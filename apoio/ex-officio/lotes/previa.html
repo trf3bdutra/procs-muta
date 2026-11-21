@@ -103,6 +103,12 @@ em.it{font-family:var(--eser);font-style:italic;font-weight:400;color:var(--eo)}
 .met.fl li button .pt{margin-top:1px;font-size:11px}
 .met.fl li button:hover .cnj{color:var(--eo2);text-decoration:underline}
 .mais{margin:0 12px 12px;padding:0;border:0;background:none;font:400 10px var(--emono);letter-spacing:.08em;text-transform:uppercase;color:var(--eg2);cursor:pointer;text-align:left}
+.ind{display:flex;flex-direction:column;gap:5px;margin:0 12px 8px;font-size:11.5px;color:var(--em)}
+.ind b{color:var(--ei);font-weight:700}
+.ind .bar{display:block;height:5px;background:var(--el)}
+.ind .bar i{display:block;height:100%;background:var(--ok)}
+.met.fl li .vf{margin-left:auto;font:400 11px var(--emono);color:var(--al)}
+.met.fl li .vf.ok{color:var(--ok)}
 .nd{margin:0 12px 12px;font-size:12px;font-style:italic;color:var(--em)}
 .ph{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:12px 0 0}
 .seg{display:inline-flex;border:1px solid var(--el);background:var(--ew)}
@@ -235,9 +241,9 @@ const sem=s=>String(s||'').normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase()
 const hoje=()=>new Date(Date.now()-4*3600e3).toISOString().slice(0,10);
 const params=new URLSearchParams(location.search);
 const SECS=[['relatorio','Relatório','R'],['voto','Voto','V'],['ementa','Ementa','E'],['acordao','Acórdão','A']];
-const ETAPAS_COMPLETO=[['corrigir','1 · Correção','a corrigir','minutadas, sem correção registrada'],['corrigida','2 · Corrigida','corrigidas','falta colar no PJe e marcar'],['pje','3 · No PJe','no PJe','versão importada, antes da liberação'],['liberada','4 · Liberada','liberadas','falta a versão final do PJe'],['final','5 · Versão final','conferidas','versão final registrada']];
+const ETAPAS_COMPLETO=[['minutar','1 · A minutar','sem minuta','minuta ainda não registrada'],['minutada','2 · Minutada','minutadas','sem correção registrada'],['corrigida','3 · Corrigida','corrigidas','falta colar no PJe e marcar'],['pje','4 · No PJe','no PJe','versão importada, antes da liberação'],['liberada','5 · Liberada','liberadas','e quantas têm a versão final']];
 /* "No PJe" e "Versão final" só valem nas minhas correções; na pauta inteira o fluxo é minutada · corrigida · liberada */
-const ETAPAS_SIMPLES=[['corrigir','1 · Correção','a corrigir','minutadas, sem correção registrada'],['corrigida','2 · Corrigida','corrigidas','falta liberar no PJe'],['liberada','3 · Liberada','liberadas','prontas para a sessão']];
+const ETAPAS_SIMPLES=[['minutar','1 · A minutar','sem minuta','minuta ainda não registrada'],['minutada','2 · Minutada','minutadas','sem correção registrada'],['corrigida','3 · Corrigida','corrigidas','falta liberar no PJe'],['liberada','4 · Liberada','liberadas','prontas para a sessão']];
 const completo=()=>S.vista==='meus';
 const etapas=()=>completo()?ETAPAS_COMPLETO:ETAPAS_SIMPLES;
 const S={usuario:'',gestor:false,sessoes:[],data:'',itens:[],por:{},lotes:{},vista:'meus',etapa:'',fora:'',q:'',aberto:'',ver:{}};
@@ -253,21 +259,22 @@ function linha(x,cheio){
   const z=S.por[x.cnj]||null, it=z?z.it:null, c=x.ctl||{};
   const m=!!(x.dataMinuta||(it&&it.minuta)), co=!!x.dataCorrecao, pj=!!(it&&it.pje), li=!!x.dataLiberacao, fi=!!(it&&it.final);
   const retido=/retirad|adiad/i.test(c.intercorTipo||'');
-  const etapa=retido?'retido':cheio?(fi?'final':li?'liberada':pj?'pje':co?'corrigida':m?'corrigir':'minutar'):(li?'liberada':co?'corrigida':m?'corrigir':'minutar');
-  const passos=cheio?[m,co,pj,li,fi]:[m,co,li];
+  /* a versão final não é etapa: é o indicador da fase liberada (só nas minhas correções) */
+  const etapa=retido?'retido':cheio?(li?'liberada':pj?'pje':co?'corrigida':m?'minutada':'minutar'):(li?'liberada':co?'corrigida':m?'minutada':'minutar');
+  const passos=cheio?[m,co,pj,li]:[m,co,li];
   const tags=[]; let nivel='';
   if(retido){tags.push(['in',c.intercorTipo]);}
   else{
     /* alerta só no que ainda pede ação: com a versão final registrada, o processo está em dia */
-    if(!m){tags.push(['al','Sem minuta']);nivel=nivel||'al'}
     if(cheio&&li&&!fi){tags.push(['al','Falta a versão final']);nivel=nivel||'al'}
+    if(cheio&&fi)tags.push(['ok','Versão final']);
     if(cheio&&co&&!li&&!pj&&it&&it.minuta)tags.push(['in','Colar no PJe e marcar']);
     const np=it&&Array.isArray(it.pendencias)?it.pendencias.length:0;
     if(np&&!li)tags.push(['in',np+(np>1?' pendências':' pendência')+' a validar']);
     if(!String(x.servidor||'').trim()||!String(x.corretor||'').trim())tags.push(['cr','Sem designação']);
   }
-  const txt={minutar:'a minutar',corrigir:x.dataMinuta?'minutada '+brc(x.dataMinuta):'minutada',corrigida:'corrigida '+brc(x.dataCorrecao),pje:'no PJe '+brc(it&&it.pje&&it.pje.em),liberada:'liberada '+brc(x.dataLiberacao),final:'versão final '+brc(it&&it.final&&it.final.em),retido:'fora da sessão'}[etapa];
-  return {x,z,it,c,item:Number(x.item)||0,etapa,passos,tags,nivel,txt,retido,cheio,
+  const txt={minutar:'a minutar',minutada:x.dataMinuta?'minutada '+brc(x.dataMinuta):'minutada',corrigida:'corrigida '+brc(x.dataCorrecao),pje:'no PJe '+brc(it&&it.pje&&it.pje.em),liberada:'liberada '+brc(x.dataLiberacao)+(cheio?(fi?' · versão final ✓':' · sem versão final'):''),retido:'fora da sessão'}[etapa];
+  return {x,z,it,c,item:Number(x.item)||0,etapa,passos,tags,nivel,txt,retido,cheio,fi,
     meu:souEu(x.corretor)};
 }
 /* o corretor pode ser dupla ("Bruno/Alex"): basta um dos nomes ser o do login (nome inteiro ou o primeiro nome) */
@@ -338,7 +345,6 @@ function render(){
    ${S.aberto?`<a class="ir" href="#proc" aria-current="true"><i>03</i><span>Item ${esc((S.linhas.find(r=>r.x.cnj===S.aberto)||{}).x.item)}</span></a>`:''}
    <p class="lx-nk" style="margin-top:14px">Etapas</p>
    ${etapas().map(([k,r])=>`<button type="button" class="ir" data-et="${k}" aria-current="${S.etapa===k}"><span>${esc(r.replace(/^\d · /,''))}</span><small>${n(k)}</small></button>`).join('')}
-   <button type="button" class="ir" data-fo="minutar" aria-current="${S.fora==='minutar'}"><span>Sem minuta</span><small>${n('minutar')}</small></button>
    <button type="button" class="ir" data-fo="retido" aria-current="${S.fora==='retido'}"><span>Retirados de pauta</span><small>${n('retido')}</small></button>
    <p class="nota">Prévia só de leitura: nada aqui grava. As marcas e as versões continuam no <a href="/amicus/collectio/">Collectio atual</a>.</p>
   </nav>
@@ -354,7 +360,7 @@ function render(){
      <div class="ph">
       <span class="seg" role="group" aria-label="Recorte"><button type="button" data-vista="meus" aria-pressed="${S.vista==='meus'}"${meus?'':' disabled'}>Minhas correções</button><button type="button" data-vista="todos" aria-pressed="${S.vista==='todos'}">Toda a pauta</button></span>
       <label class="bq"><span class="sr">Buscar</span><input type="search" id="q" placeholder="item, processo, parte ou assunto" value="${esc(S.q)}"></label>
-      <span class="fora">Fora do fluxo: <button type="button" class="b" data-fo="minutar" aria-pressed="${S.fora==='minutar'}">Sem minuta <i>${n('minutar')}</i></button><button type="button" class="b" data-fo="retido" aria-pressed="${S.fora==='retido'}">Retirados <i>${n('retido')}</i></button>${S.etapa||S.fora||S.q?`<button type="button" class="b" id="limpa">× Limpar filtros</button>`:''}</span>
+      <span class="fora">Fora do fluxo: <button type="button" class="b" data-fo="retido" aria-pressed="${S.fora==='retido'}">Retirados <i>${n('retido')}</i></button>${S.etapa||S.fora||S.q?`<button type="button" class="b" id="limpa">× Limpar filtros</button>`:''}</span>
      </div>
     </div>
    </section>
@@ -384,18 +390,22 @@ function rowHtml(r){
    <td style="text-align:right"><button type="button" class="b" data-abre="${esc(x.cnj)}">Abrir</button></td></tr>`;
 }
 /* coluna de uma etapa do fluxo: o número (filtro da lista), o próximo passo e os primeiros processos da fila */
-const PASSO={corrigir:['Corrigir','na ordem da pauta',r=>r.x.servidor?'minuta '+r.x.servidor+(r.x.dataMinuta?' · '+brc(r.x.dataMinuta):''):''],
+const PASSO={minutar:['Minutar','pelo minutante designado',r=>r.x.servidor?'minutante '+r.x.servidor:'sem minutante designado'],
+  minutada:['Corrigir','na ordem da pauta',r=>r.x.servidor?'minuta '+r.x.servidor+(r.x.dataMinuta?' · '+brc(r.x.dataMinuta):''):''],
   corrigida:['Colar no PJe e marcar','a versão importada, no Collectio',r=>'corrigida '+brc(r.x.dataCorrecao)],
   pje:['Liberar no PJe','pela pauta ou pela página do Desembargador',r=>'no PJe '+brc(r.it&&r.it.pje&&r.it.pje.em)],
-  liberada:['Registrar a versão final','texto conferido no PJe',r=>'liberada '+brc(r.x.dataLiberacao)],
-  final:['Pronto para a sessão','com a versão final registrada',r=>'versão final '+brc(r.it&&r.it.final&&r.it.final.em)]};
-const PASSO_SIMPLES={corrigir:null,corrigida:['Liberar no PJe','pela pauta ou pela página do Desembargador',r=>'corrigida '+brc(r.x.dataCorrecao)],liberada:['Pronto para a sessão','liberada no PJe',r=>'liberada '+brc(r.x.dataLiberacao)]};
+  liberada:['Registrar a versão final','nas que ainda não têm',r=>'liberada '+brc(r.x.dataLiberacao)]};
+const PASSO_SIMPLES={corrigida:['Liberar no PJe','pela pauta ou pela página do Desembargador',r=>'corrigida '+brc(r.x.dataCorrecao)],liberada:['Pronto para a sessão','liberada no PJe',r=>'liberada '+brc(r.x.dataLiberacao)]};
 function colEtapa([k,r,t,d],base){
-  const lst=base.filter(x=>x.etapa===k).sort((a,b)=>a.item-b.item), [ac,ac2,sub]=(!completo()&&PASSO_SIMPLES[k])||PASSO[k], MAX=5;
+  const ind=k==='liberada'&&completo();
+  /* na fase liberada, as que ainda não têm a versão final vêm primeiro */
+  const lst=base.filter(x=>x.etapa===k).sort((a,b)=>(ind?(a.fi?1:0)-(b.fi?1:0):0)||a.item-b.item), [ac,ac2,sub]=(!completo()&&PASSO_SIMPLES[k])||PASSO[k], MAX=5;
+  const nf=lst.filter(z=>z.fi).length, pct=lst.length?Math.round(100*nf/lst.length):0;
   return `<div class="col${S.etapa===k?' at':''}">
    <button type="button" data-et="${k}" aria-pressed="${S.etapa===k}" title="Filtrar a lista por esta etapa"><span>${esc(r)}</span><b>${lst.length}</b><small>${esc(t)}</small></button>
+   ${ind?`<p class="ind" title="Liberadas com a versão final do PJe registrada"><span class="bar" aria-hidden="true"><i style="width:${pct}%"></i></span><span><b>${nf} de ${lst.length}</b> com versão final</span></p>`:''}
    <p class="nx"><b>${esc(ac)}</b> ${esc(ac2)}</p>
-   ${lst.length?`<ul>${lst.slice(0,MAX).map(z=>`<li><span class="ii">${esc(z.x.item)}</span><button type="button" data-abre="${esc(z.x.cnj)}"><span class="cnj">${esc(z.x.cnj.slice(0,15))}</span><span class="pt">${esc(sub(z))}</span></button></li>`).join('')}</ul>${lst.length>MAX?`<button type="button" class="mais" data-et="${k}">+ ${lst.length-MAX} na lista</button>`:''}`:`<p class="nd">Nada nesta etapa.</p>`}
+   ${lst.length?`<ul>${lst.slice(0,MAX).map(z=>`<li><span class="ii">${esc(z.x.item)}</span><button type="button" data-abre="${esc(z.x.cnj)}"><span class="cnj">${esc(z.x.cnj.slice(0,15))}</span><span class="pt">${esc(sub(z))}</span></button>${ind?`<span class="vf ${z.fi?'ok':''}" title="${z.fi?'Com versão final':'Sem versão final'}">${z.fi?'✓':'—'}</span>`:''}</li>`).join('')}</ul>${lst.length>MAX?`<button type="button" class="mais" data-et="${k}">+ ${lst.length-MAX} na lista</button>`:''}`:`<p class="nd">Nada nesta etapa.</p>`}
   </div>`;
 }
 
@@ -408,8 +418,7 @@ function procHtml(){
     ['1 · Minutada',x.dataMinuta?br(x.dataMinuta):(r.passos[0]?'✓':'—'),x.servidor||''],
     ['2 · Corrigida',x.dataCorrecao?br(x.dataCorrecao):'—',x.corretor||''],
     ['3 · No PJe',it&&it.pje?br(it.pje.em):'—',it&&it.pje?'versão '+it.pje.versao+(it.pje.por?' · '+it.pje.por:''):'versão colada no editor'],
-    ['4 · Liberada',x.dataLiberacao?br(x.dataLiberacao):'—','pela pauta ou pela página do Desembargador'],
-    ['5 · Versão final',it&&it.final?br(it.final.em):'—',it&&it.final?'versão '+it.final.versao:'texto conferido no PJe']]:[
+    ['4 · Liberada',x.dataLiberacao?br(x.dataLiberacao):'—',r.fi?'✓ versão final '+it.final.versao+' em '+brc(it.final.em):x.dataLiberacao?'× falta a versão final':'pela pauta ou pela página do Desembargador']]:[
     ['1 · Minutada',x.dataMinuta?br(x.dataMinuta):(r.passos[0]?'✓':'—'),x.servidor||''],
     ['2 · Corrigida',x.dataCorrecao?br(x.dataCorrecao):'—',x.corretor||''],
     ['3 · Liberada',x.dataLiberacao?br(x.dataLiberacao):'—','pela pauta ou pela página do Desembargador']];
@@ -417,9 +426,9 @@ function procHtml(){
   let ban='';
   if(r.retido)ban=`<p class="ban in">${esc(r.c.intercor||r.c.intercorTipo)}</p>`;
   else if(!r.cheio)ban=r.etapa==='liberada'?`<p class="ban ok">Liberada no PJe para a sessão.</p>`:r.etapa==='corrigida'?`<p class="ban in">Corrigida. Falta liberar no PJe.</p>`:'';
+  else if(r.etapa==='liberada'&&r.fi)ban=`<p class="ban ok">Liberada, com a versão final registrada em ${br(it.final.em)}. A comparação parte da versão importada no PJe.</p>`;
   else if(r.etapa==='liberada')ban=`<p class="ban">Liberada no PJe${r.passos[2]?'':', sem a marca da versão importada'}. Confira o texto final no PJe e registre-o como versão final no Collectio: a comparação abaixo passa a mostrar o que o Desembargador mudou.</p>`;
   else if(r.etapa==='corrigida')ban=`<p class="ban in">Corrigida. Ao colar no editor do PJe, marque no Collectio a versão importada.</p>`;
-  else if(r.etapa==='final')ban=`<p class="ban ok">Versão final registrada${it&&it.final?' em '+br(it.final.em):''}. A comparação parte da versão importada no PJe.</p>`;
   const aj=it&&Array.isArray(it.ajustes)?it.ajustes.filter(a=>Array.isArray(a)&&!/^se[cç][aã]o$/i.test(String(a[0]||''))):[];
   const pd=it&&Array.isArray(it.pendencias)?it.pendencias:[];
   return `<section class="sec" id="proc"><div class="shd"><div><p class="k">03 / Processo · item ${esc(x.item)}</p><h2>${esc(x.classe)} · <em class="it">${esc(x.assunto)}.</em></h2></div></div>
