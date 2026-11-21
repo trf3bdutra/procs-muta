@@ -40,7 +40,11 @@ module.exports = async (req, res) => {
         meus.push({ papel: pm && pc ? 'minuta e correção' : pm ? 'minuta' : 'correção', sessao: s.date, item: it.item || '', cnj: it.cnj, classe: it.classe || '', assunto: it.assunto || '', partes: it.partes || '',
           servidor: it.servidor || '', corretor: it.corretor || '',
           dataMinuta: it.dataMinuta || '', dataCorrecao: it.dataCorrecao || '', dataLiberacao: it.dataLiberacao || '', resultado: it.resultado || '',
-          resJulg: (it.ctl || {}).resJulg || '', previa: !(d.itens || []).length });
+          resJulg: (it.ctl || {}).resJulg || '', previa: !(d.itens || []).length,
+          /* sinais do Mural do servidor: meta, pedido de sustentação/preferência, intercorrência e pendências em aberto */
+          meta: (it.ctl || {}).meta || '', so: (it.ctl || {}).sopref || '',
+          ic: (it.ctl || {}).intercor && !(it.ctl || {}).intercorOk ? String((it.ctl || {}).intercor) : '',
+          pend: (((it.ctl || {}).cartao || {}).pendencias || []).filter(p => p && p.desc && !p.ok).map(p => String(p.desc)).slice(0, 12) });
       });
     });
     const resposta = { usuario: u, sessoes: vis.map(s => ({ date: s.date, hora: s.hora || '', cor: s.cor || '', pauta: !!s.publicada, processos: s.publicada ? (s.processos || 0) : 0, previa: s.publicada && !s.processos ? (s.previa || 0) : 0, marcos: s.marcos || {} })), expediente: cal.expediente || null, progresso: prog, meus };
