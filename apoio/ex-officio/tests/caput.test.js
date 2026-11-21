@@ -102,5 +102,14 @@ test('Calendário da Chefia: sem fundo branco sob os calendários, um painel por
 test('Designação: categorias de julgamento sem responsável aparecem nas regras; faixa da etapa 4 numa linha',()=>{
   const fs=require('fs'),p=require('path'),r=(x)=>fs.readFileSync(p.join(__dirname,'../../../',x),'utf8');
   assert.ok(r('caput/triagem/index.html').includes('seguem para a próxima regra')&&r('caput/triagem/index.html').includes('const semResp = (kind, r)'),'sem responsável');
-  assert.ok(r('caput/designacao/index.html').includes('faixa da etapa 4 numa linha só'),'faixa compacta');
+  assert.ok(r('caput/designacao/index.html').includes("kk.textContent='04 / redator e corretor'"),'cabeçalho no padrão das etapas');
+});
+
+test('Etapas da esteira: cabeçalho com rótulo dourado e título grande, sem fundo; barra de rolagem mínima em todo o Caput',()=>{
+  const fs=require('fs'),p=require('path'),r=(x)=>fs.readFileSync(p.join(__dirname,'../../../',x),'utf8');
+  const cap=r('caput/triagem/index.html');
+  assert.ok(!/<h2>\d · /.test(cap)&&(cap.match(/class="cwe-et"/g)||[]).length>=9&&cap.includes('.cwe-et{border-top:2px solid var(--v)'),'cabeçalho das etapas');
+  for(const f of ['caput/triagem/index.html','caput/designacao/index.html','caput/competencias/index.html','caput/motor/index.html'])
+    assert.ok(r(f).includes('@supports not selector(::-webkit-scrollbar)')&&r(f).includes('::-webkit-scrollbar-button{display:none'),f);
+  assert.ok(r('caput/motor/assets/css/07-identidade.css').includes('@supports not selector(::-webkit-scrollbar)'),'motor css');
 });

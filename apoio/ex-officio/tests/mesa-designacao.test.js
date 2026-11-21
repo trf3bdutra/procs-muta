@@ -114,7 +114,7 @@ test('Nova sessão: convocados e substituições já na criação; começa na et
 
 test('Etapa 4: a mesa é o cabeçalho da etapa (título, Aplicar, Próximo); Caput sem lista simples duplicada',()=>{
   const pag=read('caput/designacao/index.html'),cap=read('caput/triagem/index.html');
-  assert.ok(pag.includes('4 · Designação de redator e corretor')&&pag.includes('id="b-aplicar-h"')&&pag.includes("tipo:'cmt:mesa-etapa',n:5"),'cabeçalho da etapa na mesa');
+  assert.ok(pag.includes("textContent='Designação'")&&pag.includes('id="b-aplicar-h"')&&pag.includes("tipo:'cmt:mesa-etapa',n:5"),'cabeçalho da etapa na mesa');
   assert.ok(pag.includes('>Atualizar proposta</button>')&&!pag.includes('>Recalcular<'),'Atualizar proposta');
   assert.ok(cap.includes("t === 'cmt:mesa-etapa'")&&!cap.includes('Lista simples por regra, sem a mesa')&&cap.includes('cwe-st4'),'Caput sem duplicação');
 });
