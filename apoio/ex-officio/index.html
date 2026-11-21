@@ -1756,6 +1756,16 @@ html[data-theme=dark] #mu-host .cg-cal .cc-chip.late,html[data-theme=dark] #mu-h
 #prod .pspark>div:hover::after{content:attr(data-t);position:absolute;bottom:100%;left:50%;transform:translateX(-50%);background:#203b39;color:#fff;font:500 10px var(--emono,monospace);padding:3px 6px;border-radius:4px;white-space:nowrap;margin-bottom:4px;z-index:2}
 #prod .pspark-x{display:flex;gap:6px;padding:0 4px;font:400 9.5px var(--emono,monospace);color:var(--em,#617570)}#prod .pspark-x span{flex:1;text-align:center}
 #prod .pspark-l{display:flex;gap:12px;margin:6px 0 14px;font-size:11px;color:var(--em,#617570)}#prod .pspark-l i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;vertical-align:-1px}
+/* antes de o Mural montar, nada da versão anterior aparece; só um aviso discreto de carregamento */
+body:not(.painel-gab) #v-inicio>:not(#mu-host){display:none!important}
+body:not(.painel-gab) #mu-host:empty{min-height:70vh;display:grid;place-items:start center;padding-top:22vh}
+body:not(.painel-gab) #mu-host:empty::before{content:"Carregando o Mural…";font:400 11px var(--emono,monospace);letter-spacing:.16em;text-transform:uppercase;color:var(--em,#617570)}
+/* cartão Minhas ausências: largura de uma coluna e altura até a borda de baixo do calendário */
+#mu-host .cg-cal .cc-canto{position:relative;overflow:visible!important}
+#mu-host .cg-cal .cc-canto.fim .cc-ausc{position:absolute;top:6px;left:6px;right:6px;z-index:2;justify-content:flex-start;padding-top:10px}
+#mu-host .cg-cal .cc-ausc>*{flex:none}#mu-host .cg-cal .cc-ausc b{white-space:normal}
+#mu-host .cg-cal .cc-ausc span{flex-wrap:nowrap!important;align-items:center;gap:4px!important}#mu-host .cg-cal .cc-ausb:not(.pri){border:0!important;background:none!important;padding:0 2px!important;text-decoration:underline;text-underline-offset:2px;color:var(--eg,#235a55)!important}
+#mu-host .cg-cal .cc-canto.fim .cc-ausc{padding-top:8px;gap:2px}
 /* vista Ausências do painel do calendário: resumo, solicitações e datas pessoais; e o cartão no canto vazio do mês */
 #hc-cal-full:not(.ver-aus) #aus-box{display:none!important}
 #hc-cal-full.ver-aus #cc-cal .cc-body{display:none!important}
@@ -2683,7 +2693,7 @@ function montar(P0,cx){CX=cx||{};
     var cal=document.getElementById('hc-cal-full');if(cal){
       /* à direita do calendário: avisos e atualizações e minhas ausências (os mesmos blocos, com os mesmos ids) */
       var av=document.querySelector('#v-inicio .av-box'),au=document.getElementById('aus-box');
-      cal.setAttribute('slot','cal');host.appendChild(cal);if(av){av.setAttribute('slot','avisos');host.appendChild(av);}
+      cal.setAttribute('slot','cal');host.appendChild(cal);/* a lista de avisos e atualizações sai da coluna: o destaque no topo alterna as mais recentes e o sininho guarda todas */
       var dst=document.getElementById('av-dest');if(dst){dst.setAttribute('slot','dest');host.appendChild(dst);}
       /* histórico de atividades: vista alternativa do próprio painel do calendário, trocada no cabeçalho */
       var hi=document.getElementById('prod');if(hi){hi.open=true;hi.removeAttribute('slot');cal.appendChild(hi);
@@ -2694,7 +2704,9 @@ function montar(P0,cx){CX=cx||{};
         cal.appendChild(vs);
         /* o dia do canhoto (Hoje ou o dia escolhido) vai para o cabeçalho, para economizar espaço na lateral */
         var sinc=function(){var t=cal.querySelector('.cc-esq .cc-sb-t'),d=vs.querySelector('.mu-dia');if(!t||!d)return;var n=t.firstChild&&t.firstChild.nodeType===3?t.firstChild.textContent.trim():'',dd=(t.querySelector('.cc-dd')||{}).textContent||'';var x=(n?n+' · ':'')+dd;if(d.textContent!==x)d.textContent=x;};
-        new MutationObserver(sinc).observe(cal,{childList:true,subtree:true});sinc();
+        var canto=function(){var c=cal.querySelector('.cc-canto.fim .cc-ausc'),b=cal.querySelector('#cc-cal .cc-body');if(!c||!b)return;var cr=c.parentNode.getBoundingClientRect(),br=b.getBoundingClientRect(),h=Math.round(br.bottom-cr.top-16);if(h>40&&c.style.minHeight!==h+'px')c.style.minHeight=h+'px';};
+        var cantoRaf=0,cantoJa=function(){cancelAnimationFrame(cantoRaf);cantoRaf=requestAnimationFrame(canto);};window.addEventListener('resize',cantoJa);
+        new MutationObserver(function(){sinc();cantoJa();}).observe(cal,{childList:true,subtree:true});sinc();cantoJa();
         var poe=function(v){cal.classList.toggle('ver-hist',v==='hist');cal.classList.toggle('ver-aus',v==='aus');[].forEach.call(vs.querySelectorAll('[data-vista]'),function(x){x.setAttribute('aria-pressed',String(x.getAttribute('data-vista')===v));});try{localStorage.setItem('mu_vista',v);}catch(e){}};
         vs.addEventListener('click',function(e){var x=e.target.closest('[data-vista]');if(x)poe(x.getAttribute('data-vista'));});
         var v0='cal';try{v0=localStorage.getItem('mu_vista')||'cal';}catch(e){}poe(v0);}}
