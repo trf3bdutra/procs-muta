@@ -3,7 +3,7 @@
  "versao": 1,
  "nome": "30/11/2026",
  "date": "2026-11-30",
- "atualizadoEm": "2026-11-21T01:30:31.657Z",
+ "atualizadoEm": "2026-11-21T01:30:35.752Z",
  "itens": [
   {
    "cnj": "0004423-79.2007.4.03.6000",
@@ -135,8 +135,8 @@
    "dataLiberacao": "2026-11-16",
    "obs": "",
    "ctl": {
-    "editadoPor": "Claude (autos)",
-    "editadoEm": "2026-11-18T20:46:35.612Z",
+    "editadoPor": "Bruno",
+    "editadoEm": "2026-11-21T01:30:35.752Z",
     "cartao": {
      "orig": {
       "acc": {
@@ -240,9 +240,12 @@
      "pendencias": [
       {
        "desc": "Litispendência (contrarrazões, ID 393431663): conferir nos autos do 5002016-82.2025.4.03.6000 a data de ajuizamento e o pedido; as exequentes sustentam pedidos distintos (ID 393431651)",
-       "ok": false,
+       "ok": true,
        "em": "2026-11-18",
-       "por": "Claude (autos)"
+       "por": "Claude (autos)",
+       "resolvidaEm": "2026-11-20",
+       "resolvidaPor": "Claude · revisão das pautas",
+       "resolucao": "Litispendência remetida aos autos 5002016-82.2025.4.03.6000, conforme orientação do Relator (registro do lote 2886, 19/11/2026)."
       },
       {
        "desc": "Sentença com \"Sem custas\" seguido de condenação em custas: confirmar com o Relator o tratamento na minuta",
@@ -252,15 +255,21 @@
       },
       {
        "desc": "IDs da sentença (393431657), da apelação (393431658), das contrarrazões (393431663) e do parecer do MPF (406329546) conferidos nos autos.",
-       "ok": false,
+       "ok": true,
        "em": "2026-11-19",
-       "por": "Index · lote 2886"
+       "por": "Index · lote 2886",
+       "resolvidaEm": "2026-11-20",
+       "resolvidaPor": "Claude · revisão das pautas",
+       "resolucao": "Registro de conferência já feita (lote, 19/11/2026)."
       },
       {
        "desc": "Litispendência remetida aos autos 5002016-82.2025 (feito posterior), conforme orientação de V. Exa.",
-       "ok": false,
+       "ok": true,
        "em": "2026-11-19",
-       "por": "Index · lote 2886"
+       "por": "Index · lote 2886",
+       "resolvidaEm": "2026-11-20",
+       "resolvidaPor": "Claude · revisão das pautas",
+       "resolucao": "Decisão do Relator registrada."
       }
      ]
     },
