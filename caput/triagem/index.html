@@ -833,7 +833,7 @@ html[data-theme="dark"] #tri-prontuario .tp-s h3{color:#e6e2d6;background:linear
 .cg-set{border-left:1px solid var(--b);padding:12px;background:var(--p);overflow:auto}.cg-set label{display:grid;gap:4px;margin-bottom:10px;font-size:11px;color:var(--m)}.cg-set input,.cg-set select,.cg-set textarea{width:100%;box-sizing:border-box}.cg-set .cg-exp{display:grid;grid-template-columns:1fr 1fr;gap:6px}.cg-set .cg-exp button{height:32px}
 .cg-composer{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:14px}.cg-form{border:1px solid var(--b);background:var(--w);padding:14px}.cg-form label{display:grid;gap:4px;margin-bottom:10px;font-size:11px;color:var(--m)}.cg-form input,.cg-form textarea,.cg-form select{width:100%;box-sizing:border-box}.cg-form textarea{min-height:150px}.cg-checks{display:flex;flex-wrap:wrap;gap:12px;margin:8px 0 14px;font-size:12px}.cg-checks label{display:flex;align-items:center;gap:5px;margin:0}.cg-checks input{width:auto}.cg-hist{border:1px solid var(--b);background:var(--w)}.cg-hist header{padding:10px 12px;border-bottom:1px solid var(--b);font-weight:700}.cg-msg{padding:10px 12px;border-bottom:1px solid var(--l2)}.cg-msg b{display:block;font-size:12.5px}.cg-msg small{color:var(--m)}.cg-msg p{font-size:12px;margin:4px 0 0;white-space:pre-wrap}.cg-status{font-size:12px;color:var(--m);padding:10px 0}.cg-actions a{color:inherit;text-decoration:none}
 #cg-regras{background:var(--w);min-height:560px}
-.cg-chefia{padding-bottom:40px}.cg-top{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:22px;align-items:end;margin:20px 0 16px;padding-bottom:14px;border-bottom:2px solid var(--v)}
+.cg-chefia{padding-bottom:40px}.cg-gab{display:block;width:100%;min-height:720px;border:0;background:transparent}.cg-top{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:22px;align-items:end;margin:20px 0 16px;padding-bottom:14px;border-bottom:2px solid var(--v)}
 .cg-top h1{font-size:30px;letter-spacing:-.03em;color:var(--v);margin:0;line-height:1}.cg-top .k{margin:0 0 4px}
 .cg-faixa{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid var(--b);background:var(--w)}.cg-faixa>div{padding:8px 14px;border-right:1px solid var(--l2)}.cg-faixa>div:last-child{border:0}
 .cg-faixa b{font:600 20px "JetBrains Mono",monospace;display:block;color:var(--v);line-height:1.1}.cg-faixa span{color:var(--m2);font-size:11px}
@@ -1258,7 +1258,7 @@ function render() {
   const tit = {pautas:'Pautas',coordenacao:'Coordenação',comunicacao:'Comunicação',inteligencia:'Inteligência',chefia:'Chefia'}[ABA] || 'Triagem';
   D.title = 'Caput · ' + tit;
   if (naPauta) { $('#rodape').hidden = true; D.body.classList.remove('rod-min'); try { if (W.CMTPautas) W.CMTPautas.render(); } catch (e) {} return; }
-  if (ABA === 'chefia' || ABA === 'inteligencia') { m.innerHTML = vChefia(); setTimeout(() => { montarChefia(); cgRelSincronizar(); CAL_SIG = ''; pintaCal(true); }, 0); }
+  if (ABA === 'chefia' || ABA === 'inteligencia') { m.innerHTML = vChefia(); setTimeout(() => { montarChefia(); cgRelSincronizar(); CAL_SIG = ''; pintaCal(true); cgGabAltura(); }, 0); }
   else if (ABA === 'coordenacao') { m.innerHTML = vCoordenacao(); setTimeout(montarCoord, 0); }
   else if (ABA === 'comunicacao') { m.innerHTML = vComunicacao(); setTimeout(cgComCarregar,0); }
   else if (ABA === 'fila') { m.innerHTML = vFila(); }
@@ -1267,6 +1267,9 @@ function render() {
   pintaRodape(); }
 
 
+/* Chefia › Visão operacional: o painel do Ex Officio embutido acompanha a altura do conteúdo (mesmo domínio) */
+function cgGabAltura(){ const f=$('#cg-gab'); if(!f) return; const ajusta=()=>{ try{ const d=f.contentDocument; if(!d||!d.body) return; const h=Math.max(d.documentElement.scrollHeight,d.body.scrollHeight); if(h>200) f.style.height=h+'px'; }catch(e){} };
+  f.addEventListener('load',()=>{ ajusta(); try{ const d=f.contentDocument; if(W.ResizeObserver&&d&&d.body) new ResizeObserver(ajusta).observe(d.body); }catch(e){} }); setTimeout(ajusta,1500); }
 /* Chefia › Calendário: sessões, marcos e dias sem expediente do calendário do gabinete (mesma fonte do motor) */
 let CAL_SIG = '', CAL_EL = null;
 function calDados() { const s = SES(); let st = null; try { st = s && s.estado && s.estado(); } catch (e) {} if (!st || !st.sessoes) return null;
@@ -1332,6 +1335,8 @@ function vChefia(){
   return '<div class="wrap cg-chefia"><div class="cg-top"><div><p class="k">Central de gestão</p><h1>Chefia.</h1></div>'+
     '<div class="cg-faixa">'+kpi(nP(ALL.length),'processos na fonte')+kpi(nP(U.length),'em triagem')+kpi(nP(apt),'aptos sem pendência')+kpi(nf(sessoes().length),'sessões futuras')+'</div>'+
     '<div class="cg-acv"><button class="btn pri" data-cg-acervo="1" title="Planilhas do PJe e do Power BI → carga → fonte no GitHub, com complementação pelo DataJud">Importar / atualizar acervo</button></div></div>'+
+    /* painel de entregas de todo o gabinete (o mesmo do Ex Officio, que no Mural mostra só as de quem está logado) */
+    cx('Visão operacional','Todo o gabinete · entregas e providências em aberto','<a class="btn" href="/office/?painel=gabinete" target="_blank" rel="noopener">Abrir em nova aba ↗</a>','<iframe id="cg-gab" class="cg-gab" src="/office/?painel=gabinete" title="Entregas de todo o gabinete" loading="lazy"></iframe>','cg-gabp')+
     cx('Calendário do gabinete','Sessões, marcos, afazeres e dias sem expediente','','<div id="cg-cal"><p class="cg-status">Calendário carregando…</p></div><div id="cg-forense">'+calForense()+'</div>','cg-cal')+
     cx('Regras gerais','Escopo da triagem, destino provável, acervo fonte e etiquetas','','<div id="cg-regras" aria-label="Regras da triagem, acervo e calendário"><p class="cg-status">Carregando regras…</p></div>')+
     vRelatorios()+'</div>';
