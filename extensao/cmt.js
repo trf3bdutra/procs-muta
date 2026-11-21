@@ -129,7 +129,7 @@
     '.hcm-l{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;color:#4b5a66}.hcm-l select{font:12px system-ui,sans-serif}' +
     '.hcm-dt{font-size:12.5px}.hcm-v{padding:10px;color:#66737f;font-size:12px}.hcm-msg{margin:6px 8px 0;padding:5px 8px;border-radius:6px;background:#eef3f7;color:#1f4f6b;font-size:11.5px}' +
     '.hcm-ft{padding:5px 10px;border-top:1px solid #eee;font-size:10.5px;color:#7a6f92;background:#fcfbfe}' +
-    '.hcm-pje{max-width:640px}';
+    '.hcm-pje{max-width:640px;min-width:0;width:auto}#hero-cmt{display:block;width:100%;min-width:0;box-sizing:border-box;padding:0 6px}';
   function css(doc) { doc = doc || G.document; if (!doc || doc.getElementById('hcm-css')) return; var st = doc.createElement('style'); st.id = 'hcm-css'; st.textContent = CSS; (doc.head || doc.documentElement).appendChild(st); }
   G.MutaCmt = { html: html, bind: bind, css: css, UI: UI };
 })(typeof window !== 'undefined' ? window : self);

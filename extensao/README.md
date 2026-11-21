@@ -5,6 +5,11 @@ Nome desde a 0.19.3 (antes: Muta). Os identificadores internos (`window.Muta*`, 
 Extensão do Chrome/Edge (Manifest V3) que abre o **Muta** num painel lateral, ao lado dos autos e das tarefas do PJe 2º grau do TRF-3.
 Base: o HTML independente *muta-independente-prontuario-completo* (Prontuário + Acervo).
 
+## 0.33.1 · correções no PJe real
+
+- O quadro do Desembargador entrava no menu lateral estreito (o ícone de assinaturas tem o mesmo nome): agora só entra no título largo de uma coluna, fora de menus.
+- Os selos do cartão caíam numa coluna estreita à direita do número quando a linha do número é flexível: agora entram abaixo dela, na largura do cartão.
+
 ## O que muda na 0.33 · topo, pendências e APTO
 
 - Sinalizações (urgência, avisos, intercorrências, notas) saíram do corpo do cartão: ficam na faixa rosada do topo, onde o PJe põe datas e ícones.

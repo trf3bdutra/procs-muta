@@ -452,7 +452,7 @@
   function cssSelos() {
     if (document.getElementById('muta-selos-css')) return;
     var st = document.createElement('style'); st.id = 'muta-selos-css';
-    st.textContent = '.muta-selos{display:flex;flex-wrap:wrap;gap:3px;margin:4px 0 2px;font:600 10.5px/1.2 system-ui,Segoe UI,sans-serif}' +
+    st.textContent = '.muta-selos{display:flex;flex-wrap:wrap;gap:3px;margin:4px 0 2px;width:100%;max-width:100%;box-sizing:border-box;flex:1 0 100%;font:600 10.5px/1.2 system-ui,Segoe UI,sans-serif}' +
       '.muta-selos span{display:inline-flex;align-items:center;gap:3px;padding:1px 6px;border-radius:9px;border:1px solid #d5dbe1;background:#fff;color:#33424c;white-space:nowrap}' +
       '.muta-selos .m-et{background:#eef3f7;border-color:#c9d6e0;color:#1f4f6b}.muta-selos .m-al{background:#fdecea;border-color:#efb3a9;color:#a8321f}' +
       '.muta-selos .m-av{background:#fff4e5;border-color:#f0c88a;color:#8a5a10}.muta-selos .m-ok{background:#eaf6ef;border-color:#b5dcc4;color:#2f6e4b}' +
@@ -489,7 +489,7 @@
       '.muta-selos .hf-pd ul{margin:0;padding:0 8px 6px;list-style:none;display:grid;gap:3px}.muta-selos .hf-pd label{display:flex;gap:6px;align-items:flex-start;cursor:pointer}.muta-selos .hf-pd input{margin:2px 0 0;accent-color:#2e7d32}' +
       '.muta-selos .hf-pd label>span{display:grid;border:0;background:none;padding:0;border-radius:0;white-space:normal;color:#33424c}.muta-selos .hf-pd label small{color:#8a97a3;font-size:10px}.muta-selos .hf-pd li.ok label>span{text-decoration:line-through;color:#8a97a3}' +
       '.muta-selos .hf-ic{flex-wrap:nowrap;gap:5px;overflow:hidden}.muta-selos .hf-ic .m-pes{flex:none}.muta-selos .hf-ic .m-trilha{flex:none;margin-left:2px}' +
-      '.muta-selos.hero-sin-topo{position:absolute;top:5px;left:32px;z-index:3;margin:0;gap:4px;flex-wrap:nowrap;background:rgba(255,255,255,.85);border-radius:8px;padding:1px 3px;box-shadow:0 1px 2px rgba(0,0,0,.08)}' +
+      '.muta-selos.hero-sin-topo{width:auto;max-width:none;flex:none;position:absolute;top:5px;left:32px;z-index:3;margin:0;gap:4px;flex-wrap:nowrap;background:rgba(255,255,255,.85);border-radius:8px;padding:1px 3px;box-shadow:0 1px 2px rgba(0,0,0,.08)}' +
       '.muta-selos .hf-mov{flex-wrap:nowrap;gap:6px;color:#66737f;font:400 10.5px/1.3 system-ui,sans-serif;border-top:1px solid #eef0f3;padding-top:3px}.muta-selos .hf-mov>i{width:6px;height:6px;border-radius:50%;border:1.5px solid #9aa8b3;flex:none}' +
       '.muta-selos .hf-mt{border:0;background:none;padding:0;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#4b5a66;font-weight:400;border-radius:0}.muta-selos .hf-mov time{font:600 10px ui-monospace,Menlo,monospace;color:#7d8b96;flex:none}' +
       '.muta-selos .hf-px{flex-wrap:nowrap;align-items:flex-start;gap:7px;padding:5px 7px;border-radius:9px;border:1px solid #d6e6f5;background:linear-gradient(90deg,#f1f7fd,#fff)}' +
@@ -651,7 +651,7 @@
       var texto = ((c.el.textContent || '').replace(box ? box.textContent : '', '')).slice(0, 4000); (ENR.textos = ENR.textos || {})[c.k] = texto; var html = selosHtml(Object.assign({ _k: c.k }, r), ENR.cat, texto);
       if (box && box.getAttribute('data-sig') === html) return;
       if (!html) { if (box) box.remove(); return; }
-      if (!box) { box = document.createElement('div'); box.className = 'muta-selos'; ancora(c).insertAdjacentElement('afterend', box); }
+      if (!box) { box = document.createElement('div'); box.className = 'muta-selos'; pontoBloco(ancora(c), c.el).insertAdjacentElement('afterend', box); }
       box.setAttribute('data-sig', html); box.innerHTML = ' ' + html + ' '; /* espaços nas pontas: o texto do bloco não cola no número do processo */
       /* botões de sinalização na faixa do topo do cartão (onde o PJe põe datas e ícones) */
       /* o hospedeiro é o bloco do cartão inteiro (com a faixa do topo), nunca o link do número */
@@ -677,6 +677,18 @@
       e = e.parentElement;
     }
     return e && e !== c.el ? e : (c.el.firstElementChild || c.el);
+  }
+  /* o bloco não pode entrar numa linha flexível ou grade (vira uma coluna estreita ao lado do número):
+     sobe até o ancestral cujo pai empilha os filhos na vertical */
+  function pontoBloco(a, card) {
+    var e = a;
+    for (var i = 0; e && e.parentElement && e !== card && i < 8; i++) {
+      var ps = getComputedStyle(e.parentElement), flexLinha = /flex/.test(ps.display) && !/column/.test(ps.flexDirection), grade = /grid/.test(ps.display);
+      if (!flexLinha && !grade) return e;
+      if (e.parentElement === card) return e;
+      e = e.parentElement;
+    }
+    return e || a;
   }
   /* diagnóstico: o que o leitor achou na lista (console e quadro de cima), para conferir quando os selos não aparecem */
   var DIAG = '';
@@ -874,7 +886,11 @@
       if (!RX_AS.test(n.nodeValue.replace(/\(\d+\)|\d+\s*$/g, '').trim())) continue;
       /* sobe enquanto o pai ainda é só o título (com contador, ícone) */
       for (var i = 0; i < 3 && el.parentElement && (el.parentElement.textContent || '').replace(/\s+/g, ' ').trim().length < 70; i++) el = el.parentElement;
-      var q = el.getBoundingClientRect(); if (q.width < 20 || q.height < 8) continue;
+      /* só o título de uma coluna de verdade: largo e visível (o menu lateral do PJe também diz "Assinaturas", num item estreito) */
+      var q = el.getBoundingClientRect(); if (q.width < 160 || q.height < 12) continue;
+      var st = getComputedStyle(el); if (st.visibility === 'hidden' || st.display === 'none' || +st.opacity === 0) continue;
+      if (el.closest('nav, aside, [role="navigation"], [role="menu"], .menu, .sidebar, .side-nav, .menu-lateral')) continue;
+      var o = colunaDe(el), cw = (o.col || el.parentElement || el).getBoundingClientRect().width; if (cw < 280) continue;
       CMTL.h = el; return el;
     }
     return null;

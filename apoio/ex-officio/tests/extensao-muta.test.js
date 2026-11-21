@@ -409,3 +409,9 @@ test('extensão 0.33: sinalizações na faixa do topo, pendências recolhíveis,
   assert.match(c, /\.hf-ic\{flex-wrap:nowrap/);
   assert.match(c, /box\.innerHTML = ' ' \+ html \+ ' '/, 'o bloco não cola no número do processo');
 });
+
+test('extensão 0.33.1: quadro do Desembargador fora do menu lateral; selos fora de linha flexível', () => {
+  const c = read('extensao/conteudo-pje.js');
+  assert.match(c, /q\.width < 160/); assert.match(c, /el\.closest\('nav, aside/); assert.match(c, /cw < 280/);
+  assert.match(c, /function pontoBloco\(a, card\)/); assert.match(c, /pontoBloco\(ancora\(c\), c\.el\)/);
+});
