@@ -217,15 +217,15 @@
       servidor: it.servidor || '', corretor: it.corretor || '', porD: it.criterioMinuta || '', porC: it.criterioCorrecao || '', tipoManual: it.julgamento || '', resultado: it.resultado || '',
       dataMinuta: it.dataMinuta || '', dataCorrecao: it.dataCorrecao || '', dataLiberacao: it.dataLiberacao || '', obs: it.obs || '', ...(it.ctl || {}) };
   }
-  function sessaoDoRepo(o, itens, previa, regrasDesignacao, regrasEtq, julg) {
+  function sessaoDoRepo(o, itens, previa, regrasDesignacao, regrasEtq, julg, fora) {
     var data = o.date || isoDeBr(o.nome), m = o.marcos || {};
     return { id: 's' + data + '-r', data: data, hora: o.hora || '', cor: o.cor || '', publicada: !!o.publicada, marcosPub: !!(o.marcosPublicados || o.publicada), numero: o.numeroPje || '', arquivo: o.arquivo || '', planilha: o.planilha || '',
       fases: { pauta: m.pautarAte || '', inicio: m.inicioPreparacao || '', minutas: m.entregaMinutas || '', liberacao: m.liberacao || '' },
-      itens: (itens || o.itens || []).map(itemDoRepo), previa: (previa || []).map(itemDoRepo), desigOverride: regrasDesignacao || o.regrasDesignacao || null, regrasSessao: ((regrasEtq || {}).sessao || []).slice(), regrasOff: ((regrasEtq || {}).off || []).slice(), exclPre: (o.excluidosPre || []).reduce(function (a, k) { a[k] = 1; return a; }, {}), julgadores: julg || o.julgadores || null };
+      itens: (itens || o.itens || []).map(itemDoRepo), previa: (previa || []).map(itemDoRepo), desigOverride: regrasDesignacao || o.regrasDesignacao || null, regrasSessao: ((regrasEtq || {}).sessao || []).slice(), regrasOff: ((regrasEtq || {}).off || []).slice(), exclPre: (o.excluidosPre || []).reduce(function (a, k) { a[k] = 1; return a; }, {}), julgadores: julg || o.julgadores || null, foraSessao: fora || o.foraDaSessao || null };
   }
   function chaves() {
     var k = Object.keys(ARQ).slice();
-    S.sessoes.forEach(function (ss) { if (ss.itens.length || (ss.previa || []).length || ss.julgadores || ss.desigOverride || (ss.regrasSessao || []).length || (ss.regrasOff || []).length || (S.sync || {})['ses:' + ss.data]) k.push('ses:' + ss.data); });
+    S.sessoes.forEach(function (ss) { if (ss.itens.length || (ss.previa || []).length || ss.julgadores || ss.foraSessao || ss.desigOverride || (ss.regrasSessao || []).length || (ss.regrasOff || []).length || (S.sync || {})['ses:' + ss.data]) k.push('ses:' + ss.data); });
     (S.apagadas || []).forEach(function (d) { if ((S.sync || {})['ses:' + d] && !S.sessoes.some(function (x) { return x.data === d; })) k.push('del:' + d); });
     return k;
   }
@@ -234,7 +234,8 @@
       expediente: { diasSemana: cx.weekdays || [1, 2, 3, 4, 5], semExpediente: (cx.excluded || []).slice().sort(), nomes: ex.nomes || {}, tipos: ex.tipos || {}, semPrazo: (ex.semPrazo || []).slice().sort(), recesso: ex.recesso || [] } }); }
     if (k.indexOf('ses:') === 0) { var ss = S.sessoes.find(function (x) { return x.data === k.slice(4); }); if (!ss) return 'null'; var o = (ss.previa || []).length ? { itens: itensParaRepo(ss), previa: itensParaRepo(ss, ss.previa), regrasDesignacao: ss.desigOverride || null } : { itens: itensParaRepo(ss), regrasDesignacao: ss.desigOverride || null };
       if ((ss.regrasSessao || []).length || (ss.regrasOff || []).length) o.regrasEtiquetas = { sessao: ss.regrasSessao || [], off: ss.regrasOff || [] };  /* regras de etiquetas só desta pauta */
-      if (ss.julgadores) o.julgadores = ss.julgadores;  /* composição e substituições por processo, base da proclamação */
+      if (ss.julgadores) o.julgadores = ss.julgadores;
+      if (ss.foraSessao && ((ss.foraSessao.d || []).length || (ss.foraSessao.c || []).length)) o.foraDaSessao = ss.foraSessao;  /* fora das minutas/correções só nesta sessão */  /* composição e substituições por processo, base da proclamação */
       return JSON.stringify(o); }
     if (k.indexOf('del:') === 0) return 'del';
     return JSON.stringify(k === 'regras' ? S.regras : k === 'desig' ? S.desig : S.equipe);
@@ -251,7 +252,7 @@
       try { var c0 = calendario(); if (Array.isArray(ce.semExpediente) && JSON.stringify((c0.excluded || []).slice().sort()) !== JSON.stringify(ce.semExpediente)) gravarCalendario({ weekdays: ce.diasSemana || c0.weekdays || [1, 2, 3, 4, 5], excluded: ce.semExpediente.slice() }); } catch (e) {} }
     if (cal && Array.isArray(cal.sessoes)) {
       var docs = await Promise.all(cal.sessoes.map(function (o) { return ler(arqSessao(o.date)); }));  /* sempre: a contagem do calendário pode estar defasada */
-      sessoes = cal.sessoes.map(function (o, i) { return sessaoDoRepo(o, docs[i] && Array.isArray(docs[i].itens) ? docs[i].itens : [], docs[i] && Array.isArray(docs[i].previa) ? docs[i].previa : [], docs[i] && docs[i].regrasDesignacao, docs[i] && docs[i].regrasEtiquetas, docs[i] && docs[i].julgadores); });
+      sessoes = cal.sessoes.map(function (o, i) { return sessaoDoRepo(o, docs[i] && Array.isArray(docs[i].itens) ? docs[i].itens : [], docs[i] && Array.isArray(docs[i].previa) ? docs[i].previa : [], docs[i] && docs[i].regrasDesignacao, docs[i] && docs[i].regrasEtiquetas, docs[i] && docs[i].julgadores, docs[i] && docs[i].foraDaSessao); });
     } else {
       var op = await ler('acervo/operacional.json');   /* formato anterior: sessões dentro do operacional */
       if (op && Array.isArray(op.sessoes) && op.sessoes.length) sessoes = op.sessoes.map(function (o) { return sessaoDoRepo(o); });
@@ -628,6 +629,8 @@
   /* nome do cadastro para um nome ou apelido gravado na sessão; sem cadastro, o próprio nome */
   function nomeCad(nome) { var m = membro(nome); return m ? m.nome : (nome || ''); }
   function faz(m, kind) { return kind === 'd' ? (m.minuta != null ? !!m.minuta : m.papel === 'equipe') : (m.correcao != null ? !!m.correcao : m.papel === 'assessoria'); }
+  /* fora das minutas (d) ou das correções (c) só nesta sessão, sem ausência com datas */
+  function foraSes(m, ss, kind) { var F = ss && ss.foraSessao && ss.foraSessao[kind]; return !!(F && F.some(function (n) { return N(n) === N(m.nome); })); }
   function pool(kind) { return S.equipe.filter(function (m) { return faz(m, kind); }); }
   /* caches curtos (3 s): a designação consulta ausência e carga de cada pessoa para cada processo; sem cache, uma pauta de 192 itens levava segundos */
   var AUSC = { t: 0, v: {} }, CARC = { t: 0, v: {} };
@@ -669,7 +672,7 @@
   function linha(cid, key, ss) { var k = cid + ':' + N(key), D = ss ? desigEfetiva(ss) : desigNaTela(); return D.rows[k] || { d: '', c: '' }; }
   function escolher(kind, it, ss) {
     var D = desigEfetiva(ss);
-    var inf = infoItem(it), a = N(inf.assunto), P = pool(kind).filter(function (m) { return m.auto !== false && !ausente(m, ss); });
+    var inf = infoItem(it), a = N(inf.assunto), P = pool(kind).filter(function (m) { return m.auto !== false && !ausente(m, ss) && !foraSes(m, ss, kind); });
     var hit = '', mapa = function (cid, chaves) { for (var j = 0; j < chaves.length; j++) { var x = ok(linha(cid, chaves[j], ss)[kind]); if (x) { hit = chaves[j]; return x; } } return ''; };
     var ok = function (nome) { var m = membro(nome); return m && P.indexOf(m) >= 0 ? m.nome : ''; };
     var menos = function (L) {
@@ -1996,6 +1999,9 @@ html[data-theme=dark] .pc-s.inc{background:#2a1c1f;border-color:#6b3a36}html[dat
           resultado: it.resultado || '', obs: it.obs || '', noAcervo: !!inf.r, dist: r['data_distribuição'] || r.data_distribuicao || '', tarefa: r.tarefa_atual || '', prioridade: r.prioridade || r.Prioridade || '',
           anteriores: outrasPautas(it.cnj, ss).map(function (x) { return br(x.data) + (x.resultado ? ' (' + x.resultado + ')' : ''); }) }; }); },
     /* julgadores da sessão: composição { id, nome, cargo, papel } e substituições { sai, entra, motivo, itens: 'todos' | [números dos itens] } */
+    /* fora desta sessão: { d: [nomes que não minutam nesta pauta], c: [nomes que não corrigem nesta pauta] } */
+    foraDaSessao: function (id) { var sx = S.sessoes.find(function (x) { return x.id === id; }); return sx ? (sx.foraSessao || { d: [], c: [] }) : null; },
+    definirForaDaSessao: function (id, kind, nomes) { var sx = S.sessoes.find(function (x) { return x.id === id; }); if (!sx || ['d', 'c'].indexOf(kind) < 0) return false; sx.foraSessao = sx.foraSessao || { d: [], c: [] }; sx.foraSessao[kind] = (nomes || []).slice(); HIST = null; salvar(); return true; },
     julgadores: function (id) { var sx = S.sessoes.find(function (x) { return x.id === id; }); return sx ? (sx.julgadores || null) : null; },
     definirJulgadores: function (id, j) { var sx = S.sessoes.find(function (x) { return x.id === id; }); if (!sx) return false; sx.julgadores = j ? JSON.parse(JSON.stringify(j)) : null; salvar(); return true; },
     julgadoresDoItem: function (id, cnj) { var sx = S.sessoes.find(function (x) { return x.id === id; }); if (!sx || !sx.julgadores) return []; var it = (sx.itens || []).find(function (i) { return dig(i.cnj) === dig(cnj); }), n = it ? String(it.item || '') : '';
@@ -2036,11 +2042,11 @@ html[data-theme=dark] .pc-s.inc{background:#2a1c1f;border-color:#6b3a36}html[dat
       var linhas = ss.itens.slice().sort(function (a, b) { return (+a.item || 0) - (+b.item || 0); }).map(function (it) { var inf = infoItem(it);
         return { item: it.item, cnj: it.cnj, assunto: inf.assunto, classe: inf.classe, recurso: inf.recurso, secao: inf.secao, tipo: julgKey(it, inf), servidor: it.servidor || '', corretor: it.corretor || '', porD: it.porD || '', porC: it.porC || '',
           sugD: it.servidor ? null : escolher('d', it, ss), sugC: it.corretor ? null : escolher('c', it, ss) }; });
-      var gente = function (kind) { return pool(kind).map(function (m) { return { nome: m.nome, ausente: ausente(m, ss), atual: ss.itens.filter(function (i) { return N(kind === 'd' ? i.servidor : i.corretor) === N(m.nome); }).length }; }); };
+      var gente = function (kind) { return pool(kind).map(function (m) { return { nome: m.nome, ausente: ausente(m, ss) || foraSes(m, ss, kind), fora: foraSes(m, ss, kind), atual: ss.itens.filter(function (i) { return N(kind === 'd' ? i.servidor : i.corretor) === N(m.nome); }).length }; }); };
       return { criterios: D.ordem.map(function (cid) { return { id: cid, t: CRIT_T[cid] || cid, d: !!(D.on[cid] && D.on[cid].d), c: !!(D.on[cid] && D.on[cid].c) }; }), equilibrar: D.equilibrar !== false, escopo: ss.desigOverride ? 'sessao' : 'geral',
         periodo: { de: de, ate: ate, efetivo: periodo(ss) }, fases: ss.fases || {}, data: ss.data, minutantes: gente('d'), corretores: gente('c'),
         /* minuta por exceção: só na escolha manual, nunca proposto pela regra */
-        eventuais: S.equipe.filter(function (m) { return m.minutaEventual && !faz(m, 'd'); }).map(function (m) { return { nome: m.nome, ausente: ausente(m, ss), atual: ss.itens.filter(function (i) { return N(i.servidor) === N(m.nome); }).length }; }), linhas: linhas }; },
+        eventuais: S.equipe.filter(function (m) { return m.minutaEventual && !faz(m, 'd'); }).map(function (m) { return { nome: m.nome, ausente: ausente(m, ss) || foraSes(m, ss, 'd'), fora: foraSes(m, ss, 'd'), atual: ss.itens.filter(function (i) { return N(i.servidor) === N(m.nome); }).length }; }), linhas: linhas }; },
     /* por regra: para minuta e correção, qual regra (na ordem) e qual categoria decidem cada processo da pauta,
        e se quem está designado é quem a regra indica */
     designacaoPorRegra: function (id) { var ss = S.sessoes.find(function (x) { return x.id === id; }); if (!ss) return null; var D = desigEfetiva(ss), out = {};
