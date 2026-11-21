@@ -291,3 +291,12 @@ html.ed-cmt .ed-body:has(#ed-ler)>.ed-list,html.ed-cmt .ed-body:has(#ed-man)>.ed
 .rap-lp .rap-g>.lp-doc>h2{position:sticky;top:0;z-index:1;background:var(--bg,#f4f2ec);margin:0!important;padding-bottom:6px}
 @container (max-width:780px){.rap-lp .rap-g{grid-template-columns:minmax(0,1fr)}}
 .rap-lp .rap-fm .rap-tq input#rap-q{height:32px;padding:0 10px 0 30px;background:#fffdf8 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%238a8f98' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m16 16 4 4'/%3E%3C/svg%3E") 9px center no-repeat;font:13px Figtree,system-ui,sans-serif}
+
+/* conteúdo do editor: IBM Plex Sans; texto corrido justificado; os textos que entram nas peças (relatório, voto, parágrafos, fórmulas) com recuo na primeira linha */
+.lp-ler,.lp-ler .lp-pt,.lp-ler .mn-f .lp-ta,.rap-lp .rap-fm textarea,#x-man .mn-doc{font-family:'IBM Plex Sans',system-ui,sans-serif!important}
+.lp-ler .lp-hd h1,.lp-ler h2,.lp-ler .lp-pt,#x-man .mn-doc h1,#x-man .mn-doc h2{font-family:'IBM Plex Sans',system-ui,sans-serif!important;letter-spacing:-.01em}
+.lp-ler .lp-t p{font-size:14.5px!important;line-height:1.65!important;text-align:justify!important;text-indent:2.5em}
+.lp-ler .lp-t p .lp-v{text-indent:0}
+.lp-ler .lp-lead,.lp-ler .lp-sub,.lp-ler .lp-u,.lp-ler .lp-r li,.lp-ler .lp-not li,.lp-ler .lp-alt div,.rap-lp .rap-e .lp-t p,#x-man .mn-doc p,#x-man .mn-doc li{text-align:justify!important}
+.rap-lp .rap-e .lp-t p{text-indent:0!important}
+.lp-ler .mn-f .lp-ta{font-size:14.5px!important;line-height:1.65!important;text-align:justify}
