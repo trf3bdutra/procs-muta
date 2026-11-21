@@ -20684,13 +20684,15 @@
    "exequente": "NUTRISUL COMERCIO E INDUSTRIA LTDA - ME",
    "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "assunto": "FGTS",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "g4",
+   "tipo_caso": "Execução fiscal · exceção de pré-executividade rejeitada · prescrição (citação da executada e do sócio redirecionado) · gratuidade de pessoa jurídica indeferida",
+   "resultado": "Ato a proferir: julgamento do agravo (voto), em conjunto com o AI 5023652-28.2026.4.03.0000 da União contra a mesma decisão; a gratuidade foi indeferida (decisão ID 390593248) e o preparo foi recolhido no prazo (ID 391644584); não há contraminuta nestes autos [VALIDAR intimação da União] ‖ Proposta pelos precedentes: a citação ou o despacho que a ordena interrompe a prescrição e retroage à propositura quando não há inércia da exequente; para o sócio, o prazo do redirecionamento segue o Tema 444/STJ, com termo inicial na citação da pessoa jurídica e exame da inércia → resultado depende da linha do tempo da citação da empresa e do sócio, a conferir na origem [VALIDAR: Intimação da União para contraminuta; ID da decisão agravada (589016271?)]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Agravo de Nutrisul Comércio e Indústria contra a decisão que rejeitou a exceção de pré-executividade na EF 0006486-77.2007.4.03.6000. Sustenta a prescrição: a executada não foi citada nos cinco anos seguintes ao recebimento da inicial (08/11/2007) e a citação do sócio José Clóvis Neves Ramos, redirecionada em 12/04/2010, ficou paralisada até 28/09/2020. A gratuidade foi indeferida (Súmula 481/STJ e Tema 1.424/STJ, decisão ID 390593248) e o preparo foi recolhido.",
+   "peculiaridades": "A mesma decisão é objeto do AI 5023652-28.2026.4.03.0000 da União, contra a exclusão de ofício do sócio do polo passivo. Redistribuído pela 1ª Seção à Turma Regional (despacho ID 385383123). A petição ID 385390435 cita parte estranha (\"Enrique da Silva Pacheco\") [erro material da agravante].",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -20711,9 +20713,24 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento do agravo (voto), em conjunto com o AI 5023652-28.2026 (mesma execução)",
+    "materia": "Execução fiscal — exceção de pré-executividade (prescrição)",
+    "origem": "EF 0006486-77.2007.4.03.6000 (6ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "ID 589016271 (autos de origem), segundo o AI 5023652-28.2026 [VALIDAR]",
+    "recurso": "ID 385315427 · 09/07/2026",
+    "preparo": "Pix com comprovante PagTesouro \"Pagamento realizado com sucesso\" (ID 391644584, R$ 64,26, 12/08/2026), após o indeferimento da gratuidade",
+    "monocratica": "Não indicada; pauta, em conjunto com o AI 5023652-28.2026",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "COMPROVADO (STN) · STN (aceito): ID 391644584 · valor R$ 64,26 · guia: ID 391644583 · certidão sem custas: ID 385374621 · decisão sobre gratuidade e preparo: ID 390593248 · conferido em 21/11/2026 (regra: Pix ou cartão só com o comprovante do Tesouro — PagTesouro \"Pagamento realizado com sucesso\", com \"Identificação do pagamento\")",
+    "conf_prevencao": "Origem: 0006486-77.2007.4.03.6000 · o AI 5023652-28.2026.4.03.0000 (União) foi distribuído por prevenção deste (certidão ID 390339461 daquele) · conferido em 21/11/2026"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] Contraminuta da União: não consta; conferir intimação",
+    "[VALIDAR] Procuração do advogado Rodrigo Presa Paz",
+    "Julgar em conjunto com o AI 5023652-28.2026.4.03.0000"
+   ],
    "minuta": false,
    "classe": "AI",
    "tarefa": "Analisar tipo de decisão a proferir · prioridade",
@@ -20732,6 +20749,100 @@
     "ultima_informacao": "Certidão · ID 389410220 · 29/07/2026",
     "ultima_movimentacao": "13/08/2026 14:02 · CONCLUSOS PARA JULGAMENTO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "assunto_detalhado": "Execução fiscal — exceção de pré-executividade: prescrição para a empresa e para o sócio",
+   "especificidades": "Gratuidade de pessoa jurídica indeferida (ID 390593248, Tema 1.424/STJ); preparo recolhido em 12/08/2026 (ID 391644584) · Julgamento conjunto com o AI 5023652-28.2026 (União) · Empresa com CNPJ baixado em 31/12/2008, segundo a certidão ID 385324983 [VALIDAR] · Sem contraminuta [VALIDAR intimação]",
+   "teor": {
+    "sintese_fatica": "Execução fiscal da União contra Nutrisul Comércio e Indústria (inicial recebida em 08/11/2007), com redirecionamento ao sócio José Clóvis Neves Ramos em 12/04/2010 e citação dele por edital após 2020. O juízo rejeitou a exceção de pré-executividade fundada em prescrição e excluiu o sócio do polo passivo de ofício.",
+    "inicial": "Não consta nos autos do recurso (EF 0006486-77.2007.4.03.6000)",
+    "decisao_recorrida": "Decisão da origem que rejeitou a exceção de pré-executividade e excluiu de ofício o sócio do polo passivo (descrita na decisão ID 390588554 do AI 5023652-28.2026). Não juntada com texto nos autos deste agravo.",
+    "recurso": "Agravo de instrumento ID 385315427 (09/07/2026): prescrição do crédito, porque a executada não foi citada em cinco anos do recebimento da inicial e a citação do sócio ficou paralisada por cerca de dez anos (12/04/2010 a 28/09/2020); pede a gratuidade.",
+    "resposta": "Não consta contraminuta.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Advogado Rodrigo Presa Paz (OAB/MS 15.180); procuração não identificada nos autos do recurso [VALIDAR].",
+    "preparo": "Gratuidade indeferida (ID 390593248); Pix com comprovante PagTesouro \"Pagamento realizado com sucesso\" (ID 391644584, R$ 64,26, 12/08/2026), juntado com a petição ID 391642624."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Execução fiscal · exceção de pré-executividade rejeitada · prescrição (citação da executada e do sócio redirecionado) · gratuidade de pessoa jurídica indeferida",
+     "sintese": "Execução fiscal da União contra Nutrisul Comércio e Indústria (inicial recebida em 08/11/2007), com redirecionamento ao sócio José Clóvis Neves Ramos em 12/04/2010 e citação dele por edital após 2020. O juízo rejeitou a exceção de pré-executividade fundada em prescrição e excluiu o sócio do polo passivo de ofício.",
+     "questoes": "1) Prescrição do crédito pela demora na citação da executada; 2) prescrição para o sócio redirecionado (citação paralisada de 12/04/2010 a 28/09/2020); 3) relação com o AI 5023652-28.2026 (exclusão de ofício do sócio).",
+     "rel": {
+      "razoes": "Agravo de instrumento ID 385315427 (09/07/2026): prescrição do crédito, porque a executada não foi citada em cinco anos do recebimento da inicial e a citação do sócio ficou paralisada por cerca de dez anos (12/04/2010 a 28/09/2020); pede a gratuidade.",
+      "contrarrazoes": "Não consta contraminuta."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "589016271 [VALIDAR]",
+      "juizo": "6ª Vara Federal de Campo Grande",
+      "dispositivo": "Rejeitou a exceção de pré-executividade e excluiu de ofício o sócio do polo passivo."
+     },
+     "ai": {
+      "hip": "Execução / cumprimento",
+      "efeito": "Não requerido",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2026-07-09",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte ré",
+       "tipo": "Agravo de instrumento",
+       "id": "385315427",
+       "contra": "Não apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "385315427",
+       "data": "2026-07-09"
+      },
+      {
+       "desc": "Certidão sem custas",
+       "id": "385374621",
+       "data": "2026-07-10"
+      },
+      {
+       "desc": "Despacho: remessa à Turma Regional",
+       "id": "385383123",
+       "data": "2026-07-29"
+      },
+      {
+       "desc": "Decisão que indeferiu a gratuidade",
+       "id": "390593248",
+       "data": "2026-08-06"
+      },
+      {
+       "desc": "Comprovante PagTesouro",
+       "id": "391644584",
+       "data": "2026-08-12"
+      }
+     ],
+     "pendencias": "Julgar com o AI 5023652-28.2026; conferir a intimação da União e a procuração",
+     "especificidades": "Gratuidade de pessoa jurídica indeferida (ID 390593248, Tema 1.424/STJ); preparo recolhido em 12/08/2026 (ID 391644584) · Julgamento conjunto com o AI 5023652-28.2026 (União) · Empresa com CNPJ baixado em 31/12/2008, segundo a certidão ID 385324983 [VALIDAR] · Sem contraminuta [VALIDAR intimação]",
+     "assuntoDet": "Execução fiscal — exceção de pré-executividade: prescrição para a empresa e para o sócio",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Comprovado",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "fundamento": "Paradigmas do gabinete: AI 0009489-17.2015.4.03.0000 (acórdão 1ª Turma, 06/07/2023: Tema 444/STJ, termo inicial na citação da pessoa jurídica, prescrição consumada); AI 5009405-57.2017.4.03.0000 (acórdão 3ª Turma, 25/08/2017: sem inércia da exequente, inviável a prescrição para o redirecionamento); AI 5021674-55.2022.4.03.0000 (acórdão 1ª Turma, 08/06/2023: desprovido; alegação de citação após cinco anos infundada)"
+    }
    }
   },
   {
@@ -20743,13 +20854,17 @@
    "exequente": "GUAICURUS CEREAIS, COMERCIO IMPORTACAO E EXPORTACAO LTD",
    "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "assunto": "FGTS",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "g4",
+   "tipo_caso": "Execução fiscal · exceção de pré-executividade parcialmente acolhida · ilegitimidade dos sócios, nulidade do processo administrativo e prescrição intercorrente · honorários",
+   "resultado": "Ato a proferir: julgamento do agravo (voto); o efeito suspensivo foi deferido em parte em 05/07/2023 (decisão ID 276572164, 4ª Turma), há contraminuta da União e o MPF declarou não haver interesse (ID 366197197); pendem os pedidos de prioridade por doença grave (ID 331161696), de remessa à 4ª Turma por prevenção e de baixa provisória dos protestos (ID 369456978) ‖ Proposta pelos precedentes: sem paradigma específico no banco para o conjunto das teses; a exceção de pré-executividade só alcança matéria sem dilação probatória (Súmula 393/STJ, citada na decisão ID 276572164); honorários na exceção acolhida em parte, a decidir com o AI 5011059-69.2023 da União [VALIDAR] [VALIDAR: Preparo do agravo; ID e texto da petição do agravo e da decisão agravada; AI 5011059-69.2023 da União sobre os honorários; Pedido de remessa à 4ª Turma (competência da Turma Regional pela Resolução 33/2025)]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "PRI",
+    "URG",
+    "VAL"
+   ],
+   "observacao": "Agravo de Guaicurus Cereais, dos sócios Albert Antonios Afif, Agnaldo Albert Afif e Alexandre Albert Afif e do advogado Luiz Alexandre Gonçalves do Amaral contra a decisão que, na EF 0002216-16.2009.8.12.0031, acolheu a exceção de pré-executividade só para excluir o espólio de Albert Antonios Afif. Alegam nulidade do auto de infração e do processo administrativo, ilegitimidade dos sócios, nulidade por falta de citação da devedora principal e prescrição intercorrente, e pedem a majoração dos honorários.",
+   "peculiaridades": "A decisão ID 276572164 (Des. Fed. Monica Nobre, 05/07/2023) deferiu em parte o efeito suspensivo quanto à ilegitimidade dos sócios e à nulidade do processo administrativo na análise da impugnação, deixou os honorários para o julgamento final (há o AI 5011059-69.2023 da União sobre o tema) e remeteu ao juízo de origem o pedido de intervenção da OAB/MS como amicus curiae (ID 276578504). Pedido de prioridade por doença grave do agravante Agnaldo Albert Afif (ID 331161696, 18/07/2025). Em 27/04/2026, os agravantes pediram a remessa à 4ª Turma por prevenção e a baixa provisória dos protestos (ID 369456978).",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -20775,9 +20890,26 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento do agravo (voto); há pedido pendente de baixa dos protestos e de prioridade",
+    "materia": "Execução fiscal — exceção de pré-executividade (sócios, processo administrativo e prescrição)",
+    "origem": "EF 0002216-16.2009.8.12.0031 (Justiça Estadual, jurisdição delegada [VALIDAR comarca])",
+    "decisao_agravada": "Decisão da origem que acolheu em parte a exceção de pré-executividade (ID não indicado [VALIDAR])",
+    "recurso": "Petição do agravo não identificada com texto nos autos extraídos [VALIDAR ID]; informações e documentos de 23/06/2023 (IDs 276006669 e 276007469)",
+    "preparo": "Não identificado nos autos extraídos [VALIDAR]",
+    "monocratica": "Não indicada; pauta",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "NÃO VERIFICADO · comprovante de preparo não identificado nos autos extraídos · conferido em 21/11/2026",
+    "conf_prevencao": "Origem: 0002216-16.2009.8.12.0031 · AI 5011059-69.2023.4.03.0000 da União sobre os honorários (decisão ID 276572164) [VALIDAR situação] · os agravantes pedem a remessa à 4ª Turma pela prevenção da relatora que apreciou o efeito suspensivo (ID 369456978) · conferido em 21/11/2026"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] Preparo: comprovante não identificado nos autos extraídos",
+    "[VALIDAR] Petição do agravo sem texto legível (IDs 276006669 e 276007469)",
+    "[VALIDAR] Pedido de remessa à 4ª Turma e de baixa provisória dos protestos (ID 369456978) pendentes",
+    "[VALIDAR] Prioridade de tramitação por doença grave (ID 331161696)",
+    "[VALIDAR] AI conexo 5011059-69.2023.4.03.0000 (União, honorários)"
+   ],
    "minuta": false,
    "classe": "AI",
    "tarefa": "Analisar tipo de decisão a proferir",
@@ -20796,6 +20928,124 @@
     "ultima_informacao": "Informações Prestadas · ID 369456978 · 27/04/2026",
     "ultima_movimentacao": " 18:12 · Há 1 documento não lido",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "assunto_detalhado": "Execução fiscal — exceção de pré-executividade: responsabilidade dos sócios, processo administrativo e prescrição",
+   "especificidades": "Efeito suspensivo deferido em parte (ID 276572164, 05/07/2023) · Pedido de prioridade por doença grave (ID 331161696) · Pedido de remessa à 4ª Turma por prevenção e de baixa provisória dos protestos, pendentes (ID 369456978, 27/04/2026) · MPF sem interesse (ID 366197197) · AI conexo da União sobre honorários: 5011059-69.2023.4.03.0000 [VALIDAR] · Pedido de amicus curiae da OAB/MS remetido à origem · Preparo não identificado [VALIDAR]",
+   "teor": {
+    "sintese_fatica": "Execução fiscal da União contra Guaicurus Cereais e seus sócios. O juízo acolheu em parte a exceção de pré-executividade para excluir o espólio de Albert Antonios Afif e manteve a execução contra os demais; os executados e o advogado agravaram.",
+    "inicial": "Não consta nos autos do recurso (EF 0002216-16.2009.8.12.0031)",
+    "decisao_recorrida": "Decisão da origem que acolheu em parte a exceção de pré-executividade para extinguir a execução quanto ao espólio de Albert Antonios Afif (artigo 485, VI, do CPC) e prosseguir contra os demais (descrita na decisão ID 276572164).",
+    "recurso": "Agravo de instrumento (texto não legível na extração): nulidade do auto de infração e do processo administrativo, ilegitimidade passiva dos sócios, nulidade por falta de citação da devedora principal, prescrição intercorrente quanto aos sócios e majoração dos honorários (resumo da decisão ID 276572164).",
+    "resposta": "Contraminuta da União ID 279072037 (26/08/2023): validade do processo administrativo e da CDA, responsabilidade dos sócios, ausência de prescrição e descabimento da majoração dos honorários; pede o não conhecimento ou o desprovimento.",
+    "parecer": "MPF ID 366197197 (13/04/2026): ausência de interesse que justifique a intervenção.",
+    "memoriais": "Não consta",
+    "representacao": "Advogado Luiz Alexandre Gonçalves do Amaral (OAB/MS 6.661), também agravante; substabelecimentos IDs 280359665 e 331161691 a René Vicente Acuña do Amaral (OAB/MS 30.400) [VALIDAR procurações].",
+    "preparo": "Comprovante não identificado nos autos extraídos [VALIDAR]."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Execução fiscal · exceção de pré-executividade parcialmente acolhida · ilegitimidade dos sócios, nulidade do processo administrativo e prescrição intercorrente · honorários",
+     "sintese": "Execução fiscal da União contra Guaicurus Cereais e seus sócios. O juízo acolheu em parte a exceção de pré-executividade para excluir o espólio de Albert Antonios Afif e manteve a execução contra os demais; os executados e o advogado agravaram.",
+     "questoes": "1) Pedido de remessa à 4ª Turma por prevenção; 2) nulidade do auto de infração e do processo administrativo (análise da impugnação de 2005); 3) ilegitimidade passiva dos sócios; 4) prescrição intercorrente quanto aos sócios; 5) majoração dos honorários pela exclusão do espólio; 6) baixa provisória dos protestos.",
+     "rel": {
+      "razoes": "Agravo de instrumento (texto não legível na extração): nulidade do auto de infração e do processo administrativo, ilegitimidade passiva dos sócios, nulidade por falta de citação da devedora principal, prescrição intercorrente quanto aos sócios e majoração dos honorários (resumo da decisão ID 276572164).",
+      "contrarrazoes": "Contraminuta da União ID 279072037 (26/08/2023): validade do processo administrativo e da CDA, responsabilidade dos sócios, ausência de prescrição e descabimento da majoração dos honorários; pede o não conhecimento ou o desprovimento."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "[VALIDAR]",
+      "juizo": "Justiça Estadual (jurisdição delegada) [VALIDAR]",
+      "dispositivo": "Acolheu em parte a exceção de pré-executividade para excluir o espólio de Albert Antonios Afif."
+     },
+     "ai": {
+      "hip": "Execução / cumprimento",
+      "efeito": "Deferido em parte",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2023-06-23",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte ré",
+       "tipo": "Agravo de instrumento",
+       "id": "[VALIDAR]",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Informações e documentos do agravo",
+       "id": "276006669",
+       "data": "2023-06-23"
+      },
+      {
+       "desc": "Pedido de amicus curiae da OAB/MS",
+       "id": "276578504",
+       "data": "2023-07-04"
+      },
+      {
+       "desc": "Decisão que deferiu em parte o efeito suspensivo",
+       "id": "276572164",
+       "data": "2023-07-05"
+      },
+      {
+       "desc": "Contraminuta da União",
+       "id": "279072037",
+       "data": "2023-08-26"
+      },
+      {
+       "desc": "Pedido de prioridade por doença grave",
+       "id": "331161696",
+       "data": "2025-07-18"
+      },
+      {
+       "desc": "Despacho: vista ao MPF",
+       "id": "365126360",
+       "data": "2026-04-08"
+      },
+      {
+       "desc": "MPF: ausência de interesse",
+       "id": "366197197",
+       "data": "2026-04-13"
+      },
+      {
+       "desc": "Pedido de remessa à 4ª Turma e de baixa dos protestos",
+       "id": "369456978",
+       "data": "2026-04-27"
+      }
+     ],
+     "pendencias": "Conferir preparo e petição do agravo; decidir a prioridade e os pedidos de 27/04/2026",
+     "especificidades": "Efeito suspensivo deferido em parte (ID 276572164, 05/07/2023) · Pedido de prioridade por doença grave (ID 331161696) · Pedido de remessa à 4ª Turma por prevenção e de baixa provisória dos protestos, pendentes (ID 369456978, 27/04/2026) · MPF sem interesse (ID 366197197) · AI conexo da União sobre honorários: 5011059-69.2023.4.03.0000 [VALIDAR] · Pedido de amicus curiae da OAB/MS remetido à origem · Preparo não identificado [VALIDAR]",
+     "assuntoDet": "Execução fiscal — exceção de pré-executividade: responsabilidade dos sócios, processo administrativo e prescrição",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Há preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Com parecer",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Apreciada · parcialmente deferida",
+     "urgData": "2023-07-05",
+     "urgObs": "Novo pedido de baixa provisória dos protestos (ID 369456978, 27/04/2026), pendente; prioridade por doença grave pedida (ID 331161696)",
+     "urgNivel": "Média",
+     "fundamento": "Paradigmas do gabinete: AI 5002046-56.2017.4.03.0000 (acórdão 6ª Turma, 06/04/2020: honorários em exceção de pré-executividade, sucumbência mínima); AI 5027812-43.2019.4.03.0000 (acórdão 3ª Turma, 05/07/2020: honorários em exceção de pré-executividade) [VALIDAR pertinência]",
+     "descPrelim": "Pedido dos agravantes de remessa à 4ª Turma por prevenção (ID 369456978)",
+     "idParecer": "366197197",
+     "parecerSentido": "Ausência de interesse"
+    }
    }
   },
   {
@@ -20807,13 +21057,15 @@
    "exequente": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "executado": "NUTRISUL COMERCIO E INDUSTRIA LTDA - ME",
    "assunto": "FGTS/Fundo de Garantia Por Tempo de Serviço",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "g4",
+   "tipo_caso": "Execução fiscal · exclusão de ofício do sócio do polo passivo · prescrição para o redirecionado e citação por edital",
+   "resultado": "Ato a proferir: julgamento do agravo (voto), em conjunto com o AI 5021044-57.2026.4.03.0000 da executada contra a mesma decisão; a tutela recursal não foi concedida (decisão ID 390588554) e há contraminuta (ID 392253874) ‖ Proposta pelos precedentes: sem inércia da exequente na citação do sócio, não se reconhece a prescrição para o redirecionamento (Tema 444/STJ); se houve inércia, mantém-se a exclusão → resultado depende da linha do tempo, a julgar com o AI 5021044-57.2026 [VALIDAR: Intimação do coexecutado José Clóvis Neves Ramos (curador especial) para contraminuta]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Agravo da União contra a decisão que, na EF 0006486-77.2007.4.03.6000, rejeitou a exceção de pré-executividade e, de ofício, excluiu José Clóvis Neves Ramos do polo passivo (ID 589016271 da origem). Sustenta que esgotou as tentativas de citação pessoal do coexecutado, depois citado por edital, sem inércia que lhe seja imputável. Nutrisul, na contraminuta (ID 392253874), defende a prescrição e pede seu reconhecimento no AI 5021044-57.2026.",
+   "peculiaridades": "Distribuído por prevenção do AI 5021044-57.2026 (certidão ID 390339461). A PFN manifestou ciência e aguarda o julgamento (ID 392302337).",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -20839,9 +21091,23 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento do agravo (voto), em conjunto com o AI 5021044-57.2026 (mesma execução)",
+    "materia": "Execução fiscal — redirecionamento e prescrição",
+    "origem": "EF 0006486-77.2007.4.03.6000 (6ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "ID 589016271 (autos de origem)",
+    "recurso": "ID 389760790 · 31/07/2026",
+    "preparo": "Isenta (União)",
+    "monocratica": "Não indicada; pauta, em conjunto com o AI 5021044-57.2026",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "ISENTO (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Origem: 0006486-77.2007.4.03.6000 · redistribuído por prevenção do AI 5021044-57.2026.4.03.0000 (certidão ID 390339461) · conferido em 21/11/2026"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "Julgar com o AI 5021044-57.2026.4.03.0000",
+    "[VALIDAR] Intimação do coexecutado José Clóvis Neves Ramos, citado por edital (curador especial)"
+   ],
    "minuta": false,
    "classe": "AI",
    "tarefa": "Analisar tipo de decisão a proferir",
@@ -20860,6 +21126,99 @@
     "ultima_informacao": "Certidão · ID 390339461 · 03/08/2026",
     "ultima_movimentacao": "09/09/2026 16:46 · CONCLUSOS PARA JULGAMENTO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "assunto_detalhado": "Execução fiscal — exclusão de ofício do sócio redirecionado (prescrição)",
+   "especificidades": "Julgamento conjunto com o AI 5021044-57.2026 (executada) · Tutela recursal não concedida (ID 390588554, 06/08/2026) · Contraminuta com tese de prescrição (ID 392253874)",
+   "teor": {
+    "sintese_fatica": "Na execução fiscal contra Nutrisul Comércio e Indústria, redirecionada ao sócio José Clóvis Neves Ramos, o juízo rejeitou a exceção de pré-executividade e excluiu o sócio do polo passivo de ofício; a União agravou.",
+    "inicial": "Não consta nos autos do recurso (EF 0006486-77.2007.4.03.6000)",
+    "decisao_recorrida": "Decisão ID 589016271 da origem: rejeitou a exceção de pré-executividade e excluiu de ofício o sócio José Clóvis Neves Ramos (descrita na decisão ID 390588554).",
+    "recurso": "Agravo de instrumento ID 389760790 (31/07/2026): a exequente não foi inerte; esgotadas as tentativas de citação pessoal, o coexecutado foi validamente citado por edital; pede efeito suspensivo e a reinclusão do sócio.",
+    "resposta": "Contraminuta de Nutrisul ID 392253874 (17/08/2026): a citação do litisconsorte ocorreu depois do prazo de cinco anos, sem retroação da interrupção; pede o reconhecimento da prescrição no AI 5021044-57.2026.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "União representada pela PFN (dispensada a procuração). Agravada Nutrisul representada pelo advogado Rodrigo Presa Paz (OAB/MS 15.180).",
+    "preparo": "Dispensado: União."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Execução fiscal · exclusão de ofício do sócio do polo passivo · prescrição para o redirecionado e citação por edital",
+     "sintese": "Na execução fiscal contra Nutrisul Comércio e Indústria, redirecionada ao sócio José Clóvis Neves Ramos, o juízo rejeitou a exceção de pré-executividade e excluiu o sócio do polo passivo de ofício; a União agravou.",
+     "questoes": "1) Exclusão de ofício do sócio do polo passivo; 2) prescrição para o redirecionamento e validade da citação por edital; 3) relação com o AI 5021044-57.2026.",
+     "rel": {
+      "razoes": "Agravo de instrumento ID 389760790 (31/07/2026): a exequente não foi inerte; esgotadas as tentativas de citação pessoal, o coexecutado foi validamente citado por edital; pede efeito suspensivo e a reinclusão do sócio.",
+      "contrarrazoes": "Contraminuta de Nutrisul ID 392253874 (17/08/2026): a citação do litisconsorte ocorreu depois do prazo de cinco anos, sem retroação da interrupção; pede o reconhecimento da prescrição no AI 5021044-57.2026."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "589016271",
+      "juizo": "6ª Vara Federal de Campo Grande",
+      "dispositivo": "Rejeitou a exceção de pré-executividade e excluiu de ofício o sócio do polo passivo."
+     },
+     "ai": {
+      "hip": "Execução / cumprimento",
+      "efeito": "Indeferido",
+      "id": "589016271"
+     },
+     "adm": {
+      "prot": "2026-07-31",
+      "prazo": "30",
+      "dobro": true,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte autora",
+       "tipo": "Agravo de instrumento",
+       "id": "389760790",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "389760790",
+       "data": "2026-07-31"
+      },
+      {
+       "desc": "Certidão de prevenção",
+       "id": "390339461",
+       "data": "2026-08-03"
+      },
+      {
+       "desc": "Decisão que não concedeu a tutela recursal",
+       "id": "390588554",
+       "data": "2026-08-06"
+      },
+      {
+       "desc": "Contraminuta de Nutrisul",
+       "id": "392253874",
+       "data": "2026-08-17"
+      }
+     ],
+     "pendencias": "Julgar com o AI 5021044-57.2026; conferir a intimação do coexecutado",
+     "especificidades": "Julgamento conjunto com o AI 5021044-57.2026 (executada) · Tutela recursal não concedida (ID 390588554, 06/08/2026) · Contraminuta com tese de prescrição (ID 392253874)",
+     "assuntoDet": "Execução fiscal — exclusão de ofício do sócio redirecionado (prescrição)",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Dispensada (procurador público)",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-08-06",
+     "fundamento": "Paradigmas do gabinete: AI 5009405-57.2017.4.03.0000 (acórdão 3ª Turma, 25/08/2017: provido; sem inércia, inviável a prescrição para o redirecionamento); AI 0009489-17.2015.4.03.0000 (acórdão 1ª Turma, 06/07/2023: Tema 444/STJ, prescrição consumada)",
+     "obsRepres": "Dispensada a procuração: representação por procurador público."
+    }
    }
   },
   {
@@ -21210,12 +21569,15 @@
    "executado": "PEDRO HENRIQUE DE OLIVEIRA LIMA MIRANDA",
    "assunto": "FIES",
    "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "tipo_caso": "FIES · Novo FIES · carência estendida durante a residência médica (artigo 6º-B, § 3º, da Lei 10.260/2001) · legitimidade do FNDE · liminar em mandado de segurança",
+   "resultado": "Ato a proferir: julgamento do agravo (voto); a tutela recursal não foi concedida (decisão ID 381937425), há contraminuta (ID 386516737) e o MPF declarou não haver interesse (ID 382243861) ‖ Proposta pelos precedentes: o FNDE é parte legítima, por administrar os ativos e passivos do FIES, e a carência estendida durante a residência médica decorre do artigo 6º-B, § 3º, da Lei 10.260/2001, afastados os atos normativos restritivos → desprovimento; linha reiterada do gabinete [VALIDAR aplicação ao Novo FIES] [VALIDAR: ID e data da liminar agravada]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "MONO",
+    "VAL"
+   ],
+   "observacao": "Agravo do FNDE contra a liminar que suspendeu a exigibilidade das parcelas do FIES do impetrante durante a residência médica iniciada em março/2026 (MS 5003483-62.2026.4.03.6000). Sustenta que não há previsão legal de carência estendida para os contratos do Novo FIES e que não é o responsável operacional pelo contrato. O impetrante (ID 386516737) defende a ilegalidade do artigo 6º, § 1º, da Portaria MEC 7/2013, a aplicação do artigo 6º-B, § 3º, da Lei 10.260/2001 ao Novo FIES e a legitimidade do FNDE.",
+   "peculiaridades": "Redistribuído pela 2ª Turma à Turma Regional (decisão ID 378298036). Pedido de publicação exclusiva em nome de Dimas Saad Monteiro (OAB/MS 27.949), na contraminuta.",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -21251,9 +21613,22 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento do agravo (voto)",
+    "materia": "FIES — carência estendida na residência médica",
+    "origem": "MS 5003483-62.2026.4.03.6000 (2ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Liminar no MS 5003483-62.2026.4.03.6000 (ID da origem não indicado [VALIDAR])",
+    "recurso": "ID 378075411 · 02/06/2026",
+    "preparo": "Isento (FNDE, ente público)",
+    "monocratica": "Possível (linha reiterada do gabinete sobre a carência na residência médica) [VALIDAR]",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "ISENTO (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Origem: 5003483-62.2026.4.03.6000 · conferido em 21/11/2026"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] Anotar publicação exclusiva em nome de Dimas Saad Monteiro (OAB/MS 27.949)"
+   ],
    "minuta": false,
    "classe": "AI",
    "tarefa": "Analisar tipo de decisão a proferir",
@@ -21272,6 +21647,108 @@
     "ultima_informacao": "Certidão · ID 379042125 · 08/06/2026",
     "ultima_movimentacao": "17/08/2026 17:26 · CONCLUSOS PARA DECISÃO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "assunto_detalhado": "FIES — suspensão das parcelas durante a residência médica (Novo FIES)",
+   "especificidades": "Tutela recursal não concedida (ID 381937425, 22/06/2026) · Legitimidade passiva do FNDE no Novo FIES em discussão · MPF sem interesse (ID 382243861) · Publicação exclusiva em nome de Dimas Saad Monteiro (OAB/MS 27.949)",
+   "teor": {
+    "sintese_fatica": "Médico com contrato do Novo FIES impetrou mandado de segurança para suspender as parcelas durante a residência médica (março/2026 a fevereiro/2029); o juízo deferiu a liminar e o FNDE agravou.",
+    "inicial": "Não consta nos autos do recurso (MS 5003483-62.2026.4.03.6000)",
+    "decisao_recorrida": "Liminar que suspendeu a exigibilidade das parcelas do FIES durante a residência médica (descrita na decisão ID 381937425 e no parecer ID 382243861).",
+    "recurso": "Agravo de instrumento ID 378075411 (02/06/2026): ausência de previsão legal de carência estendida no Novo FIES (Lei 13.530/2017); ilegitimidade do FNDE como responsável operacional; risco ao erário. Pede antecipação da tutela recursal.",
+    "resposta": "Contraminuta ID 386516737 (15/07/2026): ilegalidade do artigo 6º, § 1º, da Portaria MEC 7/2013; aplicação do artigo 6º-B, § 3º, da Lei 10.260/2001 ao Novo FIES; legitimidade do FNDE; pede honorários recursais.",
+    "parecer": "MPF ID 382243861 (23/06/2026): ausência de relevância social que justifique a intervenção.",
+    "memoriais": "Não consta",
+    "representacao": "FNDE representado por procurador federal (dispensada a procuração). Agravado representado pelos advogados Antônio Simão Abrão Neto, Dimas Saad Monteiro, Fernando Filho e Ivan Medeiros.",
+    "preparo": "Dispensado: autarquia federal."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "FIES · Novo FIES · carência estendida durante a residência médica (artigo 6º-B, § 3º, da Lei 10.260/2001) · legitimidade do FNDE · liminar em mandado de segurança",
+     "sintese": "Médico com contrato do Novo FIES impetrou mandado de segurança para suspender as parcelas durante a residência médica (março/2026 a fevereiro/2029); o juízo deferiu a liminar e o FNDE agravou.",
+     "questoes": "1) Legitimidade passiva do FNDE nos contratos do Novo FIES; 2) carência estendida durante a residência médica (artigo 6º-B, § 3º, da Lei 10.260/2001) e validade do artigo 6º, § 1º, da Portaria MEC 7/2013.",
+     "rel": {
+      "razoes": "Agravo de instrumento ID 378075411 (02/06/2026): ausência de previsão legal de carência estendida no Novo FIES (Lei 13.530/2017); ilegitimidade do FNDE como responsável operacional; risco ao erário. Pede antecipação da tutela recursal.",
+      "contrarrazoes": "Contraminuta ID 386516737 (15/07/2026): ilegalidade do artigo 6º, § 1º, da Portaria MEC 7/2013; aplicação do artigo 6º-B, § 3º, da Lei 10.260/2001 ao Novo FIES; legitimidade do FNDE; pede honorários recursais."
+     },
+     "orig": {
+      "tipo": "Liminar em mandado de segurança",
+      "id": "[VALIDAR]",
+      "juizo": "2ª Vara Federal de Campo Grande",
+      "dispositivo": "Suspendeu a exigibilidade das parcelas do FIES durante a residência médica."
+     },
+     "ai": {
+      "hip": "Tutela provisória",
+      "efeito": "Indeferido",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2026-06-02",
+      "prazo": "30",
+      "dobro": true,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte ré",
+       "tipo": "Agravo de instrumento",
+       "id": "378075411",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "378075411",
+       "data": "2026-06-02"
+      },
+      {
+       "desc": "Decisão: remessa à Turma Regional",
+       "id": "378298036",
+       "data": "2026-06-08"
+      },
+      {
+       "desc": "Decisão que não concedeu a tutela recursal",
+       "id": "381937425",
+       "data": "2026-06-22"
+      },
+      {
+       "desc": "MPF: ausência de interesse",
+       "id": "382243861",
+       "data": "2026-06-23"
+      },
+      {
+       "desc": "Contraminuta",
+       "id": "386516737",
+       "data": "2026-07-15"
+      }
+     ],
+     "pendencias": "Anotar a publicação exclusiva pedida na contraminuta",
+     "especificidades": "Tutela recursal não concedida (ID 381937425, 22/06/2026) · Legitimidade passiva do FNDE no Novo FIES em discussão · MPF sem interesse (ID 382243861) · Publicação exclusiva em nome de Dimas Saad Monteiro (OAB/MS 27.949)",
+     "assuntoDet": "FIES — suspensão das parcelas durante a residência médica (Novo FIES)",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Há preliminares",
+     "repres": "Dispensada (procurador público)",
+     "midias": "Não se aplica",
+     "mpf": "Mandado de segurança",
+     "parecer": "Com parecer",
+     "urgTipo": "Antecipação da tutela recursal",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-06-22",
+     "fundamento": "Paradigmas do gabinete: AI 5021281-96.2023.4.03.0000 (acórdão 1ª Turma, 14/11/2023: desprovido; legitimidade do FNDE e carência na residência médica); ApelRemNec 5003081-13.2021.4.03.6143 (acórdão 1ª Turma, 29/11/2023: legitimidade do FNDE e da CEF; ilegalidade de atos normativos restritivos)",
+     "obsRepres": "Dispensada a procuração: representação por procurador público.",
+     "descPrelim": "Ilegitimidade passiva do FNDE no Novo FIES (agravo ID 378075411)",
+     "idParecer": "382243861",
+     "parecerSentido": "Ausência de interesse"
+    }
    }
   },
   {
@@ -21284,12 +21761,14 @@
    "executado": "MARIANA CAMPOS DE ALMEIDA",
    "assunto": "FIES",
    "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "tipo_caso": "FIES · rematrícula em Medicina com débito na instituição de ensino · aditamento extemporâneo do FIES · tutela de urgência deferida",
+   "resultado": "Ato a proferir: julgamento do agravo (voto); o efeito suspensivo foi indeferido (decisão ID 346322498, 4ª Turma), a agravada sustenta perda do objeto (ID 335918694), o FNDE apresentou resposta (ID 346999673) e a 4ª Turma declinou da competência mantendo os efeitos da decisão anterior (decisão ID 365600636) ‖ Proposta pelos precedentes: sem paradigma específico para rematrícula com débito na instituição; examinar antes a perda do objeto alegada; o gabinete exige mínimo contraditório quando a matéria de rematrícula, inadimplência e aditamento é controvertida [VALIDAR] [VALIDAR: Preparo: comprovante ID 335710360 sem texto; Perda do objeto (aditamento já realizado?); Parecer do MPF (mandado de segurança)]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Agravo de Pitágoras Sistema de Educação Superior contra a tutela de urgência que mandou rematricular a estudante no 11º semestre de Medicina e viabilizar o aditamento extemporâneo do FIES (MS 5002267-03.2025.4.03.6000). Sustenta débito de R$ 416.936,21 em mensalidades (2022/2 a 2024/2) e falta de aditamento por culpa da aluna. A agravada alega perda do objeto pelo aditamento já realizado (ID 335918694); o FNDE, na resposta (ID 346999673), sustenta sua ilegitimidade no Novo FIES.",
+   "peculiaridades": "Impedimento do Des. Fed. Marcelo Saraiva (ID 335787909); efeito suspensivo indeferido pelo Des. Fed. Alessandro Diaferia (ID 346322498, 11/12/2025); declínio à Turma Regional com manutenção dos efeitos da decisão anterior (artigo 64, § 4º, do CPC; ID 365600636). CEF e FNDE constam como interessados. Pedido de intimações exclusivas em nome de Daniela Cabette de Andrade (OAB/MT 9.889-B), ID 335710358.",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -21325,9 +21804,24 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento do agravo (voto)",
+    "materia": "FIES — rematrícula e aditamento",
+    "origem": "MS 5002267-03.2025.4.03.6000 (2ª Vara Federal de Campo Grande; classe na capa: Mandado de Segurança Cível)",
+    "decisao_agravada": "Decisão em embargos de declaração com efeitos infringentes que concedeu a tutela de urgência (cópia ID 335707263)",
+    "recurso": "ID 335707258 · 08/09/2025",
+    "preparo": "GRU (guia ID 335710359) e comprovante em imagem (ID 335710360)",
+    "monocratica": "Possível, se reconhecida a perda do objeto [VALIDAR]",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "NÃO VERIFICADO · guia GRU: ID 335710359 · comprovante em imagem, sem texto (OCR pendente): ID 335710360 · pagamento antes da extinção da GRU Judicial · conferido em 21/11/2026 (regra: GRU com comprovante de caixa eletrônico ou de pagamento via internet — Resolução PRES 138/2017, artigo 2º, § 2º, II)",
+    "conf_prevencao": "Origem: 5002267-03.2025.4.03.6000 · impedimento do Des. Fed. Marcelo Saraiva (decisão ID 335787909) · redistribuído à 4ª Turma e depois à Turma Regional (decisão ID 365600636) · conferido em 21/11/2026"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] Preparo: ler o comprovante ID 335710360",
+    "[VALIDAR] Perda do objeto alegada pela agravada (ID 335918694)",
+    "[VALIDAR] Vista ao MPF (mandado de segurança): não consta parecer"
+   ],
    "minuta": false,
    "classe": "AI",
    "tarefa": "Analisar tipo de decisão a proferir",
@@ -21346,6 +21840,115 @@
     "ultima_informacao": "Certidão · ID 367235937 · 17/04/2026",
     "ultima_movimentacao": " 00:36 · Há 1 documento não lido",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "assunto_detalhado": "FIES — rematrícula e aditamento extemporâneo com débito perante a instituição de ensino",
+   "especificidades": "Efeito suspensivo indeferido (ID 346322498, 11/12/2025) · Perda do objeto alegada pela agravada (ID 335918694) · Débito de R$ 416.936,21 alegado pela IES · FNDE alega ilegitimidade no Novo FIES (ID 346999673) · Preparo por GRU com comprovante em imagem (ID 335710360) [VALIDAR] · Intimações exclusivas em nome de Daniela Cabette de Andrade (OAB/MT 9.889-B)",
+   "teor": {
+    "sintese_fatica": "Estudante de Medicina com FIES teve negada a rematrícula por débito com a instituição; em embargos de declaração com efeitos infringentes, o juízo concedeu tutela para rematriculá-la no 11º semestre e viabilizar o aditamento extemporâneo do FIES. A instituição agravou.",
+    "inicial": "Não consta nos autos do recurso (MS 5002267-03.2025.4.03.6000)",
+    "decisao_recorrida": "Decisão em embargos de declaração com efeitos infringentes: rematrícula no 11º semestre de Medicina, registro de frequência e notas e aditamento extemporâneo do FIES dentro dos semestres contratados (cópia ID 335707263; descrita na decisão ID 346322498).",
+    "recurso": "Agravo de instrumento ID 335707258 (08/09/2025): débito de R$ 416.936,21; falta de aditamento por negligência da aluna; ilegalidade de obrigar a prestação do serviço sem contraprestação. Pede efeito suspensivo e revogação da tutela.",
+    "resposta": "Manifestação da agravada ID 335918694 (10/09/2025): perda superveniente do objeto, com aditamento e regularização da situação; subsidiariamente, desprovimento. Resposta do FNDE ID 346999673 (16/12/2025): ilegitimidade do FNDE no Novo FIES (CEF como agente operador); desprovimento.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Advogados Carlos Henrique M. Fernandes (OAB/MT 18.804) e Daniela Cabette de Andrade (OAB/MT 9.889-B); procuração não identificada nos autos do recurso [VALIDAR]. Agravada: advogadas Aaram Rodrigues e Bruna Miranda da Silva (OAB/MS 22.525 e 22.746).",
+    "preparo": "Guia GRU (ID 335710359) e comprovante em imagem (ID 335710360), juntados em 08/09/2025 com a petição ID 335710358."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "FIES · rematrícula em Medicina com débito na instituição de ensino · aditamento extemporâneo do FIES · tutela de urgência deferida",
+     "sintese": "Estudante de Medicina com FIES teve negada a rematrícula por débito com a instituição; em embargos de declaração com efeitos infringentes, o juízo concedeu tutela para rematriculá-la no 11º semestre e viabilizar o aditamento extemporâneo do FIES. A instituição agravou.",
+     "questoes": "1) Perda superveniente do objeto pelo aditamento do FIES; 2) rematrícula de estudante com débito perante a instituição e aditamento extemporâneo do FIES; 3) legitimidade do FNDE no Novo FIES.",
+     "rel": {
+      "razoes": "Agravo de instrumento ID 335707258 (08/09/2025): débito de R$ 416.936,21; falta de aditamento por negligência da aluna; ilegalidade de obrigar a prestação do serviço sem contraprestação. Pede efeito suspensivo e revogação da tutela.",
+      "contrarrazoes": "Manifestação da agravada ID 335918694 (10/09/2025): perda superveniente do objeto, com aditamento e regularização da situação; subsidiariamente, desprovimento. Resposta do FNDE ID 346999673 (16/12/2025): ilegitimidade do FNDE no Novo FIES (CEF como agente operador); desprovimento."
+     },
+     "orig": {
+      "tipo": "Decisão em embargos de declaração (tutela de urgência)",
+      "id": "[VALIDAR]",
+      "juizo": "2ª Vara Federal de Campo Grande",
+      "dispositivo": "Concedeu tutela para rematricular a estudante e viabilizar o aditamento extemporâneo do FIES."
+     },
+     "ai": {
+      "hip": "Tutela provisória",
+      "efeito": "Indeferido",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2025-09-08",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte ré",
+       "tipo": "Agravo de instrumento",
+       "id": "335707258",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "335707258",
+       "data": "2025-09-08"
+      },
+      {
+       "desc": "Guia GRU",
+       "id": "335710359",
+       "data": "2025-09-08"
+      },
+      {
+       "desc": "Manifestação da agravada (perda do objeto)",
+       "id": "335918694",
+       "data": "2025-09-10"
+      },
+      {
+       "desc": "Impedimento do relator",
+       "id": "335787909",
+       "data": "2025-10-14"
+      },
+      {
+       "desc": "Decisão que indeferiu o efeito suspensivo",
+       "id": "346322498",
+       "data": "2025-12-11"
+      },
+      {
+       "desc": "Resposta do FNDE",
+       "id": "346999673",
+       "data": "2025-12-16"
+      },
+      {
+       "desc": "Decisão de declínio à Turma Regional",
+       "id": "365600636",
+       "data": "2026-04-17"
+      }
+     ],
+     "pendencias": "Ler o comprovante da GRU; avaliar a perda do objeto; conferir a vista ao MPF",
+     "especificidades": "Efeito suspensivo indeferido (ID 346322498, 11/12/2025) · Perda do objeto alegada pela agravada (ID 335918694) · Débito de R$ 416.936,21 alegado pela IES · FNDE alega ilegitimidade no Novo FIES (ID 346999673) · Preparo por GRU com comprovante em imagem (ID 335710360) [VALIDAR] · Intimações exclusivas em nome de Daniela Cabette de Andrade (OAB/MT 9.889-B)",
+     "assuntoDet": "FIES — rematrícula e aditamento extemporâneo com débito perante a instituição de ensino",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Há preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Mandado de segurança",
+     "parecer": "Não verificado",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2025-12-11",
+     "fundamento": "Paradigmas do gabinete: AI 5030776-09.2019.4.03.0000 (acórdão 3ª Turma, 04/06/2020: desprovido; rematrícula, inadimplência e aditamento tardio do FIES); AI 0017173-56.2016.4.03.0000 (acórdão 3ª Turma, 19/04/2017: estudante não sofre os efeitos do atraso causado por falha do sistema)",
+     "descPrelim": "Perda superveniente do objeto (manifestação ID 335918694); ilegitimidade do FNDE (resposta ID 346999673)"
+    }
    }
   },
   {
