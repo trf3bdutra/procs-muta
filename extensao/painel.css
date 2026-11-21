@@ -1225,3 +1225,11 @@ html[data-tema=escuro] .ap-org.pje{background:#3d2312;color:#f3b183}html[data-te
 .ap-t{overflow-x:auto;scrollbar-width:none}.ap-t::-webkit-scrollbar{display:none}
 .ap-t [role=tab]{white-space:nowrap;padding:5px 7px}
 .ap-f input[type=time]{width:108px}.ap-f:has(input[type=time]){grid-template-columns:1fr 108px}
+
+/* 0.22 · tipos de etiqueta do PJe (prévia igual ao redesenho da lista) */
+.hx{display:inline-flex;align-items:center;gap:3px;padding:1px 7px;border-radius:6px;font:700 10.5px/1.6 var(--sans);white-space:nowrap}
+.hx-solido{background:var(--hc);color:#fff;border:1px solid var(--hc)}
+.hx-suave{background:color-mix(in srgb,var(--hc) 13%,#fff);color:var(--hc);border:1px solid color-mix(in srgb,var(--hc) 40%,#fff)}
+.hx-contorno{background:#fff;color:var(--hc);border:1.5px solid var(--hc)}
+.ap-tps{display:flex;flex-wrap:wrap;gap:4px;margin:4px 0 8px}.ap-ti2{display:grid;gap:1px}.ap-hr{border:0;border-top:1px solid var(--line);margin:8px 0}
+.ap-ed .ap-ic{width:34px;flex:none;text-align:center}.ap-ed fieldset .hx{justify-self:start}

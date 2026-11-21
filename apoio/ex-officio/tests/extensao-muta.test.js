@@ -257,7 +257,7 @@ test('extensão 0.20: Gerador monta relatório, dispositivo, ementa, acórdão e
   assert.match(read('extensao/painel.html'), /<script src="gerador\.js"><\/script>/);
 });
 
-test('extensão 0.21: chegadas do PJe (só gestor; base sem aviso; urgente avisa na hora) e notificações do app com origem distinta', async () => {
+test('extensão 0.22: chegadas do PJe (só gestor; pelas datas do cartão; só urgência ou liminar avisa) e notificações do app com origem distinta', async () => {
   const store = { 'muta-gestor': true }, notas = [], posts = [];
   const chrome = { storage: { local: { get: k => Promise.resolve(Object.fromEntries([].concat(k).map(x => [x, store[x]]))), set: o => { Object.assign(store, o); return Promise.resolve(); } }, session: { set: () => Promise.resolve(), get: () => Promise.resolve({}) }, onChanged: { addListener() {} } },
     notifications: { create: (id, o) => notas.push([id, o]), onClicked: { addListener() {} }, clear() {} }, action: { setBadgeText() {}, setBadgeBackgroundColor() {}, onClicked: { addListener() {} } },
@@ -265,17 +265,31 @@ test('extensão 0.21: chegadas do PJe (só gestor; base sem aviso; urgente avisa
   const ctx = { self: {}, chrome, console, importScripts() {}, fetch: (u, o) => { posts.push([u, o && o.body]); return Promise.resolve({ ok: true, status: 200, json: () => Promise.resolve({}) }); }, setTimeout, Date, Promise, JSON, Object, Array, String, Number, isFinite };
   vm.createContext(ctx); try { vm.runInContext(read('extensao/fundo.js'), ctx); } catch (e) { /* listeners do navegador ausentes no teste */ }
   const K1 = '50000000020264030000', K2 = '50000000120264030000';
-  await ctx.chegadas([K1], { [K1]: 'Agravo de instrumento' }, 'Triagem', {});
-  assert.equal(notas.length, 0, 'a primeira lista vira a base, sem aviso');
-  await ctx.chegadas([K1, K2], { [K2]: 'AGRAVO DE INSTRUMENTO · pedido de LIMINAR · medicamento' }, 'Analisar pedido', {});
+  await ctx.chegadas([K1], { [K1]: '06-11-26 (15) 16-11-26 (05) 06-11-26 (15) AI LIMINAR PENDENTE' }, 'Triagem', {});
+  assert.equal(notas.length, 0, 'processo antigo na lista não é chegada, mesmo com liminar');
+  await ctx.chegadas([K1, K2], { [K2]: '21-11-26 (0) 21-11-26 (0) 21-11-26 (0) AGRAVO DE INSTRUMENTO · pedido de LIMINAR · medicamento' }, 'Analisar pedido', {});
   assert.equal(notas.length, 1); assert.match(notas[0][0], /^cheg:/); assert.match(notas[0][1].title, /Chegada urgente/); assert.equal(notas[0][1].iconUrl, 'icones/pje-128.png');
   assert.ok(posts.some(p => /chegadas=1/.test(p[0]) && /"urg":true/.test(p[1])));
   assert.equal(store['muta-chegadas'].length, 1);
   store['muta-gestor'] = false; await ctx.chegadas(['50000000220264030000'], {}, '', {}); assert.equal(store['muta-chegadas'].length, 1, 'só gestor');
   const man = JSON.parse(read('extensao/manifest.json')); assert.ok(man.permissions.includes('alarms'));
   assert.match(read('extensao/fundo.js'), /iconUrl: 'icones\/app-128\.png', title: '🏛 Gabinete · '/);
-  assert.match(read('extensao/fundo.js'), /iconUrl: 'icones\/pje-128\.png', title: '⚖ PJe · '/);
+  assert.doesNotMatch(read('extensao/fundo.js').split('function avisar')[1].split('chrome.runtime.onMessage')[0], /notifications\.create/, 'alertas da lista não notificam');
+  await ctx.chegadas(['50000000320264030000'], { '50000000320264030000': '21-11-26 (0) 21-11-26 (0) 21-11-26 (0) ApCiv Aposentadoria' }, '', {});
   ['icones/app-128.png', 'icones/pje-128.png', 'relatorio.html', 'relatorio.js'].forEach(f => assert.ok(fs.existsSync(path.join(ext, f)), f));
   assert.match(read('apoio/ex-officio/api/pauta.js'), /req\.query\.chegadas\) return require\('\.\/_chegadas'\)/);
   assert.match(read('apoio/ex-officio/api/notificacoes.js'), /require\('\.\/_chegadas'\)\.eventos\(u\)/);
+});
+
+test('extensão 0.22: redesenho das etiquetas do PJe por tipo (categorias do catálogo) e selos logo abaixo do número', () => {
+  const cat = JSON.parse(read('padrao/etiquetas-gabinete.json'));
+  assert.ok(cat.categorias.length >= 8); cat.categorias.forEach(c => { new RegExp(c.re, 'i'); assert.match(c.cor, /^#[0-9a-f]{6}$/i); assert.ok(['solido', 'suave', 'contorno'].includes(c.estilo)); });
+  const ctx = { self: {} }; vm.createContext(ctx); vm.runInContext(read('extensao/etiquetas.js'), ctx);
+  const E = ctx.self.MutaEtiquetas, id = n => E.categoriaDe(n, cat).id;
+  assert.equal(id('LIMINAR PENDENTE'), 'urgencia'); assert.equal(id('[P] PRIORIDADE - MAIOR DE 80'), 'prioridade'); assert.equal(id('representação'), 'conferencia');
+  assert.equal(id('2ª Seção'), 'secao'); assert.equal(id('META 2 CNJ (até 2022)'), 'meta'); assert.equal(id('LOTE 28,86% - APCIV'), 'lote'); assert.equal(id('AI'), 'classe'); assert.equal(id('Aposentadoria por Invalidez'), 'materia');
+  assert.deepEqual(JSON.parse(JSON.stringify(E.CATEGORIAS)), cat.categorias, 'cópia de reserva igual ao catálogo');
+  const c = read('extensao/conteudo-pje.js');
+  assert.match(c, /function estilizarEtiquetas\(card\)/); assert.match(c, /ancora\(c\)\.insertAdjacentElement\('afterend', box\)/);
+  assert.match(read('apoio/ex-officio/api/_ficha.js'), /categorias: cats/);
 });

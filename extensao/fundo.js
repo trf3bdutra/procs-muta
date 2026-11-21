@@ -104,25 +104,13 @@ function resumos(cnjs) {
     }).then(function (j) { Object.keys(j.resumos || {}).forEach(function (k) { RES[k] = { t: Date.now(), r: j.resumos[k] }; }); });
   })).then(function () { var o = {}; cnjs.forEach(function (k) { if (RES[k]) o[k] = RES[k].r; }); return o; });
 }
+/* alertas da lista (urgência não apreciada, intercorrência, tempo na tarefa…): ficam só no sino do painel.
+   Notificação do Chrome e número no ícone são só para chegadas com urgência e avisos do app (decisão do gestor, 21/11/2026). */
 function avisar(cnjs, R, cfg) {
   var E = self.MutaEtiquetas; if (!E) return Promise.resolve();
   var itens = cnjs.filter(function (k) { return R[k]; }).map(function (k) { var r = E.preparar(R[k]); return { k: k, etapa: E.etapa(r), alertas: E.alertas(r, cfg), servidor: r.servidor || '' }; })
     .filter(function (x) { return x.alertas.length; });
-  var nAl = itens.filter(function (x) { return x.alertas.some(function (a) { return a.nivel === 'al'; }); }).length;
-  BADGE.pje = nAl; badge();
-  return chrome.storage.session.set({ 'muta-alertas': { em: new Date().toISOString(), itens: itens } }).then(function () {
-    if (!cfg.avisos || !chrome.notifications) return;
-    return chrome.storage.local.get('muta-avisados').then(function (o) {
-      var vistos = o['muta-avisados'] || {}, hoje = Date.now(), novos = 0;
-      Object.keys(vistos).forEach(function (x) { if (hoje - vistos[x] > 864e5) delete vistos[x]; });
-      itens.forEach(function (x) { x.alertas.filter(function (a) { return a.nivel === 'al'; }).forEach(function (a) {
-        var id = x.k + ':' + a.k; if (vistos[id] || novos >= 3) return; vistos[id] = hoje; novos++;
-        var cnj = x.k.replace(/^(\d{7})(\d{2})(\d{4})(\d)(\d{2})(\d{4})$/, '$1-$2.$3.$4.$5.$6');
-        chrome.notifications.create('muta:' + id, { type: 'basic', iconUrl: 'icones/pje-128.png', title: '⚖ PJe · ' + cnj, message: a.t, contextMessage: 'Lista de tarefas do PJe', priority: 1 });
-      }); });
-      return chrome.storage.local.set({ 'muta-avisados': vistos });
-    });
-  }).catch(function () {});
+  return chrome.storage.session.set({ 'muta-alertas': { em: new Date().toISOString(), itens: itens } }).catch(function () {});
 }
 chrome.runtime.onMessage.addListener(function (msg, sender, responder) {
   if (!msg || msg.tipo !== 'muta-resumos') return;
@@ -160,23 +148,25 @@ function motivosDe(texto, r) {
   if (r && /idos|doen|defici/i.test(r.prioridade || '') && M.indexOf('prioridade legal') < 0) M.push('prioridade legal');
   return M;
 }
+function diasDoCartao(t) { var D = [], m, re = /\b\d{2}-\d{2}-\d{2}\s*\((\d{1,4})\)/g; while ((m = re.exec(t))) D.push(Number(m[1])); return D; }
 function urgente(M) { return M.some(function (m) { return !/^(pessoa idosa|prioridade legal|reconsideração)$/.test(m); }); }
 function chegadas(cnjs, textos, tarefa, R) {
   return chrome.storage.local.get(['muta-gestor', 'muta-vistos', 'muta-chegadas', 'muta-prazos']).then(function (o) {
     if (!o['muta-gestor']) return;
     var cfg = Object.assign({ chegadas: true }, o['muta-prazos'] || {}); if (cfg.chegadas === false) return;
-    var V = o['muta-vistos'] || {}, base = !Object.keys(V).length, agora = new Date().toISOString(), L = o['muta-chegadas'] || [], novos = [];
+    var V = o['muta-vistos'] || {}, agora = new Date().toISOString(), L = o['muta-chegadas'] || [], novos = [];
     cnjs.forEach(function (k) {
       if (V[k]) return; V[k] = agora.slice(0, 10);
-      if (base) return;
-      var r = R[k] || null, entrou = r && r.desde ? Date.parse(r.desde) : NaN;
-      var novo = !r || !r.registrado || (isFinite(entrou) && Date.now() - entrou <= 2 * 864e5);
+      var r = R[k] || null, entrou = r && r.desde ? Date.parse(r.desde) : NaN, dias = diasDoCartao(textos[k] || '');
+      /* chegou: o cartão mostra só datas recentes (entrada na tarefa, último movimento e conclusão em até 2 dias) */
+      var novo = dias.length ? Math.max.apply(null, dias) <= 2 : (isFinite(entrou) && Date.now() - entrou <= 2 * 864e5);
       if (!novo) return;
       var M = motivosDe(textos[k] || '', r);
       novos.push({ k: k, em: agora, urg: urgente(M), motivos: M, tarefa: tarefa || (r && r.tarefa) || '', texto: (textos[k] || '').slice(0, 500) });
     });
     var corte = Date.now() - 45 * 864e5; L = L.filter(function (x) { return Date.parse(x.em) > corte; }).concat(novos);
     var corteV = new Date(Date.now() - 400 * 864e5).toISOString().slice(0, 10); Object.keys(V).forEach(function (k) { if (V[k] < corteV) delete V[k]; });
+    var hoje = diaMS(); BADGE.pje = L.filter(function (x) { return x.urg && diaMS(Date.parse(x.em)) === hoje; }).length; badge();
     return chrome.storage.local.set({ 'muta-vistos': V, 'muta-chegadas': L }).then(function () {
       if (!novos.length) return;
       novos.filter(function (x) { return x.urg; }).slice(0, 4).forEach(function (x) {

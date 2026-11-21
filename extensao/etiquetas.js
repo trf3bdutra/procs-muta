@@ -51,7 +51,19 @@
     return A;
   }
   function iniciais(v) { var p = S(v).split(/\s+/).filter(Boolean); return p.length ? (p[0][0] + (p.length > 1 ? p[p.length - 1][0] : '')).toUpperCase() : ''; }
-  g.MutaEtiquetas = { CFG: CFG, preparar: preparar, vale: vale, devidas: devidas, faltando: faltando, etapa: etapa, alertas: alertas, iniciais: iniciais, dias: dias, N: N,
+  /* tipos de etiqueta do PJe (padrao/etiquetas-gabinete.json › categorias; esta é a cópia de reserva até o catálogo chegar) */
+  var CATEGORIAS = [{"id": "urgencia", "nome": "Urgência", "re": "liminar|urgen|tutela|efeito suspensivo|medicamento", "cor": "#c62828", "estilo": "solido", "icone": "⚡"}, {"id": "prioridade", "nome": "Prioridade legal", "re": "prioridade|superprioridade|maior (de )?80|idos[oa]|\\bmenor\\b|defici", "cor": "#7b3fb3", "estilo": "solido", "icone": "★"}, {"id": "conferencia", "nome": "Conferência", "re": "representa|tempestiv|preparo|deser|custas em dobro|intimar|regularizar|aguardando parecer|\\bmpf\\b|\\bprr\\b|intercorr|impedimento|suspei|preven[çc]|justi[çc]a gratuita", "cor": "#e8710a", "estilo": "contorno", "icone": "!"}, {"id": "sessao", "nome": "Sessão", "re": "sess[ãa]o|^\\d{4}-\\d{2}-\\d{2}|n[ãa]o pautar", "cor": "#00796b", "estilo": "suave", "icone": "📅"}, {"id": "meta", "nome": "Meta", "re": "^meta\\b", "cor": "#b7791f", "estilo": "solido", "icone": "◆"}, {"id": "fluxo", "nome": "Fluxo", "re": "^apto|monocr|minutad|revisad|n[ãa]o mexer|^analisar|sobrest|retrata|pedido de despacho|triagem de gabinete|^levantar", "cor": "#2e7d32", "estilo": "suave", "icone": "✓"}, {"id": "lote", "nome": "Lote e tema", "re": "^lote|28,86|^tema \\d|\\blote\\b", "cor": "#1e6091", "estilo": "contorno", "icone": "▦"}, {"id": "secao", "nome": "Seção", "re": "^\\dª se[çc][ãa]o|juiz(a)? auxiliar|comp\\. delegada", "cor": "#455a64", "estilo": "solido", "icone": "§"}, {"id": "pessoa", "nome": "Designação", "re": "^triagem - |produtividade|^z |giovana|v[íi]ctor|rodrigo|jos[ée] v|dalete|estela|wellington|maria eduarda|debora|marcela|luciola|heloisa|alexander|saffioti", "cor": "#6d4c41", "estilo": "suave", "icone": "👤"}, {"id": "classe", "nome": "Classe e espécie", "re": "^(ai|ed|agint|ms|apciv|remnec)$|^dupla apela|apenas remessa|recurso inominado|^ee |^ai - |^erbe", "cor": "#1565c0", "estilo": "solido", "icone": "⚖"}, {"id": "materia", "nome": "Matéria", "re": ".", "cor": "#546e7a", "estilo": "suave", "icone": ""}];
+  var RX = {};
+  function categoriaDe(nome, cat) {
+    var L = (cat && Array.isArray(cat.categorias) && cat.categorias.length) ? cat.categorias : CATEGORIAS, n = S(nome).toLowerCase(), nn = N(nome);
+    var exata = ((cat && cat.etiquetas) || []).filter(function (e) { return N(e.nome) === nn; })[0];
+    for (var i = 0; i < L.length; i++) {
+      var c = L[i], re = RX[c.re] || (RX[c.re] = (function () { try { return new RegExp(c.re, 'i'); } catch (e) { return /$^/; } })());
+      if (re.test(n) || re.test(nn)) return exata && exata.cor ? Object.assign({}, c, { cor: exata.cor }) : c;
+    }
+    return exata ? { id: 'catalogo', nome: 'Catálogo', cor: exata.cor || '#546e7a', estilo: 'solido', icone: '' } : null;
+  }
+  g.MutaEtiquetas = { CFG: CFG, CATEGORIAS: CATEGORIAS, categoriaDe: categoriaDe, preparar: preparar, vale: vale, devidas: devidas, faltando: faltando, etapa: etapa, alertas: alertas, iniciais: iniciais, dias: dias, N: N,
     CAMPOS: [['urgPend', 'Urgência não apreciada'], ['urg', 'Medida urgente'], ['preparo', 'Preparo'], ['repres', 'Representação'], ['tempest', 'Tempestividade'], ['mpfSit', 'Parecer do MPF'],
       ['custos', 'Hipótese de intervenção do MPF'], ['destino', 'Destino'], ['tipoAto', 'Tipo de ato'], ['tipoJ', 'Tipo de julgamento'], ['icN', 'Intercorrências em aberto'], ['pendN', 'Pendências em aberto'],
       ['meta', 'Meta do CNJ'], ['sobr', 'Sobrestado'], ['sens', 'Caso sensível'], ['assunto', 'Assunto'], ['classe', 'Classe'], ['prioridade', 'Prioridade'], ['dias', 'Dias na tarefa'], ['tarefa', 'Tarefa']],

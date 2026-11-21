@@ -5,6 +5,18 @@ Nome desde a 0.19.3 (antes: Muta). Os identificadores internos (`window.Muta*`, 
 Extensão do Chrome/Edge (Manifest V3) que abre o **Muta** num painel lateral, ao lado dos autos e das tarefas do PJe 2º grau do TRF-3.
 Base: o HTML independente *muta-independente-prontuario-completo* (Prontuário + Acervo).
 
+## O que muda na 0.22 · etiquetas redesenhadas e só urgências notificadas
+
+- **Redesenho das etiquetas do PJe** nos cartões da lista de tarefas, para toda a equipe: cada tipo (`categorias` em
+  `padrao/etiquetas-gabinete.json`) com cor, estilo (sólido, suave, contorno) e ícone — Urgência ⚡, Prioridade legal ★,
+  Conferência !, Sessão 📅, Meta ◆, Fluxo ✓, Lote e tema ▦, Seção §, Designação 👤, Classe e espécie ⚖ e Matéria. Vale a
+  primeira expressão que combinar com o nome. O gestor edita tipos e cores no sino › Etiquetas; só muda a aparência.
+- **Selos** logo abaixo do número do processo (o cartão do PJe tem altura limitada e escondia o que ia no fim).
+  Diagnóstico no console da página: `[HERO18810] lista do PJe`.
+- **Notificações**: alertas da lista (tempo na tarefa etc.) ficam só no sino. O Chrome avisa apenas chegadas novas com
+  urgência ou liminar (só o gestor) e avisos do app. Chegada = número nunca visto cujo cartão mostra só datas recentes
+  (até 2 dias); sem a "base" da 0.21.
+
 ## O que muda na 0.21 · notificações do app e chegadas do PJe
 
 - **Avisos do app do gabinete** (`/api/notificacoes`) entram na extensão a cada 5 minutos (`chrome.alarms`). Os urgentes

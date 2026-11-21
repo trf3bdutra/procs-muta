@@ -392,7 +392,13 @@
       '.muta-selos span{display:inline-flex;align-items:center;gap:3px;padding:1px 6px;border-radius:9px;border:1px solid #d5dbe1;background:#fff;color:#33424c;white-space:nowrap}' +
       '.muta-selos .m-et{background:#eef3f7;border-color:#c9d6e0;color:#1f4f6b}.muta-selos .m-al{background:#fdecea;border-color:#efb3a9;color:#a8321f}' +
       '.muta-selos .m-av{background:#fff4e5;border-color:#f0c88a;color:#8a5a10}.muta-selos .m-ok{background:#eaf6ef;border-color:#b5dcc4;color:#2f6e4b}' +
-      '.muta-selos .m-et-l{background:#1f4f6b;color:#fff;border-color:#1f4f6b}.muta-selos [data-muta-copia]{cursor:copy}.muta-selos .m-mu{color:#6b7a84}';
+      '.muta-selos .m-et-l{background:#1f4f6b;color:#fff;border-color:#1f4f6b}.muta-selos [data-muta-copia]{cursor:copy}.muta-selos .m-mu{color:#6b7a84}' +
+      '.hero-etq{border-radius:6px!important;font-weight:700!important;box-shadow:none!important;text-shadow:none!important;padding-left:6px!important;padding-right:6px!important}' +
+      '.hero-etq *{color:inherit!important;background:transparent!important}' +
+      '.hero-solido{background:var(--hc)!important;color:#fff!important;border:1px solid var(--hc)!important}' +
+      '.hero-suave{background:color-mix(in srgb,var(--hc) 13%,#fff)!important;color:var(--hc)!important;border:1px solid color-mix(in srgb,var(--hc) 40%,#fff)!important}' +
+      '.hero-contorno{background:#fff!important;color:var(--hc)!important;border:1.5px solid var(--hc)!important}' +
+      '.hero-etq[data-hero-ic]:not([data-hero-ic=""])::before{content:attr(data-hero-ic);margin-right:4px;font-weight:800}';
     (document.head || document.documentElement).appendChild(st);
   }
   function cartoesLista() {
@@ -409,7 +415,7 @@
         if (numeros((e.textContent || '').slice(0, 8000)).length === 1) card = e; else break;
       }
       if (!card || vistos.indexOf(card) >= 0) continue;
-      vistos.push(card); out.push({ el: card, numero: nn[0], k: nn[0].replace(/\D/g, '') });
+      vistos.push(card); out.push({ el: card, numero: nn[0], k: nn[0].replace(/\D/g, ''), tn: n });
     }
     return out;
   }
@@ -458,14 +464,67 @@
       novos.forEach(function (k) { ENR.pedidos[k] = agora; }); pedirSelos(ks, tx);
     }
     cssSelos();
+    C.forEach(function (c) { try { estilizarEtiquetas(c.el); } catch (e) {} });
     C.forEach(function (c) {
       var r = ENR.dados[c.k]; if (!r) return;
-      var box = null; for (var i = 0; i < c.el.children.length; i++) if (c.el.children[i].classList.contains('muta-selos')) box = c.el.children[i];
+      var box = c.el.querySelector('.muta-selos');
       var texto = ((c.el.textContent || '').replace(box ? box.textContent : '', '')).slice(0, 4000), html = selosHtml(Object.assign({}, r), ENR.cat, texto);
       if (box && box.getAttribute('data-sig') === html) return;
       if (!html) { if (box) box.remove(); return; }
-      if (!box) { box = document.createElement('div'); box.className = 'muta-selos'; c.el.appendChild(box); }
+      if (!box) { box = document.createElement('div'); box.className = 'muta-selos'; ancora(c).insertAdjacentElement('afterend', box); }
       box.setAttribute('data-sig', html); box.innerHTML = html;
+    });
+    diag(C);
+  }
+  /* os selos vão logo abaixo da linha do número do processo: o cartão do PJe tem altura limitada e recolhe o fim */
+  function ancora(c) {
+    /* sobe enquanto o pai ainda é só a linha do número (com classe, ícones de copiar etc.) */
+    var e = c.tn.parentElement, lim = (c.tn.nodeValue || '').trim().length + 40;
+    for (var i = 0; e && e.parentElement && e.parentElement !== c.el && i < 6; i++) {
+      if ((e.parentElement.textContent || '').replace(/\s+/g, ' ').trim().length > lim) break;
+      e = e.parentElement;
+    }
+    return e && e !== c.el ? e : (c.el.firstElementChild || c.el);
+  }
+  /* diagnóstico: o que o leitor achou na lista (console e quadro de cima), para conferir quando os selos não aparecem */
+  var DIAG = '';
+  function diag(C) {
+    var com = C.filter(function (c) { return ENR.dados[c.k]; }).length, x = C.length + '/' + com + '/' + (ENR.erro || '') + '/' + document.querySelectorAll('.muta-selos').length;
+    if (x === DIAG) return; DIAG = x;
+    var o = { cartoes: C.length, comFicha: com, selos: document.querySelectorAll('.muta-selos').length, erro: ENR.erro || '', exemplo: C[0] ? (C[0].el.textContent || '').replace(/\s+/g, ' ').slice(0, 160) : '' };
+    try { console.info('[HERO18810] lista do PJe', o); } catch (e) {}
+    try { window.parent.postMessage({ hero18810: 'diag', o: o }, '*'); } catch (e) {}
+  }
+  /* redesenho das etiquetas do PJe nos cartões: cada tipo (padrao/etiquetas-gabinete.json › categorias) com cor, estilo e ícone
+     próprios, e os tipos mais importantes primeiro. Só muda a aparência; nada é gravado no PJe. */
+  var RE_DATA = /\d{2}-\d{2}-\d{2}/;
+  function chipsDo(card) {
+    var out = [], L = card.querySelectorAll('span,a,div,button,label,li,mat-chip,small,b');
+    for (var i = 0; i < L.length && out.length < 40; i++) {
+      var el = L[i];
+      if (el.closest('.muta-selos') || out.some(function (o) { return o.contains(el); })) continue;
+      var t = (el.textContent || '').replace(/\s+/g, ' ').trim();
+      if (!t || t.length > 80) continue;
+      RE.lastIndex = 0; if (RE.test(t) || /^\d+\s*\/\s*\d+$/.test(t) || RE_DATA.test(t)) continue;
+      var q = el.getBoundingClientRect(); if (q.height < 12 || q.height > 34 || q.width < 14 || q.width > 460) continue;
+      var bg = ''; try { bg = getComputedStyle(el).backgroundColor; } catch (e) {}
+      var m = /rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*([\d.]+))?/.exec(bg || '');
+      if (!m || (m[4] != null && Number(m[4]) < 0.2) || (+m[1] > 244 && +m[2] > 244 && +m[3] > 244)) continue;
+      out.push(el);
+    }
+    return out;
+  }
+  function estilizarEtiquetas(card) {
+    var E = window.MutaEtiquetas; if (!E || !E.categoriaDe || (ENR.cfg && ENR.cfg.etqEstilo === false)) return;
+    var cats = (ENR.cat && ENR.cat.categorias && ENR.cat.categorias.length) ? ENR.cat.categorias : E.CATEGORIAS;
+    chipsDo(card).forEach(function (el) {
+      var nome = (el.textContent || '').replace(/\s+/g, ' ').replace(/\s*(×|✕|✖|close|clear|cancel)\s*$/i, '').trim(); if (!nome) return;
+      var c = E.categoriaDe(nome, ENR.cat); if (!c) return;
+      var sig = c.id + '|' + c.cor + '|' + nome; if (el.getAttribute('data-hero-etq') === sig) return;
+      el.setAttribute('data-hero-etq', sig); el.setAttribute('data-hero-ic', c.icone || ''); el.title = c.nome + ' · ' + nome;
+      el.classList.remove('hero-solido', 'hero-suave', 'hero-contorno'); el.classList.add('hero-etq', 'hero-' + (c.estilo || 'suave'));
+      el.style.setProperty('--hc', c.cor || '#546e7a');
+      var rk = cats.map(function (x) { return x.id; }).indexOf(c.id); el.style.setProperty('order', String(rk < 0 ? 50 : rk));
     });
   }
   function agendarSelos() { if (!LISTA) return; clearTimeout(ENR.tm); ENR.tm = setTimeout(function () { try { aplicarSelos(); } catch (e) {} }, 700); }

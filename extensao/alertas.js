@@ -141,9 +141,9 @@
     return num('urgDias', 'Urgência não apreciada', 'dias até o alerta vermelho') +
       num('tarefaDias', 'Tempo na tarefa', 'dias até o aviso (vermelho no dobro)') +
       lig('selos', 'Selos na lista de tarefas do PJe', 'etapa, designação, alertas e etiquetas que faltam') +
-      lig('avisos', 'Notificações do Chrome', 'só alertas vermelhos, uma vez por dia por processo') +
+      lig('etqEstilo', 'Redesenho das etiquetas do PJe', 'cada tipo com cor, estilo e ícone (sino › Etiquetas)') +
       lig('avisosApp', 'Avisos do app do gabinete', 'urgentes e importantes viram notificação (🏛, ícone azul)') +
-      (A.gestor0 || (ses && ses.estado().gestor) ? lig('chegadas', 'Registrar chegadas (só gestor)', 'processos novos na lista do PJe; urgentes avisam na hora (⚡📥)') +
+      (A.gestor0 || (ses && ses.estado().gestor) ? lig('chegadas', 'Chegadas com urgência ou liminar (só gestor)', 'processo novo na lista do PJe com pedido urgente avisa na hora (⚡📥); os demais só entram no relatório') +
         lig('relatorio', 'Relatório de chegadas no fim do dia', 'notificação com o total do dia, que abre o relatório') +
         '<label class="ap-f"><span>Hora do relatório</span><input type="time" data-pz="relHora" value="' + esc(c.relHora || '18:00') + '"><small>todo dia, neste navegador</small></label>' : '') +
       '<small class="muted ap-v">Vale só neste navegador.</small>';
@@ -152,9 +152,14 @@
     if (!ses || ses.estado().estado !== 'on') return '<p class="muted ap-v">Entre no painel para ver o catálogo.</p>';
     if (A.catErro) return '<p class="ap-v err">' + esc(A.catErro) + '</p>';
     if (!A.cat) return '<p class="muted ap-v">Carregando…</p>';
+    var cats = (A.cat.categorias && A.cat.categorias.length) ? A.cat.categorias : (E ? E.CATEGORIAS : []);
+    if (A.edCat) return pTiposEd();
+    var tipos = '<div class="ap-ti2"><b>Tipos de etiqueta do PJe</b><small class="muted">redesenho dos cartões da lista, para toda a equipe</small></div><div class="ap-tps">' + cats.map(function (c) {
+      return '<span class="hx hx-' + esc(c.estilo || 'suave') + '" style="--hc:' + esc(c.cor) + '" title="' + esc(c.re) + '">' + (c.icone ? esc(c.icone) + ' ' : '') + esc(c.nome) + '</span>';
+    }).join('') + '</div>' + (A.gestor ? '<button type="button" class="btn sm" data-ap-edcat>Editar tipos e cores</button>' : '') + '<hr class="ap-hr">';
     var L = A.ed || A.cat.etiquetas || [];
     if (!A.ed) {
-      return '<small class="muted ap-em">' + L.length + ' etiqueta' + (L.length === 1 ? '' : 's') + (A.cat.atualizadoPor ? ' · por ' + esc(A.cat.atualizadoPor) : '') + (A.cat.atualizadoEm ? ' em ' + esc(quando(A.cat.atualizadoEm)) : '') + '</small>' +
+      return tipos + '<small class="muted ap-em">' + L.length + ' etiqueta' + (L.length === 1 ? '' : 's') + (A.cat.atualizadoPor ? ' · por ' + esc(A.cat.atualizadoPor) : '') + (A.cat.atualizadoEm ? ' em ' + esc(quando(A.cat.atualizadoEm)) : '') + '</small>' +
         '<ul class="ap-e">' + L.map(function (e) {
           return '<li><span class="etq-c" style="--c:' + esc(e.cor || '#6b7280') + '"><i></i>' + esc(e.nome) + '</span><small>' + esc(e.descricao || '') + '</small><code>' + esc(regra(e)) + '</code></li>';
         }).join('') + '</ul>' + (A.gestor ? '<button type="button" class="btn sm" data-ap-ed>Editar o catálogo</button>' : '<small class="muted ap-v">Só o gestor altera o catálogo.</small>');
@@ -167,6 +172,17 @@
           return '<div class="ap-q" data-q="' + j + '">' + sel(E.CAMPOS, q.campo, 'data-qf="campo"') + sel(E.OPS, q.op, 'data-qf="op"') + (q.op === 'tem' || q.op === 'vazio' ? '' : '<input type="text" data-qf="valor" value="' + esc(q.valor == null ? '' : q.valor) + '">') + '<button type="button" class="sn-x" data-q-x="' + i + ':' + j + '" title="Excluir a condição" aria-label="Excluir">×</button></div>';
         }).join('') + ((e.quando || []).length < 6 ? '<button type="button" class="lnk" data-q-add="' + i + '">+ condição (todas devem valer)</button>' : '') + '</fieldset>';
     }).join('') + '<div class="ap-eb"><button type="button" class="lnk" data-e-add>+ etiqueta</button><span><button type="button" class="lnk" data-ap-cancelar>cancelar</button><button type="button" class="btn solid sm" data-ap-gravar>Gravar catálogo</button></span></div><small class="ap-msg" id="ap-msg"></small></div>';
+  }
+  function pTiposEd() {
+    var opt = function (v) { return [['solido', 'sólido'], ['suave', 'suave'], ['contorno', 'contorno']].map(function (o) { return '<option value="' + o[0] + '"' + (o[0] === v ? ' selected' : '') + '>' + o[1] + '</option>'; }).join(''); };
+    return '<div class="ap-ed"><small class="muted">Vale a primeira expressão que combinar com o nome da etiqueta (sem distinção de maiúsculas). O último tipo (".") pega o resto.</small>' + A.edCat.map(function (c, i) {
+      return '<fieldset data-c="' + i + '"><div class="ap-er"><input type="color" data-cf="cor" value="' + esc(c.cor) + '" title="Cor"><input type="text" data-cf="icone" value="' + esc(c.icone || '') + '" maxlength="2" class="ap-ic" title="Ícone (até 2 caracteres)"><input type="text" data-cf="nome" value="' + esc(c.nome) + '" placeholder="Nome do tipo"><select data-cf="estilo">' + opt(c.estilo) + '</select><button type="button" class="sn-x" data-c-x="' + i + '" title="Excluir o tipo" aria-label="Excluir">×</button></div>' +
+        '<input type="text" data-cf="re" value="' + esc(c.re) + '" placeholder="expressão: liminar|tutela|urgen"><span class="hx hx-' + esc(c.estilo) + '" style="--hc:' + esc(c.cor) + '">' + (c.icone ? esc(c.icone) + ' ' : '') + esc(c.nome || 'prévia') + '</span></fieldset>';
+    }).join('') + '<div class="ap-eb"><button type="button" class="lnk" data-c-add>+ tipo</button><span><button type="button" class="lnk" data-ap-cancelar>cancelar</button><button type="button" class="btn solid sm" data-ap-gravarcat>Gravar tipos</button></span></div><small class="ap-msg" id="ap-msg"></small></div>';
+  }
+  function colherCat() {
+    var p = $('tu-pop'); if (!p || !A.edCat) return;
+    Array.prototype.forEach.call(p.querySelectorAll('fieldset[data-c]'), function (f) { var c = A.edCat[Number(f.dataset.c)]; if (!c) return; Array.prototype.forEach.call(f.querySelectorAll('[data-cf]'), function (i) { c[i.dataset.cf] = i.value; }); });
   }
   function regra(e) {
     var C = {}, O = {}; (E ? E.CAMPOS : []).forEach(function (c) { C[c[0]] = c[1]; }); (E ? E.OPS : []).forEach(function (o) { O[o[0]] = o[1]; });
@@ -190,7 +206,7 @@
     var st = $('tu-st'); t0.insertBefore(b, st || null);
     var p = document.createElement('div'); p.id = 'tu-pop'; p.className = 'tu-pop'; p.hidden = true; p.setAttribute('role', 'dialog'); p.setAttribute('aria-label', 'Alertas, prazos e etiquetas'); t0.appendChild(p);
     b.addEventListener('click', function (e) { e.stopPropagation(); abrir(!aberto()); });
-    document.addEventListener('click', function (e) { if (aberto() && !p.contains(e.target) && e.target !== b && !A.ed) abrir(false); });
+    document.addEventListener('click', function (e) { if (aberto() && !p.contains(e.target) && e.target !== b && !A.ed && !A.edCat) abrir(false); });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && aberto() && !A.ed) abrir(false); });
     p.addEventListener('click', function (e) {
       e.stopPropagation(); /* o conteúdo é redesenhado no clique: o documento não deve tomá-lo por clique de fora */
@@ -199,7 +215,20 @@
       if (x.hasAttribute('data-ap-x')) { abrir(false); return; }
       if (x.dataset.apCnj) { try { navigator.clipboard.writeText(x.dataset.apCnj).then(function () { var o = x.textContent; x.textContent = 'Copiado'; setTimeout(function () { x.textContent = o; }, 1000); }); } catch (er) {} return; }
       if (x.hasAttribute('data-ap-ed')) { A.ed = JSON.parse(JSON.stringify(A.cat.etiquetas || [])); pintar(); return; }
-      if (x.hasAttribute('data-ap-cancelar')) { A.ed = null; pintar(); return; }
+      if (x.hasAttribute('data-ap-cancelar')) { A.ed = null; A.edCat = null; pintar(); return; }
+      if (x.hasAttribute('data-ap-edcat')) { var base = (A.cat.categorias && A.cat.categorias.length) ? A.cat.categorias : (E ? E.CATEGORIAS : []); A.edCat = JSON.parse(JSON.stringify(base)); pintar(); return; }
+      if (x.hasAttribute('data-c-add')) { colherCat(); A.edCat.splice(Math.max(0, A.edCat.length - 1), 0, { id: '', nome: '', re: '', cor: '#546e7a', estilo: 'suave', icone: '' }); pintar(); return; }
+      if (x.dataset.cX != null) { colherCat(); A.edCat.splice(Number(x.dataset.cX), 1); pintar(); return; }
+      if (x.hasAttribute('data-ap-gravarcat')) {
+        colherCat(); var m2 = $('ap-msg');
+        var bad = A.edCat.filter(function (c) { try { new RegExp(c.re, 'i'); return !c.nome || !c.re; } catch (e) { return true; } });
+        if (bad.length) { if (m2) { m2.textContent = 'Confira nome e expressão de: ' + bad.map(function (c) { return c.nome || '(sem nome)'; }).join(', '); m2.className = 'ap-msg err'; } return; }
+        x.disabled = true; if (m2) { m2.textContent = 'Gravando…'; m2.className = 'ap-msg'; }
+        ses.api('/api/pauta?etiquetas=1', { method: 'POST', body: JSON.stringify({ etiquetas: A.cat.etiquetas || [], categorias: A.edCat }) }).then(function (j) {
+          A.cat = j.catalogo || A.cat; A.edCat = null; pintar(); avisarAbas();
+        }).catch(function (er) { x.disabled = false; if (m2) { m2.textContent = 'Não gravou: ' + (er.message || 'erro'); m2.className = 'ap-msg err'; } });
+        return;
+      }
       if (x.hasAttribute('data-e-add')) { colher(); A.ed.push({ nome: '', cor: '#6b7280', descricao: '', quando: [{ campo: 'urgPend', op: 'tem', valor: '' }] }); pintar(); return; }
       if (x.dataset.eX != null) { colher(); A.ed.splice(Number(x.dataset.eX), 1); pintar(); return; }
       if (x.dataset.qAdd != null) { colher(); var e1 = A.ed[Number(x.dataset.qAdd)]; (e1.quando = e1.quando || []).push({ campo: 'urgPend', op: 'tem', valor: '' }); pintar(); return; }
@@ -221,6 +250,7 @@
       var i = e.target;
       if (i.dataset.pz) { var c = Object.assign({}, A.cfg || {}); c[i.dataset.pz] = i.type === 'checkbox' ? i.checked : i.type === 'time' ? (i.value || '18:00') : Math.max(1, Number(i.value) || 1); gravarCfg(c); return; }
       if (i.dataset.qf === 'op') { colher(); pintar(); }
+      if (i.dataset.cf === 'cor' || i.dataset.cf === 'estilo' || i.dataset.cf === 'icone') { colherCat(); pintar(); }
     });
     if (temChrome && chrome.storage.onChanged) chrome.storage.onChanged.addListener(function (ch, area) { if ((area === 'session' && (ch['muta-alertas'] || ch['muta-app'])) || (area === 'local' && ch['muta-chegadas'])) lerAlertas(); });
     lerAlertas(); lerCfg(); iniciarVersao();
