@@ -22321,8 +22321,8 @@
    "exequente": "HUGO LEONARDO ARAUJO NARDES",
    "executado": "CAIXA ECONÔMICA FEDERAL",
    "assunto": "Revisão do Saldo Devedor",
-   "grupo": null,
-   "tipo_caso": "",
+   "grupo": "g11",
+   "tipo_caso": "Contratos bancários · SFH · revisional · seguros MIP e DFI e depósito do valor incontroverso",
    "resultado": "Ato a proferir: julgamento do agravo de instrumento (voto), examinada antes a preliminar de deserção",
    "modelo": "",
    "variacoes": [],
@@ -22396,6 +22396,83 @@
     "outros": "Certidão sem custas ID 376357256 (26/05/2026). Decisão ID 377065728 (08/06/2026): reconheceu a gratuidade deferida na origem (ID 578264752 dos autos de origem), indeferiu a tutela recursal e intimou a agravada. Substabelecimento da CEF ID 380896698.",
     "representacao": "Agravantes: advogada constituída (procuração não juntada no agravo) [VALIDAR]. Agravada: CEF (substabelecimento ID 380896698).",
     "preparo": "Justiça gratuita deferida na origem (ID 578264752 dos autos de origem), reconhecida na decisão ID 377065728."
+   },
+   "assunto_detalhado": "Contratos bancários — SFH; seguros MIP e DFI; depósito do valor incontroverso",
+   "especificidades": "Contrato 1.4444.1425104-3, de 15/01/2021 (R$ 252.000,00, 360 parcelas); 59 parcelas pagas até 12/2025 · Venda casada dos seguros MIP e DFI alegada · Tutela recursal indeferida (ID 377065728, 08/06/2026) · Gratuidade deferida na origem; a CEF suscita deserção e impugna o benefício",
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "assuntoDet": "Contratos bancários — SFH; seguros MIP e DFI; depósito do valor incontroverso",
+     "subassuntos": "Contratos bancários · SFH · revisional · seguros MIP e DFI e depósito do valor incontroverso",
+     "sintese": "",
+     "questoes": "1) Preliminar de deserção e impugnação à gratuidade; 2) suspensão da cobrança dos seguros MIP e DFI; 3) depósito do valor incontroverso e vedação de negativação; 4) inversão do ônus da prova (CDC).",
+     "rel": {
+      "razoes": "",
+      "contrarrazoes": ""
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "",
+      "juizo": "1ª Vara Federal de Campo Grande",
+      "dispositivo": "Indeferiu a tutela de urgência."
+     },
+     "ai": {
+      "hip": "Tutela provisória",
+      "efeito": "Indeferido",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2026-05-25",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": true,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte autora",
+       "tipo": "Agravo de instrumento",
+       "id": "376176387",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "376176387",
+       "data": "2026-05-25"
+      },
+      {
+       "desc": "Certidão sem custas",
+       "id": "376357256",
+       "data": "2026-05-26"
+      },
+      {
+       "desc": "Decisão que indeferiu a tutela recursal",
+       "id": "377065728",
+       "data": "2026-06-08"
+      },
+      {
+       "desc": "Contrarrazões da CEF",
+       "id": "380895330",
+       "data": "2026-06-17"
+      }
+     ],
+     "pendencias": "Conferir a procuração dos agravantes e o ID da decisão agravada",
+     "especificidades": "Contrato 1.4444.1425104-3, de 15/01/2021 (R$ 252.000,00, 360 parcelas); 59 parcelas pagas até 12/2025 · Venda casada dos seguros MIP e DFI alegada · Tutela recursal indeferida (ID 377065728, 08/06/2026) · Gratuidade deferida na origem; a CEF suscita deserção e impugna o benefício"
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Justiça gratuita",
+     "prelim": "Há preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "",
+     "urgTipo": "Antecipação da tutela recursal",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-06-08"
+    }
    }
   },
   {
