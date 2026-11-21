@@ -6,7 +6,7 @@
   "arquivo": "acervo/fonte.json",
   "chave": "processo"
  },
- "atualizado_em": "2026-11-21T06:41:25.301Z",
+ "atualizado_em": "2026-11-21T06:41:31.949Z",
  "registros": [
   {
    "processo": "0000008-23.2025.4.03.6000",
@@ -292147,53 +292147,54 @@
     "Responsável": "",
     "Próxima ação": "",
     "Observações": "",
-    "atualizado_em": "2026-11-19T19:59:38.328Z"
+    "atualizado_em": "2026-11-21T06:41:31.949Z"
    },
    "triagem": {
-    "Urgência": "",
+    "Urgência": "Efeito suspensivo",
     "Urgência - Observação": "",
     "Urgência - Nível": "",
-    "Urgência - Apreciação": "",
-    "Urgência - Data": "",
+    "Urgência - Apreciação": "Apreciada · indeferida",
+    "Urgência - Data": "2026-11-21",
     "Urgência - Painel": "",
     "Tempest - Publicação": "",
     "Tempest - Protocolo": "",
     "Tempest - Prazo legal": "",
     "Tempest - Dobro": "",
     "Tempest - Suspensões": "",
-    "Tipo de Julgamento": "",
+    "Tipo de Julgamento": "Agravo de Instrumento",
     "Hipóteses Monocrática": "",
-    "Tempestividade": "",
-    "Preparo": "",
+    "Tempestividade": "Não verificado",
+    "Preparo": "Não verificado",
     "AJG": "",
     "DPU (controle)": "",
-    "Representação": "",
+    "Representação": "Não verificado",
     "ID da Procuração": "",
     "Impedimento / Suspeição": "",
     "Observação do Impedimento": "",
     "Regularidade": "Representação ainda não verificada.",
     "Regularidade Manual": "",
     "Observação da Representação": "",
-    "MPF": "",
-    "MPF - Custos Legis": "",
+    "MPF": "Não se aplica",
+    "MPF - Custos Legis": "Sem hipótese",
     "ID do Parecer MPF": "",
     "Parecer - Sentido": "",
     "MPF - Info adicional": "",
     "Observação MPF": "",
-    "Tema": "IPTU/ Imposto Predial e Territorial Urbano",
+    "Tema": "Execução fiscal · IPTU e taxa de coleta do Município de Campo Grande contra a CEF · exceção de pré-executividade rejeitada · nulidade das CDAs (imunidade do PAR/FAR ou legitimidade da credora fiduciária [VALIDAR])",
     "COMPLEXIDADE": "",
     "Tipo de Voto": "",
-    "Prelim.": "",
+    "Prelim.": "Sem preliminares",
     "Descrição da Preliminar": "",
     "META": "",
     "Seleção Prévia": "",
-    "Mídias": "",
+    "Mídias": "Não se aplica",
     "Etiquetas": "2ª Seção, AI - Tutela provisória",
-    "Alegações": "",
+    "Alegações": "1) Regularidade do preparo (GRU depois da extinção da GRU Judicial); 2) nulidade das CDAs de IPTU e taxa: imunidade do PAR/FAR (Tema 884/STF) ou ilegitimidade da CEF como credora fiduciária [VALIDAR]; 3) cabimento da exceção de pré-executividade.",
     "O que falta sanar": "",
     "Intercorrências": "",
     "Síntese Processual": "",
-    "Especificidades": ""
+    "Especificidades": "Petição do agravo sem texto extraível (IDs 379312340 e 379312352) [VALIDAR] · Preparo regularizado por GRU depois de 03/04/2026 (ID 381072875) [VALIDAR] · Tutela recursal não concedida (ID 390379604, 05/08/2026) · Sem contraminuta · Ver os demais agravos CEF × Município de Campo Grande do lote",
+    "Síntese Fática": "O Município de Campo Grande executa IPTU e taxa de coleta de resíduos contra a CEF; o juízo rejeitou a exceção de pré-executividade, sem honorários, e a CEF agravou pedindo a nulidade das CDAs."
    },
    "producao": {
     "Destino": "",
@@ -292232,7 +292233,8 @@
     "Lote - Observação": "",
     "Lote - Ajustes da correção": [],
     "Lote - Pendências": "",
-    "Lote - Minuta": "sem minuta no lote"
+    "Lote - Minuta": "sem minuta no lote",
+    "Mono - Fundamento": "Paradigmas do gabinete: AI 5004720-07.2017.4.03.0000 (acórdão 3ª Turma, 03/08/2017: CEF credora fiduciária, ilegitimidade passiva para IPTU e taxa de lixo); AI 5009745-98.2017.4.03.0000 (acórdão 3ª Turma, 11/09/2017: mesma tese, Lei 9.514/1997)"
    },
    "pauta": {
     "Status de Julgamento": "",
@@ -292242,7 +292244,8 @@
     "JULGAMENTO": "",
     "Motivo da remarcação": "",
     "sessoes": []
-   }
+   },
+   "controles": {}
   },
   {
    "processo": "5017015-95.2025.4.03.0000",
