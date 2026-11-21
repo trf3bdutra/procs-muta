@@ -8925,15 +8925,15 @@ body.cmt-asl-on.cmt-asl-min #v-cmt .cmt-asl-k{background:var(--ew)}
 .mrw .mr-tg .mr-dt span{padding:0;border:0;text-decoration:underline dotted;text-underline-offset:2px}
 .mrw .mr-tg .mr-dt input{position:absolute;inset:0;width:100%;height:100%;opacity:0;pointer-events:none;border:0;padding:0}
 
-/* cartões: fundo pela etapa (minutado verde, corrigido azul, liberado roxo); faixa à esquerda pelo problema mais grave */
-#v-pauta.ed #lst .pc.edr.mrw.ee1{background:rgba(40,116,75,.09)}
-#v-pauta.ed #lst .pc.edr.mrw.ee2{background:rgba(36,91,140,.09)}
-#v-pauta.ed #lst .pc.edr.mrw.ee3,#v-pauta.ed #lst .pc.edr.mrw.ee4{background:rgba(109,69,150,.09)}
-#v-pauta.ed #lst .pc.edr.mrw:hover{background-image:linear-gradient(rgba(0,0,0,.035),rgba(0,0,0,.035))}
-#v-pauta.ed #lst .pc.edr.mrw.pb-ic::before,#v-pauta.ed #lst .pc.edr.mrw.pb-pd::before,#v-pauta.ed #lst .pc.edr.mrw.pb-al::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;z-index:1;pointer-events:none}
-#v-pauta.ed #lst .pc.edr.mrw.pb-ic::before{background:#b3261e}
-#v-pauta.ed #lst .pc.edr.mrw.pb-pd::before{background:#d9822b}
-#v-pauta.ed #lst .pc.edr.mrw.pb-al::before{background:#e0b52f}
+/* cartões: fundo pela etapa, em tons claros e limpos (minutado verde, corrigido azul, liberado lilás);
+   os problemas ficam nos ícones de sinalização do próprio cartão, sem faixa lateral */
+#v-pauta.ed #lst .pc.edr.mrw.ee1{background:#f1f7f3}
+#v-pauta.ed #lst .pc.edr.mrw.ee2{background:#f0f5fa}
+#v-pauta.ed #lst .pc.edr.mrw.ee3,#v-pauta.ed #lst .pc.edr.mrw.ee4{background:#f7f4fb}
+html[data-theme=dark] #v-pauta.ed #lst .pc.edr.mrw.ee1{background:rgba(40,116,75,.14)}
+html[data-theme=dark] #v-pauta.ed #lst .pc.edr.mrw.ee2{background:rgba(36,91,140,.14)}
+html[data-theme=dark] #v-pauta.ed #lst .pc.edr.mrw.ee3,html[data-theme=dark] #v-pauta.ed #lst .pc.edr.mrw.ee4{background:rgba(109,69,150,.14)}
+#v-pauta.ed #lst .pc.edr.mrw:hover{background-image:linear-gradient(rgba(0,0,0,.03),rgba(0,0,0,.03))}
 </style>
 </body>
 </html>
