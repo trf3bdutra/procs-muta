@@ -5010,7 +5010,7 @@ function cartao(l,it){
   /* especificidades sem o resumo da situação (que já está em Situação atual) */
   let esp=F('Especificidades')||it.especificidades||'';const rs=sa.resumo||'';if(rs&&esp.startsWith(rs))esp=esp.slice(rs.length).replace(/^[\s·]+/,'');if(/^► Situação/.test(esp))esp='';
   /* triagem do lote */
-  const TRI=[['ato','Ato a proferir'],['materia','Matéria'],['origem','Origem'],['decisao_agravada','Decisão agravada'],['recurso','Recurso'],['preparo','Preparo'],['monocratica','Monocrática'],['conf_preparo','Conferência do preparo'],['conf_prevencao','Conferência da prevenção'],['analisado_em','Analisado em']];
+  const TRI=[['ato','Ato a proferir'],['materia','Matéria'],['origem','Origem'],['decisao_agravada','Decisão impugnada'],['recurso','Recurso'],['preparo','Preparo'],['monocratica','Monocrática'],['conf_preparo','Conferência do preparo'],['conf_prevencao','Conferência da prevenção'],['analisado_em','Analisado em']];
   const triKv=TRI.filter(x=>t[x[0]]).map(x=>`<div class="kv"><span>${esc(x[1])}</span><p>${esc(t[x[0]])}</p></div>`).join('');
   /* situação atual, todos os campos */
   const SIT=[['ultima_decisao','Última decisão'],['ultima_decisao_relevante','Última decisão relevante'],['ultima_peca','Última peça'],['ultima_informacao','Última informação'],['ultima_movimentacao','Última movimentação'],['aviso','Aviso'],['conferido_em','Conferido em']];

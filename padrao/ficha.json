@@ -1099,6 +1099,14 @@
        "apelido": "etiquetas"
       },
       {
+       "rotulo": "Etiquetas sugeridas para o PJe",
+       "chave": "Etiquetas sugeridas",
+       "tipo": "texto",
+       "secao": "triagem",
+       "regra": "escolhidas no prontuário de triagem do Caput, entre as sugestões calculadas pela triagem",
+       "apelido": "etiquetas_sugeridas"
+      },
+      {
        "rotulo": "Alegações",
        "chave": "Alegações",
        "tipo": "texto-longo",
@@ -1432,6 +1440,142 @@
        "tipo": "data",
        "secao": "triagem",
        "apelido": "retratacao_ed_data"
+      }
+     ]
+    },
+    {
+     "grupo": "Registro da triagem (lote)",
+     "campos": [
+      {
+       "rotulo": "Lote e item",
+       "chave": "Registro - Lote",
+       "tipo": "texto",
+       "secao": "triagem",
+       "editavel": false,
+       "regra": "do lote de triagem (acervo/lotes); atualizado por scripts/triagem/ficha_lote.py",
+       "apelido": "registro_lote"
+      },
+      {
+       "rotulo": "Assunto detalhado",
+       "chave": "Registro - Assunto detalhado",
+       "tipo": "texto-longo",
+       "secao": "triagem",
+       "editavel": false,
+       "regra": "do lote de triagem (acervo/lotes); atualizado por scripts/triagem/ficha_lote.py",
+       "apelido": "registro_assunto_detalhado"
+      },
+      {
+       "rotulo": "Grupo da matriz",
+       "chave": "Registro - Grupo",
+       "tipo": "texto-longo",
+       "secao": "triagem",
+       "editavel": false,
+       "regra": "do lote de triagem (acervo/lotes); atualizado por scripts/triagem/ficha_lote.py",
+       "apelido": "registro_grupo"
+      },
+      {
+       "rotulo": "Variações",
+       "chave": "Registro - Variações",
+       "tipo": "texto",
+       "secao": "triagem",
+       "editavel": false,
+       "regra": "do lote de triagem (acervo/lotes); atualizado por scripts/triagem/ficha_lote.py",
+       "apelido": "registro_variacoes"
+      },
+      {
+       "rotulo": "Proposta (ato a proferir e precedentes)",
+       "chave": "Registro - Proposta",
+       "tipo": "texto-longo",
+       "secao": "triagem",
+       "editavel": false,
+       "regra": "do lote de triagem (acervo/lotes); atualizado por scripts/triagem/ficha_lote.py",
+       "apelido": "registro_proposta"
+      },
+      {
+       "rotulo": "Modelo",
+       "chave": "Registro - Modelo",
+       "tipo": "texto-longo",
+       "secao": "triagem",
+       "editavel": false,
+       "regra": "do lote de triagem (acervo/lotes); atualizado por scripts/triagem/ficha_lote.py",
+       "apelido": "registro_modelo"
+      },
+      {
+       "rotulo": "Triagem",
+       "chave": "Registro - Triagem",
+       "tipo": "texto-longo",
+       "secao": "triagem",
+       "editavel": false,
+       "regra": "do lote de triagem (acervo/lotes); atualizado por scripts/triagem/ficha_lote.py",
+       "apelido": "registro_triagem"
+      },
+      {
+       "rotulo": "Situação atual",
+       "chave": "Registro - Situação atual",
+       "tipo": "texto-longo",
+       "secao": "triagem",
+       "editavel": false,
+       "regra": "do lote de triagem (acervo/lotes); atualizado por scripts/triagem/ficha_lote.py",
+       "apelido": "registro_situacao_atual"
+      },
+      {
+       "rotulo": "Teor dos autos",
+       "chave": "Registro - Teor dos autos",
+       "tipo": "texto-longo",
+       "secao": "triagem",
+       "editavel": false,
+       "regra": "do lote de triagem (acervo/lotes); atualizado por scripts/triagem/ficha_lote.py",
+       "apelido": "registro_teor"
+      },
+      {
+       "rotulo": "Peças, com nota e trecho",
+       "chave": "Registro - Peças",
+       "tipo": "tabela",
+       "secao": "triagem",
+       "editavel": false,
+       "regra": "do lote de triagem (acervo/lotes); atualizado por scripts/triagem/ficha_lote.py",
+       "colunas": [
+        {
+         "chave": "data",
+         "rotulo": "Data",
+         "tipo": "data"
+        },
+        {
+         "chave": "id",
+         "rotulo": "ID",
+         "tipo": "texto"
+        },
+        {
+         "chave": "peca",
+         "rotulo": "Peça",
+         "tipo": "texto"
+        },
+        {
+         "chave": "pje",
+         "rotulo": "No PJe",
+         "tipo": "texto"
+        },
+        {
+         "chave": "nota",
+         "rotulo": "Nota da triagem",
+         "tipo": "texto-longo"
+        },
+        {
+         "chave": "trecho",
+         "rotulo": "Trecho dos autos",
+         "tipo": "texto-longo"
+        }
+       ],
+       "apelido": "registro_pecas"
+      },
+      {
+       "rotulo": "Registrado em",
+       "chave": "Registro - Atualizado em",
+       "tipo": "texto",
+       "secao": "triagem",
+       "editavel": false,
+       "regra": "do lote de triagem (acervo/lotes); atualizado por scripts/triagem/ficha_lote.py",
+       "apelido": "registro_atualizado_em"
       }
      ]
     }
