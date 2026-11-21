@@ -98,3 +98,8 @@ test('Calendário da Chefia: sem fundo branco sob os calendários, um painel por
   const fs=require('fs'),p=require('path'),cap=fs.readFileSync(p.join(__dirname,'../../../caput/triagem/index.html'),'utf8');
   assert.ok(cap.includes('.cg-cal .cc-body{background:var(--p)}.cg-cal .cc-2m>div')&&cap.includes('.cg-cal .cc-esq .cc-esq-b{top:56px!important}'),'painéis por mês');
 });
+
+test('Chefia › Visão operacional: lista com altura fixa, rolando por dentro',()=>{
+  const fs=require('fs'),p=require('path'),cap=fs.readFileSync(p.join(__dirname,'../../../caput/triagem/index.html'),'utf8');
+  assert.ok(cap.includes('.vo-bd{height:560px}')&&cap.includes('#vo-lst{flex:1 1 auto;min-height:0;overflow:auto')&&cap.includes('.vo-g h4{position:sticky;top:0'),'altura fixa');
+});
