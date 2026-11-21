@@ -80,6 +80,22 @@ main{min-height:calc(100vh - 60px);padding-bottom:140px}
 .tri-et:hover:not(.on){background:var(--b2,#f0f4f2)}
 .tri-et small{font-weight:600;font-family:ui-monospace,monospace;color:var(--m);margin-left:4px}
 .tri-em-corpo{padding:0}
+.tri-em2{display:grid;grid-template-columns:270px minmax(0,1fr);gap:0;border:0;border-radius:0;overflow:visible;background:transparent;align-items:start}
+.tri-em2 .tri-lado{position:sticky;top:70px;padding:0 20px 12px 0}
+.tri-em2 .tri-caixa{border:1px solid var(--b2,#cfd6d3);background:#f7f4ea;padding:10px}
+.tri-em2 .tri-em-tabs{display:flex;border:1px solid var(--b2,#cfd6d3);background:var(--w,#fff)}
+.tri-em2 .tri-et{flex:1 1 auto;padding:7px 6px;border:0;border-bottom:2px solid transparent;border-left:1px solid var(--b,#dde3e0);font-size:12px;line-height:1.15;white-space:nowrap}
+.tri-em2 .tri-et:first-child{border-left:0}
+.tri-em2 .tri-et small{display:block;margin:1px 0 0;font-size:10px}
+.tri-em2 .tri-sel{display:flex;flex-direction:column;gap:5px;margin-top:12px}
+.tri-em2 .tri-sel>span{font-size:11.5px;color:var(--m)}
+.tri-em2 .tri-sel select{width:100%;min-height:38px;border:1px solid var(--b2,#cfd6d3);background:var(--w,#fff);padding:6px 8px;font:600 13px ui-monospace,'JetBrains Mono',monospace;color:var(--v)}
+.tri-em2 .tri-nav{margin-top:14px;border-top:1px solid var(--b,#dde3e0);padding-top:10px}
+.tri-em2 .tri-k{margin:0 0 6px;font:500 10px 'JetBrains Mono',ui-monospace,monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--m)}
+.tri-em2 .tri-ir{display:block;width:100%;text-align:left;border:0;border-left:1px solid var(--b,#dde3e0);background:none;padding:5px 0 5px 12px;font-family:inherit;font-size:13px;font-weight:400;color:var(--tx);cursor:pointer;text-decoration:none}
+.tri-em2 .tri-ir[aria-current=true]{border-left:2px solid var(--v);padding-left:11px;font-weight:700;color:var(--v)}
+.tri-em2 .tri-em-corpo{border:1px solid var(--b2,#cfd6d3);background:var(--w,#fff);min-height:320px}
+@media (max-width:900px){.tri-em2{grid-template-columns:minmax(0,1fr)}.tri-em2 .tri-lado{position:static;padding:0 0 10px}}
 .tri-ld{padding:16px;color:var(--m2);font-size:13.5px;text-align:center}
 .tri-banda{border-bottom:1px solid var(--b2,#eaeeec)}
 .tri-banda:last-child{border-bottom:0}
@@ -2942,22 +2958,62 @@ function painelEmTriagem() {
     {id:'selecao', r:'Seleção prévia'},
   ];
   let ctsHd = tabs.map(t => {
-    const ct = t.id==='triar' ? (U?U.length:0) : t.id==='triados' ? (_triCache?_triCache.items.size:'…') : (_selCache?_selCache.items.size:'…');
+    const ct = t.id==='triar' ? (U?U.length:0) : t.id==='triados' ? (_triCache?_triCache.items.size:somaIdx('triados')) : (_selCache?_selCache.items.size:somaIdx('selecao'));
     return '<button class="tri-et'+(TRI_SUBABA===t.id?' on':'')+'" data-trisub="'+t.id+'" aria-selected="'+(TRI_SUBABA===t.id)+'" role="tab">'+t.r+'<small>'+ct+'</small></button>';
   }).join('');
-  return '<div class="tri-em" id="tri-em"><div class="tri-em-tabs" role="tablist">'+ctsHd+'</div><div class="tri-em-corpo" id="tri-em-corpo">'+conteudoSubAba()+'</div></div>';
+  return '<div class="tri-em tri-em2" id="tri-em"><aside class="tri-lado" aria-label="Triagem: coleções"><div class="tri-caixa"><div class="tri-em-tabs" role="tablist">'+ctsHd+'</div>'+seletorLado()+'</div>'+navLado()+'</aside><div class="tri-em-corpo" id="tri-em-corpo">'+conteudoSubAba()+'</div></div>';
 }
+/* soma dos processos dos lotes no índice (antes de ler os lotes) */
+function somaIdx(sub) { if (!_triIdx || _triIdx._erro) return '…'; let n = 0; const G = gruposLotes(sub); (G.length ? [G[0]] : []).forEach((g) => g[1].forEach((x) => { n += Number(x.n) || 0; })); return n; } /* só os lotes das tarefas: séries e escaninhos repetem processos */
+function tarefasTriar() { const m = new Map(); (U || []).forEach((p) => { const g = p.tarefa || p.grupo || 'Triagem'; m.set(g, (m.get(g) || 0) + 1); }); return [...m.entries()]; }
+/* a caixa da esquerda, como Pauta | Avulsas no Collectio: abas e, abaixo, o seletor da coleção */
+function seletorLado() {
+  const opt = (v, r, on) => '<option value="' + esc(v) + '"' + (on ? ' selected' : '') + '>' + esc(r) + '</option>';
+  if (TRI_SUBABA === 'triar') {
+    const T = tarefasTriar(), sel = LS.get('tri_triar_tarefa', '');
+    return '<label class="tri-sel"><span>Tarefa do PJe · processos</span><select data-trisel="triar">' + opt('', 'Todas as tarefas · ' + nf((U || []).length), !sel) +
+      T.map(([t, n]) => opt(t, t + ' · ' + nf(n), t === sel)).join('') + '</select></label>';
+  }
+  if (!_triIdx) { carregarIdxLotes(); return '<label class="tri-sel"><span>' + (TRI_SUBABA === 'selecao' ? 'Sessão · processos' : 'Lote de triagem · processos') + '</span><select disabled><option>Carregando…</option></select></label>'; }
+  const G = gruposLotes(TRI_SUBABA), todos = [].concat(...G.map((g) => g[1])); let sel = LS.get('tri_mtz_' + TRI_SUBABA, '');
+  if (!todos.some((x) => x.id === sel) && todos.length) sel = todos[0].id;
+  const o = (x) => opt(x.id, (x.titulo || x.id).replace(/^Seleção prévia · /, '').replace(/^Analisar decisão · /, '').replace(/^Série · /, '') + (x.n != null ? ' · ' + x.n : ''), x.id === sel);
+  return '<label class="tri-sel"><span>' + (TRI_SUBABA === 'selecao' ? 'Sessão · processos' : 'Lote de triagem · processos') + '</span><select data-trisel="' + TRI_SUBABA + '">' +
+    (todos.length ? G.map((g) => G.length > 1 ? '<optgroup label="' + esc(g[0]) + '">' + g[1].map(o).join('') + '</optgroup>' : g[1].map(o).join('')).join('') : '<option>Nenhum lote</option>') + '</select></label>';
+}
+/* abaixo da caixa: contagem e modo de ver, no lugar do "Nesta página" do Collectio */
+function navLado() {
+  const k = (t) => '<p class="tri-k">' + t + '</p>';
+  if (TRI_SUBABA === 'triar') { const sel = LS.get('tri_triar_tarefa', ''), n = sel ? (tarefasTriar().find((x) => x[0] === sel) || [0, 0])[1] : (U || []).length; return k(nf(n) + ' de ' + nf((U || []).length) + ' processos'); }
+  const v = LS.get('tri_vista_' + TRI_SUBABA, 'matriz'), mot = LS.get('tri_motor', 'novo');
+  const it = (attr, r, on, t) => '<button type="button" class="tri-ir" ' + attr + ' aria-current="' + on + '" title="' + esc(t) + '">' + r + '</button>';
+  let h = '';
+  if (_triIdx && !_triIdx._erro) { const todos = [].concat(...gruposLotes(TRI_SUBABA).map((g) => g[1])); const sel = todos.find((x) => x.id === LS.get('tri_mtz_' + TRI_SUBABA, '')) || todos[0];
+    if (sel) h += k((sel.n != null ? sel.n + ' processos no lote' : sel.id)); }
+  h += '<p class="tri-k" style="margin-top:14px">Ver</p>' + it('data-trivista="matriz"', 'Matriz do lote', v === 'matriz', 'O lote como no Collectio: matriz, grupos, prontuários, ficha e minutas') +
+    it('data-trivista="lista"', 'Lista simples', v !== 'matriz', 'Lista dos processos, lote a lote');
+  if (v === 'matriz') h += '<p class="tri-k" style="margin-top:14px">Página</p>' + it('data-trimotor="novo"', 'Collectio', mot !== 'classico', 'Collectio atual (matriz padrão e matriz do lote)') +
+    it('data-trimotor="classico"', 'Collectio clássico', mot === 'classico', 'Collectio clássico (prontuários, conformidade, Compendium)') + (srcLote() ? '<a class="tri-ir" href="' + esc(srcLote().replace(/[?&]caput=1/, '')) + '" target="_blank" rel="noopener">Abrir em nova aba ↗</a>' : '');
+  return '<div class="tri-nav">' + h + '</div>';
+}
+function srcLote() {
+  if (TRI_SUBABA === 'triar' || !_triIdx || _triIdx._erro) return '';
+  const todos = [].concat(...gruposLotes(TRI_SUBABA).map((g) => g[1])); if (!todos.length) return '';
+  let sel = LS.get('tri_mtz_' + TRI_SUBABA, ''); if (!todos.some((x) => x.id === sel)) sel = todos[0].id;
+  return LS.get('tri_motor', 'novo') === 'classico' ? '/amicus/collectio/classico/?id=' + encodeURIComponent(sel) + '&caput=1' : '/amicus/collectio/?colecao=' + encodeURIComponent(sel) + '&caput=1';
+}
+function refazTriEm() { const em = document.getElementById('tri-em'); if (em) em.outerHTML = painelEmTriagem(); }
 
 function conteudoSubAba() {
-  if (TRI_SUBABA==='triar') return aTriarBands();
+  if (TRI_SUBABA==='triar') return aTriarBands(LS.get('tri_triar_tarefa', ''));
   if ((TRI_SUBABA==='triados' || TRI_SUBABA==='selecao') && LS.get('tri_vista_' + TRI_SUBABA, 'matriz') === 'matriz') return painelMatrizLote(TRI_SUBABA);
   if (TRI_SUBABA==='triados') {
-    if (!_triCache) { carregarTriados(); return barraVistaLote('triados') + '<div class="tri-ld">Carregando lotes de triagem…</div>'; }
-    return barraVistaLote('triados') + triadosBands();
+    if (!_triCache) { carregarTriados(); return '<div class="tri-ld">Carregando lotes de triagem…</div>'; }
+    return triadosBands();
   }
   if (TRI_SUBABA==='selecao') {
-    if (!_selCache) { carregarSelecao(); return barraVistaLote('selecao') + '<div class="tri-ld">Carregando seleção prévia…</div>'; }
-    return barraVistaLote('selecao') + selecaoBands();
+    if (!_selCache) { carregarSelecao(); return '<div class="tri-ld">Carregando seleção prévia…</div>'; }
+    return selecaoBands();
   }
   return '';
 }
@@ -2972,7 +3028,7 @@ async function carregarIdxLotes() {
   try { const idx = JSON.parse(await P.ler('acervo/lotes/colecoes.json')); _triIdx = (idx && idx.colecoes) || {}; }
   catch (e) { _triIdx = { _erro: String((e && e.message) || e) }; }
   _triIdxCarregando = false;
-  const c = document.getElementById('tri-em-corpo'); if (c && (TRI_SUBABA === 'triados' || TRI_SUBABA === 'selecao')) c.innerHTML = conteudoSubAba();
+  refazTriEm();
 }
 function gruposLotes(sub) {
   const C = _triIdx || {}, ent = (x) => (typeof x === 'string' ? { id: x, titulo: x } : x);
@@ -2981,38 +3037,25 @@ function gruposLotes(sub) {
   return [['Tarefas do PJe', tri.filter((x) => !x.serie && !/^adp-serie-/.test(x.id))], ['Séries', tri.filter((x) => x.serie || /^adp-serie-/.test(x.id))],
     ['Escaninhos', (C.avulsos || []).map(ent).filter((x) => x.escaninho)]].filter((g) => g[1].length);
 }
-function barraVistaLote(sub) {
-  const v = LS.get('tri_vista_' + sub, 'matriz'), mot = LS.get('tri_motor', 'novo');
-  const b = (k, r, on, t) => '<button type="button" class="btn' + (on ? ' pri' : '') + '" ' + k + ' title="' + esc(t) + '" style="padding:4px 10px;font-size:12px">' + r + '</button>';
-  return '<div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center;padding:8px 10px;border-bottom:1px solid var(--b)">' +
-    '<span style="font:500 10px \'JetBrains Mono\',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--m)">Ver</span>' +
-    b('data-trivista="matriz"', 'Matriz do lote', v === 'matriz', 'O lote como no Collectio: matriz, grupos, prontuários, ficha e minutas') +
-    b('data-trivista="lista"', 'Lista simples', v !== 'matriz', 'Lista de todos os processos dos lotes, por lote') +
-    (v === 'matriz' ? '<span style="flex:1"></span><span style="font:500 10px \'JetBrains Mono\',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--m)">Página</span>' +
-      b('data-trimotor="novo"', 'Collectio', mot !== 'classico', 'Collectio atual (matriz padrão e matriz do lote)') +
-      b('data-trimotor="classico"', 'Clássico', mot === 'classico', 'Collectio clássico (prontuários, conformidade, Compendium)') : '') + '</div>';
-}
 function painelMatrizLote(sub) {
-  if (!_triIdx) { carregarIdxLotes(); return barraVistaLote(sub) + '<div class="tri-ld">Carregando os lotes…</div>'; }
-  if (_triIdx._erro) return barraVistaLote(sub) + '<div class="tri-ld">Erro ao ler o índice dos lotes: ' + esc(_triIdx._erro) + '</div>';
-  const G = gruposLotes(sub), todos = [].concat(...G.map((g) => g[1]));
-  if (!todos.length) return barraVistaLote(sub) + '<div class="tri-ld">Nenhum lote ' + (sub === 'selecao' ? 'de seleção prévia' : 'de triagem') + '.</div>';
-  let sel = LS.get('tri_mtz_' + sub, ''); if (!todos.some((x) => x.id === sel)) sel = todos[0].id;
-  const mot = LS.get('tri_motor', 'novo');
-  const src = mot === 'classico' ? '/amicus/collectio/classico/?id=' + encodeURIComponent(sel) + '&caput=1' : '/amicus/collectio/?colecao=' + encodeURIComponent(sel) + '&caput=1';
-  const chips = G.map((g) => '<div style="display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:0 0 6px"><span style="min-width:110px;font:500 10px \'JetBrains Mono\',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--m)">' + esc(g[0]) + '</span>' +
-    g[1].map((x) => '<button type="button" data-trimtz="' + esc(x.id) + '" aria-pressed="' + (x.id === sel) + '" title="' + esc(x.id) + '" style="border:1px solid ' + (x.id === sel ? 'var(--v)' : 'var(--b2)') + ';background:' + (x.id === sel ? 'var(--v)' : 'var(--w)') + ';color:' + (x.id === sel ? '#fff' : 'var(--tx)') + ';padding:4px 9px;font-size:12px;cursor:pointer">' + esc(x.titulo || x.id) + (x.n != null ? ' <small style="opacity:.7">' + x.n + '</small>' : '') + '</button>').join('') + '</div>').join('');
-  return barraVistaLote(sub) + '<div style="padding:10px 10px 4px">' + chips +
-    '<div style="display:flex;justify-content:flex-end;margin:2px 0 6px"><a href="' + esc(src.replace('&caput=1', '')) + '" target="_blank" rel="noopener" style="font-size:11.5px;color:var(--m)">abrir o lote em nova aba ↗</a></div></div>' +
-    '<iframe id="tri-mtz-frame" src="' + esc(src) + '" title="Matriz do lote ' + esc(sel) + '" style="display:block;width:100%;height:calc(100vh - 110px);min-height:620px;border:0;border-top:1px solid var(--b);background:#fff"></iframe>';
+  if (!_triIdx) { carregarIdxLotes(); return '<div class="tri-ld">Carregando os lotes…</div>'; }
+  if (_triIdx._erro) return '<div class="tri-ld">Erro ao ler o índice dos lotes: ' + esc(_triIdx._erro) + '</div>';
+  const src = srcLote(); if (!src) return '<div class="tri-ld">Nenhum lote ' + (sub === 'selecao' ? 'de seleção prévia' : 'de triagem') + '.</div>';
+  return '<iframe id="tri-mtz-frame" src="' + esc(src) + '" title="Matriz do lote" style="display:block;width:100%;height:calc(100vh - 90px);min-height:640px;border:0;background:#fff"></iframe>';
 }
 document.addEventListener('click', (e) => {
-  const t = e.target.closest && e.target.closest('[data-trimtz],[data-trivista],[data-trimotor]'); if (!t) return;
+  const t = e.target.closest && e.target.closest('[data-trisub],[data-trimtz],[data-trivista],[data-trimotor]'); if (!t || !t.closest('#tri-em')) return;
   e.preventDefault(); e.stopPropagation();
+  if (t.dataset.trisub) { TRI_SUBABA = t.dataset.trisub; LS.set('tri_subaba', TRI_SUBABA); }
   if (t.dataset.trimtz) LS.set('tri_mtz_' + TRI_SUBABA, t.dataset.trimtz);
   if (t.dataset.trivista) LS.set('tri_vista_' + TRI_SUBABA, t.dataset.trivista);
   if (t.dataset.trimotor) LS.set('tri_motor', t.dataset.trimotor);
-  const c = document.getElementById('tri-em-corpo'); if (c) c.innerHTML = conteudoSubAba();
+  refazTriEm();
+}, true);
+document.addEventListener('change', (e) => {
+  const t = e.target.closest && e.target.closest('[data-trisel]'); if (!t) return;
+  if (t.dataset.trisel === 'triar') LS.set('tri_triar_tarefa', t.value); else LS.set('tri_mtz_' + t.dataset.trisel, t.value);
+  refazTriEm();
 }, true);
 
 async function carregarTriados() {
@@ -3078,11 +3121,11 @@ async function carregarSelecao() {
   carregarSelecao.rodando = false;
 }
 
-function aTriarBands() {
+function aTriarBands(soTarefa) {
   if (!U || !U.length) return '<div class="tri-ld">Nenhum processo em triagem.</div>';
-  // agrupa por tarefa (campo grupo já vem de U = grupo 'triar')
+  // agrupa por tarefa (campo grupo já vem de U = grupo 'triar'); a tarefa escolhida na caixa da esquerda filtra
   const groups = new Map();
-  U.forEach(p => { const g = p.tarefa||p.grupo||'Triagem'; if(!groups.has(g)) groups.set(g,[]); groups.get(g).push(p); });
+  U.forEach(p => { const g = p.tarefa||p.grupo||'Triagem'; if (soTarefa && g !== soTarefa) return; if(!groups.has(g)) groups.set(g,[]); groups.get(g).push(p); });
   let h = '';
   groups.forEach((procs, g) => {
     const triados = procs.filter(p => p.triado||p.estadoTriagem==='triado').length;
