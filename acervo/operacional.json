@@ -6,7 +6,7 @@
   "arquivo": "acervo/fonte.json",
   "chave": "processo"
  },
- "atualizado_em": "2026-11-21T09:29:15.504Z",
+ "atualizado_em": "2026-11-21T09:29:21.521Z",
  "registros": [
   {
    "processo": "0000008-23.2025.4.03.6000",
@@ -70896,53 +70896,54 @@
     "Responsável": "",
     "Próxima ação": "",
     "Observações": "",
-    "atualizado_em": "2026-11-19T19:59:38.333Z"
+    "atualizado_em": "2026-11-21T09:29:21.521Z"
    },
    "triagem": {
-    "Urgência": "",
+    "Urgência": "Efeito suspensivo",
     "Urgência - Observação": "",
     "Urgência - Nível": "",
-    "Urgência - Apreciação": "",
-    "Urgência - Data": "",
+    "Urgência - Apreciação": "Pendente · não apreciada",
+    "Urgência - Data": "2026-07-21",
     "Urgência - Painel": "",
     "Tempest - Publicação": "",
     "Tempest - Protocolo": "",
     "Tempest - Prazo legal": "",
     "Tempest - Dobro": "",
     "Tempest - Suspensões": "",
-    "Tipo de Julgamento": "",
+    "Tipo de Julgamento": "Agravo de Instrumento",
     "Hipóteses Monocrática": "",
-    "Tempestividade": "",
-    "Preparo": "",
+    "Tempestividade": "Não verificado",
+    "Preparo": "Recolhido sem comprovante do Tesouro (STN)",
     "AJG": "",
     "DPU (controle)": "",
-    "Representação": "",
+    "Representação": "Regular",
     "ID da Procuração": "",
     "Impedimento / Suspeição": "",
     "Observação do Impedimento": "",
     "Regularidade": "Representação ainda não verificada.",
     "Regularidade Manual": "",
     "Observação da Representação": "",
-    "MPF": "",
-    "MPF - Custos Legis": "",
+    "MPF": "Não verificado",
+    "MPF - Custos Legis": "Mandado de segurança",
     "ID do Parecer MPF": "",
     "Parecer - Sentido": "",
     "MPF - Info adicional": "",
     "Observação MPF": "",
-    "Tema": "Residência Médica",
+    "Tema": "Mandado de segurança · bonificação de 10% em seleção de residência médica (artigo 22, § 2º, da Lei 12.871/2013, revogado pela Lei 15.233/2025) · liminar negada · custas em dobro pagas por Pix sem o comprovante do Tesouro · intimação para o comprovante da STN",
     "COMPLEXIDADE": "",
     "Tipo de Voto": "",
-    "Prelim.": "",
-    "Descrição da Preliminar": "",
+    "Prelim.": "Preliminar de ofício",
+    "Descrição da Preliminar": "Deserção: Pix sem comprovante da STN, depois do despacho ID 397076582 [VALIDAR cumprimento]",
     "META": "",
     "Seleção Prévia": "",
-    "Mídias": "",
+    "Mídias": "Não se aplica",
     "Etiquetas": "2ª Seção",
-    "Alegações": "",
+    "Alegações": "1) Deserção: comprovante do Tesouro do Pix (Resolução PRES 138/2017, artigo 2º, § 2º, III); 2) bonificação de 10% após a revogação do artigo 22, § 2º, da Lei 12.871/2013.",
     "O que falta sanar": "",
     "Intercorrências": "",
     "Síntese Processual": "",
-    "Especificidades": ""
+    "Especificidades": "Etiquetas \"Aguardando preparo recursal\" e \"LIMINAR PENDENTE\" · Despacho ID 397076582 (comprovante da STN) · Paradigma de mérito: AI 5007524-30.2026.4.03.0000 (Turma Regional, 15/09/2026)",
+    "Síntese Fática": "Rafael Pinho de Almeida Moreira, médico da ESF em Três Lagoas desde 2022, impetrou mandado de segurança para obter a bonificação de 10% na seleção de residência médica; a liminar foi indeferida porque o artigo 22, § 2º, da Lei 12.871/2013 foi revogado pela Lei 15.233/2025."
    },
    "producao": {
     "Destino": "",
@@ -70981,7 +70982,8 @@
     "Lote - Observação": "",
     "Lote - Ajustes da correção": [],
     "Lote - Pendências": "",
-    "Lote - Minuta": "sem minuta no lote"
+    "Lote - Minuta": "sem minuta no lote",
+    "Mono - Fundamento": "Deserção: não juntado o comprovante do Tesouro do Pix após a intimação do despacho ID 397076582 [VALIDAR]"
    },
    "pauta": {
     "Status de Julgamento": "",
@@ -70991,7 +70993,8 @@
     "JULGAMENTO": "",
     "Motivo da remarcação": "",
     "sessoes": []
-   }
+   },
+   "controles": {}
   },
   {
    "processo": "5000305-21.2025.4.03.6007",
