@@ -6,7 +6,7 @@
   "arquivo": "acervo/fonte.json",
   "chave": "processo"
  },
- "atualizado_em": "2026-11-21T01:58:22.253Z",
+ "atualizado_em": "2026-11-21T01:58:29.087Z",
  "registros": [
   {
    "processo": "0000008-23.2025.4.03.6000",
@@ -281583,7 +281583,7 @@
     "Responsável": "",
     "Próxima ação": "",
     "Observações": "",
-    "atualizado_em": "2026-11-21T01:07:03.105Z",
+    "atualizado_em": "2026-11-21T01:58:29.087Z",
     "Origem - Juízo": "2ª Vara Cível da Comarca de Amambai/MS"
    },
    "triagem": {
@@ -281601,36 +281601,36 @@
     "Tipo de Julgamento": "Agravo de Instrumento",
     "Hipóteses Monocrática": "",
     "Tempestividade": "Tempestivo",
-    "Preparo": "Não verificado",
+    "Preparo": "Não Verificado",
     "AJG": "",
     "DPU (controle)": "",
-    "Representação": "Não verificado",
+    "Representação": "Não Verificado",
     "ID da Procuração": "",
     "Impedimento / Suspeição": "",
     "Observação do Impedimento": "",
     "Regularidade": "Representação ainda não verificada.",
     "Regularidade Manual": "",
     "Observação da Representação": "",
-    "MPF": "Sem hipótese",
-    "MPF - Custos Legis": "",
+    "MPF": "Não se Aplica",
+    "MPF - Custos Legis": "Não",
     "ID do Parecer MPF": "",
     "Parecer - Sentido": "",
     "MPF - Info adicional": "",
     "Observação MPF": "",
-    "Tema": "Benefício Assistencial (Art. 203,V CF/88)",
+    "Tema": "Cumprimento de sentença · alvará · sociedade de advogados · poderes para receber e dar quitação · honorários",
     "COMPLEXIDADE": "",
     "Tipo de Voto": "",
-    "Prelim.": "Não há",
+    "Prelim.": "Não",
     "Descrição da Preliminar": "",
     "META": "",
     "Seleção Prévia": "",
-    "Mídias": "Não se aplica",
+    "Mídias": "Não se Aplica",
     "Etiquetas": "3ª Seção, AI - Tutela provisória, Pedido de destaque de honorários",
     "Alegações": "Agravo (ID 371161496): artigo 105 do CPC; Estatuto da Advocacia; REsp 1.885.209/MG; afastamento da proteção ao hipossuficiente.",
     "O que falta sanar": "",
     "Intercorrências": "",
     "Síntese Processual": "",
-    "Especificidades": "O despacho ID 382357145 (24/06/2026) assentou que o recurso versa interesse próprio do patrono e que a gratuidade da parte não o alcança; comprovante de custas juntado no mesmo dia (IDs 382416245 e 382416247, este sem texto) · Declínio de competência da 10ª Turma (ID 371994262) · Interposição antes da publicação da decisão (artigo 218, § 4º, do CPC) · Possível exame de legitimidade/interesse: o recurso é em nome da parte, mas defende interesse dos advogados",
+    "Especificidades": "O despacho ID 382357145 (24/06/2026) assentou que o recurso versa interesse próprio do patrono e que a gratuidade da parte não o alcança; comprovante de custas juntado no mesmo dia (IDs 382416245 e 382416247; este é tela Pix/PagTesouro de R$ 128,52, não o comprovante STN) · Declínio de competência da 10ª Turma (ID 371994262) · Interposição antes da publicação da decisão (artigo 218, § 4º, do CPC) · Possível exame de legitimidade/interesse: o recurso é em nome da parte, mas defende interesse dos advogados",
     "Síntese Fática": "Depositado o valor de benefício previdenciário devido a segurado, o juízo negou alvará em nome da sociedade de advogados e determinou o pagamento direto ao autor, com destaque dos honorários. Os patronos recorrem invocando os poderes de receber e dar quitação."
    },
    "producao": {
@@ -281670,7 +281670,8 @@
     "Lote - Observação": "Agravo interposto em nome de Orivaldo Miranda contra a decisão (f. 297-300) da 2ª Vara Cível da Comarca de Amambai/MS (cumprimento de sentença 0801183-53.2020.8.12.0004) que indeferiu a expedição do alvará do valor total em nome da sociedade Tibulo e Wegner Advogados, determinou o destaque dos honorários contratuais e sucumbenciais e mandou indicar conta exclusiva do autor ou expedir alvará para saque presencial pela parte, sob fundamento de proteção ao hipossuficiente. Os patronos invocam o artigo 105 do CPC, o artigo 5º, § 2º, da Lei 8.906/1994 e o REsp 1.885.209/MG.",
     "Lote - Ajustes da correção": [],
     "Lote - Pendências": "",
-    "Lote - Minuta": "sem minuta no lote"
+    "Lote - Minuta": "sem minuta no lote",
+    "Mono - Fundamento": "Paradigmas do gabinete: AI 5016754-09.2020.4.03.0000 (monocrática, 29/06/2020: retenção de honorários; ilegitimidade e falta de interesse recursal, não conhecido); AI 5007174-52.2020.4.03.0000 (monocrática, 16/08/2022: sociedade de advogados sem legitimidade para cobrar honorários, desprovido); AI 5000239-80.2026.4.03.0001 (monocrática TRMS, 06/08/2026: Pix sem comprovante STN)"
    },
    "pauta": {
     "Status de Julgamento": "",
@@ -281680,7 +281681,8 @@
     "JULGAMENTO": "",
     "Motivo da remarcação": "",
     "sessoes": []
-   }
+   },
+   "controles": {}
   },
   {
    "processo": "5012372-60.2026.4.03.0000",
