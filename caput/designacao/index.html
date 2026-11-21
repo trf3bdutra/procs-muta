@@ -65,7 +65,7 @@ h2{margin:0 0 8px;font-size:11.5px;font-weight:800;letter-spacing:.08em;text-tra
 .kp.passos .ps .v{font:650 20px/1.2 var(--f-dis);letter-spacing:-.02em;color:var(--tx);white-space:nowrap;font-variant-numeric:tabular-nums}.kp.passos .ps .v small{font:500 12px var(--f-txt);color:var(--mut);letter-spacing:0}
 .kp.passos .ps .s{font-size:11.5px;color:var(--mut);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.kp.passos .ps.er .s{color:var(--er)}
 @media (max-width:900px){.kp.passos{grid-template-columns:repeat(2,minmax(0,1fr))!important}.kp.passos .ps:nth-child(2){border-right:0}.kp.passos .ps:nth-child(-n+2){border-bottom:1px solid var(--lin)}}
-.per[hidden]{display:none!important}.pp .mt:has(.tgm){white-space:normal;overflow:visible}.pp .mt .tgm{display:inline-block;white-space:nowrap;font:600 10.5px var(--f-mono);border-radius:999px;padding:1px 7px;background:var(--in-bg);color:var(--in);margin-right:4px}.pp .mt .tgm b{font-weight:700}.pp .mt .tgm.av{background:var(--av-bg);color:var(--av)}
+.per[hidden]{display:none!important}.pp .mt:has(.tgm){white-space:normal;overflow:visible}.pp .mt .tgm{display:inline-block;white-space:nowrap;font-family:var(--f-txt)!important;letter-spacing:0;font:600 10.5px var(--f-mono);border-radius:999px;padding:1px 7px;background:var(--in-bg);color:var(--in);margin-right:4px}.pp .mt .tgm b{font-weight:700}.pp .mt .tgm.av{background:var(--av-bg);color:var(--av)}
 .ogl{display:flex;flex-wrap:wrap;align-items:center;gap:5px 6px;margin:4px 0}.ogl .lbx{font:600 9.5px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--mut);width:64px}
 .og{display:inline-flex;gap:4px;align-items:baseline;border:1px solid var(--lin);border-radius:999px;padding:1px 9px;font-size:12px;background:var(--sup)}.og b{font:700 11.5px var(--f-mono)}.og.rg{border-color:#cbbfe3;background:#f4f0fa;color:#4b2f7a}.og.man{border-color:var(--av);background:var(--av-bg);color:var(--av)}.og.er{border-color:var(--er);background:var(--er-bg);color:var(--er)}
 .pn[hidden]{display:none!important}.pn{border:1px solid var(--lin);border-top:2px solid var(--ac);background:var(--sup);padding:12px 14px;margin:-12px 0 12px}
@@ -90,7 +90,7 @@ h2{margin:0 0 8px;font-size:11.5px;font-weight:800;letter-spacing:.08em;text-tra
 .bh .as2 select{border:1px solid var(--lin);border-radius:7px;padding:2px 6px;background:var(--sup);font-size:12px;max-width:170px}.bh .as2 select.on{border-color:#4b2f7a;color:#4b2f7a;font-weight:700;background:#f4f0fa}
 .bh .as2 .lbx:nth-of-type(2){margin-left:10px}
 .xp{display:inline-flex;gap:3px;align-items:baseline;border:1px solid var(--lin);border-radius:999px;padding:0 8px;background:var(--sup);font-size:11.5px;white-space:nowrap}.xp b{font:700 11px var(--f-mono);color:var(--ac)}.xp.es{border-color:var(--ok);background:var(--ok-bg)}.xp.no{border-color:var(--er);color:var(--er);background:var(--er-bg)}
-.why span.o{background:#ece6f6;color:#4b2f7a;font-weight:700}
+.why span.a{background:#eef3f2;color:#235a55;font-weight:700}.why span.o{background:#ece6f6;color:#4b2f7a;font-weight:700}
 .kp{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}
 @media (max-width:700px){.kp{grid-template-columns:repeat(2,1fr)}}
 .kp div{background:var(--sup);border:1px solid var(--lin);border-radius:12px;padding:10px 12px}
@@ -117,7 +117,7 @@ h2{margin:0 0 8px;font-size:11.5px;font-weight:800;letter-spacing:.08em;text-tra
 .pr .it{font:500 14px var(--f-mono);color:var(--mut);text-align:center}
 .pr .cnj{font:600 12.5px var(--f-mono)}
 .pr .as{display:block;font-size:13px;font-weight:700;color:var(--tx)}
-.pr .mt{display:block;font-size:11px;color:var(--mut);margin-top:1px}
+.pr .mt{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--mut);margin-top:2px;min-width:0}.pr .mt .pt{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.pr .mt .ac{white-space:nowrap;color:var(--in)}.pr .mt select.nv{margin-left:0!important;flex:none}
 .tg{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.04em;border-radius:999px;padding:1px 7px;text-transform:uppercase}
 .tg.ED,.tg.AgInt{background:var(--in-bg);color:var(--in)}.tg.JR{background:#f4f0fa;color:#4b2f7a}.pr .l1 .tg{flex:none}.tg.META{background:var(--er-bg);color:var(--er)}.tg.AI{background:var(--ok-bg);color:var(--ok)}
 .ds{display:grid;gap:3px}
@@ -342,15 +342,16 @@ body.emb #b-aplicar{display:none}body.emb .lay{grid-template-columns:262px minma
   function rotObr(r){var v=r.q==='lote'?(NOMEL[r.v]||'lote '+r.v):r.q==='cl'?(CLN[r.v]||r.v):r.v;return v;}
   function livre(n,k){return !!n&&!AUS[n]&&!(k==='d'?FD:FC)[n];}
   var TEMA={};Object.keys((D.regras&&D.regras.rows)||{}).forEach(function(k){if(k.indexOf('tema:')===0)TEMA[N(k.slice(5))]=D.regras.rows[k];});
-  /* regra fixa do processo: primeiro as obrigatórias (passo 2), depois a regra do assunto (cabeçalho de cada assunto) */
-  function fixa(x,k){var r=obr(x,k);if(r)return {nome:r[k],por:'obrigatória · '+rotObr(r)};var t=TEMA[N(x.as)];if(t&&t[k])return {nome:t[k],por:'regra do assunto'};return null;}
+  /* regra fixa do processo: só as obrigatórias (passo 2). A regra do assunto (cabeçalho de cada assunto) é a sugestão principal, não trava. */
+  function fixa(x,k){var r=obr(x,k);if(r)return {nome:r[k],por:'obrigatória · '+rotObr(r)};return null;}
+  function sugAs(x,k){var t=TEMA[N(x.as)];return t&&t[k]?t[k]:'';}
   function gravaObr(){if(VIVO&&VIVO.definirObrigatorias)try{VIVO.definirObrigatorias(OBR);}catch(er){}}
   function propor(){
     var du=diasUteis(de,ate), K=K0; PROP={};
     var LD={},LC={},LT={},AS={}; PD.forEach(function(m){CAPD[m.nome]=AUS[m.nome]||FD[m.nome]?0:capMin(m.nome,du);LD[m.nome]=0;});
     var pres=PC.filter(function(m){return !AUS[m.nome]&&!FC[m.nome];}); var cota=Math.ceil(IT.length/Math.max(1,pres.length)*1.05);
     PC.forEach(function(m){CAPC[m.nome]=AUS[m.nome]||FC[m.nome]?0:cota;LC[m.nome]=0;});
-    var pri=function(x){return fixa(x,'d')?-1:(x.t==='ED'||x.t==='AgInt')?0:x.lote?1:2;};
+    var pri=function(x){return fixa(x,'d')?-2:sugAs(x,'d')?-1:(x.t==='ED'||x.t==='AgInt')?0:x.lote?1:2;};
     var ordem=IT.slice().sort(function(a,b){return pri(a)-pri(b)||(a.lote||'').localeCompare(b.lote||'')||a.i-b.i;});
     /* mesmo assunto, mesma pessoa (fora os embargos): quem já tem o assunto na pauta fica com os demais processos dele */
     var DONO={},cntD={};IT.forEach(function(x){if(x.t==='ED'||!x.d)return;var ka=N(x.as);cntD[ka]=cntD[ka]||{};cntD[ka][x.d]=(cntD[ka][x.d]||0)+1;});Object.keys(cntD).forEach(function(ka){DONO[ka]=Object.keys(cntD[ka]).sort(function(a,b){return cntD[ka][b]-cntD[ka][a];})[0];});
@@ -372,7 +373,7 @@ body.emb #b-aplicar{display:none}body.emb .lay{grid-template-columns:262px minma
       /* regra obrigatória: decide antes de tudo (só não vale para quem está indisponível) */
       var fx=fixa(x,'d'),es=cand.filter(function(c){return c.why.some(function(w){return w[1]==='especialidade';});})[0];
       /* sem regra fixa, quem tem o assunto como especialidade começa selecionado, independente da carga */
-      var esc_=fx&&livre(fx.nome,'d')?{nome:fx.nome,s:999,why:[['o',fx.por]]}:es?{nome:es.nome,s:es.s,why:[['e','especialista no assunto']].concat(es.why.filter(function(w){return w[1]!=='especialidade';}))}:cand[0]; if(!esc_){PROP[x.i]={d:'',wd:[],od:cand};return;}
+      var sa=sugAs(x,'d'),esc_=fx&&livre(fx.nome,'d')?{nome:fx.nome,s:999,why:[['o',fx.por]]}:sa&&livre(sa,'d')?{nome:sa,s:900,why:[['a','regra do assunto']]}:es?{nome:es.nome,s:es.s,why:[['e','especialista no assunto']].concat(es.why.filter(function(w){return w[1]!=='especialidade';}))}:cand[0]; if(!esc_){PROP[x.i]={d:'',wd:[],od:cand};return;}
       LD[esc_.nome]=(LD[esc_.nome]||0)+w; if(x.lote)LT[x.lote+'|'+esc_.nome]=(LT[x.lote+'|'+esc_.nome]||0)+1; AS[N(x.as)+'|'+esc_.nome]=(AS[N(x.as)+'|'+esc_.nome]||0)+1;
       PROP[x.i]={d:esc_.nome,wd:esc_.why,od:cand};if(x.t!=='ED'&&!DONO[N(x.as)])DONO[N(x.as)]=esc_.nome;
     });
@@ -388,7 +389,7 @@ body.emb #b-aplicar{display:none}body.emb .lay{grid-template-columns:262px minma
         var lk=x.lote&&(LCT[x.lote+'|'+m.nome]||0);if(lk){s+=Math.min(2,lk*0.25);why.push(['l','mesmo lote']);}
         var u=(LC[m.nome]+1)/(CAPC[m.nome]||1);s-=K.pen*u*u+(u>1?K.pen*1.6*(u-1):0);
         return {nome:m.nome,s:s,why:why};}).sort(function(a,b){return b.s-a.s;});
-      var fc=fixa(x,'c'),ec=cand.filter(function(c){return c.why.some(function(w){return w[1]==='especialidade';});})[0],e=fc&&livre(fc.nome,'c')?{nome:fc.nome,s:999,why:[['o',fc.por]]}:ec?{nome:ec.nome,s:ec.s,why:[['e','especialista no assunto']].concat(ec.why.filter(function(w){return w[1]!=='especialidade';}))}:cand[0];if(!e)return;LC[e.nome]=(LC[e.nome]||0)+1;if(x.lote)LCT[x.lote+'|'+e.nome]=(LCT[x.lote+'|'+e.nome]||0)+1;
+      var fc=fixa(x,'c'),ec=cand.filter(function(c){return c.why.some(function(w){return w[1]==='especialidade';});})[0],sc2=sugAs(x,'c'),e=fc&&livre(fc.nome,'c')?{nome:fc.nome,s:999,why:[['o',fc.por]]}:sc2&&livre(sc2,'c')&&sc2!==dn?{nome:sc2,s:900,why:[['a','regra do assunto']]}:ec?{nome:ec.nome,s:ec.s,why:[['e','especialista no assunto']].concat(ec.why.filter(function(w){return w[1]!=='especialidade';}))}:cand[0];if(!e)return;LC[e.nome]=(LC[e.nome]||0)+1;if(x.lote)LCT[x.lote+'|'+e.nome]=(LCT[x.lote+'|'+e.nome]||0)+1;
       PROP[x.i].c=e.nome;PROP[x.i].wc=e.why;PROP[x.i].oc=cand;});
   }
   /* designação inicial: o que já está gravado na pauta fica; a proposta preenche o resto */
@@ -402,11 +403,11 @@ body.emb #b-aplicar{display:none}body.emb .lay{grid-template-columns:262px minma
   function equipe(){var k=cargas();
     /* quantos processos cada pessoa tem nesta proposta: para minutar e para corrigir */
     var ND={},NC={};IT.forEach(function(x){var d=fin(x,'d'),c=fin(x,'c');if(d)ND[d]=(ND[d]||0)+1;if(c)NC[c]=(NC[c]||0)+1;});var np=function(n){return n+' processo'+(n===1?'':'s');};
-    var aus=function(n,fora,txt){return '<label class="sw" title="'+(fora?txt+' (gravado na pauta). Desmarque para voltar.':'Indisponível nesta pauta: sai da proposta e dos processos designados a ela; fica gravado na pauta (fora desta sessão)')+'"><input type="checkbox" data-aus="'+esc(n)+'"'+(AUS[n]||fora?' checked':'')+'>indisponível</label>';};
+    var aus=function(n,fora,txt){return '<label class="sw" data-k="'+(fora?'on':'')+'" title="'+(fora?txt+' (gravado na pauta). Desmarque para voltar.':'Indisponível nesta pauta: sai da proposta e dos processos designados a ela; fica gravado na pauta (fora desta sessão)')+'"><input type="checkbox" data-aus="'+esc(n)+'"'+(AUS[n]||fora?' checked':'')+'>indisponível</label>';};
     var barra=function(v,a,cap,un){var mx=Math.max(cap,v,a,1);return '<span class="bar"><i class="'+(v>cap?'x':'')+'" style="width:'+(v/mx*100).toFixed(1)+'%"></i>'+(cap&&cap<mx?'<u style="left:'+(cap/mx*100).toFixed(1)+'%" title="capacidade: '+un(cap)+'"></u>':'')+(a?'<em style="left:'+Math.min(99,a/mx*100).toFixed(1)+'%" title="já gravado: '+un(a)+'"></em>':'')+'</span>';};
     /* sessão em que a pessoa não minuta: linha recolhida, sem barra */
     document.getElementById('eq-d').innerHTML=PD.map(function(m){var cap=CAPD[m.nome]||0,v=k.Ld[m.nome]||0,a=k.La[m.nome]||0,fora=!!FD[m.nome],cor=PC.some(function(c){return c.nome===m.nome;});
-      var dz=IT.filter(function(x){return fin(x,'d')===m.nome;}),nm=dz.filter(function(x){return !x.dm;}).length,info='<span class="tgm'+(nm?' av':'')+'" title="Processos desta pauta com '+esc(m.nome)+' na minuta: designados e ainda não minutados"><b>'+dz.length+'</b> designada'+(dz.length===1?'':'s')+' · <b>'+nm+'</b> não minutada'+(nm===1?'':'s')+'</span>'+meta(m.nome)+'/dia';
+      var dz=IT.filter(function(x){return fin(x,'d')===m.nome;}),nm=dz.filter(function(x){return !x.dm;}).length,info='<span class="tgm'+(nm?' av':'')+'" title="Processos desta pauta com '+esc(m.nome)+' na minuta: designados e ainda não minutados · meta '+meta(m.nome)+'/dia"><b>'+dz.length+'</b> designada'+(dz.length===1?'':'s')+' · <b>'+nm+'</b> não minutada'+(nm===1?'':'s')+'</span>';
       return '<div class="pp'+(AUS[m.nome]||fora?' aus':'')+(v>cap?' acima':'')+'"><span class="nm">'+esc(m.nome)+'</span><span class="num"><b>'+nf(v)+'</b><small> / '+nf(cap)+'</small></span>'+
         (fora?'':barra(v,a,cap,nf))+'<span class="mt">'+info+'</span>'+aus(m.nome,fora,'fora das minutas desta sessão')+'</div>';}).join('');
     document.getElementById('eq-c').innerHTML=PC.map(function(m){var v=k.Lc[m.nome]||0,a=k.Lca[m.nome]||0,cap=CAPC[m.nome]||0,fora=!!FC[m.nome];
@@ -430,7 +431,7 @@ body.emb #b-aplicar{display:none}body.emb .lay{grid-template-columns:262px minma
   function optsEx(k,v){if(k!=='d'||!EV.length)return '';return '<optgroup label="Minutam só por exceção">'+EV.map(function(m){return '<option value="'+esc(m.nome)+'"'+(m.nome===v?' selected':'')+'>'+esc(m.nome)+'</option>';}).join('')+'</optgroup>';}
   function opts(cand,v,pool){var nomes=cand.map(function(c){return c.nome;});pool.forEach(function(m){if(nomes.indexOf(m.nome)<0)nomes.push(m.nome);});if(v&&nomes.indexOf(v)<0&&!EV.some(function(m){return m.nome===v;}))nomes.unshift(v);
     var sc={};cand.forEach(function(c){sc[c.nome]=c.s;});
-    return nomes.map(function(n,i){return '<option value="'+esc(n)+'"'+(n===v?' selected':'')+'>'+esc(n)+(sc[n]!=null?(i===0?' ★':'')+' · '+(sc[n]>=500?'mesmo assunto':nf(sc[n])):AUS[n]?' · ausente':FD[n]||FC[n]?' · fora desta sessão':' · fora')+'</option>';}).join('');}
+    return nomes.map(function(n,i){return '<option value="'+esc(n)+'"'+(n===v?' selected':'')+'>'+esc(n)+(sc[n]!=null?(i===0?' ★':''):AUS[n]?' · ausente':FD[n]||FC[n]?' · fora desta sessão':' · fora')+'</option>';}).join('');}
   function chips(why){return (why||[]).map(function(w){return '<span class="'+w[0]+'">'+esc(w[1])+'</span>';}).join('');}
   function campo(x,k){var p=PROP[x.i]||{},v=fin(x,k),at=k==='d'?x.d:x.c,mud=!!at&&v!==at,man=ESC[x.i]&&ESC[x.i][k]!=null&&ESC[x.i][k]!==p[k],grav=!!at&&v===at&&!(ESC[x.i]&&ESC[x.i][k]!=null);
     var cand=k==='d'?p.od||[]:p.oc||[],pool=k==='d'?PD:PC,why=grav?[['','já designado na pauta']]:man?[['','escolha manual']]:(k==='d'?p.wd:p.wc);
@@ -445,7 +446,7 @@ body.emb #b-aplicar{display:none}body.emb .lay{grid-template-columns:262px minma
   var CARGA={};
   /* agrupamento: por lote e seção, ou pelo motivo da escolha (minutante ou corretor) */
   var AG='as';
-  var MOTIVOS=[['man','Escolha manual','alterado por você nesta mesa'],['obr','Regra obrigatória','decide antes da proposta (passo 2)'],['grav','Já designado na pauta','gravado antes; a mesa não mexe sem você pedir'],['cont','Continuidade','quem minutou ou corrigiu o acórdão embargado ou agravado'],['regra','Regra do gabinete','regra de designação cadastrada; o critério vem no título'],
+  var MOTIVOS=[['man','Escolha manual','alterado por você nesta mesa'],['obr','Regra obrigatória','decide antes da proposta (passo 2)'],['asr','Regra do assunto','sugestão principal do assunto'],['grav','Já designado na pauta','gravado antes; a mesa não mexe sem você pedir'],['cont','Continuidade','quem minutou ou corrigiu o acórdão embargado ou agravado'],['regra','Regra do gabinete','regra de designação cadastrada; o critério vem no título'],
     ['esp','Especialidade ou preferência','competência indicada no perfil do servidor'],['hist','Experiência no assunto','mais minutas ou correções no histórico do assunto'],['lote','Mesmo lote ou assunto','mantém o lote e o assunto nas mesmas mãos'],
 ['carga','Distribuição pela carga','nenhum critério casou; vai para quem tem folga'],['vazio','Sem designação','ninguém disponível']];
   /* regras do Caput (as mesmas do painel "regras nesta ordem"): cada processo cai na primeira regra que casa */
@@ -457,7 +458,7 @@ body.emb #b-aplicar{display:none}body.emb .lay{grid-template-columns:262px minma
     IT.forEach(function(x){x.dg=dg(x.cnj);});return RG;}
   function motivo(x,k){var v=fin(x,k),p=PROP[x.i]||{};var G=regras();if(!G.off){var rk=G[k][x.dg||String(x.cnj||'').replace(/\D/g,'')];if(rk)return rk;}if(ESC[x.i]&&ESC[x.i][k]!=null&&ESC[x.i][k]!==p[k])return 'man';if(!v)return 'vazio';var g0=k==='d'?x.d:x.c;if(ESC[x.i]&&ESC[x.i][k]!=null){if(ESC[x.i][k]!==p[k])return 'man';}else if(g0&&v===g0)return 'grav';
     var W=(k==='d'?p.wd:p.wc)||[],tem=function(f){return W.some(f);};
-    if(tem(function(w){return w[0]==='o';}))return 'obr';
+    if(tem(function(w){return w[0]==='o';}))return 'obr';if(tem(function(w){return w[0]==='a';}))return 'asr';
     if(tem(function(w){return w[0]==='c';}))return 'cont';var r=W.filter(function(w){return w[0]==='r';})[0];if(r)return 'regra|'+r[1].replace(/^regra · /,'');
     if(tem(function(w){return w[0]==='e';}))return 'esp';if(tem(function(w){return /no histórico/.test(w[1]);}))return 'hist';if(tem(function(w){return w[0]==='l';}))return 'lote';
     return 'carga';}
@@ -512,7 +513,7 @@ body.emb #b-aplicar{display:none}body.emb .lay{grid-template-columns:262px minma
       var uni=function(q){var v=fin(L[0],q);return v&&L.every(function(x){return fin(x,q)===v;})?v:'';},uD=uni('d'),uC=uni('c');
       h+='<section class="bl'+(k.indexOf('F|')===0?' mo-fora':AG==='bloco'||AGP[AG]?'':' mo-'+k.split('|')[0])+'"><div class="bh"><input type="checkbox" class="ck" data-ckg="'+esc(k)+'"'+(todosG?' checked':'')+' aria-label="Selecionar todo o grupo" title="Selecionar todos os processos deste grupo"><button type="button" class="tg-gr" data-gr="'+esc(k)+'" aria-expanded="'+ab+'" title="'+(ab?'Recolher':'Abrir')+' o grupo">'+(ab?'▾':'▸')+'</button><h3 data-gr="'+esc(k)+'" style="cursor:pointer">'+esc(nomeGrupo(k))+'</h3><span class="ct">'+L.length+' processo'+(L.length>1?'s':'')+'</span><span class="dist">'+(kd==='c'?'correção: ':'minuta: ')+esc(dd)+'</span>'+(AG==='bloco'||AGP[AG]||k.indexOf('F|')===0?'':'<span class="sub">'+esc(infoMotivo(k).sub)+'</span>')+
         '<button type="button" class="cmp-b" data-cmp="'+esc(k)+'" aria-pressed="'+!!CMP[k]+'" title="Comparar o perfil dos servidores com os processos deste grupo">Perfis ⇄</button><span class="bulk"><label>'+(AG==='bloco'?'Bloco todo':'Grupo todo')+': <select data-bulk="d" data-b="'+esc(k)+'"'+(uD?' class="on"':'')+'><option value="">'+(uD?'minutante…':'minutante: vários…')+'</option>'+PD.map(function(m){return '<option'+(m.nome===uD?' selected':'')+'>'+esc(m.nome)+'</option>';}).join('')+optsEx('d',uD)+'</select></label><select data-bulk="c" data-b="'+esc(k)+'" aria-label="Corretor do bloco"'+(uC?' class="on"':'')+'><option value="">'+(uC?'corretor…':'corretor: vários…')+'</option>'+PC.map(function(m){return '<option'+(m.nome===uC?' selected':'')+'>'+esc(m.nome)+'</option>';}).join('')+'</select></span>'+(AG==='as'&&k.indexOf('F|')!==0?linhaAssunto(k.slice(2),L):'')+'</div>'+(CMP[k]?cmpPainel(k,L):'')+
-        (ab?L.slice(0,lim):[]).map(function(x,ix,arr){var sa=porAs&&L.length>1&&(ix===0||arr[ix-1].as!==x.as)?'<div class="sub-as">'+esc(x.as||'sem assunto')+'<small>'+L.filter(function(y){return y.as===x.as;}).length+'</small></div>':'';var mud=(x.d&&fin(x,'d')!==x.d)||(x.c&&fin(x,'c')!==x.c);return sa+'<div class="rw'+(mud?' mud':'')+(SEL[x.i]?' sel':'')+'" data-rw="'+x.i+'"><div class="pr"><input type="checkbox" class="ck" data-ck="'+x.i+'"'+(SEL[x.i]?' checked':'')+' aria-label="Selecionar o item '+x.i+'"><span class="it"><small>item </small>'+x.i+'</span><div class="pb"><span class="l1"><span class="cnj">'+esc(x.cnj)+'</span>'+(x.cl?'<span class="clb">'+esc(x.cl)+'</span>':'')+tags(x)+'<span class="as" title="'+esc(x.as)+'">'+esc(x.as)+'</span></span><span class="mt">'+esc(x.sec||'')+((x.t==='ED'||x.t==='AgInt')&&x.od?(x.sec?' · ':'')+'acórdão: '+esc(x.od):'')+' '+selNivel(x)+'</span></div></div>'+campo(x,'d')+campo(x,'c')+'</div>';}).join('')+
+        (ab?L.slice(0,lim):[]).map(function(x,ix,arr){var sa=porAs&&L.length>1&&(ix===0||arr[ix-1].as!==x.as)?'<div class="sub-as">'+esc(x.as||'sem assunto')+'<small>'+L.filter(function(y){return y.as===x.as;}).length+'</small></div>':'';var mud=(x.d&&fin(x,'d')!==x.d)||(x.c&&fin(x,'c')!==x.c);return sa+'<div class="rw'+(mud?' mud':'')+(SEL[x.i]?' sel':'')+'" data-rw="'+x.i+'"><div class="pr"><input type="checkbox" class="ck" data-ck="'+x.i+'"'+(SEL[x.i]?' checked':'')+' aria-label="Selecionar o item '+x.i+'"><span class="it"><small>item </small>'+x.i+'</span><div class="pb"><span class="l1"><span class="cnj">'+esc(x.cnj)+'</span>'+(x.cl?'<span class="clb">'+esc(x.cl)+'</span>':'')+tags(x)+(AG==='as'?'':'<span class="as" title="'+esc(x.as)+'">'+esc(x.as)+'</span>')+'</span><span class="mt">'+selNivel(x)+(AG==='as'?(x.partes?'<span class="pt" title="'+esc(x.partes)+'">'+esc(x.partes)+'</span>':''):' '+esc(x.sec||''))+((x.t==='ED'||x.t==='AgInt')&&x.od?'<span class="ac">acórdão: '+esc(x.od)+'</span>':'')+'</span></div></div>'+campo(x,'d')+campo(x,'c')+'</div>';}).join('')+
         (ab&&L.length>lim?'<button type="button" class="mais" data-mais="'+esc(k)+'">Mostrar mais '+(L.length-lim)+'</button>':'')+'</section>';});
     if(ord.length>1)h='<div class="gr-acoes"><span>'+ord.filter(function(k){return G[k].some(passa);}).length+' grupos</span><button type="button" data-grtodos="1">Abrir todos</button><button type="button" data-grtodos="0">Recolher todos</button></div>'+h;
     document.getElementById('blocos').innerHTML=h||'<p class="mu">Nada com esses filtros.</p>';}
@@ -538,7 +539,7 @@ body.emb #b-aplicar{display:none}body.emb .lay{grid-template-columns:262px minma
   function passos(du,k,tot,cap){var pd=PD.filter(function(m){return !AUS[m.nome]&&!FD[m.nome];}),fora=PD.filter(function(m){return AUS[m.nome]||FD[m.nome];}).map(function(m){return m.nome;});
     var nOb=IT.filter(function(x){return fixa(x,'d')||fixa(x,'c');}).length,P=pend(),nAp=IT.filter(function(x){return fin(x,'d')!==x.d||fin(x,'c')!==x.c;}).length;
     var ps=[['1','Período e equipe',du+' <small>dias úteis</small>',pd.length+' minutando'+(fora.length?' · fora: '+fora.join(', '):''),du?'ok':'er'],
-      ['2','Regras obrigatórias',OBR.filter(function(r){return r.d||r.c;}).length+' <small>regras</small>',nOb+' processo(s) com regra (gerais e por assunto)',OBR.length?'ok':''],
+      ['2','Regras obrigatórias',OBR.filter(function(r){return r.d||r.c;}).length+' <small>regras</small>',nOb+' processo(s) decididos por elas',OBR.length?'ok':''],
       ['3','Proposta',nf(tot)+' <small>/ '+nf(cap)+' pt</small>',k.nv?k.nv+' sem designação gravada':'todos com designação gravada',k.nv?'pend':'ok'],
       ['4','Conferir e aplicar',nAp+' <small>alteraç'+(nAp===1?'ão':'ões')+'</small>',P.n?P.n+' pendência(s) a ver':'nenhuma pendência',P.n?'er':(nAp?'pend':'ok')]];
     document.getElementById('kp').innerHTML=ps.map(function(p){return '<button type="button" class="ps '+p[4]+'" data-passo="'+p[0]+'" aria-pressed="'+(PASSO===p[0])+'"><span class="nu">'+(p[4]==='ok'?'✓':p[0])+'</span><span class="t">'+p[0]+' · '+p[1]+'</span><span class="v">'+p[2]+'</span><span class="s" title="'+esc(p[3])+'">'+esc(p[3])+'</span></button>';}).join('');
@@ -559,12 +560,12 @@ body.emb #b-aplicar{display:none}body.emb .lay{grid-template-columns:262px minma
       '<div class="acoes"><button type="button" class="btn" data-a="ob-add">+ Nova regra</button><span class="mu" style="font-size:12px">Cada alteração refaz a proposta e grava as regras.</span></div>';}
   /* passo 3: como a proposta decidiu cada processo (minuta e correção) */
   function origem(x,k){var p=PROP[x.i]||{},v=fin(x,k),at=k==='d'?x.d:x.c;if(!v)return 'Sem ninguém';if(ESC[x.i]&&ESC[x.i][k]!=null&&ESC[x.i][k]!==p[k])return 'Escolha manual';if(at&&v===at&&!(ESC[x.i]&&ESC[x.i][k]!=null))return 'Já gravado na pauta';
-    var W=(k==='d'?p.wd:p.wc)||[],w0=W[0]||['',''];if(w0[0]==='o')return /^obrigat/.test(w0[1])?'Regra geral':'Regra do assunto';if(w0[1]==='especialista no assunto')return 'Especialista';
+    var W=(k==='d'?p.wd:p.wc)||[],w0=W[0]||['',''];if(w0[0]==='o')return 'Regra obrigatória';if(w0[0]==='a')return 'Regra do assunto';if(w0[1]==='especialista no assunto')return 'Especialista';
     if(W.some(function(w){return w[1]==='mesmo assunto, mesma pessoa';}))return 'Mesmo assunto';if(W.some(function(w){return w[0]==='c';}))return 'Continuidade (acórdão)';if(W.some(function(w){return w[0]==='r';}))return 'Regra do gabinete';
     if(W.some(function(w){return w[0]==='e';}))return 'Perfil';if(W.some(function(w){return /no histórico/.test(w[1]);}))return 'Histórico';return 'Carga';}
   function painelProp(){var el=document.getElementById('pn-prop');el.hidden=PASSO!=='3';if(el.hidden)return;
     var cont=function(k){var c={};IT.forEach(function(x){var o=origem(x,k);c[o]=(c[o]||0)+1;});return Object.keys(c).sort(function(a,b){return c[b]-c[a];}).map(function(o){return '<span class="og'+(o==='Sem ninguém'?' er':o==='Escolha manual'?' man':/^Regra/.test(o)?' rg':'')+'">'+esc(o)+' <b>'+c[o]+'</b></span>';}).join('');};
-    el.innerHTML='<h3>Proposta</h3><p class="nota">Ordem: regras gerais → regra do assunto → especialista → mesmo assunto → acórdão embargado → perfil e histórico → carga. O que já está gravado e o que você escolher à mão ficam; abaixo, a lista por seção e assunto.</p>'+
+    el.innerHTML='<h3>Proposta</h3><p class="nota">Ordem: regras obrigatórias → regra do assunto (sugestão principal) → especialista → mesmo assunto → acórdão embargado → perfil e histórico → carga. O que já está gravado e o que você escolher à mão ficam; abaixo, a lista por seção e assunto.</p>'+
       '<div class="ogl"><span class="lbx">Minuta</span>'+cont('d')+'</div><div class="ogl"><span class="lbx">Correção</span>'+cont('c')+'</div>'+
       '<div class="acoes"><button type="button" class="btn pri" data-a="recalc" title="Refaz a proposta com o período, as ausências e as regras atuais; mantém o que você escolheu à mão">Atualizar proposta</button>'+
       '<button type="button" class="btn" data-a="limpar-livre" title="Tira minutante e corretor que não vêm de regra (geral ou do assunto); a proposta preenche de novo. Grava só ao aplicar.">Limpar o que não é regra</button>'+(LIVRE?'<button type="button" class="btn" data-a="desfazer-livre">Desfazer</button>':'')+
@@ -581,7 +582,7 @@ body.emb #b-aplicar{display:none}body.emb .lay{grid-template-columns:262px minma
       linha(!P.semC.length,P.semC.length?P.semC.length+' sem corretor':'Todos com corretor',P.semC.length?'itens '+its(P.semC):'')+
       linha(!P.igual.length,P.igual.length?P.igual.length+' com a mesma pessoa minutando e corrigindo':'Ninguém corrige a própria minuta',P.igual.length?'itens '+its(P.igual):'')+
       linha(!dv.length,dv.length?dv.length+' assunto(s) divididos entre pessoas':'Cada assunto com uma pessoa só (fora os embargos)',dv.length?dv.slice(0,6).map(function(a){return esc(a)+': '+P.div[a].join(', ');}).join(' · '):'')+
-      linha(!P.contra.length,P.contra.length?P.contra.length+' contrariam as regras (gerais ou do assunto)':'Tudo segue as regras',P.contra.length?'itens '+its(P.contra)+' (gravados antes ou escolhidos à mão)':'',P.contra.length?'<button type="button" class="btn" data-a="ob-seguir">Seguir as regras</button>':'')+
+      linha(!P.contra.length,P.contra.length?P.contra.length+' contrariam as regras obrigatórias':'Tudo segue as regras obrigatórias',P.contra.length?'itens '+its(P.contra)+' (gravados antes ou escolhidos à mão)':'',P.contra.length?'<button type="button" class="btn" data-a="ob-seguir">Seguir as regras</button>':'')+
       '<div class="acoes"><button type="button" class="btn pri" data-a="copiar">Aplicar à pauta'+(nAp?' ('+nAp+')':'')+'</button></div>';}
   var SECG={},DESTR={};
   /* etiquetas do processo no cartão: tipo de julgamento (ED, AgInt, JR, AI) e cada META com o número */
@@ -593,7 +594,7 @@ body.emb #b-aplicar{display:none}body.emb .lay{grid-template-columns:262px minma
     var ex=PD.concat(EV).filter(function(m){return !AUS[m.nome]&&!FD[m.nome];}).map(function(m){var h=H('d',x0,m.nome),e=casa(m.exp,a),p=casa(m.pref,a),no=casa(m.nao,a);return {n:m.nome,h:h,e:e,p:p,no:no,s:(e?20:0)+(p?10:0)+h-(no?100:0)};})
       .filter(function(o){return o.h||o.e||o.p||o.no;}).sort(function(p,q){return q.s-p.s;}).slice(0,6);
     var sel=function(k,Lp,v){return '<select data-ras="'+k+'" data-as="'+esc(a)+'" class="'+(v?'on':'')+'" aria-label="'+(k==='d'?'Minutante':'Corretor')+' pela regra do assunto"><option value="">'+(k==='d'?'minuta: sem regra':'correção: sem regra')+'</option>'+Lp.map(function(m){return '<option'+(m.nome===v?' selected':'')+'>'+esc(m.nome)+'</option>';}).join('')+'</select>';};
-    return '<div class="as2"><span class="lbx" title="Vale nesta e nas próximas pautas; as regras gerais (passo 2) vêm antes">Regra do assunto</span>'+sel('d',PD.concat(EV),r.d)+sel('c',PC,r.c)+
+    return '<div class="as2"><span class="lbx" title="Sugestão principal para o assunto, nesta e nas próximas pautas; não trava. As regras obrigatórias (passo 2) vêm antes.">Sugestão do assunto</span>'+sel('d',PD.concat(EV),r.d)+sel('c',PC,r.c)+
       '<span class="lbx">Experiência</span>'+(ex.length?ex.map(function(o){return '<span class="xp'+(o.no?' no':o.e||o.p?' es':'')+'" title="'+esc(o.n+': '+[o.h?o.h+' minuta(s) deste assunto no histórico':'',o.e?'especialidade':'',o.p?'prefere':'',o.no?'evita':''].filter(Boolean).join(' · '))+'">'+esc(o.n)+(o.h?' <b>'+o.h+'</b>':'')+(o.e||o.p?' ★':'')+(o.no?' ✕':'')+'</span>';}).join(''):'<span class="mu">ninguém com histórico ou especialidade</span>')+'</div>';}
   function tudo(){topo();equipe();blocos();selbar();}
   function toast(t){var el=document.getElementById('toast');el.textContent=t;el.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(function(){el.classList.remove('on');},2400);}
