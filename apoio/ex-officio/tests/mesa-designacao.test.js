@@ -182,5 +182,11 @@ test('Mesa: Perfis ⇄ compara o perfil dos servidores com os processos do grupo
 
 test('Mesa: na regra da minuta e da correção, processos de cada regra organizados por assunto',()=>{
   const m=require('fs').readFileSync(require('path').join(__dirname,'../../../caput/designacao/index.html'),'utf8');
-  assert.ok(m.includes("var porAs=AG==='md'||AG==='mc';")&&m.includes('<div class=\"sub-as\">'));
+  assert.ok(m.includes("var porAs=AG!=='as';")&&m.includes('<div class=\"sub-as\">'));
+});
+
+test('Mesa: assuntos sempre organizados dentro do grupo, por ordem da pauta, seção ou quantidade',()=>{
+  const m=require('fs').readFileSync(require('path').join(__dirname,'../../../caput/designacao/index.html'),'utf8');
+  for(const x of ['data-asord="pauta"','data-asord="sec"','data-asord="qtd"',"localStorage.setItem('mesa_ordas'",'var ordAs=function(L)'])assert.ok(m.includes(x),x);
+  [...m.matchAll(/<script>([\s\S]*?)<\/script>/g)].forEach((x)=>new (require('vm').Script)(x[1]));
 });
