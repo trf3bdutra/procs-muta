@@ -91,7 +91,7 @@ h2{margin:0 0 8px;font-size:11.5px;font-weight:800;letter-spacing:.08em;text-tra
 .bh .as2 .lbx:nth-of-type(2){margin-left:10px}
 .xp{display:inline-flex;gap:3px;align-items:baseline;border:1px solid var(--lin);border-radius:999px;padding:0 8px;background:var(--sup);font-size:11.5px;white-space:nowrap}.xp b{font:700 11px var(--f-mono);color:var(--ac)}.xp.es{border-color:var(--ok);background:var(--ok-bg)}.xp.no{border-color:var(--er);color:var(--er);background:var(--er-bg)}
 .bh .fx-b{border:1px solid var(--lin);background:var(--sup);border-radius:7px;padding:1px 8px;font:600 11px var(--f-txt);cursor:pointer;color:var(--tx)}.bh .fx-b.on{background:#235a55;border-color:#235a55;color:#fff}
-.ds .sg{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px;font-size:11px;color:#235a55;margin-top:1px}.ds .sg b{font-weight:700}.ds .sg.ok{color:var(--ok)}.ds .sg button{border:0;background:none;padding:0;font:600 11px var(--f-txt);color:var(--ac);text-decoration:underline;text-underline-offset:2px;cursor:pointer}
+.ds .sg{display:flex;flex-wrap:nowrap;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;align-items:baseline;gap:4px;font-size:11px;color:#235a55;margin-top:1px}.ds .sg b{font-weight:700}.ds .sg.ok{color:var(--ok)}.ds .sg button{border:0;background:none;padding:0;font:600 11px var(--f-txt);color:var(--ac);text-decoration:underline;text-underline-offset:2px;cursor:pointer}
 .why span.a{background:#eef3f2;color:#235a55;font-weight:700}.why span.o{background:#ece6f6;color:#4b2f7a;font-weight:700}
 .kp{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}
 @media (max-width:700px){.kp{grid-template-columns:repeat(2,1fr)}}
@@ -119,6 +119,7 @@ h2{margin:0 0 8px;font-size:11.5px;font-weight:800;letter-spacing:.08em;text-tra
 .pr .it{font:500 14px var(--f-mono);color:var(--mut);text-align:center}
 .pr .cnj{font:600 12.5px var(--f-mono)}
 .pr .as{display:block;font-size:13px;font-weight:700;color:var(--tx)}
+.pr,.pr .pb,.pr .l1{min-width:0;overflow:hidden}.pr .l1 .clb{flex:none}.pr .l1 .cnj{overflow:hidden;text-overflow:ellipsis}
 .pr .mt{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--mut);margin-top:2px;min-width:0}.pr .mt .pt{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.pr .mt .ac{white-space:nowrap;color:var(--in)}.pr .mt select.nv{margin-left:0!important;flex:none}
 .tg{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.04em;border-radius:999px;padding:1px 7px;text-transform:uppercase}
 .tg.ED,.tg.AgInt{background:var(--in-bg);color:var(--in)}.tg.JR{background:#f4f0fa;color:#4b2f7a}.pr .l1 .tg{flex:none}.tg.META{background:var(--er-bg);color:var(--er)}.tg.AI{background:var(--ok-bg);color:var(--ok)}
@@ -455,9 +456,9 @@ body.emb #b-aplicar{display:none}body.emb .lay{grid-template-columns:262px minma
       (mud?'<span class="at">gravado: <s>'+esc(at)+'</s></span>':'')+'</span><span class="why">'+chips(why)+'</span>'+sugLinha(x,k,v)+'</div>';}
   /* sugestão do assunto no cartão: quem o assunto sugere, para usar neste processo, ou tornar a escolha atual a sugestão do assunto */
   function sugLinha(x,k,v){if(fixa(x,k)||fixo(x))return '';var sa=sugAs(x,k),ik=x.i+'|'+k;
-    if(sa&&v===sa)return '<span class="sg ok" title="Sugestão do assunto '+esc(x.as)+'">✓ sugestão do assunto</span>';
-    if(sa)return '<span class="sg">sugestão: <b>'+esc(sa)+'</b> <button type="button" data-usasug="'+ik+'">usar</button>'+(v?' <button type="button" data-fixasug="'+ik+'" title="Passa a sugerir '+esc(v)+' para '+esc(x.as)+' nas próximas pautas">trocar por '+esc(v)+'</button>':'')+'</span>';
-    return v?'<span class="sg"><button type="button" data-fixasug="'+ik+'" title="Sugerir '+esc(v)+' para '+esc(x.as)+' nesta e nas próximas pautas">tornar sugestão do assunto</button></span>':'';}
+    if(sa&&v===sa)return '<span class="sg ok" title="Sugestão do assunto '+esc(x.as)+'">✓ sugestão</span>';
+    if(sa)return '<span class="sg" title="Sugestão do assunto '+esc(x.as)+': '+esc(sa)+'">sug. <b>'+esc(sa)+'</b> · <button type="button" data-usasug="'+ik+'" title="Usar '+esc(sa)+' neste processo">usar</button>'+(v?' · <button type="button" data-fixasug="'+ik+'" title="Passa a sugerir '+esc(v)+' para '+esc(x.as)+' nas próximas pautas">trocar</button>':'')+'</span>';
+    return v?'<span class="sg"><button type="button" data-fixasug="'+ik+'" title="Sugerir '+esc(v)+' para '+esc(x.as)+' nesta e nas próximas pautas">tornar sugestão</button></span>':'';}
   var FASS='';
   function passa(x){if(FASS&&N(x.as)!==FASS)return false;var b=N(BUSCA);if(b&&N([x.cnj,x.as,x.d,x.c,fin(x,'d'),fin(x,'c'),x.partes].join(' ')).indexOf(b)<0)return false;
     if(FIL==='nov')return !x.d||!x.c;if(FIL==='ed')return x.t==='ED'||x.t==='AgInt';if(FIL==='meta')return x.t==='META';return true;}
