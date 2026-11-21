@@ -111,5 +111,5 @@ test('Calendário: os cartões de "Sessões em andamento" ocupam a largura dispo
 
 test('Triagem › Visão geral: cabeçalhos com fundo próprio',()=>{
   const fs=require('fs'),p=require('path'),cap=fs.readFileSync(p.join(__dirname,'../../../caput/triagem/index.html'),'utf8');
-  assert.ok(cap.includes('.tri-vg-h{background:#e9f0ed')&&cap.includes('.tri-vg-c .ch{background:#eef3f1'),'fundo dos cabeçalhos');
+  assert.ok(cap.includes('.tri-vg-h{background:var(--bg)')&&cap.includes('.tri-vg-c .ch{background:var(--bg)'),'fundo dos cabeçalhos');
 });
