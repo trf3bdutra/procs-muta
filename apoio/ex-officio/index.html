@@ -2437,11 +2437,14 @@ function edPauta(on,L){var tl=$('#ed-tl'),tg=$('#ed-tags'),st=$('#ed-strip');if(
   var X=['#exp-copia','#exp-csv','#exp-xlsx'].map(function(x){return $(x);});
   if(on){var sp=st.querySelector('.ed-sep2');if(!sp){sp=document.createElement('span');sp.className='ed-sep ed-sep2';sp.setAttribute('aria-hidden','true');}
     st.appendChild(sp);X.forEach(function(e){if(e){e.classList.add('ed-exp');st.appendChild(e);}});
-    var T=S.tg||{};tg.innerHTML=TGS.map(function(g){return '<div class="ed-tgp" role="group" aria-label="'+esc(g[0])+'"><small>'+esc(g[0])+'</small><div class="ed-tgb">'+g[1].map(function(x){var n=L.filter(x[3]).length;
+    var T=S.tg||{},nada=!(S.q||S.fResp||S.fEt||S.escopo==='meus'||Object.keys(T).length);
+    tg.innerHTML='<div class="ed-tgp" role="group" aria-label="Pauta"><small>Pauta</small><div class="ed-tgb"><button type="button" data-tg="*" aria-pressed="'+nada+'" title="Mostrar todos os processos da pauta (limpa os filtros)">Todos <small>'+L.length+'</small></button>'+
+      '<button type="button" class="ed-xl" data-xall title="Baixar em Excel todos os processos da pauta, com assunto, classe, etapa e demais colunas" aria-label="Baixar em Excel todos os processos da pauta"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5"/><path d="M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/></svg></button></div></div>'+TGS.map(function(g){return '<div class="ed-tgp" role="group" aria-label="'+esc(g[0])+'"><small>'+esc(g[0])+'</small><div class="ed-tgb">'+g[1].map(function(x){var n=L.filter(x[3]).length;
       return '<button type="button" data-tg="'+x[0]+'" aria-pressed="'+!!T[x[0]]+'" title="'+esc(x[2])+'"'+(n||T[x[0]]?'':' class="z"')+'>'+esc(x[1])+' <small>'+n+'</small></button>';}).join('')+'</div></div>';}).join('');}
   else{X.forEach(function(e){if(e&&e.parentNode===st){e.classList.remove('ed-exp');var ref=$('#exp-mes');if(e.id==='exp-copia')tl.appendChild(e);else tl.insertBefore(e,ref&&ref.parentNode===tl?ref:null);}});
     var s2=st.querySelector('.ed-sep2');if(s2)s2.remove();}}
-$('#ed-tags').onclick=function(e){var b=e.target.closest('[data-tg]');if(!b)return;var k=b.getAttribute('data-tg');S.tg=S.tg||{};if(S.tg[k])delete S.tg[k];else S.tg[k]=true;render();};
+$('#ed-tags').onclick=function(e){if(e.target.closest('[data-xall]')){var T=lista();if(!T.length){toast('Nada a exportar.');return;}expPauta(T,'');toast(T.length+' processo'+(T.length===1?'':'s')+' da pauta exportado'+(T.length===1?'':'s')+'.');return;}
+  var b=e.target.closest('[data-tg]');if(!b)return;var k=b.getAttribute('data-tg');if(k==='*'){$('#f-limpa').click();return;}S.tg=S.tg||{};if(S.tg[k])delete S.tg[k];else S.tg[k]=true;render();};
 function trbEt(k){if(k==='meus'){S.escopo=S.escopo==='meus'?'todos':'meus';if(S.escopo==='meus')S.fEt='';}else{S.fEt=S.fEt===k?'':k;if(S.fEt)S.escopo='todos';}
   try{localStorage.setItem('eq_escopo',S.escopo);}catch(x){}render();}
 $('#trb-p').onclick=function(e){if(e.target.closest('[data-xm]')){e.stopPropagation();$('#exp-meus').click();return;}var t=e.target.closest('.tp[data-et]');if(t)trbEt(t.getAttribute('data-et'));};
@@ -2794,7 +2797,7 @@ function cartao(it){
     var stE=[['Minutado',sv('<path d="M4 20h4l10-10-4-4L4 16z"/>'),'Minuta entregue'],['Corrigido',sv('<path d="M5 12.5l4.5 4.5L19 7.5"/>'),'Correção concluída'],['Liberado',sv('<path d="M4 12l15-7-5 15-3-6z"/>'),'Voto liberado']]
       .map(function(x,i){var ok=i+1<=o,tt=ok&&i+1===o?x[2]+' · clique para desfazer':ok?x[2]:'Marcar: '+x[2].toLowerCase();return (i?'<i class="ln'+(ok?' ok':'')+'"></i>':'')+'<button class="sp'+(ok?' ok':i===o?' nx':'')+'" data-a="et" data-v="'+(i+1===o?['A fazer','Minutado','Corrigido'][i]:x[0])+'" title="'+tt+'" aria-label="'+tt+'" aria-pressed="'+ok+'">'+x[1]+'</button>';}).join('');
     /* mesmo cartão das Monocráticas: sinalizações na coluna da esquerda, uma linha de identificação, síntese e etiqueta de responsáveis, etapas */
-    return '<article class="pc cpt edr mrw ee'+o+(meu(it)?' meu':'')+(A.length?' al':'')+pbCls(it,A,c)+'" data-k="'+k+'" title="'+esc(['Sem minuta','Minutado','Corrigido','Liberado'][o]||'')+' · clique na linha para abrir o prontuário de produção">'+
+    return '<article class="pc cpt edr mrw ee'+o+(meu(it)?' meu':'')+(A.length?' al':'')+pbCls(it,A,c)+(/^(retirad|adiad)/i.test(it.resultado||'')?' rx':'')+'" data-k="'+k+'" title="'+esc(['Sem minuta','Minutado','Corrigido','Liberado'][o]||'')+' · clique na linha para abrir o prontuário de produção">'+
       
       '<div class="rw"><span class="ga"><input type="checkbox" class="sel" data-sel'+(S.sel[k]?' checked':'')+' aria-label="Selecionar item '+esc(it.item||'')+'">'+
       '<div class="it">'+esc(it.item||'—')+'</div><div class="id"><span class="mr-l1"><span class="cnj">'+fmtCnj(it.cnj)+'</span>'+(it.classe?'<span class="mr-cl" title="Classe: '+esc(it.classe)+'">'+esc(siglaClasse(it.classe))+'</span>':'')+'<span class="mr-ta" title="Apreciação">'+esc(aprec(it))+'</span>'+
@@ -8934,6 +8937,18 @@ html[data-theme=dark] #v-pauta.ed #lst .pc.edr.mrw.ee1{background:rgba(40,116,75
 html[data-theme=dark] #v-pauta.ed #lst .pc.edr.mrw.ee2{background:rgba(36,91,140,.14)}
 html[data-theme=dark] #v-pauta.ed #lst .pc.edr.mrw.ee3,html[data-theme=dark] #v-pauta.ed #lst .pc.edr.mrw.ee4{background:rgba(109,69,150,.14)}
 #v-pauta.ed #lst .pc.edr.mrw:hover{background-image:linear-gradient(rgba(0,0,0,.03),rgba(0,0,0,.03))}
+#v-pauta.ed .ed-tgb button.ed-xl{padding:0 10px;border-left:1px dashed var(--el2);color:var(--eo2)}
+#v-pauta.ed .ed-tgb button.ed-xl:hover{color:#28744b}
+/* buscador rápido logo abaixo do cartão da sessão: sempre à vista, sem rolar (antes ficava no pé da coluna, abaixo da dobra) */
+@media (min-width:981px){
+ #v-pauta.pt2 .pp-sub{min-height:0}
+ #v-pauta.pt2 .pp-sub>.pp-ses{order:0}
+ #v-pauta.pt2 .pp-sub .pt-ir.quick-find{order:1;margin:14px 0 4px;padding-top:10px}
+ #v-pauta.pt2 .pp-sub>.pp-num-rail{order:2}
+}
+/* retirados de pauta e adiados: fundo cinza-claro, acima da cor da etapa */
+#v-pauta.ed #lst .pc.edr.mrw.rx{background:#eeeeec}
+html[data-theme=dark] #v-pauta.ed #lst .pc.edr.mrw.rx{background:rgba(255,255,255,.05)}
 </style>
 </body>
 </html>
