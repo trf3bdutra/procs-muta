@@ -109,16 +109,18 @@ function dicaCampo(c) {
   var d = DICA[c.chave] || S(c.regra) || '';
   return c.rotulo + (d ? ': ' + d : '') + ' (' + (TIPO_DICA[c.tipo] || 'campo') + (editavel(c) ? '; grava sozinho na ficha do processo' : '; só leitura') + ')';
 }
+/* rótulo do campo no painel: honorários com 😭 (quem paga, quanto e sobre o quê vêm no valor) */
+function rotuloDe(c) { return (/Honorários/.test(c.chave || '') && !/Recursais|Majora/i.test(c.chave || '') ? '😭 ' : '') + esc(c.rotulo); }
 function campo(c) {
-  var longo = c.tipo === 'texto-longo' || c.tipo === 'tabela', cls = 'gf' + (longo ? ' w' : '');
+  var longo = c.tipo === 'texto-longo' || c.tipo === 'tabela' || /Honorários/.test(c.chave || ''), cls = 'gf' + (longo ? ' w' : '');
   if (c.tipo === 'tabela') {
     var tv = c.secao ? gravado(c.secao, c.chave) : '';
-    return '<div class="' + cls + '" title="' + esc(dicaCampo(c)) + '"><span class="gl">' + esc(c.rotulo) + (editavel(c) ? ' <small class="muted">· editar na ficha do Ex Officio</small>' : '') + '</span>' + tabela(c, tv) + '</div>';
+    return '<div class="' + cls + '" title="' + esc(dicaCampo(c)) + '"><span class="gl">' + rotuloDe(c) + (editavel(c) ? ' <small class="muted">· editar na ficha do Ex Officio</small>' : '') + '</span>' + tabela(c, tv) + '</div>';
   }
   if (!editavel(c)) {
     var v0 = c.secao ? gravado(c.secao, c.chave) : fonteVal(c);
     if (typeof v0 === 'object') v0 = '';
-    return '<div class="' + cls + '" title="' + esc(dicaCampo(c)) + '"><span class="gl">' + esc(c.rotulo) + '</span><span class="ro">' + (S(v0) ? esc(/^\d{4}-\d{2}-\d{2}$/.test(S(v0)) ? brD(v0) : v0) : '—') + '</span></div>';
+    return '<div class="' + cls + '" title="' + esc(dicaCampo(c)) + '"><span class="gl">' + rotuloDe(c) + '</span><span class="ro">' + (S(v0) ? esc(/^\d{4}-\d{2}-\d{2}$/.test(S(v0)) ? brD(v0) : v0) : '—') + '</span></div>';
   }
   var id = c.secao + '.' + c.chave, v = V(c.secao, c.chave), bloq = (id === 'producao.SERVIDOR' || id === 'producao.CORRETOR') && !G.gestor, h;
   if (typeof v === 'object') v = '';
@@ -127,7 +129,7 @@ function campo(c) {
   /* lista curta e Sim/Não viram botões, como na gaveta da pauta */
   var OC = c.tipo === 'simnao' ? ['Sim', 'Não'] : c.tipo === 'lista' ? (c.opcoes || []).map(function (o) { return typeof o === 'string' ? o : o.valor; }) : null;
   if (OC && !bloq && OC.length && OC.length <= 6 && OC.every(function (o) { return o.length <= 26; })) {
-    return '<div class="' + cls + (OC.length > 3 ? ' w' : '') + (id in G.pend ? ' mud' : '') + '" title="' + esc(dicaCampo(c)) + '"><span class="gl">' + esc(c.rotulo) + '</span><div class="pm-seg gf-seg" role="group" aria-label="' + esc(c.rotulo) + '">' +
+    return '<div class="' + cls + (OC.length > 3 ? ' w' : '') + (id in G.pend ? ' mud' : '') + '" title="' + esc(dicaCampo(c)) + '"><span class="gl">' + rotuloDe(c) + '</span><div class="pm-seg gf-seg" role="group" aria-label="' + rotuloDe(c) + '">' +
       OC.map(function (o) { return '<button type="button" class="pm-ch' + (o === v ? ' on' : '') + '" data-ch="' + esc(id) + '" data-v="' + esc(o) + '" aria-pressed="' + (o === v) + '">' + esc(o) + '</button>'; }).join('') +
       (v && OC.indexOf(v) < 0 ? '<span class="pm-ch on">' + esc(v) + '</span>' : '') + '</div></div>';
   }
@@ -138,7 +140,7 @@ function campo(c) {
   else if (c.tipo === 'numero') h = '<input type="number"' + at + ' value="' + esc(v) + '">';
   else if (c.tipo === 'texto-longo') h = '<textarea rows="3"' + at + '>' + esc(v) + '</textarea>';
   else h = '<input type="text"' + at + ' value="' + esc(v) + '">';
-  return '<label class="' + cls + (id in G.pend ? ' mud' : '') + '" title="' + esc(dicaCampo(c)) + '"><span class="gl">' + esc(c.rotulo) + '</span>' + h + '</label>';
+  return '<label class="' + cls + (id in G.pend ? ' mud' : '') + '" title="' + esc(dicaCampo(c)) + '"><span class="gl">' + rotuloDe(c) + '</span>' + h + '</label>';
 }
 function grupoHtml(g, aberto) {
   var n = g.campos.filter(function (c) { var v = c.secao ? V(c.secao, c.chave) : fonteVal(c); return Array.isArray(v) ? v.length : !!S(v); }).length;

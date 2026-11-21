@@ -212,6 +212,66 @@ function third(s){s=S(s).replace(/^[,:;\s]+/,'');for(const [re,to] of VERB3){if(
 const clip=(s,n=320)=>{s=S(s).replace(/\s+/g,' ');return s.length>n?s.slice(0,n).replace(/\s+\S*$/,'')+'…':s;};
 const ROUTINE=/^(publique-se|registre-se|intime(m)?-se|cumpra-se|p\.?\s?r\.?\s?i|int\.?$|arquivem-se|d[êe]-se baixa|oportunamente|campo grande|s[ãa]o paulo|data da assinatura|cumpra-se)/i;
 const DISP_RE=/\b(Ante o exposto|Diante do exposto|Pelo exposto|Em face do exposto|Isto posto|Posto isso|Do exposto|Diante disso|Por todo o exposto|Ante o acima exposto|Diante do quadro)[,:]?\s*/gi;
+/* honorários da sentença no padrão do gabinete: "Quem paga · quanto e sobre o quê · observações".
+   Ex.: "Parte ré (INSS) · 10% sobre o valor da condenação (Súmula 111/STJ)"; "Parte autora · 10% sobre o valor atualizado da causa · exigibilidade suspensa (gratuidade, artigo 98, § 3º, do CPC)". */
+const HON_ENT=[[/uni[ãa]o\s*(\(|-|–)?\s*fazenda nacional|fazenda nacional/i,'União (Fazenda Nacional)'],[/\buni[ãa]o\b/i,'União'],[/\binss\b|instituto nacional do seguro social/i,'INSS'],
+  [/\bcef\b|caixa econ[ôo]mica federal/i,'CEF'],[/\bincra\b/i,'INCRA'],[/\bfnde\b/i,'FNDE'],[/\bibama\b/i,'IBAMA'],[/\bdnit\b/i,'DNIT'],[/\banatel\b/i,'ANATEL'],[/\bantt\b/i,'ANTT'],[/\bfunai\b/i,'FUNAI'],
+  [/\bufms\b|universidade federal de mato grosso do sul/i,'UFMS'],[/\bifms\b/i,'IFMS'],[/\bembrapa\b/i,'EMBRAPA'],[/\bconselho regional\b[^,;.]{0,40}/i,null],[/\bdefensoria p[úu]blica da uni[ãa]o|\bdpu\b/i,'DPU']];
+function honEnt(x){for(const [re,n] of HON_ENT){const m=re.exec(x||'');if(m)return n||S(m[0]).replace(/^conselho/i,'Conselho');}return '';}
+function honPolo(x){x=N(x);
+  if(/ambas as partes|as partes|cada uma das partes|reciproc/.test(x))return 'rec';
+  if(/\b(autor|autora|autores|autoras|requerente|exequente|impetrante|embargante|demandante)s?\b/.test(x))return 'autor';
+  if(/\b(re|reu|res|reus|requerid[oa]s?|executad[oa]s?|embargad[oa]s?|impetrad[oa]s?|demandad[oa]s?)\b/.test(x))return 're';
+  return '';}
+function honorariosDe(L,t){
+  const ss=(L||[]).filter(s=>/honor[áa]rios/i.test(s)&&!/honor[áa]rios (periciais|do perito|contratuais|do assistente)|honor[áa]rios periciais/i.test(s));
+  if(!ss.length)return '';
+  const cab=S(t).slice(0,3000);
+  const reCab=(/\b(?:R[ÉE]US?|R[ÉE]S?|REQUERID[OA]S?|POLO PASSIVO|EXECUTAD[OA]S?|IMPETRAD[OA]S?|EMBARGAD[OA]S?)\s*:\s*([^\n]{3,90})/.exec(cab)||[])[1]||'';
+  const entRe=honEnt(reCab);
+  const um=(s)=>{
+    const n=N(s);
+    if((/^(sem|indevid[oa]s?|incabive(l|is))|deixo de (fixar|condenar|arbitrar)|nao ha (que se falar em )?(condenacao (em|de) )?honor|sem (condenacao (em|de|ao pagamento de) )?(custas e )?(sem )?honorarios/.test(n))&&!/\bcondeno\b/.test(n)){
+      const pq=/12\.?016|sumulas? 512|sumula 105|mandado de seguranca/.test(n)?'mandado de segurança: artigo 25 da Lei 12.016/2009':/9\.?099|10\.?259|artigo 55|art\.? 55/.test(n)?'Juizado: artigo 55 da Lei 9.099/1995':/citac|relacao processual|nao (se )?complet/.test(n)?'sem citação':/1\.?060|gratuid/.test(n)?'':'';
+      return 'Sem honorários'+(pq?' ('+pq+')':'');
+    }
+    /* quem paga */
+    let dev='',m;
+    if((m=/conden(?:o|a|ou|ando|ado|ada|ados|adas|a-se|ar)\s+(?:ainda,?\s+|tamb[ée]m\s+|,\s*ainda,\s*)?(.{2,90}?)\s+(?:ao\s+pagamento|a\s+pag|ao\s+reembolso|em\s+honor|nos\s+honor|nas\s+custas|ao\s+pagar|a\s+arcar|a\s+suportar|no\s+pagamento|em\s+custas|n[oa]s?\s+[ôo]nus|nas\s+verbas|na\s+verba)/i.exec(s)))dev=m[1];
+    else if((m=/arca(?:r[áa])?\s+(.{2,60}?)\s+com\s+(?:os\s+)?honor/i.exec(s)))dev=m[1];
+    else if((m=/(?:a\s+cargo|[àa]\s+conta)\s+d[aoe]s?\s+(.{2,60}?)(?:[,.;]|\s+(?:que|no|em|fixad))/i.exec(s)))dev=m[1];
+    else if((m=/(?:honor[áa]rios(?:\s+(?:advocat[íi]cios|de\s+advogado|de\s+sucumb[êe]ncia|sucumbenciais))?|devid[oa]s|pag[oa]s|suportad[oa]s|arcad[oa]s?)\s+pel[ao]s?\s+(.{2,60}?)(?:[,.;]|\s+(?:no|em|que|fixad))/i.exec(s)))dev=m[1];
+    else if((m=/(.{2,40}?)\s+dever[áa]\s+arcar\s+com\s+(?:os\s+)?honor/i.exec(s)))dev=m[1];
+    let favor=(/em\s+favor\s+d[aoe]s?\s+(.{2,60}?)(?:[,.;]|\s+(?:que|no|em))/i.exec(s)||/aos?\s+(?:advogad|procurador)[a-z]*\s+d[aoe]s?\s+(.{2,40}?)(?:[,.;(]|\s+(?:que|no|em))/i.exec(s)||[])[1]||'';
+    let polo=honPolo(dev),ent=honEnt(dev),quem='';
+    if(!polo&&!ent&&favor){const pf=honPolo(favor);polo=pf==='re'?'autor':pf==='autor'?'re':'';}
+    if(/sucumb[êe]ncia rec[íi]proca|reciprocamente|ambas as partes|cada uma das partes/i.test(s)&&(!dev||honPolo(dev)==='rec'))polo='rec';
+    if(polo==='rec')quem='Ambas as partes (sucumbência recíproca)';
+    else if(ent&&ent!=='DPU')quem=(polo==='autor'?'Parte autora ('+ent+')':polo==='re'||!polo?'Parte ré ('+ent+')':ent);
+    else if(polo==='autor')quem='Parte autora';
+    else if(polo==='re')quem='Parte ré'+(entRe?' ('+entRe+')':'');
+    if(/\bpro rata\b|para cada um[ao]? d[ao]s|cada um[ao]? d[ao]s r[ée]/i.test(s))quem+=(quem?' ':'')+(/para cada/i.test(s)?'(para cada réu)':'(pro rata)');
+    /* quanto */
+    let q='';const sh=s.slice(Math.max(0,s.search(/honor/i)));
+    if((m=/(\d{1,2}(?:[.,]\d+)?)\s?%/.exec(sh)||/(\d{1,2}(?:[.,]\d+)?)\s?%/.exec(s)))q=m[1].replace('.',',')+'%';
+    else if((m=/\b(um|dois|tr[êe]s|cinco|oito|dez|doze|quinze|vinte)\s+por\s+cento/i.exec(s)))q={um:'1',dois:'2','três':'3',tres:'3',cinco:'5',oito:'8',dez:'10',doze:'12',quinze:'15',vinte:'20'}[N(m[1])]+'%';
+    else if((m=/R\$\s?(\d{1,3}(?:\.\d{3})*(?:,\d{2})?)/.exec(s)))q='R$ '+m[1]+(/,\d{2}$/.test(m[1])?'':',00');
+    else if(/percentua(l|is) m[íi]nimo|valores m[íi]nimos|patamar m[íi]nimo/i.test(s))q='percentual mínimo do artigo 85, § 3º, do CPC';
+    if(/liquida[çc][ãa]o|§\s*4º?,?\s*(inciso\s*)?II\b/i.test(s)&&/percentua/i.test(s)&&!/\d\s?%/.test(s))q=(q?q+', ':'')+'a definir na liquidação (artigo 85, § 4º, II, do CPC)';
+    let base='';
+    if((m=/(?:sobre|d[oe])\s+(?:o\s+)?valor\s+(atualizado\s+|corrigido\s+)?(?:(?:dad[oa]|atribu[íi]d[oa])\s+[àa]\s+|d[ao]s?\s+)?(causa|condena[çc][ãa]o|proveito econ[ôo]mico(?:\s+obtido)?|d[ée]bito|d[íi]vida|execu[çc][ãa]o|benef[íi]cio econ[ôo]mico)/i.exec(s)))base='sobre o valor '+(m[1]?'atualizado ':'')+({causa:'da causa'}[N(m[2])]||(/condena/i.test(m[2])?'da condenação':/proveito|beneficio/i.test(N(m[2]))?'do proveito econômico':/debito/.test(N(m[2]))?'do débito':/divida/.test(N(m[2]))?'da dívida':'da execução'));
+    if(/s[úu]mula\s*(n[º°.]?\s*)?111|parcelas vencidas at[ée]/i.test(s))base+=(base?' ':'')+'(Súmula 111/STJ)';
+    const obs=[];
+    if(/equitativ|equidade|§\s*8º?\b/i.test(s))obs.push('por equidade (artigo 85, § 8º, do CPC)');
+    if(/gratuidade|justi[çc]a gratuita|assist[êe]ncia judici[áa]ria|exigibilidade|art(igo)?\.?\s*98/i.test(s))obs.push('exigibilidade suspensa (gratuidade, artigo 98, § 3º, do CPC)');
+    if(/defensoria p[úu]blica da uni[ãa]o|\bdpu\b/i.test(s))obs.push('em favor da DPU');
+    const v=[q,base].filter(Boolean).join(' ');
+    if(!quem&&!v)return '';
+    return [quem||'[VALIDAR: quem paga]',v||'[VALIDAR: valor]'].concat(obs).join(' · ');
+  };
+  const R=[];for(const s of ss.slice(0,3)){const r=um(s);if(r&&R.indexOf(r)<0)R.push(r);if(R.length===2)break;}
+  return R.join(' | ');
+}
 function extractDecision(doc){
   const t=doc.text,out={};
   let m,last=null;DISP_RE.lastIndex=0;while((m=DISP_RE.exec(t)))last=m;
@@ -230,10 +290,10 @@ function extractDecision(doc){
   const fund=[...before].reverse().find(s=>/(configurad|imp[õo]e-se|raz[ãa]o pela qual|portanto|dessa forma|desse modo|^assim,|^logo,|conclui-se|ausente|n[ãa]o merece|merece (ser )?(acolhid|provid|reform))/i.test(s));
   if(fund)out.fundamento=clip(fund.replace(/[.;]\s*$/,''),320);
   const tail=dispStart>=0?sentences(t.slice(dispStart)):sentences(t.slice(-1500));
-  const hon=tail.find(s=>/honor[áa]rios/i.test(s));
+  const hon=tail.find(s=>/honor[áa]rios/i.test(s)&&!/honor[áa]rios (periciais|do perito|contratuais|do assistente)/i.test(s));
   if(hon){
-    if(/\bsem (condena[çc][ãa]o (em|ao pagamento de) )?honor[áa]rios|n[ãa]o h[áa] (condena[çc][ãa]o em )?honor[áa]rios|incab[íi]ve(l|is) honor/i.test(hon))out.honorarios='sem condenação em honorários advocatícios';
-    else{const p=/(\d{1,2}(?:[.,]\d+)?\s?%|\d{1,2}\s?\([a-zçãé ]+\)\s?por cento)[^.;]{0,140}/i.exec(hon);out.honorarios=clip(third(p?p[0]:hon).replace(/[.;]\s*$/,''),220);}
+    if(/\bsem (condena[çc][ãa]o (em|ao pagamento de) )?honor[áa]rios|n[ãa]o h[áa] (condena[çc][ãa]o em )?honor[áa]rios|incab[íi]ve(l|is) honor/i.test(hon))out.honorarios=honorariosDe([hon],t)||'Sem honorários';
+    else{const pd=honorariosDe(tail,t);if(pd)out.honorarios=pd;else{const p=/(\d{1,2}(?:[.,]\d+)?\s?%|\d{1,2}\s?\([a-zçãé ]+\)\s?por cento)[^.;]{0,140}/i.exec(hon);out.honorarios=clip(third(p?p[0]:hon).replace(/[.;]\s*$/,''),220);}}
   }
   const cus=tail.find(s=>/\bcustas\b/i.test(s)&&!/recolhiment|guia/i.test(s));
   if(cus)out.custas=clip(third(cus).replace(/[.;]\s*$/,''),220);
@@ -812,5 +872,5 @@ function especie(parsed){
   return '';
 }
 window.CMTInteiroTeor=Object.assign(window.CMTInteiroTeor||{},{TARGETS,KIND_LABEL,KIND_TXT,parseTxt,preselect,preselectKind,especie,buildSuggestions,
-  otherPieceName,extractDecision,extractPetition,headings,decodeLine,procDate});
+  otherPieceName,extractDecision,honorariosDe,extractPetition,headings,decodeLine,procDate});
 })();

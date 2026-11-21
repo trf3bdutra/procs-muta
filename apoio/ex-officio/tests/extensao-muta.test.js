@@ -220,3 +220,16 @@ test('extensão 0.19.2: Peças › extrair da peça lê o texto e preenche só o
   assert.match(gab, /x\.status === 'novo' && vazio\(x\.alvo\)/, 'nunca troca o que já está preenchido');
   assert.match(gab, /AUx\.extrair\(pid/);
 });
+
+test('inteiro teor: honorários da sentença no padrão "quem paga · quanto e sobre o quê · observações"', () => {
+  const ctx = { window: {} }; ctx.window.window = ctx.window; vm.createContext(ctx); vm.runInContext(read('padrao/inteiro-teor.js'), ctx);
+  const H = ctx.window.CMTInteiroTeor.honorariosDe;
+  assert.equal(H(['Condeno a parte autora ao pagamento de honorários advocatícios, que fixo em 10% do valor atualizado da causa, cuja exigibilidade está suspensa ante a gratuidade de justiça.'], ''),
+    'Parte autora · 10% sobre o valor atualizado da causa · exigibilidade suspensa (gratuidade, artigo 98, § 3º, do CPC)');
+  assert.equal(H(['Condeno o INSS ao pagamento de honorários advocatícios de 10% sobre o valor da condenação, observada a Súmula 111 do STJ.'], ''), 'Parte ré (INSS) · 10% sobre o valor da condenação (Súmula 111/STJ)');
+  assert.equal(H(['Condeno os réus ao pagamento de honorários advocatícios, que, com fundamento no artigo 85, § 8º, do Código de Processo Civil, arbitro em R$ 15.000,00.'], ''), 'Parte ré · R$ 15.000,00 · por equidade (artigo 85, § 8º, do CPC)');
+  assert.equal(H(['Sem condenação em honorários advocatícios, conforme o artigo 25 da Lei nº 12.016/2009.'], ''), 'Sem honorários (mandado de segurança: artigo 25 da Lei 12.016/2009)');
+  assert.match(H(['Julgo procedente o pedido de reajuste de 28,86%. Condeno a União ao pagamento de honorários de 10% sobre o valor da condenação.'], ''), /^Parte ré \(União\) · 10%/);
+  assert.equal(read('padrao/inteiro-teor.js'), read('extensao/padrao-inteiro-teor.js'), 'cópia da extensão igual');
+  assert.match(read('extensao/gabinete.js'), /function rotuloDe\(c\) \{ return \(\/Honorários\//);
+});
