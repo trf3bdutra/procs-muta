@@ -6,7 +6,7 @@
   "arquivo": "acervo/fonte.json",
   "chave": "processo"
  },
- "atualizado_em": "2026-11-21T10:14:48.746Z",
+ "atualizado_em": "2026-11-21T10:14:58.815Z",
  "registros": [
   {
    "processo": "0000008-23.2025.4.03.6000",
@@ -192182,7 +192182,7 @@
     "Responsável": "",
     "Próxima ação": "",
     "Observações": "",
-    "atualizado_em": "2026-11-19T19:59:38.521Z"
+    "atualizado_em": "2026-11-21T10:14:58.815Z"
    },
    "triagem": {
     "Urgência": "",
@@ -192196,39 +192196,40 @@
     "Tempest - Prazo legal": "",
     "Tempest - Dobro": "",
     "Tempest - Suspensões": "",
-    "Tipo de Julgamento": "",
+    "Tipo de Julgamento": "Apelação",
     "Hipóteses Monocrática": "",
-    "Tempestividade": "",
-    "Preparo": "",
+    "Tempestividade": "Não verificado",
+    "Preparo": "Isento (ente público/MP)",
     "AJG": "",
     "DPU (controle)": "",
-    "Representação": "",
+    "Representação": "Não verificado",
     "ID da Procuração": "",
     "Impedimento / Suspeição": "",
     "Observação do Impedimento": "",
     "Regularidade": "Representação ainda não verificada.",
     "Regularidade Manual": "",
     "Observação da Representação": "",
-    "MPF": "",
-    "MPF - Custos Legis": "",
-    "ID do Parecer MPF": "",
-    "Parecer - Sentido": "",
+    "MPF": "Com parecer",
+    "MPF - Custos Legis": "Mandado de segurança",
+    "ID do Parecer MPF": "345164758",
+    "Parecer - Sentido": "Desprovimento da apelação",
     "MPF - Info adicional": "",
     "Observação MPF": "",
-    "Tema": "Dano ao Erário",
+    "Tema": "Apelação do IFMS e remessa necessária em mandado de segurança · Pregão Eletrônico 28/2023 do IFMS (item 14, conjunto escolar) · desclassificação por laudo técnico de engenheiro com registro depois interrompido · liminar indeferida · segurança concedida para habilitar a impetrante",
     "COMPLEXIDADE": "",
     "Tipo de Voto": "",
-    "Prelim.": "",
+    "Prelim.": "Preliminar de ofício",
     "Descrição da Preliminar": "",
     "META": "",
     "Seleção Prévia": "",
-    "Mídias": "",
+    "Mídias": "Não se aplica",
     "Etiquetas": "DPF MARCELLUS, 2ª Seção",
-    "Alegações": "",
+    "Alegações": "1) Litisconsórcio passivo necessário da licitante vencedora; 2) validade de laudo técnico emitido por profissional com registro depois interrompido; 3) perda do objeto.",
     "O que falta sanar": "",
     "Intercorrências": "",
     "Síntese Processual": "",
-    "Especificidades": ""
+    "Especificidades": "Empresa vencedora do item atingida pela sentença: litisconsorte passivo necessário citado? [VALIDAR] · Contrato já executado? (perda do objeto) [VALIDAR] · Apelação recebida no efeito devolutivo (ID 350717809)",
+    "Síntese Fática": "A DMX Móveis Ltda. foi desclassificada no item 14 do Pregão Eletrônico 28/2023 do IFMS, entre outros motivos, porque o engenheiro que assinou o laudo técnico teve o registro interrompido depois. A liminar foi indeferida, por risco de dano inverso; a sentença mandou habilitá-la."
    },
    "producao": {
     "Destino": "",
@@ -192277,7 +192278,8 @@
     "JULGAMENTO": "",
     "Motivo da remarcação": "",
     "sessoes": []
-   }
+   },
+   "controles": {}
   },
   {
    "processo": "5003457-74.2020.4.03.6000",
