@@ -17,7 +17,8 @@ Fontes (todas no procs-muta):
   ../../../modelos/matrizes-estruturais.json        moldes do Editorial por recurso e resultado
   ../../../precedentes/precedentes.jsonl · inteiros-teores/*.jsonl   ementário do Relator
   ../../referencias-rapidas.json                   referências rápidas ao lado dos modelos
-  consulta_2886.js · consulta_2886.css · ../../../modelos/matrizes-2886.json   matriz modular de 28,86% na Consulta
+  consulta.js · consulta.css                        caso na Minuta-Matriz (pauta ou prontuário), conformidade, LIA e material
+  consulta_2886.js · consulta_2886.css · ../../../modelos/matrizes-2886.json   matriz modular de 28,86% na Minuta-Matriz
   ../../repertorio-normativo-complemento.json      dispositivos do repertório normativo além dos da planilha
   ../../../acervo/fonte.json                        partes, advogados e dados do processo, quando o processo está no acervo
 Uso: python3 build.py
@@ -152,13 +153,13 @@ def ramo_mat(a):
 acx = {}
 for n, a in AC.items():
     acx[n] = [_v(a.get('Classe') or a.get('classe_judicial')), _v(a.get('Assunto_Principal') or a.get('assunto_judicial')), _v(a.get('polo_ativo') or a.get('Polo_Ativo')), _v(a.get('polo_passivo') or a.get('Polo_Passivo')), ramo_mat(a)]
-# prompt do gabinete para a LIA (Prompt_Minuta_CMT v3): a Consulta recorta pela peça e junta os dados do caso
+# prompt do gabinete para a LIA (Prompt_Minuta_CMT v3): a Minuta-Matriz, com o caso, recorta pela peça e junta os dados do caso
 _L3 = RAIZ/'padrao/lia/Prompt_Minuta_CMT_v3.txt'
 LIA3 = ('<script type="text/plain" id="lia-v3">' + base64.b64encode(gzip.compress(_L3.read_bytes(), 9, mtime=0)).decode() + '</script>') if _L3.exists() else ''
 _LG = RAIZ/'padrao/lia/Prompt_Gerar_CMT.txt'
 LIA3 += ('<script type="text/plain" id="lia-gerar">' + base64.b64encode(gzip.compress(_LG.read_bytes(), 9, mtime=0)).decode() + '</script>') if _LG.exists() else ''
 pacote = {'prec': prec, 'it': it, 'mod': mod, 'par': par, 'ref': ref, 'ac': acx}
-# matrizes modulares de 28,86% (Consulta): modelos/matrizes-2886.json
+# matrizes modulares de 28,86% (Minuta-Matriz com o caso): modelos/matrizes-2886.json
 _M28 = RAIZ/'modelos/matrizes-2886.json'
 if _M28.exists():
     pacote['m2886'] = ler(_M28)
@@ -232,7 +233,7 @@ def montar(var):
     i0 = t.index('  <nav class="tabs" role="tablist"'); i1 = t.index('</nav>', i0) + len('</nav>\n')
     secoes = t[i0:i1]; t = t[:i0] + t[i1:]
     abas = secoes[secoes.index('>') + 1:secoes.rindex('</nav>')]
-    ordem = ['ement', 'edit', 'dir', 'consulta', 'temas', 'rep', 'enc']
+    ordem = ['ement', 'edit', 'dir', 'temas', 'rep', 'enc']
     lin = {}
     for l in abas.strip().split('\n'):
         l = l.strip(); lin[l.split('data-v="')[1].split('"')[0]] = l

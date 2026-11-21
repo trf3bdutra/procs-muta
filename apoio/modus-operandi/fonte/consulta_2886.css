@@ -1,7 +1,7 @@
 /* ===== Consulta · matriz modular 28,86% ===== */
-#cq .cq-cola{margin:10px 0 0;border:1px solid #c8c3b6;border-radius:6px;background:#fbfaf5;padding:10px 12px}
-#cq .cq-cola textarea{width:100%;box-sizing:border-box;border:1px solid #c8c3b6;border-radius:5px;padding:8px;font:12px/1.45 ui-monospace,Consolas,monospace;color:#203b39;background:#fff}
-#cq .cq-cola-a{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:8px}
+:is(#cq,#x-top) .cq-cola{margin:10px 0 0;border:1px solid #c8c3b6;border-radius:6px;background:#fbfaf5;padding:10px 12px}
+:is(#cq,#x-top) .cq-cola textarea{width:100%;box-sizing:border-box;border:1px solid #c8c3b6;border-radius:5px;padding:8px;font:12px/1.45 ui-monospace,Consolas,monospace;color:#203b39;background:#fff}
+:is(#cq,#x-top) .cq-cola-a{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:8px}
 #cq #cq-m28[aria-pressed="true"]{background:#e7f1ee;border-color:#235a55;color:#1d4f49}
 #cq-can .m28-gs{display:flex;flex-wrap:wrap;gap:4px;margin:2px 0 6px}
 #cq-can .m28-gs button{min-width:34px;height:28px;border:1px solid #c8c3b6;border-radius:4px;background:#fff;font:700 12px Inter,sans-serif;color:#41534f;cursor:pointer}
