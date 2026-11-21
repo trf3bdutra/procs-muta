@@ -221,6 +221,8 @@ const ETAPAS=[['corrigir','1 · Correção','a corrigir','minutadas, sem correç
 const S={usuario:'',gestor:false,sessoes:[],data:'',itens:[],por:{},lotes:{},vista:'meus',etapa:'',fora:'',q:'',aberto:'',ver:{}};
 
 async function get(url){const r=await fetch(url,{credentials:'same-origin',headers:{'Accept':'application/json'}});const j=await r.json().catch(()=>({}));if(!r.ok){const e=new Error(j.erro||('HTTP '+r.status));e.status=r.status;throw e}return j}
+/* o gestor lê os lotes como na gestão (&modo=cg): vê todos os processos, inclusive os ainda ocultos da página da equipe */
+const MODO=()=>S.gestor?'&modo=cg':'';
 function msg(t){const e=$('#ld-m');if(e)e.textContent=t}
 
 /* ---------- modelo de cada processo: etapas da produção, tiradas da pauta (Ex Officio) e do lote (Collectio) ---------- */
@@ -278,7 +280,7 @@ async function carregar(){
 async function carregarSessao(){
   msg('Lendo a pauta de '+br(S.data)+'…');
   const lotes=S.lotesLista.filter(l=>(l.sessoes||[]).includes(S.data)&&l.total>0&&l.tipo!=='selecao');
-  const [P,...R]=await Promise.all([get('/api/pauta?data='+S.data)].concat(lotes.map(l=>get('/api/painel?lote=1&id='+encodeURIComponent(l.id)).catch(()=>null))));
+  const [P,...R]=await Promise.all([get('/api/pauta?data='+S.data)].concat(lotes.map(l=>get('/api/painel?lote=1&id='+encodeURIComponent(l.id)+MODO()).catch(()=>null))));
   S.por={};S.lotes={};
   R.forEach((r,k)=>{if(!r||!r.lote)return;const l=r.lote;S.lotes[l.id]=l;(l.itens||[]).forEach(it=>{if(it.sessao&&it.sessao!==S.data)return;const ant=S.por[it.processo];if(!ant||(!ant.it.minuta&&it.minuta))S.por[it.processo]={lote:l.id,titulo:l.titulo||l.id,it}})});
   S.itens=(P.itens||[]);
@@ -287,6 +289,7 @@ async function carregarSessao(){
   const eu=$('#eu');if(S.usuario){eu.hidden=false;eu.textContent='★ '+S.usuario}
   S.aberto=params.get('processo')&&S.linhas.some(r=>r.x.cnj.startsWith(params.get('processo')))?S.linhas.find(r=>r.x.cnj.startsWith(params.get('processo'))).x.cnj:S.aberto;
   render();
+  if(S.aberto&&params.get('processo'))ir('proc');
 }
 
 /* ---------- página ---------- */
@@ -408,7 +411,7 @@ async function carregarVersoes(){
   const r=S.linhas.find(l=>l.x.cnj===S.aberto); if(!r||!r.z)return;
   const cnj=r.x.cnj, mx=cnj.slice(0,10), lote=r.z.lote, ch=lote+'|'+mx;
   try{
-    const V=S.ver[ch]||(S.ver[ch]=await get('/api/painel?lote=1&id='+encodeURIComponent(lote)+'&minuta='+mx+'&versoes=1'));
+    const V=S.ver[ch]||(S.ver[ch]=await get('/api/painel?lote=1&id='+encodeURIComponent(lote)+MODO()+'&minuta='+mx+'&versoes=1'));
     if(S.aberto!==cnj)return;
     const vs=(V.versoes||[]).slice();
     $('#vs-k').textContent=vs.length?vs.length+(vs.length>1?' versões':' versão')+(V.vigente?' · vigente '+V.vigente:''):'nenhuma versão registrada';
@@ -426,7 +429,7 @@ async function carregarVersoes(){
   }catch(e){const el=$('#vs');if(el)el.innerHTML=`<p class="vazio" style="padding:0">Não foi possível ler as versões: ${esc(e.message)}</p>`}
 }
 const fotos={};
-async function foto(lote,mx,v){const k=lote+'|'+mx+'|'+v;return fotos[k]||(fotos[k]=await get('/api/painel?lote=1&id='+encodeURIComponent(lote)+'&minuta='+mx+'&versao='+encodeURIComponent(v)))}
+async function foto(lote,mx,v){const k=lote+'|'+mx+'|'+v;return fotos[k]||(fotos[k]=await get('/api/painel?lote=1&id='+encodeURIComponent(lote)+MODO()+'&minuta='+mx+'&versao='+encodeURIComponent(v)))}
 async function comparar(lote,mx){
   const a=$('#va').value,b=$('#vb').value,d=$('#dif');
   if(a===b){d.innerHTML='<p class="vazio">Escolha duas versões diferentes.</p>';return}
