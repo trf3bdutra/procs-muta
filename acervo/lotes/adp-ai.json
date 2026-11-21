@@ -26303,12 +26303,12 @@
    "executado": "CONSELHO REGIONAL DE FARMACIA DO ESTADO DE MS",
    "assunto": "Multas e demais Sanções",
    "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "tipo_caso": "Execução fiscal · multa do Conselho Regional de Farmácia (artigo 24 da Lei 3.820/1960) · nulidade da CDA por falta de motivação do valor · parcelamento como confissão · custas e honorários sem citação · exceção de pré-executividade",
+   "resultado": "Ato a proferir: julgamento do agravo de instrumento (voto) ‖ Proposta pelos precedentes: Negar provimento. A fixação da multa do artigo 24 da Lei 3.820/1960 em salários mínimos é constitucional (Tema 1.244/STF, ARE 1.409.059), o que supera a linha anterior do gabinete pela nulidade (ApCiv 5001037-45.2021.4.03.6135, 3ª Turma, 16/02/2023). A alegada falta de motivação do valor depende do exame dos processos administrativos e não cabe na exceção (Súmula 393/STJ). Sem paradigma do gabinete localizado sobre a motivação da dosimetria e sobre custas e honorários incluídos em parcelamento anterior à citação. [VALIDAR: motivação da dosimetria (reincidência) nos processos administrativos 508/2017 e 20071802060922; se houve citação antes do acordo e o que o termo (ID 392828771) cobra a título de custas e honorários; efeito da confissão no parcelamento (Tema 375/STJ: não impede discutir aspectos jurídicos)]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "observacao": "Agravo de Anilton Segobia Cruz Ltda. contra a decisão da 2ª Vara Federal de Dourados que, na execução fiscal 5001303-14.2019.4.03.6002 do CRF/MS (multas por falta de farmacêutico), rejeitou a exceção de pré-executividade. A tutela recursal foi indeferida (ID 383983423) e o Conselho respondeu.",
+   "peculiaridades": "O agravante admite a tese do Tema 1.244/STF e restringe a impugnação à motivação do valor das multas. Há ação anulatória sobre a mesma execução (5000395-44.2025.4.03.6002). Preparo por Pix ao TRF3 (instituição STN), em 30/06/2026.",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -26323,18 +26323,29 @@
      "data": "30/06/2026"
     },
     {
-     "peca": "Contraminuta",
-     "id": "392828766",
-     "data": "20/08/2026"
-    },
-    {
      "peca": "Decisão no agravo",
      "id": "383983423",
      "data": "02/07/2026"
+    },
+    {
+     "peca": "Contraminuta",
+     "id": "392828766",
+     "data": "20/08/2026"
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "analisado_em": "2026-11-20",
+    "ato": "Julgamento do agravo de instrumento (voto)",
+    "materia": "Execução fiscal · multa de conselho profissional · exceção de pré-executividade",
+    "origem": "Execução fiscal 5001303-14.2019.4.03.6002 · 2ª Vara Federal de Dourados",
+    "decisao_agravada": "Rejeição da exceção de pré-executividade (intimação em 19/06/2026) [VALIDAR ID]",
+    "recurso": "ID 383683060 · 30/06/2026",
+    "preparo": "Pix ao TRF3 (STN) R$ 64,26 em 30/06/2026 (ID 383687387)",
+    "monocratica": "ID 383983423 (indeferiu a tutela recursal)",
+    "conf_preparo": "Comprovante Pix (ID 383687387): favorecido Justiça Federal - TRF3, instituição STN, R$ 64,26, 30/06/2026.",
+    "conf_prevencao": "Sem prevenção apontada nos autos extraídos."
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -26355,6 +26366,100 @@
     "ultima_informacao": "",
     "ultima_movimentacao": "20/08/2026 15:20 · CONCLUSOS PARA DECISÃO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "assunto_detalhado": "Exceção de pré-executividade em execução fiscal do CRF/MS — motivação do valor da multa fixada em salários mínimos (Tema 1.244/STF), efeito do parcelamento e cobrança de custas e honorários antes da citação",
+   "especificidades": "Execução fiscal 5001303-14.2019.4.03.6002 (2ª Vara Federal de Dourados; R$ 6.461,57) · Processos administrativos 508/2017 e 20071802060922 · Parcelamento após bloqueio em outra execução (5002892-36.2022.4.03.6002) · Anulatória 5000395-44.2025.4.03.6002 · Tutela recursal indeferida (ID 383983423, 02/07/2026)",
+   "teor": {
+    "sintese_fatica": "O CRF/MS executa multas aplicadas por funcionamento sem farmacêutico responsável (artigo 24 da Lei 3.820/1960). A executada parcelou os débitos depois de bloqueio em outra execução e, em seguida, opôs exceção de pré-executividade alegando nulidade das CDAs por falta de motivação do valor das multas e ilegalidade das custas e honorários incluídos no acordo, porque não havia sido citada. O juízo da 2ª Vara Federal de Dourados rejeitou a exceção: o parcelamento reconhece a dívida e os vícios exigem dilação probatória.",
+    "recurso": "Agravo de Anilton Segobia Cruz Ltda. ID 383683060 (30/06/2026): as decisões administrativas não indicam o critério do valor das multas (R$ 2.400,00 em 2017, acima de dois salários mínimos; três salários mínimos no outro processo), o que nulifica as CDAs; o parcelamento feito sob bloqueio não convalida o vício; a cobrança de custas e honorários no acordo é ilegal sem citação; matéria de direito (Súmula 393/STJ); pede efeito suspensivo.",
+    "resposta": "Contrarrazões do CRF/MS ID 392828766 (20/08/2026): inadequação da exceção (Súmula 393/STJ), porque a dosimetria exige exame dos processos administrativos; o parcelamento confessa a dívida; validade das multas e das deliberações do Conselho (Deliberações 5747/2016 e 5868/2017)."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "assuntoDet": "Exceção de pré-executividade em execução fiscal do CRF/MS — motivação do valor da multa fixada em salários mínimos (Tema 1.244/STF), efeito do parcelamento e cobrança de custas e honorários antes da citação",
+     "subassuntos": "Execução fiscal · multa do Conselho Regional de Farmácia (artigo 24 da Lei 3.820/1960) · nulidade da CDA por falta de motivação do valor · parcelamento como confissão · custas e honorários sem citação · exceção de pré-executividade",
+     "sintese": "O CRF/MS executa multas aplicadas por funcionamento sem farmacêutico responsável (artigo 24 da Lei 3.820/1960). A executada parcelou os débitos depois de bloqueio em outra execução e, em seguida, opôs exceção de pré-executividade alegando nulidade das CDAs por falta de motivação do valor das multas e ilegalidade das custas e honorários incluídos no acordo, porque não havia sido citada. O juízo da 2ª Vara Federal de Dourados rejeitou a exceção: o parcelamento reconhece a dívida e os vícios exigem dilação probatória.",
+     "questoes": "1) Nulidade da CDA por falta de motivação da dosimetria da multa (1 a 3 salários mínimos; Tema 1.244/STF); 2) efeito do parcelamento (confissão) sobre a discussão; 3) cabimento da exceção (Súmula 393/STJ); 4) custas e honorários incluídos no acordo sem citação.",
+     "rel": {
+      "razoes": "Agravo de Anilton Segobia Cruz Ltda. ID 383683060 (30/06/2026): as decisões administrativas não indicam o critério do valor das multas (R$ 2.400,00 em 2017, acima de dois salários mínimos; três salários mínimos no outro processo), o que nulifica as CDAs; o parcelamento feito sob bloqueio não convalida o vício; a cobrança de custas e honorários no acordo é ilegal sem citação; matéria de direito (Súmula 393/STJ); pede efeito suspensivo.",
+      "contrarrazoes": "Contrarrazões do CRF/MS ID 392828766 (20/08/2026): inadequação da exceção (Súmula 393/STJ), porque a dosimetria exige exame dos processos administrativos; o parcelamento confessa a dívida; validade das multas e das deliberações do Conselho (Deliberações 5747/2016 e 5868/2017)."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "",
+      "juizo": "2ª Vara Federal de Dourados",
+      "dispositivo": "Rejeitou a exceção de pré-executividade."
+     },
+     "ai": {
+      "hip": "Execução / cumprimento",
+      "efeito": "Indeferido",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2026-06-30",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Anilton Segobia Cruz Ltda.",
+       "tipo": "Agravo de instrumento",
+       "id": "383683060",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "383683060",
+       "data": "2026-06-30"
+      },
+      {
+       "desc": "Procuração",
+       "id": "383683064",
+       "data": "2026-06-30"
+      },
+      {
+       "desc": "Comprovante Pix ao TRF3 (STN) de R$ 64,26",
+       "id": "383687387",
+       "data": "2026-06-30"
+      },
+      {
+       "desc": "Decisão: tutela recursal não concedida",
+       "id": "383983423",
+       "data": "2026-07-02"
+      },
+      {
+       "desc": "Contrarrazões do CRF/MS",
+       "id": "392828766",
+       "data": "2026-08-20"
+      },
+      {
+       "desc": "Termo de acordo",
+       "id": "392828771",
+       "data": "2026-08-20"
+      }
+     ],
+     "papeis": [
+      "Executado(a)",
+      "Exequente"
+     ]
+    },
+    "ctl": {
+     "tempest": "Tempestivo",
+     "preparo": "Comprovado",
+     "prelim": "Sem preliminares",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Apreciada · indeferida",
+     "fundamento": "Tema 1.244/STF (ARE 1.409.059); superada a linha da ApCiv 5001037-45.2021.4.03.6135 (3ª Turma, 16/02/2023); Súmula 393/STJ. Sem paradigma do gabinete sobre a dosimetria [VALIDAR]"
+    }
    }
   },
   {
