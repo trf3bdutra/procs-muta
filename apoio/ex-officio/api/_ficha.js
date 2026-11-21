@@ -346,12 +346,12 @@ async function etiquetasGab(req, res, u) {
       quando: (Array.isArray(e.quando) ? e.quando : []).slice(0, 6).map(q => ({ campo: String(q.campo || '').slice(0, 40), op: OPS.has(q.op) ? q.op : 'tem', valor: String(q.valor == null ? '' : q.valor).slice(0, 200) })).filter(q => q.campo) }))
       .filter(e => e.nome);
     /* tipos de etiqueta do PJe (redesenho na lista): opcional; se vier, substitui */
-    const CT = (req.body || {}).categorias, EST = new Set(['solido', 'suave', 'contorno']);
+    const CT = (req.body || {}).categorias, EST = new Set(['solido', 'suave', 'contorno']), ICS = new Set(['', 'raio', 'estrela', 'alerta', 'calendario', 'alvo', 'check', 'camadas', 'secao', 'pessoa', 'balanca', 'etiqueta']);
     let cats = null;
     if (Array.isArray(CT)) {
       if (CT.length > 30) return res.status(400).json({ erro: 'tipos demais' });
       cats = CT.map(c => ({ id: String(c.id || '').replace(/[^a-z0-9-]/gi, '').slice(0, 30) || ('t' + Math.random().toString(36).slice(2, 7)), nome: String(c.nome || '').trim().slice(0, 40),
-        re: String(c.re || '').slice(0, 400), cor: /^#[0-9a-f]{6}$/i.test(c.cor || '') ? c.cor : '#546e7a', estilo: EST.has(c.estilo) ? c.estilo : 'suave', icone: String(c.icone || '').slice(0, 2) }))
+        re: String(c.re || '').slice(0, 400), cor: /^#[0-9a-f]{6}$/i.test(c.cor || '') ? c.cor : '#546e7a', estilo: EST.has(c.estilo) ? c.estilo : 'suave', icone: ICS.has(c.icone) ? c.icone : '' }))
         .filter(c => { if (!c.nome || !c.re) return false; try { new RegExp(c.re, 'i'); return true; } catch (e) { return false; } });
     }
     const atual = await L.lerJson(CAT).catch(() => null);

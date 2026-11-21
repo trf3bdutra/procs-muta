@@ -3,7 +3,7 @@
  "versao": 1,
  "atualizadoEm": "2026-11-21",
  "atualizadoPor": "Bruno",
- "descricao": "Etiquetas do Gab. A e as regras que as sugerem na extensão Muta (lista de tarefas do PJe e prontuário). Cada regra tem condições sobre o resumo do processo (todas valem). Editável pelo gestor na extensão (Prontuário › Etiquetas do gabinete). \"categorias\": tipos de etiqueta do PJe com cor, estilo (solido, suave, contorno) e ícone; a extensão redesenha as etiquetas dos cartões da lista de tarefas pela primeira categoria cuja expressão (\"re\", sem distinção de maiúsculas e acentos) combinar com o nome.",
+ "descricao": "Etiquetas do Gab. A e as regras que as sugerem na extensão Muta (lista de tarefas do PJe e prontuário). Cada regra tem condições sobre o resumo do processo (todas valem). Editável pelo gestor na extensão (Prontuário › Etiquetas do gabinete). \"categorias\": tipos de etiqueta do PJe com cor, estilo (solido, suave, contorno) e ícone (chave: raio, estrela, alerta, calendario, alvo, check, camadas, secao, pessoa, balanca, etiqueta); a extensão redesenha as etiquetas dos cartões da lista de tarefas pela primeira categoria cuja expressão (\"re\", sem distinção de maiúsculas e acentos) combinar com o nome.",
  "etiquetas": [
   {
    "nome": "LIMINAR PENDENTE",
@@ -129,7 +129,7 @@
    "re": "liminar|urgen|tutela|efeito suspensivo|medicamento",
    "cor": "#c62828",
    "estilo": "solido",
-   "icone": "⚡"
+   "icone": "raio"
   },
   {
    "id": "prioridade",
@@ -137,7 +137,7 @@
    "re": "prioridade|superprioridade|maior (de )?80|idos[oa]|\\bmenor\\b|defici",
    "cor": "#7b3fb3",
    "estilo": "solido",
-   "icone": "★"
+   "icone": "estrela"
   },
   {
    "id": "conferencia",
@@ -145,7 +145,7 @@
    "re": "representa|tempestiv|preparo|deser|custas em dobro|intimar|regularizar|aguardando parecer|\\bmpf\\b|\\bprr\\b|intercorr|impedimento|suspei|preven[çc]|justi[çc]a gratuita",
    "cor": "#e8710a",
    "estilo": "contorno",
-   "icone": "!"
+   "icone": "alerta"
   },
   {
    "id": "sessao",
@@ -153,7 +153,7 @@
    "re": "sess[ãa]o|^\\d{4}-\\d{2}-\\d{2}|n[ãa]o pautar",
    "cor": "#00796b",
    "estilo": "suave",
-   "icone": "📅"
+   "icone": "calendario"
   },
   {
    "id": "meta",
@@ -161,7 +161,7 @@
    "re": "^meta\\b",
    "cor": "#b7791f",
    "estilo": "solido",
-   "icone": "◆"
+   "icone": "alvo"
   },
   {
    "id": "fluxo",
@@ -169,7 +169,7 @@
    "re": "^apto|monocr|minutad|revisad|n[ãa]o mexer|^analisar|sobrest|retrata|pedido de despacho|triagem de gabinete|^levantar",
    "cor": "#2e7d32",
    "estilo": "suave",
-   "icone": "✓"
+   "icone": "check"
   },
   {
    "id": "lote",
@@ -177,7 +177,7 @@
    "re": "^lote|28,86|^tema \\d|\\blote\\b",
    "cor": "#1e6091",
    "estilo": "contorno",
-   "icone": "▦"
+   "icone": "camadas"
   },
   {
    "id": "secao",
@@ -185,7 +185,7 @@
    "re": "^\\dª se[çc][ãa]o|juiz(a)? auxiliar|comp\\. delegada",
    "cor": "#455a64",
    "estilo": "solido",
-   "icone": "§"
+   "icone": "secao"
   },
   {
    "id": "pessoa",
@@ -193,7 +193,7 @@
    "re": "^triagem - |produtividade|^z |giovana|v[íi]ctor|rodrigo|jos[ée] v|dalete|estela|wellington|maria eduarda|debora|marcela|luciola|heloisa|alexander|saffioti",
    "cor": "#6d4c41",
    "estilo": "suave",
-   "icone": "👤"
+   "icone": "pessoa"
   },
   {
    "id": "classe",
@@ -201,7 +201,7 @@
    "re": "^(ai|ed|agint|ms|apciv|remnec)$|^dupla apela|apenas remessa|recurso inominado|^ee |^ai - |^erbe",
    "cor": "#1565c0",
    "estilo": "solido",
-   "icone": "⚖"
+   "icone": "balanca"
   },
   {
    "id": "materia",

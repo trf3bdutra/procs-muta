@@ -231,7 +231,7 @@ test('inteiro teor: honorários da sentença no padrão "quem paga · quanto e s
   assert.equal(H(['Sem condenação em honorários advocatícios, conforme o artigo 25 da Lei nº 12.016/2009.'], ''), 'Sem honorários (mandado de segurança: artigo 25 da Lei 12.016/2009)');
   assert.match(H(['Julgo procedente o pedido de reajuste de 28,86%. Condeno a União ao pagamento de honorários de 10% sobre o valor da condenação.'], ''), /^Parte ré \(União\) · 10%/);
   assert.equal(read('padrao/inteiro-teor.js'), read('extensao/padrao-inteiro-teor.js'), 'cópia da extensão igual');
-  assert.match(read('extensao/gabinete.js'), /function rotuloDe\(c\) \{ return \(\/Honorários\//);
+  assert.match(read('extensao/gabinete.js'), /function rotuloDe\(c\) \{[^}]*\/Honorários\/[^}]*E\.svg\('triste'/);
 });
 
 test('extensão 0.20: Gerador monta relatório, dispositivo, ementa, acórdão e proclamação pelas fórmulas do gabinete', () => {
@@ -268,12 +268,12 @@ test('extensão 0.22: chegadas do PJe (só gestor; pelas datas do cartão; só u
   await ctx.chegadas([K1], { [K1]: '06-11-26 (15) 16-11-26 (05) 06-11-26 (15) AI LIMINAR PENDENTE' }, 'Triagem', {});
   assert.equal(notas.length, 0, 'processo antigo na lista não é chegada, mesmo com liminar');
   await ctx.chegadas([K1, K2], { [K2]: '21-11-26 (0) 21-11-26 (0) 21-11-26 (0) AGRAVO DE INSTRUMENTO · pedido de LIMINAR · medicamento' }, 'Analisar pedido', {});
-  assert.equal(notas.length, 1); assert.match(notas[0][0], /^cheg:/); assert.match(notas[0][1].title, /Chegada urgente/); assert.equal(notas[0][1].iconUrl, 'icones/pje-128.png');
+  assert.equal(notas.length, 1); assert.match(notas[0][0], /^cheg:/); assert.match(notas[0][1].title, /^Chegada urgente · /); assert.equal(notas[0][1].iconUrl, 'icones/pje-128.png');
   assert.ok(posts.some(p => /chegadas=1/.test(p[0]) && /"urg":true/.test(p[1])));
   assert.equal(store['muta-chegadas'].length, 1);
   store['muta-gestor'] = false; await ctx.chegadas(['50000000220264030000'], {}, '', {}); assert.equal(store['muta-chegadas'].length, 1, 'só gestor');
   const man = JSON.parse(read('extensao/manifest.json')); assert.ok(man.permissions.includes('alarms'));
-  assert.match(read('extensao/fundo.js'), /iconUrl: 'icones\/app-128\.png', title: '🏛 Gabinete · '/);
+  assert.match(read('extensao/fundo.js'), /iconUrl: 'icones\/app-128\.png', title: 'Gabinete · '/);
   assert.doesNotMatch(read('extensao/fundo.js').split('function avisar')[1].split('chrome.runtime.onMessage')[0], /notifications\.create/, 'alertas da lista não notificam');
   await ctx.chegadas(['50000000320264030000'], { '50000000320264030000': '21-11-26 (0) 21-11-26 (0) 21-11-26 (0) ApCiv Aposentadoria' }, '', {});
   ['icones/app-128.png', 'icones/pje-128.png', 'relatorio.html', 'relatorio.js'].forEach(f => assert.ok(fs.existsSync(path.join(ext, f)), f));
@@ -297,14 +297,14 @@ test('extensão 0.22: redesenho das etiquetas do PJe por tipo (categorias do cat
 test('extensão 0.23: ícones de sinalização (lista e cabeçalho dos autos) com quadro de detalhes; recolher a coluna da lista', () => {
   const c = read('extensao/conteudo-pje.js');
   assert.match(c, /function sinaisHtml\(k, r\)/); assert.match(c, /function dialogoSinais\(k, foco\)/); assert.match(c, /function sinaisAutos\(numero\)/);
-  assert.match(c, /\['ic', '⛔', 'Intercorrências', 'al'\], \['pd', '⚑', 'Pendências', 'av'\], \['nt', '📝', 'Notas', 'mu'\]/);
+  assert.match(c, /\['ic', 'bloqueio', 'Intercorrências', 'al'\], \['pd', 'bandeira', 'Pendências', 'av'\], \['nt', 'nota', 'Notas', 'mu'\]/);
   assert.match(c, /function botaoColuna\(C\)/); assert.match(c, /hero18810:lista-oculta/);
   assert.match(read('apoio/ex-officio/api/_ficha.js'), /notas: linhas\(\(r\.origem \|\| \{\}\)\['Observações'\]\)/);
 });
 
 test('extensão 0.24: quadro de sinalizações em 4 painéis (notas com síntese e questões), marcar e incluir gravam na ficha', () => {
   const c = read('extensao/conteudo-pje.js'), f = read('extensao/fundo.js');
-  assert.match(c, /col\('av', '🔔', 'Avisos'[\s\S]*col\('ic', '⛔', 'Intercorrências'[\s\S]*col\('pd', '⚑', 'Pendências'[\s\S]*col\('nt', '📝', 'Notas'/);
+  assert.match(c, /col\('av', ico\('sino', 14\), 'Avisos'[\s\S]*col\('ic', ico\('bloqueio', 14\), 'Intercorrências'[\s\S]*col\('pd', ico\('bandeira', 14\), 'Pendências'[\s\S]*col\('nt', ico\('nota', 14\), 'Notas'/);
   assert.match(c, /grid-template-columns:repeat\(4,minmax\(0,1fr\)\)/); assert.match(c, /<b>Síntese<\/b>/); assert.match(c, /<b>Questões<\/b>/);
   assert.match(f, /msg\.tipo !== 'muta-sinal'/); assert.match(f, /'✓ ' \+ semMarca\(L\[i\]\)/); assert.match(f, /\/api\/pauta\?ficha=1', \{ method: 'POST'/);
   assert.match(read('apoio/ex-officio/api/_ficha.js'), /sintese: String\(t\['Síntese Processual'\]/);
@@ -316,4 +316,10 @@ test('extensão 0.25: inserir parágrafo-padrão e citação de precedente no ed
   assert.match(read('extensao/pje.js'), /inserir: function \(html, texto\)/);
   assert.match(read('extensao/paragrafos.js'), /data-ins=/); assert.match(read('extensao/ementario.js'), /data-ej="cit"/);
   assert.match(read('extensao/ementario.js'), /'Rel\. Des\. Fed\. ' \+ rel/);
+});
+
+test('extensão 0.26: sem emojis na interface (ícones SVG de traço)', () => {
+  const emoji = /[\u{1F300}-\u{1FAFF}\u{2600}-\u{26FF}\u{2B50}\u{23F0}-\u{23FF}]/u;
+  ['conteudo-pje.js', 'fundo.js', 'alertas.js', 'gabinete.js', 'gerador.js', 'relatorio.js', 'relatorio.html', 'etiquetas.js'].forEach(f => assert.doesNotMatch(read('extensao/' + f).replace(/✓/g, ''), emoji, f));
+  assert.doesNotMatch(read('padrao/etiquetas-gabinete.json'), emoji);
 });

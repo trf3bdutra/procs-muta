@@ -109,8 +109,8 @@ function dicaCampo(c) {
   var d = DICA[c.chave] || S(c.regra) || '';
   return c.rotulo + (d ? ': ' + d : '') + ' (' + (TIPO_DICA[c.tipo] || 'campo') + (editavel(c) ? '; grava sozinho na ficha do processo' : '; só leitura') + ')';
 }
-/* rótulo do campo no painel: honorários com 😭 (quem paga, quanto e sobre o quê vêm no valor) */
-function rotuloDe(c) { return (/Honorários/.test(c.chave || '') && !/Recursais|Majora/i.test(c.chave || '') ? '😭 ' : '') + esc(c.rotulo); }
+/* rótulo do campo no painel: honorários com ícone (quem paga, quanto e sobre o quê vêm no valor) */
+function rotuloDe(c) { var E = window.MutaEtiquetas; return (/Honorários/.test(c.chave || '') && !/Recursais|Majora/i.test(c.chave || '') && E && E.svg ? '<i class="gl-ic" title="Quem paga, quanto e sobre o quê">' + E.svg('triste', 12) + '</i>' : '') + esc(c.rotulo); }
 function campo(c) {
   var longo = c.tipo === 'texto-longo' || c.tipo === 'tabela' || /Honorários/.test(c.chave || ''), cls = 'gf' + (longo ? ' w' : '');
   if (c.tipo === 'tabela') {

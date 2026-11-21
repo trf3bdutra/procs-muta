@@ -126,8 +126,8 @@ chrome.runtime.onMessage.addListener(function (msg) { if (msg && msg.tipo === 'm
 
 
 /* ---------- 0.21 · notificações do app, chegadas do PJe (só o gestor) e relatório do fim do dia ----------
-   Distinção visual: avisos do PJe saem com ⚖ e ícone laranja; os do app do gabinete, com 🏛 e ícone azul;
-   chegadas, com 📥 (urgentes, ⚡). O número no ícone da extensão soma os dois: vermelho se houver alerta do PJe. */
+   Distinção visual: chegadas do PJe com ícone laranja; avisos do app do gabinete com ícone azul e título "Gabinete ·".
+   O número no ícone da extensão soma chegadas urgentes do dia (vermelho) e avisos do app (azul). */
 var BADGE = { pje: 0, app: 0 };
 function badge() {
   var n = BADGE.pje + BADGE.app;
@@ -170,7 +170,7 @@ function chegadas(cnjs, textos, tarefa, R) {
     return chrome.storage.local.set({ 'muta-vistos': V, 'muta-chegadas': L }).then(function () {
       if (!novos.length) return;
       novos.filter(function (x) { return x.urg; }).slice(0, 4).forEach(function (x) {
-        chrome.notifications.create('cheg:' + x.k, { type: 'basic', iconUrl: 'icones/pje-128.png', title: '⚡📥 Chegada urgente · ' + fmtCnj(x.k), message: x.motivos.join(', ') + (x.tarefa ? ' · ' + x.tarefa : ''), contextMessage: 'Chegou ao gabinete pelo PJe', priority: 2, requireInteraction: true });
+        chrome.notifications.create('cheg:' + x.k, { type: 'basic', iconUrl: 'icones/pje-128.png', title: 'Chegada urgente · ' + fmtCnj(x.k), message: x.motivos.join(', ') + (x.tarefa ? ' · ' + x.tarefa : ''), contextMessage: 'Chegou ao gabinete pelo PJe', priority: 2, requireInteraction: true });
       });
       fetch(SITE + '/api/pauta?chegadas=1', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ itens: novos }) }).catch(function () {});
     });
@@ -189,7 +189,7 @@ function relatorio() {
   return chrome.storage.local.get(['muta-gestor', 'muta-chegadas', 'muta-prazos']).then(function (o) {
     if (!o['muta-gestor'] || (o['muta-prazos'] || {}).relatorio === false) return;
     var hoje = diaMS(), L = (o['muta-chegadas'] || []).filter(function (x) { return diaMS(Date.parse(x.em)) === hoje; }), u = L.filter(function (x) { return x.urg; }).length;
-    chrome.notifications.create('rel:' + hoje, { type: 'basic', iconUrl: 'icones/pje-128.png', title: '📋 Relatório de chegadas · ' + hoje.split('-').reverse().join('/'),
+    chrome.notifications.create('rel:' + hoje, { type: 'basic', iconUrl: 'icones/pje-128.png', title: 'Relatório de chegadas · ' + hoje.split('-').reverse().join('/'),
       message: L.length ? L.length + (L.length === 1 ? ' processo chegou' : ' processos chegaram') + (u ? ' · ' + u + ' com urgência' : '') : 'Nenhuma chegada vista hoje na lista do PJe.', contextMessage: 'Toque para abrir o relatório', priority: 1, requireInteraction: true });
   });
 }
@@ -208,7 +208,7 @@ function lerApp() {
       BADGE.app = naoLidos.length > 9 ? 9 : naoLidos.length; badge();
       var p = chrome.storage.session.set({ 'muta-app': { em: new Date().toISOString(), eventos: ev } });
       if (!primeira && cfg.avisosApp !== false) novos.filter(function (e) { return e.origem !== 'pje' && e.nivel !== 'info'; }).slice(0, 3).forEach(function (e) {
-        chrome.notifications.create('app:' + e.id, { type: 'basic', iconUrl: 'icones/app-128.png', title: '🏛 Gabinete · ' + (e.title || 'aviso'), message: e.message || '', contextMessage: 'App do gabinete' + (e.user ? ' · ' + e.user : ''), priority: e.nivel === 'urgente' ? 2 : 1 });
+        chrome.notifications.create('app:' + e.id, { type: 'basic', iconUrl: 'icones/app-128.png', title: 'Gabinete · ' + (e.title || 'aviso'), message: e.message || '', contextMessage: 'App do gabinete' + (e.user ? ' · ' + e.user : ''), priority: e.nivel === 'urgente' ? 2 : 1 });
       });
       return Promise.all([p, chrome.storage.local.set({ 'muta-app-vistos': vistos })]);
     });

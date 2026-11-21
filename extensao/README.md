@@ -5,6 +5,12 @@ Nome desde a 0.19.3 (antes: Muta). Os identificadores internos (`window.Muta*`, 
 Extensão do Chrome/Edge (Manifest V3) que abre o **Muta** num painel lateral, ao lado dos autos e das tarefas do PJe 2º grau do TRF-3.
 Base: o HTML independente *muta-independente-prontuario-completo* (Prontuário + Acervo).
 
+## O que muda na 0.26 · sem emojis
+
+- Selos, quadro de sinalizações, etiquetas redesenhadas, sino, relatório e notificações usam ícones SVG de traço
+  (`MutaEtiquetas.ICONES`), não emojis. Nas categorias de etiqueta, "icone" é uma chave (raio, estrela, alerta,
+  calendario, alvo, check, camadas, secao, pessoa, balanca, etiqueta). O "✓" que marca item resolvido na ficha continua.
+
 ## O que muda na 0.25 · inserir no editor do PJe
 
 - Parágrafos-padrão: botão "Inserir" põe o parágrafo no editor do PJe, na posição do cursor (sem cursor no editor, no fim).
@@ -27,8 +33,8 @@ Base: o HTML independente *muta-independente-prontuario-completo* (Prontuário +
 ## O que muda na 0.22 · etiquetas redesenhadas e só urgências notificadas
 
 - **Redesenho das etiquetas do PJe** nos cartões da lista de tarefas, para toda a equipe: cada tipo (`categorias` em
-  `padrao/etiquetas-gabinete.json`) com cor, estilo (sólido, suave, contorno) e ícone — Urgência ⚡, Prioridade legal ★,
-  Conferência !, Sessão 📅, Meta ◆, Fluxo ✓, Lote e tema ▦, Seção §, Designação 👤, Classe e espécie ⚖ e Matéria. Vale a
+  `padrao/etiquetas-gabinete.json`) com cor, estilo (sólido, suave, contorno) e ícone — Urgência, Prioridade legal,
+  Conferência, Sessão, Meta, Fluxo, Lote e tema, Seção, Designação, Classe e espécie e Matéria. Vale a
   primeira expressão que combinar com o nome. O gestor edita tipos e cores no sino › Etiquetas; só muda a aparência.
 - **Selos** logo abaixo do número do processo (o cartão do PJe tem altura limitada e escondia o que ia no fim).
   Diagnóstico no console da página: `[HERO18810] lista do PJe`.

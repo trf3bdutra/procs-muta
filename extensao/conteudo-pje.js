@@ -426,6 +426,13 @@
   var ENR = { dados: {}, cat: null, cfg: null, t: 0, pedindo: false, tm: 0, pedidos: {} };
   var LISTA = location.host === 'frontend-pje.app.trf3.jus.br';
   function escS(t) { return String(t == null ? '' : t).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  function icCss() {
+    var E = window.MutaEtiquetas; if (!E || !E.ICONES) return '';
+    return Object.keys(E.ICONES).map(function (k) {
+      var u = 'data:image/svg+xml;utf8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">' + E.ICONES[k] + '</svg>');
+      return '.hero-etq[data-hero-ic="' + k + '"]{--hi:url("' + u + '")}';
+    }).join('');
+  }
   function cssSelos() {
     if (document.getElementById('muta-selos-css')) return;
     var st = document.createElement('style'); st.id = 'muta-selos-css';
@@ -439,8 +446,9 @@
       '.hero-solido{background:var(--hc)!important;color:#fff!important;border:1px solid var(--hc)!important}' +
       '.hero-suave{background:color-mix(in srgb,var(--hc) 13%,#fff)!important;color:var(--hc)!important;border:1px solid color-mix(in srgb,var(--hc) 40%,#fff)!important}' +
       '.hero-contorno{background:#fff!important;color:var(--hc)!important;border:1.5px solid var(--hc)!important}' +
-      '.hero-etq[data-hero-ic]:not([data-hero-ic=""])::before{content:attr(data-hero-ic);margin-right:4px;font-weight:800}' +
-      '.muta-selos .hs{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:2px;height:18px;padding:0 5px;border-radius:9px;border:1px solid #d5dbe1;background:#fff;font:700 10.5px/1 system-ui,Segoe UI,sans-serif;color:#33424c}' +
+      '.hero-etq[data-hero-ic]:not([data-hero-ic=""])::before{content:"";display:inline-block;width:10px;height:10px;margin-right:4px;vertical-align:-1px;background:currentColor;-webkit-mask:var(--hi) center/contain no-repeat;mask:var(--hi) center/contain no-repeat}' +
+      icCss() +
+      '.muta-selos .hs{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:3px;height:18px;padding:0 5px;border-radius:9px;border:1px solid #d5dbe1;background:#fff;font:700 10.5px/1 system-ui,Segoe UI,sans-serif;color:#33424c}' +
       '.muta-selos .hs b{font-weight:800}.muta-selos .hs:hover{border-color:#1f4f6b;box-shadow:0 0 0 2px #1f4f6b22}' +
       '.muta-selos .hs-al{background:#fdecea;border-color:#efb3a9;color:#a8321f}.muta-selos .hs-av{background:#fff4e5;border-color:#f0c88a;color:#8a5a10}.muta-selos .hs-mu{background:#eef3f7;border-color:#c9d6e0;color:#1f4f6b}' +
       '.muta-selos.hero-autos{display:inline-flex;margin:0 0 0 8px;vertical-align:middle}' +
@@ -562,21 +570,22 @@
   function sinaisDe(r) {
     var E = window.MutaEtiquetas, cfg = ENR.cfg || (E && E.CFG) || {}; r = E.preparar(Object.assign({}, r));
     var av = [];
-    if (r.dias != null && r.dias >= (cfg.tarefaDias || 30)) av.push('⏱ ' + r.dias + ' dias na tarefa' + (r.tarefa ? ' (' + r.tarefa + ')' : ''));
+    if (r.dias != null && r.dias >= (cfg.tarefaDias || 30)) av.push(r.dias + ' dias na tarefa' + (r.tarefa ? ' (' + r.tarefa + ')' : ''));
     if (/intempest/i.test(r.tempest || '')) av.push('Tempestividade: ' + r.tempest);
     if (/nao recolhido|sem comprovante|a menor|tesouro/i.test((r.preparo || '').normalize('NFD').replace(/[\u0300-\u036f]/g, ''))) av.push('Preparo: ' + r.preparo);
     if (/irregular/i.test(r.repres || '')) av.push('Representação: ' + r.repres);
     if (/aguardando|vista a abrir/i.test(r.mpfSit || '')) av.push('MPF: ' + r.mpfSit);
-    if (r.meta) av.push('★ Meta do CNJ'); if (r.sobr) av.push('⏸ Sobrestado'); if (r.sens) av.push('♥ Caso sensível');
-    (r._falta || []).forEach(function (x) { av.push('🏷 Etiqueta a incluir no PJe: ' + x.nome + (x.descricao ? ' (' + x.descricao + ')' : '')); });
+    if (r.meta) av.push('Meta do CNJ'); if (r.sobr) av.push('Sobrestado'); if (r.sens) av.push('Caso sensível');
+    (r._falta || []).forEach(function (x) { av.push('Etiqueta a incluir no PJe: ' + x.nome + (x.descricao ? ' (' + x.descricao + ')' : '')); });
     return { r: r, urg: r.urgPend ? ['Urgência não apreciada' + (r.urg ? ': ' + r.urg : '') + (r.urgDias != null ? ' · há ' + r.urgDias + ' dia(s)' : '') + (r.urgNivel ? ' · ' + r.urgNivel : '')] : [],
       av: av, ic: r.ic || [], pd: r.pend || [], nt: r.notas || [] };
   }
-  var SIN = [['urg', '⚡', 'Urgência', 'al'], ['av', '🔔', 'Avisos', 'av'], ['ic', '⛔', 'Intercorrências', 'al'], ['pd', '⚑', 'Pendências', 'av'], ['nt', '📝', 'Notas', 'mu']];
+  var SIN = [['urg', 'raio', 'Urgência', 'al'], ['av', 'sino', 'Avisos', 'av'], ['ic', 'bloqueio', 'Intercorrências', 'al'], ['pd', 'bandeira', 'Pendências', 'av'], ['nt', 'nota', 'Notas', 'mu']];
+  function ico(k, n) { var E = window.MutaEtiquetas; return E && E.svg ? E.svg(k, n) : ''; }
   function sinaisHtml(k, r) {
     if (!k) return ''; var S0 = sinaisDe(r), h = '';
     SIN.forEach(function (x) { var n = S0[x[0]].length; if (!n) return;
-      h += '<button type="button" class="hs hs-' + x[3] + '" data-hero-sin="' + x[0] + '" data-hero-k="' + k + '" title="' + x[2] + ': ' + escS(S0[x[0]].slice(0, 3).join(' | ')) + (n > 3 ? ' …' : '') + ' — clique para ver">' + x[1] + (n > 1 || x[0] !== 'urg' ? '<b>' + n + '</b>' : '') + '</button>'; });
+      h += '<button type="button" class="hs hs-' + x[3] + '" data-hero-sin="' + x[0] + '" data-hero-k="' + k + '" title="' + x[2] + ': ' + escS(S0[x[0]].slice(0, 3).join(' | ')) + (n > 3 ? ' …' : '') + ' — clique para ver">' + ico(x[1], 12) + (n > 1 || x[0] !== 'urg' ? '<b>' + n + '</b>' : '') + '</button>'; });
     return h;
   }
   function linhaSin(l) {
@@ -604,16 +613,16 @@
     var col = function (id, ic0, tit, n, corpo, inc) { return '<section class="hd-c' + (foco === id ? ' fo' : '') + '" data-s="' + id + '"><h4>' + ic0 + ' ' + tit + ' <i>' + n + '</i></h4><div class="hd-cc">' + corpo + '</div>' +
       (inc ? '<form class="hd-inc" data-hd-inc="' + id + '"><input type="text" placeholder="' + inc + '" aria-label="' + inc + '"><button type="submit">+</button></form>' : '') + '</section>'; };
     var lista = function (L, campo, vz) { return L.length ? '<ul>' + L.map(function (l, i) { return itemSin(l, campo, i); }).join('') + '</ul>' : '<p class="hd-v">' + vz + '</p>'; };
-    var avisos = S0.urg.map(function (u) { return '<li class="u"><div><p>⚡ ' + escS(u) + '</p></div></li>'; }).join('') + S0.av.map(function (a) { return '<li><div><p>' + escS(a) + '</p></div></li>'; }).join('');
+    var avisos = S0.urg.map(function (u) { return '<li class="u"><div><p>' + escS(u) + '</p></div></li>'; }).join('') + S0.av.map(function (a) { return '<li><div><p>' + escS(a) + '</p></div></li>'; }).join('');
     var notasCorpo = (x.sintese ? '<div class="hd-sub"><b>Síntese</b><p>' + escS(x.sintese) + '</p></div>' : '') +
       (qs.length ? '<div class="hd-sub"><b>Questões</b><ol>' + qs.map(function (q) { return '<li><p>' + escS(q.replace(/^\(?\d+[).]\s*/, '')) + '</p></li>'; }).join('') + '</ol></div>' : '') +
       '<div class="hd-sub"><b>Notas</b>' + lista(nt, 'nt', 'Nenhuma nota.') + '</div>';
     d.innerHTML = '<div class="hd-bx"><header><div><b>' + fmt + '</b><small>' + escS([E ? E.etapa(x) : '', x.servidor ? 'Minuta: ' + x.servidor : '', x.corretor ? 'Correção: ' + x.corretor : '', x.tarefa ? 'Tarefa: ' + x.tarefa : ''].filter(Boolean).join(' · ')) + '</small></div><span class="hd-st" id="hd-st"></span><button type="button" data-hd-x aria-label="Fechar">×</button></header>' +
       '<div class="hd-g">' +
-      col('av', '🔔', 'Avisos', S0.urg.length + S0.av.length, avisos ? '<ul>' + avisos + '</ul>' : '<p class="hd-v">Nenhum aviso.</p>') +
-      col('ic', '⛔', 'Intercorrências', abertas(ic), lista(ic, 'ic', 'Nenhuma intercorrência.'), 'Nova intercorrência') +
-      col('pd', '⚑', 'Pendências', abertas(pend), lista(pend, 'pd', 'Nenhuma pendência.'), 'Nova pendência') +
-      col('nt', '📝', 'Notas', nt.length, notasCorpo, 'Nova nota') +
+      col('av', ico('sino', 14), 'Avisos', S0.urg.length + S0.av.length, avisos ? '<ul>' + avisos + '</ul>' : '<p class="hd-v">Nenhum aviso.</p>') +
+      col('ic', ico('bloqueio', 14), 'Intercorrências', abertas(ic), lista(ic, 'ic', 'Nenhuma intercorrência.'), 'Nova intercorrência') +
+      col('pd', ico('bandeira', 14), 'Pendências', abertas(pend), lista(pend, 'pd', 'Nenhuma pendência.'), 'Nova pendência') +
+      col('nt', ico('nota', 14), 'Notas', nt.length, notasCorpo, 'Nova nota') +
       '</div><footer>Marcar resolve (✓) e o campo inclui: grava na ficha do processo, com o seu login do painel. Esc fecha.</footer></div>';
     d._L = { ic: ic, pd: pend, nt: nt };
     if (novo) {

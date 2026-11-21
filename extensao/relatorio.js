@@ -25,11 +25,11 @@
   function pintar(dia) {
     var U = L.filter(function (x) { return x.urg; }), O = L.filter(function (x) { return !x.urg; });
     $('resumo').textContent = dia.split('-').reverse().join('/') + ': ' + (L.length ? L.length + (L.length === 1 ? ' processo chegou' : ' processos chegaram') + (U.length ? ', ' + U.length + ' com urgência.' : '.') : 'nenhuma chegada registrada.');
-    $('lista').innerHTML = (U.length ? '<h2>⚡ Com urgência (' + U.length + ')</h2>' + tabela(U) : '') + (O.length ? '<h2>Demais (' + O.length + ')</h2>' + tabela(O) : '') + (!L.length ? '<p class="vz">Abra as listas de tarefas do PJe com a extensão ligada para registrar as chegadas.</p>' : '');
+    $('lista').innerHTML = (U.length ? '<h2>Com urgência (' + U.length + ')</h2>' + tabela(U) : '') + (O.length ? '<h2>Demais (' + O.length + ')</h2>' + tabela(O) : '') + (!L.length ? '<p class="vz">Abra as listas de tarefas do PJe com a extensão ligada para registrar as chegadas.</p>' : '');
   }
   function texto() {
     var d = $('dia').value.split('-').reverse().join('/');
-    return 'Chegadas de ' + d + ' (' + L.length + ')\n' + L.map(function (x) { return '- ' + fmt(x.k) + (x.urg ? ' ⚡ ' : ' ') + (x.motivos || []).join(', ') + (x.tarefa ? ' · ' + x.tarefa : ''); }).join('\n');
+    return 'Chegadas de ' + d + ' (' + L.length + ')\n' + L.map(function (x) { return '- ' + fmt(x.k) + (x.urg ? ' [URGENTE] ' : ' ') + (x.motivos || []).join(', ') + (x.tarefa ? ' · ' + x.tarefa : ''); }).join('\n');
   }
   document.addEventListener('click', function (e) { var b = e.target.closest('[data-c]'); if (b) navigator.clipboard.writeText(b.dataset.c); });
   $('copiar').addEventListener('click', function () { navigator.clipboard.writeText(texto()).then(function () { $('copiar').textContent = 'Copiado'; setTimeout(function () { $('copiar').textContent = 'Copiar'; }, 1200); }); });

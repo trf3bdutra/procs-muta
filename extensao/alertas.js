@@ -130,7 +130,7 @@
     return '<small class="muted ap-em">Hoje: ' + A.cheg.length + ' chegada' + (A.cheg.length === 1 ? '' : 's') + (U.length ? ' · ' + U.length + ' com urgência' : '') + ' · vistas na lista do PJe</small>' +
       (A.cheg.length ? '<ul class="ap-l">' + A.cheg.slice().sort(function (a, b) { return b.urg - a.urg; }).map(function (x) {
         return '<li class="org-pje"><div class="ap-h"><i class="ap-org pje">PJe</i><button type="button" class="ap-k" data-ap-cnj="' + esc(fmtCnj(x.k)) + '">' + esc(fmtCnj(x.k)) + '</button><small>' + esc(quando(x.em)) + '</small></div>' +
-          '<div class="ap-as">' + (x.urg ? '<span class="ap-a al">⚡ ' + esc(x.motivos.join(', ')) + '</span>' : (x.motivos || []).length ? '<span class="ap-a av">' + esc(x.motivos.join(', ')) + '</span>' : '') + (x.tarefa ? '<span class="ap-a">' + esc(x.tarefa) + '</span>' : '') + '</div></li>';
+          '<div class="ap-as">' + (x.urg ? '<span class="ap-a al">Urgente: ' + esc(x.motivos.join(', ')) + '</span>' : (x.motivos || []).length ? '<span class="ap-a av">' + esc(x.motivos.join(', ')) + '</span>' : '') + (x.tarefa ? '<span class="ap-a">' + esc(x.tarefa) + '</span>' : '') + '</div></li>';
       }).join('') + '</ul>' : '<p class="muted ap-v">Nenhuma chegada vista hoje. As chegadas são registradas quando a lista de tarefas do PJe é aberta com a extensão ligada.</p>') +
       '<a class="lnk" target="_blank" href="' + lk + '">Relatório completo do dia</a>';
   }
@@ -142,8 +142,8 @@
       num('tarefaDias', 'Tempo na tarefa', 'dias até o aviso (vermelho no dobro)') +
       lig('selos', 'Selos na lista de tarefas do PJe', 'etapa, designação, alertas e etiquetas que faltam') +
       lig('etqEstilo', 'Redesenho das etiquetas do PJe', 'cada tipo com cor, estilo e ícone (sino › Etiquetas)') +
-      lig('avisosApp', 'Avisos do app do gabinete', 'urgentes e importantes viram notificação (🏛, ícone azul)') +
-      (A.gestor0 || (ses && ses.estado().gestor) ? lig('chegadas', 'Chegadas com urgência ou liminar (só gestor)', 'processo novo na lista do PJe com pedido urgente avisa na hora (⚡📥); os demais só entram no relatório') +
+      lig('avisosApp', 'Avisos do app do gabinete', 'urgentes e importantes viram notificação (ícone azul, título "Gabinete")') +
+      (A.gestor0 || (ses && ses.estado().gestor) ? lig('chegadas', 'Chegadas com urgência ou liminar (só gestor)', 'processo novo na lista do PJe com pedido urgente avisa na hora; os demais só entram no relatório') +
         lig('relatorio', 'Relatório de chegadas no fim do dia', 'notificação com o total do dia, que abre o relatório') +
         '<label class="ap-f"><span>Hora do relatório</span><input type="time" data-pz="relHora" value="' + esc(c.relHora || '18:00') + '"><small>todo dia, neste navegador</small></label>' : '') +
       '<small class="muted ap-v">Vale só neste navegador.</small>';
@@ -155,7 +155,7 @@
     var cats = (A.cat.categorias && A.cat.categorias.length) ? A.cat.categorias : (E ? E.CATEGORIAS : []);
     if (A.edCat) return pTiposEd();
     var tipos = '<div class="ap-ti2"><b>Tipos de etiqueta do PJe</b><small class="muted">redesenho dos cartões da lista, para toda a equipe</small></div><div class="ap-tps">' + cats.map(function (c) {
-      return '<span class="hx hx-' + esc(c.estilo || 'suave') + '" style="--hc:' + esc(c.cor) + '" title="' + esc(c.re) + '">' + (c.icone ? esc(c.icone) + ' ' : '') + esc(c.nome) + '</span>';
+      return '<span class="hx hx-' + esc(c.estilo || 'suave') + '" style="--hc:' + esc(c.cor) + '" title="' + esc(c.re) + '">' + (E && E.svg ? E.svg(c.icone, 10) : '') + esc(c.nome) + '</span>';
     }).join('') + '</div>' + (A.gestor ? '<button type="button" class="btn sm" data-ap-edcat>Editar tipos e cores</button>' : '') + '<hr class="ap-hr">';
     var L = A.ed || A.cat.etiquetas || [];
     if (!A.ed) {
@@ -177,7 +177,7 @@
     var opt = function (v) { return [['solido', 'sólido'], ['suave', 'suave'], ['contorno', 'contorno']].map(function (o) { return '<option value="' + o[0] + '"' + (o[0] === v ? ' selected' : '') + '>' + o[1] + '</option>'; }).join(''); };
     return '<div class="ap-ed"><small class="muted">Vale a primeira expressão que combinar com o nome da etiqueta (sem distinção de maiúsculas). O último tipo (".") pega o resto.</small>' + A.edCat.map(function (c, i) {
       return '<fieldset data-c="' + i + '"><div class="ap-er"><input type="color" data-cf="cor" value="' + esc(c.cor) + '" title="Cor"><input type="text" data-cf="icone" value="' + esc(c.icone || '') + '" maxlength="2" class="ap-ic" title="Ícone (até 2 caracteres)"><input type="text" data-cf="nome" value="' + esc(c.nome) + '" placeholder="Nome do tipo"><select data-cf="estilo">' + opt(c.estilo) + '</select><button type="button" class="sn-x" data-c-x="' + i + '" title="Excluir o tipo" aria-label="Excluir">×</button></div>' +
-        '<input type="text" data-cf="re" value="' + esc(c.re) + '" placeholder="expressão: liminar|tutela|urgen"><span class="hx hx-' + esc(c.estilo) + '" style="--hc:' + esc(c.cor) + '">' + (c.icone ? esc(c.icone) + ' ' : '') + esc(c.nome || 'prévia') + '</span></fieldset>';
+        '<input type="text" data-cf="re" value="' + esc(c.re) + '" placeholder="expressão: liminar|tutela|urgen"><span class="hx hx-' + esc(c.estilo) + '" style="--hc:' + esc(c.cor) + '">' + (E && E.svg ? E.svg(c.icone, 10) : '') + esc(c.nome || 'prévia') + '</span></fieldset>';
     }).join('') + '<div class="ap-eb"><button type="button" class="lnk" data-c-add>+ tipo</button><span><button type="button" class="lnk" data-ap-cancelar>cancelar</button><button type="button" class="btn solid sm" data-ap-gravarcat>Gravar tipos</button></span></div><small class="ap-msg" id="ap-msg"></small></div>';
   }
   function colherCat() {
