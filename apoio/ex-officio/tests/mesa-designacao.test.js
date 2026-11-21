@@ -228,7 +228,7 @@ test('Produtividade: níveis de complexidade (despacho 0,25 · serial 0,5 · pad
 test('Mesa: fluxo em 4 passos, regras obrigatórias antes da proposta e conferência',()=>{
   const pag=read('caput/designacao/index.html'),m=read('caput/motor/assets/js/21-sessoes-equipe.js');
   for(const x of ["['cl','RemNec','José','Vanilda']","if(r.q==='cl')return (x.cl||'')===r.v;",'function passos(du,k,tot,cap)',"'Período e equipe'","'Regras obrigatórias'","'Proposta'","'Conferir e aplicar'",'id="pn-obr"','id="pn-conf"','function painelObr()','function painelConf(P,nAp)','function pend()'])assert.ok(pag.includes(x),x);
-  assert.ok(pag.includes("var fx=fixa(x,'d'),esc_=fx&&livre(fx.nome,'d')?")&&pag.includes("var fc=fixa(x,'c'),e=fc&&livre(fc.nome,'c')?"),'regra (geral ou do assunto) decide antes do escore');
+  assert.ok(pag.includes("var esc_=fx&&livre(fx.nome,'d')?{nome:fx.nome,s:999,why:[['o',fx.por]]}")&&pag.includes("e=fc&&livre(fc.nome,'c')?{nome:fc.nome,s:999,why:[['o',fc.por]]}"),'regra (geral ou do assunto) decide antes do escore');
   for(const x of ['function linhaAssunto(a,L)','class="sec-h"','data-ras=','VIVO.definirRegraAssunto(D.sessao.id,aa,','data-destrava=','var fx=fixa(x,k),trav=!!fx&&v===fx.nome&&!DESTR[x.i+\'|\'+k];'])assert.ok(pag.includes(x),x);
   assert.ok(!pag.includes('class="seg ag"'),'só agrupa por assunto');
   assert.ok(pag.includes("why:[['e','especialista no assunto']]"),'especialista começa selecionado, sem regra fixa');
