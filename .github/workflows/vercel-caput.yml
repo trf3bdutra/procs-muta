@@ -75,6 +75,8 @@ jobs:
           cp apoio/ex-officio/lotes/index.html site/public/amicus/collectio/gc/index.html
           # motor da conformidade da extensão Muta, usado também pelas versões da minuta no Collectio
           cp extensao/conformidade-motor.js site/public/amicus/collectio/conformidade-motor.js
+          # ponte para registrar no Collectio as minutas lidas no editor do PJe (janela aberta pelo PJe, com código da importação)
+          cp apoio/ex-officio/lotes/pje.html site/public/amicus/collectio/pje.html
           cp apoio/modus-operandi/modus-operandi.html site/public/amicus/compendium/index.html
           cp apoio/enciclopedia.json site/api/_enciclopedia.json
           # A aplicação modular precisa manter todos os assets e o motor sob o mesmo prefixo.
