@@ -14,16 +14,19 @@ se vazio, "Mono - Fundamento" com a proposta da triagem. As coleções agrupam o
 A Interlocutória não muda o destino: o processo com urgência pendente registrada na ficha (triagem."Urgência") já
 aparece na coleção, com o destino do mérito que tiver; aqui ele só entra na matriz (grupo).
 Não mexe em: processo com destino já definido (Sessão, Monocrática, Outro destino), em pauta de sessão futura, com
-seleção prévia, com a etiqueta "NÃO MEXER", já julgado (AP5) ou sem autos triados. Votos aptos ficam listados para a
-seleção prévia, que depende de sessão cadastrada no calendário (decisão do gestor).
+seleção prévia, com a etiqueta "NÃO MEXER", já julgado (AP5) ou sem autos triados. Votos aptos (ato de voto sem
+[VALIDAR], triagem conferida, sem pendência de preparo, representação, parecer ou urgência) vão, com --reserva, para o
+banco reserva da seleção prévia: triagem."Seleção Prévia" = "SELECIONADO PREVIAMENTE" sem "Nova sessão de destino"
+(scripts/lotes/colecoes.py monta o lote selecao-reserva). A sessão é escolhida depois, no Caput.
 
-Uso: python3 scripts/triagem/destinos.py [--gravar] [lote ...]
+Uso: python3 scripts/triagem/destinos.py [--gravar [--reserva]] [lote ...]
 """
 import datetime, glob, json, re, sys
 from pathlib import Path
 
 R = Path(__file__).resolve().parents[2]
 GRAVAR = '--gravar' in sys.argv
+RESERVA = '--reserva' in sys.argv
 ARGS = [a for a in sys.argv[1:] if not a.startswith('--')]
 _UTC = datetime.datetime.now(datetime.timezone.utc)
 HOJE_D = (_UTC - datetime.timedelta(hours=4)).date()
@@ -91,7 +94,7 @@ def apto_voto(it):
     if 'Triagem assistida' in str(it.get('especificidades') or ''):
         return False  # extração assistida: só depois da conferência
     a = sem(tri.get('ato') or '')
-    if not re.search(r'\(voto\)|^julgamento d', a) or re.search(r'despacho|intimar|vista|diligenc|ou prejuizo|ou prejudicialidade|monocratica', a):
+    if not re.search(r'\(voto\)|^julgamento d', a) or re.search(r'despacho|intimar|vista|diligenc|ou prejuizo|ou prejudicialidade|monocratica|\[validar|a verificar|triagem pendente', a):
         return False
     pend = ' '.join(it.get('pendencias') or []) if isinstance(it.get('pendencias'), list) else str(it.get('pendencias') or '')
     if re.search(r'preparo|representa|intempest|parecer|urg', sem(pend)):
@@ -199,7 +202,7 @@ for col, xs in COL.items():
     for g in MATRIZ[col]['grupos']:
         n = sum(1 for v in MATRIZ[col]['itens'].values() if v['grupo'] == g['id'])
         print(f'   {g["id"]} ({n}) {g["rotulo"][:90]}')
-print(f'== votos aptos para seleção prévia (sem sessão livre no calendário): {len(VOTOS)}')
+print(f'== votos aptos para a seleção prévia (banco reserva com --reserva): {len(VOTOS)}')
 print(f'== fora (destino, pauta ou etiqueta), com categoria: {len(PULADOS)}')
 from collections import Counter
 print('   ', Counter(m.split(':')[0].split(' de ')[0] for _, _, m in PULADOS))
@@ -229,6 +232,21 @@ if GRAVAR:
             c['Monocrática - Atualizado em'] = HOJE_BR
             r.setdefault('origem', {})['atualizado_em'] = _UTC.strftime('%Y-%m-%dT%H:%M:%SZ')
             n += 1
+    nr = 0
+    if RESERVA:  # votos aptos → banco reserva da seleção prévia (sem sessão)
+        for x in VOTOS:
+            d = dg(x['processo'])
+            r = REG.get(d)
+            if not r:
+                r = {'processo': x['processo'], 'origem': {}, 'triagem': {}, 'producao': {}, 'pauta': {'sessoes': []}}
+                OP['registros'].append(r); REG[d] = r
+            t = r.setdefault('triagem', {}); pa = r.setdefault('pauta', {'sessoes': []})
+            if t.get('Seleção Prévia') or (r.get('producao') or {}).get('Destino'):
+                continue
+            t['Seleção Prévia'] = 'SELECIONADO PREVIAMENTE'
+            pa['Nova sessão de destino'] = ''
+            r.setdefault('origem', {})['atualizado_em'] = _UTC.strftime('%Y-%m-%dT%H:%M:%SZ')
+            nr += 1
     OP['atualizado_em'] = _UTC.strftime('%Y-%m-%dT%H:%M:%SZ')
     (R / 'acervo/operacional.json').write_text(json.dumps(OP, ensure_ascii=False, indent=1) + '\n', encoding='utf-8')
     (R / 'acervo/matrizes').mkdir(exist_ok=True)

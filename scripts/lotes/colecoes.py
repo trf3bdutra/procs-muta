@@ -9,6 +9,9 @@
    "SELECIONADO PREVIAMENTE" com aquela "Nova sessão de destino" (acervo/operacional.json); quem sai da seleção vai
    para lote.retirados, com o que já foi registrado. Quando a pauta oficial entra (acervo/sessoes/AAAA-MM-DD.json com
    itens), o lote de seleção é arquivado: some da coleção e dá lugar à pauta da sessão (matriz pauta-AAAA-MM-DD).
+   Banco reserva: o processo "SELECIONADO PREVIAMENTE" sem "Nova sessão de destino" (seleção sem sessão definida) fica
+   no lote 'selecao-reserva' (tipo 'selecao', sem sessão), agrupado pela série ou pelo assunto da triagem; ao receber
+   uma sessão, sai da reserva e entra na seleção daquela sessão.
 3. Índice acervo/lotes/colecoes.json (pautas, triagem, avulsos, seleção prévia), lido pela triagem do Caput.
 
 Nada que a equipe registrou num processo é apagado. Pode rodar de novo.
@@ -99,13 +102,15 @@ if ESC.get('escaninhos') and not ESC.get('migrado'):
 
 # 2. seleção prévia por sessão futura
 CAL = (ler(R / 'acervo/sessoes/calendario.json', {}) or {}).get('sessoes', [])
-selecionados = {}
+selecionados, reserva = {}, []
 for k, r in OP.items():
     if str((r.get('triagem') or {}).get('Seleção Prévia') or '').upper() == 'SELECIONADO PREVIAMENTE':
         d = str((r.get('pauta') or {}).get('Nova sessão de destino') or '').strip()
         m = re.match(r'^(\d{2})/(\d{2})/(\d{4})$', d)
         if m:
             selecionados.setdefault(f'{m.group(3)}-{m.group(2)}-{m.group(1)}', []).append(r.get('processo'))
+        elif not d or re.match(r'^(banco )?reserva$', d, re.I):
+            reserva.append(r.get('processo'))
 for s in CAL:
     data = s.get('date') or ''
     if not re.match(r'^\d{4}-\d{2}-\d{2}$', data):
@@ -132,6 +137,56 @@ for s in CAL:
     if alt:
         L['atualizado_em'] = HOJE; grava(p, L)
 
+# 2b. banco reserva: seleção prévia sem sessão definida
+def triagem_de():
+    """processo → (rótulo do grupo, item da triagem): a série entre lotes primeiro; senão o grupo do lote de triagem ou o assunto"""
+    out = {}
+    arqs = sorted(glob.glob(str(R / 'acervo/lotes/adp-*.json')), key=lambda p: (0 if '/adp-serie-' in p else 1, p))
+    for p in arqs:
+        L = ler(p, {}) or {}
+        gm = {g.get('id'): g.get('rotulo', '') for g in L.get('grupos') or []}
+        serie = re.sub(r'^Série · ', '', L.get('titulo') or '') if '/adp-serie-' in p else ''
+        for it in L.get('itens') or []:
+            k = dg(it.get('processo'))
+            if k in out or not it.get('tipo_caso'):
+                continue
+            rot = gm.get(it.get('grupo')) or ''
+            rot = (serie + (' · ' + rot if rot and len(gm) > 1 else '')) if serie else (rot or str(it.get('assunto') or 'Outros'))
+            out[k] = (rot[:120], it)
+    return out
+
+
+RP = R / 'acervo/lotes/selecao-reserva.json'
+LR = ler(RP)
+if reserva or LR:
+    if not LR:
+        LR = lote_novo('selecao-reserva', 'selecao', 'Seleção prévia · banco reserva', origem='caput', colecao='selecao-previa', sessoes=[],
+                       reserva=True, descricao='Processos selecionados previamente na triagem do Caput, ainda sem sessão definida (banco reserva). '
+                       'Ao receber a sessão, saem daqui e entram na seleção prévia dela.')
+        alt = True
+    else:
+        alt = False
+    alt = sincroniza(LR, reserva) or alt
+    TR = triagem_de() if LR.get('itens') else {}
+    gid = {g.get('rotulo'): g.get('id') for g in LR.get('grupos') or []}
+    for it in LR.get('itens') or []:
+        t = TR.get(dg(it.get('processo')))
+        if not t:
+            continue
+        rot, src = t
+        for c in ('tipo_caso', 'assunto_detalhado', 'resultado', 'observacao'):
+            if not it.get(c) and src.get(c):
+                it[c] = src[c]; alt = True
+        if not it.get('pendencias') and src.get('pendencias'):
+            it['pendencias'] = list(src['pendencias']); alt = True
+        if not it.get('grupo'):
+            if rot not in gid:
+                gid[rot] = 'R' + str(len(gid) + 1)
+                LR.setdefault('grupos', []).append({'id': gid[rot], 'rotulo': rot, 'cor': '', 'resultado': '', 'modelo': ''})
+            it['grupo'] = gid[rot]; alt = True
+    if alt:
+        LR['atualizado_em'] = HOJE; grava(RP, LR)
+
 # 3. índice das coleções
 col = {'pautas': [], 'triagem': [], 'avulsos': [], 'selecao-previa': []}
 for p in sorted(glob.glob(str(R / 'acervo/lotes/*.json'))):
@@ -144,7 +199,10 @@ for p in sorted(glob.glob(str(R / 'acervo/lotes/*.json'))):
     t = L.get('tipo')
     if t == 'selecao':
         if not L.get('arquivado'):
-            col['selecao-previa'].append({'id': L['id'], 'titulo': L.get('titulo'), 'sessao': (L.get('sessoes') or [''])[0], 'n': n})
+            e = {'id': L['id'], 'titulo': L.get('titulo'), 'sessao': (L.get('sessoes') or [''])[0], 'n': n}
+            if L.get('reserva') or not L.get('sessoes'):
+                e['reserva'] = True
+            col['selecao-previa'].append(e)
     elif t == 'triagem':
         col['triagem'].append({'id': L['id'], 'titulo': L.get('titulo'), 'tarefa': L.get('tarefa', ''), 'n': n})
     elif t == 'pauta' and len(L.get('sessoes') or []) == 1:
@@ -157,7 +215,7 @@ for s in CAL:
     if len((ler(R / 'acervo/sessoes' / (data + '.json'), {}) or {}).get('itens') or []):
         col['pautas'].append({'id': 'pauta-' + data, 'titulo': 'Pauta · ' + br(data), 'sessao': data, 'matriz': True,
                               'n': len(ler(R / 'acervo/sessoes' / (data + '.json'), {}).get('itens'))})
-col['selecao-previa'].sort(key=lambda x: x['sessao']); col['pautas'].sort(key=lambda x: x['sessao'], reverse=True)
+col['selecao-previa'].sort(key=lambda x: (bool(x.get('reserva')), x['sessao'])); col['pautas'].sort(key=lambda x: x['sessao'], reverse=True)
 IDX_P = R / 'acervo/lotes/colecoes.json'
 idx = {'schema': 'gabcmt.colecoes', 'versao': 1, 'colecoes': col}
 antes = ler(IDX_P, {}) or {}

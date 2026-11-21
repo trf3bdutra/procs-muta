@@ -66,6 +66,31 @@ test('coleções: seleção prévia por sessão futura, retirados e arquivamento
   assert.ok(I.colecoes.pautas.some(x => x.id === 'pauta-2099-01-10'));
 });
 
+test('coleções: banco reserva (seleção prévia sem sessão) agrupado pela triagem; ao ganhar sessão, sai da reserva', () => {
+  const T = acervo();
+  const sel = (cnj, d) => ({ processo: cnj, origem: {}, triagem: { 'Seleção Prévia': 'SELECIONADO PREVIAMENTE' }, producao: {}, pauta: { sessoes: [], 'Nova sessão de destino': d } });
+  poe(T, 'acervo/operacional.json', { registros: [sel(A, ''), sel(B, ''), sel(C, '10/01/2099')] });
+  poe(T, 'acervo/sessoes/calendario.json', { sessoes: [{ date: '2099-01-10' }] });
+  poe(T, 'acervo/lotes/adp-serie-x.json', { id: 'adp-serie-x', tipo: 'triagem', titulo: 'Série · Militar', grupos: [{ id: 'M1', rotulo: 'Reforma' }],
+    itens: [{ processo: A, grupo: 'M1', tipo_caso: 'Apelação militar', resultado: 'Voto' }] });
+  poe(T, 'acervo/lotes/adp-ap-1s.json', { id: 'adp-ap-1s', tipo: 'triagem', titulo: 'Apelações', grupos: [],
+    itens: [{ processo: A, tipo_caso: 'outro' }, { processo: B, assunto: 'FIES', tipo_caso: 'Apelação FIES' }] });
+  roda(T);
+  const L = le(T, 'acervo/lotes/selecao-reserva.json');
+  assert.equal(L.tipo, 'selecao'); assert.equal(L.colecao, 'selecao-previa'); assert.deepEqual(L.sessoes, []); assert.equal(L.reserva, true);
+  assert.deepEqual(L.itens.map(i => i.processo), [A, B]);
+  assert.equal(L.itens[0].tipo_caso, 'Apelação militar', 'a série entre lotes vem antes do lote de origem');
+  assert.deepEqual(L.grupos.map(g => g.rotulo), ['Militar', 'FIES']);
+  let I = le(T, 'acervo/lotes/colecoes.json');
+  assert.deepEqual(I.colecoes['selecao-previa'].map(x => [x.id, !!x.reserva]), [['selecao-2099-01-10', false], ['selecao-reserva', true]], 'a reserva vem depois das sessões');
+  /* A recebe sessão: sai da reserva (vai para retirados) e entra na seleção da sessão */
+  poe(T, 'acervo/operacional.json', { registros: [sel(A, '10/01/2099'), sel(B, ''), sel(C, '10/01/2099')] });
+  roda(T);
+  assert.deepEqual(le(T, 'acervo/lotes/selecao-reserva.json').itens.map(i => i.processo), [B]);
+  assert.deepEqual(le(T, 'acervo/lotes/selecao-2099-01-10.json').itens.map(i => i.processo).sort(), [A, C].sort());
+  assert.match(roda(T), /nada a mudar/, 'segunda rodada não muda nada');
+});
+
 test('coleções: Caput, Collectio, alimentar e fluxo usam a mesma fonte', () => {
   const tri = read('caput/triagem/index.html');
   assert.ok(tri.includes("const ESC_IDX = 'acervo/lotes/colecoes.json'"), 'Caput lê o índice das coleções');

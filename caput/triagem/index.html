@@ -2046,7 +2046,8 @@ const FE = { q: '', lim: 100, ver: 'lista' };
 
 
 function destinoAtual(o) { const r = o.row;
-  if (r['Seleção Prévia'] === 'SELECIONADO PREVIAMENTE' && r['Sessão Destino']) return { k: 'pauta', t: 'pauta ' + String(r['Sessão Destino']).slice(0, 5), s: r['Sessão Destino'] };
+  if (r['Seleção Prévia'] === 'SELECIONADO PREVIAMENTE' && /^\d{2}\/\d{2}\/\d{4}$/.test(String(r['Sessão Destino'] || '').trim())) return { k: 'pauta', t: 'pauta ' + String(r['Sessão Destino']).slice(0, 5), s: r['Sessão Destino'] };
+  if (r['Seleção Prévia'] === 'SELECIONADO PREVIAMENTE') return { k: 'pauta', t: 'banco reserva', s: '' };
   if (r.Destino === 'Monocrática') return { k: 'mono', t: 'monocrática' };
   return { k: '', t: 'sem destino' }; }
 function proc(f, r) {
@@ -3006,7 +3007,7 @@ async function carregarIdxLotes() {
 }
 function gruposLotes(sub) {
   const C = _triIdx || {}, ent = (x) => (typeof x === 'string' ? { id: x, titulo: x } : x);
-  if (sub === 'selecao') return [['Seleção prévia por sessão', (C['selecao-previa'] || []).map(ent)]];
+  if (sub === 'selecao') { const sp = (C['selecao-previa'] || []).map(ent); return [['Seleção prévia por sessão', sp.filter((x) => !x.reserva)], ['Banco reserva (sem sessão)', sp.filter((x) => x.reserva)]].filter((g) => g[1].length); }
   const tri = (C.triagem || []).map(ent);
   return [['Tarefas do PJe', tri.filter((x) => !x.serie && !/^adp-serie-/.test(x.id))], ['Séries', tri.filter((x) => x.serie || /^adp-serie-/.test(x.id))],
     ['Escaninhos', (C.avulsos || []).map(ent).filter((x) => x.escaninho)]].filter((g) => g[1].length);
@@ -3513,7 +3514,7 @@ D.addEventListener('change', (e) => { const t = e.target;
     L.filter((o) => fn(o) === t.dataset.selgrp).forEach((o) => { if (t.checked) SEL.add(o.d); else SEL.delete(o.d); }); render(); return; }
   if (t.id === 'r-lc') { RODA['r-lc'] = t.value; RODA['r-lv'] = ''; pintaRodape(); return; }
   if (t.id === 'r-lv') { RODA['r-lv'] = t.value; return; }
-  if (t.id === 'r-ses' ) { RODA[t.id] = t.value; } });
+  if (t.id === 'r-ses' ) { RODA[t.id] = t.value; pintaRodape(); } });
 function fecharPops() { $$('.pop').forEach((p) => p.remove()); CP = null; $$('[aria-expanded="true"]#bt-crit, [aria-expanded="true"]#bt-exp').forEach((b) => b.setAttribute('aria-expanded', 'false')); }
 
 /* ---------- exportar ---------- */
@@ -3708,7 +3709,7 @@ let _rodRaf = 0;
 new MutationObserver(() => { if (_rodRaf) return; _rodRaf = requestAnimationFrame(() => { _rodRaf = 0; docarRodape(); }); }).observe(D.body, { childList: true, subtree: true });
 function pintaRodape() { const r = rodEl(); if (!PRONTO || !abaTriagem()) { r.hidden = true; D.body.classList.remove('rod-min'); return; } r.hidden = false;
   const L = ABA === 'fila' ? FILA : [], n = SEL.size, S = sessoes();
-  if (!RODA['r-ses'] || !S.some((s) => s.data === RODA['r-ses'])) RODA['r-ses'] = S[0] ? S[0].data : '';
+  if (!RODA['r-ses'] || (RODA['r-ses'] !== 'reserva' && !S.some((s) => s.data === RODA['r-ses']))) RODA['r-ses'] = S[0] ? S[0].data : 'reserva';
   const dis = n ? '' : ' disabled';
   const rMin = ROD_MIN && !r.classList.contains('doca');
   if (r.classList.contains('doca') && !n) { r.classList.add('off'); r.classList.remove('min'); D.body.classList.remove('rod-min');
@@ -3716,7 +3717,7 @@ function pintaRodape() { const r = rodEl(); if (!PRONTO || !abaTriagem()) { r.hi
   r.classList.toggle('off', !n); r.classList.toggle('min', rMin); D.body.classList.toggle('rod-min', rMin);
   if (rMin) { r.innerHTML = '<div class="rmin"><div class="sel"><b>' + nf(n) + '</b><span style="font-size:13px;opacity:.85">selecionado(s)</span>' + (L.length ? '<button type="button" class="lk" data-r="todos">marcar os ' + nf(L.length) + ' filtrados</button>' : '') + (n ? '<button type="button" class="lk cl" data-r="limpar">limpar</button>' : '') + '</div><span style="font-size:12.5px;color:var(--m);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + (n ? 'Pautar ou julgar por monocrática: abra as ações' : 'Marque processos nas listas para pautar ou julgar por monocrática') + '</span><span style="flex:1"></span>' + (DESF.length ? '<button type="button" class="btn sm" data-r="desfazer" title="' + esc('Desfazer: ' + DESF[DESF.length - 1].rot) + '">Desfazer última</button>' : '') + '</div><button type="button" class="tog" data-r="rodmax" aria-expanded="false">Ações de triagem ▴</button>'; return; }
   r.innerHTML = '<button type="button" class="tog cheio" data-r="rodmin" aria-expanded="true" title="Minimizar o rodapé">minimizar ▾</button><div class="sel"><span style="font-size:13px;opacity:.8">Selecionados</span><b>' + nf(n) + '</b><span style="display:flex;gap:10px;flex-wrap:wrap">' + (L.length ? '<button type="button" class="lk" data-r="todos">marcar os ' + nf(L.length) + ' filtrados</button>' : '<span style="font-size:12px;color:#cfe0dc">marque nas listas</span>') + (n ? '<button type="button" class="lk cl" data-r="limpar">limpar</button>' : '') + '</span></div>' +
-    '<div class="ac"><span class="k" style="color:var(--ok)">Pauta</span><div class="lin"><select id="r-ses" aria-label="Sessão"' + (S.length ? '' : ' disabled') + '>' + (S.length ? S.map((s) => '<option value="' + s.data + '"' + (s.data === RODA['r-ses'] ? ' selected' : '') + '>Sessão de ' + nomeSes(s) + ' · ' + nf((s.itens || []).length || (s.previa || []).length) + (s.itens && s.itens.length ? ' itens' : ' na pré-pauta') + '</option>').join('') : '<option>nenhuma sessão futura</option>') + '</select><button type="button" class="btn" style="background:var(--v2);border-color:var(--v2);color:#fff" data-r="pautar"' + (S.length ? dis : ' disabled') + '>Pautar</button></div><small>entra na seleção prévia da sessão, na página Pautas</small></div>' +
+    '<div class="ac"><span class="k" style="color:var(--ok)">Pauta</span><div class="lin"><select id="r-ses" aria-label="Sessão">' + S.map((s) => '<option value="' + s.data + '"' + (s.data === RODA['r-ses'] ? ' selected' : '') + '>Sessão de ' + nomeSes(s) + ' · ' + nf((s.itens || []).length || (s.previa || []).length) + (s.itens && s.itens.length ? ' itens' : ' na pré-pauta') + '</option>').join('') + '<option value="reserva"' + (RODA['r-ses'] === 'reserva' ? ' selected' : '') + '>Banco reserva (sem sessão)</option></select><button type="button" class="btn" style="background:var(--v2);border-color:var(--v2);color:#fff" data-r="pautar"' + dis + '>' + (RODA['r-ses'] === 'reserva' ? 'Reservar' : 'Pautar') + '</button></div><small>' + (RODA['r-ses'] === 'reserva' ? 'seleção prévia sem sessão: fica no banco reserva até ganhar sessão' : 'entra na seleção prévia da sessão, na página Pautas') + '</small></div>' +
     '<div class="ac"><span class="k" style="color:var(--az)">Monocrática</span><button type="button" class="btn" style="background:var(--az);border-color:var(--az);color:#fff" data-r="mono"' + dis + '>Julgar por monocrática</button><small>vai para as Monocráticas da Ex Officio</small></div>' +
     '<div class="ac"><span class="k" style="color:var(--g)">Editar em lote</span><div class="lin">' + loteCtl() + '<button type="button" class="btn" style="background:var(--v);border-color:var(--v);color:#fff" data-r="lote"' + dis + '>Aplicar</button></div><small>grava o campo na ficha de todos os marcados, num só registro</small></div>' +
     '<div class="ac" style="border-right:0;gap:5px"><button type="button" class="btn sm" data-r="desfazer"' + (DESF.length ? '' : ' disabled') + ' title="' + esc(DESF.length ? 'Desfazer: ' + DESF[DESF.length - 1].rot : '') + '">Desfazer última</button><button type="button" class="btn sm" style="color:var(--r);border-color:var(--r2)" data-r="limpardest"' + dis + '>Limpar destino</button></div>'; }
@@ -3725,6 +3726,7 @@ rodEl().addEventListener('click', (e) => { const b = e.target.closest('[data-r]'
   if (k === 'todos') { FILA.forEach((o) => SEL.add(o.d)); render(); return; }
   if (k === 'limpar') { SEL.clear(); render(); return; }
   if (k === 'desfazer') { desfazer(); return; }
+  if (k === 'pautar' && RODA['r-ses'] === 'reserva') { acao('Banco reserva da seleção prévia', ds, () => ({ sp: 'SELECIONADO PREVIAMENTE', sd: '', mono: '' })); return; }
   if (k === 'pautar') { const ss = sessoes().find((s) => s.data === RODA['r-ses']); if (!ss) return; const nm = nomeSes(ss); acao('Pautado na sessão de ' + nm, ds, () => ({ sp: 'SELECIONADO PREVIAMENTE', sd: nm, mono: '' })); return; }
   if (k === 'lote') { aplicarLote(ds); return; }
   if (k === 'mono') { acao('Julgar por monocrática', ds, () => ({ sp: '', sd: '', mono: 'Monocrática' })); return; }
