@@ -90,6 +90,13 @@ button.li{cursor:pointer}button.li:hover{background:#f6f4ee}
 .leg{display:grid;grid-template-columns:1fr 1fr;gap:4px 18px;font-size:12.5px}.leg i{display:inline-block;width:9px;height:9px;margin-right:6px}
 /* Fila */
 .fl-cab{display:flex;flex-direction:column;gap:10px;padding:14px 0 12px;border-bottom:1px solid var(--b)}
+/* busca e filtros como cabeçalho do painel Acervo filtrado: um painel só (cabeçalho bege, critérios, acervo filtrado) */
+.fl-cab{gap:0;padding:0;margin:14px 0 12px;border:1px solid var(--b);border-radius:8px;background:var(--p)}
+.fl-cab>.fl-l1{padding:9px 12px;background:var(--bg);border-bottom:1px solid var(--b);border-radius:8px 8px 0 0;gap:6px}
+.fl-cab .busca{flex:1 1 220px;min-width:180px}
+.fl-cab>.chips{padding:8px 14px;border-bottom:1px solid var(--l)}
+.fl-cab>.pjf,.fl-cab>p{margin:0!important;padding:10px 14px;border-bottom:1px solid var(--l)}
+.fl-cab>.acf{border:0;border-radius:0;background:transparent}
 .fl-l1{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
 .seg{display:flex;border:1px solid var(--b2);border-radius:6px;overflow:hidden;height:34px;flex:none}
 .seg button{border:0;border-left:1px solid var(--b);background:var(--w);font:600 12.5px Figtree,sans-serif;color:var(--tx);padding:0 11px;cursor:pointer}
