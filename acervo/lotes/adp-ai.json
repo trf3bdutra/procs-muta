@@ -21331,8 +21331,8 @@
    "exequente": "INSTITUTO NACIONAL DE COLONIZACAO E REFORMA AGRARIA - INCRA",
    "executado": "MUNICIPIO DE CAMPO GRANDE",
    "assunto": "IPTU/ Imposto Predial e Territorial Urbano",
-   "grupo": null,
-   "tipo_caso": "",
+   "grupo": "g4",
+   "tipo_caso": "Execução fiscal · IPTU municipal · imóvel em território quilombola (Tia Eva/Vila São Benedito) · exceção de pré-executividade do INCRA",
    "resultado": "Ato a proferir: julgamento do agravo de instrumento (voto), com prioridade pelo tempo de tramitação [VALIDAR vista ao MPF]",
    "modelo": "",
    "variacoes": [],
@@ -21401,6 +21401,89 @@
     "outros": "Despacho ID 335656478 (09/09/2025, Gab. 20, Des. Fed. Marisa Santos): tutela recursal postergada para após a contraminuta. Despacho ID 342285550 (06/11/2025): consulta sobre o interesse no julgamento; INCRA reafirmou o interesse (ID 343862147, 18/11/2025). Redistribuição à Turma Regional de MS (decisão ID 369879816, 30/04/2026).",
     "representacao": "Agravante: INCRA (PGF). Agravado: Município de Campo Grande (Denir de Souza Nantes).",
     "preparo": "INCRA isento."
+   },
+   "assunto_detalhado": "Execução fiscal — IPTU sobre imóvel em território quilombola; exceção de pré-executividade do INCRA",
+   "especificidades": "IPTU de 1997 e 1998 (CDAs 003443/02 a 003446/02), lançado em nome de Otávio Gomes de Araújo · Território quilombola Tia Eva/Vila São Benedito; processo administrativo de titulação 54290.003453/2007-83 · Tutela recursal pendente desde 2023 (postergada em 09/09/2025) · Município sem contraminuta · Agravo distribuído em 30/03/2023",
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "assuntoDet": "Execução fiscal — IPTU sobre imóvel em território quilombola; exceção de pré-executividade do INCRA",
+     "subassuntos": "Execução fiscal · IPTU municipal · imóvel em território quilombola (Tia Eva/Vila São Benedito) · exceção de pré-executividade do INCRA",
+     "sintese": "",
+     "questoes": "1) Legitimidade e responsabilidade do INCRA pelo IPTU de imóvel em território quilombola em titulação; 2) cabimento da exceção de pré-executividade; 3) tutela recursal pendente; 4) intervenção do MPF.",
+     "rel": {
+      "razoes": "",
+      "contrarrazoes": ""
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "274548289",
+      "juizo": "6ª Vara Federal de Campo Grande",
+      "dispositivo": "Rejeitou a exceção de pré-executividade do INCRA."
+     },
+     "ai": {
+      "hip": "Execução / cumprimento",
+      "efeito": "Pendente de análise",
+      "id": "274548289"
+     },
+     "adm": {
+      "prot": "2023-03-30",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Outra",
+       "tipo": "Agravo de instrumento",
+       "id": "272091130",
+       "contra": "Não apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "272091130",
+       "data": "2023-03-30"
+      },
+      {
+       "desc": "Despacho que postergou a tutela",
+       "id": "335656478",
+       "data": "2025-09-09"
+      },
+      {
+       "desc": "Despacho sobre interesse no julgamento",
+       "id": "342285550",
+       "data": "2025-11-06"
+      },
+      {
+       "desc": "INCRA reafirma interesse",
+       "id": "343862147",
+       "data": "2025-11-18"
+      },
+      {
+       "desc": "Decisão de redistribuição",
+       "id": "369879816",
+       "data": "2026-04-30"
+      }
+     ],
+     "pendencias": "Avaliar vista ao MPF; tutela recursal pendente",
+     "especificidades": "IPTU de 1997 e 1998 (CDAs 003443/02 a 003446/02), lançado em nome de Otávio Gomes de Araújo · Território quilombola Tia Eva/Vila São Benedito; processo administrativo de titulação 54290.003453/2007-83 · Tutela recursal pendente desde 2023 (postergada em 09/09/2025) · Município sem contraminuta · Agravo distribuído em 30/03/2023"
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (DPU/ente público)",
+     "prelim": "Sem preliminares",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "",
+     "urgTipo": "Antecipação da tutela recursal",
+     "urgSit": "Pendente · não apreciada",
+     "urgPedido": "2023-03-30",
+     "urgObs": "Postergada em 09/09/2025 (ID 335656478) para após a contraminuta; o Município não respondeu (prazo decorrido em 03/11/2025)."
+    }
    }
   },
   {
