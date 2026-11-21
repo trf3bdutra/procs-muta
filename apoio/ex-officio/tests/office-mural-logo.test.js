@@ -276,10 +276,10 @@ test('Mural: Hoje/Semana integrado à lateral do calendário (abas em linha, se�
   assert.match(h, /#mu-host \.cg-cal \.cc-esq \.cc-meta,#mu-host \.cg-cal \.cc-esq \.cc-td\{/);
 });
 
-test('Mural: cabeçalho do calendário numa faixa baixa, com a cor da borda como fundo', () => {
+test('Mural: cabeçalho do calendário no padrão da Pauta, com a cor da borda no contorno', () => {
   const fs = require('fs'), path = require('path');
   const h = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
-  assert.match(h, /#mu-host \.cg-cal \.cc-h\{background:var\(--l\)!important;border-bottom:0!important;padding:3px 10px 3px 12px!important/);
+  assert.match(h, /#mu-host \.cg-cal \.cc-h\{background:#fbfaf5!important;border-bottom:1px solid var\(--l\)!important/);
   assert.match(h, /#mu-host>#hc-cal-full\{padding:0!important;overflow:hidden;border-color:var\(--l\)!important\}/);
 });
 
@@ -320,14 +320,27 @@ test('Mural: sem a opção de recolher o calendário', () => {
   assert.match(h, /localStorage\.setItem\('cc_min','false'\)/);
 });
 
-test('Mural: rodapé "Feito" fixo na lateral do calendário, com afazeres marcados e registros do dia', () => {
+test('Mural: rodapé "Feito" na lateral do calendário, recolhido por padrão, com afazeres marcados e registros do dia', () => {
   const fs = require('fs'), path = require('path');
   const lib = fs.readFileSync(path.join(__dirname, '../../../caput/motor/assets/js/11-calendario.js'), 'utf8');
   const html = fs.readFileSync(path.join(__dirname, '../index.html'), 'utf8');
-  assert.match(lib, /class="cc-fe2"><div class="cc-td-t">Feito/);
+  assert.match(lib, /class="cc-fe2\$\{st\.fe\?' on':''\}"><button type="button" class="cc-td-t cc-fe-t" data-a="feito"/);
+  assert.match(lib, /k==='feito'\)\{st\.fe=!st\.fe;\}/);
   assert.match(lib, /afazeres\(dia\)\.filter\(x=>fz\[x\.id\]\)/);
   assert.match(html, /function calFeito\(D\)/);
   assert.match(html, /feitoHtml:ME\.feito\?ME\.feito\.html:null/);
   assert.doesNotMatch(html.slice(html.indexOf('function calHoje'), html.indexOf('function calFeito')), /cc-feito/);
   assert.doesNotMatch(lib.slice(lib.indexOf('cc-fe2')-200, lib.indexOf('cc-fe2')+600), /<details/);
+});
+
+test('Calendário: voltar para hoje, feriado neutro e cabeçalho no padrão da Pauta', () => {
+  const fs = require('fs'), path = require('path');
+  const lib = fs.readFileSync(path.join(__dirname, '../../../caput/motor/assets/js/11-calendario.js'), 'utf8');
+  const html = fs.readFileSync(path.join(__dirname, '../index.html'), 'utf8');
+  assert.match(lib, /class="cc-volta" data-a="hoje"/);
+  assert.match(lib, /if\(k==='lado-hoje'\)st\.dia=null;/);
+  assert.match(lib, /ex\.titulo\?ex\.titulo\(tit\)/);
+  assert.match(html, /Calendário <em>do gabinete\.<\/em>/);
+  assert.doesNotMatch(html, /\.cg-cal \.cc-fe\{background:#f6ece0/);
+  assert.match(html, /\.lado #sgl,\.lado #ofl\{max-height:360px;overflow-y:auto/);
 });
