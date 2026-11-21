@@ -228,10 +228,37 @@ test('Perfis › Histórico: só o feito, Excel, listar todos e rolagem; Registr
 
 test('Triagem: Acervo filtrado com faixa de cabeçalho e seletor segmentado; Visão geral sobre o bege',()=>{
   const cap=require('fs').readFileSync(require('path').join(__dirname,'../../../caput/triagem/index.html'),'utf8');
-  for(const x of ['<header class="acf-h"><span class="k">Acervo filtrado</span>','.acf .pre{margin-left:auto;display:flex','<div class="acf-b"><div class="acf-n">','.tri-vg{background:transparent!important}','.tri-vg .ch{background:#f4f0e6!important;box-shadow:none!important','.tri-vg .tri-vg-h,.acf-h,.fl-cab>.chips{background:var(--bg) url(','body{background-image:url("data:image/svg+xml'])assert.ok(cap.includes(x),x);
+  for(const x of ['<header class="acf-h"><span class="k">Acervo filtrado</span>','.acf .pre{margin-left:auto;display:flex','<div class="acf-b"><div class="acf-n">','.tri-vg{background:transparent!important}','.tri-vg .ch{background:#f2ede1 url(','.tri-vg .tri-vg-h,.acf-h,.fl-cab>.chips{background:var(--bg) url(','body{background-image:url("data:image/svg+xml'])assert.ok(cap.includes(x),x);
 });
 
 test('Cartões de indicadores no padrão da Visão geral (Chefia, Coordenação, Comunicação, Pautas e mesa); fundo geral mais claro',()=>{
   const cap=require('fs').readFileSync(require('path').join(__dirname,'../../../caput/triagem/index.html'),'utf8');
   for(const x of [':root{--bg:#fcfbf8;','.cg-top .cg-faixa>div,.cwe-kpis>span,.cwe-kpis>button{display:flex;flex-direction:column','box-shadow:inset 0 3px 0 var(--kc)','.kp>div:nth-child(4n+1){--kc:#a57829}'])assert.ok(cap.includes(x),x);
+});
+
+test('Mesa: coluna de capacidade inteira (sem rolagem) e regras de minuta e correção num painel só, acima da lista',()=>{
+  const cap=require('fs').readFileSync(require('path').join(__dirname,'../../../caput/triagem/index.html'),'utf8');
+  for(const x of ['class="cwe-box cwe-rg cwe-rg1${rmin ? \' min\' : \'\'}" slot="regras"','<div class="cwe-rg2">${col(\'d\', \'MINUTA\')}${col(\'c\', \'CORREÇÃO\')}</div>',"sl.name = 'regras'",'.mb.emb .side{position:static!important;align-self:start;max-height:none!important;overflow:visible!important}','cwe-sr1" slot="regras"'])assert.ok(cap.includes(x),x);
+});
+
+test('Mesa: sem "Editar regras" no painel de regras; faixa de seleção dentro do cabeçalho fixo',()=>{
+  const cap=require('fs').readFileSync(require('path').join(__dirname,'../../../caput/triagem/index.html'),'utf8');
+  assert.ok(!cap.includes('data-cwe="cfg-3"'),'sem Editar regras');
+  assert.ok(cap.includes("tp.appendChild(sb);")&&cap.includes('.mb.emb .top>.selbar{order:9;flex:1 0 100%'),'seleção no cabeçalho');
+  assert.ok(cap.includes('<h1>Pautas.</h1><button type="button" class="cwe-pt-n" data-cwe="ses-nova"'),'título da página');
+});
+
+test('Mesa: painel REGRAS NESTA ORDEM recolhível (lembra a escolha)',()=>{
+  const cap=require('fs').readFileSync(require('path').join(__dirname,'../../../caput/triagem/index.html'),'utf8');
+  for(const x of ['data-cwe="rgmin"',"else if (k === 'rgmin')",'.cwe-rg1.min .cwe-rg2,.cwe-rg1.min .h small{display:none}'])assert.ok(cap.includes(x),x);
+});
+
+test('Pautas: seletor de sessões com rolagem, três por vez; assuntos sem regra junto das regras na mesa',()=>{
+  const cap=require('fs').readFileSync(require('path').join(__dirname,'../../../caput/triagem/index.html'),'utf8');
+  for(const x of ['.cwe-nav .cwe-ses{max-height:178px;overflow-y:auto','cwe-sr1" slot="regras"',"::slotted([slot=regras]){margin:0 0 12px}"])assert.ok(cap.includes(x),x);
+});
+
+test('Mesa: capacidade e carga à direita, no padrão da esteira',()=>{
+  const cap=require('fs').readFileSync(require('path').join(__dirname,'../../../caput/triagem/index.html'),'utf8');
+  assert.ok(cap.includes('.mb.emb .lay{grid-template-columns:minmax(0,1fr) 262px!important}.mb.emb .side{order:2}.mb.emb .side{gap:18px!important}.mb.emb .side .card{background:transparent!important;border:0!important;border-top:1px solid #235a55!important'));
 });
