@@ -857,6 +857,7 @@
   /* ---------- 0.34 · liga/desliga o modo HERO na própria lista (selos, sinalizações, sugeridas e redesenho das etiquetas) ----------
      Guarda em muta-prazos (o mesmo do sino › Prazos): selos e etqEstilo juntos. Vale para toda a equipe só neste navegador. */
   function modoDesligado() { var c = ENR.cfg || {}; return c.selos === false && c.etqEstilo === false; }
+  window.MutaModo = { desligado: modoDesligado };
   function limparModo() {
     Array.prototype.forEach.call(document.querySelectorAll('.muta-selos'), function (x) { x.remove(); });
     Array.prototype.forEach.call(document.querySelectorAll('.hero-etq'), function (el) {
@@ -924,7 +925,8 @@
       var el = n.parentElement; if (!el || el.closest('.hcm, .muta-selos, ' + FORA)) continue;
       if (!RX_AS.test(n.nodeValue.replace(/\(\d+\)|\d+\s*$/g, '').trim())) continue;
       /* sobe enquanto o pai ainda é só o título (com contador, ícone) */
-      for (var i = 0; i < 3 && el.parentElement && (el.parentElement.textContent || '').replace(/\s+/g, ' ').trim().length < 70; i++) el = el.parentElement;
+      /* sobe só enquanto o pai tem a altura do próprio título (a barra azul); não sobe até a coluna inteira */
+      for (var i = 0; i < 3 && el.parentElement && (el.parentElement.textContent || '').replace(/\s+/g, ' ').trim().length < 70 && el.parentElement.getBoundingClientRect().height <= Math.max(el.getBoundingClientRect().height + 12, 64); i++) el = el.parentElement;
       /* só o título de uma coluna de verdade: largo e visível (o menu lateral do PJe também diz "Assinaturas", num item estreito) */
       var q = el.getBoundingClientRect(); if (q.width < 160 || q.height < 12) continue;
       var st = getComputedStyle(el); if (st.visibility === 'hidden' || st.display === 'none' || +st.opacity === 0) continue;
@@ -937,9 +939,11 @@
   /* a coluna: o ancestral estreito (até 60% da tela) que fica abaixo do título */
   function colunaDe(h) {
     var vw = window.innerWidth || 1200;
+    /* a coluna é o primeiro ancestral da largura do título que tem mais filhos (o corpo, "Nenhum resultado"); o quadro entra dentro dela, logo abaixo do título */
+    var hw = h.getBoundingClientRect().width;
     for (var e = h.parentElement, i = 0; e && e !== document.body && i < 10; e = e.parentElement, i++) {
-      var q = e.getBoundingClientRect(); if (q.width > vw * 0.62) break;
-      if (q.height > 140 && e.children.length >= 2) return { col: e, depois: filhoQueContem(e, h) };
+      var q = e.getBoundingClientRect(); if (q.width > vw * 0.62 || q.width > hw + 40) break;
+      if (e.children.length >= 2) return { col: e, depois: filhoQueContem(e, h) };
     }
     return { col: null, depois: h };
   }

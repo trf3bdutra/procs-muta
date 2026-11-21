@@ -421,3 +421,14 @@ test('extensão 0.34: botão na lista do PJe liga e desliga o modo HERO (selos e
   assert.match(c, /function botaoModo\(\)/); assert.match(c, /id = 'hero-modo-btn'/); assert.match(c, /function limparModo\(\)/);
   assert.match(c, /\{ selos: liga, etqEstilo: liga \}/); assert.match(c, /if \(modoDesligado\(\)\) \{ limparModo\(\)/);
 });
+
+test('extensão 0.35: painel do usuário do PJe por etapa do fluxo (7 grupos) nas colunas Tarefas e Minhas tarefas', () => {
+  const m = JSON.parse(read('extensao/manifest.json')); assert.ok(m.content_scripts[0].js.includes('tarefas-pje.js'));
+  const t = read('extensao/tarefas-pje.js');
+  ['Assinar e liberar', 'Sessão com prazo', 'Recursos internos', 'Chegadas a examinar', 'Produção e triagem', 'Aguardando sessão', 'Sobrestados', 'Outras tarefas'].forEach(g => assert.ok(t.includes("'" + g + "'"), g));
+  assert.match(t, /it\.alvo\.click\(\)/, 'a linha do HERO clica na linha original do PJe');
+  assert.match(t, /htg-oculto/); assert.match(t, /ver a lista do PJe/); assert.match(t, /window\.MutaModo/);
+  assert.match(read('extensao/conteudo-pje.js'), /window\.MutaModo = \{ desligado: modoDesligado \}/);
+  assert.match(read('extensao/fundo.js'), /'tarefas-pje\.js'\]/);
+  const vm = require('vm'); const ctx = { location: { host: 'x' }, window: {} }; vm.createContext(ctx); vm.runInContext(t, ctx);
+});

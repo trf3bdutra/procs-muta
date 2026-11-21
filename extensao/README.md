@@ -5,6 +5,13 @@ Nome desde a 0.19.3 (antes: Muta). Os identificadores internos (`window.Muta*`, 
 Extensão do Chrome/Edge (Manifest V3) que abre o **Muta** num painel lateral, ao lado dos autos e das tarefas do PJe 2º grau do TRF-3.
 Base: o HTML independente *muta-independente-prontuario-completo* (Prontuário + Acervo).
 
+## O que muda na 0.35 · painel do usuário por etapa do fluxo
+
+- Nas colunas "Tarefas" e "Minhas tarefas" do painel do usuário do PJe, a lista alfabética dá lugar a 7 grupos (desenho "Painel do PJe — reorganização e redesign"): 1 Assinar e liberar, 2 Sessão com prazo, 3 Recursos internos, 4 Chegadas a examinar, 5 Produção e triagem, 6 Aguardando sessão e 7 Sobrestados (6 e 7 recolhidos), e Outras tarefas no fim.
+- O prefixo entre colchetes vira etiqueta (Sessão, Sessão-ED, ED, Ag. Int, SU, Instâncias); cada linha tem barra de volume (laranja nos grupos 1 e 2) e as etiquetas do PJe (APTO, BRUNO, URGENTE).
+- A lista do PJe fica escondida e continua sendo atualizada; clicar numa linha do HERO clica na linha original. "ver a lista do PJe" no pé da coluna volta à lista original (e "agrupar por etapa" volta ao HERO); o botão HERO desligado também devolve a lista.
+- Quadro do Desembargador: entra dentro da coluna Assinaturas, abaixo da barra azul, sem empurrar as outras colunas.
+
 ## O que muda na 0.34 · liga e desliga o modo HERO na lista
 
 - Botão "HERO ligado / desligado" no canto de baixo da lista de tarefas do PJe, acima de "Ocultar a lista". Desligado, somem os selos, as sinalizações e as sugeridas, e as etiquetas voltam ao desenho do PJe. Um clique liga de novo.

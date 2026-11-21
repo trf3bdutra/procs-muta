@@ -14,7 +14,7 @@ function injetarNasAbasAbertas() {
   if (!chrome.scripting || !chrome.tabs) return;
   chrome.tabs.query({ url: ['https://pje2g.trf3.jus.br/*', 'https://frontend-pje.app.trf3.jus.br/*'] }).then(function (abas) {
     (abas || []).forEach(function (t) {
-      chrome.scripting.executeScript({ target: { tabId: t.id, allFrames: true }, files: ['etiquetas.js', 'cmt.js', 'conteudo-pje.js'] }).catch(function () {});
+      chrome.scripting.executeScript({ target: { tabId: t.id, allFrames: true }, files: ['etiquetas.js', 'cmt.js', 'conteudo-pje.js', 'tarefas-pje.js'] }).catch(function () {});
     });
   }).catch(function () {});
 }
