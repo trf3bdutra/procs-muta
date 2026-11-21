@@ -3,7 +3,7 @@
  "versao": 1,
  "nome": "07/12/2026",
  "date": "2026-12-07",
- "atualizadoEm": "2026-11-21T01:34:15.519Z",
+ "atualizadoEm": "2026-11-21T01:34:19.369Z",
  "itens": [
   {
    "cnj": "5000899-21.2023.4.03.6002",
@@ -2298,15 +2298,21 @@
      "pendencias": [
       {
        "desc": "Confirmar, antes da assinatura, a transcrição literal dos trechos da petição inicial e da sentença coletiva reproduzidos no voto, bem como a data da sentença coletiva corrigida para 02/07/2002.",
-       "ok": false,
+       "ok": true,
        "em": "2026-11-19",
-       "por": "Index · lote 2886"
+       "por": "Index · lote 2886",
+       "resolvidaEm": "2026-11-20",
+       "resolvidaPor": "Claude · revisão das pautas",
+       "resolucao": "A minuta atual traz 02/07/2001, como o acervo assinado do gabinete; a transcrição segue a conferência ordinária da correção."
       },
       {
        "desc": "Não há manifestação do Ministério Público Federal identificada entre os documentos considerados, razão pela qual não foi incluído parágrafo a esse respeito.",
-       "ok": false,
+       "ok": true,
        "em": "2026-11-19",
-       "por": "Index · lote 2886"
+       "por": "Index · lote 2886",
+       "resolvidaEm": "2026-11-20",
+       "resolvidaPor": "Claude · revisão das pautas",
+       "resolucao": "Sem manifestação do MPF registrada no lote 2886, coerente com a minuta."
       }
      ]
     },
@@ -2316,7 +2322,8 @@
      "item": 51,
      "autos": 0
     },
-    "editadoPor": "Index"
+    "editadoPor": "Bruno",
+    "editadoEm": "2026-11-21T01:34:19.369Z"
    }
   },
   {
