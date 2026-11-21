@@ -778,7 +778,7 @@ html[data-theme="dark"] #tri-prontuario .tp-s h3{color:#e6e2d6;background:linear
 .cg-head p{font-size:12.8px;color:var(--m2);margin:5px 0 0}
 .cg-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;align-items:start}
 .cg-box{border:1px solid var(--b);background:var(--w);min-width:0}
-.cg-cal{margin-bottom:14px}.cg-cal header{display:flex;align-items:center}.cg-cal-nav{margin-left:auto;display:flex;gap:4px}.cg-cal-nav button{border:1px solid var(--b);background:var(--w);border-radius:6px;padding:1px 9px;font:600 12px Figtree,sans-serif;cursor:pointer;color:var(--tx)}
+.cg-cal{margin-bottom:14px}.cg-cal #cc-cal{margin:0;padding:6px 8px}.cg-cal header{display:flex;align-items:center}.cg-cal-nav{margin-left:auto;display:flex;gap:4px}.cg-cal-nav button{border:1px solid var(--b);background:var(--w);border-radius:6px;padding:1px 9px;font:600 12px Figtree,sans-serif;cursor:pointer;color:var(--tx)}
 .cg-cms{display:grid;grid-template-columns:1fr 1fr;gap:18px;padding:10px 14px}.cg-cm>b{display:block;font:700 14px Figtree,sans-serif;text-transform:capitalize;margin-bottom:6px}
 .cg-cg{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:2px}.cg-cg>i{font:500 10px "JetBrains Mono",monospace;color:var(--m);text-align:center;font-style:normal;padding-bottom:2px}
 .cg-cg>span{min-height:58px;border:1px solid var(--l);background:var(--w);padding:2px 3px;display:flex;flex-direction:column;gap:1px;overflow:hidden}.cg-cg>span em{font:600 11px Figtree,sans-serif;font-style:normal;color:var(--m2)}
@@ -844,6 +844,8 @@ html[data-theme="dark"] #tri-prontuario .tp-s h3{color:#e6e2d6;background:linear
 <script src="/init/assets/js/cmt-ficha.js"></script>
 <script src="/init/assets/js/cmt-ficha-monitor.js"></script>
 <script src="/init/assets/js/regras-gerais.js"></script>
+<link rel="stylesheet" href="/init/motor/assets/css/02-calendario.css">
+<script src="/init/motor/assets/js/11-calendario.js"></script>
 <script>
 (function () {
 'use strict';
@@ -1132,7 +1134,7 @@ function render() {
   const tit = {pautas:'Pautas',coordenacao:'Coordenação',comunicacao:'Comunicação',inteligencia:'Inteligência',chefia:'Chefia'}[ABA] || 'Triagem';
   D.title = 'Caput · ' + tit;
   if (naPauta) { $('#rodape').hidden = true; D.body.classList.remove('rod-min'); try { if (W.CMTPautas) W.CMTPautas.render(); } catch (e) {} return; }
-  if (ABA === 'chefia' || ABA === 'inteligencia') { m.innerHTML = vChefia(); setTimeout(() => { montarChefia(); cgRelSincronizar(); }, 0); }
+  if (ABA === 'chefia' || ABA === 'inteligencia') { m.innerHTML = vChefia(); setTimeout(() => { montarChefia(); cgRelSincronizar(); CAL_SIG = ''; pintaCal(true); }, 0); }
   else if (ABA === 'coordenacao') { m.innerHTML = vCoordenacao(); setTimeout(montarCoord, 0); }
   else if (ABA === 'comunicacao') { m.innerHTML = vComunicacao(); setTimeout(cgComCarregar,0); }
   else if (ABA === 'fila') { m.innerHTML = vFila(); }
@@ -1142,21 +1144,22 @@ function render() {
 
 
 /* Chefia › Calendário: sessões, marcos e dias sem expediente do calendário do gabinete (mesma fonte do motor) */
-let CAL_MES = '';
-function calChefia() {
-  const s = SES(); let st = null; try { st = s && s.estado && s.estado(); } catch (e) {} if (!st || !st.sessoes) return '<p class="cg-status">Calendário carregando…</p>';
-  let ex = {}; try { ex = M().CMTExpediente() || {}; } catch (e) {} const sem = new Set(ex.semExpediente || []), nomes = ex.nomes || {}, ws = ex.diasSemana || [1, 2, 3, 4, 5];
-  const hoje = HOJE, base = CAL_MES || hoje.slice(0, 7), EV = {};
-  const add = (d, t, c, id) => { if (/^\d{4}-\d{2}-\d{2}$/.test(d || '')) (EV[d] = EV[d] || []).push({ t, c, id }); };
-  (st.sessoes || []).forEach((ss) => { const f = ss.fases || {}, b = br(ss.data).slice(0, 5); add(ss.data, 'Sessão' + (ss.itens && ss.itens.length ? ' · ' + ss.itens.length : ''), 's', ss.id); add(f.pauta, 'Peço dia ' + b, 'm', ss.id); add(f.inicio, 'Início ' + b, 'm', ss.id); add(f.minutas, 'Entrega ' + b, 'm', ss.id); add(f.liberacao, 'Liberação ' + b, 'm', ss.id); });
-  const mes = (ym) => { const [y, m] = ym.split('-').map(Number), d1 = new Date(Date.UTC(y, m - 1, 1)), n = new Date(Date.UTC(y, m, 0)).getUTCDate(), off = d1.getUTCDay();
-    let h = '<div class="cg-cm"><b>' + d1.toLocaleDateString('pt-BR', { month: 'long', year: 'numeric', timeZone: 'UTC' }) + '</b><div class="cg-cg">' + ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'].map((x) => '<i>' + x + '</i>').join('') + '<span></span>'.repeat(off);
-    for (let k = 1; k <= n; k++) { const d = ym + '-' + String(k).padStart(2, '0'), w = (off + k - 1) % 7, fe = sem.has(d), fds = ws.indexOf(w) < 0, E = EV[d] || [];
-      h += '<span class="' + [fds ? 'fds' : '', fe ? 'fe' : '', d === hoje ? 'hj' : ''].join(' ') + '" title="' + esc([fe ? (nomes[d] || 'Sem expediente') : ''].concat(E.map((x) => x.t)).filter(Boolean).join(' · ')) + '"><em>' + k + '</em>' + E.map((x) => '<button type="button" class="ev ' + x.c + '" data-cgses="' + esc(x.id) + '">' + esc(x.t) + '</button>').join('') + (fe && !fds ? '<small>' + esc((nomes[d] || 'sem expediente').split(' (')[0]) + '</small>' : '') + '</span>'; }
-    return h + '</div></div>'; };
-  const [y, m] = base.split('-').map(Number), prox = new Date(Date.UTC(y, m, 1)).toISOString().slice(0, 7);
-  return '<div class="cg-cms">' + mes(base) + mes(prox) + '</div><p class="cg-cal-leg"><i class="s"></i>sessão <i class="m"></i>marco <i class="fe"></i>sem expediente · datas em Chefia › Calendário forense</p>'; }
-function pintaCal() { const el = $('#cg-cal'); if (el) el.innerHTML = calChefia(); const fo = $('#cg-forense'); if (fo) fo.innerHTML = calForense(); }
+let CAL_SIG = '', CAL_EL = null;
+function calDados() { const s = SES(); let st = null; try { st = s && s.estado && s.estado(); } catch (e) {} if (!st || !st.sessoes) return null;
+  let ex = {}; try { ex = M().CMTExpediente() || {}; } catch (e) {} const lim = new Date(Date.now() - 90 * 864e5).toISOString().slice(0, 10), prog = {};
+  const sess = st.sessoes.filter((x) => x.data && x.data >= lim).sort((a, b) => a.data.localeCompare(b.data)).map((x) => { const f = x.fases || {}, it = x.itens || [];
+    prog[x.data] = { minutadas: it.filter((i) => i.dataMinuta).length, corrigidas: it.filter((i) => i.dataCorrecao).length, liberadas: it.filter((i) => i.dataLiberacao).length };
+    return { date: x.data, hora: x.hora || '', marcos: { pautarAte: f.pauta || '', inicioPreparacao: f.inicio || '', entregaMinutas: f.minutas || '', liberacao: f.liberacao || '' }, processos: it.length, _id: x.id, cor: x.cor || '' }; });
+  const fer = (ex.semExpediente || []).map((d) => [d, (ex.nomes || {})[d] || 'Sem expediente']);
+  return { sess, prog, fer, rec: ex.recesso || [] }; }
+function pintaCal(forca) { const el = $('#cg-cal'), fo = $('#cg-forense'); if (fo) fo.innerHTML = calForense(); if (!el) return;
+  const Dd = calDados(); if (!Dd || !W.CMTCalendario) { if (!/carregando/.test(el.textContent)) el.innerHTML = '<p class="cg-status">Calendário carregando…</p>'; return; }
+  try { if (!W.CMTAgenda && M() && M().CMTAgenda) W.CMTAgenda = M().CMTAgenda; } catch (e) {}
+  const sig = JSON.stringify([Dd, HOJE]); if (!forca && sig === CAL_SIG && CAL_EL && el.contains(CAL_EL)) return; CAL_SIG = sig;
+  /* elemento novo a cada montagem: o calendário prende os ouvintes no elemento, e montar de novo no mesmo duplicaria os cliques */
+  const novo = D.createElement('div'); novo.id = 'cc-cal'; if (CAL_EL && el.contains(CAL_EL)) CAL_EL.replaceWith(novo); else { el.innerHTML = ''; el.appendChild(novo); } CAL_EL = novo;
+  W.CMTCalendario.montar(CAL_EL, { sessoes: Dd.sess }, { hoje: HOJE, progresso: Dd.prog, feriados: Dd.fer, recesso: Dd.rec,
+    abrir: (dt) => { const x = Dd.sess.find((y) => y.date === dt); if (!x) return; try { sessionStorage.setItem('pt-ses', x._id); } catch (er) {} try { if (W.CMTPautas && W.CMTPautas.settings) W.CMTPautas.settings.sessId = x._id; } catch (er) {} ir('pautas'); } }); }
 /* rodapé do calendário: o calendário forense (expediente, feriados, sessões e julgadores, contagem dos marcos) */
 function calForense() {
   const s = SES(); let st = null; try { st = s && s.estado && s.estado(); } catch (e) {} if (!st || !st.sessoes) return '';
@@ -1176,7 +1179,7 @@ function calForense() {
     '<div><h4>Sessões e julgadores <span>' + fut.length + '</span></h4><ul class="cg-fo-s">' + fut.map((ss) => { const A = aviso(ss); return '<li><button type="button" class="lk" data-cgses="' + esc(ss.id) + '">' + br(ss.data).slice(0, 5) + ' <small>' + wd(ss.data) + '</small></button><span>' + jul(ss) + (A.length ? '<small class="av">⚠ ' + esc(A.join(' · ')) + '</small>' : '') + '</span></li>'; }).join('') + '</ul></div>' +
     '<div><h4>Contagem dos prazos</h4><dl><dt>Dia útil</dt><dd>dia de expediente (' + ((ex.diasSemana || [1, 2, 3, 4, 5]).length === 5 ? 'segunda a sexta' : 'dias marcados') + ') fora das datas sem expediente</dd><dt>Liberação</dt><dd>' + lib + ' dias úteis antes da sessão</dd><dt>Entrega das minutas</dt><dd>1 dia útil antes da liberação, ou quando a capacidade cobre a pauta (' + rit + ' minutas por dia por servidor)</dd><dt>Recesso</dt><dd>' + ((ex.recesso || []).length ? br(ex.recesso[0]) + ' a ' + br(ex.recesso[1]) : '20/12 a 20/01') + ' · prazos suspensos</dd></dl>' +
       '<p class="cg-vz">Liberação e ritmo se ajustam em Coordenação › Regras de produtividade; os marcos de cada sessão, no cartão da sessão em Pautas.</p></div></div>'; }
-D.addEventListener('click', (e) => { const b = e.target.closest('[data-cgcal],[data-cgses],[data-cgfo],[data-cgfx]'); if (!b) return;
+D.addEventListener('click', (e) => { const b = e.target.closest('[data-cgses],[data-cgfo],[data-cgfx]'); if (!b) return;
   if (b.dataset.cgfx) { const s = SES(), X = s && s.semExpediente; if (!X) { toast('O motor ainda está carregando; tente em instantes.', true); return; } const k = b.dataset.cgfx;
     if (k === 'tira') { if (!confirm('Tirar ' + br(b.dataset.d) + ' do calendário? A data volta a contar como dia útil.')) return; X.tira(b.dataset.d); }
     else if (k === 'poe') { const d = ($('#cgfx-d') || {}).value, n = (($('#cgfx-n') || {}).value || '').trim(), t = ($('#cgfx-t') || {}).value; if (!d) { toast('Informe a data.', true); return; } X.poe([d], t, n || t, !/Ponto facultativo|Outro/.test(t)); }
@@ -1184,9 +1187,10 @@ D.addEventListener('click', (e) => { const b = e.target.closest('[data-cgcal],[d
     pintaCal(); Promise.resolve(s.gravar && s.gravar()).then((r) => toast(r && r.ok === false && !r.ocupado ? 'Não gravou: ' + (r.erro || '') : 'Calendário gravado no procs-muta.', !!(r && r.ok === false && !r.ocupado))); return; }
   if (b.dataset.cgfo) { telaMotor(b.dataset.cgfo, () => pintaCal()); return; }
   if (b.dataset.cgses) { const id = b.dataset.cgses; try { sessionStorage.setItem('pt-ses', id); } catch (x) {} try { if (W.CMTPautas && W.CMTPautas.settings) W.CMTPautas.settings.sessId = id; } catch (x) {} ir('pautas'); return; }
-  const v = +b.dataset.cgcal, h = HOJE.slice(0, 7); if (!v) CAL_MES = h; else { const [y, m] = (CAL_MES || h).split('-').map(Number); CAL_MES = new Date(Date.UTC(y, m - 1 + v, 1)).toISOString().slice(0, 7); } pintaCal(); });
+});
 /* o motor chega depois: o calendário se completa sozinho */
-setInterval(() => { const el = $('#cg-cal'), fo = $('#cg-forense'); if ((el && /Calendário carregando/.test(el.textContent)) || (fo && !fo.innerHTML)) pintaCal(); }, 1000);
+/* sessões, marcos ou expediente mudaram (Pautas, motor, outra aba): o calendário se refaz; sem mudança, nada é redesenhado */
+setInterval(() => { if (ABA !== 'chefia' || D.hidden) return; if ($('#cg-cal')) pintaCal(); }, 2000);
 
 /* Novos módulos: preservação das funções anteriores */
 let CG_CHEFIA_ABA='escopo';
@@ -1204,7 +1208,7 @@ function vChefia(){
   return '<div class="wrap cg-chefia"><div class="cg-top"><div><p class="k">Central de gestão</p><h1>Chefia.</h1></div>'+
     '<div class="cg-faixa">'+kpi(nP(ALL.length),'processos na fonte')+kpi(nP(U.length),'em triagem')+kpi(nP(apt),'aptos sem pendência')+kpi(nf(sessoes().length),'sessões futuras')+'</div>'+
     '<div class="cg-acv"><button class="btn pri" data-cg-acervo="1" title="Planilhas do PJe e do Power BI → carga → fonte no GitHub, com complementação pelo DataJud">Importar / atualizar acervo</button></div></div>'+
-    cx('Calendário do gabinete','Sessões, marcos e dias sem expediente','<span class="cg-cal-nav"><button type="button" data-cgcal="-1" aria-label="Mês anterior">‹</button><button type="button" data-cgcal="0">hoje</button><button type="button" data-cgcal="1" aria-label="Próximo mês">›</button></span>','<div id="cg-cal">'+calChefia()+'</div><div id="cg-forense">'+calForense()+'</div>','cg-cal')+
+    cx('Calendário do gabinete','Sessões, marcos, afazeres e dias sem expediente','','<div id="cg-cal"><p class="cg-status">Calendário carregando…</p></div><div id="cg-forense">'+calForense()+'</div>','cg-cal')+
     cx('Regras gerais','Escopo da triagem, destino provável, acervo fonte e etiquetas','','<div id="cg-regras" aria-label="Regras da triagem, acervo e calendário"><p class="cg-status">Carregando regras…</p></div>')+
     vRelatorios()+'</div>';
 }
