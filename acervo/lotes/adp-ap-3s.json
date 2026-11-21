@@ -36,7 +36,43 @@
    "rotulo": "Pendência [VALIDAR]"
   }
  ],
- "grupos": [],
+ "grupos": [
+  {
+   "id": "AP1",
+   "rotulo": "Apelação · Monocrática (artigo 932 do CPC)",
+   "cor": "#2a6a4a",
+   "resultado": "Monocrática conforme paradigma vinculante ou linha consolidada",
+   "modelo": "Monocrática de apelação"
+  },
+  {
+   "id": "AP2",
+   "rotulo": "Apelação · Voto (paradigma a conferir)",
+   "cor": "#6a5a2a",
+   "resultado": "Voto",
+   "modelo": "Sem paradigma direto"
+  },
+  {
+   "id": "AP3",
+   "rotulo": "Apelação · Não conhecimento, deserção ou prejuízo",
+   "cor": "#6a2a2a",
+   "resultado": "Não conheço da apelação / prejudicada",
+   "modelo": "Monocrática"
+  },
+  {
+   "id": "AP4",
+   "rotulo": "Apelação · Conferir antes (diligência, digitalizado, duplicidade, sobrestamento)",
+   "cor": "#2a4a6a",
+   "resultado": "Conferir no PJe",
+   "modelo": "—"
+  },
+  {
+   "id": "AP5",
+   "rotulo": "Apelação · Já julgada: pendência pós-acórdão (implantação, honorários, trânsito, recursos excepcionais)",
+   "cor": "#5a5a5a",
+   "resultado": "Decisão ou despacho sobre a pendência; recursos excepcionais à Vice-Presidência",
+   "modelo": "Decisão/despacho"
+  }
+ ],
  "grupo_outros": {
   "rotulo": "A triar",
   "cor": "#9aa0a8"
