@@ -166,7 +166,7 @@ test('Mesa: tipos mantidos fora dos grupos (META, ED, AgInt) num grupo à parte'
 
 test('Mesa: capacidade e carga mostram quantos processos cada pessoa tem para minutar e para corrigir',()=>{
   const m=require('fs').readFileSync(require('path').join(__dirname,'../../../caput/designacao/index.html'),'utf8');
-  for(const x of ["p/ minutar</b>","p/ corrigir</b>","var ND={},NC={};"])assert.ok(m.includes(x),x);
+  for(const x of ["' designada'","' não minutada'","nm=dz.filter(function(x){return !x.dm;}).length","p/ corrigir</b>","var ND={},NC={};","if(EMBED){var per0=document.querySelector('.per');if(per0)per0.hidden=true;}"])assert.ok(m.includes(x),x);
 });
 
 test('Mesa: indisponível tira a pessoa também dos processos já designados (vão para a proposta) e desmarcar devolve',()=>{
