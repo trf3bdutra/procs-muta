@@ -1,0 +1,1980 @@
+{
+ "schema": "gabcmt.lote",
+ "versao": 1,
+ "tipo": "triagem",
+ "tarefa": "Analisar tipo de decisão a proferir",
+ "origem": "Triagem · séries entre lotes",
+ "id": "adp-serie-medicamentos",
+ "titulo": "Série · Saúde: fornecimento de medicamentos",
+ "descricao": "Triagem: apelações com remessa e agravos sobre medicamentos (Temas 6, 793 e 1.234/STF). Nenhum processo pautado.",
+ "sessoes": [],
+ "filtro": {},
+ "criado_por": "Bruno",
+ "atualizado_em": "2026-11-21",
+ "colunas": [
+  {
+   "id": "URG",
+   "rotulo": "Urgência / liminar pendente"
+  },
+  {
+   "id": "PRI",
+   "rotulo": "Prioridade legal"
+  },
+  {
+   "id": "MONO",
+   "rotulo": "Provável monocrática"
+  },
+  {
+   "id": "SOB",
+   "rotulo": "Sobrestamento"
+  },
+  {
+   "id": "ADM",
+   "rotulo": "Admissibilidade em discussão"
+  },
+  {
+   "id": "VAL",
+   "rotulo": "Pendência [VALIDAR]"
+  },
+  {
+   "id": "ORI",
+   "rotulo": "Conferir a origem (sentença ou perda de objeto)"
+  }
+ ],
+ "grupos": [
+  {
+   "id": "M1",
+   "rotulo": "Apelação e remessa · medicamentos",
+   "cor": "#2f6db5",
+   "resultado": "Voto conforme Temas 6, 793 e 1.234/STF e Súmulas Vinculantes 60 e 61",
+   "modelo": ""
+  },
+  {
+   "id": "M2",
+   "rotulo": "Vosoritida (Voxzogo) · não incorporação pela Conitec",
+   "cor": "#a33b5c",
+   "resultado": "Voto conforme Temas 6 e 1.234/STF e a perícia",
+   "modelo": ""
+  },
+  {
+   "id": "M3",
+   "rotulo": "Agravo · oncológicos",
+   "cor": "#2a6a4a",
+   "resultado": "Voto (agravo da União)",
+   "modelo": ""
+  }
+ ],
+ "grupo_outros": {
+  "rotulo": "A triar",
+  "cor": "#9aa0a8"
+ },
+ "minutas": "acervo/minutas/adp-serie-medicamentos/<processo>.json",
+ "itens": [
+  {
+   "sessao": "",
+   "item": 1,
+   "processo": "5005012-58.2022.4.03.6000",
+   "recurso": "Apelação e remessa necessária",
+   "partes": "UNIÃO FEDERAL x ESTADO DE MATO GROSSO DO SUL",
+   "exequente": "UNIÃO FEDERAL",
+   "executado": "ESTADO DE MATO GROSSO DO SUL",
+   "assunto": "Fornecimento de medicamentos",
+   "assunto_detalhado": "Saúde — fornecimento de dupilumabe (medicamento não incorporado)",
+   "grupo": "M1",
+   "tipo_caso": "Apelação da União e remessa necessária · fornecimento de dupilumabe 300 mg (Dupixent) a criança · condenação solidária da União e do Estado, com ressarcimento de 65% pela União ao Estado · honorários de R$ 10.000,00 · processo vindo da Justiça Estadual",
+   "resultado": "Ato a proferir: apelação da União (ID 339531005) e remessa necessária da sentença ID 339531002; contrarrazões (ID 339531011); MPF pelo provimento da apelação da União (ID 365262522) ‖ Proposta pelos precedentes: Voto: aplicar Temas 6, 793 e 1.234/STF e Súmulas Vinculantes 60 e 61 (requisitos do medicamento não incorporado, competência, custeio e ressarcimento); rever os honorários [VALIDAR resultado à luz do parecer do MPF] [VALIDAR: Requisitos do Tema 6/STF no caso (laudo, CONITEC, registro); Regra de custeio do Tema 1.234/STF; Honorários]",
+   "modelo": "Origem: lote adp-remessas (grupo RA3) · não pautado",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação da União e remessa necessária da sentença que condenou a União e o Estado, solidariamente, a fornecer dupilumabe à criança Victor Hugo Arruda Rosa, com ressarcimento de 65% pela União, e fixou honorários de R$ 10.000,00. A União invoca o Tema 1.234/STF e os requisitos para medicamento não incorporado; o MPF opinou pelo provimento.",
+   "peculiaridades": "",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "",
+    "correcao": "",
+    "situacao": "A minutar"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {
+    "ato": "Julgamento da apelação e da remessa necessária (voto)",
+    "materia": "Saúde — medicamentos",
+    "origem": "Procedimento comum 5005012-58.2022.4.03.6000 (4ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 339531002 (02/04/2025)",
+    "recurso": "apelação de União (ID 339531005, 19/04/2025) · remessa necessária",
+    "preparo": "União: Isenta (ente público)",
+    "monocratica": "Não: aplicação das teses do STF sobre medicamentos a caso concreto",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "União: Isenta (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
+   "ajustes": [],
+   "pendencias": [],
+   "minuta": false,
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 355483684 · 18/02/2026 — …DESPACHO Em atenção ao disposto no art. 178 do Código de Processo Civil, encaminhem-se os autos ao Ministério Público Federal.Após, conclusos.Int.CONSUELO YOSHIDADesembargadora Federal | última peça: Parecer de Mérito (MPF) · ID 365262522 · 08/04/2026 | última movimentação: 09/04/2026 16:55 · Conclusos para decisão · Lote RA3 (saúde) · Temas 6, 793 e 1.234/STF e Súmulas Vinculantes 60 e 61 · MPF pelo provimento da apelação (ID 365262522) · Bloqueios e transferências já feitos no cumprimento da tutela",
+   "classe": "ApelRemNec",
+   "tarefa": "Analisar tipo de decisão a proferir",
+   "etiquetas": "2ª Seção; Fornecimento de medicamentos; PJ/SAF",
+   "chegada": "09/04/2026",
+   "situacao_atual": {
+    "ultima_movimentacao": "09/04/2026 16:55 · Conclusos para decisão",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Despacho · ID 355483684 · 18/02/2026 — …DESPACHO Em atenção ao disposto no art. 178 do Código de Processo Civil, encaminhem-se os autos ao Ministério Público Federal.Após, conclusos.Int.CONSUELO YOSHIDADesembargadora Federal",
+    "ultima_peca": "Parecer de Mérito (MPF) · ID 365262522 · 08/04/2026",
+    "ultima_informacao": "Certidão · ID 339646477 · 16/10/2025",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 355483684 · 18/02/2026 — …DESPACHO Em atenção ao disposto no art. 178 do Código de Processo Civil, encaminhem-se os autos ao Ministério Público Federal.Após, conclusos.Int.CONSUELO YOSHIDADesembargadora Federal | última peça: Parecer de Mérito (MPF) · ID 365262522 · 08/04/2026 | última movimentação: 09/04/2026 16:55 · Conclusos para decisão"
+   },
+   "teor": {
+    "sintese_fatica": "Victor Hugo Arruda Rosa, criança representada pela mãe, pediu dupilumabe contra a União e o Estado de Mato Grosso do Sul. A tutela foi deferida e cumprida com bloqueios de valores; a sentença julgou procedente.",
+    "inicial": "Ação do autor, criança, contra a União e o Estado de Mato Grosso do Sul.",
+    "decisao_recorrida": "Sentença ID 339531002 (02/04/2025): julgou procedente o pedido para condenar a União e o Estado, solidariamente, a fornecer dupilumabe 300 mg conforme receita trimestral, com ressarcimento de 65% pela União se o Estado cumprir; confirmou a tutela; honorários de R$ 10.000,00 rateados (corrigido em embargos, ID 339531008).",
+    "recurso": "União (ID 339531005, 19/04/2025): violação das teses do Tema 1.234/STF (competência e custeio); requisitos para medicamento não incorporado (CONITEC, Tema 6/STF); honorários [VALIDAR].",
+    "resposta": "Contrarrazões do autor (ID 339531011).",
+    "parecer": "MPF ID 365262522: Provimento da apelação da União",
+    "memoriais": "Não consta",
+    "representacao": "Advogado Felipe Accioly de Figueiredo (OAB/MS 15.943).",
+    "preparo": "União: Isenta (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação da União e remessa necessária · fornecimento de dupilumabe 300 mg (Dupixent) a criança · condenação solidária da União e do Estado, com ressarcimento de 65% pela União ao Estado · honorários de R$ 10.000,00 · processo vindo da Justiça Estadual",
+     "sintese": "Victor Hugo Arruda Rosa, criança representada pela mãe, pediu dupilumabe contra a União e o Estado de Mato Grosso do Sul. A tutela foi deferida e cumprida com bloqueios de valores; a sentença julgou procedente.",
+     "questoes": "1) Requisitos para fornecimento de medicamento não incorporado ao SUS (Tema 6/STF; Súmula Vinculante 61); 2) competência e custeio (Tema 1.234/STF; Súmula Vinculante 60); 3) honorários.",
+     "rel": {
+      "razoes": "União (ID 339531005, 19/04/2025): violação das teses do Tema 1.234/STF (competência e custeio); requisitos para medicamento não incorporado (CONITEC, Tema 6/STF); honorários [VALIDAR].",
+      "contrarrazoes": "Contrarrazões do autor (ID 339531011)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "339531002",
+      "juizo": "Procedimento comum 5005012-58.2022.4.03.6000 (4ª Vara Federal de Campo Grande)",
+      "dispositivo": "julgou procedente o pedido para condenar a União e o Estado, solidariamente, a fornecer dupilumabe 300 mg conforme receita trimestral, com ressarcimento de 65% pela União se o Estado cumprir; confirmou a tutela; honorários de R$ 10.000,00 rateados (corrigido em embargos, ID 339531008)."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2018-04-26",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "União",
+       "tipo": "Apelação",
+       "id": "339531005",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "339531002",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: procedência",
+       "id": "339531002",
+       "data": "2025-04-02"
+      },
+      {
+       "desc": "Apelação da União",
+       "id": "339531005",
+       "data": "2025-04-19"
+      },
+      {
+       "desc": "Sentença: embargos do autor acolhidos (honorários)",
+       "id": "339531008",
+       "data": "2025-07-04"
+      },
+      {
+       "desc": "Contrarrazões do autor",
+       "id": "339531011",
+       "data": "2025-10-14"
+      },
+      {
+       "desc": "Parecer do MPF (provimento da apelação)",
+       "id": "365262522",
+       "data": "2026-04-08"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 355483684 · 18/02/2026 — …DESPACHO Em atenção ao disposto no art. 178 do Código de Processo Civil, encaminhem-se os autos ao Ministério Público Federal.Após, conclusos.Int.CONSUELO YOSHIDADesembargadora Federal | última peça: Parecer de Mérito (MPF) · ID 365262522 · 08/04/2026 | última movimentação: 09/04/2026 16:55 · Conclusos para decisão · Lote RA3 (saúde) · Temas 6, 793 e 1.234/STF e Súmulas Vinculantes 60 e 61 · MPF pelo provimento da apelação (ID 365262522) · Bloqueios e transferências já feitos no cumprimento da tutela",
+     "assuntoDet": "Saúde — fornecimento de dupilumabe (medicamento não incorporado)",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Há preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Incapaz (178, II)",
+     "parecer": "Com parecer",
+     "idParecer": "365262522",
+     "parecerSentido": "Provimento da apelação da União"
+    }
+   }
+  },
+  {
+   "sessao": "",
+   "item": 2,
+   "processo": "5005632-70.2022.4.03.6000",
+   "recurso": "Apelação e remessa necessária",
+   "partes": "UNIÃO FEDERAL x HEITOR CORREA RIBEIRO",
+   "exequente": "UNIÃO FEDERAL",
+   "executado": "HEITOR CORREA RIBEIRO",
+   "assunto": "Fornecimento de medicamentos",
+   "assunto_detalhado": "Saúde — fornecimento de canabidiol (produto sem registro como medicamento)",
+   "grupo": "M1",
+   "tipo_caso": "Apelação da União e remessa necessária · fornecimento de canabidiol 200 mg/mL (Prati-Donaduzzi) a criança com epilepsia refratária · obrigação dirigida primeiro à União e subsidiariamente ao Estado e ao Município · tutela cumprida com depósitos e bloqueios",
+   "resultado": "Ato a proferir: apelação da União (ID 336024281) e remessa necessária da sentença ID 336024240, integrada pela rejeição dos embargos (ID 336024263); MPF pelo provimento parcial (ID 336695551); manifestação do Estado (ID 338225093) ‖ Proposta pelos precedentes: Voto: aplicar Temas 6, 793 e 1.234/STF e Súmulas Vinculantes 60 e 61 e o Tema 1.161/STF (produto à base de canabidiol com autorização da ANVISA) [VALIDAR]; rever honorários e contracautelas [VALIDAR: Situação regulatória do produto na ANVISA; Honorários fixados; Contrarrazões]",
+   "modelo": "Origem: lote adp-remessas (grupo RA3) · não pautado",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação da União e remessa necessária da sentença que condenou a União, e subsidiariamente o Estado e o Município, a fornecer canabidiol à criança Heitor Corrêa Ribeiro. A União invoca as Súmulas Vinculantes 60 e 61, a falta de registro na ANVISA e pede redução dos honorários e contracautelas. O MPF opinou pelo provimento parcial.",
+   "peculiaridades": "",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "",
+    "correcao": "",
+    "situacao": "A minutar"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {
+    "ato": "Julgamento da apelação e da remessa necessária (voto)",
+    "materia": "Saúde — medicamentos",
+    "origem": "Procedimento comum 5005632-70.2022.4.03.6000 (2ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 336024240 (03/04/2025)",
+    "recurso": "apelação de União (ID 336024281, 10/07/2025) · remessa necessária",
+    "preparo": "União: Isenta (ente público)",
+    "monocratica": "Não: produto sem registro e teses do STF",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "União: Isenta (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
+   "ajustes": [],
+   "pendencias": [],
+   "minuta": false,
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 336097119 · 16/09/2025 — …DECISÃORecebo a apelação (Id 336024281) apenas no efeito devolutivo, consoante o artigo 1.012, §1º, inciso V, do CPC.Publique-se. Intime-se. Após, conclusos.ANDRÉ NABARRETEDesembargador Federal | última peça: Manifestação (MPF) · ID 338225093 · 03/10/2025 | última movimentação: 13/04/2026 09:04 · Juntada de Petição de documento comprobatório · Lote RA3 (saúde) · Temas 6, 793 e 1.234/STF e Súmulas Vinculantes 60 e 61 · Canabidiol: autorização sanitária × registro (Tema 1.161/STF) [VALIDAR] · MPF pelo provimento parcial (ID 336695551)",
+   "classe": "ApelRemNec",
+   "tarefa": "Analisar tipo de decisão a proferir · prioridade",
+   "etiquetas": "2ª Seção; Canabidiol; Fornecimento de medicamentos",
+   "chegada": "04/11/2026",
+   "situacao_atual": {
+    "ultima_movimentacao": "13/04/2026 09:04 · Juntada de Petição de documento comprobatório",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Decisão · ID 336097119 · 16/09/2025 — …DECISÃORecebo a apelação (Id 336024281) apenas no efeito devolutivo, consoante o artigo 1.012, §1º, inciso V, do CPC.Publique-se. Intime-se. Após, conclusos.ANDRÉ NABARRETEDesembargador Federal",
+    "ultima_peca": "Manifestação (MPF) · ID 338225093 · 03/10/2025",
+    "ultima_informacao": "Certidão · ID 336090052 · 12/09/2025",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 336097119 · 16/09/2025 — …DECISÃORecebo a apelação (Id 336024281) apenas no efeito devolutivo, consoante o artigo 1.012, §1º, inciso V, do CPC.Publique-se. Intime-se. Após, conclusos.ANDRÉ NABARRETEDesembargador Federal | última peça: Manifestação (MPF) · ID 338225093 · 03/10/2025 | última movimentação: 13/04/2026 09:04 · Juntada de Petição de documento comprobatório"
+   },
+   "teor": {
+    "sintese_fatica": "Heitor Corrêa Ribeiro, criança com epilepsia refratária, pediu canabidiol contra a União, o Estado e o Município de Campo Grande. A tutela foi cumprida por depósitos, bloqueios e penhora de valores; a sentença julgou procedente.",
+    "inicial": "Ação do autor, criança, contra a União, o Estado de Mato Grosso do Sul e o Município de Campo Grande.",
+    "decisao_recorrida": "Sentença ID 336024240 (03/04/2025): julgou procedente o pedido, confirmando a tutela, para condenar os réus a fornecer canabidiol conforme prescrição trimestral, primeiro pela União e subsidiariamente pelo Estado e pelo Município, observado o preço mínimo de mercado até haver PMVG; embargos da União rejeitados (ID 336024263) [VALIDAR honorários].",
+    "recurso": "União (ID 336024281, 10/07/2025): Súmulas Vinculantes 60 e 61; ausência de registro na ANVISA; denominação comum brasileira; honorários excessivos; contracautelas.",
+    "resposta": "Não consta.",
+    "parecer": "MPF ID 336695551: Provimento parcial da apelação",
+    "memoriais": "Não consta",
+    "representacao": "Autor: advogado Anderson Pires Ribeiro (OAB/MS 9.820).",
+    "preparo": "União: Isenta (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação da União e remessa necessária · fornecimento de canabidiol 200 mg/mL (Prati-Donaduzzi) a criança com epilepsia refratária · obrigação dirigida primeiro à União e subsidiariamente ao Estado e ao Município · tutela cumprida com depósitos e bloqueios",
+     "sintese": "Heitor Corrêa Ribeiro, criança com epilepsia refratária, pediu canabidiol contra a União, o Estado e o Município de Campo Grande. A tutela foi cumprida por depósitos, bloqueios e penhora de valores; a sentença julgou procedente.",
+     "questoes": "1) Fornecimento de canabidiol sem registro como medicamento (Temas 6 e 1.161/STF; Súmulas Vinculantes 60 e 61); 2) direcionamento da obrigação; 3) honorários e contracautelas.",
+     "rel": {
+      "razoes": "União (ID 336024281, 10/07/2025): Súmulas Vinculantes 60 e 61; ausência de registro na ANVISA; denominação comum brasileira; honorários excessivos; contracautelas.",
+      "contrarrazoes": "Não consta."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "336024240",
+      "juizo": "Procedimento comum 5005632-70.2022.4.03.6000 (2ª Vara Federal de Campo Grande)",
+      "dispositivo": "julgou procedente o pedido, confirmando a tutela, para condenar os réus a fornecer canabidiol conforme prescrição trimestral, primeiro pela União e subsidiariamente pelo Estado e pelo Município, observado o preço mínimo de mercado até haver PMVG; embargos da União rejeitados (ID 336024263) [VALIDAR honorários]."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2011-05-03",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "União",
+       "tipo": "Apelação",
+       "id": "336024281",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "336024240",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: procedência",
+       "id": "336024240",
+       "data": "2025-04-03"
+      },
+      {
+       "desc": "Sentença: embargos da União rejeitados",
+       "id": "336024263",
+       "data": "2025-05-19"
+      },
+      {
+       "desc": "Apelação da União",
+       "id": "336024281",
+       "data": "2025-07-10"
+      },
+      {
+       "desc": "Parecer do MPF (provimento parcial)",
+       "id": "336695551",
+       "data": "2025-09-18"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 336097119 · 16/09/2025 — …DECISÃORecebo a apelação (Id 336024281) apenas no efeito devolutivo, consoante o artigo 1.012, §1º, inciso V, do CPC.Publique-se. Intime-se. Após, conclusos.ANDRÉ NABARRETEDesembargador Federal | última peça: Manifestação (MPF) · ID 338225093 · 03/10/2025 | última movimentação: 13/04/2026 09:04 · Juntada de Petição de documento comprobatório · Lote RA3 (saúde) · Temas 6, 793 e 1.234/STF e Súmulas Vinculantes 60 e 61 · Canabidiol: autorização sanitária × registro (Tema 1.161/STF) [VALIDAR] · MPF pelo provimento parcial (ID 336695551)",
+     "assuntoDet": "Saúde — fornecimento de canabidiol (produto sem registro como medicamento)",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Incapaz (178, II)",
+     "parecer": "Com parecer",
+     "idParecer": "336695551",
+     "parecerSentido": "Provimento parcial da apelação"
+    }
+   }
+  },
+  {
+   "sessao": "",
+   "item": 3,
+   "processo": "5000235-06.2017.4.03.6000",
+   "recurso": "Apelação e remessa necessária",
+   "partes": "UNIÃO FEDERAL x MARIANA FERLIN",
+   "exequente": "UNIÃO FEDERAL",
+   "executado": "MARIANA FERLIN",
+   "assunto": "Fornecimento de medicamentos",
+   "assunto_detalhado": "Saúde — fornecimento de eculizumabe (medicamento de alto custo)",
+   "grupo": "M1",
+   "tipo_caso": "Apelações da União, do Estado e do Município de Campo Grande e remessa necessária · fornecimento de eculizumabe (Soliris) a criança com síndrome hemolítico-urêmica atípica · condenação solidária com ressarcimento integral pela União · honorários de R$ 10.000,00 à DPU",
+   "resultado": "Ato a proferir: apelações da União (ID 320673064), do Estado (ID 320673065) e do Município (ID 320673066) e remessa necessária da sentença ID 320673059; contrarrazões da DPU (ID 320673068); MPF pelo desprovimento (ID 334899604) ‖ Proposta pelos precedentes: Voto: aplicar Temas 6, 793 e 1.234/STF e Súmulas Vinculantes 60 e 61 (requisitos, competência e custeio); conferir honorários à DPU contra a União (Tema 1.002/STF) [VALIDAR] [VALIDAR: Requisitos do Tema 6/STF; Regra de custeio do Tema 1.234/STF; Honorários à DPU]",
+   "modelo": "Origem: lote adp-remessas (grupo RA3) · não pautado",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelações da União, do Estado e do Município e remessa necessária da sentença que os condenou a fornecer eculizumabe à criança Mariana Ferlin, com ressarcimento integral pela União, e fixou honorários à DPU. Os entes invocam as teses do STF sobre medicamentos não incorporados. O MPF opinou pelo desprovimento.",
+   "peculiaridades": "",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "",
+    "correcao": "",
+    "situacao": "A minutar"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {
+    "ato": "Julgamento das apelações e da remessa necessária (voto)",
+    "materia": "Saúde — medicamentos",
+    "origem": "Procedimento comum 5000235-06.2017.4.03.6000 (4ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 320673059 (04/12/2024)",
+    "recurso": "apelação de União (ID 320673064, 26/12/2024) e apelação de Estado de Mato Grosso do Sul (ID 320673065, 09/01/2025) e apelação de Município de Campo Grande (ID 320673066, 19/02/2025) · remessa necessária",
+    "preparo": "União: Isenta (ente público); Estado de Mato Grosso do Sul: Isento (ente público); Município de Campo Grande: Isento (ente público)",
+    "monocratica": "Não: alto custo e teses do STF",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "União: Isenta (ente público); Estado de Mato Grosso do Sul: Isento (ente público); Município de Campo Grande: Isento (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
+   "ajustes": [],
+   "pendencias": [],
+   "minuta": false,
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 331371724 · 23/07/2025 — abriu vista ao MPF | última peça: Petição intercorrente (AGU (PRU)) · ID 365396150 · 09/04/2026 | última movimentação: 09/04/2026 15:58 · Juntada de Petição de petição intercorrente · Lote RA3 (saúde) · Temas 6, 793 e 1.234/STF e Súmulas Vinculantes 60 e 61 · Tutela desde 2017 e AI 5005535-62.2021.4.03.0000 transitado · Honorários à DPU contra a União (Tema 1.002/STF) [VALIDAR]",
+   "classe": "ApelRemNec",
+   "tarefa": "Analisar tipo de decisão a proferir · prioridade",
+   "etiquetas": "2ª Seção; Fornecimento de medicamentos",
+   "chegada": "04/11/2026",
+   "situacao_atual": {
+    "ultima_movimentacao": "09/04/2026 15:58 · Juntada de Petição de petição intercorrente",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Despacho · ID 331371724 · 23/07/2025 — abriu vista ao MPF",
+    "ultima_peca": "Petição intercorrente (AGU (PRU)) · ID 365396150 · 09/04/2026",
+    "ultima_informacao": "Certidão · ID 322006361 · 23/04/2025",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 331371724 · 23/07/2025 — abriu vista ao MPF | última peça: Petição intercorrente (AGU (PRU)) · ID 365396150 · 09/04/2026 | última movimentação: 09/04/2026 15:58 · Juntada de Petição de petição intercorrente"
+   },
+   "teor": {
+    "sintese_fatica": "Mariana Ferlin, criança assistida pela DPU, pediu eculizumabe para síndrome hemolítico-urêmica atípica. A tutela foi deferida em 15/12/2017 e mantida no AI 5005535-62.2021.4.03.0000 (transitado); houve perícia. A sentença julgou procedente.",
+    "inicial": "Ação da autora, criança, contra a União, o Estado de Mato Grosso do Sul e o Município de Campo Grande.",
+    "decisao_recorrida": "Sentença ID 320673059 (04/12/2024): julgou procedente o pedido para condenar os réus, solidariamente, a fornecer eculizumabe conforme receita trimestral, com ressarcimento integral pela União ao Estado e ao Município; confirmou a tutela e mandou restituir valores bloqueados; honorários de R$ 10.000,00 à DPU, rateados.",
+    "recurso": "União (ID 320673064, 26/12/2024): Súmula Vinculante 61 e teses do Tema 1.234/STF; CONITEC [VALIDAR]. Estado de Mato Grosso do Sul (ID 320673065, 09/01/2025): requisitos do Tema 6/STF para medicamento não incorporado (CONITEC, pedido administrativo, evidência científica); PMVG. Município de Campo Grande (ID 320673066, 19/02/2025): [VALIDAR fundamentos].",
+    "resposta": "Contrarrazões da autora pela DPU (ID 320673068).",
+    "parecer": "MPF ID 334899604: Desprovimento dos recursos",
+    "memoriais": "Não consta",
+    "representacao": "Autora assistida pela Defensoria Pública da União.",
+    "preparo": "União: Isenta (ente público); Estado de Mato Grosso do Sul: Isento (ente público); Município de Campo Grande: Isento (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelações da União, do Estado e do Município de Campo Grande e remessa necessária · fornecimento de eculizumabe (Soliris) a criança com síndrome hemolítico-urêmica atípica · condenação solidária com ressarcimento integral pela União · honorários de R$ 10.000,00 à DPU",
+     "sintese": "Mariana Ferlin, criança assistida pela DPU, pediu eculizumabe para síndrome hemolítico-urêmica atípica. A tutela foi deferida em 15/12/2017 e mantida no AI 5005535-62.2021.4.03.0000 (transitado); houve perícia. A sentença julgou procedente.",
+     "questoes": "1) Requisitos para fornecimento de medicamento de alto custo não incorporado (Tema 6/STF; Súmula Vinculante 61); 2) competência e custeio (Tema 1.234/STF; Súmula Vinculante 60); 3) honorários à DPU.",
+     "rel": {
+      "razoes": "União (ID 320673064, 26/12/2024): Súmula Vinculante 61 e teses do Tema 1.234/STF; CONITEC [VALIDAR]. Estado de Mato Grosso do Sul (ID 320673065, 09/01/2025): requisitos do Tema 6/STF para medicamento não incorporado (CONITEC, pedido administrativo, evidência científica); PMVG. Município de Campo Grande (ID 320673066, 19/02/2025): [VALIDAR fundamentos].",
+      "contrarrazoes": "Contrarrazões da autora pela DPU (ID 320673068)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "320673059",
+      "juizo": "Procedimento comum 5000235-06.2017.4.03.6000 (4ª Vara Federal de Campo Grande)",
+      "dispositivo": "julgou procedente o pedido para condenar os réus, solidariamente, a fornecer eculizumabe conforme receita trimestral, com ressarcimento integral pela União ao Estado e ao Município; confirmou a tutela e mandou restituir valores bloqueados; honorários de R$ 10.000,00 à DPU, rateados."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2017-09-15",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "União",
+       "tipo": "Apelação",
+       "id": "320673064",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Estado de Mato Grosso do Sul",
+       "tipo": "Apelação",
+       "id": "320673065",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Município de Campo Grande",
+       "tipo": "Apelação",
+       "id": "320673066",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "320673059",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Decisão: tutela de urgência deferida",
+       "id": "320670667",
+       "data": "2017-12-15"
+      },
+      {
+       "desc": "Sentença: procedência",
+       "id": "320673059",
+       "data": "2024-12-04"
+      },
+      {
+       "desc": "Apelação da União",
+       "id": "320673064",
+       "data": "2024-12-26"
+      },
+      {
+       "desc": "Apelação do Estado",
+       "id": "320673065",
+       "data": "2025-01-09"
+      },
+      {
+       "desc": "Apelação do Município",
+       "id": "320673066",
+       "data": "2025-02-19"
+      },
+      {
+       "desc": "Parecer do MPF (desprovimento)",
+       "id": "334899604",
+       "data": "2025-08-29"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 331371724 · 23/07/2025 — abriu vista ao MPF | última peça: Petição intercorrente (AGU (PRU)) · ID 365396150 · 09/04/2026 | última movimentação: 09/04/2026 15:58 · Juntada de Petição de petição intercorrente · Lote RA3 (saúde) · Temas 6, 793 e 1.234/STF e Súmulas Vinculantes 60 e 61 · Tutela desde 2017 e AI 5005535-62.2021.4.03.0000 transitado · Honorários à DPU contra a União (Tema 1.002/STF) [VALIDAR]",
+     "assuntoDet": "Saúde — fornecimento de eculizumabe (medicamento de alto custo)",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Incapaz (178, II)",
+     "parecer": "Com parecer",
+     "idParecer": "334899604",
+     "parecerSentido": "Desprovimento dos recursos"
+    }
+   }
+  },
+  {
+   "sessao": "",
+   "item": 4,
+   "processo": "5006682-68.2021.4.03.6000",
+   "recurso": "Apelação e remessa necessária",
+   "partes": "ESTADO DE MATO GROSSO DO SUL x CARMELO TEOFILO",
+   "exequente": "ESTADO DE MATO GROSSO DO SUL",
+   "executado": "CARMELO TEOFILO",
+   "assunto": "Oncológico",
+   "assunto_detalhado": "Saúde — medicamento oncológico (octreotida LAR); direcionamento à União; honorários",
+   "grupo": "M1",
+   "tipo_caso": "Apelações da União e do Estado de Mato Grosso do Sul e remessa necessária em ação de obrigação de fazer · fornecimento de OCTREOTIDA LAR 30 mg para tumor neuroendócrino (CID C17.9) · autor idoso assistido pela DPU · pedido julgado procedente, com obrigação direcionada primeiro à União",
+   "resultado": "Ato a proferir: apelações da União (ID 349375595) e do Estado (ID 349375607) e remessa necessária da sentença ID 349375592, integrada pela ID 349375605; contrarrazões (IDs 349375608 e 349375612); MPF sem intervenção (ID 355798027) ‖ Proposta pelos precedentes: Voto conforme os Temas 6 e 1.234/STF e as regras de custeio de oncológicos; honorários por equidade (Tema 1.313/STJ) [VALIDAR] [VALIDAR: Situação do medicamento no SUS; Tese do Tema 1.313/STJ]",
+   "modelo": "Origem: lote adp-remessas (grupo RA3) · não pautado",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelações da União e do Estado e remessa necessária da sentença que condenou ambos a fornecer octreotida LAR a paciente idoso com tumor neuroendócrino, com cumprimento direcionado à União. A União invoca os Temas 6 e 1.234/STF; o Estado discute apenas os honorários.",
+   "peculiaridades": "",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "",
+    "correcao": "",
+    "situacao": "A minutar"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {
+    "ato": "Julgamento das apelações e da remessa necessária (voto)",
+    "materia": "Saúde — fornecimento de medicamento (oncológico)",
+    "origem": "Procedimento comum 5006682-68.2021.4.03.6000 (2ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 349375592 (27/08/2024)",
+    "recurso": "apelação de União (ID 349375595, 25/09/2024) e apelação de Estado de Mato Grosso do Sul (ID 349375607, 09/10/2025) · remessa necessária",
+    "preparo": "União: Isento (ente público); Estado de Mato Grosso do Sul: Isento (ente público)",
+    "monocratica": "Improvável: duas apelações",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "União: Isento (ente público); Estado de Mato Grosso do Sul: Isento (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
+   "ajustes": [],
+   "pendencias": [],
+   "minuta": false,
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 355478069 · 18/02/2026 — …DESPACHO Em atenção ao disposto no art. 178 do Código de Processo Civil, encaminhem-se os autos ao Ministério Público Federal.Após, conclusos.Int.CONSUELO YOSHIDADesembargadora Federal | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 355798027 · 19/02/2026 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Situação do medicamento no SUS (oncologia via APAC/UNACON) e enquadramento nos Temas 6 e 1.234/STF [VALIDAR] · Apelação do Estado restrita aos honorários: fixação por equidade em demandas de saúde (Tema 1.313/STJ) e ausência de causalidade [VALIDAR tese] · Honorários em favor da DPU contra a União (Tema 1.002/STF) · Cumprimento provisório nos autos 5011629-63.2024.4.03.6000 (ID 349375611) · Prioridade: idoso · Mesmo grupo de 5012036-69 (oncológico, mesma Vara)",
+   "classe": "ApelRemNec",
+   "tarefa": "Analisar tipo de decisão a proferir · prioridade",
+   "etiquetas": "2ª Seção; Fornecimento de medicamentos; PRIORIDADE - Idoso(a)",
+   "chegada": "04/11/2026",
+   "situacao_atual": {
+    "ultima_movimentacao": "20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Despacho · ID 355478069 · 18/02/2026 — …DESPACHO Em atenção ao disposto no art. 178 do Código de Processo Civil, encaminhem-se os autos ao Ministério Público Federal.Após, conclusos.Int.CONSUELO YOSHIDADesembargadora Federal",
+    "ultima_peca": "Parecer \"Falta de Interesse\" (MPF) · ID 355798027 · 19/02/2026",
+    "ultima_informacao": "Certidão · ID 349487233 · 09/01/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 355478069 · 18/02/2026 — …DESPACHO Em atenção ao disposto no art. 178 do Código de Processo Civil, encaminhem-se os autos ao Ministério Público Federal.Após, conclusos.Int.CONSUELO YOSHIDADesembargadora Federal | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 355798027 · 19/02/2026 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária"
+   },
+   "teor": {
+    "sintese_fatica": "Carmelo Teófilo, idoso, assistido pela DPU, foi diagnosticado com tumor neuroendócrino após enterectomia em 25/02/2020 e pediu a octreotida LAR. A tutela foi inicialmente indeferida e houve sequestro de valores para custeio (ID 349375542). A sentença julgou procedente o pedido.",
+    "inicial": "Ação de obrigação de fazer contra o Estado de Mato Grosso do Sul e a União.",
+    "decisao_recorrida": "Sentença ID 349375592 (27/08/2024): julgou procedente o pedido para condenar os réus a fornecer a octreotida LAR conforme prescrição trimestral, com direcionamento primeiro à União (fornecimento na UNACON/CACON) e subsidiário ao Estado; honorários de R$ 20.000,00 pro rata (artigo 85, § 8º, do CPC); embargos de declaração do Estado acolhidos para ajuste do item 2 (ID 349375605).",
+    "recurso": "União (ID 349375595, 25/09/2024): Temas 6 e 1.234/STF e STA 175: requisitos não demonstrados; repartição de competências e direcionamento do cumprimento. Estado de Mato Grosso do Sul (ID 349375607, 09/10/2025): honorários: ausência de causalidade e fixação por apreciação equitativa (Tema 1.313/STJ).",
+    "resposta": "Contrarrazões do autor (IDs 349375608 e 349375612).",
+    "parecer": "MPF ID 355798027: Ausência de interesse que justifique intervenção",
+    "memoriais": "Não consta",
+    "representacao": "Autor assistido pela Defensoria Pública da União.",
+    "preparo": "União: Isento (ente público); Estado de Mato Grosso do Sul: Isento (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelações da União e do Estado de Mato Grosso do Sul e remessa necessária em ação de obrigação de fazer · fornecimento de OCTREOTIDA LAR 30 mg para tumor neuroendócrino (CID C17.9) · autor idoso assistido pela DPU · pedido julgado procedente, com obrigação direcionada primeiro à União",
+     "sintese": "Carmelo Teófilo, idoso, assistido pela DPU, foi diagnosticado com tumor neuroendócrino após enterectomia em 25/02/2020 e pediu a octreotida LAR. A tutela foi inicialmente indeferida e houve sequestro de valores para custeio (ID 349375542). A sentença julgou procedente o pedido.",
+     "questoes": "1) Fornecimento de medicamento oncológico (Temas 6 e 1.234/STF); 2) direcionamento do cumprimento e ressarcimento; 3) honorários (Tema 1.313/STJ; Tema 1.002/STF).",
+     "rel": {
+      "razoes": "União (ID 349375595, 25/09/2024): Temas 6 e 1.234/STF e STA 175: requisitos não demonstrados; repartição de competências e direcionamento do cumprimento. Estado de Mato Grosso do Sul (ID 349375607, 09/10/2025): honorários: ausência de causalidade e fixação por apreciação equitativa (Tema 1.313/STJ).",
+      "contrarrazoes": "Contrarrazões do autor (IDs 349375608 e 349375612)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "349375592",
+      "juizo": "Procedimento comum 5006682-68.2021.4.03.6000 (2ª Vara Federal de Campo Grande)",
+      "dispositivo": "julgou procedente o pedido para condenar os réus a fornecer a octreotida LAR conforme prescrição trimestral, com direcionamento primeiro à União (fornecimento na UNACON/CACON) e subsidiário ao Estado; honorários de R$ 20.000,00 pro rata (artigo 85, § 8º, do CPC); embargos de declaração do Estado acolhidos para ajuste do item 2 (ID 349375605)."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2021-08-13",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "União",
+       "tipo": "Apelação",
+       "id": "349375595",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Estado de Mato Grosso do Sul",
+       "tipo": "Apelação",
+       "id": "349375607",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "349375592",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Decisão: tutela de urgência indeferida",
+       "id": "349375496",
+       "data": "2022-01-21"
+      },
+      {
+       "desc": "Decisão: sequestro de valores",
+       "id": "349375542",
+       "data": "2023-03-03"
+      },
+      {
+       "desc": "Sentença: pedido procedente",
+       "id": "349375592",
+       "data": "2024-08-27"
+      },
+      {
+       "desc": "Embargos de declaração do Estado",
+       "id": "349375594",
+       "data": "2024-09-15"
+      },
+      {
+       "desc": "Apelação da União",
+       "id": "349375595",
+       "data": "2024-09-25"
+      },
+      {
+       "desc": "Sentença dos embargos de declaração",
+       "id": "349375605",
+       "data": "2025-09-25"
+      },
+      {
+       "desc": "Apelação do Estado",
+       "id": "349375607",
+       "data": "2025-10-09"
+      },
+      {
+       "desc": "Contrarrazões do autor",
+       "id": "349375608",
+       "data": "2025-10-09"
+      },
+      {
+       "desc": "Decisão: cumprimento provisório em autos próprios",
+       "id": "349375611",
+       "data": "2025-10-20"
+      },
+      {
+       "desc": "Contrarrazões do autor",
+       "id": "349375612",
+       "data": "2025-11-01"
+      },
+      {
+       "desc": "Parecer do MPF (sem intervenção)",
+       "id": "355798027",
+       "data": "2026-02-19"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 355478069 · 18/02/2026 — …DESPACHO Em atenção ao disposto no art. 178 do Código de Processo Civil, encaminhem-se os autos ao Ministério Público Federal.Após, conclusos.Int.CONSUELO YOSHIDADesembargadora Federal | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 355798027 · 19/02/2026 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Situação do medicamento no SUS (oncologia via APAC/UNACON) e enquadramento nos Temas 6 e 1.234/STF [VALIDAR] · Apelação do Estado restrita aos honorários: fixação por equidade em demandas de saúde (Tema 1.313/STJ) e ausência de causalidade [VALIDAR tese] · Honorários em favor da DPU contra a União (Tema 1.002/STF) · Cumprimento provisório nos autos 5011629-63.2024.4.03.6000 (ID 349375611) · Prioridade: idoso · Mesmo grupo de 5012036-69 (oncológico, mesma Vara)",
+     "assuntoDet": "Saúde — medicamento oncológico (octreotida LAR); direcionamento à União; honorários",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Com parecer",
+     "idParecer": "355798027",
+     "parecerSentido": "Ausência de interesse que justifique intervenção"
+    }
+   }
+  },
+  {
+   "sessao": "",
+   "item": 5,
+   "processo": "5012036-69.2024.4.03.6000",
+   "recurso": "Apelação e remessa necessária",
+   "partes": "ESTADO DE MATO GROSSO DO SUL x INGRID DOS SANTOS KALIL",
+   "exequente": "ESTADO DE MATO GROSSO DO SUL",
+   "executado": "INGRID DOS SANTOS KALIL",
+   "assunto": "Oncológico",
+   "assunto_detalhado": "Saúde — medicamento oncológico (trastuzumabe deruxtecana); direcionamento à União; honorários",
+   "grupo": "M1",
+   "tipo_caso": "Apelações da União e do Estado de Mato Grosso do Sul e remessa necessária em ação de obrigação de fazer · fornecimento de TRASTUZUMABE DERUXTECANA (Enhertu) para câncer de mama HER2 metastático, estágio IV · tutela de urgência com bloqueio de valores · pedido julgado procedente, com obrigação direcionada primeiro à União",
+   "resultado": "Ato a proferir: apelações da União (ID 343086547) e do Estado (ID 343086552) e remessa necessária da sentença ID 343086504, integrada pela ID 343086546; contrarrazões (ID 343086554); MPF [VALIDAR] ‖ Proposta pelos precedentes: Voto conforme os Temas 6 e 1.234/STF e as regras de custeio de oncológicos; honorários por equidade (Tema 1.313/STJ) [VALIDAR] [VALIDAR: Parecer do MPF em segundo grau; Tese do Tema 1.313/STJ]",
+   "modelo": "Origem: lote adp-remessas (grupo RA3) · não pautado",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelações da União e do Estado e remessa necessária da sentença que condenou os entes a fornecer trastuzumabe deruxtecana a paciente com câncer de mama metastático, com cumprimento direcionado à União. A União invoca o Tema 6/STF; o Estado discute apenas os honorários.",
+   "peculiaridades": "",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "",
+    "correcao": "",
+    "situacao": "A minutar"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {
+    "ato": "Julgamento das apelações e da remessa necessária (voto)",
+    "materia": "Saúde — fornecimento de medicamento (oncológico)",
+    "origem": "Procedimento comum 5012036-69.2024.4.03.6000 (2ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 343086504 (17/06/2025)",
+    "recurso": "apelação de União (ID 343086547, 25/09/2025) e apelação de Estado de Mato Grosso do Sul (ID 343086552, 07/10/2025) · remessa necessária",
+    "preparo": "União: Isento (ente público); Estado de Mato Grosso do Sul: Isento (ente público)",
+    "monocratica": "Improvável: duas apelações",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "União: Isento (ente público); Estado de Mato Grosso do Sul: Isento (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
+   "ajustes": [],
+   "pendencias": [],
+   "minuta": false,
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 343086546 · 16/09/2025 — sentença: rejeitou os embargos de declaração | última peça: Petição intercorrente (AGU (PRU)) · ID 365351272 · 09/04/2026 | última movimentação: 09/04/2026 11:27 · Juntada de Petição de petição intercorrente · Enquadramento nos Temas 6 e 1.234/STF (medicamento registrado, não incorporado) [VALIDAR] · Apelação do Estado restrita aos honorários: fixação por equidade em demandas de saúde (Tema 1.313/STJ) e ausência de causalidade [VALIDAR tese] · União informa não enquadramento em tentativa de acordo na Semana Nacional de Saúde 2026 (ID 365351272) · Mesmo grupo de 5006682-68 (oncológico, mesma Vara)",
+   "classe": "ApelRemNec",
+   "tarefa": "Analisar tipo de decisão a proferir · prioridade",
+   "etiquetas": "2ª Seção; Fornecimento de medicamentos",
+   "chegada": "04/11/2026",
+   "situacao_atual": {
+    "ultima_movimentacao": "09/04/2026 11:27 · Juntada de Petição de petição intercorrente",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Sentença · ID 343086546 · 16/09/2025 — sentença: rejeitou os embargos de declaração",
+    "ultima_peca": "Petição intercorrente (AGU (PRU)) · ID 365351272 · 09/04/2026",
+    "ultima_informacao": "Certidão · ID 343100830 · 12/11/2025",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 343086546 · 16/09/2025 — sentença: rejeitou os embargos de declaração | última peça: Petição intercorrente (AGU (PRU)) · ID 365351272 · 09/04/2026 | última movimentação: 09/04/2026 11:27 · Juntada de Petição de petição intercorrente"
+   },
+   "teor": {
+    "sintese_fatica": "Ingrid dos Santos Kalil, diagnosticada em 28/12/2020 com câncer de mama com metástase óssea (CID C50.9), pediu o trastuzumabe deruxtecana. A tutela de urgência foi deferida com bloqueio de valores (ID 343086430). A sentença julgou procedente o pedido.",
+    "inicial": "Ação de obrigação de fazer contra a União, o Estado de Mato Grosso do Sul e o Município de Campo Grande.",
+    "decisao_recorrida": "Sentença ID 343086504 (17/06/2025): confirmou a tutela de urgência e julgou procedente o pedido para condenar os réus a fornecer o trastuzumabe deruxtecana conforme prescrição trimestral, com direcionamento primeiro à União (fornecimento na UNACON/CACON) e subsidiário ao Estado e ao Município de Campo Grande; honorários de R$ 15.000,00 (artigo 85, § 8º, do CPC); embargos de declaração da União e do Estado rejeitados (ID 343086546).",
+    "recurso": "União (ID 343086547, 25/09/2025): efeito suspensivo; Tema 6/STF: medicamento não incorporado, registro acelerado, ausência de nota técnica individualizada e de superioridade terapêutica. Estado de Mato Grosso do Sul (ID 343086552, 07/10/2025): honorários: ausência de causalidade e fixação por apreciação equitativa (Tema 1.313/STJ).",
+    "resposta": "Contrarrazões da autora (ID 343086554).",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Advogado Thiago Mackenna Dipe (OAB/MS 21.804).",
+    "preparo": "União: Isento (ente público); Estado de Mato Grosso do Sul: Isento (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelações da União e do Estado de Mato Grosso do Sul e remessa necessária em ação de obrigação de fazer · fornecimento de TRASTUZUMABE DERUXTECANA (Enhertu) para câncer de mama HER2 metastático, estágio IV · tutela de urgência com bloqueio de valores · pedido julgado procedente, com obrigação direcionada primeiro à União",
+     "sintese": "Ingrid dos Santos Kalil, diagnosticada em 28/12/2020 com câncer de mama com metástase óssea (CID C50.9), pediu o trastuzumabe deruxtecana. A tutela de urgência foi deferida com bloqueio de valores (ID 343086430). A sentença julgou procedente o pedido.",
+     "questoes": "1) Fornecimento de medicamento oncológico não incorporado (Temas 6 e 1.234/STF); 2) direcionamento do cumprimento; 3) honorários (Tema 1.313/STJ).",
+     "rel": {
+      "razoes": "União (ID 343086547, 25/09/2025): efeito suspensivo; Tema 6/STF: medicamento não incorporado, registro acelerado, ausência de nota técnica individualizada e de superioridade terapêutica. Estado de Mato Grosso do Sul (ID 343086552, 07/10/2025): honorários: ausência de causalidade e fixação por apreciação equitativa (Tema 1.313/STJ).",
+      "contrarrazoes": "Contrarrazões da autora (ID 343086554)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "343086504",
+      "juizo": "Procedimento comum 5012036-69.2024.4.03.6000 (2ª Vara Federal de Campo Grande)",
+      "dispositivo": "confirmou a tutela de urgência e julgou procedente o pedido para condenar os réus a fornecer o trastuzumabe deruxtecana conforme prescrição trimestral, com direcionamento primeiro à União (fornecimento na UNACON/CACON) e subsidiário ao Estado e ao Município de Campo Grande; honorários de R$ 15.000,00 (artigo 85, § 8º, do CPC); embargos de declaração da União e do Estado rejeitados (ID 343086546)."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2024-11-18",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "União",
+       "tipo": "Apelação",
+       "id": "343086547",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Estado de Mato Grosso do Sul",
+       "tipo": "Apelação",
+       "id": "343086552",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "343086504",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Decisão: tutela de urgência com bloqueio de valores",
+       "id": "343086430",
+       "data": "2024-12-12"
+      },
+      {
+       "desc": "Sentença: pedido procedente",
+       "id": "343086504",
+       "data": "2025-06-17"
+      },
+      {
+       "desc": "Embargos de declaração da União",
+       "id": "343086523",
+       "data": "2025-06-27"
+      },
+      {
+       "desc": "Embargos de declaração do Estado",
+       "id": "343086524",
+       "data": "2025-06-30"
+      },
+      {
+       "desc": "Sentença dos embargos de declaração",
+       "id": "343086546",
+       "data": "2025-09-16"
+      },
+      {
+       "desc": "Apelação da União",
+       "id": "343086547",
+       "data": "2025-09-25"
+      },
+      {
+       "desc": "Apelação do Estado",
+       "id": "343086552",
+       "data": "2025-10-07"
+      },
+      {
+       "desc": "Contrarrazões da autora",
+       "id": "343086554",
+       "data": "2025-10-15"
+      },
+      {
+       "desc": "Petição da União: Semana Nacional de Saúde 2026",
+       "id": "365351272",
+       "data": "2026-04-09"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 343086546 · 16/09/2025 — sentença: rejeitou os embargos de declaração | última peça: Petição intercorrente (AGU (PRU)) · ID 365351272 · 09/04/2026 | última movimentação: 09/04/2026 11:27 · Juntada de Petição de petição intercorrente · Enquadramento nos Temas 6 e 1.234/STF (medicamento registrado, não incorporado) [VALIDAR] · Apelação do Estado restrita aos honorários: fixação por equidade em demandas de saúde (Tema 1.313/STJ) e ausência de causalidade [VALIDAR tese] · União informa não enquadramento em tentativa de acordo na Semana Nacional de Saúde 2026 (ID 365351272) · Mesmo grupo de 5006682-68 (oncológico, mesma Vara)",
+     "assuntoDet": "Saúde — medicamento oncológico (trastuzumabe deruxtecana); direcionamento à União; honorários",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Não verificado"
+    }
+   }
+  },
+  {
+   "sessao": "",
+   "item": 6,
+   "processo": "5004153-71.2024.4.03.6000",
+   "recurso": "Apelação e remessa necessária",
+   "partes": "UNIÃO FEDERAL x ROSANGELA RODRIGUES NOGUEIRA",
+   "exequente": "UNIÃO FEDERAL",
+   "executado": "ROSANGELA RODRIGUES NOGUEIRA",
+   "assunto": "Registrado na ANVISA",
+   "assunto_detalhado": "Saúde — imunoglobulina humana; Temas 6 e 1.234/STF",
+   "grupo": "M1",
+   "tipo_caso": "Apelação da União e remessa necessária em ação de obrigação de fazer · fornecimento de IMUNOGLOBULINA HUMANA 5 g · autora idosa com doença grave · tutela antecipada · pedido julgado procedente contra União, Estado e Município; obrigação depois adequada à prescrição",
+   "resultado": "Ato a proferir: apelação da União (ID 409590823) e remessa necessária da sentença ID 409590807; contrarrazões (ID 409590832) ‖ Proposta pelos precedentes: Voto conforme os Temas 6 e 1.234/STF; delimitar a obrigação à prescrição atual [VALIDAR] [VALIDAR: Motivo da etiqueta \"NÃO PAUTAR - GIOVANA\"; Doença e situação do medicamento no SUS]",
+   "modelo": "Origem: lote adp-remessas (grupo RA3) · não pautado",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação da União e remessa necessária da sentença que condenou União, Estado e Município a fornecer imunoglobulina humana a paciente idosa com doença grave. Decisões posteriores à sentença ajustaram a periodicidade do fornecimento.",
+   "peculiaridades": "",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "",
+    "correcao": "",
+    "situacao": "A minutar"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {
+    "ato": "Julgamento da apelação e da remessa necessária (voto)",
+    "materia": "Saúde — fornecimento de medicamento",
+    "origem": "Procedimento comum 5004153-71.2024.4.03.6000 (4ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 409590807 (02/11/2025)",
+    "recurso": "apelação de União (ID 409590823, 03/07/2026) · remessa necessária",
+    "preparo": "União: Isento (ente público)",
+    "monocratica": "Improvável sem conferência dos Temas 6 e 1.234/STF",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "União: Isento (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
+   "ajustes": [],
+   "pendencias": [],
+   "minuta": false,
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 409590843 · 28/10/2026 — …o cumprimento provisório e trasladados os documentos, remetam-se estes autos ao Tribunal Regional Federal da 3ª Região, conforme o despacho de ID 604686462, independentemente da comprovação do cumprimento da obrigação | última peça: Petição intercorrente (AGU (PRU)) · ID 409590847 · 30/10/2026 | última movimentação: 09/11/2026 18:05 · Conclusos para julgamento · Etiqueta \"NÃO PAUTAR - GIOVANA\" [VALIDAR motivo] · Situação do medicamento no SUS para a doença da autora e enquadramento nos Temas 6 e 1.234/STF [VALIDAR] · Alterações da obrigação após a sentença (IDs 409590819 e 409590833) e petições de outubro/2026 · Representação: advogada constituída (OAB/MS 28.851), não a DPU (ID 409590819) · Prioridades: idosa e doença grave",
+   "classe": "ApelRemNec",
+   "tarefa": "Analisar tipo de decisão a proferir · prioridade",
+   "etiquetas": "2ª Seção; Fornecimento de medicamentos; Medicamento Imunoglobulina Humana; NÃO PAUTAR - GIOVANA; PRIORIDADE - Doença grave; PRIORIDADE - IDOSO(A); PRIORIDADE - Idoso(a)",
+   "chegada": "17/11/2026",
+   "situacao_atual": {
+    "ultima_movimentacao": "09/11/2026 18:05 · Conclusos para julgamento",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Decisão · ID 409590843 · 28/10/2026 — …o cumprimento provisório e trasladados os documentos, remetam-se estes autos ao Tribunal Regional Federal da 3ª Região, conforme o despacho de ID 604686462, independentemente da comprovação do cumprimento da obrigação",
+    "ultima_peca": "Petição intercorrente (AGU (PRU)) · ID 409590847 · 30/10/2026",
+    "ultima_informacao": "Certidão · ID 409665661 · 09/11/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 409590843 · 28/10/2026 — …o cumprimento provisório e trasladados os documentos, remetam-se estes autos ao Tribunal Regional Federal da 3ª Região, conforme o despacho de ID 604686462, independentemente da comprovação do cumprimento da obrigação | última peça: Petição intercorrente (AGU (PRU)) · ID 409590847 · 30/10/2026 | última movimentação: 09/11/2026 18:05 · Conclusos para julgamento"
+   },
+   "teor": {
+    "sintese_fatica": "Rosângela Rodrigues Nogueira, idosa, com doença grave, inicialmente assistida pela DPU e depois por advogada, pediu imunoglobulina humana. A sentença julgou procedente o pedido; decisões posteriores ajustaram a periodicidade (semestral e, depois, seis frascos por mês).",
+    "inicial": "Ação de obrigação de fazer contra a União, o Estado de Mato Grosso do Sul e o Município de Campo Grande.",
+    "decisao_recorrida": "Sentença ID 409590807 (02/11/2025): julgou procedente o pedido para confirmar a tutela e condenar União, Estado de Mato Grosso do Sul e Município de Campo Grande a fornecer imunoglobulina humana 5 g conforme a prescrição, enquanto durar o tratamento [VALIDAR demais itens]; a obrigação foi depois adequada à periodicidade da prescrição (IDs 409590819 e 409590833).",
+    "recurso": "União (ID 409590823, 03/07/2026): ausência dos requisitos dos Temas 6 e 1.234/STF; repartição de competências [VALIDAR teor].",
+    "resposta": "Contrarrazões da autora (ID 409590832).",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Advogada constituída (OAB/MS 28.851) [VALIDAR nome]; gratuidade deferida.",
+    "preparo": "União: Isento (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação da União e remessa necessária em ação de obrigação de fazer · fornecimento de IMUNOGLOBULINA HUMANA 5 g · autora idosa com doença grave · tutela antecipada · pedido julgado procedente contra União, Estado e Município; obrigação depois adequada à prescrição",
+     "sintese": "Rosângela Rodrigues Nogueira, idosa, com doença grave, inicialmente assistida pela DPU e depois por advogada, pediu imunoglobulina humana. A sentença julgou procedente o pedido; decisões posteriores ajustaram a periodicidade (semestral e, depois, seis frascos por mês).",
+     "questoes": "1) Fornecimento de imunoglobulina humana (Temas 6 e 1.234/STF); 2) alcance da obrigação após as adequações.",
+     "rel": {
+      "razoes": "União (ID 409590823, 03/07/2026): ausência dos requisitos dos Temas 6 e 1.234/STF; repartição de competências [VALIDAR teor].",
+      "contrarrazoes": "Contrarrazões da autora (ID 409590832)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "409590807",
+      "juizo": "Procedimento comum 5004153-71.2024.4.03.6000 (4ª Vara Federal de Campo Grande)",
+      "dispositivo": "julgou procedente o pedido para confirmar a tutela e condenar União, Estado de Mato Grosso do Sul e Município de Campo Grande a fornecer imunoglobulina humana 5 g conforme a prescrição, enquanto durar o tratamento [VALIDAR demais itens]; a obrigação foi depois adequada à periodicidade da prescrição (IDs 409590819 e 409590833)."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2024-06-03",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "União",
+       "tipo": "Apelação",
+       "id": "409590823",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "409590807",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Decisão inicial: gratuidade e citação",
+       "id": "409590632",
+       "data": "2024-06-04"
+      },
+      {
+       "desc": "Sentença: pedido procedente",
+       "id": "409590807",
+       "data": "2025-11-02"
+      },
+      {
+       "desc": "Embargos de declaração da autora",
+       "id": "409590808",
+       "data": "2025-11-11"
+      },
+      {
+       "desc": "Decisão: ajuste da obrigação e da representação",
+       "id": "409590819",
+       "data": "2026-05-14"
+      },
+      {
+       "desc": "Apelação da União",
+       "id": "409590823",
+       "data": "2026-07-03"
+      },
+      {
+       "desc": "Contrarrazões da autora",
+       "id": "409590832",
+       "data": "2026-09-28"
+      },
+      {
+       "desc": "Decisão: fornecimento de seis frascos por mês",
+       "id": "409590833",
+       "data": "2026-09-29"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 409590843 · 28/10/2026 — …o cumprimento provisório e trasladados os documentos, remetam-se estes autos ao Tribunal Regional Federal da 3ª Região, conforme o despacho de ID 604686462, independentemente da comprovação do cumprimento da obrigação | última peça: Petição intercorrente (AGU (PRU)) · ID 409590847 · 30/10/2026 | última movimentação: 09/11/2026 18:05 · Conclusos para julgamento · Etiqueta \"NÃO PAUTAR - GIOVANA\" [VALIDAR motivo] · Situação do medicamento no SUS para a doença da autora e enquadramento nos Temas 6 e 1.234/STF [VALIDAR] · Alterações da obrigação após a sentença (IDs 409590819 e 409590833) e petições de outubro/2026 · Representação: advogada constituída (OAB/MS 28.851), não a DPU (ID 409590819) · Prioridades: idosa e doença grave",
+     "assuntoDet": "Saúde — imunoglobulina humana; Temas 6 e 1.234/STF",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Não verificado"
+    }
+   }
+  },
+  {
+   "sessao": "",
+   "item": 7,
+   "processo": "5006632-08.2022.4.03.6000",
+   "recurso": "Apelação e remessa necessária",
+   "partes": "UNIÃO FEDERAL x BIOMARIN BRASIL FARMACEUTICA LTDA",
+   "exequente": "UNIÃO FEDERAL",
+   "executado": "BIOMARIN BRASIL FARMACEUTICA LTDA",
+   "assunto": "Não padronizado",
+   "assunto_detalhado": "Saúde — vosoritida (Voxzogo) para acondroplasia; não incorporação pela Conitec (junho/2026)",
+   "grupo": "M2",
+   "tipo_caso": "Apelação da União e remessa necessária em ação de obrigação de fazer · fornecimento do medicamento VOXZOGO (vosoritida) para acondroplasia · autora menor · tutela de urgência deferida · perícia · pedido julgado parcialmente procedente; extinção quanto às empresas BioMarin e Multicare",
+   "resultado": "Ato a proferir: apelação da União (ID 320250099) e remessa necessária da sentença ID 320250097; contrarrazões (ID 320250103); MPF pelo provimento (ID 368244221); petição da União com o Relatório de Recomendação Conitec 1.116 (IDs 404770953 a 404770955) ‖ Proposta pelos precedentes: Voto conforme os Temas 6 e 1.234/STF, considerada a decisão de não incorporação da Conitec, a perícia judicial e a situação atual das epífises [VALIDAR] [VALIDAR: Conclusão do laudo pericial complementar (ID 320249672); Epífises abertas na data do julgamento; Alcance do item 4 do Tema 1.234/STF após a decisão da Conitec]",
+   "modelo": "Origem: lote adp-remessas (grupo RA11) · não pautado",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação da União e remessa necessária da sentença que condenou a União a fornecer vosoritida a criança com acondroplasia. Em 18/06/2026 a Conitec deliberou pela não incorporação do medicamento (Relatório 1.116); o MPF opinou pelo provimento.",
+   "peculiaridades": "",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "",
+    "correcao": "",
+    "situacao": "A minutar"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {
+    "ato": "Julgamento da apelação e da remessa necessária (voto)",
+    "materia": "Saúde — fornecimento de medicamento",
+    "origem": "Procedimento comum 5006632-08.2022.4.03.6000 (4ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 320250097 (12/12/2024)",
+    "recurso": "apelação de União (ID 320250099, 02/01/2025) · remessa necessária",
+    "preparo": "União: Isento (ente público)",
+    "monocratica": "Improvável: Temas 6 e 1.234/STF e decisão da Conitec",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "União: Isento (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
+   "ajustes": [],
+   "pendencias": [],
+   "minuta": false,
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 365172403 · 08/04/2026 — abriu vista ao MPF | última peça: Petição intercorrente (advogado de parte) · ID 404770953 · 16/10/2026 | última movimentação: 16/10/2026 08:56 · Juntada de Petição de petição intercorrente · Temas 6 e 1.234/STF: medicamento registrado na Anvisa e não incorporado; com a deliberação de não incorporação da Conitec (152ª reunião, 18/06/2026, ID 404770954), o controle judicial limita-se à legalidade do ato (item 4 do Tema 1.234) [VALIDAR] · Laudo pericial complementar (ID 320249672) sem texto extraído · Epífises ainda abertas na idade atual (cerca de 13 anos) [VALIDAR] · União informa falta temporária de estoque e retomada das entregas em novembro (ID 404770953) · MPF: interesse de incapaz",
+   "classe": "ApelRemNec",
+   "tarefa": "Analisar tipo de decisão a proferir · prioridade",
+   "etiquetas": "2ª Seção; Fornecimento de medicamentos",
+   "chegada": "04/11/2026",
+   "situacao_atual": {
+    "ultima_movimentacao": "16/10/2026 08:56 · Juntada de Petição de petição intercorrente",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Despacho · ID 365172403 · 08/04/2026 — abriu vista ao MPF",
+    "ultima_peca": "Petição intercorrente (advogado de parte) · ID 404770953 · 16/10/2026",
+    "ultima_informacao": "Certidão · ID 320746650 · 11/04/2025",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 365172403 · 08/04/2026 — abriu vista ao MPF | última peça: Petição intercorrente (advogado de parte) · ID 404770953 · 16/10/2026 | última movimentação: 16/10/2026 08:56 · Juntada de Petição de petição intercorrente"
+   },
+   "teor": {
+    "sintese_fatica": "M. D. L. A. B., menor impúbere representada pelo genitor, portadora de acondroplasia (CID Q77.4), pediu a vosoritida aos 8 anos e 11 meses, antes do fechamento das placas de crescimento. Houve tutela de urgência, perícia judicial e sentença de procedência parcial.",
+    "inicial": "Ação de obrigação de fazer contra a União, com BioMarin e Multicare (excluídas na sentença).",
+    "decisao_recorrida": "Sentença ID 320250097 (12/12/2024): confirmou a tutela de urgência e julgou parcialmente procedente o pedido para condenar a União a fornecer o VOXZOGO (vosoritida), com prescrição atualizada a cada três meses; extinguiu o processo sem mérito quanto à BioMarin e à Multicare; honorários de R$ 10.000,00 em cada relação.",
+    "recurso": "União (ID 320250099, 02/01/2025): ausência dos requisitos dos Temas 6 e 1.234/STF (evidências de alto nível, alternativa no SUS, análise da Conitec); subsidiariamente, direcionamento do cumprimento e contracautelas.",
+    "resposta": "Contrarrazões da autora (ID 320250103).",
+    "parecer": "MPF ID 368244221: Provimento da apelação",
+    "memoriais": "Não consta",
+    "representacao": "Advogados Marilia Cristina Boni (OAB/SP 272.715) e Gabriel Victor Bega Brasil (OAB/SP 374.444); justiça gratuita deferida.",
+    "preparo": "União: Isento (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação da União e remessa necessária em ação de obrigação de fazer · fornecimento do medicamento VOXZOGO (vosoritida) para acondroplasia · autora menor · tutela de urgência deferida · perícia · pedido julgado parcialmente procedente; extinção quanto às empresas BioMarin e Multicare",
+     "sintese": "M. D. L. A. B., menor impúbere representada pelo genitor, portadora de acondroplasia (CID Q77.4), pediu a vosoritida aos 8 anos e 11 meses, antes do fechamento das placas de crescimento. Houve tutela de urgência, perícia judicial e sentença de procedência parcial.",
+     "questoes": "1) Fornecimento de medicamento registrado e não incorporado (Temas 6 e 1.234/STF); 2) efeito da deliberação de não incorporação da Conitec; 3) honorários.",
+     "rel": {
+      "razoes": "União (ID 320250099, 02/01/2025): ausência dos requisitos dos Temas 6 e 1.234/STF (evidências de alto nível, alternativa no SUS, análise da Conitec); subsidiariamente, direcionamento do cumprimento e contracautelas.",
+      "contrarrazoes": "Contrarrazões da autora (ID 320250103)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "320250097",
+      "juizo": "Procedimento comum 5006632-08.2022.4.03.6000 (4ª Vara Federal de Campo Grande)",
+      "dispositivo": "confirmou a tutela de urgência e julgou parcialmente procedente o pedido para condenar a União a fornecer o VOXZOGO (vosoritida), com prescrição atualizada a cada três meses; extinguiu o processo sem mérito quanto à BioMarin e à Multicare; honorários de R$ 10.000,00 em cada relação."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2022-07-25",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "União",
+       "tipo": "Apelação",
+       "id": "320250099",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "320250097",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Decisão: tutela de urgência deferida",
+       "id": "320249250",
+       "data": "2022-07-29"
+      },
+      {
+       "desc": "Documento: laudo pericial complementar",
+       "id": "320249672",
+       "data": "2023-10-24"
+      },
+      {
+       "desc": "Sentença: pedido parcialmente procedente",
+       "id": "320250097",
+       "data": "2024-12-12"
+      },
+      {
+       "desc": "Apelação da União",
+       "id": "320250099",
+       "data": "2025-01-02"
+      },
+      {
+       "desc": "Contrarrazões da autora",
+       "id": "320250103",
+       "data": "2025-02-06"
+      },
+      {
+       "desc": "Despacho: vista à PRR",
+       "id": "365172403",
+       "data": "2026-04-08"
+      },
+      {
+       "desc": "Parecer do MPF (provimento)",
+       "id": "368244221",
+       "data": "2026-04-22"
+      },
+      {
+       "desc": "Petição da União: estoque e Conitec",
+       "id": "404770953",
+       "data": "2026-10-16"
+      },
+      {
+       "desc": "Documento: Relatório de Recomendação Conitec 1.116",
+       "id": "404770954",
+       "data": "2026-10-16"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 365172403 · 08/04/2026 — abriu vista ao MPF | última peça: Petição intercorrente (advogado de parte) · ID 404770953 · 16/10/2026 | última movimentação: 16/10/2026 08:56 · Juntada de Petição de petição intercorrente · Temas 6 e 1.234/STF: medicamento registrado na Anvisa e não incorporado; com a deliberação de não incorporação da Conitec (152ª reunião, 18/06/2026, ID 404770954), o controle judicial limita-se à legalidade do ato (item 4 do Tema 1.234) [VALIDAR] · Laudo pericial complementar (ID 320249672) sem texto extraído · Epífises ainda abertas na idade atual (cerca de 13 anos) [VALIDAR] · União informa falta temporária de estoque e retomada das entregas em novembro (ID 404770953) · MPF: interesse de incapaz",
+     "assuntoDet": "Saúde — vosoritida (Voxzogo) para acondroplasia; não incorporação pela Conitec (junho/2026)",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Incapaz (178, II)",
+     "parecer": "Com parecer",
+     "idParecer": "368244221",
+     "parecerSentido": "Provimento da apelação"
+    }
+   }
+  },
+  {
+   "sessao": "",
+   "item": 8,
+   "processo": "5008008-29.2022.4.03.6000",
+   "recurso": "Apelação e remessa necessária",
+   "partes": "UNIÃO FEDERAL x MARINA FARO BURALI",
+   "exequente": "UNIÃO FEDERAL",
+   "executado": "MARINA FARO BURALI",
+   "assunto": "Registrado na ANVISA",
+   "assunto_detalhado": "Saúde — vosoritida (Voxzogo) para acondroplasia; não incorporação pela Conitec",
+   "grupo": "M2",
+   "tipo_caso": "Apelação da União e remessa necessária em ação de obrigação de fazer · fornecimento de VOXZOGO (vosoritida) para acondroplasia · autora menor · tutela antecipada com sequestro e multa · pedido julgado procedente (30/06/2026)",
+   "resultado": "Ato a proferir: apelação da União (ID 389815539) e remessa necessária da sentença ID 389815530; contrarrazões (ID 389815549); MPF pelo desprovimento (ID 393056398) ‖ Proposta pelos precedentes: Voto conforme os Temas 6 e 1.234/STF, considerada a decisão de não incorporação da Conitec, a perícia e a situação das epífises [VALIDAR] [VALIDAR: Razões da União (PDF sem texto); Perícia e situação das epífises]",
+   "modelo": "Origem: lote adp-remessas (grupo RA11) · não pautado",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação da União e remessa necessária da sentença que condenou a União a fornecer vosoritida a criança com acondroplasia. A sentença é posterior à deliberação de não incorporação da Conitec (18/06/2026); o MPF opinou pelo desprovimento.",
+   "peculiaridades": "",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "",
+    "correcao": "",
+    "situacao": "A minutar"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {
+    "ato": "Julgamento da apelação e da remessa necessária (voto)",
+    "materia": "Saúde — fornecimento de medicamento",
+    "origem": "Procedimento comum 5008008-29.2022.4.03.6000 (2ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 389815530 (30/06/2026)",
+    "recurso": "apelação de União (ID 389815539, 13/07/2026) · remessa necessária",
+    "preparo": "União: Isento (ente público)",
+    "monocratica": "Improvável: Temas 6 e 1.234/STF e decisão da Conitec",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "União: Isento (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
+   "ajustes": [],
+   "pendencias": [],
+   "minuta": false,
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 390828641 · 07/08/2026 — abriu vista ao MPF | última peça: Petição intercorrente (advogado de parte) · ID 404900301 · 16/10/2026 | última movimentação: 16/10/2026 18:45 · Juntada de Petição de petição intercorrente · Temas 6 e 1.234/STF: medicamento registrado na Anvisa e não incorporado; Conitec deliberou pela não incorporação em 18/06/2026 (Relatório 1.116) e a Portaria SCTIE/MS 38, de 01/07/2026, tornou pública a decisão [VALIDAR teor] · Item 4 do Tema 1.234/STF: controle da legalidade do ato de não incorporação [VALIDAR] · Grupo vosoritida: 5006632-08, 5008008-29 e 5008849-24 (voto único com variações) · MPF: interesse de incapaz · Ofício 348/2026/DGITS/SCTIE/MS juntado (ID 389815547) · Petição da União de 16/10/2026 (ID 404900301) [VALIDAR conteúdo]",
+   "classe": "ApelRemNec",
+   "tarefa": "Analisar tipo de decisão a proferir · prioridade",
+   "etiquetas": "2ª Seção; Fornecimento de medicamentos; Medicamento Voxzogo (vosoritida); Menor; Triagem - Giovana Sato",
+   "chegada": "04/11/2026",
+   "situacao_atual": {
+    "ultima_movimentacao": "16/10/2026 18:45 · Juntada de Petição de petição intercorrente",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Despacho · ID 390828641 · 07/08/2026 — abriu vista ao MPF",
+    "ultima_peca": "Petição intercorrente (advogado de parte) · ID 404900301 · 16/10/2026",
+    "ultima_informacao": "Informação · ID 389815550 · 31/07/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 390828641 · 07/08/2026 — abriu vista ao MPF | última peça: Petição intercorrente (advogado de parte) · ID 404900301 · 16/10/2026 | última movimentação: 16/10/2026 18:45 · Juntada de Petição de petição intercorrente"
+   },
+   "teor": {
+    "sintese_fatica": "M. F. B., menor representada pelos genitores, portadora de acondroplasia, pediu a vosoritida. A tutela foi deferida em 03/11/2022, com sequestro de verbas e multa diária pelo descumprimento (ID 389815415). A sentença foi proferida após a deliberação da Conitec pela não incorporação.",
+    "inicial": "Ação de obrigação de fazer contra a União.",
+    "decisao_recorrida": "Sentença ID 389815530 (30/06/2026): julgou procedente o pedido, confirmou a tutela e condenou a União a fornecer a vosoritida de forma contínua, com prescrição renovada a cada seis meses; determinou ofício à Conitec.",
+    "recurso": "União (ID 389815539, 13/07/2026): razões em PDF sem texto extraído; juntou a Portaria SCTIE/MS 38/2026 (ID 389815540) [VALIDAR teor].",
+    "resposta": "Contrarrazões da autora (ID 389815549).",
+    "parecer": "MPF ID 393056398: Desprovimento da apelação",
+    "memoriais": "Não consta",
+    "representacao": "Autora assistida por advogado constituído [VALIDAR]; justiça gratuita deferida.",
+    "preparo": "União: Isento (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação da União e remessa necessária em ação de obrigação de fazer · fornecimento de VOXZOGO (vosoritida) para acondroplasia · autora menor · tutela antecipada com sequestro e multa · pedido julgado procedente (30/06/2026)",
+     "sintese": "M. F. B., menor representada pelos genitores, portadora de acondroplasia, pediu a vosoritida. A tutela foi deferida em 03/11/2022, com sequestro de verbas e multa diária pelo descumprimento (ID 389815415). A sentença foi proferida após a deliberação da Conitec pela não incorporação.",
+     "questoes": "1) Fornecimento de medicamento registrado e não incorporado (Temas 6 e 1.234/STF); 2) efeito da deliberação de não incorporação da Conitec.",
+     "rel": {
+      "razoes": "União (ID 389815539, 13/07/2026): razões em PDF sem texto extraído; juntou a Portaria SCTIE/MS 38/2026 (ID 389815540) [VALIDAR teor].",
+      "contrarrazoes": "Contrarrazões da autora (ID 389815549)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "389815530",
+      "juizo": "Procedimento comum 5008008-29.2022.4.03.6000 (2ª Vara Federal de Campo Grande)",
+      "dispositivo": "julgou procedente o pedido, confirmou a tutela e condenou a União a fornecer a vosoritida de forma contínua, com prescrição renovada a cada seis meses; determinou ofício à Conitec."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2022-09-13",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "União",
+       "tipo": "Apelação",
+       "id": "389815539",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "389815530",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Decisão: tutela antecipada deferida",
+       "id": "389815402",
+       "data": "2022-11-03"
+      },
+      {
+       "desc": "Decisão: sequestro e multa",
+       "id": "389815415",
+       "data": "2023-03-09"
+      },
+      {
+       "desc": "Sentença: pedido procedente",
+       "id": "389815530",
+       "data": "2026-06-30"
+      },
+      {
+       "desc": "Apelação da União",
+       "id": "389815539",
+       "data": "2026-07-13"
+      },
+      {
+       "desc": "Documento: Portaria SCTIE/MS 38/2026",
+       "id": "389815540",
+       "data": "2026-07-13"
+      },
+      {
+       "desc": "Ofício 348/2026/DGITS/SCTIE/MS",
+       "id": "389815547",
+       "data": "2026-07-20"
+      },
+      {
+       "desc": "Contrarrazões da autora",
+       "id": "389815549",
+       "data": "2026-07-30"
+      },
+      {
+       "desc": "Parecer do MPF (desprovimento)",
+       "id": "393056398",
+       "data": "2026-08-21"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 390828641 · 07/08/2026 — abriu vista ao MPF | última peça: Petição intercorrente (advogado de parte) · ID 404900301 · 16/10/2026 | última movimentação: 16/10/2026 18:45 · Juntada de Petição de petição intercorrente · Temas 6 e 1.234/STF: medicamento registrado na Anvisa e não incorporado; Conitec deliberou pela não incorporação em 18/06/2026 (Relatório 1.116) e a Portaria SCTIE/MS 38, de 01/07/2026, tornou pública a decisão [VALIDAR teor] · Item 4 do Tema 1.234/STF: controle da legalidade do ato de não incorporação [VALIDAR] · Grupo vosoritida: 5006632-08, 5008008-29 e 5008849-24 (voto único com variações) · MPF: interesse de incapaz · Ofício 348/2026/DGITS/SCTIE/MS juntado (ID 389815547) · Petição da União de 16/10/2026 (ID 404900301) [VALIDAR conteúdo]",
+     "assuntoDet": "Saúde — vosoritida (Voxzogo) para acondroplasia; não incorporação pela Conitec",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Incapaz (178, II)",
+     "parecer": "Com parecer",
+     "idParecer": "393056398",
+     "parecerSentido": "Desprovimento da apelação"
+    }
+   }
+  },
+  {
+   "sessao": "",
+   "item": 9,
+   "processo": "5008849-24.2022.4.03.6000",
+   "recurso": "Apelação e remessa necessária",
+   "partes": "UNIÃO FEDERAL x LETICIA TOSTA DE CARVALHO",
+   "exequente": "UNIÃO FEDERAL",
+   "executado": "LETICIA TOSTA DE CARVALHO",
+   "assunto": "Registrado na ANVISA",
+   "assunto_detalhado": "Saúde — vosoritida (Voxzogo) para acondroplasia; não incorporação pela Conitec",
+   "grupo": "M2",
+   "tipo_caso": "Apelação da União e remessa necessária em ação de obrigação de fazer · fornecimento de VOXZOGO (vosoritida) para acondroplasia · autora menor · tutela provisória; transferência de valores à genitora para compra · perícia · pedido julgado procedente",
+   "resultado": "Ato a proferir: apelação da União (ID 385112187) e remessa necessária da sentença ID 385112176, integrada pela ID 385112185; MPF pelo desprovimento, com contracautelas de monitoramento (ID 387641154) ‖ Proposta pelos precedentes: Voto conforme os Temas 6 e 1.234/STF, considerada a decisão de não incorporação da Conitec, a perícia e as contracautelas sugeridas pelo MPF [VALIDAR] [VALIDAR: Contrarrazões da autora; Perícia e situação das epífises; Conteúdo das petições da União de outubro e novembro de 2026]",
+   "modelo": "Origem: lote adp-remessas (grupo RA11) · não pautado",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação da União e remessa necessária da sentença que condenou a União a fornecer vosoritida a criança com acondroplasia. O MPF opinou pela manutenção, com relatórios periódicos de monitoramento sob pena de suspensão.",
+   "peculiaridades": "",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "",
+    "correcao": "",
+    "situacao": "A minutar"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {
+    "ato": "Julgamento da apelação e da remessa necessária (voto)",
+    "materia": "Saúde — fornecimento de medicamento",
+    "origem": "Procedimento comum 5008849-24.2022.4.03.6000 (2ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 385112176 (25/02/2026)",
+    "recurso": "apelação de União (ID 385112187, 26/03/2026) · remessa necessária",
+    "preparo": "União: Isento (ente público)",
+    "monocratica": "Improvável: Temas 6 e 1.234/STF e decisão da Conitec",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "União: Isento (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
+   "ajustes": [],
+   "pendencias": [],
+   "minuta": false,
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 385441492 · 13/07/2026 — abriu vista ao MPF | última peça: Petição intercorrente (AGU (PRU)) · ID 413752867 · 19/11/2026 | última movimentação: 19/11/2026 18:17 · Juntada de Petição de petição intercorrente · Temas 6 e 1.234/STF: medicamento registrado na Anvisa e não incorporado; Conitec deliberou pela não incorporação em 18/06/2026 (Relatório 1.116) e a Portaria SCTIE/MS 38, de 01/07/2026, tornou pública a decisão [VALIDAR teor] · Item 4 do Tema 1.234/STF: controle da legalidade do ato de não incorporação [VALIDAR] · Grupo vosoritida: 5006632-08, 5008008-29 e 5008849-24 (voto único com variações) · MPF: interesse de incapaz · Parecer do MPF trata o fármaco como \"desprovido de registro na Anvisa\" [conferir] · Petições da União de 19/10/2026 e 19/11/2026 (IDs 405384831 e 413752867) com informação do Ministério da Saúde [VALIDAR conteúdo]",
+   "classe": "ApelRemNec",
+   "tarefa": "Analisar tipo de decisão a proferir · prioridade",
+   "etiquetas": "2ª Seção; Fornecimento de medicamentos; Menor; REMESSA NECESSÁRIA",
+   "chegada": "04/11/2026",
+   "situacao_atual": {
+    "ultima_movimentacao": "19/11/2026 18:17 · Juntada de Petição de petição intercorrente",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Despacho · ID 385441492 · 13/07/2026 — abriu vista ao MPF",
+    "ultima_peca": "Petição intercorrente (AGU (PRU)) · ID 413752867 · 19/11/2026",
+    "ultima_informacao": "Informação · ID 385112191 · 30/06/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 385441492 · 13/07/2026 — abriu vista ao MPF | última peça: Petição intercorrente (AGU (PRU)) · ID 413752867 · 19/11/2026 | última movimentação: 19/11/2026 18:17 · Juntada de Petição de petição intercorrente"
+   },
+   "teor": {
+    "sintese_fatica": "L. T. C., menor representada pela genitora, portadora de acondroplasia, pediu a vosoritida. A tutela foi deferida em 21/11/2022; houve transferência de valores à genitora para aquisição (ID 385112063) e perícia judicial.",
+    "inicial": "Ação de obrigação de fazer contra a União.",
+    "decisao_recorrida": "Sentença ID 385112176 (25/02/2026): julgou procedente o pedido, confirmou a tutela e condenou a União a fornecer a vosoritida de forma contínua, com prescrição renovada a cada seis meses; ofício à Conitec; embargos de declaração da União rejeitados (ID 385112185).",
+    "recurso": "União (ID 385112187, 26/03/2026): ausência dos requisitos dos Temas 6 e 1.234/STF; contracautelas e monitoramento [VALIDAR teor].",
+    "resposta": "Contrarrazões da autora [VALIDAR ID].",
+    "parecer": "MPF ID 387641154: Manutenção da sentença, com contracautelas de monitoramento",
+    "memoriais": "Não consta",
+    "representacao": "Autora assistida por advogado constituído; justiça gratuita deferida.",
+    "preparo": "União: Isento (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação da União e remessa necessária em ação de obrigação de fazer · fornecimento de VOXZOGO (vosoritida) para acondroplasia · autora menor · tutela provisória; transferência de valores à genitora para compra · perícia · pedido julgado procedente",
+     "sintese": "L. T. C., menor representada pela genitora, portadora de acondroplasia, pediu a vosoritida. A tutela foi deferida em 21/11/2022; houve transferência de valores à genitora para aquisição (ID 385112063) e perícia judicial.",
+     "questoes": "1) Fornecimento de medicamento registrado e não incorporado (Temas 6 e 1.234/STF); 2) efeito da deliberação de não incorporação da Conitec; 3) contracautelas.",
+     "rel": {
+      "razoes": "União (ID 385112187, 26/03/2026): ausência dos requisitos dos Temas 6 e 1.234/STF; contracautelas e monitoramento [VALIDAR teor].",
+      "contrarrazoes": "Contrarrazões da autora [VALIDAR ID]."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "385112176",
+      "juizo": "Procedimento comum 5008849-24.2022.4.03.6000 (2ª Vara Federal de Campo Grande)",
+      "dispositivo": "julgou procedente o pedido, confirmou a tutela e condenou a União a fornecer a vosoritida de forma contínua, com prescrição renovada a cada seis meses; ofício à Conitec; embargos de declaração da União rejeitados (ID 385112185)."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2022-10-19",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "União",
+       "tipo": "Apelação",
+       "id": "385112187",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "385112176",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Decisão: tutela provisória deferida",
+       "id": "385111614",
+       "data": "2022-11-21"
+      },
+      {
+       "desc": "Decisão: transferência de valores para compra",
+       "id": "385112063",
+       "data": "2023-12-05"
+      },
+      {
+       "desc": "Sentença: pedido procedente",
+       "id": "385112176",
+       "data": "2026-02-25"
+      },
+      {
+       "desc": "Embargos de declaração da União",
+       "id": "385112182",
+       "data": "2026-03-05"
+      },
+      {
+       "desc": "Sentença dos embargos de declaração",
+       "id": "385112185",
+       "data": "2026-03-13"
+      },
+      {
+       "desc": "Apelação da União",
+       "id": "385112187",
+       "data": "2026-03-26"
+      },
+      {
+       "desc": "Parecer do MPF",
+       "id": "387641154",
+       "data": "2026-07-20"
+      },
+      {
+       "desc": "Petição da União",
+       "id": "405384831",
+       "data": "2026-10-19"
+      },
+      {
+       "desc": "Petição da União",
+       "id": "413752867",
+       "data": "2026-11-19"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 385441492 · 13/07/2026 — abriu vista ao MPF | última peça: Petição intercorrente (AGU (PRU)) · ID 413752867 · 19/11/2026 | última movimentação: 19/11/2026 18:17 · Juntada de Petição de petição intercorrente · Temas 6 e 1.234/STF: medicamento registrado na Anvisa e não incorporado; Conitec deliberou pela não incorporação em 18/06/2026 (Relatório 1.116) e a Portaria SCTIE/MS 38, de 01/07/2026, tornou pública a decisão [VALIDAR teor] · Item 4 do Tema 1.234/STF: controle da legalidade do ato de não incorporação [VALIDAR] · Grupo vosoritida: 5006632-08, 5008008-29 e 5008849-24 (voto único com variações) · MPF: interesse de incapaz · Parecer do MPF trata o fármaco como \"desprovido de registro na Anvisa\" [conferir] · Petições da União de 19/10/2026 e 19/11/2026 (IDs 405384831 e 413752867) com informação do Ministério da Saúde [VALIDAR conteúdo]",
+     "assuntoDet": "Saúde — vosoritida (Voxzogo) para acondroplasia; não incorporação pela Conitec",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Incapaz (178, II)",
+     "parecer": "Com parecer",
+     "idParecer": "387641154",
+     "parecerSentido": "Manutenção da sentença, com contracautelas de monitoramento"
+    }
+   }
+  },
+  {
+   "sessao": "",
+   "item": 10,
+   "processo": "5023991-21.2025.4.03.0000",
+   "recurso": "Agravo de instrumento",
+   "partes": "UNIÃO FEDERAL x MARCIANO ROMERO",
+   "exequente": "UNIÃO FEDERAL",
+   "executado": "MARCIANO ROMERO",
+   "assunto": "Oncológico",
+   "assunto_detalhado": "Medicamento oncológico (pembrolizumabe) — tutela revogada no recurso; agravo interno da DPU",
+   "grupo": "M3",
+   "tipo_caso": "Saúde · fornecimento de pembrolizumabe (Keytruda) para melanoma em estágio IV · tutela deferida na origem e revogada por efeito suspensivo · agravo interno da DPU · parecer do MPF pelo restabelecimento",
+   "resultado": "Ato a proferir: julgamento do agravo de instrumento da União (voto), com o agravo interno da DPU (ID 346951996) contra a decisão que deu efeito suspensivo e revogou a tutela (ID 344618671); há contrarrazões da DPU (ID 346953963), contraminuta da União ao agravo interno (ID 348525981) e parecer do MPF (ID 392572991) ‖ Proposta pelos precedentes: Voto no agravo de instrumento, com o agravo interno julgado prejudicado no mesmo acórdão; mérito pelos requisitos do Tema 6/STF e das Súmulas Vinculantes 60 e 61, sem paradigma de mérito da Turma Regional no banco (decisão do Relator diante da divergência entre a decisão ID 344618671 e o parecer do MPF) [VALIDAR: Requisitos do Tema 6/STF e das Súmulas Vinculantes 60 e 61 (registro na ANVISA, CONITEC, laudo); Estado atual do tratamento]",
+   "modelo": "Origem: lote adp-ai (grupo A7) · não pautado",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Agravo da União contra a tutela que lhe impôs o fornecimento de pembrolizumabe a Marciano Romero, assistido pela DPU, para melanoma em estágio IV. A Des. Fed. Marisa Santos deferiu efeito suspensivo e revogou a tutela, por não atendidos os requisitos do Tema 6/STF e das Súmulas Vinculantes 60 e 61 (ID 344618671). A DPU interpôs agravo interno (ID 346951996) e apresentou contrarrazões (ID 346953963). O MPF opinou pelo desprovimento do agravo da União e pelo provimento do agravo interno (ID 392572991).",
+   "peculiaridades": "A petição do agravo (ID 336079174) é PDF digitalizado sem texto. A DPU afirma que o medicamento tem registro na ANVISA (ID 346953963) [VALIDAR].",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "",
+    "correcao": "",
+    "situacao": "A minutar"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {
+    "ato": "Julgamento do agravo de instrumento e do agravo interno (voto)",
+    "materia": "Saúde — fornecimento de medicamento oncológico",
+    "origem": "Ação 5005690-68.2025.4.03.6000 (2ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Decisão que deferiu a tutela de urgência para o fornecimento de pembrolizumabe (ID não indicado [VALIDAR])",
+    "recurso": "ID 336079174 · 12/09/2025 (sem texto extraído: PDF digitalizado)",
+    "preparo": "Isenta (União)",
+    "monocratica": "Não indicada; pauta",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "ISENTO (União) · conferido em 21/11/2026",
+    "conf_prevencao": "Origem: 5005690-68.2025.4.03.6000 · redistribuído pela decisão ID 369881556 (Resolução 33/2025) · conferido em 21/11/2026"
+   },
+   "ajustes": [],
+   "pendencias": [
+    "[VALIDAR] Ler no PJe o agravo ID 336079174 (sem texto)",
+    "[VALIDAR] Requisitos do Tema 6/STF"
+   ],
+   "minuta": false,
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 382182012 · 23/06/2026 — abriu vista ao MPF | última peça: Parecer de Mérito (MPF) · ID 392572991 · 18/08/2026 | última movimentação: [VALIDAR no PJe] · Tutela revogada por efeito suspensivo (ID 344618671) · Agravo interno da DPU (ID 346951996) · Parecer do MPF pelo restabelecimento da tutela (ID 392572991) · Temas 6 e 1.234/STF; Súmulas Vinculantes 60 e 61",
+   "classe": "AI",
+   "tarefa": "Analisar tipo de decisão a proferir",
+   "etiquetas": "2ª Seção; AI - Tutela provisória; Fornecimento de medicamentos",
+   "chegada": "20/10/2026",
+   "situacao_atual": {
+    "ultima_decisao": "Despacho · ID 382182012 · 23/06/2026 — abriu vista ao MPF",
+    "ultima_peca": "Parecer de Mérito (MPF) · ID 392572991 · 18/08/2026",
+    "ultima_informacao": "Certidão · ID 371220784 · 05/05/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação a conferir no PJe",
+    "ultima_movimentacao": "[VALIDAR no PJe]",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 382182012 · 23/06/2026 — abriu vista ao MPF | última peça: Parecer de Mérito (MPF) · ID 392572991 · 18/08/2026 | última movimentação: [VALIDAR no PJe]"
+   },
+   "teor": {
+    "sintese_fatica": "Marciano Romero, assistido pela DPU, pediu o fornecimento de pembrolizumabe para melanoma em estágio IV; o juízo deferiu a tutela contra a União.",
+    "inicial": "Ação 5005690-68.2025.4.03.6000.",
+    "decisao_recorrida": "Decisão da origem que deferiu a tutela para o fornecimento de pembrolizumabe.",
+    "recurso": "Agravo de instrumento da União ID 336079174 (12/09/2025): falta dos requisitos do Tema 6/STF, tratamento em unidade habilitada (CACON/UNACON); efeito suspensivo.",
+    "resposta": "Agravo interno da DPU ID 346951996 (16/12/2025) contra o efeito suspensivo; contrarrazões da DPU ID 346953963 (16/12/2025); contraminuta da União ao agravo interno ID 348525981 (31/12/2025).",
+    "parecer": "MPF ID 392572991 (18/08/2026): desprovimento do agravo de instrumento e provimento do agravo interno.",
+    "memoriais": "Não consta",
+    "representacao": "União: Advocacia-Geral da União. Agravado: Defensoria Pública da União.",
+    "preparo": "Isenta (União)."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Saúde · fornecimento de pembrolizumabe (Keytruda) para melanoma em estágio IV · tutela deferida na origem e revogada por efeito suspensivo · agravo interno da DPU · parecer do MPF pelo restabelecimento",
+     "sintese": "Marciano Romero, assistido pela DPU, pediu o fornecimento de pembrolizumabe para melanoma em estágio IV; o juízo deferiu a tutela contra a União.",
+     "questoes": "1) Requisitos do Tema 6/STF e das Súmulas Vinculantes 60 e 61 para o fornecimento de pembrolizumabe; 2) agravo interno contra o efeito suspensivo.",
+     "rel": {
+      "razoes": "Agravo de instrumento da União ID 336079174 (12/09/2025): falta dos requisitos do Tema 6/STF, tratamento em unidade habilitada (CACON/UNACON); efeito suspensivo.",
+      "contrarrazoes": "Agravo interno da DPU ID 346951996 (16/12/2025) contra o efeito suspensivo; contrarrazões da DPU ID 346953963 (16/12/2025); contraminuta da União ao agravo interno ID 348525981 (31/12/2025)."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "",
+      "juizo": "2ª Vara Federal de Campo Grande",
+      "dispositivo": "Deferiu a tutela para o fornecimento de pembrolizumabe."
+     },
+     "ai": {
+      "hip": "Tutela provisória",
+      "efeito": "Deferido",
+      "id": "344618671"
+     },
+     "adm": {
+      "prot": "2025-09-12",
+      "prazo": "30",
+      "dobro": true,
+      "ajg": false,
+      "dpu": true
+     },
+     "recursos": [
+      {
+       "parte": "Parte ré",
+       "tipo": "Agravo de instrumento",
+       "id": "336079174",
+       "contra": "Apresentada"
+      },
+      {
+       "parte": "Parte autora",
+       "tipo": "Agravo interno",
+       "id": "346951996",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "336079174",
+       "data": "2025-09-12"
+      },
+      {
+       "desc": "Decisão: efeito suspensivo e revogação da tutela",
+       "id": "344618671",
+       "data": "2025-11-28"
+      },
+      {
+       "desc": "Agravo interno da DPU",
+       "id": "346951996",
+       "data": "2025-12-16"
+      },
+      {
+       "desc": "Contrarrazões da DPU",
+       "id": "346953963",
+       "data": "2025-12-16"
+      },
+      {
+       "desc": "Contraminuta da União ao agravo interno",
+       "id": "348525981",
+       "data": "2025-12-31"
+      },
+      {
+       "desc": "Parecer do MPF",
+       "id": "392572991",
+       "data": "2026-08-18"
+      }
+     ],
+     "pendencias": "Ler o agravo no PJe; conferir os requisitos do Tema 6",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 382182012 · 23/06/2026 — abriu vista ao MPF | última peça: Parecer de Mérito (MPF) · ID 392572991 · 18/08/2026 | última movimentação: [VALIDAR no PJe] · Tutela revogada por efeito suspensivo (ID 344618671) · Agravo interno da DPU (ID 346951996) · Parecer do MPF pelo restabelecimento da tutela (ID 392572991) · Temas 6 e 1.234/STF; Súmulas Vinculantes 60 e 61",
+     "assuntoDet": "Medicamento oncológico (pembrolizumabe) — tutela revogada no recurso; agravo interno da DPU",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Dispensada (procurador público)",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Com parecer",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Apreciada · deferida",
+     "urgData": "2025-11-28",
+     "intercor": "Agravo interno da DPU (ID 346951996)",
+     "idParecer": "392572991",
+     "parecerSentido": "Desprovimento do agravo de instrumento e provimento do agravo interno"
+    }
+   }
+  },
+  {
+   "sessao": "",
+   "item": 11,
+   "processo": "5030876-51.2025.4.03.0000",
+   "recurso": "Agravo de instrumento",
+   "partes": "UNIÃO FEDERAL x LUCINEIA DE SOUZA",
+   "exequente": "UNIÃO FEDERAL",
+   "executado": "LUCINEIA DE SOUZA",
+   "assunto": "Oncológico",
+   "assunto_detalhado": "Medicamento oncológico (olaparibe) — tutela deferida contra a União",
+   "grupo": "M3",
+   "tipo_caso": "Saúde · fornecimento de medicamento oncológico (olaparibe) · tutela de urgência deferida na origem · agravo da União · efeito suspensivo indeferido · parecer do MPF pelo desprovimento",
+   "resultado": "Ato a proferir: julgamento do agravo (voto); o efeito suspensivo foi indeferido (decisão ID 344616032), o Estado de Mato Grosso do Sul declarou falta de interesse (ID 349501309) e o MPF opinou pelo desprovimento (ID 370951667) ‖ Proposta pelos precedentes: Desprovimento, na linha do indeferimento do efeito suspensivo (ID 344616032) e do parecer do MPF (ID 370951667), conferidos os requisitos dos Temas 6 e 1.234/STF; não há paradigma de mérito da Turma Regional no banco (a ApCiv 5000062-92.2026.4.03.6702, de 15/09/2026, trata só do indeferimento da inicial) [VALIDAR: Requisitos dos Temas 6 e 1.234/STF no caso (incorporação, CONITEC, NatJus); Situação atual do tratamento]",
+   "modelo": "Origem: lote adp-ai (grupo A7) · não pautado",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Agravo da União contra a tutela que lhe impôs o fornecimento de olaparibe a Lucineia de Souza. O Des. Fed. André Nabarrete deferiu a prioridade e indeferiu o efeito suspensivo, por falta de prova de dano concreto (ID 344616032). O Estado de Mato Grosso do Sul não apresentou contrarrazões (ID 349501309) e a agravada só deu ciência (ID 351719291). O MPF opinou pelo desprovimento (ID 370951667, 04/05/2026).",
+   "peculiaridades": "A decisão ID 344616032 menciona \"execução fiscal\" por erro material; a origem é ação de fornecimento de medicamento. Prioridade deferida (artigo 1.048 do CPC).",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "",
+    "correcao": "",
+    "situacao": "A minutar"
+   },
+   "pecas": [
+    {
+     "peca": "Agravo de instrumento",
+     "id": "343324491",
+     "data": "13/11/2025"
+    },
+    {
+     "peca": "Decisão no agravo",
+     "id": "344616032",
+     "data": "01/12/2025"
+    },
+    {
+     "peca": "Parecer (conferir se do MPF)",
+     "id": "370951667",
+     "data": "04/05/2026"
+    }
+   ],
+   "mpf": "",
+   "triagem": {
+    "ato": "Julgamento do agravo (voto)",
+    "materia": "Saúde — fornecimento de medicamento oncológico",
+    "origem": "Ação 5009833-03.2025.4.03.6000 (2ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "ID 433786601 (autos de origem): determinou à União fornecer olaparibe, em 30 dias, na quantidade prescrita para um trimestre, com continuidade enquanto mantida a prescrição",
+    "recurso": "ID 343324491 · 13/11/2025",
+    "preparo": "Isenta (União)",
+    "monocratica": "Não indicada; pauta",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "ISENTO (União) · conferido em 21/11/2026",
+    "conf_prevencao": "Origem: 5009833-03.2025.4.03.6000 · redistribuído pelo despacho ID 365417409 (Resolução 33/2025) · conferido em 21/11/2026"
+   },
+   "ajustes": [],
+   "pendencias": [
+    "[VALIDAR] Requisitos dos Temas 6 e 1.234/STF e situação do tratamento"
+   ],
+   "minuta": false,
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 366714870 · 16/04/2026 — abriu vista ao MPF | último ato decisório sobre o recurso: ID 344616032 · 01/12/2025 — deferiu a prioridade e indeferiu o efeito suspensivo | última peça: Parecer de Mérito (MPF) · ID 370951667 · 04/05/2026 | última movimentação: 04/05/2026 17:03 · CONCLUSOS PARA JULGAMENTO · Efeito suspensivo indeferido (ID 344616032) · Parecer do MPF pelo desprovimento (ID 370951667) · Prioridade na tramitação · Temas 6 e 1.234/STF [VALIDAR requisitos]",
+   "classe": "AI",
+   "tarefa": "Analisar tipo de decisão a proferir · prioridade",
+   "etiquetas": "2ª Seção; AI - Tutela provisória; Fornecimento de medicamentos",
+   "chegada": "04/11/2026",
+   "bloco": "2",
+   "situacao_atual": {
+    "ultima_decisao": "Despacho · ID 366714870 · 16/04/2026 — abriu vista ao MPF",
+    "ultima_peca": "Parecer de Mérito (MPF) · ID 370951667 · 04/05/2026",
+    "ultima_informacao": "Certidão · ID 365638437 · 10/04/2026",
+    "ultima_movimentacao": "04/05/2026 17:03 · CONCLUSOS PARA JULGAMENTO",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "mov_fonte": "linha do tempo do PJe (extração de 20-21/11/2026), sem avisos de tela",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 366714870 · 16/04/2026 — abriu vista ao MPF | último ato decisório sobre o recurso: ID 344616032 · 01/12/2025 — deferiu a prioridade e indeferiu o efeito suspensivo | última peça: Parecer de Mérito (MPF) · ID 370951667 · 04/05/2026 | última movimentação: 04/05/2026 17:03 · CONCLUSOS PARA JULGAMENTO",
+    "ultima_decisao_relevante": "Decisão · ID 344616032 · 01/12/2025 — deferiu a prioridade e indeferiu o efeito suspensivo"
+   },
+   "teor": {
+    "sintese_fatica": "Lucineia de Souza pediu o fornecimento de olaparibe para tratamento oncológico; o juízo deferiu a tutela de urgência contra a União.",
+    "inicial": "Ação 5009833-03.2025.4.03.6000 (fornecimento de medicamento).",
+    "decisao_recorrida": "Decisão ID 433786601 (autos de origem): fornecimento de olaparibe em 30 dias, para um trimestre, com continuidade.",
+    "recurso": "Agravo de instrumento da União ID 343324491 (13/11/2025): ausência dos requisitos para o fornecimento e deferência à análise técnica dos órgãos do SUS; pede efeito suspensivo.",
+    "resposta": "Estado de Mato Grosso do Sul: falta de interesse em contrarrazoar (ID 349501309). Agravada: ciência da decisão (ID 351719291).",
+    "parecer": "MPF ID 370951667 (04/05/2026): desprovimento.",
+    "memoriais": "Não consta",
+    "representacao": "União: Advocacia-Geral da União (procuração dispensada). Agravada: advogada Janine Antunes Delgado (OAB/MS 19.703).",
+    "preparo": "Isenta (União)."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Saúde · fornecimento de medicamento oncológico (olaparibe) · tutela de urgência deferida na origem · agravo da União · efeito suspensivo indeferido · parecer do MPF pelo desprovimento",
+     "sintese": "Lucineia de Souza pediu o fornecimento de olaparibe para tratamento oncológico; o juízo deferiu a tutela de urgência contra a União.",
+     "questoes": "1) Requisitos para o fornecimento judicial de medicamento oncológico (Temas 6 e 1.234/STF); 2) perigo de dano à União.",
+     "rel": {
+      "razoes": "Agravo de instrumento da União ID 343324491 (13/11/2025): ausência dos requisitos para o fornecimento e deferência à análise técnica dos órgãos do SUS; pede efeito suspensivo.",
+      "contrarrazoes": "Estado de Mato Grosso do Sul: falta de interesse em contrarrazoar (ID 349501309). Agravada: ciência da decisão (ID 351719291)."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "433786601",
+      "juizo": "2ª Vara Federal de Campo Grande",
+      "dispositivo": "Deferiu a tutela de urgência para o fornecimento de olaparibe."
+     },
+     "ai": {
+      "hip": "Tutela provisória",
+      "efeito": "Indeferido",
+      "id": "344616032"
+     },
+     "adm": {
+      "prot": "2025-11-13",
+      "prazo": "30",
+      "dobro": true,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte ré",
+       "tipo": "Agravo de instrumento",
+       "id": "343324491",
+       "contra": "Não apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "343324491",
+       "data": "2025-11-13"
+      },
+      {
+       "desc": "Decisão: prioridade e efeito suspensivo indeferido",
+       "id": "344616032",
+       "data": "2025-12-01"
+      },
+      {
+       "desc": "Estado de MS: sem interesse em contrarrazoar",
+       "id": "349501309",
+       "data": "2026-01-09"
+      },
+      {
+       "desc": "Agravada: ciência",
+       "id": "351719291",
+       "data": "2026-01-26"
+      },
+      {
+       "desc": "Despacho: vista ao MPF",
+       "id": "366714870",
+       "data": "2026-04-16"
+      },
+      {
+       "desc": "Parecer do MPF",
+       "id": "370951667",
+       "data": "2026-05-04"
+      }
+     ],
+     "pendencias": "Conferir os requisitos dos Temas 6 e 1.234/STF",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 366714870 · 16/04/2026 — abriu vista ao MPF | último ato decisório sobre o recurso: ID 344616032 · 01/12/2025 — deferiu a prioridade e indeferiu o efeito suspensivo | última peça: Parecer de Mérito (MPF) · ID 370951667 · 04/05/2026 | última movimentação: 04/05/2026 17:03 · CONCLUSOS PARA JULGAMENTO · Efeito suspensivo indeferido (ID 344616032) · Parecer do MPF pelo desprovimento (ID 370951667) · Prioridade na tramitação · Temas 6 e 1.234/STF [VALIDAR requisitos]",
+     "assuntoDet": "Medicamento oncológico (olaparibe) — tutela deferida contra a União",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Dispensada (procurador público)",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Com parecer",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2025-12-01",
+     "idParecer": "370951667",
+     "parecerSentido": "Desprovimento do agravo"
+    }
+   }
+  }
+ ]
+}
