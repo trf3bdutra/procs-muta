@@ -96,7 +96,68 @@
     "correcao": "",
     "situacao": "A minutar"
    },
-   "pecas": [],
+   "pecas": [
+    {
+     "id": "371216988",
+     "peca": "Petição Inicial (06/11/2025)",
+     "tipo": "Petição Inicial",
+     "data": "06/11/2025"
+    },
+    {
+     "id": "371216999",
+     "peca": "Despacho (07/11/2025)",
+     "tipo": "Despacho",
+     "data": "07/11/2025"
+    },
+    {
+     "id": "371217016",
+     "peca": "Decisão (26/11/2025)",
+     "tipo": "Decisão",
+     "data": "26/11/2025"
+    },
+    {
+     "id": "371217019",
+     "peca": "Informações Prestadas (16/12/2025)",
+     "tipo": "Informações Prestadas",
+     "data": "16/12/2025"
+    },
+    {
+     "id": "371217021",
+     "peca": "MP (24/02/2026)",
+     "tipo": "Parecer \"Falta de Interesse\"",
+     "data": "24/02/2026"
+    },
+    {
+     "id": "371217024",
+     "peca": "Sentença (17/04/2026)",
+     "tipo": "Sentença",
+     "data": "17/04/2026"
+    },
+    {
+     "id": "371217027",
+     "peca": "Apelação (29/04/2026)",
+     "tipo": "Apelação",
+     "data": "29/04/2026"
+    },
+    {
+     "id": "371217029",
+     "peca": "Contrarrazões (29/04/2026)",
+     "tipo": "Contrarrazões",
+     "data": "29/04/2026"
+    },
+    {
+     "id": "371492518",
+     "peca": "MP (06/05/2026)",
+     "tipo": "Parecer \"Falta de Interesse\"",
+     "data": "06/05/2026"
+    },
+    {
+     "id": "371494638",
+     "peca": "MP (06/05/2026)",
+     "tipo": "Parecer \"Falta de Interesse\"",
+     "data": "06/05/2026"
+    }
+   ],
    "mpf": "",
    "triagem": {
     "ato": "Julgamento da apelação e da remessa necessária (voto)",
@@ -231,6 +292,465 @@
      "idParecer": "371492518",
      "parecerSentido": "Ausência de interesse que justifique intervenção"
     }
+   },
+   "autos": {
+    "arquivo": "acervo/autos/5002022-74.2025.4.03.6005.json.gz",
+    "extraido_em": "2026-11-21",
+    "total": 47,
+    "sem_texto": [
+     "371216989",
+     "371216990",
+     "371216991",
+     "371216992",
+     "371216993",
+     "371216994",
+     "371216995",
+     "371216996",
+     "371217018"
+    ],
+    "faltam": [
+     "371217018",
+     "371216989",
+     "371216990",
+     "371216991",
+     "371216992",
+     "371216993",
+     "371216994",
+     "371216995",
+     "371216996"
+    ],
+    "documentos": [
+     [
+      "371216988",
+      "06/11/2025",
+      "Petição Inicial",
+      "",
+      "",
+      "pdf",
+      5
+     ],
+     [
+      "371216989",
+      "06/11/2025",
+      "Procuração/substabelecimento com reserva de poderes",
+      "01 procuracao",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "371216990",
+      "06/11/2025",
+      "Documento Comprobatório",
+      "02 dcl pobre",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "371216991",
+      "06/11/2025",
+      "Documento Comprobatório",
+      "03 ENDERECO",
+      "",
+      "pdf",
+      2
+     ],
+     [
+      "371216992",
+      "06/11/2025",
+      "Documento Comprobatório",
+      "04 DOC PESSSOAL",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "371216993",
+      "06/11/2025",
+      "Documento Comprobatório",
+      "05 CRLV",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "371216994",
+      "06/11/2025",
+      "Documento Comprobatório",
+      "06 FIPE",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "371216995",
+      "06/11/2025",
+      "Documento Comprobatório",
+      "07 APREENSÃO",
+      "",
+      "pdf",
+      2
+     ],
+     [
+      "371216996",
+      "06/11/2025",
+      "Documento Comprobatório",
+      "DOC",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "371216997",
+      "06/11/2025",
+      "Certidão",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "371216998",
+      "06/11/2025",
+      "Manifestação",
+      "",
+      "",
+      "pdf",
+      2
+     ],
+     [
+      "371216999",
+      "07/11/2025",
+      "Despacho",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "371217000",
+      "12/11/2025",
+      "Documento Comprobatório",
+      "",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "371217001",
+      "12/11/2025",
+      "Outras peças",
+      "01",
+      "",
+      "pdf",
+      2
+     ],
+     [
+      "371217002",
+      "12/11/2025",
+      "Outras peças",
+      "02",
+      "",
+      "pdf",
+      10
+     ],
+     [
+      "371217003",
+      "12/11/2025",
+      "Outras peças",
+      "03",
+      "",
+      "pdf",
+      27
+     ],
+     [
+      "371217004",
+      "12/11/2025",
+      "Outras peças",
+      "04",
+      "",
+      "pdf",
+      2
+     ],
+     [
+      "371217005",
+      "12/11/2025",
+      "Outras peças",
+      "05",
+      "",
+      "pdf",
+      2
+     ],
+     [
+      "371217006",
+      "12/11/2025",
+      "Outras peças",
+      "06",
+      "",
+      "pdf",
+      2
+     ],
+     [
+      "371217007",
+      "12/11/2025",
+      "Outras peças",
+      "07",
+      "",
+      "pdf",
+      2
+     ],
+     [
+      "371217008",
+      "12/11/2025",
+      "Outras peças",
+      "08",
+      "",
+      "pdf",
+      6
+     ],
+     [
+      "371217009",
+      "12/11/2025",
+      "Outras peças",
+      "09",
+      "",
+      "pdf",
+      4
+     ],
+     [
+      "371217010",
+      "12/11/2025",
+      "Outras peças",
+      "10",
+      "",
+      "pdf",
+      4
+     ],
+     [
+      "371217011",
+      "12/11/2025",
+      "Outras peças",
+      "11",
+      "",
+      "pdf",
+      2
+     ],
+     [
+      "371217012",
+      "12/11/2025",
+      "Outras peças",
+      "12",
+      "",
+      "pdf",
+      2
+     ],
+     [
+      "371217013",
+      "12/11/2025",
+      "Outras peças",
+      "13",
+      "",
+      "pdf",
+      2
+     ],
+     [
+      "371217014",
+      "12/11/2025",
+      "Outras peças",
+      "14",
+      "",
+      "pdf",
+      3
+     ],
+     [
+      "371217015",
+      "12/11/2025",
+      "Outras peças",
+      "15",
+      "",
+      "pdf",
+      2
+     ],
+     [
+      "371217016",
+      "26/11/2025",
+      "Decisão",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "371217017",
+      "01/12/2025",
+      "Informação",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "371217018",
+      "01/12/2025",
+      "Ofício",
+      "5002022 74.2025.4.03.6005 e mail",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "371217019",
+      "16/12/2025",
+      "Informações Prestadas",
+      "",
+      "",
+      "pdf",
+      11
+     ],
+     [
+      "371217020",
+      "16/12/2025",
+      "Documentos Diversos",
+      "10265491652202551 5002022 74.2025.4.03.6005 ANEXO IF 283704 wesley AI",
+      "",
+      "pdf",
+      6
+     ],
+     [
+      "371217021",
+      "24/02/2026",
+      "Parecer \"Falta de Interesse\"",
+      "MP",
+      "",
+      "pdf",
+      3
+     ],
+     [
+      "371217022",
+      "24/02/2026",
+      "Certidão",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "371217023",
+      "02/03/2026",
+      "Petição intercorrente",
+      "",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "371217024",
+      "17/04/2026",
+      "Sentença",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "371217025",
+      "23/04/2026",
+      "Informação",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "371217026",
+      "23/04/2026",
+      "Ofício",
+      "5002022 74.2025.4.03.6005 e mail",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "371217027",
+      "29/04/2026",
+      "Apelação",
+      "",
+      "",
+      "pdf",
+      14
+     ],
+     [
+      "371217028",
+      "29/04/2026",
+      "Documento Comprobatório",
+      "10109723747202541 IMPRESSAO",
+      "",
+      "pdf",
+      43
+     ],
+     [
+      "371217029",
+      "29/04/2026",
+      "Contrarrazões",
+      "",
+      "",
+      "pdf",
+      6
+     ],
+     [
+      "371217030",
+      "05/05/2026",
+      "Ato ordinatório",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "371217031",
+      "05/05/2026",
+      "Informação",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "371402985",
+      "06/05/2026",
+      "Intimação",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "371492518",
+      "06/05/2026",
+      "Parecer \"Falta de Interesse\"",
+      "MP",
+      "",
+      "pdf",
+      2
+     ],
+     [
+      "371494638",
+      "06/05/2026",
+      "Parecer \"Falta de Interesse\"",
+      "MP",
+      "",
+      "html",
+      0
+     ]
+    ]
+   },
+   "extracao": {
+    "situacao": "extraída",
+    "em": "21/11/2026",
+    "documentos": "47",
+    "sem_texto": "9",
+    "faltam": "9"
    }
   },
   {
@@ -259,7 +779,104 @@
     "correcao": "",
     "situacao": "A minutar"
    },
-   "pecas": [],
+   "pecas": [
+    {
+     "id": "392442616",
+     "peca": "Petição Inicial (16/09/2024)",
+     "tipo": "Petição Inicial",
+     "data": "16/09/2024"
+    },
+    {
+     "id": "392442626",
+     "peca": "Despacho de encaminhamento (16/09/2024)",
+     "tipo": "Documento Comprobatório",
+     "data": "16/09/2024"
+    },
+    {
+     "id": "392442637",
+     "peca": "Decisão (28/01/2025)",
+     "tipo": "Decisão",
+     "data": "28/01/2025"
+    },
+    {
+     "id": "392442641",
+     "peca": "Informações Prestadas (18/02/2025)",
+     "tipo": "Informações Prestadas",
+     "data": "18/02/2025"
+    },
+    {
+     "id": "392442643",
+     "peca": "Comprovação de Interposição de Agravo (19/02/2025)",
+     "tipo": "Comprovação de Interposição de Agravo",
+     "data": "19/02/2025"
+    },
+    {
+     "id": "392442644",
+     "peca": "Agravo de Instrumento (1) (19/02/2025)",
+     "tipo": "Outras peças",
+     "data": "19/02/2025"
+    },
+    {
+     "id": "392442653",
+     "peca": "Despacho de Inspeção (30/05/2025)",
+     "tipo": "Despacho de Inspeção",
+     "data": "30/05/2025"
+    },
+    {
+     "id": "392442655",
+     "peca": "Voto (30/07/2025)",
+     "tipo": "Voto",
+     "data": "30/07/2025"
+    },
+    {
+     "id": "392442656",
+     "peca": "Ementa (30/07/2025)",
+     "tipo": "Ementa",
+     "data": "30/07/2025"
+    },
+    {
+     "id": "392442659",
+     "peca": "Despacho de Inspeção (26/05/2026)",
+     "tipo": "Despacho de Inspeção",
+     "data": "26/05/2026"
+    },
+    {
+     "id": "392442660",
+     "peca": "Despacho (03/06/2026)",
+     "tipo": "Despacho",
+     "data": "03/06/2026"
+    },
+    {
+     "id": "392442662",
+     "peca": "Sentença tipo A (29/06/2026)",
+     "tipo": "Sentença tipo A",
+     "data": "29/06/2026"
+    },
+    {
+     "id": "392442665",
+     "peca": "Apelação (13/07/2026)",
+     "tipo": "Apelação",
+     "data": "13/07/2026"
+    },
+    {
+     "id": "392442666",
+     "peca": "Despacho (13/07/2026)",
+     "tipo": "Despacho",
+     "data": "13/07/2026"
+    },
+    {
+     "id": "392442667",
+     "peca": "Contrarrazões (03/08/2026)",
+     "tipo": "Contrarrazões",
+     "data": "03/08/2026"
+    },
+    {
+     "id": "405989800",
+     "peca": "MP (22/10/2026)",
+     "tipo": "Parecer de Mérito",
+     "data": "22/10/2026"
+    }
+   ],
    "mpf": "",
    "triagem": {
     "ato": "Julgamento da apelação e da remessa necessária (voto)",
@@ -395,6 +1012,590 @@
      "idParecer": "405989800",
      "parecerSentido": "Provimento da apelação"
     }
+   },
+   "autos": {
+    "arquivo": "acervo/autos/5009950-28.2024.4.03.6000.json.gz",
+    "extraido_em": "2026-11-21",
+    "total": 62,
+    "sem_texto": [
+     "392442632",
+     "392442633",
+     "400306632",
+     "400306634"
+    ],
+    "faltam": [
+     "400306632",
+     "400306634",
+     "392442632",
+     "392442633"
+    ],
+    "documentos": [
+     [
+      "392442616",
+      "16/09/2024",
+      "Petição Inicial",
+      "",
+      "",
+      "pdf",
+      13
+     ],
+     [
+      "392442617",
+      "16/09/2024",
+      "Procuração/substabelecimento com reserva de poderes",
+      "PROCURACAO assinado",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "392442618",
+      "16/09/2024",
+      "Outros Documentos",
+      "DECLARACAO DE HIPOSSUFICIENCIA assinado",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "392442619",
+      "16/09/2024",
+      "Documento de Identificação",
+      "",
+      "",
+      "pulado",
+      0
+     ],
+     [
+      "392442620",
+      "16/09/2024",
+      "Outros Documentos",
+      "Comprovante de endereço",
+      "",
+      "pdf",
+      2
+     ],
+     [
+      "392442621",
+      "16/09/2024",
+      "Outros Documentos",
+      "AUTORIZAÇÃO PARA TRANSFERÊNCIA DE PROPRIEDADE DE VEÍCULO ATPV",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "392442622",
+      "16/09/2024",
+      "Outros Documentos",
+      "Comprovante de renda",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "392442623",
+      "16/09/2024",
+      "Documento Comprobatório",
+      "Impugnação administrativa",
+      "",
+      "pdf",
+      7
+     ],
+     [
+      "392442624",
+      "16/09/2024",
+      "Documento Comprobatório",
+      "Documentos aduaneiros Juntada de impugnação aceita",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "392442625",
+      "16/09/2024",
+      "Documento Comprobatório",
+      "Documentos aduaneiros Fipe",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "392442626",
+      "16/09/2024",
+      "Documento Comprobatório",
+      "Despacho de encaminhamento",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "392442627",
+      "16/09/2024",
+      "Documento Comprobatório",
+      "Documentos aduaneiros Renavam",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "392442628",
+      "16/09/2024",
+      "Documento Comprobatório",
+      "Documentos aduaneiros relatório de fiscalização do veículo",
+      "",
+      "pdf",
+      2
+     ],
+     [
+      "392442629",
+      "16/09/2024",
+      "Documento Comprobatório",
+      "Boletim de ocorrência",
+      "",
+      "pdf",
+      12
+     ],
+     [
+      "392442630",
+      "16/09/2024",
+      "Documento Comprobatório",
+      "Aviso de Recebimento AR apreensão do veículo",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "392442631",
+      "16/09/2024",
+      "Documento Comprobatório",
+      "Ato coator auto de infração",
+      "",
+      "pdf",
+      4
+     ],
+     [
+      "392442632",
+      "16/09/2024",
+      "Outros Documentos",
+      "certidão judicial criminal",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "392442633",
+      "16/09/2024",
+      "Outros Documentos",
+      "certidão judicial cível",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "392442634",
+      "16/09/2024",
+      "Certidão",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "392442635",
+      "17/09/2024",
+      "Certidão",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "392442636",
+      "17/09/2024",
+      "Certidão",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "392442637",
+      "28/01/2025",
+      "Decisão",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "392442638",
+      "30/01/2025",
+      "Manifestação",
+      "",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "392442639",
+      "30/01/2025",
+      "Certidão de devolução de mandado",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "392442640",
+      "30/01/2025",
+      "Diligência",
+      "DRF9950",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "392442641",
+      "18/02/2025",
+      "Informações Prestadas",
+      "",
+      "",
+      "pdf",
+      12
+     ],
+     [
+      "392442642",
+      "18/02/2025",
+      "Documentos Diversos",
+      "INFOMS PABLO REI ALEGRE SANTOS TRF3 ANEXO",
+      "",
+      "pdf",
+      6
+     ],
+     [
+      "392442643",
+      "19/02/2025",
+      "Comprovação de Interposição de Agravo",
+      "",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "392442644",
+      "19/02/2025",
+      "Outras peças",
+      "Agravo de Instrumento (1)",
+      "",
+      "pdf",
+      18
+     ],
+     [
+      "392442645",
+      "19/02/2025",
+      "Outros Documentos",
+      "5003837 79.2025.4.03.0000 1739927142336 15719810 certidao",
+      "",
+      "pdf",
+      2
+     ],
+     [
+      "392442646",
+      "20/02/2025",
+      "Ato ordinatório",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "392442647",
+      "20/02/2025",
+      "Mandado",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "392442648",
+      "20/02/2025",
+      "Certidão de devolução de mandado",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "392442649",
+      "20/02/2025",
+      "Outros Documentos",
+      "950 r",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "392442650",
+      "21/02/2025",
+      "Manifestação",
+      "",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "392442651",
+      "02/04/2025",
+      "Ato ordinatório",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "392442652",
+      "22/05/2025",
+      "Manifestação",
+      "",
+      "",
+      "pdf",
+      2
+     ],
+     [
+      "392442653",
+      "30/05/2025",
+      "Despacho de Inspeção",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "392442654",
+      "30/07/2025",
+      "Relatório",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "392442655",
+      "30/07/2025",
+      "Voto",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "392442656",
+      "30/07/2025",
+      "Ementa",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "392442657",
+      "01/08/2025",
+      "Ato ordinatório",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "392442658",
+      "05/08/2025",
+      "Outras peças",
+      "",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "392442659",
+      "26/05/2026",
+      "Despacho de Inspeção",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "392442660",
+      "03/06/2026",
+      "Despacho",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "392442661",
+      "09/06/2026",
+      "Manifestação",
+      "Manifestação PFN ref. id 57197024",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "392442662",
+      "29/06/2026",
+      "Sentença tipo A",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "392442663",
+      "01/07/2026",
+      "Mandado",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "392442664",
+      "08/07/2026",
+      "Ciência",
+      "",
+      "",
+      "pulado",
+      0
+     ],
+     [
+      "392442665",
+      "13/07/2026",
+      "Apelação",
+      "",
+      "",
+      "pdf",
+      7
+     ],
+     [
+      "392442666",
+      "13/07/2026",
+      "Despacho",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "392442667",
+      "03/08/2026",
+      "Contrarrazões",
+      "",
+      "",
+      "pdf",
+      10
+     ],
+     [
+      "392442668",
+      "13/08/2026",
+      "Informação",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "396537545",
+      "08/09/2026",
+      "Certidão",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "396553295",
+      "08/09/2026",
+      "Intimação",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "400303377",
+      "24/09/2026",
+      "Petição intercorrente",
+      "Petição intercorrente requerimento de expedição de ofício à Receita Federal",
+      "",
+      "pdf",
+      3
+     ],
+     [
+      "400306632",
+      "24/09/2026",
+      "Documento Comprobatório",
+      "Restrições",
+      "",
+      "pdf",
+      2
+     ],
+     [
+      "400306633",
+      "24/09/2026",
+      "Documento Comprobatório",
+      "Debitos",
+      "",
+      "pdf",
+      3
+     ],
+     [
+      "400306634",
+      "24/09/2026",
+      "Documento Comprobatório",
+      "comprovante de pagamento dos débitos",
+      "",
+      "pdf",
+      2
+     ],
+     [
+      "400306637",
+      "24/09/2026",
+      "Documento Comprobatório",
+      "Requerimento processo ecac",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "400306658",
+      "24/09/2026",
+      "Documento Comprobatório",
+      "Relatorio Atendimento 202601056171",
+      "",
+      "pdf",
+      2
+     ],
+     [
+      "405989800",
+      "22/10/2026",
+      "Parecer de Mérito",
+      "MP",
+      "",
+      "pdf",
+      4
+     ]
+    ]
+   },
+   "extracao": {
+    "situacao": "extraída",
+    "em": "21/11/2026",
+    "documentos": "62",
+    "sem_texto": "4",
+    "faltam": "4"
    }
   },
   {
@@ -423,7 +1624,44 @@
     "correcao": "",
     "situacao": "A minutar"
    },
-   "pecas": [],
+   "pecas": [
+    {
+     "id": "377924262",
+     "peca": "Petição Inicial (26/11/2025)",
+     "tipo": "Petição Inicial",
+     "data": "26/11/2025"
+    },
+    {
+     "id": "377924270",
+     "peca": "Decisão (26/11/2025)",
+     "tipo": "Decisão",
+     "data": "26/11/2025"
+    },
+    {
+     "id": "377924279",
+     "peca": "10265069334202698 5002157 86.2025.4.03.6005 (19/02/2026)",
+     "tipo": "Informações Prestadas",
+     "data": "19/02/2026"
+    },
+    {
+     "id": "377924533",
+     "peca": "MP (10/03/2026)",
+     "tipo": "Parecer \"Falta de Interesse\"",
+     "data": "10/03/2026"
+    },
+    {
+     "id": "377924534",
+     "peca": "Sentença (19/04/2026)",
+     "tipo": "Sentença",
+     "data": "19/04/2026"
+    },
+    {
+     "id": "381138221",
+     "peca": "MP (18/06/2026)",
+     "tipo": "Parecer \"Falta de Interesse\"",
+     "data": "18/06/2026"
+    }
+   ],
    "mpf": "",
    "triagem": {
     "ato": "Julgamento da remessa necessária (voto) [VALIDAR efeito da manifestação da Fazenda Nacional]",
@@ -542,6 +1780,289 @@
      "idParecer": "381138221",
      "parecerSentido": "Prosseguimento do feito, sem intervenção"
     }
+   },
+   "autos": {
+    "arquivo": "acervo/autos/5002157-86.2025.4.03.6005.json.gz",
+    "extraido_em": "2026-11-21",
+    "total": 29,
+    "sem_texto": [
+     "377924265",
+     "377924277"
+    ],
+    "faltam": [
+     "377924277",
+     "377924265"
+    ],
+    "documentos": [
+     [
+      "377924262",
+      "26/11/2025",
+      "Petição Inicial",
+      "",
+      "",
+      "pdf",
+      6
+     ],
+     [
+      "377924263",
+      "26/11/2025",
+      "Procuração/substabelecimento com reserva de poderes",
+      "2. Procuração Ailton Martinez dos Santos",
+      "",
+      "pdf",
+      2
+     ],
+     [
+      "377924264",
+      "26/11/2025",
+      "Documento de Identificação",
+      "2.1 CNH e.pdf",
+      "",
+      "pulado",
+      0
+     ],
+     [
+      "377924265",
+      "26/11/2025",
+      "Outros Documentos",
+      "3. Cópia Policia Federal",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "377924266",
+      "26/11/2025",
+      "Outros Documentos",
+      "1 UNIFICADO",
+      "",
+      "pdf",
+      36
+     ],
+     [
+      "377924267",
+      "26/11/2025",
+      "Outros Documentos",
+      "2 UNIFICADO",
+      "",
+      "pdf",
+      9
+     ],
+     [
+      "377924268",
+      "26/11/2025",
+      "Outros Documentos",
+      "3 UNIFICADO",
+      "",
+      "pdf",
+      46
+     ],
+     [
+      "377924269",
+      "26/11/2025",
+      "Certidão",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "377924270",
+      "26/11/2025",
+      "Decisão",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "377924271",
+      "27/01/2026",
+      "Outras peças",
+      "Justiça gratuita",
+      "",
+      "pdf",
+      2
+     ],
+     [
+      "377924272",
+      "27/01/2026",
+      "Documento Comprobatório",
+      "4.1 Consulta restituição IRPF 2025 ",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "377924273",
+      "27/01/2026",
+      "Documento Comprobatório",
+      "4.2. Consulta restituição IRPF 2024",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "377924274",
+      "27/01/2026",
+      "Documento Comprobatório",
+      "4.3 Consulta restituição IRPF 2023",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "377924275",
+      "11/02/2026",
+      "Outras peças",
+      "Pagamento custas",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "377924276",
+      "11/02/2026",
+      "Custas",
+      "5.1 guia",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "377924277",
+      "11/02/2026",
+      "Documento Comprobatório",
+      "5.2 Comprovante 2026 02 09 124159",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "377924278",
+      "12/02/2026",
+      "Outros Documentos",
+      "Intimação da autoridade",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "377924279",
+      "19/02/2026",
+      "Informações Prestadas",
+      "10265069334202698 5002157 86.2025.4.03.6005",
+      "",
+      "pdf",
+      6
+     ],
+     [
+      "377924280",
+      "19/02/2026",
+      "Documentos Diversos",
+      "10265069334202698 5002157 86.2025.4.03.6005 ANEXO IF 294361 Auto de Infração VEÍCULO",
+      "",
+      "pdf",
+      5
+     ],
+     [
+      "377924281",
+      "19/02/2026",
+      "Petição intercorrente",
+      "Ingresso em mandado de segurança",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "377924532",
+      "09/03/2026",
+      "Ato ordinatório",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "377924533",
+      "10/03/2026",
+      "Parecer \"Falta de Interesse\"",
+      "MP",
+      "",
+      "pdf",
+      2
+     ],
+     [
+      "377924534",
+      "19/04/2026",
+      "Sentença",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "377924535",
+      "22/04/2026",
+      "Certidão",
+      "Código para acesso externo às peças do processo",
+      "",
+      "html",
+      0
+     ],
+     [
+      "377924536",
+      "22/04/2026",
+      "Outros Documentos",
+      "Intimação da autoridade",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "377924537",
+      "17/05/2026",
+      "Manifestação",
+      "",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "377924538",
+      "01/06/2026",
+      "Informação",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "379916838",
+      "12/06/2026",
+      "Intimação",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "381138221",
+      "18/06/2026",
+      "Parecer \"Falta de Interesse\"",
+      "MP",
+      "",
+      "pdf",
+      1
+     ]
+    ]
+   },
+   "extracao": {
+    "situacao": "extraída",
+    "em": "21/11/2026",
+    "documentos": "29",
+    "sem_texto": "2",
+    "faltam": "2"
    }
   },
   {
@@ -570,7 +2091,140 @@
     "correcao": "",
     "situacao": "A minutar"
    },
-   "pecas": [],
+   "pecas": [
+    {
+     "id": "289230835",
+     "peca": "Petição Inicial (31/08/2022)",
+     "tipo": "Petição Inicial",
+     "data": "31/08/2022"
+    },
+    {
+     "id": "289230836",
+     "peca": "MANDADO DE SEGURANÇA JOSE CARLOS FERRARI (31/08/2022)",
+     "tipo": "Petição inicial - PDF",
+     "data": "31/08/2022"
+    },
+    {
+     "id": "289230851",
+     "peca": "Despacho (02/09/2022)",
+     "tipo": "Despacho",
+     "data": "02/09/2022"
+    },
+    {
+     "id": "289230852",
+     "peca": "Despacho (02/09/2022)",
+     "tipo": "Despacho",
+     "data": "02/09/2022"
+    },
+    {
+     "id": "289230868",
+     "peca": "Decisão (19/10/2022)",
+     "tipo": "Decisão",
+     "data": "19/10/2022"
+    },
+    {
+     "id": "289230869",
+     "peca": "Decisão (22/10/2022)",
+     "tipo": "Decisão",
+     "data": "22/10/2022"
+    },
+    {
+     "id": "289230870",
+     "peca": "Emenda à Inicial (23/11/2022)",
+     "tipo": "Emenda à Inicial",
+     "data": "23/11/2022"
+    },
+    {
+     "id": "289230876",
+     "peca": "Decisão (13/12/2022)",
+     "tipo": "Decisão",
+     "data": "13/12/2022"
+    },
+    {
+     "id": "289230877",
+     "peca": "Decisão (13/12/2022)",
+     "tipo": "Decisão",
+     "data": "13/12/2022"
+    },
+    {
+     "id": "289231034",
+     "peca": "Decisão (25/01/2023)",
+     "tipo": "Decisão",
+     "data": "25/01/2023"
+    },
+    {
+     "id": "289231035",
+     "peca": "Decisão (26/01/2023)",
+     "tipo": "Decisão",
+     "data": "26/01/2023"
+    },
+    {
+     "id": "289231036",
+     "peca": "Decisão (26/01/2023)",
+     "tipo": "Decisão",
+     "data": "26/01/2023"
+    },
+    {
+     "id": "289231046",
+     "peca": "Informações Prestadas (13/02/2023)",
+     "tipo": "Informações Prestadas",
+     "data": "13/02/2023"
+    },
+    {
+     "id": "289231048",
+     "peca": "Decisão (14/02/2023)",
+     "tipo": "Decisão",
+     "data": "14/02/2023"
+    },
+    {
+     "id": "289231049",
+     "peca": "MP (27/02/2023)",
+     "tipo": "Parecer \"Falta de Interesse\"",
+     "data": "27/02/2023"
+    },
+    {
+     "id": "289231050",
+     "peca": "Sentença (22/09/2023)",
+     "tipo": "Sentença",
+     "data": "22/09/2023"
+    },
+    {
+     "id": "289231052",
+     "peca": "Embargos de Declaração (05/10/2023)",
+     "tipo": "Embargos de Declaração",
+     "data": "05/10/2023"
+    },
+    {
+     "id": "289231056",
+     "peca": "Contrarrazões aos Embargos de Declaração (16/10/2023)",
+     "tipo": "Manifestação",
+     "data": "16/10/2023"
+    },
+    {
+     "id": "289231057",
+     "peca": "Sentença (05/02/2024)",
+     "tipo": "Sentença",
+     "data": "05/02/2024"
+    },
+    {
+     "id": "289447717",
+     "peca": "Parecer (26/04/2024)",
+     "tipo": "Parecer",
+     "data": "26/04/2024"
+    },
+    {
+     "id": "302849981",
+     "peca": "CÓPIA SENTENÇA AUTOS 5008883 28.2024.4.03.6000 (05/09/2024)",
+     "tipo": "Documento Digitalizado",
+     "data": "05/09/2024"
+    },
+    {
+     "id": "306633125",
+     "peca": "Decisão (09/10/2024)",
+     "tipo": "Decisão",
+     "data": "09/10/2024"
+    }
+   ],
    "mpf": "",
    "triagem": {
     "ato": "Julgamento da remessa necessária: possível decisão monocrática (artigo 932 do CPC) [VALIDAR prova da boa-fé]",
@@ -682,6 +2336,834 @@
      "mpf": "Mandado de segurança",
      "parecer": "Não verificado"
     }
+   },
+   "autos": {
+    "arquivo": "acervo/autos/5007702-60.2022.4.03.6000.json.gz",
+    "extraido_em": "2026-11-21",
+    "total": 86,
+    "sem_texto": [
+     "289230837",
+     "289230838",
+     "289230839",
+     "289230840",
+     "289230841",
+     "289230842",
+     "289230843",
+     "289230845",
+     "289230848",
+     "289230853",
+     "289230872",
+     "289230873",
+     "289230874",
+     "289230878",
+     "289230879",
+     "289230880",
+     "289231038",
+     "289231053"
+    ],
+    "faltam": [
+     "289231053",
+     "289231038",
+     "289230880",
+     "289230879",
+     "289230878",
+     "289230872",
+     "289230873",
+     "289230874",
+     "289230853",
+     "289230837",
+     "289230838",
+     "289230839",
+     "289230840",
+     "289230841",
+     "289230842",
+     "289230843",
+     "289230845",
+     "289230848"
+    ],
+    "documentos": [
+     [
+      "289230835",
+      "31/08/2022",
+      "Petição Inicial",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "289230836",
+      "31/08/2022",
+      "Petição inicial - PDF",
+      "MANDADO DE SEGURANÇA JOSE CARLOS FERRARI",
+      "",
+      "pdf",
+      21
+     ],
+     [
+      "289230837",
+      "31/08/2022",
+      "Outros Documentos",
+      "01 dctos José carlos",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "289230838",
+      "31/08/2022",
+      "Outros Documentos",
+      "02 comprovante residência José Carlos",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "289230839",
+      "31/08/2022",
+      "Outros Documentos",
+      "03 B.O. PRE.MS Chapadão do Sul",
+      "",
+      "pdf",
+      2
+     ],
+     [
+      "289230840",
+      "31/08/2022",
+      "Outros Documentos",
+      "04 dctos caminhão",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "289230841",
+      "31/08/2022",
+      "Outros Documentos",
+      "05 dctos veiculo",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "289230842",
+      "31/08/2022",
+      "Outros Documentos",
+      "06 contrato arrendamento",
+      "",
+      "pdf",
+      2
+     ],
+     [
+      "289230843",
+      "31/08/2022",
+      "Outros Documentos",
+      "07 REGISTRO ANTT ARRENDAMENTO",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "289230844",
+      "31/08/2022",
+      "Outros Documentos",
+      "08 CertidaoDistribuicaoTRF3R 20220005558454",
+      "",
+      "pdf",
+      2
+     ],
+     [
+      "289230845",
+      "31/08/2022",
+      "Outros Documentos",
+      "08 NOTAS DESPESAS DO CAMINHÃO EM NOME DO ARRENDATARIO",
+      "",
+      "pdf",
+      8
+     ],
+     [
+      "289230846",
+      "31/08/2022",
+      "Outras peças",
+      "10 CERTIDAO JOSECARLOSFERRARI",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "289230847",
+      "31/08/2022",
+      "Outros Documentos",
+      "11 CERTIDAO JOSEELIEZIODASILVA",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "289230848",
+      "31/08/2022",
+      "Outros Documentos",
+      "12 valor pneus caminhao",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "289230849",
+      "31/08/2022",
+      "Outros Documentos",
+      "09 CertidaoDistribuicaoTRF3R 20220005558432",
+      "",
+      "pdf",
+      2
+     ],
+     [
+      "289230850",
+      "31/08/2022",
+      "Certidão",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "289230851",
+      "02/09/2022",
+      "Despacho",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "289230852",
+      "02/09/2022",
+      "Despacho",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "289230853",
+      "13/09/2022",
+      "Custas",
+      "",
+      "",
+      "pdf",
+      2
+     ],
+     [
+      "289230854",
+      "13/09/2022",
+      "Certidão",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "289230855",
+      "03/10/2022",
+      "Outras peças",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "289230856",
+      "03/10/2022",
+      "Outras peças",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "289230857",
+      "03/10/2022",
+      "Outras peças",
+      "19715721574202219 000001 000001 COPIA FICHA DE IDENTIFICACAO 221003131751",
+      "",
+      "pdf",
+      2
+     ],
+     [
+      "289230858",
+      "03/10/2022",
+      "Outras peças",
+      "19715721574202219 000002 000005 COPIA DOCUMENTOS ADUANEIROS OUTROS 221003131751",
+      "",
+      "pdf",
+      5
+     ],
+     [
+      "289230859",
+      "03/10/2022",
+      "Outras peças",
+      "19715721574202219 000006 000006 COPIA DOCUMENTOS ADUANEIROS OUTROS 221003131751",
+      "",
+      "pdf",
+      2
+     ],
+     [
+      "289230860",
+      "03/10/2022",
+      "Outras peças",
+      "19715721574202219 000007 000007 COPIA DOCUMENTOS ADUANEIROS OUTROS 221003131751",
+      "",
+      "pdf",
+      2
+     ],
+     [
+      "289230861",
+      "03/10/2022",
+      "Outras peças",
+      "19715721574202219 000008 000008 COPIA DOCUMENTOS ADUANEIROS OUTROS 221003131751",
+      "",
+      "pdf",
+      2
+     ],
+     [
+      "289230862",
+      "03/10/2022",
+      "Outras peças",
+      "19715721574202219 000009 000009 COPIA DOCUMENTOS ADUANEIROS OUTROS 221003131751",
+      "",
+      "pdf",
+      2
+     ],
+     [
+      "289230863",
+      "03/10/2022",
+      "Outras peças",
+      "19715721574202219 000010 000010 COPIA DOCUMENTOS ADUANEIROS OUTROS 221003131751",
+      "",
+      "pdf",
+      2
+     ],
+     [
+      "289230864",
+      "03/10/2022",
+      "Outras peças",
+      "19715721574202219 000011 000012 COPIA DOCUMENTOS ADUANEIROS OUTROS 221003131751",
+      "",
+      "pdf",
+      3
+     ],
+     [
+      "289230865",
+      "03/10/2022",
+      "Outras peças",
+      "19715721574202219 000013 000013 COPIA TERMO DE APENSACAO DO PROCESSO PRINCIPAL 221003131751",
+      "",
+      "pdf",
+      2
+     ],
+     [
+      "289230866",
+      "03/10/2022",
+      "Outras peças",
+      "19715721574202219 000014 000014 COPIA TERMO DE APENSACAO DO PROCESSO PRINCIPAL 221003131751",
+      "",
+      "pdf",
+      2
+     ],
+     [
+      "289230867",
+      "03/10/2022",
+      "Outras peças",
+      "19715721574202219 000015 000015 COPIA TERMO DE DESAPENSACAO DO PROCESSO PRINCIPAL 221003131751",
+      "",
+      "pdf",
+      2
+     ],
+     [
+      "289230868",
+      "19/10/2022",
+      "Decisão",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "289230869",
+      "22/10/2022",
+      "Decisão",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "289230870",
+      "23/11/2022",
+      "Emenda à Inicial",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "289230872",
+      "23/11/2022",
+      "Custas",
+      "CamScanner 11 23 2022 08.15",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "289230873",
+      "23/11/2022",
+      "Custas",
+      "CamScanner 11 23 2022 08.41",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "289230874",
+      "23/11/2022",
+      "Custas",
+      "CamScanner 11 23 2022 08.50",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "289230875",
+      "23/11/2022",
+      "Certidão",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "289230876",
+      "13/12/2022",
+      "Decisão",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "289230877",
+      "13/12/2022",
+      "Decisão",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "289230878",
+      "14/12/2022",
+      "Substabelecimento",
+      "",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "289230879",
+      "14/12/2022",
+      "Substabelecimento",
+      "",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "289230880",
+      "14/12/2022",
+      "Substabelecimento",
+      "",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "289230881",
+      "14/12/2022",
+      "Petição intercorrente",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "289231032",
+      "18/01/2023",
+      "Petição intercorrente",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "289231033",
+      "24/01/2023",
+      "Petição intercorrente",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "289231034",
+      "25/01/2023",
+      "Decisão",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "289231035",
+      "26/01/2023",
+      "Decisão",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "289231036",
+      "26/01/2023",
+      "Decisão",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "289231037",
+      "27/01/2023",
+      "Procuração/substabelecimento com reserva de poderes",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "289231038",
+      "27/01/2023",
+      "Procuração/substabelecimento com reserva de poderes",
+      "PROCURAÇÃO JOSE CARLOS",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "289231039",
+      "27/01/2023",
+      "Petição intercorrente",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "289231040",
+      "27/01/2023",
+      "Petição intercorrente",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "289231041",
+      "27/01/2023",
+      "Intimação",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "289231042",
+      "27/01/2023",
+      "Mandado",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "289231043",
+      "27/01/2023",
+      "Notificação e intimação",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "289231044",
+      "30/01/2023",
+      "Certidão de devolução de mandado",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "289231045",
+      "30/01/2023",
+      "Outros Documentos",
+      "rec 7702",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "289231046",
+      "13/02/2023",
+      "Informações Prestadas",
+      "",
+      "",
+      "pdf",
+      14
+     ],
+     [
+      "289231047",
+      "13/02/2023",
+      "Manifestação",
+      "Manifestação da União/Fazenda Nacional",
+      "",
+      "html",
+      0
+     ],
+     [
+      "289231048",
+      "14/02/2023",
+      "Decisão",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "289231049",
+      "27/02/2023",
+      "Parecer \"Falta de Interesse\"",
+      "MP",
+      "",
+      "pdf",
+      2
+     ],
+     [
+      "289231050",
+      "22/09/2023",
+      "Sentença",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "289231051",
+      "02/10/2023",
+      "Manifestação",
+      "",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "289231052",
+      "05/10/2023",
+      "Embargos de Declaração",
+      "",
+      "",
+      "pdf",
+      4
+     ],
+     [
+      "289231053",
+      "05/10/2023",
+      "Outras peças",
+      "auto infração e apreensão jose carlos compressed",
+      "",
+      "pdf",
+      5
+     ],
+     [
+      "289231054",
+      "09/10/2023",
+      "Ato ordinatório",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "289231055",
+      "09/10/2023",
+      "Ato ordinatório",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "289231056",
+      "16/10/2023",
+      "Manifestação",
+      "Contrarrazões aos Embargos de Declaração",
+      "",
+      "pdf",
+      2
+     ],
+     [
+      "289231057",
+      "05/02/2024",
+      "Sentença",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "289231058",
+      "21/02/2024",
+      "Manifestação",
+      "",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "289231059",
+      "17/04/2024",
+      "Manifestação",
+      "Manifestação da União Fazenda Nacional",
+      "",
+      "html",
+      0
+     ],
+     [
+      "289410929",
+      "26/04/2024",
+      "Intimação",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "289447717",
+      "26/04/2024",
+      "Parecer",
+      "",
+      "",
+      "pdf",
+      3
+     ],
+     [
+      "299940222",
+      "17/08/2024",
+      "Pedido de liminar/Antecipação de tutela",
+      "",
+      "",
+      "pdf",
+      3
+     ],
+     [
+      "299940223",
+      "17/08/2024",
+      "Outras peças",
+      "PROCESSO 5007702 60.2022.4.03.6000 MANDADO DE SEGURANÇA CÍVEL 5007702 60.2022.4.03.6000 1723575",
+      "",
+      "pdf",
+      3
+     ],
+     [
+      "299940225",
+      "17/08/2024",
+      "Outras peças",
+      "Detran PR Consulta Consolidada do Veículo Pública CAMINHAO JOSE CARLOS",
+      "",
+      "pdf",
+      2
+     ],
+     [
+      "302663953",
+      "03/09/2024",
+      "Petição intercorrente",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "302849981",
+      "05/09/2024",
+      "Documento Digitalizado",
+      "CÓPIA SENTENÇA AUTOS 5008883 28.2024.4.03.6000",
+      "",
+      "pdf",
+      3
+     ],
+     [
+      "303183560",
+      "11/09/2024",
+      "Petição intercorrente",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "305930536",
+      "01/10/2024",
+      "Pedido de liminar/Antecipação de tutela",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "306633125",
+      "09/10/2024",
+      "Decisão",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "306724071",
+      "10/10/2024",
+      "Manifestação",
+      "",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "307067665",
+      "15/10/2024",
+      "Manifestação",
+      "",
+      "",
+      "pdf",
+      1
+     ]
+    ]
+   },
+   "extracao": {
+    "situacao": "extraída",
+    "em": "21/11/2026",
+    "documentos": "86",
+    "sem_texto": "18",
+    "faltam": "18"
    }
   },
   {
@@ -710,7 +3192,86 @@
     "correcao": "",
     "situacao": "A minutar"
    },
-   "pecas": [],
+   "pecas": [
+    {
+     "id": "395864333",
+     "peca": "Petição Inicial (14/11/2025)",
+     "tipo": "Petição Inicial",
+     "data": "14/11/2025"
+    },
+    {
+     "id": "395864352",
+     "peca": "Decisão (01/12/2025)",
+     "tipo": "Decisão",
+     "data": "01/12/2025"
+    },
+    {
+     "id": "395864356",
+     "peca": "Despacho (04/12/2025)",
+     "tipo": "Despacho",
+     "data": "04/12/2025"
+    },
+    {
+     "id": "395864364",
+     "peca": "MP (13/01/2026)",
+     "tipo": "Parecer \"Falta de Interesse\"",
+     "data": "13/01/2026"
+    },
+    {
+     "id": "395864365",
+     "peca": "Sentença (23/02/2026)",
+     "tipo": "Sentença",
+     "data": "23/02/2026"
+    },
+    {
+     "id": "395864368",
+     "peca": "Embargos de Declaração (27/02/2026)",
+     "tipo": "Embargos de Declaração",
+     "data": "27/02/2026"
+    },
+    {
+     "id": "395864372",
+     "peca": "10265498678202520 5000844 93.2025.4.03.6004 (20/03/2026)",
+     "tipo": "Informações Prestadas",
+     "data": "20/03/2026"
+    },
+    {
+     "id": "395864375",
+     "peca": "10265498678202520 5000844 93.2025.4.03.6004 ANEXO IF 284486 CAMSA Despacho 116 (20/03/2026)",
+     "tipo": "Documentos Diversos",
+     "data": "20/03/2026"
+    },
+    {
+     "id": "395864377",
+     "peca": "Cópia integral do PAF com despacho (25/03/2026)",
+     "tipo": "Outras peças",
+     "data": "25/03/2026"
+    },
+    {
+     "id": "395864379",
+     "peca": "Despacho de Inspeção (29/05/2026)",
+     "tipo": "Despacho de Inspeção",
+     "data": "29/05/2026"
+    },
+    {
+     "id": "395864380",
+     "peca": "Despacho de Inspeção (29/05/2026)",
+     "tipo": "Despacho de Inspeção",
+     "data": "29/05/2026"
+    },
+    {
+     "id": "395864381",
+     "peca": "Decisão (09/07/2026)",
+     "tipo": "Decisão",
+     "data": "09/07/2026"
+    },
+    {
+     "id": "401762176",
+     "peca": "MP (30/09/2026)",
+     "tipo": "Parecer \"Falta de Interesse\"",
+     "data": "30/09/2026"
+    }
+   ],
    "mpf": "",
    "triagem": {
     "ato": "Julgamento da remessa necessária (voto) [VALIDAR paradigma]",
@@ -830,6 +3391,532 @@
      "idParecer": "401762176",
      "parecerSentido": "Ausência de interesse que justifique a intervenção"
     }
+   },
+   "autos": {
+    "arquivo": "acervo/autos/5000844-93.2025.4.03.6004.json.gz",
+    "extraido_em": "2026-11-21",
+    "total": 55,
+    "sem_texto": [
+     "395864334",
+     "395864335",
+     "395864338",
+     "395864342",
+     "395864348",
+     "395864349",
+     "395864361",
+     "395864377"
+    ],
+    "faltam": [
+     "395864349",
+     "395864334",
+     "395864335",
+     "395864338",
+     "395864342"
+    ],
+    "documentos": [
+     [
+      "395864333",
+      "14/11/2025",
+      "Petição Inicial",
+      "",
+      "",
+      "pdf",
+      15
+     ],
+     [
+      "395864334",
+      "14/11/2025",
+      "Procuração/substabelecimento sem reserva de poderes",
+      "Doc. 01 PROCURACAO",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "395864335",
+      "14/11/2025",
+      "Outros Documentos",
+      "Doc. 02 ESC N°914 2013 CONSTITUCION CAMSA",
+      "",
+      "pdf",
+      24
+     ],
+     [
+      "395864336",
+      "14/11/2025",
+      "Outros Documentos",
+      "Doc. 02.A Tradução dos Atos constitutivos da empresa",
+      "",
+      "pdf",
+      18
+     ],
+     [
+      "395864337",
+      "14/11/2025",
+      "Outros Documentos",
+      "Doc. 02.B NIT CAMSA 2025",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "395864338",
+      "14/11/2025",
+      "Outros Documentos",
+      "Doc. 03 PODER GENERAL Nro. 329 2025 JULIO MOGRO CAMSA",
+      "",
+      "pdf",
+      10
+     ],
+     [
+      "395864339",
+      "14/11/2025",
+      "Outros Documentos",
+      "Doc. 03.A Tradução da procuração geral de administração",
+      "",
+      "pdf",
+      9
+     ],
+     [
+      "395864340",
+      "14/11/2025",
+      "Documento de Identificação",
+      "Doc. 04 C.I. JULIO MOGRO Rep. Legal",
+      "",
+      "pulado",
+      0
+     ],
+     [
+      "395864341",
+      "14/11/2025",
+      "Outros Documentos",
+      "Doc. 09 PAF 10108 72813 2025 31",
+      "",
+      "pdf",
+      12
+     ],
+     [
+      "395864342",
+      "14/11/2025",
+      "Outros Documentos",
+      "Doc. 05.A CARTA ENVIADA POR VIPAZ[1]",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "395864343",
+      "14/11/2025",
+      "Outros Documentos",
+      "Doc. 05.B Tradução Carta enviada por VIPAZ",
+      "",
+      "pdf",
+      2
+     ],
+     [
+      "395864344",
+      "14/11/2025",
+      "Documento Comprobatório",
+      "Doc. 06 Renovação de Licença de Importação Bolívia",
+      "",
+      "pdf",
+      3
+     ],
+     [
+      "395864345",
+      "14/11/2025",
+      "Outros Documentos",
+      "Doc. 06.A Tradução de Renovação da licença de importação Bolívia",
+      "",
+      "pdf",
+      3
+     ],
+     [
+      "395864346",
+      "14/11/2025",
+      "Outros Documentos",
+      "Doc. 07 Portaria ALF COR Nº 8 DE 03 04 2023 Federal LegisWeb",
+      "",
+      "pdf",
+      3
+     ],
+     [
+      "395864347",
+      "14/11/2025",
+      "Outros Documentos",
+      "Doc. 08 IN RFB nº 1152 2011",
+      "",
+      "pdf",
+      3
+     ],
+     [
+      "395864348",
+      "14/11/2025",
+      "Documento Comprobatório",
+      "Doc. Doc. 05 DOCUMENTOS MOURA CAMSA CRT 2627[1]",
+      "",
+      "pdf",
+      155
+     ],
+     [
+      "395864349",
+      "14/11/2025",
+      "Custas",
+      "",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "395864350",
+      "14/11/2025",
+      "Certidão",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "395864351",
+      "01/12/2025",
+      "Manifestação",
+      "",
+      "",
+      "pdf",
+      2
+     ],
+     [
+      "395864352",
+      "01/12/2025",
+      "Decisão",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "395864353",
+      "01/12/2025",
+      "Certidão",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "395864354",
+      "01/12/2025",
+      "Intimação",
+      "intimação autoridade impetrada",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "395864355",
+      "04/12/2025",
+      "Manifestação",
+      "",
+      "",
+      "pdf",
+      6
+     ],
+     [
+      "395864356",
+      "04/12/2025",
+      "Despacho",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "395864357",
+      "05/12/2025",
+      "Certidão",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "395864358",
+      "05/12/2025",
+      "Intimação",
+      "intimação autoridade impetrada",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "395864359",
+      "09/12/2025",
+      "Certidão",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "395864360",
+      "09/12/2025",
+      "Ofício",
+      "RFB informa cumprimento de ordem judicial",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "395864361",
+      "09/12/2025",
+      "Ofício",
+      "Recibo Termo de Entrega",
+      "",
+      "pdf",
+      2
+     ],
+     [
+      "395864362",
+      "09/12/2025",
+      "Ofício",
+      "2025 Oficio Gabinete 83 Sabrina Monique Gressler Borges",
+      "",
+      "pdf",
+      2
+     ],
+     [
+      "395864363",
+      "17/12/2025",
+      "Manifestação",
+      "Manifestação da União/Fazenda Nacional",
+      "",
+      "html",
+      0
+     ],
+     [
+      "395864364",
+      "13/01/2026",
+      "Parecer \"Falta de Interesse\"",
+      "MP",
+      "",
+      "pdf",
+      2
+     ],
+     [
+      "395864365",
+      "23/02/2026",
+      "Sentença",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "395864366",
+      "23/02/2026",
+      "Certidão",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "395864367",
+      "23/02/2026",
+      "Intimação",
+      "intimação autoridade impetrada",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "395864368",
+      "27/02/2026",
+      "Embargos de Declaração",
+      "",
+      "",
+      "pdf",
+      10
+     ],
+     [
+      "395864369",
+      "27/02/2026",
+      "Substabelecimento",
+      "substbelecimento",
+      "",
+      "pdf",
+      2
+     ],
+     [
+      "395864370",
+      "27/02/2026",
+      "Ato ordinatório",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "395864371",
+      "03/03/2026",
+      "Manifestação",
+      "",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "395864372",
+      "20/03/2026",
+      "Informações Prestadas",
+      "10265498678202520 5000844 93.2025.4.03.6004",
+      "",
+      "pdf",
+      5
+     ],
+     [
+      "395864373",
+      "20/03/2026",
+      "Documentos Diversos",
+      "10265498678202520 5000844 93.2025.4.03.6004 ANEXO IF 284486 CAMSA Auto de Infracao",
+      "",
+      "pdf",
+      6
+     ],
+     [
+      "395864374",
+      "20/03/2026",
+      "Documentos Diversos",
+      "10265498678202520 5000844 93.2025.4.03.6004 ANEXO IF 284486 CAMSA Cumprimento",
+      "",
+      "pdf",
+      21
+     ],
+     [
+      "395864375",
+      "20/03/2026",
+      "Documentos Diversos",
+      "10265498678202520 5000844 93.2025.4.03.6004 ANEXO IF 284486 CAMSA Despacho 116",
+      "",
+      "pdf",
+      7
+     ],
+     [
+      "395864376",
+      "25/03/2026",
+      "Alegações Finais",
+      "",
+      "",
+      "pdf",
+      3
+     ],
+     [
+      "395864377",
+      "25/03/2026",
+      "Outras peças",
+      "Cópia integral do PAF com despacho",
+      "",
+      "pdf",
+      340
+     ],
+     [
+      "395864378",
+      "30/03/2026",
+      "Alegações Finais",
+      "",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "395864379",
+      "29/05/2026",
+      "Despacho de Inspeção",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "395864380",
+      "29/05/2026",
+      "Despacho de Inspeção",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "395864381",
+      "09/07/2026",
+      "Decisão",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "395864532",
+      "09/07/2026",
+      "Certidão",
+      "Intimação da autoridade impetrada via e mail",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "395864533",
+      "10/07/2026",
+      "Certidão",
+      "confirmação de e mail pela autoridade coatora",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "395864534",
+      "27/08/2026",
+      "Manifestação",
+      "",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "395864535",
+      "04/09/2026",
+      "Informação",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "397264977",
+      "11/09/2026",
+      "Intimação",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "401762176",
+      "30/09/2026",
+      "Parecer \"Falta de Interesse\"",
+      "MP",
+      "",
+      "pdf",
+      2
+     ]
+    ]
+   },
+   "extracao": {
+    "situacao": "extraída",
+    "em": "21/11/2026",
+    "documentos": "55",
+    "sem_texto": "8",
+    "faltam": "5"
    }
   },
   {
@@ -999,6 +4086,97 @@
      "urgData": "2026-07-09",
      "fundamento": "Paradigmas do gabinete: AI 5000593-08.2026.4.03.0001 (monocrática TRMS, 21/10/2026: retenção mantida, desprovido); ApCiv 5000919-57.2019.4.03.6000 (acórdão TRMS, 28/09/2026: perdimento válido; boa-fé e uso por terceiro; desprovido); AI 5024607-59.2026.4.03.0000 (monocrática TRMS, 13/10/2026: parcial provimento só para suspender a destinação do veículo)"
     }
+   },
+   "autos": {
+    "arquivo": "acervo/autos/5000255-34.2026.4.03.0001.json.gz",
+    "extraido_em": "2026-11-20",
+    "total": 8,
+    "sem_texto": [
+     "384811553",
+     "384811556"
+    ],
+    "faltam": [],
+    "documentos": [
+     [
+      "384811549",
+      "07/07/2026",
+      "Petição Inicial",
+      "",
+      "",
+      "pdf",
+      10
+     ],
+     [
+      "384811551",
+      "07/07/2026",
+      "Documento Comprobatório (DECISÃO AGRAVADA)",
+      "",
+      "",
+      "pdf",
+      6
+     ],
+     [
+      "384811553",
+      "07/07/2026",
+      "Procuração/substabelecimento sem reserva de poderes (procuração)",
+      "",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "384811556",
+      "07/07/2026",
+      "Documentos Diversos (declaração de hipossuficiencia)",
+      "",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "384811557",
+      "07/07/2026",
+      "Documento de Identificação (documento pessoal deisy colorido)",
+      "",
+      "",
+      "pulado",
+      0
+     ],
+     [
+      "385034552",
+      "08/07/2026",
+      "Certidão",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "385094680",
+      "09/07/2026",
+      "Decisão",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "388376061",
+      "24/07/2026",
+      "Contraminuta",
+      "",
+      "",
+      "pdf",
+      3
+     ]
+    ]
+   },
+   "extracao": {
+    "situacao": "extraída",
+    "em": "20/11/2026",
+    "documentos": "8",
+    "sem_texto": "2",
+    "faltam": "0"
    }
   },
   {
@@ -1027,7 +4205,38 @@
     "correcao": "",
     "situacao": "A minutar"
    },
-   "pecas": [],
+   "pecas": [
+    {
+     "id": "401314215",
+     "peca": "Petição Inicial (29/09/2026)",
+     "tipo": "Petição Inicial",
+     "data": "29/09/2026"
+    },
+    {
+     "id": "401583518",
+     "peca": "Decisão (30/09/2026)",
+     "tipo": "Decisão",
+     "data": "30/09/2026"
+    },
+    {
+     "id": "402982074",
+     "peca": "Decisão Monocrática Terminativa Com Resolução de Mérito (07/10/2026)",
+     "tipo": "Decisão Monocrática Terminativa Com Resolução de Mérito",
+     "data": "07/10/2026"
+    },
+    {
+     "id": "405448176",
+     "peca": "Contrarrazões de Recurso (19/10/2026)",
+     "tipo": "Contrarrazões de Recurso",
+     "data": "19/10/2026"
+    },
+    {
+     "id": "405465582",
+     "peca": "Agravo Interno (19/10/2026)",
+     "tipo": "Agravo Interno",
+     "data": "19/10/2026"
+    }
+   ],
    "mpf": "",
    "triagem": {
     "ato": "Julgamento do agravo de instrumento e do agravo interno (voto)",
@@ -1160,6 +4369,94 @@
      "urgData": "2026-10-07",
      "intercor": "Agravo interno do agravado (ID 405465582)"
     }
+   },
+   "autos": {
+    "arquivo": "acervo/autos/5030878-84.2026.4.03.0000.json.gz",
+    "extraido_em": "2026-11-21",
+    "total": 8,
+    "sem_texto": [],
+    "faltam": [],
+    "documentos": [
+     [
+      "401314215",
+      "29/09/2026",
+      "Petição Inicial",
+      "",
+      "",
+      "pdf",
+      21
+     ],
+     [
+      "401580124",
+      "30/09/2026",
+      "Certidão",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "401583518",
+      "30/09/2026",
+      "Decisão",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "401664983",
+      "30/09/2026",
+      "Certidão",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "402982074",
+      "07/10/2026",
+      "Decisão Monocrática Terminativa Com Resolução de Mérito",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "404235585",
+      "14/10/2026",
+      "Petição intercorrente",
+      "Ciência aguarda mérito",
+      "",
+      "pdf",
+      1
+     ],
+     [
+      "405448176",
+      "19/10/2026",
+      "Contrarrazões de Recurso",
+      "",
+      "",
+      "pdf",
+      16
+     ],
+     [
+      "405465582",
+      "19/10/2026",
+      "Agravo Interno",
+      "",
+      "",
+      "pdf",
+      15
+     ]
+    ]
+   },
+   "extracao": {
+    "situacao": "extraída",
+    "em": "21/11/2026",
+    "documentos": "8",
+    "sem_texto": "0",
+    "faltam": "0"
    }
   },
   {
@@ -1323,6 +4620,127 @@
      "urgData": "2026-08-06",
      "fundamento": "Paradigmas do gabinete: ApCiv 5000030-13.2019.4.03.6127 (acórdão 3ª Turma, 27/07/2021: alienação provada antes da autuação afasta a multa do antigo proprietário); ApCiv 5016742-10.2019.4.03.6182 (acórdão 3ª Turma, 07/02/2022: idem, execução fiscal)"
     }
+   },
+   "autos": {
+    "arquivo": "acervo/autos/5000334-13.2026.4.03.0001.json.gz",
+    "extraido_em": "2026-11-20",
+    "total": 11,
+    "sem_texto": [
+     "389458042",
+     "389458045",
+     "389458046",
+     "389458047",
+     "389458048"
+    ],
+    "faltam": [],
+    "documentos": [
+     [
+      "389458035",
+      "29/07/2026",
+      "Petição Inicial",
+      "",
+      "",
+      "pdf",
+      16
+     ],
+     [
+      "389458042",
+      "29/07/2026",
+      "Procuração/substabelecimento sem reserva de poderes (DOC 01 PROCURACAO DOCS PESSOAIS)",
+      "",
+      "",
+      "pdf",
+      3
+     ],
+     [
+      "389458045",
+      "29/07/2026",
+      "Documento Comprobatório (DOC 02 CRLV)",
+      "",
+      "",
+      "pdf",
+      2
+     ],
+     [
+      "389458046",
+      "29/07/2026",
+      "Documentos Diversos (DOC 03 AUTO DE INFRACAO E PERDIMENTO)",
+      "",
+      "",
+      "pdf",
+      6
+     ],
+     [
+      "389458047",
+      "29/07/2026",
+      "Documentos Diversos (DOC 04 AUTORIZACAO PARA TRANSFERENCIA DE TITULARIDADE)",
+      "",
+      "",
+      "pdf",
+      3
+     ],
+     [
+      "389458048",
+      "29/07/2026",
+      "Documento comprobatório (DOC 05 CONTRATO DE COMPRA E VENDA DE VEICULO)",
+      "",
+      "",
+      "pdf",
+      2
+     ],
+     [
+      "389458049",
+      "29/07/2026",
+      "Petição inicial - PDF (AÇÃO ANULATÓRIA DE AUTO DE INFRAÇÃO)",
+      "",
+      "",
+      "pdf",
+      14
+     ],
+     [
+      "389458050",
+      "29/07/2026",
+      "Outras peças (COPIA DA DECISAO AGRAVADA)",
+      "",
+      "",
+      "pdf",
+      4
+     ],
+     [
+      "390228505",
+      "03/08/2026",
+      "Certidão",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "390289021",
+      "06/08/2026",
+      "Decisão",
+      "",
+      "",
+      "html",
+      0
+     ],
+     [
+      "391981615",
+      "14/08/2026",
+      "Petição intercorrente (P PETIÇÃO (OUTRAS) 3334587818 EM 14/08/2026 18:04:43)",
+      "",
+      "",
+      "pdf",
+      1
+     ]
+    ]
+   },
+   "extracao": {
+    "situacao": "extraída",
+    "em": "20/11/2026",
+    "documentos": "11",
+    "sem_texto": "5",
+    "faltam": "0"
    }
   }
  ]

@@ -6,7 +6,10 @@ de lote com o mesmo processo:
   - autos: arquivo, data da extração, total de documentos, IDs sem texto e a lista
     completa [id, data, tipo, descrição, juntado por, formato, páginas];
   - pecas: as peças principais (inicial, sentença, recursos, decisões, parecer...),
-    só quando o item ainda não tem peças anotadas à mão.
+    só quando o item ainda não tem peças anotadas à mão;
+  - extracao: situação "extraída", data (DD/MM/AAAA), documentos, sem texto e não lidos
+    (os demais campos de extracao são mantidos).
+Só regrava o lote que mudou. Roda de hora em hora no workflow lotes-alimentar.yml.
 
 Uso: python3 scripts/autos/registrar.py [lote ...]   (padrão: todos os lotes)
 """
@@ -73,7 +76,10 @@ def main(lotes):
     autos = dict(carregar(f) for f in sorted(glob.glob(os.path.join(RAIZ, 'acervo/autos/*.json.gz'))))
     for lote in lotes:
         p = os.path.join(RAIZ, 'acervo/lotes', lote + '.json')
-        L = json.load(open(p, encoding='utf-8'))
+        antes = open(p, encoding='utf-8').read()
+        L = json.loads(antes)
+        if not isinstance(L, dict) or not isinstance(L.get('itens'), list):
+            continue  # índices da pasta (colecoes.json etc.) não são lotes
         n = 0
         for it in L['itens']:
             a = autos.get(it['processo'])
@@ -84,9 +90,16 @@ def main(lotes):
                            'sem_texto': a['sem_texto'], 'faltam': a['faltam'], 'documentos': a['documentos']}
             if not it.get('pecas'):
                 it['pecas'] = pecas_principais(a['documentos'])
+            ext = a['extraido_em']
+            it['extracao'] = dict(it.get('extracao') or {}, situacao='extraída',
+                                  em=f'{ext[8:10]}/{ext[5:7]}/{ext[:4]}' if len(ext) == 10 else ext,
+                                  documentos=str(len(a['documentos'])), sem_texto=str(len(a['sem_texto'])),
+                                  faltam=str(len(a['faltam'])))
             n += 1
-        open(p, 'w', encoding='utf-8').write(json.dumps(L, ensure_ascii=False, indent=1) + '\n')
-        print(lote, n, 'itens com autos')
+        novo = json.dumps(L, ensure_ascii=False, indent=1) + '\n'
+        if novo != antes:
+            open(p, 'w', encoding='utf-8').write(novo)
+            print(lote, n, 'itens com autos (atualizado)')
 
 
 if __name__ == '__main__':
