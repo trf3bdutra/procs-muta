@@ -55,6 +55,7 @@ h2{margin:0 0 8px;font-size:11.5px;font-weight:800;letter-spacing:.08em;text-tra
 .leg{display:flex;flex-wrap:wrap;gap:4px 10px;font-size:11px;color:var(--mut);margin-top:6px}
 .leg i{display:inline-block;width:12px;height:5px;border-radius:999px;background:var(--ac);margin-right:4px;vertical-align:2px}.leg u{display:inline-block;width:1px;height:10px;background:var(--tx);opacity:.45;margin-right:4px;vertical-align:-1px}.leg .lx{flex-basis:100%;line-height:1.35}.leg em{display:inline-block;width:2px;height:10px;background:var(--av);margin-right:4px;vertical-align:-1px}
 .mt select.nv{margin-left:6px;font-size:11px;padding:0 4px;height:20px;border:1px solid var(--lin,#d8d3c6);border-radius:5px;background:transparent;color:inherit;max-width:190px}
+.ft-cap{flex-basis:100%;display:flex;align-items:center;gap:8px;min-width:0}.ft-tg{flex:none;border:1px solid var(--lin);background:var(--sup);border-radius:7px;padding:3px 10px;font:600 11.5px var(--f-txt);cursor:pointer;color:var(--tx)}.foot.aberto .ft-tg .ar{display:inline-block;transform:rotate(180deg)}.eqm{display:flex;flex-wrap:nowrap;overflow-x:auto;align-items:center;gap:4px 6px;font-size:11.5px;min-width:0;scrollbar-width:thin}.foot>.side{display:none}.foot.aberto>.side{display:grid;flex-basis:100%;max-height:52vh;overflow:auto}.eqm .ml{font:600 9.5px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--av);margin:0 2px 0 4px}.eqm .mc{border:1px solid var(--lin);border-radius:999px;padding:1px 8px;white-space:nowrap;font-variant-numeric:tabular-nums}.eqm .mc b{font-weight:650}.eqm .mc.x{border-color:var(--er);color:var(--er);background:var(--er-bg)}
 .intro{margin:0 0 12px;font-size:13.5px;color:var(--mut)}.intro b{color:var(--tx)}.fl{border:1px solid var(--lin);background:var(--sup);margin:0 0 12px}.fl-h{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:8px 14px;border-bottom:1px solid var(--lin);font:600 10.5px var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--av)}.fl-h small{font:400 11.5px var(--f-txt);letter-spacing:0;text-transform:none;color:var(--mut)}.fl .kp.passos{border:0;margin:0}
 .kp.passos{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:0!important;margin-bottom:12px;border:1px solid var(--lin);background:var(--sup)}
 .kp.passos .ps{all:unset;box-sizing:border-box;display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-rows:auto auto auto;column-gap:10px;padding:10px 14px 11px;cursor:pointer;border-right:1px solid var(--lin);border-top:3px solid transparent;position:relative;min-width:0}
@@ -241,6 +242,7 @@ body.emb #b-aplicar{display:none}body.emb .lay{grid-template-columns:262px minma
   </main>
 </div>
 <footer class="foot">
+  <div class="ft-cap"><button type="button" class="ft-tg" data-a="ft-cap" aria-expanded="false" title="Abrir ou fechar o painel de capacidade e carga">Capacidade e carga <span class="ar">▴</span></button><div class="eqm" id="eq-mini" aria-label="Capacidade e carga, resumo"></div></div>
   <div class="selbar" id="selbar" hidden></div>
   <span class="r"><b id="f-d">0</b> a designar</span>
   <span class="r"><b id="f-cn">0</b> com minutante e corretor</span>
@@ -311,7 +313,10 @@ body.emb #b-aplicar{display:none}body.emb .lay{grid-template-columns:262px minma
   if(EMBED){document.body.classList.add('emb');document.getElementById('tit').textContent='Designação';var kk=document.querySelector('.top .k');if(kk)kk.textContent='04 / redator e corretor';document.getElementById('hac').hidden=!VIVO;document.getElementById('b-recalc-tb').hidden=VIVO;}
   if(EMBED){var per0=document.querySelector('.per');if(per0)per0.hidden=true;
     /* no Caput: capacidade e carga vira um painel da largura toda, entre os passos e a lista (como os painéis da Publicação) */
-    var sd0=document.querySelector('.side'),ls0=document.querySelector('.lst');if(sd0&&ls0&&ls0.parentNode)ls0.parentNode.insertBefore(sd0,ls0);}
+    /* capacidade e carga vira o rodapé da mesa: resumo sempre à vista e o painel completo ao expandir */
+    var sd0=document.querySelector('.side'),fc0=document.querySelector('.foot .ft-cap');if(sd0&&fc0)fc0.parentNode.insertBefore(sd0,fc0.nextSibling);
+    var ftA=false;try{ftA=localStorage.getItem('mesa_ft_cap')==='1';}catch(e){}var ft0=document.querySelector('.foot');if(ft0)ft0.classList.toggle('aberto',ftA);var tg0=document.querySelector('[data-a="ft-cap"]');if(tg0)tg0.setAttribute('aria-expanded',String(ftA));}
+  else{var fc1=document.querySelector('.foot .ft-cap');if(fc1)fc1.remove();}
   if(VIVO){document.getElementById('b-fechar').hidden=EMBED;document.getElementById('b-aplicar').textContent='Aplicar à pauta';}
   window.addEventListener('message',function(ev){if(ev.origin!==location.origin||!ev.data)return;if(ev.data.tipo==='cmt:mesa-modo')document.getElementById('b-fechar').textContent=ev.data.full?'Sair da tela cheia':'Tela cheia';});
   document.addEventListener('keydown',function(ev){if(ev.key==='Escape'&&VIVO){try{window.parent.postMessage({tipo:'cmt:mesa-fechar'},location.origin);}catch(er){}}});
@@ -429,6 +434,9 @@ body.emb #b-aplicar{display:none}body.emb .lay{grid-template-columns:262px minma
       var dz=IT.filter(function(x){return fin(x,'d')===m.nome;}),nm=dz.filter(function(x){return !x.dm;}).length,info='<span class="tgm'+(nm?' av':'')+'" title="Processos desta pauta com '+esc(m.nome)+' na minuta: designados e ainda não minutados · meta '+meta(m.nome)+'/dia"><b>'+dz.length+'</b> designada'+(dz.length===1?'':'s')+' · <b>'+nm+'</b> não minutada'+(nm===1?'':'s')+'</span>';
       return '<div class="pp'+(AUS[m.nome]||fora?' aus':'')+(v>cap?' acima':'')+'"><span class="nm">'+esc(m.nome)+'</span><span class="num"><b>'+nf(v)+'</b><small> / '+nf(cap)+'</small></span>'+
         (fora?'':barra(v,a,cap,nf))+'<span class="mt">'+info+'</span>'+aus(m.nome,fora,'fora das minutas desta sessão')+'</div>';}).join('');
+    var mini=document.getElementById('eq-mini');if(mini){var ch=function(n,v,cap,ab){return '<span class="mc'+(v>cap&&cap?' x':'')+'" title="'+esc(n)+': '+ab+'"><b>'+esc(n)+'</b> '+ab+'</span>';};
+      mini.innerHTML='<span class="ml">Minuta</span>'+PD.filter(function(m){return !AUS[m.nome]&&!FD[m.nome];}).map(function(m){var v=k.Ld[m.nome]||0,cap=CAPD[m.nome]||0;return ch(m.nome,v,cap,nf(v)+'/'+nf(cap));}).join('')+
+        '<span class="ml">Correção</span>'+PC.filter(function(m){return !AUS[m.nome]&&!FC[m.nome];}).map(function(m){var v=k.Lc[m.nome]||0,cap=CAPC[m.nome]||0;return ch(m.nome,v,cap,v+'/'+cap);}).join('');}
     document.getElementById('eq-c').innerHTML=PC.map(function(m){var v=k.Lc[m.nome]||0,a=k.Lca[m.nome]||0,cap=CAPC[m.nome]||0,fora=!!FC[m.nome];
       return '<div class="pp'+(AUS[m.nome]||fora?' aus':'')+(v>cap?' acima':'')+'"><span class="nm">'+esc(m.nome)+'</span><span class="num"><b>'+v+'</b><small> / '+cap+'</small></span>'+
         (fora?'':barra(v,a,cap,String))+'<span class="mt"><b class="np">'+np(NC[m.nome]||0)+' p/ corrigir</b> · '+(a?'gravado '+a:'nada gravado')+'</span>'+aus(m.nome,fora,'fora das correções desta sessão')+'</div>';}).join('');
@@ -681,6 +689,7 @@ body.emb #b-aplicar{display:none}body.emb .lay{grid-template-columns:262px minma
     var a=t.dataset.a;
     if(a==='ob-add'){OBR.push({q:'julg',v:'',d:'',c:''});PASSO='2';topo();return;}
     if(a==='ob-seguir'){var ns=0;IT.forEach(function(x){if(fixo(x))return;['d','c'].forEach(function(k){var r=fixa(x,k);if(r&&livre(r.nome,k)&&fin(x,k)!==r.nome){ESC[x.i]=ESC[x.i]||{};ESC[x.i][k]=r.nome;ns++;}});});tudo();toast(ns+' designação(ões) passaram a seguir as regras obrigatórias. Aplique à pauta para gravar.');return;}
+    if(a==='ft-cap'){var ftx=document.querySelector('.foot'),on=!ftx.classList.contains('aberto');ftx.classList.toggle('aberto',on);t.setAttribute('aria-expanded',String(on));try{localStorage.setItem('mesa_ft_cap',on?'1':'0');}catch(er){}return;}
     if(a==='limpar-livre'){var Lv=[];IT.forEach(function(x){if(fixo(x))return;['d','c'].forEach(function(k){if(fixa(x,k))return;if(k==='d'&&x.dm)return;var at=k==='d'?x.d:x.c,es=ESC[x.i]&&ESC[x.i][k];if(!at&&es==null)return;Lv.push([x.i,k,at,es]);if(k==='d')x.d='';else x.c='';if(ESC[x.i])delete ESC[x.i][k];});});
       if(!Lv.length){toast('Nada fora das regras para limpar.');return;}LIVRE=Lv;propor();tudo();toast(Lv.length+' designação(ões) fora das regras limpas; a proposta preencheu de novo. Confira e aplique à pauta.');return;}
     if(a==='desfazer-livre'){if(!LIVRE)return;LIVRE.forEach(function(r){var x=IT.find(function(y){return y.i===r[0];});if(!x)return;if(r[1]==='d')x.d=r[2]||'';else x.c=r[2]||'';if(r[3]!=null){ESC[x.i]=ESC[x.i]||{};ESC[x.i][r[1]]=r[3];}});var n1=LIVRE.length;LIVRE=null;propor();tudo();toast(n1+' designação(ões) de volta.');return;}
