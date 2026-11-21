@@ -229,3 +229,19 @@ test('Mural: calendário sem os botões Dia/Semana/Mês, sempre no mês', () => 
   assert.match(h, /#mu-host \.cg-cal \.cc-ps\{display:none!important\}/);
   assert.match(h, /if\(!PAINEL_GAB\)try\{localStorage\.setItem\('cc_passo',JSON\.stringify\('mes'\)\);\}/);
 });
+
+test('Mural: registros da Assessoria fora do calendário de quem não é da assessoria; meta do dia no canhoto; histórico de atividades', () => {
+  const fs = require('fs'), path = require('path');
+  const h = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
+  const cal = fs.readFileSync(path.join(__dirname, '..', '..', '..', 'caput', 'motor', 'assets', 'js', '11-calendario.js'), 'utf8');
+  const lib = fs.readFileSync(path.join(__dirname, '..', 'api', '_lib.js'), 'utf8');
+  const pn = fs.readFileSync(path.join(__dirname, '..', 'api', 'painel.js'), 'utf8');
+  assert.match(lib, /assessoria: !!\(reg && reg\.papel === 'assessoria'\)/);
+  assert.match(h, /ocultarQuem:!PAINEL_GAB&&!U\.assessoria&&!U\.gestor\?\/\^assessoria\$\/i:null/);
+  assert.match(cal, /const oculto=q=>!!\(ex\.ocultarQuem&&ex\.ocultarQuem\.test\(q\|\|''\)\);/);
+  assert.match(cal, /\$\{dia===hoje&&ex\.hojeHtml\?ex\.hojeHtml:''\}/);
+  assert.match(pn, /minutasDia \|\| 3/);
+  assert.match(h, /function calHoje\(D\)/);
+  assert.match(h, /<b>Meu histórico de atividades<\/b>/);
+  assert.ok(!/>Minha produtividade</.test(h));
+});
