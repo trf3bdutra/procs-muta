@@ -375,8 +375,7 @@ body.emb #b-aplicar{display:none}body.emb .lay{grid-template-columns:262px minma
     if(ano(F.inicio)||ano(F.minutas)||ano(F.liberacao))al.push(['er','Marcos com data inválida:','Início '+(F.inicio||'—')+' · Entrega '+(F.minutas||'—')+' · Liberação '+(F.liberacao||'—')+'. Corrija nos marcos da sessão.']);
     if(F.inicio&&F.minutas&&F.inicio>F.minutas)al.push(['er','Marcos invertidos na sessão:','Início '+br(F.inicio)+' depois da Entrega '+br(F.minutas)+'. O período acima usa a entrega pela regra de liberação; corrija nos marcos.']);
     if(!dub)al.push(['er','Período sem dia útil:',br(de)+' a '+br(ate)+'. A capacidade de todos fica zero até corrigir os marcos da sessão.']);
-    var acima=PD.filter(function(m){var v=0;IT.forEach(function(x){if(fin(x,'d')===m.nome)v+=peso(x);});return CAPD[m.nome]&&v>CAPD[m.nome];}).map(function(m){return m.nome;});
-    if(acima.length)al.push(['av','Acima da capacidade no período:',acima.join(', ')+'. É só um aviso: a designação não é bloqueada.']);
+    /* acima da capacidade: só a barra vermelha na coluna de carga, sem faixa de aviso */
     if(!VIVO)al.push(['in','Cópia fora do Caput:','20/11 (Consciência Negra) não entra nos dias úteis. Para gravar, abra pela designação do Caput.']);
     document.getElementById('alertas').innerHTML=al.map(function(a){return '<div class="al '+a[0]+'"><b>'+esc(a[1])+'</b><span>'+esc(a[2])+'</span></div>';}).join('');}
   function br(d){return d.slice(8,10)+'/'+d.slice(5,7);}
