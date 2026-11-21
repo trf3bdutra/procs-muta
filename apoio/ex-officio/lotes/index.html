@@ -185,7 +185,11 @@ a{color:inherit}
 .vs .acts label{display:inline-flex;gap:5px;align-items:center;font-size:12px;color:var(--em)}
 .vs-sub{margin:14px 0 0;padding-top:10px;border-top:1px dashed var(--el)}.vs-sub>b{font:400 10px var(--emono);letter-spacing:.14em;text-transform:uppercase;color:var(--em)}
 .vs .cx-out{max-height:70vh;overflow-y:auto}.vs .doc{margin-top:8px}
-@media(max-width:760px){.vs .form{grid-template-columns:1fr}.vs-t td.o{max-width:none}}
+.vs-hd{display:grid;grid-template-columns:1fr 1fr;gap:0 22px;position:sticky;top:0;z-index:1;background:var(--ew);padding:6px 0;border-bottom:1px solid var(--el2);font:400 10px var(--emono);letter-spacing:.1em;text-transform:uppercase;color:var(--eo2)}
+.vs-lr{display:grid;grid-template-columns:1fr 1fr;gap:0 22px;border-bottom:1px solid var(--el)}
+.vs-lr>div{padding:8px 0;text-align:justify;min-width:0}.vs-lr>div.vz{background:repeating-linear-gradient(135deg,transparent 0 6px,var(--ep2) 6px 12px)}
+.vs-lr>div.so{opacity:.6}.vs-lr+.eq,.vs-hd+.eq{margin-top:8px}
+@media(max-width:760px){.vs .form{grid-template-columns:1fr}.vs-t td.o{max-width:none}.vs-hd,.vs-lr{grid-template-columns:1fr}.vs-lr>div.vz{display:none}}
 /* carregamento no mesmo desenho do Painel do Desembargador (/cmt): selo circular, estrela pulsante e trilho */
 .cmt-load{min-height:62vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;text-align:center}
 .cmt-ld-mk{display:grid;place-items:center;width:76px;height:76px;border:1px solid rgba(230,194,122,.55);border-radius:50%;margin-bottom:22px}
@@ -1129,13 +1133,25 @@ function alinhaPar(dl,ad){const n=dl.length,m=ad.length,L=.4,S=dl.map(a=>ad.map(
   for(let i=n-1;i>=0;i--)for(let j=m-1;j>=0;j--)D[i][j]=Math.max(D[i+1][j],D[i][j+1],S[i][j]>=L?D[i+1][j+1]+S[i][j]:-1);
   const r=[];let i=0,j=0;while(i<n&&j<m){if(S[i][j]>=L&&D[i][j]===D[i+1][j+1]+S[i][j]){r.push([i,j]);i++;j++}else if(D[i][j]===D[i+1][j]){r.push([i,null]);i++}else{r.push([null,j]);j++}}
   while(i<n)r.push([i++,null]);while(j<m)r.push([null,j++]);return r}
+/* diferença por palavra separada em dois lados: à esquerda (A) o que sai riscado; à direita (B) o que entra em verde */
+function difLados(a,b,ws){const A=a.split(/\s+/).filter(Boolean),B=b.split(/\s+/).filter(Boolean);
+  if(A.length*B.length>360000)return {ha:`<del>${esc(a)}</del>`,hb:`<ins>${esc(b)}</ins>`,igual:0,tot:Math.max(A.length,B.length)};
+  const E=[],D=[];let ig=0;
+  lcs(A,B,(x,y)=>nrm(x,ws)===nrm(y,ws)).forEach(o=>{if(o[0]==='='){E.push(['=',o[1]]);D.push(['=',o[2]]);ig++}else if(o[0]==='-')E.push(['-',o[1]]);else D.push(['+',o[1]])});
+  const junta=(T,tag)=>{let h='',cur=null,buf=[];const sai=()=>{if(!buf.length)return;const t=esc(buf.join(' '));h+=(h?' ':'')+(cur==='='?t:`<${tag}>${t}</${tag}>`);buf=[]};T.forEach(([k,w])=>{if(k!==cur){sai();cur=k}buf.push(w)});sai();return h};
+  return {ha:junta(E,'del'),hb:junta(D,'ins'),igual:ig,tot:Math.max(A.length,B.length)}}
+let VS_MODO='lado';try{VS_MODO=localStorage.getItem('collectio-versoes-modo')||'lado'}catch(_){}
 /* comparação seção a seção: riscado = só na versão A; verde = só na versão B */
-function difSecoes(MA,MB,sec,ws,sd){let h='',ig=0,tot=0,npar=0;
+function difSecoes(MA,MB,sec,ws,sd,lado){let h='',ig=0,tot=0,npar=0;
+  const par=(l,r)=>`<div class="vs-lr"><div${l==null?' class="vz"':''}>${l==null?'':l}</div><div${r==null?' class="vz"':''}>${r==null?'':r}</div></div>`;
   SECS.forEach(([k,t])=>{if(sec!=='*'&&sec!==k)return;const PA=((MA.secoes||{})[k]||[]).map(String),PB=((MB.secoes||{})[k]||[]).map(String);if(!PA.length&&!PB.length)return;
     let hs='',eqn=0,dl=[],ad=[],np=0;
     const flushEq=()=>{if(eqn){hs+=`<p class="eq">${eqn} parágrafo${eqn>1?'s':''} igua${eqn>1?'is':'l'}</p>`;eqn=0}};
-    const flush=()=>{alinhaPar(dl,ad).forEach(([i,j])=>{if(i!=null&&j!=null){const d=difPal(dl[i],ad[j],ws);hs+=`<p>${d.h}</p>`;ig+=d.igual;tot+=d.tot}else if(i!=null){hs+=`<p><del>${esc(dl[i])}</del></p>`;tot+=dl[i].split(/\s+/).length}else{hs+=`<p><ins>${esc(ad[j])}</ins></p>`;tot+=ad[j].split(/\s+/).length}np++});dl=[];ad=[]};
-    lcs(PA,PB,(x,y)=>nrm(x,ws)===nrm(y,ws)).forEach(o=>{if(o[0]==='='){flush();const w=o[1].split(/\s+/).length;ig+=w;tot+=w;if(sd)eqn++;else hs+=`<p class="so">${esc(o[1])}</p>`}else{flushEq();(o[0]==='-'?dl:ad).push(o[1])}});
+    const flush=()=>{alinhaPar(dl,ad).forEach(([i,j])=>{
+      if(i!=null&&j!=null){if(lado){const d=difLados(dl[i],ad[j],ws);hs+=par(d.ha,d.hb);ig+=d.igual;tot+=d.tot}else{const d=difPal(dl[i],ad[j],ws);hs+=`<p>${d.h}</p>`;ig+=d.igual;tot+=d.tot}}
+      else if(i!=null){hs+=lado?par(`<del>${esc(dl[i])}</del>`,null):`<p><del>${esc(dl[i])}</del></p>`;tot+=dl[i].split(/\s+/).length}
+      else{hs+=lado?par(null,`<ins>${esc(ad[j])}</ins>`):`<p><ins>${esc(ad[j])}</ins></p>`;tot+=ad[j].split(/\s+/).length}np++});dl=[];ad=[]};
+    lcs(PA,PB,(x,y)=>nrm(x,ws)===nrm(y,ws)).forEach(o=>{if(o[0]==='='){flush();const w=o[1].split(/\s+/).length;ig+=w;tot+=w;if(sd)eqn++;else hs+=lado?`<div class="vs-lr"><div class="so">${esc(o[1])}</div><div class="so">${esc(o[2])}</div></div>`:`<p class="so">${esc(o[1])}</p>`}else{flushEq();(o[0]==='-'?dl:ad).push(o[1])}});
     flush();flushEq();npar+=np;
     h+=`<h5>${t} · ${np?np+' parágrafo'+(np>1?'s':'')+' com diferença':'sem diferença'}</h5>`+hs});
   return {h,npar,pct:tot?Math.round(100*ig/tot):100}}
@@ -1163,7 +1179,7 @@ function desenhaVersoes(it,novo){const uid=it.uid,box=$('#vs-'+uid),S=VS[uid],G=
       `<td class="a"><button type="button" class="b" data-vver="${esc(v.id)}">Ver</button><button type="button" class="b" data-vcp="${esc(v.id)}">Copiar</button>${vg&&!S.editada?'':`<button type="button" class="b" data-vvig="${esc(v.id)}"${G?'':' disabled title="Só o gestor troca a vigente"'}>Tornar vigente</button>`}</td></tr>`}).join('')+`</table>`;
   if(op.length>1)h+=`<div class="vs-sub"><b>Comparar versões</b><div class="form"><label>Versão A (riscado)<select class="cmt-sel" data-vca>${opt(a0)}</select></label><label>Versão B (verde)<select class="cmt-sel" data-vcb>${opt(b1)}</select></label>`+
     `<label>Parte<select class="cmt-sel" data-vcs><option value="*">Tudo</option>${SECS.map(([k,t])=>`<option value="${k}">${t[0]+t.slice(1).toLowerCase()}</option>`).join('')}</select></label></div>`+
-    `<div class="acts"><label><input type="checkbox" data-vcw checked> ignorar espaços, aspas e travessões</label><label><input type="checkbox" data-vcd checked> só as diferenças</label><button type="button" class="b" data-vtroca="1" title="Inverte A e B">⇄ inverter</button><span class="k" data-vst></span></div>`+
+    `<div class="acts"><label><input type="checkbox" data-vcw checked> ignorar espaços, aspas e travessões</label><label><input type="checkbox" data-vcd checked> só as diferenças</label><span class="cmt-seg" role="group" aria-label="Forma da comparação"><button type="button" data-vmodo="lado" aria-pressed="${VS_MODO==='lado'}">Lado a lado</button><button type="button" data-vmodo="junto" aria-pressed="${VS_MODO!=='lado'}">No mesmo texto</button></span><button type="button" class="b" data-vtroca="1" title="Inverte A e B">⇄ inverter</button><span class="k" data-vst></span></div>`+
     `<div class="cx-lg"><span><del>riscado</del> está só na versão A</span><span><ins>verde</ins> está só na versão B</span></div></div>`;
   h+=`<div class="cx-out" data-vout></div>`;
   h+=`<div class="vs-sub${novo&&G?'':' hidden'}" data-vnf><b>${S.existe?'Registrar outra versão':'Registrar minuta'}</b><div class="form"><label>Nome da versão<input data-vnr maxlength="80" placeholder="Ex.: Corrigida por Bruno"></label><label class="w" style="grid-column:2/-1">Origem ou observação<input data-vno maxlength="400" placeholder="Ex.: conferida nos autos em ${esc(br(new Date().toISOString().slice(0,10)))}"></label>`+
@@ -1185,11 +1201,15 @@ function desenhaVersoes(it,novo){const uid=it.uid,box=$('#vs-'+uid),S=VS[uid],G=
   const cmp=async()=>{const A=q('[data-vca]'),B=q('[data-vcb]'),out=q('[data-vout]'),st=q('[data-vst]');if(!A||!B)return;
     if(A.value===B.value){out.innerHTML='<p class="none">Escolha duas versões diferentes.</p>';st.textContent='';return}
     st.textContent='Lendo as versões…';
-    try{const [MA,MB]=await Promise.all([textoVersao(it,A.value),textoVersao(it,B.value)]);const d=difSecoes(MA,MB,q('[data-vcs]').value,q('[data-vcw]').checked,q('[data-vcd]').checked);
-      out.innerHTML=d.h||'<p class="none">Sem texto nas partes escolhidas.</p>';st.textContent=d.npar?`${d.npar} parágrafo${d.npar>1?'s':''} com diferença · ${d.pct}% igual`:'Versões iguais'}
+    try{const [MA,MB]=await Promise.all([textoVersao(it,A.value),textoVersao(it,B.value)]),lado=VS_MODO==='lado';
+      const d=difSecoes(MA,MB,q('[data-vcs]').value,q('[data-vcw]').checked,q('[data-vcd]').checked,lado);
+      const nome=x=>esc(x.options[x.selectedIndex].text.replace(/ \(vigente\)$/,''));
+      out.innerHTML=d.h?(lado?`<div class="vs-hd"><span>A · ${nome(A)}</span><span>B · ${nome(B)}</span></div>`:'')+d.h:'<p class="none">Sem texto nas partes escolhidas.</p>';st.textContent=d.npar?`${d.npar} parágrafo${d.npar>1?'s':''} com diferença · ${d.pct}% igual`:'Versões iguais'}
     catch(e){st.textContent=e.message}};
   box.querySelectorAll('[data-vca],[data-vcb],[data-vcs],[data-vcw],[data-vcd]').forEach(x=>x.onchange=cmp);
   const tr=q('[data-vtroca]');if(tr)tr.onclick=()=>{const A=q('[data-vca]'),B=q('[data-vcb]'),t=A.value;A.value=B.value;B.value=t;cmp()};
+  box.querySelectorAll('[data-vmodo]').forEach(b=>b.onclick=()=>{VS_MODO=b.dataset.vmodo;try{localStorage.setItem('collectio-versoes-modo',VS_MODO)}catch(_){}
+    box.querySelectorAll('[data-vmodo]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));cmp()});
   if(op.length>1)cmp();
   /* registrar: reconhece as seções enquanto se cola e só libera o botão com nome e texto */
   const T=q('[data-vnt]'),R=q('[data-vnr]'),ok=q('[data-vnok]'),ns=q('[data-vns]');
