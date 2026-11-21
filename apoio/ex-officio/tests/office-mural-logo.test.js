@@ -29,7 +29,7 @@ test('Prontuário: copiar processo e IDs, peças numa linha; cartões com contag
  for(const x of ["class=\"cpy '+cls+'\"",'#prq .prt:not(.pmn) .prt-body .rec.rec-pc{grid-template-columns:minmax(0,1fr) 88px 82px 20px 20px','text-align:justify',"A.length||'')+","N||'');})()+",'.sn-b.on.nt i{background:']) assert.ok(app.includes(x),x);
 });
 test('Prontuário: precedentes relacionados vêm do Ementário, com link para o Compendium',()=>{
- for(const x of ["fetch('/jurisprudencia/curados.json.gz'",'function precRelacionados(it,regs)',"'/amicus/compendium/#v=ement&proc='",'Buscar “']) assert.ok(app.includes(x),x);
+ for(const x of ["jurGz('/jurisprudencia/curados.json.gz')","jurGz('/jurisprudencia/indice.json.gz')",'function precRelacionados(it,C)',"'/amicus/compendium/#v=ement&proc='",'Buscar “']) assert.ok(app.includes(x),x);
  assert.ok(!app.includes("'<div class=\"lv-c\">'+T.map(function(x){return '<span>'+esc(x)+'</span>';}).join('')"),'sem as etiquetas soltas de antes');
  const em=fs.readFileSync(path.resolve(__dirname,'../../modus-operandi/fonte/ementario.js'),'utf8');
  assert.ok(em.includes("irEmentarioProc(p.proc.split(',').filter(Boolean)"));

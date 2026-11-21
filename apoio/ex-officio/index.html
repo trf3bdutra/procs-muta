@@ -3698,40 +3698,61 @@ function calcPreparo(G){var vc=numBR(G('adm.vcausa')),al=numBR(G('adm.aliq')),rc
   if(vc==null||al==null)return '<div class="mut">Informe o valor da causa e a alíquota para ver o devido e a diferença.</div>';
   var dv=Math.round(vc*al)/100,df=rc==null?null:Math.round((rc-dv)*100)/100;
   return '<div class="prt-calc"><b>Devido '+moedaBR(dv)+'</b>'+(rc==null?'':' · recolhido '+moedaBR(rc)+' · '+(df>=0?'<span class="ok">sem diferença a recolher</span>':'<span class="no">faltam '+moedaBR(-df)+'</span>'))+'<div class="mut">Deserção só depois da intimação para complementar (art. 1.007, § 2º, do CPC).</div></div>';}
-/* precedentes relacionados: julgados do Ementário do Compendium (curados do gabinete) parecidos com o caso do prontuário,
-   cada um com link para abri-lo no Compendium. Semelhança: mesmos temas (STF/STJ), mesmo assunto e palavras do
-   subassunto e das questões; o próprio processo fica de fora. */
-var CURJ={p:null,regs:null};
-function curadosJur(){if(CURJ.p)return CURJ.p;
-  CURJ.p=fetch('/jurisprudencia/curados.json.gz',{cache:'default'}).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.arrayBuffer();})
-    .then(function(b){var u=new Uint8Array(b);if(u[0]===0x1f&&u[1]===0x8b){if(typeof DecompressionStream==='undefined')throw new Error('navegador sem descompressão');return new Response(new Blob([u]).stream().pipeThrough(new DecompressionStream('gzip'))).text();}return new TextDecoder().decode(u);})
-    .then(function(t){var o=JSON.parse(t);CURJ.regs=(o&&o.registros)||[];return CURJ.regs;})
-    .catch(function(e){CURJ.p=null;throw e;});
-  return CURJ.p;}
-var PREC_STOP={'para':1,'pela':1,'pelo':1,'como':1,'sobre':1,'entre':1,'contra':1,'quando':1,'sendo':1,'apenas':1,'caso':1,'parte':1,'partes':1,'artigo':1,'processo':1,'recurso':1,'pedido':1,'acordo':1,'sentenca':1,'apelacao':1,'agravo':1,'honorarios':1,'decisao':1,'autos':1,'lei':1,'tema':1,'temas':1,'stf':1,'stj':1,'cpc':1,'uniao':1,'inss':1,'federal':1};
+/* precedentes relacionados: julgados do Ementário do Compendium — curados do gabinete e série histórica
+   (Base de Jurisprudência do TRF-3) — parecidos com o caso do prontuário, cada um com link para abri-lo no
+   Compendium. Semelhança: mesmos temas (STF/STJ), mesmo assunto e palavras do subassunto, das questões e do
+   assunto, pesadas pela raridade no acervo; o próprio processo fica de fora. */
+var JURC={p:null};
+function jurGz(u){return fetch(u,{cache:'default'}).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.arrayBuffer();})
+  .then(function(b){var a=new Uint8Array(b);if(a[0]===0x1f&&a[1]===0x8b){if(typeof DecompressionStream==='undefined')throw new Error('navegador sem descompressão');return new Response(new Blob([a]).stream().pipeThrough(new DecompressionStream('gzip'))).text();}return new TextDecoder().decode(a);})
+  .then(JSON.parse);}
+function precTxt(a){return ' '+nq(a.join(' ')).replace(/[^a-z0-9 ]+/g,' ').replace(/\s+/g,' ')+' ';}
+function corpusJur(){if(JURC.p)return JURC.p;
+  JURC.p=Promise.all([jurGz('/jurisprudencia/curados.json.gz').then(function(o){return (o&&o.registros)||[];}).catch(function(){return [];}),
+      jurGz('/jurisprudencia/indice.json.gz').catch(function(){return [];})]).then(function(v){
+    var C=[],por={};
+    v[0].forEach(function(r){por[dg(r.n)+'|'+(r.d||'')]=1;
+      C.push({n:r.n,c:r.c||'',d:r.d||'',r:r.r||'',tx:r.e||r.ts||'',as:r.as||'',cur:1,q:precTxt([r.as,r.tc,r.ts,String(r.e||'').slice(0,1500)]),t:precTemas([r.tm,r.ts,r.e].join(' '))});});
+    (Array.isArray(v[1])?v[1]:[]).forEach(function(r){if(por[dg(r.n)+'|'+(r.d||'')])return;
+      C.push({n:r.n,c:r.c||'',d:r.d||'',r:r.r||'',tx:r.e||'',as:'',cur:0,q:precTxt([r.e,r.r]),t:precTemas(r.e)});});
+    if(!C.length)throw new Error('Ementário indisponível');
+    /* índice invertido (palavra → julgados), montado uma vez, para a busca não percorrer o texto a cada prontuário */
+    var IX=Object.create(null);C.forEach(function(x,i){var vi={};x.q.split(' ').forEach(function(t){if(t.length<5||vi[t])return;vi[t]=1;(IX[t]||(IX[t]=[])).push(i);});});C.ix=IX;
+    JURC.serie=Array.isArray(v[1])&&v[1].length>0;return C;})
+    .catch(function(e){JURC.p=null;throw e;});
+  return JURC.p;}
+var PREC_STOP={};('para pela pelo pelos pelas como sobre entre contra quando sendo apenas caso parte partes artigo artigos processo recurso pedido acordo sentenca apelacao agravo honorarios decisao autos tema temas uniao inss federal acao direito direitos fazenda nacional instituto seguro social conforme forma razao termos prazo ainda tambem assim desde mesmo outro outra outros outras cujo cuja qualquer dessa desse deste desta nesse nessa neste nesta aqueles quanto quais juizo exequente executado impetrante autora autor apelante apelado recorrente recorrido instancia primeiro grau provimento desprovimento negado mantida reforma reformada julgado julgada embargos declaracao civel').split(' ').forEach(function(w){PREC_STOP[w]=1;});
 function precTemas(t){var o={};String(t||'').replace(/Tema\s+(\d[\d.]*)\s*\/?\s*(STF|STJ)?/gi,function(_,n,c){o[n.replace(/\./g,'')+'/'+(c||'').toUpperCase()]=1;});return o;}
 function precPal(t){var o={};nq(t).replace(/[^a-z0-9 ]+/g,' ').split(/\s+/).forEach(function(w){if(w.length>=5&&!PREC_STOP[w]&&!/^\d+$/.test(w))o[w]=1;});return o;}
-function precRelacionados(it,regs){var C=(it.ctl||{}).cartao||{},txt=[C.subassuntos,C.questoes,C.sintese,C.especificidades].join(' ');
-  var TM=precTemas(txt),PW=precPal([C.subassuntos,C.questoes].join(' ')),as=nq(it.assunto||''),eu=dg(it.cnj);
-  /* prontuário ainda sem subassunto nem questões: busca pelo assunto do PJe (mesmo assunto e as palavras dele) */
-  var fraco=!Object.keys(TM).length&&Object.keys(PW).length<2;if(fraco)PW=precPal(it.assunto||'');var nPW=Object.keys(PW).length,corte=fraco?Math.max(2,2+Math.ceil(nPW*0.6)):4;
-  return regs.map(function(r){if(dg(r.n)===eu)return null;var sc=0,mot=[];
-      var rt=precTemas([r.tm,r.ts,r.e].join(' '));Object.keys(TM).forEach(function(k){if(rt[k]){sc+=4;mot.push('Tema '+k.replace('/',' /'));}});
-      if(as&&nq(r.as||'')===as){sc+=2;}
-      var rw=fraco?precPal(r.as||''):precPal([r.as,r.tc,r.ts,(r.e||'').slice(0,600)].join(' ')),n=0;Object.keys(PW).forEach(function(w){if(rw[w])n++;});sc+=Math.min(n,6);
-      if(fraco)mot.push(as&&nq(r.as||'')===as?'mesmo assunto':'assunto parecido');
-      return sc>=corte?{r:r,sc:sc,mot:mot}:null;})
-    .filter(Boolean).sort(function(a,b){return b.sc-a.sc||String(b.r.d||'').localeCompare(String(a.r.d||''));}).slice(0,6);}
+function precRelacionados(it,C){var K=(it.ctl||{}).cartao||{};
+  var TM=Object.keys(precTemas([K.subassuntos,K.questoes,K.sintese,K.especificidades].join(' '))),PW=precPal([K.subassuntos,K.questoes].join(' ')),AW=precPal(it.assunto||'');
+  /* prontuário ainda sem subassunto nem questões: busca pelo assunto do PJe */
+  var fraco=!TM.length&&Object.keys(PW).length<2;Object.keys(AW).forEach(function(w){PW[w]=1;});
+  var W=Object.keys(PW),nW=W.length,as=nq(it.assunto||''),eu=dg(it.cnj),N=C.length,IX=C.ix||{};if(!nW&&!TM.length&&!as)return [];
+  /* a palavra conta inteira, no singular ou no plural (anulação/anulações, material/materiais); peso maior para a mais rara */
+  var hit={},sc=new Float64Array(N),mw=new Uint16Array(N);
+  W.forEach(function(w){var v=[w,w+'s',w+'es'];if(/ao$/.test(w))v.push(w.slice(0,-2)+'oes',w.slice(0,-2)+'aes');if(/l$/.test(w))v.push(w.slice(0,-1)+'is');
+    var m={},k=0;v.forEach(function(z){(IX[z]||[]).forEach(function(i){if(!m[i]){m[i]=1;k++;}});});hit[w]=m;
+    var p=k?Math.log(N/k):0;Object.keys(m).forEach(function(i){sc[i]+=p;mw[i]++;});});
+  /* só o assunto: com uma palavra vale apenas o mesmo assunto; com mais, todas menos uma, sempre com a principal (a primeira: Isenção, Indenização…) */
+  var corte=fraco?(nW<2?99:nW<=2?nW:nW-1):(nW>=6?3:2),cab=fraco?Object.keys(AW)[0]:null,L=[];
+  for(var i=0;i<N;i++){var x=C[i],mot=[],s=sc[i],tm=0;
+    for(var j=0;j<TM.length;j++)if(x.t[TM[j]]){s+=6;tm++;mot.push('Tema '+TM[j].replace('/',' /'));}
+    var mesmo=as&&x.as&&nq(x.as)===as;if(mesmo){s+=3;mot.push('mesmo assunto');}
+    if(!(tm||mesmo||(mw[i]>=corte&&(!cab||hit[cab][i]))))continue;
+    if(dg(x.n)===eu)continue;L.push({r:x,sc:s,mot:mot});}
+  var vist={};/* um julgado por processo (o mais semelhante; o link abre todos os do processo) */
+  return L.sort(function(a,b){return b.sc-a.sc||String(b.r.d||'').localeCompare(String(a.r.d||''));}).filter(function(o){var k=dg(o.r.n);if(vist[k])return false;vist[k]=1;return true;}).slice(0,6);}
 function precPinta(it){var el=document.getElementById('prec-'+dg(it.cnj));if(!el)return;
-  curadosJur().then(function(regs){var L=precRelacionados(it,regs);
+  corpusJur().then(function(C){var L=precRelacionados(it,C);
     var bq=it.assunto?'<a class="prec-todos" href="/amicus/compendium/#v=ement&q='+encodeURIComponent(it.assunto)+'" target="_blank" rel="noopener">Buscar “'+esc(it.assunto)+'” em todo o Ementário ↗</a>':'';
-    if(!L.length){el.innerHTML='<p class="mut">Nenhum julgado curado do gabinete com temas, questões ou assunto em comum. Preencha subassuntos e questões no Caso para afinar.</p>'+bq;return;}
+    if(!L.length){el.innerHTML='<p class="mut">Nenhum julgado do Ementário com temas, questões ou assunto em comum. Preencha subassuntos e questões no Caso para afinar.</p>'+bq;return;}
     var lnk=function(ns,lab){return '/amicus/compendium/#v=ement&proc='+encodeURIComponent(ns.join(','))+'&lab='+encodeURIComponent(lab);};
     el.innerHTML='<ol class="prec-l">'+L.map(function(x){var r=x.r,res=r.r?String(r.r).replace(/\.$/,''):'';
         return '<li><a href="'+lnk([r.n],r.n)+'" target="_blank" rel="noopener" title="Abrir no Ementário do Compendium">'+esc(r.n)+'</a>'+
           '<span class="prec-m">'+esc([r.c,r.d?br(r.d):'',res].filter(Boolean).join(' · '))+'</span>'+
-          '<p>'+esc(String(r.ts||r.e||'').slice(0,230))+(String(r.ts||r.e||'').length>230?'…':'')+'</p>'+
-          (x.mot.length?'<small>'+esc(x.mot.join(' · '))+'</small>':'')+'</li>';}).join('')+'</ol>'+
+          '<p>'+esc(String(r.tx).slice(0,230))+(String(r.tx).length>230?'…':'')+'</p>'+
+          '<small>'+esc(x.mot.concat(r.cur?'curado do gabinete':'série histórica').join(' · '))+'</small>'+'</li>';}).join('')+'</ol>'+
       '<a class="prec-todos" href="'+lnk(L.map(function(x){return x.r.n;}),'processo '+fmtCnj(it.cnj))+'" target="_blank" rel="noopener">Ver os '+L.length+' no Ementário ↗</a>'+(bq?'<br>'+bq:'');
   }).catch(function(e){el.innerHTML='<p class="mut">Não foi possível abrir o Ementário ('+esc(e.message)+').</p>';});}
 function prtPrecedentes(it){setTimeout(function(){precPinta(it);},0);
