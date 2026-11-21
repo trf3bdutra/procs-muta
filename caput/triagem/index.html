@@ -2969,7 +2969,8 @@ async function carregarTriados() {
     const items = new Map();
     const series = new Map();
     const lotesCarregados = [];
-    for (const lid of triLotes) {
+    for (const entry of triLotes) {
+      const lid = typeof entry === 'string' ? entry : (entry.id || String(entry));
       try {
         const lote = JSON.parse(await P.ler('acervo/lotes/'+lid+'.json'));
         lotesCarregados.push(lote);
@@ -2994,7 +2995,8 @@ async function carregarSelecao() {
     const selLotes = (idx.colecoes && idx.colecoes['selecao-previa']) || [];
     const items = new Map();
     const lotesCarregados = [];
-    for (const lid of selLotes) {
+    for (const entry of selLotes) {
+      const lid = typeof entry === 'string' ? entry : (entry.id || String(entry));
       try {
         const lote = JSON.parse(await P.ler('acervo/lotes/'+lid+'.json'));
         lotesCarregados.push(lote);
