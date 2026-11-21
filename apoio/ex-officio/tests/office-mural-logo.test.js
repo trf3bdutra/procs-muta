@@ -246,3 +246,11 @@ test('Mural: registros da Assessoria fora do calendário de quem não é da asse
   assert.match(h, /<b>Meu histórico de atividades<\/b>/);
   assert.ok(!/>Minha produtividade</.test(h));
 });
+
+test('Mural: histórico sob a lista (coluna da esquerda) e Minhas ausências logo abaixo dos avisos', () => {
+  const fs = require('fs'), path = require('path');
+  const h = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
+  assert.match(h, /hi\.setAttribute\('slot','hist'\)/);
+  assert.match(h, /<slot name=\\"avisos\\"><\\\/slot><slot name=\\"aus\\"><\\\/slot>/);
+  assert.match(h, /<slot name=\\"hist\\"><\\\/slot>/);
+});
