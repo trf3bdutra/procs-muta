@@ -37,7 +37,7 @@ async function origens() {
       if (!txt || String(c.intercorOk || '').trim()) return;
       const ti = c.intercorTipo === 'Chamado ao TI';
       abertas.set('int:' + s.date + ':' + dg(it.cnj), { origem: 'intercor', origemChave: 'int:' + s.date + ':' + dg(it.cnj),
-        title: ('Intercorrência' + (ti ? ' (chamado ao TI)' : '') + ' · ' + (it.cnj || '') + (it.item ? ' · item ' + it.item : '')).slice(0, 200),
+        title: ('Intercorrência' + (c.intercorTipo ? ' (' + String(c.intercorTipo).toLowerCase() + ')' : '') + ' · ' + (it.cnj || '') + (it.item ? ' · item ' + it.item : '')).slice(0, 200),
         description: (txt + (ti && c.intercorChamado ? '\nChamado nº ' + c.intercorChamado : '')).slice(0, 2000), assignee: String(it.servidor || ''), urgency: 'Alta', dueDate: '', numero: String(it.cnj || ''), sessao: s.date });
     });
   });

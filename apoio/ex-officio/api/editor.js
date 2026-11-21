@@ -16,11 +16,21 @@ const agora = () => new Date().toISOString().replace(/\.\d+Z$/, 'Z');
 module.exports = async (req, res) => {
   res.setHeader('Cache-Control', 'no-store');
   if (req.method !== 'POST') return res.status(405).json({ erro: 'método não aceito' });
-  const u = L.exigir(req, res); if (!u) return;
+  /* pelo painel do desembargador (/cmt, cabeçalho x-cmt): grava em nome do CMT, com a chave do painel ou o login de um editor,
+     e só mexe em parágrafos-padrão, peças do Editorial e diretrizes */
+  const viaCmt = String((req.headers || {})['x-cmt'] || '') === '1';
+  let u;
+  if (viaCmt) {
+    const q = L.quem(req);
+    const ok = require('./_cmt').porChave(req) || (q && (await L.acessos(q).catch(() => ({}))).editor);
+    if (!ok) return res.status(403).json({ erro: 'Abra o painel pelo link com a chave do desembargador para gravar no Compendium.' });
+    u = 'CMT';
+  } else { u = L.exigir(req, res); if (!u) return; }
   try {
-    const a = await L.acessos(u);
-    if (!a.editor) return res.status(403).json({ erro: 'Sem acesso de editor.' });
+    if (!viaCmt) { const a = await L.acessos(u); if (!a.editor) return res.status(403).json({ erro: 'Sem acesso de editor.' }); }
     const b = req.body || {}, C = b.colecoes || {}, arqs = [], conflitos = [];
+    if (viaCmt && Object.keys(C).some(c => !['par', 'pec', 'dir', 'rap'].includes(c) && (C[c] || []).length))
+      return res.status(403).json({ erro: 'Pelo painel do desembargador só se editam parágrafos, peças, diretrizes e entradas rápidas.' });
     let n = 0;
     for (const c of Object.keys(C)) {
       const A = ARQ[c]; if (!A || !Array.isArray(C[c]) || !C[c].length) continue;
@@ -41,7 +51,7 @@ module.exports = async (req, res) => {
     }
     if (conflitos.length) return res.status(409).json({ erro: 'Conflito com o que está no GitHub: ' + conflitos.slice(0, 8).join('; ') + '. Recarregue o editor e refaça essas alterações.', conflitos });
     if (!arqs.length || !n) return res.status(400).json({ erro: 'Nada a gravar.' });
-    const msg = String(b.msg || 'Editor do Modus Operandi').slice(0, 200) + '\n\nAlterações feitas no editor do Modus Operandi por ' + u + '.';
+    const msg = String(b.msg || 'Editor do Modus Operandi').slice(0, 200) + '\n\nAlterações feitas no editor do Modus Operandi por ' + u + (viaCmt ? ' (painel do desembargador)' : '') + '.';
     const cm = await L.commitArquivos(arqs, msg);
     res.status(200).json({ ok: true, commit: cm.sha, url: 'https://github.com/trf3bdutra/procs-muta/commit/' + cm.sha, alteracoes: n });
   } catch (e) { res.status(e.status === 409 ? 409 : 500).json({ erro: e.message }); }

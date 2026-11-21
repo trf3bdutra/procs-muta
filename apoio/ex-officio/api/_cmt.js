@@ -34,6 +34,21 @@ async function criarDiligencia(campos, u) {
 const PEDIDO = /^Pedido de (retirada|adiamento)\b/i;
 /* cada entrada do relator no painel vira um aviso para o gestor da equipe (apoio/equipe-avisos.json) */
 const AVISOS = 'apoio/equipe-avisos.json';
+async function avisarEquipe(titulo, texto) {
+  for (let t = 0; t < 4; t++) {
+    let dados, sha;
+    try { const r = await L.lerJson(AVISOS); dados = r.dados; sha = r.sha; }
+    catch (e) { if (e.status !== 404) throw e; dados = { schema: 'gabcmt.equipe.avisos', versao: 1, registros: [] }; }
+    dados.registros = dados.registros || [];
+    const agora = new Date(), ate = new Date(agora.getTime() - 4 * 3600e3 + 7 * 86400e3).toISOString().slice(0, 10);
+    dados.registros.unshift({ id: 'av-cmt-' + agora.getTime().toString(36), time: agora.toISOString(), user: 'CMT', title: titulo, message: texto,
+      link: '/modus/', linkTxt: 'Abrir o Compendium', nivel: 'importante', painel: true, notificacao: true, para: [], ate, fixo: false });
+    dados.atualizadoEm = agora.toISOString();
+    try { await L.gravarJson(AVISOS, dados, sha, 'Painel do desembargador: aviso à equipe · ' + titulo.slice(0, 60)); return; }
+    catch (e) { if (e.status !== 409 && e.status !== 422) throw e; }
+  }
+  throw Object.assign(new Error('O mural mudou várias vezes seguidas; tente de novo.'), { status: 409 });
+}
 async function avisarAcesso(u) {
   for (let t = 0; t < 3; t++) {
     let dados, sha;
@@ -128,7 +143,7 @@ async function painel(req, res, u) {
      As duas gravam onde já era gravado — o item da pauta e a ficha única — e podem ser desfeitas. */
   if (req.method === 'POST') {
     const b = req.body || {}, cnj = String(b.cnj || '').trim();
-    if (!cnj && b.acao !== 'responder' && b.acao !== 'acesso') return res.status(400).json({ erro: 'Informe o processo.' });
+    if (!cnj && b.acao !== 'responder' && b.acao !== 'acesso' && b.acao !== 'aviso') return res.status(400).json({ erro: 'Informe o processo.' });
     try {
       if (b.acao === 'liberar') {
         if (!L.dataOk(b.sessao)) return res.status(400).json({ erro: 'Informe a sessão.' });
@@ -157,6 +172,13 @@ async function painel(req, res, u) {
         return res.status(200).json({ ok: true, cnj, resultado: v });
       }
       /* entrada no painel: avisa o gestor, e nunca atrapalha quem está entrando */
+      /* aviso do desembargador à equipe (ex.: depois de gravar no Compendium): mural e notificação de todos, por 7 dias */
+      if (b.acao === 'aviso') {
+        const titulo = String(b.titulo || '').trim().slice(0, 160), texto = String(b.texto || '').trim().slice(0, 2000);
+        if (!titulo) return res.status(400).json({ erro: 'Informe o título do aviso.' });
+        await avisarEquipe(titulo, texto);
+        return res.status(200).json({ ok: true });
+      }
       if (b.acao === 'acesso') {
         try { await avisarAcesso(u); } catch (e) { return res.status(200).json({ ok: false, erro: e.message }); }
         return res.status(200).json({ ok: true });
@@ -184,13 +206,14 @@ async function painel(req, res, u) {
       return res.status(400).json({ erro: 'Ação desconhecida.' });
     } catch (e) { return res.status(e.status || 500).json({ erro: e.message }); }
   }
-  const [cal, doc, aus, pen, com, avi] = await Promise.all([
+  const [cal, doc, aus, pen, com, avi, sus] = await Promise.all([
     opc('acervo/sessoes/calendario.json'),
     FICHA.lerOpLeitura().then(x => x.doc).catch(() => null),
     opc('apoio/equipe-solicitacoes.json'),
     opc('apoio/equipe-pendencias.json'),
     opc('apoio/equipe-comunicados.json'),
-    opc('apoio/equipe-avisos.json')
+    opc('apoio/equipe-avisos.json'),
+    opc('apoio/sustentacoes.json')
   ]);
   const [regProd, equipeDoc] = await Promise.all([opc('apoio/regras/produtividade.json'), opc('apoio/equipe.json')]);
   /* comunicados da equipe ao desembargador: os não lidos primeiro, do mais recente para o mais antigo */
@@ -226,16 +249,32 @@ async function painel(req, res, u) {
     .sort((x, y) => (y.minha - x.minha) || (y.dele - x.dele) || String(y.em).localeCompare(String(x.em)))
     .slice(0, 120);
 
+  /* pedidos de sustentação oral e preferência: um aviso por pedido, na hora em que chegou (ou foi vinculado à pauta),
+     no lugar do resumo em bloco que o AgentMail grava nos avisos gerais */
+  const recentes = Date.now() - 7 * 86400e3, dgs = x => String(x || '').replace(/\D/g, '');
+  const soAtivos = ((sus || {}).registros || []).filter(p => p.cnj && (!p.data || p.data >= hj || Date.parse(p.vinculadoEm || p.recebidoEm) >= recentes));
+  const soDocs = {};
+  await Promise.all([...new Set(soAtivos.map(p => (p.vinculo || {}).sessao).filter(d => L.dataOk(d)))]
+    .map(d => opc('acervo/sessoes/' + d + '.json').then(x => { soDocs[d] = x; })));
+  const soItem = p => { const d = soDocs[(p.vinculo || {}).sessao]; if (!d || p.estado !== 'vinculado') return null;
+    return [].concat(d.itens || [], d.previa || []).find(it => dgs(it.cnj) === dgs(p.cnj)) || null; };
+  const notSo = soAtivos.map(p => { const it = soItem(p), ses = it ? p.vinculo.sessao : (p.data || '');
+    const tit = p.tipo === 'Preferência' ? 'Preferência' : p.tipo === 'Presencial' ? 'Sustentação oral presencial' : 'Sustentação oral por videoconferência';
+    return { id: 'so-' + String(p.id).replace(/^so-/, ''), tipo: 'sustentacao', titulo: tit + (ses ? ' · sessão de ' + br(ses) : '') + (it ? '' : ' · a vincular'), texto: '',
+      de: 'AgentMail', numero: p.cnj, em: (it && p.vinculadoEm) || p.recebidoEm || '', modalidade: p.tipo || '', item: it ? String(it.item || '') : '',
+      advogado: p.advogado || '', oab: p.oab || '', parte: p.parte || '', sessao: ses, aVincular: !it }; });
   /* notificações dirigidas ao relator: comunicados da equipe e avisos gerais ainda válidos */
   const notificacoes = comunicados.filter(c => !c.lidoEm)
     .map(c => ({ id: 'co-' + c.id, tipo: 'comunicado', titulo: c.titulo || 'Comunicado', texto: c.texto || '',
       de: c.de || '', numero: (c.cnjs || [])[0] || '', em: c.em || '', comId: c.id }))
     .concat(((avi || {}).registros || [])
-      .filter(a => !/^av-cmt-acesso-/.test(String(a.id || '')))   /* a entrada do relator é aviso para o gestor, não para ele */
+      .filter(a => !/^av-cmt-/.test(String(a.id || '')))   /* a entrada do relator e os avisos dele à equipe não voltam para ele */
+      .filter(a => !(a.user === 'AgentMail' && /^av-so-/.test(String(a.id || ''))))   /* resumo das sustentações: vai pedido a pedido */
       .filter(a => !a.ate || a.ate >= hj)
       .filter(a => !(a.para || []).length || (a.para || []).some(n => L.norm(n) === L.norm(u)))
       .map(a => ({ id: 'av-' + a.id, tipo: 'aviso', titulo: a.title || 'Aviso', texto: a.message || '',
         de: a.user || 'Responsável', numero: '', em: a.time || '', nivel: a.nivel || 'info' })))
+    .concat(notSo)
     .sort((x, y) => String(y.em).localeCompare(String(x.em)))
     .slice(0, 60);
 
@@ -245,7 +284,18 @@ async function painel(req, res, u) {
   regs.forEach(r => {
     const i = MONO.item(r), c = i.ctl || {};
     const base = { cnj: i.cnj, servidor: i.servidor || '', corretor: i.corretor || '', obs: i.obs || '' };
-    if (i.mono && i.dataLiberacao && !i.assinado) assinar.assinatura.push(Object.assign({ desde: i.dataLiberacao }, base));
+    if (i.mono && i.dataLiberacao && !i.assinado) {
+      /* o cartão de assinatura traz o necessário para decidir sem abrir a ficha: ato, etapas, prazo e a urgência, se houver */
+      const pr = r.producao || {}, tr = r.triagem || {}, ct = r.controles || {}, pa = r.pauta || {}, d10 = v => String(v || '').slice(0, 10);
+      const ok = v => /^\d{4}-\d{2}-\d{2}$/.test(d10(v));
+      const urg = c.urgTipo && !/^Apreciada/.test(String(c.urgSit || '')) ? { tipo: c.urgTipo, nivel: c.urgNivel || '', pedidoEm: c.urgEm || '',
+        espera: ok(c.urgEm) ? dias(hj, d10(c.urgEm)) : null, situacao: c.urgSit || '', obs: c.urgObs || '' } : null;
+      assinar.assinatura.push(Object.assign({ desde: i.dataLiberacao, aguarda: ok(i.dataLiberacao) ? dias(hj, d10(i.dataLiberacao)) : null,
+        dataMinuta: i.dataMinuta || '', dataCorrecao: i.dataCorrecao || '', tipoAto: pr['Mono - Tipo de ato'] || '', julgamento: tr['Tipo de Julgamento'] || '',
+        meta: tr.META || '', prazo: ok(ct['Monocrática - Prazo']) ? d10(ct['Monocrática - Prazo']) : '', topico: pr['Tópico-síntese'] || '',
+        atencao: pr['Rev - Atenção'] || '', notaAtencao: pr['Rev - Nota de atenção'] || '', sessao: pa['Sessão original'] || '',
+        item: pa['Item (Pauta de Julgamento)'] || '', urg }, base));
+    }
     else if (i.mono && i.dataCorrecao && !i.dataLiberacao) assinar.liberacao.push(Object.assign({ desde: i.dataCorrecao }, base));
     if (c.urgTipo && !/^Apreciada/.test(String(c.urgSit || ''))) urgencias.push(Object.assign({
       tipo: c.urgTipo || '', nivel: c.urgNivel || '', pedidoEm: c.urgEm || '', situacao: c.urgSit || '',
@@ -258,7 +308,7 @@ async function painel(req, res, u) {
   const lanca = (d, k) => { const x = String(d || '').slice(0, 10); if (!/^\d{4}-\d{2}-\d{2}$/.test(x)) return; (producao[x] = producao[x] || { voto: 0, mono: 0 })[k]++; };
   regs.forEach(r => { const i = MONO.item(r); if (i.mono) lanca(i.dataMinuta, 'mono'); });
   const ordem = (x, y) => String(x.desde || x.pedidoEm || '').localeCompare(String(y.desde || y.pedidoEm || ''));
-  assinar.assinatura.sort(ordem); assinar.liberacao.sort(ordem);
+  assinar.assinatura.sort((x, y) => (!!y.urg - !!x.urg) || ordem(x, y)); assinar.liberacao.sort(ordem);
   urgencias.sort((x, y) => (y.espera || 0) - (x.espera || 0));
 
   /* sessões e produção da equipe */
@@ -306,11 +356,11 @@ async function painel(req, res, u) {
       resultado: it.resultado || '', intercor: c.intercor || '', intercorOk: !!c.intercorOk, meta: c.meta || '',
       sopref: c.sopref || '', destaque: c.destaque || '', julgamento: it.julgamento || '', obs: it.obs || '' };
   }) };
-  /* marcos vencendo: até 7 dias à frente, ou já vencidos, nas sessões visíveis à equipe */
+  /* marcos da semana: de 7 dias atrás a 7 dias à frente, nas sessões visíveis à equipe (data fora de um ano é erro de cadastro e fica de fora) */
   const NOMES = { pautarAte: 'Peço dia', inicioPreparacao: 'Início da preparação', entregaMinutas: 'Entrega das minutas', liberacao: 'Liberação' };
   todas.forEach(s => Object.keys(NOMES).forEach(k => {
     const d = (s.marcos || {})[k]; if (!L.dataOk(d)) return;
-    const n = dias(d, hj); if (n > 7) return;
+    const n = dias(d, hj); if (n > 7 || n < -7) return;
     prazos.push({ sessao: s.date, marco: NOMES[k], data: d, dias: n });
   }));
   prazos.sort((x, y) => x.dias - y.dias);
