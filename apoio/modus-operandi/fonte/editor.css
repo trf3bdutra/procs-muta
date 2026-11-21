@@ -131,3 +131,34 @@ html.ed-cmt .ed-top [data-edzip],html.ed-cmt .ed-top [data-edgit],html.ed-cmt .e
 #ed-tops .edt[data-bl]:first-child{margin-top:22px}
 #ed-tops .edt[data-bl]::before{content:attr(data-bl);position:absolute;left:2px;top:-21px;font:700 10.5px Figtree,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--acc,#c9a45c)}
 .ed-em .edf>span{font-weight:600}
+/* diretrizes editáveis no manual */
+#ed-man .mn-ed{position:relative}
+#ed-man div.mn-ed{padding-right:46px;border-left:2px solid transparent;transition:background .15s,border-color .15s}
+#ed-man div.mn-ed:hover{background:rgba(255,255,255,.55);border-left-color:var(--acc,#c9a45c)}
+#ed-man .mn-pen{position:absolute;right:6px;top:8px;width:30px;height:30px;display:grid;place-items:center;padding:0;border:1px solid var(--line,#ded9cc);border-radius:50%;background:var(--card,#fff);color:var(--mut,#5d6b72);cursor:pointer;opacity:0;transition:opacity .15s}
+#ed-man tr .mn-pen{position:static}
+#ed-man .mn-ed:hover .mn-pen,#ed-man .mn-pen:focus-visible{opacity:1}
+#ed-man .mn-pen:hover{border-color:var(--accent,#1b5878);color:var(--accent,#1b5878)}
+#ed-man .mn-ed.mud::after{content:"alterada";position:absolute;right:44px;top:13px;font:600 9px ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase;color:#805b18;background:#fbf4e3;border:1px solid #e3cf9f;padding:1px 6px}
+#ed-man tr.mn-ed.mud::after{display:none}#ed-man tr.mn-ed.mud td:first-child{box-shadow:inset 3px 0 0 #e3cf9f}
+#ed-man .mn-f{margin:8px 0;padding:14px;background:var(--card,#fff);border:1px solid var(--accent,#1b5878);box-shadow:0 6px 18px rgba(27,88,120,.12)}
+#ed-man .mn-f label{display:block;margin:0 0 10px}
+#ed-man .mn-f label>span{display:block;margin-bottom:4px;font:600 10px ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--mut,#5d6b72)}
+#ed-man .mn-f input,#ed-man .mn-f textarea{display:block;width:100%;padding:7px 9px;border:1px solid var(--line,#ded9cc);font:inherit;line-height:1.45;background:var(--bg,#fbfaf5);color:inherit;resize:vertical}
+#ed-man .mn-f input:focus,#ed-man .mn-f textarea:focus{outline:0;border-color:var(--accent,#1b5878)}
+#ed-man .mn-fx{font-size:13px;color:var(--mut,#5d6b72)}
+#ed-man .mn-fa{display:flex;gap:8px;align-items:center}
+#ed-man .mn-fa button{height:32px;padding:0 14px;border:1px solid var(--line,#ded9cc);background:var(--card,#fff);font:600 12.5px Figtree,system-ui,sans-serif;cursor:pointer}
+#ed-man .mn-fa button.pri{background:var(--accent,#1b5878);border-color:var(--accent,#1b5878);color:#fff}
+#ed-man .mn-fa .mn-fdel{border-color:transparent;background:none;color:#a7433d}
+#ed-man .mn-nova{display:inline-block;margin:6px 0 4px;padding:0;border:0;background:none;font:600 12.5px Figtree,system-ui,sans-serif;color:var(--accent,#1b5878);cursor:pointer}
+#ed-man .mn-nova:hover{text-decoration:underline}
+/* aba Entradas rápidas do editor */
+.ed-body.ed-rapb{display:block;overflow:auto}
+.ed-rap{max-width:860px;margin:0 auto;padding:22px 26px 60px}
+.ed-cols [data-edrap] .ed-rapn{display:inline-block;min-width:18px;height:18px;margin-left:4px;padding:0 5px;border-radius:9px;background:#a57829;color:#fff;font:600 10px/18px ui-monospace,monospace;font-style:normal;text-align:center}
+.ed-rap .rap-a .rap-dst{flex:1;min-width:220px;height:30px;padding:0 9px;border:1px solid var(--line,#ded9cc);font:inherit}
+.ed-rap .rap-a{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.ed-rap [data-rapdel].conf{border-color:#a7433d;color:#a7433d}
+/* no editor, as entradas rápidas têm aba própria: saem do topo do manual */
+#ed-man #mn-rap,#ed-man .mn-toc-r{display:none!important}

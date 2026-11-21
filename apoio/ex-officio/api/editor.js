@@ -29,8 +29,8 @@ module.exports = async (req, res) => {
   try {
     if (!viaCmt) { const a = await L.acessos(u); if (!a.editor) return res.status(403).json({ erro: 'Sem acesso de editor.' }); }
     const b = req.body || {}, C = b.colecoes || {}, arqs = [], conflitos = [];
-    if (viaCmt && Object.keys(C).some(c => !['par', 'pec', 'dir'].includes(c) && (C[c] || []).length))
-      return res.status(403).json({ erro: 'Pelo painel do desembargador só se editam parágrafos-padrão, peças do Editorial e diretrizes.' });
+    if (viaCmt && Object.keys(C).some(c => !['par', 'pec', 'dir', 'rap'].includes(c) && (C[c] || []).length))
+      return res.status(403).json({ erro: 'Pelo painel do desembargador só se editam parágrafos, peças, diretrizes e entradas rápidas.' });
     let n = 0;
     for (const c of Object.keys(C)) {
       const A = ARQ[c]; if (!A || !Array.isArray(C[c]) || !C[c].length) continue;

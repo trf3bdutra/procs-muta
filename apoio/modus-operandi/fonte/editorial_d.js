@@ -497,7 +497,7 @@ document.addEventListener('cmt-acesso',function(){if(XS.ed==='dir'&&!$('#v-edit'
 
 /* ===== Diretrizes: manual de redação novo (diretrizes_manual.html), com Padrões decisórios só no acesso avançado ===== */
 function dirAv(){try{return !!(window.CMT_ACESSO&&window.CMT_ACESSO().avancado);}catch(e){return false;}}
-function xManual(){var M=$('#x-man');if(!M)return;var f=document.getElementById('dir-fr');
+function xManual(){if(window.VDM_RAP_TAB&&window.VDM_RAPTAB){window.VDM_RAPTAB();return;}if(window.VDM_MN_DADOS&&typeof xManualDados==='function'){xManualDados();return;}var M=$('#x-man');if(!M)return;var f=document.getElementById('dir-fr');
   if(!f||!M.contains(f)){var src=document.getElementById('dir-manual');if(!src){M.innerHTML='<p class="empty">Manual de redação indisponível.</p>';return;}
     M.innerHTML='<iframe id="dir-fr" title="Diretrizes · Manual de redação" scrolling="no"></iframe>';f=M.querySelector('#dir-fr');
     f.addEventListener('load',function(){dirPrep(f);});var h='';try{h=JSON.parse(src.textContent);}catch(e){}f.srcdoc=h;return;}
