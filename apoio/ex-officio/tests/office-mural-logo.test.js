@@ -167,8 +167,9 @@ test('Mural: avisos e minhas ausências à direita do calendário, sem a faixa d
   const fs = require('fs'), path = require('path');
   const h = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
   assert.match(h, /#mu-host \.cc-dir\{display:none!important\}/);
-  assert.match(h, /wr\.id='mu-cal-wrap'/);
-  assert.match(h, /#mu-cal-wrap\{display:grid;grid-template-columns:minmax\(0,1fr\) 340px/);
+  assert.match(h, /av\.setAttribute\('slot','avisos'\)/);
+  assert.match(h, /au\.setAttribute\('slot','aus'\)/);
+  assert.match(h, /<slot name=\\"avisos\\"><\\\/slot>/);
 });
 
 test('Monocráticas: fila de urgências aberta na coluna da esquerda, em cartões compactos', () => {
@@ -200,4 +201,47 @@ test('Monocráticas · revisão: prontuário sem abas inertes, Notas alinhadas, 
   assert.match(h, /#prq \.prt\.pmn #prt-nt\{margin:0 14px 12px!important\}/);
   assert.match(h, /\.sn-dlg \.dv-r>label\{flex:1 1 0;min-width:0\}/);
   assert.match(h, /\$\('#f-pri'\)\.title=MO\?'Só as decisões com pedido urgente'/);
+});
+
+test('Mural: passos do ponto de vista de quem está logado, sinalizações por processo, ações rápidas e coluna da direita na altura do calendário', () => {
+  const fs = require('fs'), path = require('path');
+  const h = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
+  assert.match(h, /aguarda:\{t:'Aguardando outros'/);
+  assert.match(h, /k:'corrigir',t:'A corrigir'/);
+  assert.match(h, /data-ab=\\?"pront\\?"[^]*?title=\\?"Abrir o prontuário\\?"/);
+  assert.match(h, /\.calrow>\.lado\{align-self:stretch;height:0;min-height:100%;overflow:auto\}/);
+  assert.match(h, /#mu-host>\.av-box #avisos>\.nt:nth-child\(n\+3\)\{display:none!important\}/);
+  assert.match(h, /class=\\"sesc\\" id=\\"sesl\\"/);
+  assert.match(h, /if\(\/minuta\/\.test\(x\.papel\|\|'minuta'\)&&!x\.dataMinuta/);
+});
+
+test('Mural: Hoje/Semana como lateral do calendário e aviso em destaque no alto dos Avisos', () => {
+  const fs = require('fs'), path = require('path');
+  const h = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
+  assert.match(h, /#mu-host \.cg-cal \.cc-esq\{border:0!important;border-right:1px solid var\(--l\)!important/);
+  assert.match(h, /<div id="av-dest" class="av-dest" hidden aria-live="polite"><\/div><div id="avisos"><\/div>/);
+  assert.match(h, /\(dd&&dx\?av\.slice\(1\):av\)\.concat\(ou\)/);
+});
+
+test('Mural: calendário sem os botões Dia/Semana/Mês, sempre no mês', () => {
+  const fs = require('fs'), path = require('path');
+  const h = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
+  assert.match(h, /#mu-host \.cg-cal \.cc-ps\{display:none!important\}/);
+  assert.match(h, /if\(!PAINEL_GAB\)try\{localStorage\.setItem\('cc_passo',JSON\.stringify\('mes'\)\);\}/);
+});
+
+test('Mural: registros da Assessoria fora do calendário de quem não é da assessoria; meta do dia no canhoto; histórico de atividades', () => {
+  const fs = require('fs'), path = require('path');
+  const h = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
+  const cal = fs.readFileSync(path.join(__dirname, '..', '..', '..', 'caput', 'motor', 'assets', 'js', '11-calendario.js'), 'utf8');
+  const lib = fs.readFileSync(path.join(__dirname, '..', 'api', '_lib.js'), 'utf8');
+  const pn = fs.readFileSync(path.join(__dirname, '..', 'api', 'painel.js'), 'utf8');
+  assert.match(lib, /assessoria: !!\(reg && reg\.papel === 'assessoria'\)/);
+  assert.match(h, /ocultarQuem:!PAINEL_GAB&&!U\.assessoria&&!U\.gestor\?\/\^assessoria\$\/i:null/);
+  assert.match(cal, /const oculto=q=>!!\(ex\.ocultarQuem&&ex\.ocultarQuem\.test\(q\|\|''\)\);/);
+  assert.match(cal, /\$\{dia===hoje&&ex\.hojeHtml\?ex\.hojeHtml:''\}/);
+  assert.match(pn, /minutasDia \|\| 3/);
+  assert.match(h, /function calHoje\(D\)/);
+  assert.match(h, /<b>Meu histórico de atividades<\/b>/);
+  assert.ok(!/>Minha produtividade</.test(h));
 });

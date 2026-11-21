@@ -50,7 +50,8 @@ module.exports = async (req, res) => {
           pend: (((it.ctl || {}).cartao || {}).pendencias || []).filter(p => p && p.desc && !p.ok).map(p => String(p.desc)).slice(0, 12) });
       });
     });
-    const resposta = { usuario: u, sessoes: vis.map(s => ({ date: s.date, hora: s.hora || '', cor: s.cor || '', pauta: !!s.publicada, processos: s.publicada ? (s.processos || 0) : 0, previa: s.publicada && !s.processos ? (s.previa || 0) : 0, marcos: s.marcos || {} })), expediente: cal.expediente || null, progresso: prog, meus };
+    let metaDia = 3; try { metaDia = +(((await L.lerJson('apoio/regras/produtividade.json')).dados || {}).painel || {}).minutasDia || 3; } catch (e) {}
+    const resposta = { usuario: u, metaDia, sessoes: vis.map(s => ({ date: s.date, hora: s.hora || '', cor: s.cor || '', pauta: !!s.publicada, processos: s.publicada ? (s.processos || 0) : 0, previa: s.publicada && !s.processos ? (s.previa || 0) : 0, marcos: s.marcos || {} })), expediente: cal.expediente || null, progresso: prog, meus };
     if (detalhar) {
       resposta.entregas = E.pautas(pubs, docs).concat(extra[0] ? E.monocraticas(extra[0]) : [], E.pendencias(extra[1] || { registros: [] }));
       resposta.equipe = L.equipe();

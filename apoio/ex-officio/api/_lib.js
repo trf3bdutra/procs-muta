@@ -92,7 +92,7 @@ async function acessos(usuario) {
   const tem = lista => (lista || []).some(n => nomes.has(norm(n)));
   const P = ACC.a.perfis || { avancado: ACC.a.compendioAvancado, editor: ACC.a.editor };
   const desembargador = tem(P.desembargador), editor = desembargador || tem(P.editor), avancado = editor || tem(P.avancado);
-  return { perfil: desembargador ? 'desembargador' : editor ? 'editor' : avancado ? 'avancado' : 'equipe', avancado, editor, desembargador };
+  return { perfil: desembargador ? 'desembargador' : editor ? 'editor' : avancado ? 'avancado' : 'equipe', avancado, editor, desembargador, assessoria: !!(reg && reg.papel === 'assessoria') };
 }
 /* arquivos grandes (mais de 1 MB) vêm pelo blob. O texto fica guardado nesta instância do servidor e só é baixado
    de novo quando o arquivo muda no GitHub (a conferência do sha é uma consulta leve). */

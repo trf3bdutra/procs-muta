@@ -191,12 +191,14 @@ function montar(el,cal,ex){
     return ok;
   }
   /* itens de quem está logado (ex.meus, vindos do Ex Officio): só exibição, nunca gravados na agenda */
-  const itensV=()=>itens().concat(ex.meus||[]);
+  /* ex.ocultarQuem (RegExp): registros destinados a esse responsável não aparecem (ex.: Assessoria para quem não é da assessoria) */
+  const oculto=q=>!!(ex.ocultarQuem&&ex.ocultarQuem.test(q||''));
+  const itensV=()=>itens().filter(i=>!oculto(i.quem)).concat(ex.meus||[]);
   const doDia=(dia,tipo)=>itensV().filter(i=>i.tipo===tipo&&i.tipo!=='ausencia').flatMap(it=>ocorre(it,dia).map(s=>({id:'u'+it.id+':'+dia+':'+(s.date||''),quem:it.quem||'',o:it.titulo,hora:it.hora||'',s,it}))).sort((a,b)=>(a.hora||'99').localeCompare(b.hora||'99'));
   const feitos=()=>AG()?AG().get('feitos',{}):ls.get('cc_feitos',{});
   function afazeres(dia){
     const L=[];
-    ses.forEach(s=>AFAZ.forEach(([k,dd,quem,o],i)=>{const base=k==='date'?s.date:s.marcos[k]; if(!base) return;
+    ses.forEach(s=>AFAZ.forEach(([k,dd,quem,o],i)=>{const base=k==='date'?s.date:s.marcos[k]; if(!base||oculto(quem)) return;
       if(util(base,dd)===dia) L.push({id:s.date+':'+i,quem,o,s});}));
     return L.concat(doDia(dia,'afazer'));
   }
@@ -212,7 +214,7 @@ function montar(el,cal,ex){
           const e=est({d}), late=estado(s,{k,d})==='late'&&d<dia;
           return `<li class="${e}${late?' late':''}" data-s="${s.date}" data-k="${k}" title="${nm} · ${F(d)}"><span class="ic"><i class="ti ${ic}"></i></span><span class="nm">${MKC[k]||nm}</span><b>${F(d)}</b></li>`;}).join('')}</ol></div>`;};
     const esq=`<div class="cc-sb cc-esq"><div class="cc-sb-t">${dia===hoje?'Hoje':cap0(FD(dia,{weekday:'long'}))}<span class="cc-dd">${FD(dia,{day:'numeric',month:'long'})}</span><small>${dia===hoje?'alertas e afazeres':'afazeres do dia'}</small><span class="cc-esq-b"><button class="cc-ib cc-tx" data-a="novo" title="Cadastrar afazer, alerta, evento, prazo-limite, data ou ausência" aria-label="Cadastrar">+</button><button class="cc-ib cc-tx" data-a="lista" title="Gerenciar cadastrados" aria-label="Gerenciar">☰</button></span></div>
-      ${dia===hoje?`<div class="cc-al">${(st.alx?alertas():alertas().slice(0,1)).map(a=>`<div class="cc-a ${a[0]}" data-go="${a[3].date}"><i class="ti ${a[1]}"></i>${a[2]}</div>`).join('')||'<small style="color:#8a98a3">Nenhum marco crítico nos próximos 10 dias.</small>'}${alertas().length>1?`<button class="cc-pill" data-a="alx">${st.alx?'menos':'+'+(alertas().length-1)+' alertas'}</button>`:''}</div>`:''}
+      ${dia===hoje?`<div class="cc-al">${(st.alx?alertas():alertas().slice(0,1)).map(a=>`<div class="cc-a ${a[0]}" data-go="${a[3].date}"><i class="ti ${a[1]}"></i>${a[2]}</div>`).join('')||'<small style="color:#8a98a3">Nenhum marco crítico nos próximos 10 dias.</small>'}${alertas().length>1?`<button class="cc-pill" data-a="alx">${st.alx?'menos':'+'+(alertas().length-1)+' alertas'}</button>`:''}</div>`:''}${dia===hoje&&ex.hojeHtml?ex.hojeHtml:''}
       ${(()=>{const L=afazeres(dia),fz=feitos(); if(!L.length){let d=dia,P2=[];for(let i=0;i<30&&!P2.length;i++){d=iso(new Date(+P(d)+DIA));P2=afazeres(d).map(x=>({...x,d}));} return `<div class="cc-td"><div class="cc-td-t">Afazeres do dia <small>nenhum</small></div>${P2.length?`<div class="cc-td-nx">Próximos · ${F(P2[0].d)}</div>`+P2.map(x=>`<div class="cc-td-i" data-dia="${x.d}" style="--c:${x.s.cor}"><span><i class="cc-tag" style="background:${x.s.cor}">${x.s.date?'Sessão '+F(x.s.date):'Geral'}</i>${x.hora?`<b class="cc-hr">${x.hora}</b> `:''}${x.quem?`<b>${x.quem}:</b> `:''}${x.o}</span></div>`).join(''):''}</div>`;} return `<div class="cc-td"><div class="cc-td-t">Afazeres do dia <small>${L.filter(x=>fz[x.id]).length}/${L.length}</small></div>${L.map(x=>`<label class="cc-td-i${fz[x.id]?' ok':''}" style="--c:${x.s.cor}"><input type="checkbox" data-fz="${x.id}"${fz[x.id]?' checked':''}><span><i class="cc-tag" style="background:${x.s.cor}">${x.s.date?'Sessão '+F(x.s.date):'Geral'}</i>${x.hora?`<b class="cc-hr">${x.hora}</b> `:''}${x.quem?`<b>${x.quem}:</b> `:''}${x.o}</span></label>`).join('')}</div>`;})()}
 </div>`;
     const dir=`<div class="cc-sb cc-dir">
