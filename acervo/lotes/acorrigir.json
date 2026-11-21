@@ -9095,8 +9095,39 @@
    ],
    "mpf": "",
    "triagem": {},
-   "ajustes": [],
-   "pendencias": [],
+   "ajustes": [
+    [
+     "Seção",
+     "Ajuste",
+     "Tipo"
+    ],
+    [
+     "Relatório",
+     "Abertura “Trata-se apelações interpostas em ação ordinária …” sem a sentença, descrita em parágrafo separado; “condenou o autor”; “sustentando, preliminarmente … No mérito, sustentaram”; “Lei nº”; “ID's ID”; pontos finais ausentes (R7 e R10); nome do Conselho Aty Guassu grafado de duas formas → Forma A num só parágrafo, honorários em frase própria; “condenou os autores”; “alegando, preliminarmente, … e, no mérito:”; “Lei 6.001/1973”; “IDʼs”; pontuação; “Conselho Aty Guassu Guarani Kaiowá”, como nos autos",
+     "RED · MÉDIA"
+    ],
+    [
+     "Voto",
+     "“ID's”; “representantes pelas entidades rés”; vírgula entre sujeito e verbo (V37 e V38); “com segurança necessária”; “No contexto,”; “nesse ponto”; dispositivo “nos termos supracitados”. Trecho transcrito da sentença (V15 a V34) preservado → “IDʼs”; “representantes das entidades rés”; vírgulas retiradas; “com a segurança necessária”; “Assim,”; “neste ponto”; dispositivo com o alcance do provimento (mesmo resultado)",
+     "RED · BAIXA"
+    ],
+    [
+     "Ementa",
+     "Cabeçalho acima de três linhas; seções em caixa baixa; aspas retas; questões com “verificar/examinar/definir/averiguar”; “arts.” e “CC”; itens 8 e 9 com mais de 40 palavras; extinção por perda do objeto atribuída à apelação da ACRISSUL (veio por petição); dispositivo numa só frase; rodapé com “art.”, “Lei nº” e sem o artigo 85 do CPC → Cabeçalho enxuto; seções em caixa alta; aspas curvas; “saber se”; “artigos” e “Código Civil”; itens 8 e 9 condensados; “por petição posterior”; dispositivo em duas frases; rodapé no padrão, com o artigo 85, §§ 2º e 8º, do CPC",
+     "EST · MÉDIA"
+    ],
+    [
+     "Acórdão",
+     "Ausente na minuta do PJe → Acórdão no padrão, espelhando o dispositivo",
+     "ESTR · ALTA"
+    ]
+   ],
+   "pendencias": [
+    "A extração dos autos é parcial (27 documentos do 2º grau, a partir do ID 280995626): a sentença (ID 269658213), os embargos de declaração (ID 269658230), as apelações (IDʼs 269658235, 269658241 e 269658246), as contrarrazões, o parecer da Procuradoria Regional da República (ID 270831994) e as provas citadas no voto (IDʼs 269657827 a 269658195) não foram conferidos.",
+    "A apelação dos autores pediu, no item (4), a manutenção da gratuidade e a extensão às organizações indígenas das prerrogativas da Fazenda Pública (artigo 61 da Lei 6.001/1973). O voto só menciona a gratuidade ao fixar os honorários; a extensão das prerrogativas não foi enfrentada (artigo 489, § 1º, IV, do CPC). Avaliar um parágrafo próprio.",
+    "Resultado da ACRISSUL: todos os pedidos da sua apelação levam à improcedência, que foi acolhida; o “parcial” só se explica pelo pedido de extinção por perda do objeto, que veio por petição posterior e foi rejeitado. Confirmar com o Relator se o resultado dela é “parcial provimento” ou “provimento” (resultado mantido como no PJe).",
+    "O rodapé da ementa cita dispositivos que o voto não menciona (CF/1988, artigo 5º, XVII; CPC, artigos 485, VI, e 497, parágrafo único; Código Civil, artigos 104, 166, 186 e 927; Lei 7.102/1983 e Decreto 89.056/1983 só no trecho transcrito da sentença). Conferir se ficam."
+   ],
    "minuta": true,
    "autos": {
     "arquivo": "acervo/autos/0014547-14.2013.4.03.6000.json.gz",
@@ -9705,8 +9736,50 @@
    ],
    "mpf": "",
    "triagem": {},
-   "ajustes": [],
-   "pendencias": [],
+   "ajustes": [
+    [
+     "Seção",
+     "Ajuste",
+     "Tipo"
+    ],
+    [
+     "Relatório",
+     "“apelação contra sentença”; “contra INCRA e União”; “julgou procedente em parte pedido”; honorários no meio da frase da sentença; “vez que” → “apelação à sentença”; artigos definidos; “julgou parcialmente procedente o pedido”; honorários em frase própria, ao final; “pois”",
+     "RED · BAIXA"
+    ],
+    [
+     "Voto, V41",
+     "“deve ser majorada a indenização … para R$ 100.000,00”, mas a sentença rejeitou o dano moral coletivo (nada a majorar); o próprio V42 diz “à falta de fixação na sentença” → “deve ser fixada a indenização … em R$ 100.000,00”",
+     "FAT · ALTA"
+    ],
+    [
+     "Voto",
+     "“Após sentença, o INCRA provou”; “tanto que foram promovidas” sem sujeito; vírgula entre sujeito e verbo (V30); V38 com “previsto” sem concordância e “conforme … conforme”; dispositivo sem a satisfação do pedido e sem artigos → “Após a sentença, o INCRA comprovou”; “as providências foram promovidas”; vírgula retirada; V38 reordenado; dispositivo com “reconhecida a sua satisfação no curso da demanda” e artigos definidos (mesmo resultado)",
+     "RED · MÉDIA"
+    ],
+    [
+     "Ementa, item 9",
+     "A ementa destina a indenização ao Fundo de Defesa de Direitos Difusos (artigo 13 da Lei 7.347/1985), o que o voto não decide; a inicial pediu reversão em investimentos no território da comunidade → Destinação retirada da ementa e do rodapé, para a ementa espelhar o voto; decisão sobre a destinação remetida ao Relator (pendência)",
+     "JUR · ALTA"
+    ],
+    [
+     "Ementa",
+     "Seções em caixa baixa; questões sem “saber se” e “se demora” sem artigo; rodapé com “Constituição” e jurisprudência sem tribunal, fora da ordem STF → STJ → TRF-3 (súmulas do STJ após o TRF3) → Seções em caixa alta; “saber se”; “CF/1988”; rodapé no padrão",
+     "EST · MÉDIA"
+    ],
+    [
+     "Acórdão",
+     "Ausente na minuta do PJe → Acórdão no padrão, espelhando o dispositivo",
+     "ESTR · ALTA"
+    ]
+   ],
+   "pendencias": [
+    "Destinação da indenização por dano moral coletivo: a ementa da minuta do PJe a revertia ao Fundo de Defesa de Direitos Difusos (artigo 13 da Lei 7.347/1985), mas o voto nada diz; a inicial pediu reversão em investimentos diretos em políticas públicas no território da comunidade (decisão ID 326002323, que transcreve os pedidos). Definir no voto e, se for o caso, repor na ementa.",
+    "Termo inicial dos juros (Súmula 54/STJ, “desde o evento danoso”) em omissão continuada: o voto não fixa a data do evento danoso. Conferir se convém defini-la (por exemplo, a data a partir da qual a mora se reputou injustificada) para evitar controvérsia na liquidação.",
+    "IDʼs da origem citados no voto e não extraídos: 316932458 (sentença), 316932461 (apelação), 316932427, 316932401, 316932425, 316932442 e 316932434. Os demais IDʼs (316932463, 316932466, 316932468, 316932472, 316932473 e 321761740) foram conferidos.",
+    "O feito passou por conflito de competência (decisões IDʼs 323622454 e 326002323, entre a 1ª e a 4ª Turmas) antes de chegar à Turma Regional; o relatório não registra a ocorrência. Avaliar uma linha.",
+    "Precedentes: AgInt no REsp 2.153.688 (Rel. Min. PAULO SÉRGIO DOMINGUES) conferido em fonte aberta (Informativo e notícia do STJ de julho/2026), sem confirmação da data do DJEN; RE 1.335.550 (DJe 17/03/2022) não conferido."
+   ],
    "minuta": true,
    "autos": {
     "arquivo": "acervo/autos/5003867-30.2023.4.03.6000.json.gz",
@@ -26719,8 +26792,39 @@
    ],
    "mpf": "",
    "triagem": {},
-   "ajustes": [],
-   "pendencias": [],
+   "ajustes": [
+    [
+     "Seção",
+     "Ajuste",
+     "Tipo"
+    ],
+    [
+     "Relatório",
+     "“apelações e remessa oficial em embargos à execução fiscal opostos contra sentença”; honorários dentro da enumeração da sentença; folhas sem “f.” (R2, R3) e sem espaço (R4); “causídico” → Forma A (“apelações e remessa oficial à sentença … que, em embargos à execução fiscal, …”), honorários em frase própria; “(ID …, f. 342/348)”; “advogado”",
+     "RED · BAIXA"
+    ],
+    [
+     "Voto",
+     "“discute-se exigibilidade”; nomes regimentais abreviados (“NAPOLEÃO MAIA”, “MAURO CAMPBELL”); “Concluída instrução”; “vez que” (seis ocorrências); folhas com hífen; “causídico” no dispositivo → “a exigibilidade”; “NAPOLEÃO NUNES MAIA FILHO”, “MAURO CAMPBELL MARQUES”; “Concluída a instrução”; “pois”; “f. X/Y”; “de seu advogado” (mesmo resultado)",
+     "RED · BAIXA"
+    ],
+    [
+     "Ementa",
+     "Cabeçalho sem a conclusão (resultado); seções em caixa baixa; “definir o termo inicial”; numeração salta de 9 para 11; dispositivo numa só frase; rodapé com “Constituição Federal” e jurisprudência sem tribunal, súmulas do STF e do STJ antes dos julgados, “TRF3” e “j. em” → Cabeçalho com “APELAÇÃO DA ANP E REMESSA OFICIAL DESPROVIDAS. APELAÇÃO DO EMBARGANTE PROVIDA.”; seções em caixa alta; “saber qual”; numeração contínua (10); dispositivo em duas frases; rodapé no padrão STF → STJ → TRF-3",
+     "EST · MÉDIA"
+    ],
+    [
+     "Acórdão",
+     "Ausente na minuta do PJe → Acórdão no padrão, espelhando o dispositivo",
+     "ESTR · ALTA"
+    ]
+   ],
+   "pendencias": [
+    "A sentença, os embargos de declaração, as apelações, as contrarrazões e os documentos do processo administrativo citados no voto estão no ID 94690757 (Volume 01, digitalizado), cuja extração de texto não alcança essas folhas (f. 2/30, 37/42, 52/89, 139/146, 311/369): rastreamento “aguardando retirada”, edital de 30/06/2008, Ofícios 274 e 1308 e citação de 21/01/2011 não foram conferidos.",
+    "O relatório não registra os embargos de declaração do embargante, nem a decisão que os rejeitou, mencionados no voto (V4) e na apelação dele (R3). Indicar folhas e resultado.",
+    "O rodapé da ementa cita os artigos 10 e 99, § 5º, do CPC, que o voto não menciona. O artigo 10 cabe para justificar o julgamento por fundamento não adotado na sentença (o voto já diz que houve contraditório, V6); o artigo 99, § 5º, sugere exame do preparo da apelação do advogado, ausente do voto. Incluir no voto ou retirar do rodapé.",
+    "Precedentes do TRF-3 não conferidos: ApCiv 0001046-40.2011.4.03.6104 (dada como “DJe 13/11/2026”; o TRF-3 publica no DJEN) e ApCiv 5015441-17.2018.4.03.6100 (só com data de julgamento, “j. em 28/12/2023”). Confirmar veículo e data de publicação."
+   ],
    "minuta": true,
    "autos": {
     "arquivo": "acervo/autos/0007645-03.2018.4.03.9999.json.gz",
@@ -27378,8 +27482,48 @@
    ],
    "mpf": "",
    "triagem": {},
-   "ajustes": [],
-   "pendencias": [],
+   "ajustes": [
+    [
+     "Seção",
+     "Ajuste",
+     "Tipo"
+    ],
+    [
+     "Relatório",
+     "“agravo de instrumento contra decisão”; sem o exequente, os autos de origem e a identificação da agravante → “agravo de instrumento à decisão”; União como exequente; autos de origem; nome da agravante",
+     "RED · BAIXA"
+    ],
+    [
+     "Voto, V2",
+     "Sem admissibilidade; o rodapé da ementa cita o artigo 1.015, parágrafo único, do CPC, ausente do voto → Frase de cabimento na abertura",
+     "PROC · BAIXA"
+    ],
+    [
+     "Voto",
+     "Vírgula ausente após o ID (V3); artigos definidos ausentes (V10, V15, V20, V21) → Pontuação e artigos definidos",
+     "RED · BAIXA"
+    ],
+    [
+     "Ementa",
+     "Seções em caixa baixa; questões com “definir/estabelecer/determinar se”; item 3 com mais de 40 palavras; “CC”; rodapé com “Súmula 14/STJ” sem tribunal à frente → Seções em caixa alta; “saber se”; item 3 em duas frases; “Código Civil”; “STJ, Súmula 14.”",
+     "EST · MÉDIA"
+    ],
+    [
+     "Acórdão",
+     "Ausente na minuta do PJe → Acórdão no padrão, espelhando o dispositivo",
+     "ESTR · ALTA"
+    ],
+    [
+     "Acórdão",
+     "O modelo do gabinete lista o Juiz Federal Convocado NEY DE ANDRADE, que declarou impedimento (decisão ID 396576229) → Acórdão com o Juiz Federal Convocado NEY DE ANDRADE como impedido; composição a completar",
+     "PROC · CRÍTICA"
+    ]
+   ],
+   "pendencias": [
+    "A agravante não indicou o ID da decisão agravada (a petição traz “ID Xxxxxx”); o relatório segue sem ele. Indicar, se o Relator quiser, o ID da decisão nos autos 0000613-46.2005.4.03.6007.",
+    "IDʼs da origem citados no voto e não extraídos: 170534179 (decisão de 02/12/2021), 19631841 (habilitação do espólio, f. 47/49) e 33123270 (conta da União). O recurso (ID 261265624) e a contraminuta (ID 264327552) foram conferidos.",
+    "Composição do julgamento: o Juiz Federal Convocado NEY DE ANDRADE declarou impedimento (artigo 144, II, do CPC), por ter proferido a decisão agravada (decisão ID 396576229; certidão ID 397859370). O acórdão da v2 o registra como impedido e só traz o Desembargador Federal JEAN MARCOS como votante: indicar quem completa o quórum."
+   ],
    "minuta": true,
    "autos": {
     "arquivo": "acervo/autos/5020220-40.2022.4.03.0000.json.gz",
@@ -27628,8 +27772,40 @@
    ],
    "mpf": "",
    "triagem": {},
-   "ajustes": [],
-   "pendencias": [],
+   "ajustes": [
+    [
+     "Seção",
+     "Ajuste",
+     "Tipo"
+    ],
+    [
+     "Relatório",
+     "Sentença descrita duas vezes (R1 e R2), sem o nome da embargante; honorários antes dos fundamentos; “sustentando, em suma” → Forma A num só parágrafo, com JBS S/A e o ID da sentença, honorários em frase própria; “alegando, em suma”",
+     "RED · MÉDIA"
+    ],
+    [
+     "Voto",
+     "Artigos definidos ausentes (V3, V6, V22); “Portanto,” sem relação de conclusão (V7); V24 com dois “pois” e “cabe à União pagamento … sem aplicação, ao caso,” → Artigos definidos; conectivo retirado; V24 em duas frases. Teses e ementas transcritas (com “Lei nº”) preservadas",
+     "RED · BAIXA"
+    ],
+    [
+     "Ementa",
+     "Cabeçalho com “MÉRITO FAVORÁVEL AO EMBARGANTE, PREJUDICADAS AS DEMAIS ALEGAÇÕES”; seções em caixa baixa; questão em discussão sem “saber se” (“A controvérsia envolve discutir, primeiramente …”); itens 3 a 5 copiados do voto, com mais de 40 palavras e repetição (5 e 6); item 7 truncado (“no curso do processo por cerceamento ou redirecionamento ou do crédito em si”); dispositivo com “anular a CDA” (o voto desconstitui); rodapé com “Constituição”, dispositivos e julgados que o voto não cita e ordem TRF-3 → STJ → Cabeçalho com o artigo 282, § 2º, do CPC; caixa alta; três questões com “saber se”; itens condensados; item 7 reescrito; “Apelação provida.”; rodapé só com o que o voto cita, na ordem STF → STJ → TRF-3",
+     "EST · ALTA"
+    ],
+    [
+     "Acórdão",
+     "Ausente na minuta do PJe; o modelo do gabinete lista o Juiz Federal Convocado NEY DE ANDRADE, que declarou impedimento por ter proferido a sentença (decisão ID 389621233) → Acórdão com o Juiz Federal Convocado NEY DE ANDRADE como impedido; composição a completar",
+     "PROC · CRÍTICA"
+    ]
+   ],
+   "pendencias": [
+    "Composição do julgamento: o Juiz Federal Convocado NEY DE ANDRADE declarou impedimento (artigo 144, II, do CPC), por ter proferido a sentença (decisão ID 389621233; certidão ID 400340996). O acórdão da v2 o registra como impedido e só traz o Desembargador Federal JEAN MARCOS como votante: indicar quem completa o quórum.",
+    "ID da sentença: a minuta usa 264378257, mas a decisão de impedimento (ID 389621233) indica a sentença como ID 264378256. Conferir qual é a sentença e qual é a decisão dos embargos de declaração.",
+    "O relatório não registra: (1) os embargos de declaração e a decisão que os rejeitou, a que o voto alude (V20, “decisão dos embargos de declaração”); (2) o pedido de efeito suspensivo à apelação (ID 265376489) e a decisão que o apreciou (ID 265421636), cujo resultado não está no trecho extraído; e (3) a redistribuição à Primeira Seção (ID 360923440) e o impedimento (ID 389621233).",
+    "Retirados do rodapé da ementa, por não constarem do voto: TRF-3, IRDR 0017610-97.2016.4.03.0000; STJ, REsp 1.856.403; TRF-3, ApCiv 0000384-03.2016.4.03.6007, AI 5010769-59.2020.4.03.0000 e ApCiv 0001425-60.2015.4.03.6000; e os artigos 135, III, do CTN, 985, I, do CPC e 3º e 16, § 2º, da Lei 6.830/1980. Repor se o voto vier a citá-los.",
+    "IDʼs da origem citados no voto e não extraídos: 264378257 (sentença), 264378236, 264378232, 264378248 e 264378250. Apelação (ID 264378275) e contrarrazões (ID 264378333) conferidas."
+   ],
    "minuta": true,
    "autos": {
     "arquivo": "acervo/autos/5000614-52.2019.4.03.6007.json.gz",
@@ -31252,8 +31428,38 @@
    ],
    "mpf": "",
    "triagem": {},
-   "ajustes": [],
-   "pendencias": [],
+   "ajustes": [
+    [
+     "Seção",
+     "Ajuste",
+     "Tipo"
+    ],
+    [
+     "Relatório",
+     "Abertura “apelação interposta em ação declaratória …” sem a sentença, descrita em parágrafo separado; honorários na mesma frase; “sustentando, em síntese”, sem enumeração → Forma A num só parágrafo, com a autora e honorários em frase própria; “alegando, em suma, que: (1) …; e (2) …”",
+     "RED · MÉDIA"
+    ],
+    [
+     "Voto",
+     "“cinge-se a definir … e examinar alegado erro material”; artigos definidos ausentes (V3, V15, V17); “o magistrado fundamentou”; “enquadra-se” após “se”; “instituiu o PERT, instituiu”; sem “Na espécie,”; “condena-se à autora” (crase indevida) e “85, §§ 2º e 8º, CPC”; dispositivo sem o alcance → “consiste em saber se … e se há erro material”; artigos definidos; “a sentença fundamentou”; “se enquadra”; “previu”; “Na espécie,” (V15); “condena-se a autora”, “do CPC”; dispositivo com a condenação (mesmo resultado)",
+     "RED · MÉDIA"
+    ],
+    [
+     "Ementa",
+     "Cabeçalho com “ARTIGO 85, § 8º DO CPC” e “RECURSO PROVIDO”; seções em caixa baixa; “Apelação interposta”; “(PERT – Lei 13.496/2017)”; questões com “definir/verificar se”; rodapé com o artigo 85, § 3º, I, e o artigo 144, II, do CPC, que o voto não aplica → Cabeçalho no padrão, com “APELAÇÃO PROVIDA”; caixa alta; “Apelação contra sentença”; “(PERT), instituído pela Lei 13.496/2017”; “saber se”; rodapé com o artigo 85, §§ 2º e 8º, sem o artigo 144, II",
+     "EST · MÉDIA"
+    ],
+    [
+     "Acórdão",
+     "Ausente na minuta do PJe; o modelo do gabinete lista o Juiz Federal Convocado NEY DE ANDRADE, que declarou impedimento (decisão ID 393573470) → Acórdão com o Juiz Federal Convocado NEY DE ANDRADE como impedido; composição a completar",
+     "PROC · CRÍTICA"
+    ]
+   ],
+   "pendencias": [
+    "Composição do julgamento: o Juiz Federal Convocado NEY DE ANDRADE declarou impedimento (artigo 144, II, do CPC), por ter examinado a tutela de urgência no primeiro grau (decisão ID 393573470; certidão ID 402415842). O acórdão da v2 o registra como impedido e só traz o Desembargador Federal JEAN MARCOS como votante: indicar quem completa o quórum.",
+    "IDʼs da origem citados no voto e não extraídos: 158280810 (sentença), 158280803, 158280807, 158280477 e 158280778. Apelação (ID 158280817), contrarrazões (ID 158280824) e informação do agravo de instrumento 5021645-10.2019.4.03.0000 (ID 158280819) conferidas.",
+    "Honorários de R$ 1.000,00 por equidade (artigo 85, § 8º, do CPC) com base em “valor irrisório atribuído à causa”: o valor da causa não está no voto nem no trecho extraído. Conferir se é irrisório (Tema 1.076/STJ veda a equidade quando o valor da causa não é baixo)."
+   ],
    "minuta": true,
    "autos": {
     "arquivo": "acervo/autos/5003019-82.2019.4.03.6000.json.gz",

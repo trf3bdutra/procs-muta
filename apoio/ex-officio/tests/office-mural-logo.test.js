@@ -208,11 +208,11 @@ test('Mural: passos do ponto de vista de quem está logado, sinalizações por p
   const h = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
   assert.match(h, /aguarda:\{t:'Aguardando outros'/);
   assert.match(h, /k:'corrigir',t:'A corrigir'/);
-  assert.match(h, /data-ab=\\?"pront\\?"[^]*?title=\\?"Abrir o prontuário\\?"/);
+  assert.match(h, /data-ab=\\?"pront\\?"[^]*?>Abrir o prontuário</);
   assert.match(h, /\.calrow #lista\{flex:1;min-height:0;overflow:auto/);
-  assert.match(h, /<div class=\\"calrow\\"><div class=\\"esq\\"><slot name=\\"cal\\"><\\\/slot><div class=\\"board\\">/);
+  assert.match(h, /<div class=\\"calrow\\"><div class=\\"esq\\"><slot name=\\"cal\\"><\\\/slot><nav class=\\"kpis\\" id=\\"kpis\\"[^>]*><\\\/nav><div class=\\"board\\">/);
   assert.match(h, /#mu-host>\.av-box #avisos>\.nt:nth-child\(n\+3\)\{display:none!important\}/);
-  assert.match(h, /class=\\"sesc\\" id=\\"sesl\\"/);
+  assert.match(h, /class=\\"sessions\\" id=\\"sesl\\"/);
   assert.match(h, /if\(\/minuta\/\.test\(x\.papel\|\|'minuta'\)&&!x\.dataMinuta/);
 });
 
@@ -351,4 +351,22 @@ test('Mural: sem o aviso de marcos inválidos; contagem de processos na primeira
   assert.doesNotMatch(html, /marcos inválidos no calendário/);
   assert.match(html, /var tt=pri\?'<small class="tot">'\+tot\+'<\/small>':''/);
   assert.match(html, /\$\('#info'\)\.hidden=!fl\.length/);
+});
+
+test('Mural v2: saudação com atalhos, Foco de hoje, sessões com trilha, cards de etapa após o calendário e painel do processo', () => {
+  const fs = require('fs'), path = require('path');
+  const h = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
+  const lib = fs.readFileSync(path.join(__dirname, '../../../caput/motor/assets/js/11-calendario.js'), 'utf8');
+  assert.match(h, /id=\\"hchips\\"/);
+  assert.match(h, /function foco\(\)\{/);
+  assert.match(h, /class=\\"focus\\" id=\\"focus\\"/);
+  assert.match(h, /\{k:'atr',t:'Vencidos'/);
+  assert.match(h, /data-o=\\"prazo\\"/);
+  assert.match(h, /function gaveta\(k\)\{/);
+  assert.match(h, /function muEtapa\(ses,cnj,campo\)\{if\(\['dataMinuta','dataCorrecao'\]\.indexOf\(campo\)<0\)/);
+  assert.match(h, /meta:muMeta,etapa:muEtapa/);
+  assert.match(h, /chips:!PAINEL_GAB/);
+  assert.match(lib, /if\(ex\.chips\) vis\.forEach/);
+  assert.match(lib, /class="cc-leg"/);
+  assert.match(h, /id=\\"pspark\\"|id="pspark"/);
 });
