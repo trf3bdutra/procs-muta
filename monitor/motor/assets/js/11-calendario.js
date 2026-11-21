@@ -84,8 +84,9 @@ function montar(el,cal,ex){
     });
     return `<div class="cc-tl" style="height:${H}px">${h}</div>`;
   }
-  function mes(vis){
-    const base=st.mes||hoje.slice(0,7), [Y,M]=base.split('-').map(Number), d1=new Date(Y,M-1,1,12), n=new Date(Y,M,0).getDate();
+  /* ex.meses = 2: dois meses lado a lado na vista Mês (Chefia) */
+  function mes(vis,b0){
+    const base=b0||st.mes||hoje.slice(0,7), [Y,M]=base.split('-').map(Number), d1=new Date(Y,M-1,1,12), n=new Date(Y,M,0).getDate();
     const fer=Object.fromEntries(ex.feriados||[]); const ult=`${base}-${String(n).padStart(2,'0')}`; vis=vis.filter(s=>marcos(s)[0].d<=ult&&s.date>=`${base}-01`); let h=['seg','ter','qua','qui','sex'].map(d=>`<div class="cc-wd">${d}</div>`).join('');
     const pad0=(d1.getDay()+6)%7, pad=pad0>=5?0:pad0; for(let i=0;i<pad;i++) h+='<div class="cc-c cc-o"></div>';
     for(let dd=1;dd<=n;dd++){
@@ -240,6 +241,7 @@ function montar(el,cal,ex){
     const r0=P(st.semRef||dSel), rf=r0.getDay()%6?r0:new Date(+r0+(r0.getDay()===6?2:1)*DIA), sg=new Date(+rf-((rf.getDay()+6)%7)*DIA), sx=new Date(+sg+4*DIA);
     const tit= st.passo==='dia'? cap(FD(dSel,{weekday:'long',day:'numeric',month:'long',year:'numeric'}))
       : st.passo==='sem'? `${sg.getDate()}${sg.getMonth()!==sx.getMonth()?' de '+MESL(iso(sg)):''} a ${sx.getDate()} de ${MESL(iso(sx))} de ${sx.getFullYear()}`
+      : ex.meses===2? (()=>{const b=st.mes||hoje.slice(0,7),[y,m]=b.split('-').map(Number),n2=iso(new Date(y,m,15)).slice(0,7),f=x=>new Date(+P(x+'-15')).toLocaleDateString('pt-BR',{month:'long'});return cap(f(b))+' e '+f(n2)+' de '+n2.slice(0,4);})()
       : cap(new Date(+P((st.mes||hoje.slice(0,7))+'-15')).toLocaleDateString('pt-BR',{month:'long',year:'numeric'}));
     el.innerHTML=`<div class="cc${st.min?' min':''}">
       <div class="cc-h"><button class="cc-ib" data-a="min" title="${st.min?'Expandir':'Recolher'}"><i class="ti ti-chevron-${st.min?'down':'up'}"></i></button>
@@ -251,7 +253,7 @@ function montar(el,cal,ex){
         </span></div>
       
       
-      <div class="cc-body">${(()=>{const [e2,d2]=lateral();return `<div class="cc-top">${e2}<div>${mes(vis)}</div>${d2}</div>`})()}${semanaFaixa(vis)}</div>
+      <div class="cc-body">${(()=>{const [e2,d2]=lateral();const b=st.mes||hoje.slice(0,7),[y,m]=b.split('-').map(Number),n2=iso(new Date(y,m,15)).slice(0,7),ML=x=>cap(new Date(+P(x+'-15')).toLocaleDateString('pt-BR',{month:'long'}));const grade=ex.meses===2&&st.passo==='mes'?`<div class="cc-2m"><div><b class="cc-mt">${ML(b)}</b>${mes(vis,b)}</div><div><b class="cc-mt">${ML(n2)}</b>${mes(vis,n2)}</div></div>`:mes(vis);return `<div class="cc-top">${e2}<div>${grade}</div>${d2}</div>`})()}${semanaFaixa(vis)}</div>
       <div class="cc-lg" hidden>${MK.map(m=>`<span><i class="ti ${m[2]}"></i>${m[1]}</span>`).join('')}<span style="margin-left:auto">cheio = cumprido · pulsando = próximo · vermelho = vencido sem cumprir · tracejado = datas a definir · teclas ← → H A S M</span></div>
       <div class="cc-tip" hidden></div>${dialogo()}</div>`;
     t=el.querySelector('.cc-tip'); ajustaForm(); const f1=el.querySelector('form.cc-dl [name=titulo]'); if(f1&&!f1.value) f1.focus();

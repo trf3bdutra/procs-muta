@@ -778,7 +778,18 @@ html[data-theme="dark"] #tri-prontuario .tp-s h3{color:#e6e2d6;background:linear
 .cg-head p{font-size:12.8px;color:var(--m2);margin:5px 0 0}
 .cg-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;align-items:start}
 .cg-box{border:1px solid var(--b);background:var(--w);min-width:0}
-.cg-cal{margin-bottom:14px}.cg-cal #cc-cal{margin:0;padding:6px 8px}.cg-cal header{display:flex;align-items:center}.cg-cal-nav{margin-left:auto;display:flex;gap:4px}.cg-cal-nav button{border:1px solid var(--b);background:var(--w);border-radius:6px;padding:1px 9px;font:600 12px Figtree,sans-serif;cursor:pointer;color:var(--tx)}
+.cg-cal{margin-bottom:14px}.cg-cal #cc-cal{margin:0;padding:0}
+/* calendário do gabinete no padrão do Caput: tipografia, fundos e bordas da página; as cores das sessões, linhas e marcos ficam */
+.cg-cal .cc{border:0;border-radius:0;background:var(--w);font-family:Figtree,system-ui,sans-serif;color:var(--tx)}
+.cg-cal .cc-h{background:var(--w);border-bottom:1px solid var(--l);padding:8px 14px}.cg-cal .cc-h>b{font:700 15px Figtree,sans-serif;color:var(--v)}
+.cg-cal .cc-dt{font:500 11px "JetBrains Mono",monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--g);background:none;border:0;padding:0}
+.cg-cal .cc-pill{border-color:var(--b);color:var(--m2);background:var(--w);border-radius:7px}.cg-cal .cc-pill.on{background:var(--v);border-color:var(--v);color:#fff}
+.cg-cal .cc-ib{border-color:var(--b);color:var(--v);border-radius:7px}.cg-cal .cc-sp{background:none!important;border:0!important;box-shadow:none!important}
+.cg-cal .cc-wd{background:var(--p);color:var(--m);border-color:var(--l);font:500 10px "JetBrains Mono",monospace;letter-spacing:.12em}
+.cg-cal .cc-c{border-color:var(--l)!important}.cg-cal .cc-n{font:600 11.5px Figtree,sans-serif;color:var(--m2)}.cg-cal .cc-fe{background:#f6ece0!important}
+.cg-cal .cc-2m{display:grid;grid-template-columns:1fr 1fr;gap:14px}.cg-cal .cc-mt{display:block;font:700 13px Figtree,sans-serif;color:var(--v);margin:2px 0 6px}
+.cg-cal .cc-wk{background:var(--p)!important;border:1px solid var(--l)!important;border-radius:0!important}.cg-cal .cc-wt b{color:var(--v)}.cg-cal .cc-dir,.cg-cal .cc-esq{background:var(--p)!important;border:1px solid var(--l)!important;border-radius:0!important;box-shadow:none!important}
+@media(max-width:1100px){.cg-cal .cc-2m{grid-template-columns:1fr}}.cg-cal header{display:flex;align-items:center}.cg-cal-nav{margin-left:auto;display:flex;gap:4px}.cg-cal-nav button{border:1px solid var(--b);background:var(--w);border-radius:6px;padding:1px 9px;font:600 12px Figtree,sans-serif;cursor:pointer;color:var(--tx)}
 .cg-cms{display:grid;grid-template-columns:1fr 1fr;gap:18px;padding:10px 14px}.cg-cm>b{display:block;font:700 14px Figtree,sans-serif;text-transform:capitalize;margin-bottom:6px}
 .cg-cg{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:2px}.cg-cg>i{font:500 10px "JetBrains Mono",monospace;color:var(--m);text-align:center;font-style:normal;padding-bottom:2px}
 .cg-cg>span{min-height:58px;border:1px solid var(--l);background:var(--w);padding:2px 3px;display:flex;flex-direction:column;gap:1px;overflow:hidden}.cg-cg>span em{font:600 11px Figtree,sans-serif;font-style:normal;color:var(--m2)}
@@ -1158,7 +1169,7 @@ function pintaCal(forca) { const el = $('#cg-cal'), fo = $('#cg-forense'); if (f
   const sig = JSON.stringify([Dd, HOJE]); if (!forca && sig === CAL_SIG && CAL_EL && el.contains(CAL_EL)) return; CAL_SIG = sig;
   /* elemento novo a cada montagem: o calendário prende os ouvintes no elemento, e montar de novo no mesmo duplicaria os cliques */
   const novo = D.createElement('div'); novo.id = 'cc-cal'; if (CAL_EL && el.contains(CAL_EL)) CAL_EL.replaceWith(novo); else { el.innerHTML = ''; el.appendChild(novo); } CAL_EL = novo;
-  W.CMTCalendario.montar(CAL_EL, { sessoes: Dd.sess }, { hoje: HOJE, progresso: Dd.prog, feriados: Dd.fer, recesso: Dd.rec,
+  W.CMTCalendario.montar(CAL_EL, { sessoes: Dd.sess }, { meses: 2, hoje: HOJE, progresso: Dd.prog, feriados: Dd.fer, recesso: Dd.rec,
     abrir: (dt) => { const x = Dd.sess.find((y) => y.date === dt); if (!x) return; try { sessionStorage.setItem('pt-ses', x._id); } catch (er) {} try { if (W.CMTPautas && W.CMTPautas.settings) W.CMTPautas.settings.sessId = x._id; } catch (er) {} ir('pautas'); } }); }
 /* rodapé do calendário: o calendário forense (expediente, feriados, sessões e julgadores, contagem dos marcos) */
 function calForense() {

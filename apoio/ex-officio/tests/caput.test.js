@@ -65,3 +65,9 @@ test('Chefia: calendário completo do gabinete (o do motor) e regras de etiqueta
   assert.ok(m.includes('regrasEtiquetas: {')&&m.includes('RX.clear(); HIST = null; salvar(); return true; }'),'API do motor');
   assert.ok(rg.includes("data-rg=\"etq-nova\"")&&rg.includes('SM.conversoes(ses.id)')&&!rg.includes("tela('regras', 'Editar regras de etiquetas')"),'editor nas Regras gerais, contado como na etapa 3');
 });
+
+test('Calendário da Chefia: dois meses lado a lado e visual do Caput',()=>{
+  const fs=require('fs'),p=require('path'),cap=fs.readFileSync(p.join(__dirname,'../../../monitor/triagem/index.html'),'utf8'),cal=fs.readFileSync(p.join(__dirname,'../../../monitor/motor/assets/js/11-calendario.js'),'utf8');
+  assert.ok(cal.includes('ex.meses===2&&st.passo===')&&cal.includes('function mes(vis,b0)'),'dois meses');
+  assert.ok(cap.includes('{ meses: 2, hoje: HOJE,')&&cap.includes('.cg-cal .cc-2m{'),'Chefia usa dois meses');
+});
