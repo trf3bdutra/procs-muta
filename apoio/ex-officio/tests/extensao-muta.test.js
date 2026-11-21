@@ -344,3 +344,15 @@ test('extensão 0.28: designação como etiqueta (minuta e correção) e trilha 
   assert.match(c, /passo\(!!r\.minutado, 'Min\.', r\.minutado\)[\s\S]*passo\(!!r\.corrigido, 'Corr\.', r\.corrigidoEm\)[\s\S]*'Lib\.', r\.liberadoEm/);
   assert.match(read('apoio/ex-officio/api/_ficha.js'), /corrigidoEm: p\['Data da Revisão'\]/);
 });
+
+test('extensão 0.29: Minuta-matriz sem seleção confere só a estrutura; folha; janela lado a lado; conformidade em tela cheia; cartões no desenho do app', () => {
+  const c = read('extensao/comparar.js');
+  assert.doesNotMatch(c, /if \(!s && M\.length\) \{ s = C\.sel\.matriz = M\[0\]\.x\.id; \}/, 'sem matriz pré-selecionada');
+  assert.match(c, /if \(C\.fonte === 'matriz' && !C\.sel\.matriz\) return estruturaPadrao\(\);/);
+  assert.match(c, /function folhaHtml\(rows\)/); assert.match(c, /function ladoALadoHtml\(rows, titulo\)/); assert.match(c, /MutaJanela\.abrir\('comparar'/);
+  assert.match(read('extensao/conformidade.js'), /MutaJanela\.abrir\('conformidade'/);
+  assert.match(read('extensao/comum.js'), /window\.MutaJanela = \{/);
+  ['janela.html', 'janela.js', 'janela.css'].forEach(f => assert.ok(fs.existsSync(path.join(ext, f)), f));
+  const p = read('extensao/conteudo-pje.js');
+  assert.match(p, /\['urg', 'ampulheta', 'Urgência', 'al'\]/); assert.match(p, /'Min\.': 'lapis', 'Corr\.': 'check', 'Lib\.': 'enviar'/); assert.match(p, /rot === 'Min\.'/);
+});

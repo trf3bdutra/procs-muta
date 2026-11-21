@@ -211,8 +211,7 @@ function seletor() {
   }
   if (C.fonte === 'matriz') {
     var M = matrizesOrdenadas(), res = resEditor();
-    if (!s && M.length) { s = C.sel.matriz = M[0].x.id; }
-    return busca + (res ? '<p class="muted cx-n">dispositivo do editor: ' + esc(window.MutaConformidadeMotor.RES_TXT[res]) + '</p>' : '') +
+    return busca + '<p class="muted cx-n">' + (s ? '<button type="button" class="lnk" data-s="">tirar a seleção</button> · ' : 'Nenhuma matriz escolhida: o editor é conferido só com as regras e padrões estruturais do gabinete. ') + 'Escolha uma matriz para comparar bloco a bloco.</p>' + (res ? '<p class="muted cx-n">dispositivo do editor: ' + esc(window.MutaConformidadeMotor.RES_TXT[res]) + '</p>' : '') +
       itens(M.slice(0, C.q ? 40 : 8), function (x) { return x.nome; }, function (x) { return [x.pron, x.classe, x.resultado].filter(Boolean).join(' · '); }, function (x) { return x.id; }, s);
   }
   if (C.fonte === 'm2886') {
@@ -251,6 +250,7 @@ function resultadoHtml() {
   var E = ED.estado();
   if (!E.texto) return '<p class="none">Leia o editor do PJe (ou cole o texto) para comparar.</p>';
   if (C.fonte === 'par') return paragrafosPadrao();
+  if (C.fonte === 'matriz' && !C.sel.matriz) return estruturaPadrao();
   var it = itemAtual();
   if (!it) return '<p class="none">Escolha a fonte da comparação.</p>';
   if (it.erro) return '<p class="status err">' + esc(it.erro) + '</p>';
@@ -262,8 +262,86 @@ function resultadoHtml() {
     (pf.length > 1 ? '<label class="cx-sel">Parte da fonte <select data-c="parteFonte"><option value="inteira">Inteira</option>' + pf.map(function (t) { return '<option' + (C.parteFonte === t ? ' selected' : '') + '>' + esc(t) + '</option>'; }).join('') + '</select></label>' : '') + '</div>';
   var st = (r.npar ? r.npar + ' parágrafo' + (r.npar > 1 ? 's' : '') + ' com diferença' : 'Sem diferenças') + ' · ' + r.pct + '% igual' + (r.vagas ? ' · ' + r.vagas + ' vaga(s) do modelo preenchida(s)' : '') +
     (r.faltam.length ? ' · ' + r.faltam.length + ' parágrafo(s) da fonte ausentes no editor' : '') + (r.sobram.length ? ' · ' + r.sobram.length + ' só no editor' : '');
-  if (est) return cab + est + '<details class="mn-dif"><summary>Texto lado a lado com a matriz · ' + esc(st) + '</summary><div class="cx-out">' + r.html + '</div></details>';
-  return cab + '<p class="status" role="status">' + st + '</p><div class="cx-out">' + r.html + '</div>';
+  var vis = '<div class="cx-vis"><span class="seg"><button type="button" data-c="v:recortes" aria-selected="' + (C.vista !== 'folha') + '">Recortes</button><button type="button" data-c="v:folha" aria-selected="' + (C.vista === 'folha') + '">Folha</button></span>' +
+    '<button type="button" class="btn line sm" data-c="janela" title="Abre a fonte e o editor lado a lado, numa janela grande">Lado a lado em janela</button></div>';
+  ULT = { it: it, rotulo: it.rotulo || it.nome || '' };
+  var corpo = C.vista === 'folha' ? folhaHtml(alinhar(it)) : '<div class="cx-out">' + r.html + '</div>';
+  if (est) return cab + est + vis + '<p class="status" role="status">' + st + '</p>' + corpo;
+  return cab + vis + '<p class="status" role="status">' + st + '</p>' + corpo;
+}
+/* ---------- 0.29 · alinhamento parágrafo a parágrafo, folha no visual do editor e janela lado a lado ---------- */
+var ULT = null;
+function alinhar(it) {
+  var A = [], tit = {};
+  blocosFonte(it).forEach(function (b) { if (b.h) tit[A.length] = (tit[A.length] || []).concat(b.h); else if (b.p && String(b.p).trim()) A.push(String(b.p).trim()); });
+  var B = paragrafosEditor().map(function (x) { return String(x).trim(); }).filter(Boolean);
+  var ops = CX.lcs(A, B, function (x, y) { return CX.nrm(x, C.ws) === CX.nrm(y, C.ws); }), rows = [], dl = [], ad = [], pa = 0;
+  function flush() {
+    if (!dl.length && !ad.length) return;
+    var P = CX.pareia(dl, ad, 0.3);
+    P.forEach(function (q) { rows.push(q.i != null && q.j != null ? { t: CX.ehVaga(dl[q.i]) ? 'vaga' : 'mod', a: dl[q.i], b: ad[q.j] } : q.i != null ? { t: CX.ehVaga(dl[q.i]) ? 'vaga' : 'del', a: dl[q.i] } : { t: 'ins', b: ad[q.j] }); });
+    dl = []; ad = [];
+  }
+  ops.forEach(function (o) {
+    if (o[0] === '=') { flush(); (tit[pa] || []).forEach(function (h) { rows.push({ t: 'tit', a: h }); }); pa++; rows.push({ t: 'eq', a: o[1], b: o[1] }); }
+    else if (o[0] === '-') { (tit[pa] || []).forEach(function (h) { flush(); rows.push({ t: 'tit', a: h }); }); pa++; dl.push(o[1]); }
+    else ad.push(o[1]);
+  });
+  flush();
+  return rows;
+}
+function soLado(h, lado) { return lado === 'a' ? h.replace(/<ins>[\s\S]*?<\/ins>/g, '') : h.replace(/<del>[\s\S]*?<\/del>/g, ''); }
+function ladoALadoHtml(rows, titulo) {
+  return '<div class="lal-h"><b>' + esc(titulo || 'Fonte') + '</b><b>Editor do PJe</b></div><div class="lal">' + rows.map(function (x) {
+    if (x.t === 'tit') return '<div class="lal-t">' + esc(x.a) + '</div>';
+    if (x.t === 'eq') return '<div class="lal-r eq"><p>' + esc(x.a) + '</p><p>' + esc(x.b) + '</p></div>';
+    if (x.t === 'mod') { var d = CX.difPal(x.a, x.b, C.ws).h; return '<div class="lal-r mod"><p>' + soLado(d, 'a') + '</p><p>' + soLado(d, 'b') + '</p></div>'; }
+    if (x.t === 'vaga') return '<div class="lal-r vaga"><p class="cx-ph">' + esc(x.a) + '</p><p>' + (x.b ? '<mark class="cx-vg">' + esc(x.b) + '</mark>' : '<span class="muted">vaga não preenchida</span>') + '</p></div>';
+    if (x.t === 'del') return '<div class="lal-r del"><p><del>' + esc(x.a) + '</del></p><p class="vz">falta no editor</p></div>';
+    return '<div class="lal-r ins"><p class="vz">não está na fonte</p><p><ins>' + esc(x.b) + '</ins></p></div>';
+  }).join('') + '</div>';
+}
+/* folha: o texto do editor inteiro, com a formatação lida do PJe (negrito, itálico, recuo, alinhamento); à margem, o que mudou */
+function folhaHtml(rows) {
+  var E = ED.estado(), fila = (E.paragrafos || []).slice(), pega = function (t) { for (var i = 0; i < fila.length; i++) if (String(fila[i].t || '').trim() === t) return fila.splice(i, 1)[0]; return null; };
+  var fmt = function (p, txt) {
+    var st = (p && p.alinha ? 'text-align:' + p.alinha + ';' : '') + (p && (p.cita || p.recuo > 40) ? 'margin-left:4cm;font-size:.92em;' : '');
+    var h = p && p.html ? p.html : esc(txt); if (p && !p.html && p.neg) h = '<b>' + h + '</b>'; if (p && !p.html && p.ita) h = '<i>' + h + '</i>';
+    return { st: st, h: h };
+  };
+  var tituloPeca = /^(relat[óo]rio|voto|e\s*m\s*e\s*n\s*t\s*a|ac[óo]rd[ãa]o)\.?$/i;
+  var corpo = (rows || (E.paragrafos || []).map(function (p) { return { t: 'eq', b: String(p.t || '').trim() }; }).filter(function (x) { return x.b; })).map(function (x) {
+    if (x.t === 'tit') return '';
+    if (x.t === 'del') return '<div class="fl-m del" title="Está na fonte e falta no editor"><del>' + esc(x.a) + '</del></div>';
+    var p = pega(String(x.b).trim()), f = fmt(p, x.b);
+    if (tituloPeca.test(String(x.b).trim())) return '<p class="fl-tit">' + esc(x.b) + '</p>';
+    if (x.t === 'eq') return '<p style="' + f.st + '">' + f.h + '</p>';
+    if (x.t === 'ins') return '<p class="fl-m ins" style="' + f.st + '" title="Só no editor (não está na fonte)">' + f.h + '</p>';
+    if (x.t === 'vaga') return '<p class="fl-m vg" style="' + f.st + '" title="Preenche vaga do modelo">' + f.h + '</p>';
+    return '<p class="fl-m mod" style="' + f.st + '" title="Diferente da fonte: riscado é o texto da fonte; verde, o do editor">' + CX.difPal(x.a, x.b, C.ws).h + '</p>';
+  }).join('');
+  return '<div class="folha">' + corpo + '</div>';
+}
+/* estrutura do gabinete (sem matriz escolhida): o que a peça deve ter, conferido no texto do editor, e os avisos de estrutura do motor */
+var EST_ACORDAO = [['Relatório', /^relat[óo]rio\.?$/i], ['"É o relatório."', /^É o relatório\.$/], ['Voto', /^voto\.?$/i], ['"Senhores Desembargadores,"', /^Senhores Desembargadores,/], ['"Ante o exposto," no dispositivo', /^Ante o exposto,/],
+  ['"É como voto."', /^É como voto\.$/], ['Ementa', /^e\s*m\s*e\s*n\s*t\s*a\.?$/i], ['Cabeçalho da ementa em caixa alta (DIREITO …)', /^DIREITO [A-ZÁÉÍÓÚÂÊÔÃÕÇ ,]+\./], ['I. Caso em exame', /^I\.\s*Caso em exame$/i], ['II. Questão em discussão', /^II\.\s*Quest[ãa]o em discuss[ãa]o$/i],
+  ['III. Razões de decidir', /^III\.\s*Raz[õo]es de decidir$/i], ['IV. Dispositivo', /^IV\.\s*Dispositivo( e tese)?$/i], ['"Dispositivos relevantes citados:"', /^Dispositivos relevantes citados:/], ['"Jurisprudência relevante citada:"', /^Jurisprud[êe]ncia relevante citada:/],
+  ['Acórdão: "Vistos e relatados estes autos…"', /^Vistos e relatados estes autos/]];
+var EST_MONO = [['"Vistos."', /^Vistos\.$/], ['"Trata-se de …"', /^Trata-se de /], ['"DECIDO."', /^DECIDO\.$/], ['"Ante o exposto," no dispositivo', /^Ante o exposto,/], ['"Publique-se. Intime-se."', /Publique-se\.\s*Intime-se\./]];
+function estruturaPadrao() {
+  var E = ED.estado(), ps = (E.paragrafos || []).map(function (p) { return String(p.t || '').trim(); }).filter(Boolean);
+  var temAc = ps.some(function (t) { return /^(relat[óo]rio|voto|e\s*m\s*e\s*n\s*t\s*a)\.?$/i.test(t); }), temMono = ps.some(function (t) { return /^(DECIDO|Vistos)\.$/.test(t); });
+  var mono = temAc ? false : temMono ? true : /monocr|interlocut/i.test(processo());
+  var L = mono ? EST_MONO : EST_ACORDAO, ok = 0;
+  var lis = L.map(function (x) { var tem = ps.some(function (t) { return x[1].test(t); }); if (tem) ok++; return '<li class="' + (tem ? 'ok' : 'no') + '"><i>' + (tem ? 'ok' : 'falta') + '</i><span>' + esc(x[0]) + '</span></li>'; }).join('');
+  var avisos = [];
+  try { var R = window.MutaConformidadeMotor.analisar(E.paragrafos || [], {}); avisos = (R.itens || []).filter(function (x) { return /Estrutura|Ementa|Resultado/.test(x.grupo); }).slice(0, 30); } catch (e) {}
+  ULT = { it: null, rotulo: 'Estrutura do gabinete' };
+  return '<div class="cx-res-h"><b>Estrutura do gabinete · ' + (mono ? 'decisão monocrática' : 'acórdão') + '</b></div><p class="status">' + ok + '/' + L.length + ' elementos obrigatórios presentes · ' + avisos.length + ' aviso(s) de estrutura, ementa e resultado</p>' +
+    '<div class="mn-est"><ul class="mn-ck">' + lis + '</ul></div>' +
+    (avisos.length ? '<ul class="mn-av">' + avisos.map(function (x) { return '<li data-sev="' + x.sev + '"><b>' + esc(x.grupo) + '</b> ' + esc(x.msg) + (x.sug ? ' <small>Sugestão: ' + esc(x.sug) + '</small>' : '') + '</li>'; }).join('') + '</ul>' : '') +
+    '<div class="cx-vis"><span class="seg"><button type="button" data-c="v:recortes" aria-selected="' + (C.vista !== 'folha') + '">Lista</button><button type="button" data-c="v:folha" aria-selected="' + (C.vista === 'folha') + '">Folha</button></span><button type="button" class="btn line sm" data-c="janela-folha" title="Abre a folha do editor numa janela grande">Folha em janela</button></div>' +
+    (C.vista === 'folha' ? folhaHtml(null) : '');
 }
 /* estrutura: cada bloco da matriz (por seção) e se o editor tem um parágrafo correspondente */
 function estruturaHtml(it) {
@@ -335,6 +413,9 @@ var tq = 0;
 caixa.addEventListener('click', function (e) {
   var b = e.target.closest('button'); if (!b) return;
   if (b.dataset.c === 'ler') { ED.ler().catch(function () {}); return; }
+  if (b.dataset.c === 'v:recortes' || b.dataset.c === 'v:folha') { C.vista = b.dataset.c.slice(2); render(); return; }
+  if (b.dataset.c === 'janela') { if (ULT && ULT.it && window.MutaJanela) window.MutaJanela.abrir('comparar', 'Comparação · ' + ULT.rotulo, ladoALadoHtml(alinhar(ULT.it), ULT.rotulo)); return; }
+  if (b.dataset.c === 'janela-folha') { if (window.MutaJanela) window.MutaJanela.abrir('comparar', 'Folha do editor', folhaHtml(null)); return; }
   if (b.dataset.pron != null) { C.pron = b.dataset.pron; C.sel.matriz = ''; render(); return; }
   if (b.dataset.c === 'edtg') { C.edAberto = !C.edAberto; guarda(); render(); return; }
   if (b.dataset.c === 'col-loc') { var d = $('panel-lote'); if (d) { d.open = true; if (window.MutaLote) window.MutaLote.abrir(); d.scrollIntoView({ block: 'start' }); } return; }

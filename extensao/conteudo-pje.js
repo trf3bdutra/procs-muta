@@ -448,14 +448,19 @@
       '.hero-contorno{background:#fff!important;color:var(--hc)!important;border:1.5px solid var(--hc)!important}' +
       '.hero-etq[data-hero-ic]:not([data-hero-ic=""])::before{content:"";display:inline-block;width:10px;height:10px;margin-right:4px;vertical-align:-1px;background:currentColor;-webkit-mask:var(--hi) center/contain no-repeat;mask:var(--hi) center/contain no-repeat}' +
       icCss() +
-      '.muta-selos .hs{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:3px;height:18px;padding:0 5px;border-radius:9px;border:1px solid #d5dbe1;background:#fff;font:700 10.5px/1 system-ui,Segoe UI,sans-serif;color:#33424c}' +
-      '.muta-selos .hs b{font-weight:800}.muta-selos .hs:hover{border-color:#1f4f6b;box-shadow:0 0 0 2px #1f4f6b22}' +
-      '.muta-selos .hs-al{background:#fdecea;border-color:#efb3a9;color:#a8321f}.muta-selos .hs-av{background:#fff4e5;border-color:#f0c88a;color:#8a5a10}.muta-selos .hs-mu{background:#eef3f7;border-color:#c9d6e0;color:#1f4f6b}' +
+      '.muta-selos .hs{all:unset;cursor:pointer;position:relative;display:inline-grid;place-items:center;width:22px;height:22px;border-radius:6px;color:#5d6b78}' +
+      '.muta-selos .hs:hover{background:#eef3f7;color:#1f4f6b}' +
+      '.muta-selos .hs b{position:absolute;top:-5px;right:-5px;min-width:13px;height:13px;padding:0 3px;box-sizing:border-box;border-radius:7px;background:#e8710a;color:#fff;font:800 9px/13px system-ui,sans-serif;text-align:center}' +
+      '.muta-selos .hs-al{color:#b0402f}.muta-selos .hs-al b{background:#c62828}.muta-selos .hs-mu b{background:#4a7ea6}' +
       '.muta-selos.hero-autos{display:inline-flex;margin:0 0 0 8px;vertical-align:middle}' +
-      '.muta-selos .m-pes{background:#ede7f6;border-color:#c9b8e8;color:#4a2a8a;border-radius:6px;gap:4px}.muta-selos .m-pes-c{background:#e3f2ec;border-color:#a9d6bf;color:#1d6b45}' +
+      '.muta-selos .m-pes{display:inline-flex;align-items:center;gap:5px;padding:2px 9px 2px 3px;border-radius:14px;border:1px solid #e0dccc;background:#fff;color:#1d2730}' +
+      '.muta-selos .m-pes>i{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font:700 9px system-ui,sans-serif;font-style:normal}' +
+      '.muta-selos .m-pes-m>i{background:#e3f2ec;color:#2f6e4b}.muta-selos .m-pes-c>i{background:#ece7f8;color:#5a3fa0}' +
+      '.muta-selos{align-items:center}.muta-selos .m-pes>span{display:grid;line-height:1.05;border:0;padding:0;background:none;border-radius:0}.muta-selos .m-pes small{font:600 7.5px system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#8a97a3}.muta-selos .m-pes b{font:600 11px system-ui,sans-serif}' +
       '.muta-selos .m-trilha{display:inline-flex;align-items:center;gap:4px;border:0;background:transparent;padding:0 2px}' +
-      '.muta-selos .m-trilha i{width:9px;height:9px;border-radius:50%;border:1.5px solid #9aa8b3;background:#fff;flex:none}.muta-selos .m-trilha i.ok{background:#2f8a5a;border-color:#2f8a5a}' +
-      '.muta-selos .m-trilha b{width:8px;height:1.5px;background:#c3ccd3}.muta-selos .m-trilha small{font:600 10px system-ui,sans-serif;color:#7d8b96}.muta-selos .m-trilha small.ok{color:#1d6b45}' +
+      '.muta-selos .m-trilha i{width:20px;height:20px;border-radius:50%;border:1.5px dashed #b7c2cb;background:#fff;color:#9aa8b3;display:grid;place-items:center;flex:none}' +
+      '.muta-selos .m-trilha i.ok{border:1.5px solid #2f8a5a;color:#2f8a5a;background:#f1faf4}' +
+      '.muta-selos .m-trilha b{width:10px;border-top:1.5px dashed #c3ccd3}.muta-selos .m-trilha small{font:600 10px system-ui,sans-serif;color:#7d8b96;margin-left:-1px}.muta-selos .m-trilha small.ok{color:#1d6b45}' +
       '#hero-dlg{position:fixed;inset:0;z-index:2147483600;background:rgba(15,25,35,.42);display:grid;place-items:center;font:13px/1.45 system-ui,Segoe UI,sans-serif;color:#1d2730}' +
       '#hero-dlg .hd-bx{width:min(1180px,96vw);max-height:88vh;display:flex;flex-direction:column;background:#fff;border-radius:12px;box-shadow:0 18px 50px rgba(0,0,0,.3);overflow:hidden}' +
       '#hero-dlg header{display:flex;align-items:flex-start;gap:10px;padding:12px 16px;border-bottom:1px solid #e3e8ec}#hero-dlg header>div{flex:1}' +
@@ -505,11 +510,14 @@
     r = E.preparar(r); var cfg = ENR.cfg || E.CFG, h = [], et = E.etapa(r);
     if (et) h.push('<span class="m-et' + (/^Liberado|Assinada/.test(et) ? ' m-ok' : '') + '" title="Etapa no gabinete (ficha do processo)">' + escS(et) + '</span>');
     /* designação (como etiqueta) e trilha de produção: minutado (data) · corrigido · liberado */
-    if (r.servidor) h.push('<span class="m-pes" title="Quem minuta">' + ico('pessoa', 10) + 'Minuta: ' + escS(r.servidor) + '</span>');
-    if (r.corretor) h.push('<span class="m-pes m-pes-c" title="Quem corrige">' + ico('check', 10) + 'Correção: ' + escS(r.corretor) + '</span>');
+    /* no desenho do app: avatar com as iniciais, rótulo pequeno (MINUTA / CORREÇÃO) e o primeiro nome */
+    var pes = function (nome, rot, cls) { return '<span class="m-pes ' + cls + '" title="' + rot + ': ' + escS(nome) + '"><i>' + escS(E.iniciais(nome)) + '</i><span><small>' + rot + '</small><b>' + escS(String(nome).split(/\s+/)[0]) + '</b></span></span>'; };
+    if (r.servidor) h.push(pes(r.servidor, 'Minuta', 'm-pes-m'));
+    if (r.corretor) h.push(pes(r.corretor, 'Correção', 'm-pes-c'));
     if (r.servidor || r.corretor || r.minutado) {
       var br = function (x) { var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(x || ''); return m ? m[3] + '/' + m[2] : (x || ''); };
-      var passo = function (ok, rot, data) { return '<i class="tp' + (ok ? ' ok' : '') + '" title="' + ({ 'Min.': 'Minutado', 'Corr.': 'Corrigido', 'Lib.': 'Liberado' }[rot] || rot) + (ok ? (data ? ' em ' + escS(br(data)) : '') : ': pendente') + '"></i><small' + (ok ? ' class="ok"' : '') + '>' + rot + (ok && data ? ' ' + escS(br(data)) : '') + '</small>'; };
+      var passo = function (ok, rot, data) { var nm = { 'Min.': 'Minutado', 'Corr.': 'Corrigido', 'Lib.': 'Liberado' }[rot] || rot, ic = { 'Min.': 'lapis', 'Corr.': 'check', 'Lib.': 'enviar' }[rot];
+        return '<i class="tp' + (ok ? ' ok' : '') + '" title="' + nm + (ok ? (data ? ' em ' + escS(br(data)) : '') : ': pendente') + '">' + ico(ic, 11) + '</i>' + (ok && data && rot === 'Min.' ? '<small class="ok">' + escS(br(data)) + '</small>' : ''); };
       h.push('<span class="m-trilha" title="Trilha de produção">' + passo(!!r.minutado, 'Min.', r.minutado) + '<b></b>' + passo(!!r.corrigido, 'Corr.', r.corrigidoEm) + '<b></b>' + passo(!!(r.liberado || r.enviado), 'Lib.', r.liberadoEm) + '</span>');
     }
     r._falta = cat ? E.faltando(r, cat, texto) : [];
@@ -591,12 +599,12 @@
     return { r: r, urg: r.urgPend ? ['Urgência não apreciada' + (r.urg ? ': ' + r.urg : '') + (r.urgDias != null ? ' · há ' + r.urgDias + ' dia(s)' : '') + (r.urgNivel ? ' · ' + r.urgNivel : '')] : [],
       av: av, ic: r.ic || [], pd: r.pend || [], nt: r.notas || [] };
   }
-  var SIN = [['urg', 'raio', 'Urgência', 'al'], ['av', 'sino', 'Avisos', 'av'], ['ic', 'bloqueio', 'Intercorrências', 'al'], ['pd', 'bandeira', 'Pendências', 'av'], ['nt', 'nota', 'Notas', 'mu']];
+  var SIN = [['urg', 'ampulheta', 'Urgência', 'al'], ['av', 'sino', 'Avisos', 'av'], ['ic', 'triangulo', 'Intercorrências', 'al'], ['pd', 'alfinete', 'Pendências', 'av'], ['nt', 'nota', 'Notas', 'mu']];
   function ico(k, n) { var E = window.MutaEtiquetas; return E && E.svg ? E.svg(k, n) : ''; }
   function sinaisHtml(k, r) {
     if (!k) return ''; var S0 = sinaisDe(r), h = '';
     SIN.forEach(function (x) { var n = S0[x[0]].length; if (!n) return;
-      h += '<button type="button" class="hs hs-' + x[3] + '" data-hero-sin="' + x[0] + '" data-hero-k="' + k + '" title="' + x[2] + ': ' + escS(S0[x[0]].slice(0, 3).join(' | ')) + (n > 3 ? ' …' : '') + ' — clique para ver">' + ico(x[1], 12) + (n > 1 || x[0] !== 'urg' ? '<b>' + n + '</b>' : '') + '</button>'; });
+      h += '<button type="button" class="hs hs-' + x[3] + '" data-hero-sin="' + x[0] + '" data-hero-k="' + k + '" title="' + x[2] + ': ' + escS(S0[x[0]].slice(0, 3).join(' | ')) + (n > 3 ? ' …' : '') + ' — clique para ver">' + ico(x[1], 15) + '<b>' + n + '</b></button>'; });
     return h;
   }
   function linhaSin(l) {

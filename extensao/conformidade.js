@@ -59,7 +59,7 @@ function render() {
   var topo = '<div class="cf-top card"><label class="cf-sw"><input type="checkbox" data-k="ativa"' + (K.ativa ? ' checked' : '') + '><span></span><b>Conformidade ativa</b></label>' +
     ''+
     '<div class="bar"><button type="button" class="btn solid sm" data-k="agora"' + (E.lendo ? ' disabled' : '') + '>' + (E.lendo ? 'Lendo…' : 'Analisar agora') + '</button>' +
-    (r ? '<button type="button" class="btn line sm" data-k="copiar">Copiar relatório</button>' : '') +
+    (r ? '<button type="button" class="btn line sm" data-k="copiar">Copiar relatório</button><button type="button" class="btn line sm" data-k="cheia" title="Abre a conformidade numa janela do tamanho da tela; acompanha as novas análises">Tela cheia</button>' : '') +
     '<label class="cf-fmt" title="Confere negrito, itálico e recuo"><input type="checkbox" data-k="fmt"' + (K.fmt ? ' checked' : '') + '> formatação</label></div>' +
     (K.erroDados ? '<p class="status err">' + esc(K.erroDados) + ' A análise segue sem as regras de redação do Compendium.</p>' : '') +
     (E.erro ? '<p class="status err">' + esc(E.erro) + '</p>' : '') +
@@ -73,6 +73,9 @@ function render() {
     '</div></div>';
   var filtros = '<div class="seg cf-grupos"><button type="button" data-g="" aria-selected="' + !K.grupo + '">Todos · ' + r.itens.length + '</button>' +
     Object.keys(grupos).map(function (gq) { return '<button type="button" data-g="' + esc(gq) + '" aria-selected="' + (K.grupo === gq) + '">' + esc(gq) + ' · ' + grupos[gq] + '</button>'; }).join('') + '</div>';
+  var corpoCf = resumo + (r.itens.length ? '<ul class="cf-lista">' + r.itens.map(itemHtml).join('') + '</ul>' : '<div class="empty"><h3>Nada a apontar</h3></div>');
+  if (window.MutaJanela) window.MutaJanela.atualizar('conformidade', 'Conformidade da minuta', corpoCf);
+  K.cheia = corpoCf;
   caixa.innerHTML = topo + resumo + (r.itens.length ? filtros + '<ul class="cf-lista">' + lista.map(itemHtml).join('') + '</ul>' : '<div class="empty"><h3>Nada a apontar</h3>A minuta segue a estrutura e as regras conferidas. Confira os autos antes de liberar.</div>') ;
   $('panel-conf').scrollTop = y;
 }
@@ -90,6 +93,7 @@ caixa.addEventListener('click', function (e) {
   if (b.dataset.k === 'agora') { ED.ler().then(analisar, function () { render(); }); return; }
   if (b.dataset.k === 'copiar') { (navigator.clipboard ? navigator.clipboard.writeText(relatorioTexto()) : Promise.reject()).then(function () { b.textContent = 'Copiado'; setTimeout(function () { b.textContent = 'Copiar o relatório'; }, 1400); }, function () {}); return; }
   if (b.dataset.g != null) { K.grupo = b.dataset.g; render(); return; }
+  if (b.dataset.k === 'cheia') { if (window.MutaJanela && K.cheia) window.MutaJanela.abrir('conformidade', 'Conformidade da minuta', K.cheia); return; }
 });
 caixa.addEventListener('change', function (e) {
   var t = e.target, k = t.dataset && t.dataset.k;

@@ -5,6 +5,17 @@ Nome desde a 0.19.3 (antes: Muta). Os identificadores internos (`window.Muta*`, 
 Extensão do Chrome/Edge (Manifest V3) que abre o **Muta** num painel lateral, ao lado dos autos e das tarefas do PJe 2º grau do TRF-3.
 Base: o HTML independente *muta-independente-prontuario-completo* (Prontuário + Acervo).
 
+## O que muda na 0.29 · Minuta: estrutura, folha e janela grande; cartões no desenho do app
+
+- Minuta-matriz: nenhuma matriz vem escolhida; sem escolha, o texto do editor é conferido só com a estrutura do gabinete
+  (elementos obrigatórios do acórdão ou da monocrática e os avisos de estrutura, ementa e resultado do motor).
+- Vistas "Recortes" e "Folha": a folha mostra o texto inteiro do editor com a formatação lida do PJe (títulos, negrito,
+  itálico, recuo), com as diferenças à margem (amarelo mudou, verde só no editor, riscado falta).
+- "Lado a lado em janela" e "Folha em janela": abre uma janela do tamanho da tela (`janela.html`), fonte × editor
+  alinhados parágrafo a parágrafo. Conformidade: botão "Tela cheia", que acompanha as novas análises.
+- Cartões do PJe no desenho do app: designação com avatar de iniciais (MINUTA / CORREÇÃO), trilha lápis → check →
+  enviar em círculos tracejados que ficam verdes (data só no minutado) e sinalizações em ícones com contagem em círculo.
+
 ## O que muda na 0.28 · designação e trilha de produção nos cartões
 
 - No cartão do processo (lista do PJe), quando designado: "Minuta: nome" e "Correção: nome" como etiquetas, e a trilha
