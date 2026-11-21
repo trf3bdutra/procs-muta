@@ -88,6 +88,8 @@ def categoria(it, r=None):
 
 def apto_voto(it):
     tri = it.get('triagem') or {}
+    if 'Triagem assistida' in str(it.get('especificidades') or ''):
+        return False  # extração assistida: só depois da conferência
     a = sem(tri.get('ato') or '')
     if not re.search(r'\(voto\)|^julgamento d', a) or re.search(r'despacho|intimar|vista|diligenc|ou prejuizo|ou prejudicialidade|monocratica', a):
         return False
