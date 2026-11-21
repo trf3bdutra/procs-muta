@@ -163,3 +163,13 @@ test('Mesa: tipos mantidos fora dos grupos (META, ED, AgInt) num grupo à parte'
   for(const x of ["if(x.t&&FORA[x.t])return 'F|'+x.t;","'Mantidos pela regra · '+k.slice(2)",'id="fora"',"[data-fora]","localStorage.setItem('mesa_fora'"])assert.ok(m.includes(x),x);
   [...m.matchAll(/<script>([\s\S]*?)<\/script>/g)].forEach((x)=>new (require('vm').Script)(x[1]));
 });
+
+test('Mesa: capacidade e carga mostram quantos processos cada pessoa tem para minutar e para corrigir',()=>{
+  const m=require('fs').readFileSync(require('path').join(__dirname,'../../../caput/designacao/index.html'),'utf8');
+  for(const x of ["p/ minutar</b>","p/ corrigir</b>","var ND={},NC={};"])assert.ok(m.includes(x),x);
+});
+
+test('Mesa: indisponível tira a pessoa também dos processos já designados (vão para a proposta) e desmarcar devolve',()=>{
+  const m=require('fs').readFileSync(require('path').join(__dirname,'../../../caput/designacao/index.html'),'utf8');
+  for(const x of ['>indisponível</label>','var AUSX={};',"AUSX[nm]=Lx;","designação(ões) restauradas"])assert.ok(m.includes(x),x);
+});
