@@ -12,6 +12,7 @@ Fontes (todas no procs-muta):
   nav_editorial.css                                 barra do cabeçalho, gêmea da do Ex Officio
   padrao_paginas.js · padrao_paginas.css            padrão comum das páginas: abertura, barra de consulta e trilho
   diretrizes_manual.html                            manual de redação das Diretrizes (Padrões decisórios só no acesso avançado)
+  manual_sync.py                                    leva ao manual o que mudou em apoio/diretrizes.json
   ../../diretrizes.json · ../../repertorio.json     banco de redação e grafia de normas
   ../../../modelos/modelos.json · paragrafos.json   modelos-matriz e parágrafos-padrão
   ../../../modelos/matrizes-estruturais.json        moldes do Editorial por recurso e resultado
@@ -215,7 +216,11 @@ def montar(var):
     t = troca(t, '<section id="v-consulta" hidden>', ENC_SECAO + '<section id="v-consulta" hidden>')
     t = t.replace('<section id="v-temas">', '<section id="v-temas" hidden>', 1)
     # Diretrizes: manual de redação novo (documento próprio, embutido; Padrões decisórios só no acesso avançado)
-    t = troca(t, '<section id="v-dir" hidden>', '<script type="application/json" id="dir-manual">' + json.dumps((H/'diretrizes_manual.html').read_text(encoding='utf-8'), ensure_ascii=False).replace('<', '\\u003c') + '</script>\n<section id="v-dir" hidden>')
+    # o texto das regras, termos, conectivos, verbos e verificações vem de apoio/diretrizes.json (o que o editor altera)
+    from manual_sync import sincroniza
+    MANUAL, _rel = sincroniza((H/'diretrizes_manual.html').read_text(encoding='utf-8'), dir_)
+    if _rel: print('manual de redação ← diretrizes:', _rel)
+    t = troca(t, '<section id="v-dir" hidden>', '<script type="application/json" id="dir-manual">' + json.dumps(MANUAL, ensure_ascii=False).replace('<', '\\u003c') + '</script>\n<section id="v-dir" hidden>')
     js = 'window.VDM_PUBLICO=true;\n' + js + '\n' + (H/'enciclopedia.js').read_text(encoding='utf-8') + '\n' + (H/'acesso.js').read_text(encoding='utf-8')
     # identidade gêmea do Ex Officio: cabeçalho, paleta e tema compartilhado (cmt-eq-tema)
     css += (H/'publico.css').read_text(encoding='utf-8') + (H/'acesso.css').read_text(encoding='utf-8')
