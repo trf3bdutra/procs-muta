@@ -580,29 +580,21 @@ function falha(e){
 }
 const ROTULO={cg:'CG',eq:'Geral'};
 
-/* As coleções são três áreas: Pauta, Avulsas e Triagem. Sessões são fontes, não coleções.
-   Triagem: lotes montados a partir das tarefas do PJe (tipo 'triagem'), agrupados pela tarefa. */
+/* As coleções são duas áreas: Pauta e Avulsas. Triagem e Seleção prévia foram integradas ao Caput (/caput/triagem/). */
 function seletorColecoes(lotes,id) {
-  const tipo=LOTE?(LOTE.tipo==='pauta'?'pauta':LOTE.tipo==='triagem'?'triagem':LOTE.tipo==='selecao'?'selecao':'avulsa'):'avulsa';
+  const tipo=LOTE?(LOTE.tipo==='pauta'?'pauta':'avulsa'):'avulsa';
   const ses=LOTE&&LOTE.sessoes&&LOTE.sessoes[0]||LISTA.sessoes[0]?.date||'';
-  const sess=LISTA.sessoes||[],avulsos=lotes.filter(l=>l.tipo!=='pauta'&&l.tipo!=='triagem'&&l.tipo!=='selecao'),tri=lotes.filter(l=>l.tipo==='triagem'),sel=lotes.filter(l=>l.tipo==='selecao'&&!l.arquivado).sort((a,b)=>String(a.sessao).localeCompare(String(b.sessao)));
+  const sess=LISTA.sessoes||[],avulsos=lotes.filter(l=>l.tipo!=='pauta');
   const daSessao=lotes.filter(l=>l.tipo==='pauta'&&(l.sessao||(l.sessoes||[])[0])===ses);
   const opt=l=>'<option value="'+esc(l.id)+'"'+(l.id===id?' selected':'')+'>'+(l.cor?'● ':'')+esc(l.titulo)+(l.subtitulo?' — '+esc(l.subtitulo):'')+' · '+l.total+'</option>';
-  /* Avulsas: os escaninhos da triagem do Caput primeiro; depois os demais lotes avulsos */
-  const optAv=(avulsos.some(l=>l.escaninho)?'<optgroup label="Escaninhos da triagem do Caput">'+avulsos.filter(l=>l.escaninho).map(opt).join('')+'</optgroup><optgroup label="Outros lotes avulsos">'+avulsos.filter(l=>!l.escaninho).map(opt).join('')+'</optgroup>':avulsos.map(opt).join(''));
-  const tarefas=[...new Set(tri.map(l=>l.tarefa||'Triagem'))];
-  const optTri=tarefas.map(t=>'<optgroup label="'+esc(t)+'">'+tri.filter(l=>(l.tarefa||'Triagem')===t).map(opt).join('')+'</optgroup>').join('');
+  const optAv=avulsos.map(opt).join('');
   const bt=(k,r,t)=>'<button type="button" data-colecao="'+k+'" aria-pressed="'+(tipo===k)+'" title="'+t+'">'+r+'</button>';
   return '<div class="col-areas" aria-label="Coleções do Collectio"><div class="col-tipos">'+
-    bt('pauta','Pauta','Coleção de Pauta')+bt('selecao','Seleção prévia','Seleção prévia: um lote por sessão futura, alimentado pela triagem do Caput')+bt('triagem','Triagem','Coleção de Triagem')+bt('avulsa','Avulsas','Coleções Avulsas e escaninhos da triagem do Caput')+'</div>'+
+    bt('pauta','Pauta','Coleção de Pauta')+bt('avulsa','Avulsas','Coleções Avulsas')+'</div>'+
     '<div class="col-area" id="col-pauta"'+(tipo==='pauta'?'':' hidden')+'>'+
     '<label class="lx-sel">Sessão · processos na pauta<select id="sel-sessao">'+sess.map(x=>'<option value="'+esc(x.date)+'"'+(x.date===ses?' selected':'')+' title="'+esc(x.nome||br(x.date))+' · '+x.processos+' na pauta">'+esc(br(x.date))+' · '+(x.processos?x.processos:'vazia')+'</option>').join('')+'</select></label>'+
     (LOTE&&LOTE.virtual?'':'<button class="b col-matriz" type="button" id="b-matriz">← Matriz geral da sessão</button>')+
     (daSessao.length?'<label class="lx-sel">Lotes desta pauta<select id="sel-pauta"><option value="">Escolha um lote</option>'+daSessao.map(opt).join('')+'</select></label>':'')+'</div>'+
-    '<div class="col-area" id="col-triagem"'+(tipo==='triagem'?'':' hidden')+'>'+
-    '<label class="lx-sel">Lote de triagem<select id="sel-triagem"><option value="">Selecione um lote</option>'+optTri+'</select></label></div>'+
-    '<div class="col-area" id="col-selecao"'+(tipo==='selecao'?'':' hidden')+'>'+
-    '<label class="lx-sel">Sessão futura<select id="sel-selecao"><option value="">'+(sel.length?'Selecione a sessão':'Nenhuma sessão futura sem pauta oficial')+'</option>'+sel.map(opt).join('')+'</select></label></div>'+
     '<div class="col-area" id="col-avulsas"'+(tipo==='avulsa'?'':' hidden')+'>'+
     '<label class="lx-sel">Coleção avulsa<select id="sel-avulsas">'+
     '<option value="">Selecione uma coleção</option>'+optAv+'</select></label></div></div>';
@@ -612,18 +604,15 @@ function ligarColecoes(lotes) {
   document.querySelectorAll('[data-colecao]').forEach(b=>b.onclick=()=>{
     const k=b.dataset.colecao;
     document.querySelector('#col-pauta').hidden=k!=='pauta';
-    document.querySelector('#col-triagem').hidden=k!=='triagem';
-    document.querySelector('#col-avulsas').hidden=k!=='avulsa';     const cs=document.querySelector('#col-selecao');if(cs)cs.hidden=k!=='selecao';
+    document.querySelector('#col-avulsas').hidden=k!=='avulsa';
     document.querySelectorAll('[data-colecao]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));
     if(k==='pauta'){const s=document.querySelector('#sel-sessao').value;go('pauta-'+s)}
-    else if(k==='triagem'){const a=lotes.find(l=>l.tipo==='triagem');if(a)go(a.id)}
-    else{const a=lotes.find(l=>l.tipo!=='pauta'&&l.tipo!=='triagem');if(a)go(a.id)}
+    else{const a=lotes.find(l=>l.tipo!=='pauta');if(a)go(a.id)}
   });
   const ses=$('#sel-sessao');if(ses)ses.onchange=()=>go('pauta-'+ses.value);
   const matriz=$('#b-matriz');if(matriz)matriz.onclick=()=>go('pauta-'+ses.value);
   const lp=$('#sel-pauta');if(lp)lp.onchange=()=>go(lp.value);
-  const lt=$('#sel-triagem');if(lt)lt.onchange=()=>go(lt.value);
-  const la=$('#sel-avulsas');if(la)la.onchange=()=>go(la.value);   const lsp=$('#sel-selecao');if(lsp)lsp.onchange=()=>go(lsp.value);
+  const la=$('#sel-avulsas');if(la)la.onchange=()=>go(la.value);
 }
 
 function cabecalho(lotes,id,usuario){
@@ -657,7 +646,13 @@ async function inicio(){
     const R=await api('?id='+encodeURIComponent(id));
     /* Relator (perfil ou chave): a mesma página geral, só com os processos liberados para ele */
     if(MODO!=='cg'&&R.relator){MODO_REL=true;VZ='rel'}
-    LOTE=R.lote; RELATOR=!!R.relator; montar(lotes,id,L.usuario);
+    LOTE=R.lote; RELATOR=!!R.relator;
+    /* Lotes legados de triagem e seleção prévia foram migrados para o Caput */
+    if(LOTE&&(LOTE.tipo==='triagem'||LOTE.tipo==='selecao')){
+      mostra(cabecalho(lotes,id,L.usuario)+'<div class="card" style="margin:2rem auto;max-width:520px;padding:1.5rem"><h2 style="margin-top:0">Coleção migrada</h2><p>As coleções de <strong>Triagem</strong> e <strong>Seleção prévia</strong> foram integradas à aba de triagem do Caput.</p><a class="b" href="/caput/triagem/" style="display:inline-block;margin-top:.5rem">Ir para Caput · Triagem →</a></div>');
+      ligaCab(); return;
+    }
+    montar(lotes,id,L.usuario);
   }catch(e){falha(e)}
 }
 function ligaCab(){
@@ -761,7 +756,7 @@ function montar(lotes,id,usuario){
   const resultados=[...new Set(ITENS.map(x=>x.resultado).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'pt-BR'));
   const grs=LOTE.grupos.filter(g=>ITENS.some(i=>i.grupo===g.id)).map(g=>({k:g.id,r:g.rotulo,c:g.cor,n:ITENS.filter(i=>i.grupo===g.id).length}));
   if(ITENS.some(i=>!i.grupo))grs.push({k:'',r:'Outros',c:OUT.cor,n:ITENS.filter(i=>!i.grupo).length});
-    const contexto=LOTE.virtual?'Coleção de Pauta · sessão '+br(LOTE.sessoes[0])+' · matriz geral':LOTE.tipo==='pauta'?'Lote de pauta · sessão '+br(LOTE.sessoes[0]):LOTE.tipo==='triagem'?'Coleção de Triagem · '+(LOTE.tarefa||'tarefa do PJe'):'Coleção avulsa';
+    const contexto=LOTE.virtual?'Coleção de Pauta · sessão '+br(LOTE.sessoes[0])+' · matriz geral':LOTE.tipo==='pauta'?'Lote de pauta · sessão '+br(LOTE.sessoes[0]):'Coleção avulsa';
   const nota={cg:'Na gestão aparecem todos os processos. Nas colunas Equipe e Relator, você escolhe o que cada página mostra.',eq:'O Relator vê só os processos liberados para ele.',rel:'Clique num processo para abrir o perfil e a minuta.'}[MODO_REL?'rel':MODO];
   mostra(cabecalho(lotes,id,usuario)+`<div class="lx">
   <nav class="lx-sub" id="lx-sub" aria-label="Coleções, sessões e seções da página">
