@@ -35,8 +35,8 @@ function render() {
   var grupos = {}, ordem = [];
   L.forEach(function (p) { if (!grupos[p.cat]) { grupos[p.cat] = []; ordem.push(p.cat); } grupos[p.cat].push(p); });
   caixa.innerHTML = '<div class="pp-top"><input type="search" id="pp-q" placeholder="Buscar: honorários, gratuidade, tempestividade…" value="' + esc(P.q) + '">' +
-    '<select id="pp-cat"><option value="">Todas as categorias</option>' + cats.map(function (c) { return '<option' + (c === P.cat ? ' selected' : '') + '>' + esc(c) + '</option>'; }).join('') + '</select></div>' +
-    '<p class="muted pp-n">' + L.length + ' de ' + P.lista.length + '</p>' +
+    '<select id="pp-cat" title="Filtrar por categoria"><option value="">Todas as categorias</option>' + cats.map(function (c) { return '<option' + (c === P.cat ? ' selected' : '') + '>' + esc(c) + '</option>'; }).join('') + '</select>' +
+    '<p class="muted pp-n">' + L.length + ' de ' + P.lista.length + ' parágrafos · as partes destacadas são vagas a preencher</p></div>' +
     ordem.map(function (c) {
       return '<h4 class="tr-g">' + esc(c) + ' <small class="muted">' + grupos[c].length + '</small></h4>' + grupos[c].map(function (p) {
         return '<article class="pp-i"><div class="pp-h"><b>' + esc(p.titulo) + '</b><button type="button" class="btn line sm" data-cp="' + esc(p.id) + '">Copiar</button></div><p class="pp-t">' + comVagas(p.texto) + '</p></article>';

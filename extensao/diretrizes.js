@@ -22,11 +22,12 @@ function render() {
   if (!D.man) { caixa.innerHTML = '<div class="empty">Baixando as diretrizes do gabinete…</div>'; return; }
   var t = N(D.q).split(/\s+/).filter(Boolean), foco = document.activeElement && document.activeElement.id === 'dr-q', h;
   var top = '<div class="pp-top"><input type="search" id="dr-q" placeholder="Buscar nas diretrizes" value="' + esc(D.q) + '">' +
-    '<span class="seg"><button type="button" data-v="manual" aria-selected="' + (D.vista === 'manual') + '">Manual · ' + D.man.length + '</button><button type="button" data-v="red" aria-selected="' + (D.vista === 'red') + '">Lista de caça · ' + D.red.length + '</button></span></div>';
+    '<span class="seg"><button type="button" data-v="manual" aria-selected="' + (D.vista === 'manual') + '">Manual · ' + D.man.length + '</button><button type="button" data-v="red" aria-selected="' + (D.vista === 'red') + '">Lista de caça · ' + D.red.length + '</button></span>' + (D.vista === 'manual' ? '@@IDX@@' : '') + '</div>';
   if (D.vista === 'manual') {
     var L = D.man.filter(function (x) { return !t.length || casa(x, t); }), caps = [], porCap = {};
     L.forEach(function (x) { if (!porCap[x.cap]) { porCap[x.cap] = []; caps.push(x.cap); } porCap[x.cap].push(x); });
-    h = '<nav class="dr-idx">' + caps.map(function (c) { return '<a href="#dr-' + esc(N(c).replace(/[^a-z0-9]+/g, '-')) + '">' + esc(c) + ' <small>' + porCap[c].length + '</small></a>'; }).join('') + '</nav>' +
+    top = top.replace('@@IDX@@', '<nav class="dr-idx">' + caps.map(function (c) { return '<a href="#dr-' + esc(N(c).replace(/[^a-z0-9]+/g, '-')) + '" title="Ir para o capítulo">' + esc(c) + ' <small>' + porCap[c].length + '</small></a>'; }).join('') + '</nav>');
+    h = '' +
       caps.map(function (c) {
         return '<section class="dr-cap" id="dr-' + esc(N(c).replace(/[^a-z0-9]+/g, '-')) + '"><h3>' + esc(c) + '</h3>' + porCap[c].map(function (x) {
           return '<article class="dr-i"><div class="dr-h"><span class="dr-t">' + esc(x.tipo) + '</span><b>' + esc(x.titulo) + '</b><small class="mono">' + esc(x.id) + '</small></div>' +

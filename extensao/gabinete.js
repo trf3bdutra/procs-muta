@@ -87,6 +87,10 @@ function grupoVisivel(g) {
 function tabela(c, v) {
   var L = Array.isArray(v) ? v : [], cols = c.colunas || [];
   if (!L.length) return '<span class="ro">—</span>';
+  /* lista compacta: as duas primeiras colunas preenchidas em destaque, o resto embaixo */
+  return '<ul class="tb-l">' + L.map(function (l) { l = l || {}; var vs = cols.map(function (x) { return [x.rotulo || x.chave, S(l[x.chave])]; }).filter(function (p) { return p[1]; });
+    var cab = vs.slice(0, 2).map(function (p) { return /^\d{4}-\d{2}-\d{2}$/.test(p[1]) ? brD(p[1]) : p[1]; }), resto = vs.slice(2);
+    return '<li><b>' + esc(cab.join(' · ')) + '</b>' + (resto.length ? '<small>' + resto.map(function (p) { return '<span title="' + esc(p[0]) + '">' + esc(/^\d{4}-\d{2}-\d{2}$/.test(p[1]) ? brD(p[1]) : p[1].slice(0, 220)) + '</span>'; }).join(' · ') + '</small>' : '') + '</li>'; }).join('') + '</ul>';
   return '<div class="gt-tab"><table><thead><tr>' + cols.map(function (x) { return '<th>' + esc(x.rotulo || x.chave) + '</th>'; }).join('') + '</tr></thead><tbody>' +
     L.map(function (l) { return '<tr>' + cols.map(function (x) { return '<td>' + esc((l || {})[x.chave] || '') + '</td>'; }).join('') + '</tr>'; }).join('') + '</tbody></table></div>';
 }
@@ -121,7 +125,7 @@ function campo(c) {
   /* lista curta e Sim/Não viram botões, como na gaveta da pauta */
   var OC = c.tipo === 'simnao' ? ['Sim', 'Não'] : c.tipo === 'lista' ? (c.opcoes || []).map(function (o) { return typeof o === 'string' ? o : o.valor; }) : null;
   if (OC && !bloq && OC.length && OC.length <= 6 && OC.every(function (o) { return o.length <= 26; })) {
-    return '<div class="' + cls + (id in G.pend ? ' mud' : '') + '" title="' + esc(dicaCampo(c)) + '"><span class="gl">' + esc(c.rotulo) + '</span><div class="pm-seg gf-seg" role="group" aria-label="' + esc(c.rotulo) + '">' +
+    return '<div class="' + cls + (OC.length > 3 ? ' w' : '') + (id in G.pend ? ' mud' : '') + '" title="' + esc(dicaCampo(c)) + '"><span class="gl">' + esc(c.rotulo) + '</span><div class="pm-seg gf-seg" role="group" aria-label="' + esc(c.rotulo) + '">' +
       OC.map(function (o) { return '<button type="button" class="pm-ch' + (o === v ? ' on' : '') + '" data-ch="' + esc(id) + '" data-v="' + esc(o) + '" aria-pressed="' + (o === v) + '">' + esc(o) + '</button>'; }).join('') +
       (v && OC.indexOf(v) < 0 ? '<span class="pm-ch on">' + esc(v) + '</span>' : '') + '</div></div>';
   }
@@ -423,13 +427,21 @@ function casoPrec() { return { cnj: G.cnj, assunto: fonteVal({ fonte: ['Assunto'
     sintese: [S(V('triagem', 'Síntese Processual')), S(V('triagem', 'Síntese Fática'))].join(' '), especificidades: [S(V('triagem', 'Especificidades')), S(V('triagem', 'Tema'))].join(' ') }; }
 function precEmentario(k) { if (window.MutaEmentario && window.MutaEmentario.caso) window.MutaEmentario.caso(k); }
 /* peças do processo (sentença, origem, recursos e contrarrazões, outras peças): um cartão só, uma seção por grupo */
+var PECAS_ORDEM = { 'Sentença': ['Sentença - ID', 'Sentença - Data', 'Sentença - Decisão', 'Sentença - Resultado', 'Sentença - Honorários', 'Sentença - Custas', 'Sentença - Reexame', 'Sentença - Tutela', 'Sentença - Fundamento', 'Sentença - Providências'],
+  'Origem': ['Origem - Juízo', 'Origem - Julgador', 'Origem - Valor da causa', 'Origem - Processo de referência', 'Origem - Documentos 1G'],
+  'Recursos e contrarrazões': ['Contrarrazões - Situação', 'Recursos', 'Contrarrazões'] };
+var PECAS_RESUMO = { 'Sentença': ['Sentença - ID', 'Sentença - Data', 'Sentença - Decisão'], 'Origem': ['Origem - Juízo', 'Origem - Julgador'], 'Recursos e contrarrazões': ['Recursos', 'Contrarrazões - Situação'], 'Outras peças e ocorrências': ['Outras peças'] };
 function pecasCartao() {
   var A = abaModelo('Processo'); if (!A) return '';
   var gs = A.grupos.filter(function (g) { return !FORA_PROC[g.grupo] && grupoVisivel(g); });
   if (!gs.length) return '';
+  var val = function (c) { var v = c.secao ? V(c.secao, c.chave) : fonteVal(c); return Array.isArray(v) ? (v.length ? v.length + ' item(ns)' : '') : S(v); };
   return '<section class="card pc-sec pecas" id="g-pecas"><div class="pc-sh"><h3>Peças</h3><small class="muted">da ficha do processo</small></div>' + gs.map(function (g) {
-    var n = g.campos.filter(function (c) { var v = c.secao ? V(c.secao, c.chave) : fonteVal(c); return Array.isArray(v) ? v.length : !!S(v); }).length;
-    return '<details class="pc-s"' + (G.pecAb && G.pecAb[g.grupo] != null ? (G.pecAb[g.grupo] ? ' open' : '') : n ? ' open' : '') + ' data-grupo="' + esc(g.grupo) + '"><summary><b>' + esc(g.grupo) + '</b><span class="gn">' + n + '/' + g.campos.length + '</span></summary><div class="gr">' + g.campos.map(campo).join('') + '</div></details>';
+    var ord = PECAS_ORDEM[g.grupo] || [], C = g.campos.slice().sort(function (a, b) { var ia = ord.indexOf(a.chave), ib = ord.indexOf(b.chave); return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib); });
+    var n = C.filter(function (c) { return !!val(c); }).length, ab = G.pecAb && G.pecAb[g.grupo] != null ? G.pecAb[g.grupo] : false;
+    var res = (PECAS_RESUMO[g.grupo] || []).map(function (k) { var c = C.filter(function (x) { return x.chave === k; })[0]; var v = c ? val(c) : ''; return /^\d{4}-\d{2}-\d{2}$/.test(v) ? brD(v) : k.indexOf('ID') >= 0 && v ? 'ID ' + v : v; }).filter(Boolean).join(' · ');
+    return '<details class="pc-s"' + (ab ? ' open' : '') + ' data-grupo="' + esc(g.grupo) + '"><summary><span class="pc-s-t"><b>' + esc(g.grupo) + '</b>' + (res ? '<small>' + esc(res.slice(0, 120)) + '</small>' : '<small class="vz">sem registro</small>') + '</span><span class="gn">' + n + '/' + C.length + '</span></summary>' +
+      '<div class="gr">' + C.map(campo).join('') + '</div></details>';
   }).join('') + '</section>';
 }
 function corpoProcesso() {
@@ -438,7 +450,6 @@ function corpoProcesso() {
   h += '<section class="card pc-sec"><div class="pc-sh"><h3>Síntese e questões</h3></div><div class="gr">' +
     campoRot('triagem', 'Síntese Processual', 'Síntese do processo') + questoes() + '</div></section>';
 
-  h += pecasCartao();
   h += controlesProcesso();
   h += grupos('Processo', function (g) { return g.grupo === 'Registro no acervo'; }, function () { return false; });
   return h;
@@ -506,7 +517,7 @@ function gRot() { return { V: V, F: function (k) { return fonteVal({ fonte: [k] 
 /* o Roteiro de triagem reúne toda a triagem: os passos, a leitura dos autos, as etiquetas, o registro do lote e os demais campos */
 var FORA_ROT = { 'Síntese Processual': 1, 'Alegações': 1, 'O que falta sanar': 1, 'Intercorrências': 1, 'Assunto detalhado': 1, 'Tipo de Julgamento': 1, 'Etiquetas sugeridas': 1 };
 /* Autos: a conferência automática, a lista de peças (com detalhamento, JSON, OCR e PDF) e o preenchimento pelos autos */
-function corpoAutos() { var AU = window.MutaAutos; return AU ? AU.htmlConferencia() + AU.htmlDocs() + AU.htmlPreencher() : '<div class="empty">Leitura dos autos indisponível.</div>'; }
+function corpoAutos() { var AU = window.MutaAutos; return AU ? AU.htmlConferencia() + pecasCartao() + AU.htmlPreencher() + AU.htmlDocs() : pecasCartao(); }
 function corpoRoteiro() {
   if (!window.MutaRoteiro) return '<div class="empty">Roteiro indisponível.</div>';
   var A = abaModelo('Triagem'), todos = [], TR = window.MutaTriagem, AU = window.MutaAutos;
@@ -546,7 +557,13 @@ function render() {
   window.scrollTo(0, y); if (pp) pp.scrollTop = yp;
 }
 /* avisos de gravação: na faixa acima das abas */
-function st(t, c) { var el = $('tu-st') || stEl || $('g-st'); if (el) { el.textContent = t || ''; el.className = (el.id === 'tu-st' ? 'tu-st' : 'status') + (c ? ' ' + c : ''); } }
+function st(t, c) {
+  var el = $('tu-st');
+  if (!el) { el = stEl || $('g-st'); if (el) { el.textContent = t || ''; el.className = 'status' + (c ? ' ' + c : ''); } return; }
+  /* ícone na faixa do topo: ✓ gravado, ⋯ a gravar, ! não gravou; a mensagem fica na dica */
+  el.hidden = !t; el.title = t || ''; el.setAttribute('aria-label', t || '');
+  el.className = 'tu-st ' + (c === 'err' ? 'err' : c === 'ok' || /^gravad|^salv/i.test(t || '') ? 'ok' : 'pend');
+}
 
 /* ---------- gravação ---------- */
 function agendar(ms) { clearTimeout(G.t); G.t = setTimeout(function () { gravarJa().catch(function () {}); }, ms); st('Alterações a gravar…'); }

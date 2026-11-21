@@ -15,6 +15,9 @@ Base: o HTML independente *muta-independente-prontuario-completo* (Prontuário +
   recarregar); sem busca, a lista abre nos **precedentes relacionados ao processo** (filtro inicial, com "Todo o Ementário");
   resultados no visual dos relacionados, cada um com Expandir (ementa, resultado, inteiro teor, vincular, copiar, comparar),
   Compendium ↗ e Copiar ementa.
+- **0.17.2:** tema claro em branco e cinza (sem bege); Parágrafos e Diretrizes com a busca numa faixa colada às abas e
+  resultados em cartões; aviso de gravação como ícone na faixa do topo (mensagem na dica); **Peças** na aba Autos, em ordem
+  fixa por seção, com resumo na seção fechada, campos curtos lado a lado e tabelas como listas compactas.
 
 ## O que muda na 0.16
 
