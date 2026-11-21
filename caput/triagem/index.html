@@ -72,6 +72,46 @@ main{min-height:calc(100vh - 60px);padding-bottom:140px}
 /* faixa da Visão geral e do Acervo filtrado: mesmo bege, com a textura de papel */
 .tri-vg .tri-vg-h,.acf-h,.fl-cab>.chips{background:var(--bg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45  0 0 0 0 .38  0 0 0 0 .22  0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")!important;box-shadow:none!important;border-bottom:1px solid var(--b)!important}.tri-vg .tri-vg-h,.tri-vg .tri-vg-h *,.tri-vg .ch,.tri-vg .ch *{color:var(--v)!important}.tri-vg .ch small,.tri-vg .tri-vg-r{opacity:.85}
 .tri-vg .kpi,.tri-vg .card{background:var(--p)!important}.tri-vg .li.hd{background:#f7f3e8!important}
+/* ---- Em triagem: painel integrado ---- */
+.tri-em{margin:12px 0;border:1px solid var(--b2,#cfd6d3);border-radius:10px;overflow:hidden;background:var(--w,#fff)}
+.tri-em-tabs{display:flex;border-bottom:1px solid var(--b,#dde3e0);background:var(--bg)}
+.tri-et{flex:1;padding:9px 12px;border:0;border-bottom:3px solid transparent;background:transparent;cursor:pointer;font:inherit;font-size:13px;color:var(--m2);transition:color .15s}
+.tri-et.on,.tri-et[aria-selected=true]{color:var(--v);border-bottom-color:var(--v);font-weight:600}
+.tri-et:hover:not(.on){background:var(--b2,#f0f4f2)}
+.tri-et small{font-weight:600;font-family:ui-monospace,monospace;color:var(--m);margin-left:4px}
+.tri-em-corpo{padding:0}
+.tri-ld{padding:16px;color:var(--m2);font-size:13.5px;text-align:center}
+.tri-banda{border-bottom:1px solid var(--b2,#eaeeec)}
+.tri-banda:last-child{border-bottom:0}
+.tri-banda-h{display:flex;align-items:center;gap:8px;width:100%;padding:7px 14px;border:0;background:transparent;cursor:pointer;font:inherit;font-size:13px;text-align:left}
+.tri-banda-h:hover{background:var(--b2,#f5f7f6)}
+.tri-banda-h>span:first-child{flex:1;font-weight:600;color:var(--v)}
+.tri-banda-h>small{font-family:ui-monospace,monospace;font-size:11.5px;color:var(--m2)}
+.tri-b-arr{font-size:10px;color:var(--m2)}
+.tri-banda-b{border-top:1px solid var(--b2,#eaeeec)}
+.tri-row{display:grid;grid-template-columns:20px minmax(0,110px) 1fr auto auto;align-items:center;gap:5px;padding:4px 14px;font-size:13px;border-bottom:1px solid var(--b2,#f0f2f1)}
+.tri-row:last-child{border-bottom:0}
+.tri-row.sel{background:#edf5ef}
+.tri-row.exp{background:#f8faf9;border-left:3px solid var(--v)}
+.tri-row .nm{background:0;border:0;cursor:pointer;font:inherit;font-size:12.5px;font-family:ui-monospace,monospace;color:var(--link,#1a6b4a);text-align:left;padding:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tri-row .nm:hover{text-decoration:underline}
+.tri-row .as{display:flex;flex-direction:column;line-height:1.3;min-width:0}
+.tri-row .as b{font-size:12.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tri-row .as span{font-size:11.5px;color:var(--m2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tri-row-exp{background:0;border:0;cursor:pointer;font-size:11px;color:var(--m2);padding:2px 5px;border-radius:4px;white-space:nowrap}
+.tri-row-exp:hover{background:var(--b2)}
+.tri-sub-painel{padding:12px 14px;background:#f9faf9;border-bottom:1px solid var(--b,#dde3e0);border-left:3px solid var(--v)}
+.tri-sp-wrap{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+@media(max-width:860px){.tri-sp-wrap{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.tri-sp-wrap{grid-template-columns:1fr}}
+.tri-sp-col>.k{display:block;margin:0 0 8px;font-size:11.5px;font-weight:700;color:var(--m);text-transform:uppercase;letter-spacing:.04em}
+.tri-sp-r{display:flex;gap:6px;font-size:12.5px;padding:2px 0}
+.tri-sp-r>span:first-child{color:var(--m2);min-width:76px;flex-shrink:0}
+.tri-sp-r>span:last-child{color:var(--v);overflow:hidden;text-overflow:ellipsis}
+.tri-sp-ac{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.tri-sp-s{background:#f0f4f2;border-radius:6px;padding:8px 10px;margin-top:8px;font-size:12.5px}
+.tri-sp-s .k{display:block;font-size:11px;font-weight:700;color:var(--m2);text-transform:uppercase;letter-spacing:.03em;margin:0 0 4px}
+.tri-sp-s p{margin:2px 0;color:var(--v)}
 /* textura de papel, discreta, no fundo geral */
 body{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45  0 0 0 0 .38  0 0 0 0 .22  0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-attachment:fixed}.tri-vg-c .card{overflow:hidden}.tri-vg-c .ch{background:var(--bg);border-bottom:1px solid var(--b)}
 .ini-cab{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;padding:18px 0 14px;flex-wrap:wrap}
@@ -2719,6 +2759,57 @@ async function cgComCarregar(){ waCarregar();
   catch(e){cmEquipe([]);h.innerHTML='<p class="cg-status" style="padding:12px 14px">O histórico não carregou nesta sessão ('+esc(e.message)+'). Entre no <a href="/office/" target="_blank" rel="noopener">Ex Officio</a> e volte a esta página.</p>';if(st)st.textContent='';}
 }
 /* ---------- Início (painel incorporado à Inteligência) ---------- */
+function matrizTriagem() {
+  if (!U || !U.length) return '';
+  // colunas de indicadores
+  const COLS = [
+    {k:'minutante', r:'Minutante', fn: o => o.minutante ? '<span style="font-size:11px">'+esc((o.minutante||'').split(' ')[0])+'</span>' : '<span style="color:var(--m2)">—</span>'},
+    {k:'dest', r:'Destino', fn: o => { if (!o.dest||!o.dest.k) return '<span style="color:var(--m2)">—</span>'; const cls={pauta:'#3b7150',mono:'#24506f',esc:'#8a948f'}; return '<span style="color:'+esc(cls[o.dest.k]||'var(--m)')+'">'+esc(o.dest.k==='pauta'?'Pauta':o.dest.k==='mono'?'Mono':o.dest.t||o.dest.k)+'</span>'; }},
+    {k:'prov', r:'Provável', fn: o => { const c={tri:'#a57829',mono:'#24506f',pauta:'#3b7150',esc:'#8a948f'}; return '<span style="color:'+esc(c[o.prov]||'var(--m2)')+'">'+esc(DLAB[o.prov]||o.prov||'—')+'</span>'; }},
+    {k:'apto', r:'Apto', fn: o => o.apto ? '✔' : ''},
+    {k:'pend', r:'Pendência', fn: o => o.pend&&o.pend.length ? '<span title="'+esc(o.pend.join(', '))+'" style="color:var(--r)">⚠ '+o.pend.length+'</span>' : ''},
+    {k:'prior', r:'Prior.', fn: o => o.prior ? '<span class="tg pri" style="font-size:10px">P</span>' : ''},
+    {k:'liminar', r:'Liminar', fn: o => o.liminar ? '<span style="color:var(--r)">⚡</span>' : ''},
+    {k:'topico', r:'Tópico', fn: o => o.topico ? '✔' : ''},
+    {k:'sigiloso', r:'Sigil.', fn: o => o.sigiloso ? '🔒' : ''},
+    {k:'cand', r:'Mono?', fn: o => o.cand&&!o.dest.k ? '<span title="'+esc(o.cand)+'" style="color:#24506f">◆</span>' : ''},
+    {k:'div', r:'Seção ⚑', fn: o => o.div ? '<span style="color:var(--r)">⚑</span>' : ''},
+    {k:'etq', r:'Etiquetas', fn: o => o.etq&&o.etq.length ? '<span title="'+esc(o.etq.join(', '))+'" style="font-size:11px;color:var(--m2)">'+o.etq.length+' etq</span>' : ''},
+    {k:'desde', r:'Na tarefa', fn: o => o.desde ? '<span class="mono" style="font-size:11px">'+esc(br(o.desde))+'</span>' : ''},
+  ];
+  // agrupa por tarefa
+  const groups = new Map();
+  U.forEach(o => { const g = o.tarefa||'Sem tarefa'; if(!groups.has(g)) groups.set(g,[]); groups.get(g).push(o); });
+  const thStyle = 'position:sticky;top:0;background:var(--bg);font-size:11px;font-weight:700;color:var(--m2);text-transform:uppercase;letter-spacing:.03em;padding:4px 8px;border-bottom:2px solid var(--b);white-space:nowrap;text-align:center';
+  const thL = 'position:sticky;top:0;background:var(--bg);font-size:11px;font-weight:700;color:var(--m2);text-transform:uppercase;letter-spacing:.03em;padding:4px 8px;border-bottom:2px solid var(--b);white-space:nowrap;text-align:left';
+  const tdStyle = 'padding:3px 8px;font-size:12.5px;border-bottom:1px solid var(--b2,#f0f2f1);text-align:center;vertical-align:middle';
+  let h = '<section class="card" style="overflow:visible"><div class="ch"><h2>Matriz de triagem</h2><p>'+nf(U.length)+' em triagem · por tarefa do PJe · indicadores de cada processo</p></div>';
+  h += '<div style="overflow-x:auto;-webkit-overflow-scrolling:touch"><table style="width:100%;border-collapse:collapse;min-width:900px">';
+  h += '<thead><tr><th style="'+thL+';min-width:160px">Número</th><th style="'+thL+';min-width:120px">Partes</th><th style="'+thL+';min-width:70px">Classe</th><th style="'+thL+';min-width:160px">Assunto</th><th style="'+thL+';min-width:70px">Seção</th>';
+  COLS.forEach(c => { h += '<th style="'+thStyle+'">'+esc(c.r)+'</th>'; });
+  h += '</tr></thead><tbody>';
+  let rowCt = 0;
+  groups.forEach((procs, g) => {
+    const aberto = LS.get('tri_mz_'+g, true);
+    h += '<tr><td colspan="'+(5+COLS.length)+'" style="padding:0"><button class="tri-banda-h" data-tribanda="tri_mz_'+esc(g)+'" style="width:100%;padding:5px 10px"><span>'+esc(g)+'</span><small>'+procs.length+' proc.</small><span class="tri-b-arr">'+(aberto?'▲':'▼')+'</span></button></td></tr>';
+    if (aberto) {
+      procs.forEach(o => {
+        rowCt++;
+        const bg = rowCt%2===0?'background:#fafbfa':'';
+        h += '<tr style="'+bg+'">';
+        h += '<td style="'+tdStyle+';text-align:left"><button class="nm" data-proc-exp="'+esc(o.d)+'" style="font-family:ui-monospace,monospace;font-size:12px">'+esc(o.cnj||o.d)+'</button></td>';
+        h += '<td style="'+tdStyle+';text-align:left;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="'+esc(o.partes||'')+'">'+esc((o.partes||'').slice(0,30))+'</td>';
+        h += '<td style="'+tdStyle+'">'+esc(o.cl||o.classe||'')+'</td>';
+        h += '<td style="'+tdStyle+';text-align:left;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="'+esc(o.assunto||'')+'">'+esc((o.assunto||'').slice(0,35))+'</td>';
+        h += '<td style="'+tdStyle+'">'+esc((o.secao||'').replace(/ª\s*Seção/,'ª'))+'</td>';
+        COLS.forEach(c => { h += '<td style="'+tdStyle+'">'+c.fn(o)+'</td>'; });
+        h += '</tr>';
+      });
+    }
+  });
+  h += '</tbody></table></div></section>';
+  return h;
+}
 function vInicio(emb) {
   const semD = U.filter((o) => !o.dest.k), tri = semD.filter((o) => o.prov === 'tri');
   const aptos = U.filter((o) => o.apto), comPend = aptos.filter((o) => o.pend.length), prontos = aptos.filter((o) => !o.pend.length), prM = prontos.filter((o) => o.monoE), prC = prontos.filter((o) => !o.monoE);
@@ -2768,7 +2859,7 @@ function vInicio(emb) {
   ESCOPO.triar.map((x) => [x, U.filter((o) => nzT(o.tarefa) === nzT(x[0]))]).sort((a, b) => b[1].length - a[1].length).forEach(([x, L], i) => { reg('tf' + i, 'Tarefa: ' + x[0], L);
     pr += '<button type="button" class="li" data-conj="tf' + i + '" style="grid-template-columns:minmax(0,1fr) 90px 56px"><span><b style="font-weight:600">' + esc(x[0]) + '</b><small>' + esc(x[1]) + '</small></span><span class="hb"><i style="width:' + Math.max(1, Math.round(100 * L.length / tot)) + '%;background:var(--v2)"></i></span><span class="n">' + nf(L.length) + '</span></button>'; });
   pr += '</section>';
-  h += '<div class="ini-grid"><div class="col">' + ses + dp + cd + '</div><div class="col">' + ms + pr + '</div></div>' + (emb ? '' : '</div>');
+  h += '<div class="ini-grid"><div class="col">' + ses + dp + cd + '</div><div class="col">' + ms + pr + '</div></div>' + matrizTriagem() + (emb ? '' : '</div>');
   return h; }
 let REG = {}, INI_MAS = false;
 /* Visão geral da triagem (o antigo Início) no topo da Triagem, recolhível; cada número abre o conjunto na lista */
@@ -2842,11 +2933,211 @@ function chipsAtivos() { const ch = [];
   Object.keys(F.fac).forEach((f) => { if (F.fac[f].length) ch.push(['<b>' + FN[f] + '</b> ' + esc(F.fac[f].join(' ou ')), 'fac', f, false]); });
   F.etIn.forEach((e) => ch.push(['<b>Etiqueta</b> tem ' + esc(e), 'etIn', e, false])); F.etOut.forEach((e) => ch.push(['<b>Etiqueta</b> não tem ' + esc(e), 'etOut', e, true]));
   return ch; }
+
+/* ========== EM TRIAGEM — funções do painel integrado ========== */
+function painelEmTriagem() {
+  const tabs = [
+    {id:'triar', r:'A triar'},
+    {id:'triados', r:'Triados'},
+    {id:'selecao', r:'Seleção prévia'},
+  ];
+  let ctsHd = tabs.map(t => {
+    const ct = t.id==='triar' ? (U?U.length:0) : t.id==='triados' ? (_triCache?_triCache.items.size:'…') : (_selCache?_selCache.items.size:'…');
+    return '<button class="tri-et'+(TRI_SUBABA===t.id?' on':'')+'" data-trisub="'+t.id+'" aria-selected="'+(TRI_SUBABA===t.id)+'" role="tab">'+t.r+'<small>'+ct+'</small></button>';
+  }).join('');
+  return '<div class="tri-em" id="tri-em"><div class="tri-em-tabs" role="tablist">'+ctsHd+'</div><div class="tri-em-corpo" id="tri-em-corpo">'+conteudoSubAba()+'</div></div>';
+}
+
+function conteudoSubAba() {
+  if (TRI_SUBABA==='triar') return aTriarBands();
+  if (TRI_SUBABA==='triados') {
+    if (!_triCache) { carregarTriados(); return '<div class="tri-ld">Carregando lotes de triagem…</div>'; }
+    return triadosBands();
+  }
+  if (TRI_SUBABA==='selecao') {
+    if (!_selCache) { carregarSelecao(); return '<div class="tri-ld">Carregando seleção prévia…</div>'; }
+    return selecaoBands();
+  }
+  return '';
+}
+
+async function carregarTriados() {
+  try {
+    const ESC_IDX = 'acervo/lotes/colecoes.json';
+    const idx = JSON.parse(await P.ler(ESC_IDX));
+    const triLotes = (idx.colecoes && idx.colecoes.triagem) || [];
+    const items = new Map();
+    const series = new Map();
+    const lotesCarregados = [];
+    for (const lid of triLotes) {
+      try {
+        const lote = JSON.parse(await P.ler('acervo/lotes/'+lid+'.json'));
+        lotesCarregados.push(lote);
+        if (lid.startsWith('adp-serie-')) {
+          if (lote.processos) lote.processos.forEach(p => { const d = p.d||p.num||p.processo; if(d) series.set(d, {id:lid, titulo:lote.titulo||lid}); });
+        } else {
+          if (lote.processos) lote.processos.forEach(p => { const d = p.d||p.num||p.processo; if(d) items.set(d, {...p, _loteId:lid, _loteTitulo:lote.titulo||lid}); });
+        }
+      } catch(e) { /* lote não encontrado, ignora */ }
+    }
+    _triCache = {items, lotes:lotesCarregados, series};
+    const corpo = $('#tri-em-corpo');
+    if (corpo) corpo.innerHTML = conteudoSubAba();
+    document.querySelectorAll('[data-trisub]').forEach(x => { const small = x.querySelector('small'); if(x.dataset.trisub==='triados'&&small) small.textContent = items.size; });
+  } catch(e) { const corpo = $('#tri-em-corpo'); if(corpo) corpo.innerHTML = '<div class="tri-ld">Erro ao carregar triagem: '+esc(String(e))+'</div>'; }
+}
+
+async function carregarSelecao() {
+  try {
+    const ESC_IDX = 'acervo/lotes/colecoes.json';
+    const idx = JSON.parse(await P.ler(ESC_IDX));
+    const selLotes = (idx.colecoes && idx.colecoes['selecao-previa']) || [];
+    const items = new Map();
+    const lotesCarregados = [];
+    for (const lid of selLotes) {
+      try {
+        const lote = JSON.parse(await P.ler('acervo/lotes/'+lid+'.json'));
+        lotesCarregados.push(lote);
+        if (lote.processos) lote.processos.forEach(p => { const d = p.d||p.num||p.processo; if(d) items.set(d, {...p, _loteId:lid, _loteTitulo:lote.titulo||lid}); });
+      } catch(e) { /* ignora */ }
+    }
+    _selCache = {items, lotes:lotesCarregados};
+    const corpo = $('#tri-em-corpo');
+    if (corpo) corpo.innerHTML = conteudoSubAba();
+    document.querySelectorAll('[data-trisub]').forEach(x => { const small = x.querySelector('small'); if(x.dataset.trisub==='selecao'&&small) small.textContent = items.size; });
+  } catch(e) { const corpo = $('#tri-em-corpo'); if(corpo) corpo.innerHTML = '<div class="tri-ld">Erro ao carregar seleção prévia: '+esc(String(e))+'</div>'; }
+}
+
+function aTriarBands() {
+  if (!U || !U.length) return '<div class="tri-ld">Nenhum processo em triagem.</div>';
+  // agrupa por tarefa (campo grupo já vem de U = grupo 'triar')
+  const groups = new Map();
+  U.forEach(p => { const g = p.tarefa||p.grupo||'Triagem'; if(!groups.has(g)) groups.set(g,[]); groups.get(g).push(p); });
+  let h = '';
+  groups.forEach((procs, g) => {
+    const triados = procs.filter(p => p.triado||p.estadoTriagem==='triado').length;
+    const aberto = LS.get('tri_em_b_'+g, true);
+    h += '<div class="tri-banda">';
+    h += '<button class="tri-banda-h" data-tribanda="'+esc(g)+'"><span>'+esc(g)+'</span><small>'+triados+'/'+procs.length+' triados</small><span class="tri-b-arr">'+(aberto?'▲':'▼')+'</span></button>';
+    if (aberto) { h += '<div class="tri-banda-b">'; procs.forEach(p => { h += linhaEm(p, 'triar'); }); h += '</div>'; }
+    h += '</div>';
+  });
+  return h;
+}
+
+function triadosBands() {
+  if (!_triCache||!_triCache.items.size) return '<div class="tri-ld">Nenhum processo triado encontrado.</div>';
+  const groups = new Map();
+  _triCache.lotes.forEach(lote => {
+    if (lote.id&&!lote.id.startsWith('adp-serie-')&&lote.processos) {
+      const g = lote.titulo||lote.id;
+      if (!groups.has(g)) groups.set(g, {lote, procs:[]});
+      lote.processos.forEach(p => { const d=p.d||p.num||p.processo; if(d) groups.get(g).procs.push({...p, _loteId:lote.id, _loteTitulo:g}); });
+    }
+  });
+  let h = '';
+  groups.forEach(({lote, procs}, g) => {
+    if (!procs.length) return;
+    const aberto = LS.get('tri_em_b_'+g, true);
+    h += '<div class="tri-banda">';
+    h += '<button class="tri-banda-h" data-tribanda="'+esc(g)+'"><span>'+esc(g)+'</span><small>'+procs.length+'</small><span class="tri-b-arr">'+(aberto?'▲':'▼')+'</span></button>';
+    if (aberto) { h += '<div class="tri-banda-b">'; procs.forEach(p => { h += linhaEm(p, 'triados'); }); h += '</div>'; }
+    h += '</div>';
+  });
+  return h||'<div class="tri-ld">Nenhum processo encontrado.</div>';
+}
+
+function selecaoBands() {
+  if (!_selCache||!_selCache.items.size) return '<div class="tri-ld">Nenhum processo na seleção prévia.</div>';
+  const groups = new Map();
+  _selCache.lotes.forEach(lote => {
+    if (lote.processos) {
+      const g = lote.titulo||lote.id;
+      if (!groups.has(g)) groups.set(g, {lote, procs:[]});
+      lote.processos.forEach(p => { groups.get(g).procs.push({...p, _loteId:lote.id, _loteTitulo:g}); });
+    }
+  });
+  let h = '';
+  groups.forEach(({lote, procs}, g) => {
+    if (!procs.length) return;
+    const aberto = LS.get('tri_em_b_'+g, true);
+    h += '<div class="tri-banda">';
+    h += '<button class="tri-banda-h" data-tribanda="'+esc(g)+'"><span>'+esc(g)+'</span><small>'+procs.length+'</small><span class="tri-b-arr">'+(aberto?'▲':'▼')+'</span></button>';
+    if (aberto) { h += '<div class="tri-banda-b">'; procs.forEach(p => { h += linhaEm(p, 'selecao'); }); h += '</div>'; }
+    h += '</div>';
+  });
+  return h||'<div class="tri-ld">Nenhum processo encontrado.</div>';
+}
+
+function linhaEm(p, aba) {
+  const d = p.d||p.num||p.processo||'';
+  const partes = p.partes||p.parte||p.autor||'';
+  const assunto = p.assunto||p.classe||'';
+  const exp = TRI_EXP_D===d;
+  let h = '<div class="tri-row'+(exp?' exp':'')+(p.sel?' sel':'')+'">';
+  h += '<span style="font-size:10px;color:var(--m2)">'+(p.sel?'✓':'')+'</span>';
+  h += '<button class="nm" data-proc-exp="'+esc(d)+'" title="'+esc(d)+'">'+esc(d)+'</button>';
+  h += '<span class="as"><b>'+esc(partes)+'</b><span>'+esc(assunto)+'</span></span>';
+  if (p.pjes||p.pje) { const link=p.pjes||p.pje; h += '<a href="'+esc(link)+'" target="_blank" style="font-size:11px;color:var(--m2);text-decoration:none" title="Abrir no PJe">PJe↗</a>'; }
+  h += '<button class="tri-row-exp" data-triexp="'+esc(d)+'">'+(exp?'▲ fechar':'▼ ver')+'</button>';
+  h += '</div>';
+  if (exp) h += subPainelEm(p, aba);
+  return h;
+}
+
+function subPainelEm(p, aba) {
+  const d = p.d||p.num||p.processo||'';
+  // coleta campos de triagem
+  const campos = [
+    ['Classe', p.classe],['Assunto', p.assunto],['Relator', p.relator],
+    ['Situação', p.situacao||p.estadoTriagem],['Destino', p.destino],
+    ['Observação', p.obs||p.observacao],['Prioridade', p.prioridade],
+    ['Data', p.data||p.dataTriagem],['Responsável', p.responsavel],
+  ].filter(([,v]) => v);
+  // série
+  const serie = _triCache&&_triCache.series&&_triCache.series.get(d);
+  // campos do collectio (aba triados/selecao)
+  const colFields = [
+    ['Lote', p._loteTitulo],['Movimentos', p.movimentos],['Decisão', p.decisao],
+    ['Acórdão', p.acordao],['Publicação', p.publicacao],
+  ].filter(([,v]) => v);
+  // ações
+  const pjeLink = p.pjes||p.pje;
+  const colLink = p._loteId ? ('/apoio/ex-officio/lotes/?id='+encodeURIComponent(p._loteId)) : null;
+  let h = '<div class="tri-sub-painel"><div class="tri-sp-wrap">';
+  // coluna 1: triagem
+  h += '<div class="tri-sp-col"><span class="k">Triagem</span>';
+  if (campos.length) campos.forEach(([k,v]) => { h += '<div class="tri-sp-r"><span>'+esc(k)+'</span><span>'+esc(String(v))+'</span></div>'; });
+  else h += '<div class="tri-sp-r"><span style="color:var(--m2)">Sem dados de triagem</span></div>';
+  h += '</div>';
+  // coluna 2: Collectio (apenas para triados/seleção)
+  if ((aba==='triados'||aba==='selecao') && colFields.length) {
+    h += '<div class="tri-sp-col"><span class="k">Collectio</span>';
+    colFields.forEach(([k,v]) => { h += '<div class="tri-sp-r"><span>'+esc(k)+'</span><span>'+esc(String(v))+'</span></div>'; });
+    h += '</div>';
+  }
+  // coluna 3: série + ações
+  h += '<div class="tri-sp-col">';
+  if (serie) {
+    h += '<div class="tri-sp-s"><span class="k">📁 Série</span><p>'+esc(serie.titulo)+'</p></div>';
+  }
+  h += '<div class="tri-sp-ac" style="margin-top:'+(serie?'8':'0')+'px">';
+  h += '<button class="bt-s" data-prontuario="'+esc(d)+'" title="Prontuário de triagem">📋 Prontuário</button>';
+  h += '<button class="bt-s" data-ficha="'+esc(d)+'" title="Ficha do processo">📄 Ficha</button>';
+  if (pjeLink) h += '<a class="bt-s" href="'+esc(pjeLink)+'" target="_blank" style="text-decoration:none">⚖️ PJe</a>';
+  if (colLink) h += '<a class="bt-s" href="'+esc(colLink)+'" target="_blank" style="text-decoration:none">📦 Collectio</a>';
+  h += '</div>';
+  h += '</div>';
+  h += '</div></div>';
+  return h;
+}
+/* ========== fim Em triagem ========== */
+
 function vFila(cab, estilo) {
   const L = ordenar(filtrar(F.conj ? ALL : BASE())), emE = !!F.esc; FILA = L; if (emE) ESCL = L;
   const ch = chipsAtivos(), salvos = LS.get('tri_filtros', []);
   /* visão geral da triagem primeiro; busca e filtros depois dela */
-  let h = '<div class="wrap"' + (estilo || '') + '>' + (cab || '') + (!emE && !F.conj ? visaoGeral() : '') + '<div class="fl-cab"><div class="fl-l1" style="position:relative">' +
+  let h = '<div class="wrap"' + (estilo || '') + '>' + (cab || '') + (!emE && !F.conj ? visaoGeral() + painelEmTriagem() + '<div class="k" style="padding:12px 0 2px;font-size:11.5px;color:var(--m2);text-transform:uppercase;letter-spacing:.05em">Busca geral no acervo em triagem</div>' : '') + '<div class="fl-cab" id="tri-busca-geral"><div class="fl-l1" style="position:relative">' +
     '<div class="seg" role="group" aria-label="Modo de busca"><button type="button" data-modo="texto" class="' + (F.modo === 'texto' ? 'on' : '') + '" title="Busca em todos os campos">Texto</button><button type="button" data-modo="lote" class="' + (F.modo === 'lote' ? 'on' : '') + '" title="Colar uma lista de números de processo">Lote</button></div>' +
     (F.modo === 'texto' ? '<label class="busca"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#5c6b67" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="fl-q" type="search" aria-label="Buscar" placeholder="número, assunto, partes, etiqueta, tarefa…" value="' + esc(F.q) + '"><small>“trecho exato” · -exclui</small></label>'
       : '<label class="busca"><textarea id="fl-lote" aria-label="Números de processo" rows="2" placeholder="Cole os números (um por linha ou em qualquer formato)">' + esc(F.lote) + '</textarea></label>') +
@@ -2938,6 +3229,10 @@ function vMapa(L) {
   W.__MAPA_COLS = COLS.map((c, i) => { const ativo = c[2].indexOf(MAPA_NO) >= 0 && MAPA_NO !== 'all', ets = ativo ? [MAPA_NO] : c[1]; return L.filter((o) => ets.indexOf(o.et) >= 0).map((o) => o.d); });
   return h; }
 let FILA = [];
+let TRI_SUBABA = LS.get('tri_subaba', 'triar');
+let _triCache = null;  // {items: Map<d,{...}>, lotes:[], series: Map<d,lote>}
+let _selCache = null;  // {items: Map<d,{...}>, lotes:[]}
+let TRI_EXP_D = null;
 function BASE() { if (F.esc) { const e = ESC.escaninhos.find((x) => x.id === F.esc); return e ? U.filter((o) => e._set.has(o.d)) : []; } const S = new Set(F.base); return ALL.filter((o) => S.has(o.grupo)); }
 function painelBase(nF, nCrit) { const cnt = {}; ALL.forEach((o) => { cnt[o.grupo] = (cnt[o.grupo] || 0) + 1; }); const S = new Set(F.base), n = ALL.filter((o) => S.has(o.grupo)).length;
   const vivos = (L) => L.filter((g) => cnt[g]).sort().join(','), pr = PRESETS.find((p) => vivos(p[2]) === vivos(F.base)); /* grupos sem processo não contam */
@@ -3435,6 +3730,9 @@ D.addEventListener('click', (e) => { const t = e.target;
     if (onde === 'fila') { F.conj = { rot: b.dataset.grpso, ids: new Set(L.filter((o) => fn(o) === b.dataset.grpso).map((o) => o.d)) }; F.ver = 'lista'; F.lim = 100; } else { FE.q = '"' + b.dataset.grpso + '"'; FE.ver = 'lista'; } render(); return; }
   if ((b = q('[data-tri-close]'))) { const g=document.getElementById('tri-prontuario');if(g)g.remove();return; }
   if ((b = q('[data-tri-save]'))) { salvarProntuarioTriagem(b.dataset.triSave);return; }
+  if ((b = q('[data-trisub]'))) { TRI_SUBABA = b.dataset.trisub; LS.set('tri_subaba', TRI_SUBABA); const corpo = document.getElementById('tri-em-corpo'); if (corpo) corpo.innerHTML = conteudoSubAba(); document.querySelectorAll('[data-trisub]').forEach(x => { x.classList.toggle('on', x.dataset.trisub === TRI_SUBABA); x.setAttribute('aria-selected', String(x.dataset.trisub === TRI_SUBABA)); }); return; }
+  if ((b = q('[data-triexp]'))) { const d = b.dataset.triexp; TRI_EXP_D = TRI_EXP_D === d ? null : d; const emEl = document.getElementById('tri-em'); if (emEl) emEl.outerHTML = painelEmTriagem(); return; }
+  if ((b = q('[data-tribanda]'))) { const id = b.dataset.tribanda; const cur = LS.get('tri_em_b_'+id, true); LS.set('tri_em_b_'+id, !cur); const emEl = document.getElementById('tri-em'); if (emEl) emEl.outerHTML = painelEmTriagem(); return; }
   if ((b = q('[data-proc-exp]'))) { const d=b.dataset.procExp;PROC_EXP_ABERTO=PROC_EXP_ABERTO===d?'':d;render();return; }
   if ((b = q('[data-prontuario]'))) { abrirProntuarioTriagem(b.dataset.prontuario);return; }
   if ((b = q('[data-ficha]'))) { const o = IDX.get(b.dataset.ficha); if (!o) return; const P = W.CMTProntuario; if (P && P.abrir) { const L = ABA === 'fila' ? FILA : ESCL; P.abrir(o.cnj, L.map((x) => x.d)); } else toast('A ficha ainda está carregando.', true); return; }
