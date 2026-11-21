@@ -51,10 +51,14 @@
   function opcoesRes(tipo) {
     if (tipo === 'Embargos de Declaração') return [['rej', 'Rejeição'], ['acol', 'Acolhimento'], ['acolp', 'Acolhimento parcial'], ['nc', 'Não conhecimento']];
     if (tipo === 'Juízo de Retratação') return [['mant', 'Mantém o acórdão'], ['retr', 'Exerce a retratação']];
-    return [['desp', 'Desprovimento'], ['prov', 'Provimento'], ['parc', 'Parcial provimento'], ['ncdesp', 'Conhece em parte e nega'], ['nc', 'Não conhecimento'], ['prej', 'Prejudicado']];
+    var L = [['desp', 'Desprovimento'], ['prov', 'Provimento'], ['parc', 'Parcial provimento'], ['ncdesp', 'Conhece em parte e nega'], ['nc', 'Não conhecimento'], ['prej', 'Prejudicado']];
+    /* remessa necessária não se conhece "em parte" */
+    return tipo === 'Remessa Necessária' ? L.filter(function (o) { return o[0] !== 'ncdesp'; }) : L;
   }
+  /* sem resultado na ficha, nenhum é presumido: o gerador marca [VALIDAR] (regra: nunca escolher o resultado em silêncio) */
   function resDaFicha(tipo) {
     var r = N(v('producao', 'Voto - Resultado'));
+    if (!r) return '';
     if (tipo === 'Embargos de Declaração') return /acolh|provid|provimento/.test(r) && !/negad|nao provid|desprov/.test(r) ? 'acol' : /nao conhec/.test(r) ? 'nc' : 'rej';
     if (tipo === 'Juízo de Retratação') return 'mant';
     if (/nao conhec/.test(r)) return 'nc';
@@ -63,7 +67,8 @@
     return 'desp';
   }
   function resultado(tipo, k) {
-    var o = objeto(tipo), cmd = VAL('comando: para reformar a sentença e …');
+    if (!k) return [VAL('resultado do voto: escolha acima'), VAL('resultado do julgamento'), VAL('CONCLUSÃO'), VAL('conclusão')];
+    var o = objeto(tipo), cmd = VAL('comando: para reformar a ' + (/Agravo/.test(tipo) ? 'decisão agravada' : 'sentença') + ' e …');
     if (tipo === 'Embargos de Declaração') return ({
       rej: ['rejeito os embargos de declaração', 'rejeitou os embargos de declaração', 'EMBARGOS DE DECLARAÇÃO REJEITADOS', 'Embargos de declaração rejeitados.'],
       acol: ['acolho os embargos de declaração, ' + VAL('sem efeitos modificativos | com efeitos modificativos') + ', para ' + VAL('sanar o vício'), 'acolheu os embargos de declaração, ' + VAL('sem efeitos modificativos | com efeitos modificativos') + ', para ' + VAL('sanar o vício'), 'EMBARGOS DE DECLARAÇÃO ACOLHIDOS', 'Embargos de declaração acolhidos.'],
@@ -115,19 +120,33 @@
     if (porNome(txt)) { if (P.p && porNome(P.p) === porNome(txt)) return 're'; if (P.a && porNome(P.a) === porNome(txt)) return 'autor'; }
     return '';
   }
-  function quem(txt) { var nm = porNome(txt); if (nm) return nm; var p = poloDe(txt); return p ? designa(p) : VAL(S(txt) ? 'recorrente (lido: ' + S(txt) + ')' : 'recorrente'); }
+  var TIPO = '';
+  /* o nome lido na peça pode ser o do advogado: vale o polo que ele representa */
+  function poloDoAdvogado(txt) {
+    var n = N(txt); if (n.length < 6) return '';
+    if (N(fo('advogado_pa')).indexOf(n) >= 0) return 'autor';
+    if (N(fo('advogado_pp')).indexOf(n) >= 0) return 're';
+    return '';
+  }
+  function quem(txt) {
+    var nm = porNome(txt); if (nm) return nm;
+    var n = N(txt), p = /\bagravante\b/.test(n) ? 'autor' : /\bagravad[oa]\b/.test(n) ? 're' : poloDe(txt) || poloDoAdvogado(txt);
+    /* agravo de instrumento: a capa traz agravante e agravado; o Padrão designa pela posição na origem (autor, réu), que a capa não diz */
+    if (p && TIPO === 'Agravo de Instrumento') { var P = polos(), nome = p === 'autor' ? P.a : P.p, pn = porNome(nome); if (pn) return pn; return VAL('posição na origem (o autor | o réu) — ' + (p === 'autor' ? 'agravante' : 'agravado') + (nome ? ': ' + nome : '')); }
+    return p ? designa(p) : VAL(S(txt) ? 'recorrente (lido: ' + S(txt) + ')' : 'recorrente');
+  }
   function cap(s) { return s ? s.charAt(0).toUpperCase() + s.slice(1) : s; }
 
   /* ---------- sentença ---------- */
-  function resultadoSentenca() {
+  function resultadoSentenca(oque) {
     var r = S(v('origem', 'Sentença - Resultado')), d = N(v('origem', 'Sentença - Decisão'));
     if (r) {
-      r = r.replace(/\b([A-ZÁ-Ú]{4,}(?:\s+[A-ZÁ-Ú]{2,})*)\b/g, function (m) { return m.toLowerCase(); }).replace(/^(?:o juiz|a ju[íi]za|a sentença)\s+/i, '')
+      r = r.replace(/\b([A-ZÁ-Ú]{4,}(?:\s+[A-ZÁ-Ú]{1,})*)\b/g, function (m) { return m.toLowerCase(); }).replace(/^(?:o juiz|a ju[íi]za|a sentença)\s+/i, '')
         .replace(/,?\s*(?:e\s+)?(?:resolvendo|com resolu[çc][ãa]o|extinguindo o (?:processo|feito) com|nos termos d[oe] (?:art|artigo))[\s\S]*$/i, '').replace(/[.;,\s]+$/, '');
       if (!/^(julgou|extinguiu|denegou|concedeu|homologou|indeferiu|deferiu|rejeitou|acolheu|reconheceu|declarou|condenou|determinou)/i.test(r)) r = VAL('verbo nuclear') + ' ' + r;
       return r;
     }
-    return d === 'procedente' ? 'julgou procedente o pedido' : d === 'improcedente' ? 'julgou improcedente o pedido' : d === 'parcialmente procedente' ? 'julgou parcialmente procedente o pedido' : /extin/.test(d) ? 'extinguiu o processo sem resolução do mérito' : /homolog/.test(d) ? 'homologou ' + VAL('o acordo | a desistência') : VAL('o que a sentença decidiu');
+    return d === 'procedente' ? 'julgou procedente o pedido' : d === 'improcedente' ? 'julgou improcedente o pedido' : d === 'parcialmente procedente' ? 'julgou parcialmente procedente o pedido' : /extin/.test(d) ? 'extinguiu o processo sem resolução do mérito' : /homolog/.test(d) ? 'homologou ' + VAL('o acordo | a desistência') : VAL('o que a ' + (oque || 'sentença') + ' decidiu');
   }
   /* "Parte ré (INSS) · 10% sobre o valor da condenação (Súmula 111/STJ) · exigibilidade suspensa (…)" → frase do relatório */
   function fraseHonorarios() {
@@ -153,8 +172,13 @@
       out.push(verbo + ' ' + VAL('a parte recorrente') + ' (ID ' + VAL('ID do recurso') + '), alegando, em suma, que: ' + (al.length ? enumerar(al) : VAL('razões, em itens')) + '.');
       return out;
     }
+    /* recurso único sem parte lida e contrarrazões de um polo identificado: recorreu o outro polo */
+    var C0 = tab('origem', 'Contrarrazões'), pc = R.length === 1 && C0.length === 1 && !S(R[0].parte) ? poloDe(C0[0].parte) : '';
+    if (pc) R = [Object.assign({}, R[0], { parte: pc === 're' ? 'autor' : 're' })];
     R.forEach(function (r) {
-      var L = linhas(r.preliminares).map(function (x) { return 'preliminarmente, ' + x; }).concat(linhas(r.teses).concat(linhas(r.merito)));
+      /* o título da peça ("Agravo de Instrumento - Fulana x Beltrano", "petição inicial Laerte") não é alegação */
+      var rotulo = function (x) { return /\s[xX]\s/.test(x) || /^(agravo|apela[çc][ãa]o|peti[çc][ãa]o|recurso|contrarraz|embargos)\b/i.test(x) && x.split(/\s+/).length <= 8; };
+      var L = linhas(r.preliminares).map(function (x) { return 'preliminarmente, ' + x; }).concat(linhas(r.teses).concat(linhas(r.merito)).filter(function (x) { return !rotulo(x); }));
       if (!L.length && R.length === 1) L = linhas(v('triagem', 'Alegações'));
       var ped = S(r.pedidos);
       out.push(verbo + ' ' + quem(r.parte) + ' ' + idOu(r.ids, 'ID do recurso') + ', alegando, em suma, que: ' + (L.length ? enumerar(L) : VAL('razões, em itens')) + (ped ? ', pelo que requereu ' + ped.replace(/^(requer(eu)?|pede)\s+/i, '').replace(/[.;]+$/, '') : '') + '.');
@@ -199,7 +223,8 @@
       var trib = S(v('triagem', 'Retratação - Tribunal')), tema = S(v('triagem', 'Retratação - Tema')), prec = S(v('triagem', 'Retratação - Precedente'));
       P.push('Na tramitação dos recursos excepcionais perante a Vice-Presidência, houve, em ' + (S(v('triagem', 'Retratação - Devolução mês')) || VAL('mês/ano')) + ', decisão para devolução dos autos à Turma para eventual juízo de retratação face ao julgamento do ' + (prec || VAL('precedente')) + ' ' + (trib === 'STJ' ? 'pelo Superior Tribunal de Justiça' : 'pela Suprema Corte') + ' (Tema ' + (tema || VAL('número')) + ') ' + idOu(v('triagem', 'Retratação - Devolução ID'), 'ID') + '.');
     } else if (tipo === 'Agravo de Instrumento') {
-      P.push('Trata-se de agravo de instrumento à decisão ' + idOu(imp || sid, 'ID da decisão agravada') + ' que ' + (impS || resultadoSentenca()) + '.');
+      /* no agravo de instrumento a decisão agravada é a de origem (Sentença - ID); "Impugnada" serve ao agravo interno e aos embargos */
+      P.push('Trata-se de agravo de instrumento à decisão ' + idOu(sid || imp, 'ID da decisão agravada') + ' que ' + (sid || !impS ? resultadoSentenca('decisão') : impS) + '.');
       pRecursos(tipo).forEach(function (x) { P.push(x); });
       P.push(pContrarrazoes(tipo));
     } else if (tipo === 'Remessa Necessária') {
@@ -247,7 +272,7 @@
     else if (tipo === 'Agravo Interno') I.push(it('Agravo interno contra decisão que ' + (S(v('triagem', 'Impugnada - Síntese')) || VAL('o que a decisão decidiu')) + '.'));
     else if (tipo === 'Juízo de Retratação') I.push(it('Juízo de retratação de acórdão da Turma, após devolução dos autos pela Vice-Presidência, em razão do Tema ' + (S(v('triagem', 'Retratação - Tema')) || VAL('número')) + '.'));
     else if (tipo === 'Remessa Necessária') I.push(it('Remessa necessária de sentença que ' + resultadoSentenca() + '.'));
-    else if (tipo === 'Agravo de Instrumento') I.push(it('Agravo de instrumento contra decisão que ' + (S(v('triagem', 'Impugnada - Síntese')) || VAL('o que a decisão decidiu')) + '.'));
+    else if (tipo === 'Agravo de Instrumento') I.push(it('Agravo de instrumento contra decisão que ' + (S(v('origem', 'Sentença - ID')) || !S(v('triagem', 'Impugnada - Síntese')) ? resultadoSentenca('decisão') : S(v('triagem', 'Impugnada - Síntese'))) + '.'));
     else I.push(it((N(v('origem', 'Sentença - Reexame')) === 'sim' ? 'Remessa necessária e ' + (tab('origem', 'Recursos').length > 1 ? 'apelações' : 'apelação') : tab('origem', 'Recursos').length > 1 ? 'Apelações' : 'Apelação') + ' contra sentença que ' + resultadoSentenca() + '.'));
     var Q = linhas(v('triagem', 'Alegações')); if (!Q.length) Q = linhas(v('triagem', 'ED - Ponto'));
     if (Q.length <= 1) II.push(it('A questão em discussão consiste em saber se ' + VAL(Q[0] ? 'reescrever como pergunta: ' + Q[0] : 'questão') + '.'));
@@ -261,7 +286,8 @@
   /* ---------- montagem ---------- */
   function docs() {
     var tipo = ST.tipo || tipoDetectado(), k = ST.res || resDaFicha(tipo);
-    if (!opcoesRes(tipo).some(function (o) { return o[0] === k; })) k = opcoesRes(tipo)[0][0];
+    if (k && !opcoesRes(tipo).some(function (o) { return o[0] === k; })) k = '';
+    TIPO = tipo;
     var R = resultado(tipo, k), E = ementa(tipo, k);
     return { tipo: tipo, k: k, rel: relatorio(tipo), disp: ['Ante o exposto, ' + R[0] + '.', 'É como voto.'], em: E,
       acordao: 'Vistos e relatados estes autos em que são partes as acima indicadas, a Turma Regional de Mato Grosso do Sul, por unanimidade, ' + R[1] + ', nos termos do relatório e voto que ficam fazendo parte integrante do presente julgado.',
@@ -282,10 +308,11 @@
     var D = docs(); ULT = D;
     var chips = function (L, at, sel) { return L.map(function (o) { var k = Array.isArray(o) ? o[0] : o, r = Array.isArray(o) ? o[1] : o; return '<button type="button" class="chip' + (k === sel ? ' on' : '') + '" ' + at + '="' + esc(k) + '">' + esc(r) + '</button>'; }).join(''); };
     var relT = D.rel.join('\n'), emT = emTexto(D.em);
-    var aviso = !S(v('origem', 'Sentença - Resultado')) && !/Embargos|Interno|Retrata/.test(D.tipo) ? '<p class="gr-av">A sentença ainda não foi lida: em Autos › Peças › Sentença, use "Extrair da peça" para trazer resultado e honorários.</p>' : '';
+    var ai = D.tipo === 'Agravo de Instrumento';
+    var aviso = !S(v('origem', 'Sentença - Resultado')) && !/Embargos|Interno|Retrata/.test(D.tipo) ? '<p class="gr-av">' + (ai ? 'A decisão agravada ainda não foi lida: em Autos › Peças › Sentença (decisão recorrida), use "Extrair da peça" para trazer o que ela decidiu.' : 'A sentença ainda não foi lida: em Autos › Peças › Sentença, use "Extrair da peça" para trazer resultado e honorários.') + '</p>' : '';
     return '<section class="card pc-sec gr-cfg"><div class="pc-sh"><h3>Gerador</h3><small class="muted">padrão do gabinete · nada é gravado</small></div>' +
       '<div class="gr-l"><span>Tipo de julgamento</span><div class="chips">' + chips(TIPOS, 'data-gr-tipo', D.tipo) + '</div></div>' +
-      '<div class="gr-l"><span>Resultado</span><div class="chips">' + chips(opcoesRes(D.tipo), 'data-gr-res', D.k) + '</div></div>' + aviso + '</section>' +
+      '<div class="gr-l"><span>Resultado</span><div class="chips">' + chips(opcoesRes(D.tipo), 'data-gr-res', D.k) + '</div></div>' + (D.k ? '' : '<p class="gr-av">Sem resultado do voto na ficha: escolha o resultado acima para completar dispositivo, ementa, acórdão e proclamação.</p>') + aviso + '</section>' +
       bloco('rel', 'Relatório', D.rel.map(function (p) { return '<p>' + marca(p) + '</p>'; }).join(''), conta(relT)) +
       bloco('disp', 'Dispositivo do voto', D.disp.map(function (p) { return '<p>' + marca(p) + '</p>'; }).join(''), conta(D.disp.join(' '))) +
       bloco('em', 'Ementa', '<p class="gr-cab"><b>' + marca(D.em.cab) + '</b></p>' + D.em.sec.map(function (s) { return '<p><b>' + esc(s[0]) + '</b></p>' + s[1].map(function (x) { return '<p><b>' + x.n + '.</b> ' + marca(x.t) + '</p>'; }).join(''); }).join('') + '<p>__________</p>' + D.em.rod.map(function (r) { var i = r.indexOf(':'); return '<p><i>' + esc(r.slice(0, i + 1)) + '</i>' + marca(r.slice(i + 1)) + '</p>'; }).join(''), conta(emT)) +

@@ -5,6 +5,17 @@ Nome desde a 0.19.3 (antes: Muta). Os identificadores internos (`window.Muta*`, 
 Extensão do Chrome/Edge (Manifest V3) que abre o **Muta** num painel lateral, ao lado dos autos e das tarefas do PJe 2º grau do TRF-3.
 Base: o HTML independente *muta-independente-prontuario-completo* (Prontuário + Acervo).
 
+## O que muda na 0.37 · prontuário revisto, peça por peça
+
+Testado com 12 processos reais do acervo (apelação, remessa, agravo de instrumento com agravo interno, MS, 28,86%, SFH, tributário, OAB), nas quatro abas, sem erro de tela.
+- Leitura das razões (teses): saem assinatura com OAB, endereçamento ("Exmo."), cabeçalho de vara, número de processo, endereço, data solta, nome de empresa, dispositivo de decisão citado, trecho de ementa ou de afetação citado, frase de prosa, palavra cortada por OCR, título processual (tempestividade, síntese, pedidos) e tópico cortado; numeração e número de página saem do título. Cerca de 1.240 → 1.160 itens em 400 processos, com bem menos lixo.
+- Dispositivo da sentença na 3ª pessoa também depois de "e" ("confirmou a liminar e concedeu a segurança"); "Fundamento" não começa mais no meio de uma palavra.
+- Agravo de instrumento: a cópia da decisão agravada juntada como "Documentos Diversos — Decisão recorrida" é reconhecida; o recurso é a petição do agravo; agravos internos ficam fora do quadro de recursos. Remessa necessária sem recurso: a sentença é localizada.
+- Gerador: sem resultado do voto na ficha, nenhum é presumido ([VALIDAR] e aviso); no agravo de instrumento, "o que a decisão decidiu", a decisão agravada vem da origem, a parte vai pela posição na origem ([VALIDAR] com o nome do agravante quando a capa não diz), "reformar a decisão agravada"; advogado lido como parte vira o polo que ele representa; recurso único sem parte, com contrarrazões identificadas, sai como o outro polo; título da peça não entra como alegação; remessa sem "conhece em parte".
+- Peças: no agravo de instrumento, "Sentença" aparece como "Decisão agravada".
+- Cabeçalho: a etapa atual vem depois da última feita (processo da pauta sem triagem confirmada não fica preso em "Para triagem"); etapa pulada aparece riscada.
+- Gravação que falha aparece no topo do prontuário, com "Tentar de novo", até gravar; Roteiro não deixa erro solto no console.
+
 ## O que muda na 0.36 · só sinalizações fora do prontuário; o resto em desenvolvimento
 
 - Nos cartões da lista do PJe ficam só os ícones de sinalização (urgência, avisos, intercorrências, pendências, notas), na faixa do topo, que abrem o quadro de detalhes.

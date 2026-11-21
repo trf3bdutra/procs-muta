@@ -229,7 +229,8 @@ function etapas() {
   if (mono) L.push({ r: 'Enviada', ic: 'env', ok: !!d('Data da Liberação'), dt: d('Data da Liberação'), on: { 'Data da Liberação': 1 }, off: ['Data da Liberação'] },
     { r: 'Assinada', ic: 'ass', ok: sim(d('Assinado')) || !!d('Data da Assinatura'), dt: d('Data da Assinatura'), on: { Assinado: 'Sim', 'Data da Assinatura': 1 }, off: ['Assinado', 'Data da Assinatura'] });
   else L.push({ r: 'Liberação', ic: 'env', ok: sim(d('LIBERADO')) || !!d('Data da Liberação'), dt: d('Data da Liberação'), on: { LIBERADO: 'Sim', 'Data da Liberação': 1 }, off: ['LIBERADO', 'Data da Liberação'] });
-  var n = 0; while (n < L.length && L[n].ok) n++;
+  /* a etapa atual vem depois da última feita: processo designado direto para a pauta não passa pela confirmação da triagem */
+  var n = 0; L.forEach(function (x, i) { if (x.ok) n = i + 1; });
   return { L: L, n: n, mono: mono };
 }
 function marcarEtapa(i) {
@@ -269,7 +270,7 @@ function cabeca(s) {
   var etq = S(R['Etiquetas do PJe']).split(/\s*[;,|]\s*/).filter(Boolean);
   var pills = ORD_CE.filter(function (g) { return g !== 'monocratica' && vale(g); }).map(function (g) { return '<button type="button" class="gp ' + g + '" data-ir="g-ctl" title="Abrir o controle">' + ROT_CE[g] + '</button>'; }).join('');
   var et = E.L.map(function (x, i) {
-    var cls = x.ok ? 'ok' : i === E.n ? 'at' : '', t = i === E.n ? 'Marcar hoje' : i === E.n - 1 ? 'Desfazer' : x.ok ? 'Feita' : 'Depois da etapa anterior';
+    var cls = x.ok ? 'ok' : i === E.n ? 'at' : i < E.n ? 'pul' : '', t = i === E.n ? 'Marcar hoje' : i === E.n - 1 ? 'Desfazer' : x.ok ? 'Feita' : i < E.n ? 'Sem registro: o processo seguiu sem esta etapa' : 'Depois da etapa anterior';
     return '<button type="button" class="pm-e ' + cls + '" data-et="' + i + '" title="' + t + '">' + (i === E.n ? '<em>agora</em>' : '') + '<span class="pm-o">' + SV(IC[x.ic], 14) + '</span><b>' + esc(x.r) + '</b><small>' + (x.dt ? esc(brD(x.dt).slice(0, 5)) : '—') + '</small></button>';
   }).join('');
   var pess = function (k, rot) { var v = S(V('producao', k));
@@ -445,7 +446,9 @@ function pecasCartao() {
     var ord = PECAS_ORDEM[g.grupo] || [], C = g.campos.slice().sort(function (a, b) { var ia = ord.indexOf(a.chave), ib = ord.indexOf(b.chave); return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib); });
     var n = C.filter(function (c) { return !!val(c); }).length, ab = G.pecAb && G.pecAb[g.grupo] != null ? G.pecAb[g.grupo] : false;
     var res = (PECAS_RESUMO[g.grupo] || []).map(function (k) { var c = C.filter(function (x) { return x.chave === k; })[0]; var v = c ? val(c) : ''; return /^\d{4}-\d{2}-\d{2}$/.test(v) ? brD(v) : k.indexOf('ID') >= 0 && v ? 'ID ' + v : v; }).filter(Boolean).join(' · ');
-    return '<details class="pc-s"' + (ab ? ' open' : '') + ' data-grupo="' + esc(g.grupo) + '"><summary><span class="pc-s-t"><b>' + esc(g.grupo) + '</b>' + (res ? '<small>' + esc(res.slice(0, 120)) + '</small>' : '<small class="vz">sem registro</small>') + '</span><span class="gn">' + n + '/' + C.length + '</span></summary>' +
+    /* no agravo de instrumento a "Sentença" da ficha guarda a decisão agravada */
+    var titulo = g.grupo === 'Sentença' && /agravo de instrumento/i.test(((G.fo || {})['classe_judicial'] || (G.fo || {})['Classe'] || '') + ' ' + V('triagem', 'Tipo de Julgamento')) ? 'Decisão agravada' : g.grupo;
+    return '<details class="pc-s"' + (ab ? ' open' : '') + ' data-grupo="' + esc(g.grupo) + '"><summary><span class="pc-s-t"><b>' + esc(titulo) + '</b>' + (res ? '<small>' + esc(res.slice(0, 120)) + '</small>' : '<small class="vz">sem registro</small>') + '</span><span class="gn">' + n + '/' + C.length + '</span></summary>' +
       pecaExtracao(C, val) + '<div class="gr">' + C.map(campo).join('') + '</div></details>';
   }).join('') + '</section>';
 }
@@ -607,6 +610,12 @@ function st(t, c) {
   /* ícone na faixa do topo: ✓ gravado, ⋯ a gravar, ! não gravou; a mensagem fica na dica */
   el.hidden = !t; el.title = t || ''; el.setAttribute('aria-label', t || '');
   el.className = 'tu-st ' + (c === 'err' ? 'err' : c === 'ok' || /^gravad|^salv/i.test(t || '') ? 'ok' : 'pend');
+  /* gravação que falhou não fica só no ícone: aviso visível no prontuário, com "Tentar de novo", até gravar */
+  var fx = $('g-falha');
+  if (c === 'err') {
+    if (!fx && caixa) { fx = document.createElement('div'); fx.id = 'g-falha'; fx.className = 'err-box g-falha'; fx.setAttribute('role', 'alert'); }
+    if (fx) { fx.innerHTML = '<span>' + esc(t) + '</span><button type="button" class="btn sm" data-g="regravar">Tentar de novo</button>'; if (caixa && fx.parentNode !== caixa) caixa.insertBefore(fx, caixa.firstChild); }
+  } else if (fx && (c === 'ok' || /^gravad|^nada mudou/i.test(t || ''))) fx.remove();
 }
 
 /* ---------- gravação ---------- */
@@ -705,6 +714,7 @@ caixa.addEventListener('click', function (e) {
   if (b.dataset.dest != null) { var v = b.dataset.dest; G.dest = v === 'Monocrática' ? 'monocratica' : 'sessao'; if (v !== destGrav()) { marcar('producao.Destino', v); agendar(300); } render(); return; }
   if (b.dataset.inc) { var g = b.dataset.inc, x = INC[g][1]; G.mostra[g] = true; if (x) { marcar(x[0], x[1]); agendar(300); } render(); return; }
   if (b.dataset.g === 'atualizar') { gravarJa().catch(function () {}).then(function () { carregar(true); }); return; }
+  if (b.dataset.g === 'regravar') { gravarJa().catch(function () {}); return; }
   if (b.dataset.g === 'enviar') { enviar(); return; }
   if (b.dataset.g === 'trazer') { trazer(); return; }
 });

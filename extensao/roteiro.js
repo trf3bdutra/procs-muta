@@ -224,8 +224,8 @@
     var a = b.dataset.rt || '', cnj = g.cnj(), loc = lerLocal(cnj);
     if (/^a:/.test(a)) { var id = a.slice(2), el = b.closest('.rt-p'); R.aberto[id] = !(el && el.classList.contains('ab')); return true; }
     if (/^t:/.test(a)) { var T = tipos(g, cnj), k = a.slice(2); if (T[k]) delete T[k]; else T[k] = 1; var L = Object.keys(T); loc._tipos = L.length ? L : null; if (!loc._tipos) delete loc._tipos; gravarLocal(cnj, loc); return true; }
-    if (/^u:/.test(a)) { var it = (window.MutaAutos && window.MutaAutos.sugestoes ? window.MutaAutos.sugestoes() : [])[Number(a.slice(2))]; if (it && it.alvo && g.marcar) { g.marcar(it.alvo, it.value); if (g.gravar) g.gravar(); } return true; }
-    if (a === 'ut') { var SG = window.MutaAutos && window.MutaAutos.sugestoes ? window.MutaAutos.sugestoes() : []; (R.usados || []).forEach(function (k) { var x = SG[k]; if (x && x.alvo && g.marcar) g.marcar(x.alvo, x.value); }); if (g.gravar) g.gravar(); return true; }
+    if (/^u:/.test(a)) { var it = (window.MutaAutos && window.MutaAutos.sugestoes ? window.MutaAutos.sugestoes() : [])[Number(a.slice(2))]; if (it && it.alvo && g.marcar) { g.marcar(it.alvo, it.value); if (g.gravar) g.gravar().catch(function () {}); } return true; }
+    if (a === 'ut') { var SG = window.MutaAutos && window.MutaAutos.sugestoes ? window.MutaAutos.sugestoes() : []; (R.usados || []).forEach(function (k) { var x = SG[k]; if (x && x.alvo && g.marcar) g.marcar(x.alvo, x.value); }); if (g.gravar) g.gravar().catch(function () {}); return true; }
     if (a === 'auto') { delete loc._tipos; gravarLocal(cnj, loc); return true; }
     return false;
   }

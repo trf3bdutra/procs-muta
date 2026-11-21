@@ -444,3 +444,25 @@ test('extensão 0.36: fora do prontuário só as sinalizações; cartões, etiqu
   ['cmt.html', 'cmt-janela.js'].forEach(f => assert.ok(fs.existsSync(path.join(ext, f)), f));
   assert.match(read('extensao/cmt.js'), /op\.foco/);
 });
+
+test('extensão 0.37: prontuário revisto — teses limpas, 3ª pessoa, decisão agravada, resultado sem presunção, etapa atual, falha de gravação visível', () => {
+  const ctx = { window: {}, console }; ctx.window.window = ctx.window; vm.createContext(ctx); vm.runInContext(read('padrao/inteiro-teor.js'), ctx);
+  const T = ctx.window.CMTInteiroTeor;
+  assert.equal(T.extractDecision({ text: 'Relatório. Ante o exposto, confirmo a medida liminar concedida e CONCEDO A SEGURANÇA para anular o ato. P.R.I.' }).resultado, 'confirmou a medida liminar concedida e concedeu A SEGURANÇA para anular o ato');
+  const P = T.extractPetition({ text: 'RAZÕES DE APELAÇÃO. I – DA TEMPESTIVIDADE. O recurso é tempestivo. II – DA INEXISTÊNCIA DE LIMITAÇÃO TERRITORIAL DOS EFEITOS DA COISA JULGADA. Texto. III – DA APLICAÇÃO DO ART. 93, II DO CDC. Texto. MÉLAINE CHANTAL MEDEIROS ROUGE OAB/RJ 104.771' });
+  assert.ok(P.teses.some(x => /inexistência de limitação territorial/.test(x)), JSON.stringify(P.teses));
+  assert.ok(!P.teses.some(x => /tempestividade|oab/i.test(x)), JSON.stringify(P.teses));
+  const op = { origem: {}, triagem: { 'Tipo de Julgamento': 'Apelação' }, producao: {} };
+  const c2 = { window: {}, navigator: {} }; c2.window.window = c2.window;
+  c2.window.MutaGabinete = { cnj: () => '5000000-00.2026.4.03.6000', V: (s, k) => (op[s] || {})[k] || '', fo: () => ({ classe_judicial: 'APELAÇÃO CÍVEL' }) };
+  vm.createContext(c2); vm.runInContext(read('extensao/gerador.js'), c2);
+  const D = c2.window.MutaGerador.docs();
+  assert.equal(D.k, '', 'sem resultado na ficha, nenhum é presumido');
+  assert.match(D.disp[0], /^Ante o exposto, \[VALIDAR: resultado do voto/);
+  const g = read('extensao/gabinete.js');
+  assert.match(g, /L\.forEach\(function \(x, i\) \{ if \(x\.ok\) n = i \+ 1; \}\)/, 'etapa atual depois da última feita');
+  assert.match(g, /fx\.id = 'g-falha'/); assert.match(g, /data-g="regravar"/);
+  assert.match(read('extensao/roteiro.js'), /g\.gravar\(\)\.catch\(function \(\) \{\}\)/);
+  assert.match(read('padrao/inteiro-teor.js'), /function teseValida\(t\)/);
+  assert.equal(read('padrao/inteiro-teor.js'), read('extensao/padrao-inteiro-teor.js'));
+});

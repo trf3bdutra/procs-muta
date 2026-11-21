@@ -91,6 +91,8 @@ function kindOf(tipo,desc,text,classeAbbr,naoJuntado){
     if(/agravo de instrumento/.test(head)||/^ai\b/.test(N(classeAbbr)))return 'recurso';
     return 'inicial';
   }
+  /* cópia da decisão agravada juntada pelo agravante como documento ("Documentos Diversos — Decisão recorrida") */
+  if(/^(decisao|sentenca)( (recorrida|agravada|impugnada|de origem|proferida|liminar))?$|^decisao (recorrida|agravada)\b/.test(d)&&/document|comprobat|anexo|outro/.test(t))return 'decisao';
   if(/memoria/.test(t))return 'memoriais';
   if(/procurac|substabelec/.test(t+' '+d))return 'procuracao';
   if(/custas|guia|gru|preparo/.test(t)||/^(comprovante|guia|gru)/.test(d)&&/custas|preparo|recolhiment/.test(d))return 'custas';
@@ -208,7 +210,14 @@ function parseTxt(raw){
 /* ───────────────────────── 2 · EXTRAÇÃO POR REGRAS ───────────────────────── */
 const sentences=t=>String(t||'').replace(/\n+/g,' ').split(/(?<=[.!?])\s+(?=[A-ZÀ-Ú"“(])/).map(s=>s.trim()).filter(Boolean);
 const VERB3=[[/^n[ãa]o conhe[çc]o/i,'não conheceu'],[/^conhe[çc]o/i,'conheceu'],[/^julgo/i,'julgou'],[/^nego/i,'negou'],[/^dou/i,'deu'],[/^rejeito/i,'rejeitou'],[/^acolho/i,'acolheu'],[/^extingo/i,'extinguiu'],[/^homologo/i,'homologou'],[/^defiro/i,'deferiu'],[/^indefiro/i,'indeferiu'],[/^concedo/i,'concedeu'],[/^denego/i,'denegou'],[/^declaro/i,'declarou'],[/^determino/i,'determinou'],[/^condeno/i,'condenou'],[/^fixo/i,'fixou'],[/^reconhe[çc]o/i,'reconheceu'],[/^anulo/i,'anulou'],[/^mantenho/i,'manteve'],[/^revogo/i,'revogou'],[/^recebo/i,'recebeu'],[/^n[ãa]o admito/i,'não admitiu'],[/^admito/i,'admitiu'],[/^suspendo/i,'suspendeu'],[/^julgo prejudicad/i,'julgou prejudicad']];
-function third(s){s=S(s).replace(/^[,:;\s]+/,'');for(const [re,to] of VERB3){if(re.test(s))return s.replace(re,to);}return s;}
+const VERB3_MAIS=[[/^confirmo/i,'confirmou'],[/^ratifico/i,'ratificou'],[/^torno/i,'tornou'],[/^resolvo/i,'resolveu'],[/^imponho/i,'impôs'],[/^arbitro/i,'arbitrou'],[/^suspendo/i,'suspendeu'],[/^afasto/i,'afastou'],[/^decreto/i,'decretou']];
+/* 1ª pessoa → 3ª no início e depois de "e" ou vírgula ("confirmo a liminar e CONCEDO A SEGURANÇA" → "confirmou a liminar e concedeu a segurança") */
+function third(s){
+  s=S(s).replace(/^[,:;\s]+/,'');const L=VERB3.concat(VERB3_MAIS);
+  const um=x=>{for(const [re,to] of L){if(re.test(x))return x.replace(re,to);}return x;};
+  s=um(s);
+  return s.replace(/(\s(?:e|bem como)\s+|,\s+)([A-Za-zÀ-ú]+)(?=\s)/g,(m,sep,w)=>{const r=um(w);return r===w?m:sep+r;});
+}
 const clip=(s,n=320)=>{s=S(s).replace(/\s+/g,' ');return s.length>n?s.slice(0,n).replace(/\s+\S*$/,'')+'…':s;};
 const ROUTINE=/^(publique-se|registre-se|intime(m)?-se|cumpra-se|p\.?\s?r\.?\s?i|int\.?$|arquivem-se|d[êe]-se baixa|oportunamente|campo grande|s[ãa]o paulo|data da assinatura|cumpra-se)/i;
 const DISP_RE=/\b(Ante o exposto|Ante ao exposto|Diante o exposto|Diante do exposto|Pelo exposto|Em face do exposto|Isto posto|Posto isso|Do exposto|Diante disso|Por todo o exposto|Ante o acima exposto|Diante do quadro|Em vista do exposto|Face ao exposto|Pelo que foi exposto|Por tais raz[õo]es|Por esses fundamentos|Por estes fundamentos)[,:]?\s*/gi;
@@ -288,7 +297,8 @@ function extractDecision(doc){
     const n=N(disp);
     out.decisao=/(concedo|concedeu) (parcialmente|em parte) a seguranca|parcialmente procedente/.test(n)?'Parcialmente procedente':/(denego|denegou) a seguranca/.test(n)?'Improcedente':/(concedo|concedeu) a seguranca/.test(n)?'Procedente':/\bimprocedente/.test(n)?'Improcedente':/\bprocedente/.test(n)?'Procedente':/sem (resolucao|julgamento) do merito|extingo o processo/.test(n)?'Extinção sem resolução do mérito':/homologo/.test(n)?'Homologatória':'Outra';
   }
-  const before=dispStart>0?sentences(t.slice(Math.max(0,dispStart-1600),dispStart)):[];
+  /* a janela de 1.600 caracteres corta a primeira frase no meio: ela sai ("rá coisa julgada…") */
+  const b0=Math.max(0,dispStart-1600),before=dispStart>0?sentences(t.slice(b0,dispStart)).slice(b0>0?1:0):[];
   const fund=[...before].reverse().find(s=>/(configurad|imp[õo]e-se|raz[ãa]o pela qual|portanto|dessa forma|desse modo|^assim,|^logo,|conclui-se|ausente|n[ãa]o merece|merece (ser )?(acolhid|provid|reform))/i.test(s));
   if(fund)out.fundamento=clip(fund.replace(/[.;]\s*$/,''),320);
   const tail=dispStart>=0?sentences(t.slice(dispStart)):sentences(t.slice(-1500));
@@ -305,7 +315,7 @@ function extractDecision(doc){
   return out;
 }
 const PROC_HEAD=/^(D[AOE]S? )?(CASO EM EXAME|QUEST[AÃ]O EM DISCUSS|RAZ[OÕ]ES DE DECIDIR|DISPOSITIVO E TESE|TESE DE JULGAMENTO|JURISPRUD[EÊ]NCIA RELEVANTE|DISPOSITIVOS RELEVANTES|TEMPESTIVIDADE|CABIMENTO|ADMISSIBILIDADE|PREPARO|S[IÍ]NTESE|RELAT[OÓ]RIO|FATOS|BREVE|RESUMO|PEDIDOS?|REQUERIMENTOS?|CONCLUS|DECIS[AÃ]O AGRAVADA|DECIS[AÃ]O RECORRIDA|DECIS[AÃ]O EMBARGADA|SENTEN[CÇ]A RECORRIDA|R\.? ?DECIS|IMPUGNA[CÇ][AÃ]O ESPEC[IÍ]FICA|RAZ[OÕ]ES|EFEITO SUSPENSIVO|PEDIDO DE EFEITO|PERICULUM|FUMUS|TUTELA|LIMINAR|DIREITO$|M[EÉ]RITO$|PRELIMINARMENTE$|DISPOSITIVO|INTIMA[CÇ]|PRIORIDADE|GRATUIDADE|JUSTI[CÇ]A GRATUITA)/i;
-const KEEPCAP=/^(CDAs?|STN|STJ|STF|TRF\d?|CPC|LEF|CF|INSS|PJe|EPE|RFB|PGFN|MPF|AJG|DPU|SISPAR|SISBAJUD|RENAJUD|PIX|GRU|CNPJ|CPF|IRPJ|CSLL|PIS|COFINS|ICMS|IPI|ISS|SIMPLES|ME|EPP|LTDA|EIRELI|TNU|TR|IPCA|SELIC|RPV|BPC|LOAS|CTN|CLT|EC|ADI|ADC|RE|RESP|ARE|AI)$/i;
+const KEEPCAP=/^(ACP|CDC|ECA|LINDB|SUS|ANS|ANVISA|FUNAI|IBAMA|OAB|CEF|BACEN|UF|[IVX]{2,5}|CDAs?|STN|STJ|STF|TRF\d?|CPC|LEF|CF|INSS|PJe|EPE|RFB|PGFN|MPF|AJG|DPU|SISPAR|SISBAJUD|RENAJUD|PIX|GRU|CNPJ|CPF|IRPJ|CSLL|PIS|COFINS|ICMS|IPI|ISS|SIMPLES|ME|EPP|LTDA|EIRELI|TNU|TR|IPCA|SELIC|RPV|BPC|LOAS|CTN|CLT|EC|ADI|ADC|RE|RESP|ARE|AI)$/i;
 function headingCase(h){
   const caps=h.split(/\s+/).filter(w=>!/^[A-ZÀ-Ú]{2,}s$/.test(w)).join('').replace(/[^A-Za-zÀ-ú]/g,'');const isCaps=caps&&caps===caps.toUpperCase();
   let s=h.replace(/^\s*(D[aeo]s?)\s+/i,'');
@@ -336,6 +346,42 @@ function headings(t){
   const seen=new Set();return res.filter(h=>{const k=N(h.raw);if(seen.has(k))return false;seen.add(k);return true;})
     .filter(h=>!res.some(o=>o!==h&&o.num.startsWith(h.num+'.')));
 }
+/* tópico de petição que não é tese: assinatura (OAB), dispositivo citado de decisão, trecho de ementa ou de afetação citado,
+   continuação de citação legal ("cpc/2015, c/c art. 256…") e parêntese aberto */
+function teseLimpa(t){
+  /* tira numeração romana/arábica do início, número de página no fim e o tópico seguinte colado ("… 3. do sujeito passivo") */
+  return S(t).replace(/^\s*(?:[IVXivx]{1,5}|\d{1,2}(?:\.\d{1,2})*)\s*[-–—.)]\s*/,'').replace(/(?<!\b(?:art|arts|artigo|n[ºo°]|lei|§|inciso|tema|s[úu]mula|decreto)\.?)\s+\d{1,2}(?:\.\d{1,2})*\.\s+.*$/i,'').replace(/\s+\d{1,2}(?:\.\d{1,2})+$/,'').replace(/\s+\d{1,3}$/,'').replace(/[.…]{2,}$/,'').trim();
+}
+function teseValida(t){
+  const x=S(t),n=N(x),tok=x.split(/\s+/);
+  if(x.length<8)return false;
+  if(tok.length>=4&&tok.filter(w=>w.replace(/[^\wÀ-ú]/g,'').length<=2).length/tok.length>0.45)return false;           // OCR espaçado: "s íntese d o r ecurso"
+  if(/\boab\b|oab\/[a-z]{2}|\badvogad[oa]\b|\b(ltda|eireli|s\/a)\b/.test(n))return false;                                    // assinatura, nome de empresa
+  if(/^(exmo|excelentissim|egregio|ao egregio|a egregia|ilustrissim|meritissim|douto|colenda|senhor)/.test(n))return false; // endereçamento
+  if(/\d{7}-?\d{2}\.?\d{4}\.?\d\.?\d{2}\.?\d{4}/.test(x))return false;                                                       // número de processo
+  if(/^(diante|ante|pelo|em face|por todo)\s+(d?o\s+)?exposto|^isto posto|^posto isso/.test(n)&&/\b(defiro|indefiro|nego|dou|conheco|rejeito|acolho|julgo|mantenho)\b/.test(n))return false;
+  if(/^(cpc|ristj|ctn|lef|cf|ricarf)\b[\/\s,.]/.test(n))return false;
+  if(/^(em primeiro|em segundo|em terceiro|naturalmente|nesse contexto|neste contexto|no entanto|consoante|foi |nao tendo|acordo com|interposto|exa\b|requer|trata-se|cuida-se|com efeito|ocorre que|ademais|assim,|portanto)/.test(n))return false;
+  if(/\b(de|da|do|das|dos|pelo|pela|pelos|pelas|os|as|o|a|desta|deste|dessa|desse|e|em|na|no|nas|nos|para|com|que|ao|aos|à|às|sobre|entre|contra)$/.test(n))return false; // tópico cortado
+  if(((' '+x).match(/\s[b-df-hj-np-tv-zB-DF-HJ-NP-TV-Z]\s(?=[a-zà-ú]{2,})/g)||[]).length>=2)return false;                     // OCR com letra solta: "p edido de e feito"
+  if(/^[b-df-hj-np-tv-z]{2}/.test(x))return false;                                                                              // palavra cortada no início: "ncorporadora"
+  if(/^[A-ZÀ-Ú][a-zà-ú]/.test(x)&&(tok.length>=7||/\.$/.test(x)&&tok.length>=4))return false;                                   // frase de prosa (os títulos vêm em caixa alta)
+  if((x.match(/\s[-–]\s/g)||[]).length>=3)return false;                                                                         // cabeçalho de ementa citada
+  if(tok.length<=2&&/\d/.test(x))return false;
+  if(/\b(casa|rua|avenida|av\.|residencial|bairro|cep|lote|quadra)\s+[\wÀ-ú]/.test(n)&&/\d/.test(x)||/^rua\b/.test(n))return false;  // endereço
+  if(/^(\d{1,2}\s+de\s+)?(janeiro|fevereiro|marco|abril|maio|junho|julho|agosto|setembro|outubro|novembro|dezembro)\s+de\s+\d{4}$/.test(n))return false;
+  if(/^(a |o )?(uniao|fazenda nacional|caixa economica federal|inss|ibama|funai|anatel|ancine|antt|dnit)( - [a-z ]+)?$/.test(n))return false; // só o nome do ente
+  if(/vara federal|subsecao judiciaria|estado de mato grosso|tribunal regional federal/.test(n)&&!/\b(competencia|incompetencia|nulidade)\b/.test(n))return false; // cabeçalho                                                                                  // "casa 1029"
+  if(/^(conclusao|embargos de declaracao|recurso|apelacao civel|agravo de instrumento|o mic\/dta)$/.test(n))return false;
+  if(/^(na origem|desta forma|dessa forma|se houver|quanto a|apos,|servico publico federal|poder judiciario|ministerio publico|advocacia-geral|procuradoria|questoes em disc)/.test(n))return false;
+  if(x.length>50&&/\b\w+-se\b/.test(x)&&/,/.test(x))return false;                                                                  // frase de prosa ("tem-se", "intime-se")
+  if(/^(sintese|sontese|exposicao fatica|dos? fatos|fatos e fundamentos|apelacao|prequestionamento|pedidos e requerimentos|tempestividade|cabimento|merito recursal|razoes recursais|dos efeitos infringentes|efeitos infringentes|competencia)\b/.test(n))return false;
+  if((x.match(/\(/g)||[]).length!==(x.match(/\)/g)||[]).length)return false;
+  if(/["“”]/.test(x))return false;
+  if((x.match(/\.\s/g)||[]).length>=3)return false;
+  if(/^(delimitacao da controversia|recurso especial afetado|tese (firmada|fixada)|ementa)\b/.test(n))return false;
+  return true;
+}
 function extractPetition(doc){
   const t=doc.text,out={preliminares:[],teses:[],pedidos:[]};
   const hs=headings(t);let inPrelim=false;
@@ -345,8 +391,10 @@ function extractPetition(doc){
     if(/^(d[aeo]s? )?merito$/.test(raw)){inPrelim=false;return;}
     if(PROC_HEAD.test(h.raw.replace(/^\s*(D[AOE]S?)\s+/i,'').toUpperCase())||PROC_HEAD.test(h.raw))return;
     if(/preliminar/.test(raw)||inPrelim)out.preliminares.push(h.text.replace(/^preliminar(es)?( de)?\s*/i,''));
-    else out.teses.push(h.text);
+    else{const tx=teseLimpa(h.text);if(teseValida(tx))out.teses.push(tx);}
   });
+  /* sem repetições nem tópico contido em outro */
+  out.teses=out.teses.filter((x,i,L)=>!L.some((y,j)=>j!==i&&(N(y)===N(x)?j<i:N(y).includes(N(x))&&N(x).length<N(y).length)));
   // pedidos
   const re=/(DOS? PEDIDOS?|DOS? REQUERIMENTOS?|Ante o exposto,?\s*(?:requer|pugna|pede)[^:]{0,40}:|requer(?:-se)?(?: a [A-ZÀ-Ú]\w+)?\s*:)/g;let m,last=null;while((m=re.exec(t)))last=m;
   if(last){
@@ -521,7 +569,17 @@ function preselect(parsed){
   const ord=[...main].sort((a,b)=>key(a).localeCompare(key(b)));
   parsed.docs.forEach(d=>{d.target='';d.hint='';d.info='';d.anexos=null;d.anexoDe='';d.dupOf='';});
   const recs=ord.filter(d=>d.kind==='recurso'&&!/especial\/extra/.test(N(d.recursoTipo)));
-  if(recs.length){
+  /* agravo de instrumento: o recurso é a petição do agravo; a decisão agravada é a cópia juntada com ele (ou a última decisão
+     até a data do agravo). Agravos internos posteriores ficam fora do quadro de recursos (têm configuração própria). */
+  const ai=recs.find(d=>/peticao inicial/.test(N(d.tipo))||/agravo de instrumento/.test(N(d.desc||'')));
+  if(ai&&(/^ai\b/.test(N(parsed.classeAbbr))||/^peticao inicial/.test(N(ai.tipo)))){
+    const anexa=ord.find(d=>d.kind==='decisao'&&/recorrida|agravada|impugnada/.test(N(d.desc||'')));
+    const dec=anexa||ord.filter(d=>['sentenca','decisao'].includes(d.kind)&&(d.date||'')<=(ai.date||'~')&&d!==ai).pop();
+    if(dec){dec.target='sentenca';dec.hint=(dec.hint?dec.hint+' ':'')+'Decisão agravada.';}
+    ai.target='recurso';
+    ord.filter(d=>d.kind==='contrarrazoes'&&key(d)>key(ai)).forEach(d=>d.target='contrarrazoes');
+  }
+  else if(recs.length){
     const last=recs[recs.length-1];
     const decs=ord.filter(d=>['sentenca','decisao','acordao'].includes(d.kind)&&key(d)<key(last));
     let dec=decs[decs.length-1];
@@ -532,6 +590,8 @@ function preselect(parsed){
     const first=recs.find(d=>d.target==='recurso');
     ord.filter(d=>d.kind==='contrarrazoes'&&first&&key(d)>key(first)).forEach(d=>d.target='contrarrazoes');
   }
+  /* sem recurso (remessa necessária): a sentença é a última juntada */
+  else{const sen=ord.filter(d=>d.kind==='sentenca').pop();if(sen)sen.target='sentenca';}
   const mpf=ord.filter(d=>d.kind==='mpf');if(mpf.length)mpf[mpf.length-1].target='mpf';
   /* procurações: todas as localizadas; só as confirmadas como do recorrente (e de seu advogado) são pré-selecionadas */
   const recDoc=ord.filter(d=>d.target==='recurso').pop()||recs[recs.length-1]||null;
