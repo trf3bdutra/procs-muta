@@ -22867,8 +22867,8 @@
    "exequente": "CAMPANARIO S.A. ADMINISTRACAO E PARTICIPACOES",
    "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "assunto": "IRPJ/Imposto de Renda de Pessoa Jurídica",
-   "grupo": null,
-   "tipo_caso": "",
+   "grupo": "g7",
+   "tipo_caso": "Tributário · IRPJ e CSLL · lucro presumido: majoração de 10% nos percentuais de presunção (Lei Complementar 224/2025)",
    "resultado": "Ato a proferir: voto no agravo de instrumento [VALIDAR resultado]",
    "modelo": "",
    "variacoes": [],
@@ -22947,6 +22947,95 @@
     "outros": "Decisão do Relator ID 382779305 (26/06/2026): indeferiu a tutela recursal. Certidão ID 368700626 (24/04/2026): sem comprovante de custas. Agravante: prazo decorrido em 21/07/2026; conclusos para julgamento em 22/07/2026.",
     "representacao": "Agravante: procuração ID 367796799. Agravada: União (Fazenda Nacional).",
     "preparo": "GRU 18720-8 emitida em 20/04/2026 e comprovante bancário CAIXA de 27/04/2026, R$ 64,26 (ID 369369302), juntados após a certidão de ausência de custas (ID 368700626)."
+   },
+   "assunto_detalhado": "Tributário — IRPJ e CSLL; lucro presumido: majoração dos percentuais de presunção (Lei Complementar 224/2025)",
+   "especificidades": "Mandado de segurança · Liminar indeferida na origem e tutela recursal indeferida (ID 382779305) · Receita acima de R$ 5.000.000,00 · Preparo recolhido após a interposição, sem intimação do artigo 1.007, § 4º, do CPC",
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "assuntoDet": "Tributário — IRPJ e CSLL; lucro presumido: majoração dos percentuais de presunção (Lei Complementar 224/2025)",
+     "subassuntos": "Tributário · IRPJ e CSLL · lucro presumido: majoração de 10% nos percentuais de presunção (Lei Complementar 224/2025)",
+     "sintese": "",
+     "questoes": "1) Regularidade do preparo recolhido após a interposição; 2) probabilidade do direito: natureza do lucro presumido (regime de apuração ou benefício fiscal) e validade da majoração da Lei Complementar 224/2025; 3) perigo da demora.",
+     "rel": {
+      "razoes": "",
+      "contrarrazoes": ""
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "576702474",
+      "juizo": "4ª Vara Federal de Campo Grande",
+      "dispositivo": "Indeferiu a liminar."
+     },
+     "ai": {
+      "hip": "Tutela provisória",
+      "efeito": "Indeferido",
+      "id": "576702474"
+     },
+     "adm": {
+      "prot": "2026-04-20",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte autora",
+       "tipo": "Agravo de instrumento",
+       "id": "367796796",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "367796796",
+       "data": "2026-04-20"
+      },
+      {
+       "desc": "Decisão agravada (cópia)",
+       "id": "367796801",
+       "data": "2026-04-20"
+      },
+      {
+       "desc": "Certidão sem custas",
+       "id": "368700626",
+       "data": "2026-04-24"
+      },
+      {
+       "desc": "GRU e comprovante bancário",
+       "id": "369369302",
+       "data": "2026-04-27"
+      },
+      {
+       "desc": "Decisão: tutela recursal indeferida",
+       "id": "382779305",
+       "data": "2026-06-26"
+      },
+      {
+       "desc": "Parecer do MPF (falta de interesse)",
+       "id": "383362828",
+       "data": "2026-06-29"
+      },
+      {
+       "desc": "Contraminuta da Fazenda Nacional",
+       "id": "384751116",
+       "data": "2026-07-07"
+      }
+     ],
+     "pendencias": "Conferir o preparo (artigo 1.007, § 4º, do CPC) e eventual sentença na origem",
+     "especificidades": "Mandado de segurança · Liminar indeferida na origem e tutela recursal indeferida (ID 382779305) · Receita acima de R$ 5.000.000,00 · Preparo recolhido após a interposição, sem intimação do artigo 1.007, § 4º, do CPC"
+    },
+    "ctl": {
+     "tempest": "Tempestivo",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Manifestou-se",
+     "parecer": "Sem interesse"
+    }
    }
   },
   {
