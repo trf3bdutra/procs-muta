@@ -444,8 +444,47 @@ function pecasCartao() {
     var n = C.filter(function (c) { return !!val(c); }).length, ab = G.pecAb && G.pecAb[g.grupo] != null ? G.pecAb[g.grupo] : false;
     var res = (PECAS_RESUMO[g.grupo] || []).map(function (k) { var c = C.filter(function (x) { return x.chave === k; })[0]; var v = c ? val(c) : ''; return /^\d{4}-\d{2}-\d{2}$/.test(v) ? brD(v) : k.indexOf('ID') >= 0 && v ? 'ID ' + v : v; }).filter(Boolean).join(' · ');
     return '<details class="pc-s"' + (ab ? ' open' : '') + ' data-grupo="' + esc(g.grupo) + '"><summary><span class="pc-s-t"><b>' + esc(g.grupo) + '</b>' + (res ? '<small>' + esc(res.slice(0, 120)) + '</small>' : '<small class="vz">sem registro</small>') + '</span><span class="gn">' + n + '/' + C.length + '</span></summary>' +
-      '<div class="gr">' + C.map(campo).join('') + '</div></details>';
+      pecaExtracao(C, val) + '<div class="gr">' + C.map(campo).join('') + '</div></details>';
   }).join('') + '</section>';
+}
+/* extrair da peça: o ID e a data vêm da cronologia; o resto (decisão, resultado, honorários…) só do texto da peça.
+   O botão lê o texto (se ainda não lido) e preenche os campos vazios do grupo; nunca troca o que já está gravado. */
+function pecaIdDe(C, val) {
+  for (var i = 0; i < C.length; i++) { if (/(^|\s|-\s)ID(\s|$)|^ID\b/.test(C[i].chave)) { var v = S(val(C[i])).split(/[,;\s]+/).filter(function (x) { return /^\d{6,}$/.test(x); }); if (v.length) return v[v.length - 1]; } }
+  return '';
+}
+function pecaSug(C) {
+  var AU = window.MutaAutos; if (!AU || !AU.sugestoes) return [];
+  var ids = {}; C.forEach(function (c) { if (c.secao) ids[c.secao + '.' + c.chave] = 1; });
+  var vazio = function (alvo) { var i = alvo.indexOf('.'), v = V(alvo.slice(0, i), alvo.slice(i + 1)); return Array.isArray(v) ? !v.length : !S(v); };
+  return AU.sugestoes().filter(function (x) { return x.alvo && ids[x.alvo] && x.status === 'novo' && vazio(x.alvo) && (Array.isArray(x.value) ? x.value.length : S(x.value)); });
+}
+function pecaExtracao(C, val) {
+  var AU = window.MutaAutos; if (!AU || !AU.estado || !C.some(function (c) { return c.secao; })) return '';
+  var EA = AU.estado();
+  if (!EA.itens) return '<div class="pc-x"><small class="muted">Leia os autos (aba Autos) para extrair desta peça.</small></div>';
+  var id = pecaIdDe(C, val), d = id ? EA.docs[id] : null, sug = pecaSug(C), h = '';
+  if (sug.length) h += '<button type="button" class="btn solid sm" data-pec-apl="' + esc(id) + '" title="' + esc(sug.map(function (x) { return x.label || x.key; }).join(' · ')) + '">Preencher ' + sug.length + ' campo' + (sug.length > 1 ? 's' : '') + ' pela leitura</button>';
+  if (id && (!d || d.estado === 'erro')) h += '<button type="button" class="btn ' + (sug.length ? 'line' : 'solid') + ' sm" data-pec-ler="' + esc(id) + '" title="Lê o texto da peça no PJe e preenche os campos vazios">Extrair da peça (ID ' + esc(id) + ')</button>' + (d && d.estado === 'erro' ? '<small class="err">' + esc(d.erro || 'erro na leitura') + '</small>' : '');
+  else if (d && d.estado === 'lendo') h += '<small class="muted">lendo a peça ' + esc(id) + (d.prog ? ' · ' + esc(d.prog) : '') + '…</small>';
+  else if (d && d.estado === 'sem') h += '<button type="button" class="btn solid sm" data-pec-ocr="' + esc(id) + '" title="A peça não tem camada de texto (digitalizada)">Ler com OCR e preencher</button>';
+  else if (d && d.estado === 'ok' && !sug.length) {
+    var vz = C.filter(function (c) { return c.secao && !val(c); }).map(function (c) { return c.rotulo || c.chave; });
+    if (vz.length) h += '<small class="muted">Peça lida' + (d.ocr ? ' por OCR' : '') + '; a leitura não identificou: ' + esc(vz.join(', ')) + '. Preencha à mão.</small>';
+  }
+  if (!id && !sug.length) h += '<small class="muted">Sem ID da peça na ficha nem na cronologia lida.</small>';
+  return h ? '<div class="pc-x">' + h + '</div>' : '';
+}
+function pecaPreencher(id) {
+  var A = abaModelo('Processo'); if (!A) return 0;
+  var C = []; A.grupos.forEach(function (g) { if (!FORA_PROC[g.grupo]) C = C.concat(g.campos); });
+  var val = function (c) { var v = c.secao ? V(c.secao, c.chave) : fonteVal(c); return Array.isArray(v) ? (v.length ? '1' : '') : S(v); };
+  /* só os campos dos grupos que citam esta peça (ou, sem ID, todos os da leitura) */
+  var gs = A.grupos.filter(function (g) { return !FORA_PROC[g.grupo] && (!id || pecaIdDe(g.campos, val) === id); });
+  var L = []; gs.forEach(function (g) { L = L.concat(pecaSug(g.campos)); });
+  L.forEach(function (x) { marcar(x.alvo, x.value); });
+  if (L.length) agendar(300);
+  render(); return L.length;
 }
 function corpoProcesso() {
   var AU = window.MutaAutos, h = sinalizacoes() + notas();
@@ -645,6 +684,9 @@ caixa.addEventListener('click', function (e) {
   if (b.dataset.ch) { var cv = S(V.apply(null, [b.dataset.ch.slice(0, b.dataset.ch.indexOf('.')), b.dataset.ch.slice(b.dataset.ch.indexOf('.') + 1)])); marcar(b.dataset.ch, cv === b.dataset.v ? '' : b.dataset.v); agendar(500); render(); return; }
   if (b.dataset.rt != null) { if (window.MutaRoteiro && window.MutaRoteiro.clique(b, gRot())) render(); return; }
   if (b.dataset.copia) { copiar(b.dataset.copia, b); return; }
+  if (b.dataset.pecApl != null) { pecaPreencher(b.dataset.pecApl); return; }
+  if (b.dataset.pecLer || b.dataset.pecOcr) { var pid = b.dataset.pecLer || b.dataset.pecOcr, AUx = window.MutaAutos; if (!AUx) return;
+    AUx.extrair(pid, b.dataset.pecOcr ? 'ocr' : '').then(function (dd) { if (dd && dd.estado === 'ok') pecaPreencher(pid); else render(); }); render(); return; }
   if (b.dataset.aba) { G.aba = b.dataset.aba; render(); var pp = $('panel-pront'); if (pp) pp.scrollTop = 0; return; }
   if (b.dataset.ir) { G.aba = 'Processo'; render(); var alvo = $(b.dataset.ir); if (alvo) alvo.scrollIntoView({ block: 'start' }); return; }
   if (b.hasAttribute('data-qadd')) { G.qVazia = true; render(); var qs = caixa.querySelectorAll('[data-q]'); if (qs.length) qs[qs.length - 1].focus(); return; }

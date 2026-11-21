@@ -213,3 +213,10 @@ test('extensão 0.19.1: atualização sem chrome://extensions (atalho no pacote,
   assert.match(read('.github/workflows/vercel-caput.yml'), /site\/public\/extensao\/versao\.json/);
   assert.match(read('.gitattributes'), /extensao\/\*\.cmd text eol=crlf/);
 });
+
+test('extensão 0.19.2: Peças › extrair da peça lê o texto e preenche só os campos vazios', () => {
+  const gab = read('extensao/gabinete.js');
+  assert.match(gab, /function pecaExtracao\(C, val\)/); assert.match(gab, /data-pec-ler=/); assert.match(gab, /data-pec-ocr=/);
+  assert.match(gab, /x\.status === 'novo' && vazio\(x\.alvo\)/, 'nunca troca o que já está preenchido');
+  assert.match(gab, /AUx\.extrair\(pid/);
+});

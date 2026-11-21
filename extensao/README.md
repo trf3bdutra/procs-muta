@@ -23,6 +23,11 @@ Base: o HTML independente *muta-independente-prontuario-completo* (Prontuário +
 - **Autos → conferência:** sugere a data da intimação da decisão recorrida (primeira ciência, intimação ou publicação
   na cronologia entre a decisão e o recurso) para "Intimação / publicação" da tempestividade, a conferir.
 - Ao atualizar: recarregue a extensão e a aba do PJe e aceite a permissão nova de notificações.
+- **0.19.2 · Peças › extrair da peça:** o ID e a data vêm da cronologia; decisão, resultado, honorários, custas,
+  remessa, tutela, fundamento e providências só saem do texto. Cada grupo de Peças mostra "Extrair da peça (ID …)"
+  (lê o texto no PJe e preenche os campos vazios), "Ler com OCR e preencher" quando a peça é digitalizada, ou
+  "Preencher N campos pela leitura" quando o texto já foi lido. Nada que já esteja gravado é trocado; o que a leitura
+  não achar fica indicado para preencher à mão.
 
 ## O que muda na 0.18
 
