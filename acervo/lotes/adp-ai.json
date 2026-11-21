@@ -23057,8 +23057,8 @@
    "exequente": "ADAMES IND E COM DE RACOES E SUPLEMENTOS LTDA",
    "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "assunto": "IRPJ/Imposto de Renda de Pessoa Jurídica",
-   "grupo": null,
-   "tipo_caso": "",
+   "grupo": "g7",
+   "tipo_caso": "Tributário · IRPJ, CSLL, PIS e COFINS · benefícios fiscais de ICMS: isenção e redução de base de cálculo (Tema 1.182/STJ · Lei 14.789/2023)",
    "resultado": "Ato a proferir: voto no agravo de instrumento [VALIDAR resultado]",
    "modelo": "",
    "variacoes": [],
@@ -23137,6 +23137,95 @@
     "outros": "Decisão do Relator ID 377946846 (08/06/2026): indeferiu a tutela recursal. Agravante: prazo decorrido em 02/07/2026. Conclusos para julgamento em 10/08/2026.",
     "representacao": "Agravante: procuração nos autos de origem (ID 373907005, na cópia ID 369359561). Agravada: União (Fazenda Nacional).",
     "preparo": "Petição ID 369359565 com guia PagTesouro \"aguardando realização do pagamento\" (ID 369359566) e comprovante STN \"Pagamento realizado com sucesso\" (ID 369359567): serviço 20466, referência do agravo, Pix, R$ 64,26, pago em 27/04/2026, identificação 1wgOO1yd3u0UqRMfEBHKIL."
+   },
+   "assunto_detalhado": "Tributário — IRPJ, CSLL, PIS e COFINS sobre benefícios fiscais de ICMS (isenção e redução de base de cálculo)",
+   "especificidades": "Mandado de segurança preventivo · Liminar deferida só para o crédito presumido de ICMS · Tutela recursal indeferida (ID 377946846) · Tempestividade depende do ponto facultativo de 20/04/2026 · Agroindústria de rações",
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "assuntoDet": "Tributário — IRPJ, CSLL, PIS e COFINS sobre benefícios fiscais de ICMS (isenção e redução de base de cálculo)",
+     "subassuntos": "Tributário · IRPJ, CSLL, PIS e COFINS · benefícios fiscais de ICMS: isenção e redução de base de cálculo (Tema 1.182/STJ · Lei 14.789/2023)",
+     "sintese": "",
+     "questoes": "1) Tempestividade (ponto facultativo de 20/04/2026); 2) equiparação da isenção e da redução de base de cálculo de ICMS ao crédito presumido para excluí-las das bases federais; 3) efeitos da Lei 14.789/2023.",
+     "rel": {
+      "razoes": "",
+      "contrarrazoes": ""
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "569352177",
+      "juizo": "Vara Federal de Campo Grande [VALIDAR vara]",
+      "dispositivo": "Deferiu em parte a liminar (só créditos presumidos de ICMS); embargos de declaração sem alteração do alcance."
+     },
+     "ai": {
+      "hip": "Tutela provisória",
+      "efeito": "Indeferido",
+      "id": "569352177"
+     },
+     "adm": {
+      "prot": "2026-04-27",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte autora",
+       "tipo": "Agravo de instrumento",
+       "id": "369359560",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "369359560",
+       "data": "2026-04-27"
+      },
+      {
+       "desc": "Cópia do mandado de segurança",
+       "id": "369359561",
+       "data": "2026-04-27"
+      },
+      {
+       "desc": "Comprovante STN",
+       "id": "369359567",
+       "data": "2026-04-27"
+      },
+      {
+       "desc": "Decisão: tutela recursal indeferida",
+       "id": "377946846",
+       "data": "2026-06-08"
+      },
+      {
+       "desc": "Contraminuta da Fazenda Nacional",
+       "id": "386074185",
+       "data": "2026-07-14"
+      },
+      {
+       "desc": "Parecer do MPF (falta de interesse)",
+       "id": "389801538",
+       "data": "2026-07-31"
+      }
+     ],
+     "pendencias": "Conferir a tempestividade (ponto facultativo de 20/04/2026)",
+     "especificidades": "Mandado de segurança preventivo · Liminar deferida só para o crédito presumido de ICMS · Tutela recursal indeferida (ID 377946846) · Tempestividade depende do ponto facultativo de 20/04/2026 · Agroindústria de rações"
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Mandado de segurança",
+     "parecer": "Com parecer",
+     "urgTipo": "Antecipação da tutela recursal",
+     "urgSit": "Apreciada · indeferida",
+     "urgPedido": "2026-04-27",
+     "urgData": "2026-06-08",
+     "urgObs": "Tutela recursal indeferida (ID 377946846)."
+    }
    }
   },
   {
