@@ -18575,11 +18575,11 @@
    "assunto": "Esbulho / Turbação / Ameaça",
    "grupo": null,
    "tipo_caso": "",
-   "resultado": "",
+   "resultado": "Ato a proferir: decisão monocrática que julga prejudicado o agravo de instrumento (sentença superveniente)",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "observacao": "Agravo da União contra o indeferimento da liminar na reintegração de posse 5000071-39.2025.4.03.6007, sobre imóvel da extinta LBA em Coxim. Em 11/11/2026, a origem extinguiu o processo sem resolução do mérito pela reversão do imóvel ao Município. O agravo perdeu o objeto.",
+   "peculiaridades": "Sentença superveniente na origem (ID 615641398, comunicada no ID 410030635): perda do objeto. Agravado não localizado (AR negativo).",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -18605,7 +18605,18 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Decisão monocrática: agravo prejudicado pela sentença superveniente",
+    "materia": "Administrativo — reintegração de posse de imóvel da União (extinta LBA); liminar possessória",
+    "origem": "Vara Federal de Coxim · 5000071-39.2025.4.03.6007",
+    "decisao_agravada": "ID 362140358 (origem)",
+    "recurso": "ID 323831606 · 09/05/2025",
+    "preparo": "União isenta",
+    "monocratica": "Indicada: prejudicado",
+    "analisado_em": "20/11/2026",
+    "conf_preparo": "Isento (União) · conferido em 20/11/2026",
+    "conf_prevencao": "Origem: 5000071-39.2025.4.03.6007 · redistribuído do Gab. 41 à Turma Regional de MS · conferido em 20/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -18626,6 +18637,17 @@
     "ultima_informacao": "Certidão · ID 365596289 · 10/04/2026",
     "ultima_movimentacao": "11/11/2026 14:59 · EXPEDIÇÃO DE OUTROS DOCUMENTOS",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "teor": {
+    "sintese_fatica": "A União ajuizou reintegração de posse de imóvel oriundo da extinta LBA (Rua da Barra, 207, Coxim/MS; matrícula 13.655; RIP 90650009500-5), com pedidos de demolição e ressarcimento; o juízo indeferiu a liminar. Em 11/11/2026, sobreveio sentença sem resolução do mérito pela reversão registral do imóvel ao Município de Coxim.",
+    "inicial": "Reintegração de posse 5000071-39.2025.4.03.6007 (Vara Federal de Coxim, hoje 7º Núcleo de Justiça 4.0) da União contra Jonias Rodrigues e ocupantes; depois, Antônio Joaquim Neto e Marisa Longo",
+    "decisao_recorrida": "Decisão ID 362140358 dos autos de origem, que indeferiu a liminar possessória",
+    "recurso": "Agravo da União ID 323831606 (09/05/2025): reintegração liminar no imóvel público esbulhado.",
+    "resposta": "Agravado não localizado (AR negativo, ID 326973888); sem contraminuta.",
+    "parecer": "Sem parecer do MPF no agravo.",
+    "outros": "Decisão ID 324103214 (12/05/2025, Des. Fed. Herbert de Bruyn): indeferiu o efeito suspensivo. União aguarda o julgamento (ID 330195081, 08/07/2025). Redistribuição à Turma Regional de MS (decisão ID 362604299). Sentença ID 615641398 da origem (11/11/2026), comunicada no ID 410030635: extinção sem resolução do mérito (artigo 485, VI, do CPC) pela reversão registral do imóvel ao Município de Coxim.",
+    "representacao": "Agravante: União (AGU). Agravado: Jonias Rodrigues, sem advogado nos autos do agravo.",
+    "preparo": "União isenta."
    }
   },
   {
