@@ -133,3 +133,49 @@ test('Mural: calendário do gabinete aberto no lugar da agenda de entregas', () 
   assert.ok(app.includes('id="hc-cal-full" aria-label="Calendário do gabinete"><div id="cc-cal"'));
   assert.ok(app.includes("if($('#hc-mini-cal'))hcMiniCalendario();calendario();"));
 });
+
+test('Mural do servidor: desenho do protótipo num shadow root, com o quadro antigo só no painel do gabinete', () => {
+  const fs = require('fs'), path = require('path');
+  const h = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
+  const p = fs.readFileSync(path.join(__dirname, '..', 'api', 'painel.js'), 'utf8');
+  assert.match(h, /<div id="mu-host"/);
+  assert.match(h, /<script id="mu-lib">[\s\S]*attachShadow\(\{mode:'open'\}\)/);
+  assert.match(h, /body:not\(\.painel-gab\) #v-inicio>\.hc-board\{display:none!important\}/);
+  assert.match(h, /if\(!PAINEL_GAB\)try\{MU\.montar\(P\.dados,\{eu:U\.eu/);
+  assert.match(h, /<slot name=\\"cal\\"><\\\/slot>/);
+  const cal = fs.readFileSync(path.join(__dirname, '..', '..', '..', 'caput', 'motor', 'assets', 'js', '11-calendario.js'), 'utf8');
+  assert.match(cal, /return \(ex\.alertasExtra\|\|\[\]\)\.concat\(U,A\.slice\(0,4\)\)/);
+  assert.match(h, /<script id="cc-cal-lib" src="\/init\/motor\/assets\/js\/11-calendario\.js"><\/script>/);
+  assert.match(h, /semanaLateral:true,semanaRecolhida:true/);
+  assert.match(h, /function calMeus\(D\)/);
+  assert.match(p, /meta: \(it\.ctl \|\| \{\}\)\.meta/);
+  assert.match(p, /pend: \(\(\(it\.ctl/);
+});
+
+test('Pautas: sessão e buscador em linha única; ações de Sinalizações e Notas no cabeçalho; Solicitações no fim; seções como cartões', () => {
+  const fs = require('fs'), path = require('path');
+  const h = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
+  assert.match(h, /#v-pauta\.pt2 \.pp-sub \.pp-ses \.pp-ses-k\{display:none!important\}/);
+  assert.match(h, /\.pt-ir\.quick-find>span:not\(\.qf-row\),#v-pauta\.pt2 \.pp-sub \.pt-ir\.quick-find \.qf-help/);
+  assert.match(h, /<span class="ac-hb"><select id="sg-tp"/);
+  assert.match(h, /class="b pri nt-add" data-nota-add/);
+  assert.ok(h.indexOf('notasBloco(it)+\n') < h.indexOf("'<details class=\"ac-s ac-det\" id=\"ac-so\"'"), 'Solicitações depois das Notas');
+  assert.match(h, /#prq \.prt-p>section\{background:#fff/);
+});
+
+test('Mural: avisos e minhas ausências à direita do calendário, sem a faixa de sessões em andamento', () => {
+  const fs = require('fs'), path = require('path');
+  const h = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
+  assert.match(h, /#mu-host \.cc-dir\{display:none!important\}/);
+  assert.match(h, /wr\.id='mu-cal-wrap'/);
+  assert.match(h, /#mu-cal-wrap\{display:grid;grid-template-columns:minmax\(0,1fr\) 340px/);
+});
+
+test('Monocráticas: fila de urgências aberta na coluna da esquerda, em cartões compactos', () => {
+  const fs = require('fs'), path = require('path');
+  const h = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
+  assert.match(h, /function urgColuna\(\)/);
+  assert.match(h, /if\(\$\('#v-pauta'\)\._ed\)\{painelUrgEd\(el\);urgColuna\(\);return;\}/);
+  assert.match(h, /#urg\.urg-col \.pc\.ux\.aberto \.ux-b\{display:grid!important/);
+  assert.match(h, /#urg\.urg-col:not\(\.nova\) \.urg-n\{display:none!important\}/);
+});

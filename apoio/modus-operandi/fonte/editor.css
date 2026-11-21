@@ -201,3 +201,45 @@ html.ed-cmt .ed-top [data-edzip],html.ed-cmt .ed-top [data-edgit],html.ed-cmt .e
 .lp-ler .mn-fa{display:flex;gap:8px;align-items:center}.lp-ler .mn-fa button{height:32px;padding:0 14px;border:1px solid var(--line,#ded9cc);background:#fff;font:600 12.5px Figtree,system-ui,sans-serif;cursor:pointer}
 .lp-ler .mn-fa button.pri{background:#1b5878;border-color:#1b5878;color:#fff}
 .lp-ler .mn-nova{display:inline-block;margin:6px 0 0;padding:0;border:0;background:none;font:600 13px Figtree,system-ui,sans-serif;color:#1b5878;cursor:pointer}
+/* no painel do desembargador, as abas do editor e a ajuda ficam na barra do painel */
+html.ed-cmt .ed-top{display:none!important}
+/* Parágrafos por peça: sumário lateral, seções e texto recolhido */
+.lp-ler:has(.lp-grid){max-width:1080px;container-type:inline-size}
+.lp-grid{display:grid;grid-template-columns:190px minmax(0,1fr);gap:28px;align-items:start}
+.lp-toc{position:sticky;top:8px;max-height:calc(100vh - 140px);overflow:auto;padding:4px 0;font:13px/1.35 Figtree,system-ui,sans-serif}
+.lp-toc a{display:flex;justify-content:space-between;gap:8px;padding:4px 8px 4px 14px;color:#3f4f57;text-decoration:none;border-left:2px solid transparent}
+.lp-toc a:hover{color:#1b5878;border-left-color:#c9a45c;background:rgba(255,255,255,.6)}
+.lp-toc a.lp-tk{margin-top:12px;padding-left:8px;font-weight:700;color:#1f2d33}
+.lp-toc a.lp-tk:first-child{margin-top:0}
+.lp-toc i{font:400 10.5px ui-monospace,monospace;font-style:normal;color:#8a8f98}
+.lp-ler .lp-pk{margin:0 0 44px}
+.lp-ler .lp-pk>h2{margin-top:22px}
+.lp-ler .lp-cat{margin:4px 0 22px;scroll-margin-top:8px}
+.lp-ler .lp-pk{scroll-margin-top:8px}
+.lp-ler .lp-cat>h3{display:flex;align-items:baseline;gap:8px;margin:22px 0 8px;padding:6px 10px;background:rgba(27,88,120,.07);border-left:3px solid #1b5878;font:700 13px Figtree,system-ui,sans-serif;letter-spacing:.04em;text-transform:uppercase;color:#1b5878}
+.lp-ler .lp-cat>h3 small{margin-left:auto;font:400 10.5px ui-monospace,monospace;color:#5d6b72;text-transform:none}
+.lp-ler .lp-sub2{margin:14px 0 4px;font:600 12.5px Figtree,system-ui,sans-serif;color:#a57829}
+.lp-ler .lp-t.lp-cl{position:relative;max-height:6.6em;overflow:hidden;cursor:pointer}
+.lp-ler .lp-t.lp-cl::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2.2em;background:linear-gradient(transparent,var(--bg,#f4f1ea))}
+.lp-ler .lp-c:hover .lp-t.lp-cl::after{background:linear-gradient(transparent,#fbfaf7)}
+.lp-ler .lp-t.lp-cl.ab{max-height:none;cursor:default}.lp-ler .lp-t.lp-cl.ab::after{display:none}
+.lp-ler .lp-3{grid-template-columns:1fr 1fr 1fr}
+@container (max-width:780px){.lp-grid{grid-template-columns:minmax(0,1fr)}.lp-toc{display:none}}
+/* no editor do desembargador, a leitura (Parágrafos, Peças, Diretrizes) ocupa a largura toda: o sumário substitui a lista da esquerda */
+html.ed-cmt .ed-body:has(#ed-ler),html.ed-cmt .ed-body:has(#ed-man){grid-template-columns:minmax(0,1fr)}
+html.ed-cmt .ed-body:has(#ed-ler)>.ed-list,html.ed-cmt .ed-body:has(#ed-man)>.ed-list{display:none}
+.lp-ler:has(.lp-grid){max-width:1120px}
+.lp-ler .lp-bus{display:flex;align-items:center;gap:12px;margin:10px 0 0}
+.lp-ler .lp-bus input{flex:1;height:38px;padding:0 12px;border:1px solid var(--line,#ded9cc);background:#fff;font:14px Figtree,system-ui,sans-serif}
+.lp-ler .lp-bus input:focus{outline:0;border-color:#1b5878;box-shadow:0 0 0 3px rgba(27,88,120,.12)}
+.lp-ler .lp-bus span{font:11px ui-monospace,monospace;color:#5d6b72;white-space:nowrap}
+.lp-ler .lp-bus .mn-nova{margin:0;white-space:nowrap}
+.lp-toc span.lp-tk{display:block;margin:14px 0 2px;padding-left:8px;font:700 10.5px ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:#a57829}
+.lp-toc span.lp-tk:first-child{margin-top:0}
+.lp-ler .lp-pc{scroll-margin-top:8px}
+/* título de cada parágrafo: menor que o da seção (Admissibilidade, Mérito…), com um fio que corre até a margem */
+.lp-ler .lp-cat .lp-c>h4{display:flex;align-items:center;gap:10px;margin:0 0 5px;font:600 12.5px/1.3 Figtree,system-ui,sans-serif;color:#3f4f57}
+.lp-ler .lp-cat .lp-c>h4::after{content:"";flex:1;height:1px;background:var(--line,#ded9cc)}
+.lp-ler .lp-cat .lp-c:hover>h4::after{background:#d9c49a}
+.lp-ler .lp-sub2{margin:18px 0 6px;font:600 15px/1.3 Figtree,system-ui,sans-serif;color:#a57829}
+.lp-ler .lp-cat .lp-c>h4{font-size:12px;color:#4a5960}
