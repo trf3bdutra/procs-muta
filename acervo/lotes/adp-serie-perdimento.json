@@ -1,0 +1,1329 @@
+{
+ "schema": "gabcmt.lote",
+ "versao": 1,
+ "tipo": "triagem",
+ "tarefa": "Analisar tipo de decisão a proferir",
+ "origem": "Triagem · séries entre lotes",
+ "id": "adp-serie-perdimento",
+ "titulo": "Série · Perdimento: responsabilidade do proprietário",
+ "descricao": "Triagem (Analisar tipo de decisão a proferir): agravos e remessas sobre perdimento de veículo e mercadoria e responsabilidade do proprietário. Nenhum processo pautado.",
+ "sessoes": [],
+ "filtro": {},
+ "criado_por": "Bruno",
+ "atualizado_em": "2026-11-21",
+ "colunas": [
+  {
+   "id": "URG",
+   "rotulo": "Urgência / liminar pendente"
+  },
+  {
+   "id": "PRI",
+   "rotulo": "Prioridade legal"
+  },
+  {
+   "id": "MONO",
+   "rotulo": "Provável monocrática"
+  },
+  {
+   "id": "SOB",
+   "rotulo": "Sobrestamento"
+  },
+  {
+   "id": "ADM",
+   "rotulo": "Admissibilidade em discussão"
+  },
+  {
+   "id": "VAL",
+   "rotulo": "Pendência [VALIDAR]"
+  },
+  {
+   "id": "ORI",
+   "rotulo": "Conferir a origem (sentença ou perda de objeto)"
+  }
+ ],
+ "grupos": [
+  {
+   "id": "P1",
+   "rotulo": "Apelação e remessa · veículo conduzido por terceiro",
+   "cor": "#2f6db5",
+   "resultado": "Voto: linha da Turma (culpa in vigilando ou in eligendo; boa-fé não provada)",
+   "modelo": ""
+  },
+  {
+   "id": "P2",
+   "rotulo": "Remessa · proprietário de boa-fé (sem recurso voluntário)",
+   "cor": "#a33b5c",
+   "resultado": "Voto ou monocrática conforme a prova pré-constituída da boa-fé",
+   "modelo": ""
+  },
+  {
+   "id": "P3",
+   "rotulo": "Agravo · perdimento e multa do proprietário",
+   "cor": "#2a6a4a",
+   "resultado": "Voto ou monocrática pelos precedentes da Turma Regional",
+   "modelo": ""
+  }
+ ],
+ "grupo_outros": {
+  "rotulo": "A triar",
+  "cor": "#9aa0a8"
+ },
+ "minutas": "acervo/minutas/adp-serie-perdimento/<processo>.json",
+ "itens": [
+  {
+   "sessao": "",
+   "item": 1,
+   "processo": "5002022-74.2025.4.03.6005",
+   "recurso": "Apelação e remessa necessária",
+   "partes": "UNIAO FEDERAL - FAZENDA NACIONAL x WESLEY CARDOSO FREITAS",
+   "exequente": "UNIAO FEDERAL - FAZENDA NACIONAL",
+   "executado": "WESLEY CARDOSO FREITAS",
+   "assunto": "Liberação de Veículo Apreendido",
+   "assunto_detalhado": "Perdimento de veículo conduzido por terceiro — boa-fé do proprietário",
+   "grupo": "P1",
+   "tipo_caso": "Apelação da União e remessa necessária em mandado de segurança · pena de perdimento de veículo (GM Corsa Sedan Premium) apreendido com mercadorias estrangeiras sem documentação, conduzido por terceiro · liminar deferida (depósito) · segurança concedida",
+   "resultado": "Ato a proferir: apelação da União (ID 371217027) e remessa necessária da sentença ID 371217024; contrarrazões (ID 371217029); MPF sem intervenção (ID 371492518) ‖ Proposta pelos precedentes: Voto: examinar a prova pré-constituída da boa-fé à luz da linha da Turma (culpa in vigilando e in eligendo); tendência de provimento da apelação e da remessa [VALIDAR] [VALIDAR: Valor das mercadorias apreendidas; Vínculo entre proprietário e condutor e histórico de autuações]",
+   "modelo": "Origem: lote adp-remessas (grupo RA7) · não pautado",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação da União e remessa necessária da sentença que anulou o perdimento do GM Corsa de Wesley Cardoso Freitas, apreendido com mercadorias estrangeiras quando conduzido por amigo. A sentença presumiu a boa-fé do proprietário que empresta o veículo.",
+   "peculiaridades": "",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "",
+    "correcao": "",
+    "situacao": "A minutar"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {
+    "ato": "Julgamento da apelação e da remessa necessária (voto)",
+    "materia": "Aduaneiro — perdimento de veículo",
+    "origem": "Mandado de segurança 5002022-74.2025.4.03.6005 (1ª Vara Federal de Ponta Porã)",
+    "decisao_agravada": "Sentença ID 371217024 (17/04/2026)",
+    "recurso": "apelação de União (Fazenda Nacional) (ID 371217027, 29/04/2026) · remessa necessária",
+    "preparo": "União (Fazenda Nacional): Isento (ente público)",
+    "monocratica": "Improvável: sentença contrária à linha da Turma",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "União (Fazenda Nacional): Isento (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
+   "ajustes": [],
+   "pendencias": [],
+   "minuta": false,
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 371217024 · 17/04/2026 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 371494638 · 06/05/2026 | última movimentação: 06/05/2026 17:45 · Juntada de Petição de parecer \"falta de interesse\" (mp) · Linha da Turma Regional: responsabilidade do proprietário que cede o veículo, por culpa in vigilando e in eligendo, salvo prova de boa-fé (ApCiv 5000919-57.2019.4.03.6000, 28/09/2026) · Roteiro do Padrão Muta 3 (perdimento): a desproporção não é fator único · A sentença decide em sentido contrário à linha: possível provimento [VALIDAR] · Mesmo grupo: 5002022-74 e 5009950-28 · Valor das mercadorias × veículo [VALIDAR]",
+   "classe": "ApelRemNec",
+   "tarefa": "Analisar tipo de decisão a proferir · prioridade",
+   "etiquetas": "2ª Seção; Apreensão - Veículo; APTO - CONFERIR; MS; Perdimento",
+   "chegada": "04/11/2026",
+   "situacao_atual": {
+    "ultima_movimentacao": "06/05/2026 17:45 · Juntada de Petição de parecer \"falta de interesse\" (mp)",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Sentença · ID 371217024 · 17/04/2026 — sentença: concedeu a segurança; sujeita a reexame necessário",
+    "ultima_peca": "Parecer \"Falta de Interesse\" (MPF) · ID 371494638 · 06/05/2026",
+    "ultima_informacao": "Informação · ID 371217031 · 05/05/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 371217024 · 17/04/2026 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 371494638 · 06/05/2026 | última movimentação: 06/05/2026 17:45 · Juntada de Petição de parecer \"falta de interesse\" (mp)"
+   },
+   "teor": {
+    "sintese_fatica": "Wesley Cardoso Freitas teve o veículo apreendido pelo DOF/MS em 11/07/2025, na MS-378 (Laguna Carapã), conduzido por amigo que transportava mercadorias estrangeiras sem documentação. Alega boa-fé e desproporção (veículo de R$ 27.604,00).",
+    "inicial": "Mandado de segurança contra o Delegado da Receita Federal do Brasil em Ponta Porã.",
+    "decisao_recorrida": "Sentença ID 371217024 (17/04/2026): concedeu a segurança para declarar a nulidade da pena de perdimento (Auto de Infração e Perdimento de Veículo 0100100-225020/2025) e determinar a restituição do veículo, vedadas a alienação e a oneração até o trânsito em julgado.",
+    "recurso": "União (Fazenda Nacional) (ID 371217027, 29/04/2026): responsabilidade objetiva do proprietário pelo uso do veículo na infração aduaneira; proporcionalidade, pois as mercadorias superam o valor do veículo.",
+    "resposta": "Contrarrazões do impetrante (ID 371217029).",
+    "parecer": "MPF ID 371492518: Ausência de interesse que justifique intervenção",
+    "memoriais": "Não consta",
+    "representacao": "Impetrante assistido por advogado constituído [VALIDAR].",
+    "preparo": "União (Fazenda Nacional): Isento (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação da União e remessa necessária em mandado de segurança · pena de perdimento de veículo (GM Corsa Sedan Premium) apreendido com mercadorias estrangeiras sem documentação, conduzido por terceiro · liminar deferida (depósito) · segurança concedida",
+     "sintese": "Wesley Cardoso Freitas teve o veículo apreendido pelo DOF/MS em 11/07/2025, na MS-378 (Laguna Carapã), conduzido por amigo que transportava mercadorias estrangeiras sem documentação. Alega boa-fé e desproporção (veículo de R$ 27.604,00).",
+     "questoes": "1) Perdimento de veículo conduzido por terceiro: responsabilidade do proprietário e prova da boa-fé; 2) proporcionalidade.",
+     "rel": {
+      "razoes": "União (Fazenda Nacional) (ID 371217027, 29/04/2026): responsabilidade objetiva do proprietário pelo uso do veículo na infração aduaneira; proporcionalidade, pois as mercadorias superam o valor do veículo.",
+      "contrarrazoes": "Contrarrazões do impetrante (ID 371217029)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "371217024",
+      "juizo": "Mandado de segurança 5002022-74.2025.4.03.6005 (1ª Vara Federal de Ponta Porã)",
+      "dispositivo": "concedeu a segurança para declarar a nulidade da pena de perdimento (Auto de Infração e Perdimento de Veículo 0100100-225020/2025) e determinar a restituição do veículo, vedadas a alienação e a oneração até o trânsito em julgado."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2025-11-06",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "União (Fazenda Nacional)",
+       "tipo": "Apelação",
+       "id": "371217027",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "371217024",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Decisão: liminar deferida (fiel depositário)",
+       "id": "371217016",
+       "data": "2025-11-26"
+      },
+      {
+       "desc": "Sentença: segurança concedida",
+       "id": "371217024",
+       "data": "2026-04-17"
+      },
+      {
+       "desc": "Apelação da União",
+       "id": "371217027",
+       "data": "2026-04-29"
+      },
+      {
+       "desc": "Documento: processo administrativo 10109.723747/2025-41",
+       "id": "371217028",
+       "data": "2026-04-29"
+      },
+      {
+       "desc": "Contrarrazões do impetrante",
+       "id": "371217029",
+       "data": "2026-04-29"
+      },
+      {
+       "desc": "Parecer do MPF (sem intervenção)",
+       "id": "371492518",
+       "data": "2026-05-06"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 371217024 · 17/04/2026 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 371494638 · 06/05/2026 | última movimentação: 06/05/2026 17:45 · Juntada de Petição de parecer \"falta de interesse\" (mp) · Linha da Turma Regional: responsabilidade do proprietário que cede o veículo, por culpa in vigilando e in eligendo, salvo prova de boa-fé (ApCiv 5000919-57.2019.4.03.6000, 28/09/2026) · Roteiro do Padrão Muta 3 (perdimento): a desproporção não é fator único · A sentença decide em sentido contrário à linha: possível provimento [VALIDAR] · Mesmo grupo: 5002022-74 e 5009950-28 · Valor das mercadorias × veículo [VALIDAR]",
+     "assuntoDet": "Perdimento de veículo conduzido por terceiro — boa-fé do proprietário",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Mandado de segurança",
+     "parecer": "Com parecer",
+     "idParecer": "371492518",
+     "parecerSentido": "Ausência de interesse que justifique intervenção"
+    }
+   }
+  },
+  {
+   "sessao": "",
+   "item": 2,
+   "processo": "5009950-28.2024.4.03.6000",
+   "recurso": "Apelação e remessa necessária",
+   "partes": "Delegado da Receita Federal de Campo Grande/MS x PABLO REI ALEGRE SANTOS",
+   "exequente": "Delegado da Receita Federal de Campo Grande/MS",
+   "executado": "PABLO REI ALEGRE SANTOS",
+   "assunto": "Liberação de Veículo Apreendido",
+   "assunto_detalhado": "Perdimento de veículo conduzido por terceiro — boa-fé do proprietário",
+   "grupo": "P1",
+   "tipo_caso": "Apelação da União e remessa necessária em mandado de segurança · pena de perdimento de veículo (Ford Focus 2009) apreendido com mercadorias estrangeiras em compartimento oculto, conduzido por terceiro · liminar indeferida · segurança concedida",
+   "resultado": "Ato a proferir: apelação da União (ID 392442665) e remessa necessária da sentença ID 392442662; contrarrazões (ID 392442667); MPF pelo provimento (ID 405989800) ‖ Proposta pelos precedentes: Voto: tendência de provimento da apelação e da remessa, na linha da Turma, ante o compartimento oculto e a ausência de prova pré-constituída da boa-fé [VALIDAR]; o pedido de ofício (ID 400303377) fica prejudicado ou é apreciado conforme o resultado [VALIDAR: Agravo de instrumento conexo; Valor das mercadorias × veículo]",
+   "modelo": "Origem: lote adp-remessas (grupo RA7) · não pautado",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação da União e remessa necessária da sentença que afastou o perdimento do Ford Focus de Pablo Rei Alegre Santos, apreendido com mercadorias estrangeiras em compartimento oculto quando conduzido por terceiro. O MPF opinou pelo provimento (mercadorias mais de cinco vezes o valor do veículo).",
+   "peculiaridades": "",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "",
+    "correcao": "",
+    "situacao": "A minutar"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {
+    "ato": "Julgamento da apelação e da remessa necessária (voto)",
+    "materia": "Aduaneiro — perdimento de veículo",
+    "origem": "Mandado de segurança 5009950-28.2024.4.03.6000 (2ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 392442662 (29/06/2026)",
+    "recurso": "apelação de União (Fazenda Nacional) (ID 392442665, 13/07/2026) · remessa necessária",
+    "preparo": "União (Fazenda Nacional): Isento (ente público)",
+    "monocratica": "Improvável: sentença contrária à linha da Turma",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "União (Fazenda Nacional): Isento (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
+   "ajustes": [],
+   "pendencias": [],
+   "minuta": false,
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 392442666 · 13/07/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 392442662 · 29/06/2026 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Parecer de Mérito (MPF) · ID 405989800 · 22/10/2026 | última movimentação: 22/10/2026 10:30 · Juntada de Petição de parecer de mérito (mp) · Linha da Turma Regional: responsabilidade do proprietário que cede o veículo, por culpa in vigilando e in eligendo, salvo prova de boa-fé (ApCiv 5000919-57.2019.4.03.6000, 28/09/2026) · Roteiro do Padrão Muta 3 (perdimento): a desproporção não é fator único · A sentença decide em sentido contrário à linha: possível provimento [VALIDAR] · Mesmo grupo: 5002022-74 e 5009950-28 · Compartimento oculto · Veículo já restituído; petição do impetrante pede ofício à Receita Federal para baixa de restrição (ID 400303377) · Agravo de instrumento conexo [VALIDAR número]",
+   "classe": "ApelRemNec",
+   "tarefa": "Analisar tipo de decisão a proferir",
+   "etiquetas": "2ª Seção; aguardando parecer; Apreensão - Veículo; MS; Perdimento",
+   "chegada": "04/11/2026",
+   "situacao_atual": {
+    "ultima_movimentacao": "22/10/2026 10:30 · Juntada de Petição de parecer de mérito (mp)",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Despacho · ID 392442666 · 13/07/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso)",
+    "ultima_decisao_relevante": "Sentença tipo A · ID 392442662 · 29/06/2026 — sentença: concedeu a segurança; sujeita a reexame necessário",
+    "ultima_peca": "Parecer de Mérito (MPF) · ID 405989800 · 22/10/2026",
+    "ultima_informacao": "Certidão · ID 396537545 · 08/09/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 392442666 · 13/07/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 392442662 · 29/06/2026 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Parecer de Mérito (MPF) · ID 405989800 · 22/10/2026 | última movimentação: 22/10/2026 10:30 · Juntada de Petição de parecer de mérito (mp)"
+   },
+   "teor": {
+    "sintese_fatica": "Pablo Rei Alegre Santos teve o veículo apreendido pela PRF em 05/02/2024, na BR-060 (Sidrolândia), conduzido por José Luiz Ruiz Olmedo, com mercadorias estrangeiras em compartimento oculto. Alega ter apenas emprestado o veículo. A liminar foi indeferida; em agravo de instrumento, suspendeu-se o perdimento até a sentença.",
+    "inicial": "Mandado de segurança contra o Delegado da Receita Federal do Brasil em Campo Grande.",
+    "decisao_recorrida": "Sentença ID 392442662 (29/06/2026): concedeu a segurança para afastar a pena de perdimento e determinar a restituição do veículo, independentemente do pagamento de despesas de pátio ou encargos da apreensão.",
+    "recurso": "União (Fazenda Nacional) (ID 392442665, 13/07/2026): responsabilidade do proprietário que empresta o veículo; mercadorias ocultas em compartimento preparado; proporcionalidade.",
+    "resposta": "Contrarrazões do impetrante (ID 392442667).",
+    "parecer": "MPF ID 405989800: Provimento da apelação",
+    "memoriais": "Não consta",
+    "representacao": "Impetrante assistido por advogada constituída; justiça gratuita deferida na origem.",
+    "preparo": "União (Fazenda Nacional): Isento (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação da União e remessa necessária em mandado de segurança · pena de perdimento de veículo (Ford Focus 2009) apreendido com mercadorias estrangeiras em compartimento oculto, conduzido por terceiro · liminar indeferida · segurança concedida",
+     "sintese": "Pablo Rei Alegre Santos teve o veículo apreendido pela PRF em 05/02/2024, na BR-060 (Sidrolândia), conduzido por José Luiz Ruiz Olmedo, com mercadorias estrangeiras em compartimento oculto. Alega ter apenas emprestado o veículo. A liminar foi indeferida; em agravo de instrumento, suspendeu-se o perdimento até a sentença.",
+     "questoes": "1) Perdimento de veículo conduzido por terceiro: responsabilidade do proprietário e prova da boa-fé; 2) proporcionalidade.",
+     "rel": {
+      "razoes": "União (Fazenda Nacional) (ID 392442665, 13/07/2026): responsabilidade do proprietário que empresta o veículo; mercadorias ocultas em compartimento preparado; proporcionalidade.",
+      "contrarrazoes": "Contrarrazões do impetrante (ID 392442667)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "392442662",
+      "juizo": "Mandado de segurança 5009950-28.2024.4.03.6000 (2ª Vara Federal de Campo Grande)",
+      "dispositivo": "concedeu a segurança para afastar a pena de perdimento e determinar a restituição do veículo, independentemente do pagamento de despesas de pátio ou encargos da apreensão."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2024-09-16",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "União (Fazenda Nacional)",
+       "tipo": "Apelação",
+       "id": "392442665",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "392442662",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Decisão: liminar indeferida",
+       "id": "392442637",
+       "data": "2025-01-28"
+      },
+      {
+       "desc": "Sentença: segurança concedida",
+       "id": "392442662",
+       "data": "2026-06-29"
+      },
+      {
+       "desc": "Apelação da União",
+       "id": "392442665",
+       "data": "2026-07-13"
+      },
+      {
+       "desc": "Contrarrazões do impetrante",
+       "id": "392442667",
+       "data": "2026-08-03"
+      },
+      {
+       "desc": "Petição: ofício à Receita Federal (restrição do veículo)",
+       "id": "400303377",
+       "data": "2026-09-24"
+      },
+      {
+       "desc": "Parecer do MPF (provimento)",
+       "id": "405989800",
+       "data": "2026-10-22"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 392442666 · 13/07/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 392442662 · 29/06/2026 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Parecer de Mérito (MPF) · ID 405989800 · 22/10/2026 | última movimentação: 22/10/2026 10:30 · Juntada de Petição de parecer de mérito (mp) · Linha da Turma Regional: responsabilidade do proprietário que cede o veículo, por culpa in vigilando e in eligendo, salvo prova de boa-fé (ApCiv 5000919-57.2019.4.03.6000, 28/09/2026) · Roteiro do Padrão Muta 3 (perdimento): a desproporção não é fator único · A sentença decide em sentido contrário à linha: possível provimento [VALIDAR] · Mesmo grupo: 5002022-74 e 5009950-28 · Compartimento oculto · Veículo já restituído; petição do impetrante pede ofício à Receita Federal para baixa de restrição (ID 400303377) · Agravo de instrumento conexo [VALIDAR número]",
+     "assuntoDet": "Perdimento de veículo conduzido por terceiro — boa-fé do proprietário",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Mandado de segurança",
+     "parecer": "Com parecer",
+     "idParecer": "405989800",
+     "parecerSentido": "Provimento da apelação"
+    }
+   }
+  },
+  {
+   "sessao": "",
+   "item": 3,
+   "processo": "5002157-86.2025.4.03.6005",
+   "recurso": "Remessa necessária",
+   "partes": "AILTON MARTINEZ DOS SANTOS x UNIAO FEDERAL - FAZENDA NACIONAL",
+   "exequente": "AILTON MARTINEZ DOS SANTOS",
+   "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
+   "assunto": "Liberação de Veículo Apreendido",
+   "assunto_detalhado": "Aduaneiro — perdimento de veículo do proprietário condutor (desproporção de valores)",
+   "grupo": "P2",
+   "tipo_caso": "Remessa necessária em mandado de segurança · perdimento de veículo (Fiat Strada, R$ 49.493,00) do proprietário condutor, por transporte de pneus estrangeiros sem documentação (R$ 4.578,48) · segurança concedida só pela desproporção de valores · Fazenda Nacional não recorre",
+   "resultado": "Ato a proferir: remessa necessária da sentença ID 377924534, sem recurso voluntário; a Fazenda Nacional informou que não recorrerá, \"nos termos de nota justificativa arquivada internamente\" (ID 377924537); MPF pelo prosseguimento (ID 381138221) ‖ Proposta pelos precedentes: Voto: conferir à luz do roteiro do gabinete (a desproporção não é fator único; proprietário condutor com responsabilidade reconhecida) — possível provimento da remessa [VALIDAR]; se a manifestação da Fazenda Nacional se enquadrar no artigo 19, § 1º, II, da Lei 10.522/2002, não conhecimento [VALIDAR] [VALIDAR: Resultado: desproporção como fator único × roteiro do gabinete; Enquadramento da manifestação da Fazenda Nacional no artigo 19 da Lei 10.522/2002; Liberação já cumprida]",
+   "modelo": "Origem: lote adp-remessas (grupo RM2) · não pautado",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Remessa necessária da sentença que anulou o perdimento do Fiat Strada de Ailton Martinez dos Santos, apreendido quando ele próprio transportava pneus estrangeiros sem documentação. A sentença reconheceu a responsabilidade do impetrante, mas afastou a pena só pela desproporção entre o valor do veículo (R$ 49.493,00) e o das mercadorias (R$ 4.578,48), sem reiteração registrada. A liminar fora indeferida (ID 377924270). A Fazenda Nacional informou que não recorrerá.",
+   "peculiaridades": "",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "",
+    "correcao": "",
+    "situacao": "A minutar"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {
+    "ato": "Julgamento da remessa necessária (voto) [VALIDAR efeito da manifestação da Fazenda Nacional]",
+    "materia": "Aduaneiro — perdimento",
+    "origem": "Mandado de segurança 5002157-86.2025.4.03.6005 (2ª Vara Federal de Ponta Porã) [VALIDAR vara]",
+    "decisao_agravada": "Sentença ID 377924534 (19/04/2026)",
+    "recurso": "Remessa necessária · sentença de 19/04/2026",
+    "preparo": "Não se aplica (remessa necessária)",
+    "monocratica": "Improvável: o roteiro do gabinete não admite a desproporção como fator único",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "NÃO SE APLICA · remessa necessária · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
+   "ajustes": [],
+   "pendencias": [],
+   "minuta": false,
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 377924534 · 19/04/2026 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 381138221 · 18/06/2026 | última movimentação: 18/06/2026 16:59 · Conclusos para julgamento · Sem recurso voluntário · Proprietário era o condutor · Desproporção de cerca de dez vezes · Fazenda Nacional não recorrerá, sem indicar hipótese legal (ID 377924537) · Etiqueta \"APTO - CONFERIR\" · Ver guia de perdimento (desproporção não é fator único)",
+   "classe": "RemNecCiv",
+   "tarefa": "Analisar tipo de decisão a proferir",
+   "etiquetas": "2ª Seção; apenas remessa; Apreensão - Veículo; APTO - CONFERIR; BRUNO; José V.; MS; Perdimento",
+   "chegada": "04/11/2026",
+   "situacao_atual": {
+    "ultima_movimentacao": "18/06/2026 16:59 · Conclusos para julgamento",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Sentença · ID 377924534 · 19/04/2026 — sentença: concedeu a segurança; sujeita a reexame necessário",
+    "ultima_peca": "Parecer \"Falta de Interesse\" (MPF) · ID 381138221 · 18/06/2026",
+    "ultima_informacao": "Informação · ID 377924538 · 01/06/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 377924534 · 19/04/2026 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 381138221 · 18/06/2026 | última movimentação: 18/06/2026 16:59 · Conclusos para julgamento"
+   },
+   "teor": {
+    "sintese_fatica": "Ailton Martinez dos Santos teve o veículo apreendido em 31/07/2024, na MS-162, em Maracaju, quando o conduzia com pneus de origem estrangeira sem documentação, e a Alfândega em Ponta Porã aplicou a pena de perdimento.",
+    "inicial": "Mandado de segurança contra o Chefe da Alfândega da Receita Federal em Ponta Porã.",
+    "decisao_recorrida": "Sentença ID 377924534 (19/04/2026): concedeu a segurança para declarar a ilegalidade do perdimento do veículo Fiat Strada Working CD, placa NSA8J72, e deferiu a liminar para a liberação em 48 horas, por desproporção entre o valor do veículo e o das mercadorias, embora reconhecida a responsabilidade subjetiva do impetrante.",
+    "recurso": "Sem recurso voluntário; remessa necessária.",
+    "resposta": "Não consta.",
+    "parecer": "MPF ID 381138221: Prosseguimento do feito, sem intervenção",
+    "memoriais": "Não consta",
+    "representacao": "Impetrante assistido por advogado constituído [VALIDAR].",
+    "preparo": "Não se aplica."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Remessa Necessária",
+     "subassuntos": "Remessa necessária em mandado de segurança · perdimento de veículo (Fiat Strada, R$ 49.493,00) do proprietário condutor, por transporte de pneus estrangeiros sem documentação (R$ 4.578,48) · segurança concedida só pela desproporção de valores · Fazenda Nacional não recorre",
+     "sintese": "Ailton Martinez dos Santos teve o veículo apreendido em 31/07/2024, na MS-162, em Maracaju, quando o conduzia com pneus de origem estrangeira sem documentação, e a Alfândega em Ponta Porã aplicou a pena de perdimento.",
+     "questoes": "1) Pena de perdimento de veículo do proprietário condutor: proporcionalidade (valor do veículo × mercadorias) e demais critérios (Decreto-Lei 1.455/1976, artigo 24; Decreto-Lei 37/1966, artigos 95 e 104); 2) cabimento da remessa após a manifestação da Fazenda Nacional.",
+     "rel": {
+      "razoes": "Sem recurso voluntário; remessa necessária.",
+      "contrarrazoes": "Não consta."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "377924534",
+      "juizo": "Mandado de segurança 5002157-86.2025.4.03.6005 (2ª Vara Federal de Ponta Porã) [VALIDAR vara]",
+      "dispositivo": "concedeu a segurança para declarar a ilegalidade do perdimento do veículo Fiat Strada Working CD, placa NSA8J72, e deferiu a liminar para a liberação em 48 horas, por desproporção entre o valor do veículo e o das mercadorias, embora reconhecida a responsabilidade subjetiva do impetrante."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2025-11-26",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "377924534",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Decisão: liminar indeferida",
+       "id": "377924270",
+       "data": "2025-11-26"
+      },
+      {
+       "desc": "Sentença: segurança concedida e liminar deferida",
+       "id": "377924534",
+       "data": "2026-04-19"
+      },
+      {
+       "desc": "Manifestação da Fazenda Nacional: não recorrerá",
+       "id": "377924537",
+       "data": "2026-05-17"
+      },
+      {
+       "desc": "Parecer do MPF (prosseguimento)",
+       "id": "381138221",
+       "data": "2026-06-18"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 377924534 · 19/04/2026 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 381138221 · 18/06/2026 | última movimentação: 18/06/2026 16:59 · Conclusos para julgamento · Sem recurso voluntário · Proprietário era o condutor · Desproporção de cerca de dez vezes · Fazenda Nacional não recorrerá, sem indicar hipótese legal (ID 377924537) · Etiqueta \"APTO - CONFERIR\" · Ver guia de perdimento (desproporção não é fator único)",
+     "assuntoDet": "Aduaneiro — perdimento de veículo do proprietário condutor (desproporção de valores)",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não se aplica",
+     "preparo": "Não se aplica",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Mandado de segurança",
+     "parecer": "Com parecer",
+     "idParecer": "381138221",
+     "parecerSentido": "Prosseguimento do feito, sem intervenção"
+    }
+   }
+  },
+  {
+   "sessao": "",
+   "item": 4,
+   "processo": "5007702-60.2022.4.03.6000",
+   "recurso": "Remessa necessária",
+   "partes": "JOSE CARLOS FERRARI x UNIAO FEDERAL - FAZENDA NACIONAL",
+   "exequente": "JOSE CARLOS FERRARI",
+   "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
+   "assunto": "Apreensão",
+   "assunto_detalhado": "Aduaneiro — perdimento de veículo do proprietário de boa-fé (remessa)",
+   "grupo": "P2",
+   "tipo_caso": "Remessa necessária em mandado de segurança · caminhão trator apreendido em infração aduaneira · liberação ao proprietário de boa-fé e anulação do auto de infração e do perdimento (sentença integrada por embargos) · segurança concedida",
+   "resultado": "Ato a proferir: remessa necessária das sentenças IDs 289231050 e 289231057, sem recurso voluntário; prazo do impetrante decorrido em 06/11/2024; concluso desde 03/12/2024 ‖ Proposta pelos precedentes: Monocrática ou voto conforme a prova da boa-fé, na linha da Turma Regional em perdimento de veículo usado no transporte de mercadorias estrangeiras (ApCiv 5000919-57.2019.4.03.6000, 28/09/2026; ApCiv 5001454-68.2019.4.03.6005, 28/09/2026) [VALIDAR sentido] [VALIDAR: Apelação ou ciência da União; Prova da boa-fé do proprietário]",
+   "modelo": "Origem: lote adp-remessas (grupo RM2) · não pautado",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Remessa necessária da sentença que liberou o caminhão trator de José Carlos Ferrari e, integrada por embargos de declaração, anulou o auto de infração e o perdimento, pela boa-fé do proprietário. Não houve recurso voluntário da União [VALIDAR].",
+   "peculiaridades": "",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "",
+    "correcao": "",
+    "situacao": "A minutar"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {
+    "ato": "Julgamento da remessa necessária: possível decisão monocrática (artigo 932 do CPC) [VALIDAR prova da boa-fé]",
+    "materia": "Aduaneiro — pena de perdimento",
+    "origem": "Mandado de segurança 5007702-60.2022.4.03.6000 (Campo Grande)",
+    "decisao_agravada": "Sentença ID 289231057 (05/02/2024)",
+    "recurso": "Remessa necessária · sentença de 05/02/2024",
+    "preparo": "Não se aplica (remessa necessária)",
+    "monocratica": "Possível (artigo 932 do CPC), conforme a prova da boa-fé e a linha da Turma Regional em perdimento de veículo",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "NÃO SE APLICA · remessa necessária · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
+   "ajustes": [],
+   "pendencias": [],
+   "minuta": false,
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 306633125 · 09/10/2024 — …ecurso.Eventual não observância do procedimento pelo juízo de 1º grau deverá ser combatida por meio do recurso cabível.Intimem-se. Cumpra-se.São Paulo, data da assinatura eletrônica. GISELLE FRANÇADESEMBARGADORA FEDERAL | última peça: Manifestação (PFN) · ID 307067665 · 15/10/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Sem recurso voluntário [VALIDAR] · Sentença integrada por embargos (ID 289231057) · Lote L26 (perdimento e proprietário) · Concluso desde 03/12/2024",
+   "classe": "RemNecCiv",
+   "tarefa": "Analisar tipo de decisão a proferir",
+   "etiquetas": "2ª Seção; apenas remessa; Apreensão - Veículo; José V.",
+   "chegada": "04/11/2026",
+   "situacao_atual": {
+    "ultima_movimentacao": "20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Decisão · ID 306633125 · 09/10/2024 — …ecurso.Eventual não observância do procedimento pelo juízo de 1º grau deverá ser combatida por meio do recurso cabível.Intimem-se. Cumpra-se.São Paulo, data da assinatura eletrônica. GISELLE FRANÇADESEMBARGADORA FEDERAL",
+    "ultima_peca": "Manifestação (PFN) · ID 307067665 · 15/10/2024",
+    "ultima_informacao": "Ato ordinatório · ID 289231055 · 09/10/2023",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 306633125 · 09/10/2024 — …ecurso.Eventual não observância do procedimento pelo juízo de 1º grau deverá ser combatida por meio do recurso cabível.Intimem-se. Cumpra-se.São Paulo, data da assinatura eletrônica. GISELLE FRANÇADESEMBARGADORA FEDERAL | última peça: Manifestação (PFN) · ID 307067665 · 15/10/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária"
+   },
+   "teor": {
+    "sintese_fatica": "José Carlos Ferrari, proprietário de caminhão trator apreendido em transporte de mercadorias estrangeiras, obteve em mandado de segurança a liberação do veículo e a anulação do auto de infração e do perdimento, por boa-fé.",
+    "inicial": "Mandado de segurança contra autoridade da Receita Federal.",
+    "decisao_recorrida": "Sentença ID 289231057 (05/02/2024): a sentença ID 289231050 (22/09/2023) concedeu a segurança para liberar o caminhão Volvo FH 440 (placa DTB1G48); os embargos de declaração foram acolhidos (ID 289231057) para anular também o auto de infração e apreensão 0100100-181139/2023 e o perdimento.",
+    "recurso": "Sem recurso voluntário; remessa necessária.",
+    "resposta": "Não consta.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Advogado do impetrante [VALIDAR].",
+    "preparo": "Não se aplica."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Remessa Necessária",
+     "subassuntos": "Remessa necessária em mandado de segurança · caminhão trator apreendido em infração aduaneira · liberação ao proprietário de boa-fé e anulação do auto de infração e do perdimento (sentença integrada por embargos) · segurança concedida",
+     "sintese": "José Carlos Ferrari, proprietário de caminhão trator apreendido em transporte de mercadorias estrangeiras, obteve em mandado de segurança a liberação do veículo e a anulação do auto de infração e do perdimento, por boa-fé.",
+     "questoes": "1) Perdimento de veículo de proprietário de boa-fé usado em infração aduaneira (Súmula 138/TFR); 2) proporcionalidade.",
+     "rel": {
+      "razoes": "Sem recurso voluntário; remessa necessária.",
+      "contrarrazoes": "Não consta."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "289231057",
+      "juizo": "Mandado de segurança 5007702-60.2022.4.03.6000 (Campo Grande)",
+      "dispositivo": "a sentença ID 289231050 (22/09/2023) concedeu a segurança para liberar o caminhão Volvo FH 440 (placa DTB1G48); os embargos de declaração foram acolhidos (ID 289231057) para anular também o auto de infração e apreensão 0100100-181139/2023 e o perdimento."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2022-08-31",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "289231057",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: liberação do veículo",
+       "id": "289231050",
+       "data": "2023-09-22"
+      },
+      {
+       "desc": "Embargos de declaração",
+       "id": "289231052",
+       "data": "2023-10-05"
+      },
+      {
+       "desc": "Sentença em embargos: anulação do auto e do perdimento",
+       "id": "289231057",
+       "data": "2024-02-05"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 306633125 · 09/10/2024 — …ecurso.Eventual não observância do procedimento pelo juízo de 1º grau deverá ser combatida por meio do recurso cabível.Intimem-se. Cumpra-se.São Paulo, data da assinatura eletrônica. GISELLE FRANÇADESEMBARGADORA FEDERAL | última peça: Manifestação (PFN) · ID 307067665 · 15/10/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Sem recurso voluntário [VALIDAR] · Sentença integrada por embargos (ID 289231057) · Lote L26 (perdimento e proprietário) · Concluso desde 03/12/2024",
+     "assuntoDet": "Aduaneiro — perdimento de veículo do proprietário de boa-fé (remessa)",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não se aplica",
+     "preparo": "Não se aplica",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Mandado de segurança",
+     "parecer": "Não verificado"
+    }
+   }
+  },
+  {
+   "sessao": "",
+   "item": 5,
+   "processo": "5000844-93.2025.4.03.6004",
+   "recurso": "Remessa necessária",
+   "partes": "CAMSA INDUSTRIA Y COMÉRCIO S.A x UNIAO FEDERAL - FAZENDA NACIONAL",
+   "exequente": "CAMSA INDUSTRIA Y COMÉRCIO S.A",
+   "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
+   "assunto": "Inquérito / Processo / Recurso Administrativo",
+   "assunto_detalhado": "Aduaneiro — perdimento de mercadoria em exportação (proprietário estrangeiro de boa-fé)",
+   "grupo": "P2",
+   "tipo_caso": "Remessa necessária em mandado de segurança · pena de perdimento de 480 baterias automotivas de empresa boliviana em operação de exportação · depósito irregular em local não alfandegado atribuído à transportadora · proprietário de boa-fé · liminar deferida e cumprida · segurança concedida",
+   "resultado": "Ato a proferir: remessa necessária da sentença ID 395864365, sem recurso voluntário; embargos da impetrante objeto de desistência (ID 395864381); União apenas ciente (ID 395864534); MPF sem interesse (IDs 395864364 e 401762176) ‖ Proposta pelos precedentes: Voto: desprovimento da remessa, se confirmada a prova pré-constituída da propriedade e da boa-fé (contraste com ApelRemNec 5000629-93.2020.4.03.6004, 10/06/2026, em que faltou prova da propriedade) [VALIDAR paradigma; ver guia de perdimento do gabinete] [VALIDAR: Prova pré-constituída da propriedade e da boa-fé; Paradigma em perdimento de mercadoria em exportação]",
+   "modelo": "Origem: lote adp-remessas (grupo RM2) · não pautado",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Remessa necessária da sentença que afastou a pena de perdimento de 480 baterias automotivas da CAMSA Industria y Comercio S.A., compradas da Moura em exportação para a Bolívia, porque a infração (depósito em local não alfandegado) foi imputada só à transportadora, sem participação da proprietária. A liminar foi deferida em 01/12/2025 (ID 395864352) e cumprida. Não houve recurso voluntário.",
+   "peculiaridades": "",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "",
+    "correcao": "",
+    "situacao": "A minutar"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {
+    "ato": "Julgamento da remessa necessária (voto) [VALIDAR paradigma]",
+    "materia": "Aduaneiro — perdimento",
+    "origem": "Mandado de segurança 5000844-93.2025.4.03.6004 (1ª Vara Federal de Corumbá)",
+    "decisao_agravada": "Sentença ID 395864365 (23/02/2026)",
+    "recurso": "Remessa necessária · sentença de 23/02/2026",
+    "preparo": "Não se aplica (remessa necessária)",
+    "monocratica": "Improvável sem paradigma específico (perdimento em exportação)",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "NÃO SE APLICA · remessa necessária · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
+   "ajustes": [],
+   "pendencias": [],
+   "minuta": false,
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 395864381 · 09/07/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 395864365 · 23/02/2026 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 401762176 · 30/09/2026 | última movimentação: 01/10/2026 12:22 · Conclusos para julgamento · Sem recurso voluntário · Liminar cumprida (ID 395864363) · Desistência dos embargos da impetrante (ID 395864381) · União apenas ciente da sentença (ID 395864534) · MPF sem interesse (ID 401762176)",
+   "classe": "RemNecCiv",
+   "tarefa": "Analisar tipo de decisão a proferir · prioridade",
+   "etiquetas": "apenas remessa",
+   "chegada": "15/10/2026",
+   "situacao_atual": {
+    "ultima_movimentacao": "01/10/2026 12:22 · Conclusos para julgamento",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Decisão · ID 395864381 · 09/07/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso)",
+    "ultima_decisao_relevante": "Sentença · ID 395864365 · 23/02/2026 — sentença: concedeu a segurança; sujeita a reexame necessário",
+    "ultima_peca": "Parecer \"Falta de Interesse\" (MPF) · ID 401762176 · 30/09/2026",
+    "ultima_informacao": "Informação · ID 395864535 · 04/09/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 395864381 · 09/07/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 395864365 · 23/02/2026 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 401762176 · 30/09/2026 | última movimentação: 01/10/2026 12:22 · Conclusos para julgamento"
+   },
+   "teor": {
+    "sintese_fatica": "A CAMSA Industria y Comercio S.A., empresa boliviana, comprou 480 baterias da fabricante Moura em exportação direta; a transportadora contratada depositou a carga em local não alfandegado, e a Alfândega em Corumbá aplicou a pena de perdimento.",
+    "inicial": "Mandado de segurança contra o Delegado da Alfândega da Receita Federal do Brasil em Corumbá.",
+    "decisao_recorrida": "Sentença ID 395864365 (23/02/2026): confirmou a liminar e concedeu a segurança para afastar a pena de perdimento do Auto de Infração e Termo de Apreensão e Guarda Fiscal 0147600-242324/2025 sobre as 480 baterias da NF-e 000.462.358 e assegurar a continuidade do trânsito aduaneiro e do despacho de exportação; rejeitou a emenda à inicial.",
+    "recurso": "Sem recurso voluntário; remessa necessária.",
+    "resposta": "Não consta.",
+    "parecer": "MPF ID 401762176: Ausência de interesse que justifique a intervenção",
+    "memoriais": "Não consta",
+    "representacao": "Advogados Gleidiany da Conceição Rodrigues (OAB/MS 24.526) e Arivaldo Santos da Conceição (OAB/MS 12.125).",
+    "preparo": "Não se aplica."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Remessa Necessária",
+     "subassuntos": "Remessa necessária em mandado de segurança · pena de perdimento de 480 baterias automotivas de empresa boliviana em operação de exportação · depósito irregular em local não alfandegado atribuído à transportadora · proprietário de boa-fé · liminar deferida e cumprida · segurança concedida",
+     "sintese": "A CAMSA Industria y Comercio S.A., empresa boliviana, comprou 480 baterias da fabricante Moura em exportação direta; a transportadora contratada depositou a carga em local não alfandegado, e a Alfândega em Corumbá aplicou a pena de perdimento.",
+     "questoes": "1) Pena de perdimento de mercadoria em exportação por infração atribuída à transportadora; proprietário de boa-fé (Decreto-Lei 1.455/1976; IN RFB 1.152/2011, artigo 7º [VALIDAR]).",
+     "rel": {
+      "razoes": "Sem recurso voluntário; remessa necessária.",
+      "contrarrazoes": "Não consta."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "395864365",
+      "juizo": "Mandado de segurança 5000844-93.2025.4.03.6004 (1ª Vara Federal de Corumbá)",
+      "dispositivo": "confirmou a liminar e concedeu a segurança para afastar a pena de perdimento do Auto de Infração e Termo de Apreensão e Guarda Fiscal 0147600-242324/2025 sobre as 480 baterias da NF-e 000.462.358 e assegurar a continuidade do trânsito aduaneiro e do despacho de exportação; rejeitou a emenda à inicial."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2025-11-14",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "395864365",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Decisão: liminar deferida",
+       "id": "395864352",
+       "data": "2025-12-01"
+      },
+      {
+       "desc": "Sentença: segurança concedida",
+       "id": "395864365",
+       "data": "2026-02-23"
+      },
+      {
+       "desc": "Decisão: desistência dos embargos",
+       "id": "395864381",
+       "data": "2026-07-09"
+      },
+      {
+       "desc": "Parecer do MPF (sem interesse)",
+       "id": "401762176",
+       "data": "2026-09-30"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 395864381 · 09/07/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 395864365 · 23/02/2026 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 401762176 · 30/09/2026 | última movimentação: 01/10/2026 12:22 · Conclusos para julgamento · Sem recurso voluntário · Liminar cumprida (ID 395864363) · Desistência dos embargos da impetrante (ID 395864381) · União apenas ciente da sentença (ID 395864534) · MPF sem interesse (ID 401762176)",
+     "assuntoDet": "Aduaneiro — perdimento de mercadoria em exportação (proprietário estrangeiro de boa-fé)",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não se aplica",
+     "preparo": "Não se aplica",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Mandado de segurança",
+     "parecer": "Com parecer",
+     "idParecer": "401762176",
+     "parecerSentido": "Ausência de interesse que justifique a intervenção"
+    }
+   }
+  },
+  {
+   "sessao": "",
+   "item": 6,
+   "processo": "5000255-34.2026.4.03.0001",
+   "recurso": "Agravo de instrumento",
+   "partes": "DEISY JORDAN FUENTES x UNIAO FEDERAL - FAZENDA NACIONAL",
+   "exequente": "DEISY JORDAN FUENTES",
+   "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
+   "assunto": "Apreensão",
+   "assunto_detalhado": "Aduaneiro — perdimento de veículo estrangeiro; responsabilidade do proprietário",
+   "grupo": "P3",
+   "tipo_caso": "Aduaneiro · Pena de perdimento · veículo estrangeiro · responsabilidade do proprietário · intimação por edital",
+   "resultado": "Ato a proferir: julgamento do agravo (voto); tutela recursal negada em 09/07/2026; contraminuta da Fazenda Nacional ‖ Proposta pelos precedentes: Julgamento do agravo (voto ou monocrática pelo artigo 932 do CPC, como nos precedentes recentes). Pelos precedentes da Turma Regional: a retenção e o perdimento do veículo usado em infração aduaneira se mantêm em tutela, salvo ilegalidade manifesta; boa-fé do proprietário e uso por terceiro exigem prova; a desproporção entre veículo e mercadoria, sozinha, não afasta a retenção → negar provimento. Variante dos precedentes: se a desproporção for evidente de plano, suspender só a destinação do veículo até o mérito (parcial provimento). Intimação por edital no processo administrativo: sem precedente específico no banco. [VALIDAR: Mercadoria apreendida e valor (desproporção?); prova de boa-fé da proprietária]",
+   "modelo": "Origem: lote adp-ai (grupo L26) · não pautado",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Agravo de Deisy Jordan Fuentes contra a decisão de 16/06/2026 da 1ª Vara Federal de Corumbá (processo 5000244-38.2026.4.03.6004) que, na ação anulatória contra a União, deferiu a gratuidade, negou a tutela e mandou citar a União com esclarecimentos. Discute-se a pena de perdimento do veículo Toyota/Noah 2005, placa boliviana PQV-4923, apreendido em 28/06/2024 no Posto Esdras. A agravante alega nulidade da intimação por edital e boa-fé (locação do veículo); pede suspensão da destinação ou restituição como fiel depositária.",
+   "peculiaridades": "Gratuidade na origem (ID 588706529), reconhecida na decisão ID 385094680 apesar da certidão ID 385034552. A decisão de tutela afastou a nulidade da intimação por edital e viu ao menos culpa in eligendo da proprietária. Pedido de oitiva de testemunha (Felix Choque Garcia) dirigido à origem. Valor da causa R$ 15.000,00.",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "",
+    "correcao": "",
+    "situacao": "A minutar"
+   },
+   "pecas": [
+    {
+     "peca": "Agravo de instrumento",
+     "id": "384811549",
+     "data": "07/07/2026"
+    },
+    {
+     "peca": "Contraminuta",
+     "id": "388376061",
+     "data": "24/07/2026"
+    },
+    {
+     "peca": "Decisão no agravo",
+     "id": "385094680",
+     "data": "09/07/2026"
+    }
+   ],
+   "mpf": "",
+   "triagem": {
+    "ato": "Julgamento do agravo (voto)",
+    "materia": "Aduaneiro — perdimento de veículo estrangeiro; responsabilidade do proprietário",
+    "origem": "5000244-38.2026.4.03.6004 (1ª Vara Federal de Corumbá)",
+    "decisao_agravada": "Decisão de 16/06/2026 (cópia ID 384811551)",
+    "recurso": "ID 384811549 · 07/07/2026",
+    "preparo": "Dispensado (gratuidade da origem)",
+    "monocratica": "Possível [VALIDAR]",
+    "analisado_em": "20/11/2026",
+    "tipo_caso_anterior": "AI · Aduaneiro · perdimento de veículo boliviano (Toyota Noah) · tutela recursal indeferida",
+    "conf_preparo": "GRATUIDADE · gratuidade em: ID 385094680, 384811551 · certidão sem custas: ID 385034552 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
+    "conf_prevencao": "Origem: 5000244-38.2026.4.03.6004 · conferido em 20/11/2026"
+   },
+   "ajustes": [],
+   "pendencias": [],
+   "minuta": false,
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 385094680 · 09/07/2026 — mandou intimar a agravada para contraminuta | última peça: Contraminuta (PFN) · ID 388376061 · 24/07/2026 | última movimentação: 06/08/2026 14:44 · CONCLUSOS PARA JULGAMENTO · Gratuidade na origem (ID 588706529), reconhecida na decisão ID 385094680 apesar da certidão ID 385034552 · A decisão de tutela afastou a nulidade da intimação por edital e viu ao menos culpa in eligendo da proprietária · Pedido de oitiva de testemunha (Felix Choque Garcia) dirigido à origem · Valor da causa R$ 15.000,00",
+   "classe": "AI",
+   "tarefa": "Analisar tipo de decisão a proferir",
+   "etiquetas": "2ª Seção",
+   "chegada": "20/10/2026",
+   "bloco": "1",
+   "situacao_atual": {
+    "ultima_decisao": "Decisão · ID 385094680 · 09/07/2026 — mandou intimar a agravada para contraminuta",
+    "ultima_peca": "Contraminuta (PFN) · ID 388376061 · 24/07/2026",
+    "ultima_informacao": "Certidão · ID 385034552 · 08/07/2026",
+    "ultima_movimentacao": "06/08/2026 14:44 · CONCLUSOS PARA JULGAMENTO",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "mov_fonte": "linha do tempo do PJe (extração de 20-21/11/2026), sem avisos de tela",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 385094680 · 09/07/2026 — mandou intimar a agravada para contraminuta | última peça: Contraminuta (PFN) · ID 388376061 · 24/07/2026 | última movimentação: 06/08/2026 14:44 · CONCLUSOS PARA JULGAMENTO"
+   },
+   "teor": {
+    "sintese_fatica": "Veículo de placa boliviana de propriedade da agravante foi apreendido em Corumbá em 28/06/2024 e sofreu pena de perdimento. A agravante alega intimação nula por edital e que o veículo estava locado ao condutor autuado. A tutela foi negada na origem e no Tribunal.",
+    "inicial": "Ação anulatória 5000244-38.2026.4.03.6004 contra a União para suspender o perdimento e restituir o veículo",
+    "decisao_recorrida": "Decisão de 16/06/2026 da 1ª Vara Federal de Corumbá: recebeu a inicial, deferiu a gratuidade, indeferiu a tutela por demandar instrução e mandou citar a União com esclarecimentos",
+    "recurso": "Agravo ID 384811549 (07/07/2026): (1) nulidade da intimação por edital no processo administrativo; (2) boa-fé da proprietária e locação do veículo; (3) fragilidade da prova da responsabilidade; (4) desproporção da retenção, já periciadas as mercadorias (Termo de Retenção 0147600-157113/2024); (5) risco de leilão ou deterioração. Pede a suspensão do perdimento ou a restituição como fiel depositária.",
+    "resposta": "Fazenda Nacional ID 388376061 (24/07/2026): falta de probabilidade do direito; infrações reiteradas com o veículo; apreensão desde 2024 sem iminência de destinação; necessidade de instrução.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Agravante: advogada Cassandra Abbate (OAB/MS 12.554), procuração ID 384811553",
+    "preparo": "Dispensado: gratuidade deferida na origem (ID 588706529)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Aduaneiro · Pena de perdimento · veículo estrangeiro · responsabilidade do proprietário · intimação por edital",
+     "sintese": "Veículo de placa boliviana de propriedade da agravante foi apreendido em Corumbá em 28/06/2024 e sofreu pena de perdimento. A agravante alega intimação nula por edital e que o veículo estava locado ao condutor autuado. A tutela foi negada na origem e no Tribunal.",
+     "questoes": "1) Validade da intimação por edital no processo administrativo; 2) responsabilidade do proprietário (culpa in eligendo) e boa-fé; 3) urgência, com o veículo retido desde 2024.",
+     "rel": {
+      "razoes": "Agravo (ID 384811549): nulidade da intimação por edital; boa-fé e locação; fragilidade da prova; desproporção; risco de alienação.",
+      "contrarrazoes": "Fazenda Nacional (ID 388376061): falta de probabilidade do direito; infrações reiteradas; ausência de urgência; necessidade de instrução."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "data": "2026-06-16",
+      "juizo": "1ª Vara Federal de Corumbá/MS",
+      "dispositivo": "Deferiu a gratuidade, indeferiu a tutela e determinou a citação da União."
+     },
+     "ai": {
+      "hip": "Tutela provisória",
+      "efeito": "Indeferido"
+     },
+     "adm": {
+      "prot": "2026-07-07",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": true,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte autora",
+       "tipo": "Agravo de instrumento",
+       "id": "384811549",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "384811549",
+       "data": "2026-07-07"
+      },
+      {
+       "desc": "Cópia da decisão agravada",
+       "id": "384811551",
+       "data": "2026-07-07"
+      },
+      {
+       "desc": "Procuração",
+       "id": "384811553",
+       "data": "2026-07-07"
+      },
+      {
+       "desc": "Decisão que negou a tutela recursal",
+       "id": "385094680",
+       "data": "2026-07-09"
+      },
+      {
+       "desc": "Contraminuta da Fazenda Nacional",
+       "id": "388376061",
+       "data": "2026-07-24"
+      }
+     ],
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 385094680 · 09/07/2026 — mandou intimar a agravada para contraminuta | última peça: Contraminuta (PFN) · ID 388376061 · 24/07/2026 | última movimentação: 06/08/2026 14:44 · CONCLUSOS PARA JULGAMENTO · Gratuidade na origem (ID 588706529), reconhecida na decisão ID 385094680 apesar da certidão ID 385034552 · A decisão de tutela afastou a nulidade da intimação por edital e viu ao menos culpa in eligendo da proprietária · Pedido de oitiva de testemunha (Felix Choque Garcia) dirigido à origem · Valor da causa R$ 15.000,00",
+     "assuntoDet": "Aduaneiro — perdimento de veículo estrangeiro; responsabilidade do proprietário",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Justiça gratuita",
+     "prelim": "Sem preliminares",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-07-09",
+     "fundamento": "Paradigmas do gabinete: AI 5000593-08.2026.4.03.0001 (monocrática TRMS, 21/10/2026: retenção mantida, desprovido); ApCiv 5000919-57.2019.4.03.6000 (acórdão TRMS, 28/09/2026: perdimento válido; boa-fé e uso por terceiro; desprovido); AI 5024607-59.2026.4.03.0000 (monocrática TRMS, 13/10/2026: parcial provimento só para suspender a destinação do veículo)"
+    }
+   }
+  },
+  {
+   "sessao": "",
+   "item": 7,
+   "processo": "5030878-84.2026.4.03.0000",
+   "recurso": "Agravo de instrumento",
+   "partes": "UNIAO FEDERAL - FAZENDA NACIONAL x PAULO SERGIO PAULINO",
+   "exequente": "UNIAO FEDERAL - FAZENDA NACIONAL",
+   "executado": "PAULO SERGIO PAULINO",
+   "assunto": "Perdimento de Bens",
+   "assunto_detalhado": "Perdimento de veículos (caminhão e semirreboque) — restituição suspensa; agravo interno",
+   "grupo": "P3",
+   "tipo_caso": "Aduaneiro · pena de perdimento de caminhão e semirreboque · restituição determinada na origem · efeito suspensivo deferido ao agravo da União · agravo interno do proprietário",
+   "resultado": "Ato a proferir: julgamento do agravo de instrumento da União (voto), com o agravo interno do agravado (ID 405465582) contra o efeito suspensivo deferido pela decisão ID 402982074 (cadastrada como terminativa, mas só liminar); há contrarrazões (ID 405448176) ‖ Proposta pelos precedentes: Provimento do agravo da União, na linha da decisão ID 402982074 (responsabilidade do proprietário; Súmula 138 do TFR), com o agravo interno julgado prejudicado no mesmo acórdão; lote de perdimento da Turma Regional [VALIDAR: Intimação da União para responder ao agravo interno; Retificação do cadastro da decisão ID 402982074]",
+   "modelo": "Origem: lote adp-ai (grupo L26) · não pautado",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Agravo da União contra a decisão que determinou a restituição de caminhão e semirreboque apreendidos para perdimento. O Relator deferiu efeito suspensivo, pela responsabilidade do proprietário que disponibiliza o veículo à atividade ilícita (Súmula 138 do TFR), e suspendeu a restituição (ID 402982074, 07/10/2026). Paulo Sergio Paulino apresentou contrarrazões (ID 405448176) e agravo interno (ID 405465582), pedindo o restabelecimento da restituição.",
+   "peculiaridades": "A decisão liminar ID 402982074 foi cadastrada como \"Decisão Monocrática Terminativa Com Resolução de Mérito\", o que o próprio agravo interno aponta. Etiqueta \"Perdimento\".",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "",
+    "correcao": "",
+    "situacao": "A minutar"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {
+    "ato": "Julgamento do agravo de instrumento e do agravo interno (voto)",
+    "materia": "Aduaneiro — perdimento de veículos e responsabilidade do proprietário",
+    "origem": "Ação 5002634-84.2026.4.03.6002 (2ª Vara Federal de Dourados)",
+    "decisao_agravada": "ID 602348640 (autos de origem): restituição, em 15 dias, do caminhão VOLVO/NH12380 (placa KAI-6H67) e do semirreboque (placa AKQ-0B96)",
+    "recurso": "ID 401314215 · 29/09/2026",
+    "preparo": "Isenta (União)",
+    "monocratica": "Não indicada; pauta",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "ISENTO (União) · conferido em 21/11/2026",
+    "conf_prevencao": "Origem: 5002634-84.2026.4.03.6002 · redistribuído pela decisão ID 401583518 (Resolução 33/2025) · conferido em 21/11/2026"
+   },
+   "ajustes": [],
+   "pendencias": [
+    "[VALIDAR] Intimação da União sobre o agravo interno (artigo 1.021, § 2º, do CPC)",
+    "[VALIDAR] Retificar o tipo do documento ID 402982074 no PJe"
+   ],
+   "minuta": false,
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 402982074 · 07/10/2026 — deferiu o efeito suspensivo ou a tutela recursal; mandou intimar a agravada para contraminuta | última peça: Agravo Interno (agravado) · ID 405465582 · 19/10/2026 | última movimentação: [VALIDAR no PJe] · Efeito suspensivo deferido (ID 402982074, 07/10/2026) · Agravo interno do agravado (ID 405465582) · Cadastro da decisão liminar como terminativa (retificar) [VALIDAR] · Lote de perdimento (aduaneiro)",
+   "classe": "AI",
+   "tarefa": "Analisar tipo de decisão a proferir",
+   "etiquetas": "2ª Seção; AI - Tutela provisória; Apreensão - Veículo; Perdimento; Wellington",
+   "chegada": "20/10/2026",
+   "situacao_atual": {
+    "ultima_decisao": "Decisão Monocrática Terminativa Com Resolução de Mérito · ID 402982074 · 07/10/2026 — deferiu o efeito suspensivo ou a tutela recursal; mandou intimar a agravada para contraminuta",
+    "ultima_peca": "Agravo Interno (agravado) · ID 405465582 · 19/10/2026",
+    "ultima_informacao": "Certidão · ID 401664983 · 30/09/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação a conferir no PJe",
+    "ultima_movimentacao": "[VALIDAR no PJe]",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 402982074 · 07/10/2026 — deferiu o efeito suspensivo ou a tutela recursal; mandou intimar a agravada para contraminuta | última peça: Agravo Interno (agravado) · ID 405465582 · 19/10/2026 | última movimentação: [VALIDAR no PJe]"
+   },
+   "teor": {
+    "sintese_fatica": "A Receita Federal apreendeu para perdimento caminhão e semirreboque de Paulo Sergio Paulino; o juízo determinou a restituição dos veículos em 15 dias.",
+    "inicial": "Ação 5002634-84.2026.4.03.6002.",
+    "decisao_recorrida": "Decisão ID 602348640 (autos de origem): restituição dos veículos.",
+    "recurso": "Agravo de instrumento da União ID 401314215 (29/09/2026): legalidade da apreensão e do perdimento (Decretos-Leis 37/1966 e 1.455/1976); responsabilidade do proprietário; efeito suspensivo.",
+    "resposta": "Contrarrazões ID 405448176 (19/10/2026) e agravo interno ID 405465582 (19/10/2026) do agravado: revogação do efeito suspensivo e restabelecimento da restituição.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "União: Procuradoria da Fazenda Nacional. Agravado: advogados Alisson Danilo Lopes Rodrigues (OAB/MS 27.395) e outros.",
+    "preparo": "Isenta (União)."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Aduaneiro · pena de perdimento de caminhão e semirreboque · restituição determinada na origem · efeito suspensivo deferido ao agravo da União · agravo interno do proprietário",
+     "sintese": "A Receita Federal apreendeu para perdimento caminhão e semirreboque de Paulo Sergio Paulino; o juízo determinou a restituição dos veículos em 15 dias.",
+     "questoes": "1) Responsabilidade do proprietário pelo uso do veículo na infração aduaneira (Súmula 138 do TFR); 2) restituição dos veículos; 3) agravo interno contra o efeito suspensivo.",
+     "rel": {
+      "razoes": "Agravo de instrumento da União ID 401314215 (29/09/2026): legalidade da apreensão e do perdimento (Decretos-Leis 37/1966 e 1.455/1976); responsabilidade do proprietário; efeito suspensivo.",
+      "contrarrazoes": "Contrarrazões ID 405448176 (19/10/2026) e agravo interno ID 405465582 (19/10/2026) do agravado: revogação do efeito suspensivo e restabelecimento da restituição."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "602348640",
+      "juizo": "2ª Vara Federal de Dourados",
+      "dispositivo": "Determinou a restituição dos veículos em 15 dias."
+     },
+     "ai": {
+      "hip": "Tutela provisória",
+      "efeito": "Deferido",
+      "id": "402982074"
+     },
+     "adm": {
+      "prot": "2026-09-29",
+      "prazo": "30",
+      "dobro": true,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte ré",
+       "tipo": "Agravo de instrumento",
+       "id": "401314215",
+       "contra": "Apresentada"
+      },
+      {
+       "parte": "Parte autora",
+       "tipo": "Agravo interno",
+       "id": "405465582",
+       "contra": "Não verificado"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "401314215",
+       "data": "2026-09-29"
+      },
+      {
+       "desc": "Decisão: redistribuição à Turma Regional",
+       "id": "401583518",
+       "data": "2026-09-30"
+      },
+      {
+       "desc": "Decisão: efeito suspensivo deferido",
+       "id": "402982074",
+       "data": "2026-10-07"
+      },
+      {
+       "desc": "Contrarrazões",
+       "id": "405448176",
+       "data": "2026-10-19"
+      },
+      {
+       "desc": "Agravo interno do agravado",
+       "id": "405465582",
+       "data": "2026-10-19"
+      }
+     ],
+     "pendencias": "Intimar a União sobre o agravo interno; retificar o cadastro da decisão",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 402982074 · 07/10/2026 — deferiu o efeito suspensivo ou a tutela recursal; mandou intimar a agravada para contraminuta | última peça: Agravo Interno (agravado) · ID 405465582 · 19/10/2026 | última movimentação: [VALIDAR no PJe] · Efeito suspensivo deferido (ID 402982074, 07/10/2026) · Agravo interno do agravado (ID 405465582) · Cadastro da decisão liminar como terminativa (retificar) [VALIDAR] · Lote de perdimento (aduaneiro)",
+     "assuntoDet": "Perdimento de veículos (caminhão e semirreboque) — restituição suspensa; agravo interno",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Dispensada (procurador público)",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Apreciada · deferida",
+     "urgData": "2026-10-07",
+     "intercor": "Agravo interno do agravado (ID 405465582)"
+    }
+   }
+  },
+  {
+   "sessao": "",
+   "item": 8,
+   "processo": "5000334-13.2026.4.03.0001",
+   "recurso": "Agravo de instrumento",
+   "partes": "VILMA MARTINS FERREIRA x UNIÃO FEDERAL",
+   "exequente": "VILMA MARTINS FERREIRA",
+   "executado": "UNIÃO FEDERAL",
+   "assunto": "Apreensão",
+   "assunto_detalhado": "Aduaneiro — multa a proprietário registral; responsabilidade e artigo 134 do CTB",
+   "grupo": "P3",
+   "tipo_caso": "Aduaneiro · Multa aduaneira · proprietário registral · alienação não comunicada · cigarros",
+   "resultado": "Ato a proferir: despacho — retificar a representação da União para a Procuradoria da Fazenda Nacional (pedido da AGU, ID 391981615) e intimá-la para contraminuta; depois, julgamento do agravo ‖ Proposta pelos precedentes: Agora: despacho para retificar a representação da União (Procuradoria da Fazenda Nacional, pedido da AGU no ID 391981615) e intimá-la para contraminuta. Mérito, depois (voto): pelos precedentes, embora descumprido o dever do artigo 134 do CTB, o antigo proprietário não responde pela multa se provar que a alienação ocorreu antes da autuação; a prova da venda anterior decide. Sem precedente no banco específico para multa aduaneira por transporte de cigarros com proprietário registral. [VALIDAR: Data real da venda (maio de 2024 no agravo × maio de 2025 na inicial) e prova documental (ATPV, firma reconhecida)]",
+   "modelo": "Origem: lote adp-ai (grupo L26) · não pautado",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Agravo de Vilma Martins Ferreira contra a decisão da 2ª Vara Federal de Campo Grande (processo 5003181-33.2026.4.03.6000) que indeferiu a tutela para suspender a exigibilidade da multa de R$ 399.258,00 do Auto de Infração 0100100-244543-2024, lavrado após a apreensão, em 25/07/2024 em Mundo Novo/MS, do caminhão Mercedes Benz 1313 (placa ADS1E54) com 199.629 maços de cigarros estrangeiros. A agravante diz ter vendido o veículo antes dos fatos, sem transferir o registro no Detran, e que o artigo 134 do CTB não se aplica a infração aduaneira. O juízo aplicou a responsabilidade do alienante que não comunica a venda.",
+   "peculiaridades": "Petição endereçada a Câmara Cível do TJMS. A AGU informou (ID 391981615, 14/08/2026) que a representação cabe à PFN e pediu a retificação do cadastro; não há contraminuta. Divergência na data da venda: maio de 2024 no agravo e maio de 2025 na inicial [VALIDAR]. O nome aparece como \"Vilma Martins Pereira\" na petição da AGU. Gratuidade na origem (ID 596662143).",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "",
+    "correcao": "",
+    "situacao": "A minutar"
+   },
+   "pecas": [
+    {
+     "peca": "Agravo de instrumento",
+     "id": "389458035",
+     "data": "29/07/2026"
+    },
+    {
+     "peca": "Decisão no agravo",
+     "id": "390289021",
+     "data": "06/08/2026"
+    }
+   ],
+   "mpf": "",
+   "triagem": {
+    "ato": "Despacho de regularização da representação e nova intimação para contraminuta",
+    "materia": "Aduaneiro — multa a proprietário registral; responsabilidade e artigo 134 do CTB",
+    "origem": "5003181-33.2026.4.03.6000 (2ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Não identificada por ID [VALIDAR]",
+    "recurso": "ID 389458035 · 29/07/2026",
+    "preparo": "Dispensado (gratuidade da origem)",
+    "monocratica": "Não, por ora",
+    "analisado_em": "20/11/2026",
+    "tipo_caso_anterior": "AI · Aduaneiro · multa de R$ 399.258,00 a proprietária registral de caminhão com cigarros estrangeiros · tutela recursal indeferida",
+    "conf_preparo": "GRATUIDADE · gratuidade em: ID 390289021 · certidão sem custas: ID 390228505 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
+    "conf_prevencao": "Origem não identificada na extração · conferido em 20/11/2026"
+   },
+   "ajustes": [],
+   "pendencias": [],
+   "minuta": false,
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 390289021 · 06/08/2026 — não concedeu a tutela recursal antes do contraditório | última peça: Petição intercorrente (PFN) · ID 391981615 · 14/08/2026 | última movimentação: 08/10/2026 16:11 · CONCLUSOS PARA JULGAMENTO · Petição endereçada a Câmara Cível do TJMS · A AGU informou (ID 391981615, 14/08/2026) que a representação cabe à PFN e pediu a retificação do cadastro; não há contraminuta · Divergência na data da venda: maio de 2024 no agravo e maio de 2025 na inicial [VALIDAR] · O nome aparece como \"Vilma Martins Pereira\" na petição da AGU · Gratuidade na origem (ID 596662143)",
+   "classe": "AI",
+   "tarefa": "Analisar tipo de decisão a proferir",
+   "etiquetas": "2ª Seção; AI - Tutela provisória; LOTE MULTA - AI",
+   "chegada": "20/10/2026",
+   "bloco": "1",
+   "situacao_atual": {
+    "ultima_decisao": "Decisão · ID 390289021 · 06/08/2026 — não concedeu a tutela recursal antes do contraditório",
+    "ultima_peca": "Petição intercorrente (PFN) · ID 391981615 · 14/08/2026",
+    "ultima_informacao": "Certidão · ID 390228505 · 03/08/2026",
+    "ultima_movimentacao": "08/10/2026 16:11 · CONCLUSOS PARA JULGAMENTO",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "mov_fonte": "linha do tempo do PJe (extração de 20-21/11/2026), sem avisos de tela",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 390289021 · 06/08/2026 — não concedeu a tutela recursal antes do contraditório | última peça: Petição intercorrente (PFN) · ID 391981615 · 14/08/2026 | última movimentação: 08/10/2026 16:11 · CONCLUSOS PARA JULGAMENTO"
+   },
+   "teor": {
+    "sintese_fatica": "Caminhão registrado em nome da agravante foi encontrado abandonado em Mundo Novo/MS, em 25/07/2024, com cigarros estrangeiros, e a Receita lhe aplicou multa de R$ 399.258,00. Ela alega que vendera o veículo antes, sem transferir o registro. A tutela foi negada na origem e no Tribunal.",
+    "inicial": "Ação anulatória de auto de infração c/c declaratória de inexistência de débito 5003181-33.2026.4.03.6000, com pedido de suspensão da exigibilidade da multa",
+    "decisao_recorrida": "Decisão da 2ª Vara Federal de Campo Grande que deferiu a gratuidade e indeferiu a tutela: o proprietário que não comunica a venda ao Detran responde pelas multas (artigo 134 do CTB)",
+    "recurso": "Agravo ID 389458035 (29/07/2026): (1) venda e tradição do veículo antes da infração; (2) o artigo 134 do CTB só alcança infrações de trânsito; (3) responsabilidade aduaneira exige prova da participação (artigo 112 do CTN); (4) precedentes do TRF3 e da Turma Recursal de MS; (5) risco de constrição pelo valor da multa. Pede a suspensão da exigibilidade.",
+    "resposta": "Não há contraminuta; a AGU (ID 391981615) declinou da representação em favor da PFN",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Agravante: procuração ID 389458042; advogado não identificado na leitura [VALIDAR]. União: representação a retificar para a PFN",
+    "preparo": "Dispensado: gratuidade deferida na origem (ID 596662143)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Aduaneiro · Multa aduaneira · proprietário registral · alienação não comunicada · cigarros",
+     "sintese": "Caminhão registrado em nome da agravante foi encontrado abandonado em Mundo Novo/MS, em 25/07/2024, com cigarros estrangeiros, e a Receita lhe aplicou multa de R$ 399.258,00. Ela alega que vendera o veículo antes, sem transferir o registro. A tutela foi negada na origem e no Tribunal.",
+     "questoes": "1) Regularização da representação da União (PFN); 2) responsabilidade do proprietário registral por infração aduaneira e alcance do artigo 134 do CTB; 3) prova da alienação anterior.",
+     "rel": {
+      "razoes": "Agravo (ID 389458035): alienação anterior; inaplicabilidade do artigo 134 do CTB a infração aduaneira; necessidade de prova da participação; precedentes.",
+      "contrarrazoes": ""
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "juizo": "2ª Vara Federal de Campo Grande/MS",
+      "dispositivo": "Deferiu a gratuidade e indeferiu a tutela de urgência."
+     },
+     "ai": {
+      "hip": "Tutela provisória",
+      "efeito": "Indeferido"
+     },
+     "adm": {
+      "prot": "2026-07-29",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": true,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte autora",
+       "tipo": "Agravo de instrumento",
+       "id": "389458035",
+       "contra": "Não apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "389458035",
+       "data": "2026-07-29"
+      },
+      {
+       "desc": "Procuração",
+       "id": "389458042",
+       "data": "2026-07-29"
+      },
+      {
+       "desc": "Decisão que negou a tutela recursal",
+       "id": "390289021",
+       "data": "2026-08-06"
+      },
+      {
+       "desc": "Petição da AGU sobre a representação (PFN)",
+       "id": "391981615",
+       "data": "2026-08-14"
+      }
+     ],
+     "pendencias": [
+      "Retificar a autuação para a PFN e reabrir o prazo de contraminuta",
+      "Data da venda divergente entre inicial e agravo [VALIDAR]"
+     ],
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 390289021 · 06/08/2026 — não concedeu a tutela recursal antes do contraditório | última peça: Petição intercorrente (PFN) · ID 391981615 · 14/08/2026 | última movimentação: 08/10/2026 16:11 · CONCLUSOS PARA JULGAMENTO · Petição endereçada a Câmara Cível do TJMS · A AGU informou (ID 391981615, 14/08/2026) que a representação cabe à PFN e pediu a retificação do cadastro; não há contraminuta · Divergência na data da venda: maio de 2024 no agravo e maio de 2025 na inicial [VALIDAR] · O nome aparece como \"Vilma Martins Pereira\" na petição da AGU · Gratuidade na origem (ID 596662143)",
+     "assuntoDet": "Aduaneiro — multa a proprietário registral; responsabilidade e artigo 134 do CTB",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Justiça gratuita",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "intercor": "Representação da União a regularizar (PFN)",
+     "urgTipo": "Antecipação da tutela recursal",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-08-06",
+     "fundamento": "Paradigmas do gabinete: ApCiv 5000030-13.2019.4.03.6127 (acórdão 3ª Turma, 27/07/2021: alienação provada antes da autuação afasta a multa do antigo proprietário); ApCiv 5016742-10.2019.4.03.6182 (acórdão 3ª Turma, 07/02/2022: idem, execução fiscal)"
+    }
+   }
+  }
+ ]
+}
