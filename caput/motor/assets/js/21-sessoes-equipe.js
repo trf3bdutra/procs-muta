@@ -2117,6 +2117,10 @@ html[data-theme=dark] .pc-s.inc{background:#2a1c1f;border-color:#6b3a36}html[dat
         /* trocar: a mesa de designação pode substituir quem já estava designado (vazio continua sem efeito) */
         if (o.d && (!it.servidor || (o.trocar && it.servidor !== o.d))) { it.servidor = o.d; it.porD = o.porD || 'esteira'; m = 1; } if (o.c && (!it.corretor || (o.trocar && it.corretor !== o.c))) { it.corretor = o.c; it.porC = o.porC || 'esteira'; m = 1; } n += m; });
       if (n) { HIST = null; salvar(); if (root && !root.hidden) render(); } return n; },
+    /* regras obrigatórias da designação (apoio/regras/designacao.json, criterios.obrig): valem antes da proposta, na ordem.
+       q: 'julg' (ED, AgInt, JR, META, AI), 'sec' (seção), 'lote' (id do lote) ou 'as' (assunto); d: minutante; c: corretor */
+    obrigatorias: function () { return S.desig && Array.isArray(S.desig.obrig) ? JSON.parse(JSON.stringify(S.desig.obrig)) : null; },
+    definirObrigatorias: function (L) { if (!S.desig) return false; S.desig.obrig = (L || []).filter(function (r) { return r && r.q && r.v && (r.d || r.c); }).map(function (r) { return { q: r.q, v: r.v, d: r.d || '', c: r.c || '' }; }); HIST = null; salvar(); return true; },
     /* limpa minutante e corretor da pauta (para refazer a designação); processo já minutado ou corrigido fica; devolve o que tirou, para desfazer */
     limparDesignacao: function (id) { var ss = S.sessoes.find(function (x) { return x.id === id; }); if (!ss) return []; var bk = [];
       ss.itens.forEach(function (it) { if (it.dataMinuta || it.dataCorrecao || (!it.servidor && !it.corretor)) return; bk.push({ cnj: it.cnj, d: it.servidor || '', c: it.corretor || '', porD: it.porD || '', porC: it.porC || '' }); it.servidor = ''; it.corretor = ''; it.porD = ''; it.porC = ''; });
