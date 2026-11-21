@@ -9428,12 +9428,14 @@
    "exequente": "FUNDO NACIONAL DE DESENVOLVIMENTO DA EDUCAÇÃO",
    "executado": "COORDENADOR GERAL DE CONCESSAO E CONTROLE DE FINANCIAMENTO ESTUDANTIL (CGFIN)",
    "assunto": "FIES",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "RM4",
+   "tipo_caso": "Apelação do FNDE e remessa necessária em mandado de segurança · FIES · suspensão das parcelas durante a residência médica (01/03/2024 a 28/02/2026) · liminar deferida · segurança concedida · processo pautado em 26/10/2026 e retirado · etiqueta de sobrestamento pelo Tema 1.417/STJ",
+   "resultado": "Ato a proferir: apelação do FNDE (ID 376994685) e remessa necessária da sentença ID 376994683; contrarrazões (ID 376994692); MPF pelo prosseguimento (ID 380866688) ‖ Proposta pelos precedentes: Sobrestar até o julgamento do Tema 1.417/STJ [VALIDAR alcance da afetação]; anotar que o período de residência já terminou [VALIDAR: Decisão de sobrestamento já proferida?; Alcance do Tema 1.417/STJ; Efeitos exauridos com o fim da residência]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação do FNDE e remessa necessária da sentença que suspendeu as prestações do FIES de Fernanda Moura Rojas durante a residência médica (01/03/2024 a 28/02/2026). O processo foi pautado e retirado em 26/10/2026 e tem etiqueta de sobrestamento pelo Tema 1.417/STJ.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -9444,7 +9446,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Sobrestamento pelo Tema 1.417/STJ (retirado de pauta em 26/10/2026)",
+    "materia": "Administrativo — FIES",
+    "origem": "Mandado de segurança 5009334-53.2024.4.03.6000 (1ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 376994683 (23/04/2026)",
+    "recurso": "apelação de FNDE (ID 376994685, 10/05/2026) · remessa necessária",
+    "preparo": "FNDE: Isento (ente público)",
+    "monocratica": "Não: sobrestamento",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "FNDE: Isento (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -9454,6 +9467,117 @@
    "chegada": "09/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "FIES — carência durante a residência médica (Tema 1.417/STJ)",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 376994683 · 23/04/2026 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Procuração/substabelecimento com reserva de poderes (advogado de parte) · ID 401370920 · 29/09/2026 | última movimentação: 28/10/2026 00:48 · Decorrido prazo de FUNDO NACIONAL DE DESENVOLVIMENTO DA EDUCACAO em 27/10/2026 23:59. · Retirado de pauta em 26/10/2026 · Etiquetas \"Sobrestar\" e \"Tema 1417 STJ\" · Residência encerrada em 28/02/2026 (efeitos já exauridos?) [VALIDAR] · Ilegitimidade do FNDE alegada (contrato do FIES antigo, CEF)",
+   "teor": {
+    "sintese_fatica": "Fernanda Moura Rojas, médica com contrato do FIES, obteve liminar (04/07/2025) para suspender as prestações durante a residência médica. A sentença confirmou; o FNDE apelou e, em petição de 08/06/2026, reiterou a ilegitimidade e informou ter comunicado o julgado à CEF.",
+    "inicial": "Mandado de segurança contra o Coordenador-Geral de Concessão e Controle do Financiamento Estudantil (FNDE) e a CEF.",
+    "decisao_recorrida": "Sentença ID 376994683 (23/04/2026): confirmou a liminar e concedeu a segurança para suspender a cobrança das parcelas de amortização do contrato FIES durante toda a residência médica (01/03/2024 a 28/02/2026).",
+    "recurso": "FNDE (ID 376994685, 10/05/2026): extinção sem resolução do mérito por ilegitimidade passiva do FNDE; no mérito, ausência do direito à carência [VALIDAR].",
+    "resposta": "Contrarrazões da impetrante (ID 376994692).",
+    "parecer": "MPF ID 380866688: Prosseguimento do feito, sem intervenção",
+    "memoriais": "Não consta",
+    "representacao": "Advogado Diego Leal Nascimento (OAB/ES 29.292).",
+    "preparo": "FNDE: Isento (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação do FNDE e remessa necessária em mandado de segurança · FIES · suspensão das parcelas durante a residência médica (01/03/2024 a 28/02/2026) · liminar deferida · segurança concedida · processo pautado em 26/10/2026 e retirado · etiqueta de sobrestamento pelo Tema 1.417/STJ",
+     "sintese": "Fernanda Moura Rojas, médica com contrato do FIES, obteve liminar (04/07/2025) para suspender as prestações durante a residência médica. A sentença confirmou; o FNDE apelou e, em petição de 08/06/2026, reiterou a ilegitimidade e informou ter comunicado o julgado à CEF.",
+     "questoes": "1) Carência do FIES durante a residência médica (artigo 6º-B, § 3º, da Lei 10.260/2001) — Tema 1.417/STJ; 2) legitimidade do FNDE.",
+     "rel": {
+      "razoes": "FNDE (ID 376994685, 10/05/2026): extinção sem resolução do mérito por ilegitimidade passiva do FNDE; no mérito, ausência do direito à carência [VALIDAR].",
+      "contrarrazoes": "Contrarrazões da impetrante (ID 376994692)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "376994683",
+      "juizo": "Mandado de segurança 5009334-53.2024.4.03.6000 (1ª Vara Federal de Campo Grande)",
+      "dispositivo": "confirmou a liminar e concedeu a segurança para suspender a cobrança das parcelas de amortização do contrato FIES durante toda a residência médica (01/03/2024 a 28/02/2026)."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2024-08-28",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "FNDE",
+       "tipo": "Apelação",
+       "id": "376994685",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "376994683",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Decisão: liminar deferida",
+       "id": "376994669",
+       "data": "2025-07-04"
+      },
+      {
+       "desc": "Sentença: segurança concedida",
+       "id": "376994683",
+       "data": "2026-04-23"
+      },
+      {
+       "desc": "Apelação do FNDE",
+       "id": "376994685",
+       "data": "2026-05-10"
+      },
+      {
+       "desc": "Contrarrazões da impetrante",
+       "id": "376994692",
+       "data": "2026-05-28"
+      },
+      {
+       "desc": "Petição do FNDE na Turma Regional",
+       "id": "379009310",
+       "data": "2026-06-08"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 376994683 · 23/04/2026 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Procuração/substabelecimento com reserva de poderes (advogado de parte) · ID 401370920 · 29/09/2026 | última movimentação: 28/10/2026 00:48 · Decorrido prazo de FUNDO NACIONAL DE DESENVOLVIMENTO DA EDUCACAO em 27/10/2026 23:59. · Retirado de pauta em 26/10/2026 · Etiquetas \"Sobrestar\" e \"Tema 1417 STJ\" · Residência encerrada em 28/02/2026 (efeitos já exauridos?) [VALIDAR] · Ilegitimidade do FNDE alegada (contrato do FIES antigo, CEF)",
+     "assuntoDet": "FIES — carência durante a residência médica (Tema 1.417/STJ)",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Há preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Mandado de segurança",
+     "parecer": "Com parecer",
+     "idParecer": "380866688",
+     "parecerSentido": "Prosseguimento do feito, sem intervenção"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "28/10/2026 00:48 · Decorrido prazo de FUNDO NACIONAL DE DESENVOLVIMENTO DA EDUCACAO em 27/10/2026 23:59.",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Sentença · ID 376994683 · 23/04/2026 — sentença: concedeu a segurança; sujeita a reexame necessário",
+    "ultima_peca": "Procuração/substabelecimento com reserva de poderes (advogado de parte) · ID 401370920 · 29/09/2026",
+    "ultima_informacao": "Intimação de Pauta · ID 404621972 · 15/10/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 376994683 · 23/04/2026 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Procuração/substabelecimento com reserva de poderes (advogado de parte) · ID 401370920 · 29/09/2026 | última movimentação: 28/10/2026 00:48 · Decorrido prazo de FUNDO NACIONAL DE DESENVOLVIMENTO DA EDUCACAO em 27/10/2026 23:59."
    }
   },
   {
@@ -9465,12 +9589,14 @@
    "exequente": "ENERGISA MATO GROSSO DO SUL - DISTRIBUIDORA DE ENERGIA S.A.",
    "executado": "CENTRO DE CAPACITACAO PROFISSIONAL LTDA",
    "assunto": "Fornecimento de Energia Elétrica",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "RM2",
+   "tipo_caso": "Apelações da ANEEL e da Energisa e remessa necessária em mandado de segurança · sistema de compensação de energia elétrica (geração distribuída) · manutenção de unidades consumidoras e geradoras no grupo B, afastados os artigos 292, § 3º, e 671-A da REN ANEEL 1.000/2021 (inseridos pela REN 1.059/2023) · segurança concedida",
+   "resultado": "Ato a proferir: apelações da ANEEL (ID 366682985) e da Energisa (ID 366682999) e remessa necessária da sentença ID 366682980, integrada pela rejeição dos embargos (ID 366682993); contrarrazões (IDs 366682988 e 366683009); MPF pelo prosseguimento (ID 369821303) ‖ Proposta pelos precedentes: Voto: examinar a legitimidade passiva e, no mérito, se a REN ANEEL 1.059/2023 pode alcançar unidades já participantes do SCEE (Lei 14.300/2022; direito adquirido) [VALIDAR paradigma] [VALIDAR: Preparo da apelação da Energisa; Paradigma sobre a REN ANEEL 1.059/2023]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelações da ANEEL e da Energisa e remessa necessária da sentença que manteve as sete unidades do Centro de Capacitação Profissional, participantes da compensação de energia, no grupo B, afastando os artigos 292, § 3º, e 671-A da REN ANEEL 1.000/2021, incluídos pela REN 1.059/2023.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -9481,7 +9607,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento das apelações e da remessa necessária (voto)",
+    "materia": "Administrativo — energia elétrica",
+    "origem": "Mandado de segurança 5007604-41.2023.4.03.6000 (2ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 366682980 (09/04/2025)",
+    "recurso": "apelação de ANEEL (ID 366682985, 25/04/2025) e apelação de Energisa MS (ID 366682999, 25/09/2025) · remessa necessária",
+    "preparo": "ANEEL: Isenta (ente público); Energisa MS: [VALIDAR preparo]",
+    "monocratica": "Improvável sem paradigma",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "ANEEL: Isenta (ente público); Energisa MS: [VALIDAR preparo] · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -9491,6 +9628,123 @@
    "chegada": "04/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Energia elétrica — geração distribuída: aplicação da REN ANEEL 1.059/2023 a unidades já conectadas",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 366682993 · 17/08/2025 — sentença (dispositivo a conferir) | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 369821303 · 29/04/2026 | última movimentação: 29/04/2026 14:07 · Conclusos para julgamento · Concessionária como autoridade coatora em mandado de segurança (ato de delegação) [VALIDAR] · Lei 14.300/2022 (regras de transição da geração distribuída) [VALIDAR] · Regularização da representação da Energisa (ID 366682977)",
+   "teor": {
+    "sintese_fatica": "O Centro de Capacitação Profissional Ltda., titular de sete unidades consumidoras, três com minigeração solar integrada ao sistema de compensação, impugnou exigências da Energisa com base na REN ANEEL 1.059/2023 que alterariam o enquadramento tarifário.",
+    "inicial": "Mandado de segurança contra o Coordenador de Grandes Clientes e Poder Público da Energisa MS e o Diretor-Geral da ANEEL.",
+    "decisao_recorrida": "Sentença ID 366682980 (09/04/2025): confirmou a liminar e concedeu a segurança para manter as unidades consumidoras e geradoras do impetrante participantes do SCEE (336110, 1753755, 2120300, 2118202, 2118669, 3321858 e 2118220) no grupo B, na forma contratada, sem as inovações dos artigos 292, § 3º, e 671-A da REN ANEEL 1.000/2021; embargos da Energisa rejeitados, com reabertura do prazo (ID 366682993).",
+    "recurso": "ANEEL (ID 366682985, 25/04/2025): legalidade da REN ANEEL 1.059/2023 e inexistência de direito adquirido a regime tarifário [VALIDAR]. Energisa MS (ID 366682999, 25/09/2025): ilegitimidade ou ausência de ato coator; legalidade da reclassificação; inexistência de direito adquirido [VALIDAR].",
+    "resposta": "Contrarrazões do impetrante (IDs 366682988 e 366683009).",
+    "parecer": "MPF ID 369821303: Prosseguimento do feito, sem intervenção",
+    "memoriais": "Não consta",
+    "representacao": "Advogado Zoroastro Coutinho Neto (OAB/MS 8.155).",
+    "preparo": "ANEEL: Isenta (ente público); Energisa MS: [VALIDAR preparo]"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelações da ANEEL e da Energisa e remessa necessária em mandado de segurança · sistema de compensação de energia elétrica (geração distribuída) · manutenção de unidades consumidoras e geradoras no grupo B, afastados os artigos 292, § 3º, e 671-A da REN ANEEL 1.000/2021 (inseridos pela REN 1.059/2023) · segurança concedida",
+     "sintese": "O Centro de Capacitação Profissional Ltda., titular de sete unidades consumidoras, três com minigeração solar integrada ao sistema de compensação, impugnou exigências da Energisa com base na REN ANEEL 1.059/2023 que alterariam o enquadramento tarifário.",
+     "questoes": "1) Legitimidade da concessionária e da ANEEL; 2) aplicação da REN ANEEL 1.059/2023 a unidades já conectadas ao SCEE (Lei 14.300/2022; direito adquirido).",
+     "rel": {
+      "razoes": "ANEEL (ID 366682985, 25/04/2025): legalidade da REN ANEEL 1.059/2023 e inexistência de direito adquirido a regime tarifário [VALIDAR]. Energisa MS (ID 366682999, 25/09/2025): ilegitimidade ou ausência de ato coator; legalidade da reclassificação; inexistência de direito adquirido [VALIDAR].",
+      "contrarrazoes": "Contrarrazões do impetrante (IDs 366682988 e 366683009)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "366682980",
+      "juizo": "Mandado de segurança 5007604-41.2023.4.03.6000 (2ª Vara Federal de Campo Grande)",
+      "dispositivo": "confirmou a liminar e concedeu a segurança para manter as unidades consumidoras e geradoras do impetrante participantes do SCEE (336110, 1753755, 2120300, 2118202, 2118669, 3321858 e 2118220) no grupo B, na forma contratada, sem as inovações dos artigos 292, § 3º, e 671-A da REN ANEEL 1.000/2021; embargos da Energisa rejeitados, com reabertura do prazo (ID 366682993)."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2023-09-18",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "ANEEL",
+       "tipo": "Apelação",
+       "id": "366682985",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Energisa MS",
+       "tipo": "Apelação",
+       "id": "366682999",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "366682980",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: segurança concedida",
+       "id": "366682980",
+       "data": "2025-04-09"
+      },
+      {
+       "desc": "Apelação da ANEEL",
+       "id": "366682985",
+       "data": "2025-04-25"
+      },
+      {
+       "desc": "Sentença: embargos da Energisa rejeitados",
+       "id": "366682993",
+       "data": "2025-08-17"
+      },
+      {
+       "desc": "Apelação da Energisa",
+       "id": "366682999",
+       "data": "2025-09-25"
+      },
+      {
+       "desc": "Contrarrazões do impetrante",
+       "id": "366683009",
+       "data": "2026-02-20"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 366682993 · 17/08/2025 — sentença (dispositivo a conferir) | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 369821303 · 29/04/2026 | última movimentação: 29/04/2026 14:07 · Conclusos para julgamento · Concessionária como autoridade coatora em mandado de segurança (ato de delegação) [VALIDAR] · Lei 14.300/2022 (regras de transição da geração distribuída) [VALIDAR] · Regularização da representação da Energisa (ID 366682977)",
+     "assuntoDet": "Energia elétrica — geração distribuída: aplicação da REN ANEEL 1.059/2023 a unidades já conectadas",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Mandado de segurança",
+     "parecer": "Com parecer",
+     "idParecer": "369821303",
+     "parecerSentido": "Prosseguimento do feito, sem intervenção"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "29/04/2026 14:07 · Conclusos para julgamento",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Sentença · ID 366682993 · 17/08/2025 — sentença (dispositivo a conferir)",
+    "ultima_peca": "Parecer \"Falta de Interesse\" (MPF) · ID 369821303 · 29/04/2026",
+    "ultima_informacao": "Certidão · ID 368682957 · 24/04/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 366682993 · 17/08/2025 — sentença (dispositivo a conferir) | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 369821303 · 29/04/2026 | última movimentação: 29/04/2026 14:07 · Conclusos para julgamento"
    }
   },
   {
