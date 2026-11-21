@@ -1,7 +1,7 @@
 /* Vocabulário único do gabinete (padrao/vocabulario.json): ficha do processo, prontuário das pautas, Collectio e Caput
    falam a mesma língua. Use VOC.lista(campo) para montar as opções, VOC.norm(campo, valor, ctx) para converter valores
    antigos e VOC.classe(campo, valor) nas regras ('regular', 'pendente', 'irregular', 'na'), no lugar de comparar o texto.
-   ctx (opcional): { ajg, dpu, obs } resolve os genéricos antigos ('Dispensado', 'Isento (DPU/ente público)',
+   ctx (opcional): { ajg, dpu, obs, recorrente, advogado } resolve os genéricos antigos ('Dispensado', 'Isento (DPU/ente público)',
    'Dispensada (proc. público/DPU)'). Os dados abaixo são gerados por scripts/vocabulario/aplicar.py: não editar à mão. */
 (function (raiz, fab) { var V = fab(); if (typeof module === 'object' && module.exports) module.exports = V; else raiz.VOC = V; })(typeof self !== 'undefined' ? self : this, function () {
   var D = /*VOC-DADOS*/{"versao":"1.0.0","campos":{"tempest":{"rotulo":"Tempestividade","opcoes":[["Tempestivo","regular"],["Intempestivo","irregular"],["Não verificado","pendente"],["Não se aplica","na"]],"sinonimos":{}},"preparo":{"rotulo":"Preparo","opcoes":[["Comprovado","regular"],["Justiça gratuita","regular"],["Gratuidade pedida no recurso","pendente"],["Isento (ente público/MP)","regular"],["Assistência da DPU","regular"],["Recolhido sem comprovante do Tesouro (STN)","pendente"],["Recolhido a menor","pendente"],["Recolhido após a interposição","pendente"],["Não recolhido","irregular"],["Não se aplica","na"],["Não verificado","pendente"]],"sinonimos":{"AJG":"Justiça gratuita","Dispensado":"@dispensado","Isento (DPU/ente público)":"@isento","Recolhido sem comprovante STN":"Recolhido sem comprovante do Tesouro (STN)"}},"repres":{"rotulo":"Representação","opcoes":[["Regular","regular"],["Dispensada (procurador público)","regular"],["Dispensada (DPU)","regular"],["Irregular – intimar","irregular"],["Não verificado","pendente"]],"sinonimos":{"Negativo":"Irregular – intimar","Irregular":"Irregular – intimar","Irregular - intimar":"Irregular – intimar","Dispensada (proc. público/DPU)":"@dispensada"}},"prelim":{"rotulo":"Preliminares","opcoes":[["Sem preliminares","na"],["Há preliminares","regular"],["Preliminar de ofício","regular"]],"sinonimos":{"Não há":"Sem preliminares","Não":"Sem preliminares","Sim":"Há preliminares"}},"midias":{"rotulo":"Mídias","opcoes":[["Juntadas","regular"],["Faltantes","irregular"],["Não se aplica","na"],["Não verificado","pendente"]],"sinonimos":{"Juntada":"Juntadas","Faltante":"Faltantes"}},"mpf":{"rotulo":"Hipótese de intervenção do MPF","opcoes":[["Sem hipótese","na"],["Interesse público ou social (178, I)","regular"],["Incapaz (178, II)","regular"],["Litígio coletivo pela posse de terra (178, III)","regular"],["Mandado de segurança","regular"],["ACP/ação popular","regular"],["Improbidade","regular"],["Indígenas (CF 232)","regular"],["Comunidade quilombola","regular"],["Pessoa com deficiência","regular"],["Idoso em risco","regular"],["Reforma agrária","regular"],["Reintegração de posse coletiva","regular"],["Extradição, expulsão ou deportação","regular"],["Outra hipótese","regular"]],"sinonimos":{"Não":"Sem hipótese","Parte no feito":"Sem hipótese","Interesse público (178 I)":"Interesse público ou social (178, I)","Incapaz (178 II)":"Incapaz (178, II)","Litígio coletivo terra (178 III)":"Litígio coletivo pela posse de terra (178, III)","Menor de Idade (proteção de crianças e adolescentes)":"Incapaz (178, II)","Interdito (curatela)":"Incapaz (178, II)","Pessoa com Deficiência (acessibilidade e benefícios)":"Pessoa com deficiência","Idoso (vulnerabilidade social)":"Idoso em risco","Idoso (Estatuto)":"Idoso em risco","Comunidade Indígena (direitos originários e terras)":"Indígenas (CF 232)","Comunidade Quilombola (tutela de territórios ancestrais)":"Comunidade quilombola","Conflito Coletivo - Terra Rural (litígios agrários e INCRA)":"Litígio coletivo pela posse de terra (178, III)","Conflito Coletivo - Terra Urbana (ocupações em imóveis da União/CEF)":"Litígio coletivo pela posse de terra (178, III)","Reintegração de Posse Coletiva":"Reintegração de posse coletiva","Mandado de Segurança (fiscalização obrigatória da lei)":"Mandado de segurança","Outros":"Outra hipótese","Não se aplica":"Sem hipótese","Interesse público ou social relevante":"Interesse público ou social (178, I)","Comunidades indígenas":"Indígenas (CF 232)","Comunidades quilombolas e tradicionais":"Comunidade quilombola","Idoso":"Idoso em risco","Incapaz":"Incapaz (178, II)","Litígios coletivos federais pela posse de terra rural ou urbana":"Litígio coletivo pela posse de terra (178, III)","Ação civil pública proposta por outro legitimado":"ACP/ação popular","Ação popular":"ACP/ação popular","Processos de desapropriação para reforma agrária":"Reforma agrária","Ações de improbidade administrativa":"Improbidade","Processos de extradição, expulsão e deportação":"Extradição, expulsão ou deportação"}},"parecer":{"rotulo":"Parecer do MPF","opcoes":[["Com parecer","regular"],["Aguardando parecer","pendente"],["Intimado sem manifestação","regular"],["Vista a abrir","pendente"],["Não verificado","pendente"],["Não se aplica","na"]],"sinonimos":{"Sem Parecer":"Aguardando parecer","Sem parecer":"Aguardando parecer","Parecer juntado":"Com parecer"}},"papel":{"rotulo":"Papel da parte no 1º grau","opcoes":[["Autor(a)","regular"],["Réu/ré","regular"],["Exequente","regular"],["Executado(a)","regular"],["Embargante","regular"],["Embargado(a)","regular"],["Terceiro","regular"]],"sinonimos":{"Autor":"Autor(a)","Autora":"Autor(a)","Réu":"Réu/ré","Ré":"Réu/ré","Executado":"Executado(a)","Executada":"Executado(a)","Embargado":"Embargado(a)","Embargada":"Embargado(a)","Exequente(s)":"Exequente"}},"destino":{"rotulo":"Destino do julgamento","opcoes":[["Sessão","na"],["Monocrática","na"],["Outro destino","na"]],"sinonimos":{"Colegiado":"Sessão","Sessão (colegiado)":"Sessão","Decisão monocrática":"Monocrática"}},"situacao":{"rotulo":"Situação para julgar","opcoes":[["Pronto para julgar","regular"],["Pendente","pendente"]],"sinonimos":{"Pronto":"Pronto para julgar","Pronta":"Pronto para julgar"}},"outro_destino":{"rotulo":"Outro destino","opcoes":[["Vista ao MPF","pendente"],["Devolução ao órgão prolator","na"],["Sobrestamento","pendente"],["Redistribuição ou prevenção","pendente"],["Diligência ou intimação","pendente"],["Baixa ou arquivamento","na"],["Outro","na"]],"sinonimos":{}}}}/*VOC-FIM*/;
@@ -9,12 +9,44 @@
   var sim = function (x) { return x === true || /^(sim|s|true|1|2)$/i.test(String(x == null ? '' : x).trim()); };
   function campo(c) { return (D.campos || {})[c] || null; }
   function lista(c) { var f = campo(c); return f ? f.opcoes.map(function (o) { return o[0]; }) : []; }
+  /* Recorrente (1º nome do polo ativo do recurso). Isentos de custas na Justiça Federal: União, Estados, Municípios, DF,
+     suas autarquias e fundações, e o MP (Lei 9.289/1996, artigo 4º, I e III). Conselhos de fiscalização profissional não
+     são isentos (artigo 4º, parágrafo único) e a CEF paga preparo: com 'Dispensado' genérico, ficam 'Não verificado'.
+     Gêmeo de scripts/vocabulario.py. */
+  var ISENTO = /^(UNIAO\b|FAZENDA NACIONAL|ESTADO D[EOA] |MUNICIPIO D[EOA] |DISTRITO FEDERAL|MINISTERIO PUBLICO|INSTITUTO NACIONAL|INSS\b|INSTITUTO BRASILEIRO D|IBAMA|ICMBIO|INSTITUTO CHICO MENDES|INCRA\b|DNIT\b|DEPARTAMENTO NACIONAL|FUNAI|FUNDACAO NACIONAL|FUNASA|AGENCIA NACIONAL|UNIVERSIDADE FEDERAL|FUNDACAO UNIVERSIDADE FEDERAL|INSTITUTO FEDERAL|BANCO CENTRAL|COMISSAO NACIONAL|(CHEFE|GERENTE|DELEGAD|SUPERINTENDENTE|REITOR|COMANDANTE|DIRETOR|PROCURADOR)\S*\b.*(INSS|FEDERAL|RECEITA|UNIAO|NACIONAL|POLICIA))/;
+  var PAGA = /^(CAIXA ECONOMICA|CONSELHO (REGIONAL|FEDERAL)|CRE[A-Z]{0,2}\b|CRM\b|CRC\b|COREN\b|CRMV\b|ORDEM DOS ADVOGADOS)/;
+  function recorrente(nome) {
+    var n = String(nome == null ? '' : nome).normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^\x00-\x7f]/g, '').toUpperCase().trim();
+    if (!n) return '';
+    if (n.indexOf('DEFENSORIA PUBLICA') === 0) return 'dpu';
+    if (ISENTO.test(n)) return 'isento';
+    return PAGA.test(n) ? 'paga' : '';
+  }
   function resolve(alvo, ctx) {
     ctx = ctx || {}; var obs = String(ctx.obs || '').replace(/\(proc\. público\/DPU\)|DPU\/ente público|procurador público ou DPU/gi, ''), dpu = sim(ctx.dpu) || /DPU|Defensoria/i.test(obs), ajg = sim(ctx.ajg);
-    if (alvo === '@dispensado') return dpu ? 'Assistência da DPU' : ajg ? 'Justiça gratuita' : 'Isento (ente público/MP)';
-    if (alvo === '@isento') return dpu ? 'Assistência da DPU' : 'Isento (ente público/MP)';
-    if (alvo === '@dispensada') return dpu ? 'Dispensada (DPU)' : 'Dispensada (procurador público)';
+    var rc = recorrente(ctx.recorrente), adv = !!String(ctx.advogado || '').trim(); /* advogado particular do polo ativo: a DPU não o representa */
+    if (alvo === '@dispensado') {
+      if (rc === 'isento') return 'Isento (ente público/MP)';
+      if (rc === 'dpu') return 'Assistência da DPU';
+      if (rc === 'paga') return 'Não verificado';
+      if (dpu && !adv) return 'Assistência da DPU';
+      return ajg ? 'Justiça gratuita' : dpu ? 'Assistência da DPU' : 'Isento (ente público/MP)';
+    }
+    if (alvo === '@isento') {
+      if (rc === 'isento') return 'Isento (ente público/MP)';
+      if (rc === 'paga') return 'Não verificado';
+      return dpu && !(adv && rc !== 'dpu') ? 'Assistência da DPU' : 'Isento (ente público/MP)';
+    }
+    if (alvo === '@dispensada') return rc === 'isento' ? 'Dispensada (procurador público)' : dpu ? 'Dispensada (DPU)' : 'Dispensada (procurador público)';
     return alvo;
+  }
+  /* corrige combinações impossíveis entre o valor e o recorrente (a DPU não assiste ente público, CEF nem conselho) */
+  function coerente(c, v, ctx) {
+    ctx = ctx || {}; var rc = recorrente(ctx.recorrente);
+    if (c === 'preparo' && v === 'Assistência da DPU' && (rc === 'isento' || rc === 'paga')) return rc === 'isento' ? 'Isento (ente público/MP)' : 'Não verificado';
+    if (c === 'preparo' && v === 'Assistência da DPU' && !rc && String(ctx.advogado || '').trim() && sim(ctx.ajg)) return 'Justiça gratuita';
+    if (c === 'repres' && v === 'Dispensada (DPU)' && rc === 'isento') return 'Dispensada (procurador público)';
+    return v;
   }
   function norm(c, v, ctx) {
     var f = campo(c), s = String(v == null ? '' : v).trim();
@@ -33,5 +65,5 @@
     return '';
   }
   function eh(c, v, cl, ctx) { return classe(c, v, ctx) === cl; }
-  return { dados: D, lista: lista, norm: norm, classe: classe, eh: eh, rotulo: function (c) { var f = campo(c); return f ? f.rotulo : c; } };
+  return { dados: D, lista: lista, norm: norm, classe: classe, eh: eh, recorrente: recorrente, coerente: coerente, rotulo: function (c) { var f = campo(c); return f ? f.rotulo : c; } };
 });
