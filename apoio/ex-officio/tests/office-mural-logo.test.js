@@ -90,17 +90,17 @@ test('prontuário: pendência mostra o texto inteiro (altura acompanha o texto)'
 
 test('pauta: etiqueta Retidos (adiados ou retirados de pauta)', () => {
   const app = require('fs').readFileSync(require('path').join(__dirname, '..', 'index.html'), 'utf8');
-  assert.ok(app.includes("['rt','Retidos','Adiados ou retirados de pauta',function(i){return /^(adiad|retirad)/i.test(i.resultado||'');}]"));
+  assert.ok(app.includes("['rt','Retidos','Adiados ou retirados de pauta (resultado da sessão ou intercorrência)',function(i){return !!retidoDe(i);}]"));
 });
 
 test('prontuário: Sinalizações (intercorrência com chamado ao TI e retido, pendência, aviso) e diligência automática do retido', () => {
   const path = require('path'), fs = require('fs');
   const app = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
-  for (const x of ['function sinalizacoes(it,c,PL,auto)', 'function icAberta(it)', "Intercorrência · chamado ao TI", "data-ac=\"retidoOk\"", "data-acv-ok=", "cart(it).avisos=AV", "ic=n(icAberta)", "(inssParte(it)?f('Tópico-síntese'", "(RN||/remessa/.test(nq(it.classe||''))?f('Remessa necessária'"]) assert.ok(app.includes(x), x);
+  for (const x of ['function sinalizacoes(it,c,PL,auto)', 'function icAberta(it)', "['ti','Chamado ao TI','ad','Adiado','rt','Retirado de pauta','ic','Outra']", "sec('Intercorrências',nI)", "data-ac=\"retidoOk\"", "data-acv-ok=", "cart(it).avisos=AV", "ic=n(icAberta)", "(inssParte(it)?f('Tópico-síntese'", "(RN||/remessa/.test(nq(it.classe||''))?f('Remessa necessária'"]) assert.ok(app.includes(x), x);
   const pauta = fs.readFileSync(path.join(__dirname, '..', 'api', 'pauta.js'), 'utf8');
   assert.ok(pauta.includes("'intercorTipo', 'intercorChamado', 'retidoOk'"));
   const pend = fs.readFileSync(path.join(__dirname, '..', 'api', 'pendencias.js'), 'utf8');
-  for (const x of ["origem: 'retido'", "'ret:' + s.date", "if (alvo.origem === 'retido')", "(chamado ao TI)"]) assert.ok(pend.includes(x), x);
+  for (const x of ["origem: 'retido'", "'ret:' + s.date", "if (alvo.origem === 'retido')", "String(c.intercorTipo).toLowerCase()"]) assert.ok(pend.includes(x), x);
 });
 
 test('números da sessão: alertas em botões curtos que levam ao processo', () => {
@@ -111,4 +111,9 @@ test('números da sessão: alertas em botões curtos que levam ao processo', () 
 test('buscador rápido sem Enter, processo localizado marcado; Sinalizações em cartão', () => {
   const app = require('fs').readFileSync(require('path').join(__dirname, '..', 'index.html'), 'utf8');
   for (const x of ['setTimeout(function(){irPara(true);},380)', 'function achadoLimpa()', "el.classList.add('flash','achado')", 'achadoMarca();prontLateral();', '#v-pauta #lst .pc.achado::before{content:"localizado"', '#prq #ac-sn{background:#fbf6ec']) assert.ok(app.includes(x), x);
+});
+
+test('faixas de produção com o que falta clicável; Sinalizações por seções; intercorrência adiado/retirado', () => {
+  const app = require('fs').readFileSync(require('path').join(__dirname, '..', 'index.html'), 'utf8');
+  for (const x of ['data-et-seg="n', "S.fEt.charAt(0)==='n'&&ETF[S.fEt.slice(1)]&&it[ETF[S.fEt.slice(1)]]", 'class="tp-fal', "sec('Pendências',nP)", "sec('Avisos',nA)", "{ti:'Chamado ao TI',ad:'Adiado',rt:'Retirado de pauta'}[tg]", '@container edtabs (max-width:759px)']) assert.ok(app.includes(x), x);
 });
