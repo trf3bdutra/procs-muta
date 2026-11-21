@@ -23897,8 +23897,8 @@
    "exequente": "ARIADNE NOBRE DE OLIVEIRA SILVA",
    "executado": "UNIÃO FEDERAL",
    "assunto": "Readaptação",
-   "grupo": null,
-   "tipo_caso": "",
+   "grupo": "",
+   "tipo_caso": "Administrativo · servidor público federal · aposentadoria por incapacidade × readaptação funcional (capacidade residual) · tutela de urgência",
    "resultado": "Ato a proferir: julgamento do agravo de instrumento (voto)",
    "modelo": "",
    "variacoes": [],
@@ -23977,6 +23977,78 @@
     "outros": "Redistribuição à Turma Regional de MS (decisão ID 368192919, certidão ID 368739130). Decisão ID 368742649 (27/04/2026): gratuidade reconhecida (ID 563946290 da origem) e tutela recursal indeferida.",
     "representacao": "Agravante: advogados constituídos [VALIDAR procuração]. Agravada: União (AGU).",
     "preparo": "Justiça gratuita deferida na origem (ID 563946290), reconhecida na decisão ID 368742649."
+   },
+   "assunto_detalhado": "Administrativo — servidora aposentada por incapacidade; readaptação funcional",
+   "especificidades": "Tutela antecedente na origem · Agravante já aposentada e recebendo proventos, segundo a União · Tutela recursal indeferida (ID 368742649, 27/04/2026) · Gratuidade reconhecida",
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "assuntoDet": "Administrativo — servidora aposentada por incapacidade; readaptação funcional",
+     "subassuntos": "Administrativo · servidor público federal · aposentadoria por incapacidade × readaptação funcional (capacidade residual) · tutela de urgência",
+     "sintese": "",
+     "questoes": "1) Readaptação (artigo 24 da Lei 8.112/1990) em vez de aposentadoria por incapacidade; 2) controle judicial do laudo da junta médica; 3) perigo de dano e reversibilidade.",
+     "rel": {
+      "razoes": "",
+      "contrarrazoes": ""
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "",
+      "juizo": "1ª Vara Federal de Campo Grande",
+      "dispositivo": "Indeferiu a tutela de urgência antecedente."
+     },
+     "ai": {
+      "hip": "Tutela provisória",
+      "efeito": "Indeferido",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2026-04-15",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": true,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte autora",
+       "tipo": "Agravo de instrumento",
+       "id": "366835864",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "366835864",
+       "data": "2026-04-15"
+      },
+      {
+       "desc": "Decisão que indeferiu a tutela recursal",
+       "id": "368742649",
+       "data": "2026-04-27"
+      },
+      {
+       "desc": "Contraminuta da União",
+       "id": "371450990",
+       "data": "2026-05-06"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "Tutela antecedente na origem · Agravante já aposentada e recebendo proventos, segundo a União · Tutela recursal indeferida (ID 368742649, 27/04/2026) · Gratuidade reconhecida"
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Justiça gratuita",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "",
+     "urgTipo": "Antecipação da tutela recursal",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-04-27"
+    }
    }
   },
   {
