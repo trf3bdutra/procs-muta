@@ -3,7 +3,7 @@
  "versao": 1,
  "nome": "07/12/2026",
  "date": "2026-12-07",
- "atualizadoEm": "2026-11-21T01:35:07.839Z",
+ "atualizadoEm": "2026-11-21T01:35:11.991Z",
  "itens": [
   {
    "cnj": "5000899-21.2023.4.03.6002",
@@ -3410,22 +3410,22 @@
      "tipoJ": "Apelação",
      "pendencias": [
       {
-       "desc": "Não foram identificados dados que exijam marcação “[VALIDAR]”.",
-       "ok": false,
-       "em": "2026-11-19",
-       "por": "Index · lote 2886"
-      },
-      {
        "desc": "A minuta não inclui o precedente ApCiv 5003797-42.2025.4.03.6000 nem o ApCiv 5003454-12.2026.4.03.6000, embora constem do catálogo fornecido, porque as instruções do modelo vedam acrescentar julgados além dos previstos nos módulos.",
-       "ok": false,
+       "ok": true,
        "em": "2026-11-19",
-       "por": "Index · lote 2886"
+       "por": "Index · lote 2886",
+       "resolvidaEm": "2026-11-20",
+       "resolvidaPor": "Claude · revisão das pautas",
+       "resolucao": "Registro de redação, sem providência pendente."
       },
       {
        "desc": "A data 02/07/2002 vem da petição inicial dos exequentes (alegação de parte); o acervo assinado do gabinete traz 02/07/2001. Mantido o modelo.",
-       "ok": false,
+       "ok": true,
        "em": "2026-11-19",
-       "por": "Index · lote 2886"
+       "por": "Index · lote 2886",
+       "resolvidaEm": "2026-11-20",
+       "resolvidaPor": "Claude · revisão das pautas",
+       "resolucao": "Decisão registrada: mantida a data do acervo assinado do gabinete (02/07/2001)."
       }
      ]
     },
@@ -3435,7 +3435,8 @@
      "item": 75,
      "autos": 0
     },
-    "editadoPor": "Index"
+    "editadoPor": "Bruno",
+    "editadoEm": "2026-11-21T01:35:11.991Z"
    }
   },
   {
