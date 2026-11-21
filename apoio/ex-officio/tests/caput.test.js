@@ -148,3 +148,21 @@ test('Comunicação: padrão da Chefia, publicar com prévia ao lado do históri
   const fs=require('fs'),p=require('path'),cap=fs.readFileSync(p.join(__dirname,'../../../caput/triagem/index.html'),'utf8');
   for(const x of ['id="cg-com-form"','id="cg-com-hist"','id="cg-com-status"','name="nivel" value="','name="onde" value="','name="todos" checked','function cmParaSync(','para:cmPara(f)}',"pill('fixo'",'name="ate"','function cmPrevia(','function cmCartao(','cm-k-tot','data-cg-url="/office/#cmt"'])assert.ok(cap.includes(x),x);
 });
+
+test('Coordenação: seções no padrão da Chefia',()=>{
+  const fs=require('fs'),p=require('path'),cap=fs.readFileSync(p.join(__dirname,'../../../caput/triagem/index.html'),'utf8');
+  const i=cap.indexOf('function vCoordenacao(){'),v=cap.slice(i,cap.indexOf('\nconst CG_REL_CAT=[',i));
+  assert.ok(v.includes('<div class="wrap cg-chefia co-cab"><div class="cg-top">')&&!v.includes("Operação diária"),'cabeçalho da Coordenação');
+  assert.ok(cap.includes('<div class="co-lay"><div class="co-main"><section class="cg-px co-pf">')&&cap.includes('<section class="cg-px cg-comp-p"><header>')&&cap.includes('<aside class="co-lado"><section class="cg-px">')&&cap.includes('<div id="cg-coord" aria-label="Equipe e regras">'),'Competências principal e Equipe e regras lateral');
+});
+
+test('Chefia › Calendário: pedidos de ausência e quem está fora, pelo motor',()=>{
+  const fs=require('fs'),p=require('path'),cap=fs.readFileSync(p.join(__dirname,'../../../caput/triagem/index.html'),'utf8'),m=fs.readFileSync(p.join(__dirname,'../../../caput/motor/assets/js/21-sessoes-equipe.js'),'utf8');
+  for(const x of ['solicitacoesAusencia: function','decidirAusencia: function','ausencias: function','ausenciaPoe: function','ausenciaTira: function','async function eqDecidir('])assert.ok(m.includes(x),x);
+  for(const x of ['<div id="cg-aus">','function ausPinta(','data-cgau="sim"','data-cgau="poe"','Quem está fora · 6 semanas'])assert.ok(cap.includes(x),x);
+});
+
+test('Coordenação › Perfis: abas com filtros por pessoa (minutas, correções, diligências, presença)',()=>{
+  const fs=require('fs'),p=require('path'),cap=fs.readFileSync(p.join(__dirname,'../../../caput/triagem/index.html'),'utf8');
+  for(const x of ['function pfPinta(','function pfDados(','apoio/equipe-pendencias.json','data-pf-p=','data-pf-a=','data-pf-f="tipo"','Presença e ausências','PF.f[fk]','pfPinta();\n  const alvo=$(\'#cg-coord\')'])assert.ok(cap.includes(x),x);
+});
