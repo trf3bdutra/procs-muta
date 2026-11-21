@@ -840,6 +840,33 @@ html[data-theme="dark"] #tri-prontuario .tp-s h3{color:#e6e2d6;background:linear
 .cg-cat{border-right:1px solid var(--b);background:var(--p);padding:10px;overflow:auto;max-height:78vh}.cg-cat h3,.cg-set h3{margin:4px 6px 9px;font-size:12px;color:var(--m);text-transform:uppercase;letter-spacing:.08em}.cg-cat button{display:block;width:100%;text-align:left;border:0;border-radius:5px;background:transparent;padding:7px 8px;font:600 12px Figtree,sans-serif;color:var(--m2);cursor:pointer}.cg-cat button:hover{background:var(--l2)}.cg-cat button.on{background:var(--v);color:#fff}.cg-cat button small{display:block;font-weight:400;opacity:.8;margin-top:2px}
 .cg-prev{padding:18px;min-width:0;overflow:auto;background:#eef1ef}.cg-paper{width:min(100%,780px);min-height:900px;margin:0 auto;background:#fff;border:1px solid #d6d9d6;box-shadow:0 4px 18px rgba(0,0,0,.08);padding:34px 38px;color:#1f302e;outline:none}.cg-paper:focus{box-shadow:0 0 0 2px #a57829,0 4px 18px rgba(0,0,0,.08)}.cg-paper h1{font-size:24px;color:var(--v);margin:0 0 4px}.cg-paper h2{font-size:15px;color:var(--v);margin:22px 0 8px;border-bottom:1px solid #ddd;padding-bottom:5px}.cg-paper p{margin:4px 0 10px;font-size:12.5px}.cg-paper table{width:100%;border-collapse:collapse;font-size:10.5px}.cg-paper th,.cg-paper td{border-bottom:1px solid #e7e7e2;padding:5px;text-align:left;vertical-align:top}.cg-paper th{background:#f5f4ef;color:#4f5e5a}.cg-paper .mono{font-size:10px}
 .cg-set{border-left:1px solid var(--b);padding:12px;background:var(--p);overflow:auto}.cg-set label{display:grid;gap:4px;margin-bottom:10px;font-size:11px;color:var(--m)}.cg-set input,.cg-set select,.cg-set textarea{width:100%;box-sizing:border-box}.cg-set .cg-exp{display:grid;grid-template-columns:1fr 1fr;gap:6px}.cg-set .cg-exp button{height:32px}
+/* Comunicação */
+.cg-com .cg-top .cg-acv a.btn{text-decoration:none;display:inline-flex;align-items:center}
+.cm-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(320px,1fr);gap:16px;align-items:start}.cm-grid>.cg-px{margin-bottom:16px}
+.cm-form{padding:14px 16px 12px;display:grid;gap:12px}.cm-f{display:grid;gap:5px;font:500 10px "JetBrains Mono",monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--g);position:relative}.cm-f>span{display:block}
+.cm-form input[name=title],.cm-form textarea,.cm-form input[type=date]{width:100%;box-sizing:border-box;border:1px solid var(--b);border-radius:7px;padding:8px 10px;font:14px/1.45 Figtree,sans-serif;letter-spacing:0;text-transform:none;color:var(--tx);background:var(--w)}
+.cm-form input[name=title]{font-weight:700}.cm-form textarea{min-height:130px;resize:vertical}.cm-form input:focus,.cm-form textarea:focus{outline:2px solid rgba(35,90,85,.25);border-color:var(--v2)}
+.cm-ct{position:absolute;right:22px;bottom:7px;font:500 10.5px "JetBrains Mono",monospace;letter-spacing:0;color:var(--m)}
+.cm-row{display:grid;grid-template-columns:minmax(0,1fr) 190px;gap:12px;align-items:end}
+.cm-seg{display:flex;gap:4px;flex-wrap:wrap}.cm-nv{cursor:pointer}.cm-nv input,.cm-pl input{position:absolute;opacity:0;pointer-events:none}
+.cm-nv span,.cm-pl span{display:inline-flex;align-items:center;height:32px;padding:0 13px;border:1px solid var(--b);border-radius:999px;background:var(--w);font:600 12.5px Figtree,sans-serif;letter-spacing:0;text-transform:none;color:var(--m2)}
+.cm-nv span::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--c);margin-right:7px}.cm-nv input:checked+span{border-color:var(--c);color:var(--c);background:var(--p);box-shadow:inset 0 0 0 1px var(--c)}
+.cm-pls{display:flex;gap:6px;flex-wrap:wrap}.cm-pl{cursor:pointer}.cm-pl span::before{content:'';width:14px;height:14px;border:1.5px solid var(--b2);border-radius:4px;margin-right:7px;background:var(--w)}
+.cm-pl input:checked+span{border-color:var(--v2);color:var(--v)}.cm-pl input:checked+span::before{background:var(--v2) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3.5 8.5l3 3 6-7' fill='none' stroke='white' stroke-width='2'/%3E%3C/svg%3E") center/12px no-repeat;border-color:var(--v2)}
+.cm-nv input:focus-visible+span,.cm-pl input:focus-visible+span{outline:2px solid rgba(35,90,85,.35)}
+.cm-para{gap:5px}.cm-todos span{font-weight:700}.cm-mut{align-self:center;font:12px Figtree,sans-serif;letter-spacing:0;text-transform:none;color:var(--m)}
+.cm-prev-w{border:1px dashed var(--b2);border-radius:8px;padding:8px 10px 10px;background:var(--bg)}.cm-k{display:block;margin-bottom:6px;font:500 10px "JetBrains Mono",monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--m)}
+.cm-ft{display:flex;align-items:center;justify-content:flex-end;gap:12px;border-top:1px solid var(--l);padding-top:10px}.cm-ft .cg-status{margin-right:auto;padding:0}
+.cm-his .cm-hist{max-height:640px;overflow:auto}
+.cm-msg{position:relative;padding:10px 14px 11px 17px;border-bottom:1px solid var(--l2);background:var(--w)}.cm-msg::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--c)}
+.cm-prev{border:1px solid var(--l);border-radius:6px}.cm-msg.venc{opacity:.6}
+.cm-mh{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 6px}.cm-mh b{font-size:13.5px;color:var(--tx);margin-right:4px}
+.cm-mh i{font:500 10px "JetBrains Mono",monospace;font-style:normal;padding:1px 6px;border-radius:999px;background:var(--l2);color:var(--m2)}.cm-mh i[style]{color:var(--c);background:var(--p);box-shadow:inset 0 0 0 1px var(--c)}.cm-mh i.x{color:var(--r)}
+.cm-msg small{display:block;margin-top:2px;font-size:11px;color:var(--m)}.cm-msg p{margin:5px 0 0;font-size:12.5px;line-height:1.5;color:var(--m2);white-space:pre-wrap;display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical;overflow:hidden}
+.cm-tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}.cm-tile{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:12px;align-items:center;padding:14px 16px;border:0;border-right:1px solid var(--l);background:var(--w);text-align:left;cursor:pointer;font:inherit;color:var(--tx)}.cm-tile:last-child{border-right:0}.cm-tile:hover{background:var(--p)}
+.cm-ic{display:grid;place-items:center;width:34px;height:34px;border-radius:8px;background:var(--bg);color:var(--v);font-size:16px}.cm-tile b{display:block;font-size:13.5px;color:var(--v)}.cm-tile small{display:block;margin-top:2px;font-size:11.5px;color:var(--m2)}.cm-tile em{font-style:normal;font-weight:700;font-size:12px;color:var(--g)}
+.cm-nota{margin:0;padding:9px 16px;border-top:1px solid var(--l);font-size:11.5px;color:var(--m);background:var(--p)}
+@media(max-width:1000px){.cm-grid{grid-template-columns:1fr}.cm-tiles{grid-template-columns:1fr}.cm-tile{border-right:0;border-bottom:1px solid var(--l)}.cm-row{grid-template-columns:1fr}}
 .cg-composer{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:14px}.cg-form{border:1px solid var(--b);background:var(--w);padding:14px}.cg-form label{display:grid;gap:4px;margin-bottom:10px;font-size:11px;color:var(--m)}.cg-form input,.cg-form textarea,.cg-form select{width:100%;box-sizing:border-box}.cg-form textarea{min-height:150px}.cg-checks{display:flex;flex-wrap:wrap;gap:12px;margin:8px 0 14px;font-size:12px}.cg-checks label{display:flex;align-items:center;gap:5px;margin:0}.cg-checks input{width:auto}.cg-hist{border:1px solid var(--b);background:var(--w)}.cg-hist header{padding:10px 12px;border-bottom:1px solid var(--b);font-weight:700}.cg-msg{padding:10px 12px;border-bottom:1px solid var(--l2)}.cg-msg b{display:block;font-size:12.5px}.cg-msg small{color:var(--m)}.cg-msg p{font-size:12px;margin:4px 0 0;white-space:pre-wrap}.cg-status{font-size:12px;color:var(--m);padding:10px 0}.cg-actions a{color:inherit;text-decoration:none}
 #cg-regras{background:var(--w);min-height:560px}
 .cg-chefia{padding-bottom:40px}
@@ -1517,20 +1544,63 @@ function cgRelExportar(fmt){
   cgBaixar(slug+'.csv',new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'}));
 }
 
+/* Comunicação: no padrão da Chefia — cabeçalho com indicadores, publicar (com prévia do aviso) ao lado do histórico, canais embaixo.
+   Envio e histórico pelo mesmo endpoint de notificações do Office (/api/notificacoes?gestao=1), com o login do Office. */
+const CM_NIV = { info: ['Informativo', 'var(--az)'], importante: ['Importante', 'var(--g)'], urgente: ['Urgente', 'var(--r)'] };
 function vComunicacao(){
-  return '<div class="wrap"><div class="cg-head"><div><p class="k">Canais do gabinete</p><h1>Comunicação.</h1><p>Avisos, solicitações e acessos aos canais já usados pelo Office, sem duplicar a base.</p></div></div>'+
-    '<div class="cg-grid" style="margin-bottom:14px"><section class="cg-box"><header>Canais</header><div class="cg-link"><span><b>Office · Comunicações do gabinete</b><small>Notificações, diligências e painel do gabinete</small></span><button data-cg-url="/office/#cmt">Abrir</button></div><div class="cg-link"><span><b>Preferências e sustentações</b><small>Pedidos vinculados à pauta e fechamento diário</small></span><button data-cg-url="/office/#pauta">Abrir</button></div></section>'+
-    '<section class="cg-box"><header>Atalhos</header><p>O envio e o histórico usam o mesmo endpoint de notificações do Office. Se a sessão do Office não estiver autenticada, o sistema informa e mantém o atalho para entrar.</p><div class="cg-actions"><button class="btn" data-cg-url="/office/">Abrir Office</button><button class="btn" data-cg-go="pautas">Ir para Pautas</button></div></section></div>'+
-    '<div class="cg-composer"><form class="cg-form" id="cg-com-form"><h3 style="margin-top:0">Publicar aviso / notificação</h3><label>Título<input name="title" maxlength="160" required></label><label>Mensagem<textarea name="message" maxlength="2000" required></textarea></label>'+
-    '<label>Importância<select name="nivel"><option value="info">Informativo</option><option value="importante">Importante</option><option value="urgente">Urgente</option></select></label><label>Válido até<input type="date" name="ate"></label>'+
-    '<div class="cg-checks"><label><input type="checkbox" name="painel" checked> Painel inicial</label><label><input type="checkbox" name="notificacao" checked> Notificação</label><label><input type="checkbox" name="fixo"> Fixar</label></div><button class="btn pri" type="submit">Publicar</button><p id="cg-com-status" class="cg-status"></p></form>'+
-    '<section class="cg-hist"><header>Histórico recente</header><div id="cg-com-hist"><p class="cg-status" style="padding:12px">Carregando…</p></div></section></div></div>';
+  const cx=(k,t,extra,corpo,cls)=>'<section class="cg-px'+(cls?' '+cls:'')+'"><header><span><span class="k">'+k+'</span><b>'+t+'</b></span>'+(extra||'')+'</header>'+corpo+'</section>';
+  const kpi=(id,t)=>'<div><b id="'+id+'">—</b><span>'+t+'</span></div>';
+  const niv=Object.keys(CM_NIV).map((k,i)=>'<label class="cm-nv" style="--c:'+CM_NIV[k][1]+'"><input type="radio" name="nivel" value="'+k+'"'+(i?'':' checked')+'><span>'+CM_NIV[k][0]+'</span></label>').join('');
+  const pill=(n,t,on,dica)=>'<label class="cm-pl" title="'+dica+'"><input type="checkbox" name="'+n+'"'+(on?' checked':'')+'><span>'+t+'</span></label>';
+  const form='<form class="cm-form" id="cg-com-form"><label class="cm-f">Título<input name="title" maxlength="160" required placeholder="Ex.: Sessão de 07/12 — entrega das minutas até 27/11"></label>'+
+    '<label class="cm-f">Mensagem<textarea name="message" maxlength="2000" required placeholder="O que a equipe precisa saber ou fazer."></textarea><small class="cm-ct" id="cm-ct">0 / 2000</small></label>'+
+    '<div class="cm-row"><div class="cm-f"><span>Importância</span><div class="cm-seg">'+niv+'</div></div><label class="cm-f cm-ate">Válido até<input type="date" name="ate"></label></div>'+
+    '<div class="cm-f"><span>Para</span><div class="cm-pls cm-para" id="cm-para"><label class="cm-pl cm-todos"><input type="checkbox" name="todos" checked><span>Toda a equipe</span></label><small class="cm-mut">carregando a equipe…</small></div></div>'+
+    '<div class="cm-row"><div class="cm-f"><span>Onde aparece</span><div class="cm-seg">'+[['ambos','Mural e notificação','No Mural do Ex Officio e no sino de notificações'],['mural','Só no mural','Só no Mural do Ex Officio, sem notificação']].map((o,i)=>'<label class="cm-nv" style="--c:var(--v2)" title="'+o[2]+'"><input type="radio" name="onde" value="'+o[0]+'"'+(i?'':' checked')+'><span>'+o[1]+'</span></label>').join('')+'</div></div>'+
+    '<div class="cm-f"><span>Destaque</span><div class="cm-pls">'+pill('fixo','Fixar no topo',0,'Fica acima dos demais até vencer')+'</div></div></div>'+
+    '<div class="cm-prev-w"><span class="cm-k">Prévia</span><div class="cm-msg cm-prev" id="cm-prev"></div></div>'+
+    '<div class="cm-ft"><p id="cg-com-status" class="cg-status"></p><button class="btn pri" type="submit">Publicar</button></div></form>';
+  const tile=(ic,t,sub,attr,bt)=>'<button type="button" class="cm-tile" '+attr+'><span class="cm-ic">'+ic+'</span><span><b>'+t+'</b><small>'+sub+'</small></span><em>'+bt+'</em></button>';
+  return '<div class="wrap cg-chefia cg-com"><div class="cg-top"><div><p class="k">Canais do gabinete</p><h1>Comunicação.</h1></div>'+
+    '<div class="cg-faixa">'+kpi('cm-k-tot','avisos publicados')+kpi('cm-k-vig','em vigor')+kpi('cm-k-fix','fixados no topo')+kpi('cm-k-urg','urgentes em vigor')+'</div>'+
+    '<div class="cg-acv"><a class="btn" href="/office/" target="_blank" rel="noopener">Abrir o Ex Officio ↗</a></div></div>'+
+    '<div class="cm-grid">'+cx('Publicar','Aviso ou notificação para a equipe','',form,'cm-pub')+
+    cx('Histórico','Avisos recentes','<span class="cg-tb"><span class="cg-status" id="cm-h-st"></span></span>','<div id="cg-com-hist" class="cm-hist"><p class="cg-status" style="padding:12px 14px">Carregando…</p></div>','cm-his')+'</div>'+
+    cx('Canais','Onde a comunicação continua','','<div class="cm-tiles">'+
+      tile('✉','Comunicações do gabinete','notificações, diligências e painel do gabinete no Ex Officio','data-cg-url="/office/#cmt"','Abrir ↗')+
+      tile('⚑','Preferências e sustentações','pedidos vinculados à pauta e fechamento diário','data-cg-url="/office/#pauta"','Abrir ↗')+
+      tile('▤','Pautas','sessões, esteira e publicação da pauta','data-cg-go="pautas"','Ir →')+'</div>'+
+      '<p class="cm-nota">O envio e o histórico usam o mesmo endpoint de notificações do Ex Officio. Sem login no Ex Officio neste navegador, o histórico não carrega e a publicação avisa; entre por “Abrir o Ex Officio”.</p>')+
+  '</div>';
 }
 async function cgApi(u,op){op=op||{};op.credentials='same-origin';op.headers=Object.assign({'Content-Type':'application/json'},op.headers||{});const r=await fetch(u,op),j=await r.json().catch(()=>({}));if(!r.ok)throw new Error(j.erro||('HTTP '+r.status));return j;}
+const cmData=(d)=>{ if(!d) return ''; const x=String(d).slice(0,10); return /^\d{4}-\d{2}-\d{2}$/.test(x)?x.slice(8,10)+'/'+x.slice(5,7)+'/'+x.slice(0,4):''; };
+function cmCartao(a,prev){ const n=CM_NIV[a.nivel]||CM_NIV.info, vence=a.ate?cmData(a.ate):'', venceu=a.ate&&String(a.ate).slice(0,10)<HOJE;
+  const tags=[a.nivel&&a.nivel!=='info'?'<i style="--c:'+n[1]+'">'+n[0]+'</i>':'',a.fixo?'<i>fixado</i>':'',vence?'<i'+(venceu?' class="x"':'')+'>'+(venceu?'venceu ':'até ')+vence+'</i>':''].join('');
+  const para=(a.para||[]).length?'para '+a.para.join(', '):'para toda a equipe', onde=a.notificacao===false?'só no mural':a.painel===false?'só notificação':'mural e notificação';
+  const meta=esc([prev?'como vai aparecer':a.user||'',!prev&&a.time?new Date(a.time).toLocaleString('pt-BR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}):'',para,onde].filter(Boolean).join(' · '));
+  return '<div class="cm-msg'+(venceu?' venc':'')+'" style="--c:'+n[1]+'"><div class="cm-mh"><b>'+esc(a.title||(prev?'Título do aviso':'Aviso'))+'</b>'+tags+'</div><small>'+meta+'</small><p>'+esc(a.message||(prev?'A mensagem aparece aqui.':''))+'</p></div>'; }
+const cmPara=(f)=>[...f.querySelectorAll('input[name=para]:checked')].map((x)=>x.value);
+/* "Toda a equipe" e nomes se excluem: marcar um nome desmarca "Toda a equipe"; sem nome marcado, volta a ser toda a equipe */
+function cmParaSync(ev){ const f=$('#cg-com-form'); if(!f) return; const t=ev&&ev.target, todos=f.elements.todos;
+  if(t&&t.name==='todos'&&t.checked) f.querySelectorAll('input[name=para]').forEach((x)=>{x.checked=false;});
+  else if(t&&t.name==='para'&&t.checked&&todos) todos.checked=false;
+  if(todos&&!cmPara(f).length) todos.checked=true; }
+function cmEquipe(nomes){ const box=$('#cm-para'); if(!box) return; const sel=new Set(cmPara($('#cg-com-form')));
+  box.querySelectorAll('.cm-pn,.cm-mut').forEach((x)=>x.remove());
+  box.insertAdjacentHTML('beforeend',(nomes||[]).map((n)=>'<label class="cm-pl cm-pn"><input type="checkbox" name="para" value="'+esc(n)+'"'+(sel.has(n)?' checked':'')+'><span>'+esc(n)+'</span></label>').join('')||'<small class="cm-mut">equipe indisponível: o aviso vai para todos</small>'); }
+function cmPrevia(){ const f=$('#cg-com-form'); if(!f) return; const E=f.elements, pv=$('#cm-prev'), ct=$('#cm-ct');
+  if(ct) ct.textContent=E.message.value.length+' / 2000';
+  if(pv) pv.outerHTML=cmCartao({title:E.title.value,message:E.message.value,nivel:E.nivel.value,ate:E.ate.value,fixo:E.fixo.checked,para:cmPara(f),painel:true,notificacao:E.onde.value!=='mural'},true).replace('class="cm-msg','id="cm-prev" class="cm-msg cm-prev'); }
 async function cgComCarregar(){
-  const h=$('#cg-com-hist'),st=$('#cg-com-status');if(!h)return;
-  try{const j=await cgApi('/api/notificacoes?gestao=1'),L=(j.registros||[]).slice().reverse().slice(0,12);h.innerHTML=L.length?L.map(a=>'<div class="cg-msg"><b>'+esc(a.title||'Aviso')+'</b><small>'+esc(a.user||'')+(a.time?' · '+esc(new Date(a.time).toLocaleString('pt-BR')):'')+'</small><p>'+esc(a.message||'')+'</p></div>').join(''):'<p class="cg-status" style="padding:12px">Nenhum aviso publicado.</p>';if(st)st.textContent='';}
-  catch(e){h.innerHTML='<p class="cg-status" style="padding:12px">Não foi possível ler o histórico nesta sessão. Abra o Office para autenticar e tente novamente.</p>';if(st)st.textContent=e.message;}
+  const h=$('#cg-com-hist'),st=$('#cm-h-st'),f=$('#cg-com-form');if(!h)return;
+  if(f&&!f.dataset.ok){f.dataset.ok=1;f.addEventListener('input',cmPrevia);f.addEventListener('change',(ev)=>{cmParaSync(ev);cmPrevia();});f.addEventListener('reset',()=>setTimeout(()=>{cmParaSync();cmPrevia();},0));}
+  cmPrevia();
+  try{const j=await cgApi('/api/notificacoes?gestao=1'),R=(j.registros||[]).slice(),L=R.slice(0,30);cmEquipe(j.equipe||[]);
+    const vig=R.filter((a)=>!a.ate||String(a.ate).slice(0,10)>=HOJE), k=(id,v)=>{const el=$('#'+id);if(el)el.textContent=nf(v);};
+    k('cm-k-tot',R.length);k('cm-k-vig',vig.length);k('cm-k-fix',vig.filter((a)=>a.fixo).length);k('cm-k-urg',vig.filter((a)=>a.nivel==='urgente').length);
+    h.innerHTML=L.length?L.map((a)=>cmCartao(a)).join(''):'<p class="cg-status" style="padding:12px 14px">Nenhum aviso publicado.</p>';if(st)st.textContent=L.length?L.length+' mais recentes':'';}
+  catch(e){cmEquipe([]);h.innerHTML='<p class="cg-status" style="padding:12px 14px">O histórico não carregou nesta sessão ('+esc(e.message)+'). Entre no <a href="/office/" target="_blank" rel="noopener">Ex Officio</a> e volte a esta página.</p>';if(st)st.textContent='';}
 }
 /* ---------- Início (painel incorporado à Inteligência) ---------- */
 function vInicio(emb) {
@@ -2181,7 +2251,7 @@ D.addEventListener('click', (e) => {
 D.addEventListener('input',(e)=>{if(ABA!=='inteligencia')return;if(e.target.id==='cg-rel-title'){CG_REL.titulo=e.target.value;cgRelAtualizar();}else if(e.target.id==='cg-rel-sub'){CG_REL.sub=e.target.value;cgRelAtualizar();}});
 D.addEventListener('change',(e)=>{if(e.target.id==='cg-rel-format')CG_REL.formato=e.target.value;});
 D.addEventListener('submit',(e)=>{if(e.target.id!=='cg-com-form')return;e.preventDefault();const f=e.target,E=f.elements,st=$('#cg-com-status'),bt=f.querySelector('[type=submit]');bt.disabled=true;if(st)st.textContent='Publicando…';
- const d={title:E.title.value,message:E.message.value,link:'',linkTxt:'',nivel:E.nivel.value,painel:E.painel.checked,notificacao:E.notificacao.checked,fixo:E.fixo.checked,ate:E.ate.value,para:[]};
+ const d={title:E.title.value,message:E.message.value,link:'',linkTxt:'',nivel:E.nivel.value,painel:true,notificacao:E.onde.value!=='mural',fixo:E.fixo.checked,ate:E.ate.value,para:cmPara(f)};
  cgApi('/api/notificacoes?gestao=1',{method:'POST',body:JSON.stringify(d)}).then(()=>{f.reset();if(st)st.textContent='Aviso publicado.';toast('Aviso publicado.');return cgComCarregar();}).catch(er=>{if(st)st.textContent='Não foi possível publicar: '+er.message;toast('Não foi possível publicar o aviso.',true);}).finally(()=>{bt.disabled=false;});
 });
 $('#st-grava').addEventListener('click', () => { if (PRONTO && (ERRO || pendentes())) { TENT = 0; gravar(); } const mg = W.CMTPautas && W.CMTPautas.estadoGrava; if (mg && (mg.n || mg.erro) && W.CMTPautas.gravarJa) W.CMTPautas.gravarJa(); });

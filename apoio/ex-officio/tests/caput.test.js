@@ -143,3 +143,8 @@ test('Triagem › Visão geral: cabeçalhos com fundo próprio',()=>{
   const fs=require('fs'),p=require('path'),cap=fs.readFileSync(p.join(__dirname,'../../../caput/triagem/index.html'),'utf8');
   assert.ok(cap.includes('.tri-vg-h{background:var(--bg)')&&cap.includes('.tri-vg-c .ch{background:var(--bg)'),'fundo dos cabeçalhos');
 });
+
+test('Comunicação: padrão da Chefia, publicar com prévia ao lado do histórico, canais embaixo',()=>{
+  const fs=require('fs'),p=require('path'),cap=fs.readFileSync(p.join(__dirname,'../../../caput/triagem/index.html'),'utf8');
+  for(const x of ['id="cg-com-form"','id="cg-com-hist"','id="cg-com-status"','name="nivel" value="','name="onde" value="','name="todos" checked','function cmParaSync(','para:cmPara(f)}',"pill('fixo'",'name="ate"','function cmPrevia(','function cmCartao(','cm-k-tot','data-cg-url="/office/#cmt"'])assert.ok(cap.includes(x),x);
+});
