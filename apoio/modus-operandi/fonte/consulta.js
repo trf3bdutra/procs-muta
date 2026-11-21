@@ -46,7 +46,7 @@
       tipoJulgamento:t['Tipo de Julgamento']||tipoJ(classe,''),decisaoOrigem:[g['Sentença - Decisão'],g['Sentença - ID']?'ID '+g['Sentença - ID']:''].filter(Boolean).join(' · '),
       recursos:linhasTab(g.Recursos),tempestividade:t.Tempestividade||'',preparo:t.Preparo||'',mpf:[t.MPF,t['Parecer - Sentido']].filter(Boolean).join(' · '),
       ed:t['ED - Vício']?{vicio:t['ED - Vício']}:null,retratacao:(t['Retratação - Tema']||t['Retratação - Tribunal'])?{tema:t['Retratação - Tema']||'',tribunal:t['Retratação - Tribunal']||''}:null,
-      resultado:p['Voto - Resultado']||'',honorarios:p['Voto - Honorários']||'',servidor:p.SERVIDOR||''};
+      resultado:p['Voto - Resultado']||'',honorarios:p['Voto - Honorários']||'',servidor:p.SERVIDOR||'',destino:p.Destino||''};
     if(/28[,.]86|0005019-15\.1997/.test([x.subassuntos,x.especificidades,x.sintese,p['Lote - Caso'],p.Lote].join(' ')))x.assunto='Reajuste de 28,86% (ACP 0005019-15.1997.4.03.6000)';
     Object.keys(x).forEach(function(k){if(x[k]==null||x[k]===''||(Array.isArray(x[k])&&!x[k].length))delete x[k];});
     return x;
@@ -148,7 +148,7 @@
   }
   /* sugestão para o caso: modelo do banco aderente ou só a estrutura da Minuta-Matriz (a matriz modular, quando elegível, vem antes: e28) */
   function aplicar(P,R){
-    var mt=matrizDoCaso(P),aN=nq(P.assunto||''),b=R.mod[0],forte=b&&(b.s>=12||(aN&&nq(b.x.assunto||'')===aN&&b.s>=6));
+    var pr=/monocr/i.test(P.destino||'')?'mono':'ac',mt=matrizDoCaso(P),aN=nq(P.assunto||''),b=R.mod.filter(function(z){return dkPronMod(z.x)===pr;})[0],forte=b&&(b.s>=12||(aN&&nq(b.x.assunto||'')===aN&&b.s>=6));
     if(forte)return {tipo:'mod',x:b.x,s:b.s,ach:b.ach,mat:mt};
     return {tipo:'mat',x:mt,cand:b||null};
   }
@@ -184,8 +184,8 @@
     return R.map(function(x){var p=x.p,tx=String(p.texto||'').replace(/\{\{?([^{}|]{1,120})(\|([^{}]{1,120}))?\}\}?/g,function(_,a,_2,r){return '['+(r||a)+']';});
       return '<li><button type="button" data-dpar="'+e(k)+'|'+e(p.id)+'"'+(ja.indexOf(p.id)>=0?' aria-pressed="true"':'')+'><b>'+e(p.titulo||p.id)+'</b><small>'+e([p.categoria,p.nivelTema].filter(Boolean).join(' · '))+'</small><span>'+e(tx.slice(0,220))+(tx.length>220?'…':'')+'</span></button></li>';}).join('');}
   /* ---------- rótulos do prontuário ---------- */
-  var ROT={processo:'Processo',item:'Item',classe:'Classe',assunto:'Assunto',subassuntos:'Tipo de caso',especificidades:'Especificidades',questoes:'Questões controvertidas',tipoJulgamento:'Tipo de julgamento',decisaoOrigem:'Decisão na origem',recursos:'Recursos',tempestividade:'Tempestividade',preparo:'Preparo',requisito:'Outro requisito',mpf:'MPF',ed:'ED · vício',retratacao:'Retratação',resultado:'Resultado',consectarios:'Consectários',honorarios:'Honorários',multa:'Multa',servidor:'Servidor'};
-  var GRP=[['Identificação',['processo','item','classe','tipoJulgamento','servidor']],['Matéria',['assunto','subassuntos','especificidades','questoes']],
+  var ROT={processo:'Processo',item:'Item',destino:'Destino',classe:'Classe',assunto:'Assunto',subassuntos:'Tipo de caso',especificidades:'Especificidades',questoes:'Questões controvertidas',tipoJulgamento:'Tipo de julgamento',decisaoOrigem:'Decisão na origem',recursos:'Recursos',tempestividade:'Tempestividade',preparo:'Preparo',requisito:'Outro requisito',mpf:'MPF',ed:'ED · vício',retratacao:'Retratação',resultado:'Resultado',consectarios:'Consectários',honorarios:'Honorários',multa:'Multa',servidor:'Servidor'};
+  var GRP=[['Identificação',['processo','item','destino','classe','tipoJulgamento','servidor']],['Matéria',['assunto','subassuntos','especificidades','questoes']],
     ['Admissibilidade',['tempestividade','preparo','requisito','mpf','decisaoOrigem','recursos','ed','retratacao']],['Julgamento',['resultado','honorarios','multa']]];
   function val(k,v){if(Array.isArray(v))return v.map(function(x){return x&&typeof x==='object'?Object.keys(x).map(function(z){return x[z];}).filter(Boolean).join(' / '):x;}).join(' · ');if(v&&typeof v==='object')return Object.keys(v).map(function(z){return v[z];}).filter(Boolean).join(' · ');return v;}
   /* ---------- painel de conformidade e material aplicável ---------- */

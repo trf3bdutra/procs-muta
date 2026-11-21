@@ -626,8 +626,10 @@ function dkAplicaCaso(P,sg){
   if(v==='ap'&&(P.recursos||[]).filter(function(r){return /apela/i.test(r);}).length>1)v='dap';
   var novo=(XD.proc||'')!==(P.processo||'');
   if(novo){XP.alt={};XP.abre={};XP.fora={};XP.vb={};Object.keys(FILL).forEach(function(k){if(!/^mod-|^par:/.test(k))delete FILL[k];});DK.inc={};}
-  XP.pc='acordao';XP.v.acordao=v;if(v==='ap'||v==='aprn'||v==='ai')DK.cl=v;
-  var mt=sg&&sg.mat;if(mt){var rec=xRecAtual();if(rec)XP.res['acordao:'+rec+':'+v]=mt.id;}
+  XP.v.acordao=v;if(v==='ap'||v==='aprn'||v==='ai')DK.cl=v;
+  /* destino na ficha: monocrática abre a decisão monocrática; senão, acórdão */
+  if(/monocr/i.test(P.destino||'')){XP.pc='decisao';XP.v.decisao='mono';XP.mrec=v==='ai'?'ai':/remessa/.test(tj)&&!/apela/.test(tj)?'rn':'ap';}else XP.pc='acordao';
+  var mt=sg&&sg.mat;if(mt&&XP.pc==='acordao'){var rec=xRecAtual();if(rec)XP.res['acordao:'+rec+':'+v]=mt.id;}
   DK.fonteManual=false;if(sg&&sg.tipo==='m28')DK.fonte='m28';else if(sg&&sg.tipo==='mod'&&sg.x){DK.fonte='mod';DK.mod=sg.x.id;}else DK.fonte='mat';
   XP.sel=null;DK.parte='';DK.pick='';DK.modq='';DK.rtab='caso';dkGuarda();
   XD.proc=P.processo||'';XD.ac=null;XD.naoAchou=false;
