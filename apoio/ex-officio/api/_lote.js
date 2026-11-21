@@ -297,6 +297,10 @@ module.exports = async (req, res) => {
     limpaLote(lote);
     if (String(q.correspondencias||'') === '1') {
       const avaliar=require('./_collectio_correspondencias').avaliar;
+      /* alcance pedido pelo painel lateral: um processo (&processo=10 primeiros dígitos) ou alguns grupos (&grupos=a,b) */
+      const gsel = String(q.grupos || '').split(',').map(x => x.trim()).filter(Boolean), psel = String(q.processo || '').replace(/[^\d.-]/g, '').slice(0, 10);
+      if (gsel.length) lote.itens = lote.itens.filter(it => gsel.includes(String(it.grupo || '')));
+      if (psel) lote.itens = lote.itens.filter(it => String(it.processo || '').slice(0, 10) === psel);
       const {dados:estrut}=await L.lerJson('modelos/matrizes-estruturais.json');
       const materia28=/28[.,]86/.test(lote.titulo||'')||lote.itens.some(x=>/28[.,]86/.test(x.assunto||''));
       const modular=materia28?(await L.lerJson('modelos/matrizes-2886.json')).dados:null;
