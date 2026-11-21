@@ -25,3 +25,6 @@ test('Prontuário: títulos de seção leves e campos compactos',()=>{
  assert.ok(app.includes('#prq .sgx button{flex:1 1 auto!important;padding:3px 8px!important'));
  assert.ok(app.includes('#prq .ac-s,#prq .ac .prt-nt{border:0!important;border-bottom:1px solid var(--el)!important'));
 });
+test('Prontuário: copiar processo e IDs, peças numa linha; cartões com contagem mesmo quando é 1',()=>{
+ for(const x of ["class=\"cpy '+cls+'\"",'#prq .prt:not(.pmn) .prt-body .rec.rec-pc{grid-template-columns:minmax(0,1fr) 88px 82px 20px 20px','text-align:justify',"A.length||'')+","N||'');})()+",'.sn-b.on.nt i{background:']) assert.ok(app.includes(x),x);
+});

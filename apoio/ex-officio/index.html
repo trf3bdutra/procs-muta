@@ -2931,9 +2931,9 @@ document.addEventListener('keydown',function(e){if(e.target&&e.target.id==='ac-p
 function sinais(it,A,c){var MO=S.fonte==='mono',b=function(f,on,cls,ic,tt,n){return '<button type="button" class="sn-b'+(on?' on '+cls:'')+'" data-a="sinal" data-f="'+f+'" aria-label="'+esc(tt)+'">'+ic+(n?'<i>'+n+'</i>':'')+'</button>';};
   return '<span class="sn" role="group" aria-label="Sinalizações">'+
     (MO?'':soInd(it,c))+
-    b('al',A.length>0,'al',ICN.al,A.length?'Pendências: '+A.join(' · '):'Sem pendências',A.length>1?A.length:'')+
-    b('ic',!!c.intercor,c.intercorOk?'ok':'ic2',ICN.ic,c.intercor?'Intercorrência'+(c.intercorOk?' (resolvida)':'')+': '+c.intercor:'Sem intercorrência · clique para registrar')+
-    (function(){var N=notasDe(it).length;return b('nt',N>0,'nt',ICN.nt,N?N+(N===1?' nota':' notas')+' sobre o caso · clique para ver ou incluir':'Sem notas · clique para incluir uma nota sobre o caso',N>1?N:'');})()+
+    b('al',A.length>0,'al',ICN.al,A.length?'Pendências: '+A.join(' · '):'Sem pendências',A.length||'')+
+    b('ic',!!c.intercor,c.intercorOk?'ok':'ic2',ICN.ic,c.intercor?'Intercorrência'+(c.intercorOk?' (resolvida)':'')+': '+c.intercor:'Sem intercorrência · clique para registrar',c.intercor&&!c.intercorOk?1:'')+
+    (function(){var N=notasDe(it).length;return b('nt',N>0,'nt',ICN.nt,N?N+(N===1?' nota':' notas')+' sobre o caso · clique para ver ou incluir':'Sem notas · clique para incluir uma nota sobre o caso',N||'');})()+
     '<button type="button" class="sn-b dv" data-a="duvida" title="Registrar dúvida sobre este processo" aria-label="Registrar dúvida"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.6 2.2c-.8.4-1.1 1-1.1 1.8M12 17v.5"/></svg></button></span>';}
 /* balão ao passar o cursor: pendências, intercorrência ou sustentação daquele processo */
 function sinalTip(it,f){var c=it.ctl||{},A=alertas(it),L=function(t,x){return '<b>'+t+'</b>'+x;};
@@ -7848,6 +7848,39 @@ window.CMTFicha = { versao: 1, abrir: abrir, fechar: function () { fechar(true);
 })();
 
 
+
+/* botão de copiar: número do processo (no prontuário e nos cartões) e campos de ID do prontuário; peças numa linha só.
+   Enfeita o que a página desenha, sem mexer no desenho original nem nos campos (data-p continua igual). */
+(function(){
+  var ICO='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="1"/><path d="M5 15V4a1 1 0 0 1 1-1h11"/></svg>';
+  var bt=function(cls,tit){return '<button type="button" class="cpy '+cls+'" title="'+tit+'" aria-label="'+tit+'">'+ICO+'</button>';};
+  function enfeita(){
+    var q=document.getElementById('prq');
+    if(q){
+      var b=q.querySelector('.prt-id>b');if(b&&!(b.nextElementSibling&&b.nextElementSibling.classList.contains('cpy'))&&!b.parentElement.classList.contains('cpy-l')){var w=document.createElement('span');w.className='cpy-l';b.parentNode.insertBefore(w,b);w.appendChild(b);w.insertAdjacentHTML('beforeend',bt('cpy-cnj','Copiar o número do processo'));}
+      Array.prototype.forEach.call(q.querySelectorAll('input[data-p$=".id"],input[data-p="orig.id"],input[data-p$=".numero"],input[data-p$=".cnj"]'),function(i){if(i.parentElement.classList.contains('cpw'))return;var w=document.createElement('span');w.className='cpw';i.parentNode.insertBefore(w,i);w.appendChild(i);w.insertAdjacentHTML('beforeend',bt('cpy-in',/numero|cnj/.test(i.getAttribute('data-p'))?'Copiar o número':'Copiar o ID'));});
+      Array.prototype.forEach.call(q.querySelectorAll('.rec'),function(r){if(!r.classList.contains('rec-pc')&&r.querySelector('input[data-p$=".desc"]'))r.classList.add('rec-pc');
+        var ds=r.querySelector('input[data-p$=".desc"]');if(ds&&ds.title!==ds.value)ds.title=ds.value;
+        if(r.classList.contains('rec-pc')){var es=r.querySelector(':scope>input[data-p$=".esp"]');
+          if(es){r.classList.toggle('sem-esp',!es.value.trim());
+            var eb=r.querySelector(':scope>.esp-b');if(!eb){var xx=r.querySelector(':scope>button.x');var h='<button type="button" class="esp-b" title="Especificação do documento" aria-label="Especificação do documento"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h11M4 12h11M4 18h7"/><path d="M18 15v6M15 18h6"/></svg></button>';if(xx)xx.insertAdjacentHTML('beforebegin',h);else es.insertAdjacentHTML('beforebegin',h);eb=r.querySelector(':scope>.esp-b');}
+            eb.classList.toggle('on',!!es.value.trim());}}
+        var x=r.classList.contains('rec-pc')&&r.querySelector(':scope>button.x');if(x&&!x.dataset.ic){x.dataset.ic='1';x.textContent='×';x.title='Remover a peça';x.setAttribute('aria-label','Remover a peça');}});
+    }
+    Array.prototype.forEach.call(document.querySelectorAll('#v-pauta .mr-l1>.cnj'),function(c){if(c.nextElementSibling&&c.nextElementSibling.classList.contains('cpy'))return;c.insertAdjacentHTML('afterend',bt('cpy-card','Copiar o número do processo'));});
+  }
+  var ag=0;new MutationObserver(function(){if(ag)return;ag=requestAnimationFrame(function(){ag=0;enfeita();});}).observe(document.body,{childList:true,subtree:true});
+  function copia(txt,b){txt=String(txt||'').trim();if(!txt){toast('Nada para copiar.');return;}
+    var ok=function(){b.classList.add('ok');setTimeout(function(){b.classList.remove('ok');},900);toast('Copiado: '+txt);};
+    if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(txt).then(ok,function(){toast('Não foi possível copiar.');});
+    else{var t=document.createElement('textarea');t.value=txt;document.body.appendChild(t);t.select();try{document.execCommand('copy');ok();}catch(e){toast('Não foi possível copiar.');}t.remove();}}
+  /* botão da especificação: mostra o campo e põe o cursor nele; vazio ao sair, some de novo */
+  document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('#prq .esp-b');if(!b)return;e.preventDefault();var r=b.closest('.rec'),es=r&&r.querySelector(':scope>input[data-p$=".esp"]');if(!es)return;r.classList.add('esp-on');es.focus();},true);
+  document.addEventListener('focusout',function(e){var t=e.target;if(!t||!t.matches||!t.matches('#prq .rec-pc>input[data-p$=".esp"]'))return;var r=t.closest('.rec');setTimeout(function(){if(!t.value.trim())r.classList.remove('esp-on');r.classList.toggle('sem-esp',!t.value.trim());var eb=r.querySelector(':scope>.esp-b');if(eb)eb.classList.toggle('on',!!t.value.trim());},150);},true);
+  document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('.cpy');if(!b)return;e.preventDefault();e.stopPropagation();
+    if(b.classList.contains('cpy-in')){var i=b.parentElement.querySelector('input');copia(i&&i.value,b);}
+    else{var c=b.previousElementSibling;copia(c&&c.textContent,b);}},true);
+})();
 </script>
 <!-- cmt-ficha:fim -->
 <style>
@@ -9786,6 +9819,36 @@ html[data-theme=dark] #prq .ac-st.ok{background:rgba(95,191,138,.18);color:#8fd6
 #prq .ac-h{margin-top:4px!important;font-size:10.5px}
 #prq .ac-pl{padding:4px 6px!important}
 #prq .ac-pls{gap:4px!important}
+
+/* Prontuário · textos justificados; peças numa linha só (documento · ID · data · remover); botão de copiar no número do
+   processo e nos IDs (20/11/2026) */
+#prq .lv-t,#prq .lvw textarea,#prq .prt-body li>span,#prq .ac-pl textarea{text-align:justify;hyphens:auto}
+#prq .prt:not(.pmn) .prt-body .rec.rec-pc{grid-template-columns:minmax(0,1fr) 88px 82px 20px 20px!important;column-gap:6px;row-gap:4px;align-items:center}
+#prq .prt:not(.pmn) .prt-body .rec.rec-pc>input[data-p$=".esp"]{grid-column:1/-1}
+#prq .rec.rec-pc>button.x{width:22px;height:22px;padding:0;border:0;background:none;color:var(--em);font-size:15px;line-height:1;cursor:pointer;border-radius:0}
+#prq .rec.rec-pc>button.x:hover{color:#b3261e;background:var(--ep2,#f3f1e8)}
+#prq .rec.rec-pc input[type=date]{padding:0 3px!important;font-size:11px!important;font-family:var(--emono,ui-monospace,monospace)!important;position:relative}
+#prq .rec.rec-pc input[type=date]::-webkit-calendar-picker-indicator{position:absolute;inset:0;width:auto;height:auto;opacity:0;cursor:pointer}
+#prq .rec.rec-pc>.cpw>input{font-size:11px!important;padding:0 20px 0 4px!important}#prq .rec.rec-pc>.cpw>.cpy{width:18px;right:1px}
+#prq .cpw,.pc-cpw{position:relative;display:block;min-width:0}
+#prq .cpw>input{width:100%;padding-right:24px!important;font-family:var(--emono,ui-monospace,monospace)!important;font-size:11.5px!important}
+.cpy{display:inline-grid;place-items:center;width:20px;height:20px;padding:0;border:0;background:none;color:var(--em,#5d6b72);cursor:pointer;opacity:.7;border-radius:0;flex:none}
+.cpy:hover{opacity:1;color:var(--eg,#1b5878);background:var(--ep2,#f3f1e8)}
+.cpy svg{width:13px;height:13px}
+#prq .cpw>.cpy{position:absolute;right:2px;top:50%;transform:translateY(-50%)}
+#prq .prt-id .cpy-l{display:inline-flex;align-items:center;gap:4px}
+#v-pauta .mr-l1 .cpy{width:18px;height:18px;margin-left:-4px;opacity:0;transition:opacity .12s}
+#v-pauta .pc:hover .mr-l1 .cpy,#v-pauta .mr-l1 .cpy:focus-visible{opacity:.7}
+.cpy.ok{color:#28744b!important;opacity:1!important}
+/* peça: a especificação só aparece se já tiver texto ou depois de clicar no botão ao lado da data */
+#prq .rec.rec-pc.sem-esp:not(.esp-on)>input[data-p$=".esp"]{display:none}
+#prq .rec.rec-pc>.esp-b{width:20px;height:22px;padding:0;border:0;background:none;color:var(--em,#5d6b72);cursor:pointer;display:inline-grid;place-items:center;opacity:.75}
+#prq .rec.rec-pc>.esp-b:hover{opacity:1;color:var(--eg,#1b5878);background:var(--ep2,#f3f1e8)}
+#prq .rec.rec-pc>.esp-b.on{color:var(--eo2,#805b18);opacity:1}
+#prq .rec.rec-pc>.esp-b svg{width:14px;height:14px}
+/* cartões: contagem visível também quando há só uma pendência, nota ou intercorrência; cor do indicador pela sinalização */
+.sn-b.on.nt i{background:var(--eg,#1b5878)}
+.sn-b.on.ic2 i{background:#b8860b}
 </style>
 </body>
 </html>
