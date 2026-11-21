@@ -33,7 +33,7 @@ test('Equipe: CM não corrige; minuta por exceção só na escolha manual',()=>{
 
 test('Mesa: agrupar por motivo do minutante e do corretor',()=>{
   const pag=read('caput/designacao/index.html');
-  for(const x of ['data-ag="lote"','data-ag="sec"','data-ag="md"','data-ag="mc"','function motivo(x,k)','return grupo(x)===b'])assert.ok(pag.includes(x),x);
+  for(const x of ['function motivo(x,k)','return grupo(x)===b'])assert.ok(pag.includes(x),x);
   for(const m of ['Escolha manual','Continuidade','Regra do gabinete','Especialidade ou preferência','Experiência no assunto','Mesmo lote ou assunto','Já designado na pauta','Distribuição pela carga'])assert.ok(pag.includes(m),m);
 });
 
@@ -73,7 +73,7 @@ test('Pautas: painel da sessão integrado ao cabeçalho e julgadores com substit
 
 test('Mesa: filtro por assunto e agrupamento por assunto, minutante e corretor; rodapé da Triagem só na Triagem',()=>{
   const pag=read('caput/designacao/index.html');
-  for(const x of ['data-ag="as"','data-ag="pd"','data-ag="pc"','id="f-as"',"if(FASS&&N(x.as)!==FASS)return false;"])assert.ok(pag.includes(x),x);
+  for(const x of ["var AG='as';",'id="f-as"',"if(FASS&&N(x.as)!==FASS)return false;"])assert.ok(pag.includes(x),x);
   assert.ok(read('caput/triagem/index.html').includes('#rodape[hidden]{display:none!important}'),'rodapé oculto fora da Triagem');
 });
 
@@ -149,7 +149,7 @@ test('Mesa: Atualizar proposta ao lado de Aplicar; agrupar pelas regras do paine
   const pag=read('caput/designacao/index.html');
   assert.ok(/<div class="hac" id="hac" hidden><button type="button" class="btn" data-a="limpar"[^>]*>Limpar<\/button><button type="button" class="btn" data-a="desfazer-limpar" hidden>Desfazer limpeza<\/button><button type="button" class="btn" data-a="recalc"[^>]*>Atualizar proposta<\/button><button type="button" class="btn pri" data-a="copiar"/.test(pag),'recalc antes de Aplicar');
   assert.ok(pag.includes("document.getElementById('b-recalc-tb').hidden=VIVO"),'um só botão no Caput');
-  assert.ok(pag.includes('>Regra da minuta</button>')&&pag.includes('>Regra da correção</button>')&&pag.includes('VIVO.designacaoPorRegra(D.sessao.id)')&&pag.includes('nenhum processo nesta pauta'),'grupos pelas regras');
+  assert.ok(!pag.includes('data-ag="md"')&&pag.includes('VIVO.designacaoPorRegra(D.sessao.id)')&&pag.includes('nenhum processo nesta pauta'),'grupos pelas regras');
   assert.ok(pag.includes('class="sw"')&&pag.includes('.pp .mt{')&&pag.includes("'<span class=\"mt\">'"),'linha da pessoa');
 });
 
@@ -187,7 +187,7 @@ test('Mesa: na regra da minuta e da correção, processos de cada regra organiza
 
 test('Mesa: assuntos sempre organizados dentro do grupo, por ordem da pauta, seção ou quantidade',()=>{
   const m=require('fs').readFileSync(require('path').join(__dirname,'../../../caput/designacao/index.html'),'utf8');
-  for(const x of ['data-asord="pauta"','data-asord="sec"','data-asord="qtd"',"localStorage.setItem('mesa_ordas'",'var ordAs=function(L)'])assert.ok(m.includes(x),x);
+  for(const x of ['data-asord="pauta"','data-asord="qtd"',"localStorage.setItem('mesa_ordas'",'var ordAs=function(L)'])assert.ok(m.includes(x),x);
   [...m.matchAll(/<script>([\s\S]*?)<\/script>/g)].forEach((x)=>new (require('vm').Script)(x[1]));
 });
 
@@ -228,7 +228,10 @@ test('Produtividade: níveis de complexidade (despacho 0,25 · serial 0,5 · pad
 test('Mesa: fluxo em 4 passos, regras obrigatórias antes da proposta e conferência',()=>{
   const pag=read('caput/designacao/index.html'),m=read('caput/motor/assets/js/21-sessoes-equipe.js');
   for(const x of ["['cl','RemNec','José','Vanilda']","if(r.q==='cl')return (x.cl||'')===r.v;",'function passos(du,k,tot,cap)',"'Período e equipe'","'Regras obrigatórias'","'Proposta'","'Conferir e aplicar'",'id="pn-obr"','id="pn-conf"','function painelObr()','function painelConf(P,nAp)','function pend()'])assert.ok(pag.includes(x),x);
-  assert.ok(pag.includes("var ob=obr(x,'d'),esc_=ob&&livre(ob.d,'d')?")&&pag.includes("var oc=obr(x,'c'),e=oc&&livre(oc.c,'c')?"),'obrigatória decide antes do escore');
+  assert.ok(pag.includes("var fx=fixa(x,'d'),esc_=fx&&livre(fx.nome,'d')?")&&pag.includes("var fc=fixa(x,'c'),e=fc&&livre(fc.nome,'c')?"),'regra (geral ou do assunto) decide antes do escore');
+  for(const x of ['function linhaAssunto(a,L)','class="sec-h"','data-ras=','VIVO.definirRegraAssunto(D.sessao.id,aa,','data-destrava=','var fx=fixa(x,k),trav=!!fx&&v===fx.nome&&!DESTR[x.i+\'|\'+k];'])assert.ok(pag.includes(x),x);
+  assert.ok(!pag.includes('class="seg ag"'),'só agrupa por assunto');
+  assert.ok(m.includes('definirRegraAssunto: function (id, assunto, d, c)'));
   assert.ok(pag.includes("if(a==='ob-seguir')")&&pag.includes('data-obup=')&&pag.includes('data-obdel='),'seguir as regras, reordenar e remover');
   assert.ok(m.includes('obrigatorias: function ()')&&m.includes('definirObrigatorias: function (L)'),'motor guarda em designacao.json');
 });

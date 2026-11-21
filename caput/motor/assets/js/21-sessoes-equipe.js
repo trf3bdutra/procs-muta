@@ -2182,6 +2182,9 @@ html[data-theme=dark] .pc-s.inc{background:#2a1c1f;border-color:#6b3a36}html[dat
       ss.regrasSessao = ss.regrasSessao.filter(function (x) { return x.id !== rid; }); HIST = null; salvar(); return true; },
     criarRegraEtiqueta: function (termo, ef, v) { termo = String(termo || '').trim(); if (!termo || !EF[ef] || (EF[ef].v && !String(v || '').trim())) return false;
       S.regras.push(regra(ef, [{ t: termo, m: 'igual' }], { v: String(v || '').trim(), nome: termo, origem: 'esteira' })); HIST = null; salvar(); if (root && !root.hidden) render(); return true; },
+    /* regra do assunto pela mesa: d ou c em branco tiram a regra; null não mexe */
+    definirRegraAssunto: function (id, assunto, d, c) { var ss = S.sessoes.find(function (x) { return x.id === id; }), D = ss && ss.desigOverride ? ss.desigOverride : S.desig; if (!D || !assunto) return false; D.rows = D.rows || {};
+      var key = 'tema:' + N(assunto), r = D.rows[key] || (D.rows[key] = { d: '', c: '', cap: String(assunto).trim() }); if (d != null) r.d = d || ''; if (c != null) r.c = c || ''; HIST = null; salvar(); return true; },
     regraAssunto: function (id, assunto, d, c) { var ss = S.sessoes.find(function (x) { return x.id === id; }); if (!assunto || (!d && !c)) return false; var D = ss && ss.desigOverride ? ss.desigOverride : S.desig;
       var key = 'tema:' + N(assunto), r = D.rows[key] || (D.rows[key] = { d: '', c: '', cap: assunto }); if (d) r.d = d; if (c) r.c = c; HIST = null; salvar(); if (root && !root.hidden) render(); return true; },
     previaDaTriagem: function (id) { var ss = S.sessoes.find(function (x) { return x.id === id; }); if (!ss) return []; return linhasSelecao(ss).map(function (r) { return dig(r.Processo || r.processo); }); },

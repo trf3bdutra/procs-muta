@@ -238,7 +238,7 @@ test('Cartões de indicadores no padrão da Visão geral (Chefia, Coordenação,
 
 test('Mesa: coluna de capacidade inteira (sem rolagem) e regras de minuta e correção num painel só, acima da lista',()=>{
   const cap=require('fs').readFileSync(require('path').join(__dirname,'../../../caput/triagem/index.html'),'utf8');
-  for(const x of ['class="cwe-box cwe-rg cwe-rg1${rmin ? \' min\' : \'\'}" slot="regras"','<div class="cwe-rg2">${col(\'d\', \'MINUTA\')}${col(\'c\', \'CORREÇÃO\')}</div>',"sl.name = 'regras'",'.mb.emb .side{position:static!important;align-self:start;max-height:none!important;overflow:visible!important}','cwe-sr1" slot="regras"'])assert.ok(cap.includes(x),x);
+  for(const x of ['class="cwe-box cwe-rg cwe-rg1${rmin ? \' min\' : \'\'}" slot="regras"','<div class="cwe-rg2">${col(\'d\', \'MINUTA\')}${col(\'c\', \'CORREÇÃO\')}</div>',"sl.name = 'regras'",'.mb.emb .side{position:static!important;align-self:start;max-height:none!important;overflow:visible!important}'])assert.ok(cap.includes(x),x);
 });
 
 test('Mesa: sem "Editar regras" no painel de regras; faixa de seleção dentro do cabeçalho fixo',()=>{
@@ -255,7 +255,7 @@ test('Mesa: painel REGRAS NESTA ORDEM recolhível (lembra a escolha)',()=>{
 
 test('Pautas: seletor de sessões com rolagem, três por vez; assuntos sem regra junto das regras na mesa',()=>{
   const cap=require('fs').readFileSync(require('path').join(__dirname,'../../../caput/triagem/index.html'),'utf8');
-  for(const x of ['.cwe-nav .cwe-ses{max-height:178px;overflow-y:auto','cwe-sr1" slot="regras"',"::slotted([slot=regras]){margin:0 0 12px}"])assert.ok(cap.includes(x),x);
+  for(const x of ['.cwe-nav .cwe-ses{max-height:178px;overflow-y:auto',"::slotted([slot=regras]){margin:0 0 12px}"])assert.ok(cap.includes(x),x);
 });
 
 test('Mesa: capacidade e carga à direita, no padrão da esteira',()=>{

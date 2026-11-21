@@ -79,6 +79,13 @@ h2{margin:0 0 8px;font-size:11.5px;font-weight:800;letter-spacing:.08em;text-tra
 .pd{display:grid;grid-template-columns:22px minmax(0,1fr) auto;gap:8px;align-items:start;padding:7px 0;border-top:1px solid var(--lin);font-size:13px}
 .pd .ic{width:18px;height:18px;border-radius:50%;display:grid;place-items:center;font:700 11px var(--f-mono);background:var(--er-bg);color:var(--er)}.pd.ok .ic{background:var(--ok-bg);color:var(--ok)}
 .pd small{display:block;color:var(--mut);font-size:11.5px;margin-top:1px}
+.ds.trav select{background:#f4f0fa;border-color:#cbbfe3;color:#4b2f7a;opacity:1;cursor:not-allowed}.ds .cad{border:0;background:none;cursor:pointer;font-size:12px;padding:0 2px;line-height:1;filter:grayscale(.2)}.ds .cad:hover{transform:scale(1.15)}
+.sec-h{display:flex;align-items:baseline;gap:10px;margin:18px 0 8px;padding-bottom:5px;border-bottom:2px solid var(--ac);font:700 13px var(--f-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ac)}.sec-h small{font:500 11.5px var(--f-txt);letter-spacing:0;text-transform:none;color:var(--mut)}
+.bh .as2{flex-basis:100%;display:flex;flex-wrap:wrap;align-items:center;gap:5px 8px;font-size:12px;padding-top:4px;border-top:1px dashed var(--lin);margin-top:2px}
+.bh .as2 .lbx{font:600 9.5px var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--mut)}.bh .as2 .lbx+select{margin-left:-2px}
+.bh .as2 select{border:1px solid var(--lin);border-radius:7px;padding:2px 6px;background:var(--sup);font-size:12px;max-width:170px}.bh .as2 select.on{border-color:#4b2f7a;color:#4b2f7a;font-weight:700;background:#f4f0fa}
+.bh .as2 .lbx:nth-of-type(2){margin-left:10px}
+.xp{display:inline-flex;gap:3px;align-items:baseline;border:1px solid var(--lin);border-radius:999px;padding:0 8px;background:var(--sup);font-size:11.5px;white-space:nowrap}.xp b{font:700 11px var(--f-mono);color:var(--ac)}.xp.es{border-color:var(--ok);background:var(--ok-bg)}.xp.no{border-color:var(--er);color:var(--er);background:var(--er-bg)}
 .why span.o{background:#ece6f6;color:#4b2f7a;font-weight:700}
 .kp{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}
 @media (max-width:700px){.kp{grid-template-columns:repeat(2,1fr)}}
@@ -206,16 +213,7 @@ body.emb #b-aplicar{display:none}body.emb .lay{grid-template-columns:262px minma
       <select id="f-as" aria-label="Filtrar por assunto"><option value="">Todos os assuntos</option></select>
       <button type="button" class="btn" id="b-recalc-tb" data-a="recalc" title="Refaz a proposta com o período, as ausências e as regras atuais; mantém o que você escolheu à mão">Atualizar proposta</button>
       <div class="seg fora" id="fora" role="group" aria-label="Manter fora dos grupos" hidden></div>
-      <div class="seg asord" role="group" aria-label="Ordem dos assuntos"><span class="agl">Assuntos por</span><button type="button" data-asord="pauta" aria-pressed="false" title="Na ordem em que aparecem na pauta (número do item)">Ordem da pauta</button><button type="button" data-asord="sec" aria-pressed="false" title="1ª, 2ª e 3ª Seção; dentro de cada uma, os assuntos com mais processos primeiro">Seção</button><button type="button" data-asord="qtd" aria-pressed="true" title="Assuntos com mais processos primeiro">Quantidade</button></div>
-      <div class="seg ag" role="group" aria-label="Agrupar por">
-        <span class="agl">Agrupar por</span>
-        <button type="button" data-ag="lote" aria-pressed="true" title="Um grupo por lote; o que não está em lote fica em Sem lote">Lote</button><button type="button" data-ag="sec" aria-pressed="false" title="Um grupo por seção">Seção</button>
-        <button type="button" data-ag="as" aria-pressed="false" title="Um grupo por assunto">Assunto</button>
-        <button type="button" data-ag="pd" aria-pressed="false" title="Um grupo por minutante">Minutante</button>
-        <button type="button" data-ag="pc" aria-pressed="false" title="Um grupo por corretor">Corretor</button>
-        <button type="button" data-ag="md" aria-pressed="false" title="Pelas regras da minuta, na ordem do painel “Minuta · regras nesta ordem”">Regra da minuta</button>
-        <button type="button" data-ag="mc" aria-pressed="false" title="Pelas regras da correção, na ordem do painel “Correção · regras nesta ordem”">Regra da correção</button>
-      </div>
+      <div class="seg asord" role="group" aria-label="Ordem dos assuntos"><span class="agl">Assuntos por</span><button type="button" data-asord="pauta" aria-pressed="false" title="Na ordem em que aparecem na pauta (número do item)">Ordem da pauta</button><button type="button" data-asord="qtd" aria-pressed="true" title="Assuntos com mais processos primeiro">Quantidade</button></div>
     </div>
     <div id="blocos"><p class="mu carregando">Carregando a pauta pelo motor do Caput…</p></div>
   </main>
@@ -337,13 +335,16 @@ body.emb #b-aplicar{display:none}body.emb .lay{grid-template-columns:262px minma
   function obr(x,k){for(var i=0;i<OBR.length;i++){var r=OBR[i];if(r[k]&&casaObr(r,x))return r;}return null;}
   function rotObr(r){var v=r.q==='lote'?(NOMEL[r.v]||'lote '+r.v):r.q==='cl'?(CLN[r.v]||r.v):r.v;return v;}
   function livre(n,k){return !!n&&!AUS[n]&&!(k==='d'?FD:FC)[n];}
+  var TEMA={};Object.keys((D.regras&&D.regras.rows)||{}).forEach(function(k){if(k.indexOf('tema:')===0)TEMA[N(k.slice(5))]=D.regras.rows[k];});
+  /* regra fixa do processo: primeiro as obrigatórias (passo 2), depois a regra do assunto (cabeçalho de cada assunto) */
+  function fixa(x,k){var r=obr(x,k);if(r)return {nome:r[k],por:'obrigatória · '+rotObr(r)};var t=TEMA[N(x.as)];if(t&&t[k])return {nome:t[k],por:'regra do assunto'};return null;}
   function gravaObr(){if(VIVO&&VIVO.definirObrigatorias)try{VIVO.definirObrigatorias(OBR);}catch(er){}}
   function propor(){
     var du=diasUteis(de,ate), K=K0; PROP={};
     var LD={},LC={},LT={},AS={}; PD.forEach(function(m){CAPD[m.nome]=AUS[m.nome]||FD[m.nome]?0:capMin(m.nome,du);LD[m.nome]=0;});
     var pres=PC.filter(function(m){return !AUS[m.nome]&&!FC[m.nome];}); var cota=Math.ceil(IT.length/Math.max(1,pres.length)*1.05);
     PC.forEach(function(m){CAPC[m.nome]=AUS[m.nome]||FC[m.nome]?0:cota;LC[m.nome]=0;});
-    var pri=function(x){return obr(x,'d')?-1:(x.t==='ED'||x.t==='AgInt')?0:x.lote?1:2;};
+    var pri=function(x){return fixa(x,'d')?-1:(x.t==='ED'||x.t==='AgInt')?0:x.lote?1:2;};
     var ordem=IT.slice().sort(function(a,b){return pri(a)-pri(b)||(a.lote||'').localeCompare(b.lote||'')||a.i-b.i;});
     /* mesmo assunto, mesma pessoa (fora os embargos): quem já tem o assunto na pauta fica com os demais processos dele */
     var DONO={},cntD={};IT.forEach(function(x){if(x.t==='ED'||!x.d)return;var ka=N(x.as);cntD[ka]=cntD[ka]||{};cntD[ka][x.d]=(cntD[ka][x.d]||0)+1;});Object.keys(cntD).forEach(function(ka){DONO[ka]=Object.keys(cntD[ka]).sort(function(a,b){return cntD[ka][b]-cntD[ka][a];})[0];});
@@ -363,7 +364,7 @@ body.emb #b-aplicar{display:none}body.emb .lay{grid-template-columns:262px minma
         var cap=CAPD[m.nome]||1,u=(LD[m.nome]+w)/cap;s-=K.pen*u*u+(u>1?K.pen*1.6*(u-1):0);
         return {nome:m.nome,s:s,why:why};}).sort(function(a,b){return b.s-a.s;});
       /* regra obrigatória: decide antes de tudo (só não vale para quem está indisponível) */
-      var ob=obr(x,'d'),esc_=ob&&livre(ob.d,'d')?{nome:ob.d,s:999,why:[['o','obrigatória · '+rotObr(ob)]]}:cand[0]; if(!esc_){PROP[x.i]={d:'',wd:[],od:cand};return;}
+      var fx=fixa(x,'d'),esc_=fx&&livre(fx.nome,'d')?{nome:fx.nome,s:999,why:[['o',fx.por]]}:cand[0]; if(!esc_){PROP[x.i]={d:'',wd:[],od:cand};return;}
       LD[esc_.nome]=(LD[esc_.nome]||0)+w; if(x.lote)LT[x.lote+'|'+esc_.nome]=(LT[x.lote+'|'+esc_.nome]||0)+1; AS[N(x.as)+'|'+esc_.nome]=(AS[N(x.as)+'|'+esc_.nome]||0)+1;
       PROP[x.i]={d:esc_.nome,wd:esc_.why,od:cand};if(x.t!=='ED'&&!DONO[N(x.as)])DONO[N(x.as)]=esc_.nome;
     });
@@ -379,7 +380,7 @@ body.emb #b-aplicar{display:none}body.emb .lay{grid-template-columns:262px minma
         var lk=x.lote&&(LCT[x.lote+'|'+m.nome]||0);if(lk){s+=Math.min(2,lk*0.25);why.push(['l','mesmo lote']);}
         var u=(LC[m.nome]+1)/(CAPC[m.nome]||1);s-=K.pen*u*u+(u>1?K.pen*1.6*(u-1):0);
         return {nome:m.nome,s:s,why:why};}).sort(function(a,b){return b.s-a.s;});
-      var oc=obr(x,'c'),e=oc&&livre(oc.c,'c')?{nome:oc.c,s:999,why:[['o','obrigatória · '+rotObr(oc)]]}:cand[0];if(!e)return;LC[e.nome]=(LC[e.nome]||0)+1;if(x.lote)LCT[x.lote+'|'+e.nome]=(LCT[x.lote+'|'+e.nome]||0)+1;
+      var fc=fixa(x,'c'),e=fc&&livre(fc.nome,'c')?{nome:fc.nome,s:999,why:[['o',fc.por]]}:cand[0];if(!e)return;LC[e.nome]=(LC[e.nome]||0)+1;if(x.lote)LCT[x.lote+'|'+e.nome]=(LCT[x.lote+'|'+e.nome]||0)+1;
       PROP[x.i].c=e.nome;PROP[x.i].wc=e.why;PROP[x.i].oc=cand;});
   }
   /* designação inicial: o que já está gravado na pauta fica; a proposta preenche o resto */
@@ -426,14 +427,16 @@ body.emb #b-aplicar{display:none}body.emb .lay{grid-template-columns:262px minma
   function campo(x,k){var p=PROP[x.i]||{},v=fin(x,k),at=k==='d'?x.d:x.c,mud=!!at&&v!==at,man=ESC[x.i]&&ESC[x.i][k]!=null&&ESC[x.i][k]!==p[k],grav=!!at&&v===at&&!(ESC[x.i]&&ESC[x.i][k]!=null);
     var cand=k==='d'?p.od||[]:p.oc||[],pool=k==='d'?PD:PC,why=grav?[['','já designado na pauta']]:man?[['','escolha manual']]:(k==='d'?p.wd:p.wc);
     var sob=k==='d'&&v&&CAPD[v]!=null&&CARGA[v]>CAPD[v];
-    return '<div class="ds"><span class="lb">'+(k==='d'?'Minutante':'Corretor')+(sob?' <span class="sc" title="'+esc(v)+' fica acima da capacidade no período. Só um aviso.">↑ acima da meta</span>':'')+'</span><span class="ln"><select data-sel="'+k+'" data-i="'+x.i+'" class="'+(mud?'mud':'')+(man?' man':'')+'" aria-label="'+(k==='d'?'Minutante':'Corretor')+' do item '+x.i+'"><option value="">— ninguém —</option>'+opts(cand,v,pool)+optsEx(k,v)+'</select>'+
+    /* preenchido por regra (geral ou do assunto): travado; o cadeado destrava para mudar à mão neste processo */
+    var fx=fixa(x,k),trav=!!fx&&v===fx.nome&&!DESTR[x.i+'|'+k];
+    return '<div class="ds'+(trav?' trav':'')+'"><span class="lb">'+(k==='d'?'Minutante':'Corretor')+(sob?' <span class="sc" title="'+esc(v)+' fica acima da capacidade no período. Só um aviso.">↑ acima da meta</span>':'')+'</span><span class="ln">'+(trav?'<button type="button" class="cad" data-destrava="'+x.i+'|'+k+'" title="Fixado pela '+esc(fx.por)+'. Clique para destravar e mudar à mão neste processo." aria-label="Destravar">🔒</button>':'')+'<select data-sel="'+k+'" data-i="'+x.i+'"'+(trav?' disabled':'')+' class="'+(mud?'mud':'')+(man?' man':'')+'" aria-label=""'+(k==='d'?'Minutante':'Corretor')+' do item '+x.i+'"><option value="">— ninguém —</option>'+opts(cand,v,pool)+optsEx(k,v)+'</select>'+
       (mud?'<span class="at">gravado: <s>'+esc(at)+'</s></span>':'')+'</span><span class="why">'+chips(why)+'</span></div>';}
   var FASS='';
   function passa(x){if(FASS&&N(x.as)!==FASS)return false;var b=N(BUSCA);if(b&&N([x.cnj,x.as,x.d,x.c,fin(x,'d'),fin(x,'c'),x.partes].join(' ')).indexOf(b)<0)return false;
     if(FIL==='nov')return !x.d||!x.c;if(FIL==='ed')return x.t==='ED'||x.t==='AgInt';if(FIL==='meta')return x.t==='META';return true;}
   var CARGA={};
   /* agrupamento: por lote e seção, ou pelo motivo da escolha (minutante ou corretor) */
-  var AG='lote';
+  var AG='as';
   var MOTIVOS=[['man','Escolha manual','alterado por você nesta mesa'],['obr','Regra obrigatória','decide antes da proposta (passo 2)'],['grav','Já designado na pauta','gravado antes; a mesa não mexe sem você pedir'],['cont','Continuidade','quem minutou ou corrigiu o acórdão embargado ou agravado'],['regra','Regra do gabinete','regra de designação cadastrada; o critério vem no título'],
     ['esp','Especialidade ou preferência','competência indicada no perfil do servidor'],['hist','Experiência no assunto','mais minutas ou correções no histórico do assunto'],['lote','Mesmo lote ou assunto','mantém o lote e o assunto nas mesmas mãos'],
 ['carga','Distribuição pela carga','nenhum critério casou; vai para quem tem folga'],['vazio','Sem designação','ninguém disponível']];
@@ -461,7 +464,7 @@ body.emb #b-aplicar{display:none}body.emb .lay{grid-template-columns:262px minma
   function aberto(k,n){return ABRE[AG+'|'+k]!=null?ABRE[AG+'|'+k]:(AG==='bloco'||AG==='lote'||AG==='sec'||n<=1);}
   /* perfis dos servidores × processos do grupo em tela: especialidade, prefere, evita, histórico nos assuntos do grupo, carga e quanto já está com cada um */
   var CMP={};
-  var ORDAS='qtd';try{ORDAS=localStorage.getItem('mesa_ordas')||'qtd';}catch(e){}
+  var ORDAS='qtd';try{ORDAS=localStorage.getItem('mesa_ordas')||'qtd';}catch(e){}if(ORDAS!=='pauta')ORDAS='qtd';
   function cmpPainel(k,L){var kc=cargas(),n=L.length,pts=L.reduce(function(a,x){return a+peso(x);},0),AS0={};L.forEach(function(x){var a=x.as||'sem assunto';AS0[a]=(AS0[a]||0)+1;});
     var top=Object.keys(AS0).sort(function(a,b){return AS0[b]-AS0[a];}).slice(0,3).map(function(a){return a+' '+AS0[a];}).join(' · ');
     var tab=function(lst,kk){var R=lst.map(function(m){var fora=!!(AUS[m.nome]||(kk==='d'?FD:FC)[m.nome]);
@@ -479,6 +482,8 @@ body.emb #b-aplicar{display:none}body.emb .lay{grid-template-columns:262px minma
   function blocos(){CARGA={};IT.forEach(function(x){var d=fin(x,'d');CARGA[d]=(CARGA[d]||0)+peso(x);});var G={},ord=[],forak=[];IT.forEach(function(x){var k=grupo(x);if(!G[k]){G[k]=[];if(k.indexOf('F|')===0)forak.push(k);else ord.push(k);}G[k].push(x);});
     var fe=document.getElementById('fora');if(fe){var TT={};IT.forEach(function(x){if(x.t)TT[x.t]=(TT[x.t]||0)+1;});var tk=Object.keys(TT).sort();fe.hidden=!tk.length;fe.innerHTML=tk.length?'<span class="agl" title="O tipo marcado sai dos grupos (e do Bloco todo) e fica num grupo à parte, com a designação da regra">Manter fora dos grupos</span>'+tk.map(function(k){return '<button type="button" data-fora="'+esc(k)+'" aria-pressed="'+!!FORA[k]+'">'+esc(k)+' <small>'+TT[k]+'</small></button>';}).join(''):'';}
     if(AG==='bloco')ord.sort(function(a,b){var r=function(k){return k.indexOf('L:')===0?0:k==='T:ED'?1:2;};return r(a)-r(b)||G[b].length-G[a].length;});
+    else if(AG==='as'){var minI={};SECG={};ord.forEach(function(k){var c={};G[k].forEach(function(x){var q=x.sec||'Sem seção';c[q]=(c[q]||0)+1;minI[k]=Math.min(minI[k]||1e9,+x.i||1e9);});SECG[k]=Object.keys(c).sort(function(p,q){return c[q]-c[p];})[0];});
+      var skk=function(q){var m=/^(\d)/.exec(q||'');return m?+m[1]:9;};ord.sort(function(a,b){return skk(SECG[a])-skk(SECG[b])||(ORDAS==='pauta'?minI[a]-minI[b]:G[b].length-G[a].length)||a.localeCompare(b,'pt-BR');});}
     else if(AGP[AG])ord.sort(function(a,b){return (a==='L:')-(b==='L:')||G[b].length-G[a].length||a.localeCompare(b);});
     else ord.sort(function(a,b){return infoMotivo(a).ord-infoMotivo(b).ord||G[b].length-G[a].length;});
     var kd=(AG==='mc'||AG==='pd')?'c':'d';
@@ -490,14 +495,15 @@ body.emb #b-aplicar{display:none}body.emb .lay{grid-template-columns:262px minma
       var sec=function(a){var o=S[a].sec;return Object.keys(o).sort(function(p,q){return o[q]-o[p];})[0];},sk=function(s){var m=/^(\d)/.exec(s);return m?+m[1]:9;};
       var cmp=ORDAS==='pauta'?function(a,b){return S[a].i-S[b].i;}:ORDAS==='sec'?function(a,b){return sk(sec(a))-sk(sec(b))||S[b].n-S[a].n||a.localeCompare(b,'pt-BR');}:function(a,b){return S[b].n-S[a].n||a.localeCompare(b,'pt-BR');};
       var pos={};Object.keys(S).sort(cmp).forEach(function(a,i){pos[a]=i;});L.sort(function(a,b){return pos[a.as||'sem assunto']-pos[b.as||'sem assunto']||(+a.i)-(+b.i);});};
-    var h='';ord.forEach(function(k){var L=G[k].filter(passa);if(porAs)ordAs(L);if(vaz[k]){h+='<section class="bl vz"><div class="bh"><h3>'+esc(infoMotivo(k).nome)+'</h3><span class="ct">nenhum processo nesta pauta</span></div></section>';return;}if(!L.length)return;var dist={};L.forEach(function(x){var d=fin(x,kd)||'ninguém';dist[d]=(dist[d]||0)+1;});
+    var NS={};if(AG==='as')ord.forEach(function(k){if(k.indexOf('F|')===0)return;var n=G[k].filter(passa).length;if(!n)return;var q=SECG[k];NS[q]=NS[q]||{p:0,a:0};NS[q].p+=n;NS[q].a++;});var SECA=null;
+    var h='';ord.forEach(function(k){var L=G[k].filter(passa);if(porAs)ordAs(L);if(vaz[k]){h+='<section class="bl vz"><div class="bh"><h3>'+esc(infoMotivo(k).nome)+'</h3><span class="ct">nenhum processo nesta pauta</span></div></section>';return;}if(!L.length)return;if(AG==='as'&&k.indexOf('F|')!==0&&SECG[k]!==SECA){SECA=SECG[k];h+='<h2 class="sec-h">'+esc(SECA)+'<small>'+NS[SECA].p+' processo'+(NS[SECA].p>1?'s':'')+' · '+NS[SECA].a+' assunto'+(NS[SECA].a>1?'s':'')+'</small></h2>';}var dist={};L.forEach(function(x){var d=fin(x,kd)||'ninguém';dist[d]=(dist[d]||0)+1;});
       var dd=Object.keys(dist).sort(function(a,b){return dist[b]-dist[a];}).map(function(n){return n+' '+dist[n];}).join(' · ');
       var ab=aberto(k,ord.length),lim=ABERTO[k]?L.length:Math.min(L.length,12);
       var todosG=L.every(function(x){return SEL[x.i];});
       /* "Bloco todo" mostra a pessoa quando o grupo inteiro está com ela */
       var uni=function(q){var v=fin(L[0],q);return v&&L.every(function(x){return fin(x,q)===v;})?v:'';},uD=uni('d'),uC=uni('c');
       h+='<section class="bl'+(k.indexOf('F|')===0?' mo-fora':AG==='bloco'||AGP[AG]?'':' mo-'+k.split('|')[0])+'"><div class="bh"><input type="checkbox" class="ck" data-ckg="'+esc(k)+'"'+(todosG?' checked':'')+' aria-label="Selecionar todo o grupo" title="Selecionar todos os processos deste grupo"><button type="button" class="tg-gr" data-gr="'+esc(k)+'" aria-expanded="'+ab+'" title="'+(ab?'Recolher':'Abrir')+' o grupo">'+(ab?'▾':'▸')+'</button><h3 data-gr="'+esc(k)+'" style="cursor:pointer">'+esc(nomeGrupo(k))+'</h3><span class="ct">'+L.length+' processo'+(L.length>1?'s':'')+'</span><span class="dist">'+(kd==='c'?'correção: ':'minuta: ')+esc(dd)+'</span>'+(AG==='bloco'||AGP[AG]||k.indexOf('F|')===0?'':'<span class="sub">'+esc(infoMotivo(k).sub)+'</span>')+
-        '<button type="button" class="cmp-b" data-cmp="'+esc(k)+'" aria-pressed="'+!!CMP[k]+'" title="Comparar o perfil dos servidores com os processos deste grupo">Perfis ⇄</button><span class="bulk"><label>'+(AG==='bloco'?'Bloco todo':'Grupo todo')+': <select data-bulk="d" data-b="'+esc(k)+'"'+(uD?' class="on"':'')+'><option value="">'+(uD?'minutante…':'minutante: vários…')+'</option>'+PD.map(function(m){return '<option'+(m.nome===uD?' selected':'')+'>'+esc(m.nome)+'</option>';}).join('')+optsEx('d',uD)+'</select></label><select data-bulk="c" data-b="'+esc(k)+'" aria-label="Corretor do bloco"'+(uC?' class="on"':'')+'><option value="">'+(uC?'corretor…':'corretor: vários…')+'</option>'+PC.map(function(m){return '<option'+(m.nome===uC?' selected':'')+'>'+esc(m.nome)+'</option>';}).join('')+'</select></span></div>'+(CMP[k]?cmpPainel(k,L):'')+
+        '<button type="button" class="cmp-b" data-cmp="'+esc(k)+'" aria-pressed="'+!!CMP[k]+'" title="Comparar o perfil dos servidores com os processos deste grupo">Perfis ⇄</button><span class="bulk"><label>'+(AG==='bloco'?'Bloco todo':'Grupo todo')+': <select data-bulk="d" data-b="'+esc(k)+'"'+(uD?' class="on"':'')+'><option value="">'+(uD?'minutante…':'minutante: vários…')+'</option>'+PD.map(function(m){return '<option'+(m.nome===uD?' selected':'')+'>'+esc(m.nome)+'</option>';}).join('')+optsEx('d',uD)+'</select></label><select data-bulk="c" data-b="'+esc(k)+'" aria-label="Corretor do bloco"'+(uC?' class="on"':'')+'><option value="">'+(uC?'corretor…':'corretor: vários…')+'</option>'+PC.map(function(m){return '<option'+(m.nome===uC?' selected':'')+'>'+esc(m.nome)+'</option>';}).join('')+'</select></span>'+(AG==='as'&&k.indexOf('F|')!==0?linhaAssunto(k.slice(2),L):'')+'</div>'+(CMP[k]?cmpPainel(k,L):'')+
         (ab?L.slice(0,lim):[]).map(function(x,ix,arr){var sa=porAs&&L.length>1&&(ix===0||arr[ix-1].as!==x.as)?'<div class="sub-as">'+esc(x.as||'sem assunto')+'<small>'+L.filter(function(y){return y.as===x.as;}).length+'</small></div>':'';var mud=(x.d&&fin(x,'d')!==x.d)||(x.c&&fin(x,'c')!==x.c);return sa+'<div class="rw'+(mud?' mud':'')+(SEL[x.i]?' sel':'')+'" data-rw="'+x.i+'"><div class="pr"><input type="checkbox" class="ck" data-ck="'+x.i+'"'+(SEL[x.i]?' checked':'')+' aria-label="Selecionar o item '+x.i+'"><span class="it"><small>item </small>'+x.i+'</span><div class="pb"><span class="l1"><span class="cnj">'+esc(x.cnj)+'</span>'+(x.cl?'<span class="clb">'+esc(x.cl)+'</span>':'')+(x.t&&x.t!==x.cl?'<span class="tg '+x.t+'">'+x.t+'</span>':'')+'<span class="as" title="'+esc(x.as)+'">'+esc(x.as)+'</span></span><span class="mt">'+esc(x.sec||'')+((x.t==='ED'||x.t==='AgInt')&&x.od?(x.sec?' · ':'')+'acórdão: '+esc(x.od):'')+' '+selNivel(x)+'</span></div></div>'+campo(x,'d')+campo(x,'c')+'</div>';}).join('')+
         (ab&&L.length>lim?'<button type="button" class="mais" data-mais="'+esc(k)+'">Mostrar mais '+(L.length-lim)+'</button>':'')+'</section>';});
     if(ord.length>1)h='<div class="gr-acoes"><span>'+ord.filter(function(k){return G[k].some(passa);}).length+' grupos</span><button type="button" data-grtodos="1">Abrir todos</button><button type="button" data-grtodos="0">Recolher todos</button></div>'+h;
@@ -516,15 +522,15 @@ body.emb #b-aplicar{display:none}body.emb .lay{grid-template-columns:262px minma
   var PASSO=(function(){try{return localStorage.getItem('mesa_passo')||'';}catch(e){return '';}})();
   function pend(){var P={semD:[],semC:[],igual:[],contra:[],div:{}},As={};
     IT.forEach(function(x){var d=fin(x,'d'),c=fin(x,'c');if(!d)P.semD.push(x.i);if(!c)P.semC.push(x.i);
-      var od=obr(x,'d'),oc=obr(x,'c');if(d&&c&&d===c&&!(od&&oc&&od.d===oc.c))P.igual.push(x.i);
-      if((od&&livre(od.d,'d')&&d!==od.d)||(oc&&livre(oc.c,'c')&&c!==oc.c))P.contra.push(x.i);
+      var od=fixa(x,'d'),oc=fixa(x,'c');if(d&&c&&d===c&&!(od&&oc&&od.nome===oc.nome))P.igual.push(x.i);
+      if((od&&livre(od.nome,'d')&&d!==od.nome)||(oc&&livre(oc.nome,'c')&&c!==oc.nome))P.contra.push(x.i);
       if(x.t!=='ED'&&d){var ka=N(x.as);(As[ka]=As[ka]||{n:x.as,p:{}}).p[d]=1;}});
     Object.keys(As).forEach(function(k){var L=Object.keys(As[k].p);if(L.length>1)P.div[As[k].n]=L;});
     P.n=P.semD.length+P.semC.length+P.igual.length+P.contra.length+Object.keys(P.div).length;return P;}
   function passos(du,k,tot,cap){var pd=PD.filter(function(m){return !AUS[m.nome]&&!FD[m.nome];}),fora=PD.filter(function(m){return AUS[m.nome]||FD[m.nome];}).map(function(m){return m.nome;});
-    var nOb=IT.filter(function(x){return obr(x,'d')||obr(x,'c');}).length,P=pend(),nAp=IT.filter(function(x){return fin(x,'d')!==x.d||fin(x,'c')!==x.c;}).length;
+    var nOb=IT.filter(function(x){return fixa(x,'d')||fixa(x,'c');}).length,P=pend(),nAp=IT.filter(function(x){return fin(x,'d')!==x.d||fin(x,'c')!==x.c;}).length;
     var ps=[['1','Período e equipe',du+' <small>dias úteis</small>',pd.length+' minutando'+(fora.length?' · fora: '+fora.join(', '):''),du?'ok':'er'],
-      ['2','Regras obrigatórias',OBR.filter(function(r){return r.d||r.c;}).length+' <small>regras</small>',nOb+' processo(s) decididos por elas',OBR.length?'ok':''],
+      ['2','Regras obrigatórias',OBR.filter(function(r){return r.d||r.c;}).length+' <small>regras</small>',nOb+' processo(s) com regra (gerais e por assunto)',OBR.length?'ok':''],
       ['3','Proposta',nf(tot)+' <small>/ '+nf(cap)+' pt</small>',k.nv?k.nv+' sem designação gravada':'todos com designação gravada',k.nv?'pend':'ok'],
       ['4','Conferir e aplicar',nAp+' <small>alteraç'+(nAp===1?'ão':'ões')+'</small>',P.n?P.n+' pendência(s) a ver':'nenhuma pendência',P.n?'er':(nAp?'pend':'ok')]];
     document.getElementById('kp').innerHTML=ps.map(function(p){return '<button type="button" class="ps '+p[4]+'" data-passo="'+p[0]+'" aria-pressed="'+(PASSO===p[0])+'"><span class="nu">'+(p[4]==='ok'?'✓':p[0])+'</span><span class="t">'+p[0]+' · '+p[1]+'</span><span class="v">'+p[2]+'</span><span class="s" title="'+esc(p[3])+'">'+esc(p[3])+'</span></button>';}).join('');
@@ -554,8 +560,16 @@ body.emb #b-aplicar{display:none}body.emb .lay{grid-template-columns:262px minma
       linha(!P.semC.length,P.semC.length?P.semC.length+' sem corretor':'Todos com corretor',P.semC.length?'itens '+its(P.semC):'')+
       linha(!P.igual.length,P.igual.length?P.igual.length+' com a mesma pessoa minutando e corrigindo':'Ninguém corrige a própria minuta',P.igual.length?'itens '+its(P.igual):'')+
       linha(!dv.length,dv.length?dv.length+' assunto(s) divididos entre pessoas':'Cada assunto com uma pessoa só (fora os embargos)',dv.length?dv.slice(0,6).map(function(a){return esc(a)+': '+P.div[a].join(', ');}).join(' · '):'')+
-      linha(!P.contra.length,P.contra.length?P.contra.length+' contrariam as regras obrigatórias':'Tudo segue as regras obrigatórias',P.contra.length?'itens '+its(P.contra)+' (gravados antes ou escolhidos à mão)':'',P.contra.length?'<button type="button" class="btn" data-a="ob-seguir">Seguir as regras</button>':'')+
+      linha(!P.contra.length,P.contra.length?P.contra.length+' contrariam as regras (gerais ou do assunto)':'Tudo segue as regras',P.contra.length?'itens '+its(P.contra)+' (gravados antes ou escolhidos à mão)':'',P.contra.length?'<button type="button" class="btn" data-a="ob-seguir">Seguir as regras</button>':'')+
       '<div class="acoes"><button type="button" class="btn pri" data-a="copiar">Aplicar à pauta'+(nAp?' ('+nAp+')':'')+'</button></div>';}
+  var SECG={},DESTR={};
+  /* cabeçalho do assunto: a regra do assunto (vale nesta e nas próximas pautas) e quem tem experiência nele (histórico de minutas, especialidade, preferência) */
+  function linhaAssunto(a,L){var r=TEMA[N(a)]||{},x0=L[0];
+    var ex=PD.concat(EV).filter(function(m){return !AUS[m.nome]&&!FD[m.nome];}).map(function(m){var h=H('d',x0,m.nome),e=casa(m.exp,a),p=casa(m.pref,a),no=casa(m.nao,a);return {n:m.nome,h:h,e:e,p:p,no:no,s:(e?20:0)+(p?10:0)+h-(no?100:0)};})
+      .filter(function(o){return o.h||o.e||o.p||o.no;}).sort(function(p,q){return q.s-p.s;}).slice(0,6);
+    var sel=function(k,Lp,v){return '<select data-ras="'+k+'" data-as="'+esc(a)+'" class="'+(v?'on':'')+'" aria-label="'+(k==='d'?'Minutante':'Corretor')+' pela regra do assunto"><option value="">'+(k==='d'?'minuta: sem regra':'correção: sem regra')+'</option>'+Lp.map(function(m){return '<option'+(m.nome===v?' selected':'')+'>'+esc(m.nome)+'</option>';}).join('')+'</select>';};
+    return '<div class="as2"><span class="lbx" title="Vale nesta e nas próximas pautas; as regras gerais (passo 2) vêm antes">Regra do assunto</span>'+sel('d',PD.concat(EV),r.d)+sel('c',PC,r.c)+
+      '<span class="lbx">Experiência</span>'+(ex.length?ex.map(function(o){return '<span class="xp'+(o.no?' no':o.e||o.p?' es':'')+'" title="'+esc(o.n+': '+[o.h?o.h+' minuta(s) deste assunto no histórico':'',o.e?'especialidade':'',o.p?'prefere':'',o.no?'evita':''].filter(Boolean).join(' · '))+'">'+esc(o.n)+(o.h?' <b>'+o.h+'</b>':'')+(o.e||o.p?' ★':'')+(o.no?' ✕':'')+'</span>';}).join(''):'<span class="mu">ninguém com histórico ou especialidade</span>')+'</div>';}
   function tudo(){topo();equipe();blocos();selbar();}
   function toast(t){var el=document.getElementById('toast');el.textContent=t;el.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(function(){el.classList.remove('on');},2400);}
 
@@ -564,6 +578,9 @@ body.emb #b-aplicar{display:none}body.emb .lay{grid-template-columns:262px minma
     if(t.dataset.ckg!=null){var g=t.dataset.ckg;IT.filter(function(x){return grupo(x)===g&&passa(x);}).forEach(function(x){if(t.checked)SEL[x.i]=true;else delete SEL[x.i];});blocos();selbar();return;}
     if(t.dataset.lote){var kl=t.dataset.lote,vl=t.value;if(!vl)return;var nl=0;IT.forEach(function(x){if(!SEL[x.i])return;ESC[x.i]=ESC[x.i]||{};ESC[x.i][kl]=vl;if(kl==='d'&&fin(x,'c')===vl)ESC[x.i].c='';nl++;});
       tudo();toast(nl+' processo'+(nl>1?'s':'')+': '+(kl==='d'?'minutante ':'corretor ')+vl+(kl==='d'?'. Onde era também o corretor, o corretor ficou em branco.':'.'));return;}
+    if(t.dataset.ras){var aa=t.dataset.as,kk2=t.dataset.ras,ky=N(aa);TEMA[ky]=TEMA[ky]||{d:'',c:'',cap:aa};TEMA[ky][kk2]=t.value;
+      if(VIVO&&VIVO.definirRegraAssunto)try{VIVO.definirRegraAssunto(D.sessao.id,aa,kk2==='d'?t.value:null,kk2==='c'?t.value:null);}catch(er){}
+      propor();tudo();toast(aa+': '+(kk2==='d'?'minuta':'correção')+' '+(t.value?'com '+t.value:'sem regra')+' (vale nas próximas pautas). Proposta refeita.');return;}
     if(t.dataset.ob){var r=OBR[+t.dataset.i];if(!r)return;r[t.dataset.ob]=t.value;if(t.dataset.ob==='q')r.v='';gravaObr();propor();tudo();if(r.v&&(r.d||r.c))toast('Regra obrigatória gravada; proposta refeita.');return;}
     if(t.dataset.nv){var xi=IT.find(function(y){return y.i===+t.dataset.nv;});if(!xi)return;if(!VIVO||!VIVO.definirNivel){toast('Nível só se fixa pela designação do Caput.');return;}
       VIVO.definirNivel(D.sessao.id,xi.cnj,t.value);var r=VIVO.nivel(D.sessao.id,xi.cnj);if(r){xi.nv=r.n;xi.nvp=r.por;xi.w=r.pts;}propor();tudo();toast('Item '+xi.i+': '+(t.value?'nível fixado':'nível pela regra')+' · '+nf(peso(xi))+' pt. Grava com a pauta.');return;}
@@ -584,7 +601,8 @@ body.emb #b-aplicar{display:none}body.emb .lay{grid-template-columns:262px minma
   (function(){var C={},R={};IT.forEach(function(x){var k=N(x.as);C[k]=(C[k]||0)+1;if(!R[k])R[k]=x.as||'sem assunto';});var sel=document.getElementById('f-as');
     sel.innerHTML='<option value="">Todos os assuntos ('+IT.length+')</option>'+Object.keys(C).sort(function(a,b){return C[b]-C[a]||R[a].localeCompare(R[b]);}).map(function(k){return '<option value="'+esc(k)+'">'+esc(R[k])+' ('+C[k]+')</option>';}).join('');
     sel.addEventListener('change',function(){FASS=sel.value;ABERTO={};blocos();selbar();});})();
-  document.addEventListener('click',function(e){var t=e.target.closest('[data-f],[data-a],[data-mais],[data-ag],[data-gr],[data-grtodos],[data-fora],[data-cmp],[data-cmpa],[data-asord],[data-passo],[data-obdel],[data-obup]');if(!t)return;
+  document.addEventListener('click',function(e){var t=e.target.closest('[data-f],[data-a],[data-mais],[data-ag],[data-gr],[data-grtodos],[data-fora],[data-cmp],[data-cmpa],[data-asord],[data-passo],[data-obdel],[data-obup],[data-destrava]');if(!t)return;
+    if(t.dataset.destrava){DESTR[t.dataset.destrava]=1;blocos();var q=t.dataset.destrava.split('|'),sl=document.querySelector('select[data-sel="'+q[1]+'"][data-i="'+q[0]+'"]');if(sl&&sl.focus)sl.focus();toast('Destravado só neste processo: a escolha à mão vale sobre a regra.');return;}
     if(t.dataset.obup!=null){var ui=+t.dataset.obup;if(ui>0){var rr=OBR.splice(ui,1)[0];OBR.splice(ui-1,0,rr);gravaObr();propor();tudo();toast('Ordem das regras alterada; proposta refeita.');}return;}
     if(t.dataset.passo){var np=t.dataset.passo;PASSO=PASSO===np&&(np==='2'||np==='4')?'':np;try{localStorage.setItem('mesa_passo',PASSO);}catch(er){}
       if(np==='1'){var sd=document.querySelector('.side');if(sd&&sd.scrollIntoView)sd.scrollIntoView({block:'start',behavior:'smooth'});}
@@ -602,7 +620,7 @@ body.emb #b-aplicar{display:none}body.emb .lay{grid-template-columns:262px minma
     if(t.dataset.mais){ABERTO[t.dataset.mais]=true;blocos();return;}
     var a=t.dataset.a;
     if(a==='ob-add'){OBR.push({q:'julg',v:'',d:'',c:''});PASSO='2';topo();return;}
-    if(a==='ob-seguir'){var ns=0;IT.forEach(function(x){['d','c'].forEach(function(k){var r=obr(x,k);if(r&&livre(r[k],k)&&fin(x,k)!==r[k]){ESC[x.i]=ESC[x.i]||{};ESC[x.i][k]=r[k];ns++;}});});tudo();toast(ns+' designação(ões) passaram a seguir as regras obrigatórias. Aplique à pauta para gravar.');return;}
+    if(a==='ob-seguir'){var ns=0;IT.forEach(function(x){['d','c'].forEach(function(k){var r=fixa(x,k);if(r&&livre(r.nome,k)&&fin(x,k)!==r.nome){ESC[x.i]=ESC[x.i]||{};ESC[x.i][k]=r.nome;ns++;}});});tudo();toast(ns+' designação(ões) passaram a seguir as regras obrigatórias. Aplique à pauta para gravar.');return;}
     if(a==='limpar'){if(!VIVO||!VIVO.limparDesignacao){toast('Limpar só pela designação do Caput.');return;}var nl=IT.filter(function(x){return x.d||x.c;}).length;if(!nl){toast('Nada designado nesta pauta.');return;}
       if(!window.confirm('Limpar minutante e corretor de '+nl+' processo(s) desta pauta e gravar?\n\nO que já foi minutado ou corrigido fica. Dá para desfazer enquanto a página estiver aberta.'))return;
       LIMPO=VIVO.limparDesignacao(D.sessao.id)||[];var lk={};LIMPO.forEach(function(b){lk[b.cnj]=1;});IT.forEach(function(x){if(lk[x.cnj]){x.d='';x.c='';x.pd='';x.pc='';delete ESC[x.i];}});

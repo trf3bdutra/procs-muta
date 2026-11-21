@@ -3941,9 +3941,8 @@ function portaToken() { return new Promise((fim) => {
     /* a mesa traz o cabeçalho da etapa (título, período, indicadores, Aplicar e Próximo); abaixo, as regras e os assuntos sem regra */
     return `<section class="cwe-st cwe-st4">
       <div class="cwe-mesa-slot" data-s="${e(ss.id)}"></div>
-      ${painelRegras(ss, Z)}
-      <div class="cwe-2eq cwe-1eq cwe-sr1" slot="regras"><section class="cwe-box"><div class="h"><span><span class="cwe-k">ASSUNTOS SEM REGRA NESTA PAUTA</span></span><small>Uma regra por assunto resolve todos os processos dele, nesta e nas próximas pautas.</small></div>
-          ${semA.map(([t, o]) => `<div class="sr"><b>${o.n}</b><span>${e(t)}<small>${[o.d ? o.d + ' sem minutante' : '', o.c ? o.c + ' sem corretor' : ''].filter(Boolean).join(' · ')}</small></span><button type="button" data-cwe="nr" data-t="ass" data-v="${e(t)}" aria-expanded="${est.nr?.t === 'ass' && est.nr.v === t}">Criar regra</button></div>${est.nr?.t === 'ass' && est.nr.v === t ? formAss(Z, t) : ''}`).join('') || '<p>Todos os assuntos têm regra que casa.</p>'}</section></div></section>`;
+      <!-- regras: agora dentro da mesa (passo 2: regras gerais; cabeçalho de cada assunto: regra do assunto) -->
+    </section>`;
   }
 
   function etapa4(ss, d) {
