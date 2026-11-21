@@ -139,3 +139,8 @@ test('Mesa: Atualizar proposta ao lado de Aplicar; agrupar pelas regras do paine
   assert.ok(pag.includes('>Regra da minuta</button>')&&pag.includes('>Regra da correção</button>')&&pag.includes('VIVO.designacaoPorRegra(D.sessao.id)')&&pag.includes('nenhum processo nesta pauta'),'grupos pelas regras');
   assert.ok(pag.includes('class="sw"')&&pag.includes('.pp .mt{')&&pag.includes("'<span class=\"mt\">'"),'linha da pessoa');
 });
+
+test('Mesa: "Bloco todo" mostra a pessoa escolhida quando o grupo inteiro está com ela',()=>{
+  const pag=read('caput/designacao/index.html');
+  assert.ok(pag.includes("uD=uni('d'),uC=uni('c')")&&pag.includes("(m.nome===uD?' selected':'')")&&pag.includes("(m.nome===uC?' selected':'')")&&pag.includes('.bh .bulk select.on{'),'select preenchido');
+});
