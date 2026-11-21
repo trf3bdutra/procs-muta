@@ -82,3 +82,8 @@ test('Regras gerais embutidas no visual do painel de Relatórios (altura fixa, m
   const fs=require('fs'),p=require('path'),rg=fs.readFileSync(p.join(__dirname,'../../../caput/assets/js/regras-gerais.js'),'utf8');
   assert.ok(rg.includes('var ABAS_SUB = {')&&rg.includes(".rg.embutida{position:relative;left:auto;top:auto;transform:none;width:100%;height:600px"),'visual de ferramenta');
 });
+
+test('Calendário da Chefia: semana em lista dentro do painel Hoje, sem a faixa sob o calendário',()=>{
+  const fs=require('fs'),p=require('path'),r=(x)=>fs.readFileSync(p.join(__dirname,'../../../',x),'utf8');
+  assert.ok(r('caput/motor/assets/js/11-calendario.js').includes('function semanaLista(vis)')&&r('caput/triagem/index.html').includes('semanaLateral: true'),'semana no Hoje');
+});
