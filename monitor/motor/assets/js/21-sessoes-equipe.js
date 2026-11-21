@@ -578,6 +578,7 @@
     return { liberacao: Math.round(n(p.liberacao, 5, 0, 30)), minutasDia: n(p.minutasDia, 3, 0.5, 20) }; }
   function pesos() { var d = { voto: 1, ed: 0.5, mono: 0.75, cx1: 1, cx2: 1.5, cx3: 2 }, p = (PROD && PROD.pesos) || {}, o = {}; Object.keys(d).forEach(function (k) { var x = Number(p[k]); o[k] = isFinite(x) && x >= 0 && p[k] !== '' && p[k] != null ? x : d[k]; }); o.agint = o.ed; return o; }
   function isoMais(d, n) { var x = new Date(d + 'T12:00:00Z'); x.setUTCDate(x.getUTCDate() + n); return x.toISOString().slice(0, 10); }
+  function dataOk(d) { return /^(20\d{2}|2100)-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/.test(d || '') && new Date(d + 'T12:00:00Z').toISOString().slice(0, 10) === d; }
   function util(d) { var c = calendario(), wd = c.weekdays && c.weekdays.length ? c.weekdays : [1, 2, 3, 4, 5]; return /^\d{4}-\d{2}-\d{2}$/.test(d || '') && wd.indexOf(new Date(d + 'T12:00:00Z').getUTCDay()) >= 0 && (c.excluded || []).indexOf(d) < 0; }
   /* deslocamento estrito: -5 conta cinco dias úteis antes do dia (sem contar o próprio dia) */
   function deslocaUteis(d, n) { if (!/^\d{4}-\d{2}-\d{2}$/.test(d || '')) return ''; var r = Math.abs(n), passo = n < 0 ? -1 : 1, x = d; for (var k = 0; r && k < 4000; k++) { x = isoMais(x, passo); if (util(x)) r--; } return r ? '' : x; }
@@ -1007,7 +1008,7 @@ html[data-theme=dark] .pc-s.inc{background:#2a1c1f;border-color:#6b3a36}html[dat
   function fechar() { if (root) root.hidden = true; Dc.documentElement.style.overflow = ''; }
   /* ---------- Calendário de sessões no topo da Visão geral das pautas ---------- */
   var CAL = { el: null, sig: '' };
-  var CAL_FER = [['2026-11-02', 'Finados'], ['2026-11-15', 'Procl. República'], ['2026-11-20', 'Consc. Negra'], ['2026-12-08', 'Imac. Conceição [VALIDAR]'], ['2026-12-25', 'Natal']];
+  var CAL_FER = { forEach: function (fn) { var F = W.CMTForense, y = +hoje().slice(0, 4); if (!F || !F.sugestoes) return; [y, y + 1].forEach(function (a) { F.sugestoes(a).filter(function (o) { return o.on && /^Feriado/.test(o.type); }).forEach(function (o) { fn([o.date, o.label]); }); }); } };
   function calSlot() {
     var slot = Dc.getElementById('cc-cal-slot'); if (!slot || !W.CMTCalendario) return;
     var lim = new Date(Date.now() - 90 * 864e5).toISOString().slice(0, 10), prog = {};
@@ -1971,7 +1972,8 @@ html[data-theme=dark] .pc-s.inc{background:#2a1c1f;border-color:#6b3a36}html[dat
     importar: function (file, id) { UI.importarPara = id || ''; return importarArquivo(file); },
     aba: function () { return root && !root.hidden ? UI.aba : ''; },
     novaSessao: function (data) { if (!/^\d{4}-\d{2}-\d{2}$/.test(data || '')) return { erro: 'Informe a data do julgamento.' }; if (S.sessoes.some(function (x) { return x.data === data; })) return { erro: 'Já existe a sessão de ' + br(data) + '.' }; var ns = novaSessao(data); S.sessoes.push(ns); marcosParaPainel(ns); salvar(); if (root && !root.hidden) render(); return { id: ns.id }; },
-    fase: function (id, k, v) { var sf = S.sessoes.find(function (x) { return x.id === id; }); if (!sf) return false; sf.fases = sf.fases || {}; sf.fases[k] = v || ''; salvar(); marcosParaPainel(sf); if (root && !root.hidden) render(); return true; },
+    /* marco: data ISO válida (anos 2000 a 2100) ou vazio; ano digitado errado (0001) não entra */
+    fase: function (id, k, v) { var sf = S.sessoes.find(function (x) { return x.id === id; }); if (!sf) return false; if (v && !dataOk(v)) { toast('Data inválida: ' + v + '. Use DD/MM/AAAA com ano entre 2000 e 2100.'); return false; } sf.fases = sf.fases || {}; sf.fases[k] = v || ''; salvar(); marcosParaPainel(sf); if (root && !root.hidden) render(); return true; },
     /* muda a data da sessão: o JSON da pauta passa a AAAA-MM-DD.json da nova data e o antigo é apagado na próxima gravação */
     data: function (id, nova) { nova = String(nova || '').slice(0, 10); if (!/^\d{4}-\d{2}-\d{2}$/.test(nova)) return { erro: 'Data inválida.' };
       var sf = S.sessoes.find(function (x) { return x.id === id; }); if (!sf) return { erro: 'Sessão não encontrada.' }; var velha = sf.data; if (velha === nova) return { ok: true };
@@ -1982,7 +1984,7 @@ html[data-theme=dark] .pc-s.inc{background:#2a1c1f;border-color:#6b3a36}html[dat
     cotas: function (id) { var sf = S.sessoes.find(function (x) { return x.id === id; }); return sf ? cotas(sf) : null; },
     pontos: function (id) { var sf = S.sessoes.find(function (x) { return x.id === id; }); return sf ? sf.itens.reduce(function (a, i) { return a + pesoItem(i); }, 0) : 0; },
     regrasProdutividade: function (j) { if (j && typeof j === 'object') PROD = j; return PROD; },
-    diasUteis: { util: util, desloca: deslocaUteis, entre: uteisEntre },
+    diasUteis: { util: util, desloca: deslocaUteis, entre: uteisEntre, dataOk: dataOk },
     /* critérios de designação (apoio/regras/designacao.json): ordem e interruptores Designa (d) e Corrige (c) */
     desigDefinir: function (ordem, on) { if (!S.desig) S.desig = { ordem: CRIT.slice(), on: {}, rows: {}, equilibrar: true };
       if (Array.isArray(ordem)) { var o = ordem.filter(function (k) { return CRIT.indexOf(k) >= 0; }); CRIT.forEach(function (k) { if (o.indexOf(k) < 0) o.push(k); }); S.desig.ordem = o; }
