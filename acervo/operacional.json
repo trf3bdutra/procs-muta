@@ -6,7 +6,7 @@
   "arquivo": "acervo/fonte.json",
   "chave": "processo"
  },
- "atualizado_em": "2026-11-21T06:41:31.949Z",
+ "atualizado_em": "2026-11-21T06:41:42.567Z",
  "registros": [
   {
    "processo": "0000008-23.2025.4.03.6000",
@@ -289200,53 +289200,54 @@
     "Responsável": "",
     "Próxima ação": "",
     "Observações": "",
-    "atualizado_em": "2026-11-19T19:59:38.328Z"
+    "atualizado_em": "2026-11-21T06:41:42.567Z"
    },
    "triagem": {
-    "Urgência": "",
+    "Urgência": "Antecipação da tutela recursal",
     "Urgência - Observação": "",
     "Urgência - Nível": "",
-    "Urgência - Apreciação": "",
-    "Urgência - Data": "",
+    "Urgência - Apreciação": "Apreciada · indeferida",
+    "Urgência - Data": "2026-11-21",
     "Urgência - Painel": "",
     "Tempest - Publicação": "",
     "Tempest - Protocolo": "",
     "Tempest - Prazo legal": "",
     "Tempest - Dobro": "",
     "Tempest - Suspensões": "",
-    "Tipo de Julgamento": "",
+    "Tipo de Julgamento": "Agravo de Instrumento",
     "Hipóteses Monocrática": "",
-    "Tempestividade": "",
-    "Preparo": "",
+    "Tempestividade": "Não verificado",
+    "Preparo": "Não verificado",
     "AJG": "",
     "DPU (controle)": "",
-    "Representação": "",
+    "Representação": "Regular",
     "ID da Procuração": "",
     "Impedimento / Suspeição": "",
     "Observação do Impedimento": "",
     "Regularidade": "Representação ainda não verificada.",
     "Regularidade Manual": "",
     "Observação da Representação": "",
-    "MPF": "",
-    "MPF - Custos Legis": "",
-    "ID do Parecer MPF": "",
-    "Parecer - Sentido": "",
+    "MPF": "Com parecer",
+    "MPF - Custos Legis": "Sem hipótese",
+    "ID do Parecer MPF": "366985642",
+    "Parecer - Sentido": "Ausência de interesse",
     "MPF - Info adicional": "",
     "Observação MPF": "",
-    "Tema": "IRPF/Imposto de Renda de Pessoa Física",
+    "Tema": "Execução fiscal · levantamento de penhoras RENAJUD e SISBAJUD · garantia por imóvel aceito, fiança recusada e parcelamento posterior",
     "COMPLEXIDADE": "",
     "Tipo de Voto": "",
-    "Prelim.": "",
+    "Prelim.": "Sem preliminares",
     "Descrição da Preliminar": "",
     "META": "",
     "Seleção Prévia": "",
-    "Mídias": "",
+    "Mídias": "Não se aplica",
     "Etiquetas": "DPF MARCELLUS, 2ª Seção, idoso",
-    "Alegações": "",
+    "Alegações": "1) Levantamento das penhoras RENAJUD e SISBAJUD com garantia por imóvel aceito; 2) efeito do parcelamento posterior sobre as constrições já realizadas; 3) menor onerosidade.",
     "O que falta sanar": "",
     "Intercorrências": "",
     "Síntese Processual": "",
-    "Especificidades": ""
+    "Especificidades": "Prioridade de pessoa idosa (etiqueta) · Tutela recursal indeferida (ID 293465912, 15/07/2024) · Parcelamento posterior às constrições (ID 281847874 da origem) · MPF sem interesse (ID 366985642) · Preparo com comprovante em imagem (ID 292271819) [VALIDAR]",
+    "Síntese Fática": "Em execução fiscal contra pecuarista, foram feitas constrições por RENAJUD e SISBAJUD; a executada ofereceu imóvel aceito como garantia e fiança bancária recusada, e depois parcelou o débito. O juízo indeferiu o levantamento das penhoras."
    },
    "producao": {
     "Destino": "",
@@ -289285,7 +289286,8 @@
     "Lote - Observação": "",
     "Lote - Ajustes da correção": [],
     "Lote - Pendências": "",
-    "Lote - Minuta": "sem minuta no lote"
+    "Lote - Minuta": "sem minuta no lote",
+    "Mono - Fundamento": "Paradigmas do gabinete: AI 5016774-92.2023.4.03.0000 (acórdão 1ª Turma, 25/10/2023: desprovido; parcelamento não impede a subsistência das garantias anteriores); AI 5022066-29.2021.4.03.0000 (monocrática, 10/05/2022: desprovido; parcelamento posterior ao bloqueio SISBAJUD)"
    },
    "pauta": {
     "Status de Julgamento": "",
@@ -289295,7 +289297,8 @@
     "JULGAMENTO": "",
     "Motivo da remarcação": "",
     "sessoes": []
-   }
+   },
+   "controles": {}
   },
   {
    "processo": "5014205-16.2026.4.03.0000",
