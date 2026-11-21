@@ -69,7 +69,7 @@ test('Chefia: calendário completo do gabinete (o do motor) e regras de etiqueta
 test('Calendário da Chefia: dois meses lado a lado e visual do Caput',()=>{
   const fs=require('fs'),p=require('path'),cap=fs.readFileSync(p.join(__dirname,'../../../caput/triagem/index.html'),'utf8'),cal=fs.readFileSync(p.join(__dirname,'../../../caput/motor/assets/js/11-calendario.js'),'utf8');
   assert.ok(cal.includes('ex.meses===2&&st.passo===')&&cal.includes('function mes(vis,b0)'),'dois meses');
-  assert.ok(cap.includes('{ meses: 2, hoje: HOJE,')&&cap.includes('.cg-cal .cc-2m{'),'Chefia usa dois meses');
+  assert.ok(cap.includes('{ meses: 2, semanaLateral: true, hoje: HOJE,')&&cap.includes('.cg-cal .cc-2m{'),'Chefia usa dois meses');
 });
 
 test('Gravação só no cabeçalho: Pautas sem a faixa inicial; o indicador soma triagem e sessões, regras e equipe',()=>{
