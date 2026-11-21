@@ -3,7 +3,7 @@
    de MS, Carnaval, Semana Santa e Corpus Christi; recesso de 20/12 a 20/01 na contagem de prazos (CPC, art. 220);
    datas do calendário do gabinete marcadas “não conta para prazo”; suspensões informadas no processo.
    O expediente do gabinete fica em acervo/sessoes/calendario.json (expediente: diasSemana, semExpediente, nomes, tipos, semPrazo, recesso).
-   Um só módulo para o CMT-monitor e a Ex Officio (scripts/ficha/embutir.py). */
+   Um só módulo para o Caput e a Ex Officio (scripts/ficha/embutir.py). */
 (function () {
 'use strict';
 if (window.CMTForense && window.CMTForense.versao >= 1) return;

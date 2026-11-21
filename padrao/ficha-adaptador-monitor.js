@@ -1,4 +1,4 @@
-/* CMT-monitor · adaptador da ficha única (padrao/ficha-dialogo.js). Lê o modelo (padrao/ficha.json) e o registro do gabinete
+/* Caput · adaptador da ficha única (padrao/ficha-dialogo.js). Lê o modelo (padrao/ficha.json) e o registro do gabinete
    (acervo/operacional.json) pelo token do procs-muta do motor (window.ProcsMuta) e grava direto na base, com as mesmas regras do
    servidor da Ex Officio (CMTFicha.aplicar). Os dados do acervo vêm da linha do painel central (fonte já carregada).
    Toda abertura de ficha do monitor (Acervo, Triagem, Cadastro de sessão) passa por CMTProntuario.abrir, que agora abre esta ficha. */
@@ -21,10 +21,10 @@
       return oper(true).then(function (O) {
         var r = registro(O, cnj);
         if (!r) { var l = linha(cnj); r = { processo: (l && (l.processo || l.Processo)) || cnj, origem: {}, triagem: {}, producao: {}, pauta: { sessoes: [] }, controles: {} }; O.registros.push(r); O.registros.sort(function (a, b) { return String(a.processo).localeCompare(String(b.processo)); }); }
-        var out = W.CMTFicha.aplicar(r, campos, 'CMT-monitor');
+        var out = W.CMTFicha.aplicar(r, campos, 'Caput');
         if (!out.length) return { operacional: copia(r) };
         O.atualizado_em = new Date().toISOString();
-        return P.gravar({ 'acervo/operacional.json': JSON.stringify(O, null, 1) + '\n' }, 'Ficha (CMT-monitor): ' + r.processo + ' · ' + out.slice(0, 6).join(', ')).then(function () {
+        return P.gravar({ 'acervo/operacional.json': JSON.stringify(O, null, 1) + '\n' }, 'Ficha (Caput): ' + r.processo + ' · ' + out.slice(0, 6).join(', ')).then(function () {
           OP_T = Date.now();
           /* a linha do painel recebe os valores novos (mesmo caminho da leitura do operacional) */
           try { var row = linha(cnj), w = mw(); if (row && w.CMTOperacional) w.CMTOperacional.paraLinha(row, r); var c = w.__painelCentralComponent; if (c && c.refresh) c.refresh(); } catch (e) { console.warn('[ficha] painel', e); }
@@ -40,7 +40,7 @@
         (lista || []).forEach(function (it) {
           var r = registro(O, it.cnj);
           if (!r) { var l = linha(it.cnj); r = { processo: (l && (l.processo || l.Processo)) || it.cnj, origem: {}, triagem: {}, producao: {}, pauta: { sessoes: [] }, controles: {} }; O.registros.push(r); }
-          if (W.CMTFicha.aplicar(r, it.campos, 'CMT-monitor').length) n++;
+          if (W.CMTFicha.aplicar(r, it.campos, 'Caput').length) n++;
         });
         if (!n) return { alterados: 0 };
         O.registros.sort(function (a, b) { return String(a.processo).localeCompare(String(b.processo)); });

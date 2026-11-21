@@ -2,9 +2,9 @@
 const {test}=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),vm=require('node:vm');
 const root=path.resolve(__dirname,'../../..');
 const read=p=>fs.readFileSync(path.join(root,p),'utf8');
-const page=read('monitor/triagem/index.html');
-const legacy=read('monitor/index.html');
-const wf=read('.github/workflows/vercel-monitor.yml');
+const page=read('caput/triagem/index.html');
+const legacy=read('caput/index.html');
+const wf=read('.github/workflows/vercel-caput.yml');
 test('Caput é a central principal e preserva módulos existentes',()=>{
   assert.ok(page.includes('<title>Caput · Central do Gabinete</title>'));
   for(const id of ['triagem','pautas','coordenacao','comunicacao','chefia']){
@@ -39,41 +39,41 @@ test('Triagem: aba única com visão geral recolhível, escaninhos como sub-aba 
 });
 
 test('Desempenho e início: motor escondido não redesenha; Chefia é a página inicial; só a Triagem espera o acervo; calendário na Chefia',()=>{
-  const fs=require('fs'),p=require('path'),cap=fs.readFileSync(p.join(__dirname,'../../../monitor/triagem/index.html'),'utf8'),mot=fs.readFileSync(p.join(__dirname,'../../../monitor/motor/index.html'),'utf8');
+  const fs=require('fs'),p=require('path'),cap=fs.readFileSync(p.join(__dirname,'../../../caput/triagem/index.html'),'utf8'),mot=fs.readFileSync(p.join(__dirname,'../../../caput/motor/index.html'),'utf8');
   assert.ok(mot.includes('__oculto()')&&mot.includes('this.__sujo = true')&&mot.includes('this.__vigiaVisivel()'),'motor sem redesenho escondido');
   assert.ok(cap.includes("return 'chefia';\n}")&&cap.includes("if (!PRONTO && (ABA === 'pautas' || naT))"),'Chefia inicial e só a Triagem espera');
   assert.ok(cap.includes('function pintaCal(')&&cap.includes('data-cgses='),'calendário na Chefia');
 });
 
 test('Chefia: primeira no menu, painéis no padrão do Caput, calendário forense no rodapé do calendário, relatórios com altura fixa',()=>{
-  const fs=require('fs'),p=require('path'),cap=fs.readFileSync(p.join(__dirname,'../../../monitor/triagem/index.html'),'utf8');
+  const fs=require('fs'),p=require('path'),cap=fs.readFileSync(p.join(__dirname,'../../../caput/triagem/index.html'),'utf8');
   assert.ok(cap.indexOf('data-mod="chefia"')<cap.indexOf('data-mod="triagem"'),'Chefia primeiro');
   assert.ok(cap.includes('<div id="cg-forense">'),'rodapé forense');
   assert.ok(cap.includes('.cg-tool .cg-studio{height:600px')&&cap.includes('data-cg-rel-export="pdf"'),'relatórios como ferramenta');
 });
 
 test('Calendário forense editável na própria Chefia (sem abrir a tela antiga) e data local no motor',()=>{
-  const fs=require('fs'),p=require('path'),cap=fs.readFileSync(p.join(__dirname,'../../../monitor/triagem/index.html'),'utf8'),m=fs.readFileSync(p.join(__dirname,'../../../monitor/motor/assets/js/21-sessoes-equipe.js'),'utf8');
+  const fs=require('fs'),p=require('path'),cap=fs.readFileSync(p.join(__dirname,'../../../caput/triagem/index.html'),'utf8'),m=fs.readFileSync(p.join(__dirname,'../../../caput/motor/assets/js/21-sessoes-equipe.js'),'utf8');
   assert.ok(cap.includes('data-cgfx="poe"')&&cap.includes('data-cgfx="jf"')&&!cap.includes('Editar expediente e feriados'),'edição na Chefia');
   assert.ok(m.includes('semExpediente: { poe:')&&m.includes("d.getFullYear() + '-'"),'motor');
 });
 
 test('Chefia: calendário completo do gabinete (o do motor) e regras de etiquetas editáveis nas Regras gerais, iguais às da etapa 3 de Pautas',()=>{
   const fs=require('fs'),p=require('path'),r=(x)=>fs.readFileSync(p.join(__dirname,'../../../',x),'utf8');
-  const cap=r('monitor/triagem/index.html'),rg=r('monitor/assets/js/regras-gerais.js'),m=r('monitor/motor/assets/js/21-sessoes-equipe.js');
+  const cap=r('caput/triagem/index.html'),rg=r('caput/assets/js/regras-gerais.js'),m=r('caput/motor/assets/js/21-sessoes-equipe.js');
   assert.ok(cap.includes('<script src="/init/motor/assets/js/11-calendario.js"></script>')&&cap.includes('W.CMTCalendario.montar(CAL_EL'),'calendário do motor na Chefia');
   assert.ok(m.includes('regrasEtiquetas: {')&&m.includes('RX.clear(); HIST = null; salvar(); return true; }'),'API do motor');
   assert.ok(rg.includes("data-rg=\"etq-nova\"")&&rg.includes('SM.conversoes(ses.id)')&&!rg.includes("tela('regras', 'Editar regras de etiquetas')"),'editor nas Regras gerais, contado como na etapa 3');
 });
 
 test('Calendário da Chefia: dois meses lado a lado e visual do Caput',()=>{
-  const fs=require('fs'),p=require('path'),cap=fs.readFileSync(p.join(__dirname,'../../../monitor/triagem/index.html'),'utf8'),cal=fs.readFileSync(p.join(__dirname,'../../../monitor/motor/assets/js/11-calendario.js'),'utf8');
+  const fs=require('fs'),p=require('path'),cap=fs.readFileSync(p.join(__dirname,'../../../caput/triagem/index.html'),'utf8'),cal=fs.readFileSync(p.join(__dirname,'../../../caput/motor/assets/js/11-calendario.js'),'utf8');
   assert.ok(cal.includes('ex.meses===2&&st.passo===')&&cal.includes('function mes(vis,b0)'),'dois meses');
   assert.ok(cap.includes('{ meses: 2, hoje: HOJE,')&&cap.includes('.cg-cal .cc-2m{'),'Chefia usa dois meses');
 });
 
 test('Gravação só no cabeçalho: Pautas sem a faixa inicial; o indicador soma triagem e sessões, regras e equipe',()=>{
-  const fs=require('fs'),p=require('path'),cap=fs.readFileSync(p.join(__dirname,'../../../monitor/triagem/index.html'),'utf8');
+  const fs=require('fs'),p=require('path'),cap=fs.readFileSync(p.join(__dirname,'../../../caput/triagem/index.html'),'utf8');
   assert.ok(!cap.includes('id="pt-gravar"')&&!cap.includes('Pautas de julgamento · sessões, marcos, seleção prévia e PDF da pauta'),'faixa de Pautas removida');
   assert.ok(cap.includes('api.estadoGrava = {')&&cap.includes('W.CMTPautas.gravarJa()')&&cap.includes('W.pintaGrava = pintaGrava;'),'indicador único');
 });

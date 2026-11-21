@@ -76,6 +76,6 @@ test('pacote de dados da extensão: modelos, matrizes, 28,86%, parágrafos e reg
   assert.ok(d.modelos.length > 100 && d.matrizes.length > 10 && d.m2886.grupos.length >= 5 && d.kit2886.length > 5 && d.paragrafos.length > 100);
   d.diretrizes.concat(d.manual.filter(x => x.padrao)).forEach(x => new RegExp(x.padrao, (x.flags || '').replace(/[^gimsuy]/g, '')));
   assert.ok(d.m2886.grupos[0].secoes.some(s => s.t === 'Voto' && s.ps.some(p => /É como voto\./.test(p))));
-  const wf = read('.github/workflows/vercel-monitor.yml');
+  const wf = read('.github/workflows/vercel-caput.yml');
   assert.ok(wf.includes('scripts/extensao/dados.py --saida site/public/extensao/dados'));
 });

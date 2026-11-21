@@ -1,4 +1,4 @@
-/* Ficha única do processo (padrao/ficha.json) gravada em acervo/operacional.json, o mesmo registro que o CMT-monitor usa.
+/* Ficha única do processo (padrao/ficha.json) gravada em acervo/operacional.json, o mesmo registro que o Caput usa.
    Servido por /api/pauta (o plano Hobby da Vercel aceita no máximo 12 funções; arquivos com _ não contam):
    GET  /api/pauta?ficha=<CNJ>            ficha (modelo), registro do operacional e dados da fonte (só leitura)
    POST /api/pauta?ficha=1 {cnj, campos}   campos = { 'triagem.Tempestividade': 'Tempestivo', ... }; cria o registro se faltar
@@ -174,7 +174,7 @@ function paraCtl(r) {
   Object.keys(INV).forEach(k => { const v = INV[k](R); if (v) o[k] = v; });
   return o;
 }
-/* regras dos Controles especiais, iguais em qualquer porta de entrada (ficha, páginas, CMT-monitor):
+/* regras dos Controles especiais, iguais em qualquer porta de entrada (ficha, páginas, Caput):
    monocrática registrada ganha a data; urgência registrada ganha a data do pedido e a apreciação pendente; quem alterou o grupo fica anotado */
 function regras(r, out, u) {
   const t = r.triagem = r.triagem || {}, p = r.producao = r.producao || {}, c = r.controles = r.controles || {}, hj = agora().slice(0, 10), mud = new Set(out);

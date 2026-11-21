@@ -101,7 +101,7 @@ table.mtb tr.mpd td{background:#fff8de}table.mtb tr.enc td{background:#f1f5f2;co
 .urg-t select,.urg-t input{border:1px solid var(--line);border-radius:7px;background:var(--card);font:12px var(--font);color:var(--ink);padding:3px 5px;max-width:190px}
 .ics .ic b{font-weight:900;font-size:13px}.urg-s{border-top:2px solid #f1d8cc}
 #v-pauta.mono .pt-ses,#v-pauta.mono .pt-mk{display:none}#v-pauta.mono .pt-top{grid-template-columns:1fr}
-/* detalhes coloridos da barra, como no CMT-monitor: filete verde e régua azul em dois tons; ponto de cor em cada seção */
+/* detalhes coloridos da barra, como no Caput: filete verde e régua azul em dois tons; ponto de cor em cada seção */
 #app header:after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;background:linear-gradient(90deg,#1f5c52 0 50%,#86b8a8 50% 100%);box-shadow:0 -1px 0 #1b7244;pointer-events:none}
 
 /* ===== Pauta de Julgamento ===== */
@@ -278,7 +278,7 @@ table.pl select,table.pl input,table.pl textarea{width:100%;box-sizing:border-bo
 table.pl select:hover,table.pl input:hover,table.pl textarea:hover,table.pl select:focus,table.pl input:focus,table.pl textarea:focus{border-color:var(--line);background:var(--card)}
 table.pl textarea{resize:vertical;min-height:26px;max-width:210px}table.pl .pd{color:#9a5a10;font-weight:700;font-size:11px}table.pl .rv{font-weight:700}
 
-/* marca do gabinete (a estrela do CMT-monitor) e abertura da página inicial */
+/* marca do gabinete (a estrela do Caput) e abertura da página inicial */
 #app header .br i.star{width:22px;height:24px;border-radius:0;box-shadow:none;background:var(--gold);-webkit-mask:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%22319.34 233.85 63.70 71.05%22%3E%3Cg fill=%22%23000%22%3E%3Cpath d=%22M349.96 304.90L349.96 287.14C349.96 280.71 344.75 275.50 338.33 275.50L319.34 275.50L327.63 283.46L336.49 283.46C342.58 283.46 347.51 288.40 347.51 294.49L347.51 302.55L349.96 304.90%22/%3E%3Cpath d=%22M352.41 233.85L352.41 251.61C352.41 258.04 357.62 263.25 364.05 263.25L383.04 263.25L374.74 255.29L365.89 255.29C359.80 255.29 354.86 250.35 354.86 244.26L354.86 236.20L352.41 233.85%22/%3E%3Cpath d=%22M349.96 261.41L349.96 243.65L341.39 251.88L341.39 259.58C341.39 266.00 336.18 271.21 329.75 271.21L321.25 271.21L319.34 273.05L338.33 273.05C344.75 273.05 349.96 267.84 349.96 261.41%22/%3E%3Cpath d=%22M352.41 277.34L352.41 295.10L360.99 286.87L360.99 279.18C360.99 272.75 366.20 267.54 372.63 267.54L381.12 267.54L383.04 265.70L364.05 265.70C357.62 265.70 352.41 270.91 352.41 277.34%22/%3E%3C/g%3E%3C/svg%3E') center/contain no-repeat;mask:url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%22319.34 233.85 63.70 71.05%22%3E%3Cg fill=%22%23000%22%3E%3Cpath d=%22M349.96 304.90L349.96 287.14C349.96 280.71 344.75 275.50 338.33 275.50L319.34 275.50L327.63 283.46L336.49 283.46C342.58 283.46 347.51 288.40 347.51 294.49L347.51 302.55L349.96 304.90%22/%3E%3Cpath d=%22M352.41 233.85L352.41 251.61C352.41 258.04 357.62 263.25 364.05 263.25L383.04 263.25L374.74 255.29L365.89 255.29C359.80 255.29 354.86 250.35 354.86 244.26L354.86 236.20L352.41 233.85%22/%3E%3Cpath d=%22M349.96 261.41L349.96 243.65L341.39 251.88L341.39 259.58C341.39 266.00 336.18 271.21 329.75 271.21L321.25 271.21L319.34 273.05L338.33 273.05C344.75 273.05 349.96 267.84 349.96 261.41%22/%3E%3Cpath d=%22M352.41 277.34L352.41 295.10L360.99 286.87L360.99 279.18C360.99 272.75 366.20 267.54 372.63 267.54L381.12 267.54L383.04 265.70L364.05 265.70C357.62 265.70 352.41 270.91 352.41 277.34%22/%3E%3C/g%3E%3C/svg%3E') center/contain no-repeat}
 #app header .br{letter-spacing:.22em;font-size:11.5px}#app header .br em{letter-spacing:.22em}
 #b-atu.gira svg{animation:gira .8s linear infinite}@keyframes gira{to{transform:rotate(360deg)}}
@@ -1485,7 +1485,7 @@ html[data-theme=dark] #p-not{--ep:#10222e;--ep2:#132835;--el:#1e3747;--el2:#2c4a
 .prod{padding:0!important}
 .prod[open]>*:not(summary){margin-left:16px;margin-right:16px}
 
-/* modo noite: o calendário (componente do CMT-monitor, tema claro) fica como um cartão claro, com texto escuro legível */
+/* modo noite: o calendário (componente do Caput, tema claro) fica como um cartão claro, com texto escuro legível */
 html[data-theme=dark] #cc-cal{--ink:#13242f;--mut:#56656e;--line:#e1e7ec;--card:#ffffff;--soft:#f6f8f9;--navy:#1f4c4f;--blue:#2d6fa8;color:#13242f;color-scheme:light}
 /* tema claro: o calendário segue a página (sem o painel azul-marinho) */
 
@@ -2259,7 +2259,7 @@ html[data-theme=dark] #trm-urq .ufz2{--ur:#e07a6c;--uo:#d8a85a}
     <div class="trm-urq" id="trm-urq"></div><nav class="pp-sub" id="pp-sub" aria-label="Seções da página"><p class="ctl-nk">Nesta página</p><button type="button" data-pp="pp-and" data-m="pauta"><i>01</i><span>Andamento da sessão</span><small id="pp-and-n"></small></button><button type="button" data-pp="pp-num" data-m="pauta"><i>02</i><span>Números da sessão</span><small id="pp-num-n"></small></button><button type="button" data-pp="pp-lst" data-m="pauta"><i>03</i><span>Processos da pauta</span><small id="pp-lst-n"></small></button><div class="pp-ses"><div class="pp-ses-h"><small class="pp-ses-k">Sessão</small><span class="pp-ses-nav"><button class="b ic2" id="ses-ant" aria-label="Sessão anterior" title="Sessão anterior">‹</button><button class="b ic2" id="ses-prox" aria-label="Próxima sessão" title="Próxima sessão">›</button></span></div><p class="pp-ses-d"><b id="ses-dia">—</b><i id="ses-sem"></i></p><small id="ses-sub"></small><label class="trb-sl" for="ses"><span class="vh">Trocar de sessão</span><select id="ses" aria-label="Sessão"></select></label><span class="seg" id="ver" hidden><button data-v="itens" aria-pressed="true">Pauta</button><button data-v="previa" aria-pressed="false">Pré-pauta</button></span></div><div class="pp-num-rail"><div class="pp-sec pp-vazio" id="pp-num" data-m="pauta" aria-hidden="true"></div><p class="pp-num-k">Números da sessão</p><div class="pt-top trb-rd"><div class="pt-k" id="pt-k"></div></div></div><p class="ctl-nota">Clique numa seção para ir até ela.</p></nav>
     <div class="pt-h"><div><small class="ola-ey" id="pt-ey">Produção / Pauta de julgamento</small><h1 id="pt-t">Pauta de Julgamento</h1></div><span class="pt-st" id="pt-st"></span></div>
     <section class="urg" id="urg" hidden></section>
-    <p class="ctl-lead">Metas do CNJ, sobrestados e casos sensíveis numa só página. Cada linha lê e grava a ficha do processo, a mesma do CMT-monitor.</p>
+    <p class="ctl-lead">Metas do CNJ, sobrestados e casos sensíveis numa só página. Cada linha lê e grava a ficha do processo, a mesma do Caput.</p>
     <nav class="ctl-sub" id="ctl-sub" aria-label="Seções do Monitoramento"><p class="ctl-nk">Nesta página</p><button type="button" data-sub="metas"><i>01</i><span>Metas do CNJ</span><small id="ctl-n-metas"></small></button><button type="button" data-sub="sobr"><i>02</i><span>Sobrestados e suspensos</span><small id="ctl-n-sobr"></small></button><button type="button" data-sub="sens"><i>03</i><span>Casos sensíveis</span><small id="ctl-n-sens"></small></button><p class="ctl-nota">Clique numa seção para ir até ela. Alterações das três listas são salvas juntas.</p></nav>
     <div class="ctl-sec" id="ctl-metas"><div class="ctl-hd"><div><p class="ctl-k">01 / Acompanhar as metas</p><h2>Metas do CNJ</h2><p class="ctl-d">Processos de meta até o fim definitivo, com a fase no PJe, a pauta e o acompanhamento de cada um.</p></div><span class="pil" id="pil-metas" role="group" aria-label="Ações da seção"></span></div></div>
     <section class="metas" id="metas"></section>
@@ -2803,7 +2803,7 @@ function fdCampo(c){var w=c.tipo==='texto-longo'?' w':'';
   return '<label class="'+w+(id in FD.pend?' mud':'')+'">'+esc(c.rotulo)+h+'</label>';}
 function fdDestGrav(){return 'producao.Destino' in FD.pend?FD.pend['producao.Destino']:fdVal('producao','Destino');}
 function fdDestino(){if(FD.dest)return FD.dest;var d=fdDestGrav();return d==='Monocrática'?'monocratica':d?'sessao':(S.fonte==='mono'?'monocratica':'sessao');}
-/* Controles especiais: grupos oficiais da ficha (padrao/ficha.json), os mesmos do CMT-monitor. Cada grupo vale para o processo pela regra do grupo;
+/* Controles especiais: grupos oficiais da ficha (padrao/ficha.json), os mesmos do Caput. Cada grupo vale para o processo pela regra do grupo;
    os campos ficam no registro do operacional e gravam como qualquer campo da ficha. */
 var CE_ABA='Controles especiais',CE_VW={urgencia:'mono',monocratica:'mono',meta:'metas',sobrestamento:'sobr',sensivel:'sens'};
 function fdV(sec,k){var id=sec+'.'+k;return id in FD.pend?FD.pend[id]:fdVal(sec,k);}
@@ -2832,7 +2832,7 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
     if(x){FD.pend[x[0]]=x[1];fdSt('Alterações a gravar…','pend');clearTimeout(FD.t);FD.t=setTimeout(fdGrava,300);}fdPills();fdRender();return;}
   var p=e.target.closest&&e.target.closest('[data-fd-aba]');if(p&&p.closest('#fd')){FD.aba=p.getAttribute('data-fd-aba');fdRender();}});
 function fdPills(){var s=$('#fd .fd-pl');if(s)s.innerHTML=fdCtlPills();var t=$('#fd [data-fda="'+CE_ABA+'"]');if(t){var n=fdCtlAtivos().length;t.innerHTML=CE_ABA+(n?' <i class="fdn">'+n+'</i>':'');}}
-/* ficha única do processo: diálogo padrão (padrao/ficha-dialogo.js, o mesmo do CMT-monitor), lido e gravado pela API */
+/* ficha única do processo: diálogo padrão (padrao/ficha-dialogo.js, o mesmo do Caput), lido e gravado pela API */
 function fichaDialogo(cnj,lst,aba){if(!window.CMTFicha){toast('Ficha indisponível nesta página.');return;}
   CMTFicha.abrir(cnj,{aba:aba,lista:lst||[],leitura:S.fonte!=='mono',teor:true,avisar:function(t){toast(t);},
     carregar:function(c){return api('/api/pauta?ficha='+encodeURIComponent(c)).then(function(d){d.expediente=S.exp||null;return d;});},
@@ -3134,13 +3134,13 @@ function cartao(it){
       sinais(it,A,c)+'<div class="pr"><div class="stp" role="group" aria-label="Etapas de produção">'+stE+'</div></div></span></div></article>';}
   if(!ab||S.fonte!=='mono')return h+'</article>';
   var dt=function(f){return '<input type="date" data-d="'+f+'" value="'+esc(it[f]||'')+'">';};
-  return h+'<div class="ex"><div class="tl"><span class="dts"><label>Minutado em '+dt('dataMinuta')+'</label><label>'+(S.fonte==='mono'?'Revisado em ':'Corrigido em ')+dt('dataCorrecao')+'</label><label>'+(S.fonte==='mono'?'Para assinatura em ':'Liberado em ')+dt('dataLiberacao')+'</label></span><span class="sp2"></span>'+(S.fonte==='mono'?'<button class="b" data-a="tirar-mono" title="Desfaz o registro da monocrática (a urgência, se houver, continua)">Retirar das monocráticas</button>':'')+'<button class="b" data-a="ficha" title="Ficha completa do processo (a mesma do CMT-monitor)">▤ Ficha do processo</button><button class="b pri" data-a="comp" title="Consultar no Compendium com os dados deste cartão">◈ Compendium</button></div><div class="bd">'+(S.fonte==='mono'?corpoMono(it):corpo(it,tj))+'</div></div></article>';
+  return h+'<div class="ex"><div class="tl"><span class="dts"><label>Minutado em '+dt('dataMinuta')+'</label><label>'+(S.fonte==='mono'?'Revisado em ':'Corrigido em ')+dt('dataCorrecao')+'</label><label>'+(S.fonte==='mono'?'Para assinatura em ':'Liberado em ')+dt('dataLiberacao')+'</label></span><span class="sp2"></span>'+(S.fonte==='mono'?'<button class="b" data-a="tirar-mono" title="Desfaz o registro da monocrática (a urgência, se houver, continua)">Retirar das monocráticas</button>':'')+'<button class="b" data-a="ficha" title="Ficha completa do processo (a mesma do Caput)">▤ Ficha do processo</button><button class="b pri" data-a="comp" title="Consultar no Compendium com os dados deste cartão">◈ Compendium</button></div><div class="bd">'+(S.fonte==='mono'?corpoMono(it):corpo(it,tj))+'</div></div></article>';
 }
 /* ===== regras das monocráticas: o fluxo é minutar → revisar → assinatura (art. 932), não o do voto levado à sessão ===== */
 var CPM={tipoAto:['Decisão monocrática (art. 932)','Decisão de urgência','Despacho','Decisão de admissibilidade','Juízo de retratação','Homologação / extinção'],
   hip932:['III · recurso inadmissível, prejudicado ou sem impugnação específica','IV a · contrário a súmula do STF, STJ ou do TRF','IV b · contrário a repetitivo do STF ou STJ','IV c · contrário a IRDR ou IAC','V a · decisão recorrida contrária a súmula','V b · decisão recorrida contrária a repetitivo','V c · decisão recorrida contrária a IRDR ou IAC','Não se aplica'],
   res:['Não conhecido','Negado provimento','Dado provimento','Parcialmente provido','Deferido','Indeferido','Parcialmente deferido','Prejudicado','Homologado','Extinto'],
-  /* vocabulário único da ficha (padrao/ficha.json · Controles especiais · Urgência), o mesmo do CMT-monitor */
+  /* vocabulário único da ficha (padrao/ficha.json · Controles especiais · Urgência), o mesmo do Caput */
   urgTipo:['Tutela de urgência','Tutela de evidência','Antecipação da tutela recursal','Efeito suspensivo','Liminar em mandado de segurança','Reconsideração de liminar','Prioridade legal','Outra'],
   urgNivel:['Urgentíssima (mesmo dia)','Urgente (24 h)','Prioritária (48 h)','Ordinária (5 dias)'],
   urgSit:['Pendente · não apreciada','Em análise','Minuta pronta','Apreciada · deferida','Apreciada · parcialmente deferida','Apreciada · indeferida','Apreciada · prejudicada','Apreciada · reconsiderada']};
@@ -3526,7 +3526,7 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
   api('/api/pauta?ficha=1',{method:'POST',body:JSON.stringify({cnj:x.cnj,campos:{'triagem.Tema':N.sub,'triagem.Especificidades':N.esp,'origem.Observações':N.obs}})})
   .then(function(){x.nota=N;estado('✓ gravado');toast('Anotação gravada na ficha do processo.');b.disabled=false;})
   .catch(function(er){estado('✕ não gravou: '+er.message,'er');toast(er.message);b.disabled=false;});});
-/* próxima fase pela tarefa atual no PJe (etapas da triagem do CMT-monitor, mais as de depois da sessão) */
+/* próxima fase pela tarefa atual no PJe (etapas da triagem do Caput, mais as de depois da sessão) */
 var CT_PROX=[[/^Recebidos da unidade processante/,'triagem de gabinete'],[/Triagem de Gabinete|Analisar tipo de decisão|Avaliar tipo de recurso|Recebidos com Embargos/,'definir monocrática ou colegiado'],
   [/Minutar ato judicial/,'revisar e assinar a decisão'],[/Revisar ato judicial/,'assinar a decisão'],[/Assinar ato judicial/,'publicar a decisão'],
   [/Preparar relatório e voto/,'apto para julgamento'],[/Minutar decisão intercorrente/,'decidir a intercorrência'],[/Aptos para julgamento/,'incluir em pauta'],[/retirados e adiados/,'incluir em nova sessão'],
@@ -4215,7 +4215,7 @@ $('#v-inicio').addEventListener('click',function(e){
   b=e.target.closest('[data-hc-move]');if(b){var p=HC.mes.split('-').map(Number),delta=Number(b.getAttribute('data-hc-move'));HC.mes=new Date(p[0],p[1]-1+delta,1).toISOString().slice(0,7);hcMiniCalendario();return;}
 });
 
-/* calendário: o mesmo painel de sessões do CMT-monitor (CMTCalendario), com as pautas liberadas para a equipe */
+/* calendário: o mesmo painel de sessões do Caput (CMTCalendario), com as pautas liberadas para a equipe */
 var FER_NAC=[['2026-11-02','Finados'],['2026-11-15','Procl. República'],['2026-11-20','Consc. Negra'],['2026-12-25','Natal'],['2027-01-01','Confraternização'],['2027-04-21','Tiradentes'],['2027-05-01','Dia do Trabalho'],['2027-09-07','Independência'],['2027-10-12','N. Sra. Aparecida'],['2027-11-02','Finados'],['2027-11-15','Procl. República'],['2027-11-20','Consc. Negra'],['2027-12-25','Natal']];
 function calendario(){
   var D=P.dados||{sessoes:[],meus:[]},E=D.expediente||{},el=$('#cc-cal');if(!el||!window.CMTCalendario||!$('#hc-cal-full').open)return;
@@ -4224,7 +4224,7 @@ function calendario(){
   window.CMTCalendario.montar(el,{sessoes:(D.sessoes||[]).map(function(s){return {date:s.date,hora:s.hora||'',marcos:s.marcos||{},processos:s.processos||0,cor:s.cor||''};})},
     {progresso:D.progresso||{},feriados:fer,recesso:E.recesso||[],abrir:function(dt){S.ses=dt;try{localStorage.setItem('eq_ses',dt);}catch(e){}var o=$('#ses');if(o)o.value=dt;vista('pauta');carregar();}});
 }
-/* ausências: o pedido vai ao procs-muta e o responsável decide no CMT-monitor (Pautas › Equipe) */
+/* ausências: o pedido vai ao procs-muta e o responsável decide no Caput (Pautas › Equipe) */
 function ausencias(){
   $('#aus-tipo').innerHTML=(P.tipos.length?P.tipos:['Férias','Folga compensatória','Licença','Abono','Curso ou evento','Outro']).map(function(t){return '<option>'+esc(t)+'</option>';}).join('');
   var L=(P.aus||[]).filter(function(a){return a.estado!=='cancelada';}).slice(0,8);
@@ -5628,7 +5628,7 @@ api('/api/login').then(function(j){U.des=!!j.desembargador||!!j.gestor;iniciar(j
 </script>
 <script id="cmt-agenda">
 /* Agenda do calendário no Ex Officio: afazeres, alertas, eventos, prazos-limite, datas e ausências em acervo/sessoes/agenda.json
-   (a mesma do CMT-monitor) e as ausências pedidas pela equipe (apoio/equipe-solicitacoes.json). Lê /api/sessoes?agenda=1; só o gestor grava. */
+   (a mesma do Caput) e as ausências pedidas pela equipe (apoio/equipe-solicitacoes.json). Lê /api/sessoes?agenda=1; só o gestor grava. */
 (function(){ if(window.CMTAgenda) return;
   var D={itens:null,feitos:null,aus:[]},ok=false,t=null,lsf=function(){try{return JSON.parse(localStorage.getItem('cc_feitos')||'{}')}catch(e){return {}}};
   function get(k,d){ if(k==='feitos'&&!document.body.classList.contains('gestor')) return lsf(); return D[k]==null?d:D[k]; }
@@ -5641,7 +5641,7 @@ api('/api/login').then(function(j){U.des=!!j.desembargador||!!j.gestor;iniciar(j
   setInterval(carregar,2000); carregar();
   window.CMTAgenda={get:get,set:set,gravar:gravar,carregar:carregar,ausencias:function(){return D.aus;}};
 })();
-</script><script id="cc-cal-lib">/* cópia do CMTCalendario do CMT-monitor (m.work.html): mesmo painel de sessões */
+</script><script id="cc-cal-lib">/* cópia do CMTCalendario do Caput (m.work.html): mesmo painel de sessões */
 
 /* =====================================================================
    CMTCalendario · painel de sessões para o topo do Monitor
@@ -6382,7 +6382,7 @@ html.cmt-fx-open{overflow:hidden!important}
    de MS, Carnaval, Semana Santa e Corpus Christi; recesso de 20/12 a 20/01 na contagem de prazos (CPC, art. 220);
    datas do calendário do gabinete marcadas “não conta para prazo”; suspensões informadas no processo.
    O expediente do gabinete fica em acervo/sessoes/calendario.json (expediente: diasSemana, semExpediente, nomes, tipos, semPrazo, recesso).
-   Um só módulo para o CMT-monitor e a Ex Officio (scripts/ficha/embutir.py). */
+   Um só módulo para o Caput e a Ex Officio (scripts/ficha/embutir.py). */
 (function () {
 'use strict';
 if (window.CMTForense && window.CMTForense.versao >= 1) return;
@@ -6459,7 +6459,7 @@ window.CMTForense = { versao: 1, TIPOS: TIPOS, SEM_PRAZO: SEM_PRAZO, sugestoes: 
    a gravação no card do Controle de Pauta (applySuggestions), a IA opcional, o panorama e as estatísticas: a ficha
    (padrao/ficha-dialogo.js) conduz a conferência e grava no operacional, pelo modelo padrao/ficha.json.
    O .txt é lido só na memória do navegador; nada do texto integral é gravado: só os campos confirmados.
-   Embutido no CMT-monitor e na Ex Officio por scripts/ficha/embutir.py. */
+   Embutido no Caput e na Ex Officio por scripts/ficha/embutir.py. */
 (function(){'use strict';
 if(window.CMTInteiroTeor&&window.CMTInteiroTeor.parseTxt)return;
 

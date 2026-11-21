@@ -9,7 +9,7 @@ const AC = require('./_acomp');
 const MAPA = { ctrl: 'Meta - Situação', prox: 'Meta - Próxima providência', prazo: 'Meta - Prazo da providência', resp: 'Meta - Responsável', obs: 'Meta - Observação' };
 const dg = s => String(s || '').replace(/\D/g, '');
 const iso = v => { const s = String(v || '').trim(), m = /^(\d{2})\/(\d{2})\/(\d{4})/.exec(s); return m ? m[3] + '-' + m[2] + '-' + m[1] : /^\d{4}-\d{2}-\d{2}/.test(s) ? s.slice(0, 10) : ''; };
-/* números de meta: 1 ou 2 dígitos logo após "meta(s)", de 1 a 12 (mesma regra do CMT-monitor) */
+/* números de meta: 1 ou 2 dígitos logo após "meta(s)", de 1 a 12 (mesma regra do Caput) */
 function numerosMeta(d) {
   const out = [], re = /metas?\s*(?:cnj\s*)?[-:#]?\s*0?(\d{1,2})(?!\d)((?:\s*(?:e|,|\/)\s*0?\d{1,2}(?!\d))*)/gi; let m;
   while ((m = re.exec(d))) [m[1]].concat((m[2] || '').match(/\d{1,2}/g) || []).forEach(n => { n = String(Number(n)); if (+n >= 1 && +n <= 12 && !out.includes(n)) out.push(n); });
@@ -37,7 +37,7 @@ function pendente1(r) {
   if (R_RECURSO_INTERNO.test(t) || R_RECURSO_INTERNO.test(c) || e.split(/\s*,\s*/).some(x => R_RECURSO_INTERNO.test(x) || /^ED$/i.test(x.trim()))) return false;
   return true;
 }
-/* pendências marcadas por etiqueta (mesmas regras da triagem do CMT-monitor) e impedimento registrado na triagem */
+/* pendências marcadas por etiqueta (mesmas regras da triagem do Caput) e impedimento registrado na triagem */
 const nz = s => String(s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
 function pendEtq(et, tri) {
   const tg = String(et || '').split(/[,;]/).map(s => nz(s.trim())), has = rx => tg.some(t => rx.test(t)), P = [];

@@ -7,8 +7,8 @@ Exemplo para a etapa de montagem de Vercel:
 
 ```bash
 mkdir -p site/public/monitor
-cp -R monitor/index.html monitor/assets monitor/motor site/public/monitor/
+cp -R caput/index.html caput/assets caput/motor site/public/monitor/
 ```
 
 Não publique apenas `index.html`: o motor e os JS/CSS externos são necessários.
-O workflow `.github/workflows/vercel-monitor.yml` já faz essa cópia.
+O workflow `.github/workflows/vercel-caput.yml` já faz essa cópia.
