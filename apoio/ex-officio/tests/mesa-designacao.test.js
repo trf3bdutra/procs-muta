@@ -231,6 +231,7 @@ test('Mesa: fluxo em 4 passos, regras obrigatórias antes da proposta e conferê
   assert.ok(pag.includes("var esc_=fx&&livre(fx.nome,'d')?{nome:fx.nome,s:999,why:[['o',fx.por]]}")&&pag.includes("e=fc&&livre(fc.nome,'c')?{nome:fc.nome,s:999,why:[['o',fc.por]]}"),'regra (geral ou do assunto) decide antes do escore');
   for(const x of ['function linhaAssunto(a,L)','class="sec-h"','data-ras=','VIVO.definirRegraAssunto(D.sessao.id,aa,','data-destrava=','var fx=fixa(x,k),trav=!!fx&&v===fx.nome&&!DESTR[x.i+\'|\'+k];'])assert.ok(pag.includes(x),x);
   assert.ok(!pag.includes('class="seg ag"'),'só agrupa por assunto');
+  assert.ok(pag.includes('function tags(x)')&&pag.includes('mts:(l.metas||[]).map(String)')&&m.includes('metas: (inf.c.metas || [])'),'cartão com tipo de julgamento e META');
   assert.ok(pag.includes("why:[['e','especialista no assunto']]"),'especialista começa selecionado, sem regra fixa');
   assert.ok(m.includes('definirRegraAssunto: function (id, assunto, d, c)'));
   assert.ok(pag.includes("if(a==='ob-seguir')")&&pag.includes('data-obup=')&&pag.includes('data-obdel='),'seguir as regras, reordenar e remover');
