@@ -68,3 +68,8 @@ test('prontuário: sem redesenho quando nada mudou; atualização silenciosa sem
   const app = require('fs').readFileSync(require('path').join(__dirname, '..', 'index.html'), 'utf8');
   for (const x of ["if(el._sig===sig&&el.getAttribute('data-k')===S.prt&&el.querySelector('.prt')){prtPos();return;}", 'el._sig=sig;if(sc0)', '(silencioso&&!mud&&S.doc)', "f=requestAnimationFrame(function(){f=0;prtPos();})"]) assert.ok(app.includes(x), x);
 });
+
+test('prontuário: pendência mostra o texto inteiro (altura acompanha o texto)', () => {
+  const app = require('fs').readFileSync(require('path').join(__dirname, '..', 'index.html'), 'utf8');
+  assert.ok(app.includes('#prq .ac-pl textarea{height:auto!important;min-height:0!important;max-height:none!important}'));
+});
