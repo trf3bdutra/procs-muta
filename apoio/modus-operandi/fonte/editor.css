@@ -126,3 +126,8 @@ html.ed-cmt .ed-top [data-edzip],html.ed-cmt .ed-top [data-edgit],html.ed-cmt .e
 .ed-man .xman{display:block!important}
 .ed-man .mn-toc{top:8px}
 @container (max-width:860px){.ed-man .mn-wrap{grid-template-columns:minmax(0,1fr)}.ed-man .mn-toc{display:none}}
+/* tópicos do voto em blocos: o nome do bloco aparece acima do primeiro tópico dele */
+#ed-tops .edt[data-bl]{position:relative;margin-top:30px}
+#ed-tops .edt[data-bl]:first-child{margin-top:22px}
+#ed-tops .edt[data-bl]::before{content:attr(data-bl);position:absolute;left:2px;top:-21px;font:700 10.5px Figtree,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--acc,#c9a45c)}
+.ed-em .edf>span{font-weight:600}

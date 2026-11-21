@@ -1641,7 +1641,7 @@ var PS={cat:'',sub:'',st:'',sel:null},PVZ={modo:'lista',sel:null,mmOpen:null},PS
 var STL={padrao:'Padrão',estrutural:'Estrutural',variante:'Variante',especifico:'Específico',preferencial:'Preferencial',anterior:'Anterior',pedido:'Pedido'};
 function pVars(t,txt){return String(t||'').replace(/\{(\w+)(?:\|([^}]+))?\}/g,function(_,c,r){return txt?'['+(r||c)+']':'\u0001'+(r||c)+'\u0002';});}
 function pHtml(t){return esc(pVars(t,false)).replace(/\u0001([^\u0002]*)\u0002/g,'<mark>[$1]</mark>');}
-var PCOR={'Abertura':'#7fa3c9','Documentação':'#8fb59a','Genéricos':'#a58fc9','Seção':'#c78c79','Encerramento':'#d4ab58','Outros':'#8a96a3'};
+var PCOR={'Abertura':'#7fa3c9','Fundamento':'#5f9bb0','Aplicação':'#b98a6a','Documentação':'#8fb59a','Genéricos':'#a58fc9','Seção':'#c78c79','Encerramento':'#d4ab58','Outros':'#8a96a3'};
 function pCor(c){return PCOR[c]||'#8a96a3';}
 function pRender(){
   var P=(BASE&&BASE.par)||[],q=nz(EM.q.par||'');
