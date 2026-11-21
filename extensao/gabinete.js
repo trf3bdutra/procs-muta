@@ -260,10 +260,12 @@ function cabeca(s) {
       tjHtml + (AL.length ? '<button type="button" class="pm-al" data-aba="Autos" title="' + esc(AL.map(function (a) { return a.t; }).join(' · ')) + '">' + AL.length + ' alerta' + (AL.length > 1 ? 's' : '') + '</button>' : '') + '</div>' +
     '<p class="pm-as">' + (assunto ? '<b>' + esc(assunto) + '</b>' : '') + (classe ? '<span>' + esc(classe) + '</span>' : '') + '</p>' +
     assuntoDetalhado() +
-    (tarefa ? '<p class="pc-tf">' + esc(tarefa) + '</p>' : '') +
     (partes ? '<p class="pm-pt" title="' + esc(partes) + '">' + SV(IC.pt, 14) + '<span>' + esc(partes) + '</span></p>' : '') +
-    ((dl || polos || etq.length) ? '<details class="pm-aut"><summary>Autuação e partes</summary>' + (dl ? '<dl class="pc-dl">' + dl + '</dl>' : '') + (polos ? '<div class="pc-ps">' + polos + '</div>' : '') +
-      (etq.length ? '<div class="pc-etq">' + etq.map(function (e) { return '<span class="chip">' + esc(e) + '</span>'; }).join('') + '</div>' : '') + '</details>' : '') +
+    '<details class="pm-aut"' + (G.autAb ? ' open' : '') + '><summary data-aut>Autuação, partes e situação</summary>' +
+      (tarefa ? '<div class="pm-tf"><span>Tarefa no PJe</span><b>' + esc(tarefa) + '</b>' + (dias != null ? '<small>' + dias + ' dias</small>' : '') + '</div>' : '') +
+      (window.MutaAutos ? '<div class="pm-sit">' + window.MutaAutos.htmlSituacao(gravado('triagem', 'Registro - Situação atual')) + '</div>' : '') +
+      (dl ? '<dl class="pc-dl">' + dl + '</dl>' : '') + (polos ? '<div class="pc-ps">' + polos + '</div>' : '') +
+      (etq.length ? '<div class="pc-etq">' + etq.map(function (e) { return '<span class="chip">' + esc(e) + '</span>'; }).join('') + '</div>' : '') + '</details>' +
     '<p class="pm-sh">' + SV(IC.et, 14) + 'Etapas<i>toque para marcar hoje</i></p>' +
     '<div class="pm-et" style="--n:' + E.L.length + '"><i class="pm-ln"><i style="width:' + (E.L.length > 1 ? Math.min(E.n, E.L.length - 1) / (E.L.length - 1) * 100 : 0) + '%"></i></i>' + et + '</div>' +
     '<div class="pm-resp">' + pess('SERVIDOR', 'Minuta') + pess('CORRETOR', E.mono ? 'Revisão' : 'Correção') + '</div>' +
@@ -274,12 +276,17 @@ function faixaUsuario(s) {
   var t = $('topo-u'); if (!t) return;
   if (!s || s.estado !== 'on') { t.hidden = true; t.innerHTML = ''; return; }
   t.hidden = false;
-  t.innerHTML = '<span class="tu-n"><i class="tu-av">' + esc(iniciais(s.usuario)) + '</i>' + esc(s.usuario) + (s.gestor ? ' · gestor' : '') + '</span><span class="sp"></span>' +
-    (G.cnj ? '<button type="button" class="lnk" data-g="atualizar">Atualizar</button>' : '') + '<a class="lnk" target="_blank" rel="noopener noreferrer" href="' + SITE + '/exofficio/">Ex Officio</a><button type="button" class="lnk" data-sair>Sair</button>';
+  var q = function (attr, tit, svg) { return '<button type="button" class="tu-b" ' + attr + ' title="' + tit + '" aria-label="' + tit + '">' + SV(svg, 14) + '</button>'; };
+  t.innerHTML = '<span class="tu-n"><i class="tu-av">' + esc(iniciais(s.usuario)) + '</i>' + esc(s.usuario) + (s.gestor ? '<small>gestor</small>' : '') + '</span><span class="sp"></span>' +
+    (G.cnj ? q('data-g="atualizar"', 'Atualizar o prontuário', '<path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 4v7h-7"/>') : '') +
+    '<a class="tu-b" target="_blank" rel="noopener noreferrer" href="' + SITE + '/exofficio/" title="Abrir o Ex Officio" aria-label="Abrir o Ex Officio">' + SV('<path d="M14 4h6v6"/><path d="M20 4 10 14"/><path d="M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5"/>', 14) + '</a>' +
+    q('data-tema-tu', 'Tema claro ou escuro', '<path d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9z"/>') +
+    q('data-sair', 'Sair', '<path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3"/><path d="M10 17l-5-5 5-5M5 12h11"/>');
 }
 (function () { var t = $('topo-u'); if (!t) return; t.addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b) return;
   if (b.hasAttribute('data-sair')) { gravarJa().catch(function () {}).then(function () { ses.sair(); }); }
-  else if (b.dataset.g === 'atualizar') { gravarJa().catch(function () {}).then(function () { carregar(true); }); } }); })();
+  else if (b.dataset.g === 'atualizar') { gravarJa().catch(function () {}).then(function () { carregar(true); }); }
+  else if (b.hasAttribute('data-tema-tu')) { var tb = $('pje-tema'); if (tb) tb.click(); } }); })();
 /* assunto detalhado logo abaixo do assunto: o do Caput (lote) e, na falta, o da ficha, incluído aqui pelo ícone */
 function adAcao(a) {
   if (a === 'ed') { G.adEd = true; render(); var t = $('pm-ad-tx'); if (t) { t.focus(); t.setSelectionRange(t.value.length, t.value.length); } return; }
@@ -397,7 +404,6 @@ function corpoProcesso() {
   var ad = gravado('triagem', 'Registro - Assunto detalhado');
   h += '<section class="card pc-sec"><div class="pc-sh"><h3>Síntese e questões</h3></div><div class="gr">' +
     campoRot('triagem', 'Síntese Processual', 'Síntese do processo') + questoes() + '</div></section>';
-  if (AU) h += AU.htmlSituacao(gravado('triagem', 'Registro - Situação atual'));
   h += grupos('Processo', function (g) { return !FORA_PROC[g.grupo]; }, function () { return true; });
   h += controlesProcesso();
   h += grupos('Processo', function (g) { return g.grupo === 'Registro no acervo'; }, function () { return false; });
@@ -544,6 +550,7 @@ caixa.addEventListener('change', function (e) {
   agendar(900);
   if (/^(triagem\.(Urgência|Padrão - Espécie)|producao\.Destino|controles\.Sensível - (In|Ex)cluído)$/.test(t.dataset.fk) || G.aba === 'Roteiro') render();
 });
+caixa.addEventListener('toggle', function (e) { if (e.target.classList && e.target.classList.contains('pm-aut')) G.autAb = e.target.open; }, true);
 caixa.addEventListener('keydown', function (e) {
   if (e.target.id === 'sn-tx' && e.key === 'Enter') { e.preventDefault(); snIncluir(); }
   else if (e.target.id === 'pm-ad-tx' && e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); adAcao('ok'); }

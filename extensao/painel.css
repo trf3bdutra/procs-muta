@@ -934,3 +934,18 @@ html:not([data-tema=escuro]) .nav-label{color:hsl(38 60% 40%)}
 .tu-av{font-style:normal;width:18px;height:18px;border-radius:50%;display:grid;place-items:center;font:700 8.5px var(--sans);background:hsl(160 30% 90%);color:hsl(160 40% 26%)}
 html[data-tema=escuro] .topo-u{background:#0a1821;border-color:#1e3747}html[data-tema=escuro] .tu-av{background:#14301f;color:#9fd6b5}
 .pm-et{--gap:0}
+/* faixa do usuário integrada ao cabeçalho: mesmo fundo, sem divisão; ações em botões quadrados */
+.topo-u{padding:6px 12px 0;border:0!important;background:#fff}
+html[data-tema=escuro] .topo-u{background:#0a1821}
+
+.tu-n small{font:600 9px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--gold);margin-left:4px}
+.tu-b{all:unset;cursor:pointer;width:26px;height:26px;border-radius:7px;display:grid;place-items:center;border:1px solid var(--line);color:var(--muted-fg);background:transparent}
+.tu-b:hover{border-color:var(--gold);color:var(--gold)}
+.topo-u{gap:4px}.topo-u .tu-n{margin-right:auto}
+/* o ◐ da faixa do PJe fica só no topo */
+.pm-pje .pje-tema{display:none}
+/* situação e tarefa dentro do expansível de autuação */
+.pm-aut[open]{padding-bottom:4px}
+.pm-tf{display:flex;align-items:baseline;gap:8px;margin:8px 0 4px;font-size:12px}.pm-tf span{font:700 9.5px var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--muted-fg)}.pm-tf small{margin-left:auto;color:var(--muted-fg)}
+.pm-sit .pc-sec{border:0!important;padding:4px 0!important;background:none!important;margin:0}
+.pm-sit .pc-sh h3{font-size:9.5px}
