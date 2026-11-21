@@ -170,3 +170,12 @@ test('Mural: avisos e minhas ausências à direita do calendário, sem a faixa d
   assert.match(h, /wr\.id='mu-cal-wrap'/);
   assert.match(h, /#mu-cal-wrap\{display:grid;grid-template-columns:minmax\(0,1fr\) 340px/);
 });
+
+test('Monocráticas: fila de urgências aberta na coluna da esquerda, em cartões compactos', () => {
+  const fs = require('fs'), path = require('path');
+  const h = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
+  assert.match(h, /function urgColuna\(\)/);
+  assert.match(h, /if\(\$\('#v-pauta'\)\._ed\)\{painelUrgEd\(el\);urgColuna\(\);return;\}/);
+  assert.match(h, /#urg\.urg-col \.pc\.ux\.aberto \.ux-b\{display:grid!important/);
+  assert.match(h, /#urg\.urg-col:not\(\.nova\) \.urg-n\{display:none!important\}/);
+});
