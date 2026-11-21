@@ -21,8 +21,7 @@ PRINCIPAIS = re.compile(
     r'contrarraz|contesta[çc][ãa]o|informa[çc][õo]es|decis[ãa]o|despacho|ac[óo]rd[ãa]o|voto|ementa|'
     r'parecer|minist[ée]rio p[úu]blico|procuradoria|certid[ãa]o de julgamento|tr[âa]nsito|laudo|per[íi]cia|memoriais',
     re.I)
-IGNORAR = re.compile(r'^(intima[çc][ãa]o|cita[çc][ãa]o|ato ordinat[óo]rio|certid[ãa]o|custas|documento comprobat[óo]rio)$', re.I)
-# documento comprobatório: anexo da parte; a descrição ("DOC. 05 PARECER…") não faz dele peça principal
+IGNORAR = re.compile(r'^(intima[çc][ãa]o|cita[çc][ãa]o|ato ordinat[óo]rio|certid[ãa]o|custas)$', re.I)
 
 
 def _json(v):
