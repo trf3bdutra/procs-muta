@@ -1234,3 +1234,6 @@ html[data-tema=escuro] .ap-org.pje{background:#3d2312;color:#f3b183}html[data-te
 .ap-tps{display:flex;flex-wrap:wrap;gap:4px;margin:4px 0 8px}.ap-ti2{display:grid;gap:1px}.ap-hr{border:0;border-top:1px solid var(--line);margin:8px 0}
 .ap-ed .ap-ic{width:34px;flex:none;text-align:center}.ap-ed fieldset .hx{justify-self:start}
 .gl-ic{display:inline-flex;vertical-align:-2px;margin-right:3px;color:var(--gold)}.hx svg{margin-right:3px}
+/* 0.26 · Diretrizes: todas as seções na faixa, quebrando em linhas (sem rolagem lateral) */
+.pp-top .dr-idx{flex-wrap:wrap!important;overflow:visible!important;gap:3px!important;padding-bottom:0}
+.pp-top .dr-idx a{flex:none;font-size:10.5px;padding:1px 7px;line-height:1.6}

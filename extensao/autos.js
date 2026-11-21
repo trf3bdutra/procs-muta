@@ -234,7 +234,7 @@ function mapear(L) {
     if (!c) return; /* dado do acervo (só leitura) ou sem campo na ficha: fica de fora */
     it.alvo = c.secao + '.' + c.chave; it.campo = c; it.value = valorPara(c, it.value);
     var atual = gravado(c.secao, c.chave); if (typeof atual === 'object') atual = '';
-    it.current = atual; it.status = !S(atual) ? 'novo' : N(atual) === N(it.value) ? 'igual' : 'conflito'; it.apply = it.status === 'novo'; out.push(it);
+    it.current = atual; it.status = !S(atual) ? 'novo' : N(atual) === N(it.value) || (iso(atual) && iso(atual) === iso(it.value)) ? 'igual' : 'conflito'; it.apply = it.status === 'novo'; out.push(it);
   });
   var c1 = alvoDe('Contrarrazões - Situação');
   if (contra.length && c1) { var a1 = gravado(c1.secao, c1.chave); out.push({ sec: 'Recursos e contrarrazões', key: c1.chave, label: 'Contrarrazões', value: 'apresentadas', doc: contra.join(', '), kind: 'field', alvo: c1.secao + '.' + c1.chave, campo: c1, current: a1, status: !a1 ? 'novo' : N(a1) === 'apresentadas' ? 'igual' : 'conflito', apply: !a1 }); }
@@ -340,6 +340,20 @@ function alertas() {
     if (c0) add('in', 'Intimação da decisão recorrida (ID ' + impT.id + '): primeira ciência ou publicação na cronologia em ' + c0.data + ' (“' + c0.t + '”' + (c0.id ? ', ID ' + c0.id : '') + '). Conferir a data efetiva e o início do prazo.', c0.id || impT.id, pubGrav ? '' : 'triagem.Tempest - Publicação', pubGrav ? '' : c0.d);
     else add('in', 'Intimação da decisão recorrida (ID ' + impT.id + '): nenhuma ciência ou publicação na cronologia lida até o recurso — leia a cronologia toda ou confira no PJe.', impT.id);
   }
+  /* leitura da sentença: o que não saiu do texto fica avisado, para conferir e preencher à mão */
+  try {
+    var PP = A.P, ds = PP ? PP.docs.filter(function (d) { return d.target === 'sentenca'; }) : [], dm = ds.filter(function (d) { return !d.edDe; }).pop() || ds[ds.length - 1];
+    if (dm) {
+      var ed = ds.filter(function (d) { return d.edDe; })[0];
+      if (ed) add('in', 'Embargos de declaração na origem: a decisão ID ' + ed.id + ' integra a sentença ID ' + dm.id + '; resultado e honorários são lidos da sentença.', ed.id);
+      var est = A.docs[dm.id], lida = est && est.estado === 'ok', sg = A.sug || [];
+      var CH = [['Sentença - Resultado', 'o resultado'], ['Sentença - Decisão', 'a decisão (procedente, improcedente…)'], ['Sentença - Honorários', 'os honorários'], ['Sentença - Custas', 'as custas']];
+      var falta = CH.filter(function (c) { return !sg.some(function (x) { return x.key === c[0] && S(x.value); }) && !S(gravado('origem', c[0])); }).map(function (c) { return c[1]; });
+      if (!est || est.estado === 'erro') add('al', 'Sentença ID ' + dm.id + ': o texto ainda não foi lido. Em Peças › Sentença, use "Extrair da peça" para trazer resultado, honorários e custas.', dm.id);
+      else if (est.estado === 'sem') add('al', 'Sentença ID ' + dm.id + ': documento sem texto (digitalizado). Use "Ler com OCR e preencher"; se não der, preencha resultado e honorários à mão.', dm.id);
+      else if (lida && falta.length) add('al', 'Sentença ID ' + dm.id + ': a leitura não identificou ' + falta.join(', ').replace(/, ([^,]*)$/, ' e $1') + '. Confira no documento e preencha à mão' + (est.ocr ? ' (texto por OCR: confira nomes, números e datas)' : '') + '.', dm.id);
+    } else if (PP && PP.docs.some(function (d) { return d.target === 'recurso'; })) add('al', 'Decisão recorrida não localizada na cronologia lida (pode estar num volume digitalizado). Leia a cronologia toda ou informe o ID da sentença.', '');
+  } catch (e) {}
   /* gratuidade: decisão que a deferiu e alcance ao recurso */
   var aj = L.filter(function (d) { var t4 = texto(d); return t4 && /(defiro|deferid[ao]s?|concedo|concedid[ao]s?)\s+(os benef[íi]cios d[ao]\s+)?(a\s+)?(gratuidade|justi[çc]a gratuita|assist[êe]ncia judici[áa]ria)/i.test(t4); })[0];
   if (aj) add('in', 'Gratuidade deferida no ID ' + aj.id + ' (' + aj.data + '): alcança o recurso, salvo revogação — o preparo fica dispensado para quem a obteve.', aj.id);
@@ -379,18 +393,18 @@ function estadoDoc(id) {
 /* lista de documentos, com especificação (gravada em "Outras peças") e os botões de cada um */
 function htmlDocs() {
   var tela = window.MutaPje && window.MutaPje.tela ? window.MutaPje.tela() : '';
-  var cab = '<div class="pc-sh"><h3>Documentos dos autos</h3><small class="muted">' + (A.itens ? A.itens.reduce(function (n, i) { return n + (i.docs || []).length; }, 0) + ' na cronologia · lidos às ' + hora() : 'painel esquerdo dos autos digitais') + '</small></div>';
+  var cab = '<div class="pc-sh"><h3>Documentos (cronologia do PJe)</h3><small class="muted">' + (A.itens ? A.itens.reduce(function (n, i) { return n + (i.docs || []).length; }, 0) + ' na cronologia · lidos às ' + hora() : 'painel esquerdo dos autos digitais') + '</small></div>';
   if (A.erro) return '<section class="card pc-sec" id="g-docs">' + cab + '<div class="bar au-bl">' + botaoLer() + '</div><p class="status err">' + esc(A.erro) + '</p></section>';
   if (!A.itens) return '<section class="card pc-sec" id="g-docs">' + cab + '<div class="bar au-bl">' + botaoLer() + '</div>' + (tela === 'autos' ? '' : '<p class="muted">Abra os autos digitais no PJe.</p>') + '</section>';
   var outro = !lidoDoProcesso() ? '<p class="status err">Os autos lidos são do processo ' + esc(A.cnj || 'sem número') + ', não do aberto no painel. Leia de novo na aba dos autos certos.</p>' : '';
-  var L = lista(), F = A.filtro, V = F === 'pecas' ? L.filter(function (d) { return d.k !== 'outro' && !d.anexo; }) : L;
+  var L = lista(), F = A.filtro, V = F === 'pecas' ? L.filter(function (d) { return PRINC[d.k] && d.k !== 'intimacao' && !d.anexo; }) : L;
   var outras = linhasGravadas('origem', 'Outras peças'), espDe = function (id) { if (id in A.esp) return A.esp[id]; var r = outras.filter(function (x) { return S(x.ids) === id; })[0]; return r ? S(r.texto) : ''; };
   var lidos = Object.keys(A.docs).filter(function (k) { return /^(ok|sem)$/.test(A.docs[k].estado); }).length;
   var h = '<section class="card pc-sec" id="g-docs">' + cab + outro +
-    '<div class="bar au-bl">' + botaoLer() + '<button type="button" class="btn solid sm" data-au="princ"' + (A.fila ? ' disabled' : '') + ' title="Lê o texto das decisões, recursos, contrarrazões, pareceres, procurações e custas: alimenta a conferência automática">' + (A.fila ? 'Lendo ' + A.fila + '…' : 'Peças principais') + '</button></div>' +
+    /* ler e reler ficam na Conferência, no topo da aba (sem repetir aqui) */
     '<div class="bar au-tj"><button type="button" class="btn line sm" data-au="tudojs"' + (A.todo ? ' disabled' : '') + ' title="Lê o texto de todos os documentos (PDF digitalizado vai ao OCR) e baixa num arquivo, no formato do acervo">' + SVGDL + (A.todo ? 'Lendo ' + A.todo.feitos + '/' + A.todo.total + '…' : 'Baixar inteiro teor (JSON)') + '</button></div>' +
     (A.msg ? '<p class="status ok">' + esc(A.msg) + '</p>' : '') +
-    '<div class="au-fx"><span class="seg"><button type="button" data-au="f:pecas" aria-selected="' + (F === 'pecas') + '">Peças</button><button type="button" data-au="f:todos" aria-selected="' + (F === 'todos') + '">Todos (' + L.length + ')</button></span><small class="muted">' + lidos + ' com texto lido</small></div>' +
+    '<div class="au-fx"><span class="seg"><button type="button" data-au="f:pecas" aria-selected="' + (F === 'pecas') + '" title="Decisões, recursos, contrarrazões, parecer, procuração, custas e inicial">Principais (' + L.filter(function (d) { return PRINC[d.k] && d.k !== 'intimacao' && !d.anexo; }).length + ')</button><button type="button" data-au="f:todos" aria-selected="' + (F === 'todos') + '">Todos (' + L.length + ')</button></span><small class="muted">' + lidos + ' com texto lido</small></div>' +
     '<div class="au-docs">' + V.map(function (d) {
       var ab = A.abertos[d.id], dd = A.docs[d.id];
       return '<div class="au-doc' + (d.anexo ? ' anx' : '') + (PRINC[d.k] ? ' pr' : '') + '"><div class="au-h"><span class="au-d">' + esc(d.data) + (d.hora ? '<small>' + esc(d.hora) + '</small>' : '') + '</span>' +

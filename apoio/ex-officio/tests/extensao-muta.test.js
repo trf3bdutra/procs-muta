@@ -323,3 +323,17 @@ test('extensão 0.26: sem emojis na interface (ícones SVG de traço)', () => {
   ['conteudo-pje.js', 'fundo.js', 'alertas.js', 'gabinete.js', 'gerador.js', 'relatorio.js', 'relatorio.html', 'etiquetas.js'].forEach(f => assert.doesNotMatch(read('extensao/' + f).replace(/✓/g, ''), emoji, f));
   assert.doesNotMatch(read('padrao/etiquetas-gabinete.json'), emoji);
 });
+
+test('inteiro teor 0.27: sentença de mérito antes dos embargos; dispositivo colado ao título; aviso do que a leitura não extraiu', () => {
+  const ctx = { window: {} }; ctx.window.window = ctx.window; vm.createContext(ctx); vm.runInContext(read('padrao/inteiro-teor.js'), ctx);
+  const T = ctx.window.CMTInteiroTeor;
+  const x = T.extractDecision({ text: 'Relatório. Fundamentação longa sobre horas extras. 3. DISPOSITIVOIsto posto, julgo PROCEDENTE o pedido formulado na inicial, resolvendo o mérito. Condeno a ré ao pagamento de honorários de 10% sobre o valor da condenação. P.R.I.' });
+  assert.match(x.resultado || '', /julgou procedente|julgo procedente|PROCEDENTE/i); assert.equal(x.decisao, 'Procedente');
+  const y = T.extractDecision({ text: 'Vistos. A execução não tem título. Desta forma, julgo extinta a presente ação de cumprimento de sentença, nos termos do art. 485, IV, do CPC. Sem custas. Sem honorários.' });
+  assert.ok(y.resultado, 'fecho sem "Ante o exposto"');
+  assert.equal(read('padrao/inteiro-teor.js'), read('extensao/padrao-inteiro-teor.js'));
+  const a = read('extensao/autos.js');
+  assert.match(a, /a leitura não identificou ' \+ falta\.join/); assert.match(a, /documento sem texto \(digitalizado\)/);
+  assert.match(a, /iso\(atual\) && iso\(atual\) === iso\(it\.value\)/);
+  assert.match(read('extensao/painel.css'), /\.pp-top \.dr-idx\{flex-wrap:wrap!important/);
+});

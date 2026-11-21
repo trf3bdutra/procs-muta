@@ -5,6 +5,19 @@ Nome desde a 0.19.3 (antes: Muta). Os identificadores internos (`window.Muta*`, 
 Extensão do Chrome/Edge (Manifest V3) que abre o **Muta** num painel lateral, ao lado dos autos e das tarefas do PJe 2º grau do TRF-3.
 Base: o HTML independente *muta-independente-prontuario-completo* (Prontuário + Acervo).
 
+## O que muda na 0.27 · leitura da sentença medida no acervo, avisos e aba Autos
+
+- Medido em 600 processos do acervo (`acervo/autos`): sentença localizada em 457; resultado 66% → 84%, honorários
+  67% → 88%, custas 63% → 84%, fundamento 42% → 51%. Causas corrigidas: (1) a última decisão antes do recurso era a dos
+  embargos de declaração — agora ela integra a sentença de mérito, de onde saem resultado, honorários e custas; (2)
+  título colado ao dispositivo ("DISPOSITIVOIsto posto"); (3) fechos sem "Ante o exposto" ("Desta forma, julgo…").
+- Conferência dos autos avisa quando a sentença não foi lida, é digitalizada (sem texto) ou a leitura não identificou
+  resultado, decisão, honorários ou custas; e quando a decisão recorrida não está na cronologia lida.
+- Aba Autos: "Documentos (cronologia do PJe)" com filtro "Principais" (decisões, recursos, contrarrazões, parecer,
+  procuração, custas e inicial) e "Todos", sem repetir os botões de leitura; data igual em formatos diferentes não
+  aparece mais como divergência.
+- Diretrizes: todas as seções na faixa do topo, sem rolagem lateral.
+
 ## O que muda na 0.26 · sem emojis
 
 - Selos, quadro de sinalizações, etiquetas redesenhadas, sino, relatório e notificações usam ícones SVG de traço

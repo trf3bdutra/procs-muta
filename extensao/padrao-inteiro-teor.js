@@ -211,7 +211,7 @@ const VERB3=[[/^n[ãa]o conhe[çc]o/i,'não conheceu'],[/^conhe[çc]o/i,'conhece
 function third(s){s=S(s).replace(/^[,:;\s]+/,'');for(const [re,to] of VERB3){if(re.test(s))return s.replace(re,to);}return s;}
 const clip=(s,n=320)=>{s=S(s).replace(/\s+/g,' ');return s.length>n?s.slice(0,n).replace(/\s+\S*$/,'')+'…':s;};
 const ROUTINE=/^(publique-se|registre-se|intime(m)?-se|cumpra-se|p\.?\s?r\.?\s?i|int\.?$|arquivem-se|d[êe]-se baixa|oportunamente|campo grande|s[ãa]o paulo|data da assinatura|cumpra-se)/i;
-const DISP_RE=/\b(Ante o exposto|Diante do exposto|Pelo exposto|Em face do exposto|Isto posto|Posto isso|Do exposto|Diante disso|Por todo o exposto|Ante o acima exposto|Diante do quadro)[,:]?\s*/gi;
+const DISP_RE=/\b(Ante o exposto|Ante ao exposto|Diante o exposto|Diante do exposto|Pelo exposto|Em face do exposto|Isto posto|Posto isso|Do exposto|Diante disso|Por todo o exposto|Ante o acima exposto|Diante do quadro|Em vista do exposto|Face ao exposto|Pelo que foi exposto|Por tais raz[õo]es|Por esses fundamentos|Por estes fundamentos)[,:]?\s*/gi;
 /* honorários da sentença no padrão do gabinete: "Quem paga · quanto e sobre o quê · observações".
    Ex.: "Parte ré (INSS) · 10% sobre o valor da condenação (Súmula 111/STJ)"; "Parte autora · 10% sobre o valor atualizado da causa · exigibilidade suspensa (gratuidade, artigo 98, § 3º, do CPC)". */
 const HON_ENT=[[/uni[ãa]o\s*(\(|-|–)?\s*fazenda nacional|fazenda nacional/i,'União (Fazenda Nacional)'],[/\buni[ãa]o\b/i,'União'],[/\binss\b|instituto nacional do seguro social/i,'INSS'],
@@ -273,13 +273,15 @@ function honorariosDe(L,t){
   return R.join(' | ');
 }
 function extractDecision(doc){
-  const t=doc.text,out={};
+  /* título colado ao texto ("DISPOSITIVOAnte o exposto", "DISPOSITIVOIsto posto") */
+  const t=String(doc.text||'').replace(/(DISPOSITIVO|DECIS[ÃA]O|CONCLUS[ÃA]O)(?=[A-ZÀ-Ú][a-zà-ú])/g,'$1 '),out={};
   let m,last=null;DISP_RE.lastIndex=0;while((m=DISP_RE.exec(t)))last=m;
   let dispStart=-1,disp='';
   if(last){dispStart=last.index;const ss=sentences(t.slice(last.index+last[0].length,last.index+last[0].length+900));disp=ss[0]||'';if(disp.length<25&&ss[1])disp+=' '+ss[1];}
   else{
     const ss=sentences(t),from=Math.floor(ss.length*0.55);
-    for(let i=ss.length-1;i>=from;i--){if(/^(n[ãa]o conhe[çc]o|conhe[çc]o|julgo|nego|dou|rejeito|acolho|extingo|homologo|defiro|indefiro|concedo|denego)\b/i.test(ss[i])){disp=ss[i];dispStart=t.indexOf(ss[i]);break;}}
+    const VB=/^(?:(?:desta|dessa|deste|desse) (?:forma|modo|maneira),?\s*|assim,?\s*|portanto,?\s*|logo,?\s*|por conseguinte,?\s*|em conclus[ãa]o,?\s*|isso posto,?\s*)?(n[ãa]o conhe[çc]o|conhe[çc]o|julgo|nego|dou|rejeito|acolho|extingo|homologo|defiro|indefiro|concedo|denego|declaro extint)/i;
+    for(let i=ss.length-1;i>=from;i--){if(VB.test(ss[i])){disp=ss[i].replace(/^(?:(?:desta|dessa|deste|desse) (?:forma|modo|maneira)|assim|portanto|logo|por conseguinte|em conclus[ãa]o|isso posto),?\s*/i,'');dispStart=t.indexOf(ss[i]);break;}}
   }
   if(disp){
     const r=third(disp).replace(/[.;]\s*$/,'');out.resultado=clip(r,300);
@@ -512,6 +514,8 @@ function origemOf(parsed,sen){
   for(const d of parsed.docs.filter(z=>!z.outro)){const x=d.text.replace(/\s+/g,' ');const v=/VALOR ATRIBU[ÍI]DO [ÀA] CAUSA:\s*R\$\s*(\d{1,3}(?:\.\d{3})*,\d{2})/i.exec(x)||(d.kind==='inicial'?/(?:d[áa]-se|atribui-se|atribuindo-se)\s+(?:à|a)\s+(?:presente\s+)?(?:causa|a[çc][ãa]o|demanda)\s+o\s+valor\s+de\s+R\$\s*(\d{1,3}(?:\.\d{3})*,\d{2})/i.exec(x):null);if(v){o.valor='R$ '+v[1];o.valorDoc=d.id;break;}}
   return o;
 }
+/* decisão que só resolve embargos de declaração (rejeita, acolhe ou nega provimento aos embargos) */
+function soEmbargos(d){const t=N((d.text||'').slice(-2500));return /embargos de declara/.test(N((d.text||'').slice(0,3000))+t)&&/(rejeito|acolho|nego provimento a?os?|dou provimento a?os?|conheco d?os|nao conheco d?os|julgo improcedentes os|acolho parcialmente)\s+(os\s+)?(presentes\s+)?embargos|inexistindo causa que justifique a oposicao de embargos|nego provimento ao recurso\.?\s*intime/.test(t)&&!/julgo (parcialmente )?(im)?procedente o pedido|julgo extint/.test(t);}
 function preselect(parsed){
   const main=parsed.docs.filter(d=>!d.outro),key=d=>(d.date||'')+'|'+String(d.id).padStart(12,'0');
   const ord=[...main].sort((a,b)=>key(a).localeCompare(key(b)));
@@ -520,7 +524,9 @@ function preselect(parsed){
   if(recs.length){
     const last=recs[recs.length-1];
     const decs=ord.filter(d=>['sentenca','decisao','acordao'].includes(d.kind)&&key(d)<key(last));
-    const dec=decs[decs.length-1];
+    let dec=decs[decs.length-1];
+    /* a última decisão antes do recurso julgou embargos de declaração: a decisão recorrida é a anterior (de mérito); a dos embargos a integra */
+    if(dec&&soEmbargos(dec)){const ant=decs.slice(0,-1).filter(d=>!soEmbargos(d)).pop();if(ant){dec.target='sentenca';dec.edDe=ant.id;dec.hint=(dec.hint?dec.hint+' ':'')+'Decisão em embargos de declaração (integra a sentença ID '+ant.id+').';dec=ant;}}
     if(dec){dec.target='sentenca';recs.filter(d=>key(d)>key(dec)).forEach(d=>d.target='recurso');}
     else last.target='recurso';
     const first=recs.find(d=>d.target==='recurso');
@@ -731,7 +737,7 @@ function buildSuggestions(parsed,r,ai){
   // Decisão recorrida / sentença
   const dec=used.filter(d=>d.target==='sentenca');
   if(dec.length){
-    const d=dec[dec.length-1],x=extractDecision(d),a=ai?.sentenca||{};
+    const d=dec.filter(z=>!z.edDe&&!soEmbargos(z)).pop()||dec[dec.length-1],x=extractDecision(d),a=ai?.sentenca||{};
     const ids=dec.map(z=>z.id).join(', ');
     add({sec:'Decisão recorrida / sentença',key:'Sentença - ID',label:'ID da decisão',value:ids,current:r['Sentença - ID'],doc:ids,kind:'field'});
     add({sec:'Decisão recorrida / sentença',key:'Sentença - Data',label:'Data da decisão',value:docBr(d),current:r['Sentença - Data'],doc:d.id,kind:'field'});
