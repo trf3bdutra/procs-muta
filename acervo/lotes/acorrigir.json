@@ -20,6 +20,71 @@
  "itens": [
   {
    "sessao": "2026-11-30",
+   "item": 1,
+   "processo": "0004423-79.2007.4.03.6000",
+   "recurso": "APELAÇÃO CÍVEL",
+   "partes": "JOSE ROLIM DA SILVEIRA x CAIXA ECONÔMICA FEDERAL",
+   "exequente": "JOSE ROLIM DA SILVEIRA",
+   "executado": "CAIXA ECONÔMICA FEDERAL",
+   "assunto": "Expurgos Inflacionários / Planos Econômicos",
+   "assunto_detalhado": "",
+   "grupo": null,
+   "tipo_caso": "",
+   "resultado": "",
+   "modelo": "",
+   "variacoes": [],
+   "observacao": "Preparo não recolhido",
+   "peculiaridades": "",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "Rodrigo",
+    "correcao": "Bruno/Alex",
+    "situacao": "Liberada"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {},
+   "ajustes": [
+    [
+     "Seção",
+     "Ajuste",
+     "Tipo"
+    ],
+    [
+     "Relatório",
+     "Abertura “apelação interposta em ação de cobrança …” e sentença em parágrafo separado; “sustentando, em suma”; folhas com hífen; óbito da autora, pedido de cálculos e informação de inelegibilidade, tratados no voto, ausentes do relatório → Forma A num só parágrafo (“apelação à sentença … que, em ação de cobrança …, rejeitou … e julgou improcedente”); “alegando, em suma”; “f. X/Y”; parágrafo com as ocorrências e seus IDʼs, tirados do próprio voto",
+     "RED · MÉDIA"
+    ],
+    [
+     "Voto",
+     "“discute-se direito … após julgamento”; “IDs”; “vez que” (cinco ocorrências); “regem fixação”; “considerados número … e pluralidade”; “Incabível fixação” → Artigos definidos; “IDʼs”; “pois”; ementas e teses transcritas preservadas",
+     "RED · BAIXA"
+    ],
+    [
+     "Voto, V11",
+     "Afirmação de que o STF, em 12/11/2026, não conheceu dos recursos contra o acórdão da ADPF 165 → Conferida em fonte aberta (notícia do STF de 12/11/2026: embargos rejeitados por ilegitimidade das entidades; trânsito em julgado determinado). Mantida",
+     "JUR · BAIXA"
+    ],
+    [
+     "Ementa",
+     "Seções em caixa baixa; “Apelação interposta”; questões sem “saber se” e sem a admissibilidade, que o item 4 decide; numeração salta de 2 para 4; “face à autora”; rodapé com “TRF3”, sem tribunal à frente da ADPF e dos Temas e com o nome do relator diferente do voto (“NEY GUSTAVO PAES DE ANDRADE” × “NEY DE ANDRADE”) → Caixa alta; “Apelação contra sentença”; quatro questões com “saber se”; numeração contínua; “quanto à autora”; rodapé no padrão STF → TRF-3, com o nome como no voto; cabeçalho com o resultado completo (não conhecimento, prejudicialidade e desprovimento)",
+     "EST · MÉDIA"
+    ],
+    [
+     "Acórdão",
+     "Ausente na minuta do PJe → Acórdão no padrão, espelhando o dispositivo",
+     "ESTR · ALTA"
+    ]
+   ],
+   "pendencias": [
+    "Os autos deste processo não foram extraídos para o acervo: nenhum ID foi conferido (251721335, f. 5/17, 175/184, 192/199 e 206/234; 338487254; 338487258; 397864919; 395552845; 403337042; 329478470). O parágrafo novo do relatório usa apenas IDʼs e fatos que o próprio voto já afirma.",
+    "A minuta está liberada no PJe (relatório, voto e ementa marcados) com o texto original; a versão corrigida só vale se for colada no editor antes da sessão."
+   ],
+   "minuta": true
+  },
+  {
+   "sessao": "2026-11-30",
    "item": 3,
    "processo": "5000791-85.2025.4.03.6207",
    "recurso": "Apelação / Remessa Necessária",
