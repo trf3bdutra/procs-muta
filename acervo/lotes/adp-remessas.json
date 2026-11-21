@@ -92,6 +92,20 @@
    "cor": "#4a6a2a",
    "resultado": "Voto conjunto: artigo 124, I, do CTN; honorários (Temas 1.076 e 1.265/STJ)",
    "modelo": "Voto único para as ações idênticas"
+  },
+  {
+   "id": "RA5",
+   "rotulo": "Apelação com remessa · ISS na base do PIS/COFINS (Tema 118/STF)",
+   "cor": "#6a4a2a",
+   "resultado": "Desprovimento: Tema 118/STF (RE 592.616, julgado em 21/10/2026); modulação pendente [VALIDAR]",
+   "modelo": "Monocrática (artigo 932, IV, b, do CPC) ou voto, conforme a modulação"
+  },
+  {
+   "id": "RA6",
+   "rotulo": "Apelação com remessa · ITR: exclusão de APP e reserva legal (ADA e averbação)",
+   "cor": "#2a6a3a",
+   "resultado": "Voto: ADA inexigível para APP; reserva legal conforme averbação (linha do TRF3)",
+   "modelo": "Voto"
   }
  ],
  "grupo_outros": {
@@ -13081,12 +13095,14 @@
    "exequente": "DELEGADO DA SECRETARIA DA RECEITA FEDERAL DE MATO GROSSO DO SUL - DRF CAMPO GRANDE",
    "executado": "CLINICA DE CAMPO GRANDE S/A",
    "assunto": "ISS/ Imposto sobre Serviços",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "RA5",
+   "tipo_caso": "Apelação da União e remessa necessária em mandado de segurança · exclusão do ISS da base de cálculo do PIS e da COFINS · liminar indeferida · segurança concedida, com compensação",
+   "resultado": "Ato a proferir: apelação da União (ID 373327333) e remessa necessária da sentença ID 373327328; contrarrazões (ID 373327335); MPF sem intervenção (ID 377893995) ‖ Proposta pelos precedentes: Desprovimento da apelação e da remessa (Tema 118/STF), após conferir a modulação dos efeitos; compensação nos termos do artigo 74 da Lei 9.430/1996, do artigo 26-A da Lei 11.457/2007 e do artigo 170-A do CTN [VALIDAR] [VALIDAR: Modulação dos efeitos do Tema 118/STF]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação da União e remessa necessária da sentença que excluiu o ISS da base do PIS e da COFINS de Clínica de Campo Grande S/A, com compensação. O STF concluiu o Tema 118 em 21/10/2026 no sentido da exclusão; a modulação está pendente.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -13097,7 +13113,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da apelação e da remessa necessária: possível decisão monocrática de desprovimento (artigo 932, IV, b, do CPC)",
+    "materia": "Tributário — PIS/COFINS (ISS na base)",
+    "origem": "Mandado de segurança 5009355-29.2024.4.03.6000 (2ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 373327328 (09/02/2026)",
+    "recurso": "apelação de União (Fazenda Nacional) (ID 373327333, 23/03/2026) · remessa necessária",
+    "preparo": "União (Fazenda Nacional): Isento (ente público)",
+    "monocratica": "Sim (artigo 932, IV, b, do CPC): Tema 118/STF, observada a modulação",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "União (Fazenda Nacional): Isento (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -13107,6 +13134,117 @@
    "chegada": "04/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "ISS na base do PIS/COFINS (Tema 118/STF)",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 373327328 · 09/02/2026 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Procuração/substabelecimento sem reserva de poderes (advogado de parte) · ID 402402525 · 05/10/2026 | última movimentação: 05/10/2026 14:59 · Juntada de Petição de procuração/substabelecimento sem reserva de poderes · Tema 118/STF: o ISS não integra a base de cálculo do PIS e da COFINS (RE 592.616, julgado em 21/10/2026, por 6 a 5); modulação dos efeitos ainda pendente [VALIDAR] · Linha da Turma Regional antes do julgamento: aplicação analógica do Tema 69/STF (ED na ApelRemNec 5001917-88.2020.4.03.6000, 28/04/2026) · Mesma matéria: 5009355-29 e 5009286-94 (julgar juntos)",
+   "teor": {
+    "sintese_fatica": "Clínica de Campo Grande S/A pede a exclusão do ISS da base do PIS e da COFINS e a compensação do indébito. A liminar foi indeferida e a sentença concedeu a segurança.",
+    "inicial": "Mandado de segurança contra o Delegado da Receita Federal do Brasil em Campo Grande.",
+    "decisao_recorrida": "Sentença ID 373327328 (09/02/2026): concedeu a segurança para declarar o direito de recolher o PIS e a COFINS sem o ISS destacado nas notas fiscais e o direito à compensação dos valores recolhidos nos cinco anos anteriores à impetração e no curso da ação.",
+    "recurso": "União (Fazenda Nacional) (ID 373327333, 23/03/2026): inclusão do ISS na receita bruta; distinção em relação ao Tema 69/STF; ausência de ordem de suspensão no Tema 118/STF.",
+    "resposta": "Contrarrazões da impetrante (ID 373327335).",
+    "parecer": "MPF ID 377893995: Ausência de interesse que justifique intervenção",
+    "memoriais": "Não consta",
+    "representacao": "Impetrante assistida por advogado constituído [VALIDAR].",
+    "preparo": "União (Fazenda Nacional): Isento (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação da União e remessa necessária em mandado de segurança · exclusão do ISS da base de cálculo do PIS e da COFINS · liminar indeferida · segurança concedida, com compensação",
+     "sintese": "Clínica de Campo Grande S/A pede a exclusão do ISS da base do PIS e da COFINS e a compensação do indébito. A liminar foi indeferida e a sentença concedeu a segurança.",
+     "questoes": "1) Exclusão do ISS da base do PIS e da COFINS (Tema 118/STF); 2) modulação; 3) compensação.",
+     "rel": {
+      "razoes": "União (Fazenda Nacional) (ID 373327333, 23/03/2026): inclusão do ISS na receita bruta; distinção em relação ao Tema 69/STF; ausência de ordem de suspensão no Tema 118/STF.",
+      "contrarrazoes": "Contrarrazões da impetrante (ID 373327335)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "373327328",
+      "juizo": "Mandado de segurança 5009355-29.2024.4.03.6000 (2ª Vara Federal de Campo Grande)",
+      "dispositivo": "concedeu a segurança para declarar o direito de recolher o PIS e a COFINS sem o ISS destacado nas notas fiscais e o direito à compensação dos valores recolhidos nos cinco anos anteriores à impetração e no curso da ação."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2024-08-28",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "União (Fazenda Nacional)",
+       "tipo": "Apelação",
+       "id": "373327333",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "373327328",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Decisão: liminar indeferida",
+       "id": "373327316",
+       "data": "2024-12-19"
+      },
+      {
+       "desc": "Sentença: segurança concedida",
+       "id": "373327328",
+       "data": "2026-02-09"
+      },
+      {
+       "desc": "Apelação da União",
+       "id": "373327333",
+       "data": "2026-03-23"
+      },
+      {
+       "desc": "Contrarrazões da impetrante",
+       "id": "373327335",
+       "data": "2026-05-13"
+      },
+      {
+       "desc": "Parecer do MPF (sem intervenção)",
+       "id": "377893995",
+       "data": "2026-06-01"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 373327328 · 09/02/2026 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Procuração/substabelecimento sem reserva de poderes (advogado de parte) · ID 402402525 · 05/10/2026 | última movimentação: 05/10/2026 14:59 · Juntada de Petição de procuração/substabelecimento sem reserva de poderes · Tema 118/STF: o ISS não integra a base de cálculo do PIS e da COFINS (RE 592.616, julgado em 21/10/2026, por 6 a 5); modulação dos efeitos ainda pendente [VALIDAR] · Linha da Turma Regional antes do julgamento: aplicação analógica do Tema 69/STF (ED na ApelRemNec 5001917-88.2020.4.03.6000, 28/04/2026) · Mesma matéria: 5009355-29 e 5009286-94 (julgar juntos)",
+     "assuntoDet": "ISS na base do PIS/COFINS (Tema 118/STF)",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Mandado de segurança",
+     "parecer": "Com parecer",
+     "idParecer": "377893995",
+     "parecerSentido": "Ausência de interesse que justifique intervenção"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "05/10/2026 14:59 · Juntada de Petição de procuração/substabelecimento sem reserva de poderes",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Sentença · ID 373327328 · 09/02/2026 — sentença: concedeu a segurança; sujeita a reexame necessário",
+    "ultima_peca": "Procuração/substabelecimento sem reserva de poderes (advogado de parte) · ID 402402525 · 05/10/2026",
+    "ultima_informacao": "Certidão · ID 376205314 · 25/05/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 373327328 · 09/02/2026 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Procuração/substabelecimento sem reserva de poderes (advogado de parte) · ID 402402525 · 05/10/2026 | última movimentação: 05/10/2026 14:59 · Juntada de Petição de procuração/substabelecimento sem reserva de poderes"
    }
   },
   {
@@ -13118,12 +13256,14 @@
    "exequente": "DELEGADO DA RECEITA FEDERAL DO BRASIL EM CAMPO GRANDE",
    "executado": "KARBECK SEGURANCA LTDA",
    "assunto": "ISS/ Imposto sobre Serviços",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "RA5",
+   "tipo_caso": "Apelação da União e remessa necessária em mandado de segurança · exclusão do ISS da base de cálculo do PIS e da COFINS · liminar indeferida · segurança concedida, com compensação",
+   "resultado": "Ato a proferir: apelação da União (ID 371895371) e remessa necessária da sentença ID 371895368; contrarrazões (ID 371895375); MPF sem intervenção (ID 374389475) ‖ Proposta pelos precedentes: Desprovimento da apelação e da remessa (Tema 118/STF), após conferir a modulação dos efeitos; compensação nos termos do artigo 74 da Lei 9.430/1996, do artigo 26-A da Lei 11.457/2007 e do artigo 170-A do CTN [VALIDAR] [VALIDAR: Modulação dos efeitos do Tema 118/STF]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação da União e remessa necessária da sentença que excluiu o ISS da base do PIS e da COFINS de Karbeck Segurança Ltda., com compensação. O STF concluiu o Tema 118 em 21/10/2026 no sentido da exclusão; a modulação está pendente.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -13134,7 +13274,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da apelação e da remessa necessária: possível decisão monocrática de desprovimento (artigo 932, IV, b, do CPC)",
+    "materia": "Tributário — PIS/COFINS (ISS na base)",
+    "origem": "Mandado de segurança 5009286-94.2024.4.03.6000 (2ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 371895368 (09/02/2026)",
+    "recurso": "apelação de União (Fazenda Nacional) (ID 371895371, 12/03/2026) · remessa necessária",
+    "preparo": "União (Fazenda Nacional): Isento (ente público)",
+    "monocratica": "Sim (artigo 932, IV, b, do CPC): Tema 118/STF, observada a modulação",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "União (Fazenda Nacional): Isento (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -13144,6 +13295,117 @@
    "chegada": "04/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "ISS na base do PIS/COFINS (Tema 118/STF)",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 371895368 · 09/02/2026 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 374389475 · 18/05/2026 | última movimentação: 19/05/2026 13:04 · Conclusos para decisão · Tema 118/STF: o ISS não integra a base de cálculo do PIS e da COFINS (RE 592.616, julgado em 21/10/2026, por 6 a 5); modulação dos efeitos ainda pendente [VALIDAR] · Linha da Turma Regional antes do julgamento: aplicação analógica do Tema 69/STF (ED na ApelRemNec 5001917-88.2020.4.03.6000, 28/04/2026) · Mesma matéria: 5009355-29 e 5009286-94 (julgar juntos)",
+   "teor": {
+    "sintese_fatica": "Karbeck Segurança Ltda. pede a exclusão do ISS da base do PIS e da COFINS e a compensação do indébito. A liminar foi indeferida e a sentença concedeu a segurança.",
+    "inicial": "Mandado de segurança contra o Delegado da Receita Federal do Brasil em Campo Grande.",
+    "decisao_recorrida": "Sentença ID 371895368 (09/02/2026): concedeu a segurança para declarar o direito de recolher o PIS e a COFINS sem o ISS destacado nas notas fiscais e o direito à compensação dos valores recolhidos nos cinco anos anteriores à impetração e no curso da ação.",
+    "recurso": "União (Fazenda Nacional) (ID 371895371, 12/03/2026): inclusão do ISS na receita bruta; distinção em relação ao Tema 69/STF; ausência de ordem de suspensão no Tema 118/STF.",
+    "resposta": "Contrarrazões da impetrante (ID 371895375).",
+    "parecer": "MPF ID 374389475: Ausência de interesse que justifique intervenção",
+    "memoriais": "Não consta",
+    "representacao": "Impetrante assistida por advogado constituído [VALIDAR].",
+    "preparo": "União (Fazenda Nacional): Isento (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação da União e remessa necessária em mandado de segurança · exclusão do ISS da base de cálculo do PIS e da COFINS · liminar indeferida · segurança concedida, com compensação",
+     "sintese": "Karbeck Segurança Ltda. pede a exclusão do ISS da base do PIS e da COFINS e a compensação do indébito. A liminar foi indeferida e a sentença concedeu a segurança.",
+     "questoes": "1) Exclusão do ISS da base do PIS e da COFINS (Tema 118/STF); 2) modulação; 3) compensação.",
+     "rel": {
+      "razoes": "União (Fazenda Nacional) (ID 371895371, 12/03/2026): inclusão do ISS na receita bruta; distinção em relação ao Tema 69/STF; ausência de ordem de suspensão no Tema 118/STF.",
+      "contrarrazoes": "Contrarrazões da impetrante (ID 371895375)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "371895368",
+      "juizo": "Mandado de segurança 5009286-94.2024.4.03.6000 (2ª Vara Federal de Campo Grande)",
+      "dispositivo": "concedeu a segurança para declarar o direito de recolher o PIS e a COFINS sem o ISS destacado nas notas fiscais e o direito à compensação dos valores recolhidos nos cinco anos anteriores à impetração e no curso da ação."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2024-08-27",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "União (Fazenda Nacional)",
+       "tipo": "Apelação",
+       "id": "371895371",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "371895368",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Decisão: liminar indeferida",
+       "id": "371895358",
+       "data": "2025-02-19"
+      },
+      {
+       "desc": "Sentença: segurança concedida",
+       "id": "371895368",
+       "data": "2026-02-09"
+      },
+      {
+       "desc": "Apelação da União",
+       "id": "371895371",
+       "data": "2026-03-12"
+      },
+      {
+       "desc": "Contrarrazões da impetrante",
+       "id": "371895375",
+       "data": "2026-05-08"
+      },
+      {
+       "desc": "Parecer do MPF (sem intervenção)",
+       "id": "374389475",
+       "data": "2026-05-18"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 371895368 · 09/02/2026 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 374389475 · 18/05/2026 | última movimentação: 19/05/2026 13:04 · Conclusos para decisão · Tema 118/STF: o ISS não integra a base de cálculo do PIS e da COFINS (RE 592.616, julgado em 21/10/2026, por 6 a 5); modulação dos efeitos ainda pendente [VALIDAR] · Linha da Turma Regional antes do julgamento: aplicação analógica do Tema 69/STF (ED na ApelRemNec 5001917-88.2020.4.03.6000, 28/04/2026) · Mesma matéria: 5009355-29 e 5009286-94 (julgar juntos)",
+     "assuntoDet": "ISS na base do PIS/COFINS (Tema 118/STF)",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Mandado de segurança",
+     "parecer": "Com parecer",
+     "idParecer": "374389475",
+     "parecerSentido": "Ausência de interesse que justifique intervenção"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "19/05/2026 13:04 · Conclusos para decisão",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Sentença · ID 371895368 · 09/02/2026 — sentença: concedeu a segurança; sujeita a reexame necessário",
+    "ultima_peca": "Parecer \"Falta de Interesse\" (MPF) · ID 374389475 · 18/05/2026",
+    "ultima_informacao": "Informação · ID 371895376 · 08/05/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 371895368 · 09/02/2026 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 374389475 · 18/05/2026 | última movimentação: 19/05/2026 13:04 · Conclusos para decisão"
    }
   },
   {
@@ -13155,12 +13417,14 @@
    "exequente": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "executado": "JOSE PEREIRA DE SOUZA MARTINS",
    "assunto": "ITR/ Imposto Territorial Rural",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "RA6",
+   "tipo_caso": "Apelação da União e remessa necessária em ação anulatória · ITR do exercício de 2003 (Fazenda Capão Alto, Gleba B, matrícula 19.633) · auto de infração de 14/12/2007 (PA 13161.002140/2007-04) · glosa de 1.536 ha de reserva legal e 2.098,5 ha de APP por ADA intempestivo · depósito integral · pedido julgado procedente",
+   "resultado": "Ato a proferir: apelação da União (ID 295368679) e remessa necessária da sentença ID 295368675 (republicada nos IDs 295368676 e 295368677); contrarrazões (ID 295368782) ‖ Proposta pelos precedentes: Voto: desprovimento quanto à APP (ADA inexigível) e exame da prova de averbação da reserva legal à época do fato gerador [VALIDAR] [VALIDAR: Averbação da reserva legal à época do fato gerador (2003); Processo prevento]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação da União e remessa necessária da sentença que excluiu do ITR/2003 as áreas de APP e reserva legal glosadas por ADA intempestivo. A sentença dispensou o ADA e exigiu, para a reserva legal, a averbação na matrícula.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -13171,7 +13435,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da apelação e da remessa necessária (voto)",
+    "materia": "Tributário — ITR (APP e reserva legal)",
+    "origem": "Procedimento comum 5006108-79.2020.4.03.6000 (2ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 295368675 (15/02/2024)",
+    "recurso": "apelação de União (Fazenda Nacional) (ID 295368679, 23/05/2024) · remessa necessária",
+    "preparo": "União (Fazenda Nacional): Isento (ente público)",
+    "monocratica": "Improvável sem paradigma",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "União (Fazenda Nacional): Isento (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -13181,6 +13456,125 @@
    "chegada": "06/04/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "ITR — exclusão de APP e reserva legal glosadas por ADA intempestivo",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 302828084 · 17/09/2024 — …D E C I S Ã O Recebo a apelação (Id 295368679) apenas no efeito devolutivo, consoante o artigo 1.012, §1º, inciso V, do CPC.Publique-se. Intime-se. Após, conclusos | última peça: Manifestação (PFN) · ID 305622634 · 30/09/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Etiqueta \"Prevenção\" [VALIDAR processo prevento] · Recebimento da apelação pelo Des. Fed. André Nabarrete, 4ª Turma (ID 302828084) · Averbação da reserva legal nas matrículas 8.899 e 8.900 (IDs 295368673 e 295368674) [VALIDAR] · Linha do TRF3: ADA inexigível; averbação da reserva legal imprescindível · Mesmo grupo de 5000372-29",
+   "teor": {
+    "sintese_fatica": "O Espólio de José Pereira de Souza Martins, representado pela inventariante Geny Ratier Pereira Martins, impugna a glosa das áreas de APP e reserva legal no ITR/2003, recusadas porque o ADA foi protocolado em 31/03/2005, fora do prazo da IN SRF 256/2002. O lançamento suplementar foi de R$ 1.644.106,65 e o débito está depositado.",
+    "inicial": "Ação anulatória de débito fiscal contra a União.",
+    "decisao_recorrida": "Sentença ID 295368675 (15/02/2024): julgou procedente o pedido para anular o auto de infração quanto a 1.536 ha de reserva legal e 2.098,5 ha de APP, com recálculo do imposto; honorários nos percentuais mínimos do artigo 85, § 3º, do CPC sobre o valor da causa; levantamento do depósito após o trânsito em julgado.",
+    "recurso": "União (Fazenda Nacional) (ID 295368679, 23/05/2024): exigência do ADA tempestivo como condição da exclusão das áreas ambientais (IN SRF 256/2002) e validade da glosa.",
+    "resposta": "Contrarrazões do espólio (ID 295368782).",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Advogado Luiz Epelbaum (OAB/MS 6.703).",
+    "preparo": "União (Fazenda Nacional): Isento (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação da União e remessa necessária em ação anulatória · ITR do exercício de 2003 (Fazenda Capão Alto, Gleba B, matrícula 19.633) · auto de infração de 14/12/2007 (PA 13161.002140/2007-04) · glosa de 1.536 ha de reserva legal e 2.098,5 ha de APP por ADA intempestivo · depósito integral · pedido julgado procedente",
+     "sintese": "O Espólio de José Pereira de Souza Martins, representado pela inventariante Geny Ratier Pereira Martins, impugna a glosa das áreas de APP e reserva legal no ITR/2003, recusadas porque o ADA foi protocolado em 31/03/2005, fora do prazo da IN SRF 256/2002. O lançamento suplementar foi de R$ 1.644.106,65 e o débito está depositado.",
+     "questoes": "1) ITR: exigência do ADA para exclusão de APP e reserva legal; 2) averbação da reserva legal; 3) honorários.",
+     "rel": {
+      "razoes": "União (Fazenda Nacional) (ID 295368679, 23/05/2024): exigência do ADA tempestivo como condição da exclusão das áreas ambientais (IN SRF 256/2002) e validade da glosa.",
+      "contrarrazoes": "Contrarrazões do espólio (ID 295368782)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "295368675",
+      "juizo": "Procedimento comum 5006108-79.2020.4.03.6000 (2ª Vara Federal de Campo Grande)",
+      "dispositivo": "julgou procedente o pedido para anular o auto de infração quanto a 1.536 ha de reserva legal e 2.098,5 ha de APP, com recálculo do imposto; honorários nos percentuais mínimos do artigo 85, § 3º, do CPC sobre o valor da causa; levantamento do depósito após o trânsito em julgado."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2020-09-18",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "União (Fazenda Nacional)",
+       "tipo": "Apelação",
+       "id": "295368679",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "295368675",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Decisão: depósito integral deferido",
+       "id": "295368499",
+       "data": "2020-09-30"
+      },
+      {
+       "desc": "Documento: matrícula 8.899 atualizada",
+       "id": "295368673",
+       "data": "2023-06-23"
+      },
+      {
+       "desc": "Documento: matrícula 8.900 atualizada",
+       "id": "295368674",
+       "data": "2023-06-23"
+      },
+      {
+       "desc": "Sentença: pedido procedente",
+       "id": "295368675",
+       "data": "2024-02-15"
+      },
+      {
+       "desc": "Apelação da União",
+       "id": "295368679",
+       "data": "2024-05-23"
+      },
+      {
+       "desc": "Contrarrazões do espólio",
+       "id": "295368782",
+       "data": "2024-08-02"
+      },
+      {
+       "desc": "Decisão: recebimento da apelação (4ª Turma)",
+       "id": "302828084",
+       "data": "2024-09-17"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 302828084 · 17/09/2024 — …D E C I S Ã O Recebo a apelação (Id 295368679) apenas no efeito devolutivo, consoante o artigo 1.012, §1º, inciso V, do CPC.Publique-se. Intime-se. Após, conclusos | última peça: Manifestação (PFN) · ID 305622634 · 30/09/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Etiqueta \"Prevenção\" [VALIDAR processo prevento] · Recebimento da apelação pelo Des. Fed. André Nabarrete, 4ª Turma (ID 302828084) · Averbação da reserva legal nas matrículas 8.899 e 8.900 (IDs 295368673 e 295368674) [VALIDAR] · Linha do TRF3: ADA inexigível; averbação da reserva legal imprescindível · Mesmo grupo de 5000372-29",
+     "assuntoDet": "ITR — exclusão de APP e reserva legal glosadas por ADA intempestivo",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Não verificado"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Decisão · ID 302828084 · 17/09/2024 — …D E C I S Ã O Recebo a apelação (Id 295368679) apenas no efeito devolutivo, consoante o artigo 1.012, §1º, inciso V, do CPC.Publique-se. Intime-se. Após, conclusos",
+    "ultima_peca": "Manifestação (PFN) · ID 305622634 · 30/09/2024",
+    "ultima_informacao": "Certidão · ID 298405390 · 12/08/2024",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 302828084 · 17/09/2024 — …D E C I S Ã O Recebo a apelação (Id 295368679) apenas no efeito devolutivo, consoante o artigo 1.012, §1º, inciso V, do CPC.Publique-se. Intime-se. Após, conclusos | última peça: Manifestação (PFN) · ID 305622634 · 30/09/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária"
    }
   },
   {
@@ -13192,12 +13586,14 @@
    "exequente": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "executado": "ROBERTO ALBERTINI",
    "assunto": "ITR/ Imposto Territorial Rural",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "RA6",
+   "tipo_caso": "Apelações da União e do espólio e remessa necessária em ação anulatória · ITR do exercício de 2011 (Fazenda Santa Luzia, PA 10140.722163/2015-91) · glosa de APP, floresta nativa e área de pastagem · pedido julgado procedente em parte",
+   "resultado": "Ato a proferir: apelações da União (ID 309489826) e do espólio (ID 309489831) e remessa necessária da sentença ID 309489824; contrarrazões (IDs 309489895 e 309489899) ‖ Proposta pelos precedentes: Voto: não conhecer da remessa (artigo 496, § 3º, I, do CPC); desprover a apelação da União quanto ao ADA; examinar a área de pastagem (prova) e a multa de ofício de 75% (jurisprudência do STF sobre o caráter confiscatório) [VALIDAR] [VALIDAR: Valor do proveito econômico para a remessa; Preparo da apelação do espólio; Decadência do ITR/2011]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelações da União e do espólio e remessa necessária da sentença que excluiu do ITR/2011 a APP e a floresta nativa e manteve a área de pastagem. A União exige o ADA; o espólio pede a exclusão da pastagem e a redução da multa.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -13208,7 +13604,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento das apelações (voto); remessa necessária: possível não conhecimento (artigo 496, § 3º, I, do CPC)",
+    "materia": "Tributário — ITR (APP, floresta nativa e pastagem)",
+    "origem": "Procedimento comum 5000372-29.2024.4.03.6004 (1ª Vara Federal de Corumbá)",
+    "decisao_agravada": "Sentença ID 309489824 (24/10/2024)",
+    "recurso": "apelação de União (Fazenda Nacional) (ID 309489826, 31/10/2024) e apelação de Espólio de Roberto Albertini (ID 309489831, 12/11/2024) · remessa necessária",
+    "preparo": "União (Fazenda Nacional): Isento (ente público); Espólio de Roberto Albertini: Comprovante de custas (ID 309489886), sem texto extraído [VALIDAR]",
+    "monocratica": "Improvável: duas apelações",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "União (Fazenda Nacional): Isento (ente público); Espólio de Roberto Albertini: Comprovante de custas (ID 309489886), sem texto extraído [VALIDAR] · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -13218,6 +13625,136 @@
    "chegada": "04/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "ITR — exclusão de APP e floresta nativa; área de pastagem e multa de ofício",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 309489824 · 24/10/2024 — sentença: julgou procedente o pedido; sujeita a reexame necessário | última peça: Petição intercorrente (agravado) · ID 376741496 · 27/05/2026 | última movimentação: 27/05/2026 10:38 · Juntada de Petição de petição intercorrente · Remessa: proveito econômico inferior a 1.000 salários mínimos (lançamento total de R$ 230.345,89): não cabimento (artigo 496, § 3º, I, do CPC) [VALIDAR] · Petição de 27/05/2026 (ID 376741496) junta sentença da ação 5000622-28.2025.4.03.6004, mesmas partes, que reconheceu a decadência do ITR/2010 (ID 376741497) · Data da notificação do lançamento do ITR/2011 × decadência (artigo 150, § 4º, do CTN) [VALIDAR] · Mesmo grupo de 5006108-79",
+   "teor": {
+    "sintese_fatica": "O Espólio de Roberto Albertini, representado pela inventariante Roberta Albertini Gonçalves, impugna o lançamento suplementar do ITR/2011, que totalizou R$ 230.345,89 com juros e multa. A sentença excluiu a APP e a floresta nativa e manteve a área de pastagem.",
+    "inicial": "Ação anulatória de débito fiscal contra a União.",
+    "decisao_recorrida": "Sentença ID 309489824 (24/10/2024): julgou procedente em parte o pedido para anular o lançamento 9063/00014/2021 e determinar o recálculo do ITR/2011 com exclusão de 161,4 ha de APP e 598,6 ha de floresta nativa, mantida a área de pastagem; sucumbência recíproca.",
+    "recurso": "União (Fazenda Nacional) (ID 309489826, 31/10/2024): exigência do ADA tempestivo para exclusão das áreas ambientais. Espólio de Roberto Albertini (ID 309489831, 12/11/2024): exclusão da área de pastagem e, subsidiariamente, redução da multa de ofício de 75% para 20% (vedação ao confisco).",
+    "resposta": "Contrarrazões do espólio (ID 309489895) e da União (ID 309489899).",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Advogado Walker Araujo (OAB/MS 29.586-B).",
+    "preparo": "Espólio: comprovante de custas ID 309489886 sem texto [VALIDAR]"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelações da União e do espólio e remessa necessária em ação anulatória · ITR do exercício de 2011 (Fazenda Santa Luzia, PA 10140.722163/2015-91) · glosa de APP, floresta nativa e área de pastagem · pedido julgado procedente em parte",
+     "sintese": "O Espólio de Roberto Albertini, representado pela inventariante Roberta Albertini Gonçalves, impugna o lançamento suplementar do ITR/2011, que totalizou R$ 230.345,89 com juros e multa. A sentença excluiu a APP e a floresta nativa e manteve a área de pastagem.",
+     "questoes": "1) Cabimento da remessa (artigo 496, § 3º, I, do CPC); 2) ITR: ADA para APP e floresta nativa; 3) área de pastagem; 4) multa de ofício de 75%.",
+     "rel": {
+      "razoes": "União (Fazenda Nacional) (ID 309489826, 31/10/2024): exigência do ADA tempestivo para exclusão das áreas ambientais. Espólio de Roberto Albertini (ID 309489831, 12/11/2024): exclusão da área de pastagem e, subsidiariamente, redução da multa de ofício de 75% para 20% (vedação ao confisco).",
+      "contrarrazoes": "Contrarrazões do espólio (ID 309489895) e da União (ID 309489899)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "309489824",
+      "juizo": "Procedimento comum 5000372-29.2024.4.03.6004 (1ª Vara Federal de Corumbá)",
+      "dispositivo": "julgou procedente em parte o pedido para anular o lançamento 9063/00014/2021 e determinar o recálculo do ITR/2011 com exclusão de 161,4 ha de APP e 598,6 ha de floresta nativa, mantida a área de pastagem; sucumbência recíproca."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2024-05-08",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "União (Fazenda Nacional)",
+       "tipo": "Apelação",
+       "id": "309489826",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Espólio de Roberto Albertini",
+       "tipo": "Apelação",
+       "id": "309489831",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "309489824",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: pedido procedente em parte",
+       "id": "309489824",
+       "data": "2024-10-24"
+      },
+      {
+       "desc": "Apelação da União",
+       "id": "309489826",
+       "data": "2024-10-31"
+      },
+      {
+       "desc": "Apelação do espólio",
+       "id": "309489831",
+       "data": "2024-11-12"
+      },
+      {
+       "desc": "Comprovante de custas da apelação",
+       "id": "309489886",
+       "data": "2024-11-12"
+      },
+      {
+       "desc": "Contrarrazões do espólio",
+       "id": "309489895",
+       "data": "2024-11-12"
+      },
+      {
+       "desc": "Contrarrazões da União",
+       "id": "309489899",
+       "data": "2024-11-25"
+      },
+      {
+       "desc": "Petição: sentença em ação idêntica (ITR/2010)",
+       "id": "376741496",
+       "data": "2026-05-27"
+      },
+      {
+       "desc": "Documento: sentença da ação 5000622-28.2025.4.03.6004",
+       "id": "376741497",
+       "data": "2026-05-27"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 309489824 · 24/10/2024 — sentença: julgou procedente o pedido; sujeita a reexame necessário | última peça: Petição intercorrente (agravado) · ID 376741496 · 27/05/2026 | última movimentação: 27/05/2026 10:38 · Juntada de Petição de petição intercorrente · Remessa: proveito econômico inferior a 1.000 salários mínimos (lançamento total de R$ 230.345,89): não cabimento (artigo 496, § 3º, I, do CPC) [VALIDAR] · Petição de 27/05/2026 (ID 376741496) junta sentença da ação 5000622-28.2025.4.03.6004, mesmas partes, que reconheceu a decadência do ITR/2010 (ID 376741497) · Data da notificação do lançamento do ITR/2011 × decadência (artigo 150, § 4º, do CTN) [VALIDAR] · Mesmo grupo de 5006108-79",
+     "assuntoDet": "ITR — exclusão de APP e floresta nativa; área de pastagem e multa de ofício",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Não verificado"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "27/05/2026 10:38 · Juntada de Petição de petição intercorrente",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Sentença · ID 309489824 · 24/10/2024 — sentença: julgou procedente o pedido; sujeita a reexame necessário",
+    "ultima_peca": "Petição intercorrente (agravado) · ID 376741496 · 27/05/2026",
+    "ultima_informacao": "Informação · ID 309489900 · 03/12/2024",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 309489824 · 24/10/2024 — sentença: julgou procedente o pedido; sujeita a reexame necessário | última peça: Petição intercorrente (agravado) · ID 376741496 · 27/05/2026 | última movimentação: 27/05/2026 10:38 · Juntada de Petição de petição intercorrente"
    }
   },
   {
