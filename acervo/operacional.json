@@ -6,7 +6,7 @@
   "arquivo": "acervo/fonte.json",
   "chave": "processo"
  },
- "atualizado_em": "2026-11-21T06:29:38.913Z",
+ "atualizado_em": "2026-11-21T06:29:46.522Z",
  "registros": [
   {
    "processo": "0000008-23.2025.4.03.6000",
@@ -296280,53 +296280,54 @@
     "Responsável": "",
     "Próxima ação": "",
     "Observações": "",
-    "atualizado_em": "2026-11-19T19:59:38.326Z"
+    "atualizado_em": "2026-11-21T06:29:46.522Z"
    },
    "triagem": {
-    "Urgência": "",
+    "Urgência": "Efeito suspensivo",
     "Urgência - Observação": "",
     "Urgência - Nível": "",
-    "Urgência - Apreciação": "",
-    "Urgência - Data": "",
+    "Urgência - Apreciação": "Apreciada · indeferida",
+    "Urgência - Data": "2026-11-21",
     "Urgência - Painel": "",
     "Tempest - Publicação": "",
     "Tempest - Protocolo": "",
     "Tempest - Prazo legal": "",
     "Tempest - Dobro": "",
     "Tempest - Suspensões": "",
-    "Tipo de Julgamento": "",
+    "Tipo de Julgamento": "Agravo de Instrumento",
     "Hipóteses Monocrática": "",
-    "Tempestividade": "",
-    "Preparo": "",
+    "Tempestividade": "Não verificado",
+    "Preparo": "Isento (ente público/MP)",
     "AJG": "",
     "DPU (controle)": "",
-    "Representação": "",
+    "Representação": "Dispensada (procurador público)",
     "ID da Procuração": "",
     "Impedimento / Suspeição": "",
     "Observação do Impedimento": "",
     "Regularidade": "Representação ainda não verificada.",
     "Regularidade Manual": "",
-    "Observação da Representação": "",
-    "MPF": "",
-    "MPF - Custos Legis": "",
+    "Observação da Representação": "Dispensada a procuração: representação por procurador público.",
+    "MPF": "Vista a abrir",
+    "MPF - Custos Legis": "Mandado de segurança",
     "ID do Parecer MPF": "",
     "Parecer - Sentido": "",
     "MPF - Info adicional": "",
     "Observação MPF": "",
-    "Tema": "Enade",
+    "Tema": "Ensino superior · ENADE/ENAMED como condição para colação de grau · mandado de segurança · liminar deferida",
     "COMPLEXIDADE": "",
     "Tipo de Voto": "",
-    "Prelim.": "",
-    "Descrição da Preliminar": "",
+    "Prelim.": "Há preliminares",
+    "Descrição da Preliminar": "Perda superveniente do objeto (contraminuta ID 390506133)",
     "META": "",
     "Seleção Prévia": "",
-    "Mídias": "",
+    "Mídias": "Não se aplica",
     "Etiquetas": "MS, 2ª Seção, ENCAMINHAR VISTA AO MPF, INTIMAR MPF - PRR, AG. CONTRAMINUTA",
-    "Alegações": "",
+    "Alegações": "1) Perda superveniente do objeto pela colação de grau e inscrição no CRM/MS; 2) legalidade da exigência de regularidade no ENADE/ENAMED para a colação de grau.",
     "O que falta sanar": "",
     "Intercorrências": "",
     "Síntese Processual": "",
-    "Especificidades": ""
+    "Especificidades": "Preliminar de perda do objeto na contraminuta: colação de grau consumada e inscrição no CRM/MS (ID 390506134, desde 23/06/2026) · Vista ao MPF determinada, sem parecer [VALIDAR] · Tutela recursal não concedida (ID 387607454, 20/07/2026)",
+    "Síntese Fática": "Estudante de Medicina da UFGD impetrou mandado de segurança contra a exigência de regularidade no ENADE/ENAMED para colar grau; o juízo deferiu em parte a liminar e mandou a UFGD abster-se da exigência. A UFGD agravou."
    },
    "producao": {
     "Destino": "",
@@ -296365,7 +296366,8 @@
     "Lote - Observação": "",
     "Lote - Ajustes da correção": [],
     "Lote - Pendências": "",
-    "Lote - Minuta": "sem minuta no lote"
+    "Lote - Minuta": "sem minuta no lote",
+    "Mono - Fundamento": "Paradigmas do gabinete: AI 5012952-32.2022.4.03.0000 (acórdão 3ª Turma, 14/04/2023: desprovido; ENADE, colação de grau e situação fática consolidada); AI 5005555-82.2023.4.03.0000 (monocrática, 24/03/2023: desprovido o agravo contra liminar que afastou o ENADE como requisito para colação de grau)"
    },
    "pauta": {
     "Status de Julgamento": "",
@@ -296375,7 +296377,8 @@
     "JULGAMENTO": "",
     "Motivo da remarcação": "",
     "sessoes": []
-   }
+   },
+   "controles": {}
   },
   {
    "processo": "5020837-63.2023.4.03.0000",
