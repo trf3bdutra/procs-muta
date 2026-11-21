@@ -147,7 +147,7 @@ test('Datas: marcos validados (ano 2000–2100), aviso de marco fora do expedien
 
 test('Mesa: Atualizar proposta ao lado de Aplicar; agrupar pelas regras do painel; coluna de capacidade compacta',()=>{
   const pag=read('caput/designacao/index.html');
-  assert.ok(/<div class="hac" id="hac" hidden><button type="button" class="btn pri" data-a="copiar"/.test(pag),'recalc antes de Aplicar');
+  assert.ok(/<div class="hac" id="hac" hidden><button type="button" class="ap-sg" data-a="ob-seguir" id="ap-sg" hidden><\/button><button type="button" class="btn pri" data-a="copiar"/.test(pag),'recalc antes de Aplicar');
   assert.ok(pag.includes("document.getElementById('b-recalc-tb').hidden=VIVO"),'um só botão no Caput');
   assert.ok(!pag.includes('data-ag="md"')&&pag.includes('VIVO.designacaoPorRegra(D.sessao.id)')&&pag.includes('nenhum processo nesta pauta'),'grupos pelas regras');
   assert.ok(pag.includes('class="sw"')&&pag.includes('.pp .mt{')&&pag.includes("'<span class=\"mt\">'"),'linha da pessoa');
@@ -231,6 +231,7 @@ test('Mesa: fluxo em 4 passos, regras obrigatórias antes da proposta e conferê
   assert.ok(pag.includes("esc_=fx&&livre(fx.nome,'d')?{nome:fx.nome,s:999,why:[['o',fx.por]]}:sa&&livre(sa,'d')?{nome:sa,s:900,why:[['a','regra do assunto']]}")&&pag.includes("e=fc&&livre(fc.nome,'c')?{nome:fc.nome,s:999,why:[['o',fc.por]]}"),'regra (geral ou do assunto) decide antes do escore');
   for(const x of ['function linhaAssunto(a,L)','class="sec-h"','function sugLinha(x,k,v)','data-fixg=','function fixo(x)',"if(a==='limpar-livre'){var Lv=[];IT.forEach(function(x){if(fixo(x))return;",'data-i="\'+x.i+\'"\'+(trav||fg?','data-usasug=','data-fixasug=','<select data-sel="\'+k+\'" data-i="','data-destrava=','var fx=fixa(x,k),trav=!!fx&&v===fx.nome&&!DESTR[x.i+\'|\'+k],fg=fixo(x);'])assert.ok(pag.includes(x),x);
   assert.ok(!pag.includes('class="seg ag"'),'só agrupa por assunto');
+  assert.ok(pag.includes("'Nada a aplicar: tudo igual ao gravado na pauta'")&&pag.includes("sg.textContent=nc?nc+' contra as regras · seguir':'';"),'Aplicar explica quando não há o que gravar e oferece seguir as regras');
   assert.ok(pag.includes("if(a==='limpar-livre')")&&pag.includes('Limpar o que não é regra')&&pag.includes("if(a==='desfazer-livre')"),'limpar o que não é regra, no painel da proposta');
   assert.ok(pag.includes('function tags(x)')&&pag.includes('mts:(l.metas||[]).map(String)')&&m.includes('metas: (inf.c.metas || [])'),'cartão com tipo de julgamento e META');
   assert.ok(pag.includes("why:[['e','especialista no assunto']]"),'especialista começa selecionado, sem regra fixa');
