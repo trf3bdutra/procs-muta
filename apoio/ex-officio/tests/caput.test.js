@@ -77,3 +77,8 @@ test('Gravação só no cabeçalho: Pautas sem a faixa inicial; o indicador soma
   assert.ok(!cap.includes('id="pt-gravar"')&&!cap.includes('Pautas de julgamento · sessões, marcos, seleção prévia e PDF da pauta'),'faixa de Pautas removida');
   assert.ok(cap.includes('api.estadoGrava = {')&&cap.includes('W.CMTPautas.gravarJa()')&&cap.includes('W.pintaGrava = pintaGrava;'),'indicador único');
 });
+
+test('Regras gerais embutidas no visual do painel de Relatórios (altura fixa, menu com subtítulos)',()=>{
+  const fs=require('fs'),p=require('path'),rg=fs.readFileSync(p.join(__dirname,'../../../caput/assets/js/regras-gerais.js'),'utf8');
+  assert.ok(rg.includes('var ABAS_SUB = {')&&rg.includes(".rg.embutida{position:relative;left:auto;top:auto;transform:none;width:100%;height:600px"),'visual de ferramenta');
+});
