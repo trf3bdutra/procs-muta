@@ -85,6 +85,13 @@
    "cor": "#6a2a4a",
    "resultado": "Voto conforme Temas 6, 793 e 1.234/STF e Súmulas Vinculantes 60 e 61",
    "modelo": "Bloco de saúde (medicamentos)"
+  },
+  {
+   "id": "RA4",
+   "rotulo": "Apelação com remessa · Responsabilidade solidária no PAF 13161-720.166/2017-00 (Dourados) e honorários",
+   "cor": "#4a6a2a",
+   "resultado": "Voto conjunto: artigo 124, I, do CTN; honorários (Temas 1.076 e 1.265/STJ)",
+   "modelo": "Voto único para as ações idênticas"
   }
  ],
  "grupo_outros": {
@@ -10730,12 +10737,14 @@
    "exequente": "JOAO EUZEBIO STAUDT",
    "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "assunto": "Incidência sobre Lucro",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "RA4",
+   "tipo_caso": "Apelações do autor e da Fazenda Nacional e remessa necessária · produtor rural excluído da responsabilidade solidária por débitos de IRPJ, CSLL, PIS e COFINS de empresa autuada (PAF 13161-720.166/2017-00) · honorários por equidade de R$ 200.000,00",
+   "resultado": "Ato a proferir: apelações do autor (ID 340373486) e da Fazenda Nacional (ID 340373489) e remessa necessária da sentença ID 340373485; contrarrazões (IDs 340373491 e 340373492) ‖ Proposta pelos precedentes: Voto conjunto com as ações idênticas: examinar o interesse comum para a responsabilidade solidária (artigo 124, I, do CTN) à luz da prova do PAF e da relação comercial alegada; quanto aos honorários, aplicar os Temas 1.076 e 1.265/STJ (proveito econômico de quem é excluído do polo passivo) [VALIDAR paradigma] [VALIDAR: Ações idênticas no acervo para julgamento conjunto; Preparo da apelação do autor; Prova do interesse comum no PAF]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelações de João Euzébio Staudt e da Fazenda Nacional e remessa necessária da sentença que o excluiu da responsabilidade solidária por débitos de R$ 62 milhões da Cleison J S Cavalcanti - ME e fixou honorários por equidade de R$ 200.000,00. O autor quer honorários sobre o proveito econômico; a Fazenda, a improcedência ou a redução.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -10746,7 +10755,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento das apelações e da remessa necessária (voto)",
+    "materia": "Tributário — responsabilidade tributária",
+    "origem": "Procedimento comum 5001956-79.2020.4.03.6002 (1ª Vara Federal de Dourados)",
+    "decisao_agravada": "Sentença ID 340373485 (14/08/2025)",
+    "recurso": "apelação de João Euzébio Staudt (autor) (ID 340373486, 09/09/2025) e apelação de União (Fazenda Nacional) (ID 340373489, 17/09/2025) · remessa necessária",
+    "preparo": "João Euzébio Staudt (autor): [VALIDAR preparo]; União (Fazenda Nacional): Isenta (ente público)",
+    "monocratica": "Não: prova do interesse comum e honorários de grande valor",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "João Euzébio Staudt (autor): [VALIDAR preparo]; União (Fazenda Nacional): Isenta (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -10756,6 +10776,126 @@
    "chegada": "28/10/2025",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Tributário — responsabilidade solidária por interesse comum (artigo 124, I, do CTN) e honorários",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 340373485 · 14/08/2025 — sentença: julgou procedente o pedido; sujeita a reexame necessário | última peça: Contrarrazões (agravante) · ID 340373492 · 21/10/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Responsabilidade solidária (artigo 124, I, do CTN) no PAF 13161-720.166/2017-00 (Operação \"Tantum Charta\"; débitos de IRPJ, CSLL, PIS e COFINS de 2012 a 2015 da Cleison J S Cavalcanti - ME, R$ 62.195.077,29) · ações idênticas: 5001943-80.2020.4.03.6002, 5001956-79.2020.4.03.6002, 5001867-56.2020.4.03.6002, 0000544-09.2017.4.03.6002, 0000543-24.2017.4.03.6002 e 0000564-97.2017.4.03.6002 [VALIDAR quais estão no acervo] · honorários por equidade de R$ 200.000,00 (Temas 1.076 e 1.265/STJ)",
+   "teor": {
+    "sintese_fatica": "João Euzébio Staudt foi incluído como responsável solidário por débitos da Cleison J S Cavalcanti - ME, autuada na Operação \"Tantum Charta\", e alegou mera relação comercial de venda de produção rural. A liminar foi indeferida; a sentença excluiu-o do polo passivo.",
+    "inicial": "Ação do autor contra a União (Fazenda Nacional).",
+    "decisao_recorrida": "Sentença ID 340373485 (14/08/2025): julgou procedente o pedido para declarar nulos os lançamentos do PAF 13161-720.166/2017-00 na parte em que imputam a João Euzébio Staudt responsabilidade solidária, excluindo-o do polo passivo; honorários por equidade de R$ 200.000,00, por ser inestimável o proveito (Temas 1.076 e 1.265/STJ).",
+    "recurso": "João Euzébio Staudt (autor) (ID 340373486, 09/09/2025): honorários pelo artigo 85, § 3º, do CPC sobre o proveito econômico, afastada a equidade. União (Fazenda Nacional) (ID 340373489, 17/09/2025): improcedência, por interesse comum no fato gerador (grupo econômico); subsidiariamente, redução dos honorários, pela existência de ações idênticas.",
+    "resposta": "Contrarrazões da Fazenda Nacional (ID 340373491) e do autor (ID 340373492).",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Advogados Alberi Rafael Dehn Ramos (OAB/MS 15.031) e Ewerton Araújo de Brito (OAB/MS 11.922).",
+    "preparo": "João Euzébio Staudt (autor): [VALIDAR preparo]; União (Fazenda Nacional): Isenta (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelações do autor e da Fazenda Nacional e remessa necessária · produtor rural excluído da responsabilidade solidária por débitos de IRPJ, CSLL, PIS e COFINS de empresa autuada (PAF 13161-720.166/2017-00) · honorários por equidade de R$ 200.000,00",
+     "sintese": "João Euzébio Staudt foi incluído como responsável solidário por débitos da Cleison J S Cavalcanti - ME, autuada na Operação \"Tantum Charta\", e alegou mera relação comercial de venda de produção rural. A liminar foi indeferida; a sentença excluiu-o do polo passivo.",
+     "questoes": "1) Responsabilidade solidária por interesse comum (artigo 124, I, do CTN); 2) honorários: proveito econômico × equidade (Temas 1.076 e 1.265/STJ).",
+     "rel": {
+      "razoes": "João Euzébio Staudt (autor) (ID 340373486, 09/09/2025): honorários pelo artigo 85, § 3º, do CPC sobre o proveito econômico, afastada a equidade. União (Fazenda Nacional) (ID 340373489, 17/09/2025): improcedência, por interesse comum no fato gerador (grupo econômico); subsidiariamente, redução dos honorários, pela existência de ações idênticas.",
+      "contrarrazoes": "Contrarrazões da Fazenda Nacional (ID 340373491) e do autor (ID 340373492)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "340373485",
+      "juizo": "Procedimento comum 5001956-79.2020.4.03.6002 (1ª Vara Federal de Dourados)",
+      "dispositivo": "julgou procedente o pedido para declarar nulos os lançamentos do PAF 13161-720.166/2017-00 na parte em que imputam a João Euzébio Staudt responsabilidade solidária, excluindo-o do polo passivo; honorários por equidade de R$ 200.000,00, por ser inestimável o proveito (Temas 1.076 e 1.265/STJ)."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2020-08-03",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "João Euzébio Staudt (autor)",
+       "tipo": "Apelação",
+       "id": "340373486",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "União (Fazenda Nacional)",
+       "tipo": "Apelação",
+       "id": "340373489",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "340373485",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Decisão: liminar indeferida",
+       "id": "340373438",
+       "data": "2021-03-09"
+      },
+      {
+       "desc": "Sentença: procedência",
+       "id": "340373485",
+       "data": "2025-08-14"
+      },
+      {
+       "desc": "Apelação do autor",
+       "id": "340373486",
+       "data": "2025-09-09"
+      },
+      {
+       "desc": "Apelação da Fazenda Nacional",
+       "id": "340373489",
+       "data": "2025-09-17"
+      },
+      {
+       "desc": "Contrarrazões da Fazenda Nacional",
+       "id": "340373491",
+       "data": "2025-10-13"
+      },
+      {
+       "desc": "Contrarrazões do autor",
+       "id": "340373492",
+       "data": "2025-10-21"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 340373485 · 14/08/2025 — sentença: julgou procedente o pedido; sujeita a reexame necessário | última peça: Contrarrazões (agravante) · ID 340373492 · 21/10/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Responsabilidade solidária (artigo 124, I, do CTN) no PAF 13161-720.166/2017-00 (Operação \"Tantum Charta\"; débitos de IRPJ, CSLL, PIS e COFINS de 2012 a 2015 da Cleison J S Cavalcanti - ME, R$ 62.195.077,29) · ações idênticas: 5001943-80.2020.4.03.6002, 5001956-79.2020.4.03.6002, 5001867-56.2020.4.03.6002, 0000544-09.2017.4.03.6002, 0000543-24.2017.4.03.6002 e 0000564-97.2017.4.03.6002 [VALIDAR quais estão no acervo] · honorários por equidade de R$ 200.000,00 (Temas 1.076 e 1.265/STJ)",
+     "assuntoDet": "Tributário — responsabilidade solidária por interesse comum (artigo 124, I, do CTN) e honorários",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Não verificado"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Sentença · ID 340373485 · 14/08/2025 — sentença: julgou procedente o pedido; sujeita a reexame necessário",
+    "ultima_peca": "Contrarrazões (agravante) · ID 340373492 · 21/10/2025",
+    "ultima_informacao": "Informação · ID 340373493 · 21/10/2025",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 340373485 · 14/08/2025 — sentença: julgou procedente o pedido; sujeita a reexame necessário | última peça: Contrarrazões (agravante) · ID 340373492 · 21/10/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária"
    }
   },
   {
@@ -10767,12 +10907,14 @@
    "exequente": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "executado": "ELIO TOYOSHIGUE TANAKA",
    "assunto": "Incidência sobre Lucro",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "RA4",
+   "tipo_caso": "Apelações do autor e da Fazenda Nacional e remessa necessária · produtor rural excluído da responsabilidade solidária por débitos de empresa autuada (PAF 13161-720.166/2017-00) · honorários por equidade de R$ 200.000,00 fixados em embargos",
+   "resultado": "Ato a proferir: apelações da Fazenda Nacional (ID 340346569) e do autor (ID 340346570) e remessa necessária da sentença ID 340346559, integrada pela decisão dos embargos (ID 340346568); contrarrazões (IDs 340346562 e 340346574) ‖ Proposta pelos precedentes: Voto conjunto com as ações idênticas: examinar o interesse comum para a responsabilidade solidária (artigo 124, I, do CTN) à luz da prova do PAF e da relação comercial alegada; quanto aos honorários, aplicar os Temas 1.076 e 1.265/STJ (proveito econômico de quem é excluído do polo passivo) [VALIDAR paradigma] [VALIDAR: Ações idênticas no acervo para julgamento conjunto; Preparo da apelação do autor; Prova do interesse comum no PAF]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelações da Fazenda Nacional e de Elio Toyoshigue Tanaka e remessa necessária da sentença que o excluiu da responsabilidade solidária por débitos da Cleison J S Cavalcanti - ME e, em embargos, fixou honorários de R$ 200.000,00. O autor quer honorários sobre o proveito ou não inferiores a R$ 2 milhões; a Fazenda, a improcedência ou a redução.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -10783,7 +10925,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento das apelações e da remessa necessária (voto)",
+    "materia": "Tributário — responsabilidade tributária",
+    "origem": "Procedimento comum 5001943-80.2020.4.03.6002 (1ª Vara Federal de Dourados)",
+    "decisao_agravada": "Sentença ID 340346559 (09/05/2025)",
+    "recurso": "apelação de União (Fazenda Nacional) (ID 340346569, 16/09/2025) e apelação de Elio Toyoshigue Tanaka (autor) (ID 340346570, 18/09/2025) · remessa necessária",
+    "preparo": "União (Fazenda Nacional): Isenta (ente público); Elio Toyoshigue Tanaka (autor): [VALIDAR preparo]",
+    "monocratica": "Não: prova do interesse comum e honorários de grande valor",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "União (Fazenda Nacional): Isenta (ente público); Elio Toyoshigue Tanaka (autor): [VALIDAR preparo] · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -10793,6 +10946,121 @@
    "chegada": "04/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Tributário — responsabilidade solidária por interesse comum (artigo 124, I, do CTN) e honorários",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 340551951 · 03/11/2025 — …DECISÃORecebo os recursos de apelação no duplo efeito, com fulcro no art. 1.012, caput, do Código de Processo Civil.Intime(m)-se.São Paulo, 3 de novembro de 2025.MARCELO SARAIVADesembargador Federal | última peça: Petição intercorrente (PFN) · ID 342841570 · 10/11/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Responsabilidade solidária (artigo 124, I, do CTN) no PAF 13161-720.166/2017-00 (Operação \"Tantum Charta\"; débitos de IRPJ, CSLL, PIS e COFINS de 2012 a 2015 da Cleison J S Cavalcanti - ME, R$ 62.195.077,29) · ações idênticas: 5001943-80.2020.4.03.6002, 5001956-79.2020.4.03.6002, 5001867-56.2020.4.03.6002, 0000544-09.2017.4.03.6002, 0000543-24.2017.4.03.6002 e 0000564-97.2017.4.03.6002 [VALIDAR quais estão no acervo] · honorários por equidade de R$ 200.000,00 (Temas 1.076 e 1.265/STJ)",
+   "teor": {
+    "sintese_fatica": "Elio Toyoshigue Tanaka foi incluído como responsável solidário por débitos da Cleison J S Cavalcanti - ME e alegou mera relação comercial. A sentença o excluiu do polo passivo; os honorários foram fixados em embargos da Fazenda.",
+    "inicial": "Ação do autor contra a União (Fazenda Nacional).",
+    "decisao_recorrida": "Sentença ID 340346559 (09/05/2025): julgou procedente o pedido para declarar nulos os lançamentos do PAF 13161-720.166/2017-00 na parte em que imputam a Elio Toyoshigue Tanaka responsabilidade solidária, excluindo-o do polo passivo; em embargos, condenou a União em honorários de R$ 200.000,00 (ID 340346568).",
+    "recurso": "União (Fazenda Nacional) (ID 340346569, 16/09/2025): improcedência, por interesse comum no fato gerador; subsidiariamente, redução dos honorários. Elio Toyoshigue Tanaka (autor) (ID 340346570, 18/09/2025): honorários pelo artigo 85, § 3º, do CPC; subsidiariamente, majoração para valor não inferior a R$ 2.000.000,00.",
+    "resposta": "Contrarrazões (IDs 340346562 e 340346574).",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Advogados Alberi Rafael Dehn Ramos (OAB/MS 15.031) e outros.",
+    "preparo": "União (Fazenda Nacional): Isenta (ente público); Elio Toyoshigue Tanaka (autor): [VALIDAR preparo]"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelações do autor e da Fazenda Nacional e remessa necessária · produtor rural excluído da responsabilidade solidária por débitos de empresa autuada (PAF 13161-720.166/2017-00) · honorários por equidade de R$ 200.000,00 fixados em embargos",
+     "sintese": "Elio Toyoshigue Tanaka foi incluído como responsável solidário por débitos da Cleison J S Cavalcanti - ME e alegou mera relação comercial. A sentença o excluiu do polo passivo; os honorários foram fixados em embargos da Fazenda.",
+     "questoes": "1) Responsabilidade solidária por interesse comum (artigo 124, I, do CTN); 2) honorários: proveito econômico × equidade (Temas 1.076 e 1.265/STJ).",
+     "rel": {
+      "razoes": "União (Fazenda Nacional) (ID 340346569, 16/09/2025): improcedência, por interesse comum no fato gerador; subsidiariamente, redução dos honorários. Elio Toyoshigue Tanaka (autor) (ID 340346570, 18/09/2025): honorários pelo artigo 85, § 3º, do CPC; subsidiariamente, majoração para valor não inferior a R$ 2.000.000,00.",
+      "contrarrazoes": "Contrarrazões (IDs 340346562 e 340346574)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "340346559",
+      "juizo": "Procedimento comum 5001943-80.2020.4.03.6002 (1ª Vara Federal de Dourados)",
+      "dispositivo": "julgou procedente o pedido para declarar nulos os lançamentos do PAF 13161-720.166/2017-00 na parte em que imputam a Elio Toyoshigue Tanaka responsabilidade solidária, excluindo-o do polo passivo; em embargos, condenou a União em honorários de R$ 200.000,00 (ID 340346568)."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2020-08-01",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "União (Fazenda Nacional)",
+       "tipo": "Apelação",
+       "id": "340346569",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Elio Toyoshigue Tanaka (autor)",
+       "tipo": "Apelação",
+       "id": "340346570",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "340346559",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: procedência",
+       "id": "340346559",
+       "data": "2025-05-09"
+      },
+      {
+       "desc": "Sentença: embargos da Fazenda acolhidos (honorários)",
+       "id": "340346568",
+       "data": "2025-08-25"
+      },
+      {
+       "desc": "Apelação da Fazenda Nacional",
+       "id": "340346569",
+       "data": "2025-09-16"
+      },
+      {
+       "desc": "Apelação do autor",
+       "id": "340346570",
+       "data": "2025-09-18"
+      },
+      {
+       "desc": "Contrarrazões da Fazenda Nacional",
+       "id": "340346574",
+       "data": "2025-10-13"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 340551951 · 03/11/2025 — …DECISÃORecebo os recursos de apelação no duplo efeito, com fulcro no art. 1.012, caput, do Código de Processo Civil.Intime(m)-se.São Paulo, 3 de novembro de 2025.MARCELO SARAIVADesembargador Federal | última peça: Petição intercorrente (PFN) · ID 342841570 · 10/11/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Responsabilidade solidária (artigo 124, I, do CTN) no PAF 13161-720.166/2017-00 (Operação \"Tantum Charta\"; débitos de IRPJ, CSLL, PIS e COFINS de 2012 a 2015 da Cleison J S Cavalcanti - ME, R$ 62.195.077,29) · ações idênticas: 5001943-80.2020.4.03.6002, 5001956-79.2020.4.03.6002, 5001867-56.2020.4.03.6002, 0000544-09.2017.4.03.6002, 0000543-24.2017.4.03.6002 e 0000564-97.2017.4.03.6002 [VALIDAR quais estão no acervo] · honorários por equidade de R$ 200.000,00 (Temas 1.076 e 1.265/STJ)",
+     "assuntoDet": "Tributário — responsabilidade solidária por interesse comum (artigo 124, I, do CTN) e honorários",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Não verificado"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Decisão · ID 340551951 · 03/11/2025 — …DECISÃORecebo os recursos de apelação no duplo efeito, com fulcro no art. 1.012, caput, do Código de Processo Civil.Intime(m)-se.São Paulo, 3 de novembro de 2025.MARCELO SARAIVADesembargador Federal",
+    "ultima_peca": "Petição intercorrente (PFN) · ID 342841570 · 10/11/2025",
+    "ultima_informacao": "Informação · ID 340346576 · 21/10/2025",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 340551951 · 03/11/2025 — …DECISÃORecebo os recursos de apelação no duplo efeito, com fulcro no art. 1.012, caput, do Código de Processo Civil.Intime(m)-se.São Paulo, 3 de novembro de 2025.MARCELO SARAIVADesembargador Federal | última peça: Petição intercorrente (PFN) · ID 342841570 · 10/11/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária"
    }
   },
   {
