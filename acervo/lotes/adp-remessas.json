@@ -134,6 +134,13 @@
    "cor": "#2a3a6a",
    "resultado": "Voto conforme a perícia: incapacidade para o serviço militar, nexo com o serviço e redação da Lei 6.880/1980 aplicável (antes ou depois da Lei 13.954/2019)",
    "modelo": "Voto"
+  },
+  {
+   "id": "RA11",
+   "rotulo": "Apelação com remessa · Saúde: vosoritida (Voxzogo) para acondroplasia — não incorporação pela Conitec (junho/2026)",
+   "cor": "#6a2a5a",
+   "resultado": "Voto conforme Temas 6 e 1.234/STF, considerada a deliberação de não incorporação (Conitec, 18/06/2026; Portaria SCTIE/MS 38/2026) e a perícia de cada caso",
+   "modelo": "Voto único com variações por perícia e idade"
   }
  ],
  "grupo_outros": {
@@ -14278,7 +14285,7 @@
    "exequente": "UNIÃO FEDERAL",
    "executado": "BIOMARIN BRASIL FARMACEUTICA LTDA",
    "assunto": "Não padronizado",
-   "grupo": "RA3",
+   "grupo": "RA11",
    "tipo_caso": "Apelação da União e remessa necessária em ação de obrigação de fazer · fornecimento do medicamento VOXZOGO (vosoritida) para acondroplasia · autora menor · tutela de urgência deferida · perícia · pedido julgado parcialmente procedente; extinção quanto às empresas BioMarin e Multicare",
    "resultado": "Ato a proferir: apelação da União (ID 320250099) e remessa necessária da sentença ID 320250097; contrarrazões (ID 320250103); MPF pelo provimento (ID 368244221); petição da União com o Relatório de Recomendação Conitec 1.116 (IDs 404770953 a 404770955) ‖ Proposta pelos precedentes: Voto conforme os Temas 6 e 1.234/STF, considerada a decisão de não incorporação da Conitec, a perícia judicial e a situação atual das epífises [VALIDAR] [VALIDAR: Conclusão do laudo pericial complementar (ID 320249672); Epífises abertas na data do julgamento; Alcance do item 4 do Tema 1.234/STF após a decisão da Conitec]",
    "modelo": "",
@@ -17724,12 +17731,14 @@
    "exequente": "UNIÃO FEDERAL",
    "executado": "MARINA FARO BURALI",
    "assunto": "Registrado na ANVISA",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "RA11",
+   "tipo_caso": "Apelação da União e remessa necessária em ação de obrigação de fazer · fornecimento de VOXZOGO (vosoritida) para acondroplasia · autora menor · tutela antecipada com sequestro e multa · pedido julgado procedente (30/06/2026)",
+   "resultado": "Ato a proferir: apelação da União (ID 389815539) e remessa necessária da sentença ID 389815530; contrarrazões (ID 389815549); MPF pelo desprovimento (ID 393056398) ‖ Proposta pelos precedentes: Voto conforme os Temas 6 e 1.234/STF, considerada a decisão de não incorporação da Conitec, a perícia e a situação das epífises [VALIDAR] [VALIDAR: Razões da União (PDF sem texto); Perícia e situação das epífises]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação da União e remessa necessária da sentença que condenou a União a fornecer vosoritida a criança com acondroplasia. A sentença é posterior à deliberação de não incorporação da Conitec (18/06/2026); o MPF opinou pelo desprovimento.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -17740,7 +17749,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da apelação e da remessa necessária (voto)",
+    "materia": "Saúde — fornecimento de medicamento",
+    "origem": "Procedimento comum 5008008-29.2022.4.03.6000 (2ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 389815530 (30/06/2026)",
+    "recurso": "apelação de União (ID 389815539, 13/07/2026) · remessa necessária",
+    "preparo": "União: Isento (ente público)",
+    "monocratica": "Improvável: Temas 6 e 1.234/STF e decisão da Conitec",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "União: Isento (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -17750,6 +17770,132 @@
    "chegada": "04/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Saúde — vosoritida (Voxzogo) para acondroplasia; não incorporação pela Conitec",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 390828641 · 07/08/2026 — abriu vista ao MPF | última peça: Petição intercorrente (advogado de parte) · ID 404900301 · 16/10/2026 | última movimentação: 16/10/2026 18:45 · Juntada de Petição de petição intercorrente · Temas 6 e 1.234/STF: medicamento registrado na Anvisa e não incorporado; Conitec deliberou pela não incorporação em 18/06/2026 (Relatório 1.116) e a Portaria SCTIE/MS 38, de 01/07/2026, tornou pública a decisão [VALIDAR teor] · Item 4 do Tema 1.234/STF: controle da legalidade do ato de não incorporação [VALIDAR] · Grupo vosoritida: 5006632-08, 5008008-29 e 5008849-24 (voto único com variações) · MPF: interesse de incapaz · Ofício 348/2026/DGITS/SCTIE/MS juntado (ID 389815547) · Petição da União de 16/10/2026 (ID 404900301) [VALIDAR conteúdo]",
+   "teor": {
+    "sintese_fatica": "M. F. B., menor representada pelos genitores, portadora de acondroplasia, pediu a vosoritida. A tutela foi deferida em 03/11/2022, com sequestro de verbas e multa diária pelo descumprimento (ID 389815415). A sentença foi proferida após a deliberação da Conitec pela não incorporação.",
+    "inicial": "Ação de obrigação de fazer contra a União.",
+    "decisao_recorrida": "Sentença ID 389815530 (30/06/2026): julgou procedente o pedido, confirmou a tutela e condenou a União a fornecer a vosoritida de forma contínua, com prescrição renovada a cada seis meses; determinou ofício à Conitec.",
+    "recurso": "União (ID 389815539, 13/07/2026): razões em PDF sem texto extraído; juntou a Portaria SCTIE/MS 38/2026 (ID 389815540) [VALIDAR teor].",
+    "resposta": "Contrarrazões da autora (ID 389815549).",
+    "parecer": "MPF ID 393056398: Desprovimento da apelação",
+    "memoriais": "Não consta",
+    "representacao": "Autora assistida por advogado constituído [VALIDAR]; justiça gratuita deferida.",
+    "preparo": "União: Isento (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação da União e remessa necessária em ação de obrigação de fazer · fornecimento de VOXZOGO (vosoritida) para acondroplasia · autora menor · tutela antecipada com sequestro e multa · pedido julgado procedente (30/06/2026)",
+     "sintese": "M. F. B., menor representada pelos genitores, portadora de acondroplasia, pediu a vosoritida. A tutela foi deferida em 03/11/2022, com sequestro de verbas e multa diária pelo descumprimento (ID 389815415). A sentença foi proferida após a deliberação da Conitec pela não incorporação.",
+     "questoes": "1) Fornecimento de medicamento registrado e não incorporado (Temas 6 e 1.234/STF); 2) efeito da deliberação de não incorporação da Conitec.",
+     "rel": {
+      "razoes": "União (ID 389815539, 13/07/2026): razões em PDF sem texto extraído; juntou a Portaria SCTIE/MS 38/2026 (ID 389815540) [VALIDAR teor].",
+      "contrarrazoes": "Contrarrazões da autora (ID 389815549)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "389815530",
+      "juizo": "Procedimento comum 5008008-29.2022.4.03.6000 (2ª Vara Federal de Campo Grande)",
+      "dispositivo": "julgou procedente o pedido, confirmou a tutela e condenou a União a fornecer a vosoritida de forma contínua, com prescrição renovada a cada seis meses; determinou ofício à Conitec."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2022-09-13",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "União",
+       "tipo": "Apelação",
+       "id": "389815539",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "389815530",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Decisão: tutela antecipada deferida",
+       "id": "389815402",
+       "data": "2022-11-03"
+      },
+      {
+       "desc": "Decisão: sequestro e multa",
+       "id": "389815415",
+       "data": "2023-03-09"
+      },
+      {
+       "desc": "Sentença: pedido procedente",
+       "id": "389815530",
+       "data": "2026-06-30"
+      },
+      {
+       "desc": "Apelação da União",
+       "id": "389815539",
+       "data": "2026-07-13"
+      },
+      {
+       "desc": "Documento: Portaria SCTIE/MS 38/2026",
+       "id": "389815540",
+       "data": "2026-07-13"
+      },
+      {
+       "desc": "Ofício 348/2026/DGITS/SCTIE/MS",
+       "id": "389815547",
+       "data": "2026-07-20"
+      },
+      {
+       "desc": "Contrarrazões da autora",
+       "id": "389815549",
+       "data": "2026-07-30"
+      },
+      {
+       "desc": "Parecer do MPF (desprovimento)",
+       "id": "393056398",
+       "data": "2026-08-21"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 390828641 · 07/08/2026 — abriu vista ao MPF | última peça: Petição intercorrente (advogado de parte) · ID 404900301 · 16/10/2026 | última movimentação: 16/10/2026 18:45 · Juntada de Petição de petição intercorrente · Temas 6 e 1.234/STF: medicamento registrado na Anvisa e não incorporado; Conitec deliberou pela não incorporação em 18/06/2026 (Relatório 1.116) e a Portaria SCTIE/MS 38, de 01/07/2026, tornou pública a decisão [VALIDAR teor] · Item 4 do Tema 1.234/STF: controle da legalidade do ato de não incorporação [VALIDAR] · Grupo vosoritida: 5006632-08, 5008008-29 e 5008849-24 (voto único com variações) · MPF: interesse de incapaz · Ofício 348/2026/DGITS/SCTIE/MS juntado (ID 389815547) · Petição da União de 16/10/2026 (ID 404900301) [VALIDAR conteúdo]",
+     "assuntoDet": "Saúde — vosoritida (Voxzogo) para acondroplasia; não incorporação pela Conitec",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Incapaz (178, II)",
+     "parecer": "Com parecer",
+     "idParecer": "393056398",
+     "parecerSentido": "Desprovimento da apelação"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "16/10/2026 18:45 · Juntada de Petição de petição intercorrente",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Despacho · ID 390828641 · 07/08/2026 — abriu vista ao MPF",
+    "ultima_peca": "Petição intercorrente (advogado de parte) · ID 404900301 · 16/10/2026",
+    "ultima_informacao": "Informação · ID 389815550 · 31/07/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 390828641 · 07/08/2026 — abriu vista ao MPF | última peça: Petição intercorrente (advogado de parte) · ID 404900301 · 16/10/2026 | última movimentação: 16/10/2026 18:45 · Juntada de Petição de petição intercorrente"
    }
   },
   {
@@ -17761,12 +17907,14 @@
    "exequente": "UNIÃO FEDERAL",
    "executado": "LETICIA TOSTA DE CARVALHO",
    "assunto": "Registrado na ANVISA",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "RA11",
+   "tipo_caso": "Apelação da União e remessa necessária em ação de obrigação de fazer · fornecimento de VOXZOGO (vosoritida) para acondroplasia · autora menor · tutela provisória; transferência de valores à genitora para compra · perícia · pedido julgado procedente",
+   "resultado": "Ato a proferir: apelação da União (ID 385112187) e remessa necessária da sentença ID 385112176, integrada pela ID 385112185; MPF pelo desprovimento, com contracautelas de monitoramento (ID 387641154) ‖ Proposta pelos precedentes: Voto conforme os Temas 6 e 1.234/STF, considerada a decisão de não incorporação da Conitec, a perícia e as contracautelas sugeridas pelo MPF [VALIDAR] [VALIDAR: Contrarrazões da autora; Perícia e situação das epífises; Conteúdo das petições da União de outubro e novembro de 2026]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação da União e remessa necessária da sentença que condenou a União a fornecer vosoritida a criança com acondroplasia. O MPF opinou pela manutenção, com relatórios periódicos de monitoramento sob pena de suspensão.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -17777,7 +17925,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da apelação e da remessa necessária (voto)",
+    "materia": "Saúde — fornecimento de medicamento",
+    "origem": "Procedimento comum 5008849-24.2022.4.03.6000 (2ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 385112176 (25/02/2026)",
+    "recurso": "apelação de União (ID 385112187, 26/03/2026) · remessa necessária",
+    "preparo": "União: Isento (ente público)",
+    "monocratica": "Improvável: Temas 6 e 1.234/STF e decisão da Conitec",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "União: Isento (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -17787,6 +17946,137 @@
    "chegada": "04/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Saúde — vosoritida (Voxzogo) para acondroplasia; não incorporação pela Conitec",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 385441492 · 13/07/2026 — abriu vista ao MPF | última peça: Petição intercorrente (AGU (PRU)) · ID 413752867 · 19/11/2026 | última movimentação: 19/11/2026 18:17 · Juntada de Petição de petição intercorrente · Temas 6 e 1.234/STF: medicamento registrado na Anvisa e não incorporado; Conitec deliberou pela não incorporação em 18/06/2026 (Relatório 1.116) e a Portaria SCTIE/MS 38, de 01/07/2026, tornou pública a decisão [VALIDAR teor] · Item 4 do Tema 1.234/STF: controle da legalidade do ato de não incorporação [VALIDAR] · Grupo vosoritida: 5006632-08, 5008008-29 e 5008849-24 (voto único com variações) · MPF: interesse de incapaz · Parecer do MPF trata o fármaco como \"desprovido de registro na Anvisa\" [conferir] · Petições da União de 19/10/2026 e 19/11/2026 (IDs 405384831 e 413752867) com informação do Ministério da Saúde [VALIDAR conteúdo]",
+   "teor": {
+    "sintese_fatica": "L. T. C., menor representada pela genitora, portadora de acondroplasia, pediu a vosoritida. A tutela foi deferida em 21/11/2022; houve transferência de valores à genitora para aquisição (ID 385112063) e perícia judicial.",
+    "inicial": "Ação de obrigação de fazer contra a União.",
+    "decisao_recorrida": "Sentença ID 385112176 (25/02/2026): julgou procedente o pedido, confirmou a tutela e condenou a União a fornecer a vosoritida de forma contínua, com prescrição renovada a cada seis meses; ofício à Conitec; embargos de declaração da União rejeitados (ID 385112185).",
+    "recurso": "União (ID 385112187, 26/03/2026): ausência dos requisitos dos Temas 6 e 1.234/STF; contracautelas e monitoramento [VALIDAR teor].",
+    "resposta": "Contrarrazões da autora [VALIDAR ID].",
+    "parecer": "MPF ID 387641154: Manutenção da sentença, com contracautelas de monitoramento",
+    "memoriais": "Não consta",
+    "representacao": "Autora assistida por advogado constituído; justiça gratuita deferida.",
+    "preparo": "União: Isento (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação da União e remessa necessária em ação de obrigação de fazer · fornecimento de VOXZOGO (vosoritida) para acondroplasia · autora menor · tutela provisória; transferência de valores à genitora para compra · perícia · pedido julgado procedente",
+     "sintese": "L. T. C., menor representada pela genitora, portadora de acondroplasia, pediu a vosoritida. A tutela foi deferida em 21/11/2022; houve transferência de valores à genitora para aquisição (ID 385112063) e perícia judicial.",
+     "questoes": "1) Fornecimento de medicamento registrado e não incorporado (Temas 6 e 1.234/STF); 2) efeito da deliberação de não incorporação da Conitec; 3) contracautelas.",
+     "rel": {
+      "razoes": "União (ID 385112187, 26/03/2026): ausência dos requisitos dos Temas 6 e 1.234/STF; contracautelas e monitoramento [VALIDAR teor].",
+      "contrarrazoes": "Contrarrazões da autora [VALIDAR ID]."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "385112176",
+      "juizo": "Procedimento comum 5008849-24.2022.4.03.6000 (2ª Vara Federal de Campo Grande)",
+      "dispositivo": "julgou procedente o pedido, confirmou a tutela e condenou a União a fornecer a vosoritida de forma contínua, com prescrição renovada a cada seis meses; ofício à Conitec; embargos de declaração da União rejeitados (ID 385112185)."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2022-10-19",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "União",
+       "tipo": "Apelação",
+       "id": "385112187",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "385112176",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Decisão: tutela provisória deferida",
+       "id": "385111614",
+       "data": "2022-11-21"
+      },
+      {
+       "desc": "Decisão: transferência de valores para compra",
+       "id": "385112063",
+       "data": "2023-12-05"
+      },
+      {
+       "desc": "Sentença: pedido procedente",
+       "id": "385112176",
+       "data": "2026-02-25"
+      },
+      {
+       "desc": "Embargos de declaração da União",
+       "id": "385112182",
+       "data": "2026-03-05"
+      },
+      {
+       "desc": "Sentença dos embargos de declaração",
+       "id": "385112185",
+       "data": "2026-03-13"
+      },
+      {
+       "desc": "Apelação da União",
+       "id": "385112187",
+       "data": "2026-03-26"
+      },
+      {
+       "desc": "Parecer do MPF",
+       "id": "387641154",
+       "data": "2026-07-20"
+      },
+      {
+       "desc": "Petição da União",
+       "id": "405384831",
+       "data": "2026-10-19"
+      },
+      {
+       "desc": "Petição da União",
+       "id": "413752867",
+       "data": "2026-11-19"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 385441492 · 13/07/2026 — abriu vista ao MPF | última peça: Petição intercorrente (AGU (PRU)) · ID 413752867 · 19/11/2026 | última movimentação: 19/11/2026 18:17 · Juntada de Petição de petição intercorrente · Temas 6 e 1.234/STF: medicamento registrado na Anvisa e não incorporado; Conitec deliberou pela não incorporação em 18/06/2026 (Relatório 1.116) e a Portaria SCTIE/MS 38, de 01/07/2026, tornou pública a decisão [VALIDAR teor] · Item 4 do Tema 1.234/STF: controle da legalidade do ato de não incorporação [VALIDAR] · Grupo vosoritida: 5006632-08, 5008008-29 e 5008849-24 (voto único com variações) · MPF: interesse de incapaz · Parecer do MPF trata o fármaco como \"desprovido de registro na Anvisa\" [conferir] · Petições da União de 19/10/2026 e 19/11/2026 (IDs 405384831 e 413752867) com informação do Ministério da Saúde [VALIDAR conteúdo]",
+     "assuntoDet": "Saúde — vosoritida (Voxzogo) para acondroplasia; não incorporação pela Conitec",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Incapaz (178, II)",
+     "parecer": "Com parecer",
+     "idParecer": "387641154",
+     "parecerSentido": "Manutenção da sentença, com contracautelas de monitoramento"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "19/11/2026 18:17 · Juntada de Petição de petição intercorrente",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Despacho · ID 385441492 · 13/07/2026 — abriu vista ao MPF",
+    "ultima_peca": "Petição intercorrente (AGU (PRU)) · ID 413752867 · 19/11/2026",
+    "ultima_informacao": "Informação · ID 385112191 · 30/06/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 385441492 · 13/07/2026 — abriu vista ao MPF | última peça: Petição intercorrente (AGU (PRU)) · ID 413752867 · 19/11/2026 | última movimentação: 19/11/2026 18:17 · Juntada de Petição de petição intercorrente"
    }
   },
   {
@@ -17798,12 +18088,14 @@
    "exequente": "UNIÃO FEDERAL",
    "executado": "ROSANGELA RODRIGUES NOGUEIRA",
    "assunto": "Registrado na ANVISA",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "RA3",
+   "tipo_caso": "Apelação da União e remessa necessária em ação de obrigação de fazer · fornecimento de IMUNOGLOBULINA HUMANA 5 g · autora idosa com doença grave · tutela antecipada · pedido julgado procedente contra União, Estado e Município; obrigação depois adequada à prescrição",
+   "resultado": "Ato a proferir: apelação da União (ID 409590823) e remessa necessária da sentença ID 409590807; contrarrazões (ID 409590832) ‖ Proposta pelos precedentes: Voto conforme os Temas 6 e 1.234/STF; delimitar a obrigação à prescrição atual [VALIDAR] [VALIDAR: Motivo da etiqueta \"NÃO PAUTAR - GIOVANA\"; Doença e situação do medicamento no SUS]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação da União e remessa necessária da sentença que condenou União, Estado e Município a fornecer imunoglobulina humana a paciente idosa com doença grave. Decisões posteriores à sentença ajustaram a periodicidade do fornecimento.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -17814,7 +18106,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da apelação e da remessa necessária (voto)",
+    "materia": "Saúde — fornecimento de medicamento",
+    "origem": "Procedimento comum 5004153-71.2024.4.03.6000 (4ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 409590807 (02/11/2025)",
+    "recurso": "apelação de União (ID 409590823, 03/07/2026) · remessa necessária",
+    "preparo": "União: Isento (ente público)",
+    "monocratica": "Improvável sem conferência dos Temas 6 e 1.234/STF",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "União: Isento (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -17824,6 +18127,125 @@
    "chegada": "17/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Saúde — imunoglobulina humana; Temas 6 e 1.234/STF",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 409590843 · 28/10/2026 — …o cumprimento provisório e trasladados os documentos, remetam-se estes autos ao Tribunal Regional Federal da 3ª Região, conforme o despacho de ID 604686462, independentemente da comprovação do cumprimento da obrigação | última peça: Petição intercorrente (AGU (PRU)) · ID 409590847 · 30/10/2026 | última movimentação: 09/11/2026 18:05 · Conclusos para julgamento · Etiqueta \"NÃO PAUTAR - GIOVANA\" [VALIDAR motivo] · Situação do medicamento no SUS para a doença da autora e enquadramento nos Temas 6 e 1.234/STF [VALIDAR] · Alterações da obrigação após a sentença (IDs 409590819 e 409590833) e petições de outubro/2026 · Representação: advogada constituída (OAB/MS 28.851), não a DPU (ID 409590819) · Prioridades: idosa e doença grave",
+   "teor": {
+    "sintese_fatica": "Rosângela Rodrigues Nogueira, idosa, com doença grave, inicialmente assistida pela DPU e depois por advogada, pediu imunoglobulina humana. A sentença julgou procedente o pedido; decisões posteriores ajustaram a periodicidade (semestral e, depois, seis frascos por mês).",
+    "inicial": "Ação de obrigação de fazer contra a União, o Estado de Mato Grosso do Sul e o Município de Campo Grande.",
+    "decisao_recorrida": "Sentença ID 409590807 (02/11/2025): julgou procedente o pedido para confirmar a tutela e condenar União, Estado de Mato Grosso do Sul e Município de Campo Grande a fornecer imunoglobulina humana 5 g conforme a prescrição, enquanto durar o tratamento [VALIDAR demais itens]; a obrigação foi depois adequada à periodicidade da prescrição (IDs 409590819 e 409590833).",
+    "recurso": "União (ID 409590823, 03/07/2026): ausência dos requisitos dos Temas 6 e 1.234/STF; repartição de competências [VALIDAR teor].",
+    "resposta": "Contrarrazões da autora (ID 409590832).",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Advogada constituída (OAB/MS 28.851) [VALIDAR nome]; gratuidade deferida.",
+    "preparo": "União: Isento (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação da União e remessa necessária em ação de obrigação de fazer · fornecimento de IMUNOGLOBULINA HUMANA 5 g · autora idosa com doença grave · tutela antecipada · pedido julgado procedente contra União, Estado e Município; obrigação depois adequada à prescrição",
+     "sintese": "Rosângela Rodrigues Nogueira, idosa, com doença grave, inicialmente assistida pela DPU e depois por advogada, pediu imunoglobulina humana. A sentença julgou procedente o pedido; decisões posteriores ajustaram a periodicidade (semestral e, depois, seis frascos por mês).",
+     "questoes": "1) Fornecimento de imunoglobulina humana (Temas 6 e 1.234/STF); 2) alcance da obrigação após as adequações.",
+     "rel": {
+      "razoes": "União (ID 409590823, 03/07/2026): ausência dos requisitos dos Temas 6 e 1.234/STF; repartição de competências [VALIDAR teor].",
+      "contrarrazoes": "Contrarrazões da autora (ID 409590832)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "409590807",
+      "juizo": "Procedimento comum 5004153-71.2024.4.03.6000 (4ª Vara Federal de Campo Grande)",
+      "dispositivo": "julgou procedente o pedido para confirmar a tutela e condenar União, Estado de Mato Grosso do Sul e Município de Campo Grande a fornecer imunoglobulina humana 5 g conforme a prescrição, enquanto durar o tratamento [VALIDAR demais itens]; a obrigação foi depois adequada à periodicidade da prescrição (IDs 409590819 e 409590833)."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2024-06-03",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "União",
+       "tipo": "Apelação",
+       "id": "409590823",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "409590807",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Decisão inicial: gratuidade e citação",
+       "id": "409590632",
+       "data": "2024-06-04"
+      },
+      {
+       "desc": "Sentença: pedido procedente",
+       "id": "409590807",
+       "data": "2025-11-02"
+      },
+      {
+       "desc": "Embargos de declaração da autora",
+       "id": "409590808",
+       "data": "2025-11-11"
+      },
+      {
+       "desc": "Decisão: ajuste da obrigação e da representação",
+       "id": "409590819",
+       "data": "2026-05-14"
+      },
+      {
+       "desc": "Apelação da União",
+       "id": "409590823",
+       "data": "2026-07-03"
+      },
+      {
+       "desc": "Contrarrazões da autora",
+       "id": "409590832",
+       "data": "2026-09-28"
+      },
+      {
+       "desc": "Decisão: fornecimento de seis frascos por mês",
+       "id": "409590833",
+       "data": "2026-09-29"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 409590843 · 28/10/2026 — …o cumprimento provisório e trasladados os documentos, remetam-se estes autos ao Tribunal Regional Federal da 3ª Região, conforme o despacho de ID 604686462, independentemente da comprovação do cumprimento da obrigação | última peça: Petição intercorrente (AGU (PRU)) · ID 409590847 · 30/10/2026 | última movimentação: 09/11/2026 18:05 · Conclusos para julgamento · Etiqueta \"NÃO PAUTAR - GIOVANA\" [VALIDAR motivo] · Situação do medicamento no SUS para a doença da autora e enquadramento nos Temas 6 e 1.234/STF [VALIDAR] · Alterações da obrigação após a sentença (IDs 409590819 e 409590833) e petições de outubro/2026 · Representação: advogada constituída (OAB/MS 28.851), não a DPU (ID 409590819) · Prioridades: idosa e doença grave",
+     "assuntoDet": "Saúde — imunoglobulina humana; Temas 6 e 1.234/STF",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Não verificado"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "09/11/2026 18:05 · Conclusos para julgamento",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Decisão · ID 409590843 · 28/10/2026 — …o cumprimento provisório e trasladados os documentos, remetam-se estes autos ao Tribunal Regional Federal da 3ª Região, conforme o despacho de ID 604686462, independentemente da comprovação do cumprimento da obrigação",
+    "ultima_peca": "Petição intercorrente (AGU (PRU)) · ID 409590847 · 30/10/2026",
+    "ultima_informacao": "Certidão · ID 409665661 · 09/11/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 409590843 · 28/10/2026 — …o cumprimento provisório e trasladados os documentos, remetam-se estes autos ao Tribunal Regional Federal da 3ª Região, conforme o despacho de ID 604686462, independentemente da comprovação do cumprimento da obrigação | última peça: Petição intercorrente (AGU (PRU)) · ID 409590847 · 30/10/2026 | última movimentação: 09/11/2026 18:05 · Conclusos para julgamento"
    }
   },
   {
@@ -17835,12 +18257,14 @@
    "exequente": "ROBSON PACHECO PEREIRA",
    "executado": "SAMUEL MEDEIROS DE OLIVEIRA",
    "assunto": "Registro de Marcas, Patentes ou Invenções",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "RM2",
+   "tipo_caso": "Apelação do réu Samuel Medeiros de Oliveira e remessa necessária em ação ordinária · nulidade do registro da marca \"Fast Tickets\" (registro 912588691, INPI) e adjudicação ao autor · tutela indeferida · prova testemunhal · pedido julgado parcialmente procedente",
+   "resultado": "Ato a proferir: apelação do réu (ID 294417019) e remessa necessária da sentença ID 294417017; contrarrazões do autor (ID 294417024) ‖ Proposta pelos precedentes: Voto: prova do uso anterior e requisitos da adjudicação; cabimento da remessa [VALIDAR] [VALIDAR: Preparo do apelante; Cabimento da remessa; Posição processual do INPI]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação do réu e remessa necessária da sentença que anulou o registro da marca \"Fast Tickets\" e o adjudicou ao autor, por uso anterior.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -17851,7 +18275,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da apelação e da remessa necessária (voto)",
+    "materia": "Propriedade industrial — marca",
+    "origem": "Procedimento comum 5004725-03.2019.4.03.6000 (1ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 294417017 (27/05/2024)",
+    "recurso": "apelação de Samuel Medeiros de Oliveira (ID 294417019, 25/06/2024) · remessa necessária",
+    "preparo": "Samuel Medeiros de Oliveira: Não verificado",
+    "monocratica": "Improvável sem paradigma",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "Samuel Medeiros de Oliveira: Não verificado · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -17861,6 +18296,116 @@
    "chegada": "04/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Propriedade industrial — nulidade e adjudicação de marca (\"Fast Tickets\")",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 295417160 · 05/08/2024 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 294417017 · 27/05/2024 — sentença: julgou parcialmente procedente o pedido; sujeita a reexame necessário | última peça: Contrarrazões (advogado de parte) · ID 294417024 · 24/07/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Remessa necessária: posição do INPI na lide e cabimento (artigo 496 do CPC) [VALIDAR] · Preparo do apelante [VALIDAR] · Adjudicação (artigo 166 da Lei 9.279/1996) e prova do uso anterior de boa-fé (artigo 129, § 1º) [VALIDAR] · Mesmo tema de 5004734-28 (marcas)",
+   "teor": {
+    "sintese_fatica": "Robson Pacheco Pereira (ME) alega uso anterior da marca \"Fast Tickets\" e pede a nulidade do registro concedido a Samuel Medeiros de Oliveira e a adjudicação. A tutela foi indeferida e houve prova testemunhal.",
+    "inicial": "Ação de nulidade de registro de marca contra Samuel Medeiros de Oliveira e o INPI.",
+    "decisao_recorrida": "Sentença ID 294417017 (27/05/2024): julgou parcialmente procedente o pedido para anular o registro 912588691 da marca \"Fast Tickets\", concedido em 28/11/2018 a Samuel Medeiros de Oliveira, com adjudicação ao autor, cumpridas as exigências legais [VALIDAR demais itens].",
+    "recurso": "Samuel Medeiros de Oliveira (ID 294417019, 25/06/2024): validade do registro e ausência de anterioridade do autor [VALIDAR teor].",
+    "resposta": "Contrarrazões do autor (ID 294417024).",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Advogados Douglas de Oliveira Santos (OAB/MS 14.666) e Denis Carlos de Souza Medeiros (OAB/MS 25.605).",
+    "preparo": "Samuel Medeiros de Oliveira: Não verificado"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação do réu Samuel Medeiros de Oliveira e remessa necessária em ação ordinária · nulidade do registro da marca \"Fast Tickets\" (registro 912588691, INPI) e adjudicação ao autor · tutela indeferida · prova testemunhal · pedido julgado parcialmente procedente",
+     "sintese": "Robson Pacheco Pereira (ME) alega uso anterior da marca \"Fast Tickets\" e pede a nulidade do registro concedido a Samuel Medeiros de Oliveira e a adjudicação. A tutela foi indeferida e houve prova testemunhal.",
+     "questoes": "1) Nulidade de registro de marca por uso anterior; 2) adjudicação (artigo 166 da Lei 9.279/1996).",
+     "rel": {
+      "razoes": "Samuel Medeiros de Oliveira (ID 294417019, 25/06/2024): validade do registro e ausência de anterioridade do autor [VALIDAR teor].",
+      "contrarrazoes": "Contrarrazões do autor (ID 294417024)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "294417017",
+      "juizo": "Procedimento comum 5004725-03.2019.4.03.6000 (1ª Vara Federal de Campo Grande)",
+      "dispositivo": "julgou parcialmente procedente o pedido para anular o registro 912588691 da marca \"Fast Tickets\", concedido em 28/11/2018 a Samuel Medeiros de Oliveira, com adjudicação ao autor, cumpridas as exigências legais [VALIDAR demais itens]."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2019-06-10",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Samuel Medeiros de Oliveira",
+       "tipo": "Apelação",
+       "id": "294417019",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "294417017",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Decisão: tutela indeferida",
+       "id": "294416793",
+       "data": "2019-11-12"
+      },
+      {
+       "desc": "Decisão: prova testemunhal deferida",
+       "id": "294416828",
+       "data": "2021-04-14"
+      },
+      {
+       "desc": "Sentença: pedido parcialmente procedente",
+       "id": "294417017",
+       "data": "2024-05-27"
+      },
+      {
+       "desc": "Apelação do réu",
+       "id": "294417019",
+       "data": "2024-06-25"
+      },
+      {
+       "desc": "Contrarrazões do autor",
+       "id": "294417024",
+       "data": "2024-07-24"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 295417160 · 05/08/2024 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 294417017 · 27/05/2024 — sentença: julgou parcialmente procedente o pedido; sujeita a reexame necessário | última peça: Contrarrazões (advogado de parte) · ID 294417024 · 24/07/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Remessa necessária: posição do INPI na lide e cabimento (artigo 496 do CPC) [VALIDAR] · Preparo do apelante [VALIDAR] · Adjudicação (artigo 166 da Lei 9.279/1996) e prova do uso anterior de boa-fé (artigo 129, § 1º) [VALIDAR] · Mesmo tema de 5004734-28 (marcas)",
+     "assuntoDet": "Propriedade industrial — nulidade e adjudicação de marca (\"Fast Tickets\")",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Não verificado"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Decisão · ID 295417160 · 05/08/2024 — remessa ou redistribuição à Turma Regional (sem exame do recurso)",
+    "ultima_decisao_relevante": "Sentença · ID 294417017 · 27/05/2024 — sentença: julgou parcialmente procedente o pedido; sujeita a reexame necessário",
+    "ultima_peca": "Contrarrazões (advogado de parte) · ID 294417024 · 24/07/2024",
+    "ultima_informacao": "Certidão · ID 295674719 · 07/08/2024",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 295417160 · 05/08/2024 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 294417017 · 27/05/2024 — sentença: julgou parcialmente procedente o pedido; sujeita a reexame necessário | última peça: Contrarrazões (advogado de parte) · ID 294417024 · 24/07/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária"
    }
   },
   {
@@ -17872,12 +18417,14 @@
    "exequente": "PRESIDENTE DO INSTITUTO NACIONAL DE PROPRIEDADE INDUSTRIAL",
    "executado": "K. L. A. MAIA",
    "assunto": "Registro de Marcas, Patentes ou Invenções",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "RM2",
+   "tipo_caso": "Apelação do INPI e remessa necessária em mandado de segurança · indeferimento do registro da marca \"Jerônimo's Chiparia\" (PA 911900500) por colidência com \"GERONIMO WEST MUSIC\" (processo 904348008) · liminar indeferida · segurança concedida em parte",
+   "resultado": "Ato a proferir: apelação do INPI (ID 309375766) e remessa necessária da sentença ID 309375760; contrarrazões (ID 309375768) ‖ Proposta pelos precedentes: Voto: especialidade e risco de confusão entre os segmentos; limites do controle judicial do exame do INPI [VALIDAR] [VALIDAR: Segmentos (classes) das marcas; Litisconsorte passivo]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação do INPI e remessa necessária da sentença que determinou o registro da marca \"Jerônimo's Chiparia\", afastando a colidência com \"GERONIMO WEST MUSIC\" (segmentos distintos).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -17888,7 +18435,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da apelação e da remessa necessária (voto)",
+    "materia": "Propriedade industrial — marca",
+    "origem": "Mandado de segurança 5004734-28.2020.4.03.6000 (4ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 309375760 (01/10/2024)",
+    "recurso": "apelação de INPI (ID 309375766, 09/10/2024) · remessa necessária",
+    "preparo": "INPI: Isento (autarquia)",
+    "monocratica": "Improvável sem paradigma",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "INPI: Isento (autarquia) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -17898,6 +18456,120 @@
    "chegada": "04/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Propriedade industrial — indeferimento de marca por colidência (artigo 124, XIX, da Lei 9.279/1996)",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 309375760 · 01/10/2024 — sentença: concedeu em parte a segurança; sujeita a reexame necessário | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 310026317 · 11/12/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Princípio da especialidade × colidência (artigo 124, XIX, da Lei 9.279/1996) · Linha da 1ª Turma sobre marca fraca ou evocativa (ApCiv 5009476-30.2020.4.03.6119, 11/10/2023) [VALIDAR pertinência] · Litisconsorte G. W. (titular da marca anterior) [VALIDAR] · Mesmo tema de 5004725-03 (marcas)",
+   "teor": {
+    "sintese_fatica": "K. L. A. Maia ME teve indeferido pelo INPI o registro da marca \"Jerônimo's Chiparia\" por colidência com \"GERONIMO WEST MUSIC\". A justiça gratuita e a liminar foram indeferidas.",
+    "inicial": "Mandado de segurança contra o Presidente do INPI, com litisconsorte titular da marca anterior.",
+    "decisao_recorrida": "Sentença ID 309375760 (01/10/2024): concedeu em parte a segurança para anular o indeferimento e determinar o registro da marca \"Jerônimo's Chiparia\" (PA 911900500), se o único óbice for o registro \"GERONIMO WEST MUSIC\".",
+    "recurso": "INPI (ID 309375766, 09/10/2024): colidência entre as marcas e mérito administrativo do exame de registrabilidade [VALIDAR teor].",
+    "resposta": "Contrarrazões da impetrante (ID 309375768).",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Advogada Francisca Antônia Ferreira Lima (OAB/MS 13.715).",
+    "preparo": "INPI: Isento (autarquia)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação do INPI e remessa necessária em mandado de segurança · indeferimento do registro da marca \"Jerônimo's Chiparia\" (PA 911900500) por colidência com \"GERONIMO WEST MUSIC\" (processo 904348008) · liminar indeferida · segurança concedida em parte",
+     "sintese": "K. L. A. Maia ME teve indeferido pelo INPI o registro da marca \"Jerônimo's Chiparia\" por colidência com \"GERONIMO WEST MUSIC\". A justiça gratuita e a liminar foram indeferidas.",
+     "questoes": "1) Colidência de marcas e princípio da especialidade; 2) controle judicial do exame de registrabilidade.",
+     "rel": {
+      "razoes": "INPI (ID 309375766, 09/10/2024): colidência entre as marcas e mérito administrativo do exame de registrabilidade [VALIDAR teor].",
+      "contrarrazoes": "Contrarrazões da impetrante (ID 309375768)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "309375760",
+      "juizo": "Mandado de segurança 5004734-28.2020.4.03.6000 (4ª Vara Federal de Campo Grande)",
+      "dispositivo": "concedeu em parte a segurança para anular o indeferimento e determinar o registro da marca \"Jerônimo's Chiparia\" (PA 911900500), se o único óbice for o registro \"GERONIMO WEST MUSIC\"."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2020-07-21",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "INPI",
+       "tipo": "Apelação",
+       "id": "309375766",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "309375760",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Decisão: justiça gratuita indeferida",
+       "id": "309375674",
+       "data": "2020-08-11"
+      },
+      {
+       "desc": "Decisão: liminar indeferida",
+       "id": "309375747",
+       "data": "2021-04-20"
+      },
+      {
+       "desc": "Parecer do MPF em primeiro grau",
+       "id": "309375748",
+       "data": "2021-04-28"
+      },
+      {
+       "desc": "Sentença: segurança concedida em parte",
+       "id": "309375760",
+       "data": "2024-10-01"
+      },
+      {
+       "desc": "Apelação do INPI",
+       "id": "309375766",
+       "data": "2024-10-09"
+      },
+      {
+       "desc": "Contrarrazões da impetrante",
+       "id": "309375768",
+       "data": "2024-10-30"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 309375760 · 01/10/2024 — sentença: concedeu em parte a segurança; sujeita a reexame necessário | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 310026317 · 11/12/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Princípio da especialidade × colidência (artigo 124, XIX, da Lei 9.279/1996) · Linha da 1ª Turma sobre marca fraca ou evocativa (ApCiv 5009476-30.2020.4.03.6119, 11/10/2023) [VALIDAR pertinência] · Litisconsorte G. W. (titular da marca anterior) [VALIDAR] · Mesmo tema de 5004725-03 (marcas)",
+     "assuntoDet": "Propriedade industrial — indeferimento de marca por colidência (artigo 124, XIX, da Lei 9.279/1996)",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Mandado de segurança",
+     "parecer": "Não verificado"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Sentença · ID 309375760 · 01/10/2024 — sentença: concedeu em parte a segurança; sujeita a reexame necessário",
+    "ultima_peca": "Parecer \"Falta de Interesse\" (MPF) · ID 310026317 · 11/12/2024",
+    "ultima_informacao": "Ato ordinatório · ID 309375767 · 10/10/2024",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 309375760 · 01/10/2024 — sentença: concedeu em parte a segurança; sujeita a reexame necessário | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 310026317 · 11/12/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária"
    }
   },
   {
