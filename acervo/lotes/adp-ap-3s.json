@@ -88,12 +88,14 @@
    "exequente": "METALFER TRANSPORTES LTDA",
    "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "assunto": "1/3 de férias",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "AP2",
+   "tipo_caso": "Apelação da autora em ação declaratória · decadência e prescrição de créditos tributários declarados, parcelados (rescisão em 12/2020) e inscritos em dívida ativa em 05/2023 · protestos · tutela indeferida · pedido julgado improcedente",
+   "resultado": "Ato a proferir: apelação da autora (ID 386177966) da sentença ID 386177964; contrarrazões (ID 386177969) ‖ Proposta pelos precedentes: Despacho: intimar a apelante para juntar o comprovante PagTesouro em 5 dias (artigo 1.007, § 4º, do CPC); após, julgar a apelação [VALIDAR] [VALIDAR: Comprovante PagTesouro do preparo; Datas de declaração, parcelamento e inscrição]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação da Metalfer contra sentença que afastou a decadência de créditos declarados e parcelados. A apelante invoca prescrição; o preparo veio por Pix bancário, sem o comprovante do Tesouro.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -104,7 +106,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Despacho prévio sobre o preparo; depois, julgamento da apelação",
+    "materia": "Tributário — decadência e prescrição",
+    "origem": "Procedimento comum 5001917-09.2025.4.03.6002 (2ª Vara Federal de Dourados)",
+    "decisao_agravada": "Sentença ID 386177964 (16/05/2026)",
+    "recurso": "apelação de Metalfer Transportes Ltda. (ID 386177966, 11/06/2026)",
+    "preparo": "Metalfer Transportes Ltda.: Pix bancário de R$ 957,69, sem comprovante PagTesouro (ID 386177967)",
+    "monocratica": "Possível após o preparo: Súmulas 436 e 653/STJ",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "Metalfer Transportes Ltda.: Pix bancário de R$ 957,69, sem comprovante PagTesouro (ID 386177967) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -114,6 +127,109 @@
    "chegada": "12/08/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Tributário — decadência e prescrição de débitos declarados e parcelados (Súmulas 436 e 653/STJ)",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 386177964 · 16/05/2026 — sentença: julgou improcedente o pedido; sujeita a reexame necessário | última peça: Contrarrazões (PFN) · ID 386177969 · 23/06/2026 | última movimentação: 12/08/2026 15:38 · Conclusos para julgamento · Preparo: regra do gabinete (21/11/2026) — Pix só com o comprovante PagTesouro \"Pagamento realizado com sucesso\"; comprovante bancário ou tela \"Aguardando realização do pagamento\" exigem intimação única (artigo 1.007, § 4º, do CPC), sob pena de deserção · Mérito: constituição pela declaração (Súmula 436/STJ), interrupção da prescrição pelo parcelamento (Súmula 653/STJ e artigo 174, IV, do CTN) e reinício na rescisão (12/2020) · Gratuidade indeferida na origem (ID 386177950)",
+   "teor": {
+    "sintese_fatica": "Metalfer Transportes Ltda. pede o reconhecimento da decadência dos créditos inscritos em dívida ativa e levados a protesto. A União sustenta constituição por declaração, parcelamento rescindido em 12/2020 e inscrição em 05/2023.",
+    "inicial": "Ação declaratória de inexigibilidade de créditos tributários contra a União.",
+    "decisao_recorrida": "Sentença ID 386177964 (16/05/2026): julgou improcedente o pedido de reconhecimento de decadência e de inexigibilidade das CDAs protestadas, com honorários pela autora nos percentuais mínimos.",
+    "recurso": "Metalfer Transportes Ltda. (ID 386177966, 11/06/2026): prescrição (artigos 174 e 156, V, do CTN), cancelamento dos protestos e inversão da sucumbência; tutela recursal.",
+    "resposta": "Contrarrazões da União (ID 386177969).",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Advogada Alexandra Bastos Nunes (OAB/MS 10.178).",
+    "preparo": "Pix bancário de R$ 957,69 em 10/06/2026 (ID 386177967), sem PagTesouro"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação da autora em ação declaratória · decadência e prescrição de créditos tributários declarados, parcelados (rescisão em 12/2020) e inscritos em dívida ativa em 05/2023 · protestos · tutela indeferida · pedido julgado improcedente",
+     "sintese": "Metalfer Transportes Ltda. pede o reconhecimento da decadência dos créditos inscritos em dívida ativa e levados a protesto. A União sustenta constituição por declaração, parcelamento rescindido em 12/2020 e inscrição em 05/2023.",
+     "questoes": "1) Preparo por Pix sem comprovante do Tesouro; 2) decadência e prescrição de créditos declarados e parcelados.",
+     "rel": {
+      "razoes": "Metalfer Transportes Ltda. (ID 386177966, 11/06/2026): prescrição (artigos 174 e 156, V, do CTN), cancelamento dos protestos e inversão da sucumbência; tutela recursal.",
+      "contrarrazoes": "Contrarrazões da União (ID 386177969)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "386177964",
+      "juizo": "Procedimento comum 5001917-09.2025.4.03.6002 (2ª Vara Federal de Dourados)",
+      "dispositivo": "julgou improcedente o pedido de reconhecimento de decadência e de inexigibilidade das CDAs protestadas, com honorários pela autora nos percentuais mínimos."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2025-07-16",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Metalfer Transportes Ltda.",
+       "tipo": "Apelação",
+       "id": "386177966",
+       "contra": "Sentença"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Decisão: gratuidade indeferida",
+       "id": "386177950",
+       "data": "2025-07-22"
+      },
+      {
+       "desc": "Sentença: pedido improcedente",
+       "id": "386177964",
+       "data": "2026-05-16"
+      },
+      {
+       "desc": "Apelação da autora",
+       "id": "386177966",
+       "data": "2026-06-11"
+      },
+      {
+       "desc": "Comprovante bancário de Pix (preparo)",
+       "id": "386177967",
+       "data": "2026-06-11"
+      },
+      {
+       "desc": "Contrarrazões da União",
+       "id": "386177969",
+       "data": "2026-06-23"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 386177964 · 16/05/2026 — sentença: julgou improcedente o pedido; sujeita a reexame necessário | última peça: Contrarrazões (PFN) · ID 386177969 · 23/06/2026 | última movimentação: 12/08/2026 15:38 · Conclusos para julgamento · Preparo: regra do gabinete (21/11/2026) — Pix só com o comprovante PagTesouro \"Pagamento realizado com sucesso\"; comprovante bancário ou tela \"Aguardando realização do pagamento\" exigem intimação única (artigo 1.007, § 4º, do CPC), sob pena de deserção · Mérito: constituição pela declaração (Súmula 436/STJ), interrupção da prescrição pelo parcelamento (Súmula 653/STJ e artigo 174, IV, do CTN) e reinício na rescisão (12/2020) · Gratuidade indeferida na origem (ID 386177950)",
+     "assuntoDet": "Tributário — decadência e prescrição de débitos declarados e parcelados (Súmulas 436 e 653/STJ)",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Recolhido sem comprovante do Tesouro (STN)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Não verificado"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "12/08/2026 15:38 · Conclusos para julgamento",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Sentença · ID 386177964 · 16/05/2026 — sentença: julgou improcedente o pedido; sujeita a reexame necessário",
+    "ultima_peca": "Contrarrazões (PFN) · ID 386177969 · 23/06/2026",
+    "ultima_informacao": "Informação · ID 386177970 · 14/07/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 386177964 · 16/05/2026 — sentença: julgou improcedente o pedido; sujeita a reexame necessário | última peça: Contrarrazões (PFN) · ID 386177969 · 23/06/2026 | última movimentação: 12/08/2026 15:38 · Conclusos para julgamento"
    }
   },
   {
@@ -125,12 +241,14 @@
    "exequente": "MARIA CRISTINA RODRIGUES DA SILVA DE MORAIS",
    "executado": "MINISTERIO DA DEFESA - EXERCITO BRASILEIRO",
    "assunto": "Adicional de Inatividade",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "AP2",
+   "tipo_caso": "Apelações da autora e da União em ação ordinária · pensão militar de viúva reduzida em 11/2022 do soldo de 3º Sargento para o de Soldado de 2ª Classe (revisão por entendimento do TCU) · melhoria por invalidez do instituidor após a reforma · tutela de urgência · pedido julgado parcialmente procedente",
+   "resultado": "Ato a proferir: apelações da autora (ID 326464468) e da União (ID 326464472) da sentença ID 326464463; contrarrazões (IDs 326464475, 326464476 e 326464478); MPF sem intervenção (ID 365415722) ‖ Proposta pelos precedentes: Voto: examinar a decadência e a legalidade da revisão; danos morais [VALIDAR] [VALIDAR: Fundamento e data da revisão administrativa; Cabimento de remessa necessária]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelações da viúva e da União contra sentença que restabeleceu pensão militar reduzida por revisão baseada em entendimento do TCU, após 19 anos, e negou danos morais.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -141,7 +259,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento das apelações (voto)",
+    "materia": "Administrativo — pensão militar",
+    "origem": "Procedimento comum 5000240-60.2024.4.03.6007 (1ª Vara Federal de Coxim)",
+    "decisao_agravada": "Sentença ID 326464463 (13/03/2025)",
+    "recurso": "apelação de Maria Cristina Rodrigues da Silva de Morais (ID 326464468, 31/03/2025) e apelação de União (ID 326464472, 07/05/2025)",
+    "preparo": "Maria Cristina Rodrigues da Silva de Morais: Justiça gratuita; União: Isento (ente público)",
+    "monocratica": "Improvável: duas apelações",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "Maria Cristina Rodrigues da Silva de Morais: Justiça gratuita; União: Isento (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -151,6 +280,122 @@
    "chegada": "04/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Pensão militar — revisão por entendimento do TCU após 19 anos; danos morais",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 365172409 · 08/04/2026 — abriu vista ao MPF | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 365415722 · 09/04/2026 | última movimentação: 09/04/2026 17:53 · Conclusos para decisão · Decadência (artigo 54 da Lei 9.784/1999) × revisão de pensão por entendimento do TCU; Tema 445/STF [VALIDAR] · Melhoria do artigo 110 da Lei 6.880/1980 para militar já reformado · Petição da autora endereçada ao TJMS no cabeçalho (erro material) · Remessa necessária: sentença sujeita? [VALIDAR] · Mesmo tema de 5001266-02 (adp-remessas)",
+   "teor": {
+    "sintese_fatica": "Maria Cristina Rodrigues da Silva de Morais, idosa, viúva pensionista, teve a pensão reduzida em 11/2022 do soldo de 3º Sargento para o de Soldado de 2ª Classe, por revisão baseada em entendimento do TCU, após mais de 19 anos de pagamento.",
+    "inicial": "Ação ordinária de restabelecimento de pensão militar e danos morais contra a União.",
+    "decisao_recorrida": "Sentença ID 326464463 (13/03/2025): julgou parcialmente procedente o pedido para declarar ilegal a revogação administrativa que reduziu os proventos do instituidor e a pensão e determinar o restabelecimento, com tutela de urgência; rejeitou os danos morais [VALIDAR demais itens].",
+    "recurso": "Maria Cristina Rodrigues da Silva de Morais (ID 326464468, 31/03/2025): danos morais pela privação da verba alimentar e honorários integrais pela União. União (ID 326464472, 07/05/2025): revogação da tutela; legalidade da revisão: a melhoria só cabe a militar da ativa ou da reserva julgado inválido, não ao já reformado.",
+    "resposta": "Contrarrazões das partes (IDs 326464475, 326464476 e 326464478).",
+    "parecer": "MPF ID 365415722: Ausência de interesse que justifique intervenção",
+    "memoriais": "Não consta",
+    "representacao": "Advogado Glauco Ricci (OAB/MS 27.854); justiça gratuita.",
+    "preparo": "Maria Cristina Rodrigues da Silva de Morais: Justiça gratuita; União: Isento (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelações da autora e da União em ação ordinária · pensão militar de viúva reduzida em 11/2022 do soldo de 3º Sargento para o de Soldado de 2ª Classe (revisão por entendimento do TCU) · melhoria por invalidez do instituidor após a reforma · tutela de urgência · pedido julgado parcialmente procedente",
+     "sintese": "Maria Cristina Rodrigues da Silva de Morais, idosa, viúva pensionista, teve a pensão reduzida em 11/2022 do soldo de 3º Sargento para o de Soldado de 2ª Classe, por revisão baseada em entendimento do TCU, após mais de 19 anos de pagamento.",
+     "questoes": "1) Revisão de pensão militar por entendimento do TCU após 19 anos (decadência); 2) melhoria do artigo 110 da Lei 6.880/1980; 3) danos morais.",
+     "rel": {
+      "razoes": "Maria Cristina Rodrigues da Silva de Morais (ID 326464468, 31/03/2025): danos morais pela privação da verba alimentar e honorários integrais pela União. União (ID 326464472, 07/05/2025): revogação da tutela; legalidade da revisão: a melhoria só cabe a militar da ativa ou da reserva julgado inválido, não ao já reformado.",
+      "contrarrazoes": "Contrarrazões das partes (IDs 326464475, 326464476 e 326464478)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "326464463",
+      "juizo": "Procedimento comum 5000240-60.2024.4.03.6007 (1ª Vara Federal de Coxim)",
+      "dispositivo": "julgou parcialmente procedente o pedido para declarar ilegal a revogação administrativa que reduziu os proventos do instituidor e a pensão e determinar o restabelecimento, com tutela de urgência; rejeitou os danos morais [VALIDAR demais itens]."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2024-09-25",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Maria Cristina Rodrigues da Silva de Morais",
+       "tipo": "Apelação",
+       "id": "326464468",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "União",
+       "tipo": "Apelação",
+       "id": "326464472",
+       "contra": "Sentença"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: pedido parcialmente procedente",
+       "id": "326464463",
+       "data": "2025-03-13"
+      },
+      {
+       "desc": "Apelação da autora",
+       "id": "326464468",
+       "data": "2025-03-31"
+      },
+      {
+       "desc": "Apelação da União",
+       "id": "326464472",
+       "data": "2025-05-07"
+      },
+      {
+       "desc": "Petição de interposição (contrarrazões)",
+       "id": "326464475",
+       "data": "2025-05-15"
+      },
+      {
+       "desc": "Contrarrazões",
+       "id": "326464478",
+       "data": "2025-05-31"
+      },
+      {
+       "desc": "Parecer do MPF (sem intervenção)",
+       "id": "365415722",
+       "data": "2026-04-09"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 365172409 · 08/04/2026 — abriu vista ao MPF | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 365415722 · 09/04/2026 | última movimentação: 09/04/2026 17:53 · Conclusos para decisão · Decadência (artigo 54 da Lei 9.784/1999) × revisão de pensão por entendimento do TCU; Tema 445/STF [VALIDAR] · Melhoria do artigo 110 da Lei 6.880/1980 para militar já reformado · Petição da autora endereçada ao TJMS no cabeçalho (erro material) · Remessa necessária: sentença sujeita? [VALIDAR] · Mesmo tema de 5001266-02 (adp-remessas)",
+     "assuntoDet": "Pensão militar — revisão por entendimento do TCU após 19 anos; danos morais",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Justiça gratuita",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Com parecer",
+     "idParecer": "365415722",
+     "parecerSentido": "Ausência de interesse que justifique intervenção"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "09/04/2026 17:53 · Conclusos para decisão",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Despacho · ID 365172409 · 08/04/2026 — abriu vista ao MPF",
+    "ultima_peca": "Parecer \"Falta de Interesse\" (MPF) · ID 365415722 · 09/04/2026",
+    "ultima_informacao": "Certidão · ID 326589104 · 03/06/2025",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 365172409 · 08/04/2026 — abriu vista ao MPF | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 365415722 · 09/04/2026 | última movimentação: 09/04/2026 17:53 · Conclusos para decisão"
    }
   },
   {
@@ -162,12 +407,14 @@
    "exequente": "JAY VIEIRA MARQUES",
    "executado": "UNIÃO FEDERAL",
    "assunto": "Adicional de Insalubridade",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "AP2",
+   "tipo_caso": "Apelação do exequente em cumprimento de sentença (adicional de insalubridade de servidor) · impugnação da União julgada procedente · honorários de 10% contra o exequente · preparo por GRU Judicial paga em 22/05/2026 (comprovante da CAIXA intitulado \"IPVA\")",
+   "resultado": "Ato a proferir: apelação do exequente (ID 383863328) da sentença ID 383863327; contrarrazões da União (ID 383863633) ‖ Proposta pelos precedentes: Voto, após decidir sobre a validade do preparo por GRU paga depois de 03/04/2026 [VALIDAR] [VALIDAR: Preparo; Fundamento da sentença na impugnação]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação do exequente contra sentença que acolheu a impugnação da União ao cumprimento de sentença. O preparo foi pago por GRU Judicial depois da extinção dessa guia (03/04/2026).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -178,7 +425,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da apelação (voto), após decidir sobre a validade do preparo por GRU",
+    "materia": "Administrativo — servidor (cumprimento de sentença)",
+    "origem": "Cumprimento de sentença 0004626-26.2016.4.03.6000 (2ª Vara Federal de Campo Grande; autos principais 0004073-14.1995.4.03.6000)",
+    "decisao_agravada": "Sentença ID 383863327 (17/04/2026)",
+    "recurso": "apelação de Jay Vieira Marques (ID 383863328, 22/05/2026)",
+    "preparo": "Jay Vieira Marques: GRU Judicial de R$ 300,06 paga em 22/05/2026 (ID 383863331)",
+    "monocratica": "A verificar após o preparo",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "Jay Vieira Marques: GRU Judicial de R$ 300,06 paga em 22/05/2026 (ID 383863331) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -188,6 +446,104 @@
    "chegada": "18/08/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Cumprimento de sentença — impugnação acolhida; preparo por GRU após 03/04/2026",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 383863327 · 17/04/2026 — sentença: julgou procedente o pedido | última peça: Contrarrazões (AGU (PRU)) · ID 383863633 · 30/06/2026 | última movimentação: 17/08/2026 20:01 · Conclusos para julgamento · Preparo: GRU Judicial (convênio \"GRU JUDICIAL-EXCLUSI\", código 18710-0) de R$ 300,06 paga em 22/05/2026 pelo aplicativo da CAIXA, cujo comprovante tem o título genérico \"IPVA\" (ID 383863331); GRU Judicial extinta a partir de 03/04/2026 — tratamento em aberto no gabinete, como em 5000044-81 [VALIDAR] · Fundamento da procedência da impugnação (excesso ou inexigibilidade) [VALIDAR] · Etiqueta \"triagem de gabinete\"",
+   "teor": {
+    "sintese_fatica": "Jay Vieira Marques executa título sobre adicional de insalubridade. A União impugnou o cumprimento e a impugnação foi julgada procedente.",
+    "inicial": "Cumprimento de sentença contra a União.",
+    "decisao_recorrida": "Sentença ID 383863327 (17/04/2026): julgou procedente a impugnação ao cumprimento de sentença, com honorários de 10% sobre o valor da execução contra o exequente.",
+    "recurso": "Jay Vieira Marques (ID 383863328, 22/05/2026): reforma da decisão na impugnação e honorários de 20% [VALIDAR teor].",
+    "resposta": "Contrarrazões da União (ID 383863633).",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Advogado constituído [VALIDAR].",
+    "preparo": "GRU Judicial de R$ 300,06 paga em 22/05/2026, após a extinção da GRU Judicial (ID 383863331) [VALIDAR]"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação do exequente em cumprimento de sentença (adicional de insalubridade de servidor) · impugnação da União julgada procedente · honorários de 10% contra o exequente · preparo por GRU Judicial paga em 22/05/2026 (comprovante da CAIXA intitulado \"IPVA\")",
+     "sintese": "Jay Vieira Marques executa título sobre adicional de insalubridade. A União impugnou o cumprimento e a impugnação foi julgada procedente.",
+     "questoes": "1) Validade do preparo por GRU após 03/04/2026; 2) impugnação ao cumprimento de sentença.",
+     "rel": {
+      "razoes": "Jay Vieira Marques (ID 383863328, 22/05/2026): reforma da decisão na impugnação e honorários de 20% [VALIDAR teor].",
+      "contrarrazoes": "Contrarrazões da União (ID 383863633)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "383863327",
+      "juizo": "Cumprimento de sentença 0004626-26.2016.4.03.6000 (2ª Vara Federal de Campo Grande; autos principais 0004073-14.1995.4.03.6000)",
+      "dispositivo": "julgou procedente a impugnação ao cumprimento de sentença, com honorários de 10% sobre o valor da execução contra o exequente."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2016-04-29",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Jay Vieira Marques",
+       "tipo": "Apelação",
+       "id": "383863328",
+       "contra": "Sentença"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: impugnação procedente",
+       "id": "383863327",
+       "data": "2026-04-17"
+      },
+      {
+       "desc": "Apelação do exequente",
+       "id": "383863328",
+       "data": "2026-05-22"
+      },
+      {
+       "desc": "Comprovante CAIXA da GRU Judicial (preparo)",
+       "id": "383863331",
+       "data": "2026-05-22"
+      },
+      {
+       "desc": "Contrarrazões da União",
+       "id": "383863633",
+       "data": "2026-06-30"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 383863327 · 17/04/2026 — sentença: julgou procedente o pedido | última peça: Contrarrazões (AGU (PRU)) · ID 383863633 · 30/06/2026 | última movimentação: 17/08/2026 20:01 · Conclusos para julgamento · Preparo: GRU Judicial (convênio \"GRU JUDICIAL-EXCLUSI\", código 18710-0) de R$ 300,06 paga em 22/05/2026 pelo aplicativo da CAIXA, cujo comprovante tem o título genérico \"IPVA\" (ID 383863331); GRU Judicial extinta a partir de 03/04/2026 — tratamento em aberto no gabinete, como em 5000044-81 [VALIDAR] · Fundamento da procedência da impugnação (excesso ou inexigibilidade) [VALIDAR] · Etiqueta \"triagem de gabinete\"",
+     "assuntoDet": "Cumprimento de sentença — impugnação acolhida; preparo por GRU após 03/04/2026",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Não verificado"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "17/08/2026 20:01 · Conclusos para julgamento",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Sentença · ID 383863327 · 17/04/2026 — sentença: julgou procedente o pedido",
+    "ultima_peca": "Contrarrazões (AGU (PRU)) · ID 383863633 · 30/06/2026",
+    "ultima_informacao": "Certidão · ID 392352309 · 17/08/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 383863327 · 17/04/2026 — sentença: julgou procedente o pedido | última peça: Contrarrazões (AGU (PRU)) · ID 383863633 · 30/06/2026 | última movimentação: 17/08/2026 20:01 · Conclusos para julgamento"
    }
   },
   {
@@ -199,12 +555,14 @@
    "exequente": "RICARDO FERNANDO VERAS VIEIRA",
    "executado": "INSTITUTO BRASILEIRO DO MEIO AMBIENTE E DOS RECURSOS NATURAIS RENOVAVEIS",
    "assunto": "Ambiental",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "AP2",
+   "tipo_caso": "Apelação do embargante em embargos à execução fiscal do IBAMA (multa ambiental, Auto de Infração 736629/D) · extinção sem mérito por ilegitimidade ativa da empresa e irregularidade da representação · embargos de declaração rejeitados",
+   "resultado": "Ato a proferir: apelação do embargante (ID 369401444) da sentença ID 369401437, integrada pela ID 369401442; contrarrazões (ID 369401451) ‖ Proposta pelos precedentes: Voto: examinar a legitimidade ativa e a regularidade da representação; só então o mérito [VALIDAR] [VALIDAR: Polo passivo da execução fiscal 5000154-34.2020.4.03.6006; Forma de recolhimento do preparo]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação contra sentença que extinguiu embargos à execução fiscal de multa ambiental do IBAMA por ilegitimidade ativa e irregularidade de representação. O apelante pede julgamento do mérito.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -215,7 +573,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da apelação (voto)",
+    "materia": "Ambiental — multa (embargos à execução fiscal)",
+    "origem": "Embargos à execução fiscal 5000887-63.2021.4.03.6006 (6ª Vara Federal de Campo Grande; execução fiscal da 1ª Vara Federal de Naviraí)",
+    "decisao_agravada": "Sentença ID 369401437 (26/04/2025)",
+    "recurso": "apelação de Ricardo Fernando Veras Vieira (ID 369401444, 27/02/2026)",
+    "preparo": "Ricardo Fernando Veras Vieira: Custas recolhidas em 27/02/2026 (ID 369401449) [VALIDAR forma]",
+    "monocratica": "Improvável sem paradigma",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "Ricardo Fernando Veras Vieira: Custas recolhidas em 27/02/2026 (ID 369401449) [VALIDAR forma] · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -225,6 +594,114 @@
    "chegada": "09/06/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Embargos à execução fiscal (multa ambiental) — ilegitimidade e representação",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 369401442 · 02/02/2026 — sentença (dispositivo a conferir) | última peça: Contrarrazões (PGF) · ID 369401451 · 13/04/2026 | última movimentação: 03/06/2026 16:22 · Conclusos para julgamento · Etiquetas \"LOTE MULTA - APCIV\" e \"EE embargos à execução\" · Legitimidade: embargante pessoa física × executada pessoa jurídica [VALIDAR polo passivo da execução fiscal] · Teoria da causa madura (artigo 1.013, § 3º, I, do CPC)",
+   "teor": {
+    "sintese_fatica": "Os embargos foram opostos pela Madeireira Aeroporto Ltda. ME contra a execução fiscal 5000154-34.2020.4.03.6006; Ricardo Fernando Veras Vieira passou a atuar nos autos. A sentença extinguiu os embargos por ilegitimidade e irregularidade de representação.",
+    "inicial": "Embargos à execução fiscal contra o IBAMA.",
+    "decisao_recorrida": "Sentença ID 369401437 (26/04/2025): extinguiu os embargos sem resolução do mérito, por ilegitimidade ativa da Madeireira Aeroporto Ltda. ME e irregularidade da representação processual (artigos 76, I, e 485, VI, do CPC); embargos de declaração rejeitados (ID 369401442).",
+    "recurso": "Ricardo Fernando Veras Vieira (ID 369401444, 27/02/2026): julgamento do mérito (artigo 1.013, § 3º, do CPC): nulidade do Auto de Infração 736629/D e inexigibilidade da CDA.",
+    "resposta": "Contrarrazões do IBAMA (ID 369401451).",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Advogado constituído [VALIDAR].",
+    "preparo": "Custas em 27/02/2026 (IDs 369401447 a 369401449) [VALIDAR forma]"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação do embargante em embargos à execução fiscal do IBAMA (multa ambiental, Auto de Infração 736629/D) · extinção sem mérito por ilegitimidade ativa da empresa e irregularidade da representação · embargos de declaração rejeitados",
+     "sintese": "Os embargos foram opostos pela Madeireira Aeroporto Ltda. ME contra a execução fiscal 5000154-34.2020.4.03.6006; Ricardo Fernando Veras Vieira passou a atuar nos autos. A sentença extinguiu os embargos por ilegitimidade e irregularidade de representação.",
+     "questoes": "1) Legitimidade ativa e representação nos embargos à execução fiscal; 2) mérito da multa ambiental (causa madura).",
+     "rel": {
+      "razoes": "Ricardo Fernando Veras Vieira (ID 369401444, 27/02/2026): julgamento do mérito (artigo 1.013, § 3º, do CPC): nulidade do Auto de Infração 736629/D e inexigibilidade da CDA.",
+      "contrarrazoes": "Contrarrazões do IBAMA (ID 369401451)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "369401437",
+      "juizo": "Embargos à execução fiscal 5000887-63.2021.4.03.6006 (6ª Vara Federal de Campo Grande; execução fiscal da 1ª Vara Federal de Naviraí)",
+      "dispositivo": "extinguiu os embargos sem resolução do mérito, por ilegitimidade ativa da Madeireira Aeroporto Ltda. ME e irregularidade da representação processual (artigos 76, I, e 485, VI, do CPC); embargos de declaração rejeitados (ID 369401442)."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2021-10-04",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Ricardo Fernando Veras Vieira",
+       "tipo": "Apelação",
+       "id": "369401444",
+       "contra": "Sentença"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: extinção sem mérito",
+       "id": "369401437",
+       "data": "2025-04-26"
+      },
+      {
+       "desc": "Embargos de declaração",
+       "id": "369401439",
+       "data": "2025-05-07"
+      },
+      {
+       "desc": "Sentença dos embargos de declaração",
+       "id": "369401442",
+       "data": "2026-02-02"
+      },
+      {
+       "desc": "Apelação do embargante",
+       "id": "369401444",
+       "data": "2026-02-27"
+      },
+      {
+       "desc": "Comprovante de custas",
+       "id": "369401449",
+       "data": "2026-02-27"
+      },
+      {
+       "desc": "Contrarrazões do IBAMA",
+       "id": "369401451",
+       "data": "2026-04-13"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 369401442 · 02/02/2026 — sentença (dispositivo a conferir) | última peça: Contrarrazões (PGF) · ID 369401451 · 13/04/2026 | última movimentação: 03/06/2026 16:22 · Conclusos para julgamento · Etiquetas \"LOTE MULTA - APCIV\" e \"EE embargos à execução\" · Legitimidade: embargante pessoa física × executada pessoa jurídica [VALIDAR polo passivo da execução fiscal] · Teoria da causa madura (artigo 1.013, § 3º, I, do CPC)",
+     "assuntoDet": "Embargos à execução fiscal (multa ambiental) — ilegitimidade e representação",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Não verificado"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "03/06/2026 16:22 · Conclusos para julgamento",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Sentença · ID 369401442 · 02/02/2026 — sentença (dispositivo a conferir)",
+    "ultima_peca": "Contrarrazões (PGF) · ID 369401451 · 13/04/2026",
+    "ultima_informacao": "Informação · ID 369401452 · 27/04/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 369401442 · 02/02/2026 — sentença (dispositivo a conferir) | última peça: Contrarrazões (PGF) · ID 369401451 · 13/04/2026 | última movimentação: 03/06/2026 16:22 · Conclusos para julgamento"
    }
   },
   {
@@ -236,12 +713,14 @@
    "exequente": "INSTITUTO BRASILEIRO DO MEIO AMBIENTE E DOS RECURSOS NATURAIS RENOVAVEIS",
    "executado": "VIVALDO MENDES GALVAO",
    "assunto": "Ambiental",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "AP2",
+   "tipo_caso": "Apelações do IBAMA e dos réus em ação civil pública ambiental · desmatamento irregular de 30,43 ha na Fazenda Paiol (Corumbá) · recuperação da área e demais obrigações · pedido julgado parcialmente procedente · embargos de declaração rejeitados",
+   "resultado": "Ato a proferir: apelações do IBAMA (ID 380460099) e dos réus (ID 380460107) da sentença ID 380460096, integrada pela ID 380460103; contrarrazões (IDs 380460101, 380460106, 380460111 e 380460112); parecer de mérito do MPF (ID 386939744) ‖ Proposta pelos precedentes: Voto: prova do dano e responsabilidade objetiva; cumulação de obrigações [VALIDAR] [VALIDAR: Itens rejeitados na sentença; Conclusão do parecer do MPF; Preparo dos réus]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelações do IBAMA e dos réus contra sentença que os condenou a recuperar 30,43 ha desmatados no Pantanal. O IBAMA quer a procedência integral; os réus contestam a prova da degradação.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -252,7 +731,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento das apelações (voto)",
+    "materia": "Ambiental — ACP (desmatamento)",
+    "origem": "Ação civil pública 5000677-47.2023.4.03.6004 (1ª Vara Federal de Corumbá)",
+    "decisao_agravada": "Sentença ID 380460096 (22/08/2025)",
+    "recurso": "apelação de IBAMA (ID 380460099, 22/09/2025) e apelação de Vivaldo Mendes Galvão e Sueli Silveira Galvão (ID 380460107, 01/04/2026)",
+    "preparo": "IBAMA: Isento (autarquia); Vivaldo Mendes Galvão e Sueli Silveira Galvão: GRU de 01/04/2026 (IDs 380460108 e 380460109) [VALIDAR]",
+    "monocratica": "Improvável: duas apelações",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "IBAMA: Isento (autarquia); Vivaldo Mendes Galvão e Sueli Silveira Galvão: GRU de 01/04/2026 (IDs 380460108 e 380460109) [VALIDAR] · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -262,6 +752,122 @@
    "chegada": "20/07/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "ACP ambiental — desmatamento no Pantanal (Corumbá): recuperação e indenização",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 380460103 · 10/03/2026 — sentença (dispositivo a conferir) | última peça: Parecer de Mérito (MPF) · ID 386939744 · 17/07/2026 | última movimentação: 17/07/2026 15:02 · Conclusos para julgamento · Apelação do IBAMA interposta antes do julgamento dos embargos de declaração (artigo 1.024, § 5º, do CPC) [VALIDAR] · Responsabilidade civil ambiental objetiva e propter rem (Súmula 623/STJ); independência das instâncias · Cumulação de obrigações de fazer e indenizar (Súmula 629/STJ) [VALIDAR itens] · Etiqueta \"LOTE MULTA - APCIV\"",
+   "teor": {
+    "sintese_fatica": "O IBAMA ajuizou ação civil pública contra Vivaldo Mendes Galvão e Sueli Silveira Galvão por desmatamento de 30,43 ha sem autorização na Fazenda Paiol, em Corumbá. A sentença acolheu em parte os pedidos.",
+    "inicial": "Ação civil pública ambiental do IBAMA.",
+    "decisao_recorrida": "Sentença ID 380460096 (22/08/2025): julgou parcialmente procedentes os pedidos do IBAMA para condenar Vivaldo Mendes Galvão e Sueli Silveira Galvão, solidariamente, a recuperar integralmente os 30,43 ha desmatados na Fazenda Paiol, entre outras obrigações [VALIDAR demais itens]; embargos de declaração dos réus rejeitados (ID 380460103).",
+    "recurso": "IBAMA (ID 380460099, 22/09/2025): procedência integral dos pedidos da inicial [VALIDAR itens rejeitados]. Vivaldo Mendes Galvão e Sueli Silveira Galvão (ID 380460107, 01/04/2026): ausência de prova conclusiva da degradação e pendência do processo administrativo ambiental.",
+    "resposta": "Contrarrazões cruzadas (IDs 380460101, 380460106, 380460111 e 380460112).",
+    "parecer": "MPF ID 386939744: Parecer de mérito [VALIDAR conclusão]",
+    "memoriais": "Não consta",
+    "representacao": "Réus: advogado constituído [VALIDAR].",
+    "preparo": "Réus: GRU paga em 01/04/2026 (IDs 380460108 e 380460109) [VALIDAR]"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelações do IBAMA e dos réus em ação civil pública ambiental · desmatamento irregular de 30,43 ha na Fazenda Paiol (Corumbá) · recuperação da área e demais obrigações · pedido julgado parcialmente procedente · embargos de declaração rejeitados",
+     "sintese": "O IBAMA ajuizou ação civil pública contra Vivaldo Mendes Galvão e Sueli Silveira Galvão por desmatamento de 30,43 ha sem autorização na Fazenda Paiol, em Corumbá. A sentença acolheu em parte os pedidos.",
+     "questoes": "1) Responsabilidade civil por desmatamento (prova e solidariedade); 2) cumulação de obrigações.",
+     "rel": {
+      "razoes": "IBAMA (ID 380460099, 22/09/2025): procedência integral dos pedidos da inicial [VALIDAR itens rejeitados]. Vivaldo Mendes Galvão e Sueli Silveira Galvão (ID 380460107, 01/04/2026): ausência de prova conclusiva da degradação e pendência do processo administrativo ambiental.",
+      "contrarrazoes": "Contrarrazões cruzadas (IDs 380460101, 380460106, 380460111 e 380460112)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "380460096",
+      "juizo": "Ação civil pública 5000677-47.2023.4.03.6004 (1ª Vara Federal de Corumbá)",
+      "dispositivo": "julgou parcialmente procedentes os pedidos do IBAMA para condenar Vivaldo Mendes Galvão e Sueli Silveira Galvão, solidariamente, a recuperar integralmente os 30,43 ha desmatados na Fazenda Paiol, entre outras obrigações [VALIDAR demais itens]; embargos de declaração dos réus rejeitados (ID 380460103)."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2023-08-07",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "IBAMA",
+       "tipo": "Apelação",
+       "id": "380460099",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Vivaldo Mendes Galvão e Sueli Silveira Galvão",
+       "tipo": "Apelação",
+       "id": "380460107",
+       "contra": "Sentença"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: pedidos parcialmente procedentes",
+       "id": "380460096",
+       "data": "2025-08-22"
+      },
+      {
+       "desc": "Embargos de declaração dos réus",
+       "id": "380460098",
+       "data": "2025-09-01"
+      },
+      {
+       "desc": "Apelação do IBAMA",
+       "id": "380460099",
+       "data": "2025-09-22"
+      },
+      {
+       "desc": "Sentença dos embargos de declaração",
+       "id": "380460103",
+       "data": "2026-03-10"
+      },
+      {
+       "desc": "Apelação dos réus",
+       "id": "380460107",
+       "data": "2026-04-01"
+      },
+      {
+       "desc": "Parecer do MPF",
+       "id": "386939744",
+       "data": "2026-07-17"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 380460103 · 10/03/2026 — sentença (dispositivo a conferir) | última peça: Parecer de Mérito (MPF) · ID 386939744 · 17/07/2026 | última movimentação: 17/07/2026 15:02 · Conclusos para julgamento · Apelação do IBAMA interposta antes do julgamento dos embargos de declaração (artigo 1.024, § 5º, do CPC) [VALIDAR] · Responsabilidade civil ambiental objetiva e propter rem (Súmula 623/STJ); independência das instâncias · Cumulação de obrigações de fazer e indenizar (Súmula 629/STJ) [VALIDAR itens] · Etiqueta \"LOTE MULTA - APCIV\"",
+     "assuntoDet": "ACP ambiental — desmatamento no Pantanal (Corumbá): recuperação e indenização",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "ACP/ação popular",
+     "parecer": "Com parecer",
+     "idParecer": "386939744",
+     "parecerSentido": "Parecer de mérito [VALIDAR conclusão]"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "17/07/2026 15:02 · Conclusos para julgamento",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Sentença · ID 380460103 · 10/03/2026 — sentença (dispositivo a conferir)",
+    "ultima_peca": "Parecer de Mérito (MPF) · ID 386939744 · 17/07/2026",
+    "ultima_informacao": "Informação · ID 380460114 · 15/06/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 380460103 · 10/03/2026 — sentença (dispositivo a conferir) | última peça: Parecer de Mérito (MPF) · ID 386939744 · 17/07/2026 | última movimentação: 17/07/2026 15:02 · Conclusos para julgamento"
    }
   },
   {
@@ -1636,12 +2242,14 @@
    "exequente": "MINISTERIO PUBLICO FEDERAL - PR/MS",
    "executado": "IRANI ANTONIO JORQUEIRA NOVAES",
    "assunto": "Área de Preservação Permanente",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "AP2",
+   "tipo_caso": "Apelações do MPF e do réu em ação civil pública ambiental · área de preservação permanente (Autos de Infração 002766 e 002767 do ICMBio) · reparação in natura mediante PRAD · pedido julgado parcialmente procedente",
+   "resultado": "Ato a proferir: apelações do MPF (ID 370259482) e do réu (ID 370259484) da sentença ID 370259481; contrarrazões (IDs 370259488, 370259489 e 370259490); parecer da PRR (ID 374333975) ‖ Proposta pelos precedentes: Voto: preliminar de nulidade; extensão das obrigações ambientais [VALIDAR] [VALIDAR: Itens rejeitados; Conclusão do parecer da PRR; Preparo do réu]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelações do MPF e do réu contra sentença que condenou o réu a recuperar área de preservação permanente autuada pelo ICMBio. O réu suscita nulidade por falta de fundamentação.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -1652,7 +2260,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento das apelações (voto)",
+    "materia": "Ambiental — ACP (APP)",
+    "origem": "Ação civil pública 5005702-53.2023.4.03.6000 (1ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 370259481 (03/03/2026)",
+    "recurso": "apelação de MPF (ID 370259482, 13/03/2026) e apelação de Irani Antônio Jorqueira Novaes (ID 370259484, 27/03/2026)",
+    "preparo": "MPF: Isento (ente público/MP); Irani Antônio Jorqueira Novaes: Comprovante de preparo de 27/03/2026 (ID 370259486) [VALIDAR forma]",
+    "monocratica": "Improvável: duas apelações",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "MPF: Isento (ente público/MP); Irani Antônio Jorqueira Novaes: Comprovante de preparo de 27/03/2026 (ID 370259486) [VALIDAR forma] · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -1662,6 +2281,117 @@
    "chegada": "09/06/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "ACP ambiental — APP (ICMBio): reparação e indenização",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 370259481 · 03/03/2026 — sentença: julgou parcialmente procedente o pedido | última peça: Parecer de Mérito (MPF) · ID 374333975 · 18/05/2026 | última movimentação: 18/05/2026 18:46 · Conclusos para decisão · Preliminar de nulidade (artigo 489, § 1º, do CPC) · Cumulação de reparação e indenização (Súmula 629/STJ) [VALIDAR] · Etiqueta \"ACP ambiental\"",
+   "teor": {
+    "sintese_fatica": "O MPF ajuizou ação civil pública contra Irani Antônio Jorqueira Novaes por intervenção em área de preservação permanente autuada pelo ICMBio. O feito participou da Semana da Pauta Verde; a sentença acolheu em parte os pedidos.",
+    "inicial": "Ação civil pública ambiental do MPF.",
+    "decisao_recorrida": "Sentença ID 370259481 (03/03/2026): julgou parcialmente procedente a ação para condenar Irani Antônio Jorqueira Novaes à reparação in natura das áreas dos Autos de Infração 002766 e 002767, mediante PRAD aprovado e fiscalizado pelo ICMBio [VALIDAR demais itens].",
+    "recurso": "MPF (ID 370259482, 13/03/2026): procedência dos pedidos rejeitados [VALIDAR itens]. Irani Antônio Jorqueira Novaes (ID 370259484, 27/03/2026): preliminar de nulidade da sentença por deficiência de fundamentação; mérito [VALIDAR].",
+    "resposta": "Contrarrazões (IDs 370259488, 370259489 e 370259490).",
+    "parecer": "MPF ID 374333975: Parecer de mérito [VALIDAR conclusão]",
+    "memoriais": "Não consta",
+    "representacao": "Réu: escritório Sales Del Mondes [VALIDAR advogado e OAB].",
+    "preparo": "Réu: comprovante de 27/03/2026 (ID 370259486) [VALIDAR]"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelações do MPF e do réu em ação civil pública ambiental · área de preservação permanente (Autos de Infração 002766 e 002767 do ICMBio) · reparação in natura mediante PRAD · pedido julgado parcialmente procedente",
+     "sintese": "O MPF ajuizou ação civil pública contra Irani Antônio Jorqueira Novaes por intervenção em área de preservação permanente autuada pelo ICMBio. O feito participou da Semana da Pauta Verde; a sentença acolheu em parte os pedidos.",
+     "questoes": "1) Nulidade da sentença; 2) reparação de APP e cumulação de obrigações.",
+     "rel": {
+      "razoes": "MPF (ID 370259482, 13/03/2026): procedência dos pedidos rejeitados [VALIDAR itens]. Irani Antônio Jorqueira Novaes (ID 370259484, 27/03/2026): preliminar de nulidade da sentença por deficiência de fundamentação; mérito [VALIDAR].",
+      "contrarrazoes": "Contrarrazões (IDs 370259488, 370259489 e 370259490)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "370259481",
+      "juizo": "Ação civil pública 5005702-53.2023.4.03.6000 (1ª Vara Federal de Campo Grande)",
+      "dispositivo": "julgou parcialmente procedente a ação para condenar Irani Antônio Jorqueira Novaes à reparação in natura das áreas dos Autos de Infração 002766 e 002767, mediante PRAD aprovado e fiscalizado pelo ICMBio [VALIDAR demais itens]."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2023-07-05",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "MPF",
+       "tipo": "Apelação",
+       "id": "370259482",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Irani Antônio Jorqueira Novaes",
+       "tipo": "Apelação",
+       "id": "370259484",
+       "contra": "Sentença"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: pedido parcialmente procedente",
+       "id": "370259481",
+       "data": "2026-03-03"
+      },
+      {
+       "desc": "Apelação do MPF",
+       "id": "370259482",
+       "data": "2026-03-13"
+      },
+      {
+       "desc": "Apelação do réu",
+       "id": "370259484",
+       "data": "2026-03-27"
+      },
+      {
+       "desc": "Comprovante de preparo do réu",
+       "id": "370259486",
+       "data": "2026-03-27"
+      },
+      {
+       "desc": "Parecer da PRR",
+       "id": "374333975",
+       "data": "2026-05-18"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 370259481 · 03/03/2026 — sentença: julgou parcialmente procedente o pedido | última peça: Parecer de Mérito (MPF) · ID 374333975 · 18/05/2026 | última movimentação: 18/05/2026 18:46 · Conclusos para decisão · Preliminar de nulidade (artigo 489, § 1º, do CPC) · Cumulação de reparação e indenização (Súmula 629/STJ) [VALIDAR] · Etiqueta \"ACP ambiental\"",
+     "assuntoDet": "ACP ambiental — APP (ICMBio): reparação e indenização",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Há preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "ACP/ação popular",
+     "parecer": "Com parecer",
+     "idParecer": "374333975",
+     "parecerSentido": "Parecer de mérito [VALIDAR conclusão]"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "18/05/2026 18:46 · Conclusos para decisão",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Sentença · ID 370259481 · 03/03/2026 — sentença: julgou parcialmente procedente o pedido",
+    "ultima_peca": "Parecer de Mérito (MPF) · ID 374333975 · 18/05/2026",
+    "ultima_informacao": "Certidão · ID 371928625 · 08/05/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 370259481 · 03/03/2026 — sentença: julgou parcialmente procedente o pedido | última peça: Parecer de Mérito (MPF) · ID 374333975 · 18/05/2026 | última movimentação: 18/05/2026 18:46 · Conclusos para decisão"
    }
   },
   {
@@ -1673,12 +2403,14 @@
    "exequente": "MAQUIELVES LOPES GRISON",
    "executado": "CAIXA ECONÔMICA FEDERAL",
    "assunto": "Crédito Rural",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "AP2",
+   "tipo_caso": "Apelação do autor em ação contra a CEF · prorrogação de crédito rural (contratos 2094559/7105/2023 e 2368416/7105/2024) · pedido julgado parcialmente procedente · embargos de declaração rejeitados · preparo com tela \"Aguardando realização do pagamento\"",
+   "resultado": "Ato a proferir: apelação do autor (ID 382834522) da sentença ID 382834511, integrada pela ID 382834520; contrarrazões da CEF (ID 382834526) ‖ Proposta pelos precedentes: Despacho: intimar o apelante para juntar o comprovante PagTesouro \"Pagamento realizado com sucesso\" em 5 dias (artigo 1.007, § 4º, do CPC); após, julgar [VALIDAR] [VALIDAR: Comprovante PagTesouro; Itens impugnados na apelação]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação do produtor rural contra sentença que reconheceu em parte o direito à prorrogação do crédito rural. O preparo veio com a tela \"Aguardando realização do pagamento\".",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -1689,7 +2421,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Despacho prévio sobre o preparo; depois, julgamento da apelação",
+    "materia": "Civil — crédito rural (CEF)",
+    "origem": "Tutela cautelar antecedente 5000164-02.2025.4.03.6007 (1ª Vara Federal de Coxim) [VALIDAR conversão em procedimento comum]",
+    "decisao_agravada": "Sentença ID 382834511 (20/03/2026)",
+    "recurso": "apelação de Maquielves Lopes Grison (ID 382834522, 18/05/2026)",
+    "preparo": "Maquielves Lopes Grison: Tela PagTesouro \"Aguardando realização do pagamento\" (ID 382834523)",
+    "monocratica": "A verificar após o preparo",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "Maquielves Lopes Grison: Tela PagTesouro \"Aguardando realização do pagamento\" (ID 382834523) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -1699,6 +2442,114 @@
    "chegada": "24/07/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Crédito rural — prorrogação (Súmula 298/STJ); preparo sem comprovante do Tesouro",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 382834520 · 24/04/2026 — sentença (dispositivo a conferir) | última peça: Contrarrazões (apelante) · ID 382834526 · 26/06/2026 | última movimentação: 24/07/2026 12:56 · Conclusos para julgamento · Preparo: regra do gabinete (21/11/2026) — Pix só com o comprovante PagTesouro \"Pagamento realizado com sucesso\"; comprovante bancário ou tela \"Aguardando realização do pagamento\" exigem intimação única (artigo 1.007, § 4º, do CPC), sob pena de deserção · Mérito: alongamento da dívida rural é direito do devedor preenchidos os requisitos (Súmula 298/STJ; Manual de Crédito Rural) [VALIDAR]",
+   "teor": {
+    "sintese_fatica": "Maquielves Lopes Grison, produtor rural, pediu a prorrogação de dívidas de crédito rural com a CEF. A sentença reconheceu o direito à prorrogação, com condições a pactuar.",
+    "inicial": "Ação de prorrogação de crédito rural contra a CEF.",
+    "decisao_recorrida": "Sentença ID 382834511 (20/03/2026): julgou parcialmente procedente o pedido para declarar o direito do autor à prorrogação do crédito rural dos contratos 2094559/7105/2023 e 2368416/7105/2024, em condições a pactuar com a CEF [VALIDAR demais itens]; embargos de declaração rejeitados (ID 382834520).",
+    "recurso": "Maquielves Lopes Grison (ID 382834522, 18/05/2026): reforma parcial da sentença [VALIDAR itens].",
+    "resposta": "Contrarrazões da CEF (ID 382834526).",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Advogado Jackson Silva Wagner [VALIDAR OAB].",
+    "preparo": "Tela PagTesouro \"Aguardando realização do pagamento\" (ID 382834523)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação do autor em ação contra a CEF · prorrogação de crédito rural (contratos 2094559/7105/2023 e 2368416/7105/2024) · pedido julgado parcialmente procedente · embargos de declaração rejeitados · preparo com tela \"Aguardando realização do pagamento\"",
+     "sintese": "Maquielves Lopes Grison, produtor rural, pediu a prorrogação de dívidas de crédito rural com a CEF. A sentença reconheceu o direito à prorrogação, com condições a pactuar.",
+     "questoes": "1) Preparo sem comprovante do Tesouro; 2) prorrogação de crédito rural (Súmula 298/STJ).",
+     "rel": {
+      "razoes": "Maquielves Lopes Grison (ID 382834522, 18/05/2026): reforma parcial da sentença [VALIDAR itens].",
+      "contrarrazoes": "Contrarrazões da CEF (ID 382834526)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "382834511",
+      "juizo": "Tutela cautelar antecedente 5000164-02.2025.4.03.6007 (1ª Vara Federal de Coxim) [VALIDAR conversão em procedimento comum]",
+      "dispositivo": "julgou parcialmente procedente o pedido para declarar o direito do autor à prorrogação do crédito rural dos contratos 2094559/7105/2023 e 2368416/7105/2024, em condições a pactuar com a CEF [VALIDAR demais itens]; embargos de declaração rejeitados (ID 382834520)."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2025-07-16",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Maquielves Lopes Grison",
+       "tipo": "Apelação",
+       "id": "382834522",
+       "contra": "Sentença"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: pedido parcialmente procedente",
+       "id": "382834511",
+       "data": "2026-03-20"
+      },
+      {
+       "desc": "Embargos de declaração do autor",
+       "id": "382834515",
+       "data": "2026-03-31"
+      },
+      {
+       "desc": "Sentença dos embargos de declaração",
+       "id": "382834520",
+       "data": "2026-04-24"
+      },
+      {
+       "desc": "Apelação do autor",
+       "id": "382834522",
+       "data": "2026-05-18"
+      },
+      {
+       "desc": "Tela PagTesouro \"Aguardando realização do pagamento\"",
+       "id": "382834523",
+       "data": "2026-05-18"
+      },
+      {
+       "desc": "Contrarrazões da CEF",
+       "id": "382834526",
+       "data": "2026-06-26"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 382834520 · 24/04/2026 — sentença (dispositivo a conferir) | última peça: Contrarrazões (apelante) · ID 382834526 · 26/06/2026 | última movimentação: 24/07/2026 12:56 · Conclusos para julgamento · Preparo: regra do gabinete (21/11/2026) — Pix só com o comprovante PagTesouro \"Pagamento realizado com sucesso\"; comprovante bancário ou tela \"Aguardando realização do pagamento\" exigem intimação única (artigo 1.007, § 4º, do CPC), sob pena de deserção · Mérito: alongamento da dívida rural é direito do devedor preenchidos os requisitos (Súmula 298/STJ; Manual de Crédito Rural) [VALIDAR]",
+     "assuntoDet": "Crédito rural — prorrogação (Súmula 298/STJ); preparo sem comprovante do Tesouro",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Recolhido sem comprovante do Tesouro (STN)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Não verificado"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "24/07/2026 12:56 · Conclusos para julgamento",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Sentença · ID 382834520 · 24/04/2026 — sentença (dispositivo a conferir)",
+    "ultima_peca": "Contrarrazões (apelante) · ID 382834526 · 26/06/2026",
+    "ultima_informacao": "Certidão · ID 388325920 · 24/07/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 382834520 · 24/04/2026 — sentença (dispositivo a conferir) | última peça: Contrarrazões (apelante) · ID 382834526 · 26/06/2026 | última movimentação: 24/07/2026 12:56 · Conclusos para julgamento"
    }
   },
   {
@@ -1710,12 +2561,14 @@
    "exequente": "FRIZELO FRIGORIFICOS LTDA",
    "executado": "PERI ALIMENTOS LTDA",
    "assunto": "Finsocial",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "AP2",
+   "tipo_caso": "Apelação dos requeridos em medida cautelar fiscal da Fazenda Nacional (Frizelo Frigoríficos e outros) · extinção sem mérito (artigos 485, VI e VIII, e 925 do CPC), com levantamento das constrições e sem honorários",
+   "resultado": "Ato a proferir: apelação dos requeridos (ID 369407269) da sentença ID 369407209; contrarrazões da Fazenda (ID 369407321) ‖ Proposta pelos precedentes: Voto: examinar o objeto da apelação (honorários e efeitos da extinção) [VALIDAR] [VALIDAR: Objeto e pedidos da apelação; Agravo de instrumento conexo]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação dos requeridos contra sentença que extinguiu sem mérito a cautelar fiscal da Fazenda Nacional, levantando as constrições, sem honorários.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -1726,7 +2579,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da apelação (voto)",
+    "materia": "Tributário — cautelar fiscal",
+    "origem": "Cautelar fiscal 0006764-29.2017.4.03.6000 (6ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 369407209 (04/09/2025)",
+    "recurso": "apelação de Frizelo Frigoríficos Ltda. e outros (ID 369407269, 17/10/2025)",
+    "preparo": "Frizelo Frigoríficos Ltda. e outros: Custas da apelação (ID 369407271) [VALIDAR]",
+    "monocratica": "Improvável sem paradigma",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "Frizelo Frigoríficos Ltda. e outros: Custas da apelação (ID 369407271) [VALIDAR] · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -1736,6 +2600,109 @@
    "chegada": "09/06/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Cautelar fiscal extinta — honorários e levantamento de constrições",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 369407336 · 14/04/2026 — …de Carlos Eduardo França Ricardo Miranda (CPF 957.665.371-15), independentemente de qualquer outra complementação documental, conforme fundamentos apresentados no item 1, supra.BRUNO CEZAR DA CUNHA TEIXEIRAJuiz Federal | última peça: Procuração/substabelecimento com reserva de poderes (advogado de parte) · ID 369407333 · 01/04/2026 | última movimentação: 03/06/2026 19:02 · Conclusos para julgamento · Sentença lançada no PJe como \"Decisão\" (ID 369407209) · Honorários na extinção da cautelar fiscal (causalidade) × natureza incidental (STJ, ARE 1.521.312-MS) [VALIDAR objeto da apelação] · Agravo de instrumento 5015390-07.2017.4.03.0000 [VALIDAR situação] · Decisão posterior de levantamento de indisponibilidade (ID 369407336) · 321 documentos",
+   "teor": {
+    "sintese_fatica": "A Fazenda Nacional ajuizou em 2017 medida cautelar fiscal, com pedido de liminar, contra Frizelo Frigoríficos Ltda., Peri Alimentos Ltda. e outros. O processo foi extinto sem mérito e as constrições, levantadas; há agravo de instrumento conexo (5015390-07.2017.4.03.0000).",
+    "inicial": "Medida cautelar fiscal (Lei 8.397/1992) da Fazenda Nacional.",
+    "decisao_recorrida": "Sentença ID 369407209 (04/09/2025): extinguiu a cautelar fiscal sem resolução do mérito (artigos 485, VI e VIII, e 925 do CPC), determinou o levantamento das constrições remanescentes e deixou de fixar honorários por se tratar de incidente da execução fiscal (STJ, ARE 1.521.312-MS) [sentença lançada como \"Decisão\"].",
+    "recurso": "Frizelo Frigoríficos Ltda. e outros (ID 369407269, 17/10/2025): reforma da sentença [VALIDAR objeto: honorários e efeitos da extinção].",
+    "resposta": "Contrarrazões da Fazenda Nacional (ID 369407321).",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Advogado Felipe Ricetti Marques (OAB/SP 200.760).",
+    "preparo": "Custas da apelação (ID 369407271) [VALIDAR]"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação dos requeridos em medida cautelar fiscal da Fazenda Nacional (Frizelo Frigoríficos e outros) · extinção sem mérito (artigos 485, VI e VIII, e 925 do CPC), com levantamento das constrições e sem honorários",
+     "sintese": "A Fazenda Nacional ajuizou em 2017 medida cautelar fiscal, com pedido de liminar, contra Frizelo Frigoríficos Ltda., Peri Alimentos Ltda. e outros. O processo foi extinto sem mérito e as constrições, levantadas; há agravo de instrumento conexo (5015390-07.2017.4.03.0000).",
+     "questoes": "1) Extinção da cautelar fiscal sem mérito; 2) honorários por causalidade.",
+     "rel": {
+      "razoes": "Frizelo Frigoríficos Ltda. e outros (ID 369407269, 17/10/2025): reforma da sentença [VALIDAR objeto: honorários e efeitos da extinção].",
+      "contrarrazoes": "Contrarrazões da Fazenda Nacional (ID 369407321)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "369407209",
+      "juizo": "Cautelar fiscal 0006764-29.2017.4.03.6000 (6ª Vara Federal de Campo Grande)",
+      "dispositivo": "extinguiu a cautelar fiscal sem resolução do mérito (artigos 485, VI e VIII, e 925 do CPC), determinou o levantamento das constrições remanescentes e deixou de fixar honorários por se tratar de incidente da execução fiscal (STJ, ARE 1.521.312-MS) [sentença lançada como \"Decisão\"]."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2017-07-28",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Frizelo Frigoríficos Ltda. e outros",
+       "tipo": "Apelação",
+       "id": "369407269",
+       "contra": "Sentença"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença (lançada como decisão): extinção sem mérito",
+       "id": "369407209",
+       "data": "2025-09-04"
+      },
+      {
+       "desc": "Apelação dos requeridos",
+       "id": "369407269",
+       "data": "2025-10-17"
+      },
+      {
+       "desc": "Custas da apelação",
+       "id": "369407271",
+       "data": "2025-10-17"
+      },
+      {
+       "desc": "Contrarrazões da Fazenda Nacional",
+       "id": "369407321",
+       "data": "2026-01-07"
+      },
+      {
+       "desc": "Decisão: levantamento de indisponibilidade",
+       "id": "369407336",
+       "data": "2026-04-14"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 369407336 · 14/04/2026 — …de Carlos Eduardo França Ricardo Miranda (CPF 957.665.371-15), independentemente de qualquer outra complementação documental, conforme fundamentos apresentados no item 1, supra.BRUNO CEZAR DA CUNHA TEIXEIRAJuiz Federal | última peça: Procuração/substabelecimento com reserva de poderes (advogado de parte) · ID 369407333 · 01/04/2026 | última movimentação: 03/06/2026 19:02 · Conclusos para julgamento · Sentença lançada no PJe como \"Decisão\" (ID 369407209) · Honorários na extinção da cautelar fiscal (causalidade) × natureza incidental (STJ, ARE 1.521.312-MS) [VALIDAR objeto da apelação] · Agravo de instrumento 5015390-07.2017.4.03.0000 [VALIDAR situação] · Decisão posterior de levantamento de indisponibilidade (ID 369407336) · 321 documentos",
+     "assuntoDet": "Cautelar fiscal extinta — honorários e levantamento de constrições",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Não verificado"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "03/06/2026 19:02 · Conclusos para julgamento",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Decisão · ID 369407336 · 14/04/2026 — …de Carlos Eduardo França Ricardo Miranda (CPF 957.665.371-15), independentemente de qualquer outra complementação documental, conforme fundamentos apresentados no item 1, supra.BRUNO CEZAR DA CUNHA TEIXEIRAJuiz Federal",
+    "ultima_peca": "Procuração/substabelecimento com reserva de poderes (advogado de parte) · ID 369407333 · 01/04/2026",
+    "ultima_informacao": "Certidão · ID 378381976 · 03/06/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 369407336 · 14/04/2026 — …de Carlos Eduardo França Ricardo Miranda (CPF 957.665.371-15), independentemente de qualquer outra complementação documental, conforme fundamentos apresentados no item 1, supra.BRUNO CEZAR DA CUNHA TEIXEIRAJuiz Federal | última peça: Procuração/substabelecimento com reserva de poderes (advogado de parte) · ID 369407333 · 01/04/2026 | última movimentação: 03/06/2026 19:02 · Conclusos para julgamento"
    }
   },
   {
@@ -1747,12 +2714,14 @@
    "exequente": "ARTUR JOSE VIEIRA JUNIOR",
    "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "assunto": "IRPJ/Imposto de Renda de Pessoa Jurídica",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "AP2",
+   "tipo_caso": "Apelação do espólio embargante em embargos à execução fiscal (execução fiscal 0008546-23.2007.4.03.6000) · prescrição intercorrente e outras teses · embargos rejeitados · embargos de declaração rejeitados",
+   "resultado": "Ato a proferir: apelação do embargante (ID 383796537) da sentença ID 383796479, integrada pela ID 383796535; contrarrazões da União (ID 383796541) ‖ Proposta pelos precedentes: Voto ou monocrática conforme a cronologia da execução fiscal (Tema 566/STJ) [VALIDAR] [VALIDAR: Cronologia da execução fiscal (citação, suspensão, arquivamento); Representação do espólio]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação do espólio contra sentença que rejeitou embargos à execução fiscal de 2007. O apelante invoca prescrição intercorrente.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -1763,7 +2732,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da apelação (voto ou monocrática)",
+    "materia": "Tributário — embargos à execução fiscal",
+    "origem": "Embargos à execução fiscal 5002279-56.2021.4.03.6000 (6ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 383796479 (18/08/2025)",
+    "recurso": "apelação de Espólio de Arthur José Vieira (ID 383796537, 03/12/2025)",
+    "preparo": "Espólio de Arthur José Vieira: Custas pagas (ID 383796539) [VALIDAR forma]",
+    "monocratica": "Possível: Tema 566/STJ (REsp 1.340.553/RS) [VALIDAR teses]",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "Espólio de Arthur José Vieira: Custas pagas (ID 383796539) [VALIDAR forma] · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -1773,6 +2753,115 @@
    "chegada": "18/08/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Embargos à execução fiscal — prescrição intercorrente (Tema 566/STJ)",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 383796540 · 19/06/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 383796535 · 12/11/2025 — sentença (dispositivo a conferir) | última peça: Contrarrazões (PFN) · ID 383796541 · 01/07/2026 | última movimentação: 18/08/2026 14:26 · Conclusos para julgamento · Prescrição intercorrente: Tema 566/STJ (artigo 40 da LEF) [VALIDAR cronologia da execução] · Embargos opostos por Artur José Vieira Júnior e apelação do espólio de Arthur José Vieira, pela inventariante [VALIDAR regularização do polo]",
+   "teor": {
+    "sintese_fatica": "Os embargos foram opostos por Artur José Vieira Júnior à execução fiscal ajuizada em 2007, redirecionada ao espólio de Arthur José Vieira. A sentença rejeitou os embargos; apela o espólio, representado pela inventariante Maria Olívia Bicudo Vieira.",
+    "inicial": "Embargos à execução fiscal contra a União.",
+    "decisao_recorrida": "Sentença ID 383796479 (18/08/2025): rejeitou os embargos à execução fiscal, com honorários pelo embargante, e determinou o prosseguimento da execução fiscal 0008546-23.2007.4.03.6000; embargos de declaração rejeitados (ID 383796535).",
+    "recurso": "Espólio de Arthur José Vieira (ID 383796537, 03/12/2025): prescrição intercorrente e demais nulidades; procedência dos embargos [VALIDAR teses].",
+    "resposta": "Contrarrazões da União (ID 383796541).",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Advogada constituída pelo espólio [VALIDAR nome e OAB].",
+    "preparo": "Custas (ID 383796539) [VALIDAR forma]"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação do espólio embargante em embargos à execução fiscal (execução fiscal 0008546-23.2007.4.03.6000) · prescrição intercorrente e outras teses · embargos rejeitados · embargos de declaração rejeitados",
+     "sintese": "Os embargos foram opostos por Artur José Vieira Júnior à execução fiscal ajuizada em 2007, redirecionada ao espólio de Arthur José Vieira. A sentença rejeitou os embargos; apela o espólio, representado pela inventariante Maria Olívia Bicudo Vieira.",
+     "questoes": "1) Prescrição intercorrente (Tema 566/STJ); 2) demais teses dos embargos.",
+     "rel": {
+      "razoes": "Espólio de Arthur José Vieira (ID 383796537, 03/12/2025): prescrição intercorrente e demais nulidades; procedência dos embargos [VALIDAR teses].",
+      "contrarrazoes": "Contrarrazões da União (ID 383796541)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "383796479",
+      "juizo": "Embargos à execução fiscal 5002279-56.2021.4.03.6000 (6ª Vara Federal de Campo Grande)",
+      "dispositivo": "rejeitou os embargos à execução fiscal, com honorários pelo embargante, e determinou o prosseguimento da execução fiscal 0008546-23.2007.4.03.6000; embargos de declaração rejeitados (ID 383796535)."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2021-03-04",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Espólio de Arthur José Vieira",
+       "tipo": "Apelação",
+       "id": "383796537",
+       "contra": "Sentença"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: embargos rejeitados",
+       "id": "383796479",
+       "data": "2025-08-18"
+      },
+      {
+       "desc": "Embargos de declaração",
+       "id": "383796481",
+       "data": "2025-08-27"
+      },
+      {
+       "desc": "Sentença dos embargos de declaração",
+       "id": "383796535",
+       "data": "2025-11-12"
+      },
+      {
+       "desc": "Apelação do espólio",
+       "id": "383796537",
+       "data": "2025-12-03"
+      },
+      {
+       "desc": "Comprovante de custas",
+       "id": "383796539",
+       "data": "2025-12-03"
+      },
+      {
+       "desc": "Contrarrazões da União",
+       "id": "383796541",
+       "data": "2026-07-01"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 383796540 · 19/06/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 383796535 · 12/11/2025 — sentença (dispositivo a conferir) | última peça: Contrarrazões (PFN) · ID 383796541 · 01/07/2026 | última movimentação: 18/08/2026 14:26 · Conclusos para julgamento · Prescrição intercorrente: Tema 566/STJ (artigo 40 da LEF) [VALIDAR cronologia da execução] · Embargos opostos por Artur José Vieira Júnior e apelação do espólio de Arthur José Vieira, pela inventariante [VALIDAR regularização do polo]",
+     "assuntoDet": "Embargos à execução fiscal — prescrição intercorrente (Tema 566/STJ)",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Não verificado"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "18/08/2026 14:26 · Conclusos para julgamento",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Despacho · ID 383796540 · 19/06/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso)",
+    "ultima_decisao_relevante": "Sentença · ID 383796535 · 12/11/2025 — sentença (dispositivo a conferir)",
+    "ultima_peca": "Contrarrazões (PFN) · ID 383796541 · 01/07/2026",
+    "ultima_informacao": "Certidão · ID 392421456 · 18/08/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 383796540 · 19/06/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 383796535 · 12/11/2025 — sentença (dispositivo a conferir) | última peça: Contrarrazões (PFN) · ID 383796541 · 01/07/2026 | última movimentação: 18/08/2026 14:26 · Conclusos para julgamento"
    }
   },
   {
@@ -1784,12 +2873,14 @@
    "exequente": "ESPÓLIO DE ARTHUR BOIGUES",
    "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "assunto": "ITR/ Imposto Territorial Rural",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "AP2",
+   "tipo_caso": "Apelação do espólio autor em ação sobre ITR · perícia · pedido julgado improcedente · embargos de declaração rejeitados · preparo por GRU paga em 11/05/2026",
+   "resultado": "Ato a proferir: apelação do espólio (ID 384190223) da sentença ID 384190215, integrada pela ID 384190221; contrarrazões da União (ID 384190227) ‖ Proposta pelos precedentes: Voto, após decidir sobre a validade do preparo por GRU [VALIDAR] [VALIDAR: Validade do preparo por GRU após 03/04/2026; Objeto da ação e conclusão da perícia]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação do espólio contra sentença que julgou improcedente ação sobre ITR, após perícia. O preparo foi recolhido por GRU depois da extinção da GRU Judicial (03/04/2026).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -1800,7 +2891,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da apelação (voto), após conferir o preparo",
+    "materia": "Tributário — ITR",
+    "origem": "Procedimento comum 5000044-81.2019.4.03.6002 (2ª Vara Federal de Dourados)",
+    "decisao_agravada": "Sentença ID 384190215 (24/03/2026)",
+    "recurso": "apelação de Espólio de Arthur Boigues (ID 384190223, 11/05/2026)",
+    "preparo": "Espólio de Arthur Boigues: GRU paga em 11/05/2026 via Sicredi (IDs 384190224 e 384190225)",
+    "monocratica": "Improvável sem paradigma",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "Espólio de Arthur Boigues: GRU paga em 11/05/2026 via Sicredi (IDs 384190224 e 384190225) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -1810,6 +2912,119 @@
    "chegada": "05/08/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "ITR — ação do espólio julgada improcedente; preparo por GRU após 03/04/2026",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 384190221 · 13/04/2026 — sentença (dispositivo a conferir) | última peça: Contrarrazões (PFN) · ID 384190227 · 02/07/2026 | última movimentação: 05/08/2026 17:39 · Conclusos para julgamento · Preparo: GRU Judicial extinta a partir de 03/04/2026 (notícia TRF3 de 09/03/2026); tratamento de GRU paga depois dessa data ainda em aberto no gabinete [VALIDAR] · Objeto do ITR e conclusões da perícia [VALIDAR] · Grupo afim: RA6 de adp-remessas (ITR, APP e reserva legal)",
+   "teor": {
+    "sintese_fatica": "O espólio de Arthur Boigues impugna lançamento de ITR [VALIDAR exercício e objeto]. Houve perícia, com custas periciais parceladas, e a sentença julgou improcedentes os pedidos.",
+    "inicial": "Ação anulatória de lançamento de ITR contra a União [VALIDAR].",
+    "decisao_recorrida": "Sentença ID 384190215 (24/03/2026): julgou improcedentes os pedidos, com honorários de 10% sobre o valor da causa pelo autor; embargos de declaração rejeitados (ID 384190221).",
+    "recurso": "Espólio de Arthur Boigues (ID 384190223, 11/05/2026): reforma da sentença [VALIDAR teses: áreas excluídas, valor da terra nua ou lançamento].",
+    "resposta": "Contrarrazões da União (ID 384190227).",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Advogados do espólio [VALIDAR].",
+    "preparo": "GRU paga em 11/05/2026, após a extinção da GRU Judicial [VALIDAR]"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação do espólio autor em ação sobre ITR · perícia · pedido julgado improcedente · embargos de declaração rejeitados · preparo por GRU paga em 11/05/2026",
+     "sintese": "O espólio de Arthur Boigues impugna lançamento de ITR [VALIDAR exercício e objeto]. Houve perícia, com custas periciais parceladas, e a sentença julgou improcedentes os pedidos.",
+     "questoes": "1) Validade do preparo por GRU após 03/04/2026; 2) ITR (objeto a conferir).",
+     "rel": {
+      "razoes": "Espólio de Arthur Boigues (ID 384190223, 11/05/2026): reforma da sentença [VALIDAR teses: áreas excluídas, valor da terra nua ou lançamento].",
+      "contrarrazoes": "Contrarrazões da União (ID 384190227)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "384190215",
+      "juizo": "Procedimento comum 5000044-81.2019.4.03.6002 (2ª Vara Federal de Dourados)",
+      "dispositivo": "julgou improcedentes os pedidos, com honorários de 10% sobre o valor da causa pelo autor; embargos de declaração rejeitados (ID 384190221)."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2019-01-14",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Espólio de Arthur Boigues",
+       "tipo": "Apelação",
+       "id": "384190223",
+       "contra": "Sentença"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: pedido improcedente",
+       "id": "384190215",
+       "data": "2026-03-24"
+      },
+      {
+       "desc": "Embargos de declaração",
+       "id": "384190217",
+       "data": "2026-03-30"
+      },
+      {
+       "desc": "Sentença dos embargos de declaração",
+       "id": "384190221",
+       "data": "2026-04-13"
+      },
+      {
+       "desc": "Apelação do espólio",
+       "id": "384190223",
+       "data": "2026-05-11"
+      },
+      {
+       "desc": "GRU do preparo",
+       "id": "384190224",
+       "data": "2026-05-11"
+      },
+      {
+       "desc": "Comprovante Sicredi do preparo",
+       "id": "384190225",
+       "data": "2026-05-11"
+      },
+      {
+       "desc": "Contrarrazões da União",
+       "id": "384190227",
+       "data": "2026-07-02"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 384190221 · 13/04/2026 — sentença (dispositivo a conferir) | última peça: Contrarrazões (PFN) · ID 384190227 · 02/07/2026 | última movimentação: 05/08/2026 17:39 · Conclusos para julgamento · Preparo: GRU Judicial extinta a partir de 03/04/2026 (notícia TRF3 de 09/03/2026); tratamento de GRU paga depois dessa data ainda em aberto no gabinete [VALIDAR] · Objeto do ITR e conclusões da perícia [VALIDAR] · Grupo afim: RA6 de adp-remessas (ITR, APP e reserva legal)",
+     "assuntoDet": "ITR — ação do espólio julgada improcedente; preparo por GRU após 03/04/2026",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Não verificado"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "05/08/2026 17:39 · Conclusos para julgamento",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Sentença · ID 384190221 · 13/04/2026 — sentença (dispositivo a conferir)",
+    "ultima_peca": "Contrarrazões (PFN) · ID 384190227 · 02/07/2026",
+    "ultima_informacao": "Certidão · ID 390692189 · 05/08/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 384190221 · 13/04/2026 — sentença (dispositivo a conferir) | última peça: Contrarrazões (PFN) · ID 384190227 · 02/07/2026 | última movimentação: 05/08/2026 17:39 · Conclusos para julgamento"
    }
   },
   {
