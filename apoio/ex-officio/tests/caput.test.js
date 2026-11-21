@@ -98,3 +98,9 @@ test('Calendário da Chefia: sem fundo branco sob os calendários, um painel por
   const fs=require('fs'),p=require('path'),cap=fs.readFileSync(p.join(__dirname,'../../../caput/triagem/index.html'),'utf8');
   assert.ok(cap.includes('.cg-cal .cc-body{background:var(--p)}.cg-cal .cc-2m>div')&&cap.includes('.cg-cal .cc-esq .cc-esq-b{top:56px!important}'),'painéis por mês');
 });
+
+test('Designação: categorias de julgamento sem responsável aparecem nas regras; faixa da etapa 4 numa linha',()=>{
+  const fs=require('fs'),p=require('path'),r=(x)=>fs.readFileSync(p.join(__dirname,'../../../',x),'utf8');
+  assert.ok(r('caput/triagem/index.html').includes('seguem para a próxima regra')&&r('caput/triagem/index.html').includes('const semResp = (kind, r)'),'sem responsável');
+  assert.ok(r('caput/designacao/index.html').includes('faixa da etapa 4 numa linha só'),'faixa compacta');
+});
