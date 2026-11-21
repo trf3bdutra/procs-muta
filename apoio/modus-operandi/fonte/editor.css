@@ -121,3 +121,8 @@ html.ed-cmt .ed-top [data-edzip],html.ed-cmt .ed-top [data-edgit],html.ed-cmt .e
 /* campos a preencher e trechos ligados, em leitura (painel do desembargador) */
 .ed-chips{display:flex;flex-wrap:wrap;gap:5px;padding:4px 0}
 .ed-chips i{font-style:normal;font-size:12px;padding:3px 9px;border:1px solid var(--line,#ded9cc);border-radius:999px;background:var(--paper,#fbfaf5)}
+/* manual de redação no centro do editor (Diretrizes sem registro escolhido) */
+.ed-man{container-type:inline-size;padding:4px 6px 30px}
+.ed-man .xman{display:block!important}
+.ed-man .mn-toc{top:8px}
+@container (max-width:860px){.ed-man .mn-wrap{grid-template-columns:minmax(0,1fr)}.ed-man .mn-toc{display:none}}

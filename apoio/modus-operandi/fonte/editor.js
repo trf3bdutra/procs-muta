@@ -177,7 +177,7 @@ function edRender(){
   var nov=EDS.col==='pec'?'':'<div class="ed-new">'+(EDS.col==='dir'?'<select data-edtipo aria-label="Tipo da diretriz nova">'+Object.keys(ED_DIR).map(function(t){return '<option'+(t===EDS.tipoNovo?' selected':'')+'>'+t+'</option>';}).join('')+'</select>':'')+'<button class="e-mini pri" data-ednovo>+ Novo</button></div>';
   var lst='<aside class="ed-list"><input type="search" id="ed-q" placeholder="Buscar…  ( / )" value="'+esc(EDS.q)+'" aria-label="Buscar registros">'+edFiltrosHtml(L)+nov+'<div class="ed-n">'+F.length+' de '+L.length+'</div><ul role="listbox">'+F.slice(0,500).map(function(r){var x=edRot(EDS.col,r),s=edSit(EDS.col,r.id);return '<li data-edid="'+esc(r.id)+'" class="'+(r.id===EDS.id?'on':'')+'" tabindex="0" role="option" aria-selected="'+(r.id===EDS.id)+'"><b>'+(s?'<i class="ed-sit s-'+s.replace('í','i')+'" title="'+s+'"></i>':'')+esc(x.t.length>90?x.t.slice(0,90)+'…':x.t)+'</b><small>'+esc(x.s)+'</small></li>';}).join('')+(F.length>500?'<li class="meta">Refine a busca para ver os demais.</li>':'')+'</ul></aside>';
   var r=EDS.id&&edAcha(EDS.col,EDS.id);
-  var frm='<section class="ed-form'+(EDS.prev?' com-prev':'')+'" id="ed-form">'+(r?edForm(r):'<div class="empty ed-vazio"><p>Escolha um registro à esquerda ou crie um novo.</p><p class="meta">As alterações valem na hora nesta página e ficam guardadas neste navegador até o envio. Use <kbd>Ctrl</kbd>+<kbd>S</kbd> para aplicar.</p></div>')+'</section>';
+  var frm='<section class="ed-form'+(EDS.prev?' com-prev':'')+'" id="ed-form">'+(r?edForm(r):EDS.col==='dir'?'<div class="ed-man" id="ed-man"></div>':'<div class="empty ed-vazio"><p>Escolha um registro à esquerda ou crie um novo.</p><p class="meta">As alterações valem na hora nesta página e ficam guardadas neste navegador até o envio. Use <kbd>Ctrl</kbd>+<kbd>S</kbd> para aplicar.</p></div>')+'</section>';
   var foco=document.activeElement&&document.activeElement.id==='ed-q',pos=foco?document.activeElement.selectionStart:0,sc=$('#ed-form')?$('#ed-form').scrollTop:0,lsc=o.querySelector('.ed-list ul')?o.querySelector('.ed-list ul').scrollTop:0;
   o.innerHTML=top+'<div class="ed-body">'+lst+frm+'</div>'+(EDS.dlg||'');
   EDS.dirty=false;edAutoTodos();edAtualizaPrevia();
@@ -422,3 +422,10 @@ if(EDCMT){var edRender0=edRender;edRender=function(){var r=edRender0.apply(this,
     salvar:function(){if(EDS.dirty&&!edAplicar(true))return;if(!edPendentes().length){toast('Nada a salvar.');return;}EDS.dlg=edDlgToken();edRender();var t=$('#ed-msg');if(t)t.focus();},
     alteracoes:function(){if(EDS.dirty&&!edAplicar(true))return;EDS.dlg=edDlgPend();edRender();},
     n:function(){return edPendentes().length;}};}
+/* ---------- Diretrizes sem registro escolhido: o centro mostra o manual de redação inteiro (o mesmo da aba Diretrizes do Compendium) ---------- */
+(function(){var edRenderM=edRender;edRender=function(){var xm=$('#x-man');
+  if(xm&&xm._casa&&xm.parentNode!==xm._casa.parentNode)xm._casa.parentNode.insertBefore(xm,xm._casa.nextSibling);
+  var r=edRenderM.apply(this,arguments),alvo=$('#ed-man');
+  if(alvo&&xm){if(!xm._casa){xm._casa=document.createComment('x-man');xm.parentNode.insertBefore(xm._casa,xm);}alvo.appendChild(xm);try{xManual();}catch(e){alvo.innerHTML='<p class="empty">Manual indisponível.</p>';}}
+  return r;};
+  var edFecharM=edFechar;edFechar=function(){var xm=$('#x-man');if(xm&&xm._casa&&xm.parentNode!==xm._casa.parentNode)xm._casa.parentNode.insertBefore(xm,xm._casa.nextSibling);return edFecharM.apply(this,arguments);};})();
