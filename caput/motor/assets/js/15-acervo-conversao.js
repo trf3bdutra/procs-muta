@@ -101,7 +101,7 @@
     Object.keys(r).forEach(col => {
       const v = r[col];
       if (col === "_" || col === "id" || ix.reservadas.has(col) || vazio(v) || corr.padroes[col] === v) return;
-      if (col === "Preparo" && v === "AJG" && t._preparoAJG) return;
+      if (col === "Preparo" && ["AJG", "Justiça gratuita", "Assistência da DPU"].includes(v) && t._preparoAJG) return;
       if (ix.pg[col]) { ((op.triagem = op.triagem || {}).primeiroGrau = op.triagem.primeiroGrau || {})[ix.pg[col]] = v; return; }
       (op[bloco(col)] = op[bloco(col)] || {})[col] = v;
     });

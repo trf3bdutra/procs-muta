@@ -44,6 +44,13 @@ Não há arquivos paralelos: a página Monocráticas, as urgências e a aba Cont
 
 Valores padrão do Painel Central ("Não Verificado", "Não se Aplica", "PENDENTE", "VERIFICAR REPRESENTAÇÃO") não são gravados: campo vazio = ainda não verificado.
 
+## Vocabulário único (padrao/vocabulario.json)
+
+Tempestividade, Preparo, Representação, Preliminares, Mídias, Hipótese de intervenção do MPF (custos legis), Parecer do MPF e papéis das partes usam **os mesmos valores** na ficha (operacional), no prontuário das pautas (cartões), nos lotes do Collectio, na triagem e no motor do Caput e na extensão. Não há mais tradução entre telas: `padrao/vocabulario.js` (módulo `VOC`, embutido nas páginas entre `<!-- voc:inicio -->` e `<!-- voc:fim -->`) e `scripts/vocabulario.py` normalizam valores antigos (`VOC.norm`) e dão a classe de cada valor (`VOC.classe`: regular, pendente, irregular, na), que as regras leem no lugar do texto.
+
+- Editar só `padrao/vocabulario.json` e rodar `python3 scripts/vocabulario/aplicar.py` (o fluxo Base também roda): atualiza `ficha.json`, `campos-prontuario.json`, o `LIA_CAMPOS` da Ex Officio, os `DROPDOWNS` do motor e as cópias do módulo.
+- `scripts/vocabulario/migrar.py` (fluxo "Vocabulário único · migrar dados") converte os dados gravados; os genéricos antigos ("Dispensado", "Regular" com observação de dispensa, "Sim" no custos legis) são resolvidos pelo AJG, pela DPU, pelas observações e pelo valor específico do lote ou da pauta.
+
 ## Campos por aba
 
 

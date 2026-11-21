@@ -15,6 +15,8 @@ Nada que a equipe preencheu é apagado: os campos comuns só recebem valor quand
 Uso: python3 scripts/lotes/alimentar.py [lote ...]   (padrão: todos)
 """
 import datetime, glob, json, os, re, sys
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+import vocabulario as VOC  # noqa: E402
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 HOJE = datetime.date.today().isoformat()
@@ -158,8 +160,13 @@ def main(lotes):
                     sec[k] = v
             fp(t, 'Síntese Fática', PC.get('sintese')); fp(t, 'Especificidades', PC.get('especificidades'))
             fp(t, 'Alegações', (PC.get('rel') or {}).get('razoes')); fp(t, 'Tipo de Julgamento', PC.get('tipoJ'))
-            fp(t, 'Tempestividade', PL.get('tempest')); fp(t, 'Preparo', PL.get('preparo')); fp(t, 'Representação', PL.get('repres'))
-            fp(t, 'Prelim.', PL.get('prelim')); fp(t, 'Mídias', PL.get('midias')); fp(t, 'MPF', PL.get('mpf'))
+            # vocabulário único (padrao/vocabulario.json): o lote e a ficha usam os mesmos valores
+            fp(t, 'Tempestividade', VOC.norm('tempest', PL.get('tempest'))); fp(t, 'Preparo', VOC.norm('preparo', PL.get('preparo')))
+            fp(t, 'Representação', VOC.norm('repres', PL.get('repres'))); fp(t, 'Prelim.', VOC.norm('prelim', PL.get('prelim')))
+            fp(t, 'Mídias', VOC.norm('midias', PL.get('midias'))); fp(t, 'MPF - Custos Legis', VOC.norm('mpf', PL.get('mpf')))
+            fp(t, 'MPF', VOC.norm('parecer', PL.get('parecer')))
+            if VOC.norm('preparo', PL.get('preparo')) == 'Justiça gratuita': fp(t, 'AJG', 'Sim')
+            fp(pr, 'Mono - Fundamento', PL.get('fundamento'))
             fp(t, 'Parecer - Sentido', (PC.get('mpfx') or {}).get('sentido')); fp(t, 'ID do Parecer MPF', (PC.get('mpfx') or {}).get('id'))
             fp(t, 'Hipóteses Monocrática', PL.get('hip932')); fp(t, 'Intercorrências', PL.get('intercor'))
             fp(t, 'Urgência', PL.get('urgTipo')); fp(t, 'Urgência - Nível', PL.get('urgNivel')); fp(t, 'Urgência - Apreciação', PL.get('urgSit'))

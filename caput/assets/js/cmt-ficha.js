@@ -1,3 +1,6 @@
+/* vocabulário único (padrao/vocabulario.js, módulo VOC da página): opções e valores normalizados */
+var VL=function(k,old){return typeof VOC!=='undefined'?VOC.lista(k):old;};
+var VZ=function(k,v){var n=typeof VOC!=='undefined'?VOC.norm(k,v):(v||'');return /^n[aã]o verificado$/i.test(n||'')?'':n;};
 
 /* CMT · Calendário forense do gabinete: feriados, recesso e datas sem expediente, e a contagem de prazos processuais.
    Regras do calendário do Controle de Pauta (app Gabinete CMT): feriados nacionais e da Justiça Federal (Lei 5.010/66, art. 62),
@@ -707,20 +710,20 @@ function regSuggestions(parsed,r,used,add){
       note:`Juntada do recurso no PJe em ${f(rec)}.`+(c&&c.ok===false?` Contado da própria data da decisão (${f(dec)}, ID ${dec.id}), o prazo terminaria em ${br(c.limit)}: a conclusão depende da data da intimação, que o inteiro teor não traz — informe-a no calculador.`:!dec?' Decisão recorrida não selecionada: informe a data da intimação no calculador.':'')});
     add({sec,key:'Tempest - Prazo legal',label:'Prazo legal (dias úteis)',value:String(prazo),current:r['Tempest - Prazo legal'],doc:rec.id,kind:'select',options:['5','15','8','10','30']});
     if(dobro===2)add({sec,key:'Tempest - Dobro',label:'Contagem',value:'2',current:String(r['Tempest - Dobro']||'')==='1'?'':r['Tempest - Dobro'],doc:rec.id,kind:'select',options:['1','2'],note:`Em dobro: ${who.dpu?'Defensoria Pública':who.mp?'Ministério Público':who.conselho?'conselho profissional (autarquia)':'Fazenda Pública'} (arts. 180, 183 e 186 do CPC).`});}
-  if(c&&c.ok===true)add({sec,key:'Tempestividade',label:'Tempestividade',value:'Tempestivo',current:r.Tempestividade==='Não Verificado'?'':r.Tempestividade,doc:`${dec.id}, ${rec.id}`,kind:'select',options:['Não Verificado','Tempestivo','Intempestivo'],
+  if(c&&c.ok===true)add({sec,key:'Tempestividade',label:'Tempestividade',value:'Tempestivo',current:VZ('tempest',r.Tempestividade),doc:`${dec.id}, ${rec.id}`,kind:'select',options:VL('tempest',['Não Verificado','Tempestivo','Intempestivo']),
     note:`Recurso juntado em ${f(rec)}. Ainda que contado da própria data da decisão (${f(dec)}, ID ${dec.id}), o prazo de ${c.total} dias úteis${dobro===2?' (em dobro)':''} só terminaria em ${br(c.limit)}: tempestivo qualquer que seja a data da intimação.`});
   /* preparo: isenção, gratuidade ou GRU com comprovante */
   const gs=used.filter(d=>d.target==='preparo'),ajg=ajgOf(parsed,rec);
-  const P=(value,doc,note)=>add({sec,key:'Preparo',label:'Preparo',value,current:r.Preparo==='Não Verificado'?'':r.Preparo,doc,kind:'select',options:['Não Verificado','Comprovado','Não Recolhido','Dispensado','Não se Aplica'],note});
-  if(who.publico||who.mp)P('Dispensado',rec.id,`${who.name||'Recorrente'}: isento de preparo (art. 1.007, § 1º, do CPC; art. 4º, I, da Lei 9.289/1996).`);
-  else if(who.dpu&&ajg)P('Dispensado',ajg.d.id,`Assistido pela Defensoria Pública, com gratuidade deferida (ID ${ajg.d.id}).`);
+  const P=(value,doc,note)=>add({sec,key:'Preparo',label:'Preparo',value,current:VZ('preparo',r.Preparo),doc,kind:'select',options:VL('preparo',['Não Verificado','Comprovado','Não Recolhido','Dispensado','Não se Aplica']),note});
+  if(who.publico||who.mp)P('Isento (ente público/MP)',rec.id,`${who.name||'Recorrente'}: isento de preparo (art. 1.007, § 1º, do CPC; art. 4º, I, da Lei 9.289/1996).`);
+  else if(who.dpu&&ajg)P('Assistência da DPU',ajg.d.id,`Assistido pela Defensoria Pública, com gratuidade deferida (ID ${ajg.d.id}).`);
   else if(gs.length){const L=gs.map(d=>({d,g:gruInfo(d)})),ok=L.some(x=>x.g.comprovante);
-    P(ok?'Comprovado':'Não Verificado',gs.map(d=>d.id).join(', '),L.map(x=>`ID ${x.d.id} (${f(x.d)}): ${gruTxt(x.g)}`).join(' · ')+(ok?'':' — confira o pagamento.'));}
-  else if(ajg)P('Dispensado',ajg.d.id,`Gratuidade da justiça deferida (ID ${ajg.d.id}, ${f(ajg.d)}: “${ajg.frase}”). Confira se o beneficiário é o recorrente.`);
+    P(ok?'Comprovado':'Não verificado',gs.map(d=>d.id).join(', '),L.map(x=>`ID ${x.d.id} (${f(x.d)}): ${gruTxt(x.g)}`).join(' · ')+(ok?'':' — confira o pagamento.'));}
+  else if(ajg)P('Justiça gratuita',ajg.d.id,`Gratuidade da justiça deferida (ID ${ajg.d.id}, ${f(ajg.d)}: “${ajg.frase}”). Confira se o beneficiário é o recorrente.`);
   if(ajg&&!who.publico)add({sec,key:'AJG',label:'AJG (gratuidade)',value:'Sim',current:yes(r.AJG)?'Sim':'',doc:ajg.d.id,kind:'select',options:['','Sim']});
   if(who.dpu)add({sec,key:'DPU (controle)',label:'Defensoria Pública da União',value:'Sim',current:yes(r['DPU (controle)'])?'Sim':'',doc:rec.id,kind:'select',options:['','Sim']});
   /* representação ex lege: dispensa procuração */
-  if((who.publico||who.dpu||who.mp)&&!used.some(d=>d.target==='procuracao'))add({sec:'Representação',key:'Representação',label:'Representação',value:'Regular',current:r.Representação==='Não Verificado'?'':r.Representação,doc:rec.id,kind:'select',options:['Não Verificado','Regular','Negativo'],
+  if((who.publico||who.dpu||who.mp)&&!used.some(d=>d.target==='procuracao'))add({sec:'Representação',key:'Representação',label:'Representação',value:who.dpu?'Dispensada (DPU)':'Dispensada (procurador público)',current:VZ('repres',r.Representação),doc:rec.id,kind:'select',options:VL('repres',['Não Verificado','Regular','Negativo']),
     note:`${who.dpu?'Defensoria Pública':who.mp?'Ministério Público':'Advocacia pública'}: representação decorrente da lei, sem procuração nos autos.`});
 }
 /* data do documento (juntada/assinatura no cabeçalho do PJe) em DD/MM/AAAA, para os botões de data do card */
@@ -813,7 +816,7 @@ function buildSuggestions(parsed,r,ai){
   const mp=used.filter(d=>d.target==='mpf');
   if(mp.length){
     const d=mp[mp.length-1],x=extractMpf(d),a=ai?.mpf||{};
-    add({sec:'Parecer do MPF',key:'MPF',label:'Houve parecer?',value:'Com Parecer',current:r.MPF,doc:d.id,kind:'select',options:['Não se Aplica','Com Parecer','Sem Parecer']});
+    add({sec:'Parecer do MPF',key:'MPF',label:'Houve parecer?',value:'Com parecer',current:VZ('parecer',r.MPF),doc:d.id,kind:'select',options:VL('parecer',['Não se Aplica','Com Parecer','Sem Parecer'])});
     add({sec:'Parecer do MPF',key:'ID do Parecer MPF',label:'ID do parecer',value:d.id,current:r['ID do Parecer MPF'],doc:d.id,kind:'field'});
     add({sec:'Parecer do MPF',key:'MPF - Data',label:'Data do parecer',value:docBr(d),current:r['MPF - Data'],doc:d.id,kind:'field'});
     add({sec:'Parecer do MPF',key:'Parecer - Sentido',label:'Conclusão do parecer',value:a.sentido||x.sentido,current:r['Parecer - Sentido'],doc:d.id,kind:'select',options:['Prosseguimento do feito','Provimento do recurso','Não provimento do recurso','Outro'],src:a.sentido?'IA':'regra'});
@@ -833,7 +836,7 @@ function buildSuggestions(parsed,r,ai){
   // Representação: procurações do recorrente (ID, data da assinatura, validade e advogados)
   const procs=used.filter(d=>d.target==='procuracao');
   if(procs.length){
-    add({sec:'Representação',key:'Representação',label:'Representação',value:'Regular',current:r.Representação==='Não Verificado'?'':r.Representação,doc:procs.map(d=>d.id).join(', '),kind:'select',options:['Não Verificado','Regular','Negativo']});
+    add({sec:'Representação',key:'Representação',label:'Representação',value:'Regular',current:VZ('repres',r.Representação),doc:procs.map(d=>d.id).join(', '),kind:'select',options:VL('repres',['Não Verificado','Regular','Negativo'])});
     const ex=Array.isArray(r._procuracoes)?r._procuracoes:[],rec=used.find(d=>d.target==='recurso')||parsed.docs.filter(d=>d.kind==='recurso'&&!d.outro).pop();
     procs.forEach(d=>{
       const data=procDate(d.text);let adv=procLawyers(d.text),note='';
@@ -974,9 +977,9 @@ function fonteVal(c) { var f = fo(), L = c.fonte || []; for (var i = 0; i < L.le
 function valorCampo(c) { return c.secao ? val(c.secao, c.chave) : fonteVal(c); }
 function editavel(c) { return !!c.secao && c.editavel !== false && !c.calculado; }
 function bloqueado(c) { return (c.chave === 'SERVIDOR' || c.chave === 'CORRETOR') && c.secao === 'producao' && ST.d && ST.d.gestor === false; }
-function destino() { return val('producao', 'Destino') === 'Monocrática' ? 'monocratica' : 'sessao'; }
+function destino() { var v = val('producao', 'Destino'); return v === 'Monocrática' ? 'monocratica' : v === 'Outro destino' ? 'outro' : 'sessao'; }
 /* destino confirmado: "Sessão" ou "Monocrática" (gravado pela triagem ou pelo seletor); vazio = a definir na triagem */
-function destinoDef() { var v = val('producao', 'Destino'); return v === 'Monocrática' ? 'monocratica' : v === 'Sessão' ? 'sessao' : ''; }
+function destinoDef() { var v = val('producao', 'Destino'); return v === 'Monocrática' ? 'monocratica' : v === 'Sessão' ? 'sessao' : v === 'Outro destino' ? 'outro' : ''; } /* destino + situação (colegiado ou monocrática: pronto ou pendente; outro destino) no seletor da ficha */ function destSel() { var v = val('producao', 'Destino'); if (!v) return ''; if (v === 'Outro destino') return 'Outro destino|'; return v + '|' + (val('producao', 'Destino - Situação') || 'Pendente'); }
 function abaDe(nome) { return (F().abas || []).filter(function (a) { return a.aba === nome; })[0]; }
 function slug(s) { return N(s).replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''); }
 var CE = 'Controles especiais';
@@ -1107,7 +1110,7 @@ function faixa() {
     (R.length ? R.map(function (r) { return '<span class="fx-chip t-' + r[2] + '"><i>' + E(r[0]) + '</i>' + E(r[1]) + '</span>'; }).join('') : '<span class="fx-dim">sem regras calculadas</span>') + '</div>' +
     '<ol class="fx-flow" aria-label="Fluxo do processo">' + FL.map(function (s, j) {
       return '<li class="' + (s.feito ? 'is-done' : s.atual ? 'is-cur' : 'is-todo') + '"' + (s.atual ? ' aria-current="step"' : '') + '><span class="fx-dot">' + (s.feito ? svg('ok') : s.atual ? '<i></i>' : '') + '</span>' + (j < FL.length - 1 ? '<span class="fx-line"></span>' : '') +
-        (s.destino ? '<select class="fx-dest-sel" data-fx-destino' + (ST.ad.leitura ? ' disabled' : '') + ' aria-label="Destino do julgamento" title="Destino do julgamento: sessão (acórdão) ou decisão monocrática">' + [['', 'A definir'], ['Sessão', 'Sessão'], ['Monocrática', 'Monocrática']].map(function (o) { return '<option value="' + o[0] + '"' + (o[0] === (destinoDef() === 'monocratica' ? 'Monocrática' : destinoDef() === 'sessao' ? 'Sessão' : '') ? ' selected' : '') + '>' + o[1] + '</option>'; }).join('') + '</select>' : '<b>' + E(s.etapa) + '</b>') +
+        (s.destino ? '<select class="fx-dest-sel" data-fx-destino' + (ST.ad.leitura ? ' disabled' : '') + ' aria-label="Destino do julgamento" title="Destino do julgamento: sessão (acórdão) ou decisão monocrática">' + [['', 'A definir'], ['Sessão|Pronto para julgar', 'Colegiado · pronto'], ['Sessão|Pendente', 'Colegiado · pendente'], ['Monocrática|Pronto para julgar', 'Monocrática · pronta'], ['Monocrática|Pendente', 'Monocrática · pendente'], ['Outro destino|', 'Outro destino']].map(function (o) { return '<option value="' + o[0] + '"' + (o[0] === destSel() ? ' selected' : '') + '>' + o[1] + '</option>'; }).join('') + '</select>' : '<b>' + E(s.etapa) + '</b>') +
         '<small>' + E([s.quem, s.quando].filter(Boolean).join(' · ')) + '</small></li>';
     }).join('') + '</ol></div>';
 }
@@ -1287,7 +1290,7 @@ function abaControles(A) {
 function abaResumo() {
   var FL = fluxo(), cur = FL.filter(function (s) { return s.atual; })[0], feitas = FL.filter(function (s) { return s.feito; }).length, f = fo(), P = pendencias(), mono = destino() === 'monocratica';
   var ss = sessoes()[0] || {}, sd = iso(ss.sessao || ss.data || val('pauta', 'Nova sessão de destino'));
-  var defd = destinoDef(), destTxt = !defd ? 'A definir na triagem' : mono ? 'Decisão monocrática' : 'Sessão ' + (brD(sd) || 'a definir'), destSub = mono ? (val('producao', 'Decisão - ID') ? 'ID ' + val('producao', 'Decisão - ID') : val('producao', 'Mono - Tipo de ato') || 'sem pauta') : [ss.item ? 'item ' + ss.item : 'sem item', val('pauta', 'Status de Julgamento').toLowerCase()].filter(Boolean).join(' · ');
+  var defd = destinoDef(), destTxt = !defd ? 'A definir na triagem' : defd === 'outro' ? 'Outro destino' + (val('producao', 'Destino - Outro') ? ': ' + val('producao', 'Destino - Outro') : '') : (mono ? 'Decisão monocrática' : 'Sessão ' + (brD(sd) || 'a definir')) + (val('producao', 'Destino - Situação') ? ' · ' + val('producao', 'Destino - Situação').toLowerCase() : ''), destSub = mono ? (val('producao', 'Decisão - ID') ? 'ID ' + val('producao', 'Decisão - ID') : val('producao', 'Mono - Tipo de ato') || 'sem pauta') : [ss.item ? 'item ' + ss.item : 'sem item', val('pauta', 'Status de Julgamento').toLowerCase()].filter(Boolean).join(' · ');
   var top = '<div class="rs-top"><div class="rs-hero"><div class="rs-step"><span>Próximo passo</span><b>' + E(cur ? ACAO[cur.etapa] || cur.etapa : 'Concluído') + '</b><small>' + E(cur ? [cur.quem, cur.quando].filter(Boolean).join(' · ') : 'todas as etapas feitas') + '</small></div>' +
     '<div class="rs-arrow" aria-hidden="true">»</div><div class="rs-step rs-fim"><span>Destino final</span><b>' + E(destTxt) + '</b><small>' + E(destSub) + '</small></div><div class="rs-prog" title="' + feitas + ' de ' + FL.length + ' etapas"><i style="width:' + Math.round(feitas / FL.length * 100) + '%"></i></div></div>' +
     '<div class="rs-box rs-a3"><span><i class="rs-ic">' + svg('ficha') + '</i>Tarefa do PJe</span><b>' + E(S(f.tarefa_atual) || '—') + '</b><small>' + (iso(f.data_entrada_tarefa) ? 'desde ' + E(brD(iso(f.data_entrada_tarefa))) : 'data de entrada não informada') + '</small></div>' +
@@ -1522,7 +1525,7 @@ function onClick(ev) {
 }
 function onChange(ev) {
   var t = ev.target;
-  if (t.hasAttribute('data-fx-destino')) { if (t.value === gravado('producao', 'Destino')) return; if (ST.edit) { ST.draft['producao.Destino'] = t.value; render(); } else gravar({ 'producao.Destino': t.value }, t.value === 'Monocrática' ? 'Destino: decisão monocrática.' : t.value === 'Sessão' ? 'Destino: sessão.' : 'Destino a definir na triagem.').catch(function () {}); return; }
+  if (t.hasAttribute('data-fx-destino')) { if (t.value === destSel()) return; var dp = t.value.split('|'), dm = { 'producao.Destino': dp[0] || '', 'producao.Destino - Situação': dp[1] || '' }; if (ST.edit) { Object.assign(ST.draft, dm); render(); } else gravar(dm, dp[0] === 'Monocrática' ? 'Destino: decisão monocrática' + (dp[1] ? ' · ' + dp[1].toLowerCase() : '') + '.' : dp[0] === 'Sessão' ? 'Destino: colegiado' + (dp[1] ? ' · ' + dp[1].toLowerCase() : '') + '.' : dp[0] ? 'Destino: outro destino.' : 'Destino a definir na triagem.').catch(function () {}); return; }
   if (t.hasAttribute('data-fx-file')) { var f = t.files && t.files[0]; if (f) lerTxt(f); t.value = ''; return; }
   if (t.hasAttribute('data-fx-dest')) { ST.teor.parsed.docs[+t.getAttribute('data-fx-dest')].target = t.value; render(); return; }
   if (t.hasAttribute('data-fx-apply')) { ST.teor.items[+t.getAttribute('data-fx-apply')].apply = t.checked; render(); return; }

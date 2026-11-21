@@ -175,7 +175,7 @@
     OPER_SECOES.forEach(s => Object.entries(o[s] || {}).forEach(([k, v]) => { if (k !== "sessoes" && !operVazio(v)) row[k] = v; }));
     if (row["Nova sessão de destino"] && !row["Sessão Destino"]) row["Sessão Destino"] = row["Nova sessão de destino"];
     if (row.COMPLEXIDADE && !row.Dificuldade) row.Dificuldade = row.COMPLEXIDADE;
-    if (row.Preparo === "Dispensado" && (String(row.AJG).toLowerCase() === "sim" || String(row["DPU (controle)"]).toLowerCase() === "sim")) row.Preparo = "AJG";
+    if (typeof VOC !== "undefined") [["Tempestividade","tempest"],["Preparo","preparo"],["Representação","repres"],["Mídias","midias"],["MPF","parecer"],["MPF - Custos Legis","mpf"]].forEach(([c, k]) => { if (row[c]) row[c] = VOC.norm(k, row[c], { ajg: row.AJG, dpu: row["DPU (controle)"], obs: row["Observação da Representação"] }); }); /* vocabulário único */
     const tipo = row["Impedimento / Suspeição"];
     if (tipo && !/ — /.test(tipo)) {
       row._restricaoTipo = row._restricaoTipo || tipo; row._magistradoRestricao = row["Observação do Impedimento"] || row._magistradoRestricao || "";
@@ -191,11 +191,11 @@
     OPER_SECOES.forEach(s => { out[s] = {}; OPER_CAMPOS[s].forEach(k => { out[s][k] = v(k); }); });
     out.pauta["Nova sessão de destino"] = v("Sessão Destino") || v("Nova sessão de destino");
     out.triagem.COMPLEXIDADE = v("Dificuldade") || v("COMPLEXIDADE");
-    if (out.triagem.Preparo === "AJG") out.triagem.Preparo = "Dispensado";
+    if (out.triagem.Preparo === "AJG") out.triagem.Preparo = "Justiça gratuita";
     if (row._restricaoTipo !== undefined) { out.triagem["Impedimento / Suspeição"] = row._restricaoTipo || ""; out.triagem["Observação do Impedimento"] = row._restricaoTipo && !/^\//.test(row._magistradoRestricao || "") ? (row._magistradoRestricao || "") : ""; }
     else { const m = String(v("Impedimento / Suspeição")).split(" — "); out.triagem["Impedimento / Suspeição"] = m[0] || ""; if (m[1]) out.triagem["Observação do Impedimento"] = m[1]; }
-    const PADRAO = { Tempestividade: "Não Verificado", Representação: "Não Verificado", Preparo: "Não Verificado", MPF: "Não se Aplica", Mídias: "Não se Aplica", "Status de Julgamento": "PENDENTE" };
-    Object.entries(PADRAO).forEach(([k, p]) => OPER_SECOES.forEach(s => { if (out[s][k] === p) out[s][k] = ""; }));
+    const PADRAO = { Tempestividade: "Não verificado", Representação: "Não verificado", Preparo: "Não verificado", MPF: "Não se aplica", Mídias: "Não se aplica", "Status de Julgamento": "PENDENTE" };
+    Object.entries(PADRAO).forEach(([k, p]) => OPER_SECOES.forEach(s => { if (String(out[s][k] == null ? "" : out[s][k]).toLowerCase() === p.toLowerCase()) out[s][k] = ""; }));
     OPER_SECOES.forEach(s => Object.keys(out[s]).forEach(k => { const x = out[s][k]; out[s][k] = typeof x === "string" ? x : x === true ? "Sim" : x === false ? "" : x; }));
     return out;
   }

@@ -836,6 +836,45 @@ html[data-theme="dark"] #tri-prontuario .tp-s h3{color:#e6e2d6;background:linear
 @media(max-width:800px){.cg-grid{grid-template-columns:1fr}.cg-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.cg-studio{grid-template-columns:1fr}.cg-cat{max-height:none;border-right:0;border-bottom:1px solid var(--b);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px}.cg-prev{padding:8px}.cg-paper{padding:22px 18px;min-height:700px}.cg-set{grid-template-columns:1fr}}
 </style>
 <link rel="stylesheet" href="/padrao/loading/gabinete-loader.css">
+<!-- voc:inicio --><script>
+/* Vocabulário único do gabinete (padrao/vocabulario.json): ficha do processo, prontuário das pautas, Collectio e Caput
+   falam a mesma língua. Use VOC.lista(campo) para montar as opções, VOC.norm(campo, valor, ctx) para converter valores
+   antigos e VOC.classe(campo, valor) nas regras ('regular', 'pendente', 'irregular', 'na'), no lugar de comparar o texto.
+   ctx (opcional): { ajg, dpu, obs } resolve os genéricos antigos ('Dispensado', 'Isento (DPU/ente público)',
+   'Dispensada (proc. público/DPU)'). Os dados abaixo são gerados por scripts/vocabulario/aplicar.py: não editar à mão. */
+(function (raiz, fab) { var V = fab(); if (typeof module === 'object' && module.exports) module.exports = V; else raiz.VOC = V; })(typeof self !== 'undefined' ? self : this, function () {
+  var D = /*VOC-DADOS*/{"versao":"1.0.0","campos":{"tempest":{"rotulo":"Tempestividade","opcoes":[["Tempestivo","regular"],["Intempestivo","irregular"],["Não verificado","pendente"],["Não se aplica","na"]],"sinonimos":{}},"preparo":{"rotulo":"Preparo","opcoes":[["Comprovado","regular"],["Justiça gratuita","regular"],["Gratuidade pedida no recurso","pendente"],["Isento (ente público/MP)","regular"],["Assistência da DPU","regular"],["Recolhido sem comprovante do Tesouro (STN)","pendente"],["Recolhido a menor","pendente"],["Recolhido após a interposição","pendente"],["Não recolhido","irregular"],["Não se aplica","na"],["Não verificado","pendente"]],"sinonimos":{"AJG":"Justiça gratuita","Dispensado":"@dispensado","Isento (DPU/ente público)":"@isento","Recolhido sem comprovante STN":"Recolhido sem comprovante do Tesouro (STN)"}},"repres":{"rotulo":"Representação","opcoes":[["Regular","regular"],["Dispensada (procurador público)","regular"],["Dispensada (DPU)","regular"],["Irregular – intimar","irregular"],["Não verificado","pendente"]],"sinonimos":{"Negativo":"Irregular – intimar","Irregular":"Irregular – intimar","Irregular - intimar":"Irregular – intimar","Dispensada (proc. público/DPU)":"@dispensada"}},"prelim":{"rotulo":"Preliminares","opcoes":[["Sem preliminares","na"],["Há preliminares","regular"],["Preliminar de ofício","regular"]],"sinonimos":{"Não há":"Sem preliminares","Não":"Sem preliminares","Sim":"Há preliminares"}},"midias":{"rotulo":"Mídias","opcoes":[["Juntadas","regular"],["Faltantes","irregular"],["Não se aplica","na"],["Não verificado","pendente"]],"sinonimos":{"Juntada":"Juntadas","Faltante":"Faltantes"}},"mpf":{"rotulo":"Hipótese de intervenção do MPF","opcoes":[["Sem hipótese","na"],["Interesse público ou social (178, I)","regular"],["Incapaz (178, II)","regular"],["Litígio coletivo pela posse de terra (178, III)","regular"],["Mandado de segurança","regular"],["ACP/ação popular","regular"],["Improbidade","regular"],["Indígenas (CF 232)","regular"],["Comunidade quilombola","regular"],["Pessoa com deficiência","regular"],["Idoso em risco","regular"],["Reforma agrária","regular"],["Reintegração de posse coletiva","regular"],["Extradição, expulsão ou deportação","regular"],["Outra hipótese","regular"]],"sinonimos":{"Não":"Sem hipótese","Parte no feito":"Sem hipótese","Interesse público (178 I)":"Interesse público ou social (178, I)","Incapaz (178 II)":"Incapaz (178, II)","Litígio coletivo terra (178 III)":"Litígio coletivo pela posse de terra (178, III)","Menor de Idade (proteção de crianças e adolescentes)":"Incapaz (178, II)","Interdito (curatela)":"Incapaz (178, II)","Pessoa com Deficiência (acessibilidade e benefícios)":"Pessoa com deficiência","Idoso (vulnerabilidade social)":"Idoso em risco","Idoso (Estatuto)":"Idoso em risco","Comunidade Indígena (direitos originários e terras)":"Indígenas (CF 232)","Comunidade Quilombola (tutela de territórios ancestrais)":"Comunidade quilombola","Conflito Coletivo - Terra Rural (litígios agrários e INCRA)":"Litígio coletivo pela posse de terra (178, III)","Conflito Coletivo - Terra Urbana (ocupações em imóveis da União/CEF)":"Litígio coletivo pela posse de terra (178, III)","Reintegração de Posse Coletiva":"Reintegração de posse coletiva","Mandado de Segurança (fiscalização obrigatória da lei)":"Mandado de segurança","Outros":"Outra hipótese","Não se aplica":"Sem hipótese","Interesse público ou social relevante":"Interesse público ou social (178, I)","Comunidades indígenas":"Indígenas (CF 232)","Comunidades quilombolas e tradicionais":"Comunidade quilombola","Idoso":"Idoso em risco","Incapaz":"Incapaz (178, II)","Litígios coletivos federais pela posse de terra rural ou urbana":"Litígio coletivo pela posse de terra (178, III)","Ação civil pública proposta por outro legitimado":"ACP/ação popular","Ação popular":"ACP/ação popular","Processos de desapropriação para reforma agrária":"Reforma agrária","Ações de improbidade administrativa":"Improbidade","Processos de extradição, expulsão e deportação":"Extradição, expulsão ou deportação"}},"parecer":{"rotulo":"Parecer do MPF","opcoes":[["Com parecer","regular"],["Aguardando parecer","pendente"],["Intimado sem manifestação","regular"],["Vista a abrir","pendente"],["Não verificado","pendente"],["Não se aplica","na"]],"sinonimos":{"Sem Parecer":"Aguardando parecer","Sem parecer":"Aguardando parecer","Parecer juntado":"Com parecer"}},"papel":{"rotulo":"Papel da parte no 1º grau","opcoes":[["Autor(a)","regular"],["Réu/ré","regular"],["Exequente","regular"],["Executado(a)","regular"],["Embargante","regular"],["Embargado(a)","regular"],["Terceiro","regular"]],"sinonimos":{"Autor":"Autor(a)","Autora":"Autor(a)","Réu":"Réu/ré","Ré":"Réu/ré","Executado":"Executado(a)","Executada":"Executado(a)","Embargado":"Embargado(a)","Embargada":"Embargado(a)","Exequente(s)":"Exequente"}},"destino":{"rotulo":"Destino do julgamento","opcoes":[["Sessão","na"],["Monocrática","na"],["Outro destino","na"]],"sinonimos":{"Colegiado":"Sessão","Sessão (colegiado)":"Sessão","Decisão monocrática":"Monocrática"}},"situacao":{"rotulo":"Situação para julgar","opcoes":[["Pronto para julgar","regular"],["Pendente","pendente"]],"sinonimos":{"Pronto":"Pronto para julgar","Pronta":"Pronto para julgar"}},"outro_destino":{"rotulo":"Outro destino","opcoes":[["Vista ao MPF","pendente"],["Devolução ao órgão prolator","na"],["Sobrestamento","pendente"],["Redistribuição ou prevenção","pendente"],["Diligência ou intimação","pendente"],["Baixa ou arquivamento","na"],["Outro","na"]],"sinonimos":{}}}}/*VOC-FIM*/;
+  var N = function (s) { return String(s == null ? '' : s).normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[–—]/g, '-').replace(/\s+/g, ' ').trim().toLowerCase(); };
+  var sim = function (x) { return x === true || /^(sim|s|true|1|2)$/i.test(String(x == null ? '' : x).trim()); };
+  function campo(c) { return (D.campos || {})[c] || null; }
+  function lista(c) { var f = campo(c); return f ? f.opcoes.map(function (o) { return o[0]; }) : []; }
+  function resolve(alvo, ctx) {
+    ctx = ctx || {}; var obs = String(ctx.obs || '').replace(/\(proc\. público\/DPU\)|DPU\/ente público|procurador público ou DPU/gi, ''), dpu = sim(ctx.dpu) || /DPU|Defensoria/i.test(obs), ajg = sim(ctx.ajg);
+    if (alvo === '@dispensado') return dpu ? 'Assistência da DPU' : ajg ? 'Justiça gratuita' : 'Isento (ente público/MP)';
+    if (alvo === '@isento') return dpu ? 'Assistência da DPU' : 'Isento (ente público/MP)';
+    if (alvo === '@dispensada') return dpu ? 'Dispensada (DPU)' : 'Dispensada (procurador público)';
+    return alvo;
+  }
+  function norm(c, v, ctx) {
+    var f = campo(c), s = String(v == null ? '' : v).trim();
+    if (!f || !s) return s;
+    var n = N(s), i, o;
+    /* Representação 'Regular' com observação de dispensa (formato antigo da ficha) */
+    if (c === 'repres' && n === 'regular' && ctx && /^Dispensada/i.test(ctx.obs || '')) return resolve('@dispensada', ctx);
+    for (i = 0; i < f.opcoes.length; i++) { o = f.opcoes[i][0]; if (o === s || N(o) === n) return o; }
+    for (o in f.sinonimos) if (o === s || N(o) === n) return resolve(f.sinonimos[o], ctx);
+    return s;
+  }
+  function classe(c, v, ctx) {
+    var f = campo(c), s = norm(c, v, ctx), i;
+    if (!f || !s) return '';
+    for (i = 0; i < f.opcoes.length; i++) if (f.opcoes[i][0] === s) return f.opcoes[i][1];
+    return '';
+  }
+  function eh(c, v, cl, ctx) { return classe(c, v, ctx) === cl; }
+  return { dados: D, lista: lista, norm: norm, classe: classe, eh: eh, rotulo: function (c) { var f = campo(c); return f ? f.rotulo : c; } };
+});
+</script><!-- voc:fim -->
 <script defer src="/padrao/loading/gabinete-loader.js"></script>
 </head>
 <body>
@@ -909,6 +948,12 @@ montaEscopo();
 const ehAptoE = (e) => /\bapto(s)?\b|apto para julgamento/i.test(e) && !/inapt/i.test(e);
 const DEST = [
   ['ret', 'Retirado ou adiado: repautar', '#b0524a', (o) => /retirados e adiados/i.test(o.tarefa) || o.etq.some((e) => /retirad|retirar de pauta|\badiad/i.test(e))],
+  /* analisado na triagem (ficha › destino e situação): colegiado ou monocrática, pronto ou pendente; outro destino */
+  ['cpr', 'Colegiado · pronto para julgar', '#3b7150', (o) => o.row.Destino === 'Sessão' && o.row['Destino - Situação'] === 'Pronto para julgar'],
+  ['cpe', 'Colegiado · pendente', '#a57829', (o) => o.row.Destino === 'Sessão' && o.row['Destino - Situação'] !== 'Pronto para julgar' && !!o.row['Destino - Situação']],
+  ['mpr', 'Monocrática · pronta', '#24506f', (o) => o.row.Destino === 'Monocrática' && o.row['Destino - Situação'] === 'Pronto para julgar'],
+  ['mpe', 'Monocrática · pendente', '#7a6aa8', (o) => o.row.Destino === 'Monocrática' && o.row['Destino - Situação'] !== 'Pronto para julgar' && !!o.row['Destino - Situação']],
+  ['odt', 'Outro destino', '#8a948f', (o) => o.row.Destino === 'Outro destino'],
   ['apc', 'Apto: pautar (colegiado)', '#3b7150', (o) => o.apto && !o.monoE],
   ['apm', 'Apto: decisão do relator provável', '#24506f', (o) => o.apto && o.monoE],
   ['edr', 'Embargos de declaração recebidos: sessão ou monocrática', '#2f6690', (o) => /Recebidos com Embargos/i.test(o.tarefa)],
@@ -1738,7 +1783,9 @@ function vEscaninhos() {
     h += '<div class="ecard" role="button" tabindex="0" data-esc-abre="' + esc(e.id) + '" style="box-shadow:inset 4px 0 0 ' + esc(e.cor || '#a57829') + '"><span class="k" style="color:var(--m)">' + (ABERTAS.indexOf(e.id) >= 0 ? 'aberto em aba' : 'criado em ' + esc(br(String(e.criadoEm || '').slice(0, 10)))) + '</span><b>' + esc(e.titulo) + '</b><span style="font-size:13px;color:var(--m2)">' + esc(e.subtitulo || '') + '</span><span class="ft"><span class="mono" style="font-size:22px;color:var(--v)">' + nf(n) + '</span><span style="display:flex;gap:10px"><button type="button" class="lk" data-esc-edit="' + esc(e.id) + '">Editar</button><button type="button" class="lk" style="color:var(--r)" data-esc-del="' + esc(e.id) + '">Excluir</button></span></span></div>'; });
   h += '<button type="button" class="ecard novo" data-esc-novo>+ Novo escaninho</button></div><p style="font-size:12.5px;color:var(--m)">Excluir um escaninho devolve os processos dele à fila de triagem; nada sai do acervo.</p></div>'; return h; }
 
-const TRI_COR={'Tempestivo':'#1f5a4a','Intempestivo':'#8a2f22','Comprovado':'#1f5a4a','Não Recolhido':'#8a2f22','Regular':'#1f5a4a','Negativo':'#8a2f22','Com Parecer':'#24506f'};
+var VLc=window.VLc=(k,old)=>typeof VOC!=='undefined'?VOC.lista(k):old; /* vocabulário único (padrao/vocabulario.json) */
+  const TRI_COR_=x=>{if(TRI_COR[x])return TRI_COR[x];if(typeof VOC==='undefined')return '';for(const k of ['tempest','preparo','repres','parecer','midias']){if(VOC.lista(k).includes(x)){const c=VOC.classe(k,x);return c==='regular'?(k==='parecer'?'#24506f':'#1f5a4a'):c==='irregular'?'#8a2f22':'';}}return '';};
+  const TRI_COR={'Tempestivo':'#1f5a4a','Intempestivo':'#8a2f22','Comprovado':'#1f5a4a','Não Recolhido':'#8a2f22','Regular':'#1f5a4a','Negativo':'#8a2f22','Com Parecer':'#24506f'};
 /* posição do prontuário: abaixo da barra do topo, com a mesma folga à direita e embaixo */
 function triPos(g){const t=document.getElementById('top'),hb=t?Math.max(t.getBoundingClientRect().bottom,0):60;g.style.top=Math.round(hb+16)+'px';}
 D.addEventListener('click',(e)=>{const b=e.target.closest&&e.target.closest('[data-tri-seg]');if(!b)return;const w=b.parentNode,sl=w.previousElementSibling;if(!sl||sl.tagName!=='SELECT')return;
@@ -1747,20 +1794,21 @@ addEventListener('scroll',()=>{const g=document.getElementById('tri-prontuario')
 function abrirProntuarioTriagem(d) {
   const o=IDX.get(d); if(!o)return; const raw=o.row||{};
   const campos=[
-    ['triagem.Tempestividade','Tempestividade','s',['Não Verificado','Tempestivo','Intempestivo']],
-    ['triagem.Preparo','Preparo','s',['Não Verificado','Comprovado','Não Recolhido','Dispensado','Não se Aplica']],
-    ['triagem.Representação','Representação','s',['Não Verificado','Regular','Negativo']],
-    ['triagem.MPF','Parecer do MPF','s',['Não se Aplica','Com Parecer','Sem Parecer']],
-    ['triagem.MPF - Custos Legis','Custos legis','s',['','Sim','Não']],
+    ['triagem.Tempestividade','Tempestividade','s',VLc('tempest',['Não Verificado','Tempestivo','Intempestivo'])],
+    ['triagem.Preparo','Preparo','s',VLc('preparo',['Não Verificado','Comprovado','Não Recolhido','Dispensado','Não se Aplica'])],
+    ['triagem.Representação','Representação','s',VLc('repres',['Não Verificado','Regular','Negativo'])],
+    ['triagem.MPF','Parecer do MPF','s',VLc('parecer',['Não se Aplica','Com Parecer','Sem Parecer'])],
+    ['triagem.MPF - Custos Legis','Hipótese de intervenção (custos legis)','s',['',...VLc('mpf',['Sim','Não'])]],
     ['triagem.Urgência','Urgência','s',['','Tutela de urgência','Tutela de evidência','Antecipação da tutela recursal','Efeito suspensivo','Liminar em mandado de segurança','Reconsideração de liminar','Prioridade legal','Outra']],
     ['triagem.Tema','Tema / tipo de caso','t'],['triagem.META','Meta','t'],
     ['triagem.Alegações','Alegações','a'],['triagem.O que falta sanar','O que falta sanar','a'],
     ['triagem.Intercorrências','Intercorrências','a'],['origem.Observações','Observações gerais','a'],
     ['origem.Próxima ação','Próxima ação','t']
   ];
-  const valor=(k)=>raw[k.slice(k.indexOf('.')+1)]||'';
+  const VK={'triagem.Tempestividade':'tempest','triagem.Preparo':'preparo','triagem.Representação':'repres','triagem.MPF':'parecer','triagem.MPF - Custos Legis':'mpf'};
+  const valor=(k)=>{const v=raw[k.slice(k.indexOf('.')+1)]||'';return VK[k]&&typeof VOC!=='undefined'?VOC.norm(VK[k],v,{ajg:raw.AJG,dpu:raw['DPU (controle)'],obs:raw['Observação da Representação']}):v;};
   const field=(c)=>{const k=c[0],v=valor(k);
-    if(c[2]==='s'){const O=c[3].filter(x=>x);return '<div class="f"><span>'+c[1]+'</span><select data-tri-field="'+k+'" hidden>'+c[3].map(x=>'<option value="'+esc(x)+'"'+(x===v?' selected':'')+'>'+(x||'—')+'</option>').join('')+'</select><div class="sgx" role="group" aria-label="'+esc(c[1])+'">'+O.map(x=>'<button type="button" data-tri-seg="'+esc(x)+'" aria-pressed="'+(x===v)+'"'+(TRI_COR[x]?' style="--sgc:'+TRI_COR[x]+'"':'')+'>'+(TRI_COR[x]?'<i aria-hidden="true"></i>':'')+esc(x)+'</button>').join('')+'</div></div>';}
+    if(c[2]==='s'){const O=c[3].filter(x=>x);return '<div class="f"><span>'+c[1]+'</span><select data-tri-field="'+k+'" hidden>'+c[3].map(x=>'<option value="'+esc(x)+'"'+(x===v?' selected':'')+'>'+(x||'—')+'</option>').join('')+'</select><div class="sgx" role="group" aria-label="'+esc(c[1])+'">'+O.map(x=>'<button type="button" data-tri-seg="'+esc(x)+'" aria-pressed="'+(x===v)+'"'+(TRI_COR_(x)?' style="--sgc:'+TRI_COR_(x)+'"':'')+'>'+(TRI_COR_(x)?'<i aria-hidden="true"></i>':'')+esc(x)+'</button>').join('')+'</div></div>';}
     return '<label class="f'+(c[2]==='a'?' wide':'')+'"><span>'+c[1]+'</span>'+(c[2]==='a'?'<textarea data-tri-field="'+k+'" rows="3">'+esc(v)+'</textarea>':'<input type="text" data-tri-field="'+k+'" value="'+esc(v)+'">')+'</label>';};
   const sec=(n,t,L)=>'<section class="tp-s tp-s'+n+'"><h3><em>'+n+'</em>'+t+'</h3>'+L.map(field).join('')+'</section>';
   const g=document.createElement('aside');g.id='tri-prontuario';g.setAttribute('role','dialog');g.setAttribute('aria-label','Prontuário de triagem');
@@ -1818,7 +1866,7 @@ function excluirEscaninho(id) { const e = ESC.escaninhos.find((x) => x.id === id
 
 /* ---------- rodapé de ações em bloco ---------- */
 /* edição em lote: campo da ficha (triagem/origem) e valor, gravados num só commit no operacional */
-const LOTE_CAMPOS = [['triagem.Tempestividade','Tempestividade',['Não Verificado','Tempestivo','Intempestivo']],['triagem.Preparo','Preparo',['Não Verificado','Comprovado','Não Recolhido','Dispensado','Não se Aplica']],['triagem.Representação','Representação',['Não Verificado','Regular','Negativo']],['triagem.MPF','Parecer do MPF',['Não se Aplica','Com Parecer','Sem Parecer']],['triagem.Urgência','Urgência',['','Tutela de urgência','Tutela de evidência','Antecipação da tutela recursal','Efeito suspensivo','Liminar em mandado de segurança','Reconsideração de liminar','Prioridade legal','Outra']],['triagem.Tema','Tema / subassunto',null],['triagem.META','Meta',null],['origem.Próxima ação','Próxima ação',null],['triagem.O que falta sanar','O que falta sanar',null],['triagem.Intercorrências','Intercorrências',null],['origem.Responsável','Responsável (designar)','equipe']];
+const LOTE_CAMPOS = [['triagem.Tempestividade','Tempestividade',VLc('tempest',['Não Verificado','Tempestivo','Intempestivo'])],['triagem.Preparo','Preparo',VLc('preparo',['Não Verificado','Comprovado','Não Recolhido','Dispensado','Não se Aplica'])],['triagem.Representação','Representação',VLc('repres',['Não Verificado','Regular','Negativo'])],['triagem.MPF','Parecer do MPF',VLc('parecer',['Não se Aplica','Com Parecer','Sem Parecer'])],['triagem.Urgência','Urgência',['','Tutela de urgência','Tutela de evidência','Antecipação da tutela recursal','Efeito suspensivo','Liminar em mandado de segurança','Reconsideração de liminar','Prioridade legal','Outra']],['triagem.Tema','Tipo de caso',null],['triagem.META','Meta',null],['origem.Próxima ação','Próxima ação',null],['triagem.O que falta sanar','O que falta sanar',null],['triagem.Intercorrências','Intercorrências',null],['origem.Responsável','Responsável (designar)','equipe']];
 /* nomes da equipe vêm do motor (apoio/equipe.json); sem motor, o campo vira texto livre */
 function equipeNomes(){try{const m=document.getElementById('cmt-motor'),S=m&&m.contentWindow.CMTSessao&&m.contentWindow.CMTSessao.estado();const L=(S&&S.equipe||[]).filter((x)=>x&&x.nome&&x.situacao!=='inativo').map((x)=>String(x.nome).toUpperCase());return L.length?[''].concat([...new Set(L)].sort((a,b)=>a.localeCompare(b,'pt'))):null;}catch(e){return null;}}
 function loteCtl() { const c0 = LOTE_CAMPOS.find((x) => x[0] === RODA['r-lc']) || LOTE_CAMPOS[0]; RODA['r-lc'] = c0[0]; const c = c0[2] === 'equipe' ? [c0[0], c0[1], equipeNomes()] : c0;

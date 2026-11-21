@@ -252,7 +252,7 @@ function updateComputed(){
   var notice=host.querySelector('.pf-notice');if(notice){notice.classList.toggle('urgent',!!full.caso.urgente);notice.innerHTML=full.caso.urgente?'<strong>URGENTE · marcado no prontuário.</strong> A marca vai ao GitHub com o prontuário, mas não registra urgência na ficha nem avisa a equipe: para isso, use Controles especiais na Ficha do gabinete. Confira os autos antes de usar.':'<strong>Prontuário completo do processo.</strong> Guardado no GitHub do gabinete e ligado à ficha e ao cartão da pauta: o que você preenche aqui chega à equipe, e o que a equipe e a LIA registram chega aqui. Confira os autos antes de usar.';}
   host.querySelectorAll('[data-kind-panel]').forEach(function(el){el.hidden=el.dataset.kindPanel!==k;});
   var prep=host.querySelector('[data-path="regularidade.preparo"]'),typeExempt=['ed','agint','jr','rn'].includes(k),autoExempt=full.regularidade.dpu||full.regularidade.ajg,blocked=typeExempt||autoExempt;
-  if(prep){prep.disabled=full.modo==='ficha'||blocked;if(typeExempt&&!autoExempt)prep.value='Não se Aplica';if(autoExempt)prep.value='Dispensado';if(autoExempt)prep.title='Dispensado automaticamente por AJG/DPU';else if(typeExempt)prep.title='Não se aplica a esta espécie';}
+  if(prep){prep.disabled=full.modo==='ficha'||blocked;if(typeExempt&&!autoExempt)prep.value='Não se Aplica';if(autoExempt)prep.value=full.regularidade.dpu?'Assistência da DPU':'Justiça gratuita';if(autoExempt)prep.title='Dispensado automaticamente por AJG/DPU';else if(typeExempt)prep.title='Não se aplica a esta espécie';}
   (full.recursos||[]).forEach(function(r,i){
     var rid=host.querySelector('[data-path="recursos.'+i+'.ids"]'),rno=host.querySelector('[data-path="recursos.'+i+'.semId"]');
     var cid=host.querySelector('[data-path="recursos.'+i+'.contra.ids"]'),cdate=host.querySelector('[data-path="recursos.'+i+'.contra.data"]');
@@ -459,7 +459,7 @@ function render(restorePath){
   if(!active){var ae=host.querySelector(':focus[data-path]');if(ae)active=ae.dataset.path;}
   var k=kind(),results=RESULT[k],pieces=full.pecas||[],resources=full.recursos||[];
   var kindOptions=[['','Automático · identificar pela classe/etiquetas']].concat(ORDER.map(function(x){return[x,KIND[x]];}));
-  var prepOptions=['—','Comprovado','Dispensado','Não Recolhido','A conferir','Não se Aplica'];
+  var prepOptions=['—'].concat(typeof VOC!=='undefined'?VOC.lista('preparo'):['Comprovado','Dispensado','Não Recolhido','A conferir','Não se Aplica']);
   host.innerHTML=`<div class="pf-notice"><strong>Prontuário completo do processo.</strong> Guardado no GitHub do gabinete e ligado à ficha e ao cartão da pauta: o que você preenche aqui chega à equipe, e o que a equipe e a LIA registram chega aqui. Confira os autos antes de usar.</div>
   <div class="pf-toolbar"><div class="seg" role="tablist" aria-label="Modo do prontuário"><button type="button" data-pf-mode="ficha">Ficha</button><button type="button" data-pf-mode="preencher">Preencher</button></div><button type="button" class="btn line pf-edit-only" id="pf-save">Salvar agora</button><button type="button" class="btn line pf-edit-only" id="pf-discard">Restaurar salvo</button><span id="pf-mode-hint" class="muted"></span><span id="pf-status" class="pf-status" role="status" aria-live="polite">Salvamento automático</span></div>
   ${group('1','Identificação e classificação','caso',`<div class="pf-grid">
@@ -480,19 +480,19 @@ function render(restorePath){
     ${check('caso.urgente','Urgente · sinalização somente local')}
   </div><p class="pf-hint">Tipo atual: <strong id="pf-kind-label"></strong>. Automático usa classe, etiquetas e tipo de caso; uma escolha manual prevalece.</p>`)}
   ${group('2','Regularidade e admissibilidade','regularidade',`<div class="pf-grid">
-    ${select('regularidade.tempestividade','Tempestividade',['Não Verificado','Tempestivo','Intempestivo','Não se Aplica'])}
+    ${select('regularidade.tempestividade','Tempestividade',typeof VOC!=='undefined'?VOC.lista('tempest'):['Não Verificado','Tempestivo','Intempestivo','Não se Aplica'])}
     ${field('regularidade.intimacao','Data da intimação','', 'date')}
     ${select('regularidade.preparo','Preparo',prepOptions)}
     ${check('regularidade.dpu','DPU · prazo em dobro e dispensa de preparo')}
     ${check('regularidade.ajg','AJG · dispensa de preparo')}
-    ${select('regularidade.representacao','Representação processual',['Regular','A conferir','Irregular','Não se Aplica'])}
+    ${select('regularidade.representacao','Representação processual',typeof VOC!=='undefined'?VOC.lista('repres'):['Regular','A conferir','Irregular','Não se Aplica'])}
     ${select('regularidade.procuracao','Procuração / documento de representação',['Conferida','Pendente','Não se Aplica'])}
     ${field('regularidade.procuracaoId','ID da procuração/documento','Preencha após conferir nos autos')}
-    ${select('regularidade.midias','Mídias',['Não se aplica','Juntada','Faltante'])}
+    ${select('regularidade.midias','Mídias',typeof VOC!=='undefined'?VOC.lista('midias'):['Não se aplica','Juntada','Faltante'])}
     ${field('regularidade.outroRequisito','Outro requisito / óbice','Sem óbice ou descreva')}
     ${select('regularidade.impedimento','Impedimento / suspeição',['Sem impedimento','Impedimento','Suspeição'])}
-    ${select('regularidade.mpfAtuacao','Intervenção do MPF · custos legis',['Sim','Não'])}
-    ${select('regularidade.mpfParecer','Parecer do MPF',['Com Parecer','Sem Parecer','Não se Aplica'])}
+    ${select('regularidade.mpfAtuacao','Hipótese de intervenção do MPF (custos legis)',typeof VOC!=='undefined'?VOC.lista('mpf'):['Sim','Não'])}
+    ${select('regularidade.mpfParecer','Parecer do MPF',typeof VOC!=='undefined'?VOC.lista('parecer'):['Com Parecer','Sem Parecer','Não se Aplica'])}
     ${select('regularidade.mpfSentido','Sentido do parecer',['Prosseguimento do feito','Provimento do recurso','Não provimento do recurso','Outro'])}
     ${field('regularidade.mpfId','ID do parecer','ID do documento')}
     ${area('regularidade.mpfInfo','Informações do parecer','Fundamentos ou observação adicional','full')}
@@ -570,10 +570,10 @@ function scheduleSave(){setStatus('Salvando…');clearTimeout(timer);timer=setTi
 function maybeApplyPreparo(path,value){
   if(path==='regularidade.dpu'||path==='regularidade.ajg'){
     var exempt=full.regularidade.dpu||full.regularidade.ajg;
-    if(exempt){if(full.regularidade.preparo!=='Dispensado')full.regularidade.preparoAntesAuto=full.regularidade.preparo;full.regularidade.preparo='Dispensado';}
-    else if(full.regularidade.preparo==='Dispensado'){full.regularidade.preparo=full.regularidade.preparoAntesAuto||'';full.regularidade.preparoAntesAuto='';}
+    if(exempt){var alvo=full.regularidade.dpu?'Assistência da DPU':'Justiça gratuita';if(!(['Justiça gratuita','Assistência da DPU'].indexOf(full.regularidade.preparo)>=0))full.regularidade.preparoAntesAuto=full.regularidade.preparo;full.regularidade.preparo=alvo;}
+    else if(['Justiça gratuita','Assistência da DPU'].indexOf(full.regularidade.preparo)>=0){full.regularidade.preparo=full.regularidade.preparoAntesAuto||'';full.regularidade.preparoAntesAuto='';}
   }
-  if(path==='regularidade.preparo'&&value!=='Dispensado'&&!full.regularidade.dpu&&!full.regularidade.ajg)full.regularidade.preparoAntesAuto='';
+  if(path==='regularidade.preparo'&&['Justiça gratuita','Assistência da DPU'].indexOf(value)<0&&!full.regularidade.dpu&&!full.regularidade.ajg)full.regularidade.preparoAntesAuto='';
 }
 function buildText(){
   var c=full.caso,o=full.origem,r=full.recursoTipo,j=full.julgamento,k=kind();
