@@ -3,7 +3,7 @@
  "versao": 1,
  "nome": "07/12/2026",
  "date": "2026-12-07",
- "atualizadoEm": "2026-11-21T01:34:03.629Z",
+ "atualizadoEm": "2026-11-21T01:34:07.444Z",
  "itens": [
   {
    "cnj": "5000899-21.2023.4.03.6002",
@@ -2037,9 +2037,12 @@
      "pendencias": [
       {
        "desc": "A data 02/07/2002 vem da petição inicial dos exequentes (alegação de parte); o acervo assinado do gabinete traz 02/07/2001. Mantido o modelo.",
-       "ok": false,
+       "ok": true,
        "em": "2026-11-19",
-       "por": "Index · lote 2886"
+       "por": "Index · lote 2886",
+       "resolvidaEm": "2026-11-20",
+       "resolvidaPor": "Claude · revisão das pautas",
+       "resolucao": "Decisão registrada: mantida a data do acervo assinado do gabinete (02/07/2001)."
       }
      ]
     },
@@ -2049,7 +2052,8 @@
      "item": 45,
      "autos": 0
     },
-    "editadoPor": "Index"
+    "editadoPor": "Bruno",
+    "editadoEm": "2026-11-21T01:34:07.444Z"
    }
   },
   {
