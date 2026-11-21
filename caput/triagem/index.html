@@ -787,6 +787,7 @@ html[data-theme="dark"] #tri-prontuario .tp-s h3{color:#e6e2d6;background:linear
 .cg-cal .cc-ib{border-color:var(--b);color:var(--v);border-radius:7px}.cg-cal .cc-sp{background:none!important;border:0!important;box-shadow:none!important}
 .cg-cal .cc-wd{background:var(--p);color:var(--m);border-color:var(--l);font:500 10px "JetBrains Mono",monospace;letter-spacing:.12em}
 .cg-cal .cc-c{border-color:var(--l)!important}.cg-cal .cc-n{font:600 11.5px Figtree,sans-serif;color:var(--m2)}.cg-cal .cc-fe{background:#f6ece0!important}
+.cg-cal .cc-mini{padding:8px 14px 12px}.cg-cal .cc-mini .cc-c{min-height:64px}
 .cg-cal .cc-sl{margin-top:12px;border-top:1px solid var(--l);padding-top:10px}.cg-cal .cc-sl-t{display:flex;align-items:center;gap:6px;margin-bottom:6px}.cg-cal .cc-sl-t b{flex:1;font:700 12.5px Figtree,sans-serif;color:var(--v)}.cg-cal .cc-sl-t span{display:flex;gap:4px}.cg-cal .cc-sl-t .cc-ib{width:24px;height:24px;font-size:13px}
 .cg-cal .cc-sl-d{display:grid;grid-template-columns:38px minmax(0,1fr);gap:6px;padding:5px 4px;border-bottom:1px solid var(--l);cursor:pointer;align-items:start}.cg-cal .cc-sl-d:hover{background:var(--w)}.cg-cal .cc-sl-d.sel{background:var(--w);box-shadow:inset 3px 0 0 var(--v)}.cg-cal .cc-sl-d.fe{background:#f6ece0}
 .cg-cal .cc-sl-n{display:flex;flex-direction:column;align-items:center;line-height:1.05;font-size:10px;color:var(--m);text-transform:uppercase}.cg-cal .cc-sl-n b{font:700 15px Figtree,sans-serif;color:var(--tx)}.cg-cal .cc-sl-d.hj .cc-sl-n b{color:#fff;background:#a5382a;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:12px}
@@ -1278,7 +1279,7 @@ function pintaCal(forca) { const el = $('#cg-cal'), fo = $('#cg-forense'); if (f
   const sig = JSON.stringify([Dd, HOJE]); if (!forca && sig === CAL_SIG && CAL_EL && el.contains(CAL_EL)) return; CAL_SIG = sig;
   /* elemento novo a cada montagem: o calendário prende os ouvintes no elemento, e montar de novo no mesmo duplicaria os cliques */
   const novo = D.createElement('div'); novo.id = 'cc-cal'; if (CAL_EL && el.contains(CAL_EL)) CAL_EL.replaceWith(novo); else { el.innerHTML = ''; el.appendChild(novo); } CAL_EL = novo;
-  W.CMTCalendario.montar(CAL_EL, { sessoes: Dd.sess }, { meses: 2, semanaLateral: true, hoje: HOJE, progresso: Dd.prog, feriados: Dd.fer, recesso: Dd.rec,
+  W.CMTCalendario.montar(CAL_EL, { sessoes: Dd.sess }, { meses: 2, semanaLateral: true, semanaRecolhida: true, hoje: HOJE, progresso: Dd.prog, feriados: Dd.fer, recesso: Dd.rec,
     abrir: (dt) => { const x = Dd.sess.find((y) => y.date === dt); if (!x) return; try { sessionStorage.setItem('pt-ses', x._id); } catch (er) {} try { if (W.CMTPautas && W.CMTPautas.settings) W.CMTPautas.settings.sessId = x._id; } catch (er) {} ir('pautas'); } }); }
 /* rodapé do calendário: o calendário forense (expediente, feriados, sessões e julgadores, contagem dos marcos) */
 function calForense() {

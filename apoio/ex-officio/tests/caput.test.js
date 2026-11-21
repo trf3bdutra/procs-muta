@@ -69,7 +69,7 @@ test('Chefia: calendário completo do gabinete (o do motor) e regras de etiqueta
 test('Calendário da Chefia: dois meses lado a lado e visual do Caput',()=>{
   const fs=require('fs'),p=require('path'),cap=fs.readFileSync(p.join(__dirname,'../../../caput/triagem/index.html'),'utf8'),cal=fs.readFileSync(p.join(__dirname,'../../../caput/motor/assets/js/11-calendario.js'),'utf8');
   assert.ok(cal.includes('ex.meses===2&&st.passo===')&&cal.includes('function mes(vis,b0)'),'dois meses');
-  assert.ok(cap.includes('{ meses: 2, semanaLateral: true, hoje: HOJE,')&&cap.includes('.cg-cal .cc-2m{'),'Chefia usa dois meses');
+  assert.ok(cap.includes('{ meses: 2, semanaLateral: true, semanaRecolhida: true, hoje: HOJE,')&&cap.includes('.cg-cal .cc-2m{'),'Chefia usa dois meses');
 });
 
 test('Gravação só no cabeçalho: Pautas sem a faixa inicial; o indicador soma triagem e sessões, regras e equipe',()=>{
@@ -86,4 +86,10 @@ test('Regras gerais embutidas no visual do painel de Relatórios (altura fixa, m
 test('Calendário da Chefia: semana em lista dentro do painel Hoje, sem a faixa sob o calendário',()=>{
   const fs=require('fs'),p=require('path'),r=(x)=>fs.readFileSync(p.join(__dirname,'../../../',x),'utf8');
   assert.ok(r('caput/motor/assets/js/11-calendario.js').includes('function semanaLista(vis)')&&r('caput/triagem/index.html').includes('semanaLateral: true'),'semana no Hoje');
+});
+
+test('Calendário recolhido deixa a faixa da semana atual; Regras gerais com o fundo da coluna esquerda',()=>{
+  const fs=require('fs'),p=require('path'),r=(x)=>fs.readFileSync(p.join(__dirname,'../../../',x),'utf8');
+  assert.ok(r('caput/motor/assets/js/11-calendario.js').includes('function faixaSemana(vis)')&&r('caput/triagem/index.html').includes('semanaRecolhida: true'),'faixa recolhida');
+  assert.ok(r('caput/assets/js/regras-gerais.js').includes('.rg.embutida .rg-c{background:#fbfaf5'),'fundo igual');
 });

@@ -102,6 +102,20 @@ function montar(el,cal,ex){
     }
     return `<div class="cc-g">${h}</div>`;
   }
+  /* ex.semanaRecolhida: com o calendário recolhido, fica uma faixa com a semana atual (seg a sex), linhas e marcos das sessões */
+  function faixaSemana(vis){
+    const r=P(hoje), ref=r.getDay()%6?r:new Date(+r+(r.getDay()===6?2:1)*DIA), seg=new Date(+ref-((ref.getDay()+6)%7)*DIA), dias=[...Array(5)].map((_,i)=>iso(new Date(+seg+i*DIA)));
+    const fer=Object.fromEntries(ex.feriados||[]); vis=vis.filter(s=>marcos(s)[0].d<=dias[4]&&s.date>=dias[0]);
+    let h=dias.map(d=>`<div class="cc-wd">${FD(d,{weekday:'short'}).replace('.','')}</div>`).join('');
+    dias.forEach(d=>{ let lanes='';
+      vis.forEach(s=>{const ms=marcos(s), a=ms[0].d, b=s.date; let l='',dot='';
+        if(d>=a&&d<=b){const dash=ms.length<=2?`background:repeating-linear-gradient(90deg,${s.cor} 0 6px,transparent 6px 10px)`:`background:${s.cor}`;
+          l=`<i class="l" style="left:${d>a?0:'50%'};right:${d<b?0:'50%'};${dash};${s.date<hoje?'opacity:.45':''}"></i>`;}
+        const m=ms.find(x=>x.d===d); if(m){const e=estado(s,m); dot=bola(s,m,m.k==='date'?19:16)+`<span class="t" style="color:${e==='late'?'#c0392b':s.cor}">${({pautarAte:'Peço dia',inicioPreparacao:'Preparação',entregaMinutas:'Minutas',liberacao:'Liberação',date:'Sessão '+F(s.date)})[m.k]}</span>`;}
+        lanes+=`<div class="cc-lane">${l}${dot}</div>`;});
+      h+=`<div class="cc-c${fer[d]?' cc-fe':''}${d===hoje?' cc-hoje':''}" data-d="${d}"><span class="cc-n">${P(d).getDate()}${fer[d]?` <small>${fer[d]}</small>`:''}</span>${lanes}${doDia(d,'evento').map(x=>`<div class="cc-evt" style="--c:${x.s.cor}">${x.hora?x.hora+' ':''}${x.o}</div>`).join('')}</div>`; });
+    return `<div class="cc-mini"><div class="cc-g">${h}</div></div>`;
+  }
   /* ex.semanaLateral: a semana em lista compacta dentro do painel "Hoje", no lugar da faixa sob o calendário */
   function semanaLista(vis){
     const r0=P(st.semRef||st.dia||hoje), ref=r0.getDay()%6?r0:new Date(+r0+(r0.getDay()===6?2:1)*DIA), seg=new Date(+ref-((ref.getDay()+6)%7)*DIA);
@@ -248,7 +262,8 @@ function montar(el,cal,ex){
     const vis=ses;
     const dSel=st.dia||hoje, cap=x=>x[0].toUpperCase()+x.slice(1);
     const r0=P(st.semRef||dSel), rf=r0.getDay()%6?r0:new Date(+r0+(r0.getDay()===6?2:1)*DIA), sg=new Date(+rf-((rf.getDay()+6)%7)*DIA), sx=new Date(+sg+4*DIA);
-    const tit= st.passo==='dia'? cap(FD(dSel,{weekday:'long',day:'numeric',month:'long',year:'numeric'}))
+    const tit= st.min&&ex.semanaRecolhida? (()=>{const r=P(hoje),f=r.getDay()%6?r:new Date(+r+(r.getDay()===6?2:1)*DIA),g=new Date(+f-((f.getDay()+6)%7)*DIA),x=new Date(+g+4*DIA);return `Semana de ${g.getDate()}${g.getMonth()!==x.getMonth()?' de '+MESL(iso(g)):''} a ${x.getDate()} de ${MESL(iso(x))}`;})()
+      : st.passo==='dia'? cap(FD(dSel,{weekday:'long',day:'numeric',month:'long',year:'numeric'}))
       : st.passo==='sem'? `${sg.getDate()}${sg.getMonth()!==sx.getMonth()?' de '+MESL(iso(sg)):''} a ${sx.getDate()} de ${MESL(iso(sx))} de ${sx.getFullYear()}`
       : ex.meses===2? (()=>{const b=st.mes||hoje.slice(0,7),[y,m]=b.split('-').map(Number),n2=iso(new Date(y,m,15)).slice(0,7),f=x=>new Date(+P(x+'-15')).toLocaleDateString('pt-BR',{month:'long'});return cap(f(b))+' e '+f(n2)+' de '+n2.slice(0,4);})()
       : cap(new Date(+P((st.mes||hoje.slice(0,7))+'-15')).toLocaleDateString('pt-BR',{month:'long',year:'numeric'}));
@@ -262,6 +277,7 @@ function montar(el,cal,ex){
         </span></div>
       
       
+      ${st.min&&ex.semanaRecolhida?faixaSemana(ses):''}
       <div class="cc-body">${(()=>{const [e2,d2]=lateral();const b=st.mes||hoje.slice(0,7),[y,m]=b.split('-').map(Number),n2=iso(new Date(y,m,15)).slice(0,7),ML=x=>cap(new Date(+P(x+'-15')).toLocaleDateString('pt-BR',{month:'long'}));const grade=ex.meses===2&&st.passo==='mes'?`<div class="cc-2m"><div><b class="cc-mt">${ML(b)}</b>${mes(vis,b)}</div><div><b class="cc-mt">${ML(n2)}</b>${mes(vis,n2)}</div></div>`:mes(vis);const e3=ex.semanaLateral?e2.replace(/<\/div>\s*$/,semanaLista(vis)+'</div>'):e2;return `<div class="cc-top">${e3}<div>${grade}</div>${d2}</div>`})()}${ex.semanaLateral?'':semanaFaixa(vis)}</div>
       <div class="cc-lg" hidden>${MK.map(m=>`<span><i class="ti ${m[2]}"></i>${m[1]}</span>`).join('')}<span style="margin-left:auto">cheio = cumprido · pulsando = próximo · vermelho = vencido sem cumprir · tracejado = datas a definir · teclas ← → H A S M</span></div>
       <div class="cc-tip" hidden></div>${dialogo()}</div>`;
