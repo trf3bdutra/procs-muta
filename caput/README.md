@@ -1,4 +1,4 @@
-# monitor/ · motor e páginas do gabinete
+# caput/ · motor e páginas do gabinete
 
 O Ab Initio antigo (`index.html` com Acervo Central, Base do gabinete e Configurações) foi aposentado em 16/11/2026.
 `/init` agora só redireciona para a Triagem.
@@ -11,4 +11,4 @@ O Ab Initio antigo (`index.html` com Acervo Central, Base do gabinete e Configur
   `css/95-ficha-unica.css` e `js/regras-gerais.js` (diálogo Regras gerais).
 - `index.html` — redirecionamento de `/init` para `/triagem/`.
 
-Publicação: `.github/workflows/vercel-monitor.yml`.
+Publicação: `.github/workflows/vercel-caput.yml`.

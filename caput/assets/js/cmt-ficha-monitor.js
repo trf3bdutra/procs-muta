@@ -48,7 +48,7 @@
         (lista || []).forEach(function (it) {
           var r = registro(O, it.cnj);
           if (!r) { var l = linha(it.cnj); r = { processo: (l && (l.processo || l.Processo)) || it.cnj, origem: {}, triagem: {}, producao: {}, pauta: { sessoes: [] }, controles: {} }; O.registros.push(r); }
-          if (W.CMTFicha.aplicar(r, it.campos, 'CMT-monitor').length) n++;
+          if (W.CMTFicha.aplicar(r, it.campos, 'Caput').length) n++;
         });
         if (!n) return { alterados: 0 };
         O.registros.sort(function (a, b) { return String(a.processo).localeCompare(String(b.processo)); });

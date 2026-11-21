@@ -22,7 +22,7 @@ Chave de ligação: número CNJ (`processo`). Baixados e arquivados em definitiv
 | Pauta | `pauta` (+ `pauta.sessoes`) |
 | Controles especiais | `controles` (+ urgência em `triagem` e destino em `producao`) |
 
-**Controles especiais** (grupos oficiais da ficha, gerados em `scripts/ficha/gerar_ficha.py`; mesmo modelo no CMT-monitor e na Ex Officio):
+**Controles especiais** (grupos oficiais da ficha, gerados em `scripts/ficha/gerar_ficha.py`; mesmo modelo no Caput e na Ex Officio):
 
 | Grupo | Quando vale para o processo | Onde ficam os campos |
 |---|---|---|
@@ -32,13 +32,13 @@ Chave de ligação: número CNJ (`processo`). Baixados e arquivados em definitiv
 | Sobrestamento | tarefa de sobrestamento ou suspensão no PJe | `controles` · `Sobrestamento - *` |
 | Caso sensível | assunto ou etiqueta de saúde, ou `Sensível - Incluído` = Sim | `controles` · `Sensível - *` |
 
-**Diálogo da ficha** (o mesmo no CMT-monitor e na Ex Officio): `padrao/ficha-dialogo.js` + `padrao/ficha-dialogo.css`, no visual v198, desenhado a partir de `padrao/ficha.json`. `scripts/ficha/embutir.py` copia o módulo para `cmt-monitor.html` (com o adaptador `padrao/ficha-adaptador-monitor.js`, que grava direto na base pelo token) e para `apoio/ex-officio/index.html` (grava por `/api/pauta?ficha=1`). Na Ex Officio, a gaveta lateral passou a ser o prontuário de produção (preenchimento rápido); a ficha é o diálogo.
+**Diálogo da ficha** (o mesmo no Caput e na Ex Officio): `padrao/ficha-dialogo.js` + `padrao/ficha-dialogo.css`, no visual v198, desenhado a partir de `padrao/ficha.json`. `scripts/ficha/embutir.py` copia o módulo para `cmt-monitor.html` (com o adaptador `padrao/ficha-adaptador-monitor.js`, que grava direto na base pelo token) e para `apoio/ex-officio/index.html` (grava por `/api/pauta?ficha=1`). Na Ex Officio, a gaveta lateral passou a ser o prontuário de produção (preenchimento rápido); a ficha é o diálogo.
 
 **Inteiro teor (.txt do PJe)** na ficha: `padrao/inteiro-teor.js` (leitura, pré-seleção e sugestões do módulo v40 do app Gabinete CMT, sem mudança de regra). O painel tem três etapas (arquivo, documentos, conferência) e grava no operacional só os campos confirmados que existem no modelo; dados do acervo (PJe), recursos e outras peças aparecem na conferência, mas não são gravados. O .txt é lido só no navegador.
 
-**Calendário forense do gabinete** (`padrao/calendario-forense.js`, o do Controle de Pauta): feriados nacionais e da Justiça Federal (Lei 5.010/66), de MS, Carnaval, Semana Santa, Corpus Christi, recesso de 20/12 a 20/01 na contagem de prazos (CPC, art. 220), datas do calendário do gabinete marcadas “não conta para prazo” e suspensões do processo. O expediente fica em `acervo/sessoes/calendario.json` (`expediente`: `diasSemana`, `semExpediente`, `nomes`, `tipos`, `semPrazo`, `recesso`), editado no CMT-monitor (Sessões › Calendário do gabinete · expediente e prazos, com sugestão de feriados por ano). A ficha mostra a tempestividade calculada na Triagem; o inteiro teor, o prontuário de triagem do monitor e a prévia de prazo da Ex Officio usam a mesma contagem.
+**Calendário forense do gabinete** (`padrao/calendario-forense.js`, o do Controle de Pauta): feriados nacionais e da Justiça Federal (Lei 5.010/66), de MS, Carnaval, Semana Santa, Corpus Christi, recesso de 20/12 a 20/01 na contagem de prazos (CPC, art. 220), datas do calendário do gabinete marcadas “não conta para prazo” e suspensões do processo. O expediente fica em `acervo/sessoes/calendario.json` (`expediente`: `diasSemana`, `semExpediente`, `nomes`, `tipos`, `semPrazo`, `recesso`), editado no Caput (Sessões › Calendário do gabinete · expediente e prazos, com sugestão de feriados por ano). A ficha mostra a tempestividade calculada na Triagem; o inteiro teor, o prontuário de triagem do monitor e a prévia de prazo da Ex Officio usam a mesma contagem.
 
-**Campos da ficha 1.2.0**: sentença (data, reexame, tutela), origem (juízo, julgador, valor da causa), tabelas de recursos, contrarrazões, outras peças e procurações, data e conclusão livre do parecer do MPF, espécie (ED, agravo interno, juízo de retratação) com a decisão impugnada e os grupos próprios de cada espécie. `Tempest - Dobro` passa a 1 (simples) ou 2 (em dobro), como no CMT-monitor.
+**Campos da ficha 1.2.0**: sentença (data, reexame, tutela), origem (juízo, julgador, valor da causa), tabelas de recursos, contrarrazões, outras peças e procurações, data e conclusão livre do parecer do MPF, espécie (ED, agravo interno, juízo de retratação) com a decisão impugnada e os grupos próprios de cada espécie. `Tempest - Dobro` passa a 1 (simples) ou 2 (em dobro), como no Caput.
 
 Não há arquivos paralelos: a página Monocráticas, as urgências e a aba Controles especiais da Ex Officio leem e gravam esses campos no `acervo/operacional.json`.
 
@@ -248,7 +248,7 @@ Valores padrão do Painel Central ("Não Verificado", "Não se Aplica", "PENDENT
 
 `_pautaEntries` (entradas por sessão), `_pautaHistory`, `_recursos`, `_contras`, `_ementa`, `_autoMetaTags`, `_preparoAJG`, `_ajgFromDpu`, `_dpuAuto`, `_autoRestriction`, `_magistradoRestricao`, `_restricaoTipo`: vêm do Painel Central e ficam nas seções do operacional, sem exibição direta.
 
-## CMT-monitor · Acervo Central (busca avançada)
+## Caput · Acervo Central (busca avançada)
 
 - Modos de resultado: **Planilha** e **Triagem**. Na Triagem, cada processo aparece como o seu **Prontuário** (card triável).
 - Ao carregar, o motor lê `acervo/fonte.json` e sobrepõe `acervo/operacional.json` (`CMTOperacional.paraLinha`), convertendo os nomes da Ficha para os do app: `Nova sessão de destino` → `Sessão Destino`, `COMPLEXIDADE` → `Dificuldade`, `Preparo: Dispensado` com AJG/DPU → `AJG`, impedimento em tipo + nome → `Impedimento — Nome`.

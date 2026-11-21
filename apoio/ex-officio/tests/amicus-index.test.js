@@ -4,7 +4,7 @@ const root=path.resolve(__dirname,'../../..');
 const read=p=>fs.readFileSync(path.join(root,p),'utf8');
 const app=read('apoio/ex-officio/lotes/index.html');
 const api=read('apoio/ex-officio/api/_lote.js');
-const workflow=read('.github/workflows/vercel-monitor.yml');
+const workflow=read('.github/workflows/vercel-caput.yml');
 test('Collectio e backend possuem JavaScript sintaticamente válido',()=>{
  new vm.Script(api,{filename:'_lote.js'});
  const scripts=[...app.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g)];

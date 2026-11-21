@@ -4,7 +4,7 @@
 Uso:  python3 scripts/jurisprudencia/gerar_curados.py [--raiz .] [--saida DIR]
 
 Lê precedentes/precedentes.jsonl e precedentes/inteiros-teores/*.jsonl e grava, em DIR
-(padrão: precedentes/jurisprudencia), dois arquivos que o workflow vercel-monitor.yml publica
+(padrão: precedentes/jurisprudencia), dois arquivos que o workflow vercel-caput.yml publica
 em /jurisprudencia/ (não ficam no Git):
 
   curados.json.gz        {"schema": "gabcmt.jurisprudencia.curados", "registros": [...]}

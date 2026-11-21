@@ -1,8 +1,8 @@
 {
  "schema": "gabcmt.padrao.ficha",
  "versao": "1.2.0",
- "origem": "padrao/integracoes-ficha.md (Ficha do CMT-monitor), por scripts/ficha/gerar_ficha.py",
- "descricao": "Ficha única padrão de processo, usada pelo CMT-monitor e pela Ex Officio. Campos com \"tipo\": \"tabela\" são listas de linhas com as \"colunas\" indicadas. Grupos com \"quando\" só aparecem quando o campo indicado tem o valor. Campos com \"secao\" ficam em acervo/operacional.json (registro do processo, seção indicada: origem, triagem, producao, pauta ou controles) e são editáveis, salvo \"editavel\": false; campos com \"fonte\" vêm de acervo/fonte.json e são só leitura.",
+ "origem": "padrao/integracoes-ficha.md (Ficha do Caput), por scripts/ficha/gerar_ficha.py",
+ "descricao": "Ficha única padrão de processo, usada pelo Caput e pela Ex Officio. Campos com \"tipo\": \"tabela\" são listas de linhas com as \"colunas\" indicadas. Grupos com \"quando\" só aparecem quando o campo indicado tem o valor. Campos com \"secao\" ficam em acervo/operacional.json (registro do processo, seção indicada: origem, triagem, producao, pauta ou controles) e são editáveis, salvo \"editavel\": false; campos com \"fonte\" vêm de acervo/fonte.json e são só leitura.",
  "abas": [
   {
    "aba": "Processo",

@@ -1,5 +1,5 @@
 /* Muta · Ementário (mesma base do Ementário do Compêndio)
-   Fontes, publicadas no site do gabinete pelo workflow vercel-monitor.yml:
+   Fontes, publicadas no site do gabinete pelo workflow vercel-caput.yml:
      /jurisprudencia/curados.json.gz       ementário curado (precedentes/precedentes.jsonl)
      /jurisprudencia/curados-texto.json.gz inteiros teores dos curados (precedentes/inteiros-teores)
      /jurisprudencia/indice.json.gz        série histórica do Relator, resumida (1999 em diante)

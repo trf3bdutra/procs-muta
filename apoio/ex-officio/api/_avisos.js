@@ -1,4 +1,4 @@
-/* Avisos e notificações do gestor (acesso restrito: CMT_GESTOR). Arquivo apoio/equipe-avisos.json, o mesmo que o CMT-monitor usa.
+/* Avisos e notificações do gestor (acesso restrito: CMT_GESTOR). Arquivo apoio/equipe-avisos.json, o mesmo que o Caput usa.
    Servido por /api/notificacoes?gestao=1 (o plano Hobby da Vercel aceita no máximo 12 funções; arquivos com _ não contam).
    GET    /api/notificacoes?gestao=1             todos os avisos (gestão)
    POST   /api/notificacoes?gestao=1 {title, message, link, linkTxt, nivel, painel, notificacao, para[], ate, fixo}

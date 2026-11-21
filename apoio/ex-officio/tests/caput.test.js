@@ -2,9 +2,9 @@
 const {test}=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),vm=require('node:vm');
 const root=path.resolve(__dirname,'../../..');
 const read=p=>fs.readFileSync(path.join(root,p),'utf8');
-const page=read('monitor/triagem/index.html');
-const legacy=read('monitor/index.html');
-const wf=read('.github/workflows/vercel-monitor.yml');
+const page=read('caput/triagem/index.html');
+const legacy=read('caput/index.html');
+const wf=read('.github/workflows/vercel-caput.yml');
 test('Caput é a central principal e preserva módulos existentes',()=>{
   assert.ok(page.includes('<title>Caput · Central do Gabinete</title>'));
   for(const id of ['triagem','pautas','coordenacao','comunicacao','chefia']){
@@ -39,7 +39,7 @@ test('Triagem: aba única com visão geral recolhível, escaninhos como sub-aba 
 });
 
 test('Desempenho e início: motor escondido não redesenha; Chefia é a página inicial; só a Triagem espera o acervo; calendário na Chefia',()=>{
-  const fs=require('fs'),p=require('path'),cap=fs.readFileSync(p.join(__dirname,'../../../monitor/triagem/index.html'),'utf8'),mot=fs.readFileSync(p.join(__dirname,'../../../monitor/motor/index.html'),'utf8');
+  const fs=require('fs'),p=require('path'),cap=fs.readFileSync(p.join(__dirname,'../../../caput/triagem/index.html'),'utf8'),mot=fs.readFileSync(p.join(__dirname,'../../../caput/motor/index.html'),'utf8');
   assert.ok(mot.includes('__oculto()')&&mot.includes('this.__sujo = true')&&mot.includes('this.__vigiaVisivel()'),'motor sem redesenho escondido');
   assert.ok(cap.includes("return 'chefia';\n}")&&cap.includes("if (!PRONTO && (ABA === 'pautas' || naT))"),'Chefia inicial e só a Triagem espera');
   assert.ok(cap.includes('function calChefia()')&&cap.includes('data-cgcal=')&&cap.includes('data-cgses='),'calendário na Chefia');

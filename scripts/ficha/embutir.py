@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Embute a ficha única (padrao/ficha-dialogo.js + .css, com o calendário forense padrao/calendario-forense.js e a leitura do inteiro teor padrao/inteiro-teor.js) nos dois HTML que a usam: o CMT-monitor (cmt-monitor.html, no documento
+"""Embute a ficha única (padrao/ficha-dialogo.js + .css, com o calendário forense padrao/calendario-forense.js e a leitura do inteiro teor padrao/inteiro-teor.js) nos dois HTML que a usam: o Caput (cmt-monitor.html, no documento
 de fora, não no motor) e a Ex Officio (apoio/ex-officio/index.html). Fonte única: edite os arquivos de padrao/ e rode
    python3 scripts/ficha/embutir.py
 O monitor recebe também o adaptador (padrao/ficha-adaptador-monitor.js). O bloco fica entre <!-- cmt-ficha:inicio --> e <!-- cmt-ficha:fim --> e é trocado inteiro a cada execução."""
@@ -24,7 +24,7 @@ for rel in ['apoio/ex-officio/index.html', 'cmt-monitor.html']:
     p.write_text(s, encoding='utf-8')
     print(rel, 'ok', len(s))
 
-# CMT-monitor: o motor (iframe, guardado comprimido em var MOTOR) recebe o calendário forense e o CSS do editor do calendário do gabinete
+# Caput: o motor (iframe, guardado comprimido em var MOTOR) recebe o calendário forense e o CSS do editor do calendário do gabinete
 import base64, gzip, re
 mon = R / 'cmt-monitor.html'
 if not mon.exists(): print('cmt-monitor.html aposentado: motor embutido não atualizado'); raise SystemExit(0)

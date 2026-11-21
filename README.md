@@ -63,7 +63,7 @@ apoio/                         recursos de apoio à redação
 
 extensao/                      extensão Muta (Chrome/Edge, painel lateral ao lado do PJe): prontuário por processo, que segue o
                                processo aberto no PJe, e busca no Ementário do Compêndio (curados + série histórica);
-                               publicada em /extensao/muta-pje.zip pelo vercel-monitor.yml (ver extensao/README.md)
+                               publicada em /extensao/muta-pje.zip pelo vercel-caput.yml (ver extensao/README.md)
 
 padrao/                        regras técnicas da base
   esquema.json                 formato obrigatório de cada arquivo
@@ -74,7 +74,7 @@ padrao/                        regras técnicas da base
 
 gerar.py                       valida a base, atualiza o manifesto e importa exportações dos apps
 scripts/                       rotinas auxiliares (DataJud, catálogo, modelos-matriz, apps)
-cmt-monitor.html               CMT-monitor: menu Acervo com três páginas (Acervo Central: escaninhos à esquerda, com os fixos Aptos, Metas e Retirados de pauta; dados dos filtrados, com as fases do PJe; cartão Acervo filtrado e Busca avançada, em Planilha ou Prontuário, com Exportar; Panorama geral: indicadores em faixas, painel por blocos e relatórios; Planilha integral, só leitura), Seleção Prévia e Pautas de julgamento; botão Base do gabinete com a conexão e os dados; Configurações com as regras e a equipe
+cmt-monitor.html               Caput: menu Acervo com três páginas (Acervo Central: escaninhos à esquerda, com os fixos Aptos, Metas e Retirados de pauta; dados dos filtrados, com as fases do PJe; cartão Acervo filtrado e Busca avançada, em Planilha ou Prontuário, com Exportar; Panorama geral: indicadores em faixas, painel por blocos e relatórios; Planilha integral, só leitura), Seleção Prévia e Pautas de julgamento; botão Base do gabinete com a conexão e os dados; Configurações com as regras e a equipe
 cmt-fluxograma.html            CMT-fluxograma: fluxograma interativo, rotina do gabinete, competência e impedimentos, assuntos e procedimentos
 construtor.html · index.html   apps (ver observação abaixo)
 ```
@@ -102,7 +102,7 @@ Precedente: `acd-<20 dígitos do processo>-<AAAAMMDD do julgamento>-<espécie>` 
 
 ## Observação sobre os apps
 
-O **CMT-monitor** (`cmt-monitor.html`, antigo Painel Central) lê e grava nesta base, com um token do GitHub com permissão *Contents* (leitura e gravação):
+O **Caput** (`cmt-monitor.html`, antigo Painel Central) lê e grava nesta base, com um token do GitHub com permissão *Contents* (leitura e gravação):
 
 - lê `acervo/fonte.json`, o acervo fonte (DataJud e planilhas); em cada informação repetida vale a coluna do PJe, depois a do Power BI, depois a do DataJud;
 - tira a seção e o ramo do assunto do CNJ: `apoio/assuntos-cnj.json` (árvore da TPU, atualizada toda segunda-feira pelo workflow `cnj-assuntos`) e `apoio/regras/secoes.json` (RI TRF3, art. 10); a etiqueta de seção do PJe só gera alerta quando diverge;

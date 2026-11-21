@@ -7,7 +7,7 @@ const root = path.resolve(__dirname, '../../..');
 const read = file => fs.readFileSync(path.join(root, file), 'utf8');
 const page = read('apoio/ex-officio/lotes/index.html');
 const api = read('apoio/ex-officio/api/_lote.js');
-const workflow = read('.github/workflows/vercel-monitor.yml');
+const workflow = read('.github/workflows/vercel-caput.yml');
 test('Collectio CG fornece painel de todos os lotes com controles independentes', () => {
   for (const needle of ['function painelVisLotes(lotes)', 'function ligaVisLotes()', 'data-lve=', 'data-lvr=', "acao:'lote-visivel'"]) assert.ok(page.includes(needle), needle);
   assert.ok(page.includes('ligaVisLotes();'), 'controles devem receber eventos');

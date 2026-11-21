@@ -4,7 +4,7 @@
    a gravação no card do Controle de Pauta (applySuggestions), a IA opcional, o panorama e as estatísticas: a ficha
    (padrao/ficha-dialogo.js) conduz a conferência e grava no operacional, pelo modelo padrao/ficha.json.
    O .txt é lido só na memória do navegador; nada do texto integral é gravado: só os campos confirmados.
-   Embutido no CMT-monitor e na Ex Officio por scripts/ficha/embutir.py. */
+   Embutido no Caput e na Ex Officio por scripts/ficha/embutir.py. */
 (function(){'use strict';
 if(window.CMTInteiroTeor&&window.CMTInteiroTeor.parseTxt)return;
 

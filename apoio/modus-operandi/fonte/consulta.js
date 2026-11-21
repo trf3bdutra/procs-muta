@@ -53,7 +53,7 @@
   }
   function lerHash(){
     var h=location.hash.replace(/^#/,''),p={};h.split('&').forEach(function(kv){var i=kv.indexOf('=');if(i>0)p[kv.slice(0,i)]=kv.slice(i+1);});
-    if(p.caso){try{CQ.perfil=JSON.parse(decodeURIComponent(p.caso));CQ.fonte='enviado pelo cartão do CMT-monitor';}catch(er){}}
+    if(p.caso){try{CQ.perfil=JSON.parse(decodeURIComponent(p.caso));CQ.fonte='enviado pelo cartão do Caput';}catch(er){}}
     if(p.consulta){var m=/^(\d{4}-\d{2}-\d{2})\/(.+)$/.exec(decodeURIComponent(p.consulta));if(m){CQ.ses=m[1];CQ.item=m[2];}}
     return !!(p.caso||p.consulta);
   }

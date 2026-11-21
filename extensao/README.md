@@ -65,7 +65,7 @@ icones/            ícones 16, 32, 48 e 128
 
 ## Dados lidos do site (públicos)
 
-Publicados pelo workflow `.github/workflows/vercel-monitor.yml` em `https://www.gabinete-cmt.com/jurisprudencia/`:
+Publicados pelo workflow `.github/workflows/vercel-caput.yml` em `https://www.gabinete-cmt.com/jurisprudencia/`:
 
 | Arquivo | Origem |
 | --- | --- |

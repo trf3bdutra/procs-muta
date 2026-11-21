@@ -225,7 +225,7 @@ def montar(var):
     a = '  <div class="right">\n'
     SV = lambda d: '<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + d + '</svg>'
     # sem Notificações e Diligências na barra do Compendium (ficam no Ex Officio)
-    t = troca(t, a, a + '    <a class="mon-lnk" href="https://trf3-muta.vercel.app/" target="_blank" rel="noopener" title="Abrir o CMT-monitor" data-av hidden>Monitor ' + ARR + '</a>'
+    t = troca(t, a, a + '    <a class="mon-lnk" href="https://trf3-muta.vercel.app/caput/" target="_blank" rel="noopener" title="Abrir o Caput" data-av hidden>Caput ' + ARR + '</a>'
               + ('' if var == 'editor' else '<a class="mon-lnk" id="ed-lnk" href="/editor/" title="Abrir o editor do Compendium" hidden>Editor ' + ARR + '</a>') +
               '<button class="hb ic" id="eq-atu" type="button" onclick="location.reload()" title="Atualizar" aria-label="Atualizar">' + SV('<path d="M20 11a8 8 0 1 0-2.34 5.66"/><path d="M20 4v7h-7"/>') + '</button>\n')
     # barra unificada com o Ex Officio: cadernos no título e as seções na faixa de baixo

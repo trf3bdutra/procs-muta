@@ -1,4 +1,4 @@
-/* Solicitações de ausência da equipe (apoio/equipe-solicitacoes.json). O responsável decide no CMT-monitor, aba Equipe.
+/* Solicitações de ausência da equipe (apoio/equipe-solicitacoes.json). O responsável decide no Caput, aba Equipe.
    GET    /api/ausencias            minhas solicitações
    POST   /api/ausencias {de, ate, tipo, motivo}
    DELETE /api/ausencias?id=…       cancela uma solicitação minha ainda pendente */
