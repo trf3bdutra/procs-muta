@@ -176,7 +176,7 @@ test('extensão 0.18.1: gabinete.js define N() (o cartão compara o tipo de julg
 test('extensão 0.19: catálogo de etiquetas do gabinete, regras avaliadas e rotas do site', () => {
   const man = JSON.parse(read('extensao/manifest.json'));
   assert.ok(man.permissions.includes('notifications'), 'permissão de notificações');
-  assert.deepEqual(man.content_scripts[0].js.slice(0, 2), ['etiquetas.js', 'conteudo-pje.js'], 'etiquetas.js antes do leitor');
+  { const J = man.content_scripts[0].js; assert.equal(J[0], 'etiquetas.js', 'etiquetas.js antes do leitor'); assert.ok(J.indexOf('conteudo-pje.js') > 0); }
   assert.match(read('extensao/fundo.js'), /importScripts\('etiquetas\.js'\)/);
   const ordem = [...read('extensao/painel.html').matchAll(/<script src="([^"]+)"/g)].map(m => m[1]);
   assert.ok(ordem.indexOf('sessao.js') < ordem.indexOf('etiquetas.js') && ordem.indexOf('etiquetas.js') < ordem.indexOf('alertas.js') && ordem.indexOf('alertas.js') < ordem.indexOf('gabinete.js'), 'ordem do painel');
@@ -355,4 +355,24 @@ test('extensão 0.29: Minuta-matriz sem seleção confere só a estrutura; folha
   ['janela.html', 'janela.js', 'janela.css'].forEach(f => assert.ok(fs.existsSync(path.join(ext, f)), f));
   const p = read('extensao/conteudo-pje.js');
   assert.match(p, /\['urg', 'ampulheta', 'Urgência', 'al'\]/); assert.match(p, /'Min\.': 'lapis', 'Corr\.': 'check', 'Lib\.': 'enviar'/); assert.match(p, /rot === 'Min\.'/);
+});
+
+test('extensão 0.30: tipo de caso e etiquetas sugeridas da triagem no cartão; quadro do Desembargador na coluna Para assinatura, com cópia ao gestor', () => {
+  const F = require(path.join(root, 'apoio/ex-officio/api/_ficha.js'));
+  assert.equal(F.tipoCasoDe('3 · Apelação da União · Previdenciário — aposentadoria por incapacidade permanente; laudo'), 'Previdenciário - aposentadoria por incapacidade permanente');
+  const S = F.etqTriagem({ 'Etiquetas sugeridas': 'APTO', Preparo: 'Não Recolhido', Tema: 'Saúde · Fornecimento de medicamento', 'Urgência': 'Tutela de urgência', 'Urgência - Apreciação': 'Pendente' }, { 'Seção Competente': '2ª Seção', 'Etiquetas Originais': 'AI' });
+  assert.deepEqual(S.map(x => x.e), ['APTO', '2ª Seção', 'ver. preparo', 'LIMINAR PENDENTE', 'Saúde - Fornecimento de medicamento']);
+  assert.ok(S[S.length - 1].caso);
+  assert.match(read('apoio/ex-officio/api/_ficha.js'), /tipoCaso: tipoCasoDe\(t\.Tema\)[\s\S]*etqTri: etqTriagem\(t, f\)/);
+  const c = read('extensao/conteudo-pje.js');
+  assert.match(c, /class="m-tc"/); assert.match(c, /class="m-sgs"><small>Sugeridas/); assert.match(c, /function quadroCmt\(\)/); assert.match(c, /id = 'hero-cmt'/);
+  const cm = read('apoio/ex-officio/api/_cmt.js');
+  assert.match(cm, /async function copiaGestor\(u, titulo, texto\)/);
+  assert.equal((cm.match(/if \(b\.origem === 'extensao'\) await copiaGestor/g) || []).length, 3, 'assinar, devolver e responder');
+  const fu = read('extensao/fundo.js');
+  assert.match(fu, /\/api\/painel\?cmt=1/); assert.match(fu, /origem: 'extensao'/); assert.match(fu, /'muta-cmt', \{ periodInMinutes: 1/);
+  const vm = require('vm'), ctx = { window: {}, self: {} }; ctx.window.MutaEtiquetas = null; vm.createContext(ctx); vm.runInContext(read('extensao/cmt.js'), ctx);
+  const h = ctx.window.MutaCmt.html({ em: '2026-11-21T20:00:00Z', des: true, assinatura: [{ cnj: '5001234-56.2026.4.03.6000', tipoAto: 'Decisão terminativa', servidor: 'José Victor', corretor: 'Bruno', dataMinuta: '2026-11-19', dataCorrecao: '2026-11-20', desde: '2026-11-20', aguarda: 1, urg: { tipo: 'Liminar', espera: 3 } }], duvidas: [{ id: 'pen-1', titulo: 'Honorários', de: 'Dalete' }], liberacao: [] });
+  assert.match(h, /Para assinatura/); assert.match(h, /Decisão terminativa/); assert.match(h, /data-hcm="assinar"/); assert.match(h, /cópia ao gestor/);
+  assert.match(read('extensao/manifest.json'), /"cmt\.js"/); assert.match(read('extensao/painel.html'), /cmt\.js/);
 });

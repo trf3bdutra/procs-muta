@@ -5,6 +5,13 @@ Nome desde a 0.19.3 (antes: Muta). Os identificadores internos (`window.Muta*`, 
 Extensão do Chrome/Edge (Manifest V3) que abre o **Muta** num painel lateral, ao lado dos autos e das tarefas do PJe 2º grau do TRF-3.
 Base: o HTML independente *muta-independente-prontuario-completo* (Prontuário + Acervo).
 
+## O que muda na 0.30 · tipo de caso, etiquetas sugeridas e quadro do Desembargador
+
+- Cartão da lista do PJe: o **tipo de caso** da triagem do app abre o bloco do HERO18810; abaixo, as **etiquetas sugeridas** pela triagem (as registradas no prontuário e as calculadas: seção, preparo, representação, tempestividade, MPF, liminar, monocrática e o próprio tipo de caso) e pelo catálogo, só as que ainda não estão no cartão. Ficam tracejadas na cor do tipo; o clique copia uma, "copiar N" copia todas. O PJe não é alterado.
+- Quadro do Desembargador (perfil desembargador e gestor): as decisões submetidas à assinatura e as dúvidas da página /cmt aparecem no topo da coluna **Para assinatura** do painel do usuário do PJe e no sino, aba "Desembargador". Cada item traz ato, tipo de julgamento, urgência, meta, prazo, dias de espera, título e tópico-síntese, caso e partes, nota de atenção do revisor, quem minutou e corrigiu e a trilha. Ações: marcar assinada (no app), devolver com apontamento e responder dúvida. Cada ação feita pela extensão vai com cópia ao gestor.
+- Atualização a cada minuto; o que chega de novo vira notificação para o Desembargador. Nos cartões da lista, o selo "Para assinar" marca os processos submetidos.
+- Liga e desliga em sino › Prazos › "Quadro do Desembargador no PJe". Se a coluna não for achada, o console mostra `[HERO18810] coluna "Para assinatura" não encontrada nesta tela`.
+
 ## O que muda na 0.29 · Minuta: estrutura, folha e janela grande; cartões no desenho do app
 
 - Minuta-matriz: nenhuma matriz vem escolhida; sem escolha, o texto do editor é conferido só com a estrutura do gabinete

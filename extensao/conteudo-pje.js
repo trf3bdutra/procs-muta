@@ -66,7 +66,7 @@
     return null;
   }
   /* cliques no editor, em campos de texto ou em documentos não escolhem processo (o texto da minuta cita outros números) */
-  var FORA = '[contenteditable], .ProseMirror, textarea, select, input:not([type="checkbox"]), .ck-editor, .cke, .cke_editable, iframe, embed, object';
+  var FORA = '[contenteditable], .ProseMirror, textarea, select, input:not([type="checkbox"]), .ck-editor, .cke, .cke_editable, iframe, embed, object, .hcm';
   function escolher(el) {
     if (!el || !el.closest || el.closest(FORA)) return;
     var c = cartaoDe(el);
@@ -425,6 +425,8 @@
      dias na tarefa, meta, sobrestamento, caso sensível e as etiquetas do gabinete que faltam no PJe (clique copia). */
   var ENR = { dados: {}, cat: null, cfg: null, t: 0, pedindo: false, tm: 0, pedidos: {} };
   var LISTA = location.host === 'frontend-pje.app.trf3.jus.br';
+  function nrm(t) { return String(t || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/\s+/g, ' ').trim(); }
+  var CMTL = { d: null };
   function escS(t) { return String(t == null ? '' : t).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
   function icCss() {
     var E = window.MutaEtiquetas; if (!E || !E.ICONES) return '';
@@ -452,6 +454,10 @@
       '.muta-selos .hs:hover{background:#eef3f7;color:#1f4f6b}' +
       '.muta-selos .hs b{position:absolute;top:-5px;right:-5px;min-width:13px;height:13px;padding:0 3px;box-sizing:border-box;border-radius:7px;background:#e8710a;color:#fff;font:800 9px/13px system-ui,sans-serif;text-align:center}' +
       '.muta-selos .hs-al{color:#b0402f}.muta-selos .hs-al b{background:#c62828}.muta-selos .hs-mu b{background:#4a7ea6}' +
+      '.muta-selos .m-tc{flex-basis:100%;border:0;background:none;padding:0;gap:5px;color:#1f4f6b;white-space:normal}.muta-selos .m-tc small{font:700 8px system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#8a97a3;flex:none}.muta-selos .m-tc b{font:600 11px/1.25 system-ui,sans-serif}' +
+      '.muta-selos .m-as{background:#efe9fb;border-color:#cdbcf0;color:#4b2f8f}.muta-selos .m-as-u{background:#fdecea;border-color:#efb3a9;color:#a8321f}' +
+      '.muta-selos .m-sgs{flex-basis:100%;display:flex;flex-wrap:wrap;gap:3px;align-items:center;margin-top:1px}.muta-selos .m-sgs>small{font:700 8px system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#8a97a3;margin-right:2px}' +
+      '.muta-selos .m-sg{border:1.2px dashed color-mix(in srgb,var(--hc) 60%,#fff);color:var(--hc);background:#fff;border-radius:6px;font-weight:700}.muta-selos .m-sg:hover{background:color-mix(in srgb,var(--hc) 10%,#fff)}.muta-selos .m-sg-t{--hc:#1f4f6b;border-style:solid}' +
       '.muta-selos.hero-autos{display:inline-flex;margin:0 0 0 8px;vertical-align:middle}' +
       '.muta-selos .m-pes{display:inline-flex;align-items:center;gap:5px;padding:2px 9px 2px 3px;border-radius:14px;border:1px solid #e0dccc;background:#fff;color:#1d2730}' +
       '.muta-selos .m-pes>i{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font:700 9px system-ui,sans-serif;font-style:normal}' +
@@ -508,6 +514,10 @@
   function selosHtml(r, cat, texto) {
     var E = window.MutaEtiquetas; if (!E || !r) return '';
     r = E.preparar(r); var cfg = ENR.cfg || E.CFG, h = [], et = E.etapa(r);
+    /* tipo de caso (triagem do app): primeira linha do bloco, para ler o caso sem abrir */
+    if (r.tipoCaso) h.push('<span class="m-tc" title="Tipo de caso na triagem' + (r.tema && r.tema !== r.tipoCaso ? ': ' + escS(r.tema) : '') + '">' + ico('balanca', 11) + '<small>Tipo de caso</small><b>' + escS(r.tipoCaso) + '</b></span>');
+    var cmt = (CMTL.d && CMTL.d[r._k]) || null;
+    if (cmt) h.push('<span class="m-as' + (cmt.urg ? ' m-as-u' : '') + '" title="Submetida à assinatura do Desembargador' + (cmt.desde ? ' em ' + escS(cmt.desde.split('-').reverse().join('/')) : '') + '">' + ico('lapis', 11) + 'Para assinar' + (cmt.tipoAto ? ' · ' + escS(cmt.tipoAto) : '') + (cmt.aguarda != null ? ' · ' + cmt.aguarda + ' d' : '') + '</span>');
     if (et) h.push('<span class="m-et' + (/^Liberado|Assinada/.test(et) ? ' m-ok' : '') + '" title="Etapa no gabinete (ficha do processo)">' + escS(et) + '</span>');
     /* designação (como etiqueta) e trilha de produção: minutado (data) · corrigido · liberado */
     /* no desenho do app: avatar com as iniciais, rótulo pequeno (MINUTA / CORREÇÃO) e o primeiro nome */
@@ -522,6 +532,16 @@
     }
     r._falta = cat ? E.faltando(r, cat, texto) : [];
     h.push(sinaisHtml(r._k, r));
+    /* etiquetas sugeridas pela triagem do app e pelo catálogo, que ainda não estão no cartão: o clique copia (o PJe não é alterado) */
+    var tem = nrm((r.etqPje || '') + ' ' + (texto || '')), sg = [];
+    (r.etqTri || []).concat((r._falta || []).map(function (x) { return { e: x.nome, por: 'catálogo do gabinete' + (x.descricao ? ': ' + x.descricao : '') }; })).forEach(function (x) {
+      if (!x || !x.e || tem.indexOf(nrm(x.e)) >= 0 || sg.some(function (y) { return nrm(y.e) === nrm(x.e); })) return; sg.push(x);
+    });
+    if (sg.length) {
+      var chips = sg.slice(0, 8).map(function (x) { var c = E.categoriaDe ? E.categoriaDe(x.e, ENR.cat) : null;
+        return '<span class="m-sg" style="--hc:' + escS((c && c.cor) || '#546e7a') + '" data-muta-copia="' + escS(x.e) + '" title="Sugerida: ' + escS(x.por || 'triagem') + ' · clique para copiar">' + ico('etiqueta', 10) + escS(x.e) + '</span>'; });
+      h.push('<div class="m-sgs"><small>Sugeridas</small>' + chips.join('') + (sg.length > 1 ? '<span class="m-sg m-sg-t" data-muta-copia="' + escS(sg.map(function (x) { return x.e; }).join(', ')) + '" title="Copia todas as sugeridas, separadas por vírgula">copiar ' + sg.length + '</span>' : '') + '</div>');
+    }
     return h.join('');
   }
   function pedirSelos(ks, textos) {
@@ -565,6 +585,7 @@
       box.setAttribute('data-sig', html); box.innerHTML = html;
     });
     diag(C);
+    try { quadroCmt(); } catch (e) {}
   }
   /* os selos vão logo abaixo da linha do número do processo: o cartão do PJe tem altura limitada e recolhe o fim */
   function ancora(c) {
@@ -755,13 +776,79 @@
     COL.btn.textContent = oculta ? '⇥ Mostrar a lista' : '⇤ Ocultar a lista';
     COL.btn.title = oculta ? 'Mostrar de novo a coluna da lista de processos' : 'Recolher a coluna da lista de processos para dar espaço ao editor (HERO18810)';
   }
+  /* ---------- 0.30 · quadro do Desembargador na coluna "Para assinatura" do painel do usuário ----------
+     Só para o perfil desembargador e para o gestor (o service worker decide). Vai no topo da coluna cujo título fala em
+     assinatura; nos cartões da lista, o selo "Para assinar" marca os processos submetidos à assinatura no app. */
+  var RX_AS = /^(para assinatura|para assinar|assinaturas?|assinar( decis[ãa]o| minuta| documentos?)?|aguardando assinatura|documentos para assinatura|minutas para assinatura)\b/i;
+  function tituloAssinatura() {
+    if (CMTL.h && document.contains(CMTL.h) && RX_AS.test((CMTL.h.textContent || '').trim())) return CMTL.h;
+    CMTL.h = null;
+    var w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, { acceptNode: function (x) { var t = x.nodeValue.trim(); return t.length > 5 && t.length < 60 && /assin/i.test(t) ? 1 : 3; } }), n, c = 0;
+    while ((n = w.nextNode()) && c < 80) {
+      c++;
+      var el = n.parentElement; if (!el || el.closest('.hcm, .muta-selos, ' + FORA)) continue;
+      if (!RX_AS.test(n.nodeValue.replace(/\(\d+\)|\d+\s*$/g, '').trim())) continue;
+      /* sobe enquanto o pai ainda é só o título (com contador, ícone) */
+      for (var i = 0; i < 3 && el.parentElement && (el.parentElement.textContent || '').replace(/\s+/g, ' ').trim().length < 70; i++) el = el.parentElement;
+      var q = el.getBoundingClientRect(); if (q.width < 20 || q.height < 8) continue;
+      CMTL.h = el; return el;
+    }
+    return null;
+  }
+  /* a coluna: o ancestral estreito (até 60% da tela) que fica abaixo do título */
+  function colunaDe(h) {
+    var vw = window.innerWidth || 1200;
+    for (var e = h.parentElement, i = 0; e && e !== document.body && i < 10; e = e.parentElement, i++) {
+      var q = e.getBoundingClientRect(); if (q.width > vw * 0.62) break;
+      if (q.height > 140 && e.children.length >= 2) return { col: e, depois: filhoQueContem(e, h) };
+    }
+    return { col: null, depois: h };
+  }
+  function filhoQueContem(col, h) { for (var e = h; e && e.parentElement !== col; e = e.parentElement) {} return e || h; }
+  function cmtPedir(forcar) {
+    if (CMTL.pedindo) return; CMTL.pedindo = true;
+    try { chrome.runtime.sendMessage({ tipo: 'muta-cmt', forcar: !!forcar }).then(function (v) { CMTL.pedindo = false; cmtDados(v); }, function () { CMTL.pedindo = false; }); } catch (e) { CMTL.pedindo = false; }
+  }
+  function cmtDados(v) {
+    CMTL.v = v; CMTL.t = Date.now(); CMTL.d = {};
+    ((v && v.assinatura) || []).forEach(function (a) { CMTL.d[String(a.cnj || '').replace(/\D/g, '')] = a; });
+    quadroCmt(); agendarSelos();
+  }
+  function quadroCmt() {
+    if (!LISTA || !window.MutaCmt) return;
+    var v = CMTL.v, box = document.getElementById('hero-cmt');
+    if (!v || v.fora || (ENR.cfg && ENR.cfg.cmtPje === false)) { if (box) box.remove(); return; }
+    var h = tituloAssinatura();
+    if (!h) { if (box) box.remove(); if (CMTL.diag !== 'sem') { CMTL.diag = 'sem'; try { console.info('[HERO18810] coluna "Para assinatura" não encontrada nesta tela'); } catch (e) {} } return; }
+    window.MutaCmt.css(document);
+    if (!box || !document.contains(box)) {
+      box = document.createElement('div'); box.id = 'hero-cmt';
+      var o = colunaDe(h); (o.depois || h).insertAdjacentElement('afterend', box);
+      window.MutaCmt.bind(box, function (m) { return chrome.runtime.sendMessage(m); }, function (dados, alternar) {
+        if (alternar) { try { localStorage.setItem('hero18810:cmt-recolhido', CMTL.rec ? '0' : '1'); } catch (e) {} }
+        if (dados) cmtDados(dados); else pintarCmt(true);
+      });
+      if (CMTL.diag !== 'sim') { CMTL.diag = 'sim'; try { console.info('[HERO18810] quadro do Desembargador em', (h.textContent || '').trim().slice(0, 60)); } catch (e) {} }
+    }
+    pintarCmt();
+  }
+  function pintarCmt(forca) {
+    var box = document.getElementById('hero-cmt'); if (!box) return;
+    try { CMTL.rec = localStorage.getItem('hero18810:cmt-recolhido') === '1'; } catch (e) {}
+    var html = window.MutaCmt.html(CMTL.v, { pje: true, recolhido: CMTL.rec });
+    if (!forca && box.getAttribute('data-sig') === html) return;
+    /* não repinta enquanto alguém escreve no quadro */
+    var foco = document.activeElement; if (!forca && foco && box.contains(foco) && /TEXTAREA|SELECT|INPUT/.test(foco.tagName)) return;
+    box.setAttribute('data-sig', html); box.innerHTML = html;
+  }
+  if (LISTA) { setTimeout(function () { cmtPedir(); }, 1500); setInterval(function () { if (!document.hidden) cmtPedir(); }, 60e3); }
   function agendarSelos() { if (!LISTA) return; clearTimeout(ENR.tm); ENR.tm = setTimeout(function () { try { aplicarSelos(); } catch (e) {} }, 700); }
   if (LISTA) {
     document.addEventListener('click', function (e) {
       var b = e.target && e.target.closest && e.target.closest('.muta-selos [data-muta-copia]'); if (!b) return;
       e.preventDefault(); e.stopPropagation();
-      var t = b.getAttribute('data-muta-copia'), o = b.textContent;
-      (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(function () { b.textContent = 'copiado ✓'; setTimeout(function () { b.textContent = o; }, 1300); }, function () {});
+      var t = b.getAttribute('data-muta-copia'), o = b.innerHTML;
+      (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(function () { b.textContent = 'copiado'; setTimeout(function () { b.innerHTML = o; }, 1300); }, function () {});
     }, true);
     try { chrome.runtime.onMessage.addListener(function (msg) { if (msg && msg.tipo === 'muta-selos-atualizar') { ENR.pedidos = {}; ENR.cfg = null; agendarSelos(); } }); } catch (e) {}
   }

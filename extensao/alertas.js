@@ -91,7 +91,7 @@
   function abrir(s) {
     var p = $('tu-pop'); if (!p) return;
     p.hidden = !s; $('tu-sino').setAttribute('aria-expanded', s ? 'true' : 'false');
-    if (s) { try { chrome.runtime.sendMessage({ tipo: 'muta-app-ler' }).catch(function () {}); } catch (e) {} Promise.all([lerAlertas(), lerCfg(), lerCatalogo()]).then(pintar); pintar(); }
+    if (s) { try { chrome.runtime.sendMessage({ tipo: 'muta-app-ler' }).catch(function () {}); } catch (e) {} Promise.all([lerAlertas(), lerCfg(), lerCatalogo(), lerCmt()]).then(pintar); pintar(); }
   }
   function quando(iso) { if (!iso) return ''; var d = new Date(iso); return isNaN(d) ? '' : d.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' }) + ' ' + d.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }); }
   function fmtCnj(k) { var d = String(k).replace(/\D/g, ''); return d.length === 20 ? d.replace(/^(\d{7})(\d{2})(\d{4})(\d)(\d{2})(\d{4})$/, '$1-$2.$3.$4.$5.$6') : k; }
@@ -99,12 +99,20 @@
   function pintar() {
     var p = $('tu-pop'); if (!p) return;
     var gst = A.gestor0 || (ses && ses.estado().gestor);
-    var abas = [['al', 'PJe'], ['app', 'Gabinete']].concat(gst ? [['ch', 'Chegadas']] : []).concat([['pz', 'Prazos'], ['et', 'Etiquetas'], ['ver', 'Versão']]);
+    var cm = A.cmt && !A.cmt.fora && !A.cmt.erro, nCm = cm ? (A.cmt.assinatura || []).length + (A.cmt.duvidas || []).length : 0;
+    var abas = (cm && A.cmt.des ? [['cm', 'Desembargador']] : []).concat([['al', 'PJe'], ['app', 'Gabinete']]).concat(gst ? [['ch', 'Chegadas']] : []).concat(cm && !A.cmt.des ? [['cm', 'Assinatura']] : []).concat([['pz', 'Prazos'], ['et', 'Etiquetas'], ['ver', 'Versão']]);
+    if (A.aba === 'cm' && !cm) A.aba = 'al';
     if (A.aba === 'ch' && !gst) A.aba = 'al';
-    var h = '<div class="ap-t" role="tablist">' + abas.map(function (a) { return '<button type="button" role="tab" class="ap-tab-' + a[0] + '" data-ap="' + a[0] + '" aria-selected="' + (A.aba === a[0]) + '">' + a[1] + (a[0] === 'al' && A.itens.length ? ' <i>' + A.itens.length + '</i>' : a[0] === 'app' && appPend().length ? ' <i>' + appPend().length + '</i>' : a[0] === 'ch' && A.cheg.length ? ' <i>' + A.cheg.length + '</i>' : '') + '</button>'; }).join('') +
+    var h = '<div class="ap-t" role="tablist">' + abas.map(function (a) { return '<button type="button" role="tab" class="ap-tab-' + a[0] + '" data-ap="' + a[0] + '" aria-selected="' + (A.aba === a[0]) + '">' + a[1] + (a[0] === 'al' && A.itens.length ? ' <i>' + A.itens.length + '</i>' : a[0] === 'app' && appPend().length ? ' <i>' + appPend().length + '</i>' : a[0] === 'ch' && A.cheg.length ? ' <i>' + A.cheg.length + '</i>' : a[0] === 'cm' && nCm ? ' <i>' + nCm + '</i>' : '') + '</button>'; }).join('') +
       '<button type="button" class="ap-x" data-ap-x title="Fechar" aria-label="Fechar">×</button></div>';
-    h += '<div class="ap-c">' + (A.aba === 'al' ? pAlertas() : A.aba === 'app' ? pApp() : A.aba === 'ch' ? pChegadas() : A.aba === 'pz' ? pPrazos() : A.aba === 'ver' ? pVersao() : pEtiquetas()) + '</div>';
+    h += '<div class="ap-c">' + (A.aba === 'cm' ? '<div id="ap-cmt">' + (window.MutaCmt ? window.MutaCmt.html(A.cmt) : '') + '</div>' : A.aba === 'al' ? pAlertas() : A.aba === 'app' ? pApp() : A.aba === 'ch' ? pChegadas() : A.aba === 'pz' ? pPrazos() : A.aba === 'ver' ? pVersao() : pEtiquetas()) + '</div>';
     p.innerHTML = h;
+    var bx = $('ap-cmt');
+    if (bx && window.MutaCmt) { window.MutaCmt.css(document); window.MutaCmt.bind(bx, function (m) { return chrome.runtime.sendMessage(m); }, function (v) { if (v) A.cmt = v; pintar(); }); }
+  }
+  function lerCmt(forcar) {
+    if (!temChrome) return Promise.resolve();
+    return chrome.runtime.sendMessage({ tipo: 'muta-cmt', forcar: !!forcar }).then(function (v) { A.cmt = v || null; if (A.cmt && A.cmt.des && !A.abaCm) { A.abaCm = 1; A.aba = 'cm'; } }, function () {});
   }
   function pAlertas() {
     if (!A.itens.length) return '<p class="muted ap-v">Nenhum alerta. Os alertas surgem quando a lista de tarefas do PJe é aberta com o HERO18810 ligado.</p>';
@@ -142,6 +150,7 @@
       num('tarefaDias', 'Tempo na tarefa', 'dias até o aviso (vermelho no dobro)') +
       lig('selos', 'Selos na lista de tarefas do PJe', 'etapa, designação, alertas e etiquetas que faltam') +
       lig('etqEstilo', 'Redesenho das etiquetas do PJe', 'cada tipo com cor, estilo e ícone (sino › Etiquetas)') +
+      (A.cmt && !A.cmt.fora ? lig('cmtPje', 'Quadro do Desembargador no PJe', 'decisões para assinatura e dúvidas, no topo da coluna "Para assinatura" da lista') : '') +
       lig('avisosApp', 'Avisos do app do gabinete', 'urgentes e importantes viram notificação (ícone azul, título "Gabinete")') +
       (A.gestor0 || (ses && ses.estado().gestor) ? lig('chegadas', 'Chegadas com urgência ou liminar (só gestor)', 'processo novo na lista do PJe com pedido urgente avisa na hora; os demais só entram no relatório') +
         lig('relatorio', 'Relatório de chegadas no fim do dia', 'notificação com o total do dia, que abre o relatório') +

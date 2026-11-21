@@ -14,7 +14,7 @@ function injetarNasAbasAbertas() {
   if (!chrome.scripting || !chrome.tabs) return;
   chrome.tabs.query({ url: ['https://pje2g.trf3.jus.br/*', 'https://frontend-pje.app.trf3.jus.br/*'] }).then(function (abas) {
     (abas || []).forEach(function (t) {
-      chrome.scripting.executeScript({ target: { tabId: t.id, allFrames: true }, files: ['etiquetas.js', 'conteudo-pje.js'] }).catch(function () {});
+      chrome.scripting.executeScript({ target: { tabId: t.id, allFrames: true }, files: ['etiquetas.js', 'cmt.js', 'conteudo-pje.js'] }).catch(function () {});
     });
   }).catch(function () {});
 }
@@ -259,5 +259,70 @@ chrome.runtime.onMessage.addListener(function (msg, sender, responder) {
       return r.json().catch(function () { return {}; }).then(function (j) { if (!r.ok) throw new Error(j.erro || ('não gravou (' + r.status + ')')); if ((j.recusados || []).length) throw new Error('sem permissão para gravar este campo'); });
     });
   }).then(function () { delete RES[k]; return resumos([k]); }).then(function (R) { responder({ ok: true, resumo: R[k] || null }); }, function (e) { responder({ erro: e && e.message || String(e) }); });
+  return true;
+});
+
+
+/* ---------- 0.30 · quadro do Desembargador: decisões para assinatura e dúvidas (página /cmt) ----------
+   Para o perfil desembargador e para o gestor. Lido a cada minuto (GET /api/painel?cmt=1); o que chega de novo
+   vira notificação só para o Desembargador. As ações (assinar, devolver, responder) vão com origem "extensao",
+   e o servidor manda cópia ao gestor. Os dados ficam em storage.session › muta-cmt, para o PJe e o sino. */
+var CMTD = { t: 0, v: null, q: null };
+function perfilCmt() {
+  if (CMTD.q && Date.now() - CMTD.q.t < 600e3) return Promise.resolve(CMTD.q.j);
+  return fetch(SITE + '/api/login', { credentials: 'include', cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : {}; }, function () { return {}; }).then(function (j) { CMTD.q = { t: Date.now(), j: j || {} }; return CMTD.q.j; });
+}
+function lerCmt(forcar) {
+  if (!forcar && CMTD.v && Date.now() - CMTD.t < 50e3) return Promise.resolve(CMTD.v);
+  return perfilCmt().then(function (j) {
+    if (!j.usuario) return { fora: true, erro: 'Entre no painel do HERO18810 para ver o quadro do Desembargador.' };
+    if (!(j.desembargador || j.gestor)) return { fora: true };
+    return fetch(SITE + '/api/painel?cmt=1', { credentials: 'include', cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : null; }).then(function (d) {
+      if (!d) return CMTD.v || { erro: 'Quadro do Desembargador indisponível agora.' };
+      var v = { em: new Date().toISOString(), usuario: j.usuario, gestor: !!j.gestor, des: !!j.desembargador,
+        assinatura: (d.assinar || {}).assinatura || [], liberacao: (d.assinar || {}).liberacao || [], duvidas: d.duvidas || [] };
+      CMTD.t = Date.now(); CMTD.v = v;
+      return chrome.storage.session.set({ 'muta-cmt': v }).catch(function () {}).then(function () { return avisarCmt(v); }).then(function () { return v; });
+    });
+  }).catch(function (e) { return CMTD.v || { erro: String(e && e.message || e) }; });
+}
+function avisarCmt(v) {
+  return chrome.storage.local.get('muta-cmt-vistos').then(function (o) {
+    var vis = o['muta-cmt-vistos'], primeira = !vis; vis = vis || {};
+    var ev = v.assinatura.map(function (a) { return { id: 'as-' + a.cnj + '-' + (a.desde || ''), t: 'Para assinatura · ' + a.cnj, m: [a.tipoAto, a.titulo || a.topico].filter(Boolean).join(' · '), c: (a.servidor ? 'Minuta: ' + a.servidor : '') + (a.urg ? ' · urgente' : ''), u: !!a.urg }; })
+      .concat(v.duvidas.map(function (d) { return { id: 'du-' + d.id, t: 'Dúvida · ' + (d.titulo || ''), m: String(d.texto || '').slice(0, 180), c: d.de ? 'De ' + d.de : '', u: /alta|urg/i.test(d.prioridade || '') }; }));
+    var novos = ev.filter(function (e) { return !vis[e.id]; });
+    ev.forEach(function (e) { vis[e.id] = vis[e.id] || Date.now(); });
+    Object.keys(vis).forEach(function (k) { if (Date.now() - vis[k] > 60 * 864e5) delete vis[k]; });
+    if (!primeira && v.des) novos.slice(0, 4).forEach(function (e) {
+      chrome.notifications.create('cmt:' + e.id, { type: 'basic', iconUrl: 'icones/app-128.png', title: 'Gabinete · ' + e.t, message: e.m || '', contextMessage: e.c || 'Quadro do Desembargador', priority: e.u ? 2 : 1, requireInteraction: !!e.u });
+    });
+    return chrome.storage.local.set({ 'muta-cmt-vistos': vis });
+  }).catch(function () {});
+}
+chrome.alarms.onAlarm.addListener(function (a) { if (a.name === 'muta-cmt') lerCmt(true); });
+function alarmeCmt() { chrome.alarms.create('muta-cmt', { periodInMinutes: 1, delayInMinutes: 0.3 }); }
+chrome.runtime.onInstalled.addListener(alarmeCmt);
+chrome.runtime.onStartup.addListener(alarmeCmt);
+chrome.notifications.onClicked.addListener(function (id) {
+  if (!/^cmt:/.test(id)) return;
+  chrome.notifications.clear(id);
+  /* abre o PJe já aberto (a lista mostra o quadro na coluna Para assinatura); sem ele, a página /cmt */
+  chrome.tabs.query({ url: ['https://pje2g.trf3.jus.br/*'] }).then(function (t) {
+    if (t && t[0]) { chrome.tabs.update(t[0].id, { active: true }); chrome.windows.update(t[0].windowId, { focused: true }); }
+    else chrome.tabs.create({ url: SITE + '/cmt/' });
+  }).catch(function () { chrome.tabs.create({ url: SITE + '/cmt/' }); });
+});
+chrome.runtime.onMessage.addListener(function (msg, sender, responder) {
+  if (!msg || (msg.tipo !== 'muta-cmt' && msg.tipo !== 'muta-cmt-acao')) return;
+  if (msg.tipo === 'muta-cmt') { lerCmt(!!msg.forcar).then(responder); return true; }
+  var ACOES = { assinar: 1, devolver: 1, responder: 1 };
+  if (!ACOES[msg.acao]) { responder({ erro: 'ação inválida' }); return; }
+  var corpo = { acao: msg.acao, origem: 'extensao' };
+  ['cnj', 'id', 'texto', 'para', 'sessao'].forEach(function (k) { if (msg[k]) corpo[k] = String(msg[k]).slice(0, 2000); });
+  if (msg.manter) corpo.manter = true; if (msg.desfazer) corpo.desfazer = true;
+  fetch(SITE + '/api/painel?cmt=1', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(corpo) }).then(function (r) {
+    return r.json().catch(function () { return {}; }).then(function (j) { if (!r.ok) throw new Error(j.erro || ('não gravou (' + r.status + ')')); return j; });
+  }).then(function (j) { return lerCmt(true).then(function (v) { responder({ ok: true, r: j, dados: v }); }); }, function (e) { responder({ erro: e && e.message || String(e) }); });
   return true;
 });

@@ -299,6 +299,34 @@ function ativos(op, lista) {
 }
 /* resumo de vários processos de uma vez (só leitura), para a lista de tarefas do PJe na extensão Muta:
    GET /api/pauta?fichas=CNJ1,CNJ2,… (até 150) → { resumos: { <20 dígitos>: { etapa, designação, urgência, sinalizações, tarefa, etiquetas… } } } */
+/* tipo de caso e etiquetas sugeridas pela triagem do app (as mesmas da página /caput/triagem: etqTipoCaso e etqSugRow),
+   para o cartão da lista do PJe na extensão; o PJe não é alterado: a extensão só mostra e copia */
+const SN = x => String(x || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().trim();
+function tipoCasoDe(t) {
+  t = String(t || '').replace(/^\d+\s*·\s*/, '').replace(/\s*\([^)]*\)/g, '').replace(/\s+/g, ' ').trim(); if (t.length < 4) return '';
+  let P = t.split(/\s+·\s+/); if (P.length > 1 && /^(apela|remessa|agravo|embargos de declara|recurso)/i.test(P[0])) P = P.slice(1);
+  let r = P.slice(0, 2).join(' - ').split(/\s*;\s*/)[0].replace(/\s+—\s+/g, ' - ');
+  if (r.length > 58) { r = r.slice(0, 59).replace(/\s+\S*$/, ''); for (let k = 0; k < 8; k++) r = r.replace(/[\s,;:·—-]+$/, '').replace(/\s+(da|do|das|dos|de|por|para|pela|pelo|com|sem|e|ou|a|o|as|os|na|no|nas|nos|em|ao|à|aos|às|contra|sobre|entre|que|[IVXL]+|\d+º?|artigo)$/i, ''); }
+  return r.charAt(0).toUpperCase() + r.slice(1);
+}
+function etqTriagem(t, f) {
+  const out = [], etq = String(f['Etiquetas Originais'] || '').split(/[;|,]/).map(x => x.trim()).filter(Boolean);
+  const add = (e, por, caso) => { e = String(e || '').trim(); if (!e || out.some(x => SN(x.e) === SN(e))) return; out.push(caso ? { e, por, caso: 1 } : { e, por }); };
+  /* as registradas no prontuário vêm primeiro: é a decisão de quem triou */
+  String(t['Etiquetas sugeridas'] || '').split(/[;,\n]/).forEach(x => add(x, 'registrada no prontuário'));
+  const sc = String(f['Seção Competente'] || '').trim();
+  if (/^[123]ª Seção$/.test(sc) && !etq.some(e => /^[123]ª Seção$/.test(e))) add(sc, 'seção competente sem etiqueta');
+  if (/nao recolhido|sem comprovante|a menor|apos a interposicao|tesouro/.test(SN(t.Preparo))) add('ver. preparo', 'preparo: ' + t.Preparo);
+  if (/irregular|negativ/.test(SN(t['Representação']))) add('representação', 'representação: ' + t['Representação']);
+  if (/^intempest/.test(SN(t.Tempestividade))) add('tempestividade', 'intempestivo na triagem');
+  if (/aguardando/.test(SN(t.MPF)) || (t['MPF - Custos Legis'] && !/^(sem hip|nao se aplica)/.test(SN(t['MPF - Custos Legis'])) && !/com parecer|nao se aplica/.test(SN(t.MPF)))) add('aguardando parecer', 'intervenção do MPF sem parecer');
+  if ((t['Urgência'] && /pendente|nao apreciada/.test(SN(t['Urgência - Apreciação']))) || /^(sim|s|true|1)$/i.test(String(f['Liminar Pendente'] || '').trim())) add('LIMINAR PENDENTE', 'urgência não apreciada');
+  if (/^(possivel|provavel|cabivel)/.test(SN(t['Hipóteses Monocrática']))) add('MONOCRÁTICA TERMINATIVA', 'hipótese de monocrática na triagem');
+  const tc = tipoCasoDe(t.Tema); if (tc) add(tc, 'tipo de caso na ficha', true);
+  return out;
+}
+module.exports.tipoCasoDe = tipoCasoDe;
+module.exports.etqTriagem = etqTriagem;
 async function resumos(req, res) {
   try {
     const K = [...new Set(String(req.query.fichas || '').split(',').map(dg).filter(x => x.length === 20))].slice(0, 150);
@@ -323,7 +351,8 @@ async function resumos(req, res) {
         meta: sM.has(k) || !!t.META, sobr: sS.has(k), sens: (sX.has(k) || c['Sensível - Incluído'] === 'Sim') && c['Sensível - Excluído'] !== 'Sim',
         tarefa: f.tarefa_atual || '', desde: f.data_entrada_tarefa || '', etqPje: f['Etiquetas Originais'] || '', assunto: f.Assunto || '',
         classe: f.classe_judicial || f.Classe || '', prioridade: f.prioridade || '', mpf: f.mpf || '', registrado: !!por[k],
-        preparo: t.Preparo || '', repres: t['Representação'] || '', mpfSit: t.MPF || '', custos: t['MPF - Custos Legis'] || ''
+        preparo: t.Preparo || '', repres: t['Representação'] || '', mpfSit: t.MPF || '', custos: t['MPF - Custos Legis'] || '',
+        tipoCaso: tipoCasoDe(t.Tema), tema: String(t.Tema || '').slice(0, 300), etqTri: etqTriagem(t, f)
       };
     });
     return res.status(200).json({ resumos: out, em: agora() });

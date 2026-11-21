@@ -51,6 +51,12 @@ async function avisarEquipe(titulo, texto, op) {
   }
   throw Object.assign(new Error('O mural mudou várias vezes seguidas; tente de novo.'), { status: 409 });
 }
+/* cópia ao gestor do que o desembargador fez pela extensão HERO18810 (pedido do gestor, 21/11/2026) */
+async function copiaGestor(u, titulo, texto) {
+  if (L.gestor(u)) return;
+  const G = String(process.env.CMT_GESTOR || 'Bruno').split(',').map(x => x.trim()).filter(Boolean);
+  try { await avisarEquipe(titulo, texto, { tipo: 'cop', para: G, painel: false, link: '/cmt/', linkTxt: 'Abrir o painel do Desembargador' }); } catch (e) {}
+}
 async function avisarAcesso(u) {
   for (let t = 0; t < 3; t++) {
     let dados, sha;
@@ -203,6 +209,7 @@ async function painel(req, res, u) {
       }
       if (b.acao === 'assinar') {
         await MONO.gravarMono(cnj, { dataAssinatura: b.desfazer ? '' : hj }, uw, true);
+        if (b.origem === 'extensao') await copiaGestor(u, (b.desfazer ? 'Assinatura desfeita · ' : 'Decisão assinada · ') + cnj, 'Marcada pelo Desembargador na extensão HERO18810, em ' + br(hj) + '.');
         return res.status(200).json({ ok: true, cnj, dataAssinatura: b.desfazer ? '' : hj });
       }
       /* devolutiva: vira diligência para o servidor do processo, no mesmo quadro da equipe */
@@ -212,6 +219,7 @@ async function painel(req, res, u) {
         const r = await criarDiligencia({ title: 'Devolutiva · ' + cnj, description: txt, assignee: String(b.para || ''),
           numero: cnj, sessao: L.dataOk(b.sessao) ? b.sessao : '', urgency: 'Alta',
           ...(req.whatsappEvent && { whatsappEvento: req.whatsappEvent }) }, u);
+        if (b.origem === 'extensao') await copiaGestor(u, 'Devolutiva do Desembargador · ' + cnj, (b.para ? 'Para: ' + b.para + '\n' : '') + txt);
         return res.status(200).json({ ok: true, task: r });
       }
       /* resposta do desembargador a uma dúvida que lhe foi dirigida: fica no registro e conclui a diligência */
@@ -219,6 +227,7 @@ async function painel(req, res, u) {
         const txt = String(b.texto || '').trim().slice(0, 2000);
         if (!txt) return res.status(400).json({ erro: 'Escreva a resposta.' });
         const r = await responder(String(b.id || ''), txt, u, !!b.manter, req.whatsappEvent);
+        if (b.origem === 'extensao') await copiaGestor(u, 'Resposta do Desembargador · ' + (r.title || 'dúvida'), (r.numero ? r.numero + '\n' : '') + (r.creator ? 'Dúvida de ' + r.creator + ': ' + String(r.description || '').slice(0, 400) + '\n' : '') + 'Resposta: ' + txt);
         return res.status(200).json({ ok: true, task: r });
       }
       return res.status(400).json({ erro: 'Ação desconhecida.' });
