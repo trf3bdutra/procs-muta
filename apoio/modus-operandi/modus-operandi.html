@@ -6004,7 +6004,10 @@ window.VDM_view=function(v){
     api('/api/equipe').then(function(j){var ult='';try{ult=localStorage.getItem('eq_ultimo')||'';}catch(x){}q('#ac-nome').innerHTML='<option value="">Escolha o seu nome</option>'+(j.equipe||[]).map(function(n){return '<option'+(n===ult?' selected':'')+'>'+e(n)+'</option>';}).join('');if(ult)q('#ac-senha').focus();}).catch(function(x){q('#ac-nome').innerHTML='<option value="">'+e(x.message)+'</option>';});
     o.querySelector('form').addEventListener('submit',function(ev){ev.preventDefault();var er=q('#ac-er');er.hidden=true;var n=q('#ac-nome').value;
       api('/api/login',{method:'POST',body:JSON.stringify({usuario:n,senha:q('#ac-senha').value})}).then(function(){try{localStorage.setItem('eq_ultimo',n);}catch(x){}o.hidden=true;return verifica();}).catch(function(x){er.textContent=x.message;er.hidden=false;});});}
-  function verifica(){if(!SITE){AC.ok=true;aplica();document.dispatchEvent(new CustomEvent('cmt-acesso',{detail:AC}));return Promise.resolve(AC);}
+  /* editor aberto no painel do desembargador (/editor/?cmt=1): quem edita é o CMT; o servidor confere a chave do painel */
+  var CMTED=!!window.VDM_PAGINA_EDITOR&&/[?&]cmt=1(?:&|$)/.test(location.search);
+  function verifica(){if(CMTED)return new Promise(function(ok){setTimeout(function(){AC.usuario='CMT';AC.perfil='editor';AC.editor=true;AC.avancado=true;AC.ok=true;aplica();document.dispatchEvent(new CustomEvent('cmt-acesso',{detail:AC}));ok(AC);},0);});
+    if(!SITE){AC.ok=true;aplica();document.dispatchEvent(new CustomEvent('cmt-acesso',{detail:AC}));return Promise.resolve(AC);}
     return api('/api/acesso').then(function(j){AC.usuario=j.usuario||'';AC.editor=!!j.editor;AC.avancado=AC.editor||!!j.avancado;AC.perfil=AC.editor?'editor':AC.avancado?'avancado':'equipe';}).catch(function(){AC.usuario='';AC.perfil='equipe';AC.avancado=false;AC.editor=false;})
       .then(function(){AC.ok=true;aplica();document.dispatchEvent(new CustomEvent('cmt-acesso',{detail:AC}));return AC;});}
   window.CMT_ACESSO=function(){return AC;};window.CMT_verifica=verifica;window.CMT_login=dlgLogin;window.CMT_SITE=SITE;
