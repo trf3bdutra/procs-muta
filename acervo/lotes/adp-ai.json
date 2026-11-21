@@ -17672,7 +17672,7 @@
     "preparo": "Pix, sem comprovante STN [VALIDAR]",
     "monocratica": "Não indicada",
     "analisado_em": "20/11/2026",
-    "conf_preparo": "Pix/PagTesouro (não aceito) · Pix/PagTesouro (não aceito): ID 383782893 · \"Aguardando pagamento\": ID 380885202 · certidão sem custas: ID 380428493 · despacho/decisão sobre preparo: ID 381391124 · valor R$ 64,26 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
+    "conf_preparo": "Pix comprovado só por comprovante bancário ou tela \"aguardando pagamento\", sem o comprovante da Secretaria do Tesouro Nacional (Resolução PRES 138/2017, artigo 2º, § 2º, III, na redação da Resolução PRES 790/2025). Critério confirmado em 21/11/2026. · Pix/PagTesouro (não aceito) · Pix/PagTesouro (não aceito): ID 383782893 · \"Aguardando pagamento\": ID 380885202 · certidão sem custas: ID 380428493 · despacho/decisão sobre preparo: ID 381391124 · valor R$ 64,26 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
     "conf_prevencao": "Origem: 5001312-29.2026.4.03.6002 · conferido em 20/11/2026"
    },
    "ajustes": [],
@@ -17792,7 +17792,7 @@
     },
     "ctl": {
      "tempest": "Não verificado",
-     "preparo": "Não verificado",
+     "preparo": "Recolhido sem comprovante do Tesouro (STN)",
      "prelim": "Há preliminares",
      "repres": "Regular",
      "midias": "Não se aplica",
