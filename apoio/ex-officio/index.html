@@ -2803,7 +2803,7 @@ function ppSubAltura(){var p=document.getElementById('pp-sub');if(!p)return;if(i
   var r=p.getBoundingClientRect(),q=p.querySelector('.pt-ir.quick-find');p.style.setProperty('--qf-l',Math.round(r.left)+'px');p.style.setProperty('--qf-w',Math.round(r.width)+'px');if(q)p.style.setProperty('--qf-h',q.offsetHeight+'px');}
 (function(){var f=0,q=function(){if(f)return;f=requestAnimationFrame(function(){f=0;ppSubAltura();});};addEventListener('resize',q);
   document.addEventListener('DOMContentLoaded',function(){q();var v=document.getElementById('v-pauta');if(v&&window.ResizeObserver)new ResizeObserver(q).observe(v);});setTimeout(q,800);})();
-function fixQuickFinder(){var q=document.querySelector('#v-pauta .pt-ir'),side=$('#pp-sub');if(q&&side&&q.parentNode!==side)side.appendChild(q);}
+function fixQuickFinder(){var q=document.querySelector('#v-pauta .pt-ir'),side=$('#pp-sub');if(q&&side&&q.parentNode!==side)side.appendChild(q);requestAnimationFrame(ppSubAltura);}
 function render(){
   fixQuickFinder();irK();
   var hdz=document.querySelector('#v-pauta .pt-hd');if(hdz)hdz.hidden=false;
@@ -9823,6 +9823,14 @@ html[data-theme=dark] #v-pauta.ed #lst .pc.edr.mrw.ee3,html[data-theme=dark] #v-
 #v-pauta.ed #lst .pc.edr.mrw:hover{background-image:linear-gradient(rgba(0,0,0,.03),rgba(0,0,0,.03))}
 #v-pauta.ed .ed-tgb button.ed-xl{padding:0 10px;border-left:1px dashed var(--el2);color:var(--eo2)}
 #v-pauta.ed .ed-tgb button.ed-xl:hover{color:#28744b}
+/* etiquetas dos filtros numa linha só: quando a largura aperta, a fonte e o espaçamento diminuem (em vez de quebrar a linha) */
+#v-pauta.ed .ed-tabs{container-type:inline-size;container-name:edtabs}
+@container edtabs (min-width:760px){
+ #v-pauta.ed .ed-tags{flex-wrap:nowrap!important;gap:4px clamp(5px,1.3cqw,22px)!important}
+ #v-pauta.ed .ed-tgb button{padding:0 clamp(4px,.75cqw,13px)!important;font-size:clamp(9.5px,1.12cqw,12px)!important;height:clamp(28px,3.1cqw,34px)!important;white-space:nowrap}
+ #v-pauta.ed .ed-tgb button small{font-size:clamp(8px,.9cqw,10px)!important;margin-left:2px}
+ #v-pauta.ed .ed-tgp>small{font-size:clamp(8px,.85cqw,9.5px)!important;letter-spacing:.1em}
+}
 /* buscador rápido logo abaixo do cartão da sessão: sempre à vista, sem rolar (antes ficava no pé da coluna, abaixo da dobra) */
 @media (min-width:981px){
  #v-pauta.pt2 .pp-sub{min-height:0}
