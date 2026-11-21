@@ -1,0 +1,1066 @@
+{
+ "schema": "gabcmt.lote",
+ "versao": 1,
+ "tipo": "triagem",
+ "tarefa": "Analisar tipo de decisão a proferir",
+ "origem": "Triagem · séries entre lotes",
+ "id": "adp-serie-regressivas-inss",
+ "sessoes": [],
+ "filtro": {},
+ "criado_por": "Bruno",
+ "colunas": [
+  {
+   "id": "URG",
+   "rotulo": "Urgência / liminar pendente"
+  },
+  {
+   "id": "PRI",
+   "rotulo": "Prioridade legal"
+  },
+  {
+   "id": "MONO",
+   "rotulo": "Provável monocrática"
+  },
+  {
+   "id": "SOB",
+   "rotulo": "Sobrestamento"
+  },
+  {
+   "id": "ADM",
+   "rotulo": "Admissibilidade em discussão"
+  },
+  {
+   "id": "VAL",
+   "rotulo": "Pendência [VALIDAR]"
+  },
+  {
+   "id": "ORI",
+   "rotulo": "Conferir a origem (sentença ou perda de objeto)"
+  }
+ ],
+ "grupo_outros": {
+  "rotulo": "A triar",
+  "cor": "#9aa0a8"
+ },
+ "minutas": "acervo/minutas/adp-serie-regressivas-inss/<processo>.json",
+ "itens": [
+  {
+   "sessao": "",
+   "item": 1,
+   "processo": "5008226-57.2022.4.03.6000",
+   "recurso": "Apelação cível",
+   "partes": "JAKSON FELIPE LIMA GRANCE x UNIÃO FEDERAL",
+   "exequente": "JAKSON FELIPE LIMA GRANCE",
+   "executado": "UNIÃO FEDERAL",
+   "assunto": "Acidente de Trabalho - Ressarcimento ao Erário",
+   "grupo": "G1",
+   "tipo_caso": "Apelação de Jakson Felipe Lima Grance em procedimento comum (Acidente de Trabalho - Ressarcimento ao Erário) · pedido julgado improcedente",
+   "resultado": "Ato a proferir: apelação de Jakson Felipe Lima Grance (ID 338974860) da sentença ID 338974855; contrarrazões (ID 338974858, ID 338974862) ‖ Proposta pelos precedentes: Voto [VALIDAR paradigma: conferir os precedentes sugeridos e a linha do gabinete] [VALIDAR: Tempestividade da apelação (intimação da sentença)]",
+   "modelo": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação de Jakson Felipe Lima Grance contra sentença (pedido julgado improcedente): Diante do exposto, julgo improcedente o pedido da presente ação, dando por resolvido o mérito da lide, nos termos do artigo 487, I, do CPC. Condeno o autor ao pagamento de custas e honorários advocatícios, estes fixados em 10% sobre o valor · Também no lote adp-ap-1s",
+   "peculiaridades": "",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "",
+    "correcao": "",
+    "situacao": "A minutar"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {
+    "ato": "Julgamento da apelação (voto)",
+    "materia": "Civil — responsabilidade civil",
+    "origem": "Procedimento comum 5008226-57.2022.4.03.6000 (1ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 338974855 (16/05/2025)",
+    "recurso": "apelação de Jakson Felipe Lima Grance (ID 338974860, 19/08/2025)",
+    "preparo": "Jakson Felipe Lima Grance: Justiça gratuita",
+    "monocratica": "Improvável sem paradigma",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "Jakson Felipe Lima Grance: Justiça gratuita · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026",
+    "grupo": "G1"
+   },
+   "ajustes": [],
+   "pendencias": [],
+   "minuta": false,
+   "classe": "ApCiv",
+   "tarefa": "Analisar tipo de decisão a proferir",
+   "etiquetas": "1ª Seção; Reintegração - Militar",
+   "chegada": "14/10/2025",
+   "extracao": {
+    "situacao": "pendente"
+   },
+   "assunto_detalhado": "Acidente de Trabalho - Ressarcimento ao Erário — [VALIDAR detalhamento]",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 338974859 · 05/08/2025 — sentença (dispositivo a conferir) | última peça: Contrarrazões (advogado de parte) · ID 338974862 · 10/10/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Embargos de declaração julgados (ID 338974859) · Laudo pericial: ID 338974842 · Precedentes do Relator a conferir (busca por semelhança): ApCiv 0013214-90.2014.4.03.6000 (20/07/2026, DESPROV): DIREITO ADMINISTRATIVO MILITAR. APELAÇÃO. REFORMA MILITAR. ACIDENTE EM SERVIÇO. AUSÊNCIA DE INCAPACIDADE PARA ATIVIDADES MILITARES, BEM COMO PARA OUTR · ApCiv 5004651-46.2019.4.03.6000 (05/10/2026, PROV): DIREITO ADMINISTRATIVO E MILITAR. APELAÇÃO. AÇÃO DE ANULAÇÃO DE LICENCIAMENTO CUMULADA COM INCORPORAÇÃO AO EXÉRCITO. MILITAR TEMPORÁRIO. INCAPACIDADE  [VALIDAR] · Triagem assistida (extração automática dos autos): conferir partes, razões e proposta",
+   "teor": {
+    "sintese_fatica": "JAKSON FELIPE LIMA GRANCE propõe ação em desfavor da UNIÃO, objetivando a concessão de provimento jurisdicional que determine seu reingresso ao serviço militar para fins de tratamento médico ou o pagamento de pensão mensal em razão de lesão decorrente do exercício de atividade militar que o impede de trabalhar normalmente, além de ressarcimento de danos morais sofridos.",
+    "inicial": "Procedimento comum ajuizado(a) em 21/09/2022 (JAKSON FELIPE LIMA GRANCE x UNIÃO FEDERAL).",
+    "decisao_recorrida": "Sentença ID 338974855 (16/05/2025): Diante do exposto, julgo improcedente o pedido da presente ação, dando por resolvido o mérito da lide, nos termos do artigo 487, I, do CPC. Condeno o autor ao pagamento de custas e honorários advocatícios, estes fixados em 10% sobre o valor da causa, corrigido de ofício neste ato, devidamente atualizado, nos termos do art. 85, §3º, I, do CPC.Entretanto, por ser a parte beneficiária da gratuidade judiciária, fica suspensa a exigibilidade dessas verbas, nos termos do disposto no artigo 98, § 3º, do CPC.",
+    "recurso": "Jakson Felipe Lima Grance (ID 338974860, 19/08/2025): [VALIDAR razões]",
+    "resposta": "Contrarrazões: ID 338974858 (19/07/2025); ID 338974862 (10/10/2025).",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "[VALIDAR representação]",
+    "preparo": "Jakson Felipe Lima Grance: Justiça gratuita."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação de Jakson Felipe Lima Grance em procedimento comum (Acidente de Trabalho - Ressarcimento ao Erário) · pedido julgado improcedente",
+     "sintese": "JAKSON FELIPE LIMA GRANCE propõe ação em desfavor da UNIÃO, objetivando a concessão de provimento jurisdicional que determine seu reingresso ao serviço militar para fins de tratamento médico ou o pagamento de pensão mensal em razão de lesão decorrente do exercício de atividade militar que o impede de trabalhar normalmente, além de ressarcimento de danos morais sofridos.",
+     "questoes": "[VALIDAR questões] Acidente de Trabalho - Ressarcimento ao Erário",
+     "rel": {
+      "razoes": "Jakson Felipe Lima Grance (ID 338974860, 19/08/2025): [VALIDAR razões]",
+      "contrarrazoes": "Contrarrazões: ID 338974858 (19/07/2025); ID 338974862 (10/10/2025)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "338974855",
+      "juizo": "Procedimento comum 5008226-57.2022.4.03.6000 (1ª Vara Federal de Campo Grande)",
+      "dispositivo": "Diante do exposto, julgo improcedente o pedido da presente ação, dando por resolvido o mérito da lide, nos termos do artigo 487, I, do CPC. Condeno o autor ao pagamento de custas e honorários advocatícios, estes fixados em 10% sobre o valor da causa, corrigido de ofício neste ato, devidamente atualizado, nos termos do art. 85, §3º, I, do CPC.Entretanto, por ser a parte beneficiária da gratuidade judiciária, fica suspensa a exigibilidade dessas verbas, nos termos do disposto no artigo 98, § 3º, do CPC."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Jakson Felipe Lima Grance",
+       "tipo": "Apelação",
+       "id": "338974860",
+       "contra": "Sentença"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Petição inicial",
+       "id": "338974564",
+       "data": "2022-09-21",
+       "pje": {
+        "tipo": "Petição Inicial",
+        "paginas": 3
+       },
+       "trecho": "Ante o exposto, requer: a) sejam concedidos os benefícios da Justiça gratuita em favor da parte autora, com fulcro no inc. LXXIV, do art. 5º, da Constituição Federal, combinado com o art. 98 e seguintes, do Código de Processo Civil de 2015; b) a citação da requerida na pessoa de seus representantes …"
+      },
+      {
+       "desc": "Decisão: gratuidade deferida",
+       "id": "338974568",
+       "data": "2022-09-23",
+       "pje": {
+        "tipo": "Despacho"
+       },
+       "trecho": "intime-se a parte ré para também especificar as provas que pretende produzir, justificando sua pertinência e indicar quais os pontos controvertidos da lide que pretende esclarecer.O pedido de provas que pretendem produzir, deve ser justificado, sob pena de indeferimento, ocasião em que deverão …"
+      },
+      {
+       "desc": "Laudo pericial",
+       "id": "338974842",
+       "data": "2023-10-16",
+       "nota": "Embargos de declaração julgados (ID 338974859) · Laudo pericial: ID 338974842 · Precedentes do Relator a conferir (busca por semelhança): ApCiv 0013214-90.2014.4.03.6000 (20/07/2026, DESPROV): DIREITO ADMINISTRATIVO MILITAR.",
+       "pje": {
+        "tipo": "Outros Documentos",
+        "descricao": "LAUDO PERICIAL JAKSON FELIPE LIMA GRANCE",
+        "paginas": 5
+       },
+       "trecho": "EXCELENTÍSSIMO SENHOR DR. JUIZ DO JUIZADO ESPECIAL FEDERAL DA SUBSEÇÃO JUDICIÁRIA E CAMPO GRANDE - MS DANIEL CAVALCANTE COSTA, médico especialista em ORTOPEDIA E TRAUMATOLOGIA pela SBOT e inscrito no CRM/MS sob o número 11040 e RQE n°6468 nomeado por Vossa Excelência como Médico Perito Judicial no …"
+      },
+      {
+       "desc": "Sentença",
+       "id": "338974855",
+       "data": "2025-05-16",
+       "nota": "Sentença ID 338974855 (16/05/2025): Diante do exposto, julgo improcedente o pedido da presente ação, dando por resolvido o mérito da lide, nos termos do artigo 487, I, do CPC.",
+       "pje": {
+        "tipo": "Sentença"
+       },
+       "trecho": "Dispositivo.Diante do exposto, julgo improcedente o pedido da presente ação, dando por resolvido o mérito da lide, nos termos do artigo 487, I, do CPC. Condeno o autor ao pagamento de custas e honorários advocatícios, estes fixados em 10% sobre o valor da causa, corrigido de ofício neste ato, …"
+      },
+      {
+       "desc": "Decisão nos embargos de declaração",
+       "id": "338974859",
+       "data": "2025-08-05",
+       "nota": "Embargos de declaração julgados (ID 338974859) · Laudo pericial: ID 338974842 · Precedentes do Relator a conferir (busca por semelhança): ApCiv 0013214-90.2014.4.03.6000 (20/07/2026, DESPROV): DIREITO ADMINISTRATIVO MILITAR.",
+       "pje": {
+        "tipo": "Sentença"
+       },
+       "trecho": "REJEITO os presentes embargos de declaração.Devolvo às partes o prazo para recurso.Intimem-se.Campo Grande/MS, data e assinatura conforme certificação digital."
+      },
+      {
+       "desc": "Apelação de Jakson Felipe Lima Grance",
+       "id": "338974860",
+       "data": "2025-08-19",
+       "nota": "Jakson Felipe Lima Grance (ID 338974860, 19/08/2025): [VALIDAR razões]",
+       "pje": {
+        "tipo": "Apelação"
+       },
+       "trecho": "Diante do exposto, requer o Apelante, JAKSON FELIPE LIMA GRANCE, a este Egrégio Tribunal:a) O conhecimento e provimento do presente recurso de Apelação, para que seja reformada integralmente a r. sentença proferida nos autos do processo nº 5008226-57.2022.4.03.6000, julgando-se procedentes os …"
+      },
+      {
+       "desc": "Contrarrazões",
+       "id": "338974858",
+       "data": "2025-07-19",
+       "nota": "Contrarrazões: ID 338974858 (19/07/2025); ID 338974862 (10/10/2025).",
+       "pje": {
+        "tipo": "Contrarrazões"
+       },
+       "trecho": "requer a União o não conhecimento dos embargos declaratórios e, na remota hipótese de serem conhecidos, que sejam rejeitados. Termos em que, espera deferimento. Campo Grande, MS, 19 de julho de 2025. Carlos Erildo da Silva Advogado da União"
+      },
+      {
+       "desc": "Contrarrazões",
+       "id": "338974862",
+       "data": "2025-10-10",
+       "nota": "Contrarrazões: ID 338974858 (19/07/2025); ID 338974862 (10/10/2025).",
+       "pje": {
+        "tipo": "Contrarrazões",
+        "descricao": "P CONTRARRAZÕES 2966509064 EM 10/10/2025 15:04:33",
+        "paginas": 14
+       },
+       "trecho": "pugnado na Inicial, está em consonância com o § 3º do art. 109 da Lei n. 6.880/1980, com a redação dada pela Lei n. 13.954/2019. Como dito, diante do fato da relação do Autor com o Exército Brasileiro ser temporária, aliado ao fato de que possui plena capacidade laboral no âmbito civil e no âmbito …"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 338974859 · 05/08/2025 — sentença (dispositivo a conferir) | última peça: Contrarrazões (advogado de parte) · ID 338974862 · 10/10/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Embargos de declaração julgados (ID 338974859) · Laudo pericial: ID 338974842 · Precedentes do Relator a conferir (busca por semelhança): ApCiv 0013214-90.2014.4.03.6000 (20/07/2026, DESPROV): DIREITO ADMINISTRATIVO MILITAR. APELAÇÃO. REFORMA MILITAR. ACIDENTE EM SERVIÇO. AUSÊNCIA DE INCAPACIDADE PARA ATIVIDADES MILITARES, BEM COMO PARA OUTR · ApCiv 5004651-46.2019.4.03.6000 (05/10/2026, PROV): DIREITO ADMINISTRATIVO E MILITAR. APELAÇÃO. AÇÃO DE ANULAÇÃO DE LICENCIAMENTO CUMULADA COM INCORPORAÇÃO AO EXÉRCITO. MILITAR TEMPORÁRIO. INCAPACIDADE  [VALIDAR] · Triagem assistida (extração automática dos autos): conferir partes, razões e proposta",
+     "assuntoDet": "Acidente de Trabalho - Ressarcimento ao Erário — [VALIDAR detalhamento]",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Justiça gratuita",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Não verificado"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Sentença · ID 338974859 · 05/08/2025 — sentença (dispositivo a conferir)",
+    "ultima_peca": "Contrarrazões (advogado de parte) · ID 338974862 · 10/10/2025",
+    "ultima_informacao": "Informação · ID 338974863 · 10/10/2025",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 338974859 · 05/08/2025 — sentença (dispositivo a conferir) | última peça: Contrarrazões (advogado de parte) · ID 338974862 · 10/10/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária"
+   }
+  },
+  {
+   "sessao": "",
+   "item": 2,
+   "processo": "5007207-55.2018.4.03.6000",
+   "recurso": "Apelação cível",
+   "partes": "STELMOM TELECOMUNICACOES LTDA x INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS",
+   "exequente": "STELMOM TELECOMUNICACOES LTDA",
+   "executado": "INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS",
+   "assunto": "Acidente de Trabalho - Ressarcimento ao Erário",
+   "grupo": "G1",
+   "tipo_caso": "Apelação do INSS e de Stelmom Telecomunicacoes Ltda em procedimento comum (Acidente de Trabalho - Ressarcimento ao Erário) · pedido julgado parcialmente procedente",
+   "resultado": "Ato a proferir: apelação de INSS e Stelmom Telecomunicacoes Ltda (ID 354468387, ID 354468396) da sentença ID 354468386; contrarrazões (ID 354468401) ‖ Proposta pelos precedentes: Voto [VALIDAR paradigma: conferir os precedentes sugeridos e a linha do gabinete] [VALIDAR: Tempestividade da apelação (intimação da sentença); Parte apelante]",
+   "modelo": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação do INSS e de Stelmom Telecomunicacoes Ltda contra sentença (pedido julgado parcialmente procedente): Diante do exposto, julgo parcialmente procedente o pedido para condenar a ré a reembolsar ao autor a metade dos valores vencidos e vincendos pagos a título de benefício concedido em razão do acidente de trabalho sofrido por Claudeci Castelo · Também no lote adp-ap-1s",
+   "peculiaridades": "",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "",
+    "correcao": "",
+    "situacao": "A minutar"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {
+    "ato": "Julgamento da apelação (voto)",
+    "materia": "Civil — responsabilidade civil",
+    "origem": "Procedimento comum 5007207-55.2018.4.03.6000 (4ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 354468386 (04/02/2025)",
+    "recurso": "apelação de INSS (ID 354468387, 18/02/2025) e apelação de Stelmom Telecomunicacoes Ltda [VALIDAR parte] (ID 354468396, 02/04/2025)",
+    "preparo": "INSS: Isento (ente público); Stelmom Telecomunicacoes Ltda [VALIDAR parte]: [VALIDAR preparo]",
+    "monocratica": "Improvável sem paradigma",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "INSS: Isento (ente público); Stelmom Telecomunicacoes Ltda [VALIDAR parte]: [VALIDAR preparo] · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026",
+    "grupo": "G1"
+   },
+   "ajustes": [],
+   "pendencias": [],
+   "minuta": false,
+   "classe": "ApCiv",
+   "tarefa": "Analisar tipo de decisão a proferir",
+   "etiquetas": "1ª Seção; Ação regressiva",
+   "chegada": "13/02/2026",
+   "extracao": {
+    "situacao": "pendente"
+   },
+   "assunto_detalhado": "Acidente de Trabalho - Ressarcimento ao Erário — [VALIDAR detalhamento]",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 354468400 · 04/11/2025 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 354468389 · 20/02/2025 — …251, casa 505, Residencial Malibu, Campo Grande, MS, para, no prazo de 15 (quinze) dias, regularizar a representação processual, sob pena de revelia | última peça: Contrarrazões (PGF) · ID 354468401 · 12/02/2026 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Triagem assistida (extração automática dos autos): conferir partes, razões e proposta",
+   "teor": {
+    "sintese_fatica": "IMPROCEDENTE. COMPROVAÇÃO DE CULPA E NEXO DE CAUSALIDADE. APELAÇÃO PARCIALMENTE PROVIDA.- Trata-se de apelação interposta pelo INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS contra a sentença proferida pelo Juízo da 2ª Vara Federal de Bauru/SP que julgou improcedente o pedido formulado em ação de regresso ajuizada pelo Apelante, objetivando o ressarcimento por despesas advindas do pagamento de pensão por morte (NB 21/162.",
+    "inicial": "Procedimento comum ajuizado(a) em 04/09/2018 (STELMOM TELECOMUNICACOES LTDA x INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS).",
+    "decisao_recorrida": "Sentença ID 354468386 (04/02/2025): Diante do exposto, julgo parcialmente procedente o pedido para condenar a ré a reembolsar ao autor a metade dos valores vencidos e vincendos pagos a título de benefício concedido em razão do acidente de trabalho sofrido por Claudeci Castelo Branco de Souza. Os valores vencidos serão corrigidos pelo IPCA-E até novembro/2021, acrescidos de juros de mora de 1% ao mês, ambos a partir de cada desembolso; a partir de dezembro de 2021, os valores serão corrigidos pela SELIC, sem juros até o mês do pagamento, quando incidirá apenas juros 1%, sem outros encargos. Condeno a ré a pagar honorários aos Procuradores do autor, fixados nos percentuais mínimos estabelecidos no art.",
+    "recurso": "INSS (ID 354468387, 18/02/2025): [VALIDAR razões] Stelmom Telecomunicacoes Ltda [VALIDAR parte] (ID 354468396, 02/04/2025): [VALIDAR razões]",
+    "resposta": "Contrarrazões: ID 354468401 (12/02/2026).",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "[VALIDAR representação]",
+    "preparo": "INSS: Isento (ente público); Stelmom Telecomunicacoes Ltda [VALIDAR parte]: [VALIDAR preparo]."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação do INSS e de Stelmom Telecomunicacoes Ltda em procedimento comum (Acidente de Trabalho - Ressarcimento ao Erário) · pedido julgado parcialmente procedente",
+     "sintese": "IMPROCEDENTE. COMPROVAÇÃO DE CULPA E NEXO DE CAUSALIDADE. APELAÇÃO PARCIALMENTE PROVIDA.- Trata-se de apelação interposta pelo INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS contra a sentença proferida pelo Juízo da 2ª Vara Federal de Bauru/SP que julgou improcedente o pedido formulado em ação de regresso ajuizada pelo Apelante, objetivando o ressarcimento por despesas advindas do pagamento de pensão por morte (NB 21/162.",
+     "questoes": "[VALIDAR questões] Acidente de Trabalho - Ressarcimento ao Erário",
+     "rel": {
+      "razoes": "INSS (ID 354468387, 18/02/2025): [VALIDAR razões] Stelmom Telecomunicacoes Ltda [VALIDAR parte] (ID 354468396, 02/04/2025): [VALIDAR razões]",
+      "contrarrazoes": "Contrarrazões: ID 354468401 (12/02/2026)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "354468386",
+      "juizo": "Procedimento comum 5007207-55.2018.4.03.6000 (4ª Vara Federal de Campo Grande)",
+      "dispositivo": "Diante do exposto, julgo parcialmente procedente o pedido para condenar a ré a reembolsar ao autor a metade dos valores vencidos e vincendos pagos a título de benefício concedido em razão do acidente de trabalho sofrido por Claudeci Castelo Branco de Souza. Os valores vencidos serão corrigidos pelo IPCA-E até novembro/2021, acrescidos de juros de mora de 1% ao mês, ambos a partir de cada desembolso; a partir de dezembro de 2021, os valores serão corrigidos pela SELIC, sem juros até o mês do pagamento, quando incidirá apenas juros 1%, sem outros encargos. Condeno a ré a pagar honorários aos Procuradores do autor, fixados nos percentuais mínimos estabelecidos no art."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "INSS",
+       "tipo": "Apelação",
+       "id": "354468387",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Stelmom Telecomunicacoes Ltda [VALIDAR parte]",
+       "tipo": "Apelação",
+       "id": "354468396",
+       "contra": "Sentença"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Petição inicial",
+       "id": "354467890",
+       "data": "2018-09-04",
+       "pje": {
+        "tipo": "Petição inicial - PDF",
+        "descricao": "regressiva inicial stelmon",
+        "paginas": 19
+       },
+       "trecho": "requer que esse Juízo, ao efetuar seu despacho saneador e fixar os pontos controvert idos da demanda, atribua à Ré o ônus de provar que cumpriu as normas de segurança e higiene do trabalho a que estava obrigada e não concorreu para o acidente ocor rido com seu empregado. 5.1 - INVERSÃO DO ÔNUS DA …"
+      },
+      {
+       "desc": "Sentença",
+       "id": "354468386",
+       "data": "2025-02-04",
+       "nota": "Sentença ID 354468386 (04/02/2025): Diante do exposto, julgo parcialmente procedente o pedido para condenar a ré a reembolsar ao autor a metade dos valores vencidos e vincendos pagos a título de benefício concedido em razão do acidente de trabalho sofrido por Claudeci Castelo Branco de Souza.",
+       "pje": {
+        "tipo": "Sentença"
+       },
+       "trecho": "Desembargador Federal RENATA ANDRADE LOTUFO, julgado em 07/03/2024, Intimação via sistema DATA: 13/03/2024)Diante do exposto, julgo parcialmente procedente o pedido para condenar a ré a reembolsar ao autor a metade dos valores vencidos e vincendos pagos a título de benefício concedido em razão do …"
+      },
+      {
+       "desc": "Apelação de INSS",
+       "id": "354468387",
+       "data": "2025-02-18",
+       "nota": "INSS (ID 354468387, 18/02/2025): [VALIDAR razões] Stelmom Telecomunicacoes Ltda [VALIDAR parte] (ID 354468396, 02/04/2025): [VALIDAR razões]",
+       "pje": {
+        "tipo": "Apelação"
+       },
+       "trecho": "requerida não estaria afastada. Em matéria de direito de regresso, a culpa do empregado não afasta a responsabilidade da empresa, salvo se esta provar que tomou todas as precauções e cumpriu todas as regras de segurança, e que mesmo assim o acidente não seria evitável. Se a fatalidade foi causada …"
+      },
+      {
+       "desc": "Apelação de Stelmom Telecomunicacoes Ltda",
+       "id": "354468396",
+       "data": "2025-04-02",
+       "nota": "INSS (ID 354468387, 18/02/2025): [VALIDAR razões] Stelmom Telecomunicacoes Ltda [VALIDAR parte] (ID 354468396, 02/04/2025): [VALIDAR razões]",
+       "pje": {
+        "tipo": "Recurso de Sentença",
+        "descricao": "JEF) (01 recurso de apelacao 3",
+        "paginas": 7
+       },
+       "trecho": "equer-se, ainda, A invers„o do Ùnus de sucumbÍncia, passando a Autora a responsabilidade de arcar com a parcela no percentual de 15%, sobre o valor da causa, nos termos do art. 85, ß 2∫, do CPC. Nestes termos, pede deferimento. Campo Grande-MS, 01 de abril de 2025. Edna Bacarji Jardim OAB/MS n∫ 9431"
+      },
+      {
+       "desc": "Contrarrazões",
+       "id": "354468401",
+       "data": "2026-02-12",
+       "nota": "Contrarrazões: ID 354468401 (12/02/2026).",
+       "pje": {
+        "tipo": "Contrarrazões",
+        "descricao": "P CONTRARRAZÕES 3031177046 EM 12/02/2026 10:04:59",
+        "paginas": 12
+       },
+       "trecho": "Requer, ainda, a condenação das recorrentes nos consectários da sucumbência recursal, nos termos do art. 85, §11, do CPC. Nesses termos, pede deferimento. São Paulo, 11 de fevereiro de 2026. DANILO BUENO MENDES PROCURADOR FEDERAL"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 354468400 · 04/11/2025 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 354468389 · 20/02/2025 — …251, casa 505, Residencial Malibu, Campo Grande, MS, para, no prazo de 15 (quinze) dias, regularizar a representação processual, sob pena de revelia | última peça: Contrarrazões (PGF) · ID 354468401 · 12/02/2026 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Triagem assistida (extração automática dos autos): conferir partes, razões e proposta",
+     "assuntoDet": "Acidente de Trabalho - Ressarcimento ao Erário — [VALIDAR detalhamento]",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Não verificado"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Despacho · ID 354468400 · 04/11/2025 — remessa ou redistribuição à Turma Regional (sem exame do recurso)",
+    "ultima_decisao_relevante": "Despacho · ID 354468389 · 20/02/2025 — …251, casa 505, Residencial Malibu, Campo Grande, MS, para, no prazo de 15 (quinze) dias, regularizar a representação processual, sob pena de revelia",
+    "ultima_peca": "Contrarrazões (PGF) · ID 354468401 · 12/02/2026",
+    "ultima_informacao": "Informação · ID 354468402 · 12/02/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 354468400 · 04/11/2025 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 354468389 · 20/02/2025 — …251, casa 505, Residencial Malibu, Campo Grande, MS, para, no prazo de 15 (quinze) dias, regularizar a representação processual, sob pena de revelia | última peça: Contrarrazões (PGF) · ID 354468401 · 12/02/2026 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária"
+   }
+  },
+  {
+   "sessao": "",
+   "item": 3,
+   "processo": "0000906-85.2015.4.03.6000",
+   "recurso": "Apelação cível",
+   "partes": "INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS x MANUFATURACAO DE PRODUTOS PARA ALIM ANIMAL PREMIX LTDA",
+   "exequente": "INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS",
+   "executado": "MANUFATURACAO DE PRODUTOS PARA ALIM ANIMAL PREMIX LTDA",
+   "assunto": "Acidente de Trabalho - Ressarcimento ao Erário",
+   "grupo": "G1",
+   "tipo_caso": "Apelação do INSS e do INSS em procedimento comum (Acidente de Trabalho - Ressarcimento ao Erário) · pedido julgado parcialmente procedente",
+   "resultado": "Ato a proferir: apelação de INSS e INSS (ID 291670434, ID 291670439) da sentença ID 291670433; contrarrazões (ID 291670442, ID 291670443) ‖ Proposta pelos precedentes: Voto [VALIDAR paradigma: conferir os precedentes sugeridos e a linha do gabinete] [VALIDAR: Tempestividade da apelação (intimação da sentença)]",
+   "modelo": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação do INSS e do INSS contra sentença (pedido julgado parcialmente procedente): Diante do exposto, julgo parcialmente procedente o pedido para condenar a ré a reembolsar ao autor a metade dos valores vencidos e vincendos pagos a título de benefício concedido em razão do acidente de trabalho sofrido por Geomar Benício d · Também no lote adp-ap-1s",
+   "peculiaridades": "",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "",
+    "correcao": "",
+    "situacao": "A minutar"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {
+    "ato": "Julgamento da apelação (voto)",
+    "materia": "Civil — responsabilidade civil",
+    "origem": "Procedimento comum 0000906-85.2015.4.03.6000 (4ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 291670433 (19/03/2024)",
+    "recurso": "apelação de INSS (ID 291670434, 10/04/2024) e apelação de INSS (ID 291670439, 13/05/2024)",
+    "preparo": "INSS: Isento (ente público); INSS: Isento (ente público)",
+    "monocratica": "Improvável sem paradigma",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "INSS: Isento (ente público); INSS: Isento (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026",
+    "grupo": "G1"
+   },
+   "ajustes": [],
+   "pendencias": [],
+   "minuta": false,
+   "classe": "ApCiv",
+   "tarefa": "Analisar tipo de decisão a proferir",
+   "etiquetas": "1ª Seção; Ação regressiva",
+   "chegada": "04/11/2026",
+   "extracao": {
+    "situacao": "pendente"
+   },
+   "assunto_detalhado": "Acidente de Trabalho - Ressarcimento ao Erário — [VALIDAR detalhamento]",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 291670433 · 19/03/2024 — sentença: julgou parcialmente procedente o pedido | última peça: Contrarrazões (apelado) · ID 291670443 · 03/06/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Triagem assistida (extração automática dos autos): conferir partes, razões e proposta",
+   "teor": {
+    "sintese_fatica": "IMPROCEDENTE. COMPROVAÇÃO DE CULPA E NEXO DE CAUSALIDADE. APELAÇÃO PARCIALMENTE PROVIDA.- Trata-se de apelação interposta pelo INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS contra a sentença proferida pelo Juízo da 2ª Vara Federal de Bauru/SP que julgou improcedente o pedido formulado em ação de regresso ajuizada pelo Apelante, objetivando o ressarcimento por despesas advindas do pagamento de pensão por morte (NB 21/162.",
+    "inicial": "Procedimento comum ajuizado(a) em 05/11/2019 (INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS x MANUFATURACAO DE PRODUTOS PARA ALIM ANIMAL PREMIX LTDA).",
+    "decisao_recorrida": "Sentença ID 291670433 (19/03/2024): Diante do exposto, julgo parcialmente procedente o pedido para condenar a ré a reembolsar ao autor a metade dos valores vencidos e vincendos pagos a título de benefício concedido em razão do acidente de trabalho sofrido por Geomar Benício de Freitas. Os valores vencidos serão corrigidos pelo IPCA-E até novembro/2021, acrescidos de juros de mora de 1% ao mês, ambos a partir de cada desembolso; a partir de dezembro de 2021, os valores serão corrigidos pela SELIC, sem juros até o mês do pagamento, quando incidirá apenas juros 1%, sem outros encargos. Condeno a ré a pagar honorários aos Procuradores do autor, fixados nos percentuais mínimos estabelecidos no art.",
+    "recurso": "INSS (ID 291670434, 10/04/2024): tópicos: 3. D O Mérito; 3.1. Prejudicial De Mérito; 3 - Apelação / Remessa Necessária; 3.3. Da Necessária Reforma Pertinente Aos Honorários. INSS (ID 291670439, 13/05/2024): tópicos: 10.10 - Sinalização De Segurança.",
+    "resposta": "Contrarrazões: ID 291670442 (29/05/2024); ID 291670443 (03/06/2024).",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "[VALIDAR representação]",
+    "preparo": "INSS: Isento (ente público); INSS: Isento (ente público)."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação do INSS e do INSS em procedimento comum (Acidente de Trabalho - Ressarcimento ao Erário) · pedido julgado parcialmente procedente",
+     "sintese": "IMPROCEDENTE. COMPROVAÇÃO DE CULPA E NEXO DE CAUSALIDADE. APELAÇÃO PARCIALMENTE PROVIDA.- Trata-se de apelação interposta pelo INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS contra a sentença proferida pelo Juízo da 2ª Vara Federal de Bauru/SP que julgou improcedente o pedido formulado em ação de regresso ajuizada pelo Apelante, objetivando o ressarcimento por despesas advindas do pagamento de pensão por morte (NB 21/162.",
+     "questoes": "[VALIDAR questões] Acidente de Trabalho - Ressarcimento ao Erário",
+     "rel": {
+      "razoes": "INSS (ID 291670434, 10/04/2024): tópicos: 3. D O Mérito; 3.1. Prejudicial De Mérito; 3 - Apelação / Remessa Necessária; 3.3. Da Necessária Reforma Pertinente Aos Honorários. INSS (ID 291670439, 13/05/2024): tópicos: 10.10 - Sinalização De Segurança.",
+      "contrarrazoes": "Contrarrazões: ID 291670442 (29/05/2024); ID 291670443 (03/06/2024)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "291670433",
+      "juizo": "Procedimento comum 0000906-85.2015.4.03.6000 (4ª Vara Federal de Campo Grande)",
+      "dispositivo": "Diante do exposto, julgo parcialmente procedente o pedido para condenar a ré a reembolsar ao autor a metade dos valores vencidos e vincendos pagos a título de benefício concedido em razão do acidente de trabalho sofrido por Geomar Benício de Freitas. Os valores vencidos serão corrigidos pelo IPCA-E até novembro/2021, acrescidos de juros de mora de 1% ao mês, ambos a partir de cada desembolso; a partir de dezembro de 2021, os valores serão corrigidos pela SELIC, sem juros até o mês do pagamento, quando incidirá apenas juros 1%, sem outros encargos. Condeno a ré a pagar honorários aos Procuradores do autor, fixados nos percentuais mínimos estabelecidos no art."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "INSS",
+       "tipo": "Apelação",
+       "id": "291670434",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "INSS",
+       "tipo": "Apelação",
+       "id": "291670439",
+       "contra": "Sentença"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Petição inicial",
+       "id": "291670246",
+       "data": "2019-11-05",
+       "pje": {
+        "tipo": "Petição Inicial",
+        "descricao": "0000906 85.2015.4.03.6000 VOL 001 1.pdf",
+        "paginas": 1
+       },
+       "trecho": "REQUERER 03/06/2015 18:33:27 - RECEBIMENTO NA SECRETARIA 22/05/2015 12:14:51 - REMESSA EXTERNA PROCURADORIA FEDERAL VISTA 04/03/2015 17:00:00 - JUNTADO(A) MANDADO NAO CUMPRIDO Identifiação Mandado: MC.261.2015.SD04 Complemento Livre: NAO CITADA 05/02/2015 11:13:00 - EXPEDIDO/EXTRAIDO/LAVRADO …"
+      },
+      {
+       "desc": "Sentença",
+       "id": "291670433",
+       "data": "2024-03-19",
+       "nota": "Sentença ID 291670433 (19/03/2024): Diante do exposto, julgo parcialmente procedente o pedido para condenar a ré a reembolsar ao autor a metade dos valores vencidos e vincendos pagos a título de benefício concedido em razão do acidente de trabalho sofrido por Geomar Benício de Freitas.",
+       "pje": {
+        "tipo": "Sentença"
+       },
+       "trecho": "Diante do exposto, julgo parcialmente procedente o pedido para condenar a ré a reembolsar ao autor a metade dos valores vencidos e vincendos pagos a título de benefício concedido em razão do acidente de trabalho sofrido por Geomar Benício de Freitas. Os valores vencidos serão corrigidos pelo IPCA-E …"
+      },
+      {
+       "desc": "Apelação de INSS",
+       "id": "291670434",
+       "data": "2024-04-10",
+       "nota": "INSS (ID 291670434, 10/04/2024): tópicos: 3. D O Mérito; 3.1. Prejudicial De Mérito; 3 - Apelação / Remessa Necessária; 3.3. Da Necessária Reforma Pertinente Aos Honorários. INSS (ID 291670439, 13/05/2024): tópicos: 10.10 - Sinalização De Segurança.",
+       "pje": {
+        "tipo": "Apelação",
+        "paginas": 25
+       },
+       "trecho": "Posto isso, a Apelante requer que seja conhecid a a presente Apelação e a el a seja dado total provimento , com reforma da sentença proferida pelo MM. Juízo a quo no seguinte sentido : a. Requer a reforma da sentença nos termos acima, julgando totalmente improcedentes os pedidos iniciais, para que …"
+      },
+      {
+       "desc": "Apelação de INSS",
+       "id": "291670439",
+       "data": "2024-05-13",
+       "nota": "INSS (ID 291670434, 10/04/2024): tópicos: 3. D O Mérito; 3.1. Prejudicial De Mérito; 3 - Apelação / Remessa Necessária; 3.3. Da Necessária Reforma Pertinente Aos Honorários. INSS (ID 291670439, 13/05/2024): tópicos: 10.10 - Sinalização De Segurança.",
+       "pje": {
+        "tipo": "Apelação"
+       },
+       "trecho": "Isto posto, pugna-se para que seja recebido, conhecido e provido o Apelo ora interposto, com a reforma parcial da decisão de primeira instância. Nestes termos, p.e.deferimento. São Paulo, 13 de maio de 2024. DANILO BUENO MENDES PROCURADOR FEDERAL"
+      },
+      {
+       "desc": "Contrarrazões",
+       "id": "291670442",
+       "data": "2024-05-29",
+       "nota": "Contrarrazões: ID 291670442 (29/05/2024); ID 291670443 (03/06/2024).",
+       "pje": {
+        "tipo": "Contrarrazões"
+       },
+       "trecho": "Requer, por fim, a condenação da ré-recorrente nos consectários da sucumbência recursal, nos termos do art. 85, §11, do CPC. Nesses termos, p.e. deferimento. São Paulo, 29 de maio de 2024. DANILO BUENO MENDES PROCURADOR FEDERAL"
+      },
+      {
+       "desc": "Contrarrazões",
+       "id": "291670443",
+       "data": "2024-06-03",
+       "nota": "Contrarrazões: ID 291670442 (29/05/2024); ID 291670443 (03/06/2024).",
+       "pje": {
+        "tipo": "Contrarrazões",
+        "descricao": "Contrarrazões de Apelação",
+        "paginas": 16
+       },
+       "trecho": "Posto isso, a Apelada pede e requer : 4.1. S ejam recebidas as presentes contrarrazões e, por consequência, seja nega do provimento à Apelação interpost a pel o Apelante , a fim de que não seja reformada a r. sentença prolatada pelo r. Juízo a quo nos termos atacados pelo Instituto Nacional do …"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 291670433 · 19/03/2024 — sentença: julgou parcialmente procedente o pedido | última peça: Contrarrazões (apelado) · ID 291670443 · 03/06/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Triagem assistida (extração automática dos autos): conferir partes, razões e proposta",
+     "assuntoDet": "Acidente de Trabalho - Ressarcimento ao Erário — [VALIDAR detalhamento]",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Não verificado"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Sentença · ID 291670433 · 19/03/2024 — sentença: julgou parcialmente procedente o pedido",
+    "ultima_peca": "Contrarrazões (apelado) · ID 291670443 · 03/06/2024",
+    "ultima_informacao": "Ato ordinatório · ID 291670441 · 13/05/2024",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 291670433 · 19/03/2024 — sentença: julgou parcialmente procedente o pedido | última peça: Contrarrazões (apelado) · ID 291670443 · 03/06/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária"
+   }
+  },
+  {
+   "sessao": "",
+   "item": 4,
+   "processo": "5000972-90.2023.4.03.6002",
+   "recurso": "Apelação cível",
+   "partes": "INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS x ADUBOS FERTIPOL INDUSTRIA E COMERCIO LTDA",
+   "exequente": "INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS",
+   "executado": "ADUBOS FERTIPOL INDUSTRIA E COMERCIO LTDA",
+   "assunto": "Acidente de Trabalho - Ressarcimento ao Erário",
+   "grupo": "G1",
+   "tipo_caso": "Apelação do INSS em procedimento comum (Acidente de Trabalho - Ressarcimento ao Erário) · pedido julgado improcedente",
+   "resultado": "Ato a proferir: apelação de INSS (ID 340794280) da sentença ID 340794279; contrarrazões (ID 340794282) ‖ Proposta pelos precedentes: Voto [VALIDAR paradigma: conferir os precedentes sugeridos e a linha do gabinete] [VALIDAR: Tempestividade da apelação (intimação da sentença)]",
+   "modelo": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação do INSS contra sentença (pedido julgado improcedente): Ante o exposto, julgo improcedente o pedido.Parte autora isenta de custas.Condeno o autor ao pagamento de honorários advocatícios, arbitrados em 10% do valor da causa, corrigido monetariamente e acrescido de juros de mora de acordo com o ma · Também no lote adp-ap-1s",
+   "peculiaridades": "",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "",
+    "correcao": "",
+    "situacao": "A minutar"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {
+    "ato": "Julgamento da apelação (voto)",
+    "materia": "Civil — responsabilidade civil",
+    "origem": "Procedimento comum 5000972-90.2023.4.03.6002 (2ª Vara Federal de Dourados)",
+    "decisao_agravada": "Sentença ID 340794279 (20/02/2025)",
+    "recurso": "apelação de INSS (ID 340794280, 12/06/2025)",
+    "preparo": "INSS: Isento (ente público)",
+    "monocratica": "Improvável sem paradigma",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "INSS: Isento (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026",
+    "grupo": "G1"
+   },
+   "ajustes": [],
+   "pendencias": [],
+   "minuta": false,
+   "classe": "ApCiv",
+   "tarefa": "Analisar tipo de decisão a proferir",
+   "etiquetas": "1ª Seção; Ação regressiva; Auxílio-acidente",
+   "chegada": "04/11/2026",
+   "extracao": {
+    "situacao": "pendente"
+   },
+   "assunto_detalhado": "Acidente de Trabalho - Ressarcimento ao Erário — [VALIDAR detalhamento]",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 356966572 · 27/02/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 340794279 · 20/02/2025 — sentença: julgou improcedente o pedido | última peça: Contrarrazões de Recurso (apelado) · ID 340794282 · 07/10/2025 | última movimentação: 08/04/2026 01:13 · Decorrido prazo de INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS em 07/04/2026 23:59. · Triagem assistida (extração automática dos autos): conferir partes, razões e proposta",
+   "teor": {
+    "sintese_fatica": "I - RELATÓRIOTrata-se de ação regressiva por acidente de trabalho que o INSS move em face de ADUBOS FERTIPOL INDÚSTRIA E COMÉRCIO LTDA., visando o ressarcimento de valores de benefício previdenciário pago ao segurado, em decorrência de acidente de trabalho.",
+    "inicial": "Procedimento comum ajuizado(a) em 19/04/2023 (INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS x ADUBOS FERTIPOL INDUSTRIA E COMERCIO LTDA).",
+    "decisao_recorrida": "Sentença ID 340794279 (20/02/2025): Ante o exposto, julgo improcedente o pedido.Parte autora isenta de custas.Condeno o autor ao pagamento de honorários advocatícios, arbitrados em 10% do valor da causa, corrigido monetariamente e acrescido de juros de mora de acordo com o manual de cálculos da Justiça Federal. Os juros de mora incidem após o trânsito em jugado da sentença.Sentença não sujeita a remessa necessária.Com a eventual interposição de recurso tempestivo, determino, desde já, a intimação da parte contrária para contrarrazões no prazo legal, bem como a oportuna remessa dos autos ao Tribunal Regional Federal da 3ª Região.",
+    "recurso": "INSS (ID 340794280, 12/06/2025): tópicos: Ii - Fundamentação; Iii - Dispositivo; Ii - Mérito A) Do Acidente E Da Negligência.",
+    "resposta": "Contrarrazões: ID 340794282 (07/10/2025).",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "[VALIDAR representação]",
+    "preparo": "INSS: Isento (ente público)."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação do INSS em procedimento comum (Acidente de Trabalho - Ressarcimento ao Erário) · pedido julgado improcedente",
+     "sintese": "I - RELATÓRIOTrata-se de ação regressiva por acidente de trabalho que o INSS move em face de ADUBOS FERTIPOL INDÚSTRIA E COMÉRCIO LTDA., visando o ressarcimento de valores de benefício previdenciário pago ao segurado, em decorrência de acidente de trabalho.",
+     "questoes": "[VALIDAR questões] Acidente de Trabalho - Ressarcimento ao Erário",
+     "rel": {
+      "razoes": "INSS (ID 340794280, 12/06/2025): tópicos: Ii - Fundamentação; Iii - Dispositivo; Ii - Mérito A) Do Acidente E Da Negligência.",
+      "contrarrazoes": "Contrarrazões: ID 340794282 (07/10/2025)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "340794279",
+      "juizo": "Procedimento comum 5000972-90.2023.4.03.6002 (2ª Vara Federal de Dourados)",
+      "dispositivo": "Ante o exposto, julgo improcedente o pedido.Parte autora isenta de custas.Condeno o autor ao pagamento de honorários advocatícios, arbitrados em 10% do valor da causa, corrigido monetariamente e acrescido de juros de mora de acordo com o manual de cálculos da Justiça Federal. Os juros de mora incidem após o trânsito em jugado da sentença.Sentença não sujeita a remessa necessária.Com a eventual interposição de recurso tempestivo, determino, desde já, a intimação da parte contrária para contrarrazões no prazo legal, bem como a oportuna remessa dos autos ao Tribunal Regional Federal da 3ª Região."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "INSS",
+       "tipo": "Apelação",
+       "id": "340794280",
+       "contra": "Sentença"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Petição inicial",
+       "id": "340794062",
+       "data": "2023-04-19",
+       "pje": {
+        "tipo": "Petição inicial - PDF",
+        "descricao": "1 PETIÇÃO INICIAL 00434.000042 2023 45 ADUBOS FERTIPOL INDUSTRIA E COMERCIO LTDA NR 12",
+        "paginas": 27
+       },
+       "trecho": "Diante do exposto , a Autarquia Previdenciária requer: 1) o recebimento da presente ação, determinand o - se a citação d a ré no endereço declinado na qualificação, bem como sua intimação para que manifeste eventual interesse na realização de acordo ou transação, entrando em contato com a unidade …"
+      },
+      {
+       "desc": "Sentença",
+       "id": "340794279",
+       "data": "2025-02-20",
+       "nota": "Sentença ID 340794279 (20/02/2025): Ante o exposto, julgo improcedente o pedido.Parte autora isenta de custas.Condeno o autor ao pagamento de honorários advocatícios, arbitrados em 10% do valor da causa, corrigido monetariamente e acrescido de juros de mora de acordo com o manual de cálculos da Justiça Federal.",
+       "pje": {
+        "tipo": "Sentença"
+       },
+       "trecho": "julgo improcedente o pedido.Parte autora isenta de custas.Condeno o autor ao pagamento de honorários advocatícios, arbitrados em 10% do valor da causa, corrigido monetariamente e acrescido de juros de mora de acordo com o manual de cálculos da Justiça Federal. Os juros de mora incidem após o …"
+      },
+      {
+       "desc": "Apelação de INSS",
+       "id": "340794280",
+       "data": "2025-06-12",
+       "nota": "INSS (ID 340794280, 12/06/2025): tópicos: Ii - Fundamentação; Iii - Dispositivo; Ii - Mérito A) Do Acidente E Da Negligência.",
+       "pje": {
+        "tipo": "Apelação"
+       },
+       "trecho": "requer que seja recebido, conhecido e provido o presente recurso de Apelação, pelas razões ora trazidas, reformando-se a decisão proferida pelo d. Juízo a quo, para que: sejam JULGADOS TOTALMENTE PROCEDENTES os pedidos deduzidos na peça inicial, de modo a se acolher integralmente a pretensão do …"
+      },
+      {
+       "desc": "Contrarrazões",
+       "id": "340794282",
+       "data": "2025-10-07",
+       "nota": "Contrarrazões: ID 340794282 (07/10/2025).",
+       "pje": {
+        "tipo": "Contrarrazões de Recurso",
+        "paginas": 8
+       },
+       "trecho": "Diante do exposto, requer sejam recebidas as presentes contrarrazões e preliminarmente seja reconhecido a violação ao princípio da dialeticidade recursal da apelante negando conhecimento ao recurso . No mérito , seja confirmada a r. sentença do juízo a quo em sua integralidade , bem como sejam …"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 356966572 · 27/02/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 340794279 · 20/02/2025 — sentença: julgou improcedente o pedido | última peça: Contrarrazões de Recurso (apelado) · ID 340794282 · 07/10/2025 | última movimentação: 08/04/2026 01:13 · Decorrido prazo de INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS em 07/04/2026 23:59. · Triagem assistida (extração automática dos autos): conferir partes, razões e proposta",
+     "assuntoDet": "Acidente de Trabalho - Ressarcimento ao Erário — [VALIDAR detalhamento]",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Não verificado"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "08/04/2026 01:13 · Decorrido prazo de INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS em 07/04/2026 23:59.",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Decisão · ID 356966572 · 27/02/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso)",
+    "ultima_decisao_relevante": "Sentença · ID 340794279 · 20/02/2025 — sentença: julgou improcedente o pedido",
+    "ultima_peca": "Contrarrazões de Recurso (apelado) · ID 340794282 · 07/10/2025",
+    "ultima_informacao": "Informação · ID 340794283 · 24/10/2025",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 356966572 · 27/02/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 340794279 · 20/02/2025 — sentença: julgou improcedente o pedido | última peça: Contrarrazões de Recurso (apelado) · ID 340794282 · 07/10/2025 | última movimentação: 08/04/2026 01:13 · Decorrido prazo de INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS em 07/04/2026 23:59."
+   }
+  },
+  {
+   "sessao": "",
+   "item": 5,
+   "processo": "5000225-25.2018.4.03.6000",
+   "recurso": "Apelação cível",
+   "partes": "INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS x L M VIDROS E CRISTAIS TEMPERADOS LTDA",
+   "exequente": "INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS",
+   "executado": "L M VIDROS E CRISTAIS TEMPERADOS LTDA",
+   "assunto": "Acidente de Trabalho - Ressarcimento ao Erário",
+   "grupo": "G1",
+   "tipo_caso": "Apelação do INSS e de Instituto Nacional do Seguro Social - Inss e de Instituto Nacional do Seguro Social - Inss em procedimento comum (Acidente de Trabalho - Ressarcimento ao Erário) · pedido julgado parcialmente procedente",
+   "resultado": "Ato a proferir: apelação de INSS e Instituto Nacional do Seguro Social - Inss e Instituto Nacional do Seguro Social - Inss (ID 371494971, ID 371494972, ID 371494973) da sentença ID 371494970; contrarrazões (ID 371494976, ID 371494977) ‖ Proposta pelos precedentes: Voto [VALIDAR paradigma: conferir os precedentes sugeridos e a linha do gabinete] [VALIDAR: Tempestividade da apelação (intimação da sentença); Parte apelante]",
+   "modelo": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação do INSS e de Instituto Nacional do Seguro Social - Inss e de Instituto Nacional do Seguro Social - Inss contra sentença (pedido julgado parcialmente procedente): Ante o exposto, JULGO PARCIALMENTE PROCEDENTES os pedidos, para condenar a L M VIDROS E CRISTAIS TEMPERADOS LTDA. ao ressarcimento de 50% (cinquenta por cento) dos valores despendidos pelo INSS com o pagamento do benefício de pensão por mor · Também no lote adp-ap-1s",
+   "peculiaridades": "",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "",
+    "correcao": "",
+    "situacao": "A minutar"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {
+    "ato": "Julgamento da apelação (voto)",
+    "materia": "Civil — responsabilidade civil",
+    "origem": "Procedimento comum 5000225-25.2018.4.03.6000 (4ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 371494970 (17/09/2025)",
+    "recurso": "apelação de INSS (ID 371494971, 22/09/2025) e apelação de Instituto Nacional do Seguro Social - Inss (ID 371494972, 07/10/2025) e apelação de Instituto Nacional do Seguro Social - Inss [VALIDAR parte] (ID 371494973, 07/10/2025)",
+    "preparo": "INSS: Isento (ente público); Instituto Nacional do Seguro Social - Inss: [VALIDAR preparo]; Instituto Nacional do Seguro Social - Inss [VALIDAR parte]: [VALIDAR preparo]",
+    "monocratica": "Improvável sem paradigma",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "INSS: Isento (ente público); Instituto Nacional do Seguro Social - Inss: [VALIDAR preparo]; Instituto Nacional do Seguro Social - Inss [VALIDAR parte]: [VALIDAR preparo] · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026",
+    "grupo": "G1"
+   },
+   "ajustes": [],
+   "pendencias": [],
+   "minuta": false,
+   "classe": "ApCiv",
+   "tarefa": "Analisar tipo de decisão a proferir",
+   "etiquetas": "1ª Seção; APTO - CONFERIR; BRUNO; Responsabilidade Civil",
+   "chegada": "04/11/2026",
+   "extracao": {
+    "situacao": "pendente"
+   },
+   "assunto_detalhado": "Acidente de Trabalho - Ressarcimento ao Erário — [VALIDAR detalhamento]",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 371494970 · 17/09/2025 — sentença: julgou parcialmente procedente o pedido | última peça: Contrarrazões (apelado) · ID 371494977 · 19/03/2026 | última movimentação: 20/05/2026 18:12 · Conclusos para julgamento · Laudo pericial: ID 371494936 · Triagem assistida (extração automática dos autos): conferir partes, razões e proposta",
+   "teor": {
+    "sintese_fatica": "[VALIDAR síntese] INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS x L M VIDROS E CRISTAIS TEMPERADOS LTDA",
+    "inicial": "Procedimento comum ajuizado(a) em 17/01/2018 (INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS x L M VIDROS E CRISTAIS TEMPERADOS LTDA).",
+    "decisao_recorrida": "Sentença ID 371494970 (17/09/2025): Ante o exposto, JULGO PARCIALMENTE PROCEDENTES os pedidos, para condenar a L M VIDROS E CRISTAIS TEMPERADOS LTDA. ao ressarcimento de 50% (cinquenta por cento) dos valores despendidos pelo INSS com o pagamento do benefício de pensão por morte (NB 93/177.928.880-5), parcelas vencidas e vincendas, em razão da configuração de culpa concorrente entre a empresa ré e a vítima do acidente de trabalho, com fulcro no art. 487, inciso I, do Código de Processo Civil, nos termos da fundamentação.No cálculo, devem ser observadas as orientações constantes no Manual de Cálculos da Justiça Federal, atualizado pelas orientações mais recentes do tema.",
+    "recurso": "INSS (ID 371494971, 22/09/2025): tópicos: Iii. Dispositivo; 7 - Conclusão. Instituto Nacional do Seguro Social - Inss (ID 371494972, 07/10/2025): tópicos: 3. Preliminarmente A) Da Nulidade Da Sentença Em Razão Do Cerceamento De Defesa; I. Caso Em Exame; Ii. Questão Em Discussão A; Iii. Razões De Decidir O; Iv . Dispositivo E Tese; Ii. Questão Em Discussão. Instituto Nacional do Seguro Social - Inss [VALIDAR parte] (ID 371494973, 07/10/2025): [VALIDAR razões]",
+    "resposta": "Contrarrazões: ID 371494976 (13/03/2026); ID 371494977 (19/03/2026).",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "[VALIDAR representação]",
+    "preparo": "INSS: Isento (ente público); Instituto Nacional do Seguro Social - Inss: [VALIDAR preparo]; Instituto Nacional do Seguro Social - Inss [VALIDAR parte]: [VALIDAR preparo]."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação do INSS e de Instituto Nacional do Seguro Social - Inss e de Instituto Nacional do Seguro Social - Inss em procedimento comum (Acidente de Trabalho - Ressarcimento ao Erário) · pedido julgado parcialmente procedente",
+     "sintese": "[VALIDAR síntese] INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS x L M VIDROS E CRISTAIS TEMPERADOS LTDA",
+     "questoes": "[VALIDAR questões] Acidente de Trabalho - Ressarcimento ao Erário",
+     "rel": {
+      "razoes": "INSS (ID 371494971, 22/09/2025): tópicos: Iii. Dispositivo; 7 - Conclusão. Instituto Nacional do Seguro Social - Inss (ID 371494972, 07/10/2025): tópicos: 3. Preliminarmente A) Da Nulidade Da Sentença Em Razão Do Cerceamento De Defesa; I. Caso Em Exame; Ii. Questão Em Discussão A; Iii. Razões De Decidir O; Iv . Dispositivo E Tese; Ii. Questão Em Discussão. Instituto Nacional do Seguro Social - Inss [VALIDAR parte] (ID 371494973, 07/10/2025): [VALIDAR razões]",
+      "contrarrazoes": "Contrarrazões: ID 371494976 (13/03/2026); ID 371494977 (19/03/2026)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "371494970",
+      "juizo": "Procedimento comum 5000225-25.2018.4.03.6000 (4ª Vara Federal de Campo Grande)",
+      "dispositivo": "Ante o exposto, JULGO PARCIALMENTE PROCEDENTES os pedidos, para condenar a L M VIDROS E CRISTAIS TEMPERADOS LTDA. ao ressarcimento de 50% (cinquenta por cento) dos valores despendidos pelo INSS com o pagamento do benefício de pensão por morte (NB 93/177.928.880-5), parcelas vencidas e vincendas, em razão da configuração de culpa concorrente entre a empresa ré e a vítima do acidente de trabalho, com fulcro no art. 487, inciso I, do Código de Processo Civil, nos termos da fundamentação.No cálculo, devem ser observadas as orientações constantes no Manual de Cálculos da Justiça Federal, atualizado pelas orientações mais recentes do tema."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "INSS",
+       "tipo": "Apelação",
+       "id": "371494971",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Instituto Nacional do Seguro Social - Inss",
+       "tipo": "Apelação",
+       "id": "371494972",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Instituto Nacional do Seguro Social - Inss [VALIDAR parte]",
+       "tipo": "Apelação",
+       "id": "371494973",
+       "contra": "Sentença"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Petição inicial",
+       "id": "371494553",
+       "data": "2018-01-17",
+       "pje": {
+        "tipo": "Petição inicial - PDF",
+        "descricao": "petição inicial regressiva L M vidros",
+        "paginas": 12
+       },
+       "trecho": "Diante do exposto, requer a Autarquia Previdenciária: 1) o recebimento da presente ação, determinando-se a citação da ré no endereço declinado na epígrafe, bem como a sua intimação para comparecer em audiência de conciliação, nos termos do art. 334, caput do CPC/2015; 2) a procedência total dos …"
+      },
+      {
+       "desc": "Laudo pericial",
+       "id": "371494936",
+       "data": "2018-11-21",
+       "nota": "Laudo pericial: ID 371494936 · Triagem assistida (extração automática dos autos): conferir partes, razões e proposta",
+       "pje": {
+        "tipo": "Documento Comprobatório",
+        "descricao": "12 LAUDO PERICIAL",
+        "paginas": 9,
+        "sem_texto": true
+       }
+      },
+      {
+       "desc": "Sentença",
+       "id": "371494970",
+       "data": "2025-09-17",
+       "nota": "Sentença ID 371494970 (17/09/2025): Ante o exposto, JULGO PARCIALMENTE PROCEDENTES os pedidos, para condenar a L M VIDROS E CRISTAIS TEMPERADOS LTDA. ao ressarcimento de 50% (cinquenta por cento) dos valores despendidos pelo INSS com o pagamento do benefício de pensão por morte (NB 93/177.928.880-5), parcelas vencidas e vincendas, em razão da configuração de culpa concorrente entre a empresa ré e a vítima do …",
+       "pje": {
+        "tipo": "Sentença tipo A"
+       },
+       "trecho": "DISPOSITIVOAnte o exposto, JULGO PARCIALMENTE PROCEDENTES os pedidos, para condenar a L M VIDROS E CRISTAIS TEMPERADOS LTDA. ao ressarcimento de 50% (cinquenta por cento) dos valores despendidos pelo INSS com o pagamento do benefício de pensão por morte (NB 93/177.928.880-5), parcelas vencidas e …"
+      },
+      {
+       "desc": "Apelação de INSS",
+       "id": "371494971",
+       "data": "2025-09-22",
+       "nota": "INSS (ID 371494971, 22/09/2025): tópicos: Iii.",
+       "pje": {
+        "tipo": "Apelação",
+        "descricao": "P APELAÇÃO 2938774143 EM 22/09/2025 16:31:10",
+        "paginas": 8
+       },
+       "trecho": "Diante do exposto, o INSTITUTO NACIONAL DO SEGURO SOCIAL – INSS requer que seja recebido, conhecido e provido o presente recurso de Apelação, pelas razões ora trazidas, reformando-se a decisão proferida pelo d. Juízo a quo , para reconhecer a responsabilidade integral da ré, julgando-se totalmente …"
+      },
+      {
+       "desc": "Apelação de Instituto Nacional do Seguro Social - Inss",
+       "id": "371494972",
+       "data": "2025-10-07",
+       "nota": "Instituto Nacional do Seguro Social - Inss (ID 371494972, 07/10/2025): tópicos: 3.",
+       "pje": {
+        "tipo": "Apelação",
+        "paginas": 20
+       },
+       "trecho": "Ante o exposto, requer-se: a) Conhecimento e provimento integral da presente Apelação com a consequente reforma da r. sentença, reconhecendo-se a nulidade do decisum por cerceamento de defesa , diante do indeferimento da prova requerida (ofício ao Google/YouTube para acesso ao vídeo do acidente), e …"
+      },
+      {
+       "desc": "Apelação de Instituto Nacional do Seguro Social - Inss",
+       "id": "371494973",
+       "data": "2025-10-07",
+       "nota": "Instituto Nacional do Seguro Social - Inss [VALIDAR parte] (ID 371494973, 07/10/2025): [VALIDAR razões]",
+       "pje": {
+        "tipo": "Custas",
+        "descricao": "Boleto LM Vidros Apelacao INNS",
+        "paginas": 1
+       },
+       "trecho": "Requerente/Autor Seção Judiciária: Base de Cálculo: Vara: Classe: L M VIDROS E CRISTAIS TEMPERADOS LTDA 33.178.088/0001-95 21.372,33 GUIA DE RECOLHIMENTO DA UNIÃO - GRU MINISTÉRIO DA FAZENDA SECRETARIA DO TESOURO NACIONAL Nome da Unidade Gestora Arrecadadora JUSTICA FEDERAL DE PRIMEIRO GRAU - MS …"
+      },
+      {
+       "desc": "Contrarrazões",
+       "id": "371494976",
+       "data": "2026-03-13",
+       "nota": "Contrarrazões: ID 371494976 (13/03/2026); ID 371494977 (19/03/2026).",
+       "pje": {
+        "tipo": "Contrarrazões",
+        "descricao": "P CONTRARRAZÕES 3120374289 EM 13/03/2026 15:32:26",
+        "paginas": 6
+       },
+       "trecho": "Diante do exposto , consoante as razões preconizadas acima, demonstrada de forma insofismável a inconsistência do recurso interposto pelo recorrente, requer-se seja negado provimento ao Recurso , e, por conseguinte, seja mantida a r. sentença quanto ao tópico recorrido, com a majoração dos …"
+      },
+      {
+       "desc": "Contrarrazões",
+       "id": "371494977",
+       "data": "2026-03-19",
+       "nota": "Contrarrazões: ID 371494976 (13/03/2026); ID 371494977 (19/03/2026).",
+       "pje": {
+        "tipo": "Contrarrazões",
+        "paginas": 11
+       },
+       "trecho": "Diante do exposto, requer a Vossas Excelências: a) A total improcedência do Recurso de Apelação interposto pela parte Requerida, mantendo-se irretocável a sentença proferida pelo Juízo a quo , pelos seus próprios fundamentos . b) Outrossim, os honorários merecem ser majorados, ante o trabalho …"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 371494970 · 17/09/2025 — sentença: julgou parcialmente procedente o pedido | última peça: Contrarrazões (apelado) · ID 371494977 · 19/03/2026 | última movimentação: 20/05/2026 18:12 · Conclusos para julgamento · Laudo pericial: ID 371494936 · Triagem assistida (extração automática dos autos): conferir partes, razões e proposta",
+     "assuntoDet": "Acidente de Trabalho - Ressarcimento ao Erário — [VALIDAR detalhamento]",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Não verificado"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "20/05/2026 18:12 · Conclusos para julgamento",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Sentença tipo A · ID 371494970 · 17/09/2025 — sentença: julgou parcialmente procedente o pedido",
+    "ultima_peca": "Contrarrazões (apelado) · ID 371494977 · 19/03/2026",
+    "ultima_informacao": "Informação · ID 371494978 · 06/05/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 371494970 · 17/09/2025 — sentença: julgou parcialmente procedente o pedido | última peça: Contrarrazões (apelado) · ID 371494977 · 19/03/2026 | última movimentação: 20/05/2026 18:12 · Conclusos para julgamento"
+   }
+  }
+ ],
+ "titulo": "Série · INSS: ações regressivas (acidente de trabalho)",
+ "descricao": "Triagem (Analisar tipo de decisão a proferir): apelações em ações regressivas do INSS contra empregadores por acidente de trabalho (artigo 120 da Lei 8.213/1991). Nenhum processo pautado nesta série.",
+ "grupos": [
+  {
+   "id": "G1",
+   "rotulo": "Ação regressiva por acidente de trabalho (artigo 120 da Lei 8.213/1991)",
+   "cor": "#2a4a6a",
+   "resultado": "Voto [VALIDAR: culpa do empregador, prescrição e encargos]",
+   "modelo": ""
+  }
+ ],
+ "atualizado_em": "2026-11-21"
+}
