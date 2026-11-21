@@ -12567,12 +12567,14 @@
    "exequente": "DELEGADO DA RECEITA FEDERAL DO BRASIL EM CAMPO GRANDE",
    "executado": "NORS EQUIPAMENTOS DE CONSTRUCAO CENTRO-OESTE LTDA.",
    "assunto": "IRPJ/Imposto de Renda de Pessoa Jurídica",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "RM3",
+   "tipo_caso": "Apelação da União e remessa necessária em mandado de segurança · PAT: dedução em dobro das despesas do lucro tributável (artigo 1º da Lei 6.321/1976) · limites do Decreto 10.854/2021 (redação do Decreto 11.678/2023) · segurança concedida",
+   "resultado": "Ato a proferir: apelação da União (ID 366681333) e remessa necessária da sentença ID 366681328; contrarrazões com os Pareceres SEI 268/2023/MF e 1506/2024/MF (IDs 366681335 a 366681337); MPF sem intervenção (ID 369314856) ‖ Proposta pelos precedentes: Decisão monocrática: não conhecer da apelação (artigo 932, III, do CPC) e da remessa necessária (artigo 496, § 4º, IV, do CPC), se confirmada a dispensa da PGFN; subsidiariamente, desprovimento pela linha da 3ª Turma [VALIDAR] [VALIDAR: Alcance do Parecer SEI 1506/2024/MF e do Despacho 239/2025/PGFN-MF (dispensa vinculante)]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação da União e remessa necessária da sentença que assegurou à Nors Máquinas a dedução em dobro do PAT sem os limites do Decreto 10.854/2021. As razões da União tratam de sentença de improcedência e pedem o desprovimento de \"recurso da autora\", que não existe.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -12583,7 +12585,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Não conhecimento da apelação e da remessa necessária ou desprovimento (decisão monocrática)",
+    "materia": "Tributário — IRPJ (PAT)",
+    "origem": "Mandado de segurança 5008584-51.2024.4.03.6000 (2ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 366681328 (29/01/2026)",
+    "recurso": "apelação de União (Fazenda Nacional) (ID 366681333, 24/02/2026) · remessa necessária",
+    "preparo": "União (Fazenda Nacional): Isento (ente público)",
+    "monocratica": "Sim: artigo 932, III, do CPC (razões dissociadas) e artigo 496, § 4º, IV, do CPC, ou desprovimento pela linha da 3ª Turma",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "União (Fazenda Nacional): Isento (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -12593,6 +12606,122 @@
    "chegada": "04/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "PAT — dedução em dobro e limites infralegais (Decretos 10.854/2021 e 11.678/2023)",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 366681328 · 29/01/2026 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 369314856 · 27/04/2026 | última movimentação: 24/07/2026 00:41 · Decorrido prazo de MINISTERIO PUBLICO FEDERAL em 23/07/2026 23:59. · Razões dissociadas: apelação pede \"seja negado provimento ao recurso da Autora\" (ID 366681333) · Contrarrazões: PGFN incluiu o tema em lista de dispensa (Parecer SEI 1506/2024/MF, sobre o artigo 186 do Decreto 10.854/2021, e Despacho 239/2025/PGFN-MF) [VALIDAR] · Remessa: artigo 496, § 4º, IV, do CPC (orientação vinculante administrativa) [VALIDAR] · Mesma matéria de 5013461-34 (RM3) · Linha da 3ª Turma: normas infralegais não restringem o benefício (ApelRemNec 5032143-38.2018.4.03.6100, 22/07/2022)",
+   "teor": {
+    "sintese_fatica": "Nors Máquinas Centro-Oeste Ltda., optante pelo lucro real, pede a dedução em dobro das despesas com o PAT sem as limitações dos decretos. A sentença concedeu a segurança.",
+    "inicial": "Mandado de segurança contra o Delegado da Receita Federal do Brasil em Campo Grande.",
+    "decisao_recorrida": "Sentença ID 366681328 (29/01/2026): concedeu a segurança para assegurar a dedução em dobro das despesas com o PAT diretamente do lucro tributável para fins de IRPJ (artigo 1º da Lei 6.321/1976), afastadas as restrições infralegais quanto à base de cálculo, ao custo das refeições e à faixa salarial dos beneficiários.",
+    "recurso": "União (Fazenda Nacional) (ID 366681333, 24/02/2026): validade das restrições do Decreto 10.854/2021, na redação do Decreto 11.678/2023; as razões aludem a sentença de improcedência e pedem o desprovimento de recurso da autora.",
+    "resposta": "Contrarrazões da impetrante (ID 366681335).",
+    "parecer": "MPF ID 369314856: Ausência de interesse que justifique intervenção",
+    "memoriais": "Não consta",
+    "representacao": "Impetrante assistida por advogado constituído [VALIDAR].",
+    "preparo": "União (Fazenda Nacional): Isento (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação da União e remessa necessária em mandado de segurança · PAT: dedução em dobro das despesas do lucro tributável (artigo 1º da Lei 6.321/1976) · limites do Decreto 10.854/2021 (redação do Decreto 11.678/2023) · segurança concedida",
+     "sintese": "Nors Máquinas Centro-Oeste Ltda., optante pelo lucro real, pede a dedução em dobro das despesas com o PAT sem as limitações dos decretos. A sentença concedeu a segurança.",
+     "questoes": "1) Razões dissociadas da apelação; 2) dispensa de remessa por orientação administrativa vinculante (artigo 496, § 4º, IV, do CPC); 3) PAT: limites infralegais à dedução.",
+     "rel": {
+      "razoes": "União (Fazenda Nacional) (ID 366681333, 24/02/2026): validade das restrições do Decreto 10.854/2021, na redação do Decreto 11.678/2023; as razões aludem a sentença de improcedência e pedem o desprovimento de recurso da autora.",
+      "contrarrazoes": "Contrarrazões da impetrante (ID 366681335)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "366681328",
+      "juizo": "Mandado de segurança 5008584-51.2024.4.03.6000 (2ª Vara Federal de Campo Grande)",
+      "dispositivo": "concedeu a segurança para assegurar a dedução em dobro das despesas com o PAT diretamente do lucro tributável para fins de IRPJ (artigo 1º da Lei 6.321/1976), afastadas as restrições infralegais quanto à base de cálculo, ao custo das refeições e à faixa salarial dos beneficiários."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2024-08-08",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "União (Fazenda Nacional)",
+       "tipo": "Apelação",
+       "id": "366681333",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "366681328",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: segurança concedida",
+       "id": "366681328",
+       "data": "2026-01-29"
+      },
+      {
+       "desc": "Apelação da União",
+       "id": "366681333",
+       "data": "2026-02-24"
+      },
+      {
+       "desc": "Contrarrazões da impetrante",
+       "id": "366681335",
+       "data": "2026-03-26"
+      },
+      {
+       "desc": "Documento: Parecer SEI 268/2023/MF",
+       "id": "366681336",
+       "data": "2026-03-26"
+      },
+      {
+       "desc": "Documento: Parecer SEI 1506/2024/MF",
+       "id": "366681337",
+       "data": "2026-03-26"
+      },
+      {
+       "desc": "Parecer do MPF (sem intervenção)",
+       "id": "369314856",
+       "data": "2026-04-27"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 366681328 · 29/01/2026 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 369314856 · 27/04/2026 | última movimentação: 24/07/2026 00:41 · Decorrido prazo de MINISTERIO PUBLICO FEDERAL em 23/07/2026 23:59. · Razões dissociadas: apelação pede \"seja negado provimento ao recurso da Autora\" (ID 366681333) · Contrarrazões: PGFN incluiu o tema em lista de dispensa (Parecer SEI 1506/2024/MF, sobre o artigo 186 do Decreto 10.854/2021, e Despacho 239/2025/PGFN-MF) [VALIDAR] · Remessa: artigo 496, § 4º, IV, do CPC (orientação vinculante administrativa) [VALIDAR] · Mesma matéria de 5013461-34 (RM3) · Linha da 3ª Turma: normas infralegais não restringem o benefício (ApelRemNec 5032143-38.2018.4.03.6100, 22/07/2022)",
+     "assuntoDet": "PAT — dedução em dobro e limites infralegais (Decretos 10.854/2021 e 11.678/2023)",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Mandado de segurança",
+     "parecer": "Com parecer",
+     "idParecer": "369314856",
+     "parecerSentido": "Ausência de interesse que justifique intervenção"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "24/07/2026 00:41 · Decorrido prazo de MINISTERIO PUBLICO FEDERAL em 23/07/2026 23:59.",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Sentença · ID 366681328 · 29/01/2026 — sentença: concedeu a segurança; sujeita a reexame necessário",
+    "ultima_peca": "Parecer \"Falta de Interesse\" (MPF) · ID 369314856 · 27/04/2026",
+    "ultima_informacao": "Informação · ID 366681338 · 07/04/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 366681328 · 29/01/2026 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 369314856 · 27/04/2026 | última movimentação: 24/07/2026 00:41 · Decorrido prazo de MINISTERIO PUBLICO FEDERAL em 23/07/2026 23:59."
    }
   },
   {
@@ -12604,12 +12733,14 @@
    "exequente": "DELEGADO DA DELEGACIA DA RECEITA FEDERAL DO BRASIL EM CAMPO GRANDE",
    "executado": "AVANTI INDUSTRIA, COMERCIO, IMPORTACAO E EXPORTACAO LTDA",
    "assunto": "IRPJ/Imposto de Renda de Pessoa Jurídica",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "RM2",
+   "tipo_caso": "Apelação da União e remessa necessária em mandado de segurança · exclusão dos créditos presumidos de ICMS das bases do IRPJ e da CSLL (EREsp 1.517.492/PR; Tema 1.182/STJ; Lei 14.789/2023) · três impetrantes do grupo Avanti · segurança concedida, com compensação",
+   "resultado": "Ato a proferir: apelação da União (ID 368205953) e remessa necessária da sentença ID 368205948; contrarrazões (ID 368205955); MPF sem intervenção (ID 369622050) ‖ Proposta pelos precedentes: Voto: rejeitar ou acolher a nulidade parcial; distinguir o período anterior e posterior à Lei 14.789/2023; aplicar EREsp 1.517.492/PR e Tema 1.182/STJ conforme o benefício [VALIDAR] [VALIDAR: Termo inicial da Lei 14.789/2023 e seus efeitos sobre o pedido]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação da União e remessa necessária da sentença que excluiu os créditos presumidos de ICMS das bases do IRPJ e da CSLL das três impetrantes. A União alega dispositivo genérico e defende os requisitos do Tema 1.182/STJ e o regime da Lei 14.789/2023.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -12620,7 +12751,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da apelação e da remessa necessária (voto)",
+    "materia": "Tributário — IRPJ/CSLL (crédito presumido de ICMS)",
+    "origem": "Mandado de segurança 5003606-94.2025.4.03.6000 (4ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 368205948 (30/01/2026)",
+    "recurso": "apelação de União (Fazenda Nacional) (ID 368205953, 18/03/2026) · remessa necessária",
+    "preparo": "União (Fazenda Nacional): Isento (ente público)",
+    "monocratica": "Improvável sem paradigma",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "União (Fazenda Nacional): Isento (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -12630,6 +12772,112 @@
    "chegada": "04/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Crédito presumido de ICMS × IRPJ/CSLL (EREsp 1.517.492/PR, Tema 1.182/STJ e Lei 14.789/2023)",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 368205948 · 30/01/2026 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 369622050 · 28/04/2026 | última movimentação: 28/04/2026 14:31 · Conclusos para julgamento · Mesma matéria de 5003263-35 (crédito presumido de ICMS e Lei 14.789/2023): julgar em conjunto · Recorte temporal: regime do artigo 30 da Lei 12.973/2014 até a revogação e regime da Lei 14.789/2023 a partir de 01/01/2024 [VALIDAR] · Preliminar de nulidade parcial por dispositivo genérico",
+   "teor": {
+    "sintese_fatica": "Avanti, Adar e Fatex Indústria, Comércio, Importação e Exportação Ltda., do setor têxtil, pedem a exclusão dos créditos presumidos de ICMS das bases do IRPJ e da CSLL, inclusive após a Lei 14.789/2023. A sentença concedeu a segurança.",
+    "inicial": "Mandado de segurança contra o Delegado da Receita Federal do Brasil em Campo Grande.",
+    "decisao_recorrida": "Sentença ID 368205948 (30/01/2026): concedeu a segurança para declarar a inexistência de relação jurídica que obrigue as impetrantes a incluir os créditos presumidos de ICMS nas bases do IRPJ e da CSLL, dispensá-las de comprovar estímulo à implantação ou expansão quanto aos demais benefícios (mantidos os demais requisitos do artigo 10 da LC 160/2017 e do artigo 30 da Lei 12.973/2014) e reconhecer a compensação.",
+    "recurso": "União (Fazenda Nacional) (ID 368205953, 18/03/2026): nulidade parcial da sentença por dispositivo genérico (artigo 492, parágrafo único, do CPC); requisitos do artigo 10 da LC 160/2017 e do artigo 30 da Lei 12.973/2014 (Tema 1.182/STJ); regime da Lei 14.789/2023.",
+    "resposta": "Contrarrazões das impetrantes (ID 368205955).",
+    "parecer": "MPF ID 369622050: Ausência de interesse que justifique intervenção",
+    "memoriais": "Não consta",
+    "representacao": "Advogados Leiner Salmaso Salinas (OAB/SP 185.499), Karina Marques Machado (OAB/SP 242.615) e outra.",
+    "preparo": "União (Fazenda Nacional): Isento (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação da União e remessa necessária em mandado de segurança · exclusão dos créditos presumidos de ICMS das bases do IRPJ e da CSLL (EREsp 1.517.492/PR; Tema 1.182/STJ; Lei 14.789/2023) · três impetrantes do grupo Avanti · segurança concedida, com compensação",
+     "sintese": "Avanti, Adar e Fatex Indústria, Comércio, Importação e Exportação Ltda., do setor têxtil, pedem a exclusão dos créditos presumidos de ICMS das bases do IRPJ e da CSLL, inclusive após a Lei 14.789/2023. A sentença concedeu a segurança.",
+     "questoes": "1) Nulidade parcial por dispositivo genérico; 2) créditos presumidos de ICMS nas bases do IRPJ e da CSLL antes e depois da Lei 14.789/2023.",
+     "rel": {
+      "razoes": "União (Fazenda Nacional) (ID 368205953, 18/03/2026): nulidade parcial da sentença por dispositivo genérico (artigo 492, parágrafo único, do CPC); requisitos do artigo 10 da LC 160/2017 e do artigo 30 da Lei 12.973/2014 (Tema 1.182/STJ); regime da Lei 14.789/2023.",
+      "contrarrazoes": "Contrarrazões das impetrantes (ID 368205955)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "368205948",
+      "juizo": "Mandado de segurança 5003606-94.2025.4.03.6000 (4ª Vara Federal de Campo Grande)",
+      "dispositivo": "concedeu a segurança para declarar a inexistência de relação jurídica que obrigue as impetrantes a incluir os créditos presumidos de ICMS nas bases do IRPJ e da CSLL, dispensá-las de comprovar estímulo à implantação ou expansão quanto aos demais benefícios (mantidos os demais requisitos do artigo 10 da LC 160/2017 e do artigo 30 da Lei 12.973/2014) e reconhecer a compensação."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2025-04-23",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "União (Fazenda Nacional)",
+       "tipo": "Apelação",
+       "id": "368205953",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "368205948",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: segurança concedida",
+       "id": "368205948",
+       "data": "2026-01-30"
+      },
+      {
+       "desc": "Apelação da União",
+       "id": "368205953",
+       "data": "2026-03-18"
+      },
+      {
+       "desc": "Contrarrazões das impetrantes",
+       "id": "368205955",
+       "data": "2026-04-22"
+      },
+      {
+       "desc": "Parecer do MPF (sem intervenção)",
+       "id": "369622050",
+       "data": "2026-04-28"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 368205948 · 30/01/2026 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 369622050 · 28/04/2026 | última movimentação: 28/04/2026 14:31 · Conclusos para julgamento · Mesma matéria de 5003263-35 (crédito presumido de ICMS e Lei 14.789/2023): julgar em conjunto · Recorte temporal: regime do artigo 30 da Lei 12.973/2014 até a revogação e regime da Lei 14.789/2023 a partir de 01/01/2024 [VALIDAR] · Preliminar de nulidade parcial por dispositivo genérico",
+     "assuntoDet": "Crédito presumido de ICMS × IRPJ/CSLL (EREsp 1.517.492/PR, Tema 1.182/STJ e Lei 14.789/2023)",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Há preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Mandado de segurança",
+     "parecer": "Com parecer",
+     "idParecer": "369622050",
+     "parecerSentido": "Ausência de interesse que justifique intervenção"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "28/04/2026 14:31 · Conclusos para julgamento",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Sentença · ID 368205948 · 30/01/2026 — sentença: concedeu a segurança; sujeita a reexame necessário",
+    "ultima_peca": "Parecer \"Falta de Interesse\" (MPF) · ID 369622050 · 28/04/2026",
+    "ultima_informacao": "Informação · ID 368205957 · 22/04/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 368205948 · 30/01/2026 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 369622050 · 28/04/2026 | última movimentação: 28/04/2026 14:31 · Conclusos para julgamento"
    }
   },
   {
@@ -12641,12 +12889,14 @@
    "exequente": "ENERGISA MATO GROSSO DO SUL - DISTRIBUIDORA DE ENERGIA S.A.",
    "executado": "DELEGADO DA RECEITA FEDERAL DO BRASIL EM CAMPO GRANDE",
    "assunto": "IRPJ/Imposto de Renda de Pessoa Jurídica",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "RM2",
+   "tipo_caso": "Apelações da Energisa MS e da União e remessa necessária em mandado de segurança · IRPJ e CSLL sobre a taxa SELIC na repetição de indébito (Tema 962/STF) e no levantamento de depósitos judiciais · segurança concedida em parte · embargos de declaração da impetrante acolhidos sem alteração do resultado",
+   "resultado": "Ato a proferir: apelações da União (ID 270173555) e da impetrante (ID 270173559) e remessa necessária da sentença ID 270173544, integrada pela ID 270173556; contrarrazões (IDs 270173560 e 270173563); MPF sem intervenção (ID 270843640) ‖ Proposta pelos precedentes: Voto: desprovimento da apelação da impetrante (depósitos judiciais fora do Tema 962/STF) e exame da apelação da União e da remessa à luz dos embargos de declaração no RE 1.063.187 (ação ressalvada da modulação) [VALIDAR] [VALIDAR: Preparo da apelação da impetrante (custas recolhidas no teto na impetração); Motivo da retirada de pauta na 4ª Turma (13/10/2025)]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelações da Energisa MS e da União e remessa necessária da sentença que afastou o IRPJ e a CSLL sobre a SELIC na repetição de indébito, mas não no levantamento de depósitos judiciais. A ação é de 11/08/2021, anterior a 17/09/2021: fica ressalvada da modulação do Tema 962/STF.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -12657,7 +12907,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento das apelações e da remessa necessária (voto)",
+    "materia": "Tributário — IRPJ/CSLL (SELIC, Tema 962/STF)",
+    "origem": "Mandado de segurança 5006639-34.2021.4.03.6000 (1ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 270173544 (06/09/2022)",
+    "recurso": "apelação de União (Fazenda Nacional) (ID 270173555, 06/10/2022) e apelação de Energisa Mato Grosso do Sul - Distribuidora de Energia S.A. (ID 270173559, 23/01/2023) · remessa necessária",
+    "preparo": "União (Fazenda Nacional): Isento (ente público); Energisa Mato Grosso do Sul - Distribuidora de Energia S.A.: Recolhimento integral das custas na impetração, segundo a apelante [VALIDAR]",
+    "monocratica": "Improvável: duas apelações e pauta anterior",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "União (Fazenda Nacional): Isento (ente público); Energisa Mato Grosso do Sul - Distribuidora de Energia S.A.: Recolhimento integral das custas na impetração, segundo a apelante [VALIDAR] · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -12667,6 +12928,148 @@
    "chegada": "09/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Tema 962/STF — SELIC na repetição de indébito e em depósitos judiciais",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 271234107 · 15/03/2023 — …D E C I S Ã O Recebo os recursos de apelação no efeito devolutivo, com fulcro no art. 14, § 3º, da Lei nº 12.016/2009. Intime(m)-se. São Paulo, 14 de março de 2023. MARCELO SARAIVA Desembargador Federal | última peça: Manifestação (MPF) · ID 271457494 · 17/03/2023 | última movimentação: 13/10/2025 17:45 · Deliberado em Sessão - Retirado · Processo pautado na 4ª Turma (intimações de pauta de 08/09/2025, ID 335663348) e retirado em sessão em 13/10/2025; apelações recebidas pelo Des. Fed. Marcelo Saraiva (ID 271234107) · Tema 962/STF: os embargos de declaração no RE 1.063.187 excluem do paradigma a SELIC sobre depósitos judiciais · Linha da 3ª Turma: AgInt na ApCiv 5005018-81.2021.4.03.6103 (14/04/2023) e AgInt na ApelRemNec 5004971-91.2022.4.03.6000 (20/03/2023) · Sentença em duplicidade (IDs 270173544 e 270173545)",
+   "teor": {
+    "sintese_fatica": "A Energisa MS impetrou o mandado de segurança em 11/08/2021 para excluir das bases do IRPJ e da CSLL a SELIC recebida em repetição de indébito, inclusive no levantamento de depósitos judiciais. A sentença acolheu o pedido apenas quanto à repetição de indébito.",
+    "inicial": "Mandado de segurança contra o Delegado da Receita Federal do Brasil em Campo Grande.",
+    "decisao_recorrida": "Sentença ID 270173544 (06/09/2022): concedeu em parte a segurança para declarar a inexigibilidade do IRPJ e da CSLL sobre a SELIC incidente na repetição de indébito, o direito à compensação (artigo 26-A da Lei 11.457/2007, Lei 9.430/1996 e artigo 170-A do CTN) e o lançamento, na parte B do LALUR, do incremento de prejuízo fiscal e base negativa; não abrangeu a SELIC no levantamento de depósitos judiciais (embargos de declaração acolhidos para esclarecer, mantida a conclusão, ID 270173556).",
+    "recurso": "União (Fazenda Nacional) (ID 270173555, 06/10/2022): adequação da sentença ao julgado no RE 1.063.187 (Tema 962/STF), com os esclarecimentos e a modulação dos embargos de declaração. Energisa Mato Grosso do Sul - Distribuidora de Energia S.A. (ID 270173559, 23/01/2023): inexigibilidade do IRPJ e da CSLL também sobre a SELIC no levantamento de depósitos judiciais (natureza de danos emergentes) e regime da compensação.",
+    "resposta": "Contrarrazões da impetrante (ID 270173560) e da União (ID 270173563).",
+    "parecer": "MPF ID 270843640: Ausência de interesse que justifique intervenção",
+    "memoriais": "Não consta",
+    "representacao": "Advogados Gerson Stocco de Siqueira (OAB/RJ 75.970) e Leandro Daumas Passos (OAB/RJ 93.571).",
+    "preparo": "Impetrante: alega recolhimento integral das custas na impetração [VALIDAR]"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelações da Energisa MS e da União e remessa necessária em mandado de segurança · IRPJ e CSLL sobre a taxa SELIC na repetição de indébito (Tema 962/STF) e no levantamento de depósitos judiciais · segurança concedida em parte · embargos de declaração da impetrante acolhidos sem alteração do resultado",
+     "sintese": "A Energisa MS impetrou o mandado de segurança em 11/08/2021 para excluir das bases do IRPJ e da CSLL a SELIC recebida em repetição de indébito, inclusive no levantamento de depósitos judiciais. A sentença acolheu o pedido apenas quanto à repetição de indébito.",
+     "questoes": "1) IRPJ/CSLL sobre a SELIC na repetição de indébito (Tema 962/STF; ação anterior a 17/09/2021); 2) SELIC no levantamento de depósitos judiciais; 3) compensação e LALUR.",
+     "rel": {
+      "razoes": "União (Fazenda Nacional) (ID 270173555, 06/10/2022): adequação da sentença ao julgado no RE 1.063.187 (Tema 962/STF), com os esclarecimentos e a modulação dos embargos de declaração. Energisa Mato Grosso do Sul - Distribuidora de Energia S.A. (ID 270173559, 23/01/2023): inexigibilidade do IRPJ e da CSLL também sobre a SELIC no levantamento de depósitos judiciais (natureza de danos emergentes) e regime da compensação.",
+      "contrarrazoes": "Contrarrazões da impetrante (ID 270173560) e da União (ID 270173563)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "270173544",
+      "juizo": "Mandado de segurança 5006639-34.2021.4.03.6000 (1ª Vara Federal de Campo Grande)",
+      "dispositivo": "concedeu em parte a segurança para declarar a inexigibilidade do IRPJ e da CSLL sobre a SELIC incidente na repetição de indébito, o direito à compensação (artigo 26-A da Lei 11.457/2007, Lei 9.430/1996 e artigo 170-A do CTN) e o lançamento, na parte B do LALUR, do incremento de prejuízo fiscal e base negativa; não abrangeu a SELIC no levantamento de depósitos judiciais (embargos de declaração acolhidos para esclarecer, mantida a conclusão, ID 270173556)."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2021-08-11",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "União (Fazenda Nacional)",
+       "tipo": "Apelação",
+       "id": "270173555",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Energisa Mato Grosso do Sul - Distribuidora de Energia S.A.",
+       "tipo": "Apelação",
+       "id": "270173559",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "270173544",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: segurança concedida em parte",
+       "id": "270173544",
+       "data": "2022-09-06"
+      },
+      {
+       "desc": "Embargos de declaração da impetrante",
+       "id": "270173548",
+       "data": "2022-09-15"
+      },
+      {
+       "desc": "Apelação da União",
+       "id": "270173555",
+       "data": "2022-10-06"
+      },
+      {
+       "desc": "Sentença dos embargos de declaração",
+       "id": "270173556",
+       "data": "2022-12-07"
+      },
+      {
+       "desc": "Apelação da impetrante",
+       "id": "270173559",
+       "data": "2023-01-23"
+      },
+      {
+       "desc": "Contrarrazões da impetrante",
+       "id": "270173560",
+       "data": "2023-01-23"
+      },
+      {
+       "desc": "Contrarrazões da União",
+       "id": "270173563",
+       "data": "2023-01-26"
+      },
+      {
+       "desc": "Parecer do MPF (sem intervenção)",
+       "id": "270843640",
+       "data": "2023-03-06"
+      },
+      {
+       "desc": "Decisão: recebimento das apelações (4ª Turma)",
+       "id": "271234107",
+       "data": "2023-03-15"
+      },
+      {
+       "desc": "Intimação de pauta (4ª Turma)",
+       "id": "335663348",
+       "data": "2025-09-08"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 271234107 · 15/03/2023 — …D E C I S Ã O Recebo os recursos de apelação no efeito devolutivo, com fulcro no art. 14, § 3º, da Lei nº 12.016/2009. Intime(m)-se. São Paulo, 14 de março de 2023. MARCELO SARAIVA Desembargador Federal | última peça: Manifestação (MPF) · ID 271457494 · 17/03/2023 | última movimentação: 13/10/2025 17:45 · Deliberado em Sessão - Retirado · Processo pautado na 4ª Turma (intimações de pauta de 08/09/2025, ID 335663348) e retirado em sessão em 13/10/2025; apelações recebidas pelo Des. Fed. Marcelo Saraiva (ID 271234107) · Tema 962/STF: os embargos de declaração no RE 1.063.187 excluem do paradigma a SELIC sobre depósitos judiciais · Linha da 3ª Turma: AgInt na ApCiv 5005018-81.2021.4.03.6103 (14/04/2023) e AgInt na ApelRemNec 5004971-91.2022.4.03.6000 (20/03/2023) · Sentença em duplicidade (IDs 270173544 e 270173545)",
+     "assuntoDet": "Tema 962/STF — SELIC na repetição de indébito e em depósitos judiciais",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Mandado de segurança",
+     "parecer": "Com parecer",
+     "idParecer": "270843640",
+     "parecerSentido": "Ausência de interesse que justifique intervenção"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "13/10/2025 17:45 · Deliberado em Sessão - Retirado",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Decisão · ID 271234107 · 15/03/2023 — …D E C I S Ã O Recebo os recursos de apelação no efeito devolutivo, com fulcro no art. 14, § 3º, da Lei nº 12.016/2009. Intime(m)-se. São Paulo, 14 de março de 2023. MARCELO SARAIVA Desembargador Federal",
+    "ultima_peca": "Manifestação (MPF) · ID 271457494 · 17/03/2023",
+    "ultima_informacao": "Intimação de Pauta · ID 335663406 · 08/09/2025",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 271234107 · 15/03/2023 — …D E C I S Ã O Recebo os recursos de apelação no efeito devolutivo, com fulcro no art. 14, § 3º, da Lei nº 12.016/2009. Intime(m)-se. São Paulo, 14 de março de 2023. MARCELO SARAIVA Desembargador Federal | última peça: Manifestação (MPF) · ID 271457494 · 17/03/2023 | última movimentação: 13/10/2025 17:45 · Deliberado em Sessão - Retirado"
    }
   },
   {
