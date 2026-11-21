@@ -14,7 +14,7 @@ se vazio, "Mono - Fundamento" com a proposta da triagem. As coleções agrupam o
 A Interlocutória não muda o destino: o processo com urgência pendente registrada na ficha (triagem."Urgência") já
 aparece na coleção, com o destino do mérito que tiver; aqui ele só entra na matriz (grupo).
 Não mexe em: processo com destino já definido (Sessão, Monocrática, Outro destino), em pauta de sessão futura, com
-seleção prévia, com a etiqueta "NÃO MEXER", já julgado (AP5) ou sem autos triados. Votos aptos (ato de voto sem
+seleção prévia, com a etiqueta "NÃO MEXER", já julgado (AP5) ou sem autos triados. Os aptos para pauta (ato de voto sem
 [VALIDAR], triagem conferida, sem pendência de preparo, representação, parecer ou urgência) vão, com --reserva, para o
 banco reserva da seleção prévia: triagem."Seleção Prévia" = "SELECIONADO PREVIAMENTE" sem "Nova sessão de destino"
 (scripts/lotes/colecoes.py monta o lote selecao-reserva). A sessão é escolhida depois, no Caput.
@@ -202,7 +202,7 @@ for col, xs in COL.items():
     for g in MATRIZ[col]['grupos']:
         n = sum(1 for v in MATRIZ[col]['itens'].values() if v['grupo'] == g['id'])
         print(f'   {g["id"]} ({n}) {g["rotulo"][:90]}')
-print(f'== votos aptos para a seleção prévia (banco reserva com --reserva): {len(VOTOS)}')
+print(f'== aptos para pauta (vão ao banco reserva da seleção prévia com --reserva): {len(VOTOS)}')
 print(f'== fora (destino, pauta ou etiqueta), com categoria: {len(PULADOS)}')
 from collections import Counter
 print('   ', Counter(m.split(':')[0].split(' de ')[0] for _, _, m in PULADOS))
@@ -233,7 +233,7 @@ if GRAVAR:
             r.setdefault('origem', {})['atualizado_em'] = _UTC.strftime('%Y-%m-%dT%H:%M:%SZ')
             n += 1
     nr = 0
-    if RESERVA:  # votos aptos → banco reserva da seleção prévia (sem sessão)
+    if RESERVA:  # aptos para pauta → banco reserva da seleção prévia (sem sessão)
         for x in VOTOS:
             d = dg(x['processo'])
             r = REG.get(d)

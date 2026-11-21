@@ -9,7 +9,7 @@
    "SELECIONADO PREVIAMENTE" com aquela "Nova sessão de destino" (acervo/operacional.json); quem sai da seleção vai
    para lote.retirados, com o que já foi registrado. Quando a pauta oficial entra (acervo/sessoes/AAAA-MM-DD.json com
    itens), o lote de seleção é arquivado: some da coleção e dá lugar à pauta da sessão (matriz pauta-AAAA-MM-DD).
-   Banco reserva: o processo "SELECIONADO PREVIAMENTE" sem "Nova sessão de destino" (seleção sem sessão definida) fica
+   Banco reserva: o processo "SELECIONADO PREVIAMENTE" sem "Nova sessão de destino" (apto para pauta, sem sessão definida) fica
    no lote 'selecao-reserva' (tipo 'selecao', sem sessão), agrupado pela série ou pelo assunto da triagem; ao receber
    uma sessão, sai da reserva e entra na seleção daquela sessão.
 3. Índice acervo/lotes/colecoes.json (pautas, triagem, avulsos, seleção prévia), lido pela triagem do Caput.
@@ -157,15 +157,18 @@ def triagem_de():
 
 
 RP = R / 'acervo/lotes/selecao-reserva.json'
+DESC_RES = ('Aptos para pauta selecionados na triagem do Caput, ainda sem sessão definida (banco reserva). '
+            'Ao receber a sessão, saem daqui e entram na seleção prévia dela.')
 LR = ler(RP)
 if reserva or LR:
     if not LR:
         LR = lote_novo('selecao-reserva', 'selecao', 'Seleção prévia · banco reserva', origem='caput', colecao='selecao-previa', sessoes=[],
-                       reserva=True, descricao='Processos selecionados previamente na triagem do Caput, ainda sem sessão definida (banco reserva). '
-                       'Ao receber a sessão, saem daqui e entram na seleção prévia dela.')
+                       reserva=True, descricao=DESC_RES)
         alt = True
     else:
         alt = False
+        if LR.get('criado_por') == 'colecoes' and LR.get('descricao') != DESC_RES:
+            LR['descricao'] = DESC_RES; alt = True
     alt = sincroniza(LR, reserva) or alt
     TR = triagem_de() if LR.get('itens') else {}
     gid = {g.get('rotulo'): g.get('id') for g in LR.get('grupos') or []}
