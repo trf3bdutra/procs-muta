@@ -3,7 +3,7 @@
  "versao": 1,
  "nome": "30/11/2026",
  "date": "2026-11-30",
- "atualizadoEm": "2026-11-21T01:37:51.853Z",
+ "atualizadoEm": "2026-11-21T01:37:57.886Z",
  "itens": [
   {
    "cnj": "0004423-79.2007.4.03.6000",
@@ -2513,9 +2513,12 @@
      "pendencias": [
       {
        "desc": "A apostila (ID 400501607) é digitalizada e o texto extraído embaralha número, folha e livro do registro; conferir no PDF se é \"número 23827, folha 238, livro 65\".",
-       "ok": false,
+       "ok": true,
        "em": "2026-11-19",
-       "por": "Index · lote acorrigir"
+       "por": "Index · lote acorrigir",
+       "resolvidaEm": "2026-11-20",
+       "resolvidaPor": "Claude · revisão das pautas",
+       "resolucao": "Apostila conferida no PJe (ID 400501607): registro 23827, folha 238, livro 65, Gurupi, 26/11/2025 (ajustes do lote acorrigir)."
       }
      ]
     },
@@ -2524,8 +2527,9 @@
      "item": 51,
      "autos": 64
     },
-    "editadoPor": "Index",
-    "resJulg": "Desprovida"
+    "editadoPor": "Bruno",
+    "resJulg": "Desprovida",
+    "editadoEm": "2026-11-21T01:37:57.886Z"
    }
   },
   {
