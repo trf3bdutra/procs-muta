@@ -141,6 +141,13 @@
    "cor": "#6a2a5a",
    "resultado": "Voto conforme Temas 6 e 1.234/STF, considerada a deliberação de não incorporação (Conitec, 18/06/2026; Portaria SCTIE/MS 38/2026) e a perícia de cada caso",
    "modelo": "Voto único com variações por perícia e idade"
+  },
+  {
+   "id": "RA12",
+   "rotulo": "Apelação com remessa · Salário-educação: titular de cartório (pessoa física)",
+   "cor": "#4a6a6a",
+   "resultado": "Desprovimento: titular de serventia, pessoa física, não é contribuinte do salário-educação (linha da Turma: RemNecCiv 5002607-72.2024.4.03.6002, 10/08/2026) [VALIDAR]",
+   "modelo": "Monocrática (artigo 932 do CPC)"
   }
  ],
  "grupo_outros": {
@@ -20173,12 +20180,14 @@
    "exequente": "ELISMAR BERTOLUCI DE ARAUJO ANASTACIO",
    "executado": "INSTITUTO FEDERAL DE EDUCACAO, CIENCIA E TECNOLOGIA DE MATO GROSSO DO SUL",
    "assunto": "Remoção",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "RM2",
+   "tipo_caso": "Apelações da autora e do IFMS e remessa necessária em ação ordinária · remoção por motivo de saúde (artigo 36, parágrafo único, III, b, da Lei 8.112/1990) do Campus de Aquidauana para Campo Grande · servidora idosa com epilepsia · perícia neurológica · pedido julgado procedente",
+   "resultado": "Ato a proferir: apelações da autora (ID 341024145) e do IFMS (ID 341024150) e remessa necessária da sentença ID 341024144; contrarrazões da autora (ID 341024152) ‖ Proposta pelos precedentes: Voto: examinar a perícia e o interesse recursal da autora [VALIDAR] [VALIDAR: Preparo da autora; Laudo pericial neurológico; Alcance da sentença (remoção definitiva ou não)]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelações da autora e do IFMS e remessa necessária da sentença que determinou a remoção da servidora para Campo Grande por motivo de saúde, com base em perícia. A autora quer a remoção declarada definitiva; o IFMS nega os requisitos.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -20189,7 +20198,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento das apelações e da remessa necessária (voto)",
+    "materia": "Administrativo — servidor (remoção)",
+    "origem": "Procedimento comum 5004776-09.2022.4.03.6000 (1ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 341024144 (13/08/2025)",
+    "recurso": "apelação de Elismar Bertoluci de Araújo Anastácio (ID 341024145, 05/09/2025) e apelação de IFMS (ID 341024150, 26/09/2025) · remessa necessária",
+    "preparo": "Elismar Bertoluci de Araújo Anastácio: Não verificado; IFMS: Isento (autarquia)",
+    "monocratica": "Improvável: duas apelações",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "Elismar Bertoluci de Araújo Anastácio: Não verificado; IFMS: Isento (autarquia) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -20199,6 +20219,126 @@
    "chegada": "06/04/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Servidor — remoção por motivo de saúde (artigo 36, III, b, da Lei 8.112/1990)",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 341024144 · 13/08/2025 — sentença: julgou procedente o pedido; sujeita a reexame necessário | última peça: Contrarrazões (agravante) · ID 341024152 · 24/10/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Remoção por saúde independe do interesse da Administração, comprovada por junta médica oficial (artigo 36, III, b) [VALIDAR perícia judicial] · Interesse recursal da autora (sentença de procedência) [VALIDAR] · Etiqueta \"Prevenção\" [VALIDAR] · Prioridade: idosa",
+   "teor": {
+    "sintese_fatica": "Elismar Bertoluci de Araújo Anastácio, servidora idosa do IFMS lotada em Aquidauana, tem epilepsia focal sintomática (CID G40.1) e comorbidades e alega que só em Campo Grande há tratamento adequado. A tutela foi indeferida e houve perícia neurológica.",
+    "inicial": "Ação ordinária de remoção por motivo de saúde contra o IFMS.",
+    "decisao_recorrida": "Sentença ID 341024144 (13/08/2025): julgou procedente o pedido para determinar a remoção da autora para Campo Grande (artigo 36, III, b, da Lei 8.112/1990), com lotação nos termos da legislação [VALIDAR demais itens].",
+    "recurso": "Elismar Bertoluci de Araújo Anastácio (ID 341024145, 05/09/2025): conversão da remoção provisória em definitiva [VALIDAR alcance da sentença]. IFMS (ID 341024150, 26/09/2025): inexistência dos requisitos da remoção por saúde; tratamento disponível na localidade de lotação [VALIDAR teor].",
+    "resposta": "Contrarrazões da autora (ID 341024152).",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Advogados Felipe Magalhães Bambirra (OAB/GO 51.850) e Sérgio Antônio Merola Martins (OAB/GO 44.693).",
+    "preparo": "Elismar Bertoluci de Araújo Anastácio: Não verificado; IFMS: Isento (autarquia)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelações da autora e do IFMS e remessa necessária em ação ordinária · remoção por motivo de saúde (artigo 36, parágrafo único, III, b, da Lei 8.112/1990) do Campus de Aquidauana para Campo Grande · servidora idosa com epilepsia · perícia neurológica · pedido julgado procedente",
+     "sintese": "Elismar Bertoluci de Araújo Anastácio, servidora idosa do IFMS lotada em Aquidauana, tem epilepsia focal sintomática (CID G40.1) e comorbidades e alega que só em Campo Grande há tratamento adequado. A tutela foi indeferida e houve perícia neurológica.",
+     "questoes": "1) Remoção por motivo de saúde (artigo 36, III, b, da Lei 8.112/1990); 2) interesse recursal da autora.",
+     "rel": {
+      "razoes": "Elismar Bertoluci de Araújo Anastácio (ID 341024145, 05/09/2025): conversão da remoção provisória em definitiva [VALIDAR alcance da sentença]. IFMS (ID 341024150, 26/09/2025): inexistência dos requisitos da remoção por saúde; tratamento disponível na localidade de lotação [VALIDAR teor].",
+      "contrarrazoes": "Contrarrazões da autora (ID 341024152)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "341024144",
+      "juizo": "Procedimento comum 5004776-09.2022.4.03.6000 (1ª Vara Federal de Campo Grande)",
+      "dispositivo": "julgou procedente o pedido para determinar a remoção da autora para Campo Grande (artigo 36, III, b, da Lei 8.112/1990), com lotação nos termos da legislação [VALIDAR demais itens]."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2022-05-20",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Elismar Bertoluci de Araújo Anastácio",
+       "tipo": "Apelação",
+       "id": "341024145",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "IFMS",
+       "tipo": "Apelação",
+       "id": "341024150",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "341024144",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Decisão: tutela indeferida",
+       "id": "341024097",
+       "data": "2022-08-16"
+      },
+      {
+       "desc": "Decisão: perícia neurológica deferida",
+       "id": "341024113",
+       "data": "2023-11-17"
+      },
+      {
+       "desc": "Sentença: pedido procedente",
+       "id": "341024144",
+       "data": "2025-08-13"
+      },
+      {
+       "desc": "Apelação da autora",
+       "id": "341024145",
+       "data": "2025-09-05"
+      },
+      {
+       "desc": "Apelação do IFMS",
+       "id": "341024150",
+       "data": "2025-09-26"
+      },
+      {
+       "desc": "Contrarrazões da autora",
+       "id": "341024152",
+       "data": "2025-10-24"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 341024144 · 13/08/2025 — sentença: julgou procedente o pedido; sujeita a reexame necessário | última peça: Contrarrazões (agravante) · ID 341024152 · 24/10/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Remoção por saúde independe do interesse da Administração, comprovada por junta médica oficial (artigo 36, III, b) [VALIDAR perícia judicial] · Interesse recursal da autora (sentença de procedência) [VALIDAR] · Etiqueta \"Prevenção\" [VALIDAR] · Prioridade: idosa",
+     "assuntoDet": "Servidor — remoção por motivo de saúde (artigo 36, III, b, da Lei 8.112/1990)",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Não verificado"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Sentença · ID 341024144 · 13/08/2025 — sentença: julgou procedente o pedido; sujeita a reexame necessário",
+    "ultima_peca": "Contrarrazões (agravante) · ID 341024152 · 24/10/2025",
+    "ultima_informacao": "Certidão · ID 341044962 · 28/10/2025",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 341024144 · 13/08/2025 — sentença: julgou procedente o pedido; sujeita a reexame necessário | última peça: Contrarrazões (agravante) · ID 341024152 · 24/10/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária"
    }
   },
   {
@@ -20210,12 +20350,14 @@
    "exequente": "FUNDAÇÃO UNIVERSIDADE FEDERAL DE MATO GROSSO DO SUL",
    "executado": "NELSON MARISCO",
    "assunto": "Remoção",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "RM2",
+   "tipo_caso": "Apelação da FUFMS e remessa necessária em mandado de segurança · \"remoção\" de professor da UFMS (Campus de Aquidauana) para a Universidade Federal de Alagoas por motivo de saúde do filho e própria · liminar deferida · segurança concedida",
+   "resultado": "Ato a proferir: apelação da FUFMS (ID 286846757) e remessa necessária da sentença ID 286846754; sem contrarrazões; parecer do MPF (ID 286995819) [VALIDAR conclusão] ‖ Proposta pelos precedentes: Voto: examinar a possibilidade jurídica de remoção para outra instituição federal de ensino e a situação consolidada [VALIDAR] [VALIDAR: Conclusão do parecer do MPF; Situação funcional atual do impetrante]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação da FUFMS e remessa necessária da sentença que determinou a \"remoção\" de professor da UFMS para a UFAL por motivo de saúde do filho. A FUFMS sustenta que a remoção só existe no mesmo quadro e que a movimentação entre instituições exige redistribuição.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -20226,7 +20368,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da apelação e da remessa necessária (voto)",
+    "materia": "Administrativo — servidor (remoção)",
+    "origem": "Mandado de segurança 5001033-54.2023.4.03.6000 (1ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 286846754 (16/11/2023)",
+    "recurso": "apelação de FUFMS (ID 286846757, 17/02/2024) · remessa necessária",
+    "preparo": "FUFMS: Isento (ente público)",
+    "monocratica": "Improvável sem paradigma",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "FUFMS: Isento (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -20236,6 +20389,118 @@
    "chegada": "04/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Servidor — remoção por saúde para outra instituição federal de ensino",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 355745451 · 27/02/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 286846755 · 20/11/2023 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Parecer (MPF) · ID 286995819 · 18/03/2024 | última movimentação: 31/03/2026 01:22 · Decorrido prazo de F. U. F. D. M. G. D. S. em 30/03/2026 23:59. · Remoção (artigo 36) × redistribuição (artigo 37) entre autarquias distintas; anuência da UFAL [VALIDAR] · Situação consolidada desde a liminar de 2023 [VALIDAR] · Redistribuição do recurso à Turma Regional (ID 355745451) · Sentença republicada (ID 286846755)",
+   "teor": {
+    "sintese_fatica": "Nelson Marisco, professor da UFMS lotado em Aquidauana, pediu remoção para a UFAL, em Maceió, para cuidar do filho com transtorno mental grave e da própria saúde. A UFMS indeferiu por não haver remoção entre instituições; a liminar foi deferida.",
+    "inicial": "Mandado de segurança contra o Pró-Reitor de Gestão de Pessoas da UFMS.",
+    "decisao_recorrida": "Sentença ID 286846754 (16/11/2023): confirmou a liminar e concedeu a segurança para determinar a remoção definitiva do impetrante para a Universidade Federal de Alagoas, anulando a recusa administrativa.",
+    "recurso": "FUFMS (ID 286846757, 17/02/2024): a remoção do artigo 36 da Lei 8.112/1990 só ocorre no âmbito do mesmo quadro; movimentação para outra instituição exige redistribuição (artigo 37) [VALIDAR teor].",
+    "resposta": "Impetrante não apresentou contrarrazões.",
+    "parecer": "MPF ID 286995819: Parecer [VALIDAR conclusão]",
+    "memoriais": "Não consta",
+    "representacao": "Impetrante assistido por advogado constituído [VALIDAR].",
+    "preparo": "FUFMS: Isento (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação da FUFMS e remessa necessária em mandado de segurança · \"remoção\" de professor da UFMS (Campus de Aquidauana) para a Universidade Federal de Alagoas por motivo de saúde do filho e própria · liminar deferida · segurança concedida",
+     "sintese": "Nelson Marisco, professor da UFMS lotado em Aquidauana, pediu remoção para a UFAL, em Maceió, para cuidar do filho com transtorno mental grave e da própria saúde. A UFMS indeferiu por não haver remoção entre instituições; a liminar foi deferida.",
+     "questoes": "1) Remoção por motivo de saúde para outra instituição federal de ensino; 2) situação consolidada.",
+     "rel": {
+      "razoes": "FUFMS (ID 286846757, 17/02/2024): a remoção do artigo 36 da Lei 8.112/1990 só ocorre no âmbito do mesmo quadro; movimentação para outra instituição exige redistribuição (artigo 37) [VALIDAR teor].",
+      "contrarrazoes": "Impetrante não apresentou contrarrazões."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "286846754",
+      "juizo": "Mandado de segurança 5001033-54.2023.4.03.6000 (1ª Vara Federal de Campo Grande)",
+      "dispositivo": "confirmou a liminar e concedeu a segurança para determinar a remoção definitiva do impetrante para a Universidade Federal de Alagoas, anulando a recusa administrativa."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2023-02-17",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "FUFMS",
+       "tipo": "Apelação",
+       "id": "286846757",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "286846754",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Decisão: liminar deferida",
+       "id": "286846742",
+       "data": "2023-03-01"
+      },
+      {
+       "desc": "Sentença: segurança concedida",
+       "id": "286846754",
+       "data": "2023-11-16"
+      },
+      {
+       "desc": "Apelação da FUFMS",
+       "id": "286846757",
+       "data": "2024-02-17"
+      },
+      {
+       "desc": "Parecer do MPF",
+       "id": "286995819",
+       "data": "2024-03-18"
+      },
+      {
+       "desc": "Decisão: redistribuição à Turma Regional",
+       "id": "355745451",
+       "data": "2026-02-27"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 355745451 · 27/02/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 286846755 · 20/11/2023 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Parecer (MPF) · ID 286995819 · 18/03/2024 | última movimentação: 31/03/2026 01:22 · Decorrido prazo de F. U. F. D. M. G. D. S. em 30/03/2026 23:59. · Remoção (artigo 36) × redistribuição (artigo 37) entre autarquias distintas; anuência da UFAL [VALIDAR] · Situação consolidada desde a liminar de 2023 [VALIDAR] · Redistribuição do recurso à Turma Regional (ID 355745451) · Sentença republicada (ID 286846755)",
+     "assuntoDet": "Servidor — remoção por saúde para outra instituição federal de ensino",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Mandado de segurança",
+     "parecer": "Com parecer",
+     "idParecer": "286995819",
+     "parecerSentido": "Parecer [VALIDAR conclusão]"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "31/03/2026 01:22 · Decorrido prazo de F. U. F. D. M. G. D. S. em 30/03/2026 23:59.",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Decisão · ID 355745451 · 27/02/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso)",
+    "ultima_decisao_relevante": "Sentença · ID 286846755 · 20/11/2023 — sentença: concedeu a segurança; sujeita a reexame necessário",
+    "ultima_peca": "Parecer (MPF) · ID 286995819 · 18/03/2024",
+    "ultima_informacao": "Ato ordinatório · ID 286846758 · 19/02/2024",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 355745451 · 27/02/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 286846755 · 20/11/2023 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Parecer (MPF) · ID 286995819 · 18/03/2024 | última movimentação: 31/03/2026 01:22 · Decorrido prazo de F. U. F. D. M. G. D. S. em 30/03/2026 23:59."
    }
   },
   {
@@ -20247,12 +20512,14 @@
    "exequente": "UNIÃO FEDERAL",
    "executado": "RAISSA NOGUEIRA SILVA",
    "assunto": "Residência Médica",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "RM2",
+   "tipo_caso": "Apelações da FUFMS e da União e remessa necessária em mandado de segurança · residência médica em Oftalmologia (Santa Casa de Campo Grande) · realocação pela CNRM para fora do Estado · liminar deferida em parte · segurança concedida (realocação restrita a Mato Grosso do Sul)",
+   "resultado": "Ato a proferir: apelações da FUFMS (ID 311138343) e da União (ID 311138344) e remessa necessária da sentença ID 311138341; contrarrazões [VALIDAR] ‖ Proposta pelos precedentes: Voto: verificar a situação atual da residência (conclusão) e, se subsistente o interesse, examinar a razoabilidade da restrição à realocação [VALIDAR] [VALIDAR: Situação atual da residência; Contrarrazões]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelações da FUFMS e da União e remessa necessária da sentença que impediu a realocação de residente de Oftalmologia para fora de Mato Grosso do Sul, em proteção à unidade familiar.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -20263,7 +20530,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento das apelações e da remessa necessária (voto)",
+    "materia": "Administrativo — residência médica",
+    "origem": "Mandado de segurança 5005943-27.2023.4.03.6000 (1ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 311138341 (05/09/2024)",
+    "recurso": "apelação de FUFMS (ID 311138343, 07/11/2024) e apelação de União (ID 311138344, 07/11/2024) · remessa necessária",
+    "preparo": "FUFMS: Isento (ente público); União: Isento (ente público)",
+    "monocratica": "Improvável: duas apelações",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "FUFMS: Isento (ente público); União: Isento (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -20273,6 +20551,121 @@
    "chegada": "04/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Residência médica — realocação pela CNRM e unidade familiar",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 311138341 · 05/09/2024 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Petição intercorrente (agravado) · ID 407505964 · 29/10/2026 | última movimentação: 29/10/2026 11:30 · Juntada de Petição de petição intercorrente · Residência iniciada em 2023: possível conclusão do programa e perda superveniente do objeto [VALIDAR] · Interesse recursal da FUFMS (terceira interessada) [VALIDAR] · Petição de 29/10/2026 com novos advogados (ID 407505964)",
+   "teor": {
+    "sintese_fatica": "Raissa Nogueira Silva, residente de Oftalmologia na Santa Casa de Campo Grande, seria realocada pela CNRM para fora do Estado. Invocou a unidade familiar; a liminar e a sentença limitaram a realocação a Mato Grosso do Sul.",
+    "inicial": "Mandado de segurança contra o Presidente da Comissão Nacional de Residência Médica.",
+    "decisao_recorrida": "Sentença ID 311138341 (05/09/2024): extinguiu o processo sem mérito quanto à COREME da Santa Casa e à ABCG (ilegitimidade) e concedeu a segurança para impedir a realocação da impetrante para instituição fora de Mato Grosso do Sul, mitigando a Resolução CNRM 1/2018 [VALIDAR demais itens].",
+    "recurso": "FUFMS (ID 311138343, 07/11/2024): legalidade da realocação pela CNRM e ilegitimidade [VALIDAR teor]. União (ID 311138344, 07/11/2024): competência da CNRM e observância da Resolução CNRM 1/2018 na realocação de residentes [VALIDAR teor].",
+    "resposta": "Contrarrazões não localizadas [VALIDAR].",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Impetrante com advogados constituídos (notificação de novos advogados, ID 407505964).",
+    "preparo": "FUFMS: Isento (ente público); União: Isento (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelações da FUFMS e da União e remessa necessária em mandado de segurança · residência médica em Oftalmologia (Santa Casa de Campo Grande) · realocação pela CNRM para fora do Estado · liminar deferida em parte · segurança concedida (realocação restrita a Mato Grosso do Sul)",
+     "sintese": "Raissa Nogueira Silva, residente de Oftalmologia na Santa Casa de Campo Grande, seria realocada pela CNRM para fora do Estado. Invocou a unidade familiar; a liminar e a sentença limitaram a realocação a Mato Grosso do Sul.",
+     "questoes": "1) Realocação de residente pela CNRM e unidade familiar; 2) perda superveniente do objeto.",
+     "rel": {
+      "razoes": "FUFMS (ID 311138343, 07/11/2024): legalidade da realocação pela CNRM e ilegitimidade [VALIDAR teor]. União (ID 311138344, 07/11/2024): competência da CNRM e observância da Resolução CNRM 1/2018 na realocação de residentes [VALIDAR teor].",
+      "contrarrazoes": "Contrarrazões não localizadas [VALIDAR]."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "311138341",
+      "juizo": "Mandado de segurança 5005943-27.2023.4.03.6000 (1ª Vara Federal de Campo Grande)",
+      "dispositivo": "extinguiu o processo sem mérito quanto à COREME da Santa Casa e à ABCG (ilegitimidade) e concedeu a segurança para impedir a realocação da impetrante para instituição fora de Mato Grosso do Sul, mitigando a Resolução CNRM 1/2018 [VALIDAR demais itens]."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2023-07-14",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "FUFMS",
+       "tipo": "Apelação",
+       "id": "311138343",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "União",
+       "tipo": "Apelação",
+       "id": "311138344",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "311138341",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Decisão: liminar deferida em parte",
+       "id": "311138244",
+       "data": "2023-07-24"
+      },
+      {
+       "desc": "Sentença: segurança concedida",
+       "id": "311138341",
+       "data": "2024-09-05"
+      },
+      {
+       "desc": "Apelação da FUFMS",
+       "id": "311138343",
+       "data": "2024-11-07"
+      },
+      {
+       "desc": "Apelação da União",
+       "id": "311138344",
+       "data": "2024-11-07"
+      },
+      {
+       "desc": "Petição: novos advogados",
+       "id": "407505964",
+       "data": "2026-10-29"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 311138341 · 05/09/2024 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Petição intercorrente (agravado) · ID 407505964 · 29/10/2026 | última movimentação: 29/10/2026 11:30 · Juntada de Petição de petição intercorrente · Residência iniciada em 2023: possível conclusão do programa e perda superveniente do objeto [VALIDAR] · Interesse recursal da FUFMS (terceira interessada) [VALIDAR] · Petição de 29/10/2026 com novos advogados (ID 407505964)",
+     "assuntoDet": "Residência médica — realocação pela CNRM e unidade familiar",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Mandado de segurança",
+     "parecer": "Não verificado"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "29/10/2026 11:30 · Juntada de Petição de petição intercorrente",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Sentença · ID 311138341 · 05/09/2024 — sentença: concedeu a segurança; sujeita a reexame necessário",
+    "ultima_peca": "Petição intercorrente (agravado) · ID 407505964 · 29/10/2026",
+    "ultima_informacao": "Informação · ID 311138347 · 29/11/2024",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 311138341 · 05/09/2024 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Petição intercorrente (agravado) · ID 407505964 · 29/10/2026 | última movimentação: 29/10/2026 11:30 · Juntada de Petição de petição intercorrente"
    }
   },
   {
@@ -20284,12 +20677,14 @@
    "exequente": "DELEGADO DA RECEITA FEDERAL DO BRASIL EM CAMPO GRANDE/MS",
    "executado": "ANDRE RODRIGO GIMENEZ CABRERA",
    "assunto": "Salário-Educação",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "RA12",
+   "tipo_caso": "Apelação da União e remessa necessária em mandado de segurança · salário-educação sobre a folha de empregados de serventia extrajudicial · titular de cartório pessoa física · segurança concedida",
+   "resultado": "Ato a proferir: apelação da União (ID 329303689) e remessa necessária da sentença ID 329303682; contrarrazões (ID 329303696) ‖ Proposta pelos precedentes: Desprovimento da apelação e da remessa, por decisão monocrática, se confirmada a linha [VALIDAR] [VALIDAR: Paradigma do STJ sobre salário-educação de pessoa física]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação da União e remessa necessária da sentença que afastou o salário-educação de André Rodrigo Gimenez Cabrera, titular de cartório, pessoa física.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -20300,7 +20695,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da apelação e da remessa necessária: possível decisão monocrática de desprovimento",
+    "materia": "Tributário — salário-educação",
+    "origem": "Mandado de segurança 5004026-36.2024.4.03.6000 (2ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 329303682 (14/04/2025)",
+    "recurso": "apelação de União (Fazenda Nacional) (ID 329303689, 08/05/2025) · remessa necessária",
+    "preparo": "União (Fazenda Nacional): Isento (ente público)",
+    "monocratica": "Possível (artigo 932 do CPC): linha da Turma Regional [VALIDAR paradigma do STJ]",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "União (Fazenda Nacional): Isento (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -20310,6 +20716,106 @@
    "chegada": "07/07/2025",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Salário-educação — titular de cartório (pessoa física)",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 329303694 · 03/06/2025 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 329303682 · 14/04/2025 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 329804333 · 04/07/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Linha da Turma Regional: monocrática de desprovimento em remessa sobre salário-educação (RemNecCiv 5002607-72.2024.4.03.6002, 10/08/2026) [VALIDAR identidade de situação] · Titular de serventia extrajudicial, pessoa física, não se enquadra como empresa (artigo 15 da Lei 9.424/1996) [VALIDAR jurisprudência do STJ] · Grupo: 5004026-36 e 5005440-06",
+   "teor": {
+    "sintese_fatica": "André Rodrigo Gimenez Cabrera, titular de serventia extrajudicial, pede o reconhecimento da inexigibilidade do salário-educação sobre a remuneração de seus empregados. A sentença concedeu a segurança.",
+    "inicial": "Mandado de segurança contra o Delegado da Receita Federal do Brasil em Campo Grande.",
+    "decisao_recorrida": "Sentença ID 329303682 (14/04/2025): concedeu a segurança para declarar inexigível o salário-educação do impetrante, titular de serventia extrajudicial, com compensação após o trânsito em julgado.",
+    "recurso": "União (Fazenda Nacional) (ID 329303689, 08/05/2025): o titular de cartório equipara-se a empresa para fins de contribuições sobre a folha; incidência do salário-educação [VALIDAR teor].",
+    "resposta": "Contrarrazões do impetrante (ID 329303696).",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Impetrante assistido por advogado constituído [VALIDAR].",
+    "preparo": "União (Fazenda Nacional): Isento (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação da União e remessa necessária em mandado de segurança · salário-educação sobre a folha de empregados de serventia extrajudicial · titular de cartório pessoa física · segurança concedida",
+     "sintese": "André Rodrigo Gimenez Cabrera, titular de serventia extrajudicial, pede o reconhecimento da inexigibilidade do salário-educação sobre a remuneração de seus empregados. A sentença concedeu a segurança.",
+     "questoes": "1) Salário-educação: sujeição passiva do titular de cartório pessoa física; 2) compensação.",
+     "rel": {
+      "razoes": "União (Fazenda Nacional) (ID 329303689, 08/05/2025): o titular de cartório equipara-se a empresa para fins de contribuições sobre a folha; incidência do salário-educação [VALIDAR teor].",
+      "contrarrazoes": "Contrarrazões do impetrante (ID 329303696)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "329303682",
+      "juizo": "Mandado de segurança 5004026-36.2024.4.03.6000 (2ª Vara Federal de Campo Grande)",
+      "dispositivo": "concedeu a segurança para declarar inexigível o salário-educação do impetrante, titular de serventia extrajudicial, com compensação após o trânsito em julgado."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2024-05-27",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "União (Fazenda Nacional)",
+       "tipo": "Apelação",
+       "id": "329303689",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "329303682",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: segurança concedida",
+       "id": "329303682",
+       "data": "2025-04-14"
+      },
+      {
+       "desc": "Apelação da União",
+       "id": "329303689",
+       "data": "2025-05-08"
+      },
+      {
+       "desc": "Contrarrazões do impetrante",
+       "id": "329303696",
+       "data": "2025-06-30"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 329303694 · 03/06/2025 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 329303682 · 14/04/2025 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 329804333 · 04/07/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Linha da Turma Regional: monocrática de desprovimento em remessa sobre salário-educação (RemNecCiv 5002607-72.2024.4.03.6002, 10/08/2026) [VALIDAR identidade de situação] · Titular de serventia extrajudicial, pessoa física, não se enquadra como empresa (artigo 15 da Lei 9.424/1996) [VALIDAR jurisprudência do STJ] · Grupo: 5004026-36 e 5005440-06",
+     "assuntoDet": "Salário-educação — titular de cartório (pessoa física)",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Mandado de segurança",
+     "parecer": "Não verificado"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Despacho · ID 329303694 · 03/06/2025 — remessa ou redistribuição à Turma Regional (sem exame do recurso)",
+    "ultima_decisao_relevante": "Sentença · ID 329303682 · 14/04/2025 — sentença: concedeu a segurança; sujeita a reexame necessário",
+    "ultima_peca": "Parecer \"Falta de Interesse\" (MPF) · ID 329804333 · 04/07/2025",
+    "ultima_informacao": "Informação · ID 329303697 · 30/06/2025",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 329303694 · 03/06/2025 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 329303682 · 14/04/2025 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 329804333 · 04/07/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária"
    }
   },
   {
@@ -20321,12 +20827,14 @@
    "exequente": "DELEGADO DA RECEITA FEDERAL DO BRASIL EM CAMPO GRANDE",
    "executado": "JERONIMO BARRIQUELLO PINTO",
    "assunto": "Salário-Educação",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "RA12",
+   "tipo_caso": "Apelação da União e remessa necessária em mandado de segurança · salário-educação sobre a folha de empregados de serventia extrajudicial · titular de cartório pessoa física · segurança concedida",
+   "resultado": "Ato a proferir: apelação da União (ID 317462687) e remessa necessária da sentença ID 317462685; contrarrazões (ID 317462692) ‖ Proposta pelos precedentes: Desprovimento da apelação e da remessa, por decisão monocrática, se confirmada a linha [VALIDAR] [VALIDAR: Paradigma do STJ sobre salário-educação de pessoa física]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação da União e remessa necessária da sentença que afastou o salário-educação de Jerônimo Barriquello Pinto, titular de cartório, pessoa física.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -20337,7 +20845,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da apelação e da remessa necessária: possível decisão monocrática de desprovimento",
+    "materia": "Tributário — salário-educação",
+    "origem": "Mandado de segurança 5005440-06.2023.4.03.6000 (4ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 317462685 (18/11/2024)",
+    "recurso": "apelação de União (Fazenda Nacional) (ID 317462687, 22/11/2024) · remessa necessária",
+    "preparo": "União (Fazenda Nacional): Isento (ente público)",
+    "monocratica": "Possível (artigo 932 do CPC): linha da Turma Regional [VALIDAR paradigma do STJ]",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "União (Fazenda Nacional): Isento (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -20347,6 +20866,115 @@
    "chegada": "04/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Salário-educação — titular de cartório (pessoa física)",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 317462693 · 23/01/2025 — sentença: acolheu os embargos de declaração | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 318005394 · 18/03/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Linha da Turma Regional: monocrática de desprovimento em remessa sobre salário-educação (RemNecCiv 5002607-72.2024.4.03.6002, 10/08/2026) [VALIDAR identidade de situação] · Titular de serventia extrajudicial, pessoa física, não se enquadra como empresa (artigo 15 da Lei 9.424/1996) [VALIDAR jurisprudência do STJ] · Grupo: 5004026-36 e 5005440-06 · Embargos de declaração acolhidos para esclarecer que não cabe restituição administrativa em mandado de segurança (Tema 1.262/STF) [VALIDAR]",
+   "teor": {
+    "sintese_fatica": "Jerônimo Barriquello Pinto, titular de serventia extrajudicial, pede o reconhecimento da inexigibilidade do salário-educação sobre a remuneração de seus empregados. A sentença concedeu a segurança.",
+    "inicial": "Mandado de segurança contra o Delegado da Receita Federal do Brasil em Campo Grande.",
+    "decisao_recorrida": "Sentença ID 317462685 (18/11/2024): concedeu a segurança para declarar inexigível o salário-educação do impetrante, titular de serventia extrajudicial, com compensação após o trânsito em julgado.",
+    "recurso": "União (Fazenda Nacional) (ID 317462687, 22/11/2024): o titular de cartório equipara-se a empresa para fins de contribuições sobre a folha; incidência do salário-educação [VALIDAR teor].",
+    "resposta": "Contrarrazões do impetrante (ID 317462692).",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Advogados Claine Chiesa (OAB/MS 6.795), Clélio Chiesa (OAB/MS 5.660) e Sandro Miguel Siqueira da Silva Junior (OAB/MS 21.477).",
+    "preparo": "União (Fazenda Nacional): Isento (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação da União e remessa necessária em mandado de segurança · salário-educação sobre a folha de empregados de serventia extrajudicial · titular de cartório pessoa física · segurança concedida",
+     "sintese": "Jerônimo Barriquello Pinto, titular de serventia extrajudicial, pede o reconhecimento da inexigibilidade do salário-educação sobre a remuneração de seus empregados. A sentença concedeu a segurança.",
+     "questoes": "1) Salário-educação: sujeição passiva do titular de cartório pessoa física; 2) compensação.",
+     "rel": {
+      "razoes": "União (Fazenda Nacional) (ID 317462687, 22/11/2024): o titular de cartório equipara-se a empresa para fins de contribuições sobre a folha; incidência do salário-educação [VALIDAR teor].",
+      "contrarrazoes": "Contrarrazões do impetrante (ID 317462692)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "317462685",
+      "juizo": "Mandado de segurança 5005440-06.2023.4.03.6000 (4ª Vara Federal de Campo Grande)",
+      "dispositivo": "concedeu a segurança para declarar inexigível o salário-educação do impetrante, titular de serventia extrajudicial, com compensação após o trânsito em julgado."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2023-06-23",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "União (Fazenda Nacional)",
+       "tipo": "Apelação",
+       "id": "317462687",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "317462685",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: segurança concedida",
+       "id": "317462685",
+       "data": "2024-11-18"
+      },
+      {
+       "desc": "Embargos de declaração do impetrante",
+       "id": "317462689",
+       "data": "2024-11-28"
+      },
+      {
+       "desc": "Sentença dos embargos de declaração",
+       "id": "317462693",
+       "data": "2025-01-23"
+      },
+      {
+       "desc": "Apelação da União",
+       "id": "317462687",
+       "data": "2024-11-22"
+      },
+      {
+       "desc": "Contrarrazões do impetrante",
+       "id": "317462692",
+       "data": "2024-12-16"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 317462693 · 23/01/2025 — sentença: acolheu os embargos de declaração | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 318005394 · 18/03/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Linha da Turma Regional: monocrática de desprovimento em remessa sobre salário-educação (RemNecCiv 5002607-72.2024.4.03.6002, 10/08/2026) [VALIDAR identidade de situação] · Titular de serventia extrajudicial, pessoa física, não se enquadra como empresa (artigo 15 da Lei 9.424/1996) [VALIDAR jurisprudência do STJ] · Grupo: 5004026-36 e 5005440-06 · Embargos de declaração acolhidos para esclarecer que não cabe restituição administrativa em mandado de segurança (Tema 1.262/STF) [VALIDAR]",
+     "assuntoDet": "Salário-educação — titular de cartório (pessoa física)",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Mandado de segurança",
+     "parecer": "Não verificado"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Sentença · ID 317462693 · 23/01/2025 — sentença: acolheu os embargos de declaração",
+    "ultima_peca": "Parecer \"Falta de Interesse\" (MPF) · ID 318005394 · 18/03/2025",
+    "ultima_informacao": "Informação · ID 317462695 · 14/03/2025",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 317462693 · 23/01/2025 — sentença: acolheu os embargos de declaração | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 318005394 · 18/03/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária"
    }
   },
   {
