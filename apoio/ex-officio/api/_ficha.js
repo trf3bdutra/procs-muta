@@ -308,6 +308,7 @@ async function resumos(req, res) {
     const lista = mod => require(mod).base().then(B => new Set((Array.isArray(B) ? B : (B && B.lista) || []).map(x => dg(x.cnj)))).catch(() => new Set());
     const [sM, sS, sX] = await Promise.all([lista('./_metas'), lista('./_sobr'), lista('./_sens')]);
     const linhas = v => String(v || '').split(/\n+/).map(x => x.trim()).filter(x => x && !/^✓/.test(x));
+    const todas = v => String(v || '').split(/\n+/).map(x => x.trim()).filter(Boolean);
     const out = {};
     K.forEach(k => {
       const r = por[k] || {}, f = (FT && FT[k]) || {}, t = r.triagem || {}, p = r.producao || {}, c = r.controles || {};
@@ -316,7 +317,7 @@ async function resumos(req, res) {
         triado: t['Destino - Confirmado em'] || '', minutado: p.MINUTADO || '', corrigido: p.CORRIGIDO === 'Sim' || !!p['Data da Revisão'],
         liberado: p.LIBERADO === 'Sim' || (p.Destino !== 'Monocrática' && !!p['Data da Liberação']), enviado: p.Destino === 'Monocrática' && !!p['Data da Liberação'], assinado: p.Assinado === 'Sim' || !!p['Data da Assinatura'],
         urg: t['Urgência'] || '', urgNivel: t['Urgência - Nível'] || '', urgData: t['Urgência - Data'] || '', urgApr: t['Urgência - Apreciação'] || '', urgAprEm: t['Urgência - Apreciada em'] || '',
-        pend: linhas(t['O que falta sanar']), ic: linhas(t['Intercorrências']), notas: linhas((r.origem || {})['Observações']),
+        pend: linhas(t['O que falta sanar']), ic: linhas(t['Intercorrências']), notas: linhas((r.origem || {})['Observações']), pendT: todas(t['O que falta sanar']), icT: todas(t['Intercorrências']), sintese: String(t['Síntese Processual'] || '').slice(0, 2000), questoes: todas(t['Alegações']),
         pendTxt: t['O que falta sanar'] || '', icTxt: t['Intercorrências'] || '', notasTxt: (r.origem || {})['Observações'] || '', sintese: t['Síntese Processual'] || '', questoes: linhas(t['Alegações']),
         etqSug: t['Etiquetas sugeridas'] || '', etqGab: t['Etiquetas'] || '', tipoJ: t['Tipo de Julgamento'] || '', tempest: t.Tempestividade || '',
         meta: sM.has(k) || !!t.META, sobr: sS.has(k), sens: (sX.has(k) || c['Sensível - Incluído'] === 'Sim') && c['Sensível - Excluído'] !== 'Sim',

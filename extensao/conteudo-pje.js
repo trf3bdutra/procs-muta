@@ -405,15 +405,25 @@
       '.muta-selos .hs-al{background:#fdecea;border-color:#efb3a9;color:#a8321f}.muta-selos .hs-av{background:#fff4e5;border-color:#f0c88a;color:#8a5a10}.muta-selos .hs-mu{background:#eef3f7;border-color:#c9d6e0;color:#1f4f6b}' +
       '.muta-selos.hero-autos{display:inline-flex;margin:0 0 0 8px;vertical-align:middle}' +
       '#hero-dlg{position:fixed;inset:0;z-index:2147483600;background:rgba(15,25,35,.42);display:grid;place-items:center;font:13px/1.45 system-ui,Segoe UI,sans-serif;color:#1d2730}' +
-      '#hero-dlg .hd-bx{width:min(520px,94vw);max-height:84vh;overflow:auto;background:#fff;border-radius:12px;box-shadow:0 18px 50px rgba(0,0,0,.3)}' +
-      '#hero-dlg header{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;padding:12px 14px;border-bottom:1px solid #e3e8ec;position:sticky;top:0;background:#fff}' +
-      '#hero-dlg header b{display:block;font:700 14px ui-monospace,Menlo,monospace}#hero-dlg header small{color:#5d6b78}' +
-      '#hero-dlg header button{all:unset;cursor:pointer;font-size:20px;line-height:1;padding:0 4px;color:#5d6b78}' +
-      '#hero-dlg .hd-s{padding:8px 14px;border-bottom:1px solid #eef1f3}#hero-dlg .hd-s.fo{background:#fffaf0}' +
-      '#hero-dlg h4{margin:0 0 4px;font-size:12.5px}#hero-dlg h4 i{font-style:normal;font-size:11px;color:#5d6b78;margin-left:4px}' +
-      '#hero-dlg ul{margin:0;padding:0 0 0 2px;list-style:none;display:grid;gap:5px}#hero-dlg li{border-left:3px solid #d5dbe1;padding:2px 0 2px 8px}' +
-      '#hero-dlg .hd-s[data-s=ic] li,#hero-dlg .hd-s[data-s=urg] li{border-color:#e07a66}#hero-dlg .hd-s[data-s=pd] li,#hero-dlg .hd-s[data-s=av] li{border-color:#e9b25c}#hero-dlg .hd-s[data-s=nt] li{border-color:#8fb3cf}' +
+      '#hero-dlg .hd-bx{width:min(1180px,96vw);max-height:88vh;display:flex;flex-direction:column;background:#fff;border-radius:12px;box-shadow:0 18px 50px rgba(0,0,0,.3);overflow:hidden}' +
+      '#hero-dlg header{display:flex;align-items:flex-start;gap:10px;padding:12px 16px;border-bottom:1px solid #e3e8ec}#hero-dlg header>div{flex:1}' +
+      '#hero-dlg header b{display:block;font:700 15px ui-monospace,Menlo,monospace}#hero-dlg header small{color:#5d6b78}' +
+      '#hero-dlg header button{all:unset;cursor:pointer;font-size:22px;line-height:1;padding:0 4px;color:#5d6b78}' +
+      '#hero-dlg .hd-st{font-size:12px;color:#5d6b78;align-self:center}#hero-dlg .hd-st.ok{color:#2f6e4b}#hero-dlg .hd-st.err{color:#a8321f}' +
+      '#hero-dlg .hd-g{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;flex:1;min-height:0;overflow:auto}' +
+      '@media (max-width:900px){#hero-dlg .hd-g{grid-template-columns:repeat(2,minmax(0,1fr))}}' +
+      '#hero-dlg .hd-c{display:flex;flex-direction:column;min-height:240px;border-right:1px solid #eef1f3;padding:10px 12px}#hero-dlg .hd-c:last-child{border-right:0}#hero-dlg .hd-c.fo{background:#fffaf0}' +
+      '#hero-dlg .hd-cc{flex:1;overflow:auto}' +
+      '#hero-dlg h4{margin:0 0 8px;font-size:13px;display:flex;align-items:center;gap:4px}#hero-dlg h4 i{font-style:normal;font-size:11px;color:#fff;background:#8a97a3;border-radius:8px;padding:0 6px;margin-left:auto}' +
+      '#hero-dlg .hd-c[data-s=ic] h4 i{background:#c0412c}#hero-dlg .hd-c[data-s=pd] h4 i{background:#c98a1c}#hero-dlg .hd-c[data-s=av] h4 i{background:#d27b1c}#hero-dlg .hd-c[data-s=nt] h4 i{background:#4a7ea6}' +
+      '#hero-dlg ul,#hero-dlg ol{margin:0;padding:0;list-style:none;display:grid;gap:6px}#hero-dlg ol{counter-reset:q}#hero-dlg ol li{counter-increment:q}#hero-dlg ol li p::before{content:"(" counter(q) ") ";font-weight:700;color:#5d6b78}' +
+      '#hero-dlg li{display:flex;gap:7px;align-items:flex-start;border-left:3px solid #d5dbe1;padding:3px 0 3px 8px}#hero-dlg li input{margin-top:3px;flex:none;cursor:pointer}' +
+      '#hero-dlg li.ok p{text-decoration:line-through;color:#8a97a3}#hero-dlg li.u{border-color:#c0412c}' +
+      '#hero-dlg .hd-c[data-s=ic] li{border-color:#e07a66}#hero-dlg .hd-c[data-s=pd] li,#hero-dlg .hd-c[data-s=av] li{border-color:#e9b25c}#hero-dlg .hd-c[data-s=nt] li{border-color:#8fb3cf}' +
       '#hero-dlg li p{margin:0}#hero-dlg li small{color:#5d6b78;font-size:11px}#hero-dlg .hd-v{margin:0;color:#8a97a3;font-size:12px}' +
+      '#hero-dlg .hd-sub{margin-bottom:10px}#hero-dlg .hd-sub>b{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:#5d6b78;margin-bottom:4px}#hero-dlg .hd-sub>p{margin:0;font-size:12.5px;text-align:justify}' +
+      '#hero-dlg .hd-inc{display:flex;gap:4px;margin-top:8px}#hero-dlg .hd-inc input{flex:1;min-width:0;padding:5px 7px;border:1px solid #d5dbe1;border-radius:7px;font:inherit}' +
+      '#hero-dlg .hd-inc button{all:unset;cursor:pointer;width:28px;text-align:center;border-radius:7px;background:#1f4f6b;color:#fff;font-weight:700}' +
       '#hero-dlg footer{padding:8px 14px;color:#8a97a3;font-size:11px}' +
       '.hero-col-oculta{display:none!important}.hero-col-oculta~*{max-width:100%!important;flex:1 1 100%!important;width:100%!important}' +
       '#hero-col-btn{position:fixed;left:50px;bottom:10px;z-index:2147483000;all:unset;position:fixed;left:50px;bottom:10px;cursor:pointer;padding:5px 10px;border-radius:16px;background:#1f4f6b;color:#fff;font:600 11.5px system-ui,Segoe UI,sans-serif;box-shadow:0 3px 10px rgba(0,0,0,.25)}' +
@@ -534,24 +544,68 @@
     var tx = m ? p.slice(2).join(' · ') || p[1] : p[0], meta = m ? [p.length > 2 ? p[1] : '', p[0]] : p.slice(1);
     return '<li><p>' + escS(tx) + '</p>' + (meta.filter(Boolean).length ? '<small>' + escS(meta.filter(Boolean).join(' · ')) + '</small>' : '') + '</li>';
   }
+  /* quadro: Avisos | Intercorrências | Pendências | Notas (síntese e questões) lado a lado; marcar resolve e o campo inclui, na ficha */
+  function itemSin(l, campo, i) {
+    var ok = /^✓/.test(l), txt = String(l).replace(/^✓\s*/, ''), p = txt.split(/\s*·\s*/), dt = /^\d{2}\/\d{2}\/\d{4}/.test(p[0]);
+    var corpo = dt ? p.slice(2).join(' · ') || p[1] : p[0], meta = (dt ? [p.length > 2 ? p[1] : '', p[0]] : p.slice(1)).filter(Boolean).join(' · ');
+    return '<li class="' + (ok ? 'ok' : '') + '">' + (campo !== 'nt' && campo !== 'av' ? '<input type="checkbox" data-hd-ck="' + campo + '" data-hd-i="' + i + '"' + (ok ? ' checked' : '') + ' title="' + (ok ? 'Reabrir' : 'Marcar como resolvida') + '">' : '') +
+      '<div><p>' + escS(corpo) + '</p>' + (meta ? '<small>' + escS(meta) + '</small>' : '') + '</div></li>';
+  }
   function dialogoSinais(k, foco) {
     var r = ENR.dados[k]; if (!r) return;
     cssSelos();
     var E = window.MutaEtiquetas, S0 = sinaisDe(Object.assign({ _falta: E && ENR.cat ? E.faltando(E.preparar(Object.assign({}, r)), ENR.cat, (ENR.textos || {})[k] || (autosDigitais() ? (document.body.innerText || '').slice(0, 20000) : '')) : [] }, r)), x = S0.r;
     var fmt = k.replace(/^(\d{7})(\d{2})(\d{4})(\d)(\d{2})(\d{4})$/, '$1-$2.$3.$4.$5.$6');
-    var old = document.getElementById('hero-dlg'); if (old) old.remove();
-    var d = document.createElement('div'); d.id = 'hero-dlg'; d.setAttribute('role', 'dialog'); d.setAttribute('aria-modal', 'true'); d.setAttribute('aria-label', 'Sinalizações do processo ' + fmt);
-    var sec = function (id, ic, tit, L, vazio) { return '<section class="hd-s' + (foco === id ? ' fo' : '') + '" data-s="' + id + '"><h4>' + ic + ' ' + tit + ' <i>' + L.length + '</i></h4>' + (L.length ? '<ul>' + L.map(linhaSin).join('') + '</ul>' : '<p class="hd-v">' + vazio + '</p>') + '</section>'; };
-    d.innerHTML = '<div class="hd-bx"><header><div><b>' + fmt + '</b><small>' + escS([E ? E.etapa(x) : '', x.servidor ? 'Minuta: ' + x.servidor : '', x.corretor ? 'Correção: ' + x.corretor : ''].filter(Boolean).join(' · ')) + '</small></div><button type="button" data-hd-x aria-label="Fechar">×</button></header>' +
-      (S0.urg.length ? sec('urg', '⚡', 'Urgência', S0.urg, '') : '') + sec('av', '🔔', 'Avisos', S0.av, 'Nenhum aviso.') + sec('ic', '⛔', 'Intercorrências', S0.ic, 'Nenhuma intercorrência em aberto.') +
-      sec('pd', '⚑', 'Pendências', S0.pd, 'Nenhuma pendência em aberto.') + sec('nt', '📝', 'Notas', S0.nt, 'Nenhuma nota.') +
-      '<footer>Para incluir ou resolver, use o painel HERO18810 (Prontuário › Processo). Ficha lida às ' + new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }) + '.</footer></div>';
-    document.body.appendChild(d);
-    var f = d.querySelector('.hd-s.fo'); if (f) f.scrollIntoView({ block: 'nearest' });
-    var fechar = function () { d.remove(); document.removeEventListener('keydown', esc, true); };
-    var esc = function (e) { if (e.key === 'Escape') fechar(); };
-    document.addEventListener('keydown', esc, true);
-    d.addEventListener('click', function (e) { if (e.target === d || (e.target.closest && e.target.closest('[data-hd-x]'))) fechar(); });
+    var d = document.getElementById('hero-dlg'), novo = !d;
+    if (!d) { d = document.createElement('div'); d.id = 'hero-dlg'; d.setAttribute('role', 'dialog'); d.setAttribute('aria-modal', 'true'); document.body.appendChild(d); }
+    d.setAttribute('aria-label', 'Sinalizações do processo ' + fmt); d.setAttribute('data-k', k);
+    var pend = (r.pendT && r.pendT.length ? r.pendT : r.pend || []), ic = (r.icT && r.icT.length ? r.icT : r.ic || []), nt = r.notas || [], qs = r.questoes || [];
+    var abertas = function (L) { return L.filter(function (l) { return !/^✓/.test(l); }).length; };
+    var col = function (id, ic0, tit, n, corpo, inc) { return '<section class="hd-c' + (foco === id ? ' fo' : '') + '" data-s="' + id + '"><h4>' + ic0 + ' ' + tit + ' <i>' + n + '</i></h4><div class="hd-cc">' + corpo + '</div>' +
+      (inc ? '<form class="hd-inc" data-hd-inc="' + id + '"><input type="text" placeholder="' + inc + '" aria-label="' + inc + '"><button type="submit">+</button></form>' : '') + '</section>'; };
+    var lista = function (L, campo, vz) { return L.length ? '<ul>' + L.map(function (l, i) { return itemSin(l, campo, i); }).join('') + '</ul>' : '<p class="hd-v">' + vz + '</p>'; };
+    var avisos = S0.urg.map(function (u) { return '<li class="u"><div><p>⚡ ' + escS(u) + '</p></div></li>'; }).join('') + S0.av.map(function (a) { return '<li><div><p>' + escS(a) + '</p></div></li>'; }).join('');
+    var notasCorpo = (x.sintese ? '<div class="hd-sub"><b>Síntese</b><p>' + escS(x.sintese) + '</p></div>' : '') +
+      (qs.length ? '<div class="hd-sub"><b>Questões</b><ol>' + qs.map(function (q) { return '<li><p>' + escS(q.replace(/^\(?\d+[).]\s*/, '')) + '</p></li>'; }).join('') + '</ol></div>' : '') +
+      '<div class="hd-sub"><b>Notas</b>' + lista(nt, 'nt', 'Nenhuma nota.') + '</div>';
+    d.innerHTML = '<div class="hd-bx"><header><div><b>' + fmt + '</b><small>' + escS([E ? E.etapa(x) : '', x.servidor ? 'Minuta: ' + x.servidor : '', x.corretor ? 'Correção: ' + x.corretor : '', x.tarefa ? 'Tarefa: ' + x.tarefa : ''].filter(Boolean).join(' · ')) + '</small></div><span class="hd-st" id="hd-st"></span><button type="button" data-hd-x aria-label="Fechar">×</button></header>' +
+      '<div class="hd-g">' +
+      col('av', '🔔', 'Avisos', S0.urg.length + S0.av.length, avisos ? '<ul>' + avisos + '</ul>' : '<p class="hd-v">Nenhum aviso.</p>') +
+      col('ic', '⛔', 'Intercorrências', abertas(ic), lista(ic, 'ic', 'Nenhuma intercorrência.'), 'Nova intercorrência') +
+      col('pd', '⚑', 'Pendências', abertas(pend), lista(pend, 'pd', 'Nenhuma pendência.'), 'Nova pendência') +
+      col('nt', '📝', 'Notas', nt.length, notasCorpo, 'Nova nota') +
+      '</div><footer>Marcar resolve (✓) e o campo inclui: grava na ficha do processo, com o seu login do painel. Esc fecha.</footer></div>';
+    d._L = { ic: ic, pd: pend, nt: nt };
+    if (novo) {
+      var fechar = function () { d.remove(); document.removeEventListener('keydown', esc, true); };
+      var esc = function (e) { if (e.key === 'Escape' && !(e.target && e.target.closest && e.target.closest('.hd-inc'))) fechar(); };
+      document.addEventListener('keydown', esc, true);
+      d.addEventListener('click', function (e) { if (e.target === d || (e.target.closest && e.target.closest('[data-hd-x]'))) fechar(); });
+      d.addEventListener('change', function (e) {
+        var c = e.target; if (!c.dataset || !c.dataset.hdCk) return;
+        var L = d._L[c.dataset.hdCk] || [], linha = L[Number(c.dataset.hdI)];
+        gravarSinal(d.getAttribute('data-k'), { campo: c.dataset.hdCk, acao: c.checked ? 'resolver' : 'reabrir', linha: linha }, c.dataset.hdCk);
+      });
+      d.addEventListener('submit', function (e) {
+        var f = e.target; if (!f.dataset || !f.dataset.hdInc) return; e.preventDefault();
+        var t = f.querySelector('input'), v = (t.value || '').trim(); if (!v) return;
+        gravarSinal(d.getAttribute('data-k'), { campo: f.dataset.hdInc, acao: 'incluir', texto: v }, f.dataset.hdInc);
+      });
+    }
+    var f0 = d.querySelector('.hd-c.fo'); if (f0) f0.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+  }
+  function gravarSinal(k, pedido, foco) {
+    var st = document.getElementById('hd-st'); if (st) { st.textContent = 'Gravando…'; st.className = 'hd-st'; }
+    Array.prototype.forEach.call(document.querySelectorAll('#hero-dlg input,#hero-dlg button[type=submit]'), function (x) { x.disabled = true; });
+    try {
+      chrome.runtime.sendMessage(Object.assign({ tipo: 'muta-sinal', cnj: k }, pedido)).then(function (j) {
+        if (!j || j.erro) { var s2 = document.getElementById('hd-st'); if (s2) { s2.textContent = 'Não gravou: ' + ((j && j.erro) || 'sem resposta'); s2.className = 'hd-st err'; } Array.prototype.forEach.call(document.querySelectorAll('#hero-dlg input,#hero-dlg button'), function (x) { x.disabled = false; }); return; }
+        if (j.resumo) ENR.dados[k] = j.resumo;
+        DIAG = ''; dialogoSinais(k, foco);
+        var s3 = document.getElementById('hd-st'); if (s3) { s3.textContent = 'Gravado na ficha'; s3.className = 'hd-st ok'; }
+        try { agendarSelos(); if (autosDigitais()) { AUT.t = 0; } } catch (e) {}
+      }, function () { var s4 = document.getElementById('hd-st'); if (s4) { s4.textContent = 'Recarregue a página (a extensão foi atualizada).'; s4.className = 'hd-st err'; } });
+    } catch (e) { if (st) { st.textContent = 'Recarregue a página.'; st.className = 'hd-st err'; } }
   }
   document.addEventListener('click', function (e) {
     var b = e.target && e.target.closest && e.target.closest('[data-hero-sin]'); if (!b) return;

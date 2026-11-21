@@ -301,3 +301,11 @@ test('extensão 0.23: ícones de sinalização (lista e cabeçalho dos autos) co
   assert.match(c, /function botaoColuna\(C\)/); assert.match(c, /hero18810:lista-oculta/);
   assert.match(read('apoio/ex-officio/api/_ficha.js'), /notas: linhas\(\(r\.origem \|\| \{\}\)\['Observações'\]\)/);
 });
+
+test('extensão 0.24: quadro de sinalizações em 4 painéis (notas com síntese e questões), marcar e incluir gravam na ficha', () => {
+  const c = read('extensao/conteudo-pje.js'), f = read('extensao/fundo.js');
+  assert.match(c, /col\('av', '🔔', 'Avisos'[\s\S]*col\('ic', '⛔', 'Intercorrências'[\s\S]*col\('pd', '⚑', 'Pendências'[\s\S]*col\('nt', '📝', 'Notas'/);
+  assert.match(c, /grid-template-columns:repeat\(4,minmax\(0,1fr\)\)/); assert.match(c, /<b>Síntese<\/b>/); assert.match(c, /<b>Questões<\/b>/);
+  assert.match(f, /msg\.tipo !== 'muta-sinal'/); assert.match(f, /'✓ ' \+ semMarca\(L\[i\]\)/); assert.match(f, /\/api\/pauta\?ficha=1', \{ method: 'POST'/);
+  assert.match(read('apoio/ex-officio/api/_ficha.js'), /sintese: String\(t\['Síntese Processual'\]/);
+});

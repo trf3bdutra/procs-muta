@@ -5,6 +5,12 @@ Nome desde a 0.19.3 (antes: Muta). Os identificadores internos (`window.Muta*`, 
 Extensão do Chrome/Edge (Manifest V3) que abre o **Muta** num painel lateral, ao lado dos autos e das tarefas do PJe 2º grau do TRF-3.
 Base: o HTML independente *muta-independente-prontuario-completo* (Prontuário + Acervo).
 
+## O que muda na 0.24 · quadro de sinalizações com registro
+
+- O quadro dos ícones abre em 4 painéis lado a lado: Avisos | Intercorrências | Pendências | Notas (com a síntese e as
+  questões da triagem). Em intercorrências e pendências, a caixa de marcar resolve (✓) ou reabre; cada painel tem campo
+  para incluir. Grava na ficha do processo pelo serviço de fundo (lê a ficha atual e muda só a linha), com o login do painel.
+
 ## O que muda na 0.23 · sinalizações em ícones e lista recolhível
 
 - Nos cartões da lista de tarefas e no cabeçalho dos autos digitais: ícones com contagem — ⚡ urgência, 🔔 avisos,

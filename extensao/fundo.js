@@ -229,3 +229,35 @@ chrome.notifications.onClicked.addListener(function (id) {
   });
   chrome.notifications.clear(id);
 });
+
+
+/* ---------- 0.24 · sinalizações gravadas pelo quadro do PJe: marcar como resolvida, reabrir e incluir ----------
+   O quadro (conteudo-pje.js) manda {tipo:'muta-sinal', cnj, campo:'pd'|'ic'|'nt', acao:'resolver'|'reabrir'|'incluir', linha|texto};
+   aqui se lê a ficha atual, muda só a linha e grava (POST /api/pauta?ficha=1), com o login da equipe. */
+var CAMPO_SIN = { pd: ['triagem', 'O que falta sanar'], ic: ['triagem', 'Intercorrências'], nt: ['origem', 'Observações'] }, QUEM = { v: '', t: 0 };
+function quem() {
+  if (QUEM.v && Date.now() - QUEM.t < 600e3) return Promise.resolve(QUEM.v);
+  return fetch(SITE + '/api/login', { credentials: 'include', cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : {}; }).then(function (j) { QUEM = { v: j.usuario || '', t: Date.now() }; return QUEM.v; }, function () { return ''; });
+}
+function p2(n) { return (n < 10 ? '0' : '') + n; }
+chrome.runtime.onMessage.addListener(function (msg, sender, responder) {
+  if (!msg || msg.tipo !== 'muta-sinal') return;
+  var k = String(msg.cnj || '').replace(/\D/g, ''), cp = CAMPO_SIN[msg.campo];
+  if (k.length !== 20 || !cp) { responder({ erro: 'pedido inválido' }); return; }
+  var cnj = fmtCnj(k);
+  Promise.all([fetch(SITE + '/api/pauta?ficha=' + encodeURIComponent(cnj), { credentials: 'include', cache: 'no-store' }).then(function (r) { if (r.status === 401) throw new Error('Entre no painel do HERO18810 para registrar.'); if (!r.ok) throw new Error('ficha ilegível (' + r.status + ')'); return r.json(); }), quem()]).then(function (v) {
+    var op = v[0].operacional || {}, atual = String(((op[cp[0]] || {})[cp[1]]) || ''), L = atual.split(/\n+/).map(function (x) { return x.trim(); }).filter(Boolean);
+    var semMarca = function (x) { return x.replace(/^✓\s*/, ''); }, alvo = semMarca(String(msg.linha || '').trim());
+    var i = L.map(semMarca).indexOf(alvo), d = new Date(), u = v[1] || 'equipe';
+    if (msg.acao === 'resolver' || msg.acao === 'reabrir') { if (i < 0) throw new Error('A linha mudou na ficha; reabra o quadro.'); L[i] = msg.acao === 'resolver' ? '✓ ' + semMarca(L[i]) : semMarca(L[i]); }
+    else if (msg.acao === 'incluir') {
+      var t = String(msg.texto || '').replace(/\s*\n+\s*/g, ' ').trim().slice(0, 600); if (!t) throw new Error('texto vazio');
+      L.push(msg.campo === 'nt' ? p2(d.getDate()) + '/' + p2(d.getMonth() + 1) + '/' + d.getFullYear() + ' ' + p2(d.getHours()) + ':' + p2(d.getMinutes()) + ' · ' + u + ' · ' + t : t + ' · ' + u + ' · ' + p2(d.getDate()) + '/' + p2(d.getMonth() + 1));
+    } else throw new Error('ação inválida');
+    var campos = {}; campos[cp[0] + '.' + cp[1]] = L.join('\n');
+    return fetch(SITE + '/api/pauta?ficha=1', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ cnj: cnj, campos: campos }) }).then(function (r) {
+      return r.json().catch(function () { return {}; }).then(function (j) { if (!r.ok) throw new Error(j.erro || ('não gravou (' + r.status + ')')); if ((j.recusados || []).length) throw new Error('sem permissão para gravar este campo'); });
+    });
+  }).then(function () { delete RES[k]; return resumos([k]); }).then(function (R) { responder({ ok: true, resumo: R[k] || null }); }, function (e) { responder({ erro: e && e.message || String(e) }); });
+  return true;
+});
