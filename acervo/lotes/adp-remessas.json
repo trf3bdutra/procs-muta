@@ -9,7 +9,7 @@
  "sessoes": [],
  "filtro": {},
  "criado_por": "Bruno",
- "atualizado_em": "2026-11-20",
+ "atualizado_em": "2026-11-21",
  "colunas": [
   {
    "id": "URG",
@@ -36,7 +36,36 @@
    "rotulo": "Pendência [VALIDAR]"
   }
  ],
- "grupos": [],
+ "grupos": [
+  {
+   "id": "RM1",
+   "rotulo": "Remessa · Monocrática de desprovimento (artigo 932 do CPC)",
+   "cor": "#2a6a4a",
+   "resultado": "Nego provimento à remessa necessária (artigo 932 do CPC)",
+   "modelo": "Monocrática de remessa (banco: 95 monocráticas da Turma Regional)"
+  },
+  {
+   "id": "RM2",
+   "rotulo": "Remessa · Voto ou monocrática conforme paradigma a conferir",
+   "cor": "#6a5a2a",
+   "resultado": "Conferir paradigma",
+   "modelo": "Sem paradigma direto"
+  },
+  {
+   "id": "RM3",
+   "rotulo": "Remessa · Não conhecimento ou prejuízo",
+   "cor": "#6a2a2a",
+   "resultado": "Não conheço da remessa necessária / prejudicada",
+   "modelo": "Monocrática"
+  },
+  {
+   "id": "RM4",
+   "rotulo": "Remessa · Conferir antes (apelação, sentença, diligência)",
+   "cor": "#2a4a6a",
+   "resultado": "Conferir no PJe",
+   "modelo": "—"
+  }
+ ],
  "grupo_outros": {
   "rotulo": "A triar",
   "cor": "#9aa0a8"
@@ -52,12 +81,14 @@
    "exequente": "THAIS COSTA MEDEIROS",
    "executado": "DIRETOR DA DIRETORIA DE PAGAMENTO E REGISTRO DE PESSOAL - DIPAG/PROGEP DA FUNDAÇÃO UNIVERSIDADE FEDERAL DE MATO GROSSO DO SUL",
    "assunto": "Admissão / Permanência / Despedida",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "RM1",
+   "tipo_caso": "Remessa necessária em mandado de segurança · contratação de professora substituta pela UFMS sem o interstício de 24 meses do artigo 9º, III, da Lei 8.745/1993, por ter sido o contrato anterior com instituição diversa (IFMS) · segurança concedida",
+   "resultado": "Ato a proferir: remessa necessária da sentença ID 353961609, sem recurso voluntário; MPF sem interesse em primeiro e segundo graus (IDs 353961608 e 355553201) ‖ Proposta pelos precedentes: Desprovimento por decisão monocrática (artigo 932 do CPC), na linha do gabinete de que o interstício do artigo 9º, III, da Lei 8.745/1993 não alcança contratação por ente diverso (AI 5001313-17.2022.4.03.0000, 30/06/2022) [VALIDAR compatibilidade com o Tema 403/STF] [VALIDAR: Compatibilidade com o Tema 403/STF (RE 635.648)]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Remessa necessária da sentença que concedeu a segurança a Thaís Costa Medeiros para ser contratada como professora substituta da UFMS sem o interstício de 24 meses do artigo 9º, III, da Lei 8.745/1993, porque o contrato temporário anterior foi com o IFMS, instituição diversa. Não houve recurso voluntário; o MPF declarou falta de interesse.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -68,7 +99,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da remessa necessária: possível decisão monocrática de desprovimento (artigo 932 do CPC)",
+    "materia": "Administrativo — contratação temporária (professor substituto)",
+    "origem": "Mandado de segurança 5002479-24.2025.4.03.6000 (2ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 353961609 (27/10/2025)",
+    "recurso": "Remessa necessária · sentença de 27/10/2025",
+    "preparo": "Não se aplica (remessa necessária)",
+    "monocratica": "Possível (artigo 932 do CPC), na linha do gabinete sobre o interstício entre instituições distintas",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "NÃO SE APLICA · remessa necessária · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -78,6 +120,96 @@
    "chegada": "04/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Professor substituto — interstício do artigo 9º, III, da Lei 8.745/1993 entre instituições diversas",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 353961602 · 25/08/2025 — abriu vista ao MPF | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 355553201 · 18/02/2026 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Sem recurso voluntário · MPF sem interesse (ID 355553201) · Interstício entre instituições diversas (linha do AI 5001313-17.2022.4.03.0000) · Tema 403/STF a conferir",
+   "teor": {
+    "sintese_fatica": "Thaís Costa Medeiros, aprovada em seleção para professora substituta da UFMS, impetrou mandado de segurança contra a aplicação do interstício de 24 meses do artigo 9º, III, da Lei 8.745/1993 por contrato temporário anterior com o IFMS.",
+    "inicial": "Mandado de segurança contra o Diretor de Pagamento e Registro de Pessoal da UFMS.",
+    "decisao_recorrida": "Sentença ID 353961609 (27/10/2025): confirmou a liminar e concedeu a segurança para o prosseguimento da contratação da impetrante como professora substituta da UFMS, sem a restrição do artigo 9º, III, da Lei 8.745/1993 quanto ao contrato anterior com o IFMS.",
+    "recurso": "Sem recurso voluntário; remessa necessária.",
+    "resposta": "Não consta.",
+    "parecer": "MPF ID 355553201: Ausência de interesse que justifique a intervenção",
+    "memoriais": "Não consta",
+    "representacao": "Advogada Letícia Regina Camargo Kreuz (OAB/PR 65.860).",
+    "preparo": "Não se aplica."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Remessa Necessária",
+     "subassuntos": "Remessa necessária em mandado de segurança · contratação de professora substituta pela UFMS sem o interstício de 24 meses do artigo 9º, III, da Lei 8.745/1993, por ter sido o contrato anterior com instituição diversa (IFMS) · segurança concedida",
+     "sintese": "Thaís Costa Medeiros, aprovada em seleção para professora substituta da UFMS, impetrou mandado de segurança contra a aplicação do interstício de 24 meses do artigo 9º, III, da Lei 8.745/1993 por contrato temporário anterior com o IFMS.",
+     "questoes": "1) Alcance do interstício de 24 meses do artigo 9º, III, da Lei 8.745/1993 quando o contrato anterior foi com outra instituição.",
+     "rel": {
+      "razoes": "Sem recurso voluntário; remessa necessária.",
+      "contrarrazoes": "Não consta."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "353961609",
+      "juizo": "Mandado de segurança 5002479-24.2025.4.03.6000 (2ª Vara Federal de Campo Grande)",
+      "dispositivo": "confirmou a liminar e concedeu a segurança para o prosseguimento da contratação da impetrante como professora substituta da UFMS, sem a restrição do artigo 9º, III, da Lei 8.745/1993 quanto ao contrato anterior com o IFMS."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2025-03-21",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "353961609",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: segurança concedida",
+       "id": "353961609",
+       "data": "2025-10-27"
+      },
+      {
+       "desc": "Parecer do MPF (sem interesse)",
+       "id": "355553201",
+       "data": "2026-02-18"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 353961602 · 25/08/2025 — abriu vista ao MPF | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 355553201 · 18/02/2026 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Sem recurso voluntário · MPF sem interesse (ID 355553201) · Interstício entre instituições diversas (linha do AI 5001313-17.2022.4.03.0000) · Tema 403/STF a conferir",
+     "assuntoDet": "Professor substituto — interstício do artigo 9º, III, da Lei 8.745/1993 entre instituições diversas",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não se aplica",
+     "preparo": "Não se aplica",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Mandado de segurança",
+     "parecer": "Com parecer",
+     "idParecer": "355553201",
+     "parecerSentido": "Ausência de interesse que justifique a intervenção"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Decisão · ID 353961602 · 25/08/2025 — abriu vista ao MPF",
+    "ultima_peca": "Parecer \"Falta de Interesse\" (MPF) · ID 355553201 · 18/02/2026",
+    "ultima_informacao": "Informação · ID 353961613 · 09/02/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 353961602 · 25/08/2025 — abriu vista ao MPF | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 355553201 · 18/02/2026 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária"
    }
   },
   {
@@ -89,12 +221,14 @@
    "exequente": "CAIO BARROS FIGUEIREDO",
    "executado": "CHEFE DO 6º CENTRO DE TELEMÁTICA DE ÁREA DO COMANDO MILITAR DO OESTE",
    "assunto": "Anulação",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "RM2",
+   "tipo_caso": "Remessa necessária em mandado de segurança · militar temporário do Exército (6º CTA/CMO) · anulação da prorrogação do tempo de serviço e licenciamento a pedido para assumir emprego privado · segurança concedida",
+   "resultado": "Ato a proferir: remessa necessária da sentença ID 366531275, sem recurso voluntário; MPF sem interesse (ID 369909429) ‖ Proposta pelos precedentes: Monocrática ou voto: linha do gabinete sobre licenciamento do militar temporário na Lei 13.954/2019 (AI 5030052-34.2021.4.03.0000, 1ª Turma, 08/06/2023) [VALIDAR sentido e aplicação ao licenciamento a pedido] [VALIDAR: Paradigma sobre licenciamento a pedido do militar temporário]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Remessa necessária da sentença que concedeu a Caio Barros Figueiredo, militar temporário, o licenciamento do serviço ativo e anulou a prorrogação de seu tempo de serviço por 12 meses, para que assuma emprego privado. Não houve recurso voluntário; o MPF declarou falta de interesse.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -105,7 +239,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da remessa necessária (monocrática ou voto) [VALIDAR paradigma]",
+    "materia": "Administrativo — militar (licenciamento)",
+    "origem": "Mandado de segurança 5008104-39.2025.4.03.6000 (4ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 366531275 (15/01/2026)",
+    "recurso": "Remessa necessária · sentença de 15/01/2026",
+    "preparo": "Não se aplica (remessa necessária)",
+    "monocratica": "Possível (artigo 932 do CPC), se houver jurisprudência dominante [VALIDAR]",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "NÃO SE APLICA · remessa necessária · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -115,6 +260,96 @@
    "chegada": "04/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Militar temporário — licenciamento a pedido contra a prorrogação do serviço",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 366531274 · 12/10/2025 — …ODê-se vista à União pelo prazo de cinco dias.Após, nada mais sendo requerido, venham os autos conclusos para sentença.Campo Grande/MS, data e assinatura eletrônicos.GUILHERME VICENTE LOPES LEITESJuiz Federal Substituto | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 369909429 · 29/04/2026 | última movimentação: 29/04/2026 19:05 · Conclusos para julgamento · Sem recurso voluntário · MPF sem interesse (ID 369909429) · Lei 13.954/2019 (licenciamento do militar temporário) · Possível consumação do licenciamento",
+   "teor": {
+    "sintese_fatica": "Caio Barros Figueiredo, militar temporário do 6º Centro de Telemática de Área do Comando Militar do Oeste, impetrou mandado de segurança para anular a renovação de seu tempo de serviço por 12 meses e ser licenciado, a fim de assumir emprego privado.",
+    "inicial": "Mandado de segurança contra o Chefe do 6º Centro de Telemática de Área do CMO e a União.",
+    "decisao_recorrida": "Sentença ID 366531275 (15/01/2026): confirmou a liminar e concedeu a segurança para determinar o licenciamento do serviço ativo do impetrante.",
+    "recurso": "Sem recurso voluntário; remessa necessária.",
+    "resposta": "Não consta.",
+    "parecer": "MPF ID 369909429: Ausência de interesse que justifique a intervenção",
+    "memoriais": "Não consta",
+    "representacao": "Advogado José Raffi Neto (OAB/MS 13.978).",
+    "preparo": "Não se aplica."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Remessa Necessária",
+     "subassuntos": "Remessa necessária em mandado de segurança · militar temporário do Exército (6º CTA/CMO) · anulação da prorrogação do tempo de serviço e licenciamento a pedido para assumir emprego privado · segurança concedida",
+     "sintese": "Caio Barros Figueiredo, militar temporário do 6º Centro de Telemática de Área do Comando Militar do Oeste, impetrou mandado de segurança para anular a renovação de seu tempo de serviço por 12 meses e ser licenciado, a fim de assumir emprego privado.",
+     "questoes": "1) Direito do militar temporário ao licenciamento a pedido e anulação da prorrogação do tempo de serviço (Lei 6.880/1980; Lei 13.954/2019).",
+     "rel": {
+      "razoes": "Sem recurso voluntário; remessa necessária.",
+      "contrarrazoes": "Não consta."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "366531275",
+      "juizo": "Mandado de segurança 5008104-39.2025.4.03.6000 (4ª Vara Federal de Campo Grande)",
+      "dispositivo": "confirmou a liminar e concedeu a segurança para determinar o licenciamento do serviço ativo do impetrante."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2025-08-18",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "366531275",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: segurança concedida",
+       "id": "366531275",
+       "data": "2026-01-15"
+      },
+      {
+       "desc": "Parecer do MPF (sem interesse)",
+       "id": "369909429",
+       "data": "2026-04-29"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 366531274 · 12/10/2025 — …ODê-se vista à União pelo prazo de cinco dias.Após, nada mais sendo requerido, venham os autos conclusos para sentença.Campo Grande/MS, data e assinatura eletrônicos.GUILHERME VICENTE LOPES LEITESJuiz Federal Substituto | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 369909429 · 29/04/2026 | última movimentação: 29/04/2026 19:05 · Conclusos para julgamento · Sem recurso voluntário · MPF sem interesse (ID 369909429) · Lei 13.954/2019 (licenciamento do militar temporário) · Possível consumação do licenciamento",
+     "assuntoDet": "Militar temporário — licenciamento a pedido contra a prorrogação do serviço",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não se aplica",
+     "preparo": "Não se aplica",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Mandado de segurança",
+     "parecer": "Com parecer",
+     "idParecer": "369909429",
+     "parecerSentido": "Ausência de interesse que justifique a intervenção"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "29/04/2026 19:05 · Conclusos para julgamento",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Decisão · ID 366531274 · 12/10/2025 — …ODê-se vista à União pelo prazo de cinco dias.Após, nada mais sendo requerido, venham os autos conclusos para sentença.Campo Grande/MS, data e assinatura eletrônicos.GUILHERME VICENTE LOPES LEITESJuiz Federal Substituto",
+    "ultima_peca": "Parecer \"Falta de Interesse\" (MPF) · ID 369909429 · 29/04/2026",
+    "ultima_informacao": "Informação · ID 366531592 · 13/03/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 366531274 · 12/10/2025 — …ODê-se vista à União pelo prazo de cinco dias.Após, nada mais sendo requerido, venham os autos conclusos para sentença.Campo Grande/MS, data e assinatura eletrônicos.GUILHERME VICENTE LOPES LEITESJuiz Federal Substituto | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 369909429 · 29/04/2026 | última movimentação: 29/04/2026 19:05 · Conclusos para julgamento"
    }
   },
   {
@@ -126,12 +361,14 @@
    "exequente": "NOEM MEDICAL IMPORTACAO E EXPORTACAO DE PRODUTOS MEDICOS-HOSPITALARES LTDA",
    "executado": "SUPERINTENDENTE DO HOSPITAL UNIVERSITÁRIO MARIA APARECIDA PEDROSSIAN DA UNIVERSIDADE FEDERAL DE MATO GROSSO DO SUL (HUMAP-UFMS)",
    "assunto": "Anulação",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "RM2",
+   "tipo_caso": "Remessa necessária em mandado de segurança · sanção da EBSERH (Hospital Universitário Maria Aparecida Pedrossian) de suspensão de licitar e contratar por 150 dias por recusa em assinar ata de registro de preços · nulidade reconhecida · segurança concedida",
+   "resultado": "Ato a proferir: remessa necessária da sentença ID 385294634 (cadastrada como decisão), sem recurso voluntário; MPF sem interesse (IDs 385294632 e 387546949) ‖ Proposta pelos precedentes: Voto ou monocrática: linha da Turma Regional sobre controle judicial de sanção de impedimento de licitar (ApCiv 0005091-29.2016.4.03.6002, 15/09/2026; ApCiv 0013693-49.2015.4.03.6000, 27/08/2026) [VALIDAR sentido] [VALIDAR: Decurso dos 150 dias da sanção (interesse remanescente quanto ao SICAF)]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Remessa necessária da sentença que anulou a suspensão de licitar e contratar por 150 dias imposta pela EBSERH à Noem Medical, por recusa em assinar ata de registro de preços do Pregão 90.058/2025, e mandou cancelar a anotação no SICAF. A sentença afastou a Súmula 665/STJ pela flagrante ilegalidade e desproporcionalidade. Não houve recurso voluntário.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -142,7 +379,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da remessa necessária (voto ou monocrática) [VALIDAR paradigma]",
+    "materia": "Administrativo — licitações e sanções",
+    "origem": "Mandado de segurança 5000355-34.2026.4.03.6000 (4ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 385294634 (15/05/2026)",
+    "recurso": "Remessa necessária · sentença de 15/05/2026",
+    "preparo": "Não se aplica (remessa necessária)",
+    "monocratica": "Possível (artigo 932 do CPC), se houver jurisprudência dominante [VALIDAR]",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "NÃO SE APLICA · remessa necessária · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -152,6 +400,96 @@
    "chegada": "04/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Licitação — anulação de suspensão de licitar aplicada pela EBSERH (recusa em assinar ata)",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 385294634 · 15/05/2026 — …nos gravosa.Sem condenação em honorários advocatícios (Súmula nº 512 do STF).Custas na forma da lei.Sentença sujeita ao reexame necessário (art. 14, § 1º, da Lei nº 12.016/2009).P.I.CPEDRO PEREIRA DOS SANTOSJuiz Federal | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 387546949 · 20/07/2026 | última movimentação: 20/07/2026 18:05 · Conclusos para julgamento · Sem recurso voluntário · MPF sem interesse (ID 387546949) · Sentença cadastrada como decisão (ID 385294634) · Súmula 665/STJ",
+   "teor": {
+    "sintese_fatica": "A Noem Medical Importação e Exportação de Produtos Médico-Hospitalares Ltda. foi suspensa por 150 dias de licitar com a EBSERH por recusar a assinatura de ata de registro de preços em pregão; a sentença anulou a sanção, por desconformidade do objeto da proposta e desproporcionalidade.",
+    "inicial": "Mandado de segurança contra o Superintendente do Hospital Universitário Maria Aparecida Pedrossian (EBSERH).",
+    "decisao_recorrida": "Sentença ID 385294634 (15/05/2026): concedeu a segurança para declarar a nulidade da suspensão de licitar e contratar com a Rede EBSERH por 150 dias (Processo Administrativo Sancionador 23538.020895/2025-01) e cancelar a anotação no SICAF, sem prejuízo de sanção menos gravosa.",
+    "recurso": "Sem recurso voluntário; remessa necessária.",
+    "resposta": "Não consta.",
+    "parecer": "MPF ID 387546949: Ausência de interesse que justifique a intervenção",
+    "memoriais": "Não consta",
+    "representacao": "Advogado Giancarlo Bernardi Possamai (OAB/SP 270.040).",
+    "preparo": "Não se aplica."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Remessa Necessária",
+     "subassuntos": "Remessa necessária em mandado de segurança · sanção da EBSERH (Hospital Universitário Maria Aparecida Pedrossian) de suspensão de licitar e contratar por 150 dias por recusa em assinar ata de registro de preços · nulidade reconhecida · segurança concedida",
+     "sintese": "A Noem Medical Importação e Exportação de Produtos Médico-Hospitalares Ltda. foi suspensa por 150 dias de licitar com a EBSERH por recusar a assinatura de ata de registro de preços em pregão; a sentença anulou a sanção, por desconformidade do objeto da proposta e desproporcionalidade.",
+     "questoes": "1) Controle judicial da sanção de suspensão de licitar (proporcionalidade; Súmula 665/STJ); 2) recusa em assinar ata de registro de preços.",
+     "rel": {
+      "razoes": "Sem recurso voluntário; remessa necessária.",
+      "contrarrazoes": "Não consta."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "385294634",
+      "juizo": "Mandado de segurança 5000355-34.2026.4.03.6000 (4ª Vara Federal de Campo Grande)",
+      "dispositivo": "concedeu a segurança para declarar a nulidade da suspensão de licitar e contratar com a Rede EBSERH por 150 dias (Processo Administrativo Sancionador 23538.020895/2025-01) e cancelar a anotação no SICAF, sem prejuízo de sanção menos gravosa."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2026-01-21",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "385294634",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença (cadastrada como decisão): segurança concedida",
+       "id": "385294634",
+       "data": "2026-05-15"
+      },
+      {
+       "desc": "Parecer do MPF (sem interesse)",
+       "id": "387546949",
+       "data": "2026-07-20"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 385294634 · 15/05/2026 — …nos gravosa.Sem condenação em honorários advocatícios (Súmula nº 512 do STF).Custas na forma da lei.Sentença sujeita ao reexame necessário (art. 14, § 1º, da Lei nº 12.016/2009).P.I.CPEDRO PEREIRA DOS SANTOSJuiz Federal | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 387546949 · 20/07/2026 | última movimentação: 20/07/2026 18:05 · Conclusos para julgamento · Sem recurso voluntário · MPF sem interesse (ID 387546949) · Sentença cadastrada como decisão (ID 385294634) · Súmula 665/STJ",
+     "assuntoDet": "Licitação — anulação de suspensão de licitar aplicada pela EBSERH (recusa em assinar ata)",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não se aplica",
+     "preparo": "Não se aplica",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Mandado de segurança",
+     "parecer": "Com parecer",
+     "idParecer": "387546949",
+     "parecerSentido": "Ausência de interesse que justifique a intervenção"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "20/07/2026 18:05 · Conclusos para julgamento",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Decisão · ID 385294634 · 15/05/2026 — …nos gravosa.Sem condenação em honorários advocatícios (Súmula nº 512 do STF).Custas na forma da lei.Sentença sujeita ao reexame necessário (art. 14, § 1º, da Lei nº 12.016/2009).P.I.CPEDRO PEREIRA DOS SANTOSJuiz Federal",
+    "ultima_peca": "Parecer \"Falta de Interesse\" (MPF) · ID 387546949 · 20/07/2026",
+    "ultima_informacao": "Informação · ID 385294636 · 09/07/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 385294634 · 15/05/2026 — …nos gravosa.Sem condenação em honorários advocatícios (Súmula nº 512 do STF).Custas na forma da lei.Sentença sujeita ao reexame necessário (art. 14, § 1º, da Lei nº 12.016/2009).P.I.CPEDRO PEREIRA DOS SANTOSJuiz Federal | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 387546949 · 20/07/2026 | última movimentação: 20/07/2026 18:05 · Conclusos para julgamento"
    }
   },
   {
@@ -163,12 +501,14 @@
    "exequente": "Subseção Judiciária de Campo Grande/MS - 4ª Vara Federal",
    "executado": "CENTRO UNIVERSITÁRIO UNIFACVEST",
    "assunto": "Anulação",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "RM1",
+   "tipo_caso": "Remessa necessária em mandado de segurança · colação de grau e diploma de Licenciatura em Pedagogia (EAD) independentemente do ENADE · liminar cumprida · segurança concedida",
+   "resultado": "Ato a proferir: remessa necessária da sentença ID 320479296, sem recurso voluntário; a colação e o diploma já foram realizados por força da liminar; MPF sem interesse (IDs 320479295 e 328267615) ‖ Proposta pelos precedentes: Desprovimento por decisão monocrática (artigo 932 do CPC), na linha do gabinete sobre colação de grau sem ENADE e situação fática consolidada (AI 5012952-32.2022.4.03.0000, 3ª Turma, 14/04/2023)",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Remessa necessária da sentença que assegurou a Esmeralda Silva dos Santos a colação de grau e o diploma de Pedagogia independentemente do ENADE e mandou manter a colação já feita. Não houve recurso voluntário; o MPF declarou falta de interesse.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -179,7 +519,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da remessa necessária: possível decisão monocrática de desprovimento (artigo 932 do CPC)",
+    "materia": "Administrativo — ensino superior",
+    "origem": "Mandado de segurança 5011624-41.2024.4.03.6000 (4ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 320479296 (29/01/2025)",
+    "recurso": "Remessa necessária · sentença de 29/01/2025",
+    "preparo": "Não se aplica (remessa necessária)",
+    "monocratica": "Possível (artigo 932 do CPC), na linha do gabinete sobre situação fática consolidada",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "NÃO SE APLICA · remessa necessária · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -189,6 +540,96 @@
    "chegada": "04/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Ensino superior — colação de grau sem ENADE (situação consolidada)",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 320479294 · 11/11/2024 — …reserva da vaga da impetrante no certame, tendo em vista que a prefeitura não compõe o polo passivo da ação, restando o pedido prejudicado.Intime-se.Campo Grande/MS, data e assinatura, conforme certificação eletrônica | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 328267615 · 18/06/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Sem recurso voluntário · Colação e diploma já realizados (situação consolidada) · MPF sem interesse (ID 328267615) · Etiqueta \"Expedição de Diploma\"",
+   "teor": {
+    "sintese_fatica": "Esmeralda Silva dos Santos, aprovada em concurso para professora em Campo Grande, impetrou mandado de segurança para colar grau e obter o diploma de Licenciatura em Pedagogia (EAD) do Centro Universitário Unifacvest, independentemente do ENADE.",
+    "inicial": "Mandado de segurança contra o Centro Universitário Unifacvest.",
+    "decisao_recorrida": "Sentença ID 320479296 (29/01/2025): confirmou a liminar, declarou o direito à colação de grau e ao diploma independentemente do ENADE e determinou a manutenção da colação já realizada e do diploma expedido.",
+    "recurso": "Sem recurso voluntário; remessa necessária.",
+    "resposta": "Não consta.",
+    "parecer": "MPF ID 328267615: Ausência de interesse que justifique a intervenção",
+    "memoriais": "Não consta",
+    "representacao": "Impetrante assistida por advogado constituído [VALIDAR].",
+    "preparo": "Não se aplica."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Remessa Necessária",
+     "subassuntos": "Remessa necessária em mandado de segurança · colação de grau e diploma de Licenciatura em Pedagogia (EAD) independentemente do ENADE · liminar cumprida · segurança concedida",
+     "sintese": "Esmeralda Silva dos Santos, aprovada em concurso para professora em Campo Grande, impetrou mandado de segurança para colar grau e obter o diploma de Licenciatura em Pedagogia (EAD) do Centro Universitário Unifacvest, independentemente do ENADE.",
+     "questoes": "1) Colação de grau e diploma independentemente do ENADE; 2) situação fática consolidada.",
+     "rel": {
+      "razoes": "Sem recurso voluntário; remessa necessária.",
+      "contrarrazoes": "Não consta."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "320479296",
+      "juizo": "Mandado de segurança 5011624-41.2024.4.03.6000 (4ª Vara Federal de Campo Grande)",
+      "dispositivo": "confirmou a liminar, declarou o direito à colação de grau e ao diploma independentemente do ENADE e determinou a manutenção da colação já realizada e do diploma expedido."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2024-11-01",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "320479296",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: segurança concedida",
+       "id": "320479296",
+       "data": "2025-01-29"
+      },
+      {
+       "desc": "Parecer do MPF (sem interesse)",
+       "id": "328267615",
+       "data": "2025-06-18"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 320479294 · 11/11/2024 — …reserva da vaga da impetrante no certame, tendo em vista que a prefeitura não compõe o polo passivo da ação, restando o pedido prejudicado.Intime-se.Campo Grande/MS, data e assinatura, conforme certificação eletrônica | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 328267615 · 18/06/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Sem recurso voluntário · Colação e diploma já realizados (situação consolidada) · MPF sem interesse (ID 328267615) · Etiqueta \"Expedição de Diploma\"",
+     "assuntoDet": "Ensino superior — colação de grau sem ENADE (situação consolidada)",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não se aplica",
+     "preparo": "Não se aplica",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Mandado de segurança",
+     "parecer": "Com parecer",
+     "idParecer": "328267615",
+     "parecerSentido": "Ausência de interesse que justifique a intervenção"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Decisão · ID 320479294 · 11/11/2024 — …reserva da vaga da impetrante no certame, tendo em vista que a prefeitura não compõe o polo passivo da ação, restando o pedido prejudicado.Intime-se.Campo Grande/MS, data e assinatura, conforme certificação eletrônica",
+    "ultima_peca": "Parecer \"Falta de Interesse\" (MPF) · ID 328267615 · 18/06/2025",
+    "ultima_informacao": "Informação · ID 320479299 · 09/04/2025",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 320479294 · 11/11/2024 — …reserva da vaga da impetrante no certame, tendo em vista que a prefeitura não compõe o polo passivo da ação, restando o pedido prejudicado.Intime-se.Campo Grande/MS, data e assinatura, conforme certificação eletrônica | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 328267615 · 18/06/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária"
    }
   },
   {
@@ -200,12 +641,14 @@
    "exequente": "JOSE CARLOS FERRARI",
    "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "assunto": "Apreensão",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "RM2",
+   "tipo_caso": "Remessa necessária em mandado de segurança · caminhão trator apreendido em infração aduaneira · liberação ao proprietário de boa-fé e anulação do auto de infração e do perdimento (sentença integrada por embargos) · segurança concedida",
+   "resultado": "Ato a proferir: remessa necessária das sentenças IDs 289231050 e 289231057, sem recurso voluntário; prazo do impetrante decorrido em 06/11/2024; concluso desde 03/12/2024 ‖ Proposta pelos precedentes: Monocrática ou voto conforme a prova da boa-fé, na linha da Turma Regional em perdimento de veículo usado no transporte de mercadorias estrangeiras (ApCiv 5000919-57.2019.4.03.6000, 28/09/2026; ApCiv 5001454-68.2019.4.03.6005, 28/09/2026) [VALIDAR sentido] [VALIDAR: Apelação ou ciência da União; Prova da boa-fé do proprietário]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Remessa necessária da sentença que liberou o caminhão trator de José Carlos Ferrari e, integrada por embargos de declaração, anulou o auto de infração e o perdimento, pela boa-fé do proprietário. Não houve recurso voluntário da União [VALIDAR].",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -216,7 +659,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da remessa necessária: possível decisão monocrática (artigo 932 do CPC) [VALIDAR prova da boa-fé]",
+    "materia": "Aduaneiro — pena de perdimento",
+    "origem": "Mandado de segurança 5007702-60.2022.4.03.6000 (Campo Grande)",
+    "decisao_agravada": "Sentença ID 289231057 (05/02/2024)",
+    "recurso": "Remessa necessária · sentença de 05/02/2024",
+    "preparo": "Não se aplica (remessa necessária)",
+    "monocratica": "Possível (artigo 932 do CPC), conforme a prova da boa-fé e a linha da Turma Regional em perdimento de veículo",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "NÃO SE APLICA · remessa necessária · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -226,6 +680,99 @@
    "chegada": "04/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Aduaneiro — perdimento de veículo do proprietário de boa-fé (remessa)",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 306633125 · 09/10/2024 — …ecurso.Eventual não observância do procedimento pelo juízo de 1º grau deverá ser combatida por meio do recurso cabível.Intimem-se. Cumpra-se.São Paulo, data da assinatura eletrônica. GISELLE FRANÇADESEMBARGADORA FEDERAL | última peça: Manifestação (PFN) · ID 307067665 · 15/10/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Sem recurso voluntário [VALIDAR] · Sentença integrada por embargos (ID 289231057) · Lote L26 (perdimento e proprietário) · Concluso desde 03/12/2024",
+   "teor": {
+    "sintese_fatica": "José Carlos Ferrari, proprietário de caminhão trator apreendido em transporte de mercadorias estrangeiras, obteve em mandado de segurança a liberação do veículo e a anulação do auto de infração e do perdimento, por boa-fé.",
+    "inicial": "Mandado de segurança contra autoridade da Receita Federal.",
+    "decisao_recorrida": "Sentença ID 289231057 (05/02/2024): a sentença ID 289231050 (22/09/2023) concedeu a segurança para liberar o caminhão Volvo FH 440 (placa DTB1G48); os embargos de declaração foram acolhidos (ID 289231057) para anular também o auto de infração e apreensão 0100100-181139/2023 e o perdimento.",
+    "recurso": "Sem recurso voluntário; remessa necessária.",
+    "resposta": "Não consta.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Advogado do impetrante [VALIDAR].",
+    "preparo": "Não se aplica."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Remessa Necessária",
+     "subassuntos": "Remessa necessária em mandado de segurança · caminhão trator apreendido em infração aduaneira · liberação ao proprietário de boa-fé e anulação do auto de infração e do perdimento (sentença integrada por embargos) · segurança concedida",
+     "sintese": "José Carlos Ferrari, proprietário de caminhão trator apreendido em transporte de mercadorias estrangeiras, obteve em mandado de segurança a liberação do veículo e a anulação do auto de infração e do perdimento, por boa-fé.",
+     "questoes": "1) Perdimento de veículo de proprietário de boa-fé usado em infração aduaneira (Súmula 138/TFR); 2) proporcionalidade.",
+     "rel": {
+      "razoes": "Sem recurso voluntário; remessa necessária.",
+      "contrarrazoes": "Não consta."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "289231057",
+      "juizo": "Mandado de segurança 5007702-60.2022.4.03.6000 (Campo Grande)",
+      "dispositivo": "a sentença ID 289231050 (22/09/2023) concedeu a segurança para liberar o caminhão Volvo FH 440 (placa DTB1G48); os embargos de declaração foram acolhidos (ID 289231057) para anular também o auto de infração e apreensão 0100100-181139/2023 e o perdimento."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2022-08-31",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "289231057",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: liberação do veículo",
+       "id": "289231050",
+       "data": "2023-09-22"
+      },
+      {
+       "desc": "Embargos de declaração",
+       "id": "289231052",
+       "data": "2023-10-05"
+      },
+      {
+       "desc": "Sentença em embargos: anulação do auto e do perdimento",
+       "id": "289231057",
+       "data": "2024-02-05"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 306633125 · 09/10/2024 — …ecurso.Eventual não observância do procedimento pelo juízo de 1º grau deverá ser combatida por meio do recurso cabível.Intimem-se. Cumpra-se.São Paulo, data da assinatura eletrônica. GISELLE FRANÇADESEMBARGADORA FEDERAL | última peça: Manifestação (PFN) · ID 307067665 · 15/10/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Sem recurso voluntário [VALIDAR] · Sentença integrada por embargos (ID 289231057) · Lote L26 (perdimento e proprietário) · Concluso desde 03/12/2024",
+     "assuntoDet": "Aduaneiro — perdimento de veículo do proprietário de boa-fé (remessa)",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não se aplica",
+     "preparo": "Não se aplica",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Mandado de segurança",
+     "parecer": "Não verificado"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Decisão · ID 306633125 · 09/10/2024 — …ecurso.Eventual não observância do procedimento pelo juízo de 1º grau deverá ser combatida por meio do recurso cabível.Intimem-se. Cumpra-se.São Paulo, data da assinatura eletrônica. GISELLE FRANÇADESEMBARGADORA FEDERAL",
+    "ultima_peca": "Manifestação (PFN) · ID 307067665 · 15/10/2024",
+    "ultima_informacao": "Ato ordinatório · ID 289231055 · 09/10/2023",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 306633125 · 09/10/2024 — …ecurso.Eventual não observância do procedimento pelo juízo de 1º grau deverá ser combatida por meio do recurso cabível.Intimem-se. Cumpra-se.São Paulo, data da assinatura eletrônica. GISELLE FRANÇADESEMBARGADORA FEDERAL | última peça: Manifestação (PFN) · ID 307067665 · 15/10/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária"
    }
   },
   {
