@@ -6,7 +6,7 @@
   "arquivo": "acervo/fonte.json",
   "chave": "processo"
  },
- "atualizado_em": "2026-11-21T02:09:52.446Z",
+ "atualizado_em": "2026-11-21T02:09:59.326Z",
  "registros": [
   {
    "processo": "0000008-23.2025.4.03.6000",
@@ -43555,7 +43555,7 @@
     "Responsável": "",
     "Próxima ação": "",
     "Observações": "",
-    "atualizado_em": "2026-11-21T01:38:33.178Z",
+    "atualizado_em": "2026-11-21T02:09:59.326Z",
     "Origem - Juízo": "Justiça Federal em Campo Grande [VALIDAR vara]"
    },
    "triagem": {
@@ -43572,8 +43572,8 @@
     "Tempest - Suspensões": "",
     "Tipo de Julgamento": "Agravo de Instrumento",
     "Hipóteses Monocrática": "",
-    "Tempestividade": "Não verificado",
-    "Preparo": "Isento (DPU/ente público)",
+    "Tempestividade": "Não Verificado",
+    "Preparo": "Dispensado",
     "AJG": "",
     "DPU (controle)": "",
     "Representação": "Regular",
@@ -43583,26 +43583,27 @@
     "Regularidade": "Representação ainda não verificada.",
     "Regularidade Manual": "",
     "Observação da Representação": "",
-    "MPF": "Idoso em risco",
-    "MPF - Custos Legis": "",
+    "MPF": "Com Parecer",
+    "MPF - Custos Legis": "Sim",
     "ID do Parecer MPF": "",
     "Parecer - Sentido": "",
     "MPF - Info adicional": "",
     "Observação MPF": "",
-    "Tema": "Tratamento Domiciliar (Home Care)",
+    "Tema": "Saúde · atendimento domiciliar (home care) 24 horas · beneficiária do FUSEx · tutela de urgência",
     "COMPLEXIDADE": "",
     "Tipo de Voto": "",
-    "Prelim.": "Sem preliminares",
+    "Prelim.": "Não",
     "Descrição da Preliminar": "",
     "META": "",
     "Seleção Prévia": "",
-    "Mídias": "Não se aplica",
+    "Mídias": "Não se Aplica",
     "Etiquetas": "1ª Seção, URGENTE, AI - Tutela provisória, idoso",
     "Alegações": "",
     "O que falta sanar": "",
     "Intercorrências": "",
     "Síntese Processual": "",
-    "Especificidades": "Agravada idosa (83 anos), curatelada, com sequelas de dois AVC isquêmicos e alimentação por sonda · FUSEx prestava 12 horas diárias de enfermagem domiciliar · Relatório da Organização Militar recomenda modalidade de menor complexidade · Efeito suspensivo indeferido (ID 367175328, 27/04/2026) · Parecer do MPF pelo desprovimento (ID 376433313)"
+    "Especificidades": "Agravada idosa (83 anos), curatelada, com sequelas de dois AVC isquêmicos e alimentação por sonda · FUSEx prestava 12 horas diárias de enfermagem domiciliar · Relatório da Organização Militar recomenda modalidade de menor complexidade · Efeito suspensivo indeferido (ID 367175328, 27/04/2026) · Parecer do MPF pelo desprovimento (ID 376433313)",
+    "Síntese Fática": "Beneficiária do FUSEx, de 83 anos, acamada após dois AVC isquêmicos e com alimentação por sonda, pediu atendimento domiciliar integral (24 horas); o FUSEx prestava 12 horas diárias; o juízo deferiu em parte a tutela de urgência para manter o home care 24 horas enquanto persistir a prescrição médica."
    },
    "producao": {
     "Destino": "",
@@ -43641,7 +43642,8 @@
     "Lote - Observação": "Agravo da União contra a decisão que, na ação 5001038-71.2026.4.03.6000, manteve o home care integral (24 horas) de beneficiária idosa do FUSEx enquanto persistir a prescrição médica. A União sustenta que a atenção domiciliar do FUSEx tem limites normativos e que o quadro clínico se estabilizou. O efeito suspensivo foi indeferido em 27/04/2026; o MPF opina pelo desprovimento.",
     "Lote - Ajustes da correção": [],
     "Lote - Pendências": "",
-    "Lote - Minuta": "sem minuta no lote"
+    "Lote - Minuta": "sem minuta no lote",
+    "Mono - Fundamento": "Paradigmas do gabinete: ApCiv 0003722-19.2015.4.03.6104 (1ª Turma, 06/07/2023); AI 5022203-45.2020.4.03.0000 (3ª Turma, 23/04/2021)"
    },
    "pauta": {
     "Status de Julgamento": "",
@@ -43651,7 +43653,8 @@
     "JULGAMENTO": "",
     "Motivo da remarcação": "",
     "sessoes": []
-   }
+   },
+   "controles": {}
   },
   {
    "processo": "5000040-27.2022.4.03.6006",
