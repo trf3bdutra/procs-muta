@@ -6,7 +6,7 @@
   "arquivo": "acervo/fonte.json",
   "chave": "processo"
  },
- "atualizado_em": "2026-11-21T11:01:17.886Z",
+ "atualizado_em": "2026-11-21T11:01:23.728Z",
  "registros": [
   {
    "processo": "0000008-23.2025.4.03.6000",
@@ -1664,7 +1664,7 @@
     "Responsável": "",
     "Próxima ação": "",
     "Observações": "",
-    "atualizado_em": "2026-11-19T19:59:38.527Z"
+    "atualizado_em": "2026-11-21T11:01:23.728Z"
    },
    "triagem": {
     "Urgência": "",
@@ -1678,42 +1678,43 @@
     "Tempest - Prazo legal": "",
     "Tempest - Dobro": "",
     "Tempest - Suspensões": "",
-    "Tipo de Julgamento": "",
+    "Tipo de Julgamento": "Apelação",
     "Hipóteses Monocrática": "",
-    "Tempestividade": "",
-    "Preparo": "",
+    "Tempestividade": "Não verificado",
+    "Preparo": "Não verificado",
     "AJG": "",
     "DPU (controle)": "",
-    "Representação": "",
+    "Representação": "Não verificado",
     "ID da Procuração": "",
     "Impedimento / Suspeição": "",
     "Observação do Impedimento": "",
     "Regularidade": "Representação ainda não verificada.",
     "Regularidade Manual": "",
     "Observação da Representação": "",
-    "MPF": "",
-    "MPF - Custos Legis": "",
-    "ID do Parecer MPF": "",
-    "Parecer - Sentido": "",
+    "MPF": "Com parecer",
+    "MPF - Custos Legis": "ACP/ação popular",
+    "ID do Parecer MPF": "120423276",
+    "Parecer - Sentido": "Desprovimento das apelações",
     "MPF - Info adicional": "",
     "Observação MPF": "",
-    "Tema": "Telefonia",
+    "Tema": "Apelações da Claro S.A. e da ANATEL e remessa necessária em ação civil pública do MPF (Corumbá) · qualidade do serviço de telefonia · sentença de procedência [VALIDAR alcance] · processo físico de 2012 digitalizado",
     "COMPLEXIDADE": "",
     "Tipo de Voto": "",
-    "Prelim.": "",
+    "Prelim.": "Sem preliminares",
     "Descrição da Preliminar": "",
     "META": "META 2 CNJ (até 2022)",
     "Seleção Prévia": "",
-    "Mídias": "",
+    "Mídias": "Não se aplica",
     "Etiquetas": "Prevenção, ACP telefonia, META 2 CNJ (até 2022)",
-    "Alegações": "",
+    "Alegações": "1) ACP sobre qualidade de serviço de telefonia; 2) prevenção.",
     "O que falta sanar": "",
     "Intercorrências": "",
     "Síntese Processual": "",
-    "Especificidades": "",
+    "Especificidades": "Prevenção reconhecida para o Des. Fed. André Nabarrete (decisão ID 308784410, 18/11/2024): verificar se subsiste após a redistribuição à Turma Regional [VALIDAR] · Etiquetas \"META 2 CNJ (até 2022)\" e \"Prevenção\": prioridade de julgamento · Peças no PDF digitalizado (IDs 108965663 a 108966666) · Mesmo tema de 5009022-53 (ACP telefonia Oi)",
     "_autoMetaTags": [
      "META 2 CNJ (até 2022)"
-    ]
+    ],
+    "Síntese Fática": "O MPF ajuizou em 2012 ação civil pública contra a Claro (sucessora da Embratel) e a ANATEL por deficiência do serviço de telefonia em Corumbá. As apelações foram recebidas no efeito devolutivo (ID 122801087) e a PRR opinou pelo desprovimento (ID 120423276)."
    },
    "producao": {
     "Destino": "",
@@ -1762,7 +1763,8 @@
     "JULGAMENTO": "",
     "Motivo da remarcação": "",
     "sessoes": []
-   }
+   },
+   "controles": {}
   },
   {
    "processo": "0000125-52.2009.4.03.6007",
