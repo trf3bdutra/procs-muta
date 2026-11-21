@@ -106,6 +106,10 @@ function montar(el,cal,ex){
       h+=`<div class="cc-c${sx?' cc-sday':''}${fer[d]?' cc-fe':wd>=5?' cc-fds':''}${d===hoje?' cc-hoje':''}${d>=sg&&d<=sd?' cc-sw':''}${d===(st.dia||hoje)&&d!==hoje?' cc-sel':''}" data-d="${d}"${sx?` style="--c:${sx.cor}"`:''}><span class="cc-n"><b>${dd}</b>${fer[d]?` <small title="${fer[d]}">${fer[d]}</small>`:''}</span>${lanes}${doDia(d,'evento').map(x=>`<div class="cc-evt" style="--c:${x.s.cor}">${x.hora?x.hora+' ':''}${x.o}</div>`).join('')}${extrasDia(d,'m')}</div>`;
       if(ex.chips&&wd===4&&[1,2].some(k=>iso(new Date(+P(d)+k*DIA))===hoje)) h+=`<div class="cc-wkn">Hoje é fim de semana · ${FD(hoje,{weekday:'long',day:'numeric'})}</div>`;
     }
+    /* ex.canto: um cartão no espaço vazio do mês (dias úteis depois do último dia ou, se não houver, antes do primeiro) */
+    if(ex.canto){const wl=(pad0+n-1)%7, fim=wl>=4?0:4-wl;
+      if(fim>0) h+=`<div class="cc-c cc-canto" style="grid-column:span ${fim}">${ex.canto}</div>`;
+      else if(pad>0) h=h.replace(/(<div class="cc-c cc-o"><\/div>)+/,`<div class="cc-c cc-canto" style="grid-column:span ${pad}">${ex.canto}</div>`);}
     const leg=ex.chips?`<div class="cc-leg">${vis.filter(s=>s.date>=hoje).map(s=>`<span><i style="background:${s.cor}"></i>Sessão ${F(s.date)}</span>`).join('')}<span><i class="o"></i>marco a cumprir</span><span><i class="r"></i>seu prazo</span><span><i class="h"></i>feriado</span></div>`:'';
     return `<div class="cc-g">${h}</div>${leg}`;
   }

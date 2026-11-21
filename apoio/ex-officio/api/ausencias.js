@@ -1,7 +1,8 @@
 /* Solicitações de ausência da equipe (apoio/equipe-solicitacoes.json). O responsável decide no Caput, aba Equipe.
    GET    /api/ausencias            minhas solicitações
    POST   /api/ausencias {de, ate, tipo, motivo}
-   DELETE /api/ausencias?id=…       cancela uma solicitação minha ainda pendente */
+   DELETE /api/ausencias?id=…       cancela uma solicitação minha ainda pendente
+   POST   /api/ausencias {perfil:{aniversario, posse, chegada}}   datas pessoais do servidor (no mesmo arquivo, em perfis[nome]) */
 const L = require('./_lib');
 const ARQ = 'apoio/equipe-solicitacoes.json', TIPOS = ['Férias', 'Folga compensatória', 'Licença', 'Abono', 'Curso ou evento', 'Outro'];
 const dataOk = d => /^\d{4}-\d{2}-\d{2}$/.test(String(d || ''));
@@ -10,11 +11,20 @@ module.exports = async (req, res) => {
   res.setHeader('Cache-Control', 'no-store');
   const u = L.exigir(req, res); if (!u) return;
   try {
-    if (req.method === 'GET') { const { dados } = await ler(); return res.status(200).json({ registros: (dados.registros || []).filter(r => L.norm(r.nome) === L.norm(u)).sort((a, b) => String(b.criadoEm).localeCompare(String(a.criadoEm))), tipos: TIPOS }); }
+    if (req.method === 'GET') { const { dados } = await ler(); const pf = Object.entries(dados.perfis || {}).find(([n]) => L.norm(n) === L.norm(u)); return res.status(200).json({ registros: (dados.registros || []).filter(r => L.norm(r.nome) === L.norm(u)).sort((a, b) => String(b.criadoEm).localeCompare(String(a.criadoEm))), tipos: TIPOS, perfil: pf ? pf[1] : {} }); }
     for (let t = 0; t < 4; t++) {
       const { dados, sha } = await ler(); dados.registros = dados.registros || [];
       let msg;
-      if (req.method === 'POST') {
+      if (req.method === 'POST' && req.body && req.body.perfil) {
+        /* aniversário, posse e chegada ao gabinete: datas AAAA-MM-DD ou vazias */
+        const P = req.body.perfil, campos = ['aniversario', 'posse', 'chegada'];
+        if (campos.some(k => P[k] && !dataOk(P[k]))) return res.status(400).json({ erro: 'Data inválida.' });
+        dados.perfis = dados.perfis || {};
+        const chave = Object.keys(dados.perfis).find(n => L.norm(n) === L.norm(u)) || u, ant = dados.perfis[chave] || {};
+        campos.forEach(k => { if (k in P) { if (P[k]) ant[k] = P[k]; else delete ant[k]; } });
+        ant.atualizadoEm = new Date().toISOString(); dados.perfis[chave] = ant;
+        msg = 'Ex Officio (' + u + '): atualiza datas pessoais';
+      } else if (req.method === 'POST') {
         const b = req.body || {};
         if (!dataOk(b.de) || !dataOk(b.ate) || b.ate < b.de) return res.status(400).json({ erro: 'Informe o período (a data final não pode ser anterior à inicial).' });
         const tipo = TIPOS.includes(b.tipo) ? b.tipo : 'Outro';
