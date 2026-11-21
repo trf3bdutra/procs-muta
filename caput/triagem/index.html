@@ -231,7 +231,7 @@ body.cmt-ficha-on #cmt-motor{left:0;visibility:visible;z-index:61;top:calc(4vh +
 .pt-barra{display:flex;align-items:center;gap:8px;justify-content:flex-end;max-width:1480px;margin:0 auto;padding:10px 24px 0}
 .pt-acoes button{height:32px;padding:0 12px;border:1px solid #c8c3b6;background:#fff;color:#203b39;font:600 12.5px Figtree,sans-serif;cursor:pointer;border-radius:6px}
 .pt-acoes button.pend{background:#173f3d!important;border-color:#173f3d!important;color:#fff!important}.pt-acoes button.erro{background:#8a2f22!important;border-color:#8a2f22!important;color:#fff!important}
-#pt-view{max-width:1480px;margin:0 auto;padding:0 24px;font:13.5px/1.5 Figtree,'Segoe UI',system-ui,sans-serif}
+#pt-view{max-width:1480px;margin:0 auto;padding:14px 24px 0;font:13.5px/1.5 Figtree,'Segoe UI',system-ui,sans-serif}
 #pt-carga{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;min-height:60vh;color:#5c6b67}
 #pt-carga b{font-size:16px;color:#173f3d}
 #cwt-toast{position:fixed;right:18px;bottom:18px;z-index:2147483000;max-width:460px;padding:11px 14px;background:#173f3d;color:#fff;font:600 13px Figtree,sans-serif;box-shadow:0 8px 24px rgba(0,0,0,.18);border-radius:6px}
@@ -666,7 +666,7 @@ html[data-theme="dark"] #tri-prontuario .tp-s h3{color:#e6e2d6;background:linear
 #top{padding:0 10px;gap:6px;flex-wrap:wrap;min-height:50px}
 #top #abas{order:3;flex:1 1 100%;overflow-x:auto;white-space:nowrap;scrollbar-width:none}
 #estado{max-width:44vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:11px}
-#st-grava{padding:4px 8px}
+#st-grava{padding:4px 8px}#st-grava.pend,#st-grava.err{cursor:pointer}
 .row{grid-template-columns:24px minmax(0,1fr)!important;row-gap:4px}
 .row>*:nth-child(n+3){grid-column:2!important;display:flex!important;min-width:0}
 .row .as b,.row .as span{white-space:normal}
@@ -884,7 +884,7 @@ html[data-theme="dark"] #tri-prontuario .tp-s h3{color:#e6e2d6;background:linear
   <div id="estado"><span class="k" id="st-acervo" style="color:var(--m)" title="data da última gravação da fonte do acervo">acervo …</span><button class="btn ib" id="bt-acervo" type="button" hidden title="Atualizar acervo fonte" aria-label="Atualizar acervo fonte"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.7 3.6 3 8 3 .9 0 1.8-.1 2.6-.2"/><path d="M4 11v6c0 1.7 3.6 3 8 3"/><path d="M20 5v5"/><path d="M21 16a4 4 0 1 1-1.2-2.8L21 14.4"/><path d="M21 12v2.4h-2.4"/></svg></button><button class="btn ib" id="bt-regras" type="button" hidden title="Regras gerais: escopo da triagem, acervo fonte, etiquetas, designação, produtividade e equipe" aria-label="Regras gerais"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button><button id="st-grava" type="button" title="Estado da gravação no procs-muta"><i aria-hidden="true"></i><span>carregando</span></button></div>
 </header>
 <main id="main"><div id="carga" data-cmt-loader="adopt-inline" data-cmt-loader-family="central"><b>Carregando o acervo…</b><span id="carga-msg">Lendo a fonte do acervo e o trabalho do gabinete no procs-muta.</span></div></main>
-<section id="aba-pautas" hidden aria-label="Pautas de julgamento"><div class="pt-barra pt-acoes"><span class="k" style="margin-right:auto;color:var(--m)">Pautas de julgamento · sessões, marcos, seleção prévia e PDF da pauta</span><button type="button" id="pt-gravar" title="Gravar no procs-muta o que mudou nas sessões, regras e equipe">Gravar</button></div><main id="pt-view"><div id="pt-carga" role="status" data-cmt-loader="adopt-inline" data-cmt-loader-family="central"><b>Carregando as pautas…</b><span>Lendo o acervo, as sessões e as regras no procs-muta.</span></div></main></section>
+<section id="aba-pautas" hidden aria-label="Pautas de julgamento"><main id="pt-view"><div id="pt-carga" role="status" data-cmt-loader="adopt-inline" data-cmt-loader-family="central"><b>Carregando as pautas…</b><span>Lendo o acervo, as sessões e as regras no procs-muta.</span></div></main></section>
 <div id="cwt-toast" role="status" hidden></div>
 <div id="rodape" class="off" role="region" aria-label="Ações em bloco" hidden></div>
 <div id="toast" role="status" hidden></div>
@@ -1071,10 +1071,13 @@ function desfazer() { const u = DESF.pop(); if (!u) { toast('Nada a desfazer.', 
   u.antes.forEach((st, d) => { const o = IDX.get(d); if (o) poeEstado(o, st); }); agendar(); render(); toast('Desfeito: ' + u.rot.toLowerCase() + '.'); }
 function agendar(ms) { clearTimeout(T_GRAVA); T_GRAVA = setTimeout(gravar, ms == null ? 3500 : ms); pintaGrava(); }
 function pendentes() { return PEND.size + (ESC_V !== ESC_GRAV ? 1 : 0); }
-function pintaGrava() { const b = $('#st-grava'); if (!b) return; const n = pendentes();
-  b.classList.toggle('err', !!ERRO && !GRAVANDO); b.classList.toggle('pend', !ERRO && n > 0 && !GRAVANDO); b.classList.toggle('ing', !!GRAVANDO); b.classList.toggle('ok', PRONTO && !GRAVANDO && !ERRO && !n);
-  const tx = b.querySelector('span') || b; tx.textContent = !PRONTO ? 'carregando' : GRAVANDO ? 'gravando' : ERRO ? 'erro · tentar (' + n + ')' : n ? n + ' a gravar' : ULT ? 'gravado ' + ULT : 'gravado';
-  b.title = ERRO ? 'Erro: ' + ERRO : 'Grava no procs-muta (acervo/operacional.json e escaninhos)'; }
+/* indicador único de gravação no cabeçalho: triagem (ficha e escaninhos) + sessões, regras e equipe (motor das pautas) */
+function pintaGrava() { const b = $('#st-grava'); if (!b) return; const mg = (W.CMTPautas && W.CMTPautas.estadoGrava) || {}, nT = PRONTO ? pendentes() : 0, n = nT + (mg.n || 0);
+  const ing = !!(GRAVANDO || mg.gravando), err = ERRO || mg.erro || '', pr = PRONTO || mg.pronto, ult = [ULT, mg.ultima].filter(Boolean).sort().pop() || '';
+  b.classList.toggle('err', !!err && !ing); b.classList.toggle('pend', !err && n > 0 && !ing); b.classList.toggle('ing', ing); b.classList.toggle('ok', !!pr && !ing && !err && !n);
+  const tx = b.querySelector('span') || b; tx.textContent = !pr ? 'carregando' : ing ? 'gravando' : err ? 'erro · tentar (' + n + ')' : n ? n + ' a gravar' : ult ? 'gravado ' + ult : 'gravado';
+  b.title = err ? 'Erro: ' + err : n ? n + ' alteração(ões) a gravar no procs-muta; grava sozinho em instantes, ou clique para gravar já' : 'Tudo gravado no procs-muta (triagem, sessões, regras e equipe)'; }
+W.pintaGrava = pintaGrava;
 async function gravar() {
   if (GRAVANDO || !PRONTO) return; const P = PM(); if (!P || !P.gravar) { ERRO = 'motor ainda carregando'; pintaGrava(); return; }
   if (!pendentes()) { pintaGrava(); return; }
@@ -2021,7 +2024,7 @@ D.addEventListener('submit',(e)=>{if(e.target.id!=='cg-com-form')return;e.preven
  const d={title:E.title.value,message:E.message.value,link:'',linkTxt:'',nivel:E.nivel.value,painel:E.painel.checked,notificacao:E.notificacao.checked,fixo:E.fixo.checked,ate:E.ate.value,para:[]};
  cgApi('/api/notificacoes?gestao=1',{method:'POST',body:JSON.stringify(d)}).then(()=>{f.reset();if(st)st.textContent='Aviso publicado.';toast('Aviso publicado.');return cgComCarregar();}).catch(er=>{if(st)st.textContent='Não foi possível publicar: '+er.message;toast('Não foi possível publicar o aviso.',true);}).finally(()=>{bt.disabled=false;});
 });
-$('#st-grava').addEventListener('click', () => { if (ERRO || pendentes()) { TENT = 0; gravar(); } });
+$('#st-grava').addEventListener('click', () => { if (PRONTO && (ERRO || pendentes())) { TENT = 0; gravar(); } const mg = W.CMTPautas && W.CMTPautas.estadoGrava; if (mg && (mg.n || mg.erro) && W.CMTPautas.gravarJa) W.CMTPautas.gravarJa(); });
 
 /* ===================== eventos ===================== */
 let T_Q = null;
@@ -2941,17 +2944,16 @@ function portaToken() { return new Promise((fim) => {
     pend();
   }
   function pend() {
-    const s = getSes(), b = $('#pt-gravar'); if (!s?.pendentes || !b) return;
+    const s = getSes(); if (!s?.pendentes) return;
     const n = s.pendentes().length;
-    b.classList.toggle('pend', !!n); b.classList.toggle('erro', !!(n && G.erro));
-    b.textContent = G.gravando || s.gravando?.() ? 'Gravando…' : n ? (G.erro ? 'Não gravado (' + n + ') · tentar' : 'Gravar (' + n + ')') : (G.ultima ? 'Gravado ' + G.ultima : 'Gravado');
-    b.title = n ? 'Há ' + n + ' parte(s) com alteração ainda não gravada no procs-muta' + (G.erro ? ' · último erro: ' + G.erro : ' · grava sozinho em instantes') : 'Tudo gravado no procs-muta';
+    /* o estado vai para o indicador “gravado” do cabeçalho (o único da página) */
+    api.estadoGrava = { pronto, n, gravando: !!(G.gravando || s.gravando?.()), erro: n ? G.erro : '', ultima: G.ultima }; try { W.pintaGrava && W.pintaGrava(); } catch (e) {}
     /* gravação automática: 4 s depois da primeira alteração pendente (ou na hora da nova tentativa, após erro) */
     if (n && !G.gravando && pronto) { if (!G.desde) G.desde = Date.now(); if (Date.now() - G.desde > 4000 && Date.now() >= G.prox) gravarAgora(false); }
     if (!n) G.desde = 0;
   }
   api.gravarAgora = gravarAgora;
-  $('#pt-gravar').addEventListener('click', () => { G.prox = 0; gravarAgora(true); });
+  api.gravarJa = () => { G.prox = 0; return gravarAgora(true); };
   setInterval(pend, 1500);
   /* fechar a aba com alteração não gravada pede confirmação do navegador */
   W.addEventListener('beforeunload', (ev) => { const s = getSes(); if (s?.pendentes && s.pendentes().length) { ev.preventDefault(); ev.returnValue = ''; } });

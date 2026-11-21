@@ -45,3 +45,26 @@ test('prontuário: modo essencial aplicado sem redesenhar, com aviso; decisão n
   const app = require('fs').readFileSync(require('path').join(__dirname, '..', 'index.html'), 'utf8');
   for (const x of ['function prtModoAplica(el)', "if($('#prq .prt'))prtModoAplica();else prontLateral();", 'prt-essn', '<div class="row orig-ln">', "inp('orig.id','ID')+inp('orig.data','','date')+'</div>'", '#prq .row.orig-ln{display:grid!important']) assert.ok(app.includes(x), x);
 });
+
+test('prontuário: sem a prévia da minuta', () => {
+  const app = require('fs').readFileSync(require('path').join(__dirname, '..', 'index.html'), 'utf8');
+  assert.ok(!app.includes('abas[2].html+=previaMinuta('));
+});
+
+test('prontuário: tópico-síntese só é essencial nos casos previdenciários', () => {
+  const app = require('fs').readFileSync(require('path').join(__dirname, '..', 'index.html'), 'utf8');
+  const nq = x => String(x == null ? '' : x).normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().trim();
+  const a = app.indexOf('function ehPrev(it)'), b = app.indexOf('function prtEssencial');
+  const ehPrev = new Function('nq', app.slice(a, b) + ';return ehPrev;')(nq);
+  assert.ok(ehPrev({ assunto: 'Aposentadoria Especial (Art. 57/8)', partes: 'FULANO x INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS' }));
+  assert.ok(!ehPrev({ assunto: 'Índice de 28,86% Lei 8.622/1993 e 8.627/1993', partes: 'FULANO x INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS' }));
+  assert.ok(ehPrev({ assunto: 'Aposentadoria por Tempo de Contribuição (Art. 55/6)', partes: 'X x INSS' }));
+  assert.ok(!ehPrev({ assunto: 'Contribuição sobre a folha de salários', partes: 'EMPRESA x UNIAO FEDERAL - FAZENDA NACIONAL' }));
+  assert.ok(!ehPrev({ assunto: 'Fornecimento de medicamentos', partes: 'FULANO x UNIAO FEDERAL' }));
+  assert.ok(app.includes("if(!mono)prtEssencial(el,it);"));
+});
+
+test('prontuário: sem redesenho quando nada mudou; atualização silenciosa sem mudança não redesenha; posição por quadro', () => {
+  const app = require('fs').readFileSync(require('path').join(__dirname, '..', 'index.html'), 'utf8');
+  for (const x of ["if(el._sig===sig&&el.getAttribute('data-k')===S.prt&&el.querySelector('.prt')){prtPos();return;}", 'el._sig=sig;if(sc0)', '(silencioso&&!mud&&S.doc)', "f=requestAnimationFrame(function(){f=0;prtPos();})"]) assert.ok(app.includes(x), x);
+});
