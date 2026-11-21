@@ -638,7 +638,8 @@
   function pool(kind) { return S.equipe.filter(function (m) { return faz(m, kind); }); }
   /* caches curtos (3 s): a designação consulta ausência e carga de cada pessoa para cada processo; sem cache, uma pauta de 192 itens levava segundos */
   var AUSC = { t: 0, v: {} }, CARC = { t: 0, v: {} };
-  function ausente(m, ss) { var pr = periodo(ss), k = ss.id + '|' + m.nome + '|' + pr.de + '|' + pr.ate + '|' + JSON.stringify(m.aus || []); if (Date.now() - AUSC.t > 3000) AUSC = { t: Date.now(), v: {} };
+  /* indisponível marcado à mão (cadastro da equipe): fora da designação automática até desmarcar */
+  function ausente(m, ss) { if (m.indisp) return true; var pr = periodo(ss), k = ss.id + '|' + m.nome + '|' + pr.de + '|' + pr.ate + '|' + JSON.stringify(m.aus || []); if (Date.now() - AUSC.t > 3000) AUSC = { t: Date.now(), v: {} };
     if (!(k in AUSC.v)) AUSC.v[k] = diasDisp(m, pr.de, pr.ate) === 0; return AUSC.v[k]; }
   /* matriz de minutas (apoio/equipe-matriz.json): histórico completo de redação e correção, inclusive o histórico de produção;
      linha = [redator, tipo, seção, ramo, assunto, corretor, só histórico, pauta, data da minuta, processo, complexidade] */
@@ -2114,7 +2115,12 @@ html[data-theme=dark] .pc-s.inc{background:#2a1c1f;border-color:#6b3a36}html[dat
     ausenciaPoe: function (nome, de, ate) { var m = membro(nome), d = /^\d{4}-\d{2}-\d{2}$/; ate = ate || de; if (!m || !d.test(de || '') || !d.test(ate) || ate < de) return false;
       m.aus = m.aus || []; if (!m.aus.some(function (a) { return a.de === de && a.ate === ate; })) m.aus.push({ de: de, ate: ate }); HIST = null; salvar(); return true; },
     ausenciaTira: function (nome, i) { var m = membro(nome); if (!m || !m.aus || !m.aus[i]) return false; m.aus.splice(i, 1); HIST = null; salvar(); return true; },
-    equipeDefinir: function (nome, campo, valor) { var m = membro(nome); if (!m || ['minuta', 'correcao', 'auto', 'minutaEventual'].indexOf(campo) < 0) return false; m[campo] = !!valor; HIST = null; salvar(); return true; },
+    equipeDefinir: function (nome, campo, valor) { var m = membro(nome); if (!m || ['minuta', 'correcao', 'auto', 'minutaEventual', 'indisp'].indexOf(campo) < 0) return false;
+      if (campo === 'indisp') { if (valor) { m.indisp = true; m.indispEm = hoje(); } else { delete m.indisp; delete m.indispEm; } } else m[campo] = !!valor; HIST = null; salvar(); return true; },
+    /* situação de hoje: indisponível à mão, ausência lançada (aprovada) cobrindo hoje, ou disponível; e a próxima ausência */
+    situacao: function (nome) { var m = membro(nome); if (!m) return null; var hj = hoje(), A = (m.aus || []).filter(function (a) { return a && a.de; }),
+        ag = A.find(function (a) { return a.de <= hj && (a.ate || a.de) >= hj; }), px = A.filter(function (a) { return a.de > hj; }).sort(function (a, b) { return a.de.localeCompare(b.de); })[0];
+      return { indisp: !!m.indisp, indispEm: m.indispEm || '', ausente: ag ? { de: ag.de, ate: ag.ate || ag.de } : null, proxima: px ? { de: px.de, ate: px.ate || px.de } : null, disponivel: !m.indisp && !ag }; },
     publicarMarcos: function (id, on) { var ss = S.sessoes.find(function (x) { return x.id === id; }); if (!ss) return false; ss.marcosPub = on !== false; if (!ss.marcosPub) { ss.publicada = false; ss.pronta = ''; } salvar(); if (root && !root.hidden) render(); return true; },
     /* seleção prévia no acervo: devolve à Triagem (tira a marca), passa à sessão indicada ou marca como pautado (destino 'pautar'); grava o operacional como o botão Gravar triagem */
     /* regras criadas pela esteira, sem sair da página Pautas */

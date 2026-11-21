@@ -176,3 +176,9 @@ test('Motor: gravar a pauta devolve ctl.lote e as chaves de ctl que vieram do ar
   const fs=require('fs'),p=require('path'),m=fs.readFileSync(p.join(__dirname,'../../../caput/motor/assets/js/21-sessoes-equipe.js'),'utf8');
   assert.ok(m.includes("CTL_K.concat(['lote'], it._ck || [])")&&m.includes("_ck: Object.keys(it.ctl || {})"),'lote preservado');
 });
+
+test('Equipe: indisponível à mão ou pela ausência aprovada cobrindo hoje',()=>{
+  const fs=require('fs'),p=require('path'),m=fs.readFileSync(p.join(__dirname,'../../../caput/motor/assets/js/21-sessoes-equipe.js'),'utf8'),rg=fs.readFileSync(p.join(__dirname,'../../../caput/assets/js/regras-gerais.js'),'utf8');
+  assert.ok(m.includes('function ausente(m, ss) { if (m.indisp) return true;')&&m.includes("'minutaEventual', 'indisp'].indexOf(campo)")&&m.includes('situacao: function (nome)'),'motor');
+  assert.ok(rg.includes('data-k="indisp"')&&rg.includes('indisponível · ausente até'),'painel Equipe');
+});

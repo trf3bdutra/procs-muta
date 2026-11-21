@@ -1570,7 +1570,7 @@ function pfPinta() { const el = $('#co-pf'); if (!el) return; const s = SES(); i
   if (!PF.sel || !EQ.some((m) => m.nome === PF.sel)) PF.sel = EQ[0].nome;
   const m = EQ.find((x) => x.nome === PF.sel), D0 = pfDados(m), hj = HOJE, dia = (d, n) => new Date(Date.parse(d + 'T12:00:00Z') + n * 864e5).toISOString().slice(0, 10);
   const fk = PF.sel + '|' + PF.aba, f = PF.f[fk] || (PF.f[fk] = { q: '', tipo: '', per: 'todos', est: PF.aba === 'dil' ? 'abertas' : 'todas' }), lim = PF.lim[fk] || 40;
-  const foraHoje = D0.AU.some((a) => a.de <= hj && a.ate >= hj), proxAus = D0.AU.filter((a) => a.ate >= hj).sort((a, b) => a.de.localeCompare(b.de))[0];
+  const foraHoje = !!m.indisp || D0.AU.some((a) => a.de <= hj && a.ate >= hj), proxAus = D0.AU.filter((a) => a.ate >= hj).sort((a, b) => a.de.localeCompare(b.de))[0];
   const dilAb = D0.DIL.filter((t) => t.stage !== 'done'), ano = hj.slice(0, 4);
   const diasFora = D0.AU.reduce((n, a) => { let c = 0; for (let d = a.de; d <= a.ate && c < 400; d = dia(d, 1)) { if (d.slice(0, 4) === ano && new Date(d + 'T12:00:00Z').getUTCDay() % 6) n++; c++; } return n; }, 0);
   /* pessoas */
@@ -1578,7 +1578,7 @@ function pfPinta() { const el = $('#co-pf'); if (!el) return; const s = SES(); i
     return '<button type="button" data-pf-p="' + esc(x.nome) + '" aria-pressed="' + (x.nome === PF.sel) + '"><i>' + esc(x.nome.slice(0, 2).toUpperCase()) + '</i>' + esc(x.nome) + (fh ? '<em title="fora hoje">fora</em>' : '') + '</button>'; }).join('');
   const papel = [m.minuta ? 'minuta' : '', m.correcao ? 'corrige' : '', m.auto === false ? 'fora da designação automática' : 'designação automática'].filter(Boolean).join(' · ');
   const kp = (n, t, c) => '<div' + (c ? ' class="' + c + '"' : '') + '><b>' + n + '</b><span>' + t + '</span></div>';
-  const head = '<div class="pf-cab"><div class="pf-id"><i>' + esc(m.nome.slice(0, 2).toUpperCase()) + '</i><div><b>' + esc(m.nome) + '</b><small>' + esc([m.cargo || m.papel || '', papel].filter(Boolean).join(' · ')) + '</small></div><span class="pf-sit ' + (foraHoje ? 'fo' : 'ok') + '">' + (foraHoje ? 'fora hoje' : 'presente hoje') + '</span>' + (proxAus && !foraHoje ? '<span class="pf-sit">próxima ausência ' + br(proxAus.de).slice(0, 5) + '</span>' : '') + '</div>' +
+  const head = '<div class="pf-cab"><div class="pf-id"><i>' + esc(m.nome.slice(0, 2).toUpperCase()) + '</i><div><b>' + esc(m.nome) + '</b><small>' + esc([m.cargo || m.papel || '', papel].filter(Boolean).join(' · ')) + '</small></div><span class="pf-sit ' + (foraHoje ? 'fo' : 'ok') + '">' + (m.indisp ? 'indisponível (marcado à mão)' : foraHoje ? 'ausente hoje' : 'disponível hoje') + '</span>' + (proxAus && !foraHoje ? '<span class="pf-sit">próxima ausência ' + br(proxAus.de).slice(0, 5) + '</span>' : '') + '</div>' +
     '<div class="cg-faixa pf-k">' + kp(nf(D0.MIN.length), 'minutas' + (D0.mat ? '' : ' (lendo histórico…)')) + kp(nf(D0.COR.length), 'correções') + kp(nf(dilAb.length), 'diligências em aberto', dilAb.length ? 'g' : '') + kp(nf(diasFora), 'dias úteis fora em ' + ano) + '</div></div>';
   const abas = [['min', 'Minutas', D0.MIN.length], ['cor', 'Correções', D0.COR.length], ['dil', 'Diligências', D0.DIL.length], ['pres', 'Presença e ausências', D0.AU.length + D0.SOL.length]].map((a) => '<button type="button" data-pf-a="' + a[0] + '" aria-pressed="' + (PF.aba === a[0]) + '">' + a[1] + ' <small>' + a[2] + '</small></button>').join('');
   /* filtros e lista da aba */
