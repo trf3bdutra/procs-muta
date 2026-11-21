@@ -179,3 +179,25 @@ test('Monocráticas: fila de urgências aberta na coluna da esquerda, em cartõe
   assert.match(h, /#urg\.urg-col \.pc\.ux\.aberto \.ux-b\{display:grid!important/);
   assert.match(h, /#urg\.urg-col:not\(\.nova\) \.urg-n\{display:none!important\}/);
 });
+
+test('Fila de urgências sem os botões "Comunicar o desembargador" (aviso automático na chegada e na assinatura)', () => {
+  const fs = require('fs'), path = require('path');
+  const h = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
+  assert.ok(!h.includes('<button data-uq-com="') && !h.includes('data-uq-com-todas aria-label'));
+});
+
+test('Monocráticas: "Copiar mensagem" só para o Bruno, no cartão da decisão que aguarda assinatura', () => {
+  const fs = require('fs'), path = require('path');
+  const h = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
+  assert.match(h, /oM===3&&nq\(U\.eu\|\|''\)==='bruno'\?'<button type="button" class="b ms-cp" data-ms-copia=/);
+  assert.match(h, /var tit=!urg\?'MONOCRÁTICAS · PARA ASSINATURA'/);
+});
+
+test('Monocráticas · revisão: prontuário sem abas inertes, Notas alinhadas, diálogo sem campo vazando, título do filtro Urgências', () => {
+  const fs = require('fs'), path = require('path');
+  const h = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
+  assert.match(h, /#v-pauta\.ed #prq \.prt\.pmn \.prt-tabs\{display:none!important\}/);
+  assert.match(h, /#prq \.prt\.pmn #prt-nt\{margin:0 14px 12px!important\}/);
+  assert.match(h, /\.sn-dlg \.dv-r>label\{flex:1 1 0;min-width:0\}/);
+  assert.match(h, /\$\('#f-pri'\)\.title=MO\?'Só as decisões com pedido urgente'/);
+});

@@ -2124,6 +2124,17 @@ html[data-theme=dark] #prq #ac-sn>h4 .ac-hb select{background:#13202b;border-col
 html[data-theme=dark] #prq .prt-p>section{background:#132835;border-color:#2c4a5c!important;border-left-color:#6eba8a!important}
 </style>
 <style id="ux-urg-col">
+/* Monocráticas · revisão: prontuário em tela única sem as abas inertes; Notas alinhadas ao cartão do processo;
+   número do processo numa linha; abas de situação sem quebra com o prontuário aberto; campo do MPF dentro do diálogo */
+#v-pauta.ed #prq .prt.pmn .prt-tabs{display:none!important}
+#prq .prt.pmn #prt-nt{margin:0 14px 12px!important}
+#prq .prt.pmn .prt-id .cnj{white-space:nowrap}
+#prq .prt.pmn .prt-id>div:first-child{flex-wrap:wrap;row-gap:3px}
+#v-pauta.ed.mono #msit button{white-space:nowrap}
+#v-pauta.ed.mono.prt-on #msit button{padding-left:8px;padding-right:8px;font-size:11.5px}
+.sn-dlg .dv-r>label{flex:1 1 0;min-width:0}.sn-dlg select,.sn-dlg input{max-width:100%;min-width:0;box-sizing:border-box}
+/* botão Copiar mensagem no cartão da decisão para assinatura */
+#v-pauta .pc .ms-cp{display:inline-flex;align-items:center;gap:5px;height:26px;padding:0 9px;font:600 11.5px var(--font);border:1px solid #cfae4a;background:#fbf6e6;color:#7a5c00;border-radius:5px;white-space:nowrap;cursor:pointer}#v-pauta .pc .ms-cp:hover{background:#f6ecd0}html[data-theme=dark] #v-pauta .pc .ms-cp{background:#33301c;color:#f0d465;border-color:#8a7330}
 /* Monocráticas · fila de urgências aberta dentro da coluna da esquerda: nova urgência em duas linhas e cartões compactos */
 #v-pauta.urq-col #trm-urq{flex-direction:column!important;align-items:stretch!important}
 #v-pauta.urq-col #trm-urq>#urg{flex:none!important}
@@ -3075,7 +3086,7 @@ function render(){
   var hdz=document.querySelector('#v-pauta .pt-hd');if(hdz)hdz.hidden=false;
   edLayout(S.fonte!=='urg'&&CTRLV.indexOf(S.fonte)<0);var ED=$('#v-pauta')._ed;
   var L=lista(),V=filtrar(),ss=S.cal.filter(function(s){return s.date===S.ses;})[0]||{},m=ss.marcos||{},h=hoje(),MO=S.fonte==='mono',UR=S.fonte==='urg';
-  $('#pt-ey').textContent=UR?'Gabinete / Liminares e tutelas':MO?'Produção / Decisões monocráticas':'Produção / Pauta de julgamento';$('#pt-t').textContent=UR?'Urgências':MO?'Monocráticas':'Pauta de Julgamento';if(ED&&!MO){$('#pt-ey').textContent='Produzir';$('#pt-t').innerHTML='Processos <em>da pauta.</em>';}$('#f-pri').textContent=MO?'Urgências':'Prioridades';painelUrg();$('#pt-nota').textContent=MO?'A monocrática é registrada quando a minuta é feita ou pode ser feita. O pedido urgente se registra no cartão ou na fila de urgências ao lado.':'A composição da pauta e os marcos são definidos na página Pautas.';$('#mono-n').hidden=!(MO&&S.monoForm);if(MO&&$('#mono-n').elements.tipo.options.length<2)$('#mono-n').elements.tipo.innerHTML='<option value="">tipo de ato…</option>'+CPM.tipoAto.map(function(x){return '<option>'+x+'</option>';}).join('');
+  $('#pt-ey').textContent=UR?'Gabinete / Liminares e tutelas':MO?'Produção / Decisões monocráticas':'Produção / Pauta de julgamento';$('#pt-t').textContent=UR?'Urgências':MO?'Monocráticas':'Pauta de Julgamento';if(ED&&!MO){$('#pt-ey').textContent='Produzir';$('#pt-t').innerHTML='Processos <em>da pauta.</em>';}$('#f-pri').textContent=MO?'Urgências':'Prioridades';$('#f-pri').title=MO?'Só as decisões com pedido urgente':'Sustentação oral ou preferência';painelUrg();$('#pt-nota').textContent=MO?'A monocrática é registrada quando a minuta é feita ou pode ser feita. O pedido urgente se registra no cartão ou na fila de urgências ao lado.':'A composição da pauta e os marcos são definidos na página Pautas.';$('#mono-n').hidden=!(MO&&S.monoForm);if(MO&&$('#mono-n').elements.tipo.options.length<2)$('#mono-n').elements.tipo.innerHTML='<option value="">tipo de ato…</option>'+CPM.tipoAto.map(function(x){return '<option>'+x+'</option>';}).join('');
   /* cabeçalho: sessão e números da sessão inteira */
   var fut=S.cal.filter(function(s){return s.date>=h;}).sort(function(a,b){return a.date.localeCompare(b.date);});
   $('#ses-tag').textContent=!S.ses?'':fut[0]&&fut[0].date===S.ses?'sessão mais próxima':S.ses<h?'sessão realizada':'sessão futura';
@@ -3519,6 +3530,7 @@ function cartao(it){
       '<span class="mr-as" title="'+esc('Assunto: '+(it.assunto||'não informado')+(it.partes?' · '+it.partes:''))+'">· '+esc(it.assunto||'assunto não informado')+'</span>'+(metaDe(it)?'<em class="mt">★ Meta '+esc(metaDe(it))+'</em>':'')+'</span>'+
       (urgDe(it)?'<span class="mr-l2"><em class="e-urg'+(urgPend(it)?' pend':'')+'" title="Pedido urgente: definido no prontuário">'+esc(urgDe(it))+(urgPend(it)?' · não apreciada':' · '+esc(c.urgSit||'apreciada'))+'</em></span>':'')+'</div></span>'+
       '<span class="gb">'+
+      (oM===3&&nq(U.eu||'')==='bruno'?'<button type="button" class="b ms-cp" data-ms-copia="'+k+'" title="Copiar a mensagem ao desembargador sobre esta decisão (para assinatura)">'+svm('<rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/>')+'Copiar mensagem</button>':'')+
       tagResp(it)+
       sinais(it,A,c)+'<div class="pr"><div class="stp" role="group" aria-label="Etapas de produção">'+stM+'</div></div></span></div></article>';}
   if(S.fonte!=='mono'&&$('#v-pauta')._ed){
@@ -3801,19 +3813,24 @@ function painelUrgEd(el){
       '<label>Minutante'+selR(it,'servidor')+'</label><label>Apreciação'+op('urgSit',CPM.urgSit,c.urgSit||'Pendente · não apreciada')+'</label><label class="d">Apreciada em<input type="date" data-c="urgData" value="'+esc(c.urgData||'')+'"></label>'+
       '<label>Observação<input data-c="urgObs" value="'+esc(c.urgObs||'')+'" placeholder="—"></label></span>')+
       '<span class="ux-c">'+(it.mono?'<button class="ok" data-ver-mono="'+k+'" aria-label="Ver a monocrática vinculada na lista, para editar no prontuário" title="Monocrática vinculada: ver na lista e editar no prontuário">'+sv('<path d="M7 3h7l4 4v14H7z"/><path d="M9.5 14l2 2 3.5-4"/>')+'</button>':'<button data-criar-mono="'+k+'" aria-label="Criar monocrática para esta urgência" title="Criar monocrática para esta urgência">'+sv('<path d="M7 3h7l4 4v14H7z"/><path d="M12 11v6M9 14h6"/>')+'</button>')+
-      '<button data-uq-com="'+k+'" aria-label="Comunicar o desembargador" title="Comunicar o desembargador: copia a mensagem pronta">'+sv('<path d="M4 5h16v11H9l-5 4z"/>')+'</button><button data-tirar-urg="'+k+'" aria-label="Excluir a urgência" title="Excluir a urgência">'+sv('<path d="M6 6l12 12M18 6L6 18"/>')+'</button></span></article>';};
+      '<button data-tirar-urg="'+k+'" aria-label="Excluir a urgência" title="Excluir a urgência">'+sv('<path d="M6 6l12 12M18 6L6 18"/>')+'</button></span></article>';};
   var pill=function(v,t,n){return '<button data-uf="'+v+'" aria-pressed="'+(uf===v)+'">'+t+' <small>'+n+'</small></button>';};
   var leg=[['Pendente','#c4533f','#ecc4ba'],['Aguardando providências','#d58a3c','#f1d3b0'],['Aguardando assinatura','#cfae4a','#efe2b4'],['Apreciada','#977fa6','#dccfe3']].map(function(x){return '<span><i style="width:12px;height:12px;background:'+x[1]+'"></i>'+x[0]+'</span>';}).join('');
   el.className='urg uzb';el.hidden=false;
   el.innerHTML='<form class="urg-n" id="urg-n" aria-label="Registrar urgência"><b>Nova urgência</b><input name="cnj" placeholder="nº CNJ do processo" required aria-label="Número CNJ"><select name="tipo" aria-label="Medida">'+CPM.urgTipo.map(function(x){return '<option>'+x+'</option>';}).join('')+'</select><select name="niv" aria-label="Nível"><option value="">nível…</option>'+CPM.urgNivel.map(function(x){return '<option>'+x+'</option>';}).join('')+'</select><input type="date" name="ped" title="Data do pedido" aria-label="Data do pedido"><input name="obs" placeholder="observação (opcional)" aria-label="Observação"><button class="b pri">+ Registrar</button></form>'+
     '<div class="uz-ls">'+(P0.concat(A).map(lin).join('')||'<p class="uz-v">Nenhuma urgência'+(q||uf!=='todos'?' com esse filtro':' registrada')+'.</p>')+'</div>'+
-    '<div class="uz-ft"><div><span>Não apreciadas primeiro, pelo pedido mais antigo · mostrando '+Lf.length+' de '+L.length+'</span>'+(P0.length?'<button type="button" class="b" data-uq-com-todas aria-label="Comunicar o desembargador sobre as urgências pendentes">Comunicar o desembargador · '+P0.length+'</button>':'')+'<span class="mleg"><b>Cor da tag</b>'+leg+'</span></div>'+
+    '<div class="uz-ft"><div><span>Não apreciadas primeiro, pelo pedido mais antigo · mostrando '+Lf.length+' de '+L.length+'</span>'+'<span class="mleg"><b>Cor da tag</b>'+leg+'</span></div>'+
     (SG.length?'<details class="urg-sg"'+(S.sgAb?' open':'')+'><summary>Sugeridos pelas etiquetas do PJe <span>'+SG.length+'</span></summary><div class="urg-t"><table><thead><tr><th>Processo</th><th>Etiqueta</th><th>Tarefa</th><th></th></tr></thead><tbody>'+
       SG.map(function(b){var d=diasDesde(b.desde);return '<tr><td><span class="cnj">'+esc(b.cnj)+'</span><small class="pt">'+esc(b.partes||'')+'</small></td><td>'+esc(b.urgAuto)+'</td><td><small>'+esc(b.tarefa)+'</small>'+(d!=null?'<b class="dd">'+d+' dias na tarefa</b>':'')+'</td><td><button class="b" data-sug="'+esc(b.cnj)+'" data-et="'+esc(b.urgAuto)+'">+ Registrar urgência</button></td></tr>';}).join('')+'</tbody></table></div></details>':'')+'</div>';}
 $('#urq').addEventListener('click',function(e){var b=e.target.closest('[data-uf]');if(!b)return;S.uf=b.getAttribute('data-uf');painelUrg();});
 $('#urq').addEventListener('input',function(e){if(e.target.id!=='urg-q')return;var v=e.target.value;clearTimeout(S.tuq);S.tuq=setTimeout(function(){S.uq=v;painelUrg();var q=$('#urg-q');if(q){q.focus();q.setSelectionRange(v.length,v.length);}},250);});
 document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-uq-ab]');if(!b)return;S.urgTab=true;S.uf='todos';painelUrg();$('#trm-urq').scrollIntoView({behavior:'smooth',block:'start'});});
-/* comunicar o desembargador: sem canal próprio no app, a mensagem pronta vai para a área de transferência */
+/* cartão da decisão que aguarda assinatura (só o Bruno vê o botão): copia a mensagem pronta ao desembargador */
+document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-ms-copia]');if(!b)return;e.stopPropagation();
+  var it=lista().filter(function(i){return dg(i.cnj)===b.getAttribute('data-ms-copia');})[0];if(!it)return;var tx=comMsg([it]).texto;
+  (navigator.clipboard?navigator.clipboard.writeText(tx):Promise.reject()).then(function(){toast('Mensagem copiada.');},function(){toast('Não foi possível copiar.');});},true);
+/* (os botões “Comunicar o desembargador” saíram da fila: ele é avisado automaticamente quando a urgência chega e quando vai para assinatura)
+   comunicar o desembargador: sem canal próprio no app, a mensagem pronta vai para a área de transferência */
 /* comunicar o desembargador: a mensagem sai pronta dos dados do processo e da urgência, pode ser ajustada
    antes de sair e vai para as notificações e o painel do gabinete (/equipe/#cmt); copiar segue disponível */
 var COM_LINK='http://gabinete-cmt.com/cmt', COM_TRACO='━━━━━━━━━━━━━━━';
@@ -3828,6 +3845,7 @@ function comItem(it,n){
   L.push('*'+n+' · '+clSig(it.classe)+' '+fmtCnjDig(it.cnj)+'*');
   if(it.partes)L.push(it.partes);
   L.push('');
+  if(c.urgTipo){
   L.push('*PEDIDO*');
   L.push([c.urgTipo||'Tutela de urgência',c.urgNivel].filter(Boolean).join(' · ')+'.');
   if(it.assunto)L.push(it.assunto+'.');
@@ -3836,7 +3854,8 @@ function comItem(it,n){
   L.push('Pedido em '+(urgIni(it)?br(urgIni(it)):'data não registrada')+(d!=null?' · '+d+' '+comPlural(d,'dia','dias')+' de espera':'')+'.');
   if(c.urgObs)L.push(c.urgObs);
   if(it.obs&&it.obs!==c.urgObs)L.push(it.obs);
-  L.push('');
+  L.push('');}
+  else{if(it.assunto)L.push(it.assunto+'.');if(it.obs)L.push(it.obs);L.push('');}
   L.push('*MINUTA*');
   var mi=[];
   if(c.resJulg)mi.push(c.resJulg);
@@ -3848,10 +3867,11 @@ function comItem(it,n){
 }
 function comMsg(L){
   var paraAssin=L.length&&L.every(function(i){return i.dataLiberacao&&!i.assinado&&!i.dataAssinatura;});
-  var tit=paraAssin?'URGÊNCIAS · PARA ASSINATURA':'URGÊNCIAS · PENDENTES DE APRECIAÇÃO';
+  var urg=L.some(function(i){return !!(i.ctl||{}).urgTipo;});
+  var tit=!urg?'MONOCRÁTICAS · PARA ASSINATURA':paraAssin?'URGÊNCIAS · PARA ASSINATURA':'URGÊNCIAS · PENDENTES DE APRECIAÇÃO';
   var mn=comMinutantes(L),n=L.length;
   var ab=['*'+tit+'*','','Dr. Muta, '+comSaud()+'.','',
-    'Informo que '+comNum(n)+' '+comPlural(n,'feito urgente foi encaminhado','feitos urgentes foram encaminhados')+(paraAssin?' para assinatura.':' e seguem pendentes de apreciação.')];
+    'Informo que '+comNum(n)+' '+(urg?comPlural(n,'feito urgente foi encaminhado','feitos urgentes foram encaminhados'):comPlural(n,'feito foi encaminhado','feitos foram encaminhados'))+(paraAssin||!urg?' para assinatura.':' e seguem pendentes de apreciação.')];
   if(mn.length)ab.push('_'+comPlural(n,'Minutado','Minutados')+' por '+mn.join(', ')+'._');
   var cp=L.map(function(it,k){return comItem(it,k+1);});
   return {titulo:tit.replace(/\*/g,''),texto:ab.join('\n')+'\n\n'+COM_TRACO+'\n\n'+cp.join('\n\n'+COM_TRACO+'\n\n')+'\n\n'+COM_TRACO+'\n\n'+COM_LINK+'\n\n_Fico à disposição._\n'};
