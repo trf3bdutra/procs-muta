@@ -2962,6 +2962,11 @@ function conteudoSubAba() {
 }
 
 async function carregarTriados() {
+  /* chamada durante a montagem do HTML da sub-aba: espera o quadro existir antes de escrever nele */
+  if (carregarTriados.rodando) return; carregarTriados.rodando = true;
+  await new Promise((r) => setTimeout(r, 0));
+  const P = PM();
+  if (!P || !P.ler) { carregarTriados.rodando = false; setTimeout(carregarTriados, 1500); return; }
   try {
     const ESC_IDX = 'acervo/lotes/colecoes.json';
     const idx = JSON.parse(await P.ler(ESC_IDX));
@@ -2987,9 +2992,15 @@ async function carregarTriados() {
     if (corpo) corpo.innerHTML = conteudoSubAba();
     document.querySelectorAll('[data-trisub]').forEach(x => { const small = x.querySelector('small'); if(x.dataset.trisub==='triados'&&small) small.textContent = items.size; });
   } catch(e) { const corpo = $('#tri-em-corpo'); if(corpo) corpo.innerHTML = '<div class="tri-ld">Erro ao carregar triagem: '+esc(String(e))+'</div>'; }
+  carregarTriados.rodando = false;
 }
 
 async function carregarSelecao() {
+  /* chamada durante a montagem do HTML da sub-aba: espera o quadro existir antes de escrever nele */
+  if (carregarSelecao.rodando) return; carregarSelecao.rodando = true;
+  await new Promise((r) => setTimeout(r, 0));
+  const P = PM();
+  if (!P || !P.ler) { carregarSelecao.rodando = false; setTimeout(carregarSelecao, 1500); return; }
   try {
     const ESC_IDX = 'acervo/lotes/colecoes.json';
     const idx = JSON.parse(await P.ler(ESC_IDX));
@@ -3010,6 +3021,7 @@ async function carregarSelecao() {
     if (corpo) corpo.innerHTML = conteudoSubAba();
     document.querySelectorAll('[data-trisub]').forEach(x => { const small = x.querySelector('small'); if(x.dataset.trisub==='selecao'&&small) small.textContent = items.size; });
   } catch(e) { const corpo = $('#tri-em-corpo'); if(corpo) corpo.innerHTML = '<div class="tri-ld">Erro ao carregar seleção prévia: '+esc(String(e))+'</div>'; }
+  carregarSelecao.rodando = false;
 }
 
 function aTriarBands() {
