@@ -220,3 +220,10 @@ test('Mural: Hoje/Semana como lateral do calendário e aviso em destaque no alto
   assert.match(h, /<div id="av-dest" class="av-dest" hidden aria-live="polite"><\/div><div id="avisos"><\/div>/);
   assert.match(h, /\(dd&&dx\?av\.slice\(1\):av\)\.concat\(ou\)/);
 });
+
+test('Mural: calendário sem os botões Dia/Semana/Mês, sempre no mês', () => {
+  const fs = require('fs'), path = require('path');
+  const h = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
+  assert.match(h, /#mu-host \.cg-cal \.cc-ps\{display:none!important\}/);
+  assert.match(h, /if\(!PAINEL_GAB\)try\{localStorage\.setItem\('cc_passo',JSON\.stringify\('mes'\)\);\}/);
+});

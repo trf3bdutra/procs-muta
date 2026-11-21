@@ -1598,6 +1598,7 @@ html[data-theme=dark] .av-dest{background:#33301c;border-color:#5a4c24;border-le
 .mu-cal-lado .nt .x{grid-column:3;grid-row:2}#mu-cal-wrap>.cg-cal{margin:0;min-width:0}
 #mu-host .cc-dir{display:none!important}
 /* Mural: o painel Hoje/Semana é a lateral do próprio calendário (sem caixa própria), separado por um fio */
+#mu-host .cg-cal .cc-ps{display:none!important}/* sem Dia/Semana/Mês no Mural: só o mês */
 #mu-host .cg-cal .cc-body{padding:0!important}
 #mu-host .cg-cal .cc-top{gap:0!important;grid-template-columns:250px minmax(0,1fr)!important;align-items:stretch!important}
 #mu-host .cg-cal .cc-esq{border:0!important;border-right:1px solid var(--l)!important;background:var(--p)!important;padding:14px 16px 16px!important;margin:0!important;border-radius:0!important;box-shadow:none!important}
@@ -4725,6 +4726,8 @@ function calendario(){
   var fer=FER_NAC.slice();(E.semExpediente||[]).forEach(function(d){fer.push([d,(E.nomes||{})[d]||'Sem expediente']);});
   var ME=PAINEL_GAB?{meus:[],alertasExtra:[]}:calMeus(D);
   var sig=JSON.stringify([D.sessoes,D.progresso,fer,E.recesso,ME]);if(sig===P.calSig&&el.firstChild)return;P.calSig=sig;
+  /* no Mural o calendário fica sempre no mês (os botões Dia/Semana/Mês não aparecem) */
+  if(!PAINEL_GAB)try{localStorage.setItem('cc_passo',JSON.stringify('mes'));}catch(x){}
   /* elemento novo a cada montagem: o calendário prende os ouvintes no elemento (como na Chefia) */
   var novo=document.createElement('div');novo.id='cc-cal';novo.className=el.className;el.replaceWith(novo);el=novo;
   window.CMTCalendario.montar(el,{sessoes:(D.sessoes||[]).map(function(s){return {date:s.date,hora:s.hora||'',marcos:s.marcos||{},processos:s.processos||0,cor:s.cor||''};})},
