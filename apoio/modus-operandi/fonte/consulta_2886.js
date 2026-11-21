@@ -1,5 +1,5 @@
 /* ================= CONSULTA · MATRIZ MODULAR 28,86% (ACP 0005019-15.1997.4.03.6000) =================
-   Base: modelos/matrizes-2886.json (BASE.m2886). Recebe o caso da Consulta (pauta, cartão ou prontuário colado),
+   Base: modelos/matrizes-2886.json (BASE.m2886). Recebe o caso da Minuta-Matriz (pauta, cartão ou prontuário colado),
    escolhe o grupo e os módulos, preenche as variáveis e monta relatório, voto, ementa e acórdão. */
 (function(){
   var S={proc:null,g:'',on:{},ver:{},um:{},val:{},porque:{},manual:{},em:'',em1:'rel'};
@@ -281,7 +281,7 @@
   }
   /* ---------- tela ---------- */
   function canhoto(P,J){
-    var D=M(),G=grp(S.g),base=window.CQ_prontuarioBase?window.CQ_prontuarioBase(P,J):'',h='<div class="dcan-h"><span>PRONTUÁRIO DA CONSULTA</span><small>base importada + personalização da matriz</small></div><div class="dcan">'+base;
+    var D=M(),G=grp(S.g),base=window.CQ_prontuarioBase?window.CQ_prontuarioBase(P,J):'',h='<div class="dcan-h"><span>PRONTUÁRIO DO CASO</span><small>base importada + personalização da matriz</small></div><div class="dcan">'+base;
     h+='<div class="cf m28-person"><div class="cfl"><span>Personalização · matriz modular 28,86%</span><span class="pill">motor especializado</span></div><p class="meta">A matriz usa o prontuário acima como fonte e pede aqui somente o enquadramento, módulos, versões e variáveis necessários à minuta.</p></div>';
     h+='<div class="cf"><div class="cfl"><span>Enquadramento</span><span class="pill">'+e(S.g)+'</span></div><div class="m28-gs">'+D.grupos.map(function(x){return '<button data-m28g="'+e(x.id)+'" aria-pressed="'+(x.id===S.g)+'" title="'+e(x.nome)+'">'+e(x.id)+'</button>';}).join('')+'</div><p class="meta"><b>'+e(G.nome)+'</b></p><p class="meta m28-prov '+(S.gManual?'manual':S.gSugerido?'sugerido':/código/.test(S.gPorque||'')?'confirmado':'derivado')+'">'+(S.gManual?'Manual':S.gSugerido?'Sugerido':/código/.test(S.gPorque||'')?'Confirmado':'Derivado')+' · '+e(S.gPorque)+'</p>'+(S.gSugerido&&!S.gManual?'<p class="m28-alert">Enquadramento não confirmado. A minuta pode ser examinada, mas deve haver escolha manual do grupo ou complementação do prontuário antes da conferência final.</p>':'')+'</div>';
     h+='<div class="cf"><div class="cfl"><span>Módulos do voto</span></div><div class="m28-ml">';
@@ -326,7 +326,7 @@
     var C=conferir(P,J),mau=C.filter(function(z){return z.s!=='ok';}).length,D=M();
     var h='<div class="dori"><p class="kick2"><span>Conferência da matriz</span><span>'+(C.length-mau)+'/'+C.length+'</span></p><div class="cqc">'+
       C.map(function(z){return '<div class="cqi '+z.s+'"><div class="cqih"><b>'+e(z.k)+'</b><i>'+(z.s==='ok'?'em ordem':z.s==='pc'?'conferir':'falta')+'</i></div><p>'+e(z.t)+'</p></div>';}).join('')+'</div>';
-    h+='<div class="cqacs"><button class="dbt" data-m28sair="1">Voltar à Consulta comum</button></div></div>';
+    h+='<div class="cqacs"><button class="dbt" data-m28sair="1">Voltar à Minuta-Matriz</button></div></div>';
     h+='<div class="dori"><p class="kick2"><span>Combinações julgadas · grupo '+e(S.g)+'</span><span>'+((D.combinacoes[S.g]||[]).length)+'</span></p><ul class="m28-cb">'+
       (D.combinacoes[S.g]||[]).map(function(c){return '<li><b>'+c.acordaos+'×</b> '+e(c.modulos)+'</li>';}).join('')+'</ul><p class="meta">'+e(D.fonte.descricao)+'</p></div>';
     var K=(typeof BASE!=="undefined"&&BASE&&BASE.m2886kit)||null;
@@ -361,7 +361,7 @@
   document.addEventListener('focusout',function(ev){var f=m28Alvo(ev);if(!f)return;var k=f.getAttribute('data-m28v');if(!M28ED[k])return;M28ED[k]=0;
     setTimeout(function(){var a=document.activeElement;if(a&&a.closest&&a.closest('#cq-main [data-m28v][contenteditable]'))return;if(CTX.mn)redesenharSemCanhoto();},0);});
   document.addEventListener('keydown',function(ev){var f=m28Alvo(ev);if(f&&ev.key==='Enter'){ev.preventDefault();f.blur();}});
-  /* ---------- API usada pela Consulta ---------- */
+  /* ---------- API usada pela Minuta-Matriz (consulta.js) ---------- */
   var CTX={};
   function desenhar(){var P=CTX.P,J=CTX.J;CTX.can.innerHTML=canhoto(P,J);CTX.mn.innerHTML=folha(P,J);CTX.or.innerHTML=painel(P,J);ligar();}
   function redesenharSemCanhoto(){CTX.mn.innerHTML=folha(CTX.P,CTX.J);CTX.or.innerHTML=painel(CTX.P,CTX.J);ligarFolha();}

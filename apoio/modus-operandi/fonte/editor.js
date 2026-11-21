@@ -330,13 +330,13 @@ function edGh(caminho,opt){opt=opt||{};return fetch('https://api.github.com/repo
 function edEnviarSrv(msg){var P=edPendentes();if(!P.length)return;var C={};
   P.forEach(function(p){var L=edListaDe(p.col),cur=edAcha(p.col,p.id);(C[p.col]=C[p.col]||[]).push(p.sit==='excluído'?{op:'del',id:p.id,orig:EDS.orig[p.col][p.id]}:{op:'set',id:p.id,rec:edLimpa(cur),orig:EDS.orig[p.col][p.id],idx:L.indexOf(cur)});});
   var bt=$('[data-edenviar]');if(bt)bt.disabled=true;edSt('Gravando…');
-  var Pn=P.map(function(l){return EDCOL[l.col]+' · '+l.sit+' · '+l.t;});
+  var Nt=edNtf(P);
   fetch('/api/editor',{method:'POST',credentials:'same-origin',cache:'no-store',headers:Object.assign({'Content-Type':'application/json'},EDCMT?{'x-cmt':'1','x-cmt-chave':EDCMTK}:{}),body:JSON.stringify({msg:msg,colecoes:C})})
   .then(function(r){return r.json().catch(function(){return {};}).then(function(j){if(!r.ok)throw new Error(j.erro||('HTTP '+r.status));return j;});})
   .then(function(j){EDS.orig={mod:{},par:{},pec:{},dir:{},nor:{}};edGuarda();
     EDS.dlg='<div class="ed-dlg"><div class="ed-dlgc"><h3>'+(EDCMT?'Salvo':'Gravado')+'</h3><p>'+j.alteracoes+' alteraç'+(j.alteracoes>1?'ões':'ão')+' no commit <a href="'+esc(j.url)+'" target="_blank" rel="noopener">'+esc(String(j.commit).slice(0,7))+'</a>. O GitHub valida a base e reconstrói o Compendium em alguns minutos; até lá, esta página mostra a versão editada.</p>'+
-      (EDCMT?'<label class="edf"><span>Aviso à equipe</span><input id="ed-ntf-t" maxlength="160" value="Compendium atualizado"></label>'+
-        '<label class="edf"><span>Mensagem</span><textarea id="ed-ntf-m" rows="5" maxlength="2000">'+esc(Pn.slice(0,20).join('\n')+(Pn.length>20?'\n+ '+(Pn.length-20)+' alterações':''))+'</textarea></label>'+
+      (EDCMT?'<label class="edf"><span>Aviso à equipe · título</span><input id="ed-ntf-t" maxlength="160" value="'+esc(Nt.t)+'"></label>'+
+        '<label class="edf"><span>Mensagem (pode ajustar antes de enviar)</span><textarea id="ed-ntf-m" rows="8" maxlength="2000">'+esc(Nt.m)+'</textarea></label>'+
         '<p class="meta">Vai para o mural e para as notificações de toda a equipe, em nome do CMT.</p>':'')+
       '<div class="e-dacts">'+(EDCMT?'<button class="btn" data-edntf>Notificar equipe</button>':'')+'<button class="btn'+(EDCMT?' ghost':'')+'" data-eddlgx>Fechar</button></div><p class="meta" id="ed-st"></p></div></div>';edRender();})
   .catch(function(e){edSt('Não foi possível gravar: '+e.message);if(bt)bt.disabled=false;});}
@@ -373,7 +373,7 @@ document.body.classList.add('vdm-ed');
   document.addEventListener('cmt-acesso',abre);window.addEventListener('hashchange',function(){var a=alvo();if(a.length&&(edSrv()||!window.CMT_SITE))edAbrir(a[0],a[1]);});})();
 /* ---------- campos preenchíveis e variáveis do caso: barra sobre o texto em edição e atalho @@ ---------- */
 var EDV={ta:null,ini:-1,q:'',sel:0,itens:[]};
-function edTxtAlvo(t){return t&&t.tagName==='TEXTAREA'&&t.closest&&t.closest('#ed-form')&&!t.classList.contains('mono');}
+function edTxtAlvo(t){return t&&t.tagName==='TEXTAREA'&&t.closest&&t.closest('#ed-form')&&!t.closest('.mn-f')&&!t.classList.contains('mono');}
 function edUsados(){var c={};edLista().forEach(function(r){var s=EDS.col==='mod'?r.esqueletoModelo:EDS.col==='par'?r.texto:EDS.col==='pec'?JSON.stringify(r.elementos||[]):'';String(s||'').replace(/\{\{([^}]{1,60})\}\}/g,function(m,a){a=a.trim();c[a]=(c[a]||0)+1;});});
   return Object.keys(c).sort(function(a,b){return c[b]-c[a];}).slice(0,40);}
 function edVarsLista(q){var V=(window.VDM_varsCaso?window.VDM_varsCaso():[]).map(function(v){return {nome:v.nome,d:v.d,v:v.v,g:'Variáveis do caso'};}),nomes={};V.forEach(function(v){nomes[v.nome]=1;});
@@ -425,10 +425,11 @@ if(EDCMT){var edRender0=edRender;edRender=function(){var r=edRender0.apply(this,
 /* ---------- Diretrizes sem registro escolhido: o centro mostra o manual de redação inteiro (o mesmo da aba Diretrizes do Compendium) ---------- */
 (function(){var edRenderM=edRender;edRender=function(){var xm=$('#x-man');
   if(xm&&xm._casa&&xm.parentNode!==xm._casa.parentNode)xm._casa.parentNode.insertBefore(xm,xm._casa.nextSibling);
+  window.VDM_MN_DADOS=false;
   var r=edRenderM.apply(this,arguments),alvo=$('#ed-man');
-  if(alvo&&xm){if(!xm._casa){xm._casa=document.createComment('x-man');xm.parentNode.insertBefore(xm._casa,xm);}alvo.appendChild(xm);try{xManual();}catch(e){alvo.innerHTML='<p class="empty">Manual indisponível.</p>';}}
+  if(alvo&&xm){if(!xm._casa){xm._casa=document.createComment('x-man');xm.parentNode.insertBefore(xm._casa,xm);}alvo.appendChild(xm);window.VDM_MN_DADOS=true;try{xManual();}catch(e){alvo.innerHTML='<p class="empty">Manual indisponível.</p>';}}
   return r;};
-  var edFecharM=edFechar;edFechar=function(){var xm=$('#x-man');if(xm&&xm._casa&&xm.parentNode!==xm._casa.parentNode)xm._casa.parentNode.insertBefore(xm,xm._casa.nextSibling);return edFecharM.apply(this,arguments);};})();
+  var edFecharM=edFechar;edFechar=function(){window.VDM_MN_DADOS=false;var xm=$('#x-man');if(xm&&xm._casa&&xm.parentNode!==xm._casa.parentNode)xm._casa.parentNode.insertBefore(xm,xm._casa.nextSibling);return edFecharM.apply(this,arguments);};})();
 /* ---------- modelo: tópicos do voto em quatro blocos (Abertura · Fundamento · Aplicação · Encerramento) ---------- */
 var EDBLOCO={admiss:'Abertura',tutela:'Abertura',prelim:'Abertura',contro:'Abertura',rel:'Abertura',ctx:'Abertura',
   jurid:'Fundamento',citnorma:'Fundamento',citjur:'Fundamento',desenv:'Fundamento',fund:'Fundamento',
@@ -457,3 +458,72 @@ function edEmLer(r){var el=$('#ed-em');if(!el)return;var hm=jp(el.getAttribute('
   if(a&&a.cab===o.cab&&a.rod===o.rod&&a.s.every(function(x,k){return x===o.s[k];}))return;
   if(!o.cab&&!o.rod&&o.s.every(function(x){return !x;})){if(r.ementaIntegral)r.ementaIntegral='';return;}
   r.ementaIntegral=edEmJunta(o);}
+/* ---------- Diretrizes editadas no próprio manual: lápis abre o formulário no lugar da regra; "+ Nova regra" cria já aberta ---------- */
+var MNF={preferencia:[['titulo','Título','t'],['preferir','Preferir','a'],['evitar','Evitar','a']],
+  alerta:[['mensagem','Aviso que aparece na minuta','a'],['padrao','Palavra ou expressão a procurar','w'],['escopo','Onde (ementa, voto, relatório…)','t']],
+  correcao:[['motivo','Motivo (como aparece no aviso)','a'],['padrao','Palavra ou expressão a procurar','w'],['substituir','Substituir por','t']]};
+function mnForm(r){var F=MNF[r.tipo]||MNF.preferencia;
+  return '<div class="mn-f" data-mnf="'+esc(r.id)+'">'+F.map(function(f){var v=r[f[0]]==null?'':r[f[0]];
+    if(f[2]==='w'){var w=edPalDe(v);return '<label><span>'+f[1]+'</span>'+(w===null?'<em class="mn-fx">Regra de busca especial, mantida como está.</em>':'<input data-mnc="'+f[0]+'" data-pal="1" value="'+esc(w)+'" placeholder="ex.: writ  ·  várias, separadas por vírgula">')+'</label>';}
+    return '<label><span>'+f[1]+'</span>'+(f[2]==='a'?'<textarea data-mnc="'+f[0]+'" rows="'+(f[0]==='preferir'?3:2)+'">'+esc(v)+'</textarea>':'<input data-mnc="'+f[0]+'" value="'+esc(v)+'">')+'</label>';}).join('')+
+    '<div class="mn-fa">'+(EDS.orig.dir&&EDS.orig.dir[r.id]==='__novo__'?'':'<button type="button" class="mn-fdel" data-mndel>Excluir</button>')+'<span style="flex:1"></span><button type="button" data-mnx>Cancelar</button><button type="button" class="pri" data-mnok>Aplicar</button></div></div>';}
+function mnAbre(id){var el=document.querySelector('#ed-man [data-dirid="'+(window.CSS&&CSS.escape?CSS.escape(id):id)+'"]'),r=edAcha('dir',id);if(!el||!r)return;
+  if(el.tagName==='TR'){var n=el.children.length;el.outerHTML='<tr class="mn-fr"><td colspan="'+n+'">'+mnForm(r)+'</td></tr>';}else el.outerHTML=mnForm(r);
+  var f=document.querySelector('#ed-man [data-mnf="'+id+'"]');if(f){f.scrollIntoView({block:'nearest'});var i=f.querySelector('input,textarea');if(i)i.focus();}}
+function mnNovo(tipo,grupo){var L=edListaDe('dir'),pre=ED_DIRPRE[tipo]||'red-dir-',mx=0;L.forEach(function(x){if(String(x.id).indexOf(pre)===0){var n=parseInt(String(x.id).slice(pre.length),10);if(n>mx)mx=n;}});
+  var r={id:pre+String(mx+1).padStart(2,'0'),tipo:tipo};(MNF[tipo]||[]).forEach(function(f){r[f[0]]='';});if(grupo)r.grupo=grupo;if(tipo!=='preferencia')r.flags='i';
+  L.unshift(r);edToca('dir',r,true);xManual();mnAbre(r.id);}
+function mnVazio(r){return (MNF[r.tipo]||MNF.preferencia).every(function(f){return !String(r[f[0]]||'').trim();});}
+document.addEventListener('click',function(e){if(!e.target.closest||!e.target.closest('#ed-man'))return;var b;
+  if((b=e.target.closest('[data-mnpen]'))){var aberto=document.querySelector('#ed-man [data-mnf]');if(aberto)xManual();mnAbre(b.getAttribute('data-mnpen'));return;}
+  if((b=e.target.closest('[data-mnnovo]'))){var tg=b.getAttribute('data-mnnovo').split('|');mnNovo(tg[0],tg[1]);return;}
+  var f=e.target.closest('[data-mnf]');if(!f)return;var id=f.getAttribute('data-mnf'),r=edAcha('dir',id);if(!r)return;
+  if(e.target.closest('[data-mnx]')){if(EDS.orig.dir[id]==='__novo__'&&mnVazio(r))edDesfaz('dir',id);xManual();return;}
+  if((b=e.target.closest('[data-mndel]'))){if(!b.classList.contains('conf')){b.classList.add('conf');b.textContent='Confirmar exclusão';return;}edToca('dir',r);var L=edListaDe('dir');L.splice(L.indexOf(r),1);edGuarda();xManual();toast('Regra excluída (vale ao salvar)');return;}
+  if(e.target.closest('[data-mnok]')){var n=JSON.parse(edJ(r));f.querySelectorAll('[data-mnc]').forEach(function(c){var k=c.getAttribute('data-mnc'),v=c.value;
+      if(c.getAttribute('data-pal')){if(edPalDe(n[k])===v.trim())return;n[k]=edPalPara(v);if(n[k]&&!n.flags)n.flags='i';return;}n[k]=v.trim();});
+    if(mnVazio(n)){toast('Preencha a regra antes de aplicar');return;}
+    if(n.tipo==='preferencia'&&!n.titulo){toast('Dê um título à regra');return;}
+    if(n.tipo!=='preferencia'&&!n.padrao){toast('Informe a palavra procurada');return;}
+    if(edJ(n)!==edJ(r)){edToca('dir',r);edPoe(r,n);edGuarda();toast('Alteração aplicada; vale ao salvar');}
+    xManual();var el=document.querySelector('#ed-man [data-dirid="'+id+'"]');if(el)el.scrollIntoView({block:'nearest'});return;}});
+document.addEventListener('keydown',function(e){var f=e.target.closest&&e.target.closest('#ed-man [data-mnf]');if(!f)return;
+  if(e.key==='Escape'){e.preventDefault();e.stopPropagation();var x=f.querySelector('[data-mnx]');if(x)x.click();}
+  else if((e.ctrlKey||e.metaKey)&&(e.key==='Enter'||e.key==='s'||e.key==='S')){e.preventDefault();e.stopPropagation();var o=f.querySelector('[data-mnok]');if(o)o.click();}},true);
+/* ---------- Entradas rápidas: aba própria do editor (ao lado das coleções) ---------- */
+EDS.rap=false;
+window.VDM_RAPTAB=function(){var el=$('#ed-rap');if(el)el.innerHTML=rapHtml('');edRapBtn();};
+function edRapBtn(){var b=$('[data-edrap]'),n=rapLista().filter(function(r){return r.situacao!=='incorporada';}).length;if(b)b.innerHTML='Entradas rápidas'+(n?' <i class="ed-rapn">'+n+'</i>':'');}
+(function(){var edRenderR=edRender;edRender=function(){window.VDM_RAP_TAB=!!EDS.rap;var r=edRenderR.apply(this,arguments);
+  var seg=$('#ed-ov .ed-cols');if(seg&&!seg.querySelector('[data-edrap]')){seg.insertAdjacentHTML('beforeend','<button data-edrap aria-pressed="'+EDS.rap+'"></button>');edRapBtn();}
+  if(EDS.rap){[].forEach.call(document.querySelectorAll('#ed-ov [data-edcol]'),function(b){b.setAttribute('aria-pressed','false');});
+    var bd=$('#ed-ov .ed-body');if(bd){bd.classList.add('ed-rapb');bd.innerHTML='<section class="ed-rap" id="ed-rap">'+rapHtml('')+'</section>';if(window.rapLiga)window.rapLiga($('#ed-rap'));}}
+  return r;};})();
+document.addEventListener('click',function(e){if(!e.target.closest)return;
+  if(e.target.closest('[data-edrap]')){if(EDS.dirty&&!edAplicar(true))return;EDS.rap=true;EDS.id=null;edRender();return;}
+  if(e.target.closest('#ed-ov [data-edcol]'))EDS.rap=false;},true);
+/* incorporar e excluir sem as caixas do navegador: confirmação no próprio cartão */
+document.addEventListener('click',function(e){var R=e.target.closest&&e.target.closest('#ed-rap');if(!R)return;var b;
+  if((b=e.target.closest('[data-rapinc]'))){e.stopPropagation();e.preventDefault();var id=b.getAttribute('data-rapinc'),a=b.closest('.rap-a');
+    a.innerHTML='<input class="rap-dst" placeholder="Onde foi incorporada? (ex.: Diretrizes · Vocabulário, parágrafo, peça)"><button class="e-mini pri" data-rapincok="'+esc(id)+'">Confirmar</button><button class="e-mini" data-rapincx>Cancelar</button>';var i=a.querySelector('input');if(i)i.focus();return;}
+  if((b=e.target.closest('[data-rapincok]'))){e.stopPropagation();var id2=b.getAttribute('data-rapincok'),v=(b.parentNode.querySelector('.rap-dst')||{}).value||'';
+    rapMuda(id2,function(n){n.situacao='incorporada';n.destino=v.trim();},'Diretrizes: entrada rápida incorporada');return;}
+  if(e.target.closest('[data-rapincx]')){e.stopPropagation();window.VDM_RAPTAB();return;}
+  if((b=e.target.closest('[data-rapdel]'))&&!b.classList.contains('conf')){e.stopPropagation();e.preventDefault();b.classList.add('conf');b.textContent='Confirmar exclusão';return;}
+  if((b=e.target.closest('[data-rapdel].conf'))){e.stopPropagation();e.preventDefault();var id3=b.getAttribute('data-rapdel'),x=rapAcha(id3);if(!x)return;
+    rapGrava([{op:'del',id:id3,orig:rapJ(x)}],'Diretrizes: entrada rápida excluída',function(){var L=rapBase();L.splice(L.indexOf(rapAcha(id3)),1);});return;}},true);
+/* ---------- textos padrão do aviso à equipe depois de salvar (título e mensagem; os dois continuam editáveis no diálogo) ---------- */
+var EDNTF={
+  nome:{par:['Parágrafo','Parágrafos','o'],pec:['Peça','Peças','a'],dir:['Diretriz','Diretrizes','a'],rap:['Entrada rápida','Entradas rápidas','a'],nor:['Norma','Normas','a'],mod:['Modelo','Modelos','o']},
+  verbo:{novo:['Incluído','Incluída','incluído','incluída'],editado:['Alterado','Alterada','alterado','alterada'],'excluído':['Excluído','Excluída','excluído','excluída']},
+  abertura:'O Desembargador atualizou o Compendium:',
+  fecho:'As mudanças entram no Compendium em alguns minutos.'};
+function edNtf(P){var N=EDNTF.nome,V=EDNTF.verbo,fem=function(c){return (N[c]||N.dir)[2]==='a';};
+  var cols=[];P.forEach(function(p){if(cols.indexOf(p.col)<0)cols.push(p.col);});
+  var t;if(P.length===1){var p0=P[0],n0=N[p0.col]||[EDCOL[p0.col],EDCOL[p0.col],'o'];t=n0[0]+' '+V[p0.sit][fem(p0.col)?3:2]+': '+String(p0.t||'').slice(0,110);}
+  else if(cols.length===1){var n1=N[cols[0]]||[EDCOL[cols[0]],EDCOL[cols[0]]];t=n1[1]+' atualizad'+(fem(cols[0])?'as':'os')+': '+P.length+' alterações';}
+  else t='Compendium atualizado: '+P.length+' alterações';
+  var m=[EDNTF.abertura];cols.forEach(function(c){var nn=N[c]||[EDCOL[c],EDCOL[c]];m.push('','',nn[1].toUpperCase());
+    P.filter(function(p){return p.col===c;}).slice(0,15).forEach(function(p){m.push('• '+V[p.sit][fem(c)?1:0]+': '+String(p.t||'').slice(0,140));});
+    var r=P.filter(function(p){return p.col===c;}).length-15;if(r>0)m.push('• e mais '+r);});
+  m.push('',EDNTF.fecho);return {t:t,m:m.join('\n').replace(/\n\n\n/g,'\n\n')};}

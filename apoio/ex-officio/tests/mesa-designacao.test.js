@@ -10,14 +10,16 @@ test('Mesa de designação: página válida, publicada e ligada ao Caput',()=>{
   assert.ok(pag.includes('var K0={pen:0.6,lote:2,comp:1.5}')&&!pag.includes('data-mo='),'um critério só (competência); sem “Equilibrar carga”');
   assert.ok(read('.github/workflows/vercel-caput.yml').includes('cp caput/designacao/index.html site/public/caput/designacao/index.html'));
   const caput=read('caput/triagem/index.html');
-  for(const x of ["'/caput/designacao/?embed=1&s='",'class="cwe-mesa-slot"','function mesaSync()',"cmt:mesa-tela","cmt:mesa-fechar","trocar: true","unassigned: it.filter"])assert.ok(caput.includes(x),x);
+  for(const x of ["'?embed=1&s='",'class="cwe-mesa-slot"','function mesaSync()',"cmt:mesa-tela","cmt:mesa-fechar","trocar: true","unassigned: it.filter"])assert.ok(caput.includes(x),x);
   assert.ok(!caput.includes('<span class="v">${e(atual)}</span>'),'minutante e corretor sempre editáveis');
 });
+
 test('Motor: troca na designação e período efetivo com marcos invertidos',()=>{
   const m=read('caput/motor/assets/js/21-sessoes-equipe.js');
   assert.ok(m.includes('o.trocar && it.servidor !== o.d')&&m.includes('o.trocar && it.corretor !== o.c'));
   assert.ok(m.includes('invertido')&&m.includes('efetivo: periodo(ss)'));
 });
+
 test('Equipe: CM não corrige; minuta por exceção só na escolha manual',()=>{
   const R=JSON.parse(read('apoio/equipe.json')).registros,by=n=>R.find(m=>m.nome===n);
   assert.equal(by('CM').correcao,false);
@@ -28,18 +30,21 @@ test('Equipe: CM não corrige; minuta por exceção só na escolha manual',()=>{
   const pag=read('caput/designacao/index.html');
   assert.ok(pag.includes('optsEx(k,v)')&&pag.includes('var EV=EQ.filter'));
 });
+
 test('Mesa: agrupar por motivo do minutante e do corretor',()=>{
   const pag=read('caput/designacao/index.html');
   for(const x of ['data-ag="bloco"','data-ag="md"','data-ag="mc"','function motivo(x,k)','return grupo(x)===b'])assert.ok(pag.includes(x),x);
   for(const m of ['Escolha manual','Continuidade','Regra do gabinete','Especialidade ou preferência','Experiência no assunto','Mesmo lote ou assunto','Já designado na pauta','Distribuição pela carga'])assert.ok(pag.includes(m),m);
 });
+
 test('Mesa dentro da etapa B: modo embutido e tela cheia',()=>{
   const pag=read('caput/designacao/index.html');
   assert.ok(pag.includes("get('embed')==='1'")&&pag.includes("EMBED?'cmt:mesa-tela':'cmt:mesa-fechar'"));
   const caput=read('caput/triagem/index.html');
-  assert.ok(caput.includes('requestAnimationFrame(mesaSync)'),'reposiciona a mesa a cada render');
-  assert.ok(caput.includes("h.id = 'cwe-mesa-host'")&&caput.includes('document.body.appendChild(h)'),'moldura fora do HTML refeito pelo render');
+  assert.ok(caput.includes('    mesaSync();\n  }'),'devolve a mesa ao espaço reservado a cada render');
+  assert.ok(caput.includes("h.id = 'cwe-mesa-host'")&&caput.includes('slot.appendChild(MESA.host)')&&caput.includes("attachShadow({ mode: 'open' })")&&!caput.includes('<iframe title="Mesa'),'mesa integrada à página, sem iframe, fora do HTML refeito pelo render');
 });
+
 test('Mesa: designação inicial e seleção em lote',()=>{
   const pag=read('caput/designacao/index.html');
   assert.ok(!pag.includes('Mexer pouco')&&!pag.includes('trocas de minutante'),'sem vocabulário de troca');
@@ -47,6 +52,7 @@ test('Mesa: designação inicial e seleção em lote',()=>{
   assert.ok(!pag.includes("why.push(['','designação atual'])"),'gravado não pesa na proposta');
   for(const x of ['data-a="proposta"','Substituir também o já gravado','data-ck="','data-ckg="','data-lote="d"','data-lote="c"','sel-proposta','sel-limpar'])assert.ok(pag.includes(x),x);
 });
+
 test('Pautas: cabeçalho compacto ao lado do painel e etapa 2 pela numeração do PDF',()=>{
   const c=read('caput/triagem/index.html');
   assert.ok(c.includes('<div class="cwe-main"><div class="cwe-cab">${cabecalho(ss, d)}${marcos(ss)}${cabAbas(ss, d)}</div>'),'cabeçalho na coluna principal');
@@ -55,6 +61,7 @@ test('Pautas: cabeçalho compacto ao lado do painel e etapa 2 pela numeração d
   for(const x of ["'número repetido'","'processo repetido'","'sem número do item'","'era o item '",'Confirmar a numeração'])assert.ok(c.includes(x),x);
   assert.ok(read('caput/motor/assets/js/21-sessoes-equipe.js').includes('r.itemAnterior = String(o.item)'),'reimportação guarda o número anterior');
 });
+
 test('Pautas: painel da sessão integrado ao cabeçalho e julgadores com substituições',()=>{
   const c=read('caput/triagem/index.html');
   assert.ok(c.includes("const corpo = [null, etapa1, etapa2, etapaEtq, etapaDes, etapa4][d.cur](ss, d);"),'esteira: seleção, pauta, etiquetagem, designação, publicar');
@@ -63,22 +70,26 @@ test('Pautas: painel da sessão integrado ao cabeçalho e julgadores com substit
   const m=read('caput/motor/assets/js/21-sessoes-equipe.js');
   for(const x of ['definirJulgadores: function','julgadoresDoItem: function','if (ss.julgadores) o.julgadores = ss.julgadores;','docs[i] && docs[i].julgadores'])assert.ok(m.includes(x),x);
 });
+
 test('Mesa: filtro por assunto e agrupamento por assunto, minutante e corretor; rodapé da Triagem só na Triagem',()=>{
   const pag=read('caput/designacao/index.html');
   for(const x of ['data-ag="as"','data-ag="pd"','data-ag="pc"','id="f-as"',"if(FASS&&N(x.as)!==FASS)return false;"])assert.ok(pag.includes(x),x);
   assert.ok(read('caput/triagem/index.html').includes('#rodape[hidden]{display:none!important}'),'rodapé oculto fora da Triagem');
 });
+
 test('Designação: painel de regras para minuta e correção, com categorias e processos',()=>{
   const c=read('caput/triagem/index.html');
   for(const x of ['function painelRegras(ss, Z)',"col('d', 'MINUTA')","col('c', 'CORREÇÃO')",'data-cwe="rg"','data-cwe="rgc"','class="rg-its"'])assert.ok(c.includes(x),x);
   const m=read('caput/motor/assets/js/21-sessoes-equipe.js');
   assert.ok(m.includes('designacaoPorRegra: function')&&m.includes("cid: cid, chave: hit || inf.assunto || '—'"),'motor diz a regra e a categoria de cada processo');
 });
+
 test('Cartão da sessão: Ex Officio em ícones, aviso de marcos invertidos no cartão, painel com números, julgadores e marcos',()=>{
   const c=read('caput/triagem/index.html');
   for(const x of ['class="cwe-pico','function marcosEditor(ss)','class="cwe-inv" data-cwe="p-tab" data-v="marcos"',"['julg', 'Julgadores e substituições'","['marcos', 'Marcos'",'class="cwe-jico" data-cwe="j-ed"'])assert.ok(c.includes(x),x);
   assert.ok(!c.includes('Regras de designação do gabinete${Z.escopo'),'sem o texto de abertura na Designação');
 });
+
 test('Marcos editáveis no cartão com salvar, julgadores por alcance, calendário com sessões e julgadores, grupos recolhíveis',()=>{
   const c=read('caput/triagem/index.html');
   for(const x of ['data-cwe="mk-cal"','data-cwe="mk-salvar"','data-cwe-mkp','class="cwe-jico"',"['casos', 'nos casos de…']","['impedimento', 'onde houver impedimento ou suspeição de quem sai']",'abrirJulgadores'])assert.ok(c.includes(x),x);
@@ -89,11 +100,13 @@ test('Marcos editáveis no cartão com salvar, julgadores por alcance, calendár
   const pag=read('caput/designacao/index.html');
   for(const x of ['data-grtodos="1"','function aberto(k,n)',"if(EMBED){document.body.classList.add('emb');",'Lendo o histórico da equipe'])assert.ok(pag.includes(x),x);
 });
+
 test('Cartão da sessão: um Salvar alterações para marcos e julgadores e Publicar alterações; etapa 5 Publicação',()=>{
   const c=read('caput/triagem/index.html');
   for(const x of ['function salvarSessao(ss)','data-cwe="pub-alt"','class="cwe-svg"',"['Publicação', 'conferência final e Ex Officio']",'est.jPend[ss.id] = j;'])assert.ok(c.includes(x),x);
   assert.ok(c.includes('.cwe-ses button{border:1px solid transparent!important;'),'sessões não selecionadas sem borda');
 });
+
 test('Office: prévia da minuta gera a proclamação com o resultado do prontuário e os julgadores da sessão',()=>{
   const s=read('apoio/ex-officio/index.html');
   const pick=(a,b)=>s.slice(s.indexOf(a),s.indexOf(b,s.indexOf(a)));
@@ -114,7 +127,7 @@ test('Nova sessão: convocados e substituições já na criação; começa na et
 
 test('Etapa 4: a mesa é o cabeçalho da etapa (título, Aplicar, Próximo); Caput sem lista simples duplicada',()=>{
   const pag=read('caput/designacao/index.html'),cap=read('caput/triagem/index.html');
-  assert.ok(pag.includes('4 · Designação de redator e corretor')&&pag.includes('id="b-aplicar-h"')&&pag.includes("tipo:'cmt:mesa-etapa',n:5"),'cabeçalho da etapa na mesa');
+  assert.ok(pag.includes("textContent='Designação'")&&pag.includes('id="b-aplicar-h"')&&pag.includes("tipo:'cmt:mesa-etapa',n:5"),'cabeçalho da etapa na mesa');
   assert.ok(pag.includes('>Atualizar proposta</button>')&&!pag.includes('>Recalcular<'),'Atualizar proposta');
   assert.ok(cap.includes("t === 'cmt:mesa-etapa'")&&!cap.includes('Lista simples por regra, sem a mesa')&&cap.includes('cwe-st4'),'Caput sem duplicação');
 });
@@ -130,4 +143,17 @@ test('Datas: marcos validados (ano 2000–2100), aviso de marco fora do expedien
   const m=read('caput/motor/assets/js/21-sessoes-equipe.js'),cap=read('caput/triagem/index.html');
   assert.ok(m.includes('function dataOk(d)')&&m.includes("if (v && !dataOk(v))")&&!m.includes('Imac. Conceição'),'motor');
   assert.ok(cap.includes('fora do expediente</button>')&&cap.includes('min="2000-01-01" max="2100-12-31"'),'Caput');
+});
+
+test('Mesa: Atualizar proposta ao lado de Aplicar; agrupar pelas regras do painel; coluna de capacidade compacta',()=>{
+  const pag=read('caput/designacao/index.html');
+  assert.ok(/<div class="hac" id="hac" hidden><button type="button" class="btn" data-a="recalc"[^>]*>Atualizar proposta<\/button><button type="button" class="btn pri" data-a="copiar"/.test(pag),'recalc antes de Aplicar');
+  assert.ok(pag.includes("document.getElementById('b-recalc-tb').hidden=VIVO"),'um só botão no Caput');
+  assert.ok(pag.includes('>Regra da minuta</button>')&&pag.includes('>Regra da correção</button>')&&pag.includes('VIVO.designacaoPorRegra(D.sessao.id)')&&pag.includes('nenhum processo nesta pauta'),'grupos pelas regras');
+  assert.ok(pag.includes('class="sw"')&&pag.includes('.pp .mt{')&&pag.includes("'<span class=\"mt\">'"),'linha da pessoa');
+});
+
+test('Mesa: "Bloco todo" mostra a pessoa escolhida quando o grupo inteiro está com ela',()=>{
+  const pag=read('caput/designacao/index.html');
+  assert.ok(pag.includes("uD=uni('d'),uC=uni('c')")&&pag.includes("(m.nome===uD?' selected':'')")&&pag.includes("(m.nome===uC?' selected':'')")&&pag.includes('.bh .bulk select.on{'),'select preenchido');
 });

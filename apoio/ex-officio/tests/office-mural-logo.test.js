@@ -126,3 +126,10 @@ test('Mural só com as entregas de quem está logado; painel do gabinete nativo 
   for (const x of ["fetch('/api/painel?entregas=1'", 'function voPinta(', 'function voMontar(', "voMontar(); }, 0);"]) assert.ok(caput.includes(x), x);
   assert.ok(!caput.includes('src="/office/?painel=gabinete"') && !caput.includes('cgGabAltura'), 'sem o Ex Officio embutido');
 });
+
+test('Mural: calendário do gabinete aberto no lugar da agenda de entregas', () => {
+  const app = require('fs').readFileSync(require('path').join(__dirname, '..', 'index.html'), 'utf8');
+  assert.ok(!app.includes('▦ Agenda de entregas'));
+  assert.ok(app.includes('id="hc-cal-full" aria-label="Calendário do gabinete"><div id="cc-cal"'));
+  assert.ok(app.includes("if($('#hc-mini-cal'))hcMiniCalendario();calendario();"));
+});
