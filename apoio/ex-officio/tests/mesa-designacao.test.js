@@ -227,7 +227,7 @@ test('Produtividade: níveis de complexidade (despacho 0,25 · serial 0,5 · pad
 
 test('Mesa: fluxo em 4 passos, regras obrigatórias antes da proposta e conferência',()=>{
   const pag=read('caput/designacao/index.html'),m=read('caput/motor/assets/js/21-sessoes-equipe.js');
-  for(const x of ['function passos(du,k,tot,cap)',"'Período e equipe'","'Regras obrigatórias'","'Proposta'","'Conferir e aplicar'",'id="pn-obr"','id="pn-conf"','function painelObr()','function painelConf(P,nAp)','function pend()'])assert.ok(pag.includes(x),x);
+  for(const x of ["['cl','RemNec','José','Vanilda']","if(r.q==='cl')return (x.cl||'')===r.v;",'function passos(du,k,tot,cap)',"'Período e equipe'","'Regras obrigatórias'","'Proposta'","'Conferir e aplicar'",'id="pn-obr"','id="pn-conf"','function painelObr()','function painelConf(P,nAp)','function pend()'])assert.ok(pag.includes(x),x);
   assert.ok(pag.includes("var ob=obr(x,'d'),esc_=ob&&livre(ob.d,'d')?")&&pag.includes("var oc=obr(x,'c'),e=oc&&livre(oc.c,'c')?"),'obrigatória decide antes do escore');
   assert.ok(pag.includes("if(a==='ob-seguir')")&&pag.includes('data-obup=')&&pag.includes('data-obdel='),'seguir as regras, reordenar e remover');
   assert.ok(m.includes('obrigatorias: function ()')&&m.includes('definirObrigatorias: function (L)'),'motor guarda em designacao.json');

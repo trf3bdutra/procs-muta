@@ -327,14 +327,15 @@ body.emb #b-aplicar{display:none}body.emb .lay{grid-template-columns:262px minma
   /* um critério só: regra, continuidade, especialidade, histórico e lote; a carga só desempata e é apontada */
   var K0={pen:0.6,lote:2,comp:1.5};
   /* ---------- regras obrigatórias: tipo de julgamento, seção, lote ou assunto → minutante e/ou corretor; a primeira que casa decide ---------- */
-  var OBQ=[['julg','Tipo de julgamento'],['sec','Seção'],['lote','Lote'],['as','Assunto']];
+  var OBQ=[['julg','Tipo de julgamento'],['cl','Classe'],['sec','Seção'],['lote','Lote'],['as','Assunto']];
+  var CLN={RemNec:'Remessa necessária',ApelRemNec:'Apelação / remessa necessária',ApCiv:'Apelação cível',AI:'Agravo de instrumento',SuspApel:'Efeito suspensivo à apelação'};
   var OBR=Array.isArray(D.obrig)?D.obrig.slice():null;
   if(!OBR){var tem=function(n){return EQ.some(function(m){return m.nome===n;});};
-    OBR=[['julg','ED','Victor','Vanilda'],['sec','1ª Seção','','Vanilda'],['sec','2ª Seção','','Bruno'],['sec','3ª Seção','','Alexander']].map(function(r){return {q:r[0],v:r[1],d:tem(r[2])?r[2]:'',c:tem(r[3])?r[3]:''};}).filter(function(r){return r.d||r.c;});
+    OBR=[['julg','ED','Victor','Vanilda'],['julg','AgInt','','Vanilda'],['julg','JR','','Vanilda'],['cl','RemNec','José','Vanilda'],['sec','1ª Seção','','Vanilda'],['sec','2ª Seção','','Bruno'],['sec','3ª Seção','','Alexander']].map(function(r){return {q:r[0],v:r[1],d:tem(r[2])?r[2]:'',c:tem(r[3])?r[3]:''};}).filter(function(r){return r.d||r.c;});
     if(VIVO&&VIVO.definirObrigatorias)try{VIVO.definirObrigatorias(OBR);}catch(er){}}
-  function casaObr(r,x){if(!r||!r.v)return false;if(r.q==='julg')return x.t===r.v;if(r.q==='sec')return (x.sec||'')===r.v;if(r.q==='lote')return (x.lote||'')===r.v;if(r.q==='as')return N(x.as)===N(r.v);return false;}
+  function casaObr(r,x){if(!r||!r.v)return false;if(r.q==='julg')return x.t===r.v;if(r.q==='cl')return (x.cl||'')===r.v;if(r.q==='sec')return (x.sec||'')===r.v;if(r.q==='lote')return (x.lote||'')===r.v;if(r.q==='as')return N(x.as)===N(r.v);return false;}
   function obr(x,k){for(var i=0;i<OBR.length;i++){var r=OBR[i];if(r[k]&&casaObr(r,x))return r;}return null;}
-  function rotObr(r){var v=r.q==='lote'?(NOMEL[r.v]||'lote '+r.v):r.v;return v;}
+  function rotObr(r){var v=r.q==='lote'?(NOMEL[r.v]||'lote '+r.v):r.q==='cl'?(CLN[r.v]||r.v):r.v;return v;}
   function livre(n,k){return !!n&&!AUS[n]&&!(k==='d'?FD:FC)[n];}
   function gravaObr(){if(VIVO&&VIVO.definirObrigatorias)try{VIVO.definirObrigatorias(OBR);}catch(er){}}
   function propor(){
@@ -529,6 +530,7 @@ body.emb #b-aplicar{display:none}body.emb .lay{grid-template-columns:262px minma
     document.getElementById('kp').innerHTML=ps.map(function(p){return '<button type="button" class="ps '+p[4]+'" data-passo="'+p[0]+'" aria-pressed="'+(PASSO===p[0])+'"><span class="nu">'+(p[4]==='ok'?'✓':p[0])+'</span><span class="t">'+p[0]+' · '+p[1]+'</span><span class="v">'+p[2]+'</span><span class="s" title="'+esc(p[3])+'">'+esc(p[3])+'</span></button>';}).join('');
     painelObr();painelConf(P,nAp);}
   function valoresObr(q){var S0={};if(q==='julg')['ED','AgInt','JR','META','AI'].forEach(function(v){S0[v]=v;});
+    else if(q==='cl'){['RemNec','ApelRemNec','ApCiv','AI'].forEach(function(v){S0[v]=CLN[v];});IT.forEach(function(x){if(x.cl)S0[x.cl]=CLN[x.cl]||x.cl;});}
     else if(q==='sec'){['1ª Seção','2ª Seção','3ª Seção'].forEach(function(v){S0[v]=v;});IT.forEach(function(x){if(x.sec)S0[x.sec]=x.sec;});}
     else if(q==='lote')IT.forEach(function(x){if(x.lote)S0[x.lote]=NOMEL[x.lote]||'Lote '+x.lote;});
     else IT.slice().sort(function(a,b){return a.as.localeCompare(b.as);}).forEach(function(x){if(x.as)S0[x.as]=x.as;});return S0;}
