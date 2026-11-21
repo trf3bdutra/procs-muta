@@ -33,7 +33,7 @@
    "categoria": "Abertura › Admissibilidade",
    "titulo": "Conhecimento parcial",
    "status": "estrutural",
-   "texto": "Presentes, em parte, os pressupostos de admissibilidade, conheço parcialmente {art} {recurso}, ressalvada [DELIMITAÇÃO DO NÃO CONHECIMENTO].",
+   "texto": "Presentes, em parte, os pressupostos de admissibilidade, conheço parcialmente {art} {recurso}, ressalvada {{DELIMITAÇÃO DO NÃO CONHECIMENTO}}.",
    "variaveis": [
     {
      "campo": "art",
@@ -160,7 +160,7 @@
    "categoria": "Genéricos › Normas e citações",
    "titulo": "J03 · Jurisprudência consolidada",
    "status": "variante",
-   "texto": "Consolidada a jurisprudência do Superior Tribunal de Justiça no sentido de que [TESE JURÍDICA], conforme [REFERÊNCIA JURISPRUDENCIAL].",
+   "texto": "Consolidada a jurisprudência do Superior Tribunal de Justiça no sentido de que {{TESE JURÍDICA}}, conforme {{REFERÊNCIA JURISPRUDENCIAL}}.",
    "uso": "Baseada na redação do capítulo de gratuidade da justiça. Reservar para orientação efetivamente consolidada.",
    "variaveis": [
     {
@@ -184,7 +184,7 @@
    "categoria": "Genéricos › Normas e citações",
    "titulo": "J04 · Entendimento convergente",
    "status": "variante",
-   "texto": "Conforme jurisprudência do [TRIBUNAL], [TESE JURÍDICA APLICÁVEL], segundo [PRECEDENTE].",
+   "texto": "Conforme jurisprudência do {{TRIBUNAL}}, {{TESE JURÍDICA APLICÁVEL}}, segundo {{PRECEDENTE}}.",
    "uso": "Adaptação da construção localizada no capítulo de competência do compêndio.",
    "variaveis": [
     {
@@ -213,7 +213,7 @@
    "categoria": "Genéricos › Normas e citações",
    "titulo": "J05 · Tema repetitivo",
    "status": "especifico",
-   "texto": "A matéria foi objeto de exame pelo [TRIBUNAL] no julgamento do Tema [NÚMERO], em que se firmou entendimento no sentido de que [TESE EFETIVAMENTE FIXADA].",
+   "texto": "A matéria foi objeto de exame pelo {{TRIBUNAL}} no julgamento do Tema {{NÚMERO}}, em que se firmou entendimento no sentido de que {{TESE EFETIVAMENTE FIXADA}}.",
    "uso": "Fórmula adaptada. Exige conferência do alcance da tese e de eventual suspensão ou superação.",
    "variaveis": [
     {
@@ -242,7 +242,7 @@
    "categoria": "Genéricos › Normas e citações",
    "titulo": "J06 · Distinção",
    "status": "variante",
-   "texto": "Não se aplica à espécie o entendimento firmado no [PRECEDENTE], pois [DISTINÇÃO FÁTICA OU JURÍDICA DETERMINANTE].",
+   "texto": "Não se aplica à espécie o entendimento firmado no {{PRECEDENTE}}, pois {{DISTINÇÃO FÁTICA OU JURÍDICA DETERMINANTE}}.",
    "uso": "Para individualizar o motivo da inaplicabilidade do precedente.",
    "variaveis": [
     {
@@ -266,7 +266,7 @@
    "categoria": "Genéricos › Normas e citações",
    "titulo": "Introdução curta + transcrição isolada",
    "status": "estrutural",
-   "texto": "Neste sentido:\n\n“[TRECHO LITERAL DA JURISPRUDÊNCIA, SEM ALTERAÇÃO DO TEXTO ORIGINAL.]”\n\n[CLASSE NÚMERO], Rel. [RELATOR], [DATA DE PUBLICAÇÃO OU JULGAMENTO].",
+   "texto": "Neste sentido:\n\n“{{TRECHO LITERAL DA JURISPRUDÊNCIA, SEM ALTERAÇÃO DO TEXTO ORIGINAL.}}”\n\n{{CLASSE NÚMERO}}, Rel. {{RELATOR}}, {{DATA DE PUBLICAÇÃO OU JULGAMENTO}}.",
    "uso": "Padrão fixo (artigos 3º e 5º do Manual): transcrição em parágrafo próprio, entre aspas e em itálico; referência com classe, número, relator e data, sem a unidade federativa. Use “+ Citação” no capítulo para montá-la automaticamente.",
    "variaveis": [
     {
@@ -881,7 +881,7 @@
    "categoria": "Seção › 1ª Seção",
    "titulo": "Legitimidade ativa em cumprimento individual de sentença coletiva",
    "status": "variante",
-   "texto": "Senhores Desembargadores, a controvérsia recursal diz respeito à legitimidade ativa para o cumprimento individual do título judicial formado na ação coletiva [PROCESSO].\n\nInicialmente, cabe observar que a delimitação subjetiva do título executivo deve considerar [CONTEÚDO DO TÍTULO E DA COISA JULGADA].\n\nNa espécie, a parte exequente [SITUAÇÃO RELEVANTE], conforme [DOCUMENTOS E ID’S], circunstância que [APLICAÇÃO AO CASO].\n\nNesse cenário, [CONCLUSÃO FUNDAMENTADA SOBRE A LEGITIMIDADE].\n\nNeste sentido:\n\n“[TRANSCRIÇÃO LITERAL DO PRECEDENTE]”\n\n[REFERÊNCIA COMPLETA].",
+   "texto": "Senhores Desembargadores, a controvérsia recursal diz respeito à legitimidade ativa para o cumprimento individual do título judicial formado na ação coletiva @processo.\n\nInicialmente, cabe observar que a delimitação subjetiva do título executivo deve considerar {{CONTEÚDO DO TÍTULO E DA COISA JULGADA}}.\n\nNa espécie, a parte exequente {{SITUAÇÃO RELEVANTE}}, conforme {{DOCUMENTOS E ID’S}}, circunstância que {{APLICAÇÃO AO CASO}}.\n\nNesse cenário, {{CONCLUSÃO FUNDAMENTADA SOBRE A LEGITIMIDADE}}.\n\nNeste sentido:\n\n“{{TRANSCRIÇÃO LITERAL DO PRECEDENTE}}”\n\n{{REFERÊNCIA COMPLETA}}.",
    "uso": "Exemplo de redação integrada: questão → normas e provas → conclusão → jurisprudência ratificadora (artigo 11 do Manual). Os campos variáveis impedem que uma conclusão seja presumida.",
    "variaveis": [
     {
@@ -1193,7 +1193,7 @@
    "categoria": "Abertura › Delimitação da controvérsia",
    "titulo": "Referência a documentos dos autos",
    "status": "estrutural",
-   "texto": "Conforme os elementos constantes dos autos ({ids}), [ANÁLISE DOS DOCUMENTOS E DE SUA RELEVÂNCIA PARA A CONTROVÉRSIA].",
+   "texto": "Conforme os elementos constantes dos autos ({ids}), {{ANÁLISE DOS DOCUMENTOS E DE SUA RELEVÂNCIA PARA A CONTROVÉRSIA}}.",
    "variaveis": [
     {
      "campo": "ids",
@@ -1268,7 +1268,7 @@
    "categoria": "Genéricos › Transições e estrutura",
    "titulo": "Capítulo sem fundamentação",
    "status": "estrutural",
-   "texto": "[FUNDAMENTAÇÃO ESPECÍFICA DO CASO CONCRETO]",
+   "texto": "{{FUNDAMENTAÇÃO ESPECÍFICA DO CASO CONCRETO}}",
    "variaveis": [
     {
      "campo": "",
@@ -1374,7 +1374,7 @@
    "categoria": "Genéricos › Normas e citações",
    "titulo": "N01 · Regra normativa",
    "status": "preferencial",
-   "texto": "Nos termos do artigo [DISPOSITIVO] da [NORMA], [REGRA JURÍDICA APLICÁVEL].",
+   "texto": "Nos termos do artigo {{DISPOSITIVO}} da {{NORMA}}, {{REGRA JURÍDICA APLICÁVEL}}.",
    "uso": "Fórmula sintética, adequada à apresentação de uma regra legal sem transcrição literal.",
    "variaveis": [
     {
@@ -1403,7 +1403,7 @@
    "categoria": "Genéricos › Normas e citações",
    "titulo": "N02 · Interpretação da disciplina normativa",
    "status": "variante",
-   "texto": "A disciplina da matéria, prevista no artigo [DISPOSITIVO] da [NORMA], [ESTABELECE/EXIGE/RESSALVA] [CONTEÚDO JURÍDICO], de modo que [CONSEQUÊNCIA JURÍDICA].",
+   "texto": "A disciplina da matéria, prevista no artigo {{DISPOSITIVO}} da {{NORMA}}, {{ESTABELECE/EXIGE/RESSALVA}} {{CONTEÚDO JURÍDICO}}, de modo que {{CONSEQUÊNCIA JURÍDICA}}.",
    "variaveis": [
     {
      "campo": "",
@@ -1441,7 +1441,7 @@
    "categoria": "Genéricos › Normas e citações",
    "titulo": "N03 · Regra e exceção",
    "status": "variante",
-   "texto": "Embora o artigo [DISPOSITIVO] da [NORMA] estabeleça [REGRA GERAL], a disciplina legal ressalva [HIPÓTESE EXCEPCIONAL], quando [REQUISITOS].",
+   "texto": "Embora o artigo {{DISPOSITIVO}} da {{NORMA}} estabeleça {{REGRA GERAL}}, a disciplina legal ressalva {{HIPÓTESE EXCEPCIONAL}}, quando {{REQUISITOS}}.",
    "variaveis": [
     {
      "campo": "",
@@ -1479,7 +1479,7 @@
    "categoria": "Genéricos › Normas e citações",
    "titulo": "N04 · Aplicação da norma ao caso",
    "status": "variante",
-   "texto": "Na espécie, [FATO JURIDICAMENTE RELEVANTE], conforme [DOCUMENTO/ID], circunstância que [PREENCHE/AFASTA] os requisitos previstos no artigo [DISPOSITIVO] da [NORMA].",
+   "texto": "Na espécie, {{FATO JURIDICAMENTE RELEVANTE}}, conforme {{DOCUMENTO/ID}}, circunstância que {{PREENCHE/AFASTA}} os requisitos previstos no artigo {{DISPOSITIVO}} da {{NORMA}}.",
    "variaveis": [
     {
      "campo": "",
@@ -1647,7 +1647,7 @@
    "titulo": "Não cabimento do agravo de instrumento (artigo 1.015 do CPC)",
    "status": "padrao",
    "uso": "Decisão fora do rol do artigo 1.015, sem urgência (Tema 988/STJ).",
-   "texto": "O rol do artigo 1.015 do CPC é de taxatividade mitigada, admitindo a interposição de agravo de instrumento apenas quando verificada a urgência decorrente da inutilidade do julgamento da questão no recurso de apelação (Tema 988/STJ).\n\nNa espécie, é objeto de recurso a decisão que [CONTEÚDO DA DECISÃO AGRAVADA], o que não tem correspondência com o elenco legal das hipóteses de cabimento, de que tratam os incisos e o parágrafo único do artigo 1.015 do CPC, tampouco sendo possível cogitar de urgência para interposição recursal em detrimento da apelação.",
+   "texto": "O rol do artigo 1.015 do CPC é de taxatividade mitigada, admitindo a interposição de agravo de instrumento apenas quando verificada a urgência decorrente da inutilidade do julgamento da questão no recurso de apelação (Tema 988/STJ).\n\nNa espécie, é objeto de recurso a decisão que {{CONTEÚDO DA DECISÃO AGRAVADA}}, o que não tem correspondência com o elenco legal das hipóteses de cabimento, de que tratam os incisos e o parágrafo único do artigo 1.015 do CPC, tampouco sendo possível cogitar de urgência para interposição recursal em detrimento da apelação.",
    "especificidadesTags": "agravo de instrumento; cabimento",
    "fonte": "Modelos 8 — padrão de preliminares",
    "nivelTema": "Não cabimento do agravo de instrumento (artigo 1.015 do CPC)",
@@ -1661,7 +1661,7 @@
    "titulo": "Cerceamento de defesa (rejeição)",
    "status": "padrao",
    "uso": "Prova dos autos suficiente; artigo 370 do CPC.",
-   "texto": "Nos termos do artigo 370 do CPC, cabe ao juiz determinar as provas necessárias ao julgamento do mérito, indeferindo, em decisão fundamentada, as diligências inúteis ou meramente protelatórias. Na espécie, [A PROVA DOCUMENTAL / PERICIAL] constante dos autos (ID [ID]) revelou-se suficiente à solução da controvérsia, não se cogitando de cerceamento de defesa.",
+   "texto": "Nos termos do artigo 370 do CPC, cabe ao juiz determinar as provas necessárias ao julgamento do mérito, indeferindo, em decisão fundamentada, as diligências inúteis ou meramente protelatórias. Na espécie, {{A PROVA DOCUMENTAL / PERICIAL}} constante dos autos (ID {{ID}}) revelou-se suficiente à solução da controvérsia, não se cogitando de cerceamento de defesa.",
    "especificidadesTags": "cerceamento de defesa; prova",
    "fonte": "Modelos 8 — padrão de preliminares",
    "nivelTema": "Nulidade da sentença por cerceamento de defesa",
@@ -1675,7 +1675,7 @@
    "titulo": "Deserção (não conhecimento)",
    "status": "padrao",
    "uso": "Preparo não comprovado nem regularizado após intimação.",
-   "texto": "O preparo constitui requisito objetivo de admissibilidade recursal. Nos termos do artigo 1.007, caput, do CPC, deve ser comprovado no ato de interposição do recurso, sob pena de deserção.\n\nIntimada para regularizar o preparo (ID [ID]), nos termos do artigo 1.007, § 4º, do CPC, a parte deixou de comprová-lo no prazo assinalado.\n\nConfigurada a deserção, impõe-se o não conhecimento do recurso.",
+   "texto": "O preparo constitui requisito objetivo de admissibilidade recursal. Nos termos do artigo 1.007, caput, do CPC, deve ser comprovado no ato de interposição do recurso, sob pena de deserção.\n\nIntimada para regularizar o preparo (ID {{ID}}), nos termos do artigo 1.007, § 4º, do CPC, a parte deixou de comprová-lo no prazo assinalado.\n\nConfigurada a deserção, impõe-se o não conhecimento do recurso.",
    "especificidadesTags": "preparo; deserção",
    "fonte": "Modelos 8 — padrão de preliminares",
    "nivelTema": "Deserção (ausência ou insuficiência de preparo)",
@@ -1703,7 +1703,7 @@
    "titulo": "Dialeticidade atendida (rejeição)",
    "status": "padrao",
    "uso": "Razões recursais enfrentam os fundamentos da decisão.",
-   "texto": "Segundo o artigo 1.010 do CPC, a apelação deve conter a exposição dos fatos e do direito e as razões do pedido de reforma ou de decretação de nulidade, requisito atendido na espécie, pois as razões recursais enfrentam especificamente [FUNDAMENTO DA DECISÃO IMPUGNADO].",
+   "texto": "Segundo o artigo 1.010 do CPC, a apelação deve conter a exposição dos fatos e do direito e as razões do pedido de reforma ou de decretação de nulidade, requisito atendido na espécie, pois as razões recursais enfrentam especificamente {{FUNDAMENTO DA DECISÃO IMPUGNADO}}.",
    "especificidadesTags": "dialeticidade",
    "fonte": "Modelos 8 — padrão de preliminares",
    "nivelTema": "Ausência de dialeticidade (impugnação específica)",
@@ -1745,7 +1745,7 @@
    "titulo": "Legitimidade pela teoria da asserção (rejeição)",
    "status": "padrao",
    "uso": "Afastar ilegitimidade ativa ou passiva.",
-   "texto": "A legitimidade para a causa é aferida à luz da relação jurídica de direito material deduzida na inicial, segundo a teoria da asserção, figurando [PARTE] como titular [DO DIREITO / DA OBRIGAÇÃO] discutida, conforme [DOCUMENTO] (ID [ID]).",
+   "texto": "A legitimidade para a causa é aferida à luz da relação jurídica de direito material deduzida na inicial, segundo a teoria da asserção, figurando {{PARTE}} como titular {{DO DIREITO / DA OBRIGAÇÃO}} discutida, conforme {{DOCUMENTO}} (ID {{ID}}).",
    "especificidadesTags": "legitimidade",
    "fonte": "Modelos 8 — padrão de preliminares",
    "nivelTema": "Ilegitimidade ativa; Ilegitimidade passiva",
@@ -1829,7 +1829,7 @@
    "titulo": "Preparo comprovado (rejeição da deserção)",
    "status": "padrao",
    "uso": "Rejeitar deserção alegada.",
-   "texto": "O preparo constitui requisito objetivo de admissibilidade recursal e, nos termos do artigo 1.007, caput, do CPC, foi comprovado no ato de interposição do recurso (ID [ID]).",
+   "texto": "O preparo constitui requisito objetivo de admissibilidade recursal e, nos termos do artigo 1.007, caput, do CPC, foi comprovado no ato de interposição do recurso (ID {{ID}}).",
    "especificidadesTags": "preparo; deserção",
    "fonte": "Modelos 8 — padrão de preliminares",
    "nivelTema": "Deserção (ausência ou insuficiência de preparo)",
@@ -1857,7 +1857,7 @@
    "titulo": "Irregularidade de representação não sanada",
    "status": "padrao",
    "uso": "Mandato não juntado após intimação (artigo 76, § 2º, I, do CPC).",
-   "texto": "Intimada para regularizar a representação processual, considerando a falta de juntada de instrumento de mandato (ID [ID]), a parte deixou transcorrer in albis o prazo assinalado, perpetuando, assim, o defeito processual, a inviabilizar a admissibilidade do recurso interposto, na forma do artigo 76, § 2º, I, do CPC.",
+   "texto": "Intimada para regularizar a representação processual, considerando a falta de juntada de instrumento de mandato (ID {{ID}}), a parte deixou transcorrer in albis o prazo assinalado, perpetuando, assim, o defeito processual, a inviabilizar a admissibilidade do recurso interposto, na forma do artigo 76, § 2º, I, do CPC.",
    "especificidadesTags": "representação processual",
    "fonte": "Modelos 8 — padrão de preliminares",
    "nivelTema": "Irregularidade de representação processual",
@@ -1885,7 +1885,7 @@
    "titulo": "Tempestividade — intimação eletrônica (rejeição)",
    "status": "padrao",
    "uso": "Rejeitar intempestividade alegada: contagem a partir da intimação eletrônica.",
-   "texto": "Nos termos do artigo 5º, § 2º, da Lei 11.419/2006, c/c os artigos 219, 224, § 2º, e 231, V, do CPC, a intimação eletrônica considera-se realizada no primeiro dia útil seguinte ao da consulta ou ao término do prazo para consultá-la, iniciando-se a contagem do prazo recursal em [DATA INICIAL], com término em [DATA FINAL]. Tendo sido o recurso interposto em [DATA DA INTERPOSIÇÃO], é tempestivo.",
+   "texto": "Nos termos do artigo 5º, § 2º, da Lei 11.419/2006, c/c os artigos 219, 224, § 2º, e 231, V, do CPC, a intimação eletrônica considera-se realizada no primeiro dia útil seguinte ao da consulta ou ao término do prazo para consultá-la, iniciando-se a contagem do prazo recursal em {{DATA INICIAL}}, com término em {{DATA FINAL}}. Tendo sido o recurso interposto em {{DATA DA INTERPOSIÇÃO}}, é tempestivo.",
    "especificidadesTags": "tempestividade; intimação eletrônica",
    "fonte": "Modelos 8 — padrão de preliminares",
    "nivelTema": "Intempestividade do recurso",
@@ -1943,7 +1943,7 @@
    "categoria": "Seção › 3ª Seção",
    "titulo": "Prova oral genérica — natureza da atividade indefinida",
    "status": "padrao",
-   "texto": "Ademais, a afirmação genérica de que [A PARTE AUTORA] trabalhava em fazendas não permite identificar, com precisão, a natureza jurídica da atividade exercida, isto é, se na condição de segurado especial em regime de economia familiar, empregado rural, diarista ou trabalhador eventual, categorias submetidas a pressupostos jurídicos e probatórios distintos.",
+   "texto": "Ademais, a afirmação genérica de que {{A PARTE AUTORA}} trabalhava em fazendas não permite identificar, com precisão, a natureza jurídica da atividade exercida, isto é, se na condição de segurado especial em regime de economia familiar, empregado rural, diarista ou trabalhador eventual, categorias submetidas a pressupostos jurídicos e probatórios distintos.",
    "variaveis": [
     {
      "campo": "",
@@ -2006,7 +2006,7 @@
    "categoria": "Seção › 3ª Seção",
    "titulo": "Abertura — requisito etário e carência",
    "status": "padrao",
-   "texto": "Na espécie, [A AUTORA/O AUTOR], nascid[A/O] em [DATA] (ID [ID]), completou o requisito etário em [DATA], sujeitando-se à comprovação do exercício de atividade rural pelo período de 180 meses, a título de carência, com requerimento administrativo em [DATA], indeferido por [MOTIVO DO INDEFERIMENTO] (ID [ID]).",
+   "texto": "Na espécie, {{A AUTORA/O AUTOR}}, nascid{{A/O}} em {{DATA}} (ID {{ID}}), completou o requisito etário em {{DATA}}, sujeitando-se à comprovação do exercício de atividade rural pelo período de 180 meses, a título de carência, com requerimento administrativo em {{DATA}}, indeferido por {{MOTIVO DO INDEFERIMENTO}} (ID {{ID}}).",
    "variaveis": [
     {
      "campo": "",
@@ -2077,7 +2077,7 @@
    "categoria": "Seção › 3ª Seção",
    "titulo": "Inventário documental — abertura da lista",
    "status": "padrao",
-   "texto": "Para comprovação da atividade rural, [A AUTORA/O AUTOR] apresentou:\n\n1 - [DOCUMENTO], [DATA E QUALIFICAÇÃO REGISTRADA] (ID [ID]);\n\n2 - [DOCUMENTO] (ID [ID]); e\n\n3 - [DOCUMENTO] (ID [ID]).",
+   "texto": "Para comprovação da atividade rural, {{A AUTORA/O AUTOR}} apresentou:\n\n1 - {{DOCUMENTO}}, {{DATA E QUALIFICAÇÃO REGISTRADA}} (ID {{ID}});\n\n2 - {{DOCUMENTO}} (ID {{ID}}); e\n\n3 - {{DOCUMENTO}} (ID {{ID}}).",
    "variaveis": [
     {
      "campo": "",
@@ -2169,7 +2169,7 @@
    "categoria": "Seção › 3ª Seção",
    "titulo": "Prova documental contrária — improcedência",
    "status": "padrao",
-   "texto": "Logo, a prova documental acostada comprova a inviabilidade de qualificar [A PARTE AUTORA] como segurad[A/O] especial, não se tratando de mera deficiência instrutória, além do que a prova exclusivamente testemunhal, ainda que houvesse dúvida ou início de prova material da condição invocada, não poderia servir, isoladamente, de amparo à pretensão deduzida (Súmula 149/STJ) no sentido do reconhecimento da atividade rural em regime de economia familiar diante da própria vedação legal de caracterização de tal condição.",
+   "texto": "Logo, a prova documental acostada comprova a inviabilidade de qualificar {{A PARTE AUTORA}} como segurad{{A/O}} especial, não se tratando de mera deficiência instrutória, além do que a prova exclusivamente testemunhal, ainda que houvesse dúvida ou início de prova material da condição invocada, não poderia servir, isoladamente, de amparo à pretensão deduzida (Súmula 149/STJ) no sentido do reconhecimento da atividade rural em regime de economia familiar diante da própria vedação legal de caracterização de tal condição.",
    "variaveis": [
     {
      "campo": "",
@@ -2295,7 +2295,7 @@
    "categoria": "Abertura › Tutelas recursais",
    "titulo": "Indeferimento liminar — prévio contraditório",
    "status": "padrao",
-   "texto": "Discute-se [OBJETO DA PRETENSÃO], pretensão acerca da qual não se vislumbra concorrência dos requisitos legais para a concessão da tutela recursal in limine, em detrimento do mínimo contraditório, providência essencial à segura caracterização da probabilidade do direito associada ao perigo de dano ou risco ao resultado útil do processo.",
+   "texto": "Discute-se {{OBJETO DA PRETENSÃO}}, pretensão acerca da qual não se vislumbra concorrência dos requisitos legais para a concessão da tutela recursal in limine, em detrimento do mínimo contraditório, providência essencial à segura caracterização da probabilidade do direito associada ao perigo de dano ou risco ao resultado útil do processo.",
    "variaveis": [
     {
      "campo": "",
@@ -2330,7 +2330,7 @@
    "categoria": "Seção › 3ª Seção",
    "titulo": "É incontroverso que a autora exerceu atividade urbana entre … e…",
    "status": "especifico",
-   "texto": "É incontroverso que a autora exerceu atividade urbana entre [DATA] e [DATA], conforme extrato do CNIS (ID [ID], f. [F]), o que corresponde a pouco mais de [N] meses de trabalho com vínculo urbano, fato reconhecido pela própria autora na inicial.",
+   "texto": "É incontroverso que a autora exerceu atividade urbana entre {{DATA}} e {{DATA}}, conforme extrato do CNIS (ID {{ID}}, f. {{F}}), o que corresponde a pouco mais de {{N}} meses de trabalho com vínculo urbano, fato reconhecido pela própria autora na inicial.",
    "variaveis": [
     {
      "campo": "",
@@ -2366,7 +2366,7 @@
    "categoria": "Seção › 3ª Seção",
    "titulo": "No presente feito pretendeu reconhecer como atividade rural em…",
    "status": "especifico",
-   "texto": "No presente feito pretendeu reconhecer como atividade rural em regime de economia familiar o período de [DATA] a [DATA] e de [DATA] até os dias atuais, segundo narrado na inicial da ação ajuizada em [DATA].",
+   "texto": "No presente feito pretendeu reconhecer como atividade rural em regime de economia familiar o período de {{DATA}} a {{DATA}} e de {{DATA}} até os dias atuais, segundo narrado na inicial da ação ajuizada em {{DATA}}.",
    "variaveis": [
     {
      "campo": "",
@@ -2417,7 +2417,7 @@
    "categoria": "Seção › 3ª Seção",
    "titulo": "Constam vínculos urbanos com empresas da área de importação e…",
    "status": "especifico",
-   "texto": "Ademais, constam vínculos urbanos com empresas da área de importação e exportação ([EMPRESA]), de construção civil ([EMPRESA]), de seleção e agenciamento de mão-de-obra ([EMPRESA]), além de vínculos com pessoas físicas, cuja natureza não é possível aferir nem foi comprovado nos autos.",
+   "texto": "Ademais, constam vínculos urbanos com empresas da área de importação e exportação ({{EMPRESA}}), de construção civil ({{EMPRESA}}), de seleção e agenciamento de mão-de-obra ({{EMPRESA}}), além de vínculos com pessoas físicas, cuja natureza não é possível aferir nem foi comprovado nos autos.",
    "variaveis": [
     {
      "campo": "",
@@ -2498,7 +2498,7 @@
    "categoria": "Seção › 3ª Seção",
    "titulo": "O INSS, juntamente com a contestação, apresentou cópia do…",
    "status": "especifico",
-   "texto": "Por sua vez, o INSS, juntamente com a contestação, apresentou cópia do processo administrativo (ID [ID]), no qual constam, entre outros elementos:",
+   "texto": "Por sua vez, o INSS, juntamente com a contestação, apresentou cópia do processo administrativo (ID {{ID}}), no qual constam, entre outros elementos:",
    "variaveis": [
     {
      "campo": "",
@@ -2744,7 +2744,7 @@
    "categoria": "Seção › 3ª Seção",
    "titulo": "A autodeclaração e a declaração sindical, produzidas…",
    "status": "especifico",
-   "texto": "A autodeclaração e a declaração sindical, produzidas posteriormente e baseadas nas informações prestadas pela interessada, não bastam, isoladamente, para preencher as lacunas existentes. Tampouco podem ser aproveitados os documentos emitidos em nome de [NOME DE TERCEIRO], pois não demonstrada sua integração ao núcleo familiar da autora ou sua relação com a atividade rural alegadamente exercida.",
+   "texto": "A autodeclaração e a declaração sindical, produzidas posteriormente e baseadas nas informações prestadas pela interessada, não bastam, isoladamente, para preencher as lacunas existentes. Tampouco podem ser aproveitados os documentos emitidos em nome de {{NOME DE TERCEIRO}}, pois não demonstrada sua integração ao núcleo familiar da autora ou sua relação com a atividade rural alegadamente exercida.",
    "variaveis": [
     {
      "campo": "",
@@ -3020,7 +3020,7 @@
    "categoria": "Seção › 3ª Seção",
    "titulo": "Conforme documentação juntada (ID …), o autor exerceu atividade…",
    "status": "especifico",
-   "texto": "De fato, conforme documentação juntada (ID [ID]), o autor exerceu atividade urbana como contribuinte individual entre [DATA] a [DATA] e entre [DATA] e [DATA], período superior a 120 dias por ano civil, sendo apto a descaracterizar a alegada condição de segurado especial, nos termos do artigo 11, §9º, III, da Lei 8.212/1991.",
+   "texto": "De fato, conforme documentação juntada (ID {{ID}}), o autor exerceu atividade urbana como contribuinte individual entre {{DATA}} a {{DATA}} e entre {{DATA}} e {{DATA}}, período superior a 120 dias por ano civil, sendo apto a descaracterizar a alegada condição de segurado especial, nos termos do artigo 11, §9º, III, da Lei 8.212/1991.",
    "variaveis": [
     {
      "campo": "",
@@ -3256,7 +3256,7 @@
    "categoria": "Seção › 3ª Seção",
    "titulo": "Conforme pontuado no parecer ministerial (ID …), o período…",
    "status": "especifico",
-   "texto": "Ademais, conforme pontuado no parecer ministerial (ID [ID]), o período certificado pela FUNAI, de [DATA] a [DATA], corresponde a cerca de 42 anos, ou 504 meses. Assim, mesmo descontadas as 79 contribuições urbanas indicadas pelo INSS no procedimento administrativo, remanesceriam cerca de 425 meses de atividade como segurado especial, lapso muito superior aos 180 meses exigidos para a carência da aposentadoria por idade rural.",
+   "texto": "Ademais, conforme pontuado no parecer ministerial (ID {{ID}}), o período certificado pela FUNAI, de {{DATA}} a {{DATA}}, corresponde a cerca de 42 anos, ou 504 meses. Assim, mesmo descontadas as 79 contribuições urbanas indicadas pelo INSS no procedimento administrativo, remanesceriam cerca de 425 meses de atividade como segurado especial, lapso muito superior aos 180 meses exigidos para a carência da aposentadoria por idade rural.",
    "variaveis": [
     {
      "campo": "",
@@ -3297,7 +3297,7 @@
    "categoria": "Seção › 3ª Seção",
    "titulo": "O INSS sustentou a ausência de início de prova material em nome…",
    "status": "especifico",
-   "texto": "Por sua vez, o INSS sustentou a ausência de início de prova material em nome da autora, pois os documentos relativos ao genitor não comprovam o labor rural próprio da requerente no período de carência e que os registros sindicais e a declaração de atividade rural são posteriores ao implemento etário. Alegou que a procedência veio fundada exclusivamente em prova testemunhal, em afronta ao artigo 55, § 3º, da Lei 8.213/1991 e à Súmula 149/STJ. Aduziu, ao final, a existência de vínculos urbanos do cônjuge, o recebimento de aposentadoria urbana em valor superior ao salário mínimo, a participação dele em empresa desde [DATA] e a falta de comprovação do labor rural no período imediatamente anterior ao implemento etário ou à DER.",
+   "texto": "Por sua vez, o INSS sustentou a ausência de início de prova material em nome da autora, pois os documentos relativos ao genitor não comprovam o labor rural próprio da requerente no período de carência e que os registros sindicais e a declaração de atividade rural são posteriores ao implemento etário. Alegou que a procedência veio fundada exclusivamente em prova testemunhal, em afronta ao artigo 55, § 3º, da Lei 8.213/1991 e à Súmula 149/STJ. Aduziu, ao final, a existência de vínculos urbanos do cônjuge, o recebimento de aposentadoria urbana em valor superior ao salário mínimo, a participação dele em empresa desde {{DATA}} e a falta de comprovação do labor rural no período imediatamente anterior ao implemento etário ou à DER.",
    "variaveis": [
     {
      "campo": "",
@@ -3348,7 +3348,7 @@
    "categoria": "Seção › 3ª Seção",
    "titulo": "REsp 1.321.493, Rel. Min. HERMAN BENJAMIN, DJEN … (Tema 554)…",
    "status": "padrao",
-   "texto": "REsp 1.321.493, Rel. Min. HERMAN BENJAMIN, DJEN [DATA] (Tema 554): “Aplica-se a Súmula 149/STJ ('A prova exclusivamente testemunhal não basta à comprovação da atividade rurícola, para efeitos da obtenção de benefício previdenciário') aos trabalhadores rurais denominados 'boias-frias', sendo imprescindível a apresentação de início de prova material. Por outro lado, considerando a inerente dificuldade probatória da condição de trabalhador campesino, a apresentação de prova material somente sobre parte do lapso temporal pretendido não implica violação da Súmula 149/STJ, cuja aplicação é mitigada se a reduzida prova material for complementada por idônea e robusta prova testemunhal.”",
+   "texto": "REsp 1.321.493, Rel. Min. HERMAN BENJAMIN, DJEN {{DATA}} (Tema 554): “Aplica-se a Súmula 149/STJ ('A prova exclusivamente testemunhal não basta à comprovação da atividade rurícola, para efeitos da obtenção de benefício previdenciário') aos trabalhadores rurais denominados 'boias-frias', sendo imprescindível a apresentação de início de prova material. Por outro lado, considerando a inerente dificuldade probatória da condição de trabalhador campesino, a apresentação de prova material somente sobre parte do lapso temporal pretendido não implica violação da Súmula 149/STJ, cuja aplicação é mitigada se a reduzida prova material for complementada por idônea e robusta prova testemunhal.”",
    "variaveis": [
     {
      "campo": "",
@@ -3474,7 +3474,7 @@
    "categoria": "Seção › 3ª Seção",
    "titulo": "Verificando a prova dos autos, constata-se que, quanto à…",
    "status": "especifico",
-   "texto": "Verificando a prova dos autos, constata-se que, quanto à propriedade no assentamento rural, a certidão do INCRA e o espelho da unidade familiar do Sistema Sala da Cidadania do INCRA apenas provam vínculo rural em regime de economia familiar e situação cadastral a partir de [DATA] (ID [ID] e [ID]), sem abranger, pois, o período desde 2000 e, portanto, referindo-se a interregno que não poderia ter sido sequer considerado no indeferimento administrativo de 2015.",
+   "texto": "Verificando a prova dos autos, constata-se que, quanto à propriedade no assentamento rural, a certidão do INCRA e o espelho da unidade familiar do Sistema Sala da Cidadania do INCRA apenas provam vínculo rural em regime de economia familiar e situação cadastral a partir de {{DATA}} (ID {{ID}} e {{ID}}), sem abranger, pois, o período desde 2000 e, portanto, referindo-se a interregno que não poderia ter sido sequer considerado no indeferimento administrativo de 2015.",
    "variaveis": [
     {
      "campo": "",
@@ -3575,7 +3575,7 @@
    "categoria": "Seção › 3ª Seção",
    "titulo": "A prova oral, de igual modo, não infirma a conclusão alcançada.…",
    "status": "especifico",
-   "texto": "A prova oral, de igual modo, não infirma a conclusão alcançada. Conforme se extrai dos relatos produzidos em audiência, as testemunhas afirmaram conhecer a autora como pessoa vinculada ao meio rural, mencionando residência em fazenda e venda de produtos como leite, queijo, ovos, banha, mandioca, abóbora e outros gêneros (ID [ID], [ID] e [ID]). Contudo, os depoimentos não se revelaram aptos a suprir a ausência de início razoável de prova material contemporânea e idônea, tampouco demonstraram, com segurança, o exercício de atividade rural pela autora, em regime de economia familiar, durante o período correspondente à carência.",
+   "texto": "A prova oral, de igual modo, não infirma a conclusão alcançada. Conforme se extrai dos relatos produzidos em audiência, as testemunhas afirmaram conhecer a autora como pessoa vinculada ao meio rural, mencionando residência em fazenda e venda de produtos como leite, queijo, ovos, banha, mandioca, abóbora e outros gêneros (ID {{ID}}, {{ID}} e {{ID}}). Contudo, os depoimentos não se revelaram aptos a suprir a ausência de início razoável de prova material contemporânea e idônea, tampouco demonstraram, com segurança, o exercício de atividade rural pela autora, em regime de economia familiar, durante o período correspondente à carência.",
    "variaveis": [
     {
      "campo": "",
@@ -3806,7 +3806,7 @@
    "categoria": "Seção › 3ª Seção",
    "titulo": "Quanto à prova oral, as testemunhas ouvidas (mídias de ID …, ……",
    "status": "especifico",
-   "texto": "Quanto à prova oral, as testemunhas ouvidas (mídias de ID [ID], [ID] e [ID]), embora tenham relatado conhecer o autor no meio rural e mencionado propriedades nas quais ele teria trabalhado, não suprem a deficiência da prova material. Os depoimentos servem apenas como prova complementar, não sendo suficientes para substituir o início razoável de prova documental exigido pelo artigo 55, § 3º, da Lei 8.213/1991 e pela Súmula 149/STJ.",
+   "texto": "Quanto à prova oral, as testemunhas ouvidas (mídias de ID {{ID}}, {{ID}} e {{ID}}), embora tenham relatado conhecer o autor no meio rural e mencionado propriedades nas quais ele teria trabalhado, não suprem a deficiência da prova material. Os depoimentos servem apenas como prova complementar, não sendo suficientes para substituir o início razoável de prova documental exigido pelo artigo 55, § 3º, da Lei 8.213/1991 e pela Súmula 149/STJ.",
    "variaveis": [
     {
      "campo": "",
@@ -4022,7 +4022,7 @@
    "categoria": "Seção › 3ª Seção",
    "titulo": "Quanto à prova oral, as testemunhas ouvidas (ID … e …)…",
    "status": "especifico",
-   "texto": "Quanto à prova oral, as testemunhas ouvidas (ID [ID] e [ID]) declararam conhecer a autora no meio rural e mencionaram propriedades em que ela teria trabalhado. Contudo, tais depoimentos não podem suprir a deficiência do substrato probatório, servindo apenas como prova complementar, visto não serem suficientes para substituir o início razoável de prova documental exigido pelo artigo 55, § 3º, da Lei 8.213/1991 e pela Súmula 149/STJ.",
+   "texto": "Quanto à prova oral, as testemunhas ouvidas (ID {{ID}} e {{ID}}) declararam conhecer a autora no meio rural e mencionaram propriedades em que ela teria trabalhado. Contudo, tais depoimentos não podem suprir a deficiência do substrato probatório, servindo apenas como prova complementar, visto não serem suficientes para substituir o início razoável de prova documental exigido pelo artigo 55, § 3º, da Lei 8.213/1991 e pela Súmula 149/STJ.",
    "variaveis": [
     {
      "campo": "",
@@ -4073,7 +4073,7 @@
    "categoria": "Seção › 3ª Seção",
    "titulo": "Os dados constantes do CNIS registram recolhimentos na…",
    "status": "especifico",
-   "texto": "Os dados constantes do CNIS registram recolhimentos na categoria de contribuinte individual entre janeiro de 2020 e novembro de 2021 (ID [ID] e [ID]). Todavia, não identificam a atividade que lhes deu origem, tampouco permitem inferir, por si, o exercício de trabalho urbano ou o afastamento do labor campesino.",
+   "texto": "Os dados constantes do CNIS registram recolhimentos na categoria de contribuinte individual entre janeiro de 2020 e novembro de 2021 (ID {{ID}} e {{ID}}). Todavia, não identificam a atividade que lhes deu origem, tampouco permitem inferir, por si, o exercício de trabalho urbano ou o afastamento do labor campesino.",
    "variaveis": [
     {
      "campo": "",
@@ -4139,7 +4139,7 @@
    "categoria": "Seção › 3ª Seção",
    "titulo": "O início de prova material não se limita à declaração…",
    "status": "especifico",
-   "texto": "No caso, o início de prova material não se limita à declaração particular de convivência e à certidão eleitoral emitida em nome de [NOME DO COMPANHEIRO]. A declaração de convivência, examinada em conjunto com a certidão de nascimento do filho comum, confere suporte ao vínculo familiar alegado. Ademais, o requerimento de matrícula do filho, as fichas de atendimento médico e os registros de fornecimento de leite emitidos em nome da autora, nos anos de 2019 e 2022, evidenciam a vinculação da requerente ao meio rural em diferentes momentos.",
+   "texto": "No caso, o início de prova material não se limita à declaração particular de convivência e à certidão eleitoral emitida em nome de {{NOME DO COMPANHEIRO}}. A declaração de convivência, examinada em conjunto com a certidão de nascimento do filho comum, confere suporte ao vínculo familiar alegado. Ademais, o requerimento de matrícula do filho, as fichas de atendimento médico e os registros de fornecimento de leite emitidos em nome da autora, nos anos de 2019 e 2022, evidenciam a vinculação da requerente ao meio rural em diferentes momentos.",
    "variaveis": [
     {
      "campo": "",
@@ -4160,7 +4160,7 @@
    "categoria": "Seção › 3ª Seção",
    "titulo": "Embora parte da documentação esteja em nome do companheiro, ……",
    "status": "especifico",
-   "texto": "Embora parte da documentação esteja em nome do companheiro, [NOME DO COMPANHEIRO], tal circunstância não impede a valoração dos documentos como início de prova material, pois o vínculo familiar entre os conviventes encontra respaldo nas provas juntadas aos autos. O registro profissional do companheiro, ainda que não comprove diretamente o trabalho rural da autora, reforça o quadro de laço familiar com aquele meio social, pois as anotações referem-se a vínculos de emprego rural, desde 1989 até 1995, sem prejuízo, portanto, de atividades de subsistência em regime de economia familiar no período remanescente.",
+   "texto": "Embora parte da documentação esteja em nome do companheiro, {{NOME DO COMPANHEIRO}}, tal circunstância não impede a valoração dos documentos como início de prova material, pois o vínculo familiar entre os conviventes encontra respaldo nas provas juntadas aos autos. O registro profissional do companheiro, ainda que não comprove diretamente o trabalho rural da autora, reforça o quadro de laço familiar com aquele meio social, pois as anotações referem-se a vínculos de emprego rural, desde 1989 até 1995, sem prejuízo, portanto, de atividades de subsistência em regime de economia familiar no período remanescente.",
    "variaveis": [
     {
      "campo": "",
@@ -4316,7 +4316,7 @@
    "categoria": "Seção › 3ª Seção",
    "titulo": "Acolhe-se, a propósito, o douto parecer ministerial da lavra do…",
    "status": "especifico",
-   "texto": "Acolhe-se, a propósito, o douto parecer ministerial da lavra do Procurador Regional da República, [NOME DO PROCURADOR], assim fundamentado (ID [ID]):",
+   "texto": "Acolhe-se, a propósito, o douto parecer ministerial da lavra do Procurador Regional da República, {{NOME DO PROCURADOR}}, assim fundamentado (ID {{ID}}):",
    "variaveis": [
     {
      "campo": "",
@@ -4357,7 +4357,7 @@
    "categoria": "Seção › 3ª Seção",
    "titulo": "CADÚNICO (ID …), atualizado em …, no qual há a informação de…",
    "status": "especifico",
-   "texto": "- CADÚNICO (ID [ID]), atualizado em [DATA], no qual há a informação de que a demandante e o seu companheiro, o Sr. [NOME DO COMPANHEIRO], residem no Assentamento Mateira, Lote nº 49, Paraíso das Águas - MS;",
+   "texto": "- CADÚNICO (ID {{ID}}), atualizado em {{DATA}}, no qual há a informação de que a demandante e o seu companheiro, o Sr. {{NOME DO COMPANHEIRO}}, residem no Assentamento Mateira, Lote nº 49, Paraíso das Águas - MS;",
    "variaveis": [
     {
      "campo": "",
@@ -4388,7 +4388,7 @@
    "categoria": "Seção › 3ª Seção",
    "titulo": "Vale desconto para compra de horas de serviço da patrulha…",
    "status": "especifico",
-   "texto": "- Vale desconto para compra de horas de serviço da patrulha mecanizada, do ACPA Mateira, zona rural, Chapadão do Sul - MS, em nome da demandante, datado de [DATA] (ID [ID]).",
+   "texto": "- Vale desconto para compra de horas de serviço da patrulha mecanizada, do ACPA Mateira, zona rural, Chapadão do Sul - MS, em nome da demandante, datado de {{DATA}} (ID {{ID}}).",
    "variaveis": [
     {
      "campo": "",
@@ -4444,7 +4444,7 @@
    "categoria": "Seção › 3ª Seção",
    "titulo": "Entretanto, nenhum documento em nome do Sr. …, seu genitor, foi…",
    "status": "especifico",
-   "texto": "Entretanto, nenhum documento em nome do Sr. [NOME DO GENITOR], seu genitor, foi apresentado, e os que se encontram no nome do Sr. [NOME DO COMPANHEIRO] são datados a partir do ano de 2021.",
+   "texto": "Entretanto, nenhum documento em nome do Sr. {{NOME DO GENITOR}}, seu genitor, foi apresentado, e os que se encontram no nome do Sr. {{NOME DO COMPANHEIRO}} são datados a partir do ano de 2021.",
    "variaveis": [
     {
      "campo": "",
@@ -4725,7 +4725,7 @@
    "categoria": "Seção › 3ª Seção",
    "titulo": "Há assim, alinhamento coerente entre o dimensionamento da…",
    "status": "padrao",
-   "texto": "Há assim, alinhamento coerente entre o dimensionamento da propriedade do segurado especial, sua capacidade produtiva e a perspectiva de faturamento tida por aceitável pela legislação. Neste mesmo sentido, precedente desta Turma Regional: ApCiv [PROCESSO], Rel. Des. Fed. CARLOS MUTA, DJEN [DATA].",
+   "texto": "Há assim, alinhamento coerente entre o dimensionamento da propriedade do segurado especial, sua capacidade produtiva e a perspectiva de faturamento tida por aceitável pela legislação. Neste mesmo sentido, precedente desta Turma Regional: ApCiv @processo, Rel. Des. Fed. CARLOS MUTA, DJEN {{DATA}}.",
    "variaveis": [
     {
      "campo": "",
@@ -4871,7 +4871,7 @@
    "categoria": "Seção › 3ª Seção",
    "titulo": "A prova testemunhal, ainda que eventualmente coesa (ID … e …)…",
    "status": "especifico",
-   "texto": "A prova testemunhal, ainda que eventualmente coesa (ID [ID] e [ID]), não pode suprir a absoluta inexistência de início de prova material, pois tal solução contrariaria, expressamente, o disposto no artigo 55, § 3º, da Lei 8.213/1991 e na Súmula 149/STJ. A funcionalidade que se admite para a prova oral, no cenário do devido processo legal, é a de elemento de complemento instrutório diante de lacunas da prova documental, presumindo, assim, a existência de início de prova material. Assim sendo, aquela não pode substituir esta como base probatória do fato constitutivo do direito alegado.",
+   "texto": "A prova testemunhal, ainda que eventualmente coesa (ID {{ID}} e {{ID}}), não pode suprir a absoluta inexistência de início de prova material, pois tal solução contrariaria, expressamente, o disposto no artigo 55, § 3º, da Lei 8.213/1991 e na Súmula 149/STJ. A funcionalidade que se admite para a prova oral, no cenário do devido processo legal, é a de elemento de complemento instrutório diante de lacunas da prova documental, presumindo, assim, a existência de início de prova material. Assim sendo, aquela não pode substituir esta como base probatória do fato constitutivo do direito alegado.",
    "variaveis": [
     {
      "campo": "",
@@ -4907,7 +4907,7 @@
    "categoria": "Seção › 3ª Seção",
    "titulo": "O INSS sustentou que o autor não comprovou o exercício de…",
    "status": "especifico",
-   "texto": "Por sua vez, o INSS sustentou que o autor não comprovou o exercício de atividade rural no período imediatamente anterior ao requerimento administrativo ou ao implemento do requisito etário. Alegou que o último vínculo rural encerrou-se em [DATA], de modo que inexiste início de prova material da continuidade do labor rural após o referido marco temporal, além de constar registro de vínculo urbano no ano de 2020. Aduziu, ao final, que a CTPS, certidões e demais documentos não demonstram o exercício de atividade rural em período próximo à DER,em contrariedade ao exigido pelo Tema 642/STJ,razão pela qual concluiu pelo não preenchimento dos requisitos necessários à concessão do benefício.",
+   "texto": "Por sua vez, o INSS sustentou que o autor não comprovou o exercício de atividade rural no período imediatamente anterior ao requerimento administrativo ou ao implemento do requisito etário. Alegou que o último vínculo rural encerrou-se em {{DATA}}, de modo que inexiste início de prova material da continuidade do labor rural após o referido marco temporal, além de constar registro de vínculo urbano no ano de 2020. Aduziu, ao final, que a CTPS, certidões e demais documentos não demonstram o exercício de atividade rural em período próximo à DER,em contrariedade ao exigido pelo Tema 642/STJ,razão pela qual concluiu pelo não preenchimento dos requisitos necessários à concessão do benefício.",
    "variaveis": [
     {
      "campo": "",
@@ -5273,7 +5273,7 @@
    "categoria": "Seção › 3ª Seção",
    "titulo": "Como visto, a própria tese limita sua incidência aos óbitos…",
    "status": "especifico",
-   "texto": "Como visto, a própria tese limita sua incidência aos óbitos ocorridos após a entrada em vigor da MP 871/2019, situação diversa da presente demanda, cujo fato gerador ocorreu em [DATA].",
+   "texto": "Como visto, a própria tese limita sua incidência aos óbitos ocorridos após a entrada em vigor da MP 871/2019, situação diversa da presente demanda, cujo fato gerador ocorreu em {{DATA}}.",
    "variaveis": [
     {
      "campo": "",
@@ -5369,7 +5369,7 @@
    "categoria": "Seção › 3ª Seção",
    "titulo": "ApCiv …, Rel. Des. Fed. INES VIRGINIA, DJe …: \"DIREITO…",
    "status": "especifico",
-   "texto": "ApCiv [PROCESSO], Rel. Des. Fed. INES VIRGINIA, DJe [DATA]: \"DIREITO PREVIDENCIÁRIO. APELAÇÃO CÍVEL. PENSÃO POR MORTE. TERMO INICIAL DO BENEFÍCIO. DEPENDENTE MENOR ABSOLUTAMENTE INCAPAZ. NÃO INCIDÊNCIA DO PRAZO PREVISTO NO ART. 74 DA LEI 8.213/91. PROTEÇÃO INTEGRAL DA CRIANÇA E DO ADOLESCENTE. RECURSO DESPROVIDO. HONORÁRIOS RECURSAIS MAJORADOS.I. CASO EM EXAME Apelação interposta pelo INSS contra sentença que fixou o termo inicial da pensão por morte em [DATA], data do óbito do segurado, em favor de dependente menor absolutamente incapaz. O INSS sustenta que o benefício deveria ter início na data do requerimento administrativo.II. QUESTÃO EM DISCUSSÃO A questão em discussão consiste em definir se o prazo previsto no art. 74 da Lei nº 8.213/91, alterado pela Lei nº 13.846/2019, incide em desfavor de dependente menor absolutamente incapaz, limitando o termo inicial da pensão por morte à data do requerimento administrativo.III. RAZÕES DE DECIDIR A pensão por morte é regida pela legislação vigente à época do óbito, nos termos do princípio tempus regit actum e da Súmula 340 do STJ. O art. 74 da Lei 8.213/91, com redação dada pela Lei 13.846/2019, prevê que a retroação do benefício à data do óbito somente ocorre se o requerimento for apresentado em até 180 dias (dependentes menores de 16 anos) ou 90 dias (demais dependentes). O art. 198, I, do Código Civil estabelece que não corre prescrição contra menores de 16 anos, afastando a incidência do prazo decadencial previsto na legislação previdenciária quando o dependente é absolutamente incapaz. Na antinomia entre a regra previdenciária e a norma de proteção integral ao menor, prevalece esta última, conforme o art. 227 da CF/88, que assegura prioridade absoluta aos direitos da criança e do adolescente. Eventual negligência do representante legal não pode prejudicar direito fundamental de natureza indisponível do absolutamente incapaz, devendo o benefício ser reconhecido desde a data do óbito do segurado. Juros de mora e correção monetária devem observar os critérios do Manual de Cálculos da Justiça Federal vigente na fase de execução. Desprovido o recurso, aplica-se o art. 85, § 11, do CPC/2015, majorando-se os honorários advocatícios de 10% para 12%.IV. DISPOSITIVO E TESE Recurso desprovido\". (g.n)",
+   "texto": "ApCiv @processo, Rel. Des. Fed. INES VIRGINIA, DJe {{DATA}}: \"DIREITO PREVIDENCIÁRIO. APELAÇÃO CÍVEL. PENSÃO POR MORTE. TERMO INICIAL DO BENEFÍCIO. DEPENDENTE MENOR ABSOLUTAMENTE INCAPAZ. NÃO INCIDÊNCIA DO PRAZO PREVISTO NO ART. 74 DA LEI 8.213/91. PROTEÇÃO INTEGRAL DA CRIANÇA E DO ADOLESCENTE. RECURSO DESPROVIDO. HONORÁRIOS RECURSAIS MAJORADOS.I. CASO EM EXAME Apelação interposta pelo INSS contra sentença que fixou o termo inicial da pensão por morte em {{DATA}}, data do óbito do segurado, em favor de dependente menor absolutamente incapaz. O INSS sustenta que o benefício deveria ter início na data do requerimento administrativo.II. QUESTÃO EM DISCUSSÃO A questão em discussão consiste em definir se o prazo previsto no art. 74 da Lei nº 8.213/91, alterado pela Lei nº 13.846/2019, incide em desfavor de dependente menor absolutamente incapaz, limitando o termo inicial da pensão por morte à data do requerimento administrativo.III. RAZÕES DE DECIDIR A pensão por morte é regida pela legislação vigente à época do óbito, nos termos do princípio tempus regit actum e da Súmula 340 do STJ. O art. 74 da Lei 8.213/91, com redação dada pela Lei 13.846/2019, prevê que a retroação do benefício à data do óbito somente ocorre se o requerimento for apresentado em até 180 dias (dependentes menores de 16 anos) ou 90 dias (demais dependentes). O art. 198, I, do Código Civil estabelece que não corre prescrição contra menores de 16 anos, afastando a incidência do prazo decadencial previsto na legislação previdenciária quando o dependente é absolutamente incapaz. Na antinomia entre a regra previdenciária e a norma de proteção integral ao menor, prevalece esta última, conforme o art. 227 da CF/88, que assegura prioridade absoluta aos direitos da criança e do adolescente. Eventual negligência do representante legal não pode prejudicar direito fundamental de natureza indisponível do absolutamente incapaz, devendo o benefício ser reconhecido desde a data do óbito do segurado. Juros de mora e correção monetária devem observar os critérios do Manual de Cálculos da Justiça Federal vigente na fase de execução. Desprovido o recurso, aplica-se o art. 85, § 11, do CPC/2015, majorando-se os honorários advocatícios de 10% para 12%.IV. DISPOSITIVO E TESE Recurso desprovido\". (g.n)",
    "variaveis": [
     {
      "campo": "",
@@ -5395,7 +5395,7 @@
    "categoria": "Seção › 3ª Seção",
    "titulo": "Demonstrados os requisitos legais, impõe-se a reforma da…",
    "status": "padrao",
-   "texto": "Demonstrados os requisitos legais, impõe-se a reforma da sentença para a concessão da pensão por morte, desde o óbito ([DATA]).",
+   "texto": "Demonstrados os requisitos legais, impõe-se a reforma da sentença para a concessão da pensão por morte, desde o óbito ({{DATA}}).",
    "variaveis": [
     {
      "campo": "",
@@ -5416,7 +5416,7 @@
    "categoria": "Seção › 3ª Seção",
    "titulo": "O óbito do instituidor (…) é incontroverso, ocorrido em ……",
    "status": "especifico",
-   "texto": "O óbito do instituidor ([NOME DO INSTITUIDOR]) é incontroverso, ocorrido em [DATA], conforme certidão de óbito (ID [ID]).",
+   "texto": "O óbito do instituidor ({{NOME DO INSTITUIDOR}}) é incontroverso, ocorrido em {{DATA}}, conforme certidão de óbito (ID {{ID}}).",
    "variaveis": [
     {
      "campo": "",
@@ -5462,7 +5462,7 @@
    "categoria": "Seção › 3ª Seção",
    "titulo": "1) certidão de óbito do instituidor, constando como declarante…",
    "status": "padrao",
-   "texto": "1) certidão de óbito do instituidor, constando como declarante terceiro e residência na [ENDEREÇO], em Terenos/MS (ID [ID]);",
+   "texto": "1) certidão de óbito do instituidor, constando como declarante terceiro e residência na {{ENDEREÇO}}, em Terenos/MS (ID {{ID}});",
    "variaveis": [
     {
      "campo": "",
@@ -5488,7 +5488,7 @@
    "categoria": "Seção › 3ª Seção",
    "titulo": "2) notas fiscais de comercialização de leite em nome do…",
    "status": "especifico",
-   "texto": "2) notas fiscais de comercialização de leite em nome do falecido, referentes ao período de 2000 a 2008, vinculadas à Chácara Santa Catarina, Terenos/MS (ID [ID]);",
+   "texto": "2) notas fiscais de comercialização de leite em nome do falecido, referentes ao período de 2000 a 2008, vinculadas à Chácara Santa Catarina, Terenos/MS (ID {{ID}});",
    "variaveis": [
     {
      "campo": "",
@@ -5509,7 +5509,7 @@
    "categoria": "Seção › 3ª Seção",
    "titulo": "3) certidão de casamento em inteiro teor, na qual o instituidor…",
    "status": "especifico",
-   "texto": "3) certidão de casamento em inteiro teor, na qual o instituidor foi qualificado como lavrador, datada de [DATA](ID [ID]);",
+   "texto": "3) certidão de casamento em inteiro teor, na qual o instituidor foi qualificado como lavrador, datada de {{DATA}}(ID {{ID}});",
    "variaveis": [
     {
      "campo": "",
@@ -5535,7 +5535,7 @@
    "categoria": "Seção › 3ª Seção",
    "titulo": "5) prontuários médicos do falecido, referentes ao período de…",
    "status": "especifico",
-   "texto": "5) prontuários médicos do falecido, referentes ao período de 2016 a 2019, indicando residência na [ENDEREÇO], em Mundo Novo/MS (ID [ID]); e",
+   "texto": "5) prontuários médicos do falecido, referentes ao período de 2016 a 2019, indicando residência na {{ENDEREÇO}}, em Mundo Novo/MS (ID {{ID}}); e",
    "variaveis": [
     {
      "campo": "",
@@ -5681,7 +5681,7 @@
    "categoria": "Seção › 3ª Seção",
    "titulo": "Primeiramente não foi a autora a declarante do óbito, mas a…",
    "status": "especifico",
-   "texto": "Com efeito, primeiramente não foi a autora a declarante do óbito, mas a pessoa de [NOME DO DECLARANTE], constando que o falecido deixou dois filhos maiores, sem qualquer referência à autora como companheira. Não restou esclarecido sequer se tais filhos resultaram do próprio relacionamento do falecido com a autora para demonstrar o vínculo pretendido, ao menos em período passado. Ainda que houvesse filhos em comum, seria necessário, assim mesmo, demonstrar a continuidade da união estável até, ao menos, 24 meses antes do óbito.",
+   "texto": "Com efeito, primeiramente não foi a autora a declarante do óbito, mas a pessoa de {{NOME DO DECLARANTE}}, constando que o falecido deixou dois filhos maiores, sem qualquer referência à autora como companheira. Não restou esclarecido sequer se tais filhos resultaram do próprio relacionamento do falecido com a autora para demonstrar o vínculo pretendido, ao menos em período passado. Ainda que houvesse filhos em comum, seria necessário, assim mesmo, demonstrar a continuidade da união estável até, ao menos, 24 meses antes do óbito.",
    "variaveis": [
     {
      "campo": "",

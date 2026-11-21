@@ -70,7 +70,7 @@
         },
         {
           "n": "Abertura (variante)",
-          "f": "Trata-se de apelação à sentença (ID …) que [verbo nuclear] …",
+          "f": "Trata-se de apelação à sentença (ID …) que {{verbo nuclear}} …",
           "r": [
             "Honorários em nova frase."
           ],
@@ -86,7 +86,7 @@
         },
         {
           "n": "Razões",
-          "f": "Apelou [o autor / a autora] (ID …), alegando, em suma: (1) […]; (2) […]; e (3) […]",
+          "f": "Apelou {{o autor / a autora}} (ID …), alegando, em suma: (1) […]; (2) […]; e (3) […]",
           "r": [
             "Orações no infinitivo.",
             "O pedido integra o último item ou fecha o parágrafo com “pelo que requereu”.",
@@ -114,7 +114,7 @@
                 },
                 {
                   "lab": "Com preliminar",
-                  "f": "Houve contrarrazões, apontando [preliminar] (ID …)."
+                  "f": "Houve contrarrazões, apontando {{preliminar}} (ID …)."
                 }
               ]
             },
@@ -135,7 +135,7 @@
           "alts": [
             {
               "lab": "Opinou no mérito",
-              "f": "A Procuradoria Regional da República opinou pelo [provimento / desprovimento] do recurso (ID …)."
+              "f": "A Procuradoria Regional da República opinou pelo {{provimento / desprovimento}} do recurso (ID …)."
             },
             {
               "lab": "Pelo prosseguimento",
@@ -143,7 +143,7 @@
             },
             {
               "lab": "Sem exame do mérito",
-              "f": "A Procuradoria Regional da República deixou de analisar o mérito, considerando [motivo] (ID …)."
+              "f": "A Procuradoria Regional da República deixou de analisar o mérito, considerando {{motivo}} (ID …)."
             },
             {
               "lab": "Sem intervenção",
@@ -262,7 +262,7 @@
           "alts": [
             {
               "lab": "Autor com gratuidade",
-              "f": "Pela sucumbência recursal, [o autor / a autora] deve suportar condenação adicional (artigo 85, § 11, do CPC), no equivalente a 1%, a ser acrescido ao fixado na origem, observada a gratuidade de justiça concedida (artigo 98, § 3º, do CPC)."
+              "f": "Pela sucumbência recursal, {{o autor / a autora}} deve suportar condenação adicional (artigo 85, § 11, do CPC), no equivalente a 1%, a ser acrescido ao fixado na origem, observada a gratuidade de justiça concedida (artigo 98, § 3º, do CPC)."
             },
             {
               "lab": "INSS ou ré (previdenciário)",
@@ -396,7 +396,7 @@
       "elementos": [
         {
           "n": "Cabeçalho",
-          "f": "[RAMO]. [CLASSE]. [ASSUNTO]. [CONCLUSÃO].",
+          "f": "@ramo. @classe_ementa. @assunto_ementa. @conclusao.",
           "r": [
             "Negrito e caixa alta.",
             "Ordem: ramo → classe → assunto → conclusão, em até 3 linhas."
@@ -427,7 +427,7 @@
         },
         {
           "n": "IV. DISPOSITIVO",
-          "f": "[dispositivo da ementa]",
+          "f": "@dispositivo_ementa",
           "r": [
             "Preenchido a partir do dispositivo do voto; confira a redação."
           ],
@@ -465,7 +465,7 @@
       "elementos": [
         {
           "n": "Fórmula",
-          "f": "Vistos e relatados estes autos em que são partes as acima indicadas, a Turma Regional de Mato Grosso do Sul, por unanimidade, [resultado], nos termos do voto do Desembargador Federal CARLOS MUTA (Relator). Votaram o [2º julgador] e o [3º julgador], nos termos do relatório e voto que ficam fazendo parte integrante do presente julgado.",
+          "f": "Vistos e relatados estes autos em que são partes as acima indicadas, a Turma Regional de Mato Grosso do Sul, por unanimidade, @resultado, nos termos do voto do Desembargador Federal CARLOS MUTA (Relator). Votaram o {{2º julgador}} e o {{3º julgador}}, nos termos do relatório e voto que ficam fazendo parte integrante do presente julgado.",
           "r": [
             "O resultado repete o dispositivo do voto.",
             "O resultado vem do dispositivo do voto; os julgadores vêm preenchidos e podem ser trocados."
@@ -559,7 +559,7 @@
       "elementos": [
         {
           "n": "Baixa à origem para exame dos ED",
-          "f": "Vistos.\n[circunstâncias do caso, com ID’s e datas]\nAssim, mostra-se inviável, neste momento, a análise da apelação interposta [pela parte …].\nAnte o exposto, determino a baixa dos autos à Vara de origem para o exame dos embargos de declaração.",
+          "f": "Vistos.\n{{circunstâncias do caso, com ID’s e datas}}\nAssim, mostra-se inviável, neste momento, a análise da apelação interposta {{pela parte …}}.\nAnte o exposto, determino a baixa dos autos à Vara de origem para o exame dos embargos de declaração.",
           "r": [
             "Embargos de declaração pendentes na origem.",
             "[VALIDAR] O modelo do gabinete usa “Ante o exposto”; a regra do despacho dispensa a fórmula."
@@ -598,17 +598,17 @@
             },
             {
               "lab": "Só prequestionamento",
-              "f": "Os embargos de declaração, embora tenham apontado omissão, aludiram apenas à necessidade de garantir prequestionamento de normas discutidas, em termos de violação ou negativa de vigência, objetivando acesso às instâncias extraordinárias.\nNão houve impugnação específica nem indicação de omissão a exigir qualquer abordagem ou consideração adicional em face do que constou do acórdão embargado, pleiteando-se, como visto, apenas que se registre que foi alegada violação ou negativa de vigência aos [dispositivos indicados].\nDe toda sorte, evidencia-se, revelando inexistência de omissão, ainda que para efeito de mero prequestionamento, que o acórdão restou devidamente fundamentado quanto à conclusão adotada, relacionada ao [objeto da conclusão]."
+              "f": "Os embargos de declaração, embora tenham apontado omissão, aludiram apenas à necessidade de garantir prequestionamento de normas discutidas, em termos de violação ou negativa de vigência, objetivando acesso às instâncias extraordinárias.\nNão houve impugnação específica nem indicação de omissão a exigir qualquer abordagem ou consideração adicional em face do que constou do acórdão embargado, pleiteando-se, como visto, apenas que se registre que foi alegada violação ou negativa de vigência aos {{dispositivos indicados}}.\nDe toda sorte, evidencia-se, revelando inexistência de omissão, ainda que para efeito de mero prequestionamento, que o acórdão restou devidamente fundamentado quanto à conclusão adotada, relacionada ao {{objeto da conclusão}}."
             },
             {
               "lab": "Assiste razão · erro material",
-              "f": "Assiste razão à embargante, pois o acórdão embargado [fundamento do acórdão], contudo [erro material verificado].\nFaz-se, portanto, necessária a correção do erro material, com acolhimento dos embargos de declaração, com efeitos infringentes, para fazer constar que [correção]."
+              "f": "Assiste razão à embargante, pois o acórdão embargado {{fundamento do acórdão}}, contudo {{erro material verificado}}.\nFaz-se, portanto, necessária a correção do erro material, com acolhimento dos embargos de declaração, com efeitos infringentes, para fazer constar que {{correção}}."
             }
           ]
         },
         {
           "n": "2. Rediscussão",
-          "f": "Com efeito, resta evidenciado o intento de mera rediscussão da causa, pois o acórdão embargado [fundamento enfrentado]. De qualquer sorte, ainda que houvesse, em mera suposição, eventual ofensa à legislação, gerando error in judicando, tal discussão não seria passível de exame em embargos de declaração, a revelar, pois, que o aresto recorrido apreciou sem qualquer omissão, obscuridade ou contradição os pontos essenciais ao deslinde da causa, com fundamentação necessária e suficiente a respaldar o julgamento.",
+          "f": "Com efeito, resta evidenciado o intento de mera rediscussão da causa, pois o acórdão embargado {{fundamento enfrentado}}. De qualquer sorte, ainda que houvesse, em mera suposição, eventual ofensa à legislação, gerando error in judicando, tal discussão não seria passível de exame em embargos de declaração, a revelar, pois, que o aresto recorrido apreciou sem qualquer omissão, obscuridade ou contradição os pontos essenciais ao deslinde da causa, com fundamentação necessária e suficiente a respaldar o julgamento.",
           "r": [],
           "fo": "M"
         },
@@ -620,7 +620,7 @@
         },
         {
           "n": "4. Natureza do inconformismo",
-          "f": "Como se observa, não se trata de omissão ou qualquer outro vício sanável na via eleita, pois o que se pretende é rediscutir a matéria decidida, alegando que houve error in judicando, o que não se presta à discussão em embargos de declaração. Se tal motivação, baseada na análise de matéria de fato para a interpretação do direito aplicável, é equivocada ou insuficiente, fere normas ([normas invocadas]) ou contraria julgados ou jurisprudência, deve a embargante veicular recurso próprio para a impugnação do acórdão e não rediscutir a matéria em embargos de declaração.",
+          "f": "Como se observa, não se trata de omissão ou qualquer outro vício sanável na via eleita, pois o que se pretende é rediscutir a matéria decidida, alegando que houve error in judicando, o que não se presta à discussão em embargos de declaração. Se tal motivação, baseada na análise de matéria de fato para a interpretação do direito aplicável, é equivocada ou insuficiente, fere normas ({{normas invocadas}}) ou contraria julgados ou jurisprudência, deve a embargante veicular recurso próprio para a impugnação do acórdão e não rediscutir a matéria em embargos de declaração.",
           "r": [
             "Indicar o recurso próprio."
           ],
@@ -664,7 +664,7 @@
             },
             {
               "lab": "Duplos · não conheço e rejeito",
-              "f": "Ante o exposto, não conheço dos embargos de declaração [da parte …] e rejeito os [da parte …]."
+              "f": "Ante o exposto, não conheço dos embargos de declaração {{da parte …}} e rejeito os {{da parte …}}."
             },
             {
               "lab": "Acolhimento · efeitos modificativos",
@@ -682,7 +682,7 @@
         },
         {
           "n": "Voto com correção",
-          "f": "rejeito [não conheço d]os embargos de declaração e corrijo, de ofício, o acórdão embargado, nos termos da fundamentação mencionada",
+          "f": "rejeito {{não conheço d}}os embargos de declaração e corrijo, de ofício, o acórdão embargado, nos termos da fundamentação mencionada",
           "r": [],
           "fo": "P"
         },
@@ -751,11 +751,11 @@
       "elementos": [
         {
           "n": "Abertura",
-          "f": "Trata-se de apelação à sentença (ID …) que [verbo nuclear] …",
+          "f": "Trata-se de apelação à sentença (ID …) que {{verbo nuclear}} …",
           "alts": [
             {
               "lab": "À sentença",
-              "f": "Trata-se de apelação à sentença (ID …) que [verbo nuclear] …"
+              "f": "Trata-se de apelação à sentença (ID …) que {{verbo nuclear}} …"
             },
             {
               "lab": "Em ação",
@@ -777,7 +777,7 @@
         },
         {
           "n": "Razões",
-          "f": "Apelou [o autor / a autora] (ID …), alegando, em suma: (1) […]; (2) […]; e (3) […]",
+          "f": "Apelou {{o autor / a autora}} (ID …), alegando, em suma: (1) […]; (2) […]; e (3) […]",
           "r": [
             "Orações no infinitivo.",
             "O pedido integra o último item ou fecha o parágrafo com “pelo que requereu”.",
@@ -805,7 +805,7 @@
                 },
                 {
                   "lab": "Com preliminar",
-                  "f": "Houve contrarrazões, apontando [preliminar] (ID …)."
+                  "f": "Houve contrarrazões, apontando {{preliminar}} (ID …)."
                 }
               ]
             },
@@ -825,7 +825,7 @@
             },
             {
               "lab": "Mérito",
-              "f": "A Procuradoria Regional da República opinou pelo [provimento / desprovimento] do recurso (ID …)."
+              "f": "A Procuradoria Regional da República opinou pelo {{provimento / desprovimento}} do recurso (ID …)."
             },
             {
               "lab": "Sem exame do mérito",
@@ -866,7 +866,7 @@
       "elementos": [
         {
           "n": "Abertura",
-          "f": "Trata-se de apelações à sentença (ID …) que [verbo nuclear] …",
+          "f": "Trata-se de apelações à sentença (ID …) que {{verbo nuclear}} …",
           "r": [
             "[VALIDAR] Abertura no plural não localizada nos inteiros teores da base."
           ],
@@ -874,7 +874,7 @@
         },
         {
           "n": "Razões do primeiro apelante",
-          "f": "Apelou [a parte autora] (ID …), alegando, em suma, que: (1) […]; (2) […]; e (3) […].",
+          "f": "Apelou {{a parte autora}} (ID …), alegando, em suma, que: (1) […]; (2) […]; e (3) […].",
           "r": [
             "Um parágrafo para cada apelante."
           ],
@@ -882,7 +882,7 @@
         },
         {
           "n": "Razões do segundo apelante",
-          "f": "Apelou [a parte ré] (ID …), alegando, em suma, que: (1) […]; (2) […]; e (3) […].",
+          "f": "Apelou {{a parte ré}} (ID …), alegando, em suma, que: (1) […]; (2) […]; e (3) […].",
           "r": [],
           "fo": "P"
         },
@@ -905,7 +905,7 @@
                 },
                 {
                   "lab": "Com preliminar",
-                  "f": "Houve contrarrazões, apontando [preliminar] (ID …)."
+                  "f": "Houve contrarrazões, apontando {{preliminar}} (ID …)."
                 }
               ]
             },
@@ -925,7 +925,7 @@
             },
             {
               "lab": "Mérito",
-              "f": "A Procuradoria Regional da República opinou pelo [provimento / desprovimento] do recurso (ID …)."
+              "f": "A Procuradoria Regional da República opinou pelo {{provimento / desprovimento}} do recurso (ID …)."
             },
             {
               "lab": "Sem exame do mérito",
@@ -982,7 +982,7 @@
         },
         {
           "n": "Razões",
-          "f": "Apelou [o autor / a autora] (ID …), alegando, em suma: (1) […]; (2) […]; e (3) […]",
+          "f": "Apelou {{o autor / a autora}} (ID …), alegando, em suma: (1) […]; (2) […]; e (3) […]",
           "r": [
             "Orações no infinitivo.",
             "O pedido integra o último item ou fecha o parágrafo com “pelo que requereu”.",
@@ -1010,7 +1010,7 @@
                 },
                 {
                   "lab": "Com preliminar",
-                  "f": "Houve contrarrazões, apontando [preliminar] (ID …)."
+                  "f": "Houve contrarrazões, apontando {{preliminar}} (ID …)."
                 }
               ]
             },
@@ -1030,11 +1030,11 @@
             },
             {
               "lab": "Mérito",
-              "f": "A Procuradoria Regional da República opinou pelo [provimento / desprovimento] do recurso (ID …)."
+              "f": "A Procuradoria Regional da República opinou pelo {{provimento / desprovimento}} do recurso (ID …)."
             },
             {
               "lab": "Remessa",
-              "f": "A Procuradoria Regional da República opinou pelo [provimento / desprovimento] da remessa necessária (ID …)."
+              "f": "A Procuradoria Regional da República opinou pelo {{provimento / desprovimento}} da remessa necessária (ID …)."
             },
             {
               "lab": "Sem exame do mérito",
@@ -1081,7 +1081,7 @@
         },
         {
           "n": "Razões",
-          "f": "Alegou [a agravante] (ID …) que: (1) […]; (2) […]; e (3) […].",
+          "f": "Alegou {{a agravante}} (ID …) que: (1) […]; (2) […]; e (3) […].",
           "r": [
             "Pedido de efeito suspensivo ou de tutela recursal, quando houver, com a decisão do Relator e o ID."
           ],
@@ -1115,7 +1115,7 @@
             },
             {
               "lab": "Mérito",
-              "f": "A Procuradoria Regional da República opinou pelo [provimento / desprovimento] do recurso (ID …)."
+              "f": "A Procuradoria Regional da República opinou pelo {{provimento / desprovimento}} do recurso (ID …)."
             },
             {
               "lab": "Sem exame do mérito",
@@ -1172,7 +1172,7 @@
         },
         {
           "n": "Ementa embargada",
-          "f": "“[ementa do acórdão embargado]”",
+          "f": "“{{ementa do acórdão embargado}}”",
           "r": [
             "Transcrição integral, em bloco recuado."
           ],
@@ -1180,7 +1180,7 @@
         },
         {
           "n": "Vícios alegados",
-          "f": "Alegou-se [omissão / contradição / obscuridade], inclusive em prequestionamento, pois: (1) […]; (2) […]; e (3) […].",
+          "f": "Alegou-se {{omissão / contradição / obscuridade}}, inclusive em prequestionamento, pois: (1) […]; (2) […]; e (3) […].",
           "r": [],
           "fo": "P"
         },
@@ -1214,7 +1214,7 @@
             },
             {
               "lab": "Mérito",
-              "f": "A Procuradoria Regional da República opinou pelo [provimento / desprovimento] do recurso (ID …)."
+              "f": "A Procuradoria Regional da República opinou pelo {{provimento / desprovimento}} do recurso (ID …)."
             },
             {
               "lab": "Sem exame do mérito",
@@ -1263,7 +1263,7 @@
         },
         {
           "n": "Razões",
-          "f": "Alegou [a agravante] (ID …) que […].",
+          "f": "Alegou {{a agravante}} (ID …) que […].",
           "r": [],
           "fo": "P"
         },

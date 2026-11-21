@@ -279,7 +279,7 @@
   function liaFolha(A){if(!A||A.tipo==='m28')return '';var out='';try{out=rcDoc(rcEditorial(),true,false);}catch(er){out='';}
     /* modelo do banco: a fundamentação, os honorários e o dispositivo do caso-exemplo vão como texto-fonte a adaptar */
     if(A.tipo==='mod'){var x=A.x,tx=String(x.textoModelo||'').trim()||[x.fundamentacao?'— FUNDAMENTAÇÃO DO MODELO —\n'+String(x.fundamentacao).trim():'',x.honorarios?'— SENTENÇA E HONORÁRIOS (exemplo do modelo) —\n'+String(x.honorarios).trim():'',x.resultado?'— DISPOSITIVO DO MODELO —\n'+String(x.resultado).trim():''].filter(Boolean).join('\n\n');
-      if(tx)out+='\n\nTEXTO DO MODELO (texto-fonte do gabinete: aproveite as fórmulas e a ordem; substitua todo [PREENCHER …] e todo dado do caso-exemplo pelos dados destes autos; o resultado do modelo não vincula o resultado deste caso):\n'+tx;
+      if(tx)out+='\n\nTEXTO DO MODELO (texto-fonte do gabinete: aproveite as fórmulas e a ordem; substitua todo campo entre chaves {{ }} e todo dado do caso-exemplo pelos dados destes autos; o resultado do modelo não vincula o resultado deste caso):\n'+tx;
       if(x.ementaIntegral)out+='\n\n— EMENTA DO MODELO (referência de forma) —\n'+String(x.ementaIntegral).trim();}
     return out;}
   function liaMontar(P,A,R){var o=CQ.lia,sel=o.prec||R.prec.slice(0,4).map(function(z){return z.x.id;}),B=BASE||{};

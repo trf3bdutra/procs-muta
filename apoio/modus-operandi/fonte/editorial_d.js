@@ -693,8 +693,10 @@ var _xAutoCasoBase=xAutoCaso;xAutoCaso=function(){_xAutoCasoBase();
   Object.keys(ARR).forEach(function(a){var c=ARR[a],v='';if(c.s==='*')return;
     if(c.s)v=cp[c.s+'.'+c.c];else[c.c].concat(c.f||[]).some(function(n){v=cp['acervo.'+n];return v!=null&&v!=='';});
     v=dkValorFicha(v).trim();if(v)AUTO['@'+a]=v;});
-  var E={processo:'processo',classe:'CLASSE',assunto:'ASSUNTO',ramo:'RAMO',polo_ativo:'polo ativo',polo_passivo:'polo passivo',recorrente:'recorrente',resultado:'resultado',conclusao:'CONCLUSÃO',dispositivo_ementa:'dispositivo da ementa'};
+  var E={processo:'processo',classe:'CLASSE',assunto:'ASSUNTO',ramo:'RAMO',polo_ativo:'polo ativo',polo_passivo:'polo passivo',recorrente:'recorrente',resultado:'resultado',conclusao:'CONCLUSÃO',dispositivo_ementa:'dispositivo da ementa',classe_ementa:'CLASSE',assunto_ementa:'ASSUNTO'};
   Object.keys(E).forEach(function(a){if(!AUTO['@'+a]&&AUTO[E[a]])AUTO['@'+a]=AUTO[E[a]];});
+  /* cabeçalho da ementa: classe e assunto em maiúsculas, da ficha quando o acervo embutido não tiver o processo */
+  ['classe','assunto'].forEach(function(a){if(!AUTO['@'+a+'_ementa']&&AUTO['@'+a])AUTO['@'+a+'_ementa']=String(AUTO['@'+a]).toUpperCase();});
   var P=window.CQX&&CQX.tem()?CQX.P():null;if(P&&P.processo&&!AUTO['@processo'])AUTO['@processo']=P.processo;};
 /* canhoto “Campos do bloco”: o campo da ficha aparece pelo rótulo */
 var _dkCampoRotBase=dkCampoRot;dkCampoRot=function(f){var ph=f.getAttribute('data-ph')||'';if(ph.charAt(0)==='@')return arrRot(ph.slice(1))+' · ficha';return _dkCampoRotBase(f);};
