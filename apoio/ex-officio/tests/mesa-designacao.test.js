@@ -118,3 +118,10 @@ test('Etapa 4: a mesa é o cabeçalho da etapa (título, Aplicar, Próximo); Cap
   assert.ok(pag.includes('>Atualizar proposta</button>')&&!pag.includes('>Recalcular<'),'Atualizar proposta');
   assert.ok(cap.includes("t === 'cmt:mesa-etapa'")&&!cap.includes('Lista simples por regra, sem a mesa')&&cap.includes('cwe-st4'),'Caput sem duplicação');
 });
+
+test('Fora desta sessão: minutas e correções por pauta, gravado na sessão e respeitado pelo motor e pela mesa',()=>{
+  const m=read('monitor/motor/assets/js/21-sessoes-equipe.js'),pag=read('monitor/designacao/index.html'),cap=read('monitor/triagem/index.html');
+  assert.ok(m.includes('definirForaDaSessao: function')&&m.includes('o.foraDaSessao = ss.foraSessao')&&m.includes('!foraSes(m, ss, kind)'),'motor');
+  assert.ok(pag.includes('fora:ss.foraSessao')&&pag.includes('!FD[m.nome]')&&pag.includes('fora das minutas desta sessão'),'mesa');
+  assert.ok(cap.includes("['equipe', 'Equipe da sessão'")&&cap.includes('data-cwe-fs=')&&cap.includes('function equipeSessao(ss)'),'painel da sessão');
+});
