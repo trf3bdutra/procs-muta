@@ -377,7 +377,7 @@ function linha(x,cheio){
     /* características do processo na pauta: meta do CNJ e julgamento que não é o primeiro */
     if(c.meta)tags.push(['in','★ Meta '+c.meta]);
     {const n1={ED:'Embargos de declaração',AgInt:'Agravo interno',JR:'Juízo de retratação'}[x.julgamento]||{'Embargos de Declaração':'Embargos de declaração','Agravo Interno':'Agravo interno','Juízo de Retratação':'Juízo de retratação'}[(c.cartao||{}).tipoJ];if(n1)tags.push(['in',n1])}
-    if(x.acervo&&x.acervo.prioridade)tags.push(['in','Prioridade legal']);
+    if(priLegal(x))tags.push(['in','Prioridade legal']);
     if(x.acervo&&x.acervo.urgencia)tags.push(['al','Urgência']);
     if(fontes.length>1)tags.push(['in','Minuta em '+fontes.length+' coleções']);else if(z&&z.compart)tags.push(['in','Minuta em '+z.titulo]);
     if(np&&!li)tags.push(['in',np+(np>1?' pendências':' pendência')+' a validar']);
@@ -629,6 +629,8 @@ function colEtapa([k,r,t,d],base){
 /* na pauta (e nos lotes dentro dela) a matriz já vem com os campos do prontuário da sessão, editados no Ex Officio */
 /* campos do prontuário da sessão: colunas verticais com ícone ou código curto (o texto inteiro fica no título da célula);
    só o resultado, que é texto, fica na horizontal */
+/* prioridade do acervo vem como Sim/Não */
+const priLegal=x=>{const v=String((x.acervo||{}).prioridade||'').trim();return !!v&&!/^n[ãa]o$/i.test(v)};
 const c_=x=>x.ctl||{}, ca_=x=>(c_(x).cartao)||{};
 const NAO1={ED:'ED',AgInt:'AgInt',JR:'JR','Embargos de Declaração':'ED','Agravo Interno':'AgInt','Juízo de Retratação':'JR'};
 const TIPO={'Apelação':'Ap','Embargos de Declaração':'ED','Remessa Necessária':'Rem','Agravo Interno':'AgInt','Agravo de Instrumento':'AI','Juízo de Retratação':'JR'};
@@ -649,7 +651,7 @@ const INDS=[
   ['meta','Meta',x=>c_(x).meta||'',v=>v?{t:String(v).replace(/^M/,''),c:'ik'}:null],
   ['nao1','Não é 1º julgamento',x=>NAO1[x.julgamento]||NAO1[ca_(x).tipoJ]||'',v=>v?{t:v,c:'ik'}:null],
   ['urg','Urgência / liminar pendente',x=>(x.acervo||{}).urgencia||'',v=>v?{t:'■',c:'al'}:null],
-  ['pri','Prioridade legal',x=>(x.acervo||{}).prioridade||'',v=>v?{t:'■',c:'ik'}:null],
+  ['pri','Prioridade legal',x=>priLegal(x)?'Prioridade legal (acervo do PJe)':'',v=>v?{t:'■',c:'ik'}:null],
   ['adm','Admissibilidade em discussão',x=>{const c=c_(x),m=[];if(/intemp|n[ãa]o verif/i.test(c.tempest||''))m.push('tempestividade: '+c.tempest);if(/n[ãa]o recolh|n[ãa]o verif/i.test(c.preparo||''))m.push('preparo: '+c.preparo);if(c.repres&&/irreg|pend/i.test(c.repres))m.push('representação: '+c.repres);return m.join(' · ')},v=>v?{t:'■',c:'al'}:null],
   ['val','Pendência [VALIDAR]',x=>{const p=(ca_(x).pendencias||[]).filter(q=>q&&!q.ok);return p.length?p.length+' pendência'+(p.length>1?'s':'')+': '+p.map(q=>q.desc||q).join(' | '):''},v=>v?{t:String(parseInt(v,10)),c:'al'}:null],
   ['sig','Sigilo',x=>x.sigilo||'',v=>v?{t:'■',c:'ik'}:null],
