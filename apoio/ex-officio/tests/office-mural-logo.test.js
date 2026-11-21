@@ -68,3 +68,8 @@ test('prontuário: sem redesenho quando nada mudou; atualização silenciosa sem
   const app = require('fs').readFileSync(require('path').join(__dirname, '..', 'index.html'), 'utf8');
   for (const x of ["if(el._sig===sig&&el.getAttribute('data-k')===S.prt&&el.querySelector('.prt')){prtPos();return;}", 'el._sig=sig;if(sc0)', '(silencioso&&!mud&&S.doc)', "f=requestAnimationFrame(function(){f=0;prtPos();})"]) assert.ok(app.includes(x), x);
 });
+
+test('pauta: etiqueta Retidos (adiados ou retirados de pauta)', () => {
+  const app = require('fs').readFileSync(require('path').join(__dirname, '..', 'index.html'), 'utf8');
+  assert.ok(app.includes("['rt','Retidos','Adiados ou retirados de pauta',function(i){return /^(adiad|retirad)/i.test(i.resultado||'');}]"));
+});
