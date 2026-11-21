@@ -147,7 +147,7 @@ test('Datas: marcos validados (ano 2000–2100), aviso de marco fora do expedien
 
 test('Mesa: Atualizar proposta ao lado de Aplicar; agrupar pelas regras do painel; coluna de capacidade compacta',()=>{
   const pag=read('caput/designacao/index.html');
-  assert.ok(/<div class="hac" id="hac" hidden><button type="button" class="btn" data-a="recalc"[^>]*>Atualizar proposta<\/button><button type="button" class="btn pri" data-a="copiar"/.test(pag),'recalc antes de Aplicar');
+  assert.ok(/<div class="hac" id="hac" hidden><button type="button" class="btn" data-a="limpar"[^>]*>Limpar<\/button><button type="button" class="btn" data-a="desfazer-limpar" hidden>Desfazer limpeza<\/button><button type="button" class="btn" data-a="recalc"[^>]*>Atualizar proposta<\/button><button type="button" class="btn pri" data-a="copiar"/.test(pag),'recalc antes de Aplicar');
   assert.ok(pag.includes("document.getElementById('b-recalc-tb').hidden=VIVO"),'um só botão no Caput');
   assert.ok(pag.includes('>Regra da minuta</button>')&&pag.includes('>Regra da correção</button>')&&pag.includes('VIVO.designacaoPorRegra(D.sessao.id)')&&pag.includes('nenhum processo nesta pauta'),'grupos pelas regras');
   assert.ok(pag.includes('class="sw"')&&pag.includes('.pp .mt{')&&pag.includes("'<span class=\"mt\">'"),'linha da pessoa');
@@ -171,7 +171,7 @@ test('Mesa: capacidade e carga mostram quantos processos cada pessoa tem para mi
 
 test('Mesa: indisponível tira a pessoa também dos processos já designados (vão para a proposta) e desmarcar devolve',()=>{
   const m=require('fs').readFileSync(require('path').join(__dirname,'../../../caput/designacao/index.html'),'utf8');
-  for(const x of ['>indisponível</label>','var AUSX={};',"AUSX[nm]=Lx;","designação(ões) restauradas"])assert.ok(m.includes(x),x);
+  for(const x of ['>indisponível</label>','var AUSX={},LIMPO=null;',"AUSX[nm]=Lx;","designação(ões) restauradas"])assert.ok(m.includes(x),x);
 });
 
 test('Mesa: Perfis ⇄ compara o perfil dos servidores com os processos do grupo em tela',()=>{
@@ -194,4 +194,24 @@ test('Mesa: assuntos sempre organizados dentro do grupo, por ordem da pauta, se�
 test('Mesa: mesmo assunto fica com a mesma pessoa na proposta (fora os embargos)',()=>{
   const m=require('fs').readFileSync(require('path').join(__dirname,'../../../caput/designacao/index.html'),'utf8');
   for(const x of ["var DONO={},cntD={};","if(x.t!=='ED'&&DONO[N(x.as)]===m.nome){s+=1000;","if(x.t!=='ED'&&!DONO[N(x.as)])DONO[N(x.as)]=esc_.nome;"])assert.ok(m.includes(x),x);
+});
+
+test('Mesa: Limpar para refazer a designação, com desfazer',()=>{
+  const pag=read('caput/designacao/index.html'),m=read('caput/motor/assets/js/21-sessoes-equipe.js');
+  assert.ok(pag.includes("LIMPO=VIVO.limparDesignacao(D.sessao.id)||[];")&&pag.includes("if(a==='desfazer-limpar')"));
+  assert.ok(m.includes('limparDesignacao: function (id)')&&m.includes("if (it.dataMinuta || it.dataCorrecao || (!it.servidor && !it.corretor)) return;"),'o que já foi minutado ou corrigido fica');
+});
+
+test('Produtividade: níveis de complexidade (despacho 0,25 · serial 0,5 · padrão 1 · intermediária 2 · complexa 3)',()=>{
+  const j=JSON.parse(read('apoio/regras/produtividade.json'));
+  assert.equal(j.pesos.despacho,0.25);assert.equal(j.pesos.ed,0.5);assert.equal(j.pesos.voto,1);assert.equal(j.pesos.mono,1);assert.equal(j.pesos.cx2,2);assert.equal(j.pesos.cx3,3);
+  const m=read('caput/motor/assets/js/21-sessoes-equipe.js');
+  for(const x of ["if (k === 'ED' || k === 'AgInt') return { n: 'serial', por: k };","return { n: 'complexa', por: 'META 7' }","return { n: 'intermediaria', por: 'juízo de retratação' }","return { n: 'intermediaria', por: 'META 2' }","return { n: 'serial', por: 'lote' }","definirNivel: function (id, cnjv, n)","var CTL_K = ['complexidade',"])assert.ok(m.includes(x),x);
+  const pag=read('caput/designacao/index.html');
+  assert.ok(pag.includes('w:l.pts,nv:l.nivel')&&pag.includes('function selNivel(x)')&&pag.includes('VIVO.definirNivel(D.sessao.id,xi.cnj,t.value)'),'mesa usa os pontos do nível e permite fixar');
+  const {calcular}=require(path.join(root,'apoio/ex-officio/api/_produtividade.js'));
+  const it=(o)=>Object.assign({servidor:'Ana',dataMinuta:'2026-12-01',julgamento:'',ctl:{}},o);
+  const r=calcular({prod:j,cal:{},equipe:{registros:[{nome:'Ana',papel:'equipe'}]},de:'2026-12-01',ate:'2026-12-01',
+    sessoesDocs:[{itens:[it({cnj:'1'}),it({cnj:'2',julgamento:'ED'}),it({cnj:'3',ctl:{meta:'M2A'}}),it({cnj:'4',ctl:{meta:'M7'}}),it({cnj:'5',julgamento:'JR'}),it({cnj:'6',ctl:{lote:{id:'2886'}}}),it({cnj:'7',ctl:{complexidade:'complexa',lote:{id:'x'}}})]}]});
+  assert.equal(r.linhas.find(x=>x.nome==='Ana').pontos,1+0.5+2+3+2+0.5+3);
 });

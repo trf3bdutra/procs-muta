@@ -9,10 +9,10 @@
   if (W.CMTRegrasGerais) return;
   var ARQ_ESC = 'apoio/regras/escopo-triagem.json', ARQ_DES = 'apoio/regras/designacao.json', ARQ_PROD = 'apoio/regras/produtividade.json';
   /* regras de produtividade e prazos (padrões do Gabinete CMT); gravadas em apoio/regras/produtividade.json */
-  var PESOS_ROT = [['voto', 'Minuta de voto', 'apelação, remessa, agravo de instrumento e demais classes'], ['ed', 'ED ou Agravo Interno', 'mesmo valor para os dois'], ['mono', 'Monocrática', 'decisão do relator entregue'], ['despacho', 'Despacho', ''], ['diligencia', 'Diligência', ''], ['pendencia', 'Pendência concluída', ''], ['revisao', 'Revisão de monocrática', ''], ['complementar', 'Produção complementar', '']];
-  var CX_ROT = [['cx1', 'Ω · Padrão'], ['cx2', 'Α · Intermediário'], ['cx3', 'Σ · Complexo']];
+  var PESOS_ROT = [['voto', 'Minuta padrão (voto)', 'apelação, remessa, agravo de instrumento e demais classes'], ['ed', 'Minuta serial', 'ED, Agravo Interno e processo em lote (aplicar o modelão)'], ['mono', 'Monocrática (padrão)', 'decisão do relator entregue'], ['despacho', 'Despacho', ''], ['diligencia', 'Diligência', ''], ['pendencia', 'Pendência concluída', ''], ['revisao', 'Revisão de monocrática', ''], ['complementar', 'Produção complementar', '']];
+  var CX_ROT = [['cx1', 'Padrão', 'voto e monocrática'], ['cx2', 'Intermediária', 'juízo de retratação e, em regra, META 2'], ['cx3', 'Complexa', 'META 7']];
   function prodPadrao() { return { schema: 'gabcmt.regras.produtividade', versao: 1, painel: { liberacao: 5, minutasDia: 3, pertoMeta: 75, redistribuir: true },
-    pesos: { voto: 1, ed: 0.5, mono: 0.75, despacho: 0.25, diligencia: 0.25, pendencia: 0.25, revisao: 0.25, complementar: 0.5, cx1: 1, cx2: 1.5, cx3: 2 }, metaPadrao: { voto: 3, mono: 0 }, metas: { 'VICTOR': { voto: 4 }, 'ESTELA': { voto: 4 } } }; }
+    pesos: { voto: 1, ed: 0.5, mono: 1, despacho: 0.25, diligencia: 0.25, pendencia: 0.25, revisao: 0.25, complementar: 0.5, cx1: 1, cx2: 2, cx3: 3 }, metaPadrao: { voto: 3, mono: 0 }, metas: { 'VICTOR': { voto: 4 }, 'ESTELA': { voto: 4 } } }; }
   function prodNorm(j) { var d = prodPadrao(); j = j && typeof j === 'object' ? j : {}; return Object.assign({}, d, j, { painel: Object.assign({}, d.painel, j.painel || {}), pesos: Object.assign({}, d.pesos, j.pesos || {}), metaPadrao: Object.assign({}, d.metaPadrao, j.metaPadrao || {}), metas: Object.assign({}, j.metas ? {} : d.metas, j.metas || {}) }); }
   var chaveNome = function (n) { return String(n || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim().toUpperCase(); };
   var num = function (v) { var n = Number(String(v == null ? '' : v).replace(',', '.')); return isFinite(n) ? n : null; };
@@ -263,10 +263,10 @@
       '<div class="rg-card"><b>Meta diária por servidor<small>em minutas por dia útil; pontos em branco = calculado pelos pesos</small></b>' +
         linha('Padrão de quem minuta', 'vale para quem não tem meta própria', inp('padrao', 'voto', P.metaPadrao.voto, 1, 0, 20, 64) + ' votos · ' + inp('padrao', 'mono', P.metaPadrao.mono, 1, 0, 20, 64) + ' monocráticas') +
         (eq.length ? eq.map(function (m) { var x = metaDe(m.nome), k = chaveNome(m.nome); return linha(m.nome, m.cargo || '', inp('meta', k + '|voto', x.voto, 1, 0, 20, 64) + ' votos · ' + inp('meta', k + '|mono', x.mono, 1, 0, 20, 64) + ' monocráticas · ' + inp('meta', k + '|pontos', x.pontos, 0.25, 0, 40, 70) + ' pontos <span class="rg-n">(= ' + fmt(pts(m.nome)) + ' pt)</span>'); }).join('') : '<p class="rg-n" style="padding:8px 14px">A equipe ainda não carregou; reabra em instantes.</p>') + '</div>' +
-      '<div class="rg-card"><b>Pesos<small>pontos por entrega · complexidade multiplica voto, ED, Agravo Interno e a monocrática que a tiver</small></b>' +
+      '<div class="rg-card"><b>Níveis de complexidade<small>despacho 0,25 · serial 0,5 · padrão 1 · intermediária 2 · complexa 3 · o nível fixado no processo (mesa de designação) prevalece sobre a regra</small></b>' +
         PESOS_ROT.map(function (x) { return linha(x[1], x[2], inp('pesos', x[0], P.pesos[x[0]], 0.05, 0, 10) + ' pt'); }).join('') +
-        CX_ROT.map(function (x) { return linha('Complexidade ' + x[1], 'multiplica o peso', '× ' + inp('pesos', x[0], P.pesos[x[0]], 0.05, 0, 10)); }).join('') +
-        linha('Equivalências', '', 'voto Σ = ' + fmt(P.pesos.voto * P.pesos.cx3) + ' pt · voto Α = ' + fmt(P.pesos.voto * P.pesos.cx2) + ' pt · ED Ω = ' + fmt(P.pesos.ed * P.pesos.cx1) + ' pt · ED Σ = ' + fmt(P.pesos.ed * P.pesos.cx3) + ' pt · 4 despachos = ' + fmt(4 * P.pesos.despacho) + ' pt') + '</div>' +
+        CX_ROT.map(function (x) { return linha('Nível ' + x[1], x[2] + ' · multiplica a minuta padrão', '× ' + inp('pesos', x[0], P.pesos[x[0]], 0.05, 0, 10)); }).join('') +
+        linha('Equivalências', '', 'despacho = ' + fmt(P.pesos.despacho) + ' pt · serial = ' + fmt(P.pesos.ed) + ' pt · padrão = ' + fmt(P.pesos.voto * P.pesos.cx1) + ' pt · intermediária = ' + fmt(P.pesos.voto * P.pesos.cx2) + ' pt · complexa = ' + fmt(P.pesos.voto * P.pesos.cx3) + ' pt') + '</div>' +
       '<p style="margin-top:16px"><b>Como se conta</b> (regra do Gabinete CMT, painel de produtividade da equipe).</p><div class="rg-card">' +
       [['Universo', 'Processos das listas oficiais das sessões de julgamento. Sessão arquivada sai do painel de sessões, mas continua na produtividade.'],
        ['Minuta concluída', 'Processo com MINUTADO preenchido. Conta na data do MINUTADO, dentro do período filtrado.'],

@@ -1701,7 +1701,7 @@ window.CMTCompApp=function(document,window,location){
   var HOJE=new Date().toISOString().slice(0,10);
   var PR={grupo:'pauta',medida:'n',futuras:false,sel:null};
   var PP=(D.prod&&D.prod.pesos)||{}, pn=function(k,d){var v=Number(PP[k]);return isFinite(v)&&PP[k]!==''&&PP[k]!=null?v:d;};
-  var PESO={'Embargos de declaração':pn('ed',0.5),'Agravo interno':pn('ed',0.5),'Decisão monocrática':pn('mono',0.75)}, PVOTO=pn('voto',1), PCX={1:pn('cx1',1),2:pn('cx2',1.5),3:pn('cx3',2)};
+  var PESO={'Embargos de declaração':pn('ed',0.5),'Agravo interno':pn('ed',0.5),'Decisão monocrática':pn('mono',1)}, PVOTO=pn('voto',1), PCX={1:pn('cx1',1),2:pn('cx2',2),3:pn('cx3',3)};
   var CXR={1:'Ω',2:'Α',3:'Σ'};
   var pv=function(v){return String(Math.round(v*100)/100).replace('.',',');};
   var PAL=['#2f6db3','#c0612b','#2e8a57','#8c4bb0','#b8962e','#c23d5c','#3a9aa8','#6b7a2a','#7a5230','#5a6fd6','#a0527a','#4f8f3a'];
