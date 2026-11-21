@@ -13,3 +13,10 @@ test('Pautas: cartão do processo numa faixa só a partir de 701 px, linhas da e
  assert.ok(app.includes('#v-pauta.ed .edr.mrw .ga .id{display:grid!important;grid-template-rows:28px 28px;row-gap:6px'));
  assert.ok(app.includes('#v-pauta.ed .edr.mrw .gb>.sn{height:28px;align-items:center;margin-bottom:6px}'));
 });
+test('Prontuário: pendências legíveis por inteiro e sustentação/preferência recolhida quando não há pedido',()=>{
+ assert.ok(app.includes('<textarea data-acp-d="'));
+ assert.ok(app.includes('#prq .ac-pl textarea{grid-column:2;width:100%'));
+ assert.ok(app.includes(`'<details class="ac-s ac-det" id="ac-so"'+(so?' open':'')`));
+ assert.ok(app.includes("if(dt&&pedidos.length)dt.open=true;"));
+ assert.ok(app.includes("if(x.tagName==='DETAILS')x.open=true;"));
+});
