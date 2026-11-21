@@ -2952,8 +2952,8 @@ document.addEventListener('change',function(e){var t=e.target;if(!t.closest||!t.
 document.addEventListener('keydown',function(e){if(e.key==='Escape'){var o=$('#fd');if(o&&!o.hidden)fdFecha();}});
 /* sinalizações do cartão (Pauta e Monocráticas): ícones discretos na linha; cada um abre o diálogo de sinalizações do processo */
 /* sustentação oral e preferência: só aparece quando há registro; ícone por tipo e marcador de atenção (! ou nº de pedidos) */
-var ICNSO={pres:'<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="5" r="2.4"/><path d="M12 8v4M7 12h10l-1.5 8h-7zM9 20h6"/></svg>',
-  vid:'<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="6.5" width="13" height="11" rx="2"/><path d="M15.5 10.5l6-3.5v10l-6-3.5z"/></svg>',
+var ICNSO={pres:'<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="2.5" width="6" height="11.5" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21M8.5 21h7"/></svg>',
+  vid:'<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6.5" cy="6" r="2.6"/><circle cx="12.8" cy="6" r="2.6"/><rect x="2.8" y="10" width="13" height="9" rx="1.5"/><path d="M15.8 13.2l5.4-3v8.6l-5.4-3z"/></svg>',
   prf:'<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 12l6-6 6 6M6 18l6-6 6 6"/></svg>'};
 function soTipo(so){return /^pref/i.test(so)?'prf':/^pres/i.test(so)?'pres':'vid';}
 var SOROT={prf:'Preferência',pres:'Sustentação oral presencial',vid:'Sustentação oral por videoconferência'};
