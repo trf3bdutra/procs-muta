@@ -290,7 +290,7 @@ test('Mural: Histórico como vista alternativa do painel do calendário; dia do 
   assert.match(h, /data-vista="cal">Calendário<\/button><button type="button" data-vista="hist">Histórico<\/button>/);
   assert.match(h, /#hc-cal-full\.ver-hist #cc-cal \.cc-body\{display:none!important\}/);
   assert.match(h, /#hc-cal-full:not\(\.ver-hist\) #prod\{display:none!important\}/);
-  assert.match(h, /new MutationObserver\(function\(\)\{sinc\(\);cantoJa\(\);\}\)\.observe\(cal,\{childList:true,subtree:true\}\)/);
+  assert.match(h, /new MutationObserver\(function\(\)\{sinc\(\);cantoJa\(\);copia\(\);\}\)\.observe\(cal,\{childList:true,subtree:true\}\)/);
 });
 
 test('Agenda: todos cadastram; quem não é gestor grava só os próprios itens, privados (visíveis para ele e para a chefia)', async () => {
@@ -396,4 +396,17 @@ test('Ausências: datas pessoais (aniversário, posse, chegada) gravadas por usu
   assert.match(lib, /class="cc-c cc-canto fim"/);
   assert.match(h, /function destGira\(L\)\{/);
   assert.match(h, /<slot name=\\"dest\\">/);
+});
+
+test('Prontuário: etapas dentro do cartão do processo (Monocráticas e Pauta, com o mesmo visual); Resultado numa linha; alertas e meta no alto da coluna do Mural', () => {
+  const fs = require('fs'), path = require('path');
+  const h = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
+  assert.match(h, /sec\(0\)\+'<\/div>'\+\n    '<p class="pm-sh pm-sh0">/);
+  assert.match(h, /pill\('corretor','Revisão'\)\+'<\/div><\/div><\/div>'\+/);
+  assert.match(h, /if\(!mono&&vp\._ed\)prtPauta2\(el,it,o3,ix,V\);/);
+  assert.match(h, /function prtPauta2\(el,it,o3,ix,V\)\{/);
+  assert.match(h, /html body #prq \.pmn2 \.pm-caso\{flex:none;max-height:58vh;overflow-y:auto/);
+  assert.match(h, /html body #prq \.pmn2 \.pm-res\{flex-wrap:nowrap!important/);
+  assert.match(h, /<slot name=\\"alm\\"><\\\/slot><section class=\\"panel\\"><h2>Sinalizações em aberto/);
+  assert.match(h, /#mu-host #hc-cal-full \.cc-esq \.cc-al,#mu-host #hc-cal-full \.cc-esq \.cc-al\+\.cc-meta\{display:none!important\}/);
 });
