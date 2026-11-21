@@ -20290,8 +20290,8 @@
    "exequente": "CARLOS ALBERTO RIBEIRO DA MATA",
    "executado": "CAIXA ECONÔMICA FEDERAL",
    "assunto": "Inclusão Indevida em Cadastro de Inadimplentes",
-   "grupo": null,
-   "tipo_caso": "",
+   "grupo": "",
+   "tipo_caso": "Processual · competência do Juizado Especial Federal · valor da causa corrigido de ofício (danos morais) · ação contra instituições financeiras",
    "resultado": "Ato a proferir: examinar a prevenção e o preparo; depois, julgamento do agravo de instrumento (voto) [VALIDAR]",
    "modelo": "",
    "variacoes": [],
@@ -20339,6 +20339,98 @@
     "outros": "Petição ID 376987646 (28/05/2026): pedido de distribuição por prevenção ao Des. Fed. Alessandro Diaferia. Certidão ID 377019175 (28/05/2026): AIs anteriores 5016154-12.2025.4.03.0000 e 5025377-86.2025.4.03.0000 (2ª Turma) na mesma ação; sem custas. Decisão ID 381951629 (24/06/2026): indeferiu a tutela recursal.",
     "representacao": "Agravantes: advogado Alex Augusto Derzi Resende (procurações IDs 376857640 e 376857641). Agravados: CEF; Itaú (Renato Chagas Corrêa da Silva); Mercado Pago (Daniel Menegassi Zotareli); Bradesco (José Carlos Garcia Perez).",
     "preparo": "Sem comprovante de custas (certidão ID 377019175); gratuidade não localizada [VALIDAR]"
+   },
+   "assunto_detalhado": "Processual — valor da causa corrigido de ofício e competência do JEF",
+   "especificidades": "Valor da causa reduzido para R$ 68.197,79 (danos materiais de R$ 28.197,79 e morais de R$ 40.000,00) · Quatro agravados (CEF, Itaú, Mercado Pago e Bradesco) · Prevenção alegada pelos AIs 5016154-12.2025.4.03.0000 e 5025377-86.2025.4.03.0000 (2ª Turma) · Tutela recursal indeferida (ID 381951629, 24/06/2026) · Sem comprovante de custas",
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "assuntoDet": "Processual — valor da causa corrigido de ofício e competência do JEF",
+     "subassuntos": "Processual · competência do Juizado Especial Federal · valor da causa corrigido de ofício (danos morais) · ação contra instituições financeiras",
+     "sintese": "",
+     "questoes": "1) Prevenção e competência da Turma Regional de MS; 2) preparo ou gratuidade; 3) correção de ofício do valor da causa (artigo 292, § 3º, do CPC) e competência absoluta do JEF; 4) inovação recursal (cobranças e negativação).",
+     "rel": {
+      "razoes": "",
+      "contrarrazoes": ""
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "582949400",
+      "juizo": "4ª Vara Federal de Campo Grande",
+      "dispositivo": "Corrigiu de ofício o valor da causa para R$ 68.197,79 e declinou da competência para o JEF."
+     },
+     "ai": {
+      "hip": "Outra",
+      "efeito": "Indeferido",
+      "id": "582949400"
+     },
+     "adm": {
+      "prot": "2026-05-27",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte autora",
+       "tipo": "Agravo de instrumento",
+       "id": "376856826",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "376856826",
+       "data": "2026-05-27"
+      },
+      {
+       "desc": "Pedido de distribuição por prevenção",
+       "id": "376987646",
+       "data": "2026-05-28"
+      },
+      {
+       "desc": "Certidão de prevenção e custas",
+       "id": "377019175",
+       "data": "2026-05-28"
+      },
+      {
+       "desc": "Decisão que indeferiu a tutela recursal",
+       "id": "381951629",
+       "data": "2026-06-24"
+      },
+      {
+       "desc": "Contrarrazões da CEF",
+       "id": "384931391",
+       "data": "2026-07-07"
+      },
+      {
+       "desc": "Contraminuta do Bradesco",
+       "id": "387157584",
+       "data": "2026-07-17"
+      },
+      {
+       "desc": "Contrarrazões do Itaú",
+       "id": "387641832",
+       "data": "2026-07-20"
+      }
+     ],
+     "pendencias": "Examinar a prevenção e o preparo",
+     "especificidades": "Valor da causa reduzido para R$ 68.197,79 (danos materiais de R$ 28.197,79 e morais de R$ 40.000,00) · Quatro agravados (CEF, Itaú, Mercado Pago e Bradesco) · Prevenção alegada pelos AIs 5016154-12.2025.4.03.0000 e 5025377-86.2025.4.03.0000 (2ª Turma) · Tutela recursal indeferida (ID 381951629, 24/06/2026) · Sem comprovante de custas"
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Há preliminares",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-06-24"
+    }
    }
   },
   {
