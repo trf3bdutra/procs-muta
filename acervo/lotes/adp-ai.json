@@ -24878,12 +24878,12 @@
    "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "assunto": "ITR/ Imposto Territorial Rural",
    "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "tipo_caso": "Execução fiscal · ITR (2013 e 2015) · exceção de pré-executividade · renúncia à propriedade em 2019 e alegada inexistência física do imóvel (Bahia) · dilação probatória (Súmula 393/STJ)",
+   "resultado": "Ato a proferir: julgamento do agravo de instrumento (voto), conferido antes o preparo [VALIDAR] ‖ Proposta pelos precedentes: Negar provimento. A exceção de pré-executividade só cabe para matéria conhecível de ofício que dispense dilação probatória (Súmula 393/STJ); a renúncia à propriedade produz efeitos a partir do registro e não alcança fatos geradores anteriores; a inexistência física do imóvel, afirmada em laudo particular e contestada pela União, depende de prova (AI 0009738-65.2015.4.03.0000, 3ª Turma, 27/08/2015). Em sentido contrário, quando a prova pré-constituída basta: AI 5010979-42.2022.4.03.0000, 3ª Turma, 14/04/2023 (erro na área do imóvel comprovado). [VALIDAR: força probante do laudo e da matrícula; data do registro da renúncia; preparo (GRU com comprovante sem texto; regra do comprovante STN)]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "observacao": "Agravo de Lorimar Comparim contra a decisão da 6ª Vara Federal de Campo Grande que, na execução fiscal 5003156-59.2022.4.03.6000 (ITR 2013 e 2015), rejeitou a exceção de pré-executividade fundada em renúncia à propriedade e inexistência física do imóvel e determinou o bloqueio pelo SISBAJUD. Sem pedido de efeito suspensivo; a União respondeu. Redistribuído da 4ª Turma.",
+   "peculiaridades": "Agravo de 08/01/2025, redistribuído da 4ª Turma em 15/04/2026. Preparo por GRU judicial (código 18720-8) com comprovante sem texto (ID 310992466) [VALIDAR STN]. A União perdeu o prazo de impugnação na origem; o juízo não conheceu da manifestação.",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -24903,13 +24903,24 @@
      "data": "06/03/2025"
     },
     {
-     "peca": "Decisão no agravo",
+     "peca": "Decisão (redistribuição)",
      "id": "366599655",
      "data": "15/04/2026"
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "analisado_em": "2026-11-20",
+    "ato": "Julgamento do agravo de instrumento (voto)",
+    "materia": "Execução fiscal · ITR · exceção de pré-executividade",
+    "origem": "Execução fiscal 5003156-59.2022.4.03.6000 · 6ª Vara Federal de Campo Grande",
+    "decisao_agravada": "Rejeição da exceção de pré-executividade (publicada em 20/12/2024) [VALIDAR ID]",
+    "recurso": "ID 310992462 · 08/01/2025",
+    "preparo": "GRU judicial 18720-8 e comprovante sem texto (IDs 310992465 e 310992466) [VALIDAR]",
+    "monocratica": "Despacho ID 311075313 (sem pedido de efeito suspensivo)",
+    "conf_preparo": "GRU (ID 310992465) e comprovante (ID 310992466, sem texto extraído) [VALIDAR comprovante STN]",
+    "conf_prevencao": "Redistribuído por criação da Turma Regional de MS (certidão ID 366720877)."
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -24930,6 +24941,93 @@
     "ultima_informacao": "Certidão · ID 366720877 · 15/04/2026",
     "ultima_movimentacao": "15/04/2026 14:58 · CONCLUSOS PARA JULGAMENTO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "assunto_detalhado": "Exceção de pré-executividade em execução de ITR — renúncia à propriedade registrada em 2019 e laudo particular sobre a inexistência física do imóvel; necessidade de dilação probatória",
+   "especificidades": "Execução fiscal 5003156-59.2022.4.03.6000 (ITR 2013 e 2015; R$ 1.737.500,02) · Imóvel \"Fazenda Pérola do Oeste II\", Riachão das Neves/BA · Renúncia à propriedade em 2019 · Redistribuído da 4ª Turma (Des. Fed. Leila Paiva) em 15/04/2026 · Sem pedido de efeito suspensivo",
+   "teor": {
+    "sintese_fatica": "A União executa ITR dos exercícios de 2013 e 2015 sobre imóvel rural na Bahia. O executado opôs exceção de pré-executividade alegando que nunca teve a posse do imóvel, renunciado em 2019, e juntou laudo de engenheiro agrônomo sobre a inexistência física da área. O juízo da 6ª Vara Federal de Campo Grande rejeitou a exceção: a renúncia só produz efeitos para o futuro e o laudo particular exige dilação probatória; determinou o bloqueio pelo SISBAJUD.",
+    "recurso": "Agravo de Lorimar Comparim ID 310992462 (08/01/2025): nunca exerceu a posse nem os poderes de proprietário; renúncia registrada na matrícula; laudo técnico atesta a inexistência física do imóvel; cabimento do agravo (artigo 1.015, parágrafo único, do CPC); pede a extinção da execução.",
+    "resposta": "Contraminuta da União ID 316502048 (06/03/2025): necessidade de dilação probatória; laudo particular sem força probante; propriedade no tempo dos fatos geradores (2013 a 2015)."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "assuntoDet": "Exceção de pré-executividade em execução de ITR — renúncia à propriedade registrada em 2019 e laudo particular sobre a inexistência física do imóvel; necessidade de dilação probatória",
+     "subassuntos": "Execução fiscal · ITR (2013 e 2015) · exceção de pré-executividade · renúncia à propriedade em 2019 e alegada inexistência física do imóvel (Bahia) · dilação probatória (Súmula 393/STJ)",
+     "sintese": "A União executa ITR dos exercícios de 2013 e 2015 sobre imóvel rural na Bahia. O executado opôs exceção de pré-executividade alegando que nunca teve a posse do imóvel, renunciado em 2019, e juntou laudo de engenheiro agrônomo sobre a inexistência física da área. O juízo da 6ª Vara Federal de Campo Grande rejeitou a exceção: a renúncia só produz efeitos para o futuro e o laudo particular exige dilação probatória; determinou o bloqueio pelo SISBAJUD.",
+     "questoes": "1) Efeitos da renúncia à propriedade (2019) sobre o ITR de 2013 e 2015; 2) inexistência física do imóvel demonstrável por prova pré-constituída ou dependente de dilação probatória (Súmula 393/STJ).",
+     "rel": {
+      "razoes": "Agravo de Lorimar Comparim ID 310992462 (08/01/2025): nunca exerceu a posse nem os poderes de proprietário; renúncia registrada na matrícula; laudo técnico atesta a inexistência física do imóvel; cabimento do agravo (artigo 1.015, parágrafo único, do CPC); pede a extinção da execução.",
+      "contrarrazoes": "Contraminuta da União ID 316502048 (06/03/2025): necessidade de dilação probatória; laudo particular sem força probante; propriedade no tempo dos fatos geradores (2013 a 2015)."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "",
+      "juizo": "6ª Vara Federal de Campo Grande",
+      "dispositivo": "Rejeitou a exceção de pré-executividade e determinou o bloqueio pelo SISBAJUD (decisão publicada em 20/12/2024)."
+     },
+     "ai": {
+      "hip": "Execução / cumprimento",
+      "efeito": "Não pedido",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2025-01-08",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Lorimar Comparim",
+       "tipo": "Agravo de instrumento",
+       "id": "310992462",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "310992462",
+       "data": "2025-01-08"
+      },
+      {
+       "desc": "GRU e comprovante (sem texto)",
+       "id": "310992466",
+       "data": "2025-01-08"
+      },
+      {
+       "desc": "Despacho: intimação para contraminuta (sem pedido de efeito suspensivo)",
+       "id": "311075313",
+       "data": "2025-01-10"
+      },
+      {
+       "desc": "Contraminuta da União",
+       "id": "316502048",
+       "data": "2025-03-06"
+      },
+      {
+       "desc": "Decisão de redistribuição à Turma Regional de MS",
+       "id": "366599655",
+       "data": "2026-04-15"
+      }
+     ],
+     "papeis": [
+      "Executado(a)",
+      "Exequente"
+     ]
+    },
+    "ctl": {
+     "tempest": "Tempestivo",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "",
+     "fundamento": "Paradigmas do gabinete: AI 0009738-65.2015.4.03.0000 (3ª Turma, 27/08/2015); em sentido contrário, AI 5010979-42.2022.4.03.0000 (3ª Turma, 14/04/2023); Súmula 393/STJ"
+    }
    }
   },
   {
