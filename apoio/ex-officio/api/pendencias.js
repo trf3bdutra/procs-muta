@@ -15,7 +15,7 @@ const FICHA = require('./_ficha');
 const dg = s => String(s || '').replace(/\D/g, '');
 const hojeISO = () => new Date().toISOString().slice(0, 10);
 const ARQ = 'apoio/equipe-pendencias.json', STAGES = ['todo', 'doing', 'review', 'done'], URG = ['Urgente', 'Alta', 'Média', 'Baixa'];
-const CAMPOS = ['title', 'description', 'assignee', 'urgency', 'dueDate', 'numero', 'sessao', 'stage'];
+const CAMPOS = ['title', 'description', 'assignee', 'urgency', 'dueDate', 'numero', 'sessao', 'stage', 'razao'];
 const APRECIADA = /^Apreciada · /;
 /* origens automáticas abertas agora, e as urgências travadas (decisão já liberada ou assinada) */
 async function origens() {
@@ -96,7 +96,7 @@ async function naOrigem(alvo, b, u, done, descNova) {
 }
 async function ler() { try { return await L.lerJson(ARQ); } catch (e) { if (e.status === 404) return { dados: { schema: 'gabcmt.equipe.pendencias', versao: 1, registros: [] }, sha: undefined }; throw e; } }
 function limpar(b, t) {
-  CAMPOS.forEach(k => { if (k in b) t[k] = String(b[k] == null ? '' : b[k]).slice(0, k === 'description' ? 2000 : 200).trim(); });
+  CAMPOS.forEach(k => { if (k in b) t[k] = String(b[k] == null ? '' : b[k]).slice(0, k === 'description' ? 2000 : k === 'razao' ? 90 : 200).trim(); });
   if (!URG.includes(t.urgency)) t.urgency = 'Média'; if (!STAGES.includes(t.stage)) t.stage = 'todo';
   if (t.dueDate && !/^\d{4}-\d{2}-\d{2}$/.test(t.dueDate)) t.dueDate = '';
   return t;

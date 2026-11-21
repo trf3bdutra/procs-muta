@@ -55,7 +55,9 @@ module.exports = async (req, res) => {
   res.setHeader('Cache-Control', 'no-store');
   /* planilhas do Google (Apps Script): autenticação própria, por token (ver _planilha.js) */
   if (req.query.planilha) return require('./_planilha')(req, res);
-  const u = L.exigir(req, res); if (!u) return;
+  /* a ficha do processo também abre, só para leitura, pelo link próprio do painel do Desembargador (chave CMT_CHAVE) */
+  const pelaChave = req.query.ficha && req.method === 'GET' && !L.quem(req) && require('./_cmt').porChave(req);
+  const u = pelaChave ? (process.env.CMT_RELATOR || 'CM') : L.exigir(req, res); if (!u) return;
   if (req.query.mono) return require('./_mono')(req, res, u);
   if (req.query.ficha) return FICHA(req, res, u);
   if (req.query.prontuario) return require('./_prontuario')(req, res, u);

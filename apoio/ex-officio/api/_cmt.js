@@ -273,7 +273,7 @@ async function painel(req, res, u) {
   /* pedidos de retirada e de adiamento de item da pauta, qualquer que seja o destinatário anotado */
   const pedidos = ((pen || {}).registros || [])
     .filter(r => !r.excluida && r.stage !== 'done' && PEDIDO.test(String(r.title || '')))
-    .map(r => ({ id: r.id, tipo: /retirada/i.test(r.title) ? 'retirada' : 'adiamento', titulo: r.title || '',
+    .map(r => ({ id: r.id, tipo: /retirada/i.test(r.title) ? 'retirada' : 'adiamento', titulo: r.title || '', razao: r.razao || '',
       texto: r.description || '', numero: r.numero || '', de: r.creator || '', sessao: r.sessao || '',
       prioridade: r.urgency || '', em: r.atualizadoEm || r.criadoEm || '', resposta: r.resposta || '' }))
     .sort((x, y) => String(y.em).localeCompare(String(x.em)));
@@ -321,6 +321,10 @@ async function painel(req, res, u) {
   /* monocráticas e urgências */
   const assinar = { assinatura: [], liberacao: [] }, urgencias = [];
   const regs = ((doc || {}).registros || []).filter(r => (r.producao || {}).Destino === 'Monocrática' || !!(r.triagem || {})['Urgência']);
+  /* caso de cada monocrática a assinar (assunto, classe e partes do acervo, como na página Monocráticas) */
+  let ACV = {};
+  if (regs.some(r => { const i = MONO.item(r); return i.mono && i.dataLiberacao && !i.assinado; })) { try { ACV = (await MONO.acervo()).base || {}; } catch (e) {} }
+  const dgs0 = x => String(x || '').replace(/\D/g, '');
   regs.forEach(r => {
     const i = MONO.item(r), c = i.ctl || {};
     const base = { cnj: i.cnj, servidor: i.servidor || '', corretor: i.corretor || '', obs: i.obs || '' };
@@ -334,7 +338,8 @@ async function painel(req, res, u) {
         dataMinuta: i.dataMinuta || '', dataCorrecao: i.dataCorrecao || '', tipoAto: pr['Mono - Tipo de ato'] || '', julgamento: tr['Tipo de Julgamento'] || '',
         meta: tr.META || '', prazo: ok(ct['Monocrática - Prazo']) ? d10(ct['Monocrática - Prazo']) : '', topico: pr['Tópico-síntese'] || '',
         atencao: pr['Rev - Atenção'] || '', notaAtencao: pr['Rev - Nota de atenção'] || '', sessao: pa['Sessão original'] || '',
-        item: pa['Item (Pauta de Julgamento)'] || '', urg }, base));
+        item: pa['Item (Pauta de Julgamento)'] || '', urg,
+        titulo: (i.ctl || {}).titulo || '', assunto: (ACV[dgs0(i.cnj)] || {}).assunto || '', classe: (ACV[dgs0(i.cnj)] || {}).classe || '', partes: (ACV[dgs0(i.cnj)] || {}).partes || '' }, base));
     }
     else if (i.mono && i.dataCorrecao && !i.dataLiberacao) assinar.liberacao.push(Object.assign({ desde: i.dataCorrecao }, base));
     if (c.urgTipo && !/^Apreciada/.test(String(c.urgSit || ''))) urgencias.push(Object.assign({
@@ -356,7 +361,7 @@ async function painel(req, res, u) {
     .concat(duvidas.map(d => ({ id: 'du-' + d.id, tipo: 'duvida', titulo: d.titulo || 'Dúvida', texto: d.texto || '',
       de: d.de || '', numero: d.numero || '', em: d.em || '', prazo: d.prazo || '' })))
     .concat(pedidos.map(d => ({ id: 'pe-' + d.id, tipo: 'pedido', caso: d.tipo, titulo: d.titulo || (d.tipo === 'retirada' ? 'Pedido de retirada de pauta' : 'Pedido de adiamento'),
-      texto: d.texto || '', de: d.de || '', numero: d.numero || '', em: d.em || '', sessao: d.sessao || '' })))
+      texto: (d.razao ? 'Razão: ' + d.razao + (d.texto ? '\n' : '') : '') + (d.texto || ''), de: d.de || '', numero: d.numero || '', em: d.em || '', sessao: d.sessao || '' })))
     .concat(assinar.assinatura.map(a => ({ id: 'as-' + a.cnj, tipo: 'assinatura', titulo: 'Decisão submetida à assinatura' + (a.tipoAto ? ' · ' + a.tipoAto : ''),
       texto: a.topico || '', de: a.servidor || '', numero: a.cnj, em: a.desde || '', urg: !!a.urg })))
     .concat(urgencias.map(x => ({ id: 'ur-' + x.cnj, tipo: 'urgencia', titulo: 'Urgência · ' + (x.tipo || 'pedido urgente') + (x.nivel ? ' (' + x.nivel + ')' : ''),

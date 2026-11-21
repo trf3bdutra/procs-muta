@@ -546,9 +546,9 @@ function rapLista(){return (RAP.vivo||(ED&&ED.rapidas)||[]).slice().sort(functio
 function rapPode(){return !!(window.CMT_SITE&&window.CMT_ACESSO&&window.CMT_ACESSO().editor);}
 function rapJ(x){return JSON.stringify(x,function(k,v){return k.charAt(0)==='_'&&k!=='_topicos'&&k!=='_estrutura'?undefined:v;});}
 function rapData(d){var m=/^(\d{4})-(\d{2})-(\d{2})/.exec(d||'');return m?m[3]+'/'+m[2]+'/'+m[1]:esc(d||'');}
-function rapItem(r,pode){var inc=r.situacao==='incorporada';return '<li class="'+(inc?'inc':'')+'"><div class="rap-m"><span class="rap-t">'+esc(r.tipo||'Entrada')+'</span><span>'+rapData(r.data)+'</span>'+(r.autor?'<span>'+esc(r.autor)+'</span>':'')+(inc?'<span class="rap-ok">incorporada'+(r.destino?' em '+esc(r.destino):'')+'</span>':'')+'</div>'+
+function rapItem(r,pode,semInc){var inc=!semInc&&r.situacao==='incorporada';return '<li class="'+(inc?'inc':'')+'"><div class="rap-m"><span class="rap-t">'+esc(r.tipo||'Entrada')+'</span><span>'+rapData(r.data)+'</span>'+(r.autor?'<span>'+esc(r.autor)+'</span>':'')+(inc?'<span class="rap-ok">incorporada'+(r.destino?' em '+esc(r.destino):'')+'</span>':'')+'</div>'+
       '<p>'+xFm(r.texto||'')+'</p>'+(r.origem?'<p class="rap-o">Origem: '+esc(r.origem)+'</p>':'')+
-      (pode?'<div class="rap-a">'+(inc?'<button class="e-mini" data-rapsit="'+esc(r.id)+'">Voltar para “a incorporar”</button>':'<button class="e-mini" data-rapinc="'+esc(r.id)+'">Marcar como incorporada</button>')+'<button class="e-mini" data-rapdel="'+esc(r.id)+'">Excluir</button></div>':'')+'</li>';}
+      (pode?'<div class="rap-a">'+(semInc?'':inc?'<button class="e-mini" data-rapsit="'+esc(r.id)+'">Voltar para “a incorporar”</button>':'<button class="e-mini" data-rapinc="'+esc(r.id)+'">Marcar como incorporada</button>')+'<button class="e-mini" data-rapdel="'+esc(r.id)+'">Excluir</button></div>':'')+'</li>';}
 function rapHtml(nq,duas){
   var L=rapLista(),nov=L.filter(function(r){return r.situacao!=='incorporada';}).length,pode=rapPode();
   var V=L.filter(function(r){return (RAP.filtro==='todas'||(RAP.filtro==='novas'?r.situacao!=='incorporada':r.situacao==='incorporada'))&&(!nq||nz([r.tipo,r.texto,r.origem,r.destino].join(' ')).indexOf(nq)>=0);});
@@ -559,10 +559,20 @@ function rapHtml(nq,duas){
     '<input data-raporig placeholder="Origem (opcional): processo, reunião, despacho…" value="'+esc(RAP.orig)+'" aria-label="Origem">'+
     '<button class="btn" data-rapadd'+(RAP.grav?' disabled':'')+'>'+(RAP.grav?'Gravando…':'Registrar')+'</button></div>';
   else h+='<p class="rap-ro">'+(window.CMT_SITE?'Leitura. Quem registra, incorpora e exclui entradas é o perfil Editor.':'Aberto como arquivo: o registro de entradas funciona no site do gabinete, para o perfil Editor.')+'</p>';
-  /* duas=true (aba do editor): A incorporar e Incorporadas lado a lado, cada coluna com a sua rolagem */
-  if(duas){var A=L.filter(function(r){return r.situacao!=='incorporada'&&(!nq||nz([r.tipo,r.texto,r.origem,r.destino].join(' ')).indexOf(nq)>=0);}),I=L.filter(function(r){return r.situacao==='incorporada'&&(!nq||nz([r.tipo,r.texto,r.origem,r.destino].join(' ')).indexOf(nq)>=0);});
-    var col=function(t,X,vz,c){return '<section class="rap-c '+c+'"><h3>'+t+'<i>'+X.length+'</i></h3>'+(X.length?'<ol class="rap-l">'+X.map(function(r){return rapItem(r,pode);}).join('')+'</ol>':'<p class="rap-v">'+vz+'</p>')+'</section>';};
-    return h+'<div class="rap-2">'+col('A incorporar',A,'Nada a incorporar.','nv')+col('Incorporadas',I,'Nenhuma entrada incorporada ainda.','ok')+'</div>';}
+  /* duas=true (aba do editor): o registro à esquerda e a lista de entradas ao lado, sem a separação incorporar/incorporada */
+  if(duas){var T=L.filter(function(r){return !nq||nz([r.tipo,r.texto,r.origem,r.destino].join(' ')).indexOf(nq)>=0;});
+    var fm=pode?'<div class="rap-novo rap-fm"><p class="rap-fk">Nova entrada</p><label><span>Tipo</span><select data-raptipo aria-label="Tipo da entrada">'+RAP_TIPOS.map(function(t){return '<option'+(t===RAP.tipo?' selected':'')+'>'+t+'</option>';}).join('')+'</select></label>'+
+      '<label><span>Entrada</span><textarea data-raptxt rows="6" placeholder="O que foi fixado, em uma ou duas frases (Ctrl+Enter salva)" aria-label="Texto da entrada">'+esc(RAP.txt)+'</textarea></label>'+
+      '<label><span>Origem <small>(opcional)</small></span><input data-raporig placeholder="processo, reunião, despacho…" value="'+esc(RAP.orig)+'" aria-label="Origem"></label>'+
+      '<button class="rap-reg" data-rapadd'+(RAP.grav?' disabled':'')+'>'+(RAP.grav?'Gravando…':'Registrar')+'</button></div>'
+      :'<div class="rap-fm"><p class="rap-fk">Nova entrada</p><p class="rap-ro">'+(window.CMT_SITE?'Leitura. Quem registra e exclui entradas é o perfil Editor.':'Aberto como arquivo: o registro funciona no site do gabinete, para o perfil Editor.')+'</p></div>';
+    var X='<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>';
+    /* mesmo desenho das leituras de Parágrafos e Peças: cabeçalho com sobretítulo, título serifado e texto corrido */
+    return '<div class="lp-ler rap-lp"><header class="lp-hd"><p class="mn-k">Compendium · editor do Desembargador</p><h1>Entradas rápidas</h1><p class="lp-sub">Diretrizes, comandos, atualizações e padronizações fixadas pelo Desembargador, registradas na hora.</p></header>'+
+      '<div class="lp-grid rap-g">'+fm+'<div class="lp-doc"><h2>Entradas<small>'+T.length+'</small></h2>'+
+      (T.length?T.map(function(r){return '<div class="lp-c mn-ed rap-e"><p class="lp-m">'+esc(r.tipo||'Entrada')+' · '+rapData(r.data)+(r.autor?' · '+esc(r.autor):'')+'</p><div class="lp-t"><p>'+xFm(r.texto||'')+'</p></div>'+(r.origem?'<p class="lp-u"><b>Origem</b>'+esc(r.origem)+'</p>':'')+
+        (pode?'<button type="button" class="mn-pen rap-del" data-rapdel="'+esc(r.id)+'" title="Excluir a entrada" aria-label="Excluir a entrada">'+X+'</button>':'')+'</div>';}).join('')
+       :'<p class="lp-sub">'+(L.length?'Nenhuma entrada com esta busca.':'Nenhuma entrada ainda.')+'</p>')+'</div></div></div>';}
   h+=V.length?'<ol class="rap-l">'+V.map(function(r){return rapItem(r,pode);}).join('')+'</ol>'
     :'<p class="rap-v">'+(L.length?'Nenhuma entrada neste filtro.':'Nenhuma entrada ainda.')+'</p>';
   return h;}

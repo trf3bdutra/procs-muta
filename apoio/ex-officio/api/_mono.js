@@ -10,7 +10,7 @@ const L = require('./_lib');
 const FICHA = require('./_ficha');
 const GESTOR = ['servidor', 'corretor'];
 /* campos sem lugar próprio na ficha (cartão completo, consectários): guardados juntos, no mesmo registro */
-const EXTRA = '_monoExtra', SEM_FICHA = ['consect', 'cartao', 'intercorOk'];
+const EXTRA = '_monoExtra', SEM_FICHA = ['consect', 'cartao', 'intercorOk', 'titulo'];
 /* sugestões: etiquetas do PJe que indicam pedido urgente, em processo que ainda está no gabinete */
 const URG = /urgen|tutela de urg|tutela antecip|tutela provis|efeito suspensivo|liminar(?! indeferida)|cirurgia|medicamento/i;
 const FORA = /^\[Sess|Baixad|Arquivo|prazo em curso|Sobrestad/i;
