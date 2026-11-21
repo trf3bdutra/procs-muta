@@ -235,7 +235,11 @@ const sem=s=>String(s||'').normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase()
 const hoje=()=>new Date(Date.now()-4*3600e3).toISOString().slice(0,10);
 const params=new URLSearchParams(location.search);
 const SECS=[['relatorio','Relatório','R'],['voto','Voto','V'],['ementa','Ementa','E'],['acordao','Acórdão','A']];
-const ETAPAS=[['corrigir','1 · Correção','a corrigir','minutadas, sem correção registrada'],['corrigida','2 · Corrigida','corrigidas','falta colar no PJe e marcar'],['pje','3 · No PJe','no PJe','versão importada, antes da liberação'],['liberada','4 · Liberada','liberadas','falta a versão final do PJe'],['final','5 · Versão final','conferidas','versão final registrada']];
+const ETAPAS_COMPLETO=[['corrigir','1 · Correção','a corrigir','minutadas, sem correção registrada'],['corrigida','2 · Corrigida','corrigidas','falta colar no PJe e marcar'],['pje','3 · No PJe','no PJe','versão importada, antes da liberação'],['liberada','4 · Liberada','liberadas','falta a versão final do PJe'],['final','5 · Versão final','conferidas','versão final registrada']];
+/* "No PJe" e "Versão final" só valem nas minhas correções; na pauta inteira o fluxo é minutada · corrigida · liberada */
+const ETAPAS_SIMPLES=[['corrigir','1 · Correção','a corrigir','minutadas, sem correção registrada'],['corrigida','2 · Corrigida','corrigidas','falta liberar no PJe'],['liberada','3 · Liberada','liberadas','prontas para a sessão']];
+const completo=()=>S.vista==='meus';
+const etapas=()=>completo()?ETAPAS_COMPLETO:ETAPAS_SIMPLES;
 const S={usuario:'',gestor:false,sessoes:[],data:'',itens:[],por:{},lotes:{},vista:'meus',etapa:'',fora:'',q:'',aberto:'',ver:{}};
 
 async function get(url){const r=await fetch(url,{credentials:'same-origin',headers:{'Accept':'application/json'}});const j=await r.json().catch(()=>({}));if(!r.ok){const e=new Error(j.erro||('HTTP '+r.status));e.status=r.status;throw e}return j}
@@ -244,25 +248,26 @@ const MODO=()=>S.gestor?'&modo=cg':'';
 function msg(t){const e=$('#ld-m');if(e)e.textContent=t}
 
 /* ---------- modelo de cada processo: etapas da produção, tiradas da pauta (Ex Officio) e do lote (Collectio) ---------- */
-function linha(x){
+function linha(x,cheio){
+  if(cheio===undefined)cheio=completo();
   const z=S.por[x.cnj]||null, it=z?z.it:null, c=x.ctl||{};
   const m=!!(x.dataMinuta||(it&&it.minuta)), co=!!x.dataCorrecao, pj=!!(it&&it.pje), li=!!x.dataLiberacao, fi=!!(it&&it.final);
   const retido=/retirad|adiad/i.test(c.intercorTipo||'');
-  const etapa=retido?'retido':fi?'final':li?'liberada':pj?'pje':co?'corrigida':m?'corrigir':'minutar';
-  const passos=[m,co,pj,li,fi];
+  const etapa=retido?'retido':cheio?(fi?'final':li?'liberada':pj?'pje':co?'corrigida':m?'corrigir':'minutar'):(li?'liberada':co?'corrigida':m?'corrigir':'minutar');
+  const passos=cheio?[m,co,pj,li,fi]:[m,co,li];
   const tags=[]; let nivel='';
   if(retido){tags.push(['in',c.intercorTipo]);}
   else{
     /* alerta só no que ainda pede ação: com a versão final registrada, o processo está em dia */
     if(!m){tags.push(['al','Sem minuta']);nivel=nivel||'al'}
-    if(li&&!fi){tags.push(['al','Falta a versão final']);nivel=nivel||'al'}
-    if(co&&!li&&!pj&&it&&it.minuta)tags.push(['in','Colar no PJe e marcar']);
+    if(cheio&&li&&!fi){tags.push(['al','Falta a versão final']);nivel=nivel||'al'}
+    if(cheio&&co&&!li&&!pj&&it&&it.minuta)tags.push(['in','Colar no PJe e marcar']);
     const np=it&&Array.isArray(it.pendencias)?it.pendencias.length:0;
     if(np&&!li)tags.push(['in',np+(np>1?' pendências':' pendência')+' a validar']);
     if(!String(x.servidor||'').trim()||!String(x.corretor||'').trim())tags.push(['cr','Sem designação']);
   }
   const txt={minutar:'a minutar',corrigir:x.dataMinuta?'minutada '+brc(x.dataMinuta):'minutada',corrigida:'corrigida '+brc(x.dataCorrecao),pje:'no PJe '+brc(it&&it.pje&&it.pje.em),liberada:'liberada '+brc(x.dataLiberacao),final:'versão final '+brc(it&&it.final&&it.final.em),retido:'fora da sessão'}[etapa];
-  return {x,z,it,c,item:Number(x.item)||0,etapa,passos,tags,nivel,txt,retido,
+  return {x,z,it,c,item:Number(x.item)||0,etapa,passos,tags,nivel,txt,retido,cheio,
     meu:souEu(x.corretor)};
 }
 /* o corretor pode ser dupla ("Bruno/Alex"): basta um dos nomes ser o do login (nome inteiro ou o primeiro nome) */
@@ -302,7 +307,7 @@ async function carregarSessao(){
   S.por={};S.lotes={};
   R.forEach((r,k)=>{if(!r||!r.lote)return;const l=r.lote;S.lotes[l.id]=l;(l.itens||[]).forEach(it=>{if(it.sessao&&it.sessao!==S.data)return;const ant=S.por[it.processo];if(!ant||(!ant.it.minuta&&it.minuta))S.por[it.processo]={lote:l.id,titulo:l.titulo||l.id,it}})});
   S.itens=(P.itens||[]);
-  S.linhas=S.itens.map(linha);
+  S.linhas=S.itens.map(x=>linha(x));
   if(!S.linhas.some(r=>r.meu))S.vista='todos';
   const eu=$('#eu');if(S.usuario){eu.hidden=false;eu.textContent='★ '+S.usuario}
   S.aberto=params.get('processo')&&S.linhas.some(r=>r.x.cnj.startsWith(params.get('processo')))?S.linhas.find(r=>r.x.cnj.startsWith(params.get('processo'))).x.cnj:S.aberto;
@@ -313,6 +318,7 @@ async function carregarSessao(){
 /* ---------- página ---------- */
 function conta(lst,k){return lst.filter(r=>r.etapa===k).length}
 function render(){
+  S.linhas=S.itens.map(x=>linha(x));
   const esc0=escopo(), lst=filtradas();
   const n=k=>conta(esc0,k);
   const ses=S.sessoes.map(s=>`<option value="${s.date}"${s.date===S.data?' selected':''}>Pauta · ${br(s.date)}</option>`).join('');
@@ -331,7 +337,7 @@ function render(){
    <a class="ir" href="#procs"><i>02</i><span>Processos</span><small>${lst.length}</small></a>
    ${S.aberto?`<a class="ir" href="#proc" aria-current="true"><i>03</i><span>Item ${esc((S.linhas.find(r=>r.x.cnj===S.aberto)||{}).x.item)}</span></a>`:''}
    <p class="lx-nk" style="margin-top:14px">Etapas</p>
-   ${ETAPAS.map(([k,r])=>`<button type="button" class="ir" data-et="${k}" aria-current="${S.etapa===k}"><span>${esc(r.replace(/^\d · /,''))}</span><small>${n(k)}</small></button>`).join('')}
+   ${etapas().map(([k,r])=>`<button type="button" class="ir" data-et="${k}" aria-current="${S.etapa===k}"><span>${esc(r.replace(/^\d · /,''))}</span><small>${n(k)}</small></button>`).join('')}
    <button type="button" class="ir" data-fo="minutar" aria-current="${S.fora==='minutar'}"><span>Sem minuta</span><small>${n('minutar')}</small></button>
    <button type="button" class="ir" data-fo="retido" aria-current="${S.fora==='retido'}"><span>Retirados de pauta</span><small>${n('retido')}</small></button>
    <p class="nota">Prévia só de leitura: nada aqui grava. As marcas e as versões continuam no <a href="/amicus/collectio/">Collectio atual</a>.</p>
@@ -339,12 +345,12 @@ function render(){
   <div class="main">
    <div class="lx-h"><div><p class="k">Coleção de pauta · sessão de ${br(S.data)}</p><h1>${S.vista==='meus'?'Minhas <em class="it">correções.</em>':'Toda a <em class="it">pauta.</em>'}</h1></div>
     <p class="lx-st">${S.usuario?esc(S.usuario)+' · ':''}${esc0.length} de ${S.linhas.length} processos<br>${alertas.length} com alerta</p></div>
-   <p class="lead">O caminho de cada minuta, da correção à versão final do PJe, numa página só: cada etapa mostra o que fazer agora e em quais processos. Clique num processo para ver as versões e o que mudou.</p>
+   <p class="lead">${completo()?'O caminho de cada minuta da sua correção, da correção à versão final do PJe, numa página só: cada etapa mostra o que fazer agora e em quais processos.':'O caminho de cada minuta da pauta, da correção à liberação no PJe: cada etapa mostra o que falta e em quais processos.'} Clique num processo para ver as versões e o que mudou.</p>
    <span class="aviso">Prévia · só leitura · dados reais da pauta</span>
 
-   <section class="sec" id="fluxo"><div class="shd"><div><p class="k">01 / Produção</p><h2>Fluxo da <em class="it">minuta.</em></h2><p class="d">Cada coluna é uma etapa, com o próximo passo e a fila, na ordem da pauta. As datas vêm da pauta do Ex Officio; a marca do PJe e a versão final, do Collectio. Clique na etapa para filtrar a lista.</p></div></div>
+   <section class="sec" id="fluxo"><div class="shd"><div><p class="k">01 / Produção</p><h2>Fluxo da <em class="it">minuta.</em></h2><p class="d">Cada coluna é uma etapa, com o próximo passo e a fila, na ordem da pauta. As datas vêm da pauta do Ex Officio${completo()?'; a marca do PJe e a versão final, do Collectio':''}. Clique na etapa para filtrar a lista.${completo()?'':' “No PJe” e “Versão final” só entram nas minhas correções.'}</p></div></div>
     <div class="box">
-     <div class="met fl" role="group" aria-label="Etapas e fila de cada uma">${ETAPAS.map(e=>colEtapa(e,esc0)).join('')}</div>
+     <div class="met fl" style="grid-template-columns:repeat(${etapas().length},minmax(0,1fr))" role="group" aria-label="Etapas e fila de cada uma">${etapas().map(e=>colEtapa(e,esc0)).join('')}</div>
      <div class="ph">
       <span class="seg" role="group" aria-label="Recorte"><button type="button" data-vista="meus" aria-pressed="${S.vista==='meus'}"${meus?'':' disabled'}>Minhas correções</button><button type="button" data-vista="todos" aria-pressed="${S.vista==='todos'}">Toda a pauta</button></span>
       <label class="bq"><span class="sr">Buscar</span><input type="search" id="q" placeholder="item, processo, parte ou assunto" value="${esc(S.q)}"></label>
@@ -353,7 +359,7 @@ function render(){
     </div>
    </section>
 
-   <section class="sec" id="procs"><div class="shd"><div><p class="k">02 / Lista</p><h2>Processos <em class="it">${S.etapa?esc((ETAPAS.find(e=>e[0]===S.etapa)||[])[2]):S.fora==='retido'?'retirados':S.fora==='minutar'?'sem minuta':'da '+(S.vista==='meus'?'correção':'sessão')}.</em></h2><p class="d">${lst.length} de ${esc0.length}, na ordem da pauta. A barra mostra as cinco etapas; a vazada com contorno é a etapa pulada.</p></div></div>
+   <section class="sec" id="procs"><div class="shd"><div><p class="k">02 / Lista</p><h2>Processos <em class="it">${S.etapa?esc((etapas().find(e=>e[0]===S.etapa)||[])[2]):S.fora==='retido'?'retirados':S.fora==='minutar'?'sem minuta':'da '+(S.vista==='meus'?'correção':'sessão')}.</em></h2><p class="d">${lst.length} de ${esc0.length}, na ordem da pauta. A barra mostra as cinco etapas; a vazada com contorno é a etapa pulada.</p></div></div>
     <div class="box"><div class="tw"><table class="tb">
      <thead><tr><th scope="col">Item</th><th scope="col">Processo</th><th scope="col">Minuta</th><th scope="col">Correção</th><th scope="col">Etapas</th><th scope="col">Alertas</th><th scope="col"><span class="sr">Abrir</span></th></tr></thead>
      <tbody>${lst.map(rowHtml).join('')||`<tr><td colspan="7" class="vazio">Nenhum processo neste filtro.</td></tr>`}</tbody>
@@ -383,8 +389,9 @@ const PASSO={corrigir:['Corrigir','na ordem da pauta',r=>r.x.servidor?'minuta '+
   pje:['Liberar no PJe','pela pauta ou pela página do Desembargador',r=>'no PJe '+brc(r.it&&r.it.pje&&r.it.pje.em)],
   liberada:['Registrar a versão final','texto conferido no PJe',r=>'liberada '+brc(r.x.dataLiberacao)],
   final:['Pronto para a sessão','com a versão final registrada',r=>'versão final '+brc(r.it&&r.it.final&&r.it.final.em)]};
+const PASSO_SIMPLES={corrigir:null,corrigida:['Liberar no PJe','pela pauta ou pela página do Desembargador',r=>'corrigida '+brc(r.x.dataCorrecao)],liberada:['Pronto para a sessão','liberada no PJe',r=>'liberada '+brc(r.x.dataLiberacao)]};
 function colEtapa([k,r,t,d],base){
-  const lst=base.filter(x=>x.etapa===k).sort((a,b)=>a.item-b.item), [ac,ac2,sub]=PASSO[k], MAX=5;
+  const lst=base.filter(x=>x.etapa===k).sort((a,b)=>a.item-b.item), [ac,ac2,sub]=(!completo()&&PASSO_SIMPLES[k])||PASSO[k], MAX=5;
   return `<div class="col${S.etapa===k?' at':''}">
    <button type="button" data-et="${k}" aria-pressed="${S.etapa===k}" title="Filtrar a lista por esta etapa"><span>${esc(r)}</span><b>${lst.length}</b><small>${esc(t)}</small></button>
    <p class="nx"><b>${esc(ac)}</b> ${esc(ac2)}</p>
@@ -394,17 +401,22 @@ function colEtapa([k,r,t,d],base){
 
 /* ---------- processo aberto ---------- */
 function procHtml(){
-  const r=S.linhas.find(l=>l.x.cnj===S.aberto); if(!r)return '';
-  const x=r.x,it=r.it,z=r.z;
-  const cel=[
+  const r0=S.linhas.find(l=>l.x.cnj===S.aberto); if(!r0)return '';
+  /* o fluxo completo (no PJe e versão final) só vale para as minhas correções */
+  const r=linha(r0.x,r0.meu), x=r.x,it=r.it,z=r.z;
+  const cel=r.cheio?[
     ['1 · Minutada',x.dataMinuta?br(x.dataMinuta):(r.passos[0]?'✓':'—'),x.servidor||''],
     ['2 · Corrigida',x.dataCorrecao?br(x.dataCorrecao):'—',x.corretor||''],
     ['3 · No PJe',it&&it.pje?br(it.pje.em):'—',it&&it.pje?'versão '+it.pje.versao+(it.pje.por?' · '+it.pje.por:''):'versão colada no editor'],
     ['4 · Liberada',x.dataLiberacao?br(x.dataLiberacao):'—','pela pauta ou pela página do Desembargador'],
-    ['5 · Versão final',it&&it.final?br(it.final.em):'—',it&&it.final?'versão '+it.final.versao:'texto conferido no PJe']];
+    ['5 · Versão final',it&&it.final?br(it.final.em):'—',it&&it.final?'versão '+it.final.versao:'texto conferido no PJe']]:[
+    ['1 · Minutada',x.dataMinuta?br(x.dataMinuta):(r.passos[0]?'✓':'—'),x.servidor||''],
+    ['2 · Corrigida',x.dataCorrecao?br(x.dataCorrecao):'—',x.corretor||''],
+    ['3 · Liberada',x.dataLiberacao?br(x.dataLiberacao):'—','pela pauta ou pela página do Desembargador']];
   const atual=r.passos.findIndex(p=>!p);
   let ban='';
   if(r.retido)ban=`<p class="ban in">${esc(r.c.intercor||r.c.intercorTipo)}</p>`;
+  else if(!r.cheio)ban=r.etapa==='liberada'?`<p class="ban ok">Liberada no PJe para a sessão.</p>`:r.etapa==='corrigida'?`<p class="ban in">Corrigida. Falta liberar no PJe.</p>`:'';
   else if(r.etapa==='liberada')ban=`<p class="ban">Liberada no PJe${r.passos[2]?'':', sem a marca da versão importada'}. Confira o texto final no PJe e registre-o como versão final no Collectio: a comparação abaixo passa a mostrar o que o Desembargador mudou.</p>`;
   else if(r.etapa==='corrigida')ban=`<p class="ban in">Corrigida. Ao colar no editor do PJe, marque no Collectio a versão importada.</p>`;
   else if(r.etapa==='final')ban=`<p class="ban ok">Versão final registrada${it&&it.final?' em '+br(it.final.em):''}. A comparação parte da versão importada no PJe.</p>`;
@@ -414,7 +426,7 @@ function procHtml(){
    <div class="box">
     <div class="pf-h"><div><span class="cnj">${esc(x.cnj)}</span><span class="pt">${esc(x.partes)}</span><span class="pt">${z?'Minuta no Collectio: '+esc(z.titulo):'Sem minuta no Collectio'}</span></div>
      <div class="pf-acts">${z?`<a class="b pri" href="/amicus/collectio/?id=${encodeURIComponent(z.lote)}" target="_blank" rel="noopener">Abrir no Collectio</a>`:''}<button type="button" class="b" id="fecha">Fechar</button></div></div>
-    <div class="met flx">${cel.map((c,k)=>`<div class="${k===atual&&!r.retido?'at':''}"><span>${esc(c[0])}</span><b>${esc(c[1])}</b><small>${esc(c[2])}</small></div>`).join('')}</div>
+    <div class="met flx" style="grid-template-columns:repeat(${cel.length},minmax(0,1fr))">${cel.map((c,k)=>`<div class="${k===atual&&!r.retido?'at':''}"><span>${esc(c[0])}</span><b>${esc(c[1])}</b><small>${esc(c[2])}</small></div>`).join('')}</div>
     ${ban}
     <div class="sub"><h3>Versões da minuta <small id="vs-k">${z?'lendo…':'—'}</small></h3><div class="vs" id="vs">${z?'<p class="vazio" style="padding:0">Lendo as versões…</p>':'<p class="vazio" style="padding:0">Este processo ainda não tem minuta registrada no Collectio.</p>'}</div></div>
     <div class="sub" id="cmp-w" hidden><h3>O que <em class="it" style="font-size:12px;letter-spacing:.06em">mudou</em> <small id="cmp-k"></small></h3>
