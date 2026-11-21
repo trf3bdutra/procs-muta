@@ -9742,6 +9742,8 @@ body.cmt-asl-on.cmt-asl-min #v-cmt .cmt-asl-k{background:var(--ew)}
 #v-pauta.pt2 .pp-sub .pp-ses:focus-within{box-shadow:0 1px 3px rgba(32,59,57,.08)!important}
 #v-pauta.pt2 .pp-sub .pp-ses .pp-ses-d{position:relative;padding:6px 0 6px 10px;align-self:center}
 #v-pauta.pt2 .pp-sub .pp-ses #ses-sub{position:relative;padding-right:8px;align-self:center}
+/* o seletor invisível cobre o cartão inteiro (a regra geral .trb-sl fixava 34px e deixava a data fora do clique) */
+#v-pauta.pt2 .pp-ses .trb-sl{height:auto!important;inset:0!important}
 /* cartões da pauta: sempre em duas linhas, como o relator prefere: observação, etiquetas e ícones de ação em cima; etapas embaixo, à direita
    (antes dependia do tamanho dos nomes: com minutante de nome longo, as etapas desciam; com nome curto, ficavam na mesma linha) */
 @media (min-width:781px){
