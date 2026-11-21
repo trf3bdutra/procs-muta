@@ -163,12 +163,12 @@ test('Pautas: sessão e buscador em linha única; ações de Sinalizações e No
   assert.match(h, /#prq \.prt-p>section\{background:#fff/);
 });
 
-test('Mural: avisos e minhas ausências à direita do calendário, sem a faixa de sessões em andamento', () => {
+test('Mural: avisos à direita do calendário e ausências como vista do painel do calendário, sem a faixa de sessões em andamento', () => {
   const fs = require('fs'), path = require('path');
   const h = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
   assert.match(h, /#mu-host \.cc-dir\{display:none!important\}/);
   assert.match(h, /av\.setAttribute\('slot','avisos'\)/);
-  assert.match(h, /au\.setAttribute\('slot','aus'\)/);
+  assert.match(h, /if\(au\)\{au\.removeAttribute\('slot'\);cal\.appendChild\(au\);\}/);
   assert.match(h, /<slot name=\\"avisos\\"><\\\/slot>/);
 });
 
@@ -369,4 +369,30 @@ test('Mural v2: saudação com atalhos, Foco de hoje, sessões com trilha, cards
   assert.match(lib, /if\(ex\.chips\) vis\.forEach/);
   assert.match(lib, /class="cc-leg"/);
   assert.match(h, /id=\\"pspark\\"|id="pspark"/);
+});
+
+test('Ausências: datas pessoais (aniversário, posse, chegada) gravadas por usuário; vista Ausências e cartão no canto do calendário', async () => {
+  process.env.CMT_SESSION_SECRET = process.env.CMT_SESSION_SECRET || '0123456789abcdef0123456789abcdef';
+  const L = require('../api/_lib.js'), o = { lerJson: L.lerJson, gravarJson: L.gravarJson, exigir: L.exigir };
+  let store = { registros: [{ id: 'a1', nome: 'Victor', de: '2026-12-01', ate: '2026-12-03', estado: 'pendente', criadoEm: '1' }], perfis: { Estela: { aniversario: '1990-05-02' } } }, USER = 'Victor';
+  L.lerJson = async () => ({ dados: JSON.parse(JSON.stringify(store)), sha: 's' }); L.gravarJson = async (p, doc) => { store = doc; }; L.exigir = () => USER;
+  try {
+    const h = require('../api/ausencias.js');
+    const call = (method, body) => new Promise(ok => h({ method, query: {}, body, headers: {} }, { status(n) { this.n = n; return this; }, json(d) { ok([this.n, d]); }, setHeader() {} }));
+    let [n, d] = await call('POST', { perfil: { aniversario: '1988-11-30', posse: '2015-03-10', chegada: '2019-08-01' } }); assert.equal(n, 200);
+    assert.deepEqual(Object.keys(store.perfis).sort(), ['Estela', 'Victor']);
+    [, d] = await call('GET'); assert.equal(d.perfil.posse, '2015-03-10'); assert.equal(d.registros.length, 1);
+    [n] = await call('POST', { perfil: { aniversario: '30/11/1988' } }); assert.equal(n, 400);
+    await call('POST', { perfil: { chegada: '' } }); assert.ok(!('chegada' in store.perfis.Victor));
+    USER = 'Estela'; [, d] = await call('GET'); assert.equal(d.perfil.aniversario, '1990-05-02'); assert.ok(!d.perfil.posse);
+  } finally { Object.assign(L, o); }
+  const fs = require('fs'), path = require('path');
+  const h = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
+  const lib = fs.readFileSync(path.join(__dirname, '../../../caput/motor/assets/js/11-calendario.js'), 'utf8');
+  assert.match(h, /id="pf-aniv"[^]*id="pf-posse"[^]*id="pf-cheg"/);
+  assert.match(h, /data-vista="aus">Ausências</);
+  assert.match(h, /canto:PAINEL_GAB\?'':ausCanto\(\)/);
+  assert.match(lib, /class="cc-c cc-canto"/);
+  assert.match(h, /function destGira\(L\)\{/);
+  assert.match(h, /<slot name=\\"dest\\">/);
 });
