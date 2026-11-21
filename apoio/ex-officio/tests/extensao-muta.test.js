@@ -365,7 +365,7 @@ test('extensão 0.30: tipo de caso e etiquetas sugeridas da triagem no cartão; 
   assert.ok(S[S.length - 1].caso);
   assert.match(read('apoio/ex-officio/api/_ficha.js'), /tipoCaso: tipoCasoDe\(t\.Tema\)[\s\S]*etqTri: etqTriagem\(t, f\)/);
   const c = read('extensao/conteudo-pje.js');
-  assert.match(c, /class="m-tc"/); assert.match(c, /class="m-sgs"><small>Sugeridas/); assert.match(c, /function quadroCmt\(\)/); assert.match(c, /id = 'hero-cmt'/);
+  assert.match(c, /hf-c hf-c-t/); assert.match(c, /class="m-sgs"><small>Sugeridas/); assert.match(c, /function quadroCmt\(\)/); assert.match(c, /id = 'hero-cmt'/);
   const cm = read('apoio/ex-officio/api/_cmt.js');
   assert.match(cm, /async function copiaGestor\(u, titulo, texto\)/);
   assert.equal((cm.match(/if \(b\.origem === 'extensao'\) await copiaGestor/g) || []).length, 3, 'assinar, devolver e responder');
@@ -375,4 +375,12 @@ test('extensão 0.30: tipo de caso e etiquetas sugeridas da triagem no cartão; 
   const h = ctx.window.MutaCmt.html({ em: '2026-11-21T20:00:00Z', des: true, assinatura: [{ cnj: '5001234-56.2026.4.03.6000', tipoAto: 'Decisão terminativa', servidor: 'José Victor', corretor: 'Bruno', dataMinuta: '2026-11-19', dataCorrecao: '2026-11-20', desde: '2026-11-20', aguarda: 1, urg: { tipo: 'Liminar', espera: 3 } }], duvidas: [{ id: 'pen-1', titulo: 'Honorários', de: 'Dalete' }], liberacao: [] });
   assert.match(h, /Para assinatura/); assert.match(h, /Decisão terminativa/); assert.match(h, /data-hcm="assinar"/); assert.match(h, /cópia ao gestor/);
   assert.match(read('extensao/manifest.json'), /"cmt\.js"/); assert.match(read('extensao/painel.html'), /cmt\.js/);
+});
+
+test('extensão 0.31: cada família de informação do cartão com um padrão visual', () => {
+  const c = read('extensao/conteudo-pje.js');
+  ['hf hf-cls', 'hf hf-est', 'hf hf-mov', 'hf hf-px', 'm-sgs'].forEach(k => assert.ok(c.includes(k), k));
+  assert.match(c, /chip\('secao', r\.secao/); assert.match(c, /chip\('camadas', x, 'Subassunto/); assert.match(c, /chip\('alvo', /);
+  const f = read('apoio/ex-officio/api/_ficha.js');
+  assert.match(f, /secao: String\(f\['Seção Competente'\]/); assert.match(f, /movimento: String\(f\.ultimo_movimento/); assert.match(f, /proxima: String\(\(r\.origem \|\| \{\}\)\['Próxima ação'\]/);
 });

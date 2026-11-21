@@ -454,6 +454,17 @@
       '.muta-selos .hs:hover{background:#eef3f7;color:#1f4f6b}' +
       '.muta-selos .hs b{position:absolute;top:-5px;right:-5px;min-width:13px;height:13px;padding:0 3px;box-sizing:border-box;border-radius:7px;background:#e8710a;color:#fff;font:800 9px/13px system-ui,sans-serif;text-align:center}' +
       '.muta-selos .hs-al{color:#b0402f}.muta-selos .hs-al b{background:#c62828}.muta-selos .hs-mu b{background:#4a7ea6}' +
+      '.muta-selos .hf{flex-basis:100%;display:flex;flex-wrap:wrap;align-items:center;gap:4px;margin:1px 0}' +
+      '.muta-selos .hf-c{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:12px;border:1px solid transparent;background:#eef0fb;color:#3f4aa0;font:600 10.5px/1.25 system-ui,sans-serif;white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis}' +
+      '.muta-selos .hf-c-s{background:#5b63c7;color:#fff}.muta-selos .hf-c-o{background:#fff;border-color:#c9cdf0}.muta-selos .hf-c-t{background:#e4e7fa;white-space:normal}.muta-selos .hf-c-t small{font:700 7.5px system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#7d84c4;margin-right:2px}' +
+      '.muta-selos .hf-e{display:inline-flex;align-items:center;gap:5px;padding:2px 9px;border-radius:12px;border:1px solid #dfe4e8;background:#fff;color:#33424c;font:600 10.5px system-ui,sans-serif}.muta-selos .hf-e>i{width:7px;height:7px;border-radius:50%;background:var(--d,#9aa8b3)}' +
+      '.muta-selos .hf-e-tr{--d:#9aa8b3}.muta-selos .hf-e-mi{--d:#1a7fc0}.muta-selos .hf-e-co{--d:#e8a10a}.muta-selos .hf-e-li{--d:#00796b}.muta-selos .hf-e-as{--d:#5a3fa0;background:#f6f2fd;border-color:#e0d6f6;color:#4b2f8f}.muta-selos .hf-e-ok{--d:#2f8a5a;background:#f1faf4;border-color:#cfe9d9;color:#2f6e4b}.muta-selos .hf-e-u{--d:#c62828;background:#fdecea;border-color:#efb3a9;color:#a8321f}' +
+      '.muta-selos .hf-tf{border:0;background:none;padding:0 2px;color:#66737f;font:500 10.5px system-ui,sans-serif}' +
+      '.muta-selos .hf-mov{flex-wrap:nowrap;gap:6px;color:#66737f;font:400 10.5px/1.3 system-ui,sans-serif;border-top:1px solid #eef0f3;padding-top:3px}.muta-selos .hf-mov>i{width:6px;height:6px;border-radius:50%;border:1.5px solid #9aa8b3;flex:none}' +
+      '.muta-selos .hf-mt{border:0;background:none;padding:0;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#4b5a66;font-weight:400;border-radius:0}.muta-selos .hf-mov time{font:600 10px ui-monospace,Menlo,monospace;color:#7d8b96;flex:none}' +
+      '.muta-selos .hf-px{flex-wrap:nowrap;align-items:flex-start;gap:7px;padding:5px 7px;border-radius:9px;border:1px solid #d6e6f5;background:linear-gradient(90deg,#f1f7fd,#fff)}' +
+      '.muta-selos .hf-pi{flex:none;width:22px;height:22px;padding:0;border-radius:7px;border:1px solid #cfe2f4;background:#e6f1fb;color:#1a7fc0;display:grid;place-items:center}' +
+      '.muta-selos .hf-pt{display:block;border:0;background:none;padding:0;white-space:normal;color:#1d2730;font:500 11px/1.35 system-ui,sans-serif;border-radius:0}.muta-selos .hf-pt small{display:block;font:700 8px system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#4a7ea6;margin-bottom:1px}' +
       '.muta-selos .m-tc{flex-basis:100%;border:0;background:none;padding:0;gap:5px;color:#1f4f6b;white-space:normal}.muta-selos .m-tc small{font:700 8px system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#8a97a3;flex:none}.muta-selos .m-tc b{font:600 11px/1.25 system-ui,sans-serif}' +
       '.muta-selos .m-as{background:#efe9fb;border-color:#cdbcf0;color:#4b2f8f}.muta-selos .m-as-u{background:#fdecea;border-color:#efb3a9;color:#a8321f}' +
       '.muta-selos .m-sgs{flex-basis:100%;display:flex;flex-wrap:wrap;gap:3px;align-items:center;margin-top:1px}.muta-selos .m-sgs>small{font:700 8px system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#8a97a3;margin-right:2px}' +
@@ -511,27 +522,46 @@
     }
     return out;
   }
+  /* 0.31 · uma linguagem por família de informação (pedido do gestor, 21/11/2026):
+     classificação (seção, assunto, subassunto, especificidade, tipo de caso) = chips suaves índigo com ícone;
+     estado atual (etapa, tarefa, designação, trilha, sinalizações) = pílula de etapa com ponto de cor + avatares;
+     movimentação = linha de lista, texto cinza e data à direita; próxima providência = aviso com ícone em ladrilho;
+     etiquetas sugeridas = contorno tracejado. */
+  function etapaCls(et) { return /^Assinada|^Liberado/.test(et) ? 'ok' : /assinatura/i.test(et) ? 'as' : /libera/i.test(et) ? 'li' : /corre/i.test(et) ? 'co' : /minuta/i.test(et) ? 'mi' : 'tr'; }
   function selosHtml(r, cat, texto) {
     var E = window.MutaEtiquetas; if (!E || !r) return '';
-    r = E.preparar(r); var cfg = ENR.cfg || E.CFG, h = [], et = E.etapa(r);
-    /* tipo de caso (triagem do app): primeira linha do bloco, para ler o caso sem abrir */
-    if (r.tipoCaso) h.push('<span class="m-tc" title="Tipo de caso na triagem' + (r.tema && r.tema !== r.tipoCaso ? ': ' + escS(r.tema) : '') + '">' + ico('balanca', 11) + '<small>Tipo de caso</small><b>' + escS(r.tipoCaso) + '</b></span>');
+    r = E.preparar(r); var h = [], et = E.etapa(r), txt = nrm(texto || '');
+    /* classificação */
+    var cl = [], chip = function (ic, t, tit, cls) { return '<span class="hf-c' + (cls ? ' ' + cls : '') + '" title="' + escS(tit) + '">' + ico(ic, 11) + escS(t) + '</span>'; };
+    if (r.secao) cl.push(chip('secao', r.secao, 'Seção competente', 'hf-c-s'));
+    if (r.assunto) cl.push(chip('etiqueta', r.assunto, 'Assunto'));
+    (r.subassuntos || []).slice(0, 3).forEach(function (x) { cl.push(chip('camadas', x, 'Subassunto (DataJud)', 'hf-c-o')); });
+    if (r.especificidade) cl.push(chip('alvo', r.especificidade.length > 70 ? r.especificidade.slice(0, 68).replace(/\s+\S*$/, '') + '…' : r.especificidade, 'Especificidade: ' + r.especificidade, 'hf-c-o'));
+    if (r.tipoCaso) cl.push('<span class="hf-c hf-c-t" title="Tipo de caso na triagem' + (r.tema && r.tema !== r.tipoCaso ? ': ' + escS(r.tema) : '') + '">' + ico('balanca', 11) + '<small>Tipo de caso</small>' + escS(r.tipoCaso) + '</span>');
+    if (cl.length) h.push('<div class="hf hf-cls">' + cl.join('') + '</div>');
+    /* estado atual */
+    var es = [];
+    if (et) es.push('<span class="hf-e hf-e-' + etapaCls(et) + '" title="Etapa no gabinete (ficha do processo)"><i></i>' + escS(et) + '</span>');
     var cmt = (CMTL.d && CMTL.d[r._k]) || null;
-    if (cmt) h.push('<span class="m-as' + (cmt.urg ? ' m-as-u' : '') + '" title="Submetida à assinatura do Desembargador' + (cmt.desde ? ' em ' + escS(cmt.desde.split('-').reverse().join('/')) : '') + '">' + ico('lapis', 11) + 'Para assinar' + (cmt.tipoAto ? ' · ' + escS(cmt.tipoAto) : '') + (cmt.aguarda != null ? ' · ' + cmt.aguarda + ' d' : '') + '</span>');
-    if (et) h.push('<span class="m-et' + (/^Liberado|Assinada/.test(et) ? ' m-ok' : '') + '" title="Etapa no gabinete (ficha do processo)">' + escS(et) + '</span>');
-    /* designação (como etiqueta) e trilha de produção: minutado (data) · corrigido · liberado */
-    /* no desenho do app: avatar com as iniciais, rótulo pequeno (MINUTA / CORREÇÃO) e o primeiro nome */
+    if (cmt) es.push('<span class="hf-e hf-e-as' + (cmt.urg ? ' hf-e-u' : '') + '" title="Submetida à assinatura do Desembargador' + (cmt.desde ? ' em ' + escS(cmt.desde.split('-').reverse().join('/')) : '') + '"><i></i>Para assinar' + (cmt.tipoAto ? ' · ' + escS(cmt.tipoAto) : '') + (cmt.aguarda != null ? ' · ' + cmt.aguarda + ' d' : '') + '</span>');
+    if (r.tarefa && !/^$/.test(r.tarefa) && txt.indexOf(nrm(r.tarefa)) < 0) es.push('<span class="hf-tf" title="Tarefa atual no PJe">' + escS(r.tarefa) + (r.dias != null ? ' · ' + r.dias + ' d' : '') + '</span>');
+    else if (r.dias != null) es.push('<span class="hf-tf" title="Dias na tarefa">' + r.dias + ' d na tarefa</span>');
     var pes = function (nome, rot, cls) { return '<span class="m-pes ' + cls + '" title="' + rot + ': ' + escS(nome) + '"><i>' + escS(E.iniciais(nome)) + '</i><span><small>' + rot + '</small><b>' + escS(String(nome).split(/\s+/)[0]) + '</b></span></span>'; };
-    if (r.servidor) h.push(pes(r.servidor, 'Minuta', 'm-pes-m'));
-    if (r.corretor) h.push(pes(r.corretor, 'Correção', 'm-pes-c'));
+    if (r.servidor) es.push(pes(r.servidor, 'Minuta', 'm-pes-m'));
+    if (r.corretor) es.push(pes(r.corretor, 'Correção', 'm-pes-c'));
     if (r.servidor || r.corretor || r.minutado) {
       var br = function (x) { var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(x || ''); return m ? m[3] + '/' + m[2] : (x || ''); };
       var passo = function (ok, rot, data) { var nm = { 'Min.': 'Minutado', 'Corr.': 'Corrigido', 'Lib.': 'Liberado' }[rot] || rot, ic = { 'Min.': 'lapis', 'Corr.': 'check', 'Lib.': 'enviar' }[rot];
         return '<i class="tp' + (ok ? ' ok' : '') + '" title="' + nm + (ok ? (data ? ' em ' + escS(br(data)) : '') : ': pendente') + '">' + ico(ic, 11) + '</i>' + (ok && data && rot === 'Min.' ? '<small class="ok">' + escS(br(data)) + '</small>' : ''); };
-      h.push('<span class="m-trilha" title="Trilha de produção">' + passo(!!r.minutado, 'Min.', r.minutado) + '<b></b>' + passo(!!r.corrigido, 'Corr.', r.corrigidoEm) + '<b></b>' + passo(!!(r.liberado || r.enviado), 'Lib.', r.liberadoEm) + '</span>');
+      es.push('<span class="m-trilha" title="Trilha de produção">' + passo(!!r.minutado, 'Min.', r.minutado) + '<b></b>' + passo(!!r.corrigido, 'Corr.', r.corrigidoEm) + '<b></b>' + passo(!!(r.liberado || r.enviado), 'Lib.', r.liberadoEm) + '</span>');
     }
     r._falta = cat ? E.faltando(r, cat, texto) : [];
-    h.push(sinaisHtml(r._k, r));
+    es.push(sinaisHtml(r._k, r));
+    h.push('<div class="hf hf-est">' + es.join('') + '</div>');
+    /* movimentação */
+    if (r.movimento) h.push('<div class="hf hf-mov" title="Último movimento no PJe"><i></i><span class="hf-mt">' + escS(r.movimento) + '</span>' + (r.movimentoEm ? '<time>' + escS(String(r.movimentoEm).slice(0, 5)) + '</time>' : '') + '</div>');
+    /* próxima providência */
+    if (r.proxima) h.push('<div class="hf hf-px"><span class="hf-pi">' + ico('enviar', 12) + '</span><span class="hf-pt"><small>Próxima providência</small>' + escS(r.proxima) + '</span></div>');
     /* etiquetas sugeridas pela triagem do app e pelo catálogo, que ainda não estão no cartão: o clique copia (o PJe não é alterado) */
     var tem = nrm((r.etqPje || '') + ' ' + (texto || '')), sg = [];
     (r.etqTri || []).concat((r._falta || []).map(function (x) { return { e: x.nome, por: 'catálogo do gabinete' + (x.descricao ? ': ' + x.descricao : '') }; })).forEach(function (x) {
@@ -539,7 +569,7 @@
     });
     if (sg.length) {
       var chips = sg.slice(0, 8).map(function (x) { var c = E.categoriaDe ? E.categoriaDe(x.e, ENR.cat) : null;
-        return '<span class="m-sg" style="--hc:' + escS((c && c.cor) || '#546e7a') + '" data-muta-copia="' + escS(x.e) + '" title="Sugerida: ' + escS(x.por || 'triagem') + ' · clique para copiar">' + ico('etiqueta', 10) + escS(x.e) + '</span>'; });
+        return '<span class="m-sg" style="--hc:' + escS((c && c.cor) || '#546e7a') + '" data-muta-copia="' + escS(x.e) + '" title="Sugerida: ' + escS(x.por || 'triagem') + ' · clique para copiar">+ ' + escS(x.e) + '</span>'; });
       h.push('<div class="m-sgs"><small>Sugeridas</small>' + chips.join('') + (sg.length > 1 ? '<span class="m-sg m-sg-t" data-muta-copia="' + escS(sg.map(function (x) { return x.e; }).join(', ')) + '" title="Copia todas as sugeridas, separadas por vírgula">copiar ' + sg.length + '</span>' : '') + '</div>');
     }
     return h.join('');

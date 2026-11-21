@@ -5,6 +5,14 @@ Nome desde a 0.19.3 (antes: Muta). Os identificadores internos (`window.Muta*`, 
 Extensão do Chrome/Edge (Manifest V3) que abre o **Muta** num painel lateral, ao lado dos autos e das tarefas do PJe 2º grau do TRF-3.
 Base: o HTML independente *muta-independente-prontuario-completo* (Prontuário + Acervo).
 
+## O que muda na 0.31 · um padrão visual por família de informação
+
+- Classificação (seção, assunto, subassunto do DataJud, especificidade da triagem e tipo de caso): chips suaves índigo com ícone; a seção é sólida, subassunto e especificidade em contorno.
+- Estado atual: etapa com ponto de cor (triagem cinza, minuta azul, correção âmbar, liberação verde-petróleo, assinatura roxo, liberado verde), tarefa do PJe e dias, designação em avatares, trilha e sinalizações.
+- Movimentação: último movimento do PJe numa linha, em cinza, com a data à direita.
+- Próxima providência (ficha › origem › Próxima ação): aviso com ícone em ladrilho azul.
+- Etiquetas sugeridas: contorno tracejado, "+ nome", clique copia.
+
 ## O que muda na 0.30 · tipo de caso, etiquetas sugeridas e quadro do Desembargador
 
 - Cartão da lista do PJe: o **tipo de caso** da triagem do app abre o bloco do HERO18810; abaixo, as **etiquetas sugeridas** pela triagem (as registradas no prontuário e as calculadas: seção, preparo, representação, tempestividade, MPF, liminar, monocrática e o próprio tipo de caso) e pelo catálogo, só as que ainda não estão no cartão. Ficam tracejadas na cor do tipo; o clique copia uma, "copiar N" copia todas. O PJe não é alterado.

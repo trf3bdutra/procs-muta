@@ -352,7 +352,13 @@ async function resumos(req, res) {
         tarefa: f.tarefa_atual || '', desde: f.data_entrada_tarefa || '', etqPje: f['Etiquetas Originais'] || '', assunto: f.Assunto || '',
         classe: f.classe_judicial || f.Classe || '', prioridade: f.prioridade || '', mpf: f.mpf || '', registrado: !!por[k],
         preparo: t.Preparo || '', repres: t['Representação'] || '', mpfSit: t.MPF || '', custos: t['MPF - Custos Legis'] || '',
-        tipoCaso: tipoCasoDe(t.Tema), tema: String(t.Tema || '').slice(0, 300), etqTri: etqTriagem(t, f)
+        tipoCaso: tipoCasoDe(t.Tema), tema: String(t.Tema || '').slice(0, 300), etqTri: etqTriagem(t, f),
+        /* famílias do cartão (0.31): classificação, movimentação, estado atual e próxima providência */
+        secao: String(f['Seção Competente'] || '').trim(),
+        subassuntos: [...new Set(String(f['DataJud · Assuntos'] || '').split(/\s*;\s*/).map(x => x.trim()).filter(x => x && SN(x) !== SN(f.Assunto)))].slice(0, 4),
+        especificidade: String(t.Especificidades || '').split(/\n+/).map(x => x.trim()).filter(Boolean)[0] || '',
+        movimento: String(f.ultimo_movimento || '').trim().slice(0, 240), movimentoEm: String(f['Data Último Movimento'] || '').trim(),
+        proxima: String((r.origem || {})['Próxima ação'] || '').trim().slice(0, 400)
       };
     });
     return res.status(200).json({ resumos: out, em: agora() });
