@@ -298,7 +298,8 @@ body.cmt-ficha-on #cmt-motor{left:0;visibility:visible;z-index:61;top:calc(4vh +
 .cwe .pri{background:var(--t);border-color:var(--t);color:var(--w)}
 .cwe-grid{display:grid;grid-template-columns:220px minmax(0,1fr);gap:28px;align-items:start}
 .cwe-nav{position:sticky;top:68px;border-top:2px solid var(--t);padding-top:11px;margin-top:22px}
-.cwe-pt{margin:0 0 12px}.cwe-pt .k{margin:0 0 4px;font:500 10px 'JetBrains Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--g)}.cwe-pt h1{margin:0;font:700 30px/1 Figtree,sans-serif;letter-spacing:-.03em;color:var(--v)}
+.cwe-nav .cwe-ses{max-height:178px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:var(--b2) transparent;padding-right:4px;overscroll-behavior:contain}
+.cwe-pt{margin:0 0 12px}.cwe-pt .k{margin:0 0 4px;font:500 10px 'JetBrains Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--g)}.cwe-pt h1{margin:0;font:700 30px/1 Figtree,sans-serif;letter-spacing:-.03em;color:var(--v)}.cwe-pt-l{display:flex;align-items:center;justify-content:space-between;gap:8px}.cwe-pt-n{width:30px;height:30px;border:1px solid var(--b2);background:var(--w);border-radius:50%;font:600 18px/1 Figtree,sans-serif;color:var(--v);cursor:pointer;display:grid;place-items:center;padding:0}.cwe-pt-n:hover{background:var(--v);border-color:var(--v);color:#fff}
 .cwe-cab{margin:22px 0 18px;border:1px solid var(--b);border-top:2px solid var(--t);background:var(--w)}
 .cwe-cab .cwe-top{padding:10px 14px 8px;align-items:center;gap:8px 16px}
 .cwe-cab .cwe-top>div:first-child{flex:1 1 420px}
@@ -330,7 +331,7 @@ body.cmt-ficha-on #cmt-motor{left:0;visibility:visible;z-index:61;top:calc(4vh +
 .cwe-rg .bar{display:block;height:5px;background:var(--l);border-radius:3px;overflow:hidden}.cwe-rg .bar i{display:block!important;height:5px!important;background:var(--t)!important;border-radius:3px}
 .cwe-rg .n{font:600 12px ui-monospace,monospace;text-align:right}.cwe-rg small{font:10px ui-monospace,monospace;color:var(--m2)}
 .cwe-rg .rg-r.ab>button{background:var(--p)}
-.cwe-rg1 .h{display:flex;flex-direction:column;align-items:flex-start;gap:2px;padding:9px 12px;background:var(--bg);border-bottom:1px solid var(--b)}.cwe-rg1 .h>span{display:flex;gap:10px;align-items:center}.cwe-rg1 .h small{font:11.5px/1.4 Figtree,sans-serif;color:var(--m)}
+.cwe-rg1 .h{display:flex;flex-direction:column;align-items:flex-start;gap:2px;padding:9px 12px;background:var(--bg);border-bottom:1px solid var(--b)}.cwe-rg1 .h>span{display:flex;gap:10px;align-items:center}.cwe-rg-tg{display:flex;align-items:center;gap:8px;width:100%;border:0;background:none;padding:0;cursor:pointer;text-align:left;font:inherit}.cwe-rg-tg i{font-style:normal;font-size:11px;color:var(--g);display:inline-block;transform:rotate(90deg);transition:transform .15s}.cwe-rg-tg em{margin-left:auto;font:600 11.5px Figtree,sans-serif;font-style:normal;color:var(--v2);text-decoration:underline}.cwe-rg1.min .cwe-rg-tg i{transform:none}.cwe-rg1.min .cwe-rg2,.cwe-rg1.min .h small{display:none}.cwe-rg1.min .h{border-bottom:0}.cwe-rg1 .h small{font:11.5px/1.4 Figtree,sans-serif;color:var(--m)}
 .cwe-rg2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.cwe-rg-col{min-width:0;padding:4px 12px 8px}.cwe-rg-col+.cwe-rg-col{border-left:1px solid var(--b)}.cwe-rg-t{margin:6px 0 2px;font:500 10px 'JetBrains Mono',monospace;letter-spacing:.14em;color:var(--g)}
 @media(max-width:1100px){.cwe-rg2{grid-template-columns:1fr}.cwe-rg-col+.cwe-rg-col{border-left:0;border-top:1px solid var(--b)}}
 .rg-cats{padding:2px 0 8px 30px;display:flex;flex-direction:column}
@@ -3730,8 +3731,7 @@ function portaToken() { return new Promise((fim) => {
     /* sessões como cartões de seleção (data, dia, barra de minutadas), para não confundir com a esteira de etapas abaixo */
     const pct = (x) => { const n = (x.itens || []).length; return n ? Math.round(100 * (x.itens || []).filter((i) => i.dataMinuta).length / n) : -1; };
     const dia = (x) => { const t = new Date(x.data + 'T12:00:00'); return isNaN(t) ? '' : SEM[t.getDay()].slice(0, 3); };
-    return `<div class="cwe-pt"><p class="k">Sessões de julgamento</p><h1>Pautas.</h1></div><div class="cwe-ses">${vis.map((x) => { const p = pct(x); return `<button type="button" data-cwt-ses="${e(x.id)}" class="${x.id === ss.id ? 'on' : ''} ${x.data < hoje ? 'passada' : ''}" aria-current="${x.id === ss.id}"><span class="sd"><b>${e(A.br(x.data))}</b><em>${e(x.data < hoje ? 'realizada' : dia(x))}</em></span>${p >= 0 ? `<span class="sp" aria-hidden="true"><i style="width:${p}%"></i></span>` : ''}<small>${e(sub(x))}</small></button>`; }).join('')}</div>
-      <button type="button" class="cwe-sesnova" data-cwe="ses-nova" title="Cadastrar uma sessão: data, marcos, julgadores e como começa">+ Nova sessão</button>
+    return `<div class="cwe-pt"><p class="k">Sessões de julgamento</p><div class="cwe-pt-l"><h1>Pautas.</h1><button type="button" class="cwe-pt-n" data-cwe="ses-nova" title="Nova sessão: data, marcos, julgadores e como começa" aria-label="Nova sessão">+</button></div></div><div class="cwe-ses">${vis.map((x) => { const p = pct(x); return `<button type="button" data-cwt-ses="${e(x.id)}" class="${x.id === ss.id ? 'on' : ''} ${x.data < hoje ? 'passada' : ''}" aria-current="${x.id === ss.id}"><span class="sd"><b>${e(A.br(x.data))}</b><em>${e(x.data < hoje ? 'realizada' : dia(x))}</em></span>${p >= 0 ? `<span class="sp" aria-hidden="true"><i style="width:${p}%"></i></span>` : ''}<small>${e(sub(x))}</small></button>`; }).join('')}</div>
       ${ant.length ? `<button type="button" class="cwe-arq" data-cwe="arq">${est.arq ? 'Ocultar as realizadas' : 'Ver realizadas e arquivadas (' + ant.length + ')'}</button>` : ''}`;
   }
 
@@ -3930,7 +3930,8 @@ function portaToken() { return new Promise((fim) => {
               return `<div class="rg-c ${abc ? 'ab' : ''}"><button type="button" data-cwe="rgc" data-k="${e(kc)}" aria-expanded="${abc}"><span class="t">${e(c.chave)}</span><span class="p">→ ${e(ps)}</span><b class="n">${c.n}</b></button>
                 ${abc ? `<div class="rg-its">${c.itens.map((x) => { const dif = x.atual && x.regra && A.norm(x.atual) !== A.norm(x.regra); return `<span class="${dif ? 'dif' : ''}"><em>item ${e(x.item || '—')}</em><button type="button" class="cwe-mono cwe-lnk" data-cwt="ficha" data-p="${e(A.digits(x.cnj))}">${e(A.cnj(x.cnj))}</button><small>${x.atual ? e(x.atual) + (dif ? ' · regra: ' + e(x.regra) : '') : 'sem designação · regra: ' + e(x.regra || '—')}</small></span>`; }).join('')}</div>` : ''}</div>`; }).join('')}</div>` : ''}</div>`; }).join('')}</div>`; };
     /* um painel só, dividido em minuta e correção; vai para dentro da mesa, acima da lista e ao lado da coluna de capacidade e carga */
-    return `<section class="cwe-box cwe-rg cwe-rg1" slot="regras"><div class="h"><span><span class="cwe-k">REGRAS NESTA ORDEM</span></span><small>A primeira regra que casa decide, separadamente para minuta e para correção. Clique na regra para ver as categorias e, na categoria, os processos. “Seguem” = quem está designado é quem a regra indica.${Z.equilibrar ? ' Equilibrar a carga · ligado.' : ''}</small></div><div class="cwe-rg2">${col('d', 'MINUTA')}${col('c', 'CORREÇÃO')}</div></section>`; }
+    const rmin = (() => { try { return localStorage.getItem('cwe_rg_min') !== '0'; } catch (er) { return true; } })();
+    return `<section class="cwe-box cwe-rg cwe-rg1${rmin ? ' min' : ''}" slot="regras"><div class="h"><button type="button" class="cwe-rg-tg" data-cwe="rgmin" aria-expanded="${!rmin}" title="${rmin ? 'Mostrar' : 'Recolher'} as regras"><i>▸</i><span class="cwe-k">REGRAS NESTA ORDEM</span><em>${rmin ? 'mostrar' : 'recolher'}</em></button><small>A primeira regra que casa decide, separadamente para minuta e para correção. Clique na regra para ver as categorias e, na categoria, os processos. “Seguem” = quem está designado é quem a regra indica.${Z.equilibrar ? ' Equilibrar a carga · ligado.' : ''}</small></div><div class="cwe-rg2">${col('d', 'MINUTA')}${col('c', 'CORREÇÃO')}</div></section>`; }
   function etapa3b(ss, d, tabs) {
     const Z = desigMemo(ss, 'Z');
     if (!Z) return `<section class="cwe-st"><header class="cwe-et"><p class="k">04 / redator e corretor</p><h2>Designação</h2></header>${tabs}<p class="cwe-nota">Designação indisponível: motor não carregado.</p></section>`;
@@ -3941,7 +3942,7 @@ function portaToken() { return new Promise((fim) => {
     return `<section class="cwe-st cwe-st4">
       <div class="cwe-mesa-slot" data-s="${e(ss.id)}"></div>
       ${painelRegras(ss, Z)}
-      <div class="cwe-2eq cwe-1eq"><section class="cwe-box"><div class="h"><span><span class="cwe-k">ASSUNTOS SEM REGRA NESTA PAUTA</span></span><small>Uma regra por assunto resolve todos os processos dele, nesta e nas próximas pautas.</small></div>
+      <div class="cwe-2eq cwe-1eq cwe-sr1" slot="regras"><section class="cwe-box"><div class="h"><span><span class="cwe-k">ASSUNTOS SEM REGRA NESTA PAUTA</span></span><small>Uma regra por assunto resolve todos os processos dele, nesta e nas próximas pautas.</small></div>
           ${semA.map(([t, o]) => `<div class="sr"><b>${o.n}</b><span>${e(t)}<small>${[o.d ? o.d + ' sem minutante' : '', o.c ? o.c + ' sem corretor' : ''].filter(Boolean).join(' · ')}</small></span><button type="button" data-cwe="nr" data-t="ass" data-v="${e(t)}" aria-expanded="${est.nr?.t === 'ass' && est.nr.v === t}">Criar regra</button></div>${est.nr?.t === 'ass' && est.nr.v === t ? formAss(Z, t) : ''}`).join('') || '<p>Todos os assuntos têm regra que casa.</p>'}</section></div></section>`;
   }
 
@@ -4084,7 +4085,7 @@ function portaToken() { return new Promise((fim) => {
     return { css: css.replace(/html,body\{margin:0\}/g, '').replace(/:root/g, ':host').replace(/\bbody\{/g, '.mb{').replace(/\bbody\./g, '.mb.'), corpo: doc.body.innerHTML, cod };
   }).catch((er) => { MESA.fonte = null; throw er; })); }
   /* ajustes da mesa dentro da página: cabeçalho e coluna da equipe presos abaixo do topo do Caput; barra de baixo presa no fim do bloco */
-  const MESA_CSS = `:host{display:block}.mb.emb .top{flex-wrap:wrap!important;row-gap:8px!important}.mb.emb .top>div:first-child{flex:1 1 0!important}.mb.emb .top>.selbar{order:9;flex:1 0 100%;margin:0!important;padding:8px 12px!important;background:#eef4f1!important;border:1px solid #c9dcd3!important;border-left:3px solid #235a55!important;border-radius:0!important;font-size:12.5px}.mb.emb .top>.selbar select{border-radius:6px!important;border-color:#c8c3b6!important}.kp{gap:10px!important}.kp>div{display:flex;flex-direction:column;gap:4px;padding:11px 14px!important;background:#fbfaf5!important;border:1px solid #d8d3c6!important;border-radius:8px!important;box-shadow:inset 0 3px 0 var(--kc)!important}.kp>div>span{order:-1;font:500 10px 'JetBrains Mono',monospace!important;letter-spacing:.1em;text-transform:uppercase;color:var(--kc)!important}.kp>div>b{white-space:nowrap;font:500 24px 'JetBrains Mono',monospace!important;letter-spacing:-.02em!important;color:var(--kc)!important}.kp>div:nth-child(4n+1){--kc:#a57829}.kp>div:nth-child(4n+2){--kc:#3b7150}.kp>div:nth-child(4n+3){--kc:#24506f}.kp>div:nth-child(4n+4){--kc:#7b8580}.mb{background:transparent!important}.mb.emb .top{top:var(--mt,60px)!important}.mb.emb .side{position:static!important;align-self:start;max-height:none!important;overflow:visible!important}::slotted(.cwe-rg1){margin:0 0 12px}
+  const MESA_CSS = `:host{display:block}.mb.emb .top{flex-wrap:wrap!important;row-gap:8px!important}.mb.emb .top>div:first-child{flex:1 1 0!important}.mb.emb .top>.selbar{order:9;flex:1 0 100%;margin:0!important;padding:8px 12px!important;background:#eef4f1!important;border:1px solid #c9dcd3!important;border-left:3px solid #235a55!important;border-radius:0!important;font-size:12.5px}.mb.emb .top>.selbar select{border-radius:6px!important;border-color:#c8c3b6!important}.kp{gap:10px!important}.kp>div{display:flex;flex-direction:column;gap:4px;padding:11px 14px!important;background:#fbfaf5!important;border:1px solid #d8d3c6!important;border-radius:8px!important;box-shadow:inset 0 3px 0 var(--kc)!important}.kp>div>span{order:-1;font:500 10px 'JetBrains Mono',monospace!important;letter-spacing:.1em;text-transform:uppercase;color:var(--kc)!important}.kp>div>b{white-space:nowrap;font:500 24px 'JetBrains Mono',monospace!important;letter-spacing:-.02em!important;color:var(--kc)!important}.kp>div:nth-child(4n+1){--kc:#a57829}.kp>div:nth-child(4n+2){--kc:#3b7150}.kp>div:nth-child(4n+3){--kc:#24506f}.kp>div:nth-child(4n+4){--kc:#7b8580}.mb{background:transparent!important}.mb.emb .top{top:var(--mt,60px)!important}.mb.emb .side{position:static!important;align-self:start;max-height:none!important;overflow:visible!important}::slotted([slot=regras]){margin:0 0 12px}
     .mb .foot{position:sticky!important;bottom:0;margin-top:10px}.mb .lay{padding-bottom:16px!important}.mb.temsel main{padding-bottom:0!important}`;
   async function mesaMonta(sid) {
     const h = document.createElement('div'); h.id = 'cwe-mesa-host'; h.dataset.s = sid; MESA.host = h;
@@ -4108,7 +4109,7 @@ function portaToken() { return new Promise((fim) => {
     if (!MESA.host || MESA.sid !== slot.dataset.s) { MESA.sid = slot.dataset.s; mesaMonta(MESA.sid); }
     if (MESA.host.parentNode !== slot) slot.appendChild(MESA.host);
     /* o painel de regras desta renderização entra na mesa (slot) no lugar do anterior */
-    const rg = slot.parentNode && slot.parentNode.querySelector(':scope > .cwe-rg1'); if (rg) { MESA.host.querySelectorAll(':scope > .cwe-rg1').forEach((x) => x.remove()); MESA.host.appendChild(rg); }
+    const rgs = slot.parentNode ? [...slot.parentNode.querySelectorAll(':scope > [slot="regras"]')] : []; if (rgs.length) { MESA.host.querySelectorAll(':scope > [slot="regras"]').forEach((x) => x.remove()); rgs.forEach((x) => MESA.host.appendChild(x)); }
     /* cabeçalho da mesa preso logo abaixo do topo do Caput */
     const tp = document.getElementById('top'), mt = tp ? Math.round(tp.getBoundingClientRect().height) + 'px' : '60px'; if (MESA.host.style.getPropertyValue('--mt') !== mt) MESA.host.style.setProperty('--mt', mt);
   }
@@ -4133,6 +4134,7 @@ function portaToken() { return new Promise((fim) => {
       else if (k === 'prep') { est.etapa = 3 + (+b.dataset.n || 0); }
       else if (k === 'exp') est.exp = !est.exp;
       else if (k === 'rg') { est.rgAb = est.rgAb || {}; est.rgAb[b.dataset.k] = !est.rgAb[b.dataset.k]; }
+      else if (k === 'rgmin') { try { localStorage.setItem('cwe_rg_min', localStorage.getItem('cwe_rg_min') !== '0' ? '0' : '1'); } catch (er) {} }
       else if (k === 'rgc') { est.rgCat = est.rgCat || {}; est.rgCat[b.dataset.k] = !est.rgCat[b.dataset.k]; }
       else if (k === 'mk-cal') { const inp = b.parentElement.querySelector('.mkhid'); try { inp.showPicker(); } catch (er) { inp.focus(); inp.click(); } return; }
       else if (k === 'mk-desc') { est.mkPend = {}; if (est.jPend) delete est.jPend[ss.id]; }
@@ -4272,6 +4274,8 @@ function portaToken() { return new Promise((fim) => {
     const d = dados(ss);
     const corpo = [null, etapa1, etapa2, etapaEtq, etapaDes, etapa4][d.cur](ss, d);
     view.innerHTML = `<div class="cwe"><div class="cwe-grid"><nav class="cwe-nav">${sessoes(ss)}<span class="cwe-k cwe-k2">ESTEIRA · ${e(A.br(ss.data))}</span>${esteira(d)}</nav><div class="cwe-main"><div class="cwe-cab">${cabecalho(ss, d)}${marcos(ss)}${cabAbas(ss, d)}</div>${corpo}</div></div>${est.cfg ? config(ss, d) : ''}${est.nv ? novaSessaoDlg() : ''}</div>`;
+    /* seletor de sessões: três por vez, com a aberta à vista */
+    const sv = view.querySelector('.cwe-ses'), so = sv && sv.querySelector('.on'); if (so && (so.offsetTop - sv.offsetTop < sv.scrollTop || so.offsetTop - sv.offsetTop + so.offsetHeight > sv.scrollTop + sv.clientHeight)) sv.scrollTop = so.offsetTop - sv.offsetTop - 2;
     mesaSync();
   }
 
