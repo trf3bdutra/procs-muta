@@ -77,6 +77,8 @@ jobs:
           cp extensao/conformidade-motor.js site/public/amicus/collectio/conformidade-motor.js
           # ponte para registrar no Collectio as minutas lidas no editor do PJe (janela aberta pelo PJe, com código da importação)
           cp apoio/ex-officio/lotes/pje.html site/public/amicus/collectio/pje.html
+          # prévia do Collectio melhorado (/amicus/collectio/previa/): página só de leitura, com os mesmos dados e o mesmo login
+          mkdir -p site/public/amicus/collectio/previa && cp apoio/ex-officio/lotes/previa.html site/public/amicus/collectio/previa/index.html
           cp apoio/modus-operandi/modus-operandi.html site/public/amicus/compendium/index.html
           cp apoio/enciclopedia.json site/api/_enciclopedia.json
           # A aplicação modular precisa manter todos os assets e o motor sob o mesmo prefixo.

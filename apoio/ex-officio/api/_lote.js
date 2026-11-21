@@ -34,7 +34,13 @@
    POST ?lote=1 {acao:'visivel', id, itens:[{sessao, processo, equipe, relator}]}   visibilidade (relator: 'auto', true ou false)
    POST ?lote=1 {acao:'minuta-versao', id, processo, rotulo, origem, secoes, vigente}   registra mais uma minuta do processo
                                                (versão nova); vigente:false só guarda, sem trocar a que o relator vê
-   POST ?lote=1 {acao:'minuta-vigente', id, processo, versao}   torna vigente uma versão já registrada */
+   POST ?lote=1 {acao:'minuta-vigente', id, processo, versao}   torna vigente uma versão já registrada
+   POST ?lote=1 {acao:'minuta-versao', …, final:true}           versão final: o texto do PJe conferido depois da liberação
+                                               (pela pauta ou pela página do Desembargador); guarda base = versão importada no PJe
+   POST ?lote=1 {acao:'minuta-pje', id, processo, versao, marcado}   (equipe) marca a versão importada no PJe; ao marcar, a etapa de
+                                               produção do processo recebe a data da correção, se ainda não tinha
+   Para ver o que o Desembargador mudou: no índice das versões (…&versoes=1), compare a versão com "pje" e a versão com "final"
+   (final.base aponta a importada). O lote resume as duas em it.pje e it.final; it.equipe.datas traz minuta, correção e liberação. */
 const L = require('./_lib');
 const ID = /^[a-z0-9-]{1,40}$/i, PROC = /^\d{7}-\d{2}$/, DATA = /^\d{4}-\d{2}-\d{2}$/;
 const nada = e => { if (e.status === 404) return { dados: null }; throw e; };
@@ -102,11 +108,13 @@ function designar(e, d) {
    aplica a designação da pauta e devolve os cartões do prontuário lidos das sessões do lote */
 async function anotar(lote, M) {
   M = M || memoria();
-  const cartoes = {}, vivo = {}, porSessao = {}, futura = {};
+  const cartoes = {}, vivo = {}, porSessao = {}, futura = {}, datas = {};
   const proprias = lote.sessoes || [], hoje = hojeLocal();
   const outras = (await calendarioM(M)).filter(z => z.processos && z.date >= hoje && !proprias.includes(z.date)).map(z => z.date).sort();
   await Promise.all(proprias.map(async s => (await itensSessao(s, M)).forEach(x => {
     vivo[x.cnj] = situacao(x);
+    /* datas da produção (Ex Officio): a liberação vem da pauta ou da página do Desembargador, que gravam o mesmo campo */
+    if (x.dataMinuta || x.dataCorrecao || x.dataLiberacao) datas[x.cnj] = { minuta: x.dataMinuta || '', correcao: x.dataCorrecao || '', liberacao: x.dataLiberacao || '' };
     porSessao[s + '|' + x.cnj] = porSessao[x.cnj] = porSessao[x.cnj] || designacaoDe(s, x);
     const c = x && x.ctl; if (!c || !c.cartao) return;
     cartoes[x.cnj] = { cartao: c.cartao, editadoPor: c.editadoPor || '', editadoEm: c.editadoEm || '' };
@@ -121,6 +129,7 @@ async function anotar(lote, M) {
     const d = (it.sessao && porSessao[it.sessao + '|' + it.processo]) || porSessao[it.processo] || futura[it.processo];
     if (d) designar(e, d);
     if (sv && (ORDEM[sv] || 0) > (ORDEM[e.situacao] || 0)) e.situacao = sv;
+    if (datas[it.processo]) e.datas = datas[it.processo]; else delete e.datas;
     it.pronto = (ORDEM[e.situacao] || 0) >= 3;
     const v = it.visivel || {};
     it.verEquipe = v.equipe !== false;
@@ -376,7 +385,60 @@ module.exports = async (req, res) => {
     res.status(200).json({ usuario: u, gestor, relator, modo, lote: limpaLote(lote) });
   } catch (e) { res.status(e.status === 404 ? 404 : 500).json({ erro: e.message }); }
 };
+/* minuta-pje {id, processo, versao, marcado}: marca (ou desmarca) a versão que foi importada no editor do PJe; só uma por minuta.
+   Pode a equipe com login (é o passo do corretor depois de colar no PJe); o relator, não. Ao marcar:
+     · o índice da minuta guarda {pje: {em, por}} na versão e o lote guarda o resumo (it.pje), num só commit;
+     · a etapa de produção recebe a data da correção (dataCorrecao) na pauta do processo, se ainda não tinha, pelo mesmo caminho do
+       cartão da pauta (pauta.gravarItem), que leva também à ficha do processo.
+   Desmarcar tira a marca, mas não apaga a data da correção já registrada. */
+async function minutaPje(req, res, u, gestor) {
+  if (!u) return res.status(403).json({ erro: 'Entre com o login da equipe para marcar a versão importada no PJe.' });
+  if (!gestor && (await L.acessos(u).catch(() => ({}))).perfil === 'desembargador') return res.status(403).json({ erro: 'A marcação é da equipe.' });
+  const b = req.body || {}, id = String(b.id || '').toLowerCase(), proc = String(b.processo || ''), v = String(b.versao || ''), marcar = b.marcado !== false;
+  const CNJ = /^\d{7}-\d{2}\.\d{4}\.\d\.\d{2}\.\d{4}$/;
+  if (!ID.test(id)) return res.status(400).json({ erro: 'Lote inválido.' });
+  if (!CNJ.test(proc)) return res.status(400).json({ erro: 'Informe o número CNJ completo do processo.' });
+  if (!VID.test(v)) return res.status(400).json({ erro: 'Versão inválida.' });
+  const mx = proc.slice(0, 10), pm = caminhoMin(id, mx), rel = 'acervo/lotes/' + id + '.json', hoje = hojeLocal();
+  let fim = null, it = null, sessoes = [];
+  for (let t = 0; t < 4 && !fim; t++) {
+    const { dados: lote, sha: shaLote } = await lerLote(rel).catch(nada);
+    if (!lote) return res.status(404).json({ erro: 'Lote não encontrado.' });
+    it = (lote.itens || []).find(i => i.processo === proc);
+    if (!it) return res.status(404).json({ erro: 'Processo fora deste lote.' });
+    sessoes = [it.sessao].concat(lote.sessoes || []).filter((s, i, a) => DATA.test(s || '') && a.indexOf(s) === i);
+    const { dados: main, sha: shaMin } = await L.lerJson(pm).catch(nada);
+    if (!main) return res.status(404).json({ erro: 'Este processo não tem minuta no lote.' });
+    const arqs = [], lista = indiceVersoes(main).slice();
+    /* minuta ainda sem histórico: a atual vira v1 (guardada), para poder ser marcada */
+    if (!lista.length && v === 'v1') guardarAtual(JSON.parse(JSON.stringify(main)), main, lista, id, mx, arqs);
+    const meta = lista.find(x => x.id === v);
+    if (!meta) return res.status(404).json({ erro: 'Versão não encontrada.' });
+    lista.forEach(x => { if (x.pje && (marcar || x === meta)) delete x.pje; });
+    if (marcar) { meta.pje = { em: hoje, por: u }; it.pje = { versao: v, em: hoje, por: u }; }
+    else if (it.pje && it.pje.versao === v) delete it.pje;
+    main.versoes = lista; lote.atualizado_em = hoje;
+    try {
+      await L.commitArquivos(arqs.concat([{ path: pm, txt: jsonTxt(main), sha: shaMin }, { path: rel, txt: jsonTxt(lote), sha: shaLote }]),
+        'Collectio (' + u + '): versão ' + v + ' da minuta de ' + proc + (marcar ? ' importada no PJe' : ' desmarcada como importada no PJe'));
+      fim = main;
+    } catch (e) { if (e.status !== 409 && e.status !== 422) throw e; }
+  }
+  if (!fim) return res.status(409).json({ erro: 'A minuta ou o lote mudou várias vezes seguidas; tente de novo.' });
+  /* etapa de produção: corrigido */
+  let producao = null;
+  if (marcar) for (const s of sessoes) {
+    const x = (await itensSessao(s)).find(y => y.cnj === proc);
+    if (!x) continue;
+    if (x.dataCorrecao) { producao = { sessao: s, dataCorrecao: x.dataCorrecao, jaRegistrada: true, dataLiberacao: x.dataLiberacao || '' }; break; }
+    const g = await require('./pauta').gravarItem(s, { cnj: proc, lista: 'itens', campos: { dataCorrecao: hoje } }, u, gestor);
+    producao = g.status === 200 ? { sessao: s, dataCorrecao: hoje, dataLiberacao: x.dataLiberacao || '' } : { sessao: s, erro: (g.body && g.body.erro) || 'A pauta não gravou a correção.' };
+    break;
+  }
+  return res.status(200).json({ ok: true, processo: proc, versoes: indiceVersoes(fim), vigente: fim.vigente || '', pje: marcar ? it.pje : null, producao });
+}
 async function gravar(req, res, u, gestor) {
+  if ((req.body || {}).acao === 'minuta-pje') return minutaPje(req, res, u, gestor);
   if (!gestor) return res.status(403).json({ erro: 'Só o gestor cria lotes e associa sessões.' });
   const b = req.body || {}, id = String(b.id || '').toLowerCase();
   if (!ID.test(id)) return res.status(400).json({ erro: 'Identificador inválido: use letras, números e hífen (até 40).' });
@@ -607,9 +669,15 @@ async function gravar(req, res, u, gestor) {
         item: it.sessao ? String(it.item) : '', padrao: '', origem: '', secoes: {} };
       const lista = indiceVersoes(main).slice(), arqs = [];
       guardarAtual(atual, main, lista, id, mx, arqs);
-      let msg, vigente;
+      let msg, vigente, precisaLote = false;
       if (registrar) {
         const meta = { id: proximaVersao(lista), rotulo, por: u, em: new Date().toISOString().slice(0, 10), origem, paragrafos: contagem(novas) };
+        /* versão final: o texto do PJe conferido depois da liberação; base é a versão marcada como importada no PJe, para ver o que o
+           Desembargador mudou. O lote guarda o resumo (it.final), para a matriz mostrar sem abrir as versões. */
+        if (b.final === true) {
+          meta.final = true; const pj = lista.find(x => x.pje); if (pj) meta.base = pj.id;
+          it.final = { versao: meta.id, em: meta.em }; lote.atualizado_em = meta.em; precisaLote = true;
+        }
         lista.push(meta);
         arqs.push({ path: caminhoVer(id, mx, meta.id), txt: jsonTxt(fotoVersao(main, meta, novas, '')) });
         vigente = b.vigente !== false || !atual;
@@ -627,7 +695,8 @@ async function gravar(req, res, u, gestor) {
       }
       main.versoes = lista;
       arqs.push(Object.assign({ path: pm, txt: jsonTxt(main) }, shaMin ? { sha: shaMin } : {}));
-      if (!it.minuta) { it.minuta = true; lote.atualizado_em = new Date().toISOString().slice(0, 10); arqs.push({ path: rel, txt: jsonTxt(lote), sha: shaLote }); }
+      if (!it.minuta) { it.minuta = true; lote.atualizado_em = new Date().toISOString().slice(0, 10); precisaLote = true; }
+      if (precisaLote) arqs.push({ path: rel, txt: jsonTxt(lote), sha: shaLote });
       try {
         await L.commitArquivos(arqs, msg);
         return res.status(200).json({ ok: true, processo: proc, vigente: main.vigente, versoes: lista, trocouVigente: vigente, minuta: main });
