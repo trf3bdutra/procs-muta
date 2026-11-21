@@ -8843,8 +8843,33 @@
    ],
    "mpf": "",
    "triagem": {},
-   "ajustes": [],
-   "pendencias": [],
+   "ajustes": [
+    [
+     "Seção",
+     "Ajuste",
+     "Tipo"
+    ],
+    [
+     "Relatório",
+     "Abertura “apelação interposta contra sentença proferida em ação …” e sentença descrita em parágrafo separado; “ID's”; “sustentando, em síntese” → Forma A num só parágrafo, honorários em frase própria; “IDʼs”; “alegando, em suma”",
+     "RED · BAIXA"
+    ],
+    [
+     "Voto",
+     "“ID's”; “ARE 1385315 ED … Tribunal Pleno, DJe de …”; “por outro lado”; “TEODORO SILVA”; “DJEN de”; “voltou a ser calculado”; “artigo 85, CPC”; dispositivo “nos termos supracitados” → “IDʼs”; “ARE 1.385.315 ED …, DJe 06/02/2025”; conectivo retirado; “TEODORO SILVA SANTOS”; datas sem “de”; “calculada”; “artigo 85 do CPC”; dispositivo com o alcance do provimento (mesmo resultado)",
+     "RED · MÉDIA"
+    ],
+    [
+     "Ementa",
+     "Cabeçalho com “PARCIAL PROV…”; seções em caixa baixa; questões com “verificar/analisar”; “arts.”; rodapé fora da ordem STF → STJ → TRF-3, com “TRF3” e sem relatores e datas → Cabeçalho com “APELAÇÃO PARCIALMENTE PROVIDA”; seções em caixa alta; “saber se”; “artigos”; rodapé no padrão",
+     "EST · MÉDIA"
+    ]
+   ],
+   "pendencias": [
+    "A extração dos autos é parcial (26 documentos, sem a sentença, a apelação e as peças da origem): os IDʼs citados (sentença 286973614/286973623, apelação 286973629, documentos 286971811 e outros) não foram conferidos.",
+    "Datas da ação conexa divergem na minuta: o voto diz que a ApCiv 0006102-02.2016.4.03.6000 foi julgada em 23/07/2026, com trânsito em 16/09/2026, mas a citação traz DJEN 22/01/2026. Conferir.",
+    "Tema 1.237/STF: conferir as datas de publicação dos primeiros e dos segundos embargos de declaração no ARE 1.385.315 (a minuta dá DJe 06/02/2025 para os dois)."
+   ],
    "minuta": true,
    "autos": {
     "arquivo": "acervo/autos/0004189-82.2016.4.03.6000.json.gz",
