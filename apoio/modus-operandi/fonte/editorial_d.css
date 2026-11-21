@@ -470,3 +470,7 @@ body.dsk #x-wrap.d28>#cq{grid-column:1/-1;max-width:none;margin:0;padding:6px 0 
 #x-wrap.d28 #cq-top{display:none}
 .dcx-info .dcx-t{font:600 12px Inter,sans-serif;color:#1d4f49;border:1px solid #8fb5ad;border-radius:4px;background:#fff;padding:3px 8px;margin-left:4px}
 .dcx-info .dcx-t:hover{background:#fff;color:#173f3d}
+/* campos automáticos (@apelido, da ficha do processo) */
+body.dsk #x-main .fill.arr{background:#e3edf5;color:#23506b;box-shadow:inset 0 -1px 0 #8fb0c8}
+body.dsk #x-main .fill.arr.ok{background:#e7f1ee;color:#1d4f49;box-shadow:inset 0 -1px 0 #8fb5ad}
+.fill.arr:empty::before{content:"@ " attr(data-rot);color:#3d6683}

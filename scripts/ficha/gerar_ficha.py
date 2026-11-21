@@ -227,6 +227,9 @@ abas.sort(key=lambda a: ordem.index(a['aba']) if a['aba'] in ordem else 99)
 out = {'schema': 'gabcmt.padrao.ficha', 'versao': '1.2.0', 'origem': 'padrao/integracoes-ficha.md (Ficha do Caput), por scripts/ficha/gerar_ficha.py',
        'descricao': 'Ficha única padrão de processo, usada pelo Caput e pela Ex Officio. Campos com "tipo": "tabela" são listas de linhas com as "colunas" indicadas. Grupos com "quando" só aparecem quando o campo indicado tem o valor. Campos com "secao" ficam em acervo/operacional.json (registro do processo, seção indicada: origem, triagem, producao, pauta ou controles) e são editáveis, salvo "editavel": false; campos com "fonte" vêm de acervo/fonte.json e são só leitura.',
        'abas': abas}
+# apelidos dos campos (@apelido nas peças e modelos do Compendium): scripts/ficha/apelidos.py
+import importlib.util as _iu
+_sp = _iu.spec_from_file_location('apelidos', R / 'scripts/ficha/apelidos.py'); _ap = _iu.module_from_spec(_sp); _sp.loader.exec_module(_ap); _ap.aplicar(out)
 (R / 'padrao/ficha.json').write_text(json.dumps(out, ensure_ascii=False, indent=1) + '\n', encoding='utf-8')
 n = sum(len(g['campos']) for a in abas for g in a['grupos'])
 ed = sum(1 for a in abas for g in a['grupos'] for c in g['campos'] if c.get('secao') and c.get('editavel', True))

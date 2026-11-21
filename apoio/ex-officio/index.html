@@ -2150,25 +2150,10 @@ html[data-theme=dark] #trm-urq .ufz2{--ur:#e07a6c;--uo:#d8a85a}
       <div class="cmt-gsl-tabs" role="tablist" aria-label="Painel lateral">
         <button type="button" role="tab" id="cmt-gsl-tg" data-gsl-tab="gab" aria-selected="true" aria-controls="cmt-gsl-b"><span>Gabinete<em>.</em></span></button>
         <button type="button" role="tab" id="cmt-gsl-tn" data-gsl-tab="not" aria-selected="false" aria-controls="cmt-gsl-nb">Notificações<i id="cmt-gsl-nt" hidden></i></button>
-        <button type="button" role="tab" id="cmt-gsl-te" data-gsl-tab="ed" aria-selected="false" aria-controls="cmt-gsl-eb">Editor<i id="cmt-gsl-ne" hidden></i></button>
       </div>
     </div>
     <div class="cmt-gsl-b" id="cmt-gsl-b" role="tabpanel" aria-labelledby="cmt-gsl-tg"></div>
     <div class="cmt-gsl-b cmt-gsl-nb" id="cmt-gsl-nb" role="tabpanel" aria-labelledby="cmt-gsl-tn" hidden></div>
-    <div class="cmt-gsl-b cmt-gsl-eb" id="cmt-gsl-eb" role="tabpanel" aria-labelledby="cmt-gsl-te" hidden>
-      <form class="cmt-edl-q" id="cmt-edl-f" role="search"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><input id="cmt-edl-qi" type="search" placeholder="Buscar no Compendium e abrir para editar" aria-label="Buscar no Compendium"></form>
-      <p class="cmt-edl-h">Coleções</p>
-      <div class="cmt-edl-c">
-        <button type="button" data-cedc="par"><i>PP</i><span><b>Parágrafos</b><small>trechos reutilizáveis das minutas</small></span><em>abrir ›</em></button>
-        <button type="button" data-cedc="pec"><i>PE</i><span><b>Peças</b><small>estrutura de cada peça</small></span><em>abrir ›</em></button>
-        <button type="button" data-cedc="dir"><i>DI</i><span><b>Diretrizes</b><small>preferências e vedações do gabinete</small></span><em>abrir ›</em></button>
-      </div>
-      <p class="cmt-edl-h">Alterações não gravadas</p>
-      <div class="cmt-edl-p" id="cmt-edl-p"></div>
-      <p class="cmt-edl-h">Criar</p>
-      <div class="cmt-edl-n"><button type="button" data-cedn="par">+ Parágrafo</button><button type="button" data-cedn="dir">+ Diretriz</button></div>
-      <p class="cmt-edl-r">O que for gravado por aqui sai em nome do CMT. Depois de gravar, o editor oferece avisar a equipe pelo mural.</p>
-    </div>
   </aside>
   <div class="cmt-wrap" id="cmt-wrap" hidden>
 
@@ -2183,6 +2168,7 @@ html[data-theme=dark] #trm-urq .ufz2{--ur:#e07a6c;--uo:#d8a85a}
         <button type="button" class="hb hbx nx-tx" id="cmt-b-urg" data-cdt="u" title="Urgências" aria-label="Urgências" aria-expanded="false"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9 2h6"/></svg><span>Urgências</span><i class="bdg" id="cmt-n-urg-t" hidden></i></button>
         <button type="button" class="hb hbx nx-tx" id="cmt-b-dvt" data-cdt="d" title="Dúvidas e pedidos" aria-label="Dúvidas e pedidos" aria-expanded="false"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.6 2.2c-.8.4-1.1 1-1.1 1.8M12 17v.5"/></svg><span>Dúvidas</span><i class="bdg" id="cmt-n-dv-t" hidden></i></button>
         <button type="button" class="hb hbx nx-tx" id="cmt-b-gab" data-cdt="m" title="Gabinete: calendário, comunicados e equipe" aria-label="Gabinete" aria-expanded="false"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 10h18M8 2v4M16 2v4"/></svg><span>Gabinete</span></button>
+        <span class="cmt-pill" role="group" aria-label="Compendium"><button type="button" data-cpill="em" aria-pressed="false" title="Consultar o ementário do Compendium">Ementário</button><button type="button" data-cpill="ed" aria-pressed="false" title="Abrir o editor do Compendium">Editorial</button></span>
         <button type="button" class="hb ic" id="cmt-atu2" title="Atualizar" aria-label="Atualizar"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.34 5.66"/><path d="M20 4v7h-7"/></svg></button>
       </div>
     <aside class="cmt-fastnav quick-find" id="cmt-fastnav" role="search" aria-label="Buscador rápido da pauta">
@@ -2290,9 +2276,7 @@ html[data-theme=dark] #trm-urq .ufz2{--ur:#e07a6c;--uo:#d8a85a}
             <div class="cmt-pzw"><p class="cmt-k">Marcos da semana</p><div id="cmt-l-pz"></div></div>
           </section>
 
-          <section class="cmt-q"><h2>Comunicados da <em>equipe.</em><span class="cmt-sp"></span><span class="cmt-n" id="cmt-n-com">—</span></h2>
-            <div id="cmt-c-com"></div>
-          </section>
+          <!-- comunicados da equipe: chegam em Notificações -->
 
           <section class="cmt-q" id="cmt-eq"><h2>Equipe e <em>ausências.</em><span class="cmt-sp"></span><span class="cmt-n" id="cmt-n-eq">—</span></h2><div class="cmt-cols"><div><p class="cmt-k">Produção nas pautas publicadas</p><div id="cmt-l-eq"></div></div><div><p class="cmt-k">Ausências a decidir</p><div id="cmt-l-aus"></div></div></div></section>
 
@@ -4834,8 +4818,11 @@ function quadro(){
     .sort(function(a,c){return (URK[a.urgency]-URK[c.urgency])||String(a.dueDate||'9999').localeCompare(String(c.dueDate||'9999'));});
   var h=hoje();
   $('#pen-s').innerHTML='<span><b>'+abertas.length+'</b> em aberto</span><span><b>'+minhas.length+'</b> suas</span><span><b>'+abertas.filter(function(t){return /Urgente|Alta/.test(t.urgency);}).length+'</b> prioritárias</span><span><b>'+abertas.filter(function(t){return !t.assignee;}).length+'</b> sem responsável</span>';
-  $('#board').innerHTML=ETAPAS.map(function(st){var L=F.filter(function(t){return (t.stage||'todo')===st[0];});
-    return '<section class="lane" data-st="'+st[0]+'"><h3><span>'+st[1]+'</span><span>'+L.length+'</span></h3>'+L.map(function(t){var at=t.dueDate&&t.dueDate<h&&st[0]!=='done';
+  /* no painel do desembargador: urgências em coluna própria; Concluída e Urgências começam recolhidas (clicar no título abre) */
+  var noCmt=document.body.classList.contains('cmt-pg'),ehU=function(t){return t.origem==='urgencia';},LN=noCmt?ETAPAS.slice(0,3).concat([['urg','Urgências']],ETAPAS.slice(3)):ETAPAS;
+  PN.min=PN.min||{done:true,urg:true};
+  $('#board').innerHTML=LN.map(function(st){var L=F.filter(function(t){return st[0]==='urg'?ehU(t)&&t.stage!=='done':(t.stage||'todo')===st[0]&&(!noCmt||st[0]==='done'||!ehU(t));});
+    return '<section class="lane'+(st[0]==='urg'?' urg':'')+(noCmt&&PN.min[st[0]]?' min':'')+'" data-st="'+st[0]+'"><h3'+(noCmt?' data-lmin="'+st[0]+'" title="'+(PN.min[st[0]]?'Abrir':'Recolher')+'"':'')+'><span>'+st[1]+'</span><span>'+L.length+'</span></h3>'+L.map(function(t){var at=t.dueDate&&t.dueDate<h&&st[0]!=='done';
       return '<article class="tk '+esc(t.urgency)+(st[0]==='done'?' done':'')+'" draggable="true" data-tk="'+esc(t.id)+'"><b>'+esc(t.title)+'</b>'+(t.origem?'<small class="tk-or">'+(t.origem==='intercor'?'Intercorrência da pauta':t.origem==='retido'?'Processo retido':'Urgência da monocrática')+'</small>':'')+'<small>'+esc([t.urgency,t.assignee||'sem responsável'].join(' · '))+'</small>'+
         (t.dueDate?'<small class="'+(at?'dl':'')+'">prazo '+br(t.dueDate)+(at?' · vencida':'')+'</small>':'')+(t.numero?'<small>'+esc(t.numero)+'</small>':'')+
         '<label class="tk-mv"><span class="vh">Mover para</span><select data-mv="'+esc(t.id)+'" aria-label="Mover para">'+ETAPAS.map(function(x){return '<option value="'+x[0]+'"'+(x[0]===st[0]?' selected':'')+'>'+x[1]+'</option>';}).join('')+'</select></label>'+'</article>';}).join('')+'</section>';}).join('');
@@ -4846,7 +4833,8 @@ function salvarTk(dados){return api('/api/pendencias',{method:dados.id?'PUT':'PO
 var arr=null;
 $('#board').addEventListener('dragstart',function(e){var t=e.target.closest('[data-tk]');if(!t)return;arr=t.getAttribute('data-tk');e.dataTransfer.effectAllowed='move';});
 $('#board').addEventListener('dragover',function(e){var l=e.target.closest('.lane');if(!l||!arr)return;e.preventDefault();Array.prototype.forEach.call(document.querySelectorAll('.lane.ov'),function(x){x.classList.remove('ov');});l.classList.add('ov');});
-$('#board').addEventListener('drop',function(e){var l=e.target.closest('.lane');if(!l||!arr)return;e.preventDefault();l.classList.remove('ov');var t=PN.t.filter(function(x){return x.id===arr;})[0];arr=null;
+$('#board').addEventListener('click',function(e){var h=e.target.closest('[data-lmin]');if(!h)return;var k=h.getAttribute('data-lmin');PN.min=PN.min||{};PN.min[k]=!PN.min[k];quadro();});
+$('#board').addEventListener('drop',function(e){var l=e.target.closest('.lane');if(!l||!arr)return;e.preventDefault();if(l.getAttribute('data-st')==='urg'){l.classList.remove('ov');arr=null;return;}l.classList.remove('ov');var t=PN.t.filter(function(x){return x.id===arr;})[0];arr=null;
   if(!t||t.stage===l.getAttribute('data-st'))return;moverTk(t,l.getAttribute('data-st'));});
 /* cartão automático: concluir e reabrir escrevem na origem */
 function pedirSituacao(){return new Promise(function(ok){
@@ -4947,6 +4935,7 @@ function cmtAbrir(){if(CMT.dados&&Date.now()-CMT.atualizado<60000){cmtPinta();re
 function cmtCarregar(s){
   if(typeof s==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(s))CMT.ses=s;
   if(CMT.carregando){CMT.recarregar=true;return;}CMT.carregando=true;
+  [].forEach.call(document.querySelectorAll('#cmt-atu,#cmt-atu2'),function(b){b.classList.add('gira');b.setAttribute('aria-busy','true');});
   if(!CMT.entrou){$('#cmt-load').hidden=false;$('#cmt-wrap').hidden=true;}
   var msgs=['Lendo a ficha única, o calendário das sessões e as pautas publicadas…','Separando o que aguarda assinatura e liberação…','Conferindo urgências, marcos e ausências…'],i=0;
   var tm=setInterval(function(){i=(i+1)%msgs.length;var e=$('#cmt-ld-m');if(e)e.textContent=msgs[i];},1600);
@@ -4956,7 +4945,9 @@ function cmtCarregar(s){
       if(CMT.avisar){CMT.avisar=false;toast('Painel atualizado às '+hm+'.');}})
     .catch(function(e){CMT.entrou=true;$('#cmt-load').hidden=true;$('#cmt-wrap').hidden=false;
       console.error('[painel do relator]',e);$('#cmt-sub').textContent=(e&&e.erro)||(e&&e.message)||'Não foi possível montar o painel.';})
-    .then(function(){clearInterval(tm);CMT.carregando=false;if(CMT.recarregar){CMT.recarregar=false;cmtCarregar();}});}
+    .then(function(){clearInterval(tm);CMT.carregando=false;
+      setTimeout(function(){[].forEach.call(document.querySelectorAll('#cmt-atu,#cmt-atu2'),function(b){b.classList.remove('gira');b.removeAttribute('aria-busy');});},350);
+      if(CMT.recarregar){CMT.recarregar=false;cmtCarregar();}});}
 /* produtividade pelas regras do gabinete (apoio/regras/produtividade.json; api/_produtividade.js):
    pontos no período contra a meta diária × dias úteis do servidor, descontadas as ausências */
 function pdvPinta(j,eq){var P=j.produtividade,f=function(n){return String(Math.round((Number(n)||0)*100)/100).replace('.',',');};
@@ -4970,7 +4961,7 @@ function pdvPinta(j,eq){var P=j.produtividade,f=function(n){return String(Math.r
 document.addEventListener('click',function(e){var b=e.target.closest('[data-pdv]');if(!b)return;var k=b.getAttribute('data-pdv'),h=new Date(Date.now()-4*3600e3),i=function(d){return d.toISOString().slice(0,10);};
   var hj=i(h),de,ate;if(k==='mes'){de=hj.slice(0,8)+'01';ate=hj;}else if(k==='ant'){var a=new Date(Date.UTC(h.getUTCFullYear(),h.getUTCMonth()-1,1)),z=new Date(Date.UTC(h.getUTCFullYear(),h.getUTCMonth(),0));de=i(a);ate=i(z);}else{var t=new Date(h);t.setUTCDate(t.getUTCDate()-29);de=i(t);ate=hj;}
   CMT.perK=k;CMT.per='&pde='+de+'&pate='+ate;CMT.atualizado=0;cmtCarregar();});
-function cmtLista(el,itens,monta,vazio){var h=(itens||[]).map(monta).join('');$(el).innerHTML=h||'<p class="cmt-vazio">'+(vazio||'Nada pendente.')+'</p>';}
+function cmtLista(el,itens,monta,vazio){var e0=$(el);if(!e0)return;var h=(itens||[]).map(monta).join('');e0.innerHTML=h||'<p class="cmt-vazio">'+(vazio||'Nada pendente.')+'</p>';}
 var CMTM={pautarAte:['P','Pautar até'],inicioPreparacao:['I','Início da preparação'],entregaMinutas:['E','Entrega das minutas'],liberacao:['L','Liberação']};
 function cmtDias(a,b){return Math.round((Date.parse(a+'T12:00:00Z')-Date.parse(b+'T12:00:00Z'))/86400e3);}
 function cmtMesNome(d){return new Intl.DateTimeFormat('pt-BR',{month:'long',year:'numeric',timeZone:'UTC'}).format(d);}
@@ -5367,12 +5358,20 @@ var fase=function(x){return x.dataMinuta?2:x.servidor?1:0;};
 var card=function(x){var d=x.espera,hoje=(d===0||d>=15);
   var prazo=d==null?'sem prazo':d===0?'vence hoje':d<0?'em '+(-d)+(d===-1?' dia':' dias'):'há '+d+(d===1?' dia':' dias');
   var et=x.assinado?4:x.dataLiberacao?3:x.dataCorrecao?2:x.dataMinuta?1:0,nome=['A minutar','Minutada','Corrigida','Liberada','Assinada'][et];
-  return '<div class="cmt-ur'+(hoje?' hoje':'')+'"><div class="cmt-ur-l"><b>'+esc(x.cnj)+'</b><time>'+esc(prazo)+'</time></div>'+
+  return '<div class="cmt-ur'+(hoje?' hoje':'')+'"><div class="cmt-ur-l"><b data-cfi="'+esc(x.cnj)+'" title="Abrir a ficha do processo">'+esc(x.cnj)+'</b><time>'+esc(prazo)+'</time></div>'+
   '<p>'+esc([x.tipo,x.nivel,x.servidor?'minuta: '+x.servidor:'',x.corretor?'correção: '+x.corretor:''].filter(Boolean).join(' · ')||'—')+'</p>'+
-  '<div class="cmt-ur-a"><span class="cmt-tag'+(et>=3?' ok':et>=1?' inf':'')+'">'+nome+'</span><button type="button" class="'+(hoje?'pri':'')+'" data-cfi="'+esc(x.cnj)+'">'+(hoje?'Decidir':'Abrir')+'</button></div></div>';};
+  '<div class="cmt-ur-a"><span class="cmt-tag'+(et>=3?' ok':et>=1?' inf':'')+'">'+nome+'</span></div>'+cmtUrDes(x)+'</div>';};
 var COL=['Chegou','Em minuta','Revisão e assinatura'];
 el.innerHTML='<div class="cmt-urk">'+COL.map(function(c,i){var L=ur.filter(function(x){return fase(x)===i;});
   return '<div class="cmt-urk-c uf'+i+'"><p class="cmt-col-h"><span><em>'+(i+1)+'</em>'+c+'</span><i>'+L.length+'</i></p>'+(L.length?L.map(card).join(''):'<p class="cmt-vazio">Nenhuma.</p>')+'</div>';}).join('')+'</div>';}
+/* designação na urgência: o relator escolhe quem minuta e quem corrige; grava na ficha (a mesma da página Monocráticas) e avisa os dois */
+function cmtUrDes(x){var E=((CMT.dados||{}).equipe)||{},op=function(L,v){L=(L||[]).slice();if(v&&L.indexOf(v)<0)L.unshift(v);return '<option value="">—</option>'+L.map(function(n){return '<option'+(n===v?' selected':'')+'>'+esc(n)+'</option>';}).join('');};
+  return '<div class="cmt-ur-ds"><label>Minuta<select data-cud="servidor" data-cnj="'+esc(x.cnj)+'" aria-label="Quem minuta '+esc(x.cnj)+'">'+op(E.minutantes,x.servidor||'')+'</select></label>'+
+    '<label>Correção<select data-cud="corretor" data-cnj="'+esc(x.cnj)+'" aria-label="Quem corrige '+esc(x.cnj)+'">'+op(E.corretores,x.corretor||'')+'</select></label></div>';}
+document.addEventListener('change',function(e){var s0=e.target.closest&&e.target.closest('[data-cud]');if(!s0)return;var cnj=s0.getAttribute('data-cnj'),box=s0.closest('.cmt-ur-ds');
+  var sv=box.querySelector('[data-cud="servidor"]').value,co=box.querySelector('[data-cud="corretor"]').value;
+  [].forEach.call(box.querySelectorAll('select'),function(x){x.disabled=true;});
+  cmtPost({acao:'designar',cnj:cnj,servidor:sv,corretor:co},'Designação registrada; quem foi designado recebe o aviso.').then(function(){[].forEach.call(box.querySelectorAll('select'),function(x){x.disabled=false;});});});
 /* 03 · dúvidas, uma a uma */
 function cmtDuvidas(){
 var j=CMT.dados||{},pd=(j.pedidos||[]).map(function(x){return {id:x.id,tipo:x.tipo,titulo:x.titulo,texto:x.texto,numero:x.numero,de:x.de,em:x.em,prioridade:x.prioridade,resposta:x.resposta,sessao:x.sessao};});
@@ -5465,7 +5464,7 @@ function cmtGslMin(m,naoGuarda){document.body.classList.toggle('cmt-gsl-min',!!m
   var k=document.getElementById('cmt-gsl-k');if(k){k.setAttribute('aria-expanded',String(!m));k.title=m?'Abrir o painel lateral':'Recolher o painel lateral';}
   var a=document.getElementById('cmt-gsl'),bn=document.getElementById('cmt-b-not');if(bn)bn.setAttribute('aria-expanded',String(!m&&!!a&&a.getAttribute('data-tab')==='not'));}
 function cmtGslNot(){return !cmtMobileMode()&&document.body.classList.contains('cmt-gsl-on');}
-function cmtGslTab(t){var a=document.getElementById('cmt-gsl');if(!a)return;t=t==='not'||t==='ed'?t:'gab';a.setAttribute('data-tab',t);
+function cmtGslTab(t){var a=document.getElementById('cmt-gsl');if(!a)return;t=t==='not'?t:'gab';a.setAttribute('data-tab',t);
   [].forEach.call(a.querySelectorAll('[role=tab][data-gsl-tab]'),function(b){b.setAttribute('aria-selected',String(b.getAttribute('data-gsl-tab')===t));b.tabIndex=b.getAttribute('data-gsl-tab')===t?0:-1;});
   var gb=document.getElementById('cmt-gsl-b'),nb=document.getElementById('cmt-gsl-nb'),eb=document.getElementById('cmt-gsl-eb');if(gb)gb.hidden=t!=='gab';if(nb)nb.hidden=t!=='not';if(eb)eb.hidden=t!=='ed';
   var k=document.getElementById('cmt-gsl-k');if(k)k.setAttribute('aria-controls',t==='not'?'cmt-gsl-nb':t==='ed'?'cmt-gsl-eb':'cmt-gsl-b');
@@ -5476,7 +5475,7 @@ document.addEventListener('click',function(e){if(!e.target.closest)return;
   if(e.target.closest('#cmt-gsl-k')){cmtGslMin(!document.body.classList.contains('cmt-gsl-min'));return;}
   var t=e.target.closest('[data-gsl-tab]');if(t){if(document.body.classList.contains('cmt-gsl-min'))cmtGslMin(false);cmtGslTab(t.getAttribute('data-gsl-tab'));}});
 document.addEventListener('keydown',function(e){var t=e.target;if(!t||!t.matches||!t.matches('.cmt-gsl-tabs [role=tab]')||(e.key!=='ArrowLeft'&&e.key!=='ArrowRight'))return;
-  var O=['gab','not','ed'],i=O.indexOf(t.getAttribute('data-gsl-tab')),o=O[(i+(e.key==='ArrowRight'?1:2))%3];cmtGslTab(o);var n=document.querySelector('.cmt-gsl-tabs [data-gsl-tab="'+o+'"]');if(n)n.focus();e.preventDefault();});
+  var o=t.getAttribute('data-gsl-tab')==='gab'?'not':'gab';cmtGslTab(o);var n=document.querySelector('.cmt-gsl-tabs [data-gsl-tab="'+o+'"]');if(n)n.focus();e.preventDefault();});
 try{if(cmtGslEst()||localStorage.getItem('cmt_gsl_min')==='1')document.body.classList.add('cmt-gsl-min');}catch(e){}
 try{var tb0=localStorage.getItem('cmt_gsl_tab');if(tb0==='not'||tb0==='ed'){if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){cmtGslTab(tb0);});else setTimeout(function(){cmtGslTab(tb0);},0);}}catch(e){}
 /* ===== Editor do Compendium no painel: a aba escolhe o que editar; o editor abre preso ao pé da tela, como a caixa de resposta de um fórum ===== */
@@ -5492,14 +5491,15 @@ window.addEventListener('message',function(e){if(e.origin!==location.origin||!e.
   var i=document.getElementById('cmt-gsl-ne');if(i){i.textContent=e.data.n;i.hidden=!e.data.n;}});
 window.addEventListener('storage',function(e){if(e.key===CMTEDK)cmtEdPend();});
 function cmtSvgB(p,s){return '<svg viewBox="0 0 24 24" width="'+(s||15)+'" height="'+(s||15)+'" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+p+'</svg>';}
-function cmtCmpEstado(st){var c=document.getElementById('cmt-cmp');if(!c)return;c.setAttribute('data-st',st);
+function cmtCmpEstado(st){var c=document.getElementById('cmt-cmp');if(!c)return;c.setAttribute('data-st',st);setTimeout(function(){if(typeof cmtPill==='function')cmtPill();},0);
   document.body.classList.toggle('cmt-cmp-on',st!=='fechado');document.body.classList.toggle('cmt-cmp-min',st==='min');
   var mi=c.querySelector('[data-ccmp="min"]'),mx=c.querySelector('[data-ccmp="max"]');
   if(mi){mi.title=mi.ariaLabel=st==='min'?'Restaurar':'Minimizar';mi.innerHTML=cmtSvgB(st==='min'?'<path d="M6 15l6-6 6 6"/>':'<path d="M5 12h14"/>');}
   if(mx){mx.title=mx.ariaLabel=st==='max'?'Sair da tela cheia':'Tela cheia';mx.innerHTML=cmtSvgB(st==='max'?'<path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5"/>':'<path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/>');}}
 /* abre o editor (cria na primeira vez); col escolhe a coleção, q faz a busca, novo cria um registro */
-function cmtCmp(col,q,novo){var c=document.getElementById('cmt-cmp'),vc=document.getElementById('v-cmt');if(!vc)return;
-  if(!c){c=document.createElement('section');c.id='cmt-cmp';c.className='cmt-cmp';c.setAttribute('aria-label','Editor do Compendium');
+function cmtCmp(col,q,novo){var vc=document.getElementById('v-cmt');if(!vc)return;cmtCmpCria();cmtCmpN2(col,q,novo);}
+function cmtCmpCria(){var c=document.getElementById('cmt-cmp'),vc=document.getElementById('v-cmt');if(!vc||c)return c;
+  {c=document.createElement('section');c.id='cmt-cmp';c.className='cmt-cmp';c.setAttribute('aria-label','Editor do Compendium');
     try{var hh=+localStorage.getItem('cmt_cmp_h');if(hh>=240)c.style.setProperty('--cmp-h',hh+'px');}catch(e){}
     c.innerHTML='<span class="cmt-cmp-g" title="Arraste para ajustar a altura" aria-hidden="true"></span>'+
       '<div class="cmt-cmp-h"><span class="cmt-cmp-i">'+cmtSvgB('<path d="M4 20h4l10-10-4-4L4 16z"/><path d="M13.5 6.5l4 4"/>')+'</span><b>Editor do <em>Compendium.</em></b><span class="cmt-cmp-s" id="cmt-cmp-s"></span><span class="cmt-sp"></span>'+
@@ -5507,9 +5507,11 @@ function cmtCmp(col,q,novo){var c=document.getElementById('cmt-cmp'),vc=document
       '<button type="button" class="cmt-cmp-sv" id="cmt-cmp-sv" data-ccmp="salvar" disabled>Salvar</button><span class="cmt-cmp-dv" aria-hidden="true"></span>'+
       '<button type="button" data-ccmp="min"></button><button type="button" data-ccmp="max"></button>'+
       '<button type="button" data-ccmp="x" title="Fechar (o que não foi gravado continua guardado)" aria-label="Fechar">'+cmtSvgB('<path d="M6 6l12 12M18 6L6 18"/>')+'</button></div>'+
-      '<iframe id="cmt-cmp-f" title="Editor do Compendium" src="/editor/?cmt=1"></iframe>';
+      '<iframe id="cmt-cmp-f" title="Editor do Compendium"></iframe><iframe id="cmt-cmp-e" title="Ementário do Compendium" hidden></iframe>';
     vc.appendChild(c);cmtEdPend();}
-  cmtCmpEstado('aberto');var s=document.getElementById('cmt-cmp-s');if(s)s.textContent=CMTEDN[col]||'';
+  return c;}
+function cmtCmpN2(col,q,novo){
+  cmtCmpModo('ed');cmtCmpEstado('aberto');var s=document.getElementById('cmt-cmp-s');if(s)s.textContent=CMTEDN[col]||'';
   var f=document.getElementById('cmt-cmp-f'),n=0;
   (function vai(){var D=null;try{D=f.contentDocument;}catch(e){}
     var b=D&&col&&D.querySelector('[data-edcol="'+col+'"]');
@@ -5526,6 +5528,17 @@ document.addEventListener('click',function(e){if(!e.target.closest)return;
     if(k==='x'){cmtCmpEstado('fechado');cmtEdPend();}else if(k==='min')cmtCmpEstado(st==='min'?'aberto':'min');else if(k==='max')cmtCmpEstado(st==='max'?'aberto':'max');return;}
   var h=e.target.closest('.cmt-cmp-h');if(h&&!e.target.closest('a,button')){var cp2=document.getElementById('cmt-cmp');if(cp2&&cp2.getAttribute('data-st')==='min')cmtCmpEstado('aberto');}});
 document.addEventListener('submit',function(e){if(e.target&&e.target.id==='cmt-edl-f'){e.preventDefault();var v=(document.getElementById('cmt-edl-qi')||{}).value||'';cmtCmp('',v.trim());}});
+/* modo do quadro ao pé da tela: Editorial (editor, com alterações e Salvar) ou Ementário (consulta) */
+function cmtCmpModo(m){var c=document.getElementById('cmt-cmp');if(!c)return;c.setAttribute('data-modo',m);
+  var f=document.getElementById('cmt-cmp-f'),e=document.getElementById('cmt-cmp-e');if(f){f.hidden=m!=='ed';if(m==='ed'&&!f.getAttribute('src'))f.src='/editor/?cmt=1';}if(e){e.hidden=m!=='em';if(m==='em'&&!e.getAttribute('src'))e.src='/modus/';}
+  var b=c.querySelector('.cmt-cmp-h b');if(b)b.innerHTML=m==='em'?'<em>Ementário.</em>':'Editor do <em>Compendium.</em>';
+  var s=document.getElementById('cmt-cmp-s');if(s&&m==='em')s.textContent='consulta';cmtPill();}
+function cmtPill(){var c=document.getElementById('cmt-cmp'),st=c&&c.getAttribute('data-st'),m=c&&c.getAttribute('data-modo');
+  [].forEach.call(document.querySelectorAll('[data-cpill]'),function(b){b.setAttribute('aria-pressed',String(!!c&&st!=='fechado'&&b.getAttribute('data-cpill')===m));});}
+document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-cpill]');if(!b)return;var k=b.getAttribute('data-cpill'),c=document.getElementById('cmt-cmp');
+  if(c&&c.getAttribute('data-st')!=='fechado'&&c.getAttribute('data-modo')===k){cmtCmpEstado('fechado');cmtPill();return;}
+  if(k==='ed'){cmtCmp(document.getElementById('cmt-cmp')?'':'par');return;}
+  cmtCmpCria();cmtCmpModo('em');cmtCmpEstado('aberto');cmtPill();});
 /* alça: arrastar ajusta a altura do editor (guardada para a próxima vez) */
 document.addEventListener('pointerdown',function(e){var g=e.target.closest&&e.target.closest('.cmt-cmp-g');if(!g)return;var c=document.getElementById('cmt-cmp');if(!c)return;e.preventDefault();
   var f=document.getElementById('cmt-cmp-f');if(f)f.style.pointerEvents='none';if(c.getAttribute('data-st')!=='aberto')cmtCmpEstado('aberto');
@@ -10479,6 +10492,42 @@ html[data-theme=dark] #prq .sg-tp{background:#3a2a14;color:#f0c27a}html[data-the
  body.cmt-cmp-on #v-cmt{padding-bottom:calc(46vh + 24px)!important}
  body.cmt-cmp-on.cmt-cmp-min #v-cmt{padding-bottom:64px!important}
 }
+
+/* pílula Ementário · Editorial no cabeçalho; o editor e o ementário abrem ao pé da tela */
+#v-cmt .cmt-pill{display:inline-flex;align-items:stretch;height:28px;margin:0 6px 0 10px;border:1px solid var(--el);border-radius:999px;background:var(--ew);overflow:hidden;flex:none}
+#v-cmt .cmt-pill button{margin:0;padding:0 12px;border:0;background:none;font:400 9.5px var(--emono);letter-spacing:.12em;text-transform:uppercase;color:var(--em);cursor:pointer;white-space:nowrap}
+#v-cmt .cmt-pill button+button{border-left:1px solid var(--el)}
+#v-cmt .cmt-pill button:hover{color:var(--eg)}
+#v-cmt .cmt-pill button[aria-pressed=true]{background:var(--eg);color:#fff}
+#v-cmt .cmt-cmp[data-modo=em] .cmt-cmp-pd,#v-cmt .cmt-cmp[data-modo=em] .cmt-cmp-sv,#v-cmt .cmt-cmp[data-modo=em] .cmt-cmp-dv{display:none!important}
+#v-cmt .cmt-cmp iframe[hidden]{display:none}
+@media (max-width:780px){#v-cmt .cmt-pill{display:none}}
+/* notificações ficam na barra da direita: saem do cabeçalho no computador */
+@media (min-width:781px){body.cmt-gsl-on #v-cmt #cmt-b-not{display:none!important}}
+/* quadro de diligências no painel: colunas que recolhem (Concluída e Urgências começam recolhidas) */
+#v-cmt #board{display:flex!important;gap:0;align-items:stretch}
+#v-cmt #board .lane{flex:1 1 0;min-width:0}
+#v-cmt #board .lane>h3[data-lmin]{cursor:pointer;user-select:none}
+#v-cmt #board .lane>h3[data-lmin]:hover span:first-child{color:var(--eg)}
+#v-cmt #board .lane.min{flex:0 0 46px;padding-left:8px!important;padding-right:8px!important}
+#v-cmt #board .lane.min>h3{writing-mode:vertical-rl;border-bottom:0!important;margin:0;gap:10px;justify-content:flex-start}
+#v-cmt #board .lane.min>article{display:none}
+#v-cmt #board .lane.urg>h3 span:first-child{color:var(--er)}
+@media (max-width:780px){#v-cmt #board{flex-direction:column}#v-cmt #board .lane.min{flex:0 0 auto}#v-cmt #board .lane.min>h3{writing-mode:horizontal-tb}}
+/* urgências: designar minuta e correção no cartão */
+#v-cmt .cmt-ur-ds{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}
+#v-cmt .cmt-ur-ds label{display:flex;flex-direction:column;gap:2px;font:400 9px var(--emono);letter-spacing:.1em;text-transform:uppercase;color:var(--em)}
+#v-cmt .cmt-ur-ds select{height:30px;padding:0 6px;border:1px solid var(--el);background:var(--ew);font:inherit;font-family:inherit;font-size:12.5px;letter-spacing:0;text-transform:none;color:var(--ei)}
+#v-cmt .cmt-ur-ds select:focus{outline:2px solid var(--eg);outline-offset:1px}
+#v-cmt .cmt-ur-l b[data-cfi]{cursor:pointer}#v-cmt .cmt-ur-l b[data-cfi]:hover{text-decoration:underline}
+
+/* atualizar: gira enquanto lê */
+@keyframes cmt-gira{to{transform:rotate(360deg)}}
+#v-cmt #cmt-atu2 svg,#v-cmt #cmt-atu svg{transition:transform .2s}
+#v-cmt #cmt-atu2:active svg,#v-cmt #cmt-atu:active svg{transform:rotate(-40deg)}
+#v-cmt #cmt-atu2.gira svg,#v-cmt #cmt-atu.gira svg{animation:cmt-gira .8s linear infinite}
+#v-cmt #cmt-atu2.gira,#v-cmt #cmt-atu.gira{color:var(--eg);pointer-events:none}
+@media (prefers-reduced-motion:reduce){#v-cmt #cmt-atu2.gira svg,#v-cmt #cmt-atu.gira svg{animation-duration:2.4s}}
 /* copiar o número do processo */
 #v-cmt .cmt-cp{display:inline-grid;place-items:center;width:22px;height:22px;margin-left:4px;padding:0;border:0;border-radius:6px;background:none;color:var(--em);opacity:.55;cursor:pointer;vertical-align:middle;flex:none}
 #v-cmt .cmt-cp:hover,#v-cmt .cmt-cp:focus-visible{opacity:1;background:var(--ep2);color:var(--eg)}

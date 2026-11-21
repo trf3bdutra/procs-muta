@@ -275,9 +275,25 @@ def montar(var):
     return t, js, css, pre
 _TCV = json.loads((RAIZ/'padrao/tipo-caso.json').read_text(encoding='utf-8'))
 TCJ = json.dumps({'materias': [{'nome': m['nome'], 'aliases': m.get('aliases', []), 'assuntos': m.get('assuntos', [])} for m in _TCV['materias']]}, ensure_ascii=False, separators=(',', ':'))
+# campos automáticos (@apelido) das peças e modelos: apelidos da ficha do processo (padrao/ficha.json, scripts/ficha/apelidos.py)
+# e os que a própria peça ou o caso calculam. Só nomes e rótulos: os valores vêm da ficha do processo aberto na Minuta-Matriz.
+_FI = json.loads((RAIZ/'padrao/ficha.json').read_text(encoding='utf-8'))
+_CA, _vis = [], set()
+for _a in _FI['abas']:
+    for _g in _a.get('grupos', []):
+        for _c in _g.get('campos', []):
+            _ap = _c.get('apelido')
+            if not _ap or _ap in _vis:
+                continue
+            _vis.add(_ap)
+            _CA.append({'a': _ap, 'r': _c.get('rotulo') or _c['chave'], 's': _c.get('secao') or '', 'c': _c['chave'], 'f': _c.get('fonte') or [], 'g': _a['aba'] + ' · ' + _g.get('grupo', '')})
+_ESP = [('processo', 'Número do processo'), ('ramo', 'Ramo do direito, pela árvore do CNJ'), ('recorrente', 'Recorrente'),
+        ('resultado', 'Resultado, pelo dispositivo da peça'), ('conclusao', 'Conclusão do cabeçalho da ementa'), ('dispositivo_ementa', 'Item IV da ementa, pelo dispositivo')]
+CAJ = json.dumps({'campos': [{'a': x, 'r': r, 's': '*', 'g': 'Caso e peça'} for x, r in _ESP] + _CA}, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/')
 def gerar_html(var):
     t, js, css, pre = montar(var)
     js = 'window.TIPO_CASO=' + TCJ + ';\n' + js   # vocabulário comum do tipo de caso (Ementário e Consulta)
+    js = 'window.CAMPOS_AUTO=' + CAJ + ';\n' + js   # campos automáticos (@apelido) da Minuta-Matriz e do editor
     for a, b in [('/*__USOS__*/', (H/'usos_auto.json').read_text(encoding='utf-8').strip()),
              ('/*__DATA__*/', (RAIZ/'apoio/vade-mecum.json').read_text(encoding='utf-8').strip().replace('</', '<\\/')),
              ('/*__EDITORIAL__*/', EDJ),

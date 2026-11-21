@@ -34,15 +34,17 @@ async function criarDiligencia(campos, u) {
 const PEDIDO = /^Pedido de (retirada|adiamento)\b/i;
 /* cada entrada do relator no painel vira um aviso para o gestor da equipe (apoio/equipe-avisos.json) */
 const AVISOS = 'apoio/equipe-avisos.json';
-async function avisarEquipe(titulo, texto) {
+async function avisarEquipe(titulo, texto, op) {
+  op = op || {};
   for (let t = 0; t < 4; t++) {
     let dados, sha;
     try { const r = await L.lerJson(AVISOS); dados = r.dados; sha = r.sha; }
     catch (e) { if (e.status !== 404) throw e; dados = { schema: 'gabcmt.equipe.avisos', versao: 1, registros: [] }; }
     dados.registros = dados.registros || [];
     const agora = new Date(), ate = new Date(agora.getTime() - 4 * 3600e3 + 7 * 86400e3).toISOString().slice(0, 10);
-    dados.registros.unshift({ id: 'av-cmt-' + agora.getTime().toString(36), time: agora.toISOString(), user: 'CMT', title: titulo, message: texto,
-      link: '/modus/', linkTxt: 'Abrir o Compendium', nivel: 'importante', painel: true, notificacao: true, para: [], ate, fixo: false });
+    dados.registros.unshift({ id: 'av-cmt-' + (op.tipo ? op.tipo + '-' : '') + agora.getTime().toString(36), time: agora.toISOString(), user: 'CMT', title: titulo, message: texto,
+      link: op.link != null ? op.link : '/modus/', linkTxt: op.linkTxt != null ? op.linkTxt : 'Abrir o Compendium', nivel: 'importante',
+      painel: op.painel !== false, notificacao: true, para: op.para || [], ate, fixo: false });
     dados.atualizadoEm = agora.toISOString();
     try { await L.gravarJson(AVISOS, dados, sha, 'Painel do desembargador: aviso à equipe · ' + titulo.slice(0, 60)); return; }
     catch (e) { if (e.status !== 409 && e.status !== 422) throw e; }
@@ -178,6 +180,23 @@ async function painel(req, res, u) {
         if (!titulo) return res.status(400).json({ erro: 'Informe o título do aviso.' });
         await avisarEquipe(titulo, texto);
         return res.status(200).json({ ok: true });
+      }
+      /* designação na urgência: o relator escolhe quem minuta e quem corrige; grava na ficha (a mesma da página Monocráticas) e avisa quem mudou */
+      if (b.acao === 'designar') {
+        const nomes = L.equipe(), acha = n => nomes.find(x => L.norm(x) === L.norm(n)) || String(n || '').trim();
+        const sv = b.servidor ? acha(b.servidor) : '', co = b.corretor ? acha(b.corretor) : '';
+        const { doc: d0 } = await FICHA.lerOpLeitura();
+        const r0 = (d0.registros || []).find(r => String(r.processo || '').replace(/\D/g, '') === cnj.replace(/\D/g, ''));
+        const ant = r0 ? MONO.item(r0) : {};
+        const salvo = await MONO.gravarMono(cnj, { servidor: sv, corretor: co }, 'CMT', true);
+        const novos = [sv !== (ant.servidor || '') && sv ? sv : '', co !== (ant.corretor || '') && co ? co : ''].filter(Boolean);
+        if (novos.length) {
+          const c = (salvo.item || {}).ctl || {};
+          await avisarEquipe('Designação do Desembargador · ' + cnj,
+            'Urgência ' + [c.urgTipo, c.urgNivel].filter(Boolean).join(' · ') + '.\n' + [sv ? 'Minuta: ' + sv : '', co ? 'Correção: ' + co : ''].filter(Boolean).join('\n'),
+            { tipo: 'des', para: [...new Set(novos)], painel: false, link: '/equipe/#mono', linkTxt: 'Abrir as monocráticas' });
+        }
+        return res.status(200).json({ ok: true, cnj, servidor: sv, corretor: co, avisados: novos });
       }
       if (b.acao === 'acesso') {
         try { await avisarAcesso(u); } catch (e) { return res.status(200).json({ ok: false, erro: e.message }); }
@@ -369,7 +388,11 @@ async function painel(req, res, u) {
     .map(r => ({ id: r.id, nome: r.nome, de: r.de, ate: r.ate, tipo: r.tipo, motivo: r.motivo || '', criadoEm: r.criadoEm || '' }))
     .sort((x, y) => String(x.de).localeCompare(String(y.de)));
 
-  res.status(200).json({ usuario: u, hoje: hj, assinar, duvidas, pedidos, comunicados, notificacoes, diligencias, urgencias, sessoes, agenda, pauta, prazos, producao, produtividade,
+  /* quem pode ser designado: minutantes (equipe.json, minuta) e corretores (assessoria; Renato e CM não corrigem) */
+  const eqR = ((equipeDoc || {}).registros || []).filter(r => r.nome && r.ativo !== false);
+  const equipe = { minutantes: eqR.filter(r => r.minuta === true).map(r => r.nome),
+    corretores: eqR.filter(r => r.papel === 'assessoria' && !['renato', 'cm'].includes(L.norm(r.nome))).map(r => r.nome) };
+  res.status(200).json({ usuario: u, hoje: hj, assinar, equipe, duvidas, pedidos, comunicados, notificacoes, diligencias, urgencias, sessoes, agenda, pauta, prazos, producao, produtividade,
     equipe: Object.keys(porServidor).map(n => porServidor[n]).sort((x, y) => (y.minutas + y.correcoes) - (x.minutas + x.correcoes)),
     ausencias, fontes: { ficha: !!doc, calendario: !!cal, pautas: docs.filter(Boolean).length, ausencias: !!aus, duvidas: !!pen } });
 }
