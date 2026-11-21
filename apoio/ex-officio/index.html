@@ -1791,20 +1791,24 @@ html[data-theme=dark] #v-pauta.ed #prq .prt-h,html[data-theme=dark] #v-pauta.ed 
 #prq .prt-modo{order:8;width:28px!important;height:28px!important;min-width:28px!important;padding:0!important;display:grid;place-items:center;border:1px solid var(--el2,#c8c3b6)!important;border-radius:0!important;background:var(--ew,#fff);color:var(--em,#6b6658);cursor:pointer}
 #prq .prt-modo[aria-pressed=true]{background:#173f3d;color:#fff;border-color:#173f3d!important}
 #prq .prt-h>div:first-of-type{flex:1 1 auto;min-width:0}
-/* prontuário · botões do topo numa só linha, em pills: ferramentas (ficha · Compendium · LIA), modo, navegação, fechar */
-.prt-h{flex-wrap:wrap}
-.prt-tb{flex:1 0 100%;display:flex;align-items:center;gap:6px;min-width:0;container-type:inline-size}
-#prq .prt-tb>.sp{flex:1;order:3!important}#prq .prt-tb .prt-hb{order:1!important;margin:0!important}#prq .prt-tb .prt-modo{order:2!important}#prq .prt-tb .prt-nv{order:4!important}#prq .prt-tb .prt-x{order:5!important}
+/* prontuário · botões do topo em pills ao lado do título: ferramentas (ficha · Compendium · LIA) e modo na 1ª linha,
+   navegação e fechar na 2ª; com o painel largo, tudo numa linha só, com rótulos */
+#prq .prt-h{flex-wrap:nowrap!important;align-items:flex-start;container-type:inline-size}
+#prq .prt-tb{flex:0 0 auto;margin-left:auto;display:grid;grid-template-columns:auto auto;gap:5px 5px;justify-items:end;align-items:center}
+#prq .prt-tb>.sp{display:none}
+#prq .prt-tb .prt-hb{grid-area:1/1;order:0!important;margin:0!important}#prq .prt-tb .prt-modo{grid-area:1/2;order:0!important}
+#prq .prt-tb .prt-nv{grid-area:2/1;order:0!important}#prq .prt-tb .prt-x{grid-area:2/2;order:0!important}
 #prq .prt-tb .prt-hb,#prq .prt-tb .prt-nv{display:inline-flex;gap:0;border:1px solid var(--el2,var(--line));border-radius:999px;overflow:hidden;background:var(--ew,var(--card))}
-#prq .prt-tb .prt-hb>button,#prq .prt-tb .prt-nv>button{border:0!important;border-radius:0!important;background:transparent!important;height:26px!important;width:auto!important;min-width:30px!important;padding:0 10px!important;display:inline-flex;align-items:center;justify-content:center;gap:5px;color:var(--em,var(--ink));font:600 11.5px var(--font);cursor:pointer}
+#prq .prt-tb .prt-hb>button,#prq .prt-tb .prt-nv>button{border:0!important;border-radius:0!important;background:transparent!important;height:26px!important;width:auto!important;min-width:30px!important;padding:0 9px!important;display:inline-flex;align-items:center;justify-content:center;gap:5px;color:var(--em,var(--ink));font:600 11.5px var(--font);cursor:pointer}
 #prq .prt-tb .prt-hb>button+button,#prq .prt-tb .prt-nv>button+button{border-left:1px solid var(--el2,var(--line))!important}
 #prq .prt-tb .prt-hb>button i{font-style:normal;font-size:13px;line-height:1}
-#prq .prt-tb .prt-nv>button{font-size:15px;padding:0 9px!important}
+#prq .prt-tb .prt-nv>button{font-size:15px}
 #prq .prt-tb .prt-modo,#prq .prt-tb .prt-x{width:28px!important;height:28px!important;min-width:28px!important;padding:0!important;border-radius:999px!important;border:1px solid var(--el2,var(--line))!important;background:var(--ew,var(--card));color:var(--em,var(--ink));display:grid;place-items:center;font-size:15px;line-height:1}
 #prq .prt-tb .prt-modo[aria-pressed=true]{background:#173f3d;color:#fff;border-color:#173f3d!important}
 #prq .prt-tb .prt-hb>button:hover,#prq .prt-tb .prt-nv>button:hover:not(:disabled),#prq .prt-tb .prt-x:hover{background:rgba(23,63,61,.08)!important}
 #prq .prt-tb button:disabled{opacity:.35;cursor:default}
-@container (max-width:330px){.prt-tb .tl{display:none}}
+#prq .prt-tb .tl{display:none}
+@container (min-width:620px){#prq .prt-tb{display:flex;gap:6px;margin-top:4px}#prq .prt-tb .prt-hb{order:-1!important}#prq .prt-tb .tl{display:inline}}
 /* combinação de fundos do painel da Pauta: corpo creme, faixa do processo em branco com filete */
 #v-pauta.ed #prq .prt,#v-pauta.ed #prq .prt-tabs,#v-pauta.ed #prq .prt-body{background:#fbfaf5}
 html[data-theme=dark] #v-pauta.ed #prq .prt,html[data-theme=dark] #v-pauta.ed #prq .prt-tabs,html[data-theme=dark] #v-pauta.ed #prq .prt-body{background:#10222e}
