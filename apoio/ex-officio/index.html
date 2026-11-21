@@ -7979,6 +7979,10 @@ window.CMTFicha = { versao: 1, abrir: abrir, fechar: function () { fechar(true);
     Array.prototype.forEach.call(document.querySelectorAll('#v-pauta .mr-l1>.cnj'),function(c){if(c.nextElementSibling&&c.nextElementSibling.classList.contains('cpy'))return;c.insertAdjacentHTML('afterend',bt('cpy-card','Copiar o número do processo'));});
   }
   var ag=0;new MutationObserver(function(){if(ag)return;ag=requestAnimationFrame(function(){ag=0;enfeita();});}).observe(document.body,{childList:true,subtree:true});
+  /* navegadores sem field-sizing: a pendência cresce pela altura do texto */
+  if(!(window.CSS&&CSS.supports&&CSS.supports('field-sizing','content'))){var cresce=function(t){t.style.setProperty('height','auto','important');t.style.setProperty('height',t.scrollHeight+'px','important');};
+    document.addEventListener('input',function(e){if(e.target&&e.target.matches&&e.target.matches('#prq .ac-pl textarea'))cresce(e.target);});
+    new MutationObserver(function(){[].forEach.call(document.querySelectorAll('#prq .ac-pl textarea'),function(t){if(!t._cr){t._cr=1;cresce(t);}});}).observe(document.body,{childList:true,subtree:true});}
   function copia(txt,b){txt=String(txt||'').trim();if(!txt){toast('Nada para copiar.');return;}
     var ok=function(){b.classList.add('ok');setTimeout(function(){b.classList.remove('ok');},900);toast('Copiado: '+txt);};
     if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(txt).then(ok,function(){toast('Não foi possível copiar.');});
@@ -9773,6 +9777,8 @@ html[data-theme=dark] #prq #ac-so{background:#14273a;border-color:#2a4560!import
 #prq .ac-sf input{width:100%;min-width:0;height:28px!important;font-size:12.5px}
 #prq .ac-sf input.do-email{background:#eef6f2!important;border-color:#9cc0b4!important}
 #prq .ped-l{margin:4px 0 0;font:500 11px var(--emono,monospace);color:#28744b}
+/* a regra geral .prt-pc textarea fixa 34px: aqui a altura acompanha o texto inteiro da pendência */
+#prq .ac-pl textarea{height:auto!important;min-height:0!important;max-height:none!important}
 #prq .ac-pl{align-items:start}#prq .ac-pl>input[type=checkbox]{margin-top:5px}
 #prq .ac-pl small{grid-column:2;grid-row:2;font:400 9.5px var(--emono);color:var(--em)}
 #prq .ac-pl button{grid-column:3;grid-row:1/span 2;width:22px;height:22px;border:0;background:none;color:var(--em);cursor:pointer;font-size:15px;border-radius:4px}

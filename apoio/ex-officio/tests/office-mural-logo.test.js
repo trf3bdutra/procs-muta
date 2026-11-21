@@ -82,3 +82,8 @@ test('pedido por e-mail: grava tipo e os dados do pedido na seção do prontuár
   const app = require('fs').readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
   for (const x of ["fl('Advogado(a)','advogado','nome')", "fl('Pedido recebido em','recebido','','date')", "if(dialogo.id==='ac-so')"]) assert.ok(app.includes(x), x);
 });
+
+test('prontuário: pendência mostra o texto inteiro (altura acompanha o texto)', () => {
+  const app = require('fs').readFileSync(require('path').join(__dirname, '..', 'index.html'), 'utf8');
+  assert.ok(app.includes('#prq .ac-pl textarea{height:auto!important;min-height:0!important;max-height:none!important}'));
+});
