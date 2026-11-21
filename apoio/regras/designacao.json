@@ -1,7 +1,7 @@
 {
  "schema": "gabcmt.regras.designacao",
  "versao": 1,
- "atualizadoEm": "2026-11-19T13:56:42.000Z",
+ "atualizadoEm": "2026-11-21T11:53:33.006Z",
  "criterios": {
   "ordem": [
    "julg",
@@ -999,6 +999,32 @@
     "cap": "Vírus, bactérias e produtos químicos"
    }
   },
-  "equilibrar": true
+  "equilibrar": true,
+  "obrig": [
+   {
+    "q": "julg",
+    "v": "ED",
+    "d": "Victor",
+    "c": "Vanilda"
+   },
+   {
+    "q": "sec",
+    "v": "1ª Seção",
+    "d": "",
+    "c": "Vanilda"
+   },
+   {
+    "q": "sec",
+    "v": "2ª Seção",
+    "d": "",
+    "c": "Bruno"
+   },
+   {
+    "q": "sec",
+    "v": "3ª Seção",
+    "d": "",
+    "c": "Alexander"
+   }
+  ]
  }
 }
