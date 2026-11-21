@@ -258,7 +258,7 @@ test('Pautas: seletor de sessões com rolagem, três por vez; assuntos sem regra
   for(const x of ['.cwe-nav .cwe-ses{max-height:178px;overflow-y:auto','cwe-sr1" slot="regras"',"::slotted([slot=regras]){margin:0 0 12px}"])assert.ok(cap.includes(x),x);
 });
 
-test('Mesa: capacidade e carga à direita, em areia com textura',()=>{
+test('Mesa: capacidade e carga à direita, no padrão da esteira',()=>{
   const cap=require('fs').readFileSync(require('path').join(__dirname,'../../../caput/triagem/index.html'),'utf8');
-  assert.ok(cap.includes('.mb.emb .lay{grid-template-columns:minmax(0,1fr) 262px!important}.mb.emb .side{order:2}.mb.emb .side .card{background:#f9f7f1 url('));
+  assert.ok(cap.includes('.mb.emb .lay{grid-template-columns:minmax(0,1fr) 262px!important}.mb.emb .side{order:2}.mb.emb .side{gap:18px!important}.mb.emb .side .card{background:transparent!important;border:0!important;border-top:1px solid #235a55!important'));
 });
