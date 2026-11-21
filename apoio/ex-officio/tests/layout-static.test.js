@@ -49,7 +49,7 @@ test('áreas centrais usam colunas flexíveis e mantêm navegação responsiva',
   const lotes = styleOf(pages[1]).css;
   assert.match(main, /grid-template-columns:clamp\(190px,17vw,232px\) minmax\(0,1fr\)/);
   assert.match(lotes, /@media\(max-width:900px\)/);
-  assert.match(lotes, /body\.cx-on\{padding-right:520px\}/);
+  assert.match(lotes, /body\.cx-on\{padding-right:440px\}/);
   assert.match(lotes, /@media\(max-width:1300px\)/);
   assert.match(lotes, /overscroll-behavior-x:contain/);
 });

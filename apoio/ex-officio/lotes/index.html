@@ -340,12 +340,12 @@ html[data-theme=dark] .cx-out del{background:#5a2420;color:#ffd5cf}html[data-the
 .lx-cx .cx-c{overscroll-behavior:contain;min-height:0}
 @media(min-width:1301px){
  .lx{grid-template-columns:clamp(190px,17vw,232px) minmax(0,1fr);column-gap:clamp(16px,2.1vw,32px)}
- .lx-cx{width:520px}
- body.cx-on{padding-right:520px}
- body.cx-on .lx-nx{margin-left:calc(50% - 50vw + 260px);margin-right:calc(50% - 50vw + 260px)}
+ .lx-cx{width:440px}
+ body.cx-on{padding-right:440px}
+ body.cx-on .lx-nx{margin-left:calc(50% - 50vw + 220px);margin-right:calc(50% - 50vw + 220px)}
 }
 @media(max-width:1300px){
- .lx-cx{width:min(520px,100vw)}
+ .lx-cx{width:min(440px,100vw);box-shadow:-12px 0 28px rgba(16,34,46,.14)}
  body.cx-on{padding-right:0}
  body.cx-on .lx-nx{margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw)}
 }
@@ -385,6 +385,26 @@ html{overflow-x:clip}                                   /* a barra em largura to
 .cmt-met div.dem span{color:var(--em);font-weight:500}
 .cmt-met div.on{background:var(--ew);box-shadow:inset 0 -3px 0 var(--eo)}
 .pend-x{display:block;margin-top:2px;font-size:11.5px;color:var(--er)}
+/* painel esquerdo enxuto (20/11/2026) */
+.lx-nk2{display:flex;align-items:center;justify-content:space-between;margin-top:14px}
+.lx-sub .lx-limpa{display:inline;width:auto;border:0;padding:0;font:400 10px var(--emono);letter-spacing:.06em;color:var(--eo2);text-transform:none}
+.lx-gs .g-mais{display:none}.lx-gs.todos .g-mais{display:flex}
+.lx-sub button.g[aria-pressed=true]{border-left:2px solid var(--eo);padding-left:23px;color:var(--ei);font-weight:700}
+.lx-sub button.g.off{opacity:.5}
+.lx-sub .lx-vermais{border-left:1px solid var(--el);padding:6px 0 6px 24px;font:500 12px var(--font);color:var(--eg)}
+.lx-sub .lx-vermais:hover{color:var(--ei)}
+.lx-sub .col-area .b{display:inline-flex;width:100%;justify-content:center;height:30px;border:1px solid var(--el2);background:var(--ew);color:var(--ei);font:600 12px var(--font);padding:0 10px}
+.lx-sub .col-area .b:hover{border-color:var(--ei)}
+/* painel direito: alcance da análise */
+.cor-esc{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.cor-esc .cmt-seg button[disabled]{opacity:.4;cursor:default}
+.cor-alvo{margin:10px 0 4px;font-size:12.5px;color:var(--em);line-height:1.5}
+.cor-alvo b{color:var(--ei)}.cor-alvo a,.cor-lk{color:var(--eg);font-weight:600;text-decoration:none;white-space:nowrap}
+.cor-alvo a:hover,.cor-lk:hover{text-decoration:underline}
+.cor-lk{display:inline-block;margin:2px 0 8px;font-size:12px}
+.cor-gr h4 span{font-weight:400;color:var(--em);font-size:11.5px;margin-left:4px}
+.cor-p.ok span{color:var(--em)}
+.cor-lim{margin-top:12px}.cor-lim summary{cursor:pointer;font-size:12px;color:var(--em)}
 .cmt-met div.on span{color:var(--ei)}
 .cmt-met div:focus-visible{outline:2px solid var(--eo);outline-offset:-2px}
 /* perfil: identificação à esquerda (quebra só dentro dela) e ações fixas à direita */
@@ -465,8 +485,8 @@ function seletorColecoes(lotes,id) {
     bt('pauta','Pauta','Coleção de Pauta')+bt('triagem','Triagem','Coleção de Triagem')+bt('avulsa','Avulsas','Coleções Avulsas')+'</div>'+
     '<div class="col-area" id="col-pauta"'+(tipo==='pauta'?'':' hidden')+'>'+
     '<label class="lx-sel">Sessão · processos na pauta<select id="sel-sessao">'+sess.map(x=>'<option value="'+esc(x.date)+'"'+(x.date===ses?' selected':'')+' title="'+esc(x.nome||br(x.date))+' · '+x.processos+' na pauta">'+esc(br(x.date))+' · '+(x.processos?x.processos:'vazia')+'</option>').join('')+'</select></label>'+
-    '<button class="b col-matriz" type="button" id="b-matriz">Matriz geral da sessão</button>'+
-    '<label class="lx-sel">Lotes criados nesta pauta<select id="sel-pauta"'+(daSessao.length?'':' disabled')+'><option value="">'+(daSessao.length?'Escolha um lote':'Nenhum lote')+'</option>'+daSessao.map(opt).join('')+'</select></label></div>'+
+    (LOTE&&LOTE.virtual?'':'<button class="b col-matriz" type="button" id="b-matriz">← Matriz geral da sessão</button>')+
+    (daSessao.length?'<label class="lx-sel">Lotes desta pauta<select id="sel-pauta"><option value="">Escolha um lote</option>'+daSessao.map(opt).join('')+'</select></label>':'')+'</div>'+
     '<div class="col-area" id="col-triagem"'+(tipo==='triagem'?'':' hidden')+'>'+
     '<label class="lx-sel">Lote de triagem<select id="sel-triagem"><option value="">Selecione um lote</option>'+optTri+'</select></label></div>'+
     '<div class="col-area" id="col-avulsas"'+(tipo==='avulsa'?'':' hidden')+'>'+
@@ -602,8 +622,11 @@ function aplicaSelG(){
   offG.clear();
   if(SELG.size){const vale=new Set([...SELG].flatMap(k=>k.split(',')));cards.flatMap(d=>d.dataset.g.split(',')).forEach(g=>{if(!vale.has(g))offG.add(g)})}
   cards.forEach(d=>{const on=SELG.has(d.dataset.g);d.classList.toggle('on',on);d.classList.toggle('off',SELG.size>0&&!on);d.setAttribute('aria-pressed',String(on))});
-  const gt=$('#g-todos');if(gt)gt.hidden=!SELG.size;
+  const gt=$('#g-todos');if(gt)gt.hidden=!SELG.size;const g2=$('#g-todos2');if(g2)g2.hidden=!SELG.size;
+  const vale=new Set([...SELG].flatMap(k=>k.split(',')));
+  document.querySelectorAll('[data-sel-g]').forEach(b=>{const on=vale.has(b.dataset.selG);b.setAttribute('aria-pressed',String(on));b.classList.toggle('off',SELG.size>0&&!on)});
   filtra();
+  corAtualiza();
 }
 function cartoesMatriz(grs){
   const card=g=>`<div data-g="${g.k}" role="button" tabindex="0" aria-pressed="false" style="border-top-color:${g.c}" title="Clique: só este assunto · Ctrl+clique: somar outro · clique de novo: todos"><span>${/^\d+$/.test(g.k)?g.k+' · ':''}${esc(g.r)}</span><b>${pad(g.n)}</b></div>`;
@@ -629,16 +652,18 @@ function montar(lotes,id,usuario){
   const nota={cg:'Na gestão aparecem todos os processos. Nas colunas Equipe e Relator, você escolhe o que cada página mostra.',eq:'O Relator vê só os processos liberados para ele.',rel:'Clique num processo para abrir o perfil e a minuta.'}[MODO_REL?'rel':MODO];
   mostra(cabecalho(lotes,id,usuario)+`<div class="lx">
   <nav class="lx-sub" id="lx-sub" aria-label="Coleções, sessões e seções da página">
-   <div class="lx-lt"><p class="lx-ey">Amicus Curiae · Collectio / ${ROTULO[MODO]}</p>
+   <div class="lx-lt">
     ${seletorColecoes(lotes,id)}
-    <p class="lx-lt-n" id="cnt">—</p><p class="lx-lt-d">${esc(contexto)}</p>
-    <p class="lx-lt-s">${FILT_SESSAO?`Sessão de ${br(FILT_SESSAO)}`:`Sessões de ${LOTE.sessoes.map(br).join(' e ')}`}${FILT_MINUTISTA?` · Produção: ${esc(FILT_MINUTISTA)}`:''}</p>
-    ${LOTE.descricao?`<p class="lx-lt-d">${esc(LOTE.descricao)}</p>`:''}</div>
+    <p class="lx-lt-n" id="cnt">—</p>
+    ${LOTE.virtual?'':`<p class="lx-lt-d">${esc(contexto)}</p><p class="lx-lt-s">Sessões de ${LOTE.sessoes.map(br).join(' e ')||'—'}</p>`}
+    ${FILT_SESSAO||FILT_MINUTISTA?`<p class="lx-lt-s">${FILT_SESSAO?`Sessão de ${br(FILT_SESSAO)}`:''}${FILT_SESSAO&&FILT_MINUTISTA?' · ':''}${FILT_MINUTISTA?`Produção: ${esc(FILT_MINUTISTA)}`:''}</p>`:''}
+    ${!LOTE.virtual&&LOTE.descricao?`<p class="lx-lt-d">${esc(LOTE.descricao)}</p>`:''}</div>
    <p class="lx-nk">Nesta página</p>
    <button type="button" data-ir="matriz"><i>01</i><span>${LOTE.virtual?'Matriz da sessão':'Matriz do lote'}</span><small id="n-mx"></small></button>
-   ${grs.map(g=>`<button type="button" class="g" data-ir-g="${g.k}"><i style="background:${g.c}"></i><span>${esc(g.r)}</span><small data-ng="${g.k}">${g.n}</small></button>`).join('')}
    <button type="button" data-ir="sec-pf"><i>02</i><span>Processos</span><small id="n-pf"></small></button>
-   <button type="button" class="lx-mini" data-min-tudo>Minimizar todos os processos</button>
+   ${grs.length?`<p class="lx-nk lx-nk2">${LOTE.virtual?'Assuntos':'Grupos'}<button type="button" class="lx-limpa" id="g-todos2" hidden title="Mostrar de novo todos">× todos</button></p>
+   <div class="lx-gs" id="lx-gs">${grs.map((g,k)=>`<button type="button" class="g${k>=8?' g-mais':''}" data-sel-g="${g.k}" aria-pressed="false" title="Clique: só este · Ctrl+clique: somar outro · clique de novo: todos"><i style="background:${g.c}"></i><span>${esc(g.r)}</span><small data-ng="${g.k}">${g.n}</small></button>`).join('')}
+   ${grs.length>8?`<button type="button" class="lx-vermais" id="lx-vermais" aria-expanded="false">Ver todos os ${grs.length} ${LOTE.virtual?'assuntos':'grupos'}</button>`:''}</div>`:''}
    <p class="lx-nota">${nota}</p></nav>
   <div id="gest"></div>
   ${painelVisLotes(lotes)}
@@ -708,14 +733,19 @@ function montar(lotes,id,usuario){
 }
 function ligaSub(){
   document.querySelectorAll('[data-ir]').forEach(b=>b.onclick=()=>{const e=document.getElementById(b.dataset.ir);if(e)e.scrollIntoView({behavior:'smooth',block:'start'})});
-  document.querySelectorAll('[data-ir-g]').forEach(b=>b.onclick=()=>{const r=document.querySelector(`#mxb tr.gh[data-gh="${b.dataset.irG}"]`);if(r){r.scrollIntoView({behavior:'smooth',block:'center'})}});
+  /* assuntos (ou grupos) da lista lateral: o mesmo filtro dos cartões da matriz, e a tabela vem para a tela */
+  document.querySelectorAll('[data-sel-g]').forEach(b=>b.onclick=ev=>{const k=b.dataset.selG,soma=ev.ctrlKey||ev.metaKey||ev.shiftKey;
+    if(soma){SELG.has(k)?SELG.delete(k):SELG.add(k)}else if(SELG.has(k)&&SELG.size===1){SELG.clear()}else{SELG.clear();SELG.add(k)}
+    aplicaSelG();const t=document.getElementById('matriz');if(t)t.scrollIntoView({behavior:'smooth',block:'start'})});
+  const vm=$('#lx-vermais');if(vm)vm.onclick=()=>{const g=$('#lx-gs'),on=!g.classList.contains('todos');g.classList.toggle('todos',on);vm.setAttribute('aria-expanded',String(on));vm.textContent=on?'Mostrar só os principais':vm.dataset.t};if(vm)vm.dataset.t=vm.textContent;
+  const g2=$('#g-todos2');if(g2)g2.onclick=()=>{SELG.clear();aplicaSelG()};
   const marca=id=>document.querySelectorAll('#lx-sub [data-ir]').forEach(b=>b.setAttribute('aria-current',b.dataset.ir===id?'true':'false'));
   marca('matriz');
   try{const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)marca(e.target.id)})},{rootMargin:'-90px 0px -60% 0px'});['matriz','sec-pf'].forEach(id=>{const e=document.getElementById(id);if(e)io.observe(e)})}catch(e){}
 }
 /* ---------- painel lateral: comparar a minuta com um texto e buscar em todos os processos do lote ---------- */
 const CX={aberto:false,hits:new Set(),filtra:false,todas:false};
-const CX_TIT={cmp:'Comparar e <em>buscar.</em>',bus:'Comparar e <em>buscar.</em>',tre:'Trechos em <em>lote.</em>',cor:'Correspondências de <em>casos e modelos.</em>'};
+const CX_TIT={cmp:'Comparar e <em>buscar.</em>',bus:'Comparar e <em>buscar.</em>',tre:'Trechos em <em>lote.</em>',cor:'Casos e <em>modelos.</em>'};
 const MDATA={};
 async function getMin(it){if(MDATA[it.uid])return MDATA[it.uid];const m=await api('?id='+encodeURIComponent(LOTE.id)+'&minuta='+it.processo.slice(0,10));MDATA[it.uid]=m;return m}
 function painel(uid){
@@ -723,8 +753,9 @@ function painel(uid){
     const com=ITENS.filter(i=>i.minuta);
     document.body.insertAdjacentHTML('beforeend',`<aside class="lx-cx cv" id="cx" aria-label="Painel lateral"><div class="cx-h"><div><p class="lx-ey" style="margin:0">Painel lateral</p><b id="cx-tit">${MODO_REL?CX_TIT.cor:CX_TIT.cmp}</b></div><span class="cmt-sp"></span><button type="button" class="b" id="cx-x">Fechar</button></div>
     <div class="cx-sw"><span class="cmt-seg" role="group" aria-label="Modo do painel">${MODO_REL?'':'<button type="button" data-cx="cmp" aria-pressed="true">Comparar</button><button type="button" data-cx="bus" aria-pressed="false">Buscar no lote</button>'}${MODO==='cg'?'<button type="button" data-cx="tre" aria-pressed="false">Trechos em lote</button>':''}<button type="button" data-cx="cor" aria-pressed="${MODO_REL}">Compendium</button></span></div>
-    <div class="cx-c hidden" id="cx-cor"><p class="cx-nt">Padrões, variações, matrizes estruturais e variáveis de matéria dos processos deste lote. A correspondência não comprova a adequação do modelo ao mérito do processo.</p>
-      <div class="acts"><button class="b" type="button" id="cl-cor-carregar">Analisar correspondências</button></div>
+    <div class="cx-c hidden" id="cx-cor">
+      <div class="cor-esc"><span class="cmt-seg" role="group" aria-label="Alcance da análise"><button type="button" data-cesc="proc" aria-pressed="false">Processo</button><button type="button" data-cesc="sel" aria-pressed="false">Seleção da matriz</button><button type="button" data-cesc="lote" aria-pressed="false">${LOTE&&LOTE.virtual?'Sessão inteira':'Lote inteiro'}</button></span><button class="b" type="button" id="cl-cor-carregar" title="Refazer a análise">Atualizar</button></div>
+      <p class="cor-alvo" id="cor-alvo"></p>
       <div id="cl-cor-body" role="status" aria-live="polite"></div></div>
     <div class="cx-c${MODO_REL?' hidden':''}" id="cx-cmp"><div class="form">
       <label>Processo<select class="cmt-sel" id="cx-it">${com.map(i=>`<option value="${i.uid}">${temItem(i)?rotItem(i)+' · ':''}${esc(i.processo.slice(0,15))} · ${esc(String(i.exequente).slice(0,28))}</option>`).join('')}</select></label>
@@ -749,8 +780,9 @@ function painel(uid){
       <div class="acts"><button type="button" class="b pri" id="tr-ok" disabled>Aplicar</button><span class="k" id="tr-m"></span></div></div>`:''}</aside>`);
     $('#cx-x').onclick=()=>painel(false);
     document.querySelectorAll('[data-cx]').forEach(b=>b.onclick=()=>{const k0=b.dataset.cx;document.querySelectorAll('[data-cx]').forEach(x=>x.setAttribute('aria-pressed',x===b?'true':'false'));['cmp','bus','tre','cor'].forEach(k=>{const e=$('#cx-'+k);if(e)e.classList.toggle('hidden',k0!==k)});$('#cx-tit').innerHTML=CX_TIT[k0]||CX_TIT.cmp;
-      if(k0==='bus')$('#cx-q').focus();if(k0==='tre')trechos();if(k0==='cor'&&!$('#cl-cor-body').innerHTML.trim())carregarCorrespondencias()});
-    $('#cl-cor-carregar').onclick=carregarCorrespondencias;
+      if(k0==='bus')$('#cx-q').focus();if(k0==='tre')trechos();if(k0==='cor')carregarCorrespondencias()});
+    $('#cl-cor-carregar').onclick=()=>{CORX.cache={};carregarCorrespondencias()};
+    document.querySelectorAll('[data-cesc]').forEach(b=>b.onclick=()=>{if(b.disabled)return;CORX.esc=b.dataset.cesc;carregarCorrespondencias()});
     let t1=0,t2=0;
     ['cx-it','cx-sec','cx-ws','cx-sd'].forEach(id=>$('#'+id).onchange=compara);
     $('#cx-txt').oninput=()=>{clearTimeout(t1);t1=setTimeout(compara,350)};
@@ -936,7 +968,7 @@ function perfil(it,i){
     :`<div class="none nm" id="nm-${it.uid}"><span>Minuta não disponível no painel${e.situacao==='A minutar'?' (processo a minutar)':/Voto próprio|Sem modelo/.test(e.situacao||'')?' (voto próprio, sem acórdão-modelo)':''}.</span>${!MODO_REL&&!LOTE.virtual?`<button type="button" class="b pri so-equipe" data-criar-min="${it.uid}" title="Cria um rascunho: relatório montado do prontuário; voto e ementa a minutar pelo modelo-matriz"${LISTA.gestor?'':' disabled'}>Criar minuta</button>`:LOTE.virtual&&!MODO_REL?'<span class="k">Para criar a minuta, inclua o processo num lote.</span>':''}</div>`;
   return `<section class="cmt-q pf" id="p-${it.uid}" data-u="${it.uid}" style="border-top-color:${c}">
    <h2><button type="button" class="b mn" data-min-pf aria-expanded="true" title="Minimizar">−</button><span class="pf-id">${temItem(it)?`<i class="nn">ITEM ${pad(it.item)}</i>`:''}<span class="cnj">${it.processo}</span>${it.tipo_caso?`<span class="tg tc" title="${esc(it.tipo_caso)}">${esc(it.tipo_caso)}</span>`:''}${it.resultado?`<span class="tg">${esc(it.resultado)}</span>`:''}${e.situacao?`<span class="tg so-equipe">${esc(e.situacao)}</span>`:''}${dsg(it)}</span>
-   <span class="nav">${it.minuta&&!MODO_REL?`<button type="button" class="b so-equipe" data-cmpit="${it.uid}" title="Abre o painel lateral comparando esta minuta">Comparar</button>`:''}<a class="b so-equipe" href="${cons}" target="_blank" rel="noopener" title="Abre o processo na Consulta do Modus Operandi">Consulta ↗</a><span class="pn">${pv?`<button type="button" class="b" data-vai="${pv.uid}" title="Processo anterior">← ${rotCurto(pv)}</button>`:'<button type="button" class="b" disabled aria-hidden="true" tabindex="-1">←</button>'}${nx?`<button type="button" class="b" data-vai="${nx.uid}" title="Próximo processo">${rotCurto(nx)} →</button>`:'<button type="button" class="b" disabled aria-hidden="true" tabindex="-1">→</button>'}</span></span></h2>
+   <span class="nav">${it.minuta&&!MODO_REL?`<button type="button" class="b so-equipe" data-cmpit="${it.uid}" title="Abre o painel lateral comparando esta minuta">Comparar</button>`:''}${it.sessao&&it.item?`<a class="b so-equipe" href="${cons}" target="_blank" rel="noopener" title="Abre o processo na Consulta do Compendium">Consulta ↗</a>`:''}<span class="pn">${pv?`<button type="button" class="b" data-vai="${pv.uid}" title="Processo anterior">← ${rotCurto(pv)}</button>`:'<button type="button" class="b" disabled aria-hidden="true" tabindex="-1">←</button>'}${nx?`<button type="button" class="b" data-vai="${nx.uid}" title="Próximo processo">${rotCurto(nx)} →</button>`:'<button type="button" class="b" disabled aria-hidden="true" tabindex="-1">→</button>'}</span></span></h2>
    <div class="grid">${b}</div>${mn}</section>`;
 }
 function cls(p,sec,i){
@@ -975,41 +1007,79 @@ async function copia(v){
   const ok=await clip(plain,`<div style="font-family:'Times New Roman';font-size:12pt">${rich}</div>`);
   toast(ok?(k==='*'?'Minuta copiada':ks[0][1].charAt(0)+ks[0][1].slice(1).toLowerCase()+' copiado'):'Não foi possível copiar: selecione o texto e use Ctrl+C');
 }
-function vai(uid){if(CX.aberto){const it=ITENS.find(i=>i.uid===uid);if(it&&it.minuta){$('#cx-it').value=uid;compara()}}const e=document.getElementById('p-'+uid);if(!e)return;e.classList.remove('hidden');if(e.classList.contains('mini'))minimiza(e,false);e.scrollIntoView({behavior:'smooth',block:'start'});document.querySelectorAll('.pf.hl').forEach(x=>x.classList.remove('hl'));e.classList.add('hl');try{history.replaceState(null,'',location.pathname+location.search+'#p='+encodeURIComponent(uid))}catch(_){}}
+let CUR_UID='';
+function vai(uid){CUR_UID=uid;setTimeout(corAtualiza,0);if(CX.aberto){const it=ITENS.find(i=>i.uid===uid);if(it&&it.minuta){$('#cx-it').value=uid;compara()}}const e=document.getElementById('p-'+uid);if(!e)return;e.classList.remove('hidden');if(e.classList.contains('mini'))minimiza(e,false);e.scrollIntoView({behavior:'smooth',block:'start'});document.querySelectorAll('.pf.hl').forEach(x=>x.classList.remove('hl'));e.classList.add('hl');try{history.replaceState(null,'',location.pathname+location.search+'#p='+encodeURIComponent(uid))}catch(_){}}
 /* Seleção explícita de processos na matriz da pauta, sem criar coleções por sessão. */
 /* Análise apenas dos campos disponíveis e dos modelos publicados no Compendium. */
+/* Correspondências (aba Compendium do painel lateral). O alcance segue a tela:
+   Processo (o último aberto), Seleção da matriz (assuntos isolados nos cartões ou na lista lateral) ou o lote/sessão inteiro.
+   Em "automático", vale o processo aberto; sem ele, a seleção; sem ela, o lote. */
+const CORX={esc:'auto',cache:{},req:0};
+function corAlcance(){
+  const it=CUR_UID&&ITENS.find(i=>i.uid===CUR_UID);
+  const pode={proc:!!it,sel:SELG.size>0,lote:true};
+  let m=CORX.esc==='auto'?(it?'proc':SELG.size?'sel':'lote'):CORX.esc;if(!pode[m])m=it?'proc':SELG.size?'sel':'lote';
+  const gs=[...new Set([...SELG].flatMap(k=>k.split(',')))].filter(Boolean);
+  const q=m==='proc'?'&processo='+encodeURIComponent(String(it.processo).slice(0,10)):m==='sel'&&gs.length?'&grupos='+encodeURIComponent(gs.join(',')):'';
+  const rot=m==='proc'?(temItem(it)?'Item '+pad(it.item)+' · ':'')+it.processo+' · '+(it.exequente||'')
+    :m==='sel'?gs.length+' '+(LOTE.virtual?'assunto':'grupo')+(gs.length>1?'s':'')+' isolado'+(gs.length>1?'s':'')+' na matriz'
+    :(LOTE.virtual?'Sessão de '+br(LOTE.sessoes[0]):(LOTE.titulo||LOTE.id));
+  return {m,q,rot,it,pode};
+}
+let corT=0;
+function corAtualiza(){if(!CX.aberto)return;const c=$('#cx-cor');if(!c||c.classList.contains('hidden'))return;clearTimeout(corT);corT=setTimeout(carregarCorrespondencias,250)}
 async function carregarCorrespondencias(){
  const alvo=$('#cl-cor-body'),bt=$('#cl-cor-carregar');if(!alvo||!bt)return;
- bt.disabled=true;alvo.textContent='Consultando as matrizes do Compendium…';
+ const A=corAlcance();
+ document.querySelectorAll('[data-cesc]').forEach(b=>{b.disabled=!A.pode[b.dataset.cesc];b.setAttribute('aria-pressed',String(b.dataset.cesc===A.m))});
+ const cons=A.m==='proc'&&A.it.sessao&&A.it.item?`/amicus/compendium/#consulta=${A.it.sessao}/${A.it.item}`:'';
+ $('#cor-alvo').innerHTML=`<b>${esc(A.rot)}</b>${cons?` <a href="${cons}" target="_blank" rel="noopener">Abrir na Consulta do Compendium ↗</a>`:''}`;
+ const chave=A.q||'*',meu=++CORX.req;
+ if(CORX.cache[chave]){desenhaCor(CORX.cache[chave],A);return}
+ bt.disabled=true;alvo.innerHTML='<p class="none">Consultando as matrizes do Compendium…</p>';
  try{
-  const r=await api('?id='+encodeURIComponent(LOTE.id)+'&correspondencias=1');
-  const e=x=>esc(x==null?'':x);
+  const r=await api('?id='+encodeURIComponent(LOTE.id)+'&correspondencias=1'+A.q);
+  CORX.cache[chave]=r;if(meu===CORX.req)desenhaCor(r,A);
+ }catch(err){if(meu===CORX.req)alvo.textContent='Não foi possível consultar o Compendium: '+err.message}
+ finally{bt.disabled=false}
+}
+function desenhaCor(r,A){
+  const alvo=$('#cl-cor-body'),e=x=>esc(x==null?'':x);
   const fields={assunto:'Assunto',recurso:'Recurso',resultado:'Resultado',modelo:'Modelo de referência'};
-  const p=x=>'<div class="cor-p"><b>'+e(fields[x.campo]||x.campo)+'</b><span>'+
-    (x.comum?'Comum em todos':'Difere ou está incompleto')+' · '+x.preenchidos+'/'+x.total+'</span>'+
-    '<small>'+(x.valores.length?x.valores.map(e).join(' · '):'Não registrado')+'</small></div>';
-  const one=g=>{
+  /* estado de cada campo em linguagem direta; campos sem nenhum registro vão para a nota do fim */
+  const estado=x=>{const falta=x.total-x.preenchidos,d=x.distintos||x.valores.length;
+    if(x.comum)return x.total===1?'Registrado':'Igual em todos';
+    if(!falta)return 'Varia · '+d+' valores';
+    return (d===1?'Igual nos preenchidos':'Varia · '+d+' valores')+' · falta em '+falta};
+  const vazios=new Set();
+  const p=x=>{if(!x.preenchidos){vazios.add(fields[x.campo]||x.campo);return ''}
+    return '<div class="cor-p'+(x.comum?' ok':'')+'"><b>'+e(fields[x.campo]||x.campo)+'</b><span>'+estado(x)+'</span>'+
+    '<small>'+x.valores.slice(0,4).map(v=>e(String(v).length>90?String(v).slice(0,88)+'…':v)).join(' · ')+(x.valores.length>4?' · <i>+'+(x.valores.length-4)+'</i>':'')+'</small></div>'};
+  const MM='<a class="cor-lk" href="/amicus/compendium/#v=edit&s=pecas" target="_blank" rel="noopener">Abrir a Minuta-Matriz no Compendium ↗</a>';
+  const one=(g,aberto)=>{
    const forma=g.estruturais.map(x=>'<div class="cor-p"><b>'+e(x.classe)+' · '+e(x.resultado)+'</b>'+
-    '<span>'+x.processos+' processo(s) · '+x.referencias.length+' matriz(es) formais</span>'+
-    '<small>'+(x.referencias.length?x.referencias.map(m=>e(m.nome)+(m.pronunciamento?' ['+e(m.pronunciamento)+']':'')).join(' · '):'Sem correspondência estrutural pelos dados disponíveis')+'</small></div>').join('');
+    '<span>'+x.processos+' processo'+(x.processos===1?'':'s')+' · '+(x.referencias.length?x.referencias.length+' matriz'+(x.referencias.length===1?'':'es'):'sem matriz')+'</span>'+
+    '<small>'+(x.referencias.length?x.referencias.map(m=>e(m.pronunciamento||m.nome)).join(' · '):'Sem correspondência estrutural pelos dados disponíveis')+'</small></div>').join('');
    const materia=g.tematica?'<details class="cor-var"><summary>Matriz temática de 28,86%: '+e(g.tematica.nome)+'</summary>'+
     '<p>Módulos previstos: '+g.tematica.modulos.map(x=>e(x.id)+(x.opcional?' (opcional)':'')).join(' · ')+'</p>'+
     '<p>Modelos de ementa: '+g.tematica.modelosEmenta.map(e).join(' · ')+'</p>'+
     '<div class="cor-grid">'+g.tematica.variaveis.map(x=>'<div class="cor-p"><b>'+e(x.rotulo)+'</b>'+
     '<span>'+e(x.situacao)+' · '+x.identificados+'/'+x.total+'</span>'+
     '<small>'+e(x.campo||'Sem campo direto')+' · '+e(x.ressalva)+'</small></div>').join('')+'</div></details>':'';
-   return '<details class="cor-gr"><summary>'+e(g.nome)+' <small>· '+g.processos+' processo'+(g.processos===1?'':'s')+'</small></summary>'+
-     '<div class="cor-grid">'+g.padroes.map(p).join('')+'</div>'+
+   const pads=g.padroes.map(p).join('');
+   return '<details class="cor-gr"'+(aberto?' open':'')+'><summary>'+e(g.nome)+' <small>· '+g.processos+' processo'+(g.processos===1?'':'s')+'</small></summary>'+
+     (pads?'<div class="cor-grid">'+pads+'</div>':'')+
      (g.variacoes.length?'<p class="cor-note">Variações: '+g.variacoes.map(x=>e(x.id)+' ('+x.n+')').join(' · ')+'</p>':'')+
-     '<h4>Matrizes estruturais: classe e resultado</h4>'+(forma||'<p>Classe ou resultado insuficientes para apontar uma matriz formal.</p>')+
-     materia+'<p class="cor-note">'+e(g.criterio)+'</p></details>';
+     '<h4>Matrizes estruturais <span>classe e resultado</span></h4>'+(forma?'<div class="cor-grid">'+forma+'</div>'+MM:'<p class="cor-note">Classe ou resultado insuficientes para apontar uma matriz formal.</p>')+
+     materia+'</details>';
   };
-  alvo.innerHTML='<div class="cor-lead"><b>'+r.total+' processos em '+r.grupos.length+' grupos</b>'+
-    '<span>'+(r.materiaCompendium?'Matriz de matéria: '+e(r.materiaCompendium):'Matrizes formais por recurso e resultado')+'</span></div>'+
-    [...r.grupos].sort((x,y)=>y.processos-x.processos||String(x.nome).localeCompare(String(y.nome),'pt-BR')).map(one).join('')+'<p class="cor-note">'+(r.limites||[]).map(e).join(' ')+'</p>';
-  bt.textContent='Atualizar análise';
- }catch(err){alvo.textContent='Não foi possível consultar o Compendium: '+err.message}
- finally{bt.disabled=false}
+  const gs=[...r.grupos].sort((x,y)=>y.processos-x.processos||String(x.nome).localeCompare(String(y.nome),'pt-BR'));
+  const corpo=gs.map((g,k)=>one(g,gs.length<=3||k===0)).join('');
+  alvo.innerHTML='<div class="cor-lead"><b>'+r.total+' processo'+(r.total===1?'':'s')+(gs.length>1?' em '+gs.length+' grupos':'')+'</b>'+
+    (r.materiaCompendium?'<span>Matriz de matéria: '+e(r.materiaCompendium)+'</span>':'')+'</div>'+
+    (r.total?corpo:'<p class="none">Nenhum processo neste alcance.</p>')+
+    (vazios.size?'<p class="cor-note">Sem registro neste alcance: '+[...vazios].map(e).join(', ')+'.</p>':'')+
+    ((r.limites||[]).length?'<details class="cor-lim"><summary>Limites da análise</summary><p class="cor-note">'+r.limites.map(e).join(' ')+' A correspondência não comprova a adequação do modelo ao mérito do processo.</p></details>':'');
 }
 
 function atualizarSelecao(){
