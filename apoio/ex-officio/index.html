@@ -5181,7 +5181,7 @@ if(!al)return;
 if(!L.length){al.innerHTML='<p class="cmt-vazio">Nenhum voto aguardando assinatura.</p>';if(ft)ft.innerHTML='';return;}
 if(modo==='lista'){
 al.innerHTML=L.map(function(x){return '<div class="cmt-ar"><div class="gr"><b>'+esc(x.cnj)+'</b><p>'+esc([x.servidor,x.corretor].filter(Boolean).join(' · ')||'sem responsável')+(x.desde?' · liberada '+esc(br(x.desde)):'')+'</p></div>'+cmtTrilha(3)+'<button type="button" class="pri" data-cas="'+esc(x.cnj)+'">Assinar</button><button type="button" data-cdv="'+esc(x.cnj)+'">Devolver</button></div>';}).join('');
-if(ft)ft.innerHTML='<span>'+L.length+(L.length===1?' voto aguardando assinatura':' votos aguardando assinatura')+'</span>';return;}
+if(ft)ft.innerHTML='';return;}
 var x=L[pos],meta=[x.item?'item '+x.item:'',x.servidor,x.corretor?'corrigido por '+x.corretor:''].filter(Boolean).join(' · ');
 al.innerHTML='<div class="cmt-fc-tg">'+(x.resultado?'<span class="cmt-tag ok">'+esc(x.resultado)+'</span>':'')+(x.meta?'<span class="cmt-tag mt">Meta</span>':'')+(x.urgente?'<span class="cmt-tag al">Urgente</span>':'')+(meta?'<span class="cmt-fc-m">'+esc(meta)+'</span>':'')+'</div>'+
 '<p class="cmt-fc-n">'+esc(x.cnj)+'</p><p class="cmt-fc-s">'+esc([x.classe,x.assunto].filter(Boolean).join(' · ')||'—')+'</p>'+
@@ -9829,6 +9829,7 @@ html[data-theme=dark] #prq .ac-st.ok{background:rgba(95,191,138,.18);color:#8fd6
 #v-cmt .cmt-ass-b .cmt-ar>.cmt-trl{flex:1 0 100%!important}
 #v-cmt .cmt-ass-b .cmt-ar>button.pri{flex:1 1 auto!important}
 #v-cmt .cmt-ass-b .cmt-ar>button{flex:0 0 auto}
+#v-cmt .cmt-ass-ft:empty{display:none!important}
 /* computador: só a lista; o painel lateral usa a mesma altura, o mesmo fundo e o mesmo título do cabeçalho da página */
 @media (min-width:781px){
  #v-cmt #cmt-vis{display:none!important}
