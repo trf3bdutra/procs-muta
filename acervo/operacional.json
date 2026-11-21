@@ -6,7 +6,7 @@
   "arquivo": "acervo/fonte.json",
   "chave": "processo"
  },
- "atualizado_em": "2026-11-21T10:53:24.440Z",
+ "atualizado_em": "2026-11-21T10:53:30.125Z",
  "registros": [
   {
    "processo": "0000008-23.2025.4.03.6000",
@@ -259263,7 +259263,7 @@
     "Responsável": "",
     "Próxima ação": "",
     "Observações": "",
-    "atualizado_em": "2026-11-19T19:59:38.525Z"
+    "atualizado_em": "2026-11-21T10:53:30.125Z"
    },
    "triagem": {
     "Urgência": "",
@@ -259277,43 +259277,44 @@
     "Tempest - Prazo legal": "",
     "Tempest - Dobro": "",
     "Tempest - Suspensões": "",
-    "Tipo de Julgamento": "",
+    "Tipo de Julgamento": "Apelação",
     "Hipóteses Monocrática": "",
-    "Tempestividade": "",
+    "Tempestividade": "Não verificado",
     "Preparo": "Isento (ente público/MP)",
     "AJG": "Sim",
     "DPU (controle)": "Sim",
-    "Representação": "",
+    "Representação": "Não verificado",
     "ID da Procuração": "",
     "Impedimento / Suspeição": "",
     "Observação do Impedimento": "",
     "Regularidade": "Representação ainda não verificada.",
     "Regularidade Manual": "",
     "Observação da Representação": "",
-    "MPF": "",
-    "MPF - Custos Legis": "",
-    "ID do Parecer MPF": "",
-    "Parecer - Sentido": "",
+    "MPF": "Com parecer",
+    "MPF - Custos Legis": "Incapaz (178, II)",
+    "ID do Parecer MPF": "387641154",
+    "Parecer - Sentido": "Manutenção da sentença, com contracautelas de monitoramento",
     "MPF - Info adicional": "",
     "Observação MPF": "",
-    "Tema": "Registrado na ANVISA",
+    "Tema": "Apelação da União e remessa necessária em ação de obrigação de fazer · fornecimento de VOXZOGO (vosoritida) para acondroplasia · autora menor · tutela provisória; transferência de valores à genitora para compra · perícia · pedido julgado procedente",
     "COMPLEXIDADE": "",
     "Tipo de Voto": "",
-    "Prelim.": "",
+    "Prelim.": "Sem preliminares",
     "Descrição da Preliminar": "",
     "META": "",
     "Seleção Prévia": "",
-    "Mídias": "",
+    "Mídias": "Não se aplica",
     "Etiquetas": "2ª Seção, REMESSA NECESSÁRIA, Fornecimento de medicamentos, Menor",
-    "Alegações": "",
+    "Alegações": "1) Fornecimento de medicamento registrado e não incorporado (Temas 6 e 1.234/STF); 2) efeito da deliberação de não incorporação da Conitec; 3) contracautelas.",
     "O que falta sanar": "",
     "Intercorrências": "",
     "Síntese Processual": "",
-    "Especificidades": "",
+    "Especificidades": "Temas 6 e 1.234/STF: medicamento registrado na Anvisa e não incorporado; Conitec deliberou pela não incorporação em 18/06/2026 (Relatório 1.116) e a Portaria SCTIE/MS 38, de 01/07/2026, tornou pública a decisão [VALIDAR teor] · Item 4 do Tema 1.234/STF: controle da legalidade do ato de não incorporação [VALIDAR] · Grupo vosoritida: 5006632-08, 5008008-29 e 5008849-24 (voto único com variações) · MPF: interesse de incapaz · Parecer do MPF trata o fármaco como \"desprovido de registro na Anvisa\" [conferir] · Petições da União de 19/10/2026 e 19/11/2026 (IDs 405384831 e 413752867) com informação do Ministério da Saúde [VALIDAR conteúdo]",
     "_preparoAJG": true,
     "_preparoBeforeAJG": "Não Verificado",
     "_ajgFromDpu": true,
-    "_dpuAuto": true
+    "_dpuAuto": true,
+    "Síntese Fática": "L. T. C., menor representada pela genitora, portadora de acondroplasia, pediu a vosoritida. A tutela foi deferida em 21/11/2022; houve transferência de valores à genitora para aquisição (ID 385112063) e perícia judicial."
    },
    "producao": {
     "Destino": "",
@@ -259362,7 +259363,8 @@
     "JULGAMENTO": "",
     "Motivo da remarcação": "",
     "sessoes": []
-   }
+   },
+   "controles": {}
   },
   {
    "processo": "5008870-42.2023.4.03.6201",
