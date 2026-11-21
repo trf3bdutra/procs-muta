@@ -81,5 +81,5 @@
       .then(function () { var el = document.getElementById('prec-x'); if (el && el.dataset.k === c) el.innerHTML = CACHE[c]; });
     return '<section class="card pc-sec prec" id="g-prec"><div class="pc-sh"><h3>Precedentes relacionados</h3><small class="muted">Ementário do Compendium</small></div><div id="prec-x" data-k="' + esc(c) + '">' + corpo + '</div></section>';
   }
-  window.MutaPrecedentes = { html: html, relacionados: relacionados, temas: temas };
+  window.MutaPrecedentes = { buscar: function (k) { return corpus().then(function (C) { return relacionados(k, C); }); }, html: html, relacionados: relacionados, temas: temas };
 })();

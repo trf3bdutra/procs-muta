@@ -421,7 +421,7 @@ function controlesProcesso() {
 function casoPrec() { return { cnj: G.cnj, assunto: fonteVal({ fonte: ['Assunto'] }),
     subassuntos: S(gravado('triagem', 'Registro - Assunto detalhado')) || S(V('triagem', 'Assunto detalhado')), questoes: S(V('triagem', 'Alegações')),
     sintese: [S(V('triagem', 'Síntese Processual')), S(V('triagem', 'Síntese Fática'))].join(' '), especificidades: [S(V('triagem', 'Especificidades')), S(V('triagem', 'Tema'))].join(' ') }; }
-function precEmentario(k) { var ap = $('acv-prec'); if (ap && window.MutaPrecedentes) ap.innerHTML = window.MutaPrecedentes.html(k); }
+function precEmentario(k) { if (window.MutaEmentario && window.MutaEmentario.caso) window.MutaEmentario.caso(k); }
 /* peças do processo (sentença, origem, recursos e contrarrazões, outras peças): um cartão só, uma seção por grupo */
 function pecasCartao() {
   var A = abaModelo('Processo'); if (!A) return '';

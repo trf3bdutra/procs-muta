@@ -100,41 +100,40 @@
 
     <!-- EMENTÁRIO (Compêndio) -->
     <section id="panel-acervo" role="tabpanel" aria-labelledby="tab-acervo" hidden>
-      
-      <div class="wrap">
-        <div id="acv-prec" class="acv-prec"></div>
-        <div class="bar acv-top"><a class="btn line sm" id="acv-compendio" title="Mesma base do Ementário do Compêndio: curados do gabinete e série histórica do Relator. A busca roda no navegador; nada é transmitido. Confira a fonte antes de citar." target="_blank" rel="noopener noreferrer">Abrir o Compêndio</a><button class="btn line sm" id="btn-refresh" type="button">Recarregar</button></div>
-                <div id="acv-error" class="err-box" role="alert" hidden></div>
-        <p id="acv-status" class="status" role="status" aria-live="polite"></p>
+      <div class="acv-faixa">
         <form id="acv-form" class="acv-form" role="search">
-          <label class="sr" for="acv-q">Buscar no Ementário</label>
-          <input type="search" id="acv-q" placeholder='Termos, "frase exata", OU, -excluir, radical*' autocomplete="off">
-          <div class="bar acv-opts">
+          <div class="af-l">
+            <label class="sr" for="acv-q">Buscar no Ementário</label>
+            <input type="search" id="acv-q" placeholder='Buscar: termos, "frase exata", OU, -excluir, radical*' autocomplete="off" title='Busca com a sintaxe do Compêndio: termos soltos = todos; OU entre termos; "frase exata"; -termo exclui; radical* (aposentad*); número do processo'>
+            <button class="tu-b" type="submit" title="Buscar" aria-label="Buscar"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
+            <button class="tu-b" type="button" id="acv-clear" title="Limpar a busca e os filtros" aria-label="Limpar">×</button>
+          </div>
+          <div class="af-l">
             <label class="sr" for="acv-modo">Onde buscar</label>
-            <select id="acv-modo" title="Onde buscar">
-              <option value="idx">Índice: número, classe, ementa e resultado</option>
-              <option value="ft">Texto integral: ementa e inteiro teor</option>
+            <select id="acv-modo" title="Onde buscar: no índice (número, classe, ementa e resultado) ou no texto integral (ementa e inteiro teor)">
+              <option value="idx">Índice</option>
+              <option value="ft">Texto integral</option>
             </select>
             <label class="sr" for="acv-tipo">Espécie</label>
-            <select id="acv-tipo" title="Espécie">
+            <select id="acv-tipo" title="Espécie: todos, só os curados do gabinete, só acórdãos ou só monocráticas">
               <option value="">Todos</option>
-              <option value="cur">Curados do gabinete</option>
+              <option value="cur">Curados</option>
               <option value="A">Acórdãos</option>
               <option value="M">Monocráticas</option>
             </select>
             <label class="sr" for="acv-desde">Desde o ano</label>
-            <input type="number" id="acv-desde" min="1999" max="2100" placeholder="Desde (ano)" title="Desde o ano">
-            <button class="btn solid" type="submit">Buscar</button>
-            <button class="btn" type="button" id="acv-clear">Limpar</button>
+            <input type="number" id="acv-desde" min="1999" max="2100" placeholder="Desde" title="Só julgados a partir deste ano">
+            <a class="tu-b" id="acv-compendio" target="_blank" rel="noopener noreferrer" title="Abrir o Ementário no Compêndio (mesma base: curados do gabinete e série histórica do Relator; a busca roda no navegador e nada é transmitido)" aria-label="Abrir o Compêndio"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4h6v6"/><path d="M20 4 10 14"/><path d="M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5"/></svg></a>
+            <button class="tu-b" id="btn-refresh" type="button" title="Recarregar a base do Ementário" aria-label="Recarregar"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 4v7h-7"/></svg></button>
           </div>
         </form>
-        <div class="acv">
-          <div>
-            <div class="list" id="acv-list" aria-label="Resultados"></div>
-            <div style="margin-top:12px;text-align:center"><button class="btn line" id="acv-more" type="button" hidden>Carregar mais</button></div>
-          </div>
-          <div class="card detail" id="acv-detail" aria-live="polite"></div>
-        </div>
+        <p id="acv-status" class="status" role="status" aria-live="polite"></p>
+      </div>
+      <div class="wrap">
+        <div id="acv-error" class="err-box" role="alert" hidden></div>
+        <div id="acv-modo-rel" class="acv-rel"></div>
+        <div class="list" id="acv-list" aria-label="Resultados"></div>
+        <div style="margin-top:12px;text-align:center"><button class="btn line sm" id="acv-more" type="button" hidden>Carregar mais</button></div>
       </div>
     </section>
 

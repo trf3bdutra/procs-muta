@@ -158,6 +158,6 @@ test('extensão 0.16.4: precedentes relacionados com o critério da gaveta do Ex
 test('extensão 0.16.5: dicas em todos os botões e campos; precedentes no Ementário', () => {
   const html = read('extensao/painel.html'), gab = read('extensao/gabinete.js'), d = read('extensao/dicas.js');
   assert.ok(html.indexOf('src="dicas.js"') < html.indexOf('</head>'));
-  assert.ok(html.includes('id="acv-prec"'));
+  assert.ok(html.includes('id="acv-modo-rel"') && html.includes('class="acv-faixa"'));
   assert.match(gab, /function dicaCampo\(c\)/); assert.match(d, /MutationObserver/);
 });

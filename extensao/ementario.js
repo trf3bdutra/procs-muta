@@ -20,7 +20,19 @@ function titulo1(s) { return String(s || '').toLowerCase().replace(/(^|\s|\/)(\S
 function n0(n) { return Number(n || 0).toLocaleString('pt-BR'); }
 
 var B = { ok: false, carregando: null, erro: '', idx: [], man: null, nCur: 0, nSer: 0, textosCur: null };
-var V = { res: [], shown: 0, sel: null, ft: null, qp: null, tok: 0 };
+var V = { res: [], shown: 0, sel: null, ft: null, qp: null, tok: 0, ab: {}, rel: false };
+/* filtro inicial: os precedentes relacionados ao processo aberto (precedentes.js, o critério da gaveta do Ex Officio) */
+var R = { caso: null, chave: '', lista: null, mot: {}, todos: false, busy: false };
+function relacionados() {
+  if (!R.caso || !R.caso.cnj || !window.MutaPrecedentes || !MutaPrecedentes.buscar) return null;
+  if (R.lista) return R.lista;
+  if (!R.busy) { R.busy = true; var ch = R.chave;
+    MutaPrecedentes.buscar(R.caso).then(function (L) { if (ch !== R.chave) return; var por = {};
+      B.idx.forEach(function (x) { var k = dig(x.n); por[k + '|' + x.d] = x; if (!por[k]) por[k] = x; });
+      R.mot = {}; R.lista = L.map(function (o) { var x = por[dig(o.r.n) + '|' + (o.r.d || '')] || por[dig(o.r.n)]; if (x) R.mot[x.id] = o.mot; return x; }).filter(Boolean);
+    }, function () { R.lista = []; }).then(function () { R.busy = false; if (ch === R.chave) buscar(); }); }
+  return 'wait';
+}
 var PAGE = 25;
 
 /* ---------- Carga ---------- */
@@ -135,7 +147,10 @@ function buscar() {
   V.tok++; V.ft = null; V.shown = 0;
   var q = $('acv-q').value.trim(), F = filtros(), d = dig(q);
   var base = B.idx.filter(function (x) { return passa(x, F); });
-  if (!q) { V.qp = null; V.res = base; render(); return; }
+  V.rel = false;
+  if (!q) { V.qp = null;
+    if (!R.todos && R.caso && R.caso.cnj) { var rl = relacionados(); if (rl) { V.rel = rl === 'wait' ? 'wait' : true; V.res = rl === 'wait' ? [] : rl.filter(function (x) { return passa(x, F); }); render(); return; } }
+    V.res = base; render(); return; }
   /* número de processo: casa pelos dígitos, com ou sem pontuação */
   if (/^[\d.\-\s]+$/.test(q) && d.length >= 7) { V.qp = null; V.res = base.filter(function (x) { return dig(x.n).indexOf(d) > -1; }); render(); return; }
   var P = parseQ(q);
@@ -223,12 +238,21 @@ function erro(msg) {
   var r = el('button', 'btn line', 'Tentar novamente'); r.type = 'button'; r.addEventListener('click', function () { carregar(true); }); b.append(r);
 }
 function rotuloTipo(x) { return x.cur ? 'Curado' : x.t === 'M' ? 'Monocrática' : 'Acórdão'; }
+function cnjF(d) { d = dig(d); return d.length === 20 ? d.replace(/^(\d{7})(\d{2})(\d{4})(\d)(\d{2})(\d{4})$/, '$1-$2.$3.$4.$5.$6') : d; }
+function faixaRel() {
+  var b = $('acv-modo-rel'); if (!b) return; var q = $('acv-q').value.trim();
+  if (q || !R.caso || !R.caso.cnj) { b.innerHTML = ''; return; }
+  if (V.rel) b.innerHTML = '<div class="acv-rel-i"><b>Relacionados ao processo</b><span class="mono">' + esc(cnjF(R.caso.cnj)) + '</span>' + (V.rel === 'wait' ? '<small>procurando…</small>' : '<small>' + V.res.length + '</small>') +
+    '<button type="button" class="btn line sm" data-rel="todos" title="Mostra todo o Ementário, do mais recente para o mais antigo">Todo o Ementário</button></div>';
+  else b.innerHTML = '<div class="acv-rel-i"><b>Todo o Ementário</b><button type="button" class="btn line sm" data-rel="proc" title="Volta aos precedentes relacionados ao processo aberto">Relacionados ao processo</button></div>';
+}
 function render() {
-  var list = $('acv-list'); list.replaceChildren(); V.shown = 0;
+  var list = $('acv-list'); list.replaceChildren(); V.shown = 0; faixaRel();
   if (!B.ok) {
     if (B.carregando) for (var i = 0; i < 4; i++) { var sk = el('div', 'row'); sk.style.opacity = '.5'; sk.style.height = '86px'; list.append(sk); }
-    $('acv-more').hidden = true; detalhe(); return;
+    $('acv-more').hidden = true; return;
   }
+  if (V.rel === 'wait') { var w = el('p', 'muted', 'Procurando os precedentes relacionados ao processo…'); list.append(w); $('acv-more').hidden = true; return; }
   if (V.ft) {
     var ft = V.ft, info = el('p', 'status' + (ft.busy ? '' : ' ok'));
     info.textContent = (ft.busy ? 'Buscando no texto integral… ' : 'Texto integral: ') + n0(V.res.length) + ' julgado(s) encontrado(s)' + (ft.total ? ' · ' + ft.lidos + ' de ' + ft.total + ' arquivo(s) lido(s)' : '') + (ft.falhas ? ' · ' + ft.falhas + ' arquivo(s) não abriram' : '') + '.';
@@ -237,32 +261,37 @@ function render() {
     list.append(el('p', 'status', n0(V.res.length) + ' julgado(s) encontrado(s).'));
   }
   if (!V.res.length) {
+    if (V.rel === true) { var er = el('div', 'empty'); er.append(el('h3', null, 'Nenhum relacionado'), document.createTextNode('Nenhum julgado com temas, questões ou assunto em comum. Preencha o assunto detalhado e as questões no prontuário, ou busque acima.')); list.append(er); $('acv-more').hidden = true; return; }
     if (!(V.ft && V.ft.busy)) { var em = el('div', 'empty'); em.append(el('h3', null, 'Nenhum julgado encontrado'), document.createTextNode('Tente termos mais gerais, o radical (aposentad*), o número do processo ou a busca no texto integral.')); list.append(em); }
     $('acv-more').hidden = true;
-    if (V.sel && V.res.indexOf(V.sel) < 0 && !(V.ft && V.ft.busy)) V.sel = null;
-    detalhe(); return;
+    return;
   }
-  if (!V.sel || V.res.indexOf(V.sel) < 0) V.sel = null;
   mais();
-  detalhe();
 }
+function compendio(x) { return SITE + '/amicus/compendium/#v=ement&proc=' + encodeURIComponent(x.n || x.id) + '&lab=' + encodeURIComponent(x.n || x.id); }
 function mais() {
   var list = $('acv-list');
   V.res.slice(V.shown, V.shown + PAGE).forEach(function (x) {
-    var b = el('button', 'row' + (x.cur ? ' cur' : '')); b.type = 'button'; b.dataset.id = x.id; b.setAttribute('aria-pressed', x === V.sel);
-    var meta = el('div', 'meta'); meta.append(el('span', 'mono', x.n || x.id), el('span', null, fmtData(x.d)), el('span', 'chip' + (x.cur ? ' chip-cur' : ''), rotuloTipo(x)));
-    if (window.MutaProntuarioBridge && MutaProntuarioBridge.hasLink(x.id)) meta.append(el('span', 'chip chip-ok', 'Vinculado'));
-    b.append(meta, el('div', 'cls', x.cl || x.c || 'Classe não informada'));
-    var pv = el('div', 'prev'), h = V.ft && V.ft.hits[x.id];
-    if (h) pv.innerHTML = h.sn + (h.n > 1 ? ' <small class="muted">· ' + n0(h.n) + ' ocorrências</small>' : '');
-    else if (V.qp) { var tx = x.e || x.r || ''; var tr = trecho(tx, nz(tx), V.qp, 110); if (tr) pv.innerHTML = tr; else pv.textContent = tx || 'Sem texto no índice.'; }
-    else pv.textContent = x.e || x.r || 'Sem texto no índice.';
-    b.append(pv);
-    b.addEventListener('click', function () {
-      V.sel = x; list.querySelectorAll('.row').forEach(function (r) { r.setAttribute('aria-pressed', r === b); });
-      detalhe(); var d = $('acv-detail'); if (d.getBoundingClientRect().top > window.innerHeight || window.innerWidth < 860) d.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    var ab = !!V.ab[x.id], c = el('article', 'ej' + (x.cur ? ' cur' : '') + (ab ? ' ab' : '')); c.dataset.id = x.id;
+    var res = x.r ? String(x.r).replace(/\.$/, '') : '', h = V.ft && V.ft.hits[x.id], pv;
+    if (h) pv = h.sn + (h.n > 1 ? ' <small class="muted">· ' + n0(h.n) + ' ocorrências</small>' : '');
+    else if (V.qp) { var tx = x.e || x.r || ''; pv = trecho(tx, nz(tx), V.qp, 110) || esc(tx.slice(0, 230)); }
+    else { var t2 = x.e || x.r || 'Sem texto no índice.'; pv = esc(t2.slice(0, 230)) + (t2.length > 230 ? '…' : ''); }
+    var mot = (R.mot[x.id] || []).concat(x.cur ? 'curado do gabinete' : 'série histórica');
+    if (window.MutaProntuarioBridge && MutaProntuarioBridge.hasLink(x.id)) mot.push('vinculado ao prontuário');
+    c.innerHTML = '<div class="prec-h"><a class="mono" href="' + compendio(x) + '" target="_blank" rel="noopener" title="Abrir no Ementário do Compêndio">' + esc(x.n || x.id) + '</a><span>' +
+      esc([x.c || rotuloTipo(x), x.d ? fmtData(x.d) : '', res].filter(Boolean).join(' · ')) + '</span></div>' +
+      (ab ? '' : '<p>' + pv + '</p>') + '<small class="ej-m">' + esc(mot.join(' · ')) + '</small>' +
+      '<div class="ej-a"><button type="button" class="btn line sm" data-ej="exp" title="' + (ab ? 'Recolher' : 'Ver a ementa inteira, o resultado, o inteiro teor e as ações') + '">' + (ab ? 'Recolher' : 'Expandir') + '</button>' +
+      '<a class="btn line sm" href="' + compendio(x) + '" target="_blank" rel="noopener" title="Abrir este julgado no Ementário do Compêndio">Compendium ↗</a>' +
+      '<button type="button" class="btn line sm" data-ej="cp" title="Copiar a ementa">Copiar ementa</button></div>';
+    if (ab) { var d = el('div', 'ej-d detail'); detalhe(x, d); c.append(d); }
+    c.addEventListener('click', function (e) {
+      var b = e.target.closest('[data-ej]'); if (!b) return;
+      if (b.dataset.ej === 'exp') { V.ab[x.id] = !V.ab[x.id]; var s0 = V.shown; render(); while (V.shown < s0 && V.shown < V.res.length) mais(); var n = list.querySelector('[data-id="' + x.id + '"]'); if (n) n.scrollIntoView({ block: 'nearest' }); }
+      else if (b.dataset.ej === 'cp') copiar(x.e || '', 'Ementa copiada.');
     });
-    list.append(b);
+    list.append(c);
   });
   V.shown = Math.min(V.shown + PAGE, V.res.length);
   var m = $('acv-more'); m.hidden = V.shown >= V.res.length; m.textContent = 'Carregar mais (' + n0(V.res.length - V.shown) + ' restantes)';
@@ -283,17 +312,15 @@ function inteiroTeor(x) {
     x._it = it; return it;
   }).catch(function () { return textosCurados().then(function (T) { x._it = T[x.id] || ''; return x._it; }); });
 }
-function detalhe() {
-  var d = $('acv-detail'); d.replaceChildren();
-  var x = V.sel;
-  if (!x) { var em = el('div', 'empty'); em.append(el('h3', null, 'Nenhum julgado selecionado'), document.createTextNode('Selecione um resultado para ler a ementa e o inteiro teor.')); d.append(em); return; }
+function detalhe(x, d) {
+  if (!x || !d) return; d.replaceChildren();
   var br = window.MutaProntuarioBridge, linked = br && br.hasLink(x.id);
   d.append(el('p', 'kicker', rotuloTipo(x) + ' · julgado em ' + (fmtData(x.d) || 'data não informada') + (x.p ? ' · publicado em ' + fmtData(x.p) : '')),
-    el('h2', 'display', x.cl || x.c || 'Classe não informada'), el('div', 'mono', x.n || x.id), el('div', 'muted', x.o || 'Órgão julgador não informado'));
+    el('div', 'muted', [x.cl || x.c, x.o].filter(Boolean).join(' · ') || 'Órgão julgador não informado'));
   var bar = el('div', 'bar'); bar.style.marginTop = '10px';
   var lk = el('button', 'btn ' + (linked ? 'line' : 'solid'), linked ? 'Vinculado ao prontuário' : 'Vincular ao prontuário'); lk.type = 'button'; lk.disabled = !!linked;
   lk.addEventListener('click', function () {
-    if (br && br.addLink({ id: x.id, n: x.n, cl: x.cl || x.c, d: fmtData(x.d) })) { status('Precedente vinculado ao prontuário de ' + (br.getFull().caso.numero || 'processo avulso') + '.'); detalhe(); }
+    if (br && br.addLink({ id: x.id, n: x.n, cl: x.cl || x.c, d: fmtData(x.d) })) { status('Precedente vinculado ao prontuário de ' + (br.getFull().caso.numero || 'processo avulso') + '.'); detalhe(x, d); }
   });
   var ce = el('button', 'btn line', 'Copiar ementa'); ce.type = 'button'; ce.addEventListener('click', function () { copiar(x.e || '', 'Ementa copiada.'); });
   var cn = el('button', 'btn line', 'Copiar número'); cn.type = 'button'; cn.addEventListener('click', function () { copiar(x.n || '', 'Número copiado.'); });
@@ -336,6 +363,7 @@ function destacar(t, P) {
 
 /* ---------- Eventos ---------- */
 $('acv-form').addEventListener('submit', function (e) { e.preventDefault(); V.sel = null; if (B.ok) buscar(); else carregar(); });
+$('acv-modo-rel').addEventListener('click', function (e) { var b = e.target.closest('[data-rel]'); if (!b) return; R.todos = b.dataset.rel === 'todos'; if (B.ok) buscar(); });
 $('acv-clear').addEventListener('click', function () { $('acv-q').value = ''; $('acv-desde').value = ''; $('acv-tipo').value = ''; V.sel = null; erro(''); if (B.ok) { status(resumo()); buscar(); } });
 $('acv-more').addEventListener('click', mais);
 $('acv-tipo').addEventListener('change', function () { if (B.ok && $('acv-modo').value !== 'ft') buscar(); });
@@ -361,6 +389,8 @@ function porNumero(numero) {
   });
 }
 window.MutaEmentario = {
+  /* o processo aberto no prontuário: os relacionados viram o filtro inicial */
+  caso: function (k) { var c = JSON.stringify(k || {}); if (c === R.chave) return; R.chave = c; R.caso = k; R.lista = null; R.busy = false; R.mot = {}; if (B.ok && !$('acv-q').value.trim()) buscar(); },
   julgado: julgado, porNumero: porNumero,
   abrir: function () { return carregar(); },
   atualizar: function () { if (B.ok) { var s = V.shown; render(); while (V.shown < s && V.shown < V.res.length) mais(); } },

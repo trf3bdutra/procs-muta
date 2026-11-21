@@ -1055,3 +1055,32 @@ html[data-tema=escuro] .pm-resp .pm-pp:nth-child(2) .pm-av{background:#14301f!im
 html[data-tema=escuro] .pm-resp .pm-pp:nth-child(3) .pm-av{background:#2c2440!important;color:#c7b6ee!important}
 .pm-resp .pm-pp.vz .pm-av{background:var(--soft)!important;color:var(--muted-fg)!important}
 .pmodos button{flex:1 1 0!important;justify-content:center}
+
+/* ===== 0.17.1 · Ementário ===== */
+/* faixa de busca colada às abas, no fundo do cabeçalho */
+.acv-faixa{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line);padding:6px 11px 5px}
+html[data-tema=escuro] .acv-faixa{background:#0a1821;border-color:#1e3747}
+.acv-faixa .acv-form{display:flex;flex-direction:column;gap:5px;margin:0!important;padding:0!important;border:0!important;background:none!important}
+.af-l{display:flex;gap:4px;align-items:center}
+.af-l input[type=search]{flex:1;min-width:0}
+.af-l select,.af-l input[type=number]{flex:1 1 0;min-width:0;width:auto!important;font-size:12px!important;padding:4px 6px!important}
+.af-l input[type=number]{max-width:74px}
+.af-l .tu-b{flex:none}
+.acv-faixa .status{margin:3px 0 0;font-size:10.5px;min-height:0}
+.acv-faixa .status:empty{display:none}
+/* filtro inicial: relacionados ao processo */
+.acv-rel:empty{display:none}
+.acv-rel-i{display:flex;align-items:center;gap:7px;margin:2px 0 8px;font-size:11.5px}
+.acv-rel-i b{font:700 10px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--gold)}
+.acv-rel-i .mono{font-size:11px;color:var(--muted-fg)}.acv-rel-i small{font:700 10px var(--mono);padding:0 6px;border-radius:8px;background:var(--soft)}
+.acv-rel-i .btn{margin-left:auto}
+/* resultados no visual dos precedentes relacionados */
+#acv-list{display:flex;flex-direction:column;gap:6px}
+.ej{padding:8px 10px;border:1px solid var(--line);border-left:3px solid hsl(198 20% 70%);border-radius:9px;background:var(--card2)}
+.ej.cur{border-left-color:var(--gold)}
+.ej p{margin:4px 0 2px;font-size:11.5px;line-height:1.4}
+.ej-m{display:block;font:10px var(--mono);color:var(--gold)}
+.ej-a{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+.ej-d{margin-top:8px;padding-top:6px;border-top:1px dashed var(--line);position:static!important;max-height:none!important;border-radius:0!important;border-left:0!important;border-right:0!important;border-bottom:0!important;background:none!important;padding-left:0!important;padding-right:0!important;box-shadow:none!important}
+.ej-d pre{font-size:13px!important}
+.ej-d .bar .btn{font-size:11px;padding:2px 8px}

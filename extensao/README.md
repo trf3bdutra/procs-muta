@@ -11,6 +11,10 @@ Base: o HTML independente *muta-independente-prontuario-completo* (Prontuário +
 - **Peças** (sentença, origem, recursos e contrarrazões, outras peças) num cartão só, com uma seção por grupo.
 - Partes no rodapé expansível da autuação.
 - Avisos de gravação ("Não gravou…", "Alterações a gravar…") na faixa acima das abas.
+- **0.17.1 · Ementário:** busca e filtros numa faixa colada às abas (ícones para buscar, limpar, abrir o Compêndio e
+  recarregar); sem busca, a lista abre nos **precedentes relacionados ao processo** (filtro inicial, com "Todo o Ementário");
+  resultados no visual dos relacionados, cada um com Expandir (ementa, resultado, inteiro teor, vincular, copiar, comparar),
+  Compendium ↗ e Copiar ementa.
 
 ## O que muda na 0.16
 
