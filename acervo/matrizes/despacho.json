@@ -1,0 +1,111 @@
+{
+ "schema": "gabcmt.matriz",
+ "versao": 1,
+ "id": "despacho",
+ "colecao": "despacho",
+ "grupos": [
+  {
+   "id": "DES1",
+   "rotulo": "Resposta ao recurso (contraminuta, contrarrazões, agravo interno)",
+   "cor": "#2a6a4a",
+   "resultado": "",
+   "modelo": ""
+  },
+  {
+   "id": "DES2",
+   "rotulo": "Preparo: comprovante do Tesouro ou recolhimento em dobro",
+   "cor": "#6a5a2a",
+   "resultado": "",
+   "modelo": ""
+  },
+  {
+   "id": "DES3",
+   "rotulo": "Representação processual",
+   "cor": "#2a4a6a",
+   "resultado": "",
+   "modelo": ""
+  },
+  {
+   "id": "DES4",
+   "rotulo": "Vista ao MPF",
+   "cor": "#6a2a5a",
+   "resultado": "Proposta pelos precedentes: Abrir vista ao MPF; depois, decidir a nova prorrogação e julgar o agravo; sem paradigma do gabinete no banco sobre prorrogação de condição suspensiva de contrato de repasse [VALIDAR: Sentença no mandado de segurança de origem (prejuízo); Situação atual da condição suspensiva]",
+   "modelo": ""
+  }
+ ],
+ "colunas": [],
+ "itens": {
+  "5000459-78.2026.4.03.0001": {
+   "grupo": "DES1",
+   "variacoes": [],
+   "observacao": "Triagem: adp-ai · L18 Lote · Série ERBE: vícios construtivos (Minha Casa Minha Vida)"
+  },
+  "5000463-18.2026.4.03.0001": {
+   "grupo": "DES1",
+   "variacoes": [],
+   "observacao": "Triagem: adp-ai · L18 Lote · Série ERBE: vícios construtivos (Minha Casa Minha Vida)"
+  },
+  "5000460-63.2026.4.03.0001": {
+   "grupo": "DES1",
+   "variacoes": [],
+   "observacao": "Triagem: adp-ai · L18 Lote · Série ERBE: vícios construtivos (Minha Casa Minha Vida)"
+  },
+  "5000505-67.2026.4.03.0001": {
+   "grupo": "DES1",
+   "variacoes": [],
+   "observacao": "Triagem: adp-ai · L18 Lote · Série ERBE: vícios construtivos (Minha Casa Minha Vida)"
+  },
+  "5000385-24.2026.4.03.0001": {
+   "grupo": "DES1",
+   "variacoes": [],
+   "observacao": "Triagem: adp-ai · L18 Lote · Série ERBE: vícios construtivos (Minha Casa Minha Vida)"
+  },
+  "5000494-38.2026.4.03.0001": {
+   "grupo": "DES1",
+   "variacoes": [],
+   "observacao": "Triagem: adp-ai · L18 Lote · Série ERBE: vícios construtivos (Minha Casa Minha Vida)"
+  },
+  "5131815-15.2025.4.03.9999": {
+   "grupo": "DES1",
+   "variacoes": [],
+   "observacao": "Triagem: adp-ap-3s · AP4 Apelação · Conferir antes (diligência, digitalizado, duplicidade, sobrestamento)"
+  },
+  "5009173-30.2026.4.03.0000": {
+   "grupo": "DES2",
+   "variacoes": [],
+   "observacao": "Triagem: adp-ai · A3 Ação · Preparo ou admissibilidade antes do mérito (despacho STN ou deserção)"
+  },
+  "5009594-25.2023.4.03.0000": {
+   "grupo": "DES2",
+   "variacoes": [],
+   "observacao": "Triagem: adp-ai · A3 Ação · Preparo ou admissibilidade antes do mérito (despacho STN ou deserção)"
+  },
+  "5001917-09.2025.4.03.6002": {
+   "grupo": "DES2",
+   "variacoes": [],
+   "observacao": "Triagem: adp-ap-3s · AP2 Apelação · Voto (paradigma a conferir)"
+  },
+  "5000164-02.2025.4.03.6007": {
+   "grupo": "DES2",
+   "variacoes": [],
+   "observacao": "Triagem: adp-ap-3s · AP2 Apelação · Voto (paradigma a conferir)"
+  },
+  "5414110-91.2026.4.03.9999": {
+   "grupo": "DES3",
+   "variacoes": [],
+   "observacao": "Triagem: adp-ap-3s · AP4 Apelação · Conferir antes (diligência, digitalizado, duplicidade, sobrestamento)"
+  },
+  "5001023-58.2024.4.03.6005": {
+   "grupo": "DES3",
+   "variacoes": [],
+   "observacao": "Triagem: adp-ap-3s · AP4 Apelação · Conferir antes (diligência, digitalizado, duplicidade, sobrestamento)"
+  },
+  "5032026-38.2023.4.03.0000": {
+   "grupo": "DES4",
+   "variacoes": [],
+   "observacao": "Triagem: adp-ai · A5 Ação · Despacho ou diligência antes do julgamento"
+  }
+ },
+ "atualizado_em": "2026-11-21",
+ "por": "Triagem (lotes do Caput)"
+}

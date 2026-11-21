@@ -1,0 +1,189 @@
+{
+ "schema": "gabcmt.matriz",
+ "versao": 1,
+ "id": "interlocutoria",
+ "colecao": "interlocutoria",
+ "grupos": [
+  {
+   "id": "INT1",
+   "rotulo": "Tutela recursal pendente",
+   "cor": "#2a6a4a",
+   "resultado": "",
+   "modelo": ""
+  },
+  {
+   "id": "INT2",
+   "rotulo": "Efeito suspensivo pendente",
+   "cor": "#6a5a2a",
+   "resultado": "",
+   "modelo": ""
+  },
+  {
+   "id": "INT3",
+   "rotulo": "Urgência pendente · antes, o preparo (comprovante do Tesouro ou deserção)",
+   "cor": "#2a4a6a",
+   "resultado": "",
+   "modelo": ""
+  }
+ ],
+ "colunas": [],
+ "itens": {
+  "5024119-07.2026.4.03.0000": {
+   "grupo": "INT1",
+   "variacoes": [],
+   "observacao": "Triagem: adp-ai · L09 Lote · Lucro presumido: majoração de 10% dos percentuais (LC 224/2025)"
+  },
+  "5000009-38.2026.4.03.0001": {
+   "grupo": "INT1",
+   "variacoes": [],
+   "observacao": "Triagem: adp-ai · L11 Lote · Efeito suspensivo a embargos à execução: garantia do juízo (artigo 919, § 1º, do CPC)"
+  },
+  "5000005-98.2026.4.03.0001": {
+   "grupo": "INT1",
+   "variacoes": [],
+   "observacao": "Triagem: adp-ai · A2 Ação · Conferir a origem (sentença ou andamento): havendo, prejudicado"
+  },
+  "5007201-25.2026.4.03.0000": {
+   "grupo": "INT1",
+   "variacoes": [],
+   "observacao": "Triagem: adp-ai · A4 Ação · Urgente: liminar ou tutela recursal pendente"
+  },
+  "5013823-91.2024.4.03.0000": {
+   "grupo": "INT1",
+   "variacoes": [],
+   "observacao": "Triagem: adp-ai · A4 Ação · Urgente: liminar ou tutela recursal pendente"
+  },
+  "5000239-80.2026.4.03.0001": {
+   "grupo": "INT1",
+   "variacoes": [],
+   "observacao": "Triagem: adp-ai · L21 Lote · Agravo interno contra deserção (comprovante do Tesouro)"
+  },
+  "5027951-82.2025.4.03.0000": {
+   "grupo": "INT1",
+   "variacoes": [],
+   "observacao": "Triagem: adp-ai · A5 Ação · Despacho ou diligência antes do julgamento"
+  },
+  "5016305-75.2025.4.03.0000": {
+   "grupo": "INT1",
+   "variacoes": [],
+   "observacao": "Triagem: adp-ai · A4 Ação · Urgente: liminar ou tutela recursal pendente"
+  },
+  "5011486-61.2026.4.03.0000": {
+   "grupo": "INT1",
+   "variacoes": [],
+   "observacao": "Triagem: adp-ai · L15 Lote · FIES: carência estendida durante a residência médica"
+  },
+  "5004791-91.2026.4.03.0000": {
+   "grupo": "INT1",
+   "variacoes": [],
+   "observacao": "Triagem: adp-ai · A4 Ação · Urgente: liminar ou tutela recursal pendente"
+  },
+  "5008515-11.2023.4.03.0000": {
+   "grupo": "INT1",
+   "variacoes": [],
+   "observacao": "Triagem: adp-ai · A7 Ação · Voto individual (pauta)"
+  },
+  "5007108-96.2025.4.03.0000": {
+   "grupo": "INT1",
+   "variacoes": [],
+   "observacao": "Triagem: adp-ai · A7 Ação · Voto individual (pauta)"
+  },
+  "5005254-67.2025.4.03.0000": {
+   "grupo": "INT1",
+   "variacoes": [],
+   "observacao": "Triagem: adp-ai · A4 Ação · Urgente: liminar ou tutela recursal pendente"
+  },
+  "5012618-56.2026.4.03.0000": {
+   "grupo": "INT1",
+   "variacoes": [],
+   "observacao": "Triagem: adp-ai · L24 Lote · ANTT: piso mínimo do frete (ADI 5.956)"
+  },
+  "5032704-48.2026.4.03.0000": {
+   "grupo": "INT1",
+   "variacoes": [],
+   "observacao": "Triagem: adp-ai · A3 Ação · Preparo ou admissibilidade antes do mérito (despacho STN ou deserção)"
+  },
+  "5019962-88.2026.4.03.0000": {
+   "grupo": "INT1",
+   "variacoes": [],
+   "observacao": "Triagem: adp-ai · A3 Ação · Preparo ou admissibilidade antes do mérito (despacho STN ou deserção)"
+  },
+  "5032827-80.2025.4.03.0000": {
+   "grupo": "INT1",
+   "variacoes": [],
+   "observacao": "Triagem: adp-ai · A2 Ação · Conferir a origem (sentença ou andamento): havendo, prejudicado"
+  },
+  "5000303-90.2026.4.03.0001": {
+   "grupo": "INT1",
+   "variacoes": [],
+   "observacao": "Triagem: adp-ai · A3 Ação · Preparo ou admissibilidade antes do mérito (despacho STN ou deserção)"
+  },
+  "5012422-23.2025.4.03.0000": {
+   "grupo": "INT1",
+   "variacoes": [],
+   "observacao": "Triagem: adp-ai · A4 Ação · Urgente: liminar ou tutela recursal pendente"
+  },
+  "5026921-12.2025.4.03.0000": {
+   "grupo": "INT1",
+   "variacoes": [],
+   "observacao": "Triagem: adp-ai · A2 Ação · Conferir a origem (sentença ou andamento): havendo, prejudicado"
+  },
+  "5028832-59.2025.4.03.0000": {
+   "grupo": "INT1",
+   "variacoes": [],
+   "observacao": "Triagem: adp-ai · A4 Ação · Urgente: liminar ou tutela recursal pendente"
+  },
+  "5024673-39.2026.4.03.0000": {
+   "grupo": "INT2",
+   "variacoes": [],
+   "observacao": "Triagem: adp-ai · A4 Ação · Urgente: liminar ou tutela recursal pendente"
+  },
+  "5000003-31.2026.4.03.0001": {
+   "grupo": "INT2",
+   "variacoes": [],
+   "observacao": "Triagem: adp-ai · A4 Ação · Urgente: liminar ou tutela recursal pendente"
+  },
+  "5019964-29.2024.4.03.0000": {
+   "grupo": "INT2",
+   "variacoes": [],
+   "observacao": "Triagem: adp-ai · A4 Ação · Urgente: liminar ou tutela recursal pendente"
+  },
+  "5004974-62.2026.4.03.0000": {
+   "grupo": "INT2",
+   "variacoes": [],
+   "observacao": "Triagem: adp-ai · L13 Lote · Cumprimento de sentença: cálculos da contadoria conformes ao título"
+  },
+  "5016367-52.2024.4.03.0000": {
+   "grupo": "INT2",
+   "variacoes": [],
+   "observacao": "Triagem: adp-ai · A9 Ação · Ler no PJe antes de propor (peça sem texto)"
+  },
+  "5000090-84.2026.4.03.0001": {
+   "grupo": "INT2",
+   "variacoes": [],
+   "observacao": "Triagem: adp-ai · A4 Ação · Urgente: liminar ou tutela recursal pendente"
+  },
+  "5027464-15.2025.4.03.0000": {
+   "grupo": "INT3",
+   "variacoes": [],
+   "observacao": "Triagem: adp-ai · L05 Lote · Execuções da OAB: anuidades (Tema 1.180/STF)"
+  },
+  "5030316-75.2026.4.03.0000": {
+   "grupo": "INT3",
+   "variacoes": [],
+   "observacao": "Triagem: adp-ai · A4 Ação · Urgente: liminar ou tutela recursal pendente"
+  },
+  "5000564-55.2026.4.03.0001": {
+   "grupo": "INT3",
+   "variacoes": [],
+   "observacao": "Triagem: adp-ai · A3 Ação · Preparo ou admissibilidade antes do mérito (despacho STN ou deserção)"
+  },
+  "5000606-07.2026.4.03.0001": {
+   "grupo": "INT3",
+   "variacoes": [],
+   "observacao": "Triagem: adp-ai · A3 Ação · Preparo ou admissibilidade antes do mérito (despacho STN ou deserção)"
+  }
+ },
+ "atualizado_em": "2026-11-21",
+ "por": "Triagem (lotes do Caput)"
+}
