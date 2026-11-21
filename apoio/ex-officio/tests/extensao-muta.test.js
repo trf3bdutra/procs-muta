@@ -133,3 +133,14 @@ test('extensão 0.15: cabeçalho no formato da gaveta da pauta (etapas, designa�
   assert.match(gab, /function cabeca\(s\)/); assert.match(gab, /cabeca\(s\) \+ tabs/);
   assert.match(gab, /function sinalizacoes\(\)/); assert.match(gab, /function notas\(\)/); assert.match(gab, /toque para marcar hoje/);
 });
+
+test('extensão 0.16: modos Processo · Autos · Roteiro de triagem · Produção; peças e inteiro teor em JSON; controles num cartão', () => {
+  const gab = read('extensao/gabinete.js'), au = read('extensao/autos.js'), rt = read('extensao/roteiro.js');
+  assert.match(gab, /var MODOS = \['Processo', 'Autos', 'Roteiro', 'Produção'\]/);
+  assert.match(gab, /Roteiro: 'Roteiro de triagem'/);
+  assert.match(au, /data-au="tudojs"/); assert.match(au, /data-au="js:/); assert.match(au, /lista: JSON\.stringify/);
+  assert.match(gab, /data-ct="/); assert.match(gab, /function pronunciamento\(\)/);
+  assert.match(rt, /Outros campos da triagem/);
+  const ficha = JSON.parse(read('padrao/ficha.json'));
+  assert.ok(ficha.abas.some(a => a.grupos.some(g => g.campos.some(c => c.secao === 'triagem' && c.chave === 'Assunto detalhado' && c.editavel !== false))), 'assunto detalhado editável');
+});

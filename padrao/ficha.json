@@ -1035,6 +1035,14 @@
        "apelido": "tipo_de_caso"
       },
       {
+       "rotulo": "Assunto detalhado",
+       "chave": "Assunto detalhado",
+       "tipo": "texto-longo",
+       "secao": "triagem",
+       "regra": "complementa o do lote (Registro - Assunto detalhado): o cartão da extensão e o Caput mostram o do lote e, na falta, este",
+       "apelido": "assunto_detalhado"
+      },
+      {
        "rotulo": "Complexidade",
        "chave": "COMPLEXIDADE",
        "tipo": "texto",

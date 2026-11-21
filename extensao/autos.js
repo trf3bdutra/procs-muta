@@ -96,6 +96,7 @@ function b64bytes(b64) { var s = atob(b64), u = new Uint8Array(s.length); for (v
 /* texto do PDF: camada de texto de cada página; a página sem texto (digitalizada) vai ao OCR local (ocr.js).
    modo 'ocr' passa todas as páginas pelo OCR (camada de texto ruim ou ausente). */
 var OCR_MAX = 30;
+var SVGDL = '<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg> ';
 function semTexto(t) { return S(t).replace(/\s/g, '').length < 25; }
 function textoPdf(b64, max, modo, aviso) {
   var L = pdfLib();
@@ -135,6 +136,37 @@ function extrair(id, modo) {
     A.docs[id] = { estado: sem ? 'sem' : 'ok', modo: modo || '', texto: S(x.texto), fmt: x.fmt, pags: x.pags, lidas: x.lidas, ocr: x.ocr || 0, url: x.url };
     A.sug = null; redesenhar(); return A.docs[id];
   }, function (e) { A.docs[id] = { estado: 'erro', erro: e.message }; redesenhar(); return A.docs[id]; });
+}
+/* ---------- baixar em JSON: cada peça e o inteiro teor (formato de acervo/autos/<CNJ>.json.gz, o mesmo do Caput e da Ex Officio) ---------- */
+function baixar(nome, obj) {
+  var b = new Blob([JSON.stringify(obj, null, 1)], { type: 'application/json' }), u = URL.createObjectURL(b), a = document.createElement('a');
+  a.href = u; a.download = nome; document.body.appendChild(a); a.click(); a.remove(); setTimeout(function () { URL.revokeObjectURL(u); }, 4000);
+}
+function cnjArq() { return String(A.cnj || cnjAtual() || 'processo').replace(/[^\d.-]/g, ''); }
+function pecaJson(id) {
+  var d = lista().filter(function (x) { return x.id === id; })[0] || { id: id }, t = A.docs[id] || {};
+  return { cnj: A.cnj || cnjAtual(), id: id, tipo: d.tipo || '', descricao: d.desc || '', origem: d.origem || '', juntado_em: d.data || '', hora: d.hora || '', anexo: !!d.anexo,
+    categoria: d.rot || '', movimentos: d.movs || [], detalhamento: S(A.esp[id] != null ? A.esp[id] : ''), formato: t.fmt || '', paginas: t.pags || 0, paginas_lidas: t.lidas || 0,
+    paginas_ocr: t.ocr || 0, caracteres: S(t.texto).length, texto: S(t.texto), extraido_em: new Date().toISOString() };
+}
+function baixarPeca(id) { return extrair(id).then(function () { baixar(cnjArq() + '_ID' + id + '.json', pecaJson(id)); }); }
+/* inteiro teor: lê o que falta (três de cada vez) e baixa tudo num arquivo */
+function baixarTudo() {
+  var L = lista(), falta = L.filter(function (d) { return !(A.docs[d.id] && /^(ok|sem)$/.test(A.docs[d.id].estado)); });
+  A.todo = { feitos: 0, total: falta.length }; A.msg = ''; redesenhar();
+  var i = 0;
+  function trab() { if (i >= falta.length) return Promise.resolve(); var d = falta[i++]; return extrair(d.id).then(null, function () {}).then(function () { A.todo.feitos++; redesenhar(); }).then(trab); }
+  return Promise.all([trab(), trab(), trab()]).then(function () {
+    var mov = movimentos(), sec = ['===== MOVIMENTAÇÕES (linha do tempo do PJe, mais recente primeiro) =====', mov.map(function (m) { return m.data + (m.hora ? ' ' + m.hora : '') + ' · ' + m.t; }).join('\n'), ''];
+    var docs = [], faltam = [];
+    L.forEach(function (d) { var t = A.docs[d.id] || {};
+      if (!t.texto) faltam.push(d.id);
+      docs.push({ id: d.id, tipo: d.tipo, descricao: d.desc, juntado_por: '', juntado_em: d.data, formato: t.fmt || '', paginas: t.pags || 0, caracteres: S(t.texto).length, anexo: !!d.anexo, detalhamento: S(A.esp[d.id] || '') , paginas_ocr: t.ocr || 0 });
+      sec.push('===== ID ' + d.id + ' | ' + d.tipo + ' | ' + (d.desc || d.tipo) + ' | juntado em ' + d.data + (t.fmt === 'pdf' ? ' | pdf ' + (t.pags || 0) + ' pág.' : t.fmt ? ' | ' + t.fmt : '') + (t.ocr ? ' | OCR ' + t.ocr + ' pág.' : '') + ' =====', S(t.texto), ''); });
+    baixar(cnjArq() + '.json', { cnj: A.cnj || cnjAtual(), extraido_em: new Date().toISOString(), origem: 'Extensão Muta (painel ao lado do PJe)',
+      lista: JSON.stringify(L.map(function (d) { return [d.id, d.tipo, d.desc || d.tipo, '', d.data, d.hora || '', d.anexo ? 'anexo' : '']; })), docs: JSON.stringify(docs), faltam: faltam, texto: sec.join('\n') });
+    A.todo = null; A.msg = 'Inteiro teor baixado: ' + L.length + ' documento(s)' + (faltam.length ? ', ' + faltam.length + ' sem texto' : '') + '.'; redesenhar();
+  });
 }
 /* as peças principais, da mais recente para a mais antiga, três de cada vez (no máximo 30) */
 function extrairPrincipais() {
@@ -341,6 +373,7 @@ function htmlDocs() {
   var lidos = Object.keys(A.docs).filter(function (k) { return /^(ok|sem)$/.test(A.docs[k].estado); }).length;
   var h = '<section class="card pc-sec" id="g-docs">' + cab + outro +
     '<div class="bar au-bl">' + botaoLer() + '<button type="button" class="btn solid sm" data-au="princ"' + (A.fila ? ' disabled' : '') + ' title="Lê o texto das decisões, recursos, contrarrazões, pareceres, procurações e custas: alimenta a conferência automática">' + (A.fila ? 'Lendo ' + A.fila + '…' : 'Peças principais') + '</button></div>' +
+    '<div class="bar au-tj"><button type="button" class="btn line sm" data-au="tudojs"' + (A.todo ? ' disabled' : '') + ' title="Lê o texto de todos os documentos (PDF digitalizado vai ao OCR) e baixa num arquivo, no formato do acervo">' + SVGDL + (A.todo ? 'Lendo ' + A.todo.feitos + '/' + A.todo.total + '…' : 'Baixar inteiro teor (JSON)') + '</button></div>' +
     (A.msg ? '<p class="status ok">' + esc(A.msg) + '</p>' : '') +
     '<div class="au-fx"><span class="seg"><button type="button" data-au="f:pecas" aria-selected="' + (F === 'pecas') + '">Peças</button><button type="button" data-au="f:todos" aria-selected="' + (F === 'todos') + '">Todos (' + L.length + ')</button></span><small class="muted">' + lidos + ' com texto lido</small></div>' +
     '<div class="au-docs">' + V.map(function (d) {
@@ -348,9 +381,11 @@ function htmlDocs() {
       return '<div class="au-doc' + (d.anexo ? ' anx' : '') + (PRINC[d.k] ? ' pr' : '') + '"><div class="au-h"><span class="au-d">' + esc(d.data) + (d.hora ? '<small>' + esc(d.hora) + '</small>' : '') + '</span>' +
         '<div class="au-n"><b>' + esc(d.tipo) + '</b>' + (d.desc && N(d.desc) !== N(d.tipo) ? '<small>' + esc(d.desc) + '</small>' : '') + '</div>' +
         '<button type="button" class="mono lnk" data-copia="' + esc(d.id) + '" title="Copiar o ID">' + esc(d.id) + '</button></div>' +
-        '<div class="au-a"><input type="text" class="au-esp" data-esp="' + esc(d.id) + '" placeholder="Especificação" title="Vai para Outras peças e ocorrências" value="' + esc(espDe(d.id)) + '">' +
+        '<div class="au-inf">' + [d.rot, d.anexo ? 'anexo' : '', d.origem].filter(Boolean).map(function (x) { return '<span>' + esc(x) + '</span>'; }).join('') + (d.movs && d.movs.length && !d.anexo ? '<small>' + esc(d.movs.join(' · ')) + '</small>' : '') + '</div>' +
+        '<div class="au-a"><input type="text" class="au-esp" data-esp="' + esc(d.id) + '" placeholder="Detalhamento" title="Vai para Outras peças e ocorrências da ficha" value="' + esc(espDe(d.id)) + '">' +
         '<button type="button" class="btn line sm" data-au="ext:' + esc(d.id) + '"' + (dd && dd.estado === 'lendo' ? ' disabled' : '') + ' title="Lê o texto do documento no painel">' + (dd && /^(ok|sem)$/.test(dd.estado) ? (ab ? 'Fechar' : 'Ver texto') : 'Inteiro teor') + '</button>' +
         '<button type="button" class="btn line sm" data-au="ocr:' + esc(d.id) + '"' + (dd && dd.estado === 'lendo' ? ' disabled' : '') + ' title="Lê o documento por OCR, página por página (PDF digitalizado ou com texto ruim). Roda no computador; nada sai dele">OCR</button>' +
+        '<button type="button" class="btn line sm" data-au="js:' + esc(d.id) + '" title="Baixa esta peça em JSON (lê o texto antes, se preciso)">JSON</button>' +
         '<button type="button" class="btn line sm au-pdf" data-au="pdf:' + esc(d.id) + '" title="Abre o PDF no PJe, numa aba nova" aria-label="Abrir o PDF no PJe">↗</button>' + estadoDoc(d.id) + '</div>' +
         (ab && dd && dd.texto ? '<div class="au-tx"><div class="bar"><button type="button" class="lnk" data-au="cp:' + esc(d.id) + '">Copiar o texto</button><small class="muted">' + (dd.fmt === 'pdf' ? dd.pags + ' página(s)' + (dd.lidas < dd.pags ? ', lidas ' + dd.lidas : '') : 'HTML') + '</small></div><pre>' + esc(dd.texto.slice(0, 60000)) + '</pre></div>' : '') +
         (ab && dd && dd.estado === 'sem' ? '<p class="status err au-tx">Sem texto legível, nem pelo OCR' + (dd.pags > OCR_MAX ? ' (o OCR lê até ' + OCR_MAX + ' páginas)' : '') + ': abra o PDF (↗).</p>' : '') + '</div>';
@@ -390,7 +425,9 @@ function htmlConferencia() {
   if (!A.itens || !lidoDoProcesso()) return h + '<div class="bar au-bl">' + botaoLer() + '</div><p class="muted">' + (tela === 'autos' ? 'Leia os autos.' : 'Abra os autos digitais no PJe.') + '</p></section>';
   var al = alertas();
   h += '<div class="bar au-bl">' + botaoLer() + '<button type="button" class="btn solid sm" data-au="princ"' + (A.fila ? ' disabled' : '') + '>' + (A.fila ? 'Lendo ' + A.fila + '…' : 'Peças principais') + '</button></div>';
-  if (al.length) h += '<div class="al-l">' + al.map(function (a, i) {
+  /* o tipo de julgamento fica no cartão do processo (gabinete.js), não aqui */
+  if (al.some(function (a) { return !/^Tipo de julgamento:/.test(a.t); })) h += '<div class="al-l">' + al.map(function (a, i) {
+    if (/^Tipo de julgamento:/.test(a.t)) return '';
     return '<div class="al-i ' + a.nivel + '"><span>' + esc(a.t) + '</span>' + (a.campo ? '<button type="button" class="btn line sm" data-au="al:' + i + '">Gravar “' + esc(a.valor) + '”</button>' : '') + '</div>';
   }).join('') + '</div>';
   h += htmlSugestoes(['Admissibilidade e regularidade', 'Tempestividade', 'Preparo', 'Representação', 'Ministério Público', 'MPF', 'Matéria e gestão', 'Espécie e decisão impugnada', 'Embargos de declaração', 'Agravo interno', 'Juízo de retratação', 'Partes', 'Identificação'].concat(secoesTodas().filter(function (s) { return !naSecao(s, PROC_SECS); })));
@@ -438,6 +475,8 @@ function clique(b) {
   else if (a === 'aplicar') aplicar();
   else if (/^f:/.test(a)) { A.filtro = a.slice(2); redesenhar(); }
   else if (/^ext:/.test(a)) { var id = a.slice(4), d = A.docs[id]; if (d && /^(ok|sem)$/.test(d.estado)) { A.abertos[id] = !A.abertos[id]; redesenhar(); } else { A.abertos[id] = true; extrair(id); } }
+  else if (a === 'tudojs') baixarTudo();
+  else if (/^js:/.test(a)) baixarPeca(a.slice(3));
   else if (/^ocr:/.test(a)) { A.abertos[a.slice(4)] = true; extrair(a.slice(4), 'ocr'); }
   else if (/^pdf:/.test(a)) abrirPdf(a.slice(4));
   else if (/^cp:/.test(a)) { var x = A.docs[a.slice(3)]; if (x && x.texto) copiar(x.texto, b); }
@@ -448,7 +487,7 @@ function especificar(id, v) { A.esp[id] = v; clearTimeout(A.tEsp); A.tEsp = setT
 function especificarJa(id) { if (id in A.esp) { clearTimeout(A.tEsp); gravarEspecificacao(id); } }
 
 document.addEventListener('muta:prontuario', function () { var c = cnjAtual(); if (A.cnj && c && Muta.chaveProcesso(A.cnj) !== Muta.chaveProcesso(c)) { A.sug = null; } });
-window.MutaAutos = { sugestoes: function () { if (!A.itens || !lidoDoProcesso()) return []; if (!A.sug) calcular(); return A.sug || []; }, ler: ler, extrair: extrair, extrairPrincipais: extrairPrincipais, htmlDocs: htmlDocs, htmlSituacao: htmlSituacao, htmlConferencia: htmlConferencia, htmlPreencher: htmlPreencher,
+window.MutaAutos = { barra: function () { var tela = window.MutaPje && window.MutaPje.tela ? window.MutaPje.tela() : ''; if (!A.itens || !lidoDoProcesso()) return '<div class="bar au-bl rt-ler">' + botaoLer() + '<small class="muted">' + (tela === 'autos' ? 'Leia os autos para conferir.' : 'Abra os autos digitais no PJe.') + '</small></div>'; return '<div class="bar au-bl rt-ler">' + botaoLer() + '<button type="button" class="btn solid sm" data-au="princ"' + (A.fila ? ' disabled' : '') + '>' + (A.fila ? 'Lendo ' + A.fila + '…' : 'Peças principais') + '</button></div>'; }, sugestoes: function () { if (!A.itens || !lidoDoProcesso()) return []; if (!A.sug) calcular(); return A.sug || []; }, ler: ler, extrair: extrair, extrairPrincipais: extrairPrincipais, htmlDocs: htmlDocs, htmlSituacao: htmlSituacao, htmlConferencia: htmlConferencia, htmlPreencher: htmlPreencher,
   clique: clique, marcarSugestao: marcarSugestao, especificar: especificar, especificarJa: especificarJa, lista: lista, alertas: alertas, md: md, estado: function () { return A; },
   /* para testes: carrega uma cronologia e textos sem o PJe */
   _carregar: function (r, textos) { A.itens = r.itens; A.idp = r.idp || ''; A.host = r.host || ''; A.cnj = r.numero || ''; A.em = Date.now(); A.docs = {}; Object.keys(textos || {}).forEach(function (id) { A.docs[id] = { estado: 'ok', texto: textos[id], fmt: 'html', pags: 0 }; }); A.sug = null; } };

@@ -24,6 +24,7 @@
       dica: 'O fundamento decisivo da sentença é o alvo do recurso e a régua da dialeticidade.' },
     { id: 'impugnada', f: 'rec', t: 'Decisão impugnada identificada', tipos: ['ai', 'agint', 'ed', 'ret'],
       campos: [['triagem', 'Impugnada - ID', 'ID'], ['triagem', 'Impugnada - Data', 'Data'], ['triagem', 'Impugnada - Síntese', 'Síntese / ementa']],
+      mais: [['triagem', 'Padrão - Espécie', 'Espécie'], ['triagem', 'Impugnada - Órgão', 'Órgão julgador'], ['triagem', 'Impugnada - Relator', 'Relator(a)']],
       estado: function (c) { return c.v('triagem', 'Impugnada - ID') ? 'ok' : 'pend'; },
       dica: 'ED: transcrever a ementa embargada no relatório. AgInt: indicar a decisão agravada e o recurso de origem.' },
     { id: 'prolator', f: 'rec', t: 'Decisão da Turma Regional de MS?', tipos: ['ed', 'agint'],
@@ -40,6 +41,7 @@
       dica: 'Pix ou cartão só com o comprovante do Tesouro (PagTesouro, "Pagamento realizado com sucesso"); comprovante do banco não basta: intimar uma vez (artigo 1.007, § 4º, do CPC).' },
     { id: 'repres', f: 'adm', t: 'Representação processual', tipos: '*', nao: ['rn'],
       campos: [['triagem', 'Representação'], ['triagem', 'ID da Procuração', 'ID da procuração', function (c) { return !/^dispensada/.test(N(c.v('triagem', 'Representação'))); }]],
+      mais: [['triagem', 'DPU (controle)', 'DPU'], ['triagem', 'Procurações'], ['triagem', 'Observação da Representação', 'Observação da representação'], ['triagem', 'Impedimento / Suspeição', 'Impedimento ou suspeição'], ['triagem', 'Observação do Impedimento', 'Observação do impedimento'], ['triagem', 'Regularidade'], ['triagem', 'Regularidade Manual', 'Regularidade · observação']],
       estado: function (c) { var v = N(c.v('triagem', 'Representação')); return /^regular|^dispensada/.test(v) ? 'ok' : /^irregular/.test(v) ? 'al' : 'pend'; } },
     { id: 'reexame', f: 'adm', t: 'Sentença sujeita ao reexame?', tipos: ['rn'],
       campos: [['origem', 'Sentença - Reexame', 'Remessa necessária']],
@@ -49,6 +51,7 @@
       dica: 'Rol do artigo 1.015 do CPC ou urgência (taxatividade mitigada, Tema 988/STJ); peças do artigo 1.017.' },
     { id: 'vicios', f: 'adm', t: 'Vícios apontados nos embargos', tipos: ['ed'],
       campos: [['triagem', 'ED - Vício', 'Vício(s) apontado(s)'], ['triagem', 'ED - Ponto', 'Ponto dos embargos']],
+      mais: [['producao', 'Acórdão - ID', 'ID do acórdão embargado'], ['producao', 'Acórdão - Assinado', 'Acórdão assinado'], ['producao', 'Acórdão - Publicado', 'Acórdão publicado'], ['producao', 'Acórdão - Data da publicação', 'Data da publicação'], ['producao', 'Acórdão - ED opostos', 'Embargos opostos'], ['producao', 'Acórdão - Trânsito', 'Trânsito em julgado']],
       estado: function (c) { return c.v('triagem', 'ED - Vício') ? 'ok' : 'pend'; },
       dica: 'Omissão, contradição, obscuridade ou erro material (artigo 1.022 do CPC). Rediscussão do mérito não é omissão.' },
     { id: 'impug', f: 'adm', t: 'Impugnação específica da decisão agravada', tipos: ['agint'],
@@ -60,6 +63,7 @@
     { id: 'mpf', f: 'mp', t: 'Ministério Público Federal', tipos: '*',
       campos: [['triagem', 'MPF', 'Parecer'], ['triagem', 'MPF - Custos Legis', 'Hipótese de intervenção', function (c) { return !/^com parecer/.test(N(c.v('triagem', 'MPF'))) || !!c.v('triagem', 'MPF - Custos Legis'); }],
         ['triagem', 'ID do Parecer MPF', 'ID do parecer', function (c) { return /^com parecer/.test(N(c.v('triagem', 'MPF'))); }], ['triagem', 'Parecer - Sentido', 'Sentido', function (c) { return /^com parecer/.test(N(c.v('triagem', 'MPF'))); }]],
+      mais: [['triagem', 'MPF - Data', 'Data do parecer'], ['triagem', 'MPF - Info adicional', 'Fundamentos do parecer'], ['triagem', 'Parecer - Sentido (outro)', 'Conclusão (texto)'], ['triagem', 'Observação MPF', 'Observação']],
       estado: function (c) { var v = N(c.v('triagem', 'MPF'));
         if (c.tem('ms') && !/^com parecer|^intimado sem manifestacao/.test(v)) return v ? 'al' : 'pend';
         if (c.alerta(/mpf|idos/) && !/^com parecer|^intimado/.test(v)) return 'al';
@@ -78,19 +82,28 @@
       dica: 'Se o acolhimento puder modificar o julgado, intimar o embargado antes (artigo 1.023, § 2º, do CPC).' },
     { id: 'retrat', f: 'pre', t: 'Precedente que motivou a devolução', tipos: ['ret'],
       campos: [['triagem', 'Retratação - Tribunal', 'Tribunal'], ['triagem', 'Retratação - Tema', 'Tema'], ['triagem', 'Retratação - Precedente', 'Precedente'], ['triagem', 'Retratação - Devolução ID', 'ID da devolução'], ['triagem', 'Retratação - Síntese', 'Síntese']],
+      mais: [['triagem', 'Retratação - Devolução órgão', 'Órgão da devolução'], ['triagem', 'Retratação - Devolução mês', 'Mês da devolução'], ['triagem', 'Retratação - ED', 'Resultado dos embargos'], ['triagem', 'Retratação - ED IDs', 'IDs dos embargos'], ['triagem', 'Retratação - ED data', 'Data dos embargos']],
       estado: function (c) { return c.v('triagem', 'Retratação - Tema') || c.v('triagem', 'Retratação - Precedente') ? 'ok' : 'pend'; } },
     { id: 'materia', f: 'mer', t: 'Matéria e questões em discussão', tipos: '*',
       campos: [['triagem', 'Tema', 'Tipo de caso'], ['triagem', 'Especificidades']],
       questoes: true,
+      mais: [['triagem', 'Síntese Fática', 'Síntese fática'], ['triagem', 'COMPLEXIDADE', 'Complexidade'], ['triagem', 'Tipo de Voto', 'Tipo de voto'], ['triagem', 'Mídias'], ['triagem', 'Seleção Prévia', 'Seleção prévia']],
       estado: function (c) { return c.v('triagem', 'Tema') && c.v('triagem', 'Alegações') ? 'ok' : 'pend'; },
       dica: 'Uma frase por questão, na ordem em que o voto vai enfrentá-las.' },
     { id: 'destino', f: 'enc', t: 'Destino do julgamento', tipos: '*',
       campos: [['producao', 'Destino', 'Destino'], ['producao', 'Destino - Situação', 'Situação para julgar'],
         ['triagem', 'Hipóteses Monocrática', 'Hipótese do artigo 932', function (c) { return N(c.v('producao', 'Destino')) === 'monocratica'; }],
         ['triagem', 'O que falta sanar', 'Pendências', function (c) { return N(c.v('producao', 'Destino - Situação')) === 'pendente' || !!c.v('triagem', 'O que falta sanar'); }]],
+      mais: [['producao', 'Destino - Outro', 'Outro destino'], ['triagem', 'Destino - Confirmado em', 'Confirmado em'], ['triagem', 'Destino - Confirmado por', 'Confirmado por']],
       estado: function (c) { var d = c.v('producao', 'Destino'), s = N(c.v('producao', 'Destino - Situação')); if (!d) return 'pend'; return s === 'pendente' ? 'al' : s ? 'ok' : 'pend'; },
-      dica: function (c) { return c.tem('ms') ? 'Mandado de segurança: sem honorários (Súmula 512/STF; artigo 25 da Lei 12.016/2009).' : 'Monocrática: indicar o inciso do artigo 932 do CPC e o precedente que autoriza.'; } }
+      dica: function (c) { return c.tem('ms') ? 'Mandado de segurança: sem honorários (Súmula 512/STF; artigo 25 da Lei 12.016/2009).' : 'Monocrática: indicar o inciso do artigo 932 do CPC e o precedente que autoriza.'; } },
+    { id: 'etiquetas', f: 'enc', t: 'Etiquetas', tipos: '*', extra: 'etiquetas',
+      campos: [['triagem', 'Etiquetas', 'Etiquetas do gabinete']],
+      estado: function (c) { return c.v('triagem', 'Etiquetas') || c.v('triagem', 'Etiquetas sugeridas') ? 'ok' : 'pend'; },
+      dica: 'As sugeridas seguem as regras do Caput; "Copiar" leva ao PJe.' }
   ];
+  /* alertas da leitura dos autos: cada um no passo a que se refere */
+  var AL_PASSO = [[/orgao prolator|outra turma/, 'prolator'], [/contrarraz/, 'contra'], [/gratuidade|pix|tesouro|preparo/, 'preparo'], [/remessa necessaria/, 'reexame'], [/mpf|ministerio publico|idos/, 'mpf'], [/procura/, 'repres'], [/tempest|prazo/, 'tempest']];
 
   /* ---------- tipo de julgamento ---------- */
   var R = { cnj: '', tipos: null, aberto: {} };
@@ -123,13 +136,16 @@
 
   /* ---------- desenho ---------- */
   var ICO = { ok: '✓', al: '!', pend: '', na: '–' }, ROT = { ok: 'conferido', al: 'alerta', pend: 'a conferir' };
-  function html(g, campoRot, questoesHtml) {
+  function html(g, campoRot, questoesHtml, X) {
+    X = X || {};
+    var mostrados = {};
     var cnj = g.cnj(), T = tipos(g, cnj), loc = lerLocal(cnj), AU = window.MutaAutos;
     var SG = AU && AU.sugestoes ? AU.sugestoes() : [], usados = [];
     /* sugestão da leitura dos autos para o campo, quando difere do que está na ficha */
     var comSug = function (c) {
       var alvo = c[0] + '.' + c[1], k = -1;
       SG.forEach(function (it, i) { if (k < 0 && it.alvo === alvo && it.status !== 'igual' && it.kind !== 'tabela' && S(it.value)) k = i; });
+      if (mostrados[alvo]) return ''; mostrados[alvo] = 1;
       var h = campoRot(c[0], c[1], c[2]); if (k < 0) return h;
       if (usados.indexOf(k) < 0) usados.push(k);
       var v = S(SG[k].value); if (/^\d{4}-\d{2}-\d{2}$/.test(v)) v = v.split('-').reverse().join('/');
@@ -149,13 +165,19 @@
       return { p: p, st: st };
     });
     var n = { ok: 0, al: 0, pend: 0 }; L.forEach(function (x) { n[x.st]++; });
+    var visiveis_ = {}; L.forEach(function (x) { visiveis_[x.p.id] = 1; });
+    var alPasso = {}, alTopo = [];
+    als.forEach(function (a, i) { if (/^Tipo de julgamento:/.test(a.t)) return; var t = N(a.t), dest = null;
+      AL_PASSO.some(function (q) { if (q[0].test(t) && visiveis_[q[1]]) { dest = q[1]; return true; } return false; });
+      (dest ? (alPasso[dest] = alPasso[dest] || []) : alTopo).push([a, i]); });
+    var alHtml = function (x) { var a = x[0]; return '<div class="al-i ' + a.nivel + '"><span>' + esc(a.t) + '</span>' + (a.campo ? '<button type="button" class="btn line sm" data-au="al:' + x[1] + '">Gravar “' + esc(a.valor) + '”</button>' : '') + '</div>'; };
     var pct = L.length ? Math.round(100 * n.ok / L.length) : 0;
     var h = '@@TOPO@@';
     var topo = '<section class="card rt-top"><div class="rt-tt"><b>Roteiro de triagem</b><span class="rt-n">' + n.ok + '/' + L.length + '</span>' +
       (n.al ? '<span class="rt-al">' + n.al + ' alerta' + (n.al > 1 ? 's' : '') + '</span>' : '') + '</div>' +
       '<div class="rt-bar"><i style="width:' + pct + '%"></i></div>' +
       '<div class="rt-tipos" role="group" aria-label="Tipo de julgamento">' + TIPOS.map(function (x) { return '<button type="button" class="chip' + (T[x[0]] ? ' on' : '') + '" data-rt="t:' + x[0] + '" aria-pressed="' + !!T[x[0]] + '">' + esc(x[1]) + '</button>'; }).join('') +
-      (loc._tipos ? '<button type="button" class="lnk" data-rt="auto" title="Volta ao tipo identificado pela classe, espécie e tarefa">automático</button>' : '') + '</div>@@USAR@@</section>';
+      (loc._tipos ? '<button type="button" class="lnk" data-rt="auto" title="Volta ao tipo identificado pela classe, espécie e tarefa">automático</button>' : '') + '</div>' + (X.barra || '') + (alTopo.length ? '<div class="al-l rt-alt">' + alTopo.map(alHtml).join('') + '</div>' : '') + '@@USAR@@</section>';
     h += '<ol class="rt">';
     FASES.forEach(function (f) {
       var F = L.filter(function (x) { return x.p.f === f[0]; }); if (!F.length) return;
@@ -166,21 +188,37 @@
         var visiveis = cs.filter(function (c) { return c[3] !== 'calc'; }), calc = cs.filter(function (c) { return c[3] === 'calc'; });
         var resumo = visiveis.map(function (c) { var v = ctx.v(c[0], c[1]); return v ? (/^\d{4}-\d{2}-\d{2}$/.test(v) ? v.split('-').reverse().join('/') : v) : ''; }).filter(Boolean).join(' · ');
         var dica = typeof p.dica === 'function' ? p.dica(ctx) : p.dica;
+        var AP = alPasso[p.id] || [];
         h += '<li class="rt-p is-' + x.st + (ab ? ' ab' : '') + '"><span class="rt-i" aria-label="' + ROT[x.st] + '">' + ICO[x.st] + '</span><div class="rt-c">' +
-          '<button type="button" class="rt-h" data-rt="a:' + p.id + '" aria-expanded="' + ab + '"><b>' + esc(p.t) + '</b>' + (!ab && resumo ? '<small>' + esc(resumo.slice(0, 120)) + '</small>' : '') + '</button>';
+          '<button type="button" class="rt-h" data-rt="a:' + p.id + '" aria-expanded="' + ab + '"><b>' + esc(p.t) + (AP.length ? ' <i class="rt-av">' + AP.length + ' aviso' + (AP.length > 1 ? 's' : '') + '</i>' : '') + '</b>' + (!ab && resumo ? '<small>' + esc(resumo.slice(0, 120)) + '</small>' : '') + '</button>';
         if (ab) {
-          h += '<div class="rt-b">' + (visiveis.length ? '<div class="gr">' + visiveis.map(comSug).join('') + '</div>' : '') +
+          var mais = (p.mais || []).map(comSug).filter(Boolean);
+          h += '<div class="rt-b">' + (AP.length ? '<div class="al-l">' + AP.map(alHtml).join('') + '</div>' : '') + (visiveis.length ? '<div class="gr">' + visiveis.map(comSug).join('') + '</div>' : '') +
             (p.questoes && questoesHtml ? questoesHtml() : '') +
             (calc.length ? '<details class="rt-calc"' + (x.st === 'ok' ? '' : ' open') + '><summary>Cálculo do prazo</summary><div class="gr">' + calc.map(comSug).join('') + '</div></details>' : '') +
+            (p.extra === 'etiquetas' && X.etiquetas ? X.etiquetas : '') +
+            (mais.length ? '<details class="rt-mais"><summary>Mais campos</summary><div class="gr">' + mais.join('') + '</div></details>' : '') +
             (dica ? '<p class="rt-d">' + esc(dica) + '</p>' : '') +
             (p.manual ? '<label class="rt-m"><input type="checkbox" data-rtc="' + p.id + '"' + (loc[p.id] ? ' checked' : '') + '> Conferi</label>' : '') + '</div>';
         }
         h += '</div></li>';
       });
     });
+    /* o que a ficha tem na Triagem e nenhum passo mostrou: entra em "Outros campos", para nada ficar de fora */
+    var usadosPassos = {}; PASSOS.forEach(function (p) { (p.campos || []).concat(p.mais || []).forEach(function (c) { usadosPassos[c[0] + '.' + c[1]] = 1; }); });
+    var outros = (X.todos || []).filter(function (c) { return !usadosPassos[c[0] + '.' + c[1]] && !mostrados[c[0] + '.' + c[1]]; });
+    if (outros.length) h += '<li class="rt-f"><span>Outros campos da triagem</span></li><li class="rt-p is-na ab"><span class="rt-i">–</span><div class="rt-c"><div class="rt-b" style="border:0"><div class="gr">' + outros.map(comSug).join('') + '</div></div></div></li>';
     R.usados = usados.slice();
     var usar = usados.length ? '<div class="rt-u"><span>' + usados.length + ' campo(s) com sugestão da leitura dos autos</span><button type="button" class="btn solid sm" data-rt="ut">Usar todas</button></div>' : '';
-    return h.replace('@@TOPO@@', topo.replace('@@USAR@@', usar)) + '</ol>';
+    return h.replace('@@TOPO@@', topo.replace('@@USAR@@', usar)) + '</ol>' + (X.registro || '');
+  }
+  /* resumo para a aba: passos conferidos e total */
+  function resumo(g) {
+    var cnj = g.cnj(), T = tipos(g, cnj), loc = lerLocal(cnj), AU = window.MutaAutos, als = AU && AU.estado().itens ? AU.alertas() : [], ativos = Object.keys(T);
+    var ctx = { v: function (s, k) { var x = g.V(s, k); return Array.isArray(x) ? (x.length ? 'tabela' : '') : S(x); }, tem: function (k) { return !!T[k]; }, alerta: function (re) { return als.some(function (a) { return a.nivel === 'al' && re.test(N(a.t)); }); } };
+    var L = PASSOS.filter(function (p) { if (p.tipos !== '*' && !p.tipos.some(function (k) { return T[k]; })) return false; return !(p.nao && ativos.every(function (k) { return p.nao.indexOf(k) >= 0; })); });
+    var ok = L.filter(function (p) { var st = p.manual ? (loc[p.id] ? 'ok' : 'pend') : p.estado(ctx); if (p.manual && p.estado && p.estado(ctx) === 'al') st = 'al'; return st === 'ok'; }).length;
+    return { ok: ok, total: L.length };
   }
   function clique(b, g) {
     var a = b.dataset.rt || '', cnj = g.cnj(), loc = lerLocal(cnj);
@@ -192,5 +230,5 @@
     return false;
   }
   function conferir(id, on, g) { var cnj = g.cnj(), loc = lerLocal(cnj); if (on) loc[id] = new Date().toISOString().slice(0, 10); else delete loc[id]; gravarLocal(cnj, loc); }
-  window.MutaRoteiro = { html: html, clique: clique, conferir: conferir, detectar: detectar, PASSOS: PASSOS, TIPOS: TIPOS };
+  window.MutaRoteiro = { html: html, resumo: resumo, clique: clique, conferir: conferir, detectar: detectar, PASSOS: PASSOS, TIPOS: TIPOS };
 })();

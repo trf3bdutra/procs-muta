@@ -93,6 +93,7 @@ Tempestividade, Preparo, Representação, Preliminares, Mídias, Hipótese de in
 | Campo | Chave | Tipo | Onde fica | Com valor | Opções / regra |
 |---|---|---|---|---|---|
 | Tipo de caso | `Tema` | texto longo | operacional · `triagem` | 0 de 4.725 |  |
+| Assunto detalhado | `Assunto detalhado` | texto longo | operacional · `triagem` | — | complementa o do lote (`Registro - Assunto detalhado`); o cartão da extensão e o Caput mostram o do lote e, na falta, este |
 | Complexidade | `COMPLEXIDADE` | regra · calculado | operacional · `triagem` | 1 de 4.725 | lê COMPLEXIDADE ou Dificuldade; 1/2/3 → Ω/Α/Σ |
 | Tipo de voto | `Tipo de Voto` | texto | operacional · `triagem` | 0 de 4.725 |  |
 | Preliminares | `Prelim.` | Sim/— | operacional · `triagem` | 0 de 4.725 |  |

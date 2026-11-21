@@ -5084,7 +5084,7 @@ function cartao(l,it){
      ${p.teor.map(x=>`<p class="pz2-t"><i>${esc(x[0])}</i>${esc(x[1])}</p>`).join('')}${nt?`<p class="pz2-n"><i>Nota da triagem</i>${esc(nt)}</p>`:''}${p.trecho?`<blockquote class="pz2-q" title="Trecho do documento nos autos extraídos">${esc(p.trecho)}</blockquote>`:''}</div>`}).join('');
   const pecasHtml=(soltos.length||pcs)?`<div class="pzs"><h4>Peças e teor dos autos <small>${P.length} peça(s)</small></h4><div class="pz2-box">${soltos.length?`<div class="pz2 sol"><div class="pz2-h"><b>Teor dos autos</b><span class="m">sem peça própria na lista</span></div>${soltos.map(x=>`<p class="pz2-t"><i>${esc(x[0])}</i>${esc(x[1])}</p>`).join('')}</div>`:''}${pcs}</div></div>`:'';
   const prox=F('Próxima ação');
-  const assDet=it.assunto_detalhado||'';
+  const assDet=it.assunto_detalhado||F('Assunto detalhado')||'';
   /* Especificidades: especificidades e peculiaridades num campo só (sem repetir trechos) */
   const espU=[...new Set([esp,it.peculiaridades||'',F('Peculiaridades')].join(' · ').split(/\s+·\s+/).map(x=>x.trim()).filter(Boolean))].join(' · ');
   /* Notas em log: a observação da triagem do lote (com a data da análise) e as notas da ficha (origem.Observações, uma por linha) */

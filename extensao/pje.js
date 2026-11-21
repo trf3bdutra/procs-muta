@@ -22,7 +22,7 @@
     var ctx = reg.ctx === 'autos' ? 'autos' : reg.ed ? 'editor' : '', k = reg.numero + '|' + ctx;
     if (!ctx || k === ultimoCtx) return;
     ultimoCtx = k;
-    if (ctx === 'autos') { window.MutaAbas.ir('pront'); if (window.MutaAutos) setTimeout(function () { window.MutaAutos.ler(); }, 300); }
+    if (ctx === 'autos') { window.MutaAbas.ir('pront'); if (window.MutaGabinete && window.MutaGabinete.ir) window.MutaGabinete.ir('Autos'); if (window.MutaAutos) setTimeout(function () { window.MutaAutos.ler(); }, 300); }
     else { window.MutaAbas.ir('min'); if (window.MutaEditor) setTimeout(function () { window.MutaEditor.ler().catch(function () {}); }, 300); }
   }
 

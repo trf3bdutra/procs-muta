@@ -3,6 +3,27 @@
 Extensão do Chrome/Edge (Manifest V3) que abre o **Muta** num painel lateral, ao lado dos autos e das tarefas do PJe 2º grau do TRF-3.
 Base: o HTML independente *muta-independente-prontuario-completo* (Prontuário + Acervo).
 
+## O que muda na 0.16
+
+- **Modos do Prontuário: Processo · Autos · Roteiro de triagem · Produção**, com a contagem embaixo de cada um (em
+  aberto, peças lidas, passos conferidos, campos preenchidos), sublinhados como as abas da gaveta da pauta.
+- **Cartão do processo:** tipo de julgamento ao lado da classe (o da ficha; a leitura dos autos sugere, ✓ grava);
+  **assunto detalhado** logo abaixo do assunto (o do Caput; na falta, o da ficha, incluído pelo ícone — campo novo
+  `triagem.Assunto detalhado`, que o Caput também mostra); controles do PJe (acompanhar, trocar de aba, prontuários,
+  tema, ajuda) em ícones no canto do cartão; designação editável nas pílulas (só o gestor).
+- **Processo:** sinalizações, notas, síntese e questões, situação atual, sentença e demais peças da ficha e **Controles num
+  cartão só** (urgência, meta, sobrestamento, caso sensível: Sim/Não e, com Sim, a razão). Saiu o grupo Acompanhamento.
+- **Autos (novo):** conferência automática e a lista de peças com ID, data, hora, categoria, movimentos e **detalhamento**;
+  por peça, Ver texto, OCR, **JSON** e ↗ (PDF); **Baixar inteiro teor (JSON)** lê tudo e baixa no formato de
+  `acervo/autos/<CNJ>.json.gz` (o mesmo do Caput e da Ex Officio). Nos autos digitais, o painel abre neste modo.
+- **Roteiro de triagem** substitui o modo Triagem e reúne todos os campos: cada passo tem "Mais campos", os alertas dos
+  autos vão para o passo a que se referem, etiquetas e o registro do lote entram no roteiro e o que sobrar fica em
+  "Outros campos da triagem".
+- **Produção:** tipo de ato · pronunciamento no topo (acórdão, decisão monocrática, urgência, despacho, admissibilidade,
+  retratação, homologação, outro destino); saíram "Designação e minuta" (está no cartão) e "Lote e correção (Index)";
+  a decisão da monocrática num cartão só, sem repetir campos.
+- Listas curtas e Sim/Não viram botões em todo o prontuário; cabeçalho das abas branco no tema claro.
+
 ## O que muda na 0.15
 
 - **Cabeçalho no formato da gaveta "Para minuta" da pauta.** Fase (para minuta, correção, liberação; na monocrática,
