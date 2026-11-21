@@ -1257,6 +1257,53 @@
      ]
     },
     {
+     "grupo": "Acórdão recorrido (embargos de declaração)",
+     "campos": [
+      {
+       "rotulo": "ID do acórdão",
+       "chave": "Acórdão - ID",
+       "tipo": "texto",
+       "secao": "producao",
+       "apelido": "acordao_id"
+      },
+      {
+       "rotulo": "Acórdão assinado",
+       "chave": "Acórdão - Assinado",
+       "tipo": "simnao",
+       "secao": "producao",
+       "apelido": "acordao_assinado"
+      },
+      {
+       "rotulo": "Acórdão publicado",
+       "chave": "Acórdão - Publicado",
+       "tipo": "simnao",
+       "secao": "producao",
+       "apelido": "acordao_publicado"
+      },
+      {
+       "rotulo": "Data da publicação",
+       "chave": "Acórdão - Data da publicação",
+       "tipo": "data",
+       "secao": "producao",
+       "apelido": "acordao_data_publicacao"
+      },
+      {
+       "rotulo": "Embargos de declaração opostos",
+       "chave": "Acórdão - ED opostos",
+       "tipo": "simnao",
+       "secao": "producao",
+       "apelido": "acordao_ed_opostos"
+      },
+      {
+       "rotulo": "Trânsito em julgado",
+       "chave": "Acórdão - Trânsito",
+       "tipo": "data",
+       "secao": "producao",
+       "apelido": "acordao_transito"
+      }
+     ]
+    },
+    {
      "grupo": "Embargos de declaração",
      "quando": {
       "campo": "triagem.Padrão - Espécie",
@@ -1689,54 +1736,6 @@
       }
      ],
      "destino": "sessao"
-    },
-    {
-     "grupo": "Acórdão",
-     "destino": "sessao",
-     "campos": [
-      {
-       "rotulo": "ID do acórdão",
-       "chave": "Acórdão - ID",
-       "tipo": "texto",
-       "secao": "producao",
-       "apelido": "acordao_id"
-      },
-      {
-       "rotulo": "Acórdão assinado",
-       "chave": "Acórdão - Assinado",
-       "tipo": "simnao",
-       "secao": "producao",
-       "apelido": "acordao_assinado"
-      },
-      {
-       "rotulo": "Acórdão publicado",
-       "chave": "Acórdão - Publicado",
-       "tipo": "simnao",
-       "secao": "producao",
-       "apelido": "acordao_publicado"
-      },
-      {
-       "rotulo": "Data da publicação",
-       "chave": "Acórdão - Data da publicação",
-       "tipo": "data",
-       "secao": "producao",
-       "apelido": "acordao_data_publicacao"
-      },
-      {
-       "rotulo": "Embargos de declaração opostos",
-       "chave": "Acórdão - ED opostos",
-       "tipo": "simnao",
-       "secao": "producao",
-       "apelido": "acordao_ed_opostos"
-      },
-      {
-       "rotulo": "Trânsito em julgado",
-       "chave": "Acórdão - Trânsito",
-       "tipo": "data",
-       "secao": "producao",
-       "apelido": "acordao_transito"
-      }
-     ]
     },
     {
      "grupo": "Ato e fundamento",
