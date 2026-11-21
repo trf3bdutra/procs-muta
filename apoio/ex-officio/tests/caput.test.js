@@ -171,3 +171,8 @@ test('Triagem: busca e filtros no cabeçalho do painel Acervo filtrado',()=>{
   const fs=require('fs'),p=require('path'),cap=fs.readFileSync(p.join(__dirname,'../../../caput/triagem/index.html'),'utf8');
   assert.ok(cap.includes('.fl-cab>.fl-l1{padding:9px 12px;background:var(--bg)')&&cap.includes('.fl-cab>.acf{border:0'),'painel único');
 });
+
+test('Motor: gravar a pauta devolve ctl.lote e as chaves de ctl que vieram do arquivo',()=>{
+  const fs=require('fs'),p=require('path'),m=fs.readFileSync(p.join(__dirname,'../../../caput/motor/assets/js/21-sessoes-equipe.js'),'utf8');
+  assert.ok(m.includes("CTL_K.concat(['lote'], it._ck || [])")&&m.includes("_ck: Object.keys(it.ctl || {})"),'lote preservado');
+});
