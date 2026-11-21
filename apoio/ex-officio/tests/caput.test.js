@@ -128,3 +128,18 @@ test('Etiquetagem: "Criar regra…" em Sem regra abre o formulário junto da eti
   const fs=require('fs'),p=require('path'),cap=fs.readFileSync(p.join(__dirname,'../../../caput/triagem/index.html'),'utf8');
   assert.ok(cap.includes("boxRegrasPauta(ss, d, 'form')")&&cap.includes("if (onde === 'form') return form;")&&cap.includes("de: et }")&&cap.includes("(onde === 'form') === !!rb.de"),'form junto da etiqueta');
 });
+
+test('Chefia › Visão operacional: lista com altura fixa, rolando por dentro',()=>{
+  const fs=require('fs'),p=require('path'),cap=fs.readFileSync(p.join(__dirname,'../../../caput/triagem/index.html'),'utf8');
+  assert.ok(cap.includes('.vo-bd{height:560px}')&&cap.includes('#vo-lst{flex:1 1 auto;min-height:0;overflow:auto')&&cap.includes('.vo-g h4{position:sticky;top:0'),'altura fixa');
+});
+
+test('Calendário: os cartões de "Sessões em andamento" ocupam a largura disponível',()=>{
+  const fs=require('fs'),p=require('path'),css=fs.readFileSync(p.join(__dirname,'../../../caput/motor/assets/css/02-calendario.css'),'utf8');
+  assert.ok(css.includes('.cc-dg{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr))'),'auto-fit');
+});
+
+test('Triagem › Visão geral: cabeçalhos com fundo próprio',()=>{
+  const fs=require('fs'),p=require('path'),cap=fs.readFileSync(p.join(__dirname,'../../../caput/triagem/index.html'),'utf8');
+  assert.ok(cap.includes('.tri-vg-h{background:var(--bg)')&&cap.includes('.tri-vg-c .ch{background:var(--bg)'),'fundo dos cabeçalhos');
+});

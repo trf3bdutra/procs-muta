@@ -168,7 +168,7 @@
 .cc-sg{margin-left:auto;display:inline-flex;background:#e9eef2;border-radius:9px;padding:2px;gap:2px}
 .cc-sg button{border:0;background:transparent;font:600 11.5px Figtree,system-ui,sans-serif;color:#56656e;padding:5px 11px;border-radius:7px;cursor:pointer;display:inline-flex;align-items:center;gap:5px}
 .cc-sg button:hover{color:#13242f}.cc-sg button.on{background:#fff;color:#13242f;box-shadow:0 1px 2px rgba(19,36,47,.14)}.cc-sg button:focus-visible{outline:2px solid #006291;outline-offset:1px}
-.cc-dg{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:10px}
+.cc-dg{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:10px}
 .cc-dtl{background:#fff;border-radius:10px;box-shadow:0 1px 2px rgba(19,36,47,.07);overflow-x:auto;overflow-y:hidden}
 .cc-dir .cc-sb-s{padding:10px 12px 8px}
 .cc-dir .cc-sb-s ol{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));margin-top:10px;gap:0}
