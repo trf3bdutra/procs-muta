@@ -212,11 +212,13 @@
       dataMinuta: it.dataMinuta || '', dataCorrecao: it.dataCorrecao || '', dataLiberacao: it.dataLiberacao || '', obs: it.obs || '', ctl: ctlDe(it) }; });
   }
   var CTL_K = ['itemAnterior','detalhes','mpf','parecer','prelim','tempest','preparo','repres','midias','resJulg','consect','honor','topico','intercor','etapa','meta','manual','cartao','editadoPor','editadoEm'];
-  function ctlDe(it) { var o = {}; CTL_K.forEach(function (k) { if (it[k]) o[k] = it[k]; }); return o; }
+  /* lote: marca do /lotes (coleção, item e autos), gravada por outro caminho; o motor a lê e precisa devolvê-la intacta.
+     _ck: chaves de ctl que vieram do arquivo; as que o motor não conhece também voltam como estavam */
+  function ctlDe(it) { var o = {}; CTL_K.concat(['lote'], it._ck || []).forEach(function (k) { if (k !== '_ck' && it[k] && !(k in o)) o[k] = it[k]; }); return o; }
   function itemDoRepo(it) {
     return { cnj: it.cnj, item: String(it.item || ''), assunto: it.assunto || '', classe: it.classe || '', partes: it.partes || '', relator: S.gab,
       servidor: it.servidor || '', corretor: it.corretor || '', porD: it.criterioMinuta || '', porC: it.criterioCorrecao || '', tipoManual: it.julgamento || '', resultado: it.resultado || '',
-      dataMinuta: it.dataMinuta || '', dataCorrecao: it.dataCorrecao || '', dataLiberacao: it.dataLiberacao || '', obs: it.obs || '', ...(it.ctl || {}) };
+      dataMinuta: it.dataMinuta || '', dataCorrecao: it.dataCorrecao || '', dataLiberacao: it.dataLiberacao || '', obs: it.obs || '', ...(it.ctl || {}), _ck: Object.keys(it.ctl || {}) };
   }
   function sessaoDoRepo(o, itens, previa, regrasDesignacao, regrasEtq, julg, fora) {
     var data = o.date || isoDeBr(o.nome), m = o.marcos || {};
