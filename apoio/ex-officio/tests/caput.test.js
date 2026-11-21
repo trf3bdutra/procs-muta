@@ -262,3 +262,9 @@ test('Mesa: capacidade e carga à direita, no padrão da esteira',()=>{
   const cap=require('fs').readFileSync(require('path').join(__dirname,'../../../caput/triagem/index.html'),'utf8');
   assert.ok(cap.includes('.mb.emb .lay{grid-template-columns:minmax(0,1fr) 262px!important}.mb.emb .side{order:2}.mb.emb .side{gap:18px!important}.mb.emb .side .card{background:transparent!important;border:0!important;border-top:1px solid #235a55!important'));
 });
+
+test('Pautas: gravação ocupada (mesa gravando) não vira laço que trava a página',()=>{
+  const cap=require('fs').readFileSync(require('path').join(__dirname,'../../../caput/triagem/index.html'),'utf8');
+  assert.ok(cap.includes('else if (r && r.ocupado) {')&&cap.includes('G.prox = Date.now() + 2000; }'),'espera antes de tentar de novo');
+  assert.ok(cap.includes("if (n && !G.gravando && pronto && !s.gravando?.()) {"),'não dispara com outra gravação em curso');
+});
