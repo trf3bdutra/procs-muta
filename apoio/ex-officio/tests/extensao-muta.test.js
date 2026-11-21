@@ -297,14 +297,14 @@ test('extensão 0.22: redesenho das etiquetas do PJe por tipo (categorias do cat
 test('extensão 0.23: ícones de sinalização (lista e cabeçalho dos autos) com quadro de detalhes; recolher a coluna da lista', () => {
   const c = read('extensao/conteudo-pje.js');
   assert.match(c, /function sinaisHtml\(k, r\)/); assert.match(c, /function dialogoSinais\(k, foco\)/); assert.match(c, /function sinaisAutos\(numero\)/);
-  assert.match(c, /\['ic', 'bloqueio', 'Intercorrências', 'al'\], \['pd', 'bandeira', 'Pendências', 'av'\], \['nt', 'nota', 'Notas', 'mu'\]/);
+  assert.match(c, /\['ic', 'triangulo', 'Intercorrências', 'al'\], \['pd', 'alfinete', 'Pendências', 'av'\], \['nt', 'nota', 'Notas', 'mu'\]/);
   assert.match(c, /function botaoColuna\(C\)/); assert.match(c, /hero18810:lista-oculta/);
   assert.match(read('apoio/ex-officio/api/_ficha.js'), /notas: linhas\(\(r\.origem \|\| \{\}\)\['Observações'\]\)/);
 });
 
 test('extensão 0.24: quadro de sinalizações em 4 painéis (notas com síntese e questões), marcar e incluir gravam na ficha', () => {
   const c = read('extensao/conteudo-pje.js'), f = read('extensao/fundo.js');
-  assert.match(c, /col\('av', ico\('sino', 14\), 'Avisos'[\s\S]*col\('ic', ico\('bloqueio', 14\), 'Intercorrências'[\s\S]*col\('pd', ico\('bandeira', 14\), 'Pendências'[\s\S]*col\('nt', ico\('nota', 14\), 'Notas'/);
+  assert.match(c, /col\('av', ico\('sino', 14\), 'Avisos'[\s\S]*col\('ic', ico\('triangulo', 14\), 'Intercorrências'[\s\S]*col\('pd', ico\('alfinete', 14\), 'Pendências'[\s\S]*col\('nt', ico\('nota', 14\), 'Notas'/);
   assert.match(c, /grid-template-columns:repeat\(4,minmax\(0,1fr\)\)/); assert.match(c, /<b>Síntese<\/b>/); assert.match(c, /<b>Questões<\/b>/);
   assert.match(f, /msg\.tipo !== 'muta-sinal'/); assert.match(f, /'✓ ' \+ semMarca\(L\[i\]\)/); assert.match(f, /\/api\/pauta\?ficha=1', \{ method: 'POST'/);
   assert.match(read('apoio/ex-officio/api/_ficha.js'), /sintese: String\(t\['Síntese Processual'\]/);
@@ -340,7 +340,7 @@ test('inteiro teor 0.27: sentença de mérito antes dos embargos; dispositivo co
 
 test('extensão 0.28: designação como etiqueta (minuta e correção) e trilha de produção minutado · corrigido · liberado', () => {
   const c = read('extensao/conteudo-pje.js');
-  assert.match(c, /'Minuta: ' \+ escS\(r\.servidor\)/); assert.match(c, /'Correção: ' \+ escS\(r\.corretor\)/);
+  assert.match(c, /pes\(r\.servidor, 'Minuta', 'm-pes-m'\)/); assert.match(c, /pes\(r\.corretor, 'Correção', 'm-pes-c'\)/);
   assert.match(c, /passo\(!!r\.minutado, 'Min\.', r\.minutado\)[\s\S]*passo\(!!r\.corrigido, 'Corr\.', r\.corrigidoEm\)[\s\S]*'Lib\.', r\.liberadoEm/);
   assert.match(read('apoio/ex-officio/api/_ficha.js'), /corrigidoEm: p\['Data da Revisão'\]/);
 });

@@ -639,8 +639,8 @@
     d.innerHTML = '<div class="hd-bx"><header><div><b>' + fmt + '</b><small>' + escS([E ? E.etapa(x) : '', x.servidor ? 'Minuta: ' + x.servidor : '', x.corretor ? 'Correção: ' + x.corretor : '', x.tarefa ? 'Tarefa: ' + x.tarefa : ''].filter(Boolean).join(' · ')) + '</small></div><span class="hd-st" id="hd-st"></span><button type="button" data-hd-x aria-label="Fechar">×</button></header>' +
       '<div class="hd-g">' +
       col('av', ico('sino', 14), 'Avisos', S0.urg.length + S0.av.length, avisos ? '<ul>' + avisos + '</ul>' : '<p class="hd-v">Nenhum aviso.</p>') +
-      col('ic', ico('bloqueio', 14), 'Intercorrências', abertas(ic), lista(ic, 'ic', 'Nenhuma intercorrência.'), 'Nova intercorrência') +
-      col('pd', ico('bandeira', 14), 'Pendências', abertas(pend), lista(pend, 'pd', 'Nenhuma pendência.'), 'Nova pendência') +
+      col('ic', ico('triangulo', 14), 'Intercorrências', abertas(ic), lista(ic, 'ic', 'Nenhuma intercorrência.'), 'Nova intercorrência') +
+      col('pd', ico('alfinete', 14), 'Pendências', abertas(pend), lista(pend, 'pd', 'Nenhuma pendência.'), 'Nova pendência') +
       col('nt', ico('nota', 14), 'Notas', nt.length, notasCorpo, 'Nova nota') +
       '</div><footer>Marcar resolve (✓) e o campo inclui: grava na ficha do processo, com o seu login do painel. Esc fecha.</footer></div>';
     d._L = { ic: ic, pd: pend, nt: nt };
