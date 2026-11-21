@@ -182,6 +182,42 @@ em.it{font-family:var(--eser);font-style:italic;font-weight:400;color:var(--eo)}
 .tb tr.gh button i{font:400 12px var(--emono);font-style:normal;color:var(--eo2);width:10px}
 .tb tr.gh button small{font:400 10.5px var(--emono);color:var(--em)}
 .tb tr.gh button:hover{color:var(--eo2)}
+.tb.mx{min-width:1100px}
+.tb.mx th.v{width:28px;height:128px;padding:0 0 6px;position:relative;vertical-align:bottom}
+.tb.mx th.v div{writing-mode:vertical-rl;transform:rotate(180deg);margin:0 auto;letter-spacing:.08em;line-height:1.2;max-height:110px}
+.tb.mx th.v .x{position:absolute;top:2px;left:50%;transform:translateX(-50%)}
+.tb.mx td{vertical-align:middle}
+.tb.mx td.fx{font-size:11.5px;white-space:nowrap;border-left:1px solid var(--el);color:var(--ei2)}
+.tb.mx td.fx-res{white-space:normal;min-width:150px;max-width:220px;font-weight:600;color:var(--ei)}
+.tb.mx td.fx-mpf{white-space:normal;min-width:90px}
+.tb.mx td.fx.al{color:var(--cr);font-weight:700}
+.tb.mx .vz0{color:var(--el2)}
+.tb.mx th.fxh{white-space:nowrap;border-left:1px solid var(--el)}
+.tb.mx tr.sup th{padding:6px 8px 0;border-bottom:0}
+.tb.mx tr.sup th.g1,.tb.mx tr.sup th.g2{border-left:1px solid var(--el);border-top:2px solid var(--eo);color:var(--eo2)}
+.tb.mx tr.sup th.g2{border-top-color:var(--eg2);color:var(--eg)}
+.tb.mx tr.sup small{letter-spacing:.04em;text-transform:none;color:var(--em);margin-left:6px}
+.tb.mx .rc{font-size:10.5px;color:var(--em)}
+.tb.mx td:first-child{min-width:250px;white-space:nowrap}
+.tb.mx td:first-child .pt{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;max-width:300px}
+.tb.mx td.nm{white-space:nowrap}
+.tb.mx td.f{text-align:center;border-left:1px solid var(--el);padding:4px;width:28px}
+.tb.mx td.pa{font-size:12px;max-width:170px}
+.tb.mx td.ob{font-size:12px;line-height:1.45;color:var(--ei2);min-width:280px;max-width:460px}
+.tb.mx td.ob span{display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical;overflow:hidden}
+.tb.mx .mk{display:inline-block;width:10px;height:10px}
+.mk-b{width:22px;height:22px;border:1px dashed var(--el2);background:var(--ew);cursor:pointer;display:grid;place-items:center;padding:0}
+.mk-b[aria-pressed=true]{border-style:solid}
+.tb.mx .mxg{display:block;margin-top:4px;max-width:230px;height:24px;font-size:11px}
+.mxo{width:100%;min-height:44px;border:1px solid var(--el2);background:var(--ew);color:var(--ei);font:12px/1.45 var(--font);padding:4px 6px;resize:vertical}
+.tb tr.mxh td{padding:8px 18px;font-size:12.5px;line-height:1.45}
+.tb tr.mxh .q{display:inline-block;width:9px;height:9px;margin-right:8px}
+.tb tr.mxh .res{color:var(--em)}
+.tb tr.mxh small{font:400 10px var(--emono);letter-spacing:.1em;text-transform:uppercase;color:var(--em);margin-left:6px}
+.x{border:0;background:none;color:var(--cr);font:700 14px var(--font);cursor:pointer;padding:0 4px}
+.mxf{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:flex-end;padding:12px 0 0}
+.mxf label{display:flex;flex-direction:column;gap:4px;font:400 9.5px var(--emono);letter-spacing:.1em;text-transform:uppercase;color:var(--em);flex:1 1 260px}
+.mxf input{height:30px;font:13px var(--font);text-transform:none;letter-spacing:0}
 .vazio{padding:14px 0 0;color:var(--em);font-style:italic;font-size:12.5px}
 /* fila */
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));margin:0 -18px -16px}
@@ -302,7 +338,7 @@ const ETAPAS_COMPLETO=[['minutar','1 · A minutar','sem minuta','minuta ainda n�
 const ETAPAS_SIMPLES=[['minutar','1 · A minutar','sem minuta','minuta ainda não registrada'],['minutada','2 · Minutada','minutadas','sem correção registrada'],['corrigida','3 · Corrigida','corrigidas','falta liberar no PJe'],['liberada','4 · Liberada','liberadas','prontas para a sessão']];
 const completo=()=>S.vista==='meus';
 const etapas=()=>completo()?ETAPAS_COMPLETO:ETAPAS_SIMPLES;
-const S={usuario:'',gestor:false,sessoes:[],data:'',itens:[],por:{},lotes:{},vista:'meus',etapa:'',fora:'',q:'',aberto:'',ver:{},fechados:new Set(),minAb:new Set(),colTipo:'pauta',loteSel:'',colTit:'',loteSes:''};
+const S={usuario:'',gestor:false,sessoes:[],data:'',itens:[],por:{},lotes:{},vista:'meus',etapa:'',fora:'',q:'',aberto:'',ver:{},fechados:new Set(),minAb:new Set(),colTipo:'pauta',loteSel:'',colTit:'',loteSes:'',mxModo:'ver',mxRasc:{},mxForm:''};
 
 async function get(url){const r=await fetch(url,{credentials:'same-origin',headers:{'Accept':'application/json'}});const j=await r.json().catch(()=>({}));if(!r.ok){const e=new Error(j.erro||('HTTP '+r.status));e.status=r.status;throw e}return j}
 /* o gestor lê os lotes como na gestão (&modo=cg): vê todos os processos, inclusive os ainda ocultos da página da equipe */
@@ -465,8 +501,9 @@ function render(){
    </div>
    <p class="lx-nk">Nesta página</p>
    <a class="ir" href="#fluxo"><i>01</i><span>Fluxo da minuta</span></a>
-   <a class="ir" href="#procs"><i>02</i><span>Processos</span><small>${lst.length}</small></a>
-   ${S.aberto?`<a class="ir" href="#proc" aria-current="true"><i>03</i><span>Item ${esc((S.linhas.find(r=>r.x.cnj===S.aberto)||{}).x.item)}</span></a>`:''}
+   <a class="ir" href="#matriz"><i>02</i><span>Matriz</span></a>
+   <a class="ir" href="#procs"><i>03</i><span>Processos</span><small>${lst.length}</small></a>
+   ${S.aberto?`<a class="ir" href="#proc" aria-current="true"><i>04</i><span>Item ${esc((S.linhas.find(r=>r.x.cnj===S.aberto)||{}).x.item)}</span></a>`:''}
    <p class="lx-nk" style="margin-top:14px">Etapas</p>
    ${etapas().map(([k,r])=>`<button type="button" class="ir" data-et="${k}" aria-current="${S.etapa===k}"><span>${esc(r.replace(/^\d · /,''))}</span><small>${n(k)}</small></button>`).join('')}
    <button type="button" class="ir" data-fo="retido" aria-current="${S.fora==='retido'}"><span>Retirados de pauta</span><small>${n('retido')}</small></button>
@@ -489,7 +526,9 @@ function render(){
     </div>
    </section>
 
-   <section class="sec" id="procs"><div class="shd"><div><p class="k">02 / Lista</p><h2>Processos <em class="it">${S.etapa?esc((etapas().find(e=>e[0]===S.etapa)||[])[2]):S.fora==='retido'?'retirados':S.fora==='minutar'?'sem minuta':'da '+(S.vista==='meus'?'correção':S.loteSel?'coleção':'sessão')}.</em></h2><p class="d">${lst.length} de ${esc0.length}, por etapa e na ordem da pauta. A barra mostra as etapas; a vazada com contorno é a etapa pulada.</p></div>
+   ${matrizHtml(esc0)}
+
+   <section class="sec" id="procs"><div class="shd"><div><p class="k">03 / Lista</p><h2>Processos <em class="it">${S.etapa?esc((etapas().find(e=>e[0]===S.etapa)||[])[2]):S.fora==='retido'?'retirados':S.fora==='minutar'?'sem minuta':'da '+(S.vista==='meus'?'correção':S.loteSel?'coleção':'sessão')}.</em></h2><p class="d">${lst.length} de ${esc0.length}, por etapa e na ordem da pauta. A barra mostra as etapas; a vazada com contorno é a etapa pulada.</p></div>
      <span class="seg pil" role="group" aria-label="Exibição da lista"><button type="button" id="abre-t" aria-pressed="${!S.fechados.size}" title="Expandir todos os grupos">Expandir</button><button type="button" id="fecha-t" aria-pressed="${S.fechados.size>=etapas().length}" title="Recolher todos os grupos">Recolher</button><i class="sep" aria-hidden="true"></i><button type="button" id="mn-t" aria-pressed="${minTodas(lst)}" title="Mostrar, abaixo de cada processo, a minuta vigente no Collectio">${minTodas(lst)?'Fechar minutas':'Abrir todas as minutas'}</button></span></div>
     <div class="box"><div class="tw"><table class="tb">
      <thead><tr><th scope="col">Item</th><th scope="col">Processo</th><th scope="col">Minuta</th><th scope="col">Correção</th><th scope="col">Etapas</th><th scope="col">Alertas</th><th scope="col"><span class="sr">Abrir</span></th></tr></thead>
@@ -569,6 +608,65 @@ function colEtapa([k,r,t,d],base){
 }
 
 /* ---------- processo aberto ---------- */
+/* ---------- matriz da coleção ----------
+   Grupos (tipo de caso, com o resultado proposto), colunas de variação e a observação de cada processo, como na matriz do
+   Collectio. Em qualquer coleção, inclusive na pauta da sessão: na pauta, junta as matrizes dos lotes de onde vêm os processos.
+   "Construir" abre um rascunho na própria página (grupos, colunas, classificação, marcas e observação); a prévia não grava. */
+/* na pauta (e nos lotes dentro dela) a matriz já vem com os campos do prontuário da sessão, editados no Ex Officio */
+const FIXOS=[['tipo','Tipo',x=>((x.ctl||{}).cartao||{}).tipoJ],['prelim','Prelim.',x=>(x.ctl||{}).prelim],['mpf','MPF',x=>{const c=x.ctl||{};return [c.mpf,c.parecer].filter(Boolean).join(' · ')}],
+  ['tempest','Tempest.',x=>(x.ctl||{}).tempest],['preparo','Preparo',x=>(x.ctl||{}).preparo],['honor','Honorários',x=>(x.ctl||{}).honor],['consect','Custas · consect.',x=>(x.ctl||{}).consect],
+  ['topico','Tópico síntese',x=>(x.ctl||{}).topico],['sopref','Sustentação',x=>(x.ctl||{}).sopref],['res','Resultado',x=>(x.ctl||{}).resJulg]];
+const CURTO={'Há preliminares':'Há','Sem preliminares':'Sem','Sem honorários recursais':'Sem recursais','Isento (ente público/MP)':'Isento','Justiça gratuita':'AJG','Interesse público ou social (178, I)':'178, I','Com parecer':'com parecer','Intimado sem manifestação':'sem manifestação','Embargos de Declaração':'ED','Remessa Necessária':'Remessa','Agravo Interno':'AgInt','Agravo de Instrumento':'AI','Não se aplica':'n/a'};
+const curto=v=>String(v||'').split(' · ').map(s=>CURTO[s]||s).join(' · ');
+const ALERTA_F=/intempest|n[ãa]o recolhido|n[ãa]o verificado|irregular|pendente|sem manifesta/i;
+const comFixos=()=>!S.loteSel||!!S.loteSes;
+const chaveMx=()=>S.loteSel?S.loteSel+'|'+S.loteSes:'pauta-'+S.data;
+function matrizBase(){
+  const ls=S.loteSel?[S.lotes[S.loteSel]].filter(Boolean):Object.values(S.lotes), grupos=[], colunas=[], itens={};
+  ls.forEach(l=>{
+    (l.colunas||[]).forEach(c=>{if(!colunas.some(q=>q.id===c.id))colunas.push({id:c.id,rotulo:c.rotulo||c.id})});
+    (l.grupos||[]).forEach(g=>grupos.push({id:l.id+':'+g.id,rotulo:g.rotulo||g.id,cor:g.cor||'#5d6b72',resultado:g.resultado||'',col:ls.length>1?(l.titulo||l.id):''}));
+  });
+  S.itens.forEach(x=>{const z=S.por[x.cnj],it=z&&z.it;itens[x.cnj]={grupo:it&&it.grupo&&z?z.lote+':'+it.grupo:'',variacoes:(it&&it.variacoes||[]).slice(),observacao:(it&&it.observacao)||''}});
+  return {grupos,colunas,itens};
+}
+function matriz(){const k=chaveMx();return S.mxRasc[k]||matrizBase()}
+function rascunho(){const k=chaveMx();if(!S.mxRasc[k])S.mxRasc[k]=JSON.parse(JSON.stringify(matrizBase()));return S.mxRasc[k]}
+const REC={'APELAÇÃO CÍVEL':'ApCiv','AGRAVO DE INSTRUMENTO':'AI','APELAÇÃO / REMESSA NECESSÁRIA':'ApRemNec','REMESSA NECESSÁRIA CÍVEL':'RemNec','Agravo de instrumento':'AI','Apelação':'ApCiv'};
+const rec=c=>REC[c]||REC[String(c||'').toUpperCase()]||String(c||'').split(/[\s\/]+/).filter(Boolean).map(w=>w[0]).join('').toUpperCase().slice(0,6);
+function matrizHtml(base){
+  const M=matriz(), ed=S.mxModo==='construir', cols=M.colunas, fx=comFixos()?FIXOS:[], nc=cols.length+fx.length+(fx.length?-3:0);
+  const linhas=base.slice().sort((a,b)=>a.item-b.item);
+  const ordem=M.grupos.map(g=>({g,rs:linhas.filter(r=>(M.itens[r.x.cnj]||{}).grupo===g.id)})).filter(o=>o.rs.length||ed);
+  const soltos=linhas.filter(r=>!M.grupos.some(g=>g.id===(M.itens[r.x.cnj]||{}).grupo));
+  const nGr=M.grupos.length, classif=linhas.length-soltos.length;
+  const optG=sel=>`<option value="">Não classificado</option>`+M.grupos.map(g=>`<option value="${esc(g.id)}"${g.id===sel?' selected':''}>${esc(g.rotulo.slice(0,70))}</option>`).join('');
+  const linha=(r,cor)=>{const x=r.x,m=M.itens[x.cnj]||{variacoes:[],observacao:''},pt=String(x.partes||'').split(/\s+x\s+/i);
+    const sel=ed?`<select class="sel mxg" data-mxgrp="${esc(x.cnj)}" aria-label="Grupo do processo">${optG(m.grupo)}</select>`:'';
+    return `<tr class="mr">
+     ${fx.length?`<td><span class="ii">${esc(x.item)}</span> <span class="cnj">${esc(x.cnj.slice(0,15))}</span> <span class="mono rc">${esc(rec(x.classe))}</span><span class="pt">${esc(x.partes)}</span>${sel}</td>`
+       :`<td><span class="ii">${esc(x.item)}</span> <span class="cnj">${esc(x.cnj.slice(0,15))}</span>${sel}</td><td class="pa">${esc(pt[0]||'')}</td><td class="pa">${esc(pt.slice(1).join(' x '))}</td><td class="mono">${esc(rec(x.classe))}</td>`}
+     <td class="nm">${esc(x.servidor||'—')} · ${esc(x.corretor||'—')}</td>
+     ${fx.map(([k,,f])=>{const v=f(x);return `<td class="fx fx-${k}${v&&ALERTA_F.test(v)?' al':''}" title="${esc(v||'')}">${v?esc(k==='res'?v:curto(v)):'<span class="vz0">—</span>'}</td>`}).join('')}
+     ${cols.map(c=>{const on=m.variacoes.includes(c.id);return `<td class="f">${ed?`<button type="button" class="mk-b" data-mxcell="${esc(x.cnj)}|${esc(c.id)}" aria-pressed="${on}" aria-label="${esc(c.rotulo)}">${on?`<i class="mk" style="background:${cor}"></i>`:''}</button>`:on?`<i class="mk" style="background:${cor}" title="${esc(c.rotulo)}"></i>`:''}</td>`}).join('')}
+     <td class="ob">${ed?`<textarea class="mxo" data-mxobs="${esc(x.cnj)}" rows="2" aria-label="Observação">${esc(m.observacao)}</textarea>`:`<span>${esc(m.observacao)}</span>`}</td></tr>`;};
+  const banda=(rot,res,cor,n,col,id)=>`<tr class="gh mxh"><td colspan="${(fx.length?3:6)+cols.length+fx.length}"><span class="q" style="background:${cor}"></span><b>${esc(rot)}</b>${res?` · <span class="res">${esc(res)}</span>`:''}${col?` <span class="tg in">${esc(col)}</span>`:''} <small>${n} processo${n===1?'':'s'}</small>${ed&&id?` <button type="button" class="x" data-mxgdel="${esc(id)}" title="Excluir o grupo (os processos voltam para não classificados)">×</button>`:''}</td></tr>`;
+  const corpo=ordem.map(o=>banda(o.g.rotulo,o.g.resultado,o.g.cor,o.rs.length,o.g.col,o.g.id)+o.rs.map(r=>linha(r,o.g.cor)).join('')).join('')
+    +(soltos.length?banda('Não classificados','',' #9aa0a8',soltos.length,'','')+soltos.map(r=>linha(r,'#9aa0a8')).join(''):'');
+  const form=S.mxForm==='g'?`<form class="mxf" id="mxf-g"><label>Grupo (tipo de caso)<input class="sel" name="r" required placeholder="Ex.: Concursos: anulação de questões"></label><label>Resultado proposto<input class="sel" name="s" placeholder="Ex.: Negar provimento por monocrática"></label><button class="b pri">Adicionar grupo</button><button type="button" class="b" data-mxform="">Cancelar</button></form>`
+    :S.mxForm==='c'?`<form class="mxf" id="mxf-c"><label>Coluna (variação)<input class="sel" name="r" required placeholder="Ex.: Prescrição"></label><button class="b pri">Adicionar coluna</button><button type="button" class="b" data-mxform="">Cancelar</button></form>`:'';
+  return `<section class="sec" id="matriz"><div class="shd"><div><p class="k">02 / Matriz</p><h2>Matriz da <em class="it">${S.loteSel?'coleção':'sessão'}.</em></h2><p class="d">${fx.length?'Campos fixos do prontuário da sessão (tipo, preliminar, MPF, tempestividade, preparo, honorários, custas e consectários, tópico síntese, sustentação e resultado), mais as variações dos lotes. ':''}${nGr?`${nGr} grupo${nGr>1?'s':''} · ${cols.length} coluna${cols.length===1?'':'s'} de variação · ${classif} de ${linhas.length} processos classificados.`:'Ainda sem grupos.'} Dá para construir em qualquer coleção.</p></div>
+     <span class="seg pil" role="group" aria-label="Modo da matriz"><button type="button" data-mxmodo="ver" aria-pressed="${!ed}">Ver</button><button type="button" data-mxmodo="construir" aria-pressed="${ed}">Construir</button></span></div>
+    <div class="box">
+     ${ed?`<div class="ph"><button type="button" class="b" data-mxform="g">+ Grupo</button><button type="button" class="b" data-mxform="c">+ Coluna</button>${S.mxRasc[chaveMx()]?'<button type="button" class="b" id="mx-desc">Descartar rascunho</button>':''}<span class="aviso" style="margin:0">Rascunho da prévia · não grava</span></div>${form}`:''}
+     <div class="tw"><table class="tb mx">
+      <thead>${fx.length?`<tr class="sup"><th colspan="2"></th><th colspan="${fx.length}" class="g1">Prontuário da sessão <small>editado no Ex Officio</small></th>${cols.length?`<th colspan="${cols.length}" class="g2">Variações</th>`:''}<th></th></tr>`:''}<tr>${fx.length?'<th scope="col">Processo</th>':'<th scope="col">Processo</th><th scope="col">Exequente</th><th scope="col">Executado</th><th scope="col">Rec.</th>'}<th scope="col">Minuta · correção</th>${fx.map(([k,r])=>`<th scope="col" class="fxh">${esc(r)}</th>`).join('')}${cols.map(c=>`<th scope="col" class="v"><div>${esc(c.rotulo)}</div>${ed?`<button type="button" class="x" data-mxcdel="${esc(c.id)}" title="Excluir a coluna">×</button>`:''}</th>`).join('')}<th scope="col">Observação</th></tr></thead>
+      <tbody>${corpo||`<tr><td colspan="${(fx.length?3:6)+cols.length+fx.length}" class="vazio">Nenhum processo neste recorte.</td></tr>`}</tbody>
+     </table></div>
+    </div>
+   </section>`;
+}
+
 /* linha de etapas do processo, como no cartão da pauta: círculo por etapa, a linha de progresso e o "agora" na próxima */
 const ICO={m:'<path d="M4 20h4l10-10-4-4L4 16z"/>',r:'<path d="M5 12.5l4.5 4.5L19 7.5"/>',p:'<path d="M12 3v11"/><path d="M7.5 9.5L12 14l4.5-4.5"/><path d="M5 20h14"/>',e:'<path d="M4 12l15-7-5 15-3-6z"/>'};
 const svg=(d,s)=>`<svg viewBox="0 0 24 24" width="${s||14}" height="${s||14}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
@@ -592,7 +690,7 @@ function procHtml(){
   else if(r.etapa==='corrigida')ban=`<p class="ban in">Corrigida. Ao colar no editor do PJe, marque no Collectio a versão importada.</p>`;
   const aj=it&&Array.isArray(it.ajustes)?it.ajustes.filter(a=>Array.isArray(a)&&!/^se[cç][aã]o$/i.test(String(a[0]||''))):[];
   const pd=it&&Array.isArray(it.pendencias)?it.pendencias:[];
-  return `<section class="sec" id="proc"><div class="shd"><div><p class="k">03 / Processo · item ${esc(x.item)}</p><h2>${esc(x.classe)} · <em class="it">${esc(x.assunto)}.</em></h2></div></div>
+  return `<section class="sec" id="proc"><div class="shd"><div><p class="k">04 / Processo · item ${esc(x.item)}</p><h2>${esc(x.classe)} · <em class="it">${esc(x.assunto)}.</em></h2></div></div>
    <div class="box">
     <div class="pf-h">
      <div class="pf-id"><span class="cnj">${esc(x.cnj)}</span><span class="pt">${esc(x.partes)}</span><span class="pt">Minuta ${esc(x.servidor||'—')} · correção ${esc(x.corretor||'—')}${z?' · '+(z.compart?'minuta e registros da coleção '+esc(z.titulo):esc(z.titulo)):''}</span></div>
@@ -720,6 +818,19 @@ function ligar(){
   $$('[data-ctipo]').forEach(b=>b.onclick=()=>{S.colTipo=b.dataset.ctipo;render()});
   $$('select[data-col]').forEach(s=>s.onchange=()=>{if(s.value)trocaColecao(s.value,s.dataset.col==='pauta'?S.data:'');else trocaSessao(S.data)});
   $$('[data-grp]').forEach(b=>b.onclick=()=>{const k=b.dataset.grp;S.fechados.has(k)?S.fechados.delete(k):S.fechados.add(k);render()});
+  $$('[data-mxmodo]').forEach(b=>b.onclick=()=>{S.mxModo=b.dataset.mxmodo;S.mxForm='';render();ir('matriz')});
+  $$('[data-mxform]').forEach(b=>b.onclick=()=>{S.mxForm=b.dataset.mxform;render();ir('matriz');const i=$('.mxf input');if(i)i.focus()});
+  const fg=$('#mxf-g');if(fg)fg.onsubmit=e=>{e.preventDefault();const R=rascunho(),f=new FormData(fg),CR=['#2f6db5','#7a5cc2','#1f8a70','#c07a12','#b8562f','#3a4a5c','#8a5a9e','#4f7f3a','#a33b5c'];
+    R.grupos.push({id:'novo:g'+Date.now().toString(36),rotulo:String(f.get('r')).trim(),resultado:String(f.get('s')||'').trim(),cor:CR[R.grupos.length%CR.length],col:''});S.mxForm='';render();ir('matriz')};
+  const fc=$('#mxf-c');if(fc)fc.onsubmit=e=>{e.preventDefault();const R=rascunho(),r=String(new FormData(fc).get('r')).trim();let id=r.normalize('NFD').replace(/[^A-Za-z]/g,'').slice(0,3).toUpperCase()||'C';while(R.colunas.some(c=>c.id===id))id+='X';
+    R.colunas.push({id,rotulo:r});S.mxForm='';render();ir('matriz')};
+  $$('[data-mxgdel]').forEach(b=>b.onclick=()=>{const R=rascunho(),g=b.dataset.mxgdel;R.grupos=R.grupos.filter(x=>x.id!==g);Object.values(R.itens).forEach(m=>{if(m.grupo===g)m.grupo=''});render();ir('matriz')});
+  $$('[data-mxcdel]').forEach(b=>b.onclick=()=>{const R=rascunho(),c=b.dataset.mxcdel;R.colunas=R.colunas.filter(x=>x.id!==c);Object.values(R.itens).forEach(m=>{m.variacoes=m.variacoes.filter(v=>v!==c)});render();ir('matriz')});
+  $$('[data-mxgrp]').forEach(s=>s.onchange=()=>{const R=rascunho();(R.itens[s.dataset.mxgrp]=R.itens[s.dataset.mxgrp]||{variacoes:[],observacao:''}).grupo=s.value;const y=scrollY;render();scrollTo(0,y)});
+  $$('[data-mxcell]').forEach(b=>b.onclick=()=>{const R=rascunho(),[c,v]=b.dataset.mxcell.split('|'),m=R.itens[c]=R.itens[c]||{grupo:'',variacoes:[],observacao:''};
+    m.variacoes=m.variacoes.includes(v)?m.variacoes.filter(q=>q!==v):m.variacoes.concat(v);const y=scrollY;render();scrollTo(0,y)});
+  $$('[data-mxobs]').forEach(t=>t.oninput=()=>{const R=rascunho();(R.itens[t.dataset.mxobs]=R.itens[t.dataset.mxobs]||{grupo:'',variacoes:[]}).observacao=t.value});
+  const md=$('#mx-desc');if(md)md.onclick=()=>{delete S.mxRasc[chaveMx()];render();ir('matriz')};
   $$('[data-min]').forEach(b=>b.onclick=e=>{e.stopPropagation();const c=b.dataset.min;S.minAb.has(c)?S.minAb.delete(c):S.minAb.add(c);render()});
   const mt=$('#mn-t');if(mt)mt.onclick=()=>{const l=filtradas().filter(temMin);if(minTodas(filtradas()))l.forEach(r=>S.minAb.delete(r.x.cnj));else{l.forEach(r=>S.minAb.add(r.x.cnj));S.fechados.clear()}render();ir('procs')};
   const at=$('#abre-t');if(at)at.onclick=()=>{S.fechados.clear();render();ir('procs')};
