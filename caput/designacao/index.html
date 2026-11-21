@@ -234,7 +234,13 @@ body.emb #b-aplicar{display:none}body.emb .lay{grid-template-columns:262px minma
     var ass={};itens.forEach(function(x){ass[Nn(x.as)]=1;});var hd={},hc={};
     (MAT.minutas||[]).forEach(function(r){if(r[7]===ss.data)return;var k=Nn(r[4]);if(!ass[k])return;if(r[0]){hd[k]=hd[k]||{};hd[k][r[0]]=(hd[k][r[0]]||0)+1;}if(r[5]){hc[k]=hc[k]||{};hc[k][r[5]]=(hc[k][r[5]]||0)+1;}});
     var pr=API.regrasProdutividade()||{};
-    return {vivo:API,sessao:{id:ss.id,data:ss.data,fases:ss.fases||{},fora:ss.foraSessao||{d:[],c:[]}},periodo:Z.periodo&&Z.periodo.efetivo,itens:itens,
+    /* outras pautas com período que cruza o desta: a carga delas ocupa parte dos mesmos dias úteis */
+    var hj0=new Date().toISOString().slice(0,10),wE=(pr.pesos&&pr.pesos.ed)||0.5,wV=(pr.pesos&&pr.pesos.voto)||1;
+    var outras=S.sessoes.filter(function(o){return o.id!==ss.id&&o.data>=hj0&&o.itens&&o.itens.length;}).map(function(o){var Zo=null;try{Zo=API.designacao(o.id);}catch(e){Zo=null;}
+      var pe=Zo&&Zo.periodo&&Zo.periodo.efetivo;if(!pe||!pe.de||!pe.ate)return null;var c={};
+      Zo.linhas.forEach(function(l){if(!l.servidor)return;c[l.servidor]=(c[l.servidor]||0)+((l.tipo==='ED'||l.tipo==='AgInt')?wE:wV);});
+      return {data:o.data,de:pe.de,ate:pe.ate,carga:c};}).filter(Boolean);
+    return {vivo:API,outras:outras,sessao:{id:ss.id,data:ss.data,fases:ss.fases||{},fora:ss.foraSessao||{d:[],c:[]}},periodo:Z.periodo&&Z.periodo.efetivo,itens:itens,
       equipe:(S.equipe||[]).filter(function(m){return m.nome!=='CM';}).map(function(m){return {nome:m.nome,cargo:m.cargo,papel:m.papel,minuta:m.minuta,correcao:m.correcao,auto:m.auto,exp:m.exp,pref:m.pref,nao:m.nao,aliases:m.aliases,aus:m.aus,minutaEventual:m.minutaEventual};}),
       regras:{ordem:(S.desig&&S.desig.ordem)||[],rows:(S.desig&&S.desig.rows)||{}},hist:{d:hd,c:hc},prod:{pesos:pr.pesos||{},metaPadrao:pr.metaPadrao||{voto:3},metas:pr.metas||{}}};
   }
@@ -255,7 +261,7 @@ body.emb #b-aplicar{display:none}body.emb .lay{grid-template-columns:262px minma
   var FER={'2026-11-20':'Consciência Negra','2026-12-08':'Dia da Justiça','2026-12-25':'Natal'};
   var VIVO=D.vivo||null;
   var hoje=new Date().toISOString().slice(0,10);
-  var de=(D.periodo&&D.periodo.de)||'2026-11-23', ate=(D.periodo&&D.periodo.ate)||'2026-11-27';
+  var F0=D.sessao.fases||{}, de=(D.periodo&&D.periodo.de)||F0.inicio||D.sessao.data, ate=(D.periodo&&D.periodo.ate)||F0.minutas||D.sessao.data;
   document.getElementById('tit').textContent='Mesa de designação · pauta de '+D.sessao.data.slice(8,10)+'/'+D.sessao.data.slice(5,7)+'/'+D.sessao.data.slice(0,4);
   /* embed=1: dentro de Pautas › Designação; o botão alterna a tela cheia */
   var EMBED=new URLSearchParams(location.search).get('embed')==='1';
@@ -270,6 +276,10 @@ body.emb #b-aplicar{display:none}body.emb .lay{grid-template-columns:262px minma
   EQ.forEach(function(m){if(ausCad(m))AUS[m.nome]=true;});
   /* fora das minutas ou das correções só nesta sessão (painel da sessão › Equipe da sessão) */
   var FS=D.sessao.fora||{},FD={},FC={};(FS.d||[]).forEach(function(n){FD[n]=true;});(FS.c||[]).forEach(function(n){FC[n]=true;});
+  /* pontos que a pessoa já tem em outras pautas, na proporção dos dias úteis em comum com este período */
+  var OUT=D.outras||[];
+  function outrasCarga(n){var t=0,L=[];OUT.forEach(function(o){var v=o.carga[n]||0;if(!v)return;var a=o.de>de?o.de:de,b=o.ate<ate?o.ate:ate;if(a>b)return;var k=diasUteis(a,b),d2=diasUteis(o.de,o.ate);if(!k||!d2)return;var x=v*k/d2;t+=x;L.push(br(o.data)+': '+nf(x));});return {t:t,L:L};}
+  var capMin=function(n,du){return Math.max(0,meta(n)*du-outrasCarga(n).t);};
   var meta=function(n){var m=P.metas[N(n).toUpperCase()]||P.metas[n.toUpperCase()];return (m&&m.voto)||P.metaPadrao.voto||3;};
   var peso=function(x){return x.t==='ED'||x.t==='AgInt'?(P.pesos.ed||0.5):(P.pesos.voto||1);};
   var NOMEL={'2886':'28,86% · lote','0712-imo-a':'Atraso na entrega do imóvel · lote A','0712-imo-b':'Atraso na entrega do imóvel · lote B','0712-imo-c':'Atraso na entrega do imóvel · lote C','0712-lei-1':'Lote lei-1','0712-avulsos':'Avulsos · lote','0712-concurso':'Concurso público · lote','0712-med-entes':'Medicamentos · entes','0712-rev-1':'Revisão · lote 1','0712-rev-2':'Revisão · lote 2'};
@@ -293,7 +303,7 @@ body.emb #b-aplicar{display:none}body.emb .lay{grid-template-columns:262px minma
   var K0={pen:0.6,lote:2,comp:1.5};
   function propor(){
     var du=diasUteis(de,ate), K=K0; PROP={};
-    var LD={},LC={},LT={},AS={}; PD.forEach(function(m){CAPD[m.nome]=AUS[m.nome]||FD[m.nome]?0:meta(m.nome)*du;LD[m.nome]=0;});
+    var LD={},LC={},LT={},AS={}; PD.forEach(function(m){CAPD[m.nome]=AUS[m.nome]||FD[m.nome]?0:capMin(m.nome,du);LD[m.nome]=0;});
     var pres=PC.filter(function(m){return !AUS[m.nome]&&!FC[m.nome];}); var cota=Math.ceil(IT.length/Math.max(1,pres.length)*1.05);
     PC.forEach(function(m){CAPC[m.nome]=AUS[m.nome]||FC[m.nome]?0:cota;LC[m.nome]=0;});
     var ordem=IT.slice().sort(function(a,b){var pa=(a.t==='ED'||a.t==='AgInt')?0:a.lote?1:2,pb=(b.t==='ED'||b.t==='AgInt')?0:b.lote?1:2;return pa-pb||(a.lote||'').localeCompare(b.lote||'')||a.i-b.i;});
@@ -344,11 +354,11 @@ body.emb #b-aplicar{display:none}body.emb .lay{grid-template-columns:262px minma
   function equipe(){var k=cargas();
     /* quantos processos cada pessoa tem nesta proposta: para minutar e para corrigir */
     var ND={},NC={};IT.forEach(function(x){var d=fin(x,'d'),c=fin(x,'c');if(d)ND[d]=(ND[d]||0)+1;if(c)NC[c]=(NC[c]||0)+1;});var np=function(n){return n+' processo'+(n===1?'':'s');};
-    var aus=function(n,fora,txt){return fora?'<span class="sw off" title="'+txt+'">fora da sessão</span>':'<label class="sw" title="Indisponível no período: sai da proposta e dos processos designados a ela nesta mesa (vão para a proposta; aplique para gravar)"><input type="checkbox" data-aus="'+esc(n)+'"'+(AUS[n]?' checked':'')+'>indisponível</label>';};
+    var aus=function(n,fora,txt){return '<label class="sw" title="'+(fora?txt+' (gravado na pauta). Desmarque para voltar.':'Indisponível nesta pauta: sai da proposta e dos processos designados a ela; fica gravado na pauta (fora desta sessão)')+'"><input type="checkbox" data-aus="'+esc(n)+'"'+(AUS[n]||fora?' checked':'')+'>indisponível</label>';};
     var barra=function(v,a,cap,un){var mx=Math.max(cap,v,a,1);return '<span class="bar"><i class="'+(v>cap?'x':'')+'" style="width:'+(v/mx*100).toFixed(1)+'%"></i>'+(cap&&cap<mx?'<u style="left:'+(cap/mx*100).toFixed(1)+'%" title="capacidade: '+un(cap)+'"></u>':'')+(a?'<em style="left:'+Math.min(99,a/mx*100).toFixed(1)+'%" title="já gravado: '+un(a)+'"></em>':'')+'</span>';};
     /* sessão em que a pessoa não minuta: linha recolhida, sem barra */
     document.getElementById('eq-d').innerHTML=PD.map(function(m){var cap=CAPD[m.nome]||0,v=k.Ld[m.nome]||0,a=k.La[m.nome]||0,fora=!!FD[m.nome],cor=PC.some(function(c){return c.nome===m.nome;});
-      var info=['<b class="np">'+np(ND[m.nome]||0)+' p/ minutar</b>',meta(m.nome)+'/dia',a?'gravado '+nf(a):'',cor?'corrige '+(k.Lc[m.nome]||0):''].filter(Boolean).join(' · ');
+      var oc=outrasCarga(m.nome),info=['<b class="np">'+np(ND[m.nome]||0)+' p/ minutar</b>',meta(m.nome)+'/dia',oc.t?'<span title="'+esc('Já ocupado por outras pautas no mesmo período: '+oc.L.join(' · '))+'">outras pautas −'+nf(oc.t)+'</span>':'',a?'gravado '+nf(a):'',cor?'corrige '+(k.Lc[m.nome]||0):''].filter(Boolean).join(' · ');
       return '<div class="pp'+(AUS[m.nome]||fora?' aus':'')+(v>cap?' acima':'')+'"><span class="nm">'+esc(m.nome)+'</span><span class="num"><b>'+nf(v)+'</b><small> / '+nf(cap)+'</small></span>'+
         (fora?'':barra(v,a,cap,nf))+'<span class="mt">'+info+'</span>'+aus(m.nome,fora,'fora das minutas desta sessão')+'</div>';}).join('');
     document.getElementById('eq-c').innerHTML=PC.map(function(m){var v=k.Lc[m.nome]||0,a=k.Lca[m.nome]||0,cap=CAPC[m.nome]||0,fora=!!FC[m.nome];
@@ -361,7 +371,10 @@ body.emb #b-aplicar{display:none}body.emb .lay{grid-template-columns:262px minma
     document.getElementById('sub').title=document.getElementById('sub').textContent=IT.length+' processos · '+nf(tot)+' pontos de minuta · '+IT.filter(function(x){return x.t==='ED'||x.t==='AgInt';}).length+' ED/AgInt · '+IT.filter(function(x){return x.t==='META';}).length+' META · '+k.nv+' a designar';
     document.getElementById('kp').innerHTML=[[nf(tot)+' / '+nf(cap),'pontos de minuta / capacidade da equipe'],[k.nv,'processos a designar'],[k.ok+' de '+IT.length,'com minutante e corretor ao aplicar'],[IT.filter(function(x){return x.t==='ED'||x.t==='AgInt';}).filter(function(x){return fin(x,'d')===x.od;}).length+' de '+IT.filter(function(x){return x.t==='ED'||x.t==='AgInt';}).length,'ED e AgInt com quem minutou o acórdão']].concat(EMBED?[[Object.keys(AUS).filter(function(n){return AUS[n];}).length,(function(L){return L.length?'ausente(s): '+L.join(', '):'ausências no período';})(Object.keys(AUS).filter(function(n){return AUS[n];}))]]:[]).map(function(v){return '<div><b>'+esc(v[0])+'</b><span>'+esc(v[1])+'</span></div>';}).join('');
     var nAp=IT.filter(function(x){return fin(x,'d')!==x.d||fin(x,'c')!==x.c;}).length,bh=document.getElementById('b-aplicar-h');if(bh){bh.textContent='Aplicar à pauta'+(nAp?' ('+nAp+')':'');bh.disabled=!nAp;}document.getElementById('f-d').textContent=k.nv;document.getElementById('f-cn').textContent=k.ok;document.getElementById('f-ct').textContent=k.alt;document.getElementById('f-alt').hidden=!k.alt;document.querySelector('[data-a="proposta"]').hidden=!k.grav;
-    var al=[],F=D.sessao.fases||{}; if(!EMBED&&F.inicio&&F.minutas&&F.inicio>F.minutas)al.push(['er','Marcos invertidos na sessão:','Início '+br(F.inicio)+' depois da Entrega '+br(F.minutas)+'. O período acima usa a entrega pela regra de liberação; corrija em Editar marcos.']);
+    var al=[],F=D.sessao.fases||{},dub=diasUteis(de,ate),ano=function(v){return v&&+String(v).slice(0,4)<2000;};
+    if(ano(F.inicio)||ano(F.minutas)||ano(F.liberacao))al.push(['er','Marcos com data inválida:','Início '+(F.inicio||'—')+' · Entrega '+(F.minutas||'—')+' · Liberação '+(F.liberacao||'—')+'. Corrija nos marcos da sessão.']);
+    if(F.inicio&&F.minutas&&F.inicio>F.minutas)al.push(['er','Marcos invertidos na sessão:','Início '+br(F.inicio)+' depois da Entrega '+br(F.minutas)+'. O período acima usa a entrega pela regra de liberação; corrija nos marcos.']);
+    if(!dub)al.push(['er','Período sem dia útil:',br(de)+' a '+br(ate)+'. A capacidade de todos fica zero até corrigir os marcos da sessão.']);
     var acima=PD.filter(function(m){var v=0;IT.forEach(function(x){if(fin(x,'d')===m.nome)v+=peso(x);});return CAPD[m.nome]&&v>CAPD[m.nome];}).map(function(m){return m.nome;});
     if(acima.length)al.push(['av','Acima da capacidade no período:',acima.join(', ')+'. É só um aviso: a designação não é bloqueada.']);
     if(!VIVO)al.push(['in','Cópia fora do Caput:','20/11 (Consciência Negra) não entra nos dias úteis. Para gravar, abra pela designação do Caput.']);
@@ -472,7 +485,11 @@ body.emb #b-aplicar{display:none}body.emb .lay{grid-template-columns:262px minma
     if(t.dataset.bulk){var b=t.dataset.b,kk=t.dataset.bulk,v=t.value;if(!v)return;IT.filter(function(x){return grupo(x)===b;}).forEach(function(x){ESC[x.i]=ESC[x.i]||{};ESC[x.i][kk]=v;if(kk==='d'&&fin(x,'c')===v)ESC[x.i].c='';});toast(nomeGrupo(b)+': '+(kk==='d'?'minutante ':'corretor ')+v);tudo();return;}
     /* indisponível: a pessoa sai da proposta e também dos processos já designados a ela nesta mesa (minuta e correção), que passam para a proposta;
        desmarcar devolve o que estava. Nada grava sem "Aplicar à pauta". */
-    if(t.dataset.aus){var nm=t.dataset.aus,nx=0;AUS[nm]=t.checked;propor();
+    if(t.dataset.aus){var nm=t.dataset.aus,nx=0;AUS[nm]=t.checked;
+      /* grava na pauta: fora das minutas e das correções desta sessão (sobrevive a recarregar; não mexe nas outras pautas) */
+      if(t.checked){if(PD.some(function(m){return m.nome===nm;}))FD[nm]=true;if(PC.some(function(m){return m.nome===nm;}))FC[nm]=true;}else{delete FD[nm];delete FC[nm];}
+      if(VIVO&&VIVO.definirForaDaSessao){try{VIVO.definirForaDaSessao(D.sessao.id,'d',Object.keys(FD));VIVO.definirForaDaSessao(D.sessao.id,'c',Object.keys(FC));}catch(er){}}
+      propor();
       if(t.checked){var Lx=[];IT.forEach(function(x){['d','c'].forEach(function(k){if(fin(x,k)===nm){var p=PROP[x.i]||{};ESC[x.i]=ESC[x.i]||{};Lx.push([x.i,k,ESC[x.i][k]]);ESC[x.i][k]=p[k]||'';nx++;}});});AUSX[nm]=Lx;}
       else{(AUSX[nm]||[]).forEach(function(r){var e=ESC[r[0]];if(!e)return;if(r[2]==null)delete e[r[1]];else e[r[1]]=r[2];nx++;});delete AUSX[nm];}
       tudo();toast(nm+(t.checked?' indisponível: '+nx+' designação(ões) passaram para a proposta. Aplique à pauta para gravar.':' de volta: '+nx+' designação(ões) restauradas.'));return;}
