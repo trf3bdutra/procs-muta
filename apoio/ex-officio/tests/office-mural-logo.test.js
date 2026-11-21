@@ -167,8 +167,9 @@ test('Mural: avisos e minhas ausências à direita do calendário, sem a faixa d
   const fs = require('fs'), path = require('path');
   const h = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
   assert.match(h, /#mu-host \.cc-dir\{display:none!important\}/);
-  assert.match(h, /wr\.id='mu-cal-wrap'/);
-  assert.match(h, /#mu-cal-wrap\{display:grid;grid-template-columns:minmax\(0,1fr\) 340px/);
+  assert.match(h, /av\.setAttribute\('slot','avisos'\)/);
+  assert.match(h, /au\.setAttribute\('slot','aus'\)/);
+  assert.match(h, /<slot name=\\"avisos\\"><\\\/slot>/);
 });
 
 test('Monocráticas: fila de urgências aberta na coluna da esquerda, em cartões compactos', () => {
@@ -208,8 +209,9 @@ test('Mural: passos do ponto de vista de quem está logado, sinalizações por p
   assert.match(h, /aguarda:\{t:'Aguardando outros'/);
   assert.match(h, /k:'corrigir',t:'A corrigir'/);
   assert.match(h, /data-ab=\\?"pront\\?"[^]*?title=\\?"Abrir o prontuário\\?"/);
-  assert.match(h, /#mu-cal-wrap>\.mu-cal-lado\{align-self:stretch;height:0;min-height:100%;overflow:auto/);
-  assert.match(h, /\.mu-cal-lado \.av-box #avisos>\.nt:nth-child\(n\+5\)\{display:none\}/);
+  assert.match(h, /\.calrow>\.lado\{align-self:stretch;height:0;min-height:100%;overflow:auto\}/);
+  assert.match(h, /#mu-host>\.av-box #avisos>\.nt:nth-child\(n\+3\)\{display:none!important\}/);
+  assert.match(h, /class=\\"sesc\\" id=\\"sesl\\"/);
   assert.match(h, /if\(\/minuta\/\.test\(x\.papel\|\|'minuta'\)&&!x\.dataMinuta/);
 });
 
