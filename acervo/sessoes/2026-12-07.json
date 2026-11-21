@@ -3,7 +3,7 @@
  "versao": 1,
  "nome": "07/12/2026",
  "date": "2026-12-07",
- "atualizadoEm": "2026-11-21T01:34:07.444Z",
+ "atualizadoEm": "2026-11-21T01:34:11.216Z",
  "itens": [
   {
    "cnj": "5000899-21.2023.4.03.6002",
@@ -2078,9 +2078,12 @@
      "pendencias": [
       {
        "desc": "Não foi localizada manifestação do Ministério Público Federal entre as peças fornecidas; por isso, não foi incluído parágrafo a esse respeito.",
-       "ok": false,
+       "ok": true,
        "em": "2026-11-19",
-       "por": "Index · lote 2886"
+       "por": "Index · lote 2886",
+       "resolvidaEm": "2026-11-20",
+       "resolvidaPor": "Claude · revisão das pautas",
+       "resolucao": "Sem manifestação do MPF registrada no lote 2886, coerente com a minuta."
       },
       {
        "desc": "A extração de texto dos documentos IDs 359542416 e 359542420 falhou. A minuta utiliza a apelação legível de ID 359542421 e os demais documentos identificados; convém confirmar se os arquivos não extraídos contêm informação adicional relevante.",
@@ -2096,7 +2099,8 @@
      "item": 46,
      "autos": 0
     },
-    "editadoPor": "Index"
+    "editadoPor": "Bruno",
+    "editadoEm": "2026-11-21T01:34:11.216Z"
    }
   },
   {
