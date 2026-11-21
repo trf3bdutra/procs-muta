@@ -185,3 +185,10 @@ test('Fila de urgências sem os botões "Comunicar o desembargador" (aviso autom
   const h = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
   assert.ok(!h.includes('<button data-uq-com="') && !h.includes('data-uq-com-todas aria-label'));
 });
+
+test('Monocráticas: "Copiar mensagem" só para o Bruno, no cartão da decisão que aguarda assinatura', () => {
+  const fs = require('fs'), path = require('path');
+  const h = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
+  assert.match(h, /oM===3&&nq\(U\.eu\|\|''\)==='bruno'\?'<button type="button" class="b ms-cp" data-ms-copia=/);
+  assert.match(h, /var tit=!urg\?'MONOCRÁTICAS · PARA ASSINATURA'/);
+});
