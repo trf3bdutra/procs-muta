@@ -190,3 +190,8 @@ test('Mesa: assuntos sempre organizados dentro do grupo, por ordem da pauta, se√
   for(const x of ['data-asord="pauta"','data-asord="sec"','data-asord="qtd"',"localStorage.setItem('mesa_ordas'",'var ordAs=function(L)'])assert.ok(m.includes(x),x);
   [...m.matchAll(/<script>([\s\S]*?)<\/script>/g)].forEach((x)=>new (require('vm').Script)(x[1]));
 });
+
+test('Mesa: mesmo assunto fica com a mesma pessoa na proposta (fora os embargos)',()=>{
+  const m=require('fs').readFileSync(require('path').join(__dirname,'../../../caput/designacao/index.html'),'utf8');
+  for(const x of ["var DONO={},cntD={};","if(x.t!=='ED'&&DONO[N(x.as)]===m.nome){s+=1000;","if(x.t!=='ED'&&!DONO[N(x.as)])DONO[N(x.as)]=esc_.nome;"])assert.ok(m.includes(x),x);
+});

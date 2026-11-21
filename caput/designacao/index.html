@@ -297,10 +297,13 @@ body.emb #b-aplicar{display:none}body.emb .lay{grid-template-columns:262px minma
     var pres=PC.filter(function(m){return !AUS[m.nome]&&!FC[m.nome];}); var cota=Math.ceil(IT.length/Math.max(1,pres.length)*1.05);
     PC.forEach(function(m){CAPC[m.nome]=AUS[m.nome]||FC[m.nome]?0:cota;LC[m.nome]=0;});
     var ordem=IT.slice().sort(function(a,b){var pa=(a.t==='ED'||a.t==='AgInt')?0:a.lote?1:2,pb=(b.t==='ED'||b.t==='AgInt')?0:b.lote?1:2;return pa-pb||(a.lote||'').localeCompare(b.lote||'')||a.i-b.i;});
+    /* mesmo assunto, mesma pessoa (fora os embargos): quem já tem o assunto na pauta fica com os demais processos dele */
+    var DONO={},cntD={};IT.forEach(function(x){if(x.t==='ED'||!x.d)return;var ka=N(x.as);cntD[ka]=cntD[ka]||{};cntD[ka][x.d]=(cntD[ka][x.d]||0)+1;});Object.keys(cntD).forEach(function(ka){DONO[ka]=Object.keys(cntD[ka]).sort(function(a,b){return cntD[ka][b]-cntD[ka][a];})[0];});
     ordem.forEach(function(x){
       var w=peso(x), g=regra(x,'d');
       var cand=PD.filter(function(m){return !AUS[m.nome]&&!FD[m.nome]&&!casa(m.nao,x.as);}).map(function(m){var s=0,why=[];
         if((x.t==='ED'||x.t==='AgInt')&&x.od===m.nome){s+=6;why.push(['c','minutou o acórdão']);}
+        if(x.t!=='ED'&&DONO[N(x.as)]===m.nome){s+=1000;why.push(['l','mesmo assunto, mesma pessoa']);}
         if(g&&g.nome===m.nome){s+=4;why.push(['r','regra · '+g.por]);}
         if(casa(m.exp,x.as)){s+=2*K.comp;why.push(['e','especialidade']);}
         if(casa(m.pref,x.as)){s+=2*K.comp;why.push(['e','prefere']);}
@@ -313,7 +316,7 @@ body.emb #b-aplicar{display:none}body.emb .lay{grid-template-columns:262px minma
         return {nome:m.nome,s:s,why:why};}).sort(function(a,b){return b.s-a.s;});
       var esc_=cand[0]; if(!esc_)return;
       LD[esc_.nome]+=w; if(x.lote)LT[x.lote+'|'+esc_.nome]=(LT[x.lote+'|'+esc_.nome]||0)+1; AS[N(x.as)+'|'+esc_.nome]=(AS[N(x.as)+'|'+esc_.nome]||0)+1;
-      PROP[x.i]={d:esc_.nome,wd:esc_.why,od:cand};
+      PROP[x.i]={d:esc_.nome,wd:esc_.why,od:cand};if(x.t!=='ED'&&!DONO[N(x.as)])DONO[N(x.as)]=esc_.nome;
     });
     /* correção: depois de conhecer o minutante */
     var LCT={};
