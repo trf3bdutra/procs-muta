@@ -20257,11 +20257,11 @@
    "assunto": "IRPJ/Imposto de Renda de Pessoa Jurídica",
    "grupo": null,
    "tipo_caso": "",
-   "resultado": "",
+   "resultado": "Ato a proferir: intimar a agravante sobre a transação alegada (perda do objeto) ou julgar o recurso prejudicado [VALIDAR]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "observacao": "Agravo de Frigo Dourados Alimentos Ltda. contra a decisão que, na execução fiscal 0000099-25.2016.4.03.6002, não conheceu da exceção de pré-executividade sobre nulidade da citação por edital e prescrição. A União informa que os débitos entraram em transação individual e pede o reconhecimento da perda do objeto. A agravante não se manifestou sobre a transação.",
+   "peculiaridades": "Alegada perda do objeto por transação individual (Lei 13.988/2020); agravante ainda não ouvida [VALIDAR artigo 10 do CPC]. Preparo em dobro por PagTesouro/Pix, aceito no despacho ID 367204909, sem STN [VALIDAR].",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -20292,7 +20292,18 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Intimação da agravante sobre a transação (perda do objeto); depois, decisão",
+    "materia": "Execução fiscal — exceção de pré-executividade; citação por edital e prescrição; transação individual",
+    "origem": "2ª Vara Federal de Dourados · 0000099-25.2016.4.03.6002",
+    "decisao_agravada": "ID 557621065 (origem)",
+    "recurso": "ID 360949944 · 17/03/2026",
+    "preparo": "Em dobro, PagTesouro/Pix, aceito no despacho ID 367204909 [VALIDAR]",
+    "monocratica": "Não indicada",
+    "analisado_em": "20/11/2026",
+    "conf_preparo": "Pix/PagTesouro (não aceito pela regra): ID 365678286 · valor R$ 128,52 (dobro, despacho ID 362802952) · despacho ID 367204909 deu o preparo por recolhido · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
+    "conf_prevencao": "Origem: 0000099-25.2016.4.03.6002 · redistribuído à 2ª Seção e depois à Turma Regional de MS · conferido em 20/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -20313,6 +20324,17 @@
     "ultima_informacao": "Certidão de Dívida Ativa - CDA · ID 373376080 · 14/05/2026",
     "ultima_movimentacao": "07/07/2026 15:35 · CONCLUSOS PARA JULGAMENTO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos"
+   },
+   "teor": {
+    "sintese_fatica": "Em execução fiscal contra frigorífico de Dourados, o juízo não conheceu da exceção de pré-executividade que alegava nulidade da citação por edital e prescrição do crédito tributário (primeira citação válida em 23/07/2019, segundo a executada).",
+    "inicial": "Execução fiscal 0000099-25.2016.4.03.6002 (2ª Vara Federal de Dourados) da União (Fazenda Nacional) contra Frigo Dourados Alimentos Ltda.",
+    "decisao_recorrida": "Decisão ID 557621065 dos autos de origem, que não conheceu da exceção de pré-executividade",
+    "recurso": "Agravo ID 360949944 (17/03/2026): (1) nulidade da citação por edital; (2) prescrição quinquenal do crédito tributário, considerada a primeira citação válida em 23/07/2019.",
+    "resposta": "União (Fazenda Nacional), contraminuta ID 373376078 (14/05/2026): (1) perda do objeto pela inclusão dos débitos em transação individual (artigo 1.000, parágrafo único, do CPC; artigo 3º, V, da Lei 13.988/2020); (2) subsidiariamente, intimação da agravante para renunciar; (3) validade da citação por edital e ausência de prescrição. Juntou relatório SIDA (ID 373376080).",
+    "parecer": "Sem intervenção do MPF.",
+    "outros": "Redistribuições: Seção (decisão ID 361045567) e Turma Regional de MS (decisão ID 366232877). Despacho ID 362802952 (27/03/2026): recolhimento em dobro (artigo 1.007, § 4º, do CPC). Comprovante PagTesouro/Pix de R$ 128,52 (ID 365678286, 10/04/2026). Despacho ID 367204909 (30/04/2026): preparo recolhido; intimação para contraminuta.",
+    "representacao": "Agravante: advogado Igor Marques Ferreira de Souza (substabelecimento sem reserva ID 360949969) [VALIDAR cadeia de poderes]. Agravada: União (PGFN).",
+    "preparo": "Recolhimento em dobro por PagTesouro/Pix, R$ 128,52, em 10/04/2026 (ID 365678286), dado por recolhido no despacho ID 367204909; sem comprovante STN [VALIDAR]"
    }
   },
   {
