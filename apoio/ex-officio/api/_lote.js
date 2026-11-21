@@ -11,6 +11,8 @@
    GET  ?lote=1&id=2886                        o lote (matriz, perfis e painel), com o cartão do prontuário de cada processo
                                                tirado, na hora, da sessão em acervo/sessoes/AAAA-MM-DD.json
    GET  ?lote=1&id=2886&minuta=X               a minuta do processo X (10 primeiros caracteres do número): acervo/minutas/<id>/X.json
+   GET  ?lote=1&id=2886&minuta=X&versoes=1     as versões registradas da minuta (índice guardado na vigente); só a equipe
+   GET  ?lote=1&id=2886&minuta=X&versao=v2     o texto de uma versão: acervo/minutas/<id>/versoes/X/v2.json; só a equipe
    Com &rel=1 (página do relator, /cmt/lotes/), a resposta é sempre a do relator, qualquer que seja o login.
    O relator (link próprio, perfil desembargador ou &rel=1) só recebe os processos prontos: situação Corrigida ou Liberada, a mais
    adiantada entre a do lote e a do Ex Officio (dataCorrecao/dataLiberacao na sessão). Os que estão por fazer ou por corrigir
@@ -29,7 +31,10 @@
    POST ?lote=1 {acao:'substituir', id, de, para, processos:[X]}   troca um trecho em várias minutas do lote (acervo/minutas/<id>/X.json),
                                                num só commit; o trecho casa ignorando espaços, aspas e travessões; cada minuta
                                                alterada guarda a edição em "edicoes". Não mexe no PJe: só na cópia do painel de lotes.
-   POST ?lote=1 {acao:'visivel', id, itens:[{sessao, processo, equipe, relator}]}   visibilidade (relator: 'auto', true ou false) */
+   POST ?lote=1 {acao:'visivel', id, itens:[{sessao, processo, equipe, relator}]}   visibilidade (relator: 'auto', true ou false)
+   POST ?lote=1 {acao:'minuta-versao', id, processo, rotulo, origem, secoes, vigente}   registra mais uma minuta do processo
+                                               (versão nova); vigente:false só guarda, sem trocar a que o relator vê
+   POST ?lote=1 {acao:'minuta-vigente', id, processo, versao}   torna vigente uma versão já registrada */
 const L = require('./_lib');
 const ID = /^[a-z0-9-]{1,40}$/i, PROC = /^\d{7}-\d{2}$/, DATA = /^\d{4}-\d{2}-\d{2}$/;
 const nada = e => { if (e.status === 404) return { dados: null }; throw e; };
@@ -191,6 +196,51 @@ async function calendario() {
     .sort((a, b) => b.date.localeCompare(a.date));
 }
 function calendarioM(M) { if (!M.cal) M.cal = calendario(); return M.cal; }
+/* Versões da minuta: mais de uma minuta do mesmo processo no lote.
+   A vigente continua em acervo/minutas/<id>/<X>.json: é a que o relator vê, a que se copia para o PJe e a que os Trechos em lote
+   alteram. Cada versão registrada fica guardada, sem alteração posterior, em acervo/minutas/<id>/versoes/<X>/vN.json, e o índice
+   (versoes e vigente) fica na própria vigente. Nada se perde: na primeira versão nova, a minuta que já estava no lote é guardada
+   antes como v1; se a vigente foi alterada depois (Trechos em lote), essas alterações viram uma versão própria antes da troca. */
+const SECOES = ['relatorio', 'voto', 'ementa', 'acordao'], VID = /^v\d{1,3}$/;
+const caminhoMin = (id, mx) => 'acervo/minutas/' + id + '/' + mx + '.json';
+const caminhoVer = (id, mx, v) => 'acervo/minutas/' + id + '/versoes/' + mx + '/' + v + '.json';
+const jsonTxt = o => JSON.stringify(o, null, 1) + '\n';
+function secoesLimpas(s) {
+  const o = {};
+  for (const k of SECOES) o[k] = (Array.isArray(s && s[k]) ? s[k] : []).map(x => String(x == null ? '' : x).replace(/\s+/g, ' ').trim()).filter(Boolean).slice(0, 800);
+  return o;
+}
+const contagem = s => Object.fromEntries(SECOES.map(k => [k, (((s || {})[k]) || []).length]));
+const indiceVersoes = m => (Array.isArray(m && m.versoes) ? m.versoes : []);
+const proximaVersao = lista => 'v' + (lista.reduce((n, x) => Math.max(n, +String(x.id || '').slice(1) || 0), 0) + 1);
+const editadaDepois = m => !!m && ((m.edicoes || []).length > (m.edicoes_na_versao || 0));
+function fotoVersao(base, meta, secoes, padrao) {
+  return { schema: 'gabcmt.minuta', versao: '1', lote: base.lote, processo: base.processo, sessao: base.sessao || '', item: base.item || '',
+    versao_id: meta.id, rotulo: meta.rotulo, registrado_por: meta.por || '', registrado_em: meta.em || '', origem: meta.origem || '', padrao: padrao || '', secoes };
+}
+/* guarda como versão o texto que já está no lote, se ainda não está guardado (minuta sem índice ou alterada depois) */
+function guardarAtual(atual, main, lista, id, mx, arqs) {
+  if (!atual) return;
+  const ed = (atual.edicoes || []).length;
+  let meta;
+  if (!lista.length) meta = { id: 'v1', rotulo: atual.rotulo || (atual.padrao === 'rascunho' ? 'Rascunho do Collectio' : 'Minuta inicial do lote'),
+    por: atual.registrado_por || '', em: String(atual.atualizado_em || '').slice(0, 10), origem: atual.origem || '' };
+  else if (editadaDepois(atual)) {
+    const ult = atual.edicoes[ed - 1] || {};
+    meta = { id: proximaVersao(lista), rotulo: 'Vigente com trechos alterados em lote', por: ult.por || '', em: String(ult.em || '').slice(0, 10),
+      origem: 'Versão ' + (atual.vigente || 'anterior') + ' com ' + (ed - (atual.edicoes_na_versao || 0)) + ' alteração(ões) feita(s) em Trechos em lote.' };
+  }
+  if (!meta) return;
+  meta.paragrafos = contagem(atual.secoes);
+  lista.push(meta);
+  arqs.push({ path: caminhoVer(id, mx, meta.id), txt: jsonTxt(fotoVersao(main, meta, atual.secoes || {}, atual.padrao)) });
+  main.vigente = meta.id; main.edicoes_na_versao = ed;
+}
+function aplicarVigente(main, meta, secoes, padrao) {
+  main.secoes = secoes; main.vigente = meta.id; main.rotulo = meta.rotulo; main.origem = meta.origem || '';
+  main.registrado_por = meta.por || ''; main.padrao = padrao || '';
+  main.atualizado_em = new Date().toISOString().slice(0, 10); main.edicoes_na_versao = (main.edicoes || []).length;
+}
 /* Rascunho de minuta montado do prontuário (cartão do Ex Officio ou da triagem) e do teor registrados no lote.
    Só o relatório sai composto, e só com o que está registrado; voto e ementa ficam marcados para minutar.
    Nada é presumido: o que falta vai como [VALIDAR]. A minuta completa segue o modelo-matriz do tipo de julgamento. */
@@ -282,8 +332,24 @@ module.exports = async (req, res) => {
         const it = lt && (lt.itens || []).find(i => String(i.processo).slice(0, 10) === mx);
         if (!it || !ve(it)) return res.status(404).json({ erro: relator ? 'Minuta ainda em preparo.' : 'Minuta não disponível para este processo.' });
       }
-      const { dados } = await L.lerJson('acervo/minutas/' + id + '/' + mx + '.json').catch(nada);
+      const vq = String(q.versao || '');
+      if (q.versoes || vq) {
+        if (relator) return res.status(403).json({ erro: 'As versões da minuta ficam só com a equipe.' });
+        if (vq) {
+          if (!VID.test(vq)) return res.status(400).json({ erro: 'versão inválida' });
+          const { dados: foto } = await L.lerJson(caminhoVer(id, mx, vq)).catch(nada);
+          if (!foto) return res.status(404).json({ erro: 'Versão não encontrada.' });
+          return res.status(200).json(foto);
+        }
+        const { dados: vig } = await L.lerJson(caminhoMin(id, mx)).catch(nada);
+        if (!vig) return res.status(200).json({ existe: false, versoes: [], vigente: '', editada: false });
+        return res.status(200).json({ existe: true, versoes: indiceVersoes(vig), vigente: vig.vigente || '', editada: editadaDepois(vig) && !!indiceVersoes(vig).length,
+          rotulo: vig.rotulo || '', origem: vig.origem || '', atualizado_em: vig.atualizado_em || '', paragrafos: contagem(vig.secoes) });
+      }
+      const { dados } = await L.lerJson(caminhoMin(id, mx)).catch(nada);
       if (!dados) return res.status(404).json({ erro: 'Minuta não disponível para este processo.' });
+      /* o relator recebe só o texto vigente, sem o histórico de versões */
+      if (relator) { delete dados.versoes; delete dados.edicoes_na_versao; delete dados.registrado_por; }
       return res.status(200).json(dados);
     }
     const sessaoVirtual=/^pauta-(\d{4}-\d{2}-\d{2})$/.exec(id);
@@ -513,6 +579,61 @@ async function gravar(req, res, u, gestor) {
       } catch (e) { if (e.status !== 409 && e.status !== 422) throw e; }
     }
     return res.status(409).json({ erro: 'O lote mudou várias vezes seguidas; tente de novo.' });
+  }
+  /* minuta-versao {id, processo, rotulo, origem, secoes:{relatorio,voto,ementa,acordao}, vigente}: registra mais uma minuta do processo.
+     Por padrão a nova vira a vigente; vigente:false só guarda. minuta-vigente {id, processo, versao}: volta a uma versão guardada.
+     Num só commit: a versão nova, a minuta anterior guardada (se ainda não estava), a vigente com o índice e, se preciso, o lote. */
+  if (b.acao === 'minuta-versao' || b.acao === 'minuta-vigente') {
+    const CNJ = /^\d{7}-\d{2}\.\d{4}\.\d\.\d{2}\.\d{4}$/, proc = String(b.processo || '');
+    if (!CNJ.test(proc)) return res.status(400).json({ erro: 'Informe o número CNJ completo do processo.' });
+    const mx = proc.slice(0, 10), pm = caminhoMin(id, mx), registrar = b.acao === 'minuta-versao';
+    let novas = null, rotulo = '', origem = '';
+    if (registrar) {
+      novas = secoesLimpas(b.secoes);
+      if (!SECOES.some(k => novas[k].length)) return res.status(400).json({ erro: 'A minuta veio vazia: cole o texto com os títulos RELATÓRIO, VOTO, EMENTA e ACÓRDÃO.' });
+      if (JSON.stringify(novas).length > 600000) return res.status(400).json({ erro: 'Minuta longa demais.' });
+      rotulo = String(b.rotulo || '').replace(/\s+/g, ' ').trim().slice(0, 80);
+      if (!rotulo) return res.status(400).json({ erro: 'Dê um nome à versão (por exemplo, "Corrigida por Bruno").' });
+      origem = String(b.origem || '').replace(/\s+/g, ' ').trim().slice(0, 400);
+    } else if (!VID.test(String(b.versao || ''))) return res.status(400).json({ erro: 'Versão inválida.' });
+    for (let t = 0; t < 4; t++) {
+      const { dados: lote, sha: shaLote } = await lerLote(rel).catch(nada);
+      if (!lote) return res.status(404).json({ erro: 'Lote não encontrado. Na matriz geral da sessão, crie antes um lote com o processo.' });
+      const it = (lote.itens || []).find(i => i.processo === proc);
+      if (!it) return res.status(404).json({ erro: 'Processo fora deste lote.' });
+      const { dados: atual, sha: shaMin } = await L.lerJson(pm).catch(nada);
+      if (!registrar && !atual) return res.status(404).json({ erro: 'Este processo não tem minuta no lote.' });
+      const main = atual ? JSON.parse(JSON.stringify(atual)) : { schema: 'gabcmt.minuta', versao: '1', lote: id, processo: proc, sessao: it.sessao || '',
+        item: it.sessao ? String(it.item) : '', padrao: '', origem: '', secoes: {} };
+      const lista = indiceVersoes(main).slice(), arqs = [];
+      guardarAtual(atual, main, lista, id, mx, arqs);
+      let msg, vigente;
+      if (registrar) {
+        const meta = { id: proximaVersao(lista), rotulo, por: u, em: new Date().toISOString().slice(0, 10), origem, paragrafos: contagem(novas) };
+        lista.push(meta);
+        arqs.push({ path: caminhoVer(id, mx, meta.id), txt: jsonTxt(fotoVersao(main, meta, novas, '')) });
+        vigente = b.vigente !== false || !atual;
+        if (vigente) aplicarVigente(main, meta, novas, '');
+        msg = 'Collectio (' + u + '): versão ' + meta.id + ' ("' + rotulo + '") da minuta de ' + proc + ' no lote ' + id + (vigente ? ', vigente' : ', guardada');
+      } else {
+        const meta = lista.find(x => x.id === b.versao);
+        if (!meta) return res.status(404).json({ erro: 'Versão não encontrada.' });
+        if (main.vigente === meta.id && !arqs.length) return res.status(200).json({ ok: true, igual: true, versoes: lista, vigente: main.vigente });
+        const { dados: foto } = await L.lerJson(caminhoVer(id, mx, meta.id)).catch(nada);
+        if (!foto) return res.status(404).json({ erro: 'Versão não encontrada.' });
+        aplicarVigente(main, meta, foto.secoes || {}, foto.padrao);
+        vigente = true;
+        msg = 'Collectio (' + u + '): versão ' + meta.id + ' ("' + meta.rotulo + '") passa a vigente na minuta de ' + proc + ' no lote ' + id;
+      }
+      main.versoes = lista;
+      arqs.push(Object.assign({ path: pm, txt: jsonTxt(main) }, shaMin ? { sha: shaMin } : {}));
+      if (!it.minuta) { it.minuta = true; lote.atualizado_em = new Date().toISOString().slice(0, 10); arqs.push({ path: rel, txt: jsonTxt(lote), sha: shaLote }); }
+      try {
+        await L.commitArquivos(arqs, msg);
+        return res.status(200).json({ ok: true, processo: proc, vigente: main.vigente, versoes: lista, trocouVigente: vigente, minuta: main });
+      } catch (e) { if (e.status !== 409 && e.status !== 422) throw e; }
+    }
+    return res.status(409).json({ erro: 'A minuta ou o lote mudou várias vezes seguidas; tente de novo.' });
   }
   if (b.acao === 'lote-visivel') {
     for (let t = 0; t < 4; t++) {
