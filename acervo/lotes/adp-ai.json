@@ -18690,11 +18690,11 @@
    "assunto": "FGTS/Fundo de Garantia Por Tempo de Serviço",
    "grupo": null,
    "tipo_caso": "",
-   "resultado": "",
+   "resultado": "Ato a proferir: julgamento do agravo de instrumento (voto)",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "observacao": "Agravo de RR Service Comércio e Serviços Ltda. contra a decisão que, na execução fiscal 5008742-09.2024.4.03.6000, rejeitou a exceção de pré-executividade contra a cobrança de FGTS e contribuição social. A agravante alega nulidade sem o processo administrativo e prescrição. A tutela recursal foi indeferida em 30/04/2026; a União respondeu.",
+   "peculiaridades": "Tutela recursal indeferida. Preparo por Pix bancário, sem STN [VALIDAR].",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -18704,7 +18704,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento do agravo de instrumento (voto)",
+    "materia": "Execução fiscal — FGTS e contribuição social; exceção de pré-executividade; prescrição (artigo 23-A da Lei 8.036/1990)",
+    "origem": "6ª Vara Federal de Campo Grande · 5008742-09.2024.4.03.6000",
+    "decisao_agravada": "ID 560536313 (origem)",
+    "recurso": "ID 367054067 · 16/04/2026",
+    "preparo": "Pix bancário, sem STN [VALIDAR]",
+    "monocratica": "Não indicada",
+    "analisado_em": "20/11/2026",
+    "conf_preparo": "Comprovante bancário Pix (não aceito): ID 368504043 · guia \"aguardando pagamento\": ID 368504045 · certidão sem custas: ID 368169467 · valor R$ 64,26 · pago em 23/04/2026 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
+    "conf_prevencao": "Origem: 5008742-09.2024.4.03.6000 · conferido em 20/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -18715,7 +18726,18 @@
    "extracao": {
     "situacao": "pendente"
    },
-   "bloco": "2"
+   "bloco": "2",
+   "teor": {
+    "sintese_fatica": "Execução fiscal ajuizada em 13/08/2024 para cobrar FGTS e contribuição social (CDAs FGMS202400131 e CSMS202400132, R$ 48.400,68); o juízo rejeitou a exceção de pré-executividade fundada em nulidade do título e prescrição.",
+    "inicial": "Execução fiscal 5008742-09.2024.4.03.6000 (6ª Vara Federal de Campo Grande) da União (Fazenda Nacional) contra RR Service Comércio e Serviços Ltda.",
+    "decisao_recorrida": "Decisão ID 560536313 dos autos de origem, que rejeitou a exceção de pré-executividade",
+    "recurso": "Agravo ID 367054067 (16/04/2026): (1) nulidade da execução sem o processo administrativo; (2) prescrição, pois a interrupção do artigo 23-A da Lei 8.036/1990 dependeria da ciência do devedor; pede efeito suspensivo.",
+    "resposta": "União (Fazenda Nacional), contraminuta ID 373366125 (14/05/2026): notificação de lançamento em 15/12/2020; ausência de decadência e de prescrição (ajuizamento em 13/08/2024 e despacho de citação em 14/08/2024).",
+    "parecer": "Sem intervenção do MPF.",
+    "outros": "Certidão sem custas ID 368169467 (22/04/2026). Petição ID 368504039 (23/04/2026) com guia ID 368504045 e comprovante Pix Sicredi ID 368504043. Decisão ID 368192254 (30/04/2026): indeferiu a antecipação da tutela recursal (artigo 6º da LEF; artigo 23-A da Lei 8.036/1990 com três hipóteses autônomas de interrupção).",
+    "representacao": "Agravante: advogados Antônio Abrão, Ivan Medeiros e Dimas Saad [VALIDAR procuração]. Agravada: União (PGFN).",
+    "preparo": "Comprovante Pix do Sicredi ao TRF-3 (conta STN), R$ 64,26, em 23/04/2026 (ID 368504043); sem comprovante STN da GRU [VALIDAR]"
+   }
   },
   {
    "sessao": "",
