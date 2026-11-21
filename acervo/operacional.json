@@ -6,7 +6,7 @@
   "arquivo": "acervo/fonte.json",
   "chave": "processo"
  },
- "atualizado_em": "2026-11-21T02:06:16.383Z",
+ "atualizado_em": "2026-11-21T02:06:23.257Z",
  "registros": [
   {
    "processo": "0000008-23.2025.4.03.6000",
@@ -277519,7 +277519,7 @@
     "Responsável": "",
     "Próxima ação": "",
     "Observações": "",
-    "atualizado_em": "2026-11-21T01:27:23.530Z",
+    "atualizado_em": "2026-11-21T02:06:23.257Z",
     "Origem - Juízo": "Justiça Federal em Campo Grande [VALIDAR vara]"
    },
    "triagem": {
@@ -277536,37 +277536,38 @@
     "Tempest - Suspensões": "",
     "Tipo de Julgamento": "Agravo de Instrumento",
     "Hipóteses Monocrática": "",
-    "Tempestividade": "Não verificado",
-    "Preparo": "Justiça gratuita",
-    "AJG": "",
+    "Tempestividade": "Não Verificado",
+    "Preparo": "Dispensado",
+    "AJG": "Sim",
     "DPU (controle)": "",
-    "Representação": "Não verificado",
+    "Representação": "Não Verificado",
     "ID da Procuração": "",
     "Impedimento / Suspeição": "",
     "Observação do Impedimento": "",
     "Regularidade": "Representação ainda não verificada.",
     "Regularidade Manual": "",
     "Observação da Representação": "",
-    "MPF": "Mandado de segurança",
-    "MPF - Custos Legis": "",
+    "MPF": "Com Parecer",
+    "MPF - Custos Legis": "Sim",
     "ID do Parecer MPF": "",
     "Parecer - Sentido": "",
     "MPF - Info adicional": "",
     "Observação MPF": "",
-    "Tema": "FIES",
+    "Tema": "Concurso público · Ensino superior · FIES · carência estendida durante a residência médica (artigo 6º-B, § 3º, da Lei 10.260/2001) · mandado de segurança",
     "COMPLEXIDADE": "",
     "Tipo de Voto": "",
-    "Prelim.": "Sem preliminares",
+    "Prelim.": "Não",
     "Descrição da Preliminar": "",
     "META": "",
     "Seleção Prévia": "",
-    "Mídias": "Não se aplica",
+    "Mídias": "Não se Aplica",
     "Etiquetas": "1ª Seção, AG. CONTRAMINUTA",
     "Alegações": "",
     "O que falta sanar": "",
     "Intercorrências": "",
     "Síntese Processual": "",
-    "Especificidades": "Residência médica de 01/03/2026 a 28/02/2029 · Requerimento administrativo de 24/02/2026, com parecer de elegibilidade em 24/03/2026 · Carência possivelmente já deferida, sem implementação (decisão ID 377086871) · MPF sem interesse (ID 384073743) · Há 1 documento não lido no PJe"
+    "Especificidades": "Residência médica de 01/03/2026 a 28/02/2029 · Requerimento administrativo de 24/02/2026, com parecer de elegibilidade em 24/03/2026 · Carência possivelmente já deferida, sem implementação (decisão ID 377086871) · MPF sem interesse (ID 384073743) · Há 1 documento não lido no PJe",
+    "Síntese Fática": "Médica residente com contrato do FIES pediu, em mandado de segurança, a extensão da carência durante a residência médica (01/03/2026 a 28/02/2029) e a abstenção de negativação; o juízo deferiu a gratuidade e indeferiu a liminar, por não haver inércia administrativa (processo com parecer de elegibilidade em 24/03/2026)."
    },
    "producao": {
     "Destino": "",
@@ -277605,7 +277606,8 @@
     "Lote - Observação": "Agravo de Camila Cardoso Barbosa contra o indeferimento da liminar no mandado de segurança 5002304-93.2026.4.03.6000, em que pede a extensão da carência do FIES durante a residência médica. O Relator apontou que a carência teria sido deferida administrativamente e pediu esclarecimentos; o Banco do Brasil e a União responderam e o MPF deixou de intervir.",
     "Lote - Ajustes da correção": [],
     "Lote - Pendências": "",
-    "Lote - Minuta": "sem minuta no lote"
+    "Lote - Minuta": "sem minuta no lote",
+    "Mono - Fundamento": "Paradigmas do gabinete: AI 5019165-54.2022.4.03.0000 (1ª Turma, 26/06/2023); AI 5025228-61.2023.4.03.0000 (1ª Turma, 09/02/2024); AI 5015532-98.2023.4.03.0000 (1ª Turma, 15/09/2023); AI 5016729-88.2023.4.03.0000 (1ª Turma, 15/09/2023)"
    },
    "pauta": {
     "Status de Julgamento": "",
@@ -277615,7 +277617,8 @@
     "JULGAMENTO": "",
     "Motivo da remarcação": "",
     "sessoes": []
-   }
+   },
+   "controles": {}
   },
   {
    "processo": "5011488-10.2025.4.03.6000",
