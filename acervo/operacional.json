@@ -6,7 +6,7 @@
   "arquivo": "acervo/fonte.json",
   "chave": "processo"
  },
- "atualizado_em": "2026-11-21T10:10:51.620Z",
+ "atualizado_em": "2026-11-21T10:10:59.019Z",
  "registros": [
   {
    "processo": "0000008-23.2025.4.03.6000",
@@ -219032,7 +219032,7 @@
     "Responsável": "",
     "Próxima ação": "",
     "Observações": "",
-    "atualizado_em": "2026-11-19T19:59:38.520Z"
+    "atualizado_em": "2026-11-21T10:10:59.019Z"
    },
    "triagem": {
     "Urgência": "",
@@ -219046,39 +219046,40 @@
     "Tempest - Prazo legal": "",
     "Tempest - Dobro": "",
     "Tempest - Suspensões": "",
-    "Tipo de Julgamento": "",
+    "Tipo de Julgamento": "Apelação",
     "Hipóteses Monocrática": "",
-    "Tempestividade": "",
-    "Preparo": "",
+    "Tempestividade": "Não verificado",
+    "Preparo": "Isento (ente público/MP)",
     "AJG": "",
     "DPU (controle)": "",
-    "Representação": "",
+    "Representação": "Não verificado",
     "ID da Procuração": "",
     "Impedimento / Suspeição": "",
     "Observação do Impedimento": "",
     "Regularidade": "Representação ainda não verificada.",
     "Regularidade Manual": "",
     "Observação da Representação": "",
-    "MPF": "",
-    "MPF - Custos Legis": "",
-    "ID do Parecer MPF": "",
-    "Parecer - Sentido": "",
+    "MPF": "Com parecer",
+    "MPF - Custos Legis": "Mandado de segurança",
+    "ID do Parecer MPF": "377065100",
+    "Parecer - Sentido": "Prosseguimento do feito, sem intervenção",
     "MPF - Info adicional": "",
     "Observação MPF": "",
-    "Tema": "Contribuição INCRA",
+    "Tema": "Apelação da Fazenda Nacional e remessa necessária em mandado de segurança · empregadora rural pessoa física · contribuição patronal, RAT/SAT e terceiros sobre verbas da folha (15 primeiros dias de auxílio-doença e acidente, aviso prévio indenizado, salário-maternidade, auxílios e outras) · processo suspenso pelo Tema 1.174/STJ e depois sentenciado · segurança parcialmente concedida",
     "COMPLEXIDADE": "",
     "Tipo de Voto": "",
-    "Prelim.": "",
+    "Prelim.": "Sem preliminares",
     "Descrição da Preliminar": "",
     "META": "",
     "Seleção Prévia": "",
-    "Mídias": "",
+    "Mídias": "Não se aplica",
     "Etiquetas": "MS, 2ª Seção, Contribuição patronal, Apto para julgamento",
-    "Alegações": "",
+    "Alegações": "1) Incidência de contribuição patronal, RAT/SAT e terceiros sobre cada verba (temas vinculantes); 2) dispensa parcial de recorrer e alcance da remessa; 3) compensação.",
     "O que falta sanar": "",
     "Intercorrências": "",
     "Síntese Processual": "",
-    "Especificidades": ""
+    "Especificidades": "Etiqueta \"APTO - CONFERIR\" · Suspensão anterior pelo Tema 1.174/STJ (ID 373622119) · Dispensa parcial de recorrer (Portaria PGFN 502/2016): remessa não conhecida nessa parte? (artigo 19, § 2º, da Lei 10.522/2002) [VALIDAR] · Verba a verba: Temas 72 e 985/STF; Temas 478, 479 e 738/STJ [VALIDAR]",
+    "Síntese Fática": "Maria Tereza Junqueira de Carvalho Filha, empregadora rural pessoa física, impetrou mandado de segurança para excluir verbas indenizatórias da base das contribuições sobre a folha. O processo ficou suspenso pelo Tema 1.174/STJ (decisão ID 373622119) e foi sentenciado em 2026."
    },
    "producao": {
     "Destino": "",
@@ -219127,7 +219128,8 @@
     "JULGAMENTO": "",
     "Motivo da remarcação": "",
     "sessoes": []
-   }
+   },
+   "controles": {}
   },
   {
    "processo": "5005578-41.2021.4.03.6000",
