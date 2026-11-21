@@ -260,5 +260,5 @@ test('Pautas: seletor de sessões com rolagem, três por vez; assuntos sem regra
 
 test('Mesa: capacidade e carga à direita, em areia com textura',()=>{
   const cap=require('fs').readFileSync(require('path').join(__dirname,'../../../caput/triagem/index.html'),'utf8');
-  assert.ok(cap.includes('.mb.emb .lay{grid-template-columns:minmax(0,1fr) 262px!important}.mb.emb .side{order:2}.mb.emb .side .card{background:#f3eee3 url('));
+  assert.ok(cap.includes('.mb.emb .lay{grid-template-columns:minmax(0,1fr) 262px!important}.mb.emb .side{order:2}.mb.emb .side .card{background:#f9f7f1 url('));
 });
