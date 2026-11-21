@@ -66,13 +66,14 @@ function montar(el,cal,ex){
     const ini=st.ini||iso(new Date(P(hoje)-14*DIA)), fim=iso(new Date(+P(ini)+70*DIA));
     const X0=150, W=el.clientWidth-40-24-X0-20, x=d=>X0+(P(d)-P(ini))/(P(fim)-P(ini))*W;
     const vs=vis.filter(s=>s.date>=ini&&(s.marcos.pautarAte||s.date)<=fim);
-    let h='', H=34+vs.length*74;
+    const LH=ex.tlLinha||74; /* distância entre as sessões na linha do tempo (o Caput usa uma mais compacta) */
+    let h='', H=34+vs.length*LH;
     for(let d=P(ini);d<=P(fim);d=new Date(+d+DIA)) if(d.getDay()===1){const px=x(iso(d));h+=`<div class="cc-tk" style="left:${px}px"></div><div class="cc-tkl" style="left:${px+3}px">${F(iso(d))}</div>`;}
     (ex.feriados||[]).filter(f=>f[0]>=ini&&f[0]<=fim).forEach(f=>h+=`<div class="cc-fr" style="left:${x(f[0])-1}px"></div><div class="cc-frl" style="left:${x(f[0])+4}px">${f[1]}</div>`);
     if(ex.recesso&&ex.recesso[0]<=fim) h+=`<div class="cc-rec" style="left:${Math.max(X0,x(ex.recesso[0]))}px"></div><div class="cc-frl" style="left:${x(ex.recesso[0])+4}px;top:22px">recesso</div>`;
     if(hoje>=ini&&hoje<=fim) h+=`<div class="cc-hjc" style="left:${x(hoje)-W/140}px;width:${W/70}px"></div><div class="cc-hj" style="left:${x(hoje)}px"></div><div class="cc-hjl" style="left:${x(hoje)}px">HOJE</div>`;
     vs.forEach((s,i)=>{
-      const y=44+i*74, ms=marcos(s), a=Math.max(X0,x(ms[0].d)), b=Math.min(X0+W,x(s.date));
+      const y=44+i*LH, ms=marcos(s), a=Math.max(X0,x(ms[0].d)), b=Math.min(X0+W,x(s.date));
       const p=prog(s);
       const dd=Math.round((P(s.date)-P(hoje))/DIA), pc=s.processos?Math.round(p.minutadas/s.processos*100):0;
       h+=`<div class="cc-lab" style="top:${y-14}px"><b><i style="width:10px;height:10px;border-radius:50%;background:${s.cor}"></i>${F(s.date)}${s.hora?' · '+s.hora:''}<span class="cc-cd" style="color:${s.cor}">${dd<0?'encerrada':dd===0?'hoje':'em '+dd+' d'}</span></b>${s.processos?`${s.processos} pautados · ${pc}% minutado<span class="cc-pb"><i style="width:${pc}%;background:${s.cor}"></i></span>`:'<span style="color:#c0392b">sem pauta</span>'}</div>`;

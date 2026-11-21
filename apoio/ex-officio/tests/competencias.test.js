@@ -3,14 +3,14 @@ const {test}=require('node:test'),assert=require('node:assert/strict'),fs=requir
 const root=path.resolve(__dirname,'../../..');
 const read=p=>fs.readFileSync(path.join(root,p),'utf8');
 test('Competências da equipe: página válida e publicada na Coordenação do Caput',()=>{
-  const pag=read('caput/competencias/index.html');
-  assert.ok(pag.includes('<script id="dados" type="application/json">{}</script>'),'cópia do repositório sem dados embutidos');
-  [...pag.matchAll(/<script>([\s\S]*?)<\/script>/g)].forEach((m,i)=>new vm.Script(m[1],{filename:'competencias-'+i+'.js'}));
+  const pag=read('caput/triagem/index.html');
+  assert.ok(pag.includes('<script id="dados" type="application/json">{}</script></div></template>'),'cópia do repositório sem dados embutidos');
+  [...pag.matchAll(/<script>([\s\S]*?)<\/script>/g)].forEach((m,i)=>new vm.Script(m[1],{filename:'caput-'+i+'.js'}));
   const wf=read('.github/workflows/vercel-caput.yml');
   assert.ok(wf.includes('cp caput/competencias/index.html site/public/caput/competencias/index.html'));
   const caput=read('caput/triagem/index.html');
   assert.ok(caput.includes('W.CMTCaput = Object.assign'),'Caput expõe o motor à página');
-  assert.ok(caput.includes("compEquipe(ABA === 'coordenacao')"),'moldura só na Coordenação');
+  assert.ok(caput.includes("compEquipe(ABA === 'coordenacao')"),'competências só na Coordenação');
 });
 test('Motor: competências, regras de designação e histórico completo',()=>{
   const m=read('caput/motor/assets/js/21-sessoes-equipe.js');
