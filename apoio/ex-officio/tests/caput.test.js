@@ -71,3 +71,9 @@ test('Calendário da Chefia: dois meses lado a lado e visual do Caput',()=>{
   assert.ok(cal.includes('ex.meses===2&&st.passo===')&&cal.includes('function mes(vis,b0)'),'dois meses');
   assert.ok(cap.includes('{ meses: 2, hoje: HOJE,')&&cap.includes('.cg-cal .cc-2m{'),'Chefia usa dois meses');
 });
+
+test('Gravação só no cabeçalho: Pautas sem a faixa inicial; o indicador soma triagem e sessões, regras e equipe',()=>{
+  const fs=require('fs'),p=require('path'),cap=fs.readFileSync(p.join(__dirname,'../../../monitor/triagem/index.html'),'utf8');
+  assert.ok(!cap.includes('id="pt-gravar"')&&!cap.includes('Pautas de julgamento · sessões, marcos, seleção prévia e PDF da pauta'),'faixa de Pautas removida');
+  assert.ok(cap.includes('api.estadoGrava = {')&&cap.includes('W.CMTPautas.gravarJa()')&&cap.includes('W.pintaGrava = pintaGrava;'),'indicador único');
+});
