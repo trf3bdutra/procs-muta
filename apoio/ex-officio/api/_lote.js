@@ -218,6 +218,8 @@ function calendarioM(M) { if (!M.cal) M.cal = calendario(); return M.cal; }
 const SECOES = ['relatorio', 'voto', 'ementa', 'acordao'], VID = /^v\d{1,3}$/;
 /* matriz construída na pauta da sessão (a Coleção de Pauta não é lote gravado): grupos, colunas e marcas por processo */
 const caminhoMatriz = id => 'acervo/matrizes/' + id + '.json';
+/* coleções de decisões do Collectio (monocráticas do Ex Officio, pelo tipo de ato): não são lotes; a matriz fica em acervo/matrizes/ */
+const DECISOES = /^(monocratica|interlocutoria|despacho)$/;
 const COR = /^#[0-9a-f]{3,8}$/i;
 const limpaGrupos = a => (Array.isArray(a) ? a : []).slice(0, 60).filter(g => g && g.id && g.rotulo).map(g => ({ id: String(g.id).slice(0, 60), rotulo: String(g.rotulo).slice(0, 200),
   cor: COR.test(String(g.cor || '')) ? g.cor : '#5d6b72', resultado: String(g.resultado || '').slice(0, 600), modelo: String(g.modelo || '').slice(0, 300),
@@ -331,6 +333,10 @@ module.exports = async (req, res) => {
       const porSessao = {}, amostra = [];
       for (const s of ss) { const it = (await itensSessao(s)).filter(x => passa(x, f)); porSessao[s] = it.length; it.slice(0, 40).forEach(x => amostra.push({ sessao: s, item: x.item, processo: x.cnj, assunto: x.assunto })); }
       return res.status(200).json({ total: Object.values(porSessao).reduce((a, b) => a + b, 0), porSessao, amostra: amostra.slice(0, 60) });
+    }
+    if (DECISOES.test(String(q.matriz || ''))) {
+      const { dados: mxD } = await L.lerJson(caminhoMatriz(String(q.matriz))).catch(nada);
+      return res.status(200).json({ id: String(q.matriz), matriz: mxD || null });
     }
     if (!id) {
       const lista = await L.gh('/contents/acervo/lotes?ref=main').catch(e => (e.status === 404 ? [] : Promise.reject(e)));
@@ -472,7 +478,7 @@ async function gravar(req, res, u, gestor) {
     const grupos = Array.isArray(b.grupos) ? limpaGrupos(b.grupos) : null, colunas = Array.isArray(b.colunas) ? limpaColunas(b.colunas) : null;
     const marcas = (Array.isArray(b.itens) ? b.itens : []).filter(x => x && /^\d{7}-\d{2}\.\d{4}\.\d\.\d{2}\.\d{4}$/.test(String(x.processo || ''))).slice(0, 800);
     const hoje = new Date(Date.now() - 4 * 3600e3).toISOString().slice(0, 10);
-    const sv = /^pauta-(\d{4}-\d{2}-\d{2})$/.exec(id);
+    const sv = /^pauta-(\d{4}-\d{2}-\d{2})$/.exec(id), dv = DECISOES.test(id);
     for (let t = 0; t < 4; t++) {
       const { dados: lote, sha } = await lerLote(rel).catch(nada);
       if (lote) {
@@ -486,16 +492,16 @@ async function gravar(req, res, u, gestor) {
         try { await gravarLote(rel, lote, sha, 'Collectio (' + u + '): matriz do lote ' + id + ' (' + (lote.grupos || []).length + ' grupos, ' + (lote.colunas || []).length + ' colunas, ' + n + ' processos)'); return res.status(200).json({ ok: true, id, processos: n, grupos: (lote.grupos || []).length, colunas: (lote.colunas || []).length }); }
         catch (e) { if (e.status !== 409 && e.status !== 422) throw e; continue; }
       }
-      if (!sv) return res.status(404).json({ erro: 'Lote não encontrado.' });
-      /* pauta da sessão: a matriz fica em acervo/matrizes/, à parte do arquivo da sessão */
-      if (!(await calendario()).some(z => z.date === sv[1])) return res.status(404).json({ erro: 'Sessão não encontrada.' });
+      if (!sv && !dv) return res.status(404).json({ erro: 'Lote não encontrado.' });
+      /* pauta da sessão (ou coleção de decisões): a matriz fica em acervo/matrizes/, à parte do arquivo da sessão */
+      if (sv && !(await calendario()).some(z => z.date === sv[1])) return res.status(404).json({ erro: 'Sessão não encontrada.' });
       const { dados: ant, sha: shaM } = await L.lerJson(caminhoMatriz(id)).catch(nada);
-      const mx = ant || { schema: 'gabcmt.matriz', versao: 1, id, sessao: sv[1], grupos: [], colunas: [], itens: {} };
+      const mx = ant || Object.assign({ schema: 'gabcmt.matriz', versao: 1, id, grupos: [], colunas: [], itens: {} }, sv ? { sessao: sv[1] } : { colecao: id });
       if (grupos) mx.grupos = grupos;
       if (colunas) mx.colunas = colunas;
       for (const x of marcas) mx.itens[x.processo] = limpaMarca(x);
       mx.atualizado_em = hoje; mx.por = u;
-      try { await L.gravarJson(caminhoMatriz(id), mx, shaM, 'Collectio (' + u + '): matriz da pauta de ' + sv[1] + ' (' + mx.grupos.length + ' grupos, ' + mx.colunas.length + ' colunas, ' + Object.keys(mx.itens).length + ' processos)'); return res.status(200).json({ ok: true, id, processos: marcas.length, grupos: mx.grupos.length, colunas: mx.colunas.length }); }
+      try { await L.gravarJson(caminhoMatriz(id), mx, shaM, 'Collectio (' + u + '): matriz ' + (sv ? 'da pauta de ' + sv[1] : 'da coleção ' + id) + ' (' + mx.grupos.length + ' grupos, ' + mx.colunas.length + ' colunas, ' + Object.keys(mx.itens).length + ' processos)'); return res.status(200).json({ ok: true, id, processos: marcas.length, grupos: mx.grupos.length, colunas: mx.colunas.length }); }
       catch (e) { if (e.status !== 409 && e.status !== 422) throw e; }
     }
     return res.status(409).json({ erro: 'A matriz mudou várias vezes seguidas; tente de novo.' });
@@ -504,7 +510,7 @@ async function gravar(req, res, u, gestor) {
     const data=String(b.sessao||'');
     if(!DATA.test(data)) return res.status(400).json({erro:'Selecione uma sessão válida.'});
     if(!(await calendario()).some(x=>x.date===data))return res.status(400).json({erro:'Sessão não cadastrada.'});
-    if(/^pauta-\d{4}-\d{2}-\d{2}$/.test(id))return res.status(400).json({erro:'Identificador reservado à matriz geral.'});
+    if(/^pauta-\d{4}-\d{2}-\d{2}$/.test(id)||DECISOES.test(id))return res.status(400).json({erro:'Identificador reservado à matriz geral.'});
     const pedidos=Array.isArray(b.processos)?b.processos.map(String):[];
     if(!pedidos.length||pedidos.length>500||new Set(pedidos).size!==pedidos.length)
       return res.status(400).json({erro:'Selecione de 1 a 500 processos distintos.'});
@@ -570,7 +576,7 @@ async function gravar(req, res, u, gestor) {
     const lista = (Array.isArray(b.itens) ? b.itens : []).filter(x => x && CNJ.test(String(x.processo || '')));
     if ((!lista.length && !b.colecao) || lista.length > 600) return res.status(400).json({ erro: 'Informe de 1 a 600 processos com número CNJ completo.' });
     if (b.acao === 'criar-lista') {
-      if (/^pauta-/.test(id)) return res.status(400).json({ erro: 'Identificador reservado à matriz geral.' });
+      if (/^pauta-/.test(id) || DECISOES.test(id)) return res.status(400).json({ erro: 'Identificador reservado à matriz geral.' });
       const titulo = String(b.titulo || '').trim().slice(0, 80);
       if (!titulo) return res.status(400).json({ erro: 'Informe o título do lote.' });
       if ((await lerLote(rel).catch(nada)).dados) return res.status(409).json({ erro: 'Já existe um lote com esse identificador.' });
@@ -606,7 +612,7 @@ async function gravar(req, res, u, gestor) {
   if (b.acao === 'criar') {
     const tipo=b.tipo==='pauta'?'pauta':'avulso';
     if (!ss.length) return res.status(400).json({ erro: 'Escolha ao menos uma sessão.' });
-    if (/^pauta-\d{4}-\d{2}-\d{2}$/.test(id))return res.status(400).json({erro:'Identificador reservado à matriz geral.'});
+    if (/^pauta-\d{4}-\d{2}-\d{2}$/.test(id)||DECISOES.test(id))return res.status(400).json({erro:'Identificador reservado à matriz geral.'});
     if(tipo==='pauta' && ss.length!==1)return res.status(400).json({ erro: 'Índice de pauta exige uma sessão específica.' });
     const atual = await lerLote(rel).catch(nada);
     if (atual.dados) return res.status(409).json({ erro: 'Já existe um lote com esse identificador.' });

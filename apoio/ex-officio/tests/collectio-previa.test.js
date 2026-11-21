@@ -23,7 +23,21 @@ test('só grava a matriz (gestor) e a marca do PJe; as leituras são da API do C
   assert.deepEqual(acoes, ['matriz', 'minuta-pje']);
   const urls = [...html.matchAll(/[^.]get\('(\/[^']+)/g)].map(m => m[1]);
   assert.ok(urls.length >= 3);
-  urls.forEach(u => assert.match(u, /^\/api\/(painel\?lote=1|pauta\?data=)/));
+  urls.forEach(u => assert.match(u, /^\/api\/(painel\?lote=1|pauta\?(data=|mono=1))/));
+});
+test('coleções de decisões: Monocrática, Interlocutória e Despacho, pelo tipo de ato do Ex Officio', () => {
+  for (const k of ['monocratica', 'interlocutoria', 'despacho']) assert.match(html, new RegExp("bt\\('" + k + "'"));
+  assert.match(html, /get\('\/api\/pauta\?mono=1'\)/);
+  assert.match(html, /function tipoMono\(/);
+  assert.match(html, /ETAPAS_MONO/);
+  assert.match(html, /'4 · Para assinatura'/);
+});
+test('sem versão final importada, vale o acórdão (ou a decisão) publicado no Ementário', () => {
+  assert.match(html, /baixaTexto\('\/jurisprudencia\/indice\.json\.gz'\)/);
+  assert.match(html, /'\/jurisprudencia\/busca\/'\+nome\+'\.txt\.gz'/);
+  assert.match(html, /async function fotoPub\(/);
+  assert.match(html, /if\(lote==='#pub'\)/, 'a publicação entra no seletor de versões e na comparação');
+  assert.match(html, /fiI=!!\(it&&it\.final\), pub=\(!fiI&&/, 'a versão final importada prevalece sobre a publicada');
 });
 test('scripts válidos e HTML completo', () => {
   assert.ok(html.includes('</head>') && html.includes('</body>'));

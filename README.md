@@ -58,8 +58,11 @@ apoio/                         recursos de apoio à redação
                                lotes/index.html: painel de lotes (/lotes/), página independente da navegação do Ex Officio, no mesmo padrão
                                visual e com o mesmo login: matriz do lote, perfil de cada processo (prontuário da sessão) e minuta copiável;
                                liga-se ao Ex Officio (/equipe/) e à Consulta do Modus Operandi (/modus/#consulta=AAAA-MM-DD/ITEM);
-                               lotes/previa.html: prévia do Collectio melhorado (/amicus/collectio/previa/), só leitura: fluxo da minuta
-                               (minutada · corrigida · no PJe · liberada · versão final), fila do dia e processo com versões e comparação;
+                               lotes/previa.html: o Collectio (/amicus/collectio/; o anterior segue em /amicus/collectio/classico/):
+                               coleções Pauta (sessões ativas e lotes da pauta), Monocrática, Interlocutória e Despacho (monocráticas do
+                               Ex Officio, /api/pauta?mono=1, pelo tipo de ato) e Avulsas; fluxo da minuta, matriz padrão e própria
+                               (acervo/matrizes/ para a pauta e as decisões) e processo com versões e comparação. Sem versão final
+                               importada, vale o acórdão ou a decisão publicada no Ementário (/jurisprudencia/indice.json.gz);
                                api/ grava em acervo/sessoes e, no mesmo commit, na ficha do processo em acervo/operacional.json (GH_TOKEN da Vercel)
   modus-operandi/               Modus Operandi: seções Ementário (precedentes), Editorial (Peças, Modelos, Parágrafos), Diretrizes e Consulta, numa pill própria ao lado da pill Início · Pauta (barra comum com a Ex Officio); modus-operandi.html (um só código; o que cada pessoa vê e edita depende do perfil em apoio/acessos.json) e modus-operandi-editor.html (/editor/: edita modelos, parágrafos, peças, diretrizes e normas e grava no procs-muta pelo servidor), com os usos automáticos embutidos
 

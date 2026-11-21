@@ -252,7 +252,7 @@ html[data-theme=dark] #tip{background:#ebeff1;color:#0a1821}
 .stl-ln{position:absolute;left:calc(50% / var(--n));right:calc(50% / var(--n));top:25px;height:2px;background:var(--el)}
 .stl-ln i{display:block;height:2px;background:linear-gradient(90deg,#2e7d55,#2d6fa8)}
 .st{position:relative;display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--em);text-align:center}
-.st.s-m{--C:#2e7d55}.st.s-r{--C:#2d6fa8}.st.s-p{--C:#a57829}.st.s-e{--C:#1b4f7a}
+.st.s-a{--C:#5a4aa8}.st.s-m{--C:#2e7d55}.st.s-r{--C:#2d6fa8}.st.s-p{--C:#a57829}.st.s-e{--C:#1b4f7a}
 html[data-theme=dark] .st.s-e{--C:#4e9bcb}
 .st .c{position:relative;z-index:1;display:grid;place-items:center;width:28px;height:28px;border:2px solid var(--el2);border-radius:50%;background:var(--ew);color:var(--em)}
 .st.ok .c{border-color:var(--C);background:var(--C);color:#fff}
@@ -358,9 +358,61 @@ const SECS=[['relatorio','Relatório','R'],['voto','Voto','V'],['ementa','Ementa
 const ETAPAS_COMPLETO=[['minutar','1 · A minutar','sem minuta','minuta ainda não registrada'],['minutada','2 · Minutada','minutadas','sem correção registrada'],['corrigida','3 · Corrigida','corrigidas','falta colar no PJe e marcar'],['pje','4 · No PJe','no PJe','versão importada, antes da liberação'],['liberada','5 · Liberada','liberadas','e quantas têm a versão final']];
 /* "No PJe" e "Versão final" só valem nas minhas correções; na pauta inteira o fluxo é minutada · corrigida · liberada */
 const ETAPAS_SIMPLES=[['minutar','1 · A minutar','sem minuta','minuta ainda não registrada'],['minutada','2 · Minutada','minutadas','sem correção registrada'],['corrigida','3 · Corrigida','corrigidas','falta liberar no PJe'],['liberada','4 · Liberada','liberadas','prontas para a sessão']];
+/* coleções de decisões, a partir das monocráticas registradas no Ex Officio (/api/pauta?mono=1), pelo tipo de ato */
+const MONO={monocratica:'Monocrática',interlocutoria:'Interlocutória',despacho:'Despacho'};
+function tipoMono(x){const c=x.ctl||{},t=sem(c.tipoAto||'');
+  if(/despacho/.test(t))return 'despacho';
+  if(/urgencia|liminar|tutela|efeito suspensivo|interlocut/.test(t))return 'interlocutoria';
+  if(!t&&!x.mono)return c.urgTipo?'interlocutoria':'';
+  return 'monocratica';}
+const ETAPAS_MONO=[['minutar','1 · A minutar','sem minuta','minuta ainda não registrada'],['minutada','2 · Minutada','minutadas','sem revisão registrada'],['corrigida','3 · Revisada','revisadas','falta enviar para assinatura'],['liberada','4 · Para assinatura','enviadas','aguardando a assinatura'],['assinada','5 · Assinada','assinadas','decisão assinada']];
+/* versão final por omissão: sem versão final importada no Collectio, vale o acórdão (ou a decisão) publicado que chega ao Ementário
+   (série histórica do Relator, /jurisprudencia/indice.json.gz, a mesma do Compendium): mesmo processo, julgado na sessão (ou depois da liberação) */
+const dgt=s=>String(s||'').replace(/\D/g,'');
+async function baixaTexto(url){const r=await fetch(url,{credentials:'same-origin',cache:'default'});if(!r.ok)throw new Error('HTTP '+r.status+' em '+url);
+  const u=new Uint8Array(await r.arrayBuffer());
+  if(u[0]===0x1f&&u[1]===0x8b){if(typeof DecompressionStream==='undefined')throw new Error('Este navegador não abre arquivos compactados.');return new Response(new Blob([u]).stream().pipeThrough(new DecompressionStream('gzip'))).text()}
+  return new TextDecoder('utf-8').decode(u)}
+let PUB=null;const BUSCA={},BUSCA_ORD=[];
+function refPub(x){if(x._mono)return x.dataLiberacao||x.dataMinuta||x.monoEm||'';const z=S.por[x.cnj];return (z&&z.it&&z.it.sessao)||x.sessao||(S.loteSel?'':S.data)||''}
+/* só procura o que pode já ter sido publicado: na pauta, liberado em sessão já ocorrida; nas decisões, enviado para assinatura ou assinado */
+function pedePub(x){const z=S.por[x.cnj];if(z&&z.it&&z.it.final)return false;const ref=refPub(x);if(!ref)return false;
+  return x._mono?!!(x.dataLiberacao||x.assinado||x.dataAssinatura):(ref<=hoje()&&!!x.dataLiberacao)}
+async function publicados(){
+  const quer={};(S.itens||[]).filter(pedePub).forEach(x=>{quer[dgt(x.cnj)]=x});if(!Object.keys(quer).length)return;
+  if(!PUB)PUB=baixaTexto('/jurisprudencia/indice.json.gz').then(JSON.parse).catch(()=>{PUB=null;return []});
+  const I=await PUB;let n=0;
+  I.forEach(p=>{const x=quer[dgt(p.n)];if(!x)return;const tp=x._mono?'M':'A';if(p.t!==tp||!p.d||p.d<refPub(x))return;
+    const k=tp+dgt(x.cnj),a=S.pub[k];if(!a||p.d<a.d){S.pub[k]=p;n++}});
+  if(n){S.linhas=S.itens.map(x=>linha(x));render()}
+}
+/* o texto publicado (arquivo de busca do Ementário, um por tipo e ano) dividido nas partes da minuta */
+async function fotoPub(p){
+  if(!p)throw new Error('publicação não localizada');
+  const nome=p.t+'-'+(p.y||String(p.d).slice(0,4));let t=BUSCA[nome];
+  if(!t){t=BUSCA[nome]=await baixaTexto('/jurisprudencia/busca/'+nome+'.txt.gz');BUSCA_ORD.push(nome);while(BUSCA_ORD.length>3)delete BUSCA[BUSCA_ORD.shift()]}
+  const i=t.indexOf('\n'+p.id+'\t'),a=i>-1?i+1:(t.indexOf(p.id+'\t')===0?0:-1);
+  const s={relatorio:[],voto:[],ementa:[],acordao:[]};
+  if(a<0){if(p.e)s.ementa=[p.e];if(p.r)s.acordao=[p.r];return {secoes:s}}
+  const b=t.indexOf('\n',a),c=t.slice(a,b<0?t.length:b).split('\t'),ps=String(c[2]||'').split('\u2029').map(q=>q.trim()).filter(Boolean);
+  const ix=(re,de)=>{for(let k=de||0;k<ps.length;k++)if(re.test(ps[k]))return k;return -1};
+  if(p.t==='M'){
+    /* decisão: relatório de "Vistos." a "É o relatório."; o resto, de "DECIDO." em diante, é a fundamentação */
+    const v=ix(/^Vistos/i),d=ix(/^DECIDO\.?$/i);
+    if(v>-1&&d>v){s.relatorio=ps.slice(v,d);s.voto=ps.slice(d)}else s.voto=ps.slice(Math.max(v,0));
+  }else{
+    const R=ix(/^RELAT[ÓO]RIO$/),V=ix(/^VOTO$/,R+1),E=ix(/^EMENTA$/,Math.max(V,R)+1),A=ix(/^AC[ÓO]RD[ÃA]O$/,Math.max(E,V,R)+1);
+    if(R>-1)s.relatorio=ps.slice(R+1,V>-1?V:undefined);
+    if(V>-1)s.voto=ps.slice(V+1,E>-1?E:A>-1?A:undefined);
+    if(E>-1)s.ementa=ps.slice(E+1,A>-1?A:undefined);else if(c[1])s.ementa=[String(c[1]).replace(/\u2029/g,' ')];
+    if(A>-1)s.acordao=ps.slice(A+1);
+    if(R<0&&V<0)s.voto=ps;
+  }
+  return {secoes:s};
+}
 const completo=()=>S.vista==='meus';
-const etapas=()=>completo()?ETAPAS_COMPLETO:ETAPAS_SIMPLES;
-const S={usuario:'',gestor:false,sessoes:[],data:'',itens:[],por:{},lotes:{},vista:'meus',etapa:'',fora:'',q:'',aberto:'',ver:{},fechados:new Set(),minAb:new Set(),colTipo:'pauta',loteSel:'',colTit:'',loteSes:'',mxModo:'ver',mxVista:'lote',mxRasc:{},mxForm:''};
+const etapas=()=>S.mono?ETAPAS_MONO:completo()?ETAPAS_COMPLETO:ETAPAS_SIMPLES;
+const S={usuario:'',gestor:false,sessoes:[],data:'',itens:[],por:{},lotes:{},vista:'meus',etapa:'',fora:'',q:'',aberto:'',ver:{},fechados:new Set(),minAb:new Set(),colTipo:'pauta',loteSel:'',colTit:'',loteSes:'',mono:'',pub:{},mxModo:'ver',mxVista:'lote',mxRasc:{},mxForm:''};
 
 async function get(url){const r=await fetch(url,{credentials:'same-origin',headers:{'Accept':'application/json'}});const j=await r.json().catch(()=>({}));if(!r.ok){const e=new Error(j.erro||('HTTP '+r.status));e.status=r.status;throw e}return j}
 /* o gestor lê os lotes como na gestão (&modo=cg): vê todos os processos, inclusive os ainda ocultos da página da equipe */
@@ -377,7 +429,20 @@ function linha(x,cheio){
   ((S.idxAv&&S.idxAv[x.cnj])||[]).forEach(f=>{if(!fontes.some(q=>q.lote===f.lote))fontes.push(f)});
   if((!z||!(z.it&&z.it.minuta))&&fontes.length)z=Object.assign({compart:true},fontes[0]);
   const it=z?z.it:null, c=x.ctl||{};
-  const m=!!(x.dataMinuta||(it&&it.minuta)), co=!!x.dataCorrecao, pj=!!(it&&it.pje), li=!!x.dataLiberacao, fi=!!(it&&it.final);
+  const fiI=!!(it&&it.final), pub=(!fiI&&S.pub[(x._mono?'M':'A')+dgt(x.cnj)])||null;
+  const m=!!(x.dataMinuta||(it&&it.minuta)), co=!!x.dataCorrecao, pj=!!(it&&it.pje), li=!!x.dataLiberacao, fi=fiI||!!pub;
+  if(x._mono){
+    /* decisão: minuta · revisão · para assinatura · assinada (a ficha do Ex Officio guarda as datas) */
+    const as=!!(x.assinado||x.dataAssinatura||pub), etapa=as?'assinada':li?'liberada':co?'corrigida':m?'minutada':'minutar', tags=[];let nivel='';
+    if(c.tipoAto)tags.push(['in',c.tipoAto]);
+    if(c.urgTipo){const pend=!/apreciad|deferid|indeferid/i.test(c.urgSit||'');tags.push([pend?'al':'in','Urgência'+(c.urgSit?' · '+c.urgSit:'')]);if(pend&&!as)nivel='al'}
+    if(c.hip932)tags.push(['in','Art. 932, '+String(c.hip932).split(' · ')[0]]);
+    if(pub)tags.push(['ok','Publicada '+brc(pub.d)+' · Ementário']);else if(x.publicado)tags.push(['ok','Publicada']);
+    if(fontes.length>1)tags.push(['in','Minuta em '+fontes.length+' coleções']);else if(z&&z.compart)tags.push(['in','Minuta em '+z.titulo]);
+    if(!String(x.servidor||'').trim())tags.push(['cr','Sem minutante']);
+    const txt={minutar:'a minutar',minutada:x.dataMinuta?'minutada '+brc(x.dataMinuta):'minutada',corrigida:'revisada '+brc(x.dataCorrecao),liberada:'para assinatura '+brc(x.dataLiberacao),assinada:x.dataAssinatura?'assinada '+brc(x.dataAssinatura):pub?'publicada '+brc(pub.d):'assinada'}[etapa];
+    return {x,z,it,c,fontes,item:Number(x.item)||0,etapa,passos:[m,co,li,as],tags,nivel,txt,retido:false,cheio:false,fi,pub,mono:true,meu:souEu(x.corretor)};
+  }
   const retido=/retirad|adiad/i.test(c.intercorTipo||'');
   /* a versão final não é etapa: é o indicador da fase liberada (só nas minhas correções) */
   const etapa=retido?'retido':cheio?(li?'liberada':pj?'pje':co?'corrigida':m?'minutada':'minutar'):(li?'liberada':co?'corrigida':m?'minutada':'minutar');
@@ -387,7 +452,8 @@ function linha(x,cheio){
   else{
     /* alerta só no que ainda pede ação: com a versão final registrada, o processo está em dia */
     if(cheio&&li&&!fi){tags.push(['al','Falta a versão final']);nivel=nivel||'al'}
-    if(cheio&&fi)tags.push(['ok','Versão final']);
+    if(cheio&&fi)tags.push(['ok',pub?'Versão final · publicada':'Versão final']);
+    if(!cheio&&pub)tags.push(['ok','Acórdão publicado '+brc(pub.d)]);
     if(cheio&&co&&!li&&!pj&&it&&it.minuta)tags.push(['in','Colar no PJe e marcar']);
     const np=it&&Array.isArray(it.pendencias)?it.pendencias.length:0;
     /* características do processo na pauta: meta do CNJ e julgamento que não é o primeiro */
@@ -399,8 +465,8 @@ function linha(x,cheio){
     if(np&&!li)tags.push(['in',np+(np>1?' pendências':' pendência')+' a validar']);
     if(!String(x.servidor||'').trim()||!String(x.corretor||'').trim())tags.push(['cr','Sem designação']);
   }
-  const txt={minutar:'a minutar',minutada:x.dataMinuta?'minutada '+brc(x.dataMinuta):'minutada',corrigida:'corrigida '+brc(x.dataCorrecao),pje:'no PJe '+brc(it&&it.pje&&it.pje.em),liberada:'liberada '+brc(x.dataLiberacao)+(cheio?(fi?' · versão final ✓':' · sem versão final'):''),retido:'fora da sessão'}[etapa];
-  return {x,z,it,c,fontes,item:Number(x.item)||0,etapa,passos,tags,nivel,txt,retido,cheio,fi,
+  const txt={minutar:'a minutar',minutada:x.dataMinuta?'minutada '+brc(x.dataMinuta):'minutada',corrigida:'corrigida '+brc(x.dataCorrecao),pje:'no PJe '+brc(it&&it.pje&&it.pje.em),liberada:'liberada '+brc(x.dataLiberacao)+(cheio?(fi?' · versão final ✓'+(pub?' (Ementário)':''):' · sem versão final'):''),retido:'fora da sessão'}[etapa];
+  return {x,z,it,c,fontes,item:Number(x.item)||0,etapa,passos,tags,nivel,txt,retido,cheio,fi,pub,
     meu:souEu(x.corretor)};
 }
 /* o corretor pode ser dupla ("Bruno/Alex"): basta um dos nomes ser o do login (nome inteiro ou o primeiro nome) */
@@ -433,7 +499,9 @@ async function carregar(){
     S.data=(ses.find(s=>s.date===pedida)||ses.find(s=>s.date>=hoje())||ses[ses.length-1]||{}).date||'';
     if(!S.data)throw new Error('Nenhuma sessão publicada.');
     S.lotesLista=(L.lotes||[]);
-    const pc=params.get('colecao'), lc=pc&&S.lotesLista.find(l=>l.id===pc);
+    const pc=params.get('colecao');
+    if(MONO[pc]){await carregarMono(pc);return}
+    const lc=pc&&S.lotesLista.find(l=>l.id===pc);
     const dentro=lc&&pedida&&(lc.sessoes||[]).includes(S.data)&&S.data===pedida;
     if(lc&&['triagem','selecao'].includes(tipoCol(lc))){}
     else if(lc){S.colTipo=dentro?'pauta':tipoCol(lc);await carregarLote(lc.id,dentro?S.data:'');return}
@@ -443,9 +511,10 @@ async function carregar(){
   }
 }
 /* índice dos registros das coleções avulsas, por processo: lido uma vez, depois do primeiro desenho */
-async function indiceAvulsas(){
-  if(S.idxAv)return;
-  const ls=(S.lotesLista||[]).filter(l=>tipoCol(l)==='avulsa'&&l.total>0);
+async function indiceAvulsas(tri){
+  if(S.idxAv&&(!tri||S.idxTri))return;
+  if(tri)S.idxTri=true;
+  const ls=(S.lotesLista||[]).filter(l=>(tipoCol(l)==='avulsa'||(S.idxTri&&tipoCol(l)==='triagem'))&&l.total>0);
   const R=await Promise.all(ls.map(l=>S.lotes[l.id]?Promise.resolve({lote:S.lotes[l.id]}):get('/api/painel?lote=1&id='+encodeURIComponent(l.id)+MODO()).catch(()=>null)));
   const idx={};
   R.forEach(r=>{const l=r&&r.lote;if(!l)return;(l.itens||[]).forEach(it=>{if(!it.minuta)return;
@@ -459,7 +528,21 @@ async function indiceAvulsas(){
 }
 const tipoCol=l=>l.tipo==='pauta'?'pauta':l.tipo==='triagem'?'triagem':l.tipo==='selecao'?'selecao':'avulsa';
 const ROT_COL={pauta:'Lote da pauta',selecao:'Seleção prévia',triagem:'Coleção de triagem',avulsa:'Coleção avulsa'};
+async function carregarMono(k){
+  S.mono=k;S.colTipo=k;S.loteSel='';S.colTit=MONO[k];S.loteSes='';S.por={};S.lotes={};S.mxSes=null;
+  msg('Lendo as decisões registradas…');
+  const D=S.monoD||(S.monoD=await get('/api/pauta?mono=1'));
+  S.itens=(D.itens||[]).filter(x=>tipoMono(x)===k).map(x=>Object.assign({},x,{_mono:true,item:x.item||''}));
+  try{const V=await get('/api/painel?lote=1&matriz='+k+MODO());const mx=V&&V.matriz;if(mx)S.mxSes={grupos:mx.grupos||[],colunas:mx.colunas||[],itens:mx.itens||{},em:mx.atualizado_em,por:mx.por}}catch(e){}
+  S.linhas=S.itens.map(x=>linha(x));
+  if(!S.linhas.some(r=>r.meu))S.vista='todos';
+  const eu=$('#eu');if(S.usuario){eu.hidden=false;eu.textContent='★ '+S.usuario}
+  render();
+  indiceAvulsas(true).catch(()=>{});
+  publicados().catch(()=>{});
+}
 async function carregarLote(id,ses){
+  S.mono='';
   msg('Lendo a coleção…');
   const R=await get('/api/painel?lote=1&id='+encodeURIComponent(id)+MODO()), l=R.lote||{itens:[]};
   S.loteSel=l.id;S.colTit=l.titulo||l.id;S.loteSes=ses||'';S.lotes={[l.id]:l};S.por={};
@@ -476,9 +559,10 @@ async function carregarLote(id,ses){
   render();
   if(ra)ir('proc');
   indiceAvulsas().catch(()=>{});
+  publicados().catch(()=>{});
 }
 async function carregarSessao(){
-  S.loteSel='';S.colTit='';S.loteSes='';
+  S.loteSel='';S.colTit='';S.loteSes='';S.mono='';
   msg('Lendo a pauta de '+br(S.data)+'…');
   const lotes=S.lotesLista.filter(l=>(l.sessoes||[]).includes(S.data)&&l.total>0&&l.tipo!=='selecao');
   const [P,...R]=await Promise.all([get('/api/pauta?data='+S.data)].concat(lotes.map(l=>get('/api/painel?lote=1&id='+encodeURIComponent(l.id)+MODO()).catch(()=>null))));
@@ -496,6 +580,7 @@ async function carregarSessao(){
   render();
   if(S.aberto&&params.get('processo'))ir('proc');
   indiceAvulsas().catch(()=>{});
+  publicados().catch(()=>{});
 }
 
 /* ---------- página ---------- */
@@ -512,7 +597,8 @@ function seletorColecoes(){
   const tar=[...new Set(tri.map(l=>l.tarefa||'Triagem'))];
   const optTri=tar.map(x=>`<optgroup label="${esc(x)}">${tri.filter(l=>(l.tarefa||'Triagem')===x).map(opt).join('')}</optgroup>`).join('');
   const bt=(k,r)=>`<button type="button" data-ctipo="${k}" aria-pressed="${t===k}">${r}</button>`;
-  return `<div class="col-areas"><div class="col-tipos" role="group" aria-label="Tipo de coleção">${bt('pauta','Pauta')}${bt('avulsa','Avulsas')}</div>
+  return `<div class="col-areas"><div class="col-tipos" role="group" aria-label="Tipo de coleção">${bt('pauta','Pauta')}${bt('monocratica','Monocrática')}${bt('interlocutoria','Interlocutória')}${bt('despacho','Despacho')}${bt('avulsa','Avulsas')}</div>
+   ${MONO[t]?`<div class="col-area"><p class="lx-lt-d" style="margin:0">${esc(MONO[t])}: decisões registradas no Ex Officio, pelo tipo de ato${S.monoD?' · '+(S.monoD.itens||[]).filter(x=>tipoMono(x)===t).length:''}.</p></div>`:''}
    <div class="col-area"${t==='pauta'?'':' hidden'}><label class="lx-sel"><span class="cl">Sessão ativa</span><select id="ses">${S.sessoes.map(s=>`<option value="${s.date}"${s.date===S.data&&(!S.loteSel||S.loteSes)?' selected':''}>${br(s.date)} · ${s.processos}</option>`).join('')}${S.loteSel&&!S.loteSes&&t==='pauta'?'<option value="" selected>—</option>':''}</select></label>
     ${daSes.length?`<label class="lx-sel"><span class="cl">Lotes desta pauta</span><select data-col="pauta"><option value="">Pauta inteira</option>${daSes.map(optS).join('')}</select></label>`:''}</div>
    <div class="col-area"${t==='avulsa'?'':' hidden'}><label class="lx-sel"><span class="cl">Coleção avulsa</span><select data-col="1"><option value="">Selecione uma coleção</option>${optAv}</select></label></div></div>`;
@@ -530,7 +616,7 @@ function render(){
     <p class="k">Coleções</p>
     ${seletorColecoes()}
     <p class="lx-lt-n">${S.linhas.length} processos${S.usuario?' · '+meus+' com '+esc(S.usuario.toUpperCase())+' na correção':''}</p>
-    <p class="lx-lt-s">${S.loteSel?(S.loteSes?'Sessão de '+br(S.loteSes)+' · ':'')+esc(S.colTit):'Sessão de '+br(S.data)}</p>
+    <p class="lx-lt-s">${S.mono?'Decisões registradas no Ex Officio':S.loteSel?(S.loteSes?'Sessão de '+br(S.loteSes)+' · ':'')+esc(S.colTit):'Sessão de '+br(S.data)}</p>
    </div>
    <p class="lx-nk">Nesta página</p>
    <a class="ir" href="#fluxo"><i>01</i><span>Fluxo da minuta</span></a>
@@ -539,20 +625,20 @@ function render(){
    ${S.aberto?`<a class="ir" href="#proc" aria-current="true"><i>04</i><span>Item ${esc((S.linhas.find(r=>r.x.cnj===S.aberto)||{}).x.item)}</span></a>`:''}
    <p class="lx-nk" style="margin-top:14px">Etapas</p>
    ${etapas().map(([k,r])=>`<button type="button" class="ir" data-et="${k}" aria-current="${S.etapa===k}"><span>${esc(r.replace(/^\d · /,''))}</span><small>${n(k)}</small></button>`).join('')}
-   <button type="button" class="ir" data-fo="retido" aria-current="${S.fora==='retido'}"><span>Retirados de pauta</span><small>${n('retido')}</small></button>
+   ${S.mono?'':`<button type="button" class="ir" data-fo="retido" aria-current="${S.fora==='retido'}"><span>Retirados de pauta</span><small>${n('retido')}</small></button>`}
    <p class="nota">Registrar versão, conformidade e Compendium seguem no <a href="/amicus/collectio/classico/">Collectio clássico</a>; a marca do PJe e a matriz se fazem aqui.</p>
   </nav>
   <div class="main">
-   <div class="lx-h"><div><p class="k">${S.loteSel?(S.loteSes?'Coleção de pauta · sessão de '+br(S.loteSes)+' · '+esc(S.colTit):esc(ROT_COL[S.colTipo])+' · '+esc(S.colTit)):'Coleção de pauta · sessão de '+br(S.data)}</p><h1>${S.vista==='meus'?'Minhas <em class="it">correções.</em>':(S.loteSel?'Toda a <em class="it">coleção.</em>':'Toda a <em class="it">pauta.</em>')}</h1></div>
+   <div class="lx-h"><div><p class="k">${S.mono?'Coleção de decisões · '+esc(MONO[S.mono]):S.loteSel?(S.loteSes?'Coleção de pauta · sessão de '+br(S.loteSes)+' · '+esc(S.colTit):esc(ROT_COL[S.colTipo])+' · '+esc(S.colTit)):'Coleção de pauta · sessão de '+br(S.data)}</p><h1>${S.vista==='meus'?'Minhas <em class="it">correções.</em>':(S.loteSel||S.mono?'Toda a <em class="it">coleção.</em>':'Toda a <em class="it">pauta.</em>')}</h1></div>
     <p class="lx-st">${S.usuario?esc(S.usuario)+' · ':''}${esc0.length} de ${S.linhas.length} processos<br>${alertas.length} com alerta</p></div>
-   <p class="lead">${completo()?'O caminho de cada minuta da sua correção, da correção à versão final do PJe, numa página só: cada etapa mostra o que fazer agora e em quais processos.':'O caminho de cada minuta da pauta, da correção à liberação no PJe: cada etapa mostra o que falta e em quais processos.'} Clique num processo para ver as versões e o que mudou.</p>
+   <p class="lead">${S.mono?'O caminho de cada decisão, da minuta à assinatura: cada etapa mostra o que falta e em quais processos.':completo()?'O caminho de cada minuta da sua correção, da correção à versão final do PJe, numa página só: cada etapa mostra o que fazer agora e em quais processos.':'O caminho de cada minuta da pauta, da correção à liberação no PJe: cada etapa mostra o que falta e em quais processos.'} Clique num processo para ver as versões e o que mudou.</p>
    ${PREVIA?'<span class="aviso">Prévia · mesmos dados do Collectio</span>':''}
 
-   <section class="sec" id="fluxo"><div class="shd"><div><p class="k">01 / Produção</p><h2>Fluxo da <em class="it">minuta.</em></h2><p class="d">Cada coluna é uma etapa, com o próximo passo e a fila, na ordem da pauta. As datas vêm da pauta do Ex Officio${completo()?'; a marca do PJe e a versão final, do Collectio':''}. Clique na etapa para filtrar a lista.${completo()?'':' “No PJe” e “Versão final” só entram nas minhas correções.'}</p></div></div>
+   <section class="sec" id="fluxo"><div class="shd"><div><p class="k">01 / Produção</p><h2>Fluxo da <em class="it">minuta.</em></h2><p class="d">${S.mono?'Cada coluna é uma etapa, com o próximo passo e a fila. As datas vêm da ficha do Ex Officio; a versão final é a importada no Collectio ou, sem ela, a decisão publicada que chega ao Ementário. Clique na etapa para filtrar a lista.':`Cada coluna é uma etapa, com o próximo passo e a fila, na ordem da pauta. As datas vêm da pauta do Ex Officio${completo()?'; a marca do PJe e a versão final, do Collectio':''}. Clique na etapa para filtrar a lista.${completo()?' Sem versão final importada, vale o acórdão publicado que chega ao Ementário.':' “No PJe” e “Versão final” só entram nas minhas correções.'}`}</p></div></div>
     <div class="box">
      <div class="met fl" style="grid-template-columns:repeat(${etapas().length},minmax(0,1fr))" role="group" aria-label="Etapas e fila de cada uma">${etapas().map(e=>colEtapa(e,esc0)).join('')}</div>
      <div class="ph">
-      <span class="seg" role="group" aria-label="Recorte"><button type="button" data-vista="meus" aria-pressed="${S.vista==='meus'}"${meus?'':' disabled'}>Minhas correções</button><button type="button" data-vista="todos" aria-pressed="${S.vista==='todos'}">Toda a pauta</button></span>
+      <span class="seg" role="group" aria-label="Recorte"><button type="button" data-vista="meus" aria-pressed="${S.vista==='meus'}"${meus?'':' disabled'}>Minhas correções</button><button type="button" data-vista="todos" aria-pressed="${S.vista==='todos'}">${S.mono||S.loteSel?'Toda a coleção':'Toda a pauta'}</button></span>
       <label class="bq"><span class="sr">Buscar</span><input type="search" id="q" placeholder="item, processo, parte ou assunto" value="${esc(S.q)}"></label>
       <span class="fora">Fora do fluxo: <button type="button" class="b" data-fo="retido" aria-pressed="${S.fora==='retido'}">Retirados <i>${n('retido')}</i></button>${S.etapa||S.fora||S.q?`<button type="button" class="b" id="limpa">× Limpar filtros</button>`:''}</span>
      </div>
@@ -561,7 +647,7 @@ function render(){
 
    ${matrizHtml(esc0)}
 
-   <section class="sec" id="procs"><div class="shd"><div><p class="k">03 / Lista</p><h2>Processos <em class="it">${S.etapa?esc((etapas().find(e=>e[0]===S.etapa)||[])[2]):S.fora==='retido'?'retirados':S.fora==='minutar'?'sem minuta':'da '+(S.vista==='meus'?'correção':S.loteSel?'coleção':'sessão')}.</em></h2><p class="d">${lst.length} de ${esc0.length}, por etapa e na ordem da pauta. A barra mostra as etapas; a vazada com contorno é a etapa pulada.</p></div>
+   <section class="sec" id="procs"><div class="shd"><div><p class="k">03 / Lista</p><h2>Processos <em class="it">${S.etapa?esc((etapas().find(e=>e[0]===S.etapa)||[])[2]):S.fora==='retido'?'retirados':S.fora==='minutar'?'sem minuta':'da '+(S.vista==='meus'?'correção':S.loteSel||S.mono?'coleção':'sessão')}.</em></h2><p class="d">${lst.length} de ${esc0.length}, por etapa e na ordem ${S.mono?'de registro':'da pauta'}. A barra mostra as etapas; a vazada com contorno é a etapa pulada.</p></div>
      <span class="seg pil" role="group" aria-label="Exibição da lista"><button type="button" id="abre-t" aria-pressed="${!S.fechados.size}" title="Expandir todos os grupos">Expandir</button><button type="button" id="fecha-t" aria-pressed="${S.fechados.size>=etapas().length}" title="Recolher todos os grupos">Recolher</button><i class="sep" aria-hidden="true"></i><button type="button" id="mn-t" aria-pressed="${minTodas(lst)}" title="Mostrar, abaixo de cada processo, a minuta vigente no Collectio">${minTodas(lst)?'Fechar minutas':'Abrir todas as minutas'}</button></span></div>
     <div class="box"><div class="tw"><table class="tb">
      <thead><tr><th scope="col">Item</th><th scope="col">Processo</th><th scope="col">Minuta</th><th scope="col">Correção</th><th scope="col">Etapas</th><th scope="col">Alertas</th><th scope="col"><span class="sr">Abrir</span></th></tr></thead>
@@ -626,15 +712,20 @@ const PASSO={minutar:['Minutar','pelo minutante designado',r=>r.x.servidor?'minu
   corrigida:['Colar no PJe e marcar','a versão importada, no Collectio',r=>'corrigida '+brc(r.x.dataCorrecao)],
   pje:['Liberar no PJe','pela pauta ou pela página do Desembargador',r=>'no PJe '+brc(r.it&&r.it.pje&&r.it.pje.em)],
   liberada:['Registrar a versão final','nas que ainda não têm',r=>'liberada '+brc(r.x.dataLiberacao)]};
+const PASSO_MONO={minutar:['Minutar','pelo minutante designado',r=>r.x.servidor?'minutante '+r.x.servidor:'sem minutante designado'],
+  minutada:['Revisar','na ordem de registro',r=>r.x.servidor?'minuta '+r.x.servidor+(r.x.dataMinuta?' · '+brc(r.x.dataMinuta):''):''],
+  corrigida:['Enviar para assinatura','depois da revisão',r=>'revisada '+brc(r.x.dataCorrecao)],
+  liberada:['Assinar','pelo Relator',r=>'enviada '+brc(r.x.dataLiberacao)],
+  assinada:['Publicar','e acompanhar a intimação',r=>'assinada '+brc(r.x.dataAssinatura)+(r.x.publicado?' · publicada':'')]};
 const PASSO_SIMPLES={corrigida:['Liberar no PJe','pela pauta ou pela página do Desembargador',r=>'corrigida '+brc(r.x.dataCorrecao)],liberada:['Pronto para a sessão','liberada no PJe',r=>'liberada '+brc(r.x.dataLiberacao)]};
 function colEtapa([k,r,t,d],base){
-  const ind=k==='liberada'&&completo();
+  const ind=S.mono?k==='assinada':k==='liberada'&&completo();
   /* na fase liberada, as que ainda não têm a versão final vêm primeiro */
-  const lst=base.filter(x=>x.etapa===k).sort((a,b)=>(ind?(a.fi?1:0)-(b.fi?1:0):0)||a.item-b.item), [ac,ac2,sub]=(!completo()&&PASSO_SIMPLES[k])||PASSO[k], MAX=5;
+  const lst=base.filter(x=>x.etapa===k).sort((a,b)=>(ind?(a.fi?1:0)-(b.fi?1:0):0)||a.item-b.item), [ac,ac2,sub]=(S.mono?PASSO_MONO[k]:(!completo()&&PASSO_SIMPLES[k])||PASSO[k]), MAX=5;
   const nf=lst.filter(z=>z.fi).length, pct=lst.length?Math.round(100*nf/lst.length):0;
   return `<div class="col${S.etapa===k?' at':''}">
    <button type="button" data-et="${k}" aria-pressed="${S.etapa===k}" title="Filtrar a lista por esta etapa"><span>${esc(r)}</span><b>${lst.length}</b><small>${esc(t)}</small></button>
-   ${ind?`<p class="ind" title="Liberadas com a versão final do PJe registrada"><span class="bar" aria-hidden="true"><i style="width:${pct}%"></i></span><span><b>${nf} de ${lst.length}</b> com versão final</span></p>`:''}
+   ${ind?`<p class="ind" title="${S.mono?'Assinadas com a versão final (importada ou publicada no Ementário)':'Liberadas com a versão final do PJe registrada ou o acórdão publicado no Ementário'}"><span class="bar" aria-hidden="true"><i style="width:${pct}%"></i></span><span><b>${nf} de ${lst.length}</b> com versão final</span></p>`:''}
    <p class="nx"><b>${esc(ac)}</b> ${esc(ac2)}</p>
    ${lst.length?`<ul>${lst.slice(0,MAX).map(z=>`<li><span class="ii">${esc(z.x.item)}</span><button type="button" data-abre="${esc(z.x.cnj)}"><span class="cnj">${esc(z.x.cnj.slice(0,15))}</span><span class="pt">${esc(sub(z))}</span></button>${ind?`<span class="vf ${z.fi?'ok':''}" title="${z.fi?'Com versão final':'Sem versão final'}">${z.fi?'✓':'—'}</span>`:''}</li>`).join('')}</ul>${lst.length>MAX?`<button type="button" class="mais" data-et="${k}">+ ${lst.length-MAX} na lista</button>`:''}`:`<p class="nd">Nada nesta etapa.</p>`}
   </div>`;
@@ -652,9 +743,9 @@ function colEtapa([k,r,t,d],base){
 const priLegal=x=>{const v=String((x.acervo||{}).prioridade||'').trim();return !!v&&!/^n[ãa]o$/i.test(v)};
 const c_=x=>x.ctl||{}, ca_=x=>(c_(x).cartao)||{};
 const NAO1={ED:'ED',AgInt:'AgInt',JR:'JR','Embargos de Declaração':'ED','Agravo Interno':'AgInt','Juízo de Retratação':'JR'};
-const TIPO={'Apelação':'Ap','Embargos de Declaração':'ED','Remessa Necessária':'Rem','Agravo Interno':'AgInt','Agravo de Instrumento':'AI','Juízo de Retratação':'JR'};
+const TIPO={'Decisão monocrática (art. 932)':'932','Decisão de urgência':'Urg','Despacho':'Desp','Decisão de admissibilidade':'Adm','Juízo de retratação':'JR','Homologação / extinção':'Hom','Outra':'Outra','Apelação':'Ap','Embargos de Declaração':'ED','Remessa Necessária':'Rem','Agravo Interno':'AgInt','Agravo de Instrumento':'AI','Juízo de Retratação':'JR'};
 const FIXOS=[
-  ['tipo','Tipo de julgamento',x=>ca_(x).tipoJ||'',v=>v?{t:TIPO[v]||v.slice(0,5)}:null],
+  ['tipo','Tipo de julgamento',x=>ca_(x).tipoJ||c_(x).tipoAto||'',v=>v?{t:TIPO[v]||v.slice(0,5)}:null],
   ['prelim','Preliminares',x=>c_(x).prelim,v=>/^há/i.test(v)?{t:'■',c:'ik'}:/^sem/i.test(v)?{t:'–',c:'nd'}:null],
   ['mpf','MPF',x=>[c_(x).mpf,c_(x).parecer].filter(Boolean).join(' · '),v=>!v?null:/sem manifesta/i.test(v)?{t:'!',c:'al'}:/com parecer/i.test(v)?{t:'✓',c:'ok'}:/sem hip/i.test(v)?{t:'–',c:'nd'}:{t:'■',c:'ik'}],
   ['tempest','Tempestividade',x=>c_(x).tempest,v=>!v?null:/^intemp/i.test(v)?{t:'×',c:'al'}:/n[ãa]o verif/i.test(v)?{t:'?',c:'al'}:/^tempest/i.test(v)?{t:'✓',c:'ok'}:{t:'–',c:'nd'}],
@@ -676,18 +767,19 @@ const FIXOS=[
 const INDS=[
   ['meta','Meta',x=>c_(x).meta||'',v=>v?{t:String(v).replace(/^M/,''),c:'ik'}:null],
   ['nao1','Não é 1º julgamento',x=>NAO1[x.julgamento]||NAO1[ca_(x).tipoJ]||'',v=>v?{t:v,c:'ik'}:null],
-  ['urg','Urgência / liminar pendente',x=>(x.acervo||{}).urgencia||'',v=>v?{t:'■',c:'al'}:null],
+  ['urg','Urgência / liminar pendente',x=>(x.acervo||{}).urgencia||(c_(x).urgTipo?c_(x).urgTipo+(c_(x).urgSit?' · '+c_(x).urgSit:''):''),v=>v?{t:'■',c:'al'}:null],
   ['pri','Prioridade legal',x=>priLegal(x)?'Prioridade legal (acervo do PJe)':'',v=>v?{t:'■',c:'ik'}:null],
   ['adm','Admissibilidade em discussão',x=>{const c=c_(x),m=[];if(/intemp|n[ãa]o verif/i.test(c.tempest||''))m.push('tempestividade: '+c.tempest);if(/n[ãa]o recolh|n[ãa]o verif/i.test(c.preparo||''))m.push('preparo: '+c.preparo);if(c.repres&&/irreg|pend/i.test(c.repres))m.push('representação: '+c.repres);return m.join(' · ')},v=>v?{t:'■',c:'al'}:null],
   ['val','Pendência [VALIDAR]',x=>{const p=(ca_(x).pendencias||[]).filter(q=>q&&!q.ok);return p.length?p.length+' pendência'+(p.length>1?'s':'')+': '+p.map(q=>q.desc||q).join(' | '):''},v=>v?{t:String(parseInt(v,10)),c:'al'}:null],
   ['sig','Sigilo',x=>x.sigilo||'',v=>v?{t:'■',c:'ik'}:null],
   ['ret','Retirado de pauta',x=>c_(x).intercorTipo?(c_(x).intercor||c_(x).intercorTipo):'',v=>v?{t:'■',c:'al'}:null]];
+const IND_MONO=[['hip','Hipótese do art. 932',x=>c_(x).hip932||'',v=>v?{t:String(v).split(' ')[0],c:'ik'}:null],['ass','Assinada',x=>x.assinado||x.dataAssinatura?'assinada'+(x.dataAssinatura?' em '+br(x.dataAssinatura):''):'',v=>v?{t:'✓',c:'ok'}:null],['pub','Publicada',x=>x.publicado?'publicada':'',v=>v?{t:'✓',c:'ok'}:null]];
 function celV([k,rot,f,r],x){const v=f(x)||'',o=r?r(v):null,tip=`data-tip="${esc(rot)}" data-val="${esc(v||'não informado')}"`;
   if(!r)return `<td class="fx fx-${k}${v&&ALERTA_F.test(v)?' al':''}" ${tip}>${v?esc(v):'<span class="vz0">—</span>'}</td>`;
   return `<td class="iv${o&&o.c?' '+o.c:''}" ${tip}>${o?esc(o.t):'<span class="vz0">·</span>'}</td>`}
 const ALERTA_F=/intempest|n[ãa]o recolhido|n[ãa]o verificado|irregular|pendente|sem manifesta/i;
 const comFixos=()=>!S.loteSel||!!S.loteSes;
-const chaveMx=()=>S.loteSel?S.loteSel+'|'+S.loteSes:'pauta-'+S.data;
+const chaveMx=()=>S.mono?S.mono:S.loteSel?S.loteSel+'|'+S.loteSes:'pauta-'+S.data;
 function matrizBase(){
   if(!S.loteSel&&S.mxSes){const M=S.mxSes,itens={};S.itens.forEach(x=>{const m=M.itens[x.cnj],z=S.por[x.cnj],it=z&&z.it;itens[x.cnj]=m?{grupo:m.grupo||'',variacoes:(m.variacoes||[]).slice(),observacao:m.observacao||''}:{grupo:'',variacoes:[],observacao:(it&&it.observacao)||''}});
     return {grupos:M.grupos.map(g=>Object.assign({},g)),colunas:M.colunas.map(c=>Object.assign({},c)),itens}}
@@ -709,7 +801,7 @@ async function gravarMatriz(){
   let n=0; const ids=new Set(M.grupos.map(g=>g.id));
   const novoId=()=>{let i;do{i='G'+(++n)}while(ids.has(i)||ids.has(pre+i));ids.add(pre+i);return i};
   const mapa={}; M.grupos.forEach(g=>{mapa[g.id]=g.id.startsWith('novo:')?novoId():(pre&&g.id.startsWith(pre)?g.id.slice(pre.length):g.id)});
-  const corpo={acao:'matriz',id:lote||'pauta-'+S.data,
+  const corpo={acao:'matriz',id:lote||S.mono||'pauta-'+S.data,
     grupos:M.grupos.map(g=>({id:mapa[g.id],rotulo:g.rotulo,cor:g.cor,resultado:g.resultado||'',modelo:g.modelo||''})),
     colunas:M.colunas.map(c=>c.trecho?{id:c.id,rotulo:c.rotulo,trecho:c.trecho}:{id:c.id,rotulo:c.rotulo}),
     itens:S.itens.map(x=>{const m=M.itens[x.cnj]||{grupo:'',variacoes:[],observacao:''};return {processo:x.cnj,grupo:m.grupo?mapa[m.grupo]||'':'',variacoes:m.variacoes||[],observacao:m.observacao||''}})};
@@ -732,7 +824,7 @@ function aviso(t){let e=$('#toast');if(!e){e=document.createElement('div');e.id=
 function matrizHtml(base){
   /* todo lote, da pauta ou avulso, tem a matriz padrão (prontuário e indicadores) e a própria (editável) */
   const sesLote=!!S.loteSel, vis=sesLote?(S.mxVista==='padrao'?'padrao':'lote'):'sessao';
-  const M=matriz(), ed=S.mxModo==='construir'&&vis!=='padrao', cols=vis==='padrao'?[]:M.colunas, fx=vis==='lote'?[]:FIXOS, ind=vis==='lote'?[]:INDS, ncol=(fx.length?3:6)+cols.length+fx.length+ind.length;
+  const M=matriz(), ed=S.mxModo==='construir'&&vis!=='padrao', cols=vis==='padrao'?[]:M.colunas, fx=vis==='lote'?[]:FIXOS, ind=vis==='lote'?[]:INDS.concat(S.mono?IND_MONO:[]), ncol=(fx.length?3:6)+cols.length+fx.length+ind.length;
   const linhas=base.slice().sort((a,b)=>a.item-b.item);
   const ordem=M.grupos.map(g=>({g,rs:linhas.filter(r=>(M.itens[r.x.cnj]||{}).grupo===g.id)})).filter(o=>o.rs.length||ed);
   const soltos=linhas.filter(r=>!M.grupos.some(g=>g.id===(M.itens[r.x.cnj]||{}).grupo));
@@ -752,7 +844,7 @@ function matrizHtml(base){
     +(soltos.length?banda('Não classificados','',' #9aa0a8',soltos.length,'','')+soltos.map(r=>linha(r,'#9aa0a8')).join(''):'');
   const form=S.mxForm==='g'?`<form class="mxf" id="mxf-g"><label>Grupo (tipo de caso)<input class="sel" name="r" required placeholder="Ex.: Concursos: anulação de questões"></label><label>Resultado proposto<input class="sel" name="s" placeholder="Ex.: Negar provimento por monocrática"></label><button class="b pri">Adicionar grupo</button><button type="button" class="b" data-mxform="">Cancelar</button></form>`
     :S.mxForm==='c'?`<form class="mxf" id="mxf-c"><label>Coluna (variação)<input class="sel" name="r" required placeholder="Ex.: Prescrição"></label><label>Trecho da minuta (opcional) · marcado: deve ter; sem marca: não deve ter<input class="sel" name="t" placeholder="Ex.: Pela sucumbência recursal, a parte"></label><button class="b pri">Adicionar coluna</button><button type="button" class="b" data-mxform="">Cancelar</button></form>`:'';
-  return `<section class="sec" id="matriz"><div class="shd"><div><p class="k">02 / Matriz</p><h2>${vis==='padrao'?'Matriz <em class="it">padrão.</em>':vis==='lote'?'Matriz do <em class="it">lote.</em>':'Matriz da <em class="it">sessão.</em>'}</h2><p class="d">${vis==='padrao'?'A matriz padrão (prontuário da sessão e indicadores), só com os processos deste lote'+(S.loteSes?'':'; o prontuário vem da pauta da sessão de cada processo, quando houver')+'. ':vis==='lote'?'Grupos, variações e trechos da minuta deste lote: a coluna com trecho indica os casos que devem ter ou não aquele trecho na minuta. ':''}${!S.loteSel&&S.mxSes?`Matriz gravada${S.mxSes.por?' por '+esc(S.mxSes.por):''}${S.mxSes.em?' em '+esc(S.mxSes.em.split('-').reverse().join('/')):''}. `:''}${fx.length?'Campos fixos do prontuário da sessão (tipo, preliminar, MPF, tempestividade, preparo, honorários, custas e consectários, tópico síntese, sustentação e resultado), mais as variações dos lotes. ':''}${nGr?`${nGr} grupo${nGr>1?'s':''} · ${cols.length} coluna${cols.length===1?'':'s'} de variação · ${classif} de ${linhas.length} processos classificados.`:'Ainda sem grupos.'} Dá para construir em qualquer coleção.</p></div>
+  return `<section class="sec" id="matriz"><div class="shd"><div><p class="k">02 / Matriz</p><h2>${vis==='padrao'?'Matriz <em class="it">padrão.</em>':vis==='lote'?'Matriz do <em class="it">lote.</em>':S.mono?'Matriz da <em class="it">coleção.</em>':'Matriz da <em class="it">sessão.</em>'}</h2><p class="d">${vis==='padrao'?'A matriz padrão (prontuário da sessão e indicadores), só com os processos deste lote'+(S.loteSes?'':'; o prontuário vem da pauta da sessão de cada processo, quando houver')+'. ':vis==='lote'?'Grupos, variações e trechos da minuta deste lote: a coluna com trecho indica os casos que devem ter ou não aquele trecho na minuta. ':''}${!S.loteSel&&S.mxSes?`Matriz gravada${S.mxSes.por?' por '+esc(S.mxSes.por):''}${S.mxSes.em?' em '+esc(S.mxSes.em.split('-').reverse().join('/')):''}. `:''}${fx.length?'Campos fixos do prontuário da sessão (tipo, preliminar, MPF, tempestividade, preparo, honorários, custas e consectários, tópico síntese, sustentação e resultado), mais as variações dos lotes. ':''}${nGr?`${nGr} grupo${nGr>1?'s':''} · ${cols.length} coluna${cols.length===1?'':'s'} de variação · ${classif} de ${linhas.length} processos classificados.`:'Ainda sem grupos.'} Dá para construir em qualquer coleção.</p></div>
      <span class="mxac">${sesLote?`<span class="seg pil" role="group" aria-label="Qual matriz"><button type="button" data-mxvista="padrao" aria-pressed="${vis==='padrao'}">Matriz padrão</button><button type="button" data-mxvista="lote" aria-pressed="${vis==='lote'}">Matriz própria</button></span>`:''}${vis!=='padrao'?`<span class="seg pil" role="group" aria-label="Modo da matriz"><button type="button" data-mxmodo="ver" aria-pressed="${!ed}">Ver</button><button type="button" data-mxmodo="construir" aria-pressed="${ed}">Construir</button></span>`:''}</span></div>
     <div class="box">
      ${ed?`<div class="ph"><button type="button" class="b" data-mxform="g">+ Grupo</button><button type="button" class="b" data-mxform="c">+ Coluna</button>${S.mxRasc[chaveMx()]?'<button type="button" class="b" id="mx-desc">Descartar alterações</button>':''}<span class="sp"></span>${S.gestor?`<button type="button" class="b pri" id="mx-grava"${S.mxRasc[chaveMx()]?'':' disabled'}>Gravar matriz</button>`:'<span class="aviso" style="margin:0">Só o gestor grava a matriz</span>'}</div>${form}`:''}
@@ -765,25 +857,28 @@ function matrizHtml(base){
 }
 
 /* linha de etapas do processo, como no cartão da pauta: círculo por etapa, a linha de progresso e o "agora" na próxima */
-const ICO={m:'<path d="M4 20h4l10-10-4-4L4 16z"/>',r:'<path d="M5 12.5l4.5 4.5L19 7.5"/>',p:'<path d="M12 3v11"/><path d="M7.5 9.5L12 14l4.5-4.5"/><path d="M5 20h14"/>',e:'<path d="M4 12l15-7-5 15-3-6z"/>'};
+const ICO={a:'<path d="M4 17c3-6 5-9 7-9s0 8 2 8 2-4 4-4 2 3 4 3M4 21h16"/>',m:'<path d="M4 20h4l10-10-4-4L4 16z"/>',r:'<path d="M5 12.5l4.5 4.5L19 7.5"/>',p:'<path d="M12 3v11"/><path d="M7.5 9.5L12 14l4.5-4.5"/><path d="M5 20h14"/>',e:'<path d="M4 12l15-7-5 15-3-6z"/>'};
 const svg=(d,s)=>`<svg viewBox="0 0 24 24" width="${s||14}" height="${s||14}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
 function linhaEtapas(r){
   const x=r.x,it=r.it;
-  const P=r.cheio?[['Minuta','m',x.dataMinuta],['Correção','r',x.dataCorrecao],['No PJe','p',it&&it.pje&&it.pje.em],['Liberação','e',x.dataLiberacao]]
+  const P=r.mono?[['Minuta','m',x.dataMinuta],['Revisão','r',x.dataCorrecao],['Assinatura','e',x.dataLiberacao],['Assinada','a',x.dataAssinatura||(r.pub&&r.pub.d)]]:r.cheio?[['Minuta','m',x.dataMinuta],['Correção','r',x.dataCorrecao],['No PJe','p',it&&it.pje&&it.pje.em],['Liberação','e',x.dataLiberacao]]
                  :[['Minuta','m',x.dataMinuta],['Correção','r',x.dataCorrecao],['Liberação','e',x.dataLiberacao]];
   const n=P.length, ult=r.passos.lastIndexOf(true), at=r.retido||ult+1>=n?-1:ult+1, pct=ult>0?ult/(n-1)*100:0;
   return `<div class="stl" style="--n:${n}" role="list" aria-label="Etapas">${`<i class="stl-ln" aria-hidden="true"><i style="width:${pct}%"></i></i>`}${P.map((q,k)=>{
-    const ok=r.passos[k], cur=k===at, pul=!ok&&k<ult, vf=q[1]==='e'&&r.cheio&&ok?`<em class="vfi ${r.fi?'ok':'al'}">${r.fi?'✓ versão final':'sem versão final'}</em>`:'';
+    const ok=r.passos[k], cur=k===at, pul=!ok&&k<ult, vf=q[1]==='e'&&r.cheio&&ok?`<em class="vfi ${r.fi?'ok':'al'}">${r.fi?(r.pub?'✓ versão final · Ementário':'✓ versão final'):'sem versão final'}</em>`:q[1]==='a'&&r.pub?'<em class="vfi ok">publicada · Ementário</em>':'';
     return `<span role="listitem" class="st s-${q[1]}${ok?' ok':''}${cur?' at':''}${pul?' pu':''}" ${pul?'title="Etapa sem data registrada na pauta"':''}>${cur?'<em class="ag">agora</em>':''}<span class="c">${svg(ICO[q[1]])}</span><span class="l">${q[0]}</span><small>${q[2]?brc(q[2]):ok?'✓':pul?'sem data':'—'}</small>${vf}</span>`}).join('')}</div>`;
 }
 function procHtml(){
   const r0=S.linhas.find(l=>l.x.cnj===S.aberto); if(!r0)return '';
   /* o fluxo completo (no PJe e versão final) só vale para as minhas correções */
   const r=linha(r0.x,r0.meu), x=r.x,it=r.it,z=r.z;
+  if(r.mono){r.cheio=false}
   let ban='';
-  if(r.retido)ban=`<p class="ban in">${esc(r.c.intercor||r.c.intercorTipo)}</p>`;
+  if(r.mono&&r.pub)ban=`<p class="ban in">Versão final: a decisão publicada em ${br(r.pub.d)}${r.pub.v?' ('+esc(r.pub.v)+')':''}, lida do Ementário${r.it&&r.it.final?'':', porque nenhuma versão final foi importada no Collectio'}.</p>`;
+  if(ban);else if(r.retido)ban=`<p class="ban in">${esc(r.c.intercor||r.c.intercorTipo)}</p>`;
   else if(!r.cheio)ban=r.etapa==='corrigida'?`<p class="ban in">Corrigida. Falta liberar no PJe.</p>`:'';
-  else if(r.etapa==='liberada'&&!r.fi)ban=`<p class="ban">Liberada no PJe${r.passos[2]?'':', sem a marca da versão importada'}. Confira o texto final no PJe e registre-o como versão final no Collectio: a comparação passa a mostrar o que o Desembargador mudou.</p>`;
+  else if(r.etapa==='liberada'&&!r.fi)ban=`<p class="ban">Liberada no PJe${r.passos[2]?'':', sem a marca da versão importada'}. Confira o texto final no PJe e registre-o como versão final no Collectio: a comparação passa a mostrar o que o Desembargador mudou. Sem versão final importada, valerá o acórdão publicado, quando chegar ao Ementário.</p>`;
+  else if(r.etapa==='liberada'&&r.pub)ban=`<p class="ban in">Versão final: o acórdão publicado em ${br(r.pub.d)}${r.pub.v?' ('+esc(r.pub.v)+')':''}, lido do Ementário, porque nenhuma versão final foi importada no Collectio.</p>`;
   else if(r.etapa==='corrigida')ban=`<p class="ban in">Corrigida. Ao colar no editor do PJe, marque no Collectio a versão importada.</p>`;
   const aj=it&&Array.isArray(it.ajustes)?it.ajustes.filter(a=>Array.isArray(a)&&!/^se[cç][aã]o$/i.test(String(a[0]||''))):[];
   const pd=it&&Array.isArray(it.pendencias)?it.pendencias:[];
@@ -795,7 +890,7 @@ function procHtml(){
      <div class="pf-acts"><a class="b" href="/amicus/collectio/classico/?id=${encodeURIComponent(z&&temMin(r)?r.fontes[0].lote:(S.loteSel||'pauta-'+S.data))}#p=${encodeURIComponent(((r.it&&r.it.sessao)||(S.loteSel?'':S.data))+'-'+x.item)}" target="_blank" rel="noopener" title="Registrar versão, conformidade e Compendium">Abrir no clássico</a><button type="button" class="b" id="fecha">Fechar</button></div>
     </div>
     ${ban}
-    <div class="sub"><h3>Versões da minuta <small id="vs-k">${temMin(r)?'lendo…':'—'}</small></h3><div class="vs" id="vs">${temMin(r)?'<p class="vazio" style="padding:0">Lendo as versões…</p>':'<p class="vazio" style="padding:0">Este processo ainda não tem minuta registrada no Collectio.</p>'}</div></div>
+    <div class="sub"><h3>Versões da minuta <small id="vs-k">${temMin(r)||r.pub?'lendo…':'—'}</small></h3><div class="vs" id="vs">${temMin(r)||r.pub?'<p class="vazio" style="padding:0">Lendo as versões…</p>':'<p class="vazio" style="padding:0">Este processo ainda não tem minuta registrada no Collectio.</p>'}</div></div>
     <div class="sub" id="tr-w" hidden><h3>Trechos da minuta <small id="tr-k"></small></h3><ul class="pd trl" id="tr-l"></ul></div>
     ${aj.length?`<div class="sub"><h3>Matriz de ajustes <small>${aj.length} ajuste${aj.length>1?'s':''} da correção</small></h3><table class="aj"><thead><tr><th scope="col">Local</th><th scope="col">Problema</th><th scope="col">Correção</th><th scope="col">Natureza</th></tr></thead><tbody>${aj.map(a=>{const [p,c]=String(a[1]||'').split(/\s*→\s*/);const t=String(a[2]||'');const crit=/alta|cr[ií]tica/i.test(t)?'alta':/m[ée]dia/i.test(t)?'media':'baixa';return `<tr><th scope="row">${esc(a[0])}</th><td>${esc(p)}</td><td class="c">${esc(c||'')}</td><td><span class="tg f ${crit}">${esc(t)}</span></td></tr>`}).join('')}</tbody></table></div>`:''}
     ${pd.length?`<div class="sub"><h3>Pendências <small>${pd.length} a validar</small></h3><ol class="pd">${pd.map((p,k)=>`<li><span class="ii">${k+1}</span><span>${esc(typeof p==='string'?p:(p&&p.desc)||'')}</span></li>`).join('')}</ol></div>`:''}
@@ -803,7 +898,7 @@ function procHtml(){
 }
 /* versões: primeiro um seletor (mostra o texto da versão escolhida); "Comparar" faz surgir o segundo seletor e o lado a lado */
 async function carregarVersoes(){
-  const r=S.linhas.find(l=>l.x.cnj===S.aberto); if(!r||!temMin(r))return;
+  const r=S.linhas.find(l=>l.x.cnj===S.aberto); if(!r||!(temMin(r)||r.pub))return;
   const cnj=r.x.cnj, mx=cnj.slice(0,10);
   try{
     /* uma lista só: as versões de cada coleção em que o processo tem minuta (a coleção aberta primeiro) */
@@ -814,15 +909,18 @@ async function carregarVersoes(){
       (V.versoes||[]).forEach((v,ix)=>vs.push(Object.assign({},v,{k:f.lote+'|'+v.id,lote:f.lote,col:f.titulo,ix,vig:v.id===V.vigente})));
       /* coleção com minuta ainda sem histórico: o texto atual entra como a versão dela */
       if(!(V.versoes||[]).length&&V.existe!==false)vs.push({id:'atual',rotulo:V.rotulo||'Minuta atual, sem histórico',origem:V.origem||'',em:V.atualizado_em||'',paragrafos:V.paragrafos,k:f.lote+'|atual',lote:f.lote,col:f.titulo,ix:0,vig:true});});
-    const nc=r.fontes.length;
+    /* publicado no Ementário: entra como versão final quando nenhuma foi importada */
+    const FS=r.fontes.slice();
+    if(r.pub){FS.push({lote:'#pub',titulo:'Ementário'});vs.push({id:'publicado',rotulo:(r.mono?'Decisão publicada':'Acórdão publicado')+(r.pub.v?' · '+r.pub.v:''),em:r.pub.d,por:'',origem:'Ementário · série histórica do Relator (Base de Jurisprudência do TRF-3)',k:'#pub|publicado',lote:'#pub',col:'Ementário',ix:0,vig:false,final:true,pub:true})}
+    const nc=FS.length;
     $('#vs-k').textContent=vs.length?vs.length+(vs.length>1?' versões':' versão')+(nc>1?' em '+nc+' coleções':''):'nenhuma versão registrada';
     if(!vs.length){$('#vs').innerHTML='<p class="vazio" style="padding:0">A minuta está no Collectio, mas ainda sem versões registradas.</p>';return}
     const meta=k=>vs.find(v=>v.k===k)||{};
-    const bd=v=>(nc>1?`<span class="bd co">${esc(v.col)}</span>`:'')+(v.vig?'<span class="bd">vigente</span>':'')+(v.pje?'<span class="bd pj">no PJe</span>':'')+(v.final?'<span class="bd fi">final</span>':'');
-    const op=(sel,fora)=>r.fontes.map(f=>{const g=vs.filter(v=>v.lote===f.lote&&v.k!==fora).slice().reverse();if(!g.length)return '';
-      const o=g.map(v=>`<option value="${esc(v.k)}"${v.k===sel?' selected':''}>${esc(v.id)} · ${esc((v.rotulo||'').slice(0,64))}${v.em?' · '+brc(v.em):''}</option>`).join('');
+    const bd=v=>(nc>1?`<span class="bd co">${esc(v.col)}</span>`:'')+(v.vig?'<span class="bd">vigente</span>':'')+(v.pje?'<span class="bd pj">no PJe</span>':'')+(v.final?'<span class="bd fi">'+(v.pub?'final · publicada':'final')+'</span>':'');
+    const op=(sel,fora)=>FS.map(f=>{const g=vs.filter(v=>v.lote===f.lote&&v.k!==fora).slice().reverse();if(!g.length)return '';
+      const o=g.map(v=>`<option value="${esc(v.k)}"${v.k===sel?' selected':''}>${v.pub?'':esc(v.id)+' · '}${esc((v.rotulo||'').slice(0,64))}${v.em?' · '+brc(v.em):''}</option>`).join('');
       return nc>1?`<optgroup label="${esc(f.titulo)}">${o}</optgroup>`:o}).join('');
-    const a0=(vs.find(v=>v.lote===r.fontes[0].lote&&v.vig)||vs.filter(v=>v.lote===r.fontes[0].lote).pop()||vs[0]).k;
+    const a0=((r.fontes.length&&(vs.find(v=>v.lote===r.fontes[0].lote&&v.vig)||vs.filter(v=>v.lote===r.fontes[0].lote).pop()))||vs[0]).k;
     $('#vs').innerHTML=`<div class="vsel">
       <label class="vlb"><span>Versão</span><select class="sel" id="va">${op(a0)}</select></label><span id="va-b"></span>
       <label class="vlb pjm" title="Marque a versão que foi colada no editor do PJe: a correção entra na produção e a liberação passa a ser acompanhada"><input type="checkbox" id="va-pje"><span>importada no PJe</span></label>
@@ -831,14 +929,15 @@ async function carregarVersoes(){
      <p class="vor" id="va-o"></p><div id="dif"></div>`;
     const par=k=>{const p=meta(k).paragrafos;return p&&typeof p==='object'?SECS.map(([s,,ab])=>ab+' '+(p[s]||0)).join(' · '):''};
     /* segunda versão sugerida: na mesma coleção, a final contra a importada no PJe (ou a anterior); sem outra ali, a vigente da outra coleção */
-    const outra=k=>{const A=meta(k),mesma=vs.filter(v=>v.lote===A.lote),pj=mesma.find(v=>v.pje&&v.k!==k),fi=mesma.find(v=>v.final&&v.k!==k),ix=mesma.findIndex(v=>v.k===k);
+    const outra=k=>{const A=meta(k),mesma=vs.filter(v=>v.lote===A.lote),pj=mesma.find(v=>v.pje&&v.k!==k),fi=mesma.find(v=>v.final&&v.k!==k)||(A.pub?null:vs.find(v=>v.pub)),ix=mesma.findIndex(v=>v.k===k);
+      if(A.pub){const b=vs.find(v=>v.pje)||vs.find(v=>v.vig&&!v.pub)||vs.find(v=>v.k!==k);return b&&b.k}
       if(A.final){const b=mesma.find(v=>v.id===A.base)||pj||mesma[ix-1];if(b)return b.k}
       const c=fi||pj||mesma[ix-1]||mesma[ix+1];if(c)return c.k;
       const o=vs.find(v=>v.lote!==A.lote&&v.vig)||vs.find(v=>v.k!==k);return o&&o.k;};
     const mostra=async()=>{
       const a=$('#va').value, v=meta(a);
       $('#va-b').innerHTML=bd(v);
-      const pk=$('#va-pje');if(pk){pk.checked=!!v.pje;pk.disabled=false;pk.onchange=()=>marcaPje(r,v,pk)}
+      const pk=$('#va-pje');if(pk){pk.checked=!!v.pje;pk.disabled=false;pk.parentNode.hidden=!!v.pub;pk.onchange=()=>marcaPje(r,v,pk)}
       $('#va-o').textContent=[v.por,v.em?br(v.em):'',v.origem,par(a)].filter(Boolean).join(' · ');
       const on=S.cmpOn&&vs.length>1;
       $('#vb-w').hidden=!on; $('#cmp').textContent=on?'Fechar comparação':'Comparar'; $('#cmp').setAttribute('aria-pressed',String(on));
@@ -886,7 +985,7 @@ async function marcaPje(r,v,el){
   }catch(e){el.checked=!el.checked;el.disabled=false;aviso('Não gravou: '+e.message)}
 }
 const fotos={};
-async function foto(lote,mx,v){const k=lote+'|'+mx+'|'+v;return fotos[k]||(fotos[k]=await get('/api/painel?lote=1&id='+encodeURIComponent(lote)+MODO()+'&minuta='+mx+(v==='atual'?'':'&versao='+encodeURIComponent(v))))}
+async function foto(lote,mx,v){const k=lote+'|'+mx+'|'+v;if(lote==='#pub'){const r=S.linhas.find(l=>l.x.cnj.slice(0,10)===mx);return fotos[k]||(fotos[k]=await fotoPub(r&&r.pub))}return fotos[k]||(fotos[k]=await get('/api/painel?lote=1&id='+encodeURIComponent(lote)+MODO()+'&minuta='+mx+(v==='atual'?'':'&versao='+encodeURIComponent(v))))}
 /* lado a lado: à esquerda a versão mais antiga, à direita a mais nova */
 async function comparar(mx,vs,x1,x2){
   const d=$('#dif'); if(!x1||!x2||x1===x2){d.innerHTML='<p class="vazio">Escolha duas versões diferentes.</p>';return}
@@ -948,7 +1047,7 @@ function difPal(x,y){
 /* ---------- eventos ---------- */
 function ligar(){
   const s=$('#ses');if(s)s.onchange=()=>trocaSessao(s.value);
-  $$('[data-ctipo]').forEach(b=>b.onclick=()=>{S.colTipo=b.dataset.ctipo;render()});
+  $$('[data-ctipo]').forEach(b=>b.onclick=()=>{const k=b.dataset.ctipo;if(MONO[k]){if(S.mono!==k)trocaMono(k);return}S.colTipo=k;if(S.mono&&k==='pauta'){trocaSessao(S.data);return}render()});
   $$('select[data-col]').forEach(s=>s.onchange=()=>{if(s.value)trocaColecao(s.value,s.dataset.col==='pauta'?S.data:'');else trocaSessao(S.data)});
   $$('[data-grp]').forEach(b=>b.onclick=()=>{const k=b.dataset.grp;S.fechados.has(k)?S.fechados.delete(k):S.fechados.add(k);render()});
   $$('[data-mxvista]').forEach(b=>b.onclick=()=>{S.mxVista=b.dataset.mxvista;S.mxModo='ver';S.mxForm='';render();ir('matriz')});
@@ -980,6 +1079,7 @@ function ligar(){
   const f=$('#fecha');if(f)f.onclick=()=>{S.aberto='';const u=new URL(location.href);u.searchParams.delete('processo');history.replaceState(null,'',u);render();ir('procs')};
 }
 async function trocaSessao(d){if(!d)return;S.colTipo='pauta';S.loteSel='';S.data=d;S.aberto='';S.etapa='';S.fora='';const u=new URL(location.href);u.searchParams.set('sessao',S.data);u.searchParams.delete('processo');u.searchParams.delete('colecao');history.replaceState(null,'',u);$('#app').innerHTML='<div class="load"><p id="ld-m">Lendo a pauta…</p></div>';try{await carregarSessao()}catch(e){$('#app').innerHTML=`<div class="load"><p>${esc(e.message)}</p></div>`}}
+async function trocaMono(k){S.aberto='';S.etapa='';S.fora='';S.minAb.clear();const u=new URL(location.href);u.searchParams.set('colecao',k);u.searchParams.delete('sessao');u.searchParams.delete('processo');history.replaceState(null,'',u);$('#app').innerHTML='<div class="load"><p id="ld-m">Lendo as decisões…</p></div>';try{await carregarMono(k)}catch(e){$('#app').innerHTML=`<div class="load"><p>${esc(e.message)}</p></div>`}}
 async function trocaColecao(id,ses){const l=(S.lotesLista||[]).find(x=>x.id===id);if(!l)return;S.colTipo=ses?'pauta':tipoCol(l);S.aberto='';S.etapa='';S.fora='';S.minAb.clear();const u=new URL(location.href);u.searchParams.set('colecao',id);if(ses)u.searchParams.set('sessao',ses);else u.searchParams.delete('sessao');u.searchParams.delete('processo');history.replaceState(null,'',u);$('#app').innerHTML='<div class="load"><p id="ld-m">Lendo a coleção…</p></div>';try{await carregarLote(id,ses)}catch(e){$('#app').innerHTML=`<div class="load"><p>${esc(e.message)}</p></div>`}}
 function abre(cnj){S.aberto=cnj;S.cmpOn=false;const u=new URL(location.href);u.searchParams.set('sessao',S.data);u.searchParams.set('processo',cnj.slice(0,10));history.replaceState(null,'',u);render();ir('proc')}
 function ir(id){const e=document.getElementById(id);if(e)e.scrollIntoView({block:'start'})}

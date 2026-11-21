@@ -121,3 +121,22 @@ test('sessão inexistente não recebe matriz', async () => {
     assert.ok(!amb.data['acervo/matrizes/pauta-2026-01-05.json']);
   });
 });
+
+test('coleções de decisões (Monocrática, Interlocutória, Despacho): a matriz fica em acervo/matrizes e volta pela leitura', async () => {
+  const amb = ambiente();
+  await comHandler(amb, async run => {
+    const r = await run('POST', {}, { acao: 'matriz', id: 'monocratica', grupos: GR, colunas: CO, itens: [{ processo: P, grupo: 'G1', variacoes: ['HON'], observacao: '' }] });
+    assert.equal(r.code, 200, JSON.stringify(r.body));
+    const f = amb.data['acervo/matrizes/monocratica.json'];
+    assert.ok(f && f.colecao === 'monocratica' && !f.sessao);
+    assert.equal(f.itens[P].grupo, 'G1');
+    assert.ok(!amb.data['acervo/lotes/monocratica.json'], 'não cria lote');
+    const g = await run('GET', { matriz: 'monocratica' }, {}, 'Alex');
+    assert.equal(g.code, 200);
+    assert.deepEqual(g.body.matriz.colunas.map(x => x.id), ['PRE', 'HON']);
+    const v = await run('GET', { matriz: 'despacho' }, {}, 'Alex');
+    assert.equal(v.code, 200); assert.equal(v.body.matriz, null, 'sem matriz gravada, volta vazia');
+    const n = await run('POST', {}, { acao: 'matriz', id: 'despacho', grupos: GR, colunas: CO, itens: [] }, 'Alex');
+    assert.equal(n.code, 403, 'só o gestor grava');
+  });
+});
