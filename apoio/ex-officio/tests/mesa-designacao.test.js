@@ -196,20 +196,13 @@ test('Mesa: mesmo assunto fica com a mesma pessoa na proposta (fora os embargos)
   for(const x of ["var DONO={},cntD={};","if(x.t!=='ED'&&DONO[N(x.as)]===m.nome){s+=1000;","if(x.t!=='ED'&&!DONO[N(x.as)])DONO[N(x.as)]=esc_.nome;"])assert.ok(m.includes(x),x);
 });
 
-test('Mesa: indisponível grava na pauta, período sem datas fixas e capacidade descontando outras pautas',()=>{
+test('Mesa: indisponível grava na pauta, período sem datas fixas e capacidade só desta pauta',()=>{
   const pag=read('caput/designacao/index.html');
   assert.ok(!pag.includes("'2026-11-23', ate=")&&!pag.includes("||'2026-11-27'"),'sem período fixo no código');
   assert.ok(pag.includes("VIVO.definirForaDaSessao(D.sessao.id,'d',Object.keys(FD))")&&pag.includes("VIVO.definirForaDaSessao(D.sessao.id,'c',Object.keys(FC))"),'indisponível vira fora desta sessão, gravado');
   assert.ok(!pag.includes('>fora da sessão</span>'),'quem está fora tem o mesmo controle para voltar');
-  assert.ok(pag.includes('outras:outras,')&&pag.includes('function outrasCarga(n)')&&pag.includes('CAPD[m.nome]=AUS[m.nome]||FD[m.nome]?0:capMin(m.nome,du);'),'capacidade desconta outras pautas no mesmo período');
+  assert.ok(!pag.includes('outrasCarga')&&pag.includes('var capMin=function(n,du){return meta(n)*du;};'),'capacidade sem a carga de outras pautas');
   assert.ok(pag.includes("'Período sem dia útil:'")&&pag.includes("'Marcos com data inválida:'")&&!pag.includes('!EMBED&&F.inicio'),'alerta de marcos também dentro do Caput');
-  /* desconto proporcional aos dias úteis em comum */
-  const ini=pag.indexOf('function outrasCarga(n)'),fim=pag.indexOf('\n',ini);
-  const ctx={OUT:[{data:'2026-12-07',de:'2026-11-23',ate:'2026-12-03',carga:{Rodrigo:9}}],de:'2026-11-25',ate:'2026-12-04',br:d=>d.slice(8,10)+'/'+d.slice(5,7),nf:v=>String(Math.round(v*10)/10),
-    diasUteis:(a,b)=>{let n=0;for(let d=new Date(a+'T12:00:00');d<=new Date(b+'T12:00:00');d.setDate(d.getDate()+1)){const w=d.getDay();if(w&&w<6)n++;}return n;}};
-  vm.createContext(ctx);vm.runInContext(pag.slice(ini,fim)+';this.r=outrasCarga("Rodrigo");this.z=outrasCarga("Victor");',ctx);
-  assert.equal(Math.round(ctx.r.t*10)/10,7,'9 pontos em 9 dias úteis, 7 em comum → 7');
-  assert.equal(ctx.z.t,0);
 });
 
 test('Mesa: Limpar para refazer a designação, com desfazer',()=>{

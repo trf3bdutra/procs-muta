@@ -235,13 +235,7 @@ body.emb #b-aplicar{display:none}body.emb .lay{grid-template-columns:262px minma
     var ass={};itens.forEach(function(x){ass[Nn(x.as)]=1;});var hd={},hc={};
     (MAT.minutas||[]).forEach(function(r){if(r[7]===ss.data)return;var k=Nn(r[4]);if(!ass[k])return;if(r[0]){hd[k]=hd[k]||{};hd[k][r[0]]=(hd[k][r[0]]||0)+1;}if(r[5]){hc[k]=hc[k]||{};hc[k][r[5]]=(hc[k][r[5]]||0)+1;}});
     var pr=API.regrasProdutividade()||{};
-    /* outras pautas com período que cruza o desta: a carga delas ocupa parte dos mesmos dias úteis */
-    var hj0=new Date().toISOString().slice(0,10),wE=(pr.pesos&&pr.pesos.ed)||0.5,wV=(pr.pesos&&pr.pesos.voto)||1;
-    var outras=S.sessoes.filter(function(o){return o.id!==ss.id&&o.data>=hj0&&o.itens&&o.itens.length;}).map(function(o){var Zo=null;try{Zo=API.designacao(o.id);}catch(e){Zo=null;}
-      var pe=Zo&&Zo.periodo&&Zo.periodo.efetivo;if(!pe||!pe.de||!pe.ate)return null;var c={};
-      Zo.linhas.forEach(function(l){if(!l.servidor)return;c[l.servidor]=(c[l.servidor]||0)+((l.tipo==='ED'||l.tipo==='AgInt')?wE:wV);});
-      return {data:o.data,de:pe.de,ate:pe.ate,carga:c};}).filter(Boolean);
-    return {vivo:API,outras:outras,sessao:{id:ss.id,data:ss.data,fases:ss.fases||{},fora:ss.foraSessao||{d:[],c:[]}},periodo:Z.periodo&&Z.periodo.efetivo,itens:itens,
+    return {vivo:API,sessao:{id:ss.id,data:ss.data,fases:ss.fases||{},fora:ss.foraSessao||{d:[],c:[]}},periodo:Z.periodo&&Z.periodo.efetivo,itens:itens,
       equipe:(S.equipe||[]).filter(function(m){return m.nome!=='CM';}).map(function(m){return {nome:m.nome,cargo:m.cargo,papel:m.papel,minuta:m.minuta,correcao:m.correcao,auto:m.auto,exp:m.exp,pref:m.pref,nao:m.nao,aliases:m.aliases,aus:m.aus,minutaEventual:m.minutaEventual};}),
       regras:{ordem:(S.desig&&S.desig.ordem)||[],rows:(S.desig&&S.desig.rows)||{}},hist:{d:hd,c:hc},prod:{pesos:pr.pesos||{},metaPadrao:pr.metaPadrao||{voto:3},metas:pr.metas||{}}};
   }
@@ -277,10 +271,8 @@ body.emb #b-aplicar{display:none}body.emb .lay{grid-template-columns:262px minma
   EQ.forEach(function(m){if(ausCad(m))AUS[m.nome]=true;});
   /* fora das minutas ou das correções só nesta sessão (painel da sessão › Equipe da sessão) */
   var FS=D.sessao.fora||{},FD={},FC={};(FS.d||[]).forEach(function(n){FD[n]=true;});(FS.c||[]).forEach(function(n){FC[n]=true;});
-  /* pontos que a pessoa já tem em outras pautas, na proporção dos dias úteis em comum com este período */
-  var OUT=D.outras||[];
-  function outrasCarga(n){var t=0,L=[];OUT.forEach(function(o){var v=o.carga[n]||0;if(!v)return;var a=o.de>de?o.de:de,b=o.ate<ate?o.ate:ate;if(a>b)return;var k=diasUteis(a,b),d2=diasUteis(o.de,o.ate);if(!k||!d2)return;var x=v*k/d2;t+=x;L.push(br(o.data)+': '+nf(x));});return {t:t,L:L};}
-  var capMin=function(n,du){return Math.max(0,meta(n)*du-outrasCarga(n).t);};
+  /* capacidade = meta × dias úteis do período desta pauta (a carga de outras pautas não entra) */
+  var capMin=function(n,du){return meta(n)*du;};
   var meta=function(n){var m=P.metas[N(n).toUpperCase()]||P.metas[n.toUpperCase()];return (m&&m.voto)||P.metaPadrao.voto||3;};
   var peso=function(x){return x.w!=null&&isFinite(x.w)?x.w:(x.t==='ED'||x.t==='AgInt'?(P.pesos.ed||0.5):(P.pesos.voto||1));};
   /* níveis de complexidade (Regras gerais › produtividade): pontos de cada um; o fixado no processo prevalece sobre a regra */
@@ -364,7 +356,7 @@ body.emb #b-aplicar{display:none}body.emb .lay{grid-template-columns:262px minma
     var barra=function(v,a,cap,un){var mx=Math.max(cap,v,a,1);return '<span class="bar"><i class="'+(v>cap?'x':'')+'" style="width:'+(v/mx*100).toFixed(1)+'%"></i>'+(cap&&cap<mx?'<u style="left:'+(cap/mx*100).toFixed(1)+'%" title="capacidade: '+un(cap)+'"></u>':'')+(a?'<em style="left:'+Math.min(99,a/mx*100).toFixed(1)+'%" title="já gravado: '+un(a)+'"></em>':'')+'</span>';};
     /* sessão em que a pessoa não minuta: linha recolhida, sem barra */
     document.getElementById('eq-d').innerHTML=PD.map(function(m){var cap=CAPD[m.nome]||0,v=k.Ld[m.nome]||0,a=k.La[m.nome]||0,fora=!!FD[m.nome],cor=PC.some(function(c){return c.nome===m.nome;});
-      var oc=outrasCarga(m.nome),info=['<b class="np">'+np(ND[m.nome]||0)+' p/ minutar</b>',meta(m.nome)+'/dia',oc.t?'<span title="'+esc('Já ocupado por outras pautas no mesmo período: '+oc.L.join(' · '))+'">outras pautas −'+nf(oc.t)+'</span>':'',a?'gravado '+nf(a):'',cor?'corrige '+(k.Lc[m.nome]||0):''].filter(Boolean).join(' · ');
+      var info=['<b class="np">'+np(ND[m.nome]||0)+' p/ minutar</b>',meta(m.nome)+'/dia',a?'gravado '+nf(a):'',cor?'corrige '+(k.Lc[m.nome]||0):''].filter(Boolean).join(' · ');
       return '<div class="pp'+(AUS[m.nome]||fora?' aus':'')+(v>cap?' acima':'')+'"><span class="nm">'+esc(m.nome)+'</span><span class="num"><b>'+nf(v)+'</b><small> / '+nf(cap)+'</small></span>'+
         (fora?'':barra(v,a,cap,nf))+'<span class="mt">'+info+'</span>'+aus(m.nome,fora,'fora das minutas desta sessão')+'</div>';}).join('');
     document.getElementById('eq-c').innerHTML=PC.map(function(m){var v=k.Lc[m.nome]||0,a=k.Lca[m.nome]||0,cap=CAPC[m.nome]||0,fora=!!FC[m.nome];
