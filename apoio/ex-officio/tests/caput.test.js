@@ -105,3 +105,8 @@ test('Coordenação: seções no padrão da Chefia',()=>{
   assert.ok(v.includes('<div class="wrap cg-chefia co-cab"><div class="cg-top">')&&!v.includes("Operação diária"),'cabeçalho da Coordenação');
   assert.ok(cap.includes('<div class="co-lay"><section class="cg-px cg-comp-p"><header>')&&cap.includes('<aside class="co-lado"><section class="cg-px">')&&cap.includes('<div id="cg-coord" aria-label="Equipe e regras">'),'Competências principal e Equipe e regras lateral');
 });
+test('Chefia › Calendário: pedidos de ausência e quem está fora, pelo motor',()=>{
+  const fs=require('fs'),p=require('path'),cap=fs.readFileSync(p.join(__dirname,'../../../caput/triagem/index.html'),'utf8'),m=fs.readFileSync(p.join(__dirname,'../../../caput/motor/assets/js/21-sessoes-equipe.js'),'utf8');
+  for(const x of ['solicitacoesAusencia: function','decidirAusencia: function','ausencias: function','ausenciaPoe: function','ausenciaTira: function','async function eqDecidir('])assert.ok(m.includes(x),x);
+  for(const x of ['<div id="cg-aus">','function ausPinta(','data-cgau="sim"','data-cgau="poe"','Quem está fora · 6 semanas'])assert.ok(cap.includes(x),x);
+});

@@ -123,6 +123,13 @@ test('Mural só com as entregas de quem está logado; painel do gabinete nativo 
   const app = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
   for (const x of ["var HC={escopo:PAINEL_GAB?'todos':'minhas',", 'id="hc-esc" aria-label="Escopo" hidden', "if(PAINEL_GAB){document.body.classList.add('painel-gab');", 'html body.painel-gab #app header.nx']) assert.ok(app.includes(x), x);
   const caput = fs.readFileSync(path.join(__dirname, '..', '..', '..', 'caput', 'triagem', 'index.html'), 'utf8');
-  for (const x of ["fetch('/api/painel?entregas=1'", 'function voPinta(', 'function voMontar(', "voMontar(); }, 0);"]) assert.ok(caput.includes(x), x);
+  for (const x of ["fetch('/api/painel?entregas=1'", 'function voPinta(', 'function voMontar(', "voMontar();"]) assert.ok(caput.includes(x), x);
   assert.ok(!caput.includes('src="/office/?painel=gabinete"') && !caput.includes('cgGabAltura'), 'sem o Ex Officio embutido');
+});
+
+test('Mural: calendário do gabinete aberto no lugar da agenda de entregas', () => {
+  const app = require('fs').readFileSync(require('path').join(__dirname, '..', 'index.html'), 'utf8');
+  assert.ok(!app.includes('▦ Agenda de entregas'));
+  assert.ok(app.includes('id="hc-cal-full" aria-label="Calendário do gabinete"><div id="cc-cal"'));
+  assert.ok(app.includes("if($('#hc-mini-cal'))hcMiniCalendario();calendario();"));
 });

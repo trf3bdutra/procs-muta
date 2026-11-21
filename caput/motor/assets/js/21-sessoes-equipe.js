@@ -1622,6 +1622,17 @@ html[data-theme=dark] .pc-s.inc{background:#2a1c1f;border-color:#6b3a36}html[dat
     var f = {}; f[rel] = JSON.stringify(atual, null, 1) + '\n'; await W.ProcsMuta.gravar(f, msg);
     if (rel === ARQ_SOL) EQ.sol = atual; else EQ.av = atual;
   }
+  /* aprova ou recusa um pedido de ausência (apoio/equipe-solicitacoes.json); aprovado entra nas ausências do servidor (S.equipe[].aus) */
+  async function eqDecidir(id, ok, obs) {
+    var reg = null, nome = '';
+    await eqGravar(ARQ_SOL, function (o) { reg = o.registros.find(function (x) { return x.id === id; }); if (!reg || reg.estado !== 'pendente') throw new Error('A solicitação já foi decidida ou cancelada.');
+      nome = reg.nome; reg.estado = ok ? 'aprovada' : 'recusada'; reg.decididoEm = new Date().toISOString(); reg.decididoPor = 'Responsável'; if (String(obs || '').trim()) reg.obs = String(obs).trim(); }, 'Caput: pedido de ausência ' + id + ' ' + (ok ? 'aprovado' : 'recusado'));
+    if (!ok) return { ok: true, msg: 'Solicitação recusada.' };
+    var mb = membro(reg.nome);
+    if (!mb) return { ok: true, msg: 'Aprovada, mas ' + reg.nome + ' não está no cadastro da equipe: lance a ausência à mão.' };
+    mb.aus = mb.aus || []; if (!mb.aus.some(function (a) { return a.de === reg.de && a.ate === reg.ate; })) mb.aus.push({ de: reg.de, ate: reg.ate }); HIST = null; salvar();
+    return { ok: true, lancada: true, msg: 'Ausência aprovada e lançada para ' + mb.nome + '.' };
+  }
   async function eqAcao(t) {
     var k = t.dataset.cs;
     try {
@@ -1635,14 +1646,8 @@ html[data-theme=dark] .pc-s.inc{background:#2a1c1f;border-color:#6b3a36}html[dat
       if (k === 'eq-aviso-del') { if (!W.confirm('Excluir este aviso? Ele sai do painel inicial e das notificações de todos.')) return; var ida = t.dataset.id;
         await eqGravar(ARQ_AV, function (o) { o.registros = o.registros.filter(function (x) { return x.id !== ida; }); }, 'Ab Initio: aviso retirado'); toast('Aviso retirado.'); render(); return; }
       if (k === 'eq-aprovar' || k === 'eq-recusar') {
-        var id = t.dataset.id, obs = (root.querySelector('[data-eq-obs="' + id + '"]') || {}).value || '', ok = k === 'eq-aprovar', reg = null;
-        await eqGravar(ARQ_SOL, function (o) { reg = o.registros.find(function (x) { return x.id === id; }); if (!reg || reg.estado !== 'pendente') throw new Error('A solicitação já foi decidida ou cancelada.');
-          reg.estado = ok ? 'aprovada' : 'recusada'; reg.decididoEm = new Date().toISOString(); reg.decididoPor = 'Responsável'; if (obs.trim()) reg.obs = obs.trim(); }, 'Ab Initio: ausência de ' + (t.dataset.nome || '') + ' ' + (ok ? 'aprovada' : 'recusada'));
-        if (ok && reg) { var mb = S.equipe.find(function (x) { return N(x.nome) === N(reg.nome) || (x.aliases || []).some(function (a) { return N(a) === N(reg.nome); }); });
-          if (mb) { mb.aus = mb.aus || []; if (!mb.aus.some(function (a) { return a.de === reg.de && a.ate === reg.ate; })) mb.aus.push({ de: reg.de, ate: reg.ate }); HIST = null; salvar(); toast('Ausência aprovada e lançada para ' + mb.nome + '. Grave no procs-muta para valer na designação.'); }
-          else toast('Aprovada, mas ' + reg.nome + ' não está no cadastro da equipe: lance a ausência à mão.'); }
-        else toast(ok ? 'Aprovada.' : 'Solicitação recusada.');
-        render(); return;
+        var id = t.dataset.id, obs = (root.querySelector('[data-eq-obs="' + id + '"]') || {}).value || '';
+        var rd = await eqDecidir(id, k === 'eq-aprovar', obs); toast(rd.msg); render(); return;
       }
     } catch (e) { toast('Não gravou: ' + e.message); }
   }
@@ -2098,6 +2103,15 @@ html[data-theme=dark] .pc-s.inc{background:#2a1c1f;border-color:#6b3a36}html[dat
     matriz: function () { if (!MAT) matrizCarregar(); return MAT; },
     /* dissociar da matriz de competências (false) ou religar (true); não muda Minuta, Correção nem a designação */
     equipeMatriz: function (nome, dentro) { var m = membro(nome); if (!m) return false; if (dentro) delete m.matriz; else m.matriz = false; salvar(); return true; },
+    /* ausências da equipe (Chefia › Calendário): pedidos da Ex Officio, decisão e controle de quem está fora */
+    solicitacoesAusencia: function (forca) { if (forca) { EQ.sol = null; EQ.erro = ''; }
+      return new Promise(function (ok) { var t0 = Date.now(), fim = function () { ok({ registros: ((EQ.sol || {}).registros || []).slice(), erro: EQ.erro }); };
+        if (EQ.sol || EQ.erro) return fim(); eqCarregar(); (function v() { if (!EQ.lendo && (EQ.sol || EQ.erro)) return fim(); if (Date.now() - t0 > 20000) { EQ.erro = EQ.erro || 'tempo esgotado'; return fim(); } setTimeout(v, 250); })(); }); },
+    decidirAusencia: function (id, aprovar, obs) { return eqDecidir(id, !!aprovar, obs || ''); },
+    ausencias: function () { var L = []; S.equipe.forEach(function (mb) { (mb.aus || []).forEach(function (a, i) { if (a && a.de) L.push({ nome: mb.nome, de: a.de, ate: a.ate || a.de, i: i }); }); }); return L.sort(function (a, b) { return a.de.localeCompare(b.de) || a.nome.localeCompare(b.nome); }); },
+    ausenciaPoe: function (nome, de, ate) { var m = membro(nome), d = /^\d{4}-\d{2}-\d{2}$/; ate = ate || de; if (!m || !d.test(de || '') || !d.test(ate) || ate < de) return false;
+      m.aus = m.aus || []; if (!m.aus.some(function (a) { return a.de === de && a.ate === ate; })) m.aus.push({ de: de, ate: ate }); HIST = null; salvar(); return true; },
+    ausenciaTira: function (nome, i) { var m = membro(nome); if (!m || !m.aus || !m.aus[i]) return false; m.aus.splice(i, 1); HIST = null; salvar(); return true; },
     equipeDefinir: function (nome, campo, valor) { var m = membro(nome); if (!m || ['minuta', 'correcao', 'auto', 'minutaEventual'].indexOf(campo) < 0) return false; m[campo] = !!valor; HIST = null; salvar(); return true; },
     publicarMarcos: function (id, on) { var ss = S.sessoes.find(function (x) { return x.id === id; }); if (!ss) return false; ss.marcosPub = on !== false; if (!ss.marcosPub) { ss.publicada = false; ss.pronta = ''; } salvar(); if (root && !root.hidden) render(); return true; },
     /* seleção prévia no acervo: devolve à Triagem (tira a marca), passa à sessão indicada ou marca como pautado (destino 'pautar'); grava o operacional como o botão Gravar triagem */
