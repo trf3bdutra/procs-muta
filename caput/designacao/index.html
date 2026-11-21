@@ -461,7 +461,7 @@ body.emb #b-aplicar{display:none}body.emb .lay{grid-template-columns:262px minma
     if(k==='man')return {ord:0,nome:'Escolha manual',sub:'alterado por você nesta mesa'};var b=k.split('|')[0],m=MOTIVOS.filter(function(q){return q[0]===b;})[0]||[b,b,''];return {ord:MOTIVOS.indexOf(m),nome:m[1]+(k.indexOf('|')>0?' · '+k.split('|')[1]:''),sub:m[2]};}
   function nomeGrupo(k){if(k.indexOf('F|')===0)return 'Mantidos pela regra · '+k.slice(2);if(AG==='lote')return k==='L:'?'Sem lote':(NOMEL[k.slice(2)]||('Lote '+k.slice(2)));return AG==='bloco'?nomeBloco(k):AGP[AG]?k.slice(2):infoMotivo(k).nome;}
   var ABRE={};
-  function aberto(k,n){return ABRE[AG+'|'+k]!=null?ABRE[AG+'|'+k]:(AG==='bloco'||AG==='lote'||AG==='sec'||n<=1);}
+  function aberto(k,n){return ABRE[AG+'|'+k]!=null?ABRE[AG+'|'+k]:(AG==='bloco'||AG==='lote'||AG==='sec'||AG==='as'||n<=1);}
   /* perfis dos servidores × processos do grupo em tela: especialidade, prefere, evita, histórico nos assuntos do grupo, carga e quanto já está com cada um */
   var CMP={};
   var ORDAS='qtd';try{ORDAS=localStorage.getItem('mesa_ordas')||'qtd';}catch(e){}if(ORDAS!=='pauta')ORDAS='qtd';
