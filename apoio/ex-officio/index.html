@@ -9010,6 +9010,34 @@ html[data-theme=dark] #v-pauta.ed #lst .pc.edr.mrw.rx{background:rgba(255,255,25
 #v-pauta .quick-find .qf-kb::after{content:"⇄";font-size:11px;color:var(--em)}
 #v-pauta .quick-find .qf-kb:hover{background:var(--ep2)}
 #v-pauta .quick-find .qf-kb:focus-visible{outline:2px solid var(--eg);outline-offset:-2px}
+/* tema escuro: faixas, trilhos e números das etapas legíveis; cabeçalho da prévia no tom do painel */
+html[data-theme=dark] #v-pauta.ed .trb-p .tp.st-m .tp-b{background:rgba(95,191,138,.16)}
+html[data-theme=dark] #v-pauta.ed .trb-p .tp.st-c .tp-b{background:rgba(111,165,216,.16)}
+html[data-theme=dark] #v-pauta.ed .trb-p .tp.st-l .tp-b{background:rgba(176,139,224,.16)}
+html[data-theme=dark] #v-pauta.ed .trb-p .tp.st-m .tp-b i{background:#5fbf8a}
+html[data-theme=dark] #v-pauta.ed .trb-p .tp.st-c .tp-b i{background:#6fa5d8}
+html[data-theme=dark] #v-pauta.ed .trb-p .tp.st-l .tp-b i{background:#b08be0}
+html[data-theme=dark] #v-pauta.ed:not(.mono) .trb-p .tp.st-m[aria-pressed=true]{background:rgba(95,191,138,.16)!important;border-color:#5fbf8a}
+html[data-theme=dark] #v-pauta.ed:not(.mono) .trb-p .tp.st-c[aria-pressed=true]{background:rgba(111,165,216,.16)!important;border-color:#6fa5d8}
+html[data-theme=dark] #v-pauta.ed:not(.mono) .trb-p .tp.st-l[aria-pressed=true]{background:rgba(176,139,224,.16)!important;border-color:#b08be0}
+html[data-theme=dark] #v-pauta.ed:not(.mono) .trb-p .tp[aria-pressed=true] .tp-b{background:rgba(255,255,255,.1)}
+html[data-theme=dark] #v-pauta.pt2 .pp-num-rail .pk-bar .b1{background:#5fbf8a}
+html[data-theme=dark] #v-pauta.pt2 .pp-num-rail .pk-bar .b2{background:#6fa5d8}
+html[data-theme=dark] #v-pauta.pt2 .pp-num-rail .pk-bar .b3{background:#b08be0}
+html[data-theme=dark] #v-pauta.pt2 .pp-num-rail .kv.st-m b{color:#5fbf8a}
+html[data-theme=dark] #v-pauta.pt2 .pp-num-rail .kv.st-c b{color:#6fa5d8}
+html[data-theme=dark] #v-pauta.pt2 .pp-num-rail .kv.st-l b{color:#b08be0}
+html[data-theme=dark] #v-pauta.pt2 .pp-num-rail .kv.z b{color:var(--el2)}
+html[data-theme=dark] #v-pauta.ed #lst .pc.edr.mrw.ee1{background:rgba(95,191,138,.08)}
+html[data-theme=dark] #v-pauta.ed #lst .pc.edr.mrw.ee2{background:rgba(111,165,216,.08)}
+html[data-theme=dark] #v-pauta.ed #lst .pc.edr.mrw.ee3,html[data-theme=dark] #v-pauta.ed #lst .pc.edr.mrw.ee4{background:rgba(176,139,224,.09)}
+html[data-theme=dark] #v-pauta.ed #lst .pc.edr.mrw:hover{background-image:linear-gradient(rgba(255,255,255,.035),rgba(255,255,255,.035))}
+html[data-theme=dark] #v-pauta .sn-b.on.nt{color:#6fa5d8}
+html[data-theme=dark] .prt-min .pm-hd{background:var(--ep2);color:var(--ei);border-bottom-color:var(--el)}
+html[data-theme=dark] .prt-min .pm-sw button,html[data-theme=dark] .prt-min .pm-cp{background:var(--ep);color:var(--ei);border-color:var(--el2)}
+html[data-theme=dark] .prt-min .pm-sw button[aria-pressed=true]{background:var(--eg);color:#fff}
+/* com o prontuário aberto, a coluna do meio estreita: faixas de produção em 2 × 2, sem cortar os números */
+#v-pauta.prt-on.ed:not(.mono) .trb-p{grid-template-columns:repeat(2,minmax(0,1fr))!important}
 </style>
 <style id="cmt-mobile-redesign">
 /* ===== Painel do Desembargador no celular · redesign de 20/11/2026 =====
