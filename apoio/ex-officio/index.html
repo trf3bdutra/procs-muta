@@ -2439,14 +2439,14 @@ function carregar(silencioso){
   if(S.fonte==='metas'){$('#pt-ey').textContent='Monitoramento / Metas do CNJ';$('#pt-t').textContent='Metas';$('#pt-st').textContent='';return carregarMetas(silencioso);}
   if(S.fonte==='sens'){$('#pt-ey').textContent='Monitoramento / Casos sensíveis';$('#pt-t').textContent='Casos sensíveis';$('#pt-st').textContent='';return carregarSens(silencioso);}
   if(S.fonte==='mono'){var cm=cacheLer('mono');if(cm&&!silencioso){aplicarMono(JSON.parse(cm._t));render();atualizando(true);}else if(!silencioso)$('#lst').innerHTML='<div class="empty">Lendo…</div>';
-    return api('/api/pauta?mono=1').then(function(d){if(!vigente(nReq,fReq,sReq))return;var mud=cacheGravar('mono',d);atualizando(false);if((cm&&!mud&&!silencioso)||(S.doc&&editandoLista()))return;aplicarMono(d);render();})
+    return api('/api/pauta?mono=1').then(function(d){if(!vigente(nReq,fReq,sReq))return;var mud=cacheGravar('mono',d);atualizando(false);if((cm&&!mud&&!silencioso)||(silencioso&&!mud&&S.doc)||(S.doc&&editandoLista()))return;aplicarMono(d);render();})
       .catch(function(e){atualizando(false);if(cm&&e.status!==401){toast('Lista guardada: não consegui atualizar ('+(e.message||e.erro||'erro')+').');return;}falha(e);});}
   if(!S.ses){var mq=(S.cal||[]).filter(function(s){return s.pauta===false&&s.date>=hoje();});
     /* sem pauta publicada: limpa o que a página anterior (Monocráticas) deixou no cabeçalho, nos números e no contador */
     $('#pt-ey').textContent='01 / Produção';$('#pt-t').textContent='Pauta de Julgamento';$('#pt-st').textContent='';$('#pt-k').innerHTML='';$('#mk').innerHTML='';$('#pt-n').textContent='';$('#ses-tag').textContent='';$('#ses-sub').textContent='';var vpp=$('#v-pauta');vpp.classList.remove('mono');var hdz=vpp.querySelector('.pt-hd');if(hdz)hdz.hidden=true;var mnz=$('#mono-n');if(mnz)mnz.hidden=true;
     $('#lst').innerHTML='<div class="empty">Nenhuma pauta publicada para a equipe ainda. O responsável publica cada pauta na página Pautas (/pautas).'+(mq.length?'<br>Marcos já publicados: '+mq.map(function(s){return 'sessão de '+esc(br(s.date));}).join(', ')+' (veja o calendário na página inicial).':'')+'</div>';return;}
   var ck='p_'+S.ses,cp=cacheLer(ck);if(cp&&!silencioso){aplicarPauta(JSON.parse(cp._t));render();atualizando(true);}else if(!silencioso)$('#lst').innerHTML='<div class="empty">Lendo a pauta…</div>';
-  return api('/api/pauta?data='+S.ses).then(function(d){if(!vigente(nReq,fReq,sReq))return;var mud=cacheGravar(ck,d);atualizando(false);if((cp&&!mud&&!silencioso)||(S.doc&&editandoLista()))return;aplicarPauta(d);render();pedContar();})
+  return api('/api/pauta?data='+S.ses).then(function(d){if(!vigente(nReq,fReq,sReq))return;var mud=cacheGravar(ck,d);atualizando(false);if((cp&&!mud&&!silencioso)||(silencioso&&!mud&&S.doc)||(S.doc&&editandoLista()))return;aplicarPauta(d);render();pedContar();})
     .catch(function(e){atualizando(false);if(!vigente(nReq,fReq,sReq))return;if(e.status===404){S.doc={itens:[],previa:[]};render();return;}if(cp&&e.status!==401){toast('Pauta guardada: não consegui atualizar ('+(e.message||e.erro||'erro')+').');return;}falha(e);});
 }
 function marcaSeg(sel,v){Array.prototype.forEach.call(document.querySelectorAll(sel+' button'),function(b){b.setAttribute('aria-pressed',String(b.getAttribute('data-v')===v));});}
@@ -3215,10 +3215,15 @@ function prontLateral(){var vp=$('#v-pauta'),el=$('#prq');if(!el)return;
   [].forEach.call(document.querySelectorAll('#lst .prt-sel'),function(x){x.classList.remove('prt-sel');});
   if(!it){
     /* sem processo escolhido o prontuário sai da tela: ele volta ao clicar num processo */
-    var era0=vp.classList.contains('prt-on');vp.classList.remove('prt-on');el.removeAttribute('data-k');el.innerHTML='';prtPos();if(era0&&mono&&vp._ed)filaUrg();return;}
+    var era0=vp.classList.contains('prt-on');vp.classList.remove('prt-on');el.removeAttribute('data-k');el.innerHTML='';el._sig='';prtPos();if(era0&&mono&&vp._ed)filaUrg();return;}
   var era2=vp.classList.contains('prt-on');vp.classList.add('prt-on');if(!era2&&mono&&vp._ed)filaUrg();var sel=document.querySelector('#lst .pc[data-k="'+S.prt+'"]');if(sel)sel.classList.add('prt-sel');
   var ativo=el.querySelector('.prt-pc')&&el.contains(document.activeElement)&&/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName);
   if(ativo&&el.getAttribute('data-k')===S.prt)return;
+  /* nada do processo mudou (mesmo processo, mesmos dados, mesma posição na lista): o painel fica como está, sem piscar */
+  var V0=filtrar(),ix0=V0.findIndex(function(i){return dg(i.cnj)===S.prt;}),ss0=(S.cal||[]).filter(function(s){return s.date===S.ses;})[0]||{};
+  var sig=[S.prt,S.ses,S.fonte,!!vp._ed,S.prtModo,ix0,V0.length,(ss0.marcos||{}).entregaMinutas||'',JSON.stringify((S.doc&&S.doc.julgadores)||null),JSON.stringify(it)].join('|');
+  if(el._sig===sig&&el.getAttribute('data-k')===S.prt&&el.querySelector('.prt')){prtPos();return;}
+  var bd0=el.getAttribute('data-k')===S.prt&&el.querySelector('.prt-body'),sc0=bd0?bd0.scrollTop:0;
   var tmp=document.createElement('div');tmp.innerHTML=mono?corpoMono(it):corpo(it,tipoJ(it));var secs=[].slice.call(tmp.querySelectorAll('.pn > section'));
   /* Monocráticas: produção (minutado, revisado, para assinatura, assinada), ato e fundamento, pedido urgente */
   var abas=(mono?PRT_ABAS_MONO:PRT_ABAS).map(function(a){var ss=secs.filter(function(s){var h=s.querySelector('h3');return h&&a[1]&&a[1].test(h.textContent);});
@@ -3236,7 +3241,7 @@ function prontLateral(){var vp=$('#v-pauta'),el=$('#prq');if(!el)return;
       '<div class="f"><span>Assinatura</span><div class="v">'+(it.assinado||it.dataAssinatura?'<b class="ass">Assinada'+(it.dataAssinatura?' em '+esc(br(it.dataAssinatura)):'')+'</b>':'<span class="mut">ainda não assinada · registrar na ficha (▤ › Produção)</span>')+'</div></div>'+
       '</div></section>'+(function(){var us=secs.filter(function(x){var h=x.querySelector('h3');return h&&/Pedido urgente/.test(h.textContent);})[0],on=!!urgDe(it);if(!us)return '';var h3=us.querySelector('h3');if(h3)h3.remove();
       return '<div class="prt-urgf'+(on?' on':'')+'"><label class="prt-urgs"><input type="checkbox" data-urg-sw'+(on?' checked':'')+'><b>Pedido urgente</b>'+(on?'<span class="prt-urgt'+(urgPend(it)?' pend':'')+'">'+esc((it.ctl||{}).urgSit||'Pendente · não apreciada')+'</span>':'<small>desligado · ligue para registrar liminar, tutela ou efeito suspensivo</small>')+'</label><div class="prt-urgc"'+(on?'':' hidden')+'>'+us.outerHTML+'</div></div>';})();abas[0].n=3;abas[0].ch=['dataMinuta','dataCorrecao','dataLiberacao'].filter(function(x){return it[x];}).length;}
-  else {abas[0].html+=prtPrecedentes(it);abas[2].html+=previaMinuta(it,tipoJ(it));abas.unshift({nome:'Acompanhamento',html:acompHtml(it),n:0,ch:0,cont:acompAberto(it)});}
+  else {abas[0].html+=prtPrecedentes(it);/* prévia da minuta retirada do prontuário */abas.unshift({nome:'Acompanhamento',html:acompHtml(it),n:0,ch:0,cont:acompAberto(it)});}
   var ab=Math.min(S.prtAba||0,abas.length-1),V=filtrar(),ix=V.findIndex(function(i){return dg(i.cnj)===S.prt;}),et=etapa(it),ssx=S.cal.filter(function(s){return s.date===S.ses;})[0]||{},pz=mono?'':(ssx.marcos||{}).entregaMinutas||'',dd=pz?dias(hoje(),pz):null,A=alertas(it);
   var mins=it.servidor||'—',cor=it.corretor||'—';
   el.setAttribute('data-k',S.prt);
@@ -3259,12 +3264,18 @@ function prontLateral(){var vp=$('#v-pauta'),el=$('#prq');if(!el)return;
       '<div class="prt-urgc"'+(uon?'':' hidden')+'>'+sec(0)+'</div></div>';
     P.querySelector('.prt-body').innerHTML='<div class="pn"><span class="pm-h">Responsáveis</span><div class="prt-prod">'+ff('Minutante',selR(it,'servidor'))+ff('Corretor',selR(it,'corretor'))+'</div><span class="pm-h">Ato e fundamento · art. 932 do CPC</span>'+sec(/Ato e fundamento/)+'</div>';}
   if(!mono)prtBotoes(el,tipoJ(it));
-  if(!mono)prtEssencial(el);
+  if(!mono)prtEssencial(el,it);
+  el._sig=sig;if(sc0){var bd1=el.querySelector('.prt-body');if(bd1)bd1.scrollTop=sc0;}
   prtPos();}
 /* prontuário: modo essencial (só os campos que decidem o caso) e modo completo; a escolha fica neste navegador */
 var PRT_ESS=['[data-p="tipoJ"]','[data-p="subassuntos"]','[data-p="questoes"]','[data-p="sintese"]','[data-p^="papeis."]','[data-p="orig.tipo"]','[data-p="orig.id"]','[data-c="tempest"]','[data-c="preparo"]','[data-c="repres"]','[data-c="prelim"]','[data-c="mpf"]','[data-c="parecer"]','[data-c="resJulg"]','[data-c="honor"]','[data-c="consect"]','[data-p="jul.remessa"]','[data-p="jul.multa"]','[data-p="jul.fund"]','[data-c="topico"]'].join(',');
 try{S.prtModo=localStorage.getItem('eq_prt_modo')||'comp';}catch(e){S.prtModo='comp';}
-function prtEssencial(el){var P=el.querySelector('.prt');if(!P)return;[].forEach.call(el.querySelectorAll('.prt-body .f'),function(f){if(f.querySelector(PRT_ESS))f.classList.add('ess');});
+/* previdenciário (tópico-síntese entra no modo essencial): INSS como parte ou assunto de benefício (aposentadoria, auxílio, pensão, BPC/LOAS, tempo especial…) */
+function ehPrev(it){var t=nq([it.partes,it.assunto,it.classe,((it.ctl||{}).cartao||{}).assuntoDet].join(' ')),a=nq(it.assunto);
+  /* 28,86% é de servidor (o INSS figura como empregador) e contribuição previdenciária é tributário */
+  if(/28[,.]86/.test(a)||(/contribuic/.test(a)&&!/aposentad|tempo de contribuic/.test(a)))return false;
+  return /instituto nacional do seguro social|\binss\b|previd|aposentad|auxilio[- ](doenca|acidente|reclusao|incapacidade)|beneficio (assistencial|por incapacidade|previdenciario)|pensao por morte|salario[- ]maternidade|\bloas\b|\bbpc\b|tempo (especial|de contribuicao|rural)|segurad[oa] especial|incapacidade (laboral|temporaria|permanente)/.test(t);}
+function prtEssencial(el,it){var P=el.querySelector('.prt');if(!P)return;var prev=!it||ehPrev(it);[].forEach.call(el.querySelectorAll('.prt-body .f'),function(f){if(f.querySelector(PRT_ESS)&&(prev||!f.querySelector('[data-c="topico"]')))f.classList.add('ess');});
   [].forEach.call(el.querySelectorAll('.prt-body section'),function(sc){if(sc.classList.contains('prt-min')||sc.classList.contains('prt-prec')||sc.closest('.ac')||sc.querySelector('.f.ess,.rec'))sc.classList.add('ess');});
   prtModoAplica(el);}
 /* aplica o modo no prontuário aberto, sem redesenhar (não depende de foco nem de campo em edição) e com aviso visível */
@@ -3294,7 +3305,7 @@ function urqLat(){var vp=$('#v-pauta'),u=$('#trm-urq');if(!vp||!u)return;
   if(!on||gl<W+48){vp.classList.remove('urq-lat');u.style.left=u.style.top=u.style.width='';return;}
   var hd=document.querySelector('#app header'),hb=hd?Math.max(hd.getBoundingClientRect().bottom,0):60;
   vp.classList.add('urq-lat');u.style.width=W+'px';u.style.left=Math.round(gl-W-24)+'px';var ct=prtTopo(vp);u.style.top=Math.round(Math.max(hb+24,ct))+'px';}
-window.addEventListener('resize',prtPos);window.addEventListener('resize',urqLat);window.addEventListener('scroll',function(){prtPos();},{passive:true});
+window.addEventListener('resize',prtPos);window.addEventListener('resize',urqLat);(function(){var f=0;window.addEventListener('scroll',function(){if(f)return;f=requestAnimationFrame(function(){f=0;prtPos();});},{passive:true});})();
 document.addEventListener('click',function(e){
   var t=e.target,b=t.closest&&t.closest('[data-prt],[data-prt-aba]');
   if(b&&b.closest('#prq')){if(b.hasAttribute('data-prt-aba')){S.prtAba=+b.getAttribute('data-prt-aba');[].forEach.call($('#prq').querySelectorAll('[data-prt-aba]'),function(x){x.setAttribute('aria-selected',String(x===b));});[].forEach.call($('#prq').querySelectorAll('[data-prt-p]'),function(x){x.hidden=x.getAttribute('data-prt-p')!==String(S.prtAba);});return;}
