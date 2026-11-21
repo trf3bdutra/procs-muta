@@ -29512,13 +29512,15 @@
    "exequente": "JHONNY MIKIO CALIXTO",
    "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "assunto": "Multas e demais Sanções",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "g4",
+   "tipo_caso": "Execução fiscal · multa aduaneira (processo administrativo 10140.721797/2011-01) · exceção de pré-executividade rejeitada · ilegitimidade do responsável solidário e nulidade da notificação por edital",
+   "resultado": "Ato a proferir: julgamento do agravo (voto); a gratuidade foi deferida e a tutela recursal indeferida (decisão ID 301131603), e há contraminuta da PFN (ID 302847012); a prevenção da 3ª Turma não foi reconhecida (despacho ID 295800313) ‖ Proposta pelos precedentes: a exceção de pré-executividade só admite matéria sem dilação probatória; o alcance da anulatória transitada sobre a nova cobrança é o ponto central → resultado a definir pela prova pré-constituída [VALIDAR] [VALIDAR: Alcance da coisa julgada na anulatória 0004700-22.2012.4.03.6000 sobre a nova cobrança; Notificação por edital no processo administrativo]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Agravo de Jhonny Mikio Calixto contra a decisão que rejeitou a exceção de pré-executividade na EF 0001842-27.2017.4.03.6005, fundada em ilegitimidade passiva (cobrança como devedor solidário de multa do processo administrativo 10140.721797/2011-01, depois de reconhecida sua boa-fé na anulatória 0004700-22.2012.4.03.6000) e em nulidade da notificação por edital sem esgotar as diligências. A gratuidade foi deferida e a tutela recursal indeferida (ID 301131603). A PFN (ID 302847012) defende a manutenção.",
+   "peculiaridades": "A Des. Fed. Consuelo Yoshida não reconheceu a prevenção da ApelRemNec 0004700-22.2012.4.03.6000, já transitada (despacho ID 295800313). O agravante alega despesas médicas de familiar para justificar a urgência, afastadas por falta de prova (ID 301131603). Redistribuído à Turma Regional (despacho ID 365431460). Etiqueta \"LOTE MULTA - AI\".",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -29544,9 +29546,23 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento do agravo (voto)",
+    "materia": "Execução fiscal — multa aduaneira (exceção de pré-executividade)",
+    "origem": "EF 0001842-27.2017.4.03.6005 (2ª Vara Federal de Ponta Porã)",
+    "decisao_agravada": "Decisão que rejeitou a exceção de pré-executividade (ID não indicado [VALIDAR])",
+    "recurso": "ID 293988399 · 17/07/2024",
+    "preparo": "Gratuidade deferida no recurso (decisão ID 301131603)",
+    "monocratica": "Não indicada; pauta",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "JUSTIÇA GRATUITA (deferida pela decisão ID 301131603) · conferido em 21/11/2026",
+    "conf_prevencao": "Origem: 0001842-27.2017.4.03.6005 · prevenção da ApelRemNec 0004700-22.2012.4.03.6000 (anulatória do mesmo processo administrativo) afastada pelo despacho ID 295800313 (trânsito em 12/08/2019; Súmula 235/STJ) · conferido em 21/11/2026"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] Alcance da anulatória 0004700-22.2012.4.03.6000 sobre a CDA executada",
+    "[VALIDAR] Procuração"
+   ],
    "minuta": false,
    "classe": "AI",
    "tarefa": "Analisar tipo de decisão a proferir",
@@ -29566,6 +29582,103 @@
     "ultima_movimentacao": "10/04/2026 16:28 · CONCLUSOS PARA JULGAMENTO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos",
     "mov_fonte": "linha do tempo do PJe (extração de 20-21/11/2026), sem avisos de tela"
+   },
+   "assunto_detalhado": "Execução fiscal de multa aduaneira — ilegitimidade e notificação no processo administrativo",
+   "especificidades": "Lote de multas (etiqueta \"LOTE MULTA - AI\") · Gratuidade deferida e tutela recursal indeferida (ID 301131603, 29/08/2024) · Anulatória do mesmo processo administrativo transitada em 12/08/2019 (ApelRemNec 0004700-22.2012.4.03.6000), invocada como fundamento da ilegitimidade [VALIDAR alcance]",
+   "teor": {
+    "sintese_fatica": "A União executa multa aduaneira do processo administrativo 10140.721797/2011-01 contra Jhonny Mikio Calixto como devedor solidário; o executado opôs exceção de pré-executividade alegando ilegitimidade e nulidade da notificação por edital, e o juízo a rejeitou.",
+    "inicial": "Não consta nos autos do recurso (EF 0001842-27.2017.4.03.6005)",
+    "decisao_recorrida": "Decisão da origem que rejeitou a exceção de pré-executividade, por falta de prova (descrita no agravo ID 293988399).",
+    "recurso": "Agravo de instrumento ID 293988399 (17/07/2024): ilegitimidade passiva, por ter sido reconhecida sua boa-fé na anulatória 0004700-22.2012.4.03.6000; notificação por edital sem esgotar as diligências; gratuidade e tutela recursal.",
+    "resposta": "Contraminuta da PFN ID 302847012 (05/09/2024): manutenção da decisão; desprovimento.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Advogado Paulo Insfrán Perciany (OAB/MS 19.455); procuração não identificada com texto [VALIDAR].",
+    "preparo": "Gratuidade pedida no recurso e deferida (decisão ID 301131603)."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Execução fiscal · multa aduaneira (processo administrativo 10140.721797/2011-01) · exceção de pré-executividade rejeitada · ilegitimidade do responsável solidário e nulidade da notificação por edital",
+     "sintese": "A União executa multa aduaneira do processo administrativo 10140.721797/2011-01 contra Jhonny Mikio Calixto como devedor solidário; o executado opôs exceção de pré-executividade alegando ilegitimidade e nulidade da notificação por edital, e o juízo a rejeitou.",
+     "questoes": "1) Ilegitimidade passiva do responsável solidário diante da anulatória transitada; 2) nulidade da notificação por edital no processo administrativo; 3) cabimento da exceção de pré-executividade.",
+     "rel": {
+      "razoes": "Agravo de instrumento ID 293988399 (17/07/2024): ilegitimidade passiva, por ter sido reconhecida sua boa-fé na anulatória 0004700-22.2012.4.03.6000; notificação por edital sem esgotar as diligências; gratuidade e tutela recursal.",
+      "contrarrazoes": "Contraminuta da PFN ID 302847012 (05/09/2024): manutenção da decisão; desprovimento."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "",
+      "juizo": "2ª Vara Federal de Ponta Porã",
+      "dispositivo": "Rejeitou a exceção de pré-executividade."
+     },
+     "ai": {
+      "hip": "Execução / cumprimento",
+      "efeito": "Indeferido",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2024-07-17",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": true,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte ré",
+       "tipo": "Agravo de instrumento",
+       "id": "293988399",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "293988399",
+       "data": "2024-07-17"
+      },
+      {
+       "desc": "Despacho: prevenção não reconhecida",
+       "id": "295800313",
+       "data": "2024-08-08"
+      },
+      {
+       "desc": "Decisão: gratuidade deferida e tutela recursal indeferida",
+       "id": "301131603",
+       "data": "2024-08-29"
+      },
+      {
+       "desc": "Contraminuta da PFN",
+       "id": "302847012",
+       "data": "2024-09-05"
+      },
+      {
+       "desc": "Despacho: remessa à Turma Regional",
+       "id": "365431460",
+       "data": "2026-04-10"
+      }
+     ],
+     "pendencias": "Conferir o alcance da anulatória e a procuração",
+     "especificidades": "Lote de multas (etiqueta \"LOTE MULTA - AI\") · Gratuidade deferida e tutela recursal indeferida (ID 301131603, 29/08/2024) · Anulatória do mesmo processo administrativo transitada em 12/08/2019 (ApelRemNec 0004700-22.2012.4.03.6000), invocada como fundamento da ilegitimidade [VALIDAR alcance]",
+     "assuntoDet": "Execução fiscal de multa aduaneira — ilegitimidade e notificação no processo administrativo",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Justiça gratuita",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Antecipação da tutela recursal",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2024-08-29",
+     "ajg": "Deferida no recurso (ID 301131603)"
+    }
    }
   },
   {
@@ -29578,12 +29691,15 @@
    "executado": "INSTITUTO BRASILEIRO DO MEIO AMBIENTE E DOS RECURSOS NATURAIS RENOVAVEIS",
    "assunto": "Multas e demais Sanções",
    "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "tipo_caso": "Caução de imóveis em ação contra o IBAMA (suspensão do CADIN) · pedido de remembramento dos imóveis caucionados após o trânsito em julgado · indeferimento por extrapolar o pedido",
+   "resultado": "Ato a proferir: julgamento do agravo (voto) ou, antes, exame da antecipação da tutela recursal, que não foi apreciada (o despacho ID 317232497 só intimou o agravado; etiqueta \"LIMINAR PENDENTE\"); há contraminuta do IBAMA (ID 320417730) ‖ Proposta pelos precedentes: sem paradigma recuperado no banco para o remembramento de imóveis caucionados; pedido posterior ao trânsito e fora do objeto da ação tende a exigir via própria → tendência de desprovimento [VALIDAR] [VALIDAR: Comprovante do preparo (só a guia foi identificada); Situação da caução e da EF 5007810-31.2018.4.03.6000]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "URG",
+    "VAL"
+   ],
+   "observacao": "Agravo de Osvaldo Firmino de Souza contra a decisão que, após o trânsito em julgado da ação de obrigação de fazer contra o IBAMA (suspensão da inclusão no CADIN, com caução de imóveis), indeferiu o remembramento dos imóveis caucionados por extrapolar o pedido inicial e exigir ação própria (IDs 346942102 e 352051753 da origem). Sustenta que o remembramento já foi deferido na EF 5007810-31.2018.4.03.6000 e que os imóveis pertencem à empresa interessada nas reformas. O IBAMA (ID 320417730) pede o não conhecimento ou o desprovimento.",
+   "peculiaridades": "Tutela recursal pedida e não apreciada: o despacho ID 317232497 (Des. Fed. Consuelo Yoshida) só intimou o agravado; etiqueta \"LIMINAR PENDENTE\". Preparo: guia juntada sem comprovante de pagamento identificado (ID 316925828). Redistribuído à Turma Regional (despacho ID 366970606). Etiqueta \"LOTE MULTA - AI\".",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -29604,9 +29720,23 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Exame da tutela recursal, ainda não apreciada, ou julgamento do agravo (voto)",
+    "materia": "Processual — caução de imóveis e remembramento",
+    "origem": "Ação 5003559-67.2018.4.03.6000 (2ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "ID 346942102 (autos de origem), integrada pela decisão em embargos de declaração ID 352051753",
+    "recurso": "ID 316627603 · 07/03/2025",
+    "preparo": "GRU Judicial (guia ID 316925828) juntada em 10/03/2025, sem comprovante de pagamento identificado",
+    "monocratica": "Não indicada; pauta",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "NÃO VERIFICADO · guia GRU Judicial: ID 316925828 · petição de juntada (prazo do artigo 2º, § 2º, da Resolução PRES 138/2017): ID 316925822 · certidão sem custas: ID 316871201 · comprovante de pagamento não identificado [VALIDAR] · conferido em 21/11/2026 (regra: GRU com comprovante de caixa eletrônico ou de pagamento via internet — Resolução PRES 138/2017, artigo 2º, § 2º, II)",
+    "conf_prevencao": "Origem: 5003559-67.2018.4.03.6000 · distribuído por prevenção do AI 5011965-35.2018.4.03.0000 e da ApCiv 5003559-67.2018.4.03.6000 (certidão ID 316871201) · conferido em 21/11/2026"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] Preparo: comprovante de pagamento da GRU Judicial (ID 316925828)",
+    "[VALIDAR] Tutela recursal pendente desde 2025"
+   ],
    "minuta": false,
    "classe": "AI",
    "tarefa": "Analisar tipo de decisão a proferir",
@@ -29626,6 +29756,109 @@
     "ultima_movimentacao": "16/04/2026 16:48 · CONCLUSOS PARA JULGAMENTO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos",
     "mov_fonte": "linha do tempo do PJe (extração de 20-21/11/2026), sem avisos de tela"
+   },
+   "assunto_detalhado": "Imóveis dados em caução — remembramento pedido após o trânsito em julgado (IBAMA)",
+   "especificidades": "Tutela recursal pendente desde 07/03/2025 (etiqueta \"LIMINAR PENDENTE\") · Pedido posterior ao trânsito em julgado, fora do objeto da ação · Remembramento deferido na EF 5007810-31.2018.4.03.6000, segundo o agravante [VALIDAR] · Preparo: só a guia (ID 316925828) [VALIDAR comprovante]",
+   "teor": {
+    "sintese_fatica": "Em ação contra o IBAMA para suspender a inclusão no CADIN, o autor caucionou imóveis; após o trânsito em julgado, pediu o remembramento dos imóveis, e o juízo indeferiu o pedido por extrapolar o objeto da ação.",
+    "inicial": "Não consta nos autos do recurso (ação 5003559-67.2018.4.03.6000)",
+    "decisao_recorrida": "Decisão ID 346942102 da origem (cópia ID 316627610): indeferiu o remembramento por exceder o pedido inicial (artigo 492 do CPC), a exigir ação própria; embargos de declaração rejeitados (ID 352051753 da origem).",
+    "recurso": "Agravo de instrumento ID 316627603 (07/03/2025): o remembramento é questão incidental da caução, já deferido na execução fiscal conexa; urgência para reformas da empresa proprietária. Pede antecipação da tutela recursal.",
+    "resposta": "Contraminuta do IBAMA ID 320417730 (08/04/2025): o pedido não integra o objeto da lide; não conhecimento ou desprovimento.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Advogado Gustavo Passarelli da Silva (OAB/MS 7.602); procuração ID 316627606 [VALIDAR].",
+    "preparo": "Certidão sem custas (ID 316871201); guia GRU Judicial juntada em 10/03/2025 (IDs 316925822 e 316925828), sem comprovante identificado."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Caução de imóveis em ação contra o IBAMA (suspensão do CADIN) · pedido de remembramento dos imóveis caucionados após o trânsito em julgado · indeferimento por extrapolar o pedido",
+     "sintese": "Em ação contra o IBAMA para suspender a inclusão no CADIN, o autor caucionou imóveis; após o trânsito em julgado, pediu o remembramento dos imóveis, e o juízo indeferiu o pedido por extrapolar o objeto da ação.",
+     "questoes": "1) Regularidade do preparo; 2) cabimento do pedido de remembramento dos imóveis caucionados após o trânsito em julgado, fora do objeto da ação (artigo 492 do CPC).",
+     "rel": {
+      "razoes": "Agravo de instrumento ID 316627603 (07/03/2025): o remembramento é questão incidental da caução, já deferido na execução fiscal conexa; urgência para reformas da empresa proprietária. Pede antecipação da tutela recursal.",
+      "contrarrazoes": "Contraminuta do IBAMA ID 320417730 (08/04/2025): o pedido não integra o objeto da lide; não conhecimento ou desprovimento."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "346942102",
+      "juizo": "2ª Vara Federal de Campo Grande",
+      "dispositivo": "Indeferiu o remembramento dos imóveis caucionados."
+     },
+     "ai": {
+      "hip": "Outra",
+      "efeito": "Pendente",
+      "id": "346942102"
+     },
+     "adm": {
+      "prot": "2025-03-07",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte autora",
+       "tipo": "Agravo de instrumento",
+       "id": "316627603",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "316627603",
+       "data": "2025-03-07"
+      },
+      {
+       "desc": "Certidão de prevenção e sem custas",
+       "id": "316871201",
+       "data": "2025-03-10"
+      },
+      {
+       "desc": "Guia GRU Judicial",
+       "id": "316925828",
+       "data": "2025-03-10"
+      },
+      {
+       "desc": "Despacho: intimação do agravado",
+       "id": "317232497",
+       "data": "2025-03-17"
+      },
+      {
+       "desc": "Contraminuta do IBAMA",
+       "id": "320417730",
+       "data": "2025-04-08"
+      },
+      {
+       "desc": "Despacho: remessa à Turma Regional",
+       "id": "366970606",
+       "data": "2026-04-16"
+      }
+     ],
+     "pendencias": "Conferir o preparo; apreciar a tutela ou julgar",
+     "especificidades": "Tutela recursal pendente desde 07/03/2025 (etiqueta \"LIMINAR PENDENTE\") · Pedido posterior ao trânsito em julgado, fora do objeto da ação · Remembramento deferido na EF 5007810-31.2018.4.03.6000, segundo o agravante [VALIDAR] · Preparo: só a guia (ID 316925828) [VALIDAR comprovante]",
+     "assuntoDet": "Imóveis dados em caução — remembramento pedido após o trânsito em julgado (IBAMA)",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Antecipação da tutela recursal",
+     "urgSit": "Pendente · não apreciada",
+     "urgPedido": "2025-03-07",
+     "urgNivel": "Média",
+     "urgObs": "Não apreciada: despacho ID 317232497 só intimou o agravado"
+    }
    }
   },
   {
@@ -29637,13 +29870,16 @@
    "exequente": "AGENCIA NACIONAL DO PETROLEO, GAS NATURAL E BIOCOMBUSTIVEIS",
    "executado": "AUTO POSTO FERREIRA & FILHO LTDA",
    "assunto": "Multas e demais Sanções",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "g4",
+   "tipo_caso": "Execução fiscal da ANP · exceção de pré-executividade acolhida para excluir sócio do polo passivo · honorários contra a exequente (Tema 961/STJ)",
+   "resultado": "Ato a proferir: julgamento do agravo; não houve pedido de efeito suspensivo (despacho ID 304664764) e há contraminuta (ID 306958458), que pede desprovimento monocrático pelo Tema 961/STJ ‖ Proposta pelos precedentes: pela causalidade, cabem honorários na exceção de pré-executividade acolhida para excluir sócio do polo passivo, ainda que a execução prossiga (Tema 961/STJ) → desprovimento, inclusive por monocrática (artigo 932, IV, b, do CPC) [VALIDAR: Valor dos honorários fixados]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "MONO",
+    "VAL"
+   ],
+   "observacao": "Agravo da ANP contra o capítulo da decisão que, ao acolher a exceção de pré-executividade de José Nilson de Queiroz e excluí-lo do polo passivo da EF 0800901-17.2013.8.12.0018, condenou a exequente em honorários (fls. 470/472 e 503/504 da origem). Invoca o artigo 1º-D da Lei 9.494/1997. O agravado (ID 306958458) sustenta a aplicação do Tema 961/STJ (REsp 1.358.837/SP) e pede o desprovimento monocrático.",
+   "peculiaridades": "A exclusão do sócio decorreu de acórdão que reconheceu sua retirada do quadro societário com efeitos desde 09/02/2012 (processo 0800128-35.2014.8.12.0018), segundo o agravo. Não houve pedido de tutela recursal (ID 304664764). Redistribuído à Turma Regional por sorteio em 20/03/2026. Etiqueta \"LOTE MULTA - AI\".",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -29664,9 +29900,22 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento do agravo (voto) ou monocrática (artigo 932, IV, b, do CPC)",
+    "materia": "Execução fiscal — honorários em exceção de pré-executividade",
+    "origem": "EF 0800901-17.2013.8.12.0018 (1ª Vara Cível de Paranaíba, jurisdição delegada)",
+    "decisao_agravada": "Decisões de fls. 470/472 e 503/504 dos autos de origem",
+    "recurso": "ID 304027800 · 20/09/2024",
+    "preparo": "Isenta (ANP)",
+    "monocratica": "Possível: artigo 932, IV, b, do CPC (Tema 961/STJ) [VALIDAR]",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "ISENTO (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Origem: 0800901-17.2013.8.12.0018 · conferido em 21/11/2026"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] Valor e base dos honorários fixados na origem"
+   ],
    "minuta": false,
    "classe": "AI",
    "tarefa": "Analisar tipo de decisão a proferir",
@@ -29686,6 +29935,92 @@
     "ultima_movimentacao": "20/03/2026 18:00 · REDISTRIBUÍDO POR SORTEIO EM RAZÃO DE CRIAÇÃO DE UNIDADE JUDICIÁRIA",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos",
     "mov_fonte": "linha do tempo do PJe (extração de 20-21/11/2026), sem avisos de tela"
+   },
+   "assunto_detalhado": "Execução fiscal — honorários na exclusão de sócio por exceção de pré-executividade",
+   "especificidades": "Lote de multas (etiqueta \"LOTE MULTA - AI\") · Recurso limitado aos honorários · Tema 961/STJ invocado na contraminuta · Sem pedido de efeito suspensivo",
+   "teor": {
+    "sintese_fatica": "Em execução fiscal de multa da ANP contra posto de combustíveis, o juízo estadual acolheu a exceção de pré-executividade do sócio, excluiu-o do polo passivo e condenou a ANP em honorários; a ANP agravou desse capítulo.",
+    "inicial": "Não consta nos autos do recurso (EF 0800901-17.2013.8.12.0018)",
+    "decisao_recorrida": "Decisões de fls. 470/472 e 503/504 da origem: acolheram a exceção de pré-executividade, excluíram o sócio e fixaram honorários contra a exequente (descritas no agravo ID 304027800).",
+    "recurso": "Agravo de instrumento ID 304027800 (20/09/2024): descabimento de honorários na exceção de pré-executividade em execução não embargada (artigo 1º-D da Lei 9.494/1997); pede a exclusão da verba.",
+    "resposta": "Contraminuta ID 306958458 (14/10/2024): Tema 961/STJ (REsp 1.358.837/SP), honorários pela causalidade na exclusão do sócio; desprovimento pelo artigo 932, IV, b, do CPC.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "ANP representada por procuradora federal (dispensada a procuração). Agravados: advogados Ailton Luciano dos Santos (OAB/MS 4.105) e Bruna Queiroz Diniz (OAB/MS 13.388).",
+    "preparo": "Dispensado: autarquia federal."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Execução fiscal da ANP · exceção de pré-executividade acolhida para excluir sócio do polo passivo · honorários contra a exequente (Tema 961/STJ)",
+     "sintese": "Em execução fiscal de multa da ANP contra posto de combustíveis, o juízo estadual acolheu a exceção de pré-executividade do sócio, excluiu-o do polo passivo e condenou a ANP em honorários; a ANP agravou desse capítulo.",
+     "questoes": "1) Cabimento de honorários contra a Fazenda na exceção de pré-executividade acolhida para excluir sócio do polo passivo, sem extinção da execução (Tema 961/STJ × artigo 1º-D da Lei 9.494/1997).",
+     "rel": {
+      "razoes": "Agravo de instrumento ID 304027800 (20/09/2024): descabimento de honorários na exceção de pré-executividade em execução não embargada (artigo 1º-D da Lei 9.494/1997); pede a exclusão da verba.",
+      "contrarrazoes": "Contraminuta ID 306958458 (14/10/2024): Tema 961/STJ (REsp 1.358.837/SP), honorários pela causalidade na exclusão do sócio; desprovimento pelo artigo 932, IV, b, do CPC."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "",
+      "juizo": "1ª Vara Cível de Paranaíba (jurisdição delegada)",
+      "dispositivo": "Acolheu a exceção, excluiu o sócio e fixou honorários contra a ANP."
+     },
+     "ai": {
+      "hip": "Execução / cumprimento",
+      "efeito": "Não requerido",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2024-09-20",
+      "prazo": "30",
+      "dobro": true,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte autora",
+       "tipo": "Agravo de instrumento",
+       "id": "304027800",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "304027800",
+       "data": "2024-09-20"
+      },
+      {
+       "desc": "Despacho: intimação dos agravados",
+       "id": "304664764",
+       "data": "2024-09-24"
+      },
+      {
+       "desc": "Contraminuta",
+       "id": "306958458",
+       "data": "2024-10-14"
+      }
+     ],
+     "pendencias": "Conferir o valor dos honorários",
+     "especificidades": "Lote de multas (etiqueta \"LOTE MULTA - AI\") · Recurso limitado aos honorários · Tema 961/STJ invocado na contraminuta · Sem pedido de efeito suspensivo",
+     "assuntoDet": "Execução fiscal — honorários na exclusão de sócio por exceção de pré-executividade",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Dispensada (procurador público)",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "hip932": "IV, b — contrário a acórdão repetitivo (Tema 961/STJ) [VALIDAR]",
+     "fundamento": "Paradigmas do gabinete: AI 5029415-20.2020.4.03.0000 (acórdão 3ª Turma, 17/12/2021: desprovido; honorários na exclusão de sócio, Tema 961/STJ e artigo 1º-D da Lei 9.494/1997); AI 5004983-68.2019.4.03.0000 (acórdão 3ª Turma, 04/06/2020: honorários na exceção que exclui sócio sem extinguir a execução, Tema 961/STJ)",
+     "obsRepres": "Dispensada a procuração: representação por procurador público."
+    }
    }
   },
   {
@@ -29697,13 +30032,15 @@
    "exequente": "TAZA COMERCIO IMPORTACAO E EXPORTACAO LTDA FALIDO",
    "executado": "BANCO CENTRAL DO BRASIL",
    "assunto": "Multas e demais Sanções",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "g4",
+   "tipo_caso": "Execução fiscal do Banco Central contra massa falida (Grupo Baltazar) · pedido de suspensão da execução e de habilitação no incidente de classificação do crédito público (artigo 7º-A da Lei 11.101/2005)",
+   "resultado": "Ato a proferir: julgamento do agravo (voto); a gratuidade foi indeferida e o preparo recolhido (decisão ID 282455225; comprovante ID 283190159); não houve pedido liminar (despacho ID 283325225) e há contraminuta do Banco Central (ID 283891532) ‖ Proposta pelos precedentes: sem paradigma recuperado no banco para o artigo 7º-A da Lei 11.101/2005 nas execuções fiscais contra massa falida; a execução fiscal não se suspende pela falência, mas os atos de constrição devem observar a competência do juízo falimentar [VALIDAR] [VALIDAR: Natureza do crédito executado (multa ou tributo) e regime do artigo 7º-A da Lei 11.101/2005 (redação da Lei 14.112/2020)]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Agravo da massa falida de Taza Comércio Importação e Exportação (Grupo Baltazar) contra a decisão que, na EF 0007601-12.2002.4.03.6000 do Banco Central, manteve o prosseguimento das medidas constritivas e indeferiu a suspensão da execução depois de noticiada a falência. Pede a suspensão para habilitação do crédito no incidente de classificação de crédito público (artigo 7º-A, § 4º, V, da Lei 11.101/2005). O Banco Central (ID 283891532) defende a decisão.",
+   "peculiaridades": "A gratuidade da massa falida foi indeferida (ID 282455225); o preparo foi recolhido em 01/12/2023 (ID 283190159). Pedido de intimações exclusivas em nome de Elias Mubarak Júnior (OAB/SP 120.415). Redistribuído à Turma Regional (despacho ID 363620587). Etiqueta \"LOTE MULTA - AI\".",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -29729,9 +30066,22 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento do agravo (voto)",
+    "materia": "Execução fiscal — massa falida (Lei 11.101/2005)",
+    "origem": "EF 0007601-12.2002.4.03.6000 (Campo Grande)",
+    "decisao_agravada": "Decisão em embargos de declaração que manteve o indeferimento da suspensão da execução (cópia ID 281153437)",
+    "recurso": "ID 281153433 · 16/10/2023",
+    "preparo": "GRU 18720-8 de R$ 64,26 paga em 01/12/2023 por internet banking (ID 283190159), após o indeferimento da gratuidade",
+    "monocratica": "Não indicada; pauta",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "COMPROVADO (GRU — comprovante de pagamento via internet) · guia e comprovante: ID 283190159 (R$ 64,26, 01/12/2023) · outra guia juntada: ID 283433523 · decisão sobre gratuidade e preparo: ID 282455225 · certidão sem custas: ID 281170587 · conferido em 21/11/2026 (regra: GRU com comprovante de caixa eletrônico ou de pagamento via internet — Resolução PRES 138/2017, artigo 2º, § 2º, II)",
+    "conf_prevencao": "Origem: 0007601-12.2002.4.03.6000 · falência na Justiça do Amazonas (processo 0211083-24.2012.8.04.0001, ID 281153449) · conferido em 21/11/2026"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] Situação do incidente de classificação do crédito público no juízo falimentar"
+   ],
    "minuta": false,
    "classe": "AI",
    "tarefa": "Analisar tipo de decisão a proferir",
@@ -29751,6 +30101,105 @@
     "ultima_movimentacao": "10/04/2026 15:10 · CONCLUSOS PARA JULGAMENTO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos",
     "mov_fonte": "linha do tempo do PJe (extração de 20-21/11/2026), sem avisos de tela"
+   },
+   "assunto_detalhado": "Execução fiscal contra massa falida — suspensão e incidente de classificação de crédito público",
+   "especificidades": "Lote de multas (etiqueta \"LOTE MULTA - AI\") · Massa falida do Grupo Baltazar (falência no TJAM) · Gratuidade indeferida e preparo recolhido em 01/12/2023 · Intimações exclusivas em nome de Elias Mubarak Júnior (OAB/SP 120.415)",
+   "teor": {
+    "sintese_fatica": "O Banco Central executa multa contra empresa do Grupo Baltazar, depois falida; noticiada a falência, o juízo indeferiu a suspensão da execução e manteve as medidas constritivas, e a massa falida agravou.",
+    "inicial": "Não consta nos autos do recurso (EF 0007601-12.2002.4.03.6000)",
+    "decisao_recorrida": "Decisão em embargos de declaração (cópia ID 281153437) contra a decisão ID 264894942 da origem, que indeferiu a suspensão da execução fiscal após a falência.",
+    "recurso": "Agravo de instrumento ID 281153433 (16/10/2023): suspensão da execução fiscal contra a massa falida e habilitação no incidente de classificação de crédito público (artigo 7º-A, § 4º, V, da Lei 11.101/2005); gratuidade (Súmula 481/STJ).",
+    "resposta": "Contraminuta do Banco Central ID 283891532 (18/12/2023): manutenção da decisão; desprovimento.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Advogados Elias Mubarak Júnior (OAB/SP 120.415) e Antônio Augusto de S. Guerra Palma (OAB/SP 409.492), substabelecidos pela administradora judicial (procuração ID 281153451).",
+    "preparo": "Gratuidade indeferida (ID 282455225); GRU 18720-8 de R$ 64,26 paga em 01/12/2023 (ID 283190159)."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Execução fiscal do Banco Central contra massa falida (Grupo Baltazar) · pedido de suspensão da execução e de habilitação no incidente de classificação do crédito público (artigo 7º-A da Lei 11.101/2005)",
+     "sintese": "O Banco Central executa multa contra empresa do Grupo Baltazar, depois falida; noticiada a falência, o juízo indeferiu a suspensão da execução e manteve as medidas constritivas, e a massa falida agravou.",
+     "questoes": "1) Suspensão da execução fiscal contra a massa falida e incidente de classificação de crédito público (artigo 7º-A da Lei 11.101/2005); 2) prosseguimento de constrições na execução fiscal após a falência.",
+     "rel": {
+      "razoes": "Agravo de instrumento ID 281153433 (16/10/2023): suspensão da execução fiscal contra a massa falida e habilitação no incidente de classificação de crédito público (artigo 7º-A, § 4º, V, da Lei 11.101/2005); gratuidade (Súmula 481/STJ).",
+      "contrarrazoes": "Contraminuta do Banco Central ID 283891532 (18/12/2023): manutenção da decisão; desprovimento."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "264894942",
+      "juizo": "Vara de execuções fiscais de Campo Grande [VALIDAR]",
+      "dispositivo": "Indeferiu a suspensão da execução fiscal após a falência."
+     },
+     "ai": {
+      "hip": "Execução / cumprimento",
+      "efeito": "Não requerido",
+      "id": "264894942"
+     },
+     "adm": {
+      "prot": "2023-10-16",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte ré",
+       "tipo": "Agravo de instrumento",
+       "id": "281153433",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "281153433",
+       "data": "2023-10-16"
+      },
+      {
+       "desc": "Decisão que indeferiu a gratuidade",
+       "id": "282455225",
+       "data": "2023-11-16"
+      },
+      {
+       "desc": "GRU e comprovante",
+       "id": "283190159",
+       "data": "2023-12-01"
+      },
+      {
+       "desc": "Despacho: intimação do agravado",
+       "id": "283325225",
+       "data": "2023-12-06"
+      },
+      {
+       "desc": "Contraminuta do Banco Central",
+       "id": "283891532",
+       "data": "2023-12-18"
+      },
+      {
+       "desc": "Despacho: remessa à Turma Regional",
+       "id": "363620587",
+       "data": "2026-03-31"
+      }
+     ],
+     "pendencias": "Conferir o incidente de classificação no juízo falimentar",
+     "especificidades": "Lote de multas (etiqueta \"LOTE MULTA - AI\") · Massa falida do Grupo Baltazar (falência no TJAM) · Gratuidade indeferida e preparo recolhido em 01/12/2023 · Intimações exclusivas em nome de Elias Mubarak Júnior (OAB/SP 120.415)",
+     "assuntoDet": "Execução fiscal contra massa falida — suspensão e incidente de classificação de crédito público",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Comprovado",
+     "prelim": "Sem preliminares",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "fundamento": "Paradigma do gabinete: AI 5004286-08.2023.4.03.0000 (acórdão 1ª Turma, 08/06/2023: provido; execução fiscal contra falida, artigo 103, parágrafo único, da Lei 11.101/2005) [VALIDAR pertinência]"
+    }
    }
   },
   {
@@ -29762,13 +30211,15 @@
    "exequente": "UNIÃO FEDERAL",
    "executado": "ELIZABETHE DE PAULA PEREIRA ALMEIDA",
    "assunto": "Multas e demais Sanções",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "g5",
+   "tipo_caso": "Execução da União · penhora de imóvel recebido por herança · impenhorabilidade do bem de família (Lei 8.009/1990) · representante do espólio com dois imóveis · fraude à execução subsidiária",
+   "resultado": "Ato a proferir: julgamento do agravo (voto); a agravada foi intimada (despacho ID 342295492), sem contraminuta nos autos ‖ Proposta pelos precedentes: sem paradigma recuperado no banco; a impenhorabilidade da Lei 8.009/1990 recai sobre o imóvel residencial da entidade familiar e, havendo vários, sobre o de menor valor, salvo registro (artigo 5º, parágrafo único) → resultado conforme a prova da residência [VALIDAR] [VALIDAR: Teor e ID da decisão agravada; Natureza do crédito executado; Contraminuta da agravada]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
-   "peculiaridades": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Agravo da União contra a decisão que, na execução 0007775-55.2001.4.03.6000 contra o espólio de Roberto Paulo Almeida, desconstituiu a penhora do imóvel da matrícula 2.419 do CRI de Miranda/MS por reconhecê-lo bem de família. Sustenta que a representante do espólio é proprietária de dois imóveis (matrícula 50.281 do CRI de Campo Grande), o que afasta a impenhorabilidade (artigos 1º e 5º da Lei 8.009/1990), e, subsidiariamente, pede o reconhecimento de fraude à execução e a penhora de outro imóvel. Não consta contraminuta.",
+   "peculiaridades": "A excipiente atua como inventariante do espólio (representação processual, não substituição), segundo a União. Redistribuído da 4ª Turma à Turma Regional (despacho ID 365420184). Etiqueta \"LOTE MULTA - AI\" [VALIDAR natureza do crédito].",
    "peculiaridades_relator": "",
    "orientacao": "",
    "equipe": {
@@ -29784,9 +30235,23 @@
     }
    ],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento do agravo (voto)",
+    "materia": "Execução — impenhorabilidade do bem de família",
+    "origem": "Execução 0007775-55.2001.4.03.6000 (1ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Decisão que acolheu em parte a exceção de pré-executividade e desconstituiu a penhora do imóvel da matrícula 2.419 do CRI de Miranda (ID não indicado [VALIDAR])",
+    "recurso": "ID 340731049 · 24/10/2025",
+    "preparo": "Isenta (União)",
+    "monocratica": "Não indicada; pauta",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "ISENTO (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Origem: 0007775-55.2001.4.03.6000 · execução correlata 0006286-89.2015.4.03.6000 (ID 340731052) · conferido em 21/11/2026"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] ID e data da decisão agravada (descrita só no agravo)",
+    "[VALIDAR] Contraminuta: não consta; conferir intimação (despacho ID 342295492)"
+   ],
    "minuta": false,
    "classe": "AI",
    "tarefa": "Analisar tipo de decisão a proferir",
@@ -29806,6 +30271,91 @@
     "ultima_movimentacao": "10/04/2026 15:51 · CONCLUSOS PARA JULGAMENTO",
     "aviso": "Campos lidos mecanicamente da timeline; conferir nos autos",
     "mov_fonte": "linha do tempo do PJe (extração de 20-21/11/2026), sem avisos de tela"
+   },
+   "assunto_detalhado": "Execução — bem de família de imóvel adjudicado à inventariante do espólio executado",
+   "especificidades": "Lote de multas (etiqueta \"LOTE MULTA - AI\") [VALIDAR natureza do crédito] · Sem contraminuta · Pedido subsidiário de fraude à execução · Execução de 2001 contra espólio",
+   "teor": {
+    "sintese_fatica": "Na execução da União contra o espólio de Roberto Paulo Almeida, a inventariante opôs exceção de pré-executividade alegando prescrição intercorrente e impenhorabilidade do imóvel penhorado; o juízo desconstituiu a penhora por reconhecer bem de família, e a União agravou.",
+    "inicial": "Não consta nos autos do recurso (execução 0007775-55.2001.4.03.6000)",
+    "decisao_recorrida": "Decisão da origem que desconstituiu a penhora do imóvel da matrícula 2.419 do CRI de Miranda/MS por bem de família (transcrita em parte no agravo ID 340731049).",
+    "recurso": "Agravo de instrumento ID 340731049 (24/10/2025): a inventariante é proprietária de dois imóveis, o que afasta a impenhorabilidade (artigos 1º e 5º da Lei 8.009/1990); subsidiariamente, fraude à execução e penhora de outro imóvel.",
+    "resposta": "Não consta contraminuta.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "União representada por advogado da União (dispensada a procuração). Agravada representada pelo advogado Pedro Sérgio Dantas da Silva Carvalho [VALIDAR].",
+    "preparo": "Dispensado: União."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Execução da União · penhora de imóvel recebido por herança · impenhorabilidade do bem de família (Lei 8.009/1990) · representante do espólio com dois imóveis · fraude à execução subsidiária",
+     "sintese": "Na execução da União contra o espólio de Roberto Paulo Almeida, a inventariante opôs exceção de pré-executividade alegando prescrição intercorrente e impenhorabilidade do imóvel penhorado; o juízo desconstituiu a penhora por reconhecer bem de família, e a União agravou.",
+     "questoes": "1) Impenhorabilidade do bem de família de imóvel adjudicado à inventariante quando ela tem outro imóvel; 2) fraude à execução (pedido subsidiário).",
+     "rel": {
+      "razoes": "Agravo de instrumento ID 340731049 (24/10/2025): a inventariante é proprietária de dois imóveis, o que afasta a impenhorabilidade (artigos 1º e 5º da Lei 8.009/1990); subsidiariamente, fraude à execução e penhora de outro imóvel.",
+      "contrarrazoes": "Não consta contraminuta."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "",
+      "juizo": "1ª Vara Federal de Campo Grande",
+      "dispositivo": "Desconstituiu a penhora do imóvel por bem de família."
+     },
+     "ai": {
+      "hip": "Execução / cumprimento",
+      "efeito": "Não requerido",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2025-10-24",
+      "prazo": "30",
+      "dobro": true,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte autora",
+       "tipo": "Agravo de instrumento",
+       "id": "340731049",
+       "contra": "Não apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "340731049",
+       "data": "2025-10-24"
+      },
+      {
+       "desc": "Despacho: intimação da agravada",
+       "id": "342295492",
+       "data": "2025-12-01"
+      },
+      {
+       "desc": "Despacho: remessa à Turma Regional",
+       "id": "365420184",
+       "data": "2026-04-10"
+      }
+     ],
+     "pendencias": "Conferir a decisão agravada e a intimação da agravada",
+     "especificidades": "Lote de multas (etiqueta \"LOTE MULTA - AI\") [VALIDAR natureza do crédito] · Sem contraminuta · Pedido subsidiário de fraude à execução · Execução de 2001 contra espólio",
+     "assuntoDet": "Execução — bem de família de imóvel adjudicado à inventariante do espólio executado",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Dispensada (procurador público)",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "fundamento": "Paradigma do gabinete: AI 5020215-81.2023.4.03.0000 (acórdão 1ª Turma, 11/10/2023: desprovido; bem de família exige prova da destinação residencial da entidade familiar)",
+     "obsRepres": "Dispensada a procuração: representação por procurador público."
+    }
    }
   },
   {
