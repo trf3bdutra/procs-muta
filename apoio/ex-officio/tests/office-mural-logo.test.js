@@ -102,3 +102,13 @@ test('prontuário: Sinalizações (intercorrência com chamado ao TI e retido, p
   const pend = fs.readFileSync(path.join(__dirname, '..', 'api', 'pendencias.js'), 'utf8');
   for (const x of ["origem: 'retido'", "'ret:' + s.date", "if (alvo.origem === 'retido')", "(chamado ao TI)"]) assert.ok(pend.includes(x), x);
 });
+
+test('números da sessão: alertas em botões curtos que levam ao processo', () => {
+  const app = require('fs').readFileSync(require('path').join(__dirname, '..', 'index.html'), 'utf8');
+  for (const x of ['class="kd-it', 'data-ir-k="', "closest('[data-ir-k]')", 'mostrarItemNaPauta(it);});']) assert.ok(app.includes(x), x);
+});
+
+test('buscador rápido sem Enter, processo localizado marcado; Sinalizações em cartão', () => {
+  const app = require('fs').readFileSync(require('path').join(__dirname, '..', 'index.html'), 'utf8');
+  for (const x of ['setTimeout(function(){irPara(true);},380)', 'function achadoLimpa()', "el.classList.add('flash','achado')", 'achadoMarca();prontLateral();', '#v-pauta #lst .pc.achado::before{content:"localizado"', '#prq #ac-sn{background:#fbf6ec']) assert.ok(app.includes(x), x);
+});
