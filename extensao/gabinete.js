@@ -138,7 +138,7 @@ function pills() {
    - Triagem: conferência automática dos autos; etiquetas sugeridas; o prontuário de triagem da ficha; o registro da triagem do lote;
    - Produção: destino do julgamento, designação, revisão e o que vale para o destino; no fim, a pauta (sessão) ou o controle da monocrática.
    Autuação, partes, tramitação e "autos extraídos" não aparecem como grupos: o cartão, a situação atual e a lista de documentos os substituem. */
-var MODOS = ['Processo', 'Triagem', 'Produção'];
+var MODOS = ['Processo', 'Triagem', 'Roteiro', 'Produção'];
 var FORA_PROC = { 'Autuação': 1, 'Partes': 1, 'Tramitação': 1, 'Autos extraídos do PJe': 1, 'Registro no acervo': 1, 'Acompanhamento': 1 };
 var NO_TOPO = { 'Síntese Processual': 1, 'Alegações': 1, 'Etiquetas sugeridas': 1 };
 var CTL_PROC = ['urgencia', 'meta', 'sobrestamento', 'sensivel'];
@@ -239,6 +239,9 @@ function corpoProducao() {
   return h;
 }
 var PAUTA_ABA = 'Pauta';
+/* Roteiro: a triagem em passos, pelo tipo de julgamento (roteiro.js) */
+function gRot() { return { V: V, F: function (k) { return fonteVal({ fonte: [k] }); }, cnj: function () { return G.cnj; }, marcar: marcar, gravar: function () { return gravarJa(); } }; }
+function corpoRoteiro() { return window.MutaRoteiro ? window.MutaRoteiro.html(gRot(), campoRot, questoes) : '<div class="empty">Roteiro indisponível.</div>'; }
 function render() {
   if (!caixa) return;
   var s = ses.estado();
@@ -253,7 +256,7 @@ function render() {
   var nAl = window.MutaAutos && window.MutaAutos.estado().itens ? window.MutaAutos.alertas().filter(function (a) { return a.nivel === 'al'; }).length : 0;
   var tabs = '<div class="seg gtabs pmodos" role="tablist" aria-label="Parte do prontuário">' + MODOS.map(function (a) {
     return '<button type="button" role="tab" data-aba="' + a + '" aria-selected="' + (a === G.aba) + '">' + a + (a === 'Triagem' && nAl ? ' <i class="gnum">' + nAl + '</i>' : '') + '</button>'; }).join('') + '</div>';
-  var corpo = G.aba === 'Triagem' ? corpoTriagem() : G.aba === 'Produção' ? corpoProducao() : corpoProcesso();
+  var corpo = G.aba === 'Triagem' ? corpoTriagem() : G.aba === 'Roteiro' ? corpoRoteiro() : G.aba === 'Produção' ? corpoProducao() : corpoProcesso();
   var ab = document.activeElement && document.activeElement.dataset ? (document.activeElement.dataset.fk || (document.activeElement.dataset.esp ? 'esp:' + document.activeElement.dataset.esp : '') || (document.activeElement.dataset.q != null ? 'q:' + document.activeElement.dataset.q : '')) : '';
   var y = window.scrollY, pp = $('panel-pront'), yp = pp ? pp.scrollTop : 0;
   caixa.innerHTML = cartao(s) + tabs + st0 + '<div class="gbody">' + corpo + '</div>';
@@ -302,10 +305,11 @@ caixa.addEventListener('change', function (e) {
   var t = e.target;
   if (t.dataset && t.dataset.sg != null) { if (window.MutaAutos) window.MutaAutos.marcarSugestao(Number(t.dataset.sg), t.checked); return; }
   if (t.dataset && t.dataset.esp) { if (window.MutaAutos) window.MutaAutos.especificarJa(t.dataset.esp); return; }
+  if (t.dataset && t.dataset.rtc) { if (window.MutaRoteiro) window.MutaRoteiro.conferir(t.dataset.rtc, t.checked, gRot()); render(); return; }
   if (!t.dataset || !t.dataset.fk) return;
   marcar(t.dataset.fk, t.value); var l = t.closest('label'); if (l) l.classList.add('mud');
   agendar(900);
-  if (/^(triagem\.(Urgência|Padrão - Espécie)|producao\.Destino|controles\.Sensível - (In|Ex)cluído)$/.test(t.dataset.fk)) render();
+  if (/^(triagem\.(Urgência|Padrão - Espécie)|producao\.Destino|controles\.Sensível - (In|Ex)cluído)$/.test(t.dataset.fk) || G.aba === 'Roteiro') render();
 });
 caixa.addEventListener('input', function (e) {
   var t = e.target;
@@ -318,6 +322,7 @@ caixa.addEventListener('input', function (e) {
 caixa.addEventListener('click', function (e) {
   var b = e.target.closest('button,a'); if (!b) return;
   if (b.dataset.au != null) { if (window.MutaAutos) window.MutaAutos.clique(b); return; }
+  if (b.dataset.rt != null) { if (window.MutaRoteiro && window.MutaRoteiro.clique(b, gRot())) render(); return; }
   if (b.dataset.copia) { copiar(b.dataset.copia, b); return; }
   if (b.dataset.aba) { G.aba = b.dataset.aba; render(); var pp = $('panel-pront'); if (pp) pp.scrollTop = 0; return; }
   if (b.dataset.ir) { G.aba = 'Processo'; render(); var alvo = $(b.dataset.ir); if (alvo) alvo.scrollIntoView({ block: 'start' }); return; }

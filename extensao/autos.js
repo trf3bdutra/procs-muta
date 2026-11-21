@@ -448,7 +448,7 @@ function especificar(id, v) { A.esp[id] = v; clearTimeout(A.tEsp); A.tEsp = setT
 function especificarJa(id) { if (id in A.esp) { clearTimeout(A.tEsp); gravarEspecificacao(id); } }
 
 document.addEventListener('muta:prontuario', function () { var c = cnjAtual(); if (A.cnj && c && Muta.chaveProcesso(A.cnj) !== Muta.chaveProcesso(c)) { A.sug = null; } });
-window.MutaAutos = { ler: ler, extrair: extrair, extrairPrincipais: extrairPrincipais, htmlDocs: htmlDocs, htmlSituacao: htmlSituacao, htmlConferencia: htmlConferencia, htmlPreencher: htmlPreencher,
+window.MutaAutos = { sugestoes: function () { if (!A.itens || !lidoDoProcesso()) return []; if (!A.sug) calcular(); return A.sug || []; }, ler: ler, extrair: extrair, extrairPrincipais: extrairPrincipais, htmlDocs: htmlDocs, htmlSituacao: htmlSituacao, htmlConferencia: htmlConferencia, htmlPreencher: htmlPreencher,
   clique: clique, marcarSugestao: marcarSugestao, especificar: especificar, especificarJa: especificarJa, lista: lista, alertas: alertas, md: md, estado: function () { return A; },
   /* para testes: carrega uma cronologia e textos sem o PJe */
   _carregar: function (r, textos) { A.itens = r.itens; A.idp = r.idp || ''; A.host = r.host || ''; A.cnj = r.numero || ''; A.em = Date.now(); A.docs = {}; Object.keys(textos || {}).forEach(function (id) { A.docs[id] = { estado: 'ok', texto: textos[id], fmt: 'html', pags: 0 }; }); A.sug = null; } };

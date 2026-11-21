@@ -102,3 +102,17 @@ test('extensão 0.12: OCR local, sem CDN, com o modelo em português e permissã
   const autos = read('extensao/autos.js');
   assert.match(autos, /data-au="ocr:/); assert.match(autos, /MutaOcr\.paginas/);
 });
+
+test('extensão 0.13: Roteiro por tipo de julgamento usa campos que existem na ficha e detecta o tipo', () => {
+  const sandbox = { window: {}, localStorage: { getItem: () => null, setItem: () => {} } };
+  vm.createContext(sandbox); vm.runInContext(read('extensao/roteiro.js'), sandbox);
+  const RT = sandbox.window.MutaRoteiro, ficha = JSON.parse(read('padrao/ficha.json')), ks = new Set();
+  ficha.abas.forEach(a => a.grupos.forEach(g => g.campos.forEach(c => ks.add((c.secao || '') + '.' + c.chave))));
+  RT.PASSOS.forEach(p => (p.campos || []).forEach(c => assert.ok(ks.has(c[0] + '.' + c[1]), p.id + ': ' + c[0] + '.' + c[1])));
+  const g = (op, fo) => ({ V: (s, k) => ((op || {})[s] || {})[k] || '', F: k => (fo || {})[k] || '', cnj: () => '1' });
+  assert.deepEqual(Object.keys(RT.detectar(g({}, { classe_judicial: 'APELAÇÃO / REMESSA NECESSÁRIA' }))).sort(), ['ap', 'rn']);
+  assert.deepEqual(Object.keys(RT.detectar(g({ triagem: { 'Padrão - Espécie': 'Embargos de declaração' } }, { classe_judicial: 'APELAÇÃO CÍVEL' }))), ['ed']);
+  assert.ok(RT.detectar(g({}, { classe_judicial: 'APELAÇÃO CÍVEL', Assunto: 'Mandado de Segurança' })).ms);
+  const html = read('extensao/painel.html'), gab = read('extensao/gabinete.js');
+  assert.ok(html.includes('src="roteiro.js"')); assert.match(gab, /'Roteiro'/);
+});

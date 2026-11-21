@@ -3,6 +3,19 @@
 Extensão do Chrome/Edge (Manifest V3) que abre o **Muta** num painel lateral, ao lado dos autos e das tarefas do PJe 2º grau do TRF-3.
 Base: o HTML independente *muta-independente-prontuario-completo* (Prontuário + Acervo).
 
+## O que muda na 0.13
+
+- **Roteiro (novo modo do Prontuário: Processo · Triagem · Roteiro · Produção).** A triagem em passos, pelo tipo de
+  julgamento (Padrão Muta 2: roteiro-mestre e por espécie), em linha do tempo por fase: recurso, admissibilidade, Ministério
+  Público, preliminares e prejudiciais, mérito e encaminhamento. Cada passo mostra só os campos da ficha que lhe dizem
+  respeito (os mesmos do modo Triagem), com estado ✓ conferido, ! alerta ou ○ a conferir, e a dica do padrão. Passos que
+  dependem de condição só aparecem quando valem (embargos, agravo interno, retratação, mandado de segurança, AJG,
+  procuração, descrição da preliminar, hipótese de monocrática). O tipo vem da espécie, da classe e da tarefa; os botões
+  no topo trocam ou somam tipos. A leitura dos autos aparece em cada campo ("Autos: … · Usar"), e "Usar todas" grava de uma
+  vez. Passo sem campo na ficha tem "Conferi", guardado só neste navegador. Código em `roteiro.js`.
+- **Visual compacto (0.12.3).** Botões, campos e abas menores; mensagens explicativas longas viraram dica ao passar o mouse.
+- **Aba 28,86% (0.12.2)** só aparece nos processos do 28,86%.
+
 ## O que muda na 0.12
 
 - **OCR local.** Cada documento dos autos tem "Inteiro teor", "OCR" e "↗" (abre o PDF no PJe). "Inteiro teor" lê a camada
