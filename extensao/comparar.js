@@ -40,6 +40,15 @@ function pronSugerido() {
 }
 function N(v) { return String(v == null ? '' : v).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase(); }
 /* troca de processo: volta ao pronunciamento sugerido e à minuta-matriz */
+/* a aba 28,86% só aparece nos processos do 28,86%: assunto, lote, etiquetas, tema da triagem ou o próprio texto do editor */
+function eh2886() {
+  var GB = window.MutaGabinete, v = function (sec, ch) { try { return GB && GB.V ? String(GB.V(sec, ch) || '') : ''; } catch (e) { return ''; } };
+  var f = function (k) { try { return GB && GB.F ? String(GB.F(k) || '') : ''; } catch (e) { return ''; } };
+  var t = [f('Assunto'), f('Etiquetas Originais'), f('Processo de referência'), v('triagem', 'Registro - Lote'), v('triagem', 'Tema'), v('triagem', 'Etiquetas'), v('producao', 'Lote'), v('producao', 'Lote - Tipo de caso')].join(' ');
+  var ed = ED && ED.estado ? String((ED.estado() || {}).texto || '').slice(0, 20000) : '';
+  return /28[,.]86|2886|0005019-15\.1997/.test(t + ' ' + ed);
+}
+function fontes() { var ok = eh2886(); if (!ok && C.fonte === 'm2886') C.fonte = 'matriz'; return FONTES.filter(function (f) { return f[0] !== 'm2886' || ok; }); }
 function processo() {
   var k = chave();
   if (k !== C.pronChave) { C.pronChave = k; C.pron = ''; C.fonte = 'matriz'; C.sel = {}; C.q = ''; }
@@ -294,7 +303,7 @@ function render() {
   if (!caixa || !aberta()) return;
   var y = $('panel-min').scrollTop, foco = document.activeElement && document.activeElement.dataset ? document.activeElement.dataset.c : null;
   caixa.innerHTML = editorHtml() +
-    '<div class="seg cx-fontes" role="tablist" aria-label="Comparar com">' + FONTES.map(function (f) { return '<button type="button" role="tab" data-f="' + f[0] + '" aria-selected="' + (C.fonte === f[0]) + '">' + f[1] + '</button>'; }).join('') + '</div>' +
+    '<div class="seg cx-fontes" role="tablist" aria-label="Comparar com">' + fontes().map(function (f) { return '<button type="button" role="tab" data-f="' + f[0] + '" aria-selected="' + (C.fonte === f[0]) + '">' + f[1] + '</button>'; }).join('') + '</div>' +
     '<div class="cx-pick">' + seletor() + '</div>' +
     '<div class="bar cp-opc"><label><input type="checkbox" data-c="ws"' + (C.ws ? ' checked' : '') + '> ignorar espaços, aspas e travessões</label><label><input type="checkbox" data-c="sd"' + (C.sd ? ' checked' : '') + '> só as diferenças</label></div>' +
     '<div class="cx-lg"><span><del>riscado</del> na fonte, falta no editor</span><span><ins>verde</ins> só no editor</span><span><mark class="cx-vg">amarelo</mark> preenche vaga do modelo</span></div>' +

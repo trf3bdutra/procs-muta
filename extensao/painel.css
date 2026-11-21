@@ -624,3 +624,4 @@ input[type=password]{width:100%;font:inherit;font-size:14px;color:var(--fg);back
 .sg-ig{margin-top:4px;font-size:11px;color:var(--muted-fg)}
 .sg-ig summary{cursor:pointer;padding:3px 6px;border-radius:6px;background:var(--secondary)}
 .sg-ig ul{margin:4px 0 0;padding-left:18px}.sg-ig li{margin:1px 0}.sg-ig li b{font-weight:600;color:var(--fg)}
+.au-bl{flex-wrap:nowrap;gap:5px}.au-bl .btn{white-space:nowrap;flex:0 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis}.au-bl [data-au=princ]{margin-left:auto}

@@ -303,8 +303,8 @@ function alertas() {
 function hora() { return A.em ? new Date(A.em).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }) : ''; }
 function botaoLer() {
   var tela = window.MutaPje && window.MutaPje.tela ? window.MutaPje.tela() : '';
-  return '<button type="button" class="btn ' + (A.itens ? 'line' : 'solid') + '" data-au="ler"' + (A.lendo ? ' disabled' : '') + '>' + (A.lendo === true ? 'Lendo…' : A.itens ? 'Ler de novo' : 'Ler os autos') + '</button>' +
-    (A.itens ? '<button type="button" class="btn line" data-au="tudo"' + (A.lendo ? ' disabled' : '') + ' title="Rola o painel esquerdo do PJe até carregar a cronologia inteira">' + (A.lendo === 'tudo' ? 'Carregando…' : 'Cronologia inteira') + '</button>' : '') +
+  return '<button type="button" class="btn sm ' + (A.itens ? 'line' : 'solid') + '" data-au="ler"' + (A.lendo ? ' disabled' : '') + '>' + (A.lendo === true ? 'Lendo…' : A.itens ? 'Reler' : 'Ler os autos') + '</button>' +
+    (A.itens ? '<button type="button" class="btn line sm" data-au="tudo"' + (A.lendo ? ' disabled' : '') + ' title="Rola o painel esquerdo do PJe até carregar a cronologia inteira">' + (A.lendo === 'tudo' ? 'Carregando…' : 'Cronologia toda') + '</button>' : '') +
     (tela !== 'autos' && !A.itens ? '<span class="muted">Abra os autos digitais do processo no PJe.</span>' : '');
 }
 /* Situação atual: última decisão, última peça, última informação e última movimentação (com ID e data) */
@@ -333,14 +333,14 @@ function estadoDoc(id) {
 function htmlDocs() {
   var tela = window.MutaPje && window.MutaPje.tela ? window.MutaPje.tela() : '';
   var cab = '<div class="pc-sh"><h3>Documentos dos autos</h3><small class="muted">' + (A.itens ? A.itens.reduce(function (n, i) { return n + (i.docs || []).length; }, 0) + ' na cronologia · lidos às ' + hora() : 'painel esquerdo dos autos digitais') + '</small></div>';
-  if (A.erro) return '<section class="card pc-sec" id="g-docs">' + cab + '<div class="bar">' + botaoLer() + '</div><p class="status err">' + esc(A.erro) + '</p></section>';
-  if (!A.itens) return '<section class="card pc-sec" id="g-docs">' + cab + '<div class="bar">' + botaoLer() + '</div>' + (tela === 'autos' ? '' : '<p class="muted">Nos autos digitais, a lista de documentos aparece aqui, com data e hora da juntada, o campo de especificação e o inteiro teor de cada um.</p>') + '</section>';
+  if (A.erro) return '<section class="card pc-sec" id="g-docs">' + cab + '<div class="bar au-bl">' + botaoLer() + '</div><p class="status err">' + esc(A.erro) + '</p></section>';
+  if (!A.itens) return '<section class="card pc-sec" id="g-docs">' + cab + '<div class="bar au-bl">' + botaoLer() + '</div>' + (tela === 'autos' ? '' : '<p class="muted">Nos autos digitais, a lista de documentos aparece aqui, com data e hora da juntada, o campo de especificação e o inteiro teor de cada um.</p>') + '</section>';
   var outro = !lidoDoProcesso() ? '<p class="status err">Os autos lidos são do processo ' + esc(A.cnj || 'sem número') + ', não do aberto no painel. Leia de novo na aba dos autos certos.</p>' : '';
   var L = lista(), F = A.filtro, V = F === 'pecas' ? L.filter(function (d) { return d.k !== 'outro' && !d.anexo; }) : L;
   var outras = linhasGravadas('origem', 'Outras peças'), espDe = function (id) { if (id in A.esp) return A.esp[id]; var r = outras.filter(function (x) { return S(x.ids) === id; })[0]; return r ? S(r.texto) : ''; };
   var lidos = Object.keys(A.docs).filter(function (k) { return /^(ok|sem)$/.test(A.docs[k].estado); }).length;
   var h = '<section class="card pc-sec" id="g-docs">' + cab + outro +
-    '<div class="bar">' + botaoLer() + '<button type="button" class="btn solid" data-au="princ"' + (A.fila ? ' disabled' : '') + ' title="Lê o texto das decisões, recursos, contrarrazões, pareceres, procurações e custas: alimenta a conferência automática">' + (A.fila ? 'Lendo ' + A.fila + '…' : 'Ler as peças principais') + '</button></div>' +
+    '<div class="bar au-bl">' + botaoLer() + '<button type="button" class="btn solid sm" data-au="princ"' + (A.fila ? ' disabled' : '') + ' title="Lê o texto das decisões, recursos, contrarrazões, pareceres, procurações e custas: alimenta a conferência automática">' + (A.fila ? 'Lendo ' + A.fila + '…' : 'Peças principais') + '</button></div>' +
     (A.msg ? '<p class="status ok">' + esc(A.msg) + '</p>' : '') +
     '<div class="au-fx"><span class="seg"><button type="button" data-au="f:pecas" aria-selected="' + (F === 'pecas') + '">Peças</button><button type="button" data-au="f:todos" aria-selected="' + (F === 'todos') + '">Todos (' + L.length + ')</button></span><small class="muted">' + lidos + ' com texto lido</small></div>' +
     '<div class="au-docs">' + V.map(function (d) {
@@ -387,9 +387,9 @@ function dataBr(t) { return String(t || '').replace(/\b(\d{4})-(\d{2})-(\d{2})\b
 function htmlConferencia() {
   var tela = window.MutaPje && window.MutaPje.tela ? window.MutaPje.tela() : '';
   var h = '<section class="card pc-sec cf" id="g-cf"><div class="pc-sh"><h3>Conferência automática dos autos</h3><small class="muted">sugestões para conferir</small></div>';
-  if (!A.itens || !lidoDoProcesso()) return h + '<div class="bar">' + botaoLer() + '</div><p class="muted">' + (tela === 'autos' ? 'Leia os autos' : 'Abra os autos digitais no PJe') + ': a extensão confere tempestividade (calendário forense), preparo, procuração, MPF, contrarrazões, remessa necessária e o tipo de julgamento, e sugere os campos da ficha.</p></section>';
+  if (!A.itens || !lidoDoProcesso()) return h + '<div class="bar au-bl">' + botaoLer() + '</div><p class="muted">' + (tela === 'autos' ? 'Leia os autos' : 'Abra os autos digitais no PJe') + ': a extensão confere tempestividade (calendário forense), preparo, procuração, MPF, contrarrazões, remessa necessária e o tipo de julgamento, e sugere os campos da ficha.</p></section>';
   var al = alertas();
-  h += '<div class="bar">' + botaoLer() + '<button type="button" class="btn solid" data-au="princ"' + (A.fila ? ' disabled' : '') + '>' + (A.fila ? 'Lendo ' + A.fila + '…' : 'Ler as peças principais') + '</button></div>';
+  h += '<div class="bar au-bl">' + botaoLer() + '<button type="button" class="btn solid sm" data-au="princ"' + (A.fila ? ' disabled' : '') + '>' + (A.fila ? 'Lendo ' + A.fila + '…' : 'Peças principais') + '</button></div>';
   if (al.length) h += '<div class="al-l">' + al.map(function (a, i) {
     return '<div class="al-i ' + a.nivel + '"><span>' + esc(a.t) + '</span>' + (a.campo ? '<button type="button" class="btn line sm" data-au="al:' + i + '">Gravar “' + esc(a.valor) + '”</button>' : '') + '</div>';
   }).join('') + '</div>';

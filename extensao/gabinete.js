@@ -524,7 +524,7 @@ window.MutaMapa = { camposFicha: camposFicha, trazerFicha: trazerFicha, getP: ge
 window.MutaGabinete = { recarregar: function () { carregar(true); }, gravarPendente: function () { return gravarJa(); }, modo: function () { return modo; },
   /* para os autos (autos.js) e a aba Minuta: o prontuário aberto e a gravação */
   render: function () { render(); }, cnj: function () { return G.cnj; }, modelo: function () { return G.F; }, op: function () { return G.op; }, fo: function () { return G.fo; },
-  gravado: gravado, V: V, marcar: marcar, gravar: function () { return gravarJa(); }, ir: function (aba) { if (MODOS.indexOf(aba) >= 0) { G.aba = aba; render(); } },
+  gravado: gravado, V: V, F: function (k) { return fonteVal({ fonte: [k] }); }, marcar: marcar, gravar: function () { return gravarJa(); }, ir: function (aba) { if (MODOS.indexOf(aba) >= 0) { G.aba = aba; render(); } },
   destino: function () { return G.F ? destino() : ''; },
   /* a sincronia gravou a ficha: o painel da ficha mostra o novo registro sem nova leitura */
   registro: function (cnj, op) { if (op && dg(cnj) === dg(G.cnj)) { G.op = op; if (modo === 'ficha') render(); } } };
