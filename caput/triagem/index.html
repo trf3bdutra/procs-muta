@@ -270,7 +270,7 @@ html[data-theme="dark"] .row>.obs{background:#2a2a1c}html[data-theme="dark"] .ro
 /* gaveta */
 .veu{position:fixed;inset:0;background:rgba(23,63,61,.28);z-index:45}
 .gaveta{position:fixed;top:0;right:0;bottom:0;width:min(560px,100vw);background:var(--p);border-left:2px solid var(--v);box-shadow:-16px 0 40px rgba(23,63,61,.2);display:flex;flex-direction:column;z-index:46}
-tr.at-r[data-atpp]{cursor:pointer}tr.at-r[data-atpp]:hover td{background:#f7f5ef}tr.at-x>td{padding:0 0 14px!important;background:#fbfaf5;border-bottom:2px solid var(--v)}.at-pp{min-height:120px}
+tr.at-r[data-atpp]{cursor:pointer}tr.at-r[data-atpp]:hover td{background:#f7f5ef}tr.at-x>td{padding:0 0 14px!important;background:#fbfaf5;border-bottom:2px solid var(--v)}.at-pp{min-height:120px;position:sticky;left:0;box-sizing:border-box;max-width:100%}
 .gaveta.gaveta-pp{width:min(1180px,100vw);overflow-y:auto}.pp-gav{display:flex;flex-direction:column;min-height:100%}.pp-gav-h{position:sticky;top:0;z-index:2;display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:var(--p);border-bottom:1px solid var(--b)}.pp-gav-h b{font:650 15px Figtree,system-ui,sans-serif;color:var(--v)}#pp-host{display:block;padding:0 12px 16px}
 .gv-h{display:flex;align-items:flex-start;gap:12px;padding:18px 22px 12px;border-bottom:1px solid var(--l)}
 .gv-h h2{margin:4px 0 2px;font-size:22px;font-weight:800;letter-spacing:-.03em;color:var(--v)}
@@ -3053,7 +3053,7 @@ function itemPainel(cnj) {
 }
 /* A triar: o painel do processo abre na própria lista, logo abaixo da faixa (como nos Triados) */
 let AT_PP = '';
-function montaAtPP() { const h = document.querySelector('[data-atpph]'), C = W.CaputColecoes; if (!h || h.dataset.ok || !C || !C.painel) return; h.dataset.ok = '1'; ['triados', 'selecao'].forEach((k) => { if (!_colD[k]) lerColecoes(k); }); const x = itemPainel(h.dataset.atpph); C.painel(h, x.l, x.it, opcoesPainel()); }
+function montaAtPP() { const h = document.querySelector('[data-atpph]'), C = W.CaputColecoes; if (!h || h.dataset.ok || !C || !C.painel) return; h.dataset.ok = '1'; const wr = h.closest('table') && h.closest('table').parentElement; if (wr && wr.clientWidth) h.style.width = (wr.clientWidth - 4) + 'px'; ['triados', 'selecao'].forEach((k) => { if (!_colD[k]) lerColecoes(k); }); const x = itemPainel(h.dataset.atpph); C.painel(h, x.l, x.it, opcoesPainel()); }
 function abrirPainelProcesso(cnj) {
   const C = W.CaputColecoes, o = IDX.get(dg(cnj));
   if (!C || !C.painel) { fichaDe(cnj); return; }
