@@ -544,7 +544,7 @@ function corpoTriagem() {
     var g2 = Object.assign({}, g, { campos: g.campos.filter(function (c) { return !NO_TOPO[c.chave]; }) });
     return grupoHtml(g2, i < 2);
   }).join('');
-  if (TR && TR.registroDe) h += TR.registroDe(G.op, G.fo);
+  /* 0.46.1: sem o quadro "Registro da triagem" */
   return h;
 }
 /* tipo de ato / pronunciamento, no topo de Produção: define o destino (sessão, monocrática, outro) e o tipo de ato */
@@ -629,7 +629,7 @@ function corpoRoteiro() {
   var A = abaModelo('Triagem'), todos = [], TR = window.MutaTriagem, AU = window.MutaAutos;
   if (A) A.grupos.filter(function (g) { return g.grupo !== 'Registro da triagem (lote)' && grupoVisivel(g); }).forEach(function (g) { g.campos.forEach(function (c) { if (c.secao && !FORA_ROT[c.chave]) todos.push([c.secao, c.chave, c.rotulo]); }); });
   return window.MutaRoteiro.html(gRot(), campoRot, questoes, { todos: todos, barra: AU && AU.barra ? AU.barra() : '',
-    etiquetas: (TR && TR.etiquetasDe ? TR.etiquetasDe(G.op, G.fo) : '') + (window.MutaAlertas ? window.MutaAlertas.htmlRoteiro(G.cnj, V('triagem', 'Etiquetas sugeridas'), function () { render(); }) : ''), registro: TR && TR.registroDe ? TR.registroDe(G.op, G.fo) : '' });
+    etiquetas: (TR && TR.etiquetasDe ? TR.etiquetasDe(G.op, G.fo) : '') + (window.MutaAlertas ? window.MutaAlertas.htmlRoteiro(G.cnj, V('triagem', 'Etiquetas sugeridas'), function () { render(); }) : ''), registro: '' /* 0.46.1: o quadro "Registro da triagem" saiu do prontuário (pedido do gestor); triagem.js › registroDe fica */ });
 }
 /* a aba Minuta › Gerador acompanha o prontuário: cada redesenho repinta o Gerador, se estiver à vista */
 function render() { render0(); if (window.MutaGerador && window.MutaGerador.pintar) window.MutaGerador.pintar(); }

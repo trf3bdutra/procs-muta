@@ -8,6 +8,7 @@ Base: o HTML independente *muta-independente-prontuario-completo* (Prontuário +
 ## O que muda na 0.46 · 2ª seta do cartão: síntese, questões, mérito e encaminhamento
 
 - O cartão do processo tem duas setas, com rótulo: "autuação e partes" (a de antes) e "síntese · questões · encaminhamento" (`gabinete.js › merEnc`): síntese do processo e questões; mérito (tipo de caso, especificidades, síntese fática, complexidade, tipo de voto); encaminhamento (situação para julgar, hipótese do artigo 932 quando monocrática, pendências, etiquetas do gabinete e as sugestões de etiquetas). O destino vem do tipo de ato.
+- 0.46.1: saiu do prontuário o quadro "Registro da triagem" (com "Comparar o editor com a triagem").
 - Saíram do Roteiro as fases Mérito e Encaminhamento (`roteiro.js › NO_CARTAO`) e da aba Processo o quadro "Síntese e questões". Os campos da 2ª seta só são desenhados com ela aberta.
 
 ## O que muda na 0.45 · Minuta: Comparar enxuto, matriz na Conformidade, Collectio só do gestor

@@ -599,4 +599,5 @@ test('extensão 0.46: 2ª seta do cartão com síntese, questões, mérito e enc
   assert.match(g, /function merEnc\(\)/); assert.match(g, /merEnc\(\) \+\n    '<\/section>';/); assert.match(g, /if \(c\.contains\('pm-mer'\)\) \{ if \(G\.merAb !== e\.target\.open\)/);
   assert.doesNotMatch(g, /<h3>Síntese e questões<\/h3>/);
   assert.match(r, /var NO_CARTAO = \{ mer: 1, enc: 1 \};/);
+  assert.doesNotMatch(g, /TR\.registroDe\(/, '0.46.1: sem o quadro Registro da triagem no prontuário');
 });
