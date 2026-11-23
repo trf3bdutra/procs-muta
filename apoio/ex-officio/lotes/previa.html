@@ -510,6 +510,10 @@ async function fotoPub(p){
   return {secoes:s};
 }
 const completo=()=>S.vista==='meus';
+/* o número do item é o da pauta: fora dela (monocráticas, triagem, coleções sem sessão) o processo se identifica pelo número */
+const pautado=x=>{if(!x||x._mono)return false;if(!S.loteSel)return true;const z=S.por[x.cnj];return !!(z&&z.it&&z.it.sessao)};
+const nItem=x=>pautado(x)&&x.item!=null?String(x.item):'';
+const comItem=()=>!S.mono&&(S.itens||[]).some(pautado);
 const etapas=()=>S.mono?ETAPAS_MONO:completo()?ETAPAS_COMPLETO:ETAPAS_SIMPLES;
 const S={usuario:'',gestor:false,sessoes:[],data:'',itens:[],por:{},lotes:{},vista:'meus',etapa:'',fora:'',q:'',aberto:'',ver:{},fechados:new Set(),minAb:new Set(),colTipo:'pauta',loteSel:'',colTit:'',loteSes:'',mono:'',pub:{},mxModo:'ver',mxVista:'lote',mxRasc:{},mxForm:''};
 
@@ -751,7 +755,7 @@ function render(){
    <section class="sec" id="procs"><div class="shd"><div><p class="k">03 / Lista</p><h2>Processos <em class="it">${S.etapa?esc((etapas().find(e=>e[0]===S.etapa)||[])[2]):S.fora==='retido'?'retirados':S.fora==='minutar'?'sem minuta':'da '+(S.vista==='meus'?'correção':S.loteSel||S.mono?'coleção':'sessão')}.</em></h2><p class="d">${lst.length} de ${esc0.length}, por etapa e na ordem ${S.mono?'de registro':'da pauta'}. A barra mostra as etapas; a vazada com contorno é a etapa pulada.</p></div>
      <span class="seg pil" role="group" aria-label="Exibição da lista"><button type="button" id="abre-t" aria-pressed="${!S.fechados.size}" title="Expandir todos os grupos">Expandir</button><button type="button" id="fecha-t" aria-pressed="${S.fechados.size>=etapas().length}" title="Recolher todos os grupos">Recolher</button><i class="sep" aria-hidden="true"></i><button type="button" id="mn-t" aria-pressed="${minTodas(lst)}" title="Mostrar, abaixo de cada processo, a minuta vigente no Collectio">${minTodas(lst)?'Fechar minutas':'Abrir todas as minutas'}</button></span></div>
     <div class="box"><div class="tw"><table class="tb">
-     <thead><tr><th scope="col">Item</th><th scope="col">Processo</th><th scope="col">Minuta</th><th scope="col">Correção</th><th scope="col">Etapas</th><th scope="col">Alertas</th><th scope="col"><span class="sr">Abrir</span></th></tr></thead>
+     <thead><tr><th scope="col">${comItem()?'Item':'<span class="sr">Item</span>'}</th><th scope="col">Processo</th><th scope="col">Minuta</th><th scope="col">Correção</th><th scope="col">Etapas</th><th scope="col">Alertas</th><th scope="col"><span class="sr">Abrir</span></th></tr></thead>
      <tbody>${grupos(lst)||`<tr><td colspan="7" class="vazio">Nenhum processo neste filtro.</td></tr>`}</tbody>
     </table></div></div>
    </section>
@@ -825,7 +829,7 @@ function renderMesa(){
     <div class="ms-main">${aba==='matriz'?matrizHtml(S.etapa||S.fora||S.q?lst:esc0):`<section class="sec" id="procs"><div class="shd"><div><h2>Processos <em class="it">${sub}.</em></h2><p class="d">${lst.length} de ${esc0.length}, por etapa e na ordem ${S.mono?'de registro':'da pauta'}. Clique num processo para abrir o painel ao lado.</p></div>
       <span class="seg pil" role="group" aria-label="Exibição da lista"><button type="button" id="abre-t" aria-pressed="${!S.fechados.size}" title="Expandir todos os grupos">Expandir</button><button type="button" id="fecha-t" aria-pressed="${S.fechados.size>=etapas().length}" title="Recolher todos os grupos">Recolher</button><i class="sep" aria-hidden="true"></i><button type="button" id="mn-t" aria-pressed="${minTodas(lst)}" title="Mostrar, abaixo de cada processo, a minuta vigente no Collectio">${minTodas(lst)?'Fechar minutas':'Abrir todas as minutas'}</button></span></div>
      <div class="box"><div class="tw"><table class="tb">
-      <thead><tr><th scope="col">Item</th><th scope="col">Processo</th><th scope="col">Minuta</th><th scope="col">Correção</th><th scope="col">Etapas</th><th scope="col">Alertas</th><th scope="col"><span class="sr">Abrir</span></th></tr></thead>
+      <thead><tr><th scope="col">${comItem()?'Item':'<span class="sr">Item</span>'}</th><th scope="col">Processo</th><th scope="col">Minuta</th><th scope="col">Correção</th><th scope="col">Etapas</th><th scope="col">Alertas</th><th scope="col"><span class="sr">Abrir</span></th></tr></thead>
       <tbody>${grupos(lst)||`<tr><td colspan="7" class="vazio">Nenhum processo neste filtro.</td></tr>`}</tbody>
      </table></div></div></section>`}</div>
     ${S.aberto?`<aside class="ms-proc" id="proc-w" aria-label="Processo aberto">${procHtml()}</aside>`:''}
@@ -876,8 +880,8 @@ function grupos(lst){
 function rowHtml(r){
   const x=r.x, cls=['r',r.nivel,S.aberto===x.cnj?'on':''].filter(Boolean).join(' ');
   const pul=r.passos.map((p,k)=>p?'ok':(r.passos.slice(k+1).some(Boolean)?'fa':'')) ;
-  return `<tr class="${cls}" data-p="${esc(x.cnj)}" tabindex="0" aria-label="Item ${esc(x.item)}, ${esc(x.cnj)}">
-   <td><span class="ii">${esc(x.item)}</span></td>
+  return `<tr class="${cls}" data-p="${esc(x.cnj)}" tabindex="0" aria-label="${nItem(x)?'Item '+esc(nItem(x))+', ':''}${esc(x.cnj)}">
+   <td><span class="ii">${esc(nItem(x))}</span></td>
    <td><span class="cnj">${esc(x.cnj)}</span><span class="pt">${esc(x.classe)} · ${esc(x.assunto)}</span><span class="pt">${esc(x.partes)}</span></td>
    <td><span class="nm">${esc(x.servidor||'—')}</span></td>
    <td><span class="nm">${esc(x.corretor||'—')}</span></td>
@@ -906,7 +910,7 @@ function colEtapa([k,r,t,d],base){
    <button type="button" data-et="${k}" aria-pressed="${S.etapa===k}" title="Filtrar a lista por esta etapa"><span>${esc(r)}</span><b>${lst.length}</b><small>${esc(t)}</small></button>
    ${ind?`<p class="ind" title="${S.mono?'Assinadas com a versão final (importada ou publicada no Ementário)':'Liberadas com a versão final do PJe registrada ou o acórdão publicado no Ementário'}"><span class="bar" aria-hidden="true"><i style="width:${pct}%"></i></span><span><b>${nf} de ${lst.length}</b> com versão final</span></p>`:''}
    <p class="nx"><b>${esc(ac)}</b> ${esc(ac2)}</p>
-   ${lst.length?`<ul>${lst.slice(0,MAX).map(z=>`<li><span class="ii">${esc(z.x.item)}</span><button type="button" data-abre="${esc(z.x.cnj)}"><span class="cnj">${esc(z.x.cnj.slice(0,15))}</span><span class="pt">${esc(sub(z))}</span></button>${ind?`<span class="vf ${z.fi?'ok':''}" title="${z.fi?'Com versão final':'Sem versão final'}">${z.fi?'✓':'—'}</span>`:''}</li>`).join('')}</ul>${lst.length>MAX?`<button type="button" class="mais" data-et="${k}">+ ${lst.length-MAX} na lista</button>`:''}`:`<p class="nd">Nada nesta etapa.</p>`}
+   ${lst.length?`<ul>${lst.slice(0,MAX).map(z=>`<li><span class="ii">${esc(nItem(z.x))}</span><button type="button" data-abre="${esc(z.x.cnj)}"><span class="cnj">${esc(z.x.cnj.slice(0,15))}</span><span class="pt">${esc(sub(z))}</span></button>${ind?`<span class="vf ${z.fi?'ok':''}" title="${z.fi?'Com versão final':'Sem versão final'}">${z.fi?'✓':'—'}</span>`:''}</li>`).join('')}</ul>${lst.length>MAX?`<button type="button" class="mais" data-et="${k}">+ ${lst.length-MAX} na lista</button>`:''}`:`<p class="nd">Nada nesta etapa.</p>`}
   </div>`;
 }
 
@@ -1013,8 +1017,8 @@ function matrizHtml(base){
   const linha=(r,cor)=>{const x=r.x,m=M.itens[x.cnj]||{variacoes:[],observacao:''},pt=String(x.partes||'').split(/\s+x\s+/i);
     const sel=ed?`<select class="sel mxg" data-mxgrp="${esc(x.cnj)}" aria-label="Grupo do processo">${optG(m.grupo)}</select>`:'';
     return `<tr class="mr">
-     ${fx.length?`<td><span class="ii">${esc(x.item)}</span> <span class="cnj">${esc(x.cnj.slice(0,15))}</span> <span class="mono rc">${esc(rec(x.classe))}</span><span class="pt">${esc(x.partes)}</span>${sel}</td>`
-       :`<td><span class="ii">${esc(x.item)}</span> <span class="cnj">${esc(x.cnj.slice(0,15))}</span>${sel}</td><td class="pa">${esc(pt[0]||'')}</td><td class="pa">${esc(pt.slice(1).join(' x '))}</td><td class="mono">${esc(rec(x.classe))}</td>`}
+     ${fx.length?`<td>${nItem(x)?`<span class="ii">${esc(nItem(x))}</span> `:''}<span class="cnj">${esc(x.cnj.slice(0,15))}</span> <span class="mono rc">${esc(rec(x.classe))}</span><span class="pt">${esc(x.partes)}</span>${sel}</td>`
+       :`<td>${nItem(x)?`<span class="ii">${esc(nItem(x))}</span> `:''}<span class="cnj">${esc(x.cnj.slice(0,15))}</span>${sel}</td><td class="pa">${esc(pt[0]||'')}</td><td class="pa">${esc(pt.slice(1).join(' x '))}</td><td class="mono">${esc(rec(x.classe))}</td>`}
      <td class="nm">${esc(x.servidor||'—')} · ${esc(x.corretor||'—')}</td>
      ${fx.map(f=>celV(f,x)).join('')}${ind.map(f=>celV(f,x)).join('')}
      ${cols.map(c=>{const on=m.variacoes.includes(c.id);return `<td class="f" data-tip="${esc(c.rotulo)}" data-val="${on?'sim':'não'}${c.trecho?(on?' · a minuta deve ter o trecho':' · a minuta não deve ter o trecho'):''}">${ed?`<button type="button" class="mk-b" data-mxcell="${esc(x.cnj)}|${esc(c.id)}" aria-pressed="${on}" aria-label="${esc(c.rotulo)}">${on?`<i class="mk" style="background:${cor}"></i>`:''}</button>`:on?`<i class="mk" style="background:${cor}"></i>`:''}</td>`}).join('')}
@@ -1062,7 +1066,7 @@ function procHtml(){
   else if(r.etapa==='corrigida')ban=`<p class="ban in">Corrigida. Ao colar no editor do PJe, marque no Collectio a versão importada.</p>`;
   const aj=it&&Array.isArray(it.ajustes)?it.ajustes.filter(a=>Array.isArray(a)&&!/^se[cç][aã]o$/i.test(String(a[0]||''))):[];
   const pd=it&&Array.isArray(it.pendencias)?it.pendencias:[];
-  return `<section class="sec" id="proc"><div class="shd"><div><p class="k">04 / Processo · item ${esc(x.item)}</p><h2>${esc(x.classe)} · <em class="it">${esc(x.assunto)}.</em></h2></div></div>
+  return `<section class="sec" id="proc"><div class="shd"><div><p class="k">04 / Processo${nItem(x)?' · item '+esc(nItem(x)):''}</p><h2>${esc(x.classe)} · <em class="it">${esc(x.assunto)}.</em></h2></div></div>
    <div class="box">
     <div class="pf-h">
      <div class="pf-id"><span class="cnj">${esc(x.cnj)}</span><span class="pt">${esc(x.partes)}</span><span class="pt">Minuta ${esc(x.servidor||'—')} · correção ${esc(x.corretor||'—')}${z?' · '+(z.compart?'minuta e registros da coleção '+esc(z.titulo):esc(z.titulo)):''}</span></div>
