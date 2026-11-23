@@ -25,8 +25,14 @@ var PECA = { acordao: 'acórdão (relatório, voto, ementa e acórdão)', decisa
 function contexto() {
   var s = window.MutaSincronia ? window.MutaSincronia.situacao() : {}, c = (s.cartoes || [])[0];
   var f = null; try { f = br.getFull(); } catch (e) {}
+  /* 0.40: a cronologia lida na aba Autos (IDʼs × peças) e as questões do prontuário (enfrentamento no voto) */
+  var au = null, q = '';
+  try { au = window.MutaAutos && window.MutaAutos.doProcesso ? window.MutaAutos.doProcesso() : null; } catch (e) {}
+  try { q = window.MutaGabinete && window.MutaGabinete.V ? String(window.MutaGabinete.V('triagem', 'Alegações') || '') : ''; } catch (e) {}
   return { diretrizes: (K.dados || {}).diretrizes || [], manual: (K.dados || {}).manual || [], prontuario: f, cartao: c ? c.cartao : null,
-    classe: (f && f.caso ? f.caso.classe : '') || (window.MutaPje ? window.MutaPje.classe() : ''), formatacao: K.fmt };
+    classe: (f && f.caso ? f.caso.classe : '') || (window.MutaPje ? window.MutaPje.classe() : ''), formatacao: K.fmt,
+    autos: au ? au.lista.map(function (d) { return { id: d.id, tipo: d.tipo, desc: d.desc, data: d.data, k: d.k }; }) : null, autosTodos: !!(au && au.todos),
+    questoes: q.split(/\n+/).map(function (x) { return x.replace(/^✓\s*/, '').trim(); }).filter(Boolean) };
 }
 function analisar() {
   var E = ED.estado();
@@ -102,6 +108,7 @@ caixa.addEventListener('change', function (e) {
 });
 ED.ouvir(function () { analisar(); });
 document.addEventListener('muta:prontuario', function () { if (ED.estado().texto) analisar(); });
+document.addEventListener('muta:autos', function () { if (ED.estado().texto) analisar(); }); /* 0.40: autos lidos → IDʼs conferidos */
 (function () { var t = $('mc-t'); if (t) t.addEventListener('click', function () { var w = $('min-conf'); rodape(!(w && w.dataset.aberto === '1')); render(); }); rodape(); })();
 window.MutaConformidade = {
   abrir: function () { if (!K.dados && !K.erroDados) carregarDados(); render(); var E = ED.estado(); if (!E.texto && !E.lendo) ED.ler().then(analisar, function () { render(); }); },

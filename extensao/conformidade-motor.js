@@ -122,6 +122,57 @@ function ids(t) {
   return out;
 }
 
+/* ---------- 0.40 · IDʼs × autos lidos: a peça que o texto diz é a peça do PJe? ----------
+   A palavra mais próxima antes do ID (no mesmo período) diz que peça o texto cita; a categoria do documento na cronologia
+   (autos.js › CAT) diz o que ele é. Só aponta quando as duas são claramente diferentes. */
+var CITA = [
+  ['acórdão', /ac[óo]rd[ãa]o/gi, { acordao: 1, decisao: 1 }],
+  ['sentença', /senten[çc]a/gi, { sentenca: 1, decisao: 1 }],
+  ['decisão', /decis[ãa]o|decidiu|decisum/gi, { decisao: 1, sentenca: 1, acordao: 1, despacho: 1 }],
+  ['apelação', /apela[çc][ãa]o|apelou|apelaram|apelante/gi, { apelacao: 1, adesivo: 1, recurso: 1 }],
+  ['contrarrazões', /contrarraz|contrarrazo|contraminuta|resposta ao recurso/gi, { contrarrazoes: 1 }],
+  ['parecer do MPF', /parecer|procuradoria regional|minist[ée]rio p[úu]blico|opinou/gi, { parecer: 1 }],
+  ['procuração', /procura[çc][ãa]o|substabelec/gi, { procuracao: 1 }],
+  ['embargos de declaração', /embargos de declara[çc][ãa]o|embargou|op[ôo]s embargos/gi, { ed: 1 }],
+  ['agravo interno', /agravo interno/gi, { agint: 1, agravo: 1 }],
+  ['laudo pericial', /laudo|per[íi]cia/gi, { laudo: 1 }],
+  ['petição inicial', /peti[çc][ãa]o inicial|\binicial\b|exordial/gi, { inicial: 1 }],
+  ['contestação', /contesta[çc][ãa]o|contestou/gi, { contestacao: 1 }],
+  ['comprovante do preparo', /\bcustas\b|preparo|\bGRU\b|recolhimento/gi, { custas: 1 }]
+];
+/* categorias neutras (petição, documento, informação, intimação): o tipo do PJe não prova que a peça é outra */
+var NEUTRA = { peticao: 1, outro: 1, informacao: 1, intimacao: 1 };
+/* a peça que o texto atribui ao ID: só quando o ID vem colado ao nome da peça ("à sentença (ID …)", "Apelou a União (ID …)",
+   "contrarrazões apresentadas pela autora (ID …)"). Quando há um ato no meio ("foram rejeitados (ID …)", "Mantida a sentença
+   em juízo de retratação (ID …)", "opinou pelo provimento da apelação (ID …)"), o ID é do ato, e nada se aponta. */
+var VERBO = /\b(foi|foram|é|são|ser|sido|restou|restaram|mantid|rejeit|indefer|defer|provid|julg|recebid|processad|acolh|homolog|determin|registr|assent|consign|reconhec|extint|conden|fix|declar|afast|anul|reform|confirm|opin|ofici|manifest|decid|deduzid|apreci|analis|concedid|denegad|negad|negou|deu|dou|nego|sentenci|proferid|certific|intimad|publicad|disponibiliz|juntad|aponta|remet|cita|mencion|integr)\w*/i;
+function pecaCitada(t, pos) {
+  var pre = t.slice(0, pos).replace(/\(\s*$/, ''), frase = pre.slice(Math.max(pre.lastIndexOf('. '), 0));
+  if (/(Procuradoria|Minist[ée]rio P[úu]blico)[^.]{0,160}\b(opinou|oficiou|manifestou)/i.test(frase)) return { rot: 'parecer do MPF', ok: { parecer: 1 } };
+  var ini = Math.max(pre.lastIndexOf('. '), pre.lastIndexOf('; '), pre.lastIndexOf(', '), pre.lastIndexOf(': '), pre.lastIndexOf(')'), pre.lastIndexOf(' que '), 0), cl = pre.slice(ini), melhor = null;
+  CITA.forEach(function (c) { c[1].lastIndex = 0; var m; while ((m = c[1].exec(cl))) { var fim = m.index + m[0].length; if (!melhor || fim > melhor.fim) melhor = { rot: c[0], ok: c[2], ini: m.index, fim: fim }; } });
+  /* "Apelou o Ministério Público Federal (ID …)": quem abre com o verbo do recurso cita o recurso, seja quem for a parte */
+  if (/^\s*(Apelou|Apelaram|Recorreu|Recorreram)\b/.test(cl)) return { rot: 'apelação', ok: CITA[3][2] };
+  if (/^\s*(Agravou|Agravaram)\b/.test(cl)) return { rot: 'agravo', ok: { agravo: 1, agint: 1, inicial: 1 } };
+  if (!melhor) return null;
+  var antes = cl.slice(0, melhor.ini), depois = cl.slice(melhor.fim);
+  /* "decisão dos embargos de declaração (ID …)", "acórdão da apelação (ID …)": a peça é a decisão */
+  if (/(decis[ãa]o|ac[óo]rd[ãa]o|senten[çc]a|julgamento)\s+(?:d[oae]s?|que\s+(?:julgou|rejeitou|acolheu|apreciou))\s*$/i.test(antes)) return { rot: 'decisão', ok: CITA[2][2] };
+  /* "contrarrazões … à apelação do BACEN (ID …)": a peça é a contrarrazão */
+  if (/contrarraz|contraminuta/i.test(frase) && /apela|recurso|agravo/i.test(melhor.rot)) return { rot: 'contrarrazões', ok: CITA[4][2] };
+  if (VERBO.test(antes) || VERBO.test(depois) || /\b(sem|em|nem)\s*$/i.test(antes) || depois.trim().split(/\s+/).filter(Boolean).length > 4) return null;
+  return melhor;
+}
+/* objeto do dispositivo ("à apelação da União", "às apelações e à remessa necessária"): o que o acórdão e a ementa espelham */
+function objetoDe(t) {
+  var m = /(?:provimento|conhe[cç]o|conheceu|prejudicad[ao]s?|acolho|rejeito|acolheu|rejeitou|concedo|denego)\s+(?:parcial\s+)?((?:ao?s?|à|às)\s+[^.,;]{3,120})/i.exec(String(t || ''));
+  return m ? S(m[1]).replace(/\s+/g, ' ') : '';
+}
+function plural(o) { return /\b(apelacoes|recursos|agravos|embargos de declaracao opostos por|remessas)\b|\be (a|o|as|os|à|às) (apelacao|remessa|recurso|agravo)/.test(o); }
+/* palavras com peso de uma questão (para ver se o voto a enfrenta) */
+var VAZIAS = /^(sobre|entre|contra|desde|quando|porque|portanto|apesar|ainda|mesmo|tambem|apenas|outros|outras|referente|relativ[ao]s?|quanto|acerca|sentenca|recurso|apelacao|apelante|apelado|alegacao|alega|requer|pedido|pedidos|processo|autos|parte|partes|direito|valor|valores|uniao|federal|inss)$/;
+function chaves(q) { return nz(q).replace(/^\(?\d+\)?[.)\s-]*/, '').split(/[^a-z0-9]+/).filter(function (w) { return w.length >= 6 && !VAZIAS.test(w); }); }
+
 function analisar(paragrafos, ctx) {
   ctx = ctx || {};
   var ps = (paragrafos || []).map(function (p) { return typeof p === 'string' ? { t: p } : p; }).filter(function (p) { return S(p.t); });
@@ -269,6 +320,22 @@ function analisar(paragrafos, ctx) {
     if (/^(Sem Parecer|N[ãa]o se Aplica)$/i.test(reg.mpfParecer || '') && /(Procuradoria|Minist[ée]rio P[úu]blico)[^.]{0,80}\bopinou\b/i.test(rtx)) add('media', 'Prontuário', 'MAN-CMT-020', 'O relatório diz que o MPF opinou, mas o prontuário registra “' + reg.mpfParecer + '”.', null);
   }
 
+  /* ---------- 3b. o acórdão e a ementa espelham o objeto do dispositivo; o voto enfrenta as questões ---------- */
+  if (peca === 'acordao' && dispV.length) {
+    var objVr = objetoDe(dispV[dispV.length - 1].t), objAr = objetoDe(P.acordao.map(function (p) { return p.t; }).join(' ')), semV = function (x) { return nz(x).replace(/\b(dou|deu|dar|nego|negou|negar|conheco|conheceu|rejeito|rejeitou|acolho|acolheu|concedo|concedeu|denego|denegou|julgo|julgou|declaro|declarou)\b/g, '').replace(/\s+/g, ' ').trim(); }, objV = semV(objVr), objA = semV(objAr);
+    if (objV && objA && objV.slice(0, 40) !== objA.slice(0, 40) && objV.indexOf(objA.slice(0, 25)) < 0 && objA.indexOf(objV.slice(0, 25)) < 0)
+      add('alta', 'Resultado', 'objeto-acordao', 'O acórdão não espelha o dispositivo: o voto decide “' + objVr + '”, o acórdão “' + objAr + '”.', P.acordao[0] || null);
+    var nApel = P.relatorio.filter(function (p) { return /^(Apelou|Apelaram|Recorreu|Agravou)\b/.test(p.t); }).length;
+    if (objV && nApel >= 2 && !plural(objV) && /^(a|ao|à) (apelacao|recurso|agravo)\b/.test(objV.replace(/^à/, 'à')) && !/\bda?o?s?\s+(uniao|inss|autor|autora|re|reu|ré|impetrante|impetrad|caixa|cef|estado|municipio|fazenda|parte)/.test(objV))
+      add('media', 'Resultado', 'objeto-plural', 'O relatório descreve ' + nApel + ' recursos, mas o dispositivo decide só “' + objVr + '”: diga qual recurso, ou decida cada um.', dispV[dispV.length - 1]);
+    var Q = resV === 'naoconhecido' || resV === 'prejudicado' ? [] : (ctx.questoes || []).map(S).filter(Boolean), txVt = nz(P.voto.map(function (p) { return p.t; }).join(' '));
+    Q.forEach(function (q) {
+      var K = chaves(q); if (K.length < 2) return;
+      var acha = K.filter(function (w) { return txVt.indexOf(w.slice(0, Math.max(6, w.length - 2))) >= 0; }).length;
+      if (acha < 2 && acha / K.length < 0.34) add('baixa', 'Prontuário', 'questao-voto', 'Questão do prontuário sem enfrentamento aparente no voto: “' + q.slice(0, 140) + '”. Confira se foi apreciada (artigo 489, § 1º, IV, do CPC).', null);
+    });
+  }
+
   /* ---------- 4. IDʼs × peças do prontuário e do cartão ---------- */
   var conhecidos = {}, nConh = 0;
   function guarda(v) { String(v || '').replace(/\d{6,}/g, function (x) { if (!conhecidos[x]) { conhecidos[x] = 1; nConh++; } }); }
@@ -284,7 +351,8 @@ function analisar(paragrafos, ctx) {
     guarda((c.orig || {}).id); guarda((c.mpfx || {}).id); ['ed', 'agint', 'jr', 'ai'].forEach(function (k) { guarda((c[k] || {}).id); });
     guarda(c.especificidades); guarda((c.rel || {}).razoes); guarda((c.rel || {}).contrarrazoes);
   }
-  var citados = 0;
+  var citados = 0, AU = {}, nAu = 0;
+  (ctx.autos || []).forEach(function (d) { if (d && d.id && !AU[d.id]) { AU[d.id] = d; nAu++; } });
   corpo.forEach(function (p) {
     if (citacao(p)) return;
     var re = /\bIDs?['’ʼ]?s?\s*(?:n[º°.]\s*)?((?:\d{6,}(?:\s*(?:,|e|;)\s*)?)+)/g, m;
@@ -292,11 +360,21 @@ function analisar(paragrafos, ctx) {
       var base = m.index;
       m[1].replace(/\d{6,}/g, function (x, o) {
         citados++;
-        if (nConh && !conhecidos[x]) { var ini = base + m[0].indexOf(m[1]) + o; add('media', 'Prontuário', 'ID-prontuario', 'ID ' + x + ' não consta das peças do prontuário nem do cartão: confira nos autos [VALIDAR].', p, ini, ini + x.length); }
+        var ini = base + m[0].indexOf(m[1]) + o;
+        /* com os autos lidos: o ID existe? é a peça que o texto diz? */
+        if (nAu) {
+          var d = AU[x];
+          if (!d) { add(ctx.autosTodos ? 'media' : 'baixa', 'Autos', 'ID-autos', 'ID ' + x + ' não está na cronologia ' + (ctx.autosTodos ? 'dos autos' : 'lida (leia a cronologia toda, em Autos, para conferir os documentos antigos)') + ': confira [VALIDAR].', p, ini, ini + x.length); return; }
+          var cit = pecaCitada(p.t, base);
+          if (cit && d.k && !cit.ok[d.k] && !NEUTRA[d.k] && !(cit.ok.sentenca && d.k === 'acordao' && /embargos|agravo interno/.test(classe)))
+            add('alta', 'Autos', 'ID-peca', 'O texto cita o ID ' + x + ' como ' + cit.rot + ', mas nos autos ele é “' + d.tipo + (d.desc && nz(d.desc) !== nz(d.tipo) ? ' — ' + d.desc : '') + '” (' + (d.data || 'sem data') + '). Confira [VALIDAR].', p, ini, ini + x.length);
+          return;
+        }
+        if (nConh && !conhecidos[x]) add('media', 'Prontuário', 'ID-prontuario', 'ID ' + x + ' não consta das peças do prontuário nem do cartão: confira nos autos [VALIDAR].', p, ini, ini + x.length);
       });
     }
   });
-  if (citados && !nConh && (pr || c)) add('baixa', 'Prontuário', 'ID-prontuario', 'O prontuário não tem peças com ID registradas: os ' + citados + ' IDʼs da minuta não foram conferidos.', null);
+  if (citados && !nConh && !nAu && (pr || c)) add('baixa', 'Prontuário', 'ID-prontuario', 'O prontuário não tem peças com ID registradas: os ' + citados + ' IDʼs da minuta não foram conferidos.', null);
 
   /* ---------- 5. pendências deixadas no texto ---------- */
   todos.forEach(function (p) {

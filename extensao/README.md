@@ -5,6 +5,13 @@ Nome desde a 0.19.3 (antes: Muta). Os identificadores internos (`window.Muta*`, 
 Extensão do Chrome/Edge (Manifest V3) que abre o **Muta** num painel lateral, ao lado dos autos e das tarefas do PJe 2º grau do TRF-3.
 Base: o HTML independente *muta-independente-prontuario-completo* (Prontuário + Acervo).
 
+## O que muda na 0.40 · Conformidade confere a minuta contra os autos
+
+- **IDʼs × autos lidos** (`conformidade-motor.js › pecaCitada`, grupo "Autos"): cada "(ID …)" da minuta é procurado na cronologia lida na aba Autos. Se não está lá, aviso (baixo enquanto a cronologia não foi lida toda). Se está, e o texto o atribui a outra peça ("à sentença (ID …)" quando o ID é a apelação), aviso alto. Só se aponta quando o ID vem colado ao nome da peça; quando há um ato no meio ("foram rejeitados (ID …)", "opinou … (ID …)", "integrada em embargos (ID …)"), o ID é do ato e nada se aponta. Testado em 195 minutas do acervo com os autos extraídos: nenhum falso "peça trocada".
+- **Objeto do dispositivo** (`objetoDe`): o acórdão espelha o que o voto decide ("à apelação" × "às apelações e à remessa necessária"); dois ou mais recursos no relatório com um só decidido no dispositivo, sem dizer qual, também é apontado.
+- **Questões do prontuário** (triagem › Alegações): a questão sem palavra-chave no voto é apontada para conferência (artigo 489, § 1º, IV, do CPC); não vale quando o recurso não é conhecido ou fica prejudicado.
+- A Conformidade volta a analisar quando os autos são lidos (evento `muta:autos`).
+
 ## O que muda na 0.39 · gravar na ficha com o inteiro teor
 
 - **Autos › Peças e documentos**: cada documento tem uma caixa; as peças principais começam marcadas e qualquer outro pode ser marcado ("Marcar: principais · todos · nenhum"). Um só botão, **"Gravar N na ficha"**, lê o que falta e grava os marcados: o registro em "Outras peças e ocorrências" (tipo, ID, data e detalhamento; o que já está noutro campo da ficha não se repete) e o **inteiro teor** em `acervo/autos/<CNJ>.json.gz` (o mesmo arquivo do Caput e da Ex Officio), juntado por ID ao que já existe (`api/_ficha.js › gravarAutos/juntarAutos`, POST `/api/pauta?ficha=1` com `autos`). O documento gravado mostra "gravado".

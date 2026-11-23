@@ -520,3 +520,28 @@ test('extensão 0.39: gravar na ficha com o inteiro teor (caixa por documento, u
   assert.match(read('extensao/gabinete.js'), /t\.dataset\.auG/);
   assert.doesNotMatch(read('extensao/comparar.js'), /return pronHtml\(\) \+ editorCaixa/);
 });
+
+test('extensão 0.40: conformidade confere cada ID contra os autos lidos, o objeto do dispositivo no acórdão e as questões no voto', () => {
+  const autos = [{ id: '111111111', tipo: 'Sentença', k: 'sentenca', data: '01/02/2026' }, { id: '222222222', tipo: 'Apelação', k: 'apelacao', data: '01/03/2026' }, { id: '444444444', tipo: 'Contrarrazões', k: 'contrarrazoes', data: '05/03/2026' }];
+  const pec = (c, todos) => M.analisar(['RELATÓRIO', c, 'É o relatório.'], { autos, autosTodos: todos !== false }).itens.filter(x => /^ID-/.test(x.regra));
+  assert.match(pec('Trata-se de apelação à sentença (ID 222222222) que julgou improcedente.')[0].msg, /cita o ID 222222222 como sentença, mas nos autos ele é “Apelação”/);
+  assert.equal(pec('Houve contrarrazões (ID 444444444).').length, 0);
+  assert.equal(pec('Os embargos de declaração foram rejeitados (ID 111111111).').length, 0, 'o ID do ato não é a peça citada');
+  assert.equal(pec('Apelou o Ministério Público Federal (ID 222222222), alegando.').length, 0);
+  assert.equal(pec('Houve contrarrazões pela União à apelação do autor (ID 444444444).').length, 0);
+  assert.equal(pec('A sentença, integrada em embargos de declaração (ID 111111111), julgou.').length, 0);
+  const fora = pec('Juntou laudo (ID 999999999).', false)[0];
+  assert.equal(fora.regra, 'ID-autos'); assert.equal(fora.sev, 'baixa'); assert.match(fora.msg, /leia a cronologia toda/);
+  const ps = ['RELATÓRIO', 'Trata-se de apelações à sentença (ID 111111111).', 'Apelou a autora (ID 222222222), alegando, em suma, que houve prescrição.', 'Apelou a União (ID 222222222), alegando, em suma, que os juros são indevidos.', 'É o relatório.',
+    'VOTO', 'O Desembargador Federal Carlos Muta (Relator):', 'Senhores Desembargadores,', 'no mérito, a prescrição não ocorreu.', 'Ante o exposto, nego provimento à apelação.', 'É como voto.',
+    'ACÓRDÃO', 'Vistos e relatados estes autos, a Turma Regional de Mato Grosso do Sul, por unanimidade, negou provimento às apelações e à remessa necessária, nos termos do voto.'];
+  const r = M.analisar(ps, { questoes: ['(1) prescrição da pretensão', '(2) honorários advocatícios sucumbenciais majorados indevidamente'] });
+  assert.ok(r.itens.some(x => x.regra === 'objeto-acordao' && /“à apelação”.*“às apelações e à remessa necessária”/.test(x.msg)));
+  assert.ok(r.itens.some(x => x.regra === 'objeto-plural'));
+  const q = r.itens.filter(x => x.regra === 'questao-voto'); assert.equal(q.length, 1); assert.match(q[0].msg, /honorários advocatícios/);
+  const ok = M.analisar(ps.map(x => x.replace('negou provimento às apelações e à remessa necessária', 'negou provimento à apelação')), {});
+  assert.ok(!ok.itens.some(x => x.regra === 'objeto-acordao'));
+  const cf = read('extensao/conformidade.js');
+  assert.match(cf, /autos: au \? au\.lista\.map/); assert.match(cf, /'muta:autos'/);
+  assert.match(read('extensao/autos.js'), /doProcesso: function \(\)/);
+});
