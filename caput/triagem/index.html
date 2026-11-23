@@ -158,6 +158,18 @@ body{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/20
 .ini-cab{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;padding:18px 0 14px;flex-wrap:wrap}
 .ini-cab p{margin:4px 0 0;font-size:14px;color:var(--m2)}
 .kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+/* seleções prévias (faixa da Visão geral) */
+.sp-fx{margin-top:12px;padding:14px 16px;border:1px solid var(--b);background:var(--w);border-radius:8px;display:flex;flex-direction:column;gap:12px}
+.sp-cab{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}.sp-cab>b{font-size:15px}.sp-cab>span{color:var(--m2);font-size:12.5px}.sp-cab>span b{color:var(--t,#203b39)}.sp-sp{flex:1}
+.sp-g{display:grid;gap:12px}
+.sp-c{display:flex;flex-direction:column;gap:8px;padding:12px 14px;border:1px solid var(--b2,#e3ded2);background:var(--bg,#fbfaf5);border-radius:8px;text-align:left;font:inherit;color:inherit;cursor:pointer}
+.sp-c:hover{border-color:var(--v,#235a55)}.sp-c.at{box-shadow:inset 3px 0 0 #235a55}
+.sp-h{display:flex;align-items:baseline;gap:8px}.sp-h>b{font-size:16px}.sp-h i{font:600 10px var(--mono,monospace);font-style:normal;letter-spacing:.08em;padding:2px 6px;background:#235a55;color:#fff;border-radius:3px}.sp-h small{color:var(--m2);font-size:12px}.sp-h em{font:600 11px var(--mono,monospace);font-style:normal}
+.sp-n{font-size:12.5px;color:var(--m2)}.sp-n b{font-size:14px;color:var(--t,#203b39)}
+.sp-b{display:block;height:8px;background:#ece8dd;border-radius:4px;overflow:hidden}.sp-b i{display:block;height:8px}
+.sp-t{display:flex;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--m2)}.sp-t b{color:var(--t,#203b39)}
+.sp-nota{margin:0!important;border:0!important;padding:0!important}
+@media (max-width:1100px){.sp-g{grid-template-columns:minmax(0,1fr)!important}}
 .kpi{display:flex;flex-direction:column;gap:5px;padding:15px 17px;border:1px solid var(--b);background:var(--w);border-radius:8px;text-align:left;cursor:pointer}
 .kpi:hover{border-color:var(--v2)}
 .kpi b{font:500 32px "JetBrains Mono",monospace;letter-spacing:-.02em;line-height:1}
@@ -2796,19 +2808,14 @@ function vInicio(emb) {
   const k = (cor, rot, n, sub, rg, conj) => '<button type="button" class="kpi" style="box-shadow:inset 0 3px 0 ' + cor + '" data-conj="' + conj + '"><span class="k" style="color:' + cor + '">' + rot + '</span><b style="color:' + cor + '">' + nf(n) + '</b><span class="sub">' + sub + '</span>' + (rg ? '<span class="kr">' + rg + '</span>' : '') + '<span class="lk" style="margin-top:2px">Abrir na Fila →</span></button>';
   REG = {}; reg('tri', 'Sem caminho definido', tri); reg('pr', 'Prontos para julgar', prontos); reg('prc', 'Prontos · colegiado', prC); reg('prm', 'Prontos · decisão do relator', prM); reg('cand', 'Candidatos à monocrática', cands); reg('dados', 'Já com destino da triagem', dados); reg('novas', 'Tarefas não classificadas', NOVAS); reg('pend', 'Aptos com pendência', comPend);
   let h = emb ? '' : '<div class="wrap"><div class="ini-cab"><div><p class="k" style="margin:0">Triagem · início</p><p>Só o que leva a uma decisão de triagem. Cada número abre os processos na Fila, já filtrados.</p></div><div style="display:flex;gap:10px;align-items:center;font-size:12.5px;color:var(--m2)"><span><b class="mono" style="font-weight:500;color:var(--v)">' + nf(U.length) + '</b> em triagem</span><span><b class="mono" style="font-weight:500;color:var(--v)">' + nf(U.filter((o) => o.dest.k).length) + '</b> com destino da triagem</span></div></div>';
-  h += '<div class="kpis">' + k('#a57829', 'Sem caminho definido', tri.length, 'em Triagem de Gabinete ou Analisar tipo de decisão, sem destino', '', 'tri') +
-    k('#3b7150', 'Prontos para julgar', prontos.length, nf(prC.length) + ' colegiado · ' + nf(prM.length) + ' relator · ' + nf(comPend.length) + ' aptos com pendência à parte', 'etiqueta Apto / Apto para julgamento ou tarefa “Aptos para julgamento”, sem etiqueta de pendência', 'pr') +
-    k('#24506f', 'Candidatos à monocrática', cands.length, 'indícios de decisão do relator, a confirmar', 'sem destino da triagem; os critérios estão abaixo', 'cand') +
-    k('#8a948f', 'Já destinados na triagem', dados.length, nf(dados.filter((o) => o.dest.k === 'pauta').length) + ' à pauta · ' + nf(dados.filter((o) => o.dest.k === 'mono').length) + ' monocrática · ' + nf(dados.filter((o) => o.dest.k === 'esc').length) + ' em escaninho', 'ainda na tarefa de triagem do PJe', 'dados') + '</div>';
-  /* sessões */
-  const S = sessoes().slice(0, 5);
-  let ses = '<section class="card"><div class="ch"><h2>Próximas sessões</h2><p>prontos por seção e o que a triagem já mandou para cada uma</p></div>';
-  if (!S.length) ses += '<p class="nota" style="border:0">Nenhuma sessão futura no calendário. Cadastre na página Pautas.</p>';
-  else { ses += '<div class="li hd" style="grid-template-columns:110px 110px minmax(0,1fr) 70px 70px">' + '<span>Sessão</span><span>Pautar até</span><span>Na pauta / pré-pauta</span><span style="text-align:right">Triagem</span><span></span></div>';
-    S.forEach((ss) => { const nm = nomeSes(ss), daTri = U.filter((o) => o.dest.k === 'pauta' && o.dest.s === nm); reg('ses' + ss.data, 'Mandados à sessão de ' + nm, daTri);
-      ses += '<div class="li" style="grid-template-columns:110px 110px minmax(0,1fr) 70px 70px"><b class="mono" style="font-weight:500">' + nm + '</b><span class="mono" style="font-size:12.5px">' + esc(br((ss.fases || {}).pauta || '') || '—') + '</span><span style="font-size:12.5px;color:var(--m2)">' + nf((ss.itens || []).length) + ' na pauta · ' + nf((ss.previa || []).length) + ' na pré-pauta</span><span class="n">' + nf(daTri.length) + '</span><button type="button" class="lk" data-conj="ses' + ss.data + '" style="text-align:right">Ver →</button></div>'; }); }
-  const ps = (sec) => prC.filter((o) => o.secao === sec).length + ' col. · ' + prM.filter((o) => o.secao === sec).length + ' rel.';
-  ses += '<p class="nota">Prontos por seção: 1ª ' + ps('1ª Seção') + ' · 2ª ' + ps('2ª Seção') + ' · 3ª ' + ps('3ª Seção') + ' · Para mandar à sessão, marque na Fila e use Pauta no rodapé.</p></section>';
+  /* totais do funil de triagem (prévia "Triagem · funil", 23/11/2026): cada processo em triagem cai num só total */
+  const F4 = funilTriagem(), tp = (L) => { const c = { pj: 0, ed: 0, ag: 0, jr: 0 }; L.forEach((o) => { c[mpTipo(o)]++; }); return '1º julg. ' + nf(c.pj) + ' · ED ' + nf(c.ed) + ' · AgInt ' + nf(c.ag) + (c.jr ? ' · Retr. ' + nf(c.jr) : ''); };
+  reg('fnao', 'Não triados', F4.nao); reg('fpend', 'Com pendência', F4.pend); reg('fmono', 'Prontos · monocrática', F4.mono); reg('fses', 'Prontos · sessão', F4.ses);
+  h += '<div class="kpis">' + k('#5c6b67', 'Não triados', F4.nao.length, 'sem passar pela triagem', 'sem destino, sem pendência, sem etiqueta de apto e sem indício de monocrática', 'fnao') +
+    k('#8a2f22', 'Com pendência', F4.pend.length, 'aguardam ato ou prazo', 'etiqueta ou tarefa de pendência, ainda sem destino', 'fpend') +
+    k('#3f6f94', 'Prontos · monocrática', F4.mono.length, nf(F4.mono.filter((o) => o.dest.k === 'mono').length) + ' com destino confirmado', 'aptos para decisão do relator ou candidatos à monocrática, sem pendência', 'fmono') +
+    k('#235a55', 'Prontos · sessão', F4.ses.length, tp(F4.ses), 'aptos para o colegiado ou já mandados à pauta, sem pendência', 'fses') + '</div>';
+  h += selecoesPrevias(prC, prM);
   /* destino provável */
   const tot = U.length || 1, gD = DEST.map((x) => [x, U.filter((o) => o.prov === x[0])]).filter((x) => x[1].length).sort((a, b) => b[1].length - a[1].length), mx = Math.max(1, ...gD.map((x) => x[1].length));
   let dp = '<section class="card"><div class="ch"><h2>Destino provável</h2><p>' + nf(U.length) + ' em triagem · pela tarefa no PJe e pelas etiquetas</p></div><div class="li hd" style="grid-template-columns:minmax(0,1fr) 120px 56px 40px"><span>Destino</span><span></span><span style="text-align:right">Proc.</span><span style="text-align:right">%</span></div>';
@@ -2838,14 +2845,38 @@ function vInicio(emb) {
   ESCOPO.triar.map((x) => [x, U.filter((o) => nzT(o.tarefa) === nzT(x[0]))]).sort((a, b) => b[1].length - a[1].length).forEach(([x, L], i) => { reg('tf' + i, 'Tarefa: ' + x[0], L);
     pr += '<button type="button" class="li" data-conj="tf' + i + '" style="grid-template-columns:minmax(0,1fr) 90px 56px"><span><b style="font-weight:600">' + esc(x[0]) + '</b><small>' + esc(x[1]) + '</small></span><span class="hb"><i style="width:' + Math.max(1, Math.round(100 * L.length / tot)) + '%;background:var(--v2)"></i></span><span class="n">' + nf(L.length) + '</span></button>'; });
   pr += '</section>';
-  h += '<div class="ini-grid"><div class="col">' + ses + dp + cd + '</div><div class="col">' + ms + pr + '</div></div>' + matrizTriagem() + (emb ? '' : '</div>');
+  h += '<div class="ini-grid"><div class="col">' + dp + cd + '</div><div class="col">' + ms + pr + '</div></div>' + matrizTriagem() + (emb ? '' : '</div>');
   return h; }
 let REG = {}, INI_MAS = false;
 /* Visão geral da triagem (o antigo Início) no topo da Triagem, recolhível; cada número abre o conjunto na lista */
 function visaoGeral() {
-  const ab = LS.get('tri_vg', true), semD = U.filter((o) => !o.dest.k), tri = semD.filter((o) => o.prov === 'tri'), pr = U.filter((o) => o.apto && !o.pend.length), cd = U.filter((o) => o.cand && !o.dest.k), ds = U.filter((o) => o.dest.k);
-  const res = [['#a57829', nf(tri.length), 'sem caminho'], ['#3b7150', nf(pr.length), 'prontos para julgar'], ['#24506f', nf(cd.length), 'candidatos à monocrática'], ['#8a948f', nf(ds.length), 'já destinados']].map((x) => '<span><b style="color:' + x[0] + '">' + x[1] + '</b> ' + x[2] + '</span>').join('');
+  const ab = LS.get('tri_vg', true), F4 = funilTriagem();
+  const res = [['#5c6b67', nf(F4.nao.length), 'não triados'], ['#8a2f22', nf(F4.pend.length), 'com pendência'], ['#3f6f94', nf(F4.mono.length), 'prontos · monocrática'], ['#235a55', nf(F4.ses.length), 'prontos · sessão']].map((x) => '<span><b style="color:' + x[0] + '">' + x[1] + '</b> ' + x[2] + '</span>').join('');
   return '<section class="tri-vg' + (ab ? ' ab' : '') + '"><button type="button" class="tri-vg-h" data-vg aria-expanded="' + ab + '"><span class="k">Visão geral da triagem</span><span class="tri-vg-r">' + res + '</span><span class="tri-vg-t">' + (ab ? 'recolher ▴' : 'abrir ▾') + '</span></button>' + (ab ? '<div class="tri-vg-c">' + vInicio(true) + '</div>' : '') + '</section>'; }
+/* funil de triagem: Com pendência, Prontos · monocrática, Prontos · sessão e, no resto, Não triados */
+function funilTriagem() {
+  const pend = [], mono = [], ses = [], nao = [];
+  U.forEach((o) => { if (o.dest.k === 'esc') return;
+    if (o.pend.length && !o.dest.k) pend.push(o);
+    else if (o.dest.k === 'mono' || (!o.dest.k && !o.pend.length && (o.cand || (o.apto && o.monoE)))) mono.push(o);
+    else if (o.dest.k === 'pauta' || (!o.dest.k && !o.pend.length && o.apto)) ses.push(o);
+    else nao.push(o); });
+  return { pend, mono, ses, nao }; }
+/* seleções prévias: uma por sessão futura; a ativa é a do próximo peço dia; mínimo de 1º julgamento igual para todas */
+const SP_MIN = 150;
+function selecoesPrevias(prC, prM) {
+  const S = sessoes().slice(0, 4);
+  let h = '<section class="sp-fx" aria-label="Seleções prévias"><div class="sp-cab"><b>Seleções prévias</b><span>a ativa é a do próximo peço dia · as futuras já recebem processos · mínimo de <b>' + nf(SP_MIN) + '</b> de 1º julgamento por sessão</span><span class="sp-sp"></span><button type="button" class="lk" data-trisub="selecao" data-sp-abrir>Abrir seleções prévias →</button></div>';
+  if (!S.length) return h + '<p class="nota" style="border:0">Nenhuma sessão futura no calendário. Cadastre na página Pautas.</p></section>';
+  const at = S.find((ss) => ((ss.fases || {}).pauta || '') >= HOJE) || S[0];
+  h += '<div class="sp-g" style="grid-template-columns:repeat(' + S.length + ',minmax(0,1fr))">' + S.map((ss) => { const nm = nomeSes(ss), L = ALL.filter((o) => o.dest.k === 'pauta' && o.dest.s === nm), c = { pj: 0, ed: 0, ag: 0, jr: 0 };
+    L.forEach((o) => { c[mpTipo(o)]++; }); reg('sp' + ss.data, 'Seleção prévia · sessão de ' + nm, L);
+    const pct = Math.min(100, Math.round(100 * c.pj / SP_MIN)), cor = c.pj >= SP_MIN ? '#2c5e3f' : c.pj >= SP_MIN * .73 ? '#805b18' : '#8a2f22', pd = (ss.fases || {}).pauta || '';
+    return '<button type="button" class="sp-c' + (ss === at ? ' at' : '') + '" data-conj="sp' + ss.data + '" title="Ver os processos desta seleção prévia na lista"><span class="sp-h"><b>' + esc(nm.slice(0, 5)) + '</b>' + (ss === at ? '<i>ATIVA</i>' : '') + '<small>' + (pd ? 'peço dia ' + esc(br(pd).slice(0, 5)) : 'sem peço dia') + '</small><span class="sp-sp"></span><em style="color:' + cor + '">' + (c.pj >= SP_MIN ? 'mínimo atingido' : 'faltam ' + nf(SP_MIN - c.pj)) + '</em></span>' +
+      '<span class="sp-n">1º julgamento <b>' + nf(c.pj) + '</b> / ' + nf(SP_MIN) + '</span><span class="sp-b" role="img" aria-label="' + c.pj + ' de ' + SP_MIN + ' processos de 1º julgamento"><i style="width:' + pct + '%;background:' + cor + '"></i></span>' +
+      '<span class="sp-t"><span>ED <b>' + nf(c.ed) + '</b></span><span>AgInt <b>' + nf(c.ag) + '</b></span><span>Retratação <b>' + nf(c.jr) + '</b></span><span class="sp-sp"></span><span>' + nf((ss.itens || []).length) + ' na pauta · ' + nf((ss.previa || []).length) + ' na pré-pauta</span></span></button>'; }).join('') + '</div>';
+  const ps = (sec) => prC.filter((o) => o.secao === sec).length + ' col. · ' + prM.filter((o) => o.secao === sec).length + ' rel.';
+  return h + '<p class="nota sp-nota">Prontos por seção: 1ª ' + ps('1ª Seção') + ' · 2ª ' + ps('2ª Seção') + ' · 3ª ' + ps('3ª Seção') + ' · Para mandar à sessão, marque na Fila e use Pauta no rodapé.</p></section>'; }
 function reg(k, rot, L) { REG[k] = { rot, ids: L.map((o) => o.d) }; }
 function abrirConj(k) { const r = REG[k]; if (!r) return; limparFiltros(); F.conj = { rot: r.rot, ids: new Set(r.ids) }; ir('fila'); }
 
