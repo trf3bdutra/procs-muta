@@ -439,14 +439,29 @@ function casoPrec() { return { cnj: G.cnj, assunto: fonteVal({ fonte: ['Assunto'
     sintese: [S(V('triagem', 'Síntese Processual')), S(V('triagem', 'Síntese Fática'))].join(' '), especificidades: [S(V('triagem', 'Especificidades')), S(V('triagem', 'Tema'))].join(' ') }; }
 function precEmentario(k) { if (window.MutaEmentario && window.MutaEmentario.caso) window.MutaEmentario.caso(k); }
 /* peças do processo (sentença, origem, recursos e contrarrazões, outras peças): um cartão só, uma seção por grupo */
+/* 0.44 · grupos de documento vindos do Roteiro (em Autos › Peças e documentos): os campos são os mesmos da ficha */
+var PECAS_DOC = [
+  { grupo: 'Decisão impugnada', quando: function (tj) { return /agravo interno|embargos|retrata/.test(tj) || !!S(V('triagem', 'Impugnada - ID')); },
+    campos: [['triagem', 'Impugnada - ID'], ['triagem', 'Impugnada - Data'], ['triagem', 'Impugnada - Síntese'], ['triagem', 'Impugnada - Órgão'], ['triagem', 'Impugnada - Relator']] },
+  { grupo: 'Parecer do MPF', campos: [['triagem', 'MPF'], ['triagem', 'ID do Parecer MPF'], ['triagem', 'MPF - Data'], ['triagem', 'Parecer - Sentido'], ['triagem', 'Parecer - Sentido (outro)'], ['triagem', 'MPF - Info adicional']] },
+  { grupo: 'Procuração', campos: [['triagem', 'ID da Procuração'], ['triagem', 'Procurações']] }
+];
 var PECAS_ORDEM = { 'Sentença': ['Sentença - ID', 'Sentença - Data', 'Sentença - Decisão', 'Sentença - Resultado', 'Sentença - Honorários', 'Sentença - Custas', 'Sentença - Reexame', 'Sentença - Tutela', 'Sentença - Fundamento', 'Sentença - Providências'],
   'Origem': ['Origem - Juízo', 'Origem - Julgador', 'Origem - Valor da causa', 'Origem - Processo de referência', 'Origem - Documentos 1G'],
   'Recursos e contrarrazões': ['Contrarrazões - Situação', 'Recursos', 'Contrarrazões'] };
-var PECAS_RESUMO = { 'Sentença': ['Sentença - ID', 'Sentença - Data', 'Sentença - Decisão'], 'Origem': ['Origem - Juízo', 'Origem - Julgador'], 'Recursos e contrarrazões': ['Recursos', 'Contrarrazões - Situação'], 'Outras peças e ocorrências': ['Outras peças'] };
+var PECAS_RESUMO = { 'Decisão impugnada': ['Impugnada - ID', 'Impugnada - Data'], 'Parecer do MPF': ['MPF', 'ID do Parecer MPF', 'Parecer - Sentido'], 'Procuração': ['ID da Procuração'], 'Sentença': ['Sentença - ID', 'Sentença - Data', 'Sentença - Decisão'], 'Origem': ['Origem - Juízo', 'Origem - Julgador'], 'Recursos e contrarrazões': ['Recursos', 'Contrarrazões - Situação'], 'Outras peças e ocorrências': ['Outras peças'] };
 function pecasCartao(soGrupos) {
   var A = abaModelo('Processo'); if (!A) return '';
   var AU = window.MutaAutos;
   var gs = A.grupos.filter(function (g) { return !FORA_PROC[g.grupo] && grupoVisivel(g); });
+  /* 0.44: as informações de documento do Roteiro (decisão impugnada, parecer do MPF, procuração) também moram aqui, em Peças e documentos */
+  if (soGrupos) {
+    var tj = N(V('triagem', 'Tipo de Julgamento')), outras = -1;
+    gs.forEach(function (g, i) { if (outras < 0 && /^Outras pe/.test(g.grupo)) outras = i; });
+    var extra = PECAS_DOC.filter(function (d) { return !d.quando || d.quando(tj); }).map(function (d) {
+      return { grupo: d.grupo, campos: d.campos.map(function (k) { return campoModelo(k[0], k[1]); }).filter(Boolean) }; }).filter(function (g) { return g.campos.length; });
+    if (extra.length) gs = outras < 0 ? gs.concat(extra) : gs.slice(0, outras).concat(extra, gs.slice(outras));
+  }
   if (!gs.length) return '';
   var val = function (c) { var v = c.secao ? V(c.secao, c.chave) : fonteVal(c); return Array.isArray(v) ? (v.length ? v.length + ' item(ns)' : '') : S(v); };
   return (soGrupos ? '' : '<section class="card pc-sec pecas" id="g-pecas"><div class="pc-sh"><h3>Peças</h3><small class="muted">da ficha do processo</small></div>') + gs.map(function (g) {
@@ -526,16 +541,40 @@ var PRON = [['Acórdão (sessão)', 'Sessão', ''], ['Decisão monocrática', 'M
   ['Homologação / extinção', 'Monocrática', 'Homologação / extinção'], ['Outro destino', 'Outro destino', '']];
 function pronAtual() { var d = destGrav(), t = S(V('producao', 'Mono - Tipo de ato'));
   for (var i = 0; i < PRON.length; i++) { if (PRON[i][1] === d && (d !== 'Monocrática' || PRON[i][2] === t || (!t && i === 1))) return i; } return -1; }
+/* 0.44 · sem tipo de ato gravado: sugestão pela tarefa do PJe, pela triagem e pelas últimas peças e movimentações dos autos lidos.
+   É só sugestão: vale o que a pessoa escolher. Índices de PRON: 0 acórdão, 1 monocrática, 2 urgência, 3 despacho, 5 retratação, 6 homologação/extinção. */
+function sugerirAto() {
+  var tf = N(window.MutaPje && window.MutaPje.tarefa ? window.MutaPje.tarefa() : ''), tj = N(V('triagem', 'Tipo de Julgamento'));
+  var urg = S(V('triagem', 'Urgência')), urgAp = N(V('triagem', 'Urgência - Apreciação')), hip = N(V('triagem', 'Hipóteses Monocrática'));
+  var AU = window.MutaAutos, L = AU && AU.doProcesso ? ((AU.doProcesso() || {}).lista || []) : [];
+  var ult = L.filter(function (d) { return !d.anexo; }).sort(function (a, b) { return Number(b.id) - Number(a.id); }).slice(0, 4), txt = N(ult.map(function (d) { return d.tipo + ' ' + (d.desc || '') + ' ' + (d.movs || []).join(' '); }).join(' | '));
+  var u0 = ult[0] ? N(ult[0].tipo + ' ' + (ult[0].desc || '') + ' ' + (ult[0].movs || []).join(' ')) : '';
+  if (/urgencia|liminar|tutela|efeito suspensivo/.test(tf)) return { i: 2, por: 'tarefa do PJe' };
+  if (urg && !/apreciad|decidid|prejudicad/.test(urgAp)) return { i: 2, por: 'urgência não apreciada na triagem' };
+  if (/retratacao/.test(tf + ' ' + tj) || /devolu[a-z]* .*(vice|retratacao)|juizo de retratacao/.test(txt)) return { i: 5, por: /retratacao/.test(tf) ? 'tarefa do PJe' : /retratacao/.test(tj) ? 'tipo de julgamento' : 'devolução da Vice-Presidência nos autos' };
+  if (/desistencia|renuncia|acordo|transacao|homologa/.test(u0)) return { i: 6, por: 'última peça: ' + (ult[0].desc || ult[0].tipo) };
+  if (/pedido de (tutela|liminar|efeito)|tutela (de urgencia|antecipada)|efeito suspensivo/.test(u0)) return { i: 2, por: 'última peça: ' + (ult[0].desc || ult[0].tipo) };
+  if (/^(possivel|provavel|cabivel)/.test(hip)) return { i: 1, por: 'hipótese de monocrática na triagem' };
+  if (/sessao|pauta|relatorio e voto|voto/.test(tf)) return { i: 0, por: 'tarefa do PJe' };
+  if (ult[0] && ult[0].k === 'peticao' && !/contrarraz|parecer|apelacao|agravo|embargos|inicial/.test(u0)) return { i: 3, por: 'última peça é petição intercorrente: ' + (ult[0].desc || ult[0].tipo) };
+  if (/embargos de declaracao|agravo interno|apelacao|remessa/.test(tj)) return { i: 0, por: 'tipo de julgamento: ' + V('triagem', 'Tipo de Julgamento') };
+  if (/contrarraz|parecer/.test(u0)) return { i: 0, por: 'recurso respondido (' + (ult[0].desc || ult[0].tipo) + ')' };
+  var cl = N(((G.fo || {}).classe_judicial) || ((G.fo || {}).Classe) || '');
+  if (/apela|remessa|agravo de instrumento|embargos de declara|agravo interno/.test(cl)) return { i: 0, por: 'classe do processo, sem urgência nem hipótese de monocrática na triagem' };
+  return null;
+}
+function atoSug(k) { if (k >= 0) return ''; var x = sugerirAto(); if (!x) return '';
+  return '<button type="button" class="pm-sug" data-pron="' + x.i + '" title="Sugestão (' + esc(x.por) + '). Clique para usar.">sugerido: ' + esc(PRON[x.i][0]) + '</button>'; }
 /* tipo de ato no cartão, à esquerda de quem minuta e de quem corrige */
 function atoSel() {
   var k = pronAtual();
   return '<label class="pm-pp pm-ato"><span class="pm-pn"><small>Tipo de ato</small><select id="pm-pron" aria-label="Tipo de ato ou pronunciamento"><option value="">a definir</option>' +
-    PRON.map(function (x, i) { return '<option value="' + i + '"' + (i === k ? ' selected' : '') + '>' + esc(x[0]) + '</option>'; }).join('') + '</select></span></label>';
+    PRON.map(function (x, i) { return '<option value="' + i + '"' + (i === k ? ' selected' : '') + '>' + esc(x[0]) + '</option>'; }).join('') + '</select>' + atoSug(k) + '</span></label>';
 }
 function pronunciamento() {
   var k = pronAtual();
   return '<section class="card pc-sec pm-pron"><div class="pc-sh"><h3>Tipo de ato · pronunciamento</h3><small class="muted">' + (k < 0 ? 'a definir na triagem' : esc(PRON[k][1] === 'Sessão' ? 'vai à sessão' : PRON[k][1] === 'Monocrática' ? 'decisão do relator' : 'outro destino')) + '</small></div>' +
-    '<select id="pm-pron" class="pm-pron-s" aria-label="Tipo de ato ou pronunciamento"><option value="">— a definir —</option>' + PRON.map(function (x, i) { return '<option value="' + i + '"' + (i === k ? ' selected' : '') + '>' + esc(x[0]) + '</option>'; }).join('') + '</select></section>';
+    '<select id="pm-pron" class="pm-pron-s" aria-label="Tipo de ato ou pronunciamento"><option value="">— a definir —</option>' + PRON.map(function (x, i) { return '<option value="' + i + '"' + (i === k ? ' selected' : '') + '>' + esc(x[0]) + '</option>'; }).join('') + '</select>' + atoSug(k) + '</section>';
 }
 function corpoProducao() {
   var A = abaModelo('Produção'), h = '';

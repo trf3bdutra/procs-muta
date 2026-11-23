@@ -17,6 +17,10 @@
   var OK_PREPARO = /^(comprovado|justica gratuita|isento|assistencia da dpu|nao se aplica)/, AL_PREPARO = /^(recolhido sem comprovante|recolhido a menor|recolhido apos|nao recolhido)/;
 
   /* passos: tipos ('*' = todos), campos [seção, chave, rótulo?, condição?], estado(ctx) e dica curta do Padrão Muta */
+  /* campos de documento (moram em Autos › Peças e documentos): no Roteiro, só indicação quando já preenchidos; vazios, preenchíveis aqui */
+  var DOC_RT = { 'origem.Sentença - ID': 1, 'origem.Sentença - Data': 1, 'origem.Sentença - Resultado': 1, 'triagem.Impugnada - ID': 1, 'triagem.Impugnada - Data': 1, 'triagem.Impugnada - Síntese': 1,
+    'triagem.Impugnada - Órgão': 1, 'triagem.Impugnada - Relator': 1, 'triagem.ID do Parecer MPF': 1, 'triagem.MPF - Data': 1, 'triagem.Parecer - Sentido': 1, 'triagem.Parecer - Sentido (outro)': 1,
+    'triagem.MPF - Info adicional': 1, 'triagem.ID da Procuração': 1, 'triagem.Procurações': 1, 'producao.Acórdão - ID': 1 };
   var PASSOS = [
     { id: 'decisao', f: 'rec', t: 'Decisão recorrida identificada', tipos: ['ap', 'rn', 'ms'],
       campos: [['origem', 'Sentença - ID', 'ID da sentença'], ['origem', 'Sentença - Data', 'Data da sentença'], ['origem', 'Sentença - Resultado', 'Resultado']],
@@ -144,6 +148,10 @@
     /* sugestão da leitura dos autos para o campo, quando difere do que está na ficha */
     var comSug = function (c) {
       var alvo = c[0] + '.' + c[1], k = -1;
+      /* 0.44: informação de documento já localizada fica em Autos › Peças e documentos; aqui, só a indicação */
+      if (DOC_RT[alvo] && !mostrados[alvo]) { var vd = g.V(c[0], c[1]), tem = Array.isArray(vd) ? vd.length : S(vd);
+        if (tem) { mostrados[alvo] = 1; var tx = Array.isArray(vd) ? vd.length + (vd.length === 1 ? ' linha' : ' linhas') : S(vd); if (/^\d{4}-\d{2}-\d{2}$/.test(tx)) tx = tx.split('-').reverse().join('/');
+          return '<div class="gf rt-doc' + (tx.length > 60 ? ' w' : '') + '"><span class="gl">' + esc(c[2] || c[1]) + ' <button type="button" class="lnk" data-aba="Autos" title="Editar em Autos › Peças e documentos">em Autos</button></span><span class="ro">' + esc(tx.slice(0, 300)) + '</span></div>'; } }
       SG.forEach(function (it, i) { if (k < 0 && it.alvo === alvo && it.status !== 'igual' && it.kind !== 'tabela' && S(it.value)) k = i; });
       if (mostrados[alvo]) return ''; mostrados[alvo] = 1;
       var h = campoRot(c[0], c[1], c[2]); if (k < 0) return h;

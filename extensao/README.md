@@ -5,6 +5,12 @@ Nome desde a 0.19.3 (antes: Muta). Os identificadores internos (`window.Muta*`, 
 Extensão do Chrome/Edge (Manifest V3) que abre o **Muta** num painel lateral, ao lado dos autos e das tarefas do PJe 2º grau do TRF-3.
 Base: o HTML independente *muta-independente-prontuario-completo* (Prontuário + Acervo).
 
+## O que muda na 0.44 · Autos: íntegra; documentos do Roteiro em Autos; sugestão de tipo de ato
+
+- **Leitura dos autos**: só "Ler os autos" / "Reler". Sempre a íntegra: a cronologia toda e o texto de todos os documentos (principais primeiro), três de cada vez (`autos.js › extrairIntegra`). Saíram "Cronologia toda", "Peças principais" e "Preencher sozinho" (o preenchimento dos campos vazios segue, com Desfazer em A conferir).
+- **Documentos do Roteiro em Autos**: "Decisão impugnada" (ED, AgInt, retratação ou quando há ID), "Parecer do MPF" e "Procuração" entram em Peças e documentos, cada um com os seus documentos da cronologia (`gabinete.js › PECAS_DOC`). No Roteiro, os campos de documento já preenchidos (sentença, decisão impugnada, parecer, procuração) aparecem só como indicação, com "em Autos"; vazios, continuam preenchíveis ali (`roteiro.js › DOC_RT`).
+- **Tipo de ato**: sem tipo gravado, o cartão sugere um ("sugerido: …", clique para usar) pela tarefa do PJe, pela triagem (urgência pendente, hipótese de monocrática, retratação), pelas últimas peças dos autos (desistência ou acordo, pedido de tutela, petição intercorrente, contrarrazões ou parecer) ou pela classe (`gabinete.js › sugerirAto`). Nada é gravado sem o clique.
+
 ## O que muda na 0.43 · Gerador só com relatório e ementa
 
 - 0.43.1: saíram os botões "Localizar no Collectio" e "Mandar ao Collectio" do texto do editor (Comparar); o Collectio segue no quadro de baixo.

@@ -488,7 +488,7 @@ test('extensão 0.38: Autos preenche sozinho os campos vazios do Roteiro (e desf
   const cf = AU.htmlConferir();
   assert.match(cf, /<details class="au-auto-av au-auto-d"><summary><b>1 campo preenchido pela leitura dos autos/);
   assert.match(cf, /diverge/, 'a divergência fica em A conferir');
-  assert.match(AU.htmlLeitura(), /Preencher sozinho/); assert.match(AU.htmlLeitura(), /au-res/);
+  assert.doesNotMatch(AU.htmlLeitura(), /Preencher sozinho|Peças principais|Cronologia toda/, '0.44: só Ler/Reler (íntegra)'); assert.match(AU.htmlLeitura(), /au-res/);
   assert.match(AU.htmlDocs(() => ''), /Principais \(1\)[\s\S]*Todos \(1\)/);
   AU.clique({ dataset: { au: 'desfazer' } }); await tick();
   assert.equal(pend['origem.Sentença - Decisão'], '', 'desfeito');
@@ -576,4 +576,12 @@ test('extensão 0.43: Gerador só com relatório e ementa (dispositivo, acórdã
   assert.match(g, /\(PECAS\.disp \? bloco\('disp'/); assert.match(g, /\(PECAS\.ac \? bloco\('ac'/); assert.match(g, /\(PECAS\.pr \? bloco\('pr'/);
   assert.match(read('extensao/painel.html'), /Gerador<small>relatório e ementa<\/small>/);
   assert.doesNotMatch(read('extensao/comparar.js'), />Localizar no Collectio<|>Mandar ao Collectio</, 'sem os botões do Collectio no texto do editor');
+});
+
+test('extensão 0.44: Ler/Reler sempre a íntegra; documentos do Roteiro em Autos (indicação no Roteiro quando localizados); sugestão de tipo de ato', () => {
+  const a = read('extensao/autos.js'), g = read('extensao/gabinete.js'), r = read('extensao/roteiro.js');
+  assert.match(a, /function extrairIntegra\(\)/); assert.match(a, /if \(lidoDoProcesso\(\) && !A\.fila\) extrairIntegra\(\);/);
+  assert.match(a, /var tudo = true;/); assert.match(a, /'Parecer do MPF': \{ parecer: 1 \}, 'Procuração': \{ procuracao: 1 \}/);
+  assert.match(g, /var PECAS_DOC = \[/); assert.match(g, /grupo: 'Parecer do MPF'/); assert.match(g, /function sugerirAto\(\)/); assert.match(g, /atoSug\(k\)/);
+  assert.match(r, /var DOC_RT = \{/); assert.match(r, /data-aba="Autos" title="Editar em Autos › Peças e documentos"/);
 });

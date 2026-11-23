@@ -73,7 +73,9 @@ function movimentos() {
 /* ---------- leitura da cronologia ---------- */
 function cnjAtual() { var k = br.chaveAtual(); return k && k !== 'avulso' ? Muta.formatarCnj(k) : ''; }
 function redesenhar() { if (GB().render) GB().render(); }
-function ler(tudo) {
+/* 0.44: ler e reler sempre trazem a íntegra: a cronologia toda e o texto de todos os documentos */
+function ler() {
+  var tudo = true;
   if (!window.MutaPje || !window.MutaPje.lerAutos) return Promise.resolve();
   A.lendo = tudo ? 'tudo' : true; A.erro = ''; A.msg = ''; redesenhar();
   return window.MutaPje.lerAutos(tudo).then(function (r) {
@@ -82,7 +84,7 @@ function ler(tudo) {
     redesenhar();
     try { document.dispatchEvent(new Event('muta:autos')); } catch (e) {}
     /* leitura automática: com os autos do processo aberto e nenhuma peça principal lida, lê as principais (o Roteiro se preenche ao fim) */
-    if (autoLigado() && lidoDoProcesso() && !A.fila && !lista().some(function (d) { return PRINC[d.k] && A.docs[d.id] && /^(ok|sem)$/.test(A.docs[d.id].estado); })) extrairPrincipais();
+    if (lidoDoProcesso() && !A.fila) extrairIntegra();
   }, function (e) { A.lendo = false; A.erro = e.message; redesenhar(); });
 }
 function lidoDoProcesso() { var c = cnjAtual(); return !!(A.itens && A.cnj && c && Muta.chaveProcesso(A.cnj) === Muta.chaveProcesso(c)); }
@@ -181,6 +183,16 @@ function extrairPrincipais() {
   var i = 0;
   function trab() { if (i >= L.length) return Promise.resolve(); var d = L[i++]; return extrair(d.id).then(function () { A.fila--; }, function () { A.fila--; }).then(trab); }
   return Promise.all([trab(), trab(), trab()]).then(function () { A.fila = 0; A.msg = 'Peças principais lidas: ' + L.length + '.'; A.sug = null; redesenhar(); agendarAuto(); });
+}
+/* a íntegra: todos os documentos ainda sem texto, das peças principais para as demais, três de cada vez */
+function extrairIntegra() {
+  var L = lista().filter(function (d) { return !(A.docs[d.id] && /^(ok|sem|lendo)$/.test(A.docs[d.id].estado)); });
+  L.sort(function (a, b) { return (PRINC[b.k] ? 1 : 0) - (PRINC[a.k] ? 1 : 0); });
+  if (!L.length) { A.msg = ''; redesenhar(); agendarAuto(); return Promise.resolve(); }
+  A.fila = L.length; A.integra = { feitos: 0, total: L.length }; A.msg = ''; redesenhar();
+  var i = 0;
+  function trab() { if (i >= L.length) return Promise.resolve(); var d = L[i++]; return extrair(d.id).then(null, function () {}).then(function () { A.fila--; A.integra.feitos++; }).then(trab); }
+  return Promise.all([trab(), trab(), trab()]).then(function () { A.fila = 0; A.integra = null; A.sug = null; redesenhar(); agendarAuto(); try { document.dispatchEvent(new Event('muta:autos')); } catch (e) {} });
 }
 function abrirPdf(id) {
   if (!A.idp) return;
@@ -426,9 +438,9 @@ function alertas() {
 /* ---------- desenho ---------- */
 function hora() { return A.em ? new Date(A.em).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }) : ''; }
 function botaoLer() {
-  var tela = window.MutaPje && window.MutaPje.tela ? window.MutaPje.tela() : '';
-  return '<button type="button" class="btn sm ' + (A.itens ? 'line' : 'solid') + '" data-au="ler"' + (A.lendo ? ' disabled' : '') + '>' + (A.lendo === true ? 'Lendo…' : A.itens ? 'Reler' : 'Ler os autos') + '</button>' +
-    (A.itens ? '<button type="button" class="btn line sm" data-au="tudo"' + (A.lendo ? ' disabled' : '') + ' title="Rola o painel esquerdo do PJe até carregar a cronologia inteira">' + (A.lendo === 'tudo' ? 'Carregando…' : 'Cronologia toda') + '</button>' : '') +
+  var tela = window.MutaPje && window.MutaPje.tela ? window.MutaPje.tela() : '', lendo = A.lendo || A.fila;
+  return '<button type="button" class="btn ' + (A.itens ? 'line' : 'solid') + ' sm" data-au="ler"' + (lendo ? ' disabled' : '') + ' title="Lê a cronologia toda e o texto de todos os documentos">' +
+    (A.lendo ? 'Lendo a cronologia…' : A.integra ? 'Lendo ' + A.integra.feitos + '/' + A.integra.total + '…' : A.itens ? 'Reler' : 'Ler os autos') + '</button>' +
     (tela !== 'autos' && !A.itens ? '<span class="muted">Abra os autos digitais do processo no PJe.</span>' : '');
 }
 /* Situação atual: última decisão, última peça, última informação e última movimentação (com ID e data) */
@@ -520,7 +532,7 @@ function gravarMarcados() {
 
 /* 0.38 · Peças e documentos (uma só lista): em "Principais", as peças da ficha (sentença ou decisão agravada, origem,
    recursos e contrarrazões, outras peças), cada uma com os seus documentos da cronologia; em "Todos", a cronologia inteira. */
-var GRUPO_DOCS = { 'Sentença': { sentenca: 1 }, 'Recursos e contrarrazões': { apelacao: 1, adesivo: 1, agravo: 1, agint: 1, ed: 1, recurso: 1, contrarrazoes: 1 },
+var GRUPO_DOCS = { 'Sentença': { sentenca: 1 }, 'Decisão impugnada': { decisao: 1, acordao: 1 }, 'Parecer do MPF': { parecer: 1 }, 'Procuração': { procuracao: 1 }, 'Recursos e contrarrazões': { apelacao: 1, adesivo: 1, agravo: 1, agint: 1, ed: 1, recurso: 1, contrarrazoes: 1 },
   'Outras peças e ocorrências': { acordao: 1, decisao: 1, parecer: 1, procuracao: 1, custas: 1, inicial: 1 } };
 function principais() { return lista().filter(function (d) { return PRINC[d.k] && d.k !== 'intimacao' && !d.anexo; }); }
 function espDe(id) { if (id in A.esp) return A.esp[id]; var r = linhasGravadas('origem', 'Outras peças').filter(function (x) { return S(x.ids) === id; })[0]; return r ? S(r.texto) : ''; }
@@ -638,21 +650,21 @@ function resumoLeitura() {
     var tem = n != null ? n > 0 : !!d;
     return '<span class="au-ch ' + (tem ? (d && !lido(d) ? 'nl' : 'ok') : 'vz') + '" title="' + esc(dica || '') + '"><b>' + esc(rot) + '</b>' + (tem ? (n > 1 ? ' ' + n : '') + (d ? ' <i class="mono">ID ' + esc(d.id) + '</i>' : '') + (d && !lido(d) ? ' <small>não lida</small>' : '') : ' <small>não achada</small>') + '</span>';
   };
-  var princ = L.filter(function (d) { return PRINC[d.k] && d.k !== 'intimacao'; }), nl = princ.filter(lido).length;
+  var todosD = lista(), nl = todosD.filter(function (d) { return A.docs[d.id] && /^(ok|sem)$/.test(A.docs[d.id].estado); }).length;
   return '<div class="au-res">' + chip(ai ? 'Decisão agravada' : 'Sentença', dec, null, ai ? 'No agravo de instrumento, a decisão agravada costuma vir anexa à inicial: confira em Peças' : 'A decisão recorrida') +
     chip(R.length > 1 ? 'Recursos' : 'Recurso', R[0], R.length, R.map(function (d) { return d.tipo + ' ID ' + d.id + ' (' + d.data + ')'; }).join('; ')) +
     chip('Contrarrazões', C[0], C.length, C.map(function (d) { return 'ID ' + d.id + ' (' + d.data + ')'; }).join('; ')) +
     chip('MPF', M, null, M ? 'Parecer ID ' + M.id + ' (' + M.data + ')' : 'Sem parecer na cronologia lida') +
-    chip('Procuração', P, null, '') + '</div><p class="muted au-nl">' + nl + ' de ' + princ.length + ' peças principais com texto lido' + (A.fila ? ' · lendo ' + A.fila + '…' : '') + '</p>';
+    chip('Procuração', P, null, '') + '</div><p class="muted au-nl">' + (A.integra ? 'Lendo a íntegra: ' + A.integra.feitos + ' de ' + A.integra.total + ' documentos…' : nl + ' de ' + todosD.length + ' documentos com texto lido (íntegra)') + '</p>';
 }
 function htmlLeitura() {
   var tela = window.MutaPje && window.MutaPje.tela ? window.MutaPje.tela() : '';
   var h = '<section class="card pc-sec cf" id="g-lei"><div class="pc-sh"><h3>Leitura dos autos</h3><small class="muted">' + (A.itens && lidoDoProcesso() ? 'lidos às ' + hora() : 'cronologia do PJe') + '</small></div>';
   var chk = '<label class="au-sw" title="Lidos os autos, lê as peças principais e põe nos campos vazios da ficha o que achou (nunca troca o que já está gravado)"><input type="checkbox" data-au-auto' + (autoLigado() ? ' checked' : '') + '> Preencher sozinho</label>';
   if (A.erro) return h + '<div class="bar au-bl">' + botaoLer() + '</div><p class="status err">' + esc(A.erro) + '</p></section>';
-  if (!A.itens) return h + '<div class="bar au-bl">' + botaoLer() + chk + '</div><p class="muted">' + (tela === 'autos' ? 'Leia os autos: o Roteiro se preenche com o que for achado.' : 'Abra os autos digitais no PJe.') + '</p></section>';
+  if (!A.itens) return h + '<div class="bar au-bl">' + botaoLer() + '</div><p class="muted">' + (tela === 'autos' ? 'Leia os autos: o Roteiro se preenche com o que for achado.' : 'Abra os autos digitais no PJe.') + '</p></section>';
   if (!lidoDoProcesso()) return h + '<div class="bar au-bl">' + botaoLer() + '</div><p class="status err">Os autos lidos são do processo ' + esc(A.cnj || 'sem número') + ', não do aberto no painel. Leia de novo na aba dos autos certos.</p></section>';
-  return h + '<div class="bar au-bl">' + botaoLer() + '<button type="button" class="btn ' + (autoLigado() ? 'line' : 'solid') + ' sm" data-au="princ"' + (A.fila ? ' disabled' : '') + '>' + (A.fila ? 'Lendo ' + A.fila + '…' : 'Peças principais') + '</button>' + chk + '</div>' +
+  return h + '<div class="bar au-bl">' + botaoLer() + '</div>' +
     resumoLeitura() + (A.sugMsg ? '<p class="status err">' + esc(A.sugMsg) + '</p>' : '') + '</section>';
 }
 /* Autos › A conferir: os alertas e o que a leitura achou e não foi sozinho para a ficha (diverge, ou com o automático desligado) */
@@ -695,8 +707,7 @@ function copiar(t, el) {
 }
 function clique(b) {
   var a = b.dataset.au || '';
-  if (a === 'ler') ler(false);
-  else if (a === 'tudo') ler(true);
+  if (a === 'ler' || a === 'tudo') ler();
   else if (a === 'princ') extrairPrincipais();
   else if (a === 'aplicar') aplicar();
   else if (a === 'desfazer') desfazerAuto();
@@ -716,7 +727,7 @@ function especificar(id, v) { A.esp[id] = v; clearTimeout(A.tEsp); A.tEsp = setT
 function especificarJa(id) { if (id in A.esp) { clearTimeout(A.tEsp); gravarEspecificacao(id); } }
 
 document.addEventListener('muta:prontuario', function () { var c = cnjAtual(); if (A.cnj && c && Muta.chaveProcesso(A.cnj) !== Muta.chaveProcesso(c)) { A.sug = null; } });
-window.MutaAutos = { barra: function () { var tela = window.MutaPje && window.MutaPje.tela ? window.MutaPje.tela() : ''; if (!A.itens || !lidoDoProcesso()) return '<div class="bar au-bl rt-ler">' + botaoLer() + '<small class="muted">' + (tela === 'autos' ? 'Leia os autos para conferir.' : 'Abra os autos digitais no PJe.') + '</small></div>'; return '<div class="bar au-bl rt-ler">' + botaoLer() + '<button type="button" class="btn line sm" data-au="princ"' + (A.fila ? ' disabled' : '') + '>' + (A.fila ? 'Lendo ' + A.fila + '…' : 'Peças principais') + '</button></div>' + htmlAuto(true); }, sugestoes: function () { if (!A.itens || !lidoDoProcesso()) return []; if (!A.sug) calcular(); return A.sug || []; }, ler: ler, extrair: extrair, extrairPrincipais: extrairPrincipais, htmlDocs: htmlDocs, htmlSituacao: htmlSituacao, htmlConferencia: htmlConferencia, htmlPreencher: htmlPreencher, htmlLeitura: htmlLeitura, doProcesso: function () { return A.itens && lidoDoProcesso() ? { lista: lista(), todos: !!A.tudo } : null; }, docsDoGrupo: docsDoGrupo, selecionar: selecionar, abrirTexto: abrirTexto, gravarMarcados: gravarMarcados, marcados: marcados, htmlConferir: htmlConferir, htmlAuto: htmlAuto, preenchido: preenchido, autoLigado: autoLigado, autoLigar: autoLigar, autoPreencher: autoPreencher,
+window.MutaAutos = { barra: function () { var tela = window.MutaPje && window.MutaPje.tela ? window.MutaPje.tela() : ''; if (!A.itens || !lidoDoProcesso()) return '<div class="bar au-bl rt-ler">' + botaoLer() + '<small class="muted">' + (tela === 'autos' ? 'Leia os autos para conferir.' : 'Abra os autos digitais no PJe.') + '</small></div>'; return '<div class="bar au-bl rt-ler">' + botaoLer() + '</div>' + htmlAuto(true); }, sugestoes: function () { if (!A.itens || !lidoDoProcesso()) return []; if (!A.sug) calcular(); return A.sug || []; }, ler: ler, extrair: extrair, extrairPrincipais: extrairPrincipais, htmlDocs: htmlDocs, htmlSituacao: htmlSituacao, htmlConferencia: htmlConferencia, htmlPreencher: htmlPreencher, htmlLeitura: htmlLeitura, doProcesso: function () { return A.itens && lidoDoProcesso() ? { lista: lista(), todos: !!A.tudo } : null; }, docsDoGrupo: docsDoGrupo, selecionar: selecionar, abrirTexto: abrirTexto, gravarMarcados: gravarMarcados, marcados: marcados, htmlConferir: htmlConferir, htmlAuto: htmlAuto, preenchido: preenchido, autoLigado: autoLigado, autoLigar: autoLigar, autoPreencher: autoPreencher,
   clique: clique, marcarSugestao: marcarSugestao, especificar: especificar, especificarJa: especificarJa, lista: lista, alertas: alertas, md: md, estado: function () { return A; },
   /* para testes: carrega uma cronologia e textos sem o PJe */
   _carregar: function (r, textos) { A.itens = r.itens; A.idp = r.idp || ''; A.host = r.host || ''; A.cnj = r.numero || ''; A.em = Date.now(); A.docs = {}; Object.keys(textos || {}).forEach(function (id) { A.docs[id] = { estado: 'ok', texto: textos[id], fmt: 'html', pags: 0 }; }); A.sug = null; } };

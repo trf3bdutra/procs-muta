@@ -1307,3 +1307,7 @@ html[data-tema=escuro] .au-h .au-g{accent-color:#7fb8cf}
 .min-modos #mc-resumo{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}.min-modos #mc-resumo [data-sev=alta]{color:var(--danger)}.min-modos #mc-resumo b{color:var(--fg)}
 html[data-tema=escuro] .min-conf.aba{background:transparent}
 .min-modos button{min-width:0;overflow:hidden}.min-modos button small{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+/* 0.44 · sugestão de tipo de ato */
+.pm-sug{all:unset;cursor:pointer;display:block;margin-top:3px;font-size:10.5px;color:#4a7ea6;border:1px dashed #8fb3cf;border-radius:6px;padding:1px 6px;width:max-content;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pm-sug:hover{background:color-mix(in srgb,#4a7ea6 10%,transparent)}
+.rt-doc .ro{color:var(--fg)}.rt-doc .gl .lnk{font-size:10px;margin-left:4px}
