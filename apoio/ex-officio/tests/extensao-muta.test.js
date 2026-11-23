@@ -136,7 +136,7 @@ test('extensão 0.15: cabeçalho no formato da gaveta da pauta (etapas, designa�
 
 test('extensão 0.16: modos Processo · Autos · Roteiro de triagem · Produção; peças e inteiro teor em JSON; controles num cartão', () => {
   const gab = read('extensao/gabinete.js'), au = read('extensao/autos.js'), rt = read('extensao/roteiro.js');
-  assert.match(gab, /var MODOS = \['Processo', 'Autos', 'Roteiro'(, 'Gerador')?\]/);
+  assert.match(gab, /var MODOS = \['Processo', 'Autos'(, 'Roteiro')?(, 'Gerador')?\]/);
 
   assert.match(au, /data-au="tudojs"/); assert.match(au, /data-au="js:/); assert.match(au, /lista: JSON\.stringify/);
   assert.match(gab, /data-ct="/); assert.match(gab, /function atoSel\(\)/);
@@ -253,7 +253,7 @@ test('extensão 0.20: Gerador monta relatório, dispositivo, ementa, acórdão e
   assert.equal(D.acordao, 'Vistos e relatados estes autos em que são partes as acima indicadas, a Turma Regional de Mato Grosso do Sul, por unanimidade, negou provimento à apelação, nos termos do relatório e voto que ficam fazendo parte integrante do presente julgado.');
   assert.equal(D.procl, 'Por unanimidade, negou provimento à apelação.');
   const gab = read('extensao/gabinete.js');
-  assert.match(gab, /var MODOS = \['Processo', 'Autos', 'Roteiro'(, 'Gerador')?\]/);
+  assert.match(gab, /var MODOS = \['Processo', 'Autos'(, 'Roteiro')?(, 'Gerador')?\]/);
   assert.match(read('extensao/painel.html'), /<script src="gerador\.js"><\/script>/);
 });
 
@@ -495,7 +495,7 @@ test('extensão 0.38: Autos preenche sozinho os campos vazios do Roteiro (e desf
   AU.estado().autoSig = {}; AU.sugestoes(); await tick();
   assert.equal(pend['origem.Sentença - Decisão'], '', 'o desfeito não volta neste processo');
   const gab = read('extensao/gabinete.js'), html = read('extensao/painel.html');
-  assert.match(gab, /var MODOS = \['Processo', 'Autos', 'Roteiro'\];/);
+  assert.match(gab, /var MODOS = \['Processo', 'Autos'(, 'Roteiro')?\];/);
   assert.match(gab, /AU\.htmlLeitura\(\) \+ AU\.htmlConferir\(\) \+ AU\.htmlDocs\(function \(\) \{ return pecasCartao\(true\); \}\)/);
   assert.match(html, /data-mm="ger"/); assert.match(html, /<div id="ger-app" hidden><\/div>/);
   assert.match(read('extensao/prontuario.js'), /ger:'min'/);
@@ -600,4 +600,14 @@ test('extensão 0.46: 2ª seta do cartão com síntese, questões, mérito e enc
   assert.doesNotMatch(g, /<h3>Síntese e questões<\/h3>/);
   assert.match(r, /var NO_CARTAO = \{ mer: 1, enc: 1 \};/);
   assert.doesNotMatch(g, /TR\.registroDe\(/, '0.46.1: sem o quadro Registro da triagem no prontuário');
+});
+
+test('extensão 0.47: Roteiro dentro da aba Processo; controles na 1ª seta; Parágrafos-padrão sub-aba do Ementário; Diretrizes na Minuta; Comparar compacto; sem a Ajuda', () => {
+  const g = read('extensao/gabinete.js'), h = read('extensao/painel.html'), c = read('extensao/comparar.js');
+  assert.match(g, /var MODOS = \['Processo', 'Autos'\];/); assert.match(g, /h \+= '<div class="rt-em-proc">' \+ corpoRoteiro\(\) \+ '<\/div>';/);
+  assert.match(g, /'<div class="pm-ctl">' \+ controlesProcesso\(\) \+ '<\/div>'/);
+  assert.match(h, /id="tab-par"[^>]*hidden/); assert.match(h, /data-emd="par"/); assert.match(h, /id="tab-dir"[^>]*hidden/); assert.match(h, /data-mm="dir"/); assert.match(h, /<div id="dir-app" class="min-dir" hidden><\/div>/);
+  assert.match(h, /id="tab-ajuda"[^>]*hidden>\?<\/button>/);
+  assert.match(read('extensao/diretrizes.js'), /d = \$\('dir-app'\); return !!\(p && !p\.hidden && d && !d\.hidden\)/);
+  assert.match(c, /class="cx-op1"/); assert.doesNotMatch(c, /Leia o editor do PJe \(ou cole o texto\) para comparar/);
 });

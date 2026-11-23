@@ -5,6 +5,14 @@ Nome desde a 0.19.3 (antes: Muta). Os identificadores internos (`window.Muta*`, 
 Extensão do Chrome/Edge (Manifest V3) que abre o **Muta** num painel lateral, ao lado dos autos e das tarefas do PJe 2º grau do TRF-3.
 Base: o HTML independente *muta-independente-prontuario-completo* (Prontuário + Acervo).
 
+## O que muda na 0.47 · Processo com o Roteiro; controles na 1ª seta; Ementário com Parágrafos; Diretrizes na Minuta; Comparar compacto
+
+- **Prontuário**: abas Processo e Autos. O Roteiro entrou na aba Processo, depois de sinalizações e notas; os controles (urgência, meta, sobrestamento, caso sensível) foram para a 1ª seta do cartão ("autuação, partes e controles").
+- **Ementário**: sub-abas Precedentes | Parágrafos-padrão (o botão Parágrafos saiu da barra).
+- **Minuta**: Diretrizes virou parte da Minuta (Comparar | Gerador | Collectio — gestor — | Diretrizes | Conformidade).
+- **Comparar** compacto: o texto do editor numa linha (parte e botão ao lado; erro numa linha); opções e legenda numa linha, só com o texto lido.
+- Saiu o botão "?" (Como usar).
+
 ## O que muda na 0.46 · 2ª seta do cartão: síntese, questões, mérito e encaminhamento
 
 - O cartão do processo tem duas setas, com rótulo: "autuação e partes" (a de antes) e "síntese · questões · encaminhamento" (`gabinete.js › merEnc`): síntese do processo e questões; mérito (tipo de caso, especificidades, síntese fática, complexidade, tipo de voto); encaminhamento (situação para julgar, hipótese do artigo 932 quando monocrática, pendências, etiquetas do gabinete e as sugestões de etiquetas). O destino vem do tipo de ato.

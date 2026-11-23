@@ -350,7 +350,7 @@
   function $(id) { return typeof document !== 'undefined' ? document.getElementById(id) : null; }
   /* 0.45: a aba Collectio da Minuta é só do gestor */
   function gestor() { var x = window.MutaSessao && window.MutaSessao.estado ? window.MutaSessao.estado() : {}; return x.estado === 'on' && !!x.gestor; }
-  function modoMin() { try { var m = localStorage.getItem(MM_K); return m === 'ger' || m === 'conf' || (m === 'lote' && gestor()) ? m : 'cmp'; } catch (e) { return 'cmp'; } }
+  function modoMin() { try { var m = localStorage.getItem(MM_K); return m === 'ger' || m === 'conf' || m === 'dir' || (m === 'lote' && gestor()) ? m : 'cmp'; } catch (e) { return 'cmp'; } }
   function visivel() { var p = $('panel-min'), g = $('ger-app'); return !!(p && !p.hidden && g && !g.hidden); }
   function pintar(forca) {
     var g = $('ger-app'); if (!g || (!forca && !visivel())) return;
@@ -359,7 +359,7 @@
     if (p) p.scrollTop = y;
   }
   function modo(m) {
-    m = m === 'ger' || m === 'conf' || (m === 'lote' && gestor()) ? m : 'cmp'; try { localStorage.setItem(MM_K, m); } catch (e) {}
+    m = m === 'ger' || m === 'conf' || m === 'dir' || (m === 'lote' && gestor()) ? m : 'cmp'; try { localStorage.setItem(MM_K, m); } catch (e) {}
     var bl = typeof document !== 'undefined' ? document.querySelector('[data-mm="lote"]') : null; if (bl) bl.hidden = !gestor();
     var ger = m === 'ger';
     /* Comparar (com o Collectio embaixo) | Gerador | Conformidade */
@@ -368,6 +368,8 @@
     var pl = $('panel-lote'); if (pl) { pl.hidden = m !== 'lote'; if (m === 'lote') { pl.open = true; if (window.MutaLote && window.MutaLote.abrir) window.MutaLote.abrir(); } }
     var g = $('ger-app'); if (g) g.hidden = !ger;
     var cf = $('min-conf'); if (cf) cf.hidden = m !== 'conf';
+    var dr = $('dir-app'); if (dr) dr.hidden = m !== 'dir';
+    if (m === 'dir' && window.MutaDiretrizes && window.MutaDiretrizes.abrir) window.MutaDiretrizes.abrir();
     if (m === 'conf' && window.MutaConformidade && window.MutaConformidade.abrir) window.MutaConformidade.abrir();
     if (typeof document !== 'undefined') Array.prototype.forEach.call(document.querySelectorAll('[data-mm]'), function (b) { b.setAttribute('aria-selected', String(b.dataset.mm === m)); });
     if (ger) pintar(true);

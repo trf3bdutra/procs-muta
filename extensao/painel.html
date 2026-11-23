@@ -20,8 +20,8 @@
       <button role="tab" id="tab-pront" aria-controls="panel-pront" aria-selected="true"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3.5h6l4 4v12.8H6V5.5a2 2 0 0 1 2-2z"/><path d="M14 3.5v4h4M9 12h6M9 15.5h6"/></svg></span><span class="nav-text"><b>Prontuário</b><small>Processo · Triagem · Produção</small></span></button>
       <button role="tab" id="tab-min" aria-controls="panel-min" aria-selected="false" tabindex="-1"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="7.5" height="16" rx="1.2"/><rect x="13.5" y="4" width="7.5" height="16" rx="1.2"/><path d="M5.5 8.5h2.5M5.5 12h2.5M16 8.5h2.5M16 12h2.5M16 15.5h2.5"/></svg></span><span class="nav-text"><b>Minuta <i class="conf-badge" id="conf-badge" hidden></i></b><small>Editor × padrão</small></span></button>
       <button role="tab" id="tab-acervo" aria-controls="panel-acervo" aria-selected="false" tabindex="-1"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v4H4zM5.5 9v10h13V9M9 13h6M9 16h6"/></svg></span><span class="nav-text"><b>Ementário</b><small>Precedentes do Relator</small></span></button>
-      <button role="tab" id="tab-par" aria-controls="panel-par" aria-selected="false" tabindex="-1"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 6h14M5 10h14M5 14h9M5 18h6"/><path d="M17 15.5v5M14.5 18h5"/></svg></span><span class="nav-text"><b>Parágrafos</b><small>Parágrafos-padrão</small></span></button>
-      <button role="tab" id="tab-dir" aria-controls="panel-dir" aria-selected="false" tabindex="-1"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4h9.5L19 7.5V20H6z"/><path d="M9 9h6M9 12.5h7M9 16h4"/><path d="M15.5 4v3.5H19"/></svg></span><span class="nav-text"><b>Diretrizes</b><small>Manual do gabinete</small></span></button>
+      <button role="tab" id="tab-par" aria-controls="panel-par" aria-selected="false" tabindex="-1" hidden><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 6h14M5 10h14M5 14h9M5 18h6"/><path d="M17 15.5v5M14.5 18h5"/></svg></span><span class="nav-text"><b>Parágrafos</b><small>Parágrafos-padrão</small></span></button>
+      <button role="tab" id="tab-dir" aria-controls="panel-dir" aria-selected="false" tabindex="-1" hidden><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4h9.5L19 7.5V20H6z"/><path d="M9 9h6M9 12.5h7M9 16h4"/><path d="M15.5 4v3.5H19"/></svg></span><span class="nav-text"><b>Diretrizes</b><small>Manual do gabinete</small></span></button>
     </div>
     <div class="side-foot"><strong>Prontuário no GitHub</strong>O prontuário completo de cada processo fica no GitHub do gabinete e alimenta a ficha e o cartão da pauta do Ex Officio, nos dois sentidos, com o seu login. Uma cópia fica neste navegador para trabalhar sem conexão. O que você pesquisa no Ementário e o texto lido do editor do PJe não saem do navegador.</div>
   </aside>
@@ -37,7 +37,7 @@
         <label class="sr" for="pront-lista">Prontuários salvos</label>
         <select id="pront-lista" title="Prontuários salvos neste navegador"></select>
         <button type="button" id="pje-tema" class="pje-tema" aria-label="Alternar tema claro e escuro">◐</button>
-        <button role="tab" type="button" id="tab-ajuda" class="pje-aj" aria-controls="panel-ajuda" aria-selected="false" tabindex="-1" title="Ajuda e instalação">?</button>
+        <button role="tab" type="button" id="tab-ajuda" class="pje-aj" aria-controls="panel-ajuda" aria-selected="false" tabindex="-1" title="Ajuda e instalação" hidden>?</button>
       </div>
       <div class="sinc" id="sinc" data-estado="off" hidden><span class="sinc-dot" aria-hidden="true"></span><span class="sinc-txt" id="sinc-txt" role="status" aria-live="polite">Prontuário ainda não ligado ao GitHub.</span><button type="button" class="lnk" id="sinc-agora" hidden>Sincronizar agora</button></div>
       <div id="gab" class="gab"></div>
@@ -100,6 +100,7 @@
 
     <!-- EMENTÁRIO (Compêndio) -->
     <section id="panel-acervo" role="tabpanel" aria-labelledby="tab-acervo" hidden>
+      <div class="seg pmodos emd-modos" role="tablist" aria-label="Parte do Ementário"><button type="button" role="tab" data-emd="ementario" aria-selected="true">Precedentes</button><button type="button" role="tab" data-emd="par" aria-selected="false">Parágrafos-padrão</button></div>
       <div class="acv-faixa">
         <form id="acv-form" class="acv-form" role="search">
           <div class="af-l">
@@ -142,23 +143,25 @@
          e Conformidade (aba própria: a análise da minuta pelo padrão do gabinete) -->
     <section id="panel-min" role="tabpanel" aria-labelledby="tab-min" hidden>
       <div class="wrap min-wrap">
-        <div class="seg pmodos min-modos" role="tablist" aria-label="Parte da aba Minuta"><button type="button" role="tab" data-mm="cmp" aria-selected="true">Comparar</button><button type="button" role="tab" data-mm="ger" aria-selected="false">Gerador</button><button type="button" role="tab" data-mm="lote" aria-selected="false" hidden title="Só para o gestor">Collectio</button><button type="button" role="tab" data-mm="conf" aria-selected="false">Conformidade <i class="conf-badge" id="mm-conf-n" hidden></i><small id="mc-resumo">leia o editor</small></button></div>
+        <div class="seg pmodos min-modos" role="tablist" aria-label="Parte da aba Minuta"><button type="button" role="tab" data-mm="cmp" aria-selected="true">Comparar</button><button type="button" role="tab" data-mm="ger" aria-selected="false">Gerador</button><button type="button" role="tab" data-mm="lote" aria-selected="false" hidden title="Só para o gestor">Collectio</button><button type="button" role="tab" data-mm="dir" aria-selected="false">Diretrizes</button><button type="button" role="tab" data-mm="conf" aria-selected="false">Conformidade <i class="conf-badge" id="mm-conf-n" hidden></i><small id="mc-resumo">leia o editor</small></button></div>
         <div id="cmp-app"></div>
         <details class="card min-col" id="panel-lote" open hidden><summary><b>Collectio</b><span class="muted">minuta do processo nos lotes, versões e transferência</span></summary><div id="lote-app"></div></details>
         <div id="ger-app" hidden></div>
+        <div id="dir-app" class="min-dir" hidden></div>
         <!-- 0.42: a conformidade é uma aba própria da Minuta (antes, rodapé fixo) -->
         <div class="min-conf aba" id="min-conf" data-aberto="1" hidden><div class="mc-b" id="panel-conf"><div id="conf-app"></div></div></div>
       </div>
     </section>
 
-    <!-- PARÁGRAFOS-PADRÃO -->
+    <!-- PARÁGRAFOS-PADRÃO (0.47: sub-aba do Ementário; o botão próprio na barra fica oculto) -->
     <section id="panel-par" role="tabpanel" aria-labelledby="tab-par" hidden>
+      <div class="seg pmodos emd-modos" role="tablist" aria-label="Parte do Ementário"><button type="button" role="tab" data-emd="ementario" aria-selected="false">Precedentes</button><button type="button" role="tab" data-emd="par" aria-selected="true">Parágrafos-padrão</button></div>
       <div class="wrap"><div id="par-app"></div></div>
     </section>
 
     <!-- DIRETRIZES -->
     <section id="panel-dir" role="tabpanel" aria-labelledby="tab-dir" hidden>
-      <div class="wrap"><div id="dir-app"></div></div>
+      <div class="wrap"><!-- 0.47: as Diretrizes moram na aba Minuta (#dir-app lá) --></div>
     </section>
 
     <!-- AJUDA -->

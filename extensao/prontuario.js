@@ -171,7 +171,11 @@ var mainTabs=[$('tab-pront'),$('tab-min'),$('tab-acervo'),$('tab-par'),$('tab-di
 var NOMES=['pront','min','ementario','par','dir','ajuda'];
 var ALIAS={tri:'pront',lote:'min',cmp:'min',conf:'min',ger:'min',acervo:'ementario'};
 function abrirAba(i){
+  /* 0.47: Diretrizes é parte da Minuta */
+  if(NOMES[i]==='dir'){abrirAba(NOMES.indexOf('min'));if(window.MutaGerador&&window.MutaGerador.modo)window.MutaGerador.modo('dir');return;}
   selectTab(mainTabs,i);var n=NOMES[i];
+  /* 0.47: Parágrafos-padrão é sub-aba do Ementário: a barra mantém o Ementário marcado */
+  if(n==='par'){var te=$('tab-acervo');if(te)te.setAttribute('aria-selected','true');}
   if(n==='pront'&&window.MutaGabinete&&window.MutaGabinete.render)window.MutaGabinete.render();
   if(n==='ementario'&&window.MutaEmentario)window.MutaEmentario.abrir();
   if(n==='min'){if(window.MutaGerador&&window.MutaGerador.abrir)window.MutaGerador.abrir();if(window.MutaComparar)window.MutaComparar.abrir();if(window.MutaConformidade)window.MutaConformidade.abrir();if(window.MutaLote)window.MutaLote.sessao();}
@@ -179,7 +183,8 @@ function abrirAba(i){
   if(n==='dir'&&window.MutaDiretrizes)window.MutaDiretrizes.abrir();
 }
 wireTabs(mainTabs,function(i){abrirAba(i);});
-window.MutaAbas={ir:function(nome){var alvo=ALIAS[nome]||nome,i=NOMES.indexOf(alvo);if(i<0)return;abrirAba(i);if(nome==='tri'&&window.MutaGabinete&&window.MutaGabinete.ir)window.MutaGabinete.ir('Triagem');if((nome==='ger'||nome==='cmp'||nome==='conf')&&window.MutaGerador&&window.MutaGerador.modo)window.MutaGerador.modo(nome);}};
+document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-emd]');if(!b)return;var i=NOMES.indexOf(b.dataset.emd);if(i>=0)abrirAba(i);});
+window.MutaAbas={ir:function(nome){var alvo=ALIAS[nome]||nome,i=NOMES.indexOf(alvo);if(i<0)return;abrirAba(i);if(nome==='tri'&&window.MutaGabinete&&window.MutaGabinete.ir)window.MutaGabinete.ir('Triagem');if((nome==='ger'||nome==='cmp'||nome==='conf'||nome==='dir')&&window.MutaGerador&&window.MutaGerador.modo)window.MutaGerador.modo(nome);}};
 (function(){var d=$('panel-lote');if(d)d.addEventListener('toggle',function(){if(d.open&&window.MutaLote)window.MutaLote.abrir();});var v=$('aj-volta');if(v)v.addEventListener('click',function(){abrirAba(0);});})();
 document.addEventListener('DOMContentLoaded',function(){var h=location.hash.replace('#','');var i=NOMES.indexOf(ALIAS[h]||h);if(i>0)abrirAba(i);});
 var modeTabs=[$('mode-tri'),$('mode-pro')];

@@ -1322,3 +1322,15 @@ html[data-tema=escuro] .min-conf.aba{background:transparent}
 .pm-mer-h{margin:10px 0 4px;font:700 9.5px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--gold,#b08a3e)}
 .pm-mer .gr{margin-bottom:4px}
 .pm .pm-aut:not(.pm-mer){margin-bottom:0}
+/* 0.47 · Ementário: Precedentes | Parágrafos-padrão; controles na 1ª seta; Roteiro dentro da aba Processo */
+.emd-modos{display:flex;width:auto!important;margin:8px 11px 4px!important}.emd-modos button{flex:1}
+.pm-ctl{margin-top:8px}.pm-ctl .card{margin:0}
+.rt-em-proc{margin-top:8px}
+/* 0.47 · Comparar compacto: texto do editor numa linha; opções e legenda numa linha */
+.mn-ed{padding:6px 9px!important}.mn-ed-h{display:flex;align-items:center;gap:6px;flex-wrap:nowrap;min-width:0}
+.mn-ed-h .mn-tg{min-width:0;overflow:hidden}.mn-ed-h .mn-tg .muted{font-size:10.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mn-pt{font:inherit;font-size:11px;padding:2px 4px;max-width:110px;border:1px solid var(--input);border-radius:5px;background:var(--field)}
+.mn-err{margin:4px 0 0!important;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cx-op1{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:11px;margin:6px 0;color:var(--muted-fg)}.cx-op1 label{display:inline-flex;gap:3px;align-items:center;cursor:pointer}
+.cx-lg1{margin-left:auto;display:inline-flex;gap:4px;cursor:help}.cx-lg1 del,.cx-lg1 ins,.cx-lg1 mark{font-size:10px;padding:0 4px;border-radius:3px;text-decoration-thickness:1px}
+.cx-lg1 del{background:#f8d7d3;color:#8b1e14}.cx-lg1 ins{background:#d6f0dc;color:#1d5e33;text-decoration:none}

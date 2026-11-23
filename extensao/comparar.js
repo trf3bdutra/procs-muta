@@ -92,11 +92,10 @@ function editorCaixa(E, n, P) {
   var ps = (E.paragrafos || []).map(function (p) { return p.t; }).filter(Boolean);
   return '<section class="mn-ed card" data-aberto="' + (C.edAberto ? '1' : '0') + '">' +
     '<div class="mn-ed-h"><button type="button" class="mn-tg" data-c="edtg" aria-expanded="' + C.edAberto + '"><b>Texto do editor</b><span class="muted">' + (E.lendo ? 'lendo…' : E.texto ? esc(E.fonte || 'editor') + ' · ' + n.toLocaleString('pt-BR') + ' palavras' + (hora ? ' · ' + hora : '') : 'ainda não lido') + '</span></button>' +
-    '<span class="sp"></span><button type="button" class="btn ' + (E.texto ? 'line' : 'solid') + ' sm" data-c="ler"' + (E.lendo ? ' disabled' : '') + '>' + (E.texto && !E.colado ? 'Ler de novo' : 'Ler o editor') + '</button></div>' +
-    /* 0.43: sem os botões "Localizar no Collectio" e "Mandar ao Collectio" (pedido do gestor); o Collectio segue no quadro de baixo */
-    '<div class="bar mn-col">' +
-    '<label class="cx-sel">Parte <select data-c="parteEd">' + PARTES.map(function (p) { var q = p[0] === 'tudo' ? 1 : (P[p[0]] || []).length; return '<option value="' + p[0] + '"' + (C.parteEd === p[0] ? ' selected' : '') + (q ? '' : ' disabled') + '>' + p[1] + '</option>'; }).join('') + '</select></label></div>' +
-    (E.erro ? '<p class="status err">' + esc(E.erro) + '</p>' : '') + aviso +
+    /* 0.47: numa linha só — título, parte (só com texto lido) e o botão; o erro em uma linha, com o resto na dica */
+    '<span class="sp"></span>' + (E.texto ? '<select class="mn-pt" data-c="parteEd" title="Parte do texto do editor a comparar" aria-label="Parte">' + PARTES.map(function (p) { var q = p[0] === 'tudo' ? 1 : (P[p[0]] || []).length; return '<option value="' + p[0] + '"' + (C.parteEd === p[0] ? ' selected' : '') + (q ? '' : ' disabled') + '>' + p[1] + '</option>'; }).join('') + '</select>' : '') +
+    '<button type="button" class="btn ' + (E.texto ? 'line' : 'solid') + ' sm" data-c="ler"' + (E.lendo ? ' disabled' : '') + '>' + (E.texto && !E.colado ? 'Ler de novo' : 'Ler o editor') + '</button></div>' +
+    (E.erro ? '<p class="status err mn-err" title="' + esc(E.erro) + '">' + esc(/Nenhum editor/i.test(E.erro) ? 'Nenhum editor aberto no PJe: abra a minuta na tarefa.' : E.erro) + '</p>' : '') + aviso +
     (C.edAberto ? '<div class="mn-tx tx-j">' + (ps.length ? (E.paragrafos || []).filter(function (p) { return p.t; }).map(function (p) {
       /* negrito e itálico do editor: o trecho marcado quando o leitor trouxe; senão, o parágrafo todo quando quase todo marcado */
       var h = p.h ? String(p.h).replace(/<(?!\/?(b|i|u)>|br>)[^>]*>/g, '') : esc(p.t);
@@ -256,7 +255,7 @@ function blocosFonte(it) {
 function partesFonte(it) { return (it && it.secoes || []).map(function (s) { return s.t; }).filter(function (t, i, a) { return a.indexOf(t) === i; }); }
 function resultadoHtml() {
   var E = ED.estado();
-  if (!E.texto) return '<p class="none">Leia o editor do PJe (ou cole o texto) para comparar.</p>';
+  if (!E.texto) return '';
   if (C.fonte === 'par') return paragrafosPadrao();
   if (C.fonte === 'matriz' && !matrizDoProcesso()) return estruturaPadrao();
   var it = itemAtual();
@@ -412,8 +411,9 @@ function render() {
   caixa.innerHTML = editorHtml() +
     '<div class="seg cx-fontes" role="tablist" aria-label="Comparar com">' + fontes().map(function (f) { return '<button type="button" role="tab" data-f="' + f[0] + '" aria-selected="' + (C.fonte === f[0]) + '">' + f[1] + '</button>'; }).join('') + '</div>' +
     '<div class="cx-pick">' + seletor() + '</div>' +
-    '<div class="bar cp-opc"><label><input type="checkbox" data-c="ws"' + (C.ws ? ' checked' : '') + '> ignorar espaços, aspas e travessões</label><label><input type="checkbox" data-c="sd"' + (C.sd ? ' checked' : '') + '> só as diferenças</label></div>' +
-    '<div class="cx-lg"><span><del>riscado</del> na fonte, falta no editor</span><span><ins>verde</ins> só no editor</span><span><mark class="cx-vg">amarelo</mark> preenche vaga do modelo</span></div>' +
+    /* 0.47: opções e legenda numa linha só, e só com o texto do editor lido */
+    (ED.estado().texto ? '<div class="cx-op1"><label title="Ignorar diferenças de espaços, aspas e travessões"><input type="checkbox" data-c="ws"' + (C.ws ? ' checked' : '') + '> sem espaços/aspas</label><label><input type="checkbox" data-c="sd"' + (C.sd ? ' checked' : '') + '> só diferenças</label>' +
+      '<span class="cx-lg1" title="riscado: está na fonte e falta no editor · verde: só no editor · amarelo: preenche vaga do modelo"><del>fonte</del><ins>editor</ins><mark class="cx-vg">vaga</mark></span></div>' : '') +
     '<div class="cx-res">' + resultadoHtml() + '</div>';
   $('panel-min').scrollTop = y;
   if (foco === 'q') { var q = caixa.querySelector('[data-c=q]'); if (q) { q.focus(); q.setSelectionRange(q.value.length, q.value.length); } }
