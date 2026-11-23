@@ -10,7 +10,7 @@
   var esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); };
   var SVG = function (p, n) { return '<svg viewBox="0 0 24 24" width="' + (n || 14) + '" height="' + (n || 14) + '" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + p + '</svg>'; };
   var SINO = '<path d="M6 16V11a6 6 0 1 1 12 0v5l1.5 2h-15z"/><path d="M10 20a2 2 0 0 0 4 0"/>';
-  var A = { app: [], appEm: '', cheg: [], gestor0: false, itens: [], em: '', cfg: null, cat: null, gestor: false, catErro: '', ed: null, aba: 'al', res: {}, pedindo: {} };
+  var A = { ctl: 'pz', app: [], appEm: '', cheg: [], gestor0: false, itens: [], em: '', cfg: null, cat: null, gestor: false, catErro: '', ed: null, aba: 'al', res: {}, pedindo: {} };
   var temChrome = typeof chrome !== 'undefined' && chrome.storage;
 
   /* ---------- dados ---------- */
@@ -100,16 +100,29 @@
     var p = $('tu-pop'); if (!p) return;
     var gst = A.gestor0 || (ses && ses.estado().gestor);
     var cm = A.cmt && !A.cmt.fora && !A.cmt.erro, nCm = cm ? (A.cmt.assinatura || []).length + (A.cmt.duvidas || []).length : 0;
-    var abas = (cm && A.cmt.des ? [['cm', 'Desembargador']] : []).concat([['al', 'PJe'], ['app', 'Gabinete']]).concat(gst ? [['ch', 'Chegadas']] : []).concat(cm && !A.cmt.des ? [['cm', 'Assinatura']] : []).concat([['pz', 'Prazos'], ['et', 'Etiquetas'], ['ver', 'Versão']]);
+    var abas = (cm && A.cmt.des ? [['cm', 'Desembargador']] : []).concat([['al', 'PJe'], ['app', 'Gabinete']]).concat(gst ? [['ch', 'Chegadas']] : []).concat(cm && !A.cmt.des ? [['cm', 'Assinatura']] : []).concat([['ver', 'Versão']]);   /* 0.48: Prazos e Etiquetas saíram do sino para a aba Controle (só o gestor) */
     if (A.aba === 'cm' && !cm) A.aba = 'al';
     if (A.aba === 'ch' && !gst) A.aba = 'al';
+    if (A.aba === 'pz' || A.aba === 'et') A.aba = 'al';
     var h = '<div class="ap-t" role="tablist">' + abas.map(function (a) { return '<button type="button" role="tab" class="ap-tab-' + a[0] + '" data-ap="' + a[0] + '" aria-selected="' + (A.aba === a[0]) + '">' + a[1] + (a[0] === 'al' && A.itens.length ? ' <i>' + A.itens.length + '</i>' : a[0] === 'app' && appPend().length ? ' <i>' + appPend().length + '</i>' : a[0] === 'ch' && A.cheg.length ? ' <i>' + A.cheg.length + '</i>' : a[0] === 'cm' && nCm ? ' <i>' + nCm + '</i>' : '') + '</button>'; }).join('') +
       '<button type="button" class="ap-x" data-ap-x title="Fechar" aria-label="Fechar">×</button></div>';
-    h += '<div class="ap-c">' + (A.aba === 'cm' ? '<div id="ap-cmt">' + (window.MutaCmt ? window.MutaCmt.html(A.cmt) : '') + '</div>' : A.aba === 'al' ? pAlertas() : A.aba === 'app' ? pApp() : A.aba === 'ch' ? pChegadas() : A.aba === 'pz' ? pPrazos() : A.aba === 'ver' ? pVersao() : pEtiquetas()) + '</div>';
+    h += '<div class="ap-c">' + (A.aba === 'cm' ? '<div id="ap-cmt">' + (window.MutaCmt ? window.MutaCmt.html(A.cmt) : '') + '</div>' : A.aba === 'al' ? pAlertas() : A.aba === 'app' ? pApp() : A.aba === 'ch' ? pChegadas() : pVersao()) + '</div>';
     p.innerHTML = h;
     var bx = $('ap-cmt');
     if (bx && window.MutaCmt) { window.MutaCmt.css(document); window.MutaCmt.bind(bx, function (m) { return chrome.runtime.sendMessage(m); }, function (v) { if (v) A.cmt = v; pintar(); }); }
   }
+  /* 0.48: aba Controle (só o gestor) — Prazos e Etiquetas, antes no sino */
+  function ehGestor() { return !!(A.gestor0 || (ses && ses.estado().gestor)); }
+  function pintarCtl() {
+    var c = $('ctl-app'); if (!c) return;
+    if (!ehGestor()) { c.innerHTML = '<p class="muted ap-v">O Controle é só do gestor.</p>'; return; }
+    var t = function (k, r, d) { return '<button type="button" role="tab" data-ctl="' + k + '" aria-selected="' + (A.ctl === k) + '">' + r + '<small>' + d + '</small></button>'; };
+    c.innerHTML = '<div class="ctl-h"><b>Controle</b><small class="muted">prazos dos avisos e catálogo de etiquetas do gabinete</small></div>' +
+      '<div class="seg pmodos ctl-modos" role="tablist" aria-label="Parte do Controle">' + t('pz', 'Prazos', 'avisos e notificações') + t('et', 'Etiquetas', 'catálogo e tipos do PJe') + '</div>' +
+      '<div class="ap-c ctl-c">' + (A.ctl === 'et' ? pEtiquetas() : pPrazos()) + '</div>';
+  }
+  function tudo() { pintar(); pintarCtl(); }
+  function controle() { pintarCtl(); Promise.all([lerAlertas(), lerCfg(), lerCatalogo(), lerCmt()]).then(pintarCtl); }
   function lerCmt(forcar) {
     if (!temChrome) return Promise.resolve();
     return chrome.runtime.sendMessage({ tipo: 'muta-cmt', forcar: !!forcar }).then(function (v) { A.cmt = v || null; if (A.cmt && A.cmt.des && !A.abaCm) { A.abaCm = 1; A.aba = 'cm'; } }, function () {});
@@ -150,7 +163,7 @@
       num('tarefaDias', 'Tempo na tarefa', 'dias até o aviso (vermelho no dobro)') +
       lig('selos', 'Sinalizações nos cartões da lista do PJe', 'ícones de urgência, avisos, intercorrências, pendências e notas, que abrem o quadro de detalhes') +
       '<label class="ap-f ap-s"><input type="checkbox" data-pz="dev"' + (c.dev === true ? ' checked' : '') + '><span>Modo em desenvolvimento: cartões e etiquetas</span><small>nos cartões: estado, designação, trilha, classificação, sugeridas e redesenho das etiquetas; no painel do usuário: tarefas por etapa e quadro de assinatura (em teste)</small></label>' +
-      (c.dev === true ? lig('etqEstilo', 'Redesenho das etiquetas do PJe', 'cada tipo com cor, estilo e ícone (sino › Etiquetas)') : '') +
+      '<label class="ap-f ap-s"><input type="checkbox" data-pz="etqPers"' + (c.etqPers === true || (c.etqPers !== false && c.dev === true && c.etqEstilo !== false) ? ' checked' : '') + '><span>Etiquetas personalizadas no PJe</span><small>cada tipo com cor, estilo e ícone (Controle › Etiquetas); cada usuário também liga ou desliga no botão "Etiquetas" da lista do PJe</small></label>' +
       (A.cmt && !A.cmt.fora && c.dev === true ? lig('cmtPje', 'Quadro do Desembargador no PJe', 'decisões para assinatura e dúvidas, no topo da coluna "Para assinatura" da lista') : '') +
       lig('avisosApp', 'Avisos do app do gabinete', 'urgentes e importantes viram notificação (ícone azul, título "Gabinete")') +
       (A.gestor0 || (ses && ses.estado().gestor) ? lig('chegadas', 'Chegadas com urgência ou liminar (só gestor)', 'processo novo na lista do PJe com pedido urgente avisa na hora; os demais só entram no relatório') +
@@ -191,7 +204,7 @@
     }).join('') + '<div class="ap-eb"><button type="button" class="lnk" data-c-add>+ tipo</button><span><button type="button" class="lnk" data-ap-cancelar>cancelar</button><button type="button" class="btn solid sm" data-ap-gravarcat>Gravar tipos</button></span></div><small class="ap-msg" id="ap-msg"></small></div>';
   }
   function colherCat() {
-    var p = $('tu-pop'); if (!p || !A.edCat) return;
+    var p = $('ctl-app'); if (!p || !A.edCat) return;
     Array.prototype.forEach.call(p.querySelectorAll('fieldset[data-c]'), function (f) { var c = A.edCat[Number(f.dataset.c)]; if (!c) return; Array.prototype.forEach.call(f.querySelectorAll('[data-cf]'), function (i) { c[i.dataset.cf] = i.value; }); });
   }
   function regra(e) {
@@ -200,7 +213,7 @@
   }
   /* lê o formulário do editor para A.ed */
   function colher() {
-    var p = $('tu-pop'); if (!p || !A.ed) return;
+    var p = $('ctl-app'); if (!p || !A.ed) return;
     Array.prototype.forEach.call(p.querySelectorAll('fieldset[data-e]'), function (f) {
       var e = A.ed[Number(f.dataset.e)]; if (!e) return;
       Array.prototype.forEach.call(f.querySelectorAll('[data-ef]'), function (i) { e[i.dataset.ef] = i.value; });
@@ -216,33 +229,42 @@
     var st = $('tu-st'); t0.insertBefore(b, st || null);
     var p = document.createElement('div'); p.id = 'tu-pop'; p.className = 'tu-pop'; p.hidden = true; p.setAttribute('role', 'dialog'); p.setAttribute('aria-label', 'Alertas, prazos e etiquetas'); t0.appendChild(p);
     b.addEventListener('click', function (e) { e.stopPropagation(); abrir(!aberto()); });
-    document.addEventListener('click', function (e) { if (aberto() && !p.contains(e.target) && e.target !== b && !A.ed && !A.edCat) abrir(false); });
-    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && aberto() && !A.ed) abrir(false); });
-    p.addEventListener('click', function (e) {
+    document.addEventListener('click', function (e) { if (aberto() && !p.contains(e.target) && e.target !== b) abrir(false); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && aberto()) abrir(false); });
+    var ctl = $('ctl-app');
+    p.addEventListener('click', clique); p.addEventListener('change', mudou);
+    if (ctl) { ctl.addEventListener('click', clique); ctl.addEventListener('change', mudou); }
+    if (temChrome && chrome.storage.onChanged) chrome.storage.onChanged.addListener(function (ch, area) { if ((area === 'session' && (ch['muta-alertas'] || ch['muta-app'])) || (area === 'local' && ch['muta-chegadas'])) lerAlertas(); });
+    lerAlertas(); lerCfg(); iniciarVersao();
+    if (ses && ses.ouvir) ses.ouvir(function () { A.cat = null; A.res = {}; var c0 = $('ctl-app'); if (c0 && c0.offsetParent) controle(); });
+  }
+  /* cliques do sino e da aba Controle (o mesmo conjunto de botões) */
+  function clique(e) {
       e.stopPropagation(); /* o conteúdo é redesenhado no clique: o documento não deve tomá-lo por clique de fora */
       var x = e.target.closest('button'); if (!x) return;
       if (x.dataset.ap) { colher(); A.aba = x.dataset.ap; pintar(); return; }
+      if (x.dataset.ctl) { colher(); colherCat(); A.ctl = x.dataset.ctl; pintarCtl(); return; }
       if (x.hasAttribute('data-ap-x')) { abrir(false); return; }
       if (x.dataset.apCnj) { try { navigator.clipboard.writeText(x.dataset.apCnj).then(function () { var o = x.textContent; x.textContent = 'Copiado'; setTimeout(function () { x.textContent = o; }, 1000); }); } catch (er) {} return; }
-      if (x.hasAttribute('data-ap-ed')) { A.ed = JSON.parse(JSON.stringify(A.cat.etiquetas || [])); pintar(); return; }
-      if (x.hasAttribute('data-ap-cancelar')) { A.ed = null; A.edCat = null; pintar(); return; }
-      if (x.hasAttribute('data-ap-edcat')) { var base = (A.cat.categorias && A.cat.categorias.length) ? A.cat.categorias : (E ? E.CATEGORIAS : []); A.edCat = JSON.parse(JSON.stringify(base)); pintar(); return; }
-      if (x.hasAttribute('data-c-add')) { colherCat(); A.edCat.splice(Math.max(0, A.edCat.length - 1), 0, { id: '', nome: '', re: '', cor: '#546e7a', estilo: 'suave', icone: '' }); pintar(); return; }
-      if (x.dataset.cX != null) { colherCat(); A.edCat.splice(Number(x.dataset.cX), 1); pintar(); return; }
+      if (x.hasAttribute('data-ap-ed')) { A.ed = JSON.parse(JSON.stringify(A.cat.etiquetas || [])); tudo(); return; }
+      if (x.hasAttribute('data-ap-cancelar')) { A.ed = null; A.edCat = null; tudo(); return; }
+      if (x.hasAttribute('data-ap-edcat')) { var base = (A.cat.categorias && A.cat.categorias.length) ? A.cat.categorias : (E ? E.CATEGORIAS : []); A.edCat = JSON.parse(JSON.stringify(base)); tudo(); return; }
+      if (x.hasAttribute('data-c-add')) { colherCat(); A.edCat.splice(Math.max(0, A.edCat.length - 1), 0, { id: '', nome: '', re: '', cor: '#546e7a', estilo: 'suave', icone: '' }); tudo(); return; }
+      if (x.dataset.cX != null) { colherCat(); A.edCat.splice(Number(x.dataset.cX), 1); tudo(); return; }
       if (x.hasAttribute('data-ap-gravarcat')) {
         colherCat(); var m2 = $('ap-msg');
         var bad = A.edCat.filter(function (c) { try { new RegExp(c.re, 'i'); return !c.nome || !c.re; } catch (e) { return true; } });
         if (bad.length) { if (m2) { m2.textContent = 'Confira nome e expressão de: ' + bad.map(function (c) { return c.nome || '(sem nome)'; }).join(', '); m2.className = 'ap-msg err'; } return; }
         x.disabled = true; if (m2) { m2.textContent = 'Gravando…'; m2.className = 'ap-msg'; }
         ses.api('/api/pauta?etiquetas=1', { method: 'POST', body: JSON.stringify({ etiquetas: A.cat.etiquetas || [], categorias: A.edCat }) }).then(function (j) {
-          A.cat = j.catalogo || A.cat; A.edCat = null; pintar(); avisarAbas();
+          A.cat = j.catalogo || A.cat; A.edCat = null; tudo(); avisarAbas();
         }).catch(function (er) { x.disabled = false; if (m2) { m2.textContent = 'Não gravou: ' + (er.message || 'erro'); m2.className = 'ap-msg err'; } });
         return;
       }
-      if (x.hasAttribute('data-e-add')) { colher(); A.ed.push({ nome: '', cor: '#6b7280', descricao: '', quando: [{ campo: 'urgPend', op: 'tem', valor: '' }] }); pintar(); return; }
-      if (x.dataset.eX != null) { colher(); A.ed.splice(Number(x.dataset.eX), 1); pintar(); return; }
-      if (x.dataset.qAdd != null) { colher(); var e1 = A.ed[Number(x.dataset.qAdd)]; (e1.quando = e1.quando || []).push({ campo: 'urgPend', op: 'tem', valor: '' }); pintar(); return; }
-      if (x.dataset.qX) { colher(); var ij = x.dataset.qX.split(':'); A.ed[Number(ij[0])].quando.splice(Number(ij[1]), 1); pintar(); return; }
+      if (x.hasAttribute('data-e-add')) { colher(); A.ed.push({ nome: '', cor: '#6b7280', descricao: '', quando: [{ campo: 'urgPend', op: 'tem', valor: '' }] }); tudo(); return; }
+      if (x.dataset.eX != null) { colher(); A.ed.splice(Number(x.dataset.eX), 1); tudo(); return; }
+      if (x.dataset.qAdd != null) { colher(); var e1 = A.ed[Number(x.dataset.qAdd)]; (e1.quando = e1.quando || []).push({ campo: 'urgPend', op: 'tem', valor: '' }); tudo(); return; }
+      if (x.dataset.qX) { colher(); var ij = x.dataset.qX.split(':'); A.ed[Number(ij[0])].quando.splice(Number(ij[1]), 1); tudo(); return; }
       if (x.hasAttribute('data-ap-gravar')) {
         colher();
         var L = A.ed.map(function (e) { return { nome: String(e.nome || '').trim(), cor: e.cor, descricao: String(e.descricao || '').trim(), quando: (e.quando || []).map(function (q) { var o = { campo: q.campo, op: q.op }; if (q.op !== 'tem' && q.op !== 'vazio') o.valor = q.valor; return o; }) }; });
@@ -250,22 +272,18 @@
         if (L.some(function (e) { return !e.nome; })) { if (m) { m.textContent = 'Toda etiqueta precisa de nome.'; m.className = 'ap-msg err'; } return; }
         x.disabled = true; if (m) { m.textContent = 'Gravando…'; m.className = 'ap-msg'; }
         ses.api('/api/pauta?etiquetas=1', { method: 'POST', body: JSON.stringify({ etiquetas: L }) }).then(function (j) {
-          A.cat = j.catalogo || Object.assign({}, A.cat, { etiquetas: L }); A.ed = null; A.res = {}; pintar(); avisarAbas();
+          A.cat = j.catalogo || Object.assign({}, A.cat, { etiquetas: L }); A.ed = null; A.res = {}; tudo(); avisarAbas();
           if (typeof window.MutaRender === 'function') window.MutaRender();
         }).catch(function (er) { x.disabled = false; if (m) { m.textContent = 'Não gravou: ' + (er.message || 'erro'); m.className = 'ap-msg err'; } });
         return;
       }
-    });
-    p.addEventListener('change', function (e) {
+    }
+  function mudou(e) {
       var i = e.target;
-      if (i.dataset.pz) { var c = Object.assign({}, A.cfg || {}); c[i.dataset.pz] = i.type === 'checkbox' ? i.checked : i.type === 'time' ? (i.value || '18:00') : Math.max(1, Number(i.value) || 1); gravarCfg(c); if (i.dataset.pz === 'dev') pintar(); return; }
-      if (i.dataset.qf === 'op') { colher(); pintar(); }
-      if (i.dataset.cf === 'cor' || i.dataset.cf === 'estilo' || i.dataset.cf === 'icone') { colherCat(); pintar(); }
-    });
-    if (temChrome && chrome.storage.onChanged) chrome.storage.onChanged.addListener(function (ch, area) { if ((area === 'session' && (ch['muta-alertas'] || ch['muta-app'])) || (area === 'local' && ch['muta-chegadas'])) lerAlertas(); });
-    lerAlertas(); lerCfg(); iniciarVersao();
-    if (ses && ses.ouvir) ses.ouvir(function () { A.cat = null; A.res = {}; });
-  }
+      if (i.dataset.pz) { var c = Object.assign({}, A.cfg || {}); c[i.dataset.pz] = i.type === 'checkbox' ? i.checked : i.type === 'time' ? (i.value || '18:00') : Math.max(1, Number(i.value) || 1); gravarCfg(c); if (i.dataset.pz === 'dev') tudo(); return; }
+      if (i.dataset.qf === 'op') { colher(); tudo(); }
+      if (i.dataset.cf === 'cor' || i.dataset.cf === 'estilo' || i.dataset.cf === 'icone') { colherCat(); tudo(); }
+    }
 
   /* ---------- atualização sem chrome://extensions ----------
      - os arquivos da pasta mudaram (atualizar-muta.cmd, ou ZIP extraído por cima): o manifest em disco traz versão
@@ -303,6 +321,6 @@
     olharSite(); setInterval(olharSite, 30 * 60e3);
   }
 
-  window.MutaAlertas = { resumoJa: resumoJa, esquecer: esquecer, htmlRoteiro: htmlRoteiro, catalogo: lerCatalogo, montar: montar, _A: A };
+  window.MutaAlertas = { controle: controle, resumoJa: resumoJa, esquecer: esquecer, htmlRoteiro: htmlRoteiro, catalogo: lerCatalogo, montar: montar, _A: A };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', montar); else montar();
 })();

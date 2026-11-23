@@ -436,7 +436,7 @@ test('extensão 0.35: painel do usuário do PJe por etapa do fluxo (7 grupos) na
 test('extensão 0.36: fora do prontuário só as sinalizações; cartões, etiquetas, tarefas por etapa e quadro de assinatura no modo em desenvolvimento; notificação abre a janela do item', () => {
   const c = read('extensao/conteudo-pje.js');
   assert.match(c, /function emDesenvolvimento\(\) \{ return !!\(ENR\.cfg && ENR\.cfg\.dev === true\); \}/);
-  assert.match(c, /if \(dev\) html = selosHtml/); assert.match(c, /if \(dev\) C\.forEach\(function \(c\) \{ try \{ estilizarEtiquetas/);
+  assert.match(c, /if \(dev\) html = selosHtml/); assert.match(c, /if \(etq\) C\.forEach\(function \(c\) \{ try \{ estilizarEtiquetas/); /* 0.48: etiquetas personalizadas ligadas por usuário (etqLigadas) */
   assert.match(c, /!emDesenvolvimento\(\) \|\| \(ENR\.cfg && ENR\.cfg\.cmtPje === false\)/);
   assert.match(read('extensao/tarefas-pje.js'), /!window\.MutaModo\.dev\(\)/);
   assert.match(read('extensao/alertas.js'), /data-pz="dev"' \+ \(c\.dev === true \? ' checked' : ''\)/);
@@ -610,4 +610,17 @@ test('extensão 0.47: Roteiro dentro da aba Processo; controles na 1ª seta; Par
   assert.match(h, /id="tab-ajuda"[^>]*hidden>\?<\/button>/);
   assert.match(read('extensao/diretrizes.js'), /d = \$\('dir-app'\); return !!\(p && !p\.hidden && d && !d\.hidden\)/);
   assert.match(c, /class="cx-op1"/); assert.doesNotMatch(c, /Leia o editor do PJe \(ou cole o texto\) para comparar/);
+});
+
+test('extensão 0.48: abas Diligências e Deliberações (Desembargador e gestor), Controle só do gestor; etiquetas personalizadas para todos', () => {
+  const h = read('extensao/painel.html'), p = read('extensao/prontuario.js'), x = read('extensao/gestao.js'), a = read('extensao/alertas.js'), c = read('extensao/conteudo-pje.js');
+  ['tab-dil', 'tab-del', 'tab-ctl'].forEach(id => assert.match(h, new RegExp('id="' + id + '"[^>]*hidden')));
+  assert.match(h, /<div id="dil-app"/); assert.match(h, /<div id="del-app"/); assert.match(h, /<div id="ctl-app"/); assert.match(h, /<script src="gestao\.js"><\/script>/);
+  assert.match(p, /var NOMES=\['pront','min','ementario','par','dir','ajuda','dil','del','ctl'\];/);
+  assert.match(x, /ses\.api\('\/api\/pendencias'\)/); assert.match(x, /method: 'PUT', body: JSON\.stringify\(\{ id: id, _rev: t\._rev, stage: st \}\)/);
+  assert.match(x, /ses\.api\('\/api\/painel\?cmt=1'\)/); assert.match(x, /acao: 'situacao'/); assert.match(x, /acao: 'responder'/); assert.match(x, /n\.tipo === 'sustentacao'/);
+  assert.match(x, /ctl: q\.on && q\.gestor/); assert.match(x, /function pode\(q\) \{ return q\.on && \(q\.gestor \|\| q\.des\); \}/);
+  assert.match(a, /concat\(\[\['ver', 'Versão'\]\]\)/); assert.doesNotMatch(a, /\['pz', 'Prazos'\], \['et', 'Etiquetas'\]/); assert.match(a, /function pintarCtl\(\)/);
+  assert.match(c, /function etqLigadas\(\)/); assert.match(c, /function botaoEtq\(\)/); assert.match(c, /if \(!E \|\| !E\.categoriaDe \|\| !etqLigadas\(\)\) return;/);
+  assert.match(read('apoio/ex-officio/api/pendencias.js'), /PUT \{id,_rev,…\} altera/);
 });

@@ -536,7 +536,10 @@
       '#hero-col-btn:hover{background:#163a50}' +
       '#hero-modo-btn{all:unset;position:fixed;left:50px;bottom:44px;z-index:2147483000;cursor:pointer;display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border-radius:16px;background:#fff;color:#1f4f6b;border:1px solid #c9d6e0;font:600 11.5px system-ui,Segoe UI,sans-serif;box-shadow:0 3px 10px rgba(0,0,0,.18)}' +
       '#hero-modo-btn i{width:24px;height:13px;border-radius:7px;background:#2e7d32;position:relative;flex:none}#hero-modo-btn i::after{content:"";position:absolute;top:2px;left:13px;width:9px;height:9px;border-radius:50%;background:#fff;transition:left .15s}' +
-      '#hero-modo-btn.off{color:#66737f}#hero-modo-btn.off i{background:#b7c2cb}#hero-modo-btn.off i::after{left:2px}#hero-modo-btn:focus-visible{outline:2px solid #1a7fc0;outline-offset:2px}';
+      '#hero-modo-btn.off{color:#66737f}#hero-modo-btn.off i{background:#b7c2cb}#hero-modo-btn.off i::after{left:2px}#hero-modo-btn:focus-visible{outline:2px solid #1a7fc0;outline-offset:2px}' +
+      '#hero-etq-btn{all:unset;position:fixed;left:50px;bottom:74px;z-index:2147483000;cursor:pointer;display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:16px;background:#fff;color:#1f4f6b;border:1px solid #c9d6e0;font:600 11px/1.2 system-ui,sans-serif;box-shadow:0 1px 4px rgba(0,0,0,.12)}' +
+      '#hero-etq-btn i{width:22px;height:12px;border-radius:6px;background:#2e7d32;position:relative;flex:none}#hero-etq-btn i::after{content:"";position:absolute;top:2px;left:12px;width:8px;height:8px;border-radius:50%;background:#fff;transition:left .15s}' +
+      '#hero-etq-btn.off{color:#66737f}#hero-etq-btn.off i{background:#b7c2cb}#hero-etq-btn.off i::after{left:2px}#hero-etq-btn:focus-visible{outline:2px solid #1a7fc0;outline-offset:2px}';
     (document.head || document.documentElement).appendChild(st);
   }
   var RE_CAB1 = new RegExp('\\b([A-Z][A-Za-z]{1,13})\\s+' + CNJ + '[^\\[]{0,24}?-\\s*\\[');
@@ -694,9 +697,13 @@
   function aplicarSelos() {
     if (!LISTA) return;
     var C = cartoesLista(); if (!C.length) { try { sinaisCabecalho(); } catch (e) {} return; }
-    cssSelos(); try { botaoModo(); } catch (e) {}
+    cssSelos(); try { botaoModo(); botaoEtq(); } catch (e) {}
     /* modo HERO desligado: nada nos cartões e as etiquetas voltam ao desenho do PJe */
     if (modoDesligado()) { limparModo(); try { botaoColuna(C); } catch (e) {} return; }
+    /* 0.48 · etiquetas personalizadas: liga/desliga para todos, no botão da lista (etqLigadas) */
+    var etq = etqLigadas();
+    if (etq) C.forEach(function (c) { try { estilizarEtiquetas(c.el); } catch (e) {} });
+    else if (document.querySelector('.hero-etq')) limparEtiquetas();
     if (ENR.cfg && ENR.cfg.selos === false) { Array.prototype.forEach.call(document.querySelectorAll('.muta-selos'), function (x) { x.remove(); }); return; }
     var ks = C.map(function (c) { return c.k; });
     /* cada número é pedido no máximo uma vez a cada 2 minutos (o que o servidor não devolver não é pedido em laço) */
@@ -709,8 +716,6 @@
     try { botaoColuna(C); } catch (e) {}
     /* 0.36 · cartões e etiquetas do HERO ficam no modo em desenvolvimento (sino › Prazos); fora dele, só os ícones de sinalização */
     var dev = emDesenvolvimento();
-    if (dev) C.forEach(function (c) { try { estilizarEtiquetas(c.el); } catch (e) {} });
-    else if (document.querySelector('.hero-etq')) limparEtiquetas();
     C.forEach(function (c) {
       var r = ENR.dados[c.k];
       /* sem ficha no servidor (depois da resposta): só o botão discreto, para registrar */
@@ -902,7 +907,7 @@
     return out;
   }
   function estilizarEtiquetas(card) {
-    var E = window.MutaEtiquetas; if (!E || !E.categoriaDe || (ENR.cfg && ENR.cfg.etqEstilo === false)) return;
+    var E = window.MutaEtiquetas; if (!E || !E.categoriaDe || !etqLigadas()) return;
     var cats = (ENR.cat && ENR.cat.categorias && ENR.cat.categorias.length) ? ENR.cat.categorias : E.CATEGORIAS;
     chipsDo(card).forEach(function (el) {
       var nome = (el.textContent || '').replace(/\s+/g, ' ').replace(/\s*(×|✕|✖|close|clear|cancel)\s*$/i, '').trim(); if (!nome) return;
@@ -927,6 +932,30 @@
       el.style.removeProperty('--hc'); el.style.removeProperty('order');
     });
   }
+  /* 0.48 · etiquetas personalizadas do PJe (cor, estilo e ícone por tipo): cada usuário liga ou desliga (muta-prazos › etqPers);
+     sem escolha, valem como antes — só no modo em desenvolvimento e com o redesenho ligado */
+  function etqLigadas() { var c = ENR.cfg || {}; return c.etqPers === true || (c.etqPers !== false && c.dev === true && c.etqEstilo !== false); }
+  function gravarPref(o) {
+    ENR.cfg = Object.assign({}, ENR.cfg || {}, o);
+    try { chrome.storage.local.get('muta-prazos').then(function (v) { return chrome.storage.local.set({ 'muta-prazos': Object.assign({}, v['muta-prazos'] || {}, o) }); }); } catch (x) {}
+  }
+  function botaoEtq() {
+    var b = document.getElementById('hero-etq-btn'), off = !etqLigadas();
+    if (modoDesligado()) { if (b) b.remove(); return; }
+    if (!b) {
+      b = document.createElement('button'); b.type = 'button'; b.id = 'hero-etq-btn';
+      b.addEventListener('click', function (e) {
+        e.preventDefault(); e.stopPropagation();
+        var liga = !etqLigadas(); gravarPref(liga ? { etqPers: true, etqEstilo: true } : { etqPers: false });
+        botaoEtq(); aplicarSelos();
+      }, true);
+      document.body.appendChild(b);
+    }
+    b.className = off ? 'off' : '';
+    b.setAttribute('aria-pressed', off ? 'false' : 'true');
+    b.innerHTML = '<i></i>Etiquetas ' + (off ? 'do PJe' : 'personalizadas');
+    b.title = off ? 'Ligar as etiquetas personalizadas: cada tipo com cor, estilo e ícone do gabinete' : 'Desligar as etiquetas personalizadas: voltam ao desenho do PJe';
+  }
   function modoDesligado() { var c = ENR.cfg || {}; return c.selos === false && c.etqEstilo === false; }
   window.MutaModo = { desligado: modoDesligado, dev: emDesenvolvimento };
   function limparModo() {
@@ -942,7 +971,7 @@
         var liga = modoDesligado();
         ENR.cfg = Object.assign({}, ENR.cfg || {}, { selos: liga, etqEstilo: liga });
         try { chrome.storage.local.get('muta-prazos').then(function (o) { var c = Object.assign({}, o['muta-prazos'] || {}, { selos: liga, etqEstilo: liga }); return chrome.storage.local.set({ 'muta-prazos': c }); }); } catch (x) {}
-        ENR.pedidos = {}; botaoModo(); aplicarSelos();
+        ENR.pedidos = {}; botaoModo(); botaoEtq(); aplicarSelos();
       }, true);
       document.body.appendChild(b);
     }

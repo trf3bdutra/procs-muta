@@ -167,9 +167,9 @@ function wireTabs(tabs,onSelect){
 }
 function selectTab(tabs,idx){tabs.forEach(function(t,i){var on=i===idx;t.setAttribute('aria-selected',on);t.tabIndex=on?0:-1;$(t.getAttribute('aria-controls')).hidden=!on;});}
 /* 0.11: Prontuário (com a triagem), Minuta (lote, comparar e conformidade), Ementário, Parágrafos-padrão e Diretrizes; a Ajuda abre pelo "?" */
-var mainTabs=[$('tab-pront'),$('tab-min'),$('tab-acervo'),$('tab-par'),$('tab-dir'),$('tab-ajuda')];
-var NOMES=['pront','min','ementario','par','dir','ajuda'];
-var ALIAS={tri:'pront',lote:'min',cmp:'min',conf:'min',ger:'min',acervo:'ementario'};
+var mainTabs=[$('tab-pront'),$('tab-min'),$('tab-acervo'),$('tab-par'),$('tab-dir'),$('tab-ajuda'),$('tab-dil'),$('tab-del'),$('tab-ctl')];
+var NOMES=['pront','min','ementario','par','dir','ajuda','dil','del','ctl'];
+var ALIAS={tri:'pront',lote:'min',cmp:'min',conf:'min',ger:'min',acervo:'ementario',diligencias:'dil',deliberacoes:'del',controle:'ctl'};
 function abrirAba(i){
   /* 0.47: Diretrizes é parte da Minuta */
   if(NOMES[i]==='dir'){abrirAba(NOMES.indexOf('min'));if(window.MutaGerador&&window.MutaGerador.modo)window.MutaGerador.modo('dir');return;}
@@ -181,6 +181,9 @@ function abrirAba(i){
   if(n==='min'){if(window.MutaGerador&&window.MutaGerador.abrir)window.MutaGerador.abrir();if(window.MutaComparar)window.MutaComparar.abrir();if(window.MutaConformidade)window.MutaConformidade.abrir();if(window.MutaLote)window.MutaLote.sessao();}
   if(n==='par'&&window.MutaParagrafos)window.MutaParagrafos.abrir();
   if(n==='dir'&&window.MutaDiretrizes)window.MutaDiretrizes.abrir();
+  /* 0.48: Diligências e Deliberações (Desembargador e gestor); Controle — prazos e etiquetas — só do gestor */
+  if((n==='dil'||n==='del')&&window.MutaGestao)window.MutaGestao.abrir(n);
+  if(n==='ctl'&&window.MutaAlertas&&window.MutaAlertas.controle)window.MutaAlertas.controle();
 }
 wireTabs(mainTabs,function(i){abrirAba(i);});
 document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-emd]');if(!b)return;var i=NOMES.indexOf(b.dataset.emd);if(i>=0)abrirAba(i);});

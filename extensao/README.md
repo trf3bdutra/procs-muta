@@ -5,6 +5,13 @@ Nome desde a 0.19.3 (antes: Muta). Os identificadores internos (`window.Muta*`, 
 Extensão do Chrome/Edge (Manifest V3) que abre o **Muta** num painel lateral, ao lado dos autos e das tarefas do PJe 2º grau do TRF-3.
 Base: o HTML independente *muta-independente-prontuario-completo* (Prontuário + Acervo).
 
+## O que muda na 0.48 · Diligências e Deliberações; Controle só do gestor; etiquetas personalizadas para todos
+
+- **Diligências** (Desembargador e gestor): o quadro de diligências do Ex Officio, pela mesma API (`/api/pendencias`). Filtros Comigo | Que criei | Todas, concluídas sob demanda, mudança de etapa e diligência nova (o processo aberto vem preenchido). Contador na aba: diligências abertas com quem está conectado.
+- **Deliberações** (Desembargador e gestor), de `/api/painel?cmt=1`: Dúvidas (responder, com opção de manter aberta), Pauta (pedidos de retirada e de adiamento: deferir grava a situação na pauta e responde; indeferir só responde; confirmação antes) e Sustentação (pedidos de sustentação oral e de preferência, com item da pauta ou "a vincular").
+- **Controle** (só o gestor): Prazos e Etiquetas saíram do sino para esta aba. O sino fica com Desembargador, PJe, Gabinete, Chegadas e Versão.
+- **Etiquetas personalizadas no PJe**: botão "Etiquetas personalizadas/do PJe" na lista de tarefas, para todos (`conteudo-pje.js › etqLigadas/botaoEtq`, `muta-prazos › etqPers`). Sem escolha, vale o comportamento anterior (só no modo em desenvolvimento).
+
 ## O que muda na 0.47 · Processo com o Roteiro; controles na 1ª seta; Ementário com Parágrafos; Diretrizes na Minuta; Comparar compacto
 
 - **Prontuário**: abas Processo e Autos. O Roteiro entrou na aba Processo, depois de sinalizações e notas; os controles (urgência, meta, sobrestamento, caso sensível) foram para a 1ª seta do cartão ("autuação, partes e controles").
