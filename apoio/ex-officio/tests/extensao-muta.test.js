@@ -486,7 +486,9 @@ test('extensão 0.38: Autos preenche sozinho os campos vazios do Roteiro (e desf
   assert.ok(!('triagem.MPF' in pend), 'o que já está gravado não é trocado');
   assert.ok(AU.preenchido('origem.Sentença - Decisão'));
   const cf = AU.htmlConferir();
-  assert.match(cf, /<details class="au-auto-av au-auto-d"><summary><b>1 campo preenchido pela leitura dos autos/);
+  /* 0.50: a síntese do processo também sai da leitura (sentença e recursos) */
+  assert.match(cf, /<details class="au-auto-av au-auto-d"><summary><b>2 campos preenchidos pela leitura dos autos/);
+  assert.equal(pend['triagem.Síntese Processual'], 'Recurso contra sentença (ID 111) que julgou improcedente o pedido.');
   assert.match(cf, /diverge/, 'a divergência fica em A conferir');
   assert.doesNotMatch(AU.htmlLeitura(), /Preencher sozinho|Peças principais|Cronologia toda/, '0.44: só Ler/Reler (íntegra)'); assert.match(AU.htmlLeitura(), /au-res/);
   assert.match(AU.htmlDocs(() => ''), /Principais \(1\)[\s\S]*Todos \(1\)/);
@@ -655,4 +657,14 @@ test('extensão 0.49.1: controles na 2ª seta; 1ª seta "autuação e partes" em
   assert.match(c, /window\.HERO_PREVIA_PJE === true/); assert.match(c, /\.hcm, #hero-dlg'/); assert.match(c, /if \(bl && numeros\(\(bl\.textContent \|\| ''\)\.slice\(0, 8000\)\)\[0\] !== nn\[0\]\) continue;/);
   assert.match(ix, /<script src="pje-shim\.js"><\/script>/); assert.match(ix, /<script src="painel\/conteudo-pje\.js"><\/script>/);
   assert.match(read('scripts/extensao/previa.py'), /pje-shim\.js/);
+});
+
+test('extensão 0.50: 2ª seta sem duplicados; situação calculada pelas sinalizações; campos obtidos sozinhos (auto/autos) com Desfazer', () => {
+  const g = read('extensao/gabinete.js'), a = read('extensao/autos.js'), c = read('extensao/comparar.js');
+  const me = g.slice(g.indexOf('function merEnc()'), g.indexOf('var AUTO_G'));
+  assert.doesNotMatch(me, /campoRot\('triagem', 'O que falta sanar', 'Pendências'\)/); assert.doesNotMatch(me, /campoRot\('triagem', 'Etiquetas', 'Etiquetas do gabinete'\)/);
+  assert.match(me, /situacaoHtml\(\)/); assert.match(me, /S\(V\('triagem', 'COMPLEXIDADE'\)\) \?/);
+  assert.match(g, /function derivados\(\)/); assert.match(g, /function hipotese932\(\)/); assert.match(g, /data-autog="desfazer"/); assert.match(g, /function situacaoSync\(\)/);
+  assert.match(a, /function derivAutos\(\)/); assert.match(a, /alvo: 'triagem\.Alegações'/); assert.match(a, /alvo: 'triagem\.Síntese Processual'/);
+  assert.match(c, /matriz: function \(\) \{ try \{ return C\.dados \? matrizDoProcesso\(\) : null;/);
 });

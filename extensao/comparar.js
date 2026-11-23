@@ -471,6 +471,8 @@ ED.ouvir(function () { if (aberta()) render(); });
 document.addEventListener('muta:prontuario', function () { C.lotes = null; C.loteChave = ''; C.tri = null; C.triChave = ''; if (aberta()) preparar(); });
 window.MutaComparar = {
   estruturaConformidade: estruturaConformidade,
+  /* 0.50: a minuta-matriz do processo (para o tipo de voto no cartão), só se os modelos já foram lidos */
+  matriz: function () { try { return C.dados ? matrizDoProcesso() : null; } catch (e) { return null; } },
   triagem: function () { processo(); C.fonte = 'tri'; C.tri = null; C.triChave = ''; guarda(); if (window.MutaAbas) window.MutaAbas.ir('min'); else window.MutaComparar.abrir(); },
   abrir: function () { processo(); if (C.fonte === 'matriz' || C.fonte === 'modelo' || C.fonte === 'm2886' || C.fonte === 'par') dados().then(render); preparar(); var E = ED.estado(); if (!E.texto && !E.lendo) ED.ler().catch(function () {}); },
   /* o Ementário manda um julgado para comparar */

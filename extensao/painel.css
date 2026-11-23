@@ -1396,3 +1396,9 @@ html[data-tema=escuro] .sn-st.av,html[data-tema=escuro] .sn-tp.av{background:#16
 .pm-mer textarea{min-height:40px}
 .pm-aut1 .pc-dl{margin-top:4px}.pm-aut1 .pm-tf{margin:0 0 6px}.pm-aut1 .pm-sit{margin-top:8px}.pm-aut1 .pc-etq{margin-top:0}
 .pm-ctl2{margin-top:2px}
+/* 0.50: situação para julgar calculada e aviso do que a extensão preencheu na 2ª seta */
+.pm-sitj{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px}.pm-sitj .gl{flex:1 1 100%}
+.pm-sitv{display:inline-block;font-weight:600;font-size:12px;padding:3px 10px;border-radius:12px;border:1px solid var(--line)}
+.pm-sitv.ok{color:var(--ok);border-color:var(--ok)}.pm-sitv.pend{color:var(--gold);border-color:var(--gold)}
+.pm-sitj small{font-size:10.5px}
+.pm-auto{margin:8px 0 2px}

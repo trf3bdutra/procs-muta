@@ -115,6 +115,7 @@ function rotuloDe(c) { var E = window.MutaEtiquetas; return (/Honorários/.test(
 function campo(c) {
   var h = campo0(c), AU = window.MutaAutos;
   if (c.secao && AU && AU.preenchido && AU.preenchido(c.secao + '.' + c.chave)) h = h.replace(/^<div class="gf/, '<div class="gf au-auto').replace('</span>', ' <i class="au-tag" title="Preenchido pela leitura dos autos: confira">autos</i></span>');
+  else if (c.secao && G.cnj && autoGabPos(c.secao + '.' + c.chave)) h = h.replace(/^<div class="gf/, '<div class="gf au-auto').replace('</span>', ' <i class="au-tag" title="Preenchido pela extensão: confira">auto</i></span>');
   return h;
 }
 function campo0(c) {
@@ -309,15 +310,79 @@ function cabeca(s) {
 function merEnc() {
   var ab = !!G.merAb, h = '<details class="pm-aut pm-mer"' + (ab ? ' open' : '') + '><summary aria-label="Síntese, questões, mérito, encaminhamento e controles" title="Síntese, questões, mérito, encaminhamento e controles"><span class="pm-aut-t">síntese · questões · encaminhamento · controles</span><i class="pm-aut-h"></i></summary>';
   if (!ab) return h + '</details>';
+  /* 0.50: com a seta aberta, o que dá para obter sozinho vai para os campos vazios (marca "auto", Desfazer) */
+  try { autoGab(); situacaoSync(); } catch (e) {}
   var TR = window.MutaTriagem, mono = N(V('producao', 'Destino')) === 'monocratica';
   var etqX = (TR && TR.etiquetasDe ? TR.etiquetasDe(G.op, G.fo) : '') + (window.MutaAlertas ? window.MutaAlertas.htmlRoteiro(G.cnj, V('triagem', 'Etiquetas sugeridas'), function () { render(); }) : '');
-  return h + '<h4 class="pm-mer-h">Síntese e questões</h4><div class="gr">' + campoRot('triagem', 'Síntese Processual', 'Síntese do processo') + questoes() + '</div>' +
-    '<h4 class="pm-mer-h">Mérito</h4><div class="gr">' + campoRot('triagem', 'Tema', 'Tipo de caso') + campoRot('triagem', 'Especificidades') + campoRot('triagem', 'Síntese Fática', 'Síntese fática') + campoRot('triagem', 'COMPLEXIDADE', 'Complexidade') + campoRot('triagem', 'Tipo de Voto', 'Tipo de voto') + '</div>' +
-    '<h4 class="pm-mer-h">Encaminhamento</h4><div class="gr">' + /* o destino vem do tipo de ato, logo acima */ campoRot('producao', 'Destino - Situação', 'Situação para julgar') + (mono ? campoRot('triagem', 'Hipóteses Monocrática', 'Hipótese do artigo 932') : '') +
-    campoRot('triagem', 'O que falta sanar', 'Pendências') + campoRot('triagem', 'Etiquetas', 'Etiquetas do gabinete') + '</div>' + etqX +
+  var ag = autoGabItens();
+  return h + (ag.length ? '<div class="au-auto-av pm-auto"><span><b>' + ag.length + (ag.length === 1 ? ' campo preenchido' : ' campos preenchidos') + ' pela extensão</b> · marcados “auto”: confira</span><button type="button" class="lnk" data-autog="desfazer" title="Limpa o que a extensão pôs e não o repõe neste processo">Desfazer</button></div>' : '') +
+    '<h4 class="pm-mer-h">Síntese e questões</h4><div class="gr">' + campoRot('triagem', 'Síntese Processual', 'Síntese do processo') + questoes() + '</div>' +
+    '<h4 class="pm-mer-h">Mérito</h4><div class="gr">' + campoRot('triagem', 'Tema', 'Tipo de caso') + campoRot('triagem', 'Especificidades') + campoRot('triagem', 'Síntese Fática', 'Síntese fática') +
+      (S(V('triagem', 'COMPLEXIDADE')) ? campoRot('triagem', 'COMPLEXIDADE', 'Complexidade') : '') + campoRot('triagem', 'Tipo de Voto', 'Tipo de voto') + '</div>' +
+    /* 0.50: pendências e etiquetas do gabinete saíram daqui (estão em Sinalizações e na 1ª seta); a situação é calculada pelas sinalizações */
+    '<h4 class="pm-mer-h">Encaminhamento</h4><div class="gr">' + situacaoHtml() + (mono ? campoRot('triagem', 'Hipóteses Monocrática', 'Hipótese do artigo 932') : '') + '</div>' + etqX +
     /* 0.49.1: controles (urgência, meta, sobrestamento, caso sensível) aqui, antes na 1ª seta */
     controlesProcesso(true) + '</details>';
 }
+/* ---------- 0.50 · campos obtidos sozinhos na 2ª seta ----------
+   Tipo de caso (assunto detalhado do Caput ou o assunto), tipo de voto (minuta-matriz da Conformidade ou tipo de julgamento
+   e resultado) e hipótese do artigo 932 (fundamento e resultado da monocrática). Só campos vazios; Desfazer limpa o que
+   ainda está como a extensão pôs e não repõe naquele processo (localStorage hero18810:autoGab). */
+var AUTO_G = 'hero18810:autoGab';
+function autoGabMem() { try { return JSON.parse(localStorage.getItem(AUTO_G) || '{}'); } catch (e) { return {}; } }
+function autoGabGuardar(m) { try { localStorage.setItem(AUTO_G, JSON.stringify(m)); } catch (e) {} }
+function hipotese932() {
+  var res = N(V('producao', 'Voto - Resultado')) + ' ' + N(V('producao', 'Mono - Tipo de ato')), fund = N(V('producao', 'Mono - Fundamento')) + ' ' + N(V('triagem', 'Tipo de Julgamento'));
+  if (/nao conhec|prejudicad|inadmiss|desist|intempest|deserc/.test(res + ' ' + fund)) return 'III · recurso inadmissível, prejudicado ou sem impugnação específica';
+  var V5 = /^\s*(dou|deu|dado|provid|provimento)|parcial provimento|\bprovido|dou provimento/.test(res) && !/nego|negad|desprov/.test(res);
+  if (/sumula/.test(fund)) return V5 ? 'V a · decisão recorrida contrária a súmula' : 'IV a · contrário a súmula do STF, STJ ou do TRF';
+  if (/\btema\b|repetitiv|repercussao geral/.test(fund)) return V5 ? 'V b · decisão recorrida contrária a repetitivo' : 'IV b · contrário a repetitivo do STF ou STJ';
+  if (/\birdr\b|\biac\b/.test(fund)) return V5 ? 'V c · decisão recorrida contrária a IRDR ou IAC' : 'IV c · contrário a IRDR ou IAC';
+  return '';
+}
+function derivados() {
+  var L = [], mono = N(V('producao', 'Destino')) === 'monocratica';
+  L.push(['triagem.Tema', 'Tipo de caso', S(gravado('triagem', 'Registro - Assunto detalhado')) || S(V('triagem', 'Assunto detalhado')) || S(fonteVal({ fonte: ['Assunto'] }))]);
+  var mx = null; try { mx = window.MutaComparar && window.MutaComparar.matriz ? window.MutaComparar.matriz() : null; } catch (e) {}
+  var tj = S(V('triagem', 'Tipo de Julgamento')), res = S(V('producao', 'Voto - Resultado'));
+  L.push(['triagem.Tipo de Voto', 'Tipo de voto', mx && (mx.nome || mx.titulo) ? S(mx.nome || mx.titulo) : tj && res ? tj + ' · ' + res : '']);
+  if (mono) L.push(['triagem.Hipóteses Monocrática', 'Hipótese do artigo 932', hipotese932()]);
+  return L.filter(function (x) { return S(x[2]); });
+}
+function autoGab() {
+  if (!G.cnj || !G.op) return;
+  var k = Muta.chaveProcesso(G.cnj), M = autoGabMem(), m = M[k] = M[k] || { pos: {}, rec: {} }, mud = 0;
+  derivados().forEach(function (x) {
+    var i = x[0].indexOf('.'), atual = S(V(x[0].slice(0, i), x[0].slice(i + 1)));
+    if (atual || m.rec[x[0]]) return;
+    marcar(x[0], x[2]); m.pos[x[0]] = x[2]; mud++;
+  });
+  if (mud) { autoGabGuardar(M); agendar(800); }
+}
+function autoGabItens() {
+  if (!G.cnj) return []; var m = autoGabMem()[Muta.chaveProcesso(G.cnj)]; if (!m) return [];
+  return Object.keys(m.pos).filter(function (a) { var i = a.indexOf('.'); return S(V(a.slice(0, i), a.slice(i + 1))) === S(m.pos[a]); });
+}
+function autoGabDesfazer() {
+  var k = Muta.chaveProcesso(G.cnj), M = autoGabMem(), m = M[k]; if (!m) return;
+  autoGabItens().forEach(function (a) { marcar(a, ''); m.rec[a] = 1; delete m.pos[a]; });
+  autoGabGuardar(M); agendar(400); render();
+}
+function autoGabPos(alvo) { return autoGabItens().indexOf(alvo) >= 0; }
+/* situação para julgar: Pendente com pendência ou intercorrência em aberto; senão, Pronto. À mão só com motivo fora delas
+   (escolha guardada neste navegador, hero18810:sitManual) */
+var SIT_M = 'hero18810:sitManual';
+function sitManual() { try { return !!JSON.parse(localStorage.getItem(SIT_M) || '{}')[Muta.chaveProcesso(G.cnj)]; } catch (e) { return false; } }
+function sitManualSet(on) { try { var o = JSON.parse(localStorage.getItem(SIT_M) || '{}'), k = Muta.chaveProcesso(G.cnj); if (on) o[k] = 1; else delete o[k]; localStorage.setItem(SIT_M, JSON.stringify(o)); } catch (e) {} }
+function abertas(t) { return snLinhas(t).filter(function (l) { return !/^✓/.test(l); }).length; }
+function situacaoCalc() { var pd = abertas('pd'), ic = abertas('ic'); return { v: pd || ic ? 'Pendente' : 'Pronto para julgar', pd: pd, ic: ic }; }
+function situacaoSync() { if (!G.cnj || !G.op || sitManual()) return; var c = situacaoCalc(); if (S(V('producao', 'Destino - Situação')) !== c.v) { marcar('producao.Destino - Situação', c.v); agendar(800); } }
+function situacaoHtml() {
+  var c = situacaoCalc(), man = sitManual(), motivo = [c.pd ? c.pd + (c.pd > 1 ? ' pendências' : ' pendência') : '', c.ic ? c.ic + (c.ic > 1 ? ' intercorrências' : ' intercorrência') : ''].filter(Boolean).join(' e ');
+  if (man) return '<div class="gf w pm-sitj"><span class="gl">Situação para julgar <i class="au-tag">à mão</i></span>' + chips('producao', 'Destino - Situação') + '<small class="muted">pelas sinalizações seria “' + esc(c.v) + '” · <button type="button" class="lnk" data-sitman="0">voltar ao cálculo</button></small></div>';
+  return '<div class="gf w pm-sitj"><span class="gl">Situação para julgar</span><span class="pm-sitv ' + (c.v === 'Pendente' ? 'pend' : 'ok') + '">' + esc(c.v) + '</span><small class="muted">' + (motivo ? motivo + ' em aberto' : 'nenhuma pendência ou intercorrência em aberto') + ' · <button type="button" class="lnk" data-sitman="1" title="Para motivo que não está nas sinalizações">marcar à mão</button></small></div>';
+}
+
 window.MutaRender = function () { render(); };
 /* faixa do usuário no topo do painel, acima das abas */
 function faixaUsuario(s) {
@@ -353,7 +418,7 @@ function assuntoDetalhado() {
 /* sinalizações: pendências e intercorrências da ficha, uma por linha ("✓ " no início = resolvida) */
 var SN = [['av', 'Aviso', 'triagem', 'Avisos'], ['pd', 'Pendência', 'triagem', 'O que falta sanar'], ['ic', 'Intercorrência', 'triagem', 'Intercorrências']];
 function snLinhas(t) { var x = SN.filter(function (q) { return q[0] === t; })[0]; return S(V(x[2], x[3])).split(/\n+/).map(S).filter(Boolean); }
-function snGravar(t, L) { var x = SN.filter(function (q) { return q[0] === t; })[0]; marcar(x[2] + '.' + x[3], L.join('\n')); agendar(500); render(); }
+function snGravar(t, L) { var x = SN.filter(function (q) { return q[0] === t; })[0]; marcar(x[2] + '.' + x[3], L.join('\n')); try { situacaoSync(); } catch (e) {} agendar(500); render(); }
 function sinalizacoes() {
   var cont = {}, itens = [];
   SN.forEach(function (q) { snLinhas(q[0]).forEach(function (l, i) { var ok = /^✓\s*/.test(l); if (!ok) cont[q[0]] = (cont[q[0]] || 0) + 1; itens.push({ t: q[0], r: q[1], i: i, ok: ok, tx: l.replace(/^✓\s*/, '') }); }); });
@@ -764,6 +829,8 @@ caixa.addEventListener('click', function (e) {
   if (b.dataset.pron != null) { var x = PRON[Number(b.dataset.pron)]; if (x) { marcar('producao.Destino', x[1]); marcar('producao.Mono - Tipo de ato', x[2]); G.dest = null; agendar(400); render(); } return; }
   if (b.dataset.snX) { var px = b.dataset.snX.split(':'), Lx = snLinhas(px[0]); Lx.splice(Number(px[1]), 1); snGravar(px[0], Lx); return; }
   if (b.hasAttribute('data-nt-add')) { notaIncluir(); return; }
+  if (b.dataset.autog === 'desfazer') { autoGabDesfazer(); return; }
+  if (b.dataset.sitman) { sitManualSet(b.dataset.sitman === '1'); if (b.dataset.sitman === '0') situacaoSync(); render(); return; }
   if (b.hasAttribute('data-sn-add')) { G.snAb = !G.snAb; render(); var sx = $('sn-tx'); if (sx) sx.focus(); return; }
   if (b.hasAttribute('data-sn-inc')) { snIncluir(); return; }
   if (b.dataset.ntX != null) { var Ln = notasL(); Ln.splice(Number(b.dataset.ntX), 1); marcar('origem.Observações', Ln.join('\n')); agendar(500); render(); return; }

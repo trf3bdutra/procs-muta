@@ -5,6 +5,13 @@ Nome desde a 0.19.3 (antes: Muta). Os identificadores internos (`window.Muta*`, 
 Extensão do Chrome/Edge (Manifest V3) que abre o **Muta** num painel lateral, ao lado dos autos e das tarefas do PJe 2º grau do TRF-3.
 Base: o HTML independente *muta-independente-prontuario-completo* (Prontuário + Acervo).
 
+## O que muda na 0.50 · 2ª seta sem duplicados e com preenchimento automático
+
+- Saíram da 2ª seta: Pendências (é o campo das Sinalizações › Pendência) e Etiquetas do gabinete (as do PJe estão na 1ª seta; as que faltam, em Regras do catálogo). Complexidade só aparece quando calculada.
+- **Situação para julgar** é calculada pelas sinalizações: Pendente com pendência ou intercorrência em aberto; senão, Pronto para julgar (gravada na ficha). "marcar à mão" para motivo fora das sinalizações (escolha guardada no navegador; "voltar ao cálculo").
+- Preenchidos sozinhos, só se vazios, com a marca "auto" e Desfazer no alto da seta: tipo de caso (assunto detalhado do Caput ou assunto), tipo de voto (minuta-matriz da Conformidade ou tipo de julgamento e resultado) e hipótese do artigo 932 (fundamento e resultado da monocrática) — `gabinete.js › derivados/autoGab`.
+- Pela leitura dos autos (marca "autos", Desfazer em Autos): questões do processo, uma por tese dos recursos, e síntese do processo, montada da sentença e dos recursos — `autos.js › derivAutos`.
+
 ## O que muda na 0.49.1 · setas do cartão revistas; prévia com a lista do PJe
 
 - 1ª seta do cartão: "autuação e partes", em blocos com título — Partes, Autuação (tarefa, órgão, seção, datas e situação atual) e Etiquetas do PJe.

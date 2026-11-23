@@ -313,11 +313,31 @@ function autoPreencher() {
     if (a.campo && AUTO_AL.test(a.campo) && a.nivel !== 'al' && S(a.valor) && !rec[a.campo] && vazioFicha(a.campo) && !L.some(function (x) { return x.alvo === a.campo; }))
       L.push({ alvo: a.campo, rot: a.campo.slice(a.campo.indexOf('.') + 1), v: a.valor, doc: a.doc || '' });
   }); } catch (e) {}
+  /* 0.50: questões do processo (uma por tese dos recursos) e síntese do processo (sentença e recursos), só se vazios */
+  try { derivAutos().forEach(function (x) { if (!rec[x.alvo] && vazioFicha(x.alvo) && !L.some(function (y) { return y.alvo === x.alvo; })) L.push(x); }); } catch (e) {}
   if (!L.length) return;
   L.forEach(function (x) { g.marcar(x.alvo, x.v); });
   var ant = A.auto && A.auto.ck === ck ? A.auto.itens : [];
   A.auto = { ck: ck, itens: ant.concat(L.filter(function (x) { return !ant.some(function (p) { return p.alvo === x.alvo; }); })), em: Date.now() };
   g.gravar().then(function () { A.sug = null; redesenhar(); }, function () { redesenhar(); });
+}
+function derivAutos() {
+  var it = function (k) { return (A.sug || []).filter(function (x) { return x.key === k; })[0]; };
+  var val = function (k, sec) { var x = it(k); return S(x && !Array.isArray(x.value) ? x.value : '') || S(GB().V ? GB().V(sec || 'origem', k) : ''); };
+  var recT = it('Recursos'), rows = recT && Array.isArray(recT.value) ? recT.value : [], out = [];
+  var teses = [];
+  rows.forEach(function (r) { String(r.teses || '').split(/\n+/).map(function (t) { return S(t).replace(/^\(?\d+[).]\s*|^[-–•]\s*/, ''); }).filter(function (t) { return t.length > 8; })
+    .forEach(function (t) { if (!teses.some(function (u) { return N(u) === N(t); })) teses.push(t.slice(0, 300)); }); });
+  if (teses.length) out.push({ alvo: 'triagem.Alegações', rot: 'Questões do processo', v: teses.slice(0, 8).join('\n'), doc: recT.doc || '' });
+  var dec = val('Sentença - Decisão'), res = val('Sentença - Resultado'), sid = val('Sentença - ID') || S((it('Sentença - Decisão') || {}).doc).split(/,\s*/)[0], cl = GB().F ? S(GB().F('Classe')) : '';
+  if (dec || rows.length) {
+    var d = N(dec), frase = /extin/.test(d) ? 'extinguiu o processo' + (/sem/.test(d) ? ' sem resolução do mérito' : '') : dec ? 'julgou ' + dec.toLowerCase() + ' o pedido' : '';
+    var t = (cl ? cl.charAt(0).toUpperCase() + cl.slice(1).toLowerCase() : 'Recurso') + (frase ? ' contra sentença' + (sid ? ' (ID ' + sid + ')' : '') + ' que ' + frase + (res ? ' (' + res.replace(/[.\s]+$/, '') + ')' : '') : '') + '.';
+    rows.forEach(function (r) { var ped = String(r.pedidos || '').split(/\n+/).map(S).filter(Boolean).slice(0, 2).join('; ');
+      if (r.parte || ped) t += ' Recorre ' + (S(r.parte) || 'a parte') + (ped ? ', pedindo ' + ped.replace(/[.\s]+$/, '').replace(/^./, function (c) { return c.toLowerCase(); }) : '') + '.'; });
+    if (t.length > 20) out.push({ alvo: 'triagem.Síntese Processual', rot: 'Síntese do processo', v: t.slice(0, 1200), doc: sid });
+  }
+  return out;
 }
 function autoItens() { return A.auto && A.auto.ck === chave() && lidoDoProcesso() ? A.auto.itens : []; }
 /* desfaz só o que ainda está como a leitura pôs (o que a pessoa já mudou fica) */
