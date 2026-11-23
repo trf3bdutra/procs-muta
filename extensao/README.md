@@ -8,6 +8,7 @@ Base: o HTML independente *muta-independente-prontuario-completo* (Prontuário +
 ## O que muda na 0.39 · gravar na ficha com o inteiro teor
 
 - **Autos › Peças e documentos**: cada documento tem uma caixa; as peças principais começam marcadas e qualquer outro pode ser marcado ("Marcar: principais · todos · nenhum"). Um só botão, **"Gravar N na ficha"**, lê o que falta e grava os marcados: o registro em "Outras peças e ocorrências" (tipo, ID, data e detalhamento; o que já está noutro campo da ficha não se repete) e o **inteiro teor** em `acervo/autos/<CNJ>.json.gz` (o mesmo arquivo do Caput e da Ex Officio), juntado por ID ao que já existe (`api/_ficha.js › gravarAutos/juntarAutos`, POST `/api/pauta?ficha=1` com `autos`). O documento gravado mostra "gravado".
+- 0.39.1: em cada documento, o detalhamento ocupa uma linha só e o **inteiro teor** é um campo que se expande (lê o texto ao abrir; OCR, JSON e PDF no título do campo).
 - **Minuta**: saiu o seletor "Pronunciamento"; o tipo vem do tipo de ato (Prontuário › Processo) ou da tarefa do PJe.
 
 ## O que muda na 0.38 · Autos preenche o Roteiro; Gerador na aba Minuta
