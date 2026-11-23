@@ -1285,3 +1285,12 @@ html[data-tema=escuro] .au-ch,html[data-tema=escuro] .au-auto-av{background:#0f2
 .au-auto-d{display:block}.au-auto-d>summary{cursor:pointer;display:flex;gap:8px;align-items:baseline;list-style:none}
 .au-auto-d>summary::-webkit-details-marker{display:none}.au-auto-d>summary::before{content:'▸';color:var(--ok)}.au-auto-d[open]>summary::before{content:'▾'}
 .au-auto-d>summary small{margin-left:auto;font-size:10.5px;color:var(--muted-fg)}.au-auto-d ul{margin:6px 0 4px}.au-auto-d .bar{margin-top:4px}
+/* 0.38 · gravar na ficha: uma caixa por documento e um só botão */
+.au-h .au-g{margin:2px 6px 0 0;flex:none;accent-color:var(--primary);width:15px;height:15px}
+.au-doc.sel{background:color-mix(in srgb,var(--primary) 6%,transparent)}
+.au-gv{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin:2px 0 8px;padding:6px 8px;border:1px solid var(--line);border-radius:8px}
+.au-gv .muted{font-size:11.5px}.au-gv .lnk{font-size:11.5px}
+.au-js{padding:3px 8px}
+html[data-tema=escuro] .au-h .au-g{accent-color:#7fb8cf}
+.au-h{grid-template-columns:auto 60px minmax(0,1fr) auto}.au-h .au-g{margin:0}
+.au-a{flex-wrap:wrap}.au-a .au-esp{min-width:90px}

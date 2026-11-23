@@ -5,6 +5,11 @@ Nome desde a 0.19.3 (antes: Muta). Os identificadores internos (`window.Muta*`, 
 Extensão do Chrome/Edge (Manifest V3) que abre o **Muta** num painel lateral, ao lado dos autos e das tarefas do PJe 2º grau do TRF-3.
 Base: o HTML independente *muta-independente-prontuario-completo* (Prontuário + Acervo).
 
+## O que muda na 0.39 · gravar na ficha com o inteiro teor
+
+- **Autos › Peças e documentos**: cada documento tem uma caixa; as peças principais começam marcadas e qualquer outro pode ser marcado ("Marcar: principais · todos · nenhum"). Um só botão, **"Gravar N na ficha"**, lê o que falta e grava os marcados: o registro em "Outras peças e ocorrências" (tipo, ID, data e detalhamento; o que já está noutro campo da ficha não se repete) e o **inteiro teor** em `acervo/autos/<CNJ>.json.gz` (o mesmo arquivo do Caput e da Ex Officio), juntado por ID ao que já existe (`api/_ficha.js › gravarAutos/juntarAutos`, POST `/api/pauta?ficha=1` com `autos`). O documento gravado mostra "gravado".
+- **Minuta**: saiu o seletor "Pronunciamento"; o tipo vem do tipo de ato (Prontuário › Processo) ou da tarefa do PJe.
+
 ## O que muda na 0.38 · Autos preenche o Roteiro; Gerador na aba Minuta
 
 - **Preenchimento automático** (`autos.js › autoPreencher`): lidos os autos, o painel lê sozinho as peças principais e põe nos campos **vazios** da ficha o que a leitura achou (sentença, recursos, contrarrazões, MPF, tempestividade, procuração…); do que os alertas sugerem, só o tipo de julgamento (sem divergência) e a remessa necessária. Nunca troca o que já está gravado; o que diverge fica em "A conferir". Os campos postos levam a marca "autos" (no Roteiro, também no título do passo) até serem mudados. "Desfazer" limpa o que ainda está como a leitura pôs e não o repõe naquele processo. Desliga em Autos › "Preencher sozinho" (`localStorage hero18810:autoPreencher`).

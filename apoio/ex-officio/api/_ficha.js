@@ -267,6 +267,8 @@ module.exports = async (req, res, u) => {
       return res.status(200).json({ ficha: F, operacional: op, fonte, sinais, gestor: L.gestor(u), controles: ativos(op, { metas: bMeta, sobrestados: bSobr, sensiveis: bSens }) });
     }
     if (req.method !== 'POST') return res.status(405).json({ erro: 'método não aceito' });
+    /* 0.38: inteiro teor dos documentos marcados na extensão (Autos › Peças e documentos › Gravar) */
+    if ((req.body || {}).autos) return res.status(200).json(await gravarAutos(String(req.body.cnj || ''), req.body.autos, u));
     const b = req.body || {}, cnj = String(b.cnj || ''), C = b.campos || {}, E = editaveis(F), mud = {}, recus = [];
     if (dg(cnj).length !== 20) return res.status(400).json({ erro: 'número do processo inválido' });
     Object.keys(C).forEach(k => {
@@ -291,6 +293,51 @@ module.exports = async (req, res, u) => {
     return res.status(200).json(Object.assign({ ok: true, operacional: r, recusados: recus, cartoes: cart }, out.length ? {} : { semMudanca: true }));
   } catch (e) { res.status(e.status === 404 ? 404 : e.status === 409 ? 409 : 500).json({ erro: e.message }); }
 };
+/* ---------- 0.38 · inteiro teor dos documentos, gravado pela extensão ----------
+   acervo/autos/<CNJ>.json.gz, no formato do scripts/autos/registrar.py e da ação "autos" do Collectio
+   ({cnj, extraido_em, lista, docs, faltam, texto}). Junta com o que já existe: o documento enviado substitui o de mesmo ID;
+   os demais ficam. a = {lista:[[id,tipo,desc,'',data,hora,anexo]], docs:[{id,…}], secoes:[{id, sec}], mov} */
+const CNJ_FMT = /^\d{7}-\d{2}\.\d{4}\.\d\.\d{2}\.\d{4}$/;
+function secoesAutos(txt) {
+  const out = { mov: '', ordem: [], docs: new Map() }; let cur = null, buf = [];
+  const fecha = () => { if (cur === 'mov') out.mov = buf.join('\n'); else if (cur) { if (!out.docs.has(cur)) out.ordem.push(cur); out.docs.set(cur, buf.join('\n')); } };
+  String(txt || '').split('\n').forEach(l => { const m = /^===== ID (\d+) \|/.exec(l);
+    if (m) { fecha(); cur = m[1]; buf = [l]; } else if (/^===== MOVIMENTA/.test(l)) { fecha(); cur = 'mov'; buf = [l]; } else if (cur) buf.push(l); });
+  fecha(); return out;
+}
+function juntarAutos(velho, a, cnj) {
+  const v = velho || {}, pj = x => { try { const y = typeof x === 'string' ? JSON.parse(x) : x; return Array.isArray(y) ? y : []; } catch (e) { return []; } };
+  const S = secoesAutos(v.texto), novas = (Array.isArray(a.secoes) ? a.secoes : []).filter(x => x && /^\d+$/.test(String(x.id)) && /^===== ID \d+ \|/.test(String(x.sec || '')));
+  novas.forEach(x => { const id = String(x.id); if (!S.docs.has(id)) S.ordem.push(id); S.docs.set(id, String(x.sec).replace(/\s+$/, '') + '\n'); });
+  if (a.mov && /^===== MOVIMENTA/.test(String(a.mov))) S.mov = String(a.mov).replace(/\s+$/, '') + '\n';
+  const listaN = pj(a.lista).filter(l => Array.isArray(l) && /^\d+$/.test(String(l[0]))), listaV = pj(v.lista);
+  const lista = listaN.length ? listaN.concat(listaV.filter(l => !listaN.some(n => String(n[0]) === String(l[0])))) : listaV;
+  const ordem = lista.map(l => String(l[0])).filter(id => S.docs.has(id)).concat(S.ordem.filter(id => !lista.some(l => String(l[0]) === id)));
+  const docs = pj(v.docs); pj(a.docs).forEach(d => { if (!d || !/^\d+$/.test(String(d.id))) return; const k = docs.findIndex(x => String(x.id) === String(d.id)); if (k < 0) docs.push(d); else docs[k] = Object.assign({}, docs[k], d); });
+  const com = new Set([...S.docs.keys()].filter(id => S.docs.get(id).split('\n').slice(1).join('').trim()));
+  const faltam = [...new Set((Array.isArray(v.faltam) ? v.faltam : []).map(String))].filter(id => !com.has(id));
+  return { cnj, extraido_em: new Date().toISOString(), origem: 'Extensão HERO18810 (Autos › Peças e documentos)', lista: JSON.stringify(lista), docs: JSON.stringify(docs), faltam,
+    texto: [S.mov || ''].concat(ordem.map(id => S.docs.get(id))).filter(Boolean).join('\n') };
+}
+async function gravarAutos(cnj, a, u) {
+  if (!CNJ_FMT.test(cnj)) { const e = new Error('número do processo inválido'); e.status = 400; throw e; }
+  if (!a || typeof a !== 'object' || JSON.stringify(a).length > 4e6) { const e = new Error('inteiro teor inválido ou grande demais'); e.status = 400; throw e; }
+  const zlib = require('zlib'), rel = 'acervo/autos/' + cnj + '.json.gz';
+  for (let t = 0; t < 4; t++) {
+    const ref = await L.gh('/git/ref/heads/main'), base = await L.gh('/git/commits/' + ref.object.sha);
+    let velho = null;
+    try { const o = await L.gh('/contents/' + rel + '?ref=' + ref.object.sha); const b64 = o.content && o.encoding === 'base64' ? o.content : (await L.gh('/git/blobs/' + o.sha)).content;
+      velho = JSON.parse(zlib.gunzipSync(Buffer.from(b64, 'base64')).toString('utf8')); } catch (e) { if (e.status !== 404) throw e; }
+    const novo = juntarAutos(velho, a, cnj), n = (Array.isArray(a.secoes) ? a.secoes : []).length;
+    const blob = await L.gh('/git/blobs', { method: 'POST', body: JSON.stringify({ content: zlib.gzipSync(Buffer.from(JSON.stringify(novo))).toString('base64'), encoding: 'base64' }) });
+    const tr = await L.gh('/git/trees', { method: 'POST', body: JSON.stringify({ base_tree: base.tree.sha, tree: [{ path: rel, mode: '100644', type: 'blob', sha: blob.sha }] }) });
+    const c = await L.gh('/git/commits', { method: 'POST', body: JSON.stringify({ message: 'Autos (' + u + '): inteiro teor de ' + n + ' documento(s) · ' + cnj, tree: tr.sha, parents: [ref.object.sha] }) });
+    try { await L.gh('/git/refs/heads/main', { method: 'PATCH', body: JSON.stringify({ sha: c.sha }) }); }
+    catch (e) { if (e.status === 422 || e.status === 409) continue; throw e; }
+    return { ok: true, autos: { gravados: n, documentos: secoesAutos(novo.texto).docs.size, caminho: rel } };
+  }
+  const e = new Error('O repositório mudou várias vezes seguidas; tente de novo.'); e.status = 409; throw e;
+}
 /* quais grupos dos Controles especiais valem para o processo */
 function ativos(op, lista) {
   const t = (op && op.triagem) || {}, p = (op && op.producao) || {}, c = (op && op.controles) || {};
@@ -326,6 +373,7 @@ function etqTriagem(t, f) {
   return out;
 }
 module.exports.tipoCasoDe = tipoCasoDe;
+module.exports.juntarAutos = juntarAutos;
 module.exports.etqTriagem = etqTriagem;
 async function resumos(req, res) {
   try {

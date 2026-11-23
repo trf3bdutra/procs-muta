@@ -80,7 +80,9 @@ function paragrafosEditor() {
 }
 function editorHtml() {
   var E = ED.estado(), n = E.texto ? E.texto.split(/\s+/).length : 0, P = CX.partes(E.paragrafos || []);
-  return pronHtml() + editorCaixa(E, n, P);
+  /* 0.38: sem o seletor "Pronunciamento" — o tipo vem do tipo de ato do Prontuário › Processo (ou da tarefa do PJe) */
+  processo();
+  return editorCaixa(E, n, P);
 }
 function editorCaixa(E, n, P) {
   var aviso = E.numero && chave() && E.numero.replace(/\D/g, '') !== chave() ? '<p class="status err">O editor lido está nos autos ' + esc(E.numero) + ', não no processo aberto no painel.</p>' : '';

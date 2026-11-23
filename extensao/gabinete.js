@@ -666,6 +666,7 @@ caixa.addEventListener('change', function (e) {
   var t = e.target;
   if (t.dataset && t.dataset.sg != null) { if (window.MutaAutos) window.MutaAutos.marcarSugestao(Number(t.dataset.sg), t.checked); return; }
   if (t.dataset && t.dataset.esp) { if (window.MutaAutos) window.MutaAutos.especificarJa(t.dataset.esp); return; }
+  if (t.dataset && t.dataset.auG) { if (window.MutaAutos) window.MutaAutos.selecionar(t.dataset.auG, t.checked); return; }
   if (t.dataset && t.dataset.auAuto != null) { if (window.MutaAutos) window.MutaAutos.autoLigar(t.checked); return; }
   if (t.dataset && t.dataset.snOk) { var po = t.dataset.snOk.split(':'), Lo = snLinhas(po[0]), io = Number(po[1]); if (Lo[io] != null) Lo[io] = t.checked ? '✓ ' + Lo[io].replace(/^✓\s*/, '') : Lo[io].replace(/^✓\s*/, ''); snGravar(po[0], Lo); return; }
   if (t.id === 'sn-tp') { G.snTp = t.value; return; }
@@ -916,6 +917,7 @@ window.MutaMapa = { camposFicha: camposFicha, trazerFicha: trazerFicha, getP: ge
 window.MutaGabinete = { recarregar: function () { carregar(true); }, gravarPendente: function () { return gravarJa(); }, modo: function () { return modo; },
   /* para os autos (autos.js) e a aba Minuta: o prontuário aberto e a gravação */
   render: function () { render(); }, cnj: function () { return G.cnj; }, modelo: function () { return G.F; }, op: function () { return G.op; }, fo: function () { return G.fo; },
+  api: function (p, o) { return ses.api(p, o); },
   gravado: gravado, V: V, F: function (k) { return fonteVal({ fonte: [k] }); }, marcar: marcar, gravar: function () { return gravarJa(); }, ir: function (aba) { if (aba === 'Triagem') aba = 'Roteiro'; if (MODOS.indexOf(aba) >= 0) { G.aba = aba; render(); } },
   destino: function () { return G.F ? destino() : ''; },
   /* a sincronia gravou a ficha: o painel da ficha mostra o novo registro sem nova leitura */

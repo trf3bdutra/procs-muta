@@ -502,3 +502,21 @@ test('extensão 0.38: Autos preenche sozinho os campos vazios do Roteiro (e desf
   assert.match(read('extensao/gerador.js'), /pintar: pintar, abrir: abrir, modo: modo/);
   assert.match(read('extensao/roteiro.js'), /AU0\.preenchido/);
 });
+
+test('extensão 0.39: gravar na ficha com o inteiro teor (caixa por documento, um só botão) e acervo/autos juntado por ID; Minuta sem o seletor de pronunciamento', () => {
+  const F = require('../api/_ficha');
+  const velho = { cnj: '5000000-00.2026.4.03.6000', lista: JSON.stringify([['111', 'Sentença', 'Sentença', '', '01/02/2026', '', '']]), docs: JSON.stringify([{ id: '111', tipo: 'Sentença' }]), faltam: ['222'],
+    texto: '===== MOVIMENTAÇÕES (x) =====\nm1\n\n===== ID 111 | Sentença | Sentença | juntado em 01/02/2026 =====\nTexto velho\n' };
+  const n = F.juntarAutos(velho, { lista: [['222', 'Apelação', 'Apelação', '', '03/03/2026', '', ''], ['111', 'Sentença', 'Sentença', '', '01/02/2026', '', '']], docs: [{ id: '222', tipo: 'Apelação' }],
+    secoes: [{ id: '222', sec: '===== ID 222 | Apelação | Apelação | juntado em 03/03/2026 =====\nRazões\n' }] }, velho.cnj);
+  assert.match(n.texto, /^===== MOVIMENTAÇÕES[\s\S]*===== ID 222 \|[\s\S]*Razões[\s\S]*===== ID 111 \|[\s\S]*Texto velho/, 'o novo entra, o antigo fica, na ordem da cronologia');
+  assert.deepEqual(n.faltam, [], 'o que ganhou texto sai de "faltam"');
+  assert.equal(JSON.parse(n.docs).length, 2); assert.equal(JSON.parse(n.lista).length, 2);
+  const n2 = F.juntarAutos(n, { secoes: [{ id: '111', sec: '===== ID 111 | Sentença | Sentença | juntado em 01/02/2026 =====\nTexto novo\n' }] }, velho.cnj);
+  assert.ok(/Texto novo/.test(n2.texto) && !/Texto velho/.test(n2.texto), 'o mesmo ID é substituído');
+  const au = read('extensao/autos.js');
+  assert.match(au, /data-au-g="/); assert.match(au, /data-au="gravar"/); assert.match(au, /function marcado\(d\) \{ return d\.id in A\.sel \? !!A\.sel\[d\.id\] : !!\(PRINC\[d\.k\]/);
+  assert.match(au, /autos: \{ lista: k \? \[\] : lis/);
+  assert.match(read('extensao/gabinete.js'), /t\.dataset\.auG/);
+  assert.doesNotMatch(read('extensao/comparar.js'), /return pronHtml\(\) \+ editorCaixa/);
+});

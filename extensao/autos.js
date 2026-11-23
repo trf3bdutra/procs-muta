@@ -20,7 +20,7 @@ function iso(d) { var m = /^(\d{2})\/(\d{2})\/(\d{4})/.exec(S(d)); if (m) return
 function brD(v) { var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(S(v)); return m ? m[3] + '/' + m[2] + '/' + m[1] : S(v); }
 function GB() { return window.MutaGabinete || {}; }
 
-var A = { mostrados: {}, auto: null, autoSig: {}, recusa: {}, tAuto: 0, cnj: '', itens: null, idp: '', host: '', em: 0, lendo: false, erro: '', docs: {}, msg: '', sug: null, sugMsg: '', abertos: {}, filtro: 'pecas', fila: 0, esp: {}, tEsp: null };
+var A = { sel: {}, gravados: {}, grav: null, mostrados: {}, auto: null, autoSig: {}, recusa: {}, tAuto: 0, cnj: '', itens: null, idp: '', host: '', em: 0, lendo: false, erro: '', docs: {}, msg: '', sug: null, sugMsg: '', abertos: {}, filtro: 'pecas', fila: 0, esp: {}, tEsp: null };
 
 /* ---------- categorias pelo tipo do documento no PJe: [chave, padrão, rótulo, grupo] ---------- */
 var CAT = [
@@ -446,13 +446,71 @@ function htmlSituacao(registro) {
     (h || '<p class="muted">Abra os autos digitais no PJe.</p>') + '</section>';
 }
 function estadoDoc(id) {
-  var d = A.docs[id]; if (!d) return '';
+  var d = A.docs[id], gv = A.gravados[id] ? '<span class="au-st ok" title="Inteiro teor gravado no acervo (acervo/autos)">gravado</span>' : naFicha(id) ? '<span class="au-st" title="Registrado em Outras peças da ficha">na ficha</span>' : '';
+  if (!d) return gv;
+  return estadoDoc0(d) + gv;
+}
+function estadoDoc0(d) {
   if (d.estado === 'lendo') return '<span class="au-st">' + esc(d.prog || 'lendo…') + '</span>';
   if (d.estado === 'erro') return '<span class="au-st err" title="' + esc(d.erro) + '">erro</span>';
   if (d.estado === 'sem') return '<span class="au-st al" title="Nem a camada de texto nem o OCR trouxeram texto">sem texto</span>';
   return '<span class="au-st ok"' + (d.ocr ? ' title="' + d.ocr + ' página(s) lida(s) por OCR: confira nomes, números e datas"' : '') + '>' + (d.fmt === 'pdf' ? d.pags + ' pág.' + (d.ocr ? ' · OCR' : '') : 'texto') + '</span>';
 }
 /* lista de documentos, com especificação (gravada em "Outras peças") e os botões de cada um */
+/* 0.38 · Gravar na ficha: cada documento tem a sua caixa (as peças principais começam marcadas); um só botão grava os
+   marcados — o registro em "Outras peças e ocorrências" (tipo, ID, data e detalhamento; o que já está noutro campo da
+   ficha não se repete) e o inteiro teor em acervo/autos/<CNJ>.json.gz (o mesmo arquivo do Caput e da Ex Officio). */
+function marcado(d) { return d.id in A.sel ? !!A.sel[d.id] : !!(PRINC[d.k] && d.k !== 'intimacao' && !d.anexo && !A.gravados[d.id]); }
+function marcados() { return lista().filter(marcado); }
+function naFicha(id) { return linhasGravadas('origem', 'Outras peças').some(function (x) { return S(x.ids).split(/[,;\s]+/).indexOf(String(id)) >= 0; }); }
+function idsNaFicha() {
+  var g = GB(), F = g.modelo ? g.modelo() : null, out = {};
+  ((F && F.abas) || []).forEach(function (a) { (a.grupos || []).forEach(function (gr) { (gr.campos || []).forEach(function (c) {
+    if (!c.secao || !/(^|\s|-\s)ID(\s|$)|^ID\b|IDs?\b/.test(c.chave)) return;
+    var v = g.V ? g.V(c.secao, c.chave) : ''; (Array.isArray(v) ? JSON.stringify(v) : S(v)).split(/[^\d]+/).forEach(function (x) { if (/^\d{6,}$/.test(x)) out[x] = 1; });
+  }); }); });
+  linhasGravadas('origem', 'Recursos').concat(linhasGravadas('origem', 'Contrarrazões'), linhasGravadas('origem', 'Procurações')).forEach(function (l) { JSON.stringify(l).split(/[^\d]+/).forEach(function (x) { if (/^\d{6,}$/.test(x)) out[x] = 1; }); });
+  return out;
+}
+function selecionar(id, on) { A.sel[id] = !!on; redesenhar(); }
+function selecionarTodos(modo) { lista().forEach(function (d) { A.sel[d.id] = modo === 'todos' ? true : modo === 'nenhum' ? false : !!(PRINC[d.k] && d.k !== 'intimacao' && !d.anexo); }); redesenhar(); }
+function secaoDoc(d) { var t = A.docs[d.id] || {}; return '===== ID ' + d.id + ' | ' + d.tipo + ' | ' + (d.desc || d.tipo) + ' | juntado em ' + d.data + (t.fmt === 'pdf' ? ' | pdf ' + (t.pags || 0) + ' pág.' : t.fmt ? ' | ' + t.fmt : '') + (t.ocr ? ' | OCR ' + t.ocr + ' pág.' : '') + ' =====\n' + S(t.texto) + '\n'; }
+function gravarMarcados() {
+  var g = GB(), L = marcados(), cnj = A.cnj || cnjAtual();
+  if (!L.length || !g.api || A.grav) return Promise.resolve();
+  A.grav = { fase: 'lendo', feitos: 0, total: L.length }; A.gravMsg = ''; redesenhar();
+  var falta = L.filter(function (d) { return !(A.docs[d.id] && /^(ok|sem)$/.test(A.docs[d.id].estado)); }), i = 0;
+  function trab() { if (i >= falta.length) return Promise.resolve(); var d = falta[i++]; return extrair(d.id).then(null, function () {}).then(function () { A.grav.feitos++; redesenhar(); }).then(trab); }
+  return Promise.all([trab(), trab(), trab()]).then(function () {
+    A.grav.fase = 'gravando'; redesenhar();
+    /* 1) ficha: uma linha em Outras peças para o que não está em outro campo */
+    var usados = idsNaFicha(), OP = linhasGravadas('origem', 'Outras peças').map(function (x) { return Object.assign({}, x); }), novas = 0;
+    L.forEach(function (d) {
+      if (usados[d.id] || OP.some(function (x) { return S(x.ids).split(/[,;\s]+/).indexOf(d.id) >= 0; })) return;
+      OP.push({ tipo: d.tipo + (d.desc && N(d.desc) !== N(d.tipo) ? ' (' + d.desc + ')' : ''), ids: d.id, data: iso(d.data), texto: S(A.esp[d.id] || '') }); novas++;
+    });
+    var pFicha = novas && g.marcar ? (g.marcar('origem.Outras peças', OP), g.gravar()) : Promise.resolve();
+    /* 2) inteiro teor, em partes de até ~2,5 milhões de caracteres */
+    var lis = lista().map(function (d) { return [d.id, d.tipo, d.desc || d.tipo, '', d.data, d.hora || '', d.anexo ? 'anexo' : '']; });
+    var mov = '===== MOVIMENTAÇÕES (linha do tempo do PJe, mais recente primeiro) =====\n' + movimentos().map(function (m) { return m.data + (m.hora ? ' ' + m.hora : '') + ' · ' + m.t; }).join('\n') + '\n';
+    var lotes = [[]], tam = 0;
+    L.forEach(function (d) { var sec = secaoDoc(d); if (tam + sec.length > 2.5e6 && lotes[lotes.length - 1].length) { lotes.push([]); tam = 0; } lotes[lotes.length - 1].push({ d: d, sec: sec.slice(0, 2.5e6) }); tam += sec.length; });
+    var p = Promise.resolve(), feitos = 0;
+    lotes.forEach(function (lt, k) { p = p.then(function () {
+      var docs = lt.map(function (x) { var t = A.docs[x.d.id] || {}; return { id: x.d.id, tipo: x.d.tipo, descricao: x.d.desc, juntado_por: '', juntado_em: x.d.data, formato: t.fmt || '', paginas: t.pags || 0, caracteres: S(t.texto).length, anexo: !!x.d.anexo, detalhamento: S(A.esp[x.d.id] || ''), paginas_ocr: t.ocr || 0 }; });
+      return g.api('/api/pauta?ficha=1', { method: 'POST', body: JSON.stringify({ cnj: cnj, autos: { lista: k ? [] : lis, mov: k ? '' : mov, docs: docs, secoes: lt.map(function (x) { return { id: x.d.id, sec: x.sec }; }) } }) })
+        .then(function () { lt.forEach(function (x) { A.gravados[x.d.id] = 1; delete A.sel[x.d.id]; }); feitos += lt.length; });
+    }); });
+    var erF = '', erT = '', msg = function (e) { return (e && e.message) || String(e); };
+    return Promise.all([pFicha.then(null, function (e) { erF = msg(e); }), p.then(null, function (e) { erT = msg(e); })]).then(function () {
+      var sem = L.filter(function (d) { return A.docs[d.id] && A.docs[d.id].estado === 'sem'; }).length;
+      var ok = (feitos ? 'Inteiro teor gravado: ' + feitos + ' documento(s)' + (sem ? ' (' + sem + ' sem texto legível)' : '') : '') + (novas && !erF ? (feitos ? '; ' : '') + novas + ' novo(s) em Outras peças' : '');
+      var er = [erT ? 'inteiro teor não gravou (' + erT + ')' : '', erF ? 'ficha não gravou (' + erF + ')' : ''].filter(Boolean).join('; ');
+      A.gravMsg = er ? (ok ? ok + '. ' : '') + 'Não gravou: ' + er + '.' : ok + '.';
+    });
+  }).then(null, function (e) { A.gravMsg = 'Não gravou: ' + ((e && e.message) || e); A.gravErro = true; }).then(function () { A.grav = null; redesenhar(); setTimeout(function () { A.gravErro = false; }, 0); });
+}
+
 /* 0.38 · Peças e documentos (uma só lista): em "Principais", as peças da ficha (sentença ou decisão agravada, origem,
    recursos e contrarrazões, outras peças), cada uma com os seus documentos da cronologia; em "Todos", a cronologia inteira. */
 var GRUPO_DOCS = { 'Sentença': { sentenca: 1 }, 'Recursos e contrarrazões': { apelacao: 1, adesivo: 1, agravo: 1, agint: 1, ed: 1, recurso: 1, contrarrazoes: 1 },
@@ -461,7 +519,7 @@ function principais() { return lista().filter(function (d) { return PRINC[d.k] &
 function espDe(id) { if (id in A.esp) return A.esp[id]; var r = linhasGravadas('origem', 'Outras peças').filter(function (x) { return S(x.ids) === id; })[0]; return r ? S(r.texto) : ''; }
 function linhaDoc(d) {
       var ab = A.abertos[d.id], dd = A.docs[d.id];
-      return '<div class="au-doc' + (d.anexo ? ' anx' : '') + (PRINC[d.k] ? ' pr' : '') + '"><div class="au-h"><span class="au-d">' + esc(d.data) + (d.hora ? '<small>' + esc(d.hora) + '</small>' : '') + '</span>' +
+      return '<div class="au-doc' + (d.anexo ? ' anx' : '') + (PRINC[d.k] ? ' pr' : '') + (marcado(d) ? ' sel' : '') + '"><div class="au-h"><input type="checkbox" class="au-g" data-au-g="' + esc(d.id) + '"' + (marcado(d) ? ' checked' : '') + ' title="Gravar na ficha com o inteiro teor" aria-label="Gravar ' + esc(d.tipo) + ' ID ' + esc(d.id) + ' na ficha"><span class="au-d">' + esc(d.data) + (d.hora ? '<small>' + esc(d.hora) + '</small>' : '') + '</span>' +
         '<div class="au-n"><b>' + esc(d.tipo) + '</b>' + (d.desc && N(d.desc) !== N(d.tipo) ? '<small>' + esc(d.desc) + '</small>' : '') + '</div>' +
         '<button type="button" class="mono lnk" data-copia="' + esc(d.id) + '" title="Copiar o ID">' + esc(d.id) + '</button></div>' +
         '<div class="au-inf">' + [d.rot, d.anexo ? 'anexo' : '', d.origem].filter(Boolean).map(function (x) { return '<span>' + esc(x) + '</span>'; }).join('') + (d.movs && d.movs.length && !d.anexo ? '<small>' + esc(d.movs.join(' · ')) + '</small>' : '') + '</div>' +
@@ -486,10 +544,14 @@ function htmlDocs(pecas) {
   var F = A.filtro === 'todos' ? 'todos' : 'pecas', ok = A.itens && lidoDoProcesso();
   var gr = F === 'pecas' && typeof pecas === 'function' ? pecas() : '';
   var L = ok ? lista() : [], P = ok ? principais() : [];
+  var nSel = ok ? marcados().length : 0;
   var lidos = Object.keys(A.docs).filter(function (k) { return /^(ok|sem)$/.test(A.docs[k].estado); }).length;
   var cab = '<div class="pc-sh"><h3>Peças e documentos</h3><small class="muted">' + (ok ? L.length + ' na cronologia · ' + lidos + ' com texto lido' : 'da ficha do processo') + '</small></div>';
   var seg = ok ? '<div class="au-fx"><span class="seg"><button type="button" data-au="f:pecas" aria-selected="' + (F === 'pecas') + '" title="As peças da ficha com os seus documentos: decisões, recursos, contrarrazões, parecer, procuração, custas e inicial">Principais (' + P.length + ')</button><button type="button" data-au="f:todos" aria-selected="' + (F === 'todos') + '" title="A cronologia inteira do PJe, do mais recente ao mais antigo">Todos (' + L.length + ')</button></span>' +
-    '<button type="button" class="btn line sm" data-au="tudojs"' + (A.todo ? ' disabled' : '') + ' title="Lê o texto de todos os documentos (PDF digitalizado vai ao OCR) e baixa num arquivo, no formato do acervo">' + SVGDL + (A.todo ? 'Lendo ' + A.todo.feitos + '/' + A.todo.total + '…' : 'Inteiro teor (JSON)') + '</button></div>' : '';
+    '<button type="button" class="btn line sm au-js" data-au="tudojs"' + (A.todo ? ' disabled' : '') + ' title="Lê o texto de todos os documentos (PDF digitalizado vai ao OCR) e baixa num arquivo JSON, no formato do acervo" aria-label="Baixar o inteiro teor em JSON">' + SVGDL + (A.todo ? A.todo.feitos + '/' + A.todo.total : 'JSON') + '</button></div>' +
+    '<div class="au-gv"><span class="muted">Marcar: <button type="button" class="lnk" data-au="sel:principais">principais</button> · <button type="button" class="lnk" data-au="sel:todos">todos</button> · <button type="button" class="lnk" data-au="sel:nenhum">nenhum</button></span>' +
+    '<button type="button" class="btn solid sm" data-au="gravar"' + (A.grav || !nSel ? ' disabled' : '') + ' title="Registra os marcados na ficha (Outras peças) e grava o inteiro teor de cada um no acervo">' + (A.grav ? (A.grav.fase === 'lendo' ? 'Lendo ' + A.grav.feitos + '/' + A.grav.total + '…' : 'Gravando…') : 'Gravar ' + nSel + ' na ficha') + '</button></div>' +
+    (A.gravMsg ? '<p class="status' + (/Não gravou/.test(A.gravMsg) ? ' err' : ' ok') + '">' + esc(A.gravMsg) + '</p>' : '') : '';
   var corpo;
   if (F === 'todos') corpo = '<div class="au-docs">' + L.map(linhaDoc).join('') + '</div>';
   else {
@@ -627,6 +689,8 @@ function clique(b) {
   else if (a === 'princ') extrairPrincipais();
   else if (a === 'aplicar') aplicar();
   else if (a === 'desfazer') desfazerAuto();
+  else if (a === 'gravar') gravarMarcados();
+  else if (/^sel:/.test(a)) selecionarTodos(a.slice(4));
   else if (/^f:/.test(a)) { A.filtro = a.slice(2); redesenhar(); }
   else if (/^ext:/.test(a)) { var id = a.slice(4), d = A.docs[id]; if (d && /^(ok|sem)$/.test(d.estado)) { A.abertos[id] = !A.abertos[id]; redesenhar(); } else { A.abertos[id] = true; extrair(id); } }
   else if (a === 'tudojs') baixarTudo();
@@ -641,7 +705,7 @@ function especificar(id, v) { A.esp[id] = v; clearTimeout(A.tEsp); A.tEsp = setT
 function especificarJa(id) { if (id in A.esp) { clearTimeout(A.tEsp); gravarEspecificacao(id); } }
 
 document.addEventListener('muta:prontuario', function () { var c = cnjAtual(); if (A.cnj && c && Muta.chaveProcesso(A.cnj) !== Muta.chaveProcesso(c)) { A.sug = null; } });
-window.MutaAutos = { barra: function () { var tela = window.MutaPje && window.MutaPje.tela ? window.MutaPje.tela() : ''; if (!A.itens || !lidoDoProcesso()) return '<div class="bar au-bl rt-ler">' + botaoLer() + '<small class="muted">' + (tela === 'autos' ? 'Leia os autos para conferir.' : 'Abra os autos digitais no PJe.') + '</small></div>'; return '<div class="bar au-bl rt-ler">' + botaoLer() + '<button type="button" class="btn line sm" data-au="princ"' + (A.fila ? ' disabled' : '') + '>' + (A.fila ? 'Lendo ' + A.fila + '…' : 'Peças principais') + '</button></div>' + htmlAuto(true); }, sugestoes: function () { if (!A.itens || !lidoDoProcesso()) return []; if (!A.sug) calcular(); return A.sug || []; }, ler: ler, extrair: extrair, extrairPrincipais: extrairPrincipais, htmlDocs: htmlDocs, htmlSituacao: htmlSituacao, htmlConferencia: htmlConferencia, htmlPreencher: htmlPreencher, htmlLeitura: htmlLeitura, docsDoGrupo: docsDoGrupo, htmlConferir: htmlConferir, htmlAuto: htmlAuto, preenchido: preenchido, autoLigado: autoLigado, autoLigar: autoLigar, autoPreencher: autoPreencher,
+window.MutaAutos = { barra: function () { var tela = window.MutaPje && window.MutaPje.tela ? window.MutaPje.tela() : ''; if (!A.itens || !lidoDoProcesso()) return '<div class="bar au-bl rt-ler">' + botaoLer() + '<small class="muted">' + (tela === 'autos' ? 'Leia os autos para conferir.' : 'Abra os autos digitais no PJe.') + '</small></div>'; return '<div class="bar au-bl rt-ler">' + botaoLer() + '<button type="button" class="btn line sm" data-au="princ"' + (A.fila ? ' disabled' : '') + '>' + (A.fila ? 'Lendo ' + A.fila + '…' : 'Peças principais') + '</button></div>' + htmlAuto(true); }, sugestoes: function () { if (!A.itens || !lidoDoProcesso()) return []; if (!A.sug) calcular(); return A.sug || []; }, ler: ler, extrair: extrair, extrairPrincipais: extrairPrincipais, htmlDocs: htmlDocs, htmlSituacao: htmlSituacao, htmlConferencia: htmlConferencia, htmlPreencher: htmlPreencher, htmlLeitura: htmlLeitura, docsDoGrupo: docsDoGrupo, selecionar: selecionar, gravarMarcados: gravarMarcados, marcados: marcados, htmlConferir: htmlConferir, htmlAuto: htmlAuto, preenchido: preenchido, autoLigado: autoLigado, autoLigar: autoLigar, autoPreencher: autoPreencher,
   clique: clique, marcarSugestao: marcarSugestao, especificar: especificar, especificarJa: especificarJa, lista: lista, alertas: alertas, md: md, estado: function () { return A; },
   /* para testes: carrega uma cronologia e textos sem o PJe */
   _carregar: function (r, textos) { A.itens = r.itens; A.idp = r.idp || ''; A.host = r.host || ''; A.cnj = r.numero || ''; A.em = Date.now(); A.docs = {}; Object.keys(textos || {}).forEach(function (id) { A.docs[id] = { estado: 'ok', texto: textos[id], fmt: 'html', pags: 0 }; }); A.sug = null; } };
