@@ -20,8 +20,9 @@ test('prévia do painel: mesmos arquivos da extensão, shim antes dos scripts e 
   new Function(fs.readFileSync(path.join(pn, 'shim-previa.js'), 'utf8'));
 });
 
-test('prévia do painel: por padrão nada é gravado (o shim bloqueia POST, PUT e DELETE, fora o login)', () => {
+test('prévia do painel: por padrão nada é gravado (o shim bloqueia POST, PUT e DELETE, fora o login, Diligências e Deliberações)', () => {
   const shim = fs.readFileSync(path.join(ROOT, 'scripts/extensao/previa/shim.js'), 'utf8');
-  assert.match(shim, /m !== 'GET' && m !== 'HEAD' && !grava && !\/\\\/api\\\/login/);
+  /* 0.48.1: Diligências e Deliberações (/api/pendencias e /api/painel?cmt=1) gravam sempre; o resto continua bloqueado */
+  assert.match(shim, /m !== 'GET' && m !== 'HEAD' && !grava && !vivo && !\/\\\/api\\\/login/);
   assert.match(shim, /status: 423/);
 });

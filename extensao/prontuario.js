@@ -272,7 +272,7 @@ function abrir(chave,origem){
   else if(r==='novo')setStatus(chaveAtual==='avulso'?'Prontuário avulso em branco.':'Novo prontuário para '+state.full.caso.numero+'. Ele é salvo quando você preencher algum campo.');
   return true;
 }
-$('pront-lista').addEventListener('change',function(){
+var PL=$('pront-lista');if(PL)PL.addEventListener('change',function(){
   var v=this.value;
   if(window.MutaPje&&window.MutaPje.manual)window.MutaPje.manual(v);
   abrir(v);

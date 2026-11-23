@@ -5,6 +5,12 @@ Nome desde a 0.19.3 (antes: Muta). Os identificadores internos (`window.Muta*`, 
 Extensão do Chrome/Edge (Manifest V3) que abre o **Muta** num painel lateral, ao lado dos autos e das tarefas do PJe 2º grau do TRF-3.
 Base: o HTML independente *muta-independente-prontuario-completo* (Prontuário + Acervo).
 
+## O que muda na 0.48.1 · sem "Prontuários salvos"; Diligências completas
+
+- Saiu o seletor "Prontuários salvos" do topo (prontuário local antigo); o painel segue o processo aberto no PJe.
+- **Diligências**: além de etapa e diligência nova, editar (título, destinatário, prioridade, prazo, processo, descrição), excluir (só quem criou, com confirmação) e responder as dirigidas a quem está conectado (conclui, salvo "manter aberta").
+- Na prévia (/extensao/previa/), Diligências e Deliberações gravam sempre, sem depender de "Gravar de verdade".
+
 ## O que muda na 0.48 · Diligências e Deliberações; Controle só do gestor; etiquetas personalizadas para todos
 
 - **Diligências** (Desembargador e gestor): o quadro de diligências do Ex Officio, pela mesma API (`/api/pendencias`). Filtros Comigo | Que criei | Todas, concluídas sob demanda, mudança de etapa e diligência nova (o processo aberto vem preenchido). Contador na aba: diligências abertas com quem está conectado.

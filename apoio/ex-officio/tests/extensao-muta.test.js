@@ -624,3 +624,10 @@ test('extensão 0.48: abas Diligências e Deliberações (Desembargador e gestor
   assert.match(c, /function etqLigadas\(\)/); assert.match(c, /function botaoEtq\(\)/); assert.match(c, /if \(!E \|\| !E\.categoriaDe \|\| !etqLigadas\(\)\) return;/);
   assert.match(read('apoio/ex-officio/api/pendencias.js'), /PUT \{id,_rev,…\} altera/);
 });
+
+test('extensão 0.48.1: sem o seletor de prontuários salvos; Diligências com editar, excluir e responder; a prévia grava Diligências e Deliberações', () => {
+  const h = read('extensao/painel.html'), x = read('extensao/gestao.js'), sh = read('scripts/extensao/previa/shim.js');
+  assert.doesNotMatch(h, /<select id="pront-lista"/);
+  assert.match(x, /function formDil\(t\)/); assert.match(x, /method: 'DELETE'/); assert.match(x, /function responderDil\(f\)/); assert.match(x, /data-gx-form="dresp"/);
+  assert.match(sh, /var vivo = \/\\\/api\\\/pendencias/);
+});

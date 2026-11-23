@@ -38,7 +38,7 @@
   var ETAPAS = [['todo', 'A fazer'], ['doing', 'Em andamento'], ['review', 'Em revisão'], ['done', 'Concluída']];
   var NOME_ET = {}; ETAPAS.forEach(function (e) { NOME_ET[e[0]] = e[1]; });
   var URG = ['Urgente', 'Alta', 'Média', 'Baixa'];
-  var D = { f: 'comigo', conc: false, nova: false, lista: null, equipe: [], erro: '', msg: '', lendo: false, abertos: {} };
+  var D = { f: 'comigo', conc: false, nova: false, lista: null, equipe: [], erro: '', msg: '', lendo: false, abertos: {}, ed: {}, exc: {}, resp: {} };
   function lerDil() {
     if (!ses || !pode(quem())) return Promise.resolve();
     D.lendo = true; pintarDil();
@@ -58,6 +58,8 @@
   }
   function abertasComigo() { var u = quem().usuario; return (D.lista || []).filter(function (t) { return t.stage !== 'done' && filtro(t, 'comigo', u); }); }
   function itemDil(t) {
+    if (D.ed[t.id]) return '<article class="gx-it" data-id="' + esc(t.id) + '">' + formDil(t) + '</article>';
+    var u = quem().usuario, minha = norm(t.assignee) === norm(u), criei = norm(t.creator) === norm(u);
     var venc = t.stage !== 'done' && t.dueDate && t.dueDate < hoje();
     var desc = String(t.description || ''), longa = desc.length > 220, ab = D.abertos[t.id];
     return '<article class="gx-it' + (venc ? ' venc' : '') + (t.stage === 'done' ? ' feita' : '') + '" data-id="' + esc(t.id) + '">' +
@@ -68,18 +70,23 @@
       (desc ? '<p class="gx-tx">' + esc(longa && !ab ? desc.slice(0, 220) + '…' : desc) + (longa ? ' <button type="button" class="lnk" data-gx-mais="' + esc(t.id) + '">' + (ab ? 'menos' : 'ler tudo') + '</button>' : '') + '</p>' : '') +
       (t.resposta ? '<p class="gx-ob">Resposta' + (t.respondidoPor ? ' de ' + esc(t.respondidoPor) : '') + ': ' + esc(t.resposta) + '</p>' : '') +
       '<div class="gx-ac"><label class="gx-et">Etapa <select data-gx-etapa="' + esc(t.id) + '">' + ETAPAS.map(function (e) { return '<option value="' + e[0] + '"' + (e[0] === (t.stage || 'todo') ? ' selected' : '') + '>' + e[1] + '</option>'; }).join('') + '</select></label>' +
-      '<small class="muted">' + esc(diaMes(t.atualizadoEm || t.criadoEm)) + (t.atualizadoPor ? ' · ' + esc(t.atualizadoPor) : '') + '</small></div></article>';
+      '<span class="gx-bt">' + (minha && t.stage !== 'done' ? '<button type="button" class="lnk" data-gx-dr="' + esc(t.id) + '">responder</button>' : '') + '<button type="button" class="lnk" data-gx-ed="' + esc(t.id) + '">editar</button>' + (criei ? '<button type="button" class="lnk gx-del" data-gx-exc="' + esc(t.id) + '">excluir</button>' : '') + '</span>' +
+      '<small class="muted">' + esc(diaMes(t.atualizadoEm || t.criadoEm)) + (t.atualizadoPor ? ' · ' + esc(t.atualizadoPor) : '') + '</small></div>' +
+      (D.exc[t.id] ? '<div class="gx-ac gx-cf"><span>Excluir a diligência "' + esc(t.title || '') + '"? Ela sai do quadro da equipe.</span><span><button type="button" class="lnk" data-gx-exc="' + esc(t.id) + '">cancelar</button><button type="button" class="btn solid sm" data-gx-excok="' + esc(t.id) + '">Excluir</button></span></div>' : '') +
+      (D.resp[t.id] ? '<form class="gx-f" data-gx-form="dresp" data-id="' + esc(t.id) + '"><textarea name="texto" rows="3" maxlength="2000" placeholder="Resposta a ' + esc(t.creator || 'quem criou') + ' (conclui a diligência)" required></textarea><label class="gx-conc"><input type="checkbox" name="manter"> manter aberta</label><span class="gx-fb"><button type="button" class="lnk" data-gx-dr="' + esc(t.id) + '">cancelar</button><button type="submit" class="btn solid sm">Responder</button></span></form>' : '') +
+      '</article>';
   }
-  function formNova() {
-    var cnj = window.MutaGabinete && window.MutaGabinete.cnj ? window.MutaGabinete.cnj() : '';
-    var eq = D.equipe.slice(); if (eq.indexOf('CM') < 0 && quem().gestor) eq.push('CM');
-    return '<form class="gx-f" data-gx-form="nova"><input name="title" maxlength="200" placeholder="Título da diligência" required>' +
-      '<div class="gx-fr"><label>Para <select name="assignee"><option value="">(sem destinatário)</option>' + eq.map(function (n) { return '<option>' + esc(n) + '</option>'; }).join('') + '</select></label>' +
-      '<label>Prioridade <select name="urgency">' + URG.map(function (u) { return '<option' + (u === 'Média' ? ' selected' : '') + '>' + u + '</option>'; }).join('') + '</select></label>' +
-      '<label>Prazo <input type="date" name="dueDate"></label></div>' +
-      '<label class="gx-fl">Processo <input name="numero" value="' + esc(cnj) + '" placeholder="número CNJ (opcional)"></label>' +
-      '<textarea name="description" rows="3" maxlength="2000" placeholder="O que fazer"></textarea>' +
-      '<span class="gx-fb"><button type="button" class="lnk" data-gx="cancelar-nova">cancelar</button><button type="submit" class="btn solid sm">Criar diligência</button></span></form>';
+  /* formulário da diligência: nova (t vazio) ou edição de uma existente */
+  function formDil(t) {
+    var nova = !t; t = t || { numero: window.MutaGabinete && window.MutaGabinete.cnj ? window.MutaGabinete.cnj() : '', urgency: 'Média' };
+    var eq = D.equipe.slice(); if (eq.indexOf('CM') < 0) eq.push('CM'); if (t.assignee && eq.map(norm).indexOf(norm(t.assignee)) < 0) eq.push(t.assignee);
+    return '<form class="gx-f" data-gx-form="' + (nova ? 'nova' : 'editar') + '"' + (nova ? '' : ' data-id="' + esc(t.id) + '"') + '><input name="title" maxlength="200" placeholder="Título da diligência" value="' + esc(t.title || '') + '" required>' +
+      '<div class="gx-fr"><label>Para <select name="assignee"><option value="">(sem destinatário)</option>' + eq.map(function (n) { return '<option' + (norm(n) === norm(t.assignee) ? ' selected' : '') + '>' + esc(n) + '</option>'; }).join('') + '</select></label>' +
+      '<label>Prioridade <select name="urgency">' + URG.map(function (u) { return '<option' + (u === (t.urgency || 'Média') ? ' selected' : '') + '>' + u + '</option>'; }).join('') + '</select></label>' +
+      '<label>Prazo <input type="date" name="dueDate" value="' + esc(t.dueDate || '') + '"></label></div>' +
+      '<label class="gx-fl">Processo <input name="numero" value="' + esc(t.numero || '') + '" placeholder="número CNJ (opcional)"></label>' +
+      '<textarea name="description" rows="3" maxlength="2000" placeholder="O que fazer">' + esc(t.description || '') + '</textarea>' +
+      '<span class="gx-fb"><button type="button" class="lnk" data-gx="' + (nova ? 'cancelar-nova' : 'cancelar-ed') + '"' + (nova ? '' : ' data-id="' + esc(t.id) + '"') + '>cancelar</button><button type="submit" class="btn solid sm">' + (nova ? 'Criar diligência' : 'Gravar') + '</button></span></form>';
   }
   function pintarDil() {
     var c = $('dil-app'); if (!c) return;
@@ -93,7 +100,7 @@
     c.innerHTML = '<div class="gx-top"><div><b>Diligências</b><small class="muted">quadro da equipe no Ex Officio</small></div>' +
       '<span><button type="button" class="btn sm" data-gx="nova"' + (D.nova ? ' hidden' : '') + '>+ Nova</button><button type="button" class="lnk" data-gx="ler-dil" title="Ler de novo">' + (D.lendo ? 'lendo…' : 'atualizar') + '</button>' +
       '<a class="lnk" target="_blank" rel="noopener" href="' + esc(site()) + (q.des && !q.gestor ? '/cmt/' : '/exofficio/#pendencias') + '">abrir no Ex Officio</a></span></div>' +
-      (D.nova ? formNova() : '') +
+      (D.nova ? formDil() : '') +
       '<div class="seg pmodos gx-modos" role="tablist" aria-label="Filtro das diligências">' + tab('comigo', 'Comigo') + tab('criei', 'Que criei') + tab('todas', 'Todas') + '</div>' +
       '<label class="gx-conc"><input type="checkbox" data-gx-conc' + (D.conc ? ' checked' : '') + '> mostrar as concluídas</label>' +
       (D.msg ? '<p class="gx-msg' + (/^Não|erro/i.test(D.msg) ? ' err' : '') + '">' + esc(D.msg) + '</p>' : '') +
@@ -109,12 +116,37 @@
     }).catch(function (e) { D.msg = 'Não gravou: ' + (e.message || 'erro'); if (e.status === 409) lerDil(); else pintarDil(); });
   }
   function criar(f) {
-    var b = {}; ['title', 'assignee', 'urgency', 'dueDate', 'numero', 'description'].forEach(function (k) { b[k] = String((f.elements[k] || {}).value || '').trim(); });
+    var b = campos(f);
     if (!b.title) return;
     var bt = f.querySelector('[type=submit]'); if (bt) bt.disabled = true;
     ses.api('/api/pendencias', { method: 'POST', body: JSON.stringify(b) }).then(function () {
       D.nova = false; D.msg = 'Diligência criada: ' + b.title; D.f = norm(b.assignee) === norm(quem().usuario) ? 'comigo' : 'criei'; return lerDil();
     }).catch(function (e) { if (bt) bt.disabled = false; D.msg = 'Não criou: ' + (e.message || 'erro'); pintarDil(); });
+  }
+
+  function campos(f) { var b = {}; ['title', 'assignee', 'urgency', 'dueDate', 'numero', 'description'].forEach(function (k) { b[k] = String((f.elements[k] || {}).value || '').trim(); }); return b; }
+  function editar(f) {
+    var id = f.getAttribute('data-id'), t = (D.lista || []).filter(function (x) { return x.id === id; })[0]; if (!t) return;
+    var b = campos(f); if (!b.title) return; b.id = id; b._rev = t._rev;
+    var bt = f.querySelector('[type=submit]'); if (bt) bt.disabled = true;
+    ses.api('/api/pendencias', { method: 'PUT', body: JSON.stringify(b) }).then(function (j) {
+      if (j && j.task) Object.assign(t, j.task); else Object.assign(t, b);
+      delete D.ed[id]; D.msg = 'Diligência gravada: ' + (t.title || ''); badges(); pintarDil();
+    }).catch(function (e) { if (bt) bt.disabled = false; D.msg = 'Não gravou: ' + (e.message || 'erro'); if (e.status === 409) { delete D.ed[id]; lerDil(); } else pintarDil(); });
+  }
+  function excluir(id, bt) {
+    if (bt) bt.disabled = true;
+    ses.api('/api/pendencias?id=' + encodeURIComponent(id), { method: 'DELETE' }).then(function () {
+      delete D.exc[id]; D.lista = (D.lista || []).filter(function (x) { return x.id !== id; }); D.msg = 'Diligência excluída.'; badges(); pintarDil();
+    }).catch(function (e) { if (bt) bt.disabled = false; D.msg = 'Não excluiu: ' + (e.message || 'erro'); pintarDil(); });
+  }
+  /* resposta a uma diligência dirigida a quem está conectado: grava a resposta e conclui (como a dúvida no painel /cmt) */
+  function responderDil(f) {
+    var id = f.getAttribute('data-id'), tx = String(f.elements.texto.value || '').trim(); if (!tx) return;
+    var bt = f.querySelector('[type=submit]'); if (bt) bt.disabled = true;
+    ses.api('/api/painel?cmt=1', { method: 'POST', body: JSON.stringify({ acao: 'responder', id: id, texto: tx, manter: !!(f.elements.manter && f.elements.manter.checked), origem: 'extensao' }) }).then(function () {
+      delete D.resp[id]; D.msg = 'Resposta enviada.'; lerDel(); return lerDil();
+    }).catch(function (e) { if (bt) bt.disabled = false; D.msg = 'Não enviou: ' + (e.message || 'erro'); pintarDil(); });
   }
 
   /* ---------- Deliberações ---------- */
@@ -220,6 +252,11 @@
         if (x.dataset.gxMais) { D.abertos[x.dataset.gxMais] = !D.abertos[x.dataset.gxMais]; return pintarDil(); }
         if (x.dataset.gx === 'nova') { D.nova = true; D.msg = ''; pintarDil(); var t = cd.querySelector('[name=title]'); if (t) t.focus(); return; }
         if (x.dataset.gx === 'cancelar-nova') { D.nova = false; return pintarDil(); }
+        if (x.dataset.gx === 'cancelar-ed') { delete D.ed[x.dataset.id]; return pintarDil(); }
+        if (x.dataset.gxEd) { D.ed[x.dataset.gxEd] = true; D.msg = ''; return pintarDil(); }
+        if (x.dataset.gxExc) { D.exc[x.dataset.gxExc] = !D.exc[x.dataset.gxExc]; return pintarDil(); }
+        if (x.dataset.gxExcok) return excluir(x.dataset.gxExcok, x);
+        if (x.dataset.gxDr) { D.resp[x.dataset.gxDr] = !D.resp[x.dataset.gxDr]; pintarDil(); var ta = cd.querySelector('[data-gx-form="dresp"][data-id="' + x.dataset.gxDr + '"] textarea'); if (ta) ta.focus(); return; }
         if (x.dataset.gx === 'ler-dil') { D.msg = ''; return lerDil(); }
       });
       cd.addEventListener('change', function (e) {
@@ -227,7 +264,10 @@
         if (i.hasAttribute('data-gx-conc')) { D.conc = i.checked; return pintarDil(); }
         if (i.dataset.gxEtapa) return etapa(i.dataset.gxEtapa, i.value, i);
       });
-      cd.addEventListener('submit', function (e) { var f = e.target.closest('[data-gx-form="nova"]'); if (!f) return; e.preventDefault(); criar(f); });
+      cd.addEventListener('submit', function (e) {
+        var f = e.target.closest('[data-gx-form]'); if (!f) return; e.preventDefault();
+        var k = f.getAttribute('data-gx-form'); if (k === 'nova') criar(f); else if (k === 'editar') editar(f); else if (k === 'dresp') responderDil(f);
+      });
     }
     if (cx) {
       cx.addEventListener('click', function (e) {

@@ -18,7 +18,7 @@
     'tab-acervo': 'Ementário: precedentes do Relator e do gabinete', 'tab-par': 'Parágrafos-padrão do gabinete, para buscar e copiar', 'tab-dir': 'Diretrizes: Manual CMT e lista de caça',
     'tab-ajuda': 'Ajuda e instalação' };
   var ID = { 'pje-seguir': 'Acompanhar o PJe: o painel segue o processo aberto na aba do PJe (desligado, congela o processo atual)',
-    'pje-aba': 'Trocar de aba: autos digitais abrem o modo Autos; a tarefa com o editor abre a aba Minuta', 'pront-lista': 'Prontuários salvos: reabre qualquer processo já visto',
+    'pje-aba': 'Trocar de aba: autos digitais abrem o modo Autos; a tarefa com o editor abre a aba Minuta',
     'pje-tema': 'Tema claro ou escuro', 'sn-tp': 'Tipo da nova sinalização (pendência é aviso; intercorrência retém a liberação)', 'sn-tx': 'Descreva a sinalização e tecle Enter para incluir',
     'nt-tx': 'Escreva a nota e tecle Ctrl+Enter (ou "+ Incluir nota"); ela entra no log com data, hora e autor', 'pm-ad-tx': 'Assunto detalhado: Enter grava, Esc cancela',
     'pm-des': 'Nome de quem fica com a etapa: Enter grava, Esc cancela', 'pm-pron': 'Tipo de ato: com acórdão o processo vai à sessão; os demais são decisão do relator' };

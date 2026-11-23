@@ -4,7 +4,8 @@
    - chrome.tabs.sendMessage leva à página de fora os pedidos de leitura do editor e dos autos ('previa-pedido') e
      devolve a resposta ('previa-resposta'), como o conteudo-pje.js faria no PJe;
    - por padrão, nada é gravado: POST, PUT e DELETE à API (fora o login) voltam com erro 423 e são listados na página
-     de fora ('previa-bloqueio'); "Gravar de verdade" ('previa-grava') libera.
+     de fora ('previa-bloqueio'); "Gravar de verdade" ('previa-grava') libera. Exceção: as abas Diligências e
+     Deliberações (/api/pendencias e /api/painel?cmt=1) gravam sempre.
    Os arquivos do painel são os mesmos da extensão publicada; só este arquivo e a troca do endereço do site são da prévia. */
 (function () {
   'use strict';
@@ -91,7 +92,9 @@
   var f0 = window.fetch.bind(window);
   window.fetch = function (u, op) {
     var m = String((op && op.method) || (u && u.method) || 'GET').toUpperCase(), url = String((u && u.url) || u);
-    if (m !== 'GET' && m !== 'HEAD' && !grava && !/\/api\/login(\?|$)/.test(url)) {
+    /* 0.48.1: Diligências e Deliberações gravam sempre (são trabalho de verdade do Desembargador e do gestor, não demonstração) */
+    var vivo = /\/api\/pendencias(\?|$)/.test(url) || /\/api\/painel\?cmt=1(&|$)/.test(url);
+    if (m !== 'GET' && m !== 'HEAD' && !grava && !vivo && !/\/api\/login(\?|$)/.test(url)) {
       if (P) P.postMessage({ tipo: 'previa-bloqueio', metodo: m, url: url.replace(location.origin, '') }, '*');
       return Promise.resolve(new Response(JSON.stringify({ erro: 'Prévia do painel: nada é gravado (ligue "Gravar de verdade" na página da prévia).' }),
         { status: 423, headers: { 'Content-Type': 'application/json' } }));
