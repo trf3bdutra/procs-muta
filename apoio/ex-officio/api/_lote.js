@@ -165,7 +165,7 @@ function agrupar(lote) {
 
 /* Índices de pauta: projeção da sessão, sem copiar ou modificar os processos.
    Grupos por assunto são o agrupamento inicial para casos/modelos correlatos. */
-function tipoLote(l) { if (l.tipo === 'triagem') return 'triagem'; if (l.tipo === 'selecao') return 'selecao'; return l.tipo === 'pauta' && (l.sessoes || []).length === 1 ? 'pauta' : 'avulso'; }
+function tipoLote(l) { if (l.tipo === 'triagem') return 'triagem'; if (l.tipo === 'selecao') return 'selecao'; if (['monocratica', 'interlocutoria', 'despacho'].includes(l.tipo)) return l.tipo; return l.tipo === 'pauta' && (l.sessoes || []).length === 1 ? 'pauta' : 'avulso'; }
 function idPauta(s) { return 'pauta-' + s; }
 function rotuloAssunto(x) {
   return String(x.assunto || x.classe || 'Sem assunto informado').trim().replace(/\s+/g,' ').slice(0,130);
@@ -357,7 +357,7 @@ module.exports = async (req, res) => {
         String(a.titulo).localeCompare(String(b.titulo),'pt-BR'));
       return res.status(200).json({ usuario:u, gestor, relator, modo,
         lotes, sessoes, calendario:modo==='cg'?agenda:[],
-        colecoes:{avulsas:lotes.filter(l=>l.tipo==='avulso'),pauta:{sessoes,lotes:lotes.filter(l=>l.tipo==='pauta')},triagem:lotes.filter(l=>l.tipo==='triagem'),selecao:lotes.filter(l=>l.tipo==='selecao'&&!l.arquivado)} });
+        colecoes:{avulsas:lotes.filter(l=>l.tipo==='avulso'),pauta:{sessoes,lotes:lotes.filter(l=>l.tipo==='pauta')},triagem:lotes.filter(l=>l.tipo==='triagem'),decisoes:lotes.filter(l=>['monocratica','interlocutoria','despacho'].includes(l.tipo)),selecao:lotes.filter(l=>l.tipo==='selecao'&&!l.arquivado)} });
     }
     if (!ID.test(id)) return res.status(400).json({ erro: 'lote inválido' });
     const mx = String(q.minuta || '');

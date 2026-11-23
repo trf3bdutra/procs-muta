@@ -625,7 +625,7 @@ async function indiceAvulsas(tri){
   const muda=S.itens.some(x=>{const z=S.por[x.cnj];return (idx[x.cnj]||[]).some(f=>f.lote!==(z&&z.lote))});
   if(muda)render();
 }
-const tipoCol=l=>l.tipo==='pauta'?'pauta':l.tipo==='triagem'?'triagem':l.tipo==='selecao'?'selecao':'avulsa';
+const tipoCol=l=>l.tipo==='pauta'?'pauta':l.tipo==='triagem'?'triagem':l.tipo==='selecao'?'selecao':MONO[l.tipo]?l.tipo:'avulsa';
 const ROT_COL={pauta:'Lote da pauta',selecao:'Seleção prévia',triagem:'Coleção de triagem',avulsa:'Coleção avulsa'};
 async function carregarMono(k){
   S.mono=k;S.colTipo=k;S.loteSel='';S.colTit=MONO[k];S.loteSes='';S.por={};S.lotes={};S.mxSes=null;
@@ -641,7 +641,8 @@ async function carregarMono(k){
   publicados().catch(()=>{});
 }
 async function carregarLote(id,ses){
-  S.mono='';
+  const lt=(S.lotesLista||[]).find(x=>x.id===id), dec=lt&&MONO[lt.tipo]?lt.tipo:'';
+  S.mono=dec;
   msg('Lendo a coleção…');
   const R=await get('/api/painel?lote=1&id='+encodeURIComponent(id)+MODO()), l=R.lote||{itens:[]};
   S.loteSel=l.id;S.colTit=l.titulo||l.id;S.loteSes=ses||'';S.lotes={[l.id]:l};S.por={};
@@ -650,7 +651,7 @@ async function carregarLote(id,ses){
   const P={}, ss=[...new Set((l.itens||[]).map(i=>i.sessao).filter(Boolean))];
   await Promise.all(ss.map(s=>get('/api/pauta?data='+s).then(d=>(d.itens||[]).forEach(x=>{P[x.cnj]=x})).catch(()=>{})));
   S.itens=(l.itens||[]).map(it=>{S.por[it.processo]={lote:l.id,titulo:S.colTit,it};const e=it.equipe||{},d=e.datas||{};
-    return P[it.processo]||{cnj:it.processo,item:it.item!=null?String(it.item):'',classe:it.recurso||'',assunto:it.assunto||'',partes:it.partes||'',servidor:e.minuta||'',corretor:e.correcao||'',dataMinuta:d.minuta||'',dataCorrecao:d.correcao||'',dataLiberacao:d.liberacao||'',ctl:{}}});
+    return P[it.processo]||{cnj:it.processo,item:it.item!=null?String(it.item):'',classe:it.recurso||'',assunto:it.assunto||'',partes:it.partes||'',servidor:e.minuta||'',corretor:e.correcao||'',dataMinuta:d.minuta||'',dataCorrecao:d.correcao||'',dataLiberacao:d.liberacao||'',dataAssinatura:d.assinatura||'',ctl:{tipoAto:dec?(it.ato||(it.triagem||{}).ato||MONO[dec]):''},_mono:!!dec}});
   S.linhas=S.itens.map(x=>linha(x));
   if(!S.linhas.some(r=>r.meu))S.vista='todos';
   const eu=$('#eu');if(S.usuario){eu.hidden=false;eu.textContent='★ '+S.usuario}
@@ -697,7 +698,7 @@ function seletorColecoes(){
   const optTri=tar.map(x=>`<optgroup label="${esc(x)}">${tri.filter(l=>(l.tarefa||'Triagem')===x).map(opt).join('')}</optgroup>`).join('');
   const bt=(k,r)=>`<button type="button" data-ctipo="${k}" aria-pressed="${t===k}">${r}</button>`;
   return `<div class="col-areas"><div class="col-tipos" role="group" aria-label="Tipo de coleção">${bt('pauta','Pauta')}${bt('monocratica','Monocrática')}${bt('interlocutoria','Interlocutória')}${bt('despacho','Despacho')}${bt('avulsa','Avulsas')}</div>
-   ${MONO[t]?`<div class="col-area"><p class="lx-lt-d" style="margin:0">${esc(MONO[t])}: decisões registradas no Ex Officio, pelo tipo de ato${S.monoD?' · '+(S.monoD.itens||[]).filter(x=>tipoMono(x)===t).length:''}.</p></div>`:''}
+   ${MONO[t]?(()=>{const dl=L.filter(l=>l.tipo===t);return `<div class="col-area">${dl.length?`<label class="lx-sel"><span class="cl">${esc(MONO[t])}</span><select data-dec="${t}"><option value=""${S.loteSel?'':' selected'}>Decisões registradas no Ex Officio${S.monoD?' · '+(S.monoD.itens||[]).filter(x=>tipoMono(x)===t).length:''}</option>${dl.map(l=>`<option value="${esc(l.id)}"${l.id===S.loteSel?' selected':''}>${esc(l.titulo)} · ${l.total}</option>`).join('')}</select></label>`:`<p class="lx-lt-d" style="margin:0">${esc(MONO[t])}: decisões registradas no Ex Officio, pelo tipo de ato${S.monoD?' · '+(S.monoD.itens||[]).filter(x=>tipoMono(x)===t).length:''}.</p>`}</div>`})():''}
    <div class="col-area"${t==='pauta'?'':' hidden'}><label class="lx-sel"><span class="cl">Sessão ativa</span><select id="ses">${S.sessoes.map(s=>`<option value="${s.date}"${s.date===S.data&&(!S.loteSel||S.loteSes)?' selected':''}>${br(s.date)} · ${s.processos}</option>`).join('')}${S.loteSel&&!S.loteSes&&t==='pauta'?'<option value="" selected>—</option>':''}</select></label>
     ${daSes.length?`<label class="lx-sel"><span class="cl">Lotes desta pauta</span><select data-col="pauta"><option value="">Pauta inteira</option>${daSes.map(optS).join('')}</select></label>`:''}</div>
    <div class="col-area"${t==='avulsa'?'':' hidden'}><label class="lx-sel"><span class="cl">Coleção avulsa</span><select data-col="1"><option value="">Selecione uma coleção</option>${optAv}</select></label></div></div>`;
@@ -716,7 +717,7 @@ function render(){
     <p class="k">Coleções</p>
     ${seletorColecoes()}
     <p class="lx-lt-n">${S.linhas.length} processos${S.usuario?' · '+meus+' com '+esc(S.usuario.toUpperCase())+' na correção':''}</p>
-    <p class="lx-lt-s">${S.mono?'Decisões registradas no Ex Officio':S.loteSel?(S.loteSes?'Sessão de '+br(S.loteSes)+' · ':'')+esc(S.colTit):'Sessão de '+br(S.data)}</p>
+    <p class="lx-lt-s">${S.mono?(S.loteSel?esc(S.colTit):'Decisões registradas no Ex Officio'):S.loteSel?(S.loteSes?'Sessão de '+br(S.loteSes)+' · ':'')+esc(S.colTit):'Sessão de '+br(S.data)}</p>
    </div>
    <p class="lx-nk">Nesta página</p>
    <a class="ir" href="#fluxo"><i>01</i><span>Fluxo da minuta</span></a>
@@ -729,7 +730,7 @@ function render(){
    <p class="nota">Registrar versão, conformidade e Compendium seguem no <a href="/amicus/collectio/classico/">Collectio clássico</a>; a marca do PJe e a matriz se fazem aqui.</p>
   </nav>
   <div class="main">
-   <div class="lx-h"><div><p class="k">${S.mono?'Coleção de decisões · '+esc(MONO[S.mono]):S.loteSel?(S.loteSes?'Coleção de pauta · sessão de '+br(S.loteSes)+' · '+esc(S.colTit):esc(ROT_COL[S.colTipo])+' · '+esc(S.colTit)):'Coleção de pauta · sessão de '+br(S.data)}</p><h1>${S.vista==='meus'?'Minhas <em class="it">correções.</em>':(S.loteSel||S.mono?'Toda a <em class="it">coleção.</em>':'Toda a <em class="it">pauta.</em>')}</h1></div>
+   <div class="lx-h"><div><p class="k">${S.mono?'Coleção de decisões · '+esc(MONO[S.mono])+(S.loteSel?' · '+esc(S.colTit):''):S.loteSel?(S.loteSes?'Coleção de pauta · sessão de '+br(S.loteSes)+' · '+esc(S.colTit):esc(ROT_COL[S.colTipo])+' · '+esc(S.colTit)):'Coleção de pauta · sessão de '+br(S.data)}</p><h1>${S.vista==='meus'?'Minhas <em class="it">correções.</em>':(S.loteSel||S.mono?'Toda a <em class="it">coleção.</em>':'Toda a <em class="it">pauta.</em>')}</h1></div>
     <p class="lx-st">${S.usuario?esc(S.usuario)+' · ':''}${esc0.length} de ${S.linhas.length} processos<br>${alertas.length} com alerta</p></div>
    <p class="lead">${S.mono?'O caminho de cada decisão, da minuta à assinatura: cada etapa mostra o que falta e em quais processos.':completo()?'O caminho de cada minuta da sua correção, da correção à versão final do PJe, numa página só: cada etapa mostra o que fazer agora e em quais processos.':'O caminho de cada minuta da pauta, da correção à liberação no PJe: cada etapa mostra o que falta e em quais processos.'} Clique num processo para ver as versões e o que mudou.</p>
    ${PREVIA?'<span class="aviso">Prévia · mesmos dados do Collectio</span>':''}
@@ -778,7 +779,7 @@ function renderMesa(){
   S.linhas=S.itens.map(x=>linha(x));
   const esc0=escopo(), lst=filtradas(), n=k=>conta(esc0,k), meus=S.linhas.filter(r=>r.meu).length, alertas=esc0.filter(r=>r.nivel).length;
   const aba=S.aba==='matriz'?'matriz':'lista';
-  const ctx=S.mono?'Coleção de decisões · '+esc(MONO[S.mono]):S.loteSel?(S.loteSes?'Pauta de '+br(S.loteSes)+' · '+esc(S.colTit):esc(ROT_COL[S.colTipo]||'Coleção')+' · '+esc(S.colTit)):'Coleção de pauta · sessão de '+br(S.data);
+  const ctx=S.mono?'Coleção de decisões · '+esc(MONO[S.mono])+(S.loteSel?' · '+esc(S.colTit):''):S.loteSel?(S.loteSes?'Pauta de '+br(S.loteSes)+' · '+esc(S.colTit):esc(ROT_COL[S.colTipo]||'Coleção')+' · '+esc(S.colTit)):'Coleção de pauta · sessão de '+br(S.data);
   const titulo=S.vista==='meus'?'Minhas <em class="it">correções.</em>':(S.loteSel||S.mono?'Toda a <em class="it">coleção.</em>':'Toda a <em class="it">pauta.</em>');
   const sub=S.etapa?esc((etapas().find(e=>e[0]===S.etapa)||[])[2]):S.fora==='retido'?'retirados':'da '+(S.vista==='meus'?'correção':S.loteSel||S.mono?'coleção':'sessão');
   const mini=!!S.latMin, rotAt=(S.linhas.find(r=>r.x.cnj===S.aberto)||{x:{}}).x;
@@ -795,7 +796,7 @@ function renderMesa(){
     <p class="k">Coleções</p>
     ${seletorColecoes()}
     <p class="lx-lt-n">${S.linhas.length} processos${S.usuario?' · '+meus+' com '+esc(S.usuario.toUpperCase())+' na correção':''}</p>
-    <p class="lx-lt-s">${S.mono?'Decisões registradas no Ex Officio':S.loteSel?(S.loteSes?'Sessão de '+br(S.loteSes)+' · ':'')+esc(S.colTit):'Sessão de '+br(S.data)}</p>
+    <p class="lx-lt-s">${S.mono?(S.loteSel?esc(S.colTit):'Decisões registradas no Ex Officio'):S.loteSel?(S.loteSes?'Sessão de '+br(S.loteSes)+' · ':'')+esc(S.colTit):'Sessão de '+br(S.data)}</p>
    </div>
    <p class="lx-nk">Nesta página</p>
    <button type="button" class="ir" data-aba="lista" aria-current="${aba==='lista'}"><i>01</i><span>Lista</span><small>${lst.length}</small></button>
@@ -957,7 +958,7 @@ function celV([k,rot,f,r],x){const v=f(x)||'',o=r?r(v):null,tip=`data-tip="${esc
   return `<td class="iv${o&&o.c?' '+o.c:''}" ${tip}>${o?esc(o.t):'<span class="vz0">·</span>'}</td>`}
 const ALERTA_F=/intempest|n[ãa]o recolhido|n[ãa]o verificado|irregular|pendente|sem manifesta/i;
 const comFixos=()=>!S.loteSel||!!S.loteSes;
-const chaveMx=()=>S.mono?S.mono:S.loteSel?S.loteSel+'|'+S.loteSes:'pauta-'+S.data;
+const chaveMx=()=>S.loteSel?S.loteSel+'|'+S.loteSes:S.mono?S.mono:'pauta-'+S.data;
 function matrizBase(){
   if(!S.loteSel&&S.mxSes){const M=S.mxSes,itens={};S.itens.forEach(x=>{const m=M.itens[x.cnj],z=S.por[x.cnj],it=z&&z.it;itens[x.cnj]=m?{grupo:m.grupo||'',variacoes:(m.variacoes||[]).slice(),observacao:m.observacao||''}:{grupo:'',variacoes:[],observacao:(it&&it.observacao)||''}});
     return {grupos:M.grupos.map(g=>Object.assign({},g)),colunas:M.colunas.map(c=>Object.assign({},c)),itens}}
@@ -1227,6 +1228,7 @@ function difPal(x,y){
 function ligar(){
   const s=$('#ses');if(s)s.onchange=()=>trocaSessao(s.value);
   $$('[data-ctipo]').forEach(b=>b.onclick=()=>{const k=b.dataset.ctipo;if(MONO[k]){if(S.mono!==k)trocaMono(k);return}S.colTipo=k;if(S.mono&&k==='pauta'){trocaSessao(S.data);return}render()});
+  $$('select[data-dec]').forEach(s=>s.onchange=()=>{if(s.value)trocaColecao(s.value,'');else trocaMono(s.dataset.dec)});
   $$('select[data-col]').forEach(s=>s.onchange=()=>{if(s.value)trocaColecao(s.value,s.dataset.col==='pauta'?S.data:'');else trocaSessao(S.data)});
   $$('[data-grp]').forEach(b=>b.onclick=()=>{const k=b.dataset.grp;S.fechados.has(k)?S.fechados.delete(k):S.fechados.add(k);render()});
   $$('[data-mxvista]').forEach(b=>b.onclick=()=>{S.mxVista=b.dataset.mxvista;S.mxModo='ver';S.mxForm='';render();ir('matriz')});
