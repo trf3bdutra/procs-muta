@@ -5,6 +5,11 @@ Nome desde a 0.19.3 (antes: Muta). Os identificadores internos (`window.Muta*`, 
 Extensão do Chrome/Edge (Manifest V3) que abre o **Muta** num painel lateral, ao lado dos autos e das tarefas do PJe 2º grau do TRF-3.
 Base: o HTML independente *muta-independente-prontuario-completo* (Prontuário + Acervo).
 
+## O que muda na 0.49 · Assinatura nas Deliberações; avisos e inclusão no alto nas sinalizações
+
+- **Deliberações › Assinatura** (primeira sub-aba): as decisões submetidas à assinatura, que estavam no sino › Desembargador. As com registro de urgência ficam no topo, com faixa vermelha e o selo da urgência (tipo, nível, dias). Ações: Marcar assinada e Devolver com apontamento (vira diligência). O sino perdeu a aba do Desembargador.
+- **Sinalizações** (prontuário e quadro do PJe): novo tipo **Aviso** (campo `triagem.Avisos` da ficha), ao lado de Pendência e Intercorrência. Incluir passou a ser como em Notas: botão no alto ("+ Incluir sinalização" no prontuário; "+ Incluir" no quadro do PJe), que abre o campo com o seletor do tipo. No quadro do PJe o seletor também traz Nota, e os campos de inclusão do pé de cada coluna saíram.
+
 ## O que muda na 0.48.2 · Diligências por fase
 
 - A aba Diligências divide a lista em seções recolhíveis por fase do andamento — A fazer, Em andamento, Em revisão e Concluída —, cada uma com o total; Concluída começa fechada e mostra as 30 mais recentes. Mudar a etapa leva o cartão para a seção certa; os filtros Comigo, Que criei e Todas valem dentro das seções.

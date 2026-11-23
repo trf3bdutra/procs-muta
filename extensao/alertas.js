@@ -100,8 +100,9 @@
     var p = $('tu-pop'); if (!p) return;
     var gst = A.gestor0 || (ses && ses.estado().gestor);
     var cm = A.cmt && !A.cmt.fora && !A.cmt.erro, nCm = cm ? (A.cmt.assinatura || []).length + (A.cmt.duvidas || []).length : 0;
-    var abas = (cm && A.cmt.des ? [['cm', 'Desembargador']] : []).concat([['al', 'PJe'], ['app', 'Gabinete']]).concat(gst ? [['ch', 'Chegadas']] : []).concat(cm && !A.cmt.des ? [['cm', 'Assinatura']] : []).concat([['ver', 'Versão']]);   /* 0.48: Prazos e Etiquetas saíram do sino para a aba Controle (só o gestor) */
-    if (A.aba === 'cm' && !cm) A.aba = 'al';
+    /* 0.49: o quadro do Desembargador (para assinar e dúvidas) saiu do sino para a aba Deliberações */
+    var abas = [['al', 'PJe'], ['app', 'Gabinete']].concat(gst ? [['ch', 'Chegadas']] : []).concat([['ver', 'Versão']]);   /* 0.48: Prazos e Etiquetas saíram do sino para a aba Controle (só o gestor) */
+    if (A.aba === 'cm') A.aba = 'al';
     if (A.aba === 'ch' && !gst) A.aba = 'al';
     if (A.aba === 'pz' || A.aba === 'et') A.aba = 'al';
     var h = '<div class="ap-t" role="tablist">' + abas.map(function (a) { return '<button type="button" role="tab" class="ap-tab-' + a[0] + '" data-ap="' + a[0] + '" aria-selected="' + (A.aba === a[0]) + '">' + a[1] + (a[0] === 'al' && A.itens.length ? ' <i>' + A.itens.length + '</i>' : a[0] === 'app' && appPend().length ? ' <i>' + appPend().length + '</i>' : a[0] === 'ch' && A.cheg.length ? ' <i>' + A.cheg.length + '</i>' : a[0] === 'cm' && nCm ? ' <i>' + nCm + '</i>' : '') + '</button>'; }).join('') +
@@ -125,7 +126,7 @@
   function controle() { pintarCtl(); Promise.all([lerAlertas(), lerCfg(), lerCatalogo(), lerCmt()]).then(pintarCtl); }
   function lerCmt(forcar) {
     if (!temChrome) return Promise.resolve();
-    return chrome.runtime.sendMessage({ tipo: 'muta-cmt', forcar: !!forcar }).then(function (v) { A.cmt = v || null; if (A.cmt && A.cmt.des && !A.abaCm) { A.abaCm = 1; A.aba = 'cm'; } }, function () {});
+    return chrome.runtime.sendMessage({ tipo: 'muta-cmt', forcar: !!forcar }).then(function (v) { A.cmt = v || null; /* 0.49: sem aba do Desembargador no sino */ }, function () {});
   }
   function pAlertas() {
     if (!A.itens.length) return '<p class="muted ap-v">Nenhum alerta. Os alertas surgem quando a lista de tarefas do PJe é aberta com o HERO18810 ligado.</p>';

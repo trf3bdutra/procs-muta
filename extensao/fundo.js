@@ -232,9 +232,9 @@ chrome.notifications.onClicked.addListener(function (id) {
 
 
 /* ---------- 0.24 · sinalizações gravadas pelo quadro do PJe: marcar como resolvida, reabrir e incluir ----------
-   O quadro (conteudo-pje.js) manda {tipo:'muta-sinal', cnj, campo:'pd'|'ic'|'nt', acao:'resolver'|'reabrir'|'incluir', linha|texto};
+   O quadro (conteudo-pje.js) manda {tipo:'muta-sinal', cnj, campo:'av'|'pd'|'ic'|'nt', acao:'resolver'|'reabrir'|'incluir', linha|texto};
    aqui se lê a ficha atual, muda só a linha e grava (POST /api/pauta?ficha=1), com o login da equipe. */
-var CAMPO_SIN = { pd: ['triagem', 'O que falta sanar'], ic: ['triagem', 'Intercorrências'], nt: ['origem', 'Observações'] }, QUEM = { v: '', t: 0 };
+var CAMPO_SIN = { av: ['triagem', 'Avisos'], pd: ['triagem', 'O que falta sanar'], ic: ['triagem', 'Intercorrências'], nt: ['origem', 'Observações'] }, QUEM = { v: '', t: 0 };
 function quem() {
   if (QUEM.v && Date.now() - QUEM.t < 600e3) return Promise.resolve(QUEM.v);
   return fetch(SITE + '/api/login', { credentials: 'include', cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : {}; }).then(function (j) { QUEM = { v: j.usuario || '', t: Date.now() }; return QUEM.v; }, function () { return ''; });

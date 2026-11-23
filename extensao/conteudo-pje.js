@@ -528,6 +528,9 @@
       '#hero-dlg .hd-c[data-s=ic] li{border-color:#e07a66}#hero-dlg .hd-c[data-s=pd] li,#hero-dlg .hd-c[data-s=av] li{border-color:#e9b25c}#hero-dlg .hd-c[data-s=nt] li{border-color:#8fb3cf}' +
       '#hero-dlg li p{margin:0}#hero-dlg li small{color:#5d6b78;font-size:11px}#hero-dlg .hd-v{margin:0;color:#8a97a3;font-size:12px}' +
       '#hero-dlg .hd-sub{margin-bottom:10px}#hero-dlg .hd-sub>b{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:#5d6b78;margin-bottom:4px}#hero-dlg .hd-sub>p{margin:0;font-size:12.5px;text-align:justify}' +
+      '#hero-dlg header .hd-nv{font:600 12px system-ui,sans-serif;padding:5px 10px;border-radius:7px;background:#1f4f6b;color:#fff;align-self:center}#hero-dlg header .hd-nv[aria-expanded=true]{background:#5d6b78}' +
+      '#hero-dlg .hd-novo{display:flex;gap:6px;align-items:center;padding:10px 16px;border-bottom:1px solid #e3e8ec;background:#f6f8fa}#hero-dlg .hd-novo select,#hero-dlg .hd-novo input{padding:6px 8px;border:1px solid #d5dbe1;border-radius:7px;font:inherit;background:#fff}' +
+      '#hero-dlg .hd-novo input{flex:1;min-width:0}#hero-dlg .hd-novo button{all:unset;cursor:pointer;padding:6px 12px;border-radius:7px;background:#1f4f6b;color:#fff;font:600 12px system-ui,sans-serif}#hero-dlg .hd-novo .hd-cx{background:none;color:#5d6b78;text-decoration:underline}' +
       '#hero-dlg .hd-inc{display:flex;gap:4px;margin-top:8px}#hero-dlg .hd-inc input{flex:1;min-width:0;padding:5px 7px;border:1px solid #d5dbe1;border-radius:7px;font:inherit}' +
       '#hero-dlg .hd-inc button{all:unset;cursor:pointer;width:28px;text-align:center;border-radius:7px;background:#1f4f6b;color:#fff;font-weight:700}' +
       '#hero-dlg footer{padding:8px 14px;color:#8a97a3;font-size:11px}' +
@@ -781,6 +784,8 @@
     if (/aguardando|vista a abrir/i.test(r.mpfSit || '')) av.push('MPF: ' + r.mpfSit);
     if (r.meta) av.push('Meta do CNJ'); if (r.sobr) av.push('Sobrestado'); if (r.sens) av.push('Caso sensível');
     (r._falta || []).forEach(function (x) { av.push('Etiqueta a incluir no PJe: ' + x.nome + (x.descricao ? ' (' + x.descricao + ')' : '')); });
+    /* 0.49: avisos incluídos pela equipe (triagem.Avisos), os em aberto */
+    (r.avM || []).forEach(function (l) { av.push(String(l).replace(/\s*·\s*[^·]{2,40}\s*·\s*\d{2}\/\d{2}(?:\/\d{4})?$/, '')); });
     return { r: r, urg: r.urgPend ? ['Urgência não apreciada' + (r.urg ? ': ' + r.urg : '') + (r.urgDias != null ? ' · há ' + r.urgDias + ' dia(s)' : '') + (r.urgNivel ? ' · ' + r.urgNivel : '')] : [],
       av: av, ic: r.ic || [], pd: r.pend || [], nt: r.notas || [] };
   }
@@ -801,7 +806,7 @@
   function itemSin(l, campo, i) {
     var ok = /^✓/.test(l), txt = String(l).replace(/^✓\s*/, ''), p = txt.split(/\s*·\s*/), dt = /^\d{2}\/\d{2}\/\d{4}/.test(p[0]);
     var corpo = dt ? p.slice(2).join(' · ') || p[1] : p[0], meta = (dt ? [p.length > 2 ? p[1] : '', p[0]] : p.slice(1)).filter(Boolean).join(' · ');
-    return '<li class="' + (ok ? 'ok' : '') + '">' + (campo !== 'nt' && campo !== 'av' ? '<input type="checkbox" data-hd-ck="' + campo + '" data-hd-i="' + i + '"' + (ok ? ' checked' : '') + ' title="' + (ok ? 'Reabrir' : 'Marcar como resolvida') + '">' : '') +
+    return '<li class="' + (ok ? 'ok' : '') + '">' + (campo !== 'nt' ? '<input type="checkbox" data-hd-ck="' + campo + '" data-hd-i="' + i + '"' + (ok ? ' checked' : '') + ' title="' + (ok ? 'Reabrir' : 'Marcar como resolvida') + '">' : '') +
       '<div><p>' + escS(corpo) + '</p>' + (meta ? '<small>' + escS(meta) + '</small>' : '') + '</div></li>';
   }
   function dialogoSinais(k, foco) {
@@ -811,36 +816,52 @@
     var fmt = k.replace(/^(\d{7})(\d{2})(\d{4})(\d)(\d{2})(\d{4})$/, '$1-$2.$3.$4.$5.$6');
     var d = document.getElementById('hero-dlg'), novo = !d;
     if (!d) { d = document.createElement('div'); d.id = 'hero-dlg'; d.setAttribute('role', 'dialog'); d.setAttribute('aria-modal', 'true'); document.body.appendChild(d); }
-    d.setAttribute('aria-label', 'Sinalizações do processo ' + fmt); d.setAttribute('data-k', k);
+    d.setAttribute('aria-label', 'Sinalizações do processo ' + fmt); d.setAttribute('data-k', k); d._foco = foco;
+    var avT = r.avT || [], nAvM = (r.avM || []).length;
     var pend = (r.pendT && r.pendT.length ? r.pendT : r.pend || []), ic = (r.icT && r.icT.length ? r.icT : r.ic || []), nt = r.notas || [], qs = r.questoes || [];
     var abertas = function (L) { return L.filter(function (l) { return !/^✓/.test(l); }).length; };
     var col = function (id, ic0, tit, n, corpo, inc) { return '<section class="hd-c' + (foco === id ? ' fo' : '') + '" data-s="' + id + '"><h4>' + ic0 + ' ' + tit + ' <i>' + n + '</i></h4><div class="hd-cc">' + corpo + '</div>' +
       (inc ? '<form class="hd-inc" data-hd-inc="' + id + '"><input type="text" placeholder="' + inc + '" aria-label="' + inc + '"><button type="submit">+</button></form>' : '') + '</section>'; };
     var lista = function (L, campo, vz) { return L.length ? '<ul>' + L.map(function (l, i) { return itemSin(l, campo, i); }).join('') + '</ul>' : '<p class="hd-v">' + vz + '</p>'; };
-    var avisos = S0.urg.map(function (u) { return '<li class="u"><div><p>' + escS(u) + '</p></div></li>'; }).join('') + S0.av.map(function (a) { return '<li><div><p>' + escS(a) + '</p></div></li>'; }).join('');
+    var avisos = S0.urg.map(function (u) { return '<li class="u"><div><p>' + escS(u) + '</p></div></li>'; }).join('') + S0.av.slice(0, S0.av.length - nAvM).map(function (a) { return '<li><div><p>' + escS(a) + '</p></div></li>'; }).join('') +
+      avT.map(function (l, i) { return itemSin(l, 'av', i); }).join('');
     var notasCorpo = (x.sintese ? '<div class="hd-sub"><b>Síntese</b><p>' + escS(x.sintese) + '</p></div>' : '') +
       (qs.length ? '<div class="hd-sub"><b>Questões</b><ol>' + qs.map(function (q) { return '<li><p>' + escS(q.replace(/^\(?\d+[).]\s*/, '')) + '</p></li>'; }).join('') + '</ol></div>' : '') +
       '<div class="hd-sub"><b>Notas</b>' + lista(nt, 'nt', 'Nenhuma nota.') + '</div>';
-    d.innerHTML = '<div class="hd-bx"><header><div><b>' + fmt + '</b><small>' + escS([E ? E.etapa(x) : '', x.servidor ? 'Minuta: ' + x.servidor : '', x.corretor ? 'Correção: ' + x.corretor : '', x.tarefa ? 'Tarefa: ' + x.tarefa : ''].filter(Boolean).join(' · ')) + '</small></div><span class="hd-st" id="hd-st"></span><button type="button" data-hd-x aria-label="Fechar">×</button></header>' +
+    d.innerHTML = '<div class="hd-bx"><header><div><b>' + fmt + '</b><small>' + escS([E ? E.etapa(x) : '', x.servidor ? 'Minuta: ' + x.servidor : '', x.corretor ? 'Correção: ' + x.corretor : '', x.tarefa ? 'Tarefa: ' + x.tarefa : ''].filter(Boolean).join(' · ')) + '</small></div><span class="hd-st" id="hd-st"></span><button type="button" class="hd-nv" data-hd-novo aria-expanded="' + (d._novo ? 'true' : 'false') + '">+ Incluir</button><button type="button" data-hd-x aria-label="Fechar">×</button></header>' +
+      /* 0.49: incluir aviso, intercorrência, pendência ou nota num só campo, no alto, com o seletor do tipo (como "Incluir nota" no prontuário) */
+      (d._novo ? '<form class="hd-novo" data-hd-novo-f><select aria-label="Tipo">' + [['av', 'Aviso'], ['ic', 'Intercorrência'], ['pd', 'Pendência'], ['nt', 'Nota']].map(function (o) { return '<option value="' + o[0] + '"' + (o[0] === (d._tipo || (/^(av|ic|pd|nt)$/.test(foco || '') ? foco : 'pd')) ? ' selected' : '') + '>' + o[1] + '</option>'; }).join('') + '</select>' +
+        '<input type="text" maxlength="600" placeholder="Descreva e tecle Enter" aria-label="Texto"><button type="submit">Incluir</button><button type="button" class="hd-cx" data-hd-novo>cancelar</button></form>' : '') +
       '<div class="hd-g">' +
       col('av', ico('sino', 14), 'Avisos', S0.urg.length + S0.av.length, avisos ? '<ul>' + avisos + '</ul>' : '<p class="hd-v">Nenhum aviso.</p>') +
-      col('ic', ico('triangulo', 14), 'Intercorrências', abertas(ic), lista(ic, 'ic', 'Nenhuma intercorrência.'), 'Nova intercorrência') +
-      col('pd', ico('alfinete', 14), 'Pendências', abertas(pend), lista(pend, 'pd', 'Nenhuma pendência.'), 'Nova pendência') +
-      col('nt', ico('nota', 14), 'Notas', nt.length, notasCorpo, 'Nova nota') +
-      '</div><footer>Marcar resolve (✓) e o campo inclui: grava na ficha do processo, com o seu login do painel. Esc fecha.</footer></div>';
-    d._L = { ic: ic, pd: pend, nt: nt };
+      col('ic', ico('triangulo', 14), 'Intercorrências', abertas(ic), lista(ic, 'ic', 'Nenhuma intercorrência.')) +
+      col('pd', ico('alfinete', 14), 'Pendências', abertas(pend), lista(pend, 'pd', 'Nenhuma pendência.')) +
+      col('nt', ico('nota', 14), 'Notas', nt.length, notasCorpo) +
+      '</div><footer>Marcar resolve (✓) e "+ Incluir" acrescenta: grava na ficha do processo, com o seu login do painel. Esc fecha.</footer></div>';
+    d._L = { av: avT, ic: ic, pd: pend, nt: nt };
+    var nv = d.querySelector('.hd-novo input'); if (nv) nv.focus();
     if (novo) {
       var fechar = function () { d.remove(); document.removeEventListener('keydown', esc, true); };
-      var esc = function (e) { if (e.key === 'Escape' && !(e.target && e.target.closest && e.target.closest('.hd-inc'))) fechar(); };
+      var esc = function (e) { if (e.key === 'Escape' && !(e.target && e.target.closest && e.target.closest('.hd-inc,.hd-novo'))) fechar(); };
       document.addEventListener('keydown', esc, true);
-      d.addEventListener('click', function (e) { if (e.target === d || (e.target.closest && e.target.closest('[data-hd-x]'))) fechar(); });
+      d.addEventListener('click', function (e) {
+        if (e.target === d || (e.target.closest && e.target.closest('[data-hd-x]'))) return fechar();
+        var nb = e.target.closest && e.target.closest('[data-hd-novo]');
+        if (nb) { var sl = d.querySelector('.hd-novo select'); if (sl) d._tipo = sl.value; d._novo = !d._novo; dialogoSinais(d.getAttribute('data-k'), d._foco); }
+      });
+      d.addEventListener('change', function (e) { if (e.target.matches && e.target.matches('.hd-novo select')) d._tipo = e.target.value; });
       d.addEventListener('change', function (e) {
         var c = e.target; if (!c.dataset || !c.dataset.hdCk) return;
         var L = d._L[c.dataset.hdCk] || [], linha = L[Number(c.dataset.hdI)];
         gravarSinal(d.getAttribute('data-k'), { campo: c.dataset.hdCk, acao: c.checked ? 'resolver' : 'reabrir', linha: linha }, c.dataset.hdCk);
       });
       d.addEventListener('submit', function (e) {
-        var f = e.target; if (!f.dataset || !f.dataset.hdInc) return; e.preventDefault();
+        var f = e.target;
+        if (f.hasAttribute && f.hasAttribute('data-hd-novo-f')) {
+          e.preventDefault(); var tp = f.querySelector('select').value, tv = (f.querySelector('input').value || '').trim(); if (!tv) return;
+          d._novo = false; d._tipo = tp; gravarSinal(d.getAttribute('data-k'), { campo: tp, acao: 'incluir', texto: tv }, tp); return;
+        }
+        if (!f.dataset || !f.dataset.hdInc) return; e.preventDefault();
         var t = f.querySelector('input'), v = (t.value || '').trim(); if (!v) return;
         gravarSinal(d.getAttribute('data-k'), { campo: f.dataset.hdInc, acao: 'incluir', texto: v }, f.dataset.hdInc);
       });

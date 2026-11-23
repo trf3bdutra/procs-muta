@@ -1136,6 +1136,13 @@
        "apelido": "intercorrencias"
       },
       {
+       "rotulo": "Avisos",
+       "chave": "Avisos",
+       "tipo": "texto-longo",
+       "secao": "triagem",
+       "apelido": "avisos"
+      },
+      {
        "rotulo": "Situação para julgar",
        "chave": "Destino - Situação",
        "tipo": "lista",
@@ -1533,7 +1540,7 @@
        "secao": "triagem",
        "editavel": false,
        "regra": "do lote de triagem (acervo/lotes); atualizado por scripts/triagem/ficha_lote.py",
-       "apelido": "registro_teor"
+       "apelido": "registro_teor_autos"
       },
       {
        "rotulo": "Peças, com nota e trecho",
@@ -1583,7 +1590,7 @@
        "secao": "triagem",
        "editavel": false,
        "regra": "do lote de triagem (acervo/lotes); atualizado por scripts/triagem/ficha_lote.py",
-       "apelido": "registro_atualizado_em"
+       "apelido": "registro_atualizado"
       }
      ]
     }

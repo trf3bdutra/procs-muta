@@ -175,7 +175,7 @@ function pills() {
 var MODOS = ['Processo', 'Autos'];  /* 0.38: o Gerador foi para a aba Minuta; 0.47: o Roteiro entrou na aba Processo */
 var ROT_MODO = {};
 var FORA_PROC = { 'Autuação': 1, 'Partes': 1, 'Tramitação': 1, 'Autos extraídos do PJe': 1, 'Registro no acervo': 1, 'Acompanhamento': 1 };
-var NO_TOPO = { 'Síntese Processual': 1, 'Alegações': 1, 'Etiquetas sugeridas': 1, 'O que falta sanar': 1, 'Intercorrências': 1, 'Assunto detalhado': 1 };
+var NO_TOPO = { 'Avisos': 1, 'Síntese Processual': 1, 'Alegações': 1, 'Etiquetas sugeridas': 1, 'O que falta sanar': 1, 'Intercorrências': 1, 'Assunto detalhado': 1 };
 var CTL_PROC = ['urgencia', 'meta', 'sobrestamento', 'sensivel'];
 function abaModelo(nome) { return ((G.F && G.F.abas) || []).filter(function (a) { return a.aba === nome; })[0] || null; }
 function grupoModelo(nome) { var g = null; ((G.F && G.F.abas) || []).forEach(function (a) { (a.grupos || []).forEach(function (x) { if (!g && x.grupo === nome) g = x; }); }); return g; }
@@ -346,26 +346,30 @@ function assuntoDetalhado() {
   return '';
 }
 /* sinalizações: pendências e intercorrências da ficha, uma por linha ("✓ " no início = resolvida) */
-var SN = [['pd', 'Pendência', 'triagem', 'O que falta sanar'], ['ic', 'Intercorrência', 'triagem', 'Intercorrências']];
+var SN = [['av', 'Aviso', 'triagem', 'Avisos'], ['pd', 'Pendência', 'triagem', 'O que falta sanar'], ['ic', 'Intercorrência', 'triagem', 'Intercorrências']];
 function snLinhas(t) { var x = SN.filter(function (q) { return q[0] === t; })[0]; return S(V(x[2], x[3])).split(/\n+/).map(S).filter(Boolean); }
 function snGravar(t, L) { var x = SN.filter(function (q) { return q[0] === t; })[0]; marcar(x[2] + '.' + x[3], L.join('\n')); agendar(500); render(); }
 function sinalizacoes() {
   var cont = {}, itens = [];
   SN.forEach(function (q) { snLinhas(q[0]).forEach(function (l, i) { var ok = /^✓\s*/.test(l); if (!ok) cont[q[0]] = (cont[q[0]] || 0) + 1; itens.push({ t: q[0], r: q[1], i: i, ok: ok, tx: l.replace(/^✓\s*/, '') }); }); });
   itens.sort(function (a, b) { return a.ok - b.ok; });
-  var tag = function (t) { return t === 'ic' ? '<em class="sn-st ic">' + cont.ic + ' intercorrência' + (cont.ic > 1 ? 's' : '') + '</em>' : '<em class="sn-st pd">' + cont.pd + ' pendência' + (cont.pd > 1 ? 's' : '') + '</em>'; };
-  return '<section class="card pc-sec sn" id="g-sn"><div class="pc-sh"><h3>' + SV(IC.sn, 13) + ' Sinalizações</h3>' + (cont.ic ? tag('ic') : '') + (cont.pd ? tag('pd') : '') + (!cont.ic && !cont.pd ? '<small class="muted">nada em aberto</small>' : '') + '</div>' +
+  var NOMES_SN = { av: ['aviso', 'avisos'], ic: ['intercorrência', 'intercorrências'], pd: ['pendência', 'pendências'] };
+  var tag = function (t) { return cont[t] ? '<em class="sn-st ' + t + '">' + cont[t] + ' ' + NOMES_SN[t][cont[t] > 1 ? 1 : 0] + '</em>' : ''; };
+  /* 0.49: incluir como em "Notas": botão no alto, que abre o campo com o seletor do tipo */
+  return '<section class="card pc-sec sn" id="g-sn"><div class="pc-sh"><h3>' + SV(IC.sn, 13) + ' Sinalizações</h3>' + tag('ic') + tag('pd') + tag('av') + (!cont.ic && !cont.pd && !cont.av ? '<small class="muted">nada em aberto</small>' : '') +
+    '<span class="sp"></span><button type="button" class="btn solid sm" data-sn-add aria-expanded="' + (G.snAb ? 'true' : 'false') + '">' + (G.snAb ? 'cancelar' : '+ Incluir sinalização') + '</button></div>' +
+    (G.snAb ? '<div class="sn-n sn-novo"><select id="sn-tp" aria-label="Tipo">' + SN.map(function (q) { return '<option value="' + q[0] + '"' + ((G.snTp || 'pd') === q[0] ? ' selected' : '') + '>' + q[1] + '</option>'; }).join('') + '</select>' +
+      '<textarea id="sn-tx" rows="2" placeholder="Descreva a sinalização (Enter inclui)"></textarea><button type="button" class="btn solid sm" data-sn-inc>Incluir</button></div>' : '') +
     (itens.length ? '<ul class="sn-l">' + itens.map(function (x) {
       var m = /^(.*?)\s*·\s*([^·]{2,40})\s*·\s*(\d{2}\/\d{2}(?:\/\d{4})?)$/.exec(x.tx);
       return '<li class="sn-i ' + x.t + (x.ok ? ' ok' : '') + '"><input type="checkbox" data-sn-ok="' + x.t + ':' + x.i + '"' + (x.ok ? ' checked' : '') + ' aria-label="Resolvida"><div><span class="sn-tp ' + x.t + '">' + x.r + '</span><p>' + esc(m ? m[1] : x.tx) + '</p>' + (m ? '<small>' + esc(m[2] + ' · ' + m[3]) + '</small>' : '') + '</div><button type="button" class="sn-x" data-sn-x="' + x.t + ':' + x.i + '" title="Excluir" aria-label="Excluir">×</button></li>';
     }).join('') + '</ul>' : '') +
-    '<div class="sn-n"><select id="sn-tp" aria-label="Tipo">' + SN.map(function (q) { return '<option value="' + q[0] + '"' + (G.snTp === q[0] ? ' selected' : '') + '>' + q[1] + '</option>'; }).join('') + '</select><input type="text" id="sn-tx" placeholder="Nova sinalização: descreva e tecle Enter"></div>' +
-    '<small class="muted sn-h">Intercorrência retém a liberação; pendência é aviso.</small></section>';
+    '<small class="muted sn-h">Intercorrência retém a liberação; pendência é o que falta sanar; aviso é só para ciência.</small></section>';
 }
 function snIncluir() {
   var i = $('sn-tx'), t = ($('sn-tp') || {}).value || 'pd', v = i ? S(i.value) : ''; if (!v) return;
   var u = ses.estado().usuario || '', d = new Date(), L = snLinhas(t);
-  L.push(v + ' · ' + (u || 'equipe') + ' · ' + pad2(d.getDate()) + '/' + pad2(d.getMonth() + 1)); G.snTp = t; snGravar(t, L);
+  L.push(v.replace(/\s*\n+\s*/g, ' ') + ' · ' + (u || 'equipe') + ' · ' + pad2(d.getDate()) + '/' + pad2(d.getMonth() + 1)); G.snTp = t; G.snAb = false; snGravar(t, L);
 }
 /* notas sobre o caso: log em origem.Observações ("DD/MM/AAAA HH:MM · autor · texto"), a nova no fim */
 function notasL() { return S(V('origem', 'Observações')).split(/\n+/).map(S).filter(Boolean); }
@@ -618,7 +622,7 @@ function contaModo(a) {
 /* Roteiro: a triagem em passos, pelo tipo de julgamento (roteiro.js) */
 function gRot() { return { V: V, F: function (k) { return fonteVal({ fonte: [k] }); }, cnj: function () { return G.cnj; }, marcar: marcar, gravar: function () { return gravarJa(); } }; }
 /* o Roteiro de triagem reúne toda a triagem: os passos, a leitura dos autos, as etiquetas, o registro do lote e os demais campos */
-var FORA_ROT = { 'Síntese Processual': 1, 'Alegações': 1, 'O que falta sanar': 1, 'Intercorrências': 1, 'Assunto detalhado': 1, 'Tipo de Julgamento': 1, 'Etiquetas sugeridas': 1 };
+var FORA_ROT = { 'Avisos': 1, 'Síntese Processual': 1, 'Alegações': 1, 'O que falta sanar': 1, 'Intercorrências': 1, 'Assunto detalhado': 1, 'Tipo de Julgamento': 1, 'Etiquetas sugeridas': 1 };
 /* Autos: a conferência automática, a lista de peças (com detalhamento, JSON, OCR e PDF) e o preenchimento pelos autos */
 /* 0.38: Leitura dos autos (o que achou e o que pôs na ficha) → A conferir (alertas e divergências) → Peças e documentos */
 function corpoAutos() { var AU = window.MutaAutos; return AU && AU.htmlLeitura ? AU.htmlLeitura() + AU.htmlConferir() + AU.htmlDocs(function () { return pecasCartao(true); }) : pecasCartao(); }
@@ -728,7 +732,7 @@ caixa.addEventListener('change', function (e) {
 });
 caixa.addEventListener('toggle', function (e) { var c = e.target.classList; if (!c) return; if (c.contains('pm-mer')) { if (G.merAb !== e.target.open) { G.merAb = e.target.open; render(); } return; } if (c.contains('pm-aut')) { if (G.autAb !== e.target.open) { G.autAb = e.target.open; render(); } return; } if (c.contains('au-it') && window.MutaAutos) { window.MutaAutos.abrirTexto(e.target.dataset.auIt, e.target.open); return; } if (c.contains('au-auto-d') && window.MutaAutos) window.MutaAutos.estado().autoAb = e.target.open; if (c.contains('pc-s')) { G.pecAb = G.pecAb || {}; G.pecAb[e.target.dataset.grupo] = e.target.open; } }, true);
 caixa.addEventListener('keydown', function (e) {
-  if (e.target.id === 'sn-tx' && e.key === 'Enter') { e.preventDefault(); snIncluir(); }
+  if (e.target.id === 'sn-tx' && e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); snIncluir(); }
   else if (e.target.id === 'pm-ad-tx' && e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); adAcao('ok'); }
   else if (e.target.id === 'pm-des' && (e.key === 'Enter' || e.key === 'Escape')) { e.preventDefault(); if (e.key === 'Enter') { marcar('producao.' + e.target.dataset.des, S(e.target.value)); agendar(400); } G.desEd = null; render(); }
   else if (e.target.id === 'pm-ad-tx' && e.key === 'Escape') { adAcao('x'); }
@@ -754,6 +758,8 @@ caixa.addEventListener('click', function (e) {
   if (b.dataset.pron != null) { var x = PRON[Number(b.dataset.pron)]; if (x) { marcar('producao.Destino', x[1]); marcar('producao.Mono - Tipo de ato', x[2]); G.dest = null; agendar(400); render(); } return; }
   if (b.dataset.snX) { var px = b.dataset.snX.split(':'), Lx = snLinhas(px[0]); Lx.splice(Number(px[1]), 1); snGravar(px[0], Lx); return; }
   if (b.hasAttribute('data-nt-add')) { notaIncluir(); return; }
+  if (b.hasAttribute('data-sn-add')) { G.snAb = !G.snAb; render(); var sx = $('sn-tx'); if (sx) sx.focus(); return; }
+  if (b.hasAttribute('data-sn-inc')) { snIncluir(); return; }
   if (b.dataset.ntX != null) { var Ln = notasL(); Ln.splice(Number(b.dataset.ntX), 1); marcar('origem.Observações', Ln.join('\n')); agendar(500); render(); return; }
   if (b.dataset.ch) { var cv = S(V.apply(null, [b.dataset.ch.slice(0, b.dataset.ch.indexOf('.')), b.dataset.ch.slice(b.dataset.ch.indexOf('.') + 1)])); marcar(b.dataset.ch, cv === b.dataset.v ? '' : b.dataset.v); agendar(500); render(); return; }
   if (b.dataset.rt != null) { if (window.MutaRoteiro && window.MutaRoteiro.clique(b, gRot())) render(); return; }

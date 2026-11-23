@@ -637,3 +637,14 @@ test('extensão 0.48.2: Diligências divididas por fase do andamento (A fazer, E
   assert.match(x, /fase: \{ todo: true, doing: true, review: true, done: false \}/); assert.match(x, /class="gx-fase gx-fase-' \+ e\[0\]/);
   assert.match(x, /cd\.addEventListener\('toggle'/); assert.doesNotMatch(x, /data-gx-conc/);
 });
+
+test('extensão 0.49: Assinatura nas Deliberações (urgência no topo) e fora do sino; sinalizações com aviso e inclusão no alto, com seletor do tipo', () => {
+  const x = read('extensao/gestao.js'), a = read('extensao/alertas.js'), g = read('extensao/gabinete.js'), c = read('extensao/conteudo-pje.js'), f = read('extensao/fundo.js');
+  assert.match(x, /function itemAs\(a\)/); assert.match(x, /acao: 'assinar', cnj: cnj/); assert.match(x, /acao: 'devolver'/); assert.match(x, /var X = \{ aba: 'as'/);
+  assert.match(a, /var abas = \[\['al', 'PJe'\], \['app', 'Gabinete'\]\]/);
+  assert.match(g, /\['av', 'Aviso', 'triagem', 'Avisos'\]/); assert.match(g, /data-sn-add/); assert.doesNotMatch(g, /placeholder="Nova sinalização: descreva e tecle Enter"/);
+  assert.match(c, /data-hd-novo-f/); assert.match(c, /\[\['av', 'Aviso'\], \['ic', 'Intercorrência'\], \['pd', 'Pendência'\], \['nt', 'Nota'\]\]/);
+  assert.match(f, /av: \['triagem', 'Avisos'\]/);
+  assert.match(read('padrao/ficha.json'), /"chave": "Avisos",\s*"tipo": "texto-longo",\s*"secao": "triagem"/);
+  assert.match(read('apoio/ex-officio/api/_ficha.js'), /avM: linhas\(t\['Avisos'\]\), avT: todas\(t\['Avisos'\]\)/);
+});

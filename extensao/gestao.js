@@ -158,7 +158,7 @@
   }
 
   /* ---------- Deliberações ---------- */
-  var X = { aba: 'du', dados: null, erro: '', msg: '', lendo: false, resp: {}, conf: {}, nota: {} };
+  var X = { aba: 'as', dev: {}, dados: null, erro: '', msg: '', lendo: false, resp: {}, conf: {}, nota: {} };
   function lerDel() {
     if (!ses || !pode(quem())) return Promise.resolve();
     X.lendo = true; pintarDel();
@@ -167,7 +167,27 @@
   }
   function listas() {
     var j = X.dados || {};
-    return { du: j.duvidas || [], pe: j.pedidos || [], so: (j.notificacoes || []).filter(function (n) { return n.tipo === 'sustentacao'; }) };
+    var as = ((j.assinar || {}).assinatura || []).slice().sort(function (a, b) { return (!!b.urg - !!a.urg) || String(a.desde || '').localeCompare(String(b.desde || '')); });
+    return { as: as, du: j.duvidas || [], pe: j.pedidos || [], so: (j.notificacoes || []).filter(function (n) { return n.tipo === 'sustentacao'; }) };
+  }
+  /* decisão submetida à assinatura (antes no sino › Desembargador): urgência em destaque e no topo */
+  function itemAs(a) {
+    var u = a.urg, ab = X.dev[a.cnj], ch = [];
+    if (u) ch.push('<span class="gx-c gx-urgc" title="' + esc([u.situacao, u.obs].filter(Boolean).join(' · ')) + '">Urgência' + (u.tipo ? ' · ' + esc(u.tipo) : '') + (u.nivel ? ' · ' + esc(u.nivel) : '') + (u.espera != null ? ' · ' + u.espera + ' d' : '') + '</span>');
+    if (a.tipoAto) ch.push('<span class="gx-c gx-tp">' + esc(a.tipoAto) + '</span>');
+    if (a.meta) ch.push('<span class="gx-c">Meta</span>');
+    if (a.prazo) ch.push('<span class="gx-c' + (a.prazo < hoje() ? ' venc' : '') + '">prazo ' + esc(data(a.prazo)) + '</span>');
+    if (a.aguarda != null) ch.push('<span class="gx-c" title="Liberada em ' + esc(data(a.desde)) + '">' + (a.aguarda ? 'aguarda ' + a.aguarda + ' d' : 'liberada hoje') + '</span>');
+    var caso = [a.classe, a.assunto].filter(Boolean).join(' · ');
+    return '<article class="gx-it' + (u ? ' gx-urg' : '') + '" data-cnj="' + esc(a.cnj) + '"><div class="gx-h">' + copiaBtn(a.cnj) + ch.join('') + '</div>' +
+      (a.titulo || a.topico ? '<p class="gx-tx"><b>' + esc(a.titulo || a.topico) + '</b></p>' : '') + (a.titulo && a.topico && a.topico !== a.titulo ? '<p class="gx-tx">' + esc(a.topico) + '</p>' : '') +
+      (caso ? '<p class="gx-m">' + esc(caso) + '</p>' : '') + (a.partes ? '<p class="gx-m">' + esc(a.partes) + '</p>' : '') +
+      (a.notaAtencao || a.atencao ? '<p class="gx-at"><b>Atenção do revisor:</b> ' + esc(a.notaAtencao || a.atencao) + '</p>' : '') + (a.obs ? '<p class="gx-m">' + esc(a.obs) + '</p>' : '') +
+      '<p class="gx-m">' + [a.servidor ? 'Minuta: <b>' + esc(a.servidor) + '</b>' : '', a.corretor ? 'Correção: <b>' + esc(a.corretor) + '</b>' : '', a.desde ? 'liberada em ' + esc(data(a.desde)) : ''].filter(Boolean).join(' · ') + '</p>' +
+      (ab ? '<form class="gx-f" data-gx-form="devolver" data-cnj="' + esc(a.cnj) + '"><textarea name="texto" rows="3" maxlength="2000" placeholder="O que ajustar antes da assinatura" required></textarea>' +
+        '<label class="gx-et">Para <select name="para">' + [a.servidor, a.corretor].filter(Boolean).map(function (n) { return '<option>' + esc(n) + '</option>'; }).join('') + '</select></label>' +
+        '<span class="gx-fb"><button type="button" class="lnk" data-gx-dev="' + esc(a.cnj) + '">cancelar</button><button type="submit" class="btn solid sm">Enviar devolutiva</button></span></form>'
+        : '<div class="gx-ac"><span class="gx-bt"><button type="button" class="btn sm ok" data-gx-ass="' + esc(a.cnj) + '" title="Registra no app do gabinete que a decisão foi assinada (a assinatura em si é no PJe)">Marcar assinada</button><button type="button" class="btn sm" data-gx-dev="' + esc(a.cnj) + '">Devolver com apontamento</button></span></div>') + '</article>';
   }
   function itemDu(d) {
     var ab = X.resp[d.id];
@@ -202,13 +222,15 @@
     var q = quem();
     if (!pode(q)) { c.innerHTML = '<p class="muted gx-v">' + (q.on ? 'As Deliberações são do Desembargador e do gestor.' : 'Entre no painel para ver as deliberações.') + '</p>'; return; }
     var L = listas();
-    var tab = function (k, r, d) { return '<button type="button" role="tab" data-gx-a="' + k + '" aria-selected="' + (X.aba === k) + '">' + r + ' <i>' + L[k].length + '</i><small>' + d + '</small></button>'; };
-    var corpo = X.aba === 'pe' ? (L.pe.length ? L.pe.map(itemPe).join('') : '<p class="muted gx-v">Nenhum pedido de retirada ou de adiamento em aberto.</p>')
+    var tab = function (k, r, d) { return '<button type="button" role="tab" data-gx-a="' + k + '" aria-selected="' + (X.aba === k) + '" title="' + esc(d) + '">' + r + ' <i' + (k === 'as' && nUrg ? ' class="gx-iu"' : '') + '>' + L[k].length + '</i></button>'; };
+    var nUrg = L.as.filter(function (a) { return a.urg; }).length;
+    var corpo = X.aba === 'as' ? (L.as.length ? (nUrg ? '<p class="gx-msg err">' + nUrg + ' com registro de urgência, no topo.</p>' : '') + L.as.map(itemAs).join('') : '<p class="muted gx-v">Nenhuma decisão submetida à assinatura.</p>')
+      : X.aba === 'pe' ? (L.pe.length ? L.pe.map(itemPe).join('') : '<p class="muted gx-v">Nenhum pedido de retirada ou de adiamento em aberto.</p>')
       : X.aba === 'so' ? (L.so.length ? L.so.map(itemSo).join('') : '<p class="muted gx-v">Nenhum pedido de sustentação oral ou de preferência recebido para as próximas sessões.</p>')
       : (L.du.length ? L.du.map(itemDu).join('') : '<p class="muted gx-v">Nenhuma dúvida em aberto dirigida a você.</p>');
     c.innerHTML = '<div class="gx-top"><div><b>Deliberações</b><small class="muted">o que aguarda decisão' + (X.dados && X.dados.hoje ? ' · ' + esc(data(X.dados.hoje)) : '') + '</small></div>' +
       '<span><button type="button" class="lnk" data-gx="ler-del">' + (X.lendo ? 'lendo…' : 'atualizar') + '</button><a class="lnk" target="_blank" rel="noopener" href="' + esc(site()) + '/cmt/">painel do Desembargador</a></span></div>' +
-      '<div class="seg pmodos gx-modos" role="tablist" aria-label="Tipo de deliberação">' + tab('du', 'Dúvidas', 'da equipe') + tab('pe', 'Pauta', 'retirada e adiamento') + tab('so', 'Sustentação', 'oral e preferência') + '</div>' +
+      '<div class="seg pmodos gx-modos" role="tablist" aria-label="Tipo de deliberação">' + tab('as', 'Assinatura', 'decisões submetidas à assinatura' + (nUrg ? ' · ' + nUrg + ' com urgência' : '')) + tab('du', 'Dúvidas', 'dúvidas da equipe') + tab('pe', 'Pauta', 'pedidos de retirada e de adiamento') + tab('so', 'Sustentação', 'sustentação oral e preferência') + '</div>' +
       (X.msg ? '<p class="gx-msg' + (/^Não/.test(X.msg) ? ' err' : '') + '">' + esc(X.msg) + '</p>' : '') +
       (X.erro ? '<p class="gx-v err">' + esc(X.erro) + '</p>' : !X.dados ? '<p class="muted gx-v">Lendo…</p>' : corpo);
   }
@@ -233,6 +255,18 @@
       .then(function () { delete X.conf[id]; delete X.nota[id]; X.msg = defere ? 'Pedido deferido e registrado na pauta. Cópia ao gestor.' : 'Pedido indeferido.'; return lerDel(); })
       .catch(function (e) { if (bt) bt.disabled = false; X.msg = 'Não concluiu: ' + (e.message || 'erro'); pintarDel(); });
   }
+  function assinar(cnj, bt) {
+    if (bt) bt.disabled = true;
+    post({ acao: 'assinar', cnj: cnj }).then(function () { X.msg = 'Assinatura registrada no app · ' + cnj + '.'; return lerDel(); })
+      .catch(function (e) { if (bt) bt.disabled = false; X.msg = 'Não registrou: ' + (e.message || 'erro'); pintarDel(); });
+  }
+  function devolver(f) {
+    var cnj = f.getAttribute('data-cnj'), t = String(f.elements.texto.value || '').trim(); if (!t) return;
+    var bt = f.querySelector('[type=submit]'); if (bt) bt.disabled = true;
+    post({ acao: 'devolver', cnj: cnj, texto: t, para: f.elements.para ? f.elements.para.value : '' }).then(function () {
+      delete X.dev[cnj]; X.msg = 'Devolutiva enviada (vira diligência para ' + (f.elements.para ? f.elements.para.value : 'a equipe') + ').'; lerDil(); return lerDel();
+    }).catch(function (e) { if (bt) bt.disabled = false; X.msg = 'Não enviou: ' + (e.message || 'erro'); pintarDel(); });
+  }
   function responder(f) {
     var id = f.getAttribute('data-id'), t = String(f.elements.texto.value || '').trim(); if (!t) return;
     var bt = f.querySelector('[type=submit]'); if (bt) bt.disabled = true;
@@ -245,7 +279,7 @@
   function badges() {
     var b1 = $('dil-badge'), b2 = $('del-badge');
     if (b1) { var n1 = D.lista ? abertasComigo().length : 0; b1.hidden = !n1; b1.textContent = n1 ? String(n1) : ''; b1.title = n1 ? n1 + ' diligência(s) com você' : ''; }
-    if (b2) { var L = X.dados ? listas() : { du: [], pe: [], so: [] }, n2 = L.du.length + L.pe.length + L.so.filter(function (s) { return s.aVincular; }).length; b2.hidden = !n2; b2.textContent = n2 ? String(n2) : ''; b2.title = n2 ? n2 + ' aguardando decisão' : ''; }
+    if (b2) { var L = X.dados ? listas() : { as: [], du: [], pe: [], so: [] }, n2 = L.as.length + L.du.length + L.pe.length + L.so.filter(function (s) { return s.aVincular; }).length; b2.hidden = !n2; b2.textContent = n2 ? String(n2) : ''; b2.title = n2 ? n2 + ' aguardando decisão' : ''; }
   }
 
   /* ---------- eventos ---------- */
@@ -285,13 +319,18 @@
         if (x.dataset.gxA) { X.aba = x.dataset.gxA; X.msg = ''; return pintarDel(); }
         if (x.dataset.gx === 'ler-del') { X.msg = ''; return lerDel(); }
         if (x.dataset.gxResp) { X.resp[x.dataset.gxResp] = !X.resp[x.dataset.gxResp]; pintarDel(); var ta = cx.querySelector('[data-gx-form="responder"][data-id="' + x.dataset.gxResp + '"] textarea'); if (ta) ta.focus(); return; }
+        if (x.dataset.gxAss) return assinar(x.dataset.gxAss, x);
+        if (x.dataset.gxDev) { X.dev[x.dataset.gxDev] = !X.dev[x.dataset.gxDev]; pintarDel(); var td = cx.querySelector('[data-gx-form="devolver"] textarea'); if (td) td.focus(); return; }
         var pe = x.dataset.gxPe, id = x.dataset.id;
         if (pe === 'defere' || pe === 'indefere') { X.conf[id] = pe; return pintarDel(); }
         if (pe === 'cancelar') { delete X.conf[id]; return pintarDel(); }
         if (pe === 'confirmar') return decidir(id, x);
       });
       cx.addEventListener('input', function (e) { var i = e.target; if (i.dataset.gxNota) X.nota[i.dataset.gxNota] = i.value; });
-      cx.addEventListener('submit', function (e) { var f = e.target.closest('[data-gx-form="responder"]'); if (!f) return; e.preventDefault(); responder(f); });
+      cx.addEventListener('submit', function (e) {
+        var f = e.target.closest('[data-gx-form]'); if (!f) return; e.preventDefault();
+        if (f.getAttribute('data-gx-form') === 'devolver') devolver(f); else responder(f);
+      });
     }
     /* teclas digitadas nas abas não chegam a atalhos do painel */
     [cd, cx].forEach(function (el) { if (el) el.addEventListener('keydown', function (e) { e.stopPropagation(); }); });
