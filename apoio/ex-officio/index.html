@@ -4849,7 +4849,10 @@ var P={dados:null,mes:'',aus:[],tipos:[]};
 var MK=[['pautarAte','Peço dia','#2d6fa8'],['inicioPreparacao','Início da preparação','#7352a5'],['entregaMinutas','Entrega das minutas','#c46a1f'],['liberacao','Liberação','#28744b']];
 var SCOR=['#1f6f8b','#8a5cb8','#1a8a6a','#c46a1f','#b0406a','#3e72ad'];
 var CTRLV=['ctrl','metas','sobr','sens'],CTRLT=['metas','sobr','sens'];
-function vista(v, documentosProntos){if(v==='controles'||v==='monitoramento')v='ctrl';if(v==='urg')v='mono';if(v==='mural')v='inicio';var alvo='';
+/* página inicial (Início/mural) desligada por ora, a pedido do gestor (23/11/2026): quem abriria o Início cai na Pauta.
+   O painel de todo o gabinete (?painel=gabinete) segue como estava. Para religar, troque para false. */
+var INICIO_DESLIGADO=true;
+function vista(v, documentosProntos){if(v==='controles'||v==='monitoramento')v='ctrl';if(v==='urg')v='mono';if(v==='mural')v='inicio';var alvo='';if(v==='inicio'&&INICIO_DESLIGADO&&!PAINEL_GAB)v='pauta';
   document.title=v==='cmt'?'Painel do Desembargador · Gabinete CMT':'Ex Officio · Gabinete CMT';try{document.documentElement.setAttribute('data-theme',v==='cmt'?(localStorage.getItem('cmt-dr-tema')||'light'):(localStorage.getItem('cmt-eq-tema')||'light'));}catch(e){}if(v==='cmt'&&window.cmtTemaSync)cmtTemaSync();
   /* Controles especiais: Metas, Sobrestados e Casos sensíveis numa só página; o endereço de cada um leva à sua seção */
   if(CTRLT.indexOf(v)>=0){alvo=v;v='ctrl';}
