@@ -173,9 +173,16 @@ function plural(o) { return /\b(apelacoes|recursos|agravos|embargos de declaraca
 var VAZIAS = /^(sobre|entre|contra|desde|quando|porque|portanto|apesar|ainda|mesmo|tambem|apenas|outros|outras|referente|relativ[ao]s?|quanto|acerca|sentenca|recurso|apelacao|apelante|apelado|alegacao|alega|requer|pedido|pedidos|processo|autos|parte|partes|direito|valor|valores|uniao|federal|inss)$/;
 function chaves(q) { return nz(q).replace(/^\(?\d+\)?[.)\s-]*/, '').split(/[^a-z0-9]+/).filter(function (w) { return w.length >= 6 && !VAZIAS.test(w); }); }
 
+/* 0.42 · o cabeçalho que o PJe põe sozinho (brasão, tribunal, endereço, classe e número, relator, partes e advogados,
+   "NÃO ASSINÁVEL") não é texto da minuta: fica fora de todas as conferências */
+var CAB_PJE = /^(PODER JUDICI[ÁA]RIO|Tribunal Regional Federal|Turma Regional|Gab(inete)?\.?\s|Rua\s|Avenida\s|Av\.\s|CEP\b|https?:\/\/|www\.|N[ÃA]O ASSIN[ÁA]VEL|OUTROS PARTICIPANTES|[A-ZÀ-Ý ]{4,60}\(\d{2,4}\)\s*N[ºo°]|(RELATOR|RELATORA|APELANTE|APELAD[OA]|AGRAVANTE|AGRAVAD[OA]|EMBARGANTE|EMBARGAD[OA]|IMPETRANTE|IMPETRAD[OA]|PARTE AUTORA|PARTE R[ÉE]|AUTOR|R[ÉE]U|INTERESSAD[OA]|TERCEIRO INTERESSADO|FISCAL DA LEI|PROCURADOR|REPRESENTANTE|ADVOGAD[OA])\b[^:]{0,60}:)/;
+function cabecalhoPje(t) { t = S(t); return !!t && t.length < 400 && CAB_PJE.test(t); }
 function analisar(paragrafos, ctx) {
   ctx = ctx || {};
-  var ps = (paragrafos || []).map(function (p) { return typeof p === 'string' ? { t: p } : p; }).filter(function (p) { return S(p.t); });
+  var ps = (paragrafos || []).map(function (p) { return typeof p === 'string' ? { t: p } : p; }).filter(function (p) { return S(p.t) && !cabecalhoPje(p.t); });
+  /* decisão e despacho: o que vem antes de "Vistos." também é cabeçalho */
+  var iv = -1; ps.forEach(function (p, i) { if (iv < 0 && /^vistos\.?$/i.test(S(p.t))) iv = i; });
+  if (iv > 0 && !ps.slice(0, iv).some(function (p) { return /^(relat[óo]rio|voto|ementa|ac[óo]rd[ãa]o)\.?$/i.test(S(p.t)); })) ps = ps.slice(iv);
   var P = partes(ps), peca = tipoPeca(P, ps), itens = [], vistos = {};
   var off = ctx.desligadas || {};
   function add(sev, grupo, regra, msg, p, ini, fim, sug) {
@@ -186,7 +193,8 @@ function analisar(paragrafos, ctx) {
     itens.push({ sev: sev, grupo: grupo, regra: regra, msg: msg, sug: sug || '', par: p ? p.i : null, sec: p ? p.sec : '',
       trecho: p ? (ini != null ? trecho(t, ini, fim) : { antes: '', alvo: '', depois: t.length > 160 ? t.slice(0, 160) + '…' : t }) : null });
   }
-  var corpo = P.relatorio.concat(P.voto), ementa = P.ementa, todos = P.cabecalho.concat(P.relatorio, P.voto, P.ementa, P.acordao);
+  /* no acórdão, o que vem antes do RELATÓRIO é o cabeçalho automático: fora das conferências */
+  var corpo = P.relatorio.concat(P.voto), ementa = P.ementa, todos = (peca === 'acordao' ? [] : P.cabecalho).concat(P.relatorio, P.voto, P.ementa, P.acordao);
   if (peca !== 'acordao') { corpo = todos; ementa = []; }
 
   /* ---------- 1. estrutura ---------- */

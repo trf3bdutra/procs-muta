@@ -139,17 +139,15 @@
 
     <!-- MINUTA: Comparar (o texto do editor do PJe, a comparação; ver abaixo) ou Gerador (gerador.js: relatório, dispositivo, ementa, acórdão e proclamação pela ficha);
          Comparar: a comparação (minuta-matriz, Collectio, modelos, precedentes, texto colado)
-         e, no rodapé, a conformidade com o padrão do gabinete -->
+         e Conformidade (aba própria: a análise da minuta pelo padrão do gabinete) -->
     <section id="panel-min" role="tabpanel" aria-labelledby="tab-min" hidden>
       <div class="wrap min-wrap">
-        <div class="seg pmodos min-modos" role="tablist" aria-label="Parte da aba Minuta"><button type="button" role="tab" data-mm="cmp" aria-selected="true">Comparar<small>editor × padrão</small></button><button type="button" role="tab" data-mm="ger" aria-selected="false">Gerador<small>relatório, ementa, acórdão</small></button></div>
+        <div class="seg pmodos min-modos" role="tablist" aria-label="Parte da aba Minuta"><button type="button" role="tab" data-mm="cmp" aria-selected="true">Comparar<small>editor × padrão</small></button><button type="button" role="tab" data-mm="ger" aria-selected="false">Gerador<small>relatório, ementa, acórdão</small></button><button type="button" role="tab" data-mm="conf" aria-selected="false">Conformidade <i class="conf-badge" id="mm-conf-n" hidden></i><small id="mc-resumo">leia o editor</small></button></div>
         <div id="cmp-app"></div>
         <details class="card min-col" id="panel-lote"><summary><b>Collectio</b><span class="muted">minuta do processo nos lotes, versões e transferência</span></summary><div id="lote-app"></div></details>
         <div id="ger-app" hidden></div>
-      </div>
-      <div class="min-conf" id="min-conf">
-        <button type="button" class="mc-h" id="mc-t" aria-expanded="false" aria-controls="panel-conf"><span class="mc-k">Conformidade</span><span class="mc-r" id="mc-resumo">leia o editor</span><span class="mc-i" aria-hidden="true"></span></button>
-        <div class="mc-b" id="panel-conf"><div id="conf-app"></div></div>
+        <!-- 0.42: a conformidade é uma aba própria da Minuta (antes, rodapé fixo) -->
+        <div class="min-conf aba" id="min-conf" data-aberto="1" hidden><div class="mc-b" id="panel-conf"><div id="conf-app"></div></div></div>
       </div>
     </section>
 

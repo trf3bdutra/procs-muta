@@ -348,7 +348,7 @@ test('extensão 0.28: designação como etiqueta (minuta e correção) e trilha 
 test('extensão 0.29: Minuta-matriz sem seleção confere só a estrutura; folha; janela lado a lado; conformidade em tela cheia; cartões no desenho do app', () => {
   const c = read('extensao/comparar.js');
   assert.doesNotMatch(c, /if \(!s && M\.length\) \{ s = C\.sel\.matriz = M\[0\]\.x\.id; \}/, 'sem matriz pré-selecionada');
-  assert.match(c, /if \(C\.fonte === 'matriz' && !C\.sel\.matriz\) return estruturaPadrao\(\);/);
+  assert.match(c, /if \(C\.fonte === 'matriz' && !matrizDoProcesso\(\)\) return estruturaPadrao\(\);/, '0.42: sem matriz do processo, só a estrutura');
   assert.match(c, /function folhaHtml\(rows\)/); assert.match(c, /function ladoALadoHtml\(rows, titulo\)/); assert.match(c, /MutaJanela\.abrir\('comparar'/);
   assert.match(read('extensao/conformidade.js'), /MutaJanela\.abrir\('conformidade'/);
   assert.match(read('extensao/comum.js'), /window\.MutaJanela = \{/);
@@ -554,4 +554,18 @@ test('extensão 0.41: botões de sinalização em todo cartão (vazio = sino dis
   assert.match(c, /if \(ehCabecalho\(el\)\) continue;/, 'o cabeçalho do processo aberto não é cartão');
   assert.match(c, /\(\(r \? sinaisHtml\(k, r\) : ''\) \|\| botaoVazio\(k\)\)/, 'autos digitais: sino mesmo sem sinalização');
   assert.match(c, /var r = ENR\.dados\[k\] \|\| \{\};/, 'o quadro abre sem ficha');
+});
+
+test('extensão 0.42: Conformidade em aba própria da Minuta; minuta-matriz do processo sem lista para escolher; cabeçalho automático do PJe fora das conferências', () => {
+  const h = read('extensao/painel.html');
+  assert.match(h, /data-mm="conf"/); assert.match(h, /<div class="min-conf aba" id="min-conf" data-aberto="1" hidden>/); assert.doesNotMatch(h, /id="mc-t"/);
+  assert.match(read('extensao/gerador.js'), /var cf = \$\('min-conf'\); if \(cf\) cf\.hidden = m !== 'conf';/);
+  const c = read('extensao/comparar.js');
+  assert.match(c, /function matrizDoProcesso\(\) \{ var M = matrizesOrdenadas\(\), z = M\[0\]; return z && z\.k >= 6 \? z\.x : null; \}/);
+  assert.doesNotMatch(c, /Escolha uma matriz para comparar bloco a bloco/);
+  const cab = ['PODER JUDICIÁRIO', 'Tribunal Regional Federal da 3ª Região', 'Rua Ceará, 2175, Campo Grande - MS', 'https://www.trf3.jus.br', 'APELAÇÃO CÍVEL (198) Nº 5001082-55.2024.4.03.6002', 'RELATOR(A): LUIS CARLOS HIROKI MUTA', 'APELANTE: CONSELHO REGIONAL', 'ADVOGADO do(a) APELANTE: FULANO - MS10544-A', 'NÃO ASSINÁVEL'];
+  const r = M.analisar(cab.concat(['RELATÓRIO', 'Trata-se de apelação à sentença (ID 111111111) que julgou improcedente o pedido.', 'É o relatório.']), {});
+  assert.ok(!r.itens.some(x => x.trecho && /PODER|Tribunal|APELANTE|ADVOGADO|Rua|https/.test((x.trecho.antes || '') + (x.trecho.alvo || '') + (x.trecho.depois || ''))), JSON.stringify(r.itens.map(x => x.regra)));
+  const d = M.analisar(['PODER JUDICIÁRIO', 'AGRAVO DE INSTRUMENTO (202) Nº 5000000-00.2026.4.03.0000', 'Cabeçalho qualquer do PJe sem padrão 12.3.2026', 'Vistos.', 'Trata-se de agravo.', 'DECIDO.', 'Ante o exposto, nego provimento ao agravo.', 'Publique-se. Intime-se.'], {});
+  assert.equal(d.peca, 'decisao'); assert.ok(!d.itens.some(x => x.trecho && /Cabeçalho qualquer/.test(x.trecho.depois + x.trecho.alvo + x.trecho.antes)));
 });

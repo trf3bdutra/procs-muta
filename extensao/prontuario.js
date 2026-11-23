@@ -179,7 +179,7 @@ function abrirAba(i){
   if(n==='dir'&&window.MutaDiretrizes)window.MutaDiretrizes.abrir();
 }
 wireTabs(mainTabs,function(i){abrirAba(i);});
-window.MutaAbas={ir:function(nome){var alvo=ALIAS[nome]||nome,i=NOMES.indexOf(alvo);if(i<0)return;abrirAba(i);if(nome==='tri'&&window.MutaGabinete&&window.MutaGabinete.ir)window.MutaGabinete.ir('Triagem');if((nome==='ger'||nome==='cmp')&&window.MutaGerador&&window.MutaGerador.modo)window.MutaGerador.modo(nome);}};
+window.MutaAbas={ir:function(nome){var alvo=ALIAS[nome]||nome,i=NOMES.indexOf(alvo);if(i<0)return;abrirAba(i);if(nome==='tri'&&window.MutaGabinete&&window.MutaGabinete.ir)window.MutaGabinete.ir('Triagem');if((nome==='ger'||nome==='cmp'||nome==='conf')&&window.MutaGerador&&window.MutaGerador.modo)window.MutaGerador.modo(nome);}};
 (function(){var d=$('panel-lote');if(d)d.addEventListener('toggle',function(){if(d.open&&window.MutaLote)window.MutaLote.abrir();});var v=$('aj-volta');if(v)v.addEventListener('click',function(){abrirAba(0);});})();
 document.addEventListener('DOMContentLoaded',function(){var h=location.hash.replace('#','');var i=NOMES.indexOf(ALIAS[h]||h);if(i>0)abrirAba(i);});
 var modeTabs=[$('mode-tri'),$('mode-pro')];

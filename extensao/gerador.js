@@ -346,7 +346,7 @@
   /* ---------- 0.38: a casa do Gerador é a aba Minuta (Comparar | Gerador) ---------- */
   var MM_K = 'hero18810:minModo';
   function $(id) { return typeof document !== 'undefined' ? document.getElementById(id) : null; }
-  function modoMin() { try { return localStorage.getItem(MM_K) === 'ger' ? 'ger' : 'cmp'; } catch (e) { return 'cmp'; } }
+  function modoMin() { try { var m = localStorage.getItem(MM_K); return m === 'ger' || m === 'conf' ? m : 'cmp'; } catch (e) { return 'cmp'; } }
   function visivel() { var p = $('panel-min'), g = $('ger-app'); return !!(p && !p.hidden && g && !g.hidden); }
   function pintar(forca) {
     var g = $('ger-app'); if (!g || (!forca && !visivel())) return;
@@ -355,10 +355,13 @@
     if (p) p.scrollTop = y;
   }
   function modo(m) {
-    m = m === 'ger' ? 'ger' : 'cmp'; try { localStorage.setItem(MM_K, m); } catch (e) {}
+    m = m === 'ger' || m === 'conf' ? m : 'cmp'; try { localStorage.setItem(MM_K, m); } catch (e) {}
     var ger = m === 'ger';
-    ['cmp-app', 'panel-lote'].forEach(function (id) { var e = $(id); if (e) e.hidden = ger; });
+    /* Comparar (com o Collectio embaixo) | Gerador | Conformidade */
+    ['cmp-app', 'panel-lote'].forEach(function (id) { var e = $(id); if (e) e.hidden = m !== 'cmp'; });
     var g = $('ger-app'); if (g) g.hidden = !ger;
+    var cf = $('min-conf'); if (cf) cf.hidden = m !== 'conf';
+    if (m === 'conf' && window.MutaConformidade && window.MutaConformidade.abrir) window.MutaConformidade.abrir();
     if (typeof document !== 'undefined') Array.prototype.forEach.call(document.querySelectorAll('[data-mm]'), function (b) { b.setAttribute('aria-selected', String(b.dataset.mm === m)); });
     if (ger) pintar(true);
   }

@@ -1300,3 +1300,9 @@ html[data-tema=escuro] .au-h .au-g{accent-color:#7fb8cf}
 .au-it>summary::-webkit-details-marker{display:none}.au-it>summary::before{content:'▸';font-size:10px}.au-it[open]>summary::before{content:'▾'}
 .au-it>summary>span:first-of-type{font-weight:600;color:var(--fg)}.au-it-a{margin-left:auto;display:inline-flex;gap:4px}
 .au-it .au-tx{margin:4px 0 0}
+/* 0.42 · Conformidade como aba da Minuta */
+.min-conf.aba{position:static;border-top:0;box-shadow:none;background:transparent}
+.min-conf.aba .mc-b{display:block;max-height:none;overflow:visible;padding:0;border-top:0}
+.min-modos button .conf-badge{font-style:normal;margin-left:3px}
+.min-modos #mc-resumo{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}.min-modos #mc-resumo [data-sev=alta]{color:var(--danger)}.min-modos #mc-resumo b{color:var(--fg)}
+html[data-tema=escuro] .min-conf.aba{background:transparent}

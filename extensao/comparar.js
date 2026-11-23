@@ -3,7 +3,7 @@
    minimizável, com os botões do Collectio (localizar o processo nos lotes e mandar o texto do editor para lá).
    Embaixo, "Comparar com": a minuta-matriz do tipo de julgamento (padrão: confere a estrutura, bloco a bloco), a minuta do
    Collectio (por seção), os modelos, os precedentes, o texto colado, a triagem, o 28,86% e os parágrafos-padrão.
-   A conformidade fica no rodapé fixo da aba (conformidade.js). Texto original:
+   A conformidade fica na sua própria aba da Minuta (conformidade.js; até a 0.41, no rodapé). A minuta-matriz é a do processo, sem lista para escolher (0.42). Texto original:
    compara o texto do editor da minuta no PJe (ou um texto colado) com:
    - a minuta do processo registrada nos lotes do Amicus Curiae · Collectio;
    - os modelos do banco do gabinete (sugeridos pela semelhança com o editor);
@@ -162,7 +162,7 @@ function itemAtual() {
   if (C.fonte === 'tri') { var L = (C.tri || []), x = L.filter(function (y) { return y.id === s; })[0] || L[0]; if (x && x.ement) { var j = C.ement[x.ement]; return j && !j.erro && j.secoes && j.secoes.length ? j : null; } return x || null; }
   if (!d) return null;
   if (C.fonte === 'modelo') return d.modelos.filter(function (x) { return x.id === s; })[0] || null;
-  if (C.fonte === 'matriz') { if (!s) { var M0 = matrizesOrdenadas(); s = C.sel.matriz = M0.length ? M0[0].x.id : ''; } return d.matrizes.filter(function (x) { return x.id === s; })[0] || null; }
+  if (C.fonte === 'matriz') return matrizDoProcesso();
   if (C.fonte === 'm2886') {
     if (/^g:/.test(s || '')) { var g = d.m2886.grupos.filter(function (x) { return 'g:' + x.id === s; })[0]; return g ? { rotulo: 'Matriz 28,86% · grupo ' + g.id + ' · ' + g.nome, secoes: g.secoes } : null; }
     if (/^k:/.test(s || '')) { var k = d.kit2886.filter(function (x) { return 'k:' + x.codigo === s; })[0]; return k ? { rotulo: 'Acórdão-modelo ' + k.codigo + ' · ' + k.ref, secoes: FT.secoesDeTexto(k.texto) } : null; }
@@ -212,9 +212,11 @@ function seletor() {
       itens(L, function (x) { return x.nome; }, function (x) { return [x.pron, x.classe, x.assunto].filter(Boolean).join(' · '); }, function (x) { return x.id; }, s);
   }
   if (C.fonte === 'matriz') {
-    var M = matrizesOrdenadas(), res = resEditor();
-    return busca + '<p class="muted cx-n">' + (s ? '<button type="button" class="lnk" data-s="">tirar a seleção</button> · ' : 'Nenhuma matriz escolhida: o editor é conferido só com as regras e padrões estruturais do gabinete. ') + 'Escolha uma matriz para comparar bloco a bloco.</p>' + (res ? '<p class="muted cx-n">dispositivo do editor: ' + esc(window.MutaConformidadeMotor.RES_TXT[res]) + '</p>' : '') +
-      itens(M.slice(0, C.q ? 40 : 8), function (x) { return x.nome; }, function (x) { return [x.pron, x.classe, x.resultado].filter(Boolean).join(' · '); }, function (x) { return x.id; }, s);
+    /* 0.42: sem lista para escolher; vale a minuta-matriz do pronunciamento e do tipo de julgamento do processo */
+    var mx = matrizDoProcesso(), res = resEditor();
+    return '<p class="muted cx-n">' + (mx ? 'Minuta-matriz do processo: <b>' + esc(mx.nome) + '</b>' + ([mx.classe, mx.resultado].filter(Boolean).length ? ' · ' + esc([mx.classe, mx.resultado].filter(Boolean).join(' · ')) : '') :
+      'Sem minuta-matriz para este pronunciamento e tipo de julgamento: o editor é conferido pela estrutura do gabinete.') +
+      ' <small>(pelo tipo de ato e pelo tipo de julgamento do Prontuário' + (res ? '; resultado do editor: ' + esc(window.MutaConformidadeMotor.RES_TXT[res]) : '') + ')</small></p>';
   }
   if (C.fonte === 'm2886') {
     var G = d.m2886.grupos.map(function (g) { return { id: 'g:' + g.id, nome: 'Grupo ' + g.id + ' · ' + g.nome, sub: 'minuta-base da matriz modular · ' + g.resJulg, secoes: g.secoes }; });
@@ -234,6 +236,8 @@ function matrizesOrdenadas() {
     z.k = (z.x.pron === p ? 4 : 0) + (classeMatriz(z.x) === tj ? 2 : 0) + (res && casa(z.x, res) ? 1 : 0); return z;
   }).sort(function (a, b) { return (b.k - a.k) || (b.s - a.s); });
 }
+/* a minuta-matriz do processo: a mais bem posta, desde que seja do mesmo pronunciamento e do mesmo tipo de julgamento */
+function matrizDoProcesso() { var M = matrizesOrdenadas(), z = M[0]; return z && z.k >= 6 ? z.x : null; }
 function casa(m, res) {
   var t = String(m.resultado || m.nome || '').toLowerCase();
   var map = { provido: /provimento$|\bprovimento\b(?!.*parcial)/, parcial: /parcial/, desprovido: /desprovimento/, naoconhecido: /n[ãa]o\s*conhec|naoconhec/, prejudicado: /prejudic/, rejeitados: /rejei/, acolhidos: /acolhim/ };
@@ -252,7 +256,7 @@ function resultadoHtml() {
   var E = ED.estado();
   if (!E.texto) return '<p class="none">Leia o editor do PJe (ou cole o texto) para comparar.</p>';
   if (C.fonte === 'par') return paragrafosPadrao();
-  if (C.fonte === 'matriz' && !C.sel.matriz) return estruturaPadrao();
+  if (C.fonte === 'matriz' && !matrizDoProcesso()) return estruturaPadrao();
   var it = itemAtual();
   if (!it) return '<p class="none">Escolha a fonte da comparação.</p>';
   if (it.erro) return '<p class="status err">' + esc(it.erro) + '</p>';

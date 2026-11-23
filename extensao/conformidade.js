@@ -1,4 +1,4 @@
-/* Muta · conformidade (0.11: no rodapé fixo da aba Minuta, minimizável; aberto, mostra a análise inteira)
+/* Muta · conformidade (0.42: aba própria da Minuta — Comparar | Gerador | Conformidade; até a 0.41, rodapé fixo)
    Painel ativável: com "Conformidade ativa", o painel relê o editor da minuta no PJe a cada poucos segundos e refaz a
    análise quando o texto muda (só lê; não altera o editor). O motor está em conformidade-motor.js; as regras de redação
    vêm do pacote do gabinete (fontes.js) e o contexto do caso, do prontuário e do cartão da pauta. */
@@ -10,7 +10,7 @@ var caixa = $('conf-app'), PREF = 'muta-pje:conformidade';
 var K = { ativa: false, fmt: true, grupo: '', r: null, dados: null, erroDados: '', em: 0, hash: 0 };
 try { var g = JSON.parse(localStorage.getItem(PREF) || '{}'); K.ativa = !!g.ativa; K.fmt = g.fmt !== false; } catch (e) {}
 function guarda() { try { localStorage.setItem(PREF, JSON.stringify({ ativa: K.ativa, fmt: K.fmt })); } catch (e) {} }
-function aberta() { var p = $('panel-min'); return p && !p.hidden; }
+function aberta() { var p = $('panel-min'), w = $('min-conf'); return p && !p.hidden && !(w && w.hidden); }
 /* rodapé: aberto ou recolhido (lembrado neste navegador) */
 var ROD = 'muta-pje:conf-rodape';
 function rodape(abrir) {
@@ -44,6 +44,7 @@ function badge() {
   var m = $('mc-resumo'), w = $('min-conf');
   if (m) m.innerHTML = K.r ? '<b>' + K.r.nota + '</b>/100 · <span data-sev="alta">' + K.r.resumo.alta + ' alta</span> · <span data-sev="media">' + K.r.resumo.media + ' média</span> · <span data-sev="baixa">' + K.r.resumo.baixa + ' baixa</span>' : (ED.estado().texto ? 'analisando…' : 'leia o editor');
   if (w) w.dataset.sev = K.r ? (K.r.resumo.alta ? 'alta' : K.r.resumo.media ? 'media' : 'ok') : '';
+  var b2 = $('mm-conf-n'); if (b2) { var n2 = K.r ? K.r.resumo.alta + K.r.resumo.media : 0; b2.textContent = K.r ? String(n2) : ''; b2.hidden = !K.r; b2.dataset.sev = K.r && K.r.resumo.alta ? 'alta' : n2 ? 'media' : 'ok'; }
   var b = $('conf-badge'); if (!b) return;
   var n = K.r ? K.r.resumo.alta + K.r.resumo.media : 0;
   b.textContent = K.r ? String(n) : ''; b.hidden = !K.r; b.dataset.sev = K.r && K.r.resumo.alta ? 'alta' : n ? 'media' : 'ok';

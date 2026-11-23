@@ -5,6 +5,12 @@ Nome desde a 0.19.3 (antes: Muta). Os identificadores internos (`window.Muta*`, 
 Extensão do Chrome/Edge (Manifest V3) que abre o **Muta** num painel lateral, ao lado dos autos e das tarefas do PJe 2º grau do TRF-3.
 Base: o HTML independente *muta-independente-prontuario-completo* (Prontuário + Acervo).
 
+## O que muda na 0.42 · Minuta: Conformidade em aba própria, matriz do processo, cabeçalho fora
+
+- **Conformidade** deixou o rodapé fixo e virou a terceira parte da Minuta: Comparar | Gerador | Conformidade. O título mostra a nota e o número de avisos altos e médios (`gerador.js › modo`, `painel.html › #min-conf.aba`).
+- **Minuta-matriz** sem lista para escolher: vale a do pronunciamento (tipo de ato do Prontuário ou tarefa do PJe) e do tipo de julgamento do processo; sem uma que case, confere-se a estrutura do gabinete (`comparar.js › matrizDoProcesso`).
+- **Cabeçalho automático do PJe** (brasão, tribunal, endereço, classe e número, relator, partes, advogados, "NÃO ASSINÁVEL"; na decisão, tudo antes de "Vistos.") fica fora de todas as conferências (`conformidade-motor.js › cabecalhoPje`).
+
 ## O que muda na 0.41 · sinalizações em todo cartão e no cabeçalho; minuta e correção nos aguardando sessão
 
 - Todo cartão da lista do PJe tem o botão de sinalizações na faixa do topo; sem sinalização, um sino discreto que abre o quadro para incluir pendência, intercorrência ou nota (`conteudo-pje.js › botaoVazio`). Vale também para processo ainda sem ficha.
