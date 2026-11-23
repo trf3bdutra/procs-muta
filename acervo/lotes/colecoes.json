@@ -65,12 +65,6 @@
     "n": 42
    },
    {
-    "id": "adp-mono-terminativas",
-    "titulo": "Monocráticas terminativas · triagem",
-    "tarefa": "Analisar tipo de decisão a proferir",
-    "n": 80
-   },
-   {
     "id": "adp-remessas",
     "titulo": "Analisar decisão · Remessas necessárias",
     "tarefa": "Analisar tipo de decisão a proferir",
@@ -240,7 +234,11 @@
     "n": 144,
     "reserva": true
    }
+  ],
+  "decisoes": [
+   "adp-mono-terminativas",
+   "despachos-triagem"
   ]
  },
- "atualizado_em": "2026-11-21T18:27:06Z"
+ "atualizado_em": "2026-11-23"
 }

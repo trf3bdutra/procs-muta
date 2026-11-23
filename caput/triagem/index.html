@@ -5048,12 +5048,20 @@ function etqSug(l,it){
   return out;
 }
 const FX={}, FX_L={};
+/* minutas de decisões (monocrática, interlocutória, despacho) ficam no Collectio, em lotes de decisões; a triagem só aponta para lá */
+const DEC={}; let DEC_L=0;
+function lerDecisoes(){ if(DEC_L)return; DEC_L=1;
+  fetch('/api/painel?lote=1',{cache:'no-store',credentials:'same-origin'}).then(r=>r.ok?r.json():{lotes:[]}).then(j=>Promise.all((j.lotes||[]).filter(l=>['monocratica','interlocutoria','despacho'].includes(l.tipo)).map(l=>
+    fetch('/api/painel?lote=1&id='+encodeURIComponent(l.id),{cache:'no-store',credentials:'same-origin'}).then(r=>r.ok?r.json():null).then(x=>{const L=x&&x.lote;if(!L)return;
+      (L.itens||[]).forEach(i=>{DEC[i.processo]={lote:L.id,titulo:L.titulo||L.id,minuta:!!i.minuta,situacao:(i.equipe||{}).situacao||''}})}).catch(()=>{}))))
+    .then(()=>{if(refazer){const y=scrollY;refazer();scrollTo(0,y)}}).catch(()=>{}); }
 function lerFx(cnj){ if(FX_L[cnj]||!OPC.lerFicha)return; FX_L[cnj]=1; Promise.resolve(OPC.lerFicha(cnj)).then(r=>{FX[cnj]=r||{};if(refazer){const y=scrollY;refazer();scrollTo(0,y)}}).catch(()=>{FX[cnj]={}}); }
 function stCls(v){v=String(v||'');return /intempest|não recolhido|sem comprovante|a menor|após a interposição|irregular|deser/i.test(v)?'cr':/^(tempestivo|comprovado|justiça gratuita|isento|assistência|regular|dispensad|com parecer|sem hipótese|sem preliminares)/i.test(v)?'ok':/não se aplica/i.test(v)?'':v?'al':''}
 function cartao(l,it){
   const g=l.grupos.find(x=>x.id===it.grupo), c=ctl(it), cr=crt(it), t=it.triagem||{}, sa=it.situacao_atual||{}, teor=it.teor||{}, rel=cr.rel||{}, orig=cr.orig||{}, e=it.equipe||{};
   if(!FX[it.processo])lerFx(it.processo); const fx=FX[it.processo]||null, F=k=>fx&&fx[k]!=null&&fx[k]!==''?String(fx[k]):'';
-  const mk=l.id+'|'+it.processo.slice(0,10), mn=it.minuta?MIN[mk]:null; if(it.minuta&&!MIN[mk]&&!MIN_L[mk])lerMinuta(l.id,it.processo.slice(0,10));
+  lerDecisoes(); const dec=DEC[it.processo]||null;
+  const mk=l.id+'|'+it.processo.slice(0,10), mn=it.minuta&&!dec?MIN[mk]:null; if(it.minuta&&!dec&&!MIN[mk]&&!MIN_L[mk])lerMinuta(l.id,it.processo.slice(0,10));
   const adm=[['Tipo de julgamento',F('Tipo de Julgamento')||cr.tipoJ||rec(it.recurso||it.classe),''],['Tempestividade',F('Tempestividade')||c.tempest,''],['Preparo',F('Preparo')||c.preparo,t.conf_preparo||c.prep_t||''],
     ['Representação',F('Representação')||c.repres,F('Observação da Representação')||c.obsRepres||''],['Intervenção do MPF',F('MPF - Custos Legis')||c.mpf,F('MPF')||c.parecer||''],['Preliminares',F('Prelim.')||c.prelim,F('Descrição da Preliminar')||c.descPrelim||''],
     ['Urgência',F('Urgência')||c.urgTipo,[F('Urgência - Apreciação')||c.urgSit,F('Urgência - Data')].filter(Boolean).join(' · ')],['Mídias',F('Mídias')||c.midias,''],['Prevenção',t.conf_prevencao?'conferida':'',t.conf_prevencao||''],
@@ -5108,7 +5116,7 @@ function cartao(l,it){
      ${falta.length?`<div class="fl2"><span>Pendências</span><ul>${falta.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>`:''}${prox?tx('Próxima ação',prox):''}${F('Intercorrências')?tx('Intercorrências',F('Intercorrências')):''}
      ${sit.length?`<div class="sit2"><h4>Situação atual ${sa.resumo?`<small>${esc(String(sa.resumo).replace(/^► /,'').split(':')[0])}</small>`:''}</h4>${sit.map(x=>`<div class="kv"><span>${esc(x[0])}</span><p>${esc(x[1])}</p></div>`).join('')}</div>`:''}</section>
    </div>
-   ${it.minuta&&!mn?'<p class="vz">Lendo a minuta…</p>':''}${mn?`<details class="pc2-mn" open><summary>Minuta · ${esc(mn.vigente||'')}${mn.rotulo?' · '+esc(mn.rotulo):''}</summary><div class="mdoc">${[['relatorio','RELATÓRIO'],['voto','VOTO'],['ementa','EMENTA'],['acordao','ACÓRDÃO']].map(([k,r])=>((mn.secoes||{})[k]||[]).length?`<h4>${k==='voto'&&ehMonoMn(mn)?(/^despacho/i.test(String(mn.rotulo||''))?'DESPACHO':'DECISÃO'):r}</h4>`+mn.secoes[k].map(p=>`<p>${esc(p)}</p>`).join(''):'').join('')}</div></details>`:''}
+   ${dec?`<p class="pc2-rod">${dec.minuta?'Minuta':'Decisão'} no Collectio · ${esc(dec.titulo)}${dec.situacao?' · '+esc(dec.situacao):''} · <a class="lk2" href="/amicus/collectio/?colecao=${encodeURIComponent(dec.lote)}&processo=${esc(it.processo.slice(0,10))}" target="_blank" rel="noopener">Abrir no Collectio</a></p>`:''}${it.minuta&&!dec&&!mn?'<p class="vz">Lendo a minuta…</p>':''}${mn?`<details class="pc2-mn" open><summary>Minuta · ${esc(mn.vigente||'')}${mn.rotulo?' · '+esc(mn.rotulo):''}</summary><div class="mdoc">${[['relatorio','RELATÓRIO'],['voto','VOTO'],['ementa','EMENTA'],['acordao','ACÓRDÃO']].map(([k,r])=>((mn.secoes||{})[k]||[]).length?`<h4>${k==='voto'&&ehMonoMn(mn)?(/^despacho/i.test(String(mn.rotulo||''))?'DESPACHO':'DECISÃO'):r}</h4>`+mn.secoes[k].map(p=>`<p>${esc(p)}</p>`).join(''):'').join('')}</div></details>`:''}
    <p class="pc2-rod">O registro completo do lote está na <button type="button" class="lk2" data-acao="ficha" data-p="${esc(it.processo)}">ficha do processo</button> (aba Triagem › Registro da triagem).</p>
   </div>`;
 }

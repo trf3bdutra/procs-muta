@@ -1,0 +1,1081 @@
+{
+ "schema": "gabcmt.lote",
+ "versao": 1,
+ "tipo": "despacho",
+ "id": "despachos-triagem",
+ "titulo": "Despachos · triagem",
+ "descricao": "Despachos minutados a partir da triagem (Analisar tipo de decisão a proferir)",
+ "origem": "triagem adp-ai",
+ "tarefa": "Analisar tipo de decisão a proferir",
+ "sessoes": [],
+ "criado_por": "Bruno",
+ "atualizado_em": "2026-11-23",
+ "colunas": [],
+ "grupos": [],
+ "itens": [
+  {
+   "sessao": "",
+   "item": 243,
+   "processo": "5000459-78.2026.4.03.0001",
+   "recurso": "Agravo de instrumento",
+   "partes": "ERBE INCORPORADORA 037 S.A. x NIDELCIA SEVERINO LEITE VIEIRA",
+   "exequente": "ERBE INCORPORADORA 037 S.A.",
+   "executado": "NIDELCIA SEVERINO LEITE VIEIRA",
+   "assunto": "Vícios de Construção",
+   "grupo": "L18",
+   "tipo_caso": "Série ERBE · vícios construtivos em imóvel do Minha Casa Minha Vida · monocrática de 31/08/2026 (não conheceu quanto à perícia e negou provimento quanto ao mais) · agravo interno da construtora ainda sem resposta · custas em dobro recolhidas em valor simples [VALIDAR]",
+   "resultado": "Ato a proferir: o agravo interno (ID 397031954, 10/09/2026) contra a monocrática ID 394821237 (31/08/2026) não foi respondido e a lista extraída não traz intimação da agravada; o processo foi concluso em 14/09/2026 [VALIDAR no PJe]; a guia juntada (ID 397028579) é GRU Judicial de R$ 64,26, valor simples, embora a monocrática tenha determinado o recolhimento em dobro [VALIDAR] ‖ Proposta pelos precedentes: Intimar a agravada para resposta (artigo 1.021, § 2º, do CPC); depois, desprovimento do agravo interno, na linha dos acórdãos da Turma Regional na série (AI 5028840-36.2025.4.03.0000 e AI 5029639-79.2025.4.03.0000, Turma Regional de Mato Grosso do Sul, 15/09/2026); intimar a agravante a complementar as custas em dobro [VALIDAR] [VALIDAR: Intimação da agravada para resposta ao agravo interno; Complemento das custas em dobro (comprovante de R$ 64,26); Data da publicação da monocrática (tempestividade do agravo interno)]",
+   "modelo": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Agravo interno da ERBE Incorporadora 037 S.A. (ID 397031954, 10/09/2026) contra a monocrática ID 394821237 (31/08/2026), que não conheceu do agravo de instrumento quanto à perícia e negou provimento quanto ao mais, na ação de Nidelcia Severino Leite Vieira por vícios construtivos. A monocrática determinou o recolhimento das custas em dobro; a construtora juntou GRU Judicial de R$ 64,26. Não há resposta da agravada nem intimação para ela na lista extraída.",
+   "peculiaridades": "Série de agravos idênticos da ERBE (mesmo advogado e mesmas razões). Pedido de intimação exclusiva em nome de Wilson Sales Belchior (OAB/MS 20.233-A).",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "",
+    "correcao": "",
+    "situacao": "A minutar"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {
+    "ato": "Despacho: intimar a agravada para resposta ao agravo interno (artigo 1.021, § 2º, do CPC); depois, voto",
+    "materia": "Responsabilidade civil — vícios construtivos (Minha Casa Minha Vida)",
+    "origem": "Ação 5001396-08.2018.4.03.6003 (1ª Vara Federal de Três Lagoas)",
+    "decisao_agravada": "Decisão monocrática ID 394821237 (31/08/2026)",
+    "recurso": "Agravo interno ID 397031954 · 10/09/2026",
+    "preparo": "GRU Judicial de R$ 64,26 paga em 09/09/2026 (comprovante de caixa da CAIXA, ID 397028579); a monocrática determinou o recolhimento em dobro [VALIDAR complemento]",
+    "monocratica": "Já proferida (ID 394821237); agora, agravo interno",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "RECOLHIDO A MENOR [VALIDAR] · a monocrática ID 394821237 determinou o recolhimento em dobro (artigo 1.007, § 4º, do CPC) · a ERBE juntou GRU Judicial de R$ 64,26 com comprovante de caixa (ID 397028579) · GRU Judicial depois de 03/04/2026 [VALIDAR] · conferido em 21/11/2026",
+    "conf_prevencao": "Distribuição na Turma Regional · origem 5001396-08.2018.4.03.6003 · conferido em 21/11/2026"
+   },
+   "ajustes": [],
+   "pendencias": [
+    "[VALIDAR] Intimar a agravada (artigo 1.021, § 2º, do CPC)",
+    "[VALIDAR] Custas em dobro recolhidas em valor simples"
+   ],
+   "minuta": true,
+   "classe": "AI",
+   "tarefa": "Analisar tipo de decisão a proferir",
+   "etiquetas": "1ª Seção; CUSTAS EM DOBRO; ERBE - AI; LIMINAR PENDENTE; PJ/SAF",
+   "chegada": "20/10/2026",
+   "extracao": {
+    "situacao": "pendente"
+   },
+   "assunto_detalhado": "Série ERBE — agravo interno sem intimação para resposta; custas em dobro",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 394821237 · 31/08/2026 — não conheceu em parte e negou provimento quanto ao mais; determinou o recolhimento das custas em dobro | última peça: Agravo interno (advogado de parte) · ID 397031954 · 10/09/2026 | última movimentação: [VALIDAR no PJe] · Série ERBE · Agravo interno ID 397031954 sem resposta · Custas em dobro: GRU Judicial de R$ 64,26 (ID 397028579) [VALIDAR] · Precedentes da Turma Regional de 15/09/2026",
+   "teor": {
+    "sintese_fatica": "Nidelcia Severino Leite Vieira move ação por vícios construtivos em imóvel do Programa Minha Casa Minha Vida contra a ERBE Incorporadora 037 S.A. e a CEF; o juízo da 1ª Vara Federal de Três Lagoas deferiu a perícia e rejeitou as questões da construtora [VALIDAR teor da decisão agravada].",
+    "inicial": "Ação 5001396-08.2018.4.03.6003 (1ª Vara Federal de Três Lagoas).",
+    "decisao_recorrida": "Decisão monocrática ID 394821237 (31/08/2026): não conheceu do recurso quanto à perícia (artigo 932 do CPC) e negou provimento quanto ao mais; determinou o recolhimento das custas em dobro em 5 dias.",
+    "recurso": "Agravo interno ID 397031954 (10/09/2026): cabimento do agravo de instrumento contra a perícia (taxatividade mitigada); perícia por amostragem; julgamento colegiado.",
+    "resposta": "Não consta.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Advogado Wilson Sales Belchior (OAB/MS 20.233-A), com pedido de intimação exclusiva.",
+    "preparo": "GRU Judicial de R$ 64,26 (ID 397028579)."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo Interno",
+     "subassuntos": "Série ERBE · vícios construtivos em imóvel do Minha Casa Minha Vida · monocrática de 31/08/2026 (não conheceu quanto à perícia e negou provimento quanto ao mais) · agravo interno da construtora ainda sem resposta · custas em dobro recolhidas em valor simples [VALIDAR]",
+     "sintese": "Nidelcia Severino Leite Vieira move ação por vícios construtivos em imóvel do Programa Minha Casa Minha Vida contra a ERBE Incorporadora 037 S.A. e a CEF; o juízo da 1ª Vara Federal de Três Lagoas deferiu a perícia e rejeitou as questões da construtora [VALIDAR teor da decisão agravada].",
+     "questoes": "1) Cabimento do agravo de instrumento contra o deferimento da perícia (artigo 1.015 do CPC; taxatividade mitigada); 2) perícia individual ou por amostragem; 3) custas em dobro.",
+     "rel": {
+      "razoes": "Agravo interno ID 397031954 (10/09/2026): cabimento do agravo de instrumento contra a perícia (taxatividade mitigada); perícia por amostragem; julgamento colegiado.",
+      "contrarrazoes": "Não consta."
+     },
+     "orig": {
+      "tipo": "Decisão monocrática",
+      "id": "394821237",
+      "juizo": "Relator",
+      "dispositivo": "Não conheceu quanto à perícia e negou provimento quanto ao mais; custas em dobro."
+     },
+     "ai": {
+      "hip": "Produção de prova",
+      "efeito": "Prejudicado",
+      "id": "394821237"
+     },
+     "adm": {
+      "prot": "2026-08-15",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte ré",
+       "tipo": "Agravo interno",
+       "id": "397031954",
+       "contra": "Não intimada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "392129443",
+       "data": "2026-08-15",
+       "pje": {
+        "tipo": "Petição Inicial",
+        "paginas": 27
+       },
+       "trecho": "PUGNAÇÃO APRESENTADA – QUESITOS SUPLEMENTARES – DIFERENÇA SUBSTANCIAL DE VALORES – HOMOLOGAÇÃO DO LAUDO – DECISÃO GENÉRICA – AUSÊNCIA DE FUNDAMENTAÇÃO E ANÁLISE DE QUESTÕES RELEVANTES SUSCITADAS PELA PARTE – VIOLAÇÃO AOS ARTS. 371 E 489, AMBOS DO CPC – DECISÃO CASSADA – REALIZAÇÃO DE NOVA PERÍCIA – …"
+      },
+      {
+       "desc": "Decisão monocrática: não conheceu quanto à perícia e negou provimento quanto ao mais; custas em dobro",
+       "id": "394821237",
+       "data": "2026-08-31",
+       "nota": "Decisão monocrática ID 394821237 (31/08/2026): não conheceu do recurso quanto à perícia (artigo 932 do CPC) e negou provimento quanto ao mais; determinou o recolhimento das custas em dobro em 5 dias. · (ID 397031954, 10/09/2026) contra a monocrática ID 394821237 (31/08/2026), que não conheceu do agravo de instrumento quanto à perícia e negou provimento quanto ao mais, na ação de Nidelcia Severino Leite Vieira por …",
+       "pje": {
+        "tipo": "Decisão Monocrática Terminativa Com Resolução de Mérito"
+       },
+       "trecho": "14/08/2024, DJEN 20/08/2024.\"Ante o exposto, com esteio no artigo 932, IV, do Código de Processo Civil, não conheço do recurso, quanto ao deferimento da perícia técnica, e, quanto ao mais, nego provimento ao agravo de instrumento.Nada obstante, considerando que as custas processuais são devidas …"
+      },
+      {
+       "desc": "Guia e comprovante de custas (GRU Judicial, R$ 64,26)",
+       "id": "397028579",
+       "data": "2026-09-10",
+       "nota": "GRU Judicial de R$ 64,26 (ID 397028579). · Série ERBE · Agravo interno ID 397031954 sem resposta · Custas em dobro: GRU Judicial de R$ 64,26 (ID 397028579) [VALIDAR] · Precedentes da Turma Regional de 15/09/2026",
+       "pje": {
+        "tipo": "Documentos Diversos",
+        "descricao": "24881863 02dw doc 01 5000459 78.2026.4.03.0001",
+        "paginas": 2
+       },
+       "trecho": "Código de Recolhimento Número do Processo/Referência Competência Vencimento CPF ou CNPJ do Contribuinte Código da Unidade Gestora Arrecadadora Valor Principal (-) Descontos/Abatimentos (-) Outras Deduções (+) Mora/Multa (+) Juros/Encargos (+) Outros Acréscimos (=) Valor Total Instruções: As …"
+      },
+      {
+       "desc": "Agravo interno",
+       "id": "397031954",
+       "data": "2026-09-10",
+       "nota": "Agravo interno ID 397031954 (10/09/2026): cabimento do agravo de instrumento contra a perícia (taxatividade mitigada); perícia por amostragem; julgamento colegiado. · Série ERBE · Agravo interno ID 397031954 sem resposta · Custas em dobro: GRU Judicial de R$ 64,26 (ID 397028579) [VALIDAR] · Precedentes da Turma Regional de 15/09/2026",
+       "pje": {
+        "tipo": "Petição intercorrente",
+        "descricao": "24883566 01dw 5000459 78.2026.4.03.0001",
+        "paginas": 25
+       },
+       "trecho": "Diante do exposto, merece reforma a decisão monocrática, pois incide no caso o teor do decidido no Tema n.º 988 do STJ, porquanto permite a mitigação do rol previsto no art. 1.015, CPC/2015, viabilizando, por esse motivo, o conhecimento do agravo de instrumento. 4 . 2 . P RESCRIÇÃO . A RT . 206, § …"
+      }
+     ],
+     "pendencias": "Intimar a agravada; conferir custas em dobro",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 394821237 · 31/08/2026 — não conheceu em parte e negou provimento quanto ao mais; determinou o recolhimento das custas em dobro | última peça: Agravo interno (advogado de parte) · ID 397031954 · 10/09/2026 | última movimentação: [VALIDAR no PJe] · Série ERBE · Agravo interno ID 397031954 sem resposta · Custas em dobro: GRU Judicial de R$ 64,26 (ID 397028579) [VALIDAR] · Precedentes da Turma Regional de 15/09/2026",
+     "assuntoDet": "Série ERBE — agravo interno sem intimação para resposta; custas em dobro",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Recolhido a menor",
+     "prelim": "Sem preliminares",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Apreciada · prejudicada",
+     "urgData": "2026-08-31",
+     "urgPedido": "2026-08-15"
+    }
+   },
+   "situacao_atual": {
+    "ultima_decisao": "Decisão Monocrática Terminativa Com Resolução de Mérito · ID 394821237 · 31/08/2026 — não conheceu em parte e negou provimento quanto ao mais; determinou o recolhimento das custas em dobro",
+    "ultima_peca": "Agravo interno (advogado de parte) · ID 397031954 · 10/09/2026",
+    "ultima_informacao": "Informação · ID 392433668 · 18/08/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação a conferir no PJe",
+    "ultima_movimentacao": "[VALIDAR no PJe]",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 394821237 · 31/08/2026 — não conheceu em parte e negou provimento quanto ao mais; determinou o recolhimento das custas em dobro | última peça: Agravo interno (advogado de parte) · ID 397031954 · 10/09/2026 | última movimentação: [VALIDAR no PJe]"
+   }
+  },
+  {
+   "sessao": "",
+   "item": 244,
+   "processo": "5000463-18.2026.4.03.0001",
+   "recurso": "Agravo de instrumento",
+   "partes": "ERBE INCORPORADORA 037 S.A. x DAMIANA SOARES DE LIMA",
+   "exequente": "ERBE INCORPORADORA 037 S.A.",
+   "executado": "DAMIANA SOARES DE LIMA",
+   "assunto": "Vícios de Construção",
+   "grupo": "L18",
+   "tipo_caso": "Série ERBE · vícios construtivos em imóvel do Minha Casa Minha Vida · monocrática de 31/08/2026 (não conheceu quanto à perícia e negou provimento quanto ao mais) · agravo interno da construtora ainda sem resposta · custas em dobro recolhidas em valor simples [VALIDAR]",
+   "resultado": "Ato a proferir: o agravo interno (ID 397030504, 10/09/2026) contra a monocrática ID 394816850 (31/08/2026) não foi respondido e a lista extraída não traz intimação da agravada; o processo foi concluso em 14/09/2026 [VALIDAR no PJe]; a guia juntada (ID 397033739) é GRU Judicial de R$ 64,26, valor simples, embora a monocrática tenha determinado o recolhimento em dobro [VALIDAR] ‖ Proposta pelos precedentes: Intimar a agravada para resposta (artigo 1.021, § 2º, do CPC); depois, desprovimento do agravo interno, na linha dos acórdãos da Turma Regional na série (AI 5028840-36.2025.4.03.0000 e AI 5029639-79.2025.4.03.0000, Turma Regional de Mato Grosso do Sul, 15/09/2026); intimar a agravante a complementar as custas em dobro [VALIDAR] [VALIDAR: Intimação da agravada para resposta ao agravo interno; Complemento das custas em dobro (comprovante de R$ 64,26); Data da publicação da monocrática (tempestividade do agravo interno)]",
+   "modelo": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Agravo interno da ERBE Incorporadora 037 S.A. (ID 397030504, 10/09/2026) contra a monocrática ID 394816850 (31/08/2026), que não conheceu do agravo de instrumento quanto à perícia e negou provimento quanto ao mais, na ação de Damiana Soares de Lima por vícios construtivos. A monocrática determinou o recolhimento das custas em dobro; a construtora juntou GRU Judicial de R$ 64,26. Não há resposta da agravada nem intimação para ela na lista extraída.",
+   "peculiaridades": "Série de agravos idênticos da ERBE (mesmo advogado e mesmas razões). Pedido de intimação exclusiva em nome de Wilson Sales Belchior (OAB/MS 20.233-A).",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "",
+    "correcao": "",
+    "situacao": "A minutar"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {
+    "ato": "Despacho: intimar a agravada para resposta ao agravo interno (artigo 1.021, § 2º, do CPC); depois, voto",
+    "materia": "Responsabilidade civil — vícios construtivos (Minha Casa Minha Vida)",
+    "origem": "Ação 5001830-94.2018.4.03.6003 (1ª Vara Federal de Três Lagoas)",
+    "decisao_agravada": "Decisão monocrática ID 394816850 (31/08/2026)",
+    "recurso": "Agravo interno ID 397030504 · 10/09/2026",
+    "preparo": "GRU Judicial de R$ 64,26 paga em 27/08/2026 (comprovante de caixa da CAIXA, ID 397033739); a monocrática determinou o recolhimento em dobro [VALIDAR complemento]",
+    "monocratica": "Já proferida (ID 394816850); agora, agravo interno",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "RECOLHIDO A MENOR [VALIDAR] · a monocrática ID 394816850 determinou o recolhimento em dobro (artigo 1.007, § 4º, do CPC) · a ERBE juntou GRU Judicial de R$ 64,26 com comprovante de caixa (ID 397033739) · GRU Judicial depois de 03/04/2026 [VALIDAR] · conferido em 21/11/2026",
+    "conf_prevencao": "Distribuição na Turma Regional · origem 5001830-94.2018.4.03.6003 · conferido em 21/11/2026"
+   },
+   "ajustes": [],
+   "pendencias": [
+    "[VALIDAR] Intimar a agravada (artigo 1.021, § 2º, do CPC)",
+    "[VALIDAR] Custas em dobro recolhidas em valor simples"
+   ],
+   "minuta": true,
+   "classe": "AI",
+   "tarefa": "Analisar tipo de decisão a proferir",
+   "etiquetas": "1ª Seção; CUSTAS EM DOBRO; ERBE - AI; LIMINAR PENDENTE; PJ/SAF",
+   "chegada": "20/10/2026",
+   "extracao": {
+    "situacao": "pendente"
+   },
+   "assunto_detalhado": "Série ERBE — agravo interno sem intimação para resposta; custas em dobro",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 394816850 · 31/08/2026 — não conheceu em parte e negou provimento quanto ao mais; determinou o recolhimento das custas em dobro | última peça: Petição intercorrente (advogado de parte) · ID 397033738 · 10/09/2026 | última movimentação: [VALIDAR no PJe] · Série ERBE · Agravo interno ID 397030504 sem resposta · Custas em dobro: GRU Judicial de R$ 64,26 (ID 397033739) [VALIDAR] · Precedentes da Turma Regional de 15/09/2026",
+   "teor": {
+    "sintese_fatica": "Damiana Soares de Lima move ação por vícios construtivos em imóvel do Programa Minha Casa Minha Vida contra a ERBE Incorporadora 037 S.A. e a CEF; o juízo da 1ª Vara Federal de Três Lagoas deferiu a perícia e rejeitou as questões da construtora [VALIDAR teor da decisão agravada].",
+    "inicial": "Ação 5001830-94.2018.4.03.6003 (1ª Vara Federal de Três Lagoas).",
+    "decisao_recorrida": "Decisão monocrática ID 394816850 (31/08/2026): não conheceu do recurso quanto à perícia (artigo 932 do CPC) e negou provimento quanto ao mais; determinou o recolhimento das custas em dobro em 5 dias.",
+    "recurso": "Agravo interno ID 397030504 (10/09/2026): cabimento do agravo de instrumento contra a perícia (taxatividade mitigada); perícia por amostragem; julgamento colegiado.",
+    "resposta": "Não consta.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Advogado Wilson Sales Belchior (OAB/MS 20.233-A), com pedido de intimação exclusiva.",
+    "preparo": "GRU Judicial de R$ 64,26 (ID 397033739)."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo Interno",
+     "subassuntos": "Série ERBE · vícios construtivos em imóvel do Minha Casa Minha Vida · monocrática de 31/08/2026 (não conheceu quanto à perícia e negou provimento quanto ao mais) · agravo interno da construtora ainda sem resposta · custas em dobro recolhidas em valor simples [VALIDAR]",
+     "sintese": "Damiana Soares de Lima move ação por vícios construtivos em imóvel do Programa Minha Casa Minha Vida contra a ERBE Incorporadora 037 S.A. e a CEF; o juízo da 1ª Vara Federal de Três Lagoas deferiu a perícia e rejeitou as questões da construtora [VALIDAR teor da decisão agravada].",
+     "questoes": "1) Cabimento do agravo de instrumento contra o deferimento da perícia (artigo 1.015 do CPC; taxatividade mitigada); 2) perícia individual ou por amostragem; 3) custas em dobro.",
+     "rel": {
+      "razoes": "Agravo interno ID 397030504 (10/09/2026): cabimento do agravo de instrumento contra a perícia (taxatividade mitigada); perícia por amostragem; julgamento colegiado.",
+      "contrarrazoes": "Não consta."
+     },
+     "orig": {
+      "tipo": "Decisão monocrática",
+      "id": "394816850",
+      "juizo": "Relator",
+      "dispositivo": "Não conheceu quanto à perícia e negou provimento quanto ao mais; custas em dobro."
+     },
+     "ai": {
+      "hip": "Produção de prova",
+      "efeito": "Prejudicado",
+      "id": "394816850"
+     },
+     "adm": {
+      "prot": "2026-08-15",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte ré",
+       "tipo": "Agravo interno",
+       "id": "397030504",
+       "contra": "Não intimada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "392129463",
+       "data": "2026-08-15",
+       "pje": {
+        "tipo": "Petição Inicial",
+        "paginas": 27
+       },
+       "trecho": "PUGNAÇÃO APRESENTADA – QUESITOS SUPLEMENTARES – DIFERENÇA SUBSTANCIAL DE VALORES – HOMOLOGAÇÃO DO LAUDO – DECISÃO GENÉRICA – AUSÊNCIA DE FUNDAMENTAÇÃO E ANÁLISE DE QUESTÕES RELEVANTES SUSCITADAS PELA PARTE – VIOLAÇÃO AOS ARTS. 371 E 489, AMBOS DO CPC – DECISÃO CASSADA – REALIZAÇÃO DE NOVA PERÍCIA – …"
+      },
+      {
+       "desc": "Decisão monocrática: não conheceu quanto à perícia e negou provimento quanto ao mais; custas em dobro",
+       "id": "394816850",
+       "data": "2026-08-31",
+       "nota": "Decisão monocrática ID 394816850 (31/08/2026): não conheceu do recurso quanto à perícia (artigo 932 do CPC) e negou provimento quanto ao mais; determinou o recolhimento das custas em dobro em 5 dias. · (ID 397030504, 10/09/2026) contra a monocrática ID 394816850 (31/08/2026), que não conheceu do agravo de instrumento quanto à perícia e negou provimento quanto ao mais, na ação de Damiana Soares de Lima por vícios …",
+       "pje": {
+        "tipo": "Decisão Monocrática Terminativa Com Resolução de Mérito"
+       },
+       "trecho": "14/08/2024, DJEN 20/08/2024.\"Ante o exposto, com esteio no artigo 932, IV, do Código de Processo Civil, não conheço do recurso, quanto ao deferimento da perícia técnica, e, quanto ao mais, nego provimento ao agravo de instrumento.Nada obstante, considerando que as custas processuais são devidas …"
+      },
+      {
+       "desc": "Guia e comprovante de custas (GRU Judicial, R$ 64,26)",
+       "id": "397033739",
+       "data": "2026-09-10",
+       "nota": "GRU Judicial de R$ 64,26 (ID 397033739). · Série ERBE · Agravo interno ID 397030504 sem resposta · Custas em dobro: GRU Judicial de R$ 64,26 (ID 397033739) [VALIDAR] · Precedentes da Turma Regional de 15/09/2026",
+       "pje": {
+        "tipo": "Documentos Diversos",
+        "descricao": "24881866 02dw doc 01 5000463 18.2026.4.03.0001",
+        "paginas": 2
+       },
+       "trecho": "Gergdo a partir de ooota3 18/08/2026 10:35:47 Código de Recolhimento GUIA DE RECOLHIMENTO DA UNIÃO - GRU 187208 Niimerodo Frosesso/Referência 50004631820264030001 MINISTÉRIO DA FAZENDA — : e 08/2026 SECRETARIA DO TESOURO NACIONAL em encimento GRU Judicial 31/08/2026 Nome da Unidade Gestora …"
+      },
+      {
+       "desc": "Agravo interno",
+       "id": "397030504",
+       "data": "2026-09-10",
+       "nota": "Agravo interno ID 397030504 (10/09/2026): cabimento do agravo de instrumento contra a perícia (taxatividade mitigada); perícia por amostragem; julgamento colegiado. · Série ERBE · Agravo interno ID 397030504 sem resposta · Custas em dobro: GRU Judicial de R$ 64,26 (ID 397033739) [VALIDAR] · Precedentes da Turma Regional de 15/09/2026",
+       "pje": {
+        "tipo": "Petição intercorrente",
+        "descricao": "24883568 01dw 5000463 18.2026.4.03.0001",
+        "paginas": 25
+       },
+       "trecho": "Diante do exposto, merece reforma a decisão monocrática, pois incide no caso o teor do decidido no Tema n.º 988 do STJ, porquanto permite a mitigação do rol previsto no art. 1.015, CPC/2015, viabilizando, por esse motivo, o conhecimento do agravo de instrumento. 4 . 2 . P RESCRIÇÃO . A RT . 206, § …"
+      }
+     ],
+     "pendencias": "Intimar a agravada; conferir custas em dobro",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 394816850 · 31/08/2026 — não conheceu em parte e negou provimento quanto ao mais; determinou o recolhimento das custas em dobro | última peça: Petição intercorrente (advogado de parte) · ID 397033738 · 10/09/2026 | última movimentação: [VALIDAR no PJe] · Série ERBE · Agravo interno ID 397030504 sem resposta · Custas em dobro: GRU Judicial de R$ 64,26 (ID 397033739) [VALIDAR] · Precedentes da Turma Regional de 15/09/2026",
+     "assuntoDet": "Série ERBE — agravo interno sem intimação para resposta; custas em dobro",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Recolhido a menor",
+     "prelim": "Sem preliminares",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Apreciada · prejudicada",
+     "urgData": "2026-08-31",
+     "urgPedido": "2026-08-15"
+    }
+   },
+   "situacao_atual": {
+    "ultima_decisao": "Decisão Monocrática Terminativa Com Resolução de Mérito · ID 394816850 · 31/08/2026 — não conheceu em parte e negou provimento quanto ao mais; determinou o recolhimento das custas em dobro",
+    "ultima_peca": "Petição intercorrente (advogado de parte) · ID 397033738 · 10/09/2026",
+    "ultima_informacao": "Informação · ID 392467651 · 18/08/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação a conferir no PJe",
+    "ultima_movimentacao": "[VALIDAR no PJe]",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 394816850 · 31/08/2026 — não conheceu em parte e negou provimento quanto ao mais; determinou o recolhimento das custas em dobro | última peça: Petição intercorrente (advogado de parte) · ID 397033738 · 10/09/2026 | última movimentação: [VALIDAR no PJe]"
+   }
+  },
+  {
+   "sessao": "",
+   "item": 245,
+   "processo": "5000460-63.2026.4.03.0001",
+   "recurso": "Agravo de instrumento",
+   "partes": "ERBE INCORPORADORA 037 S.A. x VANESSA DE OLIVEIRA GARCIA",
+   "exequente": "ERBE INCORPORADORA 037 S.A.",
+   "executado": "VANESSA DE OLIVEIRA GARCIA",
+   "assunto": "Vícios de Construção",
+   "grupo": "L18",
+   "tipo_caso": "Série ERBE · vícios construtivos em imóvel do Minha Casa Minha Vida · monocrática de 31/08/2026 (não conheceu quanto à perícia e negou provimento quanto ao mais) · agravo interno da construtora ainda sem resposta · custas em dobro recolhidas em valor simples [VALIDAR]",
+   "resultado": "Ato a proferir: o agravo interno (ID 397031960, 10/09/2026) contra a monocrática ID 394803293 (31/08/2026) não foi respondido e a lista extraída não traz intimação da agravada; o processo foi concluso em 14/09/2026 [VALIDAR no PJe]; a guia juntada (ID 397028570) é GRU Judicial de R$ 64,26, valor simples, embora a monocrática tenha determinado o recolhimento em dobro [VALIDAR] ‖ Proposta pelos precedentes: Intimar a agravada para resposta (artigo 1.021, § 2º, do CPC); depois, desprovimento do agravo interno, na linha dos acórdãos da Turma Regional na série (AI 5028840-36.2025.4.03.0000 e AI 5029639-79.2025.4.03.0000, Turma Regional de Mato Grosso do Sul, 15/09/2026); intimar a agravante a complementar as custas em dobro [VALIDAR] [VALIDAR: Intimação da agravada para resposta ao agravo interno; Complemento das custas em dobro (comprovante de R$ 64,26); Data da publicação da monocrática (tempestividade do agravo interno)]",
+   "modelo": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Agravo interno da ERBE Incorporadora 037 S.A. (ID 397031960, 10/09/2026) contra a monocrática ID 394803293 (31/08/2026), que não conheceu do agravo de instrumento quanto à perícia e negou provimento quanto ao mais, na ação de Vanessa de Oliveira Garcia por vícios construtivos. A monocrática determinou o recolhimento das custas em dobro; a construtora juntou GRU Judicial de R$ 64,26. Não há resposta da agravada nem intimação para ela na lista extraída.",
+   "peculiaridades": "Série de agravos idênticos da ERBE (mesmo advogado e mesmas razões). Pedido de intimação exclusiva em nome de Wilson Sales Belchior (OAB/MS 20.233-A).",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "",
+    "correcao": "",
+    "situacao": "A minutar"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {
+    "ato": "Despacho: intimar a agravada para resposta ao agravo interno (artigo 1.021, § 2º, do CPC); depois, voto",
+    "materia": "Responsabilidade civil — vícios construtivos (Minha Casa Minha Vida)",
+    "origem": "Ação 5001562-40.2018.4.03.6003 (1ª Vara Federal de Três Lagoas)",
+    "decisao_agravada": "Decisão monocrática ID 394803293 (31/08/2026)",
+    "recurso": "Agravo interno ID 397031960 · 10/09/2026",
+    "preparo": "GRU Judicial de R$ 64,26 paga em 09/09/2026 (comprovante de caixa da CAIXA, ID 397028570); a monocrática determinou o recolhimento em dobro [VALIDAR complemento]",
+    "monocratica": "Já proferida (ID 394803293); agora, agravo interno",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "RECOLHIDO A MENOR [VALIDAR] · a monocrática ID 394803293 determinou o recolhimento em dobro (artigo 1.007, § 4º, do CPC) · a ERBE juntou GRU Judicial de R$ 64,26 com comprovante de caixa (ID 397028570) · GRU Judicial depois de 03/04/2026 [VALIDAR] · conferido em 21/11/2026",
+    "conf_prevencao": "Distribuição na Turma Regional · origem 5001562-40.2018.4.03.6003 · conferido em 21/11/2026"
+   },
+   "ajustes": [],
+   "pendencias": [
+    "[VALIDAR] Intimar a agravada (artigo 1.021, § 2º, do CPC)",
+    "[VALIDAR] Custas em dobro recolhidas em valor simples"
+   ],
+   "minuta": true,
+   "classe": "AI",
+   "tarefa": "Analisar tipo de decisão a proferir",
+   "etiquetas": "1ª Seção; CUSTAS EM DOBRO; ERBE - AI; LIMINAR PENDENTE; PJ/SAF",
+   "chegada": "20/10/2026",
+   "extracao": {
+    "situacao": "pendente"
+   },
+   "assunto_detalhado": "Série ERBE — agravo interno sem intimação para resposta; custas em dobro",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 394803293 · 31/08/2026 — não conheceu em parte e negou provimento quanto ao mais; determinou o recolhimento das custas em dobro | última peça: Agravo interno (advogado de parte) · ID 397031960 · 10/09/2026 | última movimentação: [VALIDAR no PJe] · Série ERBE · Agravo interno ID 397031960 sem resposta · Custas em dobro: GRU Judicial de R$ 64,26 (ID 397028570) [VALIDAR] · Precedentes da Turma Regional de 15/09/2026",
+   "teor": {
+    "sintese_fatica": "Vanessa de Oliveira Garcia move ação por vícios construtivos em imóvel do Programa Minha Casa Minha Vida contra a ERBE Incorporadora 037 S.A. e a CEF; o juízo da 1ª Vara Federal de Três Lagoas deferiu a perícia e rejeitou as questões da construtora [VALIDAR teor da decisão agravada].",
+    "inicial": "Ação 5001562-40.2018.4.03.6003 (1ª Vara Federal de Três Lagoas).",
+    "decisao_recorrida": "Decisão monocrática ID 394803293 (31/08/2026): não conheceu do recurso quanto à perícia (artigo 932 do CPC) e negou provimento quanto ao mais; determinou o recolhimento das custas em dobro em 5 dias.",
+    "recurso": "Agravo interno ID 397031960 (10/09/2026): cabimento do agravo de instrumento contra a perícia (taxatividade mitigada); perícia por amostragem; julgamento colegiado.",
+    "resposta": "Não consta.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Advogado Wilson Sales Belchior (OAB/MS 20.233-A), com pedido de intimação exclusiva.",
+    "preparo": "GRU Judicial de R$ 64,26 (ID 397028570)."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo Interno",
+     "subassuntos": "Série ERBE · vícios construtivos em imóvel do Minha Casa Minha Vida · monocrática de 31/08/2026 (não conheceu quanto à perícia e negou provimento quanto ao mais) · agravo interno da construtora ainda sem resposta · custas em dobro recolhidas em valor simples [VALIDAR]",
+     "sintese": "Vanessa de Oliveira Garcia move ação por vícios construtivos em imóvel do Programa Minha Casa Minha Vida contra a ERBE Incorporadora 037 S.A. e a CEF; o juízo da 1ª Vara Federal de Três Lagoas deferiu a perícia e rejeitou as questões da construtora [VALIDAR teor da decisão agravada].",
+     "questoes": "1) Cabimento do agravo de instrumento contra o deferimento da perícia (artigo 1.015 do CPC; taxatividade mitigada); 2) perícia individual ou por amostragem; 3) custas em dobro.",
+     "rel": {
+      "razoes": "Agravo interno ID 397031960 (10/09/2026): cabimento do agravo de instrumento contra a perícia (taxatividade mitigada); perícia por amostragem; julgamento colegiado.",
+      "contrarrazoes": "Não consta."
+     },
+     "orig": {
+      "tipo": "Decisão monocrática",
+      "id": "394803293",
+      "juizo": "Relator",
+      "dispositivo": "Não conheceu quanto à perícia e negou provimento quanto ao mais; custas em dobro."
+     },
+     "ai": {
+      "hip": "Produção de prova",
+      "efeito": "Prejudicado",
+      "id": "394803293"
+     },
+     "adm": {
+      "prot": "2026-08-15",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte ré",
+       "tipo": "Agravo interno",
+       "id": "397031960",
+       "contra": "Não intimada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "392129448",
+       "data": "2026-08-15",
+       "pje": {
+        "tipo": "Petição Inicial",
+        "paginas": 27
+       },
+       "trecho": "PUGNAÇÃO APRESENTADA – QUESITOS SUPLEMENTARES – DIFERENÇA SUBSTANCIAL DE VALORES – HOMOLOGAÇÃO DO LAUDO – DECISÃO GENÉRICA – AUSÊNCIA DE FUNDAMENTAÇÃO E ANÁLISE DE QUESTÕES RELEVANTES SUSCITADAS PELA PARTE – VIOLAÇÃO AOS ARTS. 371 E 489, AMBOS DO CPC – DECISÃO CASSADA – REALIZAÇÃO DE NOVA PERÍCIA – …"
+      },
+      {
+       "desc": "Decisão monocrática: não conheceu quanto à perícia e negou provimento quanto ao mais; custas em dobro",
+       "id": "394803293",
+       "data": "2026-08-31",
+       "nota": "Decisão monocrática ID 394803293 (31/08/2026): não conheceu do recurso quanto à perícia (artigo 932 do CPC) e negou provimento quanto ao mais; determinou o recolhimento das custas em dobro em 5 dias. · (ID 397031960, 10/09/2026) contra a monocrática ID 394803293 (31/08/2026), que não conheceu do agravo de instrumento quanto à perícia e negou provimento quanto ao mais, na ação de Vanessa de Oliveira Garcia por vícios …",
+       "pje": {
+        "tipo": "Decisão Monocrática Terminativa Com Resolução de Mérito"
+       },
+       "trecho": "14/08/2024, DJEN 20/08/2024.\"Ante o exposto, com esteio no artigo 932, IV, do Código de Processo Civil, não conheço do recurso, quanto ao deferimento da perícia técnica, e, quanto ao mais, nego provimento ao agravo de instrumento.Nada obstante, considerando que as custas processuais são devidas …"
+      },
+      {
+       "desc": "Guia e comprovante de custas (GRU Judicial, R$ 64,26)",
+       "id": "397028570",
+       "data": "2026-09-10",
+       "nota": "GRU Judicial de R$ 64,26 (ID 397028570). · Série ERBE · Agravo interno ID 397031960 sem resposta · Custas em dobro: GRU Judicial de R$ 64,26 (ID 397028570) [VALIDAR] · Precedentes da Turma Regional de 15/09/2026",
+       "pje": {
+        "tipo": "Documentos Diversos",
+        "descricao": "24881864 02dw doc 01 5000460 63.2026.4.03.0001",
+        "paginas": 2
+       },
+       "trecho": "Código de Recolhimento Número do Processo/Referência Competência Vencimento CPF ou CNPJ do Contribuinte Código da Unidade Gestora Arrecadadora Valor Principal (-) Descontos/Abatimentos (-) Outras Deduções (+) Mora/Multa (+) Juros/Encargos (+) Outros Acréscimos (=) Valor Total Instruções: As …"
+      },
+      {
+       "desc": "Agravo interno",
+       "id": "397031960",
+       "data": "2026-09-10",
+       "nota": "Agravo interno ID 397031960 (10/09/2026): cabimento do agravo de instrumento contra a perícia (taxatividade mitigada); perícia por amostragem; julgamento colegiado. · Série ERBE · Agravo interno ID 397031960 sem resposta · Custas em dobro: GRU Judicial de R$ 64,26 (ID 397028570) [VALIDAR] · Precedentes da Turma Regional de 15/09/2026",
+       "pje": {
+        "tipo": "Petição intercorrente",
+        "descricao": "24883567 01dw 5000460 63.2026.4.03.0001",
+        "paginas": 25
+       },
+       "trecho": "Diante do exposto, merece reforma a decisão monocrática, pois incide no caso o teor do decidido no Tema n.º 988 do STJ, porquanto permite a mitigação do rol previsto no art. 1.015, CPC/2015, viabilizando, por esse motivo, o conhecimento do agravo de instrumento. 4 . 2 . P RESCRIÇÃO . A RT . 206, § …"
+      }
+     ],
+     "pendencias": "Intimar a agravada; conferir custas em dobro",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 394803293 · 31/08/2026 — não conheceu em parte e negou provimento quanto ao mais; determinou o recolhimento das custas em dobro | última peça: Agravo interno (advogado de parte) · ID 397031960 · 10/09/2026 | última movimentação: [VALIDAR no PJe] · Série ERBE · Agravo interno ID 397031960 sem resposta · Custas em dobro: GRU Judicial de R$ 64,26 (ID 397028570) [VALIDAR] · Precedentes da Turma Regional de 15/09/2026",
+     "assuntoDet": "Série ERBE — agravo interno sem intimação para resposta; custas em dobro",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Recolhido a menor",
+     "prelim": "Sem preliminares",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Apreciada · prejudicada",
+     "urgData": "2026-08-31",
+     "urgPedido": "2026-08-15"
+    }
+   },
+   "situacao_atual": {
+    "ultima_decisao": "Decisão Monocrática Terminativa Com Resolução de Mérito · ID 394803293 · 31/08/2026 — não conheceu em parte e negou provimento quanto ao mais; determinou o recolhimento das custas em dobro",
+    "ultima_peca": "Agravo interno (advogado de parte) · ID 397031960 · 10/09/2026",
+    "ultima_informacao": "Informação · ID 392433671 · 18/08/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação a conferir no PJe",
+    "ultima_movimentacao": "[VALIDAR no PJe]",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 394803293 · 31/08/2026 — não conheceu em parte e negou provimento quanto ao mais; determinou o recolhimento das custas em dobro | última peça: Agravo interno (advogado de parte) · ID 397031960 · 10/09/2026 | última movimentação: [VALIDAR no PJe]"
+   }
+  },
+  {
+   "sessao": "",
+   "item": 246,
+   "processo": "5000505-67.2026.4.03.0001",
+   "recurso": "Agravo de instrumento",
+   "partes": "ERBE INCORPORADORA 037 S.A. x PATRICIA GENEZINA DA SILVA",
+   "exequente": "ERBE INCORPORADORA 037 S.A.",
+   "executado": "PATRICIA GENEZINA DA SILVA",
+   "assunto": "Vícios de Construção",
+   "grupo": "L18",
+   "tipo_caso": "Série ERBE · vícios construtivos em imóvel do Minha Casa Minha Vida · monocrática de 31/08/2026 (não conheceu quanto à perícia e negou provimento quanto ao mais) · agravo interno da construtora ainda sem resposta · custas em dobro recolhidas em valor simples [VALIDAR]",
+   "resultado": "Ato a proferir: o agravo interno (ID 397033746, 10/09/2026) contra a monocrática ID 394816840 (31/08/2026) não foi respondido e a lista extraída não traz intimação da agravada; o processo foi concluso em 14/09/2026 [VALIDAR no PJe]; a guia juntada (ID 397030512) é GRU Judicial de R$ 64,26, valor simples, embora a monocrática tenha determinado o recolhimento em dobro [VALIDAR] ‖ Proposta pelos precedentes: Intimar a agravada para resposta (artigo 1.021, § 2º, do CPC); depois, desprovimento do agravo interno, na linha dos acórdãos da Turma Regional na série (AI 5028840-36.2025.4.03.0000 e AI 5029639-79.2025.4.03.0000, Turma Regional de Mato Grosso do Sul, 15/09/2026); intimar a agravante a complementar as custas em dobro [VALIDAR] [VALIDAR: Intimação da agravada para resposta ao agravo interno; Complemento das custas em dobro (comprovante de R$ 64,26); Data da publicação da monocrática (tempestividade do agravo interno)]",
+   "modelo": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Agravo interno da ERBE Incorporadora 037 S.A. (ID 397033746, 10/09/2026) contra a monocrática ID 394816840 (31/08/2026), que não conheceu do agravo de instrumento quanto à perícia e negou provimento quanto ao mais, na ação de Patricia Genezina da Silva por vícios construtivos. A monocrática determinou o recolhimento das custas em dobro; a construtora juntou GRU Judicial de R$ 64,26. Não há resposta da agravada nem intimação para ela na lista extraída.",
+   "peculiaridades": "Série de agravos idênticos da ERBE (mesmo advogado e mesmas razões). Pedido de intimação exclusiva em nome de Wilson Sales Belchior (OAB/MS 20.233-A).",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "",
+    "correcao": "",
+    "situacao": "A minutar"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {
+    "ato": "Despacho: intimar a agravada para resposta ao agravo interno (artigo 1.021, § 2º, do CPC); depois, voto",
+    "materia": "Responsabilidade civil — vícios construtivos (Minha Casa Minha Vida)",
+    "origem": "Ação 5000117-79.2021.4.03.6003 (1ª Vara Federal de Três Lagoas)",
+    "decisao_agravada": "Decisão monocrática ID 394816840 (31/08/2026)",
+    "recurso": "Agravo interno ID 397033746 · 10/09/2026",
+    "preparo": "GRU Judicial de R$ 64,26 paga em 09/09/2026 (comprovante de caixa da CAIXA, ID 397030512); a monocrática determinou o recolhimento em dobro [VALIDAR complemento]",
+    "monocratica": "Já proferida (ID 394816840); agora, agravo interno",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "RECOLHIDO A MENOR [VALIDAR] · a monocrática ID 394816840 determinou o recolhimento em dobro (artigo 1.007, § 4º, do CPC) · a ERBE juntou GRU Judicial de R$ 64,26 com comprovante de caixa (ID 397030512) · GRU Judicial depois de 03/04/2026 [VALIDAR] · conferido em 21/11/2026",
+    "conf_prevencao": "Distribuição na Turma Regional · origem 5000117-79.2021.4.03.6003 · conferido em 21/11/2026"
+   },
+   "ajustes": [],
+   "pendencias": [
+    "[VALIDAR] Intimar a agravada (artigo 1.021, § 2º, do CPC)",
+    "[VALIDAR] Custas em dobro recolhidas em valor simples"
+   ],
+   "minuta": true,
+   "classe": "AI",
+   "tarefa": "Analisar tipo de decisão a proferir",
+   "etiquetas": "1ª Seção; CUSTAS EM DOBRO; ERBE - AI; LIMINAR PENDENTE; PJ/SAF",
+   "chegada": "20/10/2026",
+   "extracao": {
+    "situacao": "pendente"
+   },
+   "assunto_detalhado": "Série ERBE — agravo interno sem intimação para resposta; custas em dobro",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 394816840 · 31/08/2026 — não conheceu em parte e negou provimento quanto ao mais; determinou o recolhimento das custas em dobro | última peça: Agravo interno (advogado de parte) · ID 397033746 · 10/09/2026 | última movimentação: [VALIDAR no PJe] · Série ERBE · Agravo interno ID 397033746 sem resposta · Custas em dobro: GRU Judicial de R$ 64,26 (ID 397030512) [VALIDAR] · Precedentes da Turma Regional de 15/09/2026",
+   "teor": {
+    "sintese_fatica": "Patricia Genezina da Silva move ação por vícios construtivos em imóvel do Programa Minha Casa Minha Vida contra a ERBE Incorporadora 037 S.A. e a CEF; o juízo da 1ª Vara Federal de Três Lagoas deferiu a perícia e rejeitou as questões da construtora [VALIDAR teor da decisão agravada].",
+    "inicial": "Ação 5000117-79.2021.4.03.6003 (1ª Vara Federal de Três Lagoas).",
+    "decisao_recorrida": "Decisão monocrática ID 394816840 (31/08/2026): não conheceu do recurso quanto à perícia (artigo 932 do CPC) e negou provimento quanto ao mais; determinou o recolhimento das custas em dobro em 5 dias.",
+    "recurso": "Agravo interno ID 397033746 (10/09/2026): cabimento do agravo de instrumento contra a perícia (taxatividade mitigada); perícia por amostragem; julgamento colegiado.",
+    "resposta": "Não consta.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Advogado Wilson Sales Belchior (OAB/MS 20.233-A), com pedido de intimação exclusiva.",
+    "preparo": "GRU Judicial de R$ 64,26 (ID 397030512)."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo Interno",
+     "subassuntos": "Série ERBE · vícios construtivos em imóvel do Minha Casa Minha Vida · monocrática de 31/08/2026 (não conheceu quanto à perícia e negou provimento quanto ao mais) · agravo interno da construtora ainda sem resposta · custas em dobro recolhidas em valor simples [VALIDAR]",
+     "sintese": "Patricia Genezina da Silva move ação por vícios construtivos em imóvel do Programa Minha Casa Minha Vida contra a ERBE Incorporadora 037 S.A. e a CEF; o juízo da 1ª Vara Federal de Três Lagoas deferiu a perícia e rejeitou as questões da construtora [VALIDAR teor da decisão agravada].",
+     "questoes": "1) Cabimento do agravo de instrumento contra o deferimento da perícia (artigo 1.015 do CPC; taxatividade mitigada); 2) perícia individual ou por amostragem; 3) custas em dobro.",
+     "rel": {
+      "razoes": "Agravo interno ID 397033746 (10/09/2026): cabimento do agravo de instrumento contra a perícia (taxatividade mitigada); perícia por amostragem; julgamento colegiado.",
+      "contrarrazoes": "Não consta."
+     },
+     "orig": {
+      "tipo": "Decisão monocrática",
+      "id": "394816840",
+      "juizo": "Relator",
+      "dispositivo": "Não conheceu quanto à perícia e negou provimento quanto ao mais; custas em dobro."
+     },
+     "ai": {
+      "hip": "Produção de prova",
+      "efeito": "Prejudicado",
+      "id": "394816840"
+     },
+     "adm": {
+      "prot": "2026-08-16",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte ré",
+       "tipo": "Agravo interno",
+       "id": "397033746",
+       "contra": "Não intimada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "392168503",
+       "data": "2026-08-16",
+       "pje": {
+        "tipo": "Petição Inicial",
+        "paginas": 27
+       },
+       "trecho": "PUGNAÇÃO APRESENTADA – QUESITOS SUPLEMENTARES – DIFERENÇA SUBSTANCIAL DE VALORES – HOMOLOGAÇÃO DO LAUDO – DECISÃO GENÉRICA – AUSÊNCIA DE FUNDAMENTAÇÃO E ANÁLISE DE QUESTÕES RELEVANTES SUSCITADAS PELA PARTE – VIOLAÇÃO AOS ARTS. 371 E 489, AMBOS DO CPC – DECISÃO CASSADA – REALIZAÇÃO DE NOVA PERÍCIA – …"
+      },
+      {
+       "desc": "Decisão monocrática: não conheceu quanto à perícia e negou provimento quanto ao mais; custas em dobro",
+       "id": "394816840",
+       "data": "2026-08-31",
+       "nota": "Decisão monocrática ID 394816840 (31/08/2026): não conheceu do recurso quanto à perícia (artigo 932 do CPC) e negou provimento quanto ao mais; determinou o recolhimento das custas em dobro em 5 dias. · (ID 397033746, 10/09/2026) contra a monocrática ID 394816840 (31/08/2026), que não conheceu do agravo de instrumento quanto à perícia e negou provimento quanto ao mais, na ação de Patricia Genezina da Silva por vícios …",
+       "pje": {
+        "tipo": "Decisão Monocrática Terminativa Com Resolução de Mérito"
+       },
+       "trecho": "14/08/2024, DJEN 20/08/2024.\"Ante o exposto, com esteio no artigo 932, IV, do Código de Processo Civil, não conheço do recurso, quanto ao deferimento da perícia técnica, e, quanto ao mais, nego provimento ao agravo de instrumento.Nada obstante, considerando que as custas processuais são devidas …"
+      },
+      {
+       "desc": "Guia e comprovante de custas (GRU Judicial, R$ 64,26)",
+       "id": "397030512",
+       "data": "2026-09-10",
+       "nota": "GRU Judicial de R$ 64,26 (ID 397030512). · Série ERBE · Agravo interno ID 397033746 sem resposta · Custas em dobro: GRU Judicial de R$ 64,26 (ID 397030512) [VALIDAR] · Precedentes da Turma Regional de 15/09/2026",
+       "pje": {
+        "tipo": "Documentos Diversos",
+        "descricao": "24881872 02dw doc 01 5000505 67.2026.4.03.0001",
+        "paginas": 2
+       },
+       "trecho": "Código de Recolhimento Número do Processo/Referência Competência Vencimento CPF ou CNPJ do Contribuinte Código da Unidade Gestora Arrecadadora Valor Principal (-) Descontos/Abatimentos (-) Outras Deduções (+) Mora/Multa (+) Juros/Encargos (+) Outros Acréscimos (=) Valor Total Instruções: As …"
+      },
+      {
+       "desc": "Agravo interno",
+       "id": "397033746",
+       "data": "2026-09-10",
+       "nota": "Agravo interno ID 397033746 (10/09/2026): cabimento do agravo de instrumento contra a perícia (taxatividade mitigada); perícia por amostragem; julgamento colegiado. · Série ERBE · Agravo interno ID 397033746 sem resposta · Custas em dobro: GRU Judicial de R$ 64,26 (ID 397030512) [VALIDAR] · Precedentes da Turma Regional de 15/09/2026",
+       "pje": {
+        "tipo": "Petição intercorrente",
+        "descricao": "24883574 01dw 5000505 67.2026.4.03.0001",
+        "paginas": 25
+       },
+       "trecho": "Diante do exposto, merece reforma a decisão monocrática, pois incide no caso o teor do decidido no Tema n.º 988 do STJ, porquanto permite a mitigação do rol previsto no art. 1.015, CPC/2015, viabilizando, por esse motivo, o conhecimento do agravo de instrumento. 4 . 2 . P RESCRIÇÃO . A RT . 206, § …"
+      }
+     ],
+     "pendencias": "Intimar a agravada; conferir custas em dobro",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 394816840 · 31/08/2026 — não conheceu em parte e negou provimento quanto ao mais; determinou o recolhimento das custas em dobro | última peça: Agravo interno (advogado de parte) · ID 397033746 · 10/09/2026 | última movimentação: [VALIDAR no PJe] · Série ERBE · Agravo interno ID 397033746 sem resposta · Custas em dobro: GRU Judicial de R$ 64,26 (ID 397030512) [VALIDAR] · Precedentes da Turma Regional de 15/09/2026",
+     "assuntoDet": "Série ERBE — agravo interno sem intimação para resposta; custas em dobro",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Recolhido a menor",
+     "prelim": "Sem preliminares",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Apreciada · prejudicada",
+     "urgData": "2026-08-31",
+     "urgPedido": "2026-08-16"
+    }
+   },
+   "situacao_atual": {
+    "ultima_decisao": "Decisão Monocrática Terminativa Com Resolução de Mérito · ID 394816840 · 31/08/2026 — não conheceu em parte e negou provimento quanto ao mais; determinou o recolhimento das custas em dobro",
+    "ultima_peca": "Agravo interno (advogado de parte) · ID 397033746 · 10/09/2026",
+    "ultima_informacao": "Informação · ID 392619941 · 19/08/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação a conferir no PJe",
+    "ultima_movimentacao": "[VALIDAR no PJe]",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 394816840 · 31/08/2026 — não conheceu em parte e negou provimento quanto ao mais; determinou o recolhimento das custas em dobro | última peça: Agravo interno (advogado de parte) · ID 397033746 · 10/09/2026 | última movimentação: [VALIDAR no PJe]"
+   }
+  },
+  {
+   "sessao": "",
+   "item": 247,
+   "processo": "5000385-24.2026.4.03.0001",
+   "recurso": "Agravo de instrumento",
+   "partes": "ERBE INCORPORADORA 037 S.A. x JOSELITO RODRIGUES RIBEIRO",
+   "exequente": "ERBE INCORPORADORA 037 S.A.",
+   "executado": "JOSELITO RODRIGUES RIBEIRO",
+   "assunto": "Vícios de Construção",
+   "grupo": "L18",
+   "tipo_caso": "Série ERBE · vícios construtivos em imóvel do Minha Casa Minha Vida · monocrática de 31/08/2026 (não conheceu quanto à perícia e negou provimento quanto ao mais) · agravo interno da construtora ainda sem resposta · custas em dobro recolhidas em valor simples [VALIDAR]",
+   "resultado": "Ato a proferir: o agravo interno (ID 397031968, 10/09/2026) contra a monocrática ID 394816861 (31/08/2026) não foi respondido e a lista extraída não traz intimação da agravada; o processo foi concluso em 14/09/2026 [VALIDAR no PJe]; a guia juntada (ID 397030486) é GRU Judicial de R$ 64,26, valor simples, embora a monocrática tenha determinado o recolhimento em dobro [VALIDAR] ‖ Proposta pelos precedentes: Intimar a agravada para resposta (artigo 1.021, § 2º, do CPC); depois, desprovimento do agravo interno, na linha dos acórdãos da Turma Regional na série (AI 5028840-36.2025.4.03.0000 e AI 5029639-79.2025.4.03.0000, Turma Regional de Mato Grosso do Sul, 15/09/2026); intimar a agravante a complementar as custas em dobro [VALIDAR] [VALIDAR: Intimação da agravada para resposta ao agravo interno; Complemento das custas em dobro (comprovante de R$ 64,26)]",
+   "modelo": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Agravo interno da ERBE Incorporadora 037 S.A. (ID 397031968, 10/09/2026) contra a monocrática ID 394816861 (31/08/2026), que não conheceu do agravo de instrumento quanto à perícia e negou provimento quanto ao mais, na ação de Joselito Rodrigues Ribeiro por vícios construtivos. A monocrática determinou o recolhimento das custas em dobro; a construtora juntou GRU Judicial de R$ 64,26. Não há resposta da agravada nem intimação para ela na lista extraída.",
+   "peculiaridades": "Série de agravos idênticos da ERBE (mesmo advogado e mesmas razões). Pedido de intimação exclusiva em nome de Wilson Sales Belchior (OAB/MS 20.233-A).",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "",
+    "correcao": "",
+    "situacao": "A minutar"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {
+    "ato": "Despacho: intimar a agravada para resposta ao agravo interno (artigo 1.021, § 2º, do CPC); depois, voto",
+    "materia": "Responsabilidade civil — vícios construtivos (Minha Casa Minha Vida)",
+    "origem": "Ação 5001825-72.2018.4.03.6003 (1ª Vara Federal de Três Lagoas)",
+    "decisao_agravada": "Decisão monocrática ID 394816861 (31/08/2026)",
+    "recurso": "Agravo interno ID 397031968 · 10/09/2026",
+    "preparo": "GRU Judicial de R$ 64,26 paga em [VALIDAR data, ilegível] (comprovante de caixa da CAIXA, ID 397030486); a monocrática determinou o recolhimento em dobro [VALIDAR complemento]",
+    "monocratica": "Já proferida (ID 394816861); agora, agravo interno",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "RECOLHIDO A MENOR [VALIDAR] · a monocrática ID 394816861 determinou o recolhimento em dobro (artigo 1.007, § 4º, do CPC) · a ERBE juntou GRU Judicial de R$ 64,26 com comprovante de caixa (ID 397030486) · GRU Judicial depois de 03/04/2026 [VALIDAR] · conferido em 21/11/2026",
+    "conf_prevencao": "Distribuição na Turma Regional · origem 5001825-72.2018.4.03.6003 · conferido em 21/11/2026"
+   },
+   "ajustes": [],
+   "pendencias": [
+    "[VALIDAR] Intimar a agravada (artigo 1.021, § 2º, do CPC)",
+    "[VALIDAR] Custas em dobro recolhidas em valor simples"
+   ],
+   "minuta": true,
+   "classe": "AI",
+   "tarefa": "Analisar tipo de decisão a proferir",
+   "etiquetas": "1ª Seção; CUSTAS EM DOBRO; ERBE - AI; LIMINAR PENDENTE; PJ/SAF",
+   "chegada": "20/10/2026",
+   "extracao": {
+    "situacao": "pendente"
+   },
+   "assunto_detalhado": "Série ERBE — agravo interno sem intimação para resposta; custas em dobro",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 394816861 · 31/08/2026 — não conheceu em parte e negou provimento quanto ao mais; determinou o recolhimento das custas em dobro | última peça: Agravo interno (advogado de parte) · ID 397031968 · 10/09/2026 | última movimentação: 14/09/2026 17:52 · Conclusos para julgamento · Série ERBE · Agravo interno ID 397031968 sem resposta · Custas em dobro: GRU Judicial de R$ 64,26 (ID 397030486) [VALIDAR] · Precedentes da Turma Regional de 15/09/2026",
+   "teor": {
+    "sintese_fatica": "Joselito Rodrigues Ribeiro move ação por vícios construtivos em imóvel do Programa Minha Casa Minha Vida contra a ERBE Incorporadora 037 S.A. e a CEF; o juízo da 1ª Vara Federal de Três Lagoas deferiu a perícia e rejeitou as questões da construtora [VALIDAR teor da decisão agravada].",
+    "inicial": "Ação 5001825-72.2018.4.03.6003 (1ª Vara Federal de Três Lagoas).",
+    "decisao_recorrida": "Decisão monocrática ID 394816861 (31/08/2026): não conheceu do recurso quanto à perícia (artigo 932 do CPC) e negou provimento quanto ao mais; determinou o recolhimento das custas em dobro em 5 dias.",
+    "recurso": "Agravo interno ID 397031968 (10/09/2026): cabimento do agravo de instrumento contra a perícia (taxatividade mitigada); perícia por amostragem; julgamento colegiado.",
+    "resposta": "Não consta.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Advogado Wilson Sales Belchior (OAB/MS 20.233-A), com pedido de intimação exclusiva.",
+    "preparo": "GRU Judicial de R$ 64,26 (ID 397030486)."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo Interno",
+     "subassuntos": "Série ERBE · vícios construtivos em imóvel do Minha Casa Minha Vida · monocrática de 31/08/2026 (não conheceu quanto à perícia e negou provimento quanto ao mais) · agravo interno da construtora ainda sem resposta · custas em dobro recolhidas em valor simples [VALIDAR]",
+     "sintese": "Joselito Rodrigues Ribeiro move ação por vícios construtivos em imóvel do Programa Minha Casa Minha Vida contra a ERBE Incorporadora 037 S.A. e a CEF; o juízo da 1ª Vara Federal de Três Lagoas deferiu a perícia e rejeitou as questões da construtora [VALIDAR teor da decisão agravada].",
+     "questoes": "1) Cabimento do agravo de instrumento contra o deferimento da perícia (artigo 1.015 do CPC; taxatividade mitigada); 2) perícia individual ou por amostragem; 3) custas em dobro.",
+     "rel": {
+      "razoes": "Agravo interno ID 397031968 (10/09/2026): cabimento do agravo de instrumento contra a perícia (taxatividade mitigada); perícia por amostragem; julgamento colegiado.",
+      "contrarrazoes": "Não consta."
+     },
+     "orig": {
+      "tipo": "Decisão monocrática",
+      "id": "394816861",
+      "juizo": "Relator",
+      "dispositivo": "Não conheceu quanto à perícia e negou provimento quanto ao mais; custas em dobro."
+     },
+     "ai": {
+      "hip": "Produção de prova",
+      "efeito": "Prejudicado",
+      "id": "394816861"
+     },
+     "adm": {
+      "prot": "2026-08-15",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte ré",
+       "tipo": "Agravo interno",
+       "id": "397031968",
+       "contra": "Não intimada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "392106163",
+       "data": "2026-08-15",
+       "pje": {
+        "tipo": "Petição Inicial",
+        "paginas": 27
+       },
+       "trecho": "PUGNAÇÃO APRESENTADA – QUESITOS SUPLEMENTARES – DIFERENÇA SUBSTANCIAL DE VALORES – HOMOLOGAÇÃO DO LAUDO – DECISÃO GENÉRICA – AUSÊNCIA DE FUNDAMENTAÇÃO E ANÁLISE DE QUESTÕES RELEVANTES SUSCITADAS PELA PARTE – VIOLAÇÃO AOS ARTS. 371 E 489, AMBOS DO CPC – DECISÃO CASSADA – REALIZAÇÃO DE NOVA PERÍCIA – …"
+      },
+      {
+       "desc": "Decisão monocrática: não conheceu quanto à perícia e negou provimento quanto ao mais; custas em dobro",
+       "id": "394816861",
+       "data": "2026-08-31",
+       "nota": "Decisão monocrática ID 394816861 (31/08/2026): não conheceu do recurso quanto à perícia (artigo 932 do CPC) e negou provimento quanto ao mais; determinou o recolhimento das custas em dobro em 5 dias. · (ID 397031968, 10/09/2026) contra a monocrática ID 394816861 (31/08/2026), que não conheceu do agravo de instrumento quanto à perícia e negou provimento quanto ao mais, na ação de Joselito Rodrigues Ribeiro por vícios …",
+       "pje": {
+        "tipo": "Decisão Monocrática Terminativa Com Resolução de Mérito"
+       },
+       "trecho": "14/08/2024, DJEN 20/08/2024.\"Ante o exposto, com esteio no artigo 932, IV, do Código de Processo Civil, não conheço do recurso, quanto ao deferimento da perícia técnica, e, quanto ao mais, nego provimento ao agravo de instrumento.Nada obstante, considerando que as custas processuais são devidas …"
+      },
+      {
+       "desc": "Guia e comprovante de custas (GRU Judicial, R$ 64,26)",
+       "id": "397030486",
+       "data": "2026-09-10",
+       "nota": "GRU Judicial de R$ 64,26 (ID 397030486). · Série ERBE · Agravo interno ID 397031968 sem resposta · Custas em dobro: GRU Judicial de R$ 64,26 (ID 397030486) [VALIDAR] · Precedentes da Turma Regional de 15/09/2026",
+       "pje": {
+        "tipo": "Documentos Diversos",
+        "descricao": "24881862 02dw doc 01 5000385 24.2026.4.03.0001",
+        "paginas": 2
+       },
+       "trecho": "Código de Recolhimento Número do Processo/Referência Competência Vencimento CPF ou CNPJ do Contribuinte Código da Unidade Gestora Arrecadadora Valor Principal (-) Descontos/Abatimentos (-) Outras Deduções (+) Mora/Multa (+) Juros/Encargos (+) Outros Acréscimos (=) Valor Total Instruções: As …"
+      },
+      {
+       "desc": "Agravo interno",
+       "id": "397031968",
+       "data": "2026-09-10",
+       "nota": "Agravo interno ID 397031968 (10/09/2026): cabimento do agravo de instrumento contra a perícia (taxatividade mitigada); perícia por amostragem; julgamento colegiado. · Série ERBE · Agravo interno ID 397031968 sem resposta · Custas em dobro: GRU Judicial de R$ 64,26 (ID 397030486) [VALIDAR] · Precedentes da Turma Regional de 15/09/2026",
+       "pje": {
+        "tipo": "Petição intercorrente",
+        "descricao": "24883562 01dw 5000385 24.2026.4.03.0001",
+        "paginas": 25
+       },
+       "trecho": "Diante do exposto, merece reforma a decisão monocrática, pois incide no caso o teor do decidido no Tema n.º 988 do STJ, porquanto permite a mitigação do rol previsto no art. 1.015, CPC/2015, viabilizando, por esse motivo, o conhecimento do agravo de instrumento. 4 . 2 . P RESCRIÇÃO . A RT . 206, § …"
+      }
+     ],
+     "pendencias": "Intimar a agravada; conferir custas em dobro",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 394816861 · 31/08/2026 — não conheceu em parte e negou provimento quanto ao mais; determinou o recolhimento das custas em dobro | última peça: Agravo interno (advogado de parte) · ID 397031968 · 10/09/2026 | última movimentação: 14/09/2026 17:52 · Conclusos para julgamento · Série ERBE · Agravo interno ID 397031968 sem resposta · Custas em dobro: GRU Judicial de R$ 64,26 (ID 397030486) [VALIDAR] · Precedentes da Turma Regional de 15/09/2026",
+     "assuntoDet": "Série ERBE — agravo interno sem intimação para resposta; custas em dobro",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Tempestivo",
+     "preparo": "Recolhido a menor",
+     "prelim": "Sem preliminares",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Apreciada · prejudicada",
+     "urgData": "2026-08-31",
+     "urgPedido": "2026-08-15"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "14/09/2026 17:52 · Conclusos para julgamento",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Decisão Monocrática Terminativa Com Resolução de Mérito · ID 394816861 · 31/08/2026 — não conheceu em parte e negou provimento quanto ao mais; determinou o recolhimento das custas em dobro",
+    "ultima_peca": "Agravo interno (advogado de parte) · ID 397031968 · 10/09/2026",
+    "ultima_informacao": "Informação · ID 392397224 · 18/08/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 394816861 · 31/08/2026 — não conheceu em parte e negou provimento quanto ao mais; determinou o recolhimento das custas em dobro | última peça: Agravo interno (advogado de parte) · ID 397031968 · 10/09/2026 | última movimentação: 14/09/2026 17:52 · Conclusos para julgamento"
+   }
+  },
+  {
+   "sessao": "",
+   "item": 248,
+   "processo": "5000494-38.2026.4.03.0001",
+   "recurso": "Agravo de instrumento",
+   "partes": "ERBE INCORPORADORA 037 S.A. x ANA CLAUDIA DIAS DA SILVA",
+   "exequente": "ERBE INCORPORADORA 037 S.A.",
+   "executado": "ANA CLAUDIA DIAS DA SILVA",
+   "assunto": "Vícios de Construção",
+   "grupo": "L18",
+   "tipo_caso": "Série ERBE · vícios construtivos em imóvel do Minha Casa Minha Vida · monocrática de 31/08/2026 (não conheceu quanto à perícia e negou provimento quanto ao mais) · agravo interno da construtora ainda sem resposta · custas em dobro recolhidas em valor simples [VALIDAR]",
+   "resultado": "Ato a proferir: o agravo interno (ID 397030531, 10/09/2026) contra a monocrática ID 394821254 (31/08/2026) não foi respondido e a lista extraída não traz intimação da agravada; o processo foi concluso em 14/09/2026 [VALIDAR no PJe]; a guia juntada (ID 395874005) é GRU Judicial de R$ 64,26, valor simples, embora a monocrática tenha determinado o recolhimento em dobro [VALIDAR] ‖ Proposta pelos precedentes: Intimar a agravada para resposta (artigo 1.021, § 2º, do CPC); depois, desprovimento do agravo interno, na linha dos acórdãos da Turma Regional na série (AI 5028840-36.2025.4.03.0000 e AI 5029639-79.2025.4.03.0000, Turma Regional de Mato Grosso do Sul, 15/09/2026); intimar a agravante a complementar as custas em dobro [VALIDAR] [VALIDAR: Intimação da agravada para resposta ao agravo interno; Complemento das custas em dobro (comprovante de R$ 64,26)]",
+   "modelo": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Agravo interno da ERBE Incorporadora 037 S.A. (ID 397030531, 10/09/2026) contra a monocrática ID 394821254 (31/08/2026), que não conheceu do agravo de instrumento quanto à perícia e negou provimento quanto ao mais, na ação de Ana Claudia Dias da Silva por vícios construtivos. A monocrática determinou o recolhimento das custas em dobro; a construtora juntou GRU Judicial de R$ 64,26. Não há resposta da agravada nem intimação para ela na lista extraída.",
+   "peculiaridades": "Série de agravos idênticos da ERBE (mesmo advogado e mesmas razões). Pedido de intimação exclusiva em nome de Wilson Sales Belchior (OAB/MS 20.233-A).",
+   "peculiaridades_relator": "",
+   "orientacao": "",
+   "equipe": {
+    "minuta": "",
+    "correcao": "",
+    "situacao": "A minutar"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {
+    "ato": "Despacho: intimar a agravada para resposta ao agravo interno (artigo 1.021, § 2º, do CPC); depois, voto",
+    "materia": "Responsabilidade civil — vícios construtivos (Minha Casa Minha Vida)",
+    "origem": "Ação 5000371-86.2020.4.03.6003 (1ª Vara Federal de Três Lagoas)",
+    "decisao_agravada": "Decisão monocrática ID 394821254 (31/08/2026)",
+    "recurso": "Agravo interno ID 397030531 · 10/09/2026",
+    "preparo": "GRU Judicial de R$ 64,26 paga em 02/09/2026 (comprovante de caixa da CAIXA, ID 395874005); a monocrática determinou o recolhimento em dobro [VALIDAR complemento]",
+    "monocratica": "Já proferida (ID 394821254); agora, agravo interno",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "RECOLHIDO A MENOR [VALIDAR] · a monocrática ID 394821254 determinou o recolhimento em dobro (artigo 1.007, § 4º, do CPC) · a ERBE juntou GRU Judicial de R$ 64,26 com comprovante de caixa (ID 395874005) · GRU Judicial depois de 03/04/2026 [VALIDAR] · conferido em 21/11/2026",
+    "conf_prevencao": "Distribuição na Turma Regional · origem 5000371-86.2020.4.03.6003 · conferido em 21/11/2026"
+   },
+   "ajustes": [],
+   "pendencias": [
+    "[VALIDAR] Intimar a agravada (artigo 1.021, § 2º, do CPC)",
+    "[VALIDAR] Custas em dobro recolhidas em valor simples"
+   ],
+   "minuta": true,
+   "classe": "AI",
+   "tarefa": "Analisar tipo de decisão a proferir",
+   "etiquetas": "1ª Seção; CUSTAS EM DOBRO; ERBE - AI; LIMINAR PENDENTE; PJ/SAF",
+   "chegada": "20/10/2026",
+   "extracao": {
+    "situacao": "pendente"
+   },
+   "assunto_detalhado": "Série ERBE — agravo interno sem intimação para resposta; custas em dobro",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 394821254 · 31/08/2026 — não conheceu em parte e negou provimento quanto ao mais; determinou o recolhimento das custas em dobro | última peça: Agravo interno (advogado de parte) · ID 397030531 · 10/09/2026 | última movimentação: 14/09/2026 17:51 · Conclusos para julgamento · Série ERBE · Agravo interno ID 397030531 sem resposta · Custas em dobro: GRU Judicial de R$ 64,26 (ID 395874005) [VALIDAR] · Precedentes da Turma Regional de 15/09/2026",
+   "teor": {
+    "sintese_fatica": "Ana Claudia Dias da Silva move ação por vícios construtivos em imóvel do Programa Minha Casa Minha Vida contra a ERBE Incorporadora 037 S.A. e a CEF; o juízo da 1ª Vara Federal de Três Lagoas deferiu a perícia e rejeitou as questões da construtora [VALIDAR teor da decisão agravada].",
+    "inicial": "Ação 5000371-86.2020.4.03.6003 (1ª Vara Federal de Três Lagoas).",
+    "decisao_recorrida": "Decisão monocrática ID 394821254 (31/08/2026): não conheceu do recurso quanto à perícia (artigo 932 do CPC) e negou provimento quanto ao mais; determinou o recolhimento das custas em dobro em 5 dias.",
+    "recurso": "Agravo interno ID 397030531 (10/09/2026): cabimento do agravo de instrumento contra a perícia (taxatividade mitigada); perícia por amostragem; julgamento colegiado.",
+    "resposta": "Não consta.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Advogado Wilson Sales Belchior (OAB/MS 20.233-A), com pedido de intimação exclusiva.",
+    "preparo": "GRU Judicial de R$ 64,26 (ID 395874005)."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo Interno",
+     "subassuntos": "Série ERBE · vícios construtivos em imóvel do Minha Casa Minha Vida · monocrática de 31/08/2026 (não conheceu quanto à perícia e negou provimento quanto ao mais) · agravo interno da construtora ainda sem resposta · custas em dobro recolhidas em valor simples [VALIDAR]",
+     "sintese": "Ana Claudia Dias da Silva move ação por vícios construtivos em imóvel do Programa Minha Casa Minha Vida contra a ERBE Incorporadora 037 S.A. e a CEF; o juízo da 1ª Vara Federal de Três Lagoas deferiu a perícia e rejeitou as questões da construtora [VALIDAR teor da decisão agravada].",
+     "questoes": "1) Cabimento do agravo de instrumento contra o deferimento da perícia (artigo 1.015 do CPC; taxatividade mitigada); 2) perícia individual ou por amostragem; 3) custas em dobro.",
+     "rel": {
+      "razoes": "Agravo interno ID 397030531 (10/09/2026): cabimento do agravo de instrumento contra a perícia (taxatividade mitigada); perícia por amostragem; julgamento colegiado.",
+      "contrarrazoes": "Não consta."
+     },
+     "orig": {
+      "tipo": "Decisão monocrática",
+      "id": "394821254",
+      "juizo": "Relator",
+      "dispositivo": "Não conheceu quanto à perícia e negou provimento quanto ao mais; custas em dobro."
+     },
+     "ai": {
+      "hip": "Produção de prova",
+      "efeito": "Prejudicado",
+      "id": "394821254"
+     },
+     "adm": {
+      "prot": "2026-08-15",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte ré",
+       "tipo": "Agravo interno",
+       "id": "397030531",
+       "contra": "Não intimada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "392132520",
+       "data": "2026-08-15",
+       "pje": {
+        "tipo": "Petição Inicial",
+        "paginas": 27
+       },
+       "trecho": "PUGNAÇÃO APRESENTADA – QUESITOS SUPLEMENTARES – DIFERENÇA SUBSTANCIAL DE VALORES – HOMOLOGAÇÃO DO LAUDO – DECISÃO GENÉRICA – AUSÊNCIA DE FUNDAMENTAÇÃO E ANÁLISE DE QUESTÕES RELEVANTES SUSCITADAS PELA PARTE – VIOLAÇÃO AOS ARTS. 371 E 489, AMBOS DO CPC – DECISÃO CASSADA – REALIZAÇÃO DE NOVA PERÍCIA – …"
+      },
+      {
+       "desc": "Decisão monocrática: não conheceu quanto à perícia e negou provimento quanto ao mais; custas em dobro",
+       "id": "394821254",
+       "data": "2026-08-31",
+       "nota": "Decisão monocrática ID 394821254 (31/08/2026): não conheceu do recurso quanto à perícia (artigo 932 do CPC) e negou provimento quanto ao mais; determinou o recolhimento das custas em dobro em 5 dias. · (ID 397030531, 10/09/2026) contra a monocrática ID 394821254 (31/08/2026), que não conheceu do agravo de instrumento quanto à perícia e negou provimento quanto ao mais, na ação de Ana Claudia Dias da Silva por vícios …",
+       "pje": {
+        "tipo": "Decisão Monocrática Terminativa Com Resolução de Mérito"
+       },
+       "trecho": "14/08/2024, DJEN 20/08/2024.\"Ante o exposto, com esteio no artigo 932, IV, do Código de Processo Civil, não conheço do recurso, quanto ao deferimento da perícia técnica, e, quanto ao mais, nego provimento ao agravo de instrumento.Nada obstante, considerando que as custas processuais são devidas …"
+      },
+      {
+       "desc": "Guia e comprovante de custas (GRU Judicial, R$ 64,26)",
+       "id": "395874005",
+       "data": "2026-09-04",
+       "nota": "GRU Judicial de R$ 64,26 (ID 395874005). · Série ERBE · Agravo interno ID 397030531 sem resposta · Custas em dobro: GRU Judicial de R$ 64,26 (ID 395874005) [VALIDAR] · Precedentes da Turma Regional de 15/09/2026",
+       "pje": {
+        "tipo": "Documentos Diversos",
+        "descricao": "24782271 02dw 02 duas guias e dois comprovantes recolhimento em dobro ",
+        "paginas": 4
+       },
+       "trecho": "Código de Recolhimento Número do Processo/Referência Competência Vencimento CPF ou CNPJ do Contribuinte Código da Unidade Gestora Arrecadadora Valor Principal (-) Descontos/Abatimentos (-) Outras Deduções (+) Mora/Multa (+) Juros/Encargos (+) Outros Acréscimos (=) Valor Total Instruções: As …"
+      },
+      {
+       "desc": "Agravo interno",
+       "id": "397030531",
+       "data": "2026-09-10",
+       "nota": "Agravo interno ID 397030531 (10/09/2026): cabimento do agravo de instrumento contra a perícia (taxatividade mitigada); perícia por amostragem; julgamento colegiado. · Série ERBE · Agravo interno ID 397030531 sem resposta · Custas em dobro: GRU Judicial de R$ 64,26 (ID 395874005) [VALIDAR] · Precedentes da Turma Regional de 15/09/2026",
+       "pje": {
+        "tipo": "Petição intercorrente",
+        "descricao": "24883570 01dw 5000494 38.2026.4.03.0001",
+        "paginas": 25
+       },
+       "trecho": "Diante do exposto, merece reforma a decisão monocrática, pois incide no caso o teor do decidido no Tema n.º 988 do STJ, porquanto permite a mitigação do rol previsto no art. 1.015, CPC/2015, viabilizando, por esse motivo, o conhecimento do agravo de instrumento. 4 . 2 . P RESCRIÇÃO . A RT . 206, § …"
+      }
+     ],
+     "pendencias": "Intimar a agravada; conferir custas em dobro",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 394821254 · 31/08/2026 — não conheceu em parte e negou provimento quanto ao mais; determinou o recolhimento das custas em dobro | última peça: Agravo interno (advogado de parte) · ID 397030531 · 10/09/2026 | última movimentação: 14/09/2026 17:51 · Conclusos para julgamento · Série ERBE · Agravo interno ID 397030531 sem resposta · Custas em dobro: GRU Judicial de R$ 64,26 (ID 395874005) [VALIDAR] · Precedentes da Turma Regional de 15/09/2026",
+     "assuntoDet": "Série ERBE — agravo interno sem intimação para resposta; custas em dobro",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Tempestivo",
+     "preparo": "Recolhido a menor",
+     "prelim": "Sem preliminares",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Apreciada · prejudicada",
+     "urgData": "2026-08-31",
+     "urgPedido": "2026-08-15"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "14/09/2026 17:51 · Conclusos para julgamento",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Decisão Monocrática Terminativa Com Resolução de Mérito · ID 394821254 · 31/08/2026 — não conheceu em parte e negou provimento quanto ao mais; determinou o recolhimento das custas em dobro",
+    "ultima_peca": "Agravo interno (advogado de parte) · ID 397030531 · 10/09/2026",
+    "ultima_informacao": "Informação · ID 392607902 · 19/08/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 394821254 · 31/08/2026 — não conheceu em parte e negou provimento quanto ao mais; determinou o recolhimento das custas em dobro | última peça: Agravo interno (advogado de parte) · ID 397030531 · 10/09/2026 | última movimentação: 14/09/2026 17:51 · Conclusos para julgamento"
+   }
+  }
+ ]
+}
