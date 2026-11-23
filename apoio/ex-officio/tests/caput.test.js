@@ -287,3 +287,12 @@ test('Marcos: digitação do ano não grava 0001 nem perde o campo',()=>{
   assert.ok(cap.includes("if (t.value && +t.value.slice(0, 4) < 2000) return;"),'ano incompleto não entra');
   assert.ok(cap.includes("if (document.activeElement === t && !t.classList.contains('mkhid'))"),'sem redesenhar com o campo em uso');
 });
+
+test('Triagem: o prontuário de triagem é o próprio painel do processo (campos editáveis, gravados na ficha; sem o quadro à parte)',()=>{
+  const fs=require('fs'),p=require('path'),cap=fs.readFileSync(p.join(__dirname,'../../../caput/triagem/index.html'),'utf8');
+  assert.ok(!cap.includes("g.id='tri-prontuario'")&&!cap.includes('function salvarProntuarioTriagem'),'sem o quadro à parte');
+  assert.ok(cap.includes('function abrirProntuarioTriagem(d) { const o = IDX.get(d); abrirPainelProcesso(o ? o.cnj : d); }'),'botões Prontuário abrem o painel');
+  assert.ok(cap.includes('return { montar, painel };')&&cap.includes('function pfSalvar(sc,p,b)')&&cap.includes("data-pf-salvar"),'painel com Salvar prontuário');
+  for(const k of ['triagem.Tempestividade','triagem.Preparo','triagem.Representação','triagem.MPF','triagem.MPF - Custos Legis','triagem.Urgência','triagem.Tema','triagem.META','triagem.Alegações','triagem.O que falta sanar','triagem.Intercorrências','origem.Próxima ação'])assert.ok(cap.includes("'"+k+"'"),k);
+  assert.ok(cap.includes('gravarFicha: async (cnj, campos)')&&cap.includes('W.CMTFichaMonitor'),'grava pela ficha única');
+});
