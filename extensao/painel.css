@@ -1316,3 +1316,9 @@ html[data-tema=escuro] .min-conf.aba{background:transparent}
 .cf-mx>summary small{font-size:10.5px;color:var(--muted-fg)}.cf-mx[open]>summary{border-bottom:1px solid var(--border)}
 .cf-mx>.cx-n,.cf-mx>.mn-est,.cf-mx>.status{margin-left:11px;margin-right:11px}.cf-mx>.mn-est:last-child{margin-bottom:10px}
 #panel-lote>summary{display:none}#panel-lote{border:0;background:transparent}
+/* 0.46 · as duas setas do cartão, com rótulo; a 2ª traz síntese, questões, mérito e encaminhamento */
+.pm-aut>summary{gap:6px;align-items:center}.pm-aut-t{font:600 9.5px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted-fg)}
+.pm-mer{margin-top:0!important}.pm-aut+.pm-mer>summary{border-top-style:dashed}
+.pm-mer-h{margin:10px 0 4px;font:700 9.5px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--gold,#b08a3e)}
+.pm-mer .gr{margin-bottom:4px}
+.pm .pm-aut:not(.pm-mer){margin-bottom:0}

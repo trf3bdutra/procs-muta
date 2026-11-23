@@ -593,3 +593,10 @@ test('extensão 0.45: Comparar só com modelos, precedentes, texto colado e 28,8
   assert.match(h, /data-mm="lote" aria-selected="false" hidden title="Só para o gestor">Collectio</); assert.match(h, /id="panel-lote" open hidden/);
   assert.match(g, /function gestor\(\) \{/); assert.match(g, /\(m === 'lote' && gestor\(\)\)/);
 });
+
+test('extensão 0.46: 2ª seta do cartão com síntese, questões, mérito e encaminhamento (fora do Roteiro e da aba Processo)', () => {
+  const g = read('extensao/gabinete.js'), r = read('extensao/roteiro.js');
+  assert.match(g, /function merEnc\(\)/); assert.match(g, /merEnc\(\) \+\n    '<\/section>';/); assert.match(g, /if \(c\.contains\('pm-mer'\)\) \{ if \(G\.merAb !== e\.target\.open\)/);
+  assert.doesNotMatch(g, /<h3>Síntese e questões<\/h3>/);
+  assert.match(r, /var NO_CARTAO = \{ mer: 1, enc: 1 \};/);
+});

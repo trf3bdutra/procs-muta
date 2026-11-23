@@ -5,6 +5,11 @@ Nome desde a 0.19.3 (antes: Muta). Os identificadores internos (`window.Muta*`, 
 Extensão do Chrome/Edge (Manifest V3) que abre o **Muta** num painel lateral, ao lado dos autos e das tarefas do PJe 2º grau do TRF-3.
 Base: o HTML independente *muta-independente-prontuario-completo* (Prontuário + Acervo).
 
+## O que muda na 0.46 · 2ª seta do cartão: síntese, questões, mérito e encaminhamento
+
+- O cartão do processo tem duas setas, com rótulo: "autuação e partes" (a de antes) e "síntese · questões · encaminhamento" (`gabinete.js › merEnc`): síntese do processo e questões; mérito (tipo de caso, especificidades, síntese fática, complexidade, tipo de voto); encaminhamento (situação para julgar, hipótese do artigo 932 quando monocrática, pendências, etiquetas do gabinete e as sugestões de etiquetas). O destino vem do tipo de ato.
+- Saíram do Roteiro as fases Mérito e Encaminhamento (`roteiro.js › NO_CARTAO`) e da aba Processo o quadro "Síntese e questões". Os campos da 2ª seta só são desenhados com ela aberta.
+
 ## O que muda na 0.45 · Minuta: Comparar enxuto, matriz na Conformidade, Collectio só do gestor
 
 - **Comparar** só com Modelos, Precedentes, Texto colado e 28,86% (quando é o caso). Saíram Minuta-matriz, Collectio, Triagem e Parágrafos-padrão (`comparar.js › FORA_CMP`; o código fica).
