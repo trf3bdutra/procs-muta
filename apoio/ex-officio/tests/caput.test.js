@@ -38,7 +38,9 @@ test('Rotas históricas redirecionam à central sem alterar os dados',()=>{
 test('Triagem: aba única com visão geral recolhível, escaninhos como sub-aba e exportação num ícone',()=>{
   assert.ok(page.includes("$('#abas').innerHTML = '';")&&page.includes("$('#abas').hidden = true;")&&!page.includes("t('fila', 'Triagem'"),'Triagem é a página, sem subaba no topo');
   assert.ok(page.includes('function visaoGeral()')&&page.includes('vInicio(true)'),'visão geral do antigo Início na Triagem');
-  assert.ok(page.includes("+ (!emE && !F.conj ? visaoGeral() : '') + '<div class=\"fl-cab\">"),'visão geral antes da busca e dos filtros');
+  assert.ok(page.includes("(!F.conj ? visaoGeral() + painelEmTriagem()"),'visão geral antes da busca e dos filtros');
+  assert.ok(page.includes('function funilTriagem()')&&page.includes("reg('fpend', 'Com pendência'")&&page.includes('const SP_MIN = 150;')&&page.includes('h += selecoesPrevias(prC, prM);'),'totais do funil e seleções prévias com mínimo único');
+  assert.ok(page.includes("const atCorpo = (soTarefa) => (atVer() === 'funil' ? atFunil(soTarefa) : atTabela(soTarefa));")&&page.includes('function fnSinais(o)')&&page.includes('async function fnTemaNoTipo(d)'),'A triar: funil como opção ao lado da lista, sinais da ficha e tema no tipo de caso');
   assert.ok(page.includes('class="btn ico" id="')&&!page.includes('data-ex-xlsx title="Planilha do Excel formatada, com todas as colunas">Excel</button>'),'Excel e Exportar num botão de ícone');
 });
 
