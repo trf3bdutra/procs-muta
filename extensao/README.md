@@ -5,6 +5,10 @@ Nome desde a 0.19.3 (antes: Muta). Os identificadores internos (`window.Muta*`, 
 Extensão do Chrome/Edge (Manifest V3) que abre o **Muta** num painel lateral, ao lado dos autos e das tarefas do PJe 2º grau do TRF-3.
 Base: o HTML independente *muta-independente-prontuario-completo* (Prontuário + Acervo).
 
+## O que muda na 0.48.2 · Diligências por fase
+
+- A aba Diligências divide a lista em seções recolhíveis por fase do andamento — A fazer, Em andamento, Em revisão e Concluída —, cada uma com o total; Concluída começa fechada e mostra as 30 mais recentes. Mudar a etapa leva o cartão para a seção certa; os filtros Comigo, Que criei e Todas valem dentro das seções.
+
 ## O que muda na 0.48.1 · sem "Prontuários salvos"; Diligências completas
 
 - Saiu o seletor "Prontuários salvos" do topo (prontuário local antigo); o painel segue o processo aberto no PJe.

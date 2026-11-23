@@ -631,3 +631,9 @@ test('extensão 0.48.1: sem o seletor de prontuários salvos; Diligências com e
   assert.match(x, /function formDil\(t\)/); assert.match(x, /method: 'DELETE'/); assert.match(x, /function responderDil\(f\)/); assert.match(x, /data-gx-form="dresp"/);
   assert.match(sh, /var vivo = \/\\\/api\\\/pendencias/);
 });
+
+test('extensão 0.48.2: Diligências divididas por fase do andamento (A fazer, Em andamento, Em revisão, Concluída)', () => {
+  const x = read('extensao/gestao.js');
+  assert.match(x, /fase: \{ todo: true, doing: true, review: true, done: false \}/); assert.match(x, /class="gx-fase gx-fase-' \+ e\[0\]/);
+  assert.match(x, /cd\.addEventListener\('toggle'/); assert.doesNotMatch(x, /data-gx-conc/);
+});

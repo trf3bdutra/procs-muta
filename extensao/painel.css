@@ -1371,3 +1371,10 @@ html[data-tema=escuro] .min-conf.aba{background:transparent}
 .ctl-h{display:flex;flex-direction:column;margin:2px 0 4px}.ctl-h b{font-size:14px}.ctl-h small{font-size:10.5px}
 .ctl-app .ap-c{max-height:none}
 .gx-bt{display:flex;gap:10px;align-items:center}.gx-bt .lnk{font-size:11px}.gx-bt .gx-del{color:var(--danger)}
+.gx-fase{margin:0 0 8px}
+.gx-fase>summary{display:flex;align-items:center;gap:6px;cursor:pointer;list-style:none;padding:5px 2px;border-bottom:1px solid var(--line);margin-bottom:6px;font-size:12px}
+.gx-fase>summary::-webkit-details-marker{display:none}
+.gx-fase>summary::before{content:"";width:6px;height:6px;border-right:1.5px solid var(--muted-fg);border-bottom:1.5px solid var(--muted-fg);transform:rotate(-45deg);transition:transform .15s;margin:0 3px}
+.gx-fase[open]>summary::before{transform:rotate(45deg)}
+.gx-fase>summary i{font-style:normal;font-size:10.5px;color:var(--muted-fg);border:1px solid var(--line);border-radius:9px;padding:0 6px}
+.gx-fase-todo>summary b{color:var(--fg)}.gx-fase-doing>summary b{color:var(--primary)}.gx-fase-review>summary b{color:var(--gold)}.gx-fase-done>summary b{color:var(--ok)}

@@ -36,9 +36,9 @@
 
   /* ---------- Diligências ---------- */
   var ETAPAS = [['todo', 'A fazer'], ['doing', 'Em andamento'], ['review', 'Em revisão'], ['done', 'Concluída']];
-  var NOME_ET = {}; ETAPAS.forEach(function (e) { NOME_ET[e[0]] = e[1]; });
+  var NOME_ET = {}, STAGE_OK = {}; ETAPAS.forEach(function (e) { NOME_ET[e[0]] = e[1]; STAGE_OK[e[0]] = 1; });
   var URG = ['Urgente', 'Alta', 'Média', 'Baixa'];
-  var D = { f: 'comigo', conc: false, nova: false, lista: null, equipe: [], erro: '', msg: '', lendo: false, abertos: {}, ed: {}, exc: {}, resp: {} };
+  var D = { f: 'comigo', nova: false, lista: null, equipe: [], erro: '', msg: '', lendo: false, abertos: {}, ed: {}, exc: {}, resp: {}, fase: { todo: true, doing: true, review: true, done: false } };
   function lerDil() {
     if (!ses || !pode(quem())) return Promise.resolve();
     D.lendo = true; pintarDil();
@@ -92,20 +92,28 @@
     var c = $('dil-app'); if (!c) return;
     var q = quem();
     if (!pode(q)) { c.innerHTML = '<p class="muted gx-v">' + (q.on ? 'As Diligências são do Desembargador e do gestor.' : 'Entre no painel para ver as diligências.') + '</p>'; return; }
-    var L = (D.lista || []).filter(function (t) { return D.conc || t.stage !== 'done'; });
+    /* 0.48.2: seções por fase do andamento, como as colunas do quadro do Ex Officio; os contadores dos filtros são das abertas */
+    var L = D.lista || [];
     var n = { comigo: 0, criei: 0, todas: 0 };
-    L.forEach(function (t) { n.todas++; if (filtro(t, 'comigo', q.usuario)) n.comigo++; if (filtro(t, 'criei', q.usuario)) n.criei++; });
+    L.forEach(function (t) { if (t.stage === 'done') return; n.todas++; if (filtro(t, 'comigo', q.usuario)) n.comigo++; if (filtro(t, 'criei', q.usuario)) n.criei++; });
     var V = L.filter(function (t) { return filtro(t, D.f, q.usuario); }).sort(ordem);
+    var fases = ETAPAS.map(function (e) {
+      var I = V.filter(function (t) { return (STAGE_OK[t.stage] ? t.stage : 'todo') === e[0]; });
+      if (e[0] === 'done') I.sort(function (a, b) { return String(b.concluidaEm || b.atualizadoEm || '').localeCompare(String(a.concluidaEm || a.atualizadoEm || '')); });
+      var mostra = e[0] === 'done' ? I.slice(0, 30) : I;
+      return '<details class="gx-fase gx-fase-' + e[0] + '" data-fase="' + e[0] + '"' + (D.fase[e[0]] && I.length ? ' open' : '') + '><summary><b>' + e[1] + '</b><i>' + I.length + '</i></summary>' +
+        (mostra.length ? mostra.map(itemDil).join('') + (I.length > mostra.length ? '<p class="muted gx-v">Mostrando as ' + mostra.length + ' concluídas mais recentes de ' + I.length + '; as demais, no Ex Officio.</p>' : '')
+          : '<p class="muted gx-v">Nenhuma.</p>') + '</details>';
+    }).join('');
     var tab = function (k, r) { return '<button type="button" role="tab" data-gx-f="' + k + '" aria-selected="' + (D.f === k) + '">' + r + ' <i>' + n[k] + '</i></button>'; };
     c.innerHTML = '<div class="gx-top"><div><b>Diligências</b><small class="muted">quadro da equipe no Ex Officio</small></div>' +
       '<span><button type="button" class="btn sm" data-gx="nova"' + (D.nova ? ' hidden' : '') + '>+ Nova</button><button type="button" class="lnk" data-gx="ler-dil" title="Ler de novo">' + (D.lendo ? 'lendo…' : 'atualizar') + '</button>' +
       '<a class="lnk" target="_blank" rel="noopener" href="' + esc(site()) + (q.des && !q.gestor ? '/cmt/' : '/exofficio/#pendencias') + '">abrir no Ex Officio</a></span></div>' +
       (D.nova ? formDil() : '') +
       '<div class="seg pmodos gx-modos" role="tablist" aria-label="Filtro das diligências">' + tab('comigo', 'Comigo') + tab('criei', 'Que criei') + tab('todas', 'Todas') + '</div>' +
-      '<label class="gx-conc"><input type="checkbox" data-gx-conc' + (D.conc ? ' checked' : '') + '> mostrar as concluídas</label>' +
       (D.msg ? '<p class="gx-msg' + (/^Não|erro/i.test(D.msg) ? ' err' : '') + '">' + esc(D.msg) + '</p>' : '') +
       (D.erro ? '<p class="gx-v err">' + esc(D.erro) + '</p>' : !D.lista ? '<p class="muted gx-v">Lendo o quadro…</p>' :
-        V.length ? V.map(itemDil).join('') : '<p class="muted gx-v">Nenhuma diligência ' + (D.f === 'comigo' ? 'com você' : D.f === 'criei' ? 'criada por você' : 'em aberto') + '.</p>');
+        V.length ? fases : '<p class="muted gx-v">Nenhuma diligência ' + (D.f === 'comigo' ? 'com você' : D.f === 'criei' ? 'criada por você' : 'no quadro') + '.</p>');
   }
   function etapa(id, st, sel) {
     var t = (D.lista || []).filter(function (x) { return x.id === id; })[0]; if (!t) return;
@@ -261,9 +269,10 @@
       });
       cd.addEventListener('change', function (e) {
         var i = e.target;
-        if (i.hasAttribute('data-gx-conc')) { D.conc = i.checked; return pintarDil(); }
         if (i.dataset.gxEtapa) return etapa(i.dataset.gxEtapa, i.value, i);
       });
+      /* seção aberta ou fechada: a escolha sobrevive ao redesenho */
+      cd.addEventListener('toggle', function (e) { var d = e.target; if (d && d.classList && d.classList.contains('gx-fase')) D.fase[d.getAttribute('data-fase')] = d.open; }, true);
       cd.addEventListener('submit', function (e) {
         var f = e.target.closest('[data-gx-form]'); if (!f) return; e.preventDefault();
         var k = f.getAttribute('data-gx-form'); if (k === 'nova') criar(f); else if (k === 'editar') editar(f); else if (k === 'dresp') responderDil(f);
