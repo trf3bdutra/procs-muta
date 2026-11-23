@@ -7,6 +7,7 @@ Base: o HTML independente *muta-independente-prontuario-completo* (Prontuário +
 
 ## O que muda na 0.43 · Gerador só com relatório e ementa
 
+- 0.43.1: saíram os botões "Localizar no Collectio" e "Mandar ao Collectio" do texto do editor (Comparar); o Collectio segue no quadro de baixo.
 - Por ora (pedido do gestor), o Gerador mostra só o relatório e a ementa; dispositivo, acórdão e proclamação continuam no código, desligados em `gerador.js › PECAS`. O resultado escolhido segue valendo para o cabeçalho e o item IV da ementa.
 
 ## O que muda na 0.42 · Minuta: Conformidade em aba própria, matriz do processo, cabeçalho fora

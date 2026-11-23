@@ -575,4 +575,5 @@ test('extensão 0.43: Gerador só com relatório e ementa (dispositivo, acórdã
   assert.match(g, /var PECAS = \{ rel: true, em: true, disp: false, ac: false, pr: false \};/);
   assert.match(g, /\(PECAS\.disp \? bloco\('disp'/); assert.match(g, /\(PECAS\.ac \? bloco\('ac'/); assert.match(g, /\(PECAS\.pr \? bloco\('pr'/);
   assert.match(read('extensao/painel.html'), /Gerador<small>relatório e ementa<\/small>/);
+  assert.doesNotMatch(read('extensao/comparar.js'), />Localizar no Collectio<|>Mandar ao Collectio</, 'sem os botões do Collectio no texto do editor');
 });

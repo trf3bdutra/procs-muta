@@ -91,8 +91,8 @@ function editorCaixa(E, n, P) {
   return '<section class="mn-ed card" data-aberto="' + (C.edAberto ? '1' : '0') + '">' +
     '<div class="mn-ed-h"><button type="button" class="mn-tg" data-c="edtg" aria-expanded="' + C.edAberto + '"><b>Texto do editor</b><span class="muted">' + (E.lendo ? 'lendo…' : E.texto ? esc(E.fonte || 'editor') + ' · ' + n.toLocaleString('pt-BR') + ' palavras' + (hora ? ' · ' + hora : '') : 'ainda não lido') + '</span></button>' +
     '<span class="sp"></span><button type="button" class="btn ' + (E.texto ? 'line' : 'solid') + ' sm" data-c="ler"' + (E.lendo ? ' disabled' : '') + '>' + (E.texto && !E.colado ? 'Ler de novo' : 'Ler o editor') + '</button></div>' +
-    '<div class="bar mn-col"><button type="button" class="btn line sm" data-c="col-loc" title="Mostra o processo nos lotes do Collectio, com as versões da minuta">Localizar no Collectio</button>' +
-    '<button type="button" class="btn line sm" data-c="col-env"' + (E.texto ? '' : ' disabled') + ' title="Grava o texto do editor como nova versão da minuta do processo no lote">Mandar ao Collectio</button>' +
+    /* 0.43: sem os botões "Localizar no Collectio" e "Mandar ao Collectio" (pedido do gestor); o Collectio segue no quadro de baixo */
+    '<div class="bar mn-col">' +
     '<label class="cx-sel">Parte <select data-c="parteEd">' + PARTES.map(function (p) { var q = p[0] === 'tudo' ? 1 : (P[p[0]] || []).length; return '<option value="' + p[0] + '"' + (C.parteEd === p[0] ? ' selected' : '') + (q ? '' : ' disabled') + '>' + p[1] + '</option>'; }).join('') + '</select></label></div>' +
     (E.erro ? '<p class="status err">' + esc(E.erro) + '</p>' : '') + aviso +
     (C.edAberto ? '<div class="mn-tx tx-j">' + (ps.length ? (E.paragrafos || []).filter(function (p) { return p.t; }).map(function (p) {
