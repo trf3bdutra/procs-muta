@@ -5108,11 +5108,14 @@ function cartao(l,it){
      ${falta.length?`<div class="fl2"><span>Pendências</span><ul>${falta.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>`:''}${prox?tx('Próxima ação',prox):''}${F('Intercorrências')?tx('Intercorrências',F('Intercorrências')):''}
      ${sit.length?`<div class="sit2"><h4>Situação atual ${sa.resumo?`<small>${esc(String(sa.resumo).replace(/^► /,'').split(':')[0])}</small>`:''}</h4>${sit.map(x=>`<div class="kv"><span>${esc(x[0])}</span><p>${esc(x[1])}</p></div>`).join('')}</div>`:''}</section>
    </div>
-   ${it.minuta&&!mn?'<p class="vz">Lendo a minuta…</p>':''}${mn?`<details class="pc2-mn" open><summary>Minuta · ${esc(mn.vigente||'')}${mn.rotulo?' · '+esc(mn.rotulo):''}</summary><div class="mdoc">${[['relatorio','RELATÓRIO'],['voto','VOTO'],['ementa','EMENTA'],['acordao','ACÓRDÃO']].map(([k,r])=>((mn.secoes||{})[k]||[]).length?`<h4>${r}</h4>`+mn.secoes[k].map(p=>`<p>${esc(p)}</p>`).join(''):'').join('')}</div></details>`:''}
+   ${it.minuta&&!mn?'<p class="vz">Lendo a minuta…</p>':''}${mn?`<details class="pc2-mn" open><summary>Minuta · ${esc(mn.vigente||'')}${mn.rotulo?' · '+esc(mn.rotulo):''}</summary><div class="mdoc">${[['relatorio','RELATÓRIO'],['voto','VOTO'],['ementa','EMENTA'],['acordao','ACÓRDÃO']].map(([k,r])=>((mn.secoes||{})[k]||[]).length?`<h4>${k==='voto'&&ehMonoMn(mn)?(/^despacho/i.test(String(mn.rotulo||''))?'DESPACHO':'DECISÃO'):r}</h4>`+mn.secoes[k].map(p=>`<p>${esc(p)}</p>`).join(''):'').join('')}</div></details>`:''}
    <p class="pc2-rod">O registro completo do lote está na <button type="button" class="lk2" data-acao="ficha" data-p="${esc(it.processo)}">ficha do processo</button> (aba Triagem › Registro da triagem).</p>
   </div>`;
 }
 const propSit=it=>'';
+/* decisão monocrática, interlocutória ou despacho não tem "voto" */
+const ehMonoMn=d=>{const s=(d&&d.secoes)||{},r=String((d&&d.rotulo)||'');const p0=k=>String((s[k]||[])[0]||'').trim();
+  return /^(decis[ãa]o (monocr|interlocut)|despacho)/i.test(r)||/^DECIDO\.?$/i.test(p0('voto'))||(!(s.ementa||[]).length&&!(s.acordao||[]).length&&/^Vistos\.?$/i.test(p0('relatorio')))};
 function ligar(){
   $$('[data-ebx="tog"]').forEach(b=>b.onclick=()=>{S.etqAb=S.etqAb===false;const y=scrollY;render();scrollTo(0,y)});
   $$('[data-ebx="todos"]').forEach(b=>b.onclick=()=>{S.etqTodos=!S.etqTodos;const y=scrollY;render();scrollTo(0,y)});

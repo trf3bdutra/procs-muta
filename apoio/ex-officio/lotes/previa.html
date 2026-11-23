@@ -450,6 +450,10 @@ if(PREVIA){const c=document.getElementById('crumb');if(c)c.textContent='Prévia'
 (function(){const id=params.get('id');if(id){const m=/^pauta-(\d{4}-\d{2}-\d{2})$/.exec(id);if(m){if(!params.get('sessao'))params.set('sessao',m[1])}else if(!params.get('colecao'))params.set('colecao',id)}
   const hp=/^#p=(\d{4}-\d{2}-\d{2})-(\d+)$/.exec(decodeURIComponent(location.hash||''));if(hp){if(!params.get('sessao'))params.set('sessao',hp[1]);params.set('item',hp[2])}})();
 const SECS=[['relatorio','Relatório','R'],['voto','Voto','V'],['ementa','Ementa','E'],['acordao','Acórdão','A']];
+/* decisão monocrática, interlocutória ou despacho não tem "voto": a parte depois do relatório leva o nome da peça */
+const ehMono=d=>{const s=(d&&d.secoes)||{},r=String((d&&d.rotulo)||'');const p0=k=>String((s[k]||[])[0]||'').trim();
+  return /^(decis[ãa]o (monocr|interlocut)|despacho)/i.test(r)||/^DECIDO\.?$/i.test(p0('voto'))||(!(s.ementa||[]).length&&!(s.acordao||[]).length&&/^Vistos\.?$/i.test(p0('relatorio')))};
+const rotSec=(k,rot,d)=>k==='voto'&&ehMono(d)?(/^despacho/i.test(String((d&&d.rotulo)||''))?'Despacho':'Decisão'):rot;
 const ETAPAS_COMPLETO=[['minutar','1 · A minutar','sem minuta','minuta ainda não registrada'],['minutada','2 · Minutada','minutadas','sem correção registrada'],['corrigida','3 · Corrigida','corrigidas','falta colar no PJe e marcar'],['pje','4 · No PJe','no PJe','versão importada, antes da liberação'],['liberada','5 · Liberada','liberadas','e quantas têm a versão final']];
 /* "No PJe" e "Versão final" só valem nas minhas correções; na pauta inteira o fluxo é minutada · corrigida · liberada */
 const ETAPAS_SIMPLES=[['minutar','1 · A minutar','sem minuta','minuta ainda não registrada'],['minutada','2 · Minutada','minutadas','sem correção registrada'],['corrigida','3 · Corrigida','corrigidas','falta liberar no PJe'],['liberada','4 · Liberada','liberadas','prontas para a sessão']];
@@ -850,7 +854,7 @@ function docHtml(d){
   if(d&&d.erro)return `<p class="vazio" style="padding:0">${esc(d.erro)}</p>`;
   const s=d.secoes||{};
   const cab=`<p class="mcab"><span>Minuta vigente${d.vigente?' · '+esc(d.vigente):''}${d.rotulo?' · '+esc(d.rotulo):''}</span>${d.atualizado_em?`<span>${br(d.atualizado_em)}</span>`:''}</p>`;
-  return cab+SECS.map(([k,rot])=>(s[k]||[]).length?`<h4>${esc(rot.toUpperCase())}</h4>`+(s[k]||[]).map(t=>`<p>${esc(t)}</p>`).join(''):'').join('');
+  return cab+SECS.map(([k,rot])=>(s[k]||[]).length?`<h4>${esc(rotSec(k,rot,d).toUpperCase())}</h4>`+(s[k]||[]).map(t=>`<p>${esc(t)}</p>`).join(''):'').join('');
 }
 async function carregarMinutas(){
   const fila=S.linhas.filter(r=>S.minAb.has(r.x.cnj)&&temMin(r)&&!MIN[r.z.lote+'|'+r.x.cnj.slice(0,10)]);
@@ -1117,7 +1121,7 @@ async function carregarVersoes(){
       const on=S.cmpOn&&vs.length>1;
       $('#vb-w').hidden=!on; $('#cmp').textContent=on?'Fechar comparação':'Comparar'; $('#cmp').setAttribute('aria-pressed',String(on));
       if(on){const b0=$('#vb').value;$('#vb').innerHTML=op(b0&&b0!==a?b0:outra(a),a);await comparar(mx,vs,a,$('#vb').value)}
-      else{const d=$('#dif');d.innerHTML='<p class="vazio">Lendo a versão…</p>';try{const F=await foto(v.lote,mx,v.id);if($('#va')&&$('#va').value===a&&!S.cmpOn)d.innerHTML=`<div class="mdoc">${SECS.map(([s,rot])=>((F.secoes||{})[s]||[]).length?`<h4>${esc(rot.toUpperCase())}</h4>`+F.secoes[s].map(t=>`<p>${esc(t)}</p>`).join(''):'').join('')}</div>`}catch(e){d.innerHTML=`<p class="vazio">Não foi possível ler a versão: ${esc(e.message)}</p>`}}
+      else{const d=$('#dif');d.innerHTML='<p class="vazio">Lendo a versão…</p>';try{const F=await foto(v.lote,mx,v.id);if($('#va')&&$('#va').value===a&&!S.cmpOn)d.innerHTML=`<div class="mdoc">${SECS.map(([s,rot])=>((F.secoes||{})[s]||[]).length?`<h4>${esc(rotSec(s,rot,F).toUpperCase())}</h4>`+F.secoes[s].map(t=>`<p>${esc(t)}</p>`).join(''):'').join('')}</div>`}catch(e){d.innerHTML=`<p class="vazio">Não foi possível ler a versão: ${esc(e.message)}</p>`}}
     };
     $('#va').onchange=mostra;
     $('#vb').onchange=()=>comparar(mx,vs,$('#va').value,$('#vb').value);
@@ -1184,7 +1188,7 @@ async function comparar(mx,vs,x1,x2){
         linhas+=`<div class="dif-l">${L}${R}</div>`;
       });
       fecha();
-      if(pa.length||pb.length)h+=`<div class="eq" style="color:var(--eo2);border-bottom:1px solid var(--el2)">${rt}</div>`+linhas;
+      if(pa.length||pb.length)h+=`<div class="eq" style="color:var(--eo2);border-bottom:1px solid var(--el2)">${rotSec(k,rt,FA)}</div>`+linhas;
     });
     $('#vs-k').textContent=dif?dif+(dif>1?' parágrafos com diferença':' parágrafo com diferença'):'sem diferença';
     d.innerHTML=`<div class="dif"><div class="dif-h"><span>${esc(rot(A))}</span><span>${esc(rot(B))}</span></div>${h}</div>`;
