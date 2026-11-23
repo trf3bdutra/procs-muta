@@ -11,7 +11,28 @@
  "filtro": {},
  "criado_por": "Bruno",
  "atualizado_em": "2026-11-23",
- "colunas": [],
+ "colunas": [
+  {
+   "id": "ALTA",
+   "rotulo": "Certeza alta: conferido nos autos ou linha firme"
+  },
+  {
+   "id": "MEDIA",
+   "rotulo": "Certeza média: terminativa provável, falta um dado"
+  },
+  {
+   "id": "BAIXA",
+   "rotulo": "Certeza baixa: depende do Relator ou da linha do gabinete"
+  },
+  {
+   "id": "PJE",
+   "rotulo": "Minuta salva no editor do PJe (21/11/2026), sem envio para assinatura"
+  },
+  {
+   "id": "CONF",
+   "rotulo": "Aguarda confirmação antes de ir ao PJe"
+  }
+ ],
  "grupos": [
   {
    "id": "t01",
@@ -84,6 +105,13 @@
    "rotulo": "Outros sem tema",
    "cor": "#888",
    "resultado": "Decisão monocrática terminativa"
+  },
+  {
+   "id": "t13",
+   "rotulo": "Não terminativas: voto ou ato prévio",
+   "cor": "#7d6a8a",
+   "resultado": "Não vai por decisão monocrática terminativa",
+   "modelo": ""
   }
  ],
  "grupo_outros": {
@@ -109,9 +137,11 @@
    "variacoes": [
     "DES",
     "MONO",
-    "VAL"
+    "VAL",
+    "ALTA",
+    "PJE"
    ],
-   "observacao": "Agravo de Nildo Alves de Albres, pecuarista, na ação 5000783-38.2025.4.03.6004 contra a CEF, que busca a prorrogação das cédulas de crédito rural 2164082/0018/2023 e 2189317/0018/2023. A tutela foi deferida em relação a uma operação e negada quanto à outra (item 3.2.15 do MCR: notificação após o vencimento de 25/10/2025). Os embargos de declaração foram convertidos em agravo interno (ID 361459395), com contraminuta da CEF (ID 362231714). Em 03/11/2026, o agravante informou acordo de renegociação e pediu extinção por perda do objeto, desistência, honorários por cada parte e dispensa de custas (artigo 90, § 3º, do CPC).",
+   "observacao": "Conferido: a nova procuração (ID 408498235) dá poder para desistir. Homologar a desistência do agravo e do agravo interno.",
    "peculiaridades": "O advogado anterior, Ricardo Trad Filho (OAB/MS 7.285), comunicou a revogação dos poderes (ID 398985385, 18/09/2026). A desistência veio subscrita por Victória Rizzo de Almeida Inigo Gomes (OAB/MS 31.732), com procuração nova (ID 408498235): conferir poderes para desistir. O pedido de \"desistência da ação\" é matéria da origem; aqui cabe a desistência dos recursos. Ouvir a CEF sobre o acordo é dispensável para a desistência do recurso.",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -302,7 +332,8 @@
      "hip932": "Desistência (artigo 998 do CPC) / prejudicado",
      "fundamento": "Paradigmas do gabinete: AI 5018155-67.2025.4.03.0000 (monocrática TRMS, 31/08/2026: desistência homologada); AI 5009943-23.2026.4.03.0000 (monocrática, 24/04/2026: \"Homologo o pedido de desistência do agravo de instrumento ..., nos termos do artigo 998 do CPC\"); AI 5002196-90.2024.4.03.0000 (monocrática, 14/02/2024: idem)"
     }
-   }
+   },
+   "observacao_triagem": "Agravo de Nildo Alves de Albres, pecuarista, na ação 5000783-38.2025.4.03.6004 contra a CEF, que busca a prorrogação das cédulas de crédito rural 2164082/0018/2023 e 2189317/0018/2023. A tutela foi deferida em relação a uma operação e negada quanto à outra (item 3.2.15 do MCR: notificação após o vencimento de 25/10/2025). Os embargos de declaração foram convertidos em agravo interno (ID 361459395), com contraminuta da CEF (ID 362231714). Em 03/11/2026, o agravante informou acordo de renegociação e pediu extinção por perda do objeto, desistência, honorários por cada parte e dispensa de custas (artigo 90, § 3º, do CPC)."
   },
   {
    "sessao": "",
@@ -319,9 +350,11 @@
    "resultado": "Ato a proferir: decisão monocrática que julga prejudicado o agravo de instrumento (sentença superveniente) ‖ Proposta pelos precedentes: Julgar prejudicado o agravo de instrumento por decisão monocrática, pela perda superveniente do objeto: a sentença de 11/11/2026, que extinguiu a reintegração de posse sem resolução do mérito, substitui a decisão agravada. [VALIDAR: conferir a sentença (ID 615641398, origem) comunicada no ID 410030635]",
    "modelo": "Origem: lote adp-ai · não pautado",
    "variacoes": [
-    "MONO"
+    "MONO",
+    "ALTA",
+    "PJE"
    ],
-   "observacao": "Agravo da União contra o indeferimento da liminar na reintegração de posse 5000071-39.2025.4.03.6007, sobre imóvel da extinta LBA em Coxim. Em 11/11/2026, a origem extinguiu o processo sem resolução do mérito pela reversão do imóvel ao Município. O agravo perdeu o objeto.",
+   "observacao": "Conferido: sentença de 11/11/2026 extinguiu a reintegração (comunicada no ID 410030635). Agravo prejudicado.",
    "peculiaridades": "Sentença superveniente na origem (ID 615641398, comunicada no ID 410030635): perda do objeto. Agravado não localizado (AR negativo).",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -490,7 +523,8 @@
      "urgData": "2025-05-12",
      "fundamento": "Paradigmas do gabinete: AI 5018615-54.2025.4.03.0000 (TRMS, 05/08/2026); AI 5016359-41.2025.4.03.0000 (TRMS, 30/07/2026); AI 5032899-67.2025.4.03.0000 (TRMS, 28/09/2026)"
     }
-   }
+   },
+   "observacao_triagem": "Agravo da União contra o indeferimento da liminar na reintegração de posse 5000071-39.2025.4.03.6007, sobre imóvel da extinta LBA em Coxim. Em 11/11/2026, a origem extinguiu o processo sem resolução do mérito pela reversão do imóvel ao Município. O agravo perdeu o objeto."
   },
   {
    "sessao": "",
@@ -508,9 +542,11 @@
    "modelo": "Origem: lote adp-ai · não pautado",
    "variacoes": [
     "ADM",
-    "MONO"
+    "MONO",
+    "ALTA",
+    "PJE"
    ],
-   "observacao": "Agravo de CMR Distribuidora de Medicamentos e Produtos Veterinários contra o indeferimento da liminar no MS 5001235-26.2026.4.03.6000, que pedia a apuração do IRPJ e da CSLL sem a majoração de 10% dos percentuais de presunção da Lei Complementar 224/2025. O agravo não foi conhecido por deserção (ID 385929133): a guia constava \"aguardando realização do pagamento\" e a intimação do artigo 2º, § 2º, da Resolução PRES 138/2017 não foi atendida. A agravante opôs embargos de declaração com novos comprovantes PagTesouro (ID 386601844) e depois informou a sentença denegatória (ID 401126232).",
+   "observacao": "Conferido: sentença denegatória no mandado de segurança; a própria agravante pede o reconhecimento da perda do objeto.",
    "peculiaridades": "Sentença denegatória da segurança juntada (ID 401126233; sentença ID 401098069 da origem), com apelação informada pela agravante. A própria agravante pede o reconhecimento da perda do objeto. Redistribuído à Turma Regional (decisão ID 373243929).",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -731,7 +767,8 @@
      "tipoAto": "Decisão monocrática",
      "fundamento": "Paradigmas do gabinete: AI 5022338-47.2026.4.03.0000 (monocrática TRMS, 25/10/2026: prejudicado; majoração da presunção do IRPJ e da CSLL pela LC 224/2025); AI 5029858-05.2019.4.03.0000 (acórdão 3ª Turma, 24/07/2020: sentença superveniente no mandado de segurança, perda do objeto)"
     }
-   }
+   },
+   "observacao_triagem": "Agravo de CMR Distribuidora de Medicamentos e Produtos Veterinários contra o indeferimento da liminar no MS 5001235-26.2026.4.03.6000, que pedia a apuração do IRPJ e da CSLL sem a majoração de 10% dos percentuais de presunção da Lei Complementar 224/2025. O agravo não foi conhecido por deserção (ID 385929133): a guia constava \"aguardando realização do pagamento\" e a intimação do artigo 2º, § 2º, da Resolução PRES 138/2017 não foi atendida. A agravante opôs embargos de declaração com novos comprovantes PagTesouro (ID 386601844) e depois informou a sentença denegatória (ID 401126232)."
   },
   {
    "sessao": "",
@@ -748,9 +785,11 @@
    "resultado": "Ato a proferir: decisão monocrática que julga prejudicado o agravo de instrumento (retratação integral, artigo 1.018, § 1º, do CPC) [VALIDAR] ‖ Proposta pelos precedentes: Julgar prejudicado o agravo de instrumento, pela retratação integral da decisão agravada na origem (artigo 1.018, § 1º, do CPC). Paradigma TRMS: agravo julgado prejudicado em razão do juízo de retratação (AI 5032444-05.2025.4.03.0000, 09/06/2026, por acórdão); a perda do objeto também se resolve por decisão monocrática (artigo 932, III, do CPC), como nos casos de sentença superveniente. [VALIDAR: conferir a decisão de retratação de 09/06/2026 (ID 582199564, origem; comunicada no ID 379299098) e se reformou integralmente a decisão agravada]",
    "modelo": "Origem: lote adp-ai · não pautado",
    "variacoes": [
-    "MONO"
+    "MONO",
+    "ALTA",
+    "PJE"
    ],
-   "observacao": "Agravo de Jeferson Rogério Sperling contra a decisão que, no cumprimento de sentença 5000398-52.2023.4.03.6007 contra o DNIT, afastou os honorários contra a autarquia e condenou só o exequente. Em 09/06/2026, o juízo de origem se retratou e reformou integralmente a decisão agravada. O recurso parece prejudicado.",
+   "observacao": "Conferido: retratação integral na origem, comunicada em 09/06/2026 (ID 379299098). Agravo prejudicado.",
    "peculiaridades": "Retratação integral na origem (ID 582199564, comunicada no ID 379299098): perda superveniente do objeto [VALIDAR]. Contrarrazões do DNIT posteriores à retratação.",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -919,7 +958,8 @@
      "parecer": "",
      "fundamento": "Paradigmas do gabinete: AI 5032444-05.2025.4.03.0000 (TRMS, 09/06/2026); AI 5018615-54.2025.4.03.0000 (TRMS, 05/08/2026: monocrática)"
     }
-   }
+   },
+   "observacao_triagem": "Agravo de Jeferson Rogério Sperling contra a decisão que, no cumprimento de sentença 5000398-52.2023.4.03.6007 contra o DNIT, afastou os honorários contra a autarquia e condenou só o exequente. Em 09/06/2026, o juízo de origem se retratou e reformou integralmente a decisão agravada. O recurso parece prejudicado."
   },
   {
    "sessao": "",
@@ -937,9 +977,10 @@
    "modelo": "Origem: lote adp-ai · não pautado",
    "variacoes": [
     "MONO",
-    "VAL"
+    "VAL",
+    "MEDIA"
    ],
-   "observacao": "Agravo do MPF contra a decisão (ID 578840036 da origem) da 1ª Vara Federal de Dourados que, na ACP 5003565-24.2025.4.03.6002 (MPF × IBAMA e 28 empresas fabricantes ou comercializadoras de atrazina), declinou da competência para Campo Grande por considerar regional o dano. Teses: competência funcional do local do dano (artigo 2º da LACP), epicentro na Bacia do Rio Dourados e nas comunidades Guarani-Kaiowá; inaplicabilidade do IAC 10/STJ; controle de convencionalidade (OC-23/17 e OC-32/25 da Corte IDH) e protocolos do CNJ; o juízo de Campo Grande suscitou conflito negativo. Contrarrazões de várias rés e do IBAMA; parecer da PRR pelo provimento.",
+   "observacao": "Nos autos, o julgamento do CC 5015811-79.2026 consta só da contraminuta da parte (ID 391765095). Confirmar no PJe.",
    "peculiaridades": "Tutela recursal indeferida (decisão ID 379524581, 12/06/2026), com ofício à relatoria do conflito. A Globachem, não cadastrada como agravada, apresentou contraminuta espontânea (ID 391765095) e informou que o CC 5015811-79.2026.4.03.0000 foi julgado procedente em 05/08/2026 para declarar competente a 1ª Vara de Dourados. MPF agravante: prazo em dobro e isenção de preparo.",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -1141,7 +1182,8 @@
      "urgData": "2026-06-12",
      "intercor": "Agravada Globachem não cadastrada no polo; contraminuta espontânea."
     }
-   }
+   },
+   "observacao_triagem": "Agravo do MPF contra a decisão (ID 578840036 da origem) da 1ª Vara Federal de Dourados que, na ACP 5003565-24.2025.4.03.6002 (MPF × IBAMA e 28 empresas fabricantes ou comercializadoras de atrazina), declinou da competência para Campo Grande por considerar regional o dano. Teses: competência funcional do local do dano (artigo 2º da LACP), epicentro na Bacia do Rio Dourados e nas comunidades Guarani-Kaiowá; inaplicabilidade do IAC 10/STJ; controle de convencionalidade (OC-23/17 e OC-32/25 da Corte IDH) e protocolos do CNJ; o juízo de Campo Grande suscitou conflito negativo. Contrarrazões de várias rés e do IBAMA; parecer da PRR pelo provimento."
   },
   {
    "sessao": "",
@@ -1158,9 +1200,10 @@
    "resultado": "Ato a proferir: apelação da União (ID 373327333) e remessa necessária da sentença ID 373327328; contrarrazões (ID 373327335); MPF sem intervenção (ID 377893995) ‖ Proposta pelos precedentes: Desprovimento da apelação e da remessa (Tema 118/STF), após conferir a modulação dos efeitos; compensação nos termos do artigo 74 da Lei 9.430/1996, do artigo 26-A da Lei 11.457/2007 e do artigo 170-A do CTN [VALIDAR] [VALIDAR: Modulação dos efeitos do Tema 118/STF]",
    "modelo": "Origem: lote adp-remessas · não pautado",
    "variacoes": [
-    "VAL"
+    "VAL",
+    "BAIXA"
    ],
-   "observacao": "Apelação da União e remessa necessária da sentença que excluiu o ISS da base do PIS e da COFINS de Clínica de Campo Grande S/A, com compensação. O STF concluiu o Tema 118 em 21/10/2026 no sentido da exclusão; a modulação está pendente.",
+   "observacao": "O Tema 118/STF foi julgado em 21/10/2026 com modulação pendente: aplicar já ou aguardar os embargos de declaração?",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -1329,7 +1372,8 @@
      "idParecer": "377893995",
      "parecerSentido": "Ausência de interesse que justifique intervenção"
     }
-   }
+   },
+   "observacao_triagem": "Apelação da União e remessa necessária da sentença que excluiu o ISS da base do PIS e da COFINS de Clínica de Campo Grande S/A, com compensação. O STF concluiu o Tema 118 em 21/10/2026 no sentido da exclusão; a modulação está pendente."
   },
   {
    "sessao": "",
@@ -1346,9 +1390,10 @@
    "resultado": "Ato a proferir: apelação da União (ID 371895371) e remessa necessária da sentença ID 371895368; contrarrazões (ID 371895375); MPF sem intervenção (ID 374389475) ‖ Proposta pelos precedentes: Desprovimento da apelação e da remessa (Tema 118/STF), após conferir a modulação dos efeitos; compensação nos termos do artigo 74 da Lei 9.430/1996, do artigo 26-A da Lei 11.457/2007 e do artigo 170-A do CTN [VALIDAR] [VALIDAR: Modulação dos efeitos do Tema 118/STF]",
    "modelo": "Origem: lote adp-remessas · não pautado",
    "variacoes": [
-    "VAL"
+    "VAL",
+    "BAIXA"
    ],
-   "observacao": "Apelação da União e remessa necessária da sentença que excluiu o ISS da base do PIS e da COFINS de Karbeck Segurança Ltda., com compensação. O STF concluiu o Tema 118 em 21/10/2026 no sentido da exclusão; a modulação está pendente.",
+   "observacao": "O Tema 118/STF foi julgado em 21/10/2026 com modulação pendente: aplicar já ou aguardar os embargos de declaração?",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -1516,7 +1561,8 @@
      "idParecer": "374389475",
      "parecerSentido": "Ausência de interesse que justifique intervenção"
     }
-   }
+   },
+   "observacao_triagem": "Apelação da União e remessa necessária da sentença que excluiu o ISS da base do PIS e da COFINS de Karbeck Segurança Ltda., com compensação. O STF concluiu o Tema 118 em 21/10/2026 no sentido da exclusão; a modulação está pendente."
   },
   {
    "sessao": "",
@@ -1533,9 +1579,10 @@
    "resultado": "Ato a proferir: apelação da União (ID 355728881) e remessa necessária da sentença ID 355728876; contrarrazões (ID 355728933); MPF sem intervenção (ID 356840792) ‖ Proposta pelos precedentes: Desprovimento da apelação e da remessa (Tema 118/STF), após conferir a modulação dos efeitos [VALIDAR] [VALIDAR: Modulação dos efeitos do Tema 118/STF]",
    "modelo": "Origem: lote adp-remessas · não pautado",
    "variacoes": [
-    "VAL"
+    "VAL",
+    "BAIXA"
    ],
-   "observacao": "Apelação da União e remessa necessária da sentença que excluiu o ISS da base do PIS e da COFINS da Digithobrasil, com compensação. O STF concluiu o Tema 118 em 21/10/2026 no sentido da exclusão; a modulação está pendente.",
+   "observacao": "O Tema 118/STF foi julgado em 21/10/2026 com modulação pendente: aplicar já ou aguardar os embargos de declaração?",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -1704,7 +1751,8 @@
      "idParecer": "356840792",
      "parecerSentido": "Ausência de interesse que justifique intervenção"
     }
-   }
+   },
+   "observacao_triagem": "Apelação da União e remessa necessária da sentença que excluiu o ISS da base do PIS e da COFINS da Digithobrasil, com compensação. O STF concluiu o Tema 118 em 21/10/2026 no sentido da exclusão; a modulação está pendente."
   },
   {
    "sessao": "",
@@ -1721,9 +1769,10 @@
    "resultado": "Ato a proferir: apelação da União (ID 302872399) e remessa necessária da sentença ID 302872395 (repetida no ID 302872397); contrarrazões (ID 302872402); MPF sem intervenção (ID 307196964) ‖ Proposta pelos precedentes: Provimento parcial da apelação e da remessa, por decisão monocrática, para limitar os efeitos à modulação do Tema 962/STF e ajustar o regime da compensação [VALIDAR] [VALIDAR: Regime legal da compensação (artigo 74 da Lei 9.430/1996 e artigo 26-A da Lei 11.457/2007)]",
    "modelo": "Origem: lote adp-remessas · não pautado",
    "variacoes": [
-    "VAL"
+    "VAL",
+    "MEDIA"
    ],
-   "observacao": "Apelação da União e remessa necessária da sentença que afastou o IRPJ e a CSLL sobre a SELIC da repetição de indébito. A ação é de 17/05/2022: incide a modulação do Tema 962/STF (efeitos a partir de 30/09/2021).",
+   "observacao": "Tema 962/STF com modulação: provimento parcial; ajustar o regime da compensação.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -1899,7 +1948,8 @@
      "idParecer": "307196964",
      "parecerSentido": "Ausência de interesse que justifique intervenção"
     }
-   }
+   },
+   "observacao_triagem": "Apelação da União e remessa necessária da sentença que afastou o IRPJ e a CSLL sobre a SELIC da repetição de indébito. A ação é de 17/05/2022: incide a modulação do Tema 962/STF (efeitos a partir de 30/09/2021)."
   },
   {
    "sessao": "",
@@ -1916,9 +1966,10 @@
    "resultado": "Ato a proferir: apelação do INEP (ID 360828844) e remessa necessária da sentença ID 360828840; contrarrazões (ID 360828847); MPF pelo desprovimento (ID 361272189) ‖ Proposta pelos precedentes: Desprovimento por decisão monocrática (artigo 932, IV, c, do CPC), com base no IRDR 5/TRF3 e na linha da Turma Regional (ApCiv 5001036-62.2021.4.03.6005, 05/10/2026) [VALIDAR: Tese exata do IRDR 5/TRF3 e aplicação à edição 2025/1; Documento \"Aprovação 2025\" (ID 360828848) sem texto extraído: aprovação da impetrante no exame]",
    "modelo": "Origem: lote adp-remessas · não pautado",
    "variacoes": [
-    "VAL"
+    "VAL",
+    "BAIXA"
    ],
-   "observacao": "Apelação do INEP e remessa necessária da sentença que manteve Raphaella Krystina Lamounier no Revalida, postergada a apresentação do diploma médico exigida pelo edital na inscrição. O MPF opinou pelo desprovimento.",
+   "observacao": "A monocrática pelo IRDR 5 precisa enfrentar o efeito suspensivo do REsp/RE contra o IRDR e a Portaria Inep 251/2023: monocrática ou voto?",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -2098,7 +2149,8 @@
      "idParecer": "361272189",
      "parecerSentido": "Desprovimento da apelação"
     }
-   }
+   },
+   "observacao_triagem": "Apelação do INEP e remessa necessária da sentença que manteve Raphaella Krystina Lamounier no Revalida, postergada a apresentação do diploma médico exigida pelo edital na inscrição. O MPF opinou pelo desprovimento."
   },
   {
    "sessao": "",
@@ -2115,9 +2167,11 @@
    "resultado": "Ato a proferir: remessa necessária da sentença ID 373727035, sem recurso voluntário; Fazenda Nacional apenas ciente (ID 373727034); MPF pelo prosseguimento (ID 376868303) ‖ Proposta pelos precedentes: Desprovimento por decisão monocrática (artigo 932 do CPC), na linha do gabinete (RemNecCiv 5007392-49.2025.4.03.6000, 14/09/2026; RemNecCiv 5002418-32.2026.4.03.6000 e RemNecCiv 5000404-75.2026.4.03.6000, 27/10/2026) [VALIDAR: Vara de origem]",
    "modelo": "Origem: lote adp-remessas · não pautado",
    "variacoes": [
-    "VAL"
+    "VAL",
+    "ALTA",
+    "PJE"
    ],
-   "observacao": "Remessa necessária da sentença que mandou a Receita Federal encaminhar à PGFN os débitos da Santa Engenharia e Indústria Ltda. vencidos há mais de 90 dias, para controle de legalidade e inscrição em dívida ativa. Não houve recurso voluntário.",
+   "observacao": "Linha reiterada da Turma Regional, com três precedentes de 2026.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -2246,7 +2300,8 @@
      "idParecer": "376868303",
      "parecerSentido": "Prosseguimento do feito, sem intervenção"
     }
-   }
+   },
+   "observacao_triagem": "Remessa necessária da sentença que mandou a Receita Federal encaminhar à PGFN os débitos da Santa Engenharia e Indústria Ltda. vencidos há mais de 90 dias, para controle de legalidade e inscrição em dívida ativa. Não houve recurso voluntário."
   },
   {
    "sessao": "",
@@ -2263,9 +2318,10 @@
    "resultado": "Ato a proferir: apelação da União (ID 366681333) e remessa necessária da sentença ID 366681328; contrarrazões com os Pareceres SEI 268/2023/MF e 1506/2024/MF (IDs 366681335 a 366681337); MPF sem intervenção (ID 369314856) ‖ Proposta pelos precedentes: Decisão monocrática: não conhecer da apelação (artigo 932, III, do CPC) e da remessa necessária (artigo 496, § 4º, IV, do CPC), se confirmada a dispensa da PGFN; subsidiariamente, desprovimento pela linha da 3ª Turma [VALIDAR] [VALIDAR: Alcance do Parecer SEI 1506/2024/MF e do Despacho 239/2025/PGFN-MF (dispensa vinculante)]",
    "modelo": "Origem: lote adp-remessas · não pautado",
    "variacoes": [
-    "VAL"
+    "VAL",
+    "MEDIA"
    ],
-   "observacao": "Apelação da União e remessa necessária da sentença que assegurou à Nors Máquinas a dedução em dobro do PAT sem os limites do Decreto 10.854/2021. As razões da União tratam de sentença de improcedência e pedem o desprovimento de \"recurso da autora\", que não existe.",
+   "observacao": "Os Pareceres SEI 268/2023 e 1506/2024 da PGFN estão juntados (IDs 366681336 e 366681337), o que sustenta o artigo 496, § 4º, IV, do CPC; conferir se a apelação é dissociada.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -2444,7 +2500,8 @@
      "idParecer": "369314856",
      "parecerSentido": "Ausência de interesse que justifique intervenção"
     }
-   }
+   },
+   "observacao_triagem": "Apelação da União e remessa necessária da sentença que assegurou à Nors Máquinas a dedução em dobro do PAT sem os limites do Decreto 10.854/2021. As razões da União tratam de sentença de improcedência e pedem o desprovimento de \"recurso da autora\", que não existe."
   },
   {
    "sessao": "",
@@ -2461,9 +2518,11 @@
    "resultado": "Ato a proferir: remessa necessária da sentença ID 335778608, sem recurso voluntário; a Fazenda Nacional declarou que não recorrerá, com fundamento no artigo 19, VI, b, da Lei 10.522/2002 e na Portaria PGFN 502/2016 (ID 335778613); a impetrante renunciou ao prazo recursal (ID 335778612) ‖ Proposta pelos precedentes: Não conhecimento da remessa por decisão monocrática, porque a Fazenda Nacional manifestou desinteresse em recorrer em hipótese de dispensa (artigo 19, § 1º, II, e § 2º, da Lei 10.522/2002), na linha do gabinete (RemNecCiv 5019317-33.2025.4.03.6100, 12/05/2026; RemNecCiv 5003000-76.2025.4.03.6126, 30/04/2026) [VALIDAR: Vara de origem e autoridade impetrada]",
    "modelo": "Origem: lote adp-remessas · não pautado",
    "variacoes": [
-    "VAL"
+    "VAL",
+    "ALTA",
+    "PJE"
    ],
-   "observacao": "Remessa necessária da sentença que reconheceu à Dieselcom o direito de deduzir do lucro tributável o dobro das despesas com o PAT, limitado a 4% do IRPJ, e de compensar o indébito. A Fazenda Nacional declarou que não recorrerá, com base no artigo 19, VI, b, da Lei 10.522/2002 e na jurisprudência do STJ; a impetrante renunciou ao prazo recursal.",
+   "observacao": "Conferido: a PGFN informou que não recorreria (ID 335778613, artigo 19 da Lei 10.522/2002). Não conhecer da remessa.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -2612,7 +2671,8 @@
      "idParecer": "336714352",
      "parecerSentido": "Prosseguimento do feito, sem intervenção"
     }
-   }
+   },
+   "observacao_triagem": "Remessa necessária da sentença que reconheceu à Dieselcom o direito de deduzir do lucro tributável o dobro das despesas com o PAT, limitado a 4% do IRPJ, e de compensar o indébito. A Fazenda Nacional declarou que não recorrerá, com base no artigo 19, VI, b, da Lei 10.522/2002 e na jurisprudência do STJ; a impetrante renunciou ao prazo recursal."
   },
   {
    "sessao": "",
@@ -2629,9 +2689,11 @@
    "resultado": "Ato a proferir: apelação do autor (ID 390581373) da sentença ID 390581372; sem contrarrazões nos autos; MPF sem intervenção (ID 403792914) ‖ Proposta pelos precedentes: Monocrática: negar provimento à apelação (ADIs 2.110 e 2.111 e Tema 1.102/STF) e afastar a condenação em custas e honorários (modulação, item b), como na decisão monocrática do Relator na ApCiv 5001017-91.2023.4.03.6003 (31/08/2026): nega provimento e afasta custas e honorários pela modulação [VALIDAR: Tempestividade da apelação (data da intimação da sentença)]",
    "modelo": "Origem: lote adp-ap-3s · não pautado",
    "variacoes": [
-    "VAL"
+    "VAL",
+    "ALTA",
+    "PJE"
    ],
-   "observacao": "Apelação do autor contra sentença que julgou improcedente a revisão da vida toda após as ADIs 2.110 e 2.111/STF.",
+   "observacao": "Precedente monocrático do Relator (ApCiv 5001017-91.2023, 31/08/2026).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -2791,7 +2853,8 @@
      "idParecer": "403792914",
      "parecerSentido": "Ausência de interesse que justifique intervenção"
     }
-   }
+   },
+   "observacao_triagem": "Apelação do autor contra sentença que julgou improcedente a revisão da vida toda após as ADIs 2.110 e 2.111/STF."
   },
   {
    "sessao": "",
@@ -2808,9 +2871,11 @@
    "resultado": "Ato a proferir: apelação do autor (ID 390581467) da sentença ID 390581466; sem contrarrazões nos autos; MPF sem intervenção (ID 404267569) ‖ Proposta pelos precedentes: Monocrática: negar provimento à apelação (ADIs 2.110 e 2.111 e Tema 1.102/STF) e afastar a condenação em custas e honorários (modulação, item b), como na decisão monocrática do Relator na ApCiv 5001017-91.2023.4.03.6003 (31/08/2026): nega provimento e afasta custas e honorários pela modulação [VALIDAR: Tempestividade da apelação (data da intimação da sentença)]",
    "modelo": "Origem: lote adp-ap-3s · não pautado",
    "variacoes": [
-    "VAL"
+    "VAL",
+    "ALTA",
+    "PJE"
    ],
-   "observacao": "Apelação do autor contra sentença que julgou improcedente a revisão da vida toda após as ADIs 2.110 e 2.111/STF.",
+   "observacao": "Precedente monocrático do Relator (ApCiv 5001017-91.2023, 31/08/2026).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -2969,7 +3034,8 @@
      "idParecer": "404267569",
      "parecerSentido": "Opina pelo regular prosseguimento do feito (autor capaz, sem vulnerabilidade)"
     }
-   }
+   },
+   "observacao_triagem": "Apelação do autor contra sentença que julgou improcedente a revisão da vida toda após as ADIs 2.110 e 2.111/STF."
   },
   {
    "sessao": "",
@@ -2986,9 +3052,11 @@
    "resultado": "Ato a proferir: apelação do autor (ID 390582428) da sentença ID 390582426; sem contrarrazões nos autos; MPF sem intervenção (ID 403790948) ‖ Proposta pelos precedentes: Monocrática: negar provimento à apelação (ADIs 2.110 e 2.111 e Tema 1.102/STF) e afastar a condenação em custas e honorários (modulação, item b), como na decisão monocrática do Relator na ApCiv 5001017-91.2023.4.03.6003 (31/08/2026): nega provimento e afasta custas e honorários pela modulação [VALIDAR: Tempestividade da apelação (data da intimação da sentença)]",
    "modelo": "Origem: lote adp-ap-3s · não pautado",
    "variacoes": [
-    "VAL"
+    "VAL",
+    "ALTA",
+    "PJE"
    ],
-   "observacao": "Apelação do autor contra sentença que julgou improcedente a revisão da vida toda após as ADIs 2.110 e 2.111/STF.",
+   "observacao": "Precedente monocrático do Relator (ApCiv 5001017-91.2023, 31/08/2026).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -3146,7 +3214,8 @@
      "idParecer": "403790948",
      "parecerSentido": "Ausência de interesse que justifique intervenção"
     }
-   }
+   },
+   "observacao_triagem": "Apelação do autor contra sentença que julgou improcedente a revisão da vida toda após as ADIs 2.110 e 2.111/STF."
   },
   {
    "sessao": "",
@@ -3163,9 +3232,11 @@
    "resultado": "Ato a proferir: apelação do autor (ID 395149224) da sentença ID 395149223; sem contrarrazões nos autos ‖ Proposta pelos precedentes: Monocrática: negar provimento à apelação (ADIs 2.110 e 2.111 e Tema 1.102/STF); a sentença já afastou a sucumbência pela modulação · decisão monocrática do Relator na ApCiv 5001017-91.2023.4.03.6003 (31/08/2026): nega provimento e afasta custas e honorários pela modulação [VALIDAR: Tempestividade da apelação (data da intimação da sentença)]",
    "modelo": "Origem: lote adp-ap-3s · não pautado",
    "variacoes": [
-    "VAL"
+    "VAL",
+    "ALTA",
+    "PJE"
    ],
-   "observacao": "Apelação do autor contra sentença que julgou improcedente a revisão da vida toda após as ADIs 2.110 e 2.111/STF.",
+   "observacao": "Precedente monocrático do Relator (ApCiv 5001017-91.2023, 31/08/2026).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -3311,7 +3382,8 @@
      "parecer": "Não verificado",
      "fundamento": "ADIs 2.110 e 2.111/STF e Tema 1.102/STF (embargos)"
     }
-   }
+   },
+   "observacao_triagem": "Apelação do autor contra sentença que julgou improcedente a revisão da vida toda após as ADIs 2.110 e 2.111/STF."
   },
   {
    "sessao": "",
@@ -3328,9 +3400,11 @@
    "resultado": "Ato a proferir: julgamento do agravo de instrumento (ID 379983679), com tutela recursal indeferida pelo relator (ID 380865011, 17/06/2026) e contraminuta da CEF (ID 386621313) ‖ Proposta pelos precedentes: Desprovimento por decisão monocrática (artigo 932 do CPC), na linha das monocráticas da Turma Regional em leilão extrajudicial (AI 5000728-20.2026.4.03.0001 (19/10/2026) e AI 5030743-72.2026.4.03.0000 (09/10/2026)) e da fundamentação da decisão ID 380865011 [VALIDAR: Vara de origem]",
    "modelo": "Origem: lote adp-ai · não pautado",
    "variacoes": [
-    "VAL"
+    "VAL",
+    "ALTA",
+    "PJE"
    ],
-   "observacao": "Agravo de Paulo Eduardo Pesconi contra a negativa de tutela para suspender os leilões extrajudiciais do imóvel financiado pela CEF, com propriedade consolidada na forma da Lei 9.514/1997. Alega falta de intimação pessoal sobre as datas dos leilões e edital com descrição desatualizada do imóvel (preço vil); o relator invocou a fé pública dos atos do registro e a necessidade de prova técnica da avaliação. O relator indeferiu a tutela recursal (ID 380865011).",
+   "observacao": "Só conferir a vara de origem no cabeçalho.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -3479,7 +3553,8 @@
      "urgSit": "Apreciada · indeferida",
      "urgData": "2026-06-17"
     }
-   }
+   },
+   "observacao_triagem": "Agravo de Paulo Eduardo Pesconi contra a negativa de tutela para suspender os leilões extrajudiciais do imóvel financiado pela CEF, com propriedade consolidada na forma da Lei 9.514/1997. Alega falta de intimação pessoal sobre as datas dos leilões e edital com descrição desatualizada do imóvel (preço vil); o relator invocou a fé pública dos atos do registro e a necessidade de prova técnica da avaliação. O relator indeferiu a tutela recursal (ID 380865011)."
   },
   {
    "sessao": "",
@@ -3496,9 +3571,11 @@
    "resultado": "Ato a proferir: julgamento do agravo (voto) ‖ Proposta pelos precedentes: Negar provimento ao agravo, por monocrática (artigo 932 do CPC) ou voto, como nos precedentes recentes da Turma Regional em alienação fiduciária: sem prova concreta de irregularidade na intimação para purgar a mora ou no procedimento, prevalece a presunção do registro; não há probabilidade do direito para suspender consolidação, alienação e desocupação; eventual irregularidade se resolve por perdas e danos; resguardado o direito de preferência até o segundo leilão (artigo 27, § 2º-B, da Lei 9.514/1997). [VALIDAR: Se o imóvel já foi arrematado e há imissão dos adquirentes (efeito sobre o interesse recursal)]",
    "modelo": "Origem: lote adp-ai · não pautado",
    "variacoes": [
-    "MONO"
+    "MONO",
+    "ALTA",
+    "PJE"
    ],
-   "observacao": "Agravo de Marcio Carneiro de Oliveira contra a decisão da 1ª Vara Federal de Campo Grande/MS (ação 5005047-76.2026.4.03.6000) que indeferiu a tutela de urgência para suspender os efeitos da consolidação da propriedade fiduciária em favor da CEF, a alienação do imóvel (matrícula 95.682 do 2º Registro de Imóveis de Campo Grande) e a ordem de desocupação. O agravante sustenta que o procedimento extrajudicial completo não está nos autos, que a averbação não prova a regularidade da intimação para purgar a mora e que a decisão usou documentos de outro processo sem contraditório.",
+   "observacao": "Promovido a Alta em 21/11: mesmo bloco L02 de 5000187-84, 5016428-39, 5019752-37 e 5022961-14. Minuta v1.",
    "peculiaridades": "Gratuidade deferida na origem. Tutela recursal indeferida (ID 386634194). Ação conexa no JEF e ação de imissão na posse na Justiça Estadual. Imóvel residencial da família do agravante.",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -3666,7 +3743,8 @@
      "urgData": "2026-07-17",
      "fundamento": "Paradigmas do gabinete: AI 5032431-69.2026.4.03.0000 (monocrática TRMS, 19/10/2026: desprovido; direito de preferência); AI 5000728-20.2026.4.03.0001 (monocrática TRMS, 19/10/2026: desprovido); AI 5000704-89.2026.4.03.0001 (monocrática TRMS, 16/10/2026: desprovido)"
     }
-   }
+   },
+   "observacao_triagem": "Agravo de Marcio Carneiro de Oliveira contra a decisão da 1ª Vara Federal de Campo Grande/MS (ação 5005047-76.2026.4.03.6000) que indeferiu a tutela de urgência para suspender os efeitos da consolidação da propriedade fiduciária em favor da CEF, a alienação do imóvel (matrícula 95.682 do 2º Registro de Imóveis de Campo Grande) e a ordem de desocupação. O agravante sustenta que o procedimento extrajudicial completo não está nos autos, que a averbação não prova a regularidade da intimação para purgar a mora e que a decisão usou documentos de outro processo sem contraditório."
   },
   {
    "sessao": "",
@@ -3683,9 +3761,11 @@
    "resultado": "Ato a proferir: julgamento do agravo de instrumento (ID 378376890), com tutela recursal indeferida pelo relator (ID 384211879, 03/07/2026); a lista extraída não traz contraminuta da CEF [VALIDAR] ‖ Proposta pelos precedentes: Desprovimento por decisão monocrática (artigo 932 do CPC), na linha das monocráticas da Turma Regional em leilão extrajudicial (AI 5000728-20.2026.4.03.0001 (19/10/2026) e AI 5030743-72.2026.4.03.0000 (09/10/2026)) e da fundamentação da decisão ID 384211879 [VALIDAR: Contraminuta da CEF; Anotar a advogada Thayne Fronza (OAB/PR 109.646), substabelecimento ID 396388330]",
    "modelo": "Origem: lote adp-ai · não pautado",
    "variacoes": [
-    "VAL"
+    "VAL",
+    "ALTA",
+    "PJE"
    ],
-   "observacao": "Agravo de Bruno Estevão Weis Madruga e Kezia Silva Ferreira contra a negativa de tutela para suspender os leilões extrajudiciais do imóvel financiado pela CEF, com propriedade consolidada na forma da Lei 9.514/1997. Alegam nulidade da consolidação por falta de intimação pessoal para purgar a mora e direito de purgá-la após a consolidação; o relator invocou a Lei 13.465/2017 e a ciência inequívoca do leilão. O relator indeferiu a tutela recursal (ID 384211879).",
+   "observacao": "Contraminuta da CEF não juntada, mas ela não é necessária para negar provimento.",
    "peculiaridades": "Substabelecimento sem reserva de poderes (ID 396388330, 07/09/2026), com pedido de intimação em nome de Thayne Fronza (OAB/PR 109.646).",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -3835,7 +3915,8 @@
      "urgSit": "Apreciada · indeferida",
      "urgData": "2026-07-03"
     }
-   }
+   },
+   "observacao_triagem": "Agravo de Bruno Estevão Weis Madruga e Kezia Silva Ferreira contra a negativa de tutela para suspender os leilões extrajudiciais do imóvel financiado pela CEF, com propriedade consolidada na forma da Lei 9.514/1997. Alegam nulidade da consolidação por falta de intimação pessoal para purgar a mora e direito de purgá-la após a consolidação; o relator invocou a Lei 13.465/2017 e a ciência inequívoca do leilão. O relator indeferiu a tutela recursal (ID 384211879)."
   },
   {
    "sessao": "",
@@ -3852,9 +3933,11 @@
    "resultado": "Ato a proferir: julgamento do agravo de instrumento (ID 383481293), com liminar recursal indeferida pelo relator (ID 386693348) e contraminuta da CEF (ID 391741330) ‖ Proposta pelos precedentes: Desprovimento por decisão monocrática (artigo 932 do CPC), na linha das monocráticas da Turma Regional em leilão extrajudicial (AI 5000728-20.2026.4.03.0001, 19/10/2026; AI 5030743-72.2026.4.03.0000, 09/10/2026) e da fundamentação da decisão ID 386693348",
    "modelo": "Origem: lote adp-ai · não pautado",
    "variacoes": [
-    "VAL"
+    "VAL",
+    "ALTA",
+    "PJE"
    ],
-   "observacao": "Agravo de Willian Oliveira de Lacerda e Arilene da Silva Vilela contra a negativa de tutela, em ação revisional do financiamento com a CEF, para suspender leilões, afastar a mora e impedir a negativação. O relator indeferiu a liminar por falta de demonstração de dano concreto e iminente (ID 386693348). A CEF contraminutou (ID 391741330).",
+   "observacao": "Sem pendência.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -4001,7 +4084,8 @@
      "urgSit": "Apreciada · indeferida",
      "urgData": "2026-07-17"
     }
-   }
+   },
+   "observacao_triagem": "Agravo de Willian Oliveira de Lacerda e Arilene da Silva Vilela contra a negativa de tutela, em ação revisional do financiamento com a CEF, para suspender leilões, afastar a mora e impedir a negativação. O relator indeferiu a liminar por falta de demonstração de dano concreto e iminente (ID 386693348). A CEF contraminutou (ID 391741330)."
   },
   {
    "sessao": "",
@@ -4018,9 +4102,11 @@
    "resultado": "Ato a proferir: julgamento do agravo de instrumento (ID 388847544), com tutela recursal indeferida pelo relator (ID 390321059, 05/08/2026) e contraminuta da CEF (ID 394006599) ‖ Proposta pelos precedentes: Desprovimento por decisão monocrática (artigo 932 do CPC), na linha das monocráticas da Turma Regional em leilão extrajudicial (AI 5000728-20.2026.4.03.0001 (19/10/2026) e AI 5030743-72.2026.4.03.0000 (09/10/2026)) e da fundamentação da decisão ID 390321059",
    "modelo": "Origem: lote adp-ai · não pautado",
    "variacoes": [
-    "VAL"
+    "VAL",
+    "ALTA",
+    "PJE"
    ],
-   "observacao": "Agravo de Gilmar Moreira da Graça contra a negativa de tutela para suspender os leilões extrajudiciais do imóvel financiado pela CEF, com propriedade consolidada na forma da Lei 9.514/1997. Alega nulidade do procedimento e perigo de perda do imóvel; o relator não viu dano concreto e iminente. O relator indeferiu a tutela recursal (ID 390321059).",
+   "observacao": "Sem pendência.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -4167,7 +4253,8 @@
      "urgSit": "Apreciada · indeferida",
      "urgData": "2026-08-05"
     }
-   }
+   },
+   "observacao_triagem": "Agravo de Gilmar Moreira da Graça contra a negativa de tutela para suspender os leilões extrajudiciais do imóvel financiado pela CEF, com propriedade consolidada na forma da Lei 9.514/1997. Alega nulidade do procedimento e perigo de perda do imóvel; o relator não viu dano concreto e iminente. O relator indeferiu a tutela recursal (ID 390321059)."
   },
   {
    "sessao": "",
@@ -4184,9 +4271,10 @@
    "resultado": "Ato a proferir: julgamento do agravo de instrumento (ID 376900524), com tutela recursal indeferida pelo relator (ID 382368586, que registrou endereços do agravante em Goiânia) e contraminuta da CEF (ID 385369246); o agravo alega tempestividade por indisponibilidade do PJe [VALIDAR] ‖ Proposta pelos precedentes: Desprovimento por decisão monocrática (artigo 932 do CPC), conferida a tempestividade, na linha das monocráticas da Turma Regional em leilão extrajudicial (AI 5000728-20.2026.4.03.0001, 19/10/2026; AI 5030743-72.2026.4.03.0000, 09/10/2026) e da fundamentação da decisão ID 382368586 [VALIDAR: Tempestividade (indisponibilidade do PJe alegada)]",
    "modelo": "Origem: lote adp-ai · não pautado",
    "variacoes": [
-    "VAL"
+    "VAL",
+    "MEDIA"
    ],
-   "observacao": "Agravo de Frederico Augusto Santana contra a negativa de tutela para suspender a consolidação e os leilões do imóvel financiado pela CEF em Campo Grande. Alega vícios na intimação por edital para purgar a mora e falta de notificação pessoal dos leilões. O relator indeferiu a tutela recursal, observando que os documentos indicam residência do agravante em Goiânia (ID 382368586). A CEF contraminutou (ID 385369246).",
+   "observacao": "Disponibilização em 04/05/2026 e protocolo em 27/05/2026, no 16º dia útil. A página oficial do TRF3 não registra indisponibilidade do PJe em 26/05/2026 (a última entrada é de 16 a 20/03/2026). Sem certidão de indisponibilidade, o agravo é intempestivo. Confirmar no PJe.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -4348,7 +4436,8 @@
      "urgSit": "Apreciada · indeferida",
      "urgData": "2026-06-25"
     }
-   }
+   },
+   "observacao_triagem": "Agravo de Frederico Augusto Santana contra a negativa de tutela para suspender a consolidação e os leilões do imóvel financiado pela CEF em Campo Grande. Alega vícios na intimação por edital para purgar a mora e falta de notificação pessoal dos leilões. O relator indeferiu a tutela recursal, observando que os documentos indicam residência do agravante em Goiânia (ID 382368586). A CEF contraminutou (ID 385369246)."
   },
   {
    "sessao": "",
@@ -4365,9 +4454,10 @@
    "resultado": "Ato a proferir: julgamento do agravo de instrumento (ID 386109348), com tutela recursal indeferida pelo relator (ID 387552005, 21/07/2026) e contraminuta da CEF (ID 391065294) ‖ Proposta pelos precedentes: Desprovimento por decisão monocrática (artigo 932 do CPC), na linha das monocráticas da Turma Regional em leilão extrajudicial (AI 5000728-20.2026.4.03.0001 (19/10/2026) e AI 5030743-72.2026.4.03.0000 (09/10/2026)) e da fundamentação da decisão ID 387552005 [VALIDAR: Gratuidade na origem ou intimação para o preparo em dobro (artigo 1.007, § 4º, do CPC)]",
    "modelo": "Origem: lote adp-ai · não pautado",
    "variacoes": [
-    "VAL"
+    "VAL",
+    "MEDIA"
    ],
-   "observacao": "Agravo de Crislaine Romero e Silva contra a negativa de tutela para suspender os leilões extrajudiciais do imóvel financiado pela CEF, com propriedade consolidada na forma da Lei 9.514/1997. Alega falta de notificação pessoal sobre as datas dos leilões, irregularidade da averbação e inversão do ônus da prova; o relator invocou a fé pública da averbação da consolidação. O relator indeferiu a tutela recursal (ID 387552005).",
+   "observacao": "O agravante diz ter gratuidade na origem (5004804-35.2026), sem cópia nos autos. Conferir na origem antes de decidir.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -4516,7 +4606,8 @@
      "urgSit": "Apreciada · indeferida",
      "urgData": "2026-07-21"
     }
-   }
+   },
+   "observacao_triagem": "Agravo de Crislaine Romero e Silva contra a negativa de tutela para suspender os leilões extrajudiciais do imóvel financiado pela CEF, com propriedade consolidada na forma da Lei 9.514/1997. Alega falta de notificação pessoal sobre as datas dos leilões, irregularidade da averbação e inversão do ônus da prova; o relator invocou a fé pública da averbação da consolidação. O relator indeferiu a tutela recursal (ID 387552005)."
   },
   {
    "sessao": "",
@@ -4535,9 +4626,11 @@
    "variacoes": [
     "ADM",
     "MONO",
-    "VAL"
+    "VAL",
+    "ALTA",
+    "PJE"
    ],
-   "observacao": "Agravo de Neuza Farias Gambim contra a decisão que rejeitou a exceção de pré-executividade na execução fiscal do DNIT. O recurso veio sem preparo, com pedido de gratuidade (certidão ID 404825139). A gratuidade foi indeferida por falta de declaração e de prova da hipossuficiência, com intimação para recolher o preparo em 5 dias, sob pena de deserção (ID 405463183, 19/10/2026). Não há recolhimento na lista extraída.",
+   "observacao": "Conferido: gratuidade indeferida e intimação para recolher em 5 dias (ID 405463183, 19/10/2026); nada recolhido até a extração (20/11/2026). Deserção.",
    "peculiaridades": "Prioridade de idosa. Distribuído inicialmente fora da Turma Regional e redistribuído (decisão ID 404889747, certidão ID 405416607). A agravante pede efeito suspensivo para obstar SISBAJUD e RENAJUD (ID 404484696).",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -4706,7 +4799,8 @@
      "ajg": "Pedida no recurso e indeferida (ID 405463183)",
      "descPrelim": "Deserção: gratuidade indeferida (ID 405463183) e preparo não recolhido no prazo [VALIDAR]"
     }
-   }
+   },
+   "observacao_triagem": "Agravo de Neuza Farias Gambim contra a decisão que rejeitou a exceção de pré-executividade na execução fiscal do DNIT. O recurso veio sem preparo, com pedido de gratuidade (certidão ID 404825139). A gratuidade foi indeferida por falta de declaração e de prova da hipossuficiência, com intimação para recolher o preparo em 5 dias, sob pena de deserção (ID 405463183, 19/10/2026). Não há recolhimento na lista extraída."
   },
   {
    "sessao": "",
@@ -4723,9 +4817,11 @@
    "resultado": "Ato a proferir: decisão monocrática de não conhecimento por deserção, se confirmado que não houve recolhimento em dobro depois do despacho ID 390601880 (06/08/2026); a tutela recursal não foi apreciada ‖ Proposta pelos precedentes: Não conhecimento por deserção (artigo 1.007, § 4º, do CPC, c/c artigo 932, III), se confirmada a falta do recolhimento em dobro com comprovante do Tesouro, na linha das monocráticas da Turma Regional (ApCiv 5000023-52.2026.4.03.6005, 12/06/2026) [VALIDAR: Recolhimento em dobro depois de 06/08/2026 (comprovante do Tesouro); Data da intimação do despacho ID 390601880]",
    "modelo": "Origem: lote adp-ai · não pautado",
    "variacoes": [
-    "VAL"
+    "VAL",
+    "ALTA",
+    "PJE"
    ],
-   "observacao": "Agravo de Aires Alves Silva contra o indeferimento da indisponibilidade do imóvel da matrícula 138.528, em ação de nulidade de ato jurídico c/c perdas e danos contra a CEF e outros. O recurso veio sem custas (certidão ID 383963603); o Relator intimou para o recolhimento em dobro, sob pena de deserção (ID 390601880, 06/08/2026). A lista completa extraída em 21/11/2026 não traz recolhimento.",
+   "observacao": "Conferido: intimação para recolher em dobro (ID 390601880, 06/08/2026); nada recolhido até a extração. Deserção.",
    "peculiaridades": "Advogado com escritório em Cuiabá/MT. Etiqueta \"LIMINAR PENDENTE\": o pedido de tutela recursal não foi apreciado.",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -4874,7 +4970,8 @@
      "fundamento": "Deserção: preparo em dobro não recolhido após a intimação (ID 390601880) [VALIDAR]",
      "descPrelim": "Deserção: preparo em dobro não recolhido após o despacho ID 390601880 [VALIDAR]"
     }
-   }
+   },
+   "observacao_triagem": "Agravo de Aires Alves Silva contra o indeferimento da indisponibilidade do imóvel da matrícula 138.528, em ação de nulidade de ato jurídico c/c perdas e danos contra a CEF e outros. O recurso veio sem custas (certidão ID 383963603); o Relator intimou para o recolhimento em dobro, sob pena de deserção (ID 390601880, 06/08/2026). A lista completa extraída em 21/11/2026 não traz recolhimento."
   },
   {
    "sessao": "",
@@ -4891,9 +4988,11 @@
    "resultado": "Ato a proferir: o despacho ID 388330538 (28/07/2026) mandou recolher as custas em dobro; o agravante juntou recibo bancário de Pix de R$ 128,52 (ID 391284985, 10/08/2026); o despacho ID 397076582 (12/09/2026) mandou comprovar o recolhimento pelo comprovante da STN em 5 dias, sob pena de deserção; a lista extraída não traz o comprovante [VALIDAR no PJe]; a liminar recursal está pendente ‖ Proposta pelos precedentes: Sem o comprovante, não conhecimento por deserção (linha do AI 5000239-80.2026.4.03.0001, 06/08/2026); com ele, exame da liminar e voto na linha do AI 5007524-30.2026.4.03.0000 (Turma Regional, 15/09/2026; bonificação de 10% em residência médica) [VALIDAR: Cumprimento do despacho ID 397076582]",
    "modelo": "Origem: lote adp-ai · não pautado",
    "variacoes": [
-    "VAL"
+    "VAL",
+    "ALTA",
+    "PJE"
    ],
-   "observacao": "Agravo de Rafael Pinho de Almeida Moreira, médico da Estratégia Saúde da Família em Três Lagoas, contra a negativa de liminar em mandado de segurança para obter a bonificação de 10% no ENARE 2026/2027 (artigo 22, § 2º, da Lei 12.871/2013), revogada pela Lei 15.233/2025. O agravante pagou as custas em dobro por Pix e juntou só o recibo bancário; o despacho ID 397076582 deu 5 dias para o comprovante da STN, sob pena de deserção.",
+   "observacao": "Conferido: só comprovante Pix; intimado a juntar o comprovante do Tesouro (ID 397076582, 12/09/2026), nada juntado até a extração. Deserção.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -5055,7 +5154,8 @@
      "fundamento": "Deserção: não juntado o comprovante do Tesouro do Pix após a intimação do despacho ID 397076582 [VALIDAR]",
      "descPrelim": "Deserção: Pix sem comprovante da STN, depois do despacho ID 397076582 [VALIDAR cumprimento]"
     }
-   }
+   },
+   "observacao_triagem": "Agravo de Rafael Pinho de Almeida Moreira, médico da Estratégia Saúde da Família em Três Lagoas, contra a negativa de liminar em mandado de segurança para obter a bonificação de 10% no ENARE 2026/2027 (artigo 22, § 2º, da Lei 12.871/2013), revogada pela Lei 15.233/2025. O agravante pagou as custas em dobro por Pix e juntou só o recibo bancário; o despacho ID 397076582 deu 5 dias para o comprovante da STN, sob pena de deserção."
   },
   {
    "sessao": "",
@@ -5067,14 +5167,14 @@
    "executado": "",
    "assunto": "Responsabilidade da Administração",
    "assunto_detalhado": "",
-   "grupo": "t06",
+   "grupo": "t13",
    "tipo_caso": "Execução fiscal (multa de IPI, 2004) · sócio cotista incluído como responsável · exceção de pré-executividade rejeitada · tutela recursal indeferida pelo relator anterior · questões de ofício (artigo 10 do CPC): IRDR 0017610-97.2016.4.03.0000, Súmula 392/STJ e artigo 8º do Decreto-lei 1.736/1979 · preparo não comprovado",
    "resultado": "Ato a proferir: a certidão ID 272500235 registra a falta de recolhimento das custas e não houve intimação para o preparo; o relator anterior indeferiu a tutela recursal (ID 275315151) e abriu contraditório sobre questões de ofício (IDs 273427218 e 278226911); a PFN respondeu (IDs 275027257, 277880347 e 279513408) ‖ Proposta pelos precedentes: Intimar para o preparo em dobro; recolhido, voto na linha do gabinete sobre a responsabilidade solidária do artigo 8º do Decreto-lei 1.736/1979 e o redirecionamento sem os requisitos do artigo 135 do CTN (AI 0012557-38.2016.4.03.0000, 3ª Turma, 15/12/2016; AI 0002761-23.2016.4.03.0000, 3ª Turma, 25/08/2016) [VALIDAR: Comprovante de preparo eventualmente juntado depois]",
    "modelo": "Origem: lote adp-ai · não pautado",
    "variacoes": [
     "VAL"
    ],
-   "observacao": "Agravo de Paulo Bernardo Reichardt Junior, ex-cotista da Exportadora Reichardt Ltda., contra a rejeição de sua exceção de pré-executividade na execução fiscal de multa de IPI. O relator anterior indeferiu a tutela recursal (ID 275315151) e intimou as partes sobre questões de ofício: falta de incidente de desconsideração (IRDR 0017610-97.2016.4.03.0000), inclusão do sócio na CDA depois do ajuizamento (Súmula 392/STJ) e inaplicabilidade do artigo 8º do Decreto-lei 1.736/1979. Não há comprovante de preparo.",
+   "observacao": "Não houve intimação para o preparo: o ato é despacho de intimação para recolher em dobro (artigo 1.007, § 4º, do CPC).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -5267,7 +5367,8 @@
      "urgData": "2023-06-26",
      "descPrelim": "Preparo não comprovado (certidão ID 272500235): intimar para recolhimento em dobro (artigo 1.007, § 4º, do CPC)"
     }
-   }
+   },
+   "observacao_triagem": "Agravo de Paulo Bernardo Reichardt Junior, ex-cotista da Exportadora Reichardt Ltda., contra a rejeição de sua exceção de pré-executividade na execução fiscal de multa de IPI. O relator anterior indeferiu a tutela recursal (ID 275315151) e intimou as partes sobre questões de ofício: falta de incidente de desconsideração (IRDR 0017610-97.2016.4.03.0000), inclusão do sócio na CDA depois do ajuizamento (Súmula 392/STJ) e inaplicabilidade do artigo 8º do Decreto-lei 1.736/1979. Não há comprovante de preparo."
   },
   {
    "sessao": "",
@@ -5284,9 +5385,10 @@
    "resultado": "Ato a proferir: o relator mandou comprovar o preparo pelo comprovante da STN (ID 366298139); a agravante juntou GRU Judicial gerada em 17/04/2026 e comprovante sem texto extraído (IDs 368201186 e 368201187); depois, o relator não concedeu a tutela recursal antes do contraditório (ID 386172679); contraminutaram a ANTT (ID 388211076), a concessionária (ID 391040812) e o DNIT (ID 392725128) ‖ Proposta pelos precedentes: Conferir o comprovante ID 368201186; sem comprovante válido após duas intimações, deserção (linha do AI 5000239-80.2026.4.03.0001, 06/08/2026); regular, voto: sem paradigma do gabinete no banco sobre acesso de posto lindeiro em rodovia concedida [VALIDAR: Comprovante ID 368201186 (pagamento da GRU Judicial); Tratamento de GRU Judicial paga depois de 03/04/2026]",
    "modelo": "Origem: lote adp-ai · não pautado",
    "variacoes": [
-    "VAL"
+    "VAL",
+    "BAIXA"
    ],
-   "observacao": "Agravo do Auto Posto Manções Ltda. contra a negativa de tutela para restabelecer o acesso ao posto, interditado pela concessionária da BR-163, inclusive para usuários do sentido oposto. A origem entendeu que a questão era antiga (comunicações de 19/05/2025 e 16/09/2025). A agravante juntou laudo extrajudicial superveniente (ID 372587433). O relator não concedeu a tutela recursal antes do contraditório (ID 386172679). ANTT, concessionária e DNIT contraminutaram.",
+   "observacao": "Preparo por GRU Judicial com vencimento em 30/04/2026 (ID 368201187), após a extinção da GRU Judicial (03/04/2026): deserção ou preparo válido? Se válido, vai a voto.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -5505,7 +5607,8 @@
      "urgData": "2026-07-14",
      "descPrelim": "Preparo: Pix sem PagTesouro e GRU Judicial de 17/04/2026 com comprovante sem texto (ID 368201186), após a intimação do despacho ID 366298139 [VALIDAR]"
     }
-   }
+   },
+   "observacao_triagem": "Agravo do Auto Posto Manções Ltda. contra a negativa de tutela para restabelecer o acesso ao posto, interditado pela concessionária da BR-163, inclusive para usuários do sentido oposto. A origem entendeu que a questão era antiga (comunicações de 19/05/2025 e 16/09/2025). A agravante juntou laudo extrajudicial superveniente (ID 372587433). O relator não concedeu a tutela recursal antes do contraditório (ID 386172679). ANTT, concessionária e DNIT contraminutaram."
   },
   {
    "sessao": "",
@@ -5517,7 +5620,7 @@
    "executado": "",
    "assunto": "1/3 de férias",
    "assunto_detalhado": "",
-   "grupo": "t06",
+   "grupo": "t13",
    "tipo_caso": "Execução fiscal · exceção de pré-executividade rejeitada · PIS e COFINS · composição da base de cálculo e certeza da CDA",
    "resultado": "Ato a proferir: julgamento do agravo (voto), depois de conferir a regularidade do preparo em dobro; a tutela recursal foi indeferida e há contraminuta ‖ Proposta pelos precedentes: Antes do mérito, o preparo: comprovante STN do valor em dobro após a intimação específica → conhecer; comprovante bancário Pix ou guia \"aguardando pagamento\" → não conhecer por deserção (artigo 1.007, § 4º, do CPC e artigo 2º, § 2º, III, da Resolução PRES 138/2017), por monocrática. Mérito, se conhecido: exceção de pré-executividade só para matéria sem dilação probatória (Súmula 393/STJ); exclusão do ICMS da base do PIS e da COFINS por exceção admitida quando não exige recálculo complexo. [VALIDAR: Comprovante juntado em 10/06/2026: STN e valor em dobro? Fundamentos específicos da exceção]",
    "modelo": "Origem: lote adp-ai · não pautado",
@@ -5525,7 +5628,7 @@
     "ADM",
     "VAL"
    ],
-   "observacao": "Agravo de Costa Vaz Comércio de Alimentos contra a decisão que rejeitou a exceção de pré-executividade (ID 560379721 nos autos de origem; EF 5011102-14.2024.4.03.6000, PIS e COFINS, R$ 145.716,71). A União, na contraminuta (ID 387709321), sustenta a presunção de certeza e liquidez da CDA e o descabimento da exceção para discutir a composição da base de cálculo.",
+   "observacao": "O agravante juntou o comprovante do Tesouro após a intimação (ID 379489258, imagem): preparo provavelmente regular, então vai a voto. Se a imagem não for do Tesouro, volta como deserção.",
    "peculiaridades": "Preparo: o despacho ID 366467045 (16/04/2026) mandou recolher em dobro (artigo 1.007, § 4º, do CPC); a guia ID 372624804 constava como \"aguardando realização do pagamento\", e o despacho ID 376122107 (27/05/2026) mandou comprovar pelo Tesouro; a agravante juntou comprovante em 10/06/2026 (ID 379489258). Tutela recursal indeferida pela decisão ID 385924056 (13/07/2026).",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -5720,7 +5823,8 @@
      "urgData": "2026-07-13",
      "fundamento": "Paradigmas do gabinete: AI 5000301-23.2026.4.03.0001 (monocrática TRMS, 05/08/2026: não conhecido, dobro não atendido); AI 5000239-80.2026.4.03.0001 (06/08/2026: não conhecido, Pix sem comprovante STN); AI 5025719-44.2018.4.03.0000 (acórdão 3ª Turma, 18/11/2022: exceção cabível, ICMS na base do PIS e da COFINS)"
     }
-   }
+   },
+   "observacao_triagem": "Agravo de Costa Vaz Comércio de Alimentos contra a decisão que rejeitou a exceção de pré-executividade (ID 560379721 nos autos de origem; EF 5011102-14.2024.4.03.6000, PIS e COFINS, R$ 145.716,71). A União, na contraminuta (ID 387709321), sustenta a presunção de certeza e liquidez da CDA e o descabimento da exceção para discutir a composição da base de cálculo."
   },
   {
    "sessao": "",
@@ -5732,7 +5836,7 @@
    "executado": "",
    "assunto": "Anulação",
    "assunto_detalhado": "",
-   "grupo": "t06",
+   "grupo": "t13",
    "tipo_caso": "Administrativo · licitações · penalidade de impedimento de licitar e contratar aplicada pela UFMS · nulidade do processo administrativo · tutela deferida em parte na origem",
    "resultado": "Ato a proferir: julgamento do agravo (voto), depois de conferido o preparo; tutela recursal indeferida em 30/01/2026 e há contrarrazões da União e da UFMS ‖ Proposta pelos precedentes: Primeiro o preparo: guia Pix \"aguardando realização do pagamento\" (ID 352529775) e comprovantes sem texto — ler por imagem; sem comprovante STN, intimar para comprovar e, não atendido, não conhecer por deserção, como nos precedentes da Turma Regional. Mérito (voto): pelos precedentes, o Judiciário controla só a legalidade do processo sancionador (contraditório, ampla defesa, ciência efetiva antes da execução da sanção), sem reduzir a penalidade por proporcionalidade; nulidade só com vício demonstrado. [VALIDAR: Tipo dos comprovantes IDs 352529776 e 352529777; vícios concretos alegados no Processo Administrativo 23104.004898/2025-99]",
    "modelo": "Origem: lote adp-ai · não pautado",
@@ -5740,7 +5844,7 @@
     "ADM",
     "VAL"
    ],
-   "observacao": "Agravo de M. A. B. Lima & Cia contra a decisão (ID 473092717 da origem) que, na ação 5006521-19.2025.4.03.6000 (1ª Vara Federal de Campo Grande), deferiu em parte a tutela para suspender a penalidade de impedimento de licitar e contratar com a União aplicada no Processo Administrativo 23104.004898/2025-99. A agravante busca a nulidade do processo administrativo e a exclusão das penalidades; alega asfixia financeira. A União (ID 365273942) e a UFMS (ID 362392356) pedem o desprovimento.",
+   "observacao": "A petição de 29/01/2026 (ID 352529759) junta o comprovante do Tesouro (imagem): preparo provavelmente regular, então vai a voto. Se a imagem não for do Tesouro, volta como deserção.",
    "peculiaridades": "Tutela recursal indeferida pela Relatora anterior (decisão ID 352675226). Preparo: solicitação Pix de R$ 64,26 \"aguardando realização do pagamento\" (ID 352529775) e comprovantes sem conteúdo (IDs 352529776 e 352529777).",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -5931,7 +6035,8 @@
      "urgData": "2026-01-30",
      "fundamento": "Paradigmas do gabinete: AI 5000239-80.2026.4.03.0001 (monocrática TRMS, 06/08/2026: não conhecido, Pix sem comprovante STN); ApCiv 0005091-29.2016.4.03.6002 (acórdão TRMS, 15/09/2026: impedimento de licitar mantido; sem nulidade formal; Judiciário não reduz a penalidade); ApCiv 0013693-49.2015.4.03.6000 (acórdão TRMS, 27/08/2026: execução da penalidade antes da ciência efetiva, parcial provimento); AI 5033957-13.2022.4.03.0000 (acórdão 3ª Turma, 14/04/2023: liminar negada contra impedimento de licitar, desprovido)"
     }
-   }
+   },
+   "observacao_triagem": "Agravo de M. A. B. Lima & Cia contra a decisão (ID 473092717 da origem) que, na ação 5006521-19.2025.4.03.6000 (1ª Vara Federal de Campo Grande), deferiu em parte a tutela para suspender a penalidade de impedimento de licitar e contratar com a União aplicada no Processo Administrativo 23104.004898/2025-99. A agravante busca a nulidade do processo administrativo e a exclusão das penalidades; alega asfixia financeira. A União (ID 365273942) e a UFMS (ID 362392356) pedem o desprovimento."
   },
   {
    "sessao": "",
@@ -5950,9 +6055,10 @@
    "variacoes": [
     "ADM",
     "MONO",
-    "VAL"
+    "VAL",
+    "MEDIA"
    ],
-   "observacao": "Agravo de Antonio dos Anjos Sales contra o despacho que indeferiu a gratuidade, por renda superior a 40% do teto do RGPS, na ação de aposentadoria especial. O próprio agravo afirma que a decisão foi publicada em 24/03/2026 e que seria protocolado em 30/04/2026, mas a petição é datada e foi distribuída em 18/05/2026 (ID 374295102). A tutela recursal não foi concedida antes do contraditório (ID 377090324, 08/06/2026). Não há contraminuta do INSS na lista extraída.",
+   "observacao": "Tempestivo (15º dia útil). Mérito: gratuidade negada por critério objetivo de renda. Tema 1.178/STJ: conferir a tese.",
    "peculiaridades": "Etiquetas \"Apresentar Contraminuta\" e \"gratuidade\". Despacho de redistribuição à 3ª Seção (ID 374301928), cumprido com a remessa ao Gab. A da Turma Regional (certidão ID 374557935).",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -6129,7 +6235,8 @@
      "ajg": "Indeferida na origem; objeto do agravo",
      "descPrelim": "Intempestividade: decisão publicada em 24/03/2026, segundo o próprio agravo, e recurso de 18/05/2026 [VALIDAR]"
     }
-   }
+   },
+   "observacao_triagem": "Agravo de Antonio dos Anjos Sales contra o despacho que indeferiu a gratuidade, por renda superior a 40% do teto do RGPS, na ação de aposentadoria especial. O próprio agravo afirma que a decisão foi publicada em 24/03/2026 e que seria protocolado em 30/04/2026, mas a petição é datada e foi distribuída em 18/05/2026 (ID 374295102). A tutela recursal não foi concedida antes do contraditório (ID 377090324, 08/06/2026). Não há contraminuta do INSS na lista extraída."
   },
   {
    "sessao": "",
@@ -6148,9 +6255,10 @@
    "variacoes": [
     "ADM",
     "MONO",
-    "VAL"
+    "VAL",
+    "MEDIA"
    ],
-   "observacao": "Agravo do Espólio de Américo Farias contra a decisão que indeferiu a suspensão da execução fiscal e rejeitou a nulidade do leilão do imóvel da matrícula 1.604 de Porto Murtinho, por falha na intimação da advogada por e-mail. O recurso foi interposto no TJMS, que declarou a incompetência e manteve a liminar de suspensão (ID 360631880, f. 200-203). Aqui, a gratuidade e o efeito suspensivo foram deferidos, com suspensão dos efeitos da alienação (ID 366505084, 17/04/2026). O arrematante Anderson Gonçalves Tonini (ID 374628644) e a PFN (ID 383444608) pedem o desprovimento; a PFN suscita intempestividade, porque o protocolo no tribunal incompetente não fixa a tempestividade.",
+   "observacao": "A contraminuta (ID 383444608) confirma interposição no TJMS; paradigma do Relator. Conferir as datas e revogar o efeito suspensivo (ID 366505084).",
    "peculiaridades": "O despacho ID 357669957 exigiu a cópia integral da origem (artigo 932, parágrafo único, do CPC), juntada nos IDs 360631880, 360636813 e 360631881. A petição de interposição (ID 357592196) não tem texto extraído. O arrematante pede intimações exclusivas em nome de Bruno Mazzo Ramos dos Santos (OAB/MS 13.600).",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -6346,7 +6454,8 @@
      "ajg": "Deferida no recurso (ID 366505084)",
      "descPrelim": "Intempestividade suscitada pela PFN (ID 383444608): agravo interposto no TJMS, tribunal incompetente"
     }
-   }
+   },
+   "observacao_triagem": "Agravo do Espólio de Américo Farias contra a decisão que indeferiu a suspensão da execução fiscal e rejeitou a nulidade do leilão do imóvel da matrícula 1.604 de Porto Murtinho, por falha na intimação da advogada por e-mail. O recurso foi interposto no TJMS, que declarou a incompetência e manteve a liminar de suspensão (ID 360631880, f. 200-203). Aqui, a gratuidade e o efeito suspensivo foram deferidos, com suspensão dos efeitos da alienação (ID 366505084, 17/04/2026). O arrematante Anderson Gonçalves Tonini (ID 374628644) e a PFN (ID 383444608) pedem o desprovimento; a PFN suscita intempestividade, porque o protocolo no tribunal incompetente não fixa a tempestividade."
   },
   {
    "sessao": "",
@@ -6363,9 +6472,10 @@
    "resultado": "Ato a proferir: julgamento do agravo de instrumento (voto), conferida antes a tempestividade [VALIDAR] ‖ Proposta pelos precedentes: Conferir antes a tempestividade (data de ciência indicada na própria petição) e a sentença nos embargos de terceiro (prejudicado). Conhecido: pelo precedente recente da Turma Regional em embargos de terceiro, mesmo plausível o direito, sem perigo de dano ou risco ao resultado útil não se concede a tutela → negar provimento, por monocrática (artigo 932 do CPC). [VALIDAR: Tempestividade; prova do uso do veículo no trabalho (perigo de dano)]",
    "modelo": "Origem: lote adp-ai · não pautado",
    "variacoes": [
-    "ORI"
+    "ORI",
+    "MEDIA"
    ],
-   "observacao": "Agravo de Adriana Aparecida Ribeiro contra a decisão ID 565140853 da 1ª Vara Federal de Campo Grande que, nos embargos de terceiro 5011112-24.2025.4.03.6000 opostos à CEF, indeferiu a tutela de urgência para retirar a restrição Renajud do veículo Fiat Uno Way, adquirido por permuta. A agravante sustenta a posse de boa-fé, a quitação do financiamento e o prejuízo ao uso do veículo no trabalho.",
+   "observacao": "Corrigido: o TRF3 não teve expediente em 20/04/2026 (Portaria CATRF3R 48/2025, artigo 2º), e 21/04 foi Tiradentes. Assim, o 15º dia útil foi 22/04/2026, data do protocolo: o agravo é tempestivo. A CEF diz na contraminuta que não se opõe à baixa da restrição (ID 374688895).",
    "peculiaridades": "Possível intempestividade pela data de ciência indicada na própria petição [VALIDAR]. Tutela recursal indeferida. Gratuidade deferida na origem.",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -6530,7 +6640,8 @@
      "urgData": "2026-04-30",
      "fundamento": "Paradigmas do gabinete: AI 5000710-96.2026.4.03.0001 (monocrática TRMS, 13/10/2026: embargos de terceiro; falta de perigo de dano; desprovido); AI 5028793-67.2022.4.03.0000 (monocrática TRMS, 22/07/2026: embargos de terceiro, sentença, prejudicado)"
     }
-   }
+   },
+   "observacao_triagem": "Agravo de Adriana Aparecida Ribeiro contra a decisão ID 565140853 da 1ª Vara Federal de Campo Grande que, nos embargos de terceiro 5011112-24.2025.4.03.6000 opostos à CEF, indeferiu a tutela de urgência para retirar a restrição Renajud do veículo Fiat Uno Way, adquirido por permuta. A agravante sustenta a posse de boa-fé, a quitação do financiamento e o prejuízo ao uso do veículo no trabalho."
   },
   {
    "sessao": "",
@@ -6548,9 +6659,11 @@
    "modelo": "Origem: lote adp-ai · não pautado",
    "variacoes": [
     "ORI",
-    "VAL"
+    "VAL",
+    "ALTA",
+    "CONF"
    ],
-   "observacao": "Agravo de José Cecílio da Silva Filho contra a decisão da 1ª Vara Federal de Três Lagoas (embargos de terceiro 0001025-42.2012.4.03.6003, ID 346701285 na origem) que, após a sentença de improcedência, deixou de apreciar o pedido de efeito suspensivo à apelação e de sustar a imissão de João Gonçalves da Silva na posse do imóvel da matrícula 9.737 (CRI de Três Lagoas), arrematado no cumprimento de sentença 0000062-78.2005.4.03.6003. O agravante diz ter comprado o imóvel de José Barbosa Romero antes da ação e residir nele com a família; o prazo de desocupação vencia em 02/12/2024.",
+   "observacao": "Conferido: certidão de 24/04/2026 (ID 368751629) registra a apelação 0001025-42.2012 já distribuída ao Gab. C da Turma Regional. Agravo prejudicado. Antes do PJe: conferir se a ApCiv 0001025-42.2012.4.03.6003 (Gab. C) já foi julgada.",
    "peculiaridades": "Agravo de 29/11/2024, decidido na 4ª Turma (Des. Fed. Marcelo Saraiva) em 29/11/2024 (ID 309343589: indeferiu a tutela por exigir dilação probatória e por caber ao Tribunal o pedido de efeito suspensivo) e redistribuído à TRgMS em 23/04/2026. Quase dois anos depois, a imissão provavelmente se consumou e a apelação pode já estar no Tribunal: risco de perda de objeto. Preparo: guia juntada (ID 309342447), sem comprovante de pagamento identificado [VALIDAR]. A contraminuta de João Gonçalves da Silva (ID 309392834) refere ação anulatória de arrematação (0000889-11.2013.4.03.6003) também julgada improcedente.",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -6742,7 +6855,8 @@
      "urgData": "2024-12-02",
      "fundamento": "Paradigmas do gabinete: AI 5028793-67.2022.4.03.0000 (monocrática TRMS, 22/07/2026: embargos de terceiro, prejudicado, sentença na origem); AI 5028378-79.2025.4.03.0000 (monocrática TRMS, 15/06/2026: arrematação e imissão na posse fora do conteúdo da decisão agravada, desprovido)"
     }
-   }
+   },
+   "observacao_triagem": "Agravo de José Cecílio da Silva Filho contra a decisão da 1ª Vara Federal de Três Lagoas (embargos de terceiro 0001025-42.2012.4.03.6003, ID 346701285 na origem) que, após a sentença de improcedência, deixou de apreciar o pedido de efeito suspensivo à apelação e de sustar a imissão de João Gonçalves da Silva na posse do imóvel da matrícula 9.737 (CRI de Três Lagoas), arrematado no cumprimento de sentença 0000062-78.2005.4.03.6003. O agravante diz ter comprado o imóvel de José Barbosa Romero antes da ação e residir nele com a família; o prazo de desocupação vencia em 02/12/2024."
   },
   {
    "sessao": "",
@@ -6760,9 +6874,10 @@
    "modelo": "Origem: lote adp-ai · não pautado",
    "variacoes": [
     "ORI",
-    "VAL"
+    "VAL",
+    "BAIXA"
    ],
-   "observacao": "Agravo da União, de 26/07/2023, contra a decisão que, em tutela cautelar antecedente proposta por Aline Valencio de Souza, deferiu liminar \"para determinar à ré que admita a autora nas próximas etapas do concurso em igualdade de condições com os demais candidatos\" (ID 293792483, origem). Discute-se erro na aplicação de cláusula do edital. Efeito suspensivo negado por falta de perigo concreto (ID 278145071, Des. Fed. André Nabarrete, 25/08/2023). Contraminuta da agravada (ID 279823496, 14/09/2023): interpretação do edital mais favorável ao candidato. Redistribuído à TRgMS em 10/04/2026.",
+   "observacao": "Nada nos autos sobre sentença na ação principal ou fim do concurso: consultar a origem.",
    "peculiaridades": "Agravo de 2023 sem julgamento: risco alto de perda de objeto (cautelar antecedente convertida em ação principal, sentença ou conclusão do concurso). Petição inicial do agravo ilegível na extração (texto codificado): razões, número da origem e concurso não identificados [VALIDAR].",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -6933,7 +7048,8 @@
      "urgData": "2023-08-25",
      "fundamento": "Paradigmas do gabinete: AI 5004449-56.2021.4.03.0000 (monocrática, 24/11/2022: cautelar antecedente substituída por sentença, prejudicado); ApCiv 0007380-56.2012.4.03.6104 (acórdão 3ª Turma, 15/09/2022: ação principal julgada, cautelar sem objeto); AI 5008746-33.2026.4.03.0000 (monocrática TRMS, 25/08/2026: sentença na origem, prejudicado o agravo e o agravo interno)"
     }
-   }
+   },
+   "observacao_triagem": "Agravo da União, de 26/07/2023, contra a decisão que, em tutela cautelar antecedente proposta por Aline Valencio de Souza, deferiu liminar \"para determinar à ré que admita a autora nas próximas etapas do concurso em igualdade de condições com os demais candidatos\" (ID 293792483, origem). Discute-se erro na aplicação de cláusula do edital. Efeito suspensivo negado por falta de perigo concreto (ID 278145071, Des. Fed. André Nabarrete, 25/08/2023). Contraminuta da agravada (ID 279823496, 14/09/2023): interpretação do edital mais favorável ao candidato. Redistribuído à TRgMS em 10/04/2026."
   },
   {
    "sessao": "",
@@ -6950,9 +7066,10 @@
    "resultado": "Ato a proferir: julgamento do agravo de instrumento da CEF (ID 350113594), com tutela recursal deferida pelo relator anterior para permitir o prosseguimento da execução extrajudicial (ID 350515200), e do agravo interno da mutuária (ID 353040703), impugnado pela CEF (ID 358076700); o feito esteve em pauta na turma de origem (intimações de 18/03/2026); na mesma ação de origem, a monocrática do gabinete no AI 5000146-20.2026.4.03.0001 (08/06/2026) registra indeferimento posterior da tutela, arrematação e imissão na posse na Justiça Estadual [VALIDAR] ‖ Proposta pelos precedentes: Prejuízo (artigo 932, III, do CPC), se confirmada na origem a decisão posterior e a arrematação, como nas monocráticas do gabinete na mesma ação (AI 5027893-79.2025.4.03.0000 e AI 5000146-20.2026.4.03.0001, 08/06/2026); senão, voto conjunto [VALIDAR: Decisão posterior na origem e arrematação (prejuízo); Comprovante das custas da CEF]",
    "modelo": "Origem: lote adp-ai · não pautado",
    "variacoes": [
-    "VAL"
+    "VAL",
+    "MEDIA"
    ],
-   "observacao": "Agravo da CEF contra a decisão que assegurou a Josiane Duarte Farias a posse provisória do imóvel com propriedade consolidada e levado a leilões em 07/10/2025 e 14/10/2025. O relator anterior deferiu a tutela recursal para a CEF prosseguir na execução extrajudicial (ID 350515200); a mutuária interpôs agravo interno (ID 353040703), impugnado pela CEF (ID 358076700). Na mesma ação de origem, o gabinete julgou prejudicado o AI 5027893-79.2025.4.03.0000 e não conheceu do AI 5000146-20.2026.4.03.0001, que registra indeferimento posterior da tutela, arrematação e imissão na posse.",
+   "observacao": "Esteve em pauta na 2ª Turma (03/2026) e foi redistribuído. Confirmar na origem a decisão posterior e a arrematação.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -7131,7 +7248,8 @@
      "urgSit": "Apreciada · deferida",
      "urgData": "2026-01-23"
     }
-   }
+   },
+   "observacao_triagem": "Agravo da CEF contra a decisão que assegurou a Josiane Duarte Farias a posse provisória do imóvel com propriedade consolidada e levado a leilões em 07/10/2025 e 14/10/2025. O relator anterior deferiu a tutela recursal para a CEF prosseguir na execução extrajudicial (ID 350515200); a mutuária interpôs agravo interno (ID 353040703), impugnado pela CEF (ID 358076700). Na mesma ação de origem, o gabinete julgou prejudicado o AI 5027893-79.2025.4.03.0000 e não conheceu do AI 5000146-20.2026.4.03.0001, que registra indeferimento posterior da tutela, arrematação e imissão na posse."
   },
   {
    "sessao": "",
@@ -7148,9 +7266,11 @@
    "resultado": "Ato a proferir: a decisão agravada suspendeu os atos de expropriação só até a audiência de conciliação na CERCON; o efeito suspensivo pedido pela CEF não foi apreciado; os mutuários contraminutaram (ID 342284473); redistribuído pelo despacho ID 361957879 ‖ Proposta pelos precedentes: Prejuízo (artigo 932, III, do CPC), se já realizada a audiência, na linha do AI 5027893-79.2025.4.03.0000 (Turma Regional, 08/06/2026), de mesma situação; senão, voto [VALIDAR: Realização da audiência de conciliação; Comprovante das custas da CEF]",
    "modelo": "Origem: lote adp-ai · não pautado",
    "variacoes": [
-    "VAL"
+    "VAL",
+    "ALTA",
+    "CONF"
    ],
-   "observacao": "Agravo da CEF contra a decisão que suspendeu os atos de expropriação do imóvel de Joelson de Jesus Canos Silva e Joelene de Carvalho Santana até a audiência de conciliação na CERCON, para resguardar o direito de preferência. A CEF sustenta a regularidade da consolidação, com intimação editalícia para purgar a mora. Os mutuários contraminutaram (ID 342284473). O efeito suspensivo não foi apreciado.",
+   "observacao": "Conferido: a contraminuta (ID 342284473) informa que a audiência de conciliação, termo final da suspensão, já ocorreu. Agravo prejudicado. Antes do PJe: confirmar no 1º grau (5008245-58.2025.4.03.6000) a audiência na CERCON e que não houve nova suspensão.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -7310,7 +7430,8 @@
      "urgTipo": "Efeito suspensivo",
      "urgSit": "Pendente · não apreciada"
     }
-   }
+   },
+   "observacao_triagem": "Agravo da CEF contra a decisão que suspendeu os atos de expropriação do imóvel de Joelson de Jesus Canos Silva e Joelene de Carvalho Santana até a audiência de conciliação na CERCON, para resguardar o direito de preferência. A CEF sustenta a regularidade da consolidação, com intimação editalícia para purgar a mora. Os mutuários contraminutaram (ID 342284473). O efeito suspensivo não foi apreciado."
   },
   {
    "sessao": "",
@@ -7328,9 +7449,10 @@
    "modelo": "Origem: lote adp-ai · não pautado",
    "variacoes": [
     "ORI",
-    "VAL"
+    "VAL",
+    "MEDIA"
    ],
-   "observacao": "Agravo da União contra a decisão do plantão judicial (processo 5013765-96.2025.4.03.6000) que mandou a KZT Serviços Médicos de Atenção Domiciliar manter o home care da autora, menor dependente de ventilação mecânica, e a Postal Saúde retomar o custeio, com multa diária de R$ 1.000,00; em caso de descumprimento, previu medidas contra a União e o Estado de Mato Grosso do Sul (bloqueio, depósito ou sequestro).",
+   "observacao": "O MPF opina pelo não conhecimento, por falta de interesse recursal da União (ID 376958679). Conferir se a decisão agravada é a sentença conjunta.",
    "peculiaridades": "Autora menor (L. M. P. M.). Trâmite: decisão ID 350603286 (20/01/2026) declinou da competência para a 1ª Seção; decisão ID 350760549 (21/01/2026, Des. Fed. Herbert de Bruyn) negou o efeito suspensivo por não haver obrigação imediata à União; redistribuição à TRgMS em 10/04/2026. O Estado de MS nada opôs (ID 354566354). O MPF (ID 376958679) opina pelo não conhecimento por falta de interesse recursal [VALIDAR fundamento]. Não consta contraminuta da agravada.",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -7535,7 +7657,8 @@
      "urgData": "2026-01-21",
      "fundamento": "Paradigmas do gabinete: AI 5022203-45.2020.4.03.0000 (acórdão 3ª Turma, 23/04/2021: home care com ventilação mecânica; legitimidade dos entes; desprovido); ApCiv 0003722-19.2015.4.03.6104 (acórdão 1ª Turma, 06/07/2023: plano de autogestão, home care, limitação ilegal)"
     }
-   }
+   },
+   "observacao_triagem": "Agravo da União contra a decisão do plantão judicial (processo 5013765-96.2025.4.03.6000) que mandou a KZT Serviços Médicos de Atenção Domiciliar manter o home care da autora, menor dependente de ventilação mecânica, e a Postal Saúde retomar o custeio, com multa diária de R$ 1.000,00; em caso de descumprimento, previu medidas contra a União e o Estado de Mato Grosso do Sul (bloqueio, depósito ou sequestro)."
   },
   {
    "sessao": "",
@@ -7547,14 +7670,14 @@
    "executado": "",
    "assunto": "Redução de Alíquota IR/CSLL - Serviços Hospitalares",
    "assunto_detalhado": "",
-   "grupo": "t08",
+   "grupo": "t13",
    "tipo_caso": "Pedido de efeito suspensivo/tutela à apelação (artigo 1.012, § 3º, do CPC) em mandado de segurança · IRPJ e CSLL com bases reduzidas de serviços hospitalares (sentença de improcedência) · tutela indeferida pela relatora anterior · embargos de declaração pendentes · apelação 5000384-15.2025.4.03.6002 no acervo do gabinete",
    "resultado": "Ato a proferir: a relatora anterior indeferiu a tutela (ID 345468992), porque a atividade principal da requerente é \"atividade médica ambulatorial restrita a consultas\"; a requerente opôs embargos de declaração (ID 346984730), respondidos pela PFN (ID 347783556), que também contraminutou o pedido (ID 347783551); o MPF declarou falta de interesse (ID 349301795); redistribuído por prevenção em 22/04/2026 ‖ Proposta pelos precedentes: Julgar a apelação 5000384-15.2025.4.03.6002 e declarar prejudicados o pedido e os embargos; no mérito, linha do gabinete no Tema 217/STJ (ApCiv 5028815-95.2021.4.03.6100, 3ª Turma, 20/03/2023) [VALIDAR: Preparo; Situação da apelação 5000384-15.2025.4.03.6002]",
    "modelo": "Origem: lote adp-ai · não pautado",
    "variacoes": [
     "VAL"
    ],
-   "observacao": "Pedido da CSI Serviços Médicos Ltda. de tutela recursal à apelação contra a sentença que negou, em mandado de segurança, o recolhimento do IRPJ e da CSLL pelas bases reduzidas de serviços hospitalares. A relatora anterior indeferiu a tutela (Tema 217/STJ; atividade restrita a consultas) (ID 345468992). Pendem embargos de declaração da requerente (ID 346984730). A apelação está no acervo do gabinete.",
+   "observacao": "Tutela cautelar antecedente: julgar junto com a apelação 5000384-15.2025, em acórdão.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -7740,7 +7863,8 @@
      "idParecer": "349301795",
      "parecerSentido": "Ausência de interesse que justifique a intervenção"
     }
-   }
+   },
+   "observacao_triagem": "Pedido da CSI Serviços Médicos Ltda. de tutela recursal à apelação contra a sentença que negou, em mandado de segurança, o recolhimento do IRPJ e da CSLL pelas bases reduzidas de serviços hospitalares. A relatora anterior indeferiu a tutela (Tema 217/STJ; atividade restrita a consultas) (ID 345468992). Pendem embargos de declaração da requerente (ID 346984730). A apelação está no acervo do gabinete."
   },
   {
    "sessao": "",
@@ -7758,9 +7882,10 @@
    "modelo": "Origem: lote adp-ai · não pautado",
    "variacoes": [
     "MONO",
-    "VAL"
+    "VAL",
+    "MEDIA"
    ],
-   "observacao": "Agravo de Andréa Sallum Congro, em causa própria, contra a decisão ID 365022389 que, nos embargos à execução 5000055-97.2025.4.03.6003 (1ª Vara Federal de Três Lagoas), deu seguimento à execução de título extrajudicial 5000873-54.2022.4.03.6003 movida pela OAB/MS. Tese: o valor executado (R$ 2.853,62) é inferior ao mínimo do artigo 8º da Lei 12.514/2011, na redação da Lei 14.195/2021.",
+   "observacao": "Não há certidão do prazo da contraminuta, mas ela não é necessária para negar provimento. Confirmar a linha sobre o artigo 8º da Lei 12.514/2011.",
    "peculiaridades": "Sem preparo: o despacho ID 342572883 (18/11/2025) mandou recolher em dobro; a agravante pediu gratuidade (ID 344493533), deferida pelo despacho ID 344716055 (04/12/2025), que também mandou intimar a OAB para contraminuta. Não há contraminuta nos autos. Grupo: execuções da OAB.",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -7916,7 +8041,8 @@
      "mpf": "Sem hipótese",
      "fundamento": "Paradigmas do gabinete: ApCiv 5005625-49.2020.4.03.6000 (acórdão TRMS, 30/09/2026: artigo 8º da Lei 12.514/2011 inaplicável à OAB, Tema 1.180/STF); em contraste, para conselhos profissionais: AI 5009276-37.2026.4.03.0000 (monocrática TRMS, 21/10/2026: piso do artigo 8º aplicado)"
     }
-   }
+   },
+   "observacao_triagem": "Agravo de Andréa Sallum Congro, em causa própria, contra a decisão ID 365022389 que, nos embargos à execução 5000055-97.2025.4.03.6003 (1ª Vara Federal de Três Lagoas), deu seguimento à execução de título extrajudicial 5000873-54.2022.4.03.6003 movida pela OAB/MS. Tese: o valor executado (R$ 2.853,62) é inferior ao mínimo do artigo 8º da Lei 12.514/2011, na redação da Lei 14.195/2021."
   },
   {
    "sessao": "",
@@ -7935,9 +8061,10 @@
    "variacoes": [
     "ADM",
     "MONO",
-    "VAL"
+    "VAL",
+    "BAIXA"
    ],
-   "observacao": "Agravo da OAB/MS contra decisão que suspendeu a execução de título extrajudicial 5003973-21.2025.4.03.6000, contra a advogada Polyana Abdalla Tavares. Teses: a OAB é entidade singular, depende das contribuições para custear suas funções e não pode ter as execuções sobrestadas. Pede a anulação da decisão e o prosseguimento da execução.",
+   "observacao": "Regularizar o preparo (intimação para recolher em dobro) e identificar o fundamento da suspensão antes de decidir.",
    "peculiaridades": "Sem comprovante de preparo: certidão ID 340110104 (20/10/2025) e documento de custas sem conteúdo (ID 340124368); a petição diz que a guia seria juntada após a distribuição. Intimação da decisão agravada em 14/10/2025, segundo a agravante. Agravada sem advogado constituído nos autos do agravo.",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -8100,7 +8227,8 @@
      "mpf": "Sem hipótese",
      "fundamento": "Paradigmas do gabinete: AI 5011858-10.2026.4.03.0000 (monocrática TRMS, 19/06/2026: Conselho Regional de Administração, não conhecido por deserção após intimação); AI 5000301-23.2026.4.03.0001 (monocrática TRMS, 05/08/2026: dobro não atendido); ApCiv 5005625-49.2020.4.03.6000 (acórdão TRMS, 30/09/2026: natureza singular da OAB; anuidades)"
     }
-   }
+   },
+   "observacao_triagem": "Agravo da OAB/MS contra decisão que suspendeu a execução de título extrajudicial 5003973-21.2025.4.03.6000, contra a advogada Polyana Abdalla Tavares. Teses: a OAB é entidade singular, depende das contribuições para custear suas funções e não pode ter as execuções sobrestadas. Pede a anulação da decisão e o prosseguimento da execução."
   },
   {
    "sessao": "",
@@ -8118,9 +8246,11 @@
    "modelo": "Origem: lote adp-ai · não pautado",
    "variacoes": [
     "ADM",
-    "MONO"
+    "MONO",
+    "ALTA",
+    "PJE"
    ],
-   "observacao": "Agravo do Banco do Brasil S.A. contra a decisão ID 505233097 da 2ª Vara Federal de Campo Grande/MS (ação indenizatória 5005063-98.2024.4.03.6000, de Veraniz Carlos Lovizon) que reconheceu a ilegitimidade passiva da União, extinguiu o processo em relação a ela, reconheceu a legitimidade do Banco do Brasil e declinou da competência para a Justiça Estadual. O agravante sustenta que a ação discute índices de correção do PASEP, de responsabilidade da União, e que é mero depositário, com competência da Justiça Federal.",
+   "observacao": "Promovido a Alta em 21/11: Tema 1.150/STJ (repetitivo); preparo conferido (GRU paga pelo internet banking da CAIXA). Minuta v1.",
    "peculiaridades": "Processo redistribuído pela criação da Turma Regional. Preparo pago no Banco do Brasil e, depois da intimação, comprovado só por guia e comprovante bancário da Caixa. Matéria do Tema 1.150/STJ [VALIDAR aplicação].",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -8334,7 +8464,8 @@
      "urgData": "2026-01-23",
      "fundamento": "Paradigmas do gabinete: AI 5008045-72.2026.4.03.0000 (monocrática TRMS, 06/05/2026: desprovido; acórdão de 15/09/2026: agravo interno desprovido, com multa); AI 5007705-31.2026.4.03.0000 (monocrática TRMS, 30/06/2026; agravo interno desprovido com multa em 15/09/2026); AI 5000131-51.2026.4.03.0001 (monocrática TRMS, 26/06/2026; agravo interno desprovido em 15/09/2026); AI 5000239-80.2026.4.03.0001 (monocrática TRMS, 06/08/2026: sem comprovante STN, não conhecido)"
     }
-   }
+   },
+   "observacao_triagem": "Agravo do Banco do Brasil S.A. contra a decisão ID 505233097 da 2ª Vara Federal de Campo Grande/MS (ação indenizatória 5005063-98.2024.4.03.6000, de Veraniz Carlos Lovizon) que reconheceu a ilegitimidade passiva da União, extinguiu o processo em relação a ela, reconheceu a legitimidade do Banco do Brasil e declinou da competência para a Justiça Estadual. O agravante sustenta que a ação discute índices de correção do PASEP, de responsabilidade da União, e que é mero depositário, com competência da Justiça Federal."
   },
   {
    "sessao": "",
@@ -8354,9 +8485,10 @@
     "MONO",
     "ORI",
     "PRI",
-    "VAL"
+    "VAL",
+    "BAIXA"
    ],
-   "observacao": "Agravo do INSS contra a decisão que, no processo 5000031-48.2026.8.12.0022 (justiça estadual, competência delegada), determinou a implantação de benefício por incapacidade a João Batista Balbino antes da perícia judicial. Teses do INSS: falta de perícia prévia e perda da qualidade de segurado; pede a revogação da tutela e a devolução dos valores recebidos. O agravado, nas contrarrazões (ID 376460044), pede o desprovimento e honorários recursais.",
+   "observacao": "Nada nos autos sobre a perícia; o MPF não interveio. A perícia já foi feita na origem? Qual a linha do gabinete?",
    "peculiaridades": "Decisão ID 366561345 (29/04/2026): indeferiu a tutela recursal (quadro de AVC respaldado por laudos; revisão da tutela pode ser pedida na origem) e mandou ouvir o MPF por envolver idoso. Parecer do MPF (ID 378287673, 03/06/2026): ausência de interesse. Agravante isento de preparo (autarquia).",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -8539,7 +8671,8 @@
      "urgData": "2026-04-29",
      "fundamento": "Paradigmas do gabinete: AI 5007267-05.2026.4.03.0000 (monocrática TRMS, 21/10/2026: desprovido; perícia judicial superveniente confirmou a incapacidade); AI 5032444-05.2025.4.03.0000 (acórdão TRMS, 09/06/2026: prejudicado por retratação); AI 5031085-20.2025.4.03.0000 (monocrática TRMS, 06/08/2026: prejudicado por acordo)"
     }
-   }
+   },
+   "observacao_triagem": "Agravo do INSS contra a decisão que, no processo 5000031-48.2026.8.12.0022 (justiça estadual, competência delegada), determinou a implantação de benefício por incapacidade a João Batista Balbino antes da perícia judicial. Teses do INSS: falta de perícia prévia e perda da qualidade de segurado; pede a revogação da tutela e a devolução dos valores recebidos. O agravado, nas contrarrazões (ID 376460044), pede o desprovimento e honorários recursais."
   },
   {
    "sessao": "",
@@ -8557,9 +8690,10 @@
    "modelo": "Origem: lote adp-ai · não pautado",
    "variacoes": [
     "MONO",
-    "VAL"
+    "VAL",
+    "BAIXA"
    ],
-   "observacao": "Agravo da Massa Falida de REPRAM – Reciclagem e Preservação Ambiental, representada pela administradora judicial Cury Administradora Judicial, contra a decisão da 6ª Vara Federal de Campo Grande que, na execução fiscal 5007899-20.2019.4.03.6000 movida pelo IBAMA, indeferiu a gratuidade e rejeitou a exceção de pré-executividade. O recurso pede só a gratuidade; junta extrato bancário (R$ 8.571,26) e quadro geral de credores. O IBAMA pede o não conhecimento ou o desprovimento (ID 375249489).",
+   "observacao": "Sem precedente do gabinete sobre gratuidade de massa falida: monocrática ou voto?",
    "peculiaridades": "Ausência de preparo certificada; o recurso versa sobre a própria gratuidade (despacho ID 366759545, 29/04/2026, que mandou intimar a agravada). Etiqueta: LOTE MULTA - AI.",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -8712,7 +8846,8 @@
      "mpf": "Sem hipótese",
      "fundamento": "Paradigmas do gabinete: ApCiv 0000014-62.2020.4.03.6143 (acórdão 1ª Turma, 14/11/2023: massa falida sem prova, gratuidade negada; falência não presume hipossuficiência); AI 5027731-89.2022.4.03.0000 (monocrática, 06/03/2023: pessoa jurídica sem prova, desprovido); AI 5000189-54.2026.4.03.0001 (monocrática TRMS, 25/06/2026: desprovido)"
     }
-   }
+   },
+   "observacao_triagem": "Agravo da Massa Falida de REPRAM – Reciclagem e Preservação Ambiental, representada pela administradora judicial Cury Administradora Judicial, contra a decisão da 6ª Vara Federal de Campo Grande que, na execução fiscal 5007899-20.2019.4.03.6000 movida pelo IBAMA, indeferiu a gratuidade e rejeitou a exceção de pré-executividade. O recurso pede só a gratuidade; junta extrato bancário (R$ 8.571,26) e quadro geral de credores. O IBAMA pede o não conhecimento ou o desprovimento (ID 375249489)."
   },
   {
    "sessao": "",
@@ -8729,9 +8864,10 @@
    "resultado": "Ato a proferir: julgamento do agravo de instrumento (monocrática provável) [VALIDAR] ‖ Proposta pelos precedentes: Negar provimento ao agravo. (1) A execução ajuizada contra pessoa jurídica já baixada não é nula quando se destina a apurar a irregularidade da dissolução e a responsabilidade dos sócios; o redirecionamento por dissolução irregular cabe também na dívida não tributária (Tema 630/STJ, REsp 1.371.128) e não equivale à troca do sujeito passivo vedada pela Súmula 392/STJ (ApCiv 0045555-79.2012.4.03.6182, 3ª Turma, 07/02/2022, multa administrativa; ApCiv 0058351-49.2005.4.03.6182, 3ª Turma, 08/12/2020). (2) Prescrição para o redirecionamento pelo Tema 444/STJ: com a dissolução anterior à citação da pessoa jurídica, o quinquênio corre dessa citação e exige inércia da exequente (ApCiv 5000392-95.2017.4.03.6123, 3ª Turma, 10/08/2020; AI 0027134-55.2015.4.03.0000, 3ª Turma, 18/02/2022). Pedido de redirecionamento em 2019 (20/02/2019, segundo a ANS; 21/09/2019, segundo o agravante), deferido em 24/03/2021. [VALIDAR: data da citação por edital da pessoa jurídica; se o agravante era administrador (diretor) da cooperativa, e não só cooperado; decisão agravada e tempestividade (a decisão não consta dos autos extraídos); procuração]",
    "modelo": "Origem: lote adp-ai · não pautado",
    "variacoes": [
-    "MONO"
+    "MONO",
+    "MEDIA"
    ],
-   "observacao": "Agravo do sócio Felipe Laburu contra a rejeição da exceção de pré-executividade na execução fiscal da ANS, redirecionada a ele após a citação por edital da pessoa jurídica, baixada desde 2008. Alega nulidade da execução e prescrição para o redirecionamento. A ANS respondeu.",
+   "observacao": "Conferir o paradigma.",
    "peculiaridades": "Tutela recursal não concedida in limine (ID 385299155). Procuração não localizada nos autos do agravo [VALIDAR]. Tempestividade a conferir: decisão agravada não consta dos autos extraídos.",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -8930,7 +9066,8 @@
      "urgSit": "Apreciada · indeferida",
      "fundamento": "Paradigmas do gabinete: ApCiv 0045555-79.2012.4.03.6182 (3ª Turma, 07/02/2022); ApCiv 0058351-49.2005.4.03.6182 (3ª Turma, 08/12/2020); ApCiv 5000392-95.2017.4.03.6123 (3ª Turma, 10/08/2020); AI 0027134-55.2015.4.03.0000 (3ª Turma, 18/02/2022); Temas 444 e 630/STJ"
     }
-   }
+   },
+   "observacao_triagem": "Agravo do sócio Felipe Laburu contra a rejeição da exceção de pré-executividade na execução fiscal da ANS, redirecionada a ele após a citação por edital da pessoa jurídica, baixada desde 2008. Alega nulidade da execução e prescrição para o redirecionamento. A ANS respondeu."
   },
   {
    "sessao": "",
@@ -8948,9 +9085,11 @@
    "modelo": "Origem: lote adp-ai · não pautado",
    "variacoes": [
     "MONO",
-    "VAL"
+    "VAL",
+    "ALTA",
+    "CONF"
    ],
-   "observacao": "Agravo da ANP contra o capítulo da decisão que, ao acolher a exceção de pré-executividade de José Nilson de Queiroz e excluí-lo do polo passivo da EF 0800901-17.2013.8.12.0018, condenou a exequente em honorários (fls. 470/472 e 503/504 da origem). Invoca o artigo 1º-D da Lei 9.494/1997. O agravado (ID 306958458) sustenta a aplicação do Tema 961/STJ (REsp 1.358.837/SP) e pede o desprovimento monocrático.",
+   "observacao": "Promovido a Alta em 21/11: Tema 961/STJ (repetitivo). Falta só conferir o valor e a base dos honorários fixados na origem. Minuta v1. Antes do PJe: conferir o valor e a base dos honorários fixados na origem.",
    "peculiaridades": "A exclusão do sócio decorreu de acórdão que reconheceu sua retirada do quadro societário com efeitos desde 09/02/2012 (processo 0800128-35.2014.8.12.0018), segundo o agravo. Não houve pedido de tutela recursal (ID 304664764). Redistribuído à Turma Regional por sorteio em 20/03/2026. Etiqueta \"LOTE MULTA - AI\".",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -9102,7 +9241,8 @@
      "fundamento": "Paradigmas do gabinete: AI 5029415-20.2020.4.03.0000 (acórdão 3ª Turma, 17/12/2021: desprovido; honorários na exclusão de sócio, Tema 961/STJ e artigo 1º-D da Lei 9.494/1997); AI 5004983-68.2019.4.03.0000 (acórdão 3ª Turma, 04/06/2020: honorários na exceção que exclui sócio sem extinguir a execução, Tema 961/STJ)",
      "obsRepres": "Dispensada a procuração: representação por procurador público."
     }
-   }
+   },
+   "observacao_triagem": "Agravo da ANP contra o capítulo da decisão que, ao acolher a exceção de pré-executividade de José Nilson de Queiroz e excluí-lo do polo passivo da EF 0800901-17.2013.8.12.0018, condenou a exequente em honorários (fls. 470/472 e 503/504 da origem). Invoca o artigo 1º-D da Lei 9.494/1997. O agravado (ID 306958458) sustenta a aplicação do Tema 961/STJ (REsp 1.358.837/SP) e pede o desprovimento monocrático."
   },
   {
    "sessao": "",
@@ -9119,9 +9259,10 @@
    "resultado": "Ato a proferir: julgamento do agravo de instrumento (ID 376757486), sem tutela recursal antes do contraditório (ID 377028468) e com contraminuta da PFN (ID 382104697), que admite, subsidiariamente, o benefício a partir do alvará sanitário, excluídas as consultas simples ‖ Proposta pelos precedentes: Conferir a sentença na origem; sem ela, examinar a prova da sociedade empresária e da regularidade sanitária: linha do gabinete no Tema 217/STJ com os requisitos da Lei 11.727/2008 (ApCiv 5028815-95.2021.4.03.6100, 3ª Turma, 20/03/2023) e monocrática que deu provimento a agravo em tutela (AI 5025923-49.2022.4.03.0000, 07/03/2023)",
    "modelo": "Origem: lote adp-ai · não pautado",
    "variacoes": [
-    "VAL"
+    "VAL",
+    "BAIXA"
    ],
-   "observacao": "Agravo da Espaço Integrar Ltda., clínica de fonoaudiologia e reabilitação em Dourados, contra a negativa de tutela para recolher o IRPJ e a CSLL pelas bases presumidas reduzidas de serviços hospitalares (8% e 12%) e suspender a cobrança de débitos de 2024 inscritos em dívida ativa. O juízo entendeu necessária a dilação probatória e ausente o perigo de dano. A PFN contraminutou (ID 382104697).",
+   "observacao": "Há sentença na origem? Sem ela, a prova dos requisitos do Tema 217/STJ basta?",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -9270,7 +9411,8 @@
      "urgSit": "Apreciada · indeferida",
      "urgData": "2026-06-08"
     }
-   }
+   },
+   "observacao_triagem": "Agravo da Espaço Integrar Ltda., clínica de fonoaudiologia e reabilitação em Dourados, contra a negativa de tutela para recolher o IRPJ e a CSLL pelas bases presumidas reduzidas de serviços hospitalares (8% e 12%) e suspender a cobrança de débitos de 2024 inscritos em dívida ativa. O juízo entendeu necessária a dilação probatória e ausente o perigo de dano. A PFN contraminutou (ID 382104697)."
   },
   {
    "sessao": "",
@@ -9287,9 +9429,10 @@
    "resultado": "Ato a proferir: julgamento do agravo de instrumento (ID 385990560), sem decisão sobre tutela, com preparo comprovado pelo Portal PagTesouro (ID 387721205) após o despacho ID 386660357 e contraminuta da PFN (ID 390594418); etiqueta \"Pedido de Despacho\" ‖ Proposta pelos precedentes: Monocrática ou voto: linha do gabinete sobre exceção de pré-executividade e Súmula 393/STJ (AI 5021780-22.2019.4.03.0000, 3ª Turma, 24/07/2020) e monocrática da Turma Regional (AI 5023103-18.2026.4.03.0000, 28/09/2026) [VALIDAR prescrição pelas datas de constituição e de ajuizamento] [VALIDAR: Número e vara da execução fiscal]",
    "modelo": "Origem: lote adp-ai · não pautado",
    "variacoes": [
-    "VAL"
+    "VAL",
+    "BAIXA"
    ],
-   "observacao": "Agravo de Gabriel Rodrigues Monteiro, apontado como corresponsável na CDA, contra a decisão que não conheceu da exceção de pré-executividade quanto à ilegitimidade (artigo 135 do CTN) e a rejeitou quanto à prescrição, na execução de débitos do Simples Nacional de 2013 e 2014. O preparo foi comprovado após intimação (ID 387721205). A PFN contraminutou (ID 390594418).",
+   "observacao": "Exceção de pré-executividade e Súmula 393/STJ: monocrática ou voto?",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -9454,7 +9597,8 @@
      "midias": "Não se aplica",
      "mpf": "Sem hipótese"
     }
-   }
+   },
+   "observacao_triagem": "Agravo de Gabriel Rodrigues Monteiro, apontado como corresponsável na CDA, contra a decisão que não conheceu da exceção de pré-executividade quanto à ilegitimidade (artigo 135 do CTN) e a rejeitou quanto à prescrição, na execução de débitos do Simples Nacional de 2013 e 2014. O preparo foi comprovado após intimação (ID 387721205). A PFN contraminutou (ID 390594418)."
   },
   {
    "sessao": "",
@@ -9466,14 +9610,14 @@
    "executado": "",
    "assunto": "Salário-Maternidade (Art. 71/73)",
    "assunto_detalhado": "",
-   "grupo": "t09",
+   "grupo": "t13",
    "tipo_caso": "Previdenciário · salário-maternidade (nascimento em 15/04/2025) · tutela de implantação deferida na origem (competência delegada) · agravo do INSS: segurada empregada com vínculo ativo, indenizada na Justiça do Trabalho pelo período de estabilidade · efeito suspensivo pendente",
    "resultado": "Ato a proferir: o pedido de efeito suspensivo do INSS (ID 371522775) não foi apreciado; o relator abriu vista ao MPF (ID 373677827), que declarou falta de interesse (ID 381481398), e mandou intimar a agravada para contraminuta (ID 374592522, 19/05/2026); a lista extraída não traz contraminuta [VALIDAR prazo] ‖ Proposta pelos precedentes: Apreciar o efeito suspensivo ou julgar logo o agravo, se decorrido o prazo da contraminuta; sem paradigma do gabinete no banco sobre salário-maternidade de empregada indenizada na Justiça do Trabalho [VALIDAR: Contraminuta ou decurso do prazo; Comarca de origem; Prova da indenização trabalhista do período de estabilidade]",
    "modelo": "Origem: lote adp-ai · não pautado",
    "variacoes": [
     "VAL"
    ],
-   "observacao": "Agravo do INSS contra a tutela que determinou a implantação do salário-maternidade a Julianne de Morais Lima, pelo nascimento em 15/04/2025. O INSS sustenta que a autora era empregada com vínculo ativo e recebeu na Justiça do Trabalho as verbas do período de estabilidade da gestante. O efeito suspensivo não foi apreciado; o MPF declarou falta de interesse (ID 381481398).",
+   "observacao": "Efeito suspensivo pendente e sem paradigma: voto.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -9624,7 +9768,8 @@
      "idParecer": "381481398",
      "parecerSentido": "Ausência de interesse que justifique a intervenção"
     }
-   }
+   },
+   "observacao_triagem": "Agravo do INSS contra a tutela que determinou a implantação do salário-maternidade a Julianne de Morais Lima, pelo nascimento em 15/04/2025. O INSS sustenta que a autora era empregada com vínculo ativo e recebeu na Justiça do Trabalho as verbas do período de estabilidade da gestante. O efeito suspensivo não foi apreciado; o MPF declarou falta de interesse (ID 381481398)."
   },
   {
    "sessao": "",
@@ -9641,9 +9786,11 @@
    "resultado": "Ato a proferir: apelação da União (ID 308999400) e remessa necessária da sentença ID 308999397, integrada pela ID 308999407; contrarrazões (ID 308999414); MPF sem intervenção (ID 309276135) ‖ Proposta pelos precedentes: Provimento da apelação e da remessa para denegar a segurança, na linha da ApelRemNec 5005209-08.2025.4.03.6000 [VALIDAR via: monocrática ou voto] [VALIDAR: Ratificação da apelação após os embargos (artigo 1.024, § 5º, do CPC)]",
    "modelo": "Origem: lote adp-remessas · não pautado",
    "variacoes": [
-    "VAL"
+    "VAL",
+    "ALTA",
+    "PJE"
    ],
-   "observacao": "Apelação da União e remessa necessária da sentença que reconheceu a revendedor de combustíveis crédito de PIS e COFINS sobre o diesel no período da LC 192/2022. A Turma Regional nega o crédito em operações monofásicas e com alíquota zero.",
+   "observacao": "Promovido a Alta em 21/11: provimento pelo Tema 1.093/STJ (repetitivo, artigo 932, V, b) e pela linha da Turma Regional (ApelRemNec 5005209-08.2025; ED rejeitados). Minuta v1.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -9831,7 +9978,8 @@
      "idParecer": "309276135",
      "parecerSentido": "Ausência de interesse que justifique intervenção"
     }
-   }
+   },
+   "observacao_triagem": "Apelação da União e remessa necessária da sentença que reconheceu a revendedor de combustíveis crédito de PIS e COFINS sobre o diesel no período da LC 192/2022. A Turma Regional nega o crédito em operações monofásicas e com alíquota zero."
   },
   {
    "sessao": "",
@@ -9848,9 +9996,11 @@
    "resultado": "Ato a proferir: apelação da União (ID 291849330) e remessa necessária da sentença ID 291849323; contrarrazões (ID 291849434); MPF sem intervenção (ID 292233698) ‖ Proposta pelos precedentes: Provimento da apelação e da remessa para denegar a segurança, na linha da ApelRemNec 5005209-08.2025.4.03.6000 [VALIDAR via: monocrática ou voto] [VALIDAR: Termo inicial do crédito na sentença]",
    "modelo": "Origem: lote adp-remessas · não pautado",
    "variacoes": [
-    "VAL"
+    "VAL",
+    "ALTA",
+    "PJE"
    ],
-   "observacao": "Apelação da União e remessa necessária da sentença que reconheceu a Posto Pena Branca Ltda. crédito de PIS e COFINS sobre o diesel no período da LC 192/2022. A Turma Regional nega o crédito em operações monofásicas e com alíquota zero.",
+   "observacao": "Promovido a Alta em 21/11: provimento pelo Tema 1.093/STJ (repetitivo, artigo 932, V, b) e pela linha da Turma Regional (ApelRemNec 5005209-08.2025; ED rejeitados). Minuta v1.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -10027,7 +10177,8 @@
      "idParecer": "292233698",
      "parecerSentido": "Ausência de interesse que justifique intervenção"
     }
-   }
+   },
+   "observacao_triagem": "Apelação da União e remessa necessária da sentença que reconheceu a Posto Pena Branca Ltda. crédito de PIS e COFINS sobre o diesel no período da LC 192/2022. A Turma Regional nega o crédito em operações monofásicas e com alíquota zero."
   },
   {
    "sessao": "",
@@ -10044,9 +10195,11 @@
    "resultado": "Ato a proferir: apelação da União (ID 293963589) e remessa necessária da sentença ID 293963583; contrarrazões (ID 293963593); MPF sem intervenção (ID 294104134) ‖ Proposta pelos precedentes: Provimento da apelação e da remessa para denegar a segurança, na linha da ApelRemNec 5005209-08.2025.4.03.6000 [VALIDAR via: monocrática ou voto] [VALIDAR: Termo inicial do crédito na sentença]",
    "modelo": "Origem: lote adp-remessas · não pautado",
    "variacoes": [
-    "VAL"
+    "VAL",
+    "ALTA",
+    "PJE"
    ],
-   "observacao": "Apelação da União e remessa necessária da sentença que reconheceu a Pororoca Auto Posto IV Ltda. crédito de PIS e COFINS sobre o diesel no período da LC 192/2022. A Turma Regional nega o crédito em operações monofásicas e com alíquota zero.",
+   "observacao": "Promovido a Alta em 21/11: provimento pelo Tema 1.093/STJ (repetitivo, artigo 932, V, b) e pela linha da Turma Regional (ApelRemNec 5005209-08.2025; ED rejeitados). Minuta v1.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -10222,7 +10375,8 @@
      "idParecer": "294104134",
      "parecerSentido": "Ausência de interesse que justifique intervenção"
     }
-   }
+   },
+   "observacao_triagem": "Apelação da União e remessa necessária da sentença que reconheceu a Pororoca Auto Posto IV Ltda. crédito de PIS e COFINS sobre o diesel no período da LC 192/2022. A Turma Regional nega o crédito em operações monofásicas e com alíquota zero."
   },
   {
    "sessao": "",
@@ -10239,9 +10393,11 @@
    "resultado": "Ato a proferir: apelação da União (ID 329303689) e remessa necessária da sentença ID 329303682; contrarrazões (ID 329303696) ‖ Proposta pelos precedentes: Desprovimento da apelação e da remessa, por decisão monocrática, se confirmada a linha [VALIDAR] [VALIDAR: Paradigma do STJ sobre salário-educação de pessoa física]",
    "modelo": "Origem: lote adp-remessas · não pautado",
    "variacoes": [
-    "VAL"
+    "VAL",
+    "ALTA",
+    "PJE"
    ],
-   "observacao": "Apelação da União e remessa necessária da sentença que afastou o salário-educação de André Rodrigo Gimenez Cabrera, titular de cartório, pessoa física.",
+   "observacao": "Promovido a Alta em 21/11: salário-educação de titular de cartório, pela tese repetitiva citada na minuta (artigo 932, IV, b). Minuta v1.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -10385,7 +10541,8 @@
      "mpf": "Mandado de segurança",
      "parecer": "Não verificado"
     }
-   }
+   },
+   "observacao_triagem": "Apelação da União e remessa necessária da sentença que afastou o salário-educação de André Rodrigo Gimenez Cabrera, titular de cartório, pessoa física."
   },
   {
    "sessao": "",
@@ -10402,9 +10559,11 @@
    "resultado": "Ato a proferir: apelação da União (ID 317462687) e remessa necessária da sentença ID 317462685; contrarrazões (ID 317462692) ‖ Proposta pelos precedentes: Desprovimento da apelação e da remessa, por decisão monocrática, se confirmada a linha [VALIDAR] [VALIDAR: Paradigma do STJ sobre salário-educação de pessoa física]",
    "modelo": "Origem: lote adp-remessas · não pautado",
    "variacoes": [
-    "VAL"
+    "VAL",
+    "ALTA",
+    "PJE"
    ],
-   "observacao": "Apelação da União e remessa necessária da sentença que afastou o salário-educação de Jerônimo Barriquello Pinto, titular de cartório, pessoa física.",
+   "observacao": "Promovido a Alta em 21/11: salário-educação de titular de cartório, pela tese repetitiva citada na minuta (artigo 932, IV, b). Minuta v1.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -10566,7 +10725,8 @@
      "mpf": "Mandado de segurança",
      "parecer": "Não verificado"
     }
-   }
+   },
+   "observacao_triagem": "Apelação da União e remessa necessária da sentença que afastou o salário-educação de Jerônimo Barriquello Pinto, titular de cartório, pessoa física."
   },
   {
    "sessao": "",
@@ -10583,9 +10743,11 @@
    "resultado": "Ato a proferir: apelação da União (ID 295383539) e remessa necessária da sentença ID 295383537; contrarrazões (ID 295383542) ‖ Proposta pelos precedentes: Desprovimento da apelação e da remessa, por decisão monocrática, se confirmada a linha [VALIDAR] [VALIDAR: Paradigma do STJ sobre salário-educação de pessoa física]",
    "modelo": "Origem: lote adp-remessas · não pautado",
    "variacoes": [
-    "VAL"
+    "VAL",
+    "ALTA",
+    "PJE"
    ],
-   "observacao": "Apelação da União e remessa necessária da sentença que afastou o salário-educação de Débora Catizane de Oliveira Franco, titular de cartório, pessoa física.",
+   "observacao": "Promovido a Alta em 21/11: salário-educação de titular de cartório, pela tese repetitiva citada na minuta (artigo 932, IV, b). Minuta v1.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -10737,7 +10899,8 @@
      "mpf": "Mandado de segurança",
      "parecer": "Não verificado"
     }
-   }
+   },
+   "observacao_triagem": "Apelação da União e remessa necessária da sentença que afastou o salário-educação de Débora Catizane de Oliveira Franco, titular de cartório, pessoa física."
   },
   {
    "sessao": "",
@@ -10754,9 +10917,10 @@
    "resultado": "Ato a proferir: apelação do IBAMA (ID 311314407) e remessa necessária da sentença ID 311314406; contrarrazões (ID 311314409) ‖ Proposta pelos precedentes: Desprovimento da apelação e da remessa, se a atividade não constar do Anexo VIII da Lei 6.938/1981 [VALIDAR] [VALIDAR: Objeto social e atividade da autora]",
    "modelo": "Origem: lote adp-remessas · não pautado",
    "variacoes": [
-    "VAL"
+    "VAL",
+    "BAIXA"
    ],
-   "observacao": "Apelação do IBAMA e remessa necessária da sentença que declarou inexistente débito de TCFA protestado contra a Veipeças, empresa de comércio de peças.",
+   "observacao": "A atividade consta do Anexo VIII da Lei 6.938/1981?",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -10899,7 +11063,8 @@
      "mpf": "Sem hipótese",
      "parecer": "Não verificado"
     }
-   }
+   },
+   "observacao_triagem": "Apelação do IBAMA e remessa necessária da sentença que declarou inexistente débito de TCFA protestado contra a Veipeças, empresa de comércio de peças."
   },
   {
    "sessao": "",
@@ -10916,9 +11081,10 @@
    "resultado": "Ato a proferir: apelação do IBAMA (ID 282305788) e remessa necessária da sentença ID 282305787; contrarrazões (ID 282305792) ‖ Proposta pelos precedentes: Desprovimento da apelação e da remessa, na linha da ApCiv 5010796-21.2019.4.03.6000 [VALIDAR atividade] [VALIDAR: Objeto social e atividade das impetrantes]",
    "modelo": "Origem: lote adp-remessas · não pautado",
    "variacoes": [
-    "VAL"
+    "VAL",
+    "BAIXA"
    ],
-   "observacao": "Apelação do IBAMA e remessa necessária da sentença que afastou a TCFA de concessionária de motocicletas, matriz e filial.",
+   "observacao": "A linha da ApCiv 5010796-21.2019 basta como jurisprudência dominante?",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -11079,7 +11245,8 @@
      "mpf": "Mandado de segurança",
      "parecer": "Não verificado"
     }
-   }
+   },
+   "observacao_triagem": "Apelação do IBAMA e remessa necessária da sentença que afastou a TCFA de concessionária de motocicletas, matriz e filial."
   },
   {
    "sessao": "",
@@ -11091,14 +11258,14 @@
    "executado": "",
    "assunto": "IRPJ/Imposto de Renda de Pessoa Jurídica",
    "assunto_detalhado": "",
-   "grupo": "t10",
+   "grupo": "t13",
    "tipo_caso": "Apelação da União e remessa necessária em mandado de segurança · IRPJ e CSLL: base de cálculo presumida reduzida (8% e 12%) para serviços hospitalares e de diagnóstico por imagem (artigo 15, § 1º, III, a, e artigo 20 da Lei 9.249/1995) · segurança concedida",
    "resultado": "Ato a proferir: apelação da União (ID 340496844) e remessa necessária da sentença ID 340496838; contrarrazões com documentos novos (ID 340496845 e seguintes); MPF sem intervenção (ID 340691228) ‖ Proposta pelos precedentes: Voto: conferir a prova pré-constituída dos três requisitos (atividade, sociedade empresária registrada e licença sanitária vigente); desconsiderar ou não os documentos juntados com as contrarrazões [VALIDAR] [VALIDAR: Licença sanitária vigente (renovação protocolada, ID 340496730); Registro como sociedade empresária]",
    "modelo": "Origem: lote adp-remessas · não pautado",
    "variacoes": [
     "VAL"
    ],
-   "observacao": "Apelação da União e remessa necessária da sentença que assegurou ao IPEDI MS a base presumida de 8% (IRPJ) e 12% (CSLL) por serviços de diagnóstico por imagem. A União não impugna a tese do REsp 1.116.399/BA, mas a prova dos requisitos.",
+   "observacao": "A triagem indica voto (prova pré-constituída dos três requisitos).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -11286,7 +11453,8 @@
      "idParecer": "340691228",
      "parecerSentido": "Ausência de interesse que justifique intervenção"
     }
-   }
+   },
+   "observacao_triagem": "Apelação da União e remessa necessária da sentença que assegurou ao IPEDI MS a base presumida de 8% (IRPJ) e 12% (CSLL) por serviços de diagnóstico por imagem. A União não impugna a tese do REsp 1.116.399/BA, mas a prova dos requisitos."
   },
   {
    "sessao": "",
@@ -11298,14 +11466,14 @@
    "executado": "",
    "assunto": "Redução de Alíquota IR/CSLL - Serviços Hospitalares",
    "assunto_detalhado": "",
-   "grupo": "t10",
+   "grupo": "t13",
    "tipo_caso": "Apelação da União e remessa necessária em mandado de segurança · IRPJ e CSLL: base de cálculo presumida reduzida (8% e 12%) para serviços hospitalares (artigo 15, § 1º, III, a, e artigo 20 da Lei 9.249/1995) · liminar indeferida · segurança concedida em parte, excluídas consultas e atividades administrativas",
    "resultado": "Ato a proferir: apelação da União (ID 345436127) e remessa necessária da sentença ID 345436121; contrarrazões (ID 345436129); MPF sem intervenção (ID 346317009) ‖ Proposta pelos precedentes: Voto ou monocrática: conferir a prova pré-constituída dos requisitos; manter a exclusão das consultas [VALIDAR] [VALIDAR: Prova da sociedade empresária e da licença sanitária]",
    "modelo": "Origem: lote adp-remessas · não pautado",
    "variacoes": [
     "VAL"
    ],
-   "observacao": "Apelação da União e remessa necessária da sentença que assegurou à Clínica Bismarck a base presumida reduzida do IRPJ e da CSLL sobre serviços hospitalares, excluídas consultas e atividades administrativas.",
+   "observacao": "Prova pré-constituída a examinar: voto.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -11471,7 +11639,8 @@
      "idParecer": "346317009",
      "parecerSentido": "Ausência de interesse que justifique intervenção"
     }
-   }
+   },
+   "observacao_triagem": "Apelação da União e remessa necessária da sentença que assegurou à Clínica Bismarck a base presumida reduzida do IRPJ e da CSLL sobre serviços hospitalares, excluídas consultas e atividades administrativas."
   },
   {
    "sessao": "",
@@ -11488,9 +11657,10 @@
    "resultado": "Ato a proferir: apelação do CRA/MS (ID 385137871) e remessa necessária da sentença ID 385137866; contrarrazões (ID 385137874); MPF sem intervenção (ID 391980561) ‖ Proposta pelos precedentes: Desprovimento da apelação e da remessa, se a atividade básica não for privativa de administrador [VALIDAR objeto social] [VALIDAR: Objeto social da impetrante; Comprovante de preparo do CRA/MS]",
    "modelo": "Origem: lote adp-remessas · não pautado",
    "variacoes": [
-    "VAL"
+    "VAL",
+    "MEDIA"
    ],
-   "observacao": "Apelação do CRA/MS e remessa necessária da sentença que dispensou a Asher Administradora de Bens do registro no conselho e anulou a multa por falta de responsável técnico.",
+   "observacao": "Confirmar que a atividade básica não é privativa de administrador.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -11656,7 +11826,8 @@
      "idParecer": "391980561",
      "parecerSentido": "Ausência de interesse que justifique intervenção"
     }
-   }
+   },
+   "observacao_triagem": "Apelação do CRA/MS e remessa necessária da sentença que dispensou a Asher Administradora de Bens do registro no conselho e anulou a multa por falta de responsável técnico."
   },
   {
    "sessao": "",
@@ -11673,9 +11844,10 @@
    "resultado": "Ato a proferir: apelação do embargante (ID 383796537) da sentença ID 383796479, integrada pela ID 383796535; contrarrazões da União (ID 383796541) ‖ Proposta pelos precedentes: Voto ou monocrática conforme a cronologia da execução fiscal (Tema 566/STJ) [VALIDAR] [VALIDAR: Cronologia da execução fiscal (citação, suspensão, arquivamento); Representação do espólio]",
    "modelo": "Origem: lote adp-ap-3s · não pautado",
    "variacoes": [
-    "VAL"
+    "VAL",
+    "BAIXA"
    ],
-   "observacao": "Apelação do espólio contra sentença que rejeitou embargos à execução fiscal de 2007. O apelante invoca prescrição intercorrente.",
+   "observacao": "Tema 566/STJ: a cronologia da execução fiscal permite monocrática?",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -11845,7 +12017,8 @@
      "mpf": "Sem hipótese",
      "parecer": "Não verificado"
     }
-   }
+   },
+   "observacao_triagem": "Apelação do espólio contra sentença que rejeitou embargos à execução fiscal de 2007. O apelante invoca prescrição intercorrente."
   },
   {
    "sessao": "",
@@ -11862,9 +12035,10 @@
    "resultado": "Ato a proferir: remessa necessária da sentença ID 353961609, sem recurso voluntário; MPF sem interesse em primeiro e segundo graus (IDs 353961608 e 355553201) ‖ Proposta pelos precedentes: Desprovimento por decisão monocrática (artigo 932 do CPC), na linha do gabinete de que o interstício do artigo 9º, III, da Lei 8.745/1993 não alcança contratação por ente diverso (AI 5001313-17.2022.4.03.0000, 30/06/2022) [VALIDAR compatibilidade com o Tema 403/STF] [VALIDAR: Compatibilidade com o Tema 403/STF (RE 635.648)]",
    "modelo": "Origem: lote adp-remessas · não pautado",
    "variacoes": [
-    "VAL"
+    "VAL",
+    "MEDIA"
    ],
-   "observacao": "Remessa necessária da sentença que concedeu a segurança a Thaís Costa Medeiros para ser contratada como professora substituta da UFMS sem o interstício de 24 meses do artigo 9º, III, da Lei 8.745/1993, porque o contrato temporário anterior foi com o IFMS, instituição diversa. Não houve recurso voluntário; o MPF declarou falta de interesse.",
+   "observacao": "Linha do gabinete de 2022, da 3ª Turma: confirmar que se mantém na Turma Regional.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -11993,7 +12167,8 @@
      "idParecer": "355553201",
      "parecerSentido": "Ausência de interesse que justifique a intervenção"
     }
-   }
+   },
+   "observacao_triagem": "Remessa necessária da sentença que concedeu a segurança a Thaís Costa Medeiros para ser contratada como professora substituta da UFMS sem o interstício de 24 meses do artigo 9º, III, da Lei 8.745/1993, porque o contrato temporário anterior foi com o IFMS, instituição diversa. Não houve recurso voluntário; o MPF declarou falta de interesse."
   },
   {
    "sessao": "",
@@ -12010,9 +12185,10 @@
    "resultado": "Ato a proferir: apelação do IFMS (ID 345023231) e remessa necessária da sentença ID 345023228; contrarrazões (ID 345023232); MPF pelo prosseguimento (ID 345963153) ‖ Proposta pelos precedentes: Desprovimento, na linha do gabinete de que o interstício do artigo 9º, III, da Lei 8.745/1993 não alcança contratação por ente diverso (AI 5001313-17.2022.4.03.0000, 30/06/2022) [VALIDAR compatibilidade com o Tema 403/STF e precedentes invocados pelo IFMS] [VALIDAR: Compatibilidade com o Tema 403/STF (RE 635.648); Precedentes invocados pelo IFMS]",
    "modelo": "Origem: lote adp-remessas · não pautado",
    "variacoes": [
-    "VAL"
+    "VAL",
+    "MEDIA"
    ],
-   "observacao": "Apelação do IFMS e remessa necessária da sentença que assegurou a Thiago Augusto dos Santos a contratação como professor substituto, apesar de contrato temporário com a UFGD encerrado há menos de 24 meses. O IFMS invoca o artigo 9º, III, da Lei 8.745/1993.",
+   "observacao": "Linha do gabinete de 2022, da 3ª Turma: confirmar que se mantém na Turma Regional.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -12179,7 +12355,8 @@
      "idParecer": "345963153",
      "parecerSentido": "Prosseguimento do feito, sem intervenção"
     }
-   }
+   },
+   "observacao_triagem": "Apelação do IFMS e remessa necessária da sentença que assegurou a Thiago Augusto dos Santos a contratação como professor substituto, apesar de contrato temporário com a UFGD encerrado há menos de 24 meses. O IFMS invoca o artigo 9º, III, da Lei 8.745/1993."
   },
   {
    "sessao": "",
@@ -12196,9 +12373,11 @@
    "resultado": "Ato a proferir: remessa necessária da sentença ID 320479296, sem recurso voluntário; a colação e o diploma já foram realizados por força da liminar; MPF sem interesse (IDs 320479295 e 328267615) ‖ Proposta pelos precedentes: Não conhecimento da remessa por decisão monocrática, com fundamento no artigo 496 do CPC, na linha do gabinete em mandado de segurança contra instituição de ensino privada (RemNecCiv 5004061-54.2019.4.03.6102 e RemNecCiv 5004368-77.2020.4.03.6100, 27/05/2021) [VALIDAR fundamento no inteiro teor]; subsidiariamente, desprovimento por situação fática consolidada (AI 5012952-32.2022.4.03.0000, 3ª Turma, 14/04/2023)",
    "modelo": "Origem: lote adp-remessas · não pautado",
    "variacoes": [
-    "VAL"
+    "VAL",
+    "ALTA",
+    "PJE"
    ],
-   "observacao": "Remessa necessária da sentença que assegurou a Esmeralda Silva dos Santos a colação de grau e o diploma de Pedagogia independentemente do ENADE e mandou manter a colação já feita. Não houve recurso voluntário; o MPF declarou falta de interesse.",
+   "observacao": "Linha do gabinete em mandado de segurança contra instituição de ensino privada.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -12327,7 +12506,8 @@
      "idParecer": "328267615",
      "parecerSentido": "Ausência de interesse que justifique a intervenção"
     }
-   }
+   },
+   "observacao_triagem": "Remessa necessária da sentença que assegurou a Esmeralda Silva dos Santos a colação de grau e o diploma de Pedagogia independentemente do ENADE e mandou manter a colação já feita. Não houve recurso voluntário; o MPF declarou falta de interesse."
   },
   {
    "sessao": "",
@@ -12344,9 +12524,11 @@
    "resultado": "Ato a proferir: remessa necessária da sentença ID 347123825, integrada pela rejeição dos embargos (ID 347123833); sem apelação; MPF sem interesse em primeiro grau (ID 347123823) e pelo desprovimento em segundo grau (ID 347528454) ‖ Proposta pelos precedentes: Não conhecimento da remessa por decisão monocrática, com fundamento no artigo 496 do CPC, na linha do gabinete em mandado de segurança contra instituição de ensino privada (RemNecCiv 5004061-54.2019.4.03.6102 e RemNecCiv 5004368-77.2020.4.03.6100, 27/05/2021) [VALIDAR fundamento no inteiro teor]; subsidiariamente, desprovimento por situação fática consolidada (AI 5012952-32.2022.4.03.0000, 3ª Turma, 14/04/2023) [VALIDAR: Cumprimento da liminar (colação já realizada); Situação do AI 5028903-95.2024.4.03.0000]",
    "modelo": "Origem: lote adp-remessas · não pautado",
    "variacoes": [
-    "VAL"
+    "VAL",
+    "ALTA",
+    "PJE"
    ],
-   "observacao": "Remessa necessária da sentença que concedeu a Isabela Gunther Leiria a colação de grau e o diploma de Pedagogia na UCDB independentemente do ENADE, para posse em concurso público. A liminar foi deferida em 15/10/2024 (ID 347123800). A UCDB opôs embargos de declaração, rejeitados. Não houve apelação. A sentença foi comunicada ao AI 5028903-95.2024.4.03.0000.",
+   "observacao": "Linha do gabinete em mandado de segurança contra instituição de ensino privada.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -12505,7 +12687,8 @@
      "idParecer": "347528454",
      "parecerSentido": "Desprovimento da remessa necessária"
     }
-   }
+   },
+   "observacao_triagem": "Remessa necessária da sentença que concedeu a Isabela Gunther Leiria a colação de grau e o diploma de Pedagogia na UCDB independentemente do ENADE, para posse em concurso público. A liminar foi deferida em 15/10/2024 (ID 347123800). A UCDB opôs embargos de declaração, rejeitados. Não houve apelação. A sentença foi comunicada ao AI 5028903-95.2024.4.03.0000."
   },
   {
    "sessao": "",
@@ -12522,9 +12705,11 @@
    "resultado": "Ato a proferir: remessa necessária da sentença ID 391565397, sem recurso voluntário; o INSS informou que não recorreria e cumpriu a sentença, com deferimento do benefício (NB 732.105.918-0) (ID 391565406); MPF sem interesse (IDs 391565395 e 394947156) ‖ Proposta pelos precedentes: Não conhecimento ou desprovimento por decisão monocrática: linha do gabinete em remessa de mandado de segurança previdenciário (RemNecCiv 5005981-73.2022.4.03.6000, 31/07/2026, não conhecimento) [VALIDAR fundamento] ou desprovimento (RemNecCiv 5000523-58.2025.4.03.6004, 09/06/2026) [VALIDAR: Fundamento do não conhecimento na RemNecCiv 5005981-73.2022.4.03.6000]",
    "modelo": "Origem: lote adp-remessas · não pautado",
    "variacoes": [
-    "VAL"
+    "VAL",
+    "ALTA",
+    "PJE"
    ],
-   "observacao": "Remessa necessária da sentença que anulou o indeferimento do auxílio por incapacidade temporária de Munir Mohd Abdel Jaber Abdullah por suposto não comparecimento à perícia e mandou reanalisar o requerimento. O INSS informou que não recorreria, reabriu o processo (ID 391565402) e deferiu o benefício sob o NB 732.105.918-0 (ID 391565406).",
+   "observacao": "Promovido a Alta em 21/11: remessa sem condenação pecuniária, abaixo da alçada (artigo 496, § 3º, I; Tema 1.081/STJ), mesmo padrão do 5000567-77. Minuta v1.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -12683,7 +12868,8 @@
      "idParecer": "394947156",
      "parecerSentido": "Ausência de interesse que justifique a intervenção"
     }
-   }
+   },
+   "observacao_triagem": "Remessa necessária da sentença que anulou o indeferimento do auxílio por incapacidade temporária de Munir Mohd Abdel Jaber Abdullah por suposto não comparecimento à perícia e mandou reanalisar o requerimento. O INSS informou que não recorreria, reabriu o processo (ID 391565402) e deferiu o benefício sob o NB 732.105.918-0 (ID 391565406)."
   },
   {
    "sessao": "",
@@ -12700,9 +12886,11 @@
    "resultado": "Ato a proferir: remessa necessária da sentença ID 385938939, sem recurso voluntário; o INSS informou o cumprimento, com implantação de novo benefício (IDs 385938934 e 385938941); MPF sem interesse (IDs 385938938 e 388002049) ‖ Proposta pelos precedentes: Desprovimento por decisão monocrática (artigo 932 do CPC), na linha do gabinete em remessa de mandado de segurança previdenciário (RemNecCiv 5002121-53.2025.4.03.6002, 17/06/2026) [VALIDAR paradigma específico sobre pedido de prorrogação] [VALIDAR: Paradigma sobre pedido de prorrogação (esgotamento das prorrogações na Portaria DIRBEN/INSS 991/2022)]",
    "modelo": "Origem: lote adp-remessas · não pautado",
    "variacoes": [
-    "VAL"
+    "VAL",
+    "ALTA",
+    "PJE"
    ],
-   "observacao": "Remessa necessária da sentença que assegurou a Divina Assis Rodrigues da Silva o pedido de prorrogação do auxílio por incapacidade temporária. Para cumprir a liminar, o INSS implantou novo benefício, de 16/09/2025 a 15/10/2025, por entender esgotadas as prorrogações (ID 385938934). Não houve recurso voluntário.",
+   "observacao": "Precedente do gabinete de 17/06/2026.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -12853,7 +13041,8 @@
      "idParecer": "388002049",
      "parecerSentido": "Ausência de interesse que justifique a intervenção"
     }
-   }
+   },
+   "observacao_triagem": "Remessa necessária da sentença que assegurou a Divina Assis Rodrigues da Silva o pedido de prorrogação do auxílio por incapacidade temporária. Para cumprir a liminar, o INSS implantou novo benefício, de 16/09/2025 a 15/10/2025, por entender esgotadas as prorrogações (ID 385938934). Não houve recurso voluntário."
   },
   {
    "sessao": "",
@@ -12870,9 +13059,10 @@
    "resultado": "Ato a proferir: remessa necessária da sentença ID 377012113, sem recurso voluntário; MPF sem interesse em primeiro e segundo graus (IDs 377012112 e 387712878) ‖ Proposta pelos precedentes: Desprovimento por decisão monocrática (artigo 932 do CPC), na linha do gabinete sobre inscrição provisória de médico aprovado no Revalida (AI 5032370-14.2026.4.03.0000, 25/10/2026) [VALIDAR fundamento para julgamento monocrático]; se o registro informado no ID 377012115 for definitivo, avaliar situação consolidada [VALIDAR] [VALIDAR: Natureza do registro CRM 15.929/MS informado em 06/04/2026 (ID 377012115); Número e resultado do agravo de instrumento contra o indeferimento da liminar]",
    "modelo": "Origem: lote adp-remessas · não pautado",
    "variacoes": [
-    "VAL"
+    "VAL",
+    "MEDIA"
    ],
-   "observacao": "Remessa necessária da sentença que assegurou a Dayane dos Santos Lesiuk de Paula, aprovada no Revalida, a inscrição provisória no CRM/MS até a conclusão da revalidação do diploma estrangeiro. A liminar foi indeferida (ID 377012100); a tutela recursal foi parcialmente deferida em agravo de instrumento, e o CRM/MS fez o registro provisório em 19/12/2025 (ID 377012111). Em 06/04/2026, o CRM/MS informou o registro CRM 15.929/MS (ID 377012115). Não houve recurso voluntário.",
+   "observacao": "O CRM informou o registro da impetrante (CRM 15.929/MS) desde 19/12/2025 (ID 377012115), sem dizer se é provisório ou definitivo.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -13033,7 +13223,8 @@
      "idParecer": "387712878",
      "parecerSentido": "Ausência de interesse que justifique a intervenção"
     }
-   }
+   },
+   "observacao_triagem": "Remessa necessária da sentença que assegurou a Dayane dos Santos Lesiuk de Paula, aprovada no Revalida, a inscrição provisória no CRM/MS até a conclusão da revalidação do diploma estrangeiro. A liminar foi indeferida (ID 377012100); a tutela recursal foi parcialmente deferida em agravo de instrumento, e o CRM/MS fez o registro provisório em 19/12/2025 (ID 377012111). Em 06/04/2026, o CRM/MS informou o registro CRM 15.929/MS (ID 377012115). Não houve recurso voluntário."
   },
   {
    "sessao": "",
@@ -13050,9 +13241,11 @@
    "resultado": "Ato a proferir: remessa necessária da sentença ID 294590554, sem recurso voluntário; MPF pelo desprovimento (ID 294970683) ‖ Proposta pelos precedentes: Desprovimento por decisão monocrática (artigo 932 do CPC), na linha da Turma Regional (RemNecCiv 0000882-08.2025.4.03.6000, 28/09/2026: comprovação da habilitação na posse, Súmula 266/STJ por analogia) [VALIDAR fundamento para julgamento monocrático e autoridade impetrada] [VALIDAR: Autoridade impetrada (Ministra da Saúde × Secretário) e competência; Fundamento para julgamento monocrático]",
    "modelo": "Origem: lote adp-remessas · não pautado",
    "variacoes": [
-    "VAL"
+    "VAL",
+    "ALTA",
+    "PJE"
    ],
-   "observacao": "Remessa necessária da sentença que assegurou a Cristiane Camargo Sanches, médica formada no Paraguai, a inscrição no chamamento público do Projeto Mais Médicos para o Brasil sem a apresentação imediata do diploma e do registro profissional, postergados para as fases seguintes. A liminar foi deferida em 31/05/2023 (ID 294590541). Não houve recurso voluntário.",
+   "observacao": "Precedente da Turma Regional de 28/09/2026.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -13190,7 +13383,8 @@
      "idParecer": "294970683",
      "parecerSentido": "Desprovimento da remessa necessária"
     }
-   }
+   },
+   "observacao_triagem": "Remessa necessária da sentença que assegurou a Cristiane Camargo Sanches, médica formada no Paraguai, a inscrição no chamamento público do Projeto Mais Médicos para o Brasil sem a apresentação imediata do diploma e do registro profissional, postergados para as fases seguintes. A liminar foi deferida em 31/05/2023 (ID 294590541). Não houve recurso voluntário."
   },
   {
    "sessao": "",
@@ -13207,9 +13401,10 @@
    "resultado": "Ato a proferir: apelações da União (ID 366910914), do FNDE (ID 366910916) e da CEF (ID 366910919) e remessa necessária da sentença ID 366910912; contrarrazões (IDs 366910918 e 366910924); MPF pelo prosseguimento (ID 368590809) ‖ Proposta pelos precedentes: Desprovimento, na linha da Turma Regional (ApelRemNec 5002829-11.2022.4.03.6002, 26/10/2026: legitimidade das rés, abatimento do artigo 6º-B, III, da Lei 10.260/2001 até o fim da emergência, Portaria GM/MS 913/2022) [VALIDAR período e preparo da CEF] [VALIDAR: Preparo da apelação da CEF; Período de atuação no SUS comprovado]",
    "modelo": "Origem: lote adp-remessas · não pautado",
    "variacoes": [
-    "VAL"
+    "VAL",
+    "MEDIA"
    ],
-   "observacao": "Apelações da União, do FNDE e da CEF e remessa necessária da sentença que reconheceu a Alessandra Penteado de Souza o abatimento de 26% do saldo devedor do FIES por 26 meses de atuação como médica no SUS durante a emergência da Covid-19. As rés questionam interesse, legitimidade e requisitos.",
+   "observacao": "Linha recente (26/10/2026): conferir se basta como jurisprudência dominante.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -13400,7 +13595,8 @@
      "idParecer": "368590809",
      "parecerSentido": "Prosseguimento do feito, sem intervenção"
     }
-   }
+   },
+   "observacao_triagem": "Apelações da União, do FNDE e da CEF e remessa necessária da sentença que reconheceu a Alessandra Penteado de Souza o abatimento de 26% do saldo devedor do FIES por 26 meses de atuação como médica no SUS durante a emergência da Covid-19. As rés questionam interesse, legitimidade e requisitos."
   },
   {
    "sessao": "",
@@ -13417,9 +13613,10 @@
    "resultado": "Ato a proferir: remessa necessária das sentenças IDs 289231050 e 289231057, sem recurso voluntário; prazo do impetrante decorrido em 06/11/2024; concluso desde 03/12/2024 ‖ Proposta pelos precedentes: Monocrática ou voto conforme a prova da boa-fé, na linha da Turma Regional em perdimento de veículo usado no transporte de mercadorias estrangeiras (ApCiv 5000919-57.2019.4.03.6000, 28/09/2026; ApCiv 5001454-68.2019.4.03.6005, 28/09/2026) [VALIDAR sentido] [VALIDAR: Apelação ou ciência da União; Prova da boa-fé do proprietário]",
    "modelo": "Origem: lote adp-remessas · não pautado",
    "variacoes": [
-    "VAL"
+    "VAL",
+    "BAIXA"
    ],
-   "observacao": "Remessa necessária da sentença que liberou o caminhão trator de José Carlos Ferrari e, integrada por embargos de declaração, anulou o auto de infração e o perdimento, pela boa-fé do proprietário. Não houve recurso voluntário da União [VALIDAR].",
+   "observacao": "A prova da boa-fé é clara o bastante para monocrática?",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -13554,7 +13751,8 @@
      "mpf": "Mandado de segurança",
      "parecer": "Não verificado"
     }
-   }
+   },
+   "observacao_triagem": "Remessa necessária da sentença que liberou o caminhão trator de José Carlos Ferrari e, integrada por embargos de declaração, anulou o auto de infração e o perdimento, pela boa-fé do proprietário. Não houve recurso voluntário da União [VALIDAR]."
   },
   {
    "sessao": "",
@@ -13571,9 +13769,10 @@
    "resultado": "Ato a proferir: remessa necessária da sentença ID 366531275, sem recurso voluntário; MPF sem interesse (ID 369909429) ‖ Proposta pelos precedentes: Monocrática ou voto: linha do gabinete sobre licenciamento do militar temporário na Lei 13.954/2019 (AI 5030052-34.2021.4.03.0000, 1ª Turma, 08/06/2023) [VALIDAR sentido e aplicação ao licenciamento a pedido] [VALIDAR: Paradigma sobre licenciamento a pedido do militar temporário]",
    "modelo": "Origem: lote adp-remessas · não pautado",
    "variacoes": [
-    "VAL"
+    "VAL",
+    "BAIXA"
    ],
-   "observacao": "Remessa necessária da sentença que concedeu a Caio Barros Figueiredo, militar temporário, o licenciamento do serviço ativo e anulou a prorrogação de seu tempo de serviço por 12 meses, para que assuma emprego privado. Não houve recurso voluntário; o MPF declarou falta de interesse.",
+   "observacao": "Militar temporário: o precedente da 1ª Turma, de 2023, basta?",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -13702,7 +13901,8 @@
      "idParecer": "369909429",
      "parecerSentido": "Ausência de interesse que justifique a intervenção"
     }
-   }
+   },
+   "observacao_triagem": "Remessa necessária da sentença que concedeu a Caio Barros Figueiredo, militar temporário, o licenciamento do serviço ativo e anulou a prorrogação de seu tempo de serviço por 12 meses, para que assuma emprego privado. Não houve recurso voluntário; o MPF declarou falta de interesse."
   },
   {
    "sessao": "",
@@ -13719,9 +13919,10 @@
    "resultado": "Ato a proferir: remessa necessária da sentença ID 385294634 (cadastrada como decisão), sem recurso voluntário; MPF sem interesse (IDs 385294632 e 387546949) ‖ Proposta pelos precedentes: Voto ou monocrática: linha da Turma Regional sobre controle judicial de sanção de impedimento de licitar (ApCiv 0005091-29.2016.4.03.6002, 15/09/2026; ApCiv 0013693-49.2015.4.03.6000, 27/08/2026) [VALIDAR sentido] [VALIDAR: Decurso dos 150 dias da sanção (interesse remanescente quanto ao SICAF)]",
    "modelo": "Origem: lote adp-remessas · não pautado",
    "variacoes": [
-    "VAL"
+    "VAL",
+    "BAIXA"
    ],
-   "observacao": "Remessa necessária da sentença que anulou a suspensão de licitar e contratar por 150 dias imposta pela EBSERH à Noem Medical, por recusa em assinar ata de registro de preços do Pregão 90.058/2025, e mandou cancelar a anotação no SICAF. A sentença afastou a Súmula 665/STJ pela flagrante ilegalidade e desproporcionalidade. Não houve recurso voluntário.",
+   "observacao": "Sanção de impedimento de licitar: monocrática pela linha da Turma Regional ou voto?",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -13850,7 +14051,8 @@
      "idParecer": "387546949",
      "parecerSentido": "Ausência de interesse que justifique a intervenção"
     }
-   }
+   },
+   "observacao_triagem": "Remessa necessária da sentença que anulou a suspensão de licitar e contratar por 150 dias imposta pela EBSERH à Noem Medical, por recusa em assinar ata de registro de preços do Pregão 90.058/2025, e mandou cancelar a anotação no SICAF. A sentença afastou a Súmula 665/STJ pela flagrante ilegalidade e desproporcionalidade. Não houve recurso voluntário."
   },
   {
    "sessao": "",
@@ -13867,9 +14069,11 @@
    "resultado": "Ato a proferir: remessa necessária da sentença ID 340740964 (artigo 19 da Lei 4.717/1965), sem recurso voluntário; MPF pelo desprovimento (ID 341212442) ‖ Proposta pelos precedentes: Não conhecimento da remessa por decisão monocrática, com fundamento no artigo 496 do CPC, na linha da monocrática do gabinete em ação popular extinta por ausência superveniente de interesse (RemNecCiv 0001715-12.2015.4.03.6118, 10/05/2021) [VALIDAR fundamento no inteiro teor]; alternativamente, desprovimento (artigo 19 da Lei 4.717/1965), como opinou o MPF [VALIDAR: Não conhecimento × desprovimento (artigo 19 da Lei 4.717/1965)]",
    "modelo": "Origem: lote adp-remessas · não pautado",
    "variacoes": [
-    "VAL"
+    "VAL",
+    "ALTA",
+    "PJE"
    ],
-   "observacao": "Remessa necessária da sentença que extinguiu sem resolução do mérito a ação popular de Rodrigo Bordin Piva contra a compra da sede do CRMV-MS, pela perda superveniente de interesse do autor, que se tornou Presidente do Conselho. Publicado edital, nenhum cidadão assumiu o polo ativo, e o MPF declarou não ter interesse em prosseguir, por não ver lesão. Não houve recurso voluntário.",
+   "observacao": "Monocrática do gabinete em ação popular extinta.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -13998,7 +14202,8 @@
      "idParecer": "341212442",
      "parecerSentido": "Desprovimento da remessa necessária"
     }
-   }
+   },
+   "observacao_triagem": "Remessa necessária da sentença que extinguiu sem resolução do mérito a ação popular de Rodrigo Bordin Piva contra a compra da sede do CRMV-MS, pela perda superveniente de interesse do autor, que se tornou Presidente do Conselho. Publicado edital, nenhum cidadão assumiu o polo ativo, e o MPF declarou não ter interesse em prosseguir, por não ver lesão. Não houve recurso voluntário."
   },
   {
    "sessao": "",
@@ -14010,14 +14215,14 @@
    "executado": "",
    "assunto": "Inscrição / Documentação",
    "assunto_detalhado": "",
-   "grupo": "t12",
+   "grupo": "t13",
    "tipo_caso": "Remessa necessária em mandado de segurança · concurso para Agente Federal de Execução Penal (DEPEN, Edital 1/2020) · candidato com deficiência aprovado no curso de formação por liminar depois revogada em outro mandado de segurança · nomeação e posse determinadas · segurança concedida · União não recorre",
    "resultado": "Ato a proferir: remessa necessária da sentença ID 319551760, sem recurso voluntário; a União informou que não recorrerá (ID 319551766); MPF pelo desprovimento (ID 319966498) ‖ Proposta pelos precedentes: Voto ou monocrática: desprovimento, se confirmada a aprovação em todas as etapas; avaliar se a manifestação da União (ID 319551766) atrai o artigo 19, § 2º, da Lei 10.522/2002 [VALIDAR fundamento e paradigma] [VALIDAR: Efeito da manifestação da União de não recorrer (ID 319551766); Cumprimento da nomeação e posse]",
    "modelo": "Origem: lote adp-remessas · não pautado",
    "variacoes": [
     "VAL"
    ],
-   "observacao": "Remessa necessária da sentença que determinou a nomeação e a posse de Alison da Silva Araújo como Agente Federal de Execução Penal, aprovado no curso de formação por força de liminar em outro mandado de segurança, depois extinto. A União informou que não recorrerá. O MPF opinou pelo desprovimento.",
+   "observacao": "Sentença fundada em fato consumado pode contrariar o Tema 476/STF: a triagem recomenda voto.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -14158,7 +14363,8 @@
      "idParecer": "319966498",
      "parecerSentido": "Desprovimento da remessa necessária"
     }
-   }
+   },
+   "observacao_triagem": "Remessa necessária da sentença que determinou a nomeação e a posse de Alison da Silva Araújo como Agente Federal de Execução Penal, aprovado no curso de formação por força de liminar em outro mandado de segurança, depois extinto. A União informou que não recorrerá. O MPF opinou pelo desprovimento."
   },
   {
    "sessao": "",
@@ -14175,9 +14381,10 @@
    "resultado": "Ato a proferir: apelação do IFMS (ID 374582182) e remessa necessária da sentença ID 374582180; MPF pelo prosseguimento (ID 377046122); petição do impetrante com documentos de 29/10/2026 (IDs 407591945 e 407591949) ‖ Proposta pelos precedentes: Desprovimento por situação fática consolidada, na linha do gabinete em ensino (AI 5012952-32.2022.4.03.0000, 3ª Turma, 14/04/2023) [VALIDAR paradigma específico] [VALIDAR: Paradigma sobre certificado de ensino médio em curso técnico integrado; Relevância dos documentos de 29/10/2026]",
    "modelo": "Origem: lote adp-remessas · não pautado",
    "variacoes": [
-    "VAL"
+    "VAL",
+    "BAIXA"
    ],
-   "observacao": "Apelação do IFMS e remessa necessária da sentença que manteve a ordem para emitir a Felipe Ribeiro Espíndola o certificado de ensino médio, sem o certificado profissional, antes da integralização do curso técnico integrado, para matrícula no ensino superior. A liminar foi cumprida em 2024; em 29/10/2026 o impetrante juntou comprovantes de matrícula e histórico de curso superior.",
+   "observacao": "Situação fática consolidada em ensino: o precedente da 3ª Turma, de 2023, basta?",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -14346,7 +14553,8 @@
      "idParecer": "377046122",
      "parecerSentido": "Prosseguimento do feito, sem intervenção"
     }
-   }
+   },
+   "observacao_triagem": "Apelação do IFMS e remessa necessária da sentença que manteve a ordem para emitir a Felipe Ribeiro Espíndola o certificado de ensino médio, sem o certificado profissional, antes da integralização do curso técnico integrado, para matrícula no ensino superior. A liminar foi cumprida em 2024; em 29/10/2026 o impetrante juntou comprovantes de matrícula e histórico de curso superior."
   },
   {
    "sessao": "",
@@ -14363,9 +14571,10 @@
    "resultado": "Ato a proferir: apelação da Fazenda Nacional (ID 308513230) e remessa necessária da sentença ID 308513229; contrarrazões (ID 308513833); MPF pelo prosseguimento (ID 308783655) ‖ Proposta pelos precedentes: Voto ou monocrática: desprovimento por situação consolidada, se confirmado o reingresso do veículo; no mérito, regime aduaneiro do veículo nacional em retorno [VALIDAR] [VALIDAR: Cumprimento da liminar (reingresso do veículo); Fundamentos da apelação]",
    "modelo": "Origem: lote adp-remessas · não pautado",
    "variacoes": [
-    "VAL"
+    "VAL",
+    "BAIXA"
    ],
-   "observacao": "Apelação da Fazenda Nacional e remessa necessária da sentença que permitiu o reingresso do veículo avariado da Transtodogaz, carregado em outro veículo, sem MIC/DTA nem declaração simplificada de importação. A liminar foi cumprida em 2024.",
+   "observacao": "Nada nos autos sobre o reingresso do veículo; sem isso, não há situação consolidada.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -14532,7 +14741,8 @@
      "idParecer": "308783655",
      "parecerSentido": "Prosseguimento do feito, sem intervenção"
     }
-   }
+   },
+   "observacao_triagem": "Apelação da Fazenda Nacional e remessa necessária da sentença que permitiu o reingresso do veículo avariado da Transtodogaz, carregado em outro veículo, sem MIC/DTA nem declaração simplificada de importação. A liminar foi cumprida em 2024."
   },
   {
    "sessao": "",
@@ -14549,9 +14759,10 @@
    "resultado": "Ato a proferir: apelação do INSS (ID 360630045) e remessa necessária da sentença ID 360630041; MPF pelo desprovimento (ID 365611592) ‖ Proposta pelos precedentes: Desprovimento, na linha da Turma Regional sobre mora administrativa (artigo 49 da Lei 9.784/1999; artigo 41-A, § 5º, da Lei 8.213/1991) [VALIDAR conclusão do processo e paradigma] [VALIDAR: Conclusão do processo administrativo (perda do objeto); Multa diária e prazo]",
    "modelo": "Origem: lote adp-remessas · não pautado",
    "variacoes": [
-    "VAL"
+    "VAL",
+    "MEDIA"
    ],
-   "observacao": "Apelação do INSS e remessa necessária da sentença que mandou o INSS concluir em 15 dias o processo administrativo de Rosana de Oliveira Barbosa, pessoa com deficiência, sob multa diária. O INSS alega ilegitimidade, ausência de mora e pede prazo maior e exclusão da multa. O MPF opinou pelo desprovimento.",
+   "observacao": "O MPF opina pelo desprovimento (ID 365611592). O critério de multa de 1/30 do benefício não se aplica a pedido de prótese.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -14709,7 +14920,8 @@
      "idParecer": "365611592",
      "parecerSentido": "Desprovimento da apelação"
     }
-   }
+   },
+   "observacao_triagem": "Apelação do INSS e remessa necessária da sentença que mandou o INSS concluir em 15 dias o processo administrativo de Rosana de Oliveira Barbosa, pessoa com deficiência, sob multa diária. O INSS alega ilegitimidade, ausência de mora e pede prazo maior e exclusão da multa. O MPF opinou pelo desprovimento."
   },
   {
    "sessao": "",
@@ -14721,14 +14933,14 @@
    "executado": "",
    "assunto": "Questões Funcionais",
    "assunto_detalhado": "",
-   "grupo": "t12",
+   "grupo": "t13",
    "tipo_caso": "Apelações do CRM/MS e do Estado de Mato Grosso do Sul e remessa necessária em ação declaratória · nulidade da decisão plenária do CRM/MS que aprovou o Parecer 13/2023 (atendimentos do IMOL/MS na Casa da Mulher Brasileira e no CEPOL/MS) · tutela de urgência deferida · pedido julgado procedente",
    "resultado": "Ato a proferir: apelações do CRM/MS (ID 346218493) e do Estado (ID 346218500) e remessa necessária da sentença ID 346218488; contrarrazões (ID 346218502) ‖ Proposta pelos precedentes: Voto: não conhecer da apelação do Estado; rejeitar ou acolher a preliminar de litisconsórcio do CFM; no mérito, examinar o Parecer 13/2023 à luz do artigo 95 do Código de Ética Médica [VALIDAR] [VALIDAR: Apelação do Estado (peça de outro processo); Admissibilidade do Parecer CFM 14/2025 como documento novo; Intervenção do MPF]",
    "modelo": "Origem: lote adp-remessas · não pautado",
    "variacoes": [
     "VAL"
    ],
-   "observacao": "Apelações do CRM/MS e do Estado e remessa necessária da sentença que anulou o Parecer 13/2023 do CRM/MS e garantiu as perícias do IMOL na Casa da Mulher Brasileira e no CEPOL. O CRM invoca litisconsórcio necessário do CFM; a apelação do Estado, vencedor, reproduz peça de outro processo.",
+   "observacao": "Preliminar de litisconsórcio do CFM e mérito (Parecer 13/2023): voto.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -14920,7 +15132,8 @@
      "mpf": "Interesse público ou social (178, I)",
      "parecer": "Não verificado"
     }
-   }
+   },
+   "observacao_triagem": "Apelações do CRM/MS e do Estado e remessa necessária da sentença que anulou o Parecer 13/2023 do CRM/MS e garantiu as perícias do IMOL na Casa da Mulher Brasileira e no CEPOL. O CRM invoca litisconsórcio necessário do CFM; a apelação do Estado, vencedor, reproduz peça de outro processo."
   }
  ]
 }
