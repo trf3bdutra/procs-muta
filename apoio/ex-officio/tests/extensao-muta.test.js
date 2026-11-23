@@ -668,3 +668,13 @@ test('extensão 0.50: 2ª seta sem duplicados; situação calculada pelas sinali
   assert.match(a, /function derivAutos\(\)/); assert.match(a, /alvo: 'triagem\.Alegações'/); assert.match(a, /alvo: 'triagem\.Síntese Processual'/);
   assert.match(c, /matriz: function \(\) \{ try \{ return C\.dados \? matrizDoProcesso\(\) : null;/);
 });
+
+test('extensão 0.51: Collectio com o PJe aberto — referência na versão final, versões, confronto por seção, veredito, PJe conferido e tag nos cartões', () => {
+  const l = read('extensao/lote.js'), c = read('extensao/conteudo-pje.js');
+  assert.match(l, /function refPadrao\(\)/); assert.match(l, /a\.it\.final && a\.it\.final\.versao/); assert.match(l, /&versoes=1/); assert.match(l, /&versao=/);
+  assert.match(l, /function confrontar\(\)/); assert.match(l, /function qualVersao\(ed, ref\)/); assert.match(l, /acao: 'minuta-pje'/);
+  assert.match(l, /'muta-collectio-conf'/); assert.match(l, /function autoAba\(\)/); assert.match(l, /window\.MutaGerador\.modo\('lote'\)/);
+  assert.match(l, /\[\['cmp', 'Editor × Collectio'/); assert.match(l, /function confVersao\(m\)/);
+  assert.match(c, /function colTag\(k, r, texto\)/); assert.match(c, /'= Collectio' : '≠ Collectio'/);
+  assert.match(read('extensao/conformidade-motor.js'), /cabecalhoPje: cabecalhoPje/); assert.match(read('extensao/conformidade.js'), /contexto: function \(\)/);
+});

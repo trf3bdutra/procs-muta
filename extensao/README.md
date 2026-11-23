@@ -5,6 +5,14 @@ Nome desde a 0.19.3 (antes: Muta). Os identificadores internos (`window.Muta*`, 
 Extensão do Chrome/Edge (Manifest V3) que abre o **Muta** num painel lateral, ao lado dos autos e das tarefas do PJe 2º grau do TRF-3.
 Base: o HTML independente *muta-independente-prontuario-completo* (Prontuário + Acervo).
 
+## O que muda na 0.51 · Collectio com o PJe aberto (gestor)
+
+- Processo de lote abre a aba Minuta já no Collectio (só o gestor, quando ela estava no Comparar); fora de lote, volta ao Comparar. Com o editor à vista, lê e confronta sozinho.
+- Topo: lote, sessão, item, situação, quem minutou e corrigiu (com as datas), **Referência** — a versão final, quando existe; senão, a vigente; qualquer versão pode ser escolhida — e o **veredito**: "PJe igual ao Collectio" ou "N parágrafos diferentes (voto 2, ementa 1)", com a versão em que o PJe está quando é outra ("o Collectio tem versão mais nova, falta colar no PJe").
+- Modos: **Editor × Collectio** (por seção, com contagem; cabeçalho automático do PJe e títulos fora), **Minuta** (todas as versões — final, vigente, no PJe, referência —, texto com Copiar por seção e Conformidade da versão) e **Informações** (perfil no lote, ajustes, pendências, peças e transferir o texto do PJe).
+- **PJe conferido: marcar vN** — quando o PJe é igual à referência, registra no Collectio a versão que está no PJe (ação minuta-pje).
+- Cartões da lista do PJe (gestor, aguardando sessão): tag **= Collectio** / **≠ Collectio** pelo último confronto (`muta-collectio-conf`).
+
 ## O que muda na 0.50 · 2ª seta sem duplicados e com preenchimento automático
 
 - Saíram da 2ª seta: Pendências (é o campo das Sinalizações › Pendência) e Etiquetas do gabinete (as do PJe estão na 1ª seta; as que faltam, em Regras do catálogo). Complexidade só aparece quando calculada.

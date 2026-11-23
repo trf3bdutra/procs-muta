@@ -469,6 +469,7 @@
       '.muta-selos .hs:hover{background:#eef3f7;color:#1f4f6b}' +
       '.muta-selos .hs b{position:absolute;top:-5px;right:-5px;min-width:13px;height:13px;padding:0 3px;box-sizing:border-box;border-radius:7px;background:#e8710a;color:#fff;font:800 9px/13px system-ui,sans-serif;text-align:center}' +
       '.muta-selos .hs-vz{opacity:.55}.muta-selos .hs-vz:hover{opacity:1}' +
+      '.muta-selos .hs-col{display:inline-flex;align-items:center;font:700 10px/16px system-ui,sans-serif;padding:0 6px;border-radius:8px;margin-right:3px;border:1px solid}.muta-selos .hs-col.ok{color:#2e7d32;border-color:#2e7d32;background:#e8f5e9}.muta-selos .hs-col.dif{color:#b45309;border-color:#d97706;background:#fff7ed}' +
       '.muta-selos .hs-eq{display:inline-flex;gap:3px;align-items:center;margin-right:2px}.muta-selos .hs-eq>span{display:inline-flex;align-items:center;gap:3px;font:600 10.5px/16px system-ui,sans-serif;color:#2b4556;background:#eef3f7;border:1px solid #d3dde6;border-radius:9px;padding:0 6px 0 2px;white-space:nowrap}.muta-selos .hs-eq i{font:800 9px/13px system-ui,sans-serif;font-style:normal;color:#fff;background:#4a7ea6;border-radius:50%;width:13px;height:13px;text-align:center}.muta-selos .hs-eq>span+span i{background:#2e7d5b}' +
       '.muta-selos .hs-al{color:#b0402f}.muta-selos .hs-al b{background:#c62828}.muta-selos .hs-mu b{background:#4a7ea6}' +
       '.muta-selos .hf{flex-basis:100%;display:flex;flex-wrap:wrap;align-items:center;gap:4px;margin:1px 0}' +
@@ -571,6 +572,15 @@
   function botaoVazio(k) { return '<button type="button" class="hs hs-vz" data-hero-sin="pd" data-hero-k="' + k + '" title="Sinalizações: nenhuma. Clique para incluir pendência, intercorrência ou nota">' + ico('sino', 15) + '</button>'; }
   /* 0.41 · processos aguardando sessão: quem minutou e quem corrigiu, na faixa do topo do cartão */
   function aguardandoSessao(r, texto) { return /aguardando\s+(a\s+)?sess[ãa]o/i.test(((r && r.tarefa) || '') + ' ' + (texto || '').slice(0, 1500) + ' ' + tarefaAberta()); }
+  /* 0.51 · para o gestor, nos aguardando sessão: o último confronto do editor do PJe com o Collectio (aba Minuta › Collectio) */
+  var COLC = { c: {}, g: false };
+  try { chrome.storage.local.get(['muta-collectio-conf', 'muta-gestor']).then(function (o) { COLC.c = o['muta-collectio-conf'] || {}; COLC.g = !!o['muta-gestor']; if (COLC.g) agendarSelos(); }).catch(function () {});
+    chrome.storage.onChanged.addListener(function (ch, area) { if (area === 'local' && (ch['muta-collectio-conf'] || ch['muta-gestor'])) { if (ch['muta-collectio-conf']) COLC.c = ch['muta-collectio-conf'].newValue || {}; if (ch['muta-gestor']) COLC.g = !!ch['muta-gestor'].newValue; agendarSelos(); } }); } catch (e) {}
+  function colTag(k, r, texto) {
+    var x = COLC.g && COLC.c[k]; if (!x || !aguardandoSessao(r, texto)) return '';
+    var d = String(x.em || '').slice(0, 10).split('-').reverse().join('/');
+    return '<span class="hs-col ' + (x.igual ? 'ok' : 'dif') + '" title="Editor do PJe × Collectio (' + escS(x.ref || '') + '), conferido em ' + escS(d) + (x.igual ? ': igual' : ': ' + x.n + ' parágrafo(s) diferente(s)') + '">' + (x.igual ? '= Collectio' : '≠ Collectio') + '</span>';
+  }
   function equipeHtml(r, texto) {
     if (!r || !aguardandoSessao(r, texto) || !(r.servidor || r.corretor)) return '';
     var nm = function (x) { return String(x || '').split(/\s+/)[0]; };
@@ -742,7 +752,7 @@
       /* botões de sinalização na faixa do topo do cartão (onde o PJe põe datas e ícones); sem sinalização, o botão discreto;
          aguardando sessão, também quem minutou e quem corrigiu */
       var rp = window.MutaEtiquetas ? window.MutaEtiquetas.preparar(Object.assign({ _k: c.k }, r)) : r;
-      topoSinais(c, (dev ? '' : equipeHtml(rp, texto)) + ((ENR.sin || {})[c.k] || botaoVazio(c.k)));
+      topoSinais(c, (dev ? '' : equipeHtml(rp, texto)) + colTag(c.k, rp, texto) + ((ENR.sin || {})[c.k] || botaoVazio(c.k)));
     });
     diag(C);
     try { sinaisCabecalho(); } catch (e) {}

@@ -1402,3 +1402,19 @@ html[data-tema=escuro] .sn-st.av,html[data-tema=escuro] .sn-tp.av{background:#16
 .pm-sitv.ok{color:var(--ok);border-color:var(--ok)}.pm-sitv.pend{color:var(--gold);border-color:var(--gold)}
 .pm-sitj small{font-size:10.5px}
 .pm-auto{margin:8px 0 2px}
+/* 0.51: Collectio com o PJe aberto — referência, veredito, Editor × Collectio por seção, versões */
+.lt-refbar{align-items:center;gap:8px;flex-wrap:wrap}.lt-ref{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted-fg);flex:1 1 200px}
+.lt-ref select{flex:1;min-width:0;font:inherit;font-size:12px;padding:4px 6px;border:1px solid var(--input);border-radius:6px;background:var(--card);color:var(--fg)}
+.lt-vd{margin:4px 0 0;font-size:12.5px;padding:6px 9px;border-radius:7px;border:1px solid var(--line)}
+.lt-vd.ok{border-color:var(--ok);color:var(--ok);background:color-mix(in srgb,var(--ok) 8%,transparent)}
+.lt-vd.dif{border-color:var(--gold);background:color-mix(in srgb,var(--gold) 8%,transparent)}.lt-vd.dif2{border:0;padding:2px 9px;font-size:11.5px;color:var(--gold)}
+.lt-vd.err{border-color:var(--danger);color:var(--danger)}
+.lt-ac{gap:8px;align-items:center;flex-wrap:wrap;margin-top:6px}.lt-ac small{font-size:10.5px}
+.lt-modos{margin:10px 0 0}.lt-corpo{margin-top:6px;display:grid;gap:8px}.lt-corpo:empty{display:none}
+.lt-secs button i{font-style:normal;font-size:10px;margin-left:3px;padding:0 5px;border-radius:8px}.lt-secs i.dif{background:var(--gold);color:#1b1b1b}.lt-secs i.ok{color:var(--ok)}
+.lt-vers{display:grid;gap:4px}.lt-v{all:unset;cursor:pointer;display:flex;flex-wrap:wrap;gap:4px 6px;align-items:center;padding:5px 8px;border:1px solid var(--line);border-radius:7px;font-size:12px}
+.lt-v.on{border-color:var(--primary);box-shadow:inset 3px 0 0 var(--primary)}.lt-v small{flex:1 1 100%;color:var(--muted-fg);font-size:10.5px}
+.lt-v i{font-style:normal;font-size:9.5px;font-weight:700;padding:0 5px;border-radius:7px;border:1px solid var(--line)}.lt-v i.f{color:var(--ok);border-color:var(--ok)}.lt-v i.p{color:var(--primary);border-color:var(--primary)}.lt-v i.r{color:var(--gold);border-color:var(--gold)}
+.lt-conf summary{cursor:pointer;font-size:12px;display:flex;gap:6px;align-items:center;flex-wrap:wrap}.lt-cn{font-size:10px;padding:0 6px;border-radius:8px;border:1px solid var(--line)}
+.lt-cn.a{color:var(--danger);border-color:var(--danger)}.lt-cn.m{color:var(--gold);border-color:var(--gold)}
+.lt-conf ul{margin:6px 0 0;padding-left:16px;font-size:11.5px;display:grid;gap:3px}.lt-conf li.alta b{color:var(--danger)}.lt-conf li.media b{color:var(--gold)}

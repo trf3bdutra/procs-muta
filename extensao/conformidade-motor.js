@@ -454,6 +454,6 @@ function analisar(paragrafos, ctx) {
   var nota = Math.max(0, 100 - 12 * resumo.alta - 4 * resumo.media - Math.min(20, resumo.baixa));
   return { peca: peca, itens: itens, resumo: resumo, nota: nota, resultado: resV || resEm || resA || '', partes: { relatorio: P.relatorio.length, voto: P.voto.length, ementa: P.ementa.length, acordao: P.acordao.length } };
 }
-var API = { analisar: analisar, resultadoDe: resultadoDe, resultadoProntuario: resultadoProntuario, partes: partes, RES_TXT: RES_TXT, CACA: CACA };
+var API = { analisar: analisar, cabecalhoPje: cabecalhoPje, resultadoDe: resultadoDe, resultadoProntuario: resultadoProntuario, partes: partes, RES_TXT: RES_TXT, CACA: CACA };
 if (typeof module !== 'undefined' && module.exports) module.exports = API; else raiz.MutaConformidadeMotor = API;
 })(typeof window !== 'undefined' ? window : this);

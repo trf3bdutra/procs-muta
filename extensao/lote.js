@@ -16,11 +16,11 @@ function dg(v) { return String(v || '').replace(/\D/g, ''); }
 function brD(v) { var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(String(v || '')); return m ? m[3] + '/' + m[2] + '/' + m[1] : String(v || ''); }
 var caixa = $('lote-app');
 var C = { lista: null, lotes: {}, t: 0, carregando: null, erro: '' };   /* cache por 3 minutos */
-var V = { chave: '', achados: [], sel: 0, minuta: {}, tok: 0 };
-var CP = { texto: '', fonte: '', colado: false, sec: 'auto', ws: true, sd: true, lendo: false, erro: '' };
+var V = { chave: '', achados: [], sel: 0, minuta: {}, tok: 0, modo: 'cmp', vers: {}, vtx: {}, ref: {}, verv: {}, conf: {}, secv: '', msg: '' };
+var CP = { texto: '', ps: null, fonte: '', colado: false, sec: 'auto', ws: true, sd: true, lendo: false, erro: '' };
 var SECS = [['relatorio', 'Relatório'], ['voto', 'Voto'], ['ementa', 'Ementa'], ['acordao', 'Acórdão']];
 
-function aberta() { var m = $('panel-min'), d = $('panel-lote'); return !!(m && !m.hidden && d && d.open); }
+function aberta() { var m = $('panel-min'), d = $('panel-lote'); return !!(m && !m.hidden && d && d.open && !d.hidden); }
 function api(q) { return ses.api('/api/painel?lote=1' + (q ? '&' + q : '')); }
 function base(forcar) {
   if (C.carregando) return C.carregando;
@@ -41,6 +41,15 @@ function procurar(chave) {
   });
   return out.sort(function (a, b) { return String(b.it.sessao).localeCompare(String(a.it.sessao)); });
 }
+/* índice das versões e minuta vigente do processo; com o editor do PJe à vista, lê e confronta sozinho */
+function prepararAchado() {
+  var a = V.achados[V.sel]; if (!a) return;
+  Promise.all([carregarIndice(), new Promise(function (ok) { minuta(a.lote.id, a.it, ok); })]).then(function () {
+    render();
+    var tela = window.MutaPje && window.MutaPje.tela ? window.MutaPje.tela() : '';
+    if (!CP.texto && !CP.lendo && (tela === 'editor' || tela === '')) lerEditor(); else if (CP.texto) confrontar();
+  });
+}
 function atualizar(forcar) {
   if (!caixa || !aberta()) return;
   var s = ses.estado();
@@ -52,8 +61,9 @@ function atualizar(forcar) {
     if (tok !== V.tok) return;
     var k = br.chaveAtual(), nova = (k && k !== 'avulso' ? k : '');
     if (nova !== V.chave) { CP.texto = ''; CP.fonte = ''; CP.colado = false; CP.erro = ''; CP.sec = 'auto'; }
+    if (nova !== V.chave) { CP.ps = null; V.msg = ''; }
     V.chave = nova; V.achados = V.chave ? procurar(V.chave) : []; V.sel = 0;
-    render();
+    render(); prepararAchado();
   });
 }
 
@@ -118,31 +128,156 @@ function comparar(m) {
   st.textContent = (npar ? npar + ' parágrafo' + (npar > 1 ? 's' : '') + ' com diferença · ' + (tot ? Math.round(100 * ig / tot) : 100) + '% igual' : 'Textos iguais') + ' · comparado com: ' + parte + (CP.sec === 'auto' ? ' (automático)' : '');
 }
 function lerEditor() {
-  if (!window.MutaPje || !window.MutaPje.lerEditor) return;
-  CP.lendo = true; CP.erro = ''; desenhaCmp();
-  window.MutaPje.lerEditor().then(function (r) {
-    CP.texto = r.texto; CP.fonte = r.fonte + (r.outros ? ' · ' + (r.outros + 1) + ' editores na página; usado o maior visível' : ''); CP.colado = false;
+  if (!window.MutaPje || !window.MutaPje.lerEditor) return Promise.resolve();
+  CP.lendo = true; CP.erro = ''; desenha();
+  return window.MutaPje.lerEditor().then(function (r) {
+    CP.texto = r.texto; CP.ps = r.paragrafos || null; CP.fonte = r.fonte + (r.outros ? ' · ' + (r.outros + 1) + ' editores na página; usado o maior visível' : ''); CP.colado = false;
     if (r.numero && dg(r.numero) !== V.chave) CP.erro = 'Atenção: o editor lido está nos autos ' + r.numero + ', não no processo do lote.';
-  }).catch(function (e) { CP.erro = e.message; }).then(function () { CP.lendo = false; desenhaCmp(); });
+  }).catch(function (e) { CP.erro = e.message; }).then(function () { CP.lendo = false; confrontar(); desenha(); });
 }
 function minutaAtual() { var a = V.achados[V.sel]; if (!a) return null; return V.minuta[a.lote.id + '/' + String(a.it.processo).slice(0, 10)] || null; }
-function desenhaCmp() {
-  var box = $('lt-cmp'); if (!box) return;
-  var m = minutaAtual(), tem = m && m.secoes;
-  box.innerHTML = '<div class="cp-h"><h3 class="display">Minuta do lote × editor do PJe</h3></div>' +
-    (tem ? '' : '<p class="muted">' + (m && m.erro ? esc(m.erro) : 'Abrindo a minuta do lote…') + '</p>') +
-    '<div class="bar cp-bar"><button type="button" class="btn solid" data-cp="ler"' + (CP.lendo ? ' disabled' : '') + '>' + (CP.lendo ? 'Lendo o editor…' : CP.texto && !CP.colado ? 'Ler de novo' : 'Ler o editor do PJe') + '</button>' +
-    '<select data-cp="sec" title="Parte da minuta do lote"><option value="auto">Parte: automático</option><option value="*">Minuta inteira</option>' + SECS.map(function (s) { return '<option value="' + s[0] + '">' + s[1] + '</option>'; }).join('') + '</select></div>' +
-    '<div class="bar cp-opc"><label><input type="checkbox" data-cp="ws"' + (CP.ws ? ' checked' : '') + '> ignorar espaços, aspas e travessões</label><label><input type="checkbox" data-cp="sd"' + (CP.sd ? ' checked' : '') + '> só as diferenças</label></div>' +
-    (CP.erro ? '<p class="status err">' + esc(CP.erro) + '</p>' : '') +
-    (CP.texto && !CP.colado ? '<p class="muted cp-fonte">Texto lido do PJe (' + esc(CP.fonte) + ') · ' + CP.texto.split(/\s+/).length + ' palavras</p>' : '') +
-    '<details class="cp-colar"' + (CP.colado ? ' open' : '') + '><summary>Colar o texto em vez de ler o editor</summary><textarea data-cp="txt" placeholder="Cole aqui a minuta do editor do PJe">' + (CP.colado ? esc(CP.texto) : '') + '</textarea></details>' +
-    '<div class="cx-lg"><span><del>riscado</del> está na minuta do lote e falta no editor</span><span><ins>verde</ins> está só no editor do PJe</span></div>' +
-    '<p class="status" id="cp-st" role="status" aria-live="polite"></p><div class="cx-out" id="cp-out"></div>';
-  var s = box.querySelector('[data-cp=sec]'); if (s) s.value = CP.sec;
-  if (tem) comparar(m);
-}
 
+/* ---------- 0.51 · versões, referência e confronto com o editor do PJe ----------
+   Referência: a versão final, quando existe (o texto do PJe conferido depois da liberação); senão, a vigente. Qualquer versão pode
+   ser vista e comparada. O confronto é por seção (relatório, voto, ementa, acórdão); o cabeçalho automático do PJe fica de fora. */
+function chaveMin() { var a = V.achados[V.sel]; return a ? a.lote.id + '/' + String(a.it.processo).slice(0, 10) : ''; }
+function indice() { return V.vers[chaveMin()] || null; }
+function rotV(x) { return x ? x.id + (x.rotulo ? ' · ' + x.rotulo : '') + (x.final ? ' · final' : '') + (x.pje ? ' · no PJe' : '') : ''; }
+function refPadrao() {
+  var a = V.achados[V.sel], I = indice(); if (!a) return 'vig';
+  var L = (I && I.versoes) || [], fin = (a.it.final && a.it.final.versao) || ((L.filter(function (x) { return x.final; }).slice(-1)[0] || {}).id);
+  return fin || (I && I.vigente) || 'vig';
+}
+function refAtual() { var k = chaveMin(); return V.ref[k] || refPadrao(); }
+function carregarIndice() {
+  var a = V.achados[V.sel], k = chaveMin(); if (!a || V.vers[k]) return Promise.resolve(V.vers[k]);
+  return api('id=' + encodeURIComponent(a.lote.id) + '&minuta=' + encodeURIComponent(String(a.it.processo).slice(0, 10)) + '&versoes=1')
+    .then(function (I) { V.vers[k] = I || { versoes: [] }; return V.vers[k]; }, function () { V.vers[k] = { versoes: [], erro: 1 }; return V.vers[k]; });
+}
+/* texto de uma versão ('vig' ou a vigente = a minuta do lote, já lida) */
+function textoVersao(v) {
+  var a = V.achados[V.sel], k = chaveMin(), I = indice(); if (!a) return Promise.resolve(null);
+  if (v === 'vig' || (I && v === I.vigente)) return V.minuta[k] ? Promise.resolve(V.minuta[k]) : new Promise(function (ok) { minuta(a.lote.id, a.it, ok); });
+  var kv = k + '#' + v; if (V.vtx[kv]) return Promise.resolve(V.vtx[kv]);
+  return api('id=' + encodeURIComponent(a.lote.id) + '&minuta=' + encodeURIComponent(String(a.it.processo).slice(0, 10)) + '&versao=' + encodeURIComponent(v))
+    .then(function (m) { V.vtx[kv] = m; return m; }, function (e) { return { erro: e.message }; });
+}
+function secoesEd() {
+  var ps = CP.ps && CP.ps.length ? CP.ps : String(CP.texto || '').split(/\n+/).map(function (t) { return { t: t }; });
+  var MO = window.MutaConformidadeMotor, CX = window.MutaComparador;
+  ps = ps.filter(function (p) { var t = String(p.t || '').trim(); return t && !(MO && MO.cabecalhoPje && MO.cabecalhoPje(t)); });
+  var P = CX && CX.partes ? CX.partes(ps) : { achou: false }, o = {};
+  if (!P.achou) return null;
+  SECS.forEach(function (sx) { o[sx[0]] = (P[sx[0]] || []).map(function (p) { return String(p.t || '').trim(); }).filter(function (t) { return t && !TITULO.test(t); }); });
+  return o;
+}
+function linhasSec(m, k) { var v = (m.secoes || {})[k]; return (Array.isArray(v) ? v : String(v || '').split(/\n+/)).map(function (x) { return String(x).trim(); }).filter(function (t) { return t && !TITULO.test(t); }); }
+/* diferença de uma seção: parágrafos (LCS) e, dentro do parágrafo, palavras */
+function difSec(PA, PB) {
+  var ws = CP.ws, sd = CP.sd;
+  if (PA.length * PB.length > 250000) return { npar: -1, h: '<p class="none">Seção grande demais para comparar de uma vez.</p>' };
+  var ops = lcs(PA, PB, function (x, y) { return nrm(x, ws) === nrm(y, ws); }), h = '', ig = 0, tot = 0, eqn = 0, dl = [], ad = [], npar = 0;
+  function flushEq() { if (eqn) { h += '<p class="eq">' + eqn + ' parágrafo' + (eqn > 1 ? 's iguais' : ' igual') + '</p>'; eqn = 0; } }
+  function flush() {
+    var n = Math.max(dl.length, ad.length);
+    for (var i = 0; i < n; i++) {
+      if (dl[i] != null && ad[i] != null) { var d = difPal(dl[i], ad[i], ws); h += '<p>' + d.h + '</p>'; ig += d.igual; tot += d.tot; npar++; }
+      else if (dl[i] != null) { h += '<p><del>' + esc(dl[i]) + '</del></p>'; tot += dl[i].split(/\s+/).length; npar++; }
+      else { h += '<p><ins>' + esc(ad[i]) + '</ins></p>'; tot += ad[i].split(/\s+/).length; npar++; }
+    }
+    dl = []; ad = [];
+  }
+  ops.forEach(function (o) { if (o[0] === '=') { flush(); var w = o[1].split(/\s+/).length; ig += w; tot += w; if (sd) eqn++; else h += '<p class="so">' + esc(o[1]) + '</p>'; } else { flushEq(); (o[0] === '-' ? dl : ad).push(o[1]); } });
+  flush(); flushEq();
+  return { npar: npar, pct: tot ? Math.round(100 * ig / tot) : 100, h: h || '<p class="none">Sem diferenças.</p>' };
+}
+/* confronto do editor com a referência; se diverge, procura entre as outras versões já conhecidas qual é a do PJe */
+function confrontar() {
+  var k = chaveMin(); if (!k) return;
+  if (!CP.texto.trim()) { V.conf[k] = null; desenha(); return; }
+  var ref = refAtual(), ed = secoesEd();
+  textoVersao(ref).then(function (m) {
+    if (!m || m.erro || !m.secoes) { V.conf[k] = { erro: (m && m.erro) || 'Versão sem texto.' }; desenha(); return; }
+    var R = { ref: ref, secs: {}, total: 0, porSec: !!ed };
+    if (ed) SECS.forEach(function (sx) { var PA = linhasSec(m, sx[0]), PB = ed[sx[0]] || []; if (!PA.length && !PB.length) return; var d = difSec(PA, PB); R.secs[sx[0]] = d; if (d.npar > 0) R.total += d.npar; });
+    else { var PA = [], PB = paragrafosEditor(CP.texto); SECS.forEach(function (sx) { PA = PA.concat(linhasSec(m, sx[0])); }); var d = difSec(PA, PB); R.secs['*'] = d; R.total = Math.max(0, d.npar); }
+    V.conf[k] = R; if (!R.secs[V.secv]) V.secv = (Object.keys(R.secs).filter(function (s) { return R.secs[s].npar; })[0]) || Object.keys(R.secs)[0];
+    guardarConf(R); desenha();
+    if (R.total && ed) qualVersao(ed, ref).then(function (v) { if (V.conf[k] === R) { R.pjeEm = v; desenha(); } });
+  });
+}
+function qualVersao(ed, ref) {
+  var I = indice(), cands = ((I && I.versoes) || []).map(function (x) { return x.id; }).filter(function (v) { return v !== ref; }).reverse().slice(0, 6);
+  var igual = function (m) { return m && m.secoes && SECS.every(function (sx) { var A = linhasSec(m, sx[0]), B = ed[sx[0]] || []; return A.length === B.length && A.every(function (x, i) { return nrm(x, true) === nrm(B[i], true); }); }); };
+  return cands.reduce(function (p, v) { return p.then(function (ach) { return ach || textoVersao(v).then(function (m) { return igual(m) ? v : ''; }); }); }, Promise.resolve(''));
+}
+/* o último confronto, para a tag "= Collectio" / "≠ Collectio" nos cartões da lista do PJe (conteudo-pje.js) */
+function guardarConf(R) {
+  try {
+    if (typeof chrome === 'undefined' || !chrome.storage || !chrome.storage.local) return;
+    chrome.storage.local.get('muta-collectio-conf').then(function (o) {
+      var c = o['muta-collectio-conf'] || {}; c[V.chave] = { igual: !R.total, n: R.total, ref: R.ref, em: new Date().toISOString() };
+      var ks = Object.keys(c); if (ks.length > 400) ks.sort(function (a, b) { return String(c[a].em).localeCompare(String(c[b].em)); }).slice(0, ks.length - 400).forEach(function (x) { delete c[x]; });
+      return chrome.storage.local.set({ 'muta-collectio-conf': c });
+    }).catch(function () {});
+  } catch (e) {}
+}
+function veredito() {
+  var k = chaveMin(), R = V.conf[k], I = indice(), L = (I && I.versoes) || [], ref = refAtual(), rx = L.filter(function (x) { return x.id === ref; })[0];
+  var nomeRef = rx ? rotV(rx) : 'vigente';
+  if (CP.lendo) return '<p class="lt-vd">Lendo o editor do PJe…</p>';
+  if (!CP.texto.trim()) return '<p class="lt-vd muted">' + (CP.erro ? esc(CP.erro) + ' · ' : '') + 'Abra a minuta no editor do PJe e toque em Ler para conferir com o Collectio.</p>';
+  if (!R) return '<p class="lt-vd">Conferindo…</p>';
+  if (R.erro) return '<p class="lt-vd err">' + esc(R.erro) + '</p>';
+  if (!R.total) return '<p class="lt-vd ok"><b>PJe igual ao Collectio</b> · referência ' + esc(nomeRef) + '</p>';
+  var por = Object.keys(R.secs).filter(function (s) { return R.secs[s].npar > 0; }).map(function (s) { return (s === '*' ? 'minuta' : SECS.filter(function (x) { return x[0] === s; })[0][1].toLowerCase()) + ' ' + R.secs[s].npar; }).join(', ');
+  var pj = R.pjeEm ? L.filter(function (x) { return x.id === R.pjeEm; })[0] : null;
+  return '<p class="lt-vd dif"><b>' + R.total + ' parágrafo' + (R.total > 1 ? 's diferentes' : ' diferente') + '</b> (' + esc(por) + ') · referência ' + esc(nomeRef) + '</p>' +
+    (pj ? '<p class="lt-vd dif2">O texto do PJe é a ' + esc(rotV(pj)) + (String(pj.em || '') < String((rx || {}).em || '') ? ': o Collectio tem versão mais nova, falta colar no PJe' : '') + '.</p>' : '');
+}
+function desenha() { if (!$('lt-corpo')) return; var h = $('lt-vd-box'); if (h) h.innerHTML = veredito() + acoesVd(); var c = $('lt-corpo'); c.innerHTML = corpo(); }
+function acoesVd() {
+  var a = V.achados[V.sel], R = V.conf[chaveMin()], ref = refAtual(); if (!a) return '';
+  var podePje = R && !R.erro && !R.total && ref !== 'vig' && !(a.it.pje && a.it.pje.versao === ref);
+  return '<div class="bar lt-ac"><button type="button" class="btn sm" data-cp="ler"' + (CP.lendo ? ' disabled' : '') + '>' + (CP.texto && !CP.colado ? 'Ler de novo' : 'Ler o editor') + '</button>' +
+    (podePje ? '<button type="button" class="btn sm solid" data-lt="pje" title="Registra no Collectio que esta é a versão que está no PJe (e a data da correção, se faltava)">PJe conferido: marcar ' + esc(ref) + '</button>' : '') +
+    (a.it.pje ? '<small class="muted">no PJe: ' + esc(a.it.pje.versao) + (a.it.pje.em ? ' em ' + brD(a.it.pje.em) : '') + (a.it.pje.por ? ' por ' + esc(a.it.pje.por) : '') + '</small>' : '') + '</div>';
+}
+function corpo() {
+  var m = V.modo;
+  if (m === 'min') return corpoMinuta();
+  if (m === 'inf') return '';
+  var R = V.conf[chaveMin()];
+  if (!CP.texto.trim()) return '<details class="cp-colar"><summary>Colar o texto em vez de ler o editor</summary><textarea data-cp="txt" placeholder="Cole aqui a minuta do editor do PJe"></textarea></details>';
+  if (!R || R.erro) return '';
+  var ks = Object.keys(R.secs);
+  return (ks.length > 1 ? '<div class="seg pmodos lt-secs" role="tablist">' + ks.map(function (s) { var d = R.secs[s]; return '<button type="button" role="tab" data-secv="' + s + '" aria-selected="' + (V.secv === s) + '">' + (s === '*' ? 'Minuta' : SECS.filter(function (x) { return x[0] === s; })[0][1]) + ' <i class="' + (d.npar ? 'dif' : 'ok') + '">' + (d.npar ? d.npar : '=') + '</i></button>'; }).join('') + '</div>' : '') +
+    '<div class="bar cp-opc"><label><input type="checkbox" data-cp="ws"' + (CP.ws ? ' checked' : '') + '> ignorar espaços, aspas e travessões</label><label><input type="checkbox" data-cp="sd"' + (CP.sd ? ' checked' : '') + '> só as diferenças</label></div>' +
+    '<div class="cx-lg"><span><del>riscado</del> só no Collectio</span><span><ins>verde</ins> só no PJe</span></div>' +
+    '<div class="cx-out">' + ((R.secs[V.secv] || R.secs[ks[0]] || {}).h || '') + '</div>' +
+    (CP.texto && !CP.colado ? '<p class="muted cp-fonte">Texto lido do PJe (' + esc(CP.fonte) + ')' + (R.porSec ? '' : ' · sem os títulos RELATÓRIO, VOTO, EMENTA e ACÓRDÃO no editor: comparada a minuta inteira') + '</p>' : '');
+}
+/* Minuta: as versões e o texto da escolhida, com Copiar por seção e a Conformidade da versão */
+function corpoMinuta() {
+  var I = indice(), L = ((I && I.versoes) || []).slice().reverse(), ref = refAtual(), vv = V.verv[chaveMin()] || ref;
+  var lista = L.length ? '<div class="lt-vers">' + L.map(function (x) { return '<button type="button" class="lt-v' + (x.id === vv ? ' on' : '') + '" data-verv="' + esc(x.id) + '"><b>' + esc(x.id) + '</b>' + (x.final ? '<i class="f">final</i>' : '') + (x.pje ? '<i class="p">no PJe</i>' : '') + (I.vigente === x.id ? '<i class="vg">vigente</i>' : '') + (x.id === ref ? '<i class="r">referência</i>' : '') + '<small>' + esc(x.rotulo || '') + (x.em ? ' · ' + brD(x.em) : '') + '</small></button>'; }).join('') + '</div>'
+    : '<p class="muted">Só a versão vigente (sem histórico de versões).</p>';
+  var m = V.vtx[chaveMin() + '#' + vv] || ((vv === 'vig' || (I && vv === I.vigente)) ? minutaAtual() : null);
+  if (!m) { textoVersao(vv).then(function () { if (V.modo === 'min') desenha(); }); return lista + '<p class="muted">Abrindo a versão…</p>'; }
+  if (m.erro) return lista + '<p class="status err">' + esc(m.erro) + '</p>';
+  var tem = SECS.filter(function (sx) { return linhasSec(m, sx[0]).length; });
+  var conf = confVersao(m);
+  return lista + '<div class="bar lt-vb">' + (vv !== ref ? '<button type="button" class="btn sm" data-lt="ref" data-v="' + esc(vv) + '">Usar como referência</button>' : '<small class="muted">é a referência do confronto</small>') + '</div>' + conf +
+    tem.map(function (sx) { return '<details class="gg"><summary><h4>' + sx[1] + '</h4><button type="button" class="btn line sm" data-copsecv="' + sx[0] + '">Copiar</button></summary><pre class="lt-txt">' + esc(linhasSec(m, sx[0]).join('\n\n')) + '</pre></details>'; }).join('');
+}
+function confVersao(m) {
+  var MO = window.MutaConformidadeMotor; if (!MO || !MO.analisar) return '';
+  var ps = []; SECS.forEach(function (sx) { var L = linhasSec(m, sx[0]); if (L.length) { ps.push({ t: sx[1].toUpperCase() }); L.forEach(function (t) { ps.push({ t: t }); }); } });
+  var R; try { var ctx = window.MutaConformidade && window.MutaConformidade.contexto ? window.MutaConformidade.contexto() : {}; R = MO.analisar(ps, ctx); } catch (e) { return ''; }
+  var it = (R && R.itens) || [], n = { alta: 0, media: 0, baixa: 0 }; it.forEach(function (x) { n[x.sev] = (n[x.sev] || 0) + 1; });
+  return '<details class="lt-conf"><summary><b>Conformidade desta versão</b> <span class="lt-cn a">' + n.alta + ' alta</span><span class="lt-cn m">' + n.media + ' média</span><span class="lt-cn b">' + n.baixa + ' baixa</span></summary>' +
+    (it.length ? '<ul>' + it.slice(0, 14).map(function (x) { return '<li class="' + esc(x.sev) + '"><b>' + esc(x.grupo || '') + '</b> ' + esc(x.msg || '') + '</li>'; }).join('') + '</ul>' + (it.length > 14 ? '<small class="muted">e mais ' + (it.length - 14) + ' na aba Conformidade, depois de colar no PJe</small>' : '') : '<p class="muted">Nada a apontar.</p>') + '</details>';
+}
 /* ---------- desenho ---------- */
 function campo(rotulo, v) { return v ? '<div class="lt-f"><span class="gl">' + esc(rotulo) + '</span><div>' + esc(v) + '</div></div>' : ''; }
 function tabelaAjustes(aj) {
@@ -161,21 +296,30 @@ function render() {
   var num = Muta.formatarCnj(V.chave);
   if (!V.achados.length) { caixa.innerHTML = '<div class="empty"><h3>' + esc(num) + ' não está em nenhum lote</h3>Ou ainda não está visível para a equipe.</div>' + (lotes.length ? '<p class="muted">Lotes do gabinete:</p>' + links : ''); return; }
   if (V.achados.length > 1) h += '<div class="seg lt-sel">' + V.achados.map(function (a, i) { return '<button type="button" data-i="' + i + '" aria-selected="' + (i === V.sel) + '">' + esc(a.lote.titulo) + ' · ' + brD(a.it.sessao) + '</button>'; }).join('') + '</div>';
-  var a = V.achados[V.sel], l = a.lote, it = a.it, eq = it.equipe || {};
-  var cols = {}; (l.colunas || []).forEach(function (c) { cols[c.id] = c.rotulo; });
+  var a = V.achados[V.sel], l = a.lote, it = a.it, eq = it.equipe || {}, dt = eq.datas || {};
   var grupo = (l.grupos || []).filter(function (g) { return g.id === it.grupo; })[0];
   var cor = grupo ? grupo.cor : ((l.grupo_outros || {}).cor || '#9aa0a8');
+  var I = indice(), L = (I && I.versoes) || [], ref = refAtual();
+  var selRef = L.length ? '<label class="lt-ref">Referência <select data-lt="refsel">' + L.slice().reverse().map(function (x) { return '<option value="' + esc(x.id) + '"' + (x.id === ref ? ' selected' : '') + '>' + esc(rotV(x)) + (I.vigente === x.id ? ' · vigente' : '') + '</option>'; }).join('') + '</select></label>' : '<small class="muted">referência: vigente (sem histórico)</small>';
+  var pes = function (rot, nome, d) { return nome ? '<span class="chip">' + rot + ': ' + esc(nome) + (d ? ' · ' + brD(d) : '') + '</span>' : ''; };
   h += '<article class="card lt" style="border-left:4px solid ' + esc(cor) + '">' +
     '<p class="kicker">' + esc(l.titulo) + ' · sessão de ' + brD(it.sessao) + ' · item ' + esc(it.item) + '</p>' +
     '<h2 class="display">' + esc(it.tipo_caso || (grupo && grupo.rotulo) || 'Processo do lote') + '</h2>' +
     '<div class="mono">' + esc(it.processo) + '</div><div class="muted">' + esc(it.recurso || '') + (it.partes ? ' · ' + esc(it.partes) : '') + '</div>' +
-    '<div class="bar"><span class="chip">' + esc(eq.situacao || '—') + '</span>' + (eq.minuta ? '<span class="chip">Minuta: ' + esc(eq.minuta) + '</span>' : '') + (eq.correcao ? '<span class="chip">Correção: ' + esc(eq.correcao) + '</span>' : '') + '</div>' +
-    '<div class="bar"><a class="btn line" target="_blank" rel="noopener noreferrer" href="' + SITE + '/amicus/collectio/?id=' + encodeURIComponent(l.id) + '#p=' + encodeURIComponent(it.sessao + '-' + it.item) + '">Abrir no Collectio</a><button type="button" class="btn line" data-atu>Atualizar</button></div>' +
+    '<div class="bar"><span class="chip">' + esc(eq.situacao || '—') + (dt.liberacao && /libera/i.test(eq.situacao || '') ? ' · ' + brD(dt.liberacao) : '') + '</span>' + pes('Minuta', eq.minuta, dt.minuta) + pes('Correção', eq.correcao, dt.correcao) + (dt.liberacao && !/libera/i.test(eq.situacao || '') ? '<span class="chip">Liberada · ' + brD(dt.liberacao) + '</span>' : '') + (it.final ? '<span class="chip">Final · ' + esc(it.final.versao) + '</span>' : '') + '</div>' +
+    '<div class="bar lt-refbar">' + selRef + '<a class="btn line sm" target="_blank" rel="noopener noreferrer" href="' + SITE + '/amicus/collectio/?id=' + encodeURIComponent(l.id) + '#p=' + encodeURIComponent(it.sessao + '-' + it.item) + '">Abrir no Collectio</a><button type="button" class="btn line sm" data-atu>Atualizar</button></div>' +
+    '<div id="lt-vd-box">' + veredito() + acoesVd() + '</div>' +
+    (V.msg ? '<p class="status' + (/^Não/.test(V.msg) ? ' err' : ' ok') + '">' + esc(V.msg) + '</p>' : '') +
     '</article>' +
-    '<section class="card lt-cmp" id="lt-cmp"></section>' +
-    txHtml(l, it) +
-    '<section class="card lt-min" id="lt-min"><div class="empty">Abrindo a minuta do lote…</div></section>' +
-    '<details class="card lt-perfil"><summary><h3 class="display">Perfil do processo no lote</h3></summary>' +
+    '<div class="seg pmodos lt-modos" role="tablist" aria-label="Collectio">' + [['cmp', 'Editor × Collectio', 'confronto por seção'], ['min', 'Minuta', 'versões e texto'], ['inf', 'Informações', 'perfil, ajustes e transferir']].map(function (x) { return '<button type="button" role="tab" data-ltm="' + x[0] + '" aria-selected="' + (V.modo === x[0]) + '" title="' + x[2] + '">' + x[1] + '</button>'; }).join('') + '</div>' +
+    '<section class="card lt-corpo" id="lt-corpo"></section>' +
+    (V.modo === 'inf' ? infoHtml(l, it) : '');
+  caixa.innerHTML = h;
+  desenha();
+}
+function infoHtml(l, it) {
+  var cols = {}; (l.colunas || []).forEach(function (c) { cols[c.id] = c.rotulo; });
+  return '<section class="card lt-perfil"><h3 class="display">Perfil do processo no lote</h3>' +
     campo('Resultado', it.resultado) + campo('Modelo', it.modelo) +
     ((it.variacoes || []).length ? '<div class="lt-f"><span class="gl">Variações</span><div class="bar">' + it.variacoes.map(function (v) { return '<span class="chip">' + esc(cols[v] || v) + '</span>'; }).join('') + '</div></div>' : '') +
     campo('Observação', it.observacao) + campo('Peculiaridades (equipe)', it.peculiaridades) +
@@ -184,10 +328,7 @@ function render() {
     ((it.pecas || []).length ? '<div class="lt-f"><span class="gl">Peças</span><ul class="lt-pecas">' + it.pecas.map(function (p) { return '<li><span>' + esc(p.peca || p.tipo || '') + '</span><button type="button" class="mono lnk" data-copia="' + esc(p.id || '') + '" title="Copiar o ID">' + esc(p.id || '') + '</button></li>'; }).join('') + '</ul></div>' : '') +
     tabelaAjustes(it.ajustes) +
     (Array.isArray(it.pendencias) && it.pendencias.length ? '<div class="lt-f"><span class="gl">Pendências</span><ul>' + it.pendencias.map(function (p) { return '<li>' + esc(typeof p === 'string' ? p : (p.texto || JSON.stringify(p))) + '</li>'; }).join('') + '</ul></div>' : (typeof it.pendencias === 'string' ? campo('Pendências', it.pendencias) : '')) +
-    '</details>';
-  caixa.innerHTML = h;
-  desenhaCmp();
-  minuta(l.id, it);
+    '</section>' + txHtml(l, it);
 }
 /* ---------- transferir o texto do editor do PJe para o Collectio (nova versão da minuta do processo no lote) ---------- */
 var TX = { rotulo: '', vigente: true, prev: null, enviando: false, msg: '', erro: '' };
@@ -241,20 +382,18 @@ function txEnviar() {
     });
   });
 }
-function minuta(id, it) {
+function minuta(id, it, cb) {
   var mx = String(it.processo).slice(0, 10), chave = id + '/' + mx;
-  function desenha(m) {
-    var box = $('lt-min'); if (!box) return;
-    desenhaCmp();
-    if (m && m.erro) { box.innerHTML = '<div class="empty">' + esc(m.erro) + '</div>'; return; }
-    var sec = (m && m.secoes) || {}, tem = SECS.filter(function (s) { return textoSec(sec[s[0]]).trim(); });
-    if (!tem.length) { box.innerHTML = '<div class="empty">Minuta sem texto no lote.</div>'; return; }
-    box.innerHTML = '<p class="kicker">Versão da minuta registrada no lote' + (m.atualizado_em ? ' · ' + brD(m.atualizado_em) : '') + '</p>' + (m.origem ? '<p class="muted" style="font-size:11px">' + esc(m.origem) + '</p>' : '') +
-      tem.map(function (s) { return '<details class="gg"><summary><h4>' + s[1] + '</h4><button type="button" class="btn line" data-copsec="' + s[0] + '">Copiar</button></summary><pre class="lt-txt">' + esc(textoSec(sec[s[0]])) + '</pre></details>'; }).join('');
-  }
-  if (V.minuta[chave]) { desenha(V.minuta[chave]); return; }
-  api('id=' + encodeURIComponent(id) + '&minuta=' + encodeURIComponent(mx)).then(function (m) { V.minuta[chave] = m; desenha(m); })
-    .catch(function (e) { var m = { erro: e.status === 404 ? 'Minuta não disponível para este processo no lote.' : 'Não foi possível abrir a minuta: ' + e.message }; if (e.status === 404) V.minuta[chave] = m; desenha(m); });
+  if (V.minuta[chave]) { if (cb) cb(V.minuta[chave]); return; }
+  api('id=' + encodeURIComponent(id) + '&minuta=' + encodeURIComponent(mx)).then(function (m) { V.minuta[chave] = m; if (cb) cb(m); })
+    .catch(function (e) { var m = { erro: e.status === 404 ? 'Minuta não disponível para este processo no lote.' : 'Não foi possível abrir a minuta: ' + e.message }; if (e.status === 404) V.minuta[chave] = m; if (cb) cb(m); });
+}
+function marcarPje() {
+  var a = V.achados[V.sel], ref = refAtual(); if (!a || ref === 'vig') return;
+  V.msg = 'Gravando…'; render();
+  ses.api('/api/painel?lote=1', { method: 'POST', body: JSON.stringify({ acao: 'minuta-pje', id: a.lote.id, processo: a.it.processo, versao: ref, marcado: true }) }).then(function (j) {
+    a.it.pje = j.pje || { versao: ref }; delete V.vers[chaveMin()]; V.msg = 'Registrado no Collectio: a ' + ref + ' é a do PJe.'; carregarIndice().then(render);
+  }, function (e) { V.msg = 'Não gravou: ' + (e.message || 'erro'); render(); });
 }
 function copiar(t, el) {
   (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(function () { if (el) { var o = el.textContent; el.textContent = 'Copiado'; setTimeout(function () { el.textContent = o; }, 1200); } }).catch(function () {});
@@ -262,8 +401,14 @@ function copiar(t, el) {
 var tCol = 0;
 caixa.addEventListener('click', function (e) {
   var b = e.target.closest('button'); if (!b) return;
-  if (b.dataset.i != null) { V.sel = +b.dataset.i; render(); return; }
-  if (b.hasAttribute('data-atu')) { V.minuta = {}; atualizar(true); return; }
+  if (b.dataset.i != null) { V.sel = +b.dataset.i; render(); prepararAchado(); return; }
+  if (b.hasAttribute('data-atu')) { V.minuta = {}; V.vers = {}; V.vtx = {}; V.conf = {}; atualizar(true); return; }
+  if (b.dataset.ltm) { V.modo = b.dataset.ltm; render(); return; }
+  if (b.dataset.secv) { V.secv = b.dataset.secv; desenha(); return; }
+  if (b.dataset.verv) { V.verv[chaveMin()] = b.dataset.verv; desenha(); return; }
+  if (b.dataset.lt === 'ref') { V.ref[chaveMin()] = b.dataset.v; V.modo = 'cmp'; render(); confrontar(); return; }
+  if (b.dataset.lt === 'pje') { marcarPje(); return; }
+  if (b.dataset.copsecv) { e.preventDefault(); var vv = V.verv[chaveMin()] || refAtual(), mv = V.vtx[chaveMin() + '#' + vv] || minutaAtual(); if (mv && mv.secoes) copiar(linhasSec(mv, b.dataset.copsecv).join('\n\n'), b); return; }
   if (b.dataset.cp === 'ler') { lerEditor(); return; }
   if (b.dataset.tx === 'ler') { txLer(); return; }
   if (b.dataset.tx === 'enviar') { txEnviar(); return; }
@@ -272,16 +417,29 @@ caixa.addEventListener('click', function (e) {
 });
 caixa.addEventListener('change', function (e) {
   if (e.target.dataset && e.target.dataset.tx === 'vigente') { TX.vigente = e.target.checked; return; }
+  if (e.target.dataset && e.target.dataset.lt === 'refsel') { V.ref[chaveMin()] = e.target.value; V.verv[chaveMin()] = e.target.value; render(); confrontar(); return; }
   var t = e.target, k = t.dataset && t.dataset.cp; if (!k) return;
-  if (k === 'sec') CP.sec = t.value; else if (k === 'ws') CP.ws = t.checked; else if (k === 'sd') CP.sd = t.checked; else return;
-  var m = minutaAtual(); if (m && m.secoes) comparar(m);
+  if (k === 'ws') CP.ws = t.checked; else if (k === 'sd') CP.sd = t.checked; else return;
+  confrontar();
 });
 caixa.addEventListener('input', function (e) {
   if (e.target.dataset && e.target.dataset.tx === 'rotulo') { TX.rotulo = e.target.value; return; }
   var t = e.target; if (!t.dataset || t.dataset.cp !== 'txt') return;
-  clearTimeout(tCol); tCol = setTimeout(function () { CP.texto = t.value; CP.colado = !!t.value.trim(); CP.erro = ''; CP.fonte = ''; var m = minutaAtual(); if (m && m.secoes) comparar(m); var f = caixa.querySelector('.cp-fonte'); if (f) f.remove(); }, 350);
+  clearTimeout(tCol); tCol = setTimeout(function () { CP.texto = t.value; CP.ps = null; CP.colado = !!t.value.trim(); CP.erro = ''; CP.fonte = ''; confrontar(); }, 600);
 });
-document.addEventListener('muta:prontuario', function () { if (aberta()) atualizar(false); });
+document.addEventListener('muta:prontuario', function () { if (aberta()) atualizar(false); autoAba(); });
+/* 0.51: para o gestor, processo de lote abre a aba Minuta no Collectio (se ela estava no Comparar); fora de lote, volta ao Comparar */
+var ultAuto = '';
+function autoAba() {
+  var s0 = ses.estado(); if (!s0 || !s0.gestor || !window.MutaGerador || !window.MutaGerador.modo) return;
+  var k = br.chaveAtual(); if (!k || k === 'avulso' || k === ultAuto) return; ultAuto = k;
+  temLote(k).then(function (tem) {
+    var cur = ''; try { cur = localStorage.getItem('hero18810:minModo') || 'cmp'; } catch (e) {}
+    if (tem && cur === 'cmp') window.MutaGerador.modo('lote');
+    else if (!tem && cur === 'lote') window.MutaGerador.modo('cmp');
+    if (tem && aberta()) atualizar(false);
+  });
+}
 /* para a aba Comparar: as minutas registradas nos lotes para o processo (uma por lote em que ele está) */
 function minutasDoProcesso(chave) {
   return base(false).then(function () {
@@ -296,5 +454,7 @@ function minutasDoProcesso(chave) {
     }));
   });
 }
-window.MutaLote = { transferir: function () { if (window.MutaAbas) window.MutaAbas.ir('min'); var d = $('panel-lote'); if (d && !d.open) { d.open = true; atualizar(false); } setTimeout(function () { var x = $('lt-tx'); if (x) x.scrollIntoView({ block: 'start' }); }, 500); }, abrir: function () { atualizar(false); }, sessao: function () { if (aberta()) atualizar(false); }, lerEditor: lerEditor, minutasDoProcesso: minutasDoProcesso };
+/* 0.51: o processo aberto está em algum lote? (a aba Minuta abre no Collectio para o gestor) */
+function temLote(chave) { return base(false).then(function () { return !!procurar(chave).length; }, function () { return false; }); }
+window.MutaLote = { temLote: temLote, transferir: function () { if (window.MutaAbas) window.MutaAbas.ir('min'); var d = $('panel-lote'); if (d && !d.open) { d.open = true; atualizar(false); } setTimeout(function () { var x = $('lt-tx'); if (x) x.scrollIntoView({ block: 'start' }); }, 500); }, abrir: function () { atualizar(false); }, sessao: function () { if (aberta()) atualizar(false); }, lerEditor: lerEditor, minutasDoProcesso: minutasDoProcesso };
 })();
