@@ -111,6 +111,14 @@ main{min-height:calc(100vh - 60px);padding-bottom:140px}
 .at-tc{max-width:300px}.at-tc b{display:block;font-weight:600;font-size:12.5px;line-height:1.35}.at-sub{display:block;font-size:11px;color:var(--m);margin-top:2px}.at-cl2{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;max-width:260px}
 .at-ta{white-space:nowrap}.at-d{font:500 12px 'JetBrains Mono',monospace}.at-d.al{color:#c07a12}.at-d.cr{color:#9a3d2e}
 .at-ic{white-space:nowrap}.at-in{display:inline-block;min-width:18px;margin:0 3px 0 0;padding:0 3px;text-align:center;font:600 11px 'JetBrains Mono',monospace;border:1px solid var(--b2);background:var(--w)}.at-in.al{color:#c07a12;border-color:#e0c08a}.at-in.cr{color:#9a3d2e;border-color:#e2b3aa}.at-in.in{color:#1b5878;border-color:#9cc0d6}
+.at-ver{display:flex;align-items:center;gap:0;margin:0 0 10px}.at-ver span{font:500 10px 'JetBrains Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--m);margin-right:8px}.at-ver button{border:1px solid var(--b2);background:var(--w);color:var(--tx);font-size:12px;font-weight:500;font-family:inherit;padding:5px 12px;cursor:pointer;margin-left:-1px}.at-ver button[aria-pressed="true"]{background:#235a55;border-color:#235a55;color:#fff}
+.fn{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;align-items:start}.fn-col{display:flex;flex-direction:column;gap:8px;min-width:0}.fn-col header{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:8px 0 4px;border-top:3px solid}.fn-col header b{font-size:13px}.fn-n{font:600 12px 'JetBrains Mono',monospace;color:var(--m)}.fn-col header .btn{margin-left:auto}
+.fn-c{border:1px solid var(--b2);background:var(--w);padding:9px 10px;display:flex;flex-direction:column;gap:6px}.fn-c.sel{outline:2px solid #235a55}.fn-h{display:flex;align-items:center;gap:6px;flex-wrap:wrap}.fn-h .at-cnj{font-size:11.5px}.fn-tp{font:600 10px 'JetBrains Mono',monospace;letter-spacing:.05em;text-transform:uppercase;color:var(--m)}
+.fn-as{margin:0;font-size:12.5px;font-weight:600;line-height:1.35;color:var(--tx)}.fn-as span{display:block;font-weight:400;font-size:11px;color:var(--m);margin-top:2px}
+.fn-chs{display:flex;flex-wrap:wrap;gap:4px}.fn-ch{display:inline-flex;align-items:center;gap:3px;padding:1px 6px;font-size:10.5px;border:1px solid var(--b2);color:var(--m)}.fn-ch i{font-style:normal;font-weight:700}.fn-ch.ok{color:#2c5e3f;border-color:#9cc3ae;background:rgba(44,94,63,.08)}.fn-ch.cr{color:#8a2f22;border-color:#e2b3aa;background:rgba(138,47,34,.08)}.fn-ch.al{color:#805b18;border-color:#e0c08a;background:rgba(128,91,24,.08)}
+.fn-ch .sr,.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}.fn-tc{align-self:flex-start;border:1px dashed #9cc0d6;background:none;color:#1b5878;font-size:11px;padding:1px 6px;cursor:pointer}
+.fn-sg{margin:0;padding-left:7px;border-left:2px solid;font-size:11.5px;font-weight:600}.fn-bt{display:flex;flex-wrap:wrap;gap:4px}.fn-bt .btn{margin:0}.fn-vz{font-size:12px;color:var(--m);margin:4px 0}.fn-mais{align-self:center}
+@media (max-width:1100px){.fn{grid-template-columns:repeat(2,minmax(0,1fr))}}@media (max-width:640px){.fn{grid-template-columns:minmax(0,1fr)}}
 .at-pr{white-space:nowrap}.at-sy{display:inline-block;width:16px;text-align:center;font:600 12px 'JetBrains Mono',monospace;color:#b5b1a6}.at-sy.ok{color:#1f8a70}.at-sy.al{color:#c07a12}.at-sy.cr{color:#9a3d2e}
 .at-de{display:inline-block;padding:0 6px;border:1px solid var(--b2);font:600 10px 'JetBrains Mono',monospace;letter-spacing:.06em;text-transform:uppercase}.at-de.k-mono{color:#24506f;border-color:#9cc0d6}.at-de.k-pauta{color:#3b7150;border-color:#9cc3ae}.at-pv{font-size:12px;color:#805b18}
 .at-ac{white-space:nowrap}.at-ac .btn{margin-left:4px}.at-det td{background:#faf8f1;padding:0 8px 12px}.at-mais td{text-align:center;background:#faf8f1}
@@ -3126,12 +3134,12 @@ document.addEventListener('click', (e) => {
 }, true);
 let _atT = null;
 document.addEventListener('input', (e) => { const t = e.target; if (!t.matches || !t.matches('[data-atq]')) return; LS.set('tri_atq', t.value);
-  clearTimeout(_atT); _atT = setTimeout(() => { const tb = document.getElementById('at-tab'); if (tb) tb.innerHTML = atTabela(LS.get('tri_triar_tarefa', '')); }, 250); }, true);
+  clearTimeout(_atT); _atT = setTimeout(() => { const tb = document.getElementById('at-tab'); if (tb) tb.innerHTML = atCorpo(LS.get('tri_triar_tarefa', '')); }, 250); }, true);
 document.addEventListener('click', (e) => { const t = e.target.closest && e.target.closest('[data-bg]'); if (!t) return; e.preventDefault(); e.stopPropagation(); LS.set('tri_bg', !LS.get('tri_bg', false)); render(); }, true);
 document.addEventListener('click', (e) => { const t = e.target.closest && e.target.closest('[data-atmais]'); if (!t) return; e.preventDefault(); e.stopPropagation();
   const g = t.dataset.atmais; LS.set('tri_atlim_' + g, LS.get('tri_atlim_' + g, 60) + 100); const tb = document.getElementById('at-tab'); if (tb) tb.innerHTML = atTabela(LS.get('tri_triar_tarefa', '')); }, true);
 document.addEventListener('change', (e) => { const t = e.target; if (!t.matches || !t.matches('[data-atso],[data-ato]')) return;
-  LS.set(t.matches('[data-atso]') ? 'tri_atso' : 'tri_ato', t.value); const tb = document.getElementById('at-tab'); if (tb) tb.innerHTML = atTabela(LS.get('tri_triar_tarefa', '')); }, true);
+  LS.set(t.matches('[data-atso]') ? 'tri_atso' : 'tri_ato', t.value); const tb = document.getElementById('at-tab'); if (tb) tb.innerHTML = atCorpo(LS.get('tri_triar_tarefa', '')); }, true);
 document.addEventListener('change', (e) => {
   const t = e.target.closest && e.target.closest('[data-trisel]'); if (!t) return;
   if (t.dataset.trisel === 'triar') LS.set('tri_triar_tarefa', t.value); else LS.set('tri_mtz_' + t.dataset.trisel, t.value);
@@ -3238,6 +3246,76 @@ function atTabela(soTarefa) {
     if (ab) { h += L.slice(0, lim).map(atLinha).join(''); if (L.length > lim) h += '<tr class="at-mais"><td colspan="8"><button type="button" class="btn sm" data-atmais="' + esc(g) + '">Mostrar mais ' + Math.min(100, L.length - lim) + ' de ' + nf(L.length - lim) + '</button></td></tr>'; } });
   return h + '</tbody></table>';
 }
+/* ===== A triar · Funil (opção ao lado da lista): as colunas da triagem, com os sinais da ficha em cada cartão ===== */
+const FN_COLS = [['pend', 'Pendente', '#8a2f22'], ['mono', 'Pronto · monocrática', '#3f6f94'], ['ses', 'Pronto · sessão', '#235a55'], ['nao', 'Sem destino', '#805b18']];
+const FN_SY = { regular: ['✓', 'ok', 'regular'], irregular: ['✕', 'cr', 'irregular'], pendente: ['!', 'al', 'pendente'], na: ['·', 'na', 'não se aplica'], '': ['·', '', 'não verificado'] };
+/* classe do vocabulário (regular, pendente, irregular, na); vazio ou "Não verificado" fica neutro */
+const fnCl = (k, v) => { v = String(v || '').trim(); if (!v || /^n[aã]o verificad/i.test(v)) return ''; return (typeof VOC !== 'undefined' && VOC.classe(k, v)) || 'pendente'; };
+/* tema repetitivo: ficha (sobrestamento ou retratação) ou etiqueta "Tema N"; julgado quando a situação do precedente diz */
+function fnTema(o) { const r = o.row || {}, num = (v) => (String(v || '').replace(/(\d)\.(\d{3})/g, '$1$2').match(/\d{2,4}/) || [''])[0];
+  let n = num(r['Retratação - Tema']), jul = !!n, de = 'retratação';
+  if (!n) { n = num(r['Sobrestamento - Tema']); de = 'sobrestamento'; jul = /julgad|transit|firmad|publicad|cessad/i.test(String(r['Sobrestamento - Situação do precedente'] || r['Situação do precedente'] || '')); }
+  if (!n) { const e = (o.etq || []).find((x) => /\btema\s*n?º?\s*\d[\d.]{1,5}/i.test(x)); if (e) { n = num(e.replace(/^.*?tema/i, '')); de = 'etiqueta'; jul = !/sobrest|aguard|pendente/i.test(e) && !o.pend.includes('precedente'); } }
+  if (!n) return null;
+  if (o.pend.includes('precedente') || /sobrestado/i.test(o.tarefa || '')) jul = false;
+  return { n, jul, de }; }
+/* o tema entra no tipo de caso ("Matéria · tipo · aspecto distintivo") como último segmento */
+const fnTemNoTipo = (o, t) => new RegExp('\\btema\\s*' + t.n + '\\b', 'i').test(String((o.row || {})['Tema'] || ''));
+function fnSinais(o) { const r = o.row || {}, pd = o.pend.join(' ');
+  const cv = nz(r['Contrarrazões - Situação'] || ''), cr = /contrarraz/.test(pd) ? 'pendente' : !cv ? '' : /prazo|aguard|curso|intima/.test(cv) ? 'pendente' : 'regular';
+  const cl = String(r['MPF - Custos Legis'] || '').trim(), pa = fnCl('parecer', r['MPF']);
+  const mpf = /parecer/.test(pd) ? 'pendente' : /^sem hip/i.test(cl) ? 'na' : cl ? (pa || 'pendente') : pa;
+  const prp = /preparo/.test(pd) ? 'pendente' : fnCl('preparo', r['Preparo']), t = fnTema(o);
+  return [['Contrarrazões', cr, r['Contrarrazões - Situação'] || (cr === 'pendente' ? 'aguardando contrarrazões' : '')], ['MPF', mpf, [cl, r['MPF']].filter(Boolean).join(' · ')],
+    ['Prazo', fnCl('tempest', r['Tempestividade']), r['Tempestividade'] || ''], ['Preparo', prp, r['Preparo'] || ''],
+    [t ? 'Tema ' + t.n : 'Tema', t ? (t.jul ? 'regular' : 'pendente') : 'na', t ? (t.jul ? 'julgado' : 'pendente') + ' · pela ' + t.de : 'sem tema repetitivo']]; }
+const FN_TIPO = { pj: '', ed: 'ED', ag: 'AgInt', jr: 'Retratação' };
+function fnSesAtiva() { const S = sessoes(); return S.find((ss) => ((ss.fases || {}).pauta || '') >= HOJE) || S[0] || null; }
+function fnSug(o, col, at) {
+  if (col === 'pend') return ['Aguarda ' + o.pend.join(', '), '', ''];
+  if (col === 'mono') return o.dest.k === 'mono' ? ['Monocrática confirmada', '', 'ses'] : ['Monocrática · ' + (CLAB[o.cand] || 'pela etiqueta'), 'mono', 'ses'];
+  if (col === 'ses') { const tp = FN_TIPO[mpTipo(o)] || '1º julgamento';
+    return o.dest.k === 'pauta' ? [(o.dest.s ? 'Seleção prévia ' + o.dest.s.slice(0, 5) : 'Banco reserva') + ' · ' + tp, '', 'mono'] : [(at ? 'Seleção prévia ' + nomeSes(at).slice(0, 5) : 'Sem sessão no calendário') + ' · ' + tp, at ? 'ses' : '', 'mono']; }
+  return ['Sem regra · escolha o destino', '', ''];
+}
+function fnCartao(o, col, cor, at) {
+  const r = o.row || {}, tp = FN_TIPO[mpTipo(o)], t = fnTema(o), sg = fnSug(o, col, at);
+  const chips = fnSinais(o).map((x) => { const y = FN_SY[x[1]] || FN_SY['']; return '<span class="fn-ch ' + y[1] + '" title="' + esc(x[0] + ': ' + (x[2] || y[2])) + '"><i aria-hidden="true">' + y[0] + '</i>' + esc(x[0]) + '<span class="sr"> (' + esc(x[2] || y[2]) + ')</span></span>'; }).join('');
+  const tc = t && !fnTemNoTipo(o, t) ? '<button type="button" class="fn-tc" data-fn-tc="' + o.d + '" title="Acrescenta “Tema ' + esc(t.n) + '” ao tipo de caso da ficha (Matéria · tipo · aspecto distintivo)">+ Tema ' + esc(t.n) + ' no tipo de caso</button>' : '';
+  const bts = (sg[1] ? '<button type="button" class="btn sm pri" data-fn-ok="' + o.d + '" data-fn-k="' + sg[1] + '">Confirmar</button>' : '') +
+    (sg[2] ? '<button type="button" class="btn sm" data-fn-ok="' + o.d + '" data-fn-k="' + sg[2] + '" title="' + (sg[2] === 'ses' ? 'Mandar à seleção prévia da sessão ativa' : 'Julgar por monocrática') + '">' + (sg[2] === 'ses' ? 'Trocar · sessão' : 'Trocar · monocrática') + '</button>' : '') +
+    '<button type="button" class="btn sm" data-prontuario="' + o.d + '">Prontuário</button>';
+  return '<article class="fn-c' + (SEL.has(o.d) ? ' sel' : '') + '"><div class="fn-h"><input type="checkbox" data-sel="' + o.d + '"' + (SEL.has(o.d) ? ' checked' : '') + ' aria-label="Selecionar ' + esc(o.cnj) + '"><button type="button" class="at-cnj" data-ficha="' + o.d + '" title="Abrir a ficha">' + esc(o.cnj) + '</button><span class="fn-tp">' + esc(o.cl || '') + (tp ? ' · ' + tp : '') + '</span></div>' +
+    '<p class="fn-as">' + esc(r['Tema'] || o.assunto || '') + (r['Tema'] && o.assunto && o.assunto !== '—' ? '<span>' + esc(o.assunto) + '</span>' : '') + '</p>' +
+    '<div class="fn-chs">' + chips + '</div>' + tc + '<p class="fn-sg" style="border-color:' + cor + ';color:' + cor + '">' + esc(sg[0]) + '</p><div class="fn-bt">' + bts + '</div></article>';
+}
+function atFunil(soTarefa) {
+  const q = nz(LS.get('tri_atq', '')).trim(), so = LS.get('tri_atso', '');
+  const pass = (o) => (!soTarefa || (o.tarefa || o.grupo || 'Triagem') === soTarefa) && (!q || q.split(/\s+/).every((t) => o.hay.includes(t))) && (!so || (so === 'com' ? atTri(o) : !atTri(o)));
+  const F4 = funilTriagem(), at = fnSesAtiva();
+  return '<div class="fn">' + FN_COLS.map(([k, rot, cor]) => { const L = F4[k].filter(pass).sort((a, b) => (atDias(b) || 0) - (atDias(a) || 0)), lim = LS.get('tri_fnlim_' + k, 30);
+    const aConf = k === 'mono' ? L.filter((o) => o.dest.k !== 'mono') : k === 'ses' && at ? L.filter((o) => o.dest.k !== 'pauta') : [];
+    const lote = aConf.length ? '<button type="button" class="btn sm" data-fn-col="' + k + '" title="' + (k === 'mono' ? 'Confirma a monocrática' : 'Manda à seleção prévia da sessão de ' + nomeSes(at)) + ' para os ' + aConf.length + ' processos desta coluna ainda sem destino">' + (k === 'mono' ? 'Confirmar ' + nf(aConf.length) : 'Enviar ' + nf(aConf.length) + ' à seleção ' + nomeSes(at).slice(0, 5)) + '</button>' : '';
+    return '<section class="fn-col" aria-label="' + esc(rot) + '"><header style="border-top-color:' + cor + '"><b style="color:' + cor + '">' + esc(rot) + '</b><span class="fn-n">' + nf(L.length) + '</span>' + lote + '</header>' +
+      (L.length ? L.slice(0, lim).map((o) => fnCartao(o, k, cor, at)).join('') : '<p class="fn-vz">Nenhum processo.</p>') +
+      (L.length > lim ? '<button type="button" class="btn sm fn-mais" data-fn-mais="' + k + '">Mostrar mais ' + Math.min(30, L.length - lim) + ' de ' + nf(L.length - lim) + '</button>' : '') + '</section>'; }).join('') + '</div>'; }
+const atVer = () => LS.get('tri_atver', 'lista');
+const atCorpo = (soTarefa) => (atVer() === 'funil' ? atFunil(soTarefa) : atTabela(soTarefa));
+function refazAtTab() { const tb = document.getElementById('at-tab'); if (tb) tb.innerHTML = atCorpo(LS.get('tri_triar_tarefa', '')); }
+function fnConfirmar(ds, k) { const at = fnSesAtiva();
+  if (k === 'mono') { acao('Julgar por monocrática', ds, () => ({ sp: '', sd: '', mono: 'Monocrática' })); return; }
+  if (k === 'ses') { if (!at) { toast('Nenhuma sessão futura no calendário. Cadastre na página Pautas.', true); return; } const nm = nomeSes(at); acao('Pautado na sessão de ' + nm, ds, () => ({ sp: 'SELECIONADO PREVIAMENTE', sd: nm, mono: '' })); } }
+async function fnTemaNoTipo(d) { const o = IDX.get(d), t = o && fnTema(o); if (!t || fnTemNoTipo(o, t)) return;
+  const r = o.row || {}, base = String(r['Tema'] || '').trim() || (o.assunto && o.assunto !== '—' ? o.assunto : ''), v = (base ? base + ' · ' : '') + 'Tema ' + t.n;
+  try { await opcoesPainel().gravarFicha(o.cnj, { 'triagem.Tema': v }); toast('Tipo de caso: ' + v + '.'); refazAtTab(); } catch (e) { toast('Não gravou o tipo de caso: ' + ((e && e.message) || e), true); } }
+document.addEventListener('click', (e) => { const t = e.target.closest && e.target.closest('[data-atver],[data-fn-ok],[data-fn-col],[data-fn-mais],[data-fn-tc]'); if (!t) return; e.preventDefault(); e.stopPropagation();
+  if (t.dataset.atver) { LS.set('tri_atver', t.dataset.atver); document.querySelectorAll('[data-atver]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.atver === t.dataset.atver))); refazAtTab(); return; }
+  if (t.dataset.fnOk) { fnConfirmar([t.dataset.fnOk], t.dataset.fnK); return; }
+  if (t.dataset.fnCol) { const k = t.dataset.fnCol, so = LS.get('tri_triar_tarefa', ''), q = nz(LS.get('tri_atq', '')).trim(), sf = LS.get('tri_atso', '');
+    const L = funilTriagem()[k].filter((o) => (!so || (o.tarefa || o.grupo || 'Triagem') === so) && (!q || q.split(/\s+/).every((x) => o.hay.includes(x))) && (!sf || (sf === 'com' ? atTri(o) : !atTri(o))) && (k === 'mono' ? o.dest.k !== 'mono' : o.dest.k !== 'pauta'));
+    fnConfirmar(L.map((o) => o.d), k); return; }
+  if (t.dataset.fnMais) { const k = t.dataset.fnMais; LS.set('tri_fnlim_' + k, LS.get('tri_fnlim_' + k, 30) + 30); refazAtTab(); return; }
+  if (t.dataset.fnTc) fnTemaNoTipo(t.dataset.fnTc); }, true);
 function atLado(soTarefa) {
   const L = (U || []).filter((o) => !soTarefa || (o.tarefa || o.grupo || 'Triagem') === soTarefa);
   const m = [['Processos', L.length], ['Com prontuário', L.filter(atTri).length], ['Prioridade', L.filter((o) => o.prior).length], ['Liminar', L.filter((o) => o.liminar).length],
@@ -3252,7 +3330,8 @@ function aTriarBands(soTarefa) {
   if (!U || !U.length) return '<div class="tri-ld">Nenhum processo em triagem.</div>';
   const tit = soTarefa ? esc(soTarefa).replace(/ (\S+)$/, ' <em>$1.</em>') : 'A <em>triar.</em>';
   return '<div class="at"><p class="at-k">Triagem · processos nas tarefas do PJe' + (FONTE_EM ? ' · fonte de ' + esc(String(FONTE_EM).slice(0, 10).split('-').reverse().join('/')) : '') + '</p><h2 class="at-h">' + tit + '</h2>' +
-    '<div id="at-tab">' + atTabela(soTarefa) + '</div></div>';
+    '<div class="at-ver" role="group" aria-label="Ver como"><span>Ver como</span>' + [['lista', 'Lista'], ['funil', 'Funil']].map((x) => '<button type="button" data-atver="' + x[0] + '" aria-pressed="' + (atVer() === x[0]) + '">' + x[1] + '</button>').join('') + '</div>' +
+    '<div id="at-tab">' + atCorpo(soTarefa) + '</div></div>';
 }
 function triadosBands() {
   if (!_triCache||!_triCache.items.size) return '<div class="tri-ld">Nenhum processo triado encontrado.</div>';
@@ -3585,7 +3664,7 @@ D.addEventListener('change', (e) => { const t = e.target;
     if (v === 'del') { const nm = W.prompt('Nome do filtro salvo a excluir:', ''); if (!nm) return; LS.set('tri_filtros', S.filter((x) => x.nome !== nm)); render(); return; }
     const s = S[+v]; if (!s) return; Object.assign(F, JSON.parse(JSON.stringify(s.F))); F.conj = null; F.lim = 100; render(); toast('Filtro aplicado: ' + s.nome); return; }
   if (t.dataset.mapaTodos != null) { const ds = (W.__MAPA_COLS || [])[+t.dataset.mapaTodos] || []; ds.forEach((d) => { if (t.checked) SEL.add(d); else SEL.delete(d); }); render(); return; }
-  if (t.dataset.sel) { const d = t.dataset.sel; if (t.checked) SEL.add(d); else SEL.delete(d); const r = t.closest('.row,.mp-card'); if (r) r.classList.toggle('sel', t.checked); pintaRodape(); return; }
+  if (t.dataset.sel) { const d = t.dataset.sel; if (t.checked) SEL.add(d); else SEL.delete(d); const r = t.closest('.row,.mp-card,.fn-c'); if (r) r.classList.toggle('sel', t.checked); pintaRodape(); return; }
   if (t.dataset.selall) { const L = t.dataset.selall === 'fila' ? FILA : FILA; L.forEach((o) => { if (t.checked) SEL.add(o.d); else SEL.delete(o.d); }); render(); return; }
   if (t.dataset.selgrp != null) { const L = t.dataset.onde === 'fila' ? FILA : FILA, st = t.dataset.onde === 'fila' ? F : FE, fn = { assunto: (o) => o.assunto, tarefa: (o) => o.tarefa || 'Sem tarefa', secao: (o) => o.secao, classe: (o) => o.cl, dest: (o) => o.dest.k ? o.dest.t : 'sem destino' }[st.ver];
     L.filter((o) => fn(o) === t.dataset.selgrp).forEach((o) => { if (t.checked) SEL.add(o.d); else SEL.delete(o.d); }); render(); return; }
