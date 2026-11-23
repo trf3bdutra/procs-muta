@@ -296,3 +296,17 @@ test('Triagem: o prontuário de triagem é o próprio painel do processo (campos
   for(const k of ['triagem.Tempestividade','triagem.Preparo','triagem.Representação','triagem.MPF','triagem.MPF - Custos Legis','triagem.Urgência','triagem.Tema','triagem.META','triagem.Alegações','triagem.O que falta sanar','triagem.Intercorrências','origem.Próxima ação'])assert.ok(cap.includes("'"+k+"'"),k);
   assert.ok(cap.includes('gravarFicha: async (cnj, campos)')&&cap.includes('W.CMTFichaMonitor'),'grava pela ficha única');
 });
+
+test('Triagem · A triar: clicar na faixa do processo abre o painel do processo (o mesmo dos Triados)',()=>{
+  const cap=require('fs').readFileSync(require('path').join(__dirname,'../../../caput/triagem/index.html'),'utf8');
+  assert.ok(cap.includes(`'" data-atpp="' + esc(o.d) + '"`),'faixa marcada');
+  assert.ok(cap.includes("if ((b = q('tr[data-atpp]')) && !e.target.closest('input,button,a,select,label,textarea')) { const d = b.dataset.atpp; AT_PP = AT_PP === d ? '' : d;"),'abre o painel na lista, sem roubar os controles');
+  assert.ok(cap.includes('function montaAtPP()')&&cap.includes('<tr class="at-x"><td colspan="8"><div class="at-pp" data-atpph="'),'painel logo abaixo da faixa');
+});
+
+test('Painel do processo: admissibilidade em seletores e prontuário da triagem com altura fixa e rolagem', () => {
+  const cap = read('caput/triagem/index.html');
+  const l = cap.slice(cap.indexOf('const pfAdm='), cap.indexOf('const pfAdm=') + 1200);
+  assert.ok(l.includes("pfSel(p,'triagem.Tempestividade'") && l.includes("pfSel(p,'triagem.Preparo'") && !/pfSeg\(/.test(l), 'tempestividade, preparo e demais em dropdown');
+  assert.ok(cap.includes('.pc2-g .s1{max-height:430px;overflow-y:auto'), 'prontuário da triagem com altura fixa e rolagem');
+});
