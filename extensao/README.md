@@ -5,6 +5,10 @@ Nome desde a 0.19.3 (antes: Muta). Os identificadores internos (`window.Muta*`, 
 Extensão do Chrome/Edge (Manifest V3) que abre o **Muta** num painel lateral, ao lado dos autos e das tarefas do PJe 2º grau do TRF-3.
 Base: o HTML independente *muta-independente-prontuario-completo* (Prontuário + Acervo).
 
+## O que muda na 0.43 · Gerador só com relatório e ementa
+
+- Por ora (pedido do gestor), o Gerador mostra só o relatório e a ementa; dispositivo, acórdão e proclamação continuam no código, desligados em `gerador.js › PECAS`. O resultado escolhido segue valendo para o cabeçalho e o item IV da ementa.
+
 ## O que muda na 0.42 · Minuta: Conformidade em aba própria, matriz do processo, cabeçalho fora
 
 - **Conformidade** deixou o rodapé fixo e virou a terceira parte da Minuta: Comparar | Gerador | Conformidade. O título mostra a nota e o número de avisos altos e médios (`gerador.js › modo`, `painel.html › #min-conf.aba`).

@@ -569,3 +569,10 @@ test('extensão 0.42: Conformidade em aba própria da Minuta; minuta-matriz do p
   const d = M.analisar(['PODER JUDICIÁRIO', 'AGRAVO DE INSTRUMENTO (202) Nº 5000000-00.2026.4.03.0000', 'Cabeçalho qualquer do PJe sem padrão 12.3.2026', 'Vistos.', 'Trata-se de agravo.', 'DECIDO.', 'Ante o exposto, nego provimento ao agravo.', 'Publique-se. Intime-se.'], {});
   assert.equal(d.peca, 'decisao'); assert.ok(!d.itens.some(x => x.trecho && /Cabeçalho qualquer/.test(x.trecho.depois + x.trecho.alvo + x.trecho.antes)));
 });
+
+test('extensão 0.43: Gerador só com relatório e ementa (dispositivo, acórdão e proclamação desligados, no código)', () => {
+  const g = read('extensao/gerador.js');
+  assert.match(g, /var PECAS = \{ rel: true, em: true, disp: false, ac: false, pr: false \};/);
+  assert.match(g, /\(PECAS\.disp \? bloco\('disp'/); assert.match(g, /\(PECAS\.ac \? bloco\('ac'/); assert.match(g, /\(PECAS\.pr \? bloco\('pr'/);
+  assert.match(read('extensao/painel.html'), /Gerador<small>relatório e ementa<\/small>/);
+});

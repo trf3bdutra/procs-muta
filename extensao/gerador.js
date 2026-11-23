@@ -9,6 +9,8 @@
   var esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); };
   var VAL = function (t) { return '[VALIDAR: ' + t + ']'; };
   var ST = { tipo: '', res: '', cnj: '' };
+  /* 0.43: por ora, só relatório e ementa (pedido do gestor, 23/11/2026); dispositivo, acórdão e proclamação continuam no código, desligados */
+  var PECAS = { rel: true, em: true, disp: false, ac: false, pr: false };
 
   /* ---------- dados ---------- */
   function GB() { return window.MutaGabinete || {}; }
@@ -313,12 +315,12 @@
     var aviso = !S(v('origem', 'Sentença - Resultado')) && !/Embargos|Interno|Retrata/.test(D.tipo) ? '<p class="gr-av">' + (ai ? 'A decisão agravada ainda não foi lida: em Prontuário › Autos › Peças e documentos › Decisão agravada, use "Extrair da peça" para trazer o que ela decidiu.' : 'A sentença ainda não foi lida: em Prontuário › Autos › Peças e documentos › Sentença, use "Extrair da peça" para trazer resultado e honorários.') + ' <button type="button" class="lnk" data-gr-ir="Autos">Abrir Autos</button></p>' : '';
     return '<section class="card pc-sec gr-cfg"><div class="pc-sh"><h3>Gerador</h3><small class="muted">padrão do gabinete · nada é gravado</small></div>' +
       '<div class="gr-l"><span>Tipo de julgamento</span><div class="chips">' + chips(TIPOS, 'data-gr-tipo', D.tipo) + '</div></div>' +
-      '<div class="gr-l"><span>Resultado</span><div class="chips">' + chips(opcoesRes(D.tipo), 'data-gr-res', D.k) + '</div></div>' + (D.k ? '' : '<p class="gr-av">Sem resultado do voto na ficha: escolha o resultado acima para completar dispositivo, ementa, acórdão e proclamação.</p>') + aviso + '</section>' +
+      '<div class="gr-l"><span>Resultado</span><div class="chips">' + chips(opcoesRes(D.tipo), 'data-gr-res', D.k) + '</div></div>' + (D.k ? '' : '<p class="gr-av">Sem resultado do voto na ficha: escolha o resultado acima para completar a ementa (cabeçalho e item IV).</p>') + aviso + '</section>' +
       bloco('rel', 'Relatório', D.rel.map(function (p) { return '<p>' + marca(p) + '</p>'; }).join(''), conta(relT)) +
-      bloco('disp', 'Dispositivo do voto', D.disp.map(function (p) { return '<p>' + marca(p) + '</p>'; }).join(''), conta(D.disp.join(' '))) +
+      (PECAS.disp ? bloco('disp', 'Dispositivo do voto', D.disp.map(function (p) { return '<p>' + marca(p) + '</p>'; }).join(''), conta(D.disp.join(' '))) : '') +
       bloco('em', 'Ementa', '<p class="gr-cab"><b>' + marca(D.em.cab) + '</b></p>' + D.em.sec.map(function (s) { return '<p><b>' + esc(s[0]) + '</b></p>' + s[1].map(function (x) { return '<p><b>' + x.n + '.</b> ' + marca(x.t) + '</p>'; }).join(''); }).join('') + '<p>__________</p>' + D.em.rod.map(function (r) { var i = r.indexOf(':'); return '<p><i>' + esc(r.slice(0, i + 1)) + '</i>' + marca(r.slice(i + 1)) + '</p>'; }).join(''), conta(emT)) +
-      bloco('ac', 'Acórdão', '<p>' + marca(D.acordao) + '</p>', conta(D.acordao)) +
-      bloco('pr', 'Proclamação do julgamento', '<p>' + marca(D.procl) + '</p>', conta(D.procl));
+      (PECAS.ac ? bloco('ac', 'Acórdão', '<p>' + marca(D.acordao) + '</p>', conta(D.acordao)) : '') +
+      (PECAS.pr ? bloco('pr', 'Proclamação do julgamento', '<p>' + marca(D.procl) + '</p>', conta(D.procl)) : '');
   }
   function textos(id) {
     var D = ULT || docs();
