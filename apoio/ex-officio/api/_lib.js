@@ -137,4 +137,32 @@ async function commitArquivos(arqs, msg) {
   await avisarPlanilha(msg);
   return c;
 }
-module.exports = { diaLocal, fimDoDia, ghFetch, gh, gestor, norm, equipe, conferir, emitir, sair, quem, exigir, lerJson, gravarJson, dataOk, acessos, lerGrande, commitArquivos };
+/* Link da Triagem para colaboradores (só a aba Triagem do Caput; sem Chefia, Pautas, Coordenação e Comunicação).
+   A chave do link deriva do CMT_SESSION_SECRET e da versão em apoio/acessos.json › linkTriagem {versao, ativo}:
+   trocar a versão (ou ativo: false) invalida o link e todos os acessos já abertos com ele.
+   Quem abre o link recebe o cookie cmt_tri (30 dias), separado da sessão da Ex Officio: só a ponte do acervo o aceita, com restrições. */
+let TRI = null, TRI_T = 0;
+async function cfgTriagem() {
+  if (!TRI || Date.now() - TRI_T > 60e3) { const a = (await (module.exports.lerJson || lerJson)('apoio/acessos.json')).dados || {}; TRI = Object.assign({ versao: 1, ativo: true }, a.linkTriagem || {}); TRI_T = Date.now(); }
+  return TRI;
+}
+function chaveTriagem(versao) { return crypto.createHmac('sha256', segredo()).update('triagem-link:' + versao).digest('base64url').slice(0, 32); }
+function confereChaveTriagem(chave, versao) { return igual(String(chave || ''), chaveTriagem(versao)); }
+function emitirTriagem(res, nome, versao) {
+  const dias = 30, v = Buffer.from(JSON.stringify({ t: 'tri', n: String(nome || '').trim().slice(0, 40), v: versao, e: Date.now() + dias * 864e5 })).toString('base64url');
+  res.setHeader('Set-Cookie', `cmt_tri=${v}.${assinar(v)}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=${dias * 86400}`);
+}
+function sairTriagem(res) { res.setHeader('Set-Cookie', 'cmt_tri=; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0'); }
+async function quemTriagem(req) {
+  const m = /(?:^|;\s*)cmt_tri=([^;]+)/.exec((req.headers && req.headers.cookie) || ''); if (!m) return null;
+  const [v, s] = m[1].split('.'); if (!v || !s) return null;
+  try {
+    if (!igual(assinar(v), s)) return null;
+    const o = JSON.parse(Buffer.from(v, 'base64url').toString());
+    if (o.t !== 'tri' || !(o.e > Date.now())) return null;
+    const c = await cfgTriagem(); if (c.ativo === false || Number(o.v) !== Number(c.versao)) return null;
+    return { nome: o.n || 'colaborador', versao: o.v };
+  } catch (e) { return null; }
+}
+module.exports = { diaLocal, fimDoDia, ghFetch, gh, gestor, norm, equipe, conferir, emitir, sair, quem, exigir, lerJson, gravarJson, dataOk, acessos, lerGrande, commitArquivos,
+  cfgTriagem, chaveTriagem, confereChaveTriagem, emitirTriagem, sairTriagem, quemTriagem };

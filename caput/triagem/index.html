@@ -1079,6 +1079,7 @@ html[data-theme="dark"] #tri-prontuario .tp-s h3{color:#e6e2d6;background:linear
 @media(max-width:1000px){.cg-top{grid-template-columns:1fr}.cg-tool .cg-studio{height:auto}.cg-tool .cg-cat,.cg-tool .cg-prev,.cg-tool .cg-set{height:auto;max-height:520px}}
 @media(max-width:1000px){.cg-studio{grid-template-columns:190px minmax(0,1fr)}.cg-set{grid-column:1/-1;border-left:0;border-top:1px solid var(--b);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.cg-composer{grid-template-columns:1fr}}
 @media(max-width:800px){.cg-grid{grid-template-columns:1fr}.cg-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.cg-studio{grid-template-columns:1fr}.cg-cat{max-height:none;border-right:0;border-bottom:1px solid var(--b);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px}.cg-prev{padding:8px}.cg-paper{padding:22px 18px;min-height:700px}.cg-set{grid-template-columns:1fr}}
+body.so-tri #modulos [data-mod]:not([data-mod=triagem]),body.so-tri #bt-acervo,body.so-tri #bt-regras{display:none!important}
 </style>
 <link rel="stylesheet" href="/padrao/loading/gabinete-loader.css">
 <!-- voc:inicio --><script>
@@ -2168,6 +2169,7 @@ function abaDaRota() {
 function caminhoDaAba(a) { if (a === 'inteligencia') a = 'chefia'; return '/caput/' + (ROTA_SLUG[a] || 'triagem'); }
 function rotear() {
   let a = abaDaRota(); if (a === 'inteligencia') a = 'chefia';
+  if (SO_TRI && ['chefia', 'inteligencia', 'pautas', 'coordenacao', 'comunicacao'].includes(a)) a = 'fila';
   ABA = a;
   const alvo = caminhoDaAba(a); if (location.pathname !== alvo || location.hash) { try { history.replaceState(history.state, '', alvo + location.search); } catch (e) {} }
   W.scrollTo(0, 0); render(); }
@@ -3926,13 +3928,36 @@ function portaToken() { return new Promise((fim) => {
       try { const G = M().__acervoGitHub; if (G && G.token) { G.token(tk); if (G.puxar) G.puxar(true); } } catch (x) {}
       v.remove(); fim(tk);
     } catch (x) { erro(x.message); st.textContent = ''; bt.disabled = false; i.select(); } }); }); }
+/* Link da Triagem para colaboradores (/caput/triagem?acesso=<chave>, gerado pelo gestor em /api/acesso?triagemLink=1):
+   pede o nome, abre o acesso (cookie cmt_tri) e mostra só a aba Triagem. A ponte do acervo só deixa ler a Triagem
+   e gravar a ficha e as coleções; Chefia, Pautas, Coordenação e Comunicação ficam fora. */
+const TRI_LINK = (() => { try { return new URLSearchParams(location.search).get('acesso') || ''; } catch (e) { return ''; } })();
+var SO_TRI = '';
+function entrarPeloLink() { return new Promise((fim) => {
+  const v = D.createElement('div'); v.id = 'porta-tk';
+  v.innerHTML = '<form class="pt-c" autocomplete="on"><p class="k" style="margin:0;color:var(--g)">Caput · Triagem</p><h2>Ajudar na triagem<span style="color:var(--g2)">.</span></h2>' +
+    '<p>Este link dá acesso só à Triagem do gabinete. Informe o seu nome: ele fica no registro do que você gravar.</p>' +
+    '<input type="text" id="pt-n" placeholder="Seu nome" autocomplete="name" required aria-label="Seu nome" maxlength="40">' +
+    '<p id="pt-e" role="alert" hidden></p><div class="pt-f"><span id="pt-s"></span><button type="submit" class="btn pri">Entrar</button></div></form>';
+  D.body.appendChild(v); const n = $('#pt-n'); try { n.value = localStorage.getItem('tri_link_nome') || ''; } catch (e) {} setTimeout(() => n.focus(), 30);
+  v.querySelector('form').addEventListener('submit', async (e) => { e.preventDefault(); const er = $('#pt-e'), st = $('#pt-s'), bt = v.querySelector('button[type=submit]'); er.hidden = true; bt.disabled = true; st.textContent = 'Conferindo…';
+    try {
+      const r = await fetch('/api/acesso?triagem=1', { method: 'POST', headers: { 'Content-Type': 'application/json' }, credentials: 'same-origin', body: JSON.stringify({ chave: TRI_LINK, nome: n.value.trim() }) });
+      if (!r.ok) { let m = ''; try { m = (await r.json()).erro || ''; } catch (x) {} throw new Error(m || 'O link não foi aceito.'); }
+      try { localStorage.setItem('tri_link_nome', n.value.trim()); } catch (x) {}
+      try { const q = new URLSearchParams(location.search); q.delete('acesso'); history.replaceState(history.state, '', location.pathname + (q.toString() ? '?' + q : '') + location.hash); } catch (x) {}
+      const Pn = M() && M().__ghPonte; if (Pn && await Pn.confere()) { const r2 = await PM().definir(Pn.SENT, false); if (r2 && r2.ok) { try { const G = M().__acervoGitHub; if (G && G.token) { G.token(Pn.SENT); if (G.puxar) G.puxar(true); } } catch (x) {} } }
+      v.remove(); fim(true);
+    } catch (x) { er.textContent = x.message; er.hidden = false; st.textContent = ''; bt.disabled = false; } }); }); }
 (async function arrancar() {
   const msg = (t) => { const m = $('#carga-msg'); if (m) m.textContent = t; };
   /* token do procs-muta: pedido logo na entrada; sem ele a Triagem não abre (lê e grava num repositório privado) */
   { let t = 0; while (!PM()) { if (++t > 300) break; await new Promise((r) => setTimeout(r, 200)); } }
   if (PM() && PM().pronto) { try { await PM().pronto; } catch (e) {} }
+  if (TRI_LINK) await entrarPeloLink();
   if (PM() && !PM().atual) await portaToken();
   else { try { const G = M().__acervoGitHub; if (G && G.token && PM()) G.token(PM().atual); } catch (e) {} }
+  try { const ac = await (await fetch('/api/acesso', { cache: 'no-store', credentials: 'same-origin' })).json(); if (ac && ac.soTriagem) { SO_TRI = ac.nome || 'colaborador'; D.body.classList.add('so-tri'); const ey = $('.mc-ey'); if (ey) ey.textContent = 'Gabinete CMT · Triagem · ' + SO_TRI; } } catch (e) {}
   rotear();
   /* leituras em paralelo: escopo e fonte começam já, enquanto o motor monta o trabalho do gabinete;
      a fonte é baixada uma só vez (o motor e a Triagem compartilham o download) e fica guardada neste navegador */
