@@ -42,7 +42,8 @@ function analisar() {
 }
 function badge() {
   var m = $('mc-resumo'), w = $('min-conf');
-  if (m) m.innerHTML = K.r ? '<b>' + K.r.nota + '</b>/100 · <span data-sev="alta">' + K.r.resumo.alta + ' alta</span> · <span data-sev="media">' + K.r.resumo.media + ' média</span> · <span data-sev="baixa">' + K.r.resumo.baixa + ' baixa</span>' : (ED.estado().texto ? 'analisando…' : 'leia o editor');
+  /* no título da aba: só a nota (as contagens ficam na própria aba e no número ao lado) */
+  if (m) m.innerHTML = K.r ? '<b>' + K.r.nota + '</b>/100' : (ED.estado().texto ? 'analisando…' : 'leia o editor');
   if (w) w.dataset.sev = K.r ? (K.r.resumo.alta ? 'alta' : K.r.resumo.media ? 'media' : 'ok') : '';
   var b2 = $('mm-conf-n'); if (b2) { var n2 = K.r ? K.r.resumo.alta + K.r.resumo.media : 0; b2.textContent = K.r ? String(n2) : ''; b2.hidden = !K.r; b2.dataset.sev = K.r && K.r.resumo.alta ? 'alta' : n2 ? 'media' : 'ok'; }
   var b = $('conf-badge'); if (!b) return;
