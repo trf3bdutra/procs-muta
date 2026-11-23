@@ -253,7 +253,7 @@ test('extensão 0.20: Gerador monta relatório, dispositivo, ementa, acórdão e
   assert.equal(D.acordao, 'Vistos e relatados estes autos em que são partes as acima indicadas, a Turma Regional de Mato Grosso do Sul, por unanimidade, negou provimento à apelação, nos termos do relatório e voto que ficam fazendo parte integrante do presente julgado.');
   assert.equal(D.procl, 'Por unanimidade, negou provimento à apelação.');
   const gab = read('extensao/gabinete.js');
-  assert.match(gab, /var MODOS = \['Processo', 'Autos', 'Roteiro', 'Gerador'\]/);
+  assert.match(gab, /var MODOS = \['Processo', 'Autos', 'Roteiro'(, 'Gerador')?\]/);
   assert.match(read('extensao/painel.html'), /<script src="gerador\.js"><\/script>/);
 });
 
@@ -465,4 +465,40 @@ test('extensão 0.37: prontuário revisto — teses limpas, 3ª pessoa, decisão
   assert.match(read('extensao/roteiro.js'), /g\.gravar\(\)\.catch\(function \(\) \{\}\)/);
   assert.match(read('padrao/inteiro-teor.js'), /function teseValida\(t\)/);
   assert.equal(read('padrao/inteiro-teor.js'), read('extensao/padrao-inteiro-teor.js'));
+});
+
+test('extensão 0.38: Autos preenche sozinho os campos vazios do Roteiro (e desfaz); A conferir; Peças e documentos numa lista; Gerador na aba Minuta', async () => {
+  const pend = {}, grav = { 'triagem.MPF': 'Não' }, tick = () => new Promise(r => setTimeout(r, 5));
+  const F = { abas: [{ aba: 'Processo', grupos: [{ grupo: 'Sentença', campos: [{ secao: 'origem', chave: 'Sentença - Decisão', tipo: 'texto' }, { secao: 'triagem', chave: 'MPF', tipo: 'texto' }] }] }] };
+  const ctx = { console, setTimeout, clearTimeout, localStorage: { getItem: () => null, setItem() {} }, document: { addEventListener() {} } };
+  ctx.window = ctx; vm.createContext(ctx);
+  ctx.Muta = { formatarCnj: k => k, chaveProcesso: c => String(c).replace(/\D/g, '') };
+  ctx.MutaProntuarioBridge = { chaveAtual: () => '50000000020264036000' };
+  const V = (s, k) => { const id = s + '.' + k; return id in pend ? pend[id] : (grav[id] || ''); };
+  ctx.MutaGabinete = { modelo: () => F, V, gravado: (s, k) => grav[s + '.' + k] || '', marcar: (id, v) => { pend[id] = v; }, gravar: () => Promise.resolve(), fo: () => ({}), op: () => ({}), render() {} };
+  ctx.CMTInteiroTeor = { parseTxt: () => ({ docs: [] }), preselect() {}, especie: () => '', preselectKind() {},
+    buildSuggestions: () => [{ key: 'Sentença - Decisão', label: 'Resultado na origem', value: 'Improcedente', doc: '111', kind: 'field', sec: 'Sentença' }, { key: 'MPF', label: 'MPF', value: 'Sim', doc: '222', kind: 'field', sec: 'MPF' }] };
+  vm.runInContext(read('extensao/autos.js'), ctx);
+  const AU = ctx.MutaAutos;
+  AU._carregar({ numero: '5000000-00.2026.4.03.6000', itens: [{ data: '01/02/2026', docs: [{ id: '111', tipo: 'Sentença' }] }] }, { 111: 'texto' });
+  AU.sugestoes(); await tick();
+  assert.equal(pend['origem.Sentença - Decisão'], 'Improcedente', 'campo vazio preenchido sozinho');
+  assert.ok(!('triagem.MPF' in pend), 'o que já está gravado não é trocado');
+  assert.ok(AU.preenchido('origem.Sentença - Decisão'));
+  const cf = AU.htmlConferir();
+  assert.match(cf, /<details class="au-auto-av au-auto-d"><summary><b>1 campo preenchido pela leitura dos autos/);
+  assert.match(cf, /diverge/, 'a divergência fica em A conferir');
+  assert.match(AU.htmlLeitura(), /Preencher sozinho/); assert.match(AU.htmlLeitura(), /au-res/);
+  assert.match(AU.htmlDocs(() => ''), /Principais \(1\)[\s\S]*Todos \(1\)/);
+  AU.clique({ dataset: { au: 'desfazer' } }); await tick();
+  assert.equal(pend['origem.Sentença - Decisão'], '', 'desfeito');
+  AU.estado().autoSig = {}; AU.sugestoes(); await tick();
+  assert.equal(pend['origem.Sentença - Decisão'], '', 'o desfeito não volta neste processo');
+  const gab = read('extensao/gabinete.js'), html = read('extensao/painel.html');
+  assert.match(gab, /var MODOS = \['Processo', 'Autos', 'Roteiro'\];/);
+  assert.match(gab, /AU\.htmlLeitura\(\) \+ AU\.htmlConferir\(\) \+ AU\.htmlDocs\(function \(\) \{ return pecasCartao\(true\); \}\)/);
+  assert.match(html, /data-mm="ger"/); assert.match(html, /<div id="ger-app" hidden><\/div>/);
+  assert.match(read('extensao/prontuario.js'), /ger:'min'/);
+  assert.match(read('extensao/gerador.js'), /pintar: pintar, abrir: abrir, modo: modo/);
+  assert.match(read('extensao/roteiro.js'), /AU0\.preenchido/);
 });

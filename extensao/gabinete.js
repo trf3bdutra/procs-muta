@@ -111,7 +111,13 @@ function dicaCampo(c) {
 }
 /* rótulo do campo no painel: honorários com ícone (quem paga, quanto e sobre o quê vêm no valor) */
 function rotuloDe(c) { var E = window.MutaEtiquetas; return (/Honorários/.test(c.chave || '') && !/Recursais|Majora/i.test(c.chave || '') && E && E.svg ? '<i class="gl-ic" title="Quem paga, quanto e sobre o quê">' + E.svg('triste', 12) + '</i>' : '') + esc(c.rotulo); }
+/* 0.38: o campo que a leitura dos autos preencheu sozinha leva a marca "autos" até ser conferido ou mudado */
 function campo(c) {
+  var h = campo0(c), AU = window.MutaAutos;
+  if (c.secao && AU && AU.preenchido && AU.preenchido(c.secao + '.' + c.chave)) h = h.replace(/^<div class="gf/, '<div class="gf au-auto').replace('</span>', ' <i class="au-tag" title="Preenchido pela leitura dos autos: confira">autos</i></span>');
+  return h;
+}
+function campo0(c) {
   var longo = c.tipo === 'texto-longo' || c.tipo === 'tabela' || /Honorários/.test(c.chave || ''), cls = 'gf' + (longo ? ' w' : '');
   if (c.tipo === 'tabela') {
     var tv = c.secao ? gravado(c.secao, c.chave) : '';
@@ -166,7 +172,7 @@ function pills() {
    - Triagem: conferência automática dos autos; etiquetas sugeridas; o prontuário de triagem da ficha; o registro da triagem do lote;
    - Produção: destino do julgamento, designação, revisão e o que vale para o destino; no fim, a pauta (sessão) ou o controle da monocrática.
    Autuação, partes, tramitação e "autos extraídos" não aparecem como grupos: o cartão, a situação atual e a lista de documentos os substituem. */
-var MODOS = ['Processo', 'Autos', 'Roteiro', 'Gerador'];
+var MODOS = ['Processo', 'Autos', 'Roteiro'];  /* 0.38: o Gerador foi para a aba Minuta */
 var ROT_MODO = {};
 var FORA_PROC = { 'Autuação': 1, 'Partes': 1, 'Tramitação': 1, 'Autos extraídos do PJe': 1, 'Registro no acervo': 1, 'Acompanhamento': 1 };
 var NO_TOPO = { 'Síntese Processual': 1, 'Alegações': 1, 'Etiquetas sugeridas': 1, 'O que falta sanar': 1, 'Intercorrências': 1, 'Assunto detalhado': 1 };
@@ -437,20 +443,21 @@ var PECAS_ORDEM = { 'Sentença': ['Sentença - ID', 'Sentença - Data', 'Senten�
   'Origem': ['Origem - Juízo', 'Origem - Julgador', 'Origem - Valor da causa', 'Origem - Processo de referência', 'Origem - Documentos 1G'],
   'Recursos e contrarrazões': ['Contrarrazões - Situação', 'Recursos', 'Contrarrazões'] };
 var PECAS_RESUMO = { 'Sentença': ['Sentença - ID', 'Sentença - Data', 'Sentença - Decisão'], 'Origem': ['Origem - Juízo', 'Origem - Julgador'], 'Recursos e contrarrazões': ['Recursos', 'Contrarrazões - Situação'], 'Outras peças e ocorrências': ['Outras peças'] };
-function pecasCartao() {
+function pecasCartao(soGrupos) {
   var A = abaModelo('Processo'); if (!A) return '';
+  var AU = window.MutaAutos;
   var gs = A.grupos.filter(function (g) { return !FORA_PROC[g.grupo] && grupoVisivel(g); });
   if (!gs.length) return '';
   var val = function (c) { var v = c.secao ? V(c.secao, c.chave) : fonteVal(c); return Array.isArray(v) ? (v.length ? v.length + ' item(ns)' : '') : S(v); };
-  return '<section class="card pc-sec pecas" id="g-pecas"><div class="pc-sh"><h3>Peças</h3><small class="muted">da ficha do processo</small></div>' + gs.map(function (g) {
+  return (soGrupos ? '' : '<section class="card pc-sec pecas" id="g-pecas"><div class="pc-sh"><h3>Peças</h3><small class="muted">da ficha do processo</small></div>') + gs.map(function (g) {
     var ord = PECAS_ORDEM[g.grupo] || [], C = g.campos.slice().sort(function (a, b) { var ia = ord.indexOf(a.chave), ib = ord.indexOf(b.chave); return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib); });
     var n = C.filter(function (c) { return !!val(c); }).length, ab = G.pecAb && G.pecAb[g.grupo] != null ? G.pecAb[g.grupo] : false;
     var res = (PECAS_RESUMO[g.grupo] || []).map(function (k) { var c = C.filter(function (x) { return x.chave === k; })[0]; var v = c ? val(c) : ''; return /^\d{4}-\d{2}-\d{2}$/.test(v) ? brD(v) : k.indexOf('ID') >= 0 && v ? 'ID ' + v : v; }).filter(Boolean).join(' · ');
     /* no agravo de instrumento a "Sentença" da ficha guarda a decisão agravada */
     var titulo = g.grupo === 'Sentença' && /agravo de instrumento/i.test(((G.fo || {})['classe_judicial'] || (G.fo || {})['Classe'] || '') + ' ' + V('triagem', 'Tipo de Julgamento')) ? 'Decisão agravada' : g.grupo;
     return '<details class="pc-s"' + (ab ? ' open' : '') + ' data-grupo="' + esc(g.grupo) + '"><summary><span class="pc-s-t"><b>' + esc(titulo) + '</b>' + (res ? '<small>' + esc(res.slice(0, 120)) + '</small>' : '<small class="vz">sem registro</small>') + '</span><span class="gn">' + n + '/' + C.length + '</span></summary>' +
-      pecaExtracao(C, val) + '<div class="gr">' + C.map(campo).join('') + '</div></details>';
-  }).join('') + '</section>';
+      (AU && AU.docsDoGrupo ? AU.docsDoGrupo(g.grupo) : '') + pecaExtracao(C, val) + '<div class="gr">' + C.map(campo).join('') + '</div></details>';
+  }).join('') + (soGrupos ? '' : '</section>');
 }
 /* extrair da peça: o ID e a data vêm da cronologia; o resto (decisão, resultado, honorários…) só do texto da peça.
    O botão lê o texto (se ainda não lido) e preenche os campos vazios do grupo; nunca troca o que já está gravado. */
@@ -564,7 +571,8 @@ function gRot() { return { V: V, F: function (k) { return fonteVal({ fonte: [k] 
 /* o Roteiro de triagem reúne toda a triagem: os passos, a leitura dos autos, as etiquetas, o registro do lote e os demais campos */
 var FORA_ROT = { 'Síntese Processual': 1, 'Alegações': 1, 'O que falta sanar': 1, 'Intercorrências': 1, 'Assunto detalhado': 1, 'Tipo de Julgamento': 1, 'Etiquetas sugeridas': 1 };
 /* Autos: a conferência automática, a lista de peças (com detalhamento, JSON, OCR e PDF) e o preenchimento pelos autos */
-function corpoAutos() { var AU = window.MutaAutos; return AU ? AU.htmlConferencia() + pecasCartao() + AU.htmlPreencher() + AU.htmlDocs() : pecasCartao(); }
+/* 0.38: Leitura dos autos (o que achou e o que pôs na ficha) → A conferir (alertas e divergências) → Peças e documentos */
+function corpoAutos() { var AU = window.MutaAutos; return AU && AU.htmlLeitura ? AU.htmlLeitura() + AU.htmlConferir() + AU.htmlDocs(function () { return pecasCartao(true); }) : pecasCartao(); }
 function corpoRoteiro() {
   if (!window.MutaRoteiro) return '<div class="empty">Roteiro indisponível.</div>';
   var A = abaModelo('Triagem'), todos = [], TR = window.MutaTriagem, AU = window.MutaAutos;
@@ -572,7 +580,9 @@ function corpoRoteiro() {
   return window.MutaRoteiro.html(gRot(), campoRot, questoes, { todos: todos, barra: AU && AU.barra ? AU.barra() : '',
     etiquetas: (TR && TR.etiquetasDe ? TR.etiquetasDe(G.op, G.fo) : '') + (window.MutaAlertas ? window.MutaAlertas.htmlRoteiro(G.cnj, V('triagem', 'Etiquetas sugeridas'), function () { render(); }) : ''), registro: TR && TR.registroDe ? TR.registroDe(G.op, G.fo) : '' });
 }
-function render() {
+/* a aba Minuta › Gerador acompanha o prontuário: cada redesenho repinta o Gerador, se estiver à vista */
+function render() { render0(); if (window.MutaGerador && window.MutaGerador.pintar) window.MutaGerador.pintar(); }
+function render0() {
   if (!caixa) return;
   faixaUsuario(ses.estado());
   /* a faixa do PJe mora no cartão do processo; antes de redesenhar, volta ao lugar de origem para não se perder */
@@ -587,11 +597,12 @@ function render() {
   if (!G.F) { caixa.innerHTML = st0; stEl = $('g-st'); return; }
   if (G.aba === 'Triagem') G.aba = 'Roteiro';
   if (G.aba === 'Produção') G.aba = 'Processo';
+  if (G.aba === 'Gerador') { G.aba = 'Processo'; if (window.MutaAbas) setTimeout(function () { window.MutaAbas.ir('ger'); }, 0); }
   if (MODOS.indexOf(G.aba) < 0) G.aba = 'Processo';
   var nAl = window.MutaAutos && window.MutaAutos.estado().itens ? window.MutaAutos.alertas().filter(function (a) { return a.nivel === 'al'; }).length : 0;
   var tabs = '<div class="seg gtabs pmodos" role="tablist" aria-label="Parte do prontuário">' + MODOS.map(function (a) {
     return '<button type="button" role="tab" data-aba="' + a + '" aria-selected="' + (a === G.aba) + '"><span>' + (ROT_MODO[a] || a) + (a === 'Autos' && nAl ? ' <i class="gnum">' + nAl + '</i>' : '') + '</span><small>' + esc(contaModo(a)) + '</small></button>'; }).join('') + '</div>';
-  var corpo = G.aba === 'Autos' ? corpoAutos() : G.aba === 'Roteiro' ? corpoRoteiro() : G.aba === 'Gerador' ? (window.MutaGerador ? window.MutaGerador.html() : '<div class="empty">Gerador indisponível.</div>') : G.aba === 'Produção' ? corpoProducao() : corpoProcesso();
+  var corpo = G.aba === 'Autos' ? corpoAutos() : G.aba === 'Roteiro' ? corpoRoteiro() : G.aba === 'Produção' ? corpoProducao() : corpoProcesso();
   var ab = document.activeElement && document.activeElement.dataset ? (document.activeElement.dataset.fk || (document.activeElement.dataset.esp ? 'esp:' + document.activeElement.dataset.esp : '') || (document.activeElement.dataset.q != null ? 'q:' + document.activeElement.dataset.q : '')) : '';
   var y = window.scrollY, pp = $('panel-pront'), yp = pp ? pp.scrollTop : 0;
   precEmentario(casoPrec());
@@ -655,6 +666,7 @@ caixa.addEventListener('change', function (e) {
   var t = e.target;
   if (t.dataset && t.dataset.sg != null) { if (window.MutaAutos) window.MutaAutos.marcarSugestao(Number(t.dataset.sg), t.checked); return; }
   if (t.dataset && t.dataset.esp) { if (window.MutaAutos) window.MutaAutos.especificarJa(t.dataset.esp); return; }
+  if (t.dataset && t.dataset.auAuto != null) { if (window.MutaAutos) window.MutaAutos.autoLigar(t.checked); return; }
   if (t.dataset && t.dataset.snOk) { var po = t.dataset.snOk.split(':'), Lo = snLinhas(po[0]), io = Number(po[1]); if (Lo[io] != null) Lo[io] = t.checked ? '✓ ' + Lo[io].replace(/^✓\s*/, '') : Lo[io].replace(/^✓\s*/, ''); snGravar(po[0], Lo); return; }
   if (t.id === 'sn-tp') { G.snTp = t.value; return; }
   if (t.id === 'pm-pron') { var xp = PRON[Number(t.value)]; marcar('producao.Destino', xp ? xp[1] : ''); marcar('producao.Mono - Tipo de ato', xp ? xp[2] : ''); G.dest = null; agendar(400); render(); return; }
@@ -664,7 +676,7 @@ caixa.addEventListener('change', function (e) {
   agendar(900);
   if (/^(triagem\.(Urgência|Padrão - Espécie)|producao\.Destino|controles\.Sensível - (In|Ex)cluído)$/.test(t.dataset.fk) || G.aba === 'Roteiro') render();
 });
-caixa.addEventListener('toggle', function (e) { var c = e.target.classList; if (!c) return; if (c.contains('pm-aut')) G.autAb = e.target.open; if (c.contains('pc-s')) { G.pecAb = G.pecAb || {}; G.pecAb[e.target.dataset.grupo] = e.target.open; } }, true);
+caixa.addEventListener('toggle', function (e) { var c = e.target.classList; if (!c) return; if (c.contains('pm-aut')) G.autAb = e.target.open; if (c.contains('au-auto-d') && window.MutaAutos) window.MutaAutos.estado().autoAb = e.target.open; if (c.contains('pc-s')) { G.pecAb = G.pecAb || {}; G.pecAb[e.target.dataset.grupo] = e.target.open; } }, true);
 caixa.addEventListener('keydown', function (e) {
   if (e.target.id === 'sn-tx' && e.key === 'Enter') { e.preventDefault(); snIncluir(); }
   else if (e.target.id === 'pm-ad-tx' && e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); adAcao('ok'); }
@@ -695,7 +707,6 @@ caixa.addEventListener('click', function (e) {
   if (b.dataset.ch) { var cv = S(V.apply(null, [b.dataset.ch.slice(0, b.dataset.ch.indexOf('.')), b.dataset.ch.slice(b.dataset.ch.indexOf('.') + 1)])); marcar(b.dataset.ch, cv === b.dataset.v ? '' : b.dataset.v); agendar(500); render(); return; }
   if (b.dataset.rt != null) { if (window.MutaRoteiro && window.MutaRoteiro.clique(b, gRot())) render(); return; }
   if (b.dataset.copia) { copiar(b.dataset.copia, b); return; }
-  if (b.dataset.grTipo || b.dataset.grRes || b.dataset.grCopia) { if (window.MutaGerador && window.MutaGerador.acao(b)) render(); return; }
   if (b.dataset.pecApl != null) { pecaPreencher(b.dataset.pecApl); return; }
   if (b.dataset.pecLer || b.dataset.pecOcr) { var pid = b.dataset.pecLer || b.dataset.pecOcr, AUx = window.MutaAutos; if (!AUx) return;
     AUx.extrair(pid, b.dataset.pecOcr ? 'ocr' : '').then(function (dd) { if (dd && dd.estado === 'ok') pecaPreencher(pid); else render(); }); render(); return; }

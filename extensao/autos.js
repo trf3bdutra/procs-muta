@@ -20,7 +20,7 @@ function iso(d) { var m = /^(\d{2})\/(\d{2})\/(\d{4})/.exec(S(d)); if (m) return
 function brD(v) { var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(S(v)); return m ? m[3] + '/' + m[2] + '/' + m[1] : S(v); }
 function GB() { return window.MutaGabinete || {}; }
 
-var A = { cnj: '', itens: null, idp: '', host: '', em: 0, lendo: false, erro: '', docs: {}, msg: '', sug: null, sugMsg: '', abertos: {}, filtro: 'pecas', fila: 0, esp: {}, tEsp: null };
+var A = { mostrados: {}, auto: null, autoSig: {}, recusa: {}, tAuto: 0, cnj: '', itens: null, idp: '', host: '', em: 0, lendo: false, erro: '', docs: {}, msg: '', sug: null, sugMsg: '', abertos: {}, filtro: 'pecas', fila: 0, esp: {}, tEsp: null };
 
 /* ---------- categorias pelo tipo do documento no PJe: [chave, padrão, rótulo, grupo] ---------- */
 var CAT = [
@@ -80,6 +80,8 @@ function ler(tudo) {
     if (r.numero && r.numero !== A.cnj) { A.docs = {}; A.sug = null; A.abertos = {}; }
     A.lendo = false; A.itens = r.itens || []; A.idp = r.idp || ''; A.host = r.host || ''; A.cnj = r.numero || ''; A.em = Date.now(); A.sug = null;
     redesenhar();
+    /* leitura automática: com os autos do processo aberto e nenhuma peça principal lida, lê as principais (o Roteiro se preenche ao fim) */
+    if (autoLigado() && lidoDoProcesso() && !A.fila && !lista().some(function (d) { return PRINC[d.k] && A.docs[d.id] && /^(ok|sem)$/.test(A.docs[d.id].estado); })) extrairPrincipais();
   }, function (e) { A.lendo = false; A.erro = e.message; redesenhar(); });
 }
 function lidoDoProcesso() { var c = cnjAtual(); return !!(A.itens && A.cnj && c && Muta.chaveProcesso(A.cnj) === Muta.chaveProcesso(c)); }
@@ -136,7 +138,7 @@ function extrair(id, modo) {
   }).then(function (x) {
     var sem = S(x.texto).replace(/\s/g, '').length < 40;
     A.docs[id] = { estado: sem ? 'sem' : 'ok', modo: modo || '', texto: S(x.texto), html: x.html || null, fmt: x.fmt, pags: x.pags, lidas: x.lidas, ocr: x.ocr || 0, url: x.url };
-    A.sug = null; redesenhar(); return A.docs[id];
+    A.sug = null; redesenhar(); agendarAuto(); return A.docs[id];
   }, function (e) { A.docs[id] = { estado: 'erro', erro: e.message }; redesenhar(); return A.docs[id]; });
 }
 /* ---------- baixar em JSON: cada peça e o inteiro teor (formato de acervo/autos/<CNJ>.json.gz, o mesmo do Caput e da Ex Officio) ---------- */
@@ -177,7 +179,7 @@ function extrairPrincipais() {
   A.fila = L.length; A.msg = ''; redesenhar();
   var i = 0;
   function trab() { if (i >= L.length) return Promise.resolve(); var d = L[i++]; return extrair(d.id).then(function () { A.fila--; }, function () { A.fila--; }).then(trab); }
-  return Promise.all([trab(), trab(), trab()]).then(function () { A.fila = 0; A.msg = 'Peças principais lidas: ' + L.length + '.'; A.sug = null; redesenhar(); });
+  return Promise.all([trab(), trab(), trab()]).then(function () { A.fila = 0; A.msg = 'Peças principais lidas: ' + L.length + '.'; A.sug = null; redesenhar(); agendarAuto(); });
 }
 function abrirPdf(id) {
   if (!A.idp) return;
@@ -264,7 +266,67 @@ function calcular() {
     var P = T.parseTxt(md());
     T.preselect(P); try { P.kind = T.especie(P); T.preselectKind(P); } catch (e) {}
     A.P = P; A.sug = mapear(T.buildSuggestions(P, linhaAntiga(), null) || []); A.sugMsg = '';
+    agendarAuto();
   } catch (e) { A.sug = []; A.sugMsg = 'Não foi possível ler as peças: ' + ((e && e.message) || e); }
+}
+
+/* ---------- preenchimento automático (0.38) ----------
+   Lidas as peças, o que a leitura achou vai sozinho para os campos VAZIOS da ficha (e daí para o Roteiro): nunca troca
+   o que já está gravado nem o que diverge (esses ficam em "A conferir"). Do que os alertas sugerem, só o tipo de julgamento
+   (sem divergência) e a remessa necessária. Desfazer limpa o que foi posto e não o repõe mais neste processo.
+   Desliga em Autos › "Preencher sozinho" (localStorage hero18810:autoPreencher = '0'). */
+var AUTO_K = 'hero18810:autoPreencher';
+var AUTO_AL = /^(triagem\.Tipo de Julgamento|origem\.Sentença - Reexame)$/;
+function autoLigado() { try { return localStorage.getItem(AUTO_K) !== '0'; } catch (e) { return true; } }
+function autoLigar(on) { try { localStorage.setItem(AUTO_K, on ? '1' : '0'); } catch (e) {} if (on) { A.autoSig = {}; agendarAuto(); } redesenhar(); }
+function chave() { return A.cnj ? Muta.chaveProcesso(A.cnj) : ''; }
+function cheio(v) { return Array.isArray(v) ? v.length > 0 : !!S(v); }
+function valorFicha(alvo) { var g = GB(), i = alvo.indexOf('.'); return g.V ? g.V(alvo.slice(0, i), alvo.slice(i + 1)) : ''; }
+function vazioFicha(alvo) { return !cheio(valorFicha(alvo)); }
+function assinatura() { return chave() + '|' + Object.keys(A.docs).filter(function (k) { return /^(ok|sem)$/.test(A.docs[k].estado); }).sort().join(','); }
+function agendarAuto() { if (A.tAuto || !autoLigado()) return; A.tAuto = setTimeout(autoPreencher, 0); }
+function autoPreencher() {
+  A.tAuto = 0;
+  if (!autoLigado() || !A.itens || !lidoDoProcesso() || A.fila) return;
+  if (!A.sug) calcular(); if (!A.sug || !A.sug.length && A.sugMsg) return;
+  var g = GB(); if (!g.marcar || !g.gravar || !g.V) return;
+  var sig = assinatura(); if (A.autoSig[sig]) return; A.autoSig[sig] = 1;
+  var ck = chave(), rec = A.recusa[ck] || {}, L = [];
+  A.sug.forEach(function (it) {
+    if (it.alvo && it.status === 'novo' && !rec[it.alvo] && cheio(it.value) && vazioFicha(it.alvo) && !L.some(function (x) { return x.alvo === it.alvo; }))
+      L.push({ alvo: it.alvo, rot: it.label || it.key, v: it.value, doc: it.doc || '' });
+  });
+  try { alertas().forEach(function (a) {
+    if (a.campo && AUTO_AL.test(a.campo) && a.nivel !== 'al' && S(a.valor) && !rec[a.campo] && vazioFicha(a.campo) && !L.some(function (x) { return x.alvo === a.campo; }))
+      L.push({ alvo: a.campo, rot: a.campo.slice(a.campo.indexOf('.') + 1), v: a.valor, doc: a.doc || '' });
+  }); } catch (e) {}
+  if (!L.length) return;
+  L.forEach(function (x) { g.marcar(x.alvo, x.v); });
+  var ant = A.auto && A.auto.ck === ck ? A.auto.itens : [];
+  A.auto = { ck: ck, itens: ant.concat(L.filter(function (x) { return !ant.some(function (p) { return p.alvo === x.alvo; }); })), em: Date.now() };
+  g.gravar().then(function () { A.sug = null; redesenhar(); }, function () { redesenhar(); });
+}
+function autoItens() { return A.auto && A.auto.ck === chave() && lidoDoProcesso() ? A.auto.itens : []; }
+/* desfaz só o que ainda está como a leitura pôs (o que a pessoa já mudou fica) */
+function desfazerAuto() {
+  var g = GB(), I = autoItens(); if (!I.length || !g.marcar) return;
+  var ck = chave(); A.recusa[ck] = A.recusa[ck] || {};
+  I.forEach(function (x) { A.recusa[ck][x.alvo] = 1; if (JSON.stringify(valorFicha(x.alvo)) === JSON.stringify(x.v)) g.marcar(x.alvo, Array.isArray(x.v) ? [] : ''); });
+  A.auto = null;
+  g.gravar().then(function () { A.sug = null; redesenhar(); }, function () { redesenhar(); });
+}
+function preenchido(alvo) { return autoItens().some(function (x) { return x.alvo === alvo && JSON.stringify(valorFicha(alvo)) === JSON.stringify(x.v); }); }
+/* o aviso do que foi posto: no topo da aba Autos e na barra do Roteiro */
+function htmlAuto(curto) {
+  var I = autoItens().filter(function (x) { return preenchido(x.alvo); });
+  if (!I.length) return '';
+  var val = function (v) { return Array.isArray(v) ? v.length + (v.length === 1 ? ' linha' : ' linhas') : dataBr(S(v)).slice(0, 80); };
+  var tit = I.length + (I.length === 1 ? ' campo preenchido' : ' campos preenchidos') + ' pela leitura dos autos';
+  if (curto) return '<div class="au-auto-av" role="status"><span><b>' + tit + '</b> · confira no Roteiro (marcados “autos”)</span><button type="button" class="lnk" data-au="desfazer" title="Limpa o que a leitura pôs e não o repõe neste processo">Desfazer</button></div>';
+  /* em A conferir: recolhido; abre para ver o que foi posto */
+  return '<details class="au-auto-av au-auto-d"' + (A.autoAb ? ' open' : '') + '><summary><b>' + tit + '</b><small>conferir</small></summary>' +
+    '<ul>' + I.map(function (x) { return '<li><b>' + esc(x.rot) + '</b> ' + esc(val(x.v)) + (x.doc ? ' <small class="mono">ID ' + esc(String(x.doc).split(/,\s*/)[0]) + '</small>' : '') + '</li>'; }).join('') + '</ul>' +
+    '<div class="bar"><button type="button" class="btn line sm" data-au="desfazer" title="Limpa o que a leitura pôs e não o repõe neste processo">Desfazer o preenchimento</button></div></details>';
 }
 
 /* ---------- alertas da triagem (conferências que a ficha não guarda num campo só) ---------- */
@@ -391,21 +453,13 @@ function estadoDoc(id) {
   return '<span class="au-st ok"' + (d.ocr ? ' title="' + d.ocr + ' página(s) lida(s) por OCR: confira nomes, números e datas"' : '') + '>' + (d.fmt === 'pdf' ? d.pags + ' pág.' + (d.ocr ? ' · OCR' : '') : 'texto') + '</span>';
 }
 /* lista de documentos, com especificação (gravada em "Outras peças") e os botões de cada um */
-function htmlDocs() {
-  var tela = window.MutaPje && window.MutaPje.tela ? window.MutaPje.tela() : '';
-  var cab = '<div class="pc-sh"><h3>Documentos (cronologia do PJe)</h3><small class="muted">' + (A.itens ? A.itens.reduce(function (n, i) { return n + (i.docs || []).length; }, 0) + ' na cronologia · lidos às ' + hora() : 'painel esquerdo dos autos digitais') + '</small></div>';
-  if (A.erro) return '<section class="card pc-sec" id="g-docs">' + cab + '<div class="bar au-bl">' + botaoLer() + '</div><p class="status err">' + esc(A.erro) + '</p></section>';
-  if (!A.itens) return '<section class="card pc-sec" id="g-docs">' + cab + '<div class="bar au-bl">' + botaoLer() + '</div>' + (tela === 'autos' ? '' : '<p class="muted">Abra os autos digitais no PJe.</p>') + '</section>';
-  var outro = !lidoDoProcesso() ? '<p class="status err">Os autos lidos são do processo ' + esc(A.cnj || 'sem número') + ', não do aberto no painel. Leia de novo na aba dos autos certos.</p>' : '';
-  var L = lista(), F = A.filtro, V = F === 'pecas' ? L.filter(function (d) { return PRINC[d.k] && d.k !== 'intimacao' && !d.anexo; }) : L;
-  var outras = linhasGravadas('origem', 'Outras peças'), espDe = function (id) { if (id in A.esp) return A.esp[id]; var r = outras.filter(function (x) { return S(x.ids) === id; })[0]; return r ? S(r.texto) : ''; };
-  var lidos = Object.keys(A.docs).filter(function (k) { return /^(ok|sem)$/.test(A.docs[k].estado); }).length;
-  var h = '<section class="card pc-sec" id="g-docs">' + cab + outro +
-    /* ler e reler ficam na Conferência, no topo da aba (sem repetir aqui) */
-    '<div class="bar au-tj"><button type="button" class="btn line sm" data-au="tudojs"' + (A.todo ? ' disabled' : '') + ' title="Lê o texto de todos os documentos (PDF digitalizado vai ao OCR) e baixa num arquivo, no formato do acervo">' + SVGDL + (A.todo ? 'Lendo ' + A.todo.feitos + '/' + A.todo.total + '…' : 'Baixar inteiro teor (JSON)') + '</button></div>' +
-    (A.msg ? '<p class="status ok">' + esc(A.msg) + '</p>' : '') +
-    '<div class="au-fx"><span class="seg"><button type="button" data-au="f:pecas" aria-selected="' + (F === 'pecas') + '" title="Decisões, recursos, contrarrazões, parecer, procuração, custas e inicial">Principais (' + L.filter(function (d) { return PRINC[d.k] && d.k !== 'intimacao' && !d.anexo; }).length + ')</button><button type="button" data-au="f:todos" aria-selected="' + (F === 'todos') + '">Todos (' + L.length + ')</button></span><small class="muted">' + lidos + ' com texto lido</small></div>' +
-    '<div class="au-docs">' + V.map(function (d) {
+/* 0.38 · Peças e documentos (uma só lista): em "Principais", as peças da ficha (sentença ou decisão agravada, origem,
+   recursos e contrarrazões, outras peças), cada uma com os seus documentos da cronologia; em "Todos", a cronologia inteira. */
+var GRUPO_DOCS = { 'Sentença': { sentenca: 1 }, 'Recursos e contrarrazões': { apelacao: 1, adesivo: 1, agravo: 1, agint: 1, ed: 1, recurso: 1, contrarrazoes: 1 },
+  'Outras peças e ocorrências': { acordao: 1, decisao: 1, parecer: 1, procuracao: 1, custas: 1, inicial: 1 } };
+function principais() { return lista().filter(function (d) { return PRINC[d.k] && d.k !== 'intimacao' && !d.anexo; }); }
+function espDe(id) { if (id in A.esp) return A.esp[id]; var r = linhasGravadas('origem', 'Outras peças').filter(function (x) { return S(x.ids) === id; })[0]; return r ? S(r.texto) : ''; }
+function linhaDoc(d) {
       var ab = A.abertos[d.id], dd = A.docs[d.id];
       return '<div class="au-doc' + (d.anexo ? ' anx' : '') + (PRINC[d.k] ? ' pr' : '') + '"><div class="au-h"><span class="au-d">' + esc(d.data) + (d.hora ? '<small>' + esc(d.hora) + '</small>' : '') + '</span>' +
         '<div class="au-n"><b>' + esc(d.tipo) + '</b>' + (d.desc && N(d.desc) !== N(d.tipo) ? '<small>' + esc(d.desc) + '</small>' : '') + '</div>' +
@@ -418,19 +472,45 @@ function htmlDocs() {
         '<button type="button" class="btn line sm au-pdf" data-au="pdf:' + esc(d.id) + '" title="Abre o PDF no PJe, numa aba nova" aria-label="Abrir o PDF no PJe">↗</button>' + estadoDoc(d.id) + '</div>' +
         (ab && dd && dd.texto ? '<div class="au-tx"><div class="bar"><button type="button" class="lnk" data-au="cp:' + esc(d.id) + '">Copiar o texto</button><small class="muted">' + (dd.fmt === 'pdf' ? dd.pags + ' página(s)' + (dd.lidas < dd.pags ? ', lidas ' + dd.lidas : '') : 'HTML') + '</small></div>' + (dd.html ? '<div class="tx-j">' + dd.html.slice(0, 1500).map(function (h) { return '<p>' + limpaH(h) + '</p>'; }).join('') + '</div>' : '<div class="tx-j">' + esc(dd.texto.slice(0, 60000)).split(/\n+/).map(function (l) { return '<p>' + l + '</p>'; }).join('') + '</div>') + '</div>' : '') +
         (ab && dd && dd.estado === 'sem' ? '<p class="status err au-tx">Sem texto legível, nem pelo OCR' + (dd.pags > OCR_MAX ? ' (o OCR lê até ' + OCR_MAX + ' páginas)' : '') + ': abra o PDF (↗).</p>' : '') + '</div>';
-    }).join('') + '</div></section>';
-  return h;
+    }
+/* os documentos de uma peça da ficha (chamado pelo gabinete.js dentro de cada grupo) */
+function docsDoGrupo(grupo) {
+  if (!A.itens || !lidoDoProcesso() || A.filtro === 'todos') return '';
+  var K = GRUPO_DOCS[grupo]; if (!K) return '';
+  var L = principais().filter(function (d) { return K[d.k] && !A.mostrados[d.id]; });
+  L.forEach(function (d) { A.mostrados[d.id] = 1; });
+  return L.length ? '<div class="au-docs au-dg">' + L.map(linhaDoc).join('') + '</div>' : '';
+}
+function htmlDocs(pecas) {
+  A.mostrados = {};
+  var F = A.filtro === 'todos' ? 'todos' : 'pecas', ok = A.itens && lidoDoProcesso();
+  var gr = F === 'pecas' && typeof pecas === 'function' ? pecas() : '';
+  var L = ok ? lista() : [], P = ok ? principais() : [];
+  var lidos = Object.keys(A.docs).filter(function (k) { return /^(ok|sem)$/.test(A.docs[k].estado); }).length;
+  var cab = '<div class="pc-sh"><h3>Peças e documentos</h3><small class="muted">' + (ok ? L.length + ' na cronologia · ' + lidos + ' com texto lido' : 'da ficha do processo') + '</small></div>';
+  var seg = ok ? '<div class="au-fx"><span class="seg"><button type="button" data-au="f:pecas" aria-selected="' + (F === 'pecas') + '" title="As peças da ficha com os seus documentos: decisões, recursos, contrarrazões, parecer, procuração, custas e inicial">Principais (' + P.length + ')</button><button type="button" data-au="f:todos" aria-selected="' + (F === 'todos') + '" title="A cronologia inteira do PJe, do mais recente ao mais antigo">Todos (' + L.length + ')</button></span>' +
+    '<button type="button" class="btn line sm" data-au="tudojs"' + (A.todo ? ' disabled' : '') + ' title="Lê o texto de todos os documentos (PDF digitalizado vai ao OCR) e baixa num arquivo, no formato do acervo">' + SVGDL + (A.todo ? 'Lendo ' + A.todo.feitos + '/' + A.todo.total + '…' : 'Inteiro teor (JSON)') + '</button></div>' : '';
+  var corpo;
+  if (F === 'todos') corpo = '<div class="au-docs">' + L.map(linhaDoc).join('') + '</div>';
+  else {
+    var resto = P.filter(function (d) { return !A.mostrados[d.id]; });
+    corpo = gr + (resto.length ? '<details class="pc-s" open><summary><span class="pc-s-t"><b>Demais peças</b><small>' + resto.length + ' documento(s)</small></span></summary><div class="au-docs au-dg">' + resto.map(linhaDoc).join('') + '</div></details>' : '');
+  }
+  var aviso = A.itens && !lidoDoProcesso() ? '<p class="status err">Os autos lidos são de outro processo (' + esc(A.cnj || 'sem número') + ').</p>' : !A.itens ? '<p class="muted au-nl">Leia os autos para ver os documentos de cada peça.</p>' : '';
+  return '<section class="card pc-sec pecas" id="g-docs">' + cab + seg + (A.msg ? '<p class="status ok">' + esc(A.msg) + '</p>' : '') + aviso + corpo + '</section>';
 }
 function htmlSugestoes(secoes) {
   if (!A.itens || !lidoDoProcesso()) return '';
   if (!A.sug) calcular();
   var I = (A.sug || []).filter(function (it) { return !secoes || naSecao(it.sec, secoes); });
-  var marc = I.filter(function (i) { return i.apply && i.status !== 'igual'; }).length;
+  var marc = I.filter(function (i) { return i.apply && i.status !== 'igual' && !(i.alvo && preenchido(i.alvo)); }).length;
   if (A.sugMsg) return '<p class="status err">' + esc(A.sugMsg) + '</p>';
   if (!I.length) return '<p class="muted">Nada a sugerir nestas partes com o que foi lido' + (Object.keys(A.docs).length ? '' : ' (leia as peças principais)') + '.</p>';
   var valor = function (it) { return dataBr(it.kind === 'tabela' ? it.value.map(function (l) { return Object.keys(l).filter(function (c) { return S(l[c]); }).map(function (c) { return c + ': ' + S(l[c]).slice(0, 90); }).join(' · '); }).join(' | ') : S(it.value)); };
   /* o que já confere com a ficha não tem o que gravar: fica recolhido numa linha */
-  var pend = I.filter(function (it) { return it.status !== 'igual'; }), iguais = I.filter(function (it) { return it.status === 'igual'; });
+  /* o que a leitura já pôs sozinha (e segue como pôs) conta como igual */
+  var feito = function (it) { return it.status === 'igual' || (it.alvo && preenchido(it.alvo)); };
+  var pend = I.filter(function (it) { return !feito(it); }), iguais = I.filter(function (it) { return feito(it) && !(it.alvo && preenchido(it.alvo)); });
   var G = {}, ordem = [];
   pend.forEach(function (it) { var k = (A.sug || []).indexOf(it); if (!G[it.sec]) { G[it.sec] = []; ordem.push(it.sec); } G[it.sec].push([it, k]); });
   var h = ordem.map(function (sec) {
@@ -472,6 +552,50 @@ function htmlPreencher() {
   return '<section class="card pc-sec" id="g-pre"><div class="pc-sh"><h3>Preencher pelos autos</h3><small class="muted">sentença, origem, recursos e contrarrazões, outras peças</small></div>' + htmlSugestoes(PROC_SECS) + '</section>';
 }
 
+/* 0.38 · Autos › Leitura dos autos: botões, o que a cronologia e as peças mostram e o que foi preenchido */
+function resumoLeitura() {
+  var L = lista().filter(function (d) { return !d.anexo; }), lido = function (d) { return d && A.docs[d.id] && A.docs[d.id].estado === 'ok'; };
+  var ai = /agravo de instrumento/i.test(S(((GB().fo && GB().fo()) || {}).classe_judicial) + ' ' + S(valorFicha('triagem.Tipo de Julgamento')));
+  var dec = null;
+  try { var ds = A.P ? A.P.docs.filter(function (d) { return d.target === 'sentenca' && !d.edDe; }) : []; if (ds.length) { var x = ds[ds.length - 1]; dec = L.filter(function (d) { return d.id === String(x.id); })[0] || { id: String(x.id), data: '' }; } } catch (e) {}
+  if (!dec) dec = L.filter(function (d) { return d.k === 'sentenca'; })[0] || (ai ? null : null);
+  var R = L.filter(function (d) { return /^(apelacao|adesivo|agravo|agint|ed|recurso)$/.test(d.k); }), C = L.filter(function (d) { return d.k === 'contrarrazoes'; });
+  var M = L.filter(function (d) { return d.k === 'parecer'; })[0], P = L.filter(function (d) { return d.k === 'procuracao'; })[0];
+  var chip = function (rot, d, n, dica) {
+    var tem = n != null ? n > 0 : !!d;
+    return '<span class="au-ch ' + (tem ? (d && !lido(d) ? 'nl' : 'ok') : 'vz') + '" title="' + esc(dica || '') + '"><b>' + esc(rot) + '</b>' + (tem ? (n > 1 ? ' ' + n : '') + (d ? ' <i class="mono">ID ' + esc(d.id) + '</i>' : '') + (d && !lido(d) ? ' <small>não lida</small>' : '') : ' <small>não achada</small>') + '</span>';
+  };
+  var princ = L.filter(function (d) { return PRINC[d.k] && d.k !== 'intimacao'; }), nl = princ.filter(lido).length;
+  return '<div class="au-res">' + chip(ai ? 'Decisão agravada' : 'Sentença', dec, null, ai ? 'No agravo de instrumento, a decisão agravada costuma vir anexa à inicial: confira em Peças' : 'A decisão recorrida') +
+    chip(R.length > 1 ? 'Recursos' : 'Recurso', R[0], R.length, R.map(function (d) { return d.tipo + ' ID ' + d.id + ' (' + d.data + ')'; }).join('; ')) +
+    chip('Contrarrazões', C[0], C.length, C.map(function (d) { return 'ID ' + d.id + ' (' + d.data + ')'; }).join('; ')) +
+    chip('MPF', M, null, M ? 'Parecer ID ' + M.id + ' (' + M.data + ')' : 'Sem parecer na cronologia lida') +
+    chip('Procuração', P, null, '') + '</div><p class="muted au-nl">' + nl + ' de ' + princ.length + ' peças principais com texto lido' + (A.fila ? ' · lendo ' + A.fila + '…' : '') + '</p>';
+}
+function htmlLeitura() {
+  var tela = window.MutaPje && window.MutaPje.tela ? window.MutaPje.tela() : '';
+  var h = '<section class="card pc-sec cf" id="g-lei"><div class="pc-sh"><h3>Leitura dos autos</h3><small class="muted">' + (A.itens && lidoDoProcesso() ? 'lidos às ' + hora() : 'cronologia do PJe') + '</small></div>';
+  var chk = '<label class="au-sw" title="Lidos os autos, lê as peças principais e põe nos campos vazios da ficha o que achou (nunca troca o que já está gravado)"><input type="checkbox" data-au-auto' + (autoLigado() ? ' checked' : '') + '> Preencher sozinho</label>';
+  if (A.erro) return h + '<div class="bar au-bl">' + botaoLer() + '</div><p class="status err">' + esc(A.erro) + '</p></section>';
+  if (!A.itens) return h + '<div class="bar au-bl">' + botaoLer() + chk + '</div><p class="muted">' + (tela === 'autos' ? 'Leia os autos: o Roteiro se preenche com o que for achado.' : 'Abra os autos digitais no PJe.') + '</p></section>';
+  if (!lidoDoProcesso()) return h + '<div class="bar au-bl">' + botaoLer() + '</div><p class="status err">Os autos lidos são do processo ' + esc(A.cnj || 'sem número') + ', não do aberto no painel. Leia de novo na aba dos autos certos.</p></section>';
+  return h + '<div class="bar au-bl">' + botaoLer() + '<button type="button" class="btn ' + (autoLigado() ? 'line' : 'solid') + ' sm" data-au="princ"' + (A.fila ? ' disabled' : '') + '>' + (A.fila ? 'Lendo ' + A.fila + '…' : 'Peças principais') + '</button>' + chk + '</div>' +
+    resumoLeitura() + (A.sugMsg ? '<p class="status err">' + esc(A.sugMsg) + '</p>' : '') + '</section>';
+}
+/* Autos › A conferir: os alertas e o que a leitura achou e não foi sozinho para a ficha (diverge, ou com o automático desligado) */
+function htmlConferir() {
+  if (!A.itens || !lidoDoProcesso()) return '';
+  if (!A.sug) calcular();
+  var al = alertas().map(function (a, i) { return [a, i]; }).filter(function (x) { return !/^Tipo de julgamento:/.test(x[0].t); });
+  var pend = (A.sug || []).filter(function (it) { return it.status !== 'igual' && !(it.alvo && preenchido(it.alvo)); }).length;
+  var sg = htmlSugestoes(null);
+  var nA = autoItens().filter(function (x) { return preenchido(x.alvo); }).length;
+  return '<section class="card pc-sec" id="g-cf"><div class="pc-sh"><h3>A conferir</h3><small class="muted">' + [nA ? nA + ' preenchido(s)' : '', al.length ? al.length + ' alerta(s)' : '', pend ? pend + ' divergência(s)' : ''].filter(Boolean).join(' · ') + '</small></div>' + htmlAuto(false) +
+    (al.length ? '<div class="al-l">' + al.map(function (x) { var a = x[0];
+      return '<div class="al-i ' + a.nivel + '"><span>' + esc(a.t) + '</span>' + (a.campo && vazioFicha(a.campo) ? '<button type="button" class="btn line sm" data-au="al:' + x[1] + '">Gravar “' + esc(a.valor) + '”</button>' : '') + '</div>'; }).join('') + '</div>' : '') +
+    sg + '</section>';
+}
+
 /* ---------- ações ---------- */
 function aplicar() {
   var C = {};
@@ -502,6 +626,7 @@ function clique(b) {
   else if (a === 'tudo') ler(true);
   else if (a === 'princ') extrairPrincipais();
   else if (a === 'aplicar') aplicar();
+  else if (a === 'desfazer') desfazerAuto();
   else if (/^f:/.test(a)) { A.filtro = a.slice(2); redesenhar(); }
   else if (/^ext:/.test(a)) { var id = a.slice(4), d = A.docs[id]; if (d && /^(ok|sem)$/.test(d.estado)) { A.abertos[id] = !A.abertos[id]; redesenhar(); } else { A.abertos[id] = true; extrair(id); } }
   else if (a === 'tudojs') baixarTudo();
@@ -516,7 +641,7 @@ function especificar(id, v) { A.esp[id] = v; clearTimeout(A.tEsp); A.tEsp = setT
 function especificarJa(id) { if (id in A.esp) { clearTimeout(A.tEsp); gravarEspecificacao(id); } }
 
 document.addEventListener('muta:prontuario', function () { var c = cnjAtual(); if (A.cnj && c && Muta.chaveProcesso(A.cnj) !== Muta.chaveProcesso(c)) { A.sug = null; } });
-window.MutaAutos = { barra: function () { var tela = window.MutaPje && window.MutaPje.tela ? window.MutaPje.tela() : ''; if (!A.itens || !lidoDoProcesso()) return '<div class="bar au-bl rt-ler">' + botaoLer() + '<small class="muted">' + (tela === 'autos' ? 'Leia os autos para conferir.' : 'Abra os autos digitais no PJe.') + '</small></div>'; return '<div class="bar au-bl rt-ler">' + botaoLer() + '<button type="button" class="btn solid sm" data-au="princ"' + (A.fila ? ' disabled' : '') + '>' + (A.fila ? 'Lendo ' + A.fila + '…' : 'Peças principais') + '</button></div>'; }, sugestoes: function () { if (!A.itens || !lidoDoProcesso()) return []; if (!A.sug) calcular(); return A.sug || []; }, ler: ler, extrair: extrair, extrairPrincipais: extrairPrincipais, htmlDocs: htmlDocs, htmlSituacao: htmlSituacao, htmlConferencia: htmlConferencia, htmlPreencher: htmlPreencher,
+window.MutaAutos = { barra: function () { var tela = window.MutaPje && window.MutaPje.tela ? window.MutaPje.tela() : ''; if (!A.itens || !lidoDoProcesso()) return '<div class="bar au-bl rt-ler">' + botaoLer() + '<small class="muted">' + (tela === 'autos' ? 'Leia os autos para conferir.' : 'Abra os autos digitais no PJe.') + '</small></div>'; return '<div class="bar au-bl rt-ler">' + botaoLer() + '<button type="button" class="btn line sm" data-au="princ"' + (A.fila ? ' disabled' : '') + '>' + (A.fila ? 'Lendo ' + A.fila + '…' : 'Peças principais') + '</button></div>' + htmlAuto(true); }, sugestoes: function () { if (!A.itens || !lidoDoProcesso()) return []; if (!A.sug) calcular(); return A.sug || []; }, ler: ler, extrair: extrair, extrairPrincipais: extrairPrincipais, htmlDocs: htmlDocs, htmlSituacao: htmlSituacao, htmlConferencia: htmlConferencia, htmlPreencher: htmlPreencher, htmlLeitura: htmlLeitura, docsDoGrupo: docsDoGrupo, htmlConferir: htmlConferir, htmlAuto: htmlAuto, preenchido: preenchido, autoLigado: autoLigado, autoLigar: autoLigar, autoPreencher: autoPreencher,
   clique: clique, marcarSugestao: marcarSugestao, especificar: especificar, especificarJa: especificarJa, lista: lista, alertas: alertas, md: md, estado: function () { return A; },
   /* para testes: carrega uma cronologia e textos sem o PJe */
   _carregar: function (r, textos) { A.itens = r.itens; A.idp = r.idp || ''; A.host = r.host || ''; A.cnj = r.numero || ''; A.em = Date.now(); A.docs = {}; Object.keys(textos || {}).forEach(function (id) { A.docs[id] = { estado: 'ok', texto: textos[id], fmt: 'html', pags: 0 }; }); A.sug = null; } };

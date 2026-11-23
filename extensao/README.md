@@ -5,6 +5,12 @@ Nome desde a 0.19.3 (antes: Muta). Os identificadores internos (`window.Muta*`, 
 Extensão do Chrome/Edge (Manifest V3) que abre o **Muta** num painel lateral, ao lado dos autos e das tarefas do PJe 2º grau do TRF-3.
 Base: o HTML independente *muta-independente-prontuario-completo* (Prontuário + Acervo).
 
+## O que muda na 0.38 · Autos preenche o Roteiro; Gerador na aba Minuta
+
+- **Preenchimento automático** (`autos.js › autoPreencher`): lidos os autos, o painel lê sozinho as peças principais e põe nos campos **vazios** da ficha o que a leitura achou (sentença, recursos, contrarrazões, MPF, tempestividade, procuração…); do que os alertas sugerem, só o tipo de julgamento (sem divergência) e a remessa necessária. Nunca troca o que já está gravado; o que diverge fica em "A conferir". Os campos postos levam a marca "autos" (no Roteiro, também no título do passo) até serem mudados. "Desfazer" limpa o que ainda está como a leitura pôs e não o repõe naquele processo. Desliga em Autos › "Preencher sozinho" (`localStorage hero18810:autoPreencher`).
+- **Aba Autos** reorganizada: (1) Leitura dos autos — botões e o resumo do que foi achado (sentença ou decisão agravada, recursos, contrarrazões, MPF, procuração; "não lida" ou "não achada"); (2) A conferir — os campos preenchidos (recolhível), os alertas e as divergências com a ficha (a antiga Conferência e o antigo "Preencher pelos autos" juntos); (3) Peças e documentos — uma só lista: em "Principais", cada peça da ficha com os seus documentos da cronologia (`docsDoGrupo`); em "Todos", a cronologia inteira.
+- **Gerador** saiu do Prontuário e foi para a **Minuta** (Comparar | Gerador, `gerador.js › modo/pintar`); acompanha o prontuário aberto. Endereço `#ger` abre direto.
+
 ## O que muda na 0.37 · prontuário revisto, peça por peça
 
 Testado com 12 processos reais do acervo (apelação, remessa, agravo de instrumento com agravo interno, MS, 28,86%, SFH, tributário, OAB), nas quatro abas, sem erro de tela.

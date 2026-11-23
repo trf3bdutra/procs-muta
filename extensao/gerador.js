@@ -1,4 +1,4 @@
-/* HERO18810 · Gerador (Prontuário › Gerador): relatório, dispositivo do voto, ementa, acórdão e proclamação no padrão do
+/* HERO18810 · Gerador (Minuta › Gerador; até a 0.37, Prontuário › Gerador): relatório, dispositivo do voto, ementa, acórdão e proclamação no padrão do
    gabinete (Padrão Muta 1 e 2; Padrão de ementa do gabinete), pelo tipo de julgamento e pelo resultado escolhido.
    Fonte: a ficha do processo (o que está gravado ou a gravar) e, onde a ficha está vazia, o que a leitura dos autos achou.
    Fórmulas transcritas sem reescrever; o que não se confirma na ficha ou nos autos sai como [VALIDAR: …]. Nada é gravado. */
@@ -304,12 +304,13 @@
   var ULT = null;
   function html() {
     var g = GB(); if (!g.cnj || !g.cnj()) return '<div class="empty">Abra um processo no PJe para gerar as peças.</div>';
+    if (g.modelo && !g.modelo()) return '<div class="empty">Lendo o prontuário do processo ' + esc(g.cnj()) + '…</div>';
     if (ST.cnj !== g.cnj()) { ST.cnj = g.cnj(); ST.tipo = ''; ST.res = ''; }
     var D = docs(); ULT = D;
     var chips = function (L, at, sel) { return L.map(function (o) { var k = Array.isArray(o) ? o[0] : o, r = Array.isArray(o) ? o[1] : o; return '<button type="button" class="chip' + (k === sel ? ' on' : '') + '" ' + at + '="' + esc(k) + '">' + esc(r) + '</button>'; }).join(''); };
     var relT = D.rel.join('\n'), emT = emTexto(D.em);
     var ai = D.tipo === 'Agravo de Instrumento';
-    var aviso = !S(v('origem', 'Sentença - Resultado')) && !/Embargos|Interno|Retrata/.test(D.tipo) ? '<p class="gr-av">' + (ai ? 'A decisão agravada ainda não foi lida: em Autos › Peças › Sentença (decisão recorrida), use "Extrair da peça" para trazer o que ela decidiu.' : 'A sentença ainda não foi lida: em Autos › Peças › Sentença, use "Extrair da peça" para trazer resultado e honorários.') + '</p>' : '';
+    var aviso = !S(v('origem', 'Sentença - Resultado')) && !/Embargos|Interno|Retrata/.test(D.tipo) ? '<p class="gr-av">' + (ai ? 'A decisão agravada ainda não foi lida: em Prontuário › Autos › Peças e documentos › Decisão agravada, use "Extrair da peça" para trazer o que ela decidiu.' : 'A sentença ainda não foi lida: em Prontuário › Autos › Peças e documentos › Sentença, use "Extrair da peça" para trazer resultado e honorários.') + ' <button type="button" class="lnk" data-gr-ir="Autos">Abrir Autos</button></p>' : '';
     return '<section class="card pc-sec gr-cfg"><div class="pc-sh"><h3>Gerador</h3><small class="muted">padrão do gabinete · nada é gravado</small></div>' +
       '<div class="gr-l"><span>Tipo de julgamento</span><div class="chips">' + chips(TIPOS, 'data-gr-tipo', D.tipo) + '</div></div>' +
       '<div class="gr-l"><span>Resultado</span><div class="chips">' + chips(opcoesRes(D.tipo), 'data-gr-res', D.k) + '</div></div>' + (D.k ? '' : '<p class="gr-av">Sem resultado do voto na ficha: escolha o resultado acima para completar dispositivo, ementa, acórdão e proclamação.</p>') + aviso + '</section>' +
@@ -339,7 +340,34 @@
     if (b.dataset.grTipo) { ST.tipo = b.dataset.grTipo; ST.res = ''; return true; }
     if (b.dataset.grRes) { ST.res = b.dataset.grRes; return true; }
     if (b.dataset.grCopia) { copiar(b.dataset.grCopia, b); return false; }
+    if (b.dataset.grIr) { if (window.MutaAbas) window.MutaAbas.ir('pront'); if (GB().ir) GB().ir(b.dataset.grIr); return false; }
     return false;
   }
-  window.MutaGerador = { html: html, acao: acao, docs: docs, _ST: ST, _t: { resultado: resultado, fraseHonorarios: fraseHonorarios, designa: designa, feminino: feminino } };
+  /* ---------- 0.38: a casa do Gerador é a aba Minuta (Comparar | Gerador) ---------- */
+  var MM_K = 'hero18810:minModo';
+  function $(id) { return typeof document !== 'undefined' ? document.getElementById(id) : null; }
+  function modoMin() { try { return localStorage.getItem(MM_K) === 'ger' ? 'ger' : 'cmp'; } catch (e) { return 'cmp'; } }
+  function visivel() { var p = $('panel-min'), g = $('ger-app'); return !!(p && !p.hidden && g && !g.hidden); }
+  function pintar(forca) {
+    var g = $('ger-app'); if (!g || (!forca && !visivel())) return;
+    var p = $('panel-min'), y = p ? p.scrollTop : 0;
+    try { g.innerHTML = html(); } catch (e) { g.innerHTML = '<div class="empty">Gerador indisponível: ' + esc(e && e.message || e) + '</div>'; }
+    if (p) p.scrollTop = y;
+  }
+  function modo(m) {
+    m = m === 'ger' ? 'ger' : 'cmp'; try { localStorage.setItem(MM_K, m); } catch (e) {}
+    var ger = m === 'ger';
+    ['cmp-app', 'panel-lote'].forEach(function (id) { var e = $(id); if (e) e.hidden = ger; });
+    var g = $('ger-app'); if (g) g.hidden = !ger;
+    if (typeof document !== 'undefined') Array.prototype.forEach.call(document.querySelectorAll('[data-mm]'), function (b) { b.setAttribute('aria-selected', String(b.dataset.mm === m)); });
+    if (ger) pintar(true);
+  }
+  function abrir() { modo(modoMin()); }
+  if (typeof document !== 'undefined' && document.addEventListener) document.addEventListener('click', function (e) {
+    var t = e.target && e.target.closest ? e.target.closest('[data-mm]') : null;
+    if (t) { modo(t.dataset.mm); return; }
+    var b = e.target && e.target.closest ? e.target.closest('#ger-app button') : null;
+    if (b && acao(b)) pintar(true);
+  });
+  window.MutaGerador = { pintar: pintar, abrir: abrir, modo: modo, html: html, acao: acao, docs: docs, _ST: ST, _t: { resultado: resultado, fraseHonorarios: fraseHonorarios, designa: designa, feminino: feminino } };
 })();

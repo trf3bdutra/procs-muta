@@ -169,17 +169,17 @@ function selectTab(tabs,idx){tabs.forEach(function(t,i){var on=i===idx;t.setAttr
 /* 0.11: Prontuário (com a triagem), Minuta (lote, comparar e conformidade), Ementário, Parágrafos-padrão e Diretrizes; a Ajuda abre pelo "?" */
 var mainTabs=[$('tab-pront'),$('tab-min'),$('tab-acervo'),$('tab-par'),$('tab-dir'),$('tab-ajuda')];
 var NOMES=['pront','min','ementario','par','dir','ajuda'];
-var ALIAS={tri:'pront',lote:'min',cmp:'min',conf:'min',acervo:'ementario'};
+var ALIAS={tri:'pront',lote:'min',cmp:'min',conf:'min',ger:'min',acervo:'ementario'};
 function abrirAba(i){
   selectTab(mainTabs,i);var n=NOMES[i];
   if(n==='pront'&&window.MutaGabinete&&window.MutaGabinete.render)window.MutaGabinete.render();
   if(n==='ementario'&&window.MutaEmentario)window.MutaEmentario.abrir();
-  if(n==='min'){if(window.MutaComparar)window.MutaComparar.abrir();if(window.MutaConformidade)window.MutaConformidade.abrir();if(window.MutaLote)window.MutaLote.sessao();}
+  if(n==='min'){if(window.MutaGerador&&window.MutaGerador.abrir)window.MutaGerador.abrir();if(window.MutaComparar)window.MutaComparar.abrir();if(window.MutaConformidade)window.MutaConformidade.abrir();if(window.MutaLote)window.MutaLote.sessao();}
   if(n==='par'&&window.MutaParagrafos)window.MutaParagrafos.abrir();
   if(n==='dir'&&window.MutaDiretrizes)window.MutaDiretrizes.abrir();
 }
 wireTabs(mainTabs,function(i){abrirAba(i);});
-window.MutaAbas={ir:function(nome){var alvo=ALIAS[nome]||nome,i=NOMES.indexOf(alvo);if(i<0)return;abrirAba(i);if(nome==='tri'&&window.MutaGabinete&&window.MutaGabinete.ir)window.MutaGabinete.ir('Triagem');}};
+window.MutaAbas={ir:function(nome){var alvo=ALIAS[nome]||nome,i=NOMES.indexOf(alvo);if(i<0)return;abrirAba(i);if(nome==='tri'&&window.MutaGabinete&&window.MutaGabinete.ir)window.MutaGabinete.ir('Triagem');if((nome==='ger'||nome==='cmp')&&window.MutaGerador&&window.MutaGerador.modo)window.MutaGerador.modo(nome);}};
 (function(){var d=$('panel-lote');if(d)d.addEventListener('toggle',function(){if(d.open&&window.MutaLote)window.MutaLote.abrir();});var v=$('aj-volta');if(v)v.addEventListener('click',function(){abrirAba(0);});})();
 document.addEventListener('DOMContentLoaded',function(){var h=location.hash.replace('#','');var i=NOMES.indexOf(ALIAS[h]||h);if(i>0)abrirAba(i);});
 var modeTabs=[$('mode-tri'),$('mode-pro')];
