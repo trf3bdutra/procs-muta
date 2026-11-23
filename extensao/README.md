@@ -5,6 +5,12 @@ Nome desde a 0.19.3 (antes: Muta). Os identificadores internos (`window.Muta*`, 
 Extensão do Chrome/Edge (Manifest V3) que abre o **Muta** num painel lateral, ao lado dos autos e das tarefas do PJe 2º grau do TRF-3.
 Base: o HTML independente *muta-independente-prontuario-completo* (Prontuário + Acervo).
 
+## O que muda na 0.45 · Minuta: Comparar enxuto, matriz na Conformidade, Collectio só do gestor
+
+- **Comparar** só com Modelos, Precedentes, Texto colado e 28,86% (quando é o caso). Saíram Minuta-matriz, Collectio, Triagem e Parágrafos-padrão (`comparar.js › FORA_CMP`; o código fica).
+- **Conformidade** ganhou o quadro "Estrutura × minuta-matriz": os elementos obrigatórios da peça e, bloco a bloco, a minuta-matriz do processo (`comparar.js › estruturaConformidade`).
+- **Collectio** saiu de baixo do Comparar e virou aba própria da Minuta, visível só para o gestor (`gerador.js › gestor`).
+
 ## O que muda na 0.44 · Autos: íntegra; documentos do Roteiro em Autos; sugestão de tipo de ato
 
 - **Leitura dos autos**: só "Ler os autos" / "Reler". Sempre a íntegra: a cronologia toda e o texto de todos os documentos (principais primeiro), três de cada vez (`autos.js › extrairIntegra`). Saíram "Cronologia toda", "Peças principais" e "Preencher sozinho" (o preenchimento dos campos vazios segue, com Desfazer em A conferir).

@@ -1311,3 +1311,8 @@ html[data-tema=escuro] .min-conf.aba{background:transparent}
 .pm-sug{all:unset;cursor:pointer;display:block;margin-top:3px;font-size:10.5px;color:#4a7ea6;border:1px dashed #8fb3cf;border-radius:6px;padding:1px 6px;width:max-content;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .pm-sug:hover{background:color-mix(in srgb,#4a7ea6 10%,transparent)}
 .rt-doc .ro{color:var(--fg)}.rt-doc .gl .lnk{font-size:10px;margin-left:4px}
+/* 0.45 · estrutura × minuta-matriz na Conformidade */
+.cf-mx{padding:0!important}.cf-mx>summary{display:flex;flex-direction:column;gap:1px;padding:9px 11px;cursor:pointer;font-size:12.5px}
+.cf-mx>summary small{font-size:10.5px;color:var(--muted-fg)}.cf-mx[open]>summary{border-bottom:1px solid var(--border)}
+.cf-mx>.cx-n,.cf-mx>.mn-est,.cf-mx>.status{margin-left:11px;margin-right:11px}.cf-mx>.mn-est:last-child{margin-bottom:10px}
+#panel-lote>summary{display:none}#panel-lote{border:0;background:transparent}

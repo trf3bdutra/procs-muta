@@ -142,9 +142,9 @@
          e Conformidade (aba própria: a análise da minuta pelo padrão do gabinete) -->
     <section id="panel-min" role="tabpanel" aria-labelledby="tab-min" hidden>
       <div class="wrap min-wrap">
-        <div class="seg pmodos min-modos" role="tablist" aria-label="Parte da aba Minuta"><button type="button" role="tab" data-mm="cmp" aria-selected="true">Comparar<small>editor × padrão</small></button><button type="button" role="tab" data-mm="ger" aria-selected="false">Gerador<small>relatório e ementa</small></button><button type="button" role="tab" data-mm="conf" aria-selected="false">Conformidade <i class="conf-badge" id="mm-conf-n" hidden></i><small id="mc-resumo">leia o editor</small></button></div>
+        <div class="seg pmodos min-modos" role="tablist" aria-label="Parte da aba Minuta"><button type="button" role="tab" data-mm="cmp" aria-selected="true">Comparar</button><button type="button" role="tab" data-mm="ger" aria-selected="false">Gerador</button><button type="button" role="tab" data-mm="lote" aria-selected="false" hidden title="Só para o gestor">Collectio</button><button type="button" role="tab" data-mm="conf" aria-selected="false">Conformidade <i class="conf-badge" id="mm-conf-n" hidden></i><small id="mc-resumo">leia o editor</small></button></div>
         <div id="cmp-app"></div>
-        <details class="card min-col" id="panel-lote"><summary><b>Collectio</b><span class="muted">minuta do processo nos lotes, versões e transferência</span></summary><div id="lote-app"></div></details>
+        <details class="card min-col" id="panel-lote" open hidden><summary><b>Collectio</b><span class="muted">minuta do processo nos lotes, versões e transferência</span></summary><div id="lote-app"></div></details>
         <div id="ger-app" hidden></div>
         <!-- 0.42: a conformidade é uma aba própria da Minuta (antes, rodapé fixo) -->
         <div class="min-conf aba" id="min-conf" data-aberto="1" hidden><div class="mc-b" id="panel-conf"><div id="conf-app"></div></div></div>

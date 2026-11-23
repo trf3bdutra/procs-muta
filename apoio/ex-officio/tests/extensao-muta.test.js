@@ -574,7 +574,7 @@ test('extensão 0.43: Gerador só com relatório e ementa (dispositivo, acórdã
   const g = read('extensao/gerador.js');
   assert.match(g, /var PECAS = \{ rel: true, em: true, disp: false, ac: false, pr: false \};/);
   assert.match(g, /\(PECAS\.disp \? bloco\('disp'/); assert.match(g, /\(PECAS\.ac \? bloco\('ac'/); assert.match(g, /\(PECAS\.pr \? bloco\('pr'/);
-  assert.match(read('extensao/painel.html'), /Gerador<small>relatório e ementa<\/small>/);
+  assert.match(read('extensao/painel.html'), /data-mm="ger" aria-selected="false">Gerador</);
   assert.doesNotMatch(read('extensao/comparar.js'), />Localizar no Collectio<|>Mandar ao Collectio</, 'sem os botões do Collectio no texto do editor');
 });
 
@@ -584,4 +584,12 @@ test('extensão 0.44: Ler/Reler sempre a íntegra; documentos do Roteiro em Auto
   assert.match(a, /var tudo = true;/); assert.match(a, /'Parecer do MPF': \{ parecer: 1 \}, 'Procuração': \{ procuracao: 1 \}/);
   assert.match(g, /var PECAS_DOC = \[/); assert.match(g, /grupo: 'Parecer do MPF'/); assert.match(g, /function sugerirAto\(\)/); assert.match(g, /atoSug\(k\)/);
   assert.match(r, /var DOC_RT = \{/); assert.match(r, /data-aba="Autos" title="Editar em Autos › Peças e documentos"/);
+});
+
+test('extensão 0.45: Comparar só com modelos, precedentes, texto colado e 28,86%; minuta-matriz na Conformidade; Collectio em aba só do gestor', () => {
+  const c = read('extensao/comparar.js'), h = read('extensao/painel.html'), g = read('extensao/gerador.js');
+  assert.match(c, /var FORA_CMP = \{ matriz: 1, lote: 1, tri: 1, par: 1 \};/); assert.match(c, /function estruturaConformidade\(aoBaixar\)/);
+  assert.match(read('extensao/conformidade.js'), /window\.MutaComparar\.estruturaConformidade\(render\)/);
+  assert.match(h, /data-mm="lote" aria-selected="false" hidden title="Só para o gestor">Collectio</); assert.match(h, /id="panel-lote" open hidden/);
+  assert.match(g, /function gestor\(\) \{/); assert.match(g, /\(m === 'lote' && gestor\(\)\)/);
 });

@@ -348,7 +348,9 @@
   /* ---------- 0.38: a casa do Gerador é a aba Minuta (Comparar | Gerador) ---------- */
   var MM_K = 'hero18810:minModo';
   function $(id) { return typeof document !== 'undefined' ? document.getElementById(id) : null; }
-  function modoMin() { try { var m = localStorage.getItem(MM_K); return m === 'ger' || m === 'conf' ? m : 'cmp'; } catch (e) { return 'cmp'; } }
+  /* 0.45: a aba Collectio da Minuta é só do gestor */
+  function gestor() { var x = window.MutaSessao && window.MutaSessao.estado ? window.MutaSessao.estado() : {}; return x.estado === 'on' && !!x.gestor; }
+  function modoMin() { try { var m = localStorage.getItem(MM_K); return m === 'ger' || m === 'conf' || (m === 'lote' && gestor()) ? m : 'cmp'; } catch (e) { return 'cmp'; } }
   function visivel() { var p = $('panel-min'), g = $('ger-app'); return !!(p && !p.hidden && g && !g.hidden); }
   function pintar(forca) {
     var g = $('ger-app'); if (!g || (!forca && !visivel())) return;
@@ -357,10 +359,13 @@
     if (p) p.scrollTop = y;
   }
   function modo(m) {
-    m = m === 'ger' || m === 'conf' ? m : 'cmp'; try { localStorage.setItem(MM_K, m); } catch (e) {}
+    m = m === 'ger' || m === 'conf' || (m === 'lote' && gestor()) ? m : 'cmp'; try { localStorage.setItem(MM_K, m); } catch (e) {}
+    var bl = typeof document !== 'undefined' ? document.querySelector('[data-mm="lote"]') : null; if (bl) bl.hidden = !gestor();
     var ger = m === 'ger';
     /* Comparar (com o Collectio embaixo) | Gerador | Conformidade */
-    ['cmp-app', 'panel-lote'].forEach(function (id) { var e = $(id); if (e) e.hidden = m !== 'cmp'; });
+    var ca = $('cmp-app'); if (ca) ca.hidden = m !== 'cmp';
+    /* 0.45: o Collectio saiu de baixo do Comparar e virou aba própria, só do gestor */
+    var pl = $('panel-lote'); if (pl) { pl.hidden = m !== 'lote'; if (m === 'lote') { pl.open = true; if (window.MutaLote && window.MutaLote.abrir) window.MutaLote.abrir(); } }
     var g = $('ger-app'); if (g) g.hidden = !ger;
     var cf = $('min-conf'); if (cf) cf.hidden = m !== 'conf';
     if (m === 'conf' && window.MutaConformidade && window.MutaConformidade.abrir) window.MutaConformidade.abrir();
@@ -368,6 +373,7 @@
     if (ger) pintar(true);
   }
   function abrir() { modo(modoMin()); }
+  try { if (window.MutaSessao && window.MutaSessao.ouvir) window.MutaSessao.ouvir(function () { var p = $('panel-min'); if (p && !p.hidden) modo(modoMin()); else { var b = typeof document !== 'undefined' ? document.querySelector('[data-mm="lote"]') : null; if (b) b.hidden = !gestor(); } }); } catch (e) {}
   if (typeof document !== 'undefined' && document.addEventListener) document.addEventListener('click', function (e) {
     var t = e.target && e.target.closest ? e.target.closest('[data-mm]') : null;
     if (t) { modo(t.dataset.mm); return; }

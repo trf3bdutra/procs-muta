@@ -84,7 +84,9 @@ function render() {
   var corpoCf = resumo + (r.itens.length ? '<ul class="cf-lista">' + r.itens.map(itemHtml).join('') + '</ul>' : '<div class="empty"><h3>Nada a apontar</h3></div>');
   if (window.MutaJanela) window.MutaJanela.atualizar('conformidade', 'Conformidade da minuta', corpoCf);
   K.cheia = corpoCf;
-  caixa.innerHTML = topo + resumo + (r.itens.length ? filtros + '<ul class="cf-lista">' + lista.map(itemHtml).join('') + '</ul>' : '<div class="empty"><h3>Nada a apontar</h3>A minuta segue a estrutura e as regras conferidas. Confira os autos antes de liberar.</div>') ;
+  /* 0.45: a comparação com a minuta-matriz do processo mora aqui (saiu da aba Comparar) */
+  var mxh = ''; try { mxh = window.MutaComparar && window.MutaComparar.estruturaConformidade ? window.MutaComparar.estruturaConformidade(render) : ''; } catch (e) {}
+  caixa.innerHTML = topo + resumo + mxh + (r.itens.length ? filtros + '<ul class="cf-lista">' + lista.map(itemHtml).join('') + '</ul>' : '<div class="empty"><h3>Nada a apontar</h3>A minuta segue a estrutura e as regras conferidas. Confira os autos antes de liberar.</div>') ;
   $('panel-conf').scrollTop = y;
 }
 function relatorioTexto() {

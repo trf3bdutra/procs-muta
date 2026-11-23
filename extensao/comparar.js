@@ -22,7 +22,7 @@ var FONTES = [['matriz', 'Minuta-matriz'], ['lote', 'Collectio'], ['modelo', 'Mo
 /* tipo de pronunciamento: os mesmos rótulos do banco de modelos e das minutas-matriz */
 var PRONS = [['Voto', 'Acórdão (voto)'], ['Decisão monocrática terminativa', 'Decisão monocrática'], ['Decisão interlocutória', 'Decisão interlocutória'], ['Despacho', 'Despacho']];
 var PARTES = [['tudo', 'Tudo'], ['relatorio', 'Relatório'], ['voto', 'Voto'], ['ementa', 'Ementa'], ['acordao', 'Acórdão']];
-var C = { pron: '', pronAuto: '', pronChave: '', edAberto: false, estrutura: true, fonte: 'matriz', sel: {}, parteEd: 'tudo', parteFonte: 'inteira', ws: true, sd: true, q: '', ref: '', lotes: null, loteErro: '', loteChave: '', ement: {}, tri: null, triErro: '', triChave: '', dados: null, dadosErro: '', ranking: null, rankTxt: '' };
+var C = { pron: '', pronAuto: '', pronChave: '', edAberto: false, estrutura: true, fonte: 'modelo', sel: {}, parteEd: 'tudo', parteFonte: 'inteira', ws: true, sd: true, q: '', ref: '', lotes: null, loteErro: '', loteChave: '', ement: {}, tri: null, triErro: '', triChave: '', dados: null, dadosErro: '', ranking: null, rankTxt: '' };
 try { var g = JSON.parse(localStorage.getItem('muta-pje:comparar') || '{}'); ['parteEd', 'ws', 'sd', 'edAberto'].forEach(function (k) { if (g[k] != null) C[k] = g[k]; }); } catch (e) {}
 function guarda() { try { localStorage.setItem('muta-pje:comparar', JSON.stringify({ parteEd: C.parteEd, ws: C.ws, sd: C.sd, edAberto: C.edAberto })); } catch (e) {} }
 function aberta() { var p = $('panel-min'); return p && !p.hidden; }
@@ -48,10 +48,12 @@ function eh2886() {
   var ed = ED && ED.estado ? String((ED.estado() || {}).texto || '').slice(0, 20000) : '';
   return /28[,.]86|2886|0005019-15\.1997/.test(t + ' ' + ed);
 }
-function fontes() { var ok = eh2886(); if (!ok && C.fonte === 'm2886') C.fonte = 'matriz'; return FONTES.filter(function (f) { return f[0] !== 'm2886' || ok; }); }
+/* 0.45 (pedido do gestor): Comparar só com modelos, precedentes, texto colado e 28,86%; a minuta-matriz foi para a Conformidade; Collectio, triagem e parágrafos-padrão saíram da lista (o código fica) */
+var FORA_CMP = { matriz: 1, lote: 1, tri: 1, par: 1 };
+function fontes() { var ok = eh2886(); if (FORA_CMP[C.fonte] || (!ok && C.fonte === 'm2886')) C.fonte = 'modelo'; return FONTES.filter(function (f) { return !FORA_CMP[f[0]] && (f[0] !== 'm2886' || ok); }); }
 function processo() {
   var k = chave();
-  if (k !== C.pronChave) { C.pronChave = k; C.pron = ''; C.fonte = 'matriz'; C.sel = {}; C.q = ''; }
+  if (k !== C.pronChave) { C.pronChave = k; C.pron = ''; C.fonte = 'modelo'; C.sel = {}; C.q = ''; }
   C.pronAuto = pronSugerido();
   return C.pron || C.pronAuto;
 }
@@ -349,6 +351,23 @@ function estruturaPadrao() {
     '<div class="cx-vis"><span class="seg"><button type="button" data-c="v:recortes" aria-selected="' + (C.vista !== 'folha') + '">Lista</button><button type="button" data-c="v:folha" aria-selected="' + (C.vista === 'folha') + '">Folha</button></span><button type="button" class="btn line sm" data-c="janela-folha" title="Abre a folha do editor numa janela grande">Folha em janela</button></div>' +
     (C.vista === 'folha' ? folhaHtml(null) : '');
 }
+/* 0.45 · na Conformidade: a estrutura conferida contra a minuta-matriz do processo (ou, sem ela, contra a estrutura do gabinete) */
+function estruturaConformidade(aoBaixar) {
+  var E = ED.estado(); if (!E.texto) return '';
+  if (!C.dados && !C.dadosErro) { dados().then(function () { if (aoBaixar) aoBaixar(); }); return '<section class="card cf-mx"><p class="muted">Baixando a minuta-matriz do processo…</p></section>'; }
+  processo();
+  var parte = C.parteEd; C.parteEd = 'tudo';
+  try {
+    var ps = (E.paragrafos || []).map(function (p) { return String(p.t || '').trim(); }).filter(Boolean);
+    var temAc = ps.some(function (t) { return /^(relat[óo]rio|voto|e\s*m\s*e\s*n\s*t\s*a)\.?$/i.test(t); }), temMono = ps.some(function (t) { return /^(DECIDO|Vistos)\.$/.test(t); });
+    var mono = temAc ? false : temMono ? true : /monocr|interlocut/i.test(processo()), L = mono ? EST_MONO : EST_ACORDAO, ok = 0;
+    var lis = L.map(function (x) { var tem = ps.some(function (t) { return x[1].test(t); }); if (tem) ok++; return '<li class="' + (tem ? 'ok' : 'no') + '"><i>' + (tem ? 'ok' : 'falta') + '</i><span>' + esc(x[0]) + '</span></li>'; }).join('');
+    var mx = C.dados ? matrizDoProcesso() : null;
+    return '<details class="card cf-mx"' + (ok < L.length ? ' open' : '') + '><summary><b>Estrutura × minuta-matriz</b><small>' + ok + '/' + L.length + ' elementos obrigatórios' + (mx ? ' · ' + esc(mx.nome) : ' · sem minuta-matriz: estrutura do gabinete') + '</small></summary>' +
+      '<p class="muted cx-n">' + (mx ? 'Minuta-matriz do processo: <b>' + esc(mx.nome) + '</b> (pelo tipo de ato e pelo tipo de julgamento do Prontuário).' : 'Sem minuta-matriz para este pronunciamento e tipo de julgamento.') + '</p>' +
+      '<div class="mn-est"><ul class="mn-ck">' + lis + '</ul></div>' + (mx ? estruturaHtml(mx) : '') + '</details>';
+  } finally { C.parteEd = parte; }
+}
 /* estrutura: cada bloco da matriz (por seção) e se o editor tem um parágrafo correspondente */
 function estruturaHtml(it) {
   var PE = paragrafosEditor(); if (!PE.length) return '';
@@ -451,6 +470,7 @@ caixa.addEventListener('input', function (e) {
 ED.ouvir(function () { if (aberta()) render(); });
 document.addEventListener('muta:prontuario', function () { C.lotes = null; C.loteChave = ''; C.tri = null; C.triChave = ''; if (aberta()) preparar(); });
 window.MutaComparar = {
+  estruturaConformidade: estruturaConformidade,
   triagem: function () { processo(); C.fonte = 'tri'; C.tri = null; C.triChave = ''; guarda(); if (window.MutaAbas) window.MutaAbas.ir('min'); else window.MutaComparar.abrir(); },
   abrir: function () { processo(); if (C.fonte === 'matriz' || C.fonte === 'modelo' || C.fonte === 'm2886' || C.fonte === 'par') dados().then(render); preparar(); var E = ED.estado(); if (!E.texto && !E.lendo) ED.ler().catch(function () {}); },
   /* o Ementário manda um julgado para comparar */
