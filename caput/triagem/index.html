@@ -3394,7 +3394,11 @@ function vFila(cab, estilo) {
 /* ---------- Fila · modo Mapa do fluxo: etapas em faixas proporcionais (cor = tipo de julgamento) e painéis de processos por etapa ---------- */
 let MAPA_NO = '', MAPA_LIM = {};
 const MP_TIPO = { pj: ['1ºJ', '#3a6fa3', '1º julgamento'], ed: ['ED', '#c58a2c', 'Embargos de declaração'], ag: ['AgInt', '#7b5ea7', 'Agravo interno'], jr: ['Retr.', '#2a9d8f', 'Juízo de retratação'] };
-function mpTipo(o) { if (o.cl === 'ED' || /Embargos/i.test(o.tarefa)) return 'ed'; if (/^Ag(Int|Rg)/i.test(o.cl) || /agravo interno/i.test(o.classe)) return 'ag'; if (/retrata/i.test(o.tarefa) || o.etq.some((e) => /retrata/i.test(e))) return 'jr'; return 'pj'; }
+/* tipo de julgamento: vale o da ficha (triagem.Tipo de Julgamento) quando preenchido; sem ele, a classe, a tarefa e as etiquetas */
+function mpTipo(o) { const tj = nz((o.row && o.row['Tipo de Julgamento']) || '');
+  if (tj) return /embargos/.test(tj) ? 'ed' : /agravo interno/.test(tj) ? 'ag' : /retrata/.test(tj) ? 'jr' : 'pj';
+  return mpTipoPje(o); }
+function mpTipoPje(o) { if (o.cl === 'ED' || /Embargos/i.test(o.tarefa)) return 'ed'; if (/^Ag(Int|Rg)/i.test(o.cl) || /agravo interno/i.test(o.classe)) return 'ag'; if (/retrata/i.test(o.tarefa) || o.etq.some((e) => /retrata/i.test(e))) return 'jr'; return 'pj'; }
 function mpEtapa(o) {
   if (o.dest.k === 'pauta') return 'ses:' + String(o.dest.s || '');
   if (o.dest.k === 'mono') return 'mono';
