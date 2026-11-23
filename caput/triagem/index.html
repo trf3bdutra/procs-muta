@@ -3044,15 +3044,31 @@ function opcoesPainel() {
     aviso: (t, err) => toast(t, err) };
 }
 /* fora das coleções (acervo, mapa, tabela): o botão Prontuário abre o mesmo painel numa gaveta */
-function abrirPainelProcesso(cnj) {
-  const C = W.CaputColecoes, o = IDX.get(dg(cnj));
-  if (!C || !C.painel) { fichaDe(cnj); return; }
-  let it = null, l = null;
+/* o item do painel é o mesmo da matriz dos Triados: o do lote, se o processo já está numa coleção (triagem ou
+   seleção prévia); senão, o mínimo do acervo. As coleções são lidas na primeira vez, para A triar mostrar o mesmo que Triados. */
+function itemPainel(cnj) {
+  const o = IDX.get(dg(cnj)); let it = null, l = null;
+  ['triados', 'selecao'].forEach((k) => { if (!_colD[k]) lerColecoes(k); });
   Object.keys(_colD).forEach((k) => ((_colD[k] && _colD[k].lotes) || []).forEach((L) => (L.itens || []).forEach((i) => { if (!it && dg(i.processo) === dg(cnj)) { it = i; l = L; } })));
   if (!it) { it = { processo: o ? o.cnj : cnj, recurso: (o && (o.classe || o.cl)) || '', partes: (o && o.partes) || '', tarefa: (o && o.tarefa) || '', etiquetas: o && o.etq ? o.etq.join(', ') : '', assunto: (o && o.assunto) || '' }; l = { id: '', titulo: '', grupos: [], colunas: [], itens: [it] }; }
+  return { l, it };
+}
+function abrirPainelProcesso(cnj) {
+  const C = W.CaputColecoes;
+  if (!C || !C.painel) { fichaDe(cnj); return; }
+  const { l, it } = itemPainel(cnj);
   gaveta('<div class="pp-gav"><div class="pp-gav-h"><b>Painel do processo</b><button type="button" class="btn" data-pp-fecha aria-label="Fechar">×</button></div><div id="pp-host"></div></div>');
   const g = $('#gaveta'); if (g) { g.classList.add('gaveta-pp'); const x = g.querySelector('[data-pp-fecha]'); if (x) x.onclick = fecharGaveta; }
   C.painel(document.getElementById('pp-host'), l, it, opcoesPainel());
+}
+/* A triar: o número do processo abre, na própria linha, o mesmo painel que se abre nos Triados */
+function montarAtPP() {
+  const C = W.CaputColecoes;
+  document.querySelectorAll('[data-at-pp]').forEach((h) => {
+    if (h.dataset.montado) return; h.dataset.montado = '1';
+    if (!C || !C.painel) { h.innerHTML = subPainelEm(IDX.get(h.dataset.atPp) || {}, 'triar'); return; }
+    const { l, it } = itemPainel(h.dataset.atPp); C.painel(h, l, it, opcoesPainel());
+  });
 }
 function painelMatrizLote(sub) {
   if (!_colD[sub]) { lerColecoes(sub); return '<div class="tri-ld">Lendo as coleções de ' + (sub === 'selecao' ? 'seleção prévia' : 'triagem') + '…</div>'; }
@@ -3167,13 +3183,13 @@ function atLinha(o) {
   const dest = (o.dest || {}).k ? '<span class="at-de k-' + esc(o.dest.k) + '">' + esc(o.dest.t) + '</span>' : '<span class="at-pv" title="Destino provável pelas etiquetas e pela tarefa">' + esc(DLAB[o.prov] || '—') + '</span>';
   const prox = r['Próxima ação'] || '';
   return '<tr class="at-r' + (SEL.has(o.d) ? ' sel' : '') + (exp ? ' on' : '') + (tri ? ' tri' : '') + '"><td><input type="checkbox" data-sel="' + o.d + '"' + (SEL.has(o.d) ? ' checked' : '') + ' aria-label="Selecionar ' + esc(o.cnj) + '"></td>' +
-    '<td class="at-p"><button type="button" class="at-cnj" data-triexp="' + esc(o.d) + '" title="Abrir o resumo da triagem">' + esc(o.cnj) + '</button> <span class="at-cl">' + esc(o.cl || '') + '</span> <span class="at-se">' + esc((o.secao || '').replace(/ª\s*Seção/, 'ª Seção')) + '</span>' +
+    '<td class="at-p"><button type="button" class="at-cnj" data-triexp="' + esc(o.d) + '" title="Abrir o painel do processo nesta linha">' + esc(o.cnj) + '</button> <span class="at-cl">' + esc(o.cl || '') + '</span> <span class="at-se">' + esc((o.secao || '').replace(/ª\s*Seção/, 'ª Seção')) + '</span>' +
       '<span class="at-pa">' + esc(o.partes || '') + '</span>' + (tri ? '<span class="at-tg ok">com prontuário</span>' : '<span class="at-tg">a triar</span>') + (o.minutante ? '<span class="at-tg">' + esc(o.minutante.split(' ')[0]) + '</span>' : '') + '</td>' +
     '<td class="at-tc">' + (r['Tema'] ? '<b>' + esc(r['Tema']) + '</b><span class="at-sub">' + esc(o.assunto) + '</span>' : esc(o.assunto)) + '</td>' +
     '<td class="at-ta"><span class="at-d' + (d > 180 ? ' cr' : d > 60 ? ' al' : '') + '">' + (d == null ? '—' : d + ' d') + '</span><span class="at-sub">' + esc(o.desde ? br(o.desde) : '') + '</span></td>' +
     '<td class="at-ic">' + ind + '</td><td class="at-pr">' + prt + '</td><td class="at-dt">' + dest + (prox ? '<span class="at-sub at-cl2" title="' + esc(prox) + '">' + esc(prox) + '</span>' : '') + '</td>' +
     '<td class="at-ac"><button type="button" class="btn sm" data-prontuario="' + o.d + '">Prontuário</button><button type="button" class="btn sm" data-ficha="' + o.d + '">Ficha</button></td></tr>' +
-    (exp ? '<tr class="at-det"><td></td><td colspan="7">' + subPainelEm(o, 'triar') + '</td></tr>' : '');
+    (exp ? (setTimeout(montarAtPP, 0), '<tr class="at-det"><td></td><td colspan="7"><div class="at-pp" data-at-pp="' + esc(o.d) + '"></div></td></tr>') : '');
 }
 function atTabela(soTarefa) {
   const q = nz(LS.get('tri_atq', '')).trim(), so = LS.get('tri_atso', ''), ord = LS.get('tri_ato', 'antigos');
