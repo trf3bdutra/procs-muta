@@ -44,6 +44,7 @@ def montar(saida: pathlib.Path) -> None:
     (painel / 'painel.html').write_text(html, encoding='utf-8')
 
     shutil.copy2(AQUI / 'index.html', saida / 'index.html')
+    shutil.copy2(AQUI / 'pje-shim.js', saida / 'pje-shim.js')
 
 
 def main() -> None:

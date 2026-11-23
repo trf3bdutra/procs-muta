@@ -291,27 +291,32 @@ function cabeca(s) {
 
     '<div class="pm-et" style="--n:' + E.L.length + '"><i class="pm-ln"><i style="width:' + (E.L.length > 1 ? Math.min(E.n, E.L.length - 1) / (E.L.length - 1) * 100 : 0) + '%"></i></i>' + et + '</div>' +
     '<div class="pm-resp">' + atoSel() + pess('SERVIDOR', 'Minuta') + pess('CORRETOR', E.mono ? 'Revisão' : 'Correção') + '</div>' +
-    '<details class="pm-aut"' + (G.autAb ? ' open' : '') + '><summary data-aut aria-label="Autuação, partes e situação" title="Autuação, partes e situação"><span class="pm-aut-t">autuação, partes e controles</span><i class="pm-aut-h"></i></summary>' +
+    /* 0.49.1: 1ª seta = autuação e partes, em blocos com título (como a 2ª); os controles foram para a 2ª seta */
+    '<details class="pm-aut pm-aut1"' + (G.autAb ? ' open' : '') + '><summary data-aut aria-label="Autuação e partes" title="Autuação e partes"><span class="pm-aut-t">autuação e partes</span><i class="pm-aut-h"></i></summary>' +
+      ((partes && !polos) || polos ? '<h4 class="pm-mer-h">Partes</h4>' : '') +
       (partes && !polos ? '<p class="pm-pt" title="' + esc(partes) + '">' + SV(IC.pt, 14) + '<span>' + esc(partes) + '</span></p>' : '') +
       (polos ? '<div class="pc-ps">' + polos + '</div>' : '') +
+      (tarefa || dl ? '<h4 class="pm-mer-h">Autuação</h4>' : '') +
       (tarefa ? '<div class="pm-tf"><span>Tarefa no PJe</span><b>' + esc(tarefa) + '</b>' + (dias != null ? '<small>' + dias + ' dias</small>' : '') + '</div>' : '') +
-      (window.MutaAutos ? '<div class="pm-sit">' + window.MutaAutos.htmlSituacao(gravado('triagem', 'Registro - Situação atual')) + '</div>' : '') +
       (dl ? '<dl class="pc-dl">' + dl + '</dl>' : '') +
-      (etq.length ? '<div class="pc-etq">' + etq.map(function (e) { return '<span class="chip">' + esc(e) + '</span>'; }).join('') + '</div>' : '') + (G.autAb ? '<div class="pm-ctl">' + controlesProcesso() + '</div>' : '') + '</details>' +
+      (window.MutaAutos ? '<div class="pm-sit">' + window.MutaAutos.htmlSituacao(gravado('triagem', 'Registro - Situação atual')) + '</div>' : '') +
+      (etq.length ? '<h4 class="pm-mer-h">Etiquetas do PJe</h4><div class="pc-etq">' + etq.map(function (e) { return '<span class="chip">' + esc(e) + '</span>'; }).join('') + '</div>' : '') + '</details>' +
     merEnc() +
     '</section>';
 }
 /* 0.46 · 2ª seta do cartão: síntese e questões, mérito e encaminhamento (antes no Roteiro e na aba Processo); os campos só são
    desenhados com a seta aberta, para não repetir campos na tela */
 function merEnc() {
-  var ab = !!G.merAb, h = '<details class="pm-aut pm-mer"' + (ab ? ' open' : '') + '><summary aria-label="Síntese, questões, mérito e encaminhamento" title="Síntese, questões, mérito e encaminhamento"><span class="pm-aut-t">síntese · questões · encaminhamento</span><i class="pm-aut-h"></i></summary>';
+  var ab = !!G.merAb, h = '<details class="pm-aut pm-mer"' + (ab ? ' open' : '') + '><summary aria-label="Síntese, questões, mérito, encaminhamento e controles" title="Síntese, questões, mérito, encaminhamento e controles"><span class="pm-aut-t">síntese · questões · encaminhamento · controles</span><i class="pm-aut-h"></i></summary>';
   if (!ab) return h + '</details>';
   var TR = window.MutaTriagem, mono = N(V('producao', 'Destino')) === 'monocratica';
   var etqX = (TR && TR.etiquetasDe ? TR.etiquetasDe(G.op, G.fo) : '') + (window.MutaAlertas ? window.MutaAlertas.htmlRoteiro(G.cnj, V('triagem', 'Etiquetas sugeridas'), function () { render(); }) : '');
   return h + '<h4 class="pm-mer-h">Síntese e questões</h4><div class="gr">' + campoRot('triagem', 'Síntese Processual', 'Síntese do processo') + questoes() + '</div>' +
     '<h4 class="pm-mer-h">Mérito</h4><div class="gr">' + campoRot('triagem', 'Tema', 'Tipo de caso') + campoRot('triagem', 'Especificidades') + campoRot('triagem', 'Síntese Fática', 'Síntese fática') + campoRot('triagem', 'COMPLEXIDADE', 'Complexidade') + campoRot('triagem', 'Tipo de Voto', 'Tipo de voto') + '</div>' +
     '<h4 class="pm-mer-h">Encaminhamento</h4><div class="gr">' + /* o destino vem do tipo de ato, logo acima */ campoRot('producao', 'Destino - Situação', 'Situação para julgar') + (mono ? campoRot('triagem', 'Hipóteses Monocrática', 'Hipótese do artigo 932') : '') +
-    campoRot('triagem', 'O que falta sanar', 'Pendências') + campoRot('triagem', 'Etiquetas', 'Etiquetas do gabinete') + '</div>' + etqX + '</details>';
+    campoRot('triagem', 'O que falta sanar', 'Pendências') + campoRot('triagem', 'Etiquetas', 'Etiquetas do gabinete') + '</div>' + etqX +
+    /* 0.49.1: controles (urgência, meta, sobrestamento, caso sensível) aqui, antes na 1ª seta */
+    controlesProcesso(true) + '</details>';
 }
 window.MutaRender = function () { render(); };
 /* faixa do usuário no topo do painel, acima das abas */
@@ -434,7 +439,7 @@ function ctlMarcar(id, on) {
   else if (!on) { var k = CTL_RAZAO[id][0]; if (!ctlLista(id)) marcar(k[0] + '.' + k[1], ''); }
   agendar(500); render();
 }
-function controlesProcesso() {
+function controlesProcesso(naSeta) {
   var A = abaModelo(CE); if (!A) return '';
   var gs = A.grupos.filter(function (g) { return CTL_PROC.indexOf(g.controle) >= 0; });
   var n = 0;
@@ -448,6 +453,7 @@ function controlesProcesso() {
       (on && raz.length ? '<div class="gr ct-r">' + raz.map(function (r) { return campoRot(r[0], r[1], r[2]); }).join('') + '</div>' +
         (resto.length ? '<details class="ct-mais"><summary>Mais campos</summary><div class="gr">' + resto.map(campo).join('') + '</div></details>' : '') : '') + '</div>';
   }).join('');
+  if (naSeta) return '<h4 class="pm-mer-h">Controles <small>' + (n ? n + ' em vigor' : 'nenhum em vigor') + '</small></h4><div class="ct-l pm-ctl2" id="g-ctl">' + linhas + '</div>';
   return '<section class="card pc-sec" id="g-ctl"><div class="pc-sh"><h3>Controles</h3><small class="muted">' + (n ? n + ' em vigor' : 'nenhum em vigor') + '</small></div><div class="ct-l">' + linhas + '</div></section>';
 }
 /* precedentes relacionados do processo aberto: no topo da aba Ementário */

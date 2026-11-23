@@ -66,7 +66,7 @@
     return null;
   }
   /* cliques no editor, em campos de texto ou em documentos não escolhem processo (o texto da minuta cita outros números) */
-  var FORA = '[contenteditable], .ProseMirror, textarea, select, input:not([type="checkbox"]), .ck-editor, .cke, .cke_editable, iframe, embed, object, .hcm';
+  var FORA = '[contenteditable], .ProseMirror, textarea, select, input:not([type="checkbox"]), .ck-editor, .cke, .cke_editable, iframe, embed, object, .hcm, #hero-dlg';   /* 0.49.1: o quadro de sinalizações aberto não é cartão (tirava a faixa do cartão de origem) */
   function escolher(el) {
     if (!el || !el.closest || el.closest(FORA)) return;
     var c = cartaoDe(el);
@@ -424,7 +424,8 @@
      Em cada cartão da lista: etapa, quem minuta e quem corrige, urgência não apreciada, intercorrências, pendências,
      dias na tarefa, meta, sobrestamento, caso sensível e as etiquetas do gabinete que faltam no PJe (clique copia). */
   var ENR = { dados: {}, cat: null, cfg: null, t: 0, pedindo: false, tm: 0, pedidos: {} };
-  var LISTA = location.host === 'frontend-pje.app.trf3.jus.br';
+  /* a prévia do painel (/extensao/previa/) simula a lista do PJe com este mesmo script (scripts/extensao/previa/pje-shim.js) */
+  var LISTA = location.host === 'frontend-pje.app.trf3.jus.br' || window.HERO_PREVIA_PJE === true;
   function nrm(t) { return String(t || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/\s+/g, ' ').trim(); }
   var CMTL = { d: null };
   var PDA = {};
@@ -588,6 +589,9 @@
       var nn = numeros(n.nodeValue); if (nn.length !== 1) continue;
       /* o cabeçalho do processo aberto ("ApCiv 5001… - [Tarefa]") não é cartão da lista */
       if (ehCabecalho(el)) continue;
+      /* 0.49.1: número citado dentro de outro cartão (etiqueta "CONEXO 0001006-…", partes etc.) não é cartão: vale o primeiro número do bloco com uma só caixa de seleção */
+      if (!umSo) { var bl = null; for (var eb = el, ib = 0; eb && eb !== document.body && ib < 12; eb = eb.parentElement, ib++) { var cks = eb.querySelectorAll ? eb.querySelectorAll('input[type="checkbox"]').length : 0; if (cks === 1) { bl = eb; } else if (cks > 1) break; }
+        if (bl && numeros((bl.textContent || '').slice(0, 8000))[0] !== nn[0]) continue; }
       var card = null;
       if (umSo) {
         for (var e1 = el, i1 = 0; e1 && e1 !== document.body && i1 < 10; e1 = e1.parentElement, i1++) {
@@ -601,7 +605,9 @@
           card = pa;
         }
       } else for (var e = el, i = 0; e && e !== document.body && i < 12; e = e.parentElement, i++) {
-        if (numeros((e.textContent || '').slice(0, 8000)).length === 1) card = e; else break;
+        var ne = numeros((e.textContent || '').slice(0, 8000));
+        /* 0.49.1: outro número dentro do cartão (etiqueta "CONEXO 0001006-…", por exemplo) não o divide: vale o bloco com uma só caixa de seleção que começa pelo número do cartão */
+        if (ne.length === 1 || (ne[0] === nn[0] && e.querySelectorAll && e.querySelectorAll('input[type="checkbox"]').length === 1 && e.getBoundingClientRect().height < 420)) card = e; else break;
       }
       if (!card || vistos.indexOf(card) >= 0) continue;
       vistos.push(card); out.push({ el: card, numero: nn[0], k: nn[0].replace(/\D/g, ''), tn: n });

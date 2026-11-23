@@ -605,7 +605,7 @@ test('extensão 0.46: 2ª seta do cartão com síntese, questões, mérito e enc
 test('extensão 0.47: Roteiro dentro da aba Processo; controles na 1ª seta; Parágrafos-padrão sub-aba do Ementário; Diretrizes na Minuta; Comparar compacto; sem a Ajuda', () => {
   const g = read('extensao/gabinete.js'), h = read('extensao/painel.html'), c = read('extensao/comparar.js');
   assert.match(g, /var MODOS = \['Processo', 'Autos'\];/); assert.match(g, /h \+= '<div class="rt-em-proc">' \+ corpoRoteiro\(\) \+ '<\/div>';/);
-  assert.match(g, /'<div class="pm-ctl">' \+ controlesProcesso\(\) \+ '<\/div>'/);
+  assert.match(g, /controlesProcesso\(true\) \+ '<\/details>';/, '0.49.1: controles na 2ª seta');
   assert.match(h, /id="tab-par"[^>]*hidden/); assert.match(h, /data-emd="par"/); assert.match(h, /id="tab-dir"[^>]*hidden/); assert.match(h, /data-mm="dir"/); assert.match(h, /<div id="dir-app" class="min-dir" hidden><\/div>/);
   assert.match(h, /id="tab-ajuda"[^>]*hidden>\?<\/button>/);
   assert.match(read('extensao/diretrizes.js'), /d = \$\('dir-app'\); return !!\(p && !p\.hidden && d && !d\.hidden\)/);
@@ -647,4 +647,12 @@ test('extensão 0.49: Assinatura nas Deliberações (urgência no topo) e fora d
   assert.match(f, /av: \['triagem', 'Avisos'\]/);
   assert.match(read('padrao/ficha.json'), /"chave": "Avisos",\s*"tipo": "texto-longo",\s*"secao": "triagem"/);
   assert.match(read('apoio/ex-officio/api/_ficha.js'), /avM: linhas\(t\['Avisos'\]\), avT: todas\(t\['Avisos'\]\)/);
+});
+
+test('extensão 0.49.1: controles na 2ª seta; 1ª seta "autuação e partes" em blocos; prévia com a lista do PJe de verdade; número citado no cartão não vira cartão', () => {
+  const g = read('extensao/gabinete.js'), c = read('extensao/conteudo-pje.js'), ix = read('scripts/extensao/previa/index.html');
+  assert.match(g, /<span class="pm-aut-t">autuação e partes<\/span>/); assert.match(g, /síntese · questões · encaminhamento · controles/); assert.match(g, /function controlesProcesso\(naSeta\)/);
+  assert.match(c, /window\.HERO_PREVIA_PJE === true/); assert.match(c, /\.hcm, #hero-dlg'/); assert.match(c, /if \(bl && numeros\(\(bl\.textContent \|\| ''\)\.slice\(0, 8000\)\)\[0\] !== nn\[0\]\) continue;/);
+  assert.match(ix, /<script src="pje-shim\.js"><\/script>/); assert.match(ix, /<script src="painel\/conteudo-pje\.js"><\/script>/);
+  assert.match(read('scripts/extensao/previa.py'), /pje-shim\.js/);
 });

@@ -5,6 +5,13 @@ Nome desde a 0.19.3 (antes: Muta). Os identificadores internos (`window.Muta*`, 
 Extensão do Chrome/Edge (Manifest V3) que abre o **Muta** num painel lateral, ao lado dos autos e das tarefas do PJe 2º grau do TRF-3.
 Base: o HTML independente *muta-independente-prontuario-completo* (Prontuário + Acervo).
 
+## O que muda na 0.49.1 · setas do cartão revistas; prévia com a lista do PJe
+
+- 1ª seta do cartão: "autuação e partes", em blocos com título — Partes, Autuação (tarefa, órgão, seção, datas e situação atual) e Etiquetas do PJe.
+- 2ª seta: "síntese · questões · encaminhamento · controles" — os controles (urgência, meta, sobrestamento, caso sensível) vieram da 1ª seta para o fim desta. Mesmo desenho de blocos, campos alinhados à margem.
+- Lista do PJe: número de outro processo citado dentro do cartão (etiqueta "CONEXO …") não vira cartão; o quadro de sinalizações aberto não tira mais a faixa do cartão de origem.
+- Prévia (/extensao/previa/): a lista do "PJe" roda o `conteudo-pje.js` de verdade (faixa de sinalizações, etiquetas personalizadas, botões HERO e Etiquetas, quadro com "+ Incluir"), por `scripts/extensao/previa/pje-shim.js`; sinalização só grava com "Gravar de verdade".
+
 ## O que muda na 0.49 · Assinatura nas Deliberações; avisos e inclusão no alto nas sinalizações
 
 - **Deliberações › Assinatura** (primeira sub-aba): as decisões submetidas à assinatura, que estavam no sino › Desembargador. As com registro de urgência ficam no topo, com faixa vermelha e o selo da urgência (tipo, nível, dias). Ações: Marcar assinada e Devolver com apontamento (vira diligência). O sino perdeu a aba do Desembargador.

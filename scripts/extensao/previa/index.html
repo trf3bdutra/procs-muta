@@ -89,6 +89,11 @@ html[data-theme=dark] .pje{background:#0f1d27}
 .tf{display:block;width:100%;text-align:left;border:1px solid #d5dbe0;border-left:4px solid #b9c3cb;background:#fff;padding:8px 10px;margin:0 0 6px;cursor:pointer;color:#1c3344}
 html[data-theme=dark] .tf{background:#132835;border-color:#1e3747;color:#ebeff1}
 .tf small{display:block;color:#6b7a84;font-size:11.5px;margin-top:2px}
+/* cartão no desenho do PJe: caixa de seleção, número, tarefa e etiquetas (o conteudo-pje.js de verdade desenha por cima) */
+.tf{position:relative;padding-top:30px!important}.tf .tf-n{font-weight:700;color:#1a7fc0;font-size:14px}.tf .tf-t{font-size:12px;color:#1c3344}
+.tf input[type=checkbox]{margin:0 6px 0 0;vertical-align:-2px}
+.tf .tf-e{display:flex;flex-wrap:wrap;gap:2px;margin-top:4px}.tf .tf-e span{background:#5bc0de;color:#fff;font-size:10px;padding:1px 5px;border-radius:2px;line-height:1.5}
+#hero-modo-btn,#hero-etq-btn,#hero-col-btn{left:var(--pje-x,50px)!important}
 .tf[aria-pressed=true]{border-left-color:#e0a21b;background:#fff8e6}
 html[data-theme=dark] .tf[aria-pressed=true]{background:#2b2a1d}
 .doc{max-width:760px;margin:0 auto;background:#fff;border:1px solid #d5dbe0;padding:34px 46px;font-family:var(--eser);font-size:14.5px;line-height:1.7;color:#1c1c1c}
@@ -150,7 +155,11 @@ const hoje=()=>new Date(Date.now()-4*3600e3).toISOString().slice(0,10);
 const br=d=>d?String(d).slice(0,10).split('-').reverse().join('/'):'';
 const REC={'APELAÇÃO CÍVEL':'ApCiv','AGRAVO DE INSTRUMENTO':'AI','APELAÇÃO / REMESSA NECESSÁRIA':'ApRemNec','REMESSA NECESSÁRIA CÍVEL':'RemNec','AGRAVO INTERNO CÍVEL':'AgInt','EMBARGOS DE DECLARAÇÃO CÍVEL':'EDCiv','MANDADO DE SEGURANÇA CÍVEL':'MS'};
 const rec=c=>REC[String(c||'').toUpperCase()]||String(c||'').split(/[\s\/]+/).filter(Boolean).map(w=>w[0]).join('').toUpperCase().slice(0,6);
-const S={sessoes:[],data:'',itens:[],cnj:'',tela:'lista',fonte:'collectio',texto:null,larg:420,grava:false,bloq:[]};
+const S={sessoes:[],data:'',itens:[],cnj:'',tela:'lista',fonte:'collectio',texto:null,larg:420,grava:false,bloq:[],etq:{}};
+/* o conteudo-pje.js da lista grava sinalizações só com "Gravar de verdade" (pje-shim.js) */
+window.__previaGrava=()=>S.grava;
+function posBotoes(){const r=$('#pje-b').getBoundingClientRect();document.documentElement.style.setProperty('--pje-x',Math.round(r.left+12)+'px')}
+window.addEventListener('resize',posBotoes);
 const pn=$('#pn');
 async function get(u){const r=await fetch(u,{credentials:'same-origin',cache:'no-store'});const j=await r.json().catch(()=>({}));if(!r.ok){const e=new Error(j.erro||('HTTP '+r.status));e.status=r.status;throw e}return j}
 function item(){return S.itens.find(x=>x.cnj===S.cnj)||null}
@@ -205,8 +214,9 @@ async function desenharPje(){
   $('#url').textContent=S.tela==='lista'?'pje2g.trf3.jus.br/pje/Painel/painel_usuario/advogado.seam':S.tela==='autos'?'pje2g.trf3.jus.br/pje/Processo/ConsultaProcesso/Detalhe/listAutosDigitais.seam':'frontend-pje.app.trf3.jus.br/#/painel-usuario-interno/tarefa';
   if(S.tela==='lista'){
     $('#pje-t').textContent='Painel do usuário · tarefas'+(S.data?' · sessão de '+br(S.data):'');
-    b.innerHTML=S.itens.length?S.itens.map(i=>`<button type="button" class="tf" data-cnj="${esc(i.cnj)}" aria-pressed="${i.cnj===S.cnj}"><b>${esc(rec(i.classe))} ${esc(i.cnj)}</b> - [Sessão] Aguardando a sessão<small>Item ${esc(i.item)} · ${esc(i.assunto||'')} · ${esc(String(i.partes||'').slice(0,90))}</small></button>`).join(''):'<p class="vz">Nenhum processo nesta sessão (ou entre no Ex Officio para ler a pauta).</p>';
-    $$('.tf').forEach(t=>t.onclick=()=>{escolher(t.dataset.cnj)});
+    b.innerHTML=S.itens.length?S.itens.map(i=>`<div class="tf" role="button" tabindex="0" data-cnj="${esc(i.cnj)}" aria-pressed="${i.cnj===S.cnj}"><div><input type="checkbox" aria-label="Selecionar"><a class="tf-n">${esc(rec(i.classe))} ${esc(i.cnj)}</a></div><div class="tf-t">[Sessão] Aguardando a sessão</div><small>Item ${esc(i.item)} · ${esc(i.assunto||'')} · ${esc(String(i.partes||'').slice(0,90))}</small>${(S.etq[i.cnj]||[]).length?'<div class="tf-e">'+S.etq[i.cnj].map(e=>'<span>'+esc(e)+'</span>').join('')+'</div>':''}</div>`).join(''):'<p class="vz">Nenhum processo nesta sessão (ou entre no Ex Officio para ler a pauta).</p>';
+    $$('.tf').forEach(t=>t.onclick=ev=>{if(ev.target.closest('input,.muta-selos,.hs,[data-hero-sin],button'))return;escolher(t.dataset.cnj)});
+    posBotoes();
     return;
   }
   if(S.tela==='autos'){
@@ -223,7 +233,10 @@ function escolher(cnj){S.cnj=cnj||'';$('#cnj').value=S.cnj;desenharPje();mandar(
 
 async function carregarSessao(d){
   S.data=d;S.itens=[];S.texto=null;desenharPje();
-  try{const j=await get('/api/pauta?data='+d);S.itens=(j.itens||[]).slice().sort((a,b)=>(Number(a.item)||0)-(Number(b.item)||0))}catch(e){$('#pje-b').innerHTML='<p class="vz">'+esc(e.status===401?'Entre no Ex Officio para ler a pauta (o painel ao lado tem o mesmo login).':e.message)+'</p>';return}
+  try{const j=await get('/api/pauta?data='+d);S.itens=(j.itens||[]).slice().sort((a,b)=>(Number(a.item)||0)-(Number(b.item)||0))
+    /* etiquetas do PJe registradas na ficha, para o cartão simulado */
+    const ks=S.itens.map(i=>String(i.cnj).replace(/\D/g,'')).filter(k=>k.length===20);
+    for(let x=0;x<ks.length;x+=100){try{const f=await get('/api/pauta?fichas='+ks.slice(x,x+100).join(','));S.itens.forEach(i=>{const r=(f.resumos||{})[String(i.cnj).replace(/\D/g,'')];if(r&&r.etqPje)S.etq[i.cnj]=String(r.etqPje).split(/\s*[,;|]\s*/).filter(Boolean)})}catch(e){}}}catch(e){$('#pje-b').innerHTML='<p class="vz">'+esc(e.status===401?'Entre no Ex Officio para ler a pauta (o painel ao lado tem o mesmo login).':e.message)+'</p>';return}
   $('#cnjs').innerHTML=S.itens.map(i=>`<option value="${esc(i.cnj)}">Item ${esc(i.item)} · ${esc(rec(i.classe))}</option>`).join('');
   if(!S.itens.some(i=>i.cnj===S.cnj))S.cnj=(S.itens.find(i=>i.ctl&&i.ctl.lote&&i.ctl.lote.id)||S.itens[0]||{}).cnj||'';
   $('#cnj').value=S.cnj;desenharPje();mandar();
@@ -247,5 +260,9 @@ $('#grava').onchange=e=>{S.grava=e.target.checked;mandar()};
 $('#tema').onclick=()=>{const t=document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';document.documentElement.setAttribute('data-theme',t);try{localStorage.setItem('cmt-eq-tema',t)}catch(e){}};
 iniciar();
 </script>
+<!-- a lista do "PJe" roda o conteudo-pje.js da extensão: sinalizações, etiquetas personalizadas e botões dos cartões -->
+<script src="pje-shim.js"></script>
+<script src="painel/etiquetas.js"></script>
+<script src="painel/conteudo-pje.js"></script>
 </body>
 </html>
