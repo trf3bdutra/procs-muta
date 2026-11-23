@@ -5,6 +5,13 @@ Nome desde a 0.19.3 (antes: Muta). Os identificadores internos (`window.Muta*`, 
 Extensão do Chrome/Edge (Manifest V3) que abre o **Muta** num painel lateral, ao lado dos autos e das tarefas do PJe 2º grau do TRF-3.
 Base: o HTML independente *muta-independente-prontuario-completo* (Prontuário + Acervo).
 
+## O que muda na 0.41 · sinalizações em todo cartão e no cabeçalho; minuta e correção nos aguardando sessão
+
+- Todo cartão da lista do PJe tem o botão de sinalizações na faixa do topo; sem sinalização, um sino discreto que abre o quadro para incluir pendência, intercorrência ou nota (`conteudo-pje.js › botaoVazio`). Vale também para processo ainda sem ficha.
+- Lista com um só processo (e o mesmo aberto à direita): o cartão é achado pela caixa de seleção (`cartoesLista › umSo`); o cabeçalho do processo aberto ("ApCiv … - [Tarefa]") não é mais tomado por cartão.
+- Cabeçalho do processo aberto no painel (`sinaisCabecalho`) e cabeçalho dos autos digitais (`sinaisAutos`, com busca do número no alto da página quando o cabeçalho não é conhecido): os mesmos botões.
+- Processos aguardando sessão: tags "M" (minuta) e "C" (correção) com o primeiro nome, no cartão e nos cabeçalhos (`equipeHtml`).
+
 ## O que muda na 0.40 · Conformidade confere a minuta contra os autos
 
 - **IDʼs × autos lidos** (`conformidade-motor.js › pecaCitada`, grupo "Autos"): cada "(ID …)" da minuta é procurado na cronologia lida na aba Autos. Se não está lá, aviso (baixo enquanto a cronologia não foi lida toda). Se está, e o texto o atribui a outra peça ("à sentença (ID …)" quando o ID é a apelação), aviso alto. Só se aponta quando o ID vem colado ao nome da peça; quando há um ato no meio ("foram rejeitados (ID …)", "opinou … (ID …)", "integrada em embargos (ID …)"), o ID é do ato e nada se aponta. Testado em 195 minutas do acervo com os autos extraídos: nenhum falso "peça trocada".

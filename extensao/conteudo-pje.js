@@ -467,6 +467,8 @@
       '.muta-selos .hs{all:unset;cursor:pointer;position:relative;display:inline-grid;place-items:center;width:22px;height:22px;border-radius:6px;color:#5d6b78}' +
       '.muta-selos .hs:hover{background:#eef3f7;color:#1f4f6b}' +
       '.muta-selos .hs b{position:absolute;top:-5px;right:-5px;min-width:13px;height:13px;padding:0 3px;box-sizing:border-box;border-radius:7px;background:#e8710a;color:#fff;font:800 9px/13px system-ui,sans-serif;text-align:center}' +
+      '.muta-selos .hs-vz{opacity:.55}.muta-selos .hs-vz:hover{opacity:1}' +
+      '.muta-selos .hs-eq{display:inline-flex;gap:3px;align-items:center;margin-right:2px}.muta-selos .hs-eq>span{display:inline-flex;align-items:center;gap:3px;font:600 10.5px/16px system-ui,sans-serif;color:#2b4556;background:#eef3f7;border:1px solid #d3dde6;border-radius:9px;padding:0 6px 0 2px;white-space:nowrap}.muta-selos .hs-eq i{font:800 9px/13px system-ui,sans-serif;font-style:normal;color:#fff;background:#4a7ea6;border-radius:50%;width:13px;height:13px;text-align:center}.muta-selos .hs-eq>span+span i{background:#2e7d5b}' +
       '.muta-selos .hs-al{color:#b0402f}.muta-selos .hs-al b{background:#c62828}.muta-selos .hs-mu b{background:#4a7ea6}' +
       '.muta-selos .hf{flex-basis:100%;display:flex;flex-wrap:wrap;align-items:center;gap:4px;margin:1px 0}' +
       '.muta-selos .hf-c{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:12px;border:1px solid transparent;background:#eef0fb;color:#3f4aa0;font:600 10.5px/1.25 system-ui,sans-serif;white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis}' +
@@ -499,7 +501,7 @@
       '.muta-selos .m-as{background:#efe9fb;border-color:#cdbcf0;color:#4b2f8f}.muta-selos .m-as-u{background:#fdecea;border-color:#efb3a9;color:#a8321f}' +
       '.muta-selos .m-sgs{flex-basis:100%;display:flex;flex-wrap:wrap;gap:3px;align-items:center;margin-top:1px}.muta-selos .m-sgs>small{font:700 8px system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#8a97a3;margin-right:2px}' +
       '.muta-selos .m-sg{border:1.2px dashed color-mix(in srgb,var(--hc) 60%,#fff);color:var(--hc);background:#fff;border-radius:6px;font-weight:700}.muta-selos .m-sg:hover{background:color-mix(in srgb,var(--hc) 10%,#fff)}.muta-selos .m-sg-t{--hc:#1f4f6b;border-style:solid}' +
-      '.muta-selos.hero-autos{display:inline-flex;margin:0 0 0 8px;vertical-align:middle}' +
+      '.muta-selos.hero-autos{display:inline-flex;width:auto;max-width:none;flex:none;margin:0 0 0 8px;vertical-align:middle;gap:4px}' +
       '.muta-selos .m-pes{display:inline-flex;align-items:center;gap:5px;padding:2px 9px 2px 3px;border-radius:14px;border:1px solid #e0dccc;background:#fff;color:#1d2730}' +
       '.muta-selos .m-pes>i{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font:700 9px system-ui,sans-serif;font-style:normal}' +
       '.muta-selos .m-pes-m>i{background:#e3f2ec;color:#2f6e4b}.muta-selos .m-pes-c>i{background:#ece7f8;color:#5a3fa0}' +
@@ -537,17 +539,62 @@
       '#hero-modo-btn.off{color:#66737f}#hero-modo-btn.off i{background:#b7c2cb}#hero-modo-btn.off i::after{left:2px}#hero-modo-btn:focus-visible{outline:2px solid #1a7fc0;outline-offset:2px}';
     (document.head || document.documentElement).appendChild(st);
   }
+  var RE_CAB1 = new RegExp('\\b([A-Z][A-Za-z]{1,13})\\s+' + CNJ + '[^\\[]{0,24}?-\\s*\\[');
+  function ehCabecalho(el) {
+    for (var e = el, i = 0; e && i < 3; e = e.parentElement, i++) { var t = (e.textContent || '').slice(0, 260); if (RE_CAB1.test(t) && t.length < 260) return e; }
+    return null;
+  }
+  /* 0.41 · cabeçalho do processo aberto no painel do PJe (à direita da lista): os mesmos botões de sinalização */
+  function sinaisCabecalho() {
+    if (!LISTA || !document.body || modoDesligado()) { var v = document.getElementById('hero-sinais-cab'); if (v && modoDesligado()) v.remove(); return; }
+    var w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, { acceptNode: function (x) { RE.lastIndex = 0; return RE.test(x.nodeValue) ? 1 : 3; } }), n, alvo = null, c = 0;
+    while ((n = w.nextNode()) && c < 300 && !alvo) { c++; var el = n.parentElement; if (!el || el.closest('.muta-selos') || el.closest('input[type="checkbox"]')) continue; var h = ehCabecalho(el); if (h && !(h.querySelector && h.querySelector('input[type="checkbox"]'))) alvo = { el: el, numero: numeros(n.nodeValue)[0] }; }
+    var box = document.getElementById('hero-sinais-cab');
+    if (!alvo || !alvo.numero) { if (box) box.remove(); return; }
+    var k = alvo.numero.replace(/\D/g, ''), r = ENR.dados[k];
+    if (!r && !(ENR.pedidos[k] && Date.now() - ENR.pedidos[k] < 120e3)) { ENR.pedidos[k] = Date.now(); pedirSelos([k], {}); }
+    if (!r && !ENR.t) return;
+    cssSelos();
+    var E = window.MutaEtiquetas, rr = r && E ? E.preparar(Object.assign({ _k: k }, r)) : null;
+    var html = equipeHtml(rr, (alvo.el.parentElement || alvo.el).textContent) + ((rr ? sinaisHtml(k, rr) : '') || botaoVazio(k));
+    if (!box || box.getAttribute('data-k') !== k || !box.isConnected) { if (box) box.remove(); box = document.createElement('span'); box.id = 'hero-sinais-cab'; box.className = 'muta-selos hero-autos'; box.setAttribute('data-k', k); alvo.el.insertAdjacentElement('afterend', box); }
+    if (box.getAttribute('data-sig') !== html) { box.setAttribute('data-sig', html); box.innerHTML = ' ' + html + ' '; }
+  }
+  /* sem sinalização: um botão discreto que abre o quadro para incluir pendência, intercorrência ou nota */
+  function botaoVazio(k) { return '<button type="button" class="hs hs-vz" data-hero-sin="pd" data-hero-k="' + k + '" title="Sinalizações: nenhuma. Clique para incluir pendência, intercorrência ou nota">' + ico('sino', 15) + '</button>'; }
+  /* 0.41 · processos aguardando sessão: quem minutou e quem corrigiu, na faixa do topo do cartão */
+  function aguardandoSessao(r, texto) { return /aguardando\s+(a\s+)?sess[ãa]o/i.test(((r && r.tarefa) || '') + ' ' + (texto || '').slice(0, 1500) + ' ' + tarefaAberta()); }
+  function equipeHtml(r, texto) {
+    if (!r || !aguardandoSessao(r, texto) || !(r.servidor || r.corretor)) return '';
+    var nm = function (x) { return String(x || '').split(/\s+/)[0]; };
+    return '<span class="hs-eq" title="Minuta: ' + escS(r.servidor || '—') + ' · Correção: ' + escS(r.corretor || '—') + '">' +
+      (r.servidor ? '<span><i>M</i>' + escS(nm(r.servidor)) + '</span>' : '') + (r.corretor ? '<span><i>C</i>' + escS(nm(r.corretor)) + '</span>' : '') + '</span>';
+  }
   function cartoesLista() {
     if (!LISTA || !document.body || document.getElementById('divTimeLine')) return [];
-    if (numeros((document.body.textContent || '').slice(0, 500000)).length < 2) return [];
+    /* 0.41: com um só processo na lista (e o mesmo aberto à direita), o cartão é o bloco com a caixa de seleção */
+    var umSo = numeros((document.body.textContent || '').slice(0, 500000)).length < 2;
     var out = [], vistos = [], c = 0, n;
     var w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, { acceptNode: function (x) { RE.lastIndex = 0; return RE.test(x.nodeValue) ? 1 : 3; } });
     while ((n = w.nextNode()) && c < 500) {
       c++;
       var el = n.parentElement; if (!el || (el.closest && (el.closest(FORA) || el.closest('.muta-selos')))) continue;
       var nn = numeros(n.nodeValue); if (nn.length !== 1) continue;
+      /* o cabeçalho do processo aberto ("ApCiv 5001… - [Tarefa]") não é cartão da lista */
+      if (ehCabecalho(el)) continue;
       var card = null;
-      for (var e = el, i = 0; e && e !== document.body && i < 12; e = e.parentElement, i++) {
+      if (umSo) {
+        for (var e1 = el, i1 = 0; e1 && e1 !== document.body && i1 < 10; e1 = e1.parentElement, i1++) {
+          if (e1.querySelector && e1.querySelector('input[type="checkbox"]')) { var rc = e1.getBoundingClientRect(); if (rc.height > 0 && rc.height < 420 && rc.width < 700) card = e1; break; }
+        }
+        /* sobe até o cartão inteiro (com a faixa de ícones do topo): pai baixo, estreito e com uma só caixa de seleção */
+        for (var i2 = 0; card && card.parentElement && card.parentElement !== document.body && i2 < 4; i2++) {
+          var pa = card.parentElement, rp = pa.getBoundingClientRect();
+          var extra = (pa.textContent || '').replace(/\s+/g, '').length - (card.textContent || '').replace(/\s+/g, '').length;
+          if (rp.height >= 420 || rp.width >= 700 || extra > 14 || rp.height > card.getBoundingClientRect().height + 80 || pa.querySelectorAll('input[type="checkbox"]').length !== 1 || ehCabecalho(pa)) break;
+          card = pa;
+        }
+      } else for (var e = el, i = 0; e && e !== document.body && i < 12; e = e.parentElement, i++) {
         if (numeros((e.textContent || '').slice(0, 8000)).length === 1) card = e; else break;
       }
       if (!card || vistos.indexOf(card) >= 0) continue;
@@ -634,9 +681,19 @@
     var t = el ? el.textContent : '';
     return (t || '').replace(/\s+/g, ' ').trim().slice(0, 120);
   }
+  function topoSinais(c, sh) {
+    /* o hospedeiro é o bloco do cartão inteiro (com a faixa do topo), nunca o link do número */
+    var host = c.el;
+    for (var u = 0; u < 6 && host.parentElement && (/^(A|SPAN|B|STRONG|LABEL)$/.test(host.tagName) || host.getBoundingClientRect().height < 80) && numeros((host.parentElement.textContent || '').slice(0, 8000)).length === 1 && !(host.querySelector('input[type="checkbox"]') && host.getBoundingClientRect().height >= 80); u++) host = host.parentElement;
+    var tp = null;
+    Array.prototype.forEach.call(document.querySelectorAll('.hero-sin-topo[data-k="' + c.k + '"]'), function (x) { if (x.parentElement === host && !tp) tp = x; else x.remove(); });
+    if (!sh) { if (tp) tp.remove(); return; }
+    if (!tp) { tp = document.createElement('div'); tp.className = 'muta-selos hero-sin-topo'; tp.setAttribute('data-k', c.k); if (getComputedStyle(host).position === 'static') host.style.position = 'relative'; host.insertBefore(tp, host.firstChild); }
+    if (tp.getAttribute('data-sig') !== sh) { tp.setAttribute('data-sig', sh); tp.innerHTML = ' ' + sh + ' '; }
+  }
   function aplicarSelos() {
     if (!LISTA) return;
-    var C = cartoesLista(); if (!C.length) return;
+    var C = cartoesLista(); if (!C.length) { try { sinaisCabecalho(); } catch (e) {} return; }
     cssSelos(); try { botaoModo(); } catch (e) {}
     /* modo HERO desligado: nada nos cartões e as etiquetas voltam ao desenho do PJe */
     if (modoDesligado()) { limparModo(); try { botaoColuna(C); } catch (e) {} return; }
@@ -655,7 +712,9 @@
     if (dev) C.forEach(function (c) { try { estilizarEtiquetas(c.el); } catch (e) {} });
     else if (document.querySelector('.hero-etq')) limparEtiquetas();
     C.forEach(function (c) {
-      var r = ENR.dados[c.k]; if (!r) return;
+      var r = ENR.dados[c.k];
+      /* sem ficha no servidor (depois da resposta): só o botão discreto, para registrar */
+      if (!r) { if (ENR.t && Date.now() - (ENR.pedidos[c.k] || 0) < 600e3) topoSinais(c, botaoVazio(c.k)); return; }
       var box = c.el.querySelector('.muta-selos:not(.hero-sin-topo)');
       var texto = ((c.el.textContent || '').replace(box ? box.textContent : '', '')).slice(0, 4000); (ENR.textos = ENR.textos || {})[c.k] = texto;
       var html = '';
@@ -666,19 +725,13 @@
         if (!box) { box = document.createElement('div'); box.className = 'muta-selos'; pontoBloco(ancora(c), c.el).insertAdjacentElement('afterend', box); }
         box.setAttribute('data-sig', html); box.innerHTML = ' ' + html + ' '; /* espaços nas pontas: o texto do bloco não cola no número do processo */
       }
-      /* botões de sinalização na faixa do topo do cartão (onde o PJe põe datas e ícones) */
-      /* o hospedeiro é o bloco do cartão inteiro (com a faixa do topo), nunca o link do número */
-      var host = c.el;
-      for (var u = 0; u < 6 && host.parentElement && (/^(A|SPAN|B|STRONG|LABEL)$/.test(host.tagName) || host.getBoundingClientRect().height < 80) && numeros((host.parentElement.textContent || '').slice(0, 8000)).length === 1; u++) host = host.parentElement;
-      var sh = (ENR.sin || {})[c.k] || '', tp = null;
-      Array.prototype.forEach.call(document.querySelectorAll('.hero-sin-topo[data-k="' + c.k + '"]'), function (x) { if (x.parentElement === host && !tp) tp = x; else x.remove(); });
-      if (!sh) { if (tp) tp.remove(); }
-      else {
-        if (!tp) { tp = document.createElement('div'); tp.className = 'muta-selos hero-sin-topo'; tp.setAttribute('data-k', c.k); if (getComputedStyle(host).position === 'static') host.style.position = 'relative'; host.insertBefore(tp, host.firstChild); }
-        if (tp.getAttribute('data-sig') !== sh) { tp.setAttribute('data-sig', sh); tp.innerHTML = ' ' + sh + ' '; }
-      }
+      /* botões de sinalização na faixa do topo do cartão (onde o PJe põe datas e ícones); sem sinalização, o botão discreto;
+         aguardando sessão, também quem minutou e quem corrigiu */
+      var rp = window.MutaEtiquetas ? window.MutaEtiquetas.preparar(Object.assign({ _k: c.k }, r)) : r;
+      topoSinais(c, (dev ? '' : equipeHtml(rp, texto)) + ((ENR.sin || {})[c.k] || botaoVazio(c.k)));
     });
     diag(C);
+    try { sinaisCabecalho(); } catch (e) {}
     try { quadroCmt(); } catch (e) {}
   }
   /* os selos vão logo abaixo da linha do número do processo: o cartão do PJe tem altura limitada e recolhe o fim */
@@ -747,7 +800,7 @@
       '<div><p>' + escS(corpo) + '</p>' + (meta ? '<small>' + escS(meta) + '</small>' : '') + '</div></li>';
   }
   function dialogoSinais(k, foco) {
-    var r = ENR.dados[k]; if (!r) return;
+    var r = ENR.dados[k] || {};
     cssSelos();
     var E = window.MutaEtiquetas, S0 = sinaisDe(Object.assign({ _falta: E && ENR.cat ? E.faltando(E.preparar(Object.assign({}, r)), ENR.cat, (ENR.textos || {})[k] || (autosDigitais() ? (document.body.innerText || '').slice(0, 20000) : '')) : [] }, r)), x = S0.r;
     var fmt = k.replace(/^(\d{7})(\d{2})(\d{4})(\d)(\d{2})(\d{4})$/, '$1-$2.$3.$4.$5.$6');
@@ -812,19 +865,22 @@
     if (!autosDigitais() || !numero) return;
     var k = numero.replace(/\D/g, ''); if (k.length !== 20) return;
     var pintar = function () {
-      var r = ENR.dados[k]; if (!r) return;
+      var r = ENR.dados[k]; if (!r && !AUT.ok) return;
       cssSelos();
       var alvo = null; for (var i = 0; i < CABECALHOS.length && !alvo; i++) { var el = document.querySelector(CABECALHOS[i]); if (el && (el.textContent || '').indexOf(numero) >= 0) alvo = el; }
+      /* sem cabeçalho conhecido: o primeiro texto com o número no alto da página */
+      if (!alvo) { var w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null), n, c = 0; while ((n = w.nextNode()) && c < 4000 && !alvo) { c++; if ((n.nodeValue || '').indexOf(numero) < 0) continue; var pe = n.parentElement; if (!pe || pe.closest('.muta-selos,#hero-dlg')) continue; var rc = pe.getBoundingClientRect(); if (rc.height > 0 && rc.top < 220) alvo = pe; } }
       if (!alvo) return;
       var box = document.getElementById('hero-sinais-autos');
-      var E = window.MutaEtiquetas, et = E ? E.etapa(E.preparar(Object.assign({}, r))) : '';
-      var html = (et ? '<span class="m-et">' + escS(et) + '</span>' : '') + sinaisHtml(k, r);
+      var E = window.MutaEtiquetas, et = E && r ? E.etapa(E.preparar(Object.assign({}, r))) : '';
+      var rr = r && E ? E.preparar(Object.assign({}, r)) : null;
+      var html = (et ? '<span class="m-et">' + escS(et) + '</span>' : '') + equipeHtml(rr, document.title + ' ' + (alvo.textContent || '')) + ((r ? sinaisHtml(k, r) : '') || botaoVazio(k));
       if (!box) { box = document.createElement('span'); box.id = 'hero-sinais-autos'; box.className = 'muta-selos hero-autos'; alvo.insertAdjacentElement('afterend', box); }
-      if (box.getAttribute('data-sig') !== html) { box.setAttribute('data-sig', html); box.innerHTML = html || '<span class="m-mu">sem sinalizações</span>'; }
+      if (box.getAttribute('data-sig') !== html) { box.setAttribute('data-sig', html); box.innerHTML = html; }
     };
     if (ENR.dados[k] && AUT.k === k && Date.now() - AUT.t < 120e3) return pintar();
     AUT = { k: k, t: Date.now() };
-    try { chrome.runtime.sendMessage({ tipo: 'muta-resumos', cnjs: [k], lista: false }).then(function (x) { if (x && x.resumos) { Object.keys(x.resumos).forEach(function (q) { ENR.dados[q] = x.resumos[q]; }); ENR.cat = x.catalogo || ENR.cat; ENR.cfg = x.cfg || ENR.cfg; } pintar(); }, function () {}); } catch (e) {}
+    try { chrome.runtime.sendMessage({ tipo: 'muta-resumos', cnjs: [k], lista: false }).then(function (x) { AUT.ok = true; if (x && x.resumos) { Object.keys(x.resumos).forEach(function (q) { ENR.dados[q] = x.resumos[q]; }); ENR.cat = x.catalogo || ENR.cat; ENR.cfg = x.cfg || ENR.cfg; } pintar(); }, function () {}); } catch (e) {}
   }
   /* redesenho das etiquetas do PJe nos cartões: cada tipo (padrao/etiquetas-gabinete.json › categorias) com cor, estilo e ícone
      próprios, e os tipos mais importantes primeiro. Só muda a aparência; nada é gravado no PJe. */

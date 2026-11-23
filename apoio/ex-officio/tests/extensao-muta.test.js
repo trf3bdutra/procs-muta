@@ -545,3 +545,13 @@ test('extensão 0.40: conformidade confere cada ID contra os autos lidos, o obje
   assert.match(cf, /autos: au \? au\.lista\.map/); assert.match(cf, /'muta:autos'/);
   assert.match(read('extensao/autos.js'), /doProcesso: function \(\)/);
 });
+
+test('extensão 0.41: botões de sinalização em todo cartão (vazio = sino discreto), no cabeçalho do processo aberto e dos autos; minuta e correção nos aguardando sessão', () => {
+  const c = read('extensao/conteudo-pje.js');
+  assert.match(c, /function botaoVazio\(k\)/); assert.match(c, /function sinaisCabecalho\(\)/); assert.match(c, /function equipeHtml\(r, texto\)/);
+  assert.match(c, /aguardando\\s\+\(a\\s\+\)\?sess\[ãa\]o/);
+  assert.match(c, /var umSo = numeros/, 'lista com um só processo');
+  assert.match(c, /if \(ehCabecalho\(el\)\) continue;/, 'o cabeçalho do processo aberto não é cartão');
+  assert.match(c, /\(\(r \? sinaisHtml\(k, r\) : ''\) \|\| botaoVazio\(k\)\)/, 'autos digitais: sino mesmo sem sinalização');
+  assert.match(c, /var r = ENR\.dados\[k\] \|\| \{\};/, 'o quadro abre sem ficha');
+});
