@@ -1,6 +1,6 @@
 /* /api/acesso?gh=1&p=<caminho> (função _gh, servida pela acesso.js: o plano da Vercel aceita só 12 funções) → ponte para a API do GitHub no repositório trf3bdutra/procs-muta, com o GH_TOKEN da Vercel.
    Serve à Triagem e ao motor do acervo (Ab Initio) sem token no navegador: basta a sessão da Ex Officio (cookie cmt_eq)
-   de quem é gestor ou tem perfil avançado (apoio/acessos.json).
+   do gestor (acesso completo) ou de qualquer outro usuário, com as regras da Triagem (ver triagemPode).
    Corpo e resposta grandes (acervo/fonte.json, operacional.json) passam comprimidos (gzip, cabeçalho X-Ponte-Gz: 1),
    abaixo do limite de 4,5 MB das funções da Vercel. GET /api/acesso?gh=1&p= (vazio) só confere o acesso. */
 const zlib = require('zlib');
@@ -38,9 +38,11 @@ async function triagemPode(metodo, p, corpo) {
 module.exports = async (req, res) => {
   res.setHeader('Cache-Control', 'no-store');
   try {
+    /* acesso completo: só o gestor. Quem entra com o login do Office (equipe) ou pelo link da Triagem fica com as regras da Triagem */
     let u = L.quem(req), tri = null;
-    let ok = !!u && L.gestor(u); if (u && !ok) { try { ok = (await L.acessos(u)).avancado; } catch (e) {} }
-    if (!ok) { tri = await L.quemTriagem(req).catch(() => null); if (tri) u = 'Triagem (link) · ' + tri.nome; }
+    const ok = !!u && L.gestor(u);
+    if (u && !ok) tri = { nome: u, login: true };
+    if (!u) { tri = await L.quemTriagem(req).catch(() => null); if (tri) u = 'Triagem (link) · ' + tri.nome; }
     if (!u) return res.status(401).json({ message: 'Entre com o seu nome e a sua senha da Ex Officio.' });
     if (!ok && !tri) return res.status(403).json({ message: 'Sem permissão para o acervo do gabinete (' + u + ').' });
     const p = String((req.query && req.query.p) || '').replace(/^\/+/, '');

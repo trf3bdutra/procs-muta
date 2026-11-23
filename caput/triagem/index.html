@@ -3921,7 +3921,7 @@ function portaToken() { return new Promise((fim) => {
       if (!modoTk) { st.textContent = 'Conferindo…';
         const r = await fetch('/api/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, credentials: 'same-origin', body: JSON.stringify({ usuario: u.value.trim(), senha: i.value }) });
         if (!r.ok) { let m = ''; try { m = (await r.json()).erro || ''; } catch (x) {} throw new Error(m || 'Nome ou senha não conferem.'); }
-        const Pn = M() && M().__ghPonte; if (!Pn || !(await Pn.confere())) throw new Error('Entrou, mas este usuário não tem acesso ao acervo do gabinete (perfil gestor ou avançado).');
+        const Pn = M() && M().__ghPonte; if (!Pn || !(await Pn.confere())) throw new Error('Entrou, mas o acesso ao acervo do gabinete não foi liberado para este usuário.');
         tk = Pn.SENT; lembrar = false; }
       else st.textContent = 'Conferindo no GitHub…';
       const r2 = await PM().definir(tk, lembrar); if (!r2 || !r2.ok) throw new Error((r2 && r2.erro) || 'O GitHub recusou o acesso.');

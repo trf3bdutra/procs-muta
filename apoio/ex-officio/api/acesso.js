@@ -30,6 +30,7 @@ module.exports = async (req, res) => {
       if (t) return res.status(200).json({ usuario: '', perfil: 'triagem', soTriagem: true, nome: t.nome, avancado: false, editor: false });
       return res.status(200).json({ usuario: '', perfil: 'equipe', avancado: false, editor: false });
     }
-    const a = await L.acessos(u); res.status(200).json({ usuario: u, ...a });
+    /* no Caput, só o gestor vê todas as abas; os demais usuários do Office ficam só com a Triagem */
+    const a = await L.acessos(u); res.status(200).json({ usuario: u, ...a, soTriagem: !L.gestor(u), nome: u });
   } catch (e) { res.status(500).json({ erro: e.message }); }
 };
