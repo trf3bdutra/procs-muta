@@ -60,3 +60,10 @@ test('mesmo tema do Collectio (cmt-eq-tema) e visual editorial', () => {
   assert.match(html, /--eo:#a57829/);
   assert.match(html, /font-family:var\(--eser\);font-style:italic/);
 });
+
+test('decisões e despachos: movimentação processual sugerida (código da TPU) abaixo da minuta', () => {
+  assert.match(html, /function movSugerida\(d\)/);
+  assert.match(html, /\+\(ehMono\(d\)\?movHtml\(d\):''\)/, 'só nas decisões monocráticas, interlocutórias e despachos');
+  for (const c of ['237', '238', '239', '235', '230', '944', '11010']) assert.match(html, new RegExp('\\b' + c + ":'"));
+  assert.match(html, /d\.movimento = \{codigo, nome, parte, obs\}/, 'a minuta pode trazer a sua movimentação');
+});

@@ -177,6 +177,7 @@ em.it{font-family:var(--eser);font-style:italic;font-weight:400;color:var(--eo)}
 .mdoc{max-height:440px;overflow:auto;background:var(--ew);border:1px solid var(--el);padding:6px 26px 18px;font:14.5px/1.6 var(--eser);color:var(--ei)}
 .mdoc h4{font:400 10px var(--emono);letter-spacing:.2em;text-align:center;margin:16px 0 10px;color:var(--em)}
 .mdoc p{margin:0 0 9px;text-align:justify;text-indent:2.5em}
+.mdoc .mmov{margin:14px 0 2px;padding:8px 12px;border:1px solid var(--el);border-left:3px solid var(--eo2);font:400 12.5px/1.5 var(--eser);text-indent:0}.mdoc .mmov b{display:block;font:400 10px var(--emono);letter-spacing:.12em;text-transform:uppercase;color:var(--eo2);margin-bottom:3px}.mdoc .mmov .mcod{font:600 12px var(--emono)}.mdoc .mmov i{display:block;color:var(--em);font-size:11.5px;margin-top:2px}
 .mdoc .mcab{display:flex;justify-content:space-between;gap:10px;text-indent:0;margin:6px 0 0;padding-bottom:6px;border-bottom:1px dashed var(--el);font:400 10px var(--emono);letter-spacing:.08em;text-transform:uppercase;color:var(--eo2)}
 .b[disabled]{opacity:.4;cursor:not-allowed}
 .tb tr.gh td{background:var(--ep2);padding:0;border-bottom:1px solid var(--el)}
@@ -859,8 +860,48 @@ function docHtml(d){
   if(d&&d.erro)return `<p class="vazio" style="padding:0">${esc(d.erro)}</p>`;
   const s=d.secoes||{};
   const cab=`<p class="mcab"><span>Minuta vigente${d.vigente?' · '+esc(d.vigente):''}${d.rotulo?' · '+esc(d.rotulo):''}</span>${d.atualizado_em?`<span>${br(d.atualizado_em)}</span>`:''}</p>`;
-  return cab+SECS.map(([k,rot])=>(s[k]||[]).length?`<h4>${esc(rotSec(k,rot,d).toUpperCase())}</h4>`+(s[k]||[]).map(t=>`<p>${esc(t)}</p>`).join(''):'').join('');
+  return cab+SECS.map(([k,rot])=>(s[k]||[]).length?`<h4>${esc(rotSec(k,rot,d).toUpperCase())}</h4>`+(s[k]||[]).map(t=>`<p>${esc(t)}</p>`).join(''):'').join('')+(ehMono(d)?movHtml(d):'');
 }
+/* movimentação processual sugerida para lançar no PJe com a decisão monocrática, a interlocutória ou o despacho
+   (códigos da Tabela Processual Unificada do CNJ já lançados pelo Gab. A, conforme o DataJud, e convenções do gabinete);
+   a minuta pode trazer a sua em d.movimento = {codigo, nome, parte, obs}; sem ela, a sugestão sai do dispositivo */
+const MOVS={237:'Provimento',238:'Provimento em Parte',239:'Não-Provimento',235:'Não Conhecimento de recurso',230:'Recurso prejudicado',
+  901:'Negação de seguimento',944:'Homologação (desistência do recurso)',941:'Incompetência',11022:'Julgamento em Diligência',
+  265:'Suspensão · Recurso Extraordinário com repercussão geral',11975:'Suspensão · Recurso Especial repetitivo',792:'Liminar',
+  334:'Gratuidade da Justiça',12164:'Outras Decisões',11010:'Mero expediente'};
+function movSugerida(d){
+  const s=(d&&d.secoes)||{},rot=String((d&&d.rotulo)||'');
+  const corpo=[].concat(s.relatorio||[],s.voto||[]);
+  const fim=corpo.filter(t=>/^\s*(ante o exposto|diante do exposto|pelo exposto|isto posto|assim,? )/i.test(t)).pop()||corpo.slice(-4).join(' ');
+  const t=sem(fim),todo=sem(corpo.join(' ')),o=[];const m=c=>o.push(c);
+  if(/^despacho/i.test(rot)||(!/^\s*(ante|diante|pelo) /i.test(fim)&&!/decido/.test(todo)&&/intime-se|manifeste-se|cumpra-se|vista/.test(todo))){
+    m(/convert\w* o julgamento em diligencia/.test(todo)?11022:11010);}
+  else if(/homolog\w*.{0,60}desistencia/.test(t))m(944);
+  else if(/(declaro|reconhec\w*).{0,40}incompetencia|declino da competencia/.test(t))m(941);
+  else if(/(sobrest|suspen)\w*/.test(t)&&/repercussao geral/.test(t))m(265);
+  else if(/(sobrest|suspen)\w*/.test(t)&&/(repetitiv|tema [\d.]+\/stj)/.test(t))m(11975);
+  else if(/(defiro|indefiro|concedo|nego)\b.{0,80}(liminar|tutela|efeito suspensivo|antecipac)/.test(t))m(792);
+  else{
+    if(/julgo prejudicad|resta prejudicad|declaro prejudicad/.test(t))m(230);
+    if(/nao conheco/.test(t))m(235);
+    if(/(dou|dou-lhe|dar)\b.{0,12}parcial provimento|acolho parcialmente/.test(t))m(238);
+    else if(/(dou|dou-lhe)\b.{0,8}provimento|acolho os embargos/.test(t))m(237);
+    if(/nego seguimento/.test(t))m(901);
+    else if(/nego(-lhe)? provimento|rejeito os embargos/.test(t))m(239);
+    if(!o.length)m(12164);}
+  return o;}
+function movParte(d){const r=String(((d&&d.secoes&&d.secoes.relatorio)||[]).slice(0,3).join(' '));
+  const x=/(?:interpost[oa]s?|opost[oa]s?|ajuizad[oa])\s+(?:pel[oa]s?\s+|por\s+)([^,(]{3,80})/i.exec(r)||/\b(?:Apel(?:ou|aram)|Agravou)\s+([^,(]{3,80}?)\s*\(ID/.exec(r);
+  return x?x[1].split(/\s+(?:em|contra|nos autos|à|ao)\s+/)[0].trim():'';}
+function movHtml(d){
+  const mv=d&&d.movimento,lista=mv&&mv.codigo?[+mv.codigo]:movSugerida(d);if(!lista.length)return '';
+  const parte=(mv&&mv.parte)||movParte(d);
+  const obs=[];if(mv&&mv.obs)obs.push(mv.obs);
+  if(lista.length>1)obs.push('mais de um movimento: o PJe costuma aceitar um só; lançar o principal e registrar o outro, se aceito');
+  if(lista.includes(792))obs.push('conferir na lista do PJe se é concessão ou indeferimento');
+  if(lista.includes(11010)||lista.includes(11022))obs.push('despacho: sem complemento de parte');
+  const nm=c=>(mv&&mv.codigo&&+mv.codigo===c&&mv.nome)||MOVS[c]||'';
+  return `<div class="mmov"><b>Movimentação sugerida (PJe)</b>${lista.map(c=>`<span class="mcod">${c}</span> ${esc(nm(c))}`).join(' · ')}${parte&&!lista.includes(11010)?` <span class="mpar">· recorrente: ${esc(parte)}</span>`:''}${obs.length?`<i>${esc(obs.join('; '))}.</i>`:''}</div>`;}
 async function carregarMinutas(){
   const fila=S.linhas.filter(r=>S.minAb.has(r.x.cnj)&&temMin(r)&&!MIN[r.z.lote+'|'+r.x.cnj.slice(0,10)]);
   let i=0;
