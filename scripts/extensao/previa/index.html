@@ -232,7 +232,7 @@ async function desenharPje(){
 function escolher(cnj){S.cnj=cnj||'';$('#cnj').value=S.cnj;desenharPje();mandar()}
 
 async function carregarSessao(d){
-  S.data=d;S.itens=[];S.texto=null;desenharPje();
+  S.data=d;S.itens=[];S.texto=null;desenharPje();$('#pje-b').innerHTML='<p class="vz">Lendo a pauta e as fichas…</p>';
   try{const j=await get('/api/pauta?data='+d);S.itens=(j.itens||[]).slice().sort((a,b)=>(Number(a.item)||0)-(Number(b.item)||0))
     /* etiquetas do PJe registradas na ficha, para o cartão simulado */
     const ks=S.itens.map(i=>String(i.cnj).replace(/\D/g,'')).filter(k=>k.length===20);
