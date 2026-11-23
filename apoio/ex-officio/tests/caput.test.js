@@ -296,3 +296,9 @@ test('Triagem: o prontuário de triagem é o próprio painel do processo (campos
   for(const k of ['triagem.Tempestividade','triagem.Preparo','triagem.Representação','triagem.MPF','triagem.MPF - Custos Legis','triagem.Urgência','triagem.Tema','triagem.META','triagem.Alegações','triagem.O que falta sanar','triagem.Intercorrências','origem.Próxima ação'])assert.ok(cap.includes("'"+k+"'"),k);
   assert.ok(cap.includes('gravarFicha: async (cnj, campos)')&&cap.includes('W.CMTFichaMonitor'),'grava pela ficha única');
 });
+
+test('Triagem · A triar: clicar na faixa do processo abre o painel do processo (o mesmo dos Triados)',()=>{
+  const cap=require('fs').readFileSync(require('path').join(__dirname,'../../../caput/triagem/index.html'),'utf8');
+  assert.ok(cap.includes(`'" data-atpp="' + esc(o.d) + '"`),'faixa marcada');
+  assert.ok(cap.includes("if ((b = q('tr[data-atpp]')) && !e.target.closest('input,button,a,select,label,textarea')) { abrirProntuarioTriagem(b.dataset.atpp); return; }"),'abre o painel, sem roubar os controles');
+});
