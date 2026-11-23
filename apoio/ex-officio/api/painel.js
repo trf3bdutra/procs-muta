@@ -11,10 +11,13 @@ module.exports = async (req, res) => {
   if (req.query && req.query.fechamento === '1') return require('./_fechamento-auto')(req, res);
   /* Amicus Curiae · Collectio: login do Ex Officio ou chave do relator, conferidos em _lote.js */
   if (req.query && req.query.lote) return require('./_lote')(req, res);
-  /* painel do desembargador: o endereço próprio (/cmt) abre sem login */
+  /* painel do desembargador: abre sem senha só com o link pessoal (chave CMT_CHAVE, guardada no aparelho na
+     primeira abertura de /cmt/?k=…) ou com a sessão do Ex Officio. Sem uma nem outra, ninguém vira o relator. */
   if (req.query && req.query.cmt) {
     const CMT = require('./_cmt');
-    return CMT(req, res, L.quem(req) || process.env.CMT_RELATOR || 'CM');
+    const u = L.quem(req) || (CMT.porChave(req) ? (process.env.CMT_RELATOR || 'CM') : null);
+    if (!u) return res.status(401).json({ erro: 'Este aparelho ainda não tem o link pessoal do painel. Abra uma vez o link enviado pelo gabinete; depois, basta abrir /cmt.' });
+    return CMT(req, res, u);
   }
   const u = L.exigir(req, res); if (!u) return;
   if (req.query && req.query.fechamentoPng === '1') return require('./_fechamento-png')(req, res, u);

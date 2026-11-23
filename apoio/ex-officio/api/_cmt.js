@@ -122,7 +122,7 @@ module.exports.porChave = porChave;
 async function painel(req, res, u) {
   res.setHeader('Cache-Control', 'no-store');
   const a = await L.acessos(u);
-  /* o endereço próprio do painel abre sem login: quem está em /cmt é o desembargador */
+  /* quem chega aqui já passou por painel.js: sessão do Ex Officio ou chave do link pessoal (CMT_CHAVE) */
   void a;
   const hj = new Date(Date.now() - 4 * 3600e3).toISOString().slice(0, 10);
   /* decisões do desembargador: liberar o voto e assinar a monocrática.
