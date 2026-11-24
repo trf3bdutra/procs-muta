@@ -91,11 +91,11 @@ function montar(el,cal,ex){
     const fer=Object.fromEntries(ex.feriados||[]); const ult=`${base}-${String(n).padStart(2,'0')}`; vis=vis.filter(s=>marcos(s)[0].d<=ult&&s.date>=`${base}-01`); let h=['seg','ter','qua','qui','sex'].map(d=>`<div class="cc-wd">${d}</div>`).join('');
     const pad0=(d1.getDay()+6)%7, pad=pad0>=5?0:pad0; for(let i=0;i<pad;i++) h+='<div class="cc-c cc-o"></div>';
     for(let dd=1;dd<=n;dd++){
-      const d=`${base}-${String(dd).padStart(2,'0')}`, wd=(pad0+dd-1)%7; if(wd>=5) continue;
+      const d=`${base}-${String(dd).padStart(2,'0')}`, wd=(d1.getDay()+6+dd-1)%7; if(wd>=5) continue;
       let lanes='';
       /* ex.chips: cada marco vira uma etiqueta no próprio dia, na cor da sessão (cheia quando já passou, vazada quando está por vir, vermelha se venceu) */
-      if(ex.chips) vis.forEach(s=>{const mk=marcos(s).find(x=>x.d===d); if(!mk) return; const e=estado(s,mk);
-        lanes+=`<span class="cc-chip ${mk.k==='date'?'big':e}" data-s="${s.date}" data-k="${mk.k}" style="--c:${s.cor}"><i></i>${({pautarAte:'Pautar até',inicioPreparacao:'Preparação',entregaMinutas:'Entrega',liberacao:'Liberação',date:'Sessão'})[mk.k]} · ${F(s.date)}${mk.k==='date'&&s.hora?' · '+s.hora:''}</span>`;});
+      if(ex.chips) vis.forEach(s=>{marcos(s).filter(x=>x.d===d).forEach(mk=>{const e=estado(s,mk);
+        lanes+=`<span class="cc-chip ${mk.k==='date'?'big':e}" data-s="${s.date}" data-k="${mk.k}" style="--c:${s.cor}"><i></i>${({pautarAte:'Pautar até',inicioPreparacao:'Preparação',entregaMinutas:'Entrega',liberacao:'Liberação',date:'Sessão'})[mk.k]} · ${F(s.date)}${mk.k==='date'&&s.hora?' · '+s.hora:''}</span>`;});});
       else vis.forEach(s=>{const ms=marcos(s), a=ms[0].d, b=s.date; let l='',dot='';
         if(d>=a&&d<=b){const dash=ms.length<=2?`background:repeating-linear-gradient(90deg,${s.cor} 0 6px,transparent 6px 10px)`:`background:${s.cor}`;
           l=`<i class="l" style="left:${d>a?0:'50%'};right:${d<b?0:'50%'};${dash};${s.date<hoje?'opacity:.45':''}"></i>`;}
@@ -107,7 +107,7 @@ function montar(el,cal,ex){
       if(ex.chips&&wd===4&&[1,2].some(k=>iso(new Date(+P(d)+k*DIA))===hoje)) h+=`<div class="cc-wkn">Hoje é fim de semana · ${FD(hoje,{weekday:'long',day:'numeric'})}</div>`;
     }
     /* ex.canto: um cartão no espaço vazio do mês (dias úteis depois do último dia ou, se não houver, antes do primeiro) */
-    if(ex.canto){const wl=(pad0+n-1)%7, fim=wl>=4?0:4-wl;
+    if(ex.canto){const wl=(d1.getDay()+6+n-1)%7, fim=wl>=4?0:4-wl;
       /* o cartão fica numa coluna só (a última do mês); as outras sobras continuam vazias */
       if(fim>0) h+='<div class="cc-c cc-o"></div>'.repeat(fim-1)+`<div class="cc-c cc-canto fim">${ex.canto}</div>`;
       else if(pad>0) h=h.replace('<div class="cc-c cc-o"></div>',`<div class="cc-c cc-canto ini">${ex.canto}</div>`);}
