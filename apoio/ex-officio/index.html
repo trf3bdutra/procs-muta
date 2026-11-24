@@ -3699,7 +3699,7 @@ function alertas(it){var c=it.ctl||{},A=[];if(c.tempest==='Intempestivo')A.push(
 function fmtCnj(s){return esc(s||'');}
 /* etiquetas temáticas da pauta: dentro do mesmo tema somam (OU); entre temas restringem (E) */
 var TGS=[['Recurso',[['ed','ED','Embargos de declaração',function(i){return tipoJ(i)==='Embargos de Declaração';}],['ag','AgInt','Agravos internos',function(i){return tipoJ(i)==='Agravo Interno';}],
-    ['rn','Remessa','Remessas necessárias',function(i){return tipoJ(i)==='Remessa Necessária'||/remessa/.test(nq(i.classe));}],['jr','Retratação','Juízos de retratação',function(i){return tipoJ(i)==='Juízo de Retratação';}]]],
+    ['rn','RemNec','Remessas necessárias',function(i){return tipoJ(i)==='Remessa Necessária'||/remessa/.test(nq(i.classe));}],['jr','JR','Juízos de retratação',function(i){return tipoJ(i)==='Juízo de Retratação';}]]],
   ['Prioridade',[['mt','Metas','Processos de meta',function(i){return !!metaDe(i);}],['so','Sustentação','Pedidos de sustentação oral (presencial ou por videoconferência)',function(i){var v=(i.ctl||{}).sopref||'';return !!v&&soTipo(v)!=='prf';}],
     ['pf','Preferência','Pedidos de preferência',function(i){var v=(i.ctl||{}).sopref||'';return !!v&&soTipo(v)==='prf';}]]],
   ['Atenção',[['pd','Pendências','Processos com pendências ou alertas',function(i){return alertas(i).length>0;}],['ic','Intercorrências','Processos com intercorrência em aberto (inclusive chamado ao TI e retidos)',function(i){return icAberta(i);}],['rt','Retidos','Adiados ou retirados de pauta (resultado da sessão ou intercorrência)',function(i){return !!retidoDe(i);}]]]];
@@ -3761,6 +3761,7 @@ function edLayout(on){var vp=$('#v-pauta');on=!!on;if(!!vp._ed===on)return;vp._e
   var sp=document.createElement('span');sp.className='ed-sep';sp.setAttribute('aria-hidden','true');st.appendChild(sp);
   [document.querySelector('.pt-c'),$('#sel-n'),$('#sel-filt'),$('#sel-limpa')].forEach(function(e){mv(e,st);});}
 /* pauta (visual editorial): as abas Meus/Todos dão lugar às etiquetas temáticas; exportar e copiar vão para a faixa, junto da seleção */
+function edEtiqueta(x){var ic={so:ICNSO.pres,pf:ICNSO.prf,pd:ICN.al,ic:ICN.ic}[x[0]];return ic?'<span class="ed-tag-icon" aria-hidden="true">'+ic+'</span>':esc(x[1]);}
 function edPauta(on,L){var tl=$('#ed-tl'),tg=$('#ed-tags'),st=$('#ed-strip');if(!tl||!tg||!st)return;tg.hidden=!on;tl.hidden=on;
   ['#f-pri','#f-meta'].forEach(function(x){var e=$(x);if(e)e.classList.toggle('ed-off',on);});
   var X=['#exp-copia','#exp-csv','#exp-xlsx'].map(function(x){return $(x);});
@@ -3769,7 +3770,7 @@ function edPauta(on,L){var tl=$('#ed-tl'),tg=$('#ed-tags'),st=$('#ed-strip');if(
     var T=S.tg||{},nada=!(S.q||S.fResp||S.fEt||S.escopo==='meus'||Object.keys(T).length);
     tg.innerHTML='<div class="ed-tgp" role="group" aria-label="Pauta"><small>Pauta</small><div class="ed-tgb"><button type="button" data-tg="*" aria-pressed="'+nada+'" title="Mostrar todos os processos da pauta (limpa os filtros)">Todos <small>'+L.length+'</small></button>'+
       '<button type="button" class="ed-xl" data-xall title="Baixar em Excel todos os processos da pauta, com assunto, classe, etapa e demais colunas" aria-label="Baixar em Excel todos os processos da pauta"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5"/><path d="M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/></svg></button></div></div>'+TGS.map(function(g){return '<div class="ed-tgp" role="group" aria-label="'+esc(g[0])+'"><small>'+esc(g[0])+'</small><div class="ed-tgb">'+g[1].map(function(x){var n=L.filter(x[3]).length;
-      return '<button type="button" data-tg="'+x[0]+'" aria-pressed="'+!!T[x[0]]+'" title="'+esc(x[2])+'"'+(n||T[x[0]]?'':' class="z"')+'>'+esc(x[1])+' <small>'+n+'</small></button>';}).join('')+'</div></div>';}).join('');}
+      return '<button type="button" data-tg="'+x[0]+'" aria-pressed="'+!!T[x[0]]+'" title="'+esc(x[2])+'" aria-label="'+esc(x[2]+' · '+n)+'" class="'+(['so','pf','pd','ic'].indexOf(x[0])>=0?'ed-icon-tag ':'')+(n||T[x[0]]?'':'z')+'">'+edEtiqueta(x)+' <small>'+n+'</small></button>';}).join('')+'</div></div>';}).join('');}
   else{X.forEach(function(e){if(e&&e.parentNode===st){e.classList.remove('ed-exp');var ref=$('#exp-mes');if(e.id==='exp-copia')tl.appendChild(e);else tl.insertBefore(e,ref&&ref.parentNode===tl?ref:null);}});
     var s2=st.querySelector('.ed-sep2');if(s2)s2.remove();}}
 $('#ed-tags').onclick=function(e){if(e.target.closest('[data-xall]')){var T=lista();if(!T.length){toast('Nada a exportar.');return;}expPauta(T,'');toast(T.length+' processo'+(T.length===1?'':'s')+' da pauta exportado'+(T.length===1?'':'s')+'.');return;}
@@ -4256,7 +4257,7 @@ function cartao(it){
     return '<article class="pc cpt edr mrw ee'+o+(meu(it)?' meu':'')+(A.length?' al':'')+pbCls(it,A,c)+(/^(retirad|adiad)/i.test(it.resultado||'')?' rx':'')+'" data-k="'+k+'" title="'+esc(['Sem minuta','Minutado','Corrigido','Liberado'][o]||'')+' · clique na linha para abrir o prontuário de produção">'+
       
       '<div class="rw"><span class="ga"><input type="checkbox" class="sel" data-sel'+(S.sel[k]?' checked':'')+' aria-label="Selecionar item '+esc(it.item||'')+'">'+
-      '<div class="it">'+esc(it.item||'—')+'</div><div class="id"><span class="mr-l1"><span class="cnj">'+fmtCnj(it.cnj)+'</span>'+(it.classe?'<span class="mr-cl" title="Classe: '+esc(it.classe)+'">'+esc(siglaClasse(it.classe))+'</span>':'')+'<span class="mr-ta" title="Apreciação">'+esc(aprec(it))+'</span>'+
+      '<div class="it">'+esc(it.item||'—')+'</div><div class="id"><span class="mr-l1"><span class="cnj">'+fmtCnj(it.cnj)+'</span>'+(it.classe?'<span class="mr-cl" title="Classe: '+esc(it.classe)+'">'+esc(siglaClasse(it.classe))+'</span>':'')+'<span class="mr-ta" title="'+esc('Apreciação: '+tipoJ(it))+'">'+esc(tipoJ(it)==='Juízo de Retratação'?'JR':aprec(it))+'</span>'+
       '<span class="mr-as" title="'+esc('Assunto: '+(it.assunto||'não informado')+(it.partes?' · '+it.partes:''))+'">· '+esc(it.assunto||'assunto não informado')+'</span>'+(metaDe(it)?'<em class="mt">★ Meta '+esc(metaDe(it))+'</em>':'')+rtTag(it)+'</span>'+
       (it.partes||it.sigilo?'<span class="mr-l2"><span class="mr-pt" title="'+esc(it.partes||'')+'">'+esc(it.partes||'')+'</span>'+(it.sigilo?'<em class="e-urg pend" title="Sigilo: '+esc(it.sigilo)+'">sigilo</em>':'')+'</span>':'')+'</div></span>'+
       '<span class="gb">'+
@@ -11285,6 +11286,11 @@ body.painel-gab #v-inicio{padding-top:8px!important}body.painel-gab{background:t
 #v-pauta.ed .ed-tgb{display:flex;align-items:flex-end}
 #v-pauta.ed .ed-tgb button{height:34px;padding:0 clamp(7px,.9vw,13px);border:1px solid var(--el);border-bottom:0;border-radius:0;background:var(--ep);font:700 clamp(11px,.85vw,12px) var(--font);color:var(--em);cursor:pointer;margin:0 -1px 0 0;position:relative;top:1px;white-space:nowrap}
 #v-pauta.ed .ed-tgb button small{font:400 10px var(--emono);margin-left:3px}
+#v-pauta.ed .ed-tgb button.ed-icon-tag{display:inline-flex;align-items:center;justify-content:center;gap:3px;min-width:36px;padding-inline:8px}
+#v-pauta.ed .ed-tgb .ed-tag-icon{display:inline-flex;align-items:center;justify-content:center;flex:none;line-height:1}
+#v-pauta.ed .ed-tgb .ed-tag-icon svg{width:14px;height:14px}
+#v-pauta.ed .ed-tgb button.ed-icon-tag small{margin-left:0}
+#v-pauta.ed .ed-tgb button.ed-icon-tag:focus-visible{outline:2px solid var(--eg);outline-offset:-2px}
 #v-pauta.ed .ed-tgb button:hover{color:var(--ei)}
 #v-pauta.ed .ed-tgb button.z{color:var(--el2)}
 #v-pauta.ed .ed-tgb button[aria-pressed=true]{background:var(--ep2);color:var(--ei);box-shadow:inset 0 2px 0 var(--eg);z-index:1}
