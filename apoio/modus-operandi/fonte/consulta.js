@@ -320,13 +320,17 @@
   /* ---------- barra do caso, na Minuta-Matriz: número do processo (ficha) ou item da pauta da sessão ---------- */
   function barraCaso(){
     var opts=(CQ.cal||[]).map(function(s){return '<option value="'+e(s.date)+'"'+(s.date===CQ.ses?' selected':'')+'>'+e(brd(s.date))+(s.processos?' · '+s.processos+' itens':'')+'</option>';}).join('');
-    var P=CQ.perfil,ph=CQ.calErro?'pautas indisponíveis':CQ.cal?'opcional':'carregando…',chip=P?'<span class="dcx-info"><b>'+e(P.processo||'caso sem número')+'</b><small>'+e(CQ.fonte||'')+'</small>'+(CQ.trocar?'':'<button type="button" class="dcx-t" data-dcxt title="Carregar outro processo">Outro caso</button>')+'<button type="button" data-dcxx title="Fechar o caso: a folha volta ao molde geral" aria-label="Fechar o caso">×</button></span>':'';
+    var P=CQ.perfil,ph=CQ.calErro?'pautas indisponíveis':CQ.cal?'opcional':'carregando…',chip=P?'<span class="dcx-info"><b>'+e(P.processo||'caso sem número')+'</b><small>'+e(CQ.fonte||'')+'</small>'+'<button type="button" class="dcx-t" data-dcxf title="Buscar novamente os dados gravados pela HERO18810 na ficha"'+(CQ.busy?' disabled':'')+'>Atualizar ficha</button>'+(CQ.trocar?'':'<button type="button" class="dcx-t" data-dcxt title="Carregar outro processo">Outro caso</button>')+'<button type="button" data-dcxx title="Fechar o caso: a folha volta ao molde geral" aria-label="Fechar o caso">×</button></span>':'';
     if(P&&!CQ.trocar&&!CQ.busy)return chip;
     var h='<div class="dgrp dcaso"><span class="dglab">Caso</span>'+
       '<label><span>Processo ou item</span><input id="cq-item" value="'+e(CQ.item)+'" placeholder="nº do processo ou item" autocomplete="off" title="Número do processo (abre a ficha) ou item da pauta da sessão escolhida"></label>'+
       '<label'+(CQ.calErro?' title="'+e(CQ.calErro)+'"':'')+'><span>Sessão</span><select id="cq-ses" title="Só para abrir pelo item da pauta"><option value="">'+ph+'</option>'+opts+'</select></label>'+
       '<button type="button" class="dcx-go" id="cq-go"'+(CQ.busy?' disabled':'')+'>'+(CQ.busy?'Abrindo…':'Abrir')+'</button></div>';
     return h+chip;}
+  function atualizarFichaCaso(){var P=CQ.perfil;if(!P||CQ.busy)return;CQ.busy=true;CQ.erro='';pinta();
+    fichaDe(P.processo).then(function(F){if(CQ.perfil!==P)return;if(!F||(!F.operacional&&!F.fonte))throw new Error('Ficha indisponível.');
+      mesclaFicha(F);CQ.fonte='ficha atualizada'+(P.item?' · item '+P.item:'');CQ.R=null;CQ.Rp=null;
+    }).catch(function(er){if(CQ.perfil===P)CQ.erro='Não foi possível atualizar a ficha: '+er.message;}).then(function(){if(CQ.perfil===P){CQ.busy=false;pinta();}});}
   function barraExtra(){return CQ.erro?'<div class="cq-er">'+e(CQ.erro)+(/equipe/.test(CQ.erro)?' <a href="/equipe/" target="_blank" rel="noopener">Abrir o Ex Officio</a>':'')+'</div>':'';}
   function fecharCaso(){CQ.trocar=false;CQ.perfil=null;CQ.pront=null;CQ.fonte='';CQ.erro='';zerar();
     DK.fonte='mat';DK.mod='';DK.rtab='';DK.fonteManual=false;DK.inc={};XP.alt={};XP.abre={};XP.fora={};XP.vb={};XP.res={};Object.keys(FILL).forEach(function(k){if(!/^mod-|^par:/.test(k))delete FILL[k];});XD.proc='';XD.rec='';XD.ac=null;XD.naoAchou=false;
@@ -342,6 +346,7 @@
   document.addEventListener('click',function(ev){var t=ev.target,b;if(!emEdit(t))return;
     var fim=function(){ev.preventDefault();ev.stopImmediatePropagation();};
     if(t.closest('#cq-go')){fim();var s0=document.getElementById('cq-ses'),i0=document.getElementById('cq-item');CQ.ses=s0?s0.value:CQ.ses;CQ.item=i0?i0.value:CQ.item;abrirCaso();return;}
+    if(t.closest('[data-dcxf]')){fim();atualizarFichaCaso();return;}
     if(t.closest('[data-dcxx]')){fim();fecharCaso();return;}
     if(t.closest('[data-dcxt]')){fim();CQ.trocar=true;pinta();var it=document.getElementById('cq-item');if(it)it.focus();return;}
     if((b=t.closest('[data-dusar]'))){fim();dkUsaModelo(b.getAttribute('data-dusar'));return;}
