@@ -38,7 +38,7 @@ function cartoesDe(locais) {
   const out = [];
   locais.forEach(a => a.its.forEach(it => {
     const c = it.ctl || {}, ctl = {};
-    ['mpf', 'parecer', 'prelim', 'tempest', 'preparo', 'repres', 'midias', 'resJulg', 'consect', 'honor', 'topico', 'intercor'].forEach(k => { if (c[k]) ctl[k] = c[k]; });
+    ['mpf', 'parecer', 'prelim', 'tempest', 'preparo', 'repres', 'midias', 'resJulg', 'consect', 'honor', 'topico', 'intercor', 'sopref'].forEach(k => { if (c[k]) ctl[k] = c[k]; });
     out.push({ sessao: a.path.replace(/^.*\/(\d{4}-\d{2}-\d{2})\.json$/, '$1'), item: it.item || '', lista: (a.dados.itens || []).indexOf(it) >= 0 ? 'itens' : 'previa',
       cartao: c.cartao || {}, ctl, servidor: it.servidor || '', corretor: it.corretor || '', resultado: it.resultado || '',
       dataMinuta: it.dataMinuta || '', dataCorrecao: it.dataCorrecao || '', dataLiberacao: it.dataLiberacao || '', editadoEm: c.editadoEm || '', editadoPor: c.editadoPor || '' });

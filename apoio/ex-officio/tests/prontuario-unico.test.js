@@ -52,3 +52,11 @@ test('HERO18810: Roteiro de triagem sem a identificação da decisão; Roteiro d
   assert.match(g, /<b>Roteiro de produção<\/b>/);
   assert.match(g, /data-rt="u:' \+ k \+ '">Usar/, 'sugestão dos autos com Usar');
 });
+
+test('HERO18810: Roteiro de produção pelo perfil da minuta, com histórico de pautas e sem o tipo de ato', () => {
+  const fs = require('node:fs'), g = fs.readFileSync(path.resolve(__dirname, '../../../extensao/gabinete.js'), 'utf8');
+  assert.match(g, /var CC_MONO = \[\['Decisão', \[\['producao', 'Mono - Fundamento', 'Precedente ou fundamento'\]/);
+  assert.match(g, /\['Pauta e julgamento', 'Pauta e julgamento'\]\];/);
+  assert.match(g, /c\.chave === 'Mono - Tipo de ato'/);
+  assert.match(g, /function historicoPautas\(\)/);
+});

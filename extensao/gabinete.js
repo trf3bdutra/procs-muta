@@ -620,9 +620,21 @@ function corpoProcesso() {
    (autos.js › autoPreencher, marca "autos"), a extensão deriva o que se calcula (marca "auto") e, onde os autos divergem
    da ficha, o campo mostra a sugestão com "Usar". Grava na ficha; o Compendium relê a ficha sozinho. */
 var CC_ABERTO = {};
+/* 0.56 · Roteiro de produção por perfil da minuta (o tipo de ato vem do cartão do processo):
+   Caso (o que o Compendium usa e não está acima) → Decisão monocrática (o mesmo do prontuário da página Monocráticas do Ex Officio)
+   ou Acórdão (designação e minuta, revisão, relatório/voto/ementa, liberação) + Pauta e julgamento (histórico de pautas,
+   sustentação/preferência, retirado/adiado e para quando). */
+var CC_MONO = [['Decisão', [['producao', 'Mono - Fundamento', 'Precedente ou fundamento'], ['triagem', 'Hipóteses Monocrática', 'Hipótese do art. 932'], ['producao', 'Voto - Resultado', 'Resultado'],
+    ['producao', 'Voto - Honorários', 'Honorários'], ['producao', 'Tópico-síntese', 'Tópico-síntese (INSS)'], ['producao', 'Voto - Descrição', 'Detalhes da minuta']]],
+  ['Designação e minuta', 'Designação e minuta'], ['Revisão', 'Revisão'],
+  ['Assinatura e publicação', [['producao', 'Data da Liberação'], ['producao', 'Assinado'], ['producao', 'Data da Assinatura'], ['producao', 'Decisão - ID'], ['producao', 'Publicado'], ['producao', 'Mono - Data da publicação']]],
+  ['Controle da monocrática', 'Monocrática'], ['Urgência', 'Urgência']];
+var CC_AC = [['Designação e minuta', 'Designação e minuta'], ['Revisão', 'Revisão'], ['Relatório, voto e ementa', 'Relatório, voto e ementa'],
+  ['Revisão do acórdão (ementa)', 'Revisão do acórdão (ementa)'], ['Liberação para a sessão', 'Liberação para a sessão'], ['Pauta e julgamento', 'Pauta e julgamento']];
+var CC_PROD = { 'Produção': 1, 'Pauta': 1, 'Controles especiais': 1 };
 function camposCaso(ja) {
   ja = ja || {};
-  var AU = window.MutaAutos, SG = AU && AU.sugestoes ? AU.sugestoes() : [], tot = 0, ok = 0, au = 0, vist = {};
+  var AU = window.MutaAutos, SG = AU && AU.sugestoes ? AU.sugestoes() : [], tot = 0, ok = 0, au = 0, vist = {}, mono = destino() === 'monocratica';
   function comSug(c) {
     var alvo = c.secao + '.' + c.chave, h = campo(c), k = -1;
     if (/au-tag/.test(h)) au++;
@@ -631,21 +643,46 @@ function camposCaso(ja) {
     var v = S(SG[k].value); if (/^\d{4}-\d{2}-\d{2}$/.test(v)) v = v.split('-').reverse().join('/');
     return h + '<div class="rt-s"><span>Autos' + (SG[k].doc ? ' (ID ' + esc(SG[k].doc) + ')' : '') + ':</span> <b>' + esc(v.slice(0, 140)) + '</b><button type="button" class="btn line sm" data-rt="u:' + k + '">Usar</button></div>';
   }
-  var corpo = ((G.F && G.F.abas) || []).map(function (a) {
-    if (a.aba === 'Pauta' && destino() === 'monocratica') return '';
-    return (a.grupos || []).filter(function (g) { return !g.controle && (!g.destino || g.destino === destino()) && grupoVisivel(g); }).map(function (g) {
-      var cs = (g.campos || []).filter(function (c) { var id = c.secao + '.' + c.chave; if (vist[id] || ja[id]) return false; return c.apelido && editavel(c) && c.tipo !== 'tabela' && !soSessao(c.chave) && (vist[id] = 1); });
-      if (!cs.length) return '';
-      var n = cs.filter(function (c) { return !!S(V(c.secao, c.chave)); }).length, id = a.aba + ' · ' + g.grupo;
-      tot += cs.length; ok += n;
-      return '<details class="gg" data-cc="' + esc(id) + '"' + (CC_ABERTO[id] || (CC_ABERTO[id] == null && n < cs.length && /^(Processo|Triagem)/.test(a.aba) && tot <= 40) ? ' open' : '') + '><summary><h4>' + esc(id) + '</h4><span class="gn">' + n + '/' + cs.length + '</span></summary><div class="gr">' + cs.map(comSug).join('') + '</div></details>';
+  /* campo entra uma vez só e nunca o que já aparece acima; o tipo de ato fica no cartão */
+  function usa(c, ro) { var id = c.secao + '.' + c.chave; if (!c.secao || vist[id] || ja[id] || c.chave === 'Mono - Tipo de ato' || c.chave === 'Destino' || soSessao(c.chave) || c.tipo === 'tabela') return false;
+    if (!ro && !editavel(c)) return false; vist[id] = 1; return true; }
+  function bloco(id, cs, extra) {
+    if (!cs.length && !extra) return '';
+    var ed = cs.filter(editavel), n = ed.filter(function (c) { return !!S(V(c.secao, c.chave)); }).length; tot += ed.length; ok += n;
+    var ab = CC_ABERTO[id] != null ? CC_ABERTO[id] : n < ed.length && tot <= 30;
+    return '<details class="gg" data-cc="' + esc(id) + '"' + (ab ? ' open' : '') + '><summary><h4>' + esc(id) + '</h4><span class="gn">' + n + '/' + ed.length + '</span></summary><div class="gr">' + (extra || '') + cs.map(comSug).join('') + '</div></details>';
+  }
+  function doGrupo(nome, ro) { var g = grupoModelo(nome); return g ? (g.campos || []).filter(function (c) { return usa(c, ro); }) : []; }
+  function daLista(L) { return L.map(function (x) { var c = campoModelo(x[0], x[1]); if (!c || !usa(c)) return null; return x[2] ? Object.assign({}, c, { rotulo: x[2] }) : c; }).filter(Boolean); }
+  /* 1. Caso: abas Processo e Triagem */
+  var caso = ((G.F && G.F.abas) || []).filter(function (a) { return !CC_PROD[a.aba]; }).map(function (a) {
+    return (a.grupos || []).filter(function (g) { return !g.controle && grupoVisivel(g); }).map(function (g) {
+      return bloco(a.aba + ' · ' + g.grupo, (g.campos || []).filter(function (c) { return c.apelido && usa(c); }));
     }).join('');
+  }).join('');
+  /* 2. perfil da minuta */
+  var perfil = (mono ? CC_MONO : CC_AC).map(function (s) {
+    var cs = Array.isArray(s[1]) ? daLista(s[1]) : doGrupo(s[1], s[1] === 'Pauta e julgamento' || s[1] === 'Monocrática'), extra = '';
+    if (s[1] === 'Pauta e julgamento') extra = historicoPautas();
+    return bloco((mono ? 'Decisão monocrática · ' : 'Acórdão · ') + s[0], cs, extra);
   }).join('');
   if (!tot) return '';
   var pct = Math.round(100 * ok / tot);
   return '<section class="card rt-top cc-caso"><div class="rt-tt"><b>Roteiro de produção</b><span class="rt-n">' + ok + '/' + tot + '</span>' + (au ? '<span class="rt-al cc-au">' + au + ' automático' + (au > 1 ? 's' : '') + '</span>' : '') + '</div>' +
     '<div class="rt-bar"><i style="width:' + pct + '%"></i></div>' + (AU && AU.barra ? AU.barra() : '') +
-    '<p class="muted">Campos do caso que o Compendium usa na minuta (' + (destino() === 'monocratica' ? 'decisão monocrática' : 'acórdão') + '). Os autos lidos preenchem sozinhos os vazios; confira o que vier marcado. Grava na ficha.</p>' + corpo + '</section>';
+    '<p class="muted">Perfil da minuta: <b>' + (mono ? 'decisão monocrática' : 'acórdão') + '</b>, pelo tipo de ato do cartão do processo. Os autos lidos preenchem sozinhos os vazios; confira o que vier marcado. Grava na ficha.</p>' +
+    caso + perfil + '</section>';
+}
+/* histórico de pautas do processo: sessões registradas na ficha e cartões das pautas em curso (retirado, adiado, sustentação, preferência) */
+function historicoPautas() {
+  var L = [], ses = ((G.op || {}).pauta || {}).sessoes, br2 = function (d) { return /^\d{4}-\d{2}-\d{2}/.test(S(d)) ? S(d).slice(0, 10).split('-').reverse().join('/') : S(d); };
+  (Array.isArray(ses) ? ses : []).forEach(function (x) { if (x && x.sessao) L.push({ s: x.sessao, i: S(x.item), r: S(x.resultado) }); });
+  var SI = window.MutaSincronia && window.MutaSincronia.situacao ? window.MutaSincronia.situacao() : null, C = SI && SI.cnj && SI.cnj.replace(/\D/g, '') === S(G.cnj).replace(/\D/g, '') ? SI.cartoes : [];
+  (C || []).forEach(function (c) { var e = L.filter(function (x) { return x.s === c.sessao; })[0] || (L.push({ s: c.sessao, i: '', r: '' }), L[L.length - 1]);
+    e.i = e.i || S(c.item); e.r = e.r || S(c.resultado); var so = (c.ctl || {}).sopref || (c.cartao || {}).sopref; if (so) e.so = so; e.atual = true; });
+  if (!L.length) return '<p class="muted">Sem pauta registrada para este processo.</p>';
+  L.sort(function (a, b) { return S(a.s).localeCompare(S(b.s)); });
+  return '<ol class="cc-pautas">' + L.map(function (x) { return '<li><b>' + esc(br2(x.s)) + '</b>' + (x.i ? ' · item ' + esc(x.i) : '') + (x.r ? ' · <span class="cc-pr">' + esc(x.r) + '</span>' : x.atual ? ' · em pauta' : '') + (x.so ? ' · ' + esc(x.so) : '') + '</li>'; }).join('') + '</ol>';
 }
 document.addEventListener('toggle', function (e) { var d = e.target; if (d && d.getAttribute && d.getAttribute('data-cc') != null) CC_ABERTO[d.getAttribute('data-cc')] = d.open; }, true);
 function corpoTriagem() {
