@@ -465,7 +465,7 @@ function tipoMono(x){const c=x.ctl||{},t=sem(c.tipoAto||'');
   if(/urgencia|liminar|tutela|efeito suspensivo|interlocut/.test(t))return 'interlocutoria';
   if(!t&&!x.mono)return c.urgTipo?'interlocutoria':'';
   return 'monocratica';}
-const ETAPAS_MONO=[['minutar','1 · A minutar','sem minuta','minuta ainda não registrada'],['minutada','2 · Minutada','minutadas','sem revisão registrada'],['corrigida','3 · Revisada','revisadas','falta enviar para assinatura'],['liberada','4 · Para assinatura','enviadas','aguardando a assinatura'],['assinada','5 · Assinada','assinadas','decisão assinada']];
+const ETAPAS_MONO=[['minutar','1 · A minutar','sem minuta','minuta ainda não registrada'],['minutada','2 · Minutada','minutadas','sem revisão registrada'],['corrigida','3 · Revisada','revisadas','falta enviar para assinatura'],['liberada','4 · Aguardando assinatura','enviadas','aguardando a assinatura'],['assinada','5 · Assinada','assinadas','decisão assinada']];
 /* versão final por omissão: sem versão final importada no Collectio, vale o acórdão (ou a decisão) publicado que chega ao Ementário
    (série histórica do Relator, /jurisprudencia/indice.json.gz, a mesma do Compendium): mesmo processo, julgado na sessão (ou depois da liberação) */
 const dgt=s=>String(s||'').replace(/\D/g,'');
@@ -544,7 +544,7 @@ function linha(x,cheio){
     if(pub)tags.push(['ok','Publicada '+brc(pub.d)+' · Ementário']);else if(x.publicado)tags.push(['ok','Publicada']);
     if(fontes.length>1)tags.push(['in','Minuta em '+fontes.length+' coleções']);else if(z&&z.compart)tags.push(['in','Minuta em '+z.titulo]);
     if(!String(x.servidor||'').trim())tags.push(['cr','Sem minutante']);
-    const txt={minutar:'a minutar',minutada:x.dataMinuta?'minutada '+brc(x.dataMinuta):'minutada',corrigida:'revisada '+brc(x.dataCorrecao),liberada:'para assinatura '+brc(x.dataLiberacao),assinada:x.dataAssinatura?'assinada '+brc(x.dataAssinatura):pub?'publicada '+brc(pub.d):'assinada'}[etapa];
+    const txt={minutar:'a minutar',minutada:x.dataMinuta?'minutada '+brc(x.dataMinuta):'minutada',corrigida:'revisada '+brc(x.dataCorrecao),liberada:'enviada '+brc(x.dataLiberacao),assinada:x.dataAssinatura?'assinada '+brc(x.dataAssinatura):pub?'publicada '+brc(pub.d):'assinada'}[etapa];
     return {x,z,it,c,fontes,item:Number(x.item)||0,etapa,passos:[m,co,li,as],tags,nivel,txt,retido:false,cheio:false,fi,pub,mono:true,meu:souEu(x.corretor)};
   }
   const retido=/retirad|adiad/i.test(c.intercorTipo||'');
@@ -591,7 +591,7 @@ async function carregar(){
   try{
     msg('Lendo as sessões e os lotes…');
     const L=await get('/api/painel?lote=1');
-    S.usuario=L.usuario||'';S.gestor=!!L.gestor;
+    S.usuario=L.usuario||'';S.gestor=!!L.gestor;S.rel=!!L.relator;
     if(L.relator){location.replace('/amicus/collectio/classico/'+location.search+location.hash);return}
     const cg=$('#cg');if(cg)cg.hidden=!S.gestor;
     /* só as sessões ativas: publicadas para a equipe, com processos e ainda por realizar */
@@ -635,7 +635,7 @@ const ROT_COL={pauta:'Lote da pauta',selecao:'Seleção prévia',triagem:'Coleç
 async function carregarMono(k){
   S.mono=k;S.colTipo=k;S.loteSel='';S.colTit=MONO[k];S.loteSes='';S.por={};S.lotes={};S.mxSes=null;
   msg('Lendo as decisões registradas…');
-  const D=S.monoD||(S.monoD=await get('/api/pauta?mono=1'));
+  const D=S.monoD=await get('/api/pauta?mono=1');
   S.itens=(D.itens||[]).filter(x=>tipoMono(x)===k).map(x=>Object.assign({},x,{_mono:true,item:x.item||''}));
   try{const V=await get('/api/painel?lote=1&matriz='+k+MODO());const mx=V&&V.matriz;if(mx)S.mxSes={grupos:mx.grupos||[],colunas:mx.colunas||[],itens:mx.itens||{},em:mx.atualizado_em,por:mx.por}}catch(e){}
   S.linhas=S.itens.map(x=>linha(x));
@@ -655,8 +655,10 @@ async function carregarLote(id,ses){
   /* designação, datas e retenção vêm da pauta de cada sessão do lote, quando publicada */
   const P={}, ss=[...new Set((l.itens||[]).map(i=>i.sessao).filter(Boolean))];
   await Promise.all(ss.map(s=>get('/api/pauta?data='+s).then(d=>(d.itens||[]).forEach(x=>{P[x.cnj]=x})).catch(()=>{})));
+  const decis=dec?await get('/api/pauta?mono=1'):null;
+  const op=new Map(((decis&&decis.itens)||[]).map(x=>[dgt(x.cnj),x]));
   S.itens=(l.itens||[]).map(it=>{S.por[it.processo]={lote:l.id,titulo:S.colTit,it};const e=it.equipe||{},d=e.datas||{};
-    return P[it.processo]||{cnj:it.processo,item:it.item!=null?String(it.item):'',classe:it.recurso||'',assunto:it.assunto||'',partes:it.partes||'',servidor:e.minuta||'',corretor:e.correcao||'',dataMinuta:d.minuta||'',dataCorrecao:d.correcao||'',dataLiberacao:d.liberacao||'',dataAssinatura:d.assinatura||'',ctl:{tipoAto:dec?(it.ato||(it.triagem||{}).ato||MONO[dec]):''},_mono:!!dec}});
+    const base=P[it.processo]||{cnj:it.processo,item:it.item!=null?String(it.item):'',classe:it.recurso||'',assunto:it.assunto||'',partes:it.partes||'',servidor:e.minuta||'',corretor:e.correcao||'',dataMinuta:d.minuta||'',dataCorrecao:d.correcao||'',dataLiberacao:d.liberacao||'',dataAssinatura:d.assinatura||'',ctl:{tipoAto:dec?(it.ato||(it.triagem||{}).ato||MONO[dec]):''},_mono:!!dec};const reg=op.get(dgt(it.processo));return dec?Object.assign({},base,reg||{},{_mono:true,ctl:Object.assign({},base.ctl,reg&&reg.ctl||{})}):base});
   S.linhas=S.itens.map(x=>linha(x));
   if(!S.linhas.some(r=>r.meu))S.vista='todos';
   const eu=$('#eu');if(S.usuario){eu.hidden=false;eu.textContent='★ '+S.usuario}
@@ -754,7 +756,7 @@ function render(){
    ${matrizHtml(esc0)}
 
    <section class="sec" id="procs"><div class="shd"><div><p class="k">03 / Lista</p><h2>Processos <em class="it">${S.etapa?esc((etapas().find(e=>e[0]===S.etapa)||[])[2]):S.fora==='retido'?'retirados':S.fora==='minutar'?'sem minuta':'da '+(S.vista==='meus'?'correção':S.loteSel||S.mono?'coleção':'sessão')}.</em></h2><p class="d">${lst.length} de ${esc0.length}, por etapa e na ordem ${S.mono?'de registro':'da pauta'}. A barra mostra as etapas; a vazada com contorno é a etapa pulada.</p></div>
-     <span class="seg pil" role="group" aria-label="Exibição da lista"><button type="button" id="abre-t" aria-pressed="${!S.fechados.size}" title="Expandir todos os grupos">Expandir</button><button type="button" id="fecha-t" aria-pressed="${S.fechados.size>=etapas().length}" title="Recolher todos os grupos">Recolher</button><i class="sep" aria-hidden="true"></i><button type="button" id="mn-t" aria-pressed="${minTodas(lst)}" title="Mostrar, abaixo de cada processo, a minuta vigente no Collectio">${minTodas(lst)?'Fechar minutas':'Abrir todas as minutas'}</button></span></div>
+     ${barraAssinatura()}<span class="seg pil" role="group" aria-label="Exibição da lista"><button type="button" id="abre-t" aria-pressed="${!S.fechados.size}" title="Expandir todos os grupos">Expandir</button><button type="button" id="fecha-t" aria-pressed="${S.fechados.size>=etapas().length}" title="Recolher todos os grupos">Recolher</button><i class="sep" aria-hidden="true"></i><button type="button" id="mn-t" aria-pressed="${minTodas(lst)}" title="Mostrar, abaixo de cada processo, a minuta vigente no Collectio">${minTodas(lst)?'Fechar minutas':'Abrir todas as minutas'}</button></span></div>
     <div class="box"><div class="tw"><table class="tb">
      <thead><tr><th scope="col">${comItem()?'Item':'<span class="sr">Item</span>'}</th><th scope="col">Processo</th><th scope="col">Minuta</th><th scope="col">Correção</th><th scope="col">Etapas</th><th scope="col">Alertas</th><th scope="col"><span class="sr">Abrir</span></th></tr></thead>
      <tbody>${grupos(lst)||`<tr><td colspan="7" class="vazio">Nenhum processo neste filtro.</td></tr>`}</tbody>
@@ -828,7 +830,7 @@ function renderMesa(){
    </div>
    <div class="ms-work">
     <div class="ms-main">${aba==='matriz'?matrizHtml(S.etapa||S.fora||S.q?lst:esc0):`<section class="sec" id="procs"><div class="shd"><div><h2>Processos <em class="it">${sub}.</em></h2><p class="d">${lst.length} de ${esc0.length}, por etapa e na ordem ${S.mono?'de registro':'da pauta'}. Clique num processo para abrir o painel ao lado.</p></div>
-      <span class="seg pil" role="group" aria-label="Exibição da lista"><button type="button" id="abre-t" aria-pressed="${!S.fechados.size}" title="Expandir todos os grupos">Expandir</button><button type="button" id="fecha-t" aria-pressed="${S.fechados.size>=etapas().length}" title="Recolher todos os grupos">Recolher</button><i class="sep" aria-hidden="true"></i><button type="button" id="mn-t" aria-pressed="${minTodas(lst)}" title="Mostrar, abaixo de cada processo, a minuta vigente no Collectio">${minTodas(lst)?'Fechar minutas':'Abrir todas as minutas'}</button></span></div>
+      ${barraAssinatura()}<span class="seg pil" role="group" aria-label="Exibição da lista"><button type="button" id="abre-t" aria-pressed="${!S.fechados.size}" title="Expandir todos os grupos">Expandir</button><button type="button" id="fecha-t" aria-pressed="${S.fechados.size>=etapas().length}" title="Recolher todos os grupos">Recolher</button><i class="sep" aria-hidden="true"></i><button type="button" id="mn-t" aria-pressed="${minTodas(lst)}" title="Mostrar, abaixo de cada processo, a minuta vigente no Collectio">${minTodas(lst)?'Fechar minutas':'Abrir todas as minutas'}</button></span></div>
      <div class="box"><div class="tw"><table class="tb">
       <thead><tr><th scope="col">${comItem()?'Item':'<span class="sr">Item</span>'}</th><th scope="col">Processo</th><th scope="col">Minuta</th><th scope="col">Correção</th><th scope="col">Etapas</th><th scope="col">Alertas</th><th scope="col"><span class="sr">Abrir</span></th></tr></thead>
       <tbody>${grupos(lst)||`<tr><td colspan="7" class="vazio">Nenhum processo neste filtro.</td></tr>`}</tbody>
@@ -928,7 +930,7 @@ function rowHtml(r){
    <td><span class="nm">${esc(x.corretor||'—')}</span></td>
    <td><div class="et" aria-hidden="true">${pul.map(c=>`<i class="${c}"></i>`).join('')}</div><span class="et-t">${esc(r.txt)}</span></td>
    <td>${r.tags.map(([c,t])=>`<span class="tg ${c}">${esc(t)}</span>`).join('')||'<span class="tg ok">Em dia</span>'}${r.retido&&r.c.intercor?`<span class="pt">${esc(String(r.c.intercor).replace(/^Retirado de pauta \([^)]*\):\s*/,''))}</span>`:''}</td>
-   <td style="text-align:right;white-space:nowrap"><button type="button" class="b" data-min="${esc(x.cnj)}" aria-expanded="${S.minAb.has(x.cnj)}"${temMin(r)?'':' disabled title="Sem minuta no Collectio"'}>Minuta</button> <button type="button" class="b" data-abre="${esc(x.cnj)}">Abrir</button></td></tr>`;
+   <td style="text-align:right;white-space:nowrap">${acoesAssinatura(r,true)}<button type="button" class="b" data-min="${esc(x.cnj)}" aria-expanded="${S.minAb.has(x.cnj)}"${temMin(r)?'':' disabled title="Sem minuta no Collectio"'}>Minuta</button> <button type="button" class="b" data-abre="${esc(x.cnj)}">Abrir</button></td></tr>`;
 }
 /* coluna de uma etapa do fluxo: o número (filtro da lista), o próximo passo e os primeiros processos da fila */
 const PASSO={minutar:['Minutar','pelo minutante designado',r=>r.x.servidor?'minutante '+r.x.servidor:'sem minutante designado'],
@@ -1086,7 +1088,7 @@ const ICO={a:'<path d="M4 17c3-6 5-9 7-9s0 8 2 8 2-4 4-4 2 3 4 3M4 21h16"/>',m:'
 const svg=(d,s)=>`<svg viewBox="0 0 24 24" width="${s||14}" height="${s||14}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
 function linhaEtapas(r){
   const x=r.x,it=r.it;
-  const P=r.mono?[['Minuta','m',x.dataMinuta],['Revisão','r',x.dataCorrecao],['Assinatura','e',x.dataLiberacao],['Assinada','a',x.dataAssinatura||(r.pub&&r.pub.d)]]:r.cheio?[['Minuta','m',x.dataMinuta],['Correção','r',x.dataCorrecao],['No PJe','p',it&&it.pje&&it.pje.em],['Liberação','e',x.dataLiberacao]]
+  const P=r.mono?[['Minuta','m',x.dataMinuta],['Revisão','r',x.dataCorrecao],['Enviada','e',x.dataLiberacao],['Assinada','a',x.dataAssinatura||(r.pub&&r.pub.d)]]:r.cheio?[['Minuta','m',x.dataMinuta],['Correção','r',x.dataCorrecao],['No PJe','p',it&&it.pje&&it.pje.em],['Liberação','e',x.dataLiberacao]]
                  :[['Minuta','m',x.dataMinuta],['Correção','r',x.dataCorrecao],['Liberação','e',x.dataLiberacao]];
   const n=P.length, ult=r.passos.lastIndexOf(true), at=r.retido||ult+1>=n?-1:ult+1, pct=ult>0?ult/(n-1)*100:0;
   return `<div class="stl" style="--n:${n}" role="list" aria-label="Etapas">${`<i class="stl-ln" aria-hidden="true"><i style="width:${pct}%"></i></i>`}${P.map((q,k)=>{
@@ -1101,6 +1103,7 @@ function procHtml(){
   let ban='';
   if(r.mono&&r.pub)ban=`<p class="ban in">Versão final: a decisão publicada em ${br(r.pub.d)}${r.pub.v?' ('+esc(r.pub.v)+')':''}, lida do Ementário${r.it&&r.it.final?'':', porque nenhuma versão final foi importada no Collectio'}.</p>`;
   if(ban);else if(r.retido)ban=`<p class="ban in">${esc(r.c.intercor||r.c.intercorTipo)}</p>`;
+  else if(r.mono)ban=r.etapa==='corrigida'?'<p class="ban in">Revisada. Falta encaminhar para assinatura no PJe.</p>':'';
   else if(!r.cheio)ban=r.etapa==='corrigida'?`<p class="ban in">Corrigida. Falta liberar no PJe.</p>`:'';
   else if(r.etapa==='liberada'&&!r.fi)ban=`<p class="ban">Liberada no PJe${r.passos[2]?'':', sem a marca da versão importada'}. Confira o texto final no PJe e registre-o como versão final no Collectio: a comparação passa a mostrar o que o Desembargador mudou. Sem versão final importada, valerá o acórdão publicado, quando chegar ao Ementário.</p>`;
   else if(r.etapa==='liberada'&&r.pub)ban=`<p class="ban in">Versão final: o acórdão publicado em ${br(r.pub.d)}${r.pub.v?' ('+esc(r.pub.v)+')':''}, lido do Ementário, porque nenhuma versão final foi importada no Collectio.</p>`;
@@ -1112,6 +1115,7 @@ function procHtml(){
     <div class="pf-h">
      <div class="pf-id"><span class="cnj">${esc(x.cnj)}</span><span class="pt">${esc(x.partes)}</span><span class="pt">Minuta ${esc(x.servidor||'—')} · correção ${esc(x.corretor||'—')}${z?' · '+(z.compart?'minuta e registros da coleção '+esc(z.titulo):esc(z.titulo)):''}</span></div>
      ${linhaEtapas(r)}
+     ${acoesAssinatura(r)}
      <div class="pf-acts"><a class="b" href="/amicus/collectio/classico/?id=${encodeURIComponent(z&&temMin(r)?r.fontes[0].lote:(S.loteSel||'pauta-'+S.data))}#p=${encodeURIComponent(((r.it&&r.it.sessao)||(S.loteSel?'':S.data))+'-'+x.item)}" target="_blank" rel="noopener" title="Registrar versão, conformidade e Compendium">Abrir no clássico</a><button type="button" class="b" id="fecha">Fechar</button></div>
     </div>
     ${ban}
@@ -1270,7 +1274,47 @@ function difPal(x,y){
 }
 
 /* ---------- eventos ---------- */
+function podeAssinatura(r){return r.mono&&S.usuario&&!S.rel&&!r.pub&&!r.x.publicado}
+function acoesAssinatura(r,compacta){
+  if(!podeAssinatura(r))return '';
+  const b=(op,txt)=>'<button type="button" class="b" data-ass-op="'+op+'" data-ass-cnj="'+esc(r.x.cnj)+'">'+txt+'</button> ';
+  const x=r.x, as=r.etapa==='assinada', li=r.etapa==='liberada';
+  if(compacta)return '<input type="checkbox" data-ass-sel="'+esc(x.cnj)+'" aria-label="Selecionar para controle de assinatura" '+(S.assSel?.has(x.cnj)?'checked':'')+'> '+(!as&&!li?b('enviar','Registrar envio'):'');
+  return '<div class="pf-acts">'+(as?b('desfazer-assinatura','Desfazer assinatura'):li?b('assinar','Registrar assinatura')+b('desfazer-envio','Desfazer envio'):b('enviar','Registrar envio para assinatura'))+'</div>';
+}
+function barraAssinatura(){
+  if(!S.mono||!S.usuario||S.rel)return '';
+  return '<div class="pf-acts"><button type="button" class="b" id="ass-todos">Selecionar filtrados</button><button type="button" class="b" id="ass-limpa">Limpar seleção</button><span id="ass-n">'+(S.assSel?.size||0)+' selecionados</span><button type="button" class="b" data-ass-lote="enviar">Registrar envio</button><button type="button" class="b" data-ass-lote="assinar">Registrar assinatura</button><button type="button" class="b" data-ass-lote="desfazer-envio">Desfazer envio</button><button type="button" class="b" data-ass-lote="desfazer-assinatura">Desfazer assinatura</button></div>';
+}
+let assOcupado=false;
+async function registraAssinatura(op,cnjs){
+  if(assOcupado)return;
+  const eleg=r=>podeAssinatura(r)&&(op==='enviar'? !['liberada','assinada'].includes(r.etapa):op==='desfazer-assinatura'?r.etapa==='assinada':r.etapa==='liberada');
+  const lista=S.linhas.filter(r=>cnjs.includes(r.x.cnj)&&eleg(r)).map(r=>r.x.cnj);
+  if(!lista.length){alert('Nenhum processo selecionado é elegível para esta ação.');return}
+  const rot={enviar:'Registrar envio já realizado no PJe',assinar:'Registrar assinatura já realizada no PJe','desfazer-envio':'Desfazer registro de envio','desfazer-assinatura':'Desfazer registro de assinatura'}[op];
+  if(!confirm(rot+' · '+lista.length+' processo(s)? Este controle não movimenta o PJe.'))return;
+  assOcupado=true;const id=S.loteSel||S.mono, erros=[];
+  try{
+    for(const cnj of lista){
+      try{
+        const resp=await fetch('/api/painel?lote=1',{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify({acao:'assinatura-collectio',id,processo:cnj,operacao:op})});
+        const j=await resp.json();if(!resp.ok||!j.item)throw Error(j.erro||'Falha no registro');
+        const x=S.itens.find(x=>x.cnj===cnj);if(x&&id===(S.loteSel||S.mono))Object.assign(x,j.item,{_mono:true});S.assSel?.delete(cnj);
+      }catch(e){erros.push(cnj+': '+e.message)}
+    }
+    S.monoD=null;render();publicados().catch(()=>{});
+    if(erros.length)alert((lista.length-erros.length)+' registro(s) salvo(s). Falhas: '+erros.join('\n'));
+  }finally{assOcupado=false}
+}
 function ligar(){
+  S.assSel=S.assSel||new Set();
+  $('[data-ass-sel]').forEach(c=>{c.onclick=e=>e.stopPropagation();c.onchange=()=>{c.checked?S.assSel.add(c.dataset.assSel):S.assSel.delete(c.dataset.assSel);const n=$('#ass-n');if(n)n.textContent=S.assSel.size+' selecionados'}});
+  $('[data-ass-op]').forEach(b=>b.onclick=e=>{e.stopPropagation();registraAssinatura(b.dataset.assOp,[b.dataset.assCnj])});
+  $('[data-ass-lote]').forEach(b=>b.onclick=()=>registraAssinatura(b.dataset.assLote,[...S.assSel]));
+  const ast=$('#ass-todos');if(ast)ast.onclick=()=>{filtradas().filter(podeAssinatura).forEach(r=>S.assSel.add(r.x.cnj));render()};
+  const asl=$('#ass-limpa');if(asl)asl.onclick=()=>{S.assSel.clear();render()};
+
   const s=$('#ses');if(s)s.onchange=()=>trocaSessao(s.value);
   $$('[data-ctipo]').forEach(b=>b.onclick=()=>{const k=b.dataset.ctipo;if(MONO[k]){if(S.mono!==k)trocaMono(k);return}S.colTipo=k;if(S.mono&&k==='pauta'){trocaSessao(S.data);return}render()});
   $$('select[data-dec]').forEach(s=>s.onchange=()=>{if(s.value)trocaColecao(s.value,'');else trocaMono(s.dataset.dec)});
@@ -1305,8 +1349,8 @@ function ligar(){
   const f=$('#fecha');if(f)f.onclick=()=>{S.aberto='';const u=new URL(location.href);u.searchParams.delete('processo');history.replaceState(null,'',u);render();ir('procs')};
 }
 async function trocaSessao(d){if(!d)return;S.colTipo='pauta';S.loteSel='';S.data=d;S.aberto='';S.etapa='';S.fora='';const u=new URL(location.href);u.searchParams.set('sessao',S.data);u.searchParams.delete('processo');u.searchParams.delete('colecao');history.replaceState(null,'',u);$('#app').innerHTML='<div class="load"><p id="ld-m">Lendo a pauta…</p></div>';try{await carregarSessao()}catch(e){$('#app').innerHTML=`<div class="load"><p>${esc(e.message)}</p></div>`}}
-async function trocaMono(k){S.aberto='';S.etapa='';S.fora='';S.minAb.clear();const u=new URL(location.href);u.searchParams.set('colecao',k);u.searchParams.delete('sessao');u.searchParams.delete('processo');history.replaceState(null,'',u);$('#app').innerHTML='<div class="load"><p id="ld-m">Lendo as decisões…</p></div>';try{await carregarMono(k)}catch(e){$('#app').innerHTML=`<div class="load"><p>${esc(e.message)}</p></div>`}}
-async function trocaColecao(id,ses){const l=(S.lotesLista||[]).find(x=>x.id===id);if(!l)return;S.colTipo=ses?'pauta':tipoCol(l);S.aberto='';S.etapa='';S.fora='';S.minAb.clear();const u=new URL(location.href);u.searchParams.set('colecao',id);if(ses)u.searchParams.set('sessao',ses);else u.searchParams.delete('sessao');u.searchParams.delete('processo');history.replaceState(null,'',u);$('#app').innerHTML='<div class="load"><p id="ld-m">Lendo a coleção…</p></div>';try{await carregarLote(id,ses)}catch(e){$('#app').innerHTML=`<div class="load"><p>${esc(e.message)}</p></div>`}}
+async function trocaMono(k){S.aberto='';S.etapa='';S.fora='';S.minAb.clear();S.assSel?.clear();const u=new URL(location.href);u.searchParams.set('colecao',k);u.searchParams.delete('sessao');u.searchParams.delete('processo');history.replaceState(null,'',u);$('#app').innerHTML='<div class="load"><p id="ld-m">Lendo as decisões…</p></div>';try{await carregarMono(k)}catch(e){$('#app').innerHTML=`<div class="load"><p>${esc(e.message)}</p></div>`}}
+async function trocaColecao(id,ses){const l=(S.lotesLista||[]).find(x=>x.id===id);if(!l)return;S.colTipo=ses?'pauta':tipoCol(l);S.aberto='';S.etapa='';S.fora='';S.minAb.clear();S.assSel?.clear();const u=new URL(location.href);u.searchParams.set('colecao',id);if(ses)u.searchParams.set('sessao',ses);else u.searchParams.delete('sessao');u.searchParams.delete('processo');history.replaceState(null,'',u);$('#app').innerHTML='<div class="load"><p id="ld-m">Lendo a coleção…</p></div>';try{await carregarLote(id,ses)}catch(e){$('#app').innerHTML=`<div class="load"><p>${esc(e.message)}</p></div>`}}
 function abre(cnj){S.aberto=cnj;S.cmpOn=false;const u=new URL(location.href);u.searchParams.set('sessao',S.data);u.searchParams.set('processo',cnj.slice(0,10));history.replaceState(null,'',u);render();ir('proc')}
 function ir(id){
   /* na mesa, o processo abre no painel lateral fixo: só volta o painel ao topo (em tela estreita, ele vem para a vista) */
