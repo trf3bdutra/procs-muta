@@ -13,9 +13,10 @@
   var PECAS = { rel: true, em: true, disp: false, ac: false, pr: false };
 
   /* ---------- dados ---------- */
-  function GB() { return window.MutaGabinete || {}; }
+  var CONTEXTO = null;
+  function GB() { return CONTEXTO || window.MutaGabinete || {}; }
   function sugDe(alvo) {
-    var AU = window.MutaAutos; if (!AU || !AU.sugestoes) return '';
+    var AU = CONTEXTO ? null : window.MutaAutos; if (!AU || !AU.sugestoes) return '';
     var x = (AU.sugestoes() || []).filter(function (s) { return s.alvo === alvo; })[0];
     return x ? x.value : '';
   }
@@ -209,9 +210,9 @@
     var imp = S(v('triagem', 'Impugnada - ID')), impS = S(v('triagem', 'Impugnada - Síntese'));
     if (tipo === 'Embargos de Declaração') {
       P.push('Trata-se de embargos de declaração contra acórdão assim ementado:');
-      P.push('“' + VAL('ementa do acórdão embargado' + (imp ? ' (ID ' + imp + ')' : '')) + '”');
+      P.push('“' + (impS || VAL('ementa do acórdão embargado' + (imp ? ' (ID ' + imp + ')' : ''))) + '”');
       var pts = linhas(v('triagem', 'ED - Ponto')).concat(linhas(v('triagem', 'Alegações')));
-      var vicio = S(v('triagem', 'ED - Vício')).toLowerCase() || 'omissão';
+      var vicio = S(v('triagem', 'ED - Vício')).toLowerCase() || VAL('vício alegado');
       P.push('Alegou-se ' + vicio + ', inclusive em prequestionamento, pois: ' + (pts.length ? enumerar(pts) : VAL('pontos, em itens')) + '.');
     } else if (tipo === 'Agravo Interno') {
       P.push('Trata-se de agravo interno à decisão ' + idOu(imp, 'ID da decisão agravada') + ' que ' + (impS || VAL('o que a decisão decidiu')) + '.');
@@ -221,7 +222,7 @@
       P.push(pContrarrazoes(tipo).replace(/contrarrazões/g, 'contraminuta'));
     } else if (tipo === 'Juízo de Retratação') {
       P.push('Trata-se de juízo de retratação a acórdão da Turma, proferido em ' + (S(v('triagem', 'Impugnada - Data')) ? brD(v('triagem', 'Impugnada - Data')) : VAL('data')) + ', assim ementado ' + idOu(imp, 'ID do acórdão') + ':');
-      P.push('“' + VAL('ementa do acórdão') + '”');
+      P.push('“' + (impS || VAL('ementa do acórdão')) + '”');
       var trib = S(v('triagem', 'Retratação - Tribunal')), tema = S(v('triagem', 'Retratação - Tema')), prec = S(v('triagem', 'Retratação - Precedente'));
       P.push('Na tramitação dos recursos excepcionais perante a Vice-Presidência, houve, em ' + (S(v('triagem', 'Retratação - Devolução mês')) || VAL('mês/ano')) + ', decisão para devolução dos autos à Turma para eventual juízo de retratação face ao julgamento do ' + (prec || VAL('precedente')) + ' ' + (trib === 'STJ' ? 'pelo Superior Tribunal de Justiça' : 'pela Suprema Corte') + ' (Tema ' + (tema || VAL('número')) + ') ' + idOu(v('triagem', 'Retratação - Devolução ID'), 'ID') + '.');
     } else if (tipo === 'Agravo de Instrumento') {
@@ -238,7 +239,7 @@
       pRecursos(tipo).forEach(function (x) { P.push(x); });
       P.push(pContrarrazoes(tipo));
     }
-    var mp = /Embargos|Interno|Retrata/.test(tipo) ? '' : pMpf(); if (mp) P.push(mp);
+    var mp = pMpf(); if (mp) P.push(mp);
     P.push('É o relatório.');
     return P;
   }
@@ -270,7 +271,7 @@
   function ementa(tipo, k) {
     var R = resultado(tipo, k), n = 0, it = function (t) { n++; return { n: n, t: t }; }, I = [], II = [], III = [], IV = [];
     var cab = 'DIREITO ' + ramo() + '. ' + classeEmenta(tipo) + '. ' + assuntoCx() + '. ' + R[2] + '.';
-    if (tipo === 'Embargos de Declaração') I.push(it('Embargos de declaração opostos contra acórdão que ' + VAL('resultado do acórdão embargado') + ', alegando ' + (S(v('triagem', 'ED - Vício')).toLowerCase() || 'omissão') + '.'));
+    if (tipo === 'Embargos de Declaração') I.push(it('Embargos de declaração opostos contra acórdão que ' + VAL('resultado do acórdão embargado') + ', alegando ' + (S(v('triagem', 'ED - Vício')).toLowerCase() || VAL('vício alegado')) + '.'));
     else if (tipo === 'Agravo Interno') I.push(it('Agravo interno contra decisão que ' + (S(v('triagem', 'Impugnada - Síntese')) || VAL('o que a decisão decidiu')) + '.'));
     else if (tipo === 'Juízo de Retratação') I.push(it('Juízo de retratação de acórdão da Turma, após devolução dos autos pela Vice-Presidência, em razão do Tema ' + (S(v('triagem', 'Retratação - Tema')) || VAL('número')) + '.'));
     else if (tipo === 'Remessa Necessária') I.push(it('Remessa necessária de sentença que ' + resultadoSentenca() + '.'));
@@ -382,5 +383,7 @@
     var b = e.target && e.target.closest ? e.target.closest('#ger-app button') : null;
     if (b && acao(b)) pintar(true);
   });
-  window.MutaGerador = { pintar: pintar, abrir: abrir, modo: modo, html: html, acao: acao, docs: docs, _ST: ST, _t: { resultado: resultado, fraseHonorarios: fraseHonorarios, designa: designa, feminino: feminino } };
+  /* Composição compartilhada: recebe apenas os dados registrados do CNJ, sem recorrer ao estado da extensão. */
+  function comporFicha(campos, fonte, tipo){var ant=CONTEXTO,t0=TIPO;try{CONTEXTO={V:function(sec,k){return campos[sec+'.'+k];},fo:function(){return fonte||{};}};TIPO=tipo||tipoDetectado();return {tipo:TIPO,rel:relatorio(TIPO),em:ementa(TIPO,'')};}finally{CONTEXTO=ant;TIPO=t0;}}
+  window.MutaGerador = { comporFicha: comporFicha, pintar: pintar, abrir: abrir, modo: modo, html: html, acao: acao, docs: docs, _ST: ST, _t: { resultado: resultado, fraseHonorarios: fraseHonorarios, designa: designa, feminino: feminino } };
 })();
