@@ -6,7 +6,7 @@
   "arquivo": "acervo/fonte.json",
   "chave": "processo"
  },
- "atualizado_em": "2026-11-24T22:28:20.535Z",
+ "atualizado_em": "2026-11-24T22:28:30.341Z",
  "registros": [
   {
    "processo": "0000008-23.2025.4.03.6000",
@@ -144195,18 +144195,18 @@
   {
    "processo": "5001034-33.2023.4.03.6002",
    "origem": {
-    "Sentença - Decisão": "",
+    "Sentença - Decisão": "Procedente",
     "Sentença - ID": "369945138",
-    "Sentença - Honorários": "",
-    "Sentença - Custas": "",
-    "Sentença - Resultado": "",
-    "Sentença - Fundamento": "",
-    "Sentença - Providências": "",
+    "Sentença - Honorários": "Parte ré (CEF) · 10% sobre o valor da condenação",
+    "Sentença - Custas": "Custas na forma da lei",
+    "Sentença - Resultado": "julgou procedente o pedido, resolvendo o mérito nos termos do art. 487, I, do CPC, para: a) condenar a ré ao pagamento de indenização por lucros cessantes correspondentes a 0,5% do valor atualizado do imóvel, por mês de atraso, a incidir entre a data prevista para a conclusão do empreendimento…",
+    "Sentença - Fundamento": "Desembargador Federal RENATA ANDRADE LOTUFO, julgado em 04/12/2024, DJEN DATA: 09/12/2024) Dessa forma, fixo a indenização por danos morais no valor de R$ 5.000,00 (cinco mil reais), com base nos princípios da razoabilidade e proporcionalidade, considerando-se ainda o valor do imóvel",
+    "Sentença - Providências": "Havendo interposição de recurso, intime-se a parte contrária para contrarrazões e, em seguida, remeta-se o feito ao E\nTransitada em julgado, intime-se a CEF para apresentação dos cálculos e cumprimento da sentença em sede de execução invertida, no prazo de 30 (trinta) dias",
     "Contrarrazões - Situação": "",
     "Responsável": "",
     "Próxima ação": "",
     "Observações": "",
-    "atualizado_em": "2026-11-24T22:28:20.535Z",
+    "atualizado_em": "2026-11-24T22:28:30.341Z",
     "Origem - Juízo": "2ª Vara Federal de Dourados",
     "Origem - Documentos 1G": [
      {
@@ -144267,21 +144267,24 @@
     "Recursos": [
      {
       "parte": "Autora (Dayane Souza da Silva)",
-      "ids": "369945139, 369945140",
-      "data": "29/10/2025",
-      "preliminares": "",
-      "teses": "",
-      "pedidos": "",
+      "ids": "369945139",
+      "data": "2025-10-29",
+      "teses": "Sentença\nmajoração dos danos morais",
       "merito": "Apelação"
+     },
+     {
+      "parte": "Caixa Econômica Federal",
+      "ids": "369945140",
+      "data": "2025-10-29",
+      "teses": "decisão guerreada",
+      "pedidos": "(DANOS MATERIAIS E MORAIS) EM RELAÇÃO À CEF. 1. Na ação, objetivou-se condenação da ANDRADE MACÊDO CONSTRUÇÕES E INCORPORAÇÕES LTDA, da Caixa Econômica Federal e da Caixa Seguradora S.A, solidariamente, a indenizar a Autora:\n\"pelos danos morais causados, caracterizado pela angústia e sofrimento decorrente da incerteza desse quanto ao recebimento ou não de suas unidades pretendidas\"\n\"pelas perdas sofridas, relativas aos lucros cessantes, desde dezembro de 2000 até a efetiva entrega do imóvel, tomando-se por base os valores atuais de mercado dos alugueres mensais para imóveis de características similares aos adquiridos\". 2. A Justiça Federal é absolutamente incompetente para o…\nBase de cálculo correta – Os lucros cessantes devem incidir somente sobre o valor efetivamente desembolsado pelo adquirente (montante imobilizado), e não sobre o valor integral do imóvel. Isso porque os financiamentos habitacionais abrangem, em regra, até 90% do valor total da unidade, sendo certo…\nDedução da parcela de financiamento – Caso se adote o valor locatício como referência para a indenização, é imprescindível que dele seja deduzido o valor que o autor estaria pagando a título de prestação do financiamento, caso já estivesse na posse do imóvel. Logo, o lucro não corresponde ao valor…\nRazoabilidade e proporcionalidade – Deve ser considerada a equivalência entre o valor da suposta locação e o valor da prestação que estava sendo adimplida pelo autor, sob pena de se atribuir indenização superior ao efetivo prejuízo, em afronta ao art. 944 do Código Civil e aos princípios da…\nFixação de limite objetivo – Subsidiariamente, requer-se que eventual indenização por lucros cessantes seja limitada ao percentual máximo de 0,5% ao mês sobre o valor financiado, em consonância com parâmetros jurisprudenciais consolidados, de forma a evitar condenações que ultrapassem o valor do…"
      }
     ],
     "Contrarrazões": [
      {
-      "parte": "CEF",
+      "parte": "Caixa Econômica Federal",
       "ids": "369945145",
-      "data": "11/03/2026",
-      "preliminares": "",
-      "teses": ""
+      "data": "2026-03-11"
      }
     ],
     "Outras peças": [
@@ -144315,18 +144318,18 @@
     "Urgência - Data": "",
     "Urgência - Painel": "",
     "Tempest - Publicação": "",
-    "Tempest - Protocolo": "",
-    "Tempest - Prazo legal": "",
+    "Tempest - Protocolo": "2025-10-29",
+    "Tempest - Prazo legal": "15",
     "Tempest - Dobro": "",
     "Tempest - Suspensões": "",
     "Tipo de Julgamento": "",
     "Hipóteses Monocrática": "",
     "Tempestividade": "",
-    "Preparo": "Justiça gratuita",
+    "Preparo": "Não verificado",
     "AJG": "Sim",
     "DPU (controle)": "",
     "Representação": "Regular",
-    "ID da Procuração": "",
+    "ID da Procuração": "369945143",
     "Impedimento / Suspeição": "",
     "Observação do Impedimento": "",
     "Regularidade": "Representação ainda não verificada.",
@@ -144351,7 +144354,21 @@
     "O que falta sanar": "Dano moral de R$ 5.000,00 a confirmar com o Relator\nLista de documentos incompleta no Index: só as peças principais foram registradas (extração de 19/11/2026). Conferir a íntegra dos autos no PJe",
     "Intercorrências": "",
     "Síntese Processual": "",
-    "Especificidades": ""
+    "Especificidades": "",
+    "Procurações": [
+     {
+      "id": "369944372",
+      "data": "2023-06-09",
+      "validade": "Válida",
+      "advogados": "OAB/MS 7.420-B"
+     },
+     {
+      "id": "369945143",
+      "data": "2025-02-21",
+      "validade": "Válida",
+      "advogados": "OAB/DF 79988"
+     }
+    ]
    },
    "producao": {
     "Destino": "",
