@@ -85,6 +85,14 @@ cmt-fluxograma.html            CMT-fluxograma: fluxograma interativo, rotina do 
 construtor.html · index.html   apps (ver observação abaixo)
 ```
 
+## Compendium — definição funcional
+
+- **Ementário:** memória jurisprudencial do relator; precedentes, teses e inteiros teores.
+- **Minuta-Matriz:** estrutura do pronunciamento conforme o tipo de julgamento, independente da matéria. Ao aplicar um processo da pauta, seleciona a estrutura correspondente e preenche os campos com as informações disponíveis no cartão e na ficha. Campos sem informação permanecem pendentes; não se presume resultado. Na ausência de modelo específico, a Minuta-Matriz sustenta a elaboração da minuta individualizada.
+- **Modelos:** conteúdo jurídico reutilizável para matérias, controvérsias e hipóteses processuais específicas; os modelos são oferecidos separadamente e aplicados após escolha e conferência da aderência. A estrutura da Minuta-Matriz também orienta a elaboração e conferência dos modelos.
+
+Abrir um processo na Minuta-Matriz não equivale a aplicar um modelo temático. A matriz estrutural por resultado somente é selecionada quando há resultado registrado e correspondência exata com o pronunciamento e a espécie. A redação do mérito e a validação das particularidades dos autos permanecem necessárias.
+
 ## Uso
 
 ```
