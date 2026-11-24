@@ -413,7 +413,7 @@ module.exports = async (req, res) => {
       return res.status(200).json(avaliar(lote,estrut||{registros:[]},modular));
     }
     res.status(200).json({ usuario: u, gestor, relator, modo, lote: limpaLote(lote) });
-  } catch (e) { res.status(e.status === 404 ? 404 : e.status === 409 ? 409 : 500).json({ erro: e.message }); }
+  } catch (e) { res.status(e.status === 404 ? 404 : 500).json({ erro: e.message }); }
 };
 /* minuta-pje {id, processo, versao, marcado}: marca (ou desmarca) a versão que foi importada no editor do PJe; só uma por minuta.
    Pode a equipe com login (é o passo do corretor depois de colar no PJe); o relator, não. Ao marcar:
@@ -467,40 +467,7 @@ async function minutaPje(req, res, u, gestor) {
   }
   return res.status(200).json({ ok: true, processo: proc, versoes: indiceVersoes(fim), vigente: fim.vigente || '', pje: marcar ? it.pje : null, producao });
 }
-/* Registro declaratório da assinatura das decisões, na ficha única (nunca movimenta o PJe). */
-async function assinaturaCollectio(req, res, u, gestor) {
-  if (!u || (!gestor && (await L.acessos(u)).perfil === 'desembargador')) return res.status(403).json({erro:'Registro exclusivo da equipe.'});
-  const b=req.body||{}, id=String(b.id||''), proc=String(b.processo||''), ac=b.operacao;
-  if(!ID.test(id)||!CNJ.test(proc)||!['enviar','desfazer-envio','assinar','desfazer-assinatura'].includes(ac)) return res.status(400).json({erro:'Registro inválido.'});
-  let tipo=id;
-  if(!DECISOES.test(id)){
-    const {dados:l}=await lerLote('acervo/lotes/'+id+'.json').catch(nada);
-    if(!l||!DECISOES.test(tipoLote(l))||!(l.itens||[]).some(i=>i.processo===proc)||(!gestor&&(l.visivel?.equipe===false||(l.itens||[]).find(i=>i.processo===proc).visivel?.equipe===false))) return res.status(404).json({erro:'Processo fora da coleção de decisões.'});
-    tipo=tipoLote(l);
-  }
-  const F=require('./_ficha'), MONO=require('./_mono'), hj=hojeLocal();
-  const fail=(msg)=>{throw Object.assign(new Error(msg),{status:409})};
-  const {r}=await F.gravar(proc,{},'Collectio assinatura ('+u+'): '+proc+' · '+ac,(r,out)=>{
-    const p=r.producao||{}, c=r.controles||{};
-    if(p.Destino==='Sessão')fail('Processo destinado à sessão; confira a ficha antes de alterar.');
-    if(DECISOES.test(id)&&p.Destino!=='Monocrática'&&!(r.triagem||{})['Urgência'])fail('Decisão não registrada na ficha.');
-    const enviada=p['Data da Liberação'], assinada=p.Assinado==='Sim'||p['Data da Assinatura'], publicada=p.Publicado==='Sim';
-    if(publicada)fail('Decisão já publicada.');
-    if(ac==='enviar'&&assinada||ac==='desfazer-envio'&&assinada)fail('Decisão já assinada.');
-    if(ac==='assinar'&&!enviada)fail('Registre primeiro o envio para assinatura.');
-    if(ac==='enviar'&&enviada||ac==='desfazer-envio'&&!enviada||ac==='assinar'&&assinada||ac==='desfazer-assinatura'&&!assinada)return;
-    const campos=ac==='enviar'?{mono:true,dataLiberacao:hj}:ac==='desfazer-envio'?{dataLiberacao:''}:ac==='assinar'?{dataAssinatura:hj}:{dataAssinatura:''};
-    const mud=F.doCartao(campos);
-    if(ac==='enviar'&&!p['Mono - Tipo de ato'])mud.producao['Mono - Tipo de ato']=({monocratica:'Monocrática',interlocutoria:'Interlocutória',despacho:'Despacho'})[tipo];
-    out.push(...F.aplica(r,mud));
-    r.controles=r.controles||c;
-    r.controles['Monocrática - Assinatura último registro']=JSON.stringify({acao:ac,por:u,em:new Date().toISOString()});
-    out.push('controles.Monocrática - Assinatura último registro');
-  },u);
-  return res.status(200).json({ok:true,item:MONO.item(r)});
-}
 async function gravar(req, res, u, gestor) {
-  if ((req.body || {}).acao === 'assinatura-collectio') return assinaturaCollectio(req,res,u,gestor);
   if ((req.body || {}).acao === 'minuta-pje') return minutaPje(req, res, u, gestor);
   if (!gestor) return res.status(403).json({ erro: 'Só o gestor cria lotes e associa sessões.' });
   const b = req.body || {}, id = String(b.id || '').toLowerCase();
