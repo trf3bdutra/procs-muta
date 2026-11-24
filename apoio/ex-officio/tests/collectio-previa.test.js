@@ -16,11 +16,11 @@ test('o Collectio novo é publicado em /amicus/collectio/ e o anterior em /class
   assert.match(wf, /cp apoio\/ex-officio\/lotes\/index\.html site\/public\/amicus\/collectio\/cg\/index\.html/);
   assert.match(html, /location\.replace\('\/amicus\/collectio\/classico\/'/, 'o link do Relator segue para o clássico');
 });
-test('só grava a matriz (gestor) e a marca do PJe; as leituras são da API do Collectio e da pauta', () => {
+test('só grava a matriz (gestor), a marca do PJe e o registro de assinatura; as leituras são da API do Collectio e da pauta', () => {
   const posts = [...html.matchAll(/method\s*:\s*['"]POST['"]/gi)];
-  assert.equal(posts.length, 2, 'dois pontos de gravação');
+  assert.equal(posts.length, 3, 'três pontos de gravação autorizados');
   const acoes = [...html.matchAll(/\bacao\s*:\s*'([^']+)'/g)].map(m => m[1]).sort();
-  assert.deepEqual(acoes, ['matriz', 'minuta-pje']);
+  assert.deepEqual(acoes, ['assinatura-collectio', 'matriz', 'minuta-pje']);
   const urls = [...html.matchAll(/[^.]get\('(\/[^']+)/g)].map(m => m[1]);
   assert.ok(urls.length >= 3);
   urls.forEach(u => assert.match(u, /^\/api\/(painel\?lote=1|pauta\?(data=|mono=1))/));
@@ -30,7 +30,7 @@ test('coleções de decisões: Monocrática, Interlocutória e Despacho, pelo ti
   assert.match(html, /get\('\/api\/pauta\?mono=1'\)/);
   assert.match(html, /function tipoMono\(/);
   assert.match(html, /ETAPAS_MONO/);
-  assert.match(html, /'4 · Para assinatura'/);
+  assert.match(html, /'4 · Aguardando assinatura'/);
 });
 test('sem versão final importada, vale o acórdão (ou a decisão) publicado no Ementário', () => {
   assert.match(html, /baixaTexto\('\/jurisprudencia\/indice\.json\.gz'\)/);
@@ -66,4 +66,11 @@ test('decisões e despachos: movimentação processual sugerida (código da TPU)
   assert.match(html, /\+\(ehMono\(d\)\?movHtml\(d\):''\)/, 'só nas decisões monocráticas, interlocutórias e despachos');
   for (const c of ['237', '238', '239', '235', '230', '944', '11010']) assert.match(html, new RegExp('\\b' + c + ":'"));
   assert.match(html, /d\.movimento = \{codigo, nome, parte, obs\}/, 'a minuta pode trazer a sua movimentação');
+});
+
+test('registro de envio junto à versão importada no PJe', () => {
+  assert.match(html, /id="va-pje"[^]*id="va-ass"/);
+  assert.match(html, /ak\.disabled=assinada\|\|!podeAssinatura\(atual\)\|\|assOcupado\|\|\(!ak\.checked&&!v\.pje\)/);
+  assert.match(html, /registraAssinatura\(marcar\?'enviar':'desfazer-envio',\[cnj\]\)/);
+  assert.match(html, /acao:'assinatura-collectio'/);
 });
