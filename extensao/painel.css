@@ -1431,3 +1431,20 @@ html[data-tema=escuro] .sn-st.av,html[data-tema=escuro] .sn-tp.av{background:#16
 /* 0.56 · histórico de pautas no Roteiro de produção */
 .cc-pautas{margin:0 0 8px;padding-left:18px;font-size:11.5px;display:grid;gap:2px}
 .cc-pautas .cc-pr{font-weight:650}
+/* 0.58 · aba Pauta */
+.pa-app .pc-sh{display:flex;align-items:center;gap:8px}
+.pa-sel select{font:inherit;padding:3px 6px;border:1px solid var(--line);border-radius:7px;background:var(--card);color:inherit}
+.pa-f{display:flex;flex-wrap:wrap;gap:4px;margin:4px 0 8px}
+.pa-f .chip i{font-style:normal;opacity:.7;margin-left:3px}
+.pa-l{list-style:none;margin:0;padding:0;display:grid;gap:5px}
+.pa-b{width:100%;display:flex;gap:8px;align-items:flex-start;text-align:left;border:1px solid var(--line);border-left:3px solid var(--line);border-radius:8px;padding:7px 9px;background:var(--card);color:inherit;cursor:pointer;font:inherit}
+.pa-it.at .pa-b{outline:2px solid var(--accent,#b08d3c)}
+.pa-it.e-lib .pa-b{border-left-color:#3a8f5c}.pa-it.e-cor .pa-b{border-left-color:#6b8fd6}.pa-it.e-min .pa-b{border-left-color:#c79a2b}.pa-it.e-des .pa-b{border-left-color:#999}.pa-it.e-nd .pa-b{border-left-color:var(--danger)}.pa-it.e-ret .pa-b,.pa-it.e-adi .pa-b{opacity:.65}
+.pa-n{font:700 12px var(--mono);min-width:22px}
+.pa-c{display:grid;gap:2px;min-width:0}.pa-c small{color:var(--muted-fg);font-size:10.5px}
+.pa-et{font-size:11px;display:flex;align-items:center;gap:6px}
+.pa-st{display:inline-flex;gap:2px}.pa-st i{width:7px;height:7px;border-radius:50%;border:1px solid var(--muted-fg)}.pa-st i.ok{background:#3a8f5c;border-color:#3a8f5c}
+.pa-al{display:flex;flex-wrap:wrap;gap:3px}.pa-al em{font-style:normal;font-size:10px;padding:1px 6px;border-radius:9px;border:1px solid var(--line)}
+.pa-al .k-al{border-color:var(--danger);color:var(--danger)}.pa-al .k-at{border-color:#c79a2b;color:#a07a18}.pa-al .k-so{border-color:#6b8fd6;color:#4a6fb8}
+.pa-so .pa-at{outline:2px solid var(--accent,#b08d3c)}
+.pa-proc .gr{margin-top:6px}

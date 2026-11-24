@@ -56,7 +56,7 @@ test('HERO18810: Roteiro de triagem sem a identificação da decisão; Roteiro d
 test('HERO18810: Roteiro de produção pelo perfil da minuta, com histórico de pautas e sem o tipo de ato', () => {
   const fs = require('node:fs'), g = fs.readFileSync(path.resolve(__dirname, '../../../extensao/gabinete.js'), 'utf8');
   assert.match(g, /var CC_MONO = \[\['Decisão', \[\['producao', 'Mono - Fundamento', 'Precedente ou fundamento'\]/);
-  assert.match(g, /\['Pauta e julgamento', 'Pauta e julgamento'\]\];/);
+  assert.match(g, /function pautaHtml\(\)/);
   assert.match(g, /c\.chave === 'Mono - Tipo de ato'/);
   assert.match(g, /function historicoPautas\(\)/);
 });
@@ -67,4 +67,12 @@ test('HERO18810: Caso do Roteiro de produção segue o tipo de julgamento', () =
   assert.match(g, /'Sentença': \['ap', 'rn', 'ms'\], 'Espécie e decisão impugnada': \['ai', 'agint', 'ed', 'ret'\]/);
   assert.match(g, /T\.ai \? 'Decisão agravada'/);
   assert.match(r, /window\.MutaRoteiro = \{ tipos: tipos,/);
+});
+
+test('HERO18810 0.58: aba Pauta e Controle como ícone na faixa do topo', () => {
+  const fs = require('node:fs'), R = f => fs.readFileSync(path.resolve(__dirname, '../../../extensao', f), 'utf8');
+  const h = R('painel.html'), pa = R('pauta.js'), g = R('gabinete.js'), x = R('gestao.js');
+  assert.match(h, /id="tab-pauta"/); assert.match(h, /<div id="pauta-app"/); assert.match(h, /<script src="pauta\.js"><\/script>/);
+  assert.match(pa, /ses\.api\('\/api\/sessoes'\)/); assert.match(pa, /'\/api\/pauta\?data=' \+ P\.data/); assert.match(pa, /'\/api\/sessoes\?pedidos=1'/);
+  assert.match(g, /data-tu-ctl/); assert.doesNotMatch(x, /tab\('so', 'Sustentação'/);
 });

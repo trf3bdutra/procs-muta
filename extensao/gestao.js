@@ -24,11 +24,12 @@
 
   /* ---------- visibilidade das abas ---------- */
   function mostrar() {
-    var q = quem(), dil = $('tab-dil'), del = $('tab-del'), ctl = $('tab-ctl');
-    var ver = { dil: pode(q), del: pode(q), ctl: q.on && q.gestor };
-    [[dil, ver.dil], [del, ver.del], [ctl, ver.ctl]].forEach(function (p) {
+    var q = quem(), dil = $('tab-dil'), del = $('tab-del'), ctl = $('tab-ctl'), pa = $('tab-pauta');
+    var ver = { dil: pode(q), del: pode(q), ctl: q.on && q.gestor, pauta: q.on };
+    /* 0.58: Controle vira ícone na faixa do topo (gabinete.js › faixaUsuario); a aba fica escondida na barra */
+    [[dil, ver.dil], [del, ver.del], [ctl, ver.ctl, true], [pa, ver.pauta]].forEach(function (p) {
       if (!p[0]) return;
-      p[0].hidden = !p[1];
+      p[0].hidden = !p[1] || !!p[2];
       if (!p[1] && p[0].getAttribute('aria-selected') === 'true' && window.MutaAbas) window.MutaAbas.ir('pront');
     });
     if (pode(q)) { if (!D.lista && !D.lendo) lerDil(); if (!X.dados && !X.lendo) lerDel(); }
@@ -230,7 +231,7 @@
       : (L.du.length ? L.du.map(itemDu).join('') : '<p class="muted gx-v">Nenhuma dúvida em aberto dirigida a você.</p>');
     c.innerHTML = '<div class="gx-top"><div><b>Deliberações</b><small class="muted">o que aguarda decisão' + (X.dados && X.dados.hoje ? ' · ' + esc(data(X.dados.hoje)) : '') + '</small></div>' +
       '<span><button type="button" class="lnk" data-gx="ler-del">' + (X.lendo ? 'lendo…' : 'atualizar') + '</button><a class="lnk" target="_blank" rel="noopener" href="' + esc(site()) + '/cmt/">painel do Desembargador</a></span></div>' +
-      '<div class="seg pmodos gx-modos" role="tablist" aria-label="Tipo de deliberação">' + tab('as', 'Assinatura', 'decisões submetidas à assinatura' + (nUrg ? ' · ' + nUrg + ' com urgência' : '')) + tab('du', 'Dúvidas', 'dúvidas da equipe') + tab('pe', 'Pauta', 'pedidos de retirada e de adiamento') + tab('so', 'Sustentação', 'sustentação oral e preferência') + '</div>' +
+      '<div class="seg pmodos gx-modos" role="tablist" aria-label="Tipo de deliberação">' + tab('as', 'Assinatura', 'decisões submetidas à assinatura' + (nUrg ? ' · ' + nUrg + ' com urgência' : '')) + tab('du', 'Dúvidas', 'dúvidas da equipe') + tab('pe', 'Pauta', 'pedidos de retirada e de adiamento') + '</div>' +
       (X.msg ? '<p class="gx-msg' + (/^Não/.test(X.msg) ? ' err' : '') + '">' + esc(X.msg) + '</p>' : '') +
       (X.erro ? '<p class="gx-v err">' + esc(X.erro) + '</p>' : !X.dados ? '<p class="muted gx-v">Lendo…</p>' : corpo);
   }

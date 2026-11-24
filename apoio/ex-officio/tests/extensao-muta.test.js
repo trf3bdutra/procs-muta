@@ -620,10 +620,11 @@ test('extensão 0.48: abas Diligências e Deliberações (Desembargador e gestor
   const h = read('extensao/painel.html'), p = read('extensao/prontuario.js'), x = read('extensao/gestao.js'), a = read('extensao/alertas.js'), c = read('extensao/conteudo-pje.js');
   ['tab-dil', 'tab-del', 'tab-ctl'].forEach(id => assert.match(h, new RegExp('id="' + id + '"[^>]*hidden')));
   assert.match(h, /<div id="dil-app"/); assert.match(h, /<div id="del-app"/); assert.match(h, /<div id="ctl-app"/); assert.match(h, /<script src="gestao\.js"><\/script>/);
-  assert.match(p, /var NOMES=\['pront','min','ementario','par','dir','ajuda','dil','del','ctl'\];/);
+  /* 0.58: aba Pauta no fim; Controle segue como aba escondida, aberta pelo ícone da faixa do topo */
+  assert.match(p, /var NOMES=\['pront','min','ementario','par','dir','ajuda','dil','del','ctl','pauta'\];/);
   assert.match(x, /ses\.api\('\/api\/pendencias'\)/); assert.match(x, /method: 'PUT', body: JSON\.stringify\(\{ id: id, _rev: t\._rev, stage: st \}\)/);
   assert.match(x, /ses\.api\('\/api\/painel\?cmt=1'\)/); assert.match(x, /acao: 'situacao'/); assert.match(x, /acao: 'responder'/); assert.match(x, /n\.tipo === 'sustentacao'/);
-  assert.match(x, /ctl: q\.on && q\.gestor/); assert.match(x, /function pode\(q\) \{ return q\.on && \(q\.gestor \|\| q\.des\); \}/);
+  assert.match(x, /ctl: q\.on && q\.gestor, pauta: q\.on/); assert.match(x, /function pode\(q\) \{ return q\.on && \(q\.gestor \|\| q\.des\); \}/);
   assert.match(a, /concat\(\[\['ver', 'Versão'\]\]\)/); assert.doesNotMatch(a, /\['pz', 'Prazos'\], \['et', 'Etiquetas'\]/); assert.match(a, /function pintarCtl\(\)/);
   assert.match(c, /function etqLigadas\(\)/); assert.match(c, /function botaoEtq\(\)/); assert.match(c, /if \(!E \|\| !E\.categoriaDe \|\| !etqLigadas\(\)\) return;/);
   assert.match(read('apoio/ex-officio/api/pendencias.js'), /PUT \{id,_rev,…\} altera/);
