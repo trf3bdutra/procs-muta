@@ -1424,3 +1424,7 @@ html[data-tema=escuro] .sn-st.av,html[data-tema=escuro] .sn-tp.av{background:#16
 .cc-caso .cc-h h4{margin:0;font:650 12.5px/1.3 var(--sans)}
 .cc-caso .cc-h .gn{margin-left:auto;font:700 9.5px var(--mono);color:var(--muted-fg)}
 .cc-caso>.muted{margin:0 0 2px;font-size:11px}
+/* 0.52.2 · A conferir dentro de Peças e documentos */
+.au-cf{margin:8px 0 10px}
+.au-cf>summary small{margin-left:auto;font:600 10px var(--mono);color:var(--muted-fg)}
+.au-cf-b{display:block;padding:0 9px 9px}

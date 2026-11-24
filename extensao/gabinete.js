@@ -720,7 +720,17 @@ function gRot() { return { V: V, F: function (k) { return fonteVal({ fonte: [k] 
 var FORA_ROT = { 'Avisos': 1, 'Síntese Processual': 1, 'Alegações': 1, 'O que falta sanar': 1, 'Intercorrências': 1, 'Assunto detalhado': 1, 'Tipo de Julgamento': 1, 'Etiquetas sugeridas': 1 };
 /* Autos: a conferência automática, a lista de peças (com detalhamento, JSON, OCR e PDF) e o preenchimento pelos autos */
 /* 0.38: Leitura dos autos (o que achou e o que pôs na ficha) → A conferir (alertas e divergências) → Peças e documentos */
-function corpoAutos() { var AU = window.MutaAutos; return AU && AU.htmlLeitura ? AU.htmlLeitura() + AU.htmlConferir() + AU.htmlDocs(function () { return pecasCartao(true); }) : pecasCartao(); }
+/* 0.52.2 · A conferir dentro de Peças e documentos: um só painel para conferir, editar e gravar na ficha */
+var CF_ABERTO = true;
+function corpoAutos() {
+  var AU = window.MutaAutos; if (!AU || !AU.htmlLeitura) return pecasCartao();
+  var cf = AU.htmlConferir(), dc = AU.htmlDocs(function () { return pecasCartao(true); });
+  if (cf) cf = cf.replace(/^<section class="card pc-sec" id="g-cf"><div class="pc-sh"><h3>A conferir<\/h3>(<small[^>]*>[\s\S]*?<\/small>)<\/div>/, '<details class="gg au-cf" id="g-cf"' + (CF_ABERTO ? ' open' : '') + '><summary><h4>A conferir</h4>$1</summary><div class="gr au-cf-b">').replace(/<\/section>$/, '</div></details>');
+  var i = dc.indexOf('</div>', dc.indexOf('<h3>Peças e documentos</h3>'));
+  if (cf && i > 0 && /^<details/.test(cf)) return AU.htmlLeitura() + dc.slice(0, i + 6) + cf + dc.slice(i + 6);
+  return AU.htmlLeitura() + cf + dc;
+}
+document.addEventListener('toggle', function (e) { if (e.target && e.target.id === 'g-cf' && e.target.tagName === 'DETAILS') CF_ABERTO = e.target.open; }, true);
 function corpoRoteiro() {
   if (!window.MutaRoteiro) return '<div class="empty">Roteiro indisponível.</div>';
   var A = abaModelo('Triagem'), todos = [], TR = window.MutaTriagem, AU = window.MutaAutos;

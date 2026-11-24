@@ -498,7 +498,9 @@ test('extensão 0.38: Autos preenche sozinho os campos vazios do Roteiro (e desf
   assert.equal(pend['origem.Sentença - Decisão'], '', 'o desfeito não volta neste processo');
   const gab = read('extensao/gabinete.js'), html = read('extensao/painel.html');
   assert.match(gab, /var MODOS = \['Processo', 'Autos'(, 'Roteiro')?\];/);
-  assert.match(gab, /AU\.htmlLeitura\(\) \+ AU\.htmlConferir\(\) \+ AU\.htmlDocs\(function \(\) \{ return pecasCartao\(true\); \}\)/);
+  /* 0.52.2: A conferir vai dentro de Peças e documentos (recolhível), logo após o cabeçalho */
+  assert.match(gab, /var cf = AU\.htmlConferir\(\), dc = AU\.htmlDocs\(function \(\) \{ return pecasCartao\(true\); \}\)/);
+  assert.match(gab, /<details class="gg au-cf" id="g-cf"/);
   assert.match(html, /data-mm="ger"/); assert.match(html, /<div id="ger-app" hidden><\/div>/);
   assert.match(read('extensao/prontuario.js'), /ger:'min'/);
   assert.match(read('extensao/gerador.js'), /pintar: pintar, abrir: abrir, modo: modo/);
