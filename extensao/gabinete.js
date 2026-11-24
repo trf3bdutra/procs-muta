@@ -606,8 +606,28 @@ function corpoProcesso() {
   /* 0.46: síntese e questões foram para a 2ª seta do cartão; 0.47: os controles foram para a 1ª seta (autuação) e o Roteiro veio para cá, depois de sinalizações e notas */
   h += '<div class="rt-em-proc">' + corpoRoteiro() + '</div>';
   h += grupos('Processo', function (g) { return g.grupo === 'Registro no acervo'; }, function () { return false; });
-  return h;
+  return h + camposCaso(h);
 }
+/* 0.52 · Campos do caso: todo campo preenchível ou selecionável da ficha que a Minuta-Matriz do Compendium usa (@apelido)
+   e que não aparece acima. Grava na ficha, como os demais; o Compendium relê a ficha sozinho e preenche folha e canhoto. */
+var CC_ABERTO = {};
+function camposCaso(feito) {
+  var ja = {}; String(feito || '').replace(/data-(?:fk|ch)="([^"]+)"/g, function (m, k) { ja[k.replace(/&quot;/g, '"').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&#39;/g, "'")] = 1; return m; });
+  var tot = 0, ok = 0, corpo = ((G.F && G.F.abas) || []).map(function (a) {
+    return (a.grupos || []).filter(function (g) { return !g.controle && grupoVisivel(g); }).map(function (g) {
+      var cs = (g.campos || []).filter(function (c) { return c.apelido && editavel(c) && c.tipo !== 'tabela' && !ja[c.secao + '.' + c.chave]; });
+      if (!cs.length) return '';
+      cs.forEach(function (c) { ja[c.secao + '.' + c.chave] = 1; });
+      var n = cs.filter(function (c) { return !!S(V(c.secao, c.chave)); }).length, id = a.aba + ' · ' + g.grupo;
+      tot += cs.length; ok += n;
+      return '<details class="gg" data-cc="' + esc(id) + '"' + (CC_ABERTO[id] ? ' open' : '') + '><summary><h4>' + esc(id) + '</h4><span class="gn">' + n + '/' + cs.length + '</span></summary><div class="gr">' + cs.map(campo).join('') + '</div></details>';
+    }).join('');
+  }).join('');
+  if (!tot) return '';
+  return '<section class="cc-caso"><div class="cc-h"><h4>Campos do caso · Compendium</h4><span class="gn">' + ok + '/' + tot + '</span></div>' +
+    '<p class="muted">Gravam na ficha. A Minuta-Matriz relê a ficha sozinha e preenche a folha e o canhoto.</p>' + corpo + '</section>';
+}
+document.addEventListener('toggle', function (e) { var d = e.target; if (d && d.getAttribute && d.getAttribute('data-cc') != null) CC_ABERTO[d.getAttribute('data-cc')] = d.open; }, true);
 function corpoTriagem() {
   var AU = window.MutaAutos, TR = window.MutaTriagem, h = '';
   if (AU) h += AU.htmlConferencia();

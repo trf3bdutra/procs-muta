@@ -123,8 +123,19 @@ function paraCartao(mud, it) {
   if (tem(p, 'Data da Liberação') && /^(\d{4}-\d{2}-\d{2})?$/.test(p['Data da Liberação'])) d.dataLiberacao = p['Data da Liberação'];
   if (tem(p, 'SERVIDOR')) d.servidor = p.SERVIDOR;
   if (tem(p, 'CORRETOR')) d.corretor = p.CORRETOR;
-  const C2 = { 'Especificidades': 'especificidades', 'Alegações': 'questoes', 'Tipo de Julgamento': 'tipoJ', 'Síntese Fática': 'sintese' };
+  const C2 = { 'Especificidades': 'especificidades', 'Alegações': 'questoes', 'Tipo de Julgamento': 'tipoJ', 'Síntese Fática': 'sintese', 'Tema': 'subassuntos', 'Assunto detalhado': 'assuntoDet' };
   Object.keys(C2).forEach(x => { if (tem(t, x)) cart[C2[x]] = t[x]; });
+  /* decisão de origem: o que a HERO18810 grava na ficha aparece no prontuário da pauta */
+  const g = mud.origem || {}, O2 = { 'Origem - Juízo': 'juizo', 'Origem - Julgador': 'julgador', 'Origem - Valor da causa': 'valor', 'Sentença - Custas': 'custas', 'Sentença - Honorários': 'honor' };
+  const og = Object.assign({}, (c.cartao || {}).orig); let om = false;
+  Object.keys(O2).forEach(x => { if (tem(g, x)) { og[O2[x]] = g[x]; om = true; } });
+  if ((tem(g, 'Sentença - ID') || tem(g, 'Sentença - Data')) && (!og.tipo || og.tipo === 'Sentença')) {
+    if (tem(g, 'Sentença - ID')) og.id = g['Sentença - ID'];
+    if (tem(g, 'Sentença - Data')) og.data = g['Sentença - Data'];
+    if (!og.tipo && (og.id || og.data)) og.tipo = 'Sentença';
+    om = true;
+  }
+  if (om) cart.orig = og;
   if (tem(mud.origem || {}, 'Observações')) cart.obsGeral = mud.origem['Observações'];
   if (tem(t, 'Parecer - Sentido') || tem(t, 'ID do Parecer MPF')) { cart.mpfx = Object.assign({}, (c.cartao || {}).mpfx); if (tem(t, 'Parecer - Sentido')) cart.mpfx.sentido = t['Parecer - Sentido']; if (tem(t, 'ID do Parecer MPF')) cart.mpfx.id = t['ID do Parecer MPF']; }
   if (tem(t, 'Tempest - Publicação') || tem(t, 'Tempest - Protocolo')) { cart.adm = Object.assign({}, (c.cartao || {}).adm); if (tem(t, 'Tempest - Publicação')) cart.adm.intim = t['Tempest - Publicação']; if (tem(t, 'Tempest - Protocolo')) cart.adm.prot = t['Tempest - Protocolo']; }
@@ -157,8 +168,15 @@ const VC = {
   'mpfx.sentido': v => ({ triagem: { 'Parecer - Sentido': v } }), 'mpfx.id': v => ({ triagem: { 'ID do Parecer MPF': v } }),
   'adm.intim': v => ({ triagem: { 'Tempest - Publicação': v } }), 'adm.prot': v => ({ triagem: { 'Tempest - Protocolo': v } }), 'adm.prazo': v => ({ triagem: { 'Tempest - Prazo legal': v } }),
   'adm.dobro': v => ({ triagem: { 'Tempest - Dobro': v === true || v === 'true' ? '2' : '1' } }), 'adm.ajg': v => ({ triagem: { 'AJG': v === true || v === 'true' ? 'Sim' : '' } }),
-  'jul.fund': v => ({ producao: { 'Voto - Descrição': v } }), 'jul.topico': v => ({ producao: { 'Tópico-síntese': v } })
+  'jul.fund': v => ({ producao: { 'Voto - Descrição': v } }), 'jul.topico': v => ({ producao: { 'Tópico-síntese': v } }),
+  /* prontuário único (pauta = HERO18810): tipo de caso, assunto detalhado e decisão de origem também vão à ficha */
+  subassuntos: v => ({ triagem: { 'Tema': v } }), assuntoDet: v => ({ triagem: { 'Assunto detalhado': v } }),
+  'orig.juizo': v => ({ origem: { 'Origem - Juízo': v } }), 'orig.julgador': v => ({ origem: { 'Origem - Julgador': v } }),
+  'orig.valor': v => ({ origem: { 'Origem - Valor da causa': v } }), 'orig.custas': v => ({ origem: { 'Sentença - Custas': v } }),
+  'orig.honor': v => ({ origem: { 'Sentença - Honorários': v } })
 };
+/* ID e data da decisão de origem só valem para a sentença (a ficha não guarda decisão interlocutória nem acórdão) */
+const VC_SENT = { 'orig.id': 'Sentença - ID', 'orig.data': 'Sentença - Data' };
 /* ficha → campos do cartão (Monocráticas e urgências): o inverso de V, no vocabulário do app */
 const INV = {
   tempest: r => VOC.norm('tempest', r.triagem.Tempestividade), prelim: r => VOC.norm('prelim', r.triagem['Prelim.']), intercor: r => r.triagem['Intercorrências'],
@@ -198,11 +216,23 @@ const VCI = { tipoJ: ['triagem', 'Tipo de Julgamento'], especificidades: ['triag
   sintese: ['triagem', 'Síntese Fática'], obsGeral: ['origem', 'Observações'],
   'mpfx.sentido': ['triagem', 'Parecer - Sentido'], 'mpfx.id': ['triagem', 'ID do Parecer MPF'], 'adm.intim': ['triagem', 'Tempest - Publicação'],
   'adm.prot': ['triagem', 'Tempest - Protocolo'], 'adm.prazo': ['triagem', 'Tempest - Prazo legal'], 'adm.dobro': ['triagem', 'Tempest - Dobro', 1], 'adm.ajg': ['triagem', 'AJG', 1],
-  'jul.fund': ['producao', 'Voto - Descrição'], 'jul.topico': ['producao', 'Tópico-síntese'] };
+  'jul.fund': ['producao', 'Voto - Descrição'], 'jul.topico': ['producao', 'Tópico-síntese'],
+  subassuntos: ['triagem', 'Tema'], assuntoDet: ['triagem', 'Assunto detalhado'], 'orig.juizo': ['origem', 'Origem - Juízo'], 'orig.julgador': ['origem', 'Origem - Julgador'],
+  'orig.valor': ['origem', 'Origem - Valor da causa'], 'orig.custas': ['origem', 'Sentença - Custas'], 'orig.honor': ['origem', 'Sentença - Honorários'] };
+/* ficha → decisão de origem do cartão: ID e data da sentença, quando o cartão não registra outro tipo de decisão */
+function origDaFicha(r, orig) {
+  const g = (r && r.origem) || {}, o = Object.assign({}, orig || {});
+  if (o.tipo && o.tipo !== 'Sentença') return null;
+  let m = false;
+  [['id', 'Sentença - ID'], ['data', 'Sentença - Data']].forEach(([k, f]) => { const v = g[f]; if (v && o[k] !== v) { o[k] = v; m = true; } });
+  if (m && !o.tipo) o.tipo = 'Sentença';
+  return m ? o : null;
+}
 function cartaoDaFicha(r, base) {
   const c = JSON.parse(JSON.stringify(base || {}));
   Object.keys(VCI).forEach(p => { const [s, k, b] = VCI[p], v = ((r && r[s]) || {})[k]; if (!v) return;
     const ks = p.split('.'); let o = c; ks.slice(0, -1).forEach(x => { o = o[x] = (o[x] && typeof o[x] === 'object') ? o[x] : {}; }); o[ks[ks.length - 1]] = b ? (v === 'Sim' || v === '2') : v; });
+  const og = origDaFicha(r, c.orig); if (og) c.orig = og;
   return c;
 }
 /* grava {secao: {chave: valor}} no registro do processo (cria se faltar), com nova tentativa se o arquivo mudou no meio */
@@ -226,6 +256,8 @@ function doCartao(campos, cartao) {
   Object.keys(campos || {}).forEach(k => { if (V[k]) junta(m, V[k](String(campos[k] == null ? '' : campos[k]))); });
   const c = cartao || {};
   Object.keys(VC).forEach(p => { const v = p.split('.').reduce((o, k) => (o && typeof o === 'object' ? o[k] : undefined), c); if (v !== undefined) junta(m, VC[p](v)); });
+  const o = c.orig && typeof c.orig === 'object' ? c.orig : null;
+  if (o && (!o.tipo || o.tipo === 'Sentença')) Object.keys(VC_SENT).forEach(p => { const v = o[p.slice(5)]; if (v !== undefined) junta(m, { origem: { [VC_SENT[p]]: String(v == null ? '' : v) } }); });
   return m;
 }
 /* commit com conferência (ver _lib.commitArquivos): arquivo mudado ou ramo andou → 409, e quem chamou tenta de novo */

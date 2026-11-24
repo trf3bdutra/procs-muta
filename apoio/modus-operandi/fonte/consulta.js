@@ -62,7 +62,7 @@
     return {processo:cnj,campos:campos,recursos:(o.origem||{}).Recursos||[],pecas:(o.origem||{})['Outras peças']||[],papeis:[],pendencias:[],fonte:'ficha'};}
   function fichaDe(cnj){return jget('/api/pauta?ficha='+encodeURIComponent(cnj));}
   /* ficha única prevalece nos campos canônicos; cartão complementa os dados específicos da sessão. */
-  function mesclaFicha(F){var P=CQ.perfil,pf=perfilDaFicha(P.processo,F),J=prontDaFicha(P.processo,F);
+  function mesclaFicha(F){var P=CQ.perfil,pf=perfilDaFicha(P.processo,F),J=prontDaFicha(P.processo,F);if(VIVA){VIVA.cnj=dg(P.processo);VIVA.ass=assinatura(F);}
     Object.keys(pf).forEach(function(k){if(k!=='processo'&&k!=='item'&&k!=='destino')P[k]=pf[k];});
     if(CQ.pront&&dg(CQ.pront.processo)===dg(P.processo)){Object.keys(J.campos).forEach(function(k){CQ.pront.campos[k]=J.campos[k];});if(J.recursos.length)CQ.pront.recursos=J.recursos;if(J.pecas.length)CQ.pront.pecas=J.pecas;}else CQ.pront=J;CQ.R=null;CQ.Rp=null;}
   function lerHash(){
@@ -94,7 +94,7 @@
   function abrirFicha(cnj){CQ.busy=true;CQ.erro='';pinta();
     base().then(function(){return fichaDe(cnj);}).then(function(F){
       if(!F||(!F.operacional&&!F.fonte))throw new Error('O processo '+cnj+' não tem ficha no acervo.');
-      CQ.perfil=perfilDaFicha(cnj,F);CQ.pront=prontDaFicha(cnj,F);CQ.fonte='ficha do processo';zerar();
+      CQ.perfil=perfilDaFicha(cnj,F);CQ.pront=prontDaFicha(cnj,F);CQ.fonte='ficha do processo';zerar();VIVA.cnj=dg(cnj);VIVA.ass=assinatura(F);
     }).catch(function(er){var ac=acDe(cnj);
       if(ac){CQ.perfil=perfilDaFicha(cnj,null);CQ.pront=null;CQ.fonte='acervo · ficha indisponível ('+er.message.replace(/\.$/,'')+')';zerar();}else CQ.erro=er.message;
     }).then(function(){CQ.busy=false;if(CQ.perfil&&dg(CQ.perfil.processo)===dg(cnj)){try{history.replaceState(null,'','#processo='+encodeURIComponent(cnj));}catch(er){}aplicarCaso();}else pinta();});}
@@ -331,6 +331,22 @@
     fichaDe(P.processo).then(function(F){if(CQ.perfil!==P)return;if(!F||(!F.operacional&&!F.fonte))throw new Error('Ficha indisponível.');
       mesclaFicha(F);CQ.fonte='ficha atualizada'+(P.item?' · item '+P.item:'');CQ.R=null;CQ.Rp=null;
     }).catch(function(er){if(CQ.perfil===P)CQ.erro='Não foi possível atualizar a ficha: '+er.message;}).then(function(){if(CQ.perfil===P){CQ.busy=false;pinta();}});}
+  /* ficha viva: com um caso aberto e a Minuta-Matriz à vista, relê a ficha a cada 20 s; se a HERO18810 (ou a pauta) gravou,
+     prontuário, canhoto e folha se atualizam sem recarregar. Tipo de julgamento, destino, classe ou resultado novos refazem a estrutura. */
+  var VIVA={t:null,ass:'',cnj:''};
+  function assinatura(F){var o=(F&&F.operacional)||{};try{return JSON.stringify([o.origem,o.triagem,o.producao,o.pauta,o.controles]);}catch(er){return '';}}
+  function estrutura(P){return [P.tipoJulgamento,P.destino,P.classe,P.resultado].join('|');}
+  function fichaViva(){var P=CQ.perfil,v=document.getElementById('v-edit');
+    if(!P||!P.processo||CQ.busy||document.hidden||!v||v.hidden||(XS.ed||'pecas')!=='pecas'||dg(P.processo).length!==20)return;
+    fichaDe(P.processo).then(function(F){if(CQ.perfil!==P||CQ.busy||!F||(!F.operacional&&!F.fonte))return;
+      var a=assinatura(F);if(VIVA.cnj!==dg(P.processo)){VIVA.cnj=dg(P.processo);VIVA.ass=a;return;}
+      if(!a||a===VIVA.ass)return;VIVA.ass=a;
+      var antes=estrutura(P);mesclaFicha(F);if(!/ficha/.test(CQ.fonte))CQ.fonte+=' + ficha';
+      toastC('Ficha atualizada (HERO18810 / pauta): folha e canhoto recompostos.');
+      if(estrutura(P)!==antes&&!DK.fonteManual)aplicarCaso();else pinta();}).catch(function(){});}
+  function vivaLiga(){clearInterval(VIVA.t);VIVA.t=setInterval(fichaViva,20000);}
+  document.addEventListener('visibilitychange',function(){if(!document.hidden)fichaViva();});
+  vivaLiga();
   function barraExtra(){return CQ.erro?'<div class="cq-er">'+e(CQ.erro)+(/equipe/.test(CQ.erro)?' <a href="/equipe/" target="_blank" rel="noopener">Abrir o Ex Officio</a>':'')+'</div>':'';}
   function fecharCaso(){CQ.trocar=false;CQ.perfil=null;CQ.pront=null;CQ.fonte='';CQ.erro='';zerar();
     DK.fonte='mat';DK.mod='';DK.rtab='';DK.fonteManual=false;DK.inc={};XP.alt={};XP.abre={};XP.fora={};XP.vb={};XP.res={};Object.keys(FILL).forEach(function(k){if(!/^mod-|^par:/.test(k))delete FILL[k];});XD.proc='';XD.rec='';XD.ac=null;XD.naoAchou=false;

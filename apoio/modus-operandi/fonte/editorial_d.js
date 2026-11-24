@@ -36,9 +36,20 @@ function dkRotItem(b,it){
     (it.o?'<p>'+xFm(it.o)+'</p>':'')+
     (it.f?'<p class="xrif">'+esc(it.f).replace(/\n/g,'<br>')+'</p>':'')+
     '<small>'+esc(b.nome)+(it.fn?' · '+esc(it.fn):'')+'</small></li>';}
-function dkRotCamadas(){var esp=dkRotEsp(),as=DK.rotAs||'';
+/* assunto do roteiro pelo caso aberto (assunto, tipo de caso, especificidades), até a escolha à mão no seletor */
+var DROT_AUTO=[[/28,86/,/28[,.]86|0005019-15\.1997/],[/^PIS\/COFINS: cr/,/(pis|cofins)[\s\S]*(credit|monof|ressarc)/],[/^PIS\/COFINS: ex/,/pis|cofins/],[/^PASEP/,/pasep/],
+['Anuidades de conselhos profissionais',/anuidade|conselho (regional|federal)/],[/^Execução fiscal/,/execucao fiscal|embargos a execucao fiscal|\bcda\b/],[/^Perdimento/,/perdimento|aduan/],
+[/^Multas/,/multa administrativa|ambiental|auto de infracao/],[/^Tributos federais/,/tribut|repeticao de indebito|compensacao|imposto|contribuic/],['FGTS',/fgts/],['Saúde',/medicament|saude|tratamento|internac|\bsus\b/],
+['BPC/LOAS',/\bbpc\b|loas|assistencial|prestacao continuada|amparo social/],['Pensão por morte',/pensao por morte/],[/^Tempo especial/,/tempo especial|aposentadoria especial|atividade especial|insalubr/],
+[/^Rural/,/rural|segurado especial|ruricola|boia-fria/],[/^Benefícios por incapacidade/,/incapacidade|auxilio-doenca|auxilio doenca|aposentadoria por invalidez/],
+['Revisões e decadência',/revisao de beneficio|revisao da rmi|decadencia|\brmi\b/],['Servidor público',/servidor|vencimento|remuneracao|gratificac/]];
+function dkRotAuto(){var P=window.CQX&&CQX.tem()?CQX.P():null;if(!P)return '';
+var t=[P.assunto,P.subassuntos,P.especificidades,P.materiaEspecial].join(' ').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase(),L=dkRotAssuntos();
+for(var i=0;i<DROT_AUTO.length;i++){var r=DROT_AUTO[i];if(!r[1].test(t))continue;var x=L.filter(function(n){return typeof r[0]==='string'?n===r[0]:r[0].test(n);})[0];if(x)return x;}return '';}
+function dkRotAs(){return DK.rotAsMan?(DK.rotAs||''):dkRotAuto();}
+function dkRotCamadas(){var esp=dkRotEsp(),as=dkRotAs();
   return (DROT.blocos||[]).filter(function(b){return b.g==='mestre'||b.g==='transversal'||(b.g==='especie'&&esp.indexOf(b.nome)>=0)||(b.g==='assunto'&&b.nome===as);});}
-function dkRotSel(){var opc='<option value="">Sem assunto</option>'+dkRotAssuntos().map(function(x){return '<option value="'+esc(x)+'"'+(x===(DK.rotAs||'')?' selected':'')+'>'+esc(x)+'</option>';}).join('');
+function dkRotSel(){var cur=dkRotAs(),opc='<option value="">Sem assunto</option>'+dkRotAssuntos().map(function(x){return '<option value="'+esc(x)+'"'+(x===cur?' selected':'')+'>'+esc(x)+(x===cur&&!DK.rotAsMan?' · pelo caso':'')+'</option>';}).join('');
   return '<div class="xrsel"><label for="drot-as">Assunto</label><select id="drot-as">'+opc+'</select></div>';}
 /* roteiro do trecho selecionado, no canhoto */
 function dkRotTrecho(pid,n){
@@ -69,7 +80,7 @@ function dkRoteiro(pid){
     '<p class="ointro">Perguntas do catálogo do gabinete para esta parte. Ao abrir um trecho da folha, o roteiro dele vai para o canhoto.</p>'+
     dkRotSel()+'<p class="xrn">'+esc(esp.join(' · '))+'</p>'+corpo+'</div>';}
 
-document.addEventListener('change',function(e){if(e.target&&e.target.id==='drot-as'){DK.rotAs=e.target.value;xPagina();}});
+document.addEventListener('change',function(e){if(e.target&&e.target.id==='drot-as'){DK.rotAs=e.target.value;DK.rotAsMan=true;xPagina();}});
 document.addEventListener('toggle',function(e){var el=e.target;if(el&&el.hasAttribute&&el.hasAttribute('data-rotps')){DK.rotPs=DK.rotPs||{};DK.rotPs[el.getAttribute('data-rotps')]=el.open;}},true);
 var DPREL=/*__DPREL__*/[];
 var DEMP=/*__DEMP__*/{};
@@ -647,7 +658,7 @@ function dkAplicaCaso(P,sg){
   var tj=nz(P.tipoJulgamento||''),cl=nz(P.classe||''),v=/embargos de declar/.test(tj)?'ed':/agravo interno/.test(tj)?'agint':/agravo de instrumento/.test(tj)||/agravo de instrumento/.test(cl)?'ai':(/remessa/.test(tj)||/remessa/.test(cl))?'aprn':'ap';
   if(v==='ap'&&(P.recursos||[]).filter(function(r){return /apela/i.test(r);}).length>1)v='dap';
   var novo=String(XD.proc||'').replace(/\D/g,'')!==String(P.processo||'').replace(/\D/g,'');
-  if(novo){XP.alt={};XP.abre={};XP.fora={};XP.vb={};XP.res={};XD.rec='';Object.keys(FILL).forEach(function(k){if(!/^mod-|^par:/.test(k))delete FILL[k];});DK.inc={};}
+  if(novo){XP.alt={};XP.abre={};XP.fora={};XP.vb={};XP.res={};XD.rec='';Object.keys(FILL).forEach(function(k){if(!/^mod-|^par:/.test(k))delete FILL[k];});DK.inc={};DK.rotAs='';DK.rotAsMan=false;}
   XP.v.acordao=v;if(v==='ap'||v==='aprn'||v==='ai')DK.cl=v;
   /* destino na ficha: monocrática abre a decisão monocrática; senão, acórdão */
   if(/despacho/i.test((P.destino||'')+' '+tj)){XP.pc='decisao';XP.v.decisao='desp';}else if(/monocr/i.test((P.destino||'')+' '+tj)){XP.pc='decisao';XP.v.decisao='mono';XP.mrec=v==='ai'?'ai':/remessa/.test(tj)&&!/apela/.test(tj)?'rn':'ap';}else XP.pc='acordao';
