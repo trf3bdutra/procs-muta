@@ -130,7 +130,7 @@ test('extensão 0.15: cabeçalho no formato da gaveta da pauta (etapas, designa�
   ['producao.MINUTADO', 'producao.CORRIGIDO', 'producao.Data da Revisão', 'producao.LIBERADO', 'producao.Data da Liberação', 'producao.Assinado', 'producao.Data da Assinatura',
     'producao.SERVIDOR', 'producao.CORRETOR', 'triagem.O que falta sanar', 'triagem.Intercorrências', 'origem.Observações', 'producao.Voto - Resultado', 'producao.Voto - Honorários', 'producao.Tópico-síntese']
     .forEach(k => assert.ok(ks.has(k), k));
-  assert.match(gab, /function cabeca\(s\)/); assert.match(gab, /cabeca\(s\) \+ tabs/);
+  assert.match(gab, /function cabeca\(s\)/); assert.match(gab, /cabeca\(s\) \+ snc \+ tabs/);
   assert.match(gab, /function sinalizacoes\(\)/); assert.match(gab, /function notas\(\)/); assert.match(gab, /data-et=/);
 });
 
@@ -608,7 +608,7 @@ test('extensão 0.46: 2ª seta do cartão com síntese, questões, mérito e enc
 
 test('extensão 0.47: Roteiro dentro da aba Processo; controles na 1ª seta; Parágrafos-padrão sub-aba do Ementário; Diretrizes na Minuta; Comparar compacto; sem a Ajuda', () => {
   const g = read('extensao/gabinete.js'), h = read('extensao/painel.html'), c = read('extensao/comparar.js');
-  assert.match(g, /var MODOS = \['Processo', 'Autos'\];/); assert.match(g, /h \+= '<div class="rt-em-proc">' \+ corpoRoteiro\(\) \+ '<\/div>';/);
+  assert.match(g, /var MODOS = \['Processo', 'Autos'\];/); assert.match(g, /var h = '<div class="rt-em-proc">' \+ corpoRoteiro\(\) \+ '<\/div>';/);
   assert.match(g, /controlesProcesso\(true\) \+ '<\/details>';/, '0.49.1: controles na 2ª seta');
   assert.match(h, /id="tab-par"[^>]*hidden/); assert.match(h, /data-emd="par"/); assert.match(h, /id="tab-dir"[^>]*hidden/); assert.match(h, /data-mm="dir"/); assert.match(h, /<div id="dir-app" class="min-dir" hidden><\/div>/);
   assert.match(h, /id="tab-ajuda"[^>]*hidden>\?<\/button>/);

@@ -606,14 +606,22 @@ function pecaPreencher(id) {
   if (L.length) agendar(300);
   render(); return L.length;
 }
+/* 0.60 · Sinalizações e notas do caso: card recolhível no painel superior do prontuário (vale em Processo e em Autos) */
+var SN_AB = null, SN_HTML = '';
+function snCard() {
+  var si = sinalizacoes(), nt = notas(), rg = grupos('Processo', function (g) { return g.grupo === 'Registro no acervo'; }, function () { return false; });
+  SN_HTML = si + nt;
+  var n = (si.match(/class="sn-i [a-z]+"/g) || []).length;
+  var ab = SN_AB != null ? SN_AB : n > 0;
+  return '<details class="card sn-card"' + (ab ? ' open' : '') + '><summary><b>Sinalizações e notas</b>' + (n ? '<span class="rt-al">' + n + ' em aberto</span>' : '<span class="gn">sem pendências</span>') + '</summary><div class="sn-b">' + si + nt + rg + '</div></details>';
+}
 function corpoProcesso() {
-  var AU = window.MutaAutos, h = sinalizacoes() + notas();
-  /* 0.46: síntese e questões foram para a 2ª seta do cartão; 0.47: os controles foram para a 1ª seta (autuação) e o Roteiro veio para cá, depois de sinalizações e notas */
-  h += '<div class="rt-em-proc">' + corpoRoteiro() + '</div>';
-  h += grupos('Processo', function (g) { return g.grupo === 'Registro no acervo'; }, function () { return false; });
+  /* 0.60: a aba Processo = Roteiro de triagem + Roteiro de produção; sinalizações, notas e registro no acervo foram para o card do topo (snCard) */
+  var h = '<div class="rt-em-proc">' + corpoRoteiro() + '</div>';
   /* 0.55: sem repetição — o Roteiro de produção não repete o que já aparece no Roteiro de triagem, nesta aba ou nas setas do cartão */
   var ja = {}, sc = '';
   try { var ab0 = G.merAb; G.merAb = true; G._seco = 1; sc = merEnc() + controlesProcesso(true); G.merAb = ab0; G._seco = 0; } catch (e) { G._seco = 0; }
+  sc += SN_HTML;
   (h + sc).replace(/data-(?:fk|ch)="([^"]+)"/g, function (m, k) { ja[k.replace(/&quot;/g, '"').replace(/&amp;/g, '&').replace(/&#39;/g, "'")] = 1; return m; });
   return h + camposCaso(ja);
 }
@@ -845,11 +853,12 @@ function render0() {
   var nAl = window.MutaAutos && window.MutaAutos.estado().itens ? window.MutaAutos.alertas().filter(function (a) { return a.nivel === 'al'; }).length : 0;
   var tabs = '<div class="seg gtabs pmodos" role="tablist" aria-label="Parte do prontuário">' + MODOS.map(function (a) {
     return '<button type="button" role="tab" data-aba="' + a + '" aria-selected="' + (a === G.aba) + '"><span>' + (ROT_MODO[a] || a) + (a === 'Autos' && nAl ? ' <i class="gnum">' + nAl + '</i>' : '') + '</span><small>' + esc(contaModo(a)) + '</small></button>'; }).join('') + '</div>';
+  var snc = snCard();
   var corpo = G.aba === 'Autos' ? corpoAutos() : G.aba === 'Produção' ? corpoProducao() : corpoProcesso();
   var ab = document.activeElement && document.activeElement.dataset ? (document.activeElement.dataset.fk || (document.activeElement.dataset.esp ? 'esp:' + document.activeElement.dataset.esp : '') || (document.activeElement.dataset.q != null ? 'q:' + document.activeElement.dataset.q : '')) : '';
   var y = window.scrollY, pp = $('panel-pront'), yp = pp ? pp.scrollTop : 0;
   precEmentario(casoPrec());
-  caixa.innerHTML = cabeca(s) + tabs + st0 + '<div class="gbody">' + corpo + '</div>';
+  caixa.innerHTML = cabeca(s) + snc + tabs + st0 + '<div class="gbody">' + corpo + '</div>';
   stEl = $('g-st');
   if (ab) {
     var sel = /^esp:/.test(ab) ? '[data-esp="' + ab.slice(4) + '"]' : /^q:/.test(ab) ? '[data-q="' + ab.slice(2) + '"]' : '[data-fk="' + ab.replace(/"/g, '\\"') + '"]';
@@ -920,7 +929,7 @@ caixa.addEventListener('change', function (e) {
   agendar(900);
   if (/^(triagem\.(Urgência|Padrão - Espécie)|producao\.Destino|controles\.Sensível - (In|Ex)cluído)$/.test(t.dataset.fk) || G.aba === 'Processo') render();
 });
-caixa.addEventListener('toggle', function (e) { var c = e.target.classList; if (!c) return; if (c.contains('pm-mer')) { if (G.merAb !== e.target.open) { G.merAb = e.target.open; render(); } return; } if (c.contains('pm-aut')) { if (G.autAb !== e.target.open) { G.autAb = e.target.open; render(); } return; } if (c.contains('au-it') && window.MutaAutos) { window.MutaAutos.abrirTexto(e.target.dataset.auIt, e.target.open); return; } if (c.contains('au-auto-d') && window.MutaAutos) window.MutaAutos.estado().autoAb = e.target.open; if (c.contains('pc-s')) { G.pecAb = G.pecAb || {}; G.pecAb[e.target.dataset.grupo] = e.target.open; } }, true);
+caixa.addEventListener('toggle', function (e) { var c = e.target.classList; if (!c) return; if (c.contains('sn-card')) { SN_AB = e.target.open; return; } if (c.contains('pm-mer')) { if (G.merAb !== e.target.open) { G.merAb = e.target.open; render(); } return; } if (c.contains('pm-aut')) { if (G.autAb !== e.target.open) { G.autAb = e.target.open; render(); } return; } if (c.contains('au-it') && window.MutaAutos) { window.MutaAutos.abrirTexto(e.target.dataset.auIt, e.target.open); return; } if (c.contains('au-auto-d') && window.MutaAutos) window.MutaAutos.estado().autoAb = e.target.open; if (c.contains('pc-s')) { G.pecAb = G.pecAb || {}; G.pecAb[e.target.dataset.grupo] = e.target.open; } }, true);
 caixa.addEventListener('keydown', function (e) {
   if (e.target.id === 'sn-tx' && e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); snIncluir(); }
   else if (e.target.id === 'pm-ad-tx' && e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); adAcao('ok'); }

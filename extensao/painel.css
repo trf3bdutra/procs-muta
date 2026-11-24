@@ -1448,3 +1448,10 @@ html[data-tema=escuro] .sn-st.av,html[data-tema=escuro] .sn-tp.av{background:#16
 .pa-al .k-al{border-color:var(--danger);color:var(--danger)}.pa-al .k-at{border-color:#c79a2b;color:#a07a18}.pa-al .k-so{border-color:#6b8fd6;color:#4a6fb8}
 .pa-so .pa-at{outline:2px solid var(--accent,#b08d3c)}
 .pa-proc .gr{margin-top:6px}
+/* 0.60 · Sinalizações e notas: card recolhível no painel superior do prontuário */
+.sn-card{margin:6px 0 8px;padding:0}
+.sn-card>summary{display:flex;align-items:center;gap:8px;padding:8px 10px;cursor:pointer;list-style:none;font-size:12.5px}
+.sn-card>summary::-webkit-details-marker{display:none}
+.sn-card>summary .gn,.sn-card>summary .rt-al{margin-left:auto}
+.sn-card>summary::before{content:'›';display:inline-block;transition:transform .15s}.sn-card[open]>summary::before{transform:rotate(90deg)}
+.sn-card>.sn-b{padding:0 10px 10px}
