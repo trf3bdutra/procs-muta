@@ -2972,8 +2972,48 @@ function nTriados() { const D = _colD.triados; if (!D) return '…'; const v = n
 function abasTri() {
   return [{id:'triar', r:'A triar', n:U?U.length:0}, {id:'triados', r:'Triados', n:nTriados()}, {id:'selecao', r:'Seleção prévia', n:_selCache?_selCache.items.size:somaIdx('selecao')}].map((t) => Object.assign(t, { on: TRI_SUBABA === t.id }));
 }
+
+/* Exportação de Excel por escopo da Triagem, sem alterar seleção ou filtros. */
+function triExcelIcon(attrs){return '<button type="button" '+attrs+' title="Exportar Excel" aria-label="Exportar Excel" style="display:inline-flex;vertical-align:middle;margin-left:4px;padding:3px;border:1px solid #a7bcb3;border-radius:5px;background:#f0f6f2;color:#256047;cursor:pointer"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M6 2h8l5 5v15H6zM14 2v6h5M9 12l6 6m0-6-6 6"/></svg></button>';}
+function triExcelRows(sub,id,group,filter){
+ if(sub==='triar'){
+  const q=nz(LS.get('tri_atq','')).trim(),so=LS.get('tri_atso',''),task=LS.get('tri_triar_tarefa','');
+  let L=(U||[]).filter(o=>!group||(o.tarefa||o.grupo||'Triagem')===group);
+  if(id.startsWith('funil:')){const ids=new Set((funilTriagem()[id.slice(6)]||[]).map(o=>o.d));L=L.filter(o=>ids.has(o.d));}
+  if(filter)L=L.filter(o=>(!task||(o.tarefa||o.grupo||'Triagem')===task)&&(!q||q.split(/\s+/).every(t=>o.hay.includes(t)))&&(!so||(so==='com'?atTri(o):!atTri(o))));
+  return L.map(o=>({cnj:o.cnj,base:o,it:{},lote:'',lid:'',grupo:o.tarefa||o.grupo||'Triagem',serie:''}));
+ }
+ if(!_colD[sub])return null;
+ const L=_colD[sub].lotes.filter(l=>!id||(id.startsWith('tarefa:')?(l.tarefa||'Triagem')===id.slice(7):id.startsWith('tipo:')?(id==='tipo:series'?/^adp-serie-/.test(l.id):l.origem==='escaninho'):l.id===id));
+ return L.flatMap(l=>(l.itens||[]).filter(it=>sub!=='triados'||temTriC(it)).flatMap(it=>{
+  const g=(l.grupos||[]).find(g=>g.id===it.grupo);
+  if(group&&(group==='__'?!!g:it.grupo!==group))return [];
+  return [{cnj:it.processo,base:IDX.get(dg(it.processo))||{},it,lote:l.titulo||l.id,lid:l.id,grupo:g?g.rotulo:((l.grupo_outros||{}).rotulo||'Não classificados'),serie:/^adp-serie-/.test(l.id)?l.titulo||l.id:''}];
+ }));
+}
+function triExcelWrite(rows,title,full){
+ try{const X=W.XLSX||(M()&&M().XLSX);if(!X)throw Error('Leitor Excel ainda não carregado.');
+ const str=v=>(v==null?'':typeof v==='object'?JSON.stringify(v):String(v)).slice(0,32767);
+ const val=(r,k,b)=>str(r.it[k]??r.base[b||k]??'');
+ const cols=[['Processo',r=>r.cnj],['Classe',r=>val(r,'recurso','classe')||val(r,'classe')],['Assunto',r=>val(r,'assunto')],['Partes',r=>val(r,'partes')],['Tarefa no PJe',r=>val(r,'tarefa')],['Seção',r=>val(r,'secao')],['Coleção',r=>r.lote],['Grupo',r=>r.grupo],['Série',r=>r.serie],['Tipo de caso',r=>val(r,'tipo_caso')],['Resultado proposto',r=>val(r,'resultado')],['Observações',r=>val(r,'observacao')],['Pendências',r=>val(r,'pendencias','pend')]];
+ if(full)cols.push(['Etiquetas',r=>val(r,'etiquetas','etq')],['Especificidades',r=>val(r,'especificidades')],['Modelo',r=>val(r,'modelo')],['Triagem',r=>val(r,'triagem')],['Prontuário',r=>val(r,'prontuario_triagem')],['Situação atual',r=>val(r,'situacao_atual')],['Registro operacional',r=>str(r.base.row||{})]);
+ const out=xlsxBonito(X,rows,cols,title,'Exportação da Triagem',br(HOJE));baixar('triagem-'+nz(title).replace(/[^a-z0-9]+/g,'-').slice(0,65)+'-'+HOJE+'.xlsx',new Blob([out],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'}));
+ }catch(e){toast('Não foi possível exportar: '+e.message,true);}
+}
+function triExcelOpen(btn,sub,id,group,title,keys){
+ if(sub!=='triar'&&!_colD[sub]){lerColecoes(sub);toast('Carregando a aba. Tente novamente após a leitura.');return;}
+ const rows=triExcelRows(sub,id,group,false),filtered=sub==='triar'?triExcelRows(sub,id,group,true):keys?rows.filter(r=>keys.has(r.lid+'|'+r.cnj)):null;
+ if(!rows)return;
+ const old=document.getElementById('tri-xls-menu');if(old)old.remove();
+ const p=document.createElement('div'),rect=btn.getBoundingClientRect();p.id='tri-xls-menu';p.setAttribute('role','menu');p.style.cssText='position:fixed;z-index:2147483000;width:245px;padding:7px;background:white;color:#203b39;border:1px solid #b8c9c1;border-radius:8px;box-shadow:0 8px 24px #0002;left:'+Math.max(8,Math.min(rect.right-245,innerWidth-253))+'px;top:'+Math.max(8,Math.min(rect.bottom+5,innerHeight-190))+'px';
+ const close=()=>{p.remove();document.removeEventListener('pointerdown',outside,true);document.removeEventListener('keydown',key,true);};const outside=e=>{if(!p.contains(e.target))close();};const key=e=>{if(e.key==='Escape')close();};
+ [['Todos os processos',rows,false],['Processos filtrados',filtered,false],['Processos selecionados',rows.filter(r=>SEL.has(dg(r.cnj))),false],['Excel completo · com triagem',rows,true]].forEach(([label,L,full])=>{const b=document.createElement('button');b.type='button';b.setAttribute('role','menuitem');b.textContent=label+(L?' ('+L.length+')':' · abra a aba');b.disabled=!L||!L.length;b.style.cssText='display:block;width:100%;text-align:left;padding:9px;border:0;background:transparent;color:inherit;cursor:pointer';b.onclick=()=>{close();triExcelWrite(L,title,full);};p.appendChild(b);});
+ document.body.appendChild(p);document.addEventListener('pointerdown',outside,true);document.addEventListener('keydown',key,true);
+}
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-tri-xls]');if(!b)return;e.preventDefault();e.stopPropagation();triExcelOpen(b,b.dataset.triXls,b.dataset.xlsId||'',b.dataset.xlsGroup||'',b.dataset.xlsTitle||'Triagem');},true);
+
 function abasTriHtml() {
-  return '<div class="at-abas" role="tablist">' + abasTri().map((t) => '<button type="button" data-trisub="' + t.id + '" role="tab" aria-selected="' + t.on + '">' + t.r + '<small>' + (typeof t.n === 'number' ? nf(t.n) : t.n) + '</small></button>').join('') + '</div>';
+  return '<div class="at-abas" role="tablist">' + abasTri().map((t) => '<button type="button" data-trisub="' + t.id + '" role="tab" aria-selected="' + t.on + '">' + t.r + '<small>' + (typeof t.n === 'number' ? nf(t.n) : t.n) + '</small></button>' + triExcelIcon('data-tri-xls="'+t.id+'" data-xls-title="'+esc(t.r)+'"')).join('') + '</div>';
 }
 /* soma dos processos dos lotes no índice (antes de ler os lotes) */
 function somaIdx(sub) { if (!_triIdx || _triIdx._erro) return '…'; let n = 0; const G = gruposLotes(sub); (G.length ? [G[0]] : []).forEach((g) => g[1].forEach((x) => { n += Number(x.n) || 0; })); return n; } /* só os lotes das tarefas: séries repetem processos */
@@ -3116,7 +3156,7 @@ function montarAtPP() {
 function painelMatrizLote(sub) {
   if (!_colD[sub]) { lerColecoes(sub); return '<div class="tri-ld">Lendo as coleções de ' + (sub === 'selecao' ? 'seleção prévia' : 'triagem') + '…</div>'; }
   if (!_colD[sub].lotes.length) return '<div class="tri-ld">Nenhuma coleção ' + (sub === 'selecao' ? 'de seleção prévia' : 'de triagem') + ' encontrada.</div>';
-  setTimeout(() => { const h = document.getElementById('tri-col-host'); if (h && W.CaputColecoes) W.CaputColecoes.montar(h, _colD[sub], Object.assign(opcoesPainel(), { chave: sub, lote: colSel(sub), abas: abasTri(), onAba: (id) => { TRI_SUBABA = id; LS.set('tri_subaba', id); refazTriEm(); }, colecoes: listaColecoes(sub), onLote: (id) => { LS.set('tri_col_' + sub, id); refazTriEm(); } })); }, 0);
+  setTimeout(() => { const h = document.getElementById('tri-col-host'); if (h && W.CaputColecoes) W.CaputColecoes.montar(h, _colD[sub], Object.assign(opcoesPainel(), { excelIcon: triExcelIcon, excelOpen: triExcelOpen, chave: sub, lote: colSel(sub), abas: abasTri(), onAba: (id) => { TRI_SUBABA = id; LS.set('tri_subaba', id); refazTriEm(); }, colecoes: listaColecoes(sub), onLote: (id) => { LS.set('tri_col_' + sub, id); refazTriEm(); } })); }, 0);
   return '<div id="tri-col-host"></div>';
 }
 document.addEventListener('click', (e) => {
@@ -3242,7 +3282,7 @@ function atTabela(soTarefa) {
   if (!groups.size) return '<div class="tri-ld">Nenhum processo com esses filtros.</div>';
   let h = '<table class="at-t"><thead><tr><th></th><th>Processo</th><th>Tipo de caso · assunto</th><th>Na tarefa</th><th>Indicadores</th><th title="Tempestividade · preparo · representação · MPF">Prontuário</th><th>Destino · próxima ação</th><th></th></tr></thead><tbody>';
   groups.forEach((L, g) => { L.sort(ORD[ord] || ORD.antigos); const ab = LS.get('tri_em_b_' + g, true), lim = LS.get('tri_atlim_' + g, 60), tri = L.filter(atTri).length;
-    h += '<tr class="at-g"><td colspan="8"><button type="button" class="at-gb" data-tribanda="' + esc(g) + '"><i>' + (ab ? '−' : '+') + '</i><b>' + esc(g) + '</b><small>' + nf(L.length) + ' processos · ' + nf(tri) + ' com prontuário</small></button></td></tr>';
+    h += '<tr class="at-g"><td colspan="8"><button type="button" class="at-gb" data-tribanda="' + esc(g) + '"><i>' + (ab ? '−' : '+') + '</i><b>' + esc(g) + '</b><small>' + nf(L.length) + ' processos · ' + nf(tri) + ' com prontuário</small></button>' + triExcelIcon('data-tri-xls="triar" data-xls-group="'+esc(g)+'" data-xls-title="'+esc(g)+'"') + '</td></tr>';
     if (ab) { h += L.slice(0, lim).map(atLinha).join(''); if (L.length > lim) h += '<tr class="at-mais"><td colspan="8"><button type="button" class="btn sm" data-atmais="' + esc(g) + '">Mostrar mais ' + Math.min(100, L.length - lim) + ' de ' + nf(L.length - lim) + '</button></td></tr>'; } });
   return h + '</tbody></table>';
 }
@@ -3296,7 +3336,7 @@ function atFunil(soTarefa) {
   return '<div class="fn">' + FN_COLS.map(([k, rot, cor]) => { const L = F4[k].filter(pass).sort((a, b) => (atDias(b) || 0) - (atDias(a) || 0)), lim = LS.get('tri_fnlim_' + k, 30);
     const aConf = k === 'mono' ? L.filter((o) => o.dest.k !== 'mono') : k === 'ses' && at ? L.filter((o) => o.dest.k !== 'pauta') : [];
     const lote = aConf.length ? '<button type="button" class="btn sm" data-fn-col="' + k + '" title="' + (k === 'mono' ? 'Confirma a monocrática' : 'Manda à seleção prévia da sessão de ' + nomeSes(at)) + ' para os ' + aConf.length + ' processos desta coluna ainda sem destino">' + (k === 'mono' ? 'Confirmar ' + nf(aConf.length) : 'Enviar ' + nf(aConf.length) + ' à seleção ' + nomeSes(at).slice(0, 5)) + '</button>' : '';
-    return '<section class="fn-col" aria-label="' + esc(rot) + '"><header style="border-top-color:' + cor + '"><b style="color:' + cor + '">' + esc(rot) + '</b><span class="fn-n">' + nf(L.length) + '</span>' + lote + '</header>' +
+    return '<section class="fn-col" aria-label="' + esc(rot) + '"><header style="border-top-color:' + cor + '"><b style="color:' + cor + '">' + esc(rot) + '</b><span class="fn-n">' + nf(L.length) + '</span>' + lote + triExcelIcon('data-tri-xls="triar" data-xls-id="funil:'+esc(k)+'" data-xls-title="'+esc(rot)+'"') + '</header>' +
       (L.length ? L.slice(0, lim).map((o) => fnCartao(o, k, cor, at)).join('') : '<p class="fn-vz">Nenhum processo.</p>') +
       (L.length > lim ? '<button type="button" class="btn sm fn-mais" data-fn-mais="' + k + '">Mostrar mais ' + Math.min(30, L.length - lim) + ' de ' + nf(L.length - lim) + '</button>' : '') + '</section>'; }).join('') + '</div>'; }
 const atVer = () => LS.get('tri_atver', 'lista');
@@ -3329,7 +3369,7 @@ function atLado(soTarefa) {
 function aTriarBands(soTarefa) {
   if (!U || !U.length) return '<div class="tri-ld">Nenhum processo em triagem.</div>';
   const tit = soTarefa ? esc(soTarefa).replace(/ (\S+)$/, ' <em>$1.</em>') : 'A <em>triar.</em>';
-  return '<div class="at"><p class="at-k">Triagem · processos nas tarefas do PJe' + (FONTE_EM ? ' · fonte de ' + esc(String(FONTE_EM).slice(0, 10).split('-').reverse().join('/')) : '') + '</p><h2 class="at-h">' + tit + '</h2>' +
+  return '<div class="at"><p class="at-k">Triagem · processos nas tarefas do PJe' + (FONTE_EM ? ' · fonte de ' + esc(String(FONTE_EM).slice(0, 10).split('-').reverse().join('/')) : '') + '</p><h2 class="at-h">' + tit + triExcelIcon('data-tri-xls="triar" data-xls-group="'+esc(soTarefa||'')+'" data-xls-title="'+esc(soTarefa||'A triar')+'"') + '</h2>' +
     '<div class="at-ver" role="group" aria-label="Ver como"><span>Ver como</span>' + [['lista', 'Lista'], ['funil', 'Funil']].map((x) => '<button type="button" data-atver="' + x[0] + '" aria-pressed="' + (atVer() === x[0]) + '">' + x[1] + '</button>').join('') + '</div>' +
     '<div id="at-tab">' + atCorpo(soTarefa) + '</div></div>';
 }
@@ -5028,11 +5068,12 @@ function render(){
   const comTri=itensL.filter(temTri).length, comGr=itensL.filter(i=>i.grupo).length, comMin=itensL.filter(i=>i.minuta).length, pend=itensL.reduce((n,i)=>n+nVal(i),0);
   const grupos=l1?(l1.grupos||[]):[], cols=l1?(l1.colunas||[]):[...new Map(L.flatMap(l=>l.colunas||[]).map(c=>[c.id,c])).values()];
   const ab=(OPC.abas||[]), CL=(OPC.colecoes||[]);
+  const xi=(kind,id,title,group='')=>OPC.excelIcon?OPC.excelIcon('data-cxls="'+esc(kind)+'" data-xid="'+esc(id)+'" data-xtitle="'+esc(title)+'" data-xgroup="'+esc(group)+'"'):'';
   const nfm=n=>typeof n==='number'?n.toLocaleString('pt-BR'):esc(n);
   $('#app').innerHTML=`<div class="pg">
   <nav class="sub" aria-label="Triagem: seleção, indicadores e filtros">
    <div class="cx">
-    ${ab.length?`<div class="abas" role="tablist">${ab.map(t=>`<button type="button" data-aba="${esc(t.id)}" role="tab" aria-selected="${!!t.on}">${esc(t.r)}<small>${nfm(t.n)}</small></button>`).join('')}</div>`:''}
+    ${ab.length?`<div class="abas" role="tablist">${ab.map(t=>`<button type="button" data-aba="${esc(t.id)}" role="tab" aria-selected="${!!t.on}">${esc(t.r)}<small>${nfm(t.n)}</small></button>${xi("aba",t.id,t.r)}`).join('')}</div>`:''}
     <div class="met"><div><span>${S.tri==='sim'?'Triados':S.tri==='nao'?'A triar':'Processos'}</span><b>${itensL.length}</b></div><div><span>Com triagem</span><b>${comTri}</b></div><div><span>Em grupo</span><b>${comGr}</b></div><div><span>Grupos</span><b>${L.reduce((n,l)=>n+(l.grupos||[]).length,0)}</b></div><div><span>Pendências</span><b>${pend}</b></div><div><span>Minutas</span><b>${comMin}</b></div></div>
     <div class="ph">
      <label class="bq"><span class="sr">Buscar</span><input type="search" id="q" placeholder="processo, parte, assunto, tipo de caso, triagem…" value="${esc(S.q)}"></label>
@@ -5043,7 +5084,7 @@ function render(){
      <p class="nf">${vis} de ${itensL.length} no filtro</p>
     </div>
    </div>
-   ${CL.length?`<div class="cls">${CL.map(x=>x.k?`<p class="nk">${esc(x.k)}</p>`:`<button type="button" class="ir${x.cab?' cab':''}" data-lote="${esc(x.id)}" aria-current="${!!x.on}"><span>${esc(x.r)}</span><small>${nfm(x.n)}</small></button>`).join('')}</div>`:''}
+   ${CL.length?`<div class="cls">${CL.map(x=>x.k?`<p class="nk">${esc(x.k)}</p>`:`<button type="button" class="ir${x.cab?' cab':''}" data-lote="${esc(x.id)}" aria-current="${!!x.on}"><span>${esc(x.r)}</span><small>${nfm(x.n)}</small></button>${xi("lote",x.id,x.r)}`).join('')}</div>`:''}
   <slot name="rodape"></slot>
   </nav>
   <div class="main">
@@ -5051,7 +5092,7 @@ function render(){
     <p class="st">${L.length} ${L.length>1?'coleções':'coleção'} · ${itensL.length} processos${l1&&l1.atualizado_em?'<br>atualizada em '+esc(l1.atualizado_em.split('-').reverse().join('/')):''}</p></div>
    ${l1&&l1.descricao?`<p class="lead">${esc(l1.descricao)}</p>`:''}
    <p class="vazio" style="padding:8px 0 0;font-style:normal;font-size:12px">Clique numa linha para ver tudo o que foi registrado do processo.</p>
-   ${caixaEtq(L)}
+
    <div class="box">${L.map(l=>tabela(l)).join('')}</div>
   </div></div>`;
   ligar();
@@ -5105,10 +5146,10 @@ function tabela(l){
     .filter(o=>o.rs.length&&(!S.grupo||S.grupo===o.id||(S.grupo==='__'&&o.id==='__')));
   const fk=id=>l.id+'|'+id;
   const thv=(r)=>`<th class="v" title="${esc(r)}"><div>${esc(r)}</div></th>`;
-  return `${varios()?`<h2 style="margin:22px 0 0;font-size:20px;letter-spacing:-.02em">${esc(l.titulo)} <small class="tg">${its.length} de ${l.itens.length}</small></h2>`:''}
+  return `${varios()?`<h2 style="margin:22px 0 0;font-size:20px;letter-spacing:-.02em">${esc(l.titulo)} <small class="tg">${its.length} de ${l.itens.length}</small>${OPC.excelIcon?OPC.excelIcon('data-cxls="lote" data-xid="'+esc(l.id)+'" data-xtitle="'+esc(l.titulo)+'"'):""}</h2>`:''}
   <div class="tw"><table class="tb mx"><thead><tr class="gl">${sx?'<th></th>':''}<th></th><th></th><th class="g1" colspan="${PRT.length}">Prontuário da triagem<small>registrado na ficha</small></th><th class="g2" colspan="${IND.length}">Indicadores</th>${cols.length?`<th class="g3" colspan="${cols.length}">Variações</th>`:''}<th></th></tr>
   <tr>${sx?'<th class="sx"><span class="sr">Marcar</span></th>':''}<th>Processo</th><th>Minuta · correção</th>${PRT.map(x=>thv(x[1])).join('')}${IND.map(x=>thv(x[1])).join('')}${cols.map(c=>thv(c.rotulo)).join('')}<th>Tipo de caso · observação</th></tr></thead>
-  <tbody>${ordem.map(o=>{const ab=!S.fechados.has(fk(o.id));const todosG=sx&&o.rs.every(it=>OPC.selecao.tem(it.processo));return `<tr class="gh" data-grp="${esc(fk(o.id))}">${sx?`<td class="sx"><input type="checkbox" data-selg="${esc(o.rs.map(it=>it.processo).join(','))}"${todosG?' checked':''} aria-label="Marcar os ${o.rs.length} processos do grupo" title="Marcar o grupo para as ações em bloco"></td>`:''}<td colspan="${nc-(sx?1:0)}"><i class="sx">${ab?'−':'+'}</i><span class="q" style="background:${esc(o.g.cor||'#5d6b72')}"></span><b>${esc(o.g.rotulo)}</b>${o.g.resultado?` · <span class="res">${esc(o.g.resultado)}</span>`:''}${o.g.modelo?` <span class="tg in">${esc(o.g.modelo)}</span>`:''}<small>${o.rs.length} processo${o.rs.length===1?'':'s'}</small></td></tr>`+(ab?o.rs.map(it=>linha(l,it,o.g.cor||'#5d6b72')).join(''):'')}).join('')}</tbody></table></div>`;
+  <tbody>${ordem.map(o=>{const ab=!S.fechados.has(fk(o.id));const todosG=sx&&o.rs.every(it=>OPC.selecao.tem(it.processo));return `<tr class="gh" data-grp="${esc(fk(o.id))}">${sx?`<td class="sx"><input type="checkbox" data-selg="${esc(o.rs.map(it=>it.processo).join(','))}"${todosG?' checked':''} aria-label="Marcar os ${o.rs.length} processos do grupo" title="Marcar o grupo para as ações em bloco"></td>`:''}<td colspan="${nc-(sx?1:0)}"><i class="sx">${ab?'−':'+'}</i><span class="q" style="background:${esc(o.g.cor||'#5d6b72')}"></span><b>${esc(o.g.rotulo)}</b>${o.g.resultado?` · <span class="res">${esc(o.g.resultado)}</span>`:''}${o.g.modelo?` <span class="tg in">${esc(o.g.modelo)}</span>`:''}<small>${o.rs.length} processo${o.rs.length===1?'':'s'}</small>${OPC.excelIcon?OPC.excelIcon('data-cxls="grupo" data-xid="'+esc(l.id)+'" data-xgroup="'+esc(o.id)+'" data-xtitle="'+esc(o.g.rotulo)+'"'):''}</td></tr>`+(ab?o.rs.map(it=>linha(l,it,o.g.cor||'#5d6b72')).join(''):'')}).join('')}</tbody></table></div>`;
 }
 /* metas do CNJ: ficha (META) e etiquetas do PJe ("META 2 CNJ (até 2022)") */
 function metasDe(it){const out=[];const add=v=>String(v||'').split(/\s*[;|]\s*/).forEach(x=>{x=x.trim().replace(/^\*+/,'');if(/\bmeta\b/i.test(x)&&!out.some(y=>sem(y)===sem(x)))out.push(x)});
@@ -5321,6 +5362,7 @@ function ligar(){
   $$('[data-ebx-e]').forEach(b=>b.onclick=()=>{const e=b.dataset.ebxE;S.etqSel=S.etqSel===e?'':e;const y=scrollY;render();scrollTo(0,y)});
   $$('[data-copia]').forEach(b=>b.onclick=ev=>{ev.stopPropagation();const t=b.dataset.copia;(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>{const t0=b.textContent;b.textContent='Copiado';setTimeout(()=>{b.textContent=t0},1600)}).catch(()=>{prompt('Copie as etiquetas:',t)})});
   $$('[data-acao]').forEach(b=>b.onclick=ev=>{ev.stopPropagation();const p=b.dataset.p;if(b.dataset.acao==='prontuario'&&OPC.onProntuario){let sg=[];try{const it=S.D.lotes.flatMap(l=>l.itens||[]).find(x=>x.processo===p);if(it)sg=etqSug(it._l,it)}catch(e){}OPC.onProntuario(p,sg)}if(b.dataset.acao==='ficha'&&OPC.onFicha)OPC.onFicha(p)});
+  $$('[data-cxls]').forEach(b=>b.onclick=ev=>{ev.preventDefault();ev.stopPropagation();if(!OPC.excelOpen)return;const kind=b.dataset.cxls,sub=kind==='aba'?b.dataset.xid:OPC.chave,id=kind==='aba'?'':b.dataset.xid,group=b.dataset.xgroup||'',keys=sub===OPC.chave?new Set(lotesVis().flatMap(l=>filtra(l).map(it=>l.id+'|'+it.processo))):null;OPC.excelOpen(b,sub,id,group,b.dataset.xtitle,keys);});
   $$('[data-aba]').forEach(b=>b.onclick=()=>{if(OPC.onAba)OPC.onAba(b.dataset.aba)});
   $$('.cls [data-lote]').forEach(b=>b.onclick=()=>{if(OPC.onLote)OPC.onLote(b.dataset.lote)});
   const q=$('#q');if(q)q.oninput=()=>{clearTimeout(q._t);q._t=setTimeout(()=>{S.q=q.value;const p=q.selectionStart;render();const n=$('#q');n.focus();n.setSelectionRange(p,p)},300)};
