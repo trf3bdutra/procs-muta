@@ -628,7 +628,7 @@ function dkFonteDoCaso(sg){DK.fonteManual=false;if(sg.tipo==='m28')DK.fonte='m28
 function dkAplicaCaso(P,sg){
   var tj=nz(P.tipoJulgamento||''),cl=nz(P.classe||''),v=/embargos de declar/.test(tj)?'ed':/agravo interno/.test(tj)?'agint':/agravo de instrumento/.test(tj)||/agravo de instrumento/.test(cl)?'ai':(/remessa/.test(tj)||/remessa/.test(cl))?'aprn':'ap';
   if(v==='ap'&&(P.recursos||[]).filter(function(r){return /apela/i.test(r);}).length>1)v='dap';
-  var novo=(XD.proc||'')!==(P.processo||'');
+  var novo=String(XD.proc||'').replace(/\D/g,'')!==String(P.processo||'').replace(/\D/g,'');
   if(novo){XP.alt={};XP.abre={};XP.fora={};XP.vb={};XP.res={};XD.rec='';Object.keys(FILL).forEach(function(k){if(!/^mod-|^par:/.test(k))delete FILL[k];});DK.inc={};}
   XP.v.acordao=v;if(v==='ap'||v==='aprn'||v==='ai')DK.cl=v;
   /* destino na ficha: monocrática abre a decisão monocrática; senão, acórdão */
@@ -693,14 +693,16 @@ var _camposTBase=camposT;camposT=function(raw,ctx){return _camposTBase(raw,ctx).
 /* valores: ficha do processo aberto (campos “seção.Campo” e, para os do acervo, “acervo.coluna”) e os valores que a peça e o caso já calculam */
 function dkValorFicha(v){if(v==null)return '';if(Array.isArray(v))return v.map(function(x){return x&&typeof x==='object'?Object.keys(x).map(function(z){return x[z];}).filter(Boolean).join(' · '):String(x);}).filter(Boolean).join('; ');return String(v);}
 var _xAutoCasoBase=xAutoCaso;xAutoCaso=function(){_xAutoCasoBase();
-  var J=window.CQX&&CQX.tem()?CQX.J():null,cp=(J&&J.campos)||{};
+  var P=window.CQX&&CQX.tem()?CQX.P():null,J=P?CQX.J():null,cp=(J&&String(J.processo||'').replace(/\D/g,'')===String(P.processo||'').replace(/\D/g,'')&&J.campos)||{};
   Object.keys(ARR).forEach(function(a){var c=ARR[a],v='';if(c.s==='*')return;
-    if(c.s)v=cp[c.s+'.'+c.c];else[c.c].concat(c.f||[]).some(function(n){v=cp['acervo.'+n];return v!=null&&v!=='';});
+    if(c.s)v=cp[c.s+'.'+c.c];else{var fs=c.f||[],keys=[c.c].concat(fs);if(fs.length>1)keys.push(fs.join('.'));keys.some(function(n){v=cp['acervo.'+n];return v!=null&&v!=='';});}
     v=dkValorFicha(v).trim();if(v)AUTO['@'+a]=v;});
   var E={processo:'processo',classe:'CLASSE',assunto:'ASSUNTO',ramo:'RAMO',polo_ativo:'polo ativo',polo_passivo:'polo passivo',recorrente:'recorrente',resultado:'resultado',conclusao:'CONCLUSÃO',dispositivo_ementa:'dispositivo da ementa',classe_ementa:'CLASSE',assunto_ementa:'ASSUNTO'};
+  ['classe','assunto','polo_ativo','polo_passivo'].forEach(function(a){if(AUTO['@'+a])AUTO[E[a]]=a==='classe'||a==='assunto'?String(AUTO['@'+a]).toUpperCase():AUTO['@'+a];});
+  if(P){var res=AUTO['@resultado_julgamento']||P.resultado;if(res){AUTO.resultado=dkValorFicha(res);AUTO['@resultado']=AUTO.resultado;}else{delete AUTO.resultado;delete AUTO['@resultado'];delete AUTO.CONCLUSÃO;delete AUTO['dispositivo da ementa'];}}
   Object.keys(E).forEach(function(a){if(!AUTO['@'+a]&&AUTO[E[a]])AUTO['@'+a]=AUTO[E[a]];});
   /* cabeçalho da ementa: classe e assunto em maiúsculas, da ficha quando o acervo embutido não tiver o processo */
   ['classe','assunto'].forEach(function(a){if(!AUTO['@'+a+'_ementa']&&AUTO['@'+a])AUTO['@'+a+'_ementa']=String(AUTO['@'+a]).toUpperCase();});
-  var P=window.CQX&&CQX.tem()?CQX.P():null;if(P){var C={processo:P.processo,classe:P.classe,assunto:P.assunto,tipo_julgamento:P.tipoJulgamento,especificidades:P.especificidades,questoes:P.questoes,resultado:P.resultado};Object.keys(C).forEach(function(a){if(C[a]&&!AUTO['@'+a])AUTO['@'+a]=dkValorFicha(C[a]);});if(P.classe){AUTO.CLASSE=String(P.classe).toUpperCase();AUTO['@classe_ementa']=AUTO.CLASSE;}if(P.assunto){AUTO.ASSUNTO=String(P.assunto).toUpperCase();AUTO['@assunto_ementa']=AUTO.ASSUNTO;}}};
+  if(P){var C={processo:P.processo,classe:P.classe,assunto:P.assunto,tipo_julgamento:P.tipoJulgamento,tipo_de_caso:P.subassuntos,especificidades:P.especificidades,alegacoes:P.questoes,resultado_julgamento:P.resultado,honorarios_julgamento:P.honorarios};Object.keys(C).forEach(function(a){if(C[a]&&!AUTO['@'+a])AUTO['@'+a]=dkValorFicha(C[a]);});['classe','assunto'].forEach(function(a){if(AUTO['@'+a]){AUTO[a.toUpperCase()]=String(AUTO['@'+a]).toUpperCase();AUTO['@'+a+'_ementa']=AUTO[a.toUpperCase()];}});}};
 /* canhoto “Campos do bloco”: o campo da ficha aparece pelo rótulo */
 var _dkCampoRotBase=dkCampoRot;dkCampoRot=function(f){var ph=f.getAttribute('data-ph')||'';if(ph.charAt(0)==='@')return arrRot(ph.slice(1))+' · ficha';return _dkCampoRotBase(f);};
