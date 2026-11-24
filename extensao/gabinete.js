@@ -345,7 +345,7 @@ function derivados() {
   L.push(['triagem.Tema', 'Tipo de caso', S(gravado('triagem', 'Registro - Assunto detalhado')) || S(V('triagem', 'Assunto detalhado')) || S(fonteVal({ fonte: ['Assunto'] }))]);
   var mx = null; try { mx = window.MutaComparar && window.MutaComparar.matriz ? window.MutaComparar.matriz() : null; } catch (e) {}
   var tj = S(V('triagem', 'Tipo de Julgamento')), res = S(V('producao', 'Voto - Resultado'));
-  L.push(['triagem.Tipo de Voto', 'Tipo de voto', mx && (mx.nome || mx.titulo) ? S(mx.nome || mx.titulo) : tj && res ? tj + ' · ' + res : '']);
+  if (!mono) L.push(['triagem.Tipo de Voto', 'Tipo de voto', mx && (mx.nome || mx.titulo) ? S(mx.nome || mx.titulo) : tj && res ? tj + ' · ' + res : '']);
   if (mono) L.push(['triagem.Hipóteses Monocrática', 'Hipótese do artigo 932', hipotese932()]);
   return L.filter(function (x) { return S(x[2]); });
 }
@@ -475,7 +475,10 @@ function decisaoMono() {
     campoRot('producao', 'Mono - Fundamento', 'Precedente ou fundamento') + monoMais() + '</section>';
 }
 
-function campoRot(sec, chave, rot) { var c = campoModelo(sec, chave); if (!c) return ''; return campo(Object.assign({}, c, { rotulo: rot || c.rotulo })); }
+/* 0.52.1 · ato monocrático: sem campos que pedem relatório, voto, ementa ou acórdão (só servem à sessão) */
+var SO_SESSAO = { 'Tipo de Voto': 1, 'Relatório Padronizado': 1, 'Adequação Ementa': 1, 'Formatação Subementa': 1, 'Rev - Ementa': 1, 'Rev - Subementa': 1, 'Mídias Necessárias': 1 };
+function soSessao(chave) { return !!SO_SESSAO[chave] && destino() === 'monocratica'; }
+function campoRot(sec, chave, rot) { if (soSessao(chave)) return ''; var c = campoModelo(sec, chave); if (!c) return ''; return campo(Object.assign({}, c, { rotulo: rot || c.rotulo })); }
 /* questões do processo: uma por linha do campo "Alegações" da ficha */
 function questoes() {
   var v = S(V('triagem', 'Alegações')), L = v ? v.split(/\n+/).map(S).filter(Boolean) : [];
@@ -614,8 +617,9 @@ var CC_ABERTO = {};
 function camposCaso(feito) {
   var ja = {}; String(feito || '').replace(/data-(?:fk|ch)="([^"]+)"/g, function (m, k) { ja[k.replace(/&quot;/g, '"').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&#39;/g, "'")] = 1; return m; });
   var tot = 0, ok = 0, corpo = ((G.F && G.F.abas) || []).map(function (a) {
-    return (a.grupos || []).filter(function (g) { return !g.controle && grupoVisivel(g); }).map(function (g) {
-      var cs = (g.campos || []).filter(function (c) { return c.apelido && editavel(c) && c.tipo !== 'tabela' && !ja[c.secao + '.' + c.chave]; });
+    if (a.aba === 'Pauta' && destino() === 'monocratica') return '';
+    return (a.grupos || []).filter(function (g) { return !g.controle && (!g.destino || g.destino === destino()) && grupoVisivel(g); }).map(function (g) {
+      var cs = (g.campos || []).filter(function (c) { return c.apelido && editavel(c) && c.tipo !== 'tabela' && !ja[c.secao + '.' + c.chave] && !soSessao(c.chave); });
       if (!cs.length) return '';
       cs.forEach(function (c) { ja[c.secao + '.' + c.chave] = 1; });
       var n = cs.filter(function (c) { return !!S(V(c.secao, c.chave)); }).length, id = a.aba + ' · ' + g.grupo;

@@ -36,3 +36,11 @@ test('ficha → cartão integral (monocráticas): ficha prevalece e preserva o r
   const d = FICHA.cartaoDaFicha({ origem: { 'Sentença - ID': '7' } }, { orig: { tipo: 'Acórdão', id: '1' } });
   assert.equal(d.orig.id, '1', 'outro tipo de decisão não é sobrescrito');
 });
+
+test('HERO18810: ato monocrático não pede relatório, voto, ementa nem acórdão', () => {
+  const fs = require('node:fs'), raiz = path.resolve(__dirname, '../../../extensao');
+  const g = fs.readFileSync(path.join(raiz, 'gabinete.js'), 'utf8'), ge = fs.readFileSync(path.join(raiz, 'gerador.js'), 'utf8');
+  ['Tipo de Voto', 'Relatório Padronizado', 'Adequação Ementa', 'Rev - Ementa'].forEach(k => assert.ok(g.includes("'" + k + "': 1"), k));
+  assert.match(g, /g\.destino === destino\(\)\) && grupoVisivel\(g\)/, 'Campos do caso respeita o destino');
+  assert.match(ge, /g\.destino\(\) === 'monocratica'/, 'Gerador sem peças de acórdão na monocrática');
+});
