@@ -205,8 +205,7 @@
     else if(ct)add('ok','Folha × caso','Folha no mesmo tipo de julgamento do caso ('+tj+').');
     if(A.tipo==='m28')add('ok','Texto da folha','Matriz modular de 28,86%: motor especializado do gabinete.');
     else if(A.tipo==='mod')add('ok','Texto da folha','Modelo do banco: '+nomeDe(A)+'.');
-    else if(R.mod.length)add('pc','Texto da folha','Minuta-Matriz ('+nomeDe(A)+'), só como estrutura. Há '+R.mod.length+(R.mod.length>1?' modelos elegíveis':' modelo elegível')+' no seletor de modelos.');
-    else add('pc','Texto da folha','Sem modelo de matéria aderente: Minuta-Matriz ('+nomeDe(A)+'), só como estrutura. A redação é do caso.');
+    else add('ok','Texto da folha','Minuta-Matriz ('+nomeDe(A)+'): estrutura do tipo de julgamento. A escolha de modelo é facultativa e não constitui requisito de conformidade.');
     if(A.tipo==='mod'){
       var aM=nq(A.x.assunto||''),aP=nq(P.assunto||'');
       if(aM&&aP&&aM===aP)add('ok','Assunto','Modelo e cartão no mesmo assunto.');
@@ -220,7 +219,7 @@
     else add('pc','Resultado do caso','Resultado ainda não registrado: a matriz vem pelo tipo de recurso, sem a parte dispositiva definida.');
     var adm=['tempestividade','preparo','requisito'].filter(function(k){return P[k];});
     if(adm.length)add('pc','Admissibilidade','Cartão anota '+adm.map(function(k){return (ROT[k]||k).toLowerCase()+': '+val(k,P[k]);}).join(' · ')+'. Abra a preliminar antes do mérito.');
-    else add('ok','Admissibilidade','Nada anotado no cartão contra o conhecimento.');
+    else add('pc','Admissibilidade','Sem informação suficiente no cartão: conferir os requisitos nos autos.');
     if(P.ed)add('pc','Embargos de declaração','Vício indicado: '+val('ed',P.ed)+'. A estrutura de ED pede exame do vício antes do mérito.');
     if(P.retratacao)add('pc','Juízo de retratação','Retratação por '+val('retratacao',P.retratacao)+'. Confira o tema vinculante na folha.');
     if(P.honorarios||P.multa)add('pc','Consectários','Cartão anota '+[P.honorarios?'honorários: '+P.honorarios:'',P.multa?'multa: '+P.multa:''].filter(Boolean).join(' · ')+'. Feche o dispositivo com eles.');
@@ -235,13 +234,14 @@
   }
   /* texto da folha em três camadas: matriz modular, modelos elegíveis, Minuta-Matriz */
   function solucoes(P,A,R){
-    var q=nq(CQ.modelq||''),filt=function(z){return !q||nq([z.x.nomeModelo,z.x.assunto,z.x.tese,[].concat(z.x.especificidadesTags||[]).join(' ')].join(' ')).indexOf(q)>=0;};
-    var todos=(R.modElegiveis||R.mod||[]).filter(filt).slice(0,12),fora=(R.modFora||[]).filter(filt).slice(0,5),tem28=e28();
-    return '<div class="dori cq-solucoes"><p class="kick2"><span>Texto da folha</span><span>3 camadas</span></p>'+
+    var q=nq(CQ.modelq||''),filt=function(z){return !q||nq([z.x.nomeModelo,z.x.assunto,z.x.tese,z.x.classe,z.x.resultado,[].concat(z.x.especificidadesTags||[]).join(' '),mTextoBase(z.x)].join(' ')).indexOf(q)>=0;};
+    var compat=function(z){var j=dkJulgAtual(),m=dkJulgDe(z.x);return dkPronMod(z.x)===dkPron()&&(!j||!m||j===m||(XP.v.acordao==='aprn'&&m==='rn'));};
+    var todos=(q?(R.modTodos||[]):(R.modElegiveis||R.mod||[])).filter(compat).filter(filt).slice(0,30),fora=(R.modFora||[]).filter(filt).slice(0,5),tem28=e28();
+    return '<div class="dori cq-solucoes"><p class="kick2"><span>Buscador de modelos</span><span>Aplicação facultativa</span></p>'+
       '<div class="cq-tipo"><b>Matriz modular</b><p>Motor especializado: enquadra o caso e monta módulos, versões e variáveis.</p>'+
       (tem28?'<button type="button" class="cq-sol rec'+(A.tipo==='m28'?' sel':'')+'" data-dfonte="m28"><strong>28,86% · cumprimento individual da ACP</strong><small>Elegível para este processo · recomendada</small></button>':'<span class="meta">Nenhuma matriz modular elegível identificada.</span>')+'</div>'+
-      '<div class="cq-tipo"><b>Modelos</b><p>Texto-base do gabinete. Só entram como aplicáveis os que passam pela elegibilidade do caso; os demais ficam no seletor de modelos da barra.</p><input class="cq-modelq" id="cq-modelq" type="search" value="'+e(CQ.modelq||'')+'" placeholder="Buscar entre os modelos aplicáveis" aria-label="Buscar entre os modelos aplicáveis">'+
-      (todos.length?'<div class="cq-modsel">'+todos.map(function(z){var sel=A.tipo==='mod'&&A.x&&A.x.id===z.x.id;return '<button type="button" class="cq-sol'+(sel?' sel':'')+'" data-dusar="'+e(z.x.id)+'"><strong>'+e(z.x.nomeModelo||z.x.id)+'</strong><small>'+e((z.el.razoes||[]).join(' · ')||('aderência '+z.s))+'</small></button>';}).join('')+'</div>':'<span class="meta">Nenhum modelo elegível com os critérios atuais.</span>')+
+      '<div class="cq-tipo"><b>Modelos</b><p>Busque no banco ou selecione uma sugestão. Ao ativar um modelo compatível, a folha passa a usar seu conteúdo e os mesmos dados do processo. Confira a aderência jurídica.</p><input class="cq-modelq" id="cq-modelq" type="search" value="'+e(CQ.modelq||'')+'" placeholder="Buscar por assunto, tese ou texto" aria-label="Buscar modelos do gabinete">'+
+      (todos.length?'<div class="cq-modsel">'+todos.map(function(z){var sel=A.tipo==='mod'&&A.x&&A.x.id===z.x.id;return '<button type="button" class="cq-sol'+(sel?' sel':'')+'" data-dusar="'+e(z.x.id)+'"><strong>'+e(z.x.nomeModelo||z.x.id)+'</strong><small>'+e((z.el.razoes||[]).join(' · ')||('aderência '+z.s))+'</small></button>';}).join('')+'</div>':'<span class="meta">Nenhum modelo encontrado. Digite outros termos para pesquisar o banco.</span>')+
       (fora.length?'<details class="cq-fora"><summary>Fora dos critérios do caso · '+fora.length+'</summary>'+fora.map(function(z){return '<div><b>'+e(z.x.nomeModelo||z.x.id)+'</b><small>'+e((z.el.impedimentos||[]).join(' · ')||'aderência insuficiente')+'</small></div>';}).join('')+'</details>':'')+'</div>'+
       '<div class="cq-tipo"><b>Minuta-Matriz</b><p>Estrutura por tipo de julgamento, preenchida com os dados disponíveis do processo. Na ausência de modelo específico, é o suporte à redação da minuta.</p><button type="button" class="cq-sol'+(A.tipo==='mat'?' sel':'')+'" data-dfonte="mat"><strong>Usar a Minuta-Matriz</strong><small>'+e(A.tipo==='mat'?nomeDe(A):(A.mat?(A.mat.nome||A.mat.id):'estrutura pelo tipo de recurso'))+'</small></button></div></div>';
   }
@@ -253,7 +253,7 @@
     var h=solucoes(P,A,R)+'<div class="dori"><p class="kick2"><span>Conformidade</span><span>'+(C.length-mau)+'/'+C.length+'</span></p><div class="cqc">'+
       C.map(function(z){return '<div class="cqi '+z.s+'"><div class="cqih"><b>'+e(z.k)+'</b><i>'+(z.s==='ok'?'em ordem':z.s==='pc'?'conferir':'falta')+'</i></div><p>'+e(z.t)+'</p></div>';}).join('')+'</div>';
     h+='<div class="cqacs">'+(A.tipo==='mod'?'<button type="button" class="dbt" data-cq="mod" data-id="'+e(A.x.id)+'">Abrir o modelo na página Modelos</button>':'')+
-      (DK.fonteManual?'<button type="button" class="dbt" data-dauto="1">Voltar à escolha automática</button>':'')+'</div></div>';
+      (DK.fonteManual?'<button type="button" class="dbt" data-dauto="1">Restaurar Minuta-Matriz</button>':'')+'</div></div>';
     h+=liaPainel(P,A,R);
     var alt=(R.mod||[]).filter(function(z){return !(A.tipo==='mod'&&z.x.id===A.x.id);}).slice(0,5);
     h+=lista('Modelos relacionados','mod',alt,function(m){return e(m.nomeModelo||m.id);});
@@ -340,7 +340,7 @@
     if(t.closest('[data-dcxx]')){fim();fecharCaso();return;}
     if(t.closest('[data-dcxt]')){fim();CQ.trocar=true;pinta();var it=document.getElementById('cq-item');if(it)it.focus();return;}
     if((b=t.closest('[data-dusar]'))){fim();dkUsaModelo(b.getAttribute('data-dusar'));return;}
-    if(t.closest('[data-dauto]')){fim();var sg=sugestao();if(sg)dkFonteDoCaso(sg);return;}
+    if(t.closest('[data-dauto]')){fim();dkFonte('mat');return;}
     if((b=t.closest('#x-ref [data-cq][data-id]'))){fim();abrir(b.getAttribute('data-cq'),b.getAttribute('data-id'));return;}
     if((b=t.closest('[data-lia]'))){fim();liaAcao(b.getAttribute('data-lia'));return;}
   },true);
