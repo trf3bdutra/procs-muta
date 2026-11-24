@@ -291,7 +291,15 @@ for _a in _FI['abas']:
             if not _ap or _ap in _vis:
                 continue
             _vis.add(_ap)
-            _CA.append({'a': _ap, 'r': _c.get('rotulo') or _c['chave'], 's': _c.get('secao') or '', 'c': _c['chave'], 'f': _c.get('fonte') or [], 'g': _a['aba'] + ' · ' + _g.get('grupo', '')})
+            _CA.append({'a': _ap, 'r': _c.get('rotulo') or _c['chave'], 's': _c.get('secao') or '', 'c': _c['chave'], 'f': _c.get('fonte') or [], 't': _c.get('tipo'), 'cols': _c.get('colunas') or [], 'g': _a['aba'] + ' · ' + _g.get('grupo', '')})
+# Colunas de tabelas extraídas pela HERO18810: aliases derivados do próprio esquema da ficha.
+for _c in list(_CA):
+    for _col in _c.get('cols', []):
+        _ap = _c['a'] + '_' + _col['chave']
+        if _ap in _vis:
+            continue
+        _vis.add(_ap)
+        _CA.append(dict(_c, a=_ap, r=_c['r'] + ' · ' + _col['rotulo'], col=_col['chave'], t=_col.get('tipo'), cols=[]))
 _ESP = [('processo', 'Número do processo'), ('ramo', 'Ramo do direito, pela árvore do CNJ'), ('recorrente', 'Recorrente'),
         ('resultado', 'Resultado, pelo dispositivo da peça'), ('conclusao', 'Conclusão do cabeçalho da ementa'), ('dispositivo_ementa', 'Item IV da ementa, pelo dispositivo'),
         ('classe_ementa', 'Classe, em maiúsculas (cabeçalho da ementa)'), ('assunto_ementa', 'Assunto, em maiúsculas (cabeçalho da ementa)')]
