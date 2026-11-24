@@ -399,7 +399,7 @@ function dkCampoRot(f){var ph=f.getAttribute('data-ph')||'',idf=f.classList.cont
   var p=f.previousSibling,t='';while(p&&t.length<60){t=(p.textContent||'')+t;p=p.previousSibling;}t=t.replace(/\s+/g,' ').trim().split(' ').slice(-4).join(' ');return t?'após “'+t+'”':'Campo';}
 function dkCampos(k){var B=document.querySelector('#x-main .xblk[data-xk="'+(window.CSS&&CSS.escape?CSS.escape(k):k)+'"]');if(!B)return '';var F=$$('.fill',B);if(!F.length)return '';
   var ids=F.filter(function(f){return f.classList.contains('idf');}),tx=F.filter(function(f){return !f.classList.contains('idf');});
-  function inp(f){var nome=f.getAttribute('data-ph')||'',key=f.getAttribute('data-fk'),v=FILL[key]||AUTO[nome]||f.textContent.trim(),au=!FILL[key]&&!!AUTO[nome];return '<label class="dfl'+(f.classList.contains('idf')?' id':'')+(au?' au':'')+'"><span>'+esc(dkCampoRot(f))+(au?' <i>automático</i>':'')+'</span><input data-dfk="'+esc(f.getAttribute('data-fk'))+'" value="'+esc(v)+'" placeholder="'+(f.classList.contains('idf')?'só números':'escreva aqui')+'"'+(f.classList.contains('idf')?' inputmode="numeric"':'')+'></label>';}
+  function inp(f){var nome=f.getAttribute('data-ph')||'',key=f.getAttribute('data-fk'),v=FILL[key]||AUTO[dkAlias(nome)]||f.textContent.trim(),au=!FILL[key]&&!!AUTO[dkAlias(nome)];return '<label class="dfl'+(f.classList.contains('idf')?' id':'')+(au?' au':'')+'"><span>'+esc(dkCampoRot(f))+(au?' <i>automático</i>':'')+'</span><input data-dfk="'+esc(f.getAttribute('data-fk'))+'" value="'+esc(v)+'" placeholder="'+(f.classList.contains('idf')?'só números':'escreva aqui')+'"'+(f.classList.contains('idf')?' inputmode="numeric"':'')+'></label>';}
   return '<div class="cf"><div class="cfl">Campos do bloco <span class="pill">'+F.filter(function(f){return f.textContent.trim();}).length+' de '+F.length+'</span></div><div class="dfls">'+F.map(inp).join('')+'</div><p class="meta" style="margin:6px 0 0">Amarelo é texto do caso; azul é ID, que entra na peça ao copiar.</p></div>';}
 function dkCanTrecho(sel){var t=sel.t,pt=sel.pt,E=escolha(t,XP.alt),ai=E.ai,h='',aj=dkAjuda(pt.id,t.n);
   h+='<div class="cvh"><div><p class="cvk">Bloco selecionado · '+esc(pt.t)+(t.opc?' · opcional':'')+'</p><p class="cvt">'+esc(t.n)+(aj?' <button type="button" class="dq" data-daj aria-pressed="'+!!DK.aj+'" title="Como preencher este bloco">?</button>':'')+'</p></div><button type="button" class="cvx" data-dsel="" title="Fechar o bloco" aria-label="Fechar o bloco">×</button></div>';
@@ -684,6 +684,10 @@ document.addEventListener('keydown',function(e){var t=e.target;if(t&&t.id==='dk-
 var ARR=(function(){var M={};((window.CAMPOS_AUTO||{}).campos||[]).forEach(function(c){M[c.a]=c;});return M;})();
 function arrRot(a){var c=ARR[a];return c?c.r:a;}
 var RE_ARR=/(^|[^\w@.\/])@([a-z][a-z0-9_]{1,48})\b/g;
+/* Rótulos antigos só são associados quando a correspondência é inequívoca; orientações jurídicas continuam manuais. */
+var DK_ALIAS={'id da sentença':'sentenca_id','id sentença':'sentenca_id','data da sentença':'sentenca_data','juízo de origem':'juizo_origem','juiz de origem':'juiz_origem','resultado da sentença':'sentenca_resultado','fundamento da sentença':'sentenca_fundamento','id da decisão impugnada':'impugnada_id','data da decisão impugnada':'impugnada_data','id do parecer mpf':'parecer_mpf_id','id do parecer do mpf':'parecer_mpf_id','id da procuração':'procuracao_id','síntese processual':'sintese_processual','síntese fática':'sintese_fatica','id do recurso':'recursos_ids','ids dos recursos':'recursos_ids','data do recurso':'recursos_data','id das contrarrazões':'contrarrazoes_ids'};
+function dkAlias(n){var a=DK_ALIAS[String(n||'').trim().toLowerCase()];return a&&ARR[a]?'@'+a:n;}
+var _campoValorFicha=campoValor;campoValor=function(k,nome,ctx){return _campoValorFicha(k,dkAlias(nome),ctx);};
 var _preCamposBase=preCampos;preCampos=function(raw){return _preCamposBase(String(raw||'').replace(RE_ARR,function(m,pre,a){return ARR[a]?pre+'[PREENCHER: @'+a+']':m;}));};
 var _comCamposBase=comCampos;comCampos=function(raw,ctx,fmt){return _comCamposBase(raw,ctx,fmt).replace(/<span class="fill([^"]*)"([^>]*?) aria-label="@([a-z0-9_]+)"([^>]*?)data-ph="@\3"/g,function(m,cl,a1,a,a2){
   var r=arrRot(a);return '<span class="fill'+cl+' arr"'+a1+' aria-label="'+esc(r)+'"'+a2+'data-ph="@'+a+'" data-rot="'+esc(r)+'"'+(/ auto/.test(cl)?'':' title="Campo da ficha: '+esc(r)+' (@'+a+'). Abra o processo na barra ou escreva aqui."');});};
@@ -696,6 +700,7 @@ var _xAutoCasoBase=xAutoCaso;xAutoCaso=function(){_xAutoCasoBase();
   var P=window.CQX&&CQX.tem()?CQX.P():null,J=P?CQX.J():null,cp=(J&&String(J.processo||'').replace(/\D/g,'')===String(P.processo||'').replace(/\D/g,'')&&J.campos)||{};
   Object.keys(ARR).forEach(function(a){var c=ARR[a],v='';if(c.s==='*')return;
     if(c.s)v=cp[c.s+'.'+c.c];else{var fs=c.f||[],keys=[c.c].concat(fs);if(fs.length>1)keys.push(fs.join('.'));keys.some(function(n){v=cp['acervo.'+n];return v!=null&&v!=='';});}
+    if(c.col){if(typeof v==='string'){try{v=JSON.parse(v);}catch(er){v=[];}}v=Array.isArray(v)?v.map(function(row){return row&&row[c.col];}).filter(function(x){return x!=null&&String(x).trim()!=='';}):[];}
     v=dkValorFicha(v).trim();if(v)AUTO['@'+a]=v;});
   var E={processo:'processo',classe:'CLASSE',assunto:'ASSUNTO',ramo:'RAMO',polo_ativo:'polo ativo',polo_passivo:'polo passivo',recorrente:'recorrente',resultado:'resultado',conclusao:'CONCLUSÃO',dispositivo_ementa:'dispositivo da ementa',classe_ementa:'CLASSE',assunto_ementa:'ASSUNTO'};
   ['classe','assunto','polo_ativo','polo_passivo'].forEach(function(a){if(AUTO['@'+a])AUTO[E[a]]=a==='classe'||a==='assunto'?String(AUTO['@'+a]).toUpperCase():AUTO['@'+a];});
@@ -705,7 +710,7 @@ var _xAutoCasoBase=xAutoCaso;xAutoCaso=function(){_xAutoCasoBase();
   ['classe','assunto'].forEach(function(a){if(!AUTO['@'+a+'_ementa']&&AUTO['@'+a])AUTO['@'+a+'_ementa']=String(AUTO['@'+a]).toUpperCase();});
   if(P){var C={processo:P.processo,classe:P.classe,assunto:P.assunto,tipo_julgamento:P.tipoJulgamento,tipo_de_caso:P.subassuntos,especificidades:P.especificidades,alegacoes:P.questoes,resultado_julgamento:P.resultado,honorarios_julgamento:P.honorarios};Object.keys(C).forEach(function(a){if(C[a]&&!AUTO['@'+a])AUTO['@'+a]=dkValorFicha(C[a]);});['classe','assunto'].forEach(function(a){if(AUTO['@'+a]){AUTO[a.toUpperCase()]=String(AUTO['@'+a]).toUpperCase();AUTO['@'+a+'_ementa']=AUTO[a.toUpperCase()];}});}};
 /* canhoto “Campos do bloco”: o campo da ficha aparece pelo rótulo */
-var _dkCampoRotBase=dkCampoRot;dkCampoRot=function(f){var ph=f.getAttribute('data-ph')||'';if(ph.charAt(0)==='@')return arrRot(ph.slice(1))+' · ficha';return _dkCampoRotBase(f);};
+var _dkCampoRotBase=dkCampoRot;dkCampoRot=function(f){var ph=dkAlias(f.getAttribute('data-ph')||'');if(ph.charAt(0)==='@')return arrRot(ph.slice(1))+' · ficha';return _dkCampoRotBase(f);};
 
 /* Canhoto e folha consultam a mesma fonte, inclusive depois do recálculo dos campos. */
 var _xAutoAplicaCanhoto=xAutoAplica;
