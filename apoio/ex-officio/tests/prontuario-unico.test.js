@@ -44,3 +44,11 @@ test('HERO18810: ato monocrático não pede relatório, voto, ementa nem acórd�
   assert.match(g, /g\.destino === destino\(\)\) && grupoVisivel\(g\)/, 'Campos do caso respeita o destino');
   assert.match(ge, /g\.destino\(\) === 'monocratica'/, 'Gerador sem peças de acórdão na monocrática');
 });
+
+test('HERO18810: Roteiro de triagem sem a identificação da decisão; Roteiro de produção com os campos do Compendium', () => {
+  const fs = require('node:fs'), raiz = path.resolve(__dirname, '../../../extensao');
+  const r = fs.readFileSync(path.join(raiz, 'roteiro.js'), 'utf8'), g = fs.readFileSync(path.join(raiz, 'gabinete.js'), 'utf8');
+  assert.match(r, /var FORA_TRIAGEM = \{ decisao: 1, impugnada: 1 \}/);
+  assert.match(g, /<b>Roteiro de produção<\/b>/);
+  assert.match(g, /data-rt="u:' \+ k \+ '">Usar/, 'sugestão dos autos com Usar');
+});

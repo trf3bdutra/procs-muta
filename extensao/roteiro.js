@@ -23,6 +23,8 @@
     'triagem.MPF - Info adicional': 1, 'triagem.ID da Procuração': 1, 'triagem.Procurações': 1, 'producao.Acórdão - ID': 1 };
   /* 0.46: mérito e encaminhamento saíram do Roteiro e foram para a 2ª seta do cartão do processo (gabinete.js › merEnc) */
   var NO_CARTAO = { mer: 1, enc: 1 };
+  /* 0.54: a identificação da decisão recorrida/impugnada saiu do Roteiro de triagem e mora no Roteiro de produção (gabinete.js › camposCaso) */
+  var FORA_TRIAGEM = { decisao: 1, impugnada: 1 };
   var PASSOS = [
     { id: 'decisao', f: 'rec', t: 'Decisão recorrida identificada', tipos: ['ap', 'rn', 'ms'],
       campos: [['origem', 'Sentença - ID', 'ID da sentença'], ['origem', 'Sentença - Data', 'Data da sentença'], ['origem', 'Sentença - Resultado', 'Resultado']],
@@ -169,7 +171,7 @@
       if (p.tipos !== '*' && !p.tipos.some(function (k) { return T[k]; })) return false;
       return !(p.nao && ativos.every(function (k) { return p.nao.indexOf(k) >= 0; }));
     };
-    var L = PASSOS.filter(function (p) { return vale(p) && !NO_CARTAO[p.f]; }).map(function (p) {
+    var L = PASSOS.filter(function (p) { return vale(p) && !NO_CARTAO[p.f] && !FORA_TRIAGEM[p.id]; }).map(function (p) {
       var st = p.manual ? (loc[p.id] ? 'ok' : 'pend') : p.estado(ctx);
       if (p.manual && p.estado) { var e2 = p.estado(ctx); if (e2 === 'al') st = 'al'; }
       return { p: p, st: st };
@@ -227,7 +229,7 @@
   function resumo(g) {
     var cnj = g.cnj(), T = tipos(g, cnj), loc = lerLocal(cnj), AU = window.MutaAutos, als = AU && AU.estado().itens ? AU.alertas() : [], ativos = Object.keys(T);
     var ctx = { v: function (s, k) { var x = g.V(s, k); return Array.isArray(x) ? (x.length ? 'tabela' : '') : S(x); }, tem: function (k) { return !!T[k]; }, alerta: function (re) { return als.some(function (a) { return a.nivel === 'al' && re.test(N(a.t)); }); } };
-    var L = PASSOS.filter(function (p) { if (NO_CARTAO[p.f]) return false; if (p.tipos !== '*' && !p.tipos.some(function (k) { return T[k]; })) return false; return !(p.nao && ativos.every(function (k) { return p.nao.indexOf(k) >= 0; })); });
+    var L = PASSOS.filter(function (p) { if (NO_CARTAO[p.f] || FORA_TRIAGEM[p.id]) return false; if (p.tipos !== '*' && !p.tipos.some(function (k) { return T[k]; })) return false; return !(p.nao && ativos.every(function (k) { return p.nao.indexOf(k) >= 0; })); });
     var ok = L.filter(function (p) { var st = p.manual ? (loc[p.id] ? 'ok' : 'pend') : p.estado(ctx); if (p.manual && p.estado && p.estado(ctx) === 'al') st = 'al'; return st === 'ok'; }).length;
     return { ok: ok, total: L.length };
   }

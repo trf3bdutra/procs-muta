@@ -609,27 +609,38 @@ function corpoProcesso() {
   /* 0.46: síntese e questões foram para a 2ª seta do cartão; 0.47: os controles foram para a 1ª seta (autuação) e o Roteiro veio para cá, depois de sinalizações e notas */
   h += '<div class="rt-em-proc">' + corpoRoteiro() + '</div>';
   h += grupos('Processo', function (g) { return g.grupo === 'Registro no acervo'; }, function () { return false; });
-  return h + camposCaso(h);
+  return h + camposCaso();
 }
-/* 0.52 · Campos do caso: todo campo preenchível ou selecionável da ficha que a Minuta-Matriz do Compendium usa (@apelido)
-   e que não aparece acima. Grava na ficha, como os demais; o Compendium relê a ficha sozinho e preenche folha e canhoto. */
+/* 0.54 · Roteiro de produção: todos os campos da ficha que a Minuta-Matriz do Compendium usa (@apelido), do destino do caso
+   (sessão ou monocrática). Preenchimento automatizado: a leitura dos autos põe sozinha o que acha nos campos vazios
+   (autos.js › autoPreencher, marca "autos"), a extensão deriva o que se calcula (marca "auto") e, onde os autos divergem
+   da ficha, o campo mostra a sugestão com "Usar". Grava na ficha; o Compendium relê a ficha sozinho. */
 var CC_ABERTO = {};
-function camposCaso(feito) {
-  var ja = {}; String(feito || '').replace(/data-(?:fk|ch)="([^"]+)"/g, function (m, k) { ja[k.replace(/&quot;/g, '"').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&#39;/g, "'")] = 1; return m; });
-  var tot = 0, ok = 0, corpo = ((G.F && G.F.abas) || []).map(function (a) {
+function camposCaso() {
+  var AU = window.MutaAutos, SG = AU && AU.sugestoes ? AU.sugestoes() : [], tot = 0, ok = 0, au = 0, vist = {};
+  function comSug(c) {
+    var alvo = c.secao + '.' + c.chave, h = campo(c), k = -1;
+    if (/au-tag/.test(h)) au++;
+    SG.forEach(function (it, i) { if (k < 0 && it.alvo === alvo && it.status !== 'igual' && it.kind !== 'tabela' && S(it.value)) k = i; });
+    if (k < 0) return h;
+    var v = S(SG[k].value); if (/^\d{4}-\d{2}-\d{2}$/.test(v)) v = v.split('-').reverse().join('/');
+    return h + '<div class="rt-s"><span>Autos' + (SG[k].doc ? ' (ID ' + esc(SG[k].doc) + ')' : '') + ':</span> <b>' + esc(v.slice(0, 140)) + '</b><button type="button" class="btn line sm" data-rt="u:' + k + '">Usar</button></div>';
+  }
+  var corpo = ((G.F && G.F.abas) || []).map(function (a) {
     if (a.aba === 'Pauta' && destino() === 'monocratica') return '';
     return (a.grupos || []).filter(function (g) { return !g.controle && (!g.destino || g.destino === destino()) && grupoVisivel(g); }).map(function (g) {
-      var cs = (g.campos || []).filter(function (c) { return c.apelido && editavel(c) && c.tipo !== 'tabela' && !ja[c.secao + '.' + c.chave] && !soSessao(c.chave); });
+      var cs = (g.campos || []).filter(function (c) { var id = c.secao + '.' + c.chave; if (vist[id]) return false; return c.apelido && editavel(c) && c.tipo !== 'tabela' && !soSessao(c.chave) && (vist[id] = 1); });
       if (!cs.length) return '';
-      cs.forEach(function (c) { ja[c.secao + '.' + c.chave] = 1; });
       var n = cs.filter(function (c) { return !!S(V(c.secao, c.chave)); }).length, id = a.aba + ' · ' + g.grupo;
       tot += cs.length; ok += n;
-      return '<details class="gg" data-cc="' + esc(id) + '"' + (CC_ABERTO[id] ? ' open' : '') + '><summary><h4>' + esc(id) + '</h4><span class="gn">' + n + '/' + cs.length + '</span></summary><div class="gr">' + cs.map(campo).join('') + '</div></details>';
+      return '<details class="gg" data-cc="' + esc(id) + '"' + (CC_ABERTO[id] || (CC_ABERTO[id] == null && n < cs.length && /^(Processo|Triagem)/.test(a.aba) && tot <= 40) ? ' open' : '') + '><summary><h4>' + esc(id) + '</h4><span class="gn">' + n + '/' + cs.length + '</span></summary><div class="gr">' + cs.map(comSug).join('') + '</div></details>';
     }).join('');
   }).join('');
   if (!tot) return '';
-  return '<section class="cc-caso"><div class="cc-h"><h4>Campos do caso · Compendium</h4><span class="gn">' + ok + '/' + tot + '</span></div>' +
-    '<p class="muted">Gravam na ficha. A Minuta-Matriz relê a ficha sozinha e preenche a folha e o canhoto.</p>' + corpo + '</section>';
+  var pct = Math.round(100 * ok / tot);
+  return '<section class="card rt-top cc-caso"><div class="rt-tt"><b>Roteiro de produção</b><span class="rt-n">' + ok + '/' + tot + '</span>' + (au ? '<span class="rt-al cc-au">' + au + ' automático' + (au > 1 ? 's' : '') + '</span>' : '') + '</div>' +
+    '<div class="rt-bar"><i style="width:' + pct + '%"></i></div>' + (AU && AU.barra ? AU.barra() : '') +
+    '<p class="muted">Campos do caso que o Compendium usa na minuta (' + (destino() === 'monocratica' ? 'decisão monocrática' : 'acórdão') + '). Os autos lidos preenchem sozinhos os vazios; confira o que vier marcado. Grava na ficha.</p>' + corpo + '</section>';
 }
 document.addEventListener('toggle', function (e) { var d = e.target; if (d && d.getAttribute && d.getAttribute('data-cc') != null) CC_ABERTO[d.getAttribute('data-cc')] = d.open; }, true);
 function corpoTriagem() {
