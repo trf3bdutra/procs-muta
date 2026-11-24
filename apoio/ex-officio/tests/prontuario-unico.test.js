@@ -83,3 +83,9 @@ test('HERO18810 0.59: admissibilidade, MPF, mídias e etiquetas só no Roteiro d
   assert.match(r, /\['gab', 'Mídias e etiquetas'\]/); assert.match(r, /id: 'etiquetas', f: 'gab'/);
   assert.match(g, /!GRUPOS_TRIAGEM\[g\.grupo\] && ccGrupoVale\(g, T\)/); assert.match(g, /ja\[id\] \|\| TRI_EXTRA\[c\.chave\]/);
 });
+
+test('HERO18810 0.61: dados da decisão monocrática pela cronologia dos autos', () => {
+  const fs = require('node:fs'), a = fs.readFileSync(path.resolve(__dirname, '../../../extensao/autos.js'), 'utf8');
+  assert.match(a, /function monoAutos\(\)/);
+  ['producao.Decisão - ID', 'producao.Data da Assinatura', 'producao.Mono - Data da publicação', 'producao.Publicado'].forEach(k => assert.ok(a.includes("alvo: '" + k + "'"), k));
+});

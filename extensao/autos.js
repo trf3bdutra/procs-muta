@@ -321,6 +321,17 @@ function autoPreencher() {
   A.auto = { ck: ck, itens: ant.concat(L.filter(function (x) { return !ant.some(function (p) { return p.alvo === x.alvo; }); })), em: Date.now() };
   g.gravar().then(function () { A.sug = null; redesenhar(); }, function () { redesenhar(); });
 }
+function monoAutos() {
+  var g = GB(); if (!g.V || N(g.V('producao', 'Destino')) !== 'monocratica') return [];
+  var L = lista().filter(function (d) { return !d.anexo && /^decis[aã]o\b/i.test(S(d.tipo)) && !/interlocut|despacho/i.test(S(d.tipo) + ' ' + S(d.desc)) && iso(d.data); });
+  if (!L.length) return [];
+  L.sort(function (a, b) { return iso(b.data).localeCompare(iso(a.data)) || String(b.hora || '').localeCompare(String(a.hora || '')); });
+  var d = L[0], dd = iso(d.data), out = [{ alvo: 'producao.Decisão - ID', rot: 'ID da decisão', v: S(d.id), doc: S(d.id) }, { alvo: 'producao.Data da Assinatura', rot: 'Data da assinatura', v: dd, doc: S(d.id) }, { alvo: 'producao.Assinado', rot: 'Assinado', v: 'Sim', doc: S(d.id) }];
+  var pub = movimentos().filter(function (m) { var x = iso(m.data); return x && x >= dd && /publicad[oa]|disponibilizad[oa] no di[aá]rio|publica[cç][aã]o no di[aá]rio/i.test(S(m.t)); })
+    .sort(function (a, b) { return iso(a.data).localeCompare(iso(b.data)); })[0];
+  if (pub) out.push({ alvo: 'producao.Mono - Data da publicação', rot: 'Data da publicação', v: iso(pub.data), doc: '' }, { alvo: 'producao.Publicado', rot: 'Publicado', v: 'Sim', doc: '' });
+  return out;
+}
 function derivAutos() {
   var it = function (k) { return (A.sug || []).filter(function (x) { return x.key === k; })[0]; };
   var val = function (k, sec) { var x = it(k); return S(x && !Array.isArray(x.value) ? x.value : '') || S(GB().V ? GB().V(sec || 'origem', k) : ''); };
@@ -337,6 +348,8 @@ function derivAutos() {
       if (r.parte || ped) t += ' Recorre ' + (S(r.parte) || 'a parte') + (ped ? ', pedindo ' + ped.replace(/[.\s]+$/, '').replace(/^./, function (c) { return c.toLowerCase(); }) : '') + '.'; });
     if (t.length > 20) out.push({ alvo: 'triagem.Síntese Processual', rot: 'Síntese do processo', v: t.slice(0, 1200), doc: sid });
   }
+  /* 0.61: decisão monocrática — ID, assinatura (juntada da decisão) e publicação (movimento posterior) pela cronologia dos autos */
+  try { monoAutos().forEach(function (x) { out.push(x); }); } catch (e) {}
   return out;
 }
 function autoItens() { return A.auto && A.auto.ck === chave() && lidoDoProcesso() ? A.auto.itens : []; }
