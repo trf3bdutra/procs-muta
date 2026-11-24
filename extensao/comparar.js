@@ -199,7 +199,7 @@ function seletor() {
   if (C.fonte === 'colar') return '<textarea class="cx-ref" data-c="ref" placeholder="Cole aqui o texto de referência (outra minuta, voto-paradigma, decisão de origem…)">' + esc(C.ref) + '</textarea>';
   if (C.fonte === 'ement') {
     var vs = br.getLinks ? br.getLinks() : [];
-    h = '';
+    h = sugPrec(s);
     var ids = vs.map(function (v) { return { x: { id: v.id, n: v.n, cl: v.cl, d: v.d } }; });
     Object.keys(C.ement).forEach(function (id) { if (!vs.some(function (v) { return v.id === id; }) && C.ement[id].rotulo) ids.unshift({ x: { id: id, n: C.ement[id].rotulo, cl: 'aberto pelo Ementário', d: '' } }); });
     return h + (ids.length ? itens(ids, function (x) { return [x.cl, x.n].filter(Boolean).join(' '); }, function (x) { return x.d || ''; }, function (x) { return x.id; }, s) : '<div class="empty">Nenhum precedente vinculado. Abra o Ementário, pesquise e use Comparar com o editor.</div>') +
@@ -424,6 +424,27 @@ function preparar() {
   else if (C.fonte === 'modelo' || C.fonte === 'matriz' || C.fonte === 'm2886' || C.fonte === 'par') dados().then(render);
   else if (C.fonte === 'ement' && C.sel.ement && !C.ement[C.sel.ement]) carregarJulgado(C.sel.ement);
   render();
+}
+/* 0.53 · atalho: julgados do Ementário compatíveis com o caso (assunto, tipo de caso, questões, síntese) e com o texto do editor */
+function Sg(v) { return v == null ? '' : String(v).trim(); }
+var SUG = { k: '', L: null, busy: false, erro: '' };
+function sugPrec(atual) {
+  var GB = window.MutaGabinete, P = window.MutaPrecedentes, E = window.MutaEmentario;
+  var k = GB && GB.casoPrec ? GB.casoPrec() : null, tx = Sg(ED.estado().texto || '');
+  if (!k || !P || !P.buscar || !E || !E.porNumero) return '';
+  var caso = Object.assign({}, k, { questoes: [k.questoes, tx.slice(0, 4000)].join(' ') }), chv = JSON.stringify(caso).length + '|' + JSON.stringify(k) + '|' + tx.length + tx.slice(0, 200);
+  if (SUG.k !== chv && !SUG.busy) {
+    SUG.k = chv; SUG.busy = true; SUG.L = null; SUG.erro = '';
+    P.buscar(caso).then(function (L) {
+      return Promise.all(L.map(function (o) { return E.porNumero(o.r.n).then(function (j) { var x = (j || []).filter(function (y) { return !o.r.d || y.rotulo.indexOf(o.r.d.split('-').reverse().join('/')) >= 0; })[0] || (j || [])[0];
+        return x ? { x: { id: x.id, n: x.rotulo, cl: '', d: [o.r.r ? Sg(o.r.r).replace(/\.$/, '') : '', o.mot.join(' · ') || 'palavras do caso e do editor'].filter(Boolean).join(' · ') } } : null; }).catch(function () { return null; }); }));
+    }).then(function (R) { SUG.L = R.filter(Boolean); }, function (e) { SUG.erro = e.message; SUG.L = []; }).then(function () { SUG.busy = false; if (C.fonte === 'ement') render(); });
+  }
+  var cab = '<p class="muted cx-n">Sugeridos pelo caso' + (tx ? ' e pelo texto do editor' : '') + '</p>';
+  if (SUG.busy || SUG.L == null) return cab + '<p class="muted">Procurando no Ementário…</p>';
+  if (SUG.erro) return cab + '<p class="status err">' + esc(SUG.erro) + '</p>';
+  if (!SUG.L.length) return cab + '<p class="muted">Nenhum julgado compatível. Preencha assunto detalhado e questões no prontuário, ou leia o editor.</p>';
+  return cab + itens(SUG.L, function (x) { return x.n; }, function (x) { return x.d; }, function (x) { return x.id; }, atual) + '<p class="muted cx-n">Vinculados ao prontuário</p>';
 }
 function carregarJulgado(id) {
   C.ement[id] = { rotulo: '', secoes: [] }; render();

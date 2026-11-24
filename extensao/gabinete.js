@@ -1083,6 +1083,7 @@ window.MutaGabinete = { recarregar: function () { carregar(true); }, gravarPende
   api: function (p, o) { return ses.api(p, o); },
   gravado: gravado, V: V, F: function (k) { return fonteVal({ fonte: [k] }); }, marcar: marcar, gravar: function () { return gravarJa(); }, ir: function (aba) { if (aba === 'Triagem' || aba === 'Roteiro') aba = 'Processo'; if (MODOS.indexOf(aba) >= 0) { G.aba = aba; render(); } },
   destino: function () { return G.F ? destino() : ''; },
+  casoPrec: function () { return G.cnj ? casoPrec() : null; },
   /* a sincronia gravou a ficha: o painel da ficha mostra o novo registro sem nova leitura */
   registro: function (cnj, op) { if (op && dg(cnj) === dg(G.cnj)) { G.op = op; if (modo === 'ficha') render(); } } };
 aplicarModo();
