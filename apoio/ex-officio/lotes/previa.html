@@ -1153,6 +1153,7 @@ async function carregarVersoes(){
     $('#vs').innerHTML=`<div class="vsel">
       <label class="vlb"><span>Versão</span><select class="sel" id="va">${op(a0)}</select></label><span id="va-b"></span>
       <label class="vlb pjm" title="Marque a versão que foi colada no editor do PJe: a correção entra na produção e a liberação passa a ser acompanhada"><input type="checkbox" id="va-pje"><span>importada no PJe</span></label>
+      ${r.mono?`<label class="vlb pjm" id="va-ass-w" title="Registra o encaminhamento da decisão para assinatura já realizado no PJe, na ficha do processo"><input type="checkbox" id="va-ass"><span>enviada para assinatura</span></label>`:''}
       <label class="vlb" id="vb-w" hidden><span>comparar com</span><select class="sel" id="vb"></select></label>
       <span class="sp"></span><button type="button" class="b" id="cmp" aria-pressed="false">Comparar</button></div>
      <p class="vor" id="va-o"></p><div id="dif"></div>`;
@@ -1167,6 +1168,12 @@ async function carregarVersoes(){
       const a=$('#va').value, v=meta(a);
       $('#va-b').innerHTML=bd(v);
       const pk=$('#va-pje');if(pk){pk.checked=!!v.pje;pk.disabled=false;pk.parentNode.hidden=!!v.pub;pk.onchange=()=>marcaPje(r,v,pk)}
+      const ak=$('#va-ass');if(ak){
+        const atual=S.linhas.find(i=>i.x.cnj===cnj)||r, assinada=atual.etapa==='assinada';
+        ak.checked=!!atual.x.dataLiberacao||assinada;ak.disabled=assinada||!podeAssinatura(atual)||assOcupado||(!ak.checked&&!v.pje);
+        $('#va-ass-w').hidden=!!v.pub;$('#va-ass-w').title=assinada?'Decisão já assinada':!ak.checked&&!v.pje?'Marque primeiro a versão importada no PJe':'Registrar ou desfazer o envio já realizado no PJe (controle do processo)';
+        ak.onchange=async()=>{const marcar=ak.checked;ak.checked=!marcar;ak.disabled=true;try{await registraAssinatura(marcar?'enviar':'desfazer-envio',[cnj])}finally{if(ak.isConnected)ak.disabled=false}};
+      }
       $('#va-o').textContent=[v.por,v.em?br(v.em):'',v.origem,par(a)].filter(Boolean).join(' · ');
       const on=S.cmpOn&&vs.length>1;
       $('#vb-w').hidden=!on; $('#cmp').textContent=on?'Fechar comparação':'Comparar'; $('#cmp').setAttribute('aria-pressed',String(on));
