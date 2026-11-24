@@ -18,10 +18,13 @@
   function dev(x){var t=(x.textContent||'').replace(/\s+/g,' ').trim().replace(/^Em desenvolvimento\.\s*/i,''),i=t.search(/J[áa] dispon[íi]vel\s*:/i);
     var pre=i>=0?t.slice(0,i).trim():t,L=i>=0?t.slice(i).replace(/^J[áa] dispon[íi]vel\s*:\s*/i,'').replace(/\.\s*$/,'').split(/\s*;\s*/).filter(Boolean):[];
     return {pre:pre,itens:L.map(function(s){return s.charAt(0).toUpperCase()+s.slice(1);})};}
+  /* data da última coleta na Base de Jurisprudência do TRF-3 (precedentes/jurisprudencia/MANIFESTO.json, gravada pelo build) */
+  function coleta(){var m=/^(\d{4})-(\d{2})-(\d{2})/.exec(window.EMENT_COLETA||'');
+    return m?'<p class="pa-c" title="Base de Jurisprudência do TRF-3 (web.trf3.jus.br/jurisprudencia)">Última coleta no TRF-3: <b>'+m[3]+'/'+m[2]+'/'+m[1]+'</b></p>':'';}
   function abertura(){
     D.querySelectorAll('.pg-h').forEach(function(h){h.classList.add('pa-ab');});
     var he=D.querySelector('#v-ement .pg-h');
-    if(he){var c=D.querySelector('#v-ement #e-cnt');por(slot(he),c?numero(c):'');}
+    if(he){var c=D.querySelector('#v-ement #e-cnt');por(slot(he),c?numero(c)+coleta():'');}
     var hx=D.querySelector('#v-edit .pg-h');
     if(hx){var x=D.getElementById('x-dev'),s=slot(hx),tt=hx.querySelector('.pg-t'),kk=tt&&tt.querySelector('.dkk'),bd=tt&&tt.querySelector('.pa-dev');
       var on=x&&!x.hidden&&(x.textContent||'').trim(),dir=D.querySelector('#v-edit #x-alt.x-alt-dir:not([hidden])'),mod=/MODELOS/i.test((kk&&kk.textContent)||'');

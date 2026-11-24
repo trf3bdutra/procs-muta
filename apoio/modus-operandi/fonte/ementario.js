@@ -222,12 +222,12 @@ function selecionar(f,n){
 function selBar(){
   var C=CXC(),s=C.st.sel,el=$('#e-sel');
   if(!s||C.st.modo==='lista'){el.innerHTML='';return;}
-  var d=Object.keys(s.f).map(function(k){return '<b>'+C.DIM[k].n+':</b> '+esc(k==='y'?mesL(s.f[k]):rot(s.f[k],'vários'));}).join(' › ');
+  var d=Object.keys(s.f).map(function(k){return '<b>'+(k==='y'&&anoSel(s.f[k])?'Ano':C.DIM[k].n)+':</b> '+esc(k==='y'?mesL(s.f[k]):rot(s.f[k],'vários'));}).join(' › ');
   el.innerHTML='<div class="e-selb"><span>'+d+' · '+n0(s.n)+' '+C.nome+'</span><span class="sp"></span>'+(s.ok?'<button class="btn gold" id="e-sap">Filtrar</button><button class="btn" id="e-svl">Ver na lista</button>':'<span class="meta">“Outros” reúne vários valores: escolha um grupo nomeado.</span>')+'<button class="btn" id="e-sx">×</button></div>';
   if(s.ok){$('#e-sap').onclick=function(){CX=C===CXP0?null:C;C.aplica(false);};$('#e-svl').onclick=function(){CX=C===CXP0?null:C;C.aplica(true);};}
   $('#e-sx').onclick=function(){CX=C===CXP0?null:C;C.st.sel=null;selBar();itensRecorte();$$('.e-viz .on').forEach(function(e){e.classList.remove('on');});};
 }
-function aplicaSel(lista){var f=E.sel.f;Object.keys(f).forEach(function(k){if(k==='y'){E.y1=E.y2=f[k];}else E.F[k]=f[k];});E.sel=null;E.mmOpen=null;E.shown=60;if(lista)E.modo='lista';salvar();render();window.scrollTo(0,0);}
+function aplicaSel(lista){var f=E.sel.f;Object.keys(f).forEach(function(k){if(k==='y'&&anoSel(f[k])){var mz=E.idx.map(function(x){return x.y;}).filter(function(y){return y&&y.slice(0,4)===f[k];}).sort();E.y1=mz[0]||f[k]+'-01';E.y2=mz[mz.length-1]||f[k]+'-12';}else if(k==='y'){E.y1=E.y2=f[k];}else E.F[k]=f[k];});E.sel=null;E.mmOpen=null;E.shown=60;if(lista)E.modo='lista';salvar();render();window.scrollTo(0,0);}
 
 /* ---- Lista (linhas compactas, como a pesquisa de jurisprudência) e painel lateral ---- */
 var ICO={chev:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>',cit:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h4v4c0 3-1.5 5-4 6M15 7h4v4c0 3-1.5 5-4 6"/></svg>',doc:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>'};
@@ -427,7 +427,7 @@ function itCfg(C){
     abre:function(m){MS.sel=m.id;MVZ.modo='lista';MVZ.sel=null;mRender();window.scrollTo(0,0);}};
   return null;}
 function itensRecorte(){var out=$('#e-out'),pn=out&&out.querySelector('.e-itl');if(!pn||!out.__L)return;var C=out.__C,IC=itCfg(C);if(!IC)return;
-  var s=C.st.sel,L=out.__L,V=s&&s.ok?L.filter(function(x){return Object.keys(s.f).every(function(k){return C.DIM[k]&&C.DIM[k].v(x)===s.f[k];});}):L,lim=pn.__lim||40;
+  var s=C.st.sel,L=out.__L,V=s&&s.ok?L.filter(function(x){return Object.keys(s.f).every(function(k){return C.DIM[k]&&(k==='y'&&anoSel(s.f[k])?C.DIM.y.v(x).slice(0,4)===s.f[k]:C.DIM[k].v(x)===s.f[k]);});}):L,lim=pn.__lim||40;
   pn.__V=V;
   pn.innerHTML='<div class="lab">'+esc(IC.rot)+' do recorte <small>'+n0(V.length)+'</small></div>'+(s&&s.ok?'<p class="meta">Só os do item selecionado no mapa.</p>':'')+
     '<div class="e-itl-l">'+V.slice(0,lim).map(function(x,i){return '<button type="button" data-ii="'+i+'" title="Abrir"><b>'+esc(IC.tit(x))+'</b><small>'+esc(IC.sub(x))+'</small></button>';}).join('')+'</div>'+
@@ -466,21 +466,37 @@ function vFluxo(L,out){
   $$('.band',out).forEach(function(p){p.addEventListener('click',function(){var i=+p.getAttribute('data-i'),f={};f[D[i]]=p.getAttribute('data-a');f[D[i+1]]=p.getAttribute('data-b');selecionar(f,+p.getAttribute('data-n'));p.classList.add('on');});});
   $$('.nd',out).forEach(function(g){g.addEventListener('click',function(){var f={};f[D[+g.getAttribute('data-c')]]=g.getAttribute('data-v');selecionar(f,+g.getAttribute('data-n'));g.classList.add('on');});});
 }
-/* ---- Linha do tempo: barras empilhadas por ano ---- */
-function vTempo(L,out){var C=CXC();
-  var d=C.dm.tempo,t=top(L,d,7),keys=t.map(function(z){return z[0];}),kset={};keys.forEach(function(k){kset[k]=1;});
-  var anos={};L.forEach(function(x){var y=C.DIM.y.v(x);if(!/^\d{4}-\d{2}$/.test(y))return;var v=C.DIM[d].v(x);if(!kset[v])v='__outros';anos[y]=anos[y]||{_t:0};anos[y][v]=(anos[y][v]||0)+1;anos[y]._t++;});
-  var ys=Object.keys(anos).sort();if(!ys.length){out.innerHTML='<p class="empty">Sem datas para o recorte.</p>';return;}
-  var lista=[],c0=ys[0].split('-').map(Number),c1=ys[ys.length-1].split('-').map(Number);for(var yy=c0[0],mm=c0[1];yy<c1[0]||(yy===c1[0]&&mm<=c1[1]);mm++){if(mm>12){mm=1;yy++;if(yy>c1[0]||(yy===c1[0]&&mm>c1[1]))break;}lista.push(yy+'-'+String(mm).padStart(2,'0'));if(lista.length>240)break;}
-  var n=lista.length,mx=0;ys.forEach(function(y){mx=Math.max(mx,anos[y]._t);});
-  var W=Math.max(640,Math.min(1100,n*40+80)),H=320,PL=46,PB=28,bw=(W-PL-10)/n,s='';
+/* ---- Linha do tempo: barras empilhadas por mês; por ano quando o período passa de 5 anos (Ementário) ---- */
+function anoSel(v){return /^\d{4}$/.test(String(v||''));}
+function vTempo(L,out){var C=CXC(),LT=L,d=C.dm.tempo;
+  var ms=[];L.forEach(function(x){var y=C.DIM.y.v(x);if(/^\d{4}-\d{2}$/.test(y))ms.push(y);});
+  if(!ms.length){out.innerHTML='<p class="empty">Sem datas para o recorte.</p>';return;}
+  ms.sort();var c0=ms[0].split('-').map(Number),c1=ms[ms.length-1].split('-').map(Number),nm=(c1[0]-c0[0])*12+c1[1]-c0[1]+1;
+  var longo=nm>60&&C.aplica===aplicaSel,A0=c0[0],A1=c1[0],tz=longo&&anoSel(C.st.tz)&&+C.st.tz>=A0&&+C.st.tz<=A1?C.st.tz:'';
+  if(tz){L=L.filter(function(x){return String(C.DIM.y.v(x)).slice(0,4)===tz;});c0=[+tz,1];c1=[+tz,12];}
+  var porAno=longo&&!tz,ch=function(y){return porAno?y.slice(0,4):y;};
+  var t=top(L,d,7),keys=t.map(function(z){return z[0];}),kset={};keys.forEach(function(k){kset[k]=1;});
+  var anos={};L.forEach(function(x){var y=C.DIM.y.v(x);if(!/^\d{4}-\d{2}$/.test(y))return;y=ch(y);var v=C.DIM[d].v(x);if(!kset[v])v='__outros';anos[y]=anos[y]||{_t:0};anos[y][v]=(anos[y][v]||0)+1;anos[y]._t++;});
+  var lista=[];if(porAno){for(var a=c0[0];a<=c1[0];a++)lista.push(String(a));}
+  else for(var yy=c0[0],mm=c0[1];yy<c1[0]||(yy===c1[0]&&mm<=c1[1]);){lista.push(yy+'-'+String(mm).padStart(2,'0'));if(++mm>12){mm=1;yy++;}}
+  var n=lista.length,mx=0;Object.keys(anos).forEach(function(y){mx=Math.max(mx,anos[y]._t);});
+  var Wc=Math.max(640,(out.clientWidth||1040)-28),W=Math.max(640,Math.min(Wc,n*(tz?64:40)+80)),H=320,PL=46,PB=28,bw=(W-PL-10)/n,s='';
+  var rotX=function(Y){return porAno?Y:mesL(Y);},passo=Math.max(1,Math.ceil((porAno?36:46)/bw));
   function cor(k,i){return d==='res'?corRes(k):(k==='__outros'?PAL[9]:PAL[i%PAL.length]);}
   for(var g=0;g<=4;g++){var v=Math.round(mx*g/4),y=H-PB-(H-PB-14)*g/4;s+='<line x1="'+PL+'" x2="'+(W-6)+'" y1="'+y+'" y2="'+y+'" stroke="var(--line)"/><text x="'+(PL-6)+'" y="'+(y+4)+'" text-anchor="end" class="mutt">'+n0(v)+'</text>';}
   lista.forEach(function(Y,ix){var o=anos[Y],x=PL+ix*bw+bw*.12,w=bw*.76,yb=H-PB;
-    if(o)keys.forEach(function(k,i){var c=o[k];if(!c)return;var h=c/mx*(H-PB-14);yb-=h;s+='<rect class="bx" data-y="'+Y+'" data-v="'+esc(k)+'" data-n="'+c+'" x="'+x.toFixed(1)+'" y="'+yb.toFixed(1)+'" width="'+w.toFixed(1)+'" height="'+Math.max(.5,h).toFixed(1)+'" fill="'+cor(k,i)+'"><title>'+mesL(Y)+' · '+esc(rot(k,t[i][2]))+': '+n0(c)+'</title></rect>';});
-    if(n<=24||ix%2===0)s+='<text x="'+(x+w/2)+'" y="'+(H-PB+16)+'" text-anchor="middle" class="mutt">'+mesL(Y)+'</text>';});
+    if(o)keys.forEach(function(k,i){var c=o[k];if(!c)return;var h=c/mx*(H-PB-14);yb-=h;s+='<rect class="bx" data-y="'+Y+'" data-v="'+esc(k)+'" data-n="'+c+'" x="'+x.toFixed(1)+'" y="'+yb.toFixed(1)+'" width="'+w.toFixed(1)+'" height="'+Math.max(.5,h).toFixed(1)+'" fill="'+cor(k,i)+'"><title>'+rotX(Y)+' · '+esc(rot(k,t[i][2]))+': '+n0(c)+(o._t!==c?' (total '+n0(o._t)+')':'')+'</title></rect>';});
+    if(ix%passo===0)s+='<text x="'+(x+w/2).toFixed(1)+'" y="'+(H-PB+16)+'" text-anchor="middle" class="mutt'+(porAno?' e-tza':'')+'"'+(porAno?' data-tz="'+Y+'"><title>Ver os meses de '+Y+'</title>':'>')+rotX(Y)+'</text>';});
   var leg='<div class="e-leg">'+t.map(function(z,i){return '<span><i style="background:'+cor(z[0],i)+'"></i>'+esc(rot(z[0],z[2]))+' · '+n0(z[1])+'</span>';}).join('')+'</div>';
-  out.innerHTML='<p class="e-help">'+esc(C.tempoTit||'Julgamentos por mês.')+' Clique em um segmento para selecionar o mês e o grupo.</p><div class="e-viz">'+svgEl(W,H,s)+leg+'</div>';
+  var tit=porAno?'Julgamentos por ano. Clique no ano, abaixo das barras, ou dê dois cliques na barra para abrir os meses.':tz?'Julgamentos por mês em '+tz+'.':(C.tempoTit||'Julgamentos por mês.');
+  var bt=function(v,tx,dis,lab){return '<button class="btn" data-tz="'+v+'"'+(dis?' disabled':'')+' aria-label="'+esc(lab||tx)+'">'+esc(tx)+'</button>';},nav='';
+  if(tz)nav='<div class="e-tnav">'+bt('','‹ Todos os anos',false,'Voltar à visão por ano')+'<span class="sp"></span>'+bt(String(+tz-1),'‹ '+(+tz-1),+tz-1<A0,'Ano anterior')+'<b>'+tz+'</b>'+bt(String(+tz+1),(+tz+1)+' ›',+tz+1>A1,'Ano seguinte')+'</div>';
+  else if(porAno)nav='<div class="e-tnav"><span class="meta">'+A0+'–'+A1+' · por ano</span><span class="sp"></span><label class="meta">Abrir o ano <select id="e-tzs" aria-label="Abrir os meses do ano"><option value="">—</option>'+lista.map(function(Y){return '<option value="'+Y+'">'+Y+(anos[Y]?' ('+n0(anos[Y]._t)+')':'')+'</option>';}).join('')+'</select></label></div>';
+  out.innerHTML='<p class="e-help">'+esc(tit)+' Clique em um segmento para selecionar '+(porAno?'o ano':'o mês')+' e o grupo.</p>'+nav+'<div class="e-viz">'+svgEl(W,H,s)+leg+'</div>';
+  var vai=function(v){C.st.tz=v;C.st.sel=null;selBar();vTempo(LT,out);var e=out.querySelector('.e-tnav');if(e)e.scrollIntoView({block:'nearest'});};
+  $$('[data-tz]',out).forEach(function(b){b.addEventListener('click',function(){vai(b.getAttribute('data-tz'));});});
+  var zs=$('#e-tzs',out);if(zs)zs.onchange=function(){if(zs.value)vai(zs.value);};
+  if(porAno)$$('.bx',out).forEach(function(r){r.addEventListener('dblclick',function(){vai(r.getAttribute('data-y'));});});
   $$('.bx',out).forEach(function(r){r.addEventListener('click',function(){CX=C===CXP0?null:C;var f={y:r.getAttribute('data-y')};f[d]=r.getAttribute('data-v');selecionar(f,+r.getAttribute('data-n'));r.classList.add('on');});});
 }
 /* ---- Matriz ---- */

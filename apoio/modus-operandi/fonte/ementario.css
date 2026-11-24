@@ -682,3 +682,12 @@ html.emb-cmt body #e-aside{top:0!important;max-height:100vh!important}
 .mn-tq input{width:100%;box-sizing:border-box;height:32px;padding:0 10px 0 30px;border:1px solid #d4cbb8;border-radius:0;background:#fffdf8 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%238a8f98' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m16 16 4 4'/%3E%3C/svg%3E") 9px center no-repeat;color:#1d1d1b;font:13px Figtree,sans-serif}
 .mn-tq input:focus{outline:0;border-color:#1b5878;background-color:#fff}
 .mn-bar:has(>.btn:only-child){justify-content:flex-start}
+
+/* Linha do tempo: navegação ano ↔ meses */
+.e-tnav{display:flex;align-items:center;gap:8px;margin:0 0 8px;flex-wrap:wrap}
+.e-tnav .sp{flex:1}
+.e-tnav b{font:500 15px "IBM Plex Mono",ui-monospace,monospace;min-width:48px;text-align:center}
+.e-tnav button[disabled]{opacity:.35;cursor:default}
+.e-tnav select{margin-left:4px}
+.e-viz text.e-tza{cursor:pointer;text-decoration:underline;text-decoration-style:dotted}
+.e-viz text.e-tza:hover{fill:var(--ink)}

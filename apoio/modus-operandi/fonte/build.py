@@ -304,8 +304,12 @@ _ESP = [('processo', 'Número do processo'), ('ramo', 'Ramo do direito, pela ár
         ('resultado', 'Resultado, pelo dispositivo da peça'), ('conclusao', 'Conclusão do cabeçalho da ementa'), ('dispositivo_ementa', 'Item IV da ementa, pelo dispositivo'),
         ('classe_ementa', 'Classe, em maiúsculas (cabeçalho da ementa)'), ('assunto_ementa', 'Assunto, em maiúsculas (cabeçalho da ementa)')]
 CAJ = json.dumps({'campos': [{'a': x, 'r': r, 's': '*', 'g': 'Caso e peça'} for x, r in _ESP] + _CA}, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/')
+# data da última coleta da série histórica na Base de Jurisprudência do TRF-3
+_MAN = ler(RAIZ/'precedentes/jurisprudencia/MANIFESTO.json')
+COLETA = max((_MAN.get('coleta_original') or {}).values() or [_MAN.get('gerado_em') or ''])[:10]
 def gerar_html(var):
     t, js, css, pre = montar(var)
+    js = 'window.EMENT_COLETA=' + json.dumps(COLETA) + ';\n' + js   # última coleta na Base de Jurisprudência do TRF-3 (abertura do Ementário)
     js = 'window.TIPO_CASO=' + TCJ + ';\n' + js   # vocabulário comum do tipo de caso (Ementário e Consulta)
     js = (RAIZ/'extensao/gerador.js').read_text(encoding='utf-8') + '\n' + js  # composição redacional comum à HERO18810\n    js = 'window.CAMPOS_AUTO=' + CAJ + ';\n' + js   # campos automáticos (@apelido) da Minuta-Matriz e do editor
     for a, b in [('/*__USOS__*/', (H/'usos_auto.json').read_text(encoding='utf-8').strip()),
