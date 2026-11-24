@@ -60,3 +60,11 @@ test('HERO18810: Roteiro de produção pelo perfil da minuta, com histórico de 
   assert.match(g, /c\.chave === 'Mono - Tipo de ato'/);
   assert.match(g, /function historicoPautas\(\)/);
 });
+
+test('HERO18810: Caso do Roteiro de produção segue o tipo de julgamento', () => {
+  const fs = require('node:fs'), raiz = path.resolve(__dirname, '../../../extensao');
+  const g = fs.readFileSync(path.join(raiz, 'gabinete.js'), 'utf8'), r = fs.readFileSync(path.join(raiz, 'roteiro.js'), 'utf8');
+  assert.match(g, /'Sentença': \['ap', 'rn', 'ms'\], 'Espécie e decisão impugnada': \['ai', 'agint', 'ed', 'ret'\]/);
+  assert.match(g, /T\.ai \? 'Decisão agravada'/);
+  assert.match(r, /window\.MutaRoteiro = \{ tipos: tipos,/);
+});

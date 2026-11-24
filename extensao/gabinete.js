@@ -632,6 +632,22 @@ var CC_MONO = [['Decisão', [['producao', 'Mono - Fundamento', 'Precedente ou fu
 var CC_AC = [['Designação e minuta', 'Designação e minuta'], ['Revisão', 'Revisão'], ['Relatório, voto e ementa', 'Relatório, voto e ementa'],
   ['Revisão do acórdão (ementa)', 'Revisão do acórdão (ementa)'], ['Liberação para a sessão', 'Liberação para a sessão'], ['Pauta e julgamento', 'Pauta e julgamento']];
 var CC_PROD = { 'Produção': 1, 'Pauta': 1, 'Controles especiais': 1 };
+/* 0.57 · grupos do Caso pelo tipo de julgamento (o mesmo do Roteiro de triagem, automático ou escolhido nos botões):
+   grupo fora do tipo some, salvo se já tem algo gravado; sem tipo identificado, aparece tudo. Título conforme o recurso. */
+var CC_TIPO = { 'Sentença': ['ap', 'rn', 'ms'], 'Espécie e decisão impugnada': ['ai', 'agint', 'ed', 'ret'], 'Acórdão recorrido (embargos de declaração)': ['ed'],
+  'Embargos de declaração': ['ed'], 'Agravo interno': ['agint'], 'Juízo de retratação': ['ret'] };
+function ccTipos() { try { return window.MutaRoteiro && window.MutaRoteiro.tipos ? window.MutaRoteiro.tipos(gRot(), G.cnj) || {} : {}; } catch (e) { return {}; } }
+function ccGrupoVale(g, T) {
+  var L = CC_TIPO[g.grupo], tem = Object.keys(T).length;
+  var cheio = (g.campos || []).some(function (c) { var v = c.secao ? gravado(c.secao, c.chave) : ''; return Array.isArray(v) ? v.length : !!S(v); });
+  if (!L || !tem) return grupoVisivel(g) || cheio;
+  return L.some(function (k) { return T[k]; }) || cheio;
+}
+function ccTitulo(g, T) {
+  if (g.grupo === 'Espécie e decisão impugnada') return T.ai ? 'Decisão agravada' : T.ed ? 'Acórdão embargado' : T.agint ? 'Decisão agravada (agravo interno)' : T.ret ? 'Acórdão devolvido' : g.grupo;
+  if (g.grupo === 'Sentença' && T.ms && !T.ap && !T.rn) return 'Sentença (mandado de segurança)';
+  return g.grupo;
+}
 function camposCaso(ja) {
   ja = ja || {};
   var AU = window.MutaAutos, SG = AU && AU.sugestoes ? AU.sugestoes() : [], tot = 0, ok = 0, au = 0, vist = {}, mono = destino() === 'monocratica';
@@ -655,9 +671,10 @@ function camposCaso(ja) {
   function doGrupo(nome, ro) { var g = grupoModelo(nome); return g ? (g.campos || []).filter(function (c) { return usa(c, ro); }) : []; }
   function daLista(L) { return L.map(function (x) { var c = campoModelo(x[0], x[1]); if (!c || !usa(c)) return null; return x[2] ? Object.assign({}, c, { rotulo: x[2] }) : c; }).filter(Boolean); }
   /* 1. Caso: abas Processo e Triagem */
+  var T = ccTipos();
   var caso = ((G.F && G.F.abas) || []).filter(function (a) { return !CC_PROD[a.aba]; }).map(function (a) {
-    return (a.grupos || []).filter(function (g) { return !g.controle && grupoVisivel(g); }).map(function (g) {
-      return bloco(a.aba + ' · ' + g.grupo, (g.campos || []).filter(function (c) { return c.apelido && usa(c); }));
+    return (a.grupos || []).filter(function (g) { return !g.controle && ccGrupoVale(g, T); }).map(function (g) {
+      return bloco('Caso · ' + ccTitulo(g, T), (g.campos || []).filter(function (c) { return c.apelido && usa(c); }));
     }).join('');
   }).join('');
   /* 2. perfil da minuta */
@@ -670,7 +687,7 @@ function camposCaso(ja) {
   var pct = Math.round(100 * ok / tot);
   return '<section class="card rt-top cc-caso"><div class="rt-tt"><b>Roteiro de produção</b><span class="rt-n">' + ok + '/' + tot + '</span>' + (au ? '<span class="rt-al cc-au">' + au + ' automático' + (au > 1 ? 's' : '') + '</span>' : '') + '</div>' +
     '<div class="rt-bar"><i style="width:' + pct + '%"></i></div>' + (AU && AU.barra ? AU.barra() : '') +
-    '<p class="muted">Perfil da minuta: <b>' + (mono ? 'decisão monocrática' : 'acórdão') + '</b>, pelo tipo de ato do cartão do processo. Os autos lidos preenchem sozinhos os vazios; confira o que vier marcado. Grava na ficha.</p>' +
+    '<p class="muted">Perfil da minuta: <b>' + (mono ? 'decisão monocrática' : 'acórdão') + '</b>, pelo tipo de ato do cartão do processo' + (Object.keys(T).length && window.MutaRoteiro ? '; campos do caso de <b>' + window.MutaRoteiro.TIPOS.filter(function (x) { return T[x[0]]; }).map(function (x) { return x[1].toLowerCase(); }).join(', ') + '</b>, pelo tipo de julgamento do Roteiro de triagem' : '') + '. Os autos lidos preenchem sozinhos os vazios; confira o que vier marcado. Grava na ficha.</p>' +
     caso + perfil + '</section>';
 }
 /* histórico de pautas do processo: sessões registradas na ficha e cartões das pautas em curso (retirado, adiado, sustentação, preferência) */

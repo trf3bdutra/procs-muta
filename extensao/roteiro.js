@@ -243,5 +243,5 @@
     return false;
   }
   function conferir(id, on, g) { var cnj = g.cnj(), loc = lerLocal(cnj); if (on) loc[id] = new Date().toISOString().slice(0, 10); else delete loc[id]; gravarLocal(cnj, loc); }
-  window.MutaRoteiro = { html: html, resumo: resumo, clique: clique, conferir: conferir, detectar: detectar, PASSOS: PASSOS, TIPOS: TIPOS };
+  window.MutaRoteiro = { tipos: tipos, html: html, resumo: resumo, clique: clique, conferir: conferir, detectar: detectar, PASSOS: PASSOS, TIPOS: TIPOS };
 })();
