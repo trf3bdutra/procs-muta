@@ -311,7 +311,7 @@ function merEnc() {
   var ab = !!G.merAb, h = '<details class="pm-aut pm-mer"' + (ab ? ' open' : '') + '><summary aria-label="Síntese, questões, mérito, encaminhamento e controles" title="Síntese, questões, mérito, encaminhamento e controles"><span class="pm-aut-t">síntese · questões · encaminhamento · controles</span><i class="pm-aut-h"></i></summary>';
   if (!ab) return h + '</details>';
   /* 0.50: com a seta aberta, o que dá para obter sozinho vai para os campos vazios (marca "auto", Desfazer) */
-  try { autoGab(); situacaoSync(); } catch (e) {}
+  if (!G._seco) try { autoGab(); situacaoSync(); } catch (e) {}
   var TR = window.MutaTriagem, mono = N(V('producao', 'Destino')) === 'monocratica';
   var etqX = (TR && TR.etiquetasDe ? TR.etiquetasDe(G.op, G.fo) : '') + (window.MutaAlertas ? window.MutaAlertas.htmlRoteiro(G.cnj, V('triagem', 'Etiquetas sugeridas'), function () { render(); }) : '');
   var ag = autoGabItens();
@@ -609,14 +609,19 @@ function corpoProcesso() {
   /* 0.46: síntese e questões foram para a 2ª seta do cartão; 0.47: os controles foram para a 1ª seta (autuação) e o Roteiro veio para cá, depois de sinalizações e notas */
   h += '<div class="rt-em-proc">' + corpoRoteiro() + '</div>';
   h += grupos('Processo', function (g) { return g.grupo === 'Registro no acervo'; }, function () { return false; });
-  return h + camposCaso();
+  /* 0.55: sem repetição — o Roteiro de produção não repete o que já aparece no Roteiro de triagem, nesta aba ou nas setas do cartão */
+  var ja = {}, sc = '';
+  try { var ab0 = G.merAb; G.merAb = true; G._seco = 1; sc = merEnc() + controlesProcesso(true); G.merAb = ab0; G._seco = 0; } catch (e) { G._seco = 0; }
+  (h + sc).replace(/data-(?:fk|ch)="([^"]+)"/g, function (m, k) { ja[k.replace(/&quot;/g, '"').replace(/&amp;/g, '&').replace(/&#39;/g, "'")] = 1; return m; });
+  return h + camposCaso(ja);
 }
 /* 0.54 · Roteiro de produção: todos os campos da ficha que a Minuta-Matriz do Compendium usa (@apelido), do destino do caso
    (sessão ou monocrática). Preenchimento automatizado: a leitura dos autos põe sozinha o que acha nos campos vazios
    (autos.js › autoPreencher, marca "autos"), a extensão deriva o que se calcula (marca "auto") e, onde os autos divergem
    da ficha, o campo mostra a sugestão com "Usar". Grava na ficha; o Compendium relê a ficha sozinho. */
 var CC_ABERTO = {};
-function camposCaso() {
+function camposCaso(ja) {
+  ja = ja || {};
   var AU = window.MutaAutos, SG = AU && AU.sugestoes ? AU.sugestoes() : [], tot = 0, ok = 0, au = 0, vist = {};
   function comSug(c) {
     var alvo = c.secao + '.' + c.chave, h = campo(c), k = -1;
@@ -629,7 +634,7 @@ function camposCaso() {
   var corpo = ((G.F && G.F.abas) || []).map(function (a) {
     if (a.aba === 'Pauta' && destino() === 'monocratica') return '';
     return (a.grupos || []).filter(function (g) { return !g.controle && (!g.destino || g.destino === destino()) && grupoVisivel(g); }).map(function (g) {
-      var cs = (g.campos || []).filter(function (c) { var id = c.secao + '.' + c.chave; if (vist[id]) return false; return c.apelido && editavel(c) && c.tipo !== 'tabela' && !soSessao(c.chave) && (vist[id] = 1); });
+      var cs = (g.campos || []).filter(function (c) { var id = c.secao + '.' + c.chave; if (vist[id] || ja[id]) return false; return c.apelido && editavel(c) && c.tipo !== 'tabela' && !soSessao(c.chave) && (vist[id] = 1); });
       if (!cs.length) return '';
       var n = cs.filter(function (c) { return !!S(V(c.secao, c.chave)); }).length, id = a.aba + ' · ' + g.grupo;
       tot += cs.length; ok += n;
@@ -742,10 +747,12 @@ function corpoAutos() {
   return AU.htmlLeitura() + cf + dc;
 }
 document.addEventListener('toggle', function (e) { if (e.target && e.target.id === 'g-cf' && e.target.tagName === 'DETAILS') CF_ABERTO = e.target.open; }, true);
+/* 0.55: Roteiro de triagem = admissibilidade e MPF (e os passos); matéria, espécie e decisão impugnada ficam no Roteiro de produção */
+var GRUPOS_TRIAGEM = { 'Admissibilidade e regularidade': 1, 'Ministério Público': 1 };
 function corpoRoteiro() {
   if (!window.MutaRoteiro) return '<div class="empty">Roteiro indisponível.</div>';
   var A = abaModelo('Triagem'), todos = [], TR = window.MutaTriagem, AU = window.MutaAutos;
-  if (A) A.grupos.filter(function (g) { return g.grupo !== 'Registro da triagem (lote)' && grupoVisivel(g); }).forEach(function (g) { g.campos.forEach(function (c) { if (c.secao && !FORA_ROT[c.chave]) todos.push([c.secao, c.chave, c.rotulo]); }); });
+  if (A) A.grupos.filter(function (g) { return GRUPOS_TRIAGEM[g.grupo] && grupoVisivel(g); }).forEach(function (g) { g.campos.forEach(function (c) { if (c.secao && !FORA_ROT[c.chave]) todos.push([c.secao, c.chave, c.rotulo]); }); });
   return window.MutaRoteiro.html(gRot(), campoRot, questoes, { todos: todos, barra: AU && AU.barra ? AU.barra() : '',
     etiquetas: (TR && TR.etiquetasDe ? TR.etiquetasDe(G.op, G.fo) : '') + (window.MutaAlertas ? window.MutaAlertas.htmlRoteiro(G.cnj, V('triagem', 'Etiquetas sugeridas'), function () { render(); }) : ''), registro: '' /* 0.46.1: o quadro "Registro da triagem" saiu do prontuário (pedido do gestor); triagem.js › registroDe fica */ });
 }
