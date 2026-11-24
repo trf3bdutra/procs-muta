@@ -320,7 +320,7 @@ function merEnc() {
     '<h4 class="pm-mer-h">Mérito</h4><div class="gr">' + campoRot('triagem', 'Tema', 'Tipo de caso') + campoRot('triagem', 'Especificidades') + campoRot('triagem', 'Síntese Fática', 'Síntese fática') +
       (S(V('triagem', 'COMPLEXIDADE')) ? campoRot('triagem', 'COMPLEXIDADE', 'Complexidade') : '') + campoRot('triagem', 'Tipo de Voto', 'Tipo de voto') + '</div>' +
     /* 0.50: pendências e etiquetas do gabinete saíram daqui (estão em Sinalizações e na 1ª seta); a situação é calculada pelas sinalizações */
-    '<h4 class="pm-mer-h">Encaminhamento</h4><div class="gr">' + situacaoHtml() + (mono ? campoRot('triagem', 'Hipóteses Monocrática', 'Hipótese do artigo 932') : '') + '</div>' + etqX +
+    '<h4 class="pm-mer-h">Encaminhamento</h4><div class="gr">' + situacaoHtml() + (mono ? campoRot('triagem', 'Hipóteses Monocrática', 'Hipótese do artigo 932') : '') + '</div>' + /* 0.59: etiquetas foram para o Roteiro de triagem */
     /* 0.49.1: controles (urgência, meta, sobrestamento, caso sensível) aqui, antes na 1ª seta */
     controlesProcesso(true) + '</details>';
 }
@@ -663,7 +663,7 @@ function camposCaso(ja) {
     return h + '<div class="rt-s"><span>Autos' + (SG[k].doc ? ' (ID ' + esc(SG[k].doc) + ')' : '') + ':</span> <b>' + esc(v.slice(0, 140)) + '</b><button type="button" class="btn line sm" data-rt="u:' + k + '">Usar</button></div>';
   }
   /* campo entra uma vez só e nunca o que já aparece acima; o tipo de ato fica no cartão */
-  function usa(c, ro) { var id = c.secao + '.' + c.chave; if (!c.secao || vist[id] || ja[id] || c.chave === 'Mono - Tipo de ato' || c.chave === 'Destino' || soSessao(c.chave) || c.tipo === 'tabela') return false;
+  function usa(c, ro) { var id = c.secao + '.' + c.chave; if (!c.secao || vist[id] || ja[id] || TRI_EXTRA[c.chave] || c.chave === 'Mono - Tipo de ato' || c.chave === 'Destino' || soSessao(c.chave) || c.tipo === 'tabela') return false;
     if (!ro && !editavel(c)) return false; vist[id] = 1; return true; }
   function bloco(id, cs, extra) {
     if (!cs.length && !extra) return '';
@@ -676,7 +676,7 @@ function camposCaso(ja) {
   /* 1. Caso: abas Processo e Triagem */
   var T = ccTipos();
   var caso = ((G.F && G.F.abas) || []).filter(function (a) { return !CC_PROD[a.aba]; }).map(function (a) {
-    return (a.grupos || []).filter(function (g) { return !g.controle && ccGrupoVale(g, T); }).map(function (g) {
+    return (a.grupos || []).filter(function (g) { return !g.controle && !GRUPOS_TRIAGEM[g.grupo] && ccGrupoVale(g, T); }).map(function (g) {
       return bloco('Caso · ' + ccTitulo(g, T), (g.campos || []).filter(function (c) { return c.apelido && usa(c); }));
     }).join('');
   }).join('');
@@ -814,10 +814,12 @@ function corpoAutos() {
 document.addEventListener('toggle', function (e) { if (e.target && e.target.id === 'g-cf' && e.target.tagName === 'DETAILS') CF_ABERTO = e.target.open; }, true);
 /* 0.55: Roteiro de triagem = admissibilidade e MPF (e os passos); matéria, espécie e decisão impugnada ficam no Roteiro de produção */
 var GRUPOS_TRIAGEM = { 'Admissibilidade e regularidade': 1, 'Ministério Público': 1 };
+/* 0.59: mídias e etiquetas do gabinete (e as sugeridas, no quadro de etiquetas) também são triagem */
+var TRI_EXTRA = { 'Mídias': 1, 'Etiquetas': 1, 'Etiquetas sugeridas': 1, 'Seleção Prévia': 1 };
 function corpoRoteiro() {
   if (!window.MutaRoteiro) return '<div class="empty">Roteiro indisponível.</div>';
   var A = abaModelo('Triagem'), todos = [], TR = window.MutaTriagem, AU = window.MutaAutos;
-  if (A) A.grupos.filter(function (g) { return GRUPOS_TRIAGEM[g.grupo] && grupoVisivel(g); }).forEach(function (g) { g.campos.forEach(function (c) { if (c.secao && !FORA_ROT[c.chave]) todos.push([c.secao, c.chave, c.rotulo]); }); });
+  if (A) A.grupos.filter(function (g) { return (GRUPOS_TRIAGEM[g.grupo] || g.grupo === 'Matéria e gestão') && grupoVisivel(g); }).forEach(function (g) { g.campos.forEach(function (c) { if (c.secao && !FORA_ROT[c.chave] && (GRUPOS_TRIAGEM[g.grupo] || TRI_EXTRA[c.chave])) todos.push([c.secao, c.chave, c.rotulo]); }); });
   return window.MutaRoteiro.html(gRot(), campoRot, questoes, { todos: todos, barra: AU && AU.barra ? AU.barra() : '',
     etiquetas: (TR && TR.etiquetasDe ? TR.etiquetasDe(G.op, G.fo) : '') + (window.MutaAlertas ? window.MutaAlertas.htmlRoteiro(G.cnj, V('triagem', 'Etiquetas sugeridas'), function () { render(); }) : ''), registro: '' /* 0.46.1: o quadro "Registro da triagem" saiu do prontuário (pedido do gestor); triagem.js › registroDe fica */ });
 }

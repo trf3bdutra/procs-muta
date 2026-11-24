@@ -13,7 +13,7 @@
   var esc = function (s) { return S(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
 
   var TIPOS = [['ap', 'Apelação'], ['rn', 'Remessa necessária'], ['ai', 'Agravo de instrumento'], ['ms', 'Mandado de segurança'], ['ed', 'Embargos de declaração'], ['agint', 'Agravo interno'], ['ret', 'Juízo de retratação']];
-  var FASES = [['rec', 'Recurso'], ['adm', 'Admissibilidade'], ['mp', 'Ministério Público'], ['pre', 'Preliminares e prejudiciais'], ['mer', 'Mérito'], ['enc', 'Encaminhamento']];
+  var FASES = [['rec', 'Recurso'], ['adm', 'Admissibilidade'], ['mp', 'Ministério Público'], ['pre', 'Preliminares e prejudiciais'], ['gab', 'Mídias e etiquetas'], ['mer', 'Mérito'], ['enc', 'Encaminhamento']];
   var OK_PREPARO = /^(comprovado|justica gratuita|isento|assistencia da dpu|nao se aplica)/, AL_PREPARO = /^(recolhido sem comprovante|recolhido a menor|recolhido apos|nao recolhido)/;
 
   /* passos: tipos ('*' = todos), campos [seção, chave, rótulo?, condição?], estado(ctx) e dica curta do Padrão Muta */
@@ -95,7 +95,7 @@
     { id: 'materia', f: 'mer', t: 'Matéria e questões em discussão', tipos: '*',
       campos: [['triagem', 'Tema', 'Tipo de caso'], ['triagem', 'Especificidades']],
       questoes: true,
-      mais: [['triagem', 'Síntese Fática', 'Síntese fática'], ['triagem', 'COMPLEXIDADE', 'Complexidade'], ['triagem', 'Tipo de Voto', 'Tipo de voto'], ['triagem', 'Mídias'], ['triagem', 'Seleção Prévia', 'Seleção prévia']],
+      mais: [['triagem', 'Síntese Fática', 'Síntese fática'], ['triagem', 'COMPLEXIDADE', 'Complexidade'], ['triagem', 'Tipo de Voto', 'Tipo de voto']],
       estado: function (c) { return c.v('triagem', 'Tema') && c.v('triagem', 'Alegações') ? 'ok' : 'pend'; },
       dica: 'Uma frase por questão, na ordem em que o voto vai enfrentá-las.' },
     { id: 'destino', f: 'enc', t: 'Destino do julgamento', tipos: '*',
@@ -105,8 +105,9 @@
       mais: [['producao', 'Destino - Outro', 'Outro destino'], ['triagem', 'Destino - Confirmado em', 'Confirmado em'], ['triagem', 'Destino - Confirmado por', 'Confirmado por']],
       estado: function (c) { var d = c.v('producao', 'Destino'), s = N(c.v('producao', 'Destino - Situação')); if (!d) return 'pend'; return s === 'pendente' ? 'al' : s ? 'ok' : 'pend'; },
       dica: function (c) { return c.tem('ms') ? 'Mandado de segurança: sem honorários (Súmula 512/STF; artigo 25 da Lei 12.016/2009).' : 'Monocrática: indicar o inciso do artigo 932 do CPC e o precedente que autoriza.'; } },
-    { id: 'etiquetas', f: 'enc', t: 'Etiquetas', tipos: '*', extra: 'etiquetas',
-      campos: [['triagem', 'Etiquetas', 'Etiquetas do gabinete']],
+    /* 0.59: mídias e etiquetas (do gabinete e sugeridas) no Roteiro de triagem; gravam na ficha como antes */
+    { id: 'etiquetas', f: 'gab', t: 'Mídias e etiquetas', tipos: '*', extra: 'etiquetas',
+      campos: [['triagem', 'Etiquetas', 'Etiquetas do gabinete'], ['triagem', 'Mídias'], ['triagem', 'Seleção Prévia', 'Seleção prévia']],
       estado: function (c) { return c.v('triagem', 'Etiquetas') || c.v('triagem', 'Etiquetas sugeridas') ? 'ok' : 'pend'; },
       dica: 'As sugeridas seguem as regras do Caput; "Copiar" leva ao PJe.' }
   ];

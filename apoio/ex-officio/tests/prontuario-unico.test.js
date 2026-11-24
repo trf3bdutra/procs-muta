@@ -76,3 +76,10 @@ test('HERO18810 0.58: aba Pauta e Controle como ícone na faixa do topo', () => 
   assert.match(pa, /ses\.api\('\/api\/sessoes'\)/); assert.match(pa, /'\/api\/pauta\?data=' \+ P\.data/); assert.match(pa, /'\/api\/sessoes\?pedidos=1'/);
   assert.match(g, /data-tu-ctl/); assert.doesNotMatch(x, /tab\('so', 'Sustentação'/);
 });
+
+test('HERO18810 0.59: admissibilidade, MPF, mídias e etiquetas só no Roteiro de triagem', () => {
+  const fs = require('node:fs'), R = f => fs.readFileSync(path.resolve(__dirname, '../../../extensao', f), 'utf8');
+  const r = R('roteiro.js'), g = R('gabinete.js');
+  assert.match(r, /\['gab', 'Mídias e etiquetas'\]/); assert.match(r, /id: 'etiquetas', f: 'gab'/);
+  assert.match(g, /!GRUPOS_TRIAGEM\[g\.grupo\] && ccGrupoVale\(g, T\)/); assert.match(g, /ja\[id\] \|\| TRI_EXTRA\[c\.chave\]/);
+});
