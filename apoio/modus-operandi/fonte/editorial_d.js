@@ -374,7 +374,7 @@ function dkResumo(t){if(XP.fora[t.k])return 'retirado';if(t.opc&&!XP.abre[t.k])r
 function dkOutros(pt,sel){var L=pt.tr.filter(function(t){return !(t.n==='Sentença'&&sentNaAbertura(pt.tr,XP.alt));});if(L.length<2)return '';
   return '<div class="dout2"><div class="cfl">'+(sel?'Outros blocos':'Blocos da parte')+'</div><ol>'+L.map(function(t,i){if(sel&&t.k===sel.k)return '';var fo=XP.fora[t.k],op=t.opc&&!XP.abre[t.k];return '<li><button type="button" data-'+(fo?'xvolta':op?'xabre':'dsel')+'="'+esc(t.k)+'"><span class="n">'+('0'+(i+1)).slice(-2)+'</span><b>'+esc(t.n)+'</b><small>'+esc(dkResumo(t))+' ›</small></button></li>';}).join('')+'</ol></div>';}
 function dkHead(){var h=$('#v-edit .pg-h');if(!h)return;var ed=XS.ed||'pecas',t=$('#v-edit .pg-t h1'),k=$('#v-edit .pg-t .dkk');if(!k&&t){k=document.createElement('p');k.className='dkk';t.parentNode.insertBefore(k,t);}
-  var I={pecas:['PADRÃO · MINUTÁRIO','Minutário','Estrutura do pronunciamento conforme o tipo de julgamento. Ao abrir um processo, os campos recebem os dados disponíveis da ficha e da pauta. Na ausência de modelo específico, a Minuta-Matriz sustenta a redação; modelos temáticos são oferecidos separadamente.','Parte das funcionalidades ainda está em construção e teste. Já disponível: estrutura de ementa, relatório, voto e proclamação, por pronunciamento, classe, julgamento e resultado; texto da folha pela Minuta-Matriz ou por um modelo do gabinete, matrizes incluídas; processo aberto pela ficha ou pela pauta, com conformidade e prompt da LIA; versões, trechos opcionais e parágrafos do banco; regras e conferência da peça; cópia com a formatação do PJe, .docx e PDF.'],mod:['PADRÃO · MODELOS','Modelos','Modelos de acórdão, decisão e despacho extraídos de votos e decisões do Relator, para consulta.','Os modelos ainda não são regra do gabinete: a curadoria está em andamento e a maior parte deles não foi revisada como padrão. Já disponível: busca e filtros por tipo, julgamento, assunto e classe; leitura da peça completa, com ficha e referências rápidas; preenchimento das variáveis pelo número do processo; cópia da peça ou do esqueleto, .docx e PDF.'],dir:['DIRETRIZES DO GABINETE','Diretrizes','Entradas rápidas do que o Desembargador fixar e o manual de redação do gabinete: frase, citação, vocabulário, grafias, formatação e estrutura das peças.']}[ed]||['','Editorial',''];
+  var I={pecas:['PADRÃO · MINUTÁRIO','Minutário','Estrutura do pronunciamento conforme o tipo de julgamento. Ao abrir um processo, os campos recebem os dados disponíveis da ficha e da pauta. Na ausência de modelo específico, a Minuta-Matriz sustenta a redação; modelos temáticos são oferecidos separadamente.','Parte das funcionalidades ainda está em construção e teste. Já disponível: estrutura de ementa, relatório, voto e proclamação, por pronunciamento, classe, julgamento e resultado; texto da folha pela Minuta-Matriz ou por um modelo do gabinete, matrizes incluídas; processo aberto pela ficha ou pela pauta, com conformidade e prompt da LIA; versões, trechos opcionais e parágrafos do banco; regras e conferência da peça; cópia com a formatação do PJe, .docx e PDF.'],par:['PADRÃO · PARÁGRAFOS','Parágrafos-padrão','Trechos prontos por matéria e situação, com campos que se preenchem com o caso. Busque, abra e copie para a minuta.',''],mod:['PADRÃO · MODELOS','Modelos','Modelos de acórdão, decisão e despacho extraídos de votos e decisões do Relator, para consulta.','Os modelos ainda não são regra do gabinete: a curadoria está em andamento e a maior parte deles não foi revisada como padrão. Já disponível: busca e filtros por tipo, julgamento, assunto e classe; leitura da peça completa, com ficha e referências rápidas; preenchimento das variáveis pelo número do processo; cópia da peça ou do esqueleto, .docx e PDF.'],dir:['DIRETRIZES DO GABINETE','Diretrizes','Entradas rápidas do que o Desembargador fixar e o manual de redação do gabinete: frase, citação, vocabulário, grafias, formatação e estrutura das peças.']}[ed]||['','Editorial',''];
   if(k)k.textContent=I[0];if(t)t.textContent=I[1];var d=$('#x-desc');if(d)d.textContent=I[2];var dv=$('#x-dev');if(!dv&&d){dv=document.createElement('p');dv.id='x-dev';d.parentNode.insertBefore(dv,d.nextSibling);}if(dv){dv.hidden=!I[3];dv.innerHTML=I[3]?'<b>Em desenvolvimento.</b> '+esc(I[3]):'';}
   var sb=$('#x-sub');if(sb&&!sb.querySelector('.dgp')){var gp=document.createElement('span');gp.className='dgp';gp.setAttribute('role','group');gp.setAttribute('aria-label','Padrão: versões alternativas');gp.innerHTML='<span class="dgl" data-n="01">Padrão</span><span class="dgs"></span>';
     sb.insertBefore(gp,sb.firstChild);['pecas','mod'].forEach(function(k){var b=sb.querySelector('button[data-s="'+k+'"]');if(b)gp.querySelector('.dgs').appendChild(b);});}
@@ -511,7 +511,6 @@ document.addEventListener('input',function(e){var f=e.target.closest&&e.target.c
 /* ===== Editorial: Minuta-Matriz (com o banco de trechos ao fim) e Modelos ===== */
 function xRender(){
   if(!ED){$('#x-main').innerHTML='<p class="empty">Dados do editorial indisponíveis.</p>';return;}
-  var irBanco=XS.ed==='par';if(irBanco)XS.ed='pecas';
   var ed=XS.ed||'pecas';$$('#x-sub button').forEach(function(b){b.setAttribute('aria-selected',String(b.getAttribute('data-s')===ed));});
   var bk=$('#x-banco');
   dkVolta();
@@ -522,15 +521,16 @@ function xRender(){
     if(ED)xManual();else $('#x-man').innerHTML='<p class="empty">Dados do editorial indisponíveis.</p>';
     if(window.VDM_marcaNav)window.VDM_marcaNav();dkHead();return;}
   if(ed==='mod'){$('#x-wrap').hidden=true;if(bk)bk.hidden=true;layoutEm('#v-edit');EM.sub='mod';fecharIT();mostrar();dkHead();return;}
-  XS.sub='estrutura';$('#x-wrap').hidden=false;
   if(!bk){bk=document.createElement('section');bk.id='x-banco';bk.setAttribute('aria-label','Banco de trechos');
     bk.innerHTML='<header class="bk-h"><p class="dkk">BANCO DE TRECHOS</p><h2>Parágrafos-padrão</h2><p>Trechos prontos por matéria e situação, com campos que se preenchem com o caso. Busque, abra e copie para a minuta.</p></header>';
     $('#v-edit').appendChild(bk);}
-  bk.hidden=false;var L=$('#e-layout');if(L&&L.parentNode!==bk)bk.appendChild(L);
-  EM.sub='par';fecharIT();mostrar();
+  var L=$('#e-layout');if(L&&L.parentNode!==bk)bk.appendChild(L);
+  /* Parágrafos: modo do Minutário, como Modelos; o banco ocupa a página e a folha sai */
+  if(ed==='par'){$('#x-wrap').hidden=true;bk.hidden=false;EM.sub='par';fecharIT();mostrar();dkHead();
+    if(window.VDM_marcaNav)window.VDM_marcaNav();if(window.VDM_cnSync)setTimeout(window.VDM_cnSync,0);return;}
+  XS.sub='estrutura';$('#x-wrap').hidden=false;bk.hidden=true;
   if(window.VDM_marcaNav)window.VDM_marcaNav();
   xPagina();
-  if(irBanco)setTimeout(function(){bk.scrollIntoView({behavior:'smooth',block:'start'});},60);
   if(window.VDM_cnSync)setTimeout(window.VDM_cnSync,0);
 }
 
@@ -607,13 +607,13 @@ try{new MutationObserver(function(){var f=document.getElementById('dir-fr');if(f
 /* ===== Navegação única do Compendium, dentro da barra do cabeçalho (como as abas do Ex Officio): sem "Editorial";
    abas comuns (Ementário · Padrão: Minuta-Matriz e Modelos · Diretrizes; a Consulta saiu da navegação e só abre pelo botão do cartão no Ex Officio) e abas do acesso avançado (Enunciados · Repertório · Enciclopédia) ===== */
 (function(){var top=document.querySelector('header.top');if(!top)return;
-  var IT=[['ement','Ementário'],['mod','Modelos'],['dir','Breviário'],['pecas','Minutário'],['||'],['temas','Enunciados','Acesso avançado'],['rep','Repertório'],['enc','Enciclopédia']];
+  var IT=[['ement','Ementário'],['dir','Breviário'],['pecas','Minutário'],['||'],['temas','Enunciados','Acesso avançado'],['rep','Repertório'],['enc','Enciclopédia']];
   var bar=document.createElement('nav');bar.id='cmp-nav';bar.setAttribute('aria-label','Seções do Compendium');
   var h='<div class="cn-in">';IT.forEach(function(x){if(x[0]==='|'){h+='<span class="cn-sep" aria-hidden="true"></span>';return;}if(x[0]==='||'){h+='<span class="cn-sep av" data-av hidden aria-hidden="true"></span>';return;}
     var av=['temas','rep','enc'].indexOf(x[0])>=0;h+=(x[2]?'<span class="cn-g'+(av?' av':'')+'"'+(av?' data-av hidden':'')+'>'+x[2]+'</span>':'')+'<button type="button" class="cn-b" data-cn="'+x[0]+'"'+(av?' data-av hidden':'')+' aria-current="false">'+x[1]+'</button>';});
   bar.innerHTML=h+'</div>';var sp=top.querySelector('.eqsp');if(sp)top.insertBefore(bar,sp);else top.parentNode.insertBefore(bar,top.nextSibling);document.body.classList.add(sp?'cmp-nav-dentro':'cmp-nav-fora');
   function aba(v){var t=document.querySelector('.tab[data-v="'+v+'"]');if(t)t.click();}
-  function atual(){var vs=function(id){var e=document.getElementById(id);return e&&!e.hidden;};if(vs('v-ement'))return 'ement';if(vs('v-edit'))return XS.ed==='par'?'pecas':(XS.ed||'pecas');
+  function atual(){var vs=function(id){var e=document.getElementById(id);return e&&!e.hidden;};if(vs('v-ement'))return 'ement';if(vs('v-edit'))return ['par','mod','pecas'].indexOf(XS.ed||'pecas')>=0?'pecas':XS.ed;
     var r=['temas','rep','enc'].filter(function(v){return vs('v-'+v);})[0];return r||'';}
   function sync(){var a=atual();$$('.cn-b',bar).forEach(function(b){b.setAttribute('aria-current',String(b.getAttribute('data-cn')===a));});}
   bar.addEventListener('click',function(e){var b=e.target.closest('.cn-b');if(!b)return;var v=b.getAttribute('data-cn');
@@ -869,3 +869,7 @@ function dkPilula(){var ex=$('#x-top .dexp'),tb=$('#x-main .dtabs');if(!ex||!tb)
   $$('button',ex).forEach(function(b){for(var a in DPILL)if(b.hasAttribute(a)&&!b.querySelector('.pa-tx')&&a!=='data-xlimpar'){var s=document.createElement('span');s.className='pa-tx';s.textContent=DPILL[a];b.appendChild(s);}pl.appendChild(b);});
   var w=document.createElement('div');w.className='dpillw';w.appendChild(pl);tb.appendChild(w);ex.remove();}
 (function(){var _xp=xPagina;xPagina=function(){var r=_xp.apply(this,arguments);dkJunta();dkPilula();return r;};})();
+
+/* Minutário com três modos (Minutário · Modelos · Parágrafos), trocados pelo seletor da abertura, como o Relator/Turma do Ementário */
+window.VDM_minAtual=function(){return XS.ed||'pecas';};
+window.VDM_minModo=function(v){if(['pecas','mod','par'].indexOf(v)<0)return;irEditorial(v);window.scrollTo(0,0);};

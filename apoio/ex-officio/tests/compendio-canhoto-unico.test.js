@@ -41,3 +41,13 @@ test('matrizes estão dentro de Modelos: sem "Matriz modular" no painel do caso 
   assert.match(js, /<optgroup label="Matrizes"><option value="m28"/);
   assert.match(js, /if\(t\.value==='m28'\)\{dkFonte\('m28'\);return;\}/);
 });
+
+test('Modelos e Parágrafos são modos do Minutário, trocados pelo seletor da abertura', () => {
+  const js = ler('fonte/editorial_d.js'), pp = ler('fonte/padrao_paginas.js');
+  assert.doesNotMatch(js, /\['mod','Modelos'\],\['dir'/, 'Modelos ainda na navegação do topo');
+  assert.match(js, /var IT=\[\['ement','Ementário'\],/);
+  assert.match(js, /if\(ed==='par'\)\{\$\('#x-wrap'\)\.hidden=true;bk\.hidden=false;/);
+  assert.match(js, /window\.VDM_minModo=function\(v\)/);
+  assert.match(pp, /function modoSel\(\)/);
+  assert.match(pp, /\['pecas','Minutário'[^\]]*\],\['mod','Modelos'[^\]]*\],\['par','Parágrafos'/);
+});

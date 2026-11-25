@@ -105,3 +105,6 @@ body #v-ement .pg-h.pa-ab,body #v-edit .pg-h.pa-ab,body .pg-h.pa-ab{display:grid
 .pg-h.pa-ab .pa-fonte a:hover{color:var(--pa-deep);background:var(--pa-och-bg)}
 .pg-h.pa-ab .pa-fonte a[aria-current="page"]{background:var(--pa-deep);color:var(--panel,#fff);cursor:default}
 .pg-h.pa-ab .pa-fonte a:focus-visible{outline:2px solid var(--pa-deep);outline-offset:2px}
+/* seletor de modo do Minutário: mesmo desenho do Relator/Turma; no Minutário fica acima do quadro "Já disponível" */
+.pg-h.pa-ab .pa-modo{align-self:flex-end}
+#x-banco>.bk-h{display:none}
