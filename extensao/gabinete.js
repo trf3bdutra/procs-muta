@@ -246,11 +246,23 @@ function etapas() {
   var n = 0; L.forEach(function (x, i) { if (x.ok) n = i + 1; });
   return { L: L, n: n, mono: mono };
 }
-function pautado() {
-  var P = (G.op || {}).pauta || {}, SI = window.MutaSincronia && window.MutaSincronia.situacao ? window.MutaSincronia.situacao() : null;
-  var C = SI && SI.cnj && SI.cnj.replace(/\D/g, '') === S(G.cnj).replace(/\D/g, '') ? SI.cartoes || [] : [];
-  return C.length > 0 || (Array.isArray(P.sessoes) && P.sessoes.length > 0) || !!S(P['Sessão original']) || !!S(P['Item (Pauta de Julgamento)']);
+function pautaFluxo(P,C,hoje){
+  P=P||{};C=C||[];var rows={},dia=function(v){v=S(v);var m=/^(\d{2})\/(\d{2})\/(\d{4})/.exec(v);return m?m[3]+'-'+m[2]+'-'+m[1]:/^\d{4}-\d{2}-\d{2}/.test(v)?v.slice(0,10):'';};
+  function put(d,it,r){d=dia(d);if(!d||!S(it))return;var x=rows[d]||(rows[d]={sessao:d,item:S(it),status:''});if(it)x.item=S(it);if(r)x.status=S(r);}
+  (Array.isArray(P.sessoes)?P.sessoes:[]).forEach(function(x){if(x)put(x.sessao,x.item,x.resultado);});
+  put(P['Sessão original'],P['Item (Pauta de Julgamento)'],P['Status de Julgamento']);
+  C.forEach(function(x){if(x)put(x.sessao,x.item,x.resultado||x.status);});
+  var L=Object.values(rows).sort(function(a,b){return b.sessao.localeCompare(a.sessao);}),cur=L.find(function(x){return !/retirad|adiad|julgad|provimento|prejudic|nao conhec|acolhid|rejeitad|homolog/i.test(N(x.status));}),last=L[0],alvo=dia(P['Nova sessão de destino']);
+  if(last&&cur&&last.sessao>cur.sessao)cur=null;
+  var estado=cur?'oficial':last&&/adiad/.test(N(last.status))?'adiado':last&&/retirad/.test(N(last.status))?'retirado':last?'historico':'previa';
+  return {estado:estado,atual:cur||null,ultima:last||null,alvo:alvo,lista:L};
 }
+function pautaAtualFluxo(){
+ var P=Object.assign({},(G.op||{}).pauta||{});['Sessão original','Item (Pauta de Julgamento)','Status de Julgamento','Nova sessão de destino'].forEach(function(k){var v=V('pauta',k);if(v!=null&&S(v))P[k]=v;});
+ var SI=window.MutaSincronia&&window.MutaSincronia.situacao?window.MutaSincronia.situacao():null,C=SI&&dg(SI.cnj)===dg(G.cnj)?SI.cartoes||[]:[];
+ return pautaFluxo(P,C);
+}
+function pautado(){return pautaAtualFluxo().estado==='oficial';}
 function pilulas(E) {
   var d = function (k) { return S(V('producao', k)); }, nome = function (k) { return d(k).split(/\s*[\/,;]\s*/).map(function (x) { return x.split(/\s+/)[0]; }).filter(Boolean).join('/'); };
   var idx = function (ic) { for (var i = 0; i < E.L.length; i++) if (E.L[i].ic === ic) return i; return -1; };
@@ -1177,7 +1189,7 @@ function heroOrganizarProntuario(){
   body.querySelectorAll('.pm-enc,.pv-acomp-sit,.pv-followup,.pm-sitj').forEach(function(x){x.remove();});
   var destinoAtual=destGrav(),destRow=el('label','gf'),destSel=el('select'),destTop=el('div','hero-dest-top');
   destRow.append(el('span','gl','Destino final'));destSel.dataset.fk='producao.Destino';[['','A definir'],['Sessão','Colegiado'],['Monocrática','Relator'],['Outro destino','Outro destino final']].forEach(function(x){var o=el('option','',x[1]);o.value=x[0];destSel.append(o);});destSel.value=destinoAtual;destSel.disabled=!!(window.MUTA_WEB&&window.MUTA_WEB.leitura);destRow.append(destSel);destTop.append(destRow);html(destTop,situacaoHtml());encFields.append(destTop);
-  var enquad=el('div','gf w hero-enq-label');enquad.append(el('span','gl','Enquadramento'),el('span','ro',destinoAtual==='Sessão'?'Seleção prévia':destinoAtual==='Monocrática'?'Hipóteses de monocrática':destinoAtual==='Outro destino'?'Outro destino final':'A definir'));encFields.append(enquad);
+  var fluxoP=pautaAtualFluxo();var enquad=el('div','gf w hero-enq-label');enquad.append(el('span','gl','Enquadramento'),el('span','ro',destinoAtual==='Sessão'?(fluxoP.estado==='oficial'?'Pauta oficial':fluxoP.estado==='adiado'?'Adiado · aguardando nova inclusão':fluxoP.estado==='retirado'?'Retirado · reavaliar seleção':fluxoP.estado==='historico'?'Reavaliar destino após julgamento':'Seleção prévia'):destinoAtual==='Monocrática'?'Hipóteses de monocrática':destinoAtual==='Outro destino'?'Outro destino final':'A definir'));encFields.append(enquad);
   var prop=el('details','gg hero-proposta-julg gf w'),propSum=el('summary'),propTitle=el('h4','','Proposta de julgamento'),propBody=el('div','gr'),propVal=S(V('triagem','Proposta de julgamento')),propHist=S(V('triagem','Registro - Proposta'));
   propSum.append(propTitle);if(propVal)propSum.append(el('span','gn','Registrada'));prop.append(propSum,propBody);
   prop.open=heroTopo.proposta!==undefined?!!heroTopo.proposta:false;
@@ -1188,22 +1200,24 @@ function heroOrganizarProntuario(){
 
   if(destinoAtual==='Outro destino'){html(encFields,campoRot('producao','Destino - Outro','Especificar destino'));html(encFields,campoRot('triagem','Destino - Outro Nota','Nota de enquadramento'));}
   if(destinoAtual==='Sessão'){
-    var sp=el('label','gf'),spSel=el('select');sp.append(el('span','gl','Seleção prévia'));spSel.dataset.fk='triagem.Seleção Prévia';spSel.setAttribute('aria-label','Seleção prévia');
-    [['','Não selecionado'],['SELECIONADO PREVIAMENTE','Selecionado previamente']].forEach(function(x){var op=el('option','',x[1]);op.value=x[0];spSel.append(op);});
-    spSel.value=S(V('triagem','Seleção Prévia'));spSel.disabled=!!(window.MUTA_WEB&&window.MUTA_WEB.leitura);sp.append(spSel);encFields.append(sp);
-    html(encFields,campoRot('pauta','Nova sessão de destino',spSel.value==='SELECIONADO PREVIAMENTE'?'Sessão da seleção prévia (vazio = banco de reserva)':'Sessão provável'));html(encFields,campoRot('triagem','Seleção Prévia - Nota','Nota de enquadramento'));
-  }
-  /* Pauta do processo: os mesmos campos da ficha, sem depender da aba Pauta. */
-  var pautaOficial=pautado(),Pp=(G.op||{}).pauta||{},grupoPauta=grupoModelo('Pauta e julgamento');
-  if(pautaOficial&&destinoAtual==='Sessão'){
-    encFields.querySelectorAll('[data-fk="triagem.Seleção Prévia"],[data-fk="pauta.Nova sessão de destino"]').forEach(function(x){var r=x.closest('.gf');if(r)r.remove();});
-    var resumoP=el('div','hero-pauta-resumo gf w');
-    resumoP.append(el('h4','pm-mer-h','Pauta de julgamento'));
-    var resumoL=el('div','gr');
-    [['Sessão original','Sessão'],['Item (Pauta de Julgamento)','Item']].forEach(function(x){var v=S(V('pauta',x[0]));if(v){var r=el('div','gf');r.append(el('span','gl',x[1]),el('span','ro',fmtV(v)));resumoL.append(r);}});
-    resumoP.append(resumoL);
-    ['Status de Julgamento','Nova sessão de destino','Motivo da remarcação','JULGAMENTO'].forEach(function(k){html(resumoP,campoRot('pauta',k));});
-    encFields.append(resumoP);
+    var pf=fluxoP,oficial=pf.estado==='oficial',ultimo=pf.atual||pf.ultima;
+    function pLinha(label,value){var r=el('div','gf');r.append(el('span','gl',label),el('span','ro',value||'—'));return r;}
+    function dataPlano(label){var r=el('label','gf'),v=el('input');v.type='date';v.dataset.fk='pauta.Nova sessão de destino';v.value=pf.alvo||'';var c=campoModelo('pauta','Nova sessão de destino');v.disabled=!c||!editavel(c)||!!(window.MUTA_WEB&&window.MUTA_WEB.leitura);r.append(el('span','gl',label),v);return r;}
+    if(!oficial){
+      var sp=el('label','gf'),spSel=el('select');sp.append(el('span','gl','Seleção prévia'));spSel.dataset.fk='triagem.Seleção Prévia';
+      [['','Não selecionado'],['SELECIONADO PREVIAMENTE','Selecionado previamente']].forEach(function(x){var o=el('option','',x[1]);o.value=x[0];spSel.append(o);});
+      spSel.value=S(V('triagem','Seleção Prévia'));spSel.disabled=!!(window.MUTA_WEB&&window.MUTA_WEB.leitura);sp.append(spSel);encFields.append(sp);
+      if(spSel.value==='SELECIONADO PREVIAMENTE'||pf.estado==='adiado')encFields.append(dataPlano(pf.estado==='adiado'?'Sessão prevista para remarcação':'Sessão pretendida (vazio = banco de reserva)'));
+      html(encFields,campoRot('triagem','Seleção Prévia - Nota','Nota de enquadramento'));
+      if(ultimo)encFields.append(pLinha('Última pauta',brD(ultimo.sessao)+' · item '+ultimo.item+' · '+(ultimo.status||'Sem resultado registrado')));
+      if(pf.estado==='adiado'||pf.estado==='retirado')html(encFields,campoRot('pauta','Motivo da remarcação'));
+    }else{
+      var resumoP=el('div','hero-pauta-resumo gf w'),resumoL=el('div','gr');resumoP.append(el('h4','pm-mer-h','Pauta oficial'),resumoL);
+      resumoL.append(pLinha('Sessão',brD(ultimo.sessao)),pLinha('Item',ultimo.item));
+      html(resumoP,campoRot('pauta','Status de Julgamento'));
+      if(/adiad|retirad/.test(N(V('pauta','Status de Julgamento')))){resumoP.append(dataPlano('Sessão prevista para remarcação'));html(resumoP,campoRot('pauta','Motivo da remarcação'));}
+      encFields.append(resumoP);
+    }
   }
   /* Solicitações: bloco único anterior ao encaminhamento, inclusive sem pauta oficial. */
   if(N(destinoAtual)==='monocratica'){
