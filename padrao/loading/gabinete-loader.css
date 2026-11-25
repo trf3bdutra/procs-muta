@@ -162,3 +162,7 @@
 #am-welcome .cmt-entry-apps img{display:block;width:48px;height:48px;object-fit:contain;background:none;border:0;margin:0;box-shadow:none}
 @media(max-width:800px){#am-welcome .cmt-entry-apps ul{grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}#am-welcome .cmt-entry-apps li{font-size:11px}#am-welcome .cmt-entry-apps img{width:40px;height:40px}}
 @media(max-width:360px){#am-welcome .cmt-entry-apps ul{grid-template-columns:repeat(3,minmax(0,1fr))}}
+
+/* Ícone próprio do aplicativo, com a mesma arte da aba do navegador. */
+header .cmt-app-header-icon{display:block!important;width:36px!important;height:36px!important;min-width:36px;flex:0 0 36px;object-fit:contain;object-position:center;background:none!important;border:0!important;border-radius:0!important;box-shadow:none!important;filter:none;mask:none!important;clip-path:none!important;padding:0!important;margin:0;align-self:center}
+@media(max-width:600px){header .cmt-app-header-icon{width:30px!important;height:30px!important;min-width:30px;flex-basis:30px}}

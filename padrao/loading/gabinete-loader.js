@@ -67,7 +67,21 @@ function afterLogin(name){
 }
 W.GabineteLoader.afterLogin=afterLogin;
 
-function bootAll(){boot();bindLogin();bindAmicus();D.querySelectorAll(".load").forEach(function(el){if(el.dataset.cmtBrandReady||el.children.length||!/^\s*(?:Carregando|Lendo|Preparando|Consultando|Buscando|Sincronizando|Aguarde)/i.test(el.textContent))return;el.dataset.cmtBrandReady="1";var img=D.createElement("img");img.className="cmtl-local-brand";img.src="/padrao/loading/estrela.svg?v=20261125e";img.alt="";el.prepend(img);});}
-function start(){bootAll();var pending=false;new MutationObserver(function(records){if(pending||!records.some(function(r){return Array.prototype.some.call(r.addedNodes,function(n){return n.nodeType===1&&(n.matches("[data-cmt-loader],.load,#en-form")||n.querySelector("[data-cmt-loader],.load,#en-form"));});}))return;pending=true;requestAnimationFrame(function(){pending=false;bootAll();});}).observe(D.body,{childList:true,subtree:true});}
+
+/* Reutiliza exatamente o favicon instalado na página, apenas no cabeçalho principal. */
+function bindHeaderIcon(){
+ var link=D.querySelector('head link[rel="icon"][href*="/padrao/favicon/"]');
+ if(!link)return;
+ var selectors=['header.amicus-shell .amicus-brand > svg','header.nx .nx1 > a.br > i.star','header#top #marca > i.star','header.top.nx .brand.tw > i.star','header.lx-nx .lx-nx1 > .star'];
+ selectors.forEach(function(selector){
+  D.querySelectorAll(selector).forEach(function(old){
+   if(old.closest('.amicus-legacy-brand'))return;
+   var img=D.createElement('img');img.className='cmt-app-header-icon';img.src=link.href;img.alt='';img.width=36;img.height=36;img.setAttribute('aria-hidden','true');old.replaceWith(img);
+  });
+ });
+}
+
+function bootAll(){bindHeaderIcon();boot();bindLogin();bindAmicus();D.querySelectorAll(".load").forEach(function(el){if(el.dataset.cmtBrandReady||el.children.length||!/^\s*(?:Carregando|Lendo|Preparando|Consultando|Buscando|Sincronizando|Aguarde)/i.test(el.textContent))return;el.dataset.cmtBrandReady="1";var img=D.createElement("img");img.className="cmtl-local-brand";img.src="/padrao/loading/estrela.svg?v=20261125e";img.alt="";el.prepend(img);});}
+function start(){bootAll();var pending=false;new MutationObserver(function(records){if(pending||!records.some(function(r){return Array.prototype.some.call(r.addedNodes,function(n){return n.nodeType===1&&(n.matches("[data-cmt-loader],.load,#en-form,.amicus-brand,header.nx,header#top,header.lx-nx,header.top.nx")||n.querySelector("[data-cmt-loader],.load,#en-form,.amicus-brand,header.nx,header#top,header.lx-nx,header.top.nx"));});}))return;pending=true;requestAnimationFrame(function(){pending=false;bootAll();});}).observe(D.body,{childList:true,subtree:true});}
 if(D.readyState==="loading")D.addEventListener("DOMContentLoaded",start);else start();
 })(window,document);
