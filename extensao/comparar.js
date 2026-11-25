@@ -45,11 +45,10 @@ function eh2886() {
   var GB = window.MutaGabinete, v = function (sec, ch) { try { return GB && GB.V ? String(GB.V(sec, ch) || '') : ''; } catch (e) { return ''; } };
   var f = function (k) { try { return GB && GB.F ? String(GB.F(k) || '') : ''; } catch (e) { return ''; } };
   var t = [f('Assunto'), f('Etiquetas Originais'), f('Processo de referência'), v('triagem', 'Registro - Lote'), v('triagem', 'Tema'), v('triagem', 'Etiquetas'), v('producao', 'Lote'), v('producao', 'Lote - Tipo de caso')].join(' ');
-  var ed = ED && ED.estado ? String((ED.estado() || {}).texto || '').slice(0, 20000) : '';
-  return /28[,.]86|2886|0005019-15\.1997/.test(t + ' ' + ed);
+  return /28[,.]86|2886|0005019-15\.1997/.test(t);
 }
 /* 0.45 (pedido do gestor): Comparar só com modelos, precedentes, texto colado e 28,86%; a minuta-matriz foi para a Conformidade; CORTEX, triagem e parágrafos-padrão saíram da lista (o código fica) */
-var FORA_CMP = { matriz: 1, lote: 1, tri: 1, par: 1 };
+var FORA_CMP = { lote: 1, tri: 1, par: 1 };
 function fontes() { var ok = eh2886(); if (FORA_CMP[C.fonte] || (!ok && C.fonte === 'm2886')) C.fonte = 'modelo'; return FONTES.filter(function (f) { return !FORA_CMP[f[0]] && (f[0] !== 'm2886' || ok); }); }
 function processo() {
   var k = chave();
@@ -77,7 +76,7 @@ function classeMatriz(m) { var c = N(m.classe); return /^ed/.test(c) ? 'ed' : /^
 function paragrafosEditor() {
   var E = ED.estado(), P = CX.partes(E.paragrafos || []);
   /* "Tudo": a minuta sem o cabeçalho do documento (tribunal, número, partes), quando o editor tem as partes da peça */
-  if (C.parteEd === 'tudo' || !P.achou) return (P.achou ? ['relatorio', 'voto', 'ementa', 'acordao'] : ['cabecalho']).reduce(function (a, k) { return a.concat(P[k].map(function (p) { return p.t; })); }, []);
+  if (C.parteEd === 'tudo' || !P.achou) {var L=(P.achou ? ['relatorio', 'voto', 'ementa', 'acordao'] : ['cabecalho']).reduce(function (a, k) { return a.concat(P[k].map(function (p) { return p.t; })); }, []);while(L.length&&window.MutaConformidadeMotor.cabecalhoPje(L[0]))L.shift();return L;}
   return (P[C.parteEd] || []).map(function (p) { return p.t; });
 }
 function editorHtml() {
@@ -91,7 +90,7 @@ function editorCaixa(E, n, P) {
   var hora = E.em ? new Date(E.em).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }) : '';
   var ps = (E.paragrafos || []).map(function (p) { return p.t; }).filter(Boolean);
   return '<section class="mn-ed card" data-aberto="' + (C.edAberto ? '1' : '0') + '">' +
-    '<div class="mn-ed-h"><button type="button" class="mn-tg" data-c="edtg" aria-expanded="' + C.edAberto + '"><b>Texto do editor</b><span class="muted">' + (E.lendo ? 'lendo…' : E.texto ? esc(E.fonte || 'editor') + ' · ' + n.toLocaleString('pt-BR') + ' palavras' + (hora ? ' · ' + hora : '') : 'ainda não lido') + '</span></button>' +
+    '<div class="mn-ed-h"><button type="button" class="mn-tg" data-c="edtg" aria-expanded="' + C.edAberto + '"><b>Texto do editor</b><span class="muted">' + (E.lendo ? 'lendo…' : E.texto ? esc(E.fonte || 'editor') + (hora ? ' · ' + hora : '') : 'ainda não lido') + '</span></button>' +
     /* 0.47: numa linha só — título, parte (só com texto lido) e o botão; o erro em uma linha, com o resto na dica */
     '<span class="sp"></span>' + (E.texto ? '<select class="mn-pt" data-c="parteEd" title="Parte do texto do editor a comparar" aria-label="Parte">' + PARTES.map(function (p) { var q = p[0] === 'tudo' ? 1 : (P[p[0]] || []).length; return '<option value="' + p[0] + '"' + (C.parteEd === p[0] ? ' selected' : '') + (q ? '' : ' disabled') + '>' + p[1] + '</option>'; }).join('') + '</select>' : '') +
     '<button type="button" class="btn ' + (E.texto ? 'line' : 'solid') + ' sm" data-c="ler"' + (E.lendo ? ' disabled' : '') + '>' + (E.texto && !E.colado ? 'Ler de novo' : 'Ler o editor') + '</button></div>' +
@@ -251,7 +250,7 @@ function blocosFonte(it) {
   if (!it) return [];
   var secs = it.secoes || [];
   if (C.parteFonte !== 'inteira') secs = secs.filter(function (s) { return s.t === C.parteFonte; });
-  return FT.blocos(secs);
+  return FT.blocos(secs.filter(function(s){return !/^(cabeçalho(?: institucional| processual)?|cabecalho|autuação|autuacao)$/i.test(s.t||'');}).map(function(s){var ps=(s.ps||[]).slice();if(/^(texto|inteira|documento)$/i.test(s.t||'')){while(ps.length&&window.MutaConformidadeMotor.cabecalhoPje(ps[0]))ps.shift();}return Object.assign({},s,{ps:ps});}));
 }
 function partesFonte(it) { return (it && it.secoes || []).map(function (s) { return s.t; }).filter(function (t, i, a) { return a.indexOf(t) === i; }); }
 function resultadoHtml() {
