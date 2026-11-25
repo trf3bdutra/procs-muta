@@ -4,14 +4,16 @@
 (function(){
   if(window.ProcsMuta)return;
   var REPO={dono:'trf3bdutra',repo:'procs-muta',ramo:'main'},K='procsmuta_token',pedido=null,GRAVA=true;var fechaPedido=null;
-  var tok=(function(){try{return sessionStorage.getItem(K)||localStorage.getItem(K)||''}catch(e){return ''}})();
-  function esquecer(){tok='';try{sessionStorage.removeItem(K);localStorage.removeItem(K)}catch(e){}}
+  var OFFICE=!!(window.__ghPonte&&window.__ghPonte.office);
+  var tok=OFFICE?'':(function(){try{return sessionStorage.getItem(K)||localStorage.getItem(K)||''}catch(e){return ''}})();
+  function esquecer(){tok='';if(OFFICE)return;try{sessionStorage.removeItem(K);localStorage.removeItem(K)}catch(e){}}
   var recusado=true,aviso='';
   /* sem token guardado: a sessão da Ex Officio, se houver, abre o acesso pela ponte da Vercel (gh-ponte.js · /api/gh) */
   var pronto=(!tok&&window.__ghPonte&&window.__ghPonte.confere?window.__ghPonte.confere():Promise.resolve(false)).then(function(ok){if(ok&&!tok){tok=window.__ghPonte.SENT;recusado=false}}).catch(function(){});   /* o pedido de token não abre sozinho: só pelo botão de conexão (ou ao gravar) */
   /* pede o token uma vez; confere no GitHub antes de aceitar; "Agora não" vale para esta aba até novo pedido explícito */
   function pedir(motivo,forcar){return pronto.then(function(){return pedir0(motivo,forcar)})}
   function pedir0(motivo,forcar){
+    if(OFFICE){if(tok===window.__ghPonte.SENT)return Promise.resolve(tok);return window.__ghPonte.confere().then(function(ok){tok=ok?window.__ghPonte.SENT:'';return tok})}
     if(tok)return Promise.resolve(tok);
     if(recusado&&!forcar)return Promise.resolve('');
     if(pedido)return pedido;
@@ -85,7 +87,7 @@
     throw new Error('o procs-muta mudou durante a gravação; tente de novo');
   }
   async function definir(v,lembrar){
-    v=String(v||'').trim();if(!v)return{erro:'Informe o token.'};
+    v=String(v||'').trim();if(OFFICE&&v!==window.__ghPonte.SENT)return{erro:'Use a sessão do Office.'};if(!v)return{erro:'Informe o token.'};
     var r=null;try{r=await fetch('https://api.github.com/repos/'+REPO.dono+'/'+REPO.repo,{cache:'no-store',headers:{'Accept':'application/vnd.github+json','Authorization':'Bearer '+v,'X-GitHub-Api-Version':'2022-11-28'}})}catch(e){}
     if(!r)return{erro:'Não consegui falar com o GitHub. Confira a internet e tente de novo.'};
     if(r.status===401)return{erro:'O GitHub recusou este token: ele está errado ou expirou. Gere outro em github.com › Settings › Developer settings › Personal access tokens.'};

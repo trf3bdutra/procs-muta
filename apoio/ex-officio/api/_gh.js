@@ -42,6 +42,7 @@ module.exports = async (req, res) => {
     let u = L.quem(req), tri = null;
     const ok = !!u && L.gestor(u);
     if (u && !ok) tri = { nome: u, login: true };
+    if (!u && req.query && req.query.office === '1') return res.status(401).json({message:'Entre no Ex Officio para acessar o Cognitio.'});
     if (!u) { tri = await L.quemTriagem(req).catch(() => null); if (tri) u = 'Triagem (link) · ' + tri.nome; }
     if (!u) return res.status(401).json({ message: 'Entre com o seu nome e a sua senha da Ex Officio.' });
     if (!ok && !tri) return res.status(403).json({ message: 'Sem permissão para o acervo do gabinete (' + u + ').' });
