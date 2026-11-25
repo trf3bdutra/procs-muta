@@ -307,13 +307,6 @@ function painelOrigemCol(x){
     (x._origemEstado==='carregando'?'<p role="status">Carregando proveniência…</p>':x._origemEstado!=='ok'?'<p>Metadados de origem indisponíveis. <button class="e-mini" data-colretry>Tentar novamente</button></p>':'')+
     '<div class="pp-pg">'+rows.filter(function(z){return z[1]!==null&&z[1]!==undefined&&z[1]!=='';}).map(function(z){return '<div style="overflow-wrap:anywhere"><span>'+esc(z[0])+'</span>'+esc(z[1])+'</div>';}).join('')+'</div><p>Sem curadoria. A data do ato é extraída do documento assinado; disponibilização não equivale à data jurídica de publicação. A base não preserva o inteiro teor. Confira o original antes de citar.</p></div>';
 }
-var PP_ABAS=[['julgado','Julgado'],['correspondencias','Correspondências']];
-function ppSelecionar(box,k,focus){
-  if(!PP_ABAS.some(function(t){return t[0]===k;}))k='julgado';
-  E.detAba=k;
-  $$('[data-ppaba]',box).forEach(function(t){var on=t.dataset.ppaba===k;t.setAttribute('aria-selected',String(on));t.tabIndex=on?0:-1;if(on&&focus)t.focus({preventScroll:true});});
-  $$('[data-ppsec]',box).forEach(function(p){p.hidden=p.dataset.ppsec!==k;});
-}
 /* Metadados do julgado: etiquetas semânticas, sem duplicar a identificação do pronunciamento. */
 function ppMetadados(x,it){
   var col=!!window.EMENT_FONTE;
@@ -340,10 +333,10 @@ function ppMetadados(x,it){
     tag('Documento',estado,it?(col?'pp-excerto':'pp-inteiro'):'pp-chip-muted',col?'Conteúdo preservado na base DJEN; não equivale ao inteiro teor':'Disponibilidade do texto na base','documento')+'</div>';
 }
 function abrirIT(x){
-  if(!x)return;var mesmo=E.det===x.id,aba=mesmo?(E.detAba||'julgado'):'julgado';E.det=x.id;if(!PP_ABAS.some(function(t){return t[0]===aba;}))aba='julgado';E.detAba=aba;
+  if(!x)return;var mesmo=E.det===x.id;E.det=x.id;
   var anterior=$('#e-det'),drawer=$('#e-drb');if(!anterior||anterior.hidden)anterior=drawer;
   var processoAberto=mesmo&&!!E.detProcessoAberto;E.detProcessoAberto=processoAberto;
-  var pos=mesmo&&anterior?anterior.scrollTop:0,ppAberto=mesmo&&anterior&&!!anterior.querySelector('.pp-em:not(.cut)'),itAberto=mesmo&&anterior&&!!anterior.querySelector('[data-ppsec="julgado"] details.pp-d[open]');
+  var pos=mesmo&&anterior?anterior.scrollTop:0,ppAberto=mesmo&&anterior&&!!anterior.querySelector('.pp-em:not(.cut)'),itAberto=mesmo&&anterior&&!!anterior.querySelector('.pp-julgado details.pp-d[open]');
   if(window.EMENT_FONTE&&x.sid&&!x._origemEstado){x._origemEstado='carregando';origemCol(x).catch(function(){x._origemEstado='erro';}).then(function(){if(E.det===x.id)abrirIT(x);});}
   $$('#e-out li.e-proc.sel').forEach(function(l){l.classList.remove('sel');});var li=$('#e-out li.e-proc[data-id="'+x.id+'"]');if(li)li.classList.add('sel');
   var it=(BASE&&BASE.it&&BASE.it[x.id])||x._it;
@@ -358,7 +351,7 @@ function abrirIT(x){
   h+=ppMetadados(x,it);
   h+='<div class="pp-dt">'+(col?'Assinatura: ':'Julgado em ')+'<b>'+fmtD(x.d)+'</b>'+(col?(origem.data_disponibilizacao_djen?' · DJEN: <b>'+esc(origem.data_disponibilizacao_djen)+'</b>':''):(x.p?' · publicado em <b>'+fmtD(x.p)+'</b>':''))+' · Rel. '+esc(x.rl||(col?'não informado':'CARLOS MUTA'))+(x.gab?' · '+esc(x.gab):'')+'</div>';
   h+='<div class="e-dacts pp-process-actions" role="group" aria-label="Ações do processo"><button type="button" class="e-mini pp-process-toggle" data-dprocesso aria-controls="pp-processo-card" aria-expanded="'+processoAberto+'">Processo <span class="pp-strip-chevron" aria-hidden="true"></span></button><button type="button" class="e-mini" data-dcnj>Copiar número</button><button type="button" class="e-mini pri" data-dcit>'+ICO.cit+'Copiar citação</button><button type="button" class="e-mini" data-dem>Copiar '+(col&&x.t==='M'?'abertura':'ementa')+'</button>'+(it?'<button type="button" class="e-mini" data-dit>Copiar '+(col?'excerto':'inteiro teor')+'</button>':'')+'<button type="button" class="e-mini" data-ddocx>DOCX</button><button type="button" class="e-mini" data-dpdf>PDF</button></div>'+
-    '<div class="pp-tabs" role="tablist" aria-label="Prontuário jurisprudencial">'+PP_ABAS.map(function(t){return '<button type="button" id="pp-tab-'+t[0]+'" role="tab" data-ppaba="'+t[0]+'" aria-controls="pp-sec-'+t[0]+'" aria-selected="'+(t[0]===aba)+'" tabindex="'+(t[0]===aba?'0':'-1')+'">'+t[1]+'</button>';}).join('')+'</div></div>';
+    '</div>';
   var head=h,P={};h='';
   /* 2. tese e resultado */
   if(x.tese||x.r)h+='<div class="pp-top">'+(x.tese?'<div class="pp-card"><div class="pp-k">Tese</div><div>'+refs(x.tese)+'</div></div>':'')+(x.r?'<div class="pp-card res" style="--rc:'+corRes(x._res)+'"><div class="pp-k">Resultado</div><div>'+refs(x.r)+'</div></div>':'')+'</div>';
@@ -391,16 +384,6 @@ function abrirIT(x){
   h+='<div class="pp-interna pp-detalhamento"><div class="pp-k">Detalhamento do caso</div>'+(det?'<div class="pp-det-text">'+refs(det)+(x.tcS?' <small class="pp-sugerido">sugerido</small>':'')+'</div>':'')+(esp?'<div class="pp-det-text">'+refs(esp)+'</div>':'')+(detTags.length?'<div class="e-chipl pp-tags">'+detTags.map(function(t){return '<span>'+esc(t)+'</span>';}).join('')+'</div>':'')+(!det&&!esp&&!detTags.length?'<p class="meta">Detalhamento não registrado.</p>':'')+'</div>';
   if(x.obs)h+='<details class="pp-d"><summary>Observações do registro</summary><div class="e-box">'+esc(x.obs)+'</div></details>';
   P.processo=h+'</div>';h='';
-  /* 7. correspondentes */
-  var TG={};x.tags.forEach(function(t){TG[nz(t)]=1;});
-  var CR=E.idx.filter(function(z){return z.id!==x.id;}).map(function(z){var c=z.tags.filter(function(t){return TG[nz(t)];});var sc=(tcIgual(x,z)?3:0)+c.length+(z._ass&&z._ass===x._ass?1:0);return {z:z,c:c,sc:sc};}).filter(function(o){return o.sc>=3;}).sort(function(a,b){return b.sc-a.sc||String(b.z.d).localeCompare(String(a.z.d));});
-  if(CR.length)h+='<div class="pp-k" style="margin-top:16px">Correspondentes <small>'+CR.length+' com detalhamento do caso ou marcadores em comum</small></div><ul class="pp-rel cr">'+CR.slice(0,6).map(function(o){var z=o.z;return '<li data-pprel="'+z.id+'"><div class="l1"><span class="e-tag '+z.t+'">'+z.t+'</span><b>'+esc(z.n)+'</b><span class="meta">'+fmtD(z.d)+'</span><span class="pp-res sm" style="--rc:'+corRes(z._res)+'">'+esc(z._res)+'</span></div><div class="l2">'+(tcIgual(x,z)?'<span class="eq">'+esc(tcResto(z))+'</span>':'')+o.c.slice(0,4).map(function(t){return '<span>'+esc(t)+'</span>';}).join('')+'</div></li>';}).join('')+'</ul>';
-  /* 9. mesmo assunto no gabinete */
-  var MS=E.idx.filter(function(z){return z._ass&&z._ass===x._ass;}),outros=MS.filter(function(z){return z.id!==x.id;}).sort(function(a,b){return String(b.d).localeCompare(String(a.d));});
-  if(MS.length>1){var cr={};MS.forEach(function(z){cr[z._res]=(cr[z._res]||0)+1;});var ord=Object.keys(cr).sort(function(a,b){return cr[b]-cr[a];});
-    h+='<div class="pp-k" style="margin-top:18px">'+(col?'Mesmo assunto no Collegium':'Mesmo assunto no gabinete')+' <small>'+MS.length+' julgados</small></div><div class="pp-bar">'+ord.map(function(k){return '<i style="width:'+(100*cr[k]/MS.length)+'%;background:'+corRes(k)+'" title="'+esc(k)+': '+cr[k]+'"></i>';}).join('')+'</div><div class="pp-leg">'+ord.slice(0,4).map(function(k){return '<span><i style="background:'+corRes(k)+'"></i>'+esc(k)+' '+Math.round(100*cr[k]/MS.length)+'%</span>';}).join('')+'</div>';
-    h+='<ul class="pp-rel">'+outros.slice(0,5).map(function(z){return '<li data-pprel="'+z.id+'"><span class="e-tag '+z.t+'">'+z.t+'</span><b>'+esc(z.n)+'</b><span class="meta">'+fmtD(z.d)+'</span><span class="pp-res sm" style="--rc:'+corRes(z._res)+'">'+esc(z._res)+'</span></li>';}).join('')+'</ul>'+(outros.length>5?'<button class="pp-more" data-ppall>Ver os '+MS.length+' julgados do assunto</button>':'');}
-  P.correspondencias=h||'<p class="meta">Nenhum precedente correspondente localizado no índice atual.</p>';h='';
   /* 10. rastreabilidade */
   if(col)h+=painelOrigemCol(x);
   var R=x.rast||{};
@@ -408,9 +391,8 @@ function abrirIT(x){
   if(!window.EMENT_FONTE)h+='<div class="pp-rast"><div class="pp-k">Rastreabilidade</div><code>'+(R.it?'SHA-256 do inteiro teor: '+esc(R.it.sha)+'<br>Inteiro teor: '+esc(R.it.arq)+' · linha '+R.it.ln+'<br>':'')+'Registro: '+esc(R.arq||'precedentes/precedentes.jsonl')+' · linha '+(R.ln||'—')+' · id '+esc(x.id)+(R.idAnt?'<br>Id anterior: '+esc(R.idAnt):'')+'<br>Curadoria: '+esc(R.cur||'—')+'</code>'+(R.fonte?'<p>'+esc(R.fonte)+'</p>':'')+(R.origens&&R.origens.length?'<p>Origens: '+R.origens.map(esc).join(' · ')+'</p>':'')+'<p>A versão oficial é o documento assinado no PJe e a publicação no diário. A citação traz [VALIDAR: veículo], porque a base não registra o veículo de publicação.</p></div>';
   P.rastreabilidade=h;
   P.julgado+='<footer class="pp-footer">'+P.rastreabilidade+'</footer>';
-  h=head+'<div class="e-dbody pp-b"><section id="pp-processo-card" class="pp-processo-expand" aria-label="Dados do processo"'+(processoAberto?'':' hidden')+'>'+P.processo+'</section>'+PP_ABAS.map(function(t){return '<section class="pp-section" id="pp-sec-'+t[0]+'" data-ppsec="'+t[0]+'" role="tabpanel" aria-labelledby="pp-tab-'+t[0]+'"'+(t[0]===aba?'':' hidden')+'>'+P[t[0]]+'</section>';}).join('')+'</div>';
+  h=head+'<section id="pp-processo-card" class="pp-processo-expand" aria-label="Dados do processo"'+(processoAberto?'':' hidden')+'><div class="pp-processo-slide">'+P.processo+'</div></section><div class="e-dbody pp-b"><section class="pp-section pp-julgado" aria-label="Julgado">'+P.julgado+'</section></div>';
   var box=painel(h,true);
-  $$('[data-ppaba]',box).forEach(function(t){t.onclick=function(){ppSelecionar(box,t.dataset.ppaba);box.scrollTop=0;};t.onkeydown=function(e){var i=PP_ABAS.findIndex(function(a){return a[0]===t.dataset.ppaba;}),k=e.key;if(!['ArrowLeft','ArrowRight','Home','End'].includes(k))return;e.preventDefault();var j=k==='Home'?0:k==='End'?PP_ABAS.length-1:(i+(k==='ArrowLeft'?-1:1)+PP_ABAS.length)%PP_ABAS.length;ppSelecionar(box,PP_ABAS[j][0],true);box.scrollTop=0;};});
   box.scrollTop=pos;
   var ptoggle=box.querySelector('[data-dprocesso]'),pcard=box.querySelector('#pp-processo-card');
   ptoggle.onclick=function(){var aberto=ptoggle.getAttribute('aria-expanded')!=='true';E.detProcessoAberto=aberto;ptoggle.setAttribute('aria-expanded',String(aberto));pcard.hidden=!aberto;if(aberto)box.scrollTop=0;};
@@ -425,8 +407,6 @@ function abrirIT(x){
   box.querySelector('[data-ddocx]').onclick=function(){baixarDocx(rcPrecedente(x),true,tit,(x.c||'')+'_'+x.n);};
   box.querySelector('[data-dpdf]').onclick=function(){baixarPdf(rcPrecedente(x),true,tit,(x.c||'')+'_'+x.n);};
   var bm=box.querySelector('[data-ppm]');if(bm)bm.onclick=function(){box.querySelector('.pp-em').classList.remove('cut');bm.remove();};
-  $$('[data-pprel]',box).forEach(function(l){l.onclick=function(){var z=porId(l.getAttribute('data-pprel'));if(z)abrirIT(z);};});
-  var ba=box.querySelector('[data-ppall]');if(ba)ba.onclick=function(){setF('ass',x._ass);};
 }
 function fecharIT(){$('#e-dr').hidden=true;var d=$('#e-det');if(d&&!d.hidden){d.hidden=true;d.innerHTML='';d.parentNode.classList.remove('on');}E.det=null;$$('#e-out li.e-proc.sel').forEach(function(l){l.classList.remove('sel');});}
 $('#e-dr').addEventListener('click',function(e){if(e.target.id==='e-dr')fecharIT();});
