@@ -543,6 +543,38 @@
        "apelido": "solicitacoes_despacho"
       },
       {
+       "rotulo": "Próximo pronunciamento",
+       "chave": "Próximo pronunciamento",
+       "tipo": "lista",
+       "secao": "origem",
+       "opcoes": [
+        "Acórdão",
+        "Monocrática terminativa",
+        "Decisão de urgência",
+        "Despacho",
+        "Decisão de admissibilidade",
+        "Juízo de retratação",
+        "Homologação / extinção",
+        "Decisão interlocutória"
+       ],
+       "apelido": "proximo_pronunciamento"
+      },
+      {
+       "rotulo": "Ato a proferir",
+       "chave": "Ato a proferir",
+       "tipo": "texto-longo",
+       "secao": "origem",
+       "apelido": "ato_a_proferir"
+      },
+      {
+       "rotulo": "Mapa de próximos passos",
+       "chave": "Mapa de próximos passos",
+       "tipo": "texto-longo",
+       "secao": "origem",
+       "apelido": "mapa_proximos_passos",
+       "regra": "JSON versionado: passos, vínculos com pendências e histórico de transições."
+      },
+      {
        "rotulo": "Próxima ação",
        "chave": "Próxima ação",
        "tipo": "texto",
