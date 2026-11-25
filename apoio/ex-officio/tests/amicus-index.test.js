@@ -115,3 +115,8 @@ test('Amicus: Competência e imparcialidade num painel, com Impedimentos e suspe
  for(const x of ['class="ci-destaque"',"[['competencia','Competência da Turma'],['competencia-assuntos','Competência por assunto']]","dataset.full='competencia-imparcialidade'"])assert.ok(home.includes(x),x);
  assert.ok(!/\['impedimentos','Imparcialidade'\]/.test(home),'imparcialidade não é mais módulo solto');
 });
+
+test('Amicus: a parte da Rotina relativa à tarefa aparece no painel lateral do fluxo',()=>{
+ const home=read('apoio/amicus/index.html');
+ for(const x of ['function rotinaNoFluxo(nome)','function fasesDe(nome)','data-rot-fase','.am-op-rot-cx i.on'])assert.ok(home.includes(x),x);
+});
