@@ -3282,7 +3282,7 @@ function fichaDe(cnj,aba='Triagem'){
 async function fichaPlana(cnj) {
   const j=await cogApi('/api/pauta?ficha='+encodeURIComponent(cnj)),r=j.operacional;
   if(r&&!PEND.has(dg(cnj)))cogAtualizaFicha(r);
-  const out={};if(r)['origem','producao','triagem','controles'].forEach(k=>Object.assign(out,r[k]||{}));return out;
+  const out={};if(r)['origem','producao','triagem','controles','pauta'].forEach(k=>Object.assign(out,r[k]||{}));return out;
 }
 /* painel do processo (= prontuário de triagem desta página): ficha, caso, proposta, situação, peças e minuta, com os campos
    do prontuário editáveis ali mesmo e gravados na ficha única do processo (acervo/operacional.json) */
@@ -5456,7 +5456,7 @@ async function pfSalvar(sc,p,b){
   if(!OPC.gravarFicha){if(OPC.aviso)OPC.aviso('A gravação da ficha não está disponível nesta página.',true);return;}
   b.disabled=true;b.textContent='Gravando…';
   try{if(String(e._nota||'').trim()&&OPC.lerFicha){const atual=await OPC.lerFicha(p),base=String(atual.Observações||'').trim(),z=new Date(),st=z.toLocaleDateString('pt-BR')+' '+z.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});campos['origem.Observações']=(base?base+'\n':'')+st+' · '+String(e._nota).trim().replace(/\s*\n+\s*/g,' ');}
-    const j=await OPC.gravarFicha(p,campos),fx=FX[p]=FX[p]||{};if(j&&j.operacional)['origem','triagem','producao','controles'].forEach(k=>Object.assign(fx,j.operacional[k]||{}));else Object.keys(campos).forEach(k=>{fx[k.slice(k.indexOf('.')+1)]=campos[k]});delete ED[p];
+    const j=await OPC.gravarFicha(p,campos),fx=FX[p]=FX[p]||{};if(j&&j.operacional)['origem','triagem','producao','controles','pauta'].forEach(k=>Object.assign(fx,j.operacional[k]||{}));else Object.keys(campos).forEach(k=>{fx[k.slice(k.indexOf('.')+1)]=campos[k]});delete ED[p];
     if(OPC.aviso)OPC.aviso('Anotações gravadas na ficha do processo.');if(refazer){const y=scrollY;refazer();scrollTo(0,y)}}
   catch(er){if(OPC.aviso)OPC.aviso('Não foi possível gravar: '+((er&&er.message)||er),true);b.textContent='Salvar anotações';pfEstado(sc,p)}}
 /* eventos do prontuário no painel (uma vez por raiz); o foco volta ao campo quando o painel se redesenha */
