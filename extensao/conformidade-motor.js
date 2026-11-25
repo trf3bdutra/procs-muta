@@ -176,10 +176,11 @@ function chaves(q) { return nz(q).replace(/^\(?\d+\)?[.)\s-]*/, '').split(/[^a-z
 /* 0.42 · o cabeçalho que o PJe põe sozinho (brasão, tribunal, endereço, classe e número, relator, partes e advogados,
    "NÃO ASSINÁVEL") não é texto da minuta: fica fora de todas as conferências */
 var CAB_PJE = /^(PODER JUDICI[ÁA]RIO|Tribunal Regional Federal|Turma Regional|Gab(inete)?\.?\s|Rua\s|Avenida\s|Av\.\s|CEP\b|https?:\/\/|www\.|N[ÃA]O ASSIN[ÁA]VEL|OUTROS PARTICIPANTES|[A-ZÀ-Ý ]{4,60}\(\d{2,4}\)\s*N[ºo°]|(RELATOR|RELATORA|APELANTE|APELAD[OA]|AGRAVANTE|AGRAVAD[OA]|EMBARGANTE|EMBARGAD[OA]|IMPETRANTE|IMPETRAD[OA]|PARTE AUTORA|PARTE R[ÉE]|AUTOR|R[ÉE]U|INTERESSAD[OA]|TERCEIRO INTERESSADO|FISCAL DA LEI|PROCURADOR|REPRESENTANTE|ADVOGAD[OA])\b[^:]{0,60}:)/;
-function cabecalhoPje(t) { t = S(t); return !!t && t.length < 400 && CAB_PJE.test(t); }
+function cabecalhoPje(t) { t = S(t); return !!t && t.length < 400 && (CAB_PJE.test(t) || /^(?:UNIÃO FEDERAL|UNIAO FEDERAL|INSTITUTO NACIONAL DO SEGURO SOCIAL(?:\s*[-–]\s*INSS)?|INSS|FAZENDA NACIONAL)$/i.test(t)); }
 function analisar(paragrafos, ctx) {
   ctx = ctx || {};
-  var ps = (paragrafos || []).map(function (p) { return typeof p === 'string' ? { t: p } : p; }).filter(function (p) { return S(p.t) && !cabecalhoPje(p.t); });
+  var ps = (paragrafos || []).map(function (p) { return typeof p === 'string' ? { t: p } : p; }).filter(function (p) { return S(p.t); });
+  while(ps.length && cabecalhoPje(ps[0].t))ps.shift();
   /* decisão e despacho: o que vem antes de "Vistos." também é cabeçalho */
   var iv = -1; ps.forEach(function (p, i) { if (iv < 0 && /^vistos\.?$/i.test(S(p.t))) iv = i; });
   if (iv > 0 && !ps.slice(0, iv).some(function (p) { return /^(relat[óo]rio|voto|ementa|ac[óo]rd[ãa]o)\.?$/i.test(S(p.t)); })) ps = ps.slice(iv);
@@ -248,7 +249,7 @@ function analisar(paragrafos, ctx) {
     var pos = SECS.map(function (s) { var k = -1; ementa.forEach(function (p, i) { if (k < 0 && s[0].test(p.t)) k = i; }); return k; });
     SECS.forEach(function (s, i) { if (pos[i] < 0) add('alta', 'Ementa', 'MAN-CMT-031', 'Falta a seção “' + s[1] + '” da ementa.', cab); });
     if (pos.every(function (x) { return x >= 0; }) && !(pos[0] < pos[1] && pos[1] < pos[2] && pos[2] < pos[3])) add('media', 'Ementa', 'MAN-CMT-031', 'Seções da ementa fora da ordem I → II → III → IV.', ementa[pos[0]]);
-    pos.forEach(function (k) { if (k >= 0 && (ementa[k].neg || 0) < 0.5 && ementa[k].neg != null && ctx.formatacao !== false) add('baixa', 'Formatação', 'MAN-CMT-033', 'Título de seção da ementa em negrito.', ementa[k]); });
+    pos.forEach(function (k) { if (k >= 0 && (ementa[k].neg || 0) < 0.5 && ementa[k].fmtConfiavel === true && !/<(?:b|strong)>/i.test(ementa[k].h||'') && ctx.formatacao !== false) add('baixa', 'Formatação', 'MAN-CMT-033', 'Título de seção da ementa em negrito.', ementa[k]); });
     /* numeração contínua */
     var n = 0, rod = -1;
     ementa.forEach(function (p, i) { if (rod < 0 && /^(Dispositivos relevantes citados|Jurisprud[êe]ncia relevante citada)/i.test(p.t)) rod = i; });
@@ -258,7 +259,7 @@ function analisar(paragrafos, ctx) {
       var k = +m[1];
       if (k !== n + 1) add('media', 'Ementa', 'MAN-CMT-033', 'Numeração da ementa salta ou reinicia: veio ' + k + ' depois de ' + n + '. A numeração é contínua entre as seções.', p, 0, m[0].length);
       n = k;
-      if (p.neg != null && p.neg === 0 && ctx.formatacao !== false) add('baixa', 'Formatação', 'MAN-CMT-033', 'Número do item da ementa em negrito.', p, 0, m[0].length);
+      if (p.fmtConfiavel === true && p.neg === 0 && !/<(?:b|strong)>/i.test(p.h||'') && ctx.formatacao !== false) add('baixa', 'Formatação', 'MAN-CMT-033', 'Número do item da ementa em negrito.', p, 0, m[0].length);
     });
     if (pos[1] >= 0) {
       var q = ementa.slice(pos[1] + 1, pos[2] >= 0 ? pos[2] : undefined).map(function (p) { return p.t; }).join(' ');
