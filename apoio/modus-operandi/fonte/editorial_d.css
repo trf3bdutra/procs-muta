@@ -592,3 +592,6 @@ body.dsk #x-main .xblk.dflut-on{z-index:40}
 #dk-balao li.ju{border-left-color:#e7c98a}
 #dk-balao li b{color:#fff;font-weight:650}
 #dk-balao .dbal-f{margin:7px 0 0;font-size:10.5px;color:#9fbdb7}
+
+/* Collectio · composição modular */
+.edm-tabs{display:flex;gap:4px;margin:10px 0}.edm-tabs button{flex:1;border:1px solid var(--line);background:transparent;padding:9px;font:inherit;cursor:pointer}.edm-tabs button[aria-pressed=true]{background:var(--pa-deep,#235a55);color:white}.edm-content{display:grid;gap:6px}.edm-row{border:1px solid var(--line);background:var(--paper);padding:0 10px}.edm-row>summary{padding:10px 0;cursor:pointer;font-weight:600}.edm-body{display:grid;gap:8px;padding:8px 0 12px}.edm-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:8px}.edm-actions{display:flex;justify-content:flex-end;gap:5px}.edm-recipe,.edm-line{display:flex;align-items:end;gap:6px;min-width:0}.edm-recipe>.edf,.edm-line>.edf,.edm-options{flex:1;min-width:0}.edm-options{display:grid;gap:4px}.edm h4{margin:8px 0 0;font-size:12px;text-transform:uppercase;letter-spacing:.04em}.edm textarea{width:100%;box-sizing:border-box;resize:vertical}.edm .e-mini{flex:none}.edm .edf{min-width:0}.edm .edf select,.edm .edf input{max-width:100%}

@@ -1647,7 +1647,7 @@ function modeloEstrutura(m){
 function modeloChave(m){return m.id+'|'+String(XD.proc||'')+'|'+(XS.ed||'pecas');}
 function modeloJulgCaso(){if(XS.ed==='mod'){var P=MS.fichaCaso&&MS.fichaCaso.P,t=nz(P&&P.tipoJulgamento||'');return /embargos de declar/.test(t)?'ed':/agravo interno/.test(t)?'agint':/apela/.test(t)?'ap':'';}return window.CQX&&CQX.tem()?dkJulgAtual():'';}
 function modeloGrupos(m){var j=modeloJulgCaso();return modeloEstrutura(m).grupos.filter(function(g){return !j||!g.julgamento||g.julgamento===j;});}
-function modeloGrupo(m){var D=modeloEstrutura(m),id=MODSEL[modeloChave(m)];return modeloGrupos(m).find(function(g){return String(g.id)===id;})||(!m.modular?D.grupos[0]:null);}
+function modeloGrupo(m){var D=modeloEstrutura(m),id=MODSEL[modeloChave(m)];return modeloGrupos(m).find(function(g){return String(g.id)===id;})||(!m.modular||D.grupos.length===1?modeloGrupos(m)[0]||null:null);}
 function modeloGrupoHtml(m){if(!m||!m.modular)return '';var D=modeloEstrutura(m),G=modeloGrupo(m);return '<label class="dmodl modelo-grupo"><span>Enquadramento</span><select data-modelo-grupo="'+esc(m.id)+'" aria-label="Grupo do modelo"><option value="">Confirmar grupo…</option>'+modeloGrupos(m).map(function(g){return '<option value="'+esc(g.id)+'"'+(G&&G.id===g.id?' selected':'')+'>'+esc(g.id+' · '+g.nome)+'</option>';}).join('')+'</select></label>';}
 function modeloBlocos(m,parte){
  var D=modeloEstrutura(m),G=modeloGrupo(m),L=[],prefix=m.id+'|'+(G?G.id:'pendente')+'|',by={};D.modulos.forEach(function(md){by[md.id]=md;});
