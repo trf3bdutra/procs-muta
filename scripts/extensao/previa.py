@@ -45,8 +45,21 @@ def montar(saida: pathlib.Path) -> None:
 
     shutil.copy2(AQUI / 'index.html', saida / 'index.html')
     shutil.copy2(AQUI / 'pje-shim.js', saida / 'pje-shim.js')
-    shutil.copy2(AQUI / 'universal.html', saida / 'universal.html')
-    shutil.copy2(RAIZ / 'padrao' / 'ficha.json', saida / 'universal-ficha.json')
+    # Mesmo painel, mesmos scripts e abas: somente o renderizador do cartão recebe um adaptador.
+    fonte = (painel / 'gabinete.js').read_text(encoding='utf-8')
+    ancora = 'aplicarModo();\n})();'
+    if fonte.count(ancora) != 1:
+        sys.exit('gabinete.js: ponto de integração da prévia ausente')
+    overlay = (AQUI / 'universal-layout.js').read_text(encoding='utf-8')
+    (painel / 'gabinete-universal.js').write_text(fonte.replace(ancora, overlay + '\n' + ancora, 1), encoding='utf-8')
+    shutil.copy2(AQUI / 'universal-layout.css', painel / 'universal-layout.css')
+    universal = html.replace('<script src="gabinete.js"></script>', '<script src="gabinete-universal.js"></script>', 1)
+    if universal == html:
+        sys.exit('painel.html: gabinete.js não encontrado')
+    universal = universal.replace('</head>', '<link rel="stylesheet" href="universal-layout.css">\n</head>', 1)
+    (painel / 'universal.html').write_text(universal, encoding='utf-8')
+    for antigo in ('universal.html', 'universal-ficha.json'):
+        (saida / antigo).unlink(missing_ok=True)
 
 
 def main() -> None:

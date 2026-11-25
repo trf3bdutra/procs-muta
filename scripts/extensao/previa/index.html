@@ -129,14 +129,14 @@ html[data-theme=dark] .side-h{border-color:#1e3747;color:#a7a8a9}
 <main class="pv">
  <aside class="pv-ctl" aria-label="Simular o PJe">
   <div><p class="k">Prévia · comparação de layouts</p><h1>Painel <em class="it">ao lado do PJe.</em></h1></div>
-  <p class="d">À direita, compare o Prontuário Universal demonstrativo com o painel da versão publicada. O protótipo usa dados fictícios e não grava na ficha. Os controles abaixo continuam disponíveis na versão atual.</p>
+  <p class="d">À direita, o Prontuário Universal mantém todas as abas e os roteiros da extensão real. As alterações no modo Universal são demonstrativas; a versão atual continua disponível para comparação.</p>
   <label class="f"><span>Sessão</span><select id="ses"><option>Lendo…</option></select></label>
   <label class="f"><span>Processo</span><input id="cnj" list="cnjs" placeholder="0000000-00.0000.4.03.0000" autocomplete="off"><datalist id="cnjs"></datalist></label>
   <div class="f"><span>Tela do PJe</span><span class="seg w" role="group" aria-label="Tela do PJe" id="telas"><button type="button" data-tela="lista" aria-pressed="true">Lista de tarefas</button><button type="button" data-tela="autos" aria-pressed="false">Autos</button><button type="button" data-tela="editor" aria-pressed="false">Editor</button></span></div>
   <label class="f"><span>Texto do editor</span><select id="fonte"><option value="collectio">Minuta vigente no Collectio</option><option value="colar">Colar um texto</option><option value="vazio">Sem editor aberto</option></select></label>
   <label class="f" id="colar-w" hidden><span>Texto colado</span><textarea id="colar" placeholder="Cole aqui o texto da minuta (relatório, voto, ementa e acórdão)."></textarea></label>
   <div class="f"><span>Largura do painel</span><span class="seg w" role="group" aria-label="Largura do painel" id="larg"><button type="button" data-w="360" aria-pressed="false">360</button><button type="button" data-w="420" aria-pressed="true">420</button><button type="button" data-w="520" aria-pressed="false">520</button></span></div>
-  <label class="ck"><input type="checkbox" id="grava"><span>Gravar de verdade<small>Desligado, nada vai ao GitHub: o painel tenta gravar e a prévia lista abaixo o que seria gravado. Diligências e Deliberações gravam sempre.</small></span></label>
+  <label class="ck"><input type="checkbox" id="grava"><span>Gravar de verdade<small>Desligado, nada vai ao GitHub: o painel tenta gravar e a prévia lista abaixo o que seria gravado. Na versão atual, Diligências e Deliberações gravam sempre. No modo Universal, as gravações são bloqueadas.</small></span></label>
   <div class="blq" id="blq" hidden><b>Não gravado na prévia</b><ol id="blq-l"></ol></div>
   <p class="nota">Fora do PJe não há autos digitais: a leitura da cronologia volta vazia. O resto do painel (prontuário, ficha, triagem, Collectio, ementário, comparação e conformidade) usa os dados reais, com o seu login do Ex Officio.</p>
  </aside>
@@ -144,7 +144,7 @@ html[data-theme=dark] .side-h{border-color:#1e3747;color:#a7a8a9}
   <div class="cr-top"><i></i><i></i><i></i><span class="cr-url" id="url">pje2g.trf3.jus.br/pje/Painel/painel_usuario/advogado.seam</span><span class="cr-ext"><img src="painel/icones/32.png" alt="">Muta</span></div>
   <div class="cr-c">
    <div class="pje"><div class="pje-h"><b>PJe 2º grau</b><span id="pje-t">Painel do usuário · tarefas</span></div><div class="pje-b" id="pje-b"><p class="vz">Lendo a pauta…</p></div></div>
-   <div class="side" id="side" style="width:420px"><div class="side-h"><img src="painel/icones/16.png" alt="" width="14" height="14"><span>HERO18810 · Assistente do Gab. Muta</span></div><div class="seg w" id="pv-layout" role="group" aria-label="Layout do painel"><button type="button" aria-pressed="true" data-layout="universal">Prontuário universal</button><button type="button" aria-pressed="false" data-layout="atual">Versão atual</button></div><iframe id="universal" title="Protótipo interativo do Prontuário Universal" src="universal.html"></iframe><iframe id="pn" title="Painel da extensão HERO18810" src="painel/painel.html" hidden></iframe></div>
+   <div class="side" id="side" style="width:420px"><div class="side-h"><img src="painel/icones/16.png" alt="" width="14" height="14"><span>HERO18810 · Assistente do Gab. Muta</span></div><div class="seg w" id="pv-layout" role="group" aria-label="Layout do painel"><button type="button" aria-pressed="true" data-layout="universal">Prontuário universal</button><button type="button" aria-pressed="false" data-layout="atual">Versão atual</button></div><iframe id="pn" title="Painel da extensão HERO18810" src="painel/universal.html"></iframe></div>
   </div>
  </section>
 </main>
@@ -163,7 +163,7 @@ window.__previaGrava=()=>S.grava;
 function posBotoes(){const r=$('#pje-b').getBoundingClientRect();document.documentElement.style.setProperty('--pje-x',Math.round(r.left+12)+'px')}
 window.addEventListener('resize',posBotoes);
 const pn=$('#pn');
-$('#pv-layout button').forEach(b=>b.onclick=()=>{const u=b.dataset.layout==='universal';$('#universal').hidden=!u;pn.hidden=u;$('#pv-layout button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));if(!u)mandar()});
+$('#pv-layout button').forEach(b=>b.onclick=()=>{const next=b.dataset.layout==='universal'?'painel/universal.html':'painel/painel.html';$('#pv-layout button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));if(pn.getAttribute('src')!==next)pn.src=next;});
 async function get(u){const r=await fetch(u,{credentials:'same-origin',cache:'no-store'});const j=await r.json().catch(()=>({}));if(!r.ok){const e=new Error(j.erro||('HTTP '+r.status));e.status=r.status;throw e}return j}
 function item(){return S.itens.find(x=>x.cnj===S.cnj)||null}
 

@@ -28,16 +28,25 @@ test('prévia do painel: por padrão nada é gravado (o shim bloqueia POST, PUT 
 });
 
 
-test('prévia universal: protótipo isolado e esquema da ficha real', () => {
+test('prévia universal mantém todas as abas e ambos os roteiros originais', () => {
   const saida = fs.mkdtempSync(path.join(os.tmpdir(), 'muta-universal-'));
   try {
     execFileSync('python3', [path.join(ROOT, 'scripts/extensao/previa.py'), '--saida', saida]);
-    const idx = fs.readFileSync(path.join(saida, 'index.html'), 'utf8');
-    const html = fs.readFileSync(path.join(saida, 'universal.html'), 'utf8');
-    assert.match(idx, /id="universal"[^>]+src="universal.html"/);
-    assert.match(idx, /id="pn"[^>]+src="painel\/painel.html"/);
-    assert.deepEqual(JSON.parse(fs.readFileSync(path.join(saida, 'universal-ficha.json'), 'utf8')), JSON.parse(fs.readFileSync(path.join(ROOT, 'padrao/ficha.json'), 'utf8')));
-    for (const m of html.matchAll(/<script>([\s\S]*?)<\/script>/g)) new Function(m[1]);
-    assert.doesNotMatch(html, /\/api\/|localStorage|sendBeacon/);
-  } finally { fs.rmSync(saida, {recursive:true,force:true}); }
+    const pn = path.join(saida, 'painel');
+    const html = fs.readFileSync(path.join(pn, 'universal.html'), 'utf8');
+    const old = fs.readFileSync(path.join(pn, 'painel.html'), 'utf8');
+    const scripts = s => [...s.matchAll(/<script src="([^"]+)"/g)].map(m => m[1]);
+    assert.deepEqual(scripts(html),scripts(old).map(s=>s==='gabinete.js'?'gabinete-universal.js':s));
+    assert.match(html, /src="roteiro.js"/);
+    assert.match(html, /src="gerador.js"/);
+    assert.match(html, /src="ementario.js"/);
+    const js=fs.readFileSync(path.join(pn, 'gabinete-universal.js'), 'utf8');
+    assert.match(js,/function camposCaso\(/);
+    assert.match(js,/Roteiro de produção/);
+    assert.match(js,/fragment\(rt\(\)\)/);
+    new Function(js);
+    const idx=fs.readFileSync(path.join(saida,'index.html'),'utf8');
+    assert.match(idx,/id="pn"[^>]+src="painel\/universal.html"/);
+    assert.match(fs.readFileSync(path.join(pn,'shim-previa.js'),'utf8'),/if \(universal && m !== 'GET'/);
+  } finally { fs.rmSync(saida,{recursive:true,force:true}); }
 });

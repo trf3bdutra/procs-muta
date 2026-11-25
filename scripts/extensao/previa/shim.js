@@ -10,6 +10,7 @@
 (function () {
   'use strict';
   var P = window.parent !== window ? window.parent : null;
+  var universal = /\/universal\.html$/.test(location.pathname);
   var ABA = 1, sess = {}, loc = {}, ouv = [], pend = {}, seq = 0, grava = false;
 
   function mudou(area, k, o, n) {
@@ -94,6 +95,7 @@
     var m = String((op && op.method) || (u && u.method) || 'GET').toUpperCase(), url = String((u && u.url) || u);
     /* 0.48.1: Diligências e Deliberações gravam sempre (são trabalho de verdade do Desembargador e do gestor, não demonstração) */
     var vivo = /\/api\/pendencias(\?|$)/.test(url) || /\/api\/painel\?cmt=1(&|$)/.test(url);
+    if (universal && m !== 'GET' && m !== 'HEAD' && !/\/api\/login(\?|$)/.test(url)) return Promise.resolve(new Response(JSON.stringify({erro:'Modo Universal: edição demonstrativa, gravação bloqueada.'}), {status:423,headers:{'Content-Type':'application/json'}}));
     if (m !== 'GET' && m !== 'HEAD' && !grava && !vivo && !/\/api\/login(\?|$)/.test(url)) {
       if (P) P.postMessage({ tipo: 'previa-bloqueio', metodo: m, url: url.replace(location.origin, '') }, '*');
       return Promise.resolve(new Response(JSON.stringify({ erro: 'Prévia do painel: nada é gravado (ligue "Gravar de verdade" na página da prévia).' }),
@@ -104,7 +106,7 @@
   if (navigator.sendBeacon) {
     var b0 = navigator.sendBeacon.bind(navigator);
     navigator.sendBeacon = function (url, dados) {
-      if (!grava) { if (P) P.postMessage({ tipo: 'previa-bloqueio', metodo: 'BEACON', url: String(url).replace(location.origin, '') }, '*'); return true; }
+      if (universal || !grava) { if (P) P.postMessage({ tipo: 'previa-bloqueio', metodo: 'BEACON', url: String(url).replace(location.origin, '') }, '*'); return true; }
       return b0(url, dados);
     };
   }
