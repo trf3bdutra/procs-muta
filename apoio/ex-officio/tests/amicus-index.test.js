@@ -98,3 +98,9 @@ test('Portal Amicus: visão geral dentro do cabeçalho e duas colunas laterais',
  assert.ok(shared.includes("!e.classList.contains('am-home-overview')"));
  for(const m of home.matchAll(/<script>([\s\S]*?)<\/script>/g))new vm.Script(m[1]);
 });
+test('Amicus: Operação do gabinete reúne Fluxos, Rotina, Checklists, Guia do PJe e Metas num painel único; sem a aba HERO · prévia',()=>{
+ const home=read('apoio/amicus/index.html');
+ assert.ok(home.includes("[['operacional','Operação do gabinete',true]]"),'grupo Operacional com um só módulo');
+ for(const x of ["['fluxos','Fluxos'],['rotina','Rotina'],['checks','Checklists'],['guia-pje','Guia do PJe'],['metas','Metas']",'class="am-op-q"',"dataset.full='operacional'",'am-op-links','amicus-operacional-aba'])assert.ok(home.includes(x),x);
+ assert.ok(!home.includes('data-amtab="hero"')&&!home.includes('am-tab-hero'),'sem a aba HERO · prévia');
+});

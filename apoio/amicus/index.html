@@ -365,6 +365,25 @@ body.am-com-aba{overflow:hidden}
 .am-modular .am-check-group input{flex:none}
 @media(max-width:1050px){.am-dashboard.am-workspace.am-modular{grid-template-columns:repeat(2,minmax(0,1fr))}.am-modular>.am-module{grid-column:span 1}.am-modular>.am-wide,.am-modular>.am-expanded,.am-modular>.am-module-nav{grid-column:1/-1}.am-modular #fluxos:not(.full-panel) .af-body{grid-template-columns:1fr}}
 @media(max-width:700px){.am-dashboard.am-workspace.am-modular{grid-template-columns:minmax(0,1fr)}.am-modular>.am-module{grid-column:1/-1}.am-modular #ro-list{grid-template-columns:1fr}}
+
+/* painel único Operação do gabinete */
+.am-op-bar{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:10px 0 12px;padding-bottom:10px;border-bottom:1px solid var(--el)}
+.am-op-tabs{display:flex;flex-wrap:wrap;gap:4px}
+.am-op-tabs button{font:600 12.5px Figtree,system-ui,sans-serif;border:1px solid var(--el);background:transparent;color:inherit;padding:7px 11px;border-radius:4px;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.am-op-tabs button[aria-selected=true]{background:color-mix(in srgb,var(--mod,var(--eg)) 14%,transparent);border-color:var(--mod,var(--eg));color:var(--ei)}
+.am-op-tabs em{font:600 10px var(--emono,monospace);font-style:normal;min-width:16px;padding:1px 5px;border-radius:8px;background:var(--mod,var(--eg));color:#fff;text-align:center}
+.am-op-q{flex:1 1 240px;min-width:180px;font:inherit;font-size:13px;background:transparent;color:inherit;border:1px solid var(--el);border-radius:4px;padding:8px 10px}
+.am-op-q:focus{outline:none;border-color:var(--mod,var(--eg))}
+.am-op-pane>.pane-title{display:none}
+.am-op-pane>p:first-of-type{margin-top:0}
+.am-op-pane .am-checks{border-top:0;margin-top:0;padding-top:0}
+#fluxos .overview-node.am-op-dim{opacity:.18}
+.am-op-links{margin-top:10px;padding-top:8px;border-top:1px solid var(--el);display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.am-op-links h4{flex-basis:100%;margin:0!important}
+.am-op-links button{border:1px solid var(--el);background:var(--ew);color:var(--ei);font:600 11.5px system-ui;padding:5px 8px;cursor:pointer;border-radius:3px}
+#operacional.full-panel{padding:16px 20px}
+#operacional.full-panel #fluxos .af-body{grid-template-columns:minmax(0,1fr) 280px}
+#operacional.full-panel #ro-list{grid-template-columns:repeat(3,minmax(0,1fr))}
 </style><style id="am-areas-css">
 .am-modular>.am-area-nav,.am-modular>.am-group-heading{grid-column:1/-1}
 .am-modular>.am-module-nav{order:0}
@@ -697,7 +716,7 @@ fetch('/api/login',{credentials:'same-origin',cache:'no-store'}).then(async r=>{
 (function(){'use strict';
 const D=document,W=D.querySelector('main.am-workspace');if(!W)return;
 const groups=[
- ['operacional','Operacional','Fluxos, rotinas, checklists e tarefas do PJe',[['fluxos','Fluxos',true],['rotina','Rotinas e checklists',true],['guia-pje','Guia de tarefas do PJe',true],['metas','Metas']]],
+ ['operacional','Operacional','Fluxos, rotinas, checklists e tarefas do PJe',[['operacional','Operação do gabinete',true]]],
  ['jurisprudencial','Repertório jurisprudencial','Julgados da Turma Regional, temas e súmulas',[['jur-collegium','Collegium',true],['enunciados','Enunciados',true]]],
  ['normativo','Repertório legislativo e normativo','Regimento Interno e atos regimentais',[['regimento','Regimento',true],['norm-atos','Assentos e referências normativas',true]]],
  ['referencias','Referências jurídicas','Competência, recursos, temas e matérias',[['recursos','Recursos'],['temas-proc','Temas processuais'],['competencia','Competência'],['competencia-assuntos','Competência por assunto'],['impedimentos','Imparcialidade'],['assuntos','Assuntos recorrentes'],['lexico-recursal','Léxico recursal'],['guias-praticos','Guias práticos']]]
@@ -714,6 +733,52 @@ module('guia-pje','Guia de tarefas do PJe','Enciclopédia · consulta autenticad
 module('competencia-assuntos','Competência por assunto','Enciclopédia · consulta autenticada',loading);
 module('lexico-recursal','Léxico recursal','Enciclopédia · consulta autenticada',loading);
 module('guias-praticos','Guias práticos','Enciclopédia · consulta autenticada',loading);
+/* Operação do gabinete: Fluxos, Rotina, Checklists, Guia de tarefas do PJe e Metas num só painel, com pesquisa comum. Os motores de cada parte continuam os mesmos (ids preservados). */
+(function(){
+ const P=[['fluxos','Fluxos'],['rotina','Rotina'],['checks','Checklists'],['guia-pje','Guia do PJe'],['metas','Metas']];
+ const op=module('operacional','Operação do gabinete','Referência operacional · do fluxo da tarefa ao que fazer nela','<div class="am-op-bar"><div class="am-op-tabs" role="tablist" aria-label="Partes da operação do gabinete"></div><input type="search" class="am-op-q" placeholder="Pesquisar tarefa, caixa ou providência em todo o painel…" aria-label="Pesquisar no painel Operação do gabinete"><span class="am-op-n bmeta" aria-live="polite"></span></div><div class="am-op-panes"></div>');
+ const tabs=op.querySelector('.am-op-tabs'),panes=op.querySelector('.am-op-panes'),q=op.querySelector('.am-op-q'),nOut=op.querySelector('.am-op-n');
+ const full=D.createElement('button');full.type='button';full.className='more';full.dataset.full='operacional';full.textContent='⛶ Tela cheia';op.querySelector('.pane-title').append(full);
+ full.addEventListener('click',()=>{op.classList.toggle('full-panel');full.textContent=op.classList.contains('full-panel')?'× Sair da tela cheia':'⛶ Tela cheia';if(cur==='fluxos')setTimeout(()=>D.getElementById('af-fit')?.click(),30);});
+ const checks=D.querySelector('#rotina .am-checks');if(checks){const s=D.createElement('section');s.id='checks';s.innerHTML='<div class="pane-title"><div><small>Referência operacional</small><h2>Checklists por atividade recursal</h2></div></div>';checks.querySelector('h3')?.remove();s.append(checks);D.body.append(s);}
+ const kbd={};let cur='';
+ P.forEach(([id,label])=>{const el=D.getElementById(id);if(!el)return;const k=el.querySelector('.pane-title .cx-kbd');if(k)kbd[k.textContent.trim()]=id;el.classList.remove('busca');el.classList.add('am-op-pane');el.setAttribute('role','tabpanel');el.hidden=true;panes.append(el);
+  const b=D.createElement('button');b.type='button';b.setAttribute('role','tab');b.dataset.op=id;b.innerHTML='<span>'+label+'</span><em hidden></em>';tabs.append(b);});
+ function abre(id,foco){if(!D.getElementById(id))return;cur=id;try{localStorage.setItem('amicus-operacional-aba',id);}catch(e){}tabs.querySelectorAll('[data-op]').forEach(b=>{const on=b.dataset.op===id;b.setAttribute('aria-selected',String(on));b.tabIndex=on?0:-1;});panes.querySelectorAll(':scope>.am-op-pane').forEach(p=>p.hidden=p.id!==id);if(id==='fluxos')requestAnimationFrame(()=>D.getElementById('af-fit')?.click());filtra();if(foco)tabs.querySelector('[data-op="'+id+'"]').focus();}
+ tabs.addEventListener('click',e=>{const b=e.target.closest('[data-op]');if(b)abre(b.dataset.op);});
+ tabs.addEventListener('keydown',e=>{if(!/^Arrow(Left|Right)$/.test(e.key))return;const L=[...tabs.querySelectorAll('[data-op]')],i=L.findIndex(b=>b.dataset.op===cur);abre(L[(i+(e.key==='ArrowLeft'?L.length-1:1))%L.length].dataset.op,true);e.preventDefault();});
+ /* pesquisa comum: filtra a parte aberta e conta os achados nas outras */
+ const N=v=>String(v??'').normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();
+ const parts={
+  fluxos:{itens:()=>[...D.querySelectorAll('#flow-overview [data-node]')],mostra:(el,ok,ativo)=>el.classList.toggle('am-op-dim',ativo&&!ok)},
+  rotina:{itens:()=>[...D.querySelectorAll('#ro-list>details')],mostra:(el,ok,ativo)=>{el.hidden=ativo&&!ok;if(ativo&&ok)el.open=true;}},
+  checks:{itens:()=>[...D.querySelectorAll('#am-check-list .cx-ck')],mostra:(el,ok,ativo)=>{el.hidden=ativo&&!ok;},depois:()=>D.querySelectorAll('#am-check-list .am-check-group').forEach(g=>g.hidden=!g.querySelector('.cx-ck:not([hidden])'))},
+  'guia-pje':{itens:()=>[...D.querySelectorAll('#guia-pje .am-enc-list>details')],guia:true},
+  metas:{itens:()=>[...D.querySelectorAll('#mt-list>li')],mostra:(el,ok,ativo)=>{el.hidden=ativo&&!ok;}}
+ };
+ let guiaRows=null;
+ function filtra(){const s=N(q.value.trim()),ativo=!!s;let nCur=0;
+  Object.entries(parts).forEach(([id,p])=>{let n=0;
+   if(p.guia){const inp=D.querySelector('#guia-pje .am-enc-filter input');if(inp){if(id===cur||!ativo){if(inp.value!==q.value){inp.value=q.value;inp.dispatchEvent(new Event('input'));}}
+     n=ativo?(guiaRows||[]).filter(t=>t.includes(s)).length:0;if(id===cur&&ativo)n=D.querySelectorAll('#guia-pje .am-enc-list>details').length;}}
+   else p.itens().forEach(el=>{const ok=!ativo||N(el.textContent).includes(s);if(ok&&ativo)n++;p.mostra(el,ok,id===cur);});
+   if(p.depois)p.depois();
+   const em=tabs.querySelector('[data-op="'+id+'"] em');if(em){em.hidden=!ativo;em.textContent=n;}if(id===cur)nCur=n;});
+  nOut.textContent=ativo?nCur+' nesta parte':'';}
+ q.addEventListener('input',filtra);
+ q.addEventListener('keydown',e=>{if(e.key==='Escape'&&q.value){q.value='';filtra();e.stopPropagation();}});
+ /* o guia carrega depois (Enciclopédia autenticada): guarda o texto de todos os registros para contar e esconde a pesquisa própria */
+ const gh=D.querySelector('#guia-pje .am-enc-content');if(gh)new MutationObserver(()=>{const inp=gh.querySelector('.am-enc-filter input');if(inp&&!inp.dataset.amOp){inp.dataset.amOp='1';inp.hidden=true;guiaRows=[...gh.querySelectorAll('.am-enc-list>details')].map(d=>N(d.textContent));filtra();}}).observe(gh,{childList:true,subtree:true});
+ /* do fluxo para as outras partes: a tarefa escolhida no mapa vira pesquisa na rotina, nos checklists e no guia */
+ const note=D.getElementById('flow-overview-note');
+ if(note)new MutationObserver(()=>{const h=note.querySelector(':scope>h3');if(!h||note.querySelector('.am-op-links'))return;const nome=h.textContent.trim(),d=D.createElement('div');d.className='am-op-links';d.innerHTML='<h4>Ver esta tarefa em</h4>';[['rotina','Rotina'],['checks','Checklists'],['guia-pje','Guia do PJe']].forEach(([id,l])=>{if(!D.getElementById(id))return;const b=D.createElement('button');b.type='button';b.textContent=l;b.onclick=()=>{q.value=nome;abre(id);};d.append(b);});note.append(d);}).observe(note,{childList:true});
+ /* rotina, checklists e guia: a caixa ou tarefa do PJe leva ao mapa do fluxo */
+ panes.addEventListener('dblclick',e=>{const t=e.target.closest('#ro-list .cx-cx>span,#guia-pje summary');if(!t)return;const s=N(t.textContent.split(' · ')[0]);const n=[...D.querySelectorAll('#flow-overview [data-node]')].find(x=>N(x.textContent).includes(s)||s.includes(N(x.textContent)));if(n){abre('fluxos');n.dispatchEvent(new MouseEvent('click',{bubbles:true}));}});
+ /* teclas numéricas que levavam às seções agora abrem a parte no painel */
+ D.addEventListener('keydown',e=>{if(e.ctrlKey||e.metaKey||e.altKey||/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)||e.target.isContentEditable)return;const id=kbd[e.key];if(id){abre(id);}},true);
+ let ini='fluxos';try{ini=localStorage.getItem('amicus-operacional-aba')||ini;}catch(e){}if(!D.getElementById(ini))ini='fluxos';abre(ini);
+})();
+
 
 let pref={};try{pref=JSON.parse(localStorage.getItem('amicus-modulos-v1'))||{}}catch(e){}
 const save=()=>{try{localStorage.setItem('amicus-modulos-v1',JSON.stringify(pref))}catch(e){}};
@@ -725,7 +790,7 @@ const old=[...W.querySelectorAll(':scope > .am-rail,:scope > .am-main')];
 function apply(el){const v=pref[el.id]||{};el.classList.toggle('am-folded',!!v.fold);el.classList.toggle('am-expanded',!!v.wide);const b=el.querySelector('[data-am-fold]');if(b){b.textContent=v.fold?'Expandir':'Recolher';b.setAttribute('aria-expanded',String(!v.fold));}const w=el.querySelector('[data-am-wide]');if(w){w.textContent=v.wide?'Reduzir largura':'Ampliar';w.setAttribute('aria-pressed',String(!!v.wide));}}
 function reveal(el){if(!el)return;if(pref[el.id]?.fold){pref[el.id].fold=false;apply(el);save();}el.scrollIntoView({behavior:'smooth',block:'start'});}
 groups.forEach(([groupId,,,modules])=>{W.append(heads.get(groupId));modules.forEach(([id,title,wide])=>{const el=D.getElementById(id);if(!el)return;W.append(el);el.classList.add('am-module');if(wide)el.classList.add('am-wide');const b=D.createElement('button');b.type='button';b.textContent=title;b.onclick=()=>reveal(el);nav.append(b);
-const h=el.querySelector('.pane-title'),a=D.createElement('div');a.className='am-mod-actions';a.innerHTML=(wide?'':'<button type="button" data-am-wide>Ampliar</button>')+'<button type="button" data-am-fold>Recolher</button>';h.append(a);a.onclick=e=>{const t=e.target;if(!t.matches('button'))return;const v=pref[id]||(pref[id]={});if(t.hasAttribute('data-am-fold'))v.fold=!v.fold;else v.wide=!v.wide;apply(el);save();if(id==='fluxos'&&!v.fold)D.getElementById('af-fit')?.click();};apply(el);});});
+const h=el.querySelector('.pane-title'),a=D.createElement('div');a.className='am-mod-actions';a.innerHTML=(wide?'':'<button type="button" data-am-wide>Ampliar</button>')+'<button type="button" data-am-fold>Recolher</button>';h.append(a);a.onclick=e=>{const t=e.target;if(!t.matches('button'))return;const v=pref[id]||(pref[id]={});if(t.hasAttribute('data-am-fold'))v.fold=!v.fold;else v.wide=!v.wide;apply(el);save();if(id==='operacional'&&!v.fold)D.getElementById('af-fit')?.click();};apply(el);});});
 old.forEach(el=>{if(!el.querySelector('section.busca'))el.remove();});
 const reset=D.createElement('button');reset.type='button';reset.textContent='Restaurar layout';reset.onclick=()=>{pref={};save();W.querySelectorAll('.am-module').forEach(apply);D.getElementById('af-fit')?.click();};nav.append(reset);
 D.addEventListener('click',e=>{const b=e.target.closest('[data-req],[data-tema],[data-rart]');if(!b)return;const id=b.hasAttribute('data-req')?'recursos':b.hasAttribute('data-tema')?'temas-proc':'regimento';const el=D.getElementById(id);if(pref[id]?.fold){pref[id].fold=false;apply(el);save();}},true);
