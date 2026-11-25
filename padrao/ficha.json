@@ -565,11 +565,12 @@
        "regra": "JSON versionado: passos, vínculos com pendências e histórico de transições."
       },
       {
-       "rotulo": "Próxima ação",
+       "rotulo": "Próxima providência",
        "chave": "Próxima ação",
        "tipo": "texto",
        "secao": "origem",
-       "apelido": "proxima_acao"
+       "apelido": "proxima_acao",
+       "regra": "Etapa intermediária: vista ao MPF, diligência, intimação, sobrestamento ou verificação de prevenção, entre outras. Não altera o destino final."
       },
       {
        "rotulo": "Notas fixadas no prontuário",
@@ -1169,21 +1170,19 @@
        "apelido": "destino_situacao"
       },
       {
-       "rotulo": "Outro destino",
+       "rotulo": "Outro destino final",
        "chave": "Destino - Outro",
        "tipo": "lista",
        "secao": "producao",
        "opcoes": [
-        "Vista ao MPF",
-        "Devolução ao órgão prolator",
-        "Sobrestamento",
-        "Redistribuição ou prevenção",
-        "Diligência ou intimação",
+        "Devolução definitiva ao órgão prolator",
+        "Redistribuição definitiva a outro órgão",
         "Baixa ou arquivamento",
-        "Outro"
+        "Outro destino final"
        ],
        "vocabulario": "outro_destino",
-       "apelido": "destino_outro"
+       "apelido": "destino_outro",
+       "regra": "Fim do fluxo no gabinete, não providência intermediária. Valores históricos permanecem registrados e devem ser conferidos antes de redefinir o destino."
       },
       {
        "rotulo": "Destino confirmado em",
