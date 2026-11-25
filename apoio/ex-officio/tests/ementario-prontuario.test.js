@@ -22,6 +22,9 @@ test('Ementário: sintaxe e quatro abas no painel, com suporte a ocultação',()
   const m=montar(false);
   assert.deepEqual(m.tabs.map(t=>t.dataset.ppaba),['julgado','processo','correspondencias','rastreabilidade']);
   assert.match(m.html(),/data-ppaba="julgado"[^>]+aria-selected="true"/);
+  assert.match(m.html(),/<small>Resultado<\/small><b>Desprovido<\/b>/);
+  for(const k of ['Apreciação','Classe','Órgão','Documento'])assert.ok(m.html().includes('<small>'+k+'</small>'));
+  assert.match(m.html(),/<small>Documento<\/small><b>Inteiro teor<\/b>/);
   assert.match(m.html(),/data-ppsec="processo"[^>]+ hidden/);
   for(const [k,v] of [['julgado','Tese X'],['julgado','Resultado X'],['julgado','Ementa X'],['julgado','Texto X'],['processo','Partes X'],['processo','Tipo X'],['processo','Especificidade X'],['processo','Nota X'],['julgado','Artigo X'],['julgado','Jurisprudência X'],['julgado','Repertório X'],['correspondencias','5000001-00'],['rastreabilidade','origem.jsonl']])assert.ok(m.sec(k).includes(v),k+': '+v);
   assert.ok(!m.sec('julgado').includes('Partes X'));
@@ -44,4 +47,5 @@ test('Collegium: proveniência separada, assinatura e excerto sem afirmar inteir
   assert.match(m.sec('rastreabilidade'),/Proveniência DJEN X/);
   assert.doesNotMatch(m.sec('julgado'),/Proveniência DJEN X|Inteiro teor/);
   assert.match(m.html(),/Copiar abertura/);assert.match(m.html(),/Copiar excerto/);
+  assert.match(m.html(),/<small>Documento<\/small><b>Excerto DJEN<\/b>/);
 });
