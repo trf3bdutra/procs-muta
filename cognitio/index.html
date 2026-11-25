@@ -2355,7 +2355,7 @@ function rotear(){
  if(!COG_SESSAO)return;
  let p=location.hash.slice(1);
  if(p==='outras'){p='triagem';COG_SUB='triados';LS.set('tri_col_triados','cog-outros-destinos');try{history.replaceState(null,'','#triagem');}catch(e){}}
- COG=Object.prototype.hasOwnProperty.call(COG_PAGES,p)?p:'acervo';
+ const next=Object.prototype.hasOwnProperty.call(COG_PAGES,p)?p:'acervo';if(next!==COG){COG_LOTE=null;COG_GRUPO='';COG_SES_FILTRO='';COG_DEST_COLECAO='';SEL.clear();if(!COG_TRANSFER||next!=='triagem'){COG_TRANSFER=false;cogTriFacLimpar();}}COG=next;
  ABA='fila';
  if(COG==='triagem')TRI_SUBABA=COG_SUB;
  if(COG==='selecao')TRI_SUBABA='selecao';
@@ -2366,7 +2366,7 @@ W.addEventListener('hashchange',rotear);W.addEventListener('popstate',rotear);
 function cogIr(p){
  if(!COG_SESSAO||!COG_PAGES[p])return;
  if(COG==='triagem'&&['todos','triar','triados'].includes(TRI_SUBABA))COG_SUB=TRI_SUBABA;
- if(COG!==p){SEL.clear();FILA=[];COG_STATUS='ativos';COG_LOTE=null;COG_GRUPO='';COG_SES_FILTRO='';COG_DEST_COLECAO='';COG_TRANSFER=false;cogTriFacLimpar();LS.set('tri_atq','');LS.set('tri_atso','');}
+ if(COG!==p){SEL.clear();FILA=[];COG_STATUS='ativos';COG_LOTE=null;COG_GRUPO='';COG_SES_FILTRO='';COG_DEST_COLECAO='';if(p!=='triagem')COG_TRANSFER=false;cogTriFacLimpar();LS.set('tri_atq','');LS.set('tri_atso','');}
  if(location.hash!=='#'+p){try{history.pushState(null,'','#'+p);}catch(e){location.hash=p;return;}}
  rotear();
 }
@@ -3182,7 +3182,7 @@ function cogSelecaoData(){
  const abertas=new Set(sessoesPrevia().map(ss=>ss.data)),legacy=new Map();
  if(_colD.selecao)for(const l of recorteSelecao(_colD.selecao).lotes){const d=l.reserva===true||l.id==='selecao-reserva'?'reserva':dataSelecao(l.sessao||(l.sessoes||[])[0]||String(l.id).replace(/^selecao-/,''));if(!d||d!=='reserva'&&!abertas.has(d))continue;for(const it of l.itens||[]){const id=dg(it.processo);if(!legacy.has(id))legacy.set(id,d);}}
  const P=[];for(const o of ALL||[]){if(o.grupo==='pauta')continue;const st=estadoDe(o),dest=nz(st.dest),dt=dataSelecao(st.sd),explicit=String(st.sp||'').trim();if(dest&&dest!=='sessao')continue;
- let sess='';if(explicit==='SELECIONADO PREVIAMENTE')sess=dt||(st.sd?'':'reserva');else if(!explicit&&!dest)sess=legacy.get(o.d)||'';
+ let sess='';if(explicit==='SELECIONADO PREVIAMENTE')sess=dt||(st.sd?'':'reserva');else if(!explicit&&!dest&&!Object.prototype.hasOwnProperty.call(o.row||{},'Seleção Prévia'))sess=legacy.get(o.d)||'';
  if(sess&&(sess==='reserva'||abertas.has(sess)))P.push({o,sess});}return P;
 }
 function cogDestinoCarregar(){
@@ -3211,9 +3211,9 @@ async function cogLotesCarregar(){
  try{const j=await cogApi('/api/painel?lote=1'+(COG_SESSAO&&COG_SESSAO.gestor?'&modo=cg':''));COG_LOTES=(j.lotes||[]).filter(l=>l.tipo==='triagem'&&!l.arquivado);}
  catch(e){COG_LOTE_ERR=e.message;}finally{COG_LOTE_LOADING=false;if(['triagem','selecao','mono'].includes(COG))refazTriEm();}
 }
-async function cogLoteAbrir(id){if(!id){COG_LOTE=null;COG_GRUPO='';SEL.clear();refazTriEm();pintaRodape();return;}try{const j=await cogApi('/api/painel?lote=1&id='+encodeURIComponent(id)+(COG_SESSAO&&COG_SESSAO.gestor?'&modo=cg':''));if(!j.lote||j.lote.tipo!=='triagem')throw Error('Lote de triagem não encontrado');COG_LOTE=j.lote;COG_GRUPO='';COG_TRANSFER=false;cogTriFacLimpar();SEL.clear();LS.set('tri_atq','');LS.set('tri_atso','');LS.set('tri_atver','matriz');if(COG==='triagem')TRI_SUBABA=COG_SUB='todos';COG_DEST_COLECAO='';refazTriEm();pintaRodape();}catch(e){toast('Não abriu o lote: '+e.message,true);}}
+async function cogLoteAbrir(id){if(!id){COG_LOTE=null;COG_GRUPO='';SEL.clear();refazTriEm();pintaRodape();return;}try{const j=await cogApi('/api/painel?lote=1&id='+encodeURIComponent(id)+(COG_SESSAO&&COG_SESSAO.gestor?'&modo=cg':''));if(!j.lote||j.lote.tipo!=='triagem')throw Error('Lote de triagem não encontrado');COG_LOTE=j.lote;if(_colD.triados){const i=_colD.triados.lotes.findIndex(l=>l.id===id);if(i<0)_colD.triados.lotes.push(j.lote);else _colD.triados.lotes[i]=j.lote;}COG_GRUPO='';COG_TRANSFER=false;cogTriFacLimpar();SEL.clear();LS.set('tri_atq','');LS.set('tri_atso','');LS.set('tri_atver','matriz');if(COG==='triagem')TRI_SUBABA=COG_SUB='todos';COG_DEST_COLECAO='';refazTriEm();pintaRodape();}catch(e){toast('Não abriu o lote: '+e.message,true);}}
 function cogLoteBar(){
- const idsDest=COG==='triagem'?null:new Set(cogDestinoBase().map(o=>o.d)),L=(COG_LOTES||[]).filter(l=>{if(!idsDest)return true;const full=(_colD.triados?.lotes||[]).find(x=>x.id===l.id);return !full||(full.itens||[]).some(it=>idsDest.has(dg(it.processo)));}),id=COG_LOTE&&COG_LOTE.id||'',opt=(l)=>'<option value="'+esc(l.id)+'"'+(l.id===id?' selected':'')+'>'+esc(l.titulo||l.id)+' · '+nf(l.total||0)+'</option>',G=COG_LOTE?.grupos||[],I=COG_LOTE?.itens||[];
+ const idsDest=COG==='triagem'?null:new Set(cogDestinoBase().map(o=>o.d)),L=(COG_LOTES||[]).filter(l=>{if(!idsDest)return true;const full=(_colD.triados?.lotes||[]).find(x=>x.id===l.id);return !full||(full.itens||[]).some(it=>idsDest.has(dg(it.processo)));}),id=COG_LOTE&&COG_LOTE.id||'',opt=(l)=>'<option value="'+esc(l.id)+'"'+(l.id===id?' selected':'')+'>'+esc(l.titulo||l.id)+' · '+nf(l.total||0)+'</option>',G=COG_LOTE?.grupos||[],I=(COG_LOTE?.itens||[]).filter(it=>!idsDest||idsDest.has(dg(it.processo)));
  const group=(key,nome)=>'<option value="'+esc(key)+'"'+(COG_GRUPO===key?' selected':'')+'>'+esc(nome)+' · '+nf(I.filter(it=>(it.grupo||'__')===key).length)+'</option>';
  return '<div class="cog-lotbar"><label>Lotes e séries <select data-cog-lote-select><option value="">Matriz geral</option>'+[['Lotes de triagem',L.filter(l=>!cogSerie(l))],['Séries transversais',L.filter(cogSerie)]].filter(x=>x[1].length).map(([n,ls])=>'<optgroup label="'+esc(n)+'">'+ls.map(opt).join('')+'</optgroup>').join('')+(id&&!L.some(l=>l.id===id)?'<option selected value="'+esc(id)+'">'+esc(COG_LOTE.titulo)+'</option>':'')+'</select></label><button type="button" class="btn sm" data-cog-lotes-refresh title="Atualizar lotes e séries">'+(COG_LOTE_LOADING?'Carregando…':'↻ Atualizar')+'</button>'+(id&&COG_SESSAO&&COG_SESSAO.gestor?'<button type="button" class="btn sm" data-cog-col-add>＋ Coluna</button>':'')+(id?'<a class="lk" href="/amicus/collectio/cg/?id='+encodeURIComponent(id)+'">Collectio ↗</a>':'')+(COG_LOTE_ERR?'<small>'+esc(COG_LOTE_ERR)+'</small>':'')+'</div>'+
  (id?'<div class="cog-lotbar cog-lot-groups"><label>'+ (cogSerie(COG_LOTE)?'Grupos da série':'Grupos do lote')+' <select data-cog-grupo><option value="">Todos os grupos · '+nf(I.length)+'</option>'+G.map(g=>group(g.id,g.rotulo)).join('')+group('__','Sem grupo')+'</select></label><small>'+nf(G.length)+' grupos · '+nf(I.length)+' processos registrados</small></div>':'');
@@ -3394,7 +3394,7 @@ function fichaDe(cnj,aba='Triagem'){
  const o=IDX.get(dg(cnj)),n=o?o.cnj:cnj;
  if(!W.CMTFicha)return toast('Ficha do processo ainda indisponível.',true);
  const carregar=async c=>{const j=await cogApi('/api/pauta?ficha='+encodeURIComponent(c));if(j.operacional&&!PEND.has(dg(c)))cogAtualizaFicha(j.operacional);try{const l=await cogApi('/api/painel?lote=1&processo='+encodeURIComponent(c)+(COG_SESSAO&&COG_SESSAO.gestor?'&modo=cg':''));j.indexacao=l.registros||[];j.indexacaoGestor=!!l.gestor;}catch(e){j.indexacaoErro=e.message;}return j;};
- W.CMTFicha.abrir(n,{aba:'Triagem',editarAoAbrir:true,equipeDisponivel:cogEquipeCadastro,sessoesDisponiveis:()=>sessoesPrevia().map(nomeSes),gravarIndexacao:async(lote,coluna,processo,valor)=>{await cogLotePost({acao:'triagem-celula',id:lote,coluna,processo,valor});if(COG_LOTE&&COG_LOTE.id===lote){const it=COG_LOTE.itens.find(x=>dg(x.processo)===dg(processo));if(it)it.valores_triagem=Object.assign({},it.valores_triagem||{},{[coluna]:valor});if(COG==='triagem')refazAtTab();}},lista:(COG==='triagem'?cogTriBase().filter(cogTriStatus):FILA).map(x=>x.cnj),carregar,gravar:cogFichaGravar,avisar:(t,e)=>toast(t,e==='warn'||e==='err'||e===true)});
+ W.CMTFicha.abrir(n,{aba:'Triagem',editarAoAbrir:true,equipeDisponivel:cogEquipeCadastro,sessoesDisponiveis:()=>sessoesPrevia().map(nomeSes),gravarIndexacao:async(lote,coluna,processo,valor)=>{await cogLotePost({acao:'triagem-celula',id:lote,coluna,processo,valor});if(COG_LOTE&&COG_LOTE.id===lote){const it=COG_LOTE.itens.find(x=>dg(x.processo)===dg(processo));if(it)it.valores_triagem=Object.assign({},it.valores_triagem||{},{[coluna]:valor});if(COG==='triagem')refazAtTab();}},lista:(['triagem','selecao','mono'].includes(COG)?cogTriRecorte(COG==='triagem'?LS.get('tri_triar_tarefa',''):''):FILA).map(x=>x.cnj),carregar,gravar:cogFichaGravar,avisar:(t,e)=>toast(t,e==='warn'||e==='err'||e===true)});
 }
 /* a ficha atual do processo (operacional), com as seções achatadas: o painel do processo mostra o prontuário gravado */
 async function fichaPlana(cnj) {
@@ -3490,7 +3490,7 @@ document.addEventListener('click', (e) => {
 }, true);
 let _atT = null;
 document.addEventListener('input', (e) => { const t = e.target; if (!t.matches || !t.matches('[data-atq]')) return; LS.set('tri_atq', t.value);
-  clearTimeout(_atT); _atT = setTimeout(() => { const tb = document.getElementById('at-tab'); if (tb) tb.innerHTML = COG==='triagem'?atCorpo(LS.get('tri_triar_tarefa', '')):atTabela(''); const railEl=D.querySelector('[data-tri-fac-root]');if(railEl)railEl.outerHTML=cogTriFacHtml(); }, 250); }, true);
+  clearTimeout(_atT); _atT = setTimeout(() => { const tb = document.getElementById('at-tab'); if (tb) tb.innerHTML = COG==='triagem'?atCorpo(LS.get('tri_triar_tarefa', '')):atTabela('');const selBtn=D.querySelector('[data-cog-select-filtered]');if(selBtn)selBtn.textContent='Selecionar filtrados ('+nf(cogTriRecorte(COG==='triagem'?LS.get('tri_triar_tarefa',''):'').length)+')'; const railEl=D.querySelector('[data-tri-fac-root]');if(railEl)railEl.outerHTML=cogTriFacHtml(); }, 250); }, true);
 
 document.addEventListener('click', (e) => { const t = e.target.closest && e.target.closest('[data-atmais]'); if (!t) return; e.preventDefault(); e.stopPropagation();
   const g = t.dataset.atmais; LS.set('tri_atlim_' + g, LS.get('tri_atlim_' + g, 60) + 100); const tb = document.getElementById('at-tab'); if (tb) tb.innerHTML = atTabela(COG==='triagem'?LS.get('tri_triar_tarefa', ''):''); }, true);
@@ -3805,13 +3805,14 @@ function cogRegFields(kind){
  [['triagem.Intercorrências','Intercorrências'],['triagem.Avisos','Avisos'],['origem.Observações','Anotações gerais']].forEach(([id,nome])=>M.set(id,{id,nome,field:[id,nome,null,'texto-longo']}));
  return [...M.values()].filter(c=>cogRegKind(c)===kind);
 }
+function cogLiminarPendente(o){return !!o.liminar&&!/apreciad|deferid|indeferid|prejudicad|revogad|julgad/i.test(String(o.row?.['Urgência - Apreciação']||'').replace(/^não apreciad[ao]/i,''));}
 function cogSignalCell(o){
- const r=o.row||{},d=atDias(o),tri=cogTriAnalisado(o),pr=atTri(o),lim=o.liminar&&!/^apreciad|^deferid|^indeferid|^prejudicad/i.test(String(r['Urgência - Apreciação']||''));
+ const r=o.row||{},d=atDias(o),tri=cogTriAnalisado(o),pr=atTri(o),lim=cogLiminarPendente(o);
  const chips=[tri?['Triado','ok']:['A triar',''],pr?['Com prontuário','ok']:null,o.prior?['Prioridade','al']:null,lim?['Liminar pendente','cr']:null,o.sigiloso?['Sigiloso','al']:null,o.div?['Divergência','al']:null].filter(Boolean);
  return '<td class="cog-sign-cell"><div class="cog-sign-tags">'+chips.map(([t,c])=>'<span class="cog-sign-chip '+c+'">'+esc(t)+'</span>').join('')+'</div><div class="cog-task-card" title="'+esc(o.tarefa||'')+'"><small>Na tarefa</small><b class="at-d'+(d>180?' cr':d>60?' al':'')+'">'+(d==null?'—':d+' dias')+'</b><small>'+esc(o.desde?br(o.desde):'')+'</small></div><div class="cog-reg-actions">'+cogRegLabels(o)+'</div></td>';
 }
 function cogRegLabels(o){
- const r=o.row||{},sys=[o.prior?'Prioridade legal':'',o.liminar&&!/^apreciad|^deferid|^indeferid|^prejudicad/i.test(String(r['Urgência - Apreciação']||''))?'Liminar pendente':'',o.sigiloso?'Sigiloso':'',o.div?'Divergência de seção':''].filter(Boolean);
+ const r=o.row||{},sys=[o.prior?'Prioridade legal':'',cogLiminarPendente(o)?'Liminar pendente':'',o.sigiloso?'Sigiloso':'',o.div?'Divergência de seção':''].filter(Boolean);
  return ['sinais','notas'].map(kind=>{
  const list=cogRegFields(kind).map(c=>[c.nome,cogColValue(o,c)]).filter(x=>x[1]);
  const tip=(kind==='sinais'?'Sinalizações':'Observações')+(list.length||kind==='sinais'&&sys.length?':\n'+(kind==='sinais'?sys.concat(list.map(x=>x.join(': '))):list.map(x=>x.join(': '))).join('\n'):' · adicionar');
@@ -3981,8 +3982,8 @@ function cogDestinoSidebar(){
 D.addEventListener('change',e=>{const t=e.target;if(!t.matches?.('[data-cog-sessao-filtro],[data-cog-dest-colecao]'))return;if(t.hasAttribute('data-cog-sessao-filtro')){COG_SES_FILTRO=t.value;COG_DEST_COLECAO='';}else COG_DEST_COLECAO=t.value;COG_LOTE=null;COG_GRUPO='';SEL.clear();refazTriEm();pintaRodape();},true);
 function atLado(soTarefa) {
   const L = cogTriBase().filter(o=>cogTriStatus(o)&&(!soTarefa || (o.tarefa || o.grupo || 'Triagem') === soTarefa));
-  const m = [['Processos', L.length], ['Com prontuário', L.filter(atTri).length], ['Prioridade', L.filter((o) => o.prior).length], ['Liminar', L.filter((o) => o.liminar).length],
-    ['Mono?', L.filter((o) => o.cand && !(o.dest || {}).k).length], ['+180 dias', L.filter((o) => (atDias(o) || 0) > 180).length]];
+  const m = [['Processos', L.length], ['Com prontuário', L.filter(atTri).length], ['Prioridade', L.filter((o) => o.prior).length], ['Liminar', L.filter(o=>cogLiminarPendente(o)).length],
+    COG==='mono'?['Assinados', L.filter(cogAssinado).length]:COG==='selecao'?['Com pendências', L.filter(o=>(o.pend||[]).length||String(o.row?.['O que falta sanar']||'').trim()).length]:['Mono?', L.filter((o) => o.cand && !(o.dest || {}).k).length], ['+180 dias', L.filter((o) => (atDias(o) || 0) > 180).length]];
   return '<div class="tri-cx">' + (COG==='triagem'?abasTriHtml():cogDestinoSidebar()) + '<div class="tri-cx-c">' +(COG_TRANSFER?'<div class="nota">Filtros da Busca Geral aplicados aos processos em triagem. <button type="button" class="lk" data-cog-clear-transfer>Limpar recorte</button></div>':'') +
     '<div class="at-m">' + m.map((x) => '<div><span>' + x[0] + '</span><b>' + nf(x[1]) + '</b></div>').join('') + '</div>' +
     '<input type="search" data-atq placeholder="processo, parte, assunto, etiqueta…" value="' + esc(LS.get('tri_atq', '')) + '">' +
