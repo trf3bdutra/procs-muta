@@ -72,6 +72,14 @@ test('Barra do Amicus Curiae: CORTEX e Compendium com a mesma barra, sem citar u
  assert.ok(nav.includes('header.top.nx #cmp-nav{flex:0 1 auto;min-width:0;overflow-x:auto'));
 });
 
+test('Portal Amicus: laterais modulares mais largas e Referências jurídicas em coluna única',()=>{
+ const home=read('apoio/amicus/index.html');
+ assert.match(home,/max-width:2160px;display:grid;grid-template-columns:minmax\(290px,340px\) minmax\(0,1fr\) minmax\(300px,360px\)/);
+ assert.match(home,/\.am-rail-nav\{padding:10px 11px 12px;display:grid;gap:9px\}/);
+ assert.match(home,/\.am-rail-group\{padding:10px 11px 8px;border:1px solid var\(--el\);border-left:3px solid var\(--eo\)/);
+ assert.match(home,/\.am-main \.am-legal-grid\{grid-template-columns:minmax\(0,1fr\);gap:10px/);
+ assert.match(home,/@media\(max-width:1350px\) and \(min-width:901px\)/);
+});
 test('Portal Amicus: visão geral dentro do cabeçalho e duas colunas laterais',()=>{
  const home=read('apoio/amicus/index.html'), shared=read('apoio/amicus/header.py');
  const hd=home.match(/<header class="am-home-header">([\s\S]*?)<\/header>/);assert.ok(hd);
