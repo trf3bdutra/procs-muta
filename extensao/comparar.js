@@ -48,7 +48,7 @@ function eh2886() {
   return /28[,.]86|2886|0005019-15\.1997/.test(t);
 }
 /* 0.45 (pedido do gestor): Comparar só com modelos, precedentes, texto colado e 28,86%; a minuta-matriz foi para a Conformidade; CORTEX, triagem e parágrafos-padrão saíram da lista (o código fica) */
-var FORA_CMP = { lote: 1, tri: 1, par: 1 };
+var FORA_CMP = { matriz: 1, lote: 1, tri: 1, par: 1 };
 function fontes() { var ok = eh2886(); if (FORA_CMP[C.fonte] || C.fonte === 'm2886') C.fonte = 'modelo'; return FONTES.filter(function (f) { return !FORA_CMP[f[0]] && f[0] !== 'm2886'; }); }
 function processo() {
   var k = chave();
