@@ -1525,3 +1525,29 @@ html[data-tema=escuro] .sg-b{background:#2a1414;border-color:#6b2f2f;color:#f0b8
 .rt-adm-doc{display:grid;gap:4px;border:1px solid var(--line,#d8d9d6);border-left:2px solid #967b43;border-radius:5px;padding:6px;margin:4px 0 7px;font-size:11px;overflow-wrap:anywhere}.rt-adm-head{display:flex;justify-content:space-between;align-items:center;gap:6px}.rt-adm-head .lnk{flex:none;font-size:10px}
 
 .ref1g{display:grid;gap:6px;padding:7px;border:1px solid var(--line,#d8d9d6);border-radius:6px}.ref1g-head{display:flex;align-items:center;justify-content:space-between;gap:5px;flex-wrap:wrap}.ref1g-list{max-height:250px;overflow:auto;display:grid;gap:4px}.ref1g-item{display:flex;align-items:center;gap:7px;padding:5px;border-bottom:1px solid var(--line,#d8d9d6);font-size:11px}.ref1g-item input{flex:0 0 auto;width:15px!important}.ref1g-item span,.ref1g-doc{display:grid;gap:2px;min-width:0;overflow-wrap:anywhere}.ref1g-item small,.ref1g-doc small,.ref1g-msg{font-size:10px}.ref1g-doc{padding:4px;border-bottom:1px solid var(--line,#d8d9d6)}
+
+/* Seletor de tipo de julgamento — compacto, integrado ao Acompanhamento. */
+.rt-tsel{margin:0;border:1px solid var(--line);border-radius:7px;background:var(--field);overflow:hidden}
+.rt-tsel>summary{display:flex;align-items:center;gap:8px;padding:8px 10px;list-style:none;cursor:pointer;min-width:0}
+.rt-tsel>summary::-webkit-details-marker{display:none}
+.rt-tsel>summary:before,.rt-tsel>summary:after{content:none!important}
+.rt-kind-main{display:grid;gap:2px;flex:1;min-width:0}
+.rt-kind-label{font-size:10px;font-weight:600;color:var(--muted-fg)}
+.rt-kind-main b{font-size:12px;line-height:1.35;overflow-wrap:anywhere;font-weight:650}
+.rt-kind-mode{flex:none;font-size:9px;font-weight:600;color:var(--muted-fg);background:var(--soft);padding:3px 6px;border-radius:4px}
+.rt-kind-arrow{width:7px;height:7px;flex:none;border-right:1.5px solid var(--muted-fg);border-bottom:1.5px solid var(--muted-fg);transform:rotate(45deg);margin:0 2px 4px}
+.rt-tsel[open] .rt-kind-arrow{transform:rotate(225deg);margin-top:5px}
+.rt-kind-body{padding:8px;border-top:1px solid var(--line)}
+.rt-tsel[open] .rt-tipos{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,140px),1fr));align-items:stretch;gap:5px;margin:0}
+.rt-tipos .rt-kind-option{display:grid;grid-template-columns:auto minmax(0,1fr) 12px;align-items:center;text-align:left;gap:5px;border-radius:5px;min-height:34px;padding:5px 6px;white-space:normal;background:var(--card);color:var(--fg);border:1px solid var(--line)}
+.rt-kind-sig{font-size:9px;font-weight:700;color:var(--muted-fg);min-width:19px}
+.rt-kind-name{font-size:10.5px;line-height:1.25}
+.rt-kind-check{font-size:12px;text-align:center;font-weight:700}
+.rt-tipos .rt-kind-option.on{background:var(--soft);border-color:var(--primary);color:var(--fg)}
+.rt-tipos .rt-kind-option.on .rt-kind-sig,.rt-tipos .rt-kind-option.on .rt-kind-check{color:var(--primary)}
+.rt-tipos .rt-kind-option:hover{border-color:var(--primary)}
+.rt-kind-foot{display:flex;justify-content:space-between;align-items:center;gap:5px;flex-wrap:wrap;margin-top:8px;color:var(--muted-fg);font-size:10px}
+.rt-kind-foot small{font-size:10px}
+.rt-kind-foot .lnk{font-size:10px;padding:2px 0}
+html[data-tema=escuro] .rt-tipos .rt-kind-option.on{background:var(--soft);border-color:var(--primary);color:var(--fg)}
+html[data-tema=escuro] .rt-tipos .rt-kind-option{border-color:var(--line)}
