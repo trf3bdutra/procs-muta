@@ -942,7 +942,7 @@ function heroOrganizarProntuario(){
   var procTags=el('div','hero-proc-tags');
   if(classShort){var classTag=el('span','pc-cl',classShort);classTag.title=classFull;procTags.append(classTag);}
   var julgamento=S(V('triagem','Tipo de Julgamento')||V('triagem','Padrão - Espécie'));
-  if(julgamento){var jt=el('span','pm-tj',julgamento);jt.title='Tipo de julgamento: '+julgamento;procTags.append(jt);}
+  if(julgamento){var jt=el('button','pm-tj',julgamento);jt.type='button';jt.title='Alterar tipo de julgamento';jt.onclick=function(){ac.open=true;heroTopo.acompanhamento=true;var d=ac.querySelector('.rt-tsel');if(d){d.open=true;d.scrollIntoView({block:'nearest'});}};procTags.append(jt);}
   if(l1)l1.querySelectorAll('.pm-tj').forEach(function(x){if(x.classList.contains('sug'))tj.append(x);else x.remove();});
   if(l1&&procTags.childNodes.length)l1.append(procTags);
   top.insertBefore(nav,l1||top.firstChild);nav.after(pages);if(l1)id.append(l1);
@@ -1030,7 +1030,10 @@ function heroOrganizarProntuario(){
   var notes=caixa.querySelector('#g-nt');if(notes)body.append(notes);
   var prior=caixa.querySelector('#pv-acomp');if(prior){var pb=prior.querySelector('.pv-acomp-b');if(pb)while(pb.firstChild)body.append(pb.firstChild);prior.remove();}
   if(resp){var enc=resp.querySelector('.pm-enc');if(enc)body.append(enc);resp.remove();}
-  var sel=caixa.querySelector('#pv-identity .rt-tsel');if(sel)tj.append(sel);else html(tj,campoRot('triagem','Tipo de Julgamento','Tipo de julgamento'));
+  var sel=caixa.querySelector('.rt-tsel');
+  if(!sel&&window.MutaRoteiro){var tmp=el('div');html(tmp,corpoRoteiro());sel=tmp.querySelector('.rt-tsel');}
+  if(sel){sel.classList.add('hero-tipo-roteiro');tj.prepend(sel);caixa.querySelectorAll('.rt-tsel').forEach(function(x){if(x!==sel)x.remove();});}
+  else html(tj,campoRot('triagem','Tipo de Julgamento','Tipo de julgamento'));
   var result=caixa.querySelector('#pv-julgamento [data-fk="producao.Voto - Resultado"]');if(result){var rr=result.closest('.gf');if(rr)tj.append(rr);}else if(pronAtual()<0||!/(despacho|outro)/i.test(PRON[pronAtual()][0]))html(tj,campoRot('producao','Voto - Resultado','Conclusão / resultado'));
   body.insertBefore(tj,notes&&notes.parentNode===body?notes:null);if(identity)identity.remove();body.append(tagsGroup);
   /* Rodapé do próprio cartão superior, fora das três páginas horizontais. */
