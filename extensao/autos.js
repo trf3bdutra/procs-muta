@@ -669,26 +669,42 @@ function htmlDocs(pecas) {
   var aviso = A.itens && !lidoDoProcesso() ? '<p class="status err">Os autos lidos são de outro processo (' + esc(A.cnj || 'sem número') + ').</p>' : !A.itens ? '<p class="muted au-nl">Leia os autos para ver os documentos de cada peça.</p>' : '';
   return '<section class="card pc-sec pecas" id="g-docs">' + cab + seg + (A.msg ? '<p class="status ok">' + esc(A.msg) + '</p>' : '') + aviso + historicoDocsFicha() + corpo + '</section>';
 }
+function idSet(v){return String(v||'').match(/\b\d{6,}\b/g)||[];}
+function idsTabela(L){return Array.from(new Set((Array.isArray(L)?L:[]).reduce(function(a,r){return a.concat(idSet(r.id||r.ids||''));},[]))).sort();}
+function mesmoId(it){
+ if(it.status!=='conflito'||!it.doc)return false;
+ if(it.kind==='tabela'){var a=idsTabela(it.current),b=idsTabela(it.value);return a.length>0&&JSON.stringify(a)===JSON.stringify(b);}
+ if(/\bIDs?\b/i.test(it.key||''))return false;
+ var ds=idSet(it.doc),g=GB(),r=g.gravado?g.gravado('triagem','Registro - Peças'):[],hist=Array.isArray(r)?r:[];
+ return ds.length>0&&ds.every(function(d){return hist.some(function(h){return S(h.id)===d;});});
+}
+function decisoesConferencia(){try{var v=JSON.parse(S(valorFicha('origem.Conferência dos autos'))||'[]');return Array.isArray(v)?v:[];}catch(e){return [];}}
+function assinaturaConferencia(it){return JSON.stringify([it.alvo,it.doc,it.current,it.value]);}
+function preservado(it){var k=assinaturaConferencia(it);return decisoesConferencia().some(function(r){return r.chave===k;});}
+function manterHistorico(k){var it=(A.sug||[])[k],g=GB();if(!it||!mesmoId(it)||!g.marcar||!g.gravar||(window.MUTA_WEB&&window.MUTA_WEB.leitura))return;
+ var L=decisoesConferencia(),ch=assinaturaConferencia(it);if(!L.some(function(r){return r.chave===ch;}))L.push({chave:ch,alvo:it.alvo,doc:it.doc,decisao:'Manter histórico',data:new Date().toISOString()});
+ it.apply=false;g.marcar('origem.Conferência dos autos',JSON.stringify(L));g.gravar().then(redesenhar,function(){redesenhar();});
+}
 function htmlSugestoes(secoes) {
   if (!A.itens || !lidoDoProcesso()) return '';
   if (!A.sug) calcular();
   var I = (A.sug || []).filter(function (it) { return !secoes || naSecao(it.sec, secoes); });
-  var marc = I.filter(function (i) { return i.apply && i.status !== 'igual' && !(i.alvo && preenchido(i.alvo)); }).length;
+  var marc = I.filter(function (i) { return i.apply && i.status !== 'igual' && !preservado(i) && !(i.alvo && preenchido(i.alvo)); }).length;
   if (A.sugMsg) return '<p class="status err">' + esc(A.sugMsg) + '</p>';
   if (!I.length) return '<p class="muted">Nada a sugerir nestas partes com o que foi lido' + (Object.keys(A.docs).length ? '' : ' (leia as peças principais)') + '.</p>';
   var valor = function (it) { return dataBr(it.kind === 'tabela' ? it.value.map(function (l) { return Object.keys(l).filter(function (c) { return S(l[c]); }).map(function (c) { return c + ': ' + S(l[c]).slice(0, 90); }).join(' · '); }).join(' | ') : S(it.value)); };
   /* o que já confere com a ficha não tem o que gravar: fica recolhido numa linha */
   /* o que a leitura já pôs sozinha (e segue como pôs) conta como igual */
-  var feito = function (it) { return it.status === 'igual' || (it.alvo && preenchido(it.alvo)); };
+  var feito = function (it) { return it.status === 'igual' || preservado(it) || (it.alvo && preenchido(it.alvo)); };
   var pend = I.filter(function (it) { return !feito(it); }), iguais = I.filter(function (it) { return feito(it) && !(it.alvo && preenchido(it.alvo)); });
   var G = {}, ordem = [];
   pend.forEach(function (it) { var k = (A.sug || []).indexOf(it); if (!G[it.sec]) { G[it.sec] = []; ordem.push(it.sec); } G[it.sec].push([it, k]); });
   var h = ordem.map(function (sec) {
     return '<h4 class="tr-g">' + esc(sec) + '</h4>' + G[sec].map(function (x) {
       var it = x[0], k = x[1], v = valor(it);
-      return '<label class="sg-i is-' + it.status + '"><input type="checkbox" data-sg="' + k + '"' + (it.apply ? ' checked' : '') + '>' +
+      return '<div class="sg-i is-' + it.status + '"><input type="checkbox" data-sg="' + k + '"' + (it.apply ? ' checked' : '') + '>' +
         '<span class="sg-b"><span class="sg-h"><b>' + esc(it.label) + '</b><i class="sg-s">' + (it.status === 'conflito' ? 'diverge' : 'novo') + '</i>' + (it.doc ? '<small class="mono">ID ' + esc(it.doc) + '</small>' : '') + '</span>' +
-        '<span class="sg-v">' + esc(v.slice(0, 600)) + '</span>' + (it.status === 'conflito' && it.kind !== 'tabela' ? '<small class="muted">Na ficha: ' + esc(dataBr(S(it.current))) + '</small>' : '') + (it.note ? '<small class="muted">' + esc(it.note) + '</small>' : '') + '</span></label>';
+        '<span class="sg-v">' + esc(v.slice(0, 600)) + '</span>' + (it.status === 'conflito' && it.kind !== 'tabela' ? '<small class="muted">Na ficha: ' + esc(dataBr(S(it.current))) + '</small>' : '') + (it.note ? '<small class="muted">' + esc(it.note) + '</small>' : '') + (mesmoId(it)?'<small class="muted">Mesmo documento · conferir conteúdo</small><button type="button" class="btn line sm" data-au="manter:'+k+'">Manter registro histórico</button>':'') + '</span></div>';
     }).join('');
   }).join('');
   var conf = iguais.length ? '<details class="sg-ig"><summary>' + (pend.length ? '' : 'Tudo confere com a ficha · ') + iguais.length + ' campo(s) já iguais na ficha</summary><ul>' +
@@ -757,7 +773,7 @@ function htmlConferir() {
   if (!A.itens || !lidoDoProcesso()) return '';
   if (!A.sug) calcular();
   var al = alertas().map(function (a, i) { return [a, i]; }).filter(function (x) { return !/^Tipo de julgamento:/.test(x[0].t); });
-  var pend = (A.sug || []).filter(function (it) { return it.status !== 'igual' && !(it.alvo && preenchido(it.alvo)); }).length;
+  var pend = (A.sug || []).filter(function (it) { return it.status !== 'igual' && !preservado(it) && !(it.alvo && preenchido(it.alvo)); }).length;
   var sg = htmlSugestoes(null);
   var nA = autoItens().filter(function (x) { return preenchido(x.alvo); }).length;
   return '<section class="card pc-sec" id="g-cf"><div class="pc-sh"><h3>A conferir</h3><small class="muted">' + [nA ? nA + ' preenchido(s)' : '', al.length ? al.length + ' alerta(s)' : '', pend ? pend + ' divergência(s)' : ''].filter(Boolean).join(' · ') + '</small></div>' + htmlAuto(false) +
@@ -769,7 +785,7 @@ function htmlConferir() {
 /* ---------- ações ---------- */
 function aplicar() {
   var C = {};
-  (A.sug || []).forEach(function (i) { if (i.apply && i.alvo && i.status !== 'igual') C[i.alvo] = i.value; });
+  (A.sug || []).forEach(function (i) { if (i.apply && i.alvo && i.status !== 'igual' && !preservado(i)) C[i.alvo] = i.value; });
   var ks = Object.keys(C); if (!ks.length) return;
   var g = GB(); if (!g.marcar) return;
   ks.forEach(function (k) { g.marcar(k, C[k]); });
@@ -795,6 +811,7 @@ function clique(b) {
   if (a === 'ler' || a === 'tudo') ler();
   else if (a === 'princ') extrairPrincipais();
   else if (a === 'aplicar') aplicar();
+  else if (/^manter:/.test(a)) manterHistorico(Number(a.slice(7)));
   else if (a === 'desfazer') desfazerAuto();
   else if (a === 'gravar') gravarMarcados();
   else if (/^sel:/.test(a)) selecionarTodos(a.slice(4));
@@ -807,7 +824,7 @@ function clique(b) {
   else if (/^cp:/.test(a)) { var x = A.docs[a.slice(3)]; if (x && x.texto) copiar(x.texto, b); }
   else if (/^al:/.test(a)) { var al = alertas()[Number(a.slice(3))], g = GB(); if (al && al.campo && g.marcar) { g.marcar(al.campo, al.valor); g.gravar().catch(function () {}); } }
 }
-function marcarSugestao(k, on) { var it = (A.sug || [])[k]; if (it) it.apply = !!on; redesenhar(); }
+function marcarSugestao(k, on) { var it = (A.sug || [])[k]; if (it) it.apply = !!on; var n=(A.sug||[]).filter(function(i){return i.apply&&i.status!=='igual'&&!preservado(i)&&!(i.alvo&&preenchido(i.alvo));}).length;document.querySelectorAll('[data-au="aplicar"]').forEach(function(b){b.disabled=!n;b.textContent='Gravar '+n+' na ficha';}); }
 function especificar(id, v) { A.esp[id] = v; clearTimeout(A.tEsp); A.tEsp = setTimeout(function () { gravarEspecificacao(id); }, 1500); }
 function especificarJa(id) { if (id in A.esp) { clearTimeout(A.tEsp); gravarEspecificacao(id); } }
 
