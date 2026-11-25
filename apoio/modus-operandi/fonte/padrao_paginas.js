@@ -25,13 +25,14 @@
      (demais gabinetes da Turma Regional de MS, só consulta) são páginas separadas, com bases separadas; o seletor troca de
      uma para a outra levando a busca, o modo (índice ou texto integral) e o tipo */
   function fonteSel(){var t=!!window.EMENT_FONTE;
-    return '<div class="pa-fonte" role="group" aria-label="Base do ementário"><a href="/amicus/compendium/#v=ement" data-fonte="relator"'+(t?'':' aria-current="page"')+' title="Julgados do Relator (Des. Fed. Carlos Muta): curados e série histórica — base dos padrões do gabinete">Relator</a>'+
-      '<a href="/amicus/collegium/#v=ement" data-fonte="turma"'+(t?' aria-current="page"':'')+' title="Julgados dos demais gabinetes da Turma Regional de MS — consulta, não é padrão do gabinete">Turma</a></div>';}
+    return '<div class="pa-fonte" role="group" aria-label="Base do ementário"><a href="/amicus/compendium/#v=ement" target="_top" data-fonte="relator"'+(t?'':' aria-current="page"')+' title="Julgados do Relator (Des. Fed. Carlos Muta): curados e série histórica — base dos padrões do gabinete">Relator</a>'+
+      '<a href="/amicus/#collegium" target="_top" data-fonte="turma"'+(t?' aria-current="page"':'')+' title="Julgados da Turma Regional de MS (Relator e demais gabinetes) — consulta, não é padrão do gabinete">Turma</a></div>';}
   D.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('.pa-fonte a[data-fonte]');if(!a||a.getAttribute('aria-current')==='page'){if(a)e.preventDefault();return;}
     e.preventDefault();var q=D.getElementById('e-q'),qm=D.querySelector('input[name="e-qm"]:checked'),tp=D.querySelector('#e-tipo button[aria-pressed="true"]');
     var parts=window.VDM_ementQueryParts?window.VDM_ementQueryParts():null;var h=['v=ement'],v=parts?parts.join(' '):q&&q.value.trim(),t=tp&&tp.getAttribute('data-v');if(parts&&parts.length)h.push('qt='+encodeURIComponent(JSON.stringify(parts)));
     if(v)h.push('q='+encodeURIComponent(v));if(v&&qm&&qm.value==='ft')h.push('qm=ft');if(t==='Acórdão')h.push('t=A');else if(t==='Monocrática')h.push('t=M');
-    location.href=a.getAttribute('href').split('#')[0]+'#'+h.join('&');});
+    /* a Turma (Collegium) é aba do /amicus: o recorte segue no endereço da aba; fora de iframe, a navegação é na própria janela */
+    var hr=a.getAttribute('href'),dest=hr.split('#')[0]+'#'+(a.getAttribute('data-fonte')==='turma'?'collegium&':'')+h.join('&');try{(window.top||window).location.href=dest;}catch(er){location.href=dest;}});
   /* seletor de modo do Minutário (Minutário · Modelos · Parágrafos), no desenho do Relator/Turma do Ementário */
   function modoSel(){if(!window.VDM_minAtual)return '';var a=window.VDM_minAtual();if(['pecas','mod','par'].indexOf(a)<0)return '';
     return '<div class="pa-fonte pa-modo" role="group" aria-label="Modo do Minutário">'+[['pecas','Minutário','Estrutura da peça e folha de trabalho'],['mod','Modelos','Modelos do gabinete, matrizes incluídas'],['par','Parágrafos','Banco de parágrafos-padrão']].map(function(x){

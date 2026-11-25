@@ -6,9 +6,9 @@ const read=p=>fs.readFileSync(path.join(root,p),'utf8');
 
 test('Amicus tem o cartão do Collegium e o site publica a página e os dados',()=>{
   const amicus=read('apoio/amicus/index.html'),wf=read('.github/workflows/vercel-caput.yml');
-  assert.ok(amicus.includes('href="/amicus/collegium/"'));
-  assert.ok(amicus.includes('03 · Collegium'));
-  assert.ok(!amicus.includes('<small>01 · Collectio</small>'),'Collectio fora da página inicial do Amicus');
+  // Collegium e Collectio são abas do /amicus (Collectio só para servidores logados)
+  assert.ok(amicus.includes('data-amtab="collegium"')&&amicus.includes('data-src="/amicus/collegium/#v=ement"'));
+  assert.ok(/data-amtab="collectio"[^>]*hidden/.test(amicus),'Collectio escondida até o login');
   for(const x of ['site/public/amicus/collegium/index.html','gerar_busca.py --pasta precedentes/collegium','site/public/collegium/','"precedentes/collegium/**"'])
     assert.ok(wf.includes(x),x);
 });
@@ -51,12 +51,12 @@ test('Ementário do Collegium abre com termos e filtros pelo endereço (a pesqui
   const amicus=read('apoio/amicus/index.html'),e=read('apoio/modus-operandi/fonte/ementario.js'),wf=read('.github/workflows/vercel-caput.yml');
   assert.ok(!amicus.includes('id="bc"'),'sem o painel de pesquisa federada no Amicus');
   for(const x of ["!p.q&&!p.rl&&!p.t","if(p.rl&&DIM.rl)E.F.rl=p.rl;","E.qm=p.qm==='ft'&&E.q?'ft':'idx';"]) assert.ok(e.includes(x),x);
-  assert.ok(wf.includes('precedentes/collegium/resumo.json site/public/collegium/'),'resumo publicado');
+  assert.ok(wf.includes('collegium_turma.py --saida site/public/collegium'),'Collegium publicado com a Turma inteira');
 });
 
 test('Ementário tem o seletor Relator / Turma, que troca de página levando a busca (bases separadas)',()=>{
   const pp=read('apoio/modus-operandi/fonte/padrao_paginas.js');
-  for(const x of ['function fonteSel()','data-fonte="relator"','data-fonte="turma"','/amicus/compendium/#v=ement','/amicus/collegium/#v=ement',"por(slot(he),fonteSel()+"])
+  for(const x of ['function fonteSel()','data-fonte="relator"','data-fonte="turma"','/amicus/compendium/#v=ement','/amicus/#collegium',"por(slot(he),fonteSel()+"])
     assert.ok(pp.includes(x),x);
   assert.ok(read('apoio/modus-operandi/fonte/padrao_paginas.css').includes('.pa-fonte'));
 });

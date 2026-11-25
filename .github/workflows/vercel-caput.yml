@@ -151,7 +151,8 @@ jobs:
           python3 scripts/jurisprudencia/gerar_curados.py --saida site/public/jurisprudencia
           # Collegium: índice e busca dos julgados dos Gabs. B e C da Turma Regional de MS (precedentes/collegium), em /collegium/
           python3 scripts/jurisprudencia/gerar_busca.py --pasta precedentes/collegium
-          mkdir -p site/public/collegium && cp precedentes/collegium/indice.json.gz precedentes/collegium/resumo.json site/public/collegium/ && cp -R precedentes/collegium/busca site/public/collegium/
+          # o Collegium publica a Turma inteira: os Gabs. B e C mais a série do Relator (índice, resumo e busca unificados)
+          python3 scripts/jurisprudencia/collegium_turma.py --saida site/public/collegium
           # Extensão Muta (painel lateral ao lado do PJe): pacote para instalar sem compactação, em /extensao/muta-pje.zip
           mkdir -p site/public/extensao && python3 scripts/extensao/pacote.py --saida site/public/extensao/muta-pje.zip  # painel lateral = prontuário universal (fonte: scripts/extensao/previa/)
           # Versão publicada: a extensão compara com a instalada e avisa que há atualização (atualizar-muta.cmd baixa e troca os arquivos)

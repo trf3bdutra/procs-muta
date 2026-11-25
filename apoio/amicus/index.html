@@ -220,7 +220,17 @@ html[data-theme=dark] #fluxos{--af-entry:#8fb7e3;--af-mono:#dcae58;--af-susp:#b8
 .cx-tags{font:400 10.5px var(--emono,monospace);color:var(--em)}
 .cx-g{font:400 9.5px/1.4 var(--emono,monospace);letter-spacing:.11em;text-transform:uppercase;color:var(--em);margin:12px 0 2px}
 #comp-body details summary{cursor:pointer;font-size:12px;color:var(--em)}
-</style></head><body><header class="am-home-header"><div class="am-legacy"><b>Amicus Curiae.</b><span>Gabinete CMT · Ferramentas</span></div><nav class="am-over-nav am-home-overview" aria-label="Aplicações e áreas de consulta"><div class="am-nav-apps" aria-label="Aplicações"><a href="/amicus/compendium/">Compendium</a><a href="/amicus/cognitio/">Cognitio</a><a href="/amicus/collegium/">Collegium</a><a href="/amicus/collectio/">Collectio</a></div></nav></header>
+
+/* abas do Amicus (Referências · Collegium · Collectio) */
+.am-home-header .am-nav-apps button{flex:0 0 auto;padding:7px 12px;border:1px solid var(--el);background:transparent;color:var(--ei);font:600 11.5px Figtree,system-ui,sans-serif;cursor:pointer;white-space:nowrap}
+.am-home-header .am-nav-apps button[aria-selected="true"]{background:var(--eg,#173f3d);border-color:var(--eg,#173f3d);color:#fff}
+.am-home-header .am-nav-apps button:not([aria-selected="true"]):hover{background:var(--ep2)}
+.am-home-header .am-nav-links{display:flex;gap:4px;border-left:1px solid var(--el);padding-left:10px}
+.am-home-header .am-nav-links a{flex:0 0 auto;padding:7px 10px;border:1px solid var(--el);white-space:nowrap;font-size:11.5px;color:var(--ei);text-decoration:none}
+.am-tabpane{margin:0;padding:0}
+.am-tabpane iframe{display:block;width:100%;height:calc(100vh - var(--am-hh,64px));border:0;background:var(--ebg,#fbfaf5)}
+body.am-com-aba{overflow:hidden}
+</style></head><body><header class="am-home-header"><div class="am-legacy"><b>Amicus Curiae.</b><span>Gabinete CMT · Ferramentas</span></div><nav class="am-over-nav am-home-overview" aria-label="Aplicações e áreas de consulta"><div class="am-nav-apps" role="tablist" aria-label="Abas do Amicus"><button type="button" role="tab" data-amtab="ref" aria-selected="true">Referências</button><button type="button" role="tab" data-amtab="collegium" aria-selected="false">Collegium</button><button type="button" role="tab" data-amtab="collectio" aria-selected="false" hidden title="Só para servidores logados">Collectio</button></div><div class="am-nav-links" aria-label="Aplicações"><a href="/amicus/compendium/">Compendium</a><a href="/amicus/cognitio/">Cognitio</a></div></nav></header>
 <main class="am-dashboard am-workspace">
 <aside class="am-rail am-competence" id="referencias-operacionais" aria-labelledby="am-competence-title"><div class="am-rail-head"><small>Referências operacionais</small><h2 id="am-competence-title">Competência e imparcialidade</h2></div><div class="am-rail-panels"><section class="busca" id="competencia"><div class="pane-title"><div><small>Referência · competência</small><h2>Competência</h2></div><button type="button" class="more" data-full="competencia">⛶ Tela cheia</button></div><p>Turma Regional de Mato Grosso do Sul, competência delegada e distribuição por matéria nas Seções do TRF3. Síntese do material fornecido, sujeita à conferência normativa.</p>
 <div class="comp-grid" id="comp-body"></div></section><section class="busca" id="impedimentos"><div class="pane-title"><div><small>Referencial interno · imparcialidade</small><h2>Impedimentos e suspeições</h2></div><div class="imp-actions"><button type="button" class="more" id="imp-refresh" aria-label="Atualizar referencial" title="Atualizar referencial">↻</button><button type="button" class="more" data-full="impedimentos">⛶ Tela cheia</button></div></div>
@@ -415,4 +425,27 @@ const itAs=a=>'<summary><b>'+esc(a.t)+'</b><span class="cx-sub">'+esc(a.sec)+'</
  grupos.forEach(G=>sel.insertAdjacentHTML('beforeend','<option value="'+G.id+'">'+esc(G.t)+'</option>'));
  const f=()=>grupo(lista,grupos,ids,item);$(ids.q).addEventListener('input',f);sel.addEventListener('change',f);f();});
 })();
-</script></main></body></html>
+</script></main>
+<section class="am-tabpane" id="am-tab-collegium" role="tabpanel" aria-label="Collegium" hidden><iframe title="Collegium · ementário da Turma Regional de MS" data-src="/amicus/collegium/#v=ement"></iframe></section>
+<section class="am-tabpane" id="am-tab-collectio" role="tabpanel" aria-label="Collectio" hidden><iframe title="Collectio" data-src="/amicus/collectio/"></iframe></section>
+<script>
+/* abas do Amicus: Referências (esta página), Collegium e Collectio (só para servidores logados), carregadas no próprio portal */
+(function(){'use strict';
+const D=document,btns=()=>D.querySelectorAll('[data-amtab]'),main=D.querySelector('main.am-dashboard');let logado=false;
+function altura(){const h=D.querySelector('body>header');D.documentElement.style.setProperty('--am-hh',(h?h.getBoundingClientRect().height:64)+'px');}
+function abre(t,semHash,extra){if(t==='collectio'&&!logado)t='ref';if(!D.getElementById('am-tab-'+t)&&t!=='ref')t='ref';
+ btns().forEach(b=>b.setAttribute('aria-selected',String(b.dataset.amtab===t)));
+ if(main)main.hidden=t!=='ref';
+ D.querySelectorAll('.am-tabpane').forEach(p=>{const on=p.id==='am-tab-'+t;p.hidden=!on;const f=p.querySelector('iframe');if(on&&f&&(!f.src||extra))f.src=extra?f.dataset.src.split('#')[0]+'#'+extra:f.dataset.src;});
+ D.body.classList.toggle('am-com-aba',t!=='ref');altura();
+ if(!semHash)history.replaceState(null,'',t==='ref'?location.pathname:'#'+t);}
+D.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-amtab]');if(!b)return;e.preventDefault();abre(b.dataset.amtab);});
+window.addEventListener('resize',altura);
+const inicial=decodeURIComponent((location.hash||'').slice(1));
+fetch('/api/login',{credentials:'same-origin',cache:'no-store'}).then(r=>r.ok?r.json():null).catch(()=>null).then(j=>{
+ logado=!!(j&&j.usuario);const c=D.querySelector('[data-amtab="collectio"]');if(c)c.hidden=!logado;
+ if(!logado){const p=D.getElementById('am-tab-collectio');if(p)p.remove();}
+ if(inicial.split('&')[0]==='collectio')abre(logado?'collectio':'ref',!logado);});
+if(inicial.split('&')[0]==='collegium')abre('collegium',true,inicial.indexOf('&')>0?inicial.slice(inicial.indexOf('&')+1):'');
+})();
+</script></body></html>

@@ -180,7 +180,8 @@ if _M28.exists():
     except Exception as _ex:
         print('matriz 28,86%: conferência não rodou:', _ex)
 gz = base64.b64encode(gzip.compress(json.dumps(pacote, ensure_ascii=False, separators=(',', ':')).encode(), 9, mtime=0)).decode()
-# Collegium (/amicus/collegium/): o mesmo ementário, só com os julgados dos demais gabinetes da Turma Regional de MS (precedentes/collegium)
+# Collegium (/amicus/collegium/): o mesmo ementário com os julgados da Turma Regional de MS — os dos Gabs. B e C (precedentes/collegium)
+# e a série do Relator, juntados na publicação por scripts/jurisprudencia/collegium_turma.py
 gz_col = base64.b64encode(gzip.compress(json.dumps(dict(pacote, prec=[], it={}), ensure_ascii=False, separators=(',', ':')).encode(), 9, mtime=0)).decode()
 
 js_ = js
@@ -297,12 +298,12 @@ def montar(var):
             t = re.sub(r'<button class="tab" role="tab" data-v="' + v + r'" aria-selected="(true|false)"([^>]*)>', r'<button class="tab" role="tab" data-v="' + v + r'" aria-selected="false"\2 hidden data-collegium-fora>', t)
         t = troca(t, '<button class="tab" role="tab" data-v="ement" aria-selected="false">', '<button class="tab" role="tab" data-v="ement" aria-selected="true">')
         t = troca(t, '<p>Precedentes do Relator: ementas, inteiros teores, catalogação e linha do tempo.</p>',
-                  '<p>Julgados dos demais gabinetes da Turma Regional de MS, sem os do Relator: ementas, relatores, catalogação e linha do tempo.</p>')
+                  '<p>Julgados da Turma Regional de MS, do Relator e dos demais gabinetes: ementas, relatores, catalogação e linha do tempo.</p>')
         t = t.replace('<a class="mon-lnk" id="ed-lnk" href="/editor/" title="Abrir o editor do Compendium" hidden>', '<a class="mon-lnk" id="ed-lnk" href="/editor/" title="Abrir o editor do Compendium" hidden data-collegium-fora>', 1)
         js = ('window.EMENT_FONTE="/collegium/";window.EMENT_COLETA_ROT="Última coleta no DJEN";'
               'window.EMENT_COLETA_FONTE="Diário de Justiça Eletrônico Nacional (CNJ) · comunicaapi.pje.jus.br";'
-              'window.EMENT_NOTA="Julgados dos demais gabinetes da Turma Regional de Mato Grosso do Sul (Gab. B e Gab. C), sem os do Relator: '
-              'acórdãos e decisões monocráticas publicados no Diário de Justiça Eletrônico Nacional (CNJ), sem curadoria. Ramo, assunto e resultado '
+              'window.EMENT_NOTA="Julgados da Turma Regional de Mato Grosso do Sul: a série do Relator Carlos Muta (Gab. A) e os julgados dos Gabs. B e C, '
+              'publicados no Diário de Justiça Eletrônico Nacional (CNJ), sem curadoria. Use o filtro Relator para separar. Nos demais gabinetes, ramo, assunto e resultado '
               'vêm da ementa, por classificação automática; o texto guardado é a ementa e o resultado (acórdãos) ou a abertura e o dispositivo (monocráticas)";\n'
               + js + "\n;(function(){function vai(){var b=document.querySelector('.tab[data-v=\"ement\"]');if(b)b.click();"
               "document.querySelectorAll('[data-collegium-fora],#cmp-nav .cn-b:not([data-cn=ement]),#cmp-nav .cn-sep,#cmp-nav .cn-g').forEach(function(e){e.hidden=true;});}"
