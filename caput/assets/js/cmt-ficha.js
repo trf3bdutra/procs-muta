@@ -970,7 +970,7 @@ function gravado(sec, k) { var v = (op()[sec] || {})[k]; return v == null ? '' :
 function linhasGravadas(sec, k) { var v = (op()[sec] || {})[k]; return Array.isArray(v) ? v : []; }
 function linhas(sec, k) { var id = sec + '.' + k; return Object.prototype.hasOwnProperty.call(ST.draft, id) && Array.isArray(ST.draft[id]) ? ST.draft[id] : linhasGravadas(sec, k); }
 /* grupo condicionado (ex.: embargos de declaração só para a espécie ED): aparece se a condição vale ou se já tem algum valor */
-function grupoVisivel(g) { if (!g.quando) return true; var q = g.quando.campo.split('.'); if (val(q[0], q.slice(1).join('.')) === g.quando.valor) return true;
+function grupoVisivel(g) { if (!g.quando) return true; var q = g.quando.campo.split('.'); if(g.quando.campo==='triagem.Tipo de Julgamento'||g.quando.campo==='triagem.Padrão - Espécie'){var raw=val('triagem','Tipo de Julgamento');if(!raw)raw=val('triagem','Padrão - Espécie');var aliases={ed:'Embargos de declaração',interno:'Agravo interno',agint:'Agravo interno',retratacao:'Juízo de retratação'};if(String(raw||'').split(/\s*(?:\+|;|,|·)\s*/).map(function(x){return aliases[x.toLowerCase()]||x;}).indexOf(g.quando.valor)>=0)return true;}else if (val(q[0], q.slice(1).join('.')) === g.quando.valor) return true;
   return g.campos.some(function (c) { return c.tipo === 'tabela' ? linhas(c.secao, c.chave).length : !!valorCampo(c); }); }
 function val(sec, k) { var id = sec + '.' + k; return Object.prototype.hasOwnProperty.call(ST.draft, id) ? ST.draft[id] : gravado(sec, k); }
 function fonteVal(c) { var f = fo(), L = c.fonte || []; for (var i = 0; i < L.length; i++) { var v = f[L[i]]; if (v != null && S(v) !== '' && typeof v !== 'object') return S(v); } return ''; }
@@ -1317,6 +1317,7 @@ function fxEquipeCampo(c){return c&&((c.vocabulario==='equipe')||/^(Responsável
 function fxEquipeNomes(v){var L=(ST.d&&ST.d.equipe)||[];if(!L.length&&ST.ad&&ST.ad.equipeDisponivel)L=ST.ad.equipeDisponivel()||[];return Array.from(new Set(L.filter(function(x){return x&&x.situacao!=='inativo';}).map(function(x){return typeof x==='string'?x:x.nome;}).concat(v?[v]:[]).filter(Boolean))).sort(function(a,b){return a.localeCompare(b,'pt-BR');});}
 function fxEquipeInput(v,at,id){var dl='fx-equipe-'+id.replace(/[^a-zA-Z0-9_-]/g,'-');return '<input type="text" '+at+' list="'+E(dl)+'" value="'+E(v||'')+'" placeholder="Selecione ou digite o nome"><datalist id="'+E(dl)+'">'+fxEquipeNomes(v).map(function(x){return '<option value="'+E(x)+'"></option>';}).join('')+'</datalist>';}
 function campo(c) {
+  if(c.legado||c.chave==='Padrão - Espécie')return '';
   if(c.chave==='Status da triagem')c=Object.assign({},c,{rotulo:'Situação da triagem'});
   if (c.tipo === 'tabela') return campoTabela(c);
   var v = valorCampo(c), ed = ST.edit && editavel(c) && !bloqueado(c), id = c.secao ? c.secao + '.' + c.chave : '', sujo = id && Object.prototype.hasOwnProperty.call(ST.draft, id);
@@ -1403,7 +1404,7 @@ function fxHistLado(){
 }
 
 function fxAcomp(g){
- var ed=ST.edit&&!ST.ad.leitura,d=val('producao','Destino'),j=val('triagem','Tipo de Julgamento'),jt=S(j).split(/\s*(?:\+|;|,|·)\s*/).filter(Boolean),types=['Apelação','Remessa necessária','Agravo de instrumento','Mandado de segurança','Embargos de declaração','Agravo interno','Juízo de retratação'];
+ var ed=ST.edit&&!ST.ad.leitura,d=val('producao','Destino'),j=val('triagem','Tipo de Julgamento')||val('triagem','Padrão - Espécie'),jt=S(j).split(/\s*(?:\+|;|,|·)\s*/).filter(Boolean),types=['Primeiro julgamento','Apelação','Remessa necessária','Agravo de instrumento','Mandado de segurança','Embargos de declaração','Agravo interno','Juízo de retratação'];
  var tipos=ed?'<div class="fx-f s4"><span class="fx-lab">Tipo de julgamento</span><div class="fx-acts">'+Array.from(new Set(types.concat(jt))).map(function(x){return '<label><input type="checkbox" data-fx-jtipo value="'+E(x)+'"'+(jt.indexOf(x)>=0?' checked':'')+'> '+E(x)+'</label>';}).join('')+'</div></div>':fxCampo('triagem','Tipo de Julgamento');
  var sel=ed?'<div class="fx-f s4"><span class="fx-lab">Enquadramento</span><select data-fx-ac-dest>'+[['','A definir'],['Sessão','Seleção prévia'],['Monocrática','Hipóteses de monocrática'],['Outro destino','Outro destino final']].map(function(x){return '<option value="'+E(x[0])+'"'+(d===x[0]?' selected':'')+'>'+E(x[1])+'</option>';}).join('')+'</select></div>':'<p>'+E(d||'A definir')+'</p>';
  var sub='';
@@ -1474,7 +1475,7 @@ function abaGruposCorpo(A) {
   var gs = (A.grupos || []).filter(function (g) { return !(ST.v2 && A.aba==='Triagem' && g.grupo==='Sinalizações') && (!g.destino || g.destino === dn) && grupoVisivel(g) && !(ST.v2 && !ST.edit && FX2_SO_LADO.indexOf(g.grupo) >= 0); }), vazios = [];
   if (A.aba === 'Processo') gs = gs.map(function (g, i) { var k = PRI_PROC.indexOf(g.grupo); return [k < 0 ? 99 + i : k, g]; }).sort(function (a, b) { return a[0] - b[0]; }).map(function (x) { return x[1]; });
   if(A.aba==='Triagem')gs=gs.map(function(g){return Object.assign({},g,{campos:g.campos.filter(function(c){return ['Registro - Teor dos autos','Registro - Peças'].indexOf(c.chave)<0;})});}).filter(function(g){return g.campos.length;});
-  if(ST.v2)gs=gs.map(function(g){return Object.assign({},g,{campos:g.campos.filter(function(c){return (['Matéria','Caso, Conteúdo e Questões'].indexOf(g.grupo)>=0||['Detalhamento do caso','Síntese Processual','Síntese Fática','Alegações'].indexOf(c.chave)<0)&&c.chave!=='Observações';})});}).filter(function(g){return g.campos.length;});
+  if(ST.v2)gs=gs.map(function(g){return Object.assign({},g,{campos:g.campos.filter(function(c){return (['Matéria','Caso, Conteúdo e Questões'].indexOf(g.grupo)>=0||['Detalhamento do caso','Síntese Processual','Síntese Fática','Alegações'].indexOf(c.chave)<0)&&c.chave!=='Observações'&&c.chave!=='Padrão - Espécie'&&!c.legado;})});}).filter(function(g){return g.campos.length;});
   h += gs.map(function (g) {
     if(A.aba==='Processo'&&g.grupo==='Teor dos autos · Documentos e peças')return fxDocGrupo(g,('0'+(++n)).slice(-2));
     if(A.aba==='Processo'&&['1º grau','2º grau'].indexOf(g.grupo)>=0)return card(g.grupo,fxGrau(g),{n:('0'+(++n)).slice(-2)});
