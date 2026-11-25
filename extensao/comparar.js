@@ -49,7 +49,7 @@ function eh2886() {
 }
 /* 0.45 (pedido do gestor): Comparar só com modelos, precedentes, texto colado e 28,86%; a minuta-matriz foi para a Conformidade; CORTEX, triagem e parágrafos-padrão saíram da lista (o código fica) */
 var FORA_CMP = { lote: 1, tri: 1, par: 1 };
-function fontes() { var ok = eh2886(); if (FORA_CMP[C.fonte] || (!ok && C.fonte === 'm2886')) C.fonte = 'modelo'; return FONTES.filter(function (f) { return !FORA_CMP[f[0]] && (f[0] !== 'm2886' || ok); }); }
+function fontes() { var ok = eh2886(); if (FORA_CMP[C.fonte] || C.fonte === 'm2886') C.fonte = 'modelo'; return FONTES.filter(function (f) { return !FORA_CMP[f[0]] && f[0] !== 'm2886'; }); }
 function processo() {
   var k = chave();
   if (k !== C.pronChave) { C.pronChave = k; C.pron = ''; C.fonte = 'modelo'; C.sel = {}; C.q = ''; }
