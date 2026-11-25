@@ -6,6 +6,9 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
+concurrency:
+  group: hero-regressoes-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   codigo:
     runs-on: ubuntu-latest
