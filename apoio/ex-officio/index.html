@@ -5684,7 +5684,7 @@ function tempo(t){var d=new Date(t);if(isNaN(d))return '';var m=Math.round((Date
 function chaveLido(){return 'eq_not_lido_'+nq(U.eu);}
 function acaoNot(e){
   if(e.sessao){
-    var rotulo=e.numero?'Abrir item':'Abrir sessão';
+    var rotulo=e.numero?'Localizar na pauta':'Abrir sessão';
     return '<button type="button" class="b nt-abrir" data-ir="'+esc(e.sessao+'|'+(e.numero||''))+'">'+rotulo+'</button>';
   }
   return e.pedidoId?'<button type="button" class="b nt-abrir" data-ped-ver="'+esc(e.pedidoId)+'">Ver pedido</button>':'';
@@ -5789,7 +5789,7 @@ function pedCarregar(foco){
         '<label>Data da sessão<input required type="date" name="data" value="'+esc(p.data||'')+'"></label>'+
         '<label>Processo<input required type="text" name="cnj" maxlength="25" value="'+esc(p.cnj)+'"></label></div>'+
         '<div class="ac"><button class="b" type="submit">Vincular à pauta</button></div></form>':'';
-      var motivo=!p.vinculo&&pedMotivos.get(p.id);
+      var motivo=!p.vinculo&&(pedMotivos.get(p.id)||p.motivo);
       return '<article class="ped-card" data-ped-card="'+esc(p.id)+'" tabindex="-1">'+pedResumo(p)+
         (motivo?'<p class="mut">'+esc(motivo)+'</p>':'')+abrir+vincular+'</article>';
     }).join('')||'<p class="mut">Nenhum pedido disponível.</p>';
@@ -5822,7 +5822,12 @@ async function abrirPautaDaNotificacao(data,cnj){
   if(seq!==ntNavegacao||S.ses!==inicial||S.fonte!==fonteInicial)return;
   if(nPend()||gravando){pedeSalvar('Salve ou descarte as alterações antes de abrir a pauta.');return;}
   var alvo=achar(doc);
-  if(chave&&!alvo){toast('O processo não está mais na pauta de '+br(data)+'.');return;}
+  if(chave&&!alvo){
+    toast('O CNJ não consta na pauta de '+br(data)+'. Confira a sessão no pedido recebido.');
+    var pedidoAberto=$('#ped-list');
+    if(pedidoAberto&&!$('#p-not').hidden){pedidoAberto.hidden=false;if(!pedidoAberto.open)pedidoAberto.open=true;}
+    return;
+  }
   if(!mesma){S.aberto={};S.sel={};S.kx={};}
   S.req=(S.req||0)+1;
   S.ses=S.sesAnt=data;
@@ -5850,9 +5855,9 @@ $('#p-not').addEventListener('click',function(e){
   }
   if(!abrir)return;
   var ref=abrir.dataset.ir.split('|');
-  abrir.disabled=true;
+  abrir.disabled=true;abrir.setAttribute('aria-busy','true');
   abrirPautaDaNotificacao(ref[0],ref[1]).catch(function(e){toast(e.message||'Não foi possível abrir a pauta.');})
-    .finally(function(){abrir.disabled=false;});
+    .finally(function(){abrir.disabled=false;abrir.removeAttribute('aria-busy');});
 });
 $('#ped-fech').addEventListener('toggle',function(){if(this.open&&!$('#ped-fech-data').value)$('#ped-fech-data').value=pedDia();});
 $('#ped-fech-data').addEventListener('change',function(){$('#ped-fech-prev').hidden=true;$('#ped-fech-imagens').hidden=true;$('#ped-fech-status').textContent='';});
@@ -12409,6 +12414,8 @@ html body #prq .prt.pmn2{display:flex;flex-direction:column;gap:0;padding:0 14px
 html body #prq .pmn2 .pm-caso{padding:0!important;background:transparent!important;border:0!important}
 /* prontuário (Monocráticas e Pauta): etapas dentro do cartão do processo; se o alto não couber, rola por dentro */
 html body #prq .pmn2 .pm-caso{flex:none;max-height:58vh;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
+/* processo urgente: o cartão reaproveita a moldura .prt-urgf, mas não a margem negativa dela (deslocava o cartão 12 px para a esquerda) */
+html body #prq .pmn2 .pm-caso.prt-urgf{margin:0!important}
 html body #prq .pmn2 .pm-top{position:sticky;top:0;z-index:3;background:var(--ep,#f7f4ec)}
 html body #prq .pmn2 .pm-cd .pm-sh0{margin:14px 0 4px;padding-top:12px;border-top:1px dashed #e2ddd0}
 html body #prq .pmn2 .pm-cd .pm-et{border:0;padding:14px 0 6px;background:none;border-radius:0}
