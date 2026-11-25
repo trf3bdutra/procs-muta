@@ -1185,6 +1185,128 @@
         }
        ],
        "apelido": "procuracoes"
+      },
+      {
+       "chave": "Cabimento recursal",
+       "rotulo": "Cabimento do recurso",
+       "secao": "triagem",
+       "tipo": "lista",
+       "opcoes": [
+        "Cabível",
+        "Incabível",
+        "A conferir",
+        "Não se aplica"
+       ],
+       "apelido": "cabimento_recursal"
+      },
+      {
+       "chave": "Cabimento - Fundamento",
+       "rotulo": "Fundamento do cabimento",
+       "secao": "triagem",
+       "tipo": "texto-longo",
+       "apelido": "cabimento_fundamento"
+      },
+      {
+       "chave": "Instrução recursal",
+       "rotulo": "Instrução do recurso",
+       "secao": "triagem",
+       "tipo": "lista",
+       "opcoes": [
+        "Regular",
+        "Incompleta – sanar",
+        "Irregular – a examinar",
+        "A conferir",
+        "Não se aplica"
+       ],
+       "apelido": "instrucao_recursal"
+      },
+      {
+       "chave": "Instrução - Pendências",
+       "rotulo": "Peças faltantes / providência",
+       "secao": "triagem",
+       "tipo": "texto-longo",
+       "apelido": "instrucao_pendencias"
+      },
+      {
+       "chave": "Dialeticidade",
+       "rotulo": "Dialeticidade recursal",
+       "secao": "triagem",
+       "tipo": "lista",
+       "opcoes": [
+        "Presente",
+        "Parcial",
+        "Ausente",
+        "A conferir",
+        "Não se aplica"
+       ],
+       "apelido": "dialeticidade"
+      },
+      {
+       "chave": "Dialeticidade - Fundamento",
+       "rotulo": "Fundamentos impugnados / não impugnados",
+       "secao": "triagem",
+       "tipo": "texto-longo",
+       "apelido": "dialeticidade_fundamento"
+      },
+      {
+       "chave": "Inovação recursal",
+       "rotulo": "Inovação recursal",
+       "secao": "triagem",
+       "tipo": "lista",
+       "opcoes": [
+        "Não identificada",
+        "Identificada",
+        "A conferir",
+        "Não se aplica"
+       ],
+       "apelido": "inovacao_recursal"
+      },
+      {
+       "chave": "Inovação - Pontos",
+       "rotulo": "Matérias novas / observação",
+       "secao": "triagem",
+       "tipo": "texto-longo",
+       "apelido": "inovacao_pontos"
+      },
+      {
+       "chave": "Reexame - Cabimento",
+       "rotulo": "Cabimento da remessa necessária",
+       "secao": "triagem",
+       "tipo": "lista",
+       "opcoes": [
+        "Cabível",
+        "Dispensada",
+        "Incabível",
+        "A conferir"
+       ],
+       "apelido": "reexame_cabimento"
+      },
+      {
+       "chave": "Reexame - Fundamento",
+       "rotulo": "Fundamento da conclusão",
+       "secao": "triagem",
+       "tipo": "texto-longo",
+       "apelido": "reexame_fundamento"
+      },
+      {
+       "chave": "AgInt - Impugnação específica",
+       "rotulo": "Impugnação específica",
+       "secao": "triagem",
+       "tipo": "lista",
+       "opcoes": [
+        "Presente",
+        "Parcial",
+        "Ausente",
+        "A conferir"
+       ],
+       "apelido": "agint_impugnacao_especifica"
+      },
+      {
+       "chave": "Admissibilidade - Observação",
+       "rotulo": "Observação sobre a admissibilidade",
+       "secao": "triagem",
+       "tipo": "texto-longo",
+       "apelido": "admissibilidade_observacao"
       }
      ]
     },

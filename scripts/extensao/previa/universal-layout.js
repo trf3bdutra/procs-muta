@@ -79,12 +79,12 @@
     custas:{group:'Outras peças e ocorrências',title:'Comprovantes de preparo',keys:[],cats:['custas']},
     intim:{group:'Recursos e contrarrazões',title:'Intimações / publicações',keys:[],cats:['intimacao']}
   };
-  var stepDocs={decisao:['sent'],impugnada:['imp'],prolator:['imp'],tempest:['rec','intim'],preparo:['custas'],repres:['proc'],reexame:['sent'],cabimento:['imp','rec'],vicios:['ac','rec'],impug:['imp','rec'],dialet:['rec'],mpf:['mpf'],contra:['contra'],efeito:['imp'],infring:['ac','contra'],retrat:['imp']};
+  var stepDocs={decisao:['sent'],impugnada:['imp'],prolator:['imp'],tempest:['rec','intim'],preparo:['custas'],repres:['proc'],reexame:['sent'],cabimento:['imp','rec'],vicios:['ac','rec'],impug:['imp','rec'],dialet:['sent','imp','rec'],mpf:['mpf'],contra:['contra'],efeito:['imp'],infring:['ac','contra'],retrat:['imp']};
   // As conclusões da triagem continuam editáveis no respectivo passo.
   var triagemOwn={'triagem.MPF':1,'triagem.MPF - Custos Legis':1};
   var ownedGroups=['Sentença','Origem','Recursos e contrarrazões','Outras peças e ocorrências','Acórdão recorrido (embargos de declaração)','Sucumbência da decisão recorrida','Classificação documental'];
   function owned(id){
-    if(triagemOwn[id])return false;
+    if(triagemOwn[id]||(window.MutaRoteiro&&window.MutaRoteiro.admEditavel&&window.MutaRoteiro.admEditavel(id)))return false;
     if(ownedGroups.some(function(n){var g=grupoModelo(n);return g&&(g.campos||[]).some(function(c){return c.secao+'.'+c.chave===id;});}))return true;
     return PECAS_DOC.some(function(d){return d.campos.some(function(k){return k[0]+'.'+k[1]===id;});});
   }
@@ -115,7 +115,7 @@
     else if(!idValue&&!d.table&&!d.cats)box.append(elem('small','muted','ID não registrado na ficha.'));
     return box;
   }
-  function docsHtml(ids){var f=elem('div','pv-docrefs');ids.forEach(function(id){f.append(docRef(id));});return html(f);}
+  function docsHtml(ids){var f=elem('div','pv-docrefs'),T=ccTipos();ids.forEach(function(id){if(id==='sent'&&T.ai&&!T.ap&&!T.rn&&!S(V('origem','Sentença - ID')))return;if(id==='imp'&&T.ap&&!T.ai&&!T.agint&&!T.ed&&!T.ret&&!S(V('triagem','Impugnada - ID')))return;f.append(docRef(id));});return html(f);}
   function setupRoteiro(){
     var R=window.MutaRoteiro;if(!R||R._pvDoc)return;
     // Etiquetas são editadas em Autuação. O passo restante verifica mídias, não etiquetas.

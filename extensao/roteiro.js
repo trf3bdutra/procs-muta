@@ -23,6 +23,10 @@
     'triagem.MPF - Info adicional': 1, 'triagem.ID da Procuração': 1, 'triagem.Procurações': 1, 'producao.Acórdão - ID': 1 };
   /* 0.46: mérito e encaminhamento saíram do Roteiro e foram para a 2ª seta do cartão do processo (gabinete.js › merEnc) */
   var NO_CARTAO = { mer: 1, enc: 1 };
+  var ADM_EDIT={'triagem.ID da Procuração':1,'triagem.Procurações':1};
+  function admEditavel(id){return !!ADM_EDIT[id];}
+  function admEstado(c,k,ok,al){var v=N(c.v('triagem',k));return ok.test(v)?'ok':al.test(v)?'al':'pend';}
+  function juntarEstados(a){return a.indexOf('al')>=0?'al':a.every(function(x){return x==='ok';})?'ok':'pend';}
   /* 0.54: a identificação da decisão recorrida/impugnada saiu do Roteiro de triagem e mora no Roteiro de produção (gabinete.js › camposCaso) */
   var FORA_TRIAGEM = { decisao: 1, impugnada: 1 };
   var PASSOS = [
@@ -41,6 +45,7 @@
       dica: 'Acórdão ou decisão de outra Turma, anterior à redistribuição, volta ao órgão prolator. Conferir a certidão de julgamento antes de minutar (orientação do Relator, 19/11/2026).' },
     { id: 'tempest', f: 'adm', t: 'Tempestividade', tipos: '*', nao: ['rn'],
       campos: [['triagem', 'Tempestividade'], ['triagem', 'Tempest - Publicação', 'Intimação / publicação', 'calc'], ['triagem', 'Tempest - Protocolo', 'Protocolo', 'calc'], ['triagem', 'Tempest - Prazo legal', 'Prazo (dias úteis)', 'calc'], ['triagem', 'Tempest - Dobro', 'Contagem', 'calc'], ['triagem', 'Tempest - Suspensões', 'Suspensões', 'calc']],
+      mais: [['triagem','Admissibilidade - Observação']],
       estado: function (c) { var v = N(c.v('triagem', 'Tempestividade')); return /^tempestivo|^nao se aplica/.test(v) ? 'ok' : /^intempestivo/.test(v) ? 'al' : 'pend'; },
       dica: function (c) { return 'Dias úteis (artigo 219 do CPC), em dobro para a Fazenda (artigo 183). ' + (c.tem('ed') ? 'ED: 5 dias.' : c.tem('ai') || c.tem('agint') ? 'AI e AgInt: 15 dias.' : 'Apelação: 15 dias.'); } },
     { id: 'preparo', f: 'adm', t: 'Preparo', tipos: ['ap', 'ai', 'ms'],
@@ -52,10 +57,13 @@
       mais: [['triagem', 'DPU (controle)', 'DPU'], ['triagem', 'Procurações'], ['triagem', 'Observação da Representação', 'Observação da representação'], ['triagem', 'Impedimento / Suspeição', 'Impedimento ou suspeição'], ['triagem', 'Observação do Impedimento', 'Observação do impedimento'], ['triagem', 'Regularidade'], ['triagem', 'Regularidade Manual', 'Regularidade · observação']],
       estado: function (c) { var v = N(c.v('triagem', 'Representação')); return /^regular|^dispensada/.test(v) ? 'ok' : /^irregular/.test(v) ? 'al' : 'pend'; } },
     { id: 'reexame', f: 'adm', t: 'Sentença sujeita ao reexame?', tipos: ['rn'],
-      campos: [['origem', 'Sentença - Reexame', 'Remessa necessária']],
-      estado: function (c) { var v = N(c.v('origem', 'Sentença - Reexame')); return v === 'sim' ? 'ok' : /dispensada|nao/.test(v) ? 'al' : 'pend'; },
+      campos: [['triagem','Reexame - Cabimento'],['triagem','Reexame - Fundamento']],
+      estado:function(c){return admEstado(c,'Reexame - Cabimento',/^cabivel$/,/^dispensada$|^incabivel$/);},
       dica: 'Hipóteses e dispensas do artigo 496 do CPC; previdenciário abaixo do limite do § 3º, I: dispensada (Tema 1.081/STJ). Sem agravar a Fazenda (Súmula 45/STJ).' },
-    { id: 'cabimento', f: 'adm', t: 'Cabimento e instrução do agravo', tipos: ['ai'], manual: true,
+    { id: 'cabimento', f: 'adm', t: 'Cabimento e instrução do agravo', tipos: ['ai'],
+      campos: [['triagem','Cabimento recursal'],['triagem','Instrução recursal']],
+      mais: [['triagem','Cabimento - Fundamento'],['triagem','Instrução - Pendências']],
+      estado:function(c){return juntarEstados([admEstado(c,'Cabimento recursal',/^cabivel$|^nao se aplica$/,/^incabivel$/),admEstado(c,'Instrução recursal',/^regular$|^nao se aplica$/,/^incompleta|^irregular/)]);},
       dica: 'Rol do artigo 1.015 do CPC ou urgência (taxatividade mitigada, Tema 988/STJ); peças do artigo 1.017.' },
     { id: 'vicios', f: 'adm', t: 'Vícios apontados nos embargos', tipos: ['ed'],
       campos: [['triagem', 'ED - Vício', 'Vício(s) apontado(s)'], ['triagem', 'ED - Ponto', 'Ponto dos embargos']],
@@ -63,10 +71,13 @@
       estado: function (c) { return c.v('triagem', 'ED - Vício') ? 'ok' : 'pend'; },
       dica: 'Omissão, contradição, obscuridade ou erro material (artigo 1.022 do CPC). Rediscussão do mérito não é omissão.' },
     { id: 'impug', f: 'adm', t: 'Impugnação específica da decisão agravada', tipos: ['agint'],
-      campos: [['triagem', 'AgInt - Fundamentos', 'Fundamentos do agravo interno']],
-      estado: function (c) { return c.v('triagem', 'AgInt - Fundamentos') ? 'ok' : 'pend'; },
+      campos: [['triagem','AgInt - Impugnação específica'],['triagem', 'AgInt - Fundamentos', 'Fundamentos do agravo interno']],
+      estado:function(c){return admEstado(c,'AgInt - Impugnação específica',/^presente$/,/^ausente$|^parcial$/);},
       dica: 'Artigo 1.021, § 1º, do CPC; Súmula 182/STJ. Distinção genérica atrai a multa de 1% (Tema 1.201/STJ).' },
-    { id: 'dialet', f: 'adm', t: 'Dialeticidade e inovação recursal', tipos: ['ap', 'ai', 'ms'], manual: true,
+    { id: 'dialet', f: 'adm', t: 'Dialeticidade e inovação recursal', tipos: ['ap', 'ai', 'ms'],
+      campos: [['triagem','Dialeticidade'],['triagem','Inovação recursal']],
+      mais: [['triagem','Dialeticidade - Fundamento'],['triagem','Inovação - Pontos']],
+      estado:function(c){return juntarEstados([admEstado(c,'Dialeticidade',/^presente$|^nao se aplica$/,/^ausente$|^parcial$/),admEstado(c,'Inovação recursal',/^nao identificada$|^nao se aplica$/,/^identificada$/)]);},
       dica: 'As razões enfrentam o fundamento da decisão (artigo 1.010, II e III, do CPC)? Matéria nova não se conhece (artigo 1.014).' },
     { id: 'mpf', f: 'mp', t: 'Ministério Público Federal', tipos: '*',
       campos: [['triagem', 'MPF', 'Parecer'], ['triagem', 'MPF - Custos Legis', 'Hipótese de intervenção', function (c) { return !/^com parecer/.test(N(c.v('triagem', 'MPF'))) || !!c.v('triagem', 'MPF - Custos Legis'); }],
@@ -145,6 +156,18 @@
 
   /* ---------- desenho ---------- */
   var ICO = { ok: '✓', al: '!', pend: '', na: '–' }, ROT = { ok: 'conferido', al: 'alerta', pend: 'a conferir' };
+  function referenciaAdm(id,g){
+    var AU=window.MutaAutos,SG=window.MutaSigilo;if(SG&&SG.bloqueado())return '';
+    var cfg={tempest:['recurso','intimacao'],preparo:['custas'],repres:['procuracao'],reexame:['sentenca'],cabimento:['decisao','recurso'],vicios:['acordao','recurso'],impug:['decisao','recurso'],dialet:['sentenca','decisao','recurso']}[id];if(!cfg)return '';
+    var L=AU&&AU.doProcesso&&AU.doProcesso(),docs=L&&L.lista||[],r=[];
+    function restrito(ids){var a=S(ids).match(/\d{6,}/g)||[];return !!(SG&&docs.some(function(d){return a.indexOf(String(d.id))>=0&&SG.docBloqueado(d);}));}
+    function line(k,v){if(S(v))r.push('<div><span class="muted">'+esc(k)+': </span>'+esc(S(v).slice(0,350))+'</div>');}
+    if(cfg.indexOf('recurso')>=0){var rec=g.V('origem','Recursos');if(Array.isArray(rec))rec.forEach(function(x){if(!x||restrito(x.ids))return;line('Recurso',[x.ids?'ID '+x.ids:'',x.parte,x.data].filter(Boolean).join(' · '));line('Razões',x.teses);});}
+    if(cfg.indexOf('sentenca')>=0&&!restrito(g.V('origem','Sentença - ID'))){line('Sentença',g.V('origem','Sentença - ID'));line('Remessa na origem',g.V('origem','Sentença - Reexame'));line('Fundamento',g.V('origem','Sentença - Fundamento'));}
+    if(cfg.indexOf('decisao')>=0&&!restrito(g.V('triagem','Impugnada - ID'))){line('Decisão',g.V('triagem','Impugnada - ID'));line('Síntese',g.V('triagem','Impugnada - Síntese'));}
+    docs.filter(function(d){return !d.anexo&&cfg.indexOf(d.k)>=0&&!(SG&&SG.docBloqueado(d));}).forEach(function(d){line(d.tipo||'Documento',['ID '+d.id,d.data].filter(Boolean).join(' · '));});
+    return '<div class="rt-adm-doc"><div class="rt-adm-head"><b>Referências dos autos</b><button type="button" class="lnk" data-aba="Autos">Ver em Autos</button></div>'+(r.join('')||'<small class="muted">Nenhuma referência documental identificada.</small>')+'</div>';
+  }
   function html(g, campoRot, questoesHtml, X) {
     X = X || {};
     var mostrados = {};
@@ -155,9 +178,9 @@
       var alvo = c[0] + '.' + c[1], k = -1;
       /* 0.44: informação de documento já localizada fica em Autos › Peças e documentos; aqui, só a indicação */
       if (DOC_RT[alvo] && !mostrados[alvo]) { var vd = g.V(c[0], c[1]), tem = Array.isArray(vd) ? vd.length : S(vd);
-        if (tem) { mostrados[alvo] = 1; var tx = Array.isArray(vd) ? vd.length + (vd.length === 1 ? ' linha' : ' linhas') : S(vd); if (/^\d{4}-\d{2}-\d{2}$/.test(tx)) tx = tx.split('-').reverse().join('/');
+        if (tem && !admEditavel(alvo)) { mostrados[alvo] = 1; var tx = Array.isArray(vd) ? vd.length + (vd.length === 1 ? ' linha' : ' linhas') : S(vd); if (/^\d{4}-\d{2}-\d{2}$/.test(tx)) tx = tx.split('-').reverse().join('/');
           return '<div class="gf rt-doc' + (tx.length > 60 ? ' w' : '') + '"><span class="gl">' + esc(c[2] || c[1]) + ' <button type="button" class="lnk" data-aba="Autos" title="Editar em Autos › Peças e documentos">em Autos</button></span><span class="ro">' + esc(tx.slice(0, 300)) + '</span></div>'; } }
-      SG.forEach(function (it, i) { if (k < 0 && it.alvo === alvo && it.status !== 'igual' && it.kind !== 'tabela' && S(it.value)) k = i; });
+      SG.forEach(function (it, i) { if (k < 0 && !it.manual && it.alvo === alvo && it.status !== 'igual' && it.kind !== 'tabela' && S(it.value)) k = i; });
       if (mostrados[alvo]) return ''; mostrados[alvo] = 1;
       var h = campoRot(c[0], c[1], c[2]); if (k < 0) return h;
       if (usados.indexOf(k) < 0) usados.push(k);
@@ -209,7 +232,7 @@
           '<button type="button" class="rt-h" data-rt="a:' + p.id + '" aria-expanded="' + ab + '"><b>' + esc(p.t) + (AP.length ? ' <i class="rt-av">' + AP.length + ' aviso' + (AP.length > 1 ? 's' : '') + '</i>' : '') + (doAuto ? ' <i class="au-tag" title="Preenchido pela leitura dos autos: confira">autos</i>' : '') + '</b>' + (!ab && resumo ? '<small>' + esc(resumo.slice(0, 120)) + '</small>' : '') + '</button>';
         if (ab) {
           var mais = (p.mais || []).map(comSug).filter(Boolean);
-          h += '<div class="rt-b">' + (AP.length ? '<div class="al-l">' + AP.map(alHtml).join('') + '</div>' : '') + (visiveis.length ? '<div class="gr">' + visiveis.map(comSug).join('') + '</div>' : '') +
+          h += '<div class="rt-b">' + (!X.docRef && p.f === 'adm' ? referenciaAdm(p.id,g) : '') + (AP.length ? '<div class="al-l">' + AP.map(alHtml).join('') + '</div>' : '') + (visiveis.length ? '<div class="gr">' + visiveis.map(comSug).join('') + '</div>' : '') +
             (p.questoes && questoesHtml ? questoesHtml() : '') +
             (calc.length ? '<details class="rt-calc"' + (x.st === 'ok' ? '' : ' open') + '><summary>Cálculo do prazo</summary><div class="gr">' + calc.map(comSug).join('') + '</div></details>' : '') +
             (p.extra === 'etiquetas' && X.etiquetas ? X.etiquetas : '') +
@@ -247,5 +270,5 @@
     return false;
   }
   function conferir(id, on, g) { var cnj = g.cnj(), loc = lerLocal(cnj); if (on) loc[id] = new Date().toISOString().slice(0, 10); else delete loc[id]; gravarLocal(cnj, loc); }
-  window.MutaRoteiro = { tipos: tipos, html: html, resumo: resumo, clique: clique, conferir: conferir, detectar: detectar, PASSOS: PASSOS, TIPOS: TIPOS };
+  window.MutaRoteiro = { tipos: tipos, html: html, resumo: resumo, clique: clique, conferir: conferir, detectar: detectar, PASSOS: PASSOS, TIPOS: TIPOS, admEditavel: admEditavel };
 })();

@@ -648,5 +648,121 @@
     ]
    }
   ]
+ },
+ {
+  "aba": "Triagem",
+  "grupo": "Admissibilidade e regularidade",
+  "campos": [
+   {
+    "chave": "Cabimento recursal",
+    "rotulo": "Cabimento do recurso",
+    "secao": "triagem",
+    "tipo": "lista",
+    "opcoes": [
+     "Cabível",
+     "Incabível",
+     "A conferir",
+     "Não se aplica"
+    ]
+   },
+   {
+    "chave": "Cabimento - Fundamento",
+    "rotulo": "Fundamento do cabimento",
+    "secao": "triagem",
+    "tipo": "texto-longo"
+   },
+   {
+    "chave": "Instrução recursal",
+    "rotulo": "Instrução do recurso",
+    "secao": "triagem",
+    "tipo": "lista",
+    "opcoes": [
+     "Regular",
+     "Incompleta – sanar",
+     "Irregular – a examinar",
+     "A conferir",
+     "Não se aplica"
+    ]
+   },
+   {
+    "chave": "Instrução - Pendências",
+    "rotulo": "Peças faltantes / providência",
+    "secao": "triagem",
+    "tipo": "texto-longo"
+   },
+   {
+    "chave": "Dialeticidade",
+    "rotulo": "Dialeticidade recursal",
+    "secao": "triagem",
+    "tipo": "lista",
+    "opcoes": [
+     "Presente",
+     "Parcial",
+     "Ausente",
+     "A conferir",
+     "Não se aplica"
+    ]
+   },
+   {
+    "chave": "Dialeticidade - Fundamento",
+    "rotulo": "Fundamentos impugnados / não impugnados",
+    "secao": "triagem",
+    "tipo": "texto-longo"
+   },
+   {
+    "chave": "Inovação recursal",
+    "rotulo": "Inovação recursal",
+    "secao": "triagem",
+    "tipo": "lista",
+    "opcoes": [
+     "Não identificada",
+     "Identificada",
+     "A conferir",
+     "Não se aplica"
+    ]
+   },
+   {
+    "chave": "Inovação - Pontos",
+    "rotulo": "Matérias novas / observação",
+    "secao": "triagem",
+    "tipo": "texto-longo"
+   },
+   {
+    "chave": "Reexame - Cabimento",
+    "rotulo": "Cabimento da remessa necessária",
+    "secao": "triagem",
+    "tipo": "lista",
+    "opcoes": [
+     "Cabível",
+     "Dispensada",
+     "Incabível",
+     "A conferir"
+    ]
+   },
+   {
+    "chave": "Reexame - Fundamento",
+    "rotulo": "Fundamento da conclusão",
+    "secao": "triagem",
+    "tipo": "texto-longo"
+   },
+   {
+    "chave": "AgInt - Impugnação específica",
+    "rotulo": "Impugnação específica",
+    "secao": "triagem",
+    "tipo": "lista",
+    "opcoes": [
+     "Presente",
+     "Parcial",
+     "Ausente",
+     "A conferir"
+    ]
+   },
+   {
+    "chave": "Admissibilidade - Observação",
+    "rotulo": "Observação sobre a admissibilidade",
+    "secao": "triagem",
+    "tipo": "texto-longo"
+   }
+  ]
  }
 ]
