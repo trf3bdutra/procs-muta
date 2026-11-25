@@ -24,7 +24,7 @@
  const G=motor().__acervoGitHub;if(G&&G.token){G.token(bridge.SENT);if(G.puxar)G.puxar(true);}
  await aguardar(()=>{const sm=motor().CMTSessao;return sm&&sm.regrasEtiquetas&&(!sm.repoLido||sm.repoLido());});
  if(!window.CMTRegrasGerais)throw Error('Editor de regras indisponível.');
- CMTRegrasGerais.embutir(document.getElementById('editor'),{motor, pagina:'chefia',aba:'etiquetas',abas:['etiquetas'],abrirMotor:(aba)=>motor().CMTSessao.abrir(aba)});
+ CMTRegrasGerais.embutir(document.getElementById('editor'),{motor, pagina:'chefia',etiquetasAdmin:true,aba:'etiquetas',abas:['etiquetas'],abrirMotor:(aba)=>motor().CMTSessao.abrir(aba)});
  estado.hidden=true;
  window.addEventListener('focus',async()=>{try{const atual=await CognitioAuth.lerSessao();if(!atual||!atual.gestor||atual.usuario!==s.usuario)location.reload();}catch(e){}});
  }catch(e){estado.hidden=false;estado.textContent=e.message;}
