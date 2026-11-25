@@ -1222,6 +1222,7 @@ function fichaView() {
 }
 function fichaView2() {
   var corpo = ST.tab === 'resumo' ? abaResumo() : abaGrupos(abaDe(ST.tab) || F().abas[0]);
+  corpo = '<details class="fx-card" style="padding:8px 12px"><summary style="cursor:pointer;font-weight:650">Teor dos autos · documentos e peças</summary>'+cardDocumental()+'</details>'+corpo;
   var nav = '<nav class="fx-nav fx2-nav" aria-label="Seções da ficha"><div class="fx-seg" role="tablist">' + abas().map(function (a) {
     return '<button type="button" role="tab" data-fx-tab="' + E(a[0]) + '" aria-selected="' + (ST.tab === a[0]) + '">' + E(a[1]) + (a[2] ? '<span class="fx-badge' + (a[3] ? ' is-ce' : '') + '">' + a[2] + '</span>' : '') + '</button>';
   }).join('') + '</div><span class="fx-grow"></span>' + (ST.ad.leitura ? '' : '<div class="fx-seg fx-acts2" role="group" aria-label="Edição"><button type="button" data-fx="editar" aria-pressed="' + ST.edit + '" title="Liberar a edição dos campos do gabinete">' + svg('edit') + (ST.edit ? 'Editando' : 'Editar') + '</button></div>') + '</nav>';
@@ -1345,21 +1346,26 @@ function abaGruposCorpo(A) {
   var dn = destino(), h = '', n = 0;
   if (A.destino && A.destino !== dn) return card('Não se aplica a este processo', '<p>' + (A.destino === 'sessao' ? 'O destino do julgamento é decisão monocrática: o processo não vai à pauta. A decisão fica em Produção › Decisão monocrática.' : 'Esta parte só vale para a decisão monocrática.') + '</p><p>Para mudar, use o destino no fim do fluxo, acima.</p>');
   if (A.seletor) h += '<p class="fx-info-p">' + svg('rule') + '<span><b>' + E(A.seletor.rotulo) + ':</b> ' + (dn === 'monocratica' ? 'decisão monocrática' : destinoDef() ? 'sessão (acórdão)' : 'a definir na triagem (o fluxo mostra o da sessão)') + '. ' + E(A.seletor.regra || '') + '</span></p>';
+  var analiseStatus='', registrosHtml='';
   if (A.aba === 'Triagem') {
     if (!ST.edit) {
       var st = val('triagem','Status da triagem'), triado = st === 'Triado' || (st !== 'A triar' && !!(val('triagem','Triado em') || val('triagem','Registro - Atualizado em') || val('triagem','Registro - Triagem')));
       var ac = ST.ad.leitura ? '' : '<button type="button" class="fx-pill" data-fx="cog-tri-status" data-status="' + (triado ? 'A triar' : 'Triado') + '"' + (ST.busy ? ' disabled' : '') + '>' + (triado ? 'Reabrir triagem' : 'Concluir triagem') + '</button>';
-      h += card('Status da análise', '<p><b>' + (triado ? 'Triado' : 'A triar') + '</b> · independente do destino e das pendências.</p>', {acoes:ac});
+      analiseStatus = fxSubcard('Status da análise', '<p><b>' + (triado ? 'Triado' : 'A triar') + '</b> · independente do destino e das pendências.</p>', {acoes:ac});
     }
-    h += cardDestino() + cardTempest() + cardDocumental();
+
     var registros=ST.ad.registrosLote?ST.ad.registrosLote(ST.cnj):[];
-    if(registros&&registros.length)h+=card('Registros por lote',registros.map(function(l){return '<details open><summary><b>'+E(l.titulo)+'</b></summary><div style="padding:8px 12px">'+(l.campos||[]).map(function(c){return '<p style="white-space:pre-wrap;overflow-wrap:anywhere"><b>'+E(c.nome)+':</b> '+E(S(c.valor)||'—')+'</p>';}).join('')+'</div></details>';}).join('')+'<p class="fx-note">Campos específicos do lote atualmente aberto na Triagem. São editados na matriz do lote, sem duplicação na ficha.</p>');
+    if(registros&&registros.length)registrosHtml=card('Registros por lote',registros.map(function(l){return '<details open><summary><b>'+E(l.titulo)+'</b></summary><div style="padding:8px 12px">'+(l.campos||[]).map(function(c){return '<p style="white-space:pre-wrap;overflow-wrap:anywhere"><b>'+E(c.nome)+':</b> '+E(S(c.valor)||'—')+'</p>';}).join('')+'</div></details>';}).join('')+'<p class="fx-note">Campos específicos do lote atualmente aberto na Triagem. São editados na matriz do lote, sem duplicação na ficha.</p>');
   }
-  var gs = (A.grupos || []).filter(function (g) { return !(A.aba === 'Triagem' && !ST.edit && g.grupo === 'Conclusão da análise') && (!g.destino || g.destino === dn) && grupoVisivel(g) && !(ST.v2 && !ST.edit && FX2_SO_LADO.indexOf(g.grupo) >= 0); }), vazios = [];
+  var gs = (A.grupos || []).filter(function (g) { return (!g.destino || g.destino === dn) && grupoVisivel(g) && !(ST.v2 && !ST.edit && FX2_SO_LADO.indexOf(g.grupo) >= 0); }), vazios = [];
   if (A.aba === 'Processo') gs = gs.map(function (g, i) { var k = PRI_PROC.indexOf(g.grupo); return [k < 0 ? 99 + i : k, g]; }).sort(function (a, b) { return a[0] - b[0]; }).map(function (x) { return x[1]; });
   if(A.aba==='Triagem')gs=gs.map(function(g){return Object.assign({},g,{campos:g.campos.filter(function(c){return ['Registro - Teor dos autos','Registro - Peças'].indexOf(c.chave)<0;})});}).filter(function(g){return g.campos.length;});
   h += gs.map(function (g) {
+    var analise=A.aba==='Triagem'&&/^(Análise|Conclusão da análise)$/.test(g.grupo), adm=A.aba==='Triagem'&&g.grupo==='Admissibilidade e regularidade';
+    if(analise&&ST.v2)g=Object.assign({},g,{campos:g.campos.filter(function(c){return ['Destino - Situação','Destino - Confirmado em','Destino - Confirmado por'].indexOf(c.chave)<0 && (ST.edit||c.chave!=='Status da triagem');})});
     var cheios = (g.campos || []).filter(temValor), tudo = ST.edit || ST.vzTodos || ST.vz[g.grupo], nv = (g.campos || []).length - cheios.length;
+    if(analise)return card('Análise',analiseStatus+cardDestino(true)+grade(tudo?g.campos:cheios)+registrosHtml,{n:('0'+(++n)).slice(-2)});
+    if(adm)return card('Admissibilidade e regularidade',grade(tudo?g.campos:cheios)+cardTempest(true),{n:('0'+(++n)).slice(-2),acoes:!ST.edit&&nv?'<button type="button" class="fx-pill fx-mini" data-fx-vz="'+E(g.grupo)+'">'+(ST.vz[g.grupo]?'Esconder vazios':'+ '+nv+' campos vazios')+'</button>':''});
     if (!tudo && !cheios.length && g.grupo!=='Lote e correção (Index)') { vazios.push(g.grupo); return ''; }
     var ac = !ST.edit && !ST.vzTodos && nv ? '<button type="button" class="fx-pill fx-mini" data-fx-vz="' + E(g.grupo) + '">' + (ST.vz[g.grupo] ? 'esconder vazios' : '+ ' + nv + (nv > 1 ? ' campos vazios' : ' campo vazio')) + '</button>' : '';
     var rev=g.grupo==='Lote e correção (Index)', ocas=!!g.quando||!!g.controle||/^(Espécie e decisão impugnada|Acórdão recorrido|Embargos de declaração|Agravo interno|Juízo de retratação|Questões específicas da espécie|Sucumbência e consectários do julgamento)/.test(g.grupo);
@@ -1374,22 +1380,23 @@ function abaGruposCorpo(A) {
   return h;
 }
 /* destino do julgamento confirmado na triagem: Sessão ou Monocrática (producao.Destino); a data e o autor ficam na triagem */
-function cardDestino() {
+function fxSubcard(titulo,corpo,o){o=o||{};return '<div class="fx-subgrupo" style="padding:10px 0;border-bottom:1px solid #dce4df"><div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><b>'+E(titulo)+'</b><span class="fx-grow"></span>'+(o.acoes||'')+'</div>'+corpo+'</div>';}
+function cardDestino(interno) {
   var d = destinoDef(), em = val('triagem', 'Destino - Confirmado em'), por = val('triagem', 'Destino - Confirmado por'), hip = val('triagem', 'Hipóteses Monocrática'), ro = ST.ad.leitura;
   var est = d ? '<b>' + (d === 'monocratica' ? 'Decisão monocrática' : 'Sessão (colegiado)') + '</b> <span class="fx-dim">· confirmado' + (iso(em) ? ' em ' + E(brD(iso(em))) : '') + (por ? ' por ' + E(por) : '') + '</span>' : '<b>A definir</b> <span class="fx-dim">· o processo segue na fila de triagem até a confirmação</span>';
   var bt = function (v, t, on) { return '<button type="button" class="fx-pill' + (on ? ' is-on' : '') + '" data-fx-confdest="' + v + '"' + (ro || on ? ' disabled' : '') + '>' + t + '</button>'; };
   var acoes = bt('Sessão', 'Confirmar sessão', d === 'sessao') + bt('Monocrática', 'Confirmar monocrática', d === 'monocratica') + (d ? '<button type="button" class="fx-pill fx-mini" data-fx-confdest=""' + (ro ? ' disabled' : '') + '>Desfazer</button>' : '');
-  return card('Destino do julgamento', '<p>' + est + '</p>' + (hip && hip !== 'Não se aplica' ? '<p class="fx-note">Hipótese de monocrática anotada: ' + E(hip) + '</p>' : '') + (ST.v2 ? '<label class="fx2-dsel"><span>Destino</span>' + '<select class="fx-dest-sel" data-fx-destino' + (ST.ad.leitura ? ' disabled' : '') + ' aria-label="Destino do julgamento" title="Destino do julgamento: sessão (acórdão) ou decisão monocrática">' + [['', 'A definir'], ['Sessão|Pronto para julgar', 'Colegiado · pronto'], ['Sessão|Pendente', 'Colegiado · pendente'], ['Monocrática|Pronto para julgar', 'Monocrática · pronta'], ['Monocrática|Pendente', 'Monocrática · pendente'], ['Outro destino|', 'Outro destino']].map(function (o) { return '<option value="' + o[0] + '"' + (o[0] === destSel() ? ' selected' : '') + '>' + o[1] + '</option>'; }).join('') + '</select>' + '</label>' : '<div class="fx-acts">' + acoes + '</div>'), { cls: 'fx-destino' + (d ? ' is-ok' : ' is-warn') });
+  return (interno?fxSubcard:card)('Destino do julgamento', '<p>' + est + '</p>' + (hip && hip !== 'Não se aplica' ? '<p class="fx-note">Hipótese de monocrática anotada: ' + E(hip) + '</p>' : '') + (ST.v2 ? '<label class="fx2-dsel"><span>Destino</span>' + '<select class="fx-dest-sel" data-fx-destino' + (ST.ad.leitura ? ' disabled' : '') + ' aria-label="Destino do julgamento" title="Destino do julgamento: sessão (acórdão) ou decisão monocrática">' + [['', 'A definir'], ['Sessão|Pronto para julgar', 'Colegiado · pronto'], ['Sessão|Pendente', 'Colegiado · pendente'], ['Monocrática|Pronto para julgar', 'Monocrática · pronta'], ['Monocrática|Pendente', 'Monocrática · pendente'], ['Outro destino|', 'Outro destino']].map(function (o) { return '<option value="' + o[0] + '"' + (o[0] === destSel() ? ' selected' : '') + '>' + o[1] + '</option>'; }).join('') + '</select>' + '</label>' : '<div class="fx-acts">' + acoes + '</div>'), { cls: 'fx-destino' + (d ? ' is-ok' : ' is-warn') });
 }
 /* tempestividade calculada pelo calendário forense do gabinete (padrao/calendario-forense.js) */
-function cardTempest() {
+function cardTempest(interno) {
   var Fr = window.CMTForense, t = function (k) { return val('triagem', k); }; if (!Fr) return '';
   var c = Fr.prazo({ publicacao: t('Tempest - Publicação'), protocolo: t('Tempest - Protocolo'), prazo: t('Tempest - Prazo legal'), dobro: t('Tempest - Dobro') === '2' || sim(t('Tempest - Dobro')) ? 2 : 1, suspensoes: t('Tempest - Suspensões') }, ST.d.expediente);
   var corpo = c.falta ? '<p>Informe a intimação ou publicação, o protocolo do recurso e o prazo (Triagem › Admissibilidade) para calcular.</p>' :
     '<div class="fx-g3"><div class="fx-f"><span class="fx-lab">Data-limite</span><span class="fx-calc">' + E(brD(c.limite)) + '</span></div><div class="fx-f"><span class="fx-lab">Prazo</span><span class="fx-v">' + c.total + ' dias úteis' + (c.dobro === 2 ? ' (em dobro)' : '') + '</span></div>' +
     '<div class="fx-f"><span class="fx-lab">Resultado</span><span class="fx-calc ' + (c.ok === false ? 'is-warn' : '') + '">' + (c.ok == null ? 'informe o protocolo' : c.ok ? '✓ Tempestivo' : '✕ Intempestivo') + (c.ok != null && t('Tempestividade') && (c.ok ? 'Tempestivo' : 'Intempestivo') !== t('Tempestividade') ? ' · difere do registrado (' + E(t('Tempestividade')) + ')' : '') + '</span></div></div>' +
     (c.pulados.length ? '<p class="fx-note">Dias não contados: ' + E(c.pulados.map(function (x) { return brD(x[0]) + ' (' + x[1] + ')'; }).join(' · ')) + '</p>' : '');
-  return card('Tempestividade calculada', corpo + '<p class="fx-note">' + E(Fr.NOTA) + '</p>', { nota: 'calendário forense do gabinete' });
+  return (interno?fxSubcard:card)('Tempestividade calculada', corpo + '<p class="fx-note">' + E(Fr.NOTA) + '</p>', { nota: 'calendário forense do gabinete' });
 }
 var CE_INC = { urgencia: ['Registrar urgência', null], monocratica: ['Registrar monocrática', ['producao.Destino', 'Monocrática']], sensivel: ['Incluir em casos sensíveis', ['controles.Sensível - Incluído', 'Sim']], meta: ['Incluir em meta', null], sobrestamento: ['Registrar sobrestamento', null] };
 function infoCE(g) {
