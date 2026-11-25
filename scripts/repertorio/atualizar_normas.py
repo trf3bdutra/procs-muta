@@ -15,6 +15,10 @@ LIST = ITEM + r'(?:\s*(?:,\s*|\s+e\s+)(?:'+ITEM+r'))*'
 def diploma(s):
     n=norm(s)
     if n in ALIASES: s=ALIASES[n]
+    else:
+        for alias in ALIASES:
+            if n.startswith(alias+' ('):
+                s=ALIASES[alias]; break
     s=re.sub(r'\s+n[º°o]\.?\s*',' ',s,flags=re.I)
     return norm(s).replace('.','')
 def article(s):
@@ -44,10 +48,10 @@ def gerar(raiz, snapshot, complemento, anteriores):
             if d and a and k not in indexed[(diploma(d),a)]: indexed[(diploma(d),a)].append(k)
     auto={}
     uses={}
-    # Os vínculos automáticos anteriores não normativos permanecem; normas são recalculadas.
+    # Preserva os vínculos anteriores (inclusive casos com sintaxe não reconhecida pelo extrator).
+    # Uma nova ocorrência com a mesma chave substitui a anterior; não se duplicam usos.
     for u in anteriores:
-        if u.get('Código do item') not in codigos:
-            uses[(u.get('Código do item'),u.get('Processo'),u.get('Data'))]=u
+        uses[(u.get('Código do item'),u.get('Processo'),u.get('Data'))]=u
     with (raiz/'precedentes/precedentes.jsonl').open(encoding='utf-8') as f:
         for line in f:
             if not line.strip(): continue
