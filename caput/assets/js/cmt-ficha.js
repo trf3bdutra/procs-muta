@@ -1251,7 +1251,7 @@ function span(c, v) {
   return 1;
 }
 function campoTabela(c) {
-  var id = c.secao + '.' + c.chave, L = linhas(c.secao, c.chave), cols = c.colunas || [], ed = ST.edit, sujo = Object.prototype.hasOwnProperty.call(ST.draft, id);
+  var id = c.secao + '.' + c.chave, L = linhas(c.secao, c.chave), cols = c.colunas || [], ed = ST.edit && editavel(c) && !ST.ad.leitura, sujo = Object.prototype.hasOwnProperty.call(ST.draft, id);
   var lab = '<span class="fx-lab">' + E(c.rotulo) + ' <em class="fx-dim">· ' + L.length + (L.length === 1 ? ' linha' : ' linhas') + '</em></span>';
   if (!ed) return '<div class="fx-f s4">' + lab + (L.length ? '<div class="fx-tbl fx-tb" style="grid-template-columns:repeat(' + cols.length + ',minmax(0,1fr))!important">' + cols.map(function (k) { return '<span class="th">' + E(k.rotulo) + '</span>'; }).join('') +
     L.map(function (l) { return cols.map(function (k) { var x = S(l[k.chave]); return '<span class="' + (k.chave === 'ids' || k.chave === 'id' ? 'fx-mono' : '') + '">' + E(k.tipo === 'data' ? brD(iso(x) || x) : x) + '</span>'; }).join(''); }).join('') + '</div>' : '<span class="fx-v fx-dim">—</span>') + '</div>';
