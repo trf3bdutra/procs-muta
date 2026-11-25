@@ -141,10 +141,37 @@
   function cap(s) { return s ? s.charAt(0).toUpperCase() + s.slice(1) : s; }
 
   /* ---------- sentença ---------- */
+  function confirmadosOrigem(){
+    var x=GB().V?GB().V('origem','Sentença - Comandos'):[];
+    if(!Array.isArray(x)||!x.length||x.some(function(r){return N(r.confirmado)!=='sim'||!S(r.redacao)||!S(r.id_decisao)||r.categoria==='A conferir';}))return [];
+    var id=S(x[0].id_decisao),sid=S(v('origem','Sentença - ID')).split(/[,;\s]+/).filter(Boolean);
+    if(x.some(function(r){return S(r.id_decisao)!==id;})||sid.length!==1||sid[0]!==id||!x.some(function(r){return r.categoria==='Resultado';}))return [];
+    return x.slice().sort(function(a,b){return Number(a.ordem)-Number(b.ordem);});
+  }
+  function limpaComando(s){return S(s).replace(/[.;\s]+$/,'');}
+  function comandosOrigem(){
+    var x=confirmadosOrigem();
+    if(x.length)return x.filter(function(r){return r.categoria==='Resultado'||r.categoria==='Providência'||r.categoria==='Custas / gratuidade';}).map(function(r){return limpaComando(r.redacao);}).join('; ');
+    var r=resultadoSentenca(),p=linhas(v('origem','Sentença - Providências')).map(limpaComando).filter(function(t){return t&&r.indexOf(t)<0;});
+    return [r].concat(p).map(limpaComando).join('; ');
+  }
+  function honorariosAbertura(){
+    var h=confirmadosOrigem().filter(function(r){return r.categoria==='Honorários';});
+    if(h.length)return h.map(function(r){
+      var s=limpaComando(r.redacao).replace(/^fixou (?:os )?honorários advocatícios\s*/i,'Honorários advocatícios fixados ').replace(/^fixou (?:os )?honorários\s*/i,'Honorários advocatícios fixados ');
+      return cap(s)+'.';
+    }).join(' ');
+    return fraseHonorarios();
+  }
+  function aberturaOrigem(tipo){
+    var sid=S(v('origem','Sentença - ID')),rn=N(v('origem','Sentença - Reexame'))==='sim',nRec=tab('origem','Recursos').length;
+    var ab=tipo==='Remessa Necessária'?'Trata-se de remessa necessária de sentença ':rn?'Trata-se de remessa necessária e de apelação interposta contra sentença ':nRec>2?'Trata-se de apelações à sentença ':nRec===2?'Trata-se de dupla apelação à sentença ':'Trata-se de apelação à sentença ';
+    return ab+idOu(sid,'ID da sentença')+' que '+comandosOrigem()+'. '+honorariosAbertura();
+  }
   function resultadoSentenca(oque) {
     var r = S(v('origem', 'Sentença - Resultado')), d = N(v('origem', 'Sentença - Decisão'));
     if (r) {
-      r = r.replace(/\b([A-ZÁ-Ú]{4,}(?:\s+[A-ZÁ-Ú]{1,})*)\b/g, function (m) { return m.toLowerCase(); }).replace(/^(?:o juiz|a ju[íi]za|a sentença)\s+/i, '')
+      r = r.replace(/\b(IMPROCEDENTES?|PROCEDENTES?|PARCIALMENTE|EXTINTO|EXTINTA)\b/g, function(m){return m.toLowerCase();}).replace(/^(?:o juiz|a ju[íi]za|a sentença)\s+/i, '')
         .replace(/,?\s*(?:e\s+)?(?:resolvendo|com resolu[çc][ãa]o|extinguindo o (?:processo|feito) com|nos termos d[oe] (?:art|artigo))[\s\S]*$/i, '').replace(/[.;,\s]+$/, '');
       if (!/^(julgou|extinguiu|denegou|concedeu|homologou|indeferiu|deferiu|rejeitou|acolheu|reconheceu|declarou|condenou|determinou)/i.test(r)) r = VAL('verbo nuclear') + ' ' + r;
       return r;
@@ -231,11 +258,11 @@
       pRecursos(tipo).forEach(function (x) { P.push(x); });
       P.push(pContrarrazoes(tipo));
     } else if (tipo === 'Remessa Necessária') {
-      P.push('Trata-se de remessa necessária de sentença ' + idOu(sid, 'ID da sentença') + ' que ' + resultadoSentenca() + '. ' + fraseHonorarios());
+      P.push(aberturaOrigem(tipo));
       P.push(nRec ? VAL('há recurso voluntário: conferir o tipo de julgamento') : 'Sem recurso voluntário, subiram os autos por força da remessa necessária.');
     } else {
       var ab = rn ? 'Trata-se de remessa necessária e de apelação interposta contra sentença ' : nRec > 2 ? 'Trata-se de apelações à sentença ' : nRec === 2 ? 'Trata-se de dupla apelação à sentença ' : 'Trata-se de apelação à sentença ';
-      P.push(ab + idOu(sid, 'ID da sentença') + ' que ' + resultadoSentenca() + '. ' + fraseHonorarios());
+      P.push(aberturaOrigem(tipo));
       pRecursos(tipo).forEach(function (x) { P.push(x); });
       P.push(pContrarrazoes(tipo));
     }
@@ -387,6 +414,6 @@
     if (b && acao(b)) pintar(true);
   });
   /* Composição compartilhada: recebe apenas os dados registrados do CNJ, sem recorrer ao estado da extensão. */
-  function comporFicha(campos, fonte, tipo){var ant=CONTEXTO,t0=TIPO;try{CONTEXTO={V:function(sec,k){return campos[sec+'.'+k];},fo:function(){return fonte||{};}};TIPO=tipo||tipoDetectado();return {tipo:TIPO,rel:relatorio(TIPO),em:ementa(TIPO,'')};}finally{CONTEXTO=ant;TIPO=t0;}}
+  function comporFicha(campos, fonte, tipo){var ant=CONTEXTO,t0=TIPO;try{CONTEXTO={V:function(sec,k){return campos[sec+'.'+k];},fo:function(){return fonte||{};}};TIPO=tipo||tipoDetectado();var rel=relatorio(TIPO);return {tipo:TIPO,rel:rel,em:ementa(TIPO,resDaFicha(TIPO)),variaveis:{abertura_relatorio:rel[0],resultado_decisao_recorrida:resultadoSentenca(),comandos_dispositivos:comandosOrigem(),frase_honorarios_origem:honorariosAbertura()}};}finally{CONTEXTO=ant;TIPO=t0;}}
   window.MutaGerador = { comporFicha: comporFicha, pintar: pintar, abrir: abrir, modo: modo, html: html, acao: acao, docs: docs, _ST: ST, _t: { resultado: resultado, fraseHonorarios: fraseHonorarios, designa: designa, feminino: feminino } };
 })();

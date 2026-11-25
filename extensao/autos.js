@@ -278,6 +278,17 @@ function mapear(L) {
   tab('Outras peças', 'Outras peças e ocorrências', 'Outras peças', TB.ocorr, 'ids', TB.docs.ocorr);
   return out;
 }
+function sugerirAbertura(P,T){
+ if(!T.comandosRelatorio||sigBloq()||(SG()&&SG().sigiloso()))return;
+ var ids=S(gravado('origem','Sentença - ID')).split(/[,;\s]+/).filter(Boolean);
+ var ds=P.docs.filter(function(d){return d.target==='sentenca'&&!d.edDe;});
+ var d=ids.length===1?ds.find(function(d){return S(d.id)===ids[0];}):!ids.length&&ds.length===1?ds[0]:null;
+ if(!d||docBloq(d)||(SG()&&SG().docSigiloso(d)))return;
+ var rows=T.comandosRelatorio(d);if(!rows.length||rows.length>60||rows.some(function(r){return r.evidencia.length>4000||r.redacao.length>4000;}))return;
+ function add(k,L){var c=alvoDe(k);if(!c||!L.length)return;var old=linhasGravadas(c.secao,c.chave);if(old.length)return;
+ A.sug.push({sec:'Decisão recorrida / sentença',key:k,label:c.rotulo,kind:'tabela',alvo:c.secao+'.'+c.chave,campo:c,value:L,current:old,status:'novo',apply:false,manual:true,doc:S(d.id),note:'Conferir ID, capítulos, base literal e ressalvas. Comandos só alimentam o relatório depois de confirmados na ficha.'});}
+ add('Sentença - Comandos',rows);add('Sucumbência da decisão recorrida',T.sucumbenciaRelatorio(rows));
+}
 function calcular() {
   var T = window.CMTInteiroTeor;
   if (!T || !T.parseTxt) { A.sugMsg = 'Motor de leitura indisponível.'; return; }
@@ -286,6 +297,7 @@ function calcular() {
     var P = T.parseTxt(md());
     T.preselect(P); try { P.kind = T.especie(P); T.preselectKind(P); } catch (e) {}
     A.P = P; A.sug = mapear(T.buildSuggestions(P, linhaAntiga(), null) || []); A.sugMsg = '';
+    try { sugerirAbertura(P,T); } catch (e) { console.warn('[HERO] abertura estruturada',e); }
     agendarAuto();
   } catch (e) { A.sug = []; A.sugMsg = 'Não foi possível ler as peças: ' + ((e && e.message) || e); }
 }
@@ -313,7 +325,7 @@ function autoPreencher() {
   var sig = assinatura(); if (A.autoSig[sig]) return; A.autoSig[sig] = 1;
   var ck = chave(), rec = A.recusa[ck] || {}, L = [];
   A.sug.forEach(function (it) {
-    if (it.alvo && it.status === 'novo' && !rec[it.alvo] && cheio(it.value) && vazioFicha(it.alvo) && !L.some(function (x) { return x.alvo === it.alvo; }))
+    if (!it.manual && it.alvo && it.status === 'novo' && !rec[it.alvo] && cheio(it.value) && vazioFicha(it.alvo) && !L.some(function (x) { return x.alvo === it.alvo; }))
       L.push({ alvo: it.alvo, rot: it.label || it.key, v: it.value, doc: it.doc || '' });
   });
   try { alertas().forEach(function (a) {

@@ -614,7 +614,7 @@ function pecaSug(C) {
   var AU = window.MutaAutos; if (!AU || !AU.sugestoes) return [];
   var ids = {}; C.forEach(function (c) { if (c.secao) ids[c.secao + '.' + c.chave] = 1; });
   var vazio = function (alvo) { var i = alvo.indexOf('.'), v = V(alvo.slice(0, i), alvo.slice(i + 1)); return Array.isArray(v) ? !v.length : !S(v); };
-  return AU.sugestoes().filter(function (x) { return x.alvo && ids[x.alvo] && x.status === 'novo' && vazio(x.alvo) && (Array.isArray(x.value) ? x.value.length : S(x.value)); });
+  return AU.sugestoes().filter(function (x) { return !x.manual && x.alvo && ids[x.alvo] && x.status === 'novo' && vazio(x.alvo) && (Array.isArray(x.value) ? x.value.length : S(x.value)); });
 }
 function pecaExtracao(C, val) {
   var AU = window.MutaAutos; if (!AU || !AU.estado || !C.some(function (c) { return c.secao; })) return '';

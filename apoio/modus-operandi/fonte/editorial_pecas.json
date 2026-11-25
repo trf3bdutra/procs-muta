@@ -70,11 +70,21 @@
         },
         {
           "n": "Abertura (variante)",
-          "f": "Trata-se de apelação à sentença (ID …) que {{verbo nuclear}} …",
+          "f": "@abertura_relatorio",
           "r": [
             "Honorários em nova frase."
           ],
-          "fo": "M"
+          "fo": "M",
+          "alts": [
+            {
+              "lab": "Ficha do processo",
+              "f": "@abertura_relatorio"
+            },
+            {
+              "lab": "Fórmula original",
+              "f": "Trata-se de apelação à sentença (ID …) que {{verbo nuclear}} …"
+            }
+          ]
         },
         {
           "n": "Sentença",
@@ -215,7 +225,17 @@
             "Fundamentação geral antes do caso.",
             "Normas e teses transcritas em parágrafo próprio, entre aspas e em itálico."
           ],
-          "fo": "P+M"
+          "fo": "P+M",
+          "alts": [
+            {
+              "lab": "Fórmula original",
+              "f": ""
+            },
+            {
+              "lab": "Solução registrada na ficha",
+              "f": "@tese_juridica_adotada"
+            }
+          ]
         },
         {
           "n": "Exame do caso",
@@ -227,7 +247,17 @@
             "Preserva o grau de certeza da prova.",
             "Vincula cada premissa decisiva ao ID."
           ],
-          "fo": "P+M"
+          "fo": "P+M",
+          "alts": [
+            {
+              "lab": "Fórmula original",
+              "f": "Na espécie,"
+            },
+            {
+              "lab": "Solução registrada na ficha",
+              "f": "Na espécie, @aplicacao_caso_concreto"
+            }
+          ]
         },
         {
           "n": "Enfrentamento das alegações",
@@ -337,6 +367,10 @@
             {
               "lab": "Questão não devolvida",
               "f": "[Correção monetária e juros de mora segundo os critérios do Manual de Cálculos vigente.] [VALIDAR: redação genérica]"
+            },
+            {
+              "lab": "Solução registrada na ficha",
+              "f": "@juros_correcao_monetaria"
             }
           ],
           "info": {
@@ -373,7 +407,17 @@
             "Direto e completo: resultado, ato anulado e extensão, destino dos autos, providências e situação do recurso.",
             "Verbos por classe: recurso provido/desprovido; embargos de declaração acolhidos/rejeitados; segurança concedida/denegada."
           ],
-          "fo": "P+M"
+          "fo": "P+M",
+          "alts": [
+            {
+              "lab": "Fórmula original",
+              "f": "Ante o exposto, …"
+            },
+            {
+              "lab": "Solução registrada na ficha",
+              "f": "Ante o exposto, @dispositivo_pronunciamento"
+            }
+          ]
         },
         {
           "n": "Encerramento",
@@ -751,8 +795,12 @@
       "elementos": [
         {
           "n": "Abertura",
-          "f": "Trata-se de apelação à sentença (ID …) que {{verbo nuclear}} …",
+          "f": "@abertura_relatorio",
           "alts": [
+            {
+              "lab": "Ficha do processo",
+              "f": "@abertura_relatorio"
+            },
             {
               "lab": "À sentença",
               "f": "Trata-se de apelação à sentença (ID …) que {{verbo nuclear}} …"
@@ -763,7 +811,8 @@
             }
           ],
           "r": [
-            "Quando a abertura já diz o que decidiu a sentença, o tópico Sentença sai."
+            "Quando a abertura já diz o que decidiu a sentença, o tópico Sentença sai.",
+            "Composição pela ficha: ID, resultado, comandos e honorários; não repetir Sentença quando integrada."
           ],
           "fo": "P"
         },
@@ -866,11 +915,22 @@
       "elementos": [
         {
           "n": "Abertura",
-          "f": "Trata-se de apelações à sentença (ID …) que {{verbo nuclear}} …",
+          "f": "@abertura_relatorio",
           "r": [
-            "[VALIDAR] Abertura no plural não localizada nos inteiros teores da base."
+            "[VALIDAR] Abertura no plural não localizada nos inteiros teores da base.",
+            "Composição pela ficha: ID, resultado, comandos e honorários; não repetir Sentença quando integrada."
           ],
-          "fo": "P"
+          "fo": "P",
+          "alts": [
+            {
+              "lab": "Ficha do processo",
+              "f": "@abertura_relatorio"
+            },
+            {
+              "lab": "Fórmula original",
+              "f": "Trata-se de apelações à sentença (ID …) que {{verbo nuclear}} …"
+            }
+          ]
         },
         {
           "n": "Razões do primeiro apelante",
@@ -966,8 +1026,12 @@
       "elementos": [
         {
           "n": "Abertura",
-          "f": "Trata-se de apelação e remessa necessária à sentença (ID …) que …",
+          "f": "@abertura_relatorio",
           "alts": [
+            {
+              "lab": "Ficha do processo",
+              "f": "@abertura_relatorio"
+            },
             {
               "lab": "Apelação e remessa",
               "f": "Trata-se de apelação e remessa necessária à sentença (ID …) que …"
@@ -977,7 +1041,9 @@
               "f": "Trata-se de remessa necessária à sentença (ID …) que …"
             }
           ],
-          "r": [],
+          "r": [
+            "Composição pela ficha: ID, resultado, comandos e honorários; não repetir Sentença quando integrada."
+          ],
           "fo": "P"
         },
         {

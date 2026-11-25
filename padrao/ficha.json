@@ -98,6 +98,61 @@
         "Não"
        ],
        "apelido": "sentenca_tutela"
+      },
+      {
+       "rotulo": "Comandos dispositivos e evidências",
+       "chave": "Sentença - Comandos",
+       "tipo": "tabela",
+       "secao": "origem",
+       "colunas": [
+        {
+         "chave": "id_decisao",
+         "rotulo": "ID da decisão",
+         "tipo": "texto"
+        },
+        {
+         "chave": "ordem",
+         "rotulo": "Ordem",
+         "tipo": "texto"
+        },
+        {
+         "chave": "categoria",
+         "rotulo": "Categoria",
+         "tipo": "lista",
+         "opcoes": [
+          "Resultado",
+          "Providência",
+          "Honorários",
+          "Custas / gratuidade",
+          "A conferir"
+         ]
+        },
+        {
+         "chave": "redacao",
+         "rotulo": "Redação para o relatório",
+         "tipo": "texto-longo"
+        },
+        {
+         "chave": "evidencia",
+         "rotulo": "Trecho literal",
+         "tipo": "texto-longo"
+        },
+        {
+         "chave": "pagina",
+         "rotulo": "Página (se localizada)",
+         "tipo": "texto"
+        },
+        {
+         "chave": "confirmado",
+         "rotulo": "Confirmado",
+         "tipo": "lista",
+         "opcoes": [
+          "Sim",
+          "Não"
+         ]
+        }
+       ],
+       "apelido": "sentenca_comandos"
       }
      ]
     },

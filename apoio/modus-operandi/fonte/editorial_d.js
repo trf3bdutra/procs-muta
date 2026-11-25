@@ -606,7 +606,7 @@ function dkComposicaoFicha(PT){
   if(!P||!J||!window.MutaGerador||!MutaGerador.comporFicha||String(P.processo||'').replace(/\D/g,'')!==String(J.processo||'').replace(/\D/g,''))return PT;
   var cp=J.campos||{},fo={};Object.keys(cp).forEach(function(k){if(k.indexOf('acervo.')===0)fo[k.slice(7)]=cp[k];});
   fo.classe_judicial=fo.classe_judicial||P.classe||'';fo.Assunto=fo.Assunto||P.assunto||'';
-  var tj=String(P.tipoJulgamento||'');if(!tj)return PT;
+  var tj=String(cp['triagem.Tipo de Julgamento']||P.tipoJulgamento||'');if(!tj)return PT;
   var tipo=/retrata/i.test(tj)?'Juízo de Retratação':/embargos de declara/i.test(tj)?'Embargos de Declaração':/agravo interno/i.test(tj)?'Agravo Interno':/agravo de instrumento/i.test(tj)?'Agravo de Instrumento':/remessa/i.test(tj)&&!/apela/i.test(tj)?'Remessa Necessária':/apela/i.test(tj)?'Apelação':'';
   if(!tipo)return PT;var D=MutaGerador.comporFicha(cp,fo,tipo);
   /* O texto derivado é uma proposta editável do caso, não um modelo temático nem um dado novo na ficha. */
@@ -735,6 +735,14 @@ var _xAutoCasoBase=xAutoCaso;xAutoCaso=function(){_xAutoCasoBase();
   ['classe','assunto','polo_ativo','polo_passivo'].forEach(function(a){if(AUTO['@'+a])AUTO[E[a]]=a==='classe'||a==='assunto'?String(AUTO['@'+a]).toUpperCase():AUTO['@'+a];});
   if(P){var res=AUTO['@resultado_julgamento']||P.resultado;if(res){AUTO.resultado=dkValorFicha(res);AUTO['@resultado']=AUTO.resultado;}else{delete AUTO.resultado;delete AUTO['@resultado'];delete AUTO.CONCLUSÃO;delete AUTO['dispositivo da ementa'];}}
   Object.keys(E).forEach(function(a){if(!AUTO['@'+a]&&AUTO[E[a]])AUTO['@'+a]=AUTO[E[a]];});
+  // Variáveis compostas da mesma ficha e do mesmo gerador da HERO.
+  ['abertura_relatorio','resultado_decisao_recorrida','comandos_dispositivos','frase_honorarios_origem'].forEach(function(a){delete AUTO['@'+a];});
+  if(P&&J&&String(J.processo||'').replace(/\D/g,'')===String(P.processo||'').replace(/\D/g,'')&&window.MutaGerador&&MutaGerador.comporFicha){
+    var fo={};Object.keys(cp).forEach(function(k){if(k.indexOf('acervo.')===0)fo[k.slice(7)]=cp[k];});
+    fo.classe_judicial=fo.classe_judicial||P.classe||'';fo.Assunto=fo.Assunto||P.assunto||'';
+    var D=MutaGerador.comporFicha(cp,fo);
+    Object.keys(D.variaveis||{}).forEach(function(a){if(D.variaveis[a])AUTO['@'+a]=D.variaveis[a];});
+  }
   /* cabeçalho da ementa: classe e assunto em maiúsculas, da ficha quando o acervo embutido não tiver o processo */
   ['classe','assunto'].forEach(function(a){if(!AUTO['@'+a+'_ementa']&&AUTO['@'+a])AUTO['@'+a+'_ementa']=String(AUTO['@'+a]).toUpperCase();});
   if(P){var C={processo:P.processo,classe:P.classe,assunto:P.assunto,tipo_julgamento:P.tipoJulgamento,tipo_de_caso:P.subassuntos,especificidades:P.especificidades,alegacoes:P.questoes,resultado_julgamento:P.resultado,honorarios_julgamento:P.honorarios};Object.keys(C).forEach(function(a){if(C[a]&&!AUTO['@'+a])AUTO['@'+a]=dkValorFicha(C[a]);});['classe','assunto'].forEach(function(a){if(AUTO['@'+a]){AUTO[a.toUpperCase()]=String(AUTO['@'+a]).toUpperCase();AUTO['@'+a+'_ementa']=AUTO[a.toUpperCase()];}});}};

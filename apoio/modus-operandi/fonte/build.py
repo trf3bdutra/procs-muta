@@ -300,7 +300,7 @@ for _c in list(_CA):
             continue
         _vis.add(_ap)
         _CA.append(dict(_c, a=_ap, r=_c['r'] + ' · ' + _col['rotulo'], col=_col['chave'], t=_col.get('tipo'), cols=[]))
-_ESP = [('processo', 'Número do processo'), ('ramo', 'Ramo do direito, pela árvore do CNJ'), ('recorrente', 'Recorrente'),
+_ESP = [('abertura_relatorio','Abertura composta do relatório'), ('resultado_decisao_recorrida','Resultado da decisão recorrida'), ('comandos_dispositivos','Comandos dispositivos da origem'), ('frase_honorarios_origem','Honorários na origem'), ('processo', 'Número do processo'), ('ramo', 'Ramo do direito, pela árvore do CNJ'), ('recorrente', 'Recorrente'),
         ('resultado', 'Resultado, pelo dispositivo da peça'), ('conclusao', 'Conclusão do cabeçalho da ementa'), ('dispositivo_ementa', 'Item IV da ementa, pelo dispositivo'),
         ('classe_ementa', 'Classe, em maiúsculas (cabeçalho da ementa)'), ('assunto_ementa', 'Assunto, em maiúsculas (cabeçalho da ementa)')]
 CAJ = json.dumps({'campos': [{'a': x, 'r': r, 's': '*', 'g': 'Caso e peça'} for x, r in _ESP] + _CA}, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/')

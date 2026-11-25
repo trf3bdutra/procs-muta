@@ -937,6 +937,37 @@ function especie(parsed){
   if(last?.recursoTipo==='Agravo interno')return 'interno';
   return '';
 }
-window.CMTInteiroTeor=Object.assign(window.CMTInteiroTeor||{},{TARGETS,KIND_LABEL,KIND_TXT,parseTxt,preselect,preselectKind,especie,buildSuggestions,
+/* Comandos com evidência literal; candidatos sujeitos à conferência. */
+function comandosRelatorio(doc){
+ const t=String(doc.text||'').replace(/(DISPOSITIVO|CONCLUS[ÃA]O)(?=[A-ZÀ-Ú][a-zà-ú])/g,'$1 '),id=S(doc.id);
+ if(!id||!S(t))return [];
+ const h=/(?:^|\n|\.\s+)(?:\d+[.)]\s*)?DISPOSITIVO\s*[:.]?\s*/gi;
+ let m,last=null;while((m=h.exec(t)))last=m;
+ let tail=last?t.slice(last.index+last[0].length):'';
+ if(!tail){DISP_RE.lastIndex=0;while((m=DISP_RE.exec(t)))last=m;if(!last||last.index<t.length*.25)return [];tail=t.slice(last.index+last[0].length);}
+ else{DISP_RE.lastIndex=0;const z=DISP_RE.exec(tail);if(z&&z.index<50)tail=tail.slice(z.index+z[0].length);}
+ const verb=/^(?:julgo|extingo|denego|concedo|homologo|declaro|acolho|rejeito|reconhe[çc]o|determino|condeno|defiro|indefiro|confirmo|revogo|fixo|arbitro|mantenho|anulo|suspendo|não conheço|nego|dou)\b/i;
+ const rows=[];
+ for(const raw of sentences(tail).flatMap(s=>s.split(/;\s*(?=(?:[a-z]\)|\d+[.)])?\s*(?:julgo|extingo|denego|concedo|homologo|declaro|acolho|rejeito|reconhe[çc]o|determino|condeno|defiro|indefiro|confirmo|revogo|fixo|arbitro|mantenho|anulo|suspendo|não conheço|nego|dou)\b)/i))){
+  const ev=S(raw),x=ev.replace(/^(?:[a-z]\)|\d+[.)])\s*/i,'').replace(/^(?:assim|portanto|dessa forma|desta forma|por fim),?\s+/i,'');
+  if(ROUTINE.test(x))continue;
+  const n=N(x),hon=/honorarios\b(?! periciais| do perito| contratuais| do assistente)/.test(n),cus=/\bcustas\b|gratuidade|exigibilidade suspensa/.test(n);
+  if(!verb.test(x)&&!hon&&!cus)continue;
+  const main=/^(julgo|extingo|denego|concedo|homologo|declaro extint|nao conheco|nego|dou)\b/.test(n);
+  const cat=(hon||cus)&&main?'A conferir':hon?'Honorários':cus?'Custas / gratuidade':main?'Resultado':'Providência';
+  let fr=third(x).replace(/[.;]\s*$/,'').replace(/^(julgou)\s+(PARCIALMENTE PROCEDENTES?|PROCEDENTES?|IMPROCEDENTES?)\b/,(_,v,r)=>v+' '+r.toLowerCase()).replace(/^(denegou|concedeu)\s+A SEGURANÇA\b/,'$1 a segurança');
+  rows.push({id_decisao:id,ordem:String(rows.length+1),categoria:cat,redacao:fr,evidencia:ev,confirmado:'Não'});
+ }
+ return rows;
+}
+function sucumbenciaRelatorio(rows){
+ return rows.filter(r=>r.categoria==='Honorários'||r.categoria==='Custas / gratuidade').map(r=>{
+  const t=r.evidencia,n=N(t),hon=r.categoria==='Honorários',p=/(\d+(?:[.,]\d+)?)\s*%/.exec(t),v=/R\$\s*([\d.,]+)/.exec(t),base=/(valor\s+(?:(?:atualizado|corrigido)\s+)?d[ao]\s+(?:causa|condena[çc][ãa]o|proveito econ[ôo]mico)|proveito econ[ôo]mico(?: obtido)?)/i.exec(t),dev=/condeno\s+(.{2,90}?)\s+(?:ao pagamento|a pagar|a arcar|a suportar)/i.exec(t);
+  const neg=/\bsem (?:condenacao (?:em|ao pagamento de) )?(?:custas e )?honorarios|deixo de (?:fixar|condenar)|nao (?:fixo|ha) honorarios/.test(n);
+  return {id_decisao:r.id_decisao,honorarios:hon?(neg?'Não':p||v?'Sim':'Não informado'):'Não informado',devedor:dev?dev[1]:'',criterio:p?'Percentual':v?'Valor certo':'Não informado',percentual:p?p[1]:'',valor:v?v[1]:'',base:base?base[0]:'',custas:/\bcustas\b/.test(n)?t:'',gratuidade:/\b(?:defiro|concedo|deferida|concedida)\b.{0,40}(?:gratuidade|justica gratuita)|(?:gratuidade|justica gratuita).{0,40}(?:deferida|concedida)/.test(n)?'Deferida':'Não informada',suspensao:/exigibilidade.{0,40}suspens|suspens.{0,40}exigibilidade/.test(n)?'Sim':'Não informado',fundamento:t};
+ });
+}
+
+window.CMTInteiroTeor=Object.assign(window.CMTInteiroTeor||{},{comandosRelatorio,sucumbenciaRelatorio,TARGETS,KIND_LABEL,KIND_TXT,parseTxt,preselect,preselectKind,especie,buildSuggestions,
   otherPieceName,extractDecision,honorariosDe,extractPetition,headings,decodeLine,procDate});
 })();
