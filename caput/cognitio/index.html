@@ -1174,10 +1174,10 @@ body.so-tri #modulos [data-mod]:not([data-mod=triagem]),body.so-tri #bt-acervo,b
 });
 </script><!-- voc:fim -->
 <script defer src="/padrao/loading/gabinete-loader.js"></script>
-<style>#modulos [data-cog]{font:inherit;white-space:nowrap;border:0;background:none;cursor:pointer;padding:8px 10px;color:inherit}#modulos [data-cog].on{font-weight:700;background:rgba(0,0,0,.06);border-bottom:2px solid currentColor}#bt-acervo{display:none!important}#modulos{flex-wrap:wrap}#modulos a{margin-left:6px}</style></head>
+<style>#modulos [data-cog]{font:inherit;white-space:nowrap;border:0;background:none;cursor:pointer;padding:8px 10px;color:inherit}#modulos [data-cog].on{font-weight:700;background:rgba(0,0,0,.06);border-bottom:2px solid currentColor}#bt-acervo{display:none!important}#modulos{flex-wrap:wrap}#modulos a{margin-left:6px}</style><meta name="cognitio-preview" content="v4-original-caput"></head>
 <body>
 <header id="top">
-  <div id="marca"><i class="star" aria-hidden="true"></i><div class="mc-bc"><span class="mc-ey">Gabinete CMT · Cognitio</span><div class="mc-cad"><nav id="modulos" aria-label="Cognitio"><button type="button" data-cog="acervo" class="on">Acervo</button><button type="button" data-cog="triagem">Triagem</button><button type="button" data-cog="selecao">Seleção Prévia</button><button type="button" data-cog="mono">Monocráticas</button><button type="button" data-cog="outras">Outras Decisões</button><a class="btn sm" href="/caput/chefia">Caput · Chefia</a></nav></div></div></div>
+  <div id="marca"><i class="star" aria-hidden="true"></i><div class="mc-bc"><span class="mc-ey">Gabinete CMT · Cognitio</span><div class="mc-cad"><nav id="modulos" aria-label="Cognitio"><button type="button" data-cog="acervo" class="on">Acervo</button><button type="button" data-cog="triagem">Triagem</button><button type="button" data-cog="selecao">Seleção Prévia</button><button type="button" data-cog="mono">Monocráticas</button><button type="button" data-cog="outras">Outras Decisões</button><button type="button" class="btn sm" data-cog-regras>Regras de etiquetas</button><a class="btn sm" href="/caput/chefia">Caput · Chefia</a></nav></div></div></div>
   <nav id="abas" role="tablist" aria-label="Abas abertas"></nav>
   <div id="estado"><span class="k" id="st-acervo" style="color:var(--m)" title="data da última gravação da fonte do acervo">acervo …</span><button class="btn ib" id="bt-acervo" type="button" hidden title="Atualizar acervo fonte" aria-label="Atualizar acervo fonte"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.7 3.6 3 8 3 .9 0 1.8-.1 2.6-.2"/><path d="M4 11v6c0 1.7 3.6 3 8 3"/><path d="M20 5v5"/><path d="M21 16a4 4 0 1 1-1.2-2.8L21 14.4"/><path d="M21 12v2.4h-2.4"/></svg></button><button class="btn ib" id="bt-regras" type="button" hidden title="Regras gerais: escopo da triagem, acervo fonte, etiquetas, designação, produtividade e equipe" aria-label="Regras gerais"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button><button id="st-grava" type="button" title="Estado da gravação no procs-muta"><i aria-hidden="true"></i><span>carregando</span></button></div>
 </header>
@@ -2125,7 +2125,7 @@ function poeEstado(o, st) {
   if (st.mono !== undefined && (r.Destino === 'Monocrática' ? 'Monocrática' : '') !== st.mono) { if (st.mono) r.Destino = 'Monocrática'; else if (r.Destino === 'Monocrática') r.Destino = ''; ch.mono = st.mono; }
   if (Object.keys(ch).length) PEND.set(o.d, ch);
   refazDest(o); }
-function acao(rot, ds, fn) {
+function acao(rot, ds, fn) { if(COG_LEITURA){toast('Prévia: encaminhamento não gravado.',true);return;}
   const L = ds.map((d) => IDX.get(d)).filter(Boolean), fora = ds.length - L.length; if (!L.length) { toast(fora ? 'Os processos marcados não estão no acervo em triagem: a ficha deles não pode receber destino daqui.' : 'Marque ao menos um processo.', true); return; }
   const antes = new Map(L.map((o) => [o.d, estadoDe(o)]));
   L.forEach((o) => poeEstado(o, fn(o)));
@@ -2190,6 +2190,7 @@ function caminhoDaAba(a) { if (a === 'inteligencia') a = 'chefia'; return '/capu
 /* Cognitio: páginas separadas, mesmo motor, mesmas fichas. */
 const COG_PAGES={acervo:'Acervo',triagem:'Triagem',selecao:'Seleção Prévia',mono:'Monocráticas',outras:'Outras Decisões'};
 let COG='acervo', COG_SUB='triar', COG_CONCL={mono:false,outras:false}, COG_TIPO='';
+const COG_LEITURA=!!W.__COG_PREVIEW;
 function rotear(){
   const h=location.hash.slice(1);
   COG=Object.prototype.hasOwnProperty.call(COG_PAGES,h)?h:'acervo';
@@ -2209,7 +2210,7 @@ function cogIr(p){
  rotear();
 }
 const ir=(h)=>{if(h==='fila'){COG='acervo';if(location.hash!=='#acervo')try{history.pushState(null,'','#acervo');}catch(e){}rotear();return;}location.assign(caminhoDaAba(h));};
-D.addEventListener('click',e=>{const b=e.target.closest('[data-cog],[data-sp-abrir]');if(!b)return;e.preventDefault();e.stopPropagation();cogIr(b.hasAttribute('data-sp-abrir')?'selecao':b.dataset.cog);},true);
+D.addEventListener('click',e=>{const rr=e.target.closest('[data-cog-regras]');if(rr){e.preventDefault();e.stopPropagation();if(COG_LEITURA){toast('Prévia de consulta. As regras institucionais permanecem na Chefia do Caput.',true);return;}telaMotor('regras',render);return;}const b=e.target.closest('[data-cog],[data-sp-abrir]');if(!b)return;e.preventDefault();e.stopPropagation();cogIr(b.hasAttribute('data-sp-abrir')?'selecao':b.dataset.cog);},true);
 function pintaAbas() {
   const t = (id, rot, n, extra, cor) => '<button type="button" role="tab" class="tb' + (ABA === id ? ' on' : '') + '" aria-selected="' + (ABA === id) + '" data-aba="' + esc(id) + '">' + (cor ? '<i class="dot" style="background:' + esc(cor) + '"></i>' : '') + esc(rot) + (n != null ? ' <small>' + nf(n) + '</small>' : '') + (extra || '') + '</button>';
   $('#abas').innerHTML = ''; D.querySelectorAll('#modulos [data-cog]').forEach(b=>{const on=b.dataset.cog===COG;b.classList.toggle('on',on);b.setAttribute('aria-current',on?'page':'false');}); 
@@ -2243,7 +2244,7 @@ function render() {
   const m = $('#main'), ap = $('#aba-pautas'), naPauta = ABA === 'pautas';
   m.hidden = naPauta; ap.hidden = !naPauta;
   const tit = {pautas:'Pautas',coordenacao:'Coordenação',comunicacao:'Comunicação',inteligencia:'Inteligência',chefia:'Chefia'}[ABA] || 'Triagem';
-  D.title = 'Cognitio · ' + COG_PAGES[COG];
+  D.title = 'Cognitio · ' + COG_PAGES[COG]; if(COG_LEITURA&&!$('#cog-preview-aviso')){const v=D.createElement('div');v.id='cog-preview-aviso';v.textContent='PRÉVIA V4 · consulta no ambiente do Caput · gravações do Cognitio desabilitadas';v.style.cssText='padding:6px 14px;background:#f5efdb;color:#5c491e;font-size:12px;text-align:center';$('#top').after(v);}
   if (naPauta) { rodEl().hidden = true; D.body.classList.remove('rod-min'); try { if (W.CMTPautas) W.CMTPautas.render(); } catch (e) {} return; }
   if (ABA === 'chefia' || ABA === 'inteligencia') { m.innerHTML = vChefia(); setTimeout(() => { montarChefia(); cgRelSincronizar(); CAL_SIG = ''; pintaCal(true); voMontar(); ausPinta(); atvMontar(); }, 0); }
   else if (ABA === 'coordenacao') { m.innerHTML = vCoordenacao(); setTimeout(montarCoord, 0); }
@@ -2871,7 +2872,7 @@ function vInicio(emb) {
 let REG = {}, INI_MAS = false;
 /* Visão geral da triagem (o antigo Início) no topo da Triagem, recolhível; cada número abre o conjunto na lista */
 function visaoGeral() {
-  const ab = LS.get('tri_vg', true), F4 = funilTriagem();
+  const ab = LS.get('cog_v4_vg', true), F4 = funilTriagem();
   const res = [['#5c6b67', nf(F4.nao.length), 'não triados'], ['#8a2f22', nf(F4.pend.length), 'com pendência'], ['#3f6f94', nf(F4.mono.length), 'prontos · monocrática'], ['#235a55', nf(F4.ses.length), 'prontos · sessão']].map((x) => '<span><b style="color:' + x[0] + '">' + x[1] + '</b> ' + x[2] + '</span>').join('');
   return '<section class="tri-vg' + (ab ? ' ab' : '') + '"><button type="button" class="tri-vg-h" data-vg aria-expanded="' + ab + '"><span class="k">Visão geral da triagem</span><span class="tri-vg-r">' + res + '</span><span class="tri-vg-t">' + (ab ? 'recolher ▴' : 'abrir ▾') + '</span></button>' + (ab ? '<div class="tri-vg-c">' + vInicio(true) + '</div>' : '') + '</section>'; }
 /* funil de triagem: Com pendência, Prontos · monocrática, Prontos · sessão e, no resto, Não triados */
@@ -2967,7 +2968,7 @@ function chipsAtivos() { const ch = [];
 
 /* ========== EM TRIAGEM — funções do painel integrado ========== */
 function painelEmTriagem() {
-  if(COG==='mono'||COG==='outras'||(COG==='triagem'&&TRI_SUBABA==='retornos'))return '<div class="tri-em tri-em3" id="tri-em"><div class="tri-em-corpo" id="tri-em-corpo">'+cogPainelDestino(COG==='triagem'?'retornos':COG)+'</div></div>';
+  if(COG==='mono'||COG==='outras'||(COG==='triagem'&&['retornos','confirmar'].includes(TRI_SUBABA)))return '<div class="tri-em tri-em3" id="tri-em"><div class="tri-em-corpo" id="tri-em-corpo">'+cogPainelDestino(COG==='triagem'?TRI_SUBABA:COG)+'</div></div>';
   const tabs = [
     {id:'triar', r:'A triar'},
     {id:'triados', r:'Triados'},
@@ -2984,7 +2985,7 @@ function painelEmTriagem() {
 const temTriC = (it) => !!((it.triagem && Object.keys(it.triagem).length) || (it.prontuario_triagem && Object.keys(it.prontuario_triagem).length) || (it.teor && Object.keys(it.teor).length));
 function nTriados() { const D = _colD.triados; if (!D) return '…'; const v = new Set(); D.lotes.filter((l) => !/^adp-serie-/.test(l.id)).forEach((l) => (l.itens || []).forEach((it) => { if (temTriC(it)) v.add(it.processo); })); return v.size; }
 function abasTri() {
-  return (COG==='selecao'?[{id:'selecao',r:'Seleção prévia',n:_selCache?_selCache.items.size:somaIdx('selecao')}]:[{id:'triar',r:'A triar',n:U?U.length:0},{id:'triados',r:'Triados',n:nTriados()},{id:'retornos',r:'Retornos',n:cogProcessos('retornos').length}]).map(t=>Object.assign(t,{on:TRI_SUBABA===t.id}));
+  return (COG==='selecao'?[{id:'selecao',r:'Seleção prévia',n:_selCache?_selCache.items.size:somaIdx('selecao')}]:[{id:'triar',r:'A triar',n:U?U.length:0},{id:'triados',r:'Triados',n:nTriados()},{id:'retornos',r:'Retornos',n:cogProcessos('retornos').length},{id:'confirmar',r:'Tipo de ato a confirmar',n:cogProcessos('confirmar').length}]).map(t=>Object.assign(t,{on:TRI_SUBABA===t.id}));
 }
 
 /* Exportação de Excel por escopo da Triagem, sem alterar seleção ou filtros. */
@@ -3117,12 +3118,12 @@ async function lerColecoes(sub) {
   const ids = [].concat(...gruposLotes(sub).map((g) => g[1])).map((x) => x.id);
   const ler = async (id) => { try { const r = await fetch('/api/painel?lote=1&id=' + encodeURIComponent(id), { cache: 'no-store', credentials: 'same-origin' }); if (r.ok) { const j = await r.json(); if (j && j.lote) return j.lote; } } catch (e) {}
     try { const P = PM(); if (P && P.ler) return JSON.parse(await P.ler('acervo/lotes/' + id + '.json')); } catch (e) {} return null; };
-  const lotes = (await Promise.all(ids.map(ler))).filter(Boolean);
+  let lotes = (await Promise.all(ids.map(ler))).filter(Boolean); if(sub==='selecao'){let ss=[];try{ss=(SES().estado().sessoes||[]);}catch(e){} const pauta=new Map();ss.forEach(s=>(s.itens||[]).forEach(it=>{if(!it.cnj||!s.data)return;const d=dg(it.cnj),datas=pauta.get(d)||new Set();datas.add(String(s.data).slice(0,10));pauta.set(d,datas);}));lotes=lotes.map(l=>Object.assign({},l,{itens:(l.itens||[]).filter(it=>{const o=IDX.get(dg(it.processo));if(!o)return true;if(o.grupo==='pauta')return false;const alvo=iso((o.row||{})['Sessão Destino']);return !alvo||!(pauta.get(o.d)||new Set()).has(alvo);})}));}
   lotes.forEach((l) => { if (/^adp-serie-/.test(l.id)) l.tarefa = 'Séries entre lotes'; else if (l.tipo === 'selecao') l.tarefa = 'Seleção prévia'; else if (l.origem === 'escaninho') l.tarefa = 'Escaninhos'; });
   _colD[sub] = { gerado_em: new Date().toLocaleString('pt-BR'), commit: '', lotes };
   _colLendo[sub] = false; refazTriEm();
 }
-function fichaDe(cnj) { const o = IDX.get(dg(cnj)), P = W.CMTProntuario; if (P && P.abrir) P.abrir(o ? o.cnj : cnj, o ? [o.d] : []); else toast('A ficha ainda está carregando.', true); }
+function fichaDe(cnj) { if(COG_LEITURA){toast('A edição integral da ficha fica no Caput. O painel de consulta está disponível nesta prévia.',true);return;} const o = IDX.get(dg(cnj)), P = W.CMTProntuario; if (P && P.abrir) P.abrir(o ? o.cnj : cnj, o ? [o.d] : []); else toast('A ficha ainda está carregando.', true); }
 /* a ficha atual do processo (operacional), com as seções achatadas: o painel do processo mostra o prontuário gravado */
 async function fichaPlana(cnj) { const ad = W.CMTFichaMonitor; let r = null; try { if (ad && ad.carregar) r = (await ad.carregar(cnj)).operacional; } catch (e) {}
   if (!r) { const o = IDX.get(dg(cnj)); return o ? Object.assign({}, o.row) : {}; }
@@ -3134,7 +3135,7 @@ function opcoesPainel() {
     metas: (cnj) => { const o = IDX.get(dg(cnj)); return o ? [(o.row || {}).META, ...(o.etq || []).filter((x) => /\bmeta\b/i.test(x))].filter(Boolean) : []; },
     vocab: (k, old) => VLc(k, old), norm: (k, v, x) => (typeof VOC !== 'undefined' ? VOC.norm(k, v, x) : v),
     etqSugExtra: (cnj) => { const o = IDX.get(dg(cnj)); return o ? etqSugRow(o) : []; },
-    gravarFicha: async (cnj, campos) => { const ad = W.CMTFichaMonitor; if (!ad || !ad.gravar) throw new Error('Adaptador da ficha ainda não carregou.'); await ad.gravar(cnj, campos);
+    gravarFicha: async (cnj, campos) => { if(COG_LEITURA)throw new Error('Prévia: a ficha não será gravada.'); const ad = W.CMTFichaMonitor; if (!ad || !ad.gravar) throw new Error('Adaptador da ficha ainda não carregou.'); await ad.gravar(cnj, campos);
       const o = IDX.get(dg(cnj)); if (o) { Object.keys(campos).forEach((k) => { o.row[k.slice(k.indexOf('.') + 1)] = campos[k]; }); refazDest(o); } },
     aviso: (t, err) => toast(t, err),
     /* Triados e Seleção prévia: a marcação entra no mesmo SEL de A triar e usa as mesmas ações em bloco (pautar, seleção prévia, monocrática) */
@@ -3172,7 +3173,8 @@ function cogAto(o){
  const r=o.row||{},d=nz(r.Destino||''),a=nz(r['Mono - Tipo de ato']||'');
  if(d==='sessao'||(o.dest||{}).k==='pauta')return 'selecao';
  if(d!=='monocratica'&&d!=='interlocutoria'&&d!=='despacho')return '';
- if(/despacho|urgencia|interlocut|admissibilidade|retratacao/.test(a)||d==='despacho'||d==='interlocutoria')return 'outras';
+ if(/despacho|urgencia|interlocut/.test(a)||d==='despacho'||d==='interlocutoria')return 'outras';
+ if(/admissibilidade|retratacao/.test(a))return 'indefinido';
  if(/art\.\s*932|homologacao|extincao|decisao monocratica/.test(a))return 'mono';
  return 'indefinido';
 }
@@ -3181,8 +3183,9 @@ function cogProcessos(k){
  const xs=typeof ALL==='undefined'?[]:ALL;
  return xs.filter(o=>{const a=cogAto(o),s=cogAssinado(o);
   if(k==='retornos')return a==='outras'&&s;
+  if(k==='confirmar')return a==='indefinido';
   if(k==='mono')return a==='mono'&&s===!!COG_CONCL.mono;
-  return (a==='outras'||a==='indefinido')&&s===!!COG_CONCL.outras;
+  return a==='outras'&&s===!!COG_CONCL.outras;
  });
 }
 function cogDados(k){
@@ -3204,13 +3207,13 @@ function cogDados(k){
  return {lotes:L,gerado_em:new Date().toLocaleString('pt-BR')};
 }
 function cogPainelDestino(k){
- const title=k==='retornos'?'Retornos após ato não terminativo':COG_PAGES[k];
+ const title=k==='retornos'?'Retornos após ato não terminativo':k==='confirmar'?'Tipo de ato a confirmar':COG_PAGES[k];
  const tipo=k==='outras'?'<select data-cog-tipo aria-label="Tipo de ato"><option value="">Todos os tipos</option>'+[...new Set(cogProcessos(k).map(o=>(o.row||{})['Mono - Tipo de ato']||'A definir'))].sort().map(x=>'<option '+(COG_TIPO===x?'selected ':'')+'value="'+esc(x)+'">'+esc(x)+'</option>').join('')+'</select>':'';
  const D=cogDados(k);_colD[k]=D;
- const nav=k==='retornos'?'':('<button class="btn '+(!COG_CONCL[k]?'pri':'')+'" data-cog-status="ativos">Ativos</button> <button class="btn '+(COG_CONCL[k]?'pri':'')+'" data-cog-status="concluidos">Concluídos</button>');
+ const nav=['retornos','confirmar'].includes(k)?'':('<button class="btn '+(!COG_CONCL[k]?'pri':'')+'" data-cog-status="ativos">Ativos</button> <button class="btn '+(COG_CONCL[k]?'pri':'')+'" data-cog-status="concluidos">Concluídos</button>');
  const col=[{k:'Coleções de origem'},{id:'',r:'Todas',n:D.lotes.reduce((a,l)=>a+l.itens.length,0),on:!colSel(k)}].concat(D.lotes.map(l=>({id:l.id,r:l.titulo||l.id,n:l.itens.length,on:colSel(k)===l.id})));
- setTimeout(()=>{const host=document.getElementById('tri-col-host');if(!host||!W.CaputColecoes)return;W.CaputColecoes.montar(host,D,Object.assign(opcoesPainel(),{chave:k,lote:colSel(k),abas:k==='retornos'?abasTri():[],colecoes:col,onAba:id=>{TRI_SUBABA=id;COG_SUB=id;refazTriEm();},onLote:id=>{LS.set('tri_col_'+k,id);refazTriEm();},excelIcon:triExcelIcon,excelOpen:triExcelOpen}));},0);
- return '<div class="at" style="padding:12px"><p class="at-k">Cognitio · ficha única</p><h2 class="at-h">'+esc(title)+'</h2><div class="at-ver">'+nav+' '+tipo+'</div><p class="nota">'+(k==='retornos'?'A assinatura do ato não encerra o processo. Confira a situação, a próxima ação e o encaminhamento na ficha antes de redistribuir.':k==='outras'?'Atos não terminativos e tipos ainda a conferir. A assinatura indica ato praticado, não julgamento final.':'Decisões terminativas com espécie registrada. Assinatura é o marco de conclusão.')+'</p><div id="tri-col-host"></div></div>';
+ setTimeout(()=>{const host=document.getElementById('tri-col-host');if(!host||!W.CaputColecoes)return;W.CaputColecoes.montar(host,D,Object.assign(opcoesPainel(),{chave:k,lote:colSel(k),abas:['retornos','confirmar'].includes(k)?abasTri():[],colecoes:col,onAba:id=>{TRI_SUBABA=id;COG_SUB=id;refazTriEm();},onLote:id=>{LS.set('tri_col_'+k,id);refazTriEm();},excelIcon:triExcelIcon,excelOpen:triExcelOpen}));},0);
+ return '<div class="at" style="padding:12px"><p class="at-k">Cognitio · ficha única</p><h2 class="at-h">'+esc(title)+'</h2><div class="at-ver">'+nav+' '+tipo+'</div><p class="nota">'+(k==='retornos'?'A assinatura do ato não encerra o processo. Confira a situação, a próxima ação e o encaminhamento na ficha antes de redistribuir.':k==='outras'?'Atos não terminativos. A assinatura indica ato praticado, não julgamento final.':k==='confirmar'?'A espécie do ato está ausente ou não define por si só se é terminativo. Confirme na ficha antes de encaminhar.':'Decisões terminativas com espécie registrada. Assinatura é o marco de conclusão.')+'</p><div id="tri-col-host"></div></div>';
 }
 D.addEventListener('click',e=>{const b=e.target.closest('[data-cog-status]');if(!b)return;COG_CONCL[COG]=b.dataset.cogStatus==='concluidos';LS.set('tri_col_'+COG,'');refazTriEm();},true);
 D.addEventListener('change',e=>{if(!e.target.matches('[data-cog-tipo]'))return;COG_TIPO=e.target.value;LS.set('tri_col_outras','');refazTriEm();},true);
@@ -3236,7 +3239,7 @@ document.addEventListener('click', (e) => {
 let _atT = null;
 document.addEventListener('input', (e) => { const t = e.target; if (!t.matches || !t.matches('[data-atq]')) return; LS.set('tri_atq', t.value);
   clearTimeout(_atT); _atT = setTimeout(() => { const tb = document.getElementById('at-tab'); if (tb) tb.innerHTML = atCorpo(LS.get('tri_triar_tarefa', '')); }, 250); }, true);
-document.addEventListener('click', (e) => { const t = e.target.closest && e.target.closest('[data-bg]'); if (!t) return; e.preventDefault(); e.stopPropagation(); LS.set('tri_bg', !LS.get('tri_bg', false)); render(); }, true);
+document.addEventListener('click', (e) => { const t = e.target.closest && e.target.closest('[data-bg]'); if (!t) return; e.preventDefault(); e.stopPropagation(); LS.set('cog_v4_bg', !LS.get('cog_v4_bg', false)); render(); }, true);
 document.addEventListener('click', (e) => { const t = e.target.closest && e.target.closest('[data-atmais]'); if (!t) return; e.preventDefault(); e.stopPropagation();
   const g = t.dataset.atmais; LS.set('tri_atlim_' + g, LS.get('tri_atlim_' + g, 60) + 100); const tb = document.getElementById('at-tab'); if (tb) tb.innerHTML = atTabela(LS.get('tri_triar_tarefa', '')); }, true);
 document.addEventListener('change', (e) => { const t = e.target; if (!t.matches || !t.matches('[data-atso],[data-ato]')) return;
@@ -3547,7 +3550,7 @@ function subPainelEm(p, aba) {
 function vFila(cab, estilo) {
   const L = ordenar(filtrar(F.conj ? ALL : BASE())); FILA = L;
   /* Busca geral recolhida (padrão): a lista do acervo só é montada ao abrir, como a Visão geral */
-  const bgAb = LS.get('tri_bg', true); if(COG!=='acervo'){FILA=[];return '<div class="wrap tri-larga">'+painelEmTriagem()+'</div>';}
+  const bgAb = LS.get('cog_v4_bg', true); if(COG!=='acervo'){FILA=[];return '<div class="wrap tri-larga">'+painelEmTriagem()+'</div>';}
   const bgBarra = (ab) => '<section class="tri-vg tri-bg' + (ab ? ' ab' : '') + '"><button type="button" class="tri-vg-h" data-bg aria-expanded="' + ab + '"><span class="k">Busca geral no acervo em triagem</span><span class="tri-vg-r"><span><b>' + nf(L.length) + '</b> no acervo filtrado</span><span><b>' + nf(ALL.length) + '</b> na fonte</span><span>busca, critérios, filtros salvos, mapa do fluxo e exportação</span></span><span class="tri-vg-t">' + (ab ? 'recolher ▴' : 'abrir ▾') + '</span></button></section>';
   if (!F.conj && !bgAb) return '<div class="wrap tri-larga"' + (estilo || '') + '>' + (cab || '') + visaoGeral() + bgBarra(false) + '</div>';
   const ch = chipsAtivos(), salvos = LS.get('tri_filtros', []);
@@ -3894,7 +3897,7 @@ var ROD_EL = null;
 function rodEl() { return ROD_EL || (ROD_EL = D.getElementById('rodape')); }
 function docarRodape() { try {
   const r = rodEl(); if (!r) return;
-  const em = D.getElementById('tri-em'), bgAb = LS.get('tri_bg', false);
+  const em = D.getElementById('tri-em'), bgAb = LS.get('cog_v4_bg', false);
   let alvo = null;
   if (em && !bgAb && typeof abaTriagem === 'function' && abaTriagem()) alvo = TRI_SUBABA === 'triar' ? em.querySelector('aside.tri-lado') : D.getElementById('tri-col-host');
   if (alvo) {
@@ -3921,7 +3924,7 @@ function pintaRodape() { const r = rodEl(); if (!PRONTO || !abaTriagem()) { r.hi
     '<div class="ac"><span class="k" style="color:var(--az)">Monocrática</span><button type="button" class="btn" style="background:var(--az);border-color:var(--az);color:#fff" data-r="mono"' + dis + '>Julgar por monocrática</button><small>vai para o Collectio › Monocrática e para as Monocráticas da Ex Officio</small></div>' +
     '<div class="ac"><span class="k" style="color:var(--g)">Editar em lote</span><div class="lin">' + loteCtl() + '<button type="button" class="btn" style="background:var(--v);border-color:var(--v);color:#fff" data-r="lote"' + dis + '>Aplicar</button></div><small>grava o campo na ficha de todos os marcados, num só registro</small></div>' +
     '<div class="ac" style="border-right:0;gap:5px"><button type="button" class="btn sm" data-r="desfazer"' + (DESF.length ? '' : ' disabled') + ' title="' + esc(DESF.length ? 'Desfazer: ' + DESF[DESF.length - 1].rot : '') + '">Desfazer última</button><button type="button" class="btn sm" style="color:var(--r);border-color:var(--r2)" data-r="limpardest"' + dis + '>Limpar destino</button></div>'; }
-rodEl().addEventListener('click', (e) => { const b = e.target.closest('[data-r]'); if (!b || b.disabled) return; const k = b.dataset.r, ds = [...SEL];
+rodEl().addEventListener('click', (e) => { const b = e.target.closest('[data-r]'); if (!b || b.disabled) return; const k = b.dataset.r, ds = [...SEL]; if(COG_LEITURA&&!['rodmin','rodmax','todos','limpar'].includes(k)){toast('Prévia: ação de gravação desabilitada.',true);return;}
   if (k === 'rodmin' || k === 'rodmax') { ROD_MIN = k === 'rodmin'; LS.set('tri_rod_min', ROD_MIN); pintaRodape(); return; }
   if (k === 'todos') { FILA.forEach((o) => SEL.add(o.d)); render(); return; }
   if (k === 'limpar') { SEL.clear(); render(); return; }
@@ -3937,7 +3940,7 @@ let IMP = null;
 async function fonteInfo() { try { const P = PM(), k = P && P.atual; if (!k) return null; const r = await fetch('https://api.github.com/repos/trf3bdutra/procs-muta/commits?path=acervo/fonte.json&per_page=1', { cache: 'no-store', headers: { Accept: 'application/vnd.github+json', Authorization: 'Bearer ' + k } }); if (!r.ok) return null; const j = await r.json(); if (!j[0]) return null; return { em: j[0].commit.committer.date, msg: j[0].commit.message.split('\n')[0] }; } catch (e) { return null; } }
 const TIPOS = { pje: 'PJe', bi: 'Power BI · tramitação', sigilosos: 'Power BI · sigilosos', generica: 'outra planilha' };
 const PAPEL_TXT = { principal: 'principal (em andamento)', complementar: 'complementar', tarefa: 'lista de uma tarefa' };
-function abrirAcervo() {
+function abrirAcervo() { if(COG_LEITURA){toast('Gestão da fonte: exclusivamente na Chefia.',true);return;}
   IMP = { log: '', bad: false, ocupado: false, lidos: null, papeis: {} };
   const g = gaveta('<div class="gv-h"><div style="flex:1"><p class="k" style="margin:0">Acervo fonte</p><h2>Atualizar acervo fonte<span style="color:var(--g2)">.</span></h2><p>Escolha as planilhas do PJe e do Power BI. Confira o papel de cada uma e envie. O GitHub aplica a regra do acervo, complementa com o DataJud e grava a fonte e o operacional num só commit. Leva alguns minutos.</p></div><button type="button" class="x" style="font-size:20px" data-ia="fechar" aria-label="Fechar">×</button></div><div class="gv-c" id="ia-c"></div><div class="gv-f" id="ia-f"></div>');
   g.addEventListener('click', (e) => { const a = e.target.closest('[data-ia]'); if (!a || a.disabled) return; const k = a.dataset.ia;
@@ -4070,7 +4073,7 @@ D.addEventListener('click', (e) => { const t = e.target;
   if ((b = q('#crit-pop [data-cp]'))) { const k = b.dataset.cp; if (k === 'fechar') fecharPops(); else if (k === 'todos' || k === 'nenhum') { if (k === 'nenhum') CP.c.vals = []; else $$('#crit-pop [data-cpv]').forEach((i) => { if (CP.c.vals.indexOf(i.dataset.cpv) < 0) CP.c.vals.push(i.dataset.cpv); }); pintaCrit(); }
     else if (k === 'aplicar') { const c = CP.c; if (/^(in|notin|has|nothas)$/.test(c.cond) && !c.vals.length && !c.trechos.length) { toast('Marque um valor ou escreva um trecho.', true); return; } if (CP.edit != null) F.crit[CP.edit] = c; else F.crit.push(c); F.lim = 100; fecharPops(); render(); } return; }
   if ((b = q('.menu [data-ex]'))) { const p = b.closest('.menu'); const k = b.dataset.ex; fecharPops(); exportar(k, p.__L, p.__t, p.__b); return; }
-  if ((b = q('[data-vg]'))) { LS.set('tri_vg', !LS.get('tri_vg', true)); render(); return; }
+  if ((b = q('[data-vg]'))) { LS.set('cog_v4_vg', !LS.get('cog_v4_vg', true)); render(); return; }
   if ((b = q('[data-conj]'))) { abrirConj(b.dataset.conj); return; }
   if ((b = q('[data-mono-conj]'))) { const r = REG[b.dataset.monoConj]; if (r) acao('Julgar por monocrática', r.ids, () => ({ sp: '', sd: '', mono: 'Monocrática' })); return; }
   if (q('[data-ini-mas]')) { INI_MAS = !INI_MAS; render(); return; }
@@ -4113,7 +4116,7 @@ D.addEventListener('click', (e) => { const t = e.target;
   if ((b = q('[data-tribanda]'))) { const id = b.dataset.tribanda; const cur = LS.get('tri_em_b_'+id, true); LS.set('tri_em_b_'+id, !cur); const emEl = document.getElementById('tri-em'); if (emEl) emEl.outerHTML = painelEmTriagem(); return; }
   if ((b = q('[data-proc-exp]'))) { const d=b.dataset.procExp;PROC_EXP_ABERTO=PROC_EXP_ABERTO===d?'':d;render();return; }
   if ((b = q('[data-prontuario]'))) { abrirProntuarioTriagem(b.dataset.prontuario);return; }
-  if ((b = q('[data-ficha]'))) { const o = IDX.get(b.dataset.ficha); if (!o) return; const P = W.CMTProntuario; if (P && P.abrir) { const L = ABA === 'fila' ? FILA : FILA; P.abrir(o.cnj, L.map((x) => x.d)); } else toast('A ficha ainda está carregando.', true); return; } });
+  if ((b = q('[data-ficha]'))) { if(COG_LEITURA){fichaDe(b.dataset.ficha);return;} const o = IDX.get(b.dataset.ficha); if (!o) return; const P = W.CMTProntuario; if (P && P.abrir) { const L = ABA === 'fila' ? FILA : FILA; P.abrir(o.cnj, L.map((x) => x.d)); } else toast('A ficha ainda está carregando.', true); return; } });
 D.addEventListener('submit', (e) => { if (e.target.id !== 'pjf') return; e.preventDefault(); const P = F.pje;
   $$('[data-pj]', e.target).forEach((i) => { P[i.dataset.pj] = i.value.trim(); }); $$('[data-pjc]', e.target).forEach((i) => { if (i.dataset.pjc in P) P[i.dataset.pjc] = i.checked; });
   if (P.ordem === 'rec') { F.ord = 'desde'; F.dir = -1; } else if ($$('[data-pj]', e.target).length) { if (F.ord === 'desde' || Object.keys(PJ_ROT).some((k) => P[k])) { F.ord = 'desde'; F.dir = 1; } }
@@ -5292,7 +5295,7 @@ function pfOrig(p,k){const fx=FX[p];if(!fx)return null;const c=k.slice(k.indexOf
 function pfVal(p,k){const e=ED[p];if(e&&k in e)return e[k];const o=pfOrig(p,k);return o==null?'':o;}
 function pfMudou(p,k){const e=ED[p];return !!(e&&k in e&&String(e[k])!==String(pfOrig(p,k)||''));}
 function pfMud(p){const e=ED[p]||{};return Object.keys(e).filter(k=>k==='_nota'?!!String(e._nota||'').trim():pfMudou(p,k));}
-function pfOpc(k){const vk=PF_VOC[k];if(!vk)return PF_URG;let L=vk[1];try{if(OPC.vocab)L=OPC.vocab(vk[0],vk[1])||vk[1]}catch(e){}return L.filter(Boolean);}
+function pfOpc(k){const especiais={'producao.Destino':['Sessão','Monocrática','Outro destino'],'producao.Mono - Tipo de ato':['Decisão monocrática (art. 932)','Decisão de urgência','Despacho','Decisão de admissibilidade','Juízo de retratação','Homologação / extinção'],'producao.Destino - Situação':['Pronto para julgar','Pendente'],'producao.Destino - Outro':['Vista ao MPF','Devolução ao órgão prolator','Sobrestamento','Redistribuição ou prevenção','Diligência ou intimação','Baixa ou arquivamento','Outro']};if(especiais[k])return especiais[k];const vk=PF_VOC[k];if(!vk)return PF_URG;let L=vk[1];try{if(OPC.vocab)L=OPC.vocab(vk[0],vk[1])||vk[1]}catch(e){}return L.filter(Boolean);}
 function pfSeg(p,k,r,dica){const v=pfVal(p,k),O=pfOpc(k);
   return `<div class="pf${pfMudou(p,k)?' mud':''}"><span>${esc(r)}</span><div class="sgx" role="group" aria-label="${esc(r)}">${O.map(o=>`<button type="button" data-pf-seg="${esc(k)}" data-v="${esc(o)}" aria-pressed="${o===v}">${esc(o)}</button>`).join('')}${v&&!O.includes(v)?`<button type="button" data-pf-seg="${esc(k)}" data-v="${esc(v)}" aria-pressed="true">${esc(v)}</button>`:''}</div>${dica?`<small>${esc(dica)}</small>`:''}</div>`;}
 function pfSel(p,k,r,dica){const v=pfVal(p,k),O=pfOpc(k);
@@ -5405,7 +5408,7 @@ function cartao(l,it){
     <section class="s3" style="--gc:${esc((g&&g.cor)||'#9aa0a8')}"><h4>Matriz e proposta</h4>${g?`<p class="gr2"><i></i>${esc(g.rotulo)}</p>${g.resultado?`<p class="gres">${esc(g.resultado)}</p>`:''}${g.modelo?`<p class="gmod">Modelo: ${esc(g.modelo)}</p>`:''}`:''}
      ${vars.length?`<div class="vr2">${vars.map(v=>`<span>${esc(v)}</span>`).join('')}</div>`:''}
      ${tx('Proposta para o processo',prop(it))}${it.modelo&&(!g||it.modelo!==g.modelo)?tx('Modelo do processo',it.modelo):''}${tx('Hipótese de monocrática',F('Hipóteses Monocrática')||t.monocratica)}${tx('MPF',it.mpf)}
-     ${pfTx(p,'triagem.O que falta sanar','O que falta sanar','a','','uma pendência por linha; [VALIDAR] para o que depende dos autos')}${falta.length?`<div class="fl2"><span>Pendências da proposta</span><ul>${falta.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>`:''}<h4 class="h4b">Acompanhamento</h4>${pfSel(p,'producao.Destino','Destino')}${pfSel(p,'producao.Mono - Tipo de ato','Tipo de ato')}${pfSel(p,'producao.Destino - Situação','Situação para julgar')}${pfTx(p,'origem.Próxima ação','Próxima ação após cumprimento','t')}${pfTx(p,'triagem.Intercorrências','Intercorrências','a')}
+     ${pfTx(p,'triagem.O que falta sanar','O que falta sanar','a','','uma pendência por linha; [VALIDAR] para o que depende dos autos')}${falta.length?`<div class="fl2"><span>Pendências da proposta</span><ul>${falta.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>`:''}<h4 class="h4b">Acompanhamento</h4>${pfSel(p,'producao.Destino','Destino')}${pfSel(p,'producao.Mono - Tipo de ato','Tipo de ato')}${pfSel(p,'producao.Destino - Situação','Situação para julgar')}${pfVal(p,'producao.Destino')==='Outro destino'?pfSel(p,'producao.Destino - Outro','Especificar destino'):''}${pfTx(p,'triagem.Registro - Situação atual','Situação processual atual','a')}${pfTx(p,'origem.Próxima ação','Próxima ação prevista após cumprimento','t','Aguardar cumprimento é situação, não a próxima ação.')}${pfTx(p,'triagem.Intercorrências','Intercorrências','a')}
      ${sit.length?`<div class="sit2"><h4>Situação atual ${sa.resumo?`<small>${esc(String(sa.resumo).replace(/^► /,'').split(':')[0])}</small>`:''}</h4>${sit.map(x=>`<div class="kv"><span>${esc(x[0])}</span><p>${esc(x[1])}</p></div>`).join('')}</div>`:''}</section>
    </div>
    ${dec?`<p class="pc2-rod">${dec.minuta?'Minuta':'Decisão'} no Collectio · ${esc(dec.titulo)}${dec.situacao?' · '+esc(dec.situacao):''} · <a class="lk2" href="/amicus/collectio/?colecao=${encodeURIComponent(dec.lote)}&processo=${esc(it.processo.slice(0,10))}" target="_blank" rel="noopener">Abrir no Collectio</a></p>`:''}${it.minuta&&!dec&&!mn?'<p class="vz">Lendo a minuta…</p>':''}${mn?`<details class="pc2-mn" open><summary>Minuta · ${esc(mn.vigente||'')}${mn.rotulo?' · '+esc(mn.rotulo):''}</summary><div class="mdoc">${[['relatorio','RELATÓRIO'],['voto','VOTO'],['ementa','EMENTA'],['acordao','ACÓRDÃO']].map(([k,r])=>((mn.secoes||{})[k]||[]).length?`<h4>${k==='voto'&&ehMonoMn(mn)?(/^despacho/i.test(String(mn.rotulo||''))?'DESPACHO':'DECISÃO'):r}</h4>`+mn.secoes[k].map(p=>`<p>${esc(p)}</p>`).join(''):'').join('')}</div></details>`:''}
