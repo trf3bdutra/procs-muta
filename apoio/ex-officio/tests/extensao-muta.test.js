@@ -502,7 +502,10 @@ test('extensão 0.38: Autos preenche sozinho os campos vazios do Roteiro (e desf
   assert.match(cf, /<details class="au-auto-av au-auto-d"><summary><b>2 campos preenchidos pela leitura dos autos/);
   assert.equal(pend['triagem.Síntese Processual'], 'Recurso contra sentença (ID 111) que julgou improcedente o pedido.');
   assert.match(cf, /diverge/, 'a divergência fica em A conferir');
-  assert.doesNotMatch(AU.htmlLeitura(), /Preencher sozinho|Peças principais|Cronologia toda/, '0.44: só Ler/Reler (íntegra)'); assert.match(AU.htmlLeitura(), /au-res/);
+  assert.doesNotMatch(AU.htmlLeitura(), /Preencher sozinho|Peças principais|Cronologia toda/, '0.44: só Ler/Reler (íntegra)'); assert.match(AU.htmlLeitura(), /class="au-metr"[\s\S]*Peças identificadas[\s\S]*Textos lidos[\s\S]*A conferir/);
+  assert.match(AU.htmlLeitura(), /1 de 1 documentos com texto extraído/);
+  assert.match(AU.htmlLocalizados(), /Localizados[\s\S]*Sentença[\s\S]*Localizado · texto lido[\s\S]*ID 111/);
+  assert.match(cf, /Não identificados nesta leitura \(quando aplicáveis\)/);
   assert.match(AU.htmlDocs(() => ''), /Peças principais \(1\)[\s\S]*Cronologia \(1\)/);
   AU.clique({ dataset: { au: 'desfazer' } }); await tick();
   assert.equal(pend['origem.Sentença - Decisão'], '', 'desfeito');
@@ -510,9 +513,10 @@ test('extensão 0.38: Autos preenche sozinho os campos vazios do Roteiro (e desf
   assert.equal(pend['origem.Sentença - Decisão'], '', 'o desfeito não volta neste processo');
   const gab = read('extensao/gabinete.js'), html = read('extensao/painel.html');
   assert.match(gab, /var MODOS = \['Processo', 'Autos'(, 'Roteiro')?\];/);
-  /* 0.52.2: A conferir vai dentro de Peças e documentos (recolhível), logo após o cabeçalho */
+  /* A conferir e Localizados compõem o card de cobertura na leitura dos autos. */
   assert.match(gab, /var cf = AU\.htmlConferir\(\), dc = AU\.htmlDocs\(function \(\) \{ return pecasCartao\(true\); \}\)/);
   assert.match(gab, /<details class="gg au-cf" id="g-cf"/);
+  assert.match(gab, /au-coverage-card/);
   assert.doesNotMatch(html, /id="ger-app"/); assert.match(gab, /<div id="ger-app"><\/div>/);
   assert.match(read('extensao/prontuario.js'), /ger:'min'/);
   assert.match(read('extensao/gerador.js'), /pintar: pintar, abrir: abrir, modo: modo/);
