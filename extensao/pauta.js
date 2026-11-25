@@ -135,7 +135,7 @@
 
   function listaHtml() {
     var opts = (P.cal || []).map(function (s) { return '<option value="' + esc(s.date) + '"' + (s.date === P.data ? ' selected' : '') + '>' + esc(br(s.date)) + (s.date < hoje() ? ' (passada)' : '') + '</option>'; }).join('');
-    var h = '<div class="pa-session-head"><label class="pa-sel"><span class="sr">Sessão</span><select data-pa="ses">' + opts + '</select></label>';
+    var h = '<div class="pa-session-head"><b class="hero-v53-page-title">Pauta</b><label class="pa-sel"><span class="sr">Sessão</span><select data-pa="ses">' + opts + '</select></label>';
     var d = P.doc || {}, L = (d.itens || []).length ? d.itens : (d.previa || []), previa = !(d.itens || []).length && (d.previa || []).length;
     var nsol=(d.solicitacoes||[]).length+(P.pedPauta||[]).filter(function(r){return sesDe(r)===P.data;}).length;
     h+='<div class="seg pmodos pa-session-tabs" role="tablist" aria-label="Conteúdo da sessão"><button type="button" role="tab" data-pa="aba:itens" aria-selected="'+(P.aba==='itens')+'">Processos · '+L.length+'</button><button type="button" role="tab" data-pa="aba:sol" aria-selected="'+(P.aba==='sol')+'">Solicitações · '+nsol+'</button></div></div><section class="card pc-sec pa-ses">';
