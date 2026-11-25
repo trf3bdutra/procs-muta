@@ -1274,7 +1274,6 @@ header#top::before{background:linear-gradient(90deg,var(--eg) 0 50%,var(--eg2) 5
 <script src="/padrao/acervo-fonte.js"></script>
 <script src="/init/assets/js/cmt-ficha.js"></script>
 <script src="/init/assets/js/cmt-ficha-monitor.js"></script>
-<script src="/extensao/previa/painel/prontuario-host.js"></script>
 <script src="/init/assets/js/regras-gerais.js"></script>
 <link rel="stylesheet" href="/init/motor/assets/css/02-calendario.css">
 <script src="/init/motor/assets/js/11-calendario.js"></script>
@@ -3271,12 +3270,9 @@ async function cogFichaGravar(cnj,campos){
 }
 function fichaDe(cnj,aba='Triagem'){
  const o=IDX.get(dg(cnj)),n=o?o.cnj:cnj;
- if(!W.CMTFicha||!W.CMTUniversal)return toast('Ficha ou prontuário ainda indisponível.',true);
+ if(!W.CMTFicha)return toast('Ficha do processo ainda indisponível.',true);
  const carregar=async c=>{const j=await cogApi('/api/pauta?ficha='+encodeURIComponent(c));if(j.operacional&&!PEND.has(dg(c)))cogAtualizaFicha(j.operacional);return j;};
- W.CMTFicha.abrir(n,{aba,lista:(COG==='triagem'?cogTriBase().filter(cogTriStatus):FILA).map(x=>x.cnj),carregar,gravar:cogFichaGravar,aviso:(t,e)=>toast(t,e==='warn'||e===true),prontuarioTriagem:(c,j,leitura)=>{
- const a=j&&j.operacional&&j.operacional.triagem||{},m={lote:a['Registro - Lote']||'',grupo:a['Registro - Grupo']||'',variacoes:a['Registro - Variações']||'',proposta:a['Registro - Proposta']||'',modelo:a['Registro - Modelo']||'',resultado:a['Registro - Resultado']||''};
- return W.CMTUniversal.html(c,{modo:'tri',matriz:m,leitura});
- }});
+ W.CMTFicha.abrir(n,{aba,lista:(COG==='triagem'?cogTriBase().filter(cogTriStatus):FILA).map(x=>x.cnj),carregar,gravar:cogFichaGravar,avisar:(t,e)=>toast(t,e==='warn'||e==='err'||e===true)});
 }
 /* a ficha atual do processo (operacional), com as seções achatadas: o painel do processo mostra o prontuário gravado */
 async function fichaPlana(cnj) {
