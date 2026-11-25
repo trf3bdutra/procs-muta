@@ -1497,3 +1497,5 @@ html[data-tema=escuro] .pm-pl.k-lib.ok{background:#25173a;border-color:#5a3d8a;c
 /* 0.65.1 · Pauta: chips de filtro mais leves; seta de registro discreta */
 .pa-f .chip{border-width:1px}
 .pa-reg>summary{border:0!important;border-top:1px solid #e1e5ea!important}
+/* 0.66 · cartão: tipo de caso e especificidades junto do assunto; encaminhamento junto do tipo de ato */
+.pm-esp{margin:6px 0 2px}.pm-enc{margin-top:6px}.pm-cs{margin-bottom:8px}

@@ -130,7 +130,7 @@ test('extensão 0.15: cabeçalho no formato da gaveta da pauta (etapas, designa�
   ['producao.MINUTADO', 'producao.CORRIGIDO', 'producao.Data da Revisão', 'producao.LIBERADO', 'producao.Data da Liberação', 'producao.Assinado', 'producao.Data da Assinatura',
     'producao.SERVIDOR', 'producao.CORRETOR', 'triagem.O que falta sanar', 'triagem.Intercorrências', 'origem.Observações', 'producao.Voto - Resultado', 'producao.Voto - Honorários', 'producao.Tópico-síntese']
     .forEach(k => assert.ok(ks.has(k), k));
-  assert.match(gab, /function cabeca\(s\)/); assert.match(gab, /cabeca\(s\)\.replace\(\/<\\\/section>\$\/, snc \+ '<\/section>'\) \+ tabs/);
+  assert.match(gab, /function cabeca\(s\)/); assert.match(gab, /cab\.replace\(\/<\\\/section>\$\/, snc \+ '<\/section>'\) \+ tabs/);
   assert.match(gab, /function sinalizacoes\(\)/); assert.match(gab, /function notas\(\)/); assert.match(gab, /data-et=/);
 });
 
@@ -609,7 +609,7 @@ test('extensão 0.46: 2ª seta do cartão com síntese, questões, mérito e enc
 test('extensão 0.47: Roteiro dentro da aba Processo; controles na 1ª seta; Parágrafos-padrão sub-aba do Ementário; Diretrizes na Minuta; Comparar compacto; sem a Ajuda', () => {
   const g = read('extensao/gabinete.js'), h = read('extensao/painel.html'), c = read('extensao/comparar.js');
   assert.match(g, /var MODOS = \['Processo', 'Autos'\];/); assert.match(g, /var h = '<div class="rt-em-proc">' \+ corpoRoteiro\(\) \+ '<\/div>', rot = /);
-  assert.match(g, /controlesProcesso\(true\) \+ '<\/details>';/, '0.49.1: controles na 2ª seta');
+  assert.match(g, /controlesProcesso\(true\) \+ '<\/details>' \+/, '0.66: controles na 1ª seta');
   assert.match(h, /id="tab-par"[^>]*hidden/); assert.match(h, /data-emd="par"/); assert.match(h, /id="tab-dir"[^>]*hidden/); assert.match(h, /data-mm="dir"/); assert.match(h, /<div id="dir-app" class="min-dir" hidden><\/div>/);
   assert.match(h, /id="tab-ajuda"[^>]*hidden>\?<\/button>/);
   assert.match(read('extensao/diretrizes.js'), /d = \$\('dir-app'\); return !!\(p && !p\.hidden && d && !d\.hidden\)/);
@@ -656,7 +656,7 @@ test('extensão 0.49: Assinatura nas Deliberações (urgência no topo) e fora d
 
 test('extensão 0.49.1: controles na 2ª seta; 1ª seta "autuação e partes" em blocos; prévia com a lista do PJe de verdade; número citado no cartão não vira cartão', () => {
   const g = read('extensao/gabinete.js'), c = read('extensao/conteudo-pje.js'), ix = read('scripts/extensao/previa/index.html');
-  assert.match(g, /<span class="pm-aut-t">autuação e partes<\/span>/); assert.match(g, /síntese · questões · encaminhamento · controles/); assert.match(g, /function controlesProcesso\(naSeta\)/);
+  assert.match(g, /<span class="pm-aut-t">autuação, partes e controles<\/span>/); assert.match(g, /<span class="pm-aut-t">mérito<\/span>/); assert.match(g, /function controlesProcesso\(naSeta\)/);
   assert.match(c, /window\.HERO_PREVIA_PJE === true/); assert.match(c, /\.hcm, #hero-dlg'/); assert.match(c, /if \(bl && numeros\(\(bl\.textContent \|\| ''\)\.slice\(0, 8000\)\)\[0\] !== nn\[0\]\) continue;/);
   assert.match(ix, /<script src="pje-shim\.js"><\/script>/); assert.match(ix, /<script src="painel\/conteudo-pje\.js"><\/script>/);
   assert.match(read('scripts/extensao/previa.py'), /pje-shim\.js/);
@@ -666,7 +666,7 @@ test('extensão 0.50: 2ª seta sem duplicados; situação calculada pelas sinali
   const g = read('extensao/gabinete.js'), a = read('extensao/autos.js'), c = read('extensao/comparar.js');
   const me = g.slice(g.indexOf('function merEnc()'), g.indexOf('var AUTO_G'));
   assert.doesNotMatch(me, /campoRot\('triagem', 'O que falta sanar', 'Pendências'\)/); assert.doesNotMatch(me, /campoRot\('triagem', 'Etiquetas', 'Etiquetas do gabinete'\)/);
-  assert.match(me, /situacaoHtml\(\)/); assert.match(me, /S\(V\('triagem', 'COMPLEXIDADE'\)\) \?/);
+  assert.match(g, /'<div class="gr pm-enc">' \+ situacaoHtml\(\)/); assert.match(me, /S\(V\('triagem', 'COMPLEXIDADE'\)\) \?/);
   assert.match(g, /function derivados\(\)/); assert.match(g, /function hipotese932\(\)/); assert.match(g, /data-autog="desfazer"/); assert.match(g, /function situacaoSync\(\)/);
   assert.match(a, /function derivAutos\(\)/); assert.match(a, /alvo: 'triagem\.Alegações'/); assert.match(a, /alvo: 'triagem\.Síntese Processual'/);
   assert.match(c, /matriz: function \(\) \{ try \{ return C\.dados \? matrizDoProcesso\(\) : null;/);

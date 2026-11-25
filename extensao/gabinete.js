@@ -306,12 +306,15 @@ function cabeca(s) {
       tjHtml + (AL.length ? '<button type="button" class="pm-al" data-aba="Autos" title="' + esc(AL.map(function (a) { return a.t; }).join(' · ')) + '">' + AL.length + ' alerta' + (AL.length > 1 ? 's' : '') + '</button>' : '') + '</div>' +
     '<p class="pm-as">' + (assunto ? '<b>' + esc(assunto) + '</b>' : '') + (!G.adEd && !S(gravado('triagem', 'Registro - Assunto detalhado')) && !S(V('triagem', 'Assunto detalhado')) ? '<button type="button" class="pm-ad-ic" data-ad="ed" title="Incluir o assunto detalhado (vai para a ficha; o Caput mostra o mesmo)" aria-label="Incluir o assunto detalhado">' + SV('<path d="M12 5v14M5 12h14"/>', 12) + '</button>' : '') + '</p>' +
     assuntoDetalhado() +
+    /* 0.66: tipo de caso e especificidades junto do assunto e do assunto detalhado */
+    '<div class="gr pm-esp">' + campoRot('triagem', 'Tema', 'Tipo de caso') + campoRot('triagem', 'Especificidades') + '</div>' +
 
     /* 0.65: etapas compactas — Minuta (verde), Correção/Revisão (azul), Liberada/Assinada (roxo); o nome designa, a data marca ou desfaz */
     '<div class="pm-pills">' + pilulas(E) + '</div>' +
-    '<div class="pm-resp">' + atoSel() + '</div>' +
+    /* 0.66: encaminhamento junto do tipo de ato */
+    '<div class="pm-resp">' + atoSel() + '<div class="gr pm-enc">' + situacaoHtml() + (N(V('producao', 'Destino')) === 'monocratica' ? campoRot('triagem', 'Hipóteses Monocrática', 'Hipótese do artigo 932') : '') + '</div></div>' +
     /* 0.49.1: 1ª seta = autuação e partes, em blocos com título (como a 2ª); os controles foram para a 2ª seta */
-    '<details class="pm-aut pm-aut1"' + (G.autAb ? ' open' : '') + '><summary data-aut aria-label="Autuação e partes" title="Autuação e partes"><span class="pm-aut-t">autuação e partes</span><i class="pm-aut-h"></i></summary>' +
+    '<details class="pm-aut pm-aut1"' + (G.autAb ? ' open' : '') + '><summary data-aut aria-label="Autuação e partes" title="Autuação e partes"><span class="pm-aut-t">autuação, partes e controles</span><i class="pm-aut-h"></i></summary>' +
       ((partes && !polos) || polos ? '<h4 class="pm-mer-h">Partes</h4>' : '') +
       (partes && !polos ? '<p class="pm-pt" title="' + esc(partes) + '">' + SV(IC.pt, 14) + '<span>' + esc(partes) + '</span></p>' : '') +
       (polos ? '<div class="pc-ps">' + polos + '</div>' : '') +
@@ -319,14 +322,14 @@ function cabeca(s) {
       (tarefa ? '<div class="pm-tf"><span>Tarefa no PJe</span><b>' + esc(tarefa) + '</b>' + (dias != null ? '<small>' + dias + ' dias</small>' : '') + '</div>' : '') +
       (dl ? '<dl class="pc-dl">' + dl + '</dl>' : '') +
       (window.MutaAutos ? '<div class="pm-sit">' + window.MutaAutos.htmlSituacao(gravado('triagem', 'Registro - Situação atual')) + '</div>' : '') +
-      (etq.length ? '<h4 class="pm-mer-h">Etiquetas do PJe</h4><div class="pc-etq">' + etq.map(function (e) { return '<span class="chip">' + esc(e) + '</span>'; }).join('') + '</div>' : '') + '</details>' +
+      (etq.length ? '<h4 class="pm-mer-h">Etiquetas do PJe</h4><div class="pc-etq">' + etq.map(function (e) { return '<span class="chip">' + esc(e) + '</span>'; }).join('') + '</div>' : '') + /* 0.66: controles (urgência, meta, sobrestamento, caso sensível) na 1ª seta */ controlesProcesso(true) + '</details>' +
     merEnc() +
     '</section>';
 }
 /* 0.46 · 2ª seta do cartão: síntese e questões, mérito e encaminhamento (antes no Roteiro e na aba Processo); os campos só são
    desenhados com a seta aberta, para não repetir campos na tela */
 function merEnc() {
-  var ab = !!G.merAb, h = '<details class="pm-aut pm-mer"' + (ab ? ' open' : '') + '><summary aria-label="Síntese, questões, mérito, encaminhamento e controles" title="Síntese, questões, mérito, encaminhamento e controles"><span class="pm-aut-t">síntese · questões · encaminhamento · controles</span><i class="pm-aut-h"></i></summary>';
+  var ab = !!G.merAb, h = '<details class="pm-aut pm-mer"' + (ab ? ' open' : '') + '><summary aria-label="Mérito" title="Mérito: complexidade e tipo de voto"><span class="pm-aut-t">mérito</span><i class="pm-aut-h"></i></summary>';
   if (!ab) return h + '</details>';
   /* 0.50: com a seta aberta, o que dá para obter sozinho vai para os campos vazios (marca "auto", Desfazer) */
   if (!G._seco) try { autoGab(); situacaoSync(); } catch (e) {}
@@ -335,12 +338,11 @@ function merEnc() {
   var ag = autoGabItens();
   return h + (ag.length ? '<div class="au-auto-av pm-auto"><span><b>' + ag.length + (ag.length === 1 ? ' campo preenchido' : ' campos preenchidos') + ' pela extensão</b> · marcados “auto”: confira</span><button type="button" class="lnk" data-autog="desfazer" title="Limpa o que a extensão pôs e não o repõe neste processo">Desfazer</button></div>' : '') +
     /* 0.64: síntese, questões, tipo de caso e especificidades foram para o painel acima dos roteiros (sinteseQuestoes) */
-    '<h4 class="pm-mer-h">Mérito</h4><div class="gr">' + campoRot('triagem', 'Síntese Fática', 'Síntese fática') +
+    '<h4 class="pm-mer-h">Mérito</h4><div class="gr">' +
       (S(V('triagem', 'COMPLEXIDADE')) ? campoRot('triagem', 'COMPLEXIDADE', 'Complexidade') : '') + campoRot('triagem', 'Tipo de Voto', 'Tipo de voto') + '</div>' +
     /* 0.50: pendências e etiquetas do gabinete saíram daqui (estão em Sinalizações e na 1ª seta); a situação é calculada pelas sinalizações */
-    '<h4 class="pm-mer-h">Encaminhamento</h4><div class="gr">' + situacaoHtml() + (mono ? campoRot('triagem', 'Hipóteses Monocrática', 'Hipótese do artigo 932') : '') + '</div>' + /* 0.59: etiquetas foram para o Roteiro de triagem */
-    /* 0.49.1: controles (urgência, meta, sobrestamento, caso sensível) aqui, antes na 1ª seta */
-    controlesProcesso(true) + '</details>';
+    /* 0.66: encaminhamento foi para junto do tipo de ato e os controles para a 1ª seta */
+    '</details>';
 }
 /* ---------- 0.50 · campos obtidos sozinhos na 2ª seta ----------
    Tipo de caso (assunto detalhado do Caput ou o assunto), tipo de voto (minuta-matriz da Conformidade ou tipo de julgamento
@@ -626,13 +628,16 @@ function pecaPreencher(id) {
 }
 /* 0.60 · Sinalizações e notas do caso: card recolhível no painel superior do prontuário (vale em Processo e em Autos) */
 var SN_AB = null, SN_HTML = '';
+var CAB_HTML = '';
 function snCard() {
   var si = sinalizacoes(), nt = notas(), rg = grupos('Processo', function (g) { return g.grupo === 'Registro no acervo'; }, function () { return false; });
-  SN_HTML = si + nt;
+  /* 0.66: síntese do processo, síntese fática e questões antes das notas; notas acima das sinalizações */
+  var cs = '<div class="gr pm-cs">' + campoRot('triagem', 'Síntese Processual', 'Síntese do processo') + campoRot('triagem', 'Síntese Fática', 'Síntese fática') + questoes() + '</div>';
+  SN_HTML = cs + si + nt;
   var n = (si.match(/class="sn-i [a-z]+"/g) || []).length;
   var ab = SN_AB != null ? SN_AB : n > 0;
   /* 0.62: 3ª seta do cartão do processo (fundo cinza), no formato de "autuação e partes" */
-  return '<details class="pm-aut pm-sn"' + (ab ? ' open' : '') + '><summary aria-label="Sinalizações e notas" title="Sinalizações e notas"><span class="pm-aut-t">sinalizações e notas' + (n ? ' · <b class="pm-sn-n">' + n + ' em aberto</b>' : '') + '</span><i class="pm-aut-h"></i></summary><div class="sn-b">' + si + nt + rg + '</div></details>';
+  return '<details class="pm-aut pm-sn"' + (ab ? ' open' : '') + '><summary aria-label="Síntese, notas e sinalizações" title="Síntese, notas e sinalizações"><span class="pm-aut-t">síntese · notas · sinalizações' + (n ? ' · <b class="pm-sn-n">' + n + ' em aberto</b>' : '') + '</span><i class="pm-aut-h"></i></summary><div class="sn-b">' + cs + nt + si + rg + '</div></details>';
 }
 /* 0.64 · Síntese e questões: painel acima do seletor dos roteiros (vale para a triagem e para a produção) */
 var SQ_AB = null, SQ_HTML = '';
@@ -645,16 +650,16 @@ function sinteseQuestoes() {
 }
 function corpoProcesso() {
   /* 0.60: a aba Processo = Roteiro de triagem + Roteiro de produção; sinalizações, notas e registro no acervo foram para o card do topo (snCard) */
-  var sq = sinteseQuestoes();
+  /* 0.66: o painel Síntese e questões foi desfeito; os campos estão no cartão do processo (CAB_HTML) */
   var h = '<div class="rt-em-proc">' + corpoRoteiro() + '</div>', rot = G.rot === 'pro' ? 'pro' : 'tri';
   /* 0.55: sem repetição — o Roteiro de produção não repete o que já aparece no Roteiro de triagem, nesta aba ou nas setas do cartão */
   var ja = {}, sc = '';
   try { var ab0 = G.merAb; G.merAb = true; G._seco = 1; sc = merEnc() + controlesProcesso(true); G.merAb = ab0; G._seco = 0; } catch (e) { G._seco = 0; }
-  sc += SN_HTML + SQ_HTML;
+  sc += SN_HTML + CAB_HTML;
   (h + sc).replace(/data-(?:fk|ch)="([^"]+)"/g, function (m, k) { ja[k.replace(/&quot;/g, '"').replace(/&amp;/g, '&').replace(/&#39;/g, "'")] = 1; return m; });
   /* 0.63: a aba Processo se divide em Roteiro de triagem | Roteiro de produção (a deduplicação usa sempre os dois) */
   var pro = camposCaso(ja);
-  return sq + '<div class="seg pmodos rt-modos" role="tablist" aria-label="Roteiro"><button type="button" role="tab" data-rot="tri" aria-selected="' + (rot === 'tri') + '">Roteiro de triagem</button><button type="button" role="tab" data-rot="pro" aria-selected="' + (rot === 'pro') + '">Roteiro de produção</button></div>' +
+  return '<div class="seg pmodos rt-modos" role="tablist" aria-label="Roteiro"><button type="button" role="tab" data-rot="tri" aria-selected="' + (rot === 'tri') + '">Roteiro de triagem</button><button type="button" role="tab" data-rot="pro" aria-selected="' + (rot === 'pro') + '">Roteiro de produção</button></div>' +
     (rot === 'tri' ? h : pro || '<div class="empty">Sem campos de produção para este processo.</div>');
 }
 /* 0.54 · Roteiro de produção: todos os campos da ficha que a Minuta-Matriz do Compendium usa (@apelido), do destino do caso
@@ -903,12 +908,12 @@ function render0() {
   var nAl = window.MutaAutos && window.MutaAutos.estado().itens ? window.MutaAutos.alertas().filter(function (a) { return a.nivel === 'al'; }).length : 0;
   var tabs = '<div class="seg gtabs pmodos" role="tablist" aria-label="Parte do prontuário">' + MODOS.map(function (a) {
     return '<button type="button" role="tab" data-aba="' + a + '" aria-selected="' + (a === G.aba) + '"><span>' + (ROT_MODO[a] || a) + (a === 'Autos' && nAl ? ' <i class="gnum">' + nAl + '</i>' : '') + '</span><small>' + esc(contaModo(a)) + '</small></button>'; }).join('') + '</div>';
-  var snc = snCard();
+  var snc = snCard(), cab = cabeca(s); CAB_HTML = cab;
   var corpo = G.aba === 'Autos' ? corpoAutos() : G.aba === 'Produção' ? corpoProducao() : corpoProcesso();
   var ab = document.activeElement && document.activeElement.dataset ? (document.activeElement.dataset.fk || (document.activeElement.dataset.esp ? 'esp:' + document.activeElement.dataset.esp : '') || (document.activeElement.dataset.q != null ? 'q:' + document.activeElement.dataset.q : '')) : '';
   var y = window.scrollY, pp = $('panel-pront'), yp = pp ? pp.scrollTop : 0;
   precEmentario(casoPrec());
-  caixa.innerHTML = cabeca(s).replace(/<\/section>$/, snc + '</section>') + tabs + st0 + '<div class="gbody">' + corpo + '</div>';
+  caixa.innerHTML = cab.replace(/<\/section>$/, snc + '</section>') + tabs + st0 + '<div class="gbody">' + corpo + '</div>';
   stEl = $('g-st');
   if (ab) {
     var sel = /^esp:/.test(ab) ? '[data-esp="' + ab.slice(4) + '"]' : /^q:/.test(ab) ? '[data-q="' + ab.slice(2) + '"]' : '[data-fk="' + ab.replace(/"/g, '\\"') + '"]';
