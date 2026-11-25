@@ -14,7 +14,7 @@
   var dg = function (s) { return S(s).replace(/\D/g, ''); };
   var br = function (d) { var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(S(d)); return m ? m[3] + '/' + m[2] + '/' + m[1] : S(d); };
   var hoje = function () { return new Date(Date.now() - 4 * 3600e3).toISOString().slice(0, 10); };
-  var P = { cal: null, data: '', doc: null, ped: null, erro: '', lendo: false, f: 'todos', aberto: false };
+  var P = { cal: null, data: '', doc: null, ped: null, pedPauta: null, pedErro: false, erro: '', lendo: false, f: 'todos', aba: 'itens', solFiltro: 'todas', aberto: false, seq: 0 };
 
   function GB() { return window.MutaGabinete || {}; }
   function app() { return $('pauta-app'); }
@@ -23,18 +23,19 @@
   /* ---------- leitura ---------- */
   function ler() {
     if (!ses || ses.estado().estado !== 'on') { P.erro = ''; pintar(); return; }
-    P.lendo = true; pintar();
+    var seq=++P.seq; P.lendo = true; pintar();
     var cal = P.cal ? Promise.resolve() : ses.api('/api/sessoes').then(function (j) {
       P.cal = (j.sessoes || []).filter(function (s) { return s.date; }).sort(function (a, b) { return S(a.date).localeCompare(S(b.date)); });
       if (!P.data) { var h = hoje(), prox = P.cal.filter(function (s) { return s.date >= h; })[0]; P.data = prox ? prox.date : (P.cal[P.cal.length - 1] || {}).date || ''; }
     });
-    var ped = ses.api('/api/sessoes?pedidos=1').then(function (j) { P.ped = j.registros || []; }).catch(function () { P.ped = P.ped || []; });
-    return Promise.all([cal, ped]).then(function () { return P.data ? ses.api('/api/pauta?data=' + P.data).then(function (d) { P.doc = d; }) : null; })
-      .then(function () { P.erro = ''; }, function (e) { P.erro = 'Não foi possível ler as pautas: ' + (e && e.message || e); })
-      .then(function () { P.lendo = false; pintar(); });
+    var ped = lerPedidosPauta(seq);
+    return Promise.all([cal, ped]).then(function () { if(seq!==P.seq)return;return P.data ? ses.api('/api/pauta?data=' + P.data + '&solicitacoes=1').then(function (d) { if(seq===P.seq)P.doc = d; }) : null; })
+      .then(function () { if(seq===P.seq)P.erro = ''; }, function (e) { if(seq===P.seq)P.erro = 'Não foi possível ler as pautas: ' + (e && e.message || e); })
+      .then(function () { if(seq===P.seq){P.lendo = false; pintar();} });
   }
-  function trocar(data) { P.data = data; P.doc = null; P.lendo = true; pintar();
-    ses.api('/api/pauta?data=' + data).then(function (d) { P.doc = d; P.erro = ''; }, function (e) { P.erro = 'Não foi possível ler a pauta: ' + e.message; }).then(function () { P.lendo = false; pintar(); }); }
+  function lerPedidosPauta(seq){return ses.api('/api/sessoes?pedidos=1').then(function(j){if(seq!==P.seq)return;P.pedPauta=j.registros||[];P.ped=P.pedPauta.slice();P.pedErro=false;},function(){if(seq===P.seq)P.pedErro=true;});}
+  function trocar(data) { var seq=++P.seq;P.data = data; P.doc = null; P.lendo = true; pintar();
+    return Promise.all([lerPedidosPauta(seq),ses.api('/api/pauta?data=' + data+'&solicitacoes=1').then(function (d) { if(seq===P.seq){P.doc = d; P.erro = '';} }, function (e) { if(seq===P.seq)P.erro = 'Não foi possível ler a pauta: ' + e.message; })]).then(function () { if(seq===P.seq){P.lendo = false; pintar();} }); }
 
   /* ---------- etapa e alertas de um item da pauta ---------- */
   var PASSOS = [['servidor', 'Designado'], ['dataMinuta', 'Minutado'], ['dataCorrecao', 'Corrigido'], ['dataLiberacao', 'Liberado']];
@@ -84,7 +85,7 @@
     return h + '</div>';
   }
   function pedSessao(itens) {
-    var L = (P.ped || []).filter(function (r) { return sesDe(r) === P.data; });
+    var L = (P.pedPauta || []).filter(function (r) { return sesDe(r) === P.data; });
     if (!L.length) return '<details class="gg pa-pses"><summary><h4>Pedidos desta sessão</h4><span class="gn">nenhum</span></summary><div class="gr"><p class="muted">Nenhum pedido de sustentação ou preferência para esta sessão.</p></div></details>';
     var so = L.filter(function (r) { return !/prefer/i.test(tipoPed(r)); }).length, pr = L.length - so, av = L.filter(aVincular).length;
     L.sort(function (a, b) { return (aVincular(b) ? 1 : 0) - (aVincular(a) ? 1 : 0) || (parseInt((a.vinculo || {}).item || a.item, 10) || 999) - (parseInt((b.vinculo || {}).item || b.item, 10) || 999); });
@@ -94,7 +95,7 @@
   function vincular(id, cnj) {
     if (!cnj) return;
     ses.api('/api/sessoes?pedidos=1', { method: 'POST', body: JSON.stringify({ id: id, data: P.data, cnj: cnj }) })
-      .then(function () { return ses.api('/api/sessoes?pedidos=1').then(function (j) { P.ped = j.registros || []; }); }, function (e) { P.erro = 'Não foi possível vincular: ' + e.message; })
+      .then(function () { return ses.api('/api/sessoes?pedidos=1').then(function (j) { P.ped = j.registros || []; P.pedPauta=P.ped.slice();P.pedErro=false; }); }, function (e) { P.erro = 'Não foi possível vincular: ' + e.message; })
       .then(pintar);
   }
 
@@ -107,15 +108,41 @@
   }
   /* 0.64: sigla da classe (TPU/CNJ) e recurso julgado dentro do processo */
   function etqCl(it) { var e2 = window.ClassesCNJ ? window.ClassesCNJ.etiqueta(it.classe, ((it.ctl || {}).cartao || {}).tipoJ || '') : null; return e2 && e2.t ? ' <span class="pc-cl pa-cl" title="' + esc(e2.nome) + '">' + esc(e2.t) + '</span>' : ''; }
+
+  function solicitacoesHtml(itens){
+    var externas=(P.pedPauta||[]).filter(function(r){return sesDe(r)===P.data;}),internas=(P.doc&&P.doc.solicitacoes)||[];
+    var pend=internas.filter(function(r){return r.estado==='Pendente';}).length,av=externas.filter(aVincular).length;
+    var h='<div class="pa-sol-resumo"><b>'+internas.length+' internas</b><span>'+pend+' pendentes</span><b>'+externas.length+' externas</b><span>'+av+' a vincular</span></div>';
+    h+='<div class="pa-f" role="group" aria-label="Filtrar solicitações">'+[['todas','Todas'],['internas','Internas'],['externas','Sustentações e preferências'],['pendentes','Pendentes / a vincular']].map(function(x){return '<button type="button" class="chip'+(P.solFiltro===x[0]?' on':'')+'" data-pa="sol:'+x[0]+'" aria-pressed="'+(P.solFiltro===x[0])+'">'+esc(x[1])+'</button>';}).join('')+'</div>';
+    if(P.pedErro)h+='<p class="status err">Não foi possível atualizar os pedidos externos.</p>';
+    if(!P.doc||P.doc.solicitacoesErro||!Array.isArray(P.doc.solicitacoes))h+='<p class="status err">'+esc(P.doc&&P.doc.solicitacoesErro||'Solicitações internas indisponíveis nesta versão da API.')+'</p>';
+    var f=P.solFiltro;
+    if(f!=='externas'){
+      var L=internas.filter(function(r){return f!=='pendentes'||r.estado==='Pendente';});
+      h+='<h4 class="pm-mer-h">Solicitações internas</h4>';
+      if(!L.length)h+='<p class="muted">Nenhum registro nesta visualização.</p>';
+      L.forEach(function(r){h+='<article class="gx-it pa-ped"><div class="gx-h"><b class="gx-t">'+esc(r.tipo)+'</b><span class="gx-c">'+esc(r.estado)+'</span>'+(r.item?'<span class="gx-c">item '+esc(r.item)+'</span>':'')+'</div><p class="gx-m"><button type="button" class="lnk mono" data-pa="sol-abrir:'+esc(r.cnj)+'">'+esc(r.cnj)+'</button></p><p class="gx-m">'+esc([r.origem,r.solicitante,br(S(r.data).slice(0,10)),r.inferido?'vínculo pela pauta atual':''].filter(Boolean).join(' · '))+'</p>'+(r.sessaoPretendida?'<p class="gx-m">Sessão pretendida: '+esc(br(r.sessaoPretendida))+'</p>':'')+(r.justificativa||r.descricao?'<p class="gx-tx">'+esc(r.justificativa||r.descricao)+'</p>':'')+(r.resposta?'<p class="gx-ob">'+esc(r.resposta)+'</p>':'')+(r.decididoPor?'<p class="gx-m">Apreciada por '+esc(r.decididoPor)+' · '+esc(br(S(r.decididoEm).slice(0,10)))+'</p>':'')+'</article>';});
+    }
+    if(f!=='internas'){
+      h+='<h4 class="pm-mer-h">Sustentações orais e preferências</h4>';
+      var E=externas.filter(function(r){return f!=='pendentes'||aVincular(r);});
+      h+=E.length?E.map(function(r){return pedCard(r,{itens:itens,ses:1});}).join(''):'<p class="muted">Nenhum pedido nesta visualização.</p>';
+    }
+    return h;
+  }
+
   function listaHtml() {
     var opts = (P.cal || []).map(function (s) { return '<option value="' + esc(s.date) + '"' + (s.date === P.data ? ' selected' : '') + '>' + esc(br(s.date)) + (s.date < hoje() ? ' (passada)' : '') + '</option>'; }).join('');
     var h = '<section class="card pc-sec pa-ses"><div class="pc-sh"><h3>Pautas do Ex Officio</h3><label class="pa-sel"><span class="sr">Sessão</span><select data-pa="ses">' + opts + '</select></label></div>';
     if (P.lendo && !P.doc) return h + '<p class="muted">Lendo a pauta…</p></section>';
     var d = P.doc || {}, L = (d.itens || []).length ? d.itens : (d.previa || []), previa = !(d.itens || []).length && (d.previa || []).length;
+    var nsol=(d.solicitacoes||[]).length+(P.pedPauta||[]).filter(function(r){return sesDe(r)===P.data;}).length;
+    h+='<div class="seg pmodos pa-session-tabs" role="tablist" aria-label="Conteúdo da sessão"><button type="button" role="tab" data-pa="aba:itens" aria-selected="'+(P.aba==='itens')+'">Processos · '+L.length+'</button><button type="button" role="tab" data-pa="aba:sol" aria-selected="'+(P.aba==='sol')+'">Solicitações · '+nsol+'</button></div>';
+    if(P.aba==='sol')return h+solicitacoesHtml(L)+'</section>';
     if (!L.length) return h + '<p class="muted">Sem processos nesta pauta.</p></section>';
     var cur = dg(GB().cnj ? GB().cnj() : '');
     var R = L.map(function (it) { var a = alertas(it);
-      if (!(it.ctl || {}).sopref) (P.ped || []).filter(function (r) { return sesDe(r) === P.data && dg(r.cnj || r.numero) === dg(it.cnj); }).slice(0, 1).forEach(function (r) { a.push(['so', /prefer/i.test(tipoPed(r)) ? 'Preferência' : 'Sustentação', 'pedido recebido · ' + S(r.advogado)]); });
+      if (!(it.ctl || {}).sopref) (P.pedPauta || []).filter(function (r) { return sesDe(r) === P.data && dg(r.cnj || r.numero) === dg(it.cnj); }).slice(0, 1).forEach(function (r) { a.push(['so', /prefer/i.test(tipoPed(r)) ? 'Preferência' : 'Sustentação', 'pedido recebido · ' + S(r.advogado)]); });
       return { it: it, e: etapa(it), a: a }; });
     var cont = {}; R.forEach(function (x) { cont[x.e.k] = (cont[x.e.k] || 0) + 1; });
     var nAl = R.filter(function (x) { return x.a.some(function (a) { return a[0] === 'al'; }); }).length;
@@ -123,7 +150,7 @@
     var vis = R.filter(function (x) { return P.f === 'todos' ? true : P.f === 'al' ? x.a.some(function (a) { return a[0] === 'al'; }) : P.f === 'fora' ? /ret|adi/.test(x.e.k) : x.e.k === P.f; });
     h += (previa ? '<p class="muted">Prévia da pauta (ainda sem a relação oficial do PJe).</p>' : '') +
       '<div class="pa-f">' + F.filter(function (f) { return f[2] || f[0] === 'todos'; }).map(function (f) { return '<button type="button" class="chip' + (P.f === f[0] ? ' on' : '') + '" data-pa="f:' + f[0] + '">' + f[1] + ' <i>' + f[2] + '</i></button>'; }).join('') + '</div>';
-    h += pedSessao(L);
+    /* Os pedidos da sessão estão na subaba Solicitações. */
     h += '<ol class="pa-l">' + vis.map(function (x) {
       var it = x.it, at = dg(it.cnj) === cur, passo = PASSOS.map(function (p) { return '<i class="' + (it[p[0]] ? 'ok' : '') + '" title="' + p[1] + '"></i>'; }).join('');
       return '<li class="pa-it e-' + x.e.k + (at ? ' at' : '') + '"><button type="button" class="pa-b" data-pa="abrir:' + esc(it.cnj) + '" title="Abrir o prontuário deste processo">' +
@@ -165,6 +192,9 @@
   document.addEventListener('click', function (e) {
     var b = e.target.closest && e.target.closest('#pauta-app [data-pa]'); if (!b) return;
     var a = b.getAttribute('data-pa');
+    if (/^aba:/.test(a)) { P.aba=a.slice(4);pintar();return; }
+    if (/^sol:/.test(a)) { P.solFiltro=a.slice(4);pintar();return; }
+    if (/^sol-abrir:/.test(a)) { var n=a.slice(10),brg=window.MutaProntuarioBridge;if(brg&&brg.abrirProcesso)brg.abrirProcesso(n);if(window.MutaAbas)window.MutaAbas.ir('pront');return; }
     if (/^f:/.test(a)) { P.f = a.slice(2); pintar(); return; }
     if (/^abrir:/.test(a)) { var n = a.slice(6), brg = window.MutaProntuarioBridge; if (brg && brg.abrirProcesso) brg.abrirProcesso(n); if (window.MutaAbas) window.MutaAbas.ir('pront'); return; }
   });
@@ -193,5 +223,5 @@
     pedConsulta.then(desenhar,function(){if(node.isConnected)node.innerHTML='<p class="muted">Não foi possível consultar as solicitações.</p>';});
   }
   function registrarPedido(p){return ses.api('/api/sessoes?pedidos=1',{method:'POST',body:JSON.stringify(Object.assign({manual:true},p))}).then(function(j){pedConsultadoEm=0;return j;});}
-  window.MutaPauta = { pedidosProcesso: pedidosProcesso, registrarPedido: registrarPedido, abrir: function () { if (!P.cal || !P.doc) ler(); else pintar(); }, pintar: pintar, etapa: etapa, alertas: alertas };
+  window.MutaPauta = { pedidosProcesso: pedidosProcesso, registrarPedido: registrarPedido, abrir: function () { if (!P.cal || !P.doc) ler(); else { pintar(); if(P.data&&!P.lendo)trocar(P.data); } }, pintar: pintar, etapa: etapa, alertas: alertas };
 })();

@@ -168,7 +168,7 @@
   }
   function listas() {
     var j = X.dados || {};
-    var as = ((j.assinar || {}).assinatura || []).slice().sort(function (a, b) { return (!!b.urg - !!a.urg) || String(a.desde || '').localeCompare(String(b.desde || '')); });
+    var as = ((j.assinar || {}).assinatura || []).filter(function(a){return a&&a.urg&&a.urg.tipo&&!/^Apreciada/i.test(String(a.urg.situacao||''));}).sort(function (a, b) { return String(a.desde || '').localeCompare(String(b.desde || '')); });
     return { as: as, du: j.duvidas || [], pe: j.pedidos || [], so: (j.notificacoes || []).filter(function (n) { return n.tipo === 'sustentacao'; }) };
   }
   /* decisão submetida à assinatura (antes no sino › Desembargador): urgência em destaque e no topo */
@@ -225,13 +225,13 @@
     var L = listas();
     var tab = function (k, r, d) { return '<button type="button" role="tab" data-gx-a="' + k + '" aria-selected="' + (X.aba === k) + '" title="' + esc(d) + '">' + r + ' <i' + (k === 'as' && nUrg ? ' class="gx-iu"' : '') + '>' + L[k].length + '</i></button>'; };
     var nUrg = L.as.filter(function (a) { return a.urg; }).length;
-    var corpo = X.aba === 'as' ? (L.as.length ? (nUrg ? '<p class="gx-msg err">' + nUrg + ' com registro de urgência, no topo.</p>' : '') + L.as.map(itemAs).join('') : '<p class="muted gx-v">Nenhuma decisão submetida à assinatura.</p>')
+    var corpo = X.aba === 'as' ? (L.as.length ? (nUrg ? '<p class="gx-msg err">' + nUrg + ' aguardando assinatura · urgência ativa.</p>' : '') + L.as.map(itemAs).join('') : '<p class="muted gx-v">Nenhuma decisão urgente submetida à assinatura.</p>')
       : X.aba === 'pe' ? (L.pe.length ? L.pe.map(itemPe).join('') : '<p class="muted gx-v">Nenhum pedido de retirada ou de adiamento em aberto.</p>')
       : X.aba === 'so' ? (L.so.length ? L.so.map(itemSo).join('') : '<p class="muted gx-v">Nenhum pedido de sustentação oral ou de preferência recebido para as próximas sessões.</p>')
       : (L.du.length ? L.du.map(itemDu).join('') : '<p class="muted gx-v">Nenhuma dúvida em aberto dirigida a você.</p>');
     c.innerHTML = '<div class="gx-top"><div><b>Deliberações</b><small class="muted">o que aguarda decisão' + (X.dados && X.dados.hoje ? ' · ' + esc(data(X.dados.hoje)) : '') + '</small></div>' +
       '<span><button type="button" class="lnk" data-gx="ler-del">' + (X.lendo ? 'lendo…' : 'atualizar') + '</button><a class="lnk" target="_blank" rel="noopener" href="' + esc(site()) + '/cmt/">painel do Desembargador</a></span></div>' +
-      '<div class="seg pmodos gx-modos" role="tablist" aria-label="Tipo de deliberação">' + tab('as', 'Assinatura', 'decisões submetidas à assinatura' + (nUrg ? ' · ' + nUrg + ' com urgência' : '')) + tab('du', 'Dúvidas', 'dúvidas da equipe') + tab('pe', 'Pauta', 'pedidos de retirada e de adiamento') + '</div>' +
+      '<div class="seg pmodos gx-modos" role="tablist" aria-label="Tipo de deliberação">' + tab('as', 'Assinatura', 'somente decisões com urgência ativa, submetidas à assinatura') + tab('du', 'Dúvidas', 'dúvidas da equipe') + tab('pe', 'Pauta', 'pedidos de retirada e de adiamento') + '</div>' +
       (X.msg ? '<p class="gx-msg' + (/^Não/.test(X.msg) ? ' err' : '') + '">' + esc(X.msg) + '</p>' : '') +
       (X.erro ? '<p class="gx-v err">' + esc(X.erro) + '</p>' : !X.dados ? '<p class="muted gx-v">Lendo…</p>' : corpo);
   }

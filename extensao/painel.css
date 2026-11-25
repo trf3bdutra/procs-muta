@@ -1605,3 +1605,10 @@ html[data-tema=escuro] .rt-tipos .rt-kind-option{border-color:var(--line)}
  #prontuario-app .hero-designacoes{grid-template-columns:repeat(2,minmax(0,1fr))}
  #prontuario-app .hero-pauta-resumo>.hero-pauta-linha{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
+
+/* Pautas · solicitações da sessão */
+#pauta-app .pa-session-tabs{display:flex;gap:3px;margin:7px 0 9px;padding:3px;border:1px solid var(--line);border-radius:6px;background:var(--soft)}
+#pauta-app .pa-session-tabs>button{flex:1;min-width:0;min-height:30px;font-size:11px}
+#pauta-app .pa-sol-resumo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px;padding:8px;border:1px solid var(--line);border-radius:6px;background:var(--card);font-size:11px}
+#pauta-app .pa-sol-resumo span{text-align:right;color:var(--muted-fg)}
+#pauta-app .pa-ped .gx-tx{white-space:pre-wrap;overflow-wrap:anywhere}

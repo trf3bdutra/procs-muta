@@ -434,7 +434,7 @@ module.exports = async (req, res, u) => {
         if(!x||!x.id||!tipos.includes(x.tipo))continue;
         const id=String(x.id).slice(0,80),ant=por.get(id),interno=x.tipo==='Retirada de pauta'||x.tipo==='Adiamento';
         if(!ant){const justificativa=String(x.justificativa||x.descricao||'').trim().slice(0,4000);if(interno&&!justificativa)continue;
-          por.set(id,{id,tipo:x.tipo,solicitante:String(interno?u:x.solicitante||'').slice(0,160),descricao:justificativa,justificativa:interno?justificativa:'',data:L.dataOk(x.data)?x.data:agora().slice(0,10),autor:u,estado:'Pendente',criadoEm:agora(),sessaoPretendida:interno&&x.tipo==='Adiamento'?String(x.sessaoPretendida||'').slice(0,30):'',sessaoOrigem:interno&&L.dataOk(x.sessaoOrigem)?x.sessaoOrigem:'',itemOrigem:interno?String(x.itemOrigem||'').slice(0,30):''});continue;}
+          por.set(id,{id,tipo:x.tipo,solicitante:String(interno?u:x.solicitante||'').slice(0,160),descricao:justificativa,justificativa:interno?justificativa:'',data:L.dataOk(x.data)?x.data:agora().slice(0,10),autor:u,estado:'Pendente',criadoEm:agora(),sessaoPretendida:interno&&x.tipo==='Adiamento'?String(x.sessaoPretendida||'').slice(0,30):'',sessaoOrigem:L.dataOk(x.sessaoOrigem)?x.sessaoOrigem:'',itemOrigem:L.dataOk(x.sessaoOrigem)?String(x.itemOrigem||'').slice(0,30):''});continue;}
         if(perfil.desembargador&&['Deferida','Indeferida'].includes(x.estado)&&!['Deferida','Indeferida'].includes(ant.estado)){
           por.set(id,Object.assign({},ant,{estado:x.estado,decididoPor:u,decididoEm:agora()}));
         }
