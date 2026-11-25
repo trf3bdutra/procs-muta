@@ -667,7 +667,7 @@ function htmlDocs(pecas) {
   }
   if(F!=='todos'&&HO.length)corpo+='<details class="pc-s" open><summary><b>Outros documentos ('+HO.length+')</b></summary><div class="au-docs">'+cronologiaIntegrada([],HO).map(linhaHistorica).join('')+'</div></details>';
   var aviso = A.itens && !lidoDoProcesso() ? '<p class="status err">Os autos lidos são de outro processo (' + esc(A.cnj || 'sem número') + ').</p>' : !A.itens ? '<p class="muted au-nl">Leia os autos para ver os documentos de cada peça.</p>' : '';
-  return '<section class="card pc-sec pecas" id="g-docs">' + cab + seg + (A.msg ? '<p class="status ok">' + esc(A.msg) + '</p>' : '') + aviso + historicoDocsFicha() + corpo + '</section>';
+  return '<section class="card pc-sec pecas" id="g-docs">' + cab + seg + (A.msg ? '<p class="status ok">' + esc(A.msg) + '</p>' : '') + aviso + corpo + '</section>';
 }
 function idSet(v){return String(v||'').match(/\b\d{6,}\b/g)||[];}
 function idsTabela(L){return Array.from(new Set((Array.isArray(L)?L:[]).reduce(function(a,r){return a.concat(idSet(r.id||r.ids||''));},[]))).sort();}
