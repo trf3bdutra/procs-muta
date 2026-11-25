@@ -104,6 +104,9 @@ jobs:
           # A aplicação modular precisa manter todos os assets e o motor sob o mesmo prefixo.
           mkdir -p site/public/monitor
           cp caput/index.html site/public/monitor/index.html
+          # Recursos canônicos do Caput; aliases antigos apenas para consumidores ainda não migrados.
+          mkdir -p site/public/caput
+          cp -R caput/assets caput/motor site/public/caput/
           cp -R caput/assets caput/motor site/public/monitor/
           # Caput: interface única para inteligência, triagem, pautas, coordenação, comunicação e chefia.
           # Usa os mesmos scripts, APIs e motor da Triagem; as URLs antigas permanecem compatíveis.
