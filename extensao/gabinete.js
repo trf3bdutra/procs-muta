@@ -57,7 +57,7 @@ function carregar(forcar) {
 }
 
 /* ---------- valores ---------- */
-function gravado(sec, k) { var r = G.op || {}, v = (r[sec] || {})[k]; return v == null ? '' : v; }
+function gravado(sec, k) { var r = G.op || {}, t=r[sec]||{}, v=t[k]; if(sec==='triagem'&&k==='Detalhamento do caso'&&v==null)v=[t.Tema,t.Especificidades].map(S).filter(Boolean).filter(function(x,i,a){return a.indexOf(x)===i;}).join('\n'); return v == null ? '' : v; }
 function V(sec, k) { var id = sec + '.' + k; return id in G.pend ? G.pend[id] : gravado(sec, k); }
 function fonteVal(c) { var f = G.fo || {}, L = c.fonte || [];
   if (L.length === 2 && f[L[0]] && typeof f[L[0]] === 'object') { var x = f[L[0]][L[1]]; return x == null ? '' : S(x); }
@@ -316,7 +316,7 @@ function cabeca(s) {
     '<p class="pm-as">' + (assunto ? '<b>' + esc(assunto) + '</b>' : '') + (!G.adEd && !S(gravado('triagem', 'Registro - Assunto detalhado')) && !S(V('triagem', 'Assunto detalhado')) ? '<button type="button" class="pm-ad-ic" data-ad="ed" title="Incluir o assunto detalhado (vai para a ficha; o Caput mostra o mesmo)" aria-label="Incluir o assunto detalhado">' + SV('<path d="M12 5v14M5 12h14"/>', 12) + '</button>' : '') + '</p>' +
     assuntoDetalhado() +
     /* 0.66: tipo de caso e especificidades junto do assunto e do assunto detalhado */
-    '<div class="gr pm-esp">' + campoRot('triagem', 'Tema', 'Tipo de caso') + campoRot('triagem', 'Especificidades') + '</div>' +
+    '<div class="gr pm-esp">' + campoRot('triagem', 'Detalhamento do caso', 'Detalhamento do caso') + '</div>' +
 
     /* 0.65: etapas compactas — Minuta (verde), Correção/Revisão (azul), Liberada/Assinada (roxo); o nome designa, a data marca ou desfaz */
     '<div class="pm-pills">' + pilulas(E) + '</div>' +
@@ -662,7 +662,7 @@ var SQ_AB = null, SQ_HTML = '';
 function sinteseQuestoes() {
   var tc = S(V('triagem', 'Tema')), sp = S(V('triagem', 'Síntese Processual')), nq = S(V('triagem', 'Alegações')).split(/\n+/).filter(function (x) { return S(x); }).length;
   var vazio = !tc && !sp && !nq, ab = SQ_AB != null ? SQ_AB : vazio;
-  SQ_HTML = campoRot('triagem', 'Tema', 'Tipo de caso') + campoRot('triagem', 'Especificidades') + campoRot('triagem', 'Síntese Processual', 'Síntese do processo') + questoes();
+  SQ_HTML = campoRot('triagem', 'Detalhamento do caso', 'Detalhamento do caso') + campoRot('triagem', 'Síntese Processual', 'Síntese do processo') + questoes();
   var res = [tc || 'sem tipo de caso', nq ? nq + (nq > 1 ? ' questões' : ' questão') : 'sem questões', sp ? 'síntese preenchida' : 'sem síntese'].join(' · ');
   return '<details class="card sq-card"' + (ab ? ' open' : '') + '><summary><b>Síntese e questões</b><small>' + esc(res) + '</small></summary><div class="gr">' + SQ_HTML + '</div></details>';
 }
@@ -940,9 +940,9 @@ function heroOrganizarProntuario(){
   var old=top.querySelector('.pm-as');if(old)old.remove();var ad=top.querySelector('.pm-ad');if(ad)ad.remove();var esp=top.querySelector('.pm-esp');if(esp)esp.remove();
   var detail=el('div','hero-detalhes');html(detail,assuntoDetalhado());if(!detail.childNodes.length){var plus=el('button','pm-ad-add','+ Assunto detalhado');plus.type='button';plus.setAttribute('data-ad','ed');detail.append(plus);}
   /* Um editor de detalhamento; os dois campos antigos são conservados e concatenados na leitura. */
-  var dkey='triagem.Especificidades',oldTema=S(V('triagem','Tema')),oldEsp=S(V('triagem','Especificidades')),dv=[oldTema,oldEsp].filter(Boolean).filter(function(v,i,a){return a.indexOf(v)===i;}).join(' · ');
-  var dt=el('div','hero-detalhamento'),db=el('button','lnk',dv||'+ Detalhamento do caso');db.type='button';db.title='Editar detalhamento do caso';dt.append(db);
-  db.addEventListener('click',function(){var t=el('textarea');t.rows=2;t.value=dv;t.setAttribute('aria-label','Detalhamento do caso');var ok=el('button','btn solid sm','Gravar'),cancel=el('button','lnk','Cancelar');ok.type=cancel.type='button';dt.replaceChildren(t,ok,cancel);t.focus();ok.onclick=function(){if(window.MUTA_WEB&&window.MUTA_WEB.leitura)return;marcar(dkey,t.value.trim());marcar('triagem.Tema','');agendar(400);render();};cancel.onclick=function(){dt.replaceChildren(db);};});if(window.MUTA_WEB&&window.MUTA_WEB.leitura)db.disabled=true;detail.append(dt);id.append(detail);
+  var dkey='triagem.Detalhamento do caso',dv=S(V('triagem','Detalhamento do caso'));
+  var dt=el('div','hero-detalhamento'),db=el('button',dv?'lnk':'pm-ad-add',dv||'+ Detalhamento');db.type='button';db.title='Editar detalhamento do caso';dt.append(db);
+  db.addEventListener('click',function(){var t=el('textarea');t.rows=2;t.value=dv;t.setAttribute('aria-label','Detalhamento do caso');var ok=el('button','btn solid sm','Gravar'),cancel=el('button','lnk','Cancelar');ok.type=cancel.type='button';dt.replaceChildren(t,ok,cancel);t.focus();ok.onclick=function(){if(window.MUTA_WEB&&window.MUTA_WEB.leitura)return;marcar(dkey,t.value.trim());agendar(400);render();};cancel.onclick=function(){dt.replaceChildren(db);};});if(window.MUTA_WEB&&window.MUTA_WEB.leitura)db.disabled=true;detail.append(dt);id.append(detail);
   var ac=el('details','hero-acomp'),sum=el('summary','','Acompanhamento'),fase=top.querySelector('.pm-fase');if(fase)sum.append(el('small','muted',fase.textContent));ac.append(sum);var body=el('div','hero-acomp-b');ac.append(body);ac.open=heroTopo.acompanhamento;ac.addEventListener('toggle',function(){if(ac.isConnected)heroTopo.acompanhamento=ac.open;});
   var flow=top.querySelector('.pv-flowbox,.pm-pills');if(flow){var people=flow.querySelector('.pv-people');var tags=el('div','hero-designacoes');if(people){people.querySelectorAll('.pv-person').forEach(function(x){tags.append(x);});people.remove();}else{flow.querySelectorAll('[data-des-ed],[data-des]').forEach(function(x){var tag=el('span','chip');tag.append(el('small','muted',x.getAttribute('data-des-ed')==='CORRETOR'||x.getAttribute('data-des')==='CORRETOR'?'Corretor · ':'Minutador · '),x);tags.append(tag);});}id.append(tags);body.append(flow);}
   var dest=el('div','hero-destino'),resp=top.querySelector('.pm-resp'),ato=resp&&resp.querySelector('.pm-ato');if(ato)dest.append(ato);else html(dest,atoSel());if(N(V('producao','Destino'))==='sessao'&&S(V('triagem','Seleção Prévia')))dest.append(el('small','muted','Seleção prévia · '+S(V('pauta','Nova sessão de destino')||V('triagem','Seleção Prévia'))));id.append(dest);
