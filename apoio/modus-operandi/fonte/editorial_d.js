@@ -429,8 +429,8 @@ function dkCampoRot(f){var ph=f.getAttribute('data-ph')||'',idf=f.classList.cont
   var p=f.previousSibling,t='';while(p&&t.length<60){t=(p.textContent||'')+t;p=p.previousSibling;}t=t.replace(/\s+/g,' ').trim().split(' ').slice(-4).join(' ');return t?'após “'+t+'”':'Campo';}
 function dkCampos(k){var B=document.querySelector('#x-main .xblk[data-xk="'+(window.CSS&&CSS.escape?CSS.escape(k):k)+'"]');if(!B)return '';var F=$$('.fill',B);if(!F.length)return '';
   var ids=F.filter(function(f){return f.classList.contains('idf');}),tx=F.filter(function(f){return !f.classList.contains('idf');});
-  function inp(f){var nome=f.getAttribute('data-ph')||'',key=f.getAttribute('data-fk'),v=FILL[key]||AUTO[dkAlias(nome)]||f.textContent.trim(),au=!FILL[key]&&!!AUTO[dkAlias(nome)];return '<label class="dfl'+(f.classList.contains('idf')?' id':'')+(au?' au':'')+'"><span>'+esc(dkCampoRot(f))+(au?' <i>da ficha ou do padrão</i>':'')+'</span><input data-dfk="'+esc(f.getAttribute('data-fk'))+'" value="'+esc(v)+'" placeholder="'+(f.classList.contains('idf')?'só números':'escreva aqui')+'"'+(f.classList.contains('idf')?' inputmode="numeric"':'')+'></label>';}
-  return '<div class="cf"><div class="cfl">Campos do bloco <span class="pill">'+F.filter(function(f){return f.textContent.trim();}).length+' de '+F.length+'</span></div><div class="dfls">'+F.map(inp).join('')+'</div><p class="meta" style="margin:6px 0 0">Amarelo é texto do caso; azul é ID, que entra na peça ao copiar.</p></div>';}
+  function inp(f){var nome=f.getAttribute('data-ph')||'',key=f.getAttribute('data-fk'),v=FILL[key]||AUTO[dkAlias(nome)]||f.textContent.trim(),au=!FILL[key]&&campoConfirmado(AUTO[dkAlias(nome)]);return '<label class="dfl'+(f.classList.contains('idf')?' id':'')+(au?' au':'')+'"><span>'+esc(dkCampoRot(f))+(au?' <i>da ficha ou do padrão</i>':'')+'</span><input data-dfk="'+esc(f.getAttribute('data-fk'))+'" value="'+esc(v)+'" placeholder="'+(f.classList.contains('idf')?'só números':'escreva aqui')+'"'+(f.classList.contains('idf')?' inputmode="numeric"':'')+'></label>';}
+  return '<div class="cf"><div class="cfl">Campos do bloco <span class="pill">'+F.filter(function(f){return campoConfirmado(f.textContent);}).length+' de '+F.length+'</span></div><div class="dfls">'+F.map(inp).join('')+'</div><p class="meta" style="margin:6px 0 0">Amarelo é texto do caso; azul é ID, que entra na peça ao copiar.</p></div>';}
 function dkCanTrecho(sel){var t=sel.t,pt=sel.pt,E=escolha(t,XP.alt),ai=E.ai,h='',aj=dkAjuda(pt.id,t.n);
   h+='<div class="cvh"><div><p class="cvk">Bloco selecionado · '+esc(pt.t)+(t.opc?' · opcional':'')+'</p><p class="cvt">'+esc(t.n)+(aj?' <button type="button" class="dq" data-daj aria-pressed="'+!!DK.aj+'" title="Como preencher este bloco">?</button>':'')+'</p></div><button type="button" class="cvx" data-dsel="" title="Fechar o bloco" aria-label="Fechar o bloco">×</button></div>';
   if(aj&&DK.aj)h+=aj.replace('class="cf daj"','class="cf daj open"');
@@ -463,7 +463,7 @@ $('#v-edit').addEventListener('click',function(e){var b;
 $('#v-edit').addEventListener('input',function(e){var t=e.target;if(!t.matches||!t.matches('[data-dfk]'))return;
   var f=document.querySelector('#x-main .fill[data-fk="'+(window.CSS&&CSS.escape?CSS.escape(t.getAttribute('data-dfk')):t.getAttribute('data-dfk'))+'"]');if(!f)return;
   f.textContent=t.value;f.dispatchEvent(new Event('input',{bubbles:true}));t.closest('.dfl').classList.remove('au');
-  var c=t.closest('.cf'),P=c&&c.querySelector('.pill');if(P){var I=$$('[data-dfk]',c);P.textContent=I.filter(function(x){return x.value.trim();}).length+' de '+I.length;}});
+  var c=t.closest('.cf'),P=c&&c.querySelector('.pill');if(P){var I=$$('[data-dfk]',c);P.textContent=I.filter(function(x){return campoConfirmado(x.value);}).length+' de '+I.length;}});
 $('#v-edit').addEventListener('keydown',function(e){if(e.key==='Enter'&&e.target.matches&&e.target.matches('[data-dfk]')){e.preventDefault();var I=$$('#x-aside [data-dfk]'),i=I.indexOf(e.target);if(I[i+1])I[i+1].focus();else e.target.blur();}});
 /* resumo do bloco na lista: texto já preenchido da folha */
 var _dkRes=dkResumo;dkResumo=function(t){if(XP.fora[t.k]||(t.opc&&!XP.abre[t.k])||t.alts.length>1)return _dkRes(t);var B=document.querySelector('#x-main .xblk[data-xk="'+(window.CSS&&CSS.escape?CSS.escape(t.k):t.k)+'"] .dbody');if(!B)return _dkRes(t);var c=B.cloneNode(true);$$('.ptg',c).forEach(function(x){x.remove();});$$('.fill',c).forEach(function(f){if(!f.textContent.trim())f.textContent='…';});var x=c.textContent.replace(/\s+/g,' ').trim();return x.length>34?x.slice(0,32)+'…':x;};
@@ -683,11 +683,11 @@ function dkProntLacunas(){
  return L;
 }
 function dkProntLacunasHtml(){
- var L=dkProntLacunas(),pend=L.filter(function(x){return !x.v;}),show=DKPR.modo==='todos'?L:pend;
+ var L=dkProntLacunas(),pend=L.filter(function(x){return !campoConfirmado(x.v);}),show=DKPR.modo==='todos'?L:pend;
  var h='<div class="dk-pront-progress"><b>'+pend.length+' campo(s) em aberto</b><small>'+L.length+' lacunas na parte atual</small></div><div class="dk-pront-modes" role="group" aria-label="Filtrar campos">'+[['pendentes','Em aberto'],['todos','Todos']].map(function(x){return '<button type="button" data-dkpr-modo="'+x[0]+'" aria-pressed="'+(DKPR.modo===x[0])+'">'+x[1]+'</button>';}).join('')+'</div>';
  if(!L.length)return h+'<p class="meta">A versão atual não contém campos de preenchimento direto. Confira os blocos de texto e as orientações.</p>';
  if(!show.length)return h+'<p class="meta">Nenhuma lacuna direta em aberto nesta parte. Isso não equivale à revisão jurídica da minuta.</p>';
- h+='<ol class="dk-pront-lacunas">'+show.map(function(x){return '<li><button type="button" data-dkpr-campo="'+esc(x.key)+'" data-dkpr-bloco="'+esc(x.bloco)+'"><span><b>'+esc(x.label)+'</b><small>'+esc(x.titulo)+(x.v?' · '+(x.auto?'Valor da ficha ou do padrão':'Preenchido na minuta'):' · em aberto')+'</small></span><i aria-hidden="true">'+(x.v?'✓':'→')+'</i></button></li>';}).join('')+'</ol>';
+ h+='<ol class="dk-pront-lacunas">'+show.map(function(x){return '<li><button type="button" data-dkpr-campo="'+esc(x.key)+'" data-dkpr-bloco="'+esc(x.bloco)+'"><span><b>'+esc(x.label)+'</b><small>'+esc(x.titulo)+(campoConfirmado(x.v)?' · '+(x.auto?'Valor da ficha ou do padrão':'Preenchido na minuta'):' · pendente de validação')+'</small></span><i aria-hidden="true">'+(campoConfirmado(x.v)?'✓':'→')+'</i></button></li>';}).join('')+'</ol>';
  return h;
 }
 function dkProntuarioAtivo(){
@@ -785,7 +785,7 @@ var _xAutoCasoBase=xAutoCaso;xAutoCaso=function(){_xAutoCasoBase();
     v=dkValorFicha(v).trim();if(v)AUTO['@'+a]=v;});
   var E={processo:'processo',classe:'CLASSE',assunto:'ASSUNTO',ramo:'RAMO',polo_ativo:'polo ativo',polo_passivo:'polo passivo',recorrente:'recorrente',resultado:'resultado',conclusao:'CONCLUSÃO',dispositivo_ementa:'dispositivo da ementa',classe_ementa:'CLASSE',assunto_ementa:'ASSUNTO'};
   ['classe','assunto','polo_ativo','polo_passivo'].forEach(function(a){if(AUTO['@'+a])AUTO[E[a]]=a==='classe'||a==='assunto'?String(AUTO['@'+a]).toUpperCase():AUTO['@'+a];});
-  if(P){var res=AUTO['@resultado_julgamento']||P.resultado;if(res){AUTO.resultado=dkValorFicha(res);AUTO['@resultado']=AUTO.resultado;}else{delete AUTO.resultado;delete AUTO['@resultado'];delete AUTO.CONCLUSÃO;delete AUTO['dispositivo da ementa'];}}
+  /* Resultado redacional deriva do dispositivo escolhido, não do rótulo classificatório da ficha. */
   Object.keys(E).forEach(function(a){if(!AUTO['@'+a]&&AUTO[E[a]])AUTO['@'+a]=AUTO[E[a]];});
   // Variáveis compostas da mesma ficha e do mesmo gerador da HERO.
   ['abertura_relatorio','resultado_decisao_recorrida','comandos_dispositivos','frase_honorarios_origem','razoes_recursais','contrarrazoes_relatorio','parecer_relatorio','caso_em_exame','questao_em_discussao','razoes_primeiro_recurso','razoes_segundo_recurso','razoes_agravo_interno','vicios_relatorio','ementa_embargada_literal','sentenca_paragrafo','parecer_sentido_redacional','dispositivo_voto','honorarios_recursais_texto','honorarios_ementa','dispositivo_ementa_ficha','acordao_recorrido_id','decisao_agravada_id'].forEach(function(a){delete AUTO['@'+a];});
@@ -796,9 +796,9 @@ var _xAutoCasoBase=xAutoCaso;xAutoCaso=function(){_xAutoCasoBase();
     if(/apela|remessa|agravo|embargos de declara|retrata/i.test(tj)){
       var D=MutaGerador.comporFicha(cp,fo);
       Object.keys(D.variaveis||{}).forEach(function(a){if(D.variaveis[a])AUTO['@'+a]=D.variaveis[a];});
-       var F=dkFragmentosFicha(D.variaveis);Object.keys(F).forEach(function(a){AUTO['@'+a]=F[a];});
-       if(F.recurso_1_razoes_todas&&XP.v[XP.pc]!=='dap')AUTO['@recurso_1_razoes']=F.recurso_1_razoes_todas;
-       if(cp['origem.Sentença - ID']&&!cp['triagem.Impugnada - ID']&&D.tipo==='Agravo de Instrumento')AUTO['@decisao_agravada_id']=dkValorFicha(cp['origem.Sentença - ID']);
+       var F=dkFragmentosFicha(D.variaveis);Object.keys(F).forEach(function(a){if(!D.variaveis[a])AUTO['@'+a]=F[a];});
+       /* Cada recurso conserva os seus próprios dados. Não concatenar recursos em campo do primeiro. */
+
     }else if(/mandado de seguran[çc]a|msciv/i.test(tj)){
       var H=MutaGerador.comporFicha(cp,fo,'Apelação').variaveis;AUTO['@honorarios_recursais_texto']=H.honorarios_recursais_texto;
     }

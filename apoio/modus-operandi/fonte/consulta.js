@@ -63,8 +63,8 @@
   function fichaDe(cnj){return jget('/api/pauta?ficha='+encodeURIComponent(cnj));}
   /* ficha única prevalece nos campos canônicos; cartão complementa os dados específicos da sessão. */
   function mesclaFicha(F){var P=CQ.perfil,pf=perfilDaFicha(P.processo,F),J=prontDaFicha(P.processo,F);if(VIVA){VIVA.cnj=dg(P.processo);VIVA.ass=assinatura(F);}
-    Object.keys(pf).forEach(function(k){if(k!=='processo'&&k!=='item'&&k!=='destino')P[k]=pf[k];});
-    if(CQ.pront&&dg(CQ.pront.processo)===dg(P.processo)){Object.keys(J.campos).forEach(function(k){CQ.pront.campos[k]=J.campos[k];});if(J.recursos.length)CQ.pront.recursos=J.recursos;if(J.pecas.length)CQ.pront.pecas=J.pecas;}else CQ.pront=J;CQ.R=null;CQ.Rp=null;}
+    Object.keys(perfilDaFicha(P.processo,{operacional:{},fonte:{}})).forEach(function(k){if(k!=='processo'&&k!=='item'&&k!=='destino')delete P[k];});(CQ._fichaPerfil||[]).forEach(function(k){if(k!=='processo'&&k!=='item'&&k!=='destino')delete P[k];});CQ._fichaPerfil=Object.keys(pf);Object.keys(pf).forEach(function(k){if(k!=='processo'&&k!=='item')P[k]=pf[k];});
+    if(CQ.pront&&dg(CQ.pront.processo)===dg(P.processo)){Object.keys(CQ.pront.campos).forEach(function(k){if(/^(origem|triagem|producao|pauta|controles|acervo)\./.test(k))delete CQ.pront.campos[k];});Object.keys(J.campos).forEach(function(k){CQ.pront.campos[k]=J.campos[k];});CQ.pront.recursos=J.recursos;CQ.pront.pecas=J.pecas;}else CQ.pront=J;CQ.R=null;CQ.Rp=null;}
   function lerHash(){
     var h=location.hash.replace(/^#/,''),p={};h.split('&').forEach(function(kv){var i=kv.indexOf('=');if(i>0)p[kv.slice(0,i)]=kv.slice(i+1);});
     if(p.caso){try{CQ.perfil=JSON.parse(decodeURIComponent(p.caso));CQ.pront=null;CQ.fonte='enviado pelo cartão do Caput';}catch(er){}}
@@ -94,7 +94,7 @@
   function abrirFicha(cnj){CQ.busy=true;CQ.erro='';pinta();
     base().then(function(){return fichaDe(cnj);}).then(function(F){
       if(!F||(!F.operacional&&!F.fonte))throw new Error('O processo '+cnj+' não tem ficha no acervo.');
-      CQ.perfil=perfilDaFicha(cnj,F);CQ.pront=prontDaFicha(cnj,F);CQ.fonte='ficha do processo';zerar();VIVA.cnj=dg(cnj);VIVA.ass=assinatura(F);
+      CQ.perfil=perfilDaFicha(cnj,F);CQ.pront=prontDaFicha(cnj,F);CQ._fichaPerfil=Object.keys(CQ.perfil);CQ.fonte='ficha do processo';zerar();VIVA.cnj=dg(cnj);VIVA.ass=assinatura(F);
     }).catch(function(er){var ac=acDe(cnj);
       if(ac){CQ.perfil=perfilDaFicha(cnj,null);CQ.pront=null;CQ.fonte='acervo · ficha indisponível ('+er.message.replace(/\.$/,'')+')';zerar();}else CQ.erro=er.message;
     }).then(function(){CQ.busy=false;if(CQ.perfil&&dg(CQ.perfil.processo)===dg(cnj)){try{history.replaceState(null,'','#processo='+encodeURIComponent(cnj));}catch(er){}aplicarCaso();}else pinta();});}
@@ -296,7 +296,7 @@
   /* ficha viva: com um caso aberto e a Minuta-Matriz à vista, relê a ficha a cada 20 s; se a HERO18810 (ou a pauta) gravou,
      prontuário, canhoto e folha se atualizam sem recarregar. Tipo de julgamento, destino, classe ou resultado novos refazem a estrutura. */
   var VIVA={t:null,ass:'',cnj:''};
-  function assinatura(F){var o=(F&&F.operacional)||{};try{return JSON.stringify([o.origem,o.triagem,o.producao,o.pauta,o.controles]);}catch(er){return '';}}
+  function assinatura(F){var o=(F&&F.operacional)||{};try{return JSON.stringify([o.origem,o.triagem,o.producao,o.pauta,o.controles,F&&F.fonte]);}catch(er){return '';}}
   function estrutura(P){return [P.tipoJulgamento,P.destino,P.classe,P.resultado].join('|');}
   function fichaViva(){var P=CQ.perfil,v=document.getElementById('v-edit');
     if(!P||!P.processo||CQ.busy||document.hidden||!v||v.hidden||(XS.ed||'pecas')!=='pecas'||dg(P.processo).length!==20)return;

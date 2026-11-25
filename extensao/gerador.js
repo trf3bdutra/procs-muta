@@ -64,7 +64,7 @@
     if(!r||/\b(e|mas|porem|enquanto)\b|[;\/]/.test(r))return '';
     if(tipo==='Embargos de Declaração'){
       if(/^(acolhimento parcial|parcialmente acolhidos?|parcialmente provido)$/.test(r))return 'acolp';
-      if(/^(acolhimento|acolhidos?|dado provimento)$/.test(r))return 'acol';
+      if(/^(acolhimento|acolhidos?(?: (?:sem|com) efeitos? (?:infringentes?|modificativos?))?|dado provimento)$/.test(r))return 'acol';
       if(/^(rejeicao|rejeitados?|negado provimento|desprovimento)$/.test(r))return 'rej';
       return /^(nao conhecido|nao conhecimento)$/.test(r)?'nc':'';
     }
@@ -81,7 +81,7 @@
     var o = objeto(tipo), cmd = VAL('comando: para reformar a ' + (/Agravo/.test(tipo) ? 'decisão agravada' : 'sentença') + ' e …');
     if (tipo === 'Embargos de Declaração') return ({
       rej: ['rejeito os embargos de declaração', 'rejeitou os embargos de declaração', 'EMBARGOS DE DECLARAÇÃO REJEITADOS', 'Embargos de declaração rejeitados.'],
-      acol: ['acolho os embargos de declaração, ' + VAL('sem efeitos modificativos | com efeitos modificativos') + ', para ' + VAL('sanar o vício'), 'acolheu os embargos de declaração, ' + VAL('sem efeitos modificativos | com efeitos modificativos') + ', para ' + VAL('sanar o vício'), 'EMBARGOS DE DECLARAÇÃO ACOLHIDOS', 'Embargos de declaração acolhidos.'],
+      acol: ['acolho os embargos de declaração, ' + (N(v('producao','ED - Efeitos modificativos'))==='sim'||/com efeito/.test(N(v('producao','Voto - Resultado')))?'com efeitos modificativos':N(v('producao','ED - Efeitos modificativos'))==='nao'||/sem efeito/.test(N(v('producao','Voto - Resultado')))?'sem efeitos modificativos':VAL('sem efeitos modificativos | com efeitos modificativos')) + ', para ' + VAL('sanar o vício'), 'acolheu os embargos de declaração, ' + VAL('sem efeitos modificativos | com efeitos modificativos') + ', para ' + VAL('sanar o vício'), 'EMBARGOS DE DECLARAÇÃO ACOLHIDOS', 'Embargos de declaração acolhidos.'],
       acolp: ['acolho parcialmente os embargos de declaração para, sem efeitos modificativos, ' + VAL('acrescer fundamentação …'), 'acolheu parcialmente os embargos de declaração para, sem efeitos modificativos, ' + VAL('acrescer fundamentação …'), 'EMBARGOS DE DECLARAÇÃO PARCIALMENTE ACOLHIDOS', 'Embargos de declaração parcialmente acolhidos.'],
       nc: ['não conheço dos embargos de declaração', 'não conheceu dos embargos de declaração', 'EMBARGOS DE DECLARAÇÃO NÃO CONHECIDOS', 'Embargos de declaração não conhecidos.'] })[k];
     if (tipo === 'Juízo de Retratação') return ({
@@ -253,17 +253,25 @@
     else t='opinou '+VAL(outro||'sentido do parecer');
     return 'A Procuradoria Regional da República '+t+' '+idOu(id,'ID do parecer')+'.';
   }
+  /* Identidade do ato recorrido: só campo explicitamente impugnado ou ato marcado na origem. */
+  function atoRecorrido(tipo){
+    var imp=S(v('triagem','Impugnada - ID')),si=S(v('triagem','Impugnada - Síntese')),id='',texto='';
+    if(tipo==='Agravo de Instrumento'&&N(v('origem','1G - Decisão recorrida'))==='sim'){id=S(v('origem','1G - Decisão ID'));texto=S(v('origem','1G - Decisão Resultado'));}
+    if(tipo==='Agravo Interno'&&N(v('origem','2G - Monocrática recorrida'))==='sim'){id=S(v('origem','2G - Monocrática ID'));texto=S(v('origem','2G - Monocrática Resultado'));}
+    if(imp&&id&&imp!==id)return {id:VAL('divergência entre IDs do ato impugnado'),sintese:VAL('conferir ato impugnado')};
+    return {id:imp||id,sintese:si||texto};
+  }
   function relatorio(tipo) {
     var P = [], sid = S(v('origem', 'Sentença - ID')), rn = N(v('origem', 'Sentença - Reexame')) === 'sim', nRec = tab('origem', 'Recursos').length;
     var imp = S(v('triagem', 'Impugnada - ID')), impS = S(v('triagem', 'Impugnada - Síntese'));
     if (tipo === 'Embargos de Declaração') {
-      P.push('Trata-se de embargos de declaração contra acórdão '+idOu(v('producao','Acórdão - ID')||imp,'ID do acórdão embargado')+' assim ementado:');
+      P.push('Trata-se de embargos de declaração contra acórdão '+idOu(imp,'ID do acórdão embargado')+' assim ementado:');
       var literal=S(v('triagem','Impugnada - Ementa literal'));P.push(literal?'“'+literal+'”':VAL('transcrever a ementa literal do acórdão embargado'));
       var pts = linhas(v('triagem', 'ED - Ponto')).concat(linhas(v('triagem', 'Alegações')));
       var vicio = S(v('triagem', 'ED - Vício')).toLowerCase() || VAL('vício alegado');
       P.push('Alegou-se ' + vicio + ', inclusive em prequestionamento, pois: ' + (pts.length ? enumerar(pts) : VAL('pontos, em itens')) + '.');
     } else if (tipo === 'Agravo Interno') {
-      P.push('Trata-se de agravo interno à decisão ' + idOu(imp, 'ID da decisão agravada') + ' que ' + (impS || VAL('o que a decisão decidiu')) + '.');
+      P.push('Trata-se de agravo interno à decisão ' + idOu(atoRecorrido(tipo).id, 'ID da decisão agravada') + ' que ' + (atoRecorrido(tipo).sintese || VAL('o que a decisão decidiu')) + '.');
       var fa = linhas(v('triagem', 'AgInt - Fundamentos')).concat(linhas(v('triagem', 'Alegações')));
       var R0 = tab('origem', 'Recursos')[0] || {};
       P.push('Alegou ' + (R0.parte ? quem(R0.parte).replace(/^(a|o) (autora?|réu|ré)$/, function (m, a, b) { return a + ' agravante'; }) : 'o agravante') + ', em suma ' + idOu(R0.ids, 'ID do agravo') + ': ' + (fa.length ? enumerar(fa) : VAL('razões, em itens')) + '.');
@@ -274,8 +282,8 @@
       var trib = S(v('triagem', 'Retratação - Tribunal')), tema = S(v('triagem', 'Retratação - Tema')), prec = S(v('triagem', 'Retratação - Precedente'));
       P.push('Na tramitação dos recursos excepcionais perante a Vice-Presidência, houve, em ' + (S(v('triagem', 'Retratação - Devolução mês')) || VAL('mês/ano')) + ', decisão para devolução dos autos à Turma para eventual juízo de retratação face ao julgamento do ' + (prec || VAL('precedente')) + ' ' + (trib === 'STJ' ? 'pelo Superior Tribunal de Justiça' : 'pela Suprema Corte') + ' (Tema ' + (tema || VAL('número')) + ') ' + idOu(v('triagem', 'Retratação - Devolução ID'), 'ID') + '.');
     } else if (tipo === 'Agravo de Instrumento') {
-      /* no agravo de instrumento a decisão agravada é a de origem (Sentença - ID); "Impugnada" serve ao agravo interno e aos embargos */
-      P.push('Trata-se de agravo de instrumento à decisão ' + idOu(imp || sid, 'ID da decisão agravada') + ' que ' + (imp?impS||VAL('o que a decisão agravada decidiu'):resultadoSentenca('decisão')) + '.');
+      /* O ID da decisão agravada não é o ID genérico da sentença. */
+      P.push('Trata-se de agravo de instrumento à decisão ' + idOu(atoRecorrido(tipo).id, 'ID da decisão agravada') + ' que ' + (atoRecorrido(tipo).sintese||VAL('o que a decisão agravada decidiu')) + '.');
       pRecursos(tipo).forEach(function (x) { P.push(x); });
       P.push(pContrarrazoes(tipo));
     } else if (tipo === 'Remessa Necessária') {
@@ -324,7 +332,7 @@
     else if (tipo === 'Agravo Interno') I.push(it('Agravo interno contra decisão que ' + (S(v('triagem', 'Impugnada - Síntese')) || VAL('o que a decisão decidiu')) + '.'));
     else if (tipo === 'Juízo de Retratação') I.push(it('Juízo de retratação de acórdão da Turma, após devolução dos autos pela Vice-Presidência, em razão do Tema ' + (S(v('triagem', 'Retratação - Tema')) || VAL('número')) + '.'));
     else if (tipo === 'Remessa Necessária') I.push(it('Remessa necessária de sentença que ' + resultadoSentenca() + '.'));
-    else if (tipo === 'Agravo de Instrumento') I.push(it('Agravo de instrumento contra decisão que ' + (S(v('origem', 'Sentença - ID')) || !S(v('triagem', 'Impugnada - Síntese')) ? resultadoSentenca('decisão') : S(v('triagem', 'Impugnada - Síntese'))) + '.'));
+    else if (tipo === 'Agravo de Instrumento') I.push(it('Agravo de instrumento contra decisão que ' + (atoRecorrido(tipo).sintese||VAL('o que a decisão agravada decidiu')) + '.'));
     else I.push(it((N(v('origem', 'Sentença - Reexame')) === 'sim' ? 'Remessa necessária e ' + (tab('origem', 'Recursos').length > 1 ? 'apelações' : 'apelação') : tab('origem', 'Recursos').length > 1 ? 'Apelações' : 'Apelação') + ' contra sentença que ' + resultadoSentenca() + '.'));
     var Q = linhas(v('triagem', 'Alegações')); if (!Q.length) Q = linhas(v('triagem', 'ED - Ponto'));
     if (Q.length <= 1) II.push(it('A questão em discussão consiste em saber se ' + VAL(Q[0] ? 'reescrever como pergunta: ' + Q[0] : 'questão') + '.'));
@@ -479,8 +487,20 @@
   function variaveisEditorial(tipo,rel,em){
     var rec=tab('origem','Recursos'),rs=/^(Apelação|Agravo de Instrumento)$/.test(tipo)?pRecursos(tipo):[],hon=honorariosEditorial(tipo),d=resultado(tipo,resDaFicha(tipo)),sid=S(v('origem','Sentença - ID')),imp=S(v('triagem','Impugnada - ID'));
     var literal=S(v('triagem','Impugnada - Ementa literal')),per=S(v('triagem','Parecer - Sentido'));
-    return {razoes_primeiro_recurso:rs[0]||VAL('razões do primeiro recurso'),razoes_segundo_recurso:rec.length>1&&rs[1]||VAL('razões do segundo recurso'),razoes_agravo_interno:tipo==='Agravo Interno'?rel[1]:VAL('razões do agravo interno'),vicios_relatorio:tipo==='Embargos de Declaração'?rel[2]:VAL('vícios alegados'),ementa_embargada_literal:literal||VAL('transcrever ementa literal'),sentenca_paragrafo:'A sentença '+idOu(sid,'ID da sentença')+' '+comandosOrigem()+'. '+honorariosAbertura(),parecer_sentido_redacional:/^nao provimento|^desprovimento/.test(N(per))?'desprovimento':/^parcial.*provimento/.test(N(per))?'parcial provimento':/^provimento/.test(N(per))?'provimento':VAL('sentido do parecer'),dispositivo_voto:S(v('producao','Dispositivo do pronunciamento'))||'Ante o exposto, '+d[0]+'.',honorarios_recursais_texto:hon.texto,honorarios_ementa:hon.ementa,dispositivo_ementa_ficha:hon.ementa||d[3],acordao_recorrido_id:S(v('producao','Acórdão - ID'))||imp||VAL('ID do acórdão'),decisao_agravada_id:imp||VAL('ID da decisão agravada')};
+    return {razoes_primeiro_recurso:rs[0]||VAL('razões do primeiro recurso'),razoes_segundo_recurso:rec.length>1&&rs[1]||VAL('razões do segundo recurso'),razoes_agravo_interno:tipo==='Agravo Interno'?rel[1]:VAL('razões do agravo interno'),vicios_relatorio:tipo==='Embargos de Declaração'?rel[2]:VAL('vícios alegados'),ementa_embargada_literal:literal||VAL('transcrever ementa literal'),sentenca_paragrafo:'A sentença '+idOu(sid,'ID da sentença')+' '+comandosOrigem()+'. '+honorariosAbertura(),parecer_sentido_redacional:/^nao provimento|^desprovimento/.test(N(per))?'desprovimento':/^parcial.*provimento/.test(N(per))?'parcial provimento':/^provimento/.test(N(per))?'provimento':VAL('sentido do parecer'),dispositivo_voto:S(v('producao','Dispositivo do pronunciamento'))||'Ante o exposto, '+d[0]+'.',honorarios_recursais_texto:hon.texto,honorarios_ementa:hon.ementa,dispositivo_ementa_ficha:d[3],acordao_recorrido_id:imp||VAL('ID do acórdão recorrido'),decisao_agravada_id:atoRecorrido(tipo).id||VAL('ID da decisão agravada'),decisao_agravada_sintese:atoRecorrido(tipo).sintese||VAL('síntese da decisão agravada')};
   }
-  function comporFicha(campos, fonte, tipo){var ant=CONTEXTO,t0=TIPO;try{CONTEXTO={V:function(sec,k){return campos[sec+'.'+k];},fo:function(){return fonte||{};}};TIPO=tipo||tipoDetectado();var rel=relatorio(TIPO),em=ementa(TIPO,resDaFicha(TIPO)),R={abertura_relatorio:rel[0],razoes_recursais:/^(Apelação|Agravo de Instrumento)$/.test(TIPO)?pRecursos(TIPO).join('\n\n'):'',contrarrazoes_relatorio:pContrarrazoes(TIPO),parecer_relatorio:pMpf()||'',caso_em_exame:em.sec[0][1].map(function(x){return x.t;}).join('\n'),questao_em_discussao:em.sec[1][1].map(function(x){return x.t;}).join('\n')};if(/^(Apelação|Remessa Necessária|Agravo de Instrumento)$/.test(TIPO)){R.resultado_decisao_recorrida=resultadoSentenca();R.comandos_dispositivos=comandosOrigem();R.frase_honorarios_origem=honorariosAbertura();}Object.assign(R,variaveisEditorial(TIPO,rel,em));if(R.honorarios_ementa)em.sec[3][1][0].t=R.honorarios_ementa;return {tipo:TIPO,rel:rel,em:em,variaveis:R};}finally{CONTEXTO=ant;TIPO=t0;}}
+  /* A tabela é a fonte dos fragmentos; não separar frases já compostas por regex. */
+  function fragmentosRecursos(tipo){
+    var R=tab('origem','Recursos'),out={};
+    if(/^(Apelação|Agravo de Instrumento)$/.test(tipo))R.forEach(function(r,i){
+      var n=i+1,L=linhas(r.preliminares).map(function(x){return 'preliminarmente, '+x;}).concat(linhas(r.teses),linhas(r.merito)),ped=S(r.pedidos);
+      out['recurso_'+n+'_parte']=quem(r.parte);
+      out['recurso_'+n+'_referencia']=idOu(r.ids,'ID do recurso');
+      out['recurso_'+n+'_razoes']=(L.length?enumerar(L):VAL('razões, em itens'))+(ped?', pelo que requereu '+ped.replace(/^(requer(eu)?|pede)\s+/i,'').replace(/[.;]+$/,''):'');
+    });
+    if(tipo==='Agravo Interno'&&R.length){var r=R[0],L=linhas(v('triagem','AgInt - Fundamentos')).concat(linhas(r.preliminares),linhas(r.teses),linhas(r.merito));if(!L.length)L=linhas(v('triagem','Alegações'));out.agint_parte=quem(r.parte);out.agint_referencia=idOu(r.ids,'ID do agravo');out.agint_razoes=L.length?enumerar(L):VAL('razões, em itens');}
+    return out;
+  }
+  function comporFicha(campos, fonte, tipo){var ant=CONTEXTO,t0=TIPO;try{CONTEXTO={V:function(sec,k){return campos[sec+'.'+k];},fo:function(){return fonte||{};}};TIPO=tipo||tipoDetectado();var rel=relatorio(TIPO),em=ementa(TIPO,resDaFicha(TIPO)),R={abertura_relatorio:rel[0],razoes_recursais:/^(Apelação|Agravo de Instrumento)$/.test(TIPO)?pRecursos(TIPO).join('\n\n'):'',contrarrazoes_relatorio:pContrarrazoes(TIPO),parecer_relatorio:pMpf()||'',caso_em_exame:em.sec[0][1].map(function(x){return x.t;}).join('\n'),questao_em_discussao:em.sec[1][1].map(function(x){return x.t;}).join('\n')};if(/^(Apelação|Remessa Necessária|Agravo de Instrumento)$/.test(TIPO)){R.resultado_decisao_recorrida=resultadoSentenca();R.comandos_dispositivos=comandosOrigem();R.frase_honorarios_origem=honorariosAbertura();}Object.assign(R,variaveisEditorial(TIPO,rel,em));Object.assign(R,fragmentosRecursos(TIPO));if(R.honorarios_ementa)em.sec[3][1][0].t=R.honorarios_ementa;return {tipo:TIPO,rel:rel,em:em,variaveis:R};}finally{CONTEXTO=ant;TIPO=t0;}}
   window.MutaGerador = { comporFicha: comporFicha, pintar: pintar, abrir: abrir, modo: modo, html: html, acao: acao, docs: docs, _ST: ST, _t: { resultado: resultado, fraseHonorarios: fraseHonorarios, designa: designa, feminino: feminino } };
 })();
