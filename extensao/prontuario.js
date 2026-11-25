@@ -168,16 +168,14 @@ function wireTabs(tabs,onSelect){
 }
 function selectTab(tabs,idx){tabs.forEach(function(t,i){var on=i===idx;t.setAttribute('aria-selected',on);t.tabIndex=on?0:-1;$(t.getAttribute('aria-controls')).hidden=!on;});}
 /* 0.11: Prontuário (com a triagem), Minuta (lote, comparar e conformidade), Ementário, Parágrafos-padrão e Diretrizes; a Ajuda abre pelo "?" */
-var mainTabs=[$('tab-pront'),$('tab-min'),$('tab-acervo'),$('tab-par'),$('tab-dir'),$('tab-ajuda'),$('tab-dil'),$('tab-del'),$('tab-ctl'),$('tab-pauta'),$('tab-modelos')];
-var NOMES=['pront','min','ementario','par','dir','ajuda','dil','del','ctl','pauta','modelos'];
+var mainTabs=[$('tab-pront'),$('tab-min'),$('tab-acervo'),$('tab-par'),$('tab-ajuda'),$('tab-dil'),$('tab-del'),$('tab-ctl'),$('tab-pauta'),$('tab-modelos')];
+var NOMES=['pront','min','ementario','par','ajuda','dil','del','ctl','pauta','modelos'];
 var ALIAS={tri:'pront',lote:'min',cmp:'min',conf:'min',ger:'min',acervo:'ementario',diligencias:'dil',deliberacoes:'del',controle:'ctl'};
 function abrirAba(i){
   if(NOMES[i]==='dil'||NOMES[i]==='del'){
     var ses=window.MutaSessao,u=ses&&ses.estado?ses.estado():null;
     if(!u||u.estado!=='on'||!(u.gestor||u.perfil==='desembargador'))return;
   }
-  /* 0.47: Diretrizes é parte da Minuta */
-  if(NOMES[i]==='dir'&&!document.body.classList.contains('hero-redesign-v53')){abrirAba(NOMES.indexOf('min'));if(window.MutaGerador&&window.MutaGerador.modo)window.MutaGerador.modo('dir');return;}
   selectTab(mainTabs,i);var n=NOMES[i];
   document.body.classList.toggle('hero-gestao-ativa',n==='dil'||n==='del');
   /* 0.47: Parágrafos-padrão é sub-aba do Ementário: a barra mantém o Ementário marcado */
@@ -187,7 +185,6 @@ function abrirAba(i){
   if(n==='min'){if(window.MutaGerador&&window.MutaGerador.abrir)window.MutaGerador.abrir();if(window.MutaComparar)window.MutaComparar.abrir();if(window.MutaConformidade)window.MutaConformidade.abrir();if(window.MutaLote)window.MutaLote.sessao();}
   if(n==='modelos'&&window.MutaModelosHero)window.MutaModelosHero.abrir();
   if(n==='par'&&window.MutaParagrafos)window.MutaParagrafos.abrir();
-  if(n==='dir'&&window.MutaDiretrizes)window.MutaDiretrizes.abrir();
   /* 0.48: Diligências e Deliberações (Desembargador e gestor); Controle — prazos e etiquetas — só do gestor */
   if((n==='dil'||n==='del')&&window.MutaGestao)window.MutaGestao.abrir(n);
   /* 0.58: aba Pauta (sessões do Ex Officio, etapas, alertas e sustentações por sessão) */
@@ -196,7 +193,7 @@ function abrirAba(i){
 }
 wireTabs(mainTabs,function(i){abrirAba(i);});
 document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-emd]');if(!b)return;var i=NOMES.indexOf(b.dataset.emd);if(i>=0)abrirAba(i);});
-window.MutaAbas={ir:function(nome){if(nome==='ger'&&document.body.classList.contains('hero-redesign-v53')){abrirAba(NOMES.indexOf('pront'));if(window.MutaGabinete)window.MutaGabinete.ir('Produção');return;}var alvo=ALIAS[nome]||nome,i=NOMES.indexOf(alvo);if(i<0)return;abrirAba(i);if(nome==='tri'&&window.MutaGabinete&&window.MutaGabinete.ir)window.MutaGabinete.ir('Triagem');if((nome==='ger'||nome==='cmp'||nome==='conf'||(nome==='dir'&&!document.body.classList.contains('hero-redesign-v53')))&&window.MutaGerador&&window.MutaGerador.modo)window.MutaGerador.modo(nome);}};
+window.MutaAbas={ir:function(nome){if(nome==='ger'&&document.body.classList.contains('hero-redesign-v53')){abrirAba(NOMES.indexOf('pront'));if(window.MutaGabinete)window.MutaGabinete.ir('Produção');return;}var alvo=ALIAS[nome]||nome,i=NOMES.indexOf(alvo);if(i<0)return;abrirAba(i);if(nome==='tri'&&window.MutaGabinete&&window.MutaGabinete.ir)window.MutaGabinete.ir('Triagem');if((nome==='ger'||nome==='cmp'||nome==='conf')&&window.MutaGerador&&window.MutaGerador.modo)window.MutaGerador.modo(nome);}};
 (function(){var d=$('panel-lote');if(d)d.addEventListener('toggle',function(){if(d.open&&window.MutaLote)window.MutaLote.abrir();});var v=$('aj-volta');if(v)v.addEventListener('click',function(){abrirAba(0);});})();
 document.addEventListener('DOMContentLoaded',function(){var h=location.hash.replace('#','');var i=NOMES.indexOf(ALIAS[h]||h);if(i>0)abrirAba(i);});
 var modeTabs=[$('mode-tri'),$('mode-pro')];

@@ -86,7 +86,7 @@ test('extensão 0.11: os motores copiados de padrao/ são idênticos aos do site
   const html = read('extensao/painel.html');
   ['vendor/pdf.min.js', 'padrao-calendario-forense.js', 'padrao-inteiro-teor.js', 'autos.js', 'paragrafos.js', 'diretrizes.js']
     .forEach(f => assert.ok(html.includes('src="' + f + '"'), f + ' no painel'));
-  ['tab-pront', 'tab-min', 'tab-acervo', 'tab-par', 'tab-dir', 'tab-ajuda', 'panel-min', 'min-conf'].forEach(id => assert.ok(html.includes('id="' + id + '"'), id));
+  ['tab-pront', 'tab-min', 'tab-acervo', 'tab-par', 'tab-ajuda', 'panel-min', 'min-conf'].forEach(id => assert.ok(html.includes('id="' + id + '"'), id));
   assert.ok(fs.existsSync(path.join(ext, 'vendor/pdf.worker.min.js')), 'worker do pdf.js');
 });
 
@@ -628,7 +628,7 @@ test('extensão 0.47: Roteiro dentro da aba Processo; controles na 1ª seta; Par
   const g = read('extensao/gabinete.js'), h = read('extensao/painel.html'), c = read('extensao/comparar.js');
   assert.match(g, /var MODOS = \['Processo', 'Autos'\];/); assert.match(g, /var h = '<div class="rt-em-proc">' \+ corpoRoteiro\(\) \+ '<\/div>', rot = /);
   assert.match(g, /controlesProcesso\(true\) \+ '<\/details>' \+/, '0.66: controles na 1ª seta');
-  assert.match(h, /id="tab-par"[^>]*hidden/); assert.match(h, /data-emd="par"/); assert.doesNotMatch(h, /id="tab-dir"[^>]*hidden/); assert.doesNotMatch(h, /data-mm="dir"/); assert.match(h, /<div id="dir-app"><\/div>/);
+  assert.match(h, /id="tab-par"[^>]*hidden/); assert.match(h, /data-emd="par"/); assert.doesNotMatch(h, /id="tab-dir"/); assert.doesNotMatch(h, /data-mm="dir"/); assert.doesNotMatch(h, /id="dir-app"/);
   assert.match(h, /id="tab-ajuda"[^>]*hidden>\?<\/button>/);
   assert.match(read('extensao/diretrizes.js'), /d = \$\('dir-app'\); return !!\(p && !p\.hidden && d && !d\.hidden\)/);
   assert.match(c, /class="cx-op1"/); assert.doesNotMatch(c, /Leia o editor do PJe \(ou cole o texto\) para comparar/);
@@ -639,7 +639,7 @@ test('extensão 0.48: abas Diligências e Deliberações (Desembargador e gestor
   ['tab-dil', 'tab-del', 'tab-ctl'].forEach(id => assert.match(h, new RegExp('id="' + id + '"[^>]*hidden')));
   assert.match(h, /<div id="dil-app"/); assert.match(h, /<div id="del-app"/); assert.match(h, /<div id="ctl-app"/); assert.match(h, /<script src="gestao\.js"><\/script>/);
   /* 0.58: aba Pauta no fim; Controle segue como aba escondida, aberta pelo ícone da faixa do topo */
-  assert.match(p, /var NOMES=\['pront','min','ementario','par','dir','ajuda','dil','del','ctl','pauta','modelos'\];/);
+  assert.match(p, /var NOMES=\['pront','min','ementario','par','ajuda','dil','del','ctl','pauta','modelos'\];/);
   assert.match(x, /ses\.api\('\/api\/pendencias'\)/); assert.match(x, /method: 'PUT', body: JSON\.stringify\(\{ id: id, _rev: t\._rev, stage: st \}\)/);
   assert.match(x, /ses\.api\('\/api\/painel\?cmt=1'\)/); assert.match(x, /acao: 'situacao'/); assert.match(x, /acao: 'responder'/); assert.match(x, /n\.tipo === 'sustentacao'/);
   assert.match(x, /ctl: q\.on && q\.gestor, pauta: q\.on/); assert.match(x, /function pode\(q\) \{ return q\.on && \(q\.gestor \|\| q\.des\); \}/);

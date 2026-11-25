@@ -23,7 +23,6 @@
       <button role="tab" id="tab-acervo" aria-controls="panel-acervo" aria-selected="false" tabindex="-1"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v4H4zM5.5 9v10h13V9M9 13h6M9 16h6"/></svg></span><span class="nav-text"><b>Repertório</b><small>Precedentes, parágrafos e modelos</small></span></button>
       <button role="tab" id="tab-par" aria-controls="panel-par" aria-selected="false" tabindex="-1" hidden><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 6h14M5 10h14M5 14h9M5 18h6"/><path d="M17 15.5v5M14.5 18h5"/></svg></span><span class="nav-text"><b>Parágrafos</b><small>Parágrafos-padrão</small></span></button>
       <button role="tab" id="tab-modelos" aria-controls="panel-modelos" aria-selected="false" tabindex="-1" hidden>Modelos</button>
-      <button role="tab" id="tab-dir" aria-controls="panel-dir" aria-selected="false" tabindex="-1"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4h9.5L19 7.5V20H6z"/><path d="M9 9h6M9 12.5h7M9 16h4"/><path d="M15.5 4v3.5H19"/></svg></span><span class="nav-text"><b>Diretrizes</b><small>Manual do gabinete</small></span></button>
       <button role="tab" id="tab-pauta" aria-controls="panel-pauta" aria-selected="false" tabindex="-1" hidden><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="15" rx="1.5"/><path d="M8 3v4M16 3v4M4 10h16M8 14h3M8 17h6"/></svg></span><span class="nav-text"><b>Pauta</b><small>Sessões, etapas e sustentações</small></span></button>
       <button role="tab" id="tab-dil" aria-controls="panel-dil" aria-selected="false" tabindex="-1" hidden><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="1.5"/><path d="M8 9.5l2 2 4-4M8 15.5h8"/></svg></span><span class="nav-text"><b>Diligências <i class="conf-badge" id="dil-badge" hidden></i></b><small>Quadro da equipe</small></span></button>
       <button role="tab" id="tab-del" aria-controls="panel-del" aria-selected="false" tabindex="-1" hidden><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5h16v9.5H11l-4.5 3.5V16H4z"/><path d="M8 10h8M8 13h5"/></svg></span><span class="nav-text"><b>Deliberações <i class="conf-badge" id="del-badge" hidden></i></b><small>Dúvidas, pauta e sustentações</small></span></button>
@@ -162,10 +161,6 @@
     </section>
 
     <section id="panel-modelos" role="tabpanel" aria-labelledby="tab-modelos" hidden><div class="seg pmodos emd-modos" role="tablist" aria-label="Parte do Repertório"><button type="button" role="tab" data-emd="ementario" aria-selected="false">Precedentes</button><button type="button" role="tab" data-emd="par" aria-selected="false">Parágrafos-padrão</button><button type="button" role="tab" data-emd="modelos" aria-selected="true">Modelos</button></div><div id="modelos-app" class="wrap"></div></section>
-    <!-- DIRETRIZES -->
-    <section id="panel-dir" role="tabpanel" aria-labelledby="tab-dir" hidden>
-      <div class="wrap"><div id="dir-app"></div></div>
-    </section>
 
     <!-- 0.48: DILIGÊNCIAS e DELIBERAÇÕES (Desembargador e gestor) e CONTROLE (só o gestor) -->
     <section id="panel-pauta" role="tabpanel" aria-labelledby="tab-pauta" hidden><div class="wrap"><div id="pauta-app" class="gx-app pa-app"></div></div></section>
@@ -185,8 +180,8 @@
               <li>Com <strong>Acompanhar o PJe</strong> ligado, o painel abre o processo que está na tela; com <strong>Trocar de aba</strong>, os autos digitais abrem o Prontuário e a tarefa com o editor abre a Minuta.</li>
               <li><strong>Prontuário</strong>: a ficha do processo do Ex Officio, com o mesmo login. No topo, o cartão com a autuação e as partes. <em>Processo</em>: assunto, síntese e questões, situação atual, documentos dos autos (especificação e inteiro teor), sentença, origem, recursos, outras peças e os controles. <em>Triagem</em>: a conferência automática dos autos e o prontuário de triagem. <em>Produção</em>: destino, designação, revisão, pauta ou monocrática. O que você altera é gravado na ficha e a equipe vê.</li>
               <li><strong>Conferência automática</strong>: nos autos digitais, “Ler as peças principais” lê o texto das decisões, recursos, contrarrazões, pareceres, procurações e custas; o painel sugere os campos (tempestividade pelo calendário forense, preparo, procuração, MPF, contrarrazões, remessa necessária, tipo de julgamento) e só grava o que você marcar.</li>
-              <li><strong>Minutário</strong>: Gerador, Corretor (Comparativo e Conformidade) e Diretrizes. Os lotes são geridos no Caput.</li>
-              <li><strong>Ementário</strong>, <strong>Parágrafos-padrão</strong> e <strong>Diretrizes</strong>: pesquise, copie e cole no editor.</li>
+              <li><strong>Minutário</strong>: Gerador e Corretor (Comparativo e Conformidade). Os lotes são geridos no Caput.</li>
+              <li><strong>Ementário</strong> e <strong>Parágrafos-padrão</strong>: pesquise, copie e cole no editor.</li>
             </ol>
             <p class="muted">No PJe, o painel só lê: o número do processo, o texto do editor, a cronologia dos autos e, quando você pede, o documento (o mesmo download do botão do PJe). Não clica, não grava e não protocola nada no tribunal.</p>
           </article>
@@ -269,7 +264,6 @@
 <script src="conformidade.js"></script>
 <script src="paragrafos.js"></script>
 <script src="manual-canhoto.js"></script>
-<script src="diretrizes.js"></script>
 <script src="modelos-hero.js"></script>
 <script src="referencia-1g.js"></script>
 <script src="pje.js"></script>

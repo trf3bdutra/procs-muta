@@ -245,7 +245,7 @@ test('universal v53: quatro subabas, sinalizações na barra, cinco páginas no 
     await pg.click('.hero-v53-dock-tabs [data-hero-dock="monitoramento"]');
     await pg.waitForSelector('.hero-steps.hero-steps-mon>#hero-dock-pane-monitoramento');
     await pg.click('.hero-v53-dock-tabs [data-hero-dock=""]');
-    assert.deepEqual(v.abas, ['Prontuário', 'Corretor', 'Repertório', 'Pauta', 'Diretrizes'], 'faixa principal sem gestão duplicada');
+    assert.deepEqual(v.abas, ['Prontuário', 'Corretor', 'Repertório', 'Pauta'], 'faixa principal sem gestão duplicada');
     for (const [id, nome] of [['tab-dil', 'Diligências'], ['tab-del', 'Deliberações']]) {
       const seletor = '#tu-gestao #' + id;
       await pg.waitForSelector(seletor, { state: 'visible', timeout: 15000 });
@@ -409,10 +409,10 @@ test('universal 0.75.2: aba aberta ligada ao painel (cor do papel, sem linha de 
       const b = document.querySelector('.hero-v53-tabs>[aria-selected=true]'), nav = document.querySelector('.hero-header-nav'), cs = getComputedStyle(b);
       return { aba: cs.backgroundColor, painel: getComputedStyle(document.getElementById('gab')).backgroundColor, faixa: getComputedStyle(nav).backgroundColor, divisor: getComputedStyle(nav).borderBottomWidth, inativa: getComputedStyle(document.querySelector('.hero-v53-tabs>button[aria-selected=false]')).backgroundColor, sobrepoe: Math.round(b.getBoundingClientRect().bottom) >= Math.round(nav.getBoundingClientRect().bottom), fonte: cs.fontFamily, titulo: getComputedStyle(document.querySelector('.hero-assunto-stack>span')).fontFamily, ponto: getComputedStyle(document.querySelector('.hero-assunto-stack>span'), '::after').content };
     });
-    assert.equal(v.aba, v.painel, 'aba aberta na cor da folha');
+    assert.equal(v.aba, v.faixa, 'aba ativa na cor bege do cabeçalho');
     assert.notEqual(v.faixa, v.painel, 'a linha divide superfícies de cores distintas');
     assert.equal(v.divisor, '1px', 'divisória fina');
-    assert.ok(v.sobrepoe, 'aba aberta cobre a linha da faixa');
+    assert.ok(!v.sobrepoe, 'a aba não encobre a divisória');
     assert.match(v.fonte, /Georgia/); assert.match(v.titulo, /Georgia/); assert.equal(v.ponto, 'none');
     assert.deepEqual(P.erros, [], 'sem erro de script');
   } finally { await P.fim(); }
@@ -429,10 +429,11 @@ test('universal 0.76: Pauta sem título duplicado, marcos externos e filtros seg
     await pg.waitForSelector('#pauta-app .pa-f .chip', { timeout: 15000 });
     const v = await pg.evaluate(() => {
       const t = document.querySelector('#pauta-app .pa-titulo'), c = document.querySelector('#pauta-app .pa-busca .pa-f .chip'), cs = getComputedStyle(c);
-      return { titulo: !!t, marcosDentro: !!document.querySelector('#pauta-app .pa-ses .pa-marcos'), raio: cs.borderTopLeftRadius + '|' + cs.borderTopRightRadius, borda: cs.borderTopWidth, metr: [...document.querySelectorAll('#pauta-app .hero-v53-pa-metric b')].map(b => b.textContent) };
+      return { titulo: !!t, marcosDentro: !!document.querySelector('#pauta-app .pa-ses .pa-marcos'), indicadoresDentro: !!document.querySelector('#pauta-app .pa-ses .hero-v53-pa-metrics'), raio: cs.borderTopLeftRadius + '|' + cs.borderTopRightRadius, borda: cs.borderTopWidth, metr: [...document.querySelectorAll('#pauta-app .hero-v53-pa-metric b')].map(b => b.textContent) };
     });
     assert.equal(v.titulo, false, 'sem título redundante');
     assert.equal(v.marcosDentro, false, 'marcos fora do card');
+    assert.equal(v.indicadoresDentro, false, 'indicadores fora do card');
     assert.equal(v.borda, '1px', 'filtros com borda fina, sem a pílula de contorno grosso');
     assert.notEqual(v.raio, '9999px|9999px');
     assert.deepEqual(v.metr, ['1 de 1', '1 de 1', '0 de 1', '0 de 1']);

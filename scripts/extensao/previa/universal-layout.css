@@ -819,7 +819,7 @@ body.hero-redesign-v53 #gab .pm-l1{flex-wrap:wrap;justify-content:flex-start}
 
 
 /* HERO · duas superfícies, com a régua de subabas como divisória física.
-   O cabeçalho permanece marfim; a aba selecionada se abre para a folha branca.
+   Cabeçalho e aba selecionada em bege; somente a folha abaixo em branco.
    Aplicado igualmente a Resumo, Autos, Triagem e Produção, sem afetar as demais páginas. */
 body.hero-redesign-v53{--hero-pront-header:#f3f0e7;--hero-pront-paper:#fff;--hero-pront-divider:#d8d3c6}
 html[data-tema=escuro] body.hero-redesign-v53{--hero-pront-header:#0a1821;--hero-pront-paper:#132a3b;--hero-pront-divider:#2b4657}
@@ -832,7 +832,18 @@ body.hero-redesign-v53 #gab .pc.pm:has(.hero-v53-tabs){border:0!important;box-sh
 body.hero-redesign-v53 #gab .hero-header-nav:has(.hero-v53-tabs){background:var(--hero-pront-header)!important;border:0!important;border-bottom:1px solid var(--hero-pront-divider)!important;box-shadow:none!important;padding-top:5px!important;margin-bottom:0!important}
 body.hero-redesign-v53 #gab .hero-header-nav .hero-v53-tabs{background:transparent!important;border:0!important;box-shadow:none!important;gap:2px!important;align-items:flex-end;margin:0!important;overflow:visible!important}
 body.hero-redesign-v53 #gab .hero-header-nav .hero-v53-tabs>button{position:relative;background:transparent!important;border:1px solid transparent!important;border-bottom:0!important;border-radius:7px 7px 0 0!important;margin-bottom:-1px!important;box-shadow:none!important;min-width:0}
-body.hero-redesign-v53 #gab .hero-header-nav .hero-v53-tabs>button[aria-selected=true]{background:var(--hero-pront-paper)!important;border-color:var(--hero-pront-divider)!important;border-bottom:0!important;box-shadow:inset 0 2px 0 var(--hero53-gold)!important;z-index:1}
+body.hero-redesign-v53 #gab .hero-header-nav .hero-v53-tabs>button[aria-selected=true]{background:var(--hero-pront-header)!important;border-color:var(--hero-pront-divider)!important;border-bottom:0!important;box-shadow:inset 0 2px 0 var(--hero53-gold)!important;z-index:1}
 body.hero-redesign-v53 #gab .hero-header-nav .hero-v53-tabs>button:not([aria-selected=true]):hover{background:color-mix(in srgb,var(--hero-pront-paper) 45%,var(--hero-pront-header))!important}
 body.hero-redesign-v53 #gab .hero-top-pages:not([hidden]){padding-top:10px}
 body.hero-redesign-v53 #gab .gbody:not([hidden]){min-width:0;margin-top:0!important}
+
+/* Divisória contínua, sem sobreposição da aba ativa. */
+body.hero-redesign-v53 #gab .hero-header-nav .hero-v53-tabs>button{margin-bottom:0!important}
+body.hero-redesign-v53 #pauta-app>.hero-v53-pa-metrics{width:100%;min-width:0;margin:0 0 10px!important;box-sizing:border-box}
+body.hero-redesign-v53 #pauta-app>.pa-marcos{width:100%;box-sizing:border-box}
+body.hero-redesign-v53 #pauta-app>.pa-ses{margin-top:0!important}
+/* Diligências e Deliberações: folha branca contínua, inclusive margens e cartões. */
+html body.hero-redesign-v53.hero-gestao-ativa{--hero-gestao-paper:#fff}
+html[data-tema=escuro] body.hero-redesign-v53.hero-gestao-ativa{--hero-gestao-paper:var(--p53-card,var(--card))}
+html body.hero-redesign-v53.hero-gestao-ativa :is(main,.layout,#panel-dil,#panel-del,#dil-app,#del-app),
+html body.hero-redesign-v53.hero-gestao-ativa :is(#panel-dil,#panel-del) :is(.wrap,.card,.gx-app,.gx-row,.gx-item){background:var(--hero-gestao-paper)!important}

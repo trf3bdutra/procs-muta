@@ -69,7 +69,7 @@ test('navegador universal: utilidades, ferramentas do gabinete, processo em tela
     assert.ok(html.indexOf('id="tab-pront"')<html.indexOf('id="tab-min"'));
     assert.ok(html.indexOf('id="tab-min"')<html.indexOf('class="pv-nav-divider"'));
     assert.ok(html.indexOf('class="pv-nav-divider"')<html.indexOf('id="tab-acervo"'));
-    assert.match(html,/<b>Corretor /); assert.match(html,/id="tab-dir"/);
+    assert.match(html,/<b>Corretor /); assert.doesNotMatch(html,/id="tab-dir"/);
     assert.match(old,/<b>Corretor /);
   } finally {fs.rmSync(saida,{recursive:true,force:true});}
 });
