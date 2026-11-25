@@ -199,11 +199,11 @@
   function abrirDoc(grupo,id){
     var AU=window.MutaAutos;
     if(window.MutaGabinete.limparFiltroDocumental)window.MutaGabinete.limparFiltroDocumental();
-    if(id&&AU&&AU.estado)AU.estado().filtro='todos';else if(AU&&AU.estado)AU.estado().filtro='pecas';
+    if(AU&&AU.estado){AU.estado().docAba=id?'docs':'ficha';AU.estado().filtro=id?'todos':'pecas';}
     G.pecAb=G.pecAb||{};G.pecAb[grupo]=true;G.aba='Autos';render();
     var p=id?Array.from(caixa.querySelectorAll('[data-au-it]')).find(function(x){return x.getAttribute('data-au-it')===id;}):null;
     if(p)p=p.closest('.au-doc')||p;
-    if(!p&&id){if(AU&&AU.estado)AU.estado().filtro='pecas';render();}
+    if(!p&&id){if(AU&&AU.estado){AU.estado().docAba='ficha';AU.estado().filtro='pecas';}render();}
     if(!p)p=Array.from(caixa.querySelectorAll('details[data-grupo]')).find(function(x){return x.dataset.grupo===grupo;});
     if(!p)p=$('g-docs');if(p){if(p.tagName==='DETAILS')p.open=true;p.scrollIntoView({block:'start'});}
   }

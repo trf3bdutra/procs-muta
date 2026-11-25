@@ -20,7 +20,7 @@ function iso(d) { var m = /^(\d{2})\/(\d{2})\/(\d{4})/.exec(S(d)); if (m) return
 function brD(v) { var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(S(v)); return m ? m[3] + '/' + m[2] + '/' + m[1] : S(v); }
 function GB() { return window.MutaGabinete || {}; }
 
-var A = { sel: {}, gravados: {}, grav: null, mostrados: {}, auto: null, autoSig: {}, recusa: {}, tAuto: 0, cnj: '', itens: null, idp: '', host: '', em: 0, lendo: false, erro: '', docs: {}, msg: '', sug: null, sugMsg: '', abertos: {}, filtro: 'pecas', fila: 0, esp: {}, tEsp: null };
+var A = { sel: {}, gravados: {}, grav: null, mostrados: {}, auto: null, autoSig: {}, recusa: {}, tAuto: 0, cnj: '', itens: null, idp: '', host: '', em: 0, lendo: false, erro: '', docs: {}, msg: '', sug: null, sugMsg: '', abertos: {}, filtro: 'pecas', docAba:'docs', fila: 0, esp: {}, tEsp: null };
 
 /* ---------- categorias pelo tipo do documento no PJe: [chave, padrão, rótulo, grupo] ---------- */
 var CAT = [
@@ -84,7 +84,7 @@ function ler() {
   if (sigBloq()) { A.erro = 'Processo sigiloso: a leitura dos autos está bloqueada. Peça a liberação ao Desembargador ou ao gestor, ou use a senha no alto do cartão.'; redesenhar(); return Promise.resolve(); }
   A.lendo = tudo ? 'tudo' : true; A.erro = ''; A.msg = ''; redesenhar();
   return window.MutaPje.lerAutos(tudo).then(function (r) {
-    if (r.numero && r.numero !== A.cnj) { A.docs = {}; A.sug = null; A.abertos = {}; A.gravados={}; A.sel={}; A.esp={}; }
+    if (r.numero && r.numero !== A.cnj) { A.docs = {}; A.sug = null; A.abertos = {}; A.gravados={}; A.sel={}; A.esp={}; A.docAba='docs'; }
     A.lendo = false; A.tudo = !!tudo; A.itens = r.itens || []; try { if (SG()) SG().docs(lista().filter(function (d) { return SG().docSigiloso(d); }).length); } catch (e) {} A.idp = r.idp || ''; A.host = r.host || ''; A.cnj = r.numero || ''; A.em = Date.now(); A.sug = null;
     redesenhar();
     try { document.dispatchEvent(new Event('muta:autos')); } catch (e) {}
@@ -615,20 +615,22 @@ var GRUPO_DOCS = { 'Sentença': { sentenca: 1 }, 'Decisão impugnada': { decisao
   'Outras peças e ocorrências': { acordao: 1, decisao: 1, parecer: 1, procuracao: 1, custas: 1, inicial: 1 } };
 function principais() { return lista().filter(function (d) { return PRINC[d.k] && d.k !== 'intimacao' && !d.anexo; }); }
 function espDe(id) { if (id in A.esp) return A.esp[id]; var r = linhasGravadas('origem', 'Outras peças').filter(function (x) { return S(x.ids) === id; })[0]; return r ? S(r.texto) : ''; }
+function extrasDoc(d){return '<div class="au-inf">' + [d.rot, d.anexo ? 'anexo' : '', d.origem].filter(Boolean).map(function (x) { return '<span>' + esc(x) + '</span>'; }).join('') + (d.movs && d.movs.length && !d.anexo ? '<small>' + esc(d.movs.join(' · ')) + '</small>' : '') + '</div>' +
+        (GB().classificacaoDoc && !docBloq(d) ? GB().classificacaoDoc(d) : '') + notasHistoricasDoc(d) +
+        /* 0.39: o detalhamento numa linha só; o inteiro teor num campo que se expande (lê o texto ao abrir) */
+        '<input type="text" class="au-esp au-esp-l" data-esp="' + esc(d.id) + '" placeholder="Detalhamento (vai para Outras peças da ficha)" title="Vai para Outras peças e ocorrências da ficha" value="' + esc(espDe(d.id)) + '">';}
 function linhaDoc(d) {
-      var ab = A.abertos[d.id], dd = A.docs[d.id];
+      var ab = A.abertos[d.id], dd = A.docs[d.id], hero=document.body.classList.contains('hero-redesign-v53');
       if (GB().classificacaoVisivel && !GB().classificacaoVisivel(d)) return '';
       return '<div class="au-doc hero-doc-card' + (d.anexo ? ' anx' : '') + (PRINC[d.k] ? ' pr' : '') + (marcado(d) ? ' sel' : '') + '" data-doc-kind="' + esc(d.k||'outro') + '"><div class="au-h"><input type="checkbox" class="au-g" data-au-g="' + esc(d.id) + '"' + (marcado(d) ? ' checked' : '') + ' title="Gravar na ficha com o inteiro teor" aria-label="Gravar ' + esc(d.tipo) + ' ID ' + esc(d.id) + ' na ficha"><span class="au-d">' + esc(d.data) + (d.hora ? '<small>' + esc(d.hora) + '</small>' : '') + '</span>' +
         '<div class="au-n"><b>' + esc(d.tipo) + '</b>' + (d.desc && N(d.desc) !== N(d.tipo) ? '<small>' + esc(d.desc) + '</small>' : '') + '</div>' +
         '<button type="button" class="mono lnk" data-copia="' + esc(d.id) + '" title="Copiar o ID">' + esc(d.id) + '</button></div>' +
-        '<div class="au-inf">' + [d.rot, d.anexo ? 'anexo' : '', d.origem].filter(Boolean).map(function (x) { return '<span>' + esc(x) + '</span>'; }).join('') + (d.movs && d.movs.length && !d.anexo ? '<small>' + esc(d.movs.join(' · ')) + '</small>' : '') + '</div>' +
-        (GB().classificacaoDoc && !docBloq(d) ? GB().classificacaoDoc(d) : '') + notasHistoricasDoc(d) +
-        /* 0.39: o detalhamento numa linha só; o inteiro teor num campo que se expande (lê o texto ao abrir) */
-        '<input type="text" class="au-esp au-esp-l" data-esp="' + esc(d.id) + '" placeholder="Detalhamento (vai para Outras peças da ficha)" title="Vai para Outras peças e ocorrências da ficha" value="' + esc(espDe(d.id)) + '">' +
+        (hero?'':extrasDoc(d)) +
         '<details class="au-it" data-au-it="' + esc(d.id) + '"' + (ab ? ' open' : '') + '><summary><span>Inteiro teor</span>' + estadoDoc(d.id) +
         '<span class="au-it-a"><button type="button" class="btn line sm" data-au="ocr:' + esc(d.id) + '"' + (dd && dd.estado === 'lendo' ? ' disabled' : '') + ' title="Lê o documento por OCR, página por página (PDF digitalizado ou com texto ruim). Roda no computador; nada sai dele">OCR</button>' +
         '<button type="button" class="btn line sm" data-au="js:' + esc(d.id) + '" title="Baixa esta peça em JSON (lê o texto antes, se preciso)">JSON</button>' +
         '<button type="button" class="btn line sm au-pdf" data-au="pdf:' + esc(d.id) + '" title="Abre o PDF no PJe, numa aba nova" aria-label="Abrir o PDF no PJe">↗</button></span></summary>' +
+        (hero&&ab?'<div class="hero-doc-extra">'+extrasDoc(d)+'</div>':'')+
         (!ab ? '' : !dd || dd.estado === 'lendo' ? '<p class="muted au-tx">' + (dd && dd.prog ? esc(dd.prog) : 'Lendo o documento…') + '</p>' :
           dd.estado === 'erro' ? '<p class="status err au-tx">Não leu: ' + esc(dd.erro || '') + ' <button type="button" class="lnk" data-au="ext:' + esc(d.id) + '">tentar de novo</button></p>' :
           dd.estado === 'sem' ? '<p class="status err au-tx">Sem texto legível, nem pelo OCR' + (dd.pags > OCR_MAX ? ' (o OCR lê até ' + OCR_MAX + ' páginas)' : '') + ': abra o PDF (↗).</p>' :
@@ -637,7 +639,7 @@ function linhaDoc(d) {
     }
 /* os documentos de uma peça da ficha (chamado pelo gabinete.js dentro de cada grupo) */
 function docsDoGrupo(grupo) {
-  if (!A.itens || !lidoDoProcesso() || A.filtro === 'todos') return '';
+  if (!A.itens || !lidoDoProcesso() || A.filtro === 'todos' || A.docAba==='ficha') return '';
   var K = GRUPO_DOCS[grupo]; if (!K) return '';
   var L = principais().filter(function (d) { return K[d.k] && !A.mostrados[d.id]; });
   L.forEach(function (d) { A.mostrados[d.id] = 1; });
@@ -673,26 +675,29 @@ function notasHistoricasDoc(d){
 function htmlDocs(pecas) {
   A.mostrados = {};
   var F = A.filtro === 'todos' ? 'todos' : 'pecas', ok = A.itens && lidoDoProcesso();
-  var gr = F === 'pecas' && typeof pecas === 'function' ? pecas() : '';
+  var hero=document.body.classList.contains('hero-redesign-v53'),ficha=hero&&A.docAba==='ficha';
+  var gr = (hero?ficha:F==='pecas') && typeof pecas === 'function' ? pecas() : '';
   var L = ok ? lista() : [], P = ok ? principais() : [], H=historicosIntegrados(L), C=cronologiaIntegrada(L,H), HP=H.filter(function(d){return PRINC[d.k]&&d.k!=='intimacao';}), HO=H.filter(function(d){return !PRINC[d.k]||d.k==='intimacao';});
   var nSel = ok ? marcados().length : 0;
   var lidos = Object.keys(A.docs).filter(function (k) { return /^(ok|sem)$/.test(A.docs[k].estado); }).length;
   var cab = '<div class="pc-sh hero-doc-panel-head"><div><small class="hero-doc-kicker">ACERVO DOCUMENTAL</small><h3>Peças e documentos</h3></div><small class="muted">' + (ok ? C.length + ' na cronologia · ' + lidos + ' leituras concluídas' : 'da ficha do processo') + '</small></div>';
   var filtroFuncional=ok&&GB().classificacaoFiltro?GB().classificacaoFiltro(L.filter(function(d){return !docBloq(d);})) : '';
-  var seg = ok ? '<div class="au-doc-toolbar"><div class="au-fx"><span class="seg"><button type="button" data-au="f:pecas" aria-selected="' + (F === 'pecas') + '" title="As peças da ficha com os seus documentos: decisões, recursos, contrarrazões, parecer, procuração, custas e inicial" >Peças principais (' + (P.length+HP.length) + ')</button><button type="button" data-au="f:todos" aria-selected="' + (F === 'todos') + '" title="A cronologia inteira do PJe, do mais recente ao mais antigo">Cronologia (' + C.length + ')</button></span>' +
+  var seg = ok ? '<div class="au-doc-toolbar"><div class="au-fx"><span class="seg"><button type="button" data-au="f:pecas" aria-selected="' + (F === 'pecas') + '" title="Documentos principais identificados na cronologia e registros históricos correspondentes" >Peças principais (' + (P.length+HP.length) + ')</button><button type="button" data-au="f:todos" aria-selected="' + (F === 'todos') + '" title="A cronologia inteira do PJe, do mais recente ao mais antigo">Cronologia (' + C.length + ')</button></span>' +
     '<button type="button" class="btn line sm au-js" data-au="tudojs"' + (A.todo ? ' disabled' : '') + ' title="Lê o texto de todos os documentos (PDF digitalizado vai ao OCR) e baixa num arquivo JSON, no formato do acervo" aria-label="Baixar o inteiro teor em JSON">' + SVGDL + (A.todo ? A.todo.feitos + '/' + A.todo.total : 'JSON') + '</button></div>' +
     filtroFuncional+'<div class="au-gv"><span class="muted">Marcar: <button type="button" class="lnk" data-au="sel:principais">principais</button> · <button type="button" class="lnk" data-au="sel:todos">todos</button> · <button type="button" class="lnk" data-au="sel:nenhum">nenhum</button></span>' +
     '<button type="button" class="btn solid sm" data-au="gravar"' + (A.grav || !nSel ? ' disabled' : '') + ' title="Registra os marcados na ficha (Outras peças) e grava o inteiro teor de cada um no acervo">' + (A.grav ? (A.grav.fase === 'lendo' ? 'Lendo ' + A.grav.feitos + '/' + A.grav.total + '…' : 'Gravando…') : 'Gravar ' + nSel + ' na ficha') + '</button></div></div>' +
     (A.gravMsg ? '<p class="status' + (/Não gravou/.test(A.gravMsg) ? ' err' : ' ok') + '">' + esc(A.gravMsg) + '</p>' : '') : '';
+  var tabs=hero?'<div class="seg hero-doc-tabs" role="tablist" aria-label="Conteúdo documental"><button type="button" role="tab" data-au="docaba:docs" aria-selected="'+(!ficha)+'">Documentos</button><button type="button" role="tab" data-au="docaba:ficha" aria-selected="'+ficha+'">Dados da ficha</button></div>':'';
   var corpo;
-  if (F === 'todos') corpo = '<div class="au-docs">' + C.map(linhaHistorica).join('') + '</div>';
+  if(hero){var vis=F==='todos'?C:cronologiaIntegrada(P,HP);corpo=ficha?gr:'<div class="au-docs hero-doc-list">'+(vis.map(linhaHistorica).join('')||'<p class="muted au-nl">Nenhum documento disponível nesta visualização.</p>')+'</div>';}
+  else if (F === 'todos') corpo = '<div class="au-docs">' + C.map(linhaHistorica).join('') + '</div>';
   else {
     var resto = cronologiaIntegrada(P.filter(function (d) { return !A.mostrados[d.id]; }),HP);
     corpo = gr + (resto.length ? '<details class="pc-s" open><summary><span class="pc-s-t"><b>Demais peças</b><small>' + resto.length + ' documento(s)</small></span></summary><div class="au-docs au-dg">' + resto.map(linhaHistorica).join('') + '</div></details>' : '');
   }
-  if(F!=='todos'&&HO.length)corpo+='<details class="pc-s" open><summary><b>Outros documentos ('+HO.length+')</b></summary><div class="au-docs">'+cronologiaIntegrada([],HO).map(linhaHistorica).join('')+'</div></details>';
+  if(!hero&&F!=='todos'&&HO.length)corpo+='<details class="pc-s" open><summary><b>Outros documentos ('+HO.length+')</b></summary><div class="au-docs">'+cronologiaIntegrada([],HO).map(linhaHistorica).join('')+'</div></details>';
   var aviso = A.itens && !lidoDoProcesso() ? '<p class="status err">Os autos lidos são de outro processo (' + esc(A.cnj || 'sem número') + ').</p>' : !A.itens ? '<p class="muted au-nl">Leia os autos para ver os documentos de cada peça.</p>' : '';
-  return '<section class="card pc-sec pecas hero-doc-panel" id="g-docs">' + cab + seg + (A.msg ? '<p class="status ok">' + esc(A.msg) + '</p>' : '') + aviso + '<div class="hero-doc-panel-body">'+corpo+'</div></section>';
+  return '<section class="card pc-sec pecas hero-doc-panel" id="g-docs">' + cab + tabs + (ficha?'':seg) + (A.msg ? '<p class="status ok">' + esc(A.msg) + '</p>' : '') + (ficha?'':aviso) + '<div class="hero-doc-panel-body">'+corpo+'</div></section>';
 }
 function idSet(v){return String(v||'').match(/\b\d{6,}\b/g)||[];}
 function idsTabela(L){return Array.from(new Set((Array.isArray(L)?L:[]).reduce(function(a,r){return a.concat(idSet(r.id||r.ids||''));},[]))).sort();}
@@ -929,9 +934,10 @@ function clique(b) {
   else if (a === 'desfazer') desfazerAuto();
   else if (a === 'gravar') gravarMarcados();
   else if (/^sel:/.test(a)) selecionarTodos(a.slice(4));
-  else if (/^f:/.test(a)) { A.filtro = a.slice(2); redesenhar(); }
+  else if (/^docaba:/.test(a)) { A.docAba=a.slice(7)==='ficha'?'ficha':'docs';redesenhar(); }
+  else if (/^f:/.test(a)) { A.docAba='docs';A.filtro = a.slice(2); redesenhar(); }
   else if (/^ext:/.test(a)) { var id = a.slice(4), d = A.docs[id]; if (d && /^(ok|sem)$/.test(d.estado)) { A.abertos[id] = !A.abertos[id]; redesenhar(); } else { A.abertos[id] = true; extrair(id); } }
-  else if(/^loc:/.test(a)){var id=a.slice(4),d=lista().find(function(x){return S(x.id)===id;});if(!lidoDoProcesso()||sigBloq()||!d||docBloq(d))return;A.filtro='todos';if(GB().limparFiltroDocumental)GB().limparFiltroDocumental();redesenhar();var el=Array.from(document.querySelectorAll('#g-docs [data-au-it]')).find(function(e){return e.dataset.auIt===id;});if(el){el.open=true;el.scrollIntoView({block:'start'});}}
+  else if(/^loc:/.test(a)){var id=a.slice(4),d=lista().find(function(x){return S(x.id)===id;});if(!lidoDoProcesso()||sigBloq()||!d||docBloq(d))return;A.docAba='docs';A.filtro='todos';if(GB().limparFiltroDocumental)GB().limparFiltroDocumental();redesenhar();var el=Array.from(document.querySelectorAll('#g-docs [data-au-it]')).find(function(e){return e.dataset.auIt===id;});if(el){el.open=true;el.scrollIntoView({block:'start'});}}
   else if (a === 'tudojs') baixarTudo();
   else if (a === 'ir1g') { var g1 = document.querySelector('#gab details.pc-s[data-grupo="1º grau"]'); if (g1) { g1.open = true; g1.scrollIntoView({ block: 'start', behavior: 'smooth' }); } }
   else if (/^js:/.test(a)) baixarPeca(a.slice(3));

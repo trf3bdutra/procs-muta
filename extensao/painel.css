@@ -2530,3 +2530,21 @@ html body.hero-redesign-v53 #gab #hero-enc-dock #hero-encaminhamento>.hero-v53-s
 html body.hero-redesign-v53 #gab #hero-enc-dock #hero-encaminhamento .hero-dest-top>.pm-sitj{display:flex!important;flex-wrap:wrap!important;align-items:center!important;gap:6px!important;min-width:0}
 html body.hero-redesign-v53 #gab #hero-enc-dock #hero-encaminhamento .hero-dest-top>.pm-sitj>.gl,html body.hero-redesign-v53 #gab #hero-enc-dock #hero-encaminhamento .hero-dest-top>.pm-sitj>small{flex:1 1 100%!important;width:100%!important;min-width:0;overflow-wrap:normal}
 html body.hero-redesign-v53 #gab #hero-enc-dock #hero-encaminhamento .hero-dest-top>.pm-sitj .au-tag{white-space:nowrap}
+
+/* Peças e documentos · lista compacta independente dos dados estruturados da ficha. */
+html body.hero-redesign-v53 #gab #g-docs .hero-doc-tabs{display:flex!important;width:100%;box-sizing:border-box;margin:7px 0!important;padding:0!important;border:1px solid var(--hero-pront-divider,var(--line));border-radius:4px;background:var(--hero-pront-paper,#fff);overflow:hidden}
+html body.hero-redesign-v53 #gab #g-docs .hero-doc-tabs>button{flex:1;min-height:29px;font:600 11px/1.35 var(--sans,system-ui);border:0;border-radius:0!important}
+html body.hero-redesign-v53 #gab #g-docs .hero-doc-tabs>button+button{border-left:1px solid var(--hero-pront-divider,var(--line))}
+html body.hero-redesign-v53 #gab #g-docs .hero-doc-tabs>button[aria-selected=true]{background:var(--primary,#28565a);color:var(--primary-fg,#fff)}
+html body.hero-redesign-v53 #gab #g-docs .hero-doc-list{gap:4px!important;padding:0!important;background:transparent!important}
+html body.hero-redesign-v53 #gab #g-docs .hero-doc-list .hero-doc-card>.au-h{grid-template-columns:13px minmax(0,1fr) auto!important;grid-template-areas:"check name id" ". name date";padding:5px 7px!important;gap:2px 6px!important;align-items:baseline!important;border-left-width:2px}
+html body.hero-redesign-v53 #gab #g-docs .hero-doc-list .hero-doc-card>.au-h>.au-d{justify-content:flex-end;flex-wrap:wrap;text-align:right;font-size:9px!important;line-height:1.25}
+html body.hero-redesign-v53 #gab #g-docs .hero-doc-list .hero-doc-card>.au-h>.au-n>b{font-size:11px!important;line-height:1.3!important}
+html body.hero-redesign-v53 #gab #g-docs .hero-doc-list .hero-doc-card>.au-h>.au-n>small{font-size:10px!important;line-height:1.25!important;margin-top:1px!important}
+html body.hero-redesign-v53 #gab #g-docs .hero-doc-list .hero-doc-card.au-historico>.au-h{grid-template-columns:minmax(0,1fr) auto!important;grid-template-areas:"name id" "name date"}
+html body.hero-redesign-v53 #gab #g-docs .hero-doc-list .hero-doc-card>.au-it>summary{min-height:25px!important;padding:3px 7px!important;gap:4px!important;background:var(--hero-pront-paper,#fff)!important}
+html body.hero-redesign-v53 #gab #g-docs .hero-doc-list .hero-doc-card .au-it-a>.btn{min-height:20px!important;padding:2px 5px!important;font-size:9.5px!important}
+html body.hero-redesign-v53 #gab #g-docs .hero-doc-extra{border-top:1px solid var(--hero-pront-divider,var(--line));padding:5px 7px!important}
+html body.hero-redesign-v53 #gab #g-docs .hero-doc-extra>.au-inf{margin:0!important;padding:0!important;font-size:10px}
+html body.hero-redesign-v53 #gab #g-docs .hero-doc-extra>.au-esp-l{width:100%!important;margin:5px 0!important;box-sizing:border-box}
+html body.hero-redesign-v53 #gab #g-docs .hero-doc-extra>.au-it{margin:4px 0!important}
