@@ -419,13 +419,13 @@ function render() {
     var fontesEl=caixa.querySelector('.cx-fontes'),pick=caixa.querySelector('.cx-pick'),op=caixa.querySelector('.cx-op1'),res=caixa.querySelector('.cx-res'),ed=caixa.querySelector('.mn-ed');
     if(ed&&fontesEl&&pick&&res){
       var it=itemAtual(),ref=document.createElement('section');ref.className='card hero-v53-ref';
-      var h=document.createElement('h4');h.className='hero-v53-page-title';h.textContent='Texto de referência';ref.append(h);
+      var head=document.createElement('header');head.className='hero-review-ref-head';var h=document.createElement('h4');h.className='hero-v53-page-title';h.textContent='Texto de referência';var meta=document.createElement('small');meta.className='muted';meta.textContent=it?String(it.titulo||it.title||it.nome||'Referência selecionada'):'Nenhuma referência selecionada';head.append(h,meta);ref.append(head);
       if(C.fonte==='colar'){var ta=pick.querySelector('textarea');if(ta)ref.append(ta);}
       else{var tx=document.createElement('div');tx.className='hero-v53-ref-text tx-j';var bs=it?blocosFonte(it):[];bs.forEach(function(b){var p=document.createElement(b.h?'h4':'p');p.textContent=String(b.h||b.p||'');tx.append(p);});if(!bs.length)tx.textContent='Selecione um modelo ou precedente.';ref.append(tx);}
-      var busca=document.createElement('details');busca.className='hero-v53-ref-search';busca.open=!!C.buscaRefAberta;var sm=document.createElement('summary');sm.textContent='Buscar referência';busca.append(sm,fontesEl,pick);busca.addEventListener('toggle',function(){if(busca.isConnected)C.buscaRefAberta=busca.open;});ref.append(busca);
+      var busca=document.createElement('details');busca.className='hero-v53-ref-search';busca.open=!!C.buscaRefAberta;var sm=document.createElement('summary');sm.textContent='Buscar referência';busca.append(sm,fontesEl,pick);busca.addEventListener('toggle',function(){if(busca.isConnected)C.buscaRefAberta=busca.open;});ref.insertBefore(busca,ref.children[1]||null);
       var bar=document.createElement('div');bar.className='hero-v53-review-actions';var go=document.createElement('button');go.type='button';go.className='btn solid sm';go.dataset.c='comparar';go.textContent='Comparar textos';go.disabled=!ED.estado().texto||!it;bar.append(go);
       var side=res.querySelector('[data-c="janela"]');if(side)bar.append(side);if(op)bar.append(op);
-      ed.after(bar,ref);if(res.parentNode!==caixa)caixa.append(res);
+      var work=document.createElement('section');work.className='hero-review-workspace';var grid=document.createElement('div');grid.className='hero-review-documents';ed.classList.add('hero-review-document');ref.classList.add('hero-review-document');ed.before(work);grid.append(ed,ref);work.append(grid,bar);if(res.parentNode!==caixa)caixa.append(res);
     }
   }
   $('panel-min').scrollTop = y;

@@ -46,7 +46,7 @@
     { id: 'tempest', f: 'adm', t: 'Tempestividade', tipos: '*', nao: ['rn'],
       campos: [['triagem', 'Tempestividade por recurso'], ['triagem', 'Tempestividade'], ['triagem', 'Tempest - Publicação', 'Intimação / publicação', 'calc'], ['triagem', 'Tempest - Protocolo', 'Protocolo', 'calc'], ['triagem', 'Tempest - Prazo legal', 'Prazo (dias úteis)', 'calc'], ['triagem', 'Tempest - Dobro', 'Contagem', 'calc'], ['triagem', 'Tempest - Suspensões', 'Suspensões', 'calc']],
       mais: [['triagem','Admissibilidade - Observação']],
-      estado: function (c) { var v = N(c.v('triagem', 'Tempestividade')); return /^intempestivo/.test(v) ? 'al' : /^tempestivo|^nao se aplica/.test(v) ? 'ok' : 'pend'; },
+      estado: function (c) { return c.tempestividade(); },
       dica: function (c) { return 'Dias úteis (artigo 219 do CPC), em dobro para a Fazenda (artigo 183). ' + (c.tem('ed') ? 'ED: 5 dias.' : c.tem('ai') || c.tem('agint') ? 'AI e AgInt: 15 dias.' : 'Apelação: 15 dias.'); } },
     { id: 'preparo', f: 'adm', t: 'Preparo', tipos: ['ap', 'ai', 'ms'],
       campos: [['triagem', 'Preparo'], ['triagem', 'AJG', 'Gratuidade (AJG)', function (c) { return /gratuit/.test(N(c.v('triagem', 'Preparo'))); }]],
@@ -157,6 +157,17 @@
   function gravarTipos(g,T){var nomes=TIPOS.filter(function(x){return T[x[0]];}).map(function(x){return x[1];});if(g.marcar){g.marcar('triagem.Tipo de Julgamento',nomes.join(' / '));if(g.gravar)g.gravar().catch(function(){});}return true;
   }
 
+  function estadoTempestividade(g){
+    function rows(s,k){var a=g.V(s,k);if(typeof a==='string')try{a=JSON.parse(a);}catch(e){a=[];}return Array.isArray(a)?a:[];}
+    var R=rows('origem','Recursos'),T=rows('triagem','Tempestividade por recurso'),AU=window.MutaAutos,refs=AU&&AU.referenciasTempestividade?AU.referenciasTempestividade():null;
+    if(refs&&refs.recursos.length>R.length)R=refs.recursos;if(!R.length||!T.length)return 'pend';
+    var states=R.map(function(r){var ids=S(r.ids).match(/\b\d{6,}\b/g)||[],L=T.filter(function(t){return ids.indexOf(S(t.id_recurso))>=0;});
+      if(L.length!==1||N(L[0].confirmado)!=='sim')return 'pend';var t=L[0],s=N(t.situacao);
+      if(s==='nao se aplica')return S(t.evidencia)?'ok':'pend';
+      if(!S(t.id_decisao)||!S(t.id_intimacao)||!S(t.publicacao)||!S(t.protocolo)||!S(t.evidencia))return 'pend';
+      return s==='intempestivo'?'al':s==='tempestivo'?'ok':'pend';});
+    return states.indexOf('al')>=0?'al':states.every(function(s){return s==='ok';})?'ok':'pend';
+  }
   /* ---------- desenho ---------- */
   var ICO = { ok: '✓', al: '!', pend: '', na: '–' }, ROT = { ok: 'conferido', al: 'alerta', pend: 'a conferir' };
   function referenciaAdm(id,g){
@@ -192,7 +203,7 @@
       return h + '<div class="rt-s"><span>Autos' + (SG[k].doc ? ' (ID ' + esc(SG[k].doc) + ')' : '') + ':</span> <b>' + esc(v.slice(0, 140)) + '</b><button type="button" class="btn line sm" data-rt="u:' + k + '">Usar</button></div>';
     };
     var als = AU && AU.estado().itens ? AU.alertas() : [];
-    var ctx = { v: function (s, k) { var x = g.V(s, k); return Array.isArray(x) ? (x.length ? 'tabela' : '') : S(x); }, tem: function (k) { return !!T[k]; },
+    var ctx = { tempestividade:function(){return estadoTempestividade(g);}, v: function (s, k) { var x = g.V(s, k); return Array.isArray(x) ? (x.length ? 'tabela' : '') : S(x); }, tem: function (k) { return !!T[k]; },
       alerta: function (re) { return als.some(function (a) { return a.nivel === 'al' && re.test(N(a.t)); }); } };
     var ativos = Object.keys(T);
     var vale = function (p) {
@@ -227,6 +238,7 @@
       F.forEach(function (x) {
         var p = x.p, ab = R.aberto[p.id] != null ? R.aberto[p.id] : x.st !== 'ok';
         var cs = (p.campos || []).filter(function (c) { return typeof c[3] !== 'function' || c[3](ctx); });
+        if(p.id==='tempest'){var rs=g.V('origem','Recursos'),trs=g.V('triagem','Tempestividade por recurso'),ref=AU&&AU.referenciasTempestividade?AU.referenciasTempestividade():null;if((Array.isArray(rs)&&rs.length>1)||(Array.isArray(trs)&&trs.length>1)||(ref&&ref.recursos.length>1))cs=cs.filter(function(c){return c[1]==='Tempestividade por recurso';});}
         var visiveis = cs.filter(function (c) { return c[3] !== 'calc'; }), calc = cs.filter(function (c) { return c[3] === 'calc'; });
         var resumo = visiveis.map(function (c) { var v = ctx.v(c[0], c[1]); return v ? (/^\d{4}-\d{2}-\d{2}$/.test(v) ? v.split('-').reverse().join('/') : v) : ''; }).filter(Boolean).join(' · ');
         var dica = typeof p.dica === 'function' ? p.dica(ctx) : p.dica;
@@ -258,7 +270,7 @@
   /* resumo para a aba: passos conferidos e total */
   function resumo(g) {
     var cnj = g.cnj(), T = tipos(g, cnj), loc = lerLocal(cnj), AU = window.MutaAutos, als = AU && AU.estado().itens ? AU.alertas() : [], ativos = Object.keys(T);
-    var ctx = { v: function (s, k) { var x = g.V(s, k); return Array.isArray(x) ? (x.length ? 'tabela' : '') : S(x); }, tem: function (k) { return !!T[k]; }, alerta: function (re) { return als.some(function (a) { return a.nivel === 'al' && re.test(N(a.t)); }); } };
+    var ctx = { tempestividade:function(){return estadoTempestividade(g);}, v: function (s, k) { var x = g.V(s, k); return Array.isArray(x) ? (x.length ? 'tabela' : '') : S(x); }, tem: function (k) { return !!T[k]; }, alerta: function (re) { return als.some(function (a) { return a.nivel === 'al' && re.test(N(a.t)); }); } };
     var L = PASSOS.filter(function (p) { if (NO_CARTAO[p.f] || FORA_TRIAGEM[p.id]) return false; if (p.tipos !== '*' && !p.tipos.some(function (k) { return T[k]; })) return false; return !(p.nao && ativos.every(function (k) { return p.nao.indexOf(k) >= 0; })); });
     var ok = L.filter(function (p) { var st = p.manual ? (loc[p.id] ? 'ok' : 'pend') : p.estado(ctx); if (p.manual && p.estado && p.estado(ctx) === 'al') st = 'al'; return st === 'ok'; }).length;
     return { ok: ok, total: L.length };

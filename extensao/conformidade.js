@@ -14,10 +14,10 @@ function aberta() { var p = $('panel-min'), w = $('min-conf'); return p && !p.hi
 /* rodapé: aberto ou recolhido (lembrado neste navegador) */
 var ROD = 'muta-pje:conf-rodape';
 function rodape(abrir) {
-  var w = $('min-conf'), t = $('mc-t'); if (!w || !t) return;
+  var w = $('min-conf'), t = $('mc-t'); if (!w) return;
   if (abrir != null) { try { localStorage.setItem(ROD, abrir ? '1' : '0'); } catch (e) {} }
   var on = false; try { on = localStorage.getItem(ROD) === '1'; } catch (e) {}
-  w.dataset.aberto = on ? '1' : '0'; t.setAttribute('aria-expanded', String(on));
+  w.dataset.aberto = on ? '1' : '0'; if(t)t.setAttribute('aria-expanded', String(on)); if(w.tagName==='DETAILS')w.open=on;
 }
 var SEVR = { alta: 'Alta', media: 'Média', baixa: 'Baixa' };
 var PECA = { acordao: 'acórdão (relatório, voto, ementa e acórdão)', decisao: 'decisão monocrática', despacho: 'despacho', texto: 'texto sem estrutura de peça reconhecida' };
@@ -98,8 +98,13 @@ function relatorioTexto() {
 function carregarDados() {
   FT.base().then(function (d) { K.dados = d; K.erroDados = ''; if (ED.estado().texto) analisar(); }, function (e) { K.erroDados = 'Regras de redação indisponíveis (' + e.message + ').'; render(); });
 }
-function expandirHero(){var w=$('min-conf'),b=$('hero-v53-conf-expand');if(!w||!b)return false;var p=w.closest('.min-wrap');if(!p)return false;var on=p.classList.toggle('hero-v53-conf-expanded');w.open=true;b.setAttribute('aria-pressed',String(on));b.textContent=on?'Recolher':'Expandir';return true;}
-var heroExpand=$('hero-v53-conf-expand');if(heroExpand)heroExpand.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();expandirHero();});
+function expandirHero(){var w=$('min-conf');if(!w)return false;rodape(!w.open);return true;}
+(function(){var w=$('min-conf'),nav=document.querySelector('.layout>aside');if(!w)return;
+function sync(){w.dataset.aberto=w.open?'1':'0';try{localStorage.setItem(ROD,w.open?'1':'0');}catch(e){}}
+w.addEventListener('toggle',sync);
+function measure(){if(nav){var r=nav.getBoundingClientRect();document.documentElement.style.setProperty('--hero-review-nav-height',Math.max(0,r.height)+'px');}}
+if(nav&&typeof ResizeObserver!=='undefined')new ResizeObserver(measure).observe(nav);measure();window.addEventListener('resize',measure);
+})();
 caixa.addEventListener('click', function (e) {
   var b = e.target.closest('button'); if (!b) return;
   if (b.dataset.k === 'agora') { ED.ler().then(analisar, function () { render(); }); return; }
