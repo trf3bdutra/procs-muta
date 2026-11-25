@@ -1658,6 +1658,7 @@ function mFolha(m){
   if(m.especificidades)r+='<div class="xrg">Especificidades</div><div class="xri">'+refs(m.especificidades)+'</div>';
   if(m.fundamentacao)r+='<div class="xrg">Fundamentação resumida</div><div class="xri">'+refs(m.fundamentacao)+'</div>';
   if(mc.enun.length||mc.norm.length)r+='<div class="xrg">O modelo cita</div><div class="e-chipl pp-cita">'+mc.enun.map(function(t){return '<span class="en">'+refs(t)+'</span>';}).join('')+mc.norm.map(function(t){return '<span class="no">'+refs(t)+'</span>';}).join('')+'</div>';
+  r+=repModeloLinks(m);
   r+=usosHtml((String(m.processosAssociados||'').match(/\d{7}-\d{2}\.\d{4}\.\d\.\d{2}\.\d{4}/g)||[]),null,'Modelo-matriz: '+(m.nomeModelo||m.id),m.fonte&&/Extraído de/.test(m.fonte)?m.fonte:'');
   if(ro)r+='<div class="xrg">Roteiro da matéria</div><div class="mrot">'+rotCol(ro)+'</div>';
   if(m.fonte)r+='<p class="meta" style="margin-top:14px;font-size:11.5px">Origem: '+esc(m.fonte)+' · '+esc(m.id)+'</p>';
@@ -1862,8 +1863,10 @@ function nAbrir(x){
   if(x.obs)h+='<h3 class="e-sec">Observação</h3><div class="e-box">'+refs(x.obs)+'</div>';
   h+='<h3 class="e-sec">Matéria</h3><p class="meta" style="margin:0">'+esc(x.ramo)+' › '+esc(x.ass)+(x.sit?' · situação: '+esc(x.sit):'')+'</p>';
   h+='<h3 class="e-sec">Citações no gabinete <small>'+ac+' acórdãos · '+(x.u-ac)+' monocráticas</small></h3>'+(x.u?'<ul class="n-us">'+x.us.slice(0,80).map(function(u){return '<li><b>'+esc(u['Processo'])+'</b><span class="meta">'+esc([u['Tipo de decisão'],u['Data'],u['Órgão julgador']].filter(Boolean).join(' · '))+'</span></li>';}).join('')+'</ul>'+(x.u>80?'<p class="meta">+ '+(x.u-80)+'</p>':''):'<p class="meta">Nenhuma citação registrada.</p>');
+  h+=repNexusHtml('temas',x.k,x.us);
   if(x.fonte)h+='<p class="meta" style="margin-top:14px">'+esc(x.fonte)+'</p>';
   var d=$('#n-det');d.innerHTML=h+'</div>';d.scrollTop=0;
+  repNexusMontar(d,'temas',x.k,x.us,x.full);
   d.querySelector('[data-ndx]').onclick=nFecha;
   d.querySelector('[data-ncp]').onclick=function(){copiar(x.cit,'Copiado');};
   var em=d.querySelector('[data-nem]');if(em)em.onclick=function(){irEmentarioProc(x.us.map(function(u){return u['Processo'];}),x.full);};
@@ -1999,7 +2002,8 @@ function rpAbrir(x){
   else{if(p['Observação'])h+='<h3 class="e-sec">Observação</h3><div class="e-box">'+refs(p['Observação'])+'</div>';
     h+='<h3 class="e-sec">Assuntos</h3><div class="e-chipl">'+(x.asAll||[]).map(function(a){return '<span>'+esc(a)+'</span>';}).join('')+'</div>';}
   h+='<h3 class="e-sec">Citações no gabinete <small>'+ac+' acórdãos · '+(x.u-ac)+' monocráticas</small></h3>'+(x.u?'<ul class="n-us">'+x.us.slice(0,80).map(function(u){return '<li><b>'+esc(u['Processo'])+'</b><span class="meta">'+esc([u['Tipo de decisão'],u['Data'],u['Órgão julgador']].filter(Boolean).join(' · '))+'</span></li>';}).join('')+'</ul>'+(x.u>80?'<p class="meta">+ '+(x.u-80)+'</p>':''):'<p class="meta">Nenhuma citação registrada.</p>');
-  var d=$('#r-det');d.innerHTML=h+'</div>';d.scrollTop=0;
+  h+=repNexusHtml(RP.sub,x.k,x.us);var d=$('#r-det');d.innerHTML=h+'</div>';d.scrollTop=0;
+  repNexusMontar(d,RP.sub,x.k,x.us,x.lab);
   d.querySelector('[data-rdx]').onclick=rpFecha;d.querySelector('[data-rcp]').onclick=function(){copiar(cit,'Copiado');};
   var em=d.querySelector('[data-rem]');if(em)em.onclick=function(){irEmentarioProc(x.us.map(function(u){return u['Processo'];}),x.lab);};
 }
@@ -2032,7 +2036,8 @@ function rgAbrir(r){
   var h='<div class="e-dhead"><div class="e-dtit"><span class="n-tb" style="background:var(--gold)">RITRF3</span><span class="e-dname">'+esc(r['Rótulo'])+'</span>'+(r['Vigência']==='Revogado'?'<span class="n-m sp">revogado</span>':'')+'<button class="e-dx" data-rdx title="Fechar (Esc)" aria-label="Fechar">×</button></div><p class="meta" style="margin:6px 0 0">'+esc([r['Parte'],r['Título'],r['Capítulo'],r['Seção']].filter(Boolean).join(' › '))+'</p>';
   h+='<div class="n-of"><div class="lb ok">Texto</div><div class="e-box serif ok">'+refs(r['Título ou texto'],'reg')+'</div></div><div class="e-dacts"><button class="e-mini pri" data-rcp>Copiar</button></div></div><div class="e-dbody">';
   if(r['Notas de redação'])h+='<h3 class="e-sec">Notas de redação</h3><div class="e-box">'+refs(r['Notas de redação'],'reg')+'</div>';
-  var d=$('#r-det');d.innerHTML=h+'</div>';d.scrollTop=0;
+  var us=rpUsos(r['Código']);h+=repNexusHtml('reg',r['Código'],us);var d=$('#r-det');d.innerHTML=h+'</div>';d.scrollTop=0;
+  repNexusMontar(d,'reg',r['Código'],us,'RITRF3 · '+r['Rótulo']);
   d.querySelector('[data-rdx]').onclick=rpFecha;d.querySelector('[data-rcp]').onclick=function(){copiar('RITRF3, '+String(r['Rótulo']).replace(/^Art\. /,'art. ')+': '+r['Título ou texto'],'Copiado');};
 }
 $('#v-rep').addEventListener('click',function(e){
@@ -2086,6 +2091,60 @@ function repLinksDoProcesso(n){
  if(!repPermitido())return '';var M=repCatalogo().porProc.get(repCnj(n));if(!M||!M.size)return '';
  var L=Array.from(M.values());return '<div class="pp-k" style="margin-top:14px">Referências do Repertório <small>'+L.length+' vinculadas ao processo</small></div><div class="rep-citacoes">'+Object.keys(REP_ROT).map(function(g){var A=L.filter(function(x){return x.grupo===g;});return A.length?'<div class="rep-cit-grupo"><b>'+REP_ROT[g]+'</b><div>'+A.map(function(x){return '<button type="button" data-rep-link="'+esc(x.k)+'" data-rep-grupo="'+g+'" title="Abrir referência cadastrada">'+esc(x.label)+'</button>';}).join('')+'</div></div>':'';}).join('')+'</div><p class="meta">Vínculos registrados por processo; confira o texto do julgado para identificar a citação específica.</p>';
 }
+
+/* Nexus: referências do texto cadastrado, inclusive variantes, sem herdar citações do CNJ de origem. */
+var REP_MODELOS={base:null,db:null,porRef:new Map(),porModelo:new Map()};
+function repNum(s){return String(s||'').replace(/\D/g,'').replace(/^0+(?=\d)/,'');}
+function repClasse(s){return nz(s).replace(/\s+/g,' ').trim();}
+function repModeloTexto(m){
+ var L=['temas','tese','fundamentacao','jurisprudenciaCitada','dispositivosCitados','ementaIntegral','textoModelo'].map(function(k){return m[k]||'';});
+ mSecoes(m).forEach(function(s){s.bl.forEach(function(b){if(b.txt)L.push(b.txt);});});return L.join('\n');
+}
+function repModeloIndex(B,db){
+ if(REP_MODELOS.base===B&&REP_MODELOS.db===db)return REP_MODELOS;
+ var I={base:B,db:db,porRef:new Map(),porModelo:new Map()},en=new Map(),jur=new Map(),reg=new Map();
+ function push(M,k,v){var a=M.get(k)||[];a.push(v);M.set(k,a);}
+ (db.Temas||[]).forEach(function(r){push(en,'T|'+repNum(r.Tema),{k:r['Código'],trib:r.Tribunal});});
+ (db['Súmulas']||[]).forEach(function(r){push(en,(/vinculante/i.test(r.Tipo)?'V':'S')+'|'+repNum(r['Número']),{k:r['Código'],trib:r.Tribunal});});
+ (db['Jurisprudência']||[]).forEach(function(r){push(jur,repClasse(r.Classe)+'|'+repNum(r['Número']),{k:r['Código'],trib:r.Tribunal,uf:r.UF});});
+ (db.Regimento||[]).filter(function(r){return r.Tipo==='Artigo';}).forEach(function(r){push(reg,dn(String(r['Rótulo']).replace(/^Art\.\s*/i,'')),{k:r['Código']});});
+ (B.mod||[]).forEach(function(m){
+  if(!m.id)return;var t=repModeloTexto(m),hits=new Map(),rx=new RegExp(RE_REF.source,'gi'),a;
+  function found(g,r,ev){if(r&&r.k)hits.set(g+'|'+r.k,{grupo:g,k:r.k,trecho:String(ev||'').slice(0,250)});}
+  function unique(L,tr,uf){L=(L||[]).filter(function(r){return (!tr||String(r.trib||'').replace(/-/g,'').toUpperCase()===tr.replace(/-/g,'').toUpperCase())&&(!uf||!r.uf||String(r.uf).toUpperCase()===uf.toUpperCase());});return L.length===1?L[0]:null;}
+  while((a=rx.exec(t))){
+   if(a[1]||a[4]){var tr=(a[1]?a[3]:a[7])||((/^\s+(?:do|da)\s+(?:extinto\s+)?(STF|STJ|TNU|TFR|TRF-?\d)\b/i.exec(t.slice(rx.lastIndex,rx.lastIndex+30))||[])[1]);found('temas',unique(en.get((a[1]?'T':a[5]?'V':'S')+'|'+repNum(a[1]?a[2]:a[6])),tr),a[0]);}
+   else if(a[8]){var r=achaNorma(a[9],a[11]);if(r)found('normas',{k:r['Código']},a[0]);}
+   else if(a[12]){var R=(db.Normas||[]).filter(function(n){var z=nz(n.Norma).replace(/\./g,'');return z.indexOf(nz(a[13]))>=0&&z.indexOf(repNum(a[14])+'/'+a[15])>=0;});if(R.length===1)found('normas',{k:R[0]['Código']},a[0]);}
+  }
+  var nr=/\b(CPC|CTN|CF|LEF|Constitui[çc][ãa]o(?: Federal)?|C[óo]digo Civil|Lei(?: Complementar)?\s+[\d.]+\/\d{2,4}|LC\s+[\d.]+\/\d{2,4})\s*,?\s*(?:art(?:igo)?s?\.?)\s+(\d[\d.]*(?:[º°])?(?:-[A-Z])?)/gi;
+  while((a=nr.exec(t))){var n=achaNorma(a[2],a[1]);if(n)found('normas',{k:n['Código']},a[0]);}
+  var jr=/\b((?:(?:AgInt|AgRg|EDcl)\s+(?:no|nos|na)\s+)*(?:REsp|AREsp|EREsp|RE|ARE|ADI|ADC|ADPF|RMS|MS|HC|AI|Rcl|CC)(?:\s+(?:AgR|ED|MC)(?:-ED)?)?)\s+(?:n[º°.]\s*)?(\d{1,3}(?:\.\d{3})+|\d{3,7})(?:\/([A-Z]{2}))?(?!\d|\.\d|-\d)/gi;
+  while((a=jr.exec(t))){var jtr=/^\s*[,;·-]?\s*(STF|STJ|TNU|TFR|TRF-?\d)\b/i.exec(t.slice(jr.lastIndex,jr.lastIndex+20));found('juris',unique(jur.get(repClasse(a[1])+'|'+repNum(a[2])),jtr&&jtr[1],a[3]),a[0]);}
+  var rr=/\b(?:RITRF3|Regimento Interno do TRF-?3)\s*,?\s*art\.?\s*(\d+[º°]?(?:-[A-Z])?)|\bart\.?\s*(\d+[º°]?(?:-[A-Z])?)\s+do\s+(?:RITRF3|Regimento Interno do TRF-?3)\b/gi;
+  while((a=rr.exec(t)))found('reg',unique(reg.get(dn(a[1]||a[2]))),a[0]);
+  I.porModelo.set(m.id,Array.from(hits.values()));hits.forEach(function(h,k){push(I.porRef,k,{id:m.id,nome:m.nomeModelo||m.id,tipo:mTipo(m),trecho:h.trecho});});
+ });REP_MODELOS=I;return I;
+}
+function repNexusHtml(g,k,us){
+ var nums=new Set((us||[]).map(function(v){return repCnj(v.Processo);}).filter(function(n){return n.length===20;}));
+ return '<section class="rep-nexus"><h3 class="e-sec">Nexus da referência</h3><div class="rep-nexus-tabs"><button type="button" data-nexus-tab="prec" aria-pressed="true">Precedentes <small>'+nums.size+'</small></button><button type="button" data-nexus-tab="mod" aria-pressed="false">Modelos <small data-nexus-count>…</small></button></div><div data-nexus-pane="prec">'+(nums.size?'<button type="button" class="e-mini" data-nexus-ement>Ver processos vinculados no Ementário ('+nums.size+')</button><p class="meta">Vínculos registrados por processo; conferir o pronunciamento específico.</p>':'<p class="meta">Nenhum processo vinculado nos registros de citação.</p>')+'</div><div data-nexus-pane="mod" hidden><p class="meta">Identificando referências nos modelos…</p></div></section>';
+}
+function repNexusMontar(d,g,k,us,label){
+ var host=d.querySelector('.rep-nexus');if(!host)return;var btn=host.querySelector('[data-nexus-ement]');if(btn)btn.onclick=function(){irEmentarioProc((us||[]).map(function(u){return u.Processo;}),label);};
+ host.querySelectorAll('[data-nexus-tab]').forEach(function(b){b.onclick=function(){var v=b.dataset.nexusTab;host.querySelectorAll('[data-nexus-tab]').forEach(function(x){x.setAttribute('aria-pressed',String(x===b));});host.querySelectorAll('[data-nexus-pane]').forEach(function(p){p.hidden=p.dataset.nexusPane!==v;});};});
+ base().then(function(B){if(!host.isConnected)return;var L=repModeloIndex(B,rpDB()).porRef.get(g+'|'+k)||[];host.querySelector('[data-nexus-count]').textContent=L.length;var pane=host.querySelector('[data-nexus-pane="mod"]');
+  pane.innerHTML=L.length?'<p class="meta">Citações identificadas no texto cadastrado, inclusive variantes. Conferir a versão utilizada.</p><ul class="rep-nexus-modelos">'+L.map(function(m){return '<li><button type="button" data-nexus-modelo="'+esc(m.id)+'"><b>'+esc(m.nome)+'</b><small>'+esc(m.tipo)+' · '+esc(m.trecho)+'</small></button></li>';}).join('')+'</ul>':'<p class="meta">Nenhuma citação inequívoca identificada nos modelos cadastrados.</p>';
+ }).catch(function(){if(host.isConnected){host.querySelector('[data-nexus-count]').textContent='—';host.querySelector('[data-nexus-pane="mod"]').innerHTML='<p class="meta">Base de modelos indisponível.</p>';}});
+}
+function repModeloLinks(m){
+ if(!repPermitido()||!BASE)return '';var L=repModeloIndex(BASE,rpDB()).porModelo.get(m.id)||[],C=new Map(repCatalogo().lista.map(function(x){return [x.grupo+'|'+x.k,x];}));
+ if(!L.length)return '';return '<div class="xrg">Referências do Repertório</div><div class="rep-citacoes">'+Object.keys(REP_ROT).map(function(g){var A=L.filter(function(x){return x.grupo===g;});return A.length?'<div class="rep-cit-grupo"><b>'+REP_ROT[g]+'</b><div>'+A.map(function(x){var c=C.get(g+'|'+x.k);return '<button type="button" data-rep-link="'+esc(x.k)+'" data-rep-grupo="'+g+'">'+esc(c?c.label:x.k)+'</button>';}).join('')+'</div></div>':'';}).join('')+'</div>';
+}
+document.addEventListener('click',function(ev){var b=ev.target.closest&&ev.target.closest('[data-nexus-modelo]');if(!b)return;ev.preventDefault();ev.stopImmediatePropagation();if(!repPermitido())return;
+ var id=b.dataset.nexusModelo;base().then(function(B){var m=(B.mod||[]).find(function(x){return x.id===id;});if(!m){toast('Modelo não encontrado.');return;}irModelos(mTipo(m));MSF={};MS.sel=id;MS.tab='ficha';MS.blk=null;MS.fora={};MS.alt={};MS.abre={};MVZ.modo='lista';mRender();}).catch(function(){toast('Não foi possível abrir o modelo.');});
+},true);
+
 function repAbrirUnificado(grupo,k){
  if(!repPermitido()){toast('Repertório disponível no acesso avançado.');return false;}
  if(!REP_ROT[grupo])return false;

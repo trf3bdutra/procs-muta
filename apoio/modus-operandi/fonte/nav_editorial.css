@@ -122,3 +122,13 @@ header.top.nx .right{flex:none!important}
 .rep-cit-grupo button{font:inherit;font-size:11px;color:inherit;background:transparent;border:1px solid var(--el,#8793a344);border-radius:4px;padding:4px 6px;cursor:pointer;overflow-wrap:anywhere}
 .rep-cit-grupo button:hover,#rep-cross-results button:hover{background:var(--ep2,#8793a322)}
 @media(max-width:600px){#rep-cross-results{grid-template-columns:1fr}.rep-unified-tabs button{flex:1 1 auto;font-size:11px;padding:6px}}
+
+.rep-nexus{margin-top:12px;border-top:1px solid #8793a344;padding-top:8px}
+.rep-nexus-tabs{display:flex;gap:5px;margin:7px 0}
+.rep-nexus-tabs button{flex:1;display:flex;justify-content:space-between;align-items:center;gap:5px;padding:6px;border:1px solid #8793a344;border-radius:5px;background:transparent;color:inherit;font:inherit;cursor:pointer}
+.rep-nexus-tabs button[aria-pressed=true]{background:#8793a322;border-color:currentColor;font-weight:650}
+.rep-nexus [hidden]{display:none!important}
+.rep-nexus-modelos{list-style:none;padding:0;margin:5px 0;max-height:350px;overflow:auto}
+.rep-nexus-modelos button{width:100%;text-align:left;display:grid;gap:4px;padding:7px 3px;border:0;border-bottom:1px solid #8793a344;background:transparent;color:inherit;font:inherit;cursor:pointer;overflow-wrap:anywhere}
+.rep-nexus-modelos button small{opacity:.75;font-size:10px}
+.rep-nexus-modelos button:hover{background:#8793a318}
