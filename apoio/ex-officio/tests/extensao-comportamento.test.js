@@ -218,7 +218,16 @@ test('universal: organização — faces por setas compactas, sinalizações na 
     assert.equal(v.setas, 2, 'faces pelas setas compactas ‹ ›');
     assert.equal(v.faces.length, 0, 'sem as abas das faces');
     assert.ok(await pg.$('.hero-header-nav .pv-sn-row .hero-sn-ind'), 'sinalizações na barra do prontuário');
-    assert.ok(v.abas.includes('Diligências') && v.abas.includes('Deliberações') && v.abas.includes('Pauta'), 'faixa de abas: ' + v.abas.join('|'));
+    assert.deepEqual(v.abas, ['Prontuário', 'Minutário', 'Ementário', 'Pauta'], 'faixa principal sem gestão duplicada');
+    for (const [id, nome] of [['tab-dil', 'Diligências'], ['tab-del', 'Deliberações']]) {
+      const seletor = '#tu-gestao #' + id;
+      await pg.waitForSelector(seletor, { state: 'visible', timeout: 15000 });
+      assert.equal(await pg.locator(seletor).getAttribute('aria-label'), nome);
+      assert.equal(await pg.locator('#' + id).count(), 1, nome + ' sem duplicação');
+      await pg.click(seletor);
+      await pg.waitForSelector('#panel-' + id.slice(4), { state: 'visible', timeout: 15000 });
+    }
+    await pg.click('#tab-pront');
     assert.ok(v.etapas.some(c => /\bok\b/.test(c)) && v.etapas.some(c => /\bat\b/.test(c)) && v.etapas.some(c => /\bpend\b/.test(c)), 'feita, atual e pendente: ' + v.etapas.join(' | '));
     assert.deepEqual(v.rotulos.sort(), ['avisos', 'intercorrências', 'pendências', 'urgência'], 'sinalizações com rótulo');
     assert.equal(v.lerAutos, 1, 'um só "Ler os autos" (aba Autos)');
