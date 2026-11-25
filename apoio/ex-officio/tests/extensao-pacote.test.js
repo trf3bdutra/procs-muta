@@ -13,6 +13,6 @@ test('pacote: universal.html como painel lateral, sem peças da prévia', () => 
   assert.doesNotMatch(h, /shim-previa|MUTA_PREVIA|<script>/);
   assert.match(h, /gabinete-universal\.js/); assert.match(h, /roteiro-universal\.js/); assert.match(h, /universal-layout\.css/);
   const g = ler('gabinete-universal.js');
-  assert.match(g, /if\(!window\.MUTA_PREVIA\)return gravarReal\(\);/, 'na extensão a gravação é a real');
-  assert.ok(ler('painel.html').length > 0, 'painel anterior continua no pacote');
+  assert.match(g, /if\(!window\.MUTA_PREVIA\)return gravarReal\(keepalive\);/, 'na extensão a gravação é a real');
+  assert.match(h,/hero-redesign-v53/); assert.match(g,/hero-v53-tabs/); assert.ok(ler('painel.html').length > 0, 'painel anterior continua no pacote');
 });
