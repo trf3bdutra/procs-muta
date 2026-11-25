@@ -99,8 +99,8 @@ test('HERO18810 0.64: sigla da classe, Síntese e questões acima dos roteiros, 
   assert.equal(C.etiqueta('AGRAVO DE INSTRUMENTO', '').t, 'AI');
   assert.equal(C.etiqueta('APELAÇÃO / REMESSA NECESSÁRIA', '').t, 'ApelRemNec');
   const g = R('extensao/gabinete.js'), p = R('extensao/pauta.js');
-  assert.match(g, /return '<div class="seg pmodos rt-modos"/); assert.match(g, /síntese · notas · sinalizações/); assert.match(g, /'<div class="gr pm-esp">' \+ campoRot\('triagem', 'Tema', 'Tipo de caso'\)/);
-  assert.match(p, /function soProcesso\(cnj\)/); assert.match(p, /function pedSessao\(itens\)/); assert.match(p, /procHtml\(\) \+ listaHtml\(\);/);
+  assert.match(g,/hero-main-tabs hero-v53-tabs/); assert.match(g,/hero-v53-dock-tabs/); assert.match(g,/hero-v53-profile/);
+  assert.match(p, /function soProcesso\(cnj\)/); assert.match(p, /function pedSessao\(itens\)/); assert.match(p, /function listaHtml\(\)/); assert.match(p,/function solicitacoesHtml\(itens\)/);
   assert.match(R('extensao/painel.html'), /<script src="padrao-classes-cnj\.js"><\/script>/);
 });
 

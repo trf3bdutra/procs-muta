@@ -135,10 +135,11 @@
 
   function listaHtml() {
     var opts = (P.cal || []).map(function (s) { return '<option value="' + esc(s.date) + '"' + (s.date === P.data ? ' selected' : '') + '>' + esc(br(s.date)) + (s.date < hoje() ? ' (passada)' : '') + '</option>'; }).join('');
-    var h = '<div class="pa-session-head"><label class="pa-sel"><span class="sr">Sessão</span><select data-pa="ses">' + opts + '</select></label>';
+    var h = '<div class="pa-session-head"><b class="hero-v53-page-title">Pauta</b><label class="pa-sel"><span class="sr">Sessão</span><select data-pa="ses">' + opts + '</select></label>';
     var d = P.doc || {}, L = (d.itens || []).length ? d.itens : (d.previa || []), previa = !(d.itens || []).length && (d.previa || []).length;
     var nsol=(d.solicitacoes||[]).length+(P.pedPauta||[]).filter(function(r){return sesDe(r)===P.data;}).length;
     h+='<div class="seg pmodos pa-session-tabs" role="tablist" aria-label="Conteúdo da sessão"><button type="button" role="tab" data-pa="aba:itens" aria-selected="'+(P.aba==='itens')+'">Processos · '+L.length+'</button><button type="button" role="tab" data-pa="aba:sol" aria-selected="'+(P.aba==='sol')+'">Solicitações · '+nsol+'</button></div></div><section class="card pc-sec pa-ses">';
+    var sess=(P.cal||[]).find(function(s){return s.date===P.data;});if(sess){var mk=sess.marcos||{};var marcos=[['pautarAte','Pautar até'],['inicioPreparacao','Preparação'],['entregaMinutas','Entrega de minutas'],['liberacao','Liberação']].filter(function(x){return mk[x[0]];});if(marcos.length)h+='<details class="hero-v53-session-marks" open><summary>Marcos da sessão</summary><div class="hero-v53-pa-metrics">'+marcos.map(function(x){return '<div class="hero-v53-pa-metric"><small>'+x[1]+'</small><b>'+esc(br(mk[x[0]]))+'</b></div>';}).join('')+'</div></details>';if(!sess.pauta)h+='<p class="muted">Marcos publicados · listagem ainda não publicada.</p>';}
     if (P.lendo && !P.doc) return h + '<p class="muted">Lendo a pauta…</p></section>';
     if(P.aba==='sol')return h+solicitacoesHtml(L)+'</section>';
     if (!L.length) return h + '<p class="muted">Sem processos nesta pauta.</p></section>';
@@ -152,12 +153,14 @@
     var vis = R.filter(function (x) { var it=x.it;return (P.f === 'todos' ? true : P.f === 'al' ? x.a.some(function (a) { return a[0] === 'al'; }) : P.f === 'fora' ? /ret|adi/.test(x.e.k) : x.e.k === P.f)&&buscaCasa(P.qItens,[it.cnj,it.item,it.classe,it.assunto,it.servidor,it.corretor,x.e.t]); });
     h += (previa ? '<p class="muted">Prévia da pauta (ainda sem a relação oficial do PJe).</p>' : '') +
       '<div class="acv-faixa pa-busca"><div class="acv-form">'+buscaFaixa('itens',P.qItens,'Buscar processo, item, assunto, servidor…')+'<div class="pa-f">' + F.filter(function (f) { return f[2] || f[0] === 'todos'; }).map(function (f) { return '<button type="button" class="chip' + (P.f === f[0] ? ' on' : '') + '" data-pa="f:' + f[0] + '">' + f[1] + ' <i>' + f[2] + '</i></button>'; }).join('') + '</div><p class="status">'+vis.length+' de '+L.length+' processos</p></div></div>';
+    var m=PASSOS.map(function(p){var n=L.filter(function(it){return !!it[p[0]];}).length;return '<div class="hero-v53-pa-metric"><small>'+esc(p[1])+'</small><b>'+n+'<span> / '+L.length+'</span></b><progress value="'+n+'" max="'+L.length+'"></progress></div>';}).join('');
+    h+='<div class="hero-v53-pa-metrics">'+m+'</div>';
     /* Os pedidos da sessão estão na subaba Solicitações. */
     h += '<ol class="pa-l">' + vis.map(function (x) {
       var it = x.it, at = dg(it.cnj) === cur, passo = PASSOS.map(function (p) { return '<i class="' + (it[p[0]] ? 'ok' : '') + '" title="' + p[1] + '"></i>'; }).join('');
       return '<li class="pa-it e-' + x.e.k + (at ? ' at' : '') + '"><button type="button" class="pa-b" data-pa="abrir:' + esc(it.cnj) + '" title="Abrir o prontuário deste processo">' +
-        '<span class="pa-n">' + esc(it.item || '—') + '</span><span class="pa-c"><b class="mono">' + esc(it.cnj) + etqCl(it) + '</b><small>' + esc([S(it.assunto)].filter(Boolean).join(' · ').slice(0, 90)) + '</small>' +
-        '<span class="pa-et"><span class="pa-st">' + passo + '</span>' + esc(x.e.t) + (it.corretor ? ' · corr. ' + esc(S(it.corretor).split(' ')[0]) : '') + '</span>' +
+        '<span class="pa-n">' + esc(it.item || '—') + '</span><span class="pa-c"><b class="mono">' + esc(it.cnj) + etqCl(it) + '</b><small>' + esc(S(it.assunto)) + '</small>' +
+        '<span class="hero-v53-pa-people">'+(it.servidor?'<em>Minuta · '+esc(S(it.servidor))+'</em>':'')+(it.corretor?'<em>Correção · '+esc(S(it.corretor))+'</em>':'')+'</span><span class="pa-et"><span class="pa-st">' + passo + '</span>' + esc(x.e.t) + '</span>' +
         (x.a.length ? '<span class="pa-al">' + x.a.map(function (a) { return '<em class="k-' + a[0] + '" title="' + esc(a[2]) + '">' + esc(a[1]) + '</em>'; }).join('') + '</span>' : '') + '</span></button></li>';
     }).join('') + '</ol>';
     return h + '</section>';

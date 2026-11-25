@@ -35,7 +35,7 @@ function render() {
   var L = filtrados(), foco = document.activeElement && document.activeElement.id === 'pp-q';
   var grupos = {}, ordem = [];
   L.forEach(function (p) { if (!grupos[p.cat]) { grupos[p.cat] = []; ordem.push(p.cat); } grupos[p.cat].push(p); });
-  caixa.innerHTML = '<div class="pp-top"><input type="search" id="pp-q" placeholder="Buscar: honorários, gratuidade, tempestividade…" value="' + esc(P.q) + '">' +
+  caixa.innerHTML = '<div class="pp-top acv-faixa"><input type="search" id="pp-q" placeholder="Buscar: honorários, gratuidade, tempestividade…" value="' + esc(P.q) + '">' +
     '<select id="pp-cat" title="Filtrar por categoria"><option value="">Todas as categorias</option>' + cats.map(function (c) { return '<option' + (c === P.cat ? ' selected' : '') + '>' + esc(c) + '</option>'; }).join('') + '</select>' +
     FT.scopeHTML(P.modo)+'<p class="muted pp-n">' + L.length + ' de ' + P.lista.length + ' parágrafos · as partes destacadas são vagas a preencher</p></div>' +
     ordem.map(function (c) {

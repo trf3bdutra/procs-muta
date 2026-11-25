@@ -98,12 +98,14 @@ function relatorioTexto() {
 function carregarDados() {
   FT.base().then(function (d) { K.dados = d; K.erroDados = ''; if (ED.estado().texto) analisar(); }, function (e) { K.erroDados = 'Regras de redação indisponíveis (' + e.message + ').'; render(); });
 }
+function expandirHero(){var w=$('min-conf'),b=$('hero-v53-conf-expand');if(!w||!b)return false;var p=w.closest('.min-wrap');if(!p)return false;var on=p.classList.toggle('hero-v53-conf-expanded');w.open=true;b.setAttribute('aria-pressed',String(on));b.textContent=on?'Recolher':'Expandir';return true;}
+var heroExpand=$('hero-v53-conf-expand');if(heroExpand)heroExpand.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();expandirHero();});
 caixa.addEventListener('click', function (e) {
   var b = e.target.closest('button'); if (!b) return;
   if (b.dataset.k === 'agora') { ED.ler().then(analisar, function () { render(); }); return; }
   if (b.dataset.k === 'copiar') { (navigator.clipboard ? navigator.clipboard.writeText(relatorioTexto()) : Promise.reject()).then(function () { b.textContent = 'Copiado'; setTimeout(function () { b.textContent = 'Copiar o relatório'; }, 1400); }, function () {}); return; }
   if (b.dataset.g != null) { K.grupo = b.dataset.g; render(); return; }
-  if (b.dataset.k === 'cheia') { if (window.MutaJanela && K.cheia) window.MutaJanela.abrir('conformidade', 'Conformidade da minuta', K.cheia); return; }
+  if (b.dataset.k === 'cheia') { if(expandirHero())return; if (window.MutaJanela && K.cheia) window.MutaJanela.abrir('conformidade', 'Conformidade da minuta', K.cheia); return; }
 });
 caixa.addEventListener('change', function (e) {
   var t = e.target, k = t.dataset && t.dataset.k;

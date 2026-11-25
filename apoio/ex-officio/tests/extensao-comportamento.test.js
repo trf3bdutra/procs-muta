@@ -62,7 +62,7 @@ test('painel: abre o processo com sigla, etapas, roteiros e notas; sem erro de s
     const pil = await pg.$$eval('.pm-pl', L => L.map(x => ({ t: x.textContent.trim(), c: x.className })));
     assert.ok(pil.some(x => /^Minuta: Rodrigo · 13\/11\/2026$/.test(x.t) && /k-min ok/.test(x.c)), 'minuta verde com nome e data: ' + JSON.stringify(pil));
     assert.ok(!pil.some(x => /Liberada/.test(x.t)), 'sem "Liberada" sem as caixas do editor nem registro');
-    assert.deepEqual(await pg.$$eval('.hero-main-tabs [data-rot]', L => L.map(b=>b.dataset.rot)), ['tri','pro','sol'], 'Triagem, Produção e Solicitações como abas irmãs');
+    assert.deepEqual(await pg.$$eval('.hero-main-tabs [data-rot]', L => L.map(b=>b.dataset.rot)), ['res','tri','pro'], 'Resumo, Triagem e Produção com Autos como subaba independente');
     assert.ok(await pg.$('.hero-main-tabs [data-aba="Autos"]'), 'Autos em aba própria');
     assert.ok(await pg.$('.hero-tipo-ref'), 'tipo de julgamento no cartão');
     assert.equal(await pg.$$eval('.hero-sn-ind [data-sn-kind]', L => L.length), 3, 'sinalizações independentes');
@@ -80,10 +80,6 @@ test('painel: abre o processo com sigla, etapas, roteiros e notas; sem erro de s
     assert.ok((await botoes(pg)).includes('Desprovido'), 'resultado de recurso na seção Solução');
     assert.equal(await pg.$$eval('.gbody [data-fk="producao.Destino"]', L=>L.length),0,'destino não se repete no roteiro');
     /* O pedido do processo fica na aba Solicitações da ficha; os pedidos da sessão na subaba Solicitações da Pauta. */
-    await pg.click('.hero-main-tabs [data-rot="sol"]');
-    await pg.getByRole('button', { name: 'Sustentação oral', exact: true }).click();
-    await pg.waitForSelector('#hero-sol-main .hero-pauta-pedidos .pa-ped', { timeout: 15000 });
-    assert.match(await pg.textContent('#hero-sol-main .hero-pauta-pedidos .pa-ped'), /Sustentação presencial.*Fulana/s);
     await pg.evaluate(() => window.MutaAbas.ir('pauta'));
     await pg.waitForSelector('.pa-it', { timeout: 15000 });
     assert.equal(await pg.textContent('.pa-it .pa-cl'), 'ApCiv');
@@ -154,7 +150,7 @@ test('universal: Julgamento da monocrática e da urgência — hipótese do art.
   const P = await abrirUniversal(op);
   try {
     const { pg } = P;
-    assert.ok(await pg.$('#hero-encaminhamento [data-fk="triagem.Hipóteses Monocrática"]'), 'art. 932 no Encaminhamento');
+    await pg.click('.hero-main-tabs [data-rot="tri"]');assert.ok(await pg.$('#hero-encaminhamento [data-fk="triagem.Hipóteses Monocrática"]'), 'art. 932 no Encaminhamento');await pg.click('.hero-main-tabs [data-rot="pro"]');await pg.click('.hero-minuta-nav-steps [data-minuta-nav="solucao"]');
     assert.ok(await pg.$('[data-cc="minuta-fundamentacao"] [data-fk="producao.Mono - Fundamento"]'), 'precedente ou fundamento na Fundamentação');
     assert.ok((await botoes(pg)).includes('Desprovido'));
     if (process.env.HERO_FOTO) await pg.screenshot({ path: process.env.HERO_FOTO + '-mono.png', fullPage: true });
@@ -169,7 +165,7 @@ test('universal: Julgamento da monocrática e da urgência — hipótese do art.
   } finally { await P2.fim(); }
 });
 
-test('universal: Encaminhamento como segunda face; Monitoramento e sinalizações no cartão Etapas; registro em Autuação', { skip: pular, timeout: 90000 }, async () => {
+test('universal v53: Encaminhamento na Triagem, Monitoramento e sinalizações no Resumo', { skip: pular, timeout: 90000 }, async () => {
   const op = { processo: CNJ, origem: {}, triagem: { 'Tipo de Julgamento': 'Apelação', 'Seleção Prévia': 'SELECIONADO PREVIAMENTE', META: 'Sim', Avisos: 'x', 'Registro - Situação atual': 'Acervo importado' }, producao: { Destino: 'Sessão' }, pauta: {}, controles: {} };
   const P = await abrir(op, { sigilo: '', liberado: true, porque: 'gestor' });
   try {
@@ -181,30 +177,29 @@ test('universal: Encaminhamento como segunda face; Monitoramento e sinalizaçõe
     await pg.click('.hero-main-tabs [data-rot="tri"]');
     /* Encaminhamento é a segunda face do prontuário (seta ›), não aba do rodapé */
     assert.ok(!(await pg.$('#hero-dock-tab-acompanhamento')), 'sem a aba Encaminhamento no rodapé');
-    await pg.click('.hero-header-nav>button[aria-label^="Próxima"]');
-    await pg.waitForSelector('.hero-enc-face #hero-encaminhamento', { state: 'visible', timeout: 15000 });
-    assert.equal(await pg.getAttribute('.hero-header-nav', 'aria-label'), 'Encaminhamento', 'segunda face');
+    await pg.waitForSelector('.gbody #hero-encaminhamento', { state: 'visible', timeout: 15000 });
+    assert.equal(await pg.getAttribute('.hero-main-tabs [data-rot="tri"]', 'aria-selected'), 'true', 'Encaminhamento na Triagem');
     assert.ok(await pg.$('#hero-encaminhamento [data-fk="producao.Destino"]'), 'destino no Encaminhamento');
     assert.equal(await pg.inputValue('#hero-encaminhamento [data-fk="triagem.Seleção Prévia"]'),'SELECIONADO PREVIAMENTE');
     assert.ok(await pg.$('#hero-encaminhamento .pm-sitj'), 'situação para julgar no Encaminhamento');
-    assert.ok(await pg.$('.hero-designacoes [data-fk="origem.Responsável"]'), 'responsável na faixa de designações');
+    await pg.click('.hero-main-tabs [data-rot="res"]');assert.ok(await pg.$('.hero-designacoes [data-fk="origem.Responsável"]'), 'responsável na faixa de designações');
     assert.ok(!(await pg.$('.pv-flowbox .pm-sitj')), 'sem duplicação na faixa de etapas');
     assert.ok(await pg.$('.hero-top-page .hero-reg-acervo'), 'registro no acervo em Autuação');
-    await pg.click('.hero-header-nav>button[aria-label^="Anterior"]');
+    assert.equal(await pg.getAttribute('.hero-main-tabs [data-rot="res"]','aria-selected'),'true');
     await pg.click('.hero-sn-ind [data-sn-kind="av"]');
     await pg.waitForSelector('#hero-dock-pane-sinalizacoes #g-sn', { timeout: 15000 });
     assert.equal(await pg.getAttribute('.hero-sn-ind [data-sn-kind="av"]','aria-pressed'),'true');
     assert.ok(await pg.$('#hero-dock-pane-sinalizacoes .sn-i.av'), 'avisos na categoria selecionada');
     /* as sinalizações ocupam o lugar das etapas no mesmo cartão */
-    const sn = await pg.evaluate(() => ({ noCartao: !!document.querySelector('.hero-steps.hero-steps-sn>#hero-dock-pane-sinalizacoes'), etapasOcultas: !document.querySelector('.hero-steps .pv-flowbox').offsetParent, titulo: document.querySelector('.hero-steps-head h4').textContent }));
+    const sn = await pg.evaluate(() => ({ noCartao: !!document.querySelector('.hero-steps.hero-steps-sn>#hero-dock-pane-sinalizacoes'), etapasOcultas: !document.querySelector('.hero-steps .pv-flowbox').offsetParent, titulo: document.querySelector('.hero-sn-ind [data-sn-kind="av"]').getAttribute('aria-label') }));
     assert.ok(sn.noCartao && sn.etapasOcultas, 'sinalizações no lugar das etapas: ' + JSON.stringify(sn));
-    assert.equal(sn.titulo, 'Sinalizações · Avisos');
-    await pg.click('.hero-steps-voltar');
+    assert.match(sn.titulo,/Avisos/i);
+    await pg.click('.hero-v53-dock-tabs [data-hero-dock=""]');
     assert.ok(await pg.$eval('.hero-steps .pv-flowbox', e => !!e.offsetParent), 'volta às etapas');
     /* Monitoramento é uma terceira visão do cartão Etapas, sem janela sobreposta. */
     await pg.click('.hero-case-status .status-meta');
     await pg.waitForSelector('.hero-steps.hero-steps-mon>#hero-dock-pane-monitoramento .ct-i.meta', { state: 'visible', timeout: 15000 });
-    assert.equal(await pg.textContent('.hero-steps-head h4'), 'Monitoramento');
+    assert.equal(await pg.getAttribute('.hero-v53-dock-tabs [data-hero-dock="monitoramento"]','aria-pressed'),'true');
     assert.equal(await pg.getAttribute('.hero-case-status .status-meta','aria-pressed'),'true');
     assert.ok(!(await pg.$('#hero-mon-dlg')), 'sem diálogo');
     assert.ok(await pg.$eval('.hero-steps .pv-flowbox', e => !e.offsetParent), 'etapas substituídas');
@@ -221,7 +216,7 @@ test('universal: Encaminhamento como segunda face; Monitoramento e sinalizaçõe
 
 /* 0.73 · organização do prontuário universal: abas das faces sem as setas, Diligências e Deliberações na faixa de abas,
    etapa atual distinta, sinalizações com rótulo e um só "Ler os autos" (nas outras abas, aviso que leva à aba Autos) */
-test('universal: organização — faces por setas compactas, sinalizações na barra, faixa de abas única, etapa atual, rótulos e aviso dos autos', { skip: pular, timeout: 90000 }, async () => {
+test('universal v53: quatro subabas, sinalizações na barra, cinco páginas no rodapé e leitura em Autos', { skip: pular, timeout: 90000 }, async () => {
   const op = { processo: CNJ, origem: {}, triagem: { 'Tipo de Julgamento': 'Apelação' }, producao: { SERVIDOR: 'Rodrigo', MINUTADO: '2026-11-13', Destino: 'Sessão' }, pauta: {}, controles: {} };
   const P = await abrir(op, { sigilo: '', liberado: true, porque: 'gestor' });
   try {
@@ -233,8 +228,8 @@ test('universal: organização — faces por setas compactas, sinalizações na 
     const v = await pg.evaluate(() => {
       const vis = e => !!(e && e.offsetParent);
       return {
-        setas: [...document.querySelectorAll('.hero-header-nav>button')].filter(vis).length,
-        faces: [...document.querySelectorAll('.pv3-face-nav button')].filter(vis).map(b => b.textContent.trim()),
+        setas: [...document.querySelectorAll('.hero-header-nav>button[aria-label^="Próxima"],.hero-header-nav>button[aria-label^="Anterior"]')].filter(vis).length,
+        faces: [...document.querySelectorAll('.hero-v53-tabs button')].filter(vis).map(b => b.textContent.trim()),
         abas: [...document.querySelectorAll('#pv-nav-main button')].filter(vis).map(b => b.querySelector('b').textContent.trim()),
         etapas: [...document.querySelectorAll('.pv-stage')].map(e => e.className),
         rotulos: [...document.querySelectorAll('.pv-snr')].map(e => e.textContent),
@@ -242,16 +237,15 @@ test('universal: organização — faces por setas compactas, sinalizações na 
         frase: (document.body.innerText.match(/Abra os autos digitais/g) || []).length
       };
     });
-    assert.equal(v.setas, 2, 'faces pelas setas compactas ‹ ›');
-    assert.equal(v.faces.length, 0, 'sem as abas das faces');
+    assert.equal(v.setas, 0, 'sem setas de navegação');
+    assert.deepEqual(v.faces,['Resumo','Autos','Triagem','Produção']);
     assert.ok(await pg.$('.hero-steps-head .hero-sn-ind'), 'sinalizações na barra do cartão Etapas');
-    assert.ok(await pg.$eval('.hero-header-nav .hero-face-label', e => e.hidden), 'sem nome da face no display');
-    assert.equal(await pg.$eval('.hero-case-status .hero-status-icon[data-ativo="false"]', L => L.filter(x => x.offsetParent).length),0,'ícones inativos ocultos');
-    await pg.hover('.hero-case-status');
-    await pg.click('.hero-monitor-hover');
+    assert.equal(await pg.locator('.hero-header-nav .hero-face-label').count(),0,'sem face antiga');
+    assert.equal(await pg.$$eval('.hero-case-status .hero-status-icon[data-ativo="false"]', L => L.filter(x => x.offsetParent).length),0,'ícones inativos ocultos');
+    await pg.click('.hero-v53-dock-tabs [data-hero-dock="monitoramento"]');
     await pg.waitForSelector('.hero-steps.hero-steps-mon>#hero-dock-pane-monitoramento');
-    await pg.click('.hero-steps-voltar');
-    assert.deepEqual(v.abas, ['Prontuário', 'Minutário', 'Repertório', 'Pauta'], 'faixa principal sem gestão duplicada');
+    await pg.click('.hero-v53-dock-tabs [data-hero-dock=""]');
+    assert.deepEqual(v.abas, ['Prontuário', 'Corretor', 'Repertório', 'Pauta', 'Diretrizes'], 'faixa principal sem gestão duplicada');
     for (const [id, nome] of [['tab-dil', 'Diligências'], ['tab-del', 'Deliberações']]) {
       const seletor = '#tu-gestao #' + id;
       await pg.waitForSelector(seletor, { state: 'visible', timeout: 15000 });
@@ -263,13 +257,17 @@ test('universal: organização — faces por setas compactas, sinalizações na 
     await pg.click('#tab-pront');
     assert.ok(v.etapas.some(c => /\bok\b/.test(c)) && v.etapas.some(c => /\bat\b/.test(c)) && v.etapas.some(c => /\bpend\b/.test(c)), 'feita, atual e pendente: ' + v.etapas.join(' | '));
     for (const k of ['pd','ic','av']) assert.ok(await pg.locator('.hero-steps-head [data-sn-kind="'+k+'"]').getAttribute('aria-label'), 'sinalização com rótulo acessível: '+k);
-    assert.equal(v.lerAutos, 1, 'um só "Ler os autos" (aba Autos)');
-    assert.ok(await pg.$$eval('.hero-ann-card.pv-ann-vazia', L => L.length) >= 1, 'anotações vazias em linha tracejada');
+    assert.equal(v.lerAutos, 0, 'leitura exclusiva da aba Autos');
+    await pg.click('.hero-sn-ind [data-sn-kind="av"]');
+    await pg.waitForSelector('#hero-dock-pane-sinalizacoes .hero-ann-unified button[title="Incluir anotação"]',{state:'visible'});
+    await pg.click('#hero-dock-pane-sinalizacoes .hero-ann-unified button[title="Incluir anotação"]');
+    await pg.waitForSelector('#hero-dock-pane-sinalizacoes textarea[placeholder="Registrar anotação"]',{state:'visible'});
+    await pg.click('.hero-v53-dock-tabs [data-hero-dock=""]');
     assert.ok(v.frase <= 1, 'sem a frase repetida');
     await pg.evaluate(() => [...document.querySelectorAll('button')].find(b => b.offsetParent && b.textContent.trim() === 'Triagem').click());
-    await pg.waitForSelector('.au-aviso [data-au-ir]', { timeout: 15000 });
+    await pg.waitForSelector('.hero-v53-autos-link', { timeout: 15000 });
     assert.equal(await pg.$$eval('[data-au="ler"]', L => L.filter(x => x.offsetParent).length), 0, 'na Triagem, só o aviso');
-    await pg.click('.au-aviso [data-au-ir]');
+    await pg.click('.hero-v53-autos-link');
     await pg.waitForSelector('#g-lei [data-au="ler"]', { timeout: 15000 });
     assert.deepEqual(P.erros, [], 'sem erro de script');
   } finally { await P.fim(); }
@@ -288,9 +286,9 @@ test('universal 0.73.5: Controle dentro dos Ajustes, Gerador na Produção e cab
     assert.match(await pg.evaluate(() => document.getElementById('pv-ajustes-ctl').innerText), /Prazos/);
     await pg.evaluate(() => document.getElementById('pv-ajustes-ok').click());
     await pg.evaluate(() => window.MutaGabinete.irGerador());
-    await pg.waitForSelector('#pv-gerador[open] #pv-ger-app .gr-doc', { timeout: 10000 });
-    assert.equal(await pg.evaluate(() => document.querySelectorAll('#pv-gerador').length), 1);
-    assert.match(await pg.evaluate(() => document.getElementById('pv-ger-app').innerText), /RELATÓRIO|Relatório/);
-    assert.equal(await pg.evaluate(() => getComputedStyle(document.querySelector('[data-mm="ger"]')).display), 'none', 'o Minutário não tem mais o Gerador');
+    await pg.waitForSelector('.hero-v53-gerador #ger-app .gr-doc', { timeout: 10000 });
+    assert.equal(await pg.evaluate(() => document.querySelectorAll('#ger-app').length), 1);
+    assert.match(await pg.evaluate(() => document.getElementById('ger-app').innerText), /RELATÓRIO|Relatório/);
+    assert.equal(await pg.locator('#panel-min #ger-app').count(),0,'Corretor não tem o Gerador');
   } finally { await P.fim(); }
 });

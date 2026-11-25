@@ -363,13 +363,13 @@
   function conta(t) { return (String(t).match(/\[VALIDAR:/g) || []).length; }
   var ULT = null;
   function html() {
-    var g = GB(); if (!g.cnj || !g.cnj()) return '<div class="empty">Abra um processo no PJe para gerar as peças.</div>';
+    var g = GB();if(window.MutaSigilo&&window.MutaSigilo.bloqueado())return '<p class="muted">Acesso restrito.</p>'; if (!g.cnj || !g.cnj()) return '<div class="empty">Abra um processo no PJe para gerar as peças.</div>';
     if (g.modelo && !g.modelo()) return '<div class="empty">Lendo o prontuário do processo ' + esc(g.cnj()) + '…</div>';
     /* 0.52.1 · ato monocrático: relatório e ementa do Gerador são de acórdão; a decisão monocrática se monta na Minuta-Matriz do Compendium */
     if (g.destino && g.destino() === 'monocratica') return '<section class="card pc-sec gr-cfg"><div class="pc-sh"><h3>Gerador</h3><small class="muted">ato monocrático</small></div>' +
       '<p class="muted">O Gerador monta relatório e ementa de acórdão. Este processo está com destino monocrático: a decisão se monta na Minuta-Matriz do Compendium (pronunciamento Monocrática). Se o destino estiver errado, corrija-o no cartão do processo.</p></section>';
     if (ST.cnj !== g.cnj()) { ST.cnj = g.cnj(); ST.tipo = ''; ST.res = ''; }
-    var D = docs(); ULT = D;
+    if(novoHero()){ST.tipo='';ST.res='';} var D = docs(); ULT = D;
     var chips = function (L, at, sel) { return L.map(function (o) { var k = Array.isArray(o) ? o[0] : o, r = Array.isArray(o) ? o[1] : o; return '<button type="button" class="chip' + (k === sel ? ' on' : '') + '" ' + at + '="' + esc(k) + '">' + esc(r) + '</button>'; }).join(''); };
     var relT = D.rel.join('\n'), emT = emTexto(D.em);
     var ai = D.tipo === 'Agravo de Instrumento';
@@ -411,21 +411,24 @@
   function $(id) { return typeof document !== 'undefined' ? document.getElementById(id) : null; }
   /* 0.45: a aba CORTEX da Minuta é só do gestor */
   function gestor() { var x = window.MutaSessao && window.MutaSessao.estado ? window.MutaSessao.estado() : {}; return x.estado === 'on' && !!x.gestor; }
-  function modoMin() { try { var m = localStorage.getItem(MM_K); return m === 'ger' || m === 'conf' || m === 'dir' ? m : 'cmp'; } catch (e) { return 'cmp'; } }
-  function visivel() { var p = $('panel-min'), g = $('ger-app'); return !!(p && !p.hidden && g && !g.hidden); }
+  function novoHero(){return typeof document!=='undefined'&&document.body&&document.body.classList.contains('hero-redesign-v53');}
+  function modoMin() { if(novoHero())return 'cmp';try { var m = localStorage.getItem(MM_K); return m === 'ger' || m === 'conf' || m === 'dir' ? m : 'cmp'; } catch (e) { return 'cmp'; } }
+  function visivel() { var p = $(novoHero()?'panel-pront':'panel-min'), g = $('ger-app'); return !!(p && !p.hidden && g && !g.hidden); }
   function pintar(forca) {
     var g = $('ger-app'); if (!g || (!forca && !visivel())) return;
-    var p = $('panel-min'), y = p ? p.scrollTop : 0;
-    try { g.innerHTML = html(); if(window.MutaModelosHero)window.MutaModelosHero.montarGerador(g); } catch (e) { g.innerHTML = '<div class="empty">Gerador indisponível: ' + esc(e && e.message || e) + '</div>'; }
+    var p = $(novoHero()?'panel-pront':'panel-min'), y = p ? p.scrollTop : 0;
+    try { g.innerHTML = html(); if(novoHero()){g.querySelectorAll('.gr-l').forEach(function(l){if(l.querySelector('[data-gr-tipo],[data-gr-res]'))l.remove();});g.querySelectorAll('.gr-av').forEach(function(p){if(/^Sem resultado do voto na ficha/.test(p.textContent.trim()))p.textContent='Registre o resultado em Produção para completar a ementa.';});} if(window.MutaModelosHero)window.MutaModelosHero.montarGerador(g); } catch (e) { g.innerHTML = '<div class="empty">Gerador indisponível: ' + esc(e && e.message || e) + '</div>'; }
     if (p) p.scrollTop = y;
   }
   function modo(m) {
+    if(novoHero()&&m==='ger'){if(window.MutaAbas)window.MutaAbas.ir('pront');if(window.MutaGabinete)window.MutaGabinete.ir('Produção');return;}
     var dir=$('dir-consulta');
+    if(m==='dir'&&!dir&&window.MutaAbas){window.MutaAbas.ir('dir');return;}
     if(m==='dir'&&dir){dir.hidden=!dir.hidden;if(!dir.hidden){dir.open=true;if(window.MutaDiretrizes)window.MutaDiretrizes.abrir();}return;}
     var ger=m==='ger',cor=!ger;
     try{localStorage.setItem(MM_K,ger?'ger':'cmp');}catch(e){}
     var ca=$('cmp-app'),cf=$('min-conf'),g=$('ger-app');
-    if(ca)ca.hidden=!cor;if(cf)cf.hidden=!cor;if(g)g.hidden=!ger;
+    if(ca)ca.hidden=!cor;if(cf)cf.hidden=!cor;if(g&&!novoHero())g.hidden=!ger;
     if(cor&&window.MutaConformidade){window.MutaConformidade.abrir();if(m==='conf'&&cf){cf.open=true;cf.scrollIntoView({block:'nearest'});}}
     if(cor&&window.MutaComparar)window.MutaComparar.abrir();
     if(typeof document!=='undefined')document.querySelectorAll('.min-modos [role="tab"]').forEach(function(b){b.setAttribute('aria-selected',String(b.dataset.mm===(ger?'ger':'cor')));});

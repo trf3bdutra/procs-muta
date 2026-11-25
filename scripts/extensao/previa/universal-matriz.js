@@ -82,7 +82,7 @@
  var baseHero=heroOrganizarProntuario;
  heroOrganizarProntuario=function(){baseHero();var top=caixa.querySelector('.pc.pm'),p=caixa.querySelector('.hero-top-pages'),l=top&&top.querySelector('.pm-l1');if(!top||!p)return;
  if(cnj!==G.cnj){cnj=G.cnj;editor=null;query='';fieldGroup='';fieldSearch='';}
- if(l&&p.contains(l)){l.classList.add('pv2-fixed-id');p.before(l);}
+ if(!heroV53()&&l&&p.contains(l)){l.classList.add('pv2-fixed-id');p.before(l);}
  caixa.classList.add('pv2-enhanced');
  };
  caixa.addEventListener('input',function(e){var t=e.target;if(editor&&t.dataset.pv2Col)editor[t.dataset.pv2Col]=t.value;},true);
