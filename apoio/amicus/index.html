@@ -383,7 +383,7 @@ body.am-com-aba{overflow:hidden}
 .am-enc-list li{margin:5px 0}
 .am-enc-status{font-size:12px;color:var(--em)}
 @media(max-width:700px){.am-area-nav{grid-template-columns:repeat(2,minmax(0,1fr))}.am-group-heading h2{font-size:18px}}
-</style></head><body><header class="am-home-header"><div class="am-legacy"><b>Amicus Curiae.</b><span>Gabinete CMT · Ferramentas</span></div><nav class="am-over-nav am-home-overview" aria-label="Aplicações e áreas de consulta"><div class="am-nav-apps cn-in" role="tablist" aria-label="Abas do Amicus"><button type="button" role="tab" data-amtab="ref" aria-selected="true">Referências</button><button type="button" role="tab" data-amtab="collegium" aria-selected="false">Collegium</button><button type="button" role="tab" data-amtab="collectio" aria-selected="false" hidden title="Só para servidores logados">Collectio</button></div><div class="am-nav-links" aria-label="Aplicações"><a href="/amicus/compendium/">Compendium</a><a href="/amicus/cognitio/">Cognitio</a></div></nav><nav class="am-context-nav am-home-overview" aria-label="Subabas da aplicação" hidden><span class="am-context-label"></span><div class="cn-in" role="group"></div></nav></header>
+</style></head><body><header class="am-home-header"><div class="am-legacy"><b>Amicus Curiae.</b><span>Gabinete CMT · Ferramentas</span></div><nav class="am-over-nav am-home-overview" aria-label="Aplicações e áreas de consulta"><div class="am-nav-apps cn-in" role="tablist" aria-label="Abas do Amicus"><button type="button" role="tab" data-amtab="ref" aria-selected="true">Referências</button><button type="button" role="tab" data-amtab="collegium" aria-selected="false">Collegium</button><button type="button" role="tab" data-amtab="collectio" aria-selected="false" hidden title="Só para servidores logados">Collectio</button><button type="button" role="tab" data-amtab="hero" aria-selected="false" hidden title="Prévia do painel da extensão HERO18810, ao lado de um PJe simulado (nada é gravado) · só para servidores logados">HERO · prévia</button></div><div class="am-nav-links" aria-label="Aplicações"><a href="/amicus/compendium/">Compendium</a><a href="/amicus/cognitio/">Cognitio</a></div></nav><nav class="am-context-nav am-home-overview" aria-label="Subabas da aplicação" hidden><span class="am-context-label"></span><div class="cn-in" role="group"></div></nav></header>
 <main class="am-dashboard am-workspace">
 <aside class="am-rail am-competence" id="referencias-operacionais" aria-labelledby="am-competence-title"><div class="am-rail-head"><small>Referências operacionais</small><h2 id="am-competence-title">Competência e imparcialidade</h2></div><div class="am-rail-panels"><section class="busca" id="competencia"><div class="pane-title"><div><small>Referência · competência</small><h2>Competência</h2></div></div><p>Turma Regional de Mato Grosso do Sul, competência delegada e distribuição por matéria nas Seções do TRF3. Síntese do material fornecido, sujeita à conferência normativa.</p>
 <div class="comp-grid" id="comp-body"></div></section><section class="busca" id="impedimentos"><div class="pane-title"><div><small>Referencial interno · imparcialidade</small><h2>Impedimentos e suspeições</h2></div><div class="imp-actions"><button type="button" class="more" id="imp-refresh" aria-label="Atualizar referencial" title="Atualizar referencial">↻</button></div></div>
@@ -636,7 +636,7 @@ document.addEventListener('click',e=>{const k=e.target.closest&&e.target.closest
 })();
 </script></main>
 <section class="am-tabpane" id="am-tab-collegium" role="tabpanel" aria-label="Collegium" hidden><iframe title="Collegium · ementário da Turma Regional de MS" data-src="/amicus/collegium/#v=ement"></iframe></section>
-<section class="am-tabpane" id="am-tab-collectio" role="tabpanel" aria-label="Collectio" hidden><iframe title="Collectio" data-src="/amicus/collectio/"></iframe></section>
+<section class="am-tabpane" id="am-tab-collectio" role="tabpanel" aria-label="Collectio" hidden><iframe title="Collectio" data-src="/amicus/collectio/"></iframe></section><section class="am-tabpane" id="am-tab-hero" role="tabpanel" aria-label="Prévia da extensão HERO18810" hidden><iframe title="Prévia da extensão HERO18810" data-src="/extensao/previa/"></iframe></section>
 <script>
 /* Barra única: espelha controles reais dos módulos, sem alterar seus motores. */
 (function(){'use strict';
@@ -660,7 +660,7 @@ function render(){
 }
 function connect(f){
  disconnect();bar.hidden=true;group.replaceChildren();
- if(!f||active==='ref')return;
+ if(!f||active==='ref'||active==='hero')return;
  try{doc=f.contentDocument;if(!doc||!doc.body||!f.getAttribute('src'))return;
   const child=doc.documentElement;child.classList.add('amicus-unified-child');
   let style=doc.getElementById('amicus-unified-css');if(!style){style=doc.createElement('style');style.id='amicus-unified-css';style.textContent='html.amicus-unified-child body>header.top.nx{display:none!important} html.amicus-unified-child #e-modes>.seg{display:none!important} html.amicus-unified-child #x-sub{display:none!important}';doc.head.append(style);}
@@ -669,7 +669,7 @@ function connect(f){
  }catch(e){bar.hidden=true;disconnect();}
 }
 function abre(t,semHash,extra){
- if(t==='collectio'&&!logado)t='ref';if(t!=='ref'&&!D.getElementById('am-tab-'+t))t='ref';
+ if((t==='collectio'||t==='hero')&&!logado)t='ref';if(t!=='ref'&&!D.getElementById('am-tab-'+t))t='ref';
  active=t;disconnect();bar.hidden=true;group.replaceChildren();
  btns().forEach(b=>b.setAttribute('aria-selected',String(b.dataset.amtab===t)));
  if(main)main.hidden=t!=='ref';
@@ -682,7 +682,7 @@ D.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data
  const m=e.target.closest&&e.target.closest('.amicus-brand a[href="/amicus/"],.am-legacy');if(m&&!(e.ctrlKey||e.metaKey||e.shiftKey)){e.preventDefault();abre('ref');scrollTo({top:0,behavior:'smooth'});}});
 window.addEventListener('resize',altura);if(window.ResizeObserver)new ResizeObserver(altura).observe(D.querySelector('body>header'));
 let inicial='';try{inicial=decodeURIComponent((location.hash||'').slice(1));}catch(e){}
-fetch('/api/login',{credentials:'same-origin',cache:'no-store'}).then(r=>r.ok?r.json():null).catch(()=>null).then(j=>{logado=!!(j&&j.usuario);const c=D.querySelector('[data-amtab="collectio"]');if(c)c.hidden=!logado;if(inicial.split('&')[0]==='collectio')abre(logado?'collectio':'ref',!logado,inicial.includes('&')?inicial.slice(inicial.indexOf('&')+1):'');});
+fetch('/api/login',{credentials:'same-origin',cache:'no-store'}).then(r=>r.ok?r.json():null).catch(()=>null).then(j=>{logado=!!(j&&j.usuario);const c=D.querySelector('[data-amtab="collectio"]');if(c)c.hidden=!logado;const hx=D.querySelector('[data-amtab="hero"]');if(hx)hx.hidden=!logado;if(inicial.split('&')[0]==='collectio')abre(logado?'collectio':'ref',!logado,inicial.includes('&')?inicial.slice(inicial.indexOf('&')+1):'');if(inicial==='hero')abre(logado?'hero':'ref',!logado);});
 if(inicial.split('&')[0]==='collegium')abre('collegium',true,inicial.includes('&')?inicial.slice(inicial.indexOf('&')+1):'');
 })();
 </script><script>
