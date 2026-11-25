@@ -536,6 +536,14 @@
        "apelido": "responsavel"
       },
       {
+       "rotulo": "Solicitações manuais",
+       "chave": "Solicitações manuais",
+       "tipo": "texto-longo",
+       "secao": "origem",
+       "apelido": "solicitacoes_manuais",
+       "regra": "Registro JSON de solicitações manuais, com tipo, descrição, solicitante, data, autor e situação; independente dos pedidos recebidos por integração."
+      },
+      {
        "rotulo": "Solicitações de despacho",
        "chave": "Solicitações de despacho",
        "tipo": "texto-longo",
