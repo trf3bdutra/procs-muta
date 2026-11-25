@@ -11,6 +11,7 @@ Uso: python3 scripts/extensao/previa.py --saida site/public/extensao/previa
 """
 import argparse
 import pathlib
+import re
 import shutil
 import sys
 
@@ -57,6 +58,26 @@ def montar(saida: pathlib.Path) -> None:
     if universal == html:
         sys.exit('painel.html: gabinete.js não encontrado')
     universal = universal.replace('</head>', '<link rel="stylesheet" href="universal-layout.css">\n</head>', 1)
+    # A navegação conserva todos os IDs e painéis originais, inclusive as abas
+    # ocultas por permissão ou acessadas por atalhos. Só agrupa a apresentação.
+    nav = re.search(r'(<div class="nav" role="tablist"[^>]*>)([\s\S]*?)(</div>)', universal)
+    if not nav:
+        sys.exit('painel.html: navegador principal não encontrado')
+    itens = {m.group(1): m.group(0) for m in re.finditer(r'<button\b[^>]*\bid="tab-([^"]+)"[^>]*>[\s\S]*?</button>', nav.group(2))}
+    ferramentas = ('acervo', 'pauta', 'dil', 'del')
+    processo = ('pront', 'min')
+    if not all(k in itens for k in ferramentas + processo):
+        sys.exit('painel.html: abas principais da prévia não encontradas')
+    itens['min'] = itens['min'].replace('<b>Minuta ', '<b>Minutário ', 1).replace('Editor × padrão', 'Elaboração e revisão', 1)
+    def grupo(id, titulo, chaves):
+        return ('<div class="pv-nav-group" role="group" aria-label="' + titulo + '" id="' + id + '">'
+                '<span class="pv-nav-label">' + titulo + '</span><div class="pv-nav-row">' +
+                ''.join(itens[k] for k in chaves) + '</div></div>')
+    resto = ''.join(v for k, v in itens.items() if k not in ferramentas + processo)
+    conteudo = grupo('pv-nav-tools', 'Ferramentas do gabinete', ferramentas) + grupo('pv-nav-case', 'Processo em tela', processo) + resto
+    universal = universal[:nav.start()] + nav.group(1) + conteudo + nav.group(3) + universal[nav.end():]
+    universal = universal.replace('<div class="nav-label">PRODUÇÃO</div>', '', 1)
+    universal = universal.replace('aria-label="Parte da aba Minuta"', 'aria-label="Parte do Minutário"', 1)
     (painel / 'universal.html').write_text(universal, encoding='utf-8')
     for antigo in ('universal.html', 'universal-ficha.json'):
         (saida / antigo).unlink(missing_ok=True)

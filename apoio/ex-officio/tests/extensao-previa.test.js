@@ -50,3 +50,20 @@ test('prévia universal mantém todas as abas e ambos os roteiros originais', ()
     assert.match(fs.readFileSync(path.join(pn,'shim-previa.js'),'utf8'),/if \(universal && m !== 'GET'/);
   } finally { fs.rmSync(saida,{recursive:true,force:true}); }
 });
+
+test('navegador universal: utilidades, ferramentas do gabinete, processo em tela', () => {
+  const saida=fs.mkdtempSync(path.join(os.tmpdir(),'muta-nav-'));
+  try {
+    execFileSync('python3',[path.join(ROOT,'scripts/extensao/previa.py'),'--saida',saida]);
+    const html=fs.readFileSync(path.join(saida,'painel','universal.html'),'utf8');
+    const old=fs.readFileSync(path.join(saida,'painel','painel.html'),'utf8');
+    const ids=s=>[...s.matchAll(/id="tab-([^"]+)"/g)].map(m=>m[1]).sort();
+    assert.deepEqual(ids(html),ids(old));
+    assert.ok(html.indexOf('id="topo-u"')<html.indexOf('id="pv-nav-tools"'));
+    assert.ok(html.indexOf('id="pv-nav-tools"')<html.indexOf('id="pv-nav-case"'));
+    assert.ok(html.indexOf('id="tab-acervo"')<html.indexOf('id="tab-pront"'));
+    assert.ok(html.indexOf('id="tab-del"')<html.indexOf('id="tab-pront"'));
+    assert.match(html,/<b>Minutário /);
+    assert.match(old,/<b>Minuta /);
+  } finally {fs.rmSync(saida,{recursive:true,force:true});}
+});

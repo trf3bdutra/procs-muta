@@ -84,5 +84,14 @@
     var id=b.getAttribute('data-pv-field');open[id]=!open[id];render();
     if(open[id]){var c=Array.from(caixa.querySelectorAll('textarea[data-fk],input[data-fk],select[data-fk]')).find(function(x){return x.dataset.fk===id;});if(c)c.focus();}
   },true);
+  /* Navegação por teclado na ordem visual, sem alcançar atalhos ocultos. */
+  var nav=document.querySelector('.nav[role="tablist"]');
+  if(nav)nav.addEventListener('keydown',function(e){
+    if(!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Home','End'].includes(e.key))return;
+    var tabs=Array.from(nav.querySelectorAll('.pv-nav-row button[role="tab"]:not([hidden])')).filter(function(x){return !x.disabled;});
+    var i=tabs.indexOf(e.target);if(i<0||!tabs.length)return;
+    var n=e.key==='Home'?0:e.key==='End'?tabs.length-1:(i+(['ArrowRight','ArrowDown'].includes(e.key)?1:-1)+tabs.length)%tabs.length;
+    e.preventDefault();e.stopImmediatePropagation();tabs[n].click();tabs[n].focus();
+  },true);
   document.body.classList.add('pv-universal-body');
 })();
