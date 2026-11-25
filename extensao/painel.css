@@ -1623,3 +1623,9 @@ html[data-tema=escuro] .rt-tipos .rt-kind-option{border-color:var(--line)}
 #gab .hero-prod-index-group>.gr{padding:4px 0 8px}
 #gab .hero-prod-index-history{margin:4px 9px 9px;box-shadow:none}
 #gab .hero-prod-index .gf{min-width:0;overflow-wrap:anywhere}
+
+/* Roteiro enxuto de redação */
+#gab .hero-minuta-roteiro .hero-minuta-secao{margin:5px 0;min-width:0}
+#gab .hero-minuta-ref .ro{overflow-wrap:anywhere;white-space:normal}
+#gab .hero-minuta-questoes{margin:3px 0 7px;padding-left:19px;font-size:12px;line-height:1.4}
+#gab .hero-minuta-roteiro [data-minuta-autos],#gab .hero-minuta-roteiro [data-minuta-caso]{margin-top:4px}

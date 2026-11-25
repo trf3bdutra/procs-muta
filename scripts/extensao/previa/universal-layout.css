@@ -180,3 +180,9 @@ html[data-tema=escuro] .pv-universal-body{--pv-bg:#25282d;--pv-line:#444a52;--pv
 #gab.pv2-enhanced .pv3-solicitacoes .hero-sol-item small{font-size:10px}
 #gab.pv2-enhanced .pv3-solicitacoes .hero-sol-form{padding:9px;background:var(--card);border:1px solid var(--line);border-radius:7px;margin:0}
 #gab.pv2-enhanced .pv3-solicitacoes .hero-sol-form textarea{resize:vertical;min-height:65px}
+
+/* Roteiro enxuto de redação */
+#gab .hero-minuta-roteiro .hero-minuta-secao{margin:5px 0;min-width:0}
+#gab .hero-minuta-ref .ro{overflow-wrap:anywhere;white-space:normal}
+#gab .hero-minuta-questoes{margin:3px 0 7px;padding-left:19px;font-size:12px;line-height:1.4}
+#gab .hero-minuta-roteiro [data-minuta-autos],#gab .hero-minuta-roteiro [data-minuta-caso]{margin-top:4px}

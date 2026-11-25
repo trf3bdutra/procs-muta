@@ -725,18 +725,84 @@ function producaoIndex(){
  function ro(label,value){return '<div class="gf w"><span class="gl">'+esc(label)+'</span><span class="ro">'+esc(S(value)||'—')+'</span></div>';}
  function hist(k,fallback){var c=find(k);if(c&&S(V(c.secao,c.chave)))return render(Object.assign({},c,{editavel:false}));return ro(c?c.rotulo:k,fallback);}
  function sub(title,content){return content?'<section class="hero-prod-index-group"><h4 class="pm-mer-h">'+esc(title)+'</h4><div class="gr">'+content+'</div></section>':'';}
- var model=['Modelo aplicável','Variação do modelo'],lote=fields.filter(function(c){return c.secao==='producao'&&model.indexOf(c.chave)<0;}),histKeys=['Registro - Lote','Registro - Grupo','Registro - Variações','Registro - Modelo'];
+ var model=['Modelo aplicável','Variação do modelo'],lote=fields.filter(function(c){return ['Lote','Lote - Tipo de caso','Lote - Variações','Lote - Caso'].indexOf(c.chave)>=0;}),histKeys=['Registro - Lote','Registro - Grupo','Registro - Variações','Registro - Modelo'];
  var title=S(V('producao','Modelo aplicável')),lot=S(V('producao','Lote')),desc=[lot?'Lote '+lot:'',title].filter(Boolean).join(' · ');
  var histBody=hist(histKeys[0],M.lote)+hist(histKeys[1],M.grupo)+hist(histKeys[2],M.variacoes)+hist(histKeys[3],M.modelo);
  if(S(M.proposta)||S(V('triagem','Registro - Proposta')))histBody+=ro('Proposta registrada na triagem',V('triagem','Registro - Proposta')||M.proposta);
  if(S(M.resultado))histBody+=ro('Resultado proposto pelo grupo · histórico',M.resultado);
  return '<details id="hero-prod-index" class="card gg hero-prod-index"'+(PROD_INDEX_STATE.open?' open':'')+'><summary><h4>Análise e Indexação</h4><span class="gn">'+esc(desc||'Modelo e lote')+'</span></summary>'+
  sub('Modelo de produção',model.map(function(k){return render(find(k));}).join(''))+
- sub('Lote e correção',lote.map(render).join(''))+
+ sub('Referências do lote',lote.map(render).join(''))+
  '<details class="gg hero-prod-index-history"><summary><h4>Indexação de origem · histórico</h4></summary><div class="gr">'+histBody+'</div></details>'+
  '</details>';
 }
 document.addEventListener('toggle',function(e){var d=e.target;if(d&&d.id==='hero-prod-index'&&d.isConnected&&PROD_INDEX_STATE.cnj===G.cnj)PROD_INDEX_STATE.open=d.open;},true);
+
+
+/* Produção é o roteiro de redação, não um espelho da ficha nem um controle administrativo. */
+function fichaFacePermitida(){
+ var u=ses&&ses.estado?ses.estado():null;
+ return !!(u&&u.estado==='on'&&u.gestor&&G.gestor&&N(u.usuario)==='bruno');
+}
+function producaoMinuta(){
+ var sg=window.MutaSigilo;if(sg&&sg.bloqueado())return '<p class="muted">Acesso restrito.</p>';
+ var T=ccTipos(),p=pronAtual(),d=destGrav(),desp=p===3||p===7||d==='Outro destino',ac=p===0||p<0&&d==='Sessão',urg=p===2||p===8,hom=p===6,mono=!ac&&p>=0,seen=new Set();
+ function field(sec,k,rot,extras){
+  var id=sec+'.'+k,c=campoModelo(sec,k);if(!c||seen.has(id))return '';seen.add(id);
+  return campo(Object.assign({},c,rot?{rotulo:rot}:{},extras||{}));
+ }
+ function prod(keys){return keys.map(function(k){return Array.isArray(k)?field('producao',k[0],k[1]):field('producao',k);}).join('');}
+ function block(id,title,h,open){
+  if(!h)return '';var state=CC_ABERTO['minuta-'+id];return '<details class="gg hero-minuta-secao" data-cc="minuta-'+id+'"'+(state==null?open?' open':'':state?' open':'')+(id==='solucao'?' id="pv-julgamento"':'')+'><summary><h4>'+esc(title)+'</h4></summary><div class="gr">'+h+'</div></details>';
+ }
+ function value(v){return Array.isArray(v)?v.length+' registro(s)':S(v);}
+ function ref(title,keys){var vals=keys.map(function(k){return value(V(k[0],k[1]));}).filter(Boolean);return '<div class="gf w hero-minuta-ref"><span class="gl">'+esc(title)+'</span><span class="ro">'+esc(vals.join(' · ')||'A conferir nos Autos')+'</span></div>';}
+ function resultado(){
+  var L=['Provido','Parcialmente provido','Desprovido','Não conhecido','Prejudicado','Anulado'];
+  if(urg)L=['Deferido','Parcialmente deferido','Indeferido','Prejudicado'];
+  else if(hom)L=['Homologado','Extinto'];
+  else{var types=[];if(T.ed)types=types.concat(['Rejeitados','Acolhidos sem efeito infringente','Acolhidos com efeito infringente','Não conhecido']);if(T.ret||p===5)types=types.concat(['Retratação exercida','Acórdão mantido']);if(T.rn)types=types.concat(['Sentença confirmada','Sentença parcialmente reformada','Sentença reformada','Não conhecida']);if(T.ms)types=types.concat(['Concedido','Parcialmente concedido','Denegado','Extinto']);if(types.length)L=(T.ap||T.ai||T.agint?L:[]).concat(types);}
+  return field('producao','Voto - Resultado','Resultado proposto',{tipo:'lista',opcoes:Array.from(new Set(L))});
+ }
+ var AU=window.MutaAutos,auto=AU&&AU.barra?AU.barra():'',h='<section class="card rt-top cc-caso hero-minuta-roteiro"><div class="rt-tt"><b>Preparação da minuta</b></div><p class="muted">Insumos de redação da ficha única · sem etapas administrativas.</p>'+auto;
+ var rel='<div class="gf w"><small class="muted">Relatório: dados recuperados da ficha, sem nova transcrição.</small></div>';
+ if(!(sg&&sg.sigiloso())){
+  rel+=ref('Decisão recorrida / atos de referência',[['triagem','Impugnada - ID'],['origem','Sentença - ID'],['origem','1G - Decisão ID'],['origem','2G - Monocrática ID'],['producao','Acórdão - ID']]);
+  rel+=ref('Recursos',[['origem','Recursos']])+ref('Respostas',[['origem','Contrarrazões']])+ref('Parecer',[['triagem','MPF'],['triagem','ID do Parecer MPF']]);
+ }
+ rel+='<div class="gf w"><button type="button" class="btn line sm" data-minuta-autos>Consultar peças e documentos nos Autos</button></div>';
+ rel+=prod(['Particularidades do relatório']);
+ h+=block('relatorio','Relatório',rel,true);
+ var Q=questoesLista(V('triagem','Alegações')),q='<div class="gf w"><span class="gl">Questões da ficha</span>'+(Q.length?'<ol class="hero-minuta-questoes">'+Q.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ol>':'<span class="ro">Nenhuma questão registrada.</span>')+'<button type="button" class="lnk" data-minuta-caso>Editar no cartão Caso, Conteúdo e Questões</button></div>';
+ q+=prod(['Objeto do recurso','Objeto devolvido','Limites do julgamento','Matérias de ofício']);h+=block('questoes','Questões a decidir',q,true);
+ if(!desp){
+  var sol=prod(['Conhecimento do recurso','Extensão do conhecimento','Preliminares acolhidas','Preliminares rejeitadas','Prejudiciais de mérito'])+resultado();
+  var rec=V('origem','Recursos'),res=V('producao','Resultado por recurso');
+  if(typeof rec==='string')try{rec=JSON.parse(rec);}catch(e){}if(typeof res==='string')try{res=JSON.parse(res);}catch(e){}
+  if((Array.isArray(rec)&&rec.length>1)||(Array.isArray(res)&&res.length)||T.rn&&T.ap||Object.keys(T).filter(function(k){return T[k];}).length>1)sol+=field('producao','Resultado por recurso');
+  var species={'Apelação':'ap','Remessa':'rn','AI':'ai','ED':'ed','AgInt':'agint','JR':'ret','MS':'ms'},g=grupoModelo('Questões específicas da espécie');
+  (g&&g.campos||[]).forEach(function(c){var k=species[c.chave.split(' - ')[0]];if(!k||T[k]||S(V(c.secao,c.chave)))sol+=field(c.secao,c.chave);});
+  h+=block('solucao','Solução do julgamento',sol,true);
+ }
+ var fund=prod(['Tese jurídica adotada','Dispositivos legais aplicáveis','Precedentes aplicáveis','Distinção de precedente','Aplicação ao caso concreto']);
+ if(mono)fund+=prod(['Mono - Fundamento']);
+ fund+=prod([['Voto - Descrição','Desenvolvimento / detalhes da minuta'],'Tópico-síntese']);
+ if(ac||S(V('triagem','Tipo de Voto')))fund+=field('triagem','Tipo de Voto');
+ h+=block('fundamentacao','Fundamentação',fund,false);
+ if(!desp){
+  var suc='<div class="gf w"><small class="muted">Compare a solução proposta com a sucumbência da decisão recorrida, registrada nos Autos.</small><button type="button" class="lnk" data-minuta-autos>Consultar decisão recorrida</button></div>';
+  suc+=prod(['Voto - Honorários','Honorários - Percentual ou valor','Honorários - Base de cálculo','Honorários recursais','Fundamento da sucumbência','Custas no julgamento','Gratuidade no julgamento','Natureza da condenação','Consectários no julgamento','Juros e correção monetária','Termo inicial dos efeitos']);
+  h+=block('sucumbencia','Sucumbência e consectários',suc,false);
+ }
+ h+=block('dispositivo','Dispositivo',prod(['Extensão da reforma','Capítulos mantidos','Capítulos reformados','Providências determinadas','Dispositivo do pronunciamento']),false);
+ return h+'</section>';
+}
+caixa.addEventListener('click',function(e){
+ var b=e.target.closest&&e.target.closest('[data-minuta-autos],[data-minuta-caso]');if(!b)return;
+ e.preventDefault();e.stopImmediatePropagation();
+ if(b.hasAttribute('data-minuta-autos')){G.aba='Autos';render();return;}
+ heroTopo.pagina=2;render();var p=caixa.querySelector('.hero-top-pages');if(p)p.scrollIntoView({block:'start'});
+},true);
 
 function corpoProcesso() {
   /* 0.60: a aba Processo = Roteiro de triagem + Roteiro de produção; sinalizações, notas e registro no acervo foram para o card do topo (snCard) */
@@ -751,8 +817,7 @@ function corpoProcesso() {
   if(rot==='sol')return '<div id="hero-sol-main"></div>';
   if(rot==='tri')return h;
   producaoIndexCampos().forEach(function(c){ja[c.secao+'.'+c.chave]=1;});
-  var pro=camposCaso(ja);
-  return producaoIndex()+(pro||'<div class="empty">Sem campos de produção para este processo.</div>');
+  return producaoIndex()+producaoMinuta();
 }
 /* 0.54 · Roteiro de produção: todos os campos da ficha que a Minuta-Matriz do Compendium usa (@apelido), do destino do caso
    (sessão ou monocrática). Preenchimento automatizado: a leitura dos autos põe sozinha o que acha nos campos vazios
@@ -1024,12 +1089,12 @@ function heroOrganizarProntuario(){
   }
   var nav=el('div','hero-header-nav'),prev=el('button','','‹'),next=el('button','','›'),label=el('span','muted');
   prev.type=next.type='button';prev.setAttribute('aria-label','Face anterior');next.setAttribute('aria-label','Próxima face');var faixa=top.querySelector('.pm-top');nav.append(prev);if(faixa){nav.append(faixa);faixa.querySelectorAll('.sp').forEach(function(x){x.remove();});var phase=faixa.querySelector('.pm-fase');if(phase)phase.before(label);else faixa.prepend(label);}else nav.append(label);label.classList.add('hero-face-label');nav.append(next);
-  var enhanced=!!(window.MUTA_PREVIA&&window.MutaGabinete&&window.MutaGabinete.fichaFace),ficha=enhanced?el('div','hero-top-page pv2-ficha-face'):null;
+  var enhanced=!!(window.MUTA_PREVIA&&window.MutaGabinete&&window.MutaGabinete.fichaFace),ficha=enhanced&&fichaFacePermitida()?el('div','hero-top-page pv2-ficha-face'):null;
   var pages=el('div','hero-top-pages'),id=el('div','hero-top-page'),aut=el('div','hero-top-page'),mat=el('div','hero-top-page');
   pages.append(id,aut,mat);var pn=[id,aut,mat],names=['Resumo','Identificação e Autuação','Caso, Conteúdo e Questões'];
   if(ficha){pages.append(ficha);pn.push(ficha);names.push('Ficha');}
-  function show(i){var n=pn.length;heroTopo.pagina=(i+n)%n;pn.forEach(function(p,j){p.hidden=j!==heroTopo.pagina;});label.textContent=heroTopo.pagina===0?'':names[heroTopo.pagina];label.hidden=heroTopo.pagina===0;prev.title='Anterior: '+names[(heroTopo.pagina+n-1)%n];next.title='Próxima: '+names[(heroTopo.pagina+1)%n];prev.setAttribute('aria-label',prev.title);next.setAttribute('aria-label',next.title);nav.setAttribute('aria-label',names[heroTopo.pagina]);if(ficha){if(heroTopo.pagina===n-1){if(!ficha.childElementCount)html(ficha,window.MutaGabinete.fichaFace());}else ficha.replaceChildren();if(faceNav)Array.from(faceNav.children).forEach(function(b,j){b.setAttribute('aria-pressed',String(j===heroTopo.pagina));});}}
-  var faceNav=enhanced?el('div','pv3-face-nav'):null;if(faceNav){['Resumo','Autuação','Caso','Ficha'].forEach(function(name,i){var b=el('button','',name);b.type='button';b.onclick=function(){show(i);};faceNav.append(b);});}
+  function show(i){var n=pn.length;heroTopo.pagina=(i+n)%n;pn.forEach(function(p,j){p.hidden=j!==heroTopo.pagina;});label.textContent=heroTopo.pagina===0?'':names[heroTopo.pagina];label.hidden=heroTopo.pagina===0;prev.title='Anterior: '+names[(heroTopo.pagina+n-1)%n];next.title='Próxima: '+names[(heroTopo.pagina+1)%n];prev.setAttribute('aria-label',prev.title);next.setAttribute('aria-label',next.title);nav.setAttribute('aria-label',names[heroTopo.pagina]);if(ficha){if(heroTopo.pagina===n-1&&fichaFacePermitida()){if(!ficha.childElementCount)html(ficha,window.MutaGabinete.fichaFace());}else ficha.replaceChildren();}if(faceNav)Array.from(faceNav.children).forEach(function(b,j){b.setAttribute('aria-pressed',String(j===heroTopo.pagina));});}
+  var faceNav=enhanced?el('div','pv3-face-nav'):null;if(faceNav){faceNav.style.gridTemplateColumns='repeat('+pn.length+',minmax(0,1fr))';['Resumo','Autuação','Caso'].concat(ficha?['Ficha']:[]).forEach(function(name,i){var b=el('button','',name);b.type='button';b.onclick=function(){show(i);};faceNav.append(b);});}
   prev.addEventListener('click',function(){show(heroTopo.pagina-1);});next.addEventListener('click',function(){show(heroTopo.pagina+1);});
   var sx=0;pages.addEventListener('touchstart',function(e){sx=e.changedTouches[0].clientX;},{passive:true});pages.addEventListener('touchend',function(e){var dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>65)show(heroTopo.pagina+(dx<0?1:-1));},{passive:true});
   var l1=top.querySelector('.pm-l1'),cls=l1&&l1.querySelector('.pc-cl'),classText=cls&&cls.title?cls.title.split(' · ')[0]:'';
