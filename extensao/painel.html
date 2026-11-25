@@ -148,11 +148,10 @@
          e Conformidade (aba própria: a análise da minuta pelo padrão do gabinete) -->
     <section id="panel-min" role="tabpanel" aria-labelledby="tab-min" hidden>
       <div class="wrap min-wrap">
-        <div class="seg pmodos min-modos" role="tablist" aria-label="Parte da aba Minuta"><button type="button" role="tab" data-mm="ger" aria-selected="false">Gerador</button><button type="button" role="tab" data-mm="cor" aria-selected="true">Corretor</button><button type="button" data-mm="dir" class="min-dir-atalho" title="Manual e Lista de caça" aria-label="Diretrizes">📖</button><button type="button" data-mm="conf" class="min-conf-atalho" title="Conformidade da minuta"><i class="conf-badge" id="mm-conf-n" hidden></i><small id="mc-resumo">leia o editor</small></button></div>
-        <div id="ger-app" hidden></div>
+        <div class="hero-v53-page-head"><b class="hero-v53-page-title">Corretor</b></div>
         
         <!-- 0.42: a conformidade é uma aba própria da Minuta (antes, rodapé fixo) -->
-        <div id="cmp-app"></div><details class="min-conf aba" id="min-conf" data-aberto="1" open><summary>Conformidade</summary><div class="mc-b" id="panel-conf"><div id="conf-app"></div></div></details>
+        <div id="cmp-app"></div><details class="min-conf aba" id="min-conf" data-aberto="1" open><summary><span>Conformidade <i class="conf-badge" id="mm-conf-n" hidden></i> <small id="mc-resumo">leia o editor</small></span><button type="button" id="hero-v53-conf-expand" aria-pressed="false" class="btn line sm">Expandir</button></summary><div class="mc-b" id="panel-conf"><div id="conf-app"></div></div></details>
       </div>
     </section>
 
