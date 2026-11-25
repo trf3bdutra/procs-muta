@@ -314,6 +314,17 @@ function ppSelecionar(box,k,focus){
   $$('[data-ppaba]',box).forEach(function(t){var on=t.dataset.ppaba===k;t.setAttribute('aria-selected',String(on));t.tabIndex=on?0:-1;if(on&&focus)t.focus({preventScroll:true});});
   $$('[data-ppsec]',box).forEach(function(p){p.hidden=p.dataset.ppsec!==k;});
 }
+/* Metadados do julgado: etiquetas semânticas, sem duplicar a identificação do pronunciamento. */
+function ppMetadados(x,it){
+  var col=!!window.EMENT_FONTE;
+  function tag(k,v,cls,title,style){
+    return '<span class="pp-chip '+(cls||'')+'"'+(title?' title="'+esc(title)+'"':'')+(style?' style="'+esc(style)+'"':'')+'><small>'+esc(k)+'</small><b>'+esc(v||'Não informado')+'</b></span>';
+  }
+  var estado=it?(col?'Excerto DJEN':'Inteiro teor'):(x.sid&&!x._itFalhou&&!x._itBusca?'A consultar':x.sid&&!x._itFalhou?'Carregando…':'Não disponível');
+  return '<div class="pp-chips pp-metadados">'+tag('Resultado',x._res||'Sem classificação','pp-res','Classificação do resultado','--rc:'+corRes(x._res||'Sem classificação'))+
+    tag('Apreciação',x._apr||'Não classificada','',x._apr)+tag('Classe',x.c||x.cl,'',x.cl)+tag('Órgão',siglaO(x.o),'',x.o)+
+    tag('Documento',estado,it?'ok':'pp-chip-muted',col?'Conteúdo preservado na base DJEN; não equivale ao inteiro teor':'Disponibilidade do texto na base')+'</div>';
+}
 function abrirIT(x){
   if(!x)return;var mesmo=E.det===x.id,aba=mesmo?(E.detAba||'julgado'):'julgado';E.det=x.id;if(aba==='catalogacao')aba='processo';if(aba==='referencias')aba='julgado';E.detAba=aba;
   var anterior=$('#e-det'),drawer=$('#e-drb');if(!anterior||anterior.hidden)anterior=drawer;
@@ -328,7 +339,7 @@ function abrirIT(x){
   var h='<div class="e-dhead pp"><div class="e-dtit"><span class="e-tag '+x.t+'">'+(x.t==='A'?'Acórdão':'Decisão monocrática')+'</span><span class="e-num big">'+esc(x.n)+'</span><button class="e-dx" data-dx title="Fechar (Esc)" aria-label="Fechar">×</button></div>';
   var area=x._rd||x._ramo||'Área não informada',resto=tcResto(x);
   h+='<div class="pp-path">'+esc(area)+(x.mat&&nz(area).indexOf(nz(x.mat))<0?' · '+esc(x.mat):'')+'</div><h2 class="pp-ass">'+esc(ass)+(resto&&nz(ass)!==nz(resto)?'<span class="pp-sub"> › '+esc(resto)+'</span>':'')+'</h2>';
-  h+='<div class="pp-chips"><span class="pp-res" style="--rc:'+corRes(x._res)+'">'+esc(x._res)+'</span>'+(x._apr?'<span>'+esc(x._apr)+'</span>':'')+'<span title="'+esc(x.cl||'')+'">'+esc(x.c||x.cl||'')+'</span><span title="'+esc(x.o||'')+'">'+esc(siglaO(x.o))+'</span>'+(it?'<span class="ok">'+(window.EMENT_FONTE?'excerto DJEN':'inteiro teor')+'</span>':'')+'</div>';
+  h+=ppMetadados(x,it);
   var col=!!window.EMENT_FONTE,origem=x._origem||{};
   h+='<div class="pp-dt">'+(col?'Assinatura: ':'Julgado em ')+'<b>'+fmtD(x.d)+'</b>'+(col?(origem.data_disponibilizacao_djen?' · DJEN: <b>'+esc(origem.data_disponibilizacao_djen)+'</b>':''):(x.p?' · publicado em <b>'+fmtD(x.p)+'</b>':''))+' · Rel. '+esc(x.rl||(col?'não informado':'CARLOS MUTA'))+(x.gab?' · '+esc(x.gab):'')+'</div>';
   h+='<div class="e-dacts"><button class="e-mini pri" data-dcit>'+ICO.cit+'Copiar citação</button><button class="e-mini" data-dem>Copiar '+(col&&x.t==='M'?'abertura':'ementa')+'</button>'+(it?'<button class="e-mini" data-dit>Copiar '+(window.EMENT_FONTE?'excerto':'inteiro teor')+'</button>':'')+'<button class="e-mini" data-ddocx>.docx</button><button class="e-mini" data-dpdf>PDF</button></div>'+
