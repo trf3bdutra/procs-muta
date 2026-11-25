@@ -181,11 +181,11 @@ function pills() {
    Autuação, partes, tramitação e "autos extraídos" não aparecem como grupos: o cartão, a situação atual e a lista de documentos os substituem. */
 var MODOS = ['Processo', 'Autos'];  /* 0.38: o Gerador foi para a aba Minuta; 0.47: o Roteiro entrou na aba Processo */
 var ROT_MODO = {};
-var FORA_PROC = { 'Autuação': 1, 'Partes': 1, 'Tramitação': 1, 'Autos extraídos do PJe': 1, 'Registro no acervo': 1, 'Acompanhamento': 1 };
+var FORA_PROC = { 'Identificação e Autuação': 1, 'Autuação': 1, 'Partes': 1, 'Tramitação': 1, 'Autos extraídos do PJe': 1, 'Registro no acervo': 1, 'Acompanhamento': 1 };
 var NO_TOPO = { 'Tipo de Julgamento': 1, 'Histórico de julgamento': 1, 'Mapa de próximos passos': 1, 'Avisos': 1, 'Síntese Processual': 1, 'Alegações': 1, 'Etiquetas sugeridas': 1, 'O que falta sanar': 1, 'Intercorrências': 1, 'Assunto detalhado': 1 };
 var CTL_PROC = ['urgencia', 'meta', 'sobrestamento', 'sensivel'];
 function abaModelo(nome) { return ((G.F && G.F.abas) || []).filter(function (a) { return a.aba === nome; })[0] || null; }
-function grupoModelo(nome) { var g = null; ((G.F && G.F.abas) || []).forEach(function (a) { (a.grupos || []).forEach(function (x) { if (!g && x.grupo === nome) g = x; }); }); return g; }
+function grupoModelo(nome) { var g = null; var aliases={'Autuação':'Identificação e Autuação','Matéria':'Caso, Conteúdo e Questões','Origem':'1º grau'}; ((G.F && G.F.abas) || []).forEach(function (a) { (a.grupos || []).forEach(function (x) { if (!g && (x.grupo === nome || x.grupo === aliases[nome])) g = x; }); }); return g; }
 function campoModelo(sec, chave) { var c = null; ((G.F && G.F.abas) || []).forEach(function (a) { (a.grupos || []).forEach(function (g) { (g.campos || []).forEach(function (x) { if (!c && x.chave === chave && (x.secao || '') === sec) c = x; }); }); }); return c; }
 function fmtV(v) { v = S(v); return /^\d{4}-\d{2}-\d{2}$/.test(v) ? brD(v) : v; }
 function valorDe(c) { var v = c.secao ? gravado(c.secao, c.chave) : fonteVal(c); return typeof v === 'object' ? '' : S(v); }
@@ -976,7 +976,7 @@ function heroOrganizarProntuario(){
   var nav=el('div','hero-header-nav'),prev=el('button','','‹'),next=el('button','','›'),label=el('span','muted');
   prev.type=next.type='button';prev.setAttribute('aria-label','Face anterior');next.setAttribute('aria-label','Próxima face');var faixa=top.querySelector('.pm-top');nav.append(prev);if(faixa){nav.append(faixa);faixa.querySelectorAll('.sp').forEach(function(x){x.remove();});var phase=faixa.querySelector('.pm-fase');if(phase)phase.before(label);else faixa.prepend(label);}else nav.append(label);label.classList.add('hero-face-label');nav.append(next);
   var pages=el('div','hero-top-pages'),id=el('div','hero-top-page'),aut=el('div','hero-top-page'),mat=el('div','hero-top-page');
-  pages.append(id,aut,mat);var pn=[id,aut,mat],names=['Resumo','Autuação','Caso, conteúdo e questões'];
+  pages.append(id,aut,mat);var pn=[id,aut,mat],names=['Resumo','Identificação e Autuação','Caso, Conteúdo e Questões'];
   function show(i){heroTopo.pagina=(i+3)%3;pn.forEach(function(p,j){p.hidden=j!==heroTopo.pagina;});label.textContent=heroTopo.pagina===0?'':names[heroTopo.pagina];label.hidden=heroTopo.pagina===0;prev.title='Anterior: '+names[(heroTopo.pagina+2)%3];next.title='Próxima: '+names[(heroTopo.pagina+1)%3];prev.setAttribute('aria-label',prev.title);next.setAttribute('aria-label',next.title);nav.setAttribute('aria-label',names[heroTopo.pagina]);}
   prev.addEventListener('click',function(){show(heroTopo.pagina-1);});next.addEventListener('click',function(){show(heroTopo.pagina+1);});
   var sx=0;pages.addEventListener('touchstart',function(e){sx=e.changedTouches[0].clientX;},{passive:true});pages.addEventListener('touchend',function(e){var dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>65)show(heroTopo.pagina+(dx<0?1:-1));},{passive:true});
