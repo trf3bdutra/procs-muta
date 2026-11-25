@@ -421,6 +421,7 @@
   }
   function modo(m) {
     var dir=$('dir-consulta');
+    if(m==='dir'&&!dir&&window.MutaAbas){window.MutaAbas.ir('dir');return;}
     if(m==='dir'&&dir){dir.hidden=!dir.hidden;if(!dir.hidden){dir.open=true;if(window.MutaDiretrizes)window.MutaDiretrizes.abrir();}return;}
     var ger=m==='ger',cor=!ger;
     try{localStorage.setItem(MM_K,ger?'ger':'cmp');}catch(e){}
