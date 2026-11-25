@@ -1843,3 +1843,9 @@ html[data-tema=escuro] #gab .hero-proc-tags .hero-secao-3{--tag-ink:#efa7cf}
 
 /* Seção: somente ordinal, com identidade cromática própria. */
 #gab .hero-proc-tags .hero-secao{min-width:22px;padding:3px 5px;background:color-mix(in srgb,var(--tag-ink) 10%,var(--card));border-color:color-mix(in srgb,var(--tag-ink) 25%,var(--line));border-left-color:var(--tag-ink)}
+
+/* Utilitários de perfil: compactos, na mesma linha de Office e Sair. */
+#pv-ajustes[hidden]{display:none!important}
+.tu-profile-panel-actions>button:is([data-ap-refresh],[data-ap-ajustes]){box-sizing:border-box;justify-content:center;width:28px;height:28px;padding:0;flex:none}
+.tu-profile-panel-actions svg{flex:none}
+@media(max-width:340px){.tu-profile-panel-head{gap:4px;padding:8px 6px}.tu-profile-panel-actions{gap:3px}.tu-profile-panel-actions>a,.tu-profile-panel-actions>button{padding:4px}.tu-profile-panel-actions>a>span,.tu-profile-panel-actions>[data-ap-sair]>span{display:none}}
