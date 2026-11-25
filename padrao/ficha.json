@@ -271,11 +271,19 @@
       {
        "rotulo": "Contrarrazões",
        "chave": "Contrarrazões - Situação",
-       "tipo": "texto",
+       "tipo": "lista",
        "secao": "origem",
-       "calculado": true,
-       "regra": "apresentadas/nao/omitir → rótulo",
-       "apelido": "contrarrazoes_situacao"
+       "regra": "Registro expresso da situação; peças registradas devem ser conferidas; ausência de registro não significa ausência de contrarrazões. Valores históricos apresentadas/nao/omitir preservados.",
+       "apelido": "contrarrazoes_situacao",
+       "opcoes": [
+        "apresentadas",
+        "nao",
+        "Aguardando prazo",
+        "Vista a abrir",
+        "Não verificado",
+        "Não se aplica",
+        "omitir"
+       ]
       },
       {
        "rotulo": "Recursos",
