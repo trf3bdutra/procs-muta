@@ -750,7 +750,8 @@ var _camposTBase=camposT;camposT=function(raw,ctx){return _camposTBase(raw,ctx).
 /* valores: ficha do processo aberto (campos “seção.Campo” e, para os do acervo, “acervo.coluna”) e os valores que a peça e o caso já calculam */
 function dkValorFicha(v){if(v==null)return '';if(Array.isArray(v))return v.map(function(x){return x&&typeof x==='object'?Object.keys(x).map(function(z){return x[z];}).filter(Boolean).join(' · '):String(x);}).filter(Boolean).join('; ');return String(v);}
 var _xAutoCasoBase=xAutoCaso;xAutoCaso=function(){_xAutoCasoBase();
-  var P=window.CQX&&CQX.tem()?CQX.P():null,J=P?CQX.J():null,cp=(J&&String(J.processo||'').replace(/\D/g,'')===String(P.processo||'').replace(/\D/g,'')&&J.campos)||{};
+  var dados=(typeof MS!=='undefined'&&XS.ed==='mod'&&MS.fichaCaso&&String(MS.fichaCaso.P.processo||'').replace(/\D/g,'')===String(XD.proc||'').replace(/\D/g,''))?MS.fichaCaso:null;
+  var P=dados?dados.P:(window.CQX&&CQX.tem()?CQX.P():null),J=dados?dados.J:(P?CQX.J():null);if(P&&String(P.processo||'').replace(/\D/g,'')!==String(XD.proc||'').replace(/\D/g,'')){P=null;J=null;}var cp=(J&&String(J.processo||'').replace(/\D/g,'')===String(P.processo||'').replace(/\D/g,'')&&J.campos)||{};
   Object.keys(ARR).forEach(function(a){var c=ARR[a],v='';if(c.s==='*')return;delete AUTO['@'+a];
     if(c.s)v=cp[c.s+'.'+c.c];else{var fs=c.f||[],keys=[c.c].concat(fs);if(fs.length>1)keys.push(fs.join('.'));keys.some(function(n){v=cp['acervo.'+n];return v!=null&&v!=='';});}
     if(c.col){if(typeof v==='string'){try{v=JSON.parse(v);}catch(er){v=[];}}v=Array.isArray(v)?v.map(function(row){return row&&row[c.col];}).filter(function(x){return x!=null&&String(x).trim()!=='';}):[];}

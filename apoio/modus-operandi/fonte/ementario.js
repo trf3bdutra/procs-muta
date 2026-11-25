@@ -992,7 +992,7 @@ function rcColher(PT,get){
     return {pj:pt.pj,parte:parte,itens:itens};});
 }
 function rcEditorial(){var PT=(XP._PT||xPartes()).map(function(pt){return {pj:pt.pj||'',parte:pt.id==='ementa'?'ementa':pt.id,trs:pt.tr};});return rcColher(PT,{alt:XP.alt,abre:XP.abre,fora:XP.fora,auto:true,kp:function(t){return t.k;}});}
-function rcModelo(){var m=MS._m;var PT=(MS._P||[]).map(function(pt){return {pj:pt.pj,parte:pt.pj==='EMENTA'?'ementa':(pt.pj==='RELATÓRIO'?'relatorio':pt.pj==='ACÓRDÃO'?'acordao':'voto'),trs:pt.trs};});return rcColher(PT,{alt:MS.alt,abre:MS.abre,fora:MS.fora,kp:function(t){return m.id+'|'+t.k;}});}
+function rcModelo(){var m=MS._m;var PT=(MS._P||[]).map(function(pt){return {pj:pt.pj,parte:pt.pj==='EMENTA'?'ementa':(pt.pj==='RELATÓRIO'?'relatorio':pt.pj==='ACÓRDÃO'?'acordao':'voto'),trs:pt.trs};});return rcColher(PT,{alt:MS.alt,abre:MS.abre,fora:MS.fora,auto:true,kp:function(t){return m.id+'|'+t.k;}});}
 /* ===== Baixar .docx e PDF (mesma formatação da cópia: Arial 12, justificado, recuo 2,5 cm; ementa sem recuo; citação em bloco) ===== */
 var CRC_T=(function(){var t=[];for(var n=0;n<256;n++){var c=n;for(var k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;t[n]=c>>>0;}return t;})();
 function crc32(u){var c=0xFFFFFFFF;for(var i=0;i<u.length;i++)c=CRC_T[(c^u[i])&255]^(c>>>8);return (c^0xFFFFFFFF)>>>0;}
@@ -1764,14 +1764,17 @@ function mEmenta(m){
   if(cur&&cur.f.trim())bl(cur.n,cur.f);
   return out;}
 /* dados do caso na ficha do modelo: o processo preenche as variáveis ({{CLASSE}}, {{ASSUNTO}}, {{RAMO}}, {{polo ativo}}…) */
-function mCasoHtml(){var ac=XD.ac,info=ac?[ac[0],ac[1],[ac[2],ac[3]].filter(Boolean).join(' × ')].filter(Boolean).join(' · '):(XD.proc&&XD.naoAchou?'processo fora do acervo: variáveis do acervo ficam em aberto':'informe o processo para preencher as variáveis do caso');
+function mCasoHtml(){var ac=XD.ac,info=MS.fichaCaso&&MS.fichaCaso.P.processo===XD.proc?'Ficha processual vinculada':ac?[ac[0],ac[1],[ac[2],ac[3]].filter(Boolean).join(' × ')].filter(Boolean).join(' · '):(XD.proc&&XD.naoAchou?'processo fora do acervo: variáveis do acervo ficam em aberto':'informe o processo para preencher as variáveis do caso');
   return '<label class="m-caso"><span>Caso</span><input data-mproc placeholder="nº do processo" value="'+esc(XD.proc||'')+'" inputmode="numeric" aria-label="Número do processo do caso"><small>'+esc(info)+'</small></label>';}
-document.addEventListener('change',function(e){var t=e.target;if(!t.matches||!t.matches('[data-mproc]'))return;XD.proc=t.value.trim();XD.ac=null;XD.naoAchou=false;
-  var fim=function(){xRascunho();if(MS._m)mFolha(MS._m);};if(!XD.proc){fim();return;}
-  base().then(function(B){var n=xNumProc(XD.proc);XD.proc=n;XD.ac=(B.ac&&(B.ac[n]||B.ac[n.replace(/\D/g,"")]))||null;XD.naoAchou=!XD.ac;fim();}).catch(function(){XD.naoAchou=true;fim();});});
+document.addEventListener('change',function(e){var t=e.target;if(!t.matches||!t.matches('[data-mproc]'))return;XD.proc=xNumProc(t.value.trim());XD.ac=null;XD.naoAchou=false;MS.fichaCaso=null;XD.rec='';var n=XD.proc,token=MS._fichaTok=(MS._fichaTok||0)+1;
+  var atual=function(){return MS._fichaTok===token&&XD.proc===n&&XS.ed==='mod';};
+  var fim=function(){if(!atual())return;xRascunho();if(MS._m)mFolha(MS._m);};if(!n){fim();return;}
+  base().then(function(B){if(!atual())return;XD.ac=(B.ac&&(B.ac[n]||B.ac[n.replace(/\D/g,"")]))||null;XD.naoAchou=!XD.ac;fim();}).catch(function(){if(atual()){XD.naoAchou=true;fim();}});
+  if(window.CQX&&CQX.fichaModelo&&n.replace(/\D/g,'').length===20)CQX.fichaModelo(n).then(function(f){if(atual()&&f){MS.fichaCaso=f;fim();}}).catch(function(){});
+});
 document.addEventListener('keydown',function(e){if(e.key==='Enter'&&e.target.matches&&e.target.matches('[data-mproc]')){e.preventDefault();e.target.blur();}});
 function mFolha(m){
-  xAutoCaso();var PT=mPartes(m),tp=mTipo(m),h='';
+  AUTO={};xAutoCaso();var PT=mPartes(m),tp=mTipo(m),h='';
   PT.forEach(function(pt){var lastG=null;
     if(pt.pj)h+='<div class="xpj">'+pt.pj+' <small>(inserido pelo PJe)</small><button class="xpjc" data-mcpp="'+pt.pj+'" title="Copiar '+esc(pt.pj==='ACÓRDÃO'?'proclamação':pt.pj.toLowerCase())+', com a formatação do PJe" aria-label="Copiar '+esc(pt.pj==='ACÓRDÃO'?'proclamação':pt.pj.toLowerCase())+'"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></button></div>';
     pt.trs.forEach(function(t){
@@ -1803,7 +1806,7 @@ function mFolha(m){
   $('#e-out').innerHTML='<div class="mpag"><div class="mcen"><div class="xsheet">'+h+'</div></div><aside class="mfic" aria-label="Ficha do modelo">'+r+'</aside></div>';
   MS._P=PT;MS._m=m;
 }
-function mTexto(sk){var P=MS._P||[],m=MS._m;return P.map(function(pt){return (pt.pj?pt.pj+'\n\n':'')+pt.trs.filter(function(t){return (!t.opc||MS.abre[t.k])&&!xSai(t,pt.trs,MS.alt,MS.fora);}).map(function(t){var E=escolha(t,MS.alt),a=E.a;var rn=t.parte==='ementa'&&/^[IV]+\./.test(t.n);return sk?'['+t.n+']':(a&&a.f?(rn?t.n+'\n':'')+camposT(a.f,{k:m.id+'|'+t.k+'@'+E.key,i:0}):(rn?t.n:'['+t.n+']'));}).join('\n\n');}).join('\n\n');}
+function mTexto(sk){var P=MS._P||[],m=MS._m;return P.map(function(pt){return (pt.pj?pt.pj+'\n\n':'')+pt.trs.filter(function(t){return (!t.opc||MS.abre[t.k])&&!xSai(t,pt.trs,MS.alt,MS.fora);}).map(function(t){var E=escolha(t,MS.alt),a=E.a;var rn=t.parte==='ementa'&&/^[IV]+\./.test(t.n);return sk?'['+t.n+']':(a&&a.f?(rn?t.n+'\n':'')+camposT(a.f,{k:m.id+'|'+t.k+'@'+E.key,i:0,auto:true}):(rn?t.n:'['+t.n+']'));}).join('\n\n');}).join('\n\n');}
 $('#e-out').addEventListener('change',function(e){var s=e.target.closest('[data-rrass]');if(!s||EM.sub!=='mod')return;MS.refAss=s.value||null;mFolha(MS._m);});
 $('#e-aside').addEventListener('change',function(e){var s=e.target.closest('[data-mf]');if(!s||EM.sub!=='mod')return;MS[s.getAttribute('data-mf')]=s.value;MS.alt={};MS.abre={};mRender();});
 $('#e-aside').addEventListener('click',function(e){if(EM.sub!=='mod')return;var b;
