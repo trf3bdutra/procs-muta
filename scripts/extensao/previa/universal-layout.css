@@ -82,9 +82,9 @@ html[data-tema=escuro] .pv-universal-body{--pv-bg:#25282d;--pv-line:#444a52;--pv
 .pv-universal .pv-people.pv-ato-destino{grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid var(--pv-line);background:var(--pv-bg);padding:5px;gap:4px;margin:4px 0}.pv-universal .pv-people.pv-ato-destino .pv-person button,.pv-universal .pv-people.pv-ato-destino .pv-value{font-size:11px;font-weight:600}.pv-universal .pv-stage-situacao{padding-top:6px;margin-top:5px!important}.pv-universal .pv-enc-summary{margin:4px 0;font-size:10px}.pv-universal .pm-aut{background:transparent;border-top:1px solid var(--pv-line);border-radius:0;margin:4px 0}.pv-universal .pm-aut>summary{border:0;justify-content:space-between;padding:6px 2px}.pv-universal .pm-aut[open]{padding:0 2px 6px}.pv-universal .pm-aut-t{color:var(--pv-ink);font-size:10px}.pv-universal .proc-notas-inline{border-color:var(--pv-line)!important;border-radius:6px}.pv-universal-body .pv-nav-row button[aria-selected=true]{background:var(--pv-bg);color:var(--pv-ink);border-color:var(--pv-line)}
 
 /* Revisão integrada da prévia: #gab é o prontuário em uso; #prontuario-app é legado oculto. */
-.pv-universal-body #gab:has(.pv2-fields){min-width:0;gap:7px}
-#gab:has(.pv2-fields) .pc.pm{background:var(--soft)!important;padding:10px!important;border:1px solid var(--line)!important;border-radius:8px!important;margin:0!important;box-shadow:none!important}
-#gab:has(.pv2-fields) .hero-top-pages{min-height:0}
+.pv-universal-body #gab.pv2-enhanced{min-width:0;gap:7px}
+#gab.pv2-enhanced .pc.pm{background:var(--soft)!important;padding:10px!important;border:1px solid var(--line)!important;border-radius:8px!important;margin:0!important;box-shadow:none!important}
+#gab.pv2-enhanced .hero-top-pages{min-height:0}
 #gab .pv2-fixed-id{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:5px 0 9px!important}
 #gab .pv2-fixed-id .pc-cnj{font-size:13px;font-weight:700;line-height:1.4;overflow-wrap:anywhere}
 #gab .pv2-fixed-id .hero-proc-tags{display:flex;align-items:flex-start;flex-wrap:wrap;gap:4px;min-width:0;flex:1 1 100%}
@@ -95,14 +95,14 @@ html[data-tema=escuro] .pv-universal-body{--pv-bg:#25282d;--pv-line:#444a52;--pv
 #gab .pv2-fixed-id .rt-kind-main{display:flex;flex-wrap:wrap;align-items:baseline;gap:3px 5px}
 #gab .pv2-fixed-id .rt-kind-label{font-size:9px}
 #gab .pv2-fixed-id .rt-kind-main b{font-size:11px}
-#gab:has(.pv2-fields) .hero-main-tabs{padding:3px;border:1px solid var(--line);border-radius:7px;background:var(--soft);gap:2px}
-#gab:has(.pv2-fields) .hero-main-tabs>button{min-height:32px;padding:4px 2px;border-radius:5px}
-#gab:has(.pv2-fields) .hero-main-tabs>button[aria-selected=true]{background:var(--card);color:var(--fg);box-shadow:0 1px 2px #00000012}
-#gab:has(.pv2-fields) .gbody .gg{margin:0 0 5px;border-radius:7px;box-shadow:none;min-width:0}
-#gab:has(.pv2-fields) .gbody .gg>summary{padding:7px 9px;min-height:30px}
-#gab:has(.pv2-fields) .gbody .gr{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
-#gab:has(.pv2-fields) .hero-designacoes{gap:5px}
-#gab:has(.pv2-fields) .hero-design-cell select{min-height:28px}
+#gab.pv2-enhanced .hero-main-tabs{padding:3px;border:1px solid var(--line);border-radius:7px;background:var(--soft);gap:2px}
+#gab.pv2-enhanced .hero-main-tabs>button{min-height:32px;padding:4px 2px;border-radius:5px}
+#gab.pv2-enhanced .hero-main-tabs>button[aria-selected=true]{background:var(--card);color:var(--fg);box-shadow:0 1px 2px #00000012}
+#gab.pv2-enhanced .gbody .gg{margin:0 0 5px;border-radius:7px;box-shadow:none;min-width:0}
+#gab.pv2-enhanced .gbody .gg>summary{padding:7px 9px;min-height:30px}
+#gab.pv2-enhanced .gbody .gr{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+#gab.pv2-enhanced .hero-designacoes{gap:5px}
+#gab.pv2-enhanced .hero-design-cell select{min-height:28px}
 #gab .pv2-index{display:grid;gap:7px;margin:8px 0 12px;padding:9px;border:1px solid var(--line);border-radius:7px;background:var(--card);min-width:0}
 #gab .pv2-head{display:flex;align-items:center;justify-content:space-between;gap:5px;flex-wrap:wrap;min-width:0}
 #gab .pv2-head>b{font-size:12px}
@@ -129,4 +129,54 @@ html[data-tema=escuro] .pv-universal-body{--pv-bg:#25282d;--pv-line:#444a52;--pv
 #gab .pv2-fields .pv2-inventory{display:grid;gap:7px;padding:8px}
 #gab .pv2-fields .gr{padding:4px 0}
 #gab :is(.pv2-index,.pv2-fields) :is(button,summary,input,textarea,select):focus-visible{outline:2px solid var(--primary);outline-offset:2px}
-@media(max-width:380px){#gab:has(.pv2-fields) .hero-designacoes{grid-template-columns:repeat(2,minmax(0,1fr))}#gab:has(.pv2-fields) .hero-pauta-resumo>.hero-pauta-linha{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:380px){#gab.pv2-enhanced .hero-designacoes{grid-template-columns:repeat(2,minmax(0,1fr))}#gab.pv2-enhanced .hero-pauta-resumo>.hero-pauta-linha{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* Revisão do cartão superior e solicitações · apenas Prontuário Universal. */
+#gab.pv2-enhanced .pv3-face-nav{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:3px;padding:3px;margin:0 0 8px;border:1px solid var(--line);border-radius:6px;background:var(--soft)}
+#gab.pv2-enhanced .pv3-face-nav button{font:inherit;font-size:10.5px;border:0;border-radius:4px;padding:6px 2px;color:inherit;background:transparent;cursor:pointer;min-width:0}
+#gab.pv2-enhanced .pv3-face-nav button[aria-pressed=true]{background:var(--card);font-weight:700;box-shadow:0 1px 2px #0002}
+#gab.pv2-enhanced .hero-top-page[hidden],#gab.pv2-enhanced [data-sol-estado][hidden]{display:none!important}
+#gab.pv2-enhanced .pv2-ficha-face{padding:4px 0;min-width:0}
+#gab.pv2-enhanced .pv2-fields{padding:8px;border:1px solid var(--line);border-radius:6px;background:var(--card)}
+#gab.pv2-enhanced .pv2-inventory{padding:6px 0 0}
+#gab.pv2-enhanced .pv3-field-group>.pm-mer-h{margin:8px 0 3px;font-size:10px}
+#gab.pv2-enhanced .pv3-field-group>.gr{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));padding:4px 0;gap:7px}
+#gab.pv2-enhanced .pv3-field-group .gf{min-width:0;overflow-wrap:anywhere}
+#gab.pv2-enhanced .pv3-field-group .gf.w{grid-column:1/-1}
+#gab.pv2-enhanced .hero-ann-unified{background:var(--card)!important;border:1px solid var(--line)!important;border-radius:7px!important;padding:9px!important}
+#gab.pv2-enhanced .hero-ann-unified .hero-ann-card{padding:7px 0!important}
+#gab.pv2-enhanced .hero-ann-unified .hero-ann-head{display:flex!important;justify-content:space-between!important;align-items:center;gap:5px;margin:0 0 5px!important}
+#gab.pv2-enhanced .hero-ann-unified .hero-ann-tools{display:flex!important;gap:3px}
+#gab.pv2-enhanced .hero-ann-unified .hero-note-tag{font-size:10px;font-weight:650;text-transform:none;letter-spacing:0;border:0;background:none;padding:0;white-space:normal}
+#gab.pv2-enhanced .hero-ann-unified .hero-ann-text{font-size:12px;line-height:1.5}
+#gab.pv2-enhanced .hero-ann-unified .hero-ann-detail-featured{border-left:2px solid var(--line)!important;padding-left:8px!important}
+#gab.pv2-enhanced .hero-ann-unified .hero-ann-action{min-height:23px;padding:2px 4px;line-height:1.2}
+#gab.pv2-enhanced .hero-ann-unified .hero-detail-footer{display:flex;justify-content:space-between;gap:6px;border-top:1px solid var(--line);padding-top:5px;margin-top:6px}
+#gab.pv2-enhanced .hero-ann-unified .hero-detail-footer>.hero-ann-action{display:inline-flex!important;font-size:11px}
+#gab.pv2-enhanced .hero-ann-unified .hero-ann-icon-toggle{display:flex!important;align-items:center;gap:5px;font-size:11px;margin:0;padding:3px}
+#gab.pv2-enhanced .hero-ann-unified .hero-ann-chevron{order:2}
+#gab.pv2-enhanced .hero-ann-unified .hero-ann-panel[hidden]{display:none!important}
+#gab.pv2-enhanced .hero-ann-unified .hero-ann-panel{padding:5px 0 0!important}
+#gab.pv2-enhanced .pv3-q-highlight{margin-top:6px;padding:8px;border:1px solid var(--line);border-radius:6px;background:var(--card)}
+#gab.pv2-enhanced .pv3-q-head{display:flex;justify-content:space-between;align-items:center;gap:5px;font-size:11px}
+#gab.pv2-enhanced .pv3-q-highlight .hero-q-tags{display:grid;gap:4px}
+#gab.pv2-enhanced .pv3-q-highlight .hero-q-tag{display:block;white-space:normal;overflow-wrap:anywhere;line-height:1.4;font-size:11px;background:transparent;border:0;border-left:2px solid var(--line);border-radius:0;padding:3px 6px}
+#gab.pv2-enhanced .pv3-solicitacoes{display:grid;gap:6px;padding:0}
+#gab.pv2-enhanced .pv3-solicitacoes .hero-sol-head{margin:0}
+#gab.pv2-enhanced .pv3-sol-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid var(--line);background:var(--card);border-radius:7px}
+#gab.pv2-enhanced .pv3-sol-stat{display:grid;gap:3px;text-align:center;padding:8px 3px;border-right:1px solid var(--line)}
+#gab.pv2-enhanced .pv3-sol-stat:last-child{border:0}
+#gab.pv2-enhanced .pv3-sol-stat b{font-size:18px;line-height:1.1;font-variant-numeric:tabular-nums}
+#gab.pv2-enhanced .pv3-sol-stat small,#gab.pv2-enhanced .pv3-sol-caption{font-size:10px}
+#gab.pv2-enhanced .pv3-solicitacoes .hero-sol-nav{gap:4px;margin:3px 0}
+#gab.pv2-enhanced .pv3-solicitacoes .hero-sol-type{padding:6px 7px;font-size:11px}
+#gab.pv2-enhanced .pv3-sol-count{margin-left:4px;font-size:10px;opacity:.75}
+#gab.pv2-enhanced .pv3-sol-filter{width:100%;font:inherit;font-size:11px;padding:5px;min-width:0}
+#gab.pv2-enhanced .pv3-solicitacoes .hero-sol-panels{display:grid;gap:6px}
+#gab.pv2-enhanced .pv3-solicitacoes .hero-sol-panel{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:8px;min-width:0}
+#gab.pv2-enhanced .pv3-sol-category{margin:0 0 6px;font-size:11px;font-weight:650}
+#gab.pv2-enhanced .pv3-solicitacoes .hero-sol-item{padding:8px 0;font-size:12px}
+#gab.pv2-enhanced .pv3-solicitacoes .hero-sol-desc{line-height:1.45}
+#gab.pv2-enhanced .pv3-solicitacoes .hero-sol-item small{font-size:10px}
+#gab.pv2-enhanced .pv3-solicitacoes .hero-sol-form{padding:9px;background:var(--card);border:1px solid var(--line);border-radius:7px;margin:0}
+#gab.pv2-enhanced .pv3-solicitacoes .hero-sol-form textarea{resize:vertical;min-height:65px}
