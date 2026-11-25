@@ -75,7 +75,7 @@ test('Barra do Amicus Curiae: CORTEX e Compendium com a mesma barra, sem citar u
 test('Portal Amicus: visão geral dentro do cabeçalho e duas colunas laterais',()=>{
  const home=read('apoio/amicus/index.html'), shared=read('apoio/amicus/header.py');
  const hd=home.match(/<header class="am-home-header">([\s\S]*?)<\/header>/);assert.ok(hd);
- assert.match(hd[1],/am-over-head am-home-overview/);assert.match(hd[1],/am-over-nav am-home-overview/);
+ assert.doesNotMatch(hd[1],/am-over-head|Visão geral|Triagem, organização e apoio à elaboração/);assert.match(hd[1],/am-over-nav am-home-overview/);assert.match(home,/\.am-home-header>\.am-over-nav\{grid-column:2;grid-row:1;/);for(const id of ['ferramentas','referencias-juridicas','referencias-operacionais'])assert.ok(hd[1].includes('href="#'+id+'"'));
  assert.match(home,/<aside class="am-rail am-apps"/);assert.match(home,/<aside class="am-rail am-refs"/);
  for(const id of ['jurisprudencia','enunciados','regimento','fluxos','competencia','impedimentos']){
   assert.equal((home.match(new RegExp('id="'+id+'"','g'))||[]).length,1,id);
