@@ -47,7 +47,9 @@ test('Ementário: sintaxe e quatro abas no painel, com suporte a ocultação',()
   m.tabs[1].onkeydown({key:'ArrowRight',preventDefault(){}});assert.equal(m.ctx.E.detAba,'correspondencias');
   m.ctx.abrirIT(m.x);assert.match(m.html(),/data-ppaba="correspondencias"[^>]+aria-selected="true"/);
   m.ctx.abrirIT(m.y);assert.equal(m.ctx.E.detAba,'julgado');
+  assert.match(m.html(),/<details class="pp-process-strip"><summary[\s\S]*?data-dcnj[\s\S]*?data-dcit[\s\S]*?data-dem[\s\S]*?data-dit[\s\S]*?data-ddocx[\s\S]*?data-dpdf[\s\S]*?<\/details>/);
   m.buttons.get('[data-dem]').onclick();assert.equal(m.copias[0],'Ementa X');
+  m.buttons.get('[data-dcnj]').onclick();assert.equal(m.copias[1],m.y.n);
 });
 test('Collegium: proveniência separada, assinatura e excerto sem afirmar inteiro teor',()=>{
   const m=montar(true);
