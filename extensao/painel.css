@@ -1629,3 +1629,19 @@ html[data-tema=escuro] .rt-tipos .rt-kind-option{border-color:var(--line)}
 #gab .hero-minuta-ref .ro{overflow-wrap:anywhere;white-space:normal}
 #gab .hero-minuta-questoes{margin:3px 0 7px;padding-left:19px;font-size:12px;line-height:1.4}
 #gab .hero-minuta-roteiro [data-minuta-autos],#gab .hero-minuta-roteiro [data-minuta-caso]{margin-top:4px}
+
+/* Perfil de sessão: acesso ao Office e saída no mesmo menu. */
+.tu-profile{position:relative;flex:0 1 auto;min-width:0;z-index:30}
+.tu-profile-trigger{cursor:pointer;list-style:none;min-width:0;max-width:100%;padding:3px 4px;border-radius:5px;display:flex!important;align-items:center;gap:5px}
+.tu-profile-trigger::-webkit-details-marker{display:none}
+.tu-profile-trigger::marker{content:""}
+.tu-profile-trigger:hover,.tu-profile[open]>.tu-profile-trigger{background:var(--card2)}
+.tu-profile-trigger .tu-av,.tu-profile-trigger svg{flex:none}
+.tu-profile-name{min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.tu-profile-menu{position:absolute;top:calc(100% + 5px);left:0;min-width:155px;max-width:calc(100vw - 20px);padding:4px;background:var(--card);color:var(--fg);border:1px solid var(--line);border-radius:7px;box-shadow:0 5px 16px #0002;z-index:100}
+.tu-profile:not([open])>.tu-profile-menu{display:none}
+.tu-profile-menu>a,.tu-profile-menu>button{display:flex;align-items:center;gap:8px;width:100%;box-sizing:border-box;padding:8px 7px;text-align:left;text-decoration:none;color:inherit;font:inherit;border:0;border-radius:4px;background:transparent;cursor:pointer}
+.tu-profile-menu>a:hover,.tu-profile-menu>button:hover{background:var(--card2)}
+.tu-profile-menu svg{flex:none;color:var(--muted-fg)}
+.tu-profile-menu>button[data-sair]{border-top:1px solid var(--line);border-radius:0 0 4px 4px}
+.tu-profile-trigger:focus-visible,.tu-profile-menu :focus-visible{outline:2px solid currentColor;outline-offset:2px}

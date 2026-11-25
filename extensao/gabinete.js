@@ -441,16 +441,18 @@ function faixaUsuario(s) {
   t0.hidden = false;
   var on = s && s.estado === 'on';
   var q = function (attr, tit, svg) { return '<button type="button" class="tu-b" ' + attr + ' title="' + tit + '" aria-label="' + tit + '">' + SV(svg, 14) + '</button>'; };
-  t.innerHTML = (on ? '<a class="tu-n tu-profile-office" target="_blank" rel="noopener noreferrer" href="' + SITE + '/exofficio/" title="Abrir meu Office" aria-label="Abrir Office de ' + esc(s.usuario) + '"><i class="tu-av">' + esc(iniciais(s.usuario)) + '</i><span class="tu-profile-name">' + esc(s.usuario) + '</span><span class="tu-profile-link" aria-hidden="true">' + SV('<path d="M14 4h6v6M20 4 10 14M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5"/>', 12) + '</span></a>' : '<span class="tu-n muted">HERO18810</span>') + '<span class="tu-pje" id="tu-pje-slot"></span>' +
+  t.innerHTML = (on ? '<details class="tu-profile" id="tu-profile"><summary class="tu-n tu-profile-trigger" aria-label="Perfil de ' + esc(s.usuario) + '"><i class="tu-av">' + esc(iniciais(s.usuario)) + '</i><span class="tu-profile-name">' + esc(s.usuario) + '</span>' + SV('<path d="m6 9 6 6 6-6"/>', 11) + '</summary><div class="tu-profile-menu"><a target="_blank" rel="noopener noreferrer" href="' + SITE + '/exofficio/">' + SV('<path d="M14 4h6v6M20 4 10 14M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5"/>', 14) + '<span>Abrir Office</span></a><button type="button" data-sair>' + SV('<path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3M10 17l-5-5 5-5M5 12h11"/>', 14) + '<span>Sair da conta</span></button></div></details>' : '<span class="tu-n muted">HERO18810</span>') + '<span class="tu-pje" id="tu-pje-slot"></span>' +
     (on && G.cnj ? q('data-g="atualizar"', 'Atualizar o prontuário', '<path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 4v7h-7"/>') : '') +
 
     (on && s.gestor && !$('pv-ajustes') ? '<button type="button" class="tu-b" data-tu-ctl title="Controle: prazos e etiquetas" aria-label="Controle: prazos e etiquetas">' + SV('<path d="M5 7h14M5 12h14M5 17h14"/><circle cx="9" cy="7" r="1.8"/><circle cx="15" cy="12" r="1.8"/><circle cx="8" cy="17" r="1.8"/>', 14) + '</button>' : '') +
-    q('data-tema-tu', 'Tema claro ou escuro', '<path d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9z"/>') +
-    (on ? q('data-sair', 'Sair', '<path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3"/><path d="M10 17l-5-5 5-5M5 12h11"/>') : '');
+    q('data-tema-tu', 'Tema claro ou escuro', '<path d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9z"/>');
   var sl = $('tu-pje-slot'); if (sl && pb) { if (!PJE_CASA) { PJE_CASA = document.createComment('pje-bar'); pb.parentNode.insertBefore(PJE_CASA, pb); } sl.appendChild(pb); }
 }
-(function () { var t = $('topo-u'); if (!t) return; t.addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b) return;
-  if (b.hasAttribute('data-sair')) { gravarJa().catch(function () {}).then(function () { ses.sair(); }); }
+(function () { var t = $('topo-u'); if (!t) return;
+  document.addEventListener('click',function(e){var p=$('tu-profile');if(p&&p.open&&!p.contains(e.target))p.open=false;});
+  document.addEventListener('keydown',function(e){var p=$('tu-profile');if(e.key==='Escape'&&p&&p.open){p.open=false;var s=p.querySelector('summary');if(s)s.focus();}});
+  t.addEventListener('click', function (e) { var p=$('tu-profile');if(p&&e.target.closest('.tu-profile-menu a'))p.open=false;var b = e.target.closest('button'); if (!b) return;
+  if (b.hasAttribute('data-sair')) { if(p)p.open=false;gravarJa().catch(function () {}).then(function () { ses.sair(); }); }
   else if (b.dataset.g === 'atualizar') { gravarJa().catch(function () {}).then(function () { carregar(true); }); }
   else if (b.hasAttribute('data-tu-ctl')) { var u=ses.estado(); if(u.estado==='on'&&u.gestor&&window.MutaAbas)window.MutaAbas.ir('ctl'); }
   else if (b.hasAttribute('data-tema-tu')) { var tb = $('pje-tema'); if (tb) tb.click(); } }); })();
@@ -1500,7 +1502,7 @@ function render0() {
   var s = ses.estado();
   if (s.estado === 'verificando') { caixa.innerHTML = '<div class="empty">Verificando a sessão do Ex Officio…</div>'; return; }
   if (s.estado !== 'on') { ses.formulario(caixa, 'Entrar para ver o prontuário do processo'); return; }
-  if (!G.cnj) { caixa.innerHTML = '<div class="empty"><h3>Nenhum processo aberto</h3>Abra os autos ou a tarefa no PJe, ou escolha um processo na lista acima.<div class="pc-u"><span>' + esc(s.usuario) + (s.gestor ? ' · gestor' : '') + '</span><button type="button" class="lnk" data-sair>Sair</button></div></div>'; return; }
+  if (!G.cnj) { caixa.innerHTML = '<div class="empty"><h3>Nenhum processo aberto</h3>Abra os autos ou a tarefa no PJe, ou escolha um processo na lista acima.</div>'; return; }
   var st0 = '<p class="status" id="g-st" role="status" aria-live="polite"></p>';
   if (G.carregando) { caixa.innerHTML = '<div class="pc"><div class="pc-n"><span class="mono pc-cnj">' + esc(G.cnj) + '</span></div></div><div class="empty">Lendo o prontuário do processo…</div>' + st0; stEl = $('g-st'); return; }
   if (G.erro) { caixa.innerHTML = '<div class="pc"><div class="pc-n"><span class="mono pc-cnj">' + esc(G.cnj) + '</span><span class="sp"></span><button type="button" class="lnk" data-g="atualizar">Atualizar</button></div></div><div class="err-box">Não foi possível ler o prontuário: ' + esc(G.erro) + '</div>' + st0; stEl = $('g-st'); return; }
