@@ -79,12 +79,23 @@ test('painel: abre o processo com sigla, etapas, roteiros e notas; sem erro de s
     await pg.waitForSelector('#pv-julgamento', { timeout: 15000 });
     assert.ok((await botoes(pg)).includes('Desprovido'), 'resultado de recurso na seção Solução');
     assert.equal(await pg.$$eval('.gbody [data-fk="producao.Destino"]', L=>L.length),0,'destino não se repete no roteiro');
-    /* Pauta: processo em tela com o pedido de sustentação e a lista da sessão com a sigla */
+    /* O pedido do processo fica na aba Solicitações da ficha; os pedidos da sessão na subaba Solicitações da Pauta. */
+    await pg.click('.hero-main-tabs [data-rot="sol"]');
+    await pg.getByRole('button', { name: 'Sustentação oral', exact: true }).click();
+    await pg.waitForSelector('#hero-sol-main .hero-pauta-pedidos .pa-ped', { timeout: 15000 });
+    assert.match(await pg.textContent('#hero-sol-main .hero-pauta-pedidos .pa-ped'), /Sustentação presencial.*Fulana/s);
     await pg.evaluate(() => window.MutaAbas.ir('pauta'));
     await pg.waitForSelector('.pa-it', { timeout: 15000 });
-    assert.ok(await pg.$('.pa-soc .pa-ped'), 'card do pedido de sustentação no processo em tela');
-    assert.match(await pg.textContent('.pa-pses summary'), /1 sustentação/);
     assert.equal(await pg.textContent('.pa-it .pa-cl'), 'ApCiv');
+    assert.match(await pg.textContent('.pa-it .pa-al'), /Sustentação/);
+    await pg.click('[data-pa="aba:sol"]');
+    await pg.waitForSelector('#pauta-app .pa-ped', { timeout: 15000 });
+    assert.match(await pg.textContent('#pauta-app .pa-sol-resumo'), /1 externas/);
+    const pedido = await pg.textContent('#pauta-app .pa-ped');
+    assert.match(pedido, /Sustentação presencial/);
+    assert.match(pedido, /item 3/);
+    assert.ok(pedido.includes(CNJ) && pedido.includes('Fulana'), 'pedido identificado e vinculado à sessão');
+    assert.deepEqual(P.erros, [], 'sem erro de script');
   } finally { await P.fim(); }
 });
 
