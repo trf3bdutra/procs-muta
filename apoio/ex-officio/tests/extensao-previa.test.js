@@ -36,7 +36,7 @@ test('prévia universal mantém todas as abas e ambos os roteiros originais', ()
     const html = fs.readFileSync(path.join(pn, 'universal.html'), 'utf8');
     const old = fs.readFileSync(path.join(pn, 'painel.html'), 'utf8');
     const scripts = s => [...s.matchAll(/<script src="([^"]+)"/g)].map(m => m[1]);
-    assert.deepEqual(scripts(html),scripts(old).map(s=>s==='gabinete.js'?'gabinete-universal.js':s==='roteiro.js'?'roteiro-universal.js':s));
+    assert.deepEqual(scripts(html),scripts(old).map(s=>s==='gabinete.js'?'gabinete-universal.js':s==='roteiro.js'?'roteiro-universal.js':s).concat('universal-ajustes.js'));
     assert.match(html, /src="roteiro-universal.js"/);
     assert.match(html, /src="gerador.js"/);
     assert.match(html, /src="ementario.js"/);
@@ -59,8 +59,12 @@ test('navegador universal: utilidades, ferramentas do gabinete, processo em tela
     const old=fs.readFileSync(path.join(saida,'painel','painel.html'),'utf8');
     const ids=s=>[...s.matchAll(/id="tab-([^"]+)"/g)].map(m=>m[1]).sort();
     assert.deepEqual(ids(html),ids(old));
-    assert.ok(html.indexOf('id="topo-u"')<html.indexOf('id="pv-nav-tools"'));
-    assert.ok(html.indexOf('id="pv-nav-tools"')<html.indexOf('id="pv-nav-case"'));
+    assert.ok(html.indexOf('id="topo-u"')<html.indexOf('id="pv-nav-main"'));
+    assert.ok(html.indexOf('id="pv-ajustes"')<html.indexOf('id="pv-nav-main"'));
+    assert.doesNotMatch(html,/id="pv-nav-(tools|case)"/);
+    assert.doesNotMatch(old,/id="pv-ajustes"/);
+    assert.ok(fs.existsSync(path.join(saida,'painel','universal-ajustes.js')));
+    new Function(fs.readFileSync(path.join(saida,'painel','universal-ajustes.js'),'utf8'));
     assert.ok(html.indexOf('id="tab-acervo"')<html.indexOf('id="tab-pront"'));
     assert.ok(html.indexOf('id="tab-del"')<html.indexOf('id="tab-pront"'));
     assert.match(html,/<b>Minutário /);
@@ -205,4 +209,23 @@ test('universal: encaminhamento editável na triagem e espelhado no cartão',()=
  const a=s.indexOf('var operationalFields='),z=s.indexOf('var prodBase=camposCaso;',a);
  assert.match(s.slice(a,z),/'triagem.Seleção Prévia'/);
  new Function(s);
+});
+
+
+function testarAjustes(src){
+ const nodes={},prefs={tema:'escuro',auto:true};
+ function el(id){return nodes[id]||(nodes[id]={id,checked:false,value:'',disabled:false,open:false,events:{},setAttribute(){},addEventListener(k,f){this.events[k]=f},click(){this.checked=!this.checked;if(this.events.click)this.events.click();if(this.events.change)this.events.change()},focus(){this.focused=true},showModal(){this.open=true},close(){this.open=false;if(this.events.close)this.events.close()}});}
+ const doc={getElementById:el,createElement(){return el('pv-ajustes-dialog')},body:{appendChild(){},classList:{add(){}}},documentElement:{dataset:{}},querySelectorAll(){return []},addEventListener(){}};
+ el('pje-seguir').checked=true;el('pje-aba').checked=true;el('pje-tema').click=()=>{prefs.tema=prefs.tema==='escuro'?'claro':'escuro'};
+ new Function('document','window',src)(doc,{MutaTema:{atual:()=>prefs.tema},MutaAutos:{autoLigado:()=>prefs.auto,autoLigar:v=>{prefs.auto=v}}});
+ return {el,prefs};
+}
+
+test('diálogo Ajustes controla preferências reais e conserva os controles originais',()=>{
+ const src=fs.readFileSync(path.join(ROOT,'scripts/extensao/previa/universal-ajustes.js'),'utf8'),h=testarAjustes(src),e=h.el;
+ e('pv-ajustes').events.click();assert.equal(e('pv-ajustes-dialog').open,true);assert.equal(e('pv-ajustes-seguir').checked,true);
+ e('pv-ajustes-seguir').checked=false;e('pv-ajustes-seguir').events.change();assert.equal(e('pje-seguir').checked,false);assert.equal(e('pv-ajustes-aba').disabled,true);
+ e('pv-ajustes-tema').value='claro';e('pv-ajustes-tema').events.change();assert.equal(h.prefs.tema,'claro');
+ e('pv-ajustes-auto').checked=false;e('pv-ajustes-auto').events.change();assert.equal(h.prefs.auto,false);
+ e('pv-ajustes-ok').events.click();assert.equal(e('pv-ajustes-dialog').open,false);assert.equal(e('pv-ajustes').focused,true);
 });

@@ -79,15 +79,17 @@ def montar(saida: pathlib.Path) -> None:
     if not all(k in itens for k in ferramentas + processo):
         sys.exit('painel.html: abas principais da prévia não encontradas')
     itens['min'] = itens['min'].replace('<b>Minuta ', '<b>Minutário ', 1).replace('Editor × padrão', 'Elaboração e revisão', 1)
-    def grupo(id, titulo, chaves):
-        return ('<div class="pv-nav-group" role="group" aria-label="' + titulo + '" id="' + id + '">'
-                '<span class="pv-nav-label">' + titulo + '</span><div class="pv-nav-row">' +
-                ''.join(itens[k] for k in chaves) + '</div></div>')
-    resto = ''.join(v for k, v in itens.items() if k not in ferramentas + processo)
-    conteudo = grupo('pv-nav-tools', 'Ferramentas do gabinete', ferramentas) + grupo('pv-nav-case', 'Processo em tela', processo) + resto
+    # Uma faixa de abas. A ordem mantém as ferramentas do gabinete antes das abas do processo.
+    ordem = ferramentas + processo
+    resto = ''.join(v for k, v in itens.items() if k not in ordem)
+    conteudo = '<div class="pv-nav-row" id="pv-nav-main">' + ''.join(itens[k] for k in ordem) + '</div>' + resto
     universal = universal[:nav.start()] + nav.group(1) + conteudo + nav.group(3) + universal[nav.end():]
     universal = universal.replace('<div class="nav-label">PRODUÇÃO</div>', '', 1)
     universal = universal.replace('aria-label="Parte da aba Minuta"', 'aria-label="Parte do Minutário"', 1)
+    # Ajustes independentes do HTML reconstruído por faixaUsuario().
+    universal = universal.replace('<span class="tu-st" id="tu-st"', '<button type="button" id="pv-ajustes" class="tu-b" title="Ajustes" aria-label="Ajustes" aria-haspopup="dialog" aria-controls="pv-ajustes-dialog"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3M4.9 4.9 7 7m10 10 2.1 2.1M4.9 19.1 7 17m10-10 2.1-2.1"/><circle cx="12" cy="12" r="7"/></svg></button><span class="tu-st" id="tu-st"', 1)
+    universal = universal.replace('</body>', '<script src="universal-ajustes.js"></script>\n</body>', 1)
+    shutil.copy2(AQUI / 'universal-ajustes.js', painel / 'universal-ajustes.js')
     (painel / 'universal.html').write_text(universal, encoding='utf-8')
     for antigo in ('universal.html', 'universal-ficha.json'):
         (saida / antigo).unlink(missing_ok=True)
