@@ -22,7 +22,7 @@ var FONTES = [['matriz', 'Minuta-matriz'], ['lote', 'CORTEX'], ['modelo', 'Model
 /* tipo de pronunciamento: os mesmos rótulos do banco de modelos e das minutas-matriz */
 var PRONS = [['Voto', 'Acórdão (voto)'], ['Decisão monocrática terminativa', 'Decisão monocrática'], ['Decisão interlocutória', 'Decisão interlocutória'], ['Despacho', 'Despacho']];
 var PARTES = [['tudo', 'Tudo'], ['relatorio', 'Relatório'], ['voto', 'Voto'], ['ementa', 'Ementa'], ['acordao', 'Acórdão']];
-var C = { pron: '', pronAuto: '', pronChave: '', edAberto: document.body.classList.contains('hero-redesign-v53'), estrutura: true, fonte: 'modelo', sel: {}, parteEd: 'tudo', parteFonte: 'inteira', ws: true, sd: true, q: '', ref: '', lotes: null, loteErro: '', loteChave: '', ement: {}, tri: null, triErro: '', triChave: '', dados: null, dadosErro: '', ranking: null, rankTxt: '' };
+var C = { pron: '', pronAuto: '', pronChave: '', edAberto: !!(typeof document!=='undefined'&&document.body&&document.body.classList.contains('hero-redesign-v53')), estrutura: true, fonte: 'modelo', sel: {}, parteEd: 'tudo', parteFonte: 'inteira', ws: true, sd: true, q: '', ref: '', lotes: null, loteErro: '', loteChave: '', ement: {}, tri: null, triErro: '', triChave: '', dados: null, dadosErro: '', ranking: null, rankTxt: '' };
 try { var g = JSON.parse(localStorage.getItem('muta-pje:comparar') || '{}'); ['parteEd', 'ws', 'sd', 'edAberto'].forEach(function (k) { if (g[k] != null) C[k] = g[k]; }); } catch (e) {}
 function guarda() { try { localStorage.setItem('muta-pje:comparar', JSON.stringify({ parteEd: C.parteEd, ws: C.ws, sd: C.sd, edAberto: C.edAberto })); } catch (e) {} }
 function aberta() { var p = $('panel-min'); return p && !p.hidden; }
@@ -52,7 +52,7 @@ var FORA_CMP = { lote: 1, tri: 1, par: 1 };
 function fontes() { var ok = eh2886(); if (FORA_CMP[C.fonte] || C.fonte === 'm2886') C.fonte = 'modelo'; return FONTES.filter(function (f) { return !FORA_CMP[f[0]] && f[0] !== 'm2886'; }); }
 function processo() {
   var k = chave();
-  if (k !== C.pronChave) { C.pronChave = k; C.pron = ''; C.fonte = 'modelo'; C.sel = {}; C.q = ''; }
+  if (k !== C.pronChave) { C.pronChave = k; C.pron = ''; C.fonte = 'modelo'; C.sel = {}; C.q = ''; C.ref=''; C.parteFonte='inteira'; ULT=null; }
   C.pronAuto = pronSugerido();
   return C.pron || C.pronAuto;
 }
@@ -90,7 +90,7 @@ function editorCaixa(E, n, P) {
   var hora = E.em ? new Date(E.em).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }) : '';
   var ps = (E.paragrafos || []).map(function (p) { return p.t; }).filter(Boolean);
   return '<section class="mn-ed card" data-aberto="' + (C.edAberto ? '1' : '0') + '">' +
-    '<div class="mn-ed-h"><button type="button" class="mn-tg" data-c="edtg" aria-expanded="' + C.edAberto + '"><b>Texto do editor</b><span class="muted">' + (E.lendo ? 'lendo…' : E.texto ? esc(E.fonte || 'editor') + (hora ? ' · ' + hora : '') : 'ainda não lido') + '</span></button>' +
+    '<div class="mn-ed-h"><button type="button" class="mn-tg" data-c="edtg" aria-expanded="' + C.edAberto + '"><b>Texto em revisão</b><span class="muted">' + (E.lendo ? 'lendo…' : E.texto ? esc(E.fonte || 'editor') + (hora ? ' · ' + hora : '') : 'ainda não lido') + '</span></button>' +
     /* 0.47: numa linha só — título, parte (só com texto lido) e o botão; o erro em uma linha, com o resto na dica */
     '<span class="sp"></span>' + (document.body.classList.contains('hero-redesign-v53')?'<select class="hero-v53-pron" data-c="pron" aria-label="Pronunciamento"><option value="">Automático · '+esc(C.pronAuto||'pronunciamento')+'</option>'+PRONS.map(function(p){return '<option value="'+esc(p[0])+'"'+(C.pron===p[0]?' selected':'')+'>'+esc(p[1])+'</option>';}).join('')+'</select>':'') + (E.texto ? '<select class="mn-pt" data-c="parteEd" title="Parte do texto do editor a comparar" aria-label="Parte">' + PARTES.map(function (p) { var q = p[0] === 'tudo' ? 1 : (P[p[0]] || []).length; return '<option value="' + p[0] + '"' + (C.parteEd === p[0] ? ' selected' : '') + (q ? '' : ' disabled') + '>' + p[1] + '</option>'; }).join('') + '</select>' : '') +
     '<button type="button" class="btn ' + (E.texto ? 'line' : 'solid') + ' sm" data-c="ler"' + (E.lendo ? ' disabled' : '') + '>' + (E.texto && !E.colado ? 'Ler de novo' : 'Ler o editor') + '</button></div>' +
@@ -499,7 +499,7 @@ caixa.addEventListener('input', function (e) {
   clearTimeout(tq);
   tq = setTimeout(function () {
     if (k === 'q') { C.q = t.value; render(); }
-    else if (k === 'ref') { C.ref = t.value; var r = caixa.querySelector('.cx-res'); if (r) r.innerHTML = resultadoHtml(); }
+    else if (k === 'ref') { C.ref = t.value; var r = caixa.querySelector('.cx-res'); if (r) r.innerHTML = resultadoHtml();var go=caixa.querySelector('[data-c="comparar"]');if(go)go.disabled=!ED.estado().texto||!itemAtual();var bar=caixa.querySelector('.hero-v53-review-actions'),side=r&&r.querySelector('[data-c="janela"]');if(bar){var old=bar.querySelector('[data-c="janela"]');if(old)old.remove();if(side)bar.append(side);} }
     else if (k === 'colarEd') ED.colar(t.value);
   }, 350);
 });
