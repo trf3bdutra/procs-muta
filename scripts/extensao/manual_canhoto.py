@@ -44,7 +44,7 @@ def montar(saida):
     bloco = trecho(ed, '  /* manual da parte (orientações gerais, formatação e tensões) */', '  XP._G={h:g,t:pt.t};')
     js += '\nfunction geral(pid){var pt=ED.pecas.pecas.find(function(p){return p.id===pid;})||{id:pid,notas:[]};var XP={pc:/^(monocratica|despacho)$/.test(pid)?"decisao":"acordao"},FMT=((ED.pecas.forma.filter(function(f){return f.t==="Formatação para o PJe";})[0]||{}).r)||[];\n'+bloco+'\nreturn g;}\n'
     js += '\nwindow.MutaManualCanhoto={geral:geral,tab:function(tab,q){XP.q=q||"";return xRefTab(tab);}};\n})();\n'
-    js += '\\nwindow.MutaManualCanhoto.capitulos='+json.dumps(caps, ensure_ascii=False)+';\\nwindow.MutaManualCanhoto.orientacoes='+json.dumps(orientacoes, ensure_ascii=False)+';\\n'
+    js += '\nwindow.MutaManualCanhoto.capitulos='+json.dumps(caps, ensure_ascii=False)+';\nwindow.MutaManualCanhoto.orientacoes='+json.dumps(orientacoes, ensure_ascii=False)+';\n'
     (saida/'manual-canhoto.js').write_text(js,encoding='utf-8')
     css = []
     for nome in ('ementario.css','editorial_d.css'):
