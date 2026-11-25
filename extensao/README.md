@@ -32,7 +32,7 @@ Base: o HTML independente *muta-independente-prontuario-completo* (Prontuário +
 - 1ª seta do cartão: "autuação e partes", em blocos com título — Partes, Autuação (tarefa, órgão, seção, datas e situação atual) e Etiquetas do PJe.
 - 2ª seta: "síntese · questões · encaminhamento · controles" — os controles (urgência, meta, sobrestamento, caso sensível) vieram da 1ª seta para o fim desta. Mesmo desenho de blocos, campos alinhados à margem.
 - Lista do PJe: número de outro processo citado dentro do cartão (etiqueta "CONEXO …") não vira cartão; o quadro de sinalizações aberto não tira mais a faixa do cartão de origem.
-- Prévia (/extensao/previa/): a lista do "PJe" roda o `conteudo-pje.js` de verdade (faixa de sinalizações, etiquetas personalizadas, botões HERO e Etiquetas, quadro com "+ Incluir"), por `scripts/extensao/previa/pje-shim.js`; sinalização só grava com "Gravar de verdade".
+- Prévia (/extensao/previa/, fora do ar desde 25/11/2026; só a montagem local por `scripts/extensao/previa.py` e o `painel/web.html` usado pelo Ex Officio e pelo Caput seguem): a lista do "PJe" roda o `conteudo-pje.js` de verdade (faixa de sinalizações, etiquetas personalizadas, botões HERO e Etiquetas, quadro com "+ Incluir"), por `scripts/extensao/previa/pje-shim.js`; sinalização só grava com "Gravar de verdade".
 
 ## O que muda na 0.49 · Assinatura nas Deliberações; avisos e inclusão no alto nas sinalizações
 

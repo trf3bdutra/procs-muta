@@ -133,15 +133,33 @@
     return chrome.runtime.sendMessage({ tipo: 'muta-cmt', forcar: !!forcar }).then(function (v) { A.cmt = v || null; /* 0.49: sem aba do Desembargador no sino */ }, function () {});
   }
   /* PJe = chegadas de hoje (só o gestor) + alertas da lista */
-  function pAlertas() { return (A.gst ? '<section class="ap-sec ap-sec-ch"><h4 class="ap-sh">Chegadas de hoje' + (A.cheg.length ? ' <i>' + A.cheg.length + '</i>' : '') + '</h4>' + pChegadas() + '</section><h4 class="ap-sh">Alertas da lista</h4>' : '') + pAlertas0(); }
+  function pAlertas() { return (A.gst ? (A.cheg.length ? '<section class="ap-sec ap-sec-ch"><h4 class="ap-sh">Chegadas de hoje <i>' + A.cheg.length + '</i></h4>' + pChegadas() + '</section>' : '<h4 class="ap-sh ap-sh0">Chegadas de hoje <small>nenhuma ainda</small></h4>') + '<h4 class="ap-sh">Alertas da lista</h4>' : '') + pAlertas0(); }
+  /* 0.73.6: alertas da lista agrupados pelo que pedem — urgência, intercorrência e pendência por processo, no alto;
+     tempo na tarefa resumido por tarefa (quantos, o mais antigo), com a lista recolhida. Filtro por tipo; número abre o prontuário. */
+  var TIPOS_AL = [['urg', 'Urgência não apreciada'], ['ic', 'Intercorrências'], ['pend', 'Pendências'], ['tarefa', 'Tempo na tarefa']];
   function pAlertas0() {
     if (!A.itens.length) return '<p class="muted ap-v">Nenhum alerta. Os alertas surgem quando a lista de tarefas do PJe é aberta com o HERO18810 ligado.</p>';
-    var L = A.itens.slice().sort(function (a, b) { return al(b) - al(a); });
-    return '<small class="muted ap-em">Leitura da lista em ' + esc(quando(A.em)) + ' · toque no número para copiar</small><ul class="ap-l">' + L.map(function (i) {
-      return '<li class="org-pje"><div class="ap-h"><i class="ap-org pje">PJe</i><button type="button" class="ap-k" data-ap-cnj="' + esc(fmtCnj(i.k)) + '" title="Copiar o número">' + esc(fmtCnj(i.k)) + '</button><small>' + esc(i.etapa || '') + (i.servidor ? ' · ' + esc(i.servidor) : '') + '</small></div>' +
-        '<div class="ap-as">' + (i.alertas || []).map(function (a) { return '<span class="ap-a ' + (a.nivel === 'al' ? 'al' : 'av') + '">' + esc(a.t) + '</span>'; }).join('') + '</div></li>';
-    }).join('') + '</ul>';
-    function al(i) { return (i.alertas || []).filter(function (a) { return a.nivel === 'al'; }).length; }
+    var G = {}; TIPOS_AL.forEach(function (t) { G[t[0]] = []; });
+    A.itens.forEach(function (i) { (i.alertas || []).forEach(function (a) { var k = G[a.k] ? a.k : 'pend'; G[k].push({ i: i, a: a }); }); });
+    var f = A.filtroAl && G[A.filtroAl] && G[A.filtroAl].length ? A.filtroAl : '';
+    var chips = TIPOS_AL.filter(function (t) { return G[t[0]].length; }).map(function (t) {
+      var al = G[t[0]].filter(function (x) { return x.a.nivel === 'al'; }).length;
+      return '<button type="button" class="ap-fl' + (al ? ' al' : '') + '" data-ap-fl="' + t[0] + '" aria-pressed="' + (f === t[0]) + '">' + t[1] + ' <b>' + G[t[0]].length + '</b></button>';
+    }).join('');
+    var lin = function (x, txt) { var i = x.i; return '<li class="ap-r ' + (x.a.nivel === 'al' ? 'al' : 'av') + '"><span class="ap-rh"><button type="button" class="ap-k" data-ap-cnj="' + esc(fmtCnj(i.k)) + '" title="Copiar o número">' + esc(fmtCnj(i.k)) + '</button>' +
+      '<button type="button" class="ap-abrir" data-ap-abrir="' + esc(i.k) + '" title="Abrir o prontuário">abrir</button><small>' + esc([i.etapa, i.servidor].filter(Boolean).join(' · ')) + '</small></span>' + (txt ? '<span class="ap-rt">' + esc(txt) + '</span>' : '') + '</li>'; };
+    var porProc = function (k) { return G[k].slice().sort(function (a, b) { return (b.a.nivel === 'al') - (a.a.nivel === 'al'); }).map(function (x) { return lin(x, x.a.t); }).join(''); };
+    var h = '<small class="muted ap-em">Leitura da lista em ' + esc(quando(A.em)) + ' · ' + A.itens.length + ' processo' + (A.itens.length === 1 ? '' : 's') + ' com alerta</small><div class="ap-fls">' + chips + '</div>';
+    ['urg', 'ic', 'pend'].forEach(function (k) { if (G[k].length && (!f || f === k)) h += '<h5 class="ap-gh">' + TIPOS_AL.filter(function (t) { return t[0] === k; })[0][1] + '</h5><ul class="ap-rl">' + porProc(k) + '</ul>'; });
+    if (G.tarefa.length && (!f || f === 'tarefa')) {
+      var T = {}; G.tarefa.forEach(function (x) { var m = /^(\d+) dias na tarefa ?(.*)$/.exec(x.a.t) || [0, 0, '']; var t = m[2] || 'Tarefa sem nome'; (T[t] = T[t] || []).push({ x: x, d: +m[1] }); });
+      h += '<h5 class="ap-gh">Tempo na tarefa</h5>' + Object.keys(T).sort(function (a, b) { return T[b].length - T[a].length; }).map(function (t) {
+        var L = T[t].sort(function (a, b) { return b.d - a.d; }), al = L.filter(function (y) { return y.x.a.nivel === 'al'; }).length;
+        return '<details class="ap-tg"' + (f === 'tarefa' ? ' open' : '') + '><summary><b>' + esc(t) + '</b><span>' + L.length + ' processo' + (L.length === 1 ? '' : 's') + ' · mais antigo ' + L[0].d + ' d' + (al ? ' · <i>' + al + ' acima do dobro do prazo</i>' : '') + '</span></summary><ul class="ap-rl">' +
+          L.map(function (y) { return lin(y.x, y.d + ' dias'); }).join('') + '</ul></details>';
+      }).join('');
+    }
+    return h;
   }
   function pApp() {
     if (!A.app.length) return '<p class="muted ap-v">Sem avisos do app do gabinete' + (A.appEm ? '' : ' (entre no painel para recebê-los)') + '.</p>';
@@ -252,6 +270,8 @@
       if(x.hasAttribute('data-ap-refresh')){var gb=window.MutaGabinete;if(gb&&gb.cnj&&gb.cnj()){abrir(false);Promise.resolve().then(function(){return gb.gravarPendente();}).catch(function(){}).then(function(){return gb.recarregar();});}return;}
       if(x.hasAttribute('data-ap-ajustes')){abrir(false);var b=$('pv-ajustes'),u=ses&&ses.estado?ses.estado():{};if(b)b.click();else if(u.estado==='on'&&u.gestor&&window.MutaAbas)window.MutaAbas.ir('ctl');return;}
       if(x.hasAttribute('data-ap-sair')){abrir(false);var u=ses&&ses.estado?ses.estado():null;if(u&&u.estado==='on'){var gb=window.MutaGabinete;Promise.resolve().then(function(){return gb&&gb.gravarPendente?gb.gravarPendente():null;}).catch(function(){}).then(function(){return ses.sair();});}return;}
+      if (x.dataset.apFl) { A.filtroAl = A.filtroAl === x.dataset.apFl ? '' : x.dataset.apFl; pintar(); return; }
+      if (x.dataset.apAbrir) { var BR = window.MutaProntuarioBridge; abrir(false); if (window.MutaAbas) window.MutaAbas.ir('pront'); if (BR && BR.abrirProcesso) BR.abrirProcesso(x.dataset.apAbrir); return; }
       if (x.dataset.apCnj) { try { navigator.clipboard.writeText(x.dataset.apCnj).then(function () { var o = x.textContent; x.textContent = 'Copiado'; setTimeout(function () { x.textContent = o; }, 1000); }); } catch (er) {} return; }
       if (x.hasAttribute('data-ap-ed')) { A.ed = JSON.parse(JSON.stringify(A.cat.etiquetas || [])); tudo(); return; }
       if (x.hasAttribute('data-ap-cancelar')) { A.ed = null; A.edCat = null; tudo(); return; }
