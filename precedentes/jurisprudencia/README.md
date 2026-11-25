@@ -10,14 +10,14 @@ O procs-muta é o repositório principal: a partir desta importação, nada aqui
 
 | Pasta | Período | Registros |
 | --- | --- | --- |
-| `acordaos/` | 1999–2026 | 26.050 |
+| `acordaos/` | 1999–2026 | 26.276 |
 | `monocraticas/` | 2016–2026 | 7.157 |
-| **Total** | | **33.207** |
+| **Total** | | **33.433** |
 
-Um arquivo por ano, em JSON comprimido (`AAAA.json.gz`). O `indice.json.gz` traz os 33.207
+Um arquivo por ano, em JSON comprimido (`AAAA.json.gz`). O `indice.json.gz` traz os 33.433
 registros em forma resumida, com chaves curtas, para busca sem abrir os arquivos de ano.
 
-Dos acórdãos: 12.694 com inteiro teor, 11.751 só com o acórdão e 1.605 só com a ementa.
+Dos acórdãos: 12.694 com inteiro teor, 11.751 só com o acórdão e 1.831 só com a ementa.
 Por atuação: 25.402 como relator e 648 como relator para o acórdão.
 
 ## Critério da coleta
@@ -26,6 +26,12 @@ Por atuação: 25.402 como relator e 648 como relator para o acórdão.
 - Acórdãos: `relator_t | relator_acordao_t: CARLOS MUTA`
 
 Coleta original em 30/10/2026, registrada em `MANIFESTO.json`.
+
+Coletas incrementais ficam em `MANIFESTO.json › coletas_incrementais`. Em 24/11/2026 entraram 226
+acórdãos publicados de 14/10 a 24/11/2026, colhidos só com a ementa (`conteudo_texto: apenas_ementa`,
+sem partes, resultado, inteiro teor e links de impressão), por `scripts/jurisprudencia/acrescentar_ementas.py`;
+a próxima coleta completa os substitui pela versão integral. As monocráticas desse período ainda não
+foram coletadas.
 
 ## Lacunas conhecidas
 

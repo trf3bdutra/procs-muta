@@ -306,7 +306,8 @@ _ESP = [("razoes_primeiro_recurso", "Razões do primeiro recurso"), ("razoes_seg
 CAJ = json.dumps({'campos': [{'a': x, 'r': r, 's': '*', 'g': 'Caso e peça'} for x, r in _ESP] + _CA}, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/')
 # data da última coleta da série histórica na Base de Jurisprudência do TRF-3
 _MAN = ler(RAIZ/'precedentes/jurisprudencia/MANIFESTO.json')
-COLETA = max((_MAN.get('coleta_original') or {}).values() or [_MAN.get('gerado_em') or ''])[:10]
+COLETA = max(list((_MAN.get('coleta_original') or {}).values()) + [c.get('data') or '' for c in _MAN.get('coletas_incrementais') or []]
+             or [_MAN.get('gerado_em') or ''])[:10]
 def gerar_html(var):
     t, js, css, pre = montar(var)
     js = 'window.EMENT_COLETA=' + json.dumps(COLETA) + ';\n' + js   # última coleta na Base de Jurisprudência do TRF-3 (abertura do Ementário)
