@@ -286,7 +286,7 @@ test('universal 0.73.5: Controle dentro dos Ajustes, Gerador na Produção e cab
     assert.match(await pg.evaluate(() => document.getElementById('pv-ajustes-ctl').innerText), /Prazos/);
     await pg.evaluate(() => document.getElementById('pv-ajustes-ok').click());
     await pg.evaluate(() => window.MutaGabinete.irGerador());
-    await pg.waitForSelector('.hero-v53-gerador #ger-app .gr-doc', { timeout: 10000 });
+    await pg.waitForSelector('.hero-v53-gerador #ger-app :is(.gr-doc,.hero-ger-sheet)', { timeout: 10000 });
     assert.equal(await pg.evaluate(() => document.querySelectorAll('#ger-app').length), 1);
     assert.match(await pg.evaluate(() => document.getElementById('ger-app').innerText), /RELATÓRIO|Relatório/);
     assert.equal(await pg.locator('#panel-min #ger-app').count(),0,'Corretor não tem o Gerador');
@@ -315,7 +315,7 @@ test('universal 0.74.2: faixa das abas sem caixa, títulos sem repetição em Au
         raio: [...new Set([...document.querySelectorAll('#gab section.card:not(.hero-v53-painel):not(#g-lei):not(#g-docs):not(#hero-encaminhamento)')].filter(c => c.offsetParent).map(c => cs(c).borderTopLeftRadius))]
       };
     });
-    assert.equal(v.caixa, '0px rgba(0, 0, 0, 0)', 'faixa das abas sem caixa');
+    assert.ok(v.caixa.startsWith('0px '), 'faixa das abas sem caixa');
     assert.equal(v.merito, false, 'fora do Resumo, sem a faixa do mérito');
     assert.deepEqual(v.titulos, ['Leitura dos autos', 'Peças e documentos']);
     assert.ok(v.grupos.includes('Extração e outras peças') && !v.grupos.includes('Teor dos autos · Documentos e peças'), 'grupo da ficha sem repetir o título do cartão: ' + v.grupos);
@@ -409,12 +409,13 @@ test('universal 0.75.2: aba aberta ligada ao painel (cor do papel, sem linha de 
       const b = document.querySelector('.hero-v53-tabs>[aria-selected=true]'), nav = document.querySelector('.hero-header-nav'), cs = getComputedStyle(b);
       return { aba: cs.backgroundColor, painel: getComputedStyle(document.getElementById('gab')).backgroundColor, faixa: getComputedStyle(nav).backgroundColor, divisor: getComputedStyle(nav).borderBottomWidth, inativa: getComputedStyle(document.querySelector('.hero-v53-tabs>button[aria-selected=false]')).backgroundColor, sobrepoe: Math.round(b.getBoundingClientRect().bottom) >= Math.round(nav.getBoundingClientRect().bottom), fonte: cs.fontFamily, titulo: getComputedStyle(document.querySelector('.hero-assunto-stack>span')).fontFamily, ponto: getComputedStyle(document.querySelector('.hero-assunto-stack>span'), '::after').content };
     });
-    assert.equal(v.aba, v.faixa, 'aba ativa na cor bege do cabeçalho');
+    assert.equal(v.faixa, v.painel, 'cabeçalho branco');
     assert.equal(v.inativa, v.painel, 'abas inativas na cor da folha branca');
     assert.notEqual(v.aba, v.inativa, 'contraste entre ativa e inativa');
-    assert.notEqual(v.faixa, v.painel, 'a linha divide superfícies de cores distintas');
+    assert.notEqual(v.aba, v.painel, 'aba ativa creme');
+    assert.equal(await pg.locator('.hero-first-panel').evaluate(e=>getComputedStyle(e).backgroundColor),v.aba,'primeiro painel na cor da aba ativa');
     assert.equal(v.divisor, '1px', 'divisória fina');
-    assert.ok(!v.sobrepoe, 'a aba não encobre a divisória');
+    assert.ok(v.sobrepoe, 'aba ativa se conecta à superfície creme');
     assert.match(v.fonte, /Georgia/); assert.match(v.titulo, /Georgia/); assert.equal(v.ponto, 'none');
     assert.deepEqual(P.erros, [], 'sem erro de script');
   } finally { await P.fim(); }

@@ -823,13 +823,13 @@ body.hero-redesign-v53 #gab .pm-l1{flex-wrap:wrap;justify-content:flex-start}
    Aplicado igualmente a Resumo, Autos, Triagem e Produção, sem afetar as demais páginas. */
 body.hero-redesign-v53{--hero-pront-header:#f3f0e7;--hero-pront-paper:#fff;--hero-pront-divider:#d8d3c6}
 html[data-tema=escuro] body.hero-redesign-v53{--hero-pront-header:#0a1821;--hero-pront-paper:#132a3b;--hero-pront-divider:#2b4657}
-body.hero-redesign-v53:has(#panel-pront:not([hidden]) .hero-v53-tabs) #topo-u{background:var(--hero-pront-header)!important;border-bottom-color:transparent!important;box-shadow:none!important}
+body.hero-redesign-v53:has(#panel-pront:not([hidden]) .hero-v53-tabs) #topo-u{background:var(--hero-pront-paper)!important;border-bottom-color:transparent!important;box-shadow:none!important}
 html body.hero-redesign-v53 #panel-pront:has(.hero-v53-tabs),
 html body.hero-redesign-v53 #gab:has(.hero-v53-tabs){--hero-paper:var(--hero-pront-paper);background:var(--hero-pront-paper)!important;gap:0!important}
 body.hero-redesign-v53 #gab:has(.hero-v53-tabs) .pc.pm,
 body.hero-redesign-v53 #gab:has(.hero-v53-tabs) :is(.hero-top-pages,.hero-top-page,.gbody,.hero-autos-workspace){background:var(--hero-pront-paper)!important}
 body.hero-redesign-v53 #gab .pc.pm:has(.hero-v53-tabs){border:0!important;box-shadow:none!important}
-body.hero-redesign-v53 #gab .hero-header-nav:has(.hero-v53-tabs){background:var(--hero-pront-header)!important;border:0!important;border-bottom:1px solid var(--hero-pront-divider)!important;box-shadow:none!important;padding-top:5px!important;margin-bottom:0!important}
+body.hero-redesign-v53 #gab .hero-header-nav:has(.hero-v53-tabs){background:var(--hero-pront-paper)!important;border:0!important;border-bottom:1px solid var(--hero-pront-divider)!important;box-shadow:none!important;padding-top:5px!important;margin-bottom:0!important}
 body.hero-redesign-v53 #gab .hero-header-nav .hero-v53-tabs{background:transparent!important;border:0!important;box-shadow:none!important;gap:2px!important;align-items:flex-end;margin:0!important;overflow:visible!important}
 body.hero-redesign-v53 #gab .hero-header-nav .hero-v53-tabs>button{position:relative;background:transparent!important;border:1px solid transparent!important;border-bottom:0!important;border-radius:7px 7px 0 0!important;margin-bottom:-1px!important;box-shadow:none!important;min-width:0}
 body.hero-redesign-v53 #gab .hero-header-nav .hero-v53-tabs>button[aria-selected=true]{background:var(--hero-pront-header)!important;border-color:var(--hero-pront-divider)!important;border-bottom:0!important;box-shadow:inset 0 2px 0 var(--hero53-gold)!important;z-index:1}
@@ -853,3 +853,16 @@ html body.hero-redesign-v53 #gab .hero-header-nav .hero-v53-tabs>button[aria-sel
 html body.hero-redesign-v53 #gab .hero-header-nav .hero-v53-tabs>button[aria-selected=true]{background:var(--hero-pront-header)!important;border-color:var(--hero-pront-divider)!important;border-bottom:0!important;margin-bottom:0!important;box-shadow:inset 0 2px 0 var(--hero53-gold)!important}
 html body.hero-redesign-v53 #gab .hero-header-nav{border-bottom:1px solid var(--hero-pront-divider)!important}
 html body.hero-redesign-v53 #gab .pc.pm:has(.hero-v53-tabs>[aria-selected=true]:not([data-rot="res"])){background:transparent!important}
+
+/* Superfícies HERO: topo e abas inativas brancos; aba ativa e primeiro painel creme.
+   A divisória inferior do primeiro painel marca o início da folha branca. */
+html body.hero-redesign-v53:has(#panel-pront:not([hidden]) .hero-v53-tabs) #topo-u,
+html body.hero-redesign-v53 #gab .hero-header-nav:has(.hero-v53-tabs){background:var(--hero-pront-paper)!important}
+html body.hero-redesign-v53 #gab .hero-header-nav .hero-v53-tabs>button[aria-selected=false]{background:var(--hero-pront-paper)!important}
+html body.hero-redesign-v53 #gab .hero-header-nav .hero-v53-tabs>button[aria-selected=true]{background:var(--hero-pront-header)!important;margin-bottom:-1px!important;border-bottom:1px solid var(--hero-pront-header)!important}
+html body.hero-redesign-v53 #gab .hero-header-nav{border-bottom:1px solid var(--hero-pront-divider)!important;margin-bottom:0!important}
+html body.hero-redesign-v53 #gab .hero-top-pages:not([hidden]){padding-top:0!important}
+html body.hero-redesign-v53 #gab :is(.hero-first-panel,#g-lei,#hero-encaminhamento,.hero-minuta-roteiro){background:var(--hero-pront-header)!important;border:0!important;border-bottom:1px solid var(--hero-pront-divider)!important;border-radius:0!important;box-shadow:none!important;margin:0 0 10px!important;padding:12px 10px!important;min-width:0}
+html body.hero-redesign-v53 #gab .hero-first-panel{display:flow-root}
+html body.hero-redesign-v53 #gab .hero-first-panel .hero-steps{background:transparent!important}
+html body.hero-redesign-v53 #gab #g-docs{background:var(--hero-pront-paper)!important}

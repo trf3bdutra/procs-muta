@@ -1675,6 +1675,9 @@ function heroOrganizarProntuario(){
     var selectedDock=heroTopo.abaAcomp||'';abrirA(selectedDock);if(faceNav)faceNav.remove();
     /* O cabeçalho é a navegação única; a área de resumo não aparece nas outras subabas. */
     if(faixa)id.prepend(faixa);
+    /* A identificação e as etapas compõem a primeira superfície do Resumo.
+       O perfil e a pauta ficam após a divisória, sem mudar os nós nem os handlers. */
+    if(resumo&&painel.parentNode===id){var firstPanel=el('div','hero-first-panel');id.insertBefore(firstPanel,id.firstChild);while(firstPanel.nextSibling&&firstPanel.nextSibling!==painel)firstPanel.append(firstPanel.nextSibling);}
     nav.replaceChildren();if(mainTabs)nav.append(mainTabs);
     pages.replaceChildren(id);id.hidden=!resumo;pages.hidden=!resumo;
     if(gbody){if(G.aba==='Processo'&&G.rot==='tri'){gbody.prepend(encTr);var av=el('button','lnk hero-v53-autos-link','Conferir documentos em Autos');av.type='button';av.onclick=function(){G.aba='Autos';render();};encTr.append(av);}gbody.hidden=resumo;}
