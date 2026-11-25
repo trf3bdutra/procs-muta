@@ -1649,7 +1649,7 @@ function heroOrganizarProntuario(){
     var complexity=campoModelo('triagem','COMPLEXIDADE'),complexValue=S(V('triagem','COMPLEXIDADE'));
     if(l1&&complexity&&complexValue){var cx=el('span','hero-v53-complexidade',complexValue);cx.dataset.nivel=complexValue;cx.title='Complexidade · '+complexValue;l1.append(cx);}
     /* Seletor de tipo abre o cartão de Encaminhamento da Triagem. */
-    refTipo.onclick=function(){G.aba='Processo';G.rot='tri';render();var t=caixa.querySelector('#hero-encaminhamento');if(t)t.scrollIntoView({block:'start'});};
+    refTipo.onclick=function(){heroTopo.encDockOpen=true;G.aba='Processo';G.rot='tri';render();var t=caixa.querySelector('#hero-enc-dock>summary');if(t)t.focus({preventScroll:true});};
     /* Encaminhamento deixa de ser face; os campos continuam os mesmos da ficha. */
     var encTr=el('section','hero-v53-enc card hero-enc-integrated'),encHd=el('div','hero-v53-section-head'),encTitle=el('h4','pm-mer-h','Encaminhamento');
     encTr.id='hero-encaminhamento';encHd.append(encTitle,el('small','muted','Julgamento · destino · enquadramento'));encTr.append(encHd);
@@ -1730,7 +1730,19 @@ function heroOrganizarProntuario(){
     }
     nav.replaceChildren();if(mainTabs)nav.append(mainTabs);
     pages.replaceChildren(id);id.hidden=!resumo;pages.hidden=!resumo;
-    if(gbody){if(G.aba==='Processo'&&G.rot==='tri'){gbody.prepend(encTr);var av=el('button','lnk hero-v53-autos-link','Conferir documentos em Autos');av.type='button';av.onclick=function(){G.aba='Autos';render();};encHd.append(av);}gbody.hidden=resumo;}
+    if(gbody){
+      if(G.aba==='Processo'&&G.rot==='tri'){
+        var dock=el('details','hero-enc-dock'),ds=el('summary'),dt=el('span','hero-enc-dock-title','Encaminhamento'),dm=el('small','hero-enc-dock-meta'),dc=el('span','hero-conf-chevron');
+        dock.id='hero-enc-dock';dc.setAttribute('aria-hidden','true');
+        dm.textContent=[S(V('triagem','Tipo de Julgamento')),S(destinoAtual)||'A definir'].filter(Boolean).join(' · ');
+        ds.append(dt,dm,dc);dock.append(ds);
+        var av=el('button','lnk hero-v53-autos-link','Conferir documentos em Autos');av.type='button';av.onclick=function(){G.aba='Autos';render();};encHd.append(av);
+        var inner=el('div','hero-enc-dock-body');inner.append(encTr);dock.append(inner);dock.open=!!heroTopo.encDockOpen;
+        dock.addEventListener('toggle',function(){if(dock.isConnected)heroTopo.encDockOpen=dock.open;});
+        gbody.classList.add('hero-tri-with-dock');caixa.append(dock);
+      }
+      gbody.hidden=resumo;
+    }
     if(!resumo&&gbody&&top.parentNode)top.after(gbody);
     if(window.MutaPauta&&window.MutaPauta.receberEditor)window.MutaPauta.receberEditor(G.cnj,solBody);
     show=function(i){if(i===1){G.aba='Processo';G.rot='tri';render();}else if(i>=2){heroTopo.perfil=true;perfil.open=true;}else if(!resumo){G.aba='Processo';G.rot='res';render();}};

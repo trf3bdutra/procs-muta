@@ -2512,3 +2512,21 @@ html body.hero-redesign-v53 #gab #g-docs .hero-doc-card .au-st{font-size:9px;pad
 html body.hero-redesign-v53 #gab #g-docs .hero-doc-card>.au-it>.au-tx{margin:0!important;padding:7px 9px!important;background:var(--hero-pront-paper,#fff)}
 html body.hero-redesign-v53 #gab #g-docs .hero-doc-card .au-tx .tx-j{border:0!important;box-shadow:none!important;background:var(--hero-pront-paper,#fff)!important;margin:4px 0 0!important;padding:5px 0!important;line-height:1.55}
 html body.hero-redesign-v53 #gab #g-docs .hero-doc-card.au-historico>p,html body.hero-redesign-v53 #gab #g-docs .hero-doc-card.au-historico>small{display:block;margin:6px 9px}
+
+/* Triagem · Encaminhamento em dock, no padrão da Conformidade. */
+html body.hero-redesign-v53 #panel-pront #gab .hero-tri-with-dock{padding-bottom:49px!important}
+html body.hero-redesign-v53 #panel-pront #hero-enc-dock{position:fixed!important;inset:auto 0 var(--hero-review-nav-height,58px) 0!important;z-index:44;width:100%!important;box-sizing:border-box;margin:0!important;padding:0!important;max-height:calc(100dvh - var(--hero-review-nav-height,58px) - 72px);background:var(--hero-pront-paper,#fff)!important;border:0!important;border-top:1px solid var(--hero53-line,var(--line))!important;border-radius:0!important;box-shadow:0 -3px 12px #0000000c;overflow:hidden}
+html body.hero-redesign-v53 #panel-pront #hero-enc-dock>summary{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,55%) 12px;align-items:center;gap:7px;min-height:39px;box-sizing:border-box;padding:8px 12px!important;margin:0!important;background:var(--hero-pront-paper,#fff)!important;list-style:none;cursor:pointer;color:var(--fg);font:600 12px/1.35 var(--sans,system-ui)}
+html body.hero-redesign-v53 #panel-pront #hero-enc-dock>summary::-webkit-details-marker{display:none}
+html body.hero-redesign-v53 #panel-pront #hero-enc-dock>summary:focus-visible{outline:2px solid var(--gold,#947333);outline-offset:-3px}
+html body.hero-redesign-v53 #panel-pront #hero-enc-dock .hero-enc-dock-meta{font:400 10px/1.3 var(--sans,system-ui);color:var(--muted-fg);text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+html body.hero-redesign-v53 #panel-pront #hero-enc-dock[open]>summary{border-bottom:1px solid var(--hero-pront-divider,var(--line))}
+html body.hero-redesign-v53 #panel-pront #hero-enc-dock[open] .hero-conf-chevron{transform:rotate(225deg);margin-top:-4px}
+html body.hero-redesign-v53 #panel-pront #hero-enc-dock:not([open])>.hero-enc-dock-body{display:none!important}
+html body.hero-redesign-v53 #panel-pront #hero-enc-dock[open]>.hero-enc-dock-body{display:block!important;max-height:min(64dvh,calc(100dvh - var(--hero-review-nav-height,58px) - 116px));overflow:auto;overscroll-behavior:contain;background:var(--hero-pront-paper,#fff);padding:0}
+html body.hero-redesign-v53 #gab #hero-enc-dock #hero-encaminhamento.hero-enc-integrated{border:0!important;border-radius:0!important;margin:0!important;box-shadow:none!important;background:var(--hero-pront-paper,#fff)!important}
+html body.hero-redesign-v53 #gab #hero-enc-dock #hero-encaminhamento>.hero-v53-section-head{background:var(--hero-pront-paper,#fff)!important;padding:7px 12px!important;justify-content:flex-end}
+html body.hero-redesign-v53 #gab #hero-enc-dock #hero-encaminhamento>.hero-v53-section-head>:is(h4,small){display:none!important}
+html body.hero-redesign-v53 #gab #hero-enc-dock #hero-encaminhamento .hero-dest-top>.pm-sitj{display:flex!important;flex-wrap:wrap!important;align-items:center!important;gap:6px!important;min-width:0}
+html body.hero-redesign-v53 #gab #hero-enc-dock #hero-encaminhamento .hero-dest-top>.pm-sitj>.gl,html body.hero-redesign-v53 #gab #hero-enc-dock #hero-encaminhamento .hero-dest-top>.pm-sitj>small{flex:1 1 100%!important;width:100%!important;min-width:0;overflow-wrap:normal}
+html body.hero-redesign-v53 #gab #hero-enc-dock #hero-encaminhamento .hero-dest-top>.pm-sitj .au-tag{white-space:nowrap}
