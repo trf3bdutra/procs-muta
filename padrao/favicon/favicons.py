@@ -66,21 +66,10 @@ PAGINAS = {
 
 
 def svg(familia, cheio=False):
-    """Placa 64×64. cheio=True: sem cantos arredondados (o iOS arredonda o ícone da tela inicial)."""
-    nome, cor = FAMILIAS[familia]
-    rx, rx2 = (0, 0) if cheio else (14, 12.5)
-    tracos = ''.join("<path d='%s'/>" % d for d in MARCA)
-    return (
-        "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>"
-        "<title>Gabinete CMT · %s</title>"
-        "<defs><linearGradient id='p' x1='0' y1='0' x2='1' y2='1'>"
-        "<stop offset='0' stop-color='#17506f'/><stop offset='1' stop-color='#0a2232'/></linearGradient></defs>"
-        "<rect width='64' height='64' rx='%s' fill='url(#p)'/>"
-        "<rect x='1.5' y='1.5' width='61' height='61' rx='%s' fill='none' stroke='%s' stroke-opacity='.4' stroke-width='1.2'/>"
-        "<g transform='translate(32,29.5) scale(.53) translate(-351.19,-269.375)' fill='%s'>%s</g>"
-        "<rect x='20' y='52.4' width='24' height='3.6' rx='1.8' fill='%s'/>"
-        "</svg>"
-    ) % (nome, rx, rx2, OURO, OURO, tracos, cor)
+    """Usa a arte aprovada, sem reconstruir ou sobrescrever os SVGs originais."""
+    aliases = {'abinitio': 'caput', 'relator': 'office', 'gabinete': 'amicus'}
+    name = aliases.get(familia, familia)
+    return (AQUI / (name + '.svg')).read_text(encoding='utf-8').strip()
 
 
 def uri_svg(s):
@@ -165,7 +154,7 @@ def main():
         return
     for fam in FAMILIAS:
         (AQUI / ('bloco-%s.html' % fam)).write_text(bloco(fam) + '\n', encoding='utf-8')
-        (AQUI / ('%s.svg' % fam)).write_text(svg(fam) + '\n', encoding='utf-8')
+        # SVGs aprovados são fontes, nunca saídas deste gerador.
     for rel, (fam, alt) in PAGINAS.items():
         p = RAIZ / rel
         if not p.exists():

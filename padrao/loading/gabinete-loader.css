@@ -103,3 +103,11 @@
 .cmtl-full[data-cmt-loader-family="office"]{
   border-top:4px solid transparent;border-image:linear-gradient(90deg,#183c29,#1f5a48 45%,#0f4a5c) 1;
 }
+
+/* GAB.18810 · o SVG contém a rotação apenas da estrela. */
+.cmtl-mark,.cmt-load[data-cmt-loader="legacy"] .cmt-ld-mk{width:min(280px,76vw);height:auto;aspect-ratio:700/430;margin-bottom:19px;}
+.cmtl-mark::before,.cmtl-mark::after,.cmt-load[data-cmt-loader="legacy"] .cmt-ld-mk::before,.cmt-load[data-cmt-loader="legacy"] .cmt-ld-mk::after{content:none;}
+.cmtl-mark .cmtl-brand,.cmt-load[data-cmt-loader="legacy"] .cmt-ld-mk .cmtl-brand{display:block;width:100%;height:auto;object-fit:contain;}
+.cmt-load[data-cmt-loader="legacy"] .cmt-ld-mk .star:has(.cmtl-brand){width:100%!important;height:auto!important;}
+.cmtl-mini svg{transform-origin:center;animation:cmtl-spin 1.6s linear infinite;}
+@keyframes cmtl-spin{to{transform:rotate(360deg)}}
