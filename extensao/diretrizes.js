@@ -10,7 +10,7 @@ var D = { q: '', vista: 'manual', man: null, red: null, erro: '', cap: '', tab:'
 function esc(v) { return String(v == null ? '' : v).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
 function N(v) { return String(v == null ? '' : v).normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase(); }
 /* 0.47: as Diretrizes são uma parte da aba Minuta */
-function aberta() { var p = $('panel-min'), d = $('dir-app'); return !!(p && !p.hidden && d && !d.hidden); }
+function aberta() { var p = $('panel-dir'), d = $('dir-app'); return !!(p && !p.hidden && d && !d.hidden); }
 function carregar() {
   if (D.man || D.erro) return Promise.resolve();
   return FT.base().then(function (d) { D.man = d.manual || []; D.red = d.diretrizes || []; }, function (e) { D.erro = 'Não foi possível baixar as Diretrizes: ' + e.message; });
