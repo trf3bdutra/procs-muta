@@ -359,16 +359,16 @@ function abrirIT(x){
   h+='</div>';
   var head=h,P={};h='';
   /* 2. tese e resultado */
-  /* Síntese do julgamento: cronologia e relatoria no mesmo cartão da tese e resultado. */
+  /* Síntese do julgamento: cronologia e relatoria integradas à tese, ao resultado e à ementa no mesmo cartão. */
   h+='<div class="pp-sintese"><div class="pp-sintese-meta">'+
     (x.d?'<div><span class="pp-k">'+(col?'Assinatura':'Julgado em')+'</span><b>'+fmtD(x.d)+'</b></div>':'')+
     (col?(origem.data_disponibilizacao_djen?'<div><span class="pp-k">Disponibilizado no DJEN</span><b>'+esc(origem.data_disponibilizacao_djen)+'</b></div>':''):(x.p?'<div><span class="pp-k">Publicado em</span><b>'+fmtD(x.p)+'</b></div>':''))+
     '<div><span class="pp-k">Relator</span><b>'+esc(x.rl||(col?'Não informado':'CARLOS MUTA'))+'</b></div>'+
     (x.gab?'<div><span class="pp-k">Gabinete</span><b>'+esc(x.gab)+'</b></div>':'')+'</div>'+
-    ((x.tese||x.r)?'<div class="pp-top pp-sintese-conteudo">'+(x.tese?'<div class="pp-card"><div class="pp-k">Tese</div><div>'+refs(x.tese)+'</div></div>':'')+(x.r?'<div class="pp-card res" style="--rc:'+corRes(x._res)+'"><div class="pp-k">Resultado</div><div>'+refs(x.r)+'</div></div>':'')+'</div>':'')+'</div>';
+    ((x.tese||x.r)?'<div class="pp-top pp-sintese-conteudo">'+(x.tese?'<div class="pp-card"><div class="pp-k">Tese</div><div>'+refs(x.tese)+'</div></div>':'')+(x.r?'<div class="pp-card res" style="--rc:'+corRes(x._res)+'"><div class="pp-k">Resultado</div><div>'+refs(x.r)+'</div></div>':'')+'</div>':'');
   /* Julgado: tese, resultado, ementa e texto preservado, reunidos. */
   var em=String(x.e||'');
-  h+='<div class="pp-k" style="margin-top:14px">'+(window.EMENT_FONTE&&x.t==='M'?'Abertura da decisão':'Ementa')+'</div><div class="e-box serif pp-em'+(em.length>1200&&!ppAberto?' cut':'')+'">'+refs(em)+'</div>'+(em.length>1200&&!ppAberto?'<button class="pp-more" data-ppm>Ver texto completo do campo</button>':'');
+  h+='<div class="pp-sintese-ementa"><div class="pp-k">'+(window.EMENT_FONTE&&x.t==='M'?'Abertura da decisão':'Ementa')+'</div><div class="e-box serif pp-em'+(em.length>1200&&!ppAberto?' cut':'')+'">'+refs(em)+'</div>'+(em.length>1200&&!ppAberto?'<button class="pp-more" data-ppm>Ver texto completo do campo</button>':'')+'</div></div>';
   /* Referências do julgado — imediatamente após a ementa; vínculos por CNJ seguem identificados à parte. */
   h+='<div class="pp-k" style="margin-top:14px">Referências</div><div class="pp-proc pp-referencias">';
   var gruposRef=[['Dispositivos legais',ct.norm,x.disp],['Jurisprudência',[],x.jur],['Temas e súmulas',ct.enun,x.temas]];
