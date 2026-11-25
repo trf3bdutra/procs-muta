@@ -833,18 +833,25 @@ function sugerirAto() {
   if (/apela|remessa|agravo de instrumento|embargos de declara|agravo interno/.test(cl)) return { i: 0, por: 'classe do processo, sem urgência nem hipótese de monocrática na triagem' };
   return null;
 }
-function atoSug(k) { if (k >= 0) return ''; var x = sugerirAto(); if (!x) return '';
-  return '<button type="button" class="pm-sug" data-pron="' + x.i + '" title="Sugestão (' + esc(x.por) + '). Clique para usar.">sugerido: ' + esc(PRON[x.i][0]) + '</button>'; }
-/* tipo de ato no cartão, à esquerda de quem minuta e de quem corrige */
+/* Sugestão é uma indicação dentro da própria opção, sem definir o ato. */
+function atoOpcoes(k) {
+  var sug = k < 0 ? sugerirAto() : null;
+  return '<option value=""' + (k < 0 ? ' selected' : '') + '>A definir</option>' +
+    PRON.map(function (x, i) {
+      var indicado = sug && sug.i === i;
+      return '<option value="' + i + '"' + (i === k ? ' selected' : '') +
+        (indicado ? ' title="' + esc('Sugestão: ' + sug.por) + '"' : '') +
+        '>' + esc(x[0] + (indicado ? ' · sugerido' : '')) + '</option>';
+    }).join('');
+}
 function atoSel() {
   var k = pronAtual();
-  return '<label class="pm-pp pm-ato"><span class="pm-pn"><small>Tipo de ato</small><select id="pm-pron" aria-label="Tipo de ato ou pronunciamento"><option value="">a definir</option>' +
-    PRON.map(function (x, i) { return '<option value="' + i + '"' + (i === k ? ' selected' : '') + '>' + esc(x[0]) + '</option>'; }).join('') + '</select>' + atoSug(k) + '</span></label>';
+  return '<label class="pm-pp pm-ato"><span class="pm-pn"><small>Tipo de ato</small><select id="pm-pron" aria-label="Tipo de ato ou pronunciamento">' + atoOpcoes(k) + '</select></span></label>';
 }
 function pronunciamento() {
   var k = pronAtual();
   return '<section class="card pc-sec pm-pron"><div class="pc-sh"><h3>Tipo de ato · pronunciamento</h3><small class="muted">' + (k < 0 ? 'a definir na triagem' : esc(PRON[k][1] === 'Sessão' ? 'vai à sessão' : PRON[k][1] === 'Monocrática' ? 'decisão do relator' : 'outro destino')) + '</small></div>' +
-    '<select id="pm-pron" class="pm-pron-s" aria-label="Tipo de ato ou pronunciamento"><option value="">— a definir —</option>' + PRON.map(function (x, i) { return '<option value="' + i + '"' + (i === k ? ' selected' : '') + '>' + esc(x[0]) + '</option>'; }).join('') + '</select>' + atoSug(k) + '</section>';
+    '<select id="pm-pron" class="pm-pron-s" aria-label="Tipo de ato ou pronunciamento">' + atoOpcoes(k) + '</select></section>';
 }
 function corpoProducao() {
   var A = abaModelo('Produção'), h = '';
@@ -1012,7 +1019,7 @@ caixa.addEventListener('change', function (e) {
   if (t.dataset && t.dataset.auAuto != null) { if (window.MutaAutos) window.MutaAutos.autoLigar(t.checked); return; }
   if (t.dataset && t.dataset.snOk) { var po = t.dataset.snOk.split(':'), Lo = snLinhas(po[0]), io = Number(po[1]); if (Lo[io] != null) Lo[io] = t.checked ? '✓ ' + Lo[io].replace(/^✓\s*/, '') : Lo[io].replace(/^✓\s*/, ''); snGravar(po[0], Lo); return; }
   if (t.id === 'sn-tp') { G.snTp = t.value; return; }
-  if (t.id === 'pm-pron') { var xp = PRON[Number(t.value)]; marcar('producao.Destino', xp ? xp[1] : ''); marcar('producao.Mono - Tipo de ato', xp ? xp[2] : ''); G.dest = null; agendar(400); render(); return; }
+  if (t.id === 'pm-pron') { var xp = t.value === '' ? null : PRON[Number(t.value)]; marcar('producao.Destino', xp ? xp[1] : ''); marcar('producao.Mono - Tipo de ato', xp ? xp[2] : ''); G.dest = null; agendar(400); render(); return; }
   if (t.dataset && t.dataset.rtc) { if (window.MutaRoteiro) window.MutaRoteiro.conferir(t.dataset.rtc, t.checked, gRot()); render(); return; }
   if (!t.dataset || !t.dataset.fk) return;
   marcar(t.dataset.fk, t.value); var l = t.closest('label'); if (l) l.classList.add('mud');

@@ -586,7 +586,7 @@ test('extensão 0.44: Ler/Reler sempre a íntegra; documentos do Roteiro em Auto
   const a = read('extensao/autos.js'), g = read('extensao/gabinete.js'), r = read('extensao/roteiro.js');
   assert.match(a, /function extrairIntegra\(\)/); assert.match(a, /if \(lidoDoProcesso\(\) && !A\.fila\) extrairIntegra\(\);/);
   assert.match(a, /var tudo = true;/); assert.match(a, /'Parecer do MPF': \{ parecer: 1 \}, 'Procuração': \{ procuracao: 1 \}/);
-  assert.match(g, /var PECAS_DOC = \[/); assert.match(g, /grupo: 'Parecer do MPF'/); assert.match(g, /function sugerirAto\(\)/); assert.match(g, /atoSug\(k\)/);
+  assert.match(g, /var PECAS_DOC = \[/); assert.match(g, /grupo: 'Parecer do MPF'/); assert.match(g, /function sugerirAto\(\)/); assert.match(g, /atoOpcoes\(k\)/);
   assert.match(r, /var DOC_RT = \{/); assert.match(r, /data-aba="Autos" title="Editar em Autos › Peças e documentos"/);
 });
 
@@ -680,4 +680,17 @@ test('extensão 0.51: Collectio com o PJe aberto — referência na versão fina
   assert.match(l, /\[\['cmp', 'Editor × Collectio'/); assert.match(l, /function confVersao\(m\)/);
   assert.match(c, /function colTag\(k, r, texto\)/); assert.match(c, /'= Collectio' : '≠ Collectio'/);
   assert.match(read('extensao/conformidade-motor.js'), /cabecalhoPje: cabecalhoPje/); assert.match(read('extensao/conformidade.js'), /contexto: function \(\)/);
+});
+
+test('tipo de ato sugerido dentro da opção, sem seleção automática',()=>{
+ const src=fs.readFileSync(path.join(ROOT,'extensao/gabinete.js'),'utf8');
+ const code=src.slice(src.indexOf('function atoOpcoes(k)'),src.indexOf('function corpoProducao()'));
+ const render=new Function('PRON','sugerirAto','esc','pronAtual',code+';return {atoOpcoes,atoSel,pronunciamento};')([['Acórdão','Sessão',''],['Decisão monocrática','Monocrática','']],()=>({i:1,por:'triagem'}),String,()=>-1);
+ const html=render.atoSel();
+ assert.match(html,/<option value="" selected>A definir<\/option>/);
+ assert.match(html,/<option value="1" title="Sugestão: triagem">Decisão monocrática · sugerido<\/option>/);
+ assert.doesNotMatch(html,/data-pron=|pm-sug/);
+ assert.doesNotMatch(render.atoOpcoes(0),/sugerido/);
+ assert.match(render.atoOpcoes(0),/<option value="0" selected>Acórdão<\/option>/);
+ assert.match(src,/var xp = t\.value === '' \? null : PRON/);
 });
