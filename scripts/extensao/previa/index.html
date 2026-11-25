@@ -12,7 +12,7 @@
 <script>try{document.documentElement.setAttribute('data-theme',localStorage.getItem('cmt-eq-tema')||'light')}catch(e){}</script>
 <!-- Prévia do painel da extensão Muta (/extensao/previa/). À direita, o painel de verdade (mesmos arquivos da extensão,
      montados por scripts/extensao/previa.py); à esquerda, um PJe simulado: a sessão e o processo, a tela (lista de tarefas,
-     autos digitais ou editor da minuta) e o texto do editor (a minuta vigente no Collectio ou um texto colado).
+     autos digitais ou editor da minuta) e o texto do editor (a minuta vigente no CORTEX ou um texto colado).
      Lê /api/painel?lote=1 (sessões e minutas) e /api/pauta?data= (pauta da sessão), com o login do Ex Officio.
      Por padrão, nada é gravado: o painel tenta gravar e a prévia lista o que seria gravado. -->
 <style>
@@ -122,7 +122,7 @@ html[data-theme=dark] .side-h{border-color:#1e3747;color:#a7a8a9}
  <nav class="ut" aria-label="Ferramentas">
   <span class="hb" id="ver">versão —</span>
   <a class="hb" href="/extensao/muta-pje.zip" title="Pacote da extensão para instalar no Chrome"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M4 21h16"/></svg><span>Baixar a extensão</span></a>
-  <a class="hb" href="/amicus/collectio/"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg><span>Collectio</span></a>
+  <a class="hb" href="/amicus/cortex/"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg><span>CORTEX</span></a>
   <button type="button" class="hb" id="tema" title="Tema claro ou escuro" aria-label="Tema claro ou escuro"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
  </nav>
 </div></header>
@@ -134,12 +134,12 @@ html[data-theme=dark] .side-h{border-color:#1e3747;color:#a7a8a9}
   <button type="button" class="b" id="recarregar-sessoes">Recarregar sessões</button>
   <label class="f"><span>Processo</span><input id="cnj" list="cnjs" placeholder="0000000-00.0000.4.03.0000" autocomplete="off"><datalist id="cnjs"></datalist></label>
   <div class="f"><span>Tela do PJe</span><span class="seg w" role="group" aria-label="Tela do PJe" id="telas"><button type="button" data-tela="lista" aria-pressed="true">Lista de tarefas</button><button type="button" data-tela="autos" aria-pressed="false">Autos</button><button type="button" data-tela="editor" aria-pressed="false">Editor</button></span></div>
-  <label class="f"><span>Texto do editor</span><select id="fonte"><option value="collectio">Minuta vigente no Collectio</option><option value="colar">Colar um texto</option><option value="vazio">Sem editor aberto</option></select></label>
+  <label class="f"><span>Texto do editor</span><select id="fonte"><option value="collectio">Minuta vigente no CORTEX</option><option value="colar">Colar um texto</option><option value="vazio">Sem editor aberto</option></select></label>
   <label class="f" id="colar-w" hidden><span>Texto colado</span><textarea id="colar" placeholder="Cole aqui o texto da minuta (relatório, voto, ementa e acórdão)."></textarea></label>
   <div class="f"><span>Largura do painel</span><span class="seg w" role="group" aria-label="Largura do painel" id="larg"><button type="button" data-w="360" aria-pressed="false">360</button><button type="button" data-w="420" aria-pressed="true">420</button><button type="button" data-w="520" aria-pressed="false">520</button></span></div>
   <label class="ck"><input type="checkbox" id="grava"><span>Gravar de verdade<small>Desligado, nada vai ao GitHub: o painel tenta gravar e a prévia lista abaixo o que seria gravado. Na versão atual, Diligências e Deliberações gravam sempre. No modo Universal, as gravações são bloqueadas.</small></span></label>
   <div class="blq" id="blq" hidden><b>Não gravado na prévia</b><ol id="blq-l"></ol></div>
-  <p class="nota">Fora do PJe não há autos digitais: a leitura da cronologia volta vazia. O resto do painel (prontuário, ficha, triagem, Collectio, ementário, comparação e conformidade) usa os dados reais, com o seu login do Ex Officio.</p>
+  <p class="nota">Fora do PJe não há autos digitais: a leitura da cronologia volta vazia. O resto do painel (prontuário, ficha, triagem, CORTEX, ementário, comparação e conformidade) usa os dados reais, com o seu login do Ex Officio.</p>
  </aside>
  <section class="cr" aria-label="Chrome com o PJe e o painel Muta">
   <div class="cr-top"><i></i><i></i><i></i><span class="cr-url" id="url">pje2g.trf3.jus.br/pje/Painel/painel_usuario/advogado.seam</span><span class="cr-ext"><img src="painel/icones/32.png" alt="">Muta</span></div>
@@ -175,7 +175,7 @@ function reg(){
 }
 function mandar(){try{pn.contentWindow.postMessage({tipo:'previa-aba',reg:reg()},'*');pn.contentWindow.postMessage({tipo:'previa-grava',on:S.grava},'*')}catch(e){}}
 
-/* texto do editor: a minuta vigente do processo no Collectio (lote da pauta) ou o texto colado */
+/* texto do editor: a minuta vigente do processo no CORTEX (lote da pauta) ou o texto colado */
 const SECS=[['relatorio','RELATÓRIO'],['voto','VOTO'],['ementa','EMENTA'],['acordao','ACÓRDÃO']];
 async function textoEditor(){
   if(S.fonte==='vazio')return null;
@@ -231,7 +231,7 @@ async function desenharPje(){
   $('#pje-t').textContent='Tarefa · Minutar · '+(x?rec(x.classe)+' ':'')+(S.cnj||'—');
   b.innerHTML='<p class="vz">Lendo o texto do editor…</p>';
   const ps=S.cnj?await textoEditor():null;
-  b.innerHTML=ps?'<div class="doc">'+ps.map(p=>`<p class="${p.neg&&p.alinha==='center'?'t':''}">${esc(p.t)}</p>`).join('')+'</div>':`<p class="vz">${S.fonte==='vazio'?'Sem editor aberto.':S.cnj?'Este processo não tem minuta no Collectio: cole um texto para simular o editor.':'Escolha um processo.'}</p>`;
+  b.innerHTML=ps?'<div class="doc">'+ps.map(p=>`<p class="${p.neg&&p.alinha==='center'?'t':''}">${esc(p.t)}</p>`).join('')+'</div>':`<p class="vz">${S.fonte==='vazio'?'Sem editor aberto.':S.cnj?'Este processo não tem minuta no CORTEX: cole um texto para simular o editor.':'Escolha um processo.'}</p>`;
 }
 function escolher(cnj){S.texto=null;S.cnj=cnj||'';$('#cnj').value=S.cnj;desenharPje();mandar()}
 
