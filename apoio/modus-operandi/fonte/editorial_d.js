@@ -204,7 +204,7 @@ function dkCanTrecho(sel){var t=sel.t,pt=sel.pt,E=escolha(t,XP.alt),ai=E.ai,h=''
   h+='<div class="cvh"><div><p class="cvk">'+esc(pt.t)+(t.opc?' · opcional':'')+'</p><p class="cvt">'+esc(t.n)+'</p></div><button type="button" class="cvx" data-dsel="" title="Fechar o trecho" aria-label="Fechar o trecho">×</button></div>';
   if(t.alts.length>1)h+='<div class="cf"><div class="cfl">Versões do texto <span class="pill">'+t.alts.length+'</span></div><div class="dvl">'+t.alts.map(function(x,i){return '<button type="button" data-xalt="'+esc(t.k)+'" data-i="'+i+'" aria-pressed="'+(i===ai)+'">'+esc(x.lab||('Versão '+(i+1)))+'</button>';}).join('')+'</div>'+(E.sub?'<div class="dvl" style="margin-top:6px">'+E.sub.map(function(x,i){return '<button type="button" data-xsub="'+esc(t.k)+'" data-i="'+i+'" aria-pressed="'+(i===E.si)+'">'+esc(x.lab)+'</button>';}).join('')+'</div>':'')+'</div>';
   var rr=(t.r||[]).concat((t.alts[Math.min(XP.alt[t.k]||0,Math.max(0,t.alts.length-1))]||{}).r||[]);
-  h+='<div class="cf"><div class="cfl">Regras do trecho'+(rr.length?' <span class="pill">'+rr.length+'</span>':'')+'</div>'+(rr.length?xLista(rr.map(function(r){return '<li>'+xFm(r)+'</li>';})):'<p class="meta" style="margin:0">Sem regra específica além da fórmula.</p>')+(window.VDM_EDITOR&&xBY()[t.pid]?'<button class="e-mini ed-in" data-edpec="'+esc(t.pid)+'">Editar esta peça</button>':'')+'</div>';
+  h+='<div class="cf"><div class="cfl">Regras do trecho'+(rr.length?' <span class="pill">'+rr.length+'</span>':'')+'</div>'+(rr.length?xLista(rr.map(function(r){return '<li>'+xFm(r)+'</li>';})):'<p class="meta" style="margin:0">Sem regra específica além da fórmula.</p>')+'</div>';
   if(t.info)h+='<div class="cf"><div class="cfl">Tabela de referência</div>'+xInfo(t.info)+'</div>';
   h+=dkAjuda(pt.id,t.n);
   if(pt.id==='ementa')h+=dkEmenta(t.n);
@@ -483,7 +483,7 @@ function dkCanTrecho(sel){var t=sel.t,pt=sel.pt,E=escolha(t,XP.alt),ai=E.ai,h=''
     h+=dkTemp().replace('<div class="cf" data-dtemp><div class="cfl">Tempestividade <span class="pill">cálculo</span></div>','<details class="cf dsec" data-dtemp'+(DK.op_temp?' open':'')+' data-dop="temp"><summary class="cfl">Tempestividade <span class="pill">cálculo</span></summary>').replace(/<\/div>$/,'</details>')+
        dkPrel().replace('<div class="cf"><div class="cfl">Admissibilidade e preliminares <span class="pill">'+DPREL.length+' parágrafos</span></div>','<details class="cf dsec"'+(DK.op_prel?' open':'')+' data-dop="prel"><summary class="cfl">Admissibilidade e preliminares <span class="pill">'+DPREL.length+'</span></summary>').replace(/<\/div>$/,'</details>');
   var ac=t.opc?'<button type="button" class="dact" data-xfecha="'+esc(t.k)+'">Recolher este bloco opcional</button>':(!xFixo(pt.id,t)?'<button type="button" class="dact" data-xfora="'+esc(t.k)+'">Retirar este bloco da peça</button>':'');
-  if(ac||window.VDM_EDITOR)h+='<div class="cf dacts">'+ac+(window.VDM_EDITOR&&xBY()[t.pid]?'<button class="e-mini ed-in" data-edpec="'+esc(t.pid)+'">Editar esta peça</button>':'')+'</div>';
+  if(ac)h+='<div class="cf dacts">'+ac+'</div>';
   return h;}
 function dkCanPeca(PT,pt){var n=pt.tr.filter(function(t){return !t.opc&&!xSai(t,pt.tr,XP.alt,XP.fora);}).length,op=pt.tr.filter(function(t){return t.opc&&!XP.abre[t.k];}).length,fo=pt.tr.filter(function(t){return XP.fora[t.k];}).length;
   var F=$$('#x-main .fill'),ok=F.filter(function(f){return f.textContent.trim();}).length;
@@ -773,8 +773,8 @@ document.addEventListener('click',function(ev){var t=ev.target,b=t.closest&&t.cl
 },true);
 document.addEventListener('input',function(ev){var t=ev.target;if(t.closest&&t.closest('#v-edit')&&(t.matches('[data-dfk]')||t.closest('#x-main .fill')))dkProntAtualizar();});
 
-var _dkCanTrechoBase=dkCanTrecho;dkCanTrecho=function(sel){var h=dkProntuarioAtivo()+_dkCanTrechoBase(sel);if(sel.pt.id==='acordao'||xFixo(sel.pt.id,sel.t))return h;var inc=dkIncHtml(sel.t);
-  var i=h.indexOf('<div class="cf xrot">');return i>=0?h.slice(0,i)+inc+h.slice(i):h+inc;};
+/* parágrafos do banco: não ficam no canhoto; abrem num painel flutuante junto do bloco (dkFlutuante), pelo "+ parágrafo" da margem */
+var _dkCanTrechoBase=dkCanTrecho;dkCanTrecho=function(sel){return dkProntuarioAtivo()+_dkCanTrechoBase(sel);};
 var _dkCanPecaBase=dkCanPeca;dkCanPeca=function(PT,pt){var h=dkProntuarioAtivo()+_dkCanPecaBase(PT,pt);
   if(pt.ref)h+='<details class="cf dsec dref"><summary class="cfl">'+esc(pt.ref.t)+' <span class="pill">referência</span></summary><p class="meta" style="margin:6px 0">Forma de ementa do caso-exemplo: os fatos e o resultado não são deste processo.</p><div class="dref-t">'+esc(pt.ref.f).replace(/\n/g,'<br>')+'</div></details>';
   return h;};
@@ -784,7 +784,7 @@ document.addEventListener('click',function(e){var t=e.target,b;if(!t.closest||!t
   if((b=t.closest('[data-dfonte]'))){fim();dkFonte(b.getAttribute('data-dfonte'));return;}
   if((b=t.closest('[data-drtab]'))){fim();DK.rtab=b.getAttribute('data-drtab');xRef();return;}
   if((b=t.closest('[data-dpick]'))){fim();var k=b.getAttribute('data-dpick');DK.pick=k;DK.pickq='';XP.sel=k;xPagina();var q=$('#dk-pickq');if(q)q.focus();return;}
-  if(t.closest('[data-dpickx]')){fim();DK.pick='';DK.pickq='';xPagina();return;}
+  if(t.closest('[data-dpickx]')){fim();DK.pick='';DK.pickq='';var kx=XP.sel;xPagina();var bx=kx&&document.querySelector('#x-main .xblk[data-xk="'+(window.CSS&&CSS.escape?CSS.escape(kx):kx)+'"] [data-dpick]');if(bx)bx.focus();return;}
   if((b=t.closest('[data-dpar]'))){fim();var x=b.getAttribute('data-dpar'),j=x.lastIndexOf('|'),kk=x.slice(0,j),id=x.slice(j+1),L=DK.inc[kk]=DK.inc[kk]||[],n=L.indexOf(id);
     if(n>=0)L.splice(n,1);else L.push(id);if(!L.length)delete DK.inc[kk];dkGuarda();XP.sel=kk;xPagina();var q2=$('#dk-pickq');if(q2){q2.focus();var v=q2.value.length;try{q2.setSelectionRange(v,v);}catch(er){}}return;}
   if((b=t.closest('[data-dincrm]'))){fim();var p=b.getAttribute('data-dincrm').split('|'),i=+p.pop(),k2=p.join('|');(DK.inc[k2]||[]).splice(i,1);if(DK.inc[k2]&&!DK.inc[k2].length)delete DK.inc[k2];dkGuarda();xPagina();return;}
@@ -868,7 +868,15 @@ function dkPilula(){var ex=$('#x-top .dexp'),tb=$('#x-main .dtabs');if(!ex||!tb)
   var cp=tb.querySelector('.dcpp');if(cp)pl.appendChild(cp);
   $$('button',ex).forEach(function(b){for(var a in DPILL)if(b.hasAttribute(a)&&!b.querySelector('.pa-tx')&&a!=='data-xlimpar'){var s=document.createElement('span');s.className='pa-tx';s.textContent=DPILL[a];b.appendChild(s);}pl.appendChild(b);});
   var w=document.createElement('div');w.className='dpillw';w.appendChild(pl);tb.appendChild(w);ex.remove();}
-(function(){var _xp=xPagina;xPagina=function(){var r=_xp.apply(this,arguments);dkJunta();dkPilula();return r;};})();
+/* painel flutuante dos parágrafos do banco, preso ao bloco: abre pelo "+ parágrafo" da margem, mostra os incluídos (ordem e retirada)
+   e a busca no banco; fecha por "Fechar" ou Esc. Os cliques dentro dele não chegam à seleção do bloco. */
+function dkFlutuante(){var k=DK.pick;if(!k)return;var B=document.querySelector('#x-main .xblk[data-xk="'+(window.CSS&&CSS.escape?CSS.escape(k):k)+'"]'),t=XP._SEL;
+  if(!B||!t||t.k!==k){DK.pick='';return;}
+  var p=document.createElement('div');p.className='dflut';p.setAttribute('role','dialog');p.setAttribute('aria-label','Parágrafos do banco · '+t.n);
+  p.innerHTML='<div class="dflut-h"><b>Parágrafos do banco</b><span>'+esc(t.n)+'</span></div>'+dkIncHtml(t);
+  p.addEventListener('click',function(e){e.stopPropagation();});B.classList.add('dflut-on');B.appendChild(p);
+  var r=p.getBoundingClientRect();if(r.bottom>window.innerHeight&&r.height<window.innerHeight)window.scrollBy({top:r.bottom-window.innerHeight+16,behavior:'smooth'});}
+(function(){var _xp=xPagina;xPagina=function(){var r=_xp.apply(this,arguments);dkJunta();dkPilula();dkFlutuante();return r;};})();
 
 /* Minutário com três modos (Minutário · Modelos · Parágrafos), trocados pelo seletor da abertura, como o Relator/Turma do Ementário */
 window.VDM_minAtual=function(){return XS.ed||'pecas';};

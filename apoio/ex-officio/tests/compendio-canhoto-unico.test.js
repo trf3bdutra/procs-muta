@@ -8,7 +8,7 @@ const ler = f => fs.readFileSync(path.join(MO, f), 'utf8');
 test('o antigo painel direito vive no canhoto e a folha fica com duas colunas', () => {
   const js = ler('fonte/editorial_d.js'), css = ler('fonte/editorial_d.css');
   assert.match(js, /function dkJunta\(\)/);
-  assert.match(js, /xPagina=function\(\)\{var r=_xp\.apply\(this,arguments\);dkJunta\(\);dkPilula\(\);return r;\};/);
+  assert.match(js, /xPagina=function\(\)\{var r=_xp\.apply\(this,arguments\);dkJunta\(\);dkPilula\(\);(?:dkFlutuante\(\);)?return r;\};/);
   assert.match(css, /grid-template-areas:"top top" "can main"\}/);
   assert.match(css, /#x-aside #x-ref\.dorip\{/);
 });
@@ -50,4 +50,12 @@ test('Modelos e Parágrafos são modos do Minutário, trocados pelo seletor da a
   assert.match(js, /window\.VDM_minModo=function\(v\)/);
   assert.match(pp, /function modoSel\(\)/);
   assert.match(pp, /\['pecas','Minutário'[^\]]*\],\['mod','Modelos'[^\]]*\],\['par','Parágrafos'/);
+});
+
+test('parágrafos do banco num painel flutuante preso ao bloco; canhoto sem "Editar esta peça"', () => {
+  const js = ler('fonte/editorial_d.js');
+  assert.match(js, /function dkFlutuante\(\)/);
+  assert.match(js, /dkCanTrecho=function\(sel\)\{return dkProntuarioAtivo\(\)\+_dkCanTrechoBase\(sel\);\};/);
+  assert.doesNotMatch(js, /Editar esta peça/);
+  assert.match(ler('fonte/editorial_d.css'), /\.dflut\{position:absolute;/);
 });

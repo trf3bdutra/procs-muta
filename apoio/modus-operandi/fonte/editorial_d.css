@@ -520,3 +520,26 @@ body.dsk #x-aside #x-ref.dorip+#dcan-bot{margin-top:6px}
 @media (max-width:1380px){.dtabs{flex-wrap:wrap;overflow:visible}.dtabs .dpillw{display:flex;order:-1;width:100%;justify-content:flex-end}.dtabs .dpill{margin:0 0 8px}.dtabs .dtsp{display:none}}
 @media (max-width:860px){.dtabs .dpillw{justify-content:flex-start;overflow-x:auto}.dtabs .dpill>button:not([data-xdocx]):not([data-xpdf]):not(.pri) .pa-tx,.dtabs .dpill>.dcpp span{display:none}}
 .dcan>#x-ref.dorip:first-child{margin-top:0;padding-top:0;border-top:0;margin-bottom:14px;padding-bottom:6px;border-bottom:1px solid #d8d3c6}
+
+/* ===== Parágrafos do banco: painel flutuante preso ao bloco (não fica no canhoto) ===== */
+body.dsk #x-main .xblk.dflut-on{z-index:40}
+.dflut{position:absolute;right:0;top:calc(100% - 6px);width:min(440px,100%);box-sizing:border-box;z-index:40;background:#fffdf8;border:1px solid #c8c3b6;border-radius:8px;box-shadow:0 14px 34px -14px rgba(32,59,57,.45);padding:12px 14px;cursor:default;font:13px/1.5 Inter,"Segoe UI",system-ui,sans-serif;color:#203b39;text-indent:0}
+.dflut-h{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:6px}
+.dflut-h b{font-size:12.5px}.dflut-h span{font:500 9.5px "IBM Plex Mono",ui-monospace,monospace;letter-spacing:.1em;text-transform:uppercase;color:#805b18}
+.dflut .cf.dinc{border:0;padding:0;margin:0}.dflut .cf.dinc>.cfl{display:none}
+.dflut .dinc-l{list-style:none;margin:0 0 8px;padding:0;display:flex;flex-direction:column;gap:3px}
+.dflut .dinc-l li{display:flex;align-items:center;gap:4px;border:1px solid #e3dfd4;border-radius:5px;background:#fff;padding:4px 6px;font-size:12px}
+.dflut .dinc-l li span{flex:1;min-width:0}
+.dflut .dinc-l button{border:1px solid #d8d3c6;background:#fff;border-radius:4px;width:24px;height:22px;cursor:pointer;color:#235a55}
+.dflut .dinc-l button:disabled{opacity:.35;cursor:default}
+.dflut .cq-pick{margin:0;border:0;padding:0;background:transparent}
+.dflut .cq-pick-h{display:flex;gap:8px}
+.dflut .cq-pick-h input{flex:1;min-width:0;height:32px;border:1px solid #c8c3b6;border-radius:5px;background:#fff;padding:0 9px;font:500 13px Inter,sans-serif}
+.dflut .cq-pick .meta{margin:6px 0 4px;font-size:12px;color:#617570}
+.dflut .cq-pick-l{list-style:none;margin:0;padding:0;max-height:320px;overflow:auto;display:flex;flex-direction:column;gap:4px}
+.dflut .cq-pick-l button{display:grid;gap:1px;width:100%;text-align:left;border:1px solid #e3dfd4;border-radius:5px;background:#fff;padding:6px 9px;cursor:pointer;font:12.5px/1.4 Inter,sans-serif;color:#203b39}
+.dflut .cq-pick-l button:hover{border-color:#9cc0b4;background:#f4f9f7}
+.dflut .cq-pick-l button[aria-pressed="true"]{border-color:#235a55;background:#e7f1ee}
+.dflut .cq-pick-l button[aria-pressed="true"] b:after{content:" · incluído (clique para retirar)";font-weight:500;color:#235a55}
+.dflut .cq-pick-l small{font:500 10px "IBM Plex Mono",ui-monospace,monospace;color:#7b8794}
+@media (max-width:860px){.dflut{position:static;width:auto;margin:8px 0 4px;grid-column:1/-1}}
