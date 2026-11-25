@@ -48,13 +48,13 @@ test('Repositório (vade-mecum): coluna "Tipo de caso" no lugar de "Subassunto"'
   }
 });
 
-test('Ementário: facetas Matéria e Tipo de caso; Correspondentes pelo tipo de caso', () => {
+test('Ementário: facetas Matéria e Detalhamento do caso, com detalhamento no cartão Processo', () => {
   const s = ler('apoio/modus-operandi/fonte/ementario.js');
   assert.ok(s.includes("var DIMS=['t','apr','ramo','mat','ass','tc','c','o','res','y'];"));
   assert.ok(s.includes("facet('mat','Matéria',base('mat'),8)"));
-  assert.ok(s.includes("facet('tc','Tipo de caso',base('tc'),8)"));
-  assert.ok(s.includes("' com o mesmo tipo de caso ou especificidades em comum</small>"));
-  assert.ok(s.includes("<th>Tipo de caso</th>"));
+  assert.ok(s.includes("facet('tc','Detalhamento do caso',base('tc'),8)"));
+  assert.ok(s.includes("tc:{n:'Detalhamento do caso',v:function(x){return tcResto(x)"));
+  assert.ok(s.includes('class="pp-interna pp-detalhamento"><div class="pp-k">Detalhamento do caso</div>'));
   assert.ok(!/n:'Subassunto'|>Subassunto<|'Subassunto',base|mesmo subassunto/.test(s), 'rótulo "Subassunto" ainda aparece no Ementário');
 });
 

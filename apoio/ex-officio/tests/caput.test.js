@@ -23,7 +23,7 @@ test('A entrada Caput abre a Chefia (com os relatórios da antiga Inteligência)
 
 test('Caput é servido sem duplicar APIs ou motor',()=>{
   for(const x of ['site/public/caput/index.html','site/public/monitor/triagem/index.html'])assert.ok(wf.includes(x),x);
-  assert.ok(wf.includes('"rewrites":[{"source":"/caput/:aba(triagem|pautas|coordenacao|comunicacao|inteligencia|chefia|escaninhos)","destination":"/caput/index.html"}'),'abas do Caput por caminho');
+  assert.ok(wf.includes('{"source":"/caput/:aba(triagem|pautas|coordenacao|comunicacao|inteligencia|chefia|escaninhos)","destination":"/caput/index.html"}'),'abas do Caput por caminho');
   for(const x of ['/init/assets/js/regras-gerais.js','/init/assets/js/gh-ponte.js'])assert.ok(page.includes(x),x);
   assert.ok(legacy.includes("location.replace('/caput/' + location.hash)"));
 });
@@ -68,7 +68,10 @@ test('Chefia: calendário completo do gabinete (o do motor) e regras de etiqueta
   const fs=require('fs'),p=require('path'),r=(x)=>fs.readFileSync(p.join(__dirname,'../../../',x),'utf8');
   const cap=r('caput/triagem/index.html'),rg=r('caput/assets/js/regras-gerais.js'),m=r('caput/motor/assets/js/21-sessoes-equipe.js');
   assert.ok(cap.includes('<script src="/init/motor/assets/js/11-calendario.js"></script>')&&cap.includes('W.CMTCalendario.montar(CAL_EL'),'calendário do motor na Chefia');
-  assert.ok(m.includes('regrasEtiquetas: {')&&m.includes('RX.clear(); HIST = null; salvar(); return true; }'),'API do motor');
+  const etq=r('caput/motor/assets/js/19-motor-etiquetas.js');
+  assert.ok(m.includes('regrasEtiquetas: ETQ.administracao'),'API do motor expõe a administração compartilhada');
+  assert.ok(etq.includes('RX.clear(); ctx.alterar(true); return true;'),'ao salvar uma regra, invalida o cache da comparação');
+  assert.ok(m.includes('if(invalidar)HIST=null;salvar();'),'o motor invalida o histórico e persiste a alteração');
   assert.ok(rg.includes("data-rg=\"etq-nova\"")&&rg.includes('SM.conversoes(ses.id)')&&!rg.includes("tela('regras', 'Editar regras de etiquetas')"),'editor nas Regras gerais, contado como na etapa 3');
 });
 
