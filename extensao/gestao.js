@@ -243,8 +243,8 @@
       : X.aba === 'so' ? (L.so.length ? L.so.map(itemSo).join('') : '<p class="muted gx-v">Nenhum pedido de sustentação oral ou de preferência recebido para as próximas sessões.</p>')
       : (L.du.length ? L.du.map(itemDu).join('') : '<p class="muted gx-v">Nenhuma dúvida em aberto dirigida a você.</p>');
     c.innerHTML = '<div class="gx-top"><div><b>Deliberações</b><small class="muted">o que aguarda decisão' + (X.dados && X.dados.hoje ? ' · ' + esc(data(X.dados.hoje)) : '') + '</small></div>' +
-      '<span><button type="button" class="lnk" data-gx="ler-del">' + (X.lendo ? 'lendo…' : 'atualizar') + '</button><a class="lnk" target="_blank" rel="noopener" href="' + esc(site()) + '/cmt/">painel do Desembargador</a></span></div>' +
-      '<div class="seg pmodos gx-modos" role="tablist" aria-label="Tipo de deliberação">' + tab('as', 'Assinatura', 'somente decisões com urgência ativa, submetidas à assinatura') + tab('du', 'Dúvidas', 'dúvidas da equipe') + tab('pe', 'Pauta', 'pedidos de retirada e de adiamento') + '</div>' +
+      '<span><button type="button" class="lnk" data-gx="ler-del">' + (X.lendo ? 'lendo…' : 'atualizar') + '</button></span></div>' +
+      '<div class="seg pmodos gx-modos" role="tablist" aria-label="Tipo de deliberação">' + tab('as', 'Urgências', 'Decisões urgentes já submetidas à assinatura') + tab('du', 'Dúvidas', 'dúvidas da equipe') + tab('pe', 'Pauta', 'pedidos de retirada e de adiamento') + tab('so', 'Sustentações', 'pedidos de sustentação e preferência') + '</div>' +
       (X.msg ? '<p class="gx-msg' + (/^Não/.test(X.msg) ? ' err' : '') + '">' + esc(X.msg) + '</p>' : '') +
       (X.erro ? '<p class="gx-v err">' + esc(X.erro) + '</p>' : !X.dados ? '<p class="muted gx-v">Lendo…</p>' : corpo);
   }
