@@ -115,6 +115,49 @@ body>header.am-home-header,body>header.am-home-header.amicus-shell{display:grid!
 @media(max-width:1299px) and (min-width:901px){.am-dashboard{grid-template-columns:215px minmax(0,1fr);grid-template-areas:"apps main" "refs main";grid-template-rows:auto 1fr}.am-refs{align-self:start}}
 @media(max-width:900px){.am-dashboard{grid-template-columns:minmax(0,1fr);grid-template-areas:"apps" "main" "refs";gap:12px}.am-dashboard .am-apps .grid{grid-template-columns:repeat(auto-fit,minmax(160px,1fr))}body>header.am-home-header,body>header.am-home-header.amicus-shell{grid-template-columns:minmax(0,1fr) auto;gap:0 8px}.am-home-header>.amicus-actions{grid-column:2}.am-home-header>.am-over-head{grid-column:1/-1;grid-row:2;border-left:0;border-top:1px solid var(--el);padding:9px 0}.am-home-header>.am-over-nav{grid-row:3;flex-wrap:nowrap;overflow-x:auto}.am-home-header .am-over-nav a{flex:1 0 auto;white-space:nowrap;border-top:0;padding:9px 10px}}
 @media(max-width:480px){.am-dashboard .am-apps .grid{grid-template-columns:1fr}.am-home-header .am-over-label{font-size:9px}.am-home-header .am-over-head h1{font-size:18px}}
+
+/* Command: mapa interativo com seis estações cromáticas. */
+#fluxos{--af-entry:#1f4e79;--af-mono:#a8761c;--af-susp:#5b4b8a;--af-session:#207242;--af-appeal:#a23b3b;--af-ed:#0f7a86;--af-return:#d1495b}
+html[data-theme=dark] #fluxos{--af-entry:#8fb7e3;--af-mono:#dcae58;--af-susp:#b8a8ea;--af-session:#7fd0a1;--af-appeal:#ef8f8f;--af-ed:#6fcad6;--af-return:#ff8f9b}
+.af-toolbar,.af-tools,.af-legend,.af-route,.af-links{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.af-toolbar{justify-content:space-between;padding:8px 0}
+#fluxos .flow-tabs{display:flex;flex-wrap:wrap;gap:5px;flex:1 1 360px;margin:0}
+#fluxos .flow-tabs button,.af-legend button,.af-route button,.af-links button{border:1px solid var(--el);border-left:3px solid var(--fc);background:var(--ew);color:var(--ei);font:600 11.5px system-ui;padding:6px 8px;cursor:pointer}
+#fluxos .flow-tabs button[aria-pressed=true],.af-legend button[aria-pressed=true],.af-route button[aria-pressed=true]{background:color-mix(in srgb,var(--fc) 14%,var(--ew));border-color:var(--fc);color:var(--fc)}
+.af-body{display:grid;grid-template-columns:minmax(0,1fr);gap:8px;align-items:start}
+#fluxos.full-panel .af-body{grid-template-columns:minmax(0,1fr) 280px}
+.af-stage{min-width:0;border:1px solid var(--el);background:var(--ep)}
+#fluxos #flow-overview{overflow:auto;margin:0;padding:6px;background-image:radial-gradient(var(--etx) 1px,transparent 1px);background-size:14px 14px;scrollbar-width:thin}
+#fluxos #flow-overview svg{display:block;width:100%;min-width:760px;max-height:none;height:auto;user-select:none}
+#fluxos #flow-overview .flow-lane rect{fill:color-mix(in srgb,var(--fc) 8%,var(--ew));stroke:color-mix(in srgb,var(--fc) 42%,var(--el))}
+#fluxos #flow-overview .flow-lane text{font:650 10px system-ui;letter-spacing:.09em;fill:var(--fc)}
+#fluxos .flow-lane{cursor:pointer}
+#fluxos #flow-overview .flow-lane.on rect,#fluxos #flow-overview .flow-lane:focus-visible rect{stroke:var(--fc);stroke-width:2.5}
+#fluxos #flow-overview .overview-node .af-box{fill:color-mix(in srgb,var(--fc) 7%,var(--ew));stroke:var(--fc);stroke-width:1.5}
+#fluxos #flow-overview .overview-node .af-stripe{fill:var(--fc);stroke:none}
+#fluxos #flow-overview .overview-node text{fill:var(--ei);font:600 10.8px system-ui;pointer-events:none}
+#fluxos #flow-overview .overview-node.selected .af-box,#fluxos #flow-overview .overview-node.current .af-box,#fluxos #flow-overview .overview-node:focus-visible .af-box{stroke:var(--fc);stroke-width:3;fill:color-mix(in srgb,var(--fc) 18%,var(--ew))}
+#fluxos .overview-node,#fluxos .af-edge{transition:opacity .15s}
+#fluxos svg.af-focus .overview-node:not(.lit){opacity:.22}
+#fluxos svg.af-focus .af-edge:not(.lit){opacity:.09}
+#fluxos #flow-overview .flow-edge{fill:none;stroke:var(--fc);stroke-width:1.5;opacity:.8;marker-end:none}
+#fluxos #flow-overview .af-edge.lit .flow-edge{stroke-width:2.8;opacity:1}
+#fluxos .af-edge.dashed .flow-edge{stroke-dasharray:5 4}
+#fluxos .af-edge.ghost:not(.lit){display:none}
+#fluxos .af-edge.hot .flow-edge{stroke-dasharray:7 5;animation:af-dash 1s linear infinite}
+@keyframes af-dash{to{stroke-dashoffset:-24}}
+#fluxos .af-edge-label{font:600 9.5px system-ui;fill:var(--fc);paint-order:stroke;stroke:var(--ep);stroke-width:3px;pointer-events:none}
+.af-legend{padding:8px;border-top:1px solid var(--el);background:var(--ew)}
+.af-detail{border:1px solid var(--el);border-top:3px solid var(--fc,var(--eg));background:var(--ew);padding:12px;min-width:0;font-size:12px;line-height:1.5}
+.af-detail h3{font:650 17px system-ui;margin:4px 0 8px;color:var(--ei)}
+.af-detail h4{font:600 10px var(--emono);letter-spacing:.08em;text-transform:uppercase;color:var(--em);margin:12px 0 5px}
+.af-detail p{margin:4px 0;color:var(--em)}
+.af-links button{text-align:left;font-weight:500}.af-links button small{display:block;color:var(--fc)}
+.af-stepbar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;background:color-mix(in srgb,var(--fc) 8%,var(--ew));border:1px solid var(--el);border-left:3px solid var(--fc);padding:8px 10px;margin:0 0 8px;font-size:12px}
+.af-stepbar b{color:var(--fc);display:block}.af-stepbar p{margin:3px 0;color:var(--em);font-size:11.5px}
+.af-stepbar button:disabled{opacity:.4;cursor:default}.af-route{padding:8px 0}
+@media(max-width:1000px){#fluxos.full-panel .af-body{grid-template-columns:minmax(0,1fr)}}
+@media(prefers-reduced-motion:reduce){#fluxos .af-edge.hot .flow-edge{animation:none}#fluxos .overview-node,#fluxos .af-edge{transition:none}}
 </style></head><body><header class="am-home-header"><div class="am-legacy"><b>Amicus Curiae.</b><span>Gabinete CMT · Ferramentas</span></div><div class="am-over-head am-home-overview"><div><h1>Visão geral</h1><p>Triagem, organização e apoio à elaboração.</p></div><span class="am-over-label">3 áreas · 6 painéis de consulta</span></div><nav class="am-over-nav am-home-overview" aria-label="Áreas da página"><a href="#ferramentas"><span>01</span> Ferramentas e pesquisa</a><a href="#referencias-juridicas"><span>02</span> Referências jurídicas</a><a href="#referencias-operacionais"><span>03</span> Referências operacionais</a></nav></header>
 <main class="am-dashboard"><aside class="am-rail am-apps" aria-labelledby="am-apps-title"><div class="am-rail-head"><small>Amicus Curiae</small><h2 id="am-apps-title">Aplicações</h2><p>Ferramentas do gabinete</p></div><div class="grid"><a class="card" href="/amicus/compendium/"><small>01 · Compendium</small><h2>Conhecimento e Minutário</h2><p>Consulta à base de apoio jurídico e aos instrumentos editoriais do gabinete.</p></a>
 <a class="card" href="/amicus/cognitio/"><small>02 · Cognitio</small><h2>Acervo e triagem</h2><p>Triagem processual, seleção prévia para julgamento, decisões monocráticas e acompanhamento dos demais atos, com a ficha única do gabinete.</p></a>
@@ -139,7 +182,9 @@ body>header.am-home-header,body>header.am-home-header.amicus-shell{display:grid!
 <section class="busca" id="regimento"><div class="pane-title"><div><small>Regimento Interno · fonte do Compendium</small><h2>Regimento Interno</h2></div><a href="/amicus/compendium/#v=rep">Abrir Repertório ↗</a><button type="button" class="more" data-full="regimento">⛶ Tela cheia</button></div><p>Consulta por artigo, assunto ou palavra; texto e notas da base regimental existente.</p>
 <div class="panel-filter"><input type="search" id="rit-q" placeholder="Artigo 33, prevenção, sessão…" aria-label="Buscar artigos"><select id="rit-p" aria-label="Parte do Regimento"><option value="">Todas as partes</option></select><label><input id="rit-rev" type="checkbox"> Incluir revogados</label></div><p class="bmeta" id="rit-meta"></p><div id="rit-list" class="ref-list"></div><button class="more" id="rit-more" hidden>Mostrar mais</button></section>
 </div></section><section class="am-area" id="referencias-operacionais" aria-labelledby="referencias-operacionais-title"><div class="am-area-title"><span class="am-number">03</span><div><h2 id="referencias-operacionais-title">Referências operacionais</h2><p>Fluxos, competência e registros de imparcialidade.</p></div></div><div class="am-area-grid am-op-grid"><section class="busca" id="fluxos"><div class="pane-title"><div><small>Central de Comando · referência operacional</small><h2>Fluxos de trabalho</h2></div><button type="button" class="more" data-full="fluxos">⛶ Tela cheia</button></div>
-<p>Percursos do fluxograma do HTML de referência. Selecione uma via para examinar etapas e transições. Não representa contagem atual de processos.</p><details class="overview" open><summary>Mapa geral · tarefas e conexões</summary><div id="flow-overview"></div><p id="flow-overview-note" aria-live="polite" class="bmeta">Selecione uma tarefa para consultar as transições.</p></details><div id="flow-tabs" class="panel-filter flow-tabs"></div><div id="flow-description" class="bmeta"></div><div id="flow-map" class="flow-map"></div><div id="flow-step" class="flow-detail" aria-live="polite"></div></section>
+<p>Explore as seis estações do gabinete: selecione tarefas, siga percursos e visualize suas conexões. Mapa de referência, sem contagens do acervo.</p>
+<div class="af-toolbar"><div id="flow-tabs" class="flow-tabs" role="group" aria-label="Percursos"></div><div class="af-tools"><button class="more" id="af-minus" type="button" aria-label="Reduzir mapa">−</button><button class="more" id="af-fit" type="button">Ajustar</button><button class="more" id="af-plus" type="button" aria-label="Ampliar mapa">+</button><button class="more" id="af-reset" type="button">Visão geral</button></div></div>
+<div id="flow-description" class="af-stepbar" hidden></div><div class="af-body"><div class="af-stage"><div id="flow-overview"></div><div id="af-legend" class="af-legend" aria-label="Estações"></div></div><aside id="flow-overview-note" class="af-detail" aria-live="polite"></aside></div><div id="flow-map" class="af-route" hidden></div><div id="flow-step" class="bmeta" aria-live="polite" hidden></div></section>
 
 <section class="busca" id="competencia"><div class="pane-title"><div><small>Central de Comando · referência</small><h2>Competência</h2></div><button type="button" class="more" data-full="competencia">⛶ Tela cheia</button></div><p>Turma Regional de Mato Grosso do Sul, competência delegada e distribuição por matéria nas Seções do TRF3. Síntese do material fornecido, sujeita à conferência normativa.</p>
 <div class="comp-grid">
@@ -182,20 +227,74 @@ const overviewNodes={"rec_unid":[95,72,"Recebidos da unidade"],"triagem":[95,160
 const nodes=Object.fromEntries(Object.entries(overviewNodes).map(([k,v])=>[k,v[2]]));
 const flows=[['Via monocrática','Da triagem à assinatura da decisão singular (art. 932).',['rec_unid','triagem','analisar','minutar','revisar','assinar']],['Via colegiada','Do voto à pauta e ao acórdão conferido.',['triagem','analisar','s_prep','s_aptos','s_aguard','s_inteiro']],['Pauta com adiamento','Retirado ou adiado, o processo volta a Aptos para ser repautado.',['s_prep','s_aptos','s_aguard','s_ret','s_aptos','s_aguard','s_inteiro']],['Retirado e devolvido','Retirado de pauta, o processo volta à análise do tipo de decisão.',['s_aguard','s_ret','analisar']],['Sobrestamento','Suspensão por tema pendente e retorno quando a tese é julgada.',['analisar','sob_ts','sob_pet','sob_min','analisar']],['ED contra monocrática','Embargos decididos pelo próprio Relator.',['assinar','rec_ed','ed_min','ed_ass']],['ED contra acórdão','Embargos que voltam ao colegiado, julgados em mesa.',['s_inteiro','rec_ed','sed_prep','sed_aguard']],['Agravo interno','Mantida a monocrática, o agravo segue ao colegiado.',['assinar','analisar','agint_min','s_prep','s_aptos','s_aguard']]];
 
-function overview(){
-const out=$('flow-overview'),mid=80,hh=23;
-const lane=overviewLanes.map((l,i)=>'<g class="flow-lane lane-'+i+'"><rect x="'+l[0]+'" y="'+l[1]+'" width="'+l[2]+'" height="'+l[3]+'" rx="5"/><text x="'+(l[0]+8)+'" y="'+(l[1]+14)+'">'+esc(l[4])+'</text></g>').join('');
-const edges=overviewEdges.map(([a,b,label])=>{const A=overviewNodes[a],B=overviewNodes[b],same=A[0]===B[0],dx=B[0]-A[0],sgn=dx>=0?1:-1,x1=same?A[0]:A[0]+mid*sgn,y1=same?A[1]+hh*Math.sign(B[1]-A[1]):A[1],x2=same?B[0]:B[0]-mid*sgn,y2=same?B[1]-hh*Math.sign(B[1]-A[1]):B[1],m=(x1+x2)/2;return '<path class="flow-edge" data-from="'+a+'" data-to="'+b+'" d="M'+x1+' '+y1+' C '+m+' '+y1+' '+m+' '+y2+' '+x2+' '+y2+'"><title>'+esc(nodes[a]+' → '+nodes[b]+(label?' · '+label:''))+'</title></path>';}).join('');
-const node=Object.entries(overviewNodes).map(([id,[x,y,label]])=>{const ws=label.split(' '),ls=[''];for(const w of ws){const n=ls.length-1;if((ls[n]+' '+w).trim().length>23&&ls[n])ls.push(w);else ls[n]=(ls[n]+' '+w).trim()}return '<g class="overview-node" role="button" tabindex="0" aria-label="'+esc(label)+'" data-node="'+id+'"><rect x="'+(x-mid)+'" y="'+(y-hh)+'" width="160" height="46" rx="5"/><text text-anchor="middle" x="'+x+'" y="'+(y-(ls.length-1)*6)+'">'+ls.map((l,i)=>'<tspan x="'+x+'" dy="'+(i?12:0)+'">'+esc(l)+'</tspan>').join('')+'</text></g>';}).join('');
-out.innerHTML='<svg viewBox="0 0 955 680" role="group" aria-label="Mapa geral do fluxo processual"><defs><marker id="am-arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0 0L7 3.5L0 7Z" fill="#82968c"/></marker></defs>'+lane+edges+node+'</svg>';
-function sel(id){out.querySelectorAll('[data-node]').forEach(n=>n.classList.toggle('selected',n.dataset.node===id));out.querySelectorAll('.flow-edge').forEach(n=>n.classList.toggle('selected',n.dataset.from===id||n.dataset.to===id));const links=overviewEdges.filter(e=>e[0]===id||e[1]===id);$('flow-overview-note').innerHTML='<b>'+esc(nodes[id])+'</b><br>'+(links.length?links.map(([a,b,l])=>esc(nodes[a]+' → '+nodes[b]+(l?' · '+l:''))).join('<br>'):'Tarefa apresentada no mapa de referência, sem transição explícita neste trecho.');}
-out.onclick=e=>{const n=e.target.closest('[data-node]');if(n)sel(n.dataset.node)};out.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){const n=e.target.closest('[data-node]');if(n){e.preventDefault();sel(n.dataset.node)}}};
-}
-overview();
 
-let active=0,step=0;
-function flow(){const f=flows[active];$('flow-tabs').innerHTML=flows.map((x,i)=>'<button type="button" class="more" aria-pressed="'+(i===active)+'" data-flow="'+i+'">'+esc(x[0])+'</button>').join('');$('flow-description').textContent=f[1];$('flow-map').innerHTML=f[2].map((x,i)=>(i?'<span class="flow-arrow" aria-hidden="true">→</span>':'')+'<button class="flow-node" data-step="'+i+'" aria-pressed="'+(i===step)+'"><small>'+String(i+1).padStart(2,'0')+'</small>'+esc(nodes[x])+'</button>').join('');$('flow-step').innerHTML='<b>'+esc(nodes[f[2][step]])+'</b> · Etapa '+(step+1)+' de '+f[2].length+'<p>Anterior: '+esc(step?nodes[f[2][step-1]]:'Início')+' · Seguinte: '+esc(step+1<f[2].length?nodes[f[2][step+1]]:'Fim do percurso')+'</p>';}
-$('flow-tabs').onclick=e=>{const b=e.target.closest('[data-flow]');if(b){active=+b.dataset.flow;step=0;flow()}};$('flow-map').onclick=e=>{const b=e.target.closest('[data-step]');if(b){step=+b.dataset.step;flow()}};flow();
+const afKeys=['entry','mono','susp','session','appeal','ed'],afNames=overviewLanes.map(l=>l[4]),afRouteLanes=[1,3,3,0,2,4,5,4];
+const afLane=id=>{const [x,y]=overviewNodes[id];return x<200?0:y<176?1:y<328?2:y<500?3:y<592?4:5;};
+const afColor=i=>'var(--af-'+afKeys[i]+')',afStyle=i=>'--fc:'+afColor(i);
+const af={path:null,step:0,sel:null,hover:null,lane:null,zoom:1};
+const ghosts=[['assinar','rec_ed','Embargos'],['s_inteiro','rec_ed','Embargos contra acórdão'],['assinar','analisar','Agravo interno interposto']];
+const afEdges=overviewEdges.map(([a,b,label])=>({a,b,label,ghost:false})).concat(ghosts.map(([a,b,label])=>({a,b,label,ghost:true})));
+function afGeom(e){
+ const A=overviewNodes[e.a],B=overviewNodes[e.b],dx=B[0]-A[0],dy=B[1]-A[1];
+ if(e.a==='analisar'&&e.b==='agint_min')return ['M175 300 C228 300 212 484 262 484 L650 484 C680 484 680 492 680 522',430,484];
+ if(e.a==='agint_min'&&e.b==='s_prep')return ['M760 546 C800 546 800 494 760 494 L342 494 C330 494 330 470 330 398',560,494];
+ if((e.a==='sob_min'||e.a==='s_ret')&&e.b==='analisar'){const v=e.a==='sob_min'?322:476;return ['M'+A[0]+' '+(A[1]+23)+' C'+A[0]+' '+v+' 245 '+v+' 175 '+B[1],(A[0]+245)/2,v];}
+ let p;if(dx===0){const d=Math.sign(dy)||1;p=[[A[0],A[1]+23*d],[A[0],A[1]+23*d+dy*.3],[B[0],B[1]-23*d-dy*.3],[B[0],B[1]-23*d]];}else{const d=Math.sign(dx),x1=A[0]+80*d,x2=B[0]-80*d,m=(x1+x2)/2;p=[[x1,A[1]],[m,A[1]],[m,B[1]],[x2,B[1]]];}
+ return ['M'+p[0].join(' ')+' C'+p.slice(1).map(v=>v.join(' ')).join(' '),(p[0][0]+3*p[1][0]+3*p[2][0]+p[3][0])/8,(p[0][1]+3*p[1][1]+3*p[2][1]+p[3][1])/8];
+}
+function afRender(){
+ const lanes=overviewLanes.map((l,i)=>'<g class="flow-lane" data-lane="'+i+'" role="button" tabindex="0" aria-label="'+esc(l[4])+'" style="'+afStyle(i)+'"><rect x="'+l[0]+'" y="'+l[1]+'" width="'+l[2]+'" height="'+l[3]+'" rx="8"/><text x="'+(l[0]+9)+'" y="'+(l[1]+15)+'">'+esc(l[4].toUpperCase())+'</text></g>').join('');
+ const edges=afEdges.map((e,i)=>{const [d,x,y]=afGeom(e),ret=['sob_min|analisar','s_ret|s_aptos','s_ret|analisar'].includes(e.a+'|'+e.b),key=ret?'return':afKeys[afLane(e.b)],dash=ret||['revisar_div|assinar','sob_ts|sob_pet','su_ts|su_pet','s_aguard|s_ret','s_aguard|s_interc','sed_aguard|sed_ret'].includes(e.a+'|'+e.b);return '<g class="af-edge'+(dash?' dashed':'')+(e.ghost?' ghost':'')+'" data-edge="'+i+'" style="--fc:var(--af-'+key+')"><path class="flow-edge" d="'+d+'" style="marker-end:url(#af-arrow-'+key+')"><title>'+esc(nodes[e.a]+' → '+nodes[e.b]+(e.label?' · '+e.label:''))+'</title></path>'+(e.label?'<text class="af-edge-label" x="'+x+'" y="'+(y-5)+'" text-anchor="middle">'+esc(e.label)+'</text>':'')+'</g>';}).join('');
+ const tasks=Object.entries(overviewNodes).map(([id,[x,y,label]])=>{let ls=[''];for(const w of label.split(' ')){const i=ls.length-1;if((ls[i]+' '+w).trim().length>22&&ls[i])ls.push(w);else ls[i]=(ls[i]+' '+w).trim();}const box=id==='analisar'?'<polygon class="af-box" points="'+[[x-68,y-23],[x+68,y-23],[x+80,y],[x+68,y+23],[x-68,y+23],[x-80,y]].map(v=>v.join(',')).join(' ')+'"/>':'<rect class="af-box" x="'+(x-80)+'" y="'+(y-23)+'" width="160" height="46" rx="6"/>';return '<g class="overview-node" data-node="'+id+'" role="button" tabindex="0" aria-pressed="false" aria-label="'+esc(label)+'" style="'+afStyle(afLane(id))+'">'+box+(id==='analisar'?'':'<rect class="af-stripe" x="'+(x-75)+'" y="'+(y-14)+'" width="3" height="28" rx="1.5"/>')+'<text x="'+x+'" y="'+(y-(ls.length-1)*6+4)+'" text-anchor="middle">'+ls.map((l,i)=>'<tspan x="'+x+'" dy="'+(i?12:0)+'">'+esc(l)+'</tspan>').join('')+'</text></g>';}).join('');
+ $('flow-overview').innerHTML='<svg id="af-svg" viewBox="0 0 955 680" role="group" aria-label="Fluxograma interativo das tarefas"><defs>'+afKeys.concat('return').map(k=>'<marker id="af-arrow-'+k+'" markerWidth="8" markerHeight="8" refX="9" refY="5" viewBox="0 0 10 10" orient="auto"><path d="M0 1L9 5L0 9Z" fill="var(--af-'+k+')"/></marker>').join('')+'</defs>'+lanes+edges+tasks+'</svg>';
+ $('flow-tabs').innerHTML=flows.map((f,i)=>'<button class="more" type="button" data-flow="'+i+'" aria-pressed="false" style="'+afStyle(afRouteLanes[i])+'">'+esc(f[0])+'</button>').join('');
+ $('af-legend').innerHTML=afNames.map((n,i)=>'<button type="button" data-lane="'+i+'" aria-pressed="false" style="'+afStyle(i)+'">'+esc(n)+'</button>').join('')+'<span class="bmeta">Tracejadas: vias eventuais e retornos.</span>';
+}
+function afChip(id,label){return '<button type="button" data-go="'+id+'" style="'+afStyle(afLane(id))+'">'+esc(nodes[id])+(label?'<small>'+esc(label)+'</small>':'')+'</button>';}
+function afFocus(){
+ const svg=$('af-svg'),lit=new Set(),edges=new Set(),hot=new Set(),f=af.path===null?null:flows[af.path],cur=f?f[2][af.step]:null;
+ function around(id){lit.add(id);afEdges.forEach((e,i)=>{if(!e.ghost&&(e.a===id||e.b===id)){lit.add(e.a);lit.add(e.b);edges.add(i);}});}
+ if(af.hover)around(af.hover);else if(f){f[2].forEach(id=>lit.add(id));for(let i=1;i<f[2].length;i++){const k=afEdges.findIndex(e=>e.a===f[2][i-1]&&e.b===f[2][i]);if(k>=0){edges.add(k);if(i<=af.step)hot.add(k);}}}else if(af.sel)around(af.sel);else if(af.lane!==null){Object.keys(nodes).filter(id=>afLane(id)===af.lane).forEach(id=>lit.add(id));afEdges.forEach((e,i)=>{if(!e.ghost&&(lit.has(e.a)||lit.has(e.b)))edges.add(i);});}
+ svg.classList.toggle('af-focus',lit.size>0);
+ svg.querySelectorAll('[data-node]').forEach(n=>{const id=n.dataset.node;n.classList.toggle('lit',lit.has(id));n.classList.toggle('current',id===cur);n.classList.toggle('selected',id===af.sel&&!f);n.setAttribute('aria-pressed',String(id===cur||id===af.sel));});
+ svg.querySelectorAll('[data-edge]').forEach(n=>{const i=+n.dataset.edge;n.classList.toggle('lit',edges.has(i));n.classList.toggle('hot',hot.has(i));});
+ svg.querySelectorAll('[data-lane]').forEach(n=>n.classList.toggle('on',+n.dataset.lane===af.lane));
+}
+function afApply(){
+ afFocus();const f=af.path===null?null:flows[af.path],id=f?f[2][af.step]:af.sel,p=$('flow-overview-note'),bar=$('flow-description'),route=$('flow-map'),note=$('flow-step');
+ $('flow-tabs').querySelectorAll('[data-flow]').forEach(n=>n.setAttribute('aria-pressed',String(+n.dataset.flow===af.path)));
+ $('af-legend').querySelectorAll('[data-lane]').forEach(n=>n.setAttribute('aria-pressed',String(+n.dataset.lane===af.lane)));
+ p.style.setProperty('--fc',id?afColor(afLane(id)):af.lane!==null?afColor(af.lane):'var(--eg)');
+ if(id){const ins=afEdges.filter(e=>e.b===id),outs=afEdges.filter(e=>e.a===id);p.innerHTML='<small>'+esc(afNames[afLane(id)])+'</small><h3>'+esc(nodes[id])+'</h3><h4>Vem de</h4><div class="af-links">'+(ins.length?ins.map(e=>afChip(e.a,e.label)).join(''):'<p>Sem entrada registrada no mapa.</p>')+'</div><h4>Segue para</h4><div class="af-links">'+(outs.length?outs.map(e=>afChip(e.b,e.label)).join(''):'<p>Sem saída registrada no mapa.</p>')+'</div>';}
+ else if(af.lane!==null)p.innerHTML='<small>Estação</small><h3>'+esc(afNames[af.lane])+'</h3><div class="af-links">'+Object.keys(nodes).filter(k=>afLane(k)===af.lane).map(k=>afChip(k)).join('')+'</div>';
+ else p.innerHTML='<small>Explorar o fluxo</small><h3>Mapa de tarefas</h3><p>Passe o cursor sobre uma tarefa para realçar as conexões. Clique para navegar pelas tarefas vizinhas, ou escolha um percurso guiado.</p>';
+ bar.hidden=route.hidden=note.hidden=!f;if(!f)return;
+ bar.style.setProperty('--fc',afColor(afRouteLanes[af.path]));bar.innerHTML='<div><b>'+esc(f[0])+'</b><p>'+esc(f[1])+'</p></div><div class="af-tools"><button class="more" type="button" data-af-step="-1" aria-label="Etapa anterior" '+(!af.step?'disabled':'')+'>‹</button><span>Etapa '+(af.step+1)+' de '+f[2].length+'</span><button class="more" type="button" data-af-step="1" aria-label="Próxima etapa" '+(af.step===f[2].length-1?'disabled':'')+'>›</button><button class="more" type="button" data-af-stop>Encerrar</button></div>';
+ route.innerHTML=f[2].map((id,i)=>(i?'<span aria-hidden="true">→</span>':'')+'<button type="button" data-step="'+i+'" aria-pressed="'+(i===af.step)+'" style="'+afStyle(afLane(id))+'">'+(i+1)+' · '+esc(nodes[id])+'</button>').join('');
+ const e=af.step?afEdges.find(e=>e.a===f[2][af.step-1]&&e.b===f[2][af.step]):null;note.textContent=e&&e.label?'Transição: '+e.label:'';
+}
+function afGo(id){if(af.path!==null){const n=flows[af.path][2],i=n.indexOf(id,af.step),k=i<0?n.indexOf(id):i;if(k>=0){af.step=k;af.hover=null;afApply();return;}}af.path=null;af.sel=id;af.lane=af.hover=null;afApply();}
+function afSelectLane(i){af.lane=af.lane===i?null:i;af.path=af.sel=af.hover=null;afApply();}
+function afReset(){af.path=af.sel=af.hover=af.lane=null;af.step=0;afApply();}
+function afStep(d){if(af.path===null)return;af.step=Math.max(0,Math.min(flows[af.path][2].length-1,af.step+d));af.hover=null;afApply();}
+function afZoom(n){af.zoom=Math.max(.75,Math.min(2.5,n));const svg=$('af-svg'),w=$('flow-overview').clientWidth-12;svg.style.width=Math.round(Math.max(760,w)*af.zoom)+'px';svg.style.minWidth='0';}
+afRender();afApply();
+const afMap=$('flow-overview');
+afMap.addEventListener('mouseover',e=>{const n=e.target.closest('[data-node]'),id=n?n.dataset.node:null;if(id!==af.hover){af.hover=id;afFocus();}});
+afMap.addEventListener('mouseleave',()=>{af.hover=null;afFocus();});
+afMap.addEventListener('focusin',e=>{const n=e.target.closest('[data-node]');if(n){af.hover=n.dataset.node;afFocus();}});
+afMap.addEventListener('focusout',()=>{af.hover=null;afFocus();});
+function afPick(e){const n=e.target.closest('[data-node]'),l=e.target.closest('[data-lane]');if(n)afGo(n.dataset.node);else if(l)afSelectLane(+l.dataset.lane);}
+afMap.addEventListener('click',afPick);
+afMap.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.closest('[data-node],[data-lane]')){e.preventDefault();afPick(e);}});
+$('flow-tabs').onclick=e=>{const b=e.target.closest('[data-flow]');if(!b)return;const i=+b.dataset.flow;if(af.path===i){afReset();return;}af.path=i;af.step=0;af.sel=af.hover=af.lane=null;afApply();};
+$('flow-overview-note').onclick=e=>{const b=e.target.closest('[data-go]');if(b)afGo(b.dataset.go);};
+$('af-legend').onclick=e=>{const b=e.target.closest('[data-lane]');if(b)afSelectLane(+b.dataset.lane);};
+$('flow-description').onclick=e=>{const b=e.target.closest('[data-af-step]');if(b)afStep(+b.dataset.afStep);else if(e.target.closest('[data-af-stop]'))afReset();};
+$('flow-map').onclick=e=>{const b=e.target.closest('[data-step]');if(b&&af.path!==null){af.step=+b.dataset.step;afApply();}};
+$('af-reset').onclick=afReset;$('af-fit').onclick=()=>{af.zoom=1;const svg=$('af-svg');svg.style.removeProperty('width');svg.style.removeProperty('min-width');};
+$('af-minus').onclick=()=>afZoom(af.zoom-.25);$('af-plus').onclick=()=>afZoom(af.zoom+.25);
+$('fluxos').addEventListener('keydown',e=>{if(af.path===null||!['ArrowLeft','ArrowRight'].includes(e.key)||/INPUT|TEXTAREA|SELECT/.test(e.target.tagName))return;e.preventDefault();afStep(e.key==='ArrowLeft'?-1:1);});
 
 const IT=[['regra','Orientações'],['julgadores','Atuação no 1º grau'],['advogados','Advogados e vínculos'],['processos','Processos sinalizados'],['convocacoes','Convocações']];
 let imp=null, impTab='regra',impRequest=0;
