@@ -1971,9 +1971,10 @@
         "Não se aplica",
         "Não verificado"
        ],
-       "regra": "AJG/DPU → Dispensado",
+       "regra": "Conclusão registrada após conferência da exigibilidade, recolhimento, comprovação e eventual regularização; não inferir isenção apenas da representação pela DPU.",
        "vocabulario": "preparo",
-       "apelido": "preparo"
+       "apelido": "preparo",
+       "subgrupo": "Preparo · situação"
       },
       {
        "rotulo": "Recorrente a que se refere",
@@ -2294,7 +2295,8 @@
        "chave": "AJG",
        "tipo": "texto",
        "secao": "triagem",
-       "apelido": "ajg"
+       "apelido": "ajg",
+       "subgrupo": "Preparo · gratuidade"
       },
       {
        "rotulo": "Impedimento / suspeição",
@@ -2478,7 +2480,8 @@
         "Pessoa jurídica",
         "Não se aplica"
        ],
-       "apelido": "gratuidade_tipo_pessoa"
+       "apelido": "gratuidade_tipo_pessoa",
+       "subgrupo": "Preparo · gratuidade"
       }
      ]
     },
