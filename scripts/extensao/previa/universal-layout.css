@@ -586,7 +586,7 @@ body.hero-redesign-v53 #gab .hero-header-nav{padding-top:5px!important;margin-bo
 body.hero-redesign-v53 #gab .hero-header-nav .hero-v53-tabs{gap:2px!important;align-items:flex-end}
 body.hero-redesign-v53 #gab .hero-header-nav .hero-v53-tabs>button{position:relative;border:1px solid transparent!important;border-bottom:0!important;border-radius:7px 7px 0 0!important;margin-bottom:-1px!important;padding:8px 3px 9px!important;color:var(--p53-muted)!important}
 body.hero-redesign-v53 #gab .hero-header-nav .hero-v53-tabs>button:hover{color:var(--p53-ink)!important;background:color-mix(in srgb,var(--p53-surface) 55%,transparent)!important}
-body.hero-redesign-v53 #gab .hero-header-nav .hero-v53-tabs>button[aria-selected=true]{background:var(--p53-surface)!important;border-color:var(--p53-line)!important;box-shadow:inset 0 2px 0 var(--p53-gold)!important;color:var(--p53-ink)!important;font-family:var(--p53-serif)!important;font-style:italic;font-weight:400!important;font-size:12.5px!important;z-index:1}
+body.hero-redesign-v53 #gab .hero-header-nav .hero-v53-tabs>button[aria-selected=true]{background:var(--hero-pront-header,#f3f0e7)!important;border-color:var(--p53-line)!important;box-shadow:inset 0 2px 0 var(--p53-gold)!important;color:var(--p53-ink)!important;font-family:var(--p53-serif)!important;font-style:italic;font-weight:400!important;font-size:12.5px!important;z-index:1}
 /* título do caso à moda do Office: Georgia com ponto dourado */
 body.hero-redesign-v53 #gab .hero-assunto-stack>span:first-child{font-family:var(--p53-serif)!important;font-size:16px!important;font-weight:400!important;letter-spacing:-.005em;line-height:1.25}
 body.hero-redesign-v53 #gab .hero-assunto-stack>span:first-child::after{content:'.';color:var(--p53-gold)}
@@ -833,7 +833,7 @@ body.hero-redesign-v53 #gab .hero-header-nav:has(.hero-v53-tabs){background:var(
 body.hero-redesign-v53 #gab .hero-header-nav .hero-v53-tabs{background:transparent!important;border:0!important;box-shadow:none!important;gap:2px!important;align-items:flex-end;margin:0!important;overflow:visible!important}
 body.hero-redesign-v53 #gab .hero-header-nav .hero-v53-tabs>button{position:relative;background:transparent!important;border:1px solid transparent!important;border-bottom:0!important;border-radius:7px 7px 0 0!important;margin-bottom:-1px!important;box-shadow:none!important;min-width:0}
 body.hero-redesign-v53 #gab .hero-header-nav .hero-v53-tabs>button[aria-selected=true]{background:var(--hero-pront-header)!important;border-color:var(--hero-pront-divider)!important;border-bottom:0!important;box-shadow:inset 0 2px 0 var(--hero53-gold)!important;z-index:1}
-body.hero-redesign-v53 #gab .hero-header-nav .hero-v53-tabs>button:not([aria-selected=true]):hover{background:color-mix(in srgb,var(--hero-pront-paper) 45%,var(--hero-pront-header))!important}
+body.hero-redesign-v53 #gab .hero-header-nav .hero-v53-tabs>button:not([aria-selected=true]):hover{background:color-mix(in srgb,var(--hero-pront-paper) 85%,var(--hero-pront-header))!important}
 body.hero-redesign-v53 #gab .hero-top-pages:not([hidden]){padding-top:10px}
 body.hero-redesign-v53 #gab .gbody:not([hidden]){min-width:0;margin-top:0!important}
 
@@ -847,3 +847,9 @@ html body.hero-redesign-v53.hero-gestao-ativa{--hero-gestao-paper:#fff}
 html[data-tema=escuro] body.hero-redesign-v53.hero-gestao-ativa{--hero-gestao-paper:var(--p53-card,var(--card))}
 html body.hero-redesign-v53.hero-gestao-ativa :is(main,.layout,#panel-dil,#panel-del,#dil-app,#del-app),
 html body.hero-redesign-v53.hero-gestao-ativa :is(#panel-dil,#panel-del) :is(.wrap,.card,.gx-app,.gx-row,.gx-item){background:var(--hero-gestao-paper)!important}
+
+/* Contraste definitivo: a aba ativa pertence ao cabeçalho bege, não à folha branca. */
+html body.hero-redesign-v53 #gab .hero-header-nav .hero-v53-tabs>button[aria-selected=false]{background:var(--hero-pront-paper)!important;border-color:transparent!important;border-bottom:0!important;margin-bottom:0!important}
+html body.hero-redesign-v53 #gab .hero-header-nav .hero-v53-tabs>button[aria-selected=true]{background:var(--hero-pront-header)!important;border-color:var(--hero-pront-divider)!important;border-bottom:0!important;margin-bottom:0!important;box-shadow:inset 0 2px 0 var(--hero53-gold)!important}
+html body.hero-redesign-v53 #gab .hero-header-nav{border-bottom:1px solid var(--hero-pront-divider)!important}
+html body.hero-redesign-v53 #gab .pc.pm:has(.hero-v53-tabs>[aria-selected=true]:not([data-rot="res"])){background:transparent!important}

@@ -410,6 +410,8 @@ test('universal 0.75.2: aba aberta ligada ao painel (cor do papel, sem linha de 
       return { aba: cs.backgroundColor, painel: getComputedStyle(document.getElementById('gab')).backgroundColor, faixa: getComputedStyle(nav).backgroundColor, divisor: getComputedStyle(nav).borderBottomWidth, inativa: getComputedStyle(document.querySelector('.hero-v53-tabs>button[aria-selected=false]')).backgroundColor, sobrepoe: Math.round(b.getBoundingClientRect().bottom) >= Math.round(nav.getBoundingClientRect().bottom), fonte: cs.fontFamily, titulo: getComputedStyle(document.querySelector('.hero-assunto-stack>span')).fontFamily, ponto: getComputedStyle(document.querySelector('.hero-assunto-stack>span'), '::after').content };
     });
     assert.equal(v.aba, v.faixa, 'aba ativa na cor bege do cabeçalho');
+    assert.equal(v.inativa, v.painel, 'abas inativas na cor da folha branca');
+    assert.notEqual(v.aba, v.inativa, 'contraste entre ativa e inativa');
     assert.notEqual(v.faixa, v.painel, 'a linha divide superfícies de cores distintas');
     assert.equal(v.divisor, '1px', 'divisória fina');
     assert.ok(!v.sobrepoe, 'a aba não encobre a divisória');
