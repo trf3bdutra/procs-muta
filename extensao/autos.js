@@ -74,13 +74,18 @@ function movimentos() {
 function cnjAtual() { var k = br.chaveAtual(); return k && k !== 'avulso' ? Muta.formatarCnj(k) : ''; }
 function redesenhar() { if (GB().render) GB().render(); }
 /* 0.44: ler e reler sempre trazem a íntegra: a cronologia toda e o texto de todos os documentos */
+function SG() { return window.MutaSigilo || null; }
+/* 0.69: processo sigiloso sem liberação — a extensão não lê os autos */
+function sigBloq() { var g = SG(); return !!(g && g.bloqueado()); }
+function docBloq(d) { var g = SG(); return !!(g && d && g.docBloqueado(d)); }
 function ler() {
   var tudo = true;
   if (!window.MutaPje || !window.MutaPje.lerAutos) return Promise.resolve();
+  if (sigBloq()) { A.erro = 'Processo sigiloso: a leitura dos autos está bloqueada. Peça a liberação ao Desembargador ou ao gestor, ou use a senha no alto do cartão.'; redesenhar(); return Promise.resolve(); }
   A.lendo = tudo ? 'tudo' : true; A.erro = ''; A.msg = ''; redesenhar();
   return window.MutaPje.lerAutos(tudo).then(function (r) {
     if (r.numero && r.numero !== A.cnj) { A.docs = {}; A.sug = null; A.abertos = {}; }
-    A.lendo = false; A.tudo = !!tudo; A.itens = r.itens || []; A.idp = r.idp || ''; A.host = r.host || ''; A.cnj = r.numero || ''; A.em = Date.now(); A.sug = null;
+    A.lendo = false; A.tudo = !!tudo; A.itens = r.itens || []; try { if (SG()) SG().docs(lista().filter(function (d) { return SG().docSigiloso(d); }).length); } catch (e) {} A.idp = r.idp || ''; A.host = r.host || ''; A.cnj = r.numero || ''; A.em = Date.now(); A.sug = null;
     redesenhar();
     try { document.dispatchEvent(new Event('muta:autos')); } catch (e) {}
     /* leitura automática: com os autos do processo aberto e nenhuma peça principal lida, lê as principais (o Roteiro se preenche ao fim) */
@@ -130,7 +135,8 @@ function textoPdf(b64, max, modo, aviso) {
 }
 /* modo 'ocr': lê de novo o documento passando todas as páginas pelo OCR */
 function extrair(id, modo) {
-  var d = A.docs[id];
+  var d = A.docs[id], dl = lista().filter(function (x) { return x.id === id; })[0];
+  if (sigBloq() || docBloq(dl)) { A.docs[id] = { estado: 'sig' }; redesenhar(); return Promise.resolve(A.docs[id]); }
   if (d && (d.estado === 'lendo' || (d.estado === 'ok' && modo !== 'ocr') || (modo === 'ocr' && d.modo === 'ocr' && d.estado === 'ok'))) return Promise.resolve(d);
   var doc = lista().filter(function (x) { return x.id === id; })[0];
   A.docs[id] = { estado: 'lendo', modo: modo || '' }; redesenhar();
@@ -159,6 +165,7 @@ function pecaJson(id) {
 function baixarPeca(id) { return extrair(id).then(function () { baixar(cnjArq() + '_ID' + id + '.json', pecaJson(id)); }); }
 /* inteiro teor: lê o que falta (três de cada vez) e baixa tudo num arquivo */
 function baixarTudo() {
+  if (sigBloq()) { A.erro = 'Processo sigiloso: o inteiro teor não é baixado sem liberação.'; redesenhar(); return Promise.resolve(); }
   var L = lista(), falta = L.filter(function (d) { return !(A.docs[d.id] && /^(ok|sem)$/.test(A.docs[d.id].estado)); });
   A.todo = { feitos: 0, total: falta.length }; A.msg = ''; redesenhar();
   var i = 0;
@@ -497,6 +504,7 @@ function estadoDoc(id) {
   return estadoDoc0(d) + gv;
 }
 function estadoDoc0(d) {
+  if (d.estado === 'sig') return '<span class="au-st al" title="Documento ou processo sigiloso: não é lido nem gravado sem liberação">sigiloso</span>';
   if (d.estado === 'lendo') return '<span class="au-st">' + esc(d.prog || 'lendo…') + '</span>';
   if (d.estado === 'erro') return '<span class="au-st err" title="' + esc(d.erro) + '">erro</span>';
   if (d.estado === 'sem') return '<span class="au-st al" title="Nem a camada de texto nem o OCR trouxeram texto">sem texto</span>';
@@ -528,7 +536,8 @@ function selecionar(id, on) { A.sel[id] = !!on; redesenhar(); }
 function selecionarTodos(modo) { lista().forEach(function (d) { A.sel[d.id] = modo === 'todos' ? true : modo === 'nenhum' ? false : !!(PRINC[d.k] && d.k !== 'intimacao' && !d.anexo); }); redesenhar(); }
 function secaoDoc(d) { var t = A.docs[d.id] || {}; return '===== ID ' + d.id + ' | ' + d.tipo + ' | ' + (d.desc || d.tipo) + ' | juntado em ' + d.data + (t.fmt === 'pdf' ? ' | pdf ' + (t.pags || 0) + ' pág.' : t.fmt ? ' | ' + t.fmt : '') + (t.ocr ? ' | OCR ' + t.ocr + ' pág.' : '') + ' =====\n' + S(t.texto) + '\n'; }
 function gravarMarcados() {
-  var g = GB(), L = marcados(), cnj = A.cnj || cnjAtual();
+  var g = GB(), L = marcados().filter(function (d) { return !docBloq(d); }), cnj = A.cnj || cnjAtual();
+  if (sigBloq()) { A.gravMsg = 'Não gravou: processo sigiloso sem liberação.'; redesenhar(); return Promise.resolve(); }
   if (!L.length || !g.api || A.grav) return Promise.resolve();
   A.grav = { fase: 'lendo', feitos: 0, total: L.length }; A.gravMsg = ''; redesenhar();
   var falta = L.filter(function (d) { return !(A.docs[d.id] && /^(ok|sem)$/.test(A.docs[d.id].estado)); }), i = 0;
@@ -550,7 +559,7 @@ function gravarMarcados() {
     var p = Promise.resolve(), feitos = 0;
     lotes.forEach(function (lt, k) { p = p.then(function () {
       var docs = lt.map(function (x) { var t = A.docs[x.d.id] || {}; return { id: x.d.id, tipo: x.d.tipo, descricao: x.d.desc, juntado_por: '', juntado_em: x.d.data, formato: t.fmt || '', paginas: t.pags || 0, caracteres: S(t.texto).length, anexo: !!x.d.anexo, detalhamento: S(A.esp[x.d.id] || ''), paginas_ocr: t.ocr || 0 }; });
-      return g.api('/api/pauta?ficha=1', { method: 'POST', body: JSON.stringify({ cnj: cnj, autos: { lista: k ? [] : lis, mov: k ? '' : mov, docs: docs, secoes: lt.map(function (x) { return { id: x.d.id, sec: x.sec }; }) } }) })
+      return g.api('/api/pauta?ficha=1', { method: 'POST', body: JSON.stringify({ cnj: cnj, sigilo: SG() ? SG().token() : '', autos: { lista: k ? [] : lis, mov: k ? '' : mov, docs: docs, secoes: lt.map(function (x) { return { id: x.d.id, sec: x.sec }; }) } }) })
         .then(function () { lt.forEach(function (x) { A.gravados[x.d.id] = 1; delete A.sel[x.d.id]; }); feitos += lt.length; });
     }); });
     var erF = '', erT = '', msg = function (e) { return (e && e.message) || String(e); };

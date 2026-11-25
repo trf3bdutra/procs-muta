@@ -67,6 +67,7 @@ module.exports = async (req, res) => {
   if (req.query.chegadas) return require('./_chegadas')(req, res, u);
   if (req.query.ficha) return FICHA(req, res, u);
   if (req.query.prontuario) return require('./_prontuario')(req, res, u);
+  if (req.query.sigilo) return require('./_sigilo')(req, res, u, FICHA.fonteDe);
   if (req.query.metas) return require('./_metas')(req, res, u);
   if (req.query.sobr) return require('./_sobr')(req, res, u);
   if (req.query.sens) return require('./_sens')(req, res, u);

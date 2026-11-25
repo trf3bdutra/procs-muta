@@ -300,7 +300,12 @@ module.exports = async (req, res, u) => {
     }
     if (req.method !== 'POST') return res.status(405).json({ erro: 'método não aceito' });
     /* 0.38: inteiro teor dos documentos marcados na extensão (Autos › Peças e documentos › Gravar) */
-    if ((req.body || {}).autos) return res.status(200).json(await gravarAutos(String(req.body.cnj || ''), req.body.autos, u));
+    if ((req.body || {}).autos) {
+      /* processo sigiloso: o inteiro teor só é gravado pelo desembargador, pelo gestor ou com a senha (ver _sigilo.js) */
+      const cnjA = String(req.body.cnj || ''), st = await require('./_sigilo').situacao(u, cnjA, req.body.sigilo, await fonteDe(cnjA));
+      if (!st.liberado) return res.status(403).json({ erro: 'Processo sigiloso (' + st.sigilo + '): o inteiro teor não é gravado sem a liberação do Desembargador, do gestor ou da senha.', sigilo: st.sigilo });
+      return res.status(200).json(await gravarAutos(cnjA, req.body.autos, u));
+    }
     const b = req.body || {}, cnj = String(b.cnj || ''), C = b.campos || {}, E = editaveis(F), mud = {}, recus = [];
     if (dg(cnj).length !== 20) return res.status(400).json({ erro: 'número do processo inválido' });
     Object.keys(C).forEach(k => {
@@ -489,6 +494,7 @@ module.exports.catalogo = ficha;
 module.exports.paraCartao = paraCartao;
 /* usados pelo prontuário da extensão Muta (_prontuario.js), que grava ficha e cartão no mesmo commit do prontuário */
 module.exports.editaveis = editaveis;
+module.exports.fonteDe = fonteDe;
 module.exports.registro = registro;
 module.exports.aplica = aplica;
 module.exports.regras = regras;
