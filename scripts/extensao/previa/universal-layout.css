@@ -286,3 +286,17 @@ html[data-tema=escuro] .pv-universal-body{--pv-bg:#25282d;--pv-line:#444a52;--pv
 #gab #g-sn .sn-novo [data-sn-inc]{height:32px;padding:0 12px}
 #gab #g-sn .sn-h{display:block;font-size:10.5px;line-height:1.35;opacity:.75}
 
+
+/* Cores de etapas independentes do estado operacional. */
+.pv-stage.stage-tri{--stage-color:#747e8e}
+.pv-stage.stage-min{--stage-color:#39805b}
+.pv-stage.stage-rev{--stage-color:#3d6ca1}
+.pv-stage.stage-env{--stage-color:#805ca6}
+.pv-stage.stage-ass{--stage-color:#9a702c}
+#gab .pv-stage .pv-stage-btn{color:var(--stage-color);border-color:color-mix(in srgb,var(--stage-color) 50%,var(--pv-line));background:color-mix(in srgb,var(--stage-color) 9%,var(--pv-card))}
+#gab .pv-stage.ok .pv-stage-btn{background:var(--stage-color)!important;color:#fff!important;border-color:var(--stage-color)!important}
+#gab .pv-stage.ok .pv-stage-btn:after{background:var(--stage-color)}
+#gab .pv-stage.at .pv-stage-btn{color:var(--stage-color)!important;border:2px solid var(--stage-color)!important;background:color-mix(in srgb,var(--stage-color) 12%,var(--pv-card))!important}
+#gab .pv-stage.at small{color:var(--stage-color)}
+#gab .pv-stage.pend{opacity:.75}
+#gab .pv2-fixed-id .hero-proc-tags{flex:0 1 auto;align-items:center}
