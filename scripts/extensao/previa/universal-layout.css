@@ -428,3 +428,33 @@ body.hero-redesign-v53 .hero-v53-ficha-dlg::backdrop{background:rgb(0 0 0 / .35)
 body.hero-redesign-v53 .hero-v53-ficha-dlg .hero-v53-dlg-head{position:sticky;top:0;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 12px;background:var(--card);border-bottom:1px solid var(--line)}
 body.hero-redesign-v53 .hero-v53-ficha-dlg .hero-v53-dlg-head h4{margin:0}
 body.hero-redesign-v53 .hero-v53-ficha-dlg .hero-v53-ficha-body{padding:10px 12px;overflow:auto}
+/* 0.74.5 · A conferir no padrão dos cartões: grupos em L2, alertas e sugestões como subcartões alinhados à esquerda,
+   selo de estado discreto (novo verde, diverge âmbar) e o corpo da sugestão sem herdar o aviso de sigilo (.sg-bd) */
+body.hero-redesign-v53 #gab :is(#g-cf,.pc-sec) h4.tr-g{font:650 12.5px/1.35 'IBM Plex Sans',system-ui,sans-serif!important;text-transform:none!important;letter-spacing:0!important;color:var(--fg)!important;border:0!important;margin:14px 0 6px!important;padding:0!important}
+body.hero-redesign-v53 #gab .al-l{gap:6px!important;margin:8px 0 10px!important}
+body.hero-redesign-v53 #gab .al-i{border:1px solid var(--line)!important;border-left:3px solid var(--muted-fg)!important;border-radius:var(--h53-r2)!important;background:var(--h53-sub)!important;padding:8px 10px!important;font-size:12px!important;line-height:1.45!important;text-align:left!important;color:inherit!important}
+body.hero-redesign-v53 #gab .al-i.al{border-left-color:#c9962e!important}
+body.hero-redesign-v53 #gab .al-i.ok{border-left-color:var(--ok)!important}
+body.hero-redesign-v53 #gab .al-i .btn{flex:none}
+body.hero-redesign-v53 #gab .sg{display:grid;gap:6px}
+body.hero-redesign-v53 #gab .sg>h4.tr-g{margin-bottom:0!important}
+body.hero-redesign-v53 #gab .sg-i{display:grid!important;grid-template-columns:auto minmax(0,1fr);gap:8px!important;align-items:start;padding:9px 10px!important;border:1px solid var(--line)!important;border-left:3px solid var(--ok)!important;border-radius:var(--h53-r2)!important;background:var(--h53-sub)!important;font-size:12px!important;text-align:left!important;color:inherit!important;cursor:default}
+body.hero-redesign-v53 #gab .sg-i:hover{background:var(--h53-sub)!important}
+body.hero-redesign-v53 #gab .sg-i.is-conflito{border-left-color:#c9962e!important}
+body.hero-redesign-v53 #gab .sg-i>input{margin:2px 0 0;cursor:pointer}
+body.hero-redesign-v53 #gab .sg-bd{display:flex;flex-direction:column;gap:3px;min-width:0;align-items:flex-start;text-align:left}
+body.hero-redesign-v53 #gab .sg-h{display:flex;flex-wrap:wrap;gap:6px;align-items:baseline}
+body.hero-redesign-v53 #gab .sg-h b{font-size:12.5px;font-weight:650}
+body.hero-redesign-v53 #gab .sg-s{font:600 9.5px/1.5 'IBM Plex Mono',ui-monospace,monospace!important;text-transform:uppercase;letter-spacing:.06em;padding:0 6px!important;border-radius:999px!important;background:color-mix(in srgb,var(--ok) 14%,transparent)!important;color:var(--ok)!important}
+body.hero-redesign-v53 #gab .sg-i.is-conflito .sg-s{background:color-mix(in srgb,#c9962e 16%,transparent)!important;color:#9a6d12!important}
+html[data-tema=escuro] body.hero-redesign-v53 #gab .sg-i.is-conflito .sg-s{color:#e6c27a!important}
+body.hero-redesign-v53 #gab .sg-h small{font-size:10.5px;color:var(--muted-fg)}
+body.hero-redesign-v53 #gab .sg-v{font-size:12px;line-height:1.5;overflow-wrap:anywhere}
+body.hero-redesign-v53 #gab .sg-bd>small{font-size:11px;color:var(--muted-fg)}
+body.hero-redesign-v53 #gab .sg-bd>.btn{margin-top:4px}
+body.hero-redesign-v53 #gab .sg>.bar{margin-top:6px}
+body.hero-redesign-v53 #gab :is(.sg-ig,.au-auto-d){border:1px solid var(--line)!important;border-left:3px solid var(--ok)!important;border-radius:var(--h53-r2)!important;background:var(--h53-sub)!important;padding:0!important;margin:8px 0!important;font-size:12px!important;color:inherit!important}
+body.hero-redesign-v53 #gab :is(.sg-ig,.au-auto-d)>summary{padding:9px 10px!important;background:transparent!important;border-radius:0!important;font-size:12.5px!important;font-weight:650;cursor:pointer}
+body.hero-redesign-v53 #gab :is(.sg-ig,.au-auto-d)>summary b{font-weight:650}
+body.hero-redesign-v53 #gab :is(.sg-ig,.au-auto-d)>:is(ul,.bar){margin:0 10px 10px!important}
+body.hero-redesign-v53 #gab :is(.sg-ig,.au-auto-d) ul{padding-left:18px!important;font-size:12px!important;line-height:1.5}

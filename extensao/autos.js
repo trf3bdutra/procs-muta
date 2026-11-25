@@ -704,7 +704,7 @@ function htmlSugestoes(secoes) {
     return '<h4 class="tr-g">' + esc(sec) + '</h4>' + G[sec].map(function (x) {
       var it = x[0], k = x[1], v = valor(it);
       return '<div class="sg-i is-' + it.status + '"><input type="checkbox" data-sg="' + k + '"' + (it.apply ? ' checked' : '') + '>' +
-        '<span class="sg-b"><span class="sg-h"><b>' + esc(it.label) + '</b><i class="sg-s">' + (it.status === 'conflito' ? 'diverge' : 'novo') + '</i>' + (it.doc ? '<small class="mono">ID ' + esc(it.doc) + '</small>' : '') + '</span>' +
+        '<span class="sg-bd"><span class="sg-h"><b>' + esc(it.label) + '</b><i class="sg-s">' + (it.status === 'conflito' ? 'diverge' : 'novo') + '</i>' + (it.doc ? '<small class="mono">ID ' + esc(it.doc) + '</small>' : '') + '</span>' +
         '<span class="sg-v">' + esc(v.slice(0, 600)) + '</span>' + (it.status === 'conflito' && it.kind !== 'tabela' ? '<small class="muted">Na ficha: ' + esc(dataBr(S(it.current))) + '</small>' : '') + (it.note ? '<small class="muted">' + esc(it.note) + '</small>' : '') + (mesmoId(it)?'<small class="muted">Mesmo documento · conferir conteúdo</small><button type="button" class="btn line sm" data-au="manter:'+k+'">Manter registro histórico</button>':'') + '</span></div>';
     }).join('');
   }).join('');
