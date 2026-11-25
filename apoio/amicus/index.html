@@ -363,6 +363,26 @@ body.am-com-aba{overflow:hidden}
 .am-modular .am-check-group input{flex:none}
 @media(max-width:1050px){.am-dashboard.am-workspace.am-modular{grid-template-columns:repeat(2,minmax(0,1fr))}.am-modular>.am-module{grid-column:span 1}.am-modular>.am-wide,.am-modular>.am-expanded,.am-modular>.am-module-nav{grid-column:1/-1}.am-modular #fluxos:not(.full-panel) .af-body{grid-template-columns:1fr}}
 @media(max-width:700px){.am-dashboard.am-workspace.am-modular{grid-template-columns:minmax(0,1fr)}.am-modular>.am-module{grid-column:1/-1}.am-modular #ro-list{grid-template-columns:1fr}}
+</style><style id="am-areas-css">
+.am-modular>.am-area-nav,.am-modular>.am-group-heading{grid-column:1/-1}
+.am-modular>.am-module-nav{order:0}
+.am-modular>.am-module-nav>button:not(:last-child){display:none}
+.am-area-nav{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.am-area-nav button{font:650 13px Figtree,system-ui,sans-serif;text-align:left;cursor:pointer;padding:14px 12px;border:1px solid var(--el);border-top:2px solid var(--eg);background:var(--ew);color:var(--ei);border-radius:5px}
+.am-area-nav button:hover{background:var(--ep2)}
+.am-group-heading{padding:12px 0 4px;border-bottom:1px solid var(--el);scroll-margin-top:100px}
+.am-group-heading h2{font:650 22px Figtree,system-ui,sans-serif;margin:4px 0;color:var(--ei)}
+.am-group-heading p{font-size:12px;color:var(--em);margin:0 0 8px}
+.am-enc-content .am-enc-filter{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.am-enc-filter input,.am-enc-filter select{font:inherit;font-size:12px;min-width:0;max-width:100%;padding:8px;border:1px solid var(--el);color:var(--ei);background:var(--ep)}
+.am-enc-filter input{flex:1}
+.am-enc-list{max-height:520px;overflow:auto;scrollbar-width:thin}
+.am-enc-list details{padding:9px 0;border-bottom:1px solid var(--el);font-size:12px}
+.am-enc-list summary{cursor:pointer;font-weight:600}
+.am-enc-list p{margin:7px 0;line-height:1.5}
+.am-enc-list li{margin:5px 0}
+.am-enc-status{font-size:12px;color:var(--em)}
+@media(max-width:700px){.am-area-nav{grid-template-columns:repeat(2,minmax(0,1fr))}.am-group-heading h2{font-size:18px}}
 </style></head><body><header class="am-home-header"><div class="am-legacy"><b>Amicus Curiae.</b><span>Gabinete CMT · Ferramentas</span></div><nav class="am-over-nav am-home-overview" aria-label="Aplicações e áreas de consulta"><div class="am-nav-apps cn-in" role="tablist" aria-label="Abas do Amicus"><button type="button" role="tab" data-amtab="ref" aria-selected="true">Referências</button><button type="button" role="tab" data-amtab="collegium" aria-selected="false">Collegium</button><button type="button" role="tab" data-amtab="collectio" aria-selected="false" hidden title="Só para servidores logados">Collectio</button></div><div class="am-nav-links" aria-label="Aplicações"><a href="/amicus/compendium/">Compendium</a><a href="/amicus/cognitio/">Cognitio</a></div></nav><nav class="am-context-nav am-home-overview" aria-label="Subabas da aplicação" hidden><span class="am-context-label"></span><div class="cn-in" role="group"></div></nav></header>
 <main class="am-dashboard am-workspace">
 <aside class="am-rail am-competence" id="referencias-operacionais" aria-labelledby="am-competence-title"><div class="am-rail-head"><small>Referências operacionais</small><h2 id="am-competence-title">Competência e imparcialidade</h2></div><div class="am-rail-panels"><section class="busca" id="competencia"><div class="pane-title"><div><small>Referência · competência</small><h2>Competência</h2></div></div><p>Turma Regional de Mato Grosso do Sul, competência delegada e distribuição por matéria nas Seções do TRF3. Síntese do material fornecido, sujeita à conferência normativa.</p>
@@ -669,19 +689,76 @@ if(inicial.split('&')[0]==='collegium')abre('collegium',true,inicial.includes('&
 /* Amicus: módulos independentes, sem duplicar os motores nem os registros. */
 (function(){'use strict';
 const D=document,W=D.querySelector('main.am-workspace');if(!W)return;
-const cfg=[['fluxos','Fluxos',true],['rotina','Rotinas e checklists',true],['recursos','Recursos'],['temas-proc','Temas processuais'],['competencia','Competência'],['impedimentos','Imparcialidade'],['enunciados','Enunciados'],['regimento','Regimento'],['assuntos','Assuntos'],['metas','Metas']];
+const groups=[
+ ['operacional','Operacional','Fluxos, rotinas, checklists e tarefas do PJe',[['fluxos','Fluxos',true],['rotina','Rotinas e checklists',true],['guia-pje','Guia de tarefas do PJe',true],['metas','Metas']]],
+ ['jurisprudencial','Repertório jurisprudencial','Julgados da Turma Regional, temas e súmulas',[['jur-collegium','Collegium',true],['enunciados','Enunciados',true]]],
+ ['normativo','Repertório legislativo e normativo','Regimento Interno e atos regimentais',[['regimento','Regimento',true],['norm-atos','Assentos e referências normativas',true]]],
+ ['referencias','Referências jurídicas','Competência, recursos, temas e matérias',[['recursos','Recursos'],['temas-proc','Temas processuais'],['competencia','Competência'],['competencia-assuntos','Competência por assunto'],['impedimentos','Imparcialidade'],['assuntos','Assuntos recorrentes'],['lexico-recursal','Léxico recursal'],['guias-praticos','Guias práticos']]]
+];
+const cfg=groups.flatMap(g=>g[3]);
+function module(id,title,subtitle,body){const el=D.createElement('section');el.className='busca';el.id=id;el.innerHTML='<div class="pane-title"><div><small>'+subtitle+'</small><h2>'+title+'</h2></div></div>'+body;W.append(el);return el;}
+module('jur-collegium','Collegium','Jurisprudência · Turma Regional de MS','<p>Consulte o ementário da Turma Regional, com pesquisa e filtros por relator, preservando a origem dos julgados.</p><button class="more" type="button" data-amtab="collegium-open">Abrir ementário</button>');
+D.querySelector('[data-amtab="collegium-open"]').removeAttribute('data-amtab');
+D.querySelector('#jur-collegium button').onclick=()=>D.querySelector('header [data-amtab="collegium"]')?.click();
+module('norm-atos','Assentos e referências normativas','Repertório normativo','<p>Consulte os assentos regimentais e as referências de aplicação cotidiana, vinculados ao Regimento.</p><div class="am-norm-links"></div>');
+const norm=D.querySelector('#norm-atos .am-norm-links');['rit-dia','rit-ass'].forEach(id=>{const node=D.getElementById(id);if(node)norm.append(node);});
+const loading='<p class="am-enc-status" aria-live="polite">Consultando a fonte da Enciclopédia…</p><div class="am-enc-content"></div>';
+module('guia-pje','Guia de tarefas do PJe','Enciclopédia · consulta autenticada',loading);
+module('competencia-assuntos','Competência por assunto','Enciclopédia · consulta autenticada',loading);
+module('lexico-recursal','Léxico recursal','Enciclopédia · consulta autenticada',loading);
+module('guias-praticos','Guias práticos','Enciclopédia · consulta autenticada',loading);
+
 let pref={};try{pref=JSON.parse(localStorage.getItem('amicus-modulos-v1'))||{}}catch(e){}
 const save=()=>{try{localStorage.setItem('amicus-modulos-v1',JSON.stringify(pref))}catch(e){}};
-const nav=D.createElement('nav');nav.className='am-module-nav';nav.setAttribute('aria-label','Módulos do Amicus');nav.innerHTML='<strong>Área de trabalho</strong>';W.prepend(nav);W.classList.add('am-modular');
+const nav=D.createElement('nav');nav.className='am-module-nav';nav.setAttribute('aria-label','Módulos do Amicus');nav.innerHTML='<strong>Amicus · área de trabalho</strong>';W.prepend(nav);W.classList.add('am-modular');
+const areaNav=D.createElement('nav');areaNav.className='am-area-nav';areaNav.setAttribute('aria-label','Ambientes do Amicus');nav.after(areaNav);
+const heads=new Map();groups.forEach(([id,title,desc])=>{const h=D.createElement('div');h.className='am-group-heading';h.id='am-area-'+id;h.innerHTML='<small>AMICUS / '+title+'</small><h2>'+title+'</h2><p>'+desc+'</p>';heads.set(id,h);const b=D.createElement('button');b.type='button';b.textContent=title;b.onclick=()=>h.scrollIntoView({behavior:'smooth',block:'start'});areaNav.append(b);});
+
 const old=[...W.querySelectorAll(':scope > .am-rail,:scope > .am-main')];
 function apply(el){const v=pref[el.id]||{};el.classList.toggle('am-folded',!!v.fold);el.classList.toggle('am-expanded',!!v.wide);const b=el.querySelector('[data-am-fold]');if(b){b.textContent=v.fold?'Expandir':'Recolher';b.setAttribute('aria-expanded',String(!v.fold));}const w=el.querySelector('[data-am-wide]');if(w){w.textContent=v.wide?'Reduzir largura':'Ampliar';w.setAttribute('aria-pressed',String(!!v.wide));}}
 function reveal(el){if(!el)return;if(pref[el.id]?.fold){pref[el.id].fold=false;apply(el);save();}el.scrollIntoView({behavior:'smooth',block:'start'});}
-cfg.forEach(([id,title,wide])=>{const el=D.getElementById(id);if(!el)return;W.append(el);el.classList.add('am-module');if(wide)el.classList.add('am-wide');const b=D.createElement('button');b.type='button';b.textContent=title;b.onclick=()=>reveal(el);nav.append(b);
-const h=el.querySelector('.pane-title'),a=D.createElement('div');a.className='am-mod-actions';a.innerHTML=(wide?'':'<button type="button" data-am-wide>Ampliar</button>')+'<button type="button" data-am-fold>Recolher</button>';h.append(a);a.onclick=e=>{const t=e.target;if(!t.matches('button'))return;const v=pref[id]||(pref[id]={});if(t.hasAttribute('data-am-fold'))v.fold=!v.fold;else v.wide=!v.wide;apply(el);save();if(id==='fluxos'&&!v.fold)D.getElementById('af-fit')?.click();};apply(el);});
+groups.forEach(([groupId,,,modules])=>{W.append(heads.get(groupId));modules.forEach(([id,title,wide])=>{const el=D.getElementById(id);if(!el)return;W.append(el);el.classList.add('am-module');if(wide)el.classList.add('am-wide');const b=D.createElement('button');b.type='button';b.textContent=title;b.onclick=()=>reveal(el);nav.append(b);
+const h=el.querySelector('.pane-title'),a=D.createElement('div');a.className='am-mod-actions';a.innerHTML=(wide?'':'<button type="button" data-am-wide>Ampliar</button>')+'<button type="button" data-am-fold>Recolher</button>';h.append(a);a.onclick=e=>{const t=e.target;if(!t.matches('button'))return;const v=pref[id]||(pref[id]={});if(t.hasAttribute('data-am-fold'))v.fold=!v.fold;else v.wide=!v.wide;apply(el);save();if(id==='fluxos'&&!v.fold)D.getElementById('af-fit')?.click();};apply(el);});});
 old.forEach(el=>{if(!el.querySelector('section.busca'))el.remove();});
 const reset=D.createElement('button');reset.type='button';reset.textContent='Restaurar layout';reset.onclick=()=>{pref={};save();W.querySelectorAll('.am-module').forEach(apply);D.getElementById('af-fit')?.click();};nav.append(reset);
 D.addEventListener('click',e=>{const b=e.target.closest('[data-req],[data-tema],[data-rart]');if(!b)return;const id=b.hasAttribute('data-req')?'recursos':b.hasAttribute('data-tema')?'temas-proc':'regimento';const el=D.getElementById(id);if(pref[id]?.fold){pref[id].fold=false;apply(el);save();}},true);
 D.addEventListener('keydown',e=>{if(e.ctrlKey||e.metaKey||e.altKey||/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)||e.target.isContentEditable||!/^\d$/.test(e.key)||W.hidden)return;const k=[...W.querySelectorAll('.cx-kbd')].find(x=>x.textContent.trim()===e.key);const el=k?.closest('.am-module');if(el&&pref[el.id]?.fold){pref[el.id].fold=false;apply(el);save();}},true);
 D.getElementById('af-fit')?.click();
+})();
+</script><script>
+/* Fonte única: Enciclopédia autenticada, sem publicar dados restritos no HTML. */
+(function(){'use strict';
+const D=document,ids=['guia-pje','competencia-assuntos','lexico-recursal','guias-praticos'];
+const clean=v=>{const doc=new DOMParser().parseFromString(String(v??''),'text/html');return doc.body.textContent||'';};
+const E=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const N=v=>String(v??'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+const details=(title,body)=>'<details><summary>'+E(title)+'</summary>'+body+'</details>';
+const para=v=>'<p>'+E(clean(v))+'</p>';
+const list=v=>'<ul>'+v.map(x=>'<li>'+E(clean(x))+'</li>').join('')+'</ul>';
+function setup(id,rows,render,search,filters){
+ const root=D.getElementById(id);if(!root)return;const status=root.querySelector('.am-enc-status'),host=root.querySelector('.am-enc-content');
+ status.textContent='Fonte: Enciclopédia · '+rows.length+' registros';
+ host.innerHTML='<div class="am-enc-filter"><input type="search" placeholder="Pesquisar…" aria-label="Pesquisar '+E(root.querySelector('h2').textContent)+'"></div><p class="bmeta" aria-live="polite"></p><div class="am-enc-list"></div>';
+ const input=host.querySelector('input'),bar=host.querySelector('.am-enc-filter'),out=host.querySelector('.am-enc-list'),meta=host.querySelector('.bmeta');let sel;
+ if(filters){sel=D.createElement('select');sel.setAttribute('aria-label',filters.label);sel.add(new Option('Todos', ''));[...new Set(rows.map(filters.key).filter(Boolean))].sort().forEach(v=>sel.add(new Option(v,v)));bar.append(sel);}
+ function draw(){const q=N(input.value);const filtered=rows.filter(x=>(!sel||!sel.value||filters.key(x)===sel.value)&&N(search(x)).includes(q));meta.textContent=filtered.length+' de '+rows.length;out.innerHTML=filtered.map(render).join('')||'<p>Nenhum resultado.</p>';}
+ input.addEventListener('input',draw);if(sel)sel.addEventListener('change',draw);draw();
+}
+async function load(){
+ try{
+ const res=await fetch('/api/compendio',{credentials:'same-origin',cache:'no-store'});
+ if(res.status===401||res.status===403){ids.forEach(id=>{D.querySelector('#'+id+' .am-enc-status').textContent='Conteúdo disponível mediante login e permissão de acesso avançado à Enciclopédia.';});return;}
+ if(!res.ok)throw Error('HTTP '+res.status);const {enciclopedia:c}=await res.json();if(!c)throw Error('Fonte indisponível');
+ const tasks=Object.entries(c.tarefasPje||{}).map(([t,a])=>({t,a,kind:'Grupo de tarefas'}));
+ const boxes=(c.caixas||[]).map(x=>({t:x.nome,a:[x.serve,x.gab,...(x.l||[]).map(y=>'Encaminhamento: '+((c.caixas||[]).find(z=>z.id===y.tk)?.nome||y.tk||''))],kind:'Caixa processual'}));
+ const flows=(c.fluxosPje||[]).map(x=>({t:x.t,a:x.f,kind:'Fluxo geral'}));
+ setup('guia-pje',[...flows,...boxes,...tasks],x=>details(x.t+' · '+x.kind,list(x.a)),x=>[x.t,x.kind,...x.a].join(' '),{label:'Tipo de registro',key:x=>x.kind});
+ setup('competencia-assuntos',c.assuntosSecao||[],x=>details(x.nome+' · '+x.secao,para(x.ramo)+((x.alias||[]).length?para('Termos associados: '+x.alias.join(', ')):'')),x=>[x.nome,x.secao,x.ramo,...(x.alias||[])].join(' '),{label:'Seção',key:x=>x.secao});
+ const lg=Object.fromEntries((c.lexicoGrupos||[]).map(g=>[g.id,g.t]));
+ setup('lexico-recursal',c.lexico||[],x=>details(x.t,para(x.d)+list(x.det||[])+para(x.gab)+para((x.base||[]).join(' · '))),x=>[x.t,x.d,x.lat,x.gab,...(x.base||[])].join(' '),{label:'Grupo',key:x=>lg[x.g]||x.g});
+ setup('guias-praticos',c.guias||[],x=>details(x.t,para(x.s)+para(x.html)),x=>[x.t,x.s,clean(x.html)].join(' '));
+ }catch(e){ids.forEach(id=>{const status=D.querySelector('#'+id+' .am-enc-status');if(status)status.textContent='Não foi possível consultar a Enciclopédia. Atualize a página para tentar novamente.';});}
+}
+load();
 })();
 </script></body></html>
