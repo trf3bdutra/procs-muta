@@ -557,14 +557,6 @@
        "apelido": "ato_a_proferir"
       },
       {
-       "rotulo": "Mapa de próximos passos",
-       "chave": "Mapa de próximos passos",
-       "tipo": "texto-longo",
-       "secao": "origem",
-       "apelido": "mapa_proximos_passos",
-       "regra": "JSON versionado: passos, vínculos com pendências e histórico de transições."
-      },
-      {
        "rotulo": "Próxima providência",
        "chave": "Próxima ação",
        "tipo": "texto",
@@ -1144,8 +1136,44 @@
    "aba": "Triagem",
    "grupos": [
     {
-     "grupo": "Análise e Indexação",
+     "grupo": "Análise e Acompanhamento",
      "campos": [
+      {
+       "rotulo": "Detalhamento",
+       "chave": "Detalhamento do caso",
+       "tipo": "texto-longo",
+       "secao": "triagem",
+       "apelido": "detalhamento"
+      },
+      {
+       "rotulo": "Tipo de julgamento",
+       "chave": "Tipo de Julgamento",
+       "tipo": "texto",
+       "secao": "triagem",
+       "apelido": "tipo_julgamento",
+       "regra": "Campo único de tipos de julgamento; seleção múltipla conforme vocabulário da HERO18810, preservando formato de armazenamento existente."
+      },
+      {
+       "rotulo": "Síntese processual",
+       "chave": "Síntese Processual",
+       "tipo": "texto-longo",
+       "secao": "triagem",
+       "apelido": "sintese_processual"
+      },
+      {
+       "rotulo": "Síntese fática",
+       "chave": "Síntese Fática",
+       "tipo": "texto-longo",
+       "secao": "triagem",
+       "apelido": "sintese_fatica"
+      },
+      {
+       "rotulo": "Alegações",
+       "chave": "Alegações",
+       "tipo": "texto-longo",
+       "secao": "triagem",
+       "apelido": "alegacoes"
+      },
       {
        "rotulo": "Status da triagem",
        "chave": "Status da triagem",
@@ -1163,7 +1191,8 @@
        "chave": "Seleção Prévia",
        "tipo": "texto",
        "secao": "triagem",
-       "apelido": "selecao_previa"
+       "apelido": "selecao_previa",
+       "regra": "Banco de reserva ou sessão disponível cadastrada; não equivale à inclusão formal em pauta. Destino final Colegiado e pronunciamento Acórdão."
       },
       {
        "rotulo": "Situação para julgar",
@@ -1221,7 +1250,8 @@
         "V b · decisão recorrida contrária a repetitivo",
         "V c · decisão recorrida contrária a IRDR ou IAC",
         "Não se aplica"
-       ]
+       ],
+       "regra": "Destino final Relator; pronunciamento Monocrática terminativa."
       },
       {
        "rotulo": "Nota de enquadramento no artigo 932",
@@ -1230,6 +1260,133 @@
        "secao": "triagem",
        "apelido": "art932_nota"
       },
+      {
+       "rotulo": "Proposta de julgamento · histórico",
+       "chave": "Registro - Proposta",
+       "tipo": "texto-longo",
+       "secao": "triagem",
+       "editavel": false,
+       "regra": "do lote de triagem (acervo/lotes); atualizado por scripts/triagem/ficha_lote.py",
+       "apelido": "registro_proposta"
+      },
+      {
+       "rotulo": "Nota de enquadramento da seleção prévia",
+       "chave": "Seleção Prévia - Nota",
+       "tipo": "texto-longo",
+       "secao": "triagem",
+       "apelido": "selecao_previa_nota"
+      },
+      {
+       "rotulo": "Nota de enquadramento de outro destino",
+       "chave": "Destino - Outro Nota",
+       "tipo": "texto-longo",
+       "secao": "triagem",
+       "apelido": "destino_outro_nota"
+      },
+      {
+       "rotulo": "Trâmite",
+       "chave": "Mapa de próximos passos",
+       "tipo": "texto-longo",
+       "secao": "origem",
+       "apelido": "mapa_proximos_passos",
+       "regra": "JSON versionado: passos, vínculos com pendências e histórico de transições."
+      },
+      {
+       "rotulo": "Histórico de julgamento",
+       "chave": "Histórico de julgamento",
+       "tipo": "tabela",
+       "secao": "triagem",
+       "apelido": "historico_julgamento",
+       "colunas": [
+        {
+         "chave": "data",
+         "rotulo": "Data",
+         "tipo": "data"
+        },
+        {
+         "chave": "tipo_julgamento",
+         "rotulo": "Tipo de julgamento",
+         "tipo": "texto"
+        },
+        {
+         "chave": "sessao",
+         "rotulo": "Sessão",
+         "tipo": "texto"
+        },
+        {
+         "chave": "item",
+         "rotulo": "Item",
+         "tipo": "texto"
+        },
+        {
+         "chave": "evento",
+         "rotulo": "Evento",
+         "tipo": "lista",
+         "opcoes": [
+          "Inclusão em pauta",
+          "Reinclusão",
+          "Retirada",
+          "Adiamento",
+          "Vista",
+          "Suspensão",
+          "Conversão em diligência",
+          "Julgamento",
+          "Pronunciamento",
+          "Recurso subsequente"
+         ]
+        },
+        {
+         "chave": "justificativa",
+         "rotulo": "Justificativa",
+         "tipo": "texto-longo"
+        },
+        {
+         "chave": "solicitante",
+         "rotulo": "Solicitante",
+         "tipo": "texto"
+        },
+        {
+         "chave": "deliberacao",
+         "rotulo": "Deliberação",
+         "tipo": "texto"
+        },
+        {
+         "chave": "nova_sessao",
+         "rotulo": "Nova sessão",
+         "tipo": "texto"
+        },
+        {
+         "chave": "orgao",
+         "rotulo": "Órgão julgador",
+         "tipo": "texto"
+        },
+        {
+         "chave": "pronunciamento",
+         "rotulo": "Pronunciamento",
+         "tipo": "texto"
+        },
+        {
+         "chave": "resultado",
+         "rotulo": "Resultado",
+         "tipo": "texto"
+        },
+        {
+         "chave": "id_documento",
+         "rotulo": "ID do documento",
+         "tipo": "texto"
+        },
+        {
+         "chave": "observacoes",
+         "rotulo": "Observações",
+         "tipo": "texto-longo"
+        }
+       ]
+      }
+     ]
+    },
+    {
+     "grupo": "Análise e Indexação",
+     "campos": [
       {
        "rotulo": "Lote de origem · histórico",
        "chave": "Registro - Lote",
@@ -1270,15 +1427,6 @@
        "editavel": false,
        "regra": "do lote de triagem (acervo/lotes); atualizado por scripts/triagem/ficha_lote.py",
        "apelido": "registro_variacoes"
-      },
-      {
-       "rotulo": "Proposta de julgamento · histórico",
-       "chave": "Registro - Proposta",
-       "tipo": "texto-longo",
-       "secao": "triagem",
-       "editavel": false,
-       "regra": "do lote de triagem (acervo/lotes); atualizado por scripts/triagem/ficha_lote.py",
-       "apelido": "registro_proposta"
       },
       {
        "rotulo": "Modelo indicado · histórico",
@@ -1694,13 +1842,6 @@
      "grupo": "Matéria e gestão",
      "campos": [
       {
-       "rotulo": "Detalhamento do caso",
-       "chave": "Detalhamento do caso",
-       "tipo": "texto-longo",
-       "secao": "triagem",
-       "apelido": "detalhamento"
-      },
-      {
        "rotulo": "Assunto detalhado",
        "chave": "Assunto detalhado",
        "tipo": "texto-longo",
@@ -1772,34 +1913,6 @@
        "secao": "triagem",
        "regra": "escolhidas no prontuário de triagem do Caput, entre as sugestões calculadas pela triagem",
        "apelido": "etiquetas_sugeridas"
-      },
-      {
-       "rotulo": "Alegações",
-       "chave": "Alegações",
-       "tipo": "texto-longo",
-       "secao": "triagem",
-       "apelido": "alegacoes"
-      },
-      {
-       "rotulo": "Tipo de julgamento",
-       "chave": "Tipo de Julgamento",
-       "tipo": "texto",
-       "secao": "triagem",
-       "apelido": "tipo_julgamento"
-      },
-      {
-       "rotulo": "Síntese processual",
-       "chave": "Síntese Processual",
-       "tipo": "texto-longo",
-       "secao": "triagem",
-       "apelido": "sintese_processual"
-      },
-      {
-       "rotulo": "Síntese fática",
-       "chave": "Síntese Fática",
-       "tipo": "texto-longo",
-       "secao": "triagem",
-       "apelido": "sintese_fatica"
       },
       {
        "rotulo": "Ramo do direito",
