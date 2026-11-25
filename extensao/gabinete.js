@@ -81,7 +81,7 @@ var INC = { urgencia: ['Registrar urgência', null], monocratica: ['Registrar mo
 function grupoVisivel(g) {
   if (!g.quando) return true;
   var q = g.quando.campo, i = q.indexOf('.');
-  if (V(q.slice(0, i), q.slice(i + 1)) === g.quando.valor) return true;
+  if(g.quando.campo==='triagem.Tipo de Julgamento'||g.quando.campo==='triagem.Padrão - Espécie'){var raw=V('triagem','Tipo de Julgamento');if(!raw)raw=V('triagem','Padrão - Espécie');var aliases={ed:'Embargos de declaração',interno:'Agravo interno',agint:'Agravo interno',retratacao:'Juízo de retratação'};if(String(raw||'').split(/\s*(?:\+|;|,|·)\s*/).map(function(x){return aliases[x.toLowerCase()]||x;}).indexOf(g.quando.valor)>=0)return true;}else if (V(q.slice(0, i), q.slice(i + 1)) === g.quando.valor) return true;
   return g.campos.some(function (c) { var v = c.secao ? gravado(c.secao, c.chave) : ''; return Array.isArray(v) ? v.length : !!S(v); });
 }
 
@@ -113,6 +113,7 @@ function dicaCampo(c) {
 function rotuloDe(c) { var E = window.MutaEtiquetas; return (/Honorários/.test(c.chave || '') && !/Recursais|Majora/i.test(c.chave || '') && E && E.svg ? '<i class="gl-ic" title="Quem paga, quanto e sobre o quê">' + E.svg('triste', 12) + '</i>' : '') + esc(c.rotulo); }
 /* 0.38: o campo que a leitura dos autos preencheu sozinha leva a marca "autos" até ser conferido ou mudado */
 function campo(c) {
+  if(c.legado||c.chave==='Padrão - Espécie')return '';
   if(c.chave==='Origem - Peças vinculadas 1G'&&window.MutaReferencia)return window.MutaReferencia.html();
   var h = campo0(c), AU = window.MutaAutos;
   if (c.secao && AU && AU.preenchido && AU.preenchido(c.secao + '.' + c.chave)) h = h.replace(/^<div class="gf/, '<div class="gf au-auto').replace('</span>', ' <i class="au-tag" title="Preenchido pela leitura dos autos: confira">autos</i></span>');
@@ -123,6 +124,7 @@ function heroEquipeCampo(c){return c&&((c.vocabulario==='equipe')||/^(Responsáv
 function heroEquipeNomes(v){return Array.from(new Set((G.equipe||[]).filter(function(x){return x&&x.situacao!=='inativo';}).map(function(x){return typeof x==='string'?x:x.nome;}).concat(v?[v]:[]).filter(Boolean))).sort(function(a,b){return a.localeCompare(b,'pt-BR');});}
 function heroEquipeInput(v,at,id){var dl='hero-equipe-'+id.replace(/[^a-zA-Z0-9_-]/g,'-');return '<input type="text" '+at+' list="'+esc(dl)+'" value="'+esc(v||'')+'" placeholder="Selecione ou digite"><datalist id="'+esc(dl)+'">'+heroEquipeNomes(v).map(function(x){return '<option value="'+esc(x)+'"></option>';}).join('')+'</datalist>';}
 function campo0(c) {
+  if(c.legado||c.chave==='Padrão - Espécie')return '';
   if(c.chave==='Status da triagem')c=Object.assign({},c,{rotulo:'Situação da triagem'});
   var longo = c.tipo === 'texto-longo' || c.tipo === 'tabela' || /Honorários/.test(c.chave || ''), cls = 'gf' + (longo ? ' w' : '');
   if (c.tipo === 'tabela') {
