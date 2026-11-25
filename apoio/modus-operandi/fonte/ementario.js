@@ -317,13 +317,27 @@ function ppSelecionar(box,k,focus){
 /* Metadados do julgado: etiquetas semânticas, sem duplicar a identificação do pronunciamento. */
 function ppMetadados(x,it){
   var col=!!window.EMENT_FONTE;
-  function tag(k,v,cls,title,style){
-    return '<span class="pp-chip '+(cls||'')+'"'+(title?' title="'+esc(title)+'"':'')+(style?' style="'+esc(style)+'"':'')+'><small>'+esc(k)+'</small><b>'+esc(v||'Não informado')+'</b></span>';
+  var res=x._res||'Sem classificação',apr=x._apr||'Não classificada';
+  var rs={'Provido':'favoravel','Embargos acolhidos':'favoravel','Desprovido':'desfavoravel','Embargos rejeitados':'desfavoravel','Parcialmente provido':'parcial','Não conhecido':'processual','Seguimento negado':'processual','Prejudicado ou extinto':'processual','Extinção':'processual'}[res]||'neutro';
+  var ap={'Embargos de declaração':'ed','Agravo interno':'agint','Juízo de retratação':'retrata','Julgamento do recurso':'recurso'}[apr]||'neutra';
+  var ic={
+    resultado:'<circle cx="8" cy="8" r="5.8"/><path d="m5 8 2 2 4-4"/>',
+    desfavoravel:'<circle cx="8" cy="8" r="5.8"/><path d="M5.5 8h5"/>',
+    parcial:'<circle cx="8" cy="8" r="5.8"/><path d="M8 2.2v11.6"/>',
+    processual:'<circle cx="8" cy="8" r="5.8"/><path d="M8 5v3l2 1"/>',
+    neutro:'<circle cx="8" cy="8" r="5.8"/><path d="M8 5v3m0 2.5v.2"/>',
+    apreciacao:'<path d="M4 3h8M3 6h10M4 9h8M6 12h4"/>',
+    classe:'<path d="M3 3h4l1.5 2H13v8H3z"/>',
+    orgao:'<path d="m2 6 6-4 6 4M3 7h10M4 8v4m4-4v4m4-4v4M2 14h12"/>',
+    documento:'<path d="M4 2h5l3 3v9H4zM9 2v4h3M6 8h4m-4 3h4"/>'
+  };
+  function tag(k,v,cls,title,ico){
+    return '<span class="pp-chip '+cls+'"'+(title?' title="'+esc(title)+'"':'')+'><svg class="pp-chip-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+ic[ico]+'</svg><span class="pp-chip-info"><small>'+esc(k)+'</small><b>'+esc(v||'Não informado')+'</b></span></span>';
   }
   var estado=it?(col?'Excerto DJEN':'Inteiro teor'):(x.sid&&!x._itFalhou&&!x._itBusca?'A consultar':x.sid&&!x._itFalhou?'Carregando…':'Não disponível');
-  return '<div class="pp-chips pp-metadados">'+tag('Resultado',x._res||'Sem classificação','pp-res','Classificação do resultado','--rc:'+corRes(x._res||'Sem classificação'))+
-    tag('Apreciação',x._apr||'Não classificada','',x._apr)+tag('Classe',x.c||x.cl,'',x.cl)+tag('Órgão',siglaO(x.o),'',x.o)+
-    tag('Documento',estado,it?'ok':'pp-chip-muted',col?'Conteúdo preservado na base DJEN; não equivale ao inteiro teor':'Disponibilidade do texto na base')+'</div>';
+  return '<div class="pp-chips pp-metadados">'+tag('Resultado',res,'pp-res pp-r-'+rs,'Classificação do resultado',rs==='favoravel'?'resultado':rs)+
+    tag('Apreciação',apr,'pp-ap pp-ap-'+ap,apr,'apreciacao')+tag('Classe',x.c||x.cl,'pp-classe',x.cl,'classe')+tag('Órgão',siglaO(x.o),'pp-orgao',x.o,'orgao')+
+    tag('Documento',estado,it?(col?'pp-excerto':'pp-inteiro'):'pp-chip-muted',col?'Conteúdo preservado na base DJEN; não equivale ao inteiro teor':'Disponibilidade do texto na base','documento')+'</div>';
 }
 function abrirIT(x){
   if(!x)return;var mesmo=E.det===x.id,aba=mesmo?(E.detAba||'julgado'):'julgado';E.det=x.id;if(aba==='catalogacao')aba='processo';if(aba==='referencias')aba='julgado';E.detAba=aba;
