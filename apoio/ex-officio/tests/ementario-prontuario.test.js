@@ -25,6 +25,15 @@ test('Ementário: sintaxe e quatro abas no painel, com suporte a ocultação',()
   assert.match(m.html(),/<small>Resultado<\/small><b>Desprovido<\/b>/);
   for(const k of ['Apreciação','Classe','Órgão','Documento'])assert.ok(m.html().includes('<small>'+k+'</small>'));
   assert.match(m.html(),/<small>Documento<\/small><b>Inteiro teor<\/b>/);
+  assert.match(m.html(),/pp-res pp-r-favoravel|pp-res pp-r-desfavoravel/);
+  assert.match(m.html(),/pp-ap-recurso/);
+  assert.match(m.html(),/pp-inteiro/);
+  for (const [res,cl] of [['Provido','favoravel'],['Embargos rejeitados','desfavoravel'],['Parcialmente provido','parcial'],['Não conhecido','processual'],['Outro','neutro']]) {
+    assert.ok(m.ctx.ppMetadados({...m.x,_res:res},'Texto').includes('pp-r-'+cl));
+  }
+  for (const [apr,cl] of [['Embargos de declaração','ed'],['Agravo interno','agint'],['Juízo de retratação','retrata']]) {
+    assert.ok(m.ctx.ppMetadados({...m.x,_apr:apr},'Texto').includes('pp-ap-'+cl));
+  }
   assert.match(m.html(),/data-ppsec="processo"[^>]+ hidden/);
   for(const [k,v] of [['julgado','Tese X'],['julgado','Resultado X'],['julgado','Ementa X'],['julgado','Texto X'],['processo','Partes X'],['processo','Tipo X'],['processo','Especificidade X'],['processo','Nota X'],['julgado','Artigo X'],['julgado','Jurisprudência X'],['julgado','Repertório X'],['correspondencias','5000001-00'],['rastreabilidade','origem.jsonl']])assert.ok(m.sec(k).includes(v),k+': '+v);
   assert.ok(!m.sec('julgado').includes('Partes X'));
@@ -48,4 +57,5 @@ test('Collegium: proveniência separada, assinatura e excerto sem afirmar inteir
   assert.doesNotMatch(m.sec('julgado'),/Proveniência DJEN X|Inteiro teor/);
   assert.match(m.html(),/Copiar abertura/);assert.match(m.html(),/Copiar excerto/);
   assert.match(m.html(),/<small>Documento<\/small><b>Excerto DJEN<\/b>/);
+  assert.match(m.html(),/pp-excerto/);
 });
