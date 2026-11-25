@@ -108,3 +108,53 @@ body #v-ement .pg-h.pa-ab,body #v-edit .pg-h.pa-ab,body .pg-h.pa-ab{display:grid
 /* seletor de modo do Minutário: mesmo desenho do Relator/Turma; no Minutário fica acima do quadro "Já disponível" */
 .pg-h.pa-ab .pa-modo{align-self:flex-end}
 #x-banco>.bk-h{display:none}
+
+/* Ementários: pesquisa no fluxo, com o mesmo recuo dos resultados.
+   Também vale no Collegium, que usa o mesmo template. */
+#v-ement #e-layout>.content{box-sizing:border-box;padding:16px 22px 60px;min-width:0}
+#v-ement #e-layout .e-control-panel{position:static!important;inset:auto!important;z-index:auto!important;transform:none!important;box-shadow:none!important;width:100%;max-width:100%;box-sizing:border-box;margin:0 0 12px;border-radius:0!important}
+#v-ement #e-layout .e-control-panel .e-control-search{gap:8px}
+#v-ement #e-layout .e-control-search #e-q{height:38px;min-width:0;max-width:100%;border-radius:0}
+#v-ement #e-layout .e-control-panel .e-query-actions{min-width:0;max-width:100%}
+#v-ement #e-layout #e-out,#v-ement #e-layout #e-chips,#v-ement #e-layout #e-sel{min-width:0;max-width:100%}
+@media(max-width:860px){#v-ement #e-layout>.content{padding:14px 16px 50px}}
+
+/* Minutário: dimensionar pela largura real da folha e não pela janela;
+   opções e comandos não podem reduzir a legibilidade do texto jurídico. */
+body.dsk #v-edit #x-wrap:not(.d28){grid-template-columns:minmax(250px,clamp(260px,24vw,340px)) minmax(0,1fr);column-gap:16px;min-width:0}
+body.dsk #v-edit #x-wrap:not(.d28):has(#x-aside.cxon){grid-template-columns:minmax(270px,clamp(280px,27vw,384px)) minmax(0,1fr)}
+body.dsk #x-aside,body.dsk #x-main,body.dsk #x-main .xsheet{min-width:0;box-sizing:border-box}
+body.dsk #x-main .xsheet{padding:8px clamp(16px,3vw,42px) 24px}
+body.dsk #x-main .xblk>.dbody{min-width:0;overflow-wrap:anywhere}
+body.dsk #x-main .xblk>.band{min-width:0;overflow-wrap:anywhere;flex-wrap:wrap}
+body.dsk #x-main .xblk>.band .vs{min-width:0;max-width:100%;flex-wrap:wrap}
+body.dsk #x-main .xblk>.band button{max-width:100%;white-space:normal;text-align:left;overflow-wrap:anywhere}
+@container (max-width:899px){
+ body.dsk #x-main .xblk{display:block;grid-template-columns:none;margin:0;padding:5px 0}
+ body.dsk #x-main .xblk>.band{border:0;border-bottom:1px dashed var(--line);padding:5px 0;margin:0;align-content:normal}
+ body.dsk #x-main .xblk>.band .bl{flex:0 1 auto}
+ body.dsk #x-main .xblk>.dbody{padding:8px 0 10px 28px}
+ body.dsk #x-main .xblk>.dopc{padding-left:28px}
+}
+body.dsk #x-main .dtabs{flex-wrap:wrap;overflow:visible;gap:3px;align-items:flex-end}
+body.dsk #x-main .dtabs .dpillw{display:flex;order:-1;width:100%;justify-content:flex-end;min-width:0}
+body.dsk #x-main .dtabs .dpill{height:auto;min-height:32px;max-width:100%;flex-wrap:wrap;overflow:visible;margin:0 0 5px}
+body.dsk #x-main .dtabs .dpill>button{min-height:30px}
+body.dsk #x-main .dtabs .dtsp{display:none}
+#x-top .dbar .dgrp{max-width:100%;box-sizing:border-box}
+#x-top .dgrp.dtxt{flex:1 1 440px;min-width:0}
+#x-top .dgrp.dtxt>label.dmodl{flex:1 1 240px!important;max-width:100%}
+#x-top .dgrp.dtxt>label.dmodl>select{min-width:0!important;max-width:100%!important;width:100%!important;flex:1 1 0}
+#x-top .dgrp>label>select{max-width:clamp(148px,18vw,240px)!important}
+#x-top .dgrp>label>input{min-width:0;max-width:100%}
+@media(max-width:860px){
+ body.dsk #v-edit #x-wrap:not(.d28),body.dsk #v-edit #x-wrap:not(.d28):has(#x-aside.cxon){grid-template-columns:minmax(0,1fr)!important}
+ body.dsk #x-main .xsheet{padding:8px 16px 20px}
+ body.dsk #x-main .xblk>.dbody,body.dsk #x-main .xblk>.dopc{padding-left:0}
+ body.dsk #x-main .dtabs .dpillw{justify-content:flex-start;overflow:visible}
+ #x-top .dgrp>label{flex:1 1 100%!important}
+ #x-top .dgrp>label>select{max-width:100%!important;flex:1}
+ #x-top .dgrp.dtxt{flex:1 1 100%}
+ #x-top .dgrp.dtxt>label.dmodl{flex:1 1 100%!important}
+ #x-top .dsug-b{white-space:normal;min-height:36px}
+}
