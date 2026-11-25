@@ -967,7 +967,7 @@ function heroOrganizarProntuario(){
   stepsHead.append(el('h4','pm-mer-h','Etapas'));
   var resp=top.querySelector('.pm-resp'),ato=resp&&resp.querySelector('.pm-ato'),dest=el('div','hero-destino');
   if(ato)dest.append(ato);else html(dest,atoSel());
-  var pron=dest.querySelector('#pm-pron');if(pron){pron.setAttribute('aria-label','Pronunciamento');stepsHead.append(pron);}else stepsHead.append(dest);
+  
   steps.append(stepsHead);
   if(flow){
     var people=flow.querySelector('.pv-people'),tags=el('div','hero-designacoes');
@@ -1082,41 +1082,24 @@ function heroOrganizarProntuario(){
   if(!sel&&window.MutaRoteiro){var tmp=el('div');html(tmp,corpoRoteiro());sel=tmp.querySelector('.rt-tsel');}
   if(sel){sel.classList.add('hero-tipo-roteiro');tj.prepend(sel);caixa.querySelectorAll('.rt-tsel').forEach(function(x){if(x!==sel)x.remove();});}
   else html(tj,campoRot('triagem','Tipo de Julgamento','Tipo de julgamento'));
-  /* Resultado: dropdown com as opções do motor de julgamento. */
-  var resKey='producao.Voto - Resultado',resCampo=campoLista('producao','Voto - Resultado'),pk=pronAtual(),tipos=ccTipos();
-  Array.from(caixa.querySelectorAll('[data-fk="producao.Voto - Resultado"],[data-ch="producao.Voto - Resultado"]')).forEach(function(x){var f=x.closest('.gf');if(f)f.remove();});
-  if(pk!==3&&pk!==7&&resCampo){
-    var opts, motor=window.MutaGabinete&&window.MutaGabinete.julgamento;
-    if(motor&&motor.opcoes)opts=motor.opcoes();
-    else if(pk===2||pk===8)opts=['Deferido','Parcialmente deferido','Indeferido','Prejudicado'];
-    else if(pk===6)opts=['Homologado','Extinto'];
-    else if(pk===5||tipos.ret)opts=['Retratação exercida','Acórdão mantido'];
-    else if(tipos.ed)opts=['Rejeitados','Acolhidos sem efeito infringente','Acolhidos com efeito infringente','Não conhecido'];
-    else opts=['Provido','Parcialmente provido','Desprovido','Não conhecido','Prejudicado'];
-    var atual=S(V('producao','Voto - Resultado')),norm=window.VOC?VOC.norm('resJulg',atual):atual;
-    var rf=el('label','gf hero-resultado');rf.append(el('span','gl','Conclusão / resultado'));
-    if(editavel(resCampo)){
-      var rs=el('select');rs.dataset.fk=resKey;rs.setAttribute('aria-label','Conclusão / resultado');
-      var vazio=el('option','','A definir');vazio.value='';rs.append(vazio);
-      opts.forEach(function(o){var op=el('option','',o);op.value=o;rs.append(op);});
-      if(atual&&opts.indexOf(norm)<0){var antigo=el('option','',atual+' (registro anterior)');antigo.value=atual;rs.append(antigo);}
-      rs.value=opts.indexOf(norm)>=0?norm:atual;rf.append(rs);
-    }else rf.append(el('span','ro',atual||'—'));
-    tj.append(rf);
+  /* Especificações jurídicas ficam na Produção; planejamento não altera resultado. */
+  if(G.aba==='Produção'||G.aba==='Roteiro'){
+    var prod=caixa.querySelector('.gbody')||caixa.querySelector('.pm-pron');
+    if(prod&&sel)prod.prepend(sel);
   }
-  tj.classList.add('hero-julgamento-top');if(identity)identity.remove();
+  if(identity)identity.remove();
   /* Encaminhamento é uma seção interna, comum a todos os modos. */
   var encSection=el('section','hero-enc-integrado');encSection.append(el('h4','pm-mer-h','Encaminhamento'));
   var encFields=el('div','gr hero-enc-fields');encSection.append(encFields);
   body.querySelectorAll('.pm-enc,.pv-acomp-sit,.pv-followup,.pm-sitj').forEach(function(x){x.remove();});
   html(encFields,situacaoHtml());
-  var destinoAtual=destGrav(),destRow=el('div','gf');destRow.append(el('span','gl','Destino'),el('span','ro',destinoAtual||'A definir'));encFields.append(destRow);
+  var destinoAtual=destGrav(),destRow=el('label','gf'),destSel=el('select');destRow.append(el('span','gl','Destino'));destSel.dataset.fk='producao.Destino';[['','A definir'],['Monocrática','Relator'],['Sessão','Colegiado'],['Outro destino','Outro']].forEach(function(x){var o=el('option','',x[1]);o.value=x[0];destSel.append(o);});destSel.value=destinoAtual;destSel.disabled=!!(window.MUTA_WEB&&window.MUTA_WEB.leitura);destRow.append(destSel);encFields.append(destRow);
   if(destinoAtual==='Outro destino')html(encFields,campoRot('producao','Destino - Outro','Especificar destino'));
   if(destinoAtual==='Sessão'){
     var sp=el('label','gf'),spSel=el('select');sp.append(el('span','gl','Seleção prévia'));spSel.dataset.fk='triagem.Seleção Prévia';spSel.setAttribute('aria-label','Seleção prévia');
     [['','Não selecionado'],['SELECIONADO PREVIAMENTE','Selecionado previamente']].forEach(function(x){var op=el('option','',x[1]);op.value=x[0];spSel.append(op);});
     spSel.value=S(V('triagem','Seleção Prévia'));spSel.disabled=!!(window.MUTA_WEB&&window.MUTA_WEB.leitura);sp.append(spSel);encFields.append(sp);
-    if(spSel.value==='SELECIONADO PREVIAMENTE')html(encFields,campoRot('pauta','Nova sessão de destino','Sessão prevista (vazio = banco reserva)'));
+    html(encFields,campoRot('pauta','Nova sessão de destino',spSel.value==='SELECIONADO PREVIAMENTE'?'Sessão da seleção prévia (vazio = banco reserva)':'Sessão provável'));
   }
   /* Pauta do processo: os mesmos campos da ficha, sem depender da aba Pauta. */
   var pautaOficial=pautado(),Pp=(G.op||{}).pauta||{},grupoPauta=grupoModelo('Pauta e julgamento');
@@ -1142,9 +1125,10 @@ function heroOrganizarProntuario(){
   var pedidos=el('div','hero-pauta-pedidos');pedidos.dataset.cnj=G.cnj;solicit.append(pedidos);
   if(window.MutaPauta&&window.MutaPauta.pedidosProcesso)window.MutaPauta.pedidosProcesso(pedidos,G.cnj);
   if(N(destinoAtual)==='monocratica')html(encFields,campoRot('triagem','Hipóteses Monocrática','Hipótese do artigo 932'));
-  html(encFields,campoRot('origem','Próxima ação','Próxima fase / providência após o cumprimento'));
-  tj.prepend(el('h4','pm-mer-h','Julgamento'));
-  body.prepend(tj,solicit,encSection);body.append(tagsGroup);
+  html(encFields,campoRot('origem','Próximo pronunciamento','Próximo pronunciamento'));
+  html(encFields,campoRot('origem','Ato a proferir','Ato a proferir'));
+  html(encFields,campoRot('origem','Próxima ação','Próxima providência'));
+  body.prepend(solicit,encSection);body.append(tagsGroup);
   /* Responsável pelo acompanhamento: mesma chave da ficha, agora ao lado das designações. */
   var responsaveis=Array.from(caixa.querySelectorAll('[data-fk="origem.Responsável"],[data-pv-field="origem.Responsável"]'));
   responsaveis.forEach(function(x){var f=x.closest('.gf,.pv-field,.pv-idrow');if(f)f.remove();else x.remove();});
@@ -1286,10 +1270,10 @@ caixa.addEventListener('change', function (e) {
   if (t.dataset && t.dataset.auAuto != null) { if (window.MutaAutos) window.MutaAutos.autoLigar(t.checked); return; }
   if (t.dataset && t.dataset.snOk) { var po = t.dataset.snOk.split(':'), Lo = snLinhas(po[0]), io = Number(po[1]); if (Lo[io] != null) Lo[io] = t.checked ? '✓ ' + Lo[io].replace(/^✓\s*/, '') : Lo[io].replace(/^✓\s*/, ''); snGravar(po[0], Lo); return; }
   if (t.id === 'sn-tp') { G.snTp = t.value; return; }
-  if (t.id === 'pm-pron') { var xp = t.value === '' ? null : PRON[Number(t.value)]; marcar('producao.Destino', xp ? xp[1] : ''); marcar('producao.Mono - Tipo de ato', xp ? xp[2] : ''); G.dest = null; agendar(400); render(); return; }
+  if (t.id === 'pm-pron') { var xp = t.value === '' ? null : PRON[Number(t.value)]; marcar('producao.Mono - Tipo de ato', xp ? xp[2] : ''); G.dest = null; agendar(400); render(); return; }
   if (t.dataset && t.dataset.rtc) { if (window.MutaRoteiro) window.MutaRoteiro.conferir(t.dataset.rtc, t.checked, gRot()); render(); return; }
   if (!t.dataset || !t.dataset.fk) return;
-  marcar(t.dataset.fk, t.value); var l = t.closest('label'); if (l) l.classList.add('mud');
+  marcar(t.dataset.fk, t.value); if(t.dataset.fk==='producao.Destino')G.dest=null; var l = t.closest('label'); if (l) l.classList.add('mud');
   agendar(900);
   if (t.closest('.hero-acomp') || /^(triagem\.(Urgência|Padrão - Espécie)|producao\.Destino|controles\.Sensível - (In|Ex)cluído)$/.test(t.dataset.fk) || G.aba === 'Processo') render();
 });
