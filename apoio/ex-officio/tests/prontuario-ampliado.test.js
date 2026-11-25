@@ -24,3 +24,8 @@ test('ficha mantém campos antigos; extração e roteiros preservados',()=>{
  assert.match(g,/function corpoRoteiro\(/);assert.match(g,/function camposCaso\(/);assert.match(g,/plus-table/);
  new Function(au);new Function(g);
 });
+test('não interpretar texto misto como desprovimento integral',()=>{
+ assert.equal(A.resultado('Não conhecido e dado provimento'),'outro');
+ assert.equal(A.resultado('Parcialmente conhecido'),'outro');
+ assert.equal(A.resultado('Desprovimento integral'),'desprovimento');
+});

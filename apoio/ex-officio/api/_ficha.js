@@ -316,6 +316,9 @@ module.exports = async (req, res, u) => {
     }
     const b = req.body || {}, cnj = String(b.cnj || ''), C = b.campos || {}, E = editaveis(F), mud = {}, recus = [];
     if (dg(cnj).length !== 20) return res.status(400).json({ erro: 'número do processo inválido' });
+    if (Object.prototype.hasOwnProperty.call(C, 'origem.Classificação documental') && require('./_sigilo').sigiloDe(await fonteDe(cnj))) {
+      return res.status(403).json({ erro: 'Classificação documental detalhada não pode ser gravada na ficha compartilhada de processo sigiloso.' });
+    }
     Object.keys(C).forEach(k => {
       if (!E[k]) { recus.push(k); return; }
       if (SO_GESTOR.has(k) && !L.gestor(u)) { recus.push(k); return; }

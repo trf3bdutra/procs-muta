@@ -11,11 +11,13 @@ if(/honorario|custas|gratuidade|calculo|sucumbencia|sentenca|acordao/.test(t))a.
 if(/jurisprudencia|precedente|tema repetitivo/.test(t))a.push('Precedente','Fundamentável');
 if(/tutela|liminar|incidente/.test(t))a.push('Incidental');return Array.from(new Set(a));}
 function mergeRows(old,patch){var m=new Map();(Array.isArray(old)?old:[]).concat(Array.isArray(patch)?patch:[]).forEach(function(r){if(r&&/^\d{1,30}$/.test(String(r.id||'')))m.set(String(r.id),Object.assign({},r,{id:String(r.id)}));});return Array.from(m.values());}
-function outcome(v){var s=n(v);if(!s||s==='a definir')return 'indefinido';
-if(/anul|cassad/.test(s))return 'anulacao';if(/prejudic|perda do objeto/.test(s))return 'prejudicado';
-if(/parcial/.test(s)&&/prov|conhec/.test(s))return 'parcial';
-if(/nao conhec|nao se conhece|inadmiss/.test(s)&&!/parcial/.test(s))return 'nao_conhecido';
-if(/desprov|negad[oa] provimento|nego provimento|negar provimento|improvido/.test(s)&&!/parcial/.test(s))return 'desprovimento';
+function outcome(v){var s=n(v).replace(/[.!]$/,'');if(!s||s==='a definir')return 'indefinido';
+if(/\b(e|mas|porem|enquanto)\b|[;\/]/.test(s))return 'outro';
+if(/^(anulado|anulacao|cassado|cassacao)$/.test(s))return 'anulacao';
+if(/^(prejudicado|recurso prejudicado|perda do objeto)$/.test(s))return 'prejudicado';
+if(/^(parcialmente provido|parcial provimento|provimento parcial|dado parcial provimento|dou parcial provimento)$/.test(s))return 'parcial';
+if(/^(nao conhecido|nao conhecimento|nao se conhece|nao conheco|inadmissivel|inadmitido|recurso nao conhecido|integralmente nao conhecido)$/.test(s))return 'nao_conhecido';
+if(/^(desprovimento|desprovimento integral|desprovido|integralmente desprovido|negado provimento|nego provimento|negar provimento|improvido)$/.test(s))return 'desprovimento';
 if(/^(dado provimento|dou provimento|provimento( integral)?|provido|integralmente provido|dar provimento|deu provimento)$/.test(s))return 'provimento';return 'outro';}
 function indicador(o){o=o||{};var r=outcome(o.resultado),rows=Array.isArray(o.sucumbencia)?o.sucumbencia:[],t=n(o.tipo),s=[];
 if(/mandado de seguranca/.test(t))return {itens:['Mandado de segurança: não cabe condenação em honorários advocatícios (artigo 25 da Lei 12.016/2009); conferir custas e gratuidade.']};

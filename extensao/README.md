@@ -5,6 +5,13 @@ Nome desde a 0.19.3 (antes: Muta). Os identificadores internos (`window.Muta*`, 
 Extensão do Chrome/Edge (Manifest V3) que abre o **Muta** num painel lateral, ao lado dos autos e das tarefas do PJe 2º grau do TRF-3.
 Base: o HTML independente *muta-independente-prontuario-completo* (Prontuário + Acervo).
 
+## O que muda na 0.70 · prontuário ampliado
+- Mantém os roteiros, a extração, OCR, seleção, gravação e exportação dos autos originais.
+- Classificação funcional multivalorada por ID, sugestões revisáveis e filtros sem alterar a cronologia; referências classificadas na produção. Não grava trechos de autos sigilosos na ficha compartilhada.
+- Edição das tabelas documentais na extensão; sucumbência da decisão recorrida por capítulo, resultado por recurso, indicadores consultivos de honorários (Tema 1.059/STJ), custas e gratuidade.
+- Campos de produção estruturados e variáveis da ficha, condicionadas à espécie do julgamento. Preserva os campos históricos.
+- A prévia universal continua disponível; alterações ali não gravam na ficha. A apresentação original permanece disponível.
+
 ## O que muda na 0.51 · Collectio com o PJe aberto (gestor)
 
 - Processo de lote abre a aba Minuta já no Collectio (só o gestor, quando ela estava no Comparar); fora de lote, volta ao Comparar. Com o editor à vista, lê e confronta sozinho.

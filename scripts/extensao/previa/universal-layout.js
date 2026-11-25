@@ -135,6 +135,7 @@
   };
   function abrirDoc(grupo,id){
     var AU=window.MutaAutos;
+    if(window.MutaGabinete.limparFiltroDocumental)window.MutaGabinete.limparFiltroDocumental();
     if(id&&AU&&AU.estado)AU.estado().filtro='todos';else if(AU&&AU.estado)AU.estado().filtro='pecas';
     G.pecAb=G.pecAb||{};G.pecAb[grupo]=true;G.aba='Autos';render();
     var p=id?Array.from(caixa.querySelectorAll('[data-au-it]')).find(function(x){return x.getAttribute('data-au-it')===id;}):null;
