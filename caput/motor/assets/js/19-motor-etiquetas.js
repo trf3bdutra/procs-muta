@@ -119,6 +119,18 @@ W.CMTMotorEtiquetas={criar:function(ctx){
   }
 
 
-return {EF:EF,TIPOS:TIPOS,MODOS:MODOS,termoDeTexto:termoDeTexto,termoParaTexto:termoParaTexto,regra:regra,regrasPadrao:regrasPadrao,RX:RX,casa:casa,offDe:offDe,ativas:ativas,CAMPOS_R:CAMPOS_R,OPS_R:OPS_R,regrasCond:regrasCond,bateCond:bateCond,bateRegra:bateRegra,aplicaRegrasCond:aplicaRegrasCond,tipoDaTarefa:tipoDaTarefa,sessaoDoItem:sessaoDoItem,casaRegra:casaRegra,classeOK:classeOK,numerosMeta:numerosMeta,classificar:classificar,recursoDaClasse:recursoDaClasse};
+var administracao = {
+      efeitos: function () { return JSON.parse(JSON.stringify(EF)); },
+      lista: function () { return estado().regras.map(function (r) { var a = ctx.alcance(r); return Object.assign(JSON.parse(JSON.stringify(r)), { alcance: a.n, exemplos: a.ex, termosTx: r.termos.map(termoParaTexto), excetoTx: (r.exceto || []).map(function (x) { return x.m === 'contem' ? x.t : termoParaTexto(x); }) }); }); },
+      salvar: function (id, c) { var r = estado().regras.find(function (x) { return x.id === id; }); if (!r || !c) return false;
+        if ('on' in c) r.on = !!c.on; if (c.ef && EF[c.ef]) r.ef = c.ef; if ('v' in c) r.v = EF[r.ef].v ? String(c.v || '').trim() : ''; if ('nome' in c) r.nome = String(c.nome || '').trim(); if ('nota' in c) r.nota = String(c.nota || '').trim();
+        if ('termos' in c) r.termos = String(c.termos || '').split('\n').map(termoDeTexto).filter(Boolean);
+        if ('exceto' in c) r.exceto = String(c.exceto || '').split('\n').map(function (l) { l = l.trim(); if (!l) return null; var x = termoDeTexto(l); if (x.m === 'inicio' && !/^[=*$\/]/.test(l)) x.m = 'contem'; return x; }).filter(Boolean);
+        if ('classes' in c) r.classes = String(c.classes || '').split(';').map(function (x) { return x.trim(); }).filter(Boolean);
+        RX.clear(); ctx.alterar(true); return true; },
+      nova: function (ef) { if (!EF[ef]) return ''; var r = regra(ef, []); estado().regras.unshift(r); ctx.alterar(false); return r.id; },
+      apagar: function (id) { var n = estado().regras.length; estado().regras = estado().regras.filter(function (x) { return x.id !== id; }); if (estado().regras.length !== n) { RX.clear(); ctx.alterar(false); return true; } return false; }
+    };
+return {administracao:administracao,EF:EF,TIPOS:TIPOS,MODOS:MODOS,termoDeTexto:termoDeTexto,termoParaTexto:termoParaTexto,regra:regra,regrasPadrao:regrasPadrao,RX:RX,casa:casa,offDe:offDe,ativas:ativas,CAMPOS_R:CAMPOS_R,OPS_R:OPS_R,regrasCond:regrasCond,bateCond:bateCond,bateRegra:bateRegra,aplicaRegrasCond:aplicaRegrasCond,tipoDaTarefa:tipoDaTarefa,sessaoDoItem:sessaoDoItem,casaRegra:casaRegra,classeOK:classeOK,numerosMeta:numerosMeta,classificar:classificar,recursoDaClasse:recursoDaClasse};
 }};
 })(typeof window!=='undefined'?window:globalThis);
