@@ -3,6 +3,9 @@ on:
   push:
     branches: [main]
     paths: ["extensao/**", "scripts/extensao/**", "apoio/ex-officio/tests/extensao*.test.js", "apoio/ex-officio/tests/prontuario-extensao.test.js", ".github/workflows/hero-regressoes.yml"]
+  pull_request:
+    branches: [main]
+    paths: ["extensao/**", "scripts/extensao/**", "apoio/ex-officio/tests/extensao*.test.js", "apoio/ex-officio/tests/prontuario-extensao.test.js", ".github/workflows/hero-regressoes.yml"]
   workflow_dispatch:
 permissions:
   contents: read
