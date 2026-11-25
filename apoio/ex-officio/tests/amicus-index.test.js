@@ -71,3 +71,16 @@ test('Barra do Amicus Curiae: CORTEX e Compendium com a mesma barra, sem citar u
  assert.ok(!/collectio/i.test(build.slice(build.indexOf('EXO = '),build.indexOf("a = '  </div>\\n</header>\\n'"))),'Compendium sem o CORTEX na barra');
  assert.ok(nav.includes('header.top.nx #cmp-nav{flex:0 1 auto;min-width:0;overflow-x:auto'));
 });
+
+test('Portal Amicus: visão geral dentro do cabeçalho e duas colunas laterais',()=>{
+ const home=read('apoio/amicus/index.html'), shared=read('apoio/amicus/header.py');
+ const hd=home.match(/<header class="am-home-header">([\s\S]*?)<\/header>/);assert.ok(hd);
+ assert.match(hd[1],/am-over-head am-home-overview/);assert.match(hd[1],/am-over-nav am-home-overview/);
+ assert.match(home,/<aside class="am-rail am-apps"/);assert.match(home,/<aside class="am-rail am-refs"/);
+ for(const id of ['jurisprudencia','enunciados','regimento','fluxos','competencia','impedimentos']){
+  assert.equal((home.match(new RegExp('id="'+id+'"','g'))||[]).length,1,id);
+  assert.ok(home.includes('href="#'+id+'"'),id);
+ }
+ assert.ok(shared.includes("!e.classList.contains('am-home-overview')"));
+ for(const m of home.matchAll(/<script>([\s\S]*?)<\/script>/g))new vm.Script(m[1]);
+});
