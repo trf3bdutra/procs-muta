@@ -573,6 +573,14 @@
        "regra": "Etapa intermediária: vista ao MPF, diligência, intimação, sobrestamento ou verificação de prevenção, entre outras. Não altera o destino final."
       },
       {
+       "rotulo": "Conferência dos autos",
+       "chave": "Conferência dos autos",
+       "tipo": "texto-longo",
+       "secao": "origem",
+       "apelido": "conferencia_autos",
+       "regra": "JSON com decisões de preservação de registros históricos por campo, ID e valores comparados."
+      },
+      {
        "rotulo": "Notas fixadas no prontuário",
        "chave": "Notas fixadas",
        "tipo": "texto-longo",
