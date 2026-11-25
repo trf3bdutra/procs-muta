@@ -54,3 +54,10 @@ test('Amicus tem o painel de busca do Collegium, que abre o ementário com termo
   for(const x of ["!p.q&&!p.rl&&!p.t","if(p.rl&&DIM.rl)E.F.rl=p.rl;","E.qm=p.qm==='ft'&&E.q?'ft':'idx';"]) assert.ok(e.includes(x),x);
   assert.ok(wf.includes('precedentes/collegium/resumo.json site/public/collegium/'),'resumo publicado');
 });
+
+test('Ementário tem o seletor Relator / Turma, que troca de página levando a busca (bases separadas)',()=>{
+  const pp=read('apoio/modus-operandi/fonte/padrao_paginas.js');
+  for(const x of ['function fonteSel()','data-fonte="relator"','data-fonte="turma"','/amicus/compendium/#v=ement','/amicus/collegium/#v=ement',"por(slot(he),fonteSel()+"])
+    assert.ok(pp.includes(x),x);
+  assert.ok(read('apoio/modus-operandi/fonte/padrao_paginas.css').includes('.pa-fonte'));
+});

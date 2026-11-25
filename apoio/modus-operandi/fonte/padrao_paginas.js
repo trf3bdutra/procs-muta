@@ -21,10 +21,21 @@
   /* data da última coleta na Base de Jurisprudência do TRF-3 (precedentes/jurisprudencia/MANIFESTO.json, gravada pelo build) */
   function coleta(){var m=/^(\d{4})-(\d{2})-(\d{2})/.exec(window.EMENT_COLETA||'');
     return m?'<p class="pa-c" title="'+(window.EMENT_COLETA_FONTE||'Base de Jurisprudência do TRF-3 (web.trf3.jus.br/jurisprudencia)')+'">'+(window.EMENT_COLETA_ROT||'Última coleta no TRF-3')+': <b>'+m[3]+'/'+m[2]+'/'+m[1]+'</b></p>':'';}
+  /* seletor Relator / Turma do Ementário: o Compendium (julgados do Relator, os únicos usados como padrão) e o Collegium
+     (demais gabinetes da Turma Regional de MS, só consulta) são páginas separadas, com bases separadas; o seletor troca de
+     uma para a outra levando a busca, o modo (índice ou texto integral) e o tipo */
+  function fonteSel(){var t=!!window.EMENT_FONTE;
+    return '<div class="pa-fonte" role="group" aria-label="Base do ementário"><a href="/amicus/compendium/#v=ement" data-fonte="relator"'+(t?'':' aria-current="page"')+' title="Julgados do Relator (Des. Fed. Carlos Muta): curados e série histórica — base dos padrões do gabinete">Relator</a>'+
+      '<a href="/amicus/collegium/#v=ement" data-fonte="turma"'+(t?' aria-current="page"':'')+' title="Julgados dos demais gabinetes da Turma Regional de MS — consulta, não é padrão do gabinete">Turma</a></div>';}
+  D.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('.pa-fonte a[data-fonte]');if(!a||a.getAttribute('aria-current')==='page'){if(a)e.preventDefault();return;}
+    e.preventDefault();var q=D.getElementById('e-q'),qm=D.querySelector('input[name="e-qm"]:checked'),tp=D.querySelector('#e-tipo button[aria-pressed="true"]');
+    var h=['v=ement'],v=q&&q.value.trim(),t=tp&&tp.getAttribute('data-v');
+    if(v)h.push('q='+encodeURIComponent(v));if(v&&qm&&qm.value==='ft')h.push('qm=ft');if(t==='Acórdão')h.push('t=A');else if(t==='Monocrática')h.push('t=M');
+    location.href=a.getAttribute('href').split('#')[0]+'#'+h.join('&');});
   function abertura(){
     D.querySelectorAll('.pg-h').forEach(function(h){h.classList.add('pa-ab');});
     var he=D.querySelector('#v-ement .pg-h');
-    if(he){var c=D.querySelector('#v-ement #e-cnt');por(slot(he),c?numero(c)+coleta():'');}
+    if(he){var c=D.querySelector('#v-ement #e-cnt');por(slot(he),fonteSel()+(c?numero(c)+coleta():''));}
     var hx=D.querySelector('#v-edit .pg-h');
     if(hx){var x=D.getElementById('x-dev'),s=slot(hx),tt=hx.querySelector('.pg-t'),kk=tt&&tt.querySelector('.dkk'),bd=tt&&tt.querySelector('.pa-dev');
       var on=x&&!x.hidden&&(x.textContent||'').trim(),dir=D.querySelector('#v-edit #x-alt.x-alt-dir:not([hidden])'),mod=/MODELOS/i.test((kk&&kk.textContent)||'');

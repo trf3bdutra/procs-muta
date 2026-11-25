@@ -98,3 +98,10 @@ body #v-ement .pg-h.pa-ab,body #v-edit .pg-h.pa-ab,body .pg-h.pa-ab{display:grid
 /* Minuta-Matriz: o seletor de modelos precisa de espaço para o nome do modelo */
 #x-top .dgrp.dtxt>label.dmodl>select{max-width:420px!important;min-width:240px!important}
 @media (max-width:860px){#x-top .dgrp.dtxt>label.dmodl>select{max-width:none!important;min-width:0!important;width:100%!important}}
+
+/* seletor Relator / Turma no alto do Ementário (Compendium ↔ Collegium) */
+.pg-h.pa-ab .pa-fonte{display:inline-flex;margin:0 0 12px;border:1px solid var(--line);background:var(--bg,#fff);border-radius:999px;padding:3px;gap:2px}
+.pg-h.pa-ab .pa-fonte a{display:inline-block;padding:5px 15px;border-radius:999px;font:500 11px/1.3 "IBM Plex Mono",ui-monospace,monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--mut);text-decoration:none}
+.pg-h.pa-ab .pa-fonte a:hover{color:var(--pa-deep);background:var(--pa-och-bg)}
+.pg-h.pa-ab .pa-fonte a[aria-current="page"]{background:var(--pa-deep);color:var(--panel,#fff);cursor:default}
+.pg-h.pa-ab .pa-fonte a:focus-visible{outline:2px solid var(--pa-deep);outline-offset:2px}
