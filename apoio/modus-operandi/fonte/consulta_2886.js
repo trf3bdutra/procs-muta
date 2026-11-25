@@ -407,6 +407,7 @@
     disponivel:function(){return !!M();},
     e2886:function(P,J){return e2886(P||{},J||null);},
     render:function(P,J,els,CQ,voltar){CTX={P:P,J:J,can:els.can,mn:els.mn,or:els.or,CQ:CQ,voltar:voltar};preparar(P,J);desenhar();},
+    dados:function(P,J,grupo){var V=preVal(P,J,grupo),D={};doOffice(P,J,grupo,V,D);return V;},
     estado:function(){return S;},texto:textoFinal,pacote:pacote
   };
 })();

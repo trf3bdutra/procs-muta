@@ -38,8 +38,8 @@ test('matrizes estão dentro de Modelos: sem "Matriz modular" no painel do caso 
   assert.doesNotMatch(c, /<b>Matriz modular<\/b>/);
   assert.match(c, /Modelos para o caso/);
   assert.doesNotMatch(js, /\['m28','Matriz 28,86%'\]/);
-  assert.match(js, /<optgroup label="Matrizes"><option value="m28"/);
-  assert.match(js, /if\(t\.value==='m28'\)\{dkFonte\('m28'\);return;\}/);
+  assert.doesNotMatch(js, /<option value="m28"/);
+  assert.doesNotMatch(js, /CQX\.render28\(\)/);
 });
 
 test('Modelos e Parágrafos são modos do Minutário, trocados pelo seletor da abertura', () => {
