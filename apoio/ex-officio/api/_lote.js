@@ -338,6 +338,22 @@ module.exports = async (req, res) => {
       const { dados: mxD } = await L.lerJson(caminhoMatriz(String(q.matriz))).catch(nada);
       return res.status(200).json({ id: String(q.matriz), matriz: mxD || null });
     }
+    if (!id && q.processo) {
+      const proc=String(q.processo).replace(/\D/g,'');
+      if(proc.length!==20)return res.status(400).json({erro:'CNJ inválido'});
+      const lista=await L.gh('/contents/acervo/lotes?ref=main').catch(e=>e.status===404?[]:Promise.reject(e));
+      const registros=[];
+      for(const f of (Array.isArray(lista)?lista:[]).filter(f=>/^[a-z0-9-]+\.json$/i.test(f.name))){
+        const {dados:l}=await lerLote('acervo/lotes/'+f.name).catch(nada);
+        if(!l||l.tipo!=='triagem'||!loteVe(l)||(l.arquivado&&modo!=='cg'))continue;
+        const it=(l.itens||[]).find(x=>String(x.processo||'').replace(/\D/g,'')===proc);
+        if(!it)continue;
+        if(modo!=='cg'){await anotar(l,M);if(!ve(it))continue;}
+        const g=(l.grupos||[]).find(x=>x.id===it.grupo);
+        registros.push({id:l.id,titulo:l.titulo,grupo:g?g.nome||g.titulo||g.id:it.grupo||'',arquivado:!!l.arquivado,proposta:it.proposta||'',modelo:it.modelo||'',variacoes:it.variacoes||'',resultado:it.resultado||'',campos:(l.colunas_triagem||[]).map(c=>({id:c.id,nome:c.nome,tipo:c.tipo,opcoes:c.opcoes||[],valor:(it.valores_triagem||{})[c.id]??''}))});
+      }
+      return res.status(200).json({registros,gestor});
+    }
     if (!id) {
       const lista = await L.gh('/contents/acervo/lotes?ref=main').catch(e => (e.status === 404 ? [] : Promise.reject(e)));
       const lotes = [];
