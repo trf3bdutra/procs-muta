@@ -33,3 +33,11 @@ test('Editorial: honorários dependem de resultado, verba prévia, recorrente e 
  assert.match(f({...cp,'producao.Voto - Honorários':''},{classe_judicial:'Mandado de segurança'}).honorarios_recursais_texto,/artigo 25/);
  assert.match(f({...cp,'origem.Sentença - Publicação':'2016-03-17'}).honorarios_recursais_texto,/anterior/);
 });
+
+test('contrarrazões não verificadas ou contraditórias não viram ausência confirmada',()=>{
+ const w={};new Function('window',read('extensao/gerador.js'))(w);
+ const x=w.MutaGerador.comporFicha({'origem.Contrarrazões - Situação':'Não verificado'},{},'Apelação');
+ assert.match(x.variaveis.contrarrazoes_relatorio,/VALIDAR/);
+ const y=w.MutaGerador.comporFicha({'origem.Contrarrazões - Situação':'Não houve','origem.Contrarrazões':[{ids:'123456789'}]},{},'Apelação');
+ assert.match(y.variaveis.contrarrazoes_relatorio,/divergência/);
+});

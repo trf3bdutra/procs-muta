@@ -613,7 +613,7 @@ function dkComposicaoFicha(PT){
   function bloco(id,n,tx){return {k:'ficha:'+id,pid:'relatorio',n:n,r:['Proposta redacional composta a partir da Ficha Única; conferir os trechos sinalizados.'],opc:false,alts:[{lab:'Ficha do processo',f:tx,r:[]}]};}
   PT.forEach(function(pt){
     if(pt.id==='relatorio'){pt.tr=D.rel.map(function(p,i){return bloco('rel:'+i,i===0?'Abertura':p==='É o relatório.'?'Encerramento':'Relato · '+i,p);});}
-    if(pt.id==='ementa'){var I=D.em.sec[0],II=D.em.sec[1];pt.tr=pt.tr.map(function(t){if(!/^I\. CASO EM EXAME|^II\. QUESTÃO EM DISCUSSÃO/.test(t.n))return t;var sec=/^II\./.test(t.n)?II:I;return Object.assign({},t,{alts:[{lab:'Ficha do processo',f:sec[1].map(function(x){return x.n+'. '+x.t;}).join('\n'),r:[]}]});});}
+    if(pt.id==='ementa'){var I=D.em.sec[0],II=D.em.sec[1];pt.tr=pt.tr.map(function(t){if(!/^I\. CASO EM EXAME|^II\. QUESTÃO EM DISCUSSÃO/.test(t.n))return t;var sec=/^II\./.test(t.n)?II:I;return Object.assign({},t,{alts:[{lab:'Ficha do processo',f:sec[1].map(function(x){return x.n+'. '+x.t;}).join('\n'),r:[]}].concat((t.alts||[]).filter(function(a){return a.lab!=='Ficha do processo';}))});});}
     if(pt.id==='monocratica'&&XP.v.decisao==='mono'){pt.tr=pt.tr.map(function(t){if(t.n!=='Relato')return t;return Object.assign({},t,{alts:[{lab:'Ficha do processo',f:D.rel.filter(function(p){return p!=='É o relatório.';}).join('\n'),r:[]}]});});}
   });return PT;
 }
@@ -744,8 +744,11 @@ var _xAutoCasoBase=xAutoCaso;xAutoCaso=function(){_xAutoCasoBase();
     if(/apela|remessa|agravo|embargos de declara|retrata/i.test(tj)){
       var D=MutaGerador.comporFicha(cp,fo);
       Object.keys(D.variaveis||{}).forEach(function(a){if(D.variaveis[a])AUTO['@'+a]=D.variaveis[a];});
+    }else if(/mandado de seguran[çc]a|msciv/i.test(tj)){
+      var H=MutaGerador.comporFicha(cp,fo,'Apelação').variaveis;AUTO['@honorarios_recursais_texto']=H.honorarios_recursais_texto;
     }
   }
+  if(AUTO['@ramo_direito'])AUTO['@ramo']=String(AUTO['@ramo_direito']).replace(/^direito\s+/i,'').toUpperCase();
   /* cabeçalho da ementa: classe e assunto em maiúsculas, da ficha quando o acervo embutido não tiver o processo */
   ['classe','assunto'].forEach(function(a){if(!AUTO['@'+a+'_ementa']&&AUTO['@'+a])AUTO['@'+a+'_ementa']=String(AUTO['@'+a]).toUpperCase();});
   if(P){var C={processo:P.processo,classe:P.classe,assunto:P.assunto,tipo_julgamento:P.tipoJulgamento,tipo_de_caso:P.subassuntos,especificidades:P.especificidades,alegacoes:P.questoes,resultado_julgamento:P.resultado,honorarios_julgamento:P.honorarios};Object.keys(C).forEach(function(a){if(C[a]&&!AUTO['@'+a])AUTO['@'+a]=dkValorFicha(C[a]);});['classe','assunto'].forEach(function(a){if(AUTO['@'+a]){AUTO[a.toUpperCase()]=String(AUTO['@'+a]).toUpperCase();AUTO['@'+a+'_ementa']=AUTO[a.toUpperCase()];}});}};

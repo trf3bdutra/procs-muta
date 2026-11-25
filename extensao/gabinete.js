@@ -571,12 +571,12 @@ function precEmentario(k) { if (window.MutaEmentario && window.MutaEmentario.cas
 /* peças do processo (sentença, origem, recursos e contrarrazões, outras peças): um cartão só, uma seção por grupo */
 /* 0.44 · grupos de documento vindos do Roteiro (em Autos › Peças e documentos): os campos são os mesmos da ficha */
 var PECAS_DOC = [
-  { grupo: 'Decisão impugnada', quando: function (tj) { return /agravo interno|embargos|retrata/.test(tj) || !!S(V('triagem', 'Impugnada - ID')); },
-    campos: [['triagem', 'Impugnada - ID'], ['triagem', 'Impugnada - Data'], ['triagem', 'Impugnada - Síntese'], ['triagem', 'Impugnada - Órgão'], ['triagem', 'Impugnada - Relator']] },
+  { grupo: 'Decisão impugnada', quando: function (tj) { return /agravo de instrumento|agravo interno|embargos|retrata/.test(tj) || !!S(V('triagem', 'Impugnada - ID')); },
+    campos: [['triagem', 'Impugnada - ID'], ['triagem', 'Impugnada - Data'], ['triagem', 'Impugnada - Publicação'], ['triagem', 'Impugnada - Síntese'], ['triagem', 'Impugnada - Ementa literal'], ['triagem', 'Impugnada - Órgão'], ['triagem', 'Impugnada - Relator']] },
   { grupo: 'Parecer do MPF', campos: [['triagem', 'MPF'], ['triagem', 'ID do Parecer MPF'], ['triagem', 'MPF - Data'], ['triagem', 'Parecer - Sentido'], ['triagem', 'Parecer - Sentido (outro)'], ['triagem', 'MPF - Info adicional']] },
   { grupo: 'Procuração', campos: [['triagem', 'ID da Procuração'], ['triagem', 'Procurações']] }
 ];
-var PECAS_ORDEM = { 'Sentença': ['Sentença - ID', 'Sentença - Data', 'Sentença - Decisão', 'Sentença - Resultado', 'Sentença - Honorários', 'Sentença - Custas', 'Sentença - Reexame', 'Sentença - Tutela', 'Sentença - Fundamento', 'Sentença - Providências'],
+var PECAS_ORDEM = { 'Sentença': ['Sentença - ID', 'Sentença - Data', 'Sentença - Publicação', 'Sentença - Decisão', 'Sentença - Resultado', 'Sentença - Honorários', 'Sentença - Custas', 'Sentença - Reexame', 'Sentença - Tutela', 'Sentença - Fundamento', 'Sentença - Providências'],
   'Origem': ['Origem - Juízo', 'Origem - Julgador', 'Origem - Valor da causa', 'Origem - Processo de referência', 'Origem - Documentos 1G'],
   'Recursos e contrarrazões': ['Contrarrazões - Situação', 'Recursos', 'Contrarrazões'] };
 var PECAS_RESUMO = { 'Decisão impugnada': ['Impugnada - ID', 'Impugnada - Data'], 'Parecer do MPF': ['MPF', 'ID do Parecer MPF', 'Parecer - Sentido'], 'Procuração': ['ID da Procuração'], 'Sentença': ['Sentença - ID', 'Sentença - Data', 'Sentença - Decisão'], 'Origem': ['Origem - Juízo', 'Origem - Julgador'], 'Recursos e contrarrazões': ['Recursos', 'Contrarrazões - Situação'], 'Outras peças e ocorrências': ['Outras peças'] };

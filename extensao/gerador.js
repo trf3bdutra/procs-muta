@@ -123,8 +123,8 @@
   }
   function poloDe(txt) {
     var n = N(txt); if (!n) return '';
-    if (/\b(autor|autora|autores|requerente|exequente|impetrante|demandante|embargante)\b/.test(n)) return 'autor';
-    if (/\b(re|reu|res|reus|requerid|executad|impetrad|demandad|embargad)/.test(n)) return 're';
+    if (/\b(autor|autora|autores|autoras|requerente|exequente|impetrante|demandante)\b/.test(n)) return 'autor';
+    if (/\b(re|reu|res|reus|requerid[oa]s?|executad[oa]s?|impetrad[oa]s?|demandad[oa]s?)\b/.test(n)) return 're';
     var P = polos();
     if (P.a && N(P.a).indexOf(n.slice(0, 12)) >= 0) return 'autor';
     if (P.p && N(P.p).indexOf(n.slice(0, 12)) >= 0) return 're';
@@ -228,6 +228,7 @@
   function pContrarrazoes(tipo) {
     var C = tab('origem', 'Contrarrazões'), sit = N(v('origem', 'Contrarrazões - Situação')), nome = /agravo/.test(N(tipo)) ? 'contraminuta' : 'contrarrazões';
     if (C.length) {
+      if(/^(nao apresentadas?|nao houve|sem contrarrazoes|sem contraminuta|prazo decorrido sem manifestacao)$/.test(sit))return VAL('divergência entre a situação e as peças de resposta registradas');
       var com = C.filter(function (c) { return S(c.preliminares); });
       if (C.length === 1) return 'Houve ' + nome + ' ' + idOu(C[0].ids, 'ID') + (com.length ? ', com arguição preliminar de ' + linhas(com[0].preliminares).join('; ') : '') + '.';
       return 'Houve ' + nome + ' ' + C.map(function (c, i) { var q = quem(c.parte), d = q.replace(/^(o|a) /, function (m) { return m === 'o ' ? 'do ' : 'da '; }).replace(/^os /, 'dos '); return d + ' ' + idOu(c.ids, 'ID') + (S(c.preliminares) ? ', com arguição preliminar de ' + linhas(c.preliminares).join('; ') : ''); }).reduce(function (a, x, i, L) { return a + (i === 0 ? '' : i === L.length - 1 ? ' e ' : ', ') + x; }, '') + '.';
@@ -443,7 +444,7 @@
       if(sol==='majorados'||sol2==='majorados')return validar('mandado de segurança: conferir solução de honorários incompatível com artigo 25 da Lei 12.016/2009');
       return {texto:'Sem condenação em honorários advocatícios (artigo 25 da Lei 12.016/2009 e Súmula 512/STF).',ementa:''};
     }
-    if(R.length>1)return validar('individualizar a sucumbência por recurso e recorrente; não aplicar uma fórmula global');
+    if(R.length>1||tab('producao','Resultado por recurso').length>1)return validar('individualizar a sucumbência por recurso e recorrente; não aplicar uma fórmula global');
     if(r==='prov'||r==='parc'){
       if(sol==='majorados'||sol2==='majorados')return validar('resultado provido: incompatível com majoração pelo Tema 1.059/STJ');
       if(/invertidos|redistribuidos|fixados/.test(sol))return livre?{texto:livre,ementa:''}:validar('redimensionamento da sucumbência, critérios e base de cálculo');
@@ -464,7 +465,7 @@
     if(sol!=='majorados'&&sol2!=='majorados')return livre?{texto:livre,ementa:''}:validar('confirmar solução dos honorários recursais');
     if(sol&&sol!=='majorados'||sol2&&sol2!=='majorados'&&sol2!=='a definir')return validar('divergência entre os campos de honorários do julgamento');
     if(!R.length||!S(R[0].parte))return validar('identificar recorrente e devedor da verba fixada na origem');
-    var parte=R[0].parte,polo=poloDe(parte),match=C.filter(function(x){return N(x.honorarios)==='sim'&&S(x.devedor)&&(N(x.devedor)===N(parte)||(polo&&poloDe(x.devedor)===polo));});
+    var parte=R[0].parte,polo=poloDe(parte),P=polos(),unico=polo==='autor'?P.aN<=1:polo==='re'?P.pN<=1:false,match=C.filter(function(x){return N(x.honorarios)==='sim'&&S(x.devedor)&&(N(x.devedor)===N(parte)||(unico&&polo&&poloDe(x.devedor)===polo));});
     if(!match.length)return validar('confirmar honorários previamente fixados contra o recorrente');
     var pct=S(v('producao','Honorários - Percentual ou valor'));if(!/^\d+(?:[.,]\d+)?\s*%$/.test(pct))return validar('percentual de majoração confirmado pelo servidor');
     if(!match.every(function(x){return S(x.base)&&S(x.criterio)&&(/^(sim|nao|nao se aplica)$/.test(N(x.suspensao))||/^(indeferida|nao se aplica|revogada)$/.test(N(x.gratuidade)));}))return validar('base, critério e exigibilidade dos honorários na origem');
@@ -480,6 +481,6 @@
     var literal=S(v('triagem','Impugnada - Ementa literal')),per=S(v('triagem','Parecer - Sentido'));
     return {razoes_primeiro_recurso:rs[0]||VAL('razões do primeiro recurso'),razoes_segundo_recurso:rec.length>1&&rs[1]||VAL('razões do segundo recurso'),razoes_agravo_interno:tipo==='Agravo Interno'?rel[1]:VAL('razões do agravo interno'),vicios_relatorio:tipo==='Embargos de Declaração'?rel[2]:VAL('vícios alegados'),ementa_embargada_literal:literal||VAL('transcrever ementa literal'),sentenca_paragrafo:'A sentença '+idOu(sid,'ID da sentença')+' '+comandosOrigem()+'. '+honorariosAbertura(),parecer_sentido_redacional:/^nao provimento|^desprovimento/.test(N(per))?'desprovimento':/^parcial.*provimento/.test(N(per))?'parcial provimento':/^provimento/.test(N(per))?'provimento':VAL('sentido do parecer'),dispositivo_voto:S(v('producao','Dispositivo do pronunciamento'))||'Ante o exposto, '+d[0]+'.',honorarios_recursais_texto:hon.texto,honorarios_ementa:hon.ementa,dispositivo_ementa_ficha:hon.ementa||d[3],acordao_recorrido_id:S(v('producao','Acórdão - ID'))||imp||VAL('ID do acórdão'),decisao_agravada_id:imp||VAL('ID da decisão agravada')};
   }
-  function comporFicha(campos, fonte, tipo){var ant=CONTEXTO,t0=TIPO;try{CONTEXTO={V:function(sec,k){return campos[sec+'.'+k];},fo:function(){return fonte||{};}};TIPO=tipo||tipoDetectado();var rel=relatorio(TIPO),em=ementa(TIPO,resDaFicha(TIPO)),R={abertura_relatorio:rel[0],razoes_recursais:/^(Apelação|Agravo de Instrumento)$/.test(TIPO)?pRecursos(TIPO).join('\n\n'):'',contrarrazoes_relatorio:pContrarrazoes(TIPO),parecer_relatorio:pMpf()||'',caso_em_exame:em.sec[0][1].map(function(x){return x.t;}).join('\n'),questao_em_discussao:em.sec[1][1].map(function(x){return x.t;}).join('\n')};if(/^(Apelação|Remessa Necessária|Agravo de Instrumento)$/.test(TIPO)){R.resultado_decisao_recorrida=resultadoSentenca();R.comandos_dispositivos=comandosOrigem();R.frase_honorarios_origem=honorariosAbertura();}Object.assign(R,variaveisEditorial(TIPO,rel,em));return {tipo:TIPO,rel:rel,em:em,variaveis:R};}finally{CONTEXTO=ant;TIPO=t0;}}
+  function comporFicha(campos, fonte, tipo){var ant=CONTEXTO,t0=TIPO;try{CONTEXTO={V:function(sec,k){return campos[sec+'.'+k];},fo:function(){return fonte||{};}};TIPO=tipo||tipoDetectado();var rel=relatorio(TIPO),em=ementa(TIPO,resDaFicha(TIPO)),R={abertura_relatorio:rel[0],razoes_recursais:/^(Apelação|Agravo de Instrumento)$/.test(TIPO)?pRecursos(TIPO).join('\n\n'):'',contrarrazoes_relatorio:pContrarrazoes(TIPO),parecer_relatorio:pMpf()||'',caso_em_exame:em.sec[0][1].map(function(x){return x.t;}).join('\n'),questao_em_discussao:em.sec[1][1].map(function(x){return x.t;}).join('\n')};if(/^(Apelação|Remessa Necessária|Agravo de Instrumento)$/.test(TIPO)){R.resultado_decisao_recorrida=resultadoSentenca();R.comandos_dispositivos=comandosOrigem();R.frase_honorarios_origem=honorariosAbertura();}Object.assign(R,variaveisEditorial(TIPO,rel,em));if(R.honorarios_ementa)em.sec[3][1][0].t=R.honorarios_ementa;return {tipo:TIPO,rel:rel,em:em,variaveis:R};}finally{CONTEXTO=ant;TIPO=t0;}}
   window.MutaGerador = { comporFicha: comporFicha, pintar: pintar, abrir: abrir, modo: modo, html: html, acao: acao, docs: docs, _ST: ST, _t: { resultado: resultado, fraseHonorarios: fraseHonorarios, designa: designa, feminino: feminino } };
 })();
