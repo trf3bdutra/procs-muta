@@ -3310,8 +3310,8 @@ async function cogFichaGravar(cnj,campos){
 function fichaDe(cnj,aba='Triagem'){
  const o=IDX.get(dg(cnj)),n=o?o.cnj:cnj;
  if(!W.CMTFicha)return toast('Ficha do processo ainda indisponível.',true);
- const carregar=async c=>{const j=await cogApi('/api/pauta?ficha='+encodeURIComponent(c));if(j.operacional&&!PEND.has(dg(c)))cogAtualizaFicha(j.operacional);return j;};
- W.CMTFicha.abrir(n,{aba:'Triagem',editarAoAbrir:true,registrosLote:c=>{if(COG!=='triagem'||!COG_LOTE)return [];const it=(COG_LOTE.itens||[]).find(x=>dg(x.processo)===dg(c));return it?[{titulo:COG_LOTE.titulo,campos:(COG_LOTE.colunas_triagem||[]).map(k=>({nome:k.nome,valor:(it.valores_triagem||{})[k.id]||''}))}]:[];},lista:(COG==='triagem'?cogTriBase().filter(cogTriStatus):FILA).map(x=>x.cnj),carregar,gravar:cogFichaGravar,avisar:(t,e)=>toast(t,e==='warn'||e==='err'||e===true)});
+ const carregar=async c=>{const j=await cogApi('/api/pauta?ficha='+encodeURIComponent(c));if(j.operacional&&!PEND.has(dg(c)))cogAtualizaFicha(j.operacional);try{const l=await cogApi('/api/painel?lote=1&processo='+encodeURIComponent(c)+(COG_SESSAO&&COG_SESSAO.gestor?'&modo=cg':''));j.indexacao=l.registros||[];j.indexacaoGestor=!!l.gestor;}catch(e){j.indexacaoErro=e.message;}return j;};
+ W.CMTFicha.abrir(n,{aba:'Triagem',editarAoAbrir:true,gravarIndexacao:async(lote,coluna,processo,valor)=>{await cogLotePost({acao:'triagem-celula',id:lote,coluna,processo,valor});if(COG_LOTE&&COG_LOTE.id===lote){const it=COG_LOTE.itens.find(x=>dg(x.processo)===dg(processo));if(it)it.valores_triagem=Object.assign({},it.valores_triagem||{},{[coluna]:valor});if(COG==='triagem')refazAtTab();}},lista:(COG==='triagem'?cogTriBase().filter(cogTriStatus):FILA).map(x=>x.cnj),carregar,gravar:cogFichaGravar,avisar:(t,e)=>toast(t,e==='warn'||e==='err'||e===true)});
 }
 /* a ficha atual do processo (operacional), com as seções achatadas: o painel do processo mostra o prontuário gravado */
 async function fichaPlana(cnj) {
