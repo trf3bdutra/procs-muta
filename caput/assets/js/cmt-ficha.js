@@ -1340,6 +1340,13 @@ function campo(c) {
   return '<div class="fx-f s' + span(c, v) + (ed ? ' is-edit' : '') + (sujo ? ' is-dirty' : '') + '">' + lab + body + '</div>';
 }
 var grade = function (campos) { return '<div class="fx-grid">' + campos.map(campo).join('') + '</div>'; };
+function fxPreparoCampo(c){return c.secao==='triagem'&&(c.chave==='AJG'||c.chave==='Gratuidade - Tipo de pessoa'||/^Preparo(?: -|$)/.test(c.chave));}
+function fxPreparoGrupos(campos,tudo){
+ var C=campos.filter(fxPreparoCampo),main=C.find(function(c){return c.chave==='Preparo';});if(!main)return '';
+ var v=N(S(valorCampo(main))),grupos=['Preparo · conferência','Preparo · recolhimento e comprovação','Preparo · gratuidade','Preparo · isenção / dispensa','Preparo · regularização'];
+ var ativo=function(k){if(!v||v==='nao verificado'||k===grupos[0])return true;if(k===grupos[1])return !/gratuidade|justica gratuita|isento|assistencia da dpu|nao se aplica/.test(v);if(k===grupos[2])return /gratuidade|justica gratuita|dpu/.test(v);if(k===grupos[3])return /isento|dpu|nao se aplica/.test(v);return /recolhido|gratuidade pedida|comprovado/.test(v);};
+ return '<section class="fx-subgrupo" style="margin-top:10px;border-top:1px solid #dce4df;padding-top:10px"><b>Preparo recursal</b><p class="fx-note">Exigibilidade, recolhimento, comprovação e regularização. Confira a situação por recorrente; a conclusão não decorre apenas da existência de uma guia.</p>'+grade([main])+grupos.map(function(k){var L=C.filter(function(c){return c!==main&&c.subgrupo===k;}),cheios=L.filter(temValor),show=ativo(k)||cheios.length;if(!L.length||!show||(!tudo&&!cheios.length))return '';return '<details class="fx-subgrupo" style="border-top:1px solid #dce4df;padding:8px 0"'+(ST.edit||cheios.length?' open':'')+'><summary style="cursor:pointer;font-weight:600">'+E(k.replace(/^Preparo · /,''))+'</summary><div style="padding-top:8px">'+grade(tudo?L:cheios)+'</div></details>';}).join('')+'</section>';
+}
 function abaGrupos(A) {
   if (ST.v2 && (A.aba === CE || A.aba === 'Produção')) {
     /* Monitoramento: só os controles de acompanhamento. Pauta (ou, na monocrática, o caso e o controle da monocrática) vai para o fim da Produção */
@@ -1484,7 +1491,7 @@ function abaGruposCorpo(A) {
     if(analise&&ST.v2)g=Object.assign({},g,{campos:g.campos.filter(function(c){return ['Destino - Situação','Destino - Confirmado em','Destino - Confirmado por'].indexOf(c.chave)<0 && (ST.edit||c.chave!=='Status da triagem');})});
     var cheios = (g.campos || []).filter(temValor), tudo = ST.edit || ST.vzTodos || ST.vz[g.grupo], nv = (g.campos || []).length - cheios.length;
     if(analise)return card('Análise e Indexação',grade(tudo?g.campos:cheios)+indexacaoFicha(),{n:('0'+(++n)).slice(-2)});
-    if(adm)return card('Admissibilidade e regularidade',grade(tudo?g.campos:cheios)+cardTempest(true),{n:('0'+(++n)).slice(-2),acoes:!ST.edit&&nv?'<button type="button" class="fx-pill fx-mini" data-fx-vz="'+E(g.grupo)+'">'+(ST.vz[g.grupo]?'Esconder vazios':'+ '+nv+' campos vazios')+'</button>':''});
+    if(adm)return card('Admissibilidade e regularidade',grade((tudo?g.campos:cheios).filter(function(c){return !fxPreparoCampo(c); }))+cardTempest(true)+fxPreparoGrupos(g.campos,tudo),{n:('0'+(++n)).slice(-2),acoes:!ST.edit&&nv?'<button type="button" class="fx-pill fx-mini" data-fx-vz="'+E(g.grupo)+'">'+(ST.vz[g.grupo]?'Esconder vazios':'+ '+nv+' campos vazios')+'</button>':''});
     if (!tudo && !cheios.length && g.grupo!=='Lote e correção (Index)') { vazios.push(g.grupo); return ''; }
     var ac = !ST.edit && !ST.vzTodos && nv ? '<button type="button" class="fx-pill fx-mini" data-fx-vz="' + E(g.grupo) + '">' + (ST.vz[g.grupo] ? 'esconder vazios' : '+ ' + nv + (nv > 1 ? ' campos vazios' : ' campo vazio')) + '</button>' : '';
     var rev=g.grupo==='Lote e correção (Index)', ocas=!!g.quando||!!g.controle||/^(Espécie e decisão impugnada|Acórdão recorrido|Embargos de declaração|Agravo interno|Juízo de retratação|Questões específicas da espécie|Sucumbência e consectários do julgamento)/.test(g.grupo);
