@@ -38,6 +38,8 @@ test('Ementário: julgado sem abas, expansão vertical e rodapé',()=>{
   assert.doesNotMatch(m.html(),/data-ppaba="(?:processo|rastreabilidade)"/);
   for(const [k,v] of [['julgado','Tese X'],['julgado','Resultado X'],['julgado','Ementa X'],['julgado','Texto X'],['processo','Partes X'],['processo','Tipo X'],['processo','Especificidade X'],['processo','Nota X'],['julgado','Artigo X'],['julgado','Jurisprudência X'],['julgado','Repertório X'],['rastreabilidade','origem.jsonl']])assert.ok(m.sec(k).includes(v),k+': '+v);
   assert.ok(!m.sec('julgado').includes('Partes X'));
+  assert.match(m.sec('julgado'),/class="pp-sintese"[\s\S]*Julgado em[\s\S]*Publicado em[\s\S]*Relator[\s\S]*pp-sintese-conteudo[\s\S]*Tese X[\s\S]*Resultado X/);
+  assert.doesNotMatch(m.html(),/class="pp-dt"/);
   assert.match(m.sec('processo'),/Detalhamento do caso/);
   assert.match(m.sec('processo'),/Tag X/);
   assert.doesNotMatch(m.html(),/data-ppaba="(?:catalogacao|referencias)"/);
@@ -56,7 +58,7 @@ test('Ementário: julgado sem abas, expansão vertical e rodapé',()=>{
 });
 test('Collegium: proveniência separada, assinatura e excerto sem afirmar inteiro teor',()=>{
   const m=montar(true);
-  assert.match(m.html(),/Assinatura: /);assert.match(m.html(),/DJEN: /);
+  assert.match(m.sec('julgado'),/>Assinatura<\/span>/);assert.match(m.sec('julgado'),/>Disponibilizado no DJEN<\/span>/);
   assert.match(m.sec('julgado'),/Abertura da decisão/);assert.match(m.sec('julgado'),/Abertura e dispositivo/);
   assert.match(m.sec('rastreabilidade'),/Proveniência DJEN X/);
   assert.doesNotMatch(m.sec('julgado'),/Inteiro teor/);
