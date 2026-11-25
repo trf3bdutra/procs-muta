@@ -17,14 +17,35 @@ function carregar() {
 }
 var ESCOPO = { ementa: 'Ementa', voto: 'Voto', relatorio: 'Relatório', geral: 'Geral', acordao: 'Acórdão', decisao: 'Decisão', todo: 'Toda a peça' };
 function casa(x, t) { var h = N(Object.keys(x).map(function (k) { return typeof x[k] === 'string' ? x[k] : ''; }).join(' ')); return t.every(function (w) { return h.indexOf(w) >= 0; }); }
-function manualOriginal(){var M=window.MutaManualCanhoto,g=window.MutaGabinete,des=g&&g.destino?N(g.destino()):'',p=D.parte||(/despacho/.test(des)?'despacho':/monocr/.test(des)?'monocratica':'relatorio'),T=[['relatorio','Relatório'],['voto','Voto'],['ementa','Ementa'],['acordao','Proclamação'],['monocratica','Decisão monocrática'],['despacho','Despacho']],tabs=[['par','Parágrafos'],['cit','Citação'],['voc','Vocabulário'],['forma','Forma']],R={};tabs.forEach(function(t){R[t[0]]=M.tab(t[0],D.q);});return '<div class="dori man"><div class="ohd"><p class="kick2">Manual · '+esc(T.find(function(t){return t[0]===p;})[1])+'</p></div><select class="mc-parte" id="mc-parte" aria-label="Parte da peça">'+T.map(function(t){return '<option value="'+t[0]+'"'+(t[0]===p?' selected':'')+'>'+t[1]+'</option>';}).join('')+'</select>'+M.geral(p)+'<div class="xrtabs" role="tablist" style="margin-top:10px">'+tabs.map(function(t){return '<button role="tab" data-xrt="'+t[0]+'" aria-selected="'+(D.tab===t[0])+'">'+t[1]+(D.q?' <small>'+R[t[0]].n+'</small>':'')+'</button>';}).join('')+'</div><input id="x-rq" type="search" placeholder="Buscar nas orientações…" aria-label="Buscar nas orientações" value="'+esc(D.q)+'"><div class="xrb">'+(R[D.tab].h||'<p class="meta">Nada encontrado.</p>')+'</div></div>';}
+function manualOriginal(){
+ var M=window.MutaManualCanhoto,g=window.MutaGabinete,des=g&&g.destino?N(g.destino()):'',p=D.parte||(/despacho/.test(des)?'despacho':/monocr/.test(des)?'monocratica':'relatorio');
+ var T=[['relatorio','Relatório'],['voto','Voto'],['ementa','Ementa'],['acordao','Proclamação'],['monocratica','Decisão monocrática'],['despacho','Despacho']];
+ var tabs=[['par','Parágrafos'],['cit','Citação'],['voc','Vocabulário'],['forma','Forma']];
+ var caps=(M.capitulos||[]).filter(function(c){return !/tensoes|propostas em avaliacao/.test(N(c.titulo));});
+ var areas=[['contexto','Por peça'],['par','Parágrafos'],['cit','Citações'],['voc','Vocabulário'],['forma','Formatação']];
+ if(caps.length)areas.push(['integral','Manual completo']);
+ var mode=D.modo||'contexto';
+ function select(id,label,L,val){return '<select id="'+id+'" aria-label="'+label+'">'+L.map(function(t){return '<option value="'+esc(t[0])+'"'+(t[0]===val?' selected':'')+'>'+esc(t[1])+'</option>';}).join('')+'</select>';}
+ var h='<div class="acv-faixa dr-head"><div class="acv-form"><div class="af-l"><input id="x-rq" type="search" placeholder="Buscar nas Diretrizes…" aria-label="Buscar nas Diretrizes" value="'+esc(D.q)+'"><button type="button" class="tu-b" data-dr-clear aria-label="Limpar busca" title="Limpar busca">×</button></div><div class="af-l">'+select('dr-modo','Área de consulta',areas,mode)+(mode==='contexto'?select('mc-parte','Parte da peça',T,p):mode==='integral'?select('dr-capitulo','Capítulo',[['','Todos os capítulos']].concat(caps.map(function(c){return [c.id,c.titulo];})),D.cap):'')+'</div></div></div>';
+ var query=N(D.q).split(/\s+/).filter(Boolean);
+ function matches(t){return query.every(function(w){return N(t).includes(w);});}
+ var body='';
+ if(mode==='contexto'){
+   var tmp=document.createElement('div');tmp.innerHTML=M.geral(p);
+   Array.from(tmp.querySelectorAll('details.xgd')).forEach(function(d){var sum=d.querySelector('summary');if(sum&&/tensoes|propostas em avaliacao/.test(N(sum.textContent))){d.remove();return;}if(query.length){if(!matches(d.textContent))d.remove();else d.open=true;}});
+   body='<h4 class="dr-section-title">'+esc((T.find(function(t){return t[0]===p;})||T[0])[1])+'</h4>'+tmp.innerHTML;
+ }else if(mode==='integral'){
+   body=caps.filter(function(c){return (!D.cap||c.id===D.cap)&&matches(c.titulo+' '+c.html.replace(/<[^>]*>/g,' '));}).map(function(c){var doc=new DOMParser().parseFromString(c.html,'text/html');doc.querySelectorAll('script,style,iframe,object,embed,form,button').forEach(function(x){x.remove();});doc.body.querySelectorAll('*').forEach(function(x){Array.from(x.attributes).forEach(function(a){if(/^on/i.test(a.name)||/^(src|srcset|href|style)$/i.test(a.name))x.removeAttribute(a.name);});});return '<details class="dr-chapter"'+(D.cap||query.length?' open':'')+'><summary>'+esc(c.titulo)+'</summary><div class="dr-chapter-body">'+doc.body.innerHTML+'</div></details>';}).join('');
+ }else{var R=M.tab(mode,D.q);body='<div class="xrb">'+(R.h||'<p class="meta">Nada encontrado.</p>')+'</div>';}
+ return h+'<div class="dori man dr-content">'+(body||'<p class="muted">Nenhuma orientação encontrada.</p>')+'</div>';
+}
 function render() {
   if (!caixa || !aberta()) return;
-  if(D.vista==='manual'&&window.MutaManualCanhoto){var a=document.activeElement,f=a&&a.id==='x-rq',pos=f?a.selectionStart:0;caixa.innerHTML='<div class="pp-top"><span class="seg"><button type="button" data-v="manual" aria-selected="true">Manual</button><button type="button" data-v="red" aria-selected="false">Lista de caça</button></span></div>'+manualOriginal();if(f){var q=$('x-rq');q.focus();try{q.setSelectionRange(pos,pos);}catch(e){}}return;}
+  if(D.vista==='manual'&&window.MutaManualCanhoto){var a=document.activeElement,f=a&&a.id==='x-rq',pos=f?a.selectionStart:0;caixa.innerHTML='<div class="dr-nav"><span class="seg"><button type="button" data-v="manual" aria-selected="true">Manual</button><button type="button" data-v="red" aria-selected="false">Lista de caça</button></span></div>'+manualOriginal();if(f){var q=$('x-rq');q.focus();try{q.setSelectionRange(pos,pos);}catch(e){}}return;}
   if (D.erro) { caixa.innerHTML = '<div class="err-box">' + esc(D.erro) + '</div>'; return; }
-  if (!D.man) { caixa.innerHTML = '<div class="empty">Baixando o Diretrizes do gabinete…</div>'; return; }
+  if (!D.man) { caixa.innerHTML = '<div class="empty">Baixando as Diretrizes do gabinete…</div>'; return; }
   var t = N(D.q).split(/\s+/).filter(Boolean), foco = document.activeElement && document.activeElement.id === 'dr-q', h;
-  var top = '<div class="pp-top"><input type="search" id="dr-q" placeholder="Buscar nas Diretrizes" value="' + esc(D.q) + '">' +
+  var top = '<div class="pp-top dr-list-head"><input type="search" id="dr-q" placeholder="Buscar nas Diretrizes" value="' + esc(D.q) + '">' +
     '<span class="seg"><button type="button" data-v="manual" aria-selected="' + (D.vista === 'manual') + '">Manual · ' + D.man.length + '</button><button type="button" data-v="red" aria-selected="' + (D.vista === 'red') + '">Lista de caça · ' + D.red.length + '</button></span>' + (D.vista === 'manual' ? '@@IDX@@' : '') + '</div>';
   if (D.vista === 'manual') {
     var L = D.man.filter(function (x) { return !t.length || casa(x, t); }), caps = [], porCap = {};
@@ -52,8 +73,9 @@ function render() {
 var tq = 0;
 if (caixa) {
   caixa.addEventListener('input', function (e) { if (e.target.id !== 'dr-q' && e.target.id !== 'x-rq') return; clearTimeout(tq); tq = setTimeout(function () { D.q = e.target.value; render(); }, 250); });
-  caixa.addEventListener('change',function(e){if(e.target.id==='mc-parte'){D.parte=e.target.value;render();}});
+  caixa.addEventListener('change',function(e){if(e.target.id==='mc-parte'){D.parte=e.target.value;render();}else if(e.target.id==='dr-modo'){D.modo=e.target.value;render();}else if(e.target.id==='dr-capitulo'){D.cap=e.target.value;render();}});
   caixa.addEventListener('click', function (e) {
+    if(e.target.closest('[data-dr-clear]')){D.q='';render();return;}
     var tab=e.target.closest('[data-xrt]');if(tab){D.tab=tab.dataset.xrt;render();return;}
     var b = e.target.closest('[data-v]'); if (b) { D.vista = b.dataset.v; render(); if(D.vista==='red')carregar().then(render); return; }
     var a = e.target.closest('.dr-idx a'); if (a) { e.preventDefault(); var x = document.querySelector(a.getAttribute('href')); if (x) x.scrollIntoView({ block: 'start' }); }
