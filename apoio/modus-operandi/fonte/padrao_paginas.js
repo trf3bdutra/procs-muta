@@ -45,9 +45,8 @@
     var hx=D.querySelector('#v-edit .pg-h');
     if(hx){var x=D.getElementById('x-dev'),s=slot(hx),tt=hx.querySelector('.pg-t'),kk=tt&&tt.querySelector('.dkk'),bd=tt&&tt.querySelector('.pa-dev');
       var on=x&&!x.hidden&&(x.textContent||'').trim(),dir=D.querySelector('#v-edit #x-alt.x-alt-dir:not([hidden])'),mod=/MODELOS/i.test((kk&&kk.textContent)||'');
-      if(dir&&!on){/* Diretrizes: o quadro de entradas rápidas ocupa a direita da abertura, no desenho do "Já disponível" */
-        if(!s.querySelector('#pa-rap')){s.__pa='';s.innerHTML='<div class="pa-disp pa-rap" id="pa-rap"></div>';var bx=s.firstChild;try{bx.innerHTML=window.rapHtml?rapHtml(''):'';}catch(er){}if(window.rapLiga)rapLiga(bx);}
-        hx.classList.remove('pa-com-dev');if(bd)bd.remove();var pr0=tt&&tt.querySelector('.pa-pre');if(pr0)pr0.remove();return;}
+      if(dir&&!on){/* Entradas rápidas: coluna própria do manual; abertura sem duplicação. */
+        por(s,'');hx.classList.remove('pa-com-dev');if(bd)bd.remove();var pr0=tt&&tt.querySelector('.pa-pre');if(pr0)pr0.remove();if(typeof dkConf==='function')dkConf();return;}
       if(on){var v=dev(x);
         if(!bd&&kk){bd=D.createElement('span');bd.className='pa-dev';kk.parentNode.insertBefore(bd,kk.nextSibling);}
         if(bd){bd.textContent='Em desenvolvimento';bd.title=v.pre;}
