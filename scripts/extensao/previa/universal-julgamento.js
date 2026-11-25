@@ -92,6 +92,6 @@
     return out(f);
   };
   caixa.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-pv-jg]');if(!b)return;e.preventDefault();e.stopImmediatePropagation();
-    G.aba='Processo';G.rot='pro';render();var p=$('pv-julgamento');if(p){p.open=true;p.scrollIntoView({block:'start'});}},true);
+    G.aba='Processo';G.rot='pro';HERO_MINUTA_NAV.cnj=G.cnj;HERO_MINUTA_NAV.sec='solucao';HERO_MINUTA_NAV.todos=false;render();var p=$('pv-julgamento');if(p&&!p.hidden){p.open=true;p.scrollIntoView({block:'start'});}},true);
   window.MutaGabinete.julgamento={especie:especie,opcoes:function(){return opcoesResultado(especie(),ccTipos());}};
 })();
