@@ -1499,3 +1499,6 @@ html[data-tema=escuro] .pm-pl.k-lib.ok{background:#25173a;border-color:#5a3d8a;c
 .pa-reg>summary{border:0!important;border-top:1px solid #e1e5ea!important}
 /* 0.66 · cartão: tipo de caso e especificidades junto do assunto; encaminhamento junto do tipo de ato */
 .pm-esp{margin:6px 0 2px}.pm-enc{margin-top:6px}.pm-cs{margin-bottom:8px}
+/* 0.67 · liberação marcada no editor do PJe e ainda não registrada na ficha */
+.pm-pl.k-lib.pl-pje{background:#f6f1fd;border:1px dashed #b79be3;color:#5a2d91}
+html[data-tema=escuro] .pm-pl.k-lib.pl-pje{background:#1c1330;border-color:#6b4ca0;color:#d3bdf3}

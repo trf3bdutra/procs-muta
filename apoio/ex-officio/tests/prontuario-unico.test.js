@@ -103,3 +103,10 @@ test('HERO18810 0.64: sigla da classe, Síntese e questões acima dos roteiros, 
   assert.match(p, /function soProcesso\(cnj\)/); assert.match(p, /function pedSessao\(itens\)/); assert.match(p, /procHtml\(\) \+ listaHtml\(\);/);
   assert.match(R('extensao/painel.html'), /<script src="padrao-classes-cnj\.js"><\/script>/);
 });
+
+test('HERO18810 0.67: "Liberada" só em processo pautado e com as caixas do editor marcadas ou informada à mão', () => {
+  const fs = require('node:fs'), R = f => fs.readFileSync(path.resolve(__dirname, '../../../extensao', f), 'utf8');
+  assert.match(R('conteudo-pje.js'), /function liberacaoEditor\(tarefa\)/); assert.match(R('conteudo-pje.js'), /lib: d\.lib \|\| ''/);
+  assert.match(R('fundo.js'), /reg\.lib = ''/); assert.match(R('pje.js'), /liberacao: function \(\)/);
+  assert.match(R('gabinete.js'), /else if \(pautado\(\) && \(libOk \|\| libMan\)\)/);
+});

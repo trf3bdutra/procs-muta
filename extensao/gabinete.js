@@ -240,11 +240,19 @@ function etapas() {
   var n = 0; L.forEach(function (x, i) { if (x.ok) n = i + 1; });
   return { L: L, n: n, mono: mono };
 }
+function pautado() {
+  var P = (G.op || {}).pauta || {}, SI = window.MutaSincronia && window.MutaSincronia.situacao ? window.MutaSincronia.situacao() : null;
+  var C = SI && SI.cnj && SI.cnj.replace(/\D/g, '') === S(G.cnj).replace(/\D/g, '') ? SI.cartoes || [] : [];
+  return C.length > 0 || (Array.isArray(P.sessoes) && P.sessoes.length > 0) || !!S(P['Sessão original']) || !!S(P['Nova sessão de destino']);
+}
 function pilulas(E) {
   var d = function (k) { return S(V('producao', k)); }, nome = function (k) { return d(k).split(/\s*[\/,;]\s*/).map(function (x) { return x.split(/\s+/)[0]; }).filter(Boolean).join('/'); };
   var idx = function (ic) { for (var i = 0; i < E.L.length; i++) if (E.L[i].ic === ic) return i; return -1; };
   var P = [['min', 'Minuta', 'SERVIDOR', 'k-min'], ['rev', E.mono ? 'Revisão' : 'Correção', 'CORRETOR', 'k-rev']];
-  if (E.mono) P.push(['env', 'Enviada', '', 'k-lib'], ['ass', 'Assinada', '', 'k-lib']); else P.push(['env', 'Liberada', '', 'k-lib']);
+  /* 0.67: "Liberada" só em processo pautado e quando as caixas de liberação do editor (Aguardando a sessão) estão marcadas ou a liberação foi informada à mão */
+  var lib = pjeDoProcesso() && window.MutaPje.liberacao ? window.MutaPje.liberacao() : null, libOk = lib && lib.tot && lib.ok === lib.tot, libMan = sim(d('LIBERADO')) || !!d('Data da Liberação');
+  if (E.mono) P.push(['env', 'Enviada', '', 'k-lib'], ['ass', 'Assinada', '', 'k-lib']);
+  else if (pautado() && (libOk || libMan)) P.push(['env', libMan ? 'Liberada' : 'Liberada no editor', '', 'k-lib' + (libMan ? '' : ' pl-pje')]);
   return P.map(function (p) {
     var i = idx(p[0]), x = E.L[i] || {}, ok = !!x.ok, at = i === E.n, dt = x.dt ? brD(x.dt) : '';
     var pode = at || i === E.n - 1, tt = at ? 'Marcar hoje' : i === E.n - 1 ? 'Desfazer' : ok ? 'Feita' : 'Depois da etapa anterior';

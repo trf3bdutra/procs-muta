@@ -8,7 +8,7 @@
   var br = window.MutaProntuarioBridge;
   var temChrome = !!(window.chrome && chrome.storage && chrome.storage.session && chrome.tabs);
   var PREF = 'muta-pje:seguir';
-  var abaAtiva = null, ultimoPje = '', ultimaClasse = '', ultimaTarefa = '', ultimoCtxTela = '';
+  var abaAtiva = null, ultimoPje = '', ultimaClasse = '', ultimaTarefa = '', ultimoCtxTela = '', ultimaLib = '';
 
   var seguir = $('pje-seguir'), trocar = $('pje-aba'), PREF_ABA = 'muta-pje:aba-auto', ultimoCtx = '';
   try { seguir.checked = localStorage.getItem(PREF) !== '0'; } catch (e) {}
@@ -32,7 +32,7 @@
   }
   function aplicar(reg) {
     var numero = reg && reg.numero || '', classe = reg && reg.classe || '';
-    ultimoPje = numero; ultimaClasse = classe; ultimaTarefa = reg && reg.tarefa || ''; ultimoCtxTela = reg ? (reg.ctx === 'autos' ? 'autos' : reg.ed ? 'editor' : reg.ctx || '') : '';
+    ultimoPje = numero; ultimaClasse = classe; ultimaTarefa = reg && reg.tarefa || ''; ultimaLib = reg && reg.lib || ''; ultimoCtxTela = reg ? (reg.ctx === 'autos' ? 'autos' : reg.ed ? 'editor' : reg.ctx || '') : '';
     try { document.dispatchEvent(new CustomEvent('muta:pje', { detail: { numero: numero, classe: classe, tarefa: ultimaTarefa, ctx: ultimoCtxTela } })); } catch (e) {}
     if (!numero) { mostrar('', temChrome ? 'Nenhum processo aberto na aba ativa do PJe.' : 'Fora da extensão: sem leitura do PJe.', 'off'); return; }
     var atual = br.chaveAtual(), k = Muta.chaveProcesso(numero);
@@ -78,6 +78,8 @@
     classe: function () { return ultimaClasse; },
     /* nome da tarefa aberta ("[Sessão] Aguardando a sessão") e a tela (autos, editor, tarefa, lista) */
     tarefa: function () { return ultimaTarefa; },
+    /* 0.67: { ok, tot } das caixas de liberação do editor em "Aguardando a sessão", ou null */
+    liberacao: function () { var m = /^(\d+)\/(\d+)$/.exec(ultimaLib); return m ? { ok: +m[1], tot: +m[2] } : null; },
     tela: function () { return ultimoCtxTela; },
     /* conteúdo de um documento dos autos (o download do próprio PJe): {fmt:'html', texto} ou {fmt:'pdf', b64} */
     lerDocumento: function (idp, id) {

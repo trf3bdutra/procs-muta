@@ -78,6 +78,7 @@
   document.addEventListener('change', function (e) {
     var t = e.target;
     if (!t || t.type !== 'checkbox') return;
+    ultimo = null; agendar();
     if (t.checked) { escolher(t); return; }
     var c = cartaoDe(t);
     if (c && SEL && SEL.numero === c.numero) {
@@ -130,16 +131,27 @@
     return { numero: '', classe: '', forca: 0, via: '' };
   }
 
+  /* 0.67: caixas de liberação do editor na tarefa "Aguardando a sessão" (relatório, voto, ementa…): "marcadas/total" ou '' */
+  function liberacaoEditor(tarefa) {
+    if (!/aguardando\s+(a\s+)?sess/i.test(String(tarefa || ''))) return '';
+    var R = raizes(), tot = 0, ok = 0;
+    R.forEach(function (r) { Array.prototype.forEach.call(r.querySelectorAll('input[type="checkbox"]'), function (c) {
+      if (!visivel(c)) return;
+      var lb = (c.id && r.querySelector('label[for="' + c.id + '"]')) || c.closest('label') || c.parentElement, t = ((lb && (lb.innerText || lb.textContent)) || '') + ' ' + (c.title || '') + ' ' + (c.getAttribute('aria-label') || '');
+      if (!/libera/i.test(t)) return; tot++; if (c.checked) ok++; }); });
+    return tot ? ok + '/' + tot : '';
+  }
   var ultimo = null, espera = null;
   function informar() {
     espera = null;
     var d;
     try { d = detectar(); } catch (e) { return; }
-    var chave = d.numero + '|' + d.classe + '|' + d.forca + '|' + d.ctx + '|' + d.ed + '|' + (d.tarefa || '');
+    try { d.lib = liberacaoEditor(d.tarefa); } catch (e) { d.lib = ''; }
+    var chave = d.numero + '|' + d.classe + '|' + d.forca + '|' + d.ctx + '|' + d.ed + '|' + (d.tarefa || '') + '|' + d.lib;
     if (chave === ultimo) return;
     ultimo = chave;
     try { if (d.ctx === 'autos') sinaisAutos(d.numero); } catch (e) {}
-    try { chrome.runtime.sendMessage({ tipo: 'muta-processo', numero: d.numero, classe: d.classe, forca: d.forca, via: d.via, ctx: d.ctx, ed: !!d.ed, tarefa: d.tarefa || '', host: location.host }); }
+    try { chrome.runtime.sendMessage({ tipo: 'muta-processo', numero: d.numero, classe: d.classe, forca: d.forca, via: d.via, ctx: d.ctx, ed: !!d.ed, tarefa: d.tarefa || '', lib: d.lib || '', host: location.host }); }
     catch (e) { /* extensão recarregada: esta página fica sem vínculo até ser recarregada */ }
   }
   function agendar() { if (!espera) espera = setTimeout(informar, 700); }
