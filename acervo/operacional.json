@@ -6,7 +6,7 @@
   "arquivo": "acervo/fonte.json",
   "chave": "processo"
  },
- "atualizado_em": "2026-11-25T15:49:24.174Z",
+ "atualizado_em": "2026-11-25T16:00:10.944Z",
  "registros": [
   {
    "processo": "0000008-23.2025.4.03.6000",
@@ -133798,17 +133798,17 @@
    "processo": "5000873-11.2023.4.03.6006",
    "origem": {
     "Sentença - Decisão": "",
-    "Sentença - ID": "",
+    "Sentença - ID": "304946699",
     "Sentença - Honorários": "",
     "Sentença - Custas": "",
     "Sentença - Resultado": "",
     "Sentença - Fundamento": "",
     "Sentença - Providências": "",
-    "Contrarrazões - Situação": "",
+    "Contrarrazões - Situação": "apresentadas",
     "Responsável": "",
     "Próxima ação": "",
     "Observações": "",
-    "atualizado_em": "2026-11-25T15:49:06.040Z",
+    "atualizado_em": "2026-11-25T16:00:10.944Z",
     "Origem - Juízo": "1ª Vara Federal de Naviraí",
     "Origem - Documentos 1G": [
      {
@@ -133819,7 +133819,23 @@
     ],
     "Sentença - Data": "15/08/2024",
     "Origem - Julgador": "Hugo Daniel Lazarin",
-    "Sentença - Reexame": "Dispensada"
+    "Sentença - Reexame": "Dispensada",
+    "Recursos": [
+     {
+      "ids": "304946703",
+      "data": "2024-08-20"
+     },
+     {
+      "ids": "304946705",
+      "data": "2024-09-09"
+     }
+    ],
+    "Contrarrazões": [
+     {
+      "ids": "304946708",
+      "data": "2024-09-20"
+     }
+    ]
    },
    "triagem": {
     "Urgência": "",
@@ -133829,26 +133845,26 @@
     "Urgência - Data": "",
     "Urgência - Painel": "",
     "Tempest - Publicação": "",
-    "Tempest - Protocolo": "",
-    "Tempest - Prazo legal": "",
-    "Tempest - Dobro": "",
+    "Tempest - Protocolo": "2024-08-20",
+    "Tempest - Prazo legal": "15",
+    "Tempest - Dobro": "2",
     "Tempest - Suspensões": "",
     "Tipo de Julgamento": "Apelação",
     "Hipóteses Monocrática": "",
-    "Tempestividade": "",
+    "Tempestividade": "Tempestivo",
     "Preparo": "",
     "AJG": "",
     "DPU (controle)": "",
-    "Representação": "",
+    "Representação": "Dispensada (procurador público)",
     "ID da Procuração": "",
     "Impedimento / Suspeição": "",
     "Observação do Impedimento": "",
     "Regularidade": "Representação ainda não verificada.",
     "Regularidade Manual": "",
     "Observação da Representação": "",
-    "MPF": "",
+    "MPF": "Com parecer",
     "MPF - Custos Legis": "",
-    "ID do Parecer MPF": "",
+    "ID do Parecer MPF": "365739660",
     "Parecer - Sentido": "",
     "MPF - Info adicional": "",
     "Observação MPF": "",
@@ -133865,7 +133881,8 @@
     "O que falta sanar": "",
     "Intercorrências": "",
     "Síntese Processual": "",
-    "Especificidades": ""
+    "Especificidades": "",
+    "MPF - Data": "2026-04-10"
    },
    "producao": {
     "Destino": "",
