@@ -7,13 +7,8 @@
   /* anotações vazias: uma linha tracejada com "+ registrar"; clicar abre a edição */
   caixa.querySelectorAll('.hero-ann-card').forEach(function(c){var t=c.querySelector('.hero-ann-text');var vazia=!!(t&&t.classList.contains('muted')&&/^não registrad/i.test(t.textContent.trim()));c.classList.toggle('pv-ann-vazia',vazia);
    if(vazia&&!c.__pv){c.__pv=1;c.addEventListener('click',function(e){if(e.target.closest('button'))return;var ed=c.querySelector('.hero-ann-tools button[title^="Editar"]');if(ed)ed.click();});}});
-  caixa.querySelectorAll('.hero-sn-ind .hero-sn-mini').forEach(function(b){if(b.querySelector('.pv-snr'))return;var k=Object.keys(ROT).filter(function(x){return b.classList.contains(x);})[0];if(!k)return;var s=document.createElement('span');s.className='pv-snr';s.textContent=ROT[k];b.append(s);});
-  var u=caixa.querySelector('.hero-urg-short');if(u&&!u.querySelector('.pv-snr')){var s=document.createElement('span');s.className='pv-snr';s.textContent='urgência';u.append(s);}
-  /* sinalizações e urgência numa linha própria, abaixo de Encaminhamento | Monitoramento */
-  /* sinalizações e urgência na barra do prontuário (ao lado das setas e da fase); o card abre logo abaixo dela */
-  var hd=caixa.querySelector('.hero-header-nav'),ind=caixa.querySelector('.hero-sn-ind');
-  if(hd&&ind&&u&&!hd.querySelector('.pv-sn-row')){var row=document.createElement('div');row.className='pv-sn-row';row.append(ind,u);hd.append(row);}
-  var pane=caixa.querySelector('#hero-dock-pane-sinalizacoes');if(hd&&pane&&hd.nextElementSibling!==pane)hd.after(pane);
+  /* Etapas contém os contadores; o cabeçalho usa os indicadores do núcleo da extensão. */
+  var hd=caixa.querySelector('.hero-header-nav');
   /* faces por setas: o nome da face atual fica visível ao lado da fase */
   var lb=hd&&hd.querySelector('.hero-face-label');if(lb){lb.hidden=false;lb.textContent=hd.getAttribute('aria-label')||'';}
   caixa.querySelectorAll('.pv3-solicitacoes').forEach(function(sb){
