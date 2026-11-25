@@ -13,7 +13,7 @@ function N(v) { return String(v == null ? '' : v).normalize('NFD').replace(/[̀-
 function aberta() { var p = $('panel-min'), d = $('dir-app'); return !!(p && !p.hidden && d && !d.hidden); }
 function carregar() {
   if (D.man || D.erro) return Promise.resolve();
-  return FT.base().then(function (d) { D.man = d.manual || []; D.red = d.diretrizes || []; }, function (e) { D.erro = 'Não foi possível baixar o Breviário: ' + e.message; });
+  return FT.base().then(function (d) { D.man = d.manual || []; D.red = d.diretrizes || []; }, function (e) { D.erro = 'Não foi possível baixar as Diretrizes: ' + e.message; });
 }
 var ESCOPO = { ementa: 'Ementa', voto: 'Voto', relatorio: 'Relatório', geral: 'Geral', acordao: 'Acórdão', decisao: 'Decisão', todo: 'Toda a peça' };
 function casa(x, t) { var h = N(Object.keys(x).map(function (k) { return typeof x[k] === 'string' ? x[k] : ''; }).join(' ')); return t.every(function (w) { return h.indexOf(w) >= 0; }); }
@@ -22,9 +22,9 @@ function render() {
   if (!caixa || !aberta()) return;
   if(D.vista==='manual'&&window.MutaManualCanhoto){var a=document.activeElement,f=a&&a.id==='x-rq',pos=f?a.selectionStart:0;caixa.innerHTML='<div class="pp-top"><span class="seg"><button type="button" data-v="manual" aria-selected="true">Manual</button><button type="button" data-v="red" aria-selected="false">Lista de caça</button></span></div>'+manualOriginal();if(f){var q=$('x-rq');q.focus();try{q.setSelectionRange(pos,pos);}catch(e){}}return;}
   if (D.erro) { caixa.innerHTML = '<div class="err-box">' + esc(D.erro) + '</div>'; return; }
-  if (!D.man) { caixa.innerHTML = '<div class="empty">Baixando o Breviário do gabinete…</div>'; return; }
+  if (!D.man) { caixa.innerHTML = '<div class="empty">Baixando o Diretrizes do gabinete…</div>'; return; }
   var t = N(D.q).split(/\s+/).filter(Boolean), foco = document.activeElement && document.activeElement.id === 'dr-q', h;
-  var top = '<div class="pp-top"><input type="search" id="dr-q" placeholder="Buscar no Breviário" value="' + esc(D.q) + '">' +
+  var top = '<div class="pp-top"><input type="search" id="dr-q" placeholder="Buscar nas Diretrizes" value="' + esc(D.q) + '">' +
     '<span class="seg"><button type="button" data-v="manual" aria-selected="' + (D.vista === 'manual') + '">Manual · ' + D.man.length + '</button><button type="button" data-v="red" aria-selected="' + (D.vista === 'red') + '">Lista de caça · ' + D.red.length + '</button></span>' + (D.vista === 'manual' ? '@@IDX@@' : '') + '</div>';
   if (D.vista === 'manual') {
     var L = D.man.filter(function (x) { return !t.length || casa(x, t); }), caps = [], porCap = {};
