@@ -18,7 +18,7 @@ test('Amicus tem URLs canônicas e redirecionamentos de compatibilidade',()=>{
  const config=workflow.match(/^\s*printf '(\{"framework":.*\})\\n' > site\/vercel\.json$/m);
  assert.ok(config,'configuração Vercel gerada pelo workflow');
  const routes=new Map(JSON.parse(config[1]).redirects.map(({source,destination})=>[source,destination]));
- for(const old of ['/index/cmt','/lote/cmt','/cmt/lotes','/amicus/index/cmt']){
+ for(const old of ['/index/cmt','/lote/cmt','/cmt/lotes','/amicus/index/cmt','/amicus/collectio/cmt']){
   for(const suffix of ['','/']) assert.equal(routes.get(old+suffix),'/amicus/cortex/',old+suffix);
  }
  assert.ok(read('apoio/amicus/index.html').includes('/amicus/compendium/'));
