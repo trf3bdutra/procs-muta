@@ -696,6 +696,33 @@ function kindSuggestions(parsed,r,used,add){
 }
 
 /* ───────────────────────── 4 · SUGESTÕES (com conflitos) ───────────────────────── */
+const PREPARO_MAP={"situacao":"Preparo","recorrente":"Preparo - Recorrente","id_recurso":"Preparo - ID recurso","id_guia":"Preparo - ID guia","id_comprovante":"Preparo - ID comprovante","tipo_comprovante":"Preparo - Tipo comprovante","conferencia_stn":"Preparo - Conferência STN","codigo_receita":"Preparo - Código receita","ug":"Preparo - UG","vinculacao":"Preparo - Vinculação","valor_devido":"Preparo - Valor devido","valor_recolhido":"Preparo - Valor recolhido","data_recolhimento":"Preparo - Data recolhimento","data_comprovacao":"Preparo - Data comprovação","id_ajg":"Preparo - ID AJG","situacao_ajg":"Preparo - Situação AJG","fundamento_dispensa":"Preparo - Fundamento dispensa","regularizacao":"Preparo - Regularização","id_intimacao":"Preparo - ID intimação","prazo_regularizacao":"Preparo - Prazo regularização","cumprimento":"Preparo - Cumprimento","conferencia":"Preparo - Conferência","ajg":"AJG","gratuidade_tipo_pessoa":"Gratuidade - Tipo de pessoa"};
+function preparoExtrair(parsed,r,used,add){
+ const recs=used.filter(d=>d.target==='recurso'),gs=used.filter(d=>d.target==='preparo'),cnj=cnjDigits(r.Processo||parsed.cnj||''),rows=[];
+ if(!recs.length)return;
+ const data=v=>{const m=/^(\d{2})\/(\d{2})\/(\d{4})$/.exec(v||'');return m?m[3]+'-'+m[2]+'-'+m[1]:iso10(v||'');};
+ for(const rec of recs){
+  const who=recorrenteInfo(parsed,rec),q={id_recurso:String(rec.id),recorrente:who.name||'',situacao:'Não verificado'},linked=gs.filter(d=>recs.length===1||String(d.anexoDe||'')===String(rec.id)),ajg=recs.length===1?ajgOf(parsed,rec):null;
+  if(who.publico||who.mp){q.situacao='Isento (ente público/MP)';q.fundamento_dispensa='Ente público / MP identificado no recurso; conferir hipótese legal.';}
+  else if(ajg){q.situacao=who.dpu?'Assistência da DPU':'Justiça gratuita';q.id_ajg=String(ajg.d.id);q.situacao_ajg='Deferida';q.ajg='Sim';}
+  if(linked.length){
+   const L=linked.map(d=>({d,g:gruInfo(d),t:String(d.text||'').replace(/\s+/g,' ')})),guide=L.find(x=>x.g.gru),stn=L.find(x=>/consulta de pagamentos? (?:de )?gru|pagtesouro|secretaria do tesouro nacional/i.test(x.t)&&x.g.comprovante),proof=stn||L.find(x=>x.g.comprovante),x=proof||guide;
+   if(guide)q.id_guia=String(guide.d.id);
+   if(proof){q.id_comprovante=String(proof.d.id);q.tipo_comprovante=stn?'Consulta de Pagamentos de GRU / PagTesouro (STN)':'Comprovante bancário / PIX';q.data_comprovacao=iso10(proof.d.date||'');}
+   else if(guide)q.tipo_comprovante='Guia sem comprovante';
+   if(x){const u=/\b(?:UG|Unidade Gestora)\s*:?\s*(\d{6})\b/i.exec(x.t);if(u)q.ug=u[1];if(x.g.codigo)q.codigo_receita=x.g.codigo;if(proof&&proof.g.valor)q.valor_recolhido=proof.g.valor;if(proof&&proof.g.pago)q.data_recolhimento=data(proof.g.pago);if(x.g.processo&&cnj)q.vinculacao=x.g.processo===cnj?'A conferir':'Divergente';}
+   q.conferencia_stn=stn?'A conferir':'Não apresentado';
+   if(q.situacao==='Não verificado'&&!stn&&proof)q.situacao='Recolhido sem comprovante do Tesouro (STN)';
+   q.conferencia=L.map(x=>'ID '+x.d.id+': '+gruTxt(x.g)).join(' · ')+' · Conferir valor devido, titularidade, vinculação e momento do recolhimento; não se presume regularidade.';
+  }
+  if(recs.length>1&&!linked.length&&!who.publico&&!who.mp)q.conferencia='Vincular manualmente os documentos de preparo a este recurso. Não foi inferida gratuidade ou recolhimento de outro recorrente.';
+  rows.push(q);
+ }
+ const sec='Preparo recursal · conferência';
+ if(rows.length===1){const q=rows[0],map=PREPARO_MAP;Object.keys(q).forEach(k=>{const key=map[k];if(key&&q[k])add({sec,key,label:key,value:q[k],current:r[key],doc:q.id_comprovante||q.id_ajg||q.id_recurso,kind:'field',manual:key==='Preparo',note:key==='Preparo'?'Conclusão sujeita à conferência; não preencher automaticamente.':''});});}
+ else {const old=Array.isArray(r['Preparo por recurso'])?r['Preparo por recurso']:[],merged=old.map(x=>({...x}));rows.forEach(q=>{const m=merged.find(x=>String(x.id_recurso)===q.id_recurso&&(!x.recorrente||!q.recorrente||N(x.recorrente)===N(q.recorrente)));if(m){Object.keys(q).forEach(k=>{if(!S(m[k]))m[k]=q[k];});}else merged.push(q);});add({sec,key:'Preparo por recurso',label:'Preparo individualizado',value:'Conferir '+rows.length+' recurso(s)',current:'',kind:'prep-table',rows:merged,doc:rows.map(q=>q.id_recurso).join(', '),manual:true,note:'Conferir cada recorrente. Os registros existentes são preservados.'});}
+}
+
 function regSuggestions(parsed,r,used,add){
   const key=d=>(d.date||'')+'|'+String(d.id).padStart(12,'0'),f=d=>br(d?.date)||'—';
   const recs=used.filter(d=>d.target==='recurso').sort((a,b)=>key(a).localeCompare(key(b)));const rec=recs[0];if(!rec)return;
@@ -711,15 +738,7 @@ function regSuggestions(parsed,r,used,add){
     if(dobro===2)add({sec,key:'Tempest - Dobro',label:'Contagem',value:'2',current:String(r['Tempest - Dobro']||'')==='1'?'':r['Tempest - Dobro'],doc:rec.id,kind:'select',options:['1','2'],note:`Em dobro: ${who.dpu?'Defensoria Pública':who.mp?'Ministério Público':who.conselho?'conselho profissional (autarquia)':'Fazenda Pública'} (arts. 180, 183 e 186 do CPC).`});}
   if(c&&c.ok===true)add({sec,key:'Tempestividade',label:'Tempestividade',value:'Tempestivo',current:VZ('tempest',r.Tempestividade),doc:`${dec.id}, ${rec.id}`,kind:'select',options:VL('tempest',['Não Verificado','Tempestivo','Intempestivo']),
     note:`Recurso juntado em ${f(rec)}. Ainda que contado da própria data da decisão (${f(dec)}, ID ${dec.id}), o prazo de ${c.total} dias úteis${dobro===2?' (em dobro)':''} só terminaria em ${br(c.limit)}: tempestivo qualquer que seja a data da intimação.`});
-  /* preparo: isenção, gratuidade ou GRU com comprovante */
-  const gs=used.filter(d=>d.target==='preparo'),ajg=ajgOf(parsed,rec);
-  const P=(value,doc,note)=>add({sec,key:'Preparo',label:'Preparo',value,current:VZ('preparo',r.Preparo),doc,kind:'select',options:VL('preparo',['Não Verificado','Comprovado','Não Recolhido','Dispensado','Não se Aplica']),note});
-  if(who.publico||who.mp)P('Isento (ente público/MP)',rec.id,`${who.name||'Recorrente'}: isento de preparo (art. 1.007, § 1º, do CPC; art. 4º, I, da Lei 9.289/1996).`);
-  else if(who.dpu&&ajg)P('Assistência da DPU',ajg.d.id,`Assistido pela Defensoria Pública, com gratuidade deferida (ID ${ajg.d.id}).`);
-  else if(gs.length){const L=gs.map(d=>({d,g:gruInfo(d)})),ok=L.some(x=>x.g.comprovante);
-    P(ok?'Comprovado':'Não verificado',gs.map(d=>d.id).join(', '),L.map(x=>`ID ${x.d.id} (${f(x.d)}): ${gruTxt(x.g)}`).join(' · ')+(ok?'':' — confira o pagamento.'));}
-  else if(ajg)P('Justiça gratuita',ajg.d.id,`Gratuidade da justiça deferida (ID ${ajg.d.id}, ${f(ajg.d)}: “${ajg.frase}”). Confira se o beneficiário é o recorrente.`);
-  if(ajg&&!who.publico)add({sec,key:'AJG',label:'AJG (gratuidade)',value:'Sim',current:yes(r.AJG)?'Sim':'',doc:ajg.d.id,kind:'select',options:['','Sim']});
+  preparoExtrair(parsed,r,used,add);
   if(who.dpu)add({sec,key:'DPU (controle)',label:'Defensoria Pública da União',value:'Sim',current:yes(r['DPU (controle)'])?'Sim':'',doc:rec.id,kind:'select',options:['','Sim']});
   /* representação ex lege: dispensa procuração */
   if((who.publico||who.dpu||who.mp)&&!used.some(d=>d.target==='procuracao'))add({sec:'Representação',key:'Representação',label:'Representação',value:who.dpu?'Dispensada (DPU)':'Dispensada (procurador público)',current:VZ('repres',r.Representação),doc:rec.id,kind:'select',options:VL('repres',['Não Verificado','Regular','Negativo']),
@@ -1340,12 +1359,12 @@ function campo(c) {
   return '<div class="fx-f s' + span(c, v) + (ed ? ' is-edit' : '') + (sujo ? ' is-dirty' : '') + '">' + lab + body + '</div>';
 }
 var grade = function (campos) { return '<div class="fx-grid">' + campos.map(campo).join('') + '</div>'; };
-function fxPreparoCampo(c){return c.secao==='triagem'&&(c.chave==='AJG'||c.chave==='Gratuidade - Tipo de pessoa'||/^Preparo(?: -|$)/.test(c.chave));}
+function fxPreparoCampo(c){return c.secao==='triagem'&&(c.chave==='AJG'||c.chave==='Gratuidade - Tipo de pessoa'||/^Preparo(?: -|$| por recurso$)/.test(c.chave));}
 function fxPreparoGrupos(campos,tudo){
  var C=campos.filter(fxPreparoCampo),main=C.find(function(c){return c.chave==='Preparo';});if(!main)return '';
  var v=N(S(valorCampo(main))),grupos=['Preparo · conferência','Preparo · recolhimento e comprovação','Preparo · gratuidade','Preparo · isenção / dispensa','Preparo · regularização'];
  var ativo=function(k){if(!v||v==='nao verificado'||k===grupos[0])return true;if(k===grupos[1])return !/gratuidade|justica gratuita|isento|assistencia da dpu|nao se aplica/.test(v);if(k===grupos[2])return /gratuidade|justica gratuita|dpu/.test(v);if(k===grupos[3])return /isento|dpu|nao se aplica/.test(v);return /recolhido|gratuidade pedida|comprovado/.test(v);};
- return '<section class="fx-subgrupo" style="margin-top:10px;border-top:1px solid #dce4df;padding-top:10px"><b>Preparo recursal</b><p class="fx-note">Exigibilidade, recolhimento, comprovação e regularização. Confira a situação por recorrente; a conclusão não decorre apenas da existência de uma guia.</p>'+grade([main])+grupos.map(function(k){var L=C.filter(function(c){return c!==main&&c.subgrupo===k;}),cheios=L.filter(temValor),show=ativo(k)||cheios.length;if(!L.length||!show||(!tudo&&!cheios.length))return '';return '<details class="fx-subgrupo" style="border-top:1px solid #dce4df;padding:8px 0"'+(ST.edit||cheios.length?' open':'')+'><summary style="cursor:pointer;font-weight:600">'+E(k.replace(/^Preparo · /,''))+'</summary><div style="padding-top:8px">'+grade(tudo?L:cheios)+'</div></details>';}).join('')+'</section>';
+ return '<section class="fx-subgrupo" style="margin-top:10px;border-top:1px solid #dce4df;padding-top:10px"><b>Preparo recursal</b><p class="fx-note">Exigibilidade, recolhimento, comprovação e regularização. Confira a situação por recorrente; a conclusão não decorre apenas da existência de uma guia.</p>'+grade([main])+grupos.map(function(k){var L=C.filter(function(c){return c!==main&&c.subgrupo===k;}),cheios=L.filter(temValor),show=ativo(k)||cheios.length;if(!L.length||!show||(!tudo&&!cheios.length))return '';return '<details class="fx-subgrupo" style="border-top:1px solid #dce4df;padding:8px 0"'+(ST.edit||cheios.length?' open':'')+'><summary style="cursor:pointer;font-weight:600">'+E(k.replace(/^Preparo · /,''))+'</summary><div style="padding-top:8px">'+grade(tudo?L:cheios)+'</div></details>';}).join('')+C.filter(function(c){return c.chave==='Preparo por recurso';}).map(function(c){return fxSubcard('Conferência individualizada',grade([c]));}).join('')+'</section>';
 }
 function abaGrupos(A) {
   if (ST.v2 && (A.aba === CE || A.aba === 'Produção')) {
@@ -1633,6 +1652,7 @@ function linhaAntiga() { var o = op(), r = Object.assign({ Processo: ST.cnj }, f
 function itensTeor(P) {
   var L = TX().buildSuggestions(P, linhaAntiga(), null) || [], out = [], contra = [], proc = [], TB = { rec: [], contra: [], proc: [], ocorr: [], docs: { rec: [], contra: [], proc: [], ocorr: [] } };
   L.forEach(function (it) {
+    if(it.kind==='prep-table'){var pc=alvoDe('Preparo por recurso');if(!pc)return;var old=linhasGravadas(pc.secao,pc.chave),value=it.rows||[],igual=JSON.stringify(old)===JSON.stringify(value);out.push(Object.assign({},it,{kind:'tabela',alvo:pc.secao+'.'+pc.chave,campo:pc,value:value,current:old,status:igual?'igual':old.length?'conflito':'novo',apply:false,manual:true}));return;}
     if (it.kind === 'contra') { if (it.key === 'ids') contra.push(it.value); (TB.contra[it.idx || 0] = TB.contra[it.idx || 0] || {})[it.key] = it.key === 'data' ? (iso(it.value) || it.value) : it.value; TB.docs.contra.push(it.doc); return; }
     if (it.kind === 'rec') { (TB.rec[it.idx || 0] = TB.rec[it.idx || 0] || {})[it.key] = it.key === 'data' ? (iso(it.value) || it.value) : it.value; TB.docs.rec.push(it.doc); return; }
     if (it.kind === 'proc') { proc.push(it); var q = it.proc || {}; TB.proc.push({ id: S(q.id) || S(it.doc), data: iso(q.data) || S(q.data), validade: S(q.validade), advogados: S(q.advogados) }); TB.docs.proc.push(it.doc); return; }
