@@ -133,11 +133,11 @@
 
   function listaHtml() {
     var opts = (P.cal || []).map(function (s) { return '<option value="' + esc(s.date) + '"' + (s.date === P.data ? ' selected' : '') + '>' + esc(br(s.date)) + (s.date < hoje() ? ' (passada)' : '') + '</option>'; }).join('');
-    var h = '<section class="card pc-sec pa-ses"><div class="pc-sh"><h3>Pautas do Ex Officio</h3><label class="pa-sel"><span class="sr">Sessão</span><select data-pa="ses">' + opts + '</select></label></div>';
-    if (P.lendo && !P.doc) return h + '<p class="muted">Lendo a pauta…</p></section>';
+    var h = '<section class="card pc-sec pa-ses"><div class="pc-sh pa-session-head"><label class="pa-sel"><span class="sr">Sessão</span><select data-pa="ses">' + opts + '</select></label>';
     var d = P.doc || {}, L = (d.itens || []).length ? d.itens : (d.previa || []), previa = !(d.itens || []).length && (d.previa || []).length;
     var nsol=(d.solicitacoes||[]).length+(P.pedPauta||[]).filter(function(r){return sesDe(r)===P.data;}).length;
-    h+='<div class="seg pmodos pa-session-tabs" role="tablist" aria-label="Conteúdo da sessão"><button type="button" role="tab" data-pa="aba:itens" aria-selected="'+(P.aba==='itens')+'">Processos · '+L.length+'</button><button type="button" role="tab" data-pa="aba:sol" aria-selected="'+(P.aba==='sol')+'">Solicitações · '+nsol+'</button></div>';
+    h+='<div class="seg pmodos pa-session-tabs" role="tablist" aria-label="Conteúdo da sessão"><button type="button" role="tab" data-pa="aba:itens" aria-selected="'+(P.aba==='itens')+'">Processos · '+L.length+'</button><button type="button" role="tab" data-pa="aba:sol" aria-selected="'+(P.aba==='sol')+'">Solicitações · '+nsol+'</button></div></div>';
+    if (P.lendo && !P.doc) return h + '<p class="muted">Lendo a pauta…</p></section>';
     if(P.aba==='sol')return h+solicitacoesHtml(L)+'</section>';
     if (!L.length) return h + '<p class="muted">Sem processos nesta pauta.</p></section>';
     var cur = dg(GB().cnj ? GB().cnj() : '');
