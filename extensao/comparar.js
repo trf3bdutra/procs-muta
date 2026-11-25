@@ -405,9 +405,14 @@ function paragrafosPadrao() {
 }
 
 /* ---------- desenho ---------- */
+function atualizarResultado(){
+  var out=caixa.querySelector('.cx-res');if(!out)return;
+  out.innerHTML=resultadoHtml();var bar=caixa.querySelector('.hero-v53-review-actions'),side=out.querySelector('[data-c="janela"]');if(bar){var old=bar.querySelector('[data-c="janela"]');if(old)old.remove();if(side)bar.append(side);}
+  var d=out.closest('.hero-review-result');if(d)d.open=true;
+}
 function render() {
   if (!caixa || !aberta()) return;
-  var y = $('panel-min').scrollTop, foco = document.activeElement && document.activeElement.dataset ? document.activeElement.dataset.c : null;
+  var y = $('panel-min').scrollTop, previous=caixa.querySelector('.hero-review-result'), resultOpen=previous?previous.open:!!C.resultOpen, scrolls=Array.from(caixa.querySelectorAll('.mn-tx,.hero-v53-ref-text')).map(function(e){return e.scrollTop;}), foco = document.activeElement && document.activeElement.dataset ? document.activeElement.dataset.c : null;
   caixa.innerHTML = editorHtml() +
     '<div class="seg cx-fontes" role="tablist" aria-label="Comparar com">' + fontes().map(function (f) { return '<button type="button" role="tab" data-f="' + f[0] + '" aria-selected="' + (C.fonte === f[0]) + '">' + f[1] + '</button>'; }).join('') + '</div>' +
     '<div class="cx-pick">' + seletor() + '</div>' +
@@ -431,10 +436,10 @@ function render() {
       var work=document.createElement('section');work.className='hero-review-workspace';var grid=document.createElement('div');grid.className='hero-review-documents';ed.classList.add('hero-review-document');ref.classList.add('hero-review-document');ed.before(work);
       var divider=document.createElement('div');divider.className='hero-review-divider';
       var mark=document.createElement('span');mark.className='hero-review-cross';mark.setAttribute('aria-label','Comparação entre os textos');mark.textContent='×';
-      divider.append(mark,bar);grid.append(ed,divider,ref);work.append(grid);if(res.parentNode!==caixa)caixa.append(res);
+      divider.append(mark,bar);grid.append(ed,divider,ref);work.append(grid);var result=document.createElement('details');result.className='hero-review-result card';result.open=resultOpen;var rs=document.createElement('summary');rs.textContent='Resultado da comparação';result.append(rs,res);caixa.append(result);result.addEventListener('toggle',function(){if(result.isConnected)C.resultOpen=result.open;});
     }
   }
-  $('panel-min').scrollTop = y;
+  $('panel-min').scrollTop = y;Array.from(caixa.querySelectorAll('.mn-tx,.hero-v53-ref-text')).forEach(function(e,i){if(scrolls[i]!=null)e.scrollTop=scrolls[i];});
   if (foco === 'q') { var q = caixa.querySelector('[data-c=q]'); if (q) { q.focus(); q.setSelectionRange(q.value.length, q.value.length); } }
 }
 function preparar() {
@@ -477,7 +482,7 @@ function carregarJulgado(id) {
 var tq = 0;
 caixa.addEventListener('click', function (e) {
   var b = e.target.closest('button'); if (!b) return;
-  if(b.dataset.c==='comparar'){render();var out=caixa.querySelector('.cx-res');if(out)out.scrollIntoView({block:'start'});return;}
+  if(b.dataset.c==='comparar'){atualizarResultado();return;}
   if (b.dataset.c === 'ler') { ED.ler().catch(function () {}); return; }
   if (b.dataset.c === 'v:recortes' || b.dataset.c === 'v:folha') { C.vista = b.dataset.c.slice(2); render(); return; }
   if (b.dataset.c === 'janela') { if (ULT && ULT.it && window.MutaJanela) window.MutaJanela.abrir('comparar', 'Comparação · ' + ULT.rotulo, ladoALadoHtml(alinhar(ULT.it), ULT.rotulo)); return; }
@@ -491,7 +496,7 @@ caixa.addEventListener('click', function (e) {
     C.sel[C.fonte] = b.dataset.s; C.parteFonte = 'inteira';
     if (C.fonte === 'ement' && !C.ement[b.dataset.s]) { carregarJulgado(b.dataset.s); return; }
     if (C.fonte === 'tri' && /^e:/.test(b.dataset.s) && !C.ement[b.dataset.s.slice(2)]) { carregarJulgado(b.dataset.s.slice(2)); return; }
-    render(); var r = caixa.querySelector('.cx-res'); if (r) r.scrollIntoView({ block: 'start' }); return;
+    render(); return;
   }
 });
 caixa.addEventListener('change', function (e) {
