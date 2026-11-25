@@ -22,7 +22,7 @@ function n0(n) { return Number(n || 0).toLocaleString('pt-BR'); }
 var B = { ok: false, carregando: null, erro: '', idx: [], man: null, nCur: 0, nSer: 0, textosCur: null };
 var V = { res: [], shown: 0, sel: null, ft: null, qp: null, tok: 0, ab: {}, rel: false };
 /* filtro inicial: os precedentes relacionados ao processo aberto (precedentes.js, o critério da gaveta do Ex Officio) */
-var R = { caso: null, chave: '', lista: null, mot: {}, todos: false, busy: false };
+var R = { caso: null, chave: '', lista: null, mot: {}, todos: false, modo:'proc', busy: false };
 function relacionados() {
   if (!R.caso || !R.caso.cnj || !window.MutaPrecedentes || !MutaPrecedentes.buscar) return null;
   if (R.lista) return R.lista;
@@ -148,8 +148,8 @@ function buscar() {
   var q = $('acv-q').value.trim(), F = filtros(), d = dig(q);
   var base = B.idx.filter(function (x) { return passa(x, F); });
   V.rel = false;
+  if(R.modo!=='todos'){base=window.MutaFontes.rank(base.filter(function(x){return !R.caso||dig(x.n)!==dig(R.caso.cnj);}),R.modo,function(x){return [x.e,x.tese,x.ass,x.temas,x.tc,x.mat].join(' ');});V.rel=true;}
   if (!q) { V.qp = null;
-    if (!R.todos && R.caso && R.caso.cnj) { var rl = relacionados(); if (rl) { V.rel = rl === 'wait' ? 'wait' : true; V.res = rl === 'wait' ? [] : rl.filter(function (x) { return passa(x, F); }); render(); return; } }
     V.res = base; render(); return; }
   /* número de processo: casa pelos dígitos, com ou sem pontuação */
   if (/^[\d.\-\s]+$/.test(q) && d.length >= 7) { V.qp = null; V.res = base.filter(function (x) { return dig(x.n).indexOf(d) > -1; }); render(); return; }
@@ -239,13 +239,7 @@ function erro(msg) {
 }
 function rotuloTipo(x) { return x.cur ? 'Curado' : x.t === 'M' ? 'Monocrática' : 'Acórdão'; }
 function cnjF(d) { d = dig(d); return d.length === 20 ? d.replace(/^(\d{7})(\d{2})(\d{4})(\d)(\d{2})(\d{4})$/, '$1-$2.$3.$4.$5.$6') : d; }
-function faixaRel() {
-  var b = $('acv-modo-rel'); if (!b) return; var q = $('acv-q').value.trim();
-  if (q || !R.caso || !R.caso.cnj) { b.innerHTML = ''; return; }
-  if (V.rel) b.innerHTML = '<div class="acv-rel-i"><b>Relacionados ao processo</b><span class="mono">' + esc(cnjF(R.caso.cnj)) + '</span>' + (V.rel === 'wait' ? '<small>procurando…</small>' : '<small>' + V.res.length + '</small>') +
-    '<button type="button" class="btn line sm" data-rel="todos" title="Mostra todo o Ementário, do mais recente para o mais antigo">Todo o Ementário</button></div>';
-  else b.innerHTML = '<div class="acv-rel-i"><b>Todo o Ementário</b><button type="button" class="btn line sm" data-rel="proc" title="Volta aos precedentes relacionados ao processo aberto">Relacionados ao processo</button></div>';
-}
+function faixaRel(){var b=$('acv-modo-rel');if(!b)return;b.innerHTML=window.MutaFontes.scopeHTML(R.modo)+(R.modo!=='todos'&&!window.MutaFontes.contexto(R.modo)?'<p class="muted rep-context">'+(R.modo==='editor'?'Leia o editor do processo atual.':'Preencha o caso no prontuário.')+'</p>':'');}
 function render() {
   var list = $('acv-list'); list.replaceChildren(); V.shown = 0; faixaRel();
   if (!B.ok) {
@@ -261,7 +255,7 @@ function render() {
     list.append(el('p', 'status', n0(V.res.length) + ' julgado(s) encontrado(s).'));
   }
   if (!V.res.length) {
-    if (V.rel === true) { var er = el('div', 'empty'); er.append(el('h3', null, 'Nenhum relacionado'), document.createTextNode('Nenhum julgado com temas, questões ou assunto em comum. Preencha o assunto detalhado e as questões no prontuário, ou busque acima.')); list.append(er); $('acv-more').hidden = true; return; }
+    if (V.rel === true) { var er = el('div', 'empty'); er.append(el('h3', null, 'Nenhum relacionado'), document.createTextNode('Nenhum julgado relacionado no universo selecionado. Confira a fonte do contexto ou amplie para Banco inteiro.')); list.append(er); $('acv-more').hidden = true; return; }
     if (!(V.ft && V.ft.busy)) { var em = el('div', 'empty'); em.append(el('h3', null, 'Nenhum julgado encontrado'), document.createTextNode('Tente termos mais gerais, o radical (aposentad*), o número do processo ou a busca no texto integral.')); list.append(em); }
     $('acv-more').hidden = true;
     return;
@@ -381,7 +375,8 @@ function destacar(t, P) {
 
 /* ---------- Eventos ---------- */
 $('acv-form').addEventListener('submit', function (e) { e.preventDefault(); V.sel = null; if (B.ok) buscar(); else carregar(); });
-$('acv-modo-rel').addEventListener('click', function (e) { var b = e.target.closest('[data-rel]'); if (!b) return; R.todos = b.dataset.rel === 'todos'; if (B.ok) buscar(); });
+$('acv-modo-rel').addEventListener('change',function(e){if(e.target.hasAttribute('data-rep-scope')){R.modo=e.target.value;if(B.ok)buscar();}});
+$('acv-modo-rel').addEventListener('click',function(e){if(e.target.closest('[data-rep-read]'))window.MutaFontes.lerEditor().then(buscar,function(err){status(err.message);});});
 $('acv-clear').addEventListener('click', function () { $('acv-q').value = ''; $('acv-desde').value = ''; $('acv-tipo').value = ''; V.sel = null; erro(''); if (B.ok) { status(resumo()); buscar(); } });
 $('acv-more').addEventListener('click', mais);
 $('acv-tipo').addEventListener('change', function () { if (B.ok && $('acv-modo').value !== 'ft') buscar(); });
@@ -408,10 +403,10 @@ function porNumero(numero) {
 }
 window.MutaEmentario = {
   /* o processo aberto no prontuário: os relacionados viram o filtro inicial */
-  caso: function (k) { var c = JSON.stringify(k || {}); if (c === R.chave) return; R.chave = c; R.caso = k; R.lista = null; R.busy = false; R.mot = {}; if (B.ok && !$('acv-q').value.trim()) buscar(); },
+  caso: function (k) { var c = JSON.stringify(k || {}); if (c === R.chave) return; R.chave = c; R.caso = k; R.lista = null; R.busy = false; R.mot = {}; if (B.ok && R.modo==='proc') buscar(); },
   julgado: julgado, porNumero: porNumero,
-  abrir: function () { return carregar(); },
+  abrir: function () { return carregar().then(function(){if(B.ok)buscar();}); },
   atualizar: function () { if (B.ok) { var s = V.shown; render(); while (V.shown < s && V.shown < V.res.length) mais(); } },
-  buscarNumero: function (n) { $('acv-q').value = n; $('acv-modo').value = 'idx'; V.sel = null; carregar().then(buscar); }
+  buscarNumero: function (n) { R.modo='todos'; $('acv-q').value = n; $('acv-modo').value = 'idx'; V.sel = null; carregar().then(buscar); }
 };
 })();
