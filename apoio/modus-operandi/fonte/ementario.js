@@ -1377,7 +1377,7 @@ function textoSerie(x){
     var t=o.t,i=t.indexOf('\n'+x.sid+'\t');if(i<0&&t.indexOf(x.sid+'\t')===0)i=-1;else if(i<0){x._itFalhou=1;return;}
     var a=i+1,b=t.indexOf('\n',a);var l=t.slice(a,b<0?t.length:b).split('\t');
     var em=(l[1]||'').replace(/\u2029/g,'\n'),it=(l[2]||'').replace(/\u2029/g,'\n');
-    if(em&&x.serie)x.e=em;if(window.EMENT_FONTE&&x.t==='M'&&!em&&it)x.e=it.split(' … ')[0];x._it=window.EMENT_FONTE?it:(it||em);
+    if(em&&x.serie)x.e=em;if(window.EMENT_FONTE&&x.t==='M'&&!em&&it)x.e=it.split(' … ')[0];x._it=window.EMENT_FONTE?it:(it||em);if(!x._it)x._itFalhou=1;
   });
 }
 function buscar(){
