@@ -241,7 +241,7 @@ test('universal v53: quatro subabas, sinalizações na barra, cinco páginas no 
     assert.deepEqual(v.faces,['Resumo','Autos','Triagem','Produção']);
     assert.ok(await pg.$('.hero-steps-head .hero-sn-ind'), 'sinalizações na barra do cartão Etapas');
     assert.equal(await pg.locator('.hero-header-nav .hero-face-label').count(),0,'sem face antiga');
-    assert.equal(await pg.$eval('.hero-case-status .hero-status-icon[data-ativo="false"]', L => L.filter(x => x.offsetParent).length),0,'ícones inativos ocultos');
+    assert.equal(await pg.$$eval('.hero-case-status .hero-status-icon[data-ativo="false"]', L => L.filter(x => x.offsetParent).length),0,'ícones inativos ocultos');
     await pg.click('.hero-v53-dock-tabs [data-hero-dock="monitoramento"]');
     await pg.waitForSelector('.hero-steps.hero-steps-mon>#hero-dock-pane-monitoramento');
     await pg.click('.hero-v53-dock-tabs [data-hero-dock=""]');
