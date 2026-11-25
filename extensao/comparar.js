@@ -22,7 +22,7 @@ var FONTES = [['matriz', 'Minuta-matriz'], ['lote', 'CORTEX'], ['modelo', 'Model
 /* tipo de pronunciamento: os mesmos rótulos do banco de modelos e das minutas-matriz */
 var PRONS = [['Voto', 'Acórdão (voto)'], ['Decisão monocrática terminativa', 'Decisão monocrática'], ['Decisão interlocutória', 'Decisão interlocutória'], ['Despacho', 'Despacho']];
 var PARTES = [['tudo', 'Tudo'], ['relatorio', 'Relatório'], ['voto', 'Voto'], ['ementa', 'Ementa'], ['acordao', 'Acórdão']];
-var C = { pron: '', pronAuto: '', pronChave: '', edAberto: false, estrutura: true, fonte: 'modelo', sel: {}, parteEd: 'tudo', parteFonte: 'inteira', ws: true, sd: true, q: '', ref: '', lotes: null, loteErro: '', loteChave: '', ement: {}, tri: null, triErro: '', triChave: '', dados: null, dadosErro: '', ranking: null, rankTxt: '' };
+var C = { pron: '', pronAuto: '', pronChave: '', edAberto: document.body.classList.contains('hero-redesign-v53'), estrutura: true, fonte: 'modelo', sel: {}, parteEd: 'tudo', parteFonte: 'inteira', ws: true, sd: true, q: '', ref: '', lotes: null, loteErro: '', loteChave: '', ement: {}, tri: null, triErro: '', triChave: '', dados: null, dadosErro: '', ranking: null, rankTxt: '' };
 try { var g = JSON.parse(localStorage.getItem('muta-pje:comparar') || '{}'); ['parteEd', 'ws', 'sd', 'edAberto'].forEach(function (k) { if (g[k] != null) C[k] = g[k]; }); } catch (e) {}
 function guarda() { try { localStorage.setItem('muta-pje:comparar', JSON.stringify({ parteEd: C.parteEd, ws: C.ws, sd: C.sd, edAberto: C.edAberto })); } catch (e) {} }
 function aberta() { var p = $('panel-min'); return p && !p.hidden; }
@@ -92,7 +92,7 @@ function editorCaixa(E, n, P) {
   return '<section class="mn-ed card" data-aberto="' + (C.edAberto ? '1' : '0') + '">' +
     '<div class="mn-ed-h"><button type="button" class="mn-tg" data-c="edtg" aria-expanded="' + C.edAberto + '"><b>Texto do editor</b><span class="muted">' + (E.lendo ? 'lendo…' : E.texto ? esc(E.fonte || 'editor') + (hora ? ' · ' + hora : '') : 'ainda não lido') + '</span></button>' +
     /* 0.47: numa linha só — título, parte (só com texto lido) e o botão; o erro em uma linha, com o resto na dica */
-    '<span class="sp"></span>' + (E.texto ? '<select class="mn-pt" data-c="parteEd" title="Parte do texto do editor a comparar" aria-label="Parte">' + PARTES.map(function (p) { var q = p[0] === 'tudo' ? 1 : (P[p[0]] || []).length; return '<option value="' + p[0] + '"' + (C.parteEd === p[0] ? ' selected' : '') + (q ? '' : ' disabled') + '>' + p[1] + '</option>'; }).join('') + '</select>' : '') +
+    '<span class="sp"></span>' + (document.body.classList.contains('hero-redesign-v53')?'<select class="hero-v53-pron" data-c="pron" aria-label="Pronunciamento"><option value="">Automático · '+esc(C.pronAuto||'pronunciamento')+'</option>'+PRONS.map(function(p){return '<option value="'+esc(p[0])+'"'+(C.pron===p[0]?' selected':'')+'>'+esc(p[1])+'</option>';}).join('')+'</select>':'') + (E.texto ? '<select class="mn-pt" data-c="parteEd" title="Parte do texto do editor a comparar" aria-label="Parte">' + PARTES.map(function (p) { var q = p[0] === 'tudo' ? 1 : (P[p[0]] || []).length; return '<option value="' + p[0] + '"' + (C.parteEd === p[0] ? ' selected' : '') + (q ? '' : ' disabled') + '>' + p[1] + '</option>'; }).join('') + '</select>' : '') +
     '<button type="button" class="btn ' + (E.texto ? 'line' : 'solid') + ' sm" data-c="ler"' + (E.lendo ? ' disabled' : '') + '>' + (E.texto && !E.colado ? 'Ler de novo' : 'Ler o editor') + '</button></div>' +
     (E.erro ? '<p class="status err mn-err" title="' + esc(E.erro) + '">' + esc(/Nenhum editor/i.test(E.erro) ? 'Nenhum editor aberto no PJe: abra a minuta na tarefa.' : E.erro) + '</p>' : '') + aviso +
     (C.edAberto ? '<div class="mn-tx tx-j">' + (ps.length ? (E.paragrafos || []).filter(function (p) { return p.t; }).map(function (p) {
@@ -415,6 +415,19 @@ function render() {
     (ED.estado().texto ? '<div class="cx-op1"><label title="Ignorar diferenças de espaços, aspas e travessões"><input type="checkbox" data-c="ws"' + (C.ws ? ' checked' : '') + '> sem espaços/aspas</label><label><input type="checkbox" data-c="sd"' + (C.sd ? ' checked' : '') + '> só diferenças</label>' +
       '<span class="cx-lg1" title="riscado: está na fonte e falta no editor · verde: só no editor · amarelo: preenche vaga do modelo"><del>fonte</del><ins>editor</ins><mark class="cx-vg">vaga</mark></span></div>' : '') +
     '<div class="cx-res">' + resultadoHtml() + '</div>';
+  if(document.body.classList.contains('hero-redesign-v53')){
+    var fontesEl=caixa.querySelector('.cx-fontes'),pick=caixa.querySelector('.cx-pick'),op=caixa.querySelector('.cx-op1'),res=caixa.querySelector('.cx-res'),ed=caixa.querySelector('.mn-ed');
+    if(ed&&fontesEl&&pick&&res){
+      var it=itemAtual(),ref=document.createElement('section');ref.className='card hero-v53-ref';
+      var h=document.createElement('h4');h.className='hero-v53-page-title';h.textContent='Texto de referência';ref.append(h);
+      if(C.fonte==='colar'){var ta=pick.querySelector('textarea');if(ta)ref.append(ta);}
+      else{var tx=document.createElement('div');tx.className='hero-v53-ref-text tx-j';var bs=it?blocosFonte(it):[];bs.forEach(function(b){var p=document.createElement(b.h?'h4':'p');p.textContent=String(b.h||b.p||'');tx.append(p);});if(!bs.length)tx.textContent='Selecione um modelo ou precedente.';ref.append(tx);}
+      var busca=document.createElement('details');busca.className='hero-v53-ref-search';busca.open=!!C.buscaRefAberta;var sm=document.createElement('summary');sm.textContent='Buscar referência';busca.append(sm,fontesEl,pick);busca.addEventListener('toggle',function(){if(busca.isConnected)C.buscaRefAberta=busca.open;});ref.append(busca);
+      var bar=document.createElement('div');bar.className='hero-v53-review-actions';var go=document.createElement('button');go.type='button';go.className='btn solid sm';go.dataset.c='comparar';go.textContent='Comparar textos';go.disabled=!ED.estado().texto||!it;bar.append(go);
+      var side=res.querySelector('[data-c="janela"]');if(side)bar.append(side);if(op)bar.append(op);
+      ed.after(bar,ref);if(res.parentNode!==caixa)caixa.append(res);
+    }
+  }
   $('panel-min').scrollTop = y;
   if (foco === 'q') { var q = caixa.querySelector('[data-c=q]'); if (q) { q.focus(); q.setSelectionRange(q.value.length, q.value.length); } }
 }
@@ -458,6 +471,7 @@ function carregarJulgado(id) {
 var tq = 0;
 caixa.addEventListener('click', function (e) {
   var b = e.target.closest('button'); if (!b) return;
+  if(b.dataset.c==='comparar'){render();var out=caixa.querySelector('.cx-res');if(out)out.scrollIntoView({block:'start'});return;}
   if (b.dataset.c === 'ler') { ED.ler().catch(function () {}); return; }
   if (b.dataset.c === 'v:recortes' || b.dataset.c === 'v:folha') { C.vista = b.dataset.c.slice(2); render(); return; }
   if (b.dataset.c === 'janela') { if (ULT && ULT.it && window.MutaJanela) window.MutaJanela.abrir('comparar', 'Comparação · ' + ULT.rotulo, ladoALadoHtml(alinhar(ULT.it), ULT.rotulo)); return; }
@@ -476,6 +490,7 @@ caixa.addEventListener('click', function (e) {
 });
 caixa.addEventListener('change', function (e) {
   var t = e.target, k = t.dataset && t.dataset.c; if (!k) return;
+  if(k==='pron'){C.pron=t.value;C.sel.matriz='';preparar();return;}
   if (k === 'parteEd') C.parteEd = t.value; else if (k === 'parteFonte') C.parteFonte = t.value; else if (k === 'ws') C.ws = t.checked; else if (k === 'sd') C.sd = t.checked; else return;
   guarda(); render();
 });
