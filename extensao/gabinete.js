@@ -476,9 +476,18 @@ function notasL() { return S(V('origem', 'Observações')).split(/\n+/).map(S).f
 function notas() {
   var L = notasL();
   return '<section class="card pc-sec nt" id="g-nt"><div class="pc-sh"><h3>' + SV(IC.nt, 13) + ' Notas sobre o caso</h3><small class="muted">' + (L.length || 'nenhuma') + '</small><span class="sp"></span><button type="button" class="btn solid sm" data-nt-add title="Ctrl+Enter">+ Incluir nota</button></div>' +
+    casoNotas() +
     (L.length ? '<ol class="nt-l">' + L.map(function (l, i) { var m = /^(\d{2}\/\d{2}\/\d{4}(?: \d{2}:\d{2})?)\s*·\s*(?:([^·]{2,40}?)\s*·\s*)?(.+)$/.exec(l);
       return '<li><p>' + esc(m ? m[3] : l) + '</p>' + (m ? '<small>' + esc([m[2], m[1]].filter(Boolean).join(' · ')) + '</small>' : '') + '<button type="button" class="sn-x" data-nt-x="' + i + '" title="Excluir esta nota" aria-label="Excluir">×</button></li>'; }).join('') + '</ol>' : '') +
     '<textarea id="nt-tx" rows="2" placeholder="Nova nota: síntese, observação, lembrete para quem vai revisar… (Ctrl+Enter inclui)"></textarea></section>';
+}
+/* 0.68 · síntese do processo, síntese fática e questões no card das notas, antes do log; vazio não ocupa espaço: vira um botão "+" */
+var CS_AB = {};
+function casoNotas() {
+  var F = [['sp', 'triagem', 'Síntese Processual', 'Síntese do processo'], ['sf', 'triagem', 'Síntese Fática', 'Síntese fática']], h = '', vaz = [];
+  F.forEach(function (f) { var v = S(V(f[1], f[2])); if (v || CS_AB[f[0]]) h += campoRot(f[1], f[2], f[3]); else vaz.push('<button type="button" class="nt-add" data-cs="' + f[0] + '">+ ' + f[3] + '</button>'); });
+  if (S(V('triagem', 'Alegações')) || CS_AB.q || G.qVazia) h += questoes(); else vaz.push('<button type="button" class="nt-add" data-cs="q">+ Questões do processo</button>');
+  return (h ? '<div class="gr nt-cs">' + h + '</div>' : '') + (vaz.length ? '<div class="nt-vz">' + vaz.join('') + '</div>' : '');
 }
 function notaIncluir() { var t = $('nt-tx'), v = t ? S(t.value).replace(/\s*\n+\s*/g, ' ') : ''; if (!v) { if (t) t.focus(); return; } var L = notasL(); L.push(agoraBr() + ' · ' + (ses.estado().usuario || 'equipe') + ' · ' + v); marcar('origem.Observações', L.join('\n')); agendar(500); render(); }
 /* decisão da monocrática em botões, como na gaveta da pauta */
@@ -640,7 +649,7 @@ var CAB_HTML = '';
 function snCard() {
   var si = sinalizacoes(), nt = notas(), rg = grupos('Processo', function (g) { return g.grupo === 'Registro no acervo'; }, function () { return false; });
   /* 0.66: síntese do processo, síntese fática e questões antes das notas; notas acima das sinalizações */
-  var cs = '<div class="gr pm-cs">' + campoRot('triagem', 'Síntese Processual', 'Síntese do processo') + campoRot('triagem', 'Síntese Fática', 'Síntese fática') + questoes() + '</div>';
+  var cs = ''; /* 0.68: síntese e questões estão dentro do card das notas (casoNotas) */
   SN_HTML = cs + si + nt;
   var n = (si.match(/class="sn-i [a-z]+"/g) || []).length;
   var ab = SN_AB != null ? SN_AB : n > 0;
@@ -716,7 +725,7 @@ function camposCaso(ja) {
     return h + '<div class="rt-s"><span>Autos' + (SG[k].doc ? ' (ID ' + esc(SG[k].doc) + ')' : '') + ':</span> <b>' + esc(v.slice(0, 140)) + '</b><button type="button" class="btn line sm" data-rt="u:' + k + '">Usar</button></div>';
   }
   /* campo entra uma vez só e nunca o que já aparece acima; o tipo de ato fica no cartão */
-  function usa(c, ro) { var id = c.secao + '.' + c.chave; if (!c.secao || vist[id] || ja[id] || TRI_EXTRA[c.chave] || c.chave === 'Mono - Tipo de ato' || c.chave === 'Destino' || soSessao(c.chave) || c.tipo === 'tabela') return false;
+  function usa(c, ro) { var id = c.secao + '.' + c.chave; if (!c.secao || vist[id] || ja[id] || TRI_EXTRA[c.chave] || /^(Síntese Processual|Síntese Fática|Alegações)$/.test(c.chave) || c.chave === 'Mono - Tipo de ato' || c.chave === 'Destino' || soSessao(c.chave) || c.tipo === 'tabela') return false;
     if (!ro && !editavel(c)) return false; vist[id] = 1; return true; }
   function bloco(id, cs, extra) {
     if (!cs.length && !extra) return '';
@@ -1010,6 +1019,7 @@ caixa.addEventListener('input', function (e) {
 });
 caixa.addEventListener('click', function (e) {
   var rb = e.target.closest && e.target.closest('[data-rot]'); if (rb) { G.rot = rb.getAttribute('data-rot'); render(); return; }
+  var cb = e.target.closest && e.target.closest('[data-cs]'); if (cb) { var k = cb.getAttribute('data-cs'); CS_AB[k] = true; if (k === 'q') G.qVazia = true; render(); setTimeout(function () { var el = caixa.querySelector(k === 'q' ? '[data-q]' : '[data-fk="triagem.' + (k === 'sp' ? 'Síntese Processual' : 'Síntese Fática') + '"]'); if (el) el.focus(); }, 0); return; }
   if (e.target.closest && e.target.closest('[data-cl-tipo]')) { G.aba = 'Processo'; G.rot = 'tri'; render(); setTimeout(function () { var d = caixa.querySelector('.rt-tsel'); if (d) { d.open = true; d.scrollIntoView({ block: 'center' }); } }, 0); return; }
   var b = e.target.closest('button,a'); if (!b) return;
   if (b.tagName === 'BUTTON' && b.closest('summary')) e.preventDefault(); /* botão no título de um campo expansível não abre nem fecha o campo */

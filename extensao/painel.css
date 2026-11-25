@@ -1502,3 +1502,7 @@ html[data-tema=escuro] .pm-pl.k-lib.ok{background:#25173a;border-color:#5a3d8a;c
 /* 0.67 · liberação marcada no editor do PJe e ainda não registrada na ficha */
 .pm-pl.k-lib.pl-pje{background:#f6f1fd;border:1px dashed #b79be3;color:#5a2d91}
 html[data-tema=escuro] .pm-pl.k-lib.pl-pje{background:#1c1330;border-color:#6b4ca0;color:#d3bdf3}
+/* 0.68 · síntese e questões no card das notas; vazio vira botão "+" */
+.nt-cs{margin:0 0 8px}.nt-vz{display:flex;flex-wrap:wrap;gap:5px;margin:0 0 8px}
+.nt-add{all:unset;cursor:pointer;font-size:11px;padding:2px 9px;border-radius:999px;border:1px dashed var(--line);color:var(--muted-fg)}
+.nt-add:hover{border-color:var(--muted-fg);color:inherit}
