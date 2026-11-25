@@ -458,3 +458,102 @@ body.hero-redesign-v53 #gab :is(.sg-ig,.au-auto-d)>summary{padding:9px 10px!impo
 body.hero-redesign-v53 #gab :is(.sg-ig,.au-auto-d)>summary b{font-weight:650}
 body.hero-redesign-v53 #gab :is(.sg-ig,.au-auto-d)>:is(ul,.bar){margin:0 10px 10px!important}
 body.hero-redesign-v53 #gab :is(.sg-ig,.au-auto-d) ul{padding-left:18px!important;font-size:12px!important;line-height:1.5}
+/* ==== 0.75.0 · prontuário fiel ao protótipo v53 (hero-replica-visual-v53) ====
+   Paleta do protótipo (superfície contínua cinza-claro, linhas #d8dfe3, destaque petróleo #285f5b, rótulos dourados
+   #967022 em 9,5px caixa alta), cartões transparentes com borda, abas com sublinhado dourado, cartão de Etapas com seletor
+   segmentado, sinalizadores em ícone e rodapé "Próximo passo"; no Resumo, as sínteses e as questões destacadas ficam no
+   cabeçalho, como no protótipo. Substitui o rótulo mono da 0.74.2. */
+body.hero-redesign-v53{--p53-surface:#f5f6f7;--p53-card:#fff;--p53-soft:#edf1f3;--p53-line:#d8dfe3;--p53-ink:#26343e;--p53-muted:#6d7d87;--p53-accent:#285f5b;--p53-accent-soft:#e2eeea;--p53-gold:#967022;--p53-tab:#aa843e;--p53-fato:#b79a59;--p53-proc:#588f9c;--p53-amber:#a96a20;--p53-red:#ab4d4d;--p53-blue:#397eac;--p53-purple:#7862a3;--h53-sub:var(--p53-soft)}
+html[data-tema=escuro] body.hero-redesign-v53{--p53-surface:#202930;--p53-card:#252f37;--p53-soft:#2e3a43;--p53-line:#3b4852;--p53-ink:#e3e9ed;--p53-muted:#a1b0ba;--p53-accent:#8bc3b1;--p53-accent-soft:#304740;--p53-gold:#d1af70;--p53-tab:#d1af70;--p53-fato:#d0ad69;--p53-proc:#79b1c0;--p53-amber:#e6b471;--p53-red:#e7a0a0;--p53-blue:#8ac0e5;--p53-purple:#b7a4dc}
+body.hero-redesign-v53 #gab{--line:var(--p53-line);--hero53-gold:var(--p53-gold);background:var(--p53-surface);color:var(--p53-ink)}
+/* rótulos de seção (L1): dourado, 9,5px, caixa alta */
+body.hero-redesign-v53 #gab :is(.pc-sh h3,h4.pm-mer-h,.hero-prod-index h4,.rt-tt>b,.hero-v53-section-head h4,.hero-v53-page-title,h3.pm-mer-h,h4.tr-g),
+body.hero-redesign-v53 #gab .hero-enc-pane .pm-mer-h,body.hero-redesign-v53 #gab .hero-etiquetas .pm-mer-h{font:700 9.5px/1.4 'IBM Plex Sans',system-ui,sans-serif!important;text-transform:uppercase!important;letter-spacing:.12em!important;color:var(--p53-gold)!important;opacity:1!important}
+body.hero-redesign-v53 #gab .pc-sh h3::before,body.hero-redesign-v53 #gab .pm-mer-h::before{opacity:.8}
+/* cartões: transparentes sobre a superfície, borda fina, raio 8 */
+body.hero-redesign-v53 #gab :is(.card,section.hero-steps,.hero-v53-enc,details.gg.hero-ann-group,details.gg.hero-minuta-secao,details.card.hero-prod-index,section.pv2-index){background:transparent!important;border:1px solid var(--p53-line)!important;border-radius:8px!important}
+body.hero-redesign-v53 #gab :is(section.card,section.hero-v53-enc){padding:10px!important}
+body.hero-redesign-v53 #gab :is(.rt-c,.hero-case-block,.rt-tsel,.rt-adm-doc,.pv-synthesis,.au-auto-av,.al-i,.sg-i,.sg-ig,.au-auto-d){background:var(--p53-card)!important;border-color:var(--p53-line)!important}
+body.hero-redesign-v53 #gab :is(input:not([type=checkbox]):not([type=radio]),select,textarea){background:var(--p53-card);border-color:var(--p53-line)}
+body.hero-redesign-v53 #gab .btn.solid{background:var(--p53-accent)!important;border-color:var(--p53-accent)!important;color:var(--p53-card)!important}
+body.hero-redesign-v53 #gab .btn.line{border-color:var(--p53-line)!important}
+body.hero-redesign-v53 #gab .btn.line:hover{border-color:var(--p53-accent)!important;color:var(--p53-accent)!important}
+body.hero-redesign-v53 #gab .lnk{color:var(--p53-accent)}
+/* faixa das abas do prontuário */
+body.hero-redesign-v53 #gab .hero-v53-tabs{border-bottom:1px solid var(--p53-line)!important}
+body.hero-redesign-v53 #gab .hero-v53-tabs>button{font-size:11px!important;font-weight:500!important;color:var(--p53-muted)!important;padding:10px 3px!important;box-shadow:none!important;border-bottom:2px solid transparent!important}
+body.hero-redesign-v53 #gab .hero-v53-tabs>button[aria-selected=true]{color:var(--p53-ink)!important;font-weight:700!important;border-bottom-color:var(--p53-tab)!important}
+/* identidade do processo */
+body.hero-redesign-v53 #gab .pm-top .pm-fase{font:650 9px/1.3 'IBM Plex Sans',system-ui,sans-serif;letter-spacing:.1em;color:var(--p53-muted)}
+body.hero-redesign-v53 #gab .pm-l1{align-items:center;gap:5px!important}
+body.hero-redesign-v53 #gab .pc-cnj{font:700 12.5px/1.3 'IBM Plex Mono',ui-monospace,monospace!important;color:var(--p53-ink)!important;letter-spacing:0}
+body.hero-redesign-v53 #gab .hero-proc-tags{display:inline-flex!important;gap:0!important;border:1px solid var(--p53-line);border-radius:3px;overflow:hidden}
+body.hero-redesign-v53 #gab .hero-proc-tags>.pc-cl{background:#e8eef6!important;color:#42668c!important;border:0!important;border-radius:0!important;padding:2px 5px!important;font-size:9.5px!important;font-weight:650!important}
+body.hero-redesign-v53 #gab .hero-proc-tags>.hero-tipo-ref{background:#f0e9f6!important;color:#765495!important;border:0!important;border-left:1px solid var(--p53-line)!important;border-radius:0!important;padding:2px 5px!important;font-size:9.5px!important;font-weight:650!important;min-height:0!important}
+html[data-tema=escuro] body.hero-redesign-v53 #gab .hero-proc-tags>.pc-cl{background:#293b50!important;color:#b6cde9!important}
+html[data-tema=escuro] body.hero-redesign-v53 #gab .hero-proc-tags>.hero-tipo-ref{background:#41324f!important;color:#d9b9f0!important}
+body.hero-redesign-v53 #gab .hero-assunto-stack>span:first-child,body.hero-redesign-v53 #gab .hero-top-classif b{font-size:12.5px!important;font-weight:750!important;letter-spacing:-.01em;color:var(--p53-ink)}
+body.hero-redesign-v53 #gab .hero-case-preview.hero-case-detail{display:block;width:100%;text-align:left;background:transparent!important;border:0!important;padding:1px 0 0!important;font-size:11px!important;color:var(--p53-muted)!important;box-shadow:none!important}
+/* sínteses e questões destacadas no cabeçalho do Resumo */
+body.hero-redesign-v53 #gab .hero-v53-highlights{display:grid;gap:4px;margin:6px 0 2px}
+body.hero-redesign-v53 #gab .hero-v53-highlight{display:block;width:100%;text-align:left;background:var(--p53-soft)!important;border:0!important;border-left:2px solid var(--p53-fato)!important;border-radius:0!important;padding:5px 8px!important;font-size:11.5px!important;line-height:1.45;color:var(--p53-ink)!important;white-space:pre-wrap;overflow-wrap:anywhere;box-shadow:none!important}
+body.hero-redesign-v53 #gab .hero-v53-highlight.processual{border-left-color:var(--p53-proc)!important}
+body.hero-redesign-v53 #gab .hero-v53-highlight:hover{background:var(--p53-accent-soft)!important}
+body.hero-redesign-v53 #gab .hero-v53-question{display:flex;width:100%;text-align:left;gap:7px;background:transparent!important;border:0!important;padding:4px 2px!important;font-size:11px!important;line-height:1.4;color:var(--p53-ink)!important}
+body.hero-redesign-v53 #gab .hero-v53-question+.hero-v53-question{border-top:1px solid var(--p53-line)!important}
+/* cartão de Etapas, como o stepcard do protótipo */
+body.hero-redesign-v53 #gab section.hero-steps{background:var(--p53-surface)!important;padding:8px!important;margin-top:10px!important}
+body.hero-redesign-v53 #gab .hero-steps-head{display:flex;align-items:center;flex-wrap:wrap;gap:5px;margin-bottom:8px}
+body.hero-redesign-v53 #gab .hero-v53-dock-tabs{display:inline-flex!important;gap:0!important;border:1px solid var(--p53-line)!important;border-radius:5px!important;padding:2px!important;background:transparent!important}
+body.hero-redesign-v53 #gab .hero-v53-dock-tabs>button{font:750 9px/1.2 'IBM Plex Sans',system-ui,sans-serif!important;letter-spacing:.06em!important;text-transform:uppercase!important;color:var(--p53-tab)!important;background:transparent!important;border:0!important;border-radius:3px!important;padding:5px 6px!important;box-shadow:none!important}
+body.hero-redesign-v53 #gab .hero-v53-dock-tabs>button:is([aria-selected=true],[aria-pressed=true],.on,.active){outline:1px solid var(--p53-gold)!important;outline-offset:-1px;background:color-mix(in srgb,var(--p53-tab) 10%,transparent)!important}
+body.hero-redesign-v53 #gab .hero-sn-ind{margin-left:auto;display:inline-flex;gap:3px}
+body.hero-redesign-v53 #gab .hero-sn-mini{min-width:23px;height:23px!important;min-height:0!important;padding:0 4px!important;border:1px solid var(--p53-line)!important;border-radius:4px!important;background:transparent!important;display:inline-flex!important;align-items:center;justify-content:center;gap:2px}
+body.hero-redesign-v53 #gab .hero-sn-mini svg{width:13px;height:13px}
+body.hero-redesign-v53 #gab .hero-sn-mini.pd{color:var(--p53-amber)!important}
+body.hero-redesign-v53 #gab .hero-sn-mini.ic{color:var(--p53-red)!important}
+body.hero-redesign-v53 #gab .hero-sn-mini.av{color:var(--p53-blue)!important}
+body.hero-redesign-v53 #gab .hero-sn-mini .hero-sn-count{font-size:9.5px}
+body.hero-redesign-v53 #gab .hero-sn-mini:has(.hero-sn-count:is(:empty)) .hero-sn-count{display:none}
+body.hero-redesign-v53 #gab .pv-flowbox{border:0!important;padding:2px 0 0!important;margin:0!important}
+body.hero-redesign-v53 #gab .pv-stage-btn{width:24px!important;height:24px!important;border:1px solid var(--p53-line)!important;background:var(--p53-surface)!important;color:var(--p53-muted)!important;box-shadow:none!important}
+body.hero-redesign-v53 #gab .pv-stage-btn svg{width:13px;height:13px}
+body.hero-redesign-v53 #gab .pv-stage.ok .pv-stage-btn{border-color:var(--p53-accent)!important;color:var(--p53-accent)!important}
+body.hero-redesign-v53 #gab .pv-stage.at .pv-stage-btn{border:1.5px solid var(--p53-accent)!important;color:var(--p53-accent)!important}
+body.hero-redesign-v53 #gab .pv-stage b{font-size:9.5px!important;font-weight:500!important;color:var(--p53-muted)!important}
+body.hero-redesign-v53 #gab .pv-stage.at b{font-weight:700!important;color:var(--p53-ink)!important}
+body.hero-redesign-v53 #gab .pv-stage small{font-size:9px!important}
+body.hero-redesign-v53 #gab .pv-flow:before{background:var(--p53-line)!important}
+body.hero-redesign-v53 #gab .hero-designacoes{border-top:1px solid var(--p53-line);margin-top:9px;padding-top:7px}
+body.hero-redesign-v53 #gab .hero-designacoes .gl{font:600 10px/1.3 'IBM Plex Sans',system-ui,sans-serif!important;text-transform:none!important;letter-spacing:0!important;color:var(--p53-muted)!important}
+body.hero-redesign-v53 #gab .hero-v53-next{display:flex;align-items:center;gap:6px;border-top:1px solid var(--p53-line);margin:9px -8px -8px;padding:6px 8px}
+body.hero-redesign-v53 #gab .hero-v53-next::before{content:'Próximo passo';font:700 9.5px/1.4 'IBM Plex Sans',system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--p53-gold);margin-right:auto}
+body.hero-redesign-v53 #gab .hero-v53-next .lnk{text-decoration:none;font-weight:650;font-size:11px}
+body.hero-redesign-v53 #gab .hero-v53-next-button{flex-basis:100%}
+/* Perfil do processo | Pauta e julgamento: como as seções recolhíveis do protótipo */
+body.hero-redesign-v53 #gab .hero-v53-painel{background:transparent!important;border:0!important;border-top:1px solid var(--p53-line)!important;border-radius:0!important;margin-top:8px!important}
+body.hero-redesign-v53 #gab .hero-v53-painel-head{padding:6px 0!important}
+body.hero-redesign-v53 #gab .hero-v53-painel-tabs>button{font:700 9.5px/1.4 'IBM Plex Sans',system-ui,sans-serif!important;letter-spacing:.12em!important;text-transform:uppercase;color:var(--p53-gold)!important;padding:6px 6px 6px 2px!important;background:transparent!important}
+body.hero-redesign-v53 #gab .hero-v53-painel-tabs>button::before{content:'▸ ';color:var(--p53-muted)}
+body.hero-redesign-v53 #gab .hero-v53-painel-tabs>button[aria-selected=true]::before{content:'▾ '}
+body.hero-redesign-v53 #gab .hero-v53-painel-tabs>button::after{content:none!important}
+body.hero-redesign-v53 #gab .hero-v53-painel-tabs>button[aria-selected=true]{background:transparent!important;text-decoration:underline;text-underline-offset:4px}
+body.hero-redesign-v53 #gab .hero-v53-painel-body{padding:0 2px!important}
+/* Autos: métricas da leitura */
+body.hero-redesign-v53 #gab .au-metr{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;margin:4px 0 9px}
+body.hero-redesign-v53 #gab .au-metr>div{border:1px solid var(--p53-line);background:var(--p53-card);border-radius:5px;padding:7px;min-width:0}
+body.hero-redesign-v53 #gab .au-metr b{display:block;font-size:15px;font-weight:650;line-height:1.2;font-variant-numeric:tabular-nums}
+body.hero-redesign-v53 #gab .au-metr small{font-size:10px;color:var(--p53-muted)}
+body.hero-redesign-v53 #gab .au-metr>div.at b{color:var(--p53-amber)}
+/* recolhíveis (details) dos cartões: rótulo dourado com chevron, como .collapse do protótipo */
+body.hero-redesign-v53 #gab details.au-cf>summary h4,body.hero-redesign-v53 #gab details.gg>summary>h4{font:700 9.5px/1.4 'IBM Plex Sans',system-ui,sans-serif!important;letter-spacing:.12em!important;text-transform:uppercase!important;color:var(--p53-gold)!important}
+body.hero-redesign-v53 #gab section.card.hero-v53-painel{background:transparent!important;border:0!important;border-top:1px solid var(--p53-line)!important;border-radius:0!important;padding:0!important}
+body.hero-redesign-v53 #gab section.hero-steps :is(.pv-flowbox,.pv-flow,.hero-steps-body,.hero-designacoes){background:transparent!important;box-shadow:none!important;border-radius:0!important}
+body.hero-redesign-v53 #gab section.hero-steps .pv-flowbox{border:0!important}
+body.hero-redesign-v53 #gab .pv-stage.ok .pv-stage-btn{background:var(--p53-accent-soft)!important}
+body.hero-redesign-v53 #gab :is(.pc-sh h3,h4.pm-mer-h,.hero-prod-index h4,.rt-tt>b,.rt-top .rt-h b,.hero-minuta-roteiro>b,.pv-stage-head>.pm-mer-h,.hero-v53-section-head h4,.hero-v53-page-title,h3.pm-mer-h),
+body.hero-redesign-v53 :is(#cmp-app,#pauta-app,#dir-app,#del-app,#dil-app) :is(.pc-sh h3,.hero-v53-page-title){font:700 9.5px/1.4 'IBM Plex Sans',system-ui,sans-serif!important;text-transform:uppercase!important;letter-spacing:.12em!important;color:var(--p53-gold,#967022)!important}
+/* superfície única: no escuro, a paleta do painel (navy); no claro, o cinza do protótipo em toda a página */
+html[data-tema=escuro] body.hero-redesign-v53{--p53-surface:var(--bg);--p53-card:var(--card);--p53-soft:color-mix(in srgb,var(--card) 70%,var(--line));--p53-line:var(--line);--p53-ink:var(--fg);--p53-muted:var(--muted-fg)}
+body.hero-redesign-v53 #gab{background:transparent}
+html:not([data-tema=escuro]) body.hero-redesign-v53,html:not([data-tema=escuro]) body.hero-redesign-v53 :is(main,.layout,#gab,main>section){background:var(--p53-surface)!important}

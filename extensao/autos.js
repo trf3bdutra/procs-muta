@@ -770,7 +770,11 @@ function resumoLeitura() {
     chip('MPF', M, null, M ? 'Parecer ID ' + M.id + ' (' + M.data + ')' : 'Sem parecer na cronologia lida', fichaIds('triagem.ID do Parecer MPF')) +
     chip('Procuração', P, null, '', fichaIds('triagem.ID da Procuração'));
   var falta = faltam.length ? '<p class="au-falta"><span>Fora da cronologia do 2º grau: <b>' + faltam.map(esc).join('</b>, <b>') + '</b>.</span> <small>Se estão nos autos do 1º grau, vincule-as em <button type="button" class="lnk" data-au="ir1g">1º grau › Peças vinculadas</button>.</small></p>' : '';
-  return '<div class="au-res">' + chips + '</div>' + falta + '<p class="muted au-nl">' + (A.integra ? 'Lendo a íntegra: ' + A.integra.feitos + ' de ' + A.integra.total + ' documentos…' : nl + ' de ' + todosD.length + ' documentos com texto lido (íntegra)') + '</p>';
+  /* 0.75 · métricas da leitura (como no protótipo v53): peças identificadas, textos lidos e o que há a conferir */
+  if (!A.sug) calcular();
+  var nConf = (A.sug || []).filter(function (it) { return it.status !== 'igual' && !preservado(it) && !(it.alvo && preenchido(it.alvo)); }).length + alertas().filter(function (x) { return !/^Tipo de julgamento:/.test(x.t); }).length;
+  var metr = '<div class="au-metr"><div><b>' + L.length + '</b><small>Peças identificadas</small></div><div><b>' + nl + '/' + todosD.length + '</b><small>Textos lidos</small></div><div' + (nConf ? ' class="at"' : '') + '><b>' + nConf + '</b><small>A conferir</small></div></div>';
+  return metr + '<div class="au-res">' + chips + '</div>' + falta + '<p class="muted au-nl">' + (A.integra ? 'Lendo a íntegra: ' + A.integra.feitos + ' de ' + A.integra.total + ' documentos…' : nl + ' de ' + todosD.length + ' documentos com texto lido (íntegra)') + '</p>';
 }
 function htmlLeitura() {
   var tela = window.MutaPje && window.MutaPje.tela ? window.MutaPje.tela() : '';

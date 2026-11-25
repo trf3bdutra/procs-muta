@@ -312,44 +312,36 @@ test('universal 0.74.2: faixa das abas sem caixa, títulos sem repetição em Au
         titulos: [...document.querySelectorAll('#gab .pc-sh h3')].filter(h => h.offsetParent).map(h => h.textContent.trim()),
         grupos: [...document.querySelectorAll('#g-docs details.pc-s>summary b')].map(b => b.textContent.trim()),
         l1: [...new Set([...document.querySelectorAll('#gab .pc-sh h3')].map(h => cs(h).fontSize + ' ' + cs(h).textTransform))],
-        raio: [...new Set([...document.querySelectorAll('#gab section.card')].map(c => cs(c).borderTopLeftRadius))]
+        raio: [...new Set([...document.querySelectorAll('#gab section.card:not(.hero-v53-painel)')].filter(c => c.offsetParent).map(c => cs(c).borderTopLeftRadius))]
       };
     });
     assert.equal(v.caixa, '0px rgba(0, 0, 0, 0)', 'faixa das abas sem caixa');
     assert.equal(v.merito, false, 'fora do Resumo, sem a faixa do mérito');
     assert.deepEqual(v.titulos, ['Leitura dos autos', 'Peças e documentos']);
     assert.ok(v.grupos.includes('Extração e outras peças') && !v.grupos.includes('Teor dos autos · Documentos e peças'), 'grupo da ficha sem repetir o título do cartão: ' + v.grupos);
-    assert.deepEqual(v.l1, ['10.5px uppercase'], 'rótulo de cartão num só tamanho');
-    assert.deepEqual(v.raio, ['10px'], 'cartões com um só raio');
+    assert.deepEqual(v.l1, ['9.5px uppercase'], 'rótulo de cartão num só tamanho (protótipo v53: 9,5px dourado)');
+    assert.deepEqual(v.raio, ['8px'], 'cartões com um só raio (protótipo v53)');
     assert.deepEqual(P.erros, [], 'sem erro de script');
   } finally { await P.fim(); }
 });
 
-test('universal 0.74.3: Resumo com o cartão Resumo do processo e o cartão Autos', { skip: pular, timeout: 90000 }, async () => {
-  const op = { processo: CNJ, origem: {}, triagem: { 'Tipo de Julgamento': 'Apelação', 'Síntese Fática': 'Compra na planta com atraso.', 'Alegações': 'Há dano moral?' }, producao: { SERVIDOR: 'Rodrigo', MINUTADO: '2026-11-13', Destino: 'Sessão' }, pauta: {}, controles: {} };
+test('universal 0.75: Resumo como o protótipo v53 — sínteses no cabeçalho (destacadas por padrão), sem cartões extras', { skip: pular, timeout: 90000 }, async () => {
+  const op = { processo: CNJ, origem: {}, triagem: { 'Tipo de Julgamento': 'Apelação', 'Síntese Fática': 'Compra na planta com atraso.', 'Síntese Processual': 'Sentença de procedência.', 'Alegações': 'Há dano moral?' }, producao: { SERVIDOR: 'Rodrigo', MINUTADO: '2026-11-13', Destino: 'Sessão' }, pauta: {}, controles: {} };
   const P = await abrir(op, { sigilo: '', liberado: true, porque: 'gestor' });
   try {
     const { pg } = P;
     await pg.goto(pg.url().replace('/painel/painel.html', '/painel/universal.html'));
     await pg.waitForFunction(() => window.MutaSessao && window.MutaSessao.estado().estado === 'on', null, { timeout: 15000 });
     await pg.evaluate(cnj => { window.chrome.storage.session.set({ 'aba:1': { numero: cnj, classe: 'ApCiv', tarefa: '[Sessão] Aguardando a sessão', ctx: '', ed: false, lib: '' } }); }, CNJ);
-    await pg.waitForSelector('.hero-v53-resumo', { timeout: 15000 });
+    await pg.waitForSelector('.hero-v53-highlights', { timeout: 15000 });
     const v = await pg.evaluate(() => ({
-      linhas: [...document.querySelectorAll('.hero-v53-resumo .hero-v53-rs-k')].map(e => e.textContent),
-      fatica: document.querySelector('.hero-v53-resumo .hero-v53-rs-v p').textContent,
-      processual: [...document.querySelectorAll('.hero-v53-resumo .hero-v53-rs-row')].some(r => /Síntese processual/.test(r.textContent) && r.querySelector('.lnk')),
-      tags: [...document.querySelectorAll('.hero-v53-rs-tags .chip')].map(e => e.textContent),
-      autos: !document.querySelector('.hero-v53-autos-resumo [data-au="ler"]') && /Autos ainda não lidos/.test(document.querySelector('.hero-v53-autos-resumo').textContent),
-      ordem: [...document.querySelectorAll('#gab .hero-steps, #gab .hero-v53-resumo, #gab .hero-v53-autos-resumo')].map(e => e.className.split(' ').pop())
+      sint: [...document.querySelectorAll('.hero-v53-highlights .hero-v53-highlight')].map(e => e.className.split(' ').pop() + ':' + e.textContent),
+      cartoes: document.querySelectorAll('.hero-v53-resumo,.hero-v53-autos-resumo').length,
+      ordem: [...document.querySelectorAll('#gab .hero-v53-highlights, #gab .hero-steps, #gab .hero-v53-painel')].map(e => e.className.split(' ').filter(c => /^hero-/.test(c)).pop())
     }));
-    assert.deepEqual(v.linhas, ['Síntese fática', 'Síntese processual', 'Questões · 1']);
-    assert.equal(v.fatica, 'Compra na planta com atraso.');
-    assert.ok(v.processual, 'síntese vazia oferece "+ registrar"');
-    assert.deepEqual(v.tags, ['Apelação', 'Destino · Sessão']);
-    assert.ok(v.autos, 'cartão Autos sem um segundo Ler os autos (a leitura fica na aba Autos)');
-    assert.deepEqual(v.ordem, ['hero-steps', 'hero-v53-resumo', 'hero-v53-autos-resumo']);
-    await pg.click('.hero-v53-autos-resumo .hero-v53-rs-foot .btn');
-    await pg.waitForSelector('#g-docs', { timeout: 15000 });
+    assert.deepEqual(v.sint, ['fatica:Compra na planta com atraso.', 'processual:Sentença de procedência.']);
+    assert.equal(v.cartoes, 0, 'sem os cartões Resumo do processo e Autos');
+    assert.deepEqual(v.ordem, ['hero-v53-highlights', 'hero-steps', 'hero-v53-painel']);
     assert.deepEqual(P.erros, [], 'sem erro de script');
   } finally { await P.fim(); }
 });
