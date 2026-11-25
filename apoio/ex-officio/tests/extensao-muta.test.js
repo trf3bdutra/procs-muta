@@ -582,7 +582,7 @@ test('extensão 0.43: Gerador só com relatório e ementa (dispositivo, acórdã
   const g = read('extensao/gerador.js');
   assert.match(g, /var PECAS = \{ rel: true, em: true, disp: false, ac: false, pr: false \};/);
   assert.match(g, /\(PECAS\.disp \? bloco\('disp'/); assert.match(g, /\(PECAS\.ac \? bloco\('ac'/); assert.match(g, /\(PECAS\.pr \? bloco\('pr'/);
-  assert.match(read('extensao/painel.html'), /data-mm="ger" aria-selected="false">Gerador</);
+  assert.match(read('extensao/painel.html'), /data-mm="ger" aria-selected="false">Minutário</);
   assert.doesNotMatch(read('extensao/comparar.js'), />Localizar no Collectio<|>Mandar ao Collectio</, 'sem os botões do Collectio no texto do editor');
 });
 
@@ -594,12 +594,18 @@ test('extensão 0.44: Ler/Reler sempre a íntegra; documentos do Roteiro em Auto
   assert.match(r, /var DOC_RT = \{/); assert.match(r, /data-aba="Autos" title="Editar em Autos › Peças e documentos"/);
 });
 
-test('extensão 0.45: Comparar só com modelos, precedentes, texto colado e 28,86%; minuta-matriz na Conformidade; CORTEX em aba só do gestor', () => {
+test('extensão 0.45: Comparar só com modelos, precedentes, texto colado e 28,86%; minuta-matriz na Conformidade; Corretor com subabas e CORTEX fora da navegação', () => {
   const c = read('extensao/comparar.js'), h = read('extensao/painel.html'), g = read('extensao/gerador.js');
   assert.match(c, /var FORA_CMP = \{ matriz: 1, lote: 1, tri: 1, par: 1 \};/); assert.match(c, /function estruturaConformidade\(aoBaixar\)/);
   assert.match(read('extensao/conformidade.js'), /window\.MutaComparar\.estruturaConformidade\(render\)/);
-  assert.match(h, /data-mm="lote" aria-selected="false" hidden title="Só para o gestor">CORTEX</); assert.match(h, /id="panel-lote" open hidden/);
-  assert.match(g, /function gestor\(\) \{/); assert.match(g, /\(m === 'lote' && gestor\(\)\)/);
+  assert.doesNotMatch(h, /data-mm="lote"|id="panel-lote"|id="lote-app"/);
+  assert.match(h, /data-mm="cor"[^>]*>Corretor</);
+  assert.match(h, /data-mm="cmp"[^>]*>Comparativo</);
+  assert.match(h, /data-mm="conf"[^>]*>Conformidade/);
+  assert.match(g, /m === 'ger' \|\| m === 'conf' \|\| m === 'dir' \? m : 'cmp'/);
+  const lote = read('extensao/lote.js');
+  assert.equal((lote.match(/if \(caixa\) caixa\.addEventListener\(/g) || []).length, 3);
+  assert.match(lote, /minutasDoProcesso: minutasDoProcesso/);
 });
 
 test('extensão 0.46: 2ª seta do cartão com síntese, questões, mérito e encaminhamento (fora do Roteiro e da aba Processo)', () => {
