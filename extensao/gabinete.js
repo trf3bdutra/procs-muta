@@ -1071,9 +1071,9 @@ function corpoAutos() {
   var AU = window.MutaAutos; if (!AU || !AU.htmlLeitura) return pecasCartao();
   var cf = AU.htmlConferir(), dc = AU.htmlDocs(function () { return pecasCartao(true); });
   if (cf) cf = cf.replace(/^<section class="card pc-sec" id="g-cf"><div class="pc-sh"><h3>A conferir<\/h3>(<small[^>]*>[\s\S]*?<\/small>)<\/div>/, '<details class="gg au-cf" id="g-cf"' + (CF_ABERTO ? ' open' : '') + '><summary><h4>A conferir</h4>$1</summary><div class="gr au-cf-b">').replace(/<\/section>$/, '</div></details>');
-  var i = dc.indexOf('</div>', dc.indexOf('<h3>Peças e documentos</h3>'));
-  if (cf && i > 0 && /^<details/.test(cf)) return AU.htmlLeitura() + dc.slice(0, i + 6) + cf + dc.slice(i + 6);
-  return AU.htmlLeitura() + cf + dc;
+  var leitura=AU.htmlLeitura();
+  if(cf) leitura=leitura.replace(/<\/section>$/,cf+'</section>');
+  return '<div class="hero-autos-workspace">'+leitura+dc+'</div>';
 }
 document.addEventListener('toggle', function (e) { if (e.target && e.target.id === 'g-cf' && e.target.tagName === 'DETAILS') CF_ABERTO = e.target.open; }, true);
 /* 0.55: Roteiro de triagem = admissibilidade e MPF (e os passos); matéria, espécie e decisão impugnada ficam no Roteiro de produção */
@@ -1108,7 +1108,7 @@ function heroOrganizarProntuario(){
   /* Encaminhamento é a segunda face do prontuário (antes, aba do rodapé do cartão). */
   pages.append(id,encFace,aut,mat);var pn=[id,encFace,aut,mat],names=['Resumo','Encaminhamento','Identificação e Autuação','Caso, Conteúdo e Questões'];
   if(ficha){pages.append(ficha);pn.push(ficha);names.push('Ficha');}
-  function show(i){var n=pn.length;heroTopo.pagina=(i+n)%n;pn.forEach(function(p,j){p.hidden=j!==heroTopo.pagina;});label.textContent=heroTopo.pagina===0?'':names[heroTopo.pagina];label.hidden=heroTopo.pagina===0;prev.title='Anterior: '+names[(heroTopo.pagina+n-1)%n];next.title='Próxima: '+names[(heroTopo.pagina+1)%n];prev.setAttribute('aria-label',prev.title);next.setAttribute('aria-label',next.title);nav.setAttribute('aria-label',names[heroTopo.pagina]);if(ficha){if(heroTopo.pagina===n-1&&fichaFacePermitida()){if(!ficha.childElementCount)html(ficha,window.MutaGabinete.fichaFace());}else ficha.replaceChildren();}if(faceNav)Array.from(faceNav.children).forEach(function(b,j){b.setAttribute('aria-pressed',String(j===heroTopo.pagina));});}
+  function show(i){var n=pn.length;heroTopo.pagina=(i+n)%n;pn.forEach(function(p,j){p.hidden=j!==heroTopo.pagina;});label.textContent='';label.hidden=true;prev.title='Anterior: '+names[(heroTopo.pagina+n-1)%n];next.title='Próxima: '+names[(heroTopo.pagina+1)%n];prev.setAttribute('aria-label',prev.title);next.setAttribute('aria-label',next.title);nav.setAttribute('aria-label',names[heroTopo.pagina]);if(ficha){if(heroTopo.pagina===n-1&&fichaFacePermitida()){if(!ficha.childElementCount)html(ficha,window.MutaGabinete.fichaFace());}else ficha.replaceChildren();}if(faceNav)Array.from(faceNav.children).forEach(function(b,j){b.setAttribute('aria-pressed',String(j===heroTopo.pagina));});}
   var faceNav=enhanced||document.querySelector('link[href="universal-layout.css"]')?el('div','pv3-face-nav'):null;if(faceNav){faceNav.style.gridTemplateColumns='repeat('+pn.length+',minmax(0,1fr))';['Resumo','Encaminhamento','Autuação','Caso'].concat(ficha?['Ficha']:[]).forEach(function(name,i){var b=el('button','',name);b.type='button';b.onclick=function(){show(i);};faceNav.append(b);});}
   prev.addEventListener('click',function(){show(heroTopo.pagina-1);});next.addEventListener('click',function(){show(heroTopo.pagina+1);});
   var sx=0;pages.addEventListener('touchstart',function(e){sx=e.changedTouches[0].clientX;},{passive:true});pages.addEventListener('touchend',function(e){var dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>65)show(heroTopo.pagina+(dx<0?1:-1));},{passive:true});
@@ -1291,7 +1291,14 @@ function heroOrganizarProntuario(){
     });
     materia.append(hdHist);
   }
-  materia.append(qd,noteWrap);atualizaAnn();
+  /* Caso / Conteúdo / Questões: seções da mesma ficha, com edição original e expansão independente. */
+  var secCaso=el('details','hero-case-block'),secConteudo=el('details','hero-case-block'),caseGrid=el('div','gr hero-case-grid'),contentGrid=el('div','gr hero-case-grid');
+  secCaso.append(el('summary','','Caso · classificação e delimitação'),caseGrid);secConteudo.append(el('summary','','Conteúdo · sínteses e detalhamento'),contentGrid);
+  heroTopo.caseOpen=heroTopo.caseOpen||{caso:true,conteudo:true};
+  Array.from(mg.children).forEach(function(x){var l=x.querySelector('.gl'),v=l?S(l.textContent):'';(/síntese|detalhamento do caso/i.test(v)?contentGrid:caseGrid).append(x);});
+  Array.from(materia.querySelectorAll(':scope > .pc-dl')).forEach(function(x){caseGrid.prepend(x);});
+  mg.replaceWith(secCaso,secConteudo);[['caso',secCaso],['conteudo',secConteudo]].forEach(function(x){x[1].open=heroTopo.caseOpen[x[0]]!==false;x[1].addEventListener('toggle',function(){if(x[1].isConnected)heroTopo.caseOpen[x[0]]=x[1].open;});});
+  qd.classList.add('hero-case-block');materia.append(qd,noteWrap);atualizaAnn();
   /* O Acompanhamento é proprietário dos campos, não depende do DOM da aba Triagem. */
   var prior=caixa.querySelector('#pv-acomp');if(prior)prior.remove();
   caixa.querySelectorAll('#pv-tri-enc,.pv-followup').forEach(function(x){x.remove();});
@@ -1515,7 +1522,7 @@ function heroOrganizarProntuario(){
   }
   mdx.onclick=fecharMon;monDlg.addEventListener('cancel',function(e){e.preventDefault();fecharMon();});
   monDlg.addEventListener('click',function(e){if(e.target===monDlg)fecharMon();});
-  var monBtn=el('button','hero-monitor-label','Monitoramento'),mgp=el('div','hero-monitor-tab');monBtn.type='button';monBtn.id='hero-dock-tab-monitoramento';monBtn.title='Monitoramento especial';monBtn.setAttribute('aria-haspopup','dialog');monBtn.setAttribute('aria-controls',monDlg.id);monBtn.onclick=function(){heroTopo.monFoco='';abrirMon('monitoramento');};mgp.append(monBtn);navA.append(mgp);
+  /* O monitoramento é aberto exclusivamente pelo cabeçalho; sem faixa no corpo. */
   /* Sinalizações: ocupam o lugar das etapas no mesmo cartão (não abrem abaixo); "‹ Etapas" ou a mesma categoria voltam. */
   var SNR={pd:'Pendências',ic:'Intercorrências',av:'Avisos'},stepsTitle=stepsHead.querySelector('h4'),voltar=el('button','hero-steps-voltar','‹ Etapas');
   voltar.type='button';voltar.title='Voltar às etapas';voltar.hidden=true;voltar.onclick=function(){abrirA('');};
@@ -1531,18 +1538,19 @@ function heroOrganizarProntuario(){
   ind.setAttribute('role','group');ind.setAttribute('aria-label','Sinalizações');stepsHead.append(voltar,ind);
   urg.addEventListener('click',function(){abrirA('monitoramento');});
   if(flow&&flow.parentNode===steps)flow.after(sd);else steps.append(sd);
-  encFace.append(ac);dock.append(navA);top.append(dock);
+  encFace.append(ac);
   /* Condições processuais: apenas indicadores no cabeçalho, sem alteração de estado ao consultar. */
   var status=el('div','hero-case-status');status.setAttribute('role','group');status.setAttribute('aria-label','Condições do processo');
-  urg.classList.add('hero-status-icon','status-urgencia');urg.title='Urgência'+(ctlSim('urgencia')?' · ativa':' · não registrada');urg.setAttribute('aria-label',urg.title);urg.setAttribute('aria-haspopup','dialog');urg.disabled=false;status.append(urg);
+  urg.classList.add('hero-status-icon','status-urgencia');urg.title='Urgência'+(ctlSim('urgencia')?' · ativa':' · não registrada');urg.setAttribute('aria-label',urg.title);urg.setAttribute('aria-haspopup','dialog');urg.disabled=false;urg.dataset.ativo=String(ctlSim('urgencia'));urg.hidden=!ctlSim('urgencia');status.append(urg);
   var sg=top.querySelector('.sg-b'),lock=el('button','hero-status-icon status-sigilo');lock.type='button';lock.innerHTML=SV('<rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/>',14);
   lock.title=sg?sg.textContent.trim():'Sigilo · sem restrição identificada';lock.setAttribute('aria-label',lock.title);lock.dataset.ativo=String(!!sg);lock.dataset.estado=sg?(sg.classList.contains('sg-ok')?'liberado':sg.classList.contains('sg-l')?'consulta':'restrito'):'inativo';
   if(sg){sgBox=el('section','hero-sig-details');sgBox.hidden=true;sgBox.append(sg);mdc.append(sgBox);if(sg.querySelector('.sg-f,.sg-e'))heroTopo.monDlg='sigilo';lock.setAttribute('aria-haspopup','dialog');lock.onclick=function(){abrirMon('sigilo');};}else{lock.disabled=true;}
-  status.append(lock);
-  [['meta','Meta','<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/>'],['sensivel','Caso sensível','<path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11z"/><path d="M12 8v4m0 4h.01"/>']].forEach(function(x){var b=el('button','hero-status-icon status-'+x[0]);b.type='button';b.innerHTML=SV(x[2],14);b.dataset.ativo=String(ctlSim(x[0]));b.title=x[1]+(ctlSim(x[0])?' · ativo':' · não registrado');b.setAttribute('aria-label',b.title);b.setAttribute('aria-haspopup','dialog');b.onclick=function(){heroTopo.monFoco=x[0];abrirA('monitoramento');};status.append(b);});
-  nav.append(status);
+  lock.hidden=!sg;status.append(lock);
+  [['meta','Meta','<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/>'],['sensivel','Caso sensível','<path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11z"/><path d="M12 8v4m0 4h.01"/>']].forEach(function(x){var b=el('button','hero-status-icon status-'+x[0]);b.type='button';b.innerHTML=SV(x[2],14);b.dataset.ativo=String(ctlSim(x[0]));b.hidden=!ctlSim(x[0]);b.title=x[1]+(ctlSim(x[0])?' · ativo':' · não registrado');b.setAttribute('aria-label',b.title);b.setAttribute('aria-haspopup','dialog');b.onclick=function(){heroTopo.monFoco=x[0];abrirA('monitoramento');};status.append(b);});
+  var openMon=el('button','hero-monitor-hover','Monitoramento');openMon.type='button';openMon.title='Abrir monitoramento';openMon.setAttribute('aria-label','Abrir monitoramento');openMon.setAttribute('aria-haspopup','dialog');openMon.setAttribute('aria-controls',monDlg.id);openMon.onclick=function(){heroTopo.monFoco='';abrirMon('monitoramento');};status.append(openMon);status.classList.toggle('hero-monitor-empty',!Array.from(status.querySelectorAll('.hero-status-icon')).some(function(b){return !b.hidden;}));nav.append(status);
   solBody.classList.add('hero-sol-main-body');
-  if(window.MutaPauta&&window.MutaPauta.receberEditor)window.MutaPauta.receberEditor(G.cnj,solBody);
+  var solMain=caixa.querySelector('#hero-sol-main');
+  if(solMain){solMain.append(solBody);if(window.MutaPauta&&window.MutaPauta.receberEditor)window.MutaPauta.receberEditor(G.cnj,solBody);}
   if(heroTopo.abaAcomp==='solicitacoes')heroTopo.abaAcomp='';
   abrirA(heroTopo.abaAcomp==='sinalizacoes'||(!heroTopo.abaAcomp&&heroTopo.sinalizacoes)?'sinalizacoes':'');if(heroTopo.monDlg&&(heroTopo.monDlg!=='sigilo'||sgBox))abrirMon(heroTopo.monDlg);else heroTopo.monDlg='';show(heroTopo.pagina);
 }
@@ -1565,11 +1573,10 @@ function render0() {
   if (G.aba === 'Produção') { G.aba = 'Processo'; G.rot = 'pro'; }
   if (G.aba === 'Gerador') { G.aba = 'Processo'; if (window.MutaAbas) setTimeout(function () { window.MutaAbas.ir('ger'); }, 0); }
   if (MODOS.indexOf(G.aba) < 0) G.aba = 'Processo';
-  if(G.rot==='sol')G.rot='tri';
   var nAl = window.MutaAutos && window.MutaAutos.estado().itens ? window.MutaAutos.alertas().filter(function (a) { return a.nivel === 'al'; }).length : 0;
   var tabs = '<div class="seg gtabs pmodos hero-main-tabs" role="tablist" aria-label="Parte do prontuário">' +
     '<button type="button" role="tab" data-aba="Autos" aria-selected="'+(G.aba==='Autos')+'"><span>Autos'+(nAl?' <i class="gnum">'+nAl+'</i>':'')+'</span><small>'+esc(contaModo('Autos'))+'</small></button>'+
-    [['tri','Triagem'],['pro','Produção']].map(function(x){var on=G.aba==='Processo'&&(G.rot||'tri')===x[0];return '<button type="button" role="tab" data-rot="'+x[0]+'" data-pv-tab="'+x[0]+'" aria-selected="'+on+'"><span>'+x[1]+'</span></button>';}).join('')+'</div>';
+    [['tri','Triagem'],['pro','Produção'],['sol','Solicitações']].map(function(x){var on=G.aba==='Processo'&&(G.rot||'tri')===x[0];return '<button type="button" role="tab" data-rot="'+x[0]+'" data-pv-tab="'+x[0]+'" aria-selected="'+on+'"><span>'+x[1]+'</span></button>';}).join('')+'</div>';
   var snc = snCard(), cab = cabeca(s); CAB_HTML = cab;
   /* 0.69: aviso de sigilo no alto do cartão (processo sigiloso ou documento sigiloso nos autos) */
   if (window.MutaSigilo) { window.MutaSigilo.consultar(G.cnj); var sgh = window.MutaSigilo.html(); if (sgh) cab = cab.replace('<section class="pc pm">', '<section class="pc pm">' + sgh); }
