@@ -731,10 +731,8 @@ function htmlSugestoes(secoes) {
         (details?'<details class="sg-row-detail"><summary>'+(long?'Ver conteúdo':'Detalhes')+(note?' · observação':'')+'</summary><div class="sg-row-detail-body">'+(long?'<div class="sg-detail-value"><small>Valor sugerido</small><div>'+esc(full)+'</div></div>':'')+(div?'<div class="sg-detail-value"><small>Registro atual</small><div>'+esc(it.kind==='tabela'&&Array.isArray(it.current)?JSON.stringify(it.current,null,2):dataBr(S(it.current)))+'</div></div>':'')+(note?'<p>'+esc(note)+'</p>':'')+(same?'<small class="muted">Mesmo documento · conferir conteúdo</small><button type="button" class="btn line sm" data-au="manter:'+k+'"'+(ro?' disabled':'')+'>Manter registro histórico</button>':'')+'</div></details>':'')+'</div></div>';
     }).join('')+'</div></section>';
   }).join('');
-  var conf = iguais.length ? '<details class="sg-ig"><summary>' + (pend.length ? '' : 'Tudo confere com a ficha · ') + iguais.length + ' campo(s) já iguais na ficha</summary><ul>' +
-    iguais.map(function (it) { return '<li><b>' + esc(it.label) + '</b> ' + esc(valor(it).slice(0, 160)) + (it.doc ? ' <small class="mono">ID ' + esc(it.doc) + '</small>' : '') + '</li>'; }).join('') + '</ul></details>' : '';
   var barra=elegiveis.length?'<div class="au-sug-toolbar"><div class="au-sug-pill" role="group" aria-label="Seleção e gravação das sugestões"><button type="button" class="au-sug-select" data-au="sug-todos" aria-pressed="'+(marc===elegiveis.length)+'"'+(ro?' disabled':'')+'><span class="au-sug-check" aria-hidden="true">'+(marc===elegiveis.length?'✓':marc?'−':'')+'</span><span>'+(marc===elegiveis.length?'Desmarcar todos':'Selecionar todos')+'</span></button><button type="button" class="au-sug-save" data-au="aplicar" title="Gravar os campos selecionados na ficha"'+(marc&&!ro?'':' disabled')+'>Gravar '+marc+'</button></div><small class="muted au-sug-count">'+marc+'/'+elegiveis.length+' selecionados</small></div>':'';
-  return '<div class="sg">'+barra+h+conf+'</div>';
+  return '<div class="sg">'+barra+h+(!pend.length?'<p class="muted">Nenhum campo pendente de conferência.</p>':'')+'</div>';
 }
 /* datas ISO (2025-07-01) aparecem como 01/07/2025 */
 function dataBr(t) { return String(t || '').replace(/\b(\d{4})-(\d{2})-(\d{2})\b/g, '$3/$2/$1'); }
@@ -802,6 +800,30 @@ function coberturaLocalizada(){
  });
  return groups;
 }
+function referenciasTempestividade(){
+ var g=GB(),empty={recursos:[],intimacoes:[],candidatos:[]};
+ if(!lidoDoProcesso()||sigBloq()||(SG()&&SG().sigiloso()))return empty;
+ var ids=function(x){return S(x).match(/\b\d{6,}\b/g)||[];},D=lista().filter(function(d){return !d.anexo&&!docBloq(d)&&!(SG()&&SG().docSigiloso(d));});
+ var R=linhasGravadas('origem','Recursos'),s=(A.sug||[]).find(function(x){return x.alvo==='origem.Recursos';}),sug=s&&Array.isArray(s.value)?s.value:[],known=new Set(R.reduce(function(o,r){return o.concat(ids(r.ids));},[]));
+ var recursos=R.filter(function(r){return ids(r.ids).length;}).map(function(r){return Object.assign({},r,{fonte:'Ficha'});});
+ sug.forEach(function(r){if(ids(r.ids).length&&!ids(r.ids).some(function(i){return known.has(i);}))recursos.push(Object.assign({},r,{fonte:'Extração · a conferir'}));});
+ var tipo=N(g.V&&g.V('triagem','Tipo de Julgamento')),ato=ids(g.V&&g.V('triagem','Impugnada - ID'));
+ if(!ato.length&&/apela|remessa/.test(tipo))ato=ids(g.V('origem','Sentença - ID'));
+ if(!ato.length&&/agravo de instrumento/.test(tipo)&&N(g.V('origem','1G - Decisão recorrida'))==='sim')ato=ids(g.V('origem','1G - Decisão ID'));
+ if(!ato.length&&/agravo interno/.test(tipo)&&N(g.V('origem','2G - Monocrática recorrida'))==='sim')ato=ids(g.V('origem','2G - Monocrática ID'));
+ var I=D.filter(function(d){return d.k==='intimacao'&&!/\bpauta\b|sessao de julgamento|inclusao em mesa/.test(N(d.tipo+' '+(d.desc||'')));}),candidatos=[];
+ recursos.forEach(function(r){var rid=ids(r.ids),rd=iso(r.data),ref=ids(r.id_decisao);if(!ref.length)ref=ato;
+ I.forEach(function(d){var dd=iso(d.data),doc=A.docs[d.id],body=doc&&doc.estado==='ok'?S(doc.texto):'';if(rd&&dd&&dd<=rd&&ref.length===1&&ids(body).indexOf(ref[0])>=0)candidatos.push(Object.assign({},d,{recurso:rid.join(', '),vinculo:'Menciona ID do ato recorrido · confirmar destinatário e marco inicial'}));});});
+ return {recursos:recursos,intimacoes:[],candidatos:candidatos};
+}
+function htmlCamposIguais(){
+ if(!lidoDoProcesso()||sigBloq()||(SG()&&SG().sigiloso()))return '';
+ if(!A.sug)calcular();
+ var L=(A.sug||[]).filter(function(it){return it.status==='igual'&&!preservado(it)&&!preenchido(it.alvo);});
+ if(!L.length)return '';
+ var groups=new Map();L.forEach(function(it){var k=it.sec||'Outros campos';if(!groups.has(k))groups.set(k,[]);groups.get(k).push(it);});
+ return '<details class="au-group-card au-equal-card"><summary class="au-group-head"><div class="au-group-title"><h4>Campos já iguais na ficha</h4></div><small class="au-group-count">'+L.length+' campo(s)</small></summary><div class="au-group-rows">'+Array.from(groups).map(function(pair){return '<div class="au-equal-subhead">'+esc(pair[0])+'</div>'+pair[1].map(function(it){var val=it.kind==='tabela'?(Array.isArray(it.value)?it.value.length:0)+' registro(s)':dataBr(S(it.value));return '<div class="au-group-row au-equal-row"><div><b>'+esc(it.label||it.key)+'</b><span>'+esc(val)+'</span></div><small class="au-row-state">'+(it.doc?'ID '+esc(it.doc)+' · ':'')+'Coincidente</small></div>';}).join('');}).join('')+'</div></details>';
+}
 function htmlLocalizados(){
  var groups=coberturaLocalizada();if(!groups)return '';
  function row(r){
@@ -811,7 +833,7 @@ function htmlLocalizados(){
  }
  var found=groups.filter(function(g){return g.rows.length;}),n=found.reduce(function(s,g){return s+g.rows.length;},0);
  return '<section class="au-localizados" aria-label="Localizados"><div class="au-loc-head"><h4>Localizados</h4><small>'+found.length+' categorias</small></div>'+
- (n?'<div class="au-loc-grid au-group-stack">'+found.map(function(g){return '<article class="au-loc-card au-group-card"><header class="au-group-head"><div class="au-group-title"><h4>'+esc(g.label)+'</h4></div><small class="au-group-count">'+g.rows.length+' '+(g.rows.length===1?'peça':'peças')+'</small></header><div class="au-group-rows">'+g.rows.slice(0,3).map(row).join('')+(g.rows.length>3?'<details class="au-loc-more"><summary>Mais '+(g.rows.length-3)+' peça(s)</summary>'+g.rows.slice(3).map(row).join('')+'</details>':'')+'</div></article>';}).join('')+'</div>':'<p class="muted">Nenhuma peça relevante identificada nesta leitura.</p>')+'</section>';
+ (n?'<div class="au-loc-grid au-group-stack">'+found.map(function(g){return '<article class="au-loc-card au-group-card"><header class="au-group-head"><div class="au-group-title"><h4>'+esc(g.label)+'</h4></div><small class="au-group-count">'+g.rows.length+' '+(g.rows.length===1?'peça':'peças')+'</small></header><div class="au-group-rows">'+g.rows.slice(0,3).map(row).join('')+(g.rows.length>3?'<details class="au-loc-more"><summary>Mais '+(g.rows.length-3)+' peça(s)</summary>'+g.rows.slice(3).map(row).join('')+'</details>':'')+'</div></article>';}).join('')+'</div>':'<p class="muted">Nenhuma peça relevante identificada nesta leitura.</p>')+htmlAuto(false)+htmlCamposIguais()+'</section>';
 }
 function resumoLeitura() {
  var todosD=lista().filter(function(d){return !docBloq(d);}),L=todosD.filter(function(d){return !d.anexo;}),nl=todosD.filter(function(d){return (A.docs[d.id]||{}).estado==='ok';}).length;
@@ -838,7 +860,7 @@ function htmlConferir() {
   var sg = htmlSugestoes(null),cv=coberturaLocalizada(),faltam=cv?cv.filter(function(g){return !g.rows.length&&['Decisão recorrida','Recursos','Contrarrazões','Parecer / manifestação MPF','Procuração / substabelecimento','Guia de preparo / GRU','Comprovante de preparo'].includes(g.label);}).map(function(g){return g.label;}):[];
   var falta=faltam.length?'<div class="au-loc-missing"><small>Não identificados nesta leitura (quando aplicáveis)</small><p>'+faltam.map(esc).join(' · ')+'</p><button type="button" class="lnk" data-au="ir1g">Consultar peças vinculadas do 1º grau</button></div>':'';
   var nA = autoItens().filter(function (x) { return preenchido(x.alvo); }).length;
-  return '<section class="card pc-sec" id="g-cf"><div class="pc-sh"><h3>A conferir</h3><small class="muted">' + [nA ? nA + ' preenchido(s)' : '', al.length ? al.length + ' alerta(s)' : '', pend ? pend + ' divergência(s)' : ''].filter(Boolean).join(' · ') + '</small></div>' + falta + htmlAuto(false) +
+  return '<section class="card pc-sec" id="g-cf"><div class="pc-sh"><h3>A conferir</h3><small class="muted">' + [al.length ? al.length + ' alerta(s)' : '', pend ? pend + ' campo(s) a conferir' : ''].filter(Boolean).join(' · ') + '</small></div>' + falta +
     (al.length ? '<div class="al-l">' + al.map(function (x) { var a = x[0];
       return '<div class="al-i ' + a.nivel + '"><span>' + esc(a.t) + '</span>' + (a.campo && vazioFicha(a.campo) ? '<button type="button" class="btn line sm" data-au="al:' + x[1] + '">Gravar “' + esc(a.valor) + '”</button>' : '') + '</div>'; }).join('') + '</div>' : '') +
     sg + '</section>';
@@ -915,7 +937,7 @@ function especificar(id, v) { A.esp[id] = v; clearTimeout(A.tEsp); A.tEsp = setT
 function especificarJa(id) { if (id in A.esp) { clearTimeout(A.tEsp); gravarEspecificacao(id); } }
 
 document.addEventListener('muta:prontuario', function () { var c = cnjAtual(); if (A.cnj && c && Muta.chaveProcesso(A.cnj) !== Muta.chaveProcesso(c)) { A.sug = null; } });
-window.MutaAutos = { barra: function () { var tela = window.MutaPje && window.MutaPje.tela ? window.MutaPje.tela() : ''; if ((!A.itens || !lidoDoProcesso()) && !A.lendo && !A.fila && window.MutaGabinete && window.MutaGabinete.irAutos) return '<p class="au-aviso"><span>Autos ainda não lidos.</span> <button type="button" class="lnk" data-au-ir>Ler na aba Autos</button></p>'; if (!A.itens || !lidoDoProcesso()) return '<div class="bar au-bl rt-ler">' + botaoLer() + '<small class="muted">' + (tela === 'autos' ? 'Leia os autos para conferir.' : 'Abra os autos digitais no PJe.') + '</small></div>'; return '<div class="bar au-bl rt-ler">' + botaoLer() + '</div>' + htmlAuto(true); }, sugestoes: function () { if (!A.itens || !lidoDoProcesso()||sigBloq()||(SG()&&SG().sigiloso())) return []; if (!A.sug) calcular(); return A.sug || []; }, ler: ler, extrair: extrair, extrairPrincipais: extrairPrincipais, htmlDocs: htmlDocs, htmlSituacao: htmlSituacao, htmlConferencia: htmlConferencia, htmlPreencher: htmlPreencher, htmlLeitura: htmlLeitura, htmlLocalizados:htmlLocalizados, doProcesso: function () { return A.itens && lidoDoProcesso() ? { lista: lista(), todos: !!A.tudo } : null; },
+window.MutaAutos = { referenciasTempestividade:referenciasTempestividade, barra: function () { var tela = window.MutaPje && window.MutaPje.tela ? window.MutaPje.tela() : ''; if ((!A.itens || !lidoDoProcesso()) && !A.lendo && !A.fila && window.MutaGabinete && window.MutaGabinete.irAutos) return '<p class="au-aviso"><span>Autos ainda não lidos.</span> <button type="button" class="lnk" data-au-ir>Ler na aba Autos</button></p>'; if (!A.itens || !lidoDoProcesso()) return '<div class="bar au-bl rt-ler">' + botaoLer() + '<small class="muted">' + (tela === 'autos' ? 'Leia os autos para conferir.' : 'Abra os autos digitais no PJe.') + '</small></div>'; return '<div class="bar au-bl rt-ler">' + botaoLer() + '</div>' + htmlAuto(true); }, sugestoes: function () { if (!A.itens || !lidoDoProcesso()||sigBloq()||(SG()&&SG().sigiloso())) return []; if (!A.sug) calcular(); return A.sug || []; }, ler: ler, extrair: extrair, extrairPrincipais: extrairPrincipais, htmlDocs: htmlDocs, htmlSituacao: htmlSituacao, htmlConferencia: htmlConferencia, htmlPreencher: htmlPreencher, htmlLeitura: htmlLeitura, htmlLocalizados:htmlLocalizados, doProcesso: function () { return A.itens && lidoDoProcesso() ? { lista: lista(), todos: !!A.tudo } : null; },
   cobertura: function(){if(sigBloq()||SG()&&SG().sigiloso())return null;var ids=idsNaFicha(),g=GB(),real=lidoDoProcesso(),D=real?lista().filter(function(d){return !docBloq(d);}):[],stored=g.V&&g.V('origem','Autos - Documentos'),seen=new Set(D.map(function(d){return S(d.id);}));(Array.isArray(stored)?stored:[]).forEach(function(d){if(!d||!S(d.id)||seen.has(S(d.id))||docBloq(d))return;seen.add(S(d.id));D.push({id:S(d.id),tipo:S(d.documento),data:d.data,historico:true});});return D.map(function(d){var x=real&&!d.historico?A.docs[d.id]:null;return {id:d.id,tipo:d.tipo,desc:d.desc,data:d.data,historico:!!d.historico,naFicha:!!ids[d.id]||naFicha(d.id),texto:!!(x&&x.estado==='ok'),gravado:!!(real&&!d.historico&&A.gravados[d.id])};});}, docsDoGrupo: docsDoGrupo, selecionar: selecionar, abrirTexto: abrirTexto, gravarMarcados: gravarMarcados, marcados: marcados, htmlConferir: htmlConferir, htmlAuto: htmlAuto, preenchido: preenchido, autoLigado: autoLigado, autoLigar: autoLigar, autoPreencher: autoPreencher,
   clique: clique, marcarSugestao: marcarSugestao, especificar: especificar, especificarJa: especificarJa, lista: lista, alertas: alertas, md: md, estado: function () { return A; },
   /* para testes: carrega uma cronologia e textos sem o PJe */

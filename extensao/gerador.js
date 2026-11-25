@@ -383,6 +383,16 @@
   }
 
   /* ---------- montagem ---------- */
+  function inventarioFicha(){
+    var G=GB(),F=G.modelo&&G.modelo(),fonte=G.fo?G.fo()||{}:{},A=CONTEXTO?null:window.MutaAutos,sug=A&&A.sugestoes?A.sugestoes():[],by=new Map(),seen=new Set(),L=[];
+    sug.forEach(function(s){if(s&&s.alvo&&s.status!=='igual'&&!(A.preenchido&&A.preenchido(s.alvo))){var x=by.get(s.alvo)||[];x.push(s);by.set(s.alvo,x);}});
+    ((F&&F.abas)||[]).forEach(function(a){(a.grupos||[]).forEach(function(gr){(gr.campos||[]).forEach(function(c){
+      var id=(c.secao||'acervo')+'.'+c.chave;if(seen.has(id))return;seen.add(id);
+      var x=c.secao?v(c.secao,c.chave):[c.chave].concat(c.fonte||[]).map(function(k){return fonte[k];}).find(function(z){return z!=null&&S(z);});
+      var reg=Array.isArray(x)?x.length>0:!!S(x),ss=by.get(id)||[];
+      L.push({alvo:id,rotulo:c.rotulo||c.chave,aba:a.aba,grupo:gr.grupo,tipo:c.tipo,apelido:c.apelido,valor:x,registrado:reg,estado:ss.some(function(s){return s.status==='conflito';})?'Divergência':!reg&&ss.length?'Extraído · a conferir':reg?'Registrado':'Sem registro',docs:ss.map(function(s){return s.doc;}).filter(Boolean).join(', ')});
+    });});});return L;
+  }
   function cobertura(){
     var tipo=tipoDetectado(),m=[];
     function add(sec,k,rot,etapa,check){var x=v(sec,k);var ok=check?check(x):Array.isArray(x)?x.length>0:!!S(x)&&!/\[VALIDAR:/.test(S(x));m.push({alvo:sec+'.'+k,rotulo:rot,etapa:etapa,ok:!!ok});}
@@ -411,10 +421,11 @@
     add('producao','Fundamento da sucumbência','Sucumbência (quando aplicável)','Dispositivo',function(){return !/\[VALIDAR:/.test(honorariosEditorial(tipo).texto);});
     return m;
   }
+  function htmlInventario(){var F=inventarioFicha(),groups=new Map();F.forEach(function(c){var k=c.aba+' · '+c.grupo;if(!groups.has(k))groups.set(k,[]);groups.get(k).push(c);});return F.length?'<details class="gr-cov-catalog"><summary>Catálogo completo da ficha · '+F.filter(function(c){return c.registrado;}).length+'/'+F.length+' registrados</summary><small class="muted">Inventário de todos os campos; nem todos são necessários ao pronunciamento. Sugestões não gravadas não compõem a minuta.</small>'+Array.from(groups).map(function(p){return '<details class="au-group-card"><summary class="au-group-head"><b>'+esc(p[0])+'</b><small>'+p[1].filter(function(c){return c.registrado;}).length+'/'+p[1].length+'</small></summary>'+p[1].map(function(c){return '<div class="au-group-row au-equal-row"><span>'+esc(c.rotulo)+'</span><small>'+esc(c.estado)+(c.docs?' · ID '+esc(c.docs):'')+'</small></div>';}).join('')+'</details>';}).join('')+'</details>':'';}
   function htmlCobertura(){
     var g=GB();if(!g.cnj||!g.cnj()||window.MutaSigilo&&window.MutaSigilo.bloqueado())return '';
     var L=cobertura(),N=L.filter(function(x){return x.ok;}).length;
-    return '<details class="gg"><summary><h4>Dados para a Minuta-Matriz</h4><span class="gn">'+N+'/'+L.length+'</span></summary><div class="gr"><div class="gf w"><small class="muted">Cobertura de campos mínimos; preenchido não significa revisão jurídica concluída.</small>'+['Identificação','Relatório','Fundamentação','Dispositivo'].map(function(e){return '<p><b>'+esc(e)+'</b></p><ul>'+L.filter(function(x){return x.etapa===e;}).map(function(x){return '<li>'+esc(x.rotulo)+' · '+(x.ok?'Registrado':'A conferir')+'</li>';}).join('')+'</ul>';}).join('')+'</div></div></details>';
+    return '<details class="gg"><summary><h4>Dados para a Minuta-Matriz</h4><span class="gn">'+N+'/'+L.length+'</span></summary><div class="gr"><div class="gf w"><small class="muted">Cobertura de campos mínimos; preenchido não significa revisão jurídica concluída.</small>'+['Identificação','Relatório','Fundamentação','Dispositivo'].map(function(e){return '<p><b>'+esc(e)+'</b></p><ul>'+L.filter(function(x){return x.etapa===e;}).map(function(x){return '<li>'+esc(x.rotulo)+' · '+(x.ok?'Registrado':'A conferir')+'</li>';}).join('')+'</ul>';}).join('')+htmlInventario()+'</div></div></details>';
   }
   function docs() {
     var tipo = ST.tipo || tipoDetectado(), k = ST.res || resDaFicha(tipo);
@@ -606,5 +617,5 @@
     return out;
   }
   function comporFicha(campos, fonte, tipo){var ant=CONTEXTO,t0=TIPO;try{CONTEXTO={V:function(sec,k){return campos[sec+'.'+k];},fo:function(){return fonte||{};}};TIPO=tipo||tipoDetectado();var rel=relatorio(TIPO),em=ementa(TIPO,resDaFicha(TIPO)),R={abertura_relatorio:rel[0],razoes_recursais:/^(Apelação|Agravo de Instrumento)$/.test(TIPO)?pRecursos(TIPO).join('\n\n'):'',contrarrazoes_relatorio:pContrarrazoes(TIPO),parecer_relatorio:pMpf()||'',caso_em_exame:em.sec[0][1].map(function(x){return x.t;}).join('\n'),questao_em_discussao:em.sec[1][1].map(function(x){return x.t;}).join('\n')};if(/^(Apelação|Remessa Necessária|Agravo de Instrumento)$/.test(TIPO)){R.resultado_decisao_recorrida=resultadoSentenca();R.comandos_dispositivos=comandosOrigem();R.frase_honorarios_origem=honorariosAbertura();}Object.assign(R,variaveisEditorial(TIPO,rel,em));Object.assign(R,fragmentosRecursos(TIPO));var qf=questoesFicha();if(qf.length){R.tese_juridica_adotada=qf.map(function(q){return questaoConfirmada(q)&&S(q.tese_adotada)||VAL('tese: '+textoQuestao(q));}).join('\n\n');R.aplicacao_ao_caso_concreto=qf.map(fundamentosQuestao).join('\n\n');R.dispositivos_legais_aplicaveis=refsQuestoes('dispositivos_legais');R.precedentes_aplicaveis=refsQuestoes('precedentes');}if(R.honorarios_ementa)em.sec[3][1][0].t=R.honorarios_ementa;return {tipo:TIPO,rel:rel,em:em,variaveis:R};}finally{CONTEXTO=ant;TIPO=t0;}}
-  window.MutaGerador = { comporFicha: comporFicha, cobertura: cobertura, htmlCobertura: htmlCobertura, pintar: pintar, abrir: abrir, modo: modo, html: html, acao: acao, docs: docs, _ST: ST, _t: { resultado: resultado, fraseHonorarios: fraseHonorarios, designa: designa, feminino: feminino } };
+  window.MutaGerador = { comporFicha: comporFicha, cobertura: cobertura, inventarioFicha: inventarioFicha, htmlCobertura: htmlCobertura, pintar: pintar, abrir: abrir, modo: modo, html: html, acao: acao, docs: docs, _ST: ST, _t: { resultado: resultado, fraseHonorarios: fraseHonorarios, designa: designa, feminino: feminino } };
 })();

@@ -168,7 +168,8 @@
     if(cfg.indexOf('recurso')>=0){var rec=g.V('origem','Recursos');if(Array.isArray(rec))rec.forEach(function(x){if(!x||restrito(x.ids))return;line('Recurso',[x.ids?'ID '+x.ids:'',x.parte,x.data].filter(Boolean).join(' · '));line('Razões',x.teses);});}
     if(cfg.indexOf('sentenca')>=0&&!restrito(g.V('origem','Sentença - ID'))){line('Sentença',g.V('origem','Sentença - ID'));line('Remessa na origem',g.V('origem','Sentença - Reexame'));line('Fundamento',g.V('origem','Sentença - Fundamento'));}
     if(cfg.indexOf('decisao')>=0&&!restrito(g.V('triagem','Impugnada - ID'))){line('Decisão',g.V('triagem','Impugnada - ID'));line('Síntese',g.V('triagem','Impugnada - Síntese'));}
-    docs.filter(function(d){return !d.anexo&&cfg.indexOf(d.k)>=0&&!(SG&&SG.docBloqueado(d));}).forEach(function(d){line(d.tipo||'Documento',['ID '+d.id,d.data].filter(Boolean).join(' · '));});
+    if(id==='tempest'){var tr=AU&&AU.referenciasTempestividade?AU.referenciasTempestividade():{candidatos:[]};tr.candidatos.forEach(function(d){line(d.vinculo,['ID '+d.id,d.data,'Recurso '+d.recurso].join(' · '));});line('Intimação do ato recorrido','Confirmar vínculo e marco inicial nos Autos');}
+    else docs.filter(function(d){return !d.anexo&&cfg.indexOf(d.k)>=0&&!(SG&&SG.docBloqueado(d));}).forEach(function(d){line(d.tipo||'Documento',['ID '+d.id,d.data].filter(Boolean).join(' · '));});
     return '<div class="rt-adm-doc"><div class="rt-adm-head"><b>Referências dos autos</b><button type="button" class="lnk" data-aba="Autos">Ver em Autos</button></div>'+(r.join('')||'<small class="muted">Nenhuma referência documental identificada.</small>')+'</div>';
   }
   function html(g, campoRot, questoesHtml, X) {

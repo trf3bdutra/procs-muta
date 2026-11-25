@@ -81,7 +81,7 @@
     contra:{group:'Recursos e contrarrazões',title:'Contrarrazões',keys:[['origem','Contrarrazões - Situação','Situação']],table:['origem','Contrarrazões'],cols:[['ids','ID'],['parte','Parte'],['data','Data'],['preliminares','Preliminares'],['teses','Teses']]},
     origem:{group:'Origem',title:'Origem',keys:[['origem','Origem - Juízo','Juízo'],['origem','Origem - Julgador','Julgador(a)'],['origem','Origem - Processo de referência','Processo de referência']]},
     custas:{group:'Outras peças e ocorrências',title:'Comprovantes de preparo',keys:[],cats:['custas']},
-    intim:{group:'Recursos e contrarrazões',title:'Intimações / publicações',keys:[],cats:['intimacao']}
+    intim:{group:'Recursos e contrarrazões',title:'Intimação do ato recorrido',keys:[],cats:['intimacao']}
   };
   var stepDocs={decisao:['sent'],impugnada:['imp'],prolator:['imp'],tempest:['rec','intim'],preparo:['custas'],repres:['proc'],reexame:['sent'],cabimento:['imp','rec'],vicios:['ac','rec'],impug:['imp','rec'],dialet:['sent','imp','rec'],mpf:['mpf'],contra:['contra'],efeito:['imp'],infring:['ac','contra'],retrat:['imp']};
   // As conclusões da triagem continuam editáveis no respectivo passo.
@@ -111,10 +111,11 @@
       else r.append(elem('span','',limit(brD(v))));p.append(r);}
     if(blocked(idValue)){box.append(elem('small','muted','Documento sigiloso · conteúdo restrito.'));return box;}
     d.keys.forEach(function(k){line(box,k[2],S(V(k[0],k[1])),k[2]==='ID');});
-    if(d.table){var rows=V(d.table[0],d.table[1]);if(Array.isArray(rows))rows.forEach(function(row){
-      if(!row)return;var p=elem('div','pv-docitem'),rid=row.ids||row.id;if(blocked(rid)){p.append(elem('small','muted','Documento sigiloso · conteúdo restrito.'));any=true;}else d.cols.forEach(function(c){line(p,c[1],S(row[c[0]]),c[1]==='ID');});if(p.childNodes.length)box.append(p);
+    if(d.table){var rows=V(d.table[0],d.table[1]);if(id==='rec'&&AU&&AU.referenciasTempestividade){var trR=AU.referenciasTempestividade();if(trR.recursos.length)rows=trR.recursos;}if(Array.isArray(rows))rows.forEach(function(row){
+      if(!row)return;var p=elem('div','pv-docitem'),rid=row.ids||row.id;if(blocked(rid)){p.append(elem('small','muted','Documento sigiloso · conteúdo restrito.'));any=true;}else {d.cols.forEach(function(c){line(p,c[1],S(row[c[0]]),c[1]==='ID');});if(row.fonte&&id==='rec')line(p,'Fonte',row.fonte,false);}if(p.childNodes.length)box.append(p);
     });}
-    if(d.cats&&leitura)list.filter(function(x){return !x.anexo&&d.cats.indexOf(x.k)>=0&&!(sig&&sig.docBloqueado(x));}).forEach(function(x){var p=elem('div','pv-docitem');line(p,'Documento',x.tipo||d.title,false);line(p,'ID',String(x.id||''),true);line(p,'Data',S(x.data),false);box.append(p);});
+    if(id==='intim'){var tr=AU&&AU.referenciasTempestividade?AU.referenciasTempestividade():{candidatos:[]};tr.candidatos.forEach(function(x){var p=elem('div','pv-docitem');line(p,'ID',String(x.id||''),true);line(p,'Data da juntada',S(x.data),false);line(p,'Recurso',x.recurso,true);line(p,'Vínculo',x.vinculo,false);box.append(p);});box.append(elem('small','muted','Confirme a intimação do ato recorrido e o marco inicial. Intimações de pauta excluídas.'));any=true;}
+    else if(d.cats&&leitura)list.filter(function(x){return !x.anexo&&d.cats.indexOf(x.k)>=0&&!(sig&&sig.docBloqueado(x));}).forEach(function(x){var p=elem('div','pv-docitem');line(p,'Documento',x.tipo||d.title,false);line(p,'ID',String(x.id||''),true);line(p,'Data',S(x.data),false);box.append(p);});
     if(!any)box.append(elem('small','muted',id==='mpf'?'Sem manifestação / hipótese registrada na ficha.':'Sem dados documentais registrados.'));
     else if(!idValue&&!d.table&&!d.cats)box.append(elem('small','muted','ID não registrado na ficha.'));
     return box;
