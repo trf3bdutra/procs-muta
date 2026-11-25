@@ -350,7 +350,9 @@ module.exports = async (req, res, u) => {
       const normal = v=>String(v||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim().toLowerCase();
       const conhecidos=new Set(equipe.flatMap(x=>[x.nome,...x.aliases].map(normal)));
       L.equipe().forEach(nome=>{if(!conhecidos.has(normal(nome))&&!/^(cm|dr\.? muta|carlos muta|des\.? carlos muta)$/i.test(nome)){equipe.push({nome,aliases:[],apelido:''});conhecidos.add(normal(nome));}});
-      return res.status(200).json({ ficha: F, operacional: op, fonte, sinais, equipe, gestor: L.gestor(u), controles: ativos(op, { metas: bMeta, sobrestados: bSobr, sensiveis: bSens }) });
+      let devolutivas=[], devolutivasErro=false;
+      try { const pen=await L.lerJson('apoio/equipe-pendencias.json'); devolutivas=(pen.dados.registros||[]).filter(t=>dg(t.numero)===dg(cnj)&&/^devolutiva\b/i.test(String(t.title||''))).map(t=>({id:t.id,autor:t.creator,destinatario:t.assignee,data:t.criadoEm,atualizado:t.atualizadoEm,situacao:t.stage,texto:t.description,sessao:t.sessao,resposta:t.resposta||''})); } catch(e) { devolutivasErro=e.status!==404; }
+      return res.status(200).json({ ficha: F, operacional: op, fonte, sinais, equipe, devolutivas, devolutivasErro, gestor: L.gestor(u), controles: ativos(op, { metas: bMeta, sobrestados: bSobr, sensiveis: bSens }) });
     }
     if (req.method !== 'POST') return res.status(405).json({ erro: 'método não aceito' });
     /* 0.38: inteiro teor dos documentos marcados na extensão (Autos › Peças e documentos › Gravar) */
