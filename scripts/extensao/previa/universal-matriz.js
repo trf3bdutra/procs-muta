@@ -43,7 +43,7 @@
   rows('triagem','Registro - Peças').forEach(r=>add({id:r.id,tipo:r.peca,data:r.data,detalhamento:r.nota||r.trecho}));
   rows('origem','Outras peças').forEach(r=>ids(r.ids,{tipo:r.tipo,data:r.data,detalhamento:r.texto}));
   rows('origem','Origem - Peças vinculadas 1G').forEach(r=>add({id:r.id,tipo:r.documento,data:r.data,instancia:'1º grau',cnj_referencia:r.cnj_referencia}));
-  [['Sentença - ID','Sentença','1º grau','Sentença - Data'],['1G - Decisão ID','Decisão','1º grau','1G - Decisão Data'],['2G - Monocrática ID','Decisão monocrática','2º grau','2G - Monocrática Data'],['Acórdão - ID','Acórdão','2º grau','2G - Acórdão Data']].forEach(x=>ids(V('origem',x[0]),{tipo:x[1],instancia:x[2],data:V('origem',x[3]),categoria:CAT[0]}));
+  [['Sentença - ID','Sentença','1º grau','Sentença - Data'],['1G - Decisão ID','Decisão','1º grau','1G - Decisão Data'],['2G - Monocrática ID','Decisão monocrática','2º grau','2G - Monocrática Data'],['Acórdão - ID','Acórdão','2º grau','2G - Acórdão Data']].forEach(x=>ids(V(x[0]==='Acórdão - ID'?'producao':'origem',x[0]),{tipo:x[1],instancia:x[2],data:V('origem',x[3]),categoria:CAT[0]}));
   ids(V('triagem','Impugnada - ID')||V('origem','Impugnada - ID'),{tipo:'Ato impugnado',categoria:CAT[0],pertinencia_atual:'Sim'});
   rows('origem','Recursos').forEach(r=>ids(r.ids||r.id,{tipo:r.tipo||'Recurso',data:r.data,categoria:CAT[1]}));
   rows('origem','Contrarrazões').forEach(r=>ids(r.ids||r.id,{tipo:'Contrarrazões',data:r.data,categoria:CAT[1]}));
@@ -54,7 +54,7 @@
   rows('origem','Classificação documental').forEach(add);
   return Array.from(M.values()).map(d=>Object.assign(d,{categoria:cat(d)}));
  }
- function model(){return campoModelo('origem','Classificação documental');}
+ function model(){var c=campoModelo('origem','Classificação documental');return c&&(c.colunas||[]).some(x=>x.chave==='titulo')&&(c.colunas||[]).some(x=>x.chave==='detalhamento')?c:null;}
  function button(a,t){return '<button type="button" class="btn line sm" data-pv2="'+esc(a)+'">'+esc(t)+'</button>';}
  function input(c,v){var k=c.chave,at=' data-pv2-col="'+esc(k)+'" aria-label="'+esc(c.rotulo)+'"',opts=k==='categoria'?CAT:k==='pertinencia_atual'?['Sim','Não','A conferir']:c.opcoes;
  if(opts){var l=[''].concat(opts);if(v&&!l.includes(v))l.push(v);return '<select'+at+'>'+l.map(x=>'<option value="'+esc(x)+'"'+(x===v?' selected':'')+'>'+esc(x||'—')+'</option>').join('')+'</select>';}
@@ -67,7 +67,9 @@
  L.sort((a,b)=>{var x=dateKey(a.data),y=dateKey(b.data);return (view==='categoria'?CAT.indexOf(a.categoria)-CAT.indexOf(b.categoria):0)||(!x&&!y?0:!x?1:!y?-1:(order==='asc'?1:-1)*x.localeCompare(y));});
  var h='<section class="pv2-index" id="pv2-index"><div class="pv2-head"><b>Índice documental integrado</b><small class="muted">'+D.length+' documentos</small>'+(model()&&editavel(model())?button('new','+ Peça'):'')+'</div><input class="pv2-search" data-pv2-query placeholder="Buscar ID, título ou detalhamento" aria-label="Buscar documentos" value="'+esc(query)+'"><div class="seg pv2-modes">'+['categoria','cronologia'].map(k=>'<button type="button" data-pv2="view:'+k+'" aria-selected="'+(view===k)+'">'+(k==='categoria'?'Por categoria':'Cronológico')+'</button>').join('')+'</div><div class="pv2-head"><label class="pv2-check"><input type="checkbox" data-pv2-relevant'+(relevant?' checked':'')+'> Em apreciação</label>'+button('order',order==='asc'?'Mais antigos primeiro':'Mais recentes primeiro')+'</div>'+form();
  var last='';L.forEach(d=>{if(view==='categoria'&&last!==d.categoria){last=d.categoria;h+='<h4 class="pv2-cat">'+esc(last)+'</h4>';}h+='<details class="pv2-doc"><summary><span><b>'+esc(d.titulo||d.tipo||'Documento')+'</b><small>'+esc([d.data||'Sem data',d.instancia,'ID '+d.id].filter(Boolean).join(' · '))+'</small></span>'+(N(d.pertinencia_atual)==='sim'?'<small class="pv2-current">Em apreciação</small>':'')+'</summary><div class="pv2-doc-body">'+(view==='cronologia'?'<small class="muted">'+esc(d.categoria)+'</small>':'')+(d.detalhamento?'<p>'+esc(d.detalhamento)+'</p>':'<small class="muted">Sem detalhamento registrado.</small>')+(d.ato_impugnado?'<small>Ato impugnado: '+esc(d.ato_impugnado)+'</small>':'')+(d.recursos_vinculados?'<small>Recursos: '+esc(d.recursos_vinculados)+'</small>':'')+'<div class="pv2-head">'+button('copy:'+d.id,'Copiar ID')+(model()&&editavel(model())?button('edit:'+d.id,'Editar peça'):'')+'</div></div></details>';});
- return h+(L.length?'':'<p class="muted">Nenhuma peça nesta visualização.</p>')+'</section>';}
+ return h+(L.length?'':'<p class="muted">Nenhuma peça nesta visualização.</p>')+(!model()?'<p class="muted">O servidor ainda não disponibilizou os novos campos documentais; índice somente para consulta.</p>':'')+'</section>';}
+ var oldRender=render0;
+ render0=function(){if(cnj!==G.cnj){cnj=G.cnj;editor=null;query='';fieldGroup='';fieldSearch='';relevant=false;}oldRender();};
  var baseAutos=corpoAutos;
  corpoAutos=function(){var t=document.createElement('template');t.innerHTML=baseAutos();var root=t.content.querySelector('#g-docs');if(root&&!restricted()){var x=document.createElement('div');x.innerHTML=index();var h=root.querySelector('.pc-sh');if(h)h.after(x.firstElementChild);else root.prepend(x.firstElementChild);}var box=document.createElement('div');box.append(t.content);return box.innerHTML;};
  /* Inventário de campos: acesso sob demanda, com os mesmos renderizadores e permissões. */
@@ -86,7 +88,7 @@
  caixa.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-pv2]');if(!b)return;e.preventDefault();e.stopImmediatePropagation();var a=b.dataset.pv2;
  if(a.startsWith('view:'))view=a.slice(5);else if(a==='order')order=order==='asc'?'desc':'asc';else if(a==='cancel')editor=null;else if(a.startsWith('copy:')){if(navigator.clipboard)navigator.clipboard.writeText(a.slice(5));return;}
  else if(a==='new'&&model()&&editavel(model())&&!restricted()){editor={_new:true,categoria:CAT[7]};}
- else if(a.startsWith('edit:')&&model()&&editavel(model())&&!restricted()){var d=docs().find(x=>x.id===a.slice(5));if(!d)return;editor=Object.assign({},d,{_original:d.id});}
+ else if(a.startsWith('edit:')&&model()&&editavel(model())&&!restricted()){var d=docs().find(x=>x.id===a.slice(5));if(!d)return;editor=Object.assign({},d,{titulo:d.titulo||d.tipo||'Documento',_original:d.id});}
  else if(a==='save'&&editor&&model()&&editavel(model())&&!restricted()){
  var err=$('pv2-error'),id=S(editor.id);if(!valid(id)||!S(editor.titulo)){if(err)err.textContent='Informe ID numérico e título.';return;}
  if(editor._original&&editor._original!==id){if(err)err.textContent='O ID existente não pode ser trocado; cadastre outra peça.';return;}
