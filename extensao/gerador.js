@@ -361,10 +361,42 @@
       '<button type="button" class="btn sm" data-gr-copia="' + id + '" title="Copiar para colar no PJe (com negrito e itálico)">Copiar</button></div><div class="gr-tx tx-j">' + html + '</div></section>';
   }
   function conta(t) { return (String(t).match(/\[VALIDAR:/g) || []).length; }
+
+  /* Folha única do HERO: as partes do pronunciamento permanecem juntas; dados faltantes são lacunas, nunca fatos presumidos. */
+  var FOLHA = [];
+  function folhaPartes(pron,D) {
+    function reg(k,label){return S(v('producao',k))||VAL(label||k);}
+    function ps(L){return L.filter(Boolean).map(function(p){return '<p>'+marca(p)+'</p>';}).join('');}
+    function part(id,t,L,h){return {id:id,titulo:t,texto:L.join('\n\n'),html:h||ps(L)};}
+    var fund=['Tese jurídica adotada','Aplicação ao caso concreto','Voto - Descrição'].map(function(k){return S(v('producao',k));}).filter(Boolean);
+    if(!fund.length)fund.push(VAL('desenvolver fundamentação jurídica e aplicação ao caso concreto'));
+    var prec=S(v('producao','Precedentes aplicáveis'));if(prec)fund.push(prec);
+    var dis=S(v('producao','Dispositivo do pronunciamento'));
+    var suc=S(v('producao','Fundamento da sucumbência'));var atos=S(v('producao','Providências determinadas'));
+    if(pron==='Acórdão (sessão)'){
+      var R=resultado(D.tipo,D.k),voto=['O Desembargador Federal Carlos Muta (Relator):','Senhores Desembargadores,'].concat(fund,[suc||honorariosEditorial(D.tipo).texto,dis||'Ante o exposto, '+R[0]+'.','É como voto.']);
+      var em=D.em,eh='<p><b>'+marca(em.cab)+'</b></p>'+em.sec.map(function(s){return '<p><b>'+esc(s[0])+'</b></p>'+s[1].map(function(x){return '<p><b>'+x.n+'.</b> '+marca(x.t)+'</p>';}).join('');}).join('')+'<p>__________</p>'+em.rod.map(function(r){return '<p>'+marca(r)+'</p>';}).join('');
+      return [part('ementa','Ementa',[emTexto(em)],eh),part('relatorio','Relatório',D.rel),part('voto','Voto',voto),part('acordao','Acórdão',['Vistos e relatados estes autos em que são partes as acima indicadas, a Turma Regional de Mato Grosso do Sul, '+VAL('quórum e resultado proclamado em sessão')+', nos termos do relatório e voto que ficam fazendo parte integrante do presente julgado.'])];
+    }
+    if(pron==='Outro destino'||!pron)return [];
+    if(pron==='Despacho')return [part('despacho','Despacho',[reg('Particularidades do relatório','contexto da providência'),atos||dis||VAL('providência a determinar')])];
+    var mono=S(v('producao','Mono - Fundamento'));if(mono)fund.unshift(mono);
+    var titulo=pron==='Decisão monocrática'?'Decisão monocrática':pron;
+    return [part('relatorio','Relatório',D.rel),part('fundamentacao','Fundamentação',fund),part('dispositivo','Dispositivo',[suc,dis||VAL('dispositivo adequado ao pronunciamento'),atos])];
+  }
+  function folhaHtml(g,D){
+    var pron=g.pronunciamento?g.pronunciamento():g.destino&&g.destino()==='monocratica'?'Decisão monocrática':g.destino&&g.destino()==='sessao'?'Acórdão (sessão)':'';
+    FOLHA=folhaPartes(pron,D);
+    if(!FOLHA.length)return '<p class="muted">Defina o pronunciamento em Triagem › Encaminhamento para montar a folha.</p>';
+    var cnj=g.cnj(),n=FOLHA.reduce(function(s,p){return s+conta(p.texto);},0);
+    return '<div class="hero-ger-sheet"><header class="hero-ger-head"><small class="muted">MINUTA-MATRIZ · FICHA DO PROCESSO</small><b>'+esc(pron)+'</b><small class="muted">'+esc(cnj)+' · '+FOLHA.length+' partes · '+n+' pontos a validar</small><div class="hero-ger-tools"><button type="button" class="btn line sm" data-gr-copia="folha">Copiar folha</button><a class="btn line sm" target="_blank" rel="noopener noreferrer" href="'+esc(window.Muta.SITE+'/amicus/compendium/#processo='+encodeURIComponent(cnj))+'">Abrir no Minutário</a></div><small class="muted">Prévia de redação: conferir lacunas, fundamentação e resultado. Nada é gravado.</small></header><nav class="hero-ger-toc" aria-label="Partes da peça">'+FOLHA.map(function(p){return '<a href="#gr-folha-'+p.id+'">'+esc(p.titulo)+'</a>';}).join('')+'</nav>'+FOLHA.map(function(p){var k=conta(p.texto);return '<section class="hero-ger-part" id="gr-folha-'+p.id+'"><header class="hero-ger-part-head"><h4>'+esc(p.titulo)+'</h4>'+(k?'<small class="gr-nv">'+k+' a validar</small>':'')+'<button type="button" class="btn line sm" data-gr-copia="folha-'+p.id+'">Copiar</button></header><div class="gr-tx">'+p.html+'</div></section>';}).join('')+'</div>';
+  }
+
   var ULT = null;
   function html() {
     var g = GB();if(window.MutaSigilo&&window.MutaSigilo.bloqueado())return '<p class="muted">Acesso restrito.</p>'; if (!g.cnj || !g.cnj()) return '<div class="empty">Abra um processo no PJe para gerar as peças.</div>';
     if (g.modelo && !g.modelo()) return '<div class="empty">Lendo o prontuário do processo ' + esc(g.cnj()) + '…</div>';
+    if(novoHero()){if(ST.cnj!==g.cnj()){ST.cnj=g.cnj();FOLHA=[];}ST.tipo='';ST.res='';var H=docs();ULT=H;return folhaHtml(g,H);}
     /* 0.52.1 · ato monocrático: relatório e ementa do Gerador são de acórdão; a decisão monocrática se monta na Minuta-Matriz do Compendium */
     if (g.destino && g.destino() === 'monocratica') return '<section class="card pc-sec gr-cfg"><div class="pc-sh"><h3>Gerador</h3><small class="muted">ato monocrático</small></div>' +
       '<p class="muted">O Gerador monta relatório e ementa de acórdão. Este processo está com destino monocrático: a decisão se monta na Minuta-Matriz do Compendium (pronunciamento Monocrática). Se o destino estiver errado, corrija-o no cartão do processo.</p></section>';
@@ -384,6 +416,7 @@
       (PECAS.pr ? bloco('pr', 'Proclamação do julgamento', '<p>' + marca(D.procl) + '</p>', conta(D.procl)) : '');
   }
   function textos(id) {
+    if(id==='folha'||id.indexOf('folha-')===0){var P=id==='folha'?FOLHA:FOLHA.filter(function(p){return 'folha-'+p.id===id;});return {t:P.map(function(p){return p.titulo.toUpperCase()+'\n\n'+p.texto;}).join('\n\n'),h:P.map(function(p){return '<h3>'+esc(p.titulo)+'</h3>'+p.html;}).join('')};}
     var D = ULT || docs();
     if (id === 'rel') return { t: 'RELATÓRIO\n\n' + D.rel.join('\n\n'), h: D.rel.map(function (p) { return '<p>' + esc(p) + '</p>'; }).join('') };
     if (id === 'disp') return { t: D.disp.join('\n\n'), h: D.disp.map(function (p) { return '<p>' + esc(p) + '</p>'; }).join('') };

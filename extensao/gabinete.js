@@ -833,7 +833,7 @@ function corpoProcesso() {
   if(rot==='sol')return '<div id="hero-sol-main"></div>';
   if(rot==='tri')return h;
   producaoIndexCampos().forEach(function(c){ja[c.secao+'.'+c.chave]=1;});
-  return producaoIndex()+producaoMinuta()+(heroV53()?'<section class="hero-v53-gerador"><h4 class="pm-mer-h">Gerador</h4><div id="ger-app"></div></section>':'');
+  return producaoMinuta()+(heroV53()?'<section class="hero-v53-gerador"><h4 class="pm-mer-h">Gerador</h4><div id="ger-app"></div></section>':'')+producaoIndex();
 }
 /* 0.54 · Roteiro de produção: todos os campos da ficha que a Minuta-Matriz do Compendium usa (@apelido), do destino do caso
    (sessão ou monocrática). Preenchimento automatizado: a leitura dos autos põe sozinha o que acha nos campos vazios
@@ -1628,7 +1628,7 @@ function heroOrganizarProntuario(){
     var encTr=el('section','hero-v53-enc card'),encHd=el('div','hero-v53-section-head'),encTitle=el('h4','pm-mer-h','Encaminhamento');
     encTr.id='hero-encaminhamento';encTr.append(encHd,tipoSec,encFields);encHd.append(encTitle);
     var sit=encFields.querySelector('.pm-sitj');if(sit)encHd.append(sit);
-    var destActions=el('div','hero-v53-dest-actions');destTop.append(destActions);
+    var destActions=el('div','hero-v53-dest-actions');encFields.append(destActions);destTop.append(enquad);
     function destDialog(titulo,nodes){if(!nodes.length)return;var btn=el('button','btn line sm',titulo),dlg=el('dialog','hero-v53-field-dialog'),dh=el('h4','pm-mer-h',titulo),close=el('button','btn line sm','Fechar');btn.type=close.type='button';dlg.append(dh);nodes.forEach(function(n){dlg.append(n);});dlg.append(close);close.onclick=function(){dlg.close();};btn.onclick=function(){if(!dlg.open)dlg.showModal();};destActions.append(btn);encTr.append(dlg);}
     var notaKeys=['triagem.Seleção Prévia - Nota','triagem.Art. 932 - Nota de enquadramento','triagem.Destino - Outro Nota'];
     var notaNodes=notaKeys.map(function(k){var n=Array.from(encFields.querySelectorAll('[data-fk]')).find(function(e){return e.dataset.fk===k;});return n&&n.closest('.gf,.pv-field,.pv-idrow');}).filter(Boolean);
@@ -2040,7 +2040,7 @@ window.MutaGabinete = { recarregar: function () { carregar(true); }, gravarPende
   render: function () { render(); }, cnj: function () { return G.cnj; }, modelo: function () { return G.F; }, op: function () { return G.op; }, fo: function () { return G.fo; },
   api: function (p, o) { return ses.api(p, o); },
   gravado: gravado, V: V, F: function (k) { return fonteVal({ fonte: [k] }); }, marcar: marcar, gravar: function () { return gravarJa(); }, ir: function (aba) { if (aba === 'Triagem' || aba === 'Roteiro') {aba = 'Processo';if(heroV53())G.rot='tri';} if(heroV53()&&aba==='Produção'){aba='Processo';G.rot='pro';} if(heroV53()&&aba==='Resumo'){aba='Processo';G.rot='res';} if (MODOS.indexOf(aba) >= 0) { G.aba = aba; render(); } },
-  destino: function () { return G.F ? destino() : ''; },
+  destino: function () { return G.F ? destino() : ''; }, pronunciamento: function(){var i=pronAtual();return i>=0?PRON[i][0]:'';},
   casoPrec: function () { return G.cnj ? casoPrec() : null; },
   pautaHtml: pautaHtml,
   abrirReferencia: function(){G.pecAb=G.pecAb||{};G.pecAb.Origem=true;G.aba='Autos';if(window.MutaAbas)window.MutaAbas.ir('pront');render();},
