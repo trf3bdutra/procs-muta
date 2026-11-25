@@ -1977,6 +1977,201 @@
        "subgrupo": "Preparo · situação"
       },
       {
+       "chave": "Preparo por recurso",
+       "rotulo": "Preparo individualizado por recurso / recorrente",
+       "secao": "triagem",
+       "tipo": "tabela",
+       "colunas": [
+        {
+         "chave": "situacao",
+         "rotulo": "Preparo",
+         "tipo": "lista",
+         "opcoes": [
+          "Comprovado",
+          "Justiça gratuita",
+          "Gratuidade pedida no recurso",
+          "Isento (ente público/MP)",
+          "Assistência da DPU",
+          "Recolhido sem comprovante do Tesouro (STN)",
+          "Recolhido a menor",
+          "Recolhido após a interposição",
+          "Não recolhido",
+          "Não se aplica",
+          "Não verificado"
+         ]
+        },
+        {
+         "chave": "recorrente",
+         "rotulo": "Recorrente a que se refere",
+         "tipo": "texto"
+        },
+        {
+         "chave": "id_recurso",
+         "rotulo": "ID do recurso",
+         "tipo": "texto"
+        },
+        {
+         "chave": "id_guia",
+         "rotulo": "ID da guia de recolhimento",
+         "tipo": "texto"
+        },
+        {
+         "chave": "id_comprovante",
+         "rotulo": "ID do comprovante de pagamento",
+         "tipo": "texto"
+        },
+        {
+         "chave": "tipo_comprovante",
+         "rotulo": "Tipo de comprovante",
+         "tipo": "lista",
+         "opcoes": [
+          "Consulta de Pagamentos de GRU / PagTesouro (STN)",
+          "Comprovante bancário / PIX",
+          "Guia sem comprovante",
+          "Outro",
+          "Não localizado",
+          "Não verificado"
+         ]
+        },
+        {
+         "chave": "conferencia_stn",
+         "rotulo": "Conferência do comprovante do Tesouro (STN)",
+         "tipo": "lista",
+         "opcoes": [
+          "Confirmado",
+          "Não apresentado",
+          "Divergente",
+          "A conferir",
+          "Não se aplica"
+         ]
+        },
+        {
+         "chave": "codigo_receita",
+         "rotulo": "Código de receita",
+         "tipo": "texto"
+        },
+        {
+         "chave": "ug",
+         "rotulo": "Unidade gestora (UG)",
+         "tipo": "texto"
+        },
+        {
+         "chave": "vinculacao",
+         "rotulo": "Vinculação ao processo / recorrente",
+         "tipo": "lista",
+         "opcoes": [
+          "Conferida",
+          "Divergente",
+          "A conferir",
+          "Não se aplica"
+         ]
+        },
+        {
+         "chave": "valor_devido",
+         "rotulo": "Valor devido (R$)",
+         "tipo": "texto"
+        },
+        {
+         "chave": "valor_recolhido",
+         "rotulo": "Valor recolhido (R$)",
+         "tipo": "texto"
+        },
+        {
+         "chave": "data_recolhimento",
+         "rotulo": "Data do recolhimento",
+         "tipo": "data"
+        },
+        {
+         "chave": "data_comprovacao",
+         "rotulo": "Data da juntada do comprovante",
+         "tipo": "data"
+        },
+        {
+         "chave": "id_ajg",
+         "rotulo": "ID da decisão / pedido de gratuidade",
+         "tipo": "texto"
+        },
+        {
+         "chave": "situacao_ajg",
+         "rotulo": "Situação do pedido de gratuidade",
+         "tipo": "lista",
+         "opcoes": [
+          "Deferida",
+          "Indeferida",
+          "Revogada",
+          "Pendente",
+          "A conferir",
+          "Não se aplica"
+         ]
+        },
+        {
+         "chave": "fundamento_dispensa",
+         "rotulo": "Fundamento da isenção / dispensa",
+         "tipo": "texto-longo"
+        },
+        {
+         "chave": "regularizacao",
+         "rotulo": "Providência de regularização",
+         "tipo": "lista",
+         "opcoes": [
+          "Complementação",
+          "Recolhimento em dobro",
+          "Comprovar recolhimento",
+          "Sanar erro no preenchimento da guia",
+          "Apreciar gratuidade",
+          "Outra providência",
+          "Não se aplica"
+         ]
+        },
+        {
+         "chave": "id_intimacao",
+         "rotulo": "ID da decisão / intimação para regularizar",
+         "tipo": "texto"
+        },
+        {
+         "chave": "prazo_regularizacao",
+         "rotulo": "Prazo final para regularização",
+         "tipo": "data"
+        },
+        {
+         "chave": "cumprimento",
+         "rotulo": "Cumprimento da providência",
+         "tipo": "lista",
+         "opcoes": [
+          "Aguardando intimação",
+          "Intimado · prazo em curso",
+          "Cumprida",
+          "Cumprida parcialmente",
+          "Prazo decorrido",
+          "A conferir",
+          "Não se aplica"
+         ]
+        },
+        {
+         "chave": "conferencia",
+         "rotulo": "Conferência e observações do preparo",
+         "tipo": "texto-longo"
+        },
+        {
+         "chave": "ajg",
+         "rotulo": "AJG",
+         "tipo": "texto"
+        },
+        {
+         "chave": "gratuidade_tipo_pessoa",
+         "rotulo": "Tipo de pessoa (gratuidade)",
+         "tipo": "lista",
+         "opcoes": [
+          "Pessoa natural",
+          "Pessoa jurídica",
+          "Não se aplica"
+         ]
+        }
+       ],
+       "apelido": "preparo_por_recurso",
+       "subgrupo": "Preparo · individualização"
+      },
+      {
        "rotulo": "Recorrente a que se refere",
        "chave": "Preparo - Recorrente",
        "tipo": "texto",
