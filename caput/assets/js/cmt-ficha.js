@@ -1054,27 +1054,7 @@ function ensureHost() {
   host.addEventListener('drop', function (ev) { host.classList.remove('is-drop'); var f = ev.dataTransfer && ev.dataTransfer.files && ev.dataTransfer.files[0]; if (!f || !ST.teor) return; ev.preventDefault(); lerTxt(f); });
   doc.body.appendChild(host); return host;
 }
-function antesHero(continuar) {
-  if (!host || ST.heroPass) return false;
-  var frame = host.querySelector('.fx-hero-tri iframe.cmt-hero-frame');
-  if (!frame) return false;
-  if (ST.heroBusy) return true;
-  ST.heroBusy = true; var cnj = ST.cnj, ad = ST.ad;
-  Promise.resolve().then(function () {
-    var g = frame.contentWindow && frame.contentWindow.MutaGabinete;
-    return g && g.gravarPendente ? g.gravarPendente() : null;
-  }).then(function (j) {
-    if (j && j.recusados && j.recusados.length) throw Error('Campos não gravados: ' + j.recusados.join(', '));
-    return ad.carregar(cnj);
-  }).then(function (d) {
-    ST.heroBusy = false; if (ST.cnj !== cnj || ST.ad !== ad) return;
-    if (d) ST.d = d; ST.heroPass = true;
-    try { continuar(); } finally { ST.heroPass = false; }
-  }).catch(function (e) { ST.heroBusy = false; avisar('Não foi possível sincronizar o prontuário: ' + (e.message || e), 'warn'); });
-  return true;
-}
 function abrir(cnj, ad) {
-  if (antesHero(function () { abrir(cnj, ad); })) return;
   ensureHost();
   ST.ad = ad || ST.ad || {}; ST.cnj = cnjFmt(cnj); ST.d = null; ST.err = ''; ST.edit = false; ST.draft = {}; ST.busy = false; ST.view = 'ficha'; ST.mostra = {}; ST.histAll = false; ST.obsEd = false; ST.obsTx = ''; descartarTeor();
   ST.tab = tabNorm((ad && ad.aba) || 'resumo'); ST.vz = {};
@@ -1090,7 +1070,6 @@ function abrir(cnj, ad) {
 }
 function fechar(force) {
   if (!host) return;
-  if (antesHero(function () { fechar(force); })) return;
   if (!force && Object.keys(ST.draft).length && !window.confirm('Descartar as alterações não salvas da ficha?')) return;
   descartarTeor(); host.classList.remove('on', 'is-drop'); host.setAttribute('aria-hidden', 'true'); host.innerHTML = '';
   doc.documentElement.classList.remove('cmt-fx-open'); doc.removeEventListener('keydown', onKey, true); ST.edit = false; ST.draft = {};
@@ -1111,7 +1090,6 @@ function avisar(t, tipo) { try { if (ST.ad.avisar) ST.ad.avisar(t, tipo); } catc
 /* ───── desenho ───── */
 function render() {
   if (!host) return;
-  if (antesHero(render)) return;
   var m = host.querySelector('.fx-main'), y = m ? m.scrollTop : 0, b = host.querySelector('.fx2-body'), yb = b ? b.scrollTop : 0, tb = render._tab;
   host.innerHTML = ST.view === 'doc' && ST.d ? docView() : fichaView();
   var m2 = host.querySelector('.fx-main'); if (m2) m2.scrollTop = y;
@@ -1244,14 +1222,6 @@ function fichaView() {
 }
 function fichaView2() {
   var corpo = ST.tab === 'resumo' ? abaResumo() : abaGrupos(abaDe(ST.tab) || F().abas[0]);
-  if (ST.tab === 'Triagem' && !ST.edit && ST.ad.prontuarioTriagem) {
-    var hp = ST.ad.prontuarioTriagem(ST.cnj, ST.d, ST.ad.leitura);
-    if (hp) {
-      var st = val('triagem','Status da triagem'), triado = st === 'Triado' || (st !== 'A triar' && !!(val('triagem','Triado em') || val('triagem','Registro - Atualizado em') || val('triagem','Registro - Triagem')));
-      var ac = ST.ad.leitura ? '' : '<button type="button" class="fx-pill" data-fx="cog-tri-status" data-status="' + (triado ? 'A triar' : 'Triado') + '">' + (triado ? 'Reabrir triagem' : 'Concluir triagem') + '</button>';
-      corpo = card('Status da análise', '<p>' + (triado ? 'Triado' : 'A triar') + ' · independente do destino e das pendências.</p>', {acoes:ac}) + card('Prontuário da triagem', hp, {cls:'fx-hero-tri'});
-    }
-  }
   var nav = '<nav class="fx-nav fx2-nav" aria-label="Seções da ficha"><div class="fx-seg" role="tablist">' + abas().map(function (a) {
     return '<button type="button" role="tab" data-fx-tab="' + E(a[0]) + '" aria-selected="' + (ST.tab === a[0]) + '">' + E(a[1]) + (a[2] ? '<span class="fx-badge' + (a[3] ? ' is-ce' : '') + '">' + a[2] + '</span>' : '') + '</button>';
   }).join('') + '</div><span class="fx-grow"></span>' + (ST.ad.leitura ? '' : '<div class="fx-seg fx-acts2" role="group" aria-label="Edição"><button type="button" data-fx="editar" aria-pressed="' + ST.edit + '" title="Liberar a edição dos campos do gabinete">' + svg('edit') + (ST.edit ? 'Editando' : 'Editar') + '</button></div>') + '</nav>';
@@ -1371,8 +1341,15 @@ function abaGruposCorpo(A) {
   var dn = destino(), h = '', n = 0;
   if (A.destino && A.destino !== dn) return card('Não se aplica a este processo', '<p>' + (A.destino === 'sessao' ? 'O destino do julgamento é decisão monocrática: o processo não vai à pauta. A decisão fica em Produção › Decisão monocrática.' : 'Esta parte só vale para a decisão monocrática.') + '</p><p>Para mudar, use o destino no fim do fluxo, acima.</p>');
   if (A.seletor) h += '<p class="fx-info-p">' + svg('rule') + '<span><b>' + E(A.seletor.rotulo) + ':</b> ' + (dn === 'monocratica' ? 'decisão monocrática' : destinoDef() ? 'sessão (acórdão)' : 'a definir na triagem (o fluxo mostra o da sessão)') + '. ' + E(A.seletor.regra || '') + '</span></p>';
-  if (A.aba === 'Triagem') h += cardDestino() + cardTempest();
-  var gs = (A.grupos || []).filter(function (g) { return (!g.destino || g.destino === dn) && grupoVisivel(g) && !(ST.v2 && !ST.edit && FX2_SO_LADO.indexOf(g.grupo) >= 0); }), vazios = [];
+  if (A.aba === 'Triagem') {
+    if (!ST.edit) {
+      var st = val('triagem','Status da triagem'), triado = st === 'Triado' || (st !== 'A triar' && !!(val('triagem','Triado em') || val('triagem','Registro - Atualizado em') || val('triagem','Registro - Triagem')));
+      var ac = ST.ad.leitura ? '' : '<button type="button" class="fx-pill" data-fx="cog-tri-status" data-status="' + (triado ? 'A triar' : 'Triado') + '"' + (ST.busy ? ' disabled' : '') + '>' + (triado ? 'Reabrir triagem' : 'Concluir triagem') + '</button>';
+      h += card('Status da análise', '<p><b>' + (triado ? 'Triado' : 'A triar') + '</b> · independente do destino e das pendências.</p>', {acoes:ac});
+    }
+    h += cardDestino() + cardTempest();
+  }
+  var gs = (A.grupos || []).filter(function (g) { return !(A.aba === 'Triagem' && !ST.edit && g.grupo === 'Conclusão da análise') && (!g.destino || g.destino === dn) && grupoVisivel(g) && !(ST.v2 && !ST.edit && FX2_SO_LADO.indexOf(g.grupo) >= 0); }), vazios = [];
   if (A.aba === 'Processo') gs = gs.map(function (g, i) { var k = PRI_PROC.indexOf(g.grupo); return [k < 0 ? 99 + i : k, g]; }).sort(function (a, b) { return a[0] - b[0]; }).map(function (x) { return x[1]; });
   h += gs.map(function (g) {
     var cheios = (g.campos || []).filter(temValor), tudo = ST.edit || ST.vzTodos || ST.vz[g.grupo], nv = (g.campos || []).length - cheios.length;
@@ -1645,8 +1622,7 @@ function gravar(campos, msgOk) {
 function onClick(ev) {
   if (ev.target === host) return; /* clique fora não fecha (evita perder a edição) */
   var t = ev.target.closest('[data-fx],[data-fx-tab],[data-fx-vz],[data-fx-inc],[data-fx-ir],[data-fx-tba],[data-fx-tbx],[data-fx-confdest]'); if (!t) return;
-  if (antesHero(function () { onClick(ev); })) return;
-  if (t.getAttribute('data-fx') === 'cog-tri-status') { gravar({'triagem.Status da triagem':t.getAttribute('data-status')},'Status da triagem atualizado.').catch(function () {}); return; }
+  if (t.getAttribute('data-fx') === 'cog-tri-status') { if (ST.ad.leitura || ST.busy) return; gravar({'triagem.Status da triagem':t.getAttribute('data-status')},'Status da triagem atualizado.').catch(function () {}); return; }
   if (t.hasAttribute('data-fx-confdest')) { var dv = t.getAttribute('data-fx-confdest'); if (ST.edit) { ST.draft['producao.Destino'] = dv; render(); } else gravar({ 'producao.Destino': dv }, dv === 'Monocrática' ? 'Destino confirmado: decisão monocrática.' : dv === 'Sessão' ? 'Destino confirmado: sessão.' : 'Destino desfeito: volta a definir na triagem.').catch(function () {}); return; }
   if (t.hasAttribute('data-fx-vz')) { var gz = t.getAttribute('data-fx-vz'); if (gz === '*') ST.vzTodos = !ST.vzTodos; else ST.vz[gz] = !ST.vz[gz]; render(); return; }
   if (t.hasAttribute('data-fx-tab')) { ST.tab = tabNorm(t.getAttribute('data-fx-tab')); render(); var m = host.querySelector('.fx-main'); if (m) m.scrollTop = 0; return; }
@@ -1684,7 +1660,6 @@ function onClick(ev) {
   if (a === 'doc-json') { var b = new Blob([JSON.stringify({ processo: ST.cnj, operacional: op(), fonte: fo() }, null, 2)], { type: 'application/json;charset=utf-8' }), u = URL.createObjectURL(b), l = doc.createElement('a'); l.href = u; l.download = 'Ficha_' + dg(ST.cnj) + '.json'; doc.body.appendChild(l); l.click(); l.remove(); setTimeout(function () { URL.revokeObjectURL(u); }, 3000); return; }
 }
 function onChange(ev) {
-  if (antesHero(function () { onChange(ev); })) return;
   var t = ev.target;
   if (t.hasAttribute('data-fx-destino')) { if (t.value === destSel()) return; var dp = t.value.split('|'), dm = { 'producao.Destino': dp[0] || '', 'producao.Destino - Situação': dp[1] || '' }; if (ST.edit) { Object.assign(ST.draft, dm); render(); } else gravar(dm, dp[0] === 'Monocrática' ? 'Destino: decisão monocrática' + (dp[1] ? ' · ' + dp[1].toLowerCase() : '') + '.' : dp[0] === 'Sessão' ? 'Destino: colegiado' + (dp[1] ? ' · ' + dp[1].toLowerCase() : '') + '.' : dp[0] ? 'Destino: outro destino.' : 'Destino a definir na triagem.').catch(function () {}); return; }
   if (t.hasAttribute('data-fx-file')) { var f = t.files && t.files[0]; if (f) lerTxt(f); t.value = ''; return; }
