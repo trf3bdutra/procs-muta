@@ -18,5 +18,8 @@
    const r=await fetcher('/api/acesso?gh=1&office=1&p=',{method:'GET',credentials:'same-origin',cache:'no-store'});
    if(!r.ok)throw new Error('A sessão do Office não tem acesso ao acervo (HTTP '+r.status+').');
  }
- W.CognitioAuth={lerSessao,entrar,ponte};
+ function podeGerarRelatorio(s){
+   return !!(s&&typeof s.usuario==='string'&&s.usuario.trim()&&(s.gestor===true||s.perfil==='editor'||s.usuario.trim().toLowerCase()==='bruno'));
+ }
+ W.CognitioAuth={lerSessao,entrar,ponte,podeGerarRelatorio};
 })(typeof window!=='undefined'?window:globalThis);
