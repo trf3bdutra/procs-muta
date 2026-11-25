@@ -65,7 +65,7 @@ function controlesDe(fo, op) {
 /* ───── estado ───── */
 var ST = { cnj: '', ad: null, d: null, err: '', tab: 'resumo', edit: false, draft: {}, busy: false, view: 'ficha', mostra: {}, histAll: false, teor: null, vz: {}, vzTodos: false };
 /* organização: a aba Pauta fica no fim da Produção (a aba Controles especiais se chama Monitoramento); quem abre a ficha na aba Pauta cai na Produção */
-var PAUTA = 'Pauta', ROT_CE = 'Monitoramento especial', PRI_PROC = ['Autuação', 'Matéria', 'Partes', 'Tramitação'];
+var PAUTA = 'Pauta', ROT_CE = 'Monitoramento especial', PRI_PROC = ['Identificação e Autuação', 'Caso, Conteúdo e Questões', 'Partes', 'Tramitação', '1º grau', '2º grau', 'Autuação', 'Matéria'];
 ST.v2 = true;
 function tabNorm(t) { return t === PAUTA ? (ST.v2 ? 'Produção' : CE) : t; }
 function temValor(c) { return c.tipo === 'tabela' ? linhas(c.secao, c.chave).length > 0 : !!S(valorCampo(c)).trim(); }
@@ -537,6 +537,10 @@ function fxAcompAction(a,t){
 function fxAcompInput(t){if(!t.hasAttribute('data-fx-tr-k')||!ST.edit||ST.ad.leitura)return false;var m=fxTrMap(),p=m&&m.passos[+t.dataset.fxTrI],k=t.dataset.fxTrK;if(!p)return true;var v=t.type==='checkbox'?t.checked:t.value;if(p[k]!==v){p[k]=v;if(k==='feito')fxTrLog(m,p,v?'concluído':'reaberto');fxTrStore(m);}var b=host.querySelector('[data-fx="salvar"]');if(b)b.textContent='Salvar alterações ('+Object.keys(ST.draft).length+')';return true;}
 function fxAcompValid(){if(Object.prototype.hasOwnProperty.call(ST.draft,FX_TR)){var m=fxTrMap();if(!m||m.passos.some(function(p){return !S(p.texto).trim();}))return 'Preencha a descrição de todos os passos do Trâmite.';}if(Object.prototype.hasOwnProperty.call(ST.draft,FX_HJ)&&ST.draft[FX_HJ].some(function(x){return !x.data||!x.evento||(['Retirada','Adiamento','Vista','Suspensão','Conversão em diligência'].indexOf(x.evento)>=0&&!S(x.justificativa).trim());}))return 'Informe data, evento e justificativa das intercorrências.';return '';}
 
+function fxGrau(g){
+ var by=new Map();(g.campos||[]).forEach(function(c){var k=c.subgrupo||'Dados';if(!by.has(k))by.set(k,[]);by.get(k).push(c);});
+ return Array.from(by.entries()).map(function(pair){var title=pair[0],C=pair[1],flag=C.find(function(c){return /^[12]G - .*recorrid[ao]$/.test(c.chave);}),cheios=C.filter(temValor),flagHtml=flag?campo(flag):'',rest=(ST.edit?C:cheios).filter(function(c){return c!==flag;}),on=flag&&sim(valorCampo(flag));return '<details class="fx-subgrupo" style="padding:10px 0;border-bottom:1px solid #dce4df"'+(ST.edit||cheios.length?' open':'')+'><summary style="cursor:pointer;font-weight:650">'+E(title)+(on?' <span class="fx-chip t-ouro">Recorrida</span>':'')+'</summary><div class="fx-grid" style="padding-top:8px">'+flagHtml+rest.map(campo).join('')+'</div>'+(!rest.length?'<p class="fx-dim">Sem dados registrados.</p>':'')+'</details>';}).join('');
+}
 function abaGruposCorpo(A) {
   var dn = destino(), h = '', n = 0;
   if (A.destino && A.destino !== dn) return card('Não se aplica a este processo', '<p>' + (A.destino === 'sessao' ? 'O destino do julgamento é decisão monocrática: o processo não vai à pauta. A decisão fica em Produção › Decisão monocrática.' : 'Esta parte só vale para a decisão monocrática.') + '</p><p>Para mudar, use o destino no fim do fluxo, acima.</p>');
@@ -544,8 +548,9 @@ function abaGruposCorpo(A) {
   var analiseStatus='', registrosHtml='';
   var gs = (A.grupos || []).filter(function (g) { return !(ST.v2 && A.aba==='Triagem' && g.grupo==='Sinalizações') && (!g.destino || g.destino === dn) && grupoVisivel(g) && !(ST.v2 && !ST.edit && FX2_SO_LADO.indexOf(g.grupo) >= 0); }), vazios = [];
   if (A.aba === 'Processo') gs = gs.map(function (g, i) { var k = PRI_PROC.indexOf(g.grupo); return [k < 0 ? 99 + i : k, g]; }).sort(function (a, b) { return a[0] - b[0]; }).map(function (x) { return x[1]; });
-  if(ST.v2)gs=gs.map(function(g){return Object.assign({},g,{campos:g.campos.filter(function(c){return (g.grupo==='Matéria'||['Detalhamento do caso','Síntese Processual','Síntese Fática'].indexOf(c.chave)<0)&&['Alegações','Observações'].indexOf(c.chave)<0;})});}).filter(function(g){return g.campos.length;});
+  if(ST.v2)gs=gs.map(function(g){return Object.assign({},g,{campos:g.campos.filter(function(c){return (['Matéria','Caso, Conteúdo e Questões'].indexOf(g.grupo)>=0||['Detalhamento do caso','Síntese Processual','Síntese Fática','Alegações'].indexOf(c.chave)<0)&&c.chave!=='Observações';})});}).filter(function(g){return g.campos.length;});
   h += gs.map(function (g) {
+    if(A.aba==='Processo'&&['1º grau','2º grau'].indexOf(g.grupo)>=0)return card(g.grupo,fxGrau(g),{n:('0'+(++n)).slice(-2)});
     if(A.aba==='Triagem'&&g.grupo==='Análise e Acompanhamento')return card(g.grupo,fxAcomp(g),{n:('0'+(++n)).slice(-2)});
     var analise=A.aba==='Triagem'&&/^(Análise e Indexação|Análise|Conclusão da análise)$/.test(g.grupo), adm=A.aba==='Triagem'&&g.grupo==='Admissibilidade e regularidade';
     if(analise&&ST.v2)g=Object.assign({},g,{campos:g.campos.filter(function(c){return ['Destino - Situação','Destino - Confirmado em','Destino - Confirmado por'].indexOf(c.chave)<0 && (ST.edit||c.chave!=='Status da triagem');})});
