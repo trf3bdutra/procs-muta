@@ -7,10 +7,11 @@ var EDM=null;try{EDM=JSON.parse($('#editor-meta').textContent);}catch(e){EDM=nul
 var EDS={col:'mod',id:null,q:'',tipoNovo:'preferencia',token:'',conf:null,dirty:false,prev:false,f:{mod:{},par:{},pec:{},dir:{},nor:{}},
   orig:{mod:{},par:{},pec:{},dir:{},nor:{}},dlg:'',restaura:null,lido:false};
 var EDCOL={mod:'Modelos-matriz',par:'Parágrafos-padrão',pec:'Peças do Editorial',dir:'Diretrizes',nor:'Normas'};
+if(window.VDM_COLLECTIO){EDCOL={mod:'Modelos',par:'Parágrafos-padrão'};}
 var EDARQ={mod:'modelos',par:'paragrafos',pec:'pecas',dir:'diretrizes',nor:'normas'};
 /* aberto dentro do painel do desembargador (/editor/?cmt=1): grava em nome do CMT, só parágrafos, peças e diretrizes,
    e depois de gravar oferece avisar a equipe (mural e notificações de todos) */
-var EDCMT=!!window.VDM_PAGINA_EDITOR&&/[?&]cmt=1(?:&|$)/.test(location.search);
+var EDCMT=!!window.VDM_PAGINA_EDITOR&&!window.VDM_COLLECTIO&&/[?&]cmt=1(?:&|$)/.test(location.search);
 var EDCMTK=(function(){try{return localStorage.getItem('cmt_k')||sessionStorage.getItem('cmt_k')||'';}catch(e){return '';}})();
 if(EDCMT){delete EDCOL.mod;delete EDCOL.nor;EDCOL.par='Parágrafos';EDCOL.pec='Peças';EDS.col='par';document.documentElement.classList.add('ed-cmt');}
 /* gravação pelo servidor do site (login da Ex Officio + acesso de editor) */
@@ -147,7 +148,7 @@ function edMarcaCampos(l){return esc(l).replace(/\{\{([^}]*)\}\}|\{([^}|]*)(?:\|
 function edAtualizaPrevia(){var p=$('#ed-prev');if(p&&EDS.prev)p.innerHTML=edPrevia();}
 
 /* ---------- painel ---------- */
-function edAbrir(col,id){if(EDS.dirty&&!edAplicar(true))return;EDS.col=col||EDS.col;EDS.id=id||EDS.id;if(col&&id)EDS.id=id;EDS.conf=null;var o=$('#ed-ov');if(!o){o=document.createElement('div');o.id='ed-ov';o.className='ed-ov';o.setAttribute('role','dialog');o.setAttribute('aria-label','Editor do Compendium');document.body.appendChild(o);}
+function edAbrir(col,id){if(window.VDM_COLLECTIO&&(!edSrv()||col&&!['mod','par'].includes(col)))return;if(EDS.dirty&&!edAplicar(true))return;EDS.col=col||EDS.col;EDS.id=id||EDS.id;if(col&&id)EDS.id=id;EDS.conf=null;var o=$('#ed-ov');if(!o){o=document.createElement('div');o.id='ed-ov';o.className='ed-ov';o.setAttribute('role','dialog');o.setAttribute('aria-label',window.VDM_COLLECTIO?'Editor dos bancos do Collectio':'Editor do Compendium');document.body.appendChild(o);}
   o.hidden=false;document.body.classList.add('ed-on');base().then(function(){edLeRascunho();edRender();}).catch(function(e){o.innerHTML='<p class="empty">Base indisponível ('+esc(e.message)+').</p>';});}
 function edFechar(){if(EDS.dirty&&!edAplicar(true))return;var o=$('#ed-ov');if(o)o.hidden=true;document.body.classList.remove('ed-on');}
 function edFiltrar(L){var c=EDS.col,f=EDS.f[c],q=nz(EDS.q);
@@ -368,8 +369,9 @@ document.body.classList.add('vdm-ed');
   function alvo(){var m=/^#(mod|par|pec|dir|nor)=(.+)$/.exec(location.hash||'');return m?[m[1],decodeURIComponent(m[2])]:[];}
   function semAcesso(){var o=$('#ed-ov');if(!o){o=document.createElement('div');o.id='ed-ov';o.className='ed-ov';document.body.appendChild(o);}o.hidden=false;document.body.classList.add('ed-on');
     var A=window.CMT_ACESSO?window.CMT_ACESSO():{};o.innerHTML='<div class="ed-top"><b class="ed-tit">Editor</b><span style="flex:1"></span><a class="btn ghost" href="/modus/">Ir para o Compendium</a></div><div class="empty ed-vazio"><p>'+(A.usuario?'O login <b>'+esc(A.usuario)+'</b> não tem acesso de editor.':'Entre com o login da Ex Officio para editar.')+'</p><p class="meta">Quem edita está em apoio/acessos.json, no procs-muta.</p>'+(A.usuario?'':'<p><button class="btn" data-acentra>Entrar</button></p>')+'</div>';}
+  window.VDM_abrirEditorBanco=function(col){if(edSrv())edAbrir(col==='par'?'par':'mod');};
   if(!window.VDM_PAGINA_EDITOR)return;
-  function abre(){var a=alvo();if(edSrv()||!window.CMT_SITE){var o=$('#ed-ov');if(o&&!o.querySelector('.ed-body'))o.remove();edAbrir(a[0],a[1]);}else semAcesso();}
+  function abre(){var a=alvo();if(window.VDM_COLLECTIO&&(!a.length||!['mod','par'].includes(a[0])))return;if(edSrv()||!window.CMT_SITE){var o=$('#ed-ov');if(o&&!o.querySelector('.ed-body'))o.remove();edAbrir(a[0],a[1]);}else semAcesso();}
   document.addEventListener('cmt-acesso',abre);window.addEventListener('hashchange',function(){var a=alvo();if(a.length&&(edSrv()||!window.CMT_SITE))edAbrir(a[0],a[1]);});})();
 /* ---------- campos: automáticos (@apelido, da ficha do processo; atalho @) e manuais ({{orientação}}): barra sobre o texto em edição ---------- */
 var EDV={ta:null,ini:-1,q:'',sel:0,itens:[]};
