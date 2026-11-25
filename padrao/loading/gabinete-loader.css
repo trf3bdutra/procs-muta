@@ -123,14 +123,14 @@
 #entrada .en-top .cmtl-login-brand{width:78px;height:auto;display:block}
 #entrada .en-main,.cmt-entry-main{display:grid;grid-template-columns:minmax(300px,500px) minmax(300px,460px);align-items:center;justify-content:center;gap:clamp(32px,7vw,120px);padding:clamp(30px,7vh,90px) clamp(18px,5vw,72px);max-width:1440px;margin:auto;width:100%;box-sizing:border-box}
 #entrada .en-story{grid-column:1;grid-row:1;color:#f2f0e7}#entrada .en-card{grid-column:2;grid-row:1}
-#entrada .en-card,.cmt-entry-card{box-sizing:border-box;background:#142f35f5!important;border:1px solid #8aab9f66!important;border-top:3px solid #d4a643!important;border-radius:2px!important;padding:clamp(22px,3vw,38px)!important;box-shadow:0 24px 80px #091c26aa!important;color:#f2f0e7}
-#entrada .en-card h1,.cmt-entry-card h2{font:600 clamp(26px,3vw,36px)/1.1 Figtree,system-ui,sans-serif;letter-spacing:-.04em;margin:8px 0 10px}
+.cmt-entry-card{box-sizing:border-box;background:#142f35f5!important;border:1px solid #8aab9f66!important;border-top:3px solid #d4a643!important;border-radius:2px!important;padding:clamp(22px,3vw,38px)!important;box-shadow:0 24px 80px #091c26aa!important;color:#f2f0e7}
+.cmt-entry-card h2{font:600 clamp(26px,3vw,36px)/1.1 Figtree,system-ui,sans-serif;letter-spacing:-.04em;margin:8px 0 10px}
 #entrada .en-story h2,.cmt-entry-story h1{font:650 clamp(42px,6vw,78px)/.98 Figtree,system-ui,sans-serif;letter-spacing:-.055em;margin:12px 0 20px;color:#f2f0e7}
 #entrada .en-story h2 em,.cmt-entry-story h1 em{font-style:normal;color:#e6c27a}
 #entrada .en-story ol{border-top:1px solid #e6c27a55;padding-top:16px}
 #entrada .en-story p,.cmt-entry-story p,.cmt-entry-card p{color:#d0ddd7;line-height:1.55}
-#entrada .en-card input,.cmt-entry-card input{box-sizing:border-box;width:100%;border-radius:2px!important;border:1px solid #75918a;background:#0c242b;color:#f4f2e9;padding:12px;font:inherit}
-#entrada .en-go,.cmt-entry-card button{border-radius:2px!important;border:1px solid #d4a643;padding:12px 14px;background:#e1b34e;color:#142b30;font:700 14px Figtree,system-ui,sans-serif;cursor:pointer;width:100%;margin-top:12px}
+.cmt-entry-card input{box-sizing:border-box;width:100%;border-radius:2px!important;border:1px solid #75918a;background:#0c242b;color:#f4f2e9;padding:12px;font:inherit}
+.cmt-entry-card button{border-radius:2px!important;border:1px solid #d4a643;padding:12px 14px;background:#e1b34e;color:#142b30;font:700 14px Figtree,system-ui,sans-serif;cursor:pointer;width:100%;margin-top:12px}
 #entrada .cmtl-auth-status{display:flex;gap:10px;align-items:center;justify-content:center;margin-top:12px;font-size:12px}
 #entrada .cmtl-auth-status .cmtl-brand,.cmt-entry-card button .cmtl-brand{width:22px!important;height:22px!important;display:inline-block;vertical-align:middle}
 .cmt-entry-overlay{position:fixed;inset:0;z-index:30000;display:grid;place-items:center;overflow:auto}
@@ -143,3 +143,12 @@
 #entrada[hidden],.cmt-entry[hidden],.cmtl-auth-status[hidden]{display:none!important}
 @media(max-width:800px){#entrada .en-main,.cmt-entry-main{grid-template-columns:1fr;gap:24px;max-width:540px}#entrada .en-story{display:none}#entrada .en-card{grid-column:1}.cmt-entry-story img{width:118px;margin-bottom:10px}.cmt-entry-story h1{font-size:40px;margin:8px 0}.cmt-entry-story p{margin:8px 0}.cmt-entry-overlay{display:block}}
 @media(prefers-reduced-motion:reduce){.cmtl-brand,.cmtl-local-brand{animation:none!important}}
+
+/* Identidade negativa e grafismos institucionais em escala arquitetónica. */
+#entrada:not([hidden]),.cmt-entry{background:linear-gradient(110deg,#19452e30,#153f3e38 55%,#102d3938),url("/padrao/loading/grafismo-login.svg") center/cover no-repeat,#19452e!important}
+#entrada:before,.cmt-entry:before{background:linear-gradient(90deg,#12382b20,transparent 50%,#102d3920)}
+#entrada .en-top .cmtl-login-brand{width:clamp(144px,18vw,230px);height:auto}
+.cmt-entry-story img{width:min(340px,85%)}
+.cmtl-mark,.cmt-load[data-cmt-loader="legacy"] .cmt-ld-mk{width:120px!important;height:120px!important}
+.cmtl-mark .cmtl-brand,.cmt-load[data-cmt-loader="legacy"] .cmt-ld-mk .cmtl-brand{width:90px!important;height:90px!important}
+@media(max-width:800px){#entrada .en-top .cmtl-login-brand{width:140px}.cmt-entry-story img{width:180px}}

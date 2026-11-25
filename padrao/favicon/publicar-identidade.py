@@ -6,7 +6,7 @@ import sys
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
-VERSION = "20261125c"
+VERSION = "20261125d"
 FAMILIES = {
     "monitor": "caput", "caput": "caput", "office": "office",
     "equipe": "office", "exofficio": "office", "cmt": "office",
@@ -29,7 +29,7 @@ def apply(html, fam):
         inner = ICONS.sub("", MARKS.sub("", m[2]))
         inner = re.sub(r"""<link\b[^>]*href=["'][^"']*/padrao/loading/gabinete-loader\.css[^"']*["'][^>]*>""", "", inner, flags=re.I)
         inner = re.sub(r"""<script\b[^>]*src=["'][^"']*/padrao/loading/gabinete-loader\.js[^"']*["'][^>]*>\s*</script>""", "", inner, flags=re.I)
-        inner += '\n<link rel="stylesheet" href="/padrao/loading/gabinete-loader.css?v=20261125c">\n<script defer src="/padrao/loading/gabinete-loader.js?v=20261125c"></script>\n'
+        inner += '\n<link rel="stylesheet" href="/padrao/loading/gabinete-loader.css?v=20261125d">\n<script defer src="/padrao/loading/gabinete-loader.js?v=20261125d"></script>\n'
         icon = f'<link rel="icon" type="image/svg+xml" href="/padrao/favicon/{fam}.svg?v={VERSION}">'
         apple = f'<link rel="apple-touch-icon" sizes="180x180" href="/padrao/favicon/{fam}.png?v={VERSION}">'
         return m[1] + "\n<!-- favicon:cmt · identidade GAB.18810 -->\n" + icon + "\n" + apple + "\n<!-- /favicon:cmt -->\n" + inner + m[3]
@@ -45,7 +45,7 @@ def main(public):
         src = HERE / (name + ".svg")
         shutil.copyfile(src, fav / src.name)
         cairosvg.svg2png(url=str(src), write_to=str(fav / (name + ".png")), output_width=180, output_height=180)
-    for name in ("gab18810.svg", "estrela.svg", "grafismo-login.svg", "grafismo-loading.svg", "gabinete-loader.js", "gabinete-loader.css"):
+    for name in ("gab18810.svg", "gab18810-negativa.svg", "estrela.svg", "grafismo-login.svg", "grafismo-loading.svg", "gabinete-loader.js", "gabinete-loader.css"):
         shutil.copyfile(ROOT / "padrao/loading" / name, loading / name)
     for page in public.rglob("*.html"):
         fam = family(page.relative_to(public).as_posix().rsplit("/", 1)[0])

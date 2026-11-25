@@ -22,7 +22,7 @@ var SCREENS={
 function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[c]})}
 function svg(cls){return '<svg'+(cls?' class="'+cls+'"':'')+' viewBox="319.34 233.85 63.7 71.05" aria-hidden="true">'+PATHS.map(function(d){return '<path d="'+d+'" fill="currentColor"/>'}).join('')+'</svg>'}
 function copy(el,o){var id=(o&&o.screen)||el.dataset.cmtLoaderScreen||"inline",b=Object.assign({},SCREENS[id]||SCREENS.inline,o||{});b.office=b.office||el.dataset.cmtLoaderOffice||"Gabinete do Des. Fed. Carlos Muta";return b}
-function brand(){return '<img class="cmtl-brand" src="/padrao/loading/estrela.svg?v=20261125c" alt="" width="80" height="80">'}
+function brand(){return '<img class="cmtl-brand" src="/padrao/loading/estrela.svg?v=20261125d" alt="" width="80" height="80">'}
 function fullMarkup(el,o){var b=copy(el,o),title=b.heading||b.focus?'<h1 class="cmtl-heading">'+esc(b.heading||"")+(b.focus?'<em>'+esc(b.focus)+'</em>':'')+'</h1>':'';return '<div class="cmtl-watermark">'+svg()+'</div><section class="cmtl-content" role="status" aria-live="polite"><span class="cmtl-mark">'+brand()+'</span><p class="cmtl-identity">'+esc(b.office)+'</p>'+title+(b.welcome?'<p class="cmtl-welcome">'+esc(b.welcome)+'</p>':'')+'<div class="cmtl-track"><i></i></div><p class="cmtl-stage">'+esc(b.stage||"Carregando…")+'</p></section>'}
 function inlineMarkup(el,o){var b=copy(el,o);return '<div class="cmtl-inline" role="status" aria-live="polite"><span class="cmtl-mini">'+brand()+'</span><div class="cmtl-inline-copy"><b>'+esc(b.stage||"Carregando…")+'</b><div class="cmtl-inline-track"><i></i></div>'+(b.detail?'<span>'+esc(b.detail)+'</span>':'')+'</div></div>'}
 function adoptLegacy(el){el.classList.add("cmtl-legacy");var star=el.querySelector(".cmt-ld-mk");if(star&&!star.querySelector(".cmtl-brand"))star.innerHTML=brand();var bar=el.querySelector(".cmt-ld-b");if(bar&&!bar.querySelector("i"))bar.appendChild(D.createElement("i"))}
@@ -38,7 +38,7 @@ function bindLogin(){
  if(!form||!btn||form.dataset.cmtBrandReady)return;
  form.dataset.cmtBrandReady="1";
  var top=D.querySelector("#entrada .en-top");
- if(top){var old=top.querySelector("i");if(old)old.remove();var img=D.createElement("img");img.className="cmtl-login-brand";img.src="/padrao/loading/gab18810.svg?v=20261125c";img.alt="GAB. 18810";top.prepend(img);}
+ if(top){var old=top.querySelector("i");if(old)old.remove();var img=D.createElement("img");img.className="cmtl-login-brand";img.src="/padrao/loading/gab18810-negativa.svg?v=20261125d";img.alt="GAB. 18810";top.prepend(img);}
  var host=D.createElement("div");host.className="cmtl-auth-status";host.hidden=true;host.setAttribute("role","status");host.innerHTML=brand()+"<span>Confirmando seu acesso…</span>";btn.insertAdjacentElement("afterend",host);
  function sync(){host.hidden=!btn.disabled;}
  new MutationObserver(sync).observe(btn,{attributes:true,attributeFilter:["disabled"]});sync();
@@ -50,7 +50,7 @@ function bindAmicus(){
  var key="cmt-amicus-visitor";
  try{if(sessionStorage.getItem(key)==="1")return;}catch(e){}
  var screen=D.createElement("section");screen.id="am-welcome";screen.className="cmt-entry cmt-entry-overlay";screen.setAttribute("aria-label","Boas-vindas ao Amicus Curiae");screen.hidden=true;
- screen.innerHTML='<div class="cmt-entry-main"><div class="cmt-entry-story"><img src="/padrao/loading/gab18810.svg?v=20261125c" alt="GAB. 18810"><small>GABINETE DO DES. FED. CARLOS MUTA</small><h1>Amicus <em>Curiae.</em></h1><p>Pesquisa jurisprudencial, referências jurídicas e ferramentas do gabinete.</p></div><form class="cmt-entry-card" autocomplete="on"><small>ACESSO AO PORTAL</small><h2>Boas-vindas.</h2><p>Entre com sua conta da equipe ou continue como visitante.</p><label for="am-user">Usuário</label><input id="am-user" name="usuario" autocomplete="username" required><label for="am-pass">Senha</label><input id="am-pass" name="senha" type="password" autocomplete="current-password" required><p class="cmt-entry-error" role="alert" hidden></p><button type="submit">Entrar</button><button type="button" class="cmt-visitor">Acessar como visitante</button><p class="cmt-entry-note">Acesso de visitante: somente recursos públicos.</p></form></div>';
+ screen.innerHTML='<div class="cmt-entry-main"><div class="cmt-entry-story"><img src="/padrao/loading/gab18810-negativa.svg?v=20261125d" alt="GAB. 18810"><small>GABINETE DO DES. FED. CARLOS MUTA</small><h1>Amicus <em>Curiae.</em></h1><p>Pesquisa jurisprudencial, referências jurídicas e ferramentas do gabinete.</p></div><form class="cmt-entry-card" autocomplete="on"><small>ACESSO AO PORTAL</small><h2>Boas-vindas.</h2><p>Entre com sua conta da equipe ou continue como visitante.</p><label for="am-user">Usuário</label><input id="am-user" name="usuario" autocomplete="username" required><label for="am-pass">Senha</label><input id="am-pass" name="senha" type="password" autocomplete="current-password" required><p class="cmt-entry-error" role="alert" hidden></p><button type="submit">Entrar</button><button type="button" class="cmt-visitor">Acessar como visitante</button><p class="cmt-entry-note">Acesso de visitante: somente recursos públicos.</p></form></div>';
  D.body.appendChild(screen);
  var form=screen.querySelector("form"),submit=form.querySelector('[type=submit]'),guest=form.querySelector(".cmt-visitor"),err=form.querySelector('[role=alert]');
  function close(){screen.remove();D.documentElement.classList.remove("cmt-entry-open");}
@@ -67,7 +67,7 @@ function afterLogin(name){
 }
 W.GabineteLoader.afterLogin=afterLogin;
 
-function bootAll(){boot();bindLogin();bindAmicus();D.querySelectorAll(".load").forEach(function(el){if(el.dataset.cmtBrandReady||el.children.length||!/^\s*(?:Carregando|Lendo|Preparando|Consultando|Buscando|Sincronizando|Aguarde)/i.test(el.textContent))return;el.dataset.cmtBrandReady="1";var img=D.createElement("img");img.className="cmtl-local-brand";img.src="/padrao/loading/estrela.svg?v=20261125c";img.alt="";el.prepend(img);});}
+function bootAll(){boot();bindLogin();bindAmicus();D.querySelectorAll(".load").forEach(function(el){if(el.dataset.cmtBrandReady||el.children.length||!/^\s*(?:Carregando|Lendo|Preparando|Consultando|Buscando|Sincronizando|Aguarde)/i.test(el.textContent))return;el.dataset.cmtBrandReady="1";var img=D.createElement("img");img.className="cmtl-local-brand";img.src="/padrao/loading/estrela.svg?v=20261125d";img.alt="";el.prepend(img);});}
 function start(){bootAll();var pending=false;new MutationObserver(function(records){if(pending||!records.some(function(r){return Array.prototype.some.call(r.addedNodes,function(n){return n.nodeType===1&&(n.matches("[data-cmt-loader],.load,#en-form")||n.querySelector("[data-cmt-loader],.load,#en-form"));});}))return;pending=true;requestAnimationFrame(function(){pending=false;bootAll();});}).observe(D.body,{childList:true,subtree:true});}
 if(D.readyState==="loading")D.addEventListener("DOMContentLoaded",start);else start();
 })(window,document);
