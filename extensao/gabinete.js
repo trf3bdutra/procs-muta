@@ -1133,7 +1133,8 @@ function heroOrganizarProntuario(){
   var assuntoPrincipal=S(R['Assunto CNJ']||fonteVal({fonte:['Assunto']})),assuntoComp=S(gravado('triagem','Registro - Assunto detalhado'))||S(V('triagem','Assunto detalhado'));
   function normalAssunto(v){return N(S(v)).replace(/\s+/g,' ').trim();}
   var assuntoStack=el('div','hero-assunto-stack'),principal=Array.from(as.children).find(function(x){return !x.classList.contains('hero-secao');});if(principal)assuntoStack.append(principal);as.append(assuntoStack);
-  if(G.adEd||(assuntoComp&&normalAssunto(assuntoComp)!==normalAssunto(assuntoPrincipal)))html(assuntoStack,assuntoDetalhado());
+  if(assuntoComp&&normalAssunto(assuntoComp)!==normalAssunto(assuntoPrincipal)){var sub=el('button','hero-case-preview',assuntoComp);sub.type='button';sub.title='Editar assunto detalhado em Caso, Conteúdo e Questões';sub.onclick=function(){show(2);};assuntoStack.append(sub);}
+  if(S(V('triagem','Detalhamento do caso'))){var resumo=el('button','hero-case-preview hero-case-detail',S(V('triagem','Detalhamento do caso')));resumo.type='button';resumo.title='Editar detalhamento em Caso, Conteúdo e Questões';resumo.onclick=function(){show(2);};id.append(resumo);}
   /* Um editor de detalhamento; os dois campos antigos são conservados e concatenados na leitura. */
   var dkey='triagem.Detalhamento do caso',dv=S(V('triagem','Detalhamento do caso'));
   var dt=el('div','hero-detalhamento'),db=el('button','hero-detail-text',dv),expand=el('button','hero-detail-expand','Expandir');
@@ -1170,16 +1171,17 @@ function heroOrganizarProntuario(){
       if(x.matches('h4')||labelText==='Classe'||labelText==='Conclusão / resultado'||labelText==='Tipo de julgamento'||x.querySelector('.rt-tsel,[data-fk="producao.Voto - Resultado"],[data-pv-jg]'))return;
       if(x.classList.contains('pv-idrow')&&labelText==='Assunto CNJ'){var dlm=el('dl','pc-dl'),line=el('div');line.append(el('dt','','Assunto CNJ'),el('dd','',S(x.querySelector('.pv-value')&&x.querySelector('.pv-value').textContent)));dlm.append(line);materia.append(dlm);return;}
       if(x.querySelector('[data-pv-field="triagem.Tema"],[data-pv-field="triagem.Especificidades"],[data-fk="triagem.Tema"],[data-fk="triagem.Especificidades"]'))return;
+      if(/^(Síntese processual|Síntese fática|Detalhamento do caso|Questões|Alegações|Assunto detalhado)$/i.test(labelText)||x.querySelector('[data-fk="triagem.Síntese Processual"],[data-fk="triagem.Síntese Fática"],[data-pv-field="triagem.Síntese Processual"],[data-pv-field="triagem.Síntese Fática"],.pv-sint'))return;
       mg.append(x);
     });}
   }else{
     var dlm=el('dl','pc-dl'),line=el('div');line.append(el('dt','','Assunto CNJ'),el('dd','',S(R['Assunto CNJ']||fonteVal({fonte:['Assunto']}))));dlm.append(line);materia.append(dlm);
-    html(mg,campoRot('triagem','Ramo do direito','Ramo do direito')+campoRot('triagem','Outros assuntos','Outros assuntos')+campoRot('triagem','Síntese Processual','Síntese processual')+campoRot('triagem','Síntese Fática','Síntese fática'));
+    html(mg,campoRot('triagem','Ramo do direito','Ramo do direito')+campoRot('triagem','Outros assuntos','Outros assuntos'));
   }
   /* A inclusão fica em Matéria, não na face de resumo. */
   if(!mg.querySelector('[data-ad]')&&!mg.querySelector('.pm-ad'))html(mg,campoRot('triagem','Assunto detalhado','Assunto detalhado'));
   if(!mg.querySelector('[data-fk="triagem.Detalhamento do caso"]')&&!mg.querySelector('[data-pv-field="triagem.Detalhamento do caso"]'))html(mg,campoRot('triagem','Detalhamento do caso','Detalhamento do caso'));
-  materia.append(mg);mat.append(materia);
+  html(mg,campoRot('triagem','Síntese Processual','Síntese processual')+campoRot('triagem','Síntese Fática','Síntese fática'));materia.append(mg);mat.append(materia);
   var sd=el('details','hero-acomp hero-sinalizacoes'),ss=el('summary','','Sinalizações'),ind=el('span','hero-sn-ind'),sig=el('div','hero-acomp-b');
   sd.append(ss,sig);ss.append(ind);sd.open=!!heroTopo.sinalizacoes;sd.addEventListener('toggle',function(){if(sd.isConnected)heroTopo.sinalizacoes=sd.open;});
   var sn=top.querySelector('.pm-sn'),dialog=caixa.querySelector('#pv-sn-dlg');if(sn){var sb=sn.querySelector('.sn-b');if(sb)while(sb.firstChild)sig.append(sb.firstChild);sn.remove();}else if(dialog){var sc=dialog.querySelector('.pv-sn-c');if(sc)while(sc.firstChild)sig.append(sc.firstChild);dialog.remove();var bar=top.querySelector('.pv-sn-bar');if(bar)bar.remove();}
@@ -1223,7 +1225,7 @@ function heroOrganizarProntuario(){
   var noteWrap=el('section','hero-notes-wrap hero-ann-v2'),primary=el('div','hero-primary-note'),pair=el('div','hero-ann-panels'),ann=el('section','hero-ann-panel'),questions=el('section','hero-ann-panel hero-ann-questions'),foot=el('div','hero-detail-footer');
   var linhas=notasL(),fixCampo=campoModelo('origem','Notas fixadas'),fixados=[],readonly=!!(window.MUTA_WEB&&window.MUTA_WEB.leitura);
   try{var fx=JSON.parse(S(V('origem','Notas fixadas'))||'[]');if(Array.isArray(fx))fixados=fx.filter(function(x){return typeof x==='string';});}catch(e){}
-  var regs=[['@detalhamento','Detalhamento do caso'],['@processual','Síntese Processual'],['@fatica','Síntese Fática']];
+  var regs=[]; // Os campos do caso são editados exclusivamente em Caso, Conteúdo e Questões.
   function destacado(k){return k==='@detalhamento'?fixados.indexOf('@ocultar-detalhamento')<0:fixados.indexOf(k)>=0;}
   function gravaFix(){marcar('origem.Notas fixadas',JSON.stringify(fixados));}
   function pin(k){var b=el('button','hero-note-pin');b.type='button';b.title=destacado(k)?'Retirar destaque':'Destacar no prontuário';b.setAttribute('aria-label',b.title);b.setAttribute('aria-pressed',String(destacado(k)));b.innerHTML=SV('<path d="m16 3 5 5-4 1-3 5v3l-2 2-3-5-5-3 2-2h3l5-3zM9 14l-6 7"/>',13);b.disabled=!fixCampo||!editavel(fixCampo);b.onclick=function(){var key=k==='@detalhamento'?'@ocultar-detalhamento':k,idx=fixados.indexOf(key);if(idx<0)fixados.push(key);else fixados.splice(idx,1);gravaFix();heroTopo.notas=true;agendar(500);render();};return b;}
@@ -1274,7 +1276,7 @@ function heroOrganizarProntuario(){
   pair.append(noteCard);noteWrap.append(pair);
   var qtags=el('div','hero-q-tags');qtags.setAttribute('aria-label','Questões destacadas');
   qs.filter(function(q,i){return qfix.includes(q)&&qs.indexOf(q)===i;}).forEach(function(q){var t=el('span','chip hero-q-tag',enhanced?String(qs.indexOf(q)+1).padStart(2,'0')+' · '+q:q);t.title=q;qtags.append(t);});
-  if(qtags.childNodes.length){if(enhanced){var qw=el('section','pv3-q-highlight'),qh=el('div','pv3-q-head');qh.append(el('b','','Questões destacadas'));var goQ=el('button','lnk','Ver todas');goQ.type='button';goQ.onclick=function(){heroTopo.questoes=true;qd.open=true;show(2);qd.scrollIntoView({block:'nearest'});};qh.append(goQ);qw.append(qh,qtags);noteWrap.append(qw);}else noteWrap.append(qtags);}
+  if(qtags.childNodes.length){id.insertBefore(qtags,steps);if(false){var qw=el('section','pv3-q-highlight'),qh=el('div','pv3-q-head');qh.append(el('b','','Questões destacadas'));var goQ=el('button','lnk','Ver todas');goQ.type='button';goQ.onclick=function(){heroTopo.questoes=true;qd.open=true;show(2);qd.scrollIntoView({block:'nearest'});};qh.append(goQ);qw.append(qh,qtags);noteWrap.append(qw);}}
   /* Registro histórico dos autos: fonte preservada, classificação humana e complementação das sínteses. */
   var sgHist=window.MutaSigilo,teorHist=sgHist&&(sgHist.bloqueado()||sgHist.sigiloso())?'':S(gravado('triagem','Registro - Teor dos autos'));
   if(teorHist){
@@ -1291,7 +1293,7 @@ function heroOrganizarProntuario(){
     });
     materia.append(hdHist);
   }
-  materia.append(qd);id.insertBefore(noteWrap,steps);atualizaAnn();
+  materia.append(qd,noteWrap);atualizaAnn();
   /* O Acompanhamento é proprietário dos campos, não depende do DOM da aba Triagem. */
   var prior=caixa.querySelector('#pv-acomp');if(prior)prior.remove();
   caixa.querySelectorAll('#pv-tri-enc,.pv-followup').forEach(function(x){x.remove();});
@@ -1506,7 +1508,7 @@ function heroOrganizarProntuario(){
   ind.querySelectorAll('button').forEach(function(b){b.onclick=function(){var kind=b.dataset.snKind,close=heroTopo.abaAcomp==='sinalizacoes'&&heroTopo.snKind===kind;heroTopo.snKind=kind;G.snTp=kind;abrirA(close?'':'sinalizacoes');};});
   tabsA.forEach(function(x){var b=el('button','',x[1]);b.type='button';b.setAttribute('role','tab');x[3]=b;b.id='hero-dock-tab-'+x[0];x[2].id='hero-dock-pane-'+x[0];b.setAttribute('aria-controls',x[2].id);if(x[0]!=='sinalizacoes'){x[2].setAttribute('role','tabpanel');x[2].setAttribute('aria-labelledby',b.id);}b.addEventListener('click',function(){abrirA(heroTopo.abaAcomp===x[0]?'':x[0]);});if(x[0]==='sinalizacoes'){x[3]=ind;ind.setAttribute('role','group');ind.setAttribute('aria-label','Sinalizações');navA.append(ind);}else if(x[0]==='monitoramento'){var mgp=el('div','hero-monitor-tab');b.classList.add('hero-monitor-label');b.title='Monitoramento';mgp.append(b,urg);navA.append(mgp);}else{b.classList.add('hero-acomp-label');b.title=x[1];navA.append(b);}x[2].querySelector('summary').hidden=true;});
   urg.addEventListener('click',function(){abrirA('monitoramento');});
-  dock.append(navA,ac,mon,sd);top.append(dock);
+  dock.append(navA,ac,mon,sd);top.append(dock);var sg=top.querySelector('.sg-b');if(sg){var sgp=el('span','hero-sig-urg');var lock=el('span','hero-lock');lock.innerHTML=SV('<rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/>',13);sgp.append(lock,sg);nav.append(sgp);}
   solBody.classList.add('hero-sol-main-body');
   if(window.MutaPauta&&window.MutaPauta.receberEditor)window.MutaPauta.receberEditor(G.cnj,solBody);
   if(heroTopo.abaAcomp==='solicitacoes')heroTopo.abaAcomp='';
