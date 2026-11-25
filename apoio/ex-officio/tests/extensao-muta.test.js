@@ -503,7 +503,7 @@ test('extensão 0.38: Autos preenche sozinho os campos vazios do Roteiro (e desf
   assert.equal(pend['triagem.Síntese Processual'], 'Recurso contra sentença (ID 111) que julgou improcedente o pedido.');
   assert.match(cf, /diverge/, 'a divergência fica em A conferir');
   assert.doesNotMatch(AU.htmlLeitura(), /Preencher sozinho|Peças principais|Cronologia toda/, '0.44: só Ler/Reler (íntegra)'); assert.match(AU.htmlLeitura(), /au-res/);
-  assert.match(AU.htmlDocs(() => ''), /Principais \(1\)[\s\S]*Todos \(1\)/);
+  assert.match(AU.htmlDocs(() => ''), /Peças principais \(1\)[\s\S]*Cronologia \(1\)/);
   AU.clique({ dataset: { au: 'desfazer' } }); await tick();
   assert.equal(pend['origem.Sentença - Decisão'], '', 'desfeito');
   AU.estado().autoSig = {}; AU.sugestoes(); await tick();
@@ -574,8 +574,8 @@ test('extensão 0.41: botões de sinalização em todo cartão (vazio = sino dis
 
 test('extensão 0.42: Conformidade em aba própria da Minuta; minuta-matriz do processo sem lista para escolher; cabeçalho automático do PJe fora das conferências', () => {
   const h = read('extensao/painel.html');
-  assert.match(h, /data-mm="conf"/); assert.match(h, /<div class="min-conf aba" id="min-conf" data-aberto="1" hidden>/); assert.doesNotMatch(h, /id="mc-t"/);
-  assert.match(read('extensao/gerador.js'), /var cf = \$\('min-conf'\); if \(cf\) cf\.hidden = m !== 'conf';/);
+  assert.match(h, /id="hero-v53-conf-expand"/); assert.match(h, /<details class="min-conf aba" id="min-conf" data-aberto="1" open>/); assert.doesNotMatch(h, /id="mc-t"/);
+  assert.match(read('extensao/conformidade.js'), /hero-v53-conf-expanded/);
   const c = read('extensao/comparar.js');
   assert.match(c, /function matrizDoProcesso\(\) \{ var M = matrizesOrdenadas\(\), z = M\[0\]; return z && z\.k >= 6 \? z\.x : null; \}/);
   assert.doesNotMatch(c, /Escolha uma matriz para comparar bloco a bloco/);
@@ -604,12 +604,12 @@ test('extensão 0.44: Ler/Reler sempre a íntegra; documentos do Roteiro em Auto
 
 test('extensão 0.45: Comparar só com modelos, precedentes, texto colado e 28,86%; minuta-matriz na Conformidade; Corretor com subabas e CORTEX fora da navegação', () => {
   const c = read('extensao/comparar.js'), h = read('extensao/painel.html'), g = read('extensao/gerador.js');
-  assert.match(c, /var FORA_CMP = \{ matriz: 1, lote: 1, tri: 1, par: 1 \};/); assert.match(c, /function estruturaConformidade\(aoBaixar\)/);
+  assert.match(c, /var FORA_CMP = \{ matriz: 1, lote: 1, tri: 1, par: 1 \};/); assert.match(c,/f\[0\] !== 'm2886'/); assert.match(c, /function estruturaConformidade\(aoBaixar\)/);
   assert.match(read('extensao/conformidade.js'), /window\.MutaComparar\.estruturaConformidade\(render\)/);
   assert.doesNotMatch(h, /data-mm="lote"|id="panel-lote"|id="lote-app"/);
-  assert.match(h, /data-mm="cor"[^>]*>Corretor</);
-  assert.match(h, /data-mm="cmp"[^>]*>Comparativo</);
-  assert.match(h, /data-mm="conf"[^>]*>Conformidade/);
+  assert.match(h, /hero-v53-page-title">Corretor</);
+  assert.match(h, /id="cmp-app"/); assert.match(c,/hero-v53-review-actions/);
+  assert.match(h, /id="min-conf"/); assert.doesNotMatch(h,/data-mm="(?:cmp|conf)"/);
   assert.match(g, /m === 'ger' \|\| m === 'conf' \|\| m === 'dir' \? m : 'cmp'/);
   const lote = read('extensao/lote.js');
   assert.equal((lote.match(/if \(caixa\) caixa\.addEventListener\(/g) || []).length, 3);
@@ -639,7 +639,7 @@ test('extensão 0.48: abas Diligências e Deliberações (Desembargador e gestor
   ['tab-dil', 'tab-del', 'tab-ctl'].forEach(id => assert.match(h, new RegExp('id="' + id + '"[^>]*hidden')));
   assert.match(h, /<div id="dil-app"/); assert.match(h, /<div id="del-app"/); assert.match(h, /<div id="ctl-app"/); assert.match(h, /<script src="gestao\.js"><\/script>/);
   /* 0.58: aba Pauta no fim; Controle segue como aba escondida, aberta pelo ícone da faixa do topo */
-  assert.match(p, /var NOMES=\['pront','min','ementario','par','dir','ajuda','dil','del','ctl','pauta'\];/);
+  assert.match(p, /var NOMES=\['pront','min','ementario','par','dir','ajuda','dil','del','ctl','pauta','modelos'\];/);
   assert.match(x, /ses\.api\('\/api\/pendencias'\)/); assert.match(x, /method: 'PUT', body: JSON\.stringify\(\{ id: id, _rev: t\._rev, stage: st \}\)/);
   assert.match(x, /ses\.api\('\/api\/painel\?cmt=1'\)/); assert.match(x, /acao: 'situacao'/); assert.match(x, /acao: 'responder'/); assert.match(x, /n\.tipo === 'sustentacao'/);
   assert.match(x, /ctl: q\.on && q\.gestor, pauta: q\.on/); assert.match(x, /function pode\(q\) \{ return q\.on && \(q\.gestor \|\| q\.des\); \}/);
