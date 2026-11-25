@@ -557,3 +557,19 @@ body.hero-redesign-v53 :is(#cmp-app,#pauta-app,#dir-app,#del-app,#dil-app) :is(.
 html[data-tema=escuro] body.hero-redesign-v53{--p53-surface:var(--bg);--p53-card:var(--card);--p53-soft:color-mix(in srgb,var(--card) 70%,var(--line));--p53-line:var(--line);--p53-ink:var(--fg);--p53-muted:var(--muted-fg)}
 body.hero-redesign-v53 #gab{background:transparent}
 html:not([data-tema=escuro]) body.hero-redesign-v53,html:not([data-tema=escuro]) body.hero-redesign-v53 :is(main,.layout,#gab,main>section){background:var(--p53-surface)!important}
+/* 0.75.1 · faixa das subabas do prontuário como rodapé do cabeçalho: mesma cor da barra do topo (#topo-u), de borda a
+   borda, colada nele e fixa ao rolar; a linha que separava o cabeçalho passa para baixo da faixa */
+body.hero-redesign-v53 #gab .hero-header-nav{position:sticky;top:0;z-index:6;margin:-10px -14px 10px!important;padding:0 14px!important;background:#fff!important;border-bottom:1px solid var(--p53-line)!important;box-shadow:0 1px 0 rgb(0 0 0 / .02)}
+html[data-tema=escuro] body.hero-redesign-v53 #gab .hero-header-nav{background:#0a1821!important;border-bottom-color:#1e3747!important}
+body.hero-redesign-v53 #gab .hero-header-nav .hero-v53-tabs{border-bottom:0!important}
+body.hero-redesign-v53 #gab .hero-header-nav .hero-v53-tabs>button{padding:9px 3px 8px!important}
+body.hero-redesign-v53:has(#panel-pront:not([hidden]) .hero-v53-tabs) #topo-u{border-bottom-color:transparent!important;box-shadow:none!important}
+/* cabeçalho e faixa das subabas ficam juntos no alto ao rolar (a página rola na janela; o painel não cria rolagem própria) */
+body.hero-redesign-v53 #topo-u{position:sticky;top:0;z-index:20}
+body.hero-redesign-v53 #panel-pront{overflow:clip visible!important}
+body.hero-redesign-v53 #gab .hero-header-nav{top:var(--h53-topo,40px)}
+/* fora do Resumo o bloco do cabeçalho é só a faixa: o bloco inteiro fica preso, para a faixa acompanhar a rolagem da face */
+body.hero-redesign-v53 #gab .pc.pm:has(.hero-v53-tabs>[aria-selected=true]:not([data-rot="res"])){position:sticky;top:calc(var(--h53-topo,40px) + 10px);z-index:6}
+body.hero-redesign-v53 #gab .pc.pm:has(.hero-v53-tabs>[aria-selected=true]:not([data-rot="res"])) .hero-header-nav{position:static}
+/* no prontuário web (Ex Officio, Caput) a barra do topo não aparece: a faixa prende no alto da página */
+body.hero-redesign-v53.muta-web,.muta-web body.hero-redesign-v53{--h53-topo:0px}
