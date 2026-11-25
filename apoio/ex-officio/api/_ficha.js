@@ -70,6 +70,14 @@ function mesclarReferencia(old,patch){
  if(m.size>500){const e=new Error('Limite de 500 peças vinculadas. Nenhum registro foi alterado.');e.status=400;throw e;}
  return Array.from(m.values());
 }
+function mesclarOcorrencias(old,patch){
+  const parse=v=>{try{const x=JSON.parse(v||'{}');return x&&typeof x==='object'&&!Array.isArray(x)?x:{};}catch(e){return {};}};
+  const base=parse(old),inc=parse(patch);
+  for(const [k,v] of Object.entries(inc)){if(!/^\d{4}-\d{2}-\d{2}\|[^|]{1,30}$/.test(k)||!v||typeof v!=='object')continue;
+    const ingresso=['PAUTADO','EM MESA',''].includes(v.ingresso)?v.ingresso:'',ocorrencia=['Retirada de pauta','Adiamento'].includes(v.ocorrencia)?v.ocorrencia:'';
+    base[k]={ingresso,ocorrencia,justificativa:ocorrencia?String(v.justificativa||'').trim().slice(0,4000):'',solicitacao:ocorrencia?String(v.solicitacao||'').slice(0,80):''};
+  }return JSON.stringify(base);
+}
 function aplica(r, mud) {
   const out = [];
   const t=mud.triagem, has=(o,k)=>Object.prototype.hasOwnProperty.call(o||{},k);
@@ -90,7 +98,7 @@ function aplica(r, mud) {
   }
   /* texto, ou lista de linhas (campos "tabela" da ficha) */
   const igual = (x, y) => (typeof x === 'object' && x) || (typeof y === 'object' && y) ? JSON.stringify(x == null || x === '' ? [] : x) === JSON.stringify(y == null || y === '' ? [] : y) : String(x == null ? '' : x) === String(y == null ? '' : y);
-  Object.keys(mud).forEach(s => { r[s] = r[s] || {}; Object.keys(mud[s]).forEach(k => { const raw = mud[s][k], v = s === 'origem' && k === 'Classificação documental' ? mesclarClassificacao(r[s][k], raw) : s === 'origem' && k === 'Origem - Peças vinculadas 1G' ? mesclarReferencia(r[s][k],raw) : Array.isArray(raw) ? raw : String(raw == null ? '' : raw); if (!igual(r[s][k], v)) { r[s][k] = v; out.push(s + '.' + k); } }); });
+  Object.keys(mud).forEach(s => { r[s] = r[s] || {}; Object.keys(mud[s]).forEach(k => { const raw = mud[s][k], v = s === 'pauta' && k === 'Ingresso e ocorrências da sessão' ? mesclarOcorrencias(r[s][k],raw) : s === 'origem' && k === 'Classificação documental' ? mesclarClassificacao(r[s][k], raw) : s === 'origem' && k === 'Origem - Peças vinculadas 1G' ? mesclarReferencia(r[s][k],raw) : Array.isArray(raw) ? raw : String(raw == null ? '' : raw); if (!igual(r[s][k], v)) { r[s][k] = v; out.push(s + '.' + k); } }); });
   if (out.length) { r.origem = r.origem || {}; r.origem.atualizado_em = agora(); }
   return out;
 }
@@ -426,7 +434,7 @@ module.exports = async (req, res, u) => {
         if(!x||!x.id||!tipos.includes(x.tipo))continue;
         const id=String(x.id).slice(0,80),ant=por.get(id),interno=x.tipo==='Retirada de pauta'||x.tipo==='Adiamento';
         if(!ant){const justificativa=String(x.justificativa||x.descricao||'').trim().slice(0,4000);if(interno&&!justificativa)continue;
-          por.set(id,{id,tipo:x.tipo,solicitante:String(interno?u:x.solicitante||'').slice(0,160),descricao:justificativa,justificativa:interno?justificativa:'',data:L.dataOk(x.data)?x.data:agora().slice(0,10),autor:u,estado:'Pendente',criadoEm:agora(),sessaoPretendida:interno&&x.tipo==='Adiamento'?String(x.sessaoPretendida||'').slice(0,30):''});continue;}
+          por.set(id,{id,tipo:x.tipo,solicitante:String(interno?u:x.solicitante||'').slice(0,160),descricao:justificativa,justificativa:interno?justificativa:'',data:L.dataOk(x.data)?x.data:agora().slice(0,10),autor:u,estado:'Pendente',criadoEm:agora(),sessaoPretendida:interno&&x.tipo==='Adiamento'?String(x.sessaoPretendida||'').slice(0,30):'',sessaoOrigem:interno&&L.dataOk(x.sessaoOrigem)?x.sessaoOrigem:'',itemOrigem:interno?String(x.itemOrigem||'').slice(0,30):''});continue;}
         if(perfil.desembargador&&['Deferida','Indeferida'].includes(x.estado)&&!['Deferida','Indeferida'].includes(ant.estado)){
           por.set(id,Object.assign({},ant,{estado:x.estado,decididoPor:u,decididoEm:agora()}));
         }
