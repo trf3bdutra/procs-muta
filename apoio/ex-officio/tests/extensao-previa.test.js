@@ -122,7 +122,8 @@ test('tipo de ato e destino na faixa superior; etiquetas apenas na autuação',(
  const s=fs.readFileSync(path.join(ROOT,'scripts/extensao/previa/universal-layout.js'),'utf8');
  assert.match(s,/pv-ato-destino/);
  assert.match(s,/faixa=p\.querySelector\('\.pv-people'\)/);
- assert.match(s,/faixa\.prepend\(next,dest\)/);
+ assert.match(s,/head\.append\(next\)/);
+ assert.match(s,/faixa\.prepend\(dest\)/);
  assert.doesNotMatch(s,/cnj\.after\(faixa\)/);
  assert.match(s,/function etiquetasAutuacao\(ctx\)/);
  assert.match(s,/etiquetas:''/);
@@ -204,7 +205,7 @@ test('universal: encaminhamento editável na triagem e espelhado no cartão',()=
  assert.match(s,/fragment\(atoSel\(\)\)/);
  assert.match(s,/campoRot\('triagem','Seleção Prévia','Seleção prévia'\)/);
  assert.match(s,/f\.append\(encaminhamentoTriagem\(\)\)/);
- assert.match(s,/faixa\.prepend\(next,dest\);ato\.remove\(\)/);
+ assert.match(s,/faixa\.prepend\(dest\);ato\.remove\(\)/);
  assert.match(s,/readRow\('Seleção prévia',V\('triagem','Seleção Prévia'\)\)/);
  assert.match(s,/data-pv-enc/);
  const a=s.indexOf('var operationalFields='),z=s.indexOf('var prodBase=camposCaso;',a);
