@@ -268,10 +268,15 @@ function fx2Sinais() {
 /* anotações dos prontuários (Notas sobre o caso), como mensagens */
 function fx2Anot() {
   var L = []; ((ST.d && ST.d.sinais) || []).forEach(function (o) { (o.notas || []).forEach(function (n) { if (n && n.tx) L.push({ tx: n.tx, por: n.por || '', em: n.em || '', o: o.origem }); }); });
+  var log=S(val('origem','Observações'));
+  log.split(/\n+/).filter(Boolean).forEach(function(l){var m=/^(\d{2}\/\d{2}\/\d{4}(?: \d{2}:\d{2})?)\s*·\s*(?:([^·]+?)\s*·\s*)?(.+)$/.exec(l),tx=m?m[3]:l;if(!L.some(function(n){return n.tx===tx&&(!m||!m[2]||n.por===m[2]);}))L.push({tx:tx,por:m&&m[2]||'',em:'',data:m&&m[1]||'',o:'Ficha / HERO'});});
   L.sort(function (a, b) { return S(a.em).localeCompare(S(b.em)); });
+  var campos=[['Detalhamento do caso','Detalhamento do caso'],['Síntese Processual','Síntese processual'],['Síntese Fática','Síntese fática'],['Alegações','Questões controvertidas']].map(function(z){return {secao:'triagem',chave:z[0],rotulo:z[1],tipo:'texto-longo'};});
+  var notas=grade(ST.edit?campos:campos.filter(temValor));
+  if(ST.edit&&!ST.ad.leitura)notas+='<details style="margin:8px 0"><summary>Editar notas compartilhadas com a HERO</summary>'+campo({secao:'origem',chave:'Observações',rotulo:'Notas sobre o caso',tipo:'texto-longo'})+'</details>';
   var ini = function (n) { n = S(n); var p = n.split(/[\s\/]+/).filter(Boolean); return n ? (p.length > 1 ? p[0][0] + p[1][0] : n.slice(0, 2)).toUpperCase() : '—'; };
   var hr = function (v) { var d = new Date(v); return isNaN(d) ? '' : brD(iso(v)).slice(0, 5) + ' ' + String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0'); };
-  return card('Anotações', L.length ? '<div class="fx2-nts">' + L.map(function (n) { return '<div class="fx2-nt"><span class="fx2-av">' + E(ini(n.por)) + '</span><div><p>' + E(n.tx) + '</p><small>' + E([n.por, hr(n.em), n.o].filter(Boolean).join(' · ')) + '</small></div></div>'; }).join('') + '</div>' : '<p class="fx-dim">Sem anotações. As notas escritas nos prontuários da Pauta e das Monocráticas aparecem aqui.</p>', { cls: 'fx2-anot', nota: L.length ? L.length + (L.length > 1 ? ' notas' : ' nota') : '' });
+  return card('Anotações', notas+(L.length ? '<div class="fx2-nts">' + L.map(function (n) { return '<div class="fx2-nt"><span class="fx2-av">' + E(ini(n.por)) + '</span><div><p>' + E(n.tx) + '</p><small>' + E([n.por, n.data||hr(n.em), n.o].filter(Boolean).join(' · ')) + '</small></div></div>'; }).join('') + '</div>' : '<p class="fx-dim">Sem anotações. As notas escritas nos prontuários da Pauta e das Monocráticas aparecem aqui.</p>'), { cls: 'fx2-anot', nota: L.length ? L.length + (L.length > 1 ? ' notas' : ' nota') : '' });
 }
 /* Resumo · rodapé do cartão Processo: a Pauta (no colegiado) ou a Urgência (na monocrática) */
 function fx2RodProc(mono, pau, t) {
@@ -465,6 +470,7 @@ function abaGruposCorpo(A) {
   var analiseStatus='', registrosHtml='';
   var gs = (A.grupos || []).filter(function (g) { return !(ST.v2 && A.aba==='Triagem' && g.grupo==='Sinalizações') && (!g.destino || g.destino === dn) && grupoVisivel(g) && !(ST.v2 && !ST.edit && FX2_SO_LADO.indexOf(g.grupo) >= 0); }), vazios = [];
   if (A.aba === 'Processo') gs = gs.map(function (g, i) { var k = PRI_PROC.indexOf(g.grupo); return [k < 0 ? 99 + i : k, g]; }).sort(function (a, b) { return a[0] - b[0]; }).map(function (x) { return x[1]; });
+  if(ST.v2)gs=gs.map(function(g){return Object.assign({},g,{campos:g.campos.filter(function(c){return ['Detalhamento do caso','Síntese Processual','Síntese Fática','Alegações','Observações'].indexOf(c.chave)<0;})});}).filter(function(g){return g.campos.length;});
   h += gs.map(function (g) {
     var analise=A.aba==='Triagem'&&/^(Análise e Indexação|Análise|Conclusão da análise)$/.test(g.grupo), adm=A.aba==='Triagem'&&g.grupo==='Admissibilidade e regularidade';
     if(analise&&ST.v2)g=Object.assign({},g,{campos:g.campos.filter(function(c){return ['Destino - Situação','Destino - Confirmado em','Destino - Confirmado por'].indexOf(c.chave)<0 && (ST.edit||c.chave!=='Status da triagem');})});
