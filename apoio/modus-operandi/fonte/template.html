@@ -189,22 +189,13 @@ code{font-size:12px;background:var(--field);padding:1px 5px;border-radius:4px;ov
       <section class="e-control-panel" aria-label="Pesquisa e visualização do Ementário">
         <div class="e-control-head"><span class="e-control-k">Pesquisa e visualização</span><span class="count" id="e-cnt" role="status"></span></div>
         <div class="bar e-control-search">
-          <input class="q" id="e-q" type="search" placeholder="Buscar por número, classe, ementa ou dispositivo…" aria-label="Buscar no ementário">
+          <div class="e-query-field"><div id="e-qterms" class="e-query-terms" aria-label="Termos da pesquisa" hidden></div><input class="q" id="e-q" type="search" placeholder="Digite uma palavra ou frase e pressione Enter…" aria-label="Adicionar palavra ou frase à pesquisa" aria-describedby="e-qhint"></div>
           <div class="e-query-actions" id="e-qactions">
-            <button type="button" class="btn" id="e-qbuilder-toggle" aria-expanded="false" aria-controls="e-qbuilder">＋ Termos e frases</button>
             <button type="button" class="btn gold" id="e-qgo">Buscar</button>
             <button type="button" class="btn" id="e-qaj" aria-expanded="false" title="Como buscar" aria-label="Como buscar">?</button>
           </div>
         </div>
-        <section class="e-query-builder" id="e-qbuilder" aria-label="Combinar termos e frases" hidden>
-          <div class="e-builder-head"><b>Combinar termos e frases</b><span>Um termo ou frase por linha, ou separados por ponto e vírgula. Frases com espaços são pesquisadas juntas.</span></div>
-          <div class="e-builder-grid">
-            <label class="e-builder-field"><span><b>Todos os termos</b><small>E</small></span><textarea id="e-qall" rows="3" placeholder="Ex.: aposentadoria&#10;tempo especial"></textarea><small>Todos devem ocorrer.</small></label>
-            <label class="e-builder-field"><span><b>Qualquer dos termos</b><small>OU</small></span><textarea id="e-qany" rows="3" placeholder="Ex.: vigilante&#10;vigia"></textarea><small>Ao menos um deve ocorrer.</small></label>
-            <label class="e-builder-field"><span><b>Excluir termos</b><small>NÃO</small></span><textarea id="e-qnot" rows="3" placeholder="Ex.: rural&#10;atividade urbana"></textarea><small>Nenhum pode ocorrer.</small></label>
-          </div>
-          <div class="e-builder-foot"><div class="e-builder-preview"><span class="e-control-k">Consulta gerada</span><code id="e-qpreview" aria-live="polite">Adicione palavras ou frases.</code></div><div class="e-builder-actions"><button type="button" class="btn" id="e-qreset">Limpar critérios</button><button type="button" class="btn" id="e-qappend">Acrescentar à busca</button><button type="button" class="btn gold" id="e-qapply">Aplicar critérios</button></div></div>
-        </section>
+        <p id="e-qhint" class="e-query-hint">Enter para adicionar · cada termo ou frase refina a busca · × para remover.</p>
         <div class="e-qmodo" id="e-qmodo"></div>
         <div class="e-modes" id="e-modes"></div>
       </section>

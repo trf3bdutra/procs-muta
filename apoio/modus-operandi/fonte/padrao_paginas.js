@@ -29,7 +29,7 @@
       '<a href="/amicus/collegium/#v=ement" data-fonte="turma"'+(t?' aria-current="page"':'')+' title="Julgados dos demais gabinetes da Turma Regional de MS — consulta, não é padrão do gabinete">Turma</a></div>';}
   D.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('.pa-fonte a[data-fonte]');if(!a||a.getAttribute('aria-current')==='page'){if(a)e.preventDefault();return;}
     e.preventDefault();var q=D.getElementById('e-q'),qm=D.querySelector('input[name="e-qm"]:checked'),tp=D.querySelector('#e-tipo button[aria-pressed="true"]');
-    var h=['v=ement'],v=q&&q.value.trim(),t=tp&&tp.getAttribute('data-v');
+    var parts=window.VDM_ementQueryParts?window.VDM_ementQueryParts():null;var h=['v=ement'],v=parts?parts.join(' '):q&&q.value.trim(),t=tp&&tp.getAttribute('data-v');if(parts&&parts.length)h.push('qt='+encodeURIComponent(JSON.stringify(parts)));
     if(v)h.push('q='+encodeURIComponent(v));if(v&&qm&&qm.value==='ft')h.push('qm=ft');if(t==='Acórdão')h.push('t=A');else if(t==='Monocrática')h.push('t=M');
     location.href=a.getAttribute('href').split('#')[0]+'#'+h.join('&');});
   /* seletor de modo do Minutário (Minutário · Modelos · Parágrafos), no desenho do Relator/Turma do Ementário */

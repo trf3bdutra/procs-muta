@@ -210,11 +210,10 @@ function chips(){
   DIMS.forEach(function(d){if(E.F[d])h.push('<span class="e-chip"><small>'+DIM[d].n+'</small> '+esc(E.F[d])+'<button data-x="'+d+'" aria-label="Remover filtro">×</button></span>');});
   if(E.y1||E.y2)h.push('<span class="e-chip"><small>Período</small> '+(E.y1===E.y2?mesL(E.y1):mesL(E.y1||'')+' a '+mesL(E.y2||''))+'<button data-x="__y" aria-label="Remover filtro">×</button></span>');
   if(E.plist)h.push('<span class="e-chip"><small>'+esc(E.plist.pre||'Citam')+'</small> '+esc(E.plist.lab)+'<button data-x="__p" aria-label="Remover filtro">×</button></span>');
-  if(E.q&&(E.qp||E.ft))h.push('<span class="e-chip"><small>'+(E.ft?'Texto integral':'Busca')+'</small> '+esc(E.ft?E.ft.q:E.q)+'<button data-x="__q" aria-label="Remover busca">×</button></span>');
-  if(h.length>1)h.push('<button class="e-clr" id="e-clr">Limpar todos</button>');
+  if(h.length+qTermSync().length>1)h.push('<button class="e-clr" id="e-clr">Limpar todos</button>');
   $('#e-chips').innerHTML=h.join('');
-  $$('#e-chips [data-x]').forEach(function(b){b.onclick=function(){var d=b.getAttribute('data-x');if(d==='__p'){E.plist=null;}else if(d==='__y'){E.y1=E.y2='';}else if(d==='__q'){E.q='';E.qn=null;E.qp=null;E.ft=null;FT.tok++;$('#e-q').value='';qBuilderReset();}else E.F[d]='';E.sel=null;E.mmOpen=null;E.shown=60;render();};});
-  var c=$('#e-clr');if(c)c.onclick=function(){E.plist=null;E.F={};E.y1=E.y2='';E.q='';E.qn=null;E.qp=null;E.ft=null;FT.tok++;$('#e-q').value='';qBuilderReset();E.sel=null;E.mmOpen=null;render();};
+  $$('#e-chips [data-x]').forEach(function(b){b.onclick=function(){var d=b.getAttribute('data-x');if(d==='__p'){E.plist=null;}else if(d==='__y'){E.y1=E.y2='';}else if(d==='__q'){E.q='';E.qn=null;E.qp=null;E.ft=null;FT.tok++;$('#e-q').value='';qTermReset();}else E.F[d]='';E.sel=null;E.mmOpen=null;E.shown=60;render();};});
+  var c=$('#e-clr');if(c)c.onclick=function(){E.plist=null;E.F={};E.y1=E.y2='';E.q='';E.qn=null;E.qp=null;E.ft=null;FT.tok++;$('#e-q').value='';qTermReset();E.sel=null;E.mmOpen=null;render();};
 }
 /* seleção feita nas visualizações: aplicar como filtro ou ver a lista */
 function selecionar(f,n){
@@ -431,8 +430,8 @@ $('#e-out').addEventListener('click',function(e){
   else if(a==='cit')copiar(citacao(x),'Citação copiada; confira o veículo de publicação');
   else if(a==='abrir'){if(E.det===x.id&&largo()&&!$('#e-det').hidden){fecharIT();return;}abrirIT(x);}
 });
-var qT;$('#e-q').addEventListener('input',function(e){clearTimeout(qT);qT=setTimeout(function(){if(EM.sub!=='prec'){EM.q[EM.sub]=e.target.value.trim();(EM.sub==='mod'?mRender:pRender)();return;}E.q=e.target.value.trim();if(E.qm==='ft'){if(!E.q){E.ft=null;FT.tok++;render();}return;}E.ft=null;E.qp=parseQ(E.q);E.shown=60;E.sel=null;E.mmOpen=null;render();},220);});
-$('#e-q').addEventListener('keydown',function(e){if(e.key!=='Enter'||EM.sub!=='prec')return;e.preventDefault();clearTimeout(qT);E.q=e.target.value.trim();buscar();});
+var qT;$('#e-q').addEventListener('input',function(e){clearTimeout(qT);if(EM.sub==='prec')return;qT=setTimeout(function(){if(EM.sub==='prec')return;EM.q[EM.sub]=e.target.value.trim();(EM.sub==='mod'?mRender:pRender)();},220);});
+$('#e-q').addEventListener('keydown',function(e){if(EM.sub!=='prec'||e.isComposing||e.keyCode===229)return;if(e.key==='Enter'){e.preventDefault();qTermCommit();}else if(e.key==='Backspace'&&!e.target.value&&qTermSync().length){e.preventDefault();qTermRemove(qTermSync().length-1);}});
 function baixarCsv(L){
   var C=[['Tipo','Apreciação','Processo','Classe','Classe (nome)','Órgão','Julgamento','Publicação','Ramo','Assunto','Resultado','Temas','Texto do resultado','Registro','Relator','Gabinete']];
   L.forEach(function(x){C.push([x.t==='A'?'Acórdão':'Monocrática',x._apr,x.n,x.c,x.cl,x.o,fmtD(x.d),fmtD(x.p),x._ramo,x._ass,x._res,x.temas,x.r,x.id,x.rl||'',x.gab||'']);});
@@ -1425,35 +1424,26 @@ function buscaIntegral(){
     }).catch(function(e){i++;ft.lidos=i;ft.falhas=(ft.falhas||0)+1;setTimeout(prox,0);});
   })();
 }
-/* Construtor de pesquisa: cláusulas E, um grupo de alternativas OU e exclusões.
-   Produz a mesma sintaxe de parseQ, usada tanto no índice quanto no texto integral. */
-function qBuilderItems(v){
-  var seen=Object.create(null);
-  return String(v||'').split(/[\r\n;]+/).map(function(w){return w.trim().replace(/^"|"$/g,'').replace(/"/g,' ').trim();}).filter(function(w){var k=nz(w);if(!k||seen[k]||!/[a-z0-9]/.test(k))return false;seen[k]=true;return true;}).map(function(w){
-    var k=nz(w);return /^[a-z0-9]+\*?$/.test(k)&&!STOP[k]&&!/^(ou|or)$/.test(k)?w:'"'+w+'"';
-  });
+/* Cada Enter confirma um critério. Frases são exatas; critérios cumulativos usam E.
+   Sintaxe explícita (OU, aspas, exclusão e radical) continua disponível. */
+function qTermEncode(value){
+  var v=String(value||'').trim().replace(/\s+/g,' ');if(!/[a-z0-9]/.test(nz(v)))return '';
+  if(/(?:^|\s)(?:OU|OR|\|)(?:\s|$)/i.test(v)||v.indexOf('"')>=0||/^-\S/.test(v))return v;
+  var k=nz(v);return /^[a-z0-9]+\*?$/.test(k)&&!STOP[k]?v:'"'+v+'"';
 }
-function qBuilderQuery(all,any,not){
-  return qBuilderItems(all).concat(qBuilderItems(any).length?[qBuilderItems(any).join(' OU ')]:[],qBuilderItems(not).map(function(w){return '-'+w;})).join(' ');
+function qTermSync(){var p=E.qparts||[];if(p.join(' ')!==(E.q||''))p=E.q?[E.q]:[];E.qparts=p;return p;}
+function qTermDraft(){var p=qTermSync().slice(),v=qTermEncode($('#e-q').value);if(v&&!p.some(function(w){return nz(w)===nz(v);}))p.push(v);return p;}
+window.VDM_ementQueryParts=qTermDraft;
+function qTermRender(){
+  var el=$('#e-qterms');if(!el)return;var p=qTermSync();
+  el.innerHTML=p.map(function(v,i){var label=v.replace(/^"([^"]*)"$/,'$1');return '<span class="e-chip e-query-chip" title="'+esc(label)+'"><span>'+esc(label)+'</span><button type="button" data-qt="'+i+'" aria-label="Remover '+esc(label)+'">×</button></span>';}).join('');
+  el.hidden=!p.length||EM.sub!=='prec';
+  $$('[data-qt]',el).forEach(function(b){b.onclick=function(){qTermRemove(+b.getAttribute('data-qt'));$('#e-q').focus();};});
 }
-function qBuilderRead(){return qBuilderQuery($('#e-qall').value,$('#e-qany').value,$('#e-qnot').value);}
-function qBuilderPreview(){var p=$('#e-qpreview');if(!p)return;var q=qBuilderRead();p.textContent=q||'Adicione palavras ou frases.';$('#e-qapply').disabled=!q;$('#e-qappend').disabled=!q;}
-function qBuilderReset(){['#e-qall','#e-qany','#e-qnot'].forEach(function(k){var el=$(k);if(el)el.value='';});qBuilderPreview();}
-function qBuilderBind(){
-  var b=$('#e-qbuilder'),t=$('#e-qbuilder-toggle');if(!b||!t)return;
-  t.onclick=function(){b.hidden=!b.hidden;t.setAttribute('aria-expanded',String(!b.hidden));if(!b.hidden)$('#e-qall').focus();};
-  ['#e-qall','#e-qany','#e-qnot'].forEach(function(k){$(k).oninput=qBuilderPreview;});
-  $('#e-qreset').onclick=qBuilderReset;
-  function aplicar(acrescentar){
-    var q=qBuilderRead();if(!q)return;var atual=$('#e-q').value.trim();
-    if(acrescentar&&/(?:^|\s)(?:OU|OR|\|)$/i.test(atual)){toast('Complete a alternativa OU da consulta atual antes de acrescentar critérios');return;}
-    var novo=(acrescentar&&atual?atual+' ':'')+q;
-    clearTimeout(qT);$('#e-q').value=E.q=novo;buscar();
-  }
-  $('#e-qapply').onclick=function(){aplicar(false);};
-  $('#e-qappend').onclick=function(){aplicar(true);};
-  qBuilderPreview();
-}
+function qTermReset(){E.qparts=[];qTermRender();}
+function qTermRun(p){clearTimeout(qT);E.qparts=p;E.q=p.join(' ');qTermRender();if(E.idx)buscar();else{E.qp=parseQ(E.q);E.ft=null;}}
+function qTermCommit(){var p=qTermDraft();$('#e-q').value='';qTermRun(p);$('#e-q').focus();}
+function qTermRemove(i){var p=qTermSync().slice();p.splice(i,1);qTermRun(p);}
 var QAJ=false;
 function qBar(){
   var el=$('#e-qmodo');if(!el)return;
@@ -1462,12 +1452,12 @@ function qBar(){
     '<label'+(ftOk?'':' class="off" title="A busca no texto integral só funciona no site"')+'><input type="radio" name="e-qm" value="ft"'+(E.qm==='ft'?' checked':'')+(ftOk?'':' disabled')+'> <b>'+(window.EMENT_FONTE?'Texto disponível no DJEN':'Texto integral')+'</b> <small>'+(window.EMENT_FONTE?'ementa, resultado e excertos · baixa os anos do recorte':'ementa e inteiro teor · baixa os anos do recorte')+'</small></label>'+
     '<span class="sp"></span>'+((E.qp||E.ft)?'<label class="e-ord">Ordenar <select id="e-ord"><option value="data"'+(E.ord!=='rel'?' selected':'')+'>mais recentes</option><option value="rel"'+(E.ord==='rel'?' selected':'')+'>mais ocorrências</option></select></label>':'')+
 
-    (QAJ?'<div class="e-qaj"><b>Como buscar</b><ul><li><code>aposentadoria especial ruído</code>: todos os termos, em qualquer ordem</li><li><code>"tempo especial"</code>: a frase exata</li><li><code>vigilante OU vigia</code>: um ou outro</li><li><code>aposentad*</code>: palavras que começam assim</li><li><code>-rural</code>: exclui quem tem o termo</li><li>Acentos e maiúsculas não importam; artigos e preposições soltos são ignorados.</li><li><b>Índice</b> procura na hora em número, classe, órgão, ementa e resultado. <b>'+(window.EMENT_FONTE?'Texto disponível':'Texto integral')+'</b> procura também '+(window.EMENT_FONTE?'nos excertos preservados do DJEN':'no inteiro teor')+': escolha antes o período e os filtros, para baixar menos anos.</li></ul></div>':'')+
+    (QAJ?'<div class="e-qaj"><b>Como buscar</b><ul><li>Digite uma palavra ou frase e pressione Enter. Cada etiqueta é um critério obrigatório (E).</li><li><code>tempo especial</code>: frase exata, sem precisar de aspas. Remova uma etiqueta pelo ×.</li><li><code>vigilante OU vigia</code>: um ou outro</li><li><code>aposentad*</code>: palavras que começam assim</li><li><code>-rural</code>: exclui quem tem o termo</li><li>Acentos e maiúsculas não importam; artigos e preposições soltos são ignorados.</li><li><b>Índice</b> procura na hora em número, classe, órgão, ementa e resultado. <b>'+(window.EMENT_FONTE?'Texto disponível':'Texto integral')+'</b> procura também '+(window.EMENT_FONTE?'nos excertos preservados do DJEN':'no inteiro teor')+': escolha antes o período e os filtros, para baixar menos anos.</li></ul></div>':'')+
     (SER.ok?'':SER.erro?'<div class="e-qinfo">Série histórica indisponível ('+esc(SER.erro)+'); a busca vale para os julgados curados.</div>':'<div class="e-qinfo">Carregando a série histórica (1999-2026)…</div>');
-  $$('input[name="e-qm"]',el).forEach(function(r){r.onchange=function(){E.qm=r.value;clearTimeout(qT);E.q=$('#e-q').value.trim();if(E.q)buscar();else{E.qp=null;E.ft=null;render();}};});
-  qBuilderBind();
+  $$('input[name="e-qm"]',el).forEach(function(r){r.onchange=function(){E.qm=r.value;qTermCommit();};});
+  qTermRender();
   $('#e-qaj').setAttribute('aria-expanded',String(QAJ));
-  $('#e-qgo').onclick=function(){clearTimeout(qT);E.q=$('#e-q').value.trim();buscar();};
+  $('#e-qgo').onclick=qTermCommit;
   $('#e-qaj').onclick=function(){QAJ=!QAJ;qBar();};
   var so=$('#e-ord');if(so)so.onchange=function(){E.ord=so.value;render();};
 }
@@ -1478,10 +1468,10 @@ function mostrar(){
   $$('#e-sub button').forEach(function(b){b.setAttribute('aria-selected',String(b.getAttribute('data-s')===EM.sub));});
   ['#e-modes','#e-chips','#e-sel'].forEach(function(s){$(s).hidden=false;$(s).innerHTML='';});
   $('#e-aside').parentNode.classList.remove('sem-aside');
-  $('#e-q').value=p?(E.q||''):(EM.q[EM.sub]||'');
+  clearTimeout(qT);$('#e-q').value=p?'':(EM.q[EM.sub]||'');
   var qm=$('#e-qmodo');if(qm){qm.hidden=!p;if(!p)qm.innerHTML='';}
-  var qa=$('#e-qactions'),qb=$('#e-qbuilder');if(qa)qa.hidden=!p;if(qb&&!p){qb.hidden=true;$('#e-qbuilder-toggle').setAttribute('aria-expanded','false');}
-  $('#e-q').placeholder=p?'Buscar: termos, "frase exata", OU, -excluir, radical*…':EM.sub==='mod'?'Buscar nos modelos-matriz: nome, assunto, tese, texto…':'Buscar nos parágrafos-padrão…';
+  var qa=$('#e-qactions');if(qa)qa.hidden=!p;var qt=$('#e-qterms');if(qt)qt.hidden=!p||!qTermSync().length;var hint=$('#e-qhint');if(hint)hint.hidden=!p;
+  $('#e-q').placeholder=p?'Digite uma palavra ou frase e pressione Enter…':EM.sub==='mod'?'Buscar nos modelos-matriz: nome, assunto, tese, texto…':'Buscar nos parágrafos-padrão…';
   if(p){if(E.idx)render();else carregar();return;}
   $('#e-out').innerHTML='<p class="empty">Abrindo a base do gabinete…</p>';
   base().then(function(){if(EM.sub==='mod')mRender();else if(EM.sub==='par')pRender();}).catch(function(e){$('#e-out').innerHTML='<p class="empty">Não foi possível abrir a base do gabinete ('+esc(e.message)+').</p>';});
@@ -1489,7 +1479,7 @@ function mostrar(){
 $$('#e-sub button').forEach(function(b){b.addEventListener('click',function(){EM.sub=b.getAttribute('data-s');fecharIT();mostrar();window.scrollTo(0,0);});});
 function irEmentarioProc(nums,lab,pre){
   var set={};nums.forEach(function(n){var s=String(n||'').trim();if(s){set[s]=1;var d=repCnj(s);if(d.length===20)set[d]=1;}});
-  E.F={};E.q='';E.qn=null;E.qp=null;E.ft=null;FT.tok++;E.y1=E.y2='';E.plist={set:set,lab:lab,pre:pre};E.modo='lista';E.sel=null;E.mmOpen=null;E.shown=60;$('#e-q').value='';qBuilderReset();
+  E.F={};E.q='';E.qn=null;E.qp=null;E.ft=null;FT.tok++;E.y1=E.y2='';E.plist={set:set,lab:lab,pre:pre};E.modo='lista';E.sel=null;E.mmOpen=null;E.shown=60;$('#e-q').value='';qTermReset();
   EM.sub='prec';$$('#e-sub button').forEach(function(z){z.setAttribute('aria-selected',String(z.getAttribute('data-s')==='prec'));});
   var b=document.querySelector('.tab[data-v="ement"]');if(b&&b.getAttribute('aria-selected')==='true'){fecharIT();mostrar();}else if(b)b.click();window.scrollTo(0,0);
 }
@@ -1501,7 +1491,7 @@ function irEmentarioProc(nums,lab,pre){
   var ult='';
   function vai(){var p=lerHash();if(p.v!=='ement'||(!p.proc&&!p.q&&!p.rl&&!p.t))return;if(location.hash===ult)return;ult=location.hash;
     if(p.proc){irEmentarioProc(p.proc.split(',').filter(Boolean),p.lab||'processo do prontuário','Relacionados a');return;}
-    irEmentarioProc([],'',null);E.plist=null;E.q=p.q||'';$('#e-q').value=E.q;
+    irEmentarioProc([],'',null);E.plist=null;E.q=p.q||'';E.qparts=[];try{var parts=JSON.parse(p.qt||'[]');if(Array.isArray(parts)&&parts.every(function(v){return typeof v==='string';})&&parts.join(' ')===E.q)E.qparts=parts;}catch(e){}$('#e-q').value='';qTermRender();
     if(p.t==='A'||p.t==='M')E.F.t=p.t==='A'?'Acórdão':'Monocrática';
     if(p.rl&&DIM.rl)E.F.rl=p.rl;
     E.qm=p.qm==='ft'&&E.q?'ft':'idx';
@@ -2353,7 +2343,7 @@ if(m[1]){var num=+m[2].replace(/\./g,''),tr=m[3],A=NL.filter(function(x){return 
 })();
 /* ================= navegação ================= */
 function irEmentario(f){
-  E.F={};E.q='';E.qn=null;E.qp=null;E.ft=null;FT.tok++;E.y1=E.y2='';$('#e-q').value='';qBuilderReset();Object.keys(f||{}).forEach(function(k){E.F[k]=f[k];});E.modo='lista';E.sel=null;E.mmOpen=null;
+  E.F={};E.q='';E.qn=null;E.qp=null;E.ft=null;FT.tok++;E.y1=E.y2='';$('#e-q').value='';qTermReset();Object.keys(f||{}).forEach(function(k){E.F[k]=f[k];});E.modo='lista';E.sel=null;E.mmOpen=null;
   EM.sub='prec';$$('#e-sub button').forEach(function(z){z.setAttribute('aria-selected',String(z.getAttribute('data-s')==='prec'));});var b=document.querySelector('.tab[data-v="ement"]');if(b)b.click();
 }
 var xFeito=false;
