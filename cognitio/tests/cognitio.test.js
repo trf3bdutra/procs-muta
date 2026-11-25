@@ -43,7 +43,8 @@ test('a duplicação conserva integralmente o painel de processo, matriz e visã
  for(const [start,end] of [['function cartao(l,it){','const propSit='],['function tabela(l){','/* painel do processo:'],['function vInicio(emb) {','let REG =']]){
   const i=html.indexOf(start),j=html.indexOf(end,i);assert.ok(i>=0&&j-i>100,'Componente original ausente: '+start);
  }
- for(const p of ['acervo','triagem','selecao','mono','outras'])assert.ok(html.includes('data-cog="'+p+'"'));
+ for(const p of ['acervo','triagem','selecao','mono'])assert.ok(html.includes('data-cog="'+p+'"'));
+ assert.ok(!html.includes('data-cog="outras"'));assert.ok(html.includes("r:'Outros destinos'"));
  assert.ok(html.includes("frame.src = 'about:blank'"));
  assert.ok(html.indexOf('await W.CognitioAuth.ponte()')<html.indexOf("frame.src='/init/motor/index.html?cognitio=1'"));
  assert.ok(!html.includes('id="pt-alt"'));
@@ -62,4 +63,12 @@ test('todos os scripts inline têm sintaxe válida',()=>{
  for(const [,attrs,code] of html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)){
  if(!/\bsrc=|application\/(?:json|ld\+json)|type="module"/.test(attrs))new vm.Script(code);
  }
+});
+
+test('outros destinos é um recorte dos Triados, preservando a pauta',()=>{
+ const nz=s=>String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+ const start=html.indexOf('function cogTipo(o){'),end=html.indexOf('function cogOutrosLote()',start);
+ const f=new Function('nz',html.slice(start,end)+';return cogGrupoOutro')(nz);
+ const o=(d,a='',extra={})=>({row:{Destino:d,'Mono - Tipo de ato':a,...extra}});
+ assert.equal(f(o('Despacho')),'ativos');assert.equal(f(o('Interlocutória','',{Assinado:'Sim'})),'assinados');assert.equal(f(o('Outro destino')),'encaminhamentos');assert.equal(f(o('Monocrática')),'confirmar');assert.equal(f(o('Monocrática','art. 932')),'');assert.equal(f({...o('Despacho'),dest:{k:'pauta'}}),'');
 });
