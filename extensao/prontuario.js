@@ -179,6 +179,7 @@ function abrirAba(i){
   /* 0.47: Diretrizes é parte da Minuta */
   if(NOMES[i]==='dir'){abrirAba(NOMES.indexOf('min'));if(window.MutaGerador&&window.MutaGerador.modo)window.MutaGerador.modo('dir');return;}
   selectTab(mainTabs,i);var n=NOMES[i];
+  document.body.classList.toggle('hero-gestao-ativa',n==='dil'||n==='del');
   /* 0.47: Parágrafos-padrão é sub-aba do Ementário: a barra mantém o Ementário marcado */
   if(n==='par'){var te=$('tab-acervo');if(te)te.setAttribute('aria-selected','true');}
   if(n==='pront'&&window.MutaGabinete&&window.MutaGabinete.render)window.MutaGabinete.render();
