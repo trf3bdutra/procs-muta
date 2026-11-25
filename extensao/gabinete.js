@@ -1094,6 +1094,23 @@ function heroOrganizarProntuario(){
     spSel.value=S(V('triagem','Seleção Prévia'));spSel.disabled=!!(window.MUTA_WEB&&window.MUTA_WEB.leitura);sp.append(spSel);encFields.append(sp);
     if(spSel.value==='SELECIONADO PREVIAMENTE')html(encFields,campoRot('pauta','Nova sessão de destino','Sessão prevista (vazio = banco reserva)'));
   }
+  /* Pauta do processo: os mesmos campos da ficha, sem depender da aba Pauta. */
+  var pautaOficial=pautado(),Pp=(G.op||{}).pauta||{},grupoPauta=grupoModelo('Pauta e julgamento');
+  if(pautaOficial){
+    encFields.querySelectorAll('[data-fk="triagem.Seleção Prévia"],[data-fk="pauta.Nova sessão de destino"]').forEach(function(x){var r=x.closest('.gf');if(r)r.remove();});
+    var resumoP=el('div','hero-pauta-resumo gf w');
+    resumoP.append(el('h4','pm-mer-h','Pauta de julgamento'));
+    var resumoL=el('div','gr');
+    [['Sessão original','Sessão'],['Item (Pauta de Julgamento)','Item']].forEach(function(x){var v=S(V('pauta',x[0]));if(v){var r=el('div','gf');r.append(el('span','gl',x[1]),el('span','ro',fmtV(v)));resumoL.append(r);}});
+    resumoP.append(resumoL);
+    ['Status de Julgamento','Nova sessão de destino','Motivo da remarcação','JULGAMENTO'].forEach(function(k){html(resumoP,campoRot('pauta',k));});
+    encFields.append(resumoP);
+    var hist=el('section','hero-pauta-hist');hist.append(el('h4','pm-mer-h','Histórico de sessões'));html(hist,historicoPautas());aut.append(hist);
+    var pjeP=el('div','gr');['Pauta - Publicação','Pauta - Inclusão','Pauta - Proclamação','Pauta - Último movimento','Pauta - MPU','Pauta - Importado em'].forEach(function(k){if(S(V('pauta',k)))html(pjeP,campoRot('pauta',k));});if(pjeP.childNodes.length){hist.append(el('h4','pm-mer-h','Registro no PJe'),pjeP);}
+    var pautaSig=el('section','hero-pauta-sig');pautaSig.append(el('h4','pm-mer-h','Sustentação oral e preferência'));html(pautaSig,campoRot('pauta','Sustentação oral'));
+    var pedidos=el('div','hero-pauta-pedidos');pedidos.dataset.cnj=G.cnj;pautaSig.append(pedidos);sig.append(pautaSig);
+    if(window.MutaPauta&&window.MutaPauta.pedidosProcesso)window.MutaPauta.pedidosProcesso(pedidos,G.cnj);
+  }
   if(N(destinoAtual)==='monocratica')html(encFields,campoRot('triagem','Hipóteses Monocrática','Hipótese do artigo 932'));
   html(encFields,campoRot('origem','Próxima ação','Próxima fase / providência após o cumprimento'));
   tj.prepend(el('h4','pm-mer-h','Julgamento'));
