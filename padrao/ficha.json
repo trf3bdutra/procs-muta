@@ -1365,6 +1365,14 @@
        "apelido": "registro_proposta"
       },
       {
+       "rotulo": "Proposta de julgamento",
+       "chave": "Proposta de julgamento",
+       "tipo": "texto-longo",
+       "secao": "triagem",
+       "apelido": "proposta_julgamento",
+       "regra": "Proposta atual, editável, independente do registro histórico do lote e do resultado definitivo do julgamento."
+      },
+      {
        "rotulo": "Nota de enquadramento da seleção prévia",
        "chave": "Seleção Prévia - Nota",
        "tipo": "texto-longo",
