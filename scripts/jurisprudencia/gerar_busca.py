@@ -32,6 +32,27 @@ def main():
         for f in sorted((J / pasta).glob("*.json.gz")):
             ano = f.name[:4]
             regs = json.load(gzip.open(f)).get("registros", [])
+            if J.name == "collegium":
+                import hashlib
+                campos = ("id", "numero_processo", "relator", "gabinete", "id_orgao_djen",
+                          "data", "data_iso", "data_fonte", "data_disponibilizacao_djen",
+                          "tipo_documento", "conteudo_texto", "link_documento_djen", "link_pje",
+                          "caracteres_texto_djen", "sha256_ementa")
+                proveniencia = {}
+                for pos, reg in enumerate(regs, 1):
+                    item = {k: reg[k] for k in campos if reg.get(k) is not None}
+                    item["posicao"] = pos
+                    item["arquivo"] = f"{pasta}/{f.name}"
+                    item["sha256_registro"] = hashlib.sha256(
+                        json.dumps(reg, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
+                    ).hexdigest()
+                    if reg.get("texto_guardado"):
+                        item["sha256_excerto"] = hashlib.sha256(reg["texto_guardado"].encode("utf-8")).hexdigest()
+                    proveniencia[reg["id"]] = item
+                out_meta = S / f"origem-{t}-{ano}.json.gz"
+                with open(out_meta, "wb") as fo:
+                    with gzip.GzipFile(fileobj=fo, mode="wb", mtime=0, compresslevel=9) as g:
+                        g.write(json.dumps(proveniencia, ensure_ascii=False, separators=(",", ":")).encode("utf-8"))
             linhas = []
             for r in regs:
                 txt = r.get("inteiro_teor") or r.get("resultado_colegiado") or r.get("texto_guardado") or ""
