@@ -1697,3 +1697,8 @@ html[data-tema=escuro] .rt-tipos .rt-kind-option{border-color:var(--line)}
 #gab .hero-proc-tags .hero-secao{display:inline-flex;align-items:center;border:1px solid var(--line,#8793a344);border-radius:4px;padding:2px 5px;font-size:10px;font-weight:650}
 #gab .hero-aut-historico{margin:9px 0 0;padding:8px 0 0;border-top:1px solid var(--line,#8793a344)}
 #gab .hero-aut-historico .hero-hist-body{min-width:0;overflow-wrap:anywhere}
+
+/* Enquadramento: rótulo e valor na mesma linha, sem alterar o cálculo. */
+#gab .hero-enc-fields>.hero-enq-label{display:flex;flex-direction:row;align-items:baseline;gap:7px;min-width:0;grid-column:1/-1;margin:0}
+#gab .hero-enq-label>.gl{flex:none;white-space:nowrap;margin:0}
+#gab .hero-enq-label>.ro{flex:1;min-width:0;overflow-wrap:anywhere;margin:0}
