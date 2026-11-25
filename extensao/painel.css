@@ -1788,3 +1788,55 @@ body.hero-gestao-ativa .layout>aside>.nav>button{flex:1;min-width:0}
 #gab .hero-steps>#hero-dock-pane-sinalizacoes{border:0;border-top:1px solid var(--line);border-radius:0;margin:7px 0 0;padding:6px 0 0;background:transparent;box-shadow:none}
 #gab .hero-steps>#hero-dock-pane-sinalizacoes>summary{display:none}
 #gab .hero-steps>#hero-dock-pane-sinalizacoes[hidden]{display:none!important}
+
+/* Tags com mesma geometria e diferença semântica discreta. */
+#gab .hero-proc-tags{display:inline-flex;align-items:center;gap:4px;flex-wrap:wrap}
+#gab .hero-proc-tags :is(.hero-class-only,.hero-tipo-ref,.hero-secao){box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;min-height:21px;height:21px;line-height:1;font-size:10.5px;font-weight:650;padding:3px 6px;border:1px solid var(--line);border-left:2px solid var(--tag-ink);border-radius:4px;color:var(--tag-ink);background:var(--card);white-space:nowrap}
+#gab .hero-proc-tags .hero-class-only{--tag-ink:#52647b}
+#gab .hero-proc-tags .hero-tipo-ref{--tag-ink:#7957a1;cursor:pointer}
+#gab .hero-proc-tags .hero-secao{--tag-ink:#59776c}
+#gab .hero-proc-tags .hero-secao-1{--tag-ink:#3568a5}
+#gab .hero-proc-tags .hero-secao-2{--tag-ink:#9b702b}
+#gab .hero-proc-tags .hero-secao-3{--tag-ink:#377a57}
+html[data-tema=escuro] #gab .hero-proc-tags .hero-class-only{--tag-ink:#b3c4d8}
+html[data-tema=escuro] #gab .hero-proc-tags .hero-tipo-ref{--tag-ink:#c4a9e6}
+html[data-tema=escuro] #gab .hero-proc-tags .hero-secao-1{--tag-ink:#94baf0}
+html[data-tema=escuro] #gab .hero-proc-tags .hero-secao-2{--tag-ink:#e6bf76}
+html[data-tema=escuro] #gab .hero-proc-tags .hero-secao-3{--tag-ink:#8ed3a7}
+#gab .hero-proc-tags .hero-tipo-ref:hover{border-color:var(--tag-ink)}
+#gab .pm-pl .pl-e{display:inline-flex;align-items:center;gap:4px}
+#gab .pm-pl.k-min .pl-e svg{color:#39805b}
+#gab .pm-pl.k-rev .pl-e svg{color:#3d6ca1}
+#gab .pm-pl.k-lib .pl-e svg{color:#805ca6}
+/* Escopo da pesquisa: um controle só, sem chips adicionais. */
+.rep-scope{display:flex;align-items:center;gap:4px;margin:0;min-width:0}
+.rep-scope select{flex:1;min-width:0;width:100%;height:29px;font-size:11.5px;border:1px solid var(--line);border-radius:5px;background:var(--field);color:var(--fg)}
+.rep-context{font-size:11px;margin:3px 0}
+#acv-modo-rel{margin:0}
+#modelos-app .acv-faixa{display:grid;gap:5px}
+/* Diretrizes: cabeçalho de consulta único e leitura editorial. */
+#dir-app{min-width:0;color:var(--fg)}
+#dir-app .dr-nav{padding:4px 0 6px;display:flex}
+#dir-app .dr-nav .seg{width:100%;display:flex}
+#dir-app .dr-nav .seg button{flex:1;font-size:12px}
+#dir-app .dr-head{position:static;background:transparent;padding:6px 0 8px;margin:0 0 8px}
+#dir-app .dr-head .af-l select{min-height:30px;border-radius:5px}
+#dir-app .dr-head #x-rq{margin:0;width:100%;min-width:0;min-height:30px}
+#dir-app .dr-content.dori.man{background:var(--card);border:0;border-radius:0;padding:3px 0;box-shadow:none;min-width:0}
+#dir-app .dr-section-title{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted-fg);margin:0 0 7px}
+#dir-app .dr-content :is(.xgd,.dr-chapter){border:0;border-bottom:1px solid var(--line);border-radius:0;margin:0;background:transparent}
+#dir-app .dr-content :is(.xgd,.dr-chapter)>summary{padding:9px 6px;cursor:pointer;font-size:12px;font-weight:650;background:transparent;color:var(--fg)}
+#dir-app .dr-content :is(.xgd,.dr-chapter)[open]>summary{background:var(--card2)}
+#dir-app .dr-chapter-body{padding:9px 6px;font-size:12px;line-height:1.55;overflow-wrap:anywhere}
+#dir-app .dr-chapter-body h3{font-size:13px;margin:12px 0 5px}
+#dir-app .dr-chapter-body h4{font-size:12px;margin:8px 0 3px}
+#dir-app .dr-chapter-body table{width:100%;table-layout:fixed;border-collapse:collapse;font-size:11px}
+#dir-app .dr-chapter-body :is(td,th){padding:5px;border:1px solid var(--line);vertical-align:top}
+#dir-app .dr-chapter-body .mn-n{font-size:10px;color:var(--muted-fg)}
+#dir-app .dr-chapter-body .xlb{display:inline-block;padding:2px 4px;border-radius:3px;background:var(--card2);font-size:10px;font-weight:650;margin-right:4px}
+#dir-app .dr-chapter-body :is(.tok,.xlb.ok){color:var(--ok)}
+#dir-app .dr-chapter-body :is(.tno,.xlb.no){color:var(--danger)}
+#dir-app .dr-list-head{margin-bottom:8px}
+#dir-app .dr-cap{margin:8px 0;border-bottom:1px solid var(--line);padding:6px 0}
+#dir-app .dr-cap h3{font-size:12px;margin:0 0 6px}
+#dir-app .dr-i{border-radius:4px;line-height:1.45}
