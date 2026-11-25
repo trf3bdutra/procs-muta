@@ -722,3 +722,45 @@ body.hero-redesign-v53 #gab .hero-steps-head{flex-wrap:wrap}
 body.hero-redesign-v53 #gab .hero-v53-painel-head{flex-wrap:wrap}
 body.hero-redesign-v53 #gab .hero-v53-painel-tabs{flex-wrap:wrap}
 body.hero-redesign-v53 #gab .hero-v53-painel-tabs>button{white-space:nowrap}
+/* ==== 0.77.0 · escala tipográfica única e dois níveis de painel (revisão geral) ====
+   T1  título do caso ................ Georgia 16
+   L1  rótulo de seção/cartão ........ 9,5 · 700 · caixa alta · ouro (rótulo de grupo interno: idem, apagado)
+   T2  título de item, grupo, recolhível, valor de destaque .. 12,5 · 650
+   C   corpo e valores ............... 12 · 400 (controles 11,5)
+   R   rótulo de campo ............... 11 · 600 · apagado, sem caixa alta
+   M   meta, apoio e links ........... 10,5–11 · 400 · apagado (subtítulo do cartão em Georgia itálico 11)
+   N   contadores .................... mono 9,5
+   Painel nível 1 (cartão): borda, raio 8, recuo 12, fundo do papel. Nível 2 (painel interno): fundo branco, borda, raio 6,
+   recuo 8–10. Recolhível interno: sem caixa, filete no alto. */
+body.hero-redesign-v53 #gab{font-size:12px}
+/* T2 */
+body.hero-redesign-v53 #gab :is(details.pc-s>summary b,.pc-s-t>b,.rt-c b.rt-t,.rt-c>.rt-h b,.rt-c>summary b,details.hero-v53-profile>summary,details.hero-v53-coverage>summary,details.hero-case-block>summary,details.hero-aut-historico>summary,details.hero-minuta-secao>summary h4,details.hero-case-block>summary h4,.au-doc .au-n b,.pv2-index b,.rt-kind-name,.hero-tipo-ref-v,.pv-docref>b){font:650 12.5px/1.35 'IBM Plex Sans',system-ui,sans-serif!important;letter-spacing:0!important;text-transform:none!important}
+body.hero-redesign-v53 #gab .rt-c :is(b,.rt-t){font-size:12.5px!important}
+body.hero-redesign-v53 #gab .pv-docref>b,body.hero-redesign-v53 #gab .pv-docref b{font-size:12px!important;font-weight:650!important}
+/* C */
+body.hero-redesign-v53 #gab :is(.ro,.pv-value,.hero-ann-text,.gf .val,dd,p:not(.muted):not(.status):not(.au-nl):not(.au-falta)){font-size:12px!important;line-height:1.45}
+body.hero-redesign-v53 #gab :is(input:not([type=checkbox]):not([type=radio]),select,textarea){font-size:12px!important}
+body.hero-redesign-v53 #gab .pm-ch{font-size:11.5px!important}
+/* R */
+body.hero-redesign-v53 #gab :is(.gl,.hero-designacoes .gl,.pv-field .gl,dt,.pc-dl dt,.pc-p>span,.rt-kind-label,.kicker){font:600 11px/1.3 'IBM Plex Sans',system-ui,sans-serif!important;letter-spacing:0!important;text-transform:none!important;color:var(--p53-muted)!important}
+/* M */
+body.hero-redesign-v53 #gab :is(small,.muted,.au-nl,.rt-d,.lnk,.status):not(.pc-sh small):not(.hero-sn-count):not(.au-d small){font-size:11px}
+body.hero-redesign-v53 #gab :is(small.muted,.pc-s-t small,.au-inf small,.rt-c small){font-size:10.5px!important}
+body.hero-redesign-v53 #gab .pc-sh small{font:italic 400 11px var(--p53-serif,Georgia)!important;color:var(--p53-muted)!important}
+/* L1 secundário: rótulos de grupo interno (Admissibilidade, Ministério Público…) e a fase do processo */
+body.hero-redesign-v53 #gab :is(.rt-g>span,.rt-grp,.rt-fase,.pm-fase,.pv-stage-head small,.hero-v53-dock-tabs>button){font-size:9.5px!important;letter-spacing:.1em!important}
+body.hero-redesign-v53 #gab :is(.rt-g>span,.rt-grp,.rt-fase){font-weight:700!important;text-transform:uppercase!important;color:var(--p53-muted)!important}
+/* N */
+body.hero-redesign-v53 #gab :is(.gn,.rt-n,.pc-s-n){font:600 9.5px/1.3 'IBM Plex Mono',ui-monospace,monospace!important;color:var(--p53-muted)!important;letter-spacing:0!important}
+/* sem Arial perdido */
+body.hero-redesign-v53 #gab :is(.rt-kind-name,.rt-kind-sig,.rt-kind-mode){font-family:'IBM Plex Sans',system-ui,sans-serif!important}
+body.hero-redesign-v53 #gab .rt-kind-sig{font-size:9.5px!important}
+/* painel nível 2 */
+body.hero-redesign-v53 #gab :is(.rt-c,.hero-case-block,.rt-tsel,.rt-adm-doc,.pv-synthesis,.au-doc,.pv2-index,.al-i,.sg-i,.sg-ig,.au-auto-d,.au-auto-av,.hero-tipo-roteiro){border-radius:6px!important}
+body.hero-redesign-v53 #gab :is(.rt-c,.hero-case-block,.rt-tsel,.pv2-index){background:var(--p53-card)!important;border:1px solid var(--p53-line)!important}
+body.hero-redesign-v53 #gab .rt-c .pv-docref{border-radius:5px!important}
+/* recolhível interno: sem caixa, filete no alto, chevron */
+body.hero-redesign-v53 #gab :is(.rt-c details,.hero-case-block details,.gr details):not(.pc-s):not(.au-it):not(.hero-tipo-roteiro)>summary{font:600 11.5px/1.35 'IBM Plex Sans',system-ui,sans-serif!important;color:var(--p53-ink)!important}
+body.hero-redesign-v53 #gab .rt-kind-name{font-size:12px!important;font-weight:500!important}
+body.hero-redesign-v53 #gab .rt-kind-mode{font-size:10px!important}
+body.hero-redesign-v53 #gab li.rt-f>span:first-child{font:700 9.5px/1.3 'IBM Plex Sans',system-ui,sans-serif!important;letter-spacing:.1em!important;text-transform:uppercase!important;color:var(--p53-muted)!important}
