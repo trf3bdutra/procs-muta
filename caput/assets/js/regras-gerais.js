@@ -207,7 +207,7 @@
   /* regras de etiquetas: as mesmas que Pautas › 3 · Etiquetagem aplica (motor), editadas aqui; grava sozinho no procs-muta */
   function etqGrava(msg) { var SM = sesM(); ST.msg = msg || 'Gravando as regras de etiquetas…'; ST.bad = false; pintar(); clearTimeout(etqGrava.t);
     etqGrava.t = setTimeout(function () { Promise.resolve(SM && SM.gravar && SM.gravar()).then(function (r) { if (!ST) return; ST.msg = r && r.ok === false && !r.ocupado ? 'Não gravou: ' + (r.erro || '') : 'Regras de etiquetas gravadas no procs-muta. Valem já na etapa 3 · Etiquetagem de Pautas.'; ST.bad = !!(r && r.ok === false && !r.ocupado); pintar(); }); }, 700); }
-  function vEtiquetas() { var SM = sesM(), RE = SM && SM.regrasEtiquetas; if (!RE) return '<p class="rg-n">O motor ainda está carregando as regras de etiquetas…</p>';
+  function vEtiquetas() { if (!ST.ctx.etiquetasAdmin) return '<p class="rg-n">A administração das regras de etiquetas está centralizada no Caput.</p><a class="rg-btn pri" href="/caput/etiquetas/">Abrir Regras de etiquetas</a>'; var SM = sesM(), RE = SM && SM.regrasEtiquetas; if (!RE) return '<p class="rg-n">O motor ainda está carregando as regras de etiquetas…</p>';
     var EFs = RE.efeitos(), L = RE.lista(), G = {}, ord = [];
     Object.keys(EFs).forEach(function (k) { var g = EFs[k].g; if (!G[g]) { G[g] = []; ord.push(g); } });
     L.forEach(function (r) { var g = (EFs[r.ef] || {}).g || 'Outras'; if (!G[g]) { G[g] = []; ord.push(g); } G[g].push(r); });
