@@ -1563,7 +1563,7 @@ window.MutaGabinete = { recarregar: function () { carregar(true); }, gravarPende
  function restricted(d){var s=window.MutaSigilo;return blocked(d)||!!(s&&(s.sigiloso()||(d&&s.docSigiloso(d))));}
  function currentDocs(){var au=window.MutaAutos,r=au&&au.doProcesso&&au.doProcesso();return r?list(r.lista):[];}
  function rows(){return A.mesclar(gravado('origem','Classificação documental'),G.pend[DOC]);}
- function classified(d){var r=rows().find(function(x){return x.id===String(d.id);});return {row:r,classes:r?String(r.classes||'').split(';').map(S).filter(Boolean):A.sugerir(d)};}
+ function classified(d){var r=rows().find(function(x){return x.id===String(d.id);});return {row:r,classes:r?A.classesValidas(r.classes):A.sugerir(d)};}
  function b(action,id,label){return '<button type="button" class="btn line sm" data-plus="'+esc(action)+'" data-plus-id="'+esc(id)+'">'+esc(label)+'</button>';}
  function inp(c,v,attrs){v=String(v==null?'':v);if(c.tipo==='lista'){var o=[''].concat(c.opcoes||[]);if(v&&o.indexOf(v)<0)o.push(v);return '<select '+attrs+'>'+o.map(function(x){return '<option value="'+esc(x)+'"'+(x===v?' selected':'')+'>'+esc(x||'—')+'</option>';}).join('')+'</select>';}
  return c.tipo==='texto-longo'?'<textarea rows="2" '+attrs+'>'+esc(v)+'</textarea>':'<input type="'+(c.tipo==='data'?'date':'text')+'" '+attrs+' value="'+esc(v)+'">';}
@@ -1576,10 +1576,10 @@ window.MutaGabinete = { recarregar: function () { carregar(true); }, gravarPende
  h+=d.map(function(row,i){return '<div class="plus-row"><div class="plus-head"><b>Registro '+(i+1)+'</b>'+b('table-remove',id+'|'+i,'Remover')+'</div><div class="gr">'+(c.colunas||[]).map(function(col){return '<label class="gf'+(col.tipo==='texto-longo'?' w':'')+'"><span class="gl">'+esc(col.rotulo)+'</span>'+inp(col,row[col.chave],'data-plus-col="'+esc(col.chave)+'" data-plus-index="'+i+'"')+'</label>';}).join('')+'</div></div>';}).join('');
  return h+'<div class="plus-head">'+b('table-add',id,'+ Linha')+'<span>'+b('table-cancel',id,'Cancelar')+' '+b('table-save',id,'Gravar')+'</span></div></div>';};
  function docHtml(d){if(!model(DOC))return '';if(restricted(d))return '<p class="muted">Classificação detalhada indisponível para documento sigiloso na ficha compartilhada.</p>';
- var id=String(d.id),c=classified(d),draft=docDraft[key(id)],cs=draft?String(draft.classes||'').split(';').map(S).filter(Boolean):c.classes;
+ var id=String(d.id),c=classified(d),draft=docDraft[key(id)],cs=draft?A.classesValidas(draft.classes):c.classes;
  var h='<div class="plus-doc" data-plus-doc="'+esc(id)+'"><div class="plus-head"><span class="muted">'+(c.row?'Classificação registrada':'Classificação sugerida')+'</span>'+b('doc-edit',id,draft?'Fechar':'+ Classificar')+'</div><div class="plus-tags">'+cs.map(function(x){return '<span class="chip">'+esc(x)+'</span>';}).join('')+'</div>';
  if(!draft)return h+'</div>';
- h+='<div class="plus-tags">'+A.categorias.map(function(x){return '<button type="button" class="chip'+(cs.indexOf(x)>=0?' on':'')+'" data-plus="doc-tag" data-plus-id="'+esc(id)+'" data-plus-cat="'+esc(x)+'" aria-pressed="'+(cs.indexOf(x)>=0)+'">'+esc(x)+'</button>';}).join('')+'</div><div class="gr">';
+ h+='<div class="plus-tags">'+A.categorias.map(function(x){return '<button type="button" class="chip'+(cs.indexOf(x)>=0?' on':'')+'" data-plus="doc-tag" data-plus-id="'+esc(id)+'" data-plus-cat="'+esc(x)+'" aria-pressed="'+(cs.indexOf(x)>=0)+'">'+esc(x)+'</button>';}).join('')+'</div><small class="muted">Até duas funções por documento. Relatável: peça não principal a mencionar no relatório.</small><div class="gr">';
  var cols=model(DOC).colunas.filter(function(c){return ['id','tipo','data','classes','origem','confirmada'].indexOf(c.chave)<0;});
  h+=cols.map(function(c){return '<label class="gf'+(c.tipo==='texto-longo'?' w':'')+'"><span class="gl">'+esc(c.rotulo)+'</span>'+inp(c,draft[c.chave],'data-plus-doc-col="'+esc(c.chave)+'"')+'</label>';}).join('');
  return h+'</div><div class="plus-head">'+b('doc-cancel',id,'Cancelar')+b('doc-save',id,'Confirmar e gravar')+'</div></div>';
@@ -1637,8 +1637,8 @@ window.MutaGabinete = { recarregar: function () { carregar(true); }, gravarPende
  else if(act.indexOf('doc-')===0){var doc=currentDocs().find(function(z){return String(z.id)===id;});if(!doc||restricted(doc))return;
  if(act==='doc-edit'){if(docDraft[k])delete docDraft[k];else{var z=classified(doc);docDraft[k]=Object.assign({id:id,tipo:doc.tipo,data:doc.data,classes:z.classes.join('; ')},z.row||{});}}
  else if(act==='doc-cancel')delete docDraft[k];
- else if(act==='doc-tag'){d=docDraft[k];if(!d)return;var L=String(d.classes||'').split(';').map(S).filter(Boolean),cat=x.dataset.plusCat;if(L.indexOf(cat)>=0)L=L.filter(function(t){return t!==cat;});else L.push(cat);d.classes=L.join('; ');}
- else if(act==='doc-save'){d=docDraft[k];if(!d)return;d.origem='Manual / confirmada';d.confirmada='Sim';marcar(DOC,A.mesclar(G.pend[DOC],[d]));delete docDraft[k];agendar(400);}
+ else if(act==='doc-tag'){d=docDraft[k];if(!d)return;var L=String(d.classes||'').split(';').map(S).filter(Boolean),cat=x.dataset.plusCat;if(L.indexOf(cat)>=0)L=L.filter(function(t){return t!==cat;});else {if(cat==='Principal')L=L.filter(function(t){return t!=='Relatável';});if(cat==='Relatável')L=L.filter(function(t){return t!=='Principal';});if(cat==='Dispensável')L=[];else L=L.filter(function(t){return t!=='Dispensável';});if(L.length>=2){st('Selecione no máximo duas classificações por documento. Retire uma antes de incluir outra.','err');return;}L.push(cat);}d.classes=A.classesValidas(L).join('; ');}
+ else if(act==='doc-save'){d=docDraft[k];if(!d)return;d.classes=A.classesValidas(d.classes).join('; ');d.origem='Manual / confirmada';d.confirmada='Sim';marcar(DOC,A.mesclar(G.pend[DOC],[d]));delete docDraft[k];agendar(400);}
  }render();
  },true);
 })();
