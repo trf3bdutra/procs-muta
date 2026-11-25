@@ -6,7 +6,7 @@
   "arquivo": "acervo/fonte.json",
   "chave": "processo"
  },
- "atualizado_em": "2026-11-25T08:22:43.430Z",
+ "atualizado_em": "2026-11-25T09:01:06.373Z",
  "registros": [
   {
    "processo": "0000008-23.2025.4.03.6000",
@@ -957,14 +957,14 @@
     "Responsável": "",
     "Próxima ação": "",
     "Observações": "",
-    "atualizado_em": "2026-11-19T19:59:38.360Z"
+    "atualizado_em": "2026-11-25T09:01:06.373Z"
    },
    "triagem": {
-    "Urgência": "",
+    "Urgência": "Tutela de urgência",
     "Urgência - Observação": "",
     "Urgência - Nível": "",
-    "Urgência - Apreciação": "",
-    "Urgência - Data": "",
+    "Urgência - Apreciação": "Pendente · não apreciada",
+    "Urgência - Data": "2026-11-25",
     "Urgência - Painel": "",
     "Tempest - Publicação": "",
     "Tempest - Protocolo": "",
@@ -1052,7 +1052,8 @@
     "JULGAMENTO": "",
     "Motivo da remarcação": "",
     "sessoes": []
-   }
+   },
+   "controles": {}
   },
   {
    "processo": "0000084-81.2024.4.03.6000",
