@@ -119,7 +119,11 @@ function campo(c) {
   else if (c.secao && G.cnj && autoGabPos(c.secao + '.' + c.chave)) h = h.replace(/^<div class="gf/, '<div class="gf au-auto').replace('</span>', ' <i class="au-tag" title="Preenchido pela extensão: confira">auto</i></span>');
   return h;
 }
+function heroEquipeCampo(c){return c&&((c.vocabulario==='equipe')||/^(Responsável|SERVIDOR|CORRETOR|Destino - Confirmado por)$| - Responsável$/.test(c.chave));}
+function heroEquipeNomes(v){return Array.from(new Set((G.equipe||[]).filter(function(x){return x&&x.situacao!=='inativo';}).map(function(x){return typeof x==='string'?x:x.nome;}).concat(v?[v]:[]).filter(Boolean))).sort(function(a,b){return a.localeCompare(b,'pt-BR');});}
+function heroEquipeInput(v,at,id){var dl='hero-equipe-'+id.replace(/[^a-zA-Z0-9_-]/g,'-');return '<input type="text" '+at+' list="'+esc(dl)+'" value="'+esc(v||'')+'" placeholder="Selecione ou digite"><datalist id="'+esc(dl)+'">'+heroEquipeNomes(v).map(function(x){return '<option value="'+esc(x)+'"></option>';}).join('')+'</datalist>';}
 function campo0(c) {
+  if(c.chave==='Status da triagem')c=Object.assign({},c,{rotulo:'Situação da triagem'});
   var longo = c.tipo === 'texto-longo' || c.tipo === 'tabela' || /Honorários/.test(c.chave || ''), cls = 'gf' + (longo ? ' w' : '');
   if (c.tipo === 'tabela') {
     var tv = c.secao ? gravado(c.secao, c.chave) : '';
@@ -134,6 +138,7 @@ function campo0(c) {
   if (typeof v === 'object') v = '';
   v = String(v);
   var at = ' data-fk="' + esc(id) + '"' + (bloq ? ' disabled title="Designação: só o gestor"' : '');
+  if(heroEquipeCampo(c))return '<div class="'+cls+(id in G.pend?' mud':'')+'"><span class="gl">'+rotuloDe(c)+'</span>'+heroEquipeInput(v,at,id)+'</div>';
   /* lista curta e Sim/Não viram botões, como na gaveta da pauta */
   var OC = c.tipo === 'simnao' ? ['Sim', 'Não'] : c.tipo === 'lista' ? (c.opcoes || []).map(function (o) { return typeof o === 'string' ? o : o.valor; }) : null;
   if (OC && !bloq && OC.length && OC.length <= 6 && OC.every(function (o) { return o.length <= 26; })) {
@@ -1317,18 +1322,9 @@ function heroOrganizarProntuario(){
   function curto(r){if(r.apelido)return r.apelido;if(normNome(r.nome)==='maria eduarda')return 'Duda';return r.nome;}
   design.replaceChildren();
   roles.forEach(function(role){
-    var sec=role[0],key=role[1],label=role[2],cur=S(V(sec,key)),item=el('label','hero-design-cell'),select=el('select');
-    item.append(el('span','gl',label));select.setAttribute('aria-label',label);select.dataset.fk=sec+'.'+key;
-    var blank=el('option','','—');blank.value='';select.append(blank);
-    var found=equipe.find(function(r){return [r.nome].concat(r.aliases||[]).some(function(x){return normNome(x)===normNome(cur);});});
-    equipe.slice().sort(function(a,b){return a.nome.localeCompare(b.nome,'pt-BR');}).forEach(function(r){
-      var o=el('option','',curto(r));o.value=r.nome;o.title=r.nome;select.append(o);
-    });
-    if(cur&&!found){var o=el('option','',cur);o.value=cur;select.append(o);}
-    select.value=found?found.nome:cur;select.title=found?found.nome:(cur||label);
-    select.disabled=!!(window.MUTA_WEB&&window.MUTA_WEB.leitura)||(sec==='producao'&&!G.gestor)||!equipe.length;
-    if(!equipe.length)select.title='Cadastro de servidores indisponível; atualize o prontuário';
-    item.append(select);design.append(item);
+    var sec=role[0],key=role[1],label=role[2],cur=S(V(sec,key)),item=el('label','hero-design-cell'),found=equipe.find(function(r){return [r.nome].concat(r.aliases||[]).some(function(x){return normNome(x)===normNome(cur);});});
+    item.append(el('span','gl',label));var disabled=!!(window.MUTA_WEB&&window.MUTA_WEB.leitura)||(sec==='producao'&&!G.gestor);
+    html(item,heroEquipeInput(found?found.nome:cur,'data-fk="'+esc(sec+'.'+key)+'" aria-label="'+esc(label)+'"'+(disabled?' disabled':''),'design-'+key));design.append(item);
   });
   /* Rodapé do próprio cartão superior, fora das três páginas horizontais. */
   var dock=el('section','hero-acomp-dock'),navA=el('div','hero-acomp-tabs');navA.setAttribute('role','tablist');
