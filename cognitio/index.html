@@ -1314,6 +1314,13 @@ header#top::before{background:linear-gradient(90deg,var(--eg) 0 50%,var(--eg2) 5
 .cog-criterion-dialog .cog-preparo-note{font-size:11px;line-height:1.45;color:#526b5e;margin:0}
 </style>
 <style id="cog-quick-refactor">.cog-quick-grid{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;align-items:start;gap:12px}.cog-quick-grid>details{min-width:0}.cog-quick-grid>details>summary{cursor:pointer;display:list-item;padding:6px 0;color:var(--v)}.cog-quick-grid>details[open]>summary{border-bottom:1px solid #dce4df;margin-bottom:8px}.cog-quick-grid [data-quick-prep][hidden]{display:none!important}.cog-quick-grid [data-q-acomp]{margin-top:10px}.cog-quick-grid [data-q-prep-warn],.cog-quick-grid [data-prep-warn]{color:#92652a;font-size:11px}.cog-quick-actions{position:sticky;bottom:0;background:var(--bg,#f9faf9);padding:8px;z-index:2;border-top:1px solid #dce4df}@media(max-width:900px){.cog-quick-grid{grid-template-columns:1fr!important}}</style>
+<style id="cog-shared-signals">
+.cog-list-table .cog-sign-head,.cog-list-table .cog-sign-cell{min-width:155px;width:155px;max-width:190px;vertical-align:top}
+.cog-fixed-subject{white-space:normal;overflow-wrap:anywhere;margin:5px 0}
+.cog-sign-tags{display:flex;flex-wrap:wrap;gap:3px}.cog-sign-chip{font-size:9px;line-height:1.4;padding:2px 4px;border:1px solid #cbd5cf;border-radius:3px;color:#526b60;background:#f5f7f5}.cog-sign-chip.ok{color:#35654c;border-color:#a9c5b5}.cog-sign-chip.al{color:#896222}.cog-sign-chip.cr{color:#983e32}
+.cog-task-card{display:grid;grid-template-columns:1fr auto;align-items:center;gap:2px 5px;border:1px solid #d8e0db;background:#f7f9f8;border-radius:4px;padding:5px;margin:5px 0}.cog-task-card small{font-size:10px;color:#526b60}
+.cog-sign-cell .cog-reg-actions{display:flex;flex-wrap:wrap}
+</style>
 </head>
 <body>
 <header id="top">
@@ -2359,7 +2366,7 @@ W.addEventListener('hashchange',rotear);W.addEventListener('popstate',rotear);
 function cogIr(p){
  if(!COG_SESSAO||!COG_PAGES[p])return;
  if(COG==='triagem'&&['todos','triar','triados'].includes(TRI_SUBABA))COG_SUB=TRI_SUBABA;
- if(COG!==p){SEL.clear();FILA=[];COG_STATUS='ativos';}
+ if(COG!==p){SEL.clear();FILA=[];COG_STATUS='ativos';COG_LOTE=null;COG_GRUPO='';COG_SES_FILTRO='';COG_DEST_COLECAO='';COG_TRANSFER=false;cogTriFacLimpar();LS.set('tri_atq','');LS.set('tri_atso','');}
  if(location.hash!=='#'+p){try{history.pushState(null,'','#'+p);}catch(e){location.hash=p;return;}}
  rotear();
 }
@@ -3157,18 +3164,9 @@ function chipsAtivos() { const ch = [];
 
 /* ========== EM TRIAGEM — funções do painel integrado ========== */
 function painelEmTriagem() {
- if(COG==='mono')return '<div class="tri-em tri-em3" id="tri-em"><div class="tri-em-corpo" id="tri-em-corpo">'+cogMatrizDestino(COG)+'</div></div>';
-  const tabs = [
-    {id:'triar', r:'A triar'},
-    {id:'triados', r:'Triados'},
-    {id:'selecao', r:'Seleção prévia'},
-  ];
-  let ctsHd = tabs.map(t => {
-    const ct = t.id==='triar' ? (U?U.length:0) : t.id==='triados' ? (_triCache?_triCache.items.size:somaIdx('triados')) : (_selCache?_selCache.items.size:somaIdx('selecao'));
-    return '<button class="tri-et'+(TRI_SUBABA===t.id?' on':'')+'" data-trisub="'+t.id+'" aria-selected="'+(TRI_SUBABA===t.id)+'" role="tab">'+t.r+'<small>'+ct+'</small></button>';
-  }).join('');
-  if (COG !== 'triagem') return '<div class="tri-em tri-em3" id="tri-em"><div class="tri-em-corpo" id="tri-em-corpo">'+conteudoSubAba()+'</div></div>';
-  return '<div class="tri-em tri-em2 cog-side-grid'+(LS.get('cog_side_triagem',false)?' cog-side-closed':'')+'" id="tri-em"><aside class="tri-lado" aria-label="Triagem: seleção, indicadores e filtros">'+cogSideButton('triagem')+'<div class="cog-side-content">'+atLado(LS.get('tri_triar_tarefa', ''))+'</div></aside><div class="tri-em-corpo" id="tri-em-corpo">'+conteudoSubAba()+'</div></div>';
+ const k=COG;if(!['triagem','selecao','mono'].includes(k))return '';
+ if(k!=='triagem')cogDestinoCarregar();
+ return '<div class="tri-em tri-em2 cog-side-grid'+(LS.get('cog_side_'+k,false)?' cog-side-closed':'')+'" id="tri-em"><aside class="tri-lado" aria-label="'+esc(COG_PAGES[k])+': seleção, indicadores e filtros">'+cogSideButton(k)+'<div class="cog-side-content">'+atLado(k==='triagem'?LS.get('tri_triar_tarefa',''):'')+'</div></aside><div class="tri-em-corpo" id="tri-em-corpo">'+conteudoSubAba()+'</div></div>';
 }
 /* abas A triar | Triados | Seleção prévia: primeira faixa do painel de métricas e filtros de cada vista */
 const temTriC = (it) => !!((it.triagem && Object.keys(it.triagem).length) || (it.prontuario_triagem && Object.keys(it.prontuario_triagem).length) || (it.teor && Object.keys(it.teor).length));
@@ -3176,18 +3174,46 @@ function nTriados() { const D = _colD.triados; if (!D) return '…'; const v = n
 function cogTriAnalisado(o){const r=o.row||{},st=r['Status da triagem'];return st==='Triado'||(st!=='A triar'&&!!(String(r['Triado em']||'').trim()||String(r['Registro - Atualizado em']||'').trim()||String(r['Registro - Triagem']||'').trim()));}
 const TRI_FAC={fac:{secao:[],classe:[],assunto:[],tarefa:[],prior:[]},etIn:[],etOut:[],rail:LS.get('cog_tri_rail',{secao:true,tarefa:true,etq:true})};
 let COG_LOTES=null,COG_LOTE=null,COG_LOTE_ERR='',COG_LOTE_LOADING=false,COG_GRUPO='';
+let COG_SES_FILTRO='',COG_DEST_COLECAO='';
 function cogSerie(l){return !!(l&&(l.serie||/^adp-serie-/.test(l.id)));}
 function cogGrupoDe(o){const it=COG_LOTE&&(COG_LOTE.itens||[]).find(i=>dg(i.processo)===o.d);return it&&it.grupo||'__';}
 function cogGrupoNome(g){return (COG_LOTE?.grupos||[]).find(x=>x.id===g)?.rotulo||'Sem grupo';}
-function cogTriBaseOrig(){const L=COG_TRANSFER?filtrar((U||[]).filter(o=>F.conj||F.base.includes(o.grupo))):(U||[]);if(!COG_LOTE)return L;const ids=new Set((COG_LOTE.itens||[]).filter(it=>!COG_GRUPO||(it.grupo||'__')===COG_GRUPO).map(it=>dg(it.processo)));return L.filter(o=>ids.has(o.d));}
+function cogSelecaoData(){
+ const abertas=new Set(sessoesPrevia().map(ss=>ss.data)),legacy=new Map();
+ if(_colD.selecao)for(const l of recorteSelecao(_colD.selecao).lotes){const d=l.reserva===true||l.id==='selecao-reserva'?'reserva':dataSelecao(l.sessao||(l.sessoes||[])[0]||String(l.id).replace(/^selecao-/,''));if(!d||d!=='reserva'&&!abertas.has(d))continue;for(const it of l.itens||[]){const id=dg(it.processo);if(!legacy.has(id))legacy.set(id,d);}}
+ const P=[];for(const o of ALL||[]){if(o.grupo==='pauta')continue;const st=estadoDe(o),dest=nz(st.dest),dt=dataSelecao(st.sd),explicit=String(st.sp||'').trim();if(dest&&dest!=='sessao')continue;
+ let sess='';if(explicit==='SELECIONADO PREVIAMENTE')sess=dt||(st.sd?'':'reserva');else if(!explicit&&!dest)sess=legacy.get(o.d)||'';
+ if(sess&&(sess==='reserva'||abertas.has(sess)))P.push({o,sess});}return P;
+}
+function cogDestinoCarregar(){
+ if(COG_LOTES===null&&!COG_LOTE_ERR&&!COG_LOTE_LOADING)setTimeout(()=>{if(COG!=='acervo'&&COG_LOTES===null&&!COG_LOTE_LOADING)cogLotesCarregar();},0);
+ if(!_colD.triados&&!_colLendo.triados)lerColecoes('triados');
+ if(COG==='selecao'&&!_colD.selecao&&!_colLendo.selecao)lerColecoes('selecao');
+}
+function cogDestinoBase(k=COG){
+ if(k==='mono')return cogRecorte('mono',COG_STATUS,ALL||[]);
+ if(k==='selecao')return cogSelecaoData().filter(x=>!COG_SES_FILTRO||x.sess===COG_SES_FILTRO).map(x=>x.o);
+ return [];
+}
+function cogOrigemMap(){
+ const M=new Map();for(const l of (_colD.triados?.lotes||[])){if(l.arquivado||cogSerie(l))continue;for(const it of l.itens||[]){const d=dg(it.processo);if(!M.has(d))M.set(d,{l,it});}}return M;
+}
+function cogDestinoColecoes(){
+ const P=cogDestinoBase(),orig=cogOrigemMap(),M=new Map();for(const o of P){const z=orig.get(o.d),id=z?.l.id||'__soltos',x=M.get(id)||{id,titulo:z?.l.titulo||'Sem coleção de origem',n:0};x.n++;M.set(id,x);}return [...M.values()];
+}
+function cogTriBaseOrig(){
+ let L=COG==='triagem'?(COG_TRANSFER?filtrar((U||[]).filter(o=>F.conj||F.base.includes(o.grupo))):(U||[])):cogDestinoBase();
+ if(COG!=='triagem'&&COG_DEST_COLECAO){const M=cogOrigemMap();L=L.filter(o=>(M.get(o.d)?.l.id||'__soltos')===COG_DEST_COLECAO);}
+ if(!COG_LOTE)return L;const ids=new Set((COG_LOTE.itens||[]).filter(it=>!COG_GRUPO||(it.grupo||'__')===COG_GRUPO).map(it=>dg(it.processo)));return L.filter(o=>ids.has(o.d));
+}
 async function cogLotesCarregar(){
  if(COG_LOTE_LOADING)return;COG_LOTE_LOADING=true;COG_LOTE_ERR='';
  try{const j=await cogApi('/api/painel?lote=1'+(COG_SESSAO&&COG_SESSAO.gestor?'&modo=cg':''));COG_LOTES=(j.lotes||[]).filter(l=>l.tipo==='triagem'&&!l.arquivado);}
- catch(e){COG_LOTE_ERR=e.message;}finally{COG_LOTE_LOADING=false;if(COG==='triagem')refazTriEm();}
+ catch(e){COG_LOTE_ERR=e.message;}finally{COG_LOTE_LOADING=false;if(['triagem','selecao','mono'].includes(COG))refazTriEm();}
 }
-async function cogLoteAbrir(id){if(!id){COG_LOTE=null;COG_GRUPO='';SEL.clear();refazTriEm();pintaRodape();return;}try{const j=await cogApi('/api/painel?lote=1&id='+encodeURIComponent(id)+(COG_SESSAO&&COG_SESSAO.gestor?'&modo=cg':''));if(!j.lote||j.lote.tipo!=='triagem')throw Error('Lote de triagem não encontrado');COG_LOTE=j.lote;COG_GRUPO='';COG_TRANSFER=false;cogTriFacLimpar();SEL.clear();LS.set('tri_atq','');LS.set('tri_atso','');LS.set('tri_atver','matriz');TRI_SUBABA=COG_SUB='todos';refazTriEm();pintaRodape();}catch(e){toast('Não abriu o lote: '+e.message,true);}}
+async function cogLoteAbrir(id){if(!id){COG_LOTE=null;COG_GRUPO='';SEL.clear();refazTriEm();pintaRodape();return;}try{const j=await cogApi('/api/painel?lote=1&id='+encodeURIComponent(id)+(COG_SESSAO&&COG_SESSAO.gestor?'&modo=cg':''));if(!j.lote||j.lote.tipo!=='triagem')throw Error('Lote de triagem não encontrado');COG_LOTE=j.lote;COG_GRUPO='';COG_TRANSFER=false;cogTriFacLimpar();SEL.clear();LS.set('tri_atq','');LS.set('tri_atso','');LS.set('tri_atver','matriz');if(COG==='triagem')TRI_SUBABA=COG_SUB='todos';COG_DEST_COLECAO='';refazTriEm();pintaRodape();}catch(e){toast('Não abriu o lote: '+e.message,true);}}
 function cogLoteBar(){
- const L=COG_LOTES||[],id=COG_LOTE&&COG_LOTE.id||'',opt=(l)=>'<option value="'+esc(l.id)+'"'+(l.id===id?' selected':'')+'>'+esc(l.titulo||l.id)+' · '+nf(l.total||0)+'</option>',G=COG_LOTE?.grupos||[],I=COG_LOTE?.itens||[];
+ const idsDest=COG==='triagem'?null:new Set(cogDestinoBase().map(o=>o.d)),L=(COG_LOTES||[]).filter(l=>{if(!idsDest)return true;const full=(_colD.triados?.lotes||[]).find(x=>x.id===l.id);return !full||(full.itens||[]).some(it=>idsDest.has(dg(it.processo)));}),id=COG_LOTE&&COG_LOTE.id||'',opt=(l)=>'<option value="'+esc(l.id)+'"'+(l.id===id?' selected':'')+'>'+esc(l.titulo||l.id)+' · '+nf(l.total||0)+'</option>',G=COG_LOTE?.grupos||[],I=COG_LOTE?.itens||[];
  const group=(key,nome)=>'<option value="'+esc(key)+'"'+(COG_GRUPO===key?' selected':'')+'>'+esc(nome)+' · '+nf(I.filter(it=>(it.grupo||'__')===key).length)+'</option>';
  return '<div class="cog-lotbar"><label>Lotes e séries <select data-cog-lote-select><option value="">Matriz geral</option>'+[['Lotes de triagem',L.filter(l=>!cogSerie(l))],['Séries transversais',L.filter(cogSerie)]].filter(x=>x[1].length).map(([n,ls])=>'<optgroup label="'+esc(n)+'">'+ls.map(opt).join('')+'</optgroup>').join('')+(id&&!L.some(l=>l.id===id)?'<option selected value="'+esc(id)+'">'+esc(COG_LOTE.titulo)+'</option>':'')+'</select></label><button type="button" class="btn sm" data-cog-lotes-refresh title="Atualizar lotes e séries">'+(COG_LOTE_LOADING?'Carregando…':'↻ Atualizar')+'</button>'+(id&&COG_SESSAO&&COG_SESSAO.gestor?'<button type="button" class="btn sm" data-cog-col-add>＋ Coluna</button>':'')+(id?'<a class="lk" href="/amicus/collectio/cg/?id='+encodeURIComponent(id)+'">Collectio ↗</a>':'')+(COG_LOTE_ERR?'<small>'+esc(COG_LOTE_ERR)+'</small>':'')+'</div>'+
  (id?'<div class="cog-lotbar cog-lot-groups"><label>'+ (cogSerie(COG_LOTE)?'Grupos da série':'Grupos do lote')+' <select data-cog-grupo><option value="">Todos os grupos · '+nf(I.length)+'</option>'+G.map(g=>group(g.id,g.rotulo)).join('')+group('__','Sem grupo')+'</select></label><small>'+nf(G.length)+' grupos · '+nf(I.length)+' processos registrados</small></div>':'');
@@ -3214,7 +3240,7 @@ D.addEventListener('click',e=>{const b=e.target.closest('[data-tri-fac-root] but
  else if(z.etout){const v=z.etout;st.etIn=st.etIn.filter(x=>x!==v);st.etOut=st.etOut.includes(v)?st.etOut.filter(x=>x!==v):st.etOut.concat(v);}
  const y=scrollY;refazTriEm();pintaRodape();W.scrollTo(0,y);
 },true);
-function cogTriStatus(o){return TRI_SUBABA==='todos'||(TRI_SUBABA==='triados'?cogTriAnalisado(o):!cogTriAnalisado(o));}
+function cogTriStatus(o){return COG!=='triagem'||TRI_SUBABA==='todos'||(TRI_SUBABA==='triados'?cogTriAnalisado(o):!cogTriAnalisado(o));}
 function cogTriBaseIds(){return new Set(cogTriBase().map(o=>o.d));}
 function abasTri() {
   const L=cogTriBase(),n=L.filter(cogTriAnalisado).length;
@@ -3226,6 +3252,7 @@ const COG_FICHA_SVG='<svg width="16" height="16" viewBox="0 0 24 24" fill="none"
 function cogFichaIcon(d,shadow=false){return '<button type="button" class="cog-ficha-icon" '+(shadow?'data-acao="ficha" data-p=':'data-ficha=')+'"'+esc(d)+'" title="Abrir ficha · Triagem (modo operacional)" aria-label="Abrir ficha do processo em Triagem">'+COG_FICHA_SVG+'</button>';}
 function triExcelIcon(attrs){return '<button type="button" '+attrs+' title="Opções de exportação Excel" aria-label="Opções de exportação Excel" aria-haspopup="menu" class="cog-xls-icon" style="display:inline-flex;vertical-align:middle;margin-left:8px;padding:5px;border:1px solid #c9d3ce;border-radius:6px;background:white;color:#526b60;cursor:pointer"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M6 2h8l5 5v15H6zM14 2v6h5M9 12l6 6m0-6-6 6"/></svg></button>';}
 function triExcelRows(sub,id,group,filter){
+ if(sub==='destino'){const orig=cogOrigemMap(),sess=COG==='selecao'?new Map(cogSelecaoData().map(x=>[x.o.d,x.sess])):null;return cogTriRecorte('',filter).filter(o=>!group||cogMatrizGrupo(o,orig,sess)===group).map(o=>({cnj:o.cnj,base:o,it:orig.get(o.d)?.it||{},lote:COG_LOTE?.titulo||orig.get(o.d)?.l.titulo||'',lid:COG_LOTE?.id||orig.get(o.d)?.l.id||'',grupo:cogMatrizGrupo(o,orig,sess),serie:cogSerie(COG_LOTE)?COG_LOTE.titulo:''}));}
  if(sub==='triar'){
   const q=nz(LS.get('tri_atq','')).trim(),so=LS.get('tri_atso',''),task=LS.get('tri_triar_tarefa','');
   let L=cogTriBase().filter(o=>cogTriStatus(o)&&(!group||(COG_LOTE?cogGrupoNome(cogGrupoDe(o)):(o.tarefa||o.grupo||'Triagem'))===group));
@@ -3247,16 +3274,16 @@ function triExcelWrite(rows,title,full){
  const str=v=>(v==null?'':typeof v==='object'?JSON.stringify(v):String(v)).slice(0,32767);
  const val=(r,k,b)=>str(r.it[k]??(r.base.row||{})[b||k]??r.base[b||k]??'');
  const cols=[['Processo',r=>r.cnj],['Classe',r=>val(r,'recurso','classe')||val(r,'classe')],['Assunto',r=>val(r,'assunto')],['Partes',r=>val(r,'partes')],['Tarefa no PJe',r=>val(r,'tarefa')],['Seção',r=>val(r,'secao')],['Coleção',r=>r.lote],['Grupo',r=>r.grupo],['Série',r=>r.serie],['Detalhamento do caso',r=>r.base&&r.base.row&&(['Detalhamento do caso','Tema','Especificidades'].some(k=>Object.prototype.hasOwnProperty.call(r.base.row,k)))?cogDetalhamento(r.base.row):[...new Set([val(r,'tipo_caso'),val(r,'especificidades')].map(x=>String(x||'').trim()).filter(Boolean))].join('\n')],['Resultado proposto',r=>val(r,'resultado')],['Observações',r=>val(r,'observacao')],['Pendências',r=>val(r,'pendencias','pend')]];
- if(rows.some(r=>r.base&&r.base.row))cols.push(['Situação da triagem',r=>cogTriAnalisado(r.base)?'Triado':'A triar'],...COG_MAT_FIELDS.filter(f=>f[0]!=='triagem.Status da triagem'&&f[0]!=='triagem.Detalhamento do caso'&&f[1]!=='Pendências'&&f[1]!=='Observações').map(f=>[f[1],r=>str((r.base.row||{})[f[0].slice(f[0].indexOf('.')+1)])]));
- if(COG==='triagem'&&COG_LOTE){for(const c of COG_LOTE.colunas_triagem||[]){cols.push([c.nome,r=>str(((COG_LOTE.itens||[]).find(it=>dg(it.processo)===dg(r.cnj))?.valores_triagem||{})[c.id])]);}}
+ if(rows.some(r=>r.base&&r.base.row))cols.push(['Situação da triagem',r=>cogTriAnalisado(r.base)?'Triado':'A triar'],...cogColDefs().filter(f=>cogMatrixColumn({id:f[0],nome:f[1],field:f})&&f[0]!=='triagem.Status da triagem'&&f[0]!=='triagem.Detalhamento do caso'&&f[1]!=='Pendências'&&f[1]!=='Observações').map(f=>[f[1],r=>str((r.base.row||{})[f[0].slice(f[0].indexOf('.')+1)])]));
+ if(COG_LOTE){for(const c of COG_LOTE.colunas_triagem||[]){cols.push([c.nome,r=>str(((COG_LOTE.itens||[]).find(it=>dg(it.processo)===dg(r.cnj))?.valores_triagem||{})[c.id])]);}}
  if(full)cols.push(['Etiquetas',r=>val(r,'etiquetas','etq')],['Modelo',r=>val(r,'modelo')],['Triagem',r=>val(r,'triagem')],['Prontuário',r=>val(r,'prontuario_triagem')],['Situação atual',r=>val(r,'situacao_atual')],['Registro operacional',r=>str(r.base.row||{})]);
  const out=xlsxBonito(X,rows,cols,title,'Exportação da Triagem',br(HOJE));baixar('triagem-'+nz(title).replace(/[^a-z0-9]+/g,'-').slice(0,65)+'-'+HOJE+'.xlsx',new Blob([out],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'}));
  }catch(e){toast('Não foi possível exportar: '+e.message,true);}
 }
 function triExcelOpen(btn,sub,id,group,title,keys){
  if(id===COG_OUTROS_ID)_colD.outras={lotes:[cogOutrosLote()]};
- if(sub!=='triar'&&!_colD[sub]){lerColecoes(sub);toast('Carregando a aba. Tente novamente após a leitura.');return;}
- const rows=triExcelRows(sub,id,group,false),filtered=sub==='triar'?triExcelRows(sub,id,group,true):keys?rows.filter(r=>keys.has(r.lid+'|'+r.cnj)):null;
+ if(sub!=='triar'&&sub!=='destino'&&!_colD[sub]){lerColecoes(sub);toast('Carregando a aba. Tente novamente após a leitura.');return;}
+ const rows=triExcelRows(sub,id,group,false),filtered=['triar','destino'].includes(sub)?triExcelRows(sub,id,group,true):keys?rows.filter(r=>keys.has(r.lid+'|'+r.cnj)):null;
  if(!rows)return;
  const old=document.getElementById('tri-xls-menu');if(old)old.remove();
  const p=document.createElement('div'),rect=btn.getBoundingClientRect();p.id='tri-xls-menu';p.setAttribute('role','menu');p.style.cssText='position:fixed;z-index:2147483000;width:245px;padding:7px;background:white;color:#203b39;border:1px solid #b8c9c1;border-radius:8px;box-shadow:0 8px 24px #0002;left:'+Math.max(8,Math.min(rect.right-245,innerWidth-253))+'px;top:'+Math.max(8,Math.min(rect.bottom+5,innerHeight-190))+'px';
@@ -3317,11 +3344,10 @@ function loteSel(sub) {
 function refazTriEm() { const em = document.getElementById('tri-em'); if (em) em.outerHTML = painelEmTriagem(); }
 
 function conteudoSubAba() {
-  if (COG==='triagem') return aTriarBands(LS.get('tri_triar_tarefa', ''));
-  if (COG==='selecao') return painelMatrizLote('selecao');
-  return '';
+ if(COG==='triagem')return aTriarBands(LS.get('tri_triar_tarefa',''));
+ if(COG==='selecao'||COG==='mono')return cogMatrizDestino(COG);
+ return '';
 }
-
 /* ===== Triados e Seleção prévia com a matriz do Collectio: cada lote (tarefa, série, escaninho, sessão) abre
    na própria página do Collectio, embutida aqui (?caput=1), com matriz, grupos, prontuários, ficha e minutas ===== */
 let _triIdx = null, _triIdxCarregando = false;
@@ -3361,7 +3387,7 @@ async function cogFichaGravar(cnj,campos){
  const j=await cogApi('/api/pauta?ficha=1',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({cnj,campos})});
  if(j.operacional)cogAtualizaFicha(j.operacional);
  if(j.recusados&&j.recusados.length)throw Error('Campos não gravados: '+j.recusados.join(', '));
- if(COG==='triagem'&&Object.prototype.hasOwnProperty.call(campos,'triagem.Status da triagem'))refazTriEm();
+ if(COG==='triagem'&&Object.prototype.hasOwnProperty.call(campos,'triagem.Status da triagem')||['selecao','mono'].includes(COG)&&Object.keys(campos).some(k=>['producao.Destino','producao.Mono - Tipo de ato','producao.Assinado','producao.Data da Assinatura','triagem.Seleção Prévia','pauta.Nova sessão de destino'].includes(k)))refazTriEm();
  return j;
 }
 function fichaDe(cnj,aba='Triagem'){
@@ -3435,28 +3461,10 @@ function cogOutrosLote(){
  return {id:COG_OUTROS_ID,titulo:'Outros destinos',tarefa:'Triados',descricao:'Despachos, decisões interlocutórias e demais encaminhamentos. A assinatura de um ato não terminativo não encerra o processo.',grupos,colunas:[],itens};
 }
 function cogMatrizDestino(k){
- const P=cogRecorte(k,COG_STATUS,ALL);
- if(!_colD.triados){lerColecoes('triados');return '<div class="tri-ld">Lendo as coleções de origem…</div>';}
- const orig=new Map();_colD.triados.lotes.forEach(l=>(l.itens||[]).forEach(it=>{const d=dg(it.processo);if(!orig.has(d))orig.set(d,{l,it});}));
- const M=new Map();
- const solto={id:'cog-'+k+'-ficha',titulo:'Sem coleção de origem',tarefa:'Ficha única',grupos:[],colunas:[]};
- P.forEach(o=>{
-  const z=orig.get(o.d),l=z?z.l:solto,r=o.row||{};
-  const it=z?Object.assign({},z.it):{processo:o.cnj,recurso:o.classe,partes:o.partes,assunto:o.assunto,tarefa:o.tarefa,etiquetas:(o.etq||[]).join(', ')};
-  delete it._h;delete it._l;
-  const p=it.prontuario_triagem||{},c=p.ctl||{},ca=p.cartao||{};
-  it.prontuario_triagem=Object.assign({},p,{ctl:Object.assign({},c,{prelim:r['Prelim.']||c.prelim,mpf:r['MPF - Custos Legis']||c.mpf,parecer:r.MPF||c.parecer,tempest:r.Tempestividade||c.tempest,preparo:r.Preparo||c.preparo,repres:r['Representação']||c.repres,midias:r['Mídias']||c.midias,urgTipo:r['Urgência']||c.urgTipo}),cartao:Object.assign({},ca,{tipoJ:r['Tipo de Julgamento']||ca.tipoJ})});
-  it.triagem=Object.assign({},it.triagem||{},{monocratica:r['Hipóteses Monocrática']||(it.triagem||{}).monocratica,ato:r['Voto - Resultado']||(it.triagem||{}).ato});
-  if(!M.has(l.id))M.set(l.id,Object.assign({},l,{itens:[]}));M.get(l.id).itens.push(it);
- });
- const data={lotes:[...M.values()],gerado_em:new Date().toLocaleString('pt-BR')};_colD[k]=data;
- const selected=colSel(k),sel=data.lotes.some(l=>l.id===selected)?selected:'';
- const cl=[{k:'Coleções de origem'},{id:'',r:'Todas',n:P.length,on:!sel}].concat(data.lotes.map(l=>({id:l.id,r:l.titulo||l.id,n:l.itens.length,on:l.id===sel})));
- setTimeout(()=>{const el=document.getElementById('tri-col-host');if(!el||COG!==k||!W.CaputColecoes||!data.lotes.length)return;W.CaputColecoes.montar(el,data,Object.assign(opcoesPainel(),{chave:k,lote:sel,abas:[],colecoes:cl,onLote:id=>{LS.set('tri_col_'+k,id);refazTriEm();},excelIcon:triExcelIcon,excelOpen:triExcelOpen}));},0);
- const btn=(id,t)=>'<button type="button" class="btn '+(COG_STATUS===id?'pri':'')+'" data-cog-status="'+id+'">'+t+' <b>'+nf(cogRecorte(k,id,ALL).length)+'</b></button>';
- return '<div class="at"><p class="at-k">Cognitio · recorte da ficha única</p><h2 class="at-h">'+esc(COG_PAGES[k])+'</h2><div class="at-ver">'+btn('ativos','Ativos')+' '+btn('concluidos','Assinados')+(k==='outras'?' '+btn('confirmar','Tipo a confirmar'):'')+'</div><p class="nota">'+(k==='outras'?'Atos não terminativos. Assinatura não equivale a encerramento do processo.':'Atos terminativos identificados pela espécie registrada na ficha.')+'</p>'+(P.length?'<div id="tri-col-host"></div>':'<div class="tri-ld">Nenhum processo neste recorte.</div>')+'</div>';
+ const P=cogTriRecorte(''),base=cogDestinoBase(k),name=COG_PAGES[k],loading=k==='selecao'&&!_colD.selecao;
+ return '<div class="at"><p class="at-k">Cognitio · ficha única · matriz compartilhada</p><h2 class="at-h">'+esc(name)+triExcelIcon('data-tri-xls="destino" data-xls-title="'+esc(name)+'"')+'</h2><p class="nota">'+(k==='mono'?'Decisões terminativas do relator · ativos e assinados.':'Sessões futuras sem pauta oficial e banco de reserva.')+' · '+nf(P.length)+' de '+nf(base.length)+' processos</p>'+cogLoteBar()+'<div class="cog-list-tools"><button type="button" class="btn sm" data-cog-select-filtered>Selecionar filtrados ('+nf(P.length)+')</button></div><div id="at-tab">'+(loading&&!P.length?'<div class="tri-ld">Lendo seleção prévia…</div>':atTabela(''))+'</div></div>';
 }
-D.addEventListener('click',e=>{const b=e.target.closest('[data-cog-status]');if(!b)return;COG_STATUS=b.dataset.cogStatus;SEL.clear();refazTriEm();},true);
+D.addEventListener('click',e=>{const b=e.target.closest('[data-cog-status]');if(!b)return;COG_STATUS=b.dataset.cogStatus;COG_LOTE=null;COG_GRUPO='';COG_DEST_COLECAO='';SEL.clear();refazTriEm();pintaRodape();},true);
 
 function painelMatrizLote(sub) {
   if (!_colD[sub]) { lerColecoes(sub); return '<div class="tri-ld">Lendo as coleções de ' + (sub === 'selecao' ? 'seleção prévia' : 'triagem') + '…</div>'; }
@@ -3482,10 +3490,10 @@ document.addEventListener('click', (e) => {
 }, true);
 let _atT = null;
 document.addEventListener('input', (e) => { const t = e.target; if (!t.matches || !t.matches('[data-atq]')) return; LS.set('tri_atq', t.value);
-  clearTimeout(_atT); _atT = setTimeout(() => { const tb = document.getElementById('at-tab'); if (tb) tb.innerHTML = atCorpo(LS.get('tri_triar_tarefa', '')); const railEl=D.querySelector('[data-tri-fac-root]');if(railEl)railEl.outerHTML=cogTriFacHtml(); }, 250); }, true);
+  clearTimeout(_atT); _atT = setTimeout(() => { const tb = document.getElementById('at-tab'); if (tb) tb.innerHTML = COG==='triagem'?atCorpo(LS.get('tri_triar_tarefa', '')):atTabela(''); const railEl=D.querySelector('[data-tri-fac-root]');if(railEl)railEl.outerHTML=cogTriFacHtml(); }, 250); }, true);
 
 document.addEventListener('click', (e) => { const t = e.target.closest && e.target.closest('[data-atmais]'); if (!t) return; e.preventDefault(); e.stopPropagation();
-  const g = t.dataset.atmais; LS.set('tri_atlim_' + g, LS.get('tri_atlim_' + g, 60) + 100); const tb = document.getElementById('at-tab'); if (tb) tb.innerHTML = atTabela(LS.get('tri_triar_tarefa', '')); }, true);
+  const g = t.dataset.atmais; LS.set('tri_atlim_' + g, LS.get('tri_atlim_' + g, 60) + 100); const tb = document.getElementById('at-tab'); if (tb) tb.innerHTML = atTabela(COG==='triagem'?LS.get('tri_triar_tarefa', ''):''); }, true);
 document.addEventListener('change', (e) => { const t = e.target; if (!t.matches || !t.matches('[data-atso],[data-ato]')) return;
   LS.set(t.matches('[data-atso]') ? 'tri_atso' : 'tri_ato', t.value); refazTriEm(); }, true);
 document.addEventListener('change', (e) => {
@@ -3570,8 +3578,8 @@ D.addEventListener('click',e=>{const b=e.target.closest?.('[data-cog-side]');if(
 function cogListHead(cols=cogColVis()){
  const compact=cogListCompact(),context=cols.filter(cogContextField),groups=cogColAgrupar(cols.filter(c=>!cogContextField(c)));
  const head=(c,i,g)=>'<th class="cog-ind-head'+(i===0?' cog-band-start':'')+(c.custom?' cog-list-custom':'')+'" data-cog-group="'+esc(g)+'" title="'+esc(c.nome+' · '+cogColInfo(c).guide)+'">'+esc(c.nome)+'</th>';
- const bands='<tr class="cog-list-bands"><th class="cog-fix-check" rowspan="2"></th><th class="cog-fix-cnj" rowspan="2">Processo · registros</th>'+(!compact?'<th colspan="'+(3+context.length)+'" class="cog-context-band" data-cog-band="Contexto do processo">Contexto do processo</th>':'')+groups.map(([g,L])=>'<th class="cog-band" data-cog-band="'+esc(g)+'" colspan="'+L.length+'"><span>'+esc(g)+'</span> <small>'+L.length+'</small></th>').join('')+'</tr>';
- const fields=(!compact?'<th data-cog-group="Contexto do processo">Classe · partes · seção · assunto CNJ</th>'+context.map((c,i)=>head(c,i,'Contexto do processo')).join('')+'<th>Na tarefa</th><th>Destino · próxima ação</th>':'')+groups.map(([g,L])=>L.map((c,i)=>head(c,i,g)).join('')).join('');
+ const bands='<tr class="cog-list-bands"><th class="cog-fix-check" rowspan="2"></th><th class="cog-fix-cnj" rowspan="2">Processo · assunto</th><th class="cog-sign-head" rowspan="2">Sinais</th>'+(!compact?'<th colspan="'+(2+context.length)+'" class="cog-context-band" data-cog-band="Contexto do processo">Contexto do processo</th>':'')+groups.map(([g,L])=>'<th class="cog-band" data-cog-band="'+esc(g)+'" colspan="'+L.length+'"><span>'+esc(g)+'</span> <small>'+L.length+'</small></th>').join('')+'</tr>';
+ const fields=(!compact?'<th data-cog-group="Contexto do processo">Classe · partes · seção</th>'+context.map((c,i)=>head(c,i,'Contexto do processo')).join('')+'<th>Destino · próxima ação</th>':'')+groups.map(([g,L])=>L.map((c,i)=>head(c,i,g)).join('')).join('');
  return '<thead>'+bands+'<tr class="cog-list-fields">'+fields+'</tr></thead>';
 }
 function cogListIndicador(o,f){
@@ -3591,9 +3599,9 @@ function atLinha(o,cols=cogColVis()) {
  const prt=mat.map((c,i)=>{const h=cogColCell(o,c);return i===0||cogColGroup(mat[i-1])!==cogColGroup(c)?h.replace('class="at-pr','class="cog-band-start at-pr'):h;});
  const dest=(o.dest||{}).k?'<span class="at-de k-'+esc(o.dest.k)+'">'+esc(o.dest.t)+'</span>':'<span class="at-pv" title="Destino provável pelas etiquetas e pela tarefa">'+esc(DLAB[o.prov]||'—')+'</span>',prox=r['Próxima ação']||'';
  return '<tr class="at-r'+(SEL.has(o.d)?' sel':'')+(tri?' tri':'')+'"><td class="cog-fix-check"><input type="checkbox" data-sel="'+o.d+'"'+(SEL.has(o.d)?' checked':'')+' aria-label="Selecionar '+esc(o.cnj)+'"></td>'+
- '<td class="at-p cog-fix-cnj"><span class="cog-proc-id">'+cogCopyCnj(o)+cogFichaIcon(o.d)+'</span><div class="cog-reg-actions">'+cogQuickIcon(o.d)+cogRegLabels(o)+'</div></td>'+(!compact?
- '<td class="cog-context-id"><span class="at-cl">'+esc(o.cl||'')+'</span> <span class="at-se">'+esc(o.secao||'')+'</span><span class="at-pa">'+esc(o.partes||'')+'</span><span class="at-sub">'+esc(o.assunto||'')+'</span></td>'+context.map(c=>cogColCell(o,c)).join('')+
- '<td class="at-ta"><span class="at-d'+(d>180?' cr':d>60?' al':'')+'">'+(d==null?'—':d+' d')+'</span><span class="at-sub">'+esc(o.desde?br(o.desde):'')+'</span></td>'+
+ '<td class="at-p cog-fix-cnj"><span class="cog-proc-id">'+cogCopyCnj(o)+cogFichaIcon(o.d)+'</span><span class="at-sub cog-fixed-subject">'+esc(o.assunto||'')+'</span><div class="cog-reg-actions">'+cogQuickIcon(o.d)+'</div></td>'+cogSignalCell(o)+(!compact?
+ '<td class="cog-context-id"><span class="at-cl">'+esc(o.cl||'')+'</span> <span class="at-se">'+esc(o.secao||'')+'</span><span class="at-pa">'+esc(o.partes||'')+'</span></td>'+context.map(c=>cogColCell(o,c)).join('')+
+
  '<td class="at-dt">'+dest+(prox?'<span class="at-sub at-cl2" title="'+esc(prox)+'">'+esc(prox)+'</span>':'')+'</td>':'')+prt.join('')+
  '</tr><tr class="cog-note-row'+(SEL.has(o.d)?' sel':'')+'"><td colspan="'+cogListSpan(cols)+'">'+cogNotasRodape(o)+'</td></tr>';
 }
@@ -3606,12 +3614,17 @@ function cogTriRecorte(task,filtrado=true){
  const q=filtrado?nz(LS.get('tri_atq','')).trim():'',so=filtrado?LS.get('tri_atso',''):'';
  return cogTriOrdenar(cogTriBase().filter(o=>cogTriStatus(o)&&(!task||(o.tarefa||o.grupo||'Triagem')===task)&&(!q||q.split(/\s+/).every(t=>o.hay.includes(t)))&&(!so||(so==='com'?atTri(o):!atTri(o)))));
 }
+function cogMatrizGrupo(o,orig,sessoes){
+ if(COG_LOTE)return cogGrupoNome(cogGrupoDe(o));if(COG==='triagem')return o.tarefa||o.grupo||'Triagem';
+ const z=orig?.get(o.d),g=z?.l.grupos?.find(g=>g.id===z.it.grupo),sess=sessoes?.get(o.d);
+ return (sess?(sess==='reserva'?'Banco de reserva':br(sess))+' · ':'')+(z?(z.l.titulo||z.l.id)+(g?' / '+g.rotulo:''):(o.tarefa||'Sem coleção de origem'));
+}
 function atTabela(soTarefa) {
-  const cols=cogColVis(),span=cogListSpan(cols),groups = new Map(); cogTriRecorte(soTarefa).forEach((o) => { const g = COG_LOTE?cogGrupoNome(cogGrupoDe(o)):(o.tarefa || o.grupo || 'Triagem'); if (!groups.has(g)) groups.set(g, []); groups.get(g).push(o); });
+  const cols=cogColVis(),span=cogListSpan(cols),groups = new Map(),orig=COG==='triagem'||COG_LOTE?null:cogOrigemMap(),sessoes=COG==='selecao'?new Map(cogSelecaoData().map(x=>[x.o.d,x.sess])):null; cogTriRecorte(soTarefa).forEach((o) => { const g = cogMatrizGrupo(o,orig,sessoes); if (!groups.has(g)) groups.set(g, []); groups.get(g).push(o); });
   if (!groups.size) return '<div class="tri-ld">Nenhum processo com esses filtros.</div>';
   let h = cogListTools()+'<div class="cog-unified-scroll'+(cogListCompact()?' cog-context-compact':'')+'"><table class="at-t cog-list-table">' + cogListHead(cols) + '<tbody>';
   groups.forEach((L, g) => { const ab = LS.get('tri_em_b_' + g, true), lim = LS.get('tri_atlim_' + g, 60), tri = L.filter(atTri).length;
-    h += '<tr class="at-g"><td colspan="'+span+'"><div class="cog-groupbar"><button type="button" class="at-gb" data-tribanda="' + esc(g) + '"><i>' + (ab ? '−' : '+') + '</i><b>' + esc(g) + '</b><small>' + nf(L.length) + ' processos · ' + nf(tri) + ' com prontuário</small></button>' + triExcelIcon('data-tri-xls="triar" data-xls-group="'+esc(g)+'" data-xls-title="'+esc(g)+'"') + '</div></td></tr>';
+    h += '<tr class="at-g"><td colspan="'+span+'"><div class="cog-groupbar"><button type="button" class="at-gb" data-tribanda="' + esc(g) + '"><i>' + (ab ? '−' : '+') + '</i><b>' + esc(g) + '</b><small>' + nf(L.length) + ' processos · ' + nf(tri) + ' com prontuário</small></button>' + triExcelIcon('data-tri-xls="'+(COG==='triagem'?'triar':'destino')+'" data-xls-group="'+esc(g)+'" data-xls-title="'+esc(g)+'"') + '</div></td></tr>';
     if (ab) { h += L.slice(0, lim).map(o=>atLinha(o,cols)).join(''); if (L.length > lim) h += '<tr class="at-mais"><td colspan="'+span+'"><button type="button" class="btn sm" data-atmais="' + esc(g) + '">Mostrar mais ' + Math.min(100, L.length - lim) + ' de ' + nf(L.length - lim) + '</button></td></tr>'; } });
   return h + '</tbody></table></div>';
 }
@@ -3760,19 +3773,19 @@ function cogExtraParent(c){
 function cogMonitorDetail(c){return !!cogExtraParent(c)||(!c.custom&&cogColGroup(c)==='Equipe e produção');}
 const COG_PREPARO_MATRIX=new Set(["triagem.Preparo","triagem.Preparo - Situação AJG","triagem.Preparo - Conferência STN","triagem.Preparo - Regularização","triagem.Preparo - Cumprimento"]);
 const COG_PREPARO_MATRIX_LABELS={'triagem.Preparo':'Situação do preparo','triagem.Preparo - Situação AJG':'Gratuidade · situação','triagem.Preparo - Conferência STN':'Comprovação STN','triagem.Preparo - Regularização':'Regularização · providência','triagem.Preparo - Cumprimento':'Regularização · cumprimento'};
-function cogMatrixColumn(c){return !c.custom&&COG_PREPARO_MATRIX.has(c.id)||!cogRegKind(c)&&!cogMonitorDetail(c);}
+function cogMatrixColumn(c){if(!c.custom&&c.id==='triagem.Detalhamento do caso')return false;return !c.custom&&COG_PREPARO_MATRIX.has(c.id)||!cogRegKind(c)&&!cogMonitorDetail(c);}
 function cogColumnEnabled(c,p){return cogMatrixColumn(c)&&(!p||!p.hidden.includes(c.id));}
 function cogExtraFields(parent){return cogColDefs().map(f=>({id:f[0],nome:f[1],field:f})).filter(c=>cogExtraParent(c)===parent);}
 function cogExtraApplicable(parent,v){return parent==='triagem.MPF'?nz(v)==='com parecer':parent==='triagem.Tipo de Julgamento'?/retrata/.test(nz(v)):parent==='producao.Mono - Tipo de ato'?/monocratica|932/.test(nz(v)):!!String(v||'').trim();}
 function cogFindColumn(id){return cogColDefs().map(f=>({id:f[0],nome:f[1],field:f})).find(c=>c.id===id);}
 
 const COG_COL_GROUPS=['Contexto do processo','Caso e julgamento','Encaminhamento e trâmite','Admissibilidade','Preparo','Recursos e respostas','Ministério Público','Sinalizações','Monitoramento especial','Equipe e produção','Critérios do lote','Outros campos'];
-function cogContextField(c){return !c.custom&&['triagem.Detalhamento do caso','triagem.Tipo de Julgamento'].includes(c.id);}
+function cogContextField(c){return !c.custom&&c.id==='triagem.Tipo de Julgamento';}
 function cogColGroup(c){if(!c.custom&&COG_PREPARO_MATRIX.has(c.id))return 'Preparo';if(cogContextField(c))return 'Contexto do processo';if(c.custom)return 'Critérios do lote';const k=c.id,m=COG_COL_META[k]||{},g=m.grupo||'';if(/^(origem\.Responsável|producao\.(SERVIDOR|CORRETOR)|triagem\.Destino - Confirmado por)$/.test(k)||/Designação|Revisão|Produção/.test(g))return 'Equipe e produção';if(/^controles\.Monocrática/.test(k))return 'Equipe e produção';if(/^triagem\.Urgência/.test(k)||k==='triagem.META'||/^controles\.(Meta|Sobrestamento|Sensível) -/.test(k))return 'Monitoramento especial';if(k==='triagem.O que falta sanar')return 'Encaminhamento e trâmite';if(/^triagem\.(Intercorrências|Avisos)$/.test(k))return 'Sinalizações';if(/^triagem\.(MPF|Parecer|ID do Parecer)/.test(k)||g==='Ministério Público')return 'Ministério Público';if(/^origem\.Contrarrazões|^triagem\.(Prelim\.|Descrição da Preliminar|Recurso adesivo|Má-fé alegada)/.test(k)||g==='Recursos e contrarrazões')return 'Recursos e respostas';if(/Admissibilidade e regularidade/.test(g)||/^triagem\.(Tempest|Preparo|Representação|Regularidade|DPU|AJG|Impedimento|Cabimento|Instrução|Dialeticidade|Inovação|Reexame|AgInt - Impugnação)/.test(k))return 'Admissibilidade';if(/^producao\.(Destino|Mono - Tipo de ato)|^triagem\.(Status da triagem|Seleção Prévia|Hipóteses Monocrática|Art\. 932)|^origem\.(Próxima ação|Próximo pronunciamento|Ato a proferir)/.test(k))return 'Encaminhamento e trâmite';if(/^triagem\.(Detalhamento do caso|Tipo de Julgamento|Retratação|ED -|AgInt -|Assunto|Síntese|COMPLEXIDADE)|^origem\.Sentença/.test(k)||/Matéria|Caso, Conteúdo|Espécie|Embargos de declaração|Agravo interno|Juízo de retratação/.test(g))return 'Caso e julgamento';return 'Outros campos';}
 function cogColAgrupar(cols){const M=new Map(COG_COL_GROUPS.map(g=>[g,[]]));cols.forEach(c=>M.get(cogColGroup(c)).push(c));return [...M.entries()].filter(x=>x[1].length);}
 function cogColVis(){const l=cogMatLayout();const ordered=[...l.S,...l.C].filter(c=>!cogRegKind(c)&&(!cogListCompact()||!cogContextField(c))&&cogColumnEnabled(c,l.p)).sort((a,b)=>{if(!l.p)return 0;const i=l.p.ord.indexOf(a.id),j=l.p.ord.indexOf(b.id);return (i<0?999:i)-(j<0?999:j);});return cogColAgrupar(ordered).flatMap(x=>x[1]);}
 function cogListCompact(){return !!LS.get('cog_list_compact',false);}
-function cogListSpan(cols){return (cogListCompact()?2:5)+cols.length;}
+function cogListSpan(cols){return (cogListCompact()?3:5)+cols.length;}
 
 function cogServidorCampo(k){return /(?:^|\.)(?:Responsável|SERVIDOR|CORRETOR|Destino - Confirmado por)$| - Responsável$/.test(k);}
 function cogEquipeCadastro(){const a=equipeAtual();return a.length?a:(COG_SESSAO?.equipe||[]);}
@@ -3792,8 +3805,13 @@ function cogRegFields(kind){
  [['triagem.Intercorrências','Intercorrências'],['triagem.Avisos','Avisos'],['origem.Observações','Anotações gerais']].forEach(([id,nome])=>M.set(id,{id,nome,field:[id,nome,null,'texto-longo']}));
  return [...M.values()].filter(c=>cogRegKind(c)===kind);
 }
+function cogSignalCell(o){
+ const r=o.row||{},d=atDias(o),tri=cogTriAnalisado(o),pr=atTri(o),lim=o.liminar&&!/^apreciad|^deferid|^indeferid|^prejudicad/i.test(String(r['Urgência - Apreciação']||''));
+ const chips=[tri?['Triado','ok']:['A triar',''],pr?['Com prontuário','ok']:null,o.prior?['Prioridade','al']:null,lim?['Liminar pendente','cr']:null,o.sigiloso?['Sigiloso','al']:null,o.div?['Divergência','al']:null].filter(Boolean);
+ return '<td class="cog-sign-cell"><div class="cog-sign-tags">'+chips.map(([t,c])=>'<span class="cog-sign-chip '+c+'">'+esc(t)+'</span>').join('')+'</div><div class="cog-task-card" title="'+esc(o.tarefa||'')+'"><small>Na tarefa</small><b class="at-d'+(d>180?' cr':d>60?' al':'')+'">'+(d==null?'—':d+' dias')+'</b><small>'+esc(o.desde?br(o.desde):'')+'</small></div><div class="cog-reg-actions">'+cogRegLabels(o)+'</div></td>';
+}
 function cogRegLabels(o){
- const r=o.row||{},sys=[o.prior?'Prioridade legal':'',o.liminar?'Liminar pendente':'',o.sigiloso?'Sigiloso':'',o.div?'Divergência de seção':''].filter(Boolean);
+ const r=o.row||{},sys=[o.prior?'Prioridade legal':'',o.liminar&&!/^apreciad|^deferid|^indeferid|^prejudicad/i.test(String(r['Urgência - Apreciação']||''))?'Liminar pendente':'',o.sigiloso?'Sigiloso':'',o.div?'Divergência de seção':''].filter(Boolean);
  return ['sinais','notas'].map(kind=>{
  const list=cogRegFields(kind).map(c=>[c.nome,cogColValue(o,c)]).filter(x=>x[1]);
  const tip=(kind==='sinais'?'Sinalizações':'Observações')+(list.length||kind==='sinais'&&sys.length?':\n'+(kind==='sinais'?sys.concat(list.map(x=>x.join(': '))):list.map(x=>x.join(': '))).join('\n'):' · adicionar');
@@ -3910,21 +3928,22 @@ D.addEventListener('click',e=>{const b=e.target.closest?.('[data-cog-context]');
 D.addEventListener('change',e=>{const b=e.target.closest?.('[data-cog-jump]');if(!b||!b.value)return;const box=D.querySelector('.cog-unified-scroll'),th=box&&[...box.querySelectorAll('[data-cog-group]')].find(x=>x.dataset.cogGroup===b.value);if(th){const fixed=box.querySelector('.cog-fix-cnj'),w=(fixed?.offsetWidth||230)+(box.querySelector('.cog-fix-check')?.offsetWidth||32);box.scrollLeft+=th.getBoundingClientRect().left-box.getBoundingClientRect().left-w;}b.value='';});
 
 D.addEventListener('input',e=>{const el=e.target;if(!el.matches?.('.cog-pend-input'))return;el.style.height='auto';el.style.height=Math.max(44,el.scrollHeight+2)+'px';},true);
+function cogMatPrefId(){return (COG==='triagem'?'':COG+'-')+(COG_LOTE?.id||'geral');}
 function cogMatLayout(){
- const S=cogColDefs().map(f=>({id:f[0],nome:f[1],field:f})),C=(COG_LOTE?COG_LOTE.colunas_triagem||[]:[]).map(c=>({id:c.id,nome:c.nome,custom:c})),prefKey='cog_mat_cols_'+(COG_LOTE?.id||'geral'),old=LS.get(prefKey,null),canon=k=>['triagem.Tema','triagem.Especificidades'].includes(k)?'triagem.Detalhamento do caso':k,uniq=L=>[...new Set(L.map(canon))],p=old?{...old,ord:uniq(old.ord||[]),hidden:uniq(old.hidden||[]),monitorV2:true}:null,sort=L=>p?L.slice().sort((a,b)=>{const i=p.ord.indexOf(a.id),j=p.ord.indexOf(b.id);return (i<0?999:i)-(j<0?999:j);}):L;
+ const S=cogColDefs().map(f=>({id:f[0],nome:f[1],field:f})),C=(COG_LOTE?COG_LOTE.colunas_triagem||[]:[]).map(c=>({id:c.id,nome:c.nome,custom:c})),prefKey='cog_mat_cols_'+cogMatPrefId(),old=LS.get(prefKey,null),canon=k=>['triagem.Tema','triagem.Especificidades'].includes(k)?'triagem.Detalhamento do caso':k,uniq=L=>[...new Set(L.map(canon))],p=old?{...old,ord:uniq(old.ord||[]),hidden:uniq(old.hidden||[]),monitorV2:true}:null,sort=L=>p?L.slice().sort((a,b)=>{const i=p.ord.indexOf(a.id),j=p.ord.indexOf(b.id);return (i<0?999:i)-(j<0?999:j);}):L;
  if(p&&!old.monitorV2){p.hidden=uniq(p.hidden.concat(S.filter(cogMonitorDetail).map(c=>c.id)));if(!p.hidden.includes('triagem.O que falta sanar'))p.hidden=p.hidden.filter(x=>x!=='triagem.O que falta sanar');}
  if(p&&!old.preparoV3){p.hidden=p.hidden.filter(x=>!COG_PREPARO_MATRIX.has(x)||x==='triagem.Preparo');p.preparoV3=true;}
  if(p&&JSON.stringify(p)!==JSON.stringify(old))LS.set(prefKey,p);
  return {S:sort(S),C:sort(C),p};
 }
 function cogMatPrefs(){
- const M=cogMatLayout(),id=COG_LOTE?.id||'geral',d=D.createElement('dialog'),ordered=[...M.S,...M.C].filter(cogMatrixColumn).sort((a,b)=>{if(!M.p)return 0;const i=M.p.ord.indexOf(a.id),j=M.p.ord.indexOf(b.id);return (i<0?999:i)-(j<0?999:j);});
+ const M=cogMatLayout(),id=cogMatPrefId(),d=D.createElement('dialog'),ordered=[...M.S,...M.C].filter(cogMatrixColumn).sort((a,b)=>{if(!M.p)return 0;const i=M.p.ord.indexOf(a.id),j=M.p.ord.indexOf(b.id);return (i<0?999:i)-(j<0?999:j);});
  d.className='cog-create-lot';d.innerHTML='<form><header><h3>Colunas da lista</h3><button type="button" data-cancel aria-label="Fechar">×</button></header><p>Escolha os campos visíveis e ordene dentro de cada grupo. O número do processo permanece fixo. Fundamentos e documentos ficam nos detalhes do critério; parecer e monitoramento têm extras na própria célula. Equipe e produção permanecem na ficha.</p><div class="cog-pref-list">'+cogColAgrupar(ordered).map(([g,L])=>'<section data-pref-group><div class="cog-pref-group">'+esc(g)+' <button type="button" class="btn sm" data-pref-all>Todos / nenhum</button></div><div data-pref-rows>'+L.map(c=>'<div class="cog-pref-row" data-pref="'+esc(c.id)+'"><label><input type="checkbox"'+(cogColumnEnabled(c,M.p)?' checked':'')+'> '+esc(c.nome)+'</label><button type="button" data-move="-1" title="Subir no grupo">↑</button><button type="button" data-move="1" title="Descer no grupo">↓</button></div>').join('')+'</div></section>').join('')+'</div><footer><button type="button" class="btn" data-reset>Restaurar padrão</button><button type="submit" class="btn pri">Aplicar</button></footer></form>';
  D.body.appendChild(d);d.addEventListener('close',()=>d.remove(),{once:true});d.querySelector('[data-cancel]').onclick=()=>d.close();d.showModal();const list=d.querySelector('.cog-pref-list');
  d.addEventListener('click',e=>{const b=e.target.closest('[data-move]');if(b){const row=b.closest('[data-pref]'),p=Number(b.dataset.move),parent=row.parentElement;if(p<0&&row.previousElementSibling)parent.insertBefore(row,row.previousElementSibling);if(p>0&&row.nextElementSibling)parent.insertBefore(row.nextElementSibling,row);}const all=e.target.closest('[data-pref-all]');if(all){const checks=[...all.closest('[data-pref-group]').querySelectorAll('[data-pref] input')],on=checks.some(x=>!x.checked);checks.forEach(x=>x.checked=on);}if(e.target.closest('[data-reset]')){LS.set('cog_mat_cols_'+id,null);d.close();refazAtTab();}});
  d.querySelector('form').onsubmit=e=>{e.preventDefault();const rs=[...list.querySelectorAll('[data-pref]')];LS.set('cog_mat_cols_'+id,{ord:rs.map(r=>r.dataset.pref),hidden:rs.filter(r=>!r.querySelector('input').checked).map(r=>r.dataset.pref),monitorV2:true,preparoV3:true});d.close();refazAtTab();};
 }
-function cogMatBulk(){if(!COG_LOTE)return;const l=COG_LOTE,C=l.colunas_triagem||[],L=cogTriRecorte(LS.get('tri_triar_tarefa','')).filter(o=>SEL.has(o.d));if(!L.length||!C.length)return toast('Selecione processos do lote e crie uma coluna.',true);const d=D.createElement('dialog');d.className='cog-create-lot';d.innerHTML='<form><header><h3>Editar coluna em lote</h3><button type="button" data-cancel>×</button></header><p>'+nf(L.length)+' processos selecionados no recorte atual.</p><label>Coluna<select name="col">'+C.map(c=>'<option value="'+esc(c.id)+'">'+esc(c.nome)+'</option>').join('')+'</select></label><label>Valor<div data-val></div></label><p role="status"></p><footer><button type="button" class="btn" data-cancel>Cancelar</button><button class="btn pri" type="submit">Gravar em todos</button></footer></form>';
+function cogMatBulk(){if(!COG_LOTE)return;const l=COG_LOTE,C=l.colunas_triagem||[],L=cogTriRecorte(COG==='triagem'?LS.get('tri_triar_tarefa',''):'').filter(o=>SEL.has(o.d));if(!L.length||!C.length)return toast('Selecione processos do lote e crie uma coluna.',true);const d=D.createElement('dialog');d.className='cog-create-lot';d.innerHTML='<form><header><h3>Editar coluna em lote</h3><button type="button" data-cancel>×</button></header><p>'+nf(L.length)+' processos selecionados no recorte atual.</p><label>Coluna<select name="col">'+C.map(c=>'<option value="'+esc(c.id)+'">'+esc(c.nome)+'</option>').join('')+'</select></label><label>Valor<div data-val></div></label><p role="status"></p><footer><button type="button" class="btn" data-cancel>Cancelar</button><button class="btn pri" type="submit">Gravar em todos</button></footer></form>';
  D.body.appendChild(d);d.addEventListener('close',()=>d.remove(),{once:true});d.querySelectorAll('[data-cancel]').forEach(b=>b.onclick=()=>d.close());d.showModal();const f=d.querySelector('form'),sel=f.elements.col,vh=d.querySelector('[data-val]'),pinta=()=>{const c=C.find(x=>x.id===sel.value);vh.innerHTML=['lista','simnao'].includes(c.tipo)?'<select name="valor"><option value="">Limpar valor</option>'+c.opcoes.map(v=>'<option value="'+esc(v)+'">'+esc(v)+'</option>').join('')+'</select>':c.tipo==='longo'?'<textarea name="valor" rows="4"></textarea>':'<input name="valor" type="'+(c.tipo==='data'?'date':c.tipo==='numero'?'number':'text')+'"'+(c.tipo==='numero'?' step="any"':'')+'>';};sel.onchange=pinta;pinta();f.onsubmit=async e=>{e.preventDefault();const b=f.querySelector('[type=submit]'),c=sel.value,v=f.elements.valor.value;b.disabled=true;try{await cogLotePost({acao:'triagem-celula',id:l.id,coluna:c,processos:L.map(o=>o.cnj),valor:v});const ids=new Set(L.map(o=>o.d));l.itens.filter(it=>ids.has(dg(it.processo))).forEach(it=>it.valores_triagem=Object.assign({},it.valores_triagem||{},{[c]:v}));d.close();refazAtTab();toast('Coluna atualizada em '+L.length+' processos.');}catch(err){f.querySelector('[role=status]').textContent=err.message;b.disabled=false;}};
 }
 D.addEventListener('click',e=>{if(e.target.closest('[data-cog-mat-prefs]'))cogMatPrefs();if(e.target.closest('[data-cog-mat-bulk]'))cogMatBulk();},true);
@@ -3938,7 +3957,7 @@ function cogMatrizEditavelLegada(task){
 }
 D.addEventListener('change',async e=>{const el=e.target;if(!el.matches||!el.matches('[data-cog-mat]'))return;const o=IDX.get(el.dataset.d);if(!o||el.value===el.dataset.ant)return;const old=el.dataset.ant,v=el.value;el.disabled=true;try{await opcoesPainel().gravarFicha(o.cnj,{[el.dataset.cogMat]:v});el.dataset.ant=v;toast('Ficha atualizada.');}catch(err){el.value=old;toast('Não foi possível gravar: '+err.message,true);}finally{el.disabled=false;}},true);
 D.addEventListener('click',e=>{if(!e.target.closest('[data-cog-mat-more]'))return;LS.set('cog_matriz_lim',LS.get('cog_matriz_lim',50)+50);refazAtTab();},true);
-function refazAtTab() { const tb=document.getElementById('at-tab');if(tb){const box=tb.querySelector('.cog-unified-scroll'),left=box?.scrollLeft||0,top=box?.scrollTop||0;tb.innerHTML=atCorpo(LS.get('tri_triar_tarefa',''));const next=tb.querySelector('.cog-unified-scroll');if(next){next.scrollLeft=left;next.scrollTop=top;}} }
+function refazAtTab() { const tb=document.getElementById('at-tab');if(tb){const box=tb.querySelector('.cog-unified-scroll'),left=box?.scrollLeft||0,top=box?.scrollTop||0;tb.innerHTML=COG==='triagem'?atCorpo(LS.get('tri_triar_tarefa','')):atTabela('');const next=tb.querySelector('.cog-unified-scroll');if(next){next.scrollLeft=left;next.scrollTop=top;}} }
 function fnConfirmar(ds, k) { const at = fnSesAtiva();
   if (k === 'mono') { acao('Julgar por monocrática', ds, () => ({ sp: '', sd: '', mono: 'Monocrática' })); return; }
   if (k === 'ses') { if (!at) { toast('Nenhuma sessão futura sem pauta oficial. Utilize o Banco Reserva.', true); return; } const nm = nomeSes(at); acao('Pautado na sessão de ' + nm, ds, () => ({ sp: 'SELECIONADO PREVIAMENTE', sd: nm, mono: '' })); } }
@@ -3953,11 +3972,18 @@ document.addEventListener('click', (e) => { const t = e.target.closest && e.targ
     fnConfirmar(L.map((o) => o.d), k); return; }
   if (t.dataset.fnMais) { const k = t.dataset.fnMais; LS.set('tri_fnlim_' + k, LS.get('tri_fnlim_' + k, 30) + 30); refazAtTab(); return; }
   if (t.dataset.fnTc) fnTemaNoTipo(t.dataset.fnTc); }, true);
+function cogDestinoSidebar(){
+ const opt=(v,t,on)=>'<option value="'+esc(v)+'"'+(on?' selected':'')+'>'+esc(t)+'</option>',P=COG==='selecao'?cogSelecaoData():[],C=cogDestinoColecoes(),mono=COG==='mono';
+ const status=(v,t)=>'<button type="button" data-cog-status="'+v+'" role="tab" aria-selected="'+(COG_STATUS===v)+'">'+t+'<small>'+nf(cogRecorte('mono',v,ALL||[]).length)+'</small></button>';
+ return (mono?'<div class="at-abas" role="tablist">'+status('ativos','Ativos')+status('concluidos','Assinados')+'</div>':'<div class="tri-cx-c"><label class="tri-sel"><span>Sessões e banco de reserva</span><select data-cog-sessao-filtro>'+opt('','Todas · '+nf(P.length),!COG_SES_FILTRO)+opt('reserva','Banco de reserva · '+nf(P.filter(x=>x.sess==='reserva').length),COG_SES_FILTRO==='reserva')+sessoesPrevia().map(ss=>opt(ss.data,'Sessão de '+nomeSes(ss)+' · '+nf(P.filter(x=>x.sess===ss.data).length),COG_SES_FILTRO===ss.data)).join('')+'</select></label></div>')+
+ '<div class="tri-cx-c"><label class="tri-sel"><span>Coleções de origem</span><select data-cog-dest-colecao>'+opt('','Todas as coleções',!COG_DEST_COLECAO)+C.map(x=>opt(x.id,x.titulo+' · '+nf(x.n),x.id===COG_DEST_COLECAO)).join('')+'</select></label></div>';
+}
+D.addEventListener('change',e=>{const t=e.target;if(!t.matches?.('[data-cog-sessao-filtro],[data-cog-dest-colecao]'))return;if(t.hasAttribute('data-cog-sessao-filtro')){COG_SES_FILTRO=t.value;COG_DEST_COLECAO='';}else COG_DEST_COLECAO=t.value;COG_LOTE=null;COG_GRUPO='';SEL.clear();refazTriEm();pintaRodape();},true);
 function atLado(soTarefa) {
   const L = cogTriBase().filter(o=>cogTriStatus(o)&&(!soTarefa || (o.tarefa || o.grupo || 'Triagem') === soTarefa));
   const m = [['Processos', L.length], ['Com prontuário', L.filter(atTri).length], ['Prioridade', L.filter((o) => o.prior).length], ['Liminar', L.filter((o) => o.liminar).length],
     ['Mono?', L.filter((o) => o.cand && !(o.dest || {}).k).length], ['+180 dias', L.filter((o) => (atDias(o) || 0) > 180).length]];
-  return '<div class="tri-cx">' + abasTriHtml() + '<div class="tri-cx-c">' +(COG_TRANSFER?'<div class="nota">Filtros da Busca Geral aplicados aos processos em triagem. <button type="button" class="lk" data-cog-clear-transfer>Limpar recorte</button></div>':'') +
+  return '<div class="tri-cx">' + (COG==='triagem'?abasTriHtml():cogDestinoSidebar()) + '<div class="tri-cx-c">' +(COG_TRANSFER?'<div class="nota">Filtros da Busca Geral aplicados aos processos em triagem. <button type="button" class="lk" data-cog-clear-transfer>Limpar recorte</button></div>':'') +
     '<div class="at-m">' + m.map((x) => '<div><span>' + x[0] + '</span><b>' + nf(x[1]) + '</b></div>').join('') + '</div>' +
     '<input type="search" data-atq placeholder="processo, parte, assunto, etiqueta…" value="' + esc(LS.get('tri_atq', '')) + '">' +
     '<select data-atso><option value="">Com e sem prontuário</option><option value="sem"' + (LS.get('tri_atso', '') === 'sem' ? ' selected' : '') + '>Só sem prontuário</option><option value="com"' + (LS.get('tri_atso', '') === 'com' ? ' selected' : '') + '>Só com prontuário</option></select>' +
@@ -3972,7 +3998,7 @@ async function cogOrganizarSerie(){
  const L=[...SEL].map(d=>IDX.get(d)).filter(Boolean);if(!L.length)return toast('Selecione processos.',true);
  if(COG_LOTES===null)await cogLotesCarregar();const S=(COG_LOTES||[]).filter(cogSerie);
  const d=D.createElement('dialog');d.className='cog-create-lot';d.innerHTML='<form><header><h3>Séries transversais</h3><button type="button" data-cancel>×</button></header><p>'+nf(L.length)+' processos selecionados. A inclusão em uma série preserva os lotes de origem e os dados da ficha.</p><label>Série<select name="serie"><option value="nova">＋ Criar nova série</option>'+S.map(l=>'<option value="'+esc(l.id)+'">'+esc(l.titulo)+'</option>').join('')+'</select></label><p role="status"></p><footer><button type="button" class="btn" data-cancel>Cancelar</button><button class="btn pri" type="submit">Continuar</button></footer></form>';
- D.body.appendChild(d);d.addEventListener('close',()=>d.remove(),{once:true});d.querySelectorAll('[data-cancel]').forEach(b=>b.onclick=()=>d.close());d.showModal();const f=d.querySelector('form');f.onsubmit=async e=>{e.preventDefault();const id=f.elements.serie.value,b=f.querySelector('[type=submit]');if(id==='nova'){d.close();cogCriarLote(true);return;}b.disabled=true;try{await cogLotePost({acao:'triagem-serie-incluir',id,processos:L.map(o=>o.cnj),itens:L.map(o=>({processo:o.cnj,recurso:o.classe||o.cl,assunto:o.assunto,tarefa:o.tarefa,tipo_caso:(o.row||{}).Tema||''}))});d.close();toast('Processos incluídos na série.');if(COG!=='triagem')cogIr('triagem');await cogLoteAbrir(id);cogLotesCarregar();}catch(err){f.querySelector('[role=status]').textContent=err.message;b.disabled=false;}};
+ D.body.appendChild(d);d.addEventListener('close',()=>d.remove(),{once:true});d.querySelectorAll('[data-cancel]').forEach(b=>b.onclick=()=>d.close());d.showModal();const f=d.querySelector('form');f.onsubmit=async e=>{e.preventDefault();const id=f.elements.serie.value,b=f.querySelector('[type=submit]');if(id==='nova'){d.close();cogCriarLote(true);return;}b.disabled=true;try{await cogLotePost({acao:'triagem-serie-incluir',id,processos:L.map(o=>o.cnj),itens:L.map(o=>({processo:o.cnj,recurso:o.classe||o.cl,assunto:o.assunto,tarefa:o.tarefa,tipo_caso:(o.row||{}).Tema||''}))});d.close();toast('Processos incluídos na série.');if(COG==='acervo')cogIr('triagem');await cogLoteAbrir(id);cogLotesCarregar();}catch(err){f.querySelector('[role=status]').textContent=err.message;b.disabled=false;}};
 }
 function cogCriarLote(serie=false){
  const sel=[...SEL].map(d=>IDX.get(d)).filter(Boolean);if(!sel.length)return toast('Selecione os processos para criar um lote.',true);const d=D.createElement('dialog');
@@ -3982,8 +4008,8 @@ function cogCriarLote(serie=false){
  form.onsubmit=async e=>{e.preventDefault();if(btn.disabled)return;const v=new FormData(form),L=sel,titulo=String(v.get('titulo')||'').trim();if(!titulo||!L.length||L.length>600){msg.textContent='Informe um nome e selecione entre 1 e 600 processos.';return;}
  const id=(serie?'adp-serie-':'tri-')+titulo.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,serie?20:24)+'-'+Date.now().toString(36);
  btn.disabled=true;msg.textContent='Criando lote…';try{
- const j=await cogApi('/api/painel?lote=1&modo=cg',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({acao:'criar-lista',tipo:'triagem',id,titulo,descricao:String(v.get('descricao')||''),origem:serie?'Triagem · séries entre lotes':'cognitio',tarefa:TRI_FAC.fac.tarefa.length===1?TRI_FAC.fac.tarefa[0]:'',itens:L.map(o=>({processo:o.cnj,recurso:o.classe||o.cl,assunto:o.assunto,tarefa:o.tarefa,tipo_caso:(o.row||{}).Tema||''}))})});
- if(!j.ok)throw Error(j.erro||'Resposta sem confirmação');msg.innerHTML='Lote criado · '+nf(j.total)+' processos. <a href="/amicus/collectio/cg/?id='+encodeURIComponent(j.id)+'">Abrir no Collectio ↗</a>';btn.textContent='Lote criado';toast('Lote de triagem criado: '+titulo);d.close();if(COG!=='triagem')cogIr('triagem');await cogLoteAbrir(j.id);cogLotesCarregar();
+ const j=await cogApi('/api/painel?lote=1&modo=cg',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({acao:'criar-lista',tipo:'triagem',id,titulo,descricao:String(v.get('descricao')||''),origem:serie?'Triagem · séries entre lotes':COG==='mono'?'Cognitio · Monocráticas':COG==='selecao'?'Cognitio · Seleção prévia':'cognitio',tarefa:TRI_FAC.fac.tarefa.length===1?TRI_FAC.fac.tarefa[0]:'',itens:L.map(o=>({processo:o.cnj,recurso:o.classe||o.cl,assunto:o.assunto,tarefa:o.tarefa,tipo_caso:(o.row||{}).Tema||''}))})});
+ if(!j.ok)throw Error(j.erro||'Resposta sem confirmação');msg.innerHTML='Lote criado · '+nf(j.total)+' processos. <a href="/amicus/collectio/cg/?id='+encodeURIComponent(j.id)+'">Abrir no Collectio ↗</a>';btn.textContent='Lote criado';toast('Lote de triagem criado: '+titulo);d.close();if(COG==='acervo')cogIr('triagem');await cogLoteAbrir(j.id);cogLotesCarregar();
  }catch(err){msg.textContent='Não foi possível criar: '+err.message;btn.disabled=false;}};
 }
 D.addEventListener('click',e=>{if(e.target.closest('[data-cog-select-filtered]')){e.preventDefault();cogVisiveis().forEach(d=>SEL.add(d));render();return;}},true);
@@ -4527,7 +4553,7 @@ function rodEl() { return ROD_EL || (ROD_EL = D.getElementById('rodape')); }
 function docarRodape(){const r=rodEl();if(!r)return;if(r.parentNode!==D.body)D.body.appendChild(r);r.removeAttribute('slot');r.classList.remove('doca');D.body.classList.remove('rod-doca');}
 function cogVisiveis(){
  if(COG==='acervo')return FILA.map(o=>o.d);
- if(COG==='triagem')return cogTriRecorte(LS.get('tri_triar_tarefa','')).map(o=>o.d);
+ if(['triagem','selecao','mono'].includes(COG))return cogTriRecorte(COG==='triagem'?LS.get('tri_triar_tarefa',''):'').map(o=>o.d);
  const out=new Set();function scan(root){root.querySelectorAll('[data-sel],[data-selx]').forEach(el=>{const d=dg(el.dataset.sel||el.dataset.selx);if(d.length===20)out.add(d);});root.querySelectorAll('*').forEach(el=>{if(el.shadowRoot)scan(el.shadowRoot);});}
  const em=D.getElementById('tri-em');if(em)scan(em);return [...out];
 }
@@ -4543,7 +4569,7 @@ function pintaRodape(){
  (COG_ROD_MIN?'':'<div class="cog-rbody"><div class="ac cog-destinar"><span class="k">Destinar selecionados</span><div class="lin"><select id="r-dest" aria-label="Pronunciamento">'+[['sessao','Colegiado · sessão de julgamento'],['mono','Decisão do relator · monocrática'],['inter','Decisão do relator · interlocutória'],['desp','Decisão do relator · despacho'],['outro','Outros destinos'],['limpar','Limpar destino']].map(x=>op(x[0],x[1],val)).join('')+'</select>'+
  (val==='sessao'?'<select id="r-ses" aria-label="Sessão prevista">'+op('reserva','Banco reserva',RODA['r-ses']||'reserva')+S.map(s=>op(s.data,'Sessão de '+nomeSes(s),RODA['r-ses'])).join('')+'</select>':val==='outro'?'<select id="r-outro" aria-label="Outro encaminhamento">'+['Vista ao MPF','Devolução ao órgão prolator','Sobrestamento','Redistribuição ou prevenção','Diligência ou intimação','Baixa ou arquivamento','Outro'].map(x=>op(x,x,RODA.outro||'Vista ao MPF')).join('')+'</select>':'')+
  '<button type="button" class="btn pri" data-r="destinar">Destinar</button></div><small>Grava na ficha única. Não inclui em pauta oficial.</small></div>'+
- '<div class="ac"><span class="k">Editar em lote</span><div class="lin">'+loteCtl()+'<button type="button" class="btn" data-r="lote">Aplicar</button></div></div><div class="cog-rtools">'+(COG_SESSAO&&COG_SESSAO.gestor&&['acervo','triagem'].includes(COG)?'<button type="button" class="btn sm" data-r="criar">＋ Criar lote</button><button type="button" class="btn sm" data-r="serie">Séries</button>'+(COG==='triagem'&&COG_LOTE?'<button type="button" class="btn sm" data-r="grupo">Grupos</button>':'')+'':'')+'<button type="button" class="btn sm" data-r="exportar">Excel</button><button type="button" class="btn sm" data-r="desfazer"'+(DESF.length?'':' disabled')+'>Desfazer</button></div></div>');
+ '<div class="ac"><span class="k">Editar em lote</span><div class="lin">'+loteCtl()+'<button type="button" class="btn" data-r="lote">Aplicar</button></div></div><div class="cog-rtools">'+(COG_SESSAO&&COG_SESSAO.gestor&&['acervo','triagem','selecao','mono'].includes(COG)?'<button type="button" class="btn sm" data-r="criar">＋ Criar lote</button><button type="button" class="btn sm" data-r="serie">Séries</button>'+(COG_LOTE?'<button type="button" class="btn sm" data-r="grupo">Grupos</button>':'')+'':'')+'<button type="button" class="btn sm" data-r="exportar">Excel</button><button type="button" class="btn sm" data-r="desfazer"'+(DESF.length?'':' disabled')+'>Desfazer</button></div></div>');
 }
 rodEl().addEventListener('change',e=>{if(e.target.id==='r-dest'){RODA.dest=e.target.value;pintaRodape();}if(e.target.id==='r-outro')RODA.outro=e.target.value;});
 rodEl().addEventListener('click',e=>{const b=e.target.closest('[data-r]');if(!b||b.disabled)return;const k=b.dataset.r,ds=[...SEL];
