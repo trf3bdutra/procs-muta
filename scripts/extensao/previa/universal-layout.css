@@ -53,3 +53,6 @@ html[data-tema=escuro] .pv-universal-body{--pv-bg:#112530;--pv-line:#344854;--pv
 
 /* Questões de mérito no roteiro de produção; acompanhamento permanece no cartão. */
 .pv-questoes-producao .q-w{width:100%;min-width:0}.pv-questoes-producao .q-l{margin:4px 0;padding-left:18px}.pv-questoes-producao .q-l li{min-width:0}.pv-questoes-producao .q-l input{min-width:0;width:100%}.pv-followup{border-top:1px solid var(--pv-line);margin-top:6px;padding-top:5px;display:grid;gap:5px}.pv-universal .pv-stage{min-width:0}.pv-universal .pv-stage b{font-size:9px;overflow-wrap:anywhere}
+
+/* Mérito integrado aos campos do plano do pronunciamento, sem faixa autônoma no cartão. */
+.pv-merito-producao{min-width:0;grid-column:1/-1;display:grid;gap:5px;border-bottom:1px solid var(--pv-line);padding-bottom:6px;margin-bottom:3px}.pv-merito-producao>.pm-mer-h{margin:0;font-size:11px}.pv-merito-producao>.gr{min-width:0}.pv-merito-producao>.au-auto-av{margin:0}

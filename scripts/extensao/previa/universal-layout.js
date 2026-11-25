@@ -142,6 +142,23 @@
     });
     return all;
   }
+  // A antiga seta Mérito deixa de existir no cartão. Seus campos ficam no plano da produção.
+  merEnc=function(){return '';};
+  function meritProduction(root,q){
+    var plan=Array.from(root.querySelectorAll('details[data-cc]')).find(function(d){return /Plano do pronunciamento$/.test(d.dataset.cc||'');});
+    var target=plan&&plan.querySelector('.gr'),box=elem('div','pv-merito-producao gf w');
+    box.append(elem('h4','pm-mer-h','Mérito'));
+    var gr=elem('div','gr');
+    add(gr,campoRot('triagem','COMPLEXIDADE','Complexidade'));
+    if(destino()!=='monocratica'||S(V('triagem','Tipo de Voto')))add(gr,campoRot('triagem','Tipo de Voto','Tipo de voto'));
+    box.append(gr);
+    var ag=autoGabItens();
+    if(ag.length){
+      var notice=elem('div','au-auto-av pm-auto'),label=elem('span','','Campos preenchidos pela extensão: confira ('+ag.length+').'),undo=btn('Desfazer','data-autog','desfazer');
+      undo.className='lnk';undo.title='Limpa o que a extensão pôs e não o repõe neste processo';notice.append(label,undo);box.append(notice);
+    }
+    if(target)target.prepend(box);else q.after(box);
+  }
   var prodBase=camposCaso;
   camposCaso=function(ja){
     var all=Object.assign(productionExclusions(ja),{'producao.Voto - Resultado':1,'triagem.Tema':1,'triagem.Especificidades':1,'triagem.Assunto detalhado':1,'triagem.Tipo de Julgamento':1,'triagem.Ramo do direito':1,'triagem.Outros assuntos':1,'producao.Destino - Outro':1});ownedGroups.forEach(function(n){var g=grupoModelo(n);if(g)(g.campos||[]).forEach(function(c){var k=c.secao+'.'+c.chave;if(owned(k))all[k]=1;});});
@@ -155,6 +172,7 @@
     var qs=elem('summary'),n=S(V('triagem','Alegações')).split(/\n+/).map(S).filter(Boolean).length;
     qs.append(elem('h4','','Questões jurídicas'),elem('span','gn',String(n)));q.append(qs);
     var gr=elem('div','gr');add(gr,questoes());var rot=gr.querySelector('.q-w>.gl');if(rot)rot.textContent='Questões a decidir';q.append(gr);d.after(q);
+    meritProduction(root,q);
     return html(f);
   };
   function abrirDoc(grupo,id){
@@ -286,7 +304,10 @@
   var renderBase=render0;
   render0=function(){
     if(tabCnj!==G.cnj){tabCnj=G.cnj;identOpen=false;G.aba='Autos';G.rot='tri';G.adEd=false;}
-    setupRoteiro();renderBase();
+    setupRoteiro();
+    // Preserva a derivação e a sincronização antes de desenhar a produção, sem depender da antiga seta.
+    if(G.aba==='Processo'&&G.rot==='pro'&&G.cnj&&G.op)try{autoGab();situacaoSync();}catch(e){}
+    renderBase();
     var top=caixa.querySelector('.pc.pm');if(top)top.classList.add('pv-universal');
     var tabs=caixa.querySelector('.gtabs'),proc=tabs&&tabs.querySelector('[data-aba="Processo"]');
     if(proc){var tri=btn('Triagem','data-pv-tab','tri'),pro=btn('Produção','data-pv-tab','pro');

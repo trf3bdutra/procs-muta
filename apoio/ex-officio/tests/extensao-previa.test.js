@@ -154,3 +154,16 @@ test('universal: questões apenas em produção e campos operacionais com propri
  assert.match(s,/field\('origem','Próxima ação','Próxima ação'\)/);
  new Function(s);
 });
+
+test('universal: mérito integra o plano da produção, sem seta no cartão',()=>{
+ const s=fs.readFileSync(path.join(ROOT,'scripts/extensao/previa/universal-layout.js'),'utf8');
+ assert.match(s,/merEnc=function\(\)\{return '';\}/);
+ assert.match(s,/Plano do pronunciamento\$/);
+ assert.match(s,/campoRot\('triagem','COMPLEXIDADE','Complexidade'\)/);
+ assert.match(s,/campoRot\('triagem','Tipo de Voto','Tipo de voto'\)/);
+ assert.match(s,/meritProduction\(root,q\)/);
+ assert.match(s,/target\.prepend\(box\)/);
+ assert.match(s,/autoGab\(\);situacaoSync\(\)/);
+ assert.match(s,/data-autog','desfazer'/);
+ new Function(s);
+});
