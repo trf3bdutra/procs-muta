@@ -1853,3 +1853,30 @@ html[data-tema=escuro] #gab .hero-proc-tags .hero-secao-3{--tag-ink:#efa7cf}
 .ap-sh{display:flex;align-items:center;gap:6px;margin:10px 0 6px;font:600 10px/1.3 var(--mono,ui-monospace,monospace);letter-spacing:.1em;text-transform:uppercase;color:var(--muted-fg)}
 .ap-sh:first-child{margin-top:2px}.ap-sh i{font-style:normal;font-size:10px;padding:0 6px;border-radius:8px;background:var(--acc,#c9a24a);color:#111}
 .ap-sec-ch{padding-bottom:8px;border-bottom:1px solid var(--line,rgba(127,127,127,.25))}.ap-sec-ch .ap-l{max-height:220px;overflow:auto}
+
+
+/* Prontuário · sinalizações no lugar das etapas, Encaminhamento como face e Monitoramento em janela. */
+#gab .hero-steps.hero-steps-sn>.pv-flowbox,#gab .hero-steps.hero-steps-sn>.pm-pills,#gab .hero-steps.hero-steps-sn>.hero-designacoes{display:none!important}
+#gab .hero-steps.hero-steps-sn>#hero-dock-pane-sinalizacoes{border-top:0;margin:2px 0 0;padding:0}
+#gab .hero-steps-voltar{margin-left:auto;border:0;background:transparent;color:var(--muted-fg);font:inherit;font-size:10.5px;padding:2px 4px;cursor:pointer;border-radius:4px}
+#gab .hero-steps-voltar:hover{background:var(--soft);color:inherit}
+#gab .hero-steps-voltar[hidden]{display:none!important}
+#gab .hero-steps-voltar:not([hidden])+.hero-sn-ind{margin-left:4px}
+#gab .hero-enc-face>.hero-enc-pane{margin:0;border:0;padding:0}
+#gab .hero-enc-face>.hero-enc-pane>summary{display:none!important}
+#gab .hero-enc-face>.hero-enc-pane>.hero-acomp-b{padding-top:2px}
+#gab .hero-enc-face .hero-enc-card>.pm-mer-h{display:none}
+#gab .hero-enc-face .hero-enc-card>.hero-enc-tipo-section{border-top:0}
+#gab .hero-enc-monitor-dock .hero-monitor-tab{flex:1 1 auto}
+#gab .hero-mon-dlg{width:min(440px,calc(100vw - 24px));max-height:min(80vh,640px);padding:0;border:1px solid var(--line);border-radius:10px;background:var(--card,var(--bg));color:var(--fg,inherit);box-shadow:0 14px 36px #0006;overflow:hidden}
+#gab .hero-mon-dlg[open]{display:flex;flex-direction:column}
+#gab .hero-mon-dlg::backdrop{background:hsl(200 38% 8%/.45)}
+#gab .hero-mon-dlg-h{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:9px 12px;border-bottom:1px solid var(--line)}
+#gab .hero-mon-dlg-h b{font-size:12.5px}
+#gab .hero-mon-dlg-x{border:0;background:transparent;color:inherit;font-size:18px;line-height:1;cursor:pointer;padding:0 4px}
+#gab .hero-mon-dlg-c{overflow:auto;padding:6px 12px 12px}
+#gab .hero-mon-dlg-c>.hero-monitoramento{margin:0;border:0;padding:0}
+#gab .hero-mon-dlg-c>.hero-monitoramento>summary{display:none!important}
+#gab .hero-mon-dlg-c>.hero-monitoramento>.hero-acomp-b{padding-top:0}
+#gab .hero-mon-dlg-c [hidden]{display:none!important}
+#gab .hero-mon-dlg .hero-sig-details{margin:4px 0 0;font-size:12px}
