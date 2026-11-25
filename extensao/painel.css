@@ -1796,13 +1796,13 @@ body.hero-gestao-ativa .layout>aside>.nav>button{flex:1;min-width:0}
 #gab .hero-proc-tags .hero-tipo-ref{--tag-ink:#7957a1;cursor:pointer}
 #gab .hero-proc-tags .hero-secao{--tag-ink:#59776c}
 #gab .hero-proc-tags .hero-secao-1{--tag-ink:#3568a5}
-#gab .hero-proc-tags .hero-secao-2{--tag-ink:#9b702b}
-#gab .hero-proc-tags .hero-secao-3{--tag-ink:#377a57}
+#gab .hero-proc-tags .hero-secao-2{--tag-ink:#8056a5}
+#gab .hero-proc-tags .hero-secao-3{--tag-ink:#b05283}
 html[data-tema=escuro] #gab .hero-proc-tags .hero-class-only{--tag-ink:#b3c4d8}
 html[data-tema=escuro] #gab .hero-proc-tags .hero-tipo-ref{--tag-ink:#c4a9e6}
 html[data-tema=escuro] #gab .hero-proc-tags .hero-secao-1{--tag-ink:#94baf0}
-html[data-tema=escuro] #gab .hero-proc-tags .hero-secao-2{--tag-ink:#e6bf76}
-html[data-tema=escuro] #gab .hero-proc-tags .hero-secao-3{--tag-ink:#8ed3a7}
+html[data-tema=escuro] #gab .hero-proc-tags .hero-secao-2{--tag-ink:#c7a6ed}
+html[data-tema=escuro] #gab .hero-proc-tags .hero-secao-3{--tag-ink:#efa7cf}
 #gab .hero-proc-tags .hero-tipo-ref:hover{border-color:var(--tag-ink)}
 #gab .pm-pl .pl-e{display:inline-flex;align-items:center;gap:4px}
 #gab .pm-pl.k-min .pl-e svg{color:#39805b}
@@ -1840,3 +1840,6 @@ html[data-tema=escuro] #gab .hero-proc-tags .hero-secao-3{--tag-ink:#8ed3a7}
 #dir-app .dr-cap{margin:8px 0;border-bottom:1px solid var(--line);padding:6px 0}
 #dir-app .dr-cap h3{font-size:12px;margin:0 0 6px}
 #dir-app .dr-i{border-radius:4px;line-height:1.45}
+
+/* Seção: somente ordinal, com identidade cromática própria. */
+#gab .hero-proc-tags .hero-secao{min-width:22px;padding:3px 5px;background:color-mix(in srgb,var(--tag-ink) 10%,var(--card));border-color:color-mix(in srgb,var(--tag-ink) 25%,var(--line));border-left-color:var(--tag-ink)}
