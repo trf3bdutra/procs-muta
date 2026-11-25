@@ -6,7 +6,7 @@
   "arquivo": "acervo/fonte.json",
   "chave": "processo"
  },
- "atualizado_em": "2026-11-25T18:43:02.776Z",
+ "atualizado_em": "2026-11-25T18:53:09.935Z",
  "registros": [
   {
    "processo": "0000008-23.2025.4.03.6000",
@@ -98126,18 +98126,18 @@
   {
    "processo": "5000466-10.2020.4.03.6006",
    "origem": {
-    "Sentença - Decisão": "",
-    "Sentença - ID": "",
+    "Sentença - Decisão": "Outra",
+    "Sentença - ID": "310207690",
     "Sentença - Honorários": "",
     "Sentença - Custas": "",
-    "Sentença - Resultado": "",
-    "Sentença - Fundamento": "",
+    "Sentença - Resultado": "julgou EXTINTA A AÇÃO, sem resolução de mérito, nos termos do art. 485, IV e VI do CPC",
+    "Sentença - Fundamento": "Assim, não há como se dar prosseguimento ao feito ante a existência de cumprimento de sentença interposto pelo MPF, uma vez que não pode haver pagamento em duplicidade em decorrência de um mesmo título judicial",
     "Sentença - Providências": "",
-    "Contrarrazões - Situação": "",
+    "Contrarrazões - Situação": "apresentadas",
     "Responsável": "",
     "Próxima ação": "",
     "Observações": "",
-    "atualizado_em": "2026-11-21T11:09:44.894Z",
+    "atualizado_em": "2026-11-25T18:53:09.935Z",
     "Origem - Juízo": "1ª Vara Federal de Naviraí",
     "Origem - Documentos 1G": [
      {
@@ -98152,7 +98152,23 @@
      }
     ],
     "Sentença - Data": "10/09/2024",
-    "Origem - Julgador": "Hugo Daniel Lazarin"
+    "Origem - Julgador": "Hugo Daniel Lazarin",
+    "Recursos": [
+     {
+      "parte": "União",
+      "ids": "310207691",
+      "data": "2024-10-14",
+      "teses": "legitimidade concorrente e autonomia municipal para promover a execução",
+      "pedidos": "O recebimento e processamento do presente Recurso de Apelação , com a devida intimação da União para apresentar contrarrazões no prazo legal\nA reforma da sentença proferida pelo Juízo a quo , para que seja determinado o prosseguimento d a liquidação de sentença promovido pelo Município, reconhecendo-se a legitimidade concorrente do Apelante, em conformidade com o entendimento pacificado pelos Tribunais Superiores\nA condenação da União ao pagamento das custas processuais e honorários advocatícios , conforme disposto no artigo 85, §3º, do Código de Processo Civil. Nesses termos,"
+     }
+    ],
+    "Contrarrazões": [
+     {
+      "parte": "União",
+      "ids": "310207693",
+      "data": "2024-12-02"
+     }
+    ]
    },
    "triagem": {
     "Urgência": "",
@@ -98162,28 +98178,28 @@
     "Urgência - Data": "",
     "Urgência - Painel": "",
     "Tempest - Publicação": "",
-    "Tempest - Protocolo": "",
-    "Tempest - Prazo legal": "",
-    "Tempest - Dobro": "",
+    "Tempest - Protocolo": "2024-10-14",
+    "Tempest - Prazo legal": "5",
+    "Tempest - Dobro": "2",
     "Tempest - Suspensões": "",
-    "Tipo de Julgamento": "",
+    "Tipo de Julgamento": "Apelação",
     "Hipóteses Monocrática": "",
     "Tempestividade": "",
     "Preparo": "",
     "AJG": "",
     "DPU (controle)": "",
-    "Representação": "",
+    "Representação": "Dispensada (procurador público)",
     "ID da Procuração": "",
     "Impedimento / Suspeição": "",
     "Observação do Impedimento": "",
     "Regularidade": "Representação ainda não verificada.",
     "Regularidade Manual": "",
     "Observação da Representação": "",
-    "MPF": "",
+    "MPF": "Com parecer",
     "MPF - Custos Legis": "",
-    "ID do Parecer MPF": "",
+    "ID do Parecer MPF": "310207687",
     "Parecer - Sentido": "",
-    "MPF - Info adicional": "",
+    "MPF - Info adicional": "i – do descabimento da alegação de ausência de interesse de agir; i i – da ação rescisória pendente de julgamento; ação rescisória pendente de julgamento; são paulo); v – da legitimidade ativa dos município para execução da sentença proferida na ACP; são paulo",
     "Observação MPF": "",
     "Tema": "",
     "COMPLEXIDADE": "",
@@ -98194,11 +98210,16 @@
     "Seleção Prévia": "",
     "Mídias": "",
     "Etiquetas": "2ª Seção, Cumprimento individual - ACP, Repasse de Verbas",
-    "Alegações": "",
+    "Alegações": "legitimidade concorrente e autonomia municipal para promover a execução",
     "O que falta sanar": "",
     "Intercorrências": "",
-    "Síntese Processual": "",
-    "Especificidades": ""
+    "Síntese Processual": "Recurso contra sentença (ID 310207690) que julgou outra o pedido (julgou EXTINTA A AÇÃO, sem resolução de mérito, nos termos do art. 485, IV e VI do CPC). Recorre União, pedindo o recebimento e processamento do presente Recurso de Apelação , com a devida intimação da União para apresentar contrarrazões no prazo legal; A reforma da sentença proferida pelo Juízo a quo , para que seja determinado o prosseguimento d a liquidação de sentença promovido pelo Município, reconhecendo-se a legitimidade concorrente do Apelante, em conformidade com o entendimento pacificado pelos Tribunais Superiores.",
+    "Especificidades": "",
+    "ED - Ponto": "legitimidade concorrente e autonomia municipal para promover a execução",
+    "MPF - Data": "2022-06-22",
+    "Preparo - ID recurso": "310207691",
+    "Preparo - Recorrente": "UNIÃO FEDERAL",
+    "Preparo - Fundamento dispensa": "Ente público / MP identificado no recurso; conferir hipótese legal."
    },
    "producao": {
     "Destino": "",
