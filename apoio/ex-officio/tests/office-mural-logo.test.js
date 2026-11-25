@@ -233,7 +233,7 @@ test('Mural: calendário sem os botões Dia/Semana/Mês, sempre no mês', () => 
   assert.match(h, /if\(!PAINEL_GAB\)try\{localStorage\.setItem\('cc_passo',JSON\.stringify\('mes'\)\);/);
 });
 
-test('Mural: registros da Assessoria fora do calendário de quem não é da assessoria; meta do dia no canhoto; histórico de atividades', () => {
+test('Mural: registros da Assessoria fora do calendário de quem não é da assessoria; meta do dia no canhoto; Minhas atividades', () => {
   const fs = require('fs'), path = require('path');
   const h = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
   const cal = fs.readFileSync(path.join(__dirname, '..', '..', '..', 'caput', 'motor', 'assets', 'js', '11-calendario.js'), 'utf8');
@@ -245,7 +245,7 @@ test('Mural: registros da Assessoria fora do calendário de quem não é da asse
   assert.match(cal, /\$\{dia===hoje&&ex\.hojeHtml\?ex\.hojeHtml:''\}/);
   assert.match(pn, /minutasDia \|\| 3/);
   assert.match(h, /function calHoje\(D\)/);
-  assert.match(h, /<b>Meu histórico de atividades<\/b>/);
+  assert.match(h, /<b>Minhas atividades<\/b>/);
   assert.ok(!/>Minha produtividade</.test(h));
 });
 
@@ -292,7 +292,7 @@ test('Mural: Histórico no próprio slot (não mais vista do calendário); dia d
   assert.match(h, /<slot name=\\"hist\\"><\\\/slot>/);
   assert.match(h, /#hc-cal-full\.ver-hist #cc-cal \.cc-body\{display:none!important\}/);
   assert.match(h, /#hc-cal-full:not\(\.ver-hist\) #prod\{display:none!important\}/);
-  assert.match(h, /new MutationObserver\(function\(\)\{sinc\(\);cantoJa\(\);copia\(\);\}\)\.observe\(cal,\{childList:true,subtree:true\}\)/);
+  assert.match(h, /new MutationObserver\(function\(\)\{sinc\(\);cantoJa\(\);\}\)\.observe\(cal,\{childList:true,subtree:true\}\)/);
 });
 
 test('Agenda: todos cadastram; quem não é gestor grava só os próprios itens, privados (visíveis para ele e para a chefia)', async () => {
@@ -403,7 +403,7 @@ test('Ausências: datas pessoais (aniversário, posse, chegada) gravadas por usu
   assert.match(h, /<slot name=\\"dest\\">/);
 });
 
-test('Prontuário: etapas dentro do cartão do processo (Monocráticas e Pauta, com o mesmo visual); Resultado numa linha; alertas e meta no alto da coluna do Mural', () => {
+test('Prontuário: etapas dentro do cartão do processo (Monocráticas e Pauta, com o mesmo visual); Resultado numa linha; o Mural dispensa o painel Alertas do dia', () => {
   const fs = require('fs'), path = require('path');
   const h = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
   assert.match(h, /sec\(0\)\+'<\/div>'\+\n    '<p class="pm-sh pm-sh0">/);
@@ -412,15 +412,15 @@ test('Prontuário: etapas dentro do cartão do processo (Monocráticas e Pauta, 
   assert.match(h, /function prtPauta2\(el,it,o3,ix,V\)\{/);
   assert.match(h, /html body #prq \.pmn2 \.pm-caso\{flex:none;max-height:58vh;overflow-y:auto/);
   assert.match(h, /html body #prq \.pmn2 \.pm-res\{flex-wrap:nowrap!important/);
-  assert.match(h, /<slot name=\\"alm\\"><\\\/slot><div class=\\"sessions lsess\\"/);
+  assert.doesNotMatch(h, /<slot name=\\"alm\\"|<h2 class="fx-strip-title">Alertas do dia/);
   assert.match(h, /#mu-host #hc-cal-full \.cc-esq \.cc-al,#mu-host #hc-cal-full \.cc-esq \.cc-al\+\.cc-meta\{display:none!important\}/);
 });
 
-test('Mural: aviso em destaque na linha do Foco de hoje; cartões das sessões na coluna da direita, acima das sinalizações', () => {
+test('Mural: aviso em destaque na linha do Foco de hoje; fonte das sessões e sinalizações', () => {
   const fs = require('fs'), path = require('path');
   const h = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
   assert.match(h, /<div class=\\"toprow\\"><div class=\\"focus\\" id=\\"focus\\"[^>]*><\\\/div><slot name=\\"dest\\"><\\\/slot><\\\/div>/);
-  assert.match(h, /<slot name=\\"alm\\"><\\\/slot><div class=\\"sessions lsess\\" id=\\"sesl\\"[^>]*><\\\/div><section class=\\"panel\\"><h2>Sinalizações em aberto/);
+  assert.match(h, /<div class=\\"sessions lsess\\" id=\\"sesl\\"[^>]*><\\\/div><section class=\\"panel\\"><h2>Sinalizações em aberto/);
 });
 
 test('Mural: coluna da direita até a borda de baixo da lista, sem rolagem própria; só as sinalizações rolam', () => {
