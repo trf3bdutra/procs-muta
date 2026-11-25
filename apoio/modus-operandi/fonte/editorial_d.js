@@ -606,25 +606,8 @@ function dkComInc(PT){var I=DK.inc||{};if(!Object.keys(I).length)return PT;
     c.inc=L.length;return c;});});
   return PT;}
 var _xPartesBase=xPartes;
-/* Relatório e caso em exame: mesma composição da HERO18810, exclusivamente da ficha registrada.
-   Cada parágrafo fica editável; fundamentos e resultado do julgamento continuam na estrutura do voto. */
-function dkComposicaoFicha(PT){
-  var P=window.CQX&&CQX.tem()?CQX.P():null,J=P?CQX.J():null;
-  if(!P||!J||!window.MutaGerador||!MutaGerador.comporFicha||String(P.processo||'').replace(/\D/g,'')!==String(J.processo||'').replace(/\D/g,''))return PT;
-  var cp=J.campos||{},fo={};Object.keys(cp).forEach(function(k){if(k.indexOf('acervo.')===0)fo[k.slice(7)]=cp[k];});
-  fo.classe_judicial=fo.classe_judicial||P.classe||'';fo.Assunto=fo.Assunto||P.assunto||'';
-  var tj=String(cp['triagem.Tipo de Julgamento']||P.tipoJulgamento||'');if(!tj)return PT;
-  var tipo=/retrata/i.test(tj)?'Juízo de Retratação':/embargos de declara/i.test(tj)?'Embargos de Declaração':/agravo interno/i.test(tj)?'Agravo Interno':/agravo de instrumento/i.test(tj)?'Agravo de Instrumento':/remessa/i.test(tj)&&!/apela/i.test(tj)?'Remessa Necessária':/apela/i.test(tj)?'Apelação':'';
-  if(!tipo)return PT;var D=MutaGerador.comporFicha(cp,fo,tipo);
-  /* O texto derivado é uma proposta editável do caso, não um modelo temático nem um dado novo na ficha. */
-  function bloco(id,n,tx){return {k:'ficha:'+id,pid:'relatorio',n:n,r:['Proposta redacional composta a partir da Ficha Única; conferir os trechos sinalizados.'],opc:false,alts:[{lab:'Ficha do processo',f:tx,r:[]}]};}
-  PT.forEach(function(pt){
-    if(pt.id==='relatorio'){pt.tr=D.rel.map(function(p,i){return bloco('rel:'+i,i===0?'Abertura':p==='É o relatório.'?'Encerramento':'Relato · '+i,p);});}
-    if(pt.id==='ementa'){var I=D.em.sec[0],II=D.em.sec[1];pt.tr=pt.tr.map(function(t){if(!/^I\. CASO EM EXAME|^II\. QUESTÃO EM DISCUSSÃO/.test(t.n))return t;var sec=/^II\./.test(t.n)?II:I;return Object.assign({},t,{alts:[{lab:'Ficha do processo',f:sec[1].map(function(x){return x.n+'. '+x.t;}).join('\n'),r:[]}].concat((t.alts||[]).filter(function(a){return a.lab!=='Ficha do processo';}))});});}
-    if(pt.id==='monocratica'&&XP.v.decisao==='mono'){pt.tr=pt.tr.map(function(t){if(t.n!=='Relato')return t;return Object.assign({},t,{alts:[{lab:'Ficha do processo',f:D.rel.filter(function(p){return p!=='É o relatório.';}).join('\n'),r:[]}]});});}
-  });return PT;
-}
-xPartes=function(){var PT=_xPartesBase(),m=dkModeloAtivo();if(m)PT=dkPartesModelo(m,PT);else PT=dkComposicaoFicha(PT);return dkComInc(PT);};
+/* Estrutura única: a ficha alimenta os campos, sem substituir os blocos. */
+xPartes=function(){var PT=_xPartesBase(),m=dkModeloAtivo();if(m)PT=dkPartesModelo(m,PT);return dkComInc(PT);};
 var _xLimparBase=xLimpar;xLimpar=function(){DK.inc={};DK.pick='';dkGuarda();_xLimparBase();};
 /* ---------- texto da folha: seletor na barra ---------- */
 function dkJulgDe(m){return ({ed:'ed',ain:'agint',ai:'ai',rn:'rn',apc:'ap',ades:'ap'})[rrTipoJulg(m)]||'';}
@@ -642,13 +625,13 @@ function dkModOpts(){
   if(outros.length)o+='<optgroup label="Outros tipos de julgamento">'+outros.map(function(m){return op(m);}).join('')+'</optgroup>';
   return o;}
 function dkBarraTexto(){var e28=!!(window.CQX&&CQX.e28()),f=DK.fonte==='m28'&&!e28?'mat':DK.fonte,m=dkModelo(),fora=f==='mod'&&m&&dkPronMod(m)!==dkPron();
-  var h='<div class="dgrp dtxt"><span class="dglab">Modelo da peça</span>';
+  var h='<div class="dgrp dtxt">';
   h+='<label class="dmodl"><span>Modelo</span><select data-dmod aria-label="Modelo do gabinete">'+dkModOpts()+'</select></label><label class="dmodq"><input data-dmodq type="search" autocomplete="off" value="'+esc(DK.modq||'')+'" placeholder="filtrar modelos" aria-label="Filtrar modelos"></label>'+(window.CQX&&CQX.tem()?'<button type="button" class="dsug-b" data-dsug aria-expanded="'+!!DK.sug+'" title="Modelos sugeridos para o processo aberto">Para o caso ▾</button>':'');
   h+='</div>';
   if(fora)h+='<span class="dcx-nota">O modelo escolhido é de '+esc(mTipo(m).toLowerCase())+': a folha segue a Minuta-Matriz neste pronunciamento.</span>';
   else if(f==='mod'&&!m&&BASE)h+='<span class="dcx-nota">Escolha um modelo: até lá, a folha segue a Minuta-Matriz.</span>';
   return h;}
-function dkBarraUnica(modular){var estrutura=modular?'':xBarra().replace(/^<div class="dbar">/,'').replace(/<\/div>$/,'').replace('<div class="dgrp">','<div class="dgrp destrutura"><span class="dglab">Estrutura da peça</span>');return '<div class="dbar d-unica"><div class="d-caso-grupo">'+(window.CQX?CQX.barra():'')+'</div><div class="d-estrutura-grupo">'+estrutura+'</div>'+dkBarraTexto()+'</div>'+(window.CQX?CQX.extra():'');}
+function dkBarraUnica(modular){var estrutura=modular?'':xBarra().replace(/^<div class="dbar">/,'').replace(/<\/div>$/,'').replace('<div class="dgrp">','<div class="dgrp destrutura">');return '<div class="dbar d-unica"><div class="d-caso-grupo">'+(window.CQX?CQX.barra():'')+'</div><div class="d-estrutura-grupo">'+estrutura+'</div>'+dkBarraTexto()+'</div>'+(window.CQX?CQX.extra():'');}
 function dkFonte(v){if(v==='m28'&&!(window.CQX&&CQX.e28()))return;
   if(v==='mod'&&!dkModelo()){DK.rtab='caso';xPagina();var q=document.querySelector('[data-dmodq]');if(q)q.focus();return;}
   if(v==='mat'){DK.mod='';var P=window.CQX&&CQX.tem()?CQX.P():null;if(P){dkAplicaCaso(P,{tipo:'mat',mat:CQX.matrizDoCaso(P)});return;}}

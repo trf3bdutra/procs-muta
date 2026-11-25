@@ -284,8 +284,8 @@
     var P=CQ.perfil,ph=CQ.calErro?'pautas indisponíveis':CQ.cal?'opcional':'carregando…',chip=P?'<span class="dcx-info"><b>'+e(P.processo||'caso sem número')+'</b><small>'+e(CQ.fonte||'')+'</small>'+'<button type="button" class="dcx-t" data-dcxf title="Buscar novamente os dados gravados pela HERO18810 na ficha"'+(CQ.busy?' disabled':'')+'>Atualizar ficha</button>'+(CQ.trocar?'':'<button type="button" class="dcx-t" data-dcxt title="Carregar outro processo">Outro caso</button>')+'<button type="button" data-dcxx title="Fechar o caso: a folha volta ao molde geral" aria-label="Fechar o caso">×</button></span>':'';
     var prec='<button type="button" class="dcx-t cq-prec-toggle" data-cq-prec aria-controls="cq-prec-panel" aria-expanded="'+CQ.precOpen+'" title="Precedentes associados e correspondentes" aria-label="Precedentes associados e correspondentes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 4h6a3 3 0 0 1 3 3v14a4 4 0 0 0-4-4H4zM20 4h-3a4 4 0 0 0-4 4v13a4 4 0 0 1 4-4h3z"/><path d="M7 8h3m6 0h2M7 11h3m6 0h2"/></svg></button>';
     if(P&&!CQ.trocar&&!CQ.busy)return chip+prec;
-    var h='<div class="dgrp dcaso"><span class="dglab">Caso</span>'+
-      '<label><span>Processo ou item</span><input id="cq-item" value="'+e(CQ.item)+'" placeholder="nº do processo ou item" autocomplete="off" title="Número do processo (abre a ficha) ou item da pauta da sessão escolhida"></label>'+
+    var h='<div class="dgrp dcaso">'+
+      '<label><span>Processo ou item</span><input id="cq-item" value="'+e(CQ.item)+'" placeholder="Processo / item" autocomplete="off" title="Número do processo (abre a ficha) ou item da pauta da sessão escolhida"></label>'+
       '<label'+(CQ.calErro?' title="'+e(CQ.calErro)+'"':'')+'><span>Sessão</span><select id="cq-ses" title="Só para abrir pelo item da pauta"><option value="">'+ph+'</option>'+opts+'</select></label>'+
       '<button type="button" class="dcx-go" id="cq-go"'+(CQ.busy?' disabled':'')+'>'+(CQ.busy?'Abrindo…':'Abrir')+'</button></div>';
     return h+chip+prec;}
