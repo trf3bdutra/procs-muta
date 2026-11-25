@@ -59,7 +59,7 @@
   }
   function flow(){
     var E=etapas(),box=elem('div','pv-flowbox'),r=elem('div','pv-flow');box.append(elem('h4','pm-mer-h','Etapas'));
-    E.L.forEach(function(x,i){if(x.ic==='tri')return;
+    E.L.forEach(function(x,i){
       var cell=elem('div','pv-stage'+(x.ok?' ok':i===E.n?' at':'')),b=btn('','data-et',String(i));b.className='pv-stage-btn';b.innerHTML=SV(IC[x.ic],14);b.disabled=i===E.L.length-1||!(i===E.n||i===E.n-1);b.title=i===E.L.length-1?'Ato do relator · somente leitura':'Marcar ou desfazer';
       cell.append(b,elem('b','',x.ic==='ass'?'Assinatura':x.r),elem('small','muted',x.dt?brD(x.dt).slice(0,5):'—'));r.append(cell);});
     box.append(r);var people=elem('div','pv-people');
@@ -121,17 +121,41 @@
     // Etiquetas são editadas em Autuação. O passo restante verifica mídias, não etiquetas.
     var m=R.PASSOS.find(function(p){return p.id==='etiquetas';});
     if(m){m.t='Mídias e seleção prévia';m.campos=m.campos.filter(function(c){return c[1]!=='Etiquetas';});delete m.extra;delete m.dica;m.estado=function(c){var v=N(c.v('triagem','Mídias'));return v==='faltantes'?'al':v==='juntadas'||v==='nao se aplica'?'ok':'pend';};}
-    var original=R.html;R.html=function(g,c,q,x){return original(g,c,q,Object.assign({},x,{etiquetas:'',docOwned:function(id){return owned(id)||id==='triagem.Etiquetas'||id==='triagem.Etiquetas sugeridas';},docRef:function(id){return docsHtml(stepDocs[id]||[]);}}));};R._pvDoc=true;
+    var original=R.html;R.html=function(g,c,q,x){return original(g,c,null,Object.assign({},x,{etiquetas:'',docOwned:function(id){return owned(id)||id==='triagem.Etiquetas'||id==='triagem.Etiquetas sugeridas';},docRef:function(id){return docsHtml(stepDocs[id]||[]);}}));};R._pvDoc=true;
+  }
+  // Proprietários fixos, independentemente de estarem recolhidos ou preenchidos.
+  var operationalFields=[
+    'triagem.Avisos','triagem.O que falta sanar','triagem.Intercorrências',
+    'producao.Destino - Situação','producao.Destino','producao.Destino - Outro','producao.Mono - Tipo de ato',
+    'triagem.Destino - Confirmado em','triagem.Destino - Confirmado por',
+    'origem.Responsável','origem.Próxima ação','origem.Observações',
+    'producao.SERVIDOR','producao.CORRETOR','producao.MINUTADO','producao.CORRIGIDO',
+    'producao.Data da Revisão','producao.LIBERADO','producao.Data da Liberação','producao.Assinado','producao.Data da Assinatura',
+    'triagem.Registro - Situação atual','triagem.Etiquetas','triagem.Etiquetas sugeridas',
+    'triagem.COMPLEXIDADE','triagem.Tipo de Voto','triagem.Hipóteses Monocrática'
+  ];
+  function productionExclusions(ja){
+    var all=Object.assign({},ja);operationalFields.forEach(function(k){all[k]=1;});
+    // Os controles especiais também têm proprietário no cartão, inclusive desativados.
+    ['Urgência','Meta','Sobrestamento','Caso sensível'].forEach(function(n){
+      var gg=grupoModelo(n);if(gg)(gg.campos||[]).forEach(function(c){if(c.secao)all[c.secao+'.'+c.chave]=1;});
+    });
+    return all;
   }
   var prodBase=camposCaso;
   camposCaso=function(ja){
-    var all=Object.assign({},ja,{'producao.Voto - Resultado':1,'triagem.Tema':1,'triagem.Especificidades':1,'triagem.Assunto detalhado':1,'triagem.Tipo de Julgamento':1,'triagem.Ramo do direito':1,'triagem.Outros assuntos':1,'producao.Destino - Outro':1});ownedGroups.forEach(function(n){var g=grupoModelo(n);if(g)(g.campos||[]).forEach(function(c){var k=c.secao+'.'+c.chave;if(owned(k))all[k]=1;});});
+    var all=Object.assign(productionExclusions(ja),{'producao.Voto - Resultado':1,'triagem.Tema':1,'triagem.Especificidades':1,'triagem.Assunto detalhado':1,'triagem.Tipo de Julgamento':1,'triagem.Ramo do direito':1,'triagem.Outros assuntos':1,'producao.Destino - Outro':1});ownedGroups.forEach(function(n){var g=grupoModelo(n);if(g)(g.campos||[]).forEach(function(c){var k=c.secao+'.'+c.chave;if(owned(k))all[k]=1;});});
     PECAS_DOC.forEach(function(d){d.campos.forEach(function(k){var id=k.join('.');if(owned(id))all[id]=1;});});
     var f=fragment(prodBase(all)),root=f.querySelector('.cc-caso');if(!root)return html(f);
     var T=ccTipos(), ids=['origem'];if(T.ap||T.rn||T.ms||S(V('origem','Sentença - ID')))ids.push('sent');
     if(T.ai||T.agint||T.ed||T.ret||S(V('triagem','Impugnada - ID')))ids.push('imp');if(T.ed)ids.push('ac');
     if(!T.rn||T.ap||T.ai||T.ed||T.agint||T.ms||T.ret)ids.push('rec','contra');ids.push('mpf');
-    var d=elem('details','pv-docbase');d.open=true;d.append(elem('summary','','Base documental do caso'));add(d,docsHtml(ids));var first=root.querySelector('details.gg');if(first)root.insertBefore(d,first);else root.append(d);return html(f);
+    var d=elem('details','pv-docbase');d.open=true;d.append(elem('summary','','Base documental do caso'));add(d,docsHtml(ids));var first=root.querySelector('details.gg');if(first)root.insertBefore(d,first);else root.append(d);
+    var q=elem('details','gg pv-questoes-producao');q.id='pv-questoes-producao';q.open=open.questoesProducao!==false;
+    var qs=elem('summary'),n=S(V('triagem','Alegações')).split(/\n+/).map(S).filter(Boolean).length;
+    qs.append(elem('h4','','Questões jurídicas'),elem('span','gn',String(n)));q.append(qs);
+    var gr=elem('div','gr');add(gr,questoes());var rot=gr.querySelector('.q-w>.gl');if(rot)rot.textContent='Questões a decidir';q.append(gr);d.after(q);
+    return html(f);
   };
   function abrirDoc(grupo,id){
     var AU=window.MutaAutos;
@@ -162,7 +186,13 @@
     if(t){if(noteOpen)t.after(btn('Incluir','data-nt-add',''));else t.remove();}return html(f);
   };
   notaIncluir=function(){var t=$('nt-tx');if(t&&S(t.value))noteOpen=false;return nota();};
-  snCard=function(){return sn().replace(/síntese · notas · sinalizações/g,'acompanhamento · notas · sinalizações').replace(/Síntese, notas e sinalizações/g,'Acompanhamento, notas e sinalizações');};
+  snCard=function(){
+    var f=fragment(sn()),s=f.querySelector('.pm-sn .pm-aut-t'),body=f.querySelector('.sn-b');
+    if(s){var first=s.firstChild;if(first&&first.nodeType===3)first.nodeValue=first.nodeValue.replace(/síntese · notas · sinalizações/i,'Sinalizações e acompanhamento');}
+    var sm=f.querySelector('.pm-sn>summary');if(sm){sm.title='Sinalizações e acompanhamento';sm.setAttribute('aria-label','Sinalizações e acompanhamento');}
+    if(body){var follow=elem('div','pv-followup');follow.append(elem('h4','pm-mer-h','Acompanhamento'),field('origem','Responsável','Responsável pelo acompanhamento'),field('origem','Próxima ação','Próxima ação'));body.append(follow);}
+    return html(f);
+  };
   /* Classificação: formulário único em Autos; o cartão superior só espelha os dados.
      Ramo e outros assuntos não têm chaves no modelo atual: rascunho da prévia, por CNJ. */
   function source(keys){
@@ -235,7 +265,7 @@
     p.querySelectorAll('.pm-as,.pm-ad,.pm-esp').forEach(function(x){x.remove();});
     var ctx=p.querySelector('.pm-aut1');
     if(ctx){var l=ctx.querySelector('.pm-aut-t');if(l)l.textContent='Autuação e contexto';
-      var q=elem('details','pv-sub');q.append(elem('summary','','Questões jurídicas'));add(q,questoes());var tagsBox=etiquetasAutuacao(ctx),ctl=ctx.querySelector('.pm-ctl2');if(ctl&&ctl.previousElementSibling){ctx.insertBefore(q,ctl.previousElementSibling);ctx.insertBefore(tagsBox,ctl.previousElementSibling);}else ctx.append(q,tagsBox);}
+      var tagsBox=etiquetasAutuacao(ctx),ctl=ctx.querySelector('.pm-ctl2');if(ctl&&ctl.previousElementSibling){ctx.insertBefore(tagsBox,ctl.previousElementSibling);}else ctx.append(tagsBox);}
     var pills=p.querySelector('.pm-pills');if(pills)pills.replaceWith(flow());
     var resp=p.querySelector('.pm-resp');if(resp){resp.classList.add('pv-enc');var ato=resp.querySelector('.pm-ato');if(ato){
       var faixa=p.querySelector('.pv-people'),dest=readRow('Destino',destGrav()||'A definir');
@@ -265,7 +295,7 @@
     var nested=caixa.querySelector('.gbody .rt-modos');if(nested)nested.hidden=true;
     var sel=caixa.querySelector('.gbody .rt-tsel');if(sel&&G.aba==='Processo')sel.remove();
   };
-  caixa.addEventListener('toggle',function(e){if(!e.target.isConnected)return;if(e.target.id==='pv-identity')identOpen=e.target.open;if(e.target.id==='pv-etiquetas')open.etiquetasAutuacao=e.target.open;},true);
+  caixa.addEventListener('toggle',function(e){if(!e.target.isConnected)return;if(e.target.id==='pv-identity')identOpen=e.target.open;if(e.target.id==='pv-etiquetas')open.etiquetasAutuacao=e.target.open;if(e.target.id==='pv-questoes-producao')open.questoesProducao=e.target.open;},true);
   caixa.addEventListener('click',function(e){
     var b=e.target.closest&&e.target.closest('[data-pv-tab],[data-pv-ident],[data-cl-tipo],[data-pv-extra],#pv-identity [data-rt]');if(!b)return;
     e.preventDefault();e.stopImmediatePropagation();

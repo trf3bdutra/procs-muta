@@ -137,3 +137,20 @@ test('universal: tipo de julgamento na tag, matéria em Autos, situação e nota
  assert.match(s,/sec\.append\(elem\('h4','pm-mer-h','Matéria'\)/);
  new Function(s);new Function(g);
 });
+
+test('universal: questões apenas em produção e campos operacionais com proprietário fixo',()=>{
+ const s=fs.readFileSync(path.join(ROOT,'scripts/extensao/previa/universal-layout.js'),'utf8');
+ const start=s.indexOf('var operationalFields='),end=s.indexOf('var prodBase=camposCaso;',start);
+ const get=new Function('grupoModelo',s.slice(start,end)+';return productionExclusions;')(()=>null);
+ const x=get({});
+ for(const k of ['triagem.Avisos','triagem.O que falta sanar','triagem.Intercorrências','producao.Destino - Situação','producao.Destino','origem.Observações','origem.Próxima ação','origem.Responsável','producao.MINUTADO','producao.Data da Revisão','producao.Data da Liberação','producao.Data da Assinatura','triagem.Destino - Confirmado em'])assert.equal(x[k],1,k);
+ assert.equal(x['producao.Rev - Mérito'],undefined);
+ assert.equal(x['producao.Tese jurídica adotada'],undefined);
+ assert.equal(x['producao.Voto - Honorários'],undefined);
+ assert.match(s,/add\(gr,questoes\(\)\)/);
+ assert.match(s,/d\.after\(q\)/);
+ assert.match(s,/return original\(g,c,null,Object\.assign/);
+ assert.doesNotMatch(s,/ctx\.insertBefore\(q,/);
+ assert.match(s,/field\('origem','Próxima ação','Próxima ação'\)/);
+ new Function(s);
+});
