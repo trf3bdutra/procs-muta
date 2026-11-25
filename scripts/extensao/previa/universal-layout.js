@@ -63,10 +63,85 @@
     box.append(r);var people=elem('div','pv-people');
     [['SERVIDOR','Minuta'],['CORRETOR',E.mono?'Revisão':'Correção']].forEach(function(z){var p=elem('div','pv-person'),v=S(V('producao',z[0]));p.append(elem('small','muted',z[1]));if(G.desEd===z[0]){var i=elem('input');i.id='pm-des';i.setAttribute('data-des',z[0]);i.value=v;p.append(i);}else{var b=btn(v||'Não designado','data-des-ed',z[0]);b.disabled=!G.gestor;p.append(b);}people.append(p);});box.append(people);return box;
   }
+  /* Autos são o local de edição documental; roteiros conservam as conclusões
+     jurídicas e referências à ficha, sem segundo formulário. */
+  var docs = {
+    sent:{group:'Sentença', title:'Sentença', keys:[['origem','Sentença - ID','ID'],['origem','Sentença - Data','Data'],['origem','Sentença - Decisão','Decisão'],['origem','Sentença - Resultado','Resultado'],['origem','Sentença - Fundamento','Fundamento'],['origem','Sentença - Honorários','Honorários'],['origem','Sentença - Reexame','Remessa necessária']]},
+    imp:{group:'Decisão impugnada',title:'Decisão impugnada',keys:[['triagem','Impugnada - ID','ID'],['triagem','Impugnada - Data','Data'],['triagem','Impugnada - Órgão','Órgão julgador'],['triagem','Impugnada - Relator','Relator(a)'],['triagem','Impugnada - Síntese','Síntese']]},
+    ac:{group:'Acórdão recorrido (embargos de declaração)',title:'Acórdão embargado',keys:[['producao','Acórdão - ID','ID'],['producao','Acórdão - Assinado','Assinado'],['producao','Acórdão - Publicado','Publicado'],['producao','Acórdão - Data da publicação','Publicação'],['producao','Acórdão - ED opostos','ED opostos'],['producao','Acórdão - Trânsito','Trânsito']]},
+    mpf:{group:'Parecer do MPF',title:'Ministério Público Federal',keys:[['triagem','MPF','Parecer'],['triagem','MPF - Custos Legis','Hipótese de intervenção'],['triagem','ID do Parecer MPF','ID'],['triagem','MPF - Data','Data'],['triagem','Parecer - Sentido','Sentido'],['triagem','Parecer - Sentido (outro)','Conclusão'],['triagem','MPF - Info adicional','Fundamentos']]},
+    proc:{group:'Procuração',title:'Procuração',keys:[['triagem','ID da Procuração','ID']],table:['triagem','Procurações'],cols:[['id','ID'],['data','Data'],['validade','Validade'],['advogados','Advogados']]},
+    rec:{group:'Recursos e contrarrazões',title:'Recurso(s)',keys:[],table:['origem','Recursos'],cols:[['ids','ID'],['parte','Recorrente'],['data','Protocolo'],['teses','Teses'],['pedidos','Pedidos']]},
+    contra:{group:'Recursos e contrarrazões',title:'Contrarrazões',keys:[['origem','Contrarrazões - Situação','Situação']],table:['origem','Contrarrazões'],cols:[['ids','ID'],['parte','Parte'],['data','Data'],['preliminares','Preliminares'],['teses','Teses']]},
+    origem:{group:'Origem',title:'Origem',keys:[['origem','Origem - Juízo','Juízo'],['origem','Origem - Julgador','Julgador(a)'],['origem','Origem - Processo de referência','Processo de referência']]},
+    custas:{group:'Outras peças e ocorrências',title:'Comprovantes de preparo',keys:[],cats:['custas']},
+    intim:{group:'Recursos e contrarrazões',title:'Intimações / publicações',keys:[],cats:['intimacao']}
+  };
+  var stepDocs={decisao:['sent'],impugnada:['imp'],prolator:['imp'],tempest:['rec','intim'],preparo:['custas'],repres:['proc'],reexame:['sent'],cabimento:['imp','rec'],vicios:['ac','rec'],impug:['imp','rec'],dialet:['rec'],mpf:['mpf'],contra:['contra'],efeito:['imp'],infring:['ac','contra'],retrat:['imp']};
+  // As conclusões da triagem continuam editáveis no respectivo passo.
+  var triagemOwn={'triagem.MPF':1,'triagem.MPF - Custos Legis':1};
+  var ownedGroups=['Sentença','Origem','Recursos e contrarrazões','Outras peças e ocorrências','Acórdão recorrido (embargos de declaração)'];
+  function owned(id){
+    if(triagemOwn[id])return false;
+    if(ownedGroups.some(function(n){var g=grupoModelo(n);return g&&(g.campos||[]).some(function(c){return c.secao+'.'+c.chave===id;});}))return true;
+    return PECAS_DOC.some(function(d){return d.campos.some(function(k){return k[0]+'.'+k[1]===id;});});
+  }
+  var impGroup=PECAS_DOC.filter(function(g){return g.grupo==='Decisão impugnada';})[0];
+  if(impGroup){var qImp=impGroup.quando;impGroup.quando=function(t){var T=ccTipos();return T.ai||T.ed||T.agint||T.ret||qImp(t);};}
+  PECAS_DOC.forEach(function(g){if(g.grupo==='Parecer do MPF')g.campos=g.campos.filter(function(k){return k[1]!=='MPF';});});
+  PECAS_DOC.push({grupo:docs.ac.group,quando:function(){return ccTipos().ed||!!S(V('producao','Acórdão - ID'));},campos:docs.ac.keys.map(function(k){return k.slice(0,2);})});
+  function limit(v){v=String(v||'').trim();return v.length>280?v.slice(0,277)+'…':v;}
+  function docRef(id){
+    var d=docs[id], box=elem('div','pv-docref'), head=elem('div','pv-dochead'), sig=window.MutaSigilo;
+    var T=ccTipos(), title=id==='imp'&&T.ai?'Decisão agravada':id==='sent'&&T.ai?'Decisão de origem':d.title;
+    head.append(elem('b','',title));var go=btn('Ver em Autos','data-pv-doc',d.group);go.className='lnk pv-doclink';head.append(go);box.append(head);
+    if(sig&&sig.bloqueado()){box.append(elem('small','muted','Acesso documental restrito.'));return box;}
+    var AU=window.MutaAutos, leitura=AU&&AU.doProcesso&&AU.doProcesso(), list=leitura?leitura.lista||[]:[];
+    function ids(v){return String(v||'').match(/\d{6,}/g)||[];}
+    function blocked(v){var L=ids(v);return !!(sig&&list.some(function(x){return L.indexOf(String(x.id))>=0&&sig.docBloqueado(x);}));}
+    var any=false, idValue=d.keys.filter(function(k){return k[2]==='ID';}).map(function(k){return S(V(k[0],k[1]));}).join(' ');
+    function line(p,label,v,isID){if(!v)return;any=true;var r=elem('div','pv-docline');r.append(elem('span','muted',label));
+      if(isID){var L=ids(v);if(L.length){var w=elem('div','pv-docids');L.forEach(function(n){var b=btn('ID '+n,'data-pv-doc',d.group);b.setAttribute('data-pv-doc-id',n);b.className='lnk mono';w.append(b);});r.append(w);}else r.append(elem('span','',limit(v)));}
+      else r.append(elem('span','',limit(brD(v))));p.append(r);}
+    if(blocked(idValue)){box.append(elem('small','muted','Documento sigiloso · conteúdo restrito.'));return box;}
+    d.keys.forEach(function(k){line(box,k[2],S(V(k[0],k[1])),k[2]==='ID');});
+    if(d.table){var rows=V(d.table[0],d.table[1]);if(Array.isArray(rows))rows.forEach(function(row){
+      if(!row)return;var p=elem('div','pv-docitem'),rid=row.ids||row.id;if(blocked(rid)){p.append(elem('small','muted','Documento sigiloso · conteúdo restrito.'));any=true;}else d.cols.forEach(function(c){line(p,c[1],S(row[c[0]]),c[1]==='ID');});if(p.childNodes.length)box.append(p);
+    });}
+    if(d.cats&&leitura)list.filter(function(x){return !x.anexo&&d.cats.indexOf(x.k)>=0&&!(sig&&sig.docBloqueado(x));}).forEach(function(x){var p=elem('div','pv-docitem');line(p,'Documento',x.tipo||d.title,false);line(p,'ID',String(x.id||''),true);line(p,'Data',S(x.data),false);box.append(p);});
+    if(!any)box.append(elem('small','muted',id==='mpf'?'Sem manifestação / hipótese registrada na ficha.':'Sem dados documentais registrados.'));
+    else if(!idValue&&!d.table&&!d.cats)box.append(elem('small','muted','ID não registrado na ficha.'));
+    return box;
+  }
+  function docsHtml(ids){var f=elem('div','pv-docrefs');ids.forEach(function(id){f.append(docRef(id));});return html(f);}
+  function setupRoteiro(){
+    var R=window.MutaRoteiro;if(!R||R._pvDoc)return;
+    var original=R.html;R.html=function(g,c,q,x){return original(g,c,q,Object.assign({},x,{docOwned:owned,docRef:function(id){return docsHtml(stepDocs[id]||[]);}}));};R._pvDoc=true;
+  }
+  var prodBase=camposCaso;
+  camposCaso=function(ja){
+    var all=Object.assign({},ja);ownedGroups.forEach(function(n){var g=grupoModelo(n);if(g)(g.campos||[]).forEach(function(c){var k=c.secao+'.'+c.chave;if(owned(k))all[k]=1;});});
+    PECAS_DOC.forEach(function(d){d.campos.forEach(function(k){var id=k.join('.');if(owned(id))all[id]=1;});});
+    var f=fragment(prodBase(all)),root=f.querySelector('.cc-caso');if(!root)return html(f);
+    var T=ccTipos(), ids=['origem'];if(T.ap||T.rn||T.ms||S(V('origem','Sentença - ID')))ids.push('sent');
+    if(T.ai||T.agint||T.ed||T.ret||S(V('triagem','Impugnada - ID')))ids.push('imp');if(T.ed)ids.push('ac');
+    if(!T.rn||T.ap||T.ai||T.ed||T.agint||T.ms||T.ret)ids.push('rec','contra');ids.push('mpf');
+    var d=elem('details','pv-docbase');d.open=true;d.append(elem('summary','','Base documental do caso'));add(d,docsHtml(ids));var first=root.querySelector('details.gg');if(first)root.insertBefore(d,first);else root.append(d);return html(f);
+  };
+  function abrirDoc(grupo,id){
+    var AU=window.MutaAutos;
+    if(id&&AU&&AU.estado)AU.estado().filtro='todos';else if(AU&&AU.estado)AU.estado().filtro='pecas';
+    G.pecAb=G.pecAb||{};G.pecAb[grupo]=true;G.aba='Autos';render();
+    var p=id?Array.from(caixa.querySelectorAll('[data-au-it]')).find(function(x){return x.getAttribute('data-au-it')===id;}):null;
+    if(p)p=p.closest('.au-doc')||p;
+    if(!p&&id){if(AU&&AU.estado)AU.estado().filtro='pecas';render();}
+    if(!p)p=Array.from(caixa.querySelectorAll('details[data-grupo]')).find(function(x){return x.dataset.grupo===grupo;});
+    if(!p)p=$('g-docs');if(p){if(p.tagName==='DETAILS')p.open=true;p.scrollIntoView({block:'start'});}
+  }
   /* Roteiro real de triagem, incluindo estados, prazos, conferência e seleção de espécies.
      Retira só a explicação redundante do catálogo, não as etiquetas nem as ações. */
   corpoRoteiro=function(){
-    var f=fragment(rt());f.querySelectorAll('.etq-cat').forEach(function(c){if(!c.querySelector('.etq-cs'))c.remove();else{var b=c.querySelector('.etq-cat-h b');if(b)b.remove();}});
+    setupRoteiro();var f=fragment(rt());f.querySelectorAll('.etq-cat').forEach(function(c){if(!c.querySelector('.etq-cs'))c.remove();else{var b=c.querySelector('.etq-cat-h b');if(b)b.remove();}});
     f.querySelectorAll('p,small').forEach(function(p){if(p.textContent.trim().startsWith('As sugeridas seguem as regras do Caput'))p.remove();});return html(f);
   };
   /* Reaproveita controles originais e disponibiliza os demais campos de Meta. */
@@ -110,8 +185,9 @@
     if(e.key==='Escape'||(e.key==='Enter'&&(e.ctrlKey||e.metaKey))){e.preventDefault();e.stopImmediatePropagation();sintAcao(id,e.key==='Escape'?'x':'ok');}
   },true);
   caixa.addEventListener('click',function(e){
-    var b=e.target.closest&&e.target.closest('[data-pv-field],[data-pv-note],[data-pv-sint]');if(!b)return;
+    var b=e.target.closest&&e.target.closest('[data-pv-field],[data-pv-note],[data-pv-sint],[data-pv-doc]');if(!b)return;
     e.preventDefault();e.stopImmediatePropagation();
+    if(b.hasAttribute('data-pv-doc')){abrirDoc(b.getAttribute('data-pv-doc'),b.getAttribute('data-pv-doc-id'));return;}
     if(b.hasAttribute('data-pv-sint')){var a=b.getAttribute('data-pv-sint').split(':');sintAcao(a[0],a[1]);return;}
     if(b.hasAttribute('data-pv-note')){noteOpen=!noteOpen;render();var t=$('nt-tx');if(t)t.focus();return;}
     var id=b.getAttribute('data-pv-field');open[id]=!open[id];render();

@@ -53,10 +53,20 @@ def montar(saida: pathlib.Path) -> None:
         sys.exit('gabinete.js: ponto de integração da prévia ausente')
     overlay = (AQUI / 'universal-layout.js').read_text(encoding='utf-8')
     (painel / 'gabinete-universal.js').write_text(fonte.replace(ancora, overlay + '\n' + ancora, 1), encoding='utf-8')
+    # Ganchos de apresentação do roteiro, sem modificar as regras nem os estados dos passos.
+    roteiro = (painel / 'roteiro.js').read_text(encoding='utf-8')
+    if "      if (DOC_RT[alvo] && !mostrados[alvo])" not in roteiro:
+        sys.exit('roteiro.js: gancho de referências documentais não encontrado')
+    if "        if (ab) {\n          var mais =" not in roteiro:
+        sys.exit('roteiro.js: gancho de referências documentais não encontrado')
+    roteiro = roteiro.replace("      if (DOC_RT[alvo] && !mostrados[alvo])", "      if (X.docOwned && X.docOwned(alvo)) { mostrados[alvo] = 1; return ''; }\n      if (DOC_RT[alvo] && !mostrados[alvo])", 1)
+    roteiro = roteiro.replace("        if (ab) {\n          var mais =", "        if (X.docRef) h += X.docRef(p.id);\n        if (ab) {\n          var mais =", 1)
+    (painel / 'roteiro-universal.js').write_text(roteiro, encoding='utf-8')
     shutil.copy2(AQUI / 'universal-layout.css', painel / 'universal-layout.css')
     universal = html.replace('<script src="gabinete.js"></script>', '<script src="gabinete-universal.js"></script>', 1)
     if universal == html:
         sys.exit('painel.html: gabinete.js não encontrado')
+    universal = universal.replace('<script src="roteiro.js"></script>', '<script src="roteiro-universal.js"></script>', 1)
     universal = universal.replace('</head>', '<link rel="stylesheet" href="universal-layout.css">\n</head>', 1)
     # A navegação conserva todos os IDs e painéis originais, inclusive as abas
     # ocultas por permissão ou acessadas por atalhos. Só agrupa a apresentação.

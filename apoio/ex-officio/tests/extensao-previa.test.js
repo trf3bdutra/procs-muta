@@ -36,8 +36,8 @@ test('prévia universal mantém todas as abas e ambos os roteiros originais', ()
     const html = fs.readFileSync(path.join(pn, 'universal.html'), 'utf8');
     const old = fs.readFileSync(path.join(pn, 'painel.html'), 'utf8');
     const scripts = s => [...s.matchAll(/<script src="([^"]+)"/g)].map(m => m[1]);
-    assert.deepEqual(scripts(html),scripts(old).map(s=>s==='gabinete.js'?'gabinete-universal.js':s));
-    assert.match(html, /src="roteiro.js"/);
+    assert.deepEqual(scripts(html),scripts(old).map(s=>s==='gabinete.js'?'gabinete-universal.js':s==='roteiro.js'?'roteiro-universal.js':s));
+    assert.match(html, /src="roteiro-universal.js"/);
     assert.match(html, /src="gerador.js"/);
     assert.match(html, /src="ementario.js"/);
     const js=fs.readFileSync(path.join(pn, 'gabinete-universal.js'), 'utf8');
@@ -79,4 +79,22 @@ test('sínteses: chaves distintas, padrão de assunto detalhado e gravação exp
   assert.doesNotMatch(src,/field\('triagem','Síntese Fática'/);
   assert.match(src,/sintEdit='';sintDraft='';render\(\)/);
   new Function(src);
+});
+
+test('referências documentais preservam decisões de triagem e centralizam edição em Autos', () => {
+  const saida=fs.mkdtempSync(path.join(os.tmpdir(),'muta-docref-'));
+  try {
+    execFileSync('python3',[path.join(ROOT,'scripts/extensao/previa.py'),'--saida',saida]);
+    const pn=path.join(saida,'painel'),rt=fs.readFileSync(path.join(pn,'roteiro-universal.js'),'utf8'),gb=fs.readFileSync(path.join(pn,'gabinete-universal.js'),'utf8');
+    new Function(rt);new Function(gb);
+    assert.match(rt,/X\.docOwned\(alvo\)/);
+    assert.match(rt,/X\.docRef\(p\.id\)/);
+    assert.match(gb,/triagemOwn=\{'triagem.MPF':1,'triagem.MPF - Custos Legis':1\}/);
+    assert.match(gb,/ID do Parecer MPF/);
+    assert.match(gb,/Parecer - Sentido/);
+    assert.match(gb,/data-pv-doc-id/);
+    assert.match(gb,/sig\.docBloqueado/);
+    assert.match(gb,/Base documental do caso/);
+    assert.equal(fs.readFileSync(path.join(pn,'roteiro.js'),'utf8'),fs.readFileSync(path.join(ROOT,'extensao','roteiro.js'),'utf8'));
+  } finally {fs.rmSync(saida,{recursive:true,force:true});}
 });
