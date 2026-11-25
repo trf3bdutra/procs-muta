@@ -1252,6 +1252,8 @@ header#top::before{background:linear-gradient(90deg,var(--eg) 0 50%,var(--eg2) 5
 </style><style>.cog-dest-sub{border-top:1px solid var(--b);margin:0}.cog-dest-sub .ch h3{font:650 15px/1.3 Figtree,"Segoe UI",sans-serif;color:var(--v);margin:0 0 4px}.cog-pauta-linha{grid-template-columns:minmax(0,1fr) 64px!important;text-align:left}.cog-dest-sub .ch{padding-top:14px}</style><style>#rodape[hidden]{display:none!important}#rodape:not([hidden]){display:flex!important;gap:0;align-items:center;flex-wrap:wrap;padding:4px 10px;max-height:42vh;overflow:auto;z-index:35}#rodape .sel{display:flex;align-items:center;gap:8px;min-width:0}#rodape .ac{flex:1 1 200px;padding:6px 10px}#rodape .cog-destinar{flex:2 1 340px}#rodape .lin{display:flex;flex-wrap:wrap;gap:5px}#rodape .lin select{min-width:0;max-width:100%;flex:1}#rodape .ac small{font-size:10px}body.cog-rod-on main{padding-bottom:130px!important}@media(max-width:850px){body.cog-rod-on main{padding-bottom:230px!important}}</style><style>
 .cog-ac-head{gap:12px}.cog-ac-over [data-conj][aria-pressed="true"]{outline:2px solid #235a55;outline-offset:-2px;background:#e9f1ee}.cog-ac-over [hidden]{display:none!important}
 .cog-matrix{overflow:auto;max-height:72vh}.cog-matrix table{min-width:1450px}.cog-matrix th{position:sticky;top:0;background:#f4f6f5;z-index:2}.cog-matrix th:first-child,.cog-matrix td:first-child{position:sticky;left:0;background:#fff;z-index:1;min-width:235px}.cog-matrix th:first-child{z-index:3}.cog-matrix input:not([type=checkbox]),.cog-matrix select{width:100%;min-width:130px;font:inherit;padding:6px;border:1px solid #cbd5d1;border-radius:4px}.cog-xls-icon:focus-visible{outline:2px solid #235a55}
+</style><style>
+.flow-map{border:1px solid #d3ded8;border-radius:10px;background:#fff;padding:16px 18px;margin:6px 0 14px}.flow-map header h3{margin:5px 0;font:650 20px Figtree,sans-serif;color:var(--v)}.flow-map header p,.flow-legend{color:var(--m);font:12px/1.5 Figtree,sans-serif;margin:4px 0 14px}.flow-grid{display:grid;grid-template-columns:minmax(135px,.75fr) 24px minmax(145px,.8fr) 24px minmax(260px,1.8fr);align-items:center;gap:8px}.flow-step{min-width:0;display:grid;gap:8px}.flow-step h4{font:600 10.5px Figtree,sans-serif;letter-spacing:.07em;text-transform:uppercase;color:var(--m);margin:0 0 4px}.flow-arrow{font-size:24px;color:#a0afa8;text-align:center}.flow-node,.flow-sub{width:100%;display:flex;align-items:center;justify-content:space-between;gap:10px;text-align:left;background:#f8faf9;color:#243d32;border:1px solid #d9e2dd;border-left:3px solid var(--fl);border-radius:6px;padding:9px 10px;cursor:pointer;font:550 12px Figtree,sans-serif}.flow-node b{font:650 20px Figtree,sans-serif;color:var(--fl);font-variant-numeric:tabular-nums}.flow-dest{border:1px solid #dce5df;border-radius:7px;padding:5px}.flow-dest .flow-node{border:0;border-left:3px solid var(--fl)}.flow-subgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;margin-top:5px}.flow-sub{border:1px solid #e1e8e4;font-size:10.5px;padding:5px;gap:4px}.flow-sub i{width:6px;height:6px;border-radius:50%;background:var(--fl);flex:none}.flow-sub b{font-size:12px;color:var(--fl)}.flow-node[aria-pressed="true"],.flow-sub[aria-pressed="true"]{outline:2px solid var(--fl);outline-offset:-2px;background:#e9f0ec}.flow-legend{margin:12px 0 0;border-top:1px solid #e5eae7;padding-top:10px}.flow-detail{background:white;border:1px solid #d3ded8;border-radius:8px;padding:12px}.flow-detail header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}.flow-scroll{overflow:auto}.flow-detail .at-t{min-width:900px}@media(max-width:950px){.flow-grid{grid-template-columns:1fr;gap:6px}.flow-arrow{transform:rotate(90deg)}.flow-step:not(.flow-dests){grid-template-columns:repeat(2,minmax(0,1fr))}.flow-step h4{grid-column:1/-1}.flow-step:first-child .flow-node{grid-column:1/-1}}
 </style></head>
 <body>
 <header id="top">
@@ -3128,7 +3130,7 @@ function triExcelRows(sub,id,group,filter){
   let L=cogTriBase().filter(o=>cogTriStatus(o)&&(!group||(o.tarefa||o.grupo||'Triagem')===group));
   if(id.startsWith('funil:')){const ids=new Set((id==='funil:outro'?U.filter(o=>o.dest.k==='outro'||o.dest.k==='esc'):(funilTriagem()[id.slice(6)]||[])).map(o=>o.d));L=L.filter(o=>ids.has(o.d));}
   if(filter)L=L.filter(o=>(!task||(o.tarefa||o.grupo||'Triagem')===task)&&(!q||q.split(/\s+/).every(t=>o.hay.includes(t)))&&(!so||(so==='com'?atTri(o):!atTri(o))));
-  return L.map(o=>({cnj:o.cnj,base:o,it:{},lote:'',lid:'',grupo:o.tarefa||o.grupo||'Triagem',serie:''}));
+  return cogTriOrdenar(L).map(o=>({cnj:o.cnj,base:o,it:{},lote:'',lid:'',grupo:o.tarefa||o.grupo||'Triagem',serie:''}));
  }
  if(id===COG_OUTROS_ID){_colD.outras={lotes:[cogOutrosLote()]};sub='outras';}
  if(!_colD[sub])return null;
@@ -3214,15 +3216,7 @@ function refazTriEm() { const em = document.getElementById('tri-em'); if (em) em
 
 function conteudoSubAba() {
   if (COG==='triagem') return aTriarBands(LS.get('tri_triar_tarefa', ''));
-  if (TRI_SUBABA==='triados' || TRI_SUBABA==='selecao') return painelMatrizLote(TRI_SUBABA);
-  if (TRI_SUBABA==='triados') {
-    if (!_triCache) { carregarTriados(); return '<div class="tri-ld">Carregando lotes de triagem…</div>'; }
-    return triadosBands();
-  }
-  if (TRI_SUBABA==='selecao') {
-    if (!_selCache) { carregarSelecao(); return '<div class="tri-ld">Carregando seleção prévia…</div>'; }
-    return selecaoBands();
-  }
+  if (COG==='selecao') return painelMatrizLote('selecao');
   return '';
 }
 
@@ -3495,14 +3489,20 @@ function atLinha(o) {
     '<td class="at-ac"><button type="button" class="btn sm" data-prontuario="' + o.d + '">Prontuário</button><button type="button" class="btn sm" data-ficha="' + o.d + '">Ficha</button></td></tr>' +
     (exp ? (setTimeout(montarAtPP, 0), '<tr class="at-det"><td></td><td colspan="7"><div class="at-pp" data-at-pp="' + esc(o.d) + '"></div></td></tr>') : '');
 }
+/* Um único recorte e uma única ordenação para as visualizações nativas. */
+function cogTriOrdenar(L,ord=LS.get('tri_ato','antigos')){
+ const cmp={antigos:(a,b)=>(atDias(b)||0)-(atDias(a)||0),numero:(a,b)=>a.d.localeCompare(b.d),assunto:(a,b)=>String(a.assunto||'').localeCompare(String(b.assunto||''),'pt-BR'),secao:(a,b)=>String(a.secao||'').localeCompare(String(b.secao||''),'pt-BR')}[ord];
+ return L.slice().sort((a,b)=>(cmp||((x,y)=>(atDias(y)||0)-(atDias(x)||0)))(a,b)||a.d.localeCompare(b.d));
+}
+function cogTriRecorte(task,filtrado=true){
+ const q=filtrado?nz(LS.get('tri_atq','')).trim():'',so=filtrado?LS.get('tri_atso',''):'';
+ return cogTriOrdenar(cogTriBase().filter(o=>cogTriStatus(o)&&(!task||(o.tarefa||o.grupo||'Triagem')===task)&&(!q||q.split(/\s+/).every(t=>o.hay.includes(t)))&&(!so||(so==='com'?atTri(o):!atTri(o)))));
+}
 function atTabela(soTarefa) {
-  const q = nz(LS.get('tri_atq', '')).trim(), so = LS.get('tri_atso', ''), ord = LS.get('tri_ato', 'antigos');
-  const ids=cogTriBaseIds(); const pass = (o) => ids.has(o.d)&&cogTriStatus(o)&&(!soTarefa||(o.tarefa||o.grupo||'Triagem')===soTarefa)&&(!q||q.split(/\s+/).every(t=>o.hay.includes(t)))&&(!so||(so==='com'?atTri(o):!atTri(o)));
-  const ORD = { antigos: (a, b) => (atDias(b) || 0) - (atDias(a) || 0), numero: (a, b) => a.d.localeCompare(b.d), assunto: (a, b) => String(a.assunto).localeCompare(String(b.assunto), 'pt-BR'), secao: (a, b) => String(a.secao).localeCompare(String(b.secao)) || a.d.localeCompare(b.d) };
-  const groups = new Map(); U.filter(pass).forEach((o) => { const g = o.tarefa || o.grupo || 'Triagem'; if (!groups.has(g)) groups.set(g, []); groups.get(g).push(o); });
+  const groups = new Map(); cogTriRecorte(soTarefa).forEach((o) => { const g = o.tarefa || o.grupo || 'Triagem'; if (!groups.has(g)) groups.set(g, []); groups.get(g).push(o); });
   if (!groups.size) return '<div class="tri-ld">Nenhum processo com esses filtros.</div>';
   let h = '<table class="at-t"><thead><tr><th></th><th>Processo</th><th>Tipo de caso · assunto</th><th>Na tarefa</th><th>Indicadores</th><th title="Tempestividade · preparo · representação · MPF">Prontuário</th><th>Destino · próxima ação</th><th></th></tr></thead><tbody>';
-  groups.forEach((L, g) => { L.sort(ORD[ord] || ORD.antigos); const ab = LS.get('tri_em_b_' + g, true), lim = LS.get('tri_atlim_' + g, 60), tri = L.filter(atTri).length;
+  groups.forEach((L, g) => { const ab = LS.get('tri_em_b_' + g, true), lim = LS.get('tri_atlim_' + g, 60), tri = L.filter(atTri).length;
     h += '<tr class="at-g"><td colspan="8"><button type="button" class="at-gb" data-tribanda="' + esc(g) + '"><i>' + (ab ? '−' : '+') + '</i><b>' + esc(g) + '</b><small>' + nf(L.length) + ' processos · ' + nf(tri) + ' com prontuário</small></button>' + triExcelIcon('data-tri-xls="triar" data-xls-group="'+esc(g)+'" data-xls-title="'+esc(g)+'"') + '</td></tr>';
     if (ab) { h += L.slice(0, lim).map(atLinha).join(''); if (L.length > lim) h += '<tr class="at-mais"><td colspan="8"><button type="button" class="btn sm" data-atmais="' + esc(g) + '">Mostrar mais ' + Math.min(100, L.length - lim) + ' de ' + nf(L.length - lim) + '</button></td></tr>'; } });
   return h + '</tbody></table>';
@@ -3554,14 +3554,41 @@ function atFunil(soTarefa) {
   const q = nz(LS.get('tri_atq', '')).trim(), so = LS.get('tri_atso', '');
   const ids=cogTriBaseIds(); const pass = (o) => ids.has(o.d)&&cogTriStatus(o)&&(!soTarefa||(o.tarefa||o.grupo||'Triagem')===soTarefa)&&(!q||q.split(/\s+/).every(t=>o.hay.includes(t)))&&(!so||(so==='com'?atTri(o):!atTri(o)));
   const F4 = funilTriagem(), at = fnSesAtiva(); F4.outro=U.filter(o=>o.dest.k==='outro'||o.dest.k==='esc');
-  return '<div class="fn">' + FN_COLS.map(([k, rot, cor]) => { const L = F4[k].filter(pass).sort((a, b) => (atDias(b) || 0) - (atDias(a) || 0)), lim = LS.get('tri_fnlim_' + k, 30);
+  return '<div class="fn">' + FN_COLS.map(([k, rot, cor]) => { const L = cogTriOrdenar(F4[k].filter(pass)), lim = LS.get('tri_fnlim_' + k, 30);
     const aConf = k === 'mono' ? L.filter((o) => o.dest.k !== 'mono') : k === 'ses' && at ? L.filter((o) => o.dest.k !== 'pauta') : [];
     const lote = aConf.length ? '<button type="button" class="btn sm" data-fn-col="' + k + '" title="' + (k === 'mono' ? 'Confirma a monocrática' : 'Manda à seleção prévia da sessão de ' + nomeSes(at)) + ' para os ' + aConf.length + ' processos desta coluna ainda sem destino">' + (k === 'mono' ? 'Confirmar ' + nf(aConf.length) : 'Enviar ' + nf(aConf.length) + ' à seleção ' + nomeSes(at).slice(0, 5)) + '</button>' : '';
     return '<section class="fn-col" aria-label="' + esc(rot) + '"><header style="border-top-color:' + cor + '"><b style="color:' + cor + '">' + esc(rot) + '</b><span class="fn-n">' + nf(L.length) + '</span>' + lote + triExcelIcon('data-tri-xls="triar" data-xls-id="funil:'+esc(k)+'" data-xls-title="'+esc(rot)+'"') + '</header>' +
       (L.length ? L.slice(0, lim).map((o) => fnCartao(o, k, cor, at)).join('') : '<p class="fn-vz">Nenhum processo.</p>') +
       (L.length > lim ? '<button type="button" class="btn sm fn-mais" data-fn-mais="' + k + '">Mostrar mais ' + Math.min(30, L.length - lim) + ' de ' + nf(L.length - lim) + '</button>' : '') + '</section>'; }).join('') + '</div>'; }
-const atVer = () => LS.get('tri_atver', 'lista');
-const atCorpo = (soTarefa) => (atVer() === 'funil' ? atFunil(soTarefa) : atVer()==='matriz'?cogMatrizEditavel(soTarefa):atVer()==='colecoes'&&TRI_SUBABA==='triados'&&!COG_TRANSFER?painelMatrizLote('triados'):atTabela(soTarefa));
+const atVer = () => {const v=LS.get('tri_atver','lista');return ['lista','funil','matriz','fluxo'].includes(v)?v:'lista';};
+const atCorpo = task => atVer()==='fluxo'?cogFluxo(task):atVer()==='funil'?atFunil(task):atVer()==='matriz'?cogMatrizEditavel(task):atTabela(task);
+const COG_FLUXO_DEST=[['definir','Destino a definir','#7b6d55'],['colegiado','Colegiado · sessão','#477762'],['relator','Decisão do relator','#52779d'],['outro','Outros destinos','#726c7e']];
+let COG_FLUXO_NO='',COG_FLUXO_LIM=50;
+function cogFluxoDestino(o){
+ const k=(o.dest||{}).k;
+ return k==='pauta'||k==='sessao'?'colegiado':k==='mono'?'relator':k==='outro'||k==='esc'?'outro':'definir';
+}
+function cogFluxoAptidao(o){
+ const st=nz((o.row||{})['Destino - Situação']||'');
+ return st==='pendente'||(o.pend||[]).length?'pend':st==='pronto para julgar'?'apto':'verificar';
+}
+function cogFluxo(task){
+ const L=cogTriRecorte(task),nodes=new Map([['total',L]]);
+ const stages=[['triar','A triar',L.filter(o=>!cogTriAnalisado(o))],['triado','Triados',L.filter(cogTriAnalisado)]];
+ stages.forEach(([k,t,rs])=>nodes.set(k,rs));
+ const dests=COG_FLUXO_DEST.map(([k,t,c])=>{const rs=L.filter(o=>cogFluxoDestino(o)===k);nodes.set(k,rs);return [k,t,c,rs];});
+ const node=(k,t,rs,c)=>'<button type="button" class="flow-node" style="--fl:'+c+'" data-cog-flow="'+k+'" aria-pressed="'+(COG_FLUXO_NO===k)+'"><span>'+esc(t)+'</span><b>'+nf(rs.length)+'</b></button>';
+ const dot=(k,t,rs,c)=>'<button type="button" class="flow-sub" style="--fl:'+c+'" data-cog-flow="'+k+'" aria-pressed="'+(COG_FLUXO_NO===k)+'"><i></i><span>'+esc(t)+'</span><b>'+nf(rs.length)+'</b></button>';
+ let h='<section class="flow-map"><header><div><span class="at-k">Mapa do fluxo</span><h3>Da análise ao encaminhamento</h3><p>Posição atual dos processos no recorte filtrado. Selecione um nó para consultar seus processos.</p></div></header><div class="flow-grid"><div class="flow-step"><h4>01 · Entrada</h4>'+node('total','Processos no recorte',L,'#536c63')+'</div><div class="flow-arrow" aria-hidden="true">→</div><div class="flow-step"><h4>02 · Análise</h4>'+stages.map(([k,t,rs])=>node(k,t,rs,k==='triado'?'#477762':'#7b6d55')).join('')+'</div><div class="flow-arrow" aria-hidden="true">→</div><div class="flow-step flow-dests"><h4>03 · Destino e aptidão</h4>'+dests.map(([k,t,c,rs])=>{
+  const stats=[['apto','Aptos','#477762'],['pend','Com pendências','#a26741'],['verificar','A verificar','#83918a']];
+  return '<section class="flow-dest">'+node(k,t,rs,c)+'<div class="flow-subgrid">'+stats.map(([st,rot,cor])=>{const rr=rs.filter(o=>cogFluxoAptidao(o)===st),key=k+'-'+st;nodes.set(key,rr);return dot(key,rot,rr,cor);}).join('')+'</div></section>';
+ }).join('')+'</div></div><p class="flow-legend">O status da análise não implica aptidão para julgamento. O destino é o registrado na ficha, não uma sugestão automática.</p></section>';
+ const key=nodes.has(COG_FLUXO_NO)?COG_FLUXO_NO:'',rs=key?nodes.get(key):[];
+ if(key){const lim=COG_FLUXO_LIM;h+='<section class="flow-detail"><header><b>'+nf(rs.length)+' processos no nó selecionado</b><button type="button" class="btn sm" data-cog-flow="">Limpar seleção do nó</button></header>'+(rs.length?'<div class="flow-scroll"><table class="at-t"><thead><tr><th></th><th>Processo</th><th>Tipo de caso · assunto</th><th>Na tarefa</th><th>Indicadores</th><th>Prontuário</th><th>Destino · próxima ação</th><th></th></tr></thead><tbody>'+rs.slice(0,lim).map(atLinha).join('')+'</tbody></table></div>':'<p class="nota">Nenhum processo neste nó.</p>')+(rs.length>lim?'<button type="button" class="btn sm" data-cog-flow-more>Mostrar mais '+Math.min(50,rs.length-lim)+'</button>':'')+'</section>';}
+ return h;
+}
+D.addEventListener('click',e=>{const b=e.target.closest('[data-cog-flow],[data-cog-flow-more]');if(!b||COG!=='triagem'||atVer()!=='fluxo')return;e.preventDefault();const y=scrollY;if(b.hasAttribute('data-cog-flow-more'))COG_FLUXO_LIM+=50;else{const k=b.dataset.cogFlow;COG_FLUXO_NO=COG_FLUXO_NO===k?'':k;COG_FLUXO_LIM=50;}refazAtTab();W.scrollTo(0,y);},true);
+
 const COG_MAT_FIELDS=[
  ['triagem.Status da triagem','Status',['A triar','Triado']],['producao.Destino','Destino',['Sessão','Monocrática','Outro destino']],['producao.Destino - Situação','Aptidão',['Pronto para julgar','Pendente']],['producao.Mono - Tipo de ato','Pronunciamento',['Decisão monocrática (art. 932)','Decisão de urgência','Decisão interlocutória','Despacho','Decisão de admissibilidade','Juízo de retratação','Homologação / extinção']],
  ['triagem.Tema','Tipo de caso',null],
@@ -3572,7 +3599,7 @@ const COG_MAT_FIELDS=[
  ['triagem.Hipóteses Monocrática','Hipótese do art. 932',null],['triagem.O que falta sanar','Pendências',null],['origem.Próxima ação','Próxima ação',null],['origem.Observações','Observações',null]
 ];
 function cogMatrizEditavel(task){
- const q=nz(LS.get('tri_atq','')).trim(),so=LS.get('tri_atso',''),L=cogTriBase().filter(o=>cogTriStatus(o)&&(!task||(o.tarefa||o.grupo||'Triagem')===task)&&(!q||q.split(/\s+/).every(t=>o.hay.includes(t)))&&(!so||(so==='com'?atTri(o):!atTri(o)))),lim=LS.get('cog_matriz_lim',50);
+ const L=cogTriRecorte(task),lim=LS.get('cog_matriz_lim',50);
  const cell=(o,f)=>{const key=f[0],v=String((o.row||{})[key.slice(key.indexOf('.')+1)]||(key==='triagem.Status da triagem'?(cogTriAnalisado(o)?'Triado':'A triar'):'')),a=' data-cog-mat="'+esc(key)+'" data-d="'+o.d+'" data-ant="'+esc(v)+'" aria-label="'+esc(f[1]+' · '+o.cnj)+'"';
  return f[2]?'<select'+a+'><option value="">—</option>'+[...new Set([...(v?[v]:[]),...f[2]])].map(x=>'<option value="'+esc(x)+'"'+(x===v?' selected':'')+'>'+esc(key==='producao.Destino'?(x==='Sessão'?'Colegiado (sessão)':x==='Monocrática'?'Decisão do relator':x):x)+'</option>').join('')+'</select>':'<input type="text"'+a+' value="'+esc(v)+'">';};
  return '<div class="cog-matrix"><table class="at-t"><thead><tr><th>Processo</th>'+COG_MAT_FIELDS.map(f=>'<th>'+esc(f[1])+'</th>').join('')+'</tr></thead><tbody>'+L.slice(0,lim).map(o=>'<tr><td><input type="checkbox" data-sel="'+o.d+'"'+(SEL.has(o.d)?' checked':'')+' aria-label="Selecionar '+esc(o.cnj)+'"> <button type="button" class="at-cnj" data-ficha="'+o.d+'">'+esc(o.cnj)+'</button></td>'+COG_MAT_FIELDS.map(f=>'<td>'+cell(o,f)+'</td>').join('')+'</tr>').join('')+'</tbody></table></div><p class="nota">'+nf(Math.min(lim,L.length))+' de '+nf(L.length)+' processos · alterações gravadas na ficha única ao sair do campo.</p>'+(L.length>lim?'<button type="button" class="btn sm" data-cog-mat-more>Mostrar mais</button>':'');
@@ -3608,7 +3635,7 @@ function aTriarBands(soTarefa) {
   if (!U || !U.length) return '<div class="tri-ld">Nenhum processo em triagem.</div>';
   const tit = soTarefa ? esc(soTarefa) : 'Processos em <em>triagem.</em>';
   return '<div class="at"><p class="at-k">Triagem · processos nas tarefas do PJe' + (FONTE_EM ? ' · fonte de ' + esc(String(FONTE_EM).slice(0, 10).split('-').reverse().join('/')) : '') + '</p><h2 class="at-h">' + tit + triExcelIcon('data-tri-xls="triar" data-xls-group="'+esc(soTarefa||'')+'" data-xls-title="'+esc(soTarefa||'A triar')+'"') + '</h2>' +
-    '<div class="at-ver" role="group" aria-label="Ver como"><span>Ver como</span>' + [['lista', 'Lista'], ['funil', 'Funil'],['matriz','Matriz'],...(TRI_SUBABA==='triados'&&!COG_TRANSFER?[['colecoes','Coleções']]:[])].map((x) => '<button type="button" data-atver="' + x[0] + '" aria-pressed="' + (atVer() === x[0]) + '">' + x[1] + '</button>').join('') + '</div>' +
+    '<div class="at-ver" role="group" aria-label="Ver como"><span>Ver como</span>' + [['lista', 'Lista'], ['funil', 'Funil'], ['fluxo','Fluxo'], ['matriz','Matriz']].map((x) => '<button type="button" data-atver="' + x[0] + '" aria-pressed="' + (atVer() === x[0]) + '">' + x[1] + '</button>').join('') + '</div>' +
     '<div id="at-tab">' + atCorpo(soTarefa) + '</div></div>';
 }
 function triadosBands() {
