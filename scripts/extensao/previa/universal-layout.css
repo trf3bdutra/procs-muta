@@ -602,3 +602,75 @@ body.hero-redesign-v53 #gab .hero-v53-question{font-family:var(--p53-serif)!impo
 /* números das métricas e das etapas em Georgia, como os números do Mural */
 body.hero-redesign-v53 #gab :is(.au-metr b,.rt-ov b){font-family:var(--p53-serif)!important;font-weight:400!important;font-size:19px!important}
 body.hero-redesign-v53 #gab .hero-header-nav .hero-v53-tabs{margin:0!important;overflow:visible!important}
+/* ==== 0.76.0 · Pauta no padrão da Pauta do Ex Officio e filtros sem a pílula de borda grossa ==== */
+/* filtros (pílulas .chip com contagem) viram abas segmentadas: caixas unidas, borda fina, contagem em Georgia,
+   a escolhida em branco com filete dourado no alto; rótulo do grupo em versalete (aria-label) */
+body.hero-redesign-v53 .pa-f{display:inline-flex!important;flex-wrap:wrap;align-items:stretch;gap:0!important;margin:4px 0 8px!important;position:relative;padding-top:14px}
+body.hero-redesign-v53 .pa-f[aria-label]::before{content:attr(aria-label);position:absolute;top:0;left:0;font:700 9px/1.2 'IBM Plex Sans',system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--p53-muted)}
+body.hero-redesign-v53 .pa-f .chip{border:1px solid var(--p53-line)!important;border-radius:0!important;margin:0 0 -1px -1px!important;background:var(--p53-soft)!important;color:var(--p53-muted)!important;font:600 11.5px/1.2 'IBM Plex Sans',system-ui,sans-serif!important;padding:6px 9px!important;min-height:0!important;box-shadow:none!important}
+body.hero-redesign-v53 .pa-f .chip:first-child{margin-left:0!important;border-top-left-radius:5px!important;border-bottom-left-radius:5px!important}
+body.hero-redesign-v53 .pa-f .chip:last-child{border-top-right-radius:5px!important;border-bottom-right-radius:5px!important}
+body.hero-redesign-v53 .pa-f .chip i{font:400 11px var(--p53-serif,Georgia);opacity:1;color:var(--p53-muted);margin-left:4px}
+body.hero-redesign-v53 .pa-f .chip:hover{color:var(--p53-ink)!important}
+body.hero-redesign-v53 .pa-f .chip:is(.on,[aria-pressed=true]){background:var(--p53-card)!important;color:var(--p53-ink)!important;font-weight:700!important;box-shadow:inset 0 2px 0 var(--p53-gold)!important;position:relative;z-index:1}
+body.hero-redesign-v53 .pa-f .chip:is(.on,[aria-pressed=true]) i{color:var(--p53-gold)}
+/* demais pílulas de filtro do painel (classificação dos autos e afins): borda fina, sem o contorno preto */
+body.hero-redesign-v53 :is(.plus-tags,.au-fx) :is(button,.chip){border:1px solid var(--p53-line)!important;background:var(--p53-card)!important;color:var(--p53-muted)!important;box-shadow:none!important;font-weight:600!important}
+body.hero-redesign-v53 :is(.plus-tags,.au-fx) :is(button,.chip):is(.on,[aria-pressed=true],[aria-selected=true]){color:var(--p53-ink)!important;border-color:var(--p53-gold)!important;background:color-mix(in srgb,var(--p53-gold) 10%,var(--p53-card))!important}
+/* página da Pauta */
+body.hero-redesign-v53 #pauta-app{background:var(--p53-surface);color:var(--p53-ink)}
+body.hero-redesign-v53 .pa-session-head{display:flex;align-items:flex-end;flex-wrap:wrap;gap:8px;padding-bottom:10px;border-bottom:1px solid var(--p53-line);margin-bottom:10px}
+body.hero-redesign-v53 .pa-hero{display:grid;gap:2px;margin-right:auto}
+body.hero-redesign-v53 .pa-kicker{font:700 9px/1.2 'IBM Plex Sans',system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--p53-muted);padding-bottom:4px;border-bottom:1px solid var(--p53-ink);justify-self:start}
+body.hero-redesign-v53 .pa-titulo.hero-v53-page-title{font:400 22px/1.15 var(--p53-serif,Georgia)!important;letter-spacing:-.01em!important;text-transform:none!important;color:var(--p53-ink)!important}
+body.hero-redesign-v53 .pa-titulo em{font-style:italic;color:var(--p53-gold)}
+body.hero-redesign-v53 .pa-sel select{font:600 13px/1.2 'IBM Plex Mono',ui-monospace,monospace;border:1px solid var(--p53-line);border-top:2px solid var(--p53-gold);border-radius:5px;padding:6px 8px;background:var(--p53-card);color:var(--p53-ink)}
+body.hero-redesign-v53 .pa-session-tabs{flex-basis:100%}
+/* marcos: linha do tempo */
+body.hero-redesign-v53 .pa-marcos{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);margin:4px 0 12px;padding:4px 0 6px}
+body.hero-redesign-v53 .pa-mk{position:relative;display:grid;justify-items:center;gap:2px;text-align:center;min-width:0}
+body.hero-redesign-v53 .pa-mk::after{content:'';position:absolute;top:10px;left:calc(50% + 12px);right:calc(-50% + 12px);border-top:1px solid var(--p53-line)}
+body.hero-redesign-v53 .pa-mk.past::after{border-top-color:var(--p53-accent)}
+body.hero-redesign-v53 .pa-mk.now::after,body.hero-redesign-v53 .pa-mk.fut::after{border-top-style:dashed}
+body.hero-redesign-v53 .pa-mk:last-child::after{display:none}
+body.hero-redesign-v53 .pa-mk i{width:21px;height:21px;border-radius:50%;border:1px solid var(--p53-line);background:var(--p53-card);display:block;position:relative;z-index:1}
+body.hero-redesign-v53 .pa-mk.past i{background:var(--p53-accent);border-color:var(--p53-accent)}
+body.hero-redesign-v53 .pa-mk.past i::after{content:'✓';color:var(--p53-card);font:700 11px/21px system-ui;display:block}
+body.hero-redesign-v53 .pa-mk.now i{width:13px;height:13px;margin:4px 0;background:var(--p53-gold);border-color:var(--p53-gold)}
+body.hero-redesign-v53 .pa-mk.ses i{border:1.5px solid var(--p53-ink)}
+body.hero-redesign-v53 .pa-mk small{font:700 8.5px/1.2 'IBM Plex Sans',system-ui,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--p53-muted);margin-top:3px;overflow-wrap:anywhere}
+body.hero-redesign-v53 .pa-mk b{font:600 12px/1.2 'IBM Plex Mono',ui-monospace,monospace;color:var(--p53-ink)}
+body.hero-redesign-v53 .pa-mk em{font:italic 400 10px/1.2 var(--p53-serif,Georgia);color:var(--p53-muted)}
+body.hero-redesign-v53 .pa-mk.fut em{color:var(--p53-gold)}
+/* números da sessão */
+body.hero-redesign-v53 #pauta-app .hero-v53-pa-metrics{gap:0!important;border:1px solid var(--p53-line);border-radius:6px;overflow:hidden;background:var(--p53-card);margin:0 0 12px!important}
+body.hero-redesign-v53 #pauta-app .hero-v53-pa-metric{position:relative;border:0!important;border-radius:0!important;border-top:2px solid var(--p53-accent)!important;padding:8px 8px 7px!important;gap:3px!important}
+body.hero-redesign-v53 #pauta-app .hero-v53-pa-metric+.hero-v53-pa-metric{border-left:1px solid var(--p53-line)!important}
+body.hero-redesign-v53 #pauta-app .pa-m-dataCorrecao{border-top-color:#28608b!important}
+body.hero-redesign-v53 #pauta-app .pa-m-dataLiberacao{border-top-color:#8051a0!important}
+body.hero-redesign-v53 #pauta-app .pa-m-servidor{border-top-color:var(--p53-gold)!important}
+body.hero-redesign-v53 #pauta-app .hero-v53-pa-metric small{font:700 8.5px/1.2 'IBM Plex Sans',system-ui,sans-serif!important;letter-spacing:.1em;text-transform:uppercase;color:var(--p53-muted)!important}
+body.hero-redesign-v53 #pauta-app .hero-v53-pa-metric b{font:400 20px/1.1 var(--p53-serif,Georgia)!important;color:var(--p53-ink)}
+body.hero-redesign-v53 #pauta-app .hero-v53-pa-metric b span{font:400 10.5px var(--p53-serif,Georgia)!important;color:var(--p53-muted)!important}
+body.hero-redesign-v53 #pauta-app .pa-pct{position:absolute;right:8px;top:8px;font:600 10px 'IBM Plex Mono',ui-monospace,monospace;color:var(--p53-muted)}
+body.hero-redesign-v53 #pauta-app .hero-v53-pa-metric progress{appearance:none;-webkit-appearance:none;height:4px!important;border:0;background:repeating-linear-gradient(-45deg,var(--p53-soft) 0 3px,var(--p53-line) 3px 5px);border-radius:2px;overflow:hidden}
+body.hero-redesign-v53 #pauta-app .hero-v53-pa-metric progress::-webkit-progress-bar{background:transparent}
+body.hero-redesign-v53 #pauta-app .hero-v53-pa-metric progress::-webkit-progress-value{background:var(--p53-accent)}
+body.hero-redesign-v53 #pauta-app .pa-m-dataCorrecao progress::-webkit-progress-value{background:#28608b}
+body.hero-redesign-v53 #pauta-app .pa-m-dataLiberacao progress::-webkit-progress-value{background:#8051a0}
+body.hero-redesign-v53 #pauta-app .pa-m-servidor progress::-webkit-progress-value{background:var(--p53-gold)}
+body.hero-redesign-v53 #pauta-app .pa-falta{font:400 9.5px 'IBM Plex Mono',ui-monospace,monospace;color:var(--p53-muted);text-align:right;font-style:normal}
+@media(max-width:420px){body.hero-redesign-v53 #pauta-app .hero-v53-pa-metrics{grid-template-columns:repeat(2,minmax(0,1fr))!important}body.hero-redesign-v53 #pauta-app .hero-v53-pa-metric:nth-child(3){border-left:0!important}}
+body.hero-redesign-v53 #pauta-app .pa-session-head .pa-hero .pa-titulo.hero-v53-page-title{font:400 22px/1.15 var(--p53-serif,Georgia)!important;letter-spacing:-.01em!important;text-transform:none!important;color:var(--p53-ink)!important}
+body.hero-redesign-v53 #pauta-app .pa-session-head .pa-hero{flex-basis:100%}
+body.hero-redesign-v53 #pauta-app .pa-session-head{display:grid!important;grid-template-columns:auto minmax(0,1fr);align-items:end;gap:8px 10px}
+body.hero-redesign-v53 #pauta-app .pa-session-head .pa-hero{grid-column:1/-1}
+body.hero-redesign-v53 #pauta-app .pa-session-head .pa-sel select{min-width:122px}
+body.hero-redesign-v53 #pauta-app .pa-session-head .pa-session-tabs{justify-self:end;flex-basis:auto}
+/* linhas da pauta como as do Office: fundo branco, número do item em mono, designações em etiquetas mono douradas */
+body.hero-redesign-v53 #pauta-app .pa-it>.pa-b{background:var(--p53-card)!important;border-top-color:var(--p53-line)!important;border-right-color:var(--p53-line)!important;border-bottom-color:var(--p53-line)!important;border-radius:6px!important;box-shadow:none!important}
+body.hero-redesign-v53 #pauta-app .pa-it.at>.pa-b{background:color-mix(in srgb,var(--p53-accent) 6%,var(--p53-card))!important}
+body.hero-redesign-v53 #pauta-app .pa-n{font:600 11px 'IBM Plex Mono',ui-monospace,monospace!important;color:var(--p53-muted)!important}
+body.hero-redesign-v53 #pauta-app .pa-c>small{font-family:var(--p53-serif,Georgia);font-size:12.5px!important;color:var(--p53-ink)!important}
+body.hero-redesign-v53 #pauta-app .hero-v53-pa-people em{font:500 9.5px/1.3 'IBM Plex Mono',ui-monospace,monospace!important;font-style:normal!important;color:#8d6d2a!important;border:1px solid #d8c69f!important;background:#fbf6ea!important;border-radius:2px!important;padding:2px 5px!important}
+html[data-tema=escuro] body.hero-redesign-v53 #pauta-app .hero-v53-pa-people em{color:#e6c27a!important;border-color:#5a4a2a!important;background:#2a2416!important}

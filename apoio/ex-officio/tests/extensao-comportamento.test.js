@@ -415,3 +415,25 @@ test('universal 0.75.2: aba aberta ligada ao painel (cor do papel, sem linha de 
     assert.deepEqual(P.erros, [], 'sem erro de script');
   } finally { await P.fim(); }
 });
+
+test('universal 0.76: Pauta no padrão do Office — título em Georgia, marcos em linha do tempo e filtros segmentados', { skip: pular, timeout: 90000 }, async () => {
+  const op = { processo: CNJ, origem: {}, triagem: {}, producao: { SERVIDOR: 'Rodrigo', MINUTADO: '2026-11-13', Destino: 'Sessão' }, pauta: {}, controles: {} };
+  const P = await abrir(op, { sigilo: '', liberado: true, porque: 'gestor' });
+  try {
+    const { pg } = P;
+    await pg.goto(pg.url().replace('/painel/painel.html', '/painel/universal.html'));
+    await pg.waitForFunction(() => window.MutaSessao && window.MutaSessao.estado().estado === 'on', null, { timeout: 15000 });
+    await pg.locator('#pv-nav-main button', { hasText: 'Pauta' }).first().click();
+    await pg.waitForSelector('#pauta-app .pa-f .chip', { timeout: 15000 });
+    const v = await pg.evaluate(() => {
+      const t = document.querySelector('#pauta-app .pa-titulo'), c = document.querySelector('#pauta-app .pa-busca .pa-f .chip'), cs = getComputedStyle(c);
+      return { titulo: t.textContent, fonte: getComputedStyle(t).fontFamily, raio: cs.borderTopLeftRadius + '|' + cs.borderTopRightRadius, borda: cs.borderTopWidth, metr: [...document.querySelectorAll('#pauta-app .hero-v53-pa-metric b')].map(b => b.textContent) };
+    });
+    assert.equal(v.titulo, 'Pauta de julgamento.');
+    assert.match(v.fonte, /Georgia/);
+    assert.equal(v.borda, '1px', 'filtros com borda fina, sem a pílula de contorno grosso');
+    assert.notEqual(v.raio, '9999px|9999px');
+    assert.deepEqual(v.metr, ['1 de 1', '1 de 1', '0 de 1', '0 de 1']);
+    assert.deepEqual(P.erros, [], 'sem erro de script');
+  } finally { await P.fim(); }
+});
