@@ -345,7 +345,12 @@ module.exports = async (req, res, u) => {
         const ca = x.cartao || {}, ic = (op.triagem || {})['Intercorrências'] || '';
         if (ic || (ca.pendencias || []).length || (ca.avisos || []).length || (ca.notas || []).length)
           sinais.push({ origem: 'Monocrática', intercor: ic, intercorTipo: x.intercorTipo || '', intercorOk: x.intercorOk || '', intercorChamado: x.intercorChamado || '', retidoOk: x.retidoOk || '', resultado: '', pendencias: ca.pendencias || [], avisos: ca.avisos || [], notas: ca.notas || [] }); }
-      return res.status(200).json({ ficha: F, operacional: op, fonte, sinais, gestor: L.gestor(u), controles: ativos(op, { metas: bMeta, sobrestados: bSobr, sensiveis: bSens }) });
+      const cadastro = await L.lerJson('apoio/equipe.json').catch(() => ({dados:{registros:[]}}));
+      const equipe = (cadastro.dados.registros||[]).filter(x=>x.nome&&x.id!=='m-cm'&&x.nome!=='CM').map(x=>({nome:x.nome,aliases:x.aliases||[],apelido:x.apelido||x.nomeCurto||''}));
+      const normal = v=>String(v||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim().toLowerCase();
+      const conhecidos=new Set(equipe.flatMap(x=>[x.nome,...x.aliases].map(normal)));
+      L.equipe().forEach(nome=>{if(!conhecidos.has(normal(nome))&&!/^(cm|dr\.? muta|carlos muta|des\.? carlos muta)$/i.test(nome)){equipe.push({nome,aliases:[],apelido:''});conhecidos.add(normal(nome));}});
+      return res.status(200).json({ ficha: F, operacional: op, fonte, sinais, equipe, gestor: L.gestor(u), controles: ativos(op, { metas: bMeta, sobrestados: bSobr, sensiveis: bSens }) });
     }
     if (req.method !== 'POST') return res.status(405).json({ erro: 'método não aceito' });
     /* 0.38: inteiro teor dos documentos marcados na extensão (Autos › Peças e documentos › Gravar) */
