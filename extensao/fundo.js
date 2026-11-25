@@ -285,7 +285,8 @@ function lerCmt(forcar) {
     return fetch(SITE + '/api/painel?cmt=1', { credentials: 'include', cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : null; }).then(function (d) {
       if (!d) return CMTD.v || { erro: 'Quadro do Desembargador indisponível agora.' };
       var v = { em: new Date().toISOString(), usuario: j.usuario, gestor: !!j.gestor, des: !!j.desembargador,
-        assinatura: (d.assinar || {}).assinatura || [], liberacao: (d.assinar || {}).liberacao || [], duvidas: d.duvidas || [] };
+        assinatura: (d.assinar || {}).assinatura || [], liberacao: (d.assinar || {}).liberacao || [], duvidas: d.duvidas || [],
+        pedidos: d.pedidos || [], hoje: d.hoje || '', pauta: { date: (d.pauta || {}).date || '', itens: ((d.pauta || {}).itens || []).map(function (x) { return { cnj: x.cnj, obs: x.obs || '' }; }) } };
       CMTD.t = Date.now(); CMTD.v = v;
       return chrome.storage.session.set({ 'muta-cmt': v }).catch(function () {}).then(function () { return avisarCmt(v); }).then(function () { return v; });
     });
@@ -294,7 +295,9 @@ function lerCmt(forcar) {
 function avisarCmt(v) {
   return chrome.storage.local.get('muta-cmt-vistos').then(function (o) {
     var vis = o['muta-cmt-vistos'], primeira = !vis; vis = vis || {};
-    var ev = v.assinatura.map(function (a) { return { id: 'as-' + a.cnj + '-' + (a.desde || ''), t: 'Para assinatura · ' + a.cnj, m: [a.tipoAto, a.titulo || a.topico].filter(Boolean).join(' · '), c: (a.servidor ? 'Minuta: ' + a.servidor : '') + (a.urg ? ' · urgente' : ''), u: !!a.urg }; })
+    var urgAtiva = function (a) { return !!(a && a.urg && a.urg.tipo && !/^Apreciada/i.test(String(a.urg.situacao || ''))); };
+    var ev = v.assinatura.filter(urgAtiva).map(function (a) { return { id: 'as-' + a.cnj + '-' + (a.desde || ''), t: 'Para assinatura · ' + a.cnj, m: [a.tipoAto, a.titulo || a.topico].filter(Boolean).join(' · '), c: (a.servidor ? 'Minuta: ' + a.servidor : '') + (a.urg ? ' · urgente' : ''), u: !!a.urg }; })
+      .concat((v.pedidos || []).map(function (p) { return { id: 'pe-' + p.id, t: (p.tipo === 'retirada' ? 'Pedido de retirada de pauta' : 'Pedido de adiamento') + (p.numero ? ' · ' + p.numero : ''), m: String(p.razao || p.texto || p.titulo || '').slice(0, 180), c: p.de ? 'De ' + p.de : '', u: false }; }))
       .concat(v.duvidas.map(function (d) { return { id: 'du-' + d.id, t: 'Dúvida · ' + (d.titulo || ''), m: String(d.texto || '').slice(0, 180), c: d.de ? 'De ' + d.de : '', u: /alta|urg/i.test(d.prioridade || '') }; }));
     var novos = ev.filter(function (e) { return !vis[e.id]; });
     ev.forEach(function (e) { vis[e.id] = vis[e.id] || Date.now(); });
@@ -318,11 +321,36 @@ chrome.notifications.onClicked.addListener(function (id) {
   else if (m) alvo = 'du:' + m[2];
   chrome.windows.create({ url: chrome.runtime.getURL('cmt.html') + (alvo ? '#' + encodeURIComponent(alvo) : ''), type: 'popup', width: 600, height: 820, focused: true }).catch(function () { chrome.tabs.create({ url: SITE + '/cmt/' }); });
 });
+/* pedido de retirada ou de adiamento (quadro do Desembargador no PJe): deferido, a pauta registra Retirado/Adiado
+   com a observação de praxe (como Deliberações › gestao.js); depois a resposta ao pedido. Cópia ao gestor pelo servidor. */
+function postCmt(corpo) {
+  return fetch(SITE + '/api/painel?cmt=1', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(Object.assign({ origem: 'extensao' }, corpo)) }).then(function (r) {
+    return r.json().catch(function () { return {}; }).then(function (j) { if (!r.ok) throw new Error(j.erro || ('não gravou (' + r.status + ')')); return j; });
+  });
+}
+function pedidoCmt(msg) {
+  var v = CMTD.v || {}, p = (v.pedidos || []).filter(function (x) { return x.id === msg.id; })[0];
+  if (!p) return Promise.resolve({ erro: 'Pedido não encontrado; atualize o quadro.' });
+  var defere = msg.decisao === 'defere', ret = p.tipo === 'retirada', dg = function (s) { return String(s || '').replace(/\D/g, ''); };
+  var dt = function (d) { var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(String(d || '')); return m ? m[3] + '/' + m[2] + '/' + m[1] : ''; };
+  var sessao = p.sessao || (v.pauta || {}).date || '';
+  if (defere && !sessao) return Promise.resolve({ erro: 'Não deferiu: o pedido não indica a sessão.' });
+  var nota = String(msg.texto || '').trim().slice(0, 600);
+  var it = ((v.pauta || {}).itens || []).filter(function (x) { return dg(x.cnj) === dg(p.numero); })[0] || {};
+  var hj = v.hoje || new Date(Date.now() - 4 * 3600e3).toISOString().slice(0, 10);
+  var praxe = (ret ? 'Retirado de pauta' : 'Adiado') + ' em ' + dt(hj) + ' por decisão do relator' + (p.de ? ', a pedido de ' + p.de : '') + '.';
+  var o = String(it.obs || '').trim(), obs = !o ? praxe : o.indexOf(praxe) >= 0 ? o : o + ' · ' + praxe;
+  var texto = (ret ? 'Retirada ' + (defere ? 'deferida.' : 'indeferida.') : 'Adiamento ' + (defere ? 'deferido.' : 'indeferido.')) + (nota ? ' ' + nota : '');
+  return (defere ? postCmt({ acao: 'situacao', sessao: sessao, cnj: p.numero, valor: ret ? 'Retirado' : 'Adiado', obs: obs }) : Promise.resolve())
+    .then(function () { return postCmt({ acao: 'responder', id: p.id, texto: texto }); })
+    .then(function (j) { return lerCmt(true).then(function (d) { return { ok: true, r: j, dados: d }; }); });
+}
 chrome.runtime.onMessage.addListener(function (msg, sender, responder) {
   if (!msg || (msg.tipo !== 'muta-cmt' && msg.tipo !== 'muta-cmt-acao')) return;
   if (msg.tipo === 'muta-cmt') { lerCmt(!!msg.forcar).then(responder); return true; }
-  var ACOES = { assinar: 1, devolver: 1, responder: 1 };
+  var ACOES = { assinar: 1, devolver: 1, responder: 1, pedido: 1 };
   if (!ACOES[msg.acao]) { responder({ erro: 'ação inválida' }); return; }
+  if (msg.acao === 'pedido') { pedidoCmt(msg).then(responder, function (e) { responder({ erro: e && e.message || String(e) }); }); return true; }
   var corpo = { acao: msg.acao, origem: 'extensao' };
   ['cnj', 'id', 'texto', 'para', 'sessao'].forEach(function (k) { if (msg[k]) corpo[k] = String(msg[k]).slice(0, 2000); });
   if (msg.manter) corpo.manter = true; if (msg.desfazer) corpo.desfazer = true;

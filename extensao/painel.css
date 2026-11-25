@@ -1849,3 +1849,7 @@ html[data-tema=escuro] #gab .hero-proc-tags .hero-secao-3{--tag-ink:#efa7cf}
 .tu-profile-panel-actions>button:is([data-ap-refresh],[data-ap-ajustes]){box-sizing:border-box;justify-content:center;width:28px;height:28px;padding:0;flex:none}
 .tu-profile-panel-actions svg{flex:none}
 @media(max-width:340px){.tu-profile-panel-head{gap:4px;padding:8px 6px}.tu-profile-panel-actions{gap:3px}.tu-profile-panel-actions>a,.tu-profile-panel-actions>button{padding:4px}.tu-profile-panel-actions>a>span,.tu-profile-panel-actions>[data-ap-sair]>span{display:none}}
+/* 0.73.5: PJe no sino reúne as chegadas de hoje (gestor) e os alertas da lista */
+.ap-sh{display:flex;align-items:center;gap:6px;margin:10px 0 6px;font:600 10px/1.3 var(--mono,ui-monospace,monospace);letter-spacing:.1em;text-transform:uppercase;color:var(--muted-fg)}
+.ap-sh:first-child{margin-top:2px}.ap-sh i{font-style:normal;font-size:10px;padding:0 6px;border-radius:8px;background:var(--acc,#c9a24a);color:#111}
+.ap-sec-ch{padding-bottom:8px;border-bottom:1px solid var(--line,rgba(127,127,127,.25))}.ap-sec-ch .ap-l{max-height:220px;overflow:auto}

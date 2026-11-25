@@ -1,5 +1,5 @@
-/* HERO18810 · quadro do Desembargador (0.30)
-   Os cartões "Assinar decisão" e "Dúvidas" da página /cmt, para o perfil desembargador (e o gestor, que acompanha):
+/* HERO18810 · quadro do Desembargador (0.30; 0.73.5: só assinatura com urgência ativa, dúvidas e pedidos de retirada/adiamento)
+   Os cartões "Assinar decisão" (urgentes), "Dúvidas" e "Retirada / adiamento" da página /cmt, para o perfil desembargador (e o gestor, que acompanha):
    - na lista do PJe, no topo da coluna "Para assinatura" (conteudo-pje.js);
    - no sino do painel lateral, aba "Desembargador" (alertas.js).
    Os dados vêm do service worker (fundo.js › lerCmt, GET /api/painel?cmt=1, a cada minuto); as ações vão por ele
@@ -51,28 +51,43 @@
         '<label class="hcm-l"><input type="checkbox" name="manter"> manter a dúvida aberta</label><span class="hcm-fb"><button type="button" class="hcm-b" data-hcm="fechar-du" data-id="' + esc(d.id) + '">cancelar</button><button type="submit" class="hcm-b ok">Responder</button></span></form>'
         : '<div class="hcm-ac"><button type="button" class="hcm-b ok" data-hcm="abrir-du" data-id="' + esc(d.id) + '">' + ic('enviar', 12) + 'Responder</button></div>') + '</article>';
   }
-  var UI = { dev: {}, du: {}, aba: 'as', msg: '' }, FOCO = {};
+  /* pedido de retirada ou de adiamento de pauta: deferir ou indeferir (com observação opcional), como em Deliberações */
+  function pedido(p) {
+    var ret = p.tipo === 'retirada', cf = UI.pe[p.id];
+    return '<article class="hcm-it hcm-pe' + (FOCO.t === 'pe' && FOCO.id === p.id ? ' foco' : '') + '" data-hcm-id="' + esc(p.id) + '"><div class="hcm-h"><span class="hcm-c hcm-ato">' + (ret ? 'Retirada de pauta' : 'Adiamento') + '</span>' + (p.numero ? cnjBtn(p.numero) : '') + '</div>' +
+      (p.titulo ? '<p class="hcm-ti">' + esc(p.titulo) + '</p>' : '') +
+      '<p class="hcm-ca">' + [p.de ? 'De ' + esc(p.de) : '', p.sessao ? 'sessão de ' + esc(br(p.sessao)) : '', p.em ? esc(br(p.em)) : ''].filter(Boolean).join(' · ') + '</p>' +
+      (p.razao ? '<p class="hcm-tx"><b>Razão:</b> ' + esc(p.razao) + '</p>' : '') + (p.texto ? '<p class="hcm-tx">' + esc(p.texto) + '</p>' : '') +
+      (cf ? '<form class="hcm-f" data-hcm-form="pedido" data-id="' + esc(p.id) + '" data-decisao="' + cf + '"><b class="hcm-dt">' + (cf === 'defere' ? 'Deferir' : 'Indeferir') + ' o pedido de ' + (ret ? 'retirada' : 'adiamento') + '?</b>' +
+        (cf === 'defere' ? '<small class="hcm-ca">A pauta registra o item como ' + (ret ? 'Retirado' : 'Adiado') + '.</small>' : '') +
+        '<textarea rows="2" name="texto" placeholder="Observação (opcional), vai na resposta"></textarea><span class="hcm-fb"><button type="button" class="hcm-b" data-hcm="fechar-pe" data-id="' + esc(p.id) + '">cancelar</button><button type="submit" class="hcm-b ok">Confirmar</button></span></form>'
+        : '<div class="hcm-ac"><button type="button" class="hcm-b ok" data-hcm="pe" data-decisao="defere" data-id="' + esc(p.id) + '">Deferir</button><button type="button" class="hcm-b" data-hcm="pe" data-decisao="indefere" data-id="' + esc(p.id) + '">Indeferir</button></div>') + '</article>';
+  }
+  /* só a assinatura com urgência ativa (como em Deliberações): o resto segue o fluxo normal da lista */
+  function urgente(a) { return !!(a && a.urg && a.urg.tipo && !/^Apreciada/i.test(String(a.urg.situacao || ''))); }
+  var UI = { dev: {}, du: {}, pe: {}, aba: 'as', msg: '' }, FOCO = {};
   function html(v, op) {
     op = op || {};
     if (!v) return '<section class="hcm"><p class="hcm-v">Carregando o quadro do Desembargador…</p></section>';
     if (v.erro) return '<section class="hcm"><p class="hcm-v">' + esc(v.erro) + '</p></section>';
-    var A = (v.assinatura || []).slice(), D = (v.duvidas || []).slice(), L = v.liberacao || [];
+    var A = (v.assinatura || []).filter(urgente), D = (v.duvidas || []).slice(), P = (v.pedidos || []).slice();
     /* aberto por uma notificação: o item dela vem primeiro, destacado, e a aba certa abre (uma vez) */
     var F = op.foco || null; FOCO = F || {};
-    if (F && !UI.focado) { UI.focado = true; UI.aba = F.t === 'du' ? 'du' : 'as'; if (F.t === 'du') UI.du[F.id] = true; }
+    if (F && !UI.focado) { UI.focado = true; UI.aba = F.t === 'du' ? 'du' : F.t === 'pe' ? 'pe' : 'as'; if (F.t === 'du') UI.du[F.id] = true; }
+    if (UI.aba === 'li') UI.aba = 'as';
     var prim = function (L2, f) { var i = -1; L2.forEach(function (x, j) { if (f(x)) i = j; }); if (i > 0) L2.unshift(L2.splice(i, 1)[0]); return i >= 0; };
     if (F && F.t === 'as') prim(A, function (a) { return String(a.cnj).replace(/\D/g, '') === String(F.id).replace(/\D/g, ''); });
     if (F && F.t === 'du') prim(D, function (d) { return d.id === F.id; });
     var tab = function (k, t, n) { return '<button type="button" class="hcm-tab" data-hcm="aba" data-aba="' + k + '" aria-selected="' + (UI.aba === k) + '">' + t + (n ? ' <i>' + n + '</i>' : '') + '</button>'; };
     var corpo = UI.aba === 'du' ? (D.length ? D.map(function (d) { return duvida(d, UI.du[d.id]); }).join('') : '<p class="hcm-v">Nenhuma dúvida em aberto' + (v.gestor && !v.des ? ' dirigida a você' : '') + '.</p>')
-      : UI.aba === 'li' ? (L.length ? L.map(function (a) { return '<article class="hcm-it"><div class="hcm-h">' + cnjBtn(a.cnj) + '<span class="hcm-c">corrigida em ' + esc(br(a.desde)) + '</span></div><div class="hcm-r">' + pes(a.servidor, 'Minuta', 'm') + pes(a.corretor, 'Correção', 'c') + '</div></article>'; }).join('') : '<p class="hcm-v">Nenhuma monocrática corrigida à espera de liberação.</p>')
-      : (A.length ? A.map(function (a) { return item(a, UI.dev[a.cnj]); }).join('') : '<p class="hcm-v">Nenhuma decisão submetida à assinatura.</p>');
-    var urg = A.filter(function (a) { return a.urg; }).length;
+      : UI.aba === 'pe' ? (P.length ? P.map(pedido).join('') : '<p class="hcm-v">Nenhum pedido de retirada ou de adiamento em aberto.</p>')
+      : (A.length ? A.map(function (a) { return item(a, UI.dev[a.cnj]); }).join('') : '<p class="hcm-v">Nenhuma decisão urgente submetida à assinatura.</p>');
+    var urg = A.length;
     return '<section class="hcm' + (op.pje ? ' hcm-pje' : '') + (op.janela ? ' hcm-jan' : '') + '">' +
-      '<header class="hcm-hd"><span class="hcm-lg">' + ic('lapis', 14) + '</span><span class="hcm-tt"><b>Para assinatura</b><small>HERO18810 · Gabinete do Des. Fed. Carlos Muta' + (v.em ? ' · ' + esc(new Date(v.em).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })) : '') + '</small></span>' +
+      '<header class="hcm-hd"><span class="hcm-lg">' + ic('lapis', 14) + '</span><span class="hcm-tt"><b>Quadro do Desembargador</b><small>HERO18810 · Gabinete do Des. Fed. Carlos Muta' + (v.em ? ' · ' + esc(new Date(v.em).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })) : '') + '</small></span>' +
       (urg ? '<span class="hcm-c hcm-u">' + ic('ampulheta', 11) + urg + ' urgente' + (urg > 1 ? 's' : '') + '</span>' : '') +
       '<button type="button" class="hcm-b" data-hcm="ler" title="Atualizar agora">Atualizar</button>' + (op.pje ? '<button type="button" class="hcm-b" data-hcm="recolher" title="Recolher o quadro">' + (op.recolhido ? 'abrir' : 'recolher') + '</button>' : '') + '</header>' +
-      (op.recolhido ? '' : '<nav class="hcm-tabs">' + tab('as', 'Assinar', A.length) + tab('du', 'Dúvidas', D.length) + tab('li', 'A liberar', L.length) + '</nav>' +
+      (op.recolhido ? '' : '<nav class="hcm-tabs">' + tab('as', 'Assinatura urgente', A.length) + tab('du', 'Dúvidas', D.length) + tab('pe', 'Retirada / adiamento', P.length) + '</nav>' +
         (UI.msg ? '<p class="hcm-msg">' + esc(UI.msg) + '</p>' : '') + '<div class="hcm-l2">' + corpo + '</div>' +
         '<footer class="hcm-ft">Resposta, devolutiva e assinatura marcadas aqui vão com cópia ao gestor.</footer>') + '</section>';
   }
@@ -81,7 +96,7 @@
     if (!root || root.__hcm) return; root.__hcm = true;
     var acao = function (corpo, ok) {
       UI.msg = 'Gravando…'; repintar();
-      return enviar(Object.assign({ tipo: 'muta-cmt-acao' }, corpo)).then(function (r) { UI.msg = r && r.erro ? r.erro : ok; if (!(r && r.erro)) { UI.dev = {}; UI.du = {}; } repintar(r && r.dados); }, function (e) { UI.msg = String(e && e.message || e); repintar(); });
+      return enviar(Object.assign({ tipo: 'muta-cmt-acao' }, corpo)).then(function (r) { UI.msg = r && r.erro ? r.erro : ok; if (!(r && r.erro)) { UI.dev = {}; UI.du = {}; UI.pe = {}; } repintar(r && r.dados); }, function (e) { UI.msg = String(e && e.message || e); repintar(); });
     };
     root.addEventListener('click', function (e) {
       var c = e.target.closest && e.target.closest('[data-hcm-copia]');
@@ -96,12 +111,15 @@
       if (k === 'fechar-dev') { delete UI.dev[cnj]; return repintar(); }
       if (k === 'abrir-du') { UI.du[id] = true; return repintar(); }
       if (k === 'fechar-du') { delete UI.du[id]; return repintar(); }
+      if (k === 'pe') { UI.pe[id] = b.getAttribute('data-decisao'); return repintar(); }
+      if (k === 'fechar-pe') { delete UI.pe[id]; return repintar(); }
       if (k === 'assinar') return acao({ acao: 'assinar', cnj: cnj }, 'Assinatura registrada no app · ' + cnj + '. Cópia ao gestor.');
     }, true);
     root.addEventListener('submit', function (e) {
       var f = e.target.closest && e.target.closest('[data-hcm-form]'); if (!f) return;
       e.preventDefault(); e.stopPropagation();
-      var t = (f.elements.texto.value || '').trim(); if (!t) return;
+      var t = (f.elements.texto.value || '').trim(); if (!t && f.getAttribute('data-hcm-form') !== 'pedido') return;
+      if (f.getAttribute('data-hcm-form') === 'pedido') { var dc = f.getAttribute('data-decisao'); return acao({ acao: 'pedido', id: f.getAttribute('data-id'), decisao: dc, texto: t }, dc === 'defere' ? 'Pedido deferido e registrado na pauta. Cópia ao gestor.' : 'Pedido indeferido. Cópia ao gestor.').then(function () { UI.pe = {}; }); }
       if (f.getAttribute('data-hcm-form') === 'devolver') return acao({ acao: 'devolver', cnj: f.getAttribute('data-cnj'), texto: t, para: f.elements.para ? f.elements.para.value : '' }, 'Devolutiva enviada. Cópia ao gestor.');
       return acao({ acao: 'responder', id: f.getAttribute('data-id'), texto: t, manter: !!(f.elements.manter && f.elements.manter.checked) }, 'Resposta enviada. Cópia ao gestor.');
     }, true);

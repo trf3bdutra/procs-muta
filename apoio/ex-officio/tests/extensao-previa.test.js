@@ -220,8 +220,9 @@ function testarAjustes(src){
  function el(id){return nodes[id]||(nodes[id]={id,checked:false,value:'',disabled:false,open:false,events:{},setAttribute(){},addEventListener(k,f){this.events[k]=f},click(){this.checked=!this.checked;if(this.events.click)this.events.click();if(this.events.change)this.events.change()},focus(){this.focused=true},showModal(){this.open=true},close(){this.open=false;if(this.events.close)this.events.close()}});}
  const doc={getElementById:el,createElement(){return el('pv-ajustes-dialog')},body:{appendChild(){},classList:{add(){}}},documentElement:{dataset:{}},querySelectorAll(){return []},addEventListener(){}};
  el('pje-seguir').checked=true;el('pje-aba').checked=true;el('pje-tema').click=()=>{prefs.tema=prefs.tema==='escuro'?'claro':'escuro'};
- new Function('document','window',src)(doc,{MutaTema:{atual:()=>prefs.tema},MutaAutos:{autoLigado:()=>prefs.auto,autoLigar:v=>{prefs.auto=v}},MutaSessao:{estado:()=>sess},MutaAbas:{ir:n=>routes.push(n)}});
- return {el,prefs,sess,routes};
+ const win={MutaTema:{atual:()=>prefs.tema},MutaAutos:{autoLigado:()=>prefs.auto,autoLigar:v=>{prefs.auto=v}},MutaSessao:{estado:()=>sess},MutaAbas:{ir:n=>routes.push(n)}};
+ new Function('document','window','setTimeout',src)(doc,win,()=>{});
+ return {el,prefs,sess,routes,win};
 }
 
 test('diálogo Ajustes controla preferências reais e conserva os controles originais',()=>{
@@ -236,8 +237,12 @@ test('diálogo Ajustes controla preferências reais e conserva os controles orig
 test('Controle fica nos Ajustes apenas para gestor autenticado',()=>{
  const src=fs.readFileSync(path.join(ROOT,'scripts/extensao/previa/universal-ajustes.js'),'utf8'),h=testarAjustes(src),e=h.el;
  e('pv-ajustes').events.click();assert.equal(e('pv-ajustes-gestao').hidden,false);
- e('pv-ajustes-controle').events.click();assert.deepEqual(h.routes,['ctl']);assert.equal(e('pv-ajustes-dialog').open,false);
- h.sess.gestor=false;e('pv-ajustes').events.click();assert.equal(e('pv-ajustes-gestao').hidden,true);e('pv-ajustes-controle').events.click();assert.deepEqual(h.routes,['ctl']);
+ e('pv-ajustes-controle').events.click();assert.deepEqual(h.routes,[],'o Controle abre dentro dos Ajustes, sem tela à parte');assert.equal(e('pv-ajustes-dialog').open,true);assert.equal(e('pv-ajustes-ctl').hidden,false);
+ e('pv-ajustes-controle').events.click();assert.equal(e('pv-ajustes-ctl').hidden,true,'o mesmo botão recolhe');
+ e('pv-ajustes-ok').events.click();assert.equal(e('pv-ajustes-dialog').open,false);
+ h.win.MutaAbas.ir('ctl');assert.deepEqual(h.routes,[],'quem pedia a aba Controle abre os Ajustes');assert.equal(e('pv-ajustes-dialog').open,true);assert.equal(e('pv-ajustes-ctl').hidden,false);
+ h.win.MutaAbas.ir('pauta');assert.deepEqual(h.routes,['pauta'],'as outras abas seguem normais');e('pv-ajustes-ok').events.click();
+ h.sess.gestor=false;e('pv-ajustes').events.click();assert.equal(e('pv-ajustes-gestao').hidden,true);e('pv-ajustes-controle').events.click();assert.equal(e('pv-ajustes-ctl').hidden,true);assert.deepEqual(h.routes,['pauta']);
  h.sess.gestor=true;h.sess.estado='off';e('pv-ajustes').events.click();assert.equal(e('pv-ajustes-gestao').hidden,true);
 });
 test('próximo ato no título de Etapas, paleta neutra e faixa de três campos',()=>{
