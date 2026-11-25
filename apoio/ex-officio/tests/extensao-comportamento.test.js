@@ -414,6 +414,8 @@ test('universal 0.75.2: aba aberta ligada ao painel (cor do papel, sem linha de 
     assert.notEqual(v.aba, v.inativa, 'contraste entre ativa e inativa');
     assert.notEqual(v.aba, v.painel, 'aba ativa creme');
     assert.equal(await pg.locator('.hero-first-panel').evaluate(e=>getComputedStyle(e).backgroundColor),v.aba,'primeiro painel na cor da aba ativa');
+    assert.equal(await pg.locator('.hero-steps').evaluate(e=>getComputedStyle(e).backgroundColor),v.painel,'card operacional branco sobre creme');
+    for(const k of ['acompanhamento','monitoramento','']){await pg.locator('.hero-v53-dock-tabs [data-hero-dock="'+k+'"]').click();assert.equal(await pg.locator('.hero-steps').evaluate(e=>getComputedStyle(e).backgroundColor),v.painel,'mesma superfície em todas as abas internas');}
     assert.equal(v.divisor, '1px', 'divisória fina');
     assert.ok(v.sobrepoe, 'aba ativa se conecta à superfície creme');
     assert.match(v.fonte, /Georgia/); assert.match(v.titulo, /Georgia/); assert.equal(v.ponto, 'none');

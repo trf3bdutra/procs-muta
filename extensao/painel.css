@@ -2166,5 +2166,30 @@ html body.hero-redesign-v53 #gab .hero-header-nav{border-bottom:1px solid var(--
 html body.hero-redesign-v53 #gab .hero-top-pages:not([hidden]){padding-top:0!important}
 html body.hero-redesign-v53 #gab :is(.hero-first-panel,#g-lei,#hero-encaminhamento,.hero-minuta-roteiro){background:var(--hero-pront-header)!important;border:0!important;border-bottom:1px solid var(--hero-pront-divider)!important;border-radius:0!important;box-shadow:none!important;margin:0 0 10px!important;padding:12px 10px!important;min-width:0}
 html body.hero-redesign-v53 #gab .hero-first-panel{display:flow-root}
-html body.hero-redesign-v53 #gab .hero-first-panel .hero-steps{background:transparent!important}
+
 html body.hero-redesign-v53 #gab #g-docs{background:var(--hero-pront-paper)!important}
+
+/* Card de operação: superfície branca independente do fundo creme do Resumo.
+   Componentes compartilhados em Etapas, Acompanhamento, Monitoramento e Sinalizações. */
+html body.hero-redesign-v53 #gab section.hero-steps{
+ --dock-paper:var(--hero-pront-paper,#fff);--dock-line:var(--hero-pront-divider,var(--line));--dock-ink:var(--p53-ink,var(--fg));--dock-muted:var(--p53-muted,var(--muted-fg));--dock-gold:var(--p53-gold,var(--gold));
+ background:var(--dock-paper)!important;border:1px solid var(--dock-line)!important;border-radius:8px!important;box-shadow:none!important;padding:9px!important;min-width:0;color:var(--dock-ink)
+}
+html body.hero-redesign-v53 #gab section.hero-steps .hero-steps-head{display:flex;align-items:center;gap:5px;border-bottom:1px solid var(--dock-line);padding:0 0 7px!important;margin:0 0 9px!important;min-width:0}
+html body.hero-redesign-v53 #gab section.hero-steps .hero-v53-dock-tabs{display:flex!important;flex:1;gap:3px!important;border:0!important;background:transparent!important;padding:0!important;min-width:0}
+html body.hero-redesign-v53 #gab section.hero-steps .hero-v53-dock-tabs>button{font:650 9.5px/1.25 var(--sans,system-ui)!important;letter-spacing:.045em!important;text-transform:uppercase!important;border:1px solid transparent!important;border-radius:4px!important;background:transparent!important;color:var(--dock-muted)!important;padding:5px 4px!important;min-height:25px;outline:none!important;box-shadow:none!important}
+html body.hero-redesign-v53 #gab section.hero-steps .hero-v53-dock-tabs>button[aria-pressed=true]{border-color:var(--dock-gold)!important;color:var(--dock-gold)!important;background:color-mix(in srgb,var(--dock-gold) 7%,var(--dock-paper))!important}
+html body.hero-redesign-v53 #gab section.hero-steps :is(.hero-v53-dock-tabs>button,.btn,.lnk,.hero-sn-mini):focus-visible{outline:2px solid var(--dock-gold)!important;outline-offset:1px!important}
+html body.hero-redesign-v53 #gab section.hero-steps :is(.pv-flowbox,.pv-flow,.hero-steps-body,.hero-designacoes,.hero-v53-acomp,#hero-dock-pane-monitoramento,#hero-dock-pane-sinalizacoes,.hero-acomp-b,.hero-ctl-integrado){background:transparent!important;box-shadow:none!important;min-width:0}
+html body.hero-redesign-v53 #gab section.hero-steps :is(.hero-v53-acomp,#hero-dock-pane-monitoramento,#hero-dock-pane-sinalizacoes){border:0!important;border-radius:0!important;padding:0!important;margin:0!important}
+html body.hero-redesign-v53 #gab section.hero-steps :is(.hero-acomp-b,.hero-ctl-integrado){padding:0!important}
+html body.hero-redesign-v53 #gab section.hero-steps :is(.hero-tr-item,.hero-tr-condition,.hero-tr-history){background:var(--dock-paper)!important;border-color:var(--dock-line)!important;border-radius:5px}
+html body.hero-redesign-v53 #gab section.hero-steps :is(.gl,label,small.muted){font:500 10.5px/1.4 var(--sans,system-ui)!important;letter-spacing:0!important;text-transform:none!important;color:var(--dock-muted)!important}
+html body.hero-redesign-v53 #gab section.hero-steps :is(input:not([type=checkbox]):not([type=radio]),select,textarea){background:var(--dock-paper)!important;border:1px solid var(--dock-line)!important;border-radius:5px!important;color:var(--dock-ink)!important;font:500 11px/1.3 var(--sans,system-ui)!important;min-height:30px;max-width:100%;padding:5px 7px}
+html body.hero-redesign-v53 #gab section.hero-steps :is(.btn,.lnk,.hero-sn-mini){font:550 10.5px/1.3 var(--sans,system-ui)!important;min-height:26px;border:1px solid var(--dock-line);border-radius:4px;background:var(--dock-paper);color:var(--dock-ink);padding:4px 7px;text-decoration:none;box-shadow:none}
+html body.hero-redesign-v53 #gab section.hero-steps .hero-v53-next{border-top:1px solid var(--dock-line)!important;background:var(--dock-paper)!important;margin:8px 0 0!important;padding:7px 0 0!important}
+html body.hero-redesign-v53 #gab section.hero-steps .hero-designacoes{gap:6px!important}
+html body.hero-redesign-v53 #gab section.hero-steps .pv-stage-btn{width:27px!important;height:27px!important;background:var(--dock-paper)!important;color:var(--stage-color,var(--dock-muted))!important;border:1px solid color-mix(in srgb,var(--stage-color,var(--dock-line)) 50%,var(--dock-line))!important}
+html body.hero-redesign-v53 #gab section.hero-steps .pv-stage.at .pv-stage-btn{border:1.5px solid var(--stage-color,var(--p53-accent,var(--ok)))!important;color:var(--stage-color,var(--p53-accent,var(--ok)))!important}
+html body.hero-redesign-v53 #gab section.hero-steps .pv-stage.ok .pv-stage-btn{background:var(--stage-color,var(--p53-accent,var(--ok)))!important;color:white!important;border-color:var(--stage-color,var(--p53-accent,var(--ok)))!important}
+html body.hero-redesign-v53 #gab section.hero-steps .pv-stage.pend{opacity:1}
