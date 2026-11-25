@@ -120,7 +120,7 @@ function carregar(){
       var x={id:r.id,t:/^voto/i.test(r.pronunciamento||'Voto')?'A':'M',n:r.processo,c:r.classeSigla||r.especie||'',cl:r.classe||'',o:r.orgao||'',d:r.dataJulgamento||'',p:r.dataPublicacao||'',e:r.ementa||'',r:r.resultado||'',temas:r.temas||'',tese:r.tese||'',disp:r.dispositivosCitados||'',jur:r.jurisprudenciaCitada||'',it:!!r.inteiroTeor,tc:r.tipoCaso||r.subassunto||'',tcS:!!(r.tcSug||r.subSug),mat:r.materia||'',tags:String(r.espTags||'').split(/\s*;\s*/).filter(Boolean),esp:r.esp||'',obs:r.obs||'',proc:r.proc||null,rast:r.rast||null};
       if(!x.mat)x.mat=matDe(x.tc)||matAss(r.assunto);x.y=(x.d||'').slice(0,7);x._apr=apreciacao(r);x._ramo=ramoDe(r.ramoDireito);x._rd=r.ramoDireito||'';x._ass=r.assunto||null;
       x._res=SENT[r.sentidoResultado]||(x.r?classRes(x.r):'Sem classificação');
-      x._q=nz([x.n,x.c,x.cl,x.o,x.e,x.r,x.temas,x._ass,x.mat,x.tc,x.tags.join(' '),x.esp,x.tese,x.proc?(x.proc.pt||[]).concat(x.proc.ac||[]).map(function(z){return z[1];}).join(' '):''].join(' '));if(x.c&&x.cl)E.clsNome[x.c]=x.cl;return x;});
+      x._q=nz([x.n,x.c,x.cl,x.o,x.e,x.r,x.temas,x._ass,x.mat,x.tc,x.tags.join(' '),x.esp,x.tese,x.proc?(x.proc.pt||[]).concat(x.proc.ac||[]).map(function(z){return z[1];}).join(' '):''].join('\t'));if(x.c&&x.cl)E.clsNome[x.c]=x.cl;return x;});
     d.sort(function(a,b){return (b.d||'').localeCompare(a.d||'');});
     E.idx=d;E.carregando=false;if(EM.sub==='prec')render();
     serie(d);
@@ -1301,7 +1301,7 @@ function deSerie(r){
   x.y=(x.d||'').slice(0,7);x._apr=apreciacao({ementa:x.e,resultado:x.r,classeSigla:x.c});ramoAss(x);x._rd='';
   x._res=x.r?classRes(x.r):'Sem classificação';
   if(r.rl)x.rl=r.rl;if(r.g)x.gab=r.g;
-  x._q=nz([x.n,x.c,x.cl,x.o,x.e,x.r,x._ass,x.rl||''].join(' '));if(x.c&&x.cl&&!E.clsNome[x.c])E.clsNome[x.c]=x.cl;return x;
+  x._q=nz([x.n,x.c,x.cl,x.o,x.e,x.r,x._ass,x.rl||''].join('\t'));if(x.c&&x.cl&&!E.clsNome[x.c])E.clsNome[x.c]=x.cl;return x;
 }
 function serie(cur){
   SER.base=/^https?:/.test(location.protocol)?(window.EMENT_FONTE||'/jurisprudencia/'):null;
@@ -1321,33 +1321,69 @@ function serie(cur){
 }
 function reEsc(t){return t.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');}
 function termoSrc(w){
-  var pre=/\*$/.test(w);w=w.replace(/^[^a-z0-9]+|[^a-z0-9]+$/g,'');if(!w)return null;
-  return '(?:^|[^a-z0-9])('+reEsc(w)+(pre?'[a-z0-9]*':'')+')'+(pre?'':'(?![a-z0-9])');
+  w=nz(w).replace(/^[^a-z0-9]+|[^a-z0-9*$]+$/g,'');if(!w)return null;
+  var src=w.split(/([$*])/).map(function(p){return p==='$'||p==='*'?'[a-z0-9]*':reEsc(p);}).join('');
+  return '(?<![a-z0-9])('+src+')(?![a-z0-9])';
 }
-function fraseSrc(f){var ws=nz(f).split(/[^a-z0-9]+/).filter(Boolean);if(!ws.length)return null;return '(?:^|[^a-z0-9])('+ws.map(reEsc).join('[^a-z0-9]+')+')(?![a-z0-9])';}
-/* consulta → {cls: [[alternativas OU] E ...], nots: [...]} */
+function fraseSrc(f){var ws=nz(f).match(/[a-z0-9]+[$*]?/g)||[];if(!ws.length)return null;return '(?<![a-z0-9])('+ws.map(function(w){return reEsc(w.replace(/[$*]$/,''))+(/[$*]$/.test(w)?'[a-z0-9]*':'');}).join('[^a-z0-9\\t\\n\\r\\u2029]+')+')(?![a-z0-9])';}
+function qOp(w){var n=nz(w).toUpperCase();if(n==='OR'||n==='|')return 'OU';if(n==='NAO'||n==='-')return 'NÃO';if(/^(?:ADJ|PROX)(?:\d+|\(\d+\))?$/.test(n))return n.replace(/[()]/g,'');return /^(E|OU|MESMO|COM)$/.test(n)?n:'';}
+/* Núcleos alternativos OU têm prioridade sobre E, como na busca anterior.
+   Proximidade tem prioridade sobre OU; parênteses alteram o agrupamento. */
 function parseQ(q){
-  q=String(q||'').trim();if(!q)return null;
-  var rx=/(-?)"([^"]*)"?|(\S+)/g,m,T=[];
-  while((m=rx.exec(q)))T.push(m[2]!==undefined?{neg:!!m[1],ph:m[2]}:{w:m[3]});
-  var cls=[],nots=[],ou=false,termos=[];
-  T.forEach(function(t){
-    if(t.w&&/^(ou|or|\|)$/i.test(t.w)){ou=cls.length>0;return;}
-    var neg=t.ph!==undefined?t.neg:(t.w.length>1&&t.w[0]==='-');
-    var w=t.w!==undefined?nz(neg?t.w.slice(1):t.w):null;
-    if(w!==null&&!neg&&!ou&&STOP[w.replace(/[^a-z0-9]/g,'')]){return;}
-    var src=t.ph!==undefined?fraseSrc(t.ph):termoSrc(w);if(!src){ou=false;return;}
-    var o={src:src,re:new RegExp(src)};
-    if(neg)nots.push(o);else{if(ou)cls[cls.length-1].push(o);else cls.push([o]);termos.push(o);}
-    ou=false;
-  });
-  return cls.length||nots.length?{q:q,cls:cls,nots:nots,termos:termos}:null;
+  q=String(q||'').trim();if(!q)return null;var ts=[],i=0,terms=[];
+  function erro(m){throw Error(m);}
+  try{
+    while(i<q.length){
+      if(/\s/.test(q[i])){i++;continue;}
+      var c=q[i];if(c==='('||c===')'){ts.push({k:c});i++;continue;}
+      if(c==='-'){ts.push({k:'NÃO'});i++;continue;}
+      if(c==='"'){var j=q.indexOf('"',i+1);if(j<0)erro('Feche as aspas da expressão.');var f=q.slice(i+1,j);if(!fraseSrc(f))erro('Expressão vazia.');ts.push({k:'t',src:fraseSrc(f)});i=j+1;continue;}
+      var m=q.slice(i).match(/^(?:ADJ|PROX)\(\d+\)(?=\s|$|\))/i)||q.slice(i).match(/^[^\s()"]+/);if(!m)erro('Expressão inválida.');
+      var w=m[0],op=qOp(w);i+=w.length;
+      if(op){if(/^(ADJ|PROX)/.test(op)){var n=Number(op.replace(/^[A-Z]+/,''))||1;if(n<1||n>99||/0$/.test(op)&&Number(op.replace(/^[A-Z]+/,''))===0)erro('Distância de 1 a 99 palavras.');ts.push({k:op.replace(/\d+$/,''),n:n});}else ts.push({k:op});}
+      else{var src=termoSrc(w);if(!src)erro('Termo inválido: '+w);ts.push({k:'t',src:src});}
+    }
+    var p=0,peek=function(){return ts[p]&&ts[p].k;};
+    function atom(){
+      var t=ts[p++];if(!t)erro('Falta um termo.');
+      if(t.k==='NÃO')return {k:'not',a:atom()};
+      if(t.k==='('){var a=expr();if(peek()!==')')erro('Feche os parênteses.');p++;return a;}
+      if(t.k!=='t')erro('Falta termo antes ou depois do operador.');
+      return {k:'term',src:t.src,re:new RegExp(t.src)};
+    }
+    function near(){var a=atom();while(/^(ADJ|PROX|COM|MESMO)$/.test(peek()||'')){var o=ts[p++],b=atom();a={k:o.k,n:o.n,a:a,b:b};}return a;}
+    function alt(){var a=near();while(peek()==='OU'){p++;a={k:'or',a:a,b:near()};}return a;}
+    function expr(){var a=alt();while(p<ts.length&&peek()!==')'){var k=peek();if(k==='E')p++;a={k:'and',a:a,b:alt()};}return a;}
+    var ast=expr();if(p!==ts.length)erro('Parênteses sem abertura.');
+    function collect(n,neg){if(n.k==='term'){if(!neg)terms.push(n);return;}collect(n.a,neg||n.k==='not');if(n.b)collect(n.b,neg);}
+    collect(ast,false);
+    function valid(n){if(n.k==='ADJ'||n.k==='PROX'){if(!spanOK(n.a)||!spanOK(n.b))erro('ADJ e PROX aceitam termos, frases, alternativas OU e cadeias de proximidade.');}if(n.a)valid(n.a);if(n.b)valid(n.b);}
+    function spanOK(n){return n.k==='term'||(/^(or|ADJ|PROX)$/.test(n.k)&&spanOK(n.a)&&spanOK(n.b));}
+    valid(ast);return {q:q,ast:ast,termos:terms,cls:terms.length?[terms]:[],nots:[]};
+  }catch(e){return {q:q,error:e.message,termos:[],cls:[],nots:[]};}
 }
-function casa(P,t){
-  for(var i=0;i<P.cls.length;i++){var ok=false;for(var j=0;j<P.cls[i].length;j++)if(P.cls[i][j].re.test(t)){ok=true;break;}if(!ok)return false;}
-  for(var k=0;k<P.nots.length;k++)if(P.nots[k].re.test(t))return false;
-  return true;
+function qSpans(n,t){
+  if(n.k==='term'){var out=[],g=new RegExp(n.src,'g'),m;while((m=g.exec(t)))out.push([m.index,m.index+m[0].length]);return out;}
+  if(n.k==='or')return qSpans(n.a,t).concat(qSpans(n.b,t)).sort(function(a,b){return a[0]-b[0];});
+  if(n.k==='ADJ'||n.k==='PROX'){
+    var A=qSpans(n.a,t),B=qSpans(n.b,t),r=[],seen={};
+    // At most n words may separate the end of one operand from the next start.
+    function pair(a,b){if(a[1]>b[0])return;var gap=t.slice(a[1],b[0]);if(/[\t]/.test(gap))return;var d=(gap.match(/[a-z0-9]+/g)||[]).length+1;if(d<=n.n){var k=a[0]+':'+b[1];if(!seen[k]){seen[k]=1;r.push([a[0],b[1]]);}}}
+    function scan(X,Y){var j=0;X.forEach(function(a){while(j<Y.length&&Y[j][0]<a[1])j++;for(var k=j;k<Y.length;k++){var b=Y[k],gap=t.slice(a[1],b[0]);if(/\t/.test(gap)||(gap.match(/[a-z0-9]+/g)||[]).length>=n.n)break;pair(a,b);}});}
+    A.sort(function(a,b){return a[1]-b[1];});B.sort(function(a,b){return a[0]-b[0];});scan(A,B);
+    if(n.k==='PROX'){B.sort(function(a,b){return a[1]-b[1];});A.sort(function(a,b){return a[0]-b[0];});scan(B,A);}
+    return r.sort(function(a,b){return a[0]-b[0];});
+  }return [];
 }
+function qEval(n,t){
+  if(n.k==='term')return n.re.test(t);
+  if(n.k==='not')return !qEval(n.a,t);
+  if(n.k==='and')return qEval(n.a,t)&&qEval(n.b,t);
+  if(n.k==='or')return qEval(n.a,t)||qEval(n.b,t);
+  if(n.k==='MESMO'||n.k==='COM')return t.split(n.k==='MESMO'?/\t/:/[\t\u2029\r\n]+/).some(function(part){return qEval(n.a,part)&&qEval(n.b,part);});
+  return t.split(/\t/).some(function(part){return qSpans(n,part).length>0;});
+}
+function casa(P,t){return !!P&&!P.error&&qEval(P.ast,t);}
 function conta1(P,t){var n=0;P.termos.forEach(function(o){var g=new RegExp(o.src,'g'),m;while((m=g.exec(t))){n++;if(n>500)break;}});return n;}
 /* trecho do texto original com os termos destacados (n = mesmo texto normalizado, mesmas posições) */
 function trecho(orig,n,P,larg){
@@ -1396,13 +1432,13 @@ function buscar(){
   buscaIntegral();
 }
 function buscaIntegral(){
-  var P=parseQ(E.q);if(!P){E.ft=null;render();return;}
-  if(!P.cls.length){toast('Use ao menos um termo que não seja de exclusão');return;}
+  var P=parseQ(E.q);if(!P||P.error){E.ft=null;E.qp=P;render();if(P&&P.error)toast(P.error);return;}
+  if(!P.termos.length){E.ft=null;E.qp=P;render();toast('Exclusão sem termo positivo: apenas o índice será consultado.');return;}
   var tok=FT.tok,base=E.idx.filter(function(x){return passa(x,'__q');}),cand={},need={};
   var ft={q:E.q,P:P,hits:{},lidos:0,total:0,busy:true,atual:''};
   base.forEach(function(x){
     if(x.sid&&SER.base){cand[x.sid]=1;need[(x.serie&&x.t?x.t:x.sid.charAt(0))+'-'+x.ano]=1;return;}
-    var t=((BASE&&BASE.it&&BASE.it[x.id])||'');var o=(x.e||'')+'\u2029'+t,h=avalia(P,o,nz(o));if(h)ft.hits[x.id]=h;});
+    var t=((BASE&&BASE.it&&BASE.it[x.id])||'');var o=(x.e||'')+'\t'+t,h=avalia(P,o,nz(o));if(h)ft.hits[x.id]=h;});
   var nomes=Object.keys(need).filter(function(k){return !SER.man||SER.man[k];}).sort().reverse();
   ft.total=nomes.length;E.ft=ft;E.qp=null;render();
   var i=0;
@@ -1428,22 +1464,29 @@ function buscaIntegral(){
    Sintaxe explícita (OU, aspas, exclusão e radical) continua disponível. */
 function qTermEncode(value){
   var v=String(value||'').trim().replace(/\s+/g,' ');if(!/[a-z0-9]/.test(nz(v)))return '';
-  if(/(?:^|\s)(?:OU|OR|\|)(?:\s|$)/i.test(v)||v.indexOf('"')>=0||/^-\S/.test(v))return v;
-  var k=nz(v);return /^[a-z0-9]+\*?$/.test(k)&&!STOP[k]?v:'"'+v+'"';
+  if(/(?:^|\s)(?:OU|OR|E|NÃO|NAO|COM|MESMO|ADJ(?:\d+|\(\d+\))?|PROX(?:\d+|\(\d+\))?|\|)(?:\s|$)/.test(v)||/["()]/.test(v)||/^-\S/.test(v))return v;
+  var k=nz(v);return /^[a-z0-9]+[$*]?$/.test(k)&&!STOP[k]?v:'"'+v+'"';
 }
 function qTermSync(){var p=E.qparts||[];if(p.join(' ')!==(E.q||''))p=E.q?[E.q]:[];E.qparts=p;return p;}
-function qTermDraft(){var p=qTermSync().slice(),v=qTermEncode($('#e-q').value);if(v&&!p.some(function(w){return nz(w)===nz(v);}))p.push(v);return p;}
+function qPart(v,i){var m=i>0&&/^((?:E|OU|NÃO|MESMO|COM|ADJ\d*|PROX\d*)\s+)([\s\S]+)$/.exec(v);return m?{op:m[1].trim(),term:m[2]}:{op:'E',term:v};}
+function qTermDraft(){var p=qTermSync().slice(),v=qTermEncode($('#e-q').value);if(v&&!p.some(function(w,i){return nz(qPart(w,i).term)===nz(v)&&qPart(w,i).op==='E';}))p.push(v);return p;}
 window.VDM_ementQueryParts=qTermDraft;
 function qTermRender(){
   var el=$('#e-qterms');if(!el)return;var p=qTermSync();
-  el.innerHTML=p.map(function(v,i){var label=v.replace(/^"([^"]*)"$/,'$1');return '<span class="e-chip e-query-chip" title="'+esc(label)+'"><span>'+esc(label)+'</span><button type="button" data-qt="'+i+'" aria-label="Remover '+esc(label)+'">×</button></span>';}).join('');
+  el.innerHTML=p.map(function(v,i){var t=qPart(v,i),label=t.term.replace(/^"([^"]*)"$/,'$1'),base=t.op.replace(/\d+$/,''),dist=Number(t.op.replace(/^[A-Z]+/,''))||1;
+    var op=i?'<select class="e-query-op" data-qop="'+i+'" aria-label="Operador antes do critério '+(i+1)+'">'+['E','OU','NÃO','ADJ','PROX','MESMO','COM'].map(function(o){return '<option'+(o===base?' selected':'')+' value="'+o+'">'+o+'</option>';}).join('')+'</select>'+(/^(ADJ|PROX)$/.test(base)?'<input class="e-query-distance" type="number" min="1" max="99" value="'+dist+'" data-qdist="'+i+'" aria-label="Distância máxima em palavras">':''):'';
+    return op+'<span class="e-chip e-query-chip" title="'+esc(label)+'"><button class="e-query-edit" type="button" data-qedit="'+i+'" title="Editar critério">'+esc(label)+'</button><button type="button" data-qt="'+i+'" aria-label="Remover '+esc(label)+'">×</button></span>';}).join('');
   el.hidden=!p.length||EM.sub!=='prec';
   $$('[data-qt]',el).forEach(function(b){b.onclick=function(){qTermRemove(+b.getAttribute('data-qt'));$('#e-q').focus();};});
+  $$('[data-qop]',el).forEach(function(b){b.onchange=function(){var i=+b.getAttribute('data-qop'),parts=qTermSync().slice(),t=qPart(parts[i],i);parts[i]=(b.value==='E'?'':b.value+' ')+t.term;qTermRun(parts);};});
+  $$('[data-qdist]',el).forEach(function(b){b.onchange=function(){var i=+b.getAttribute('data-qdist'),parts=qTermSync().slice(),t=qPart(parts[i],i),n=Math.max(1,Math.min(99,Math.round(Number(b.value)||1)));parts[i]=t.op.replace(/\d+$/,'')+n+' '+t.term;qTermRun(parts);};});
+  $$('[data-qedit]',el).forEach(function(b){b.onclick=function(){var i=+b.getAttribute('data-qedit'),parts=qTermSync().slice(),t=qPart(parts[i],i),v=window.prompt('Editar palavra, frase ou expressão',t.term.replace(/^"([^"]*)"$/,'$1'));if(v===null)return;v=qTermEncode(v);if(!v)return;parts[i]=(i&&t.op!=='E'?t.op+' ':'')+v;qTermRun(parts);};});
+  var ex=$('#e-qexpr');if(ex)ex.onclick=function(){var v=window.prompt('Expressão de pesquisa — E, OU, NÃO, ADJ, PROX, MESMO, COM, $, aspas e parênteses',qTermDraft().join(' '));if(v===null)return;if(qTermRun(v.trim()?[v.trim()]:[]))$('#e-q').value='';};
 }
 function qTermReset(){E.qparts=[];qTermRender();}
-function qTermRun(p){clearTimeout(qT);E.qparts=p;E.q=p.join(' ');qTermRender();if(E.idx)buscar();else{E.qp=parseQ(E.q);E.ft=null;}}
-function qTermCommit(){var p=qTermDraft();$('#e-q').value='';qTermRun(p);$('#e-q').focus();}
-function qTermRemove(i){var p=qTermSync().slice();p.splice(i,1);qTermRun(p);}
+function qTermRun(p){var q=p.join(' '),P=parseQ(q);if(P&&P.error){toast(P.error);qTermRender();return false;}clearTimeout(qT);E.qparts=p;E.q=q;qTermRender();if(E.idx)buscar();else{E.qp=P;E.ft=null;}return true;}
+function qTermCommit(){var p=qTermDraft();if(qTermRun(p))$('#e-q').value='';$('#e-q').focus();}
+function qTermRemove(i){var p=qTermSync().slice();p.splice(i,1);if(i===0&&p.length)p[0]=qPart(p[0],1).term;qTermRun(p);}
 var QAJ=false;
 function qBar(){
   var el=$('#e-qmodo');if(!el)return;
@@ -1452,7 +1495,7 @@ function qBar(){
     '<label'+(ftOk?'':' class="off" title="A busca no texto integral só funciona no site"')+'><input type="radio" name="e-qm" value="ft"'+(E.qm==='ft'?' checked':'')+(ftOk?'':' disabled')+'> <b>'+(window.EMENT_FONTE?'Texto disponível no DJEN':'Texto integral')+'</b> <small>'+(window.EMENT_FONTE?'ementa, resultado e excertos · baixa os anos do recorte':'ementa e inteiro teor · baixa os anos do recorte')+'</small></label>'+
     '<span class="sp"></span>'+((E.qp||E.ft)?'<label class="e-ord">Ordenar <select id="e-ord"><option value="data"'+(E.ord!=='rel'?' selected':'')+'>mais recentes</option><option value="rel"'+(E.ord==='rel'?' selected':'')+'>mais ocorrências</option></select></label>':'')+
 
-    (QAJ?'<div class="e-qaj"><b>Como buscar</b><ul><li>Digite uma palavra ou frase e pressione Enter. Cada etiqueta é um critério obrigatório (E).</li><li><code>tempo especial</code>: frase exata, sem precisar de aspas. Remova uma etiqueta pelo ×.</li><li><code>vigilante OU vigia</code>: um ou outro</li><li><code>aposentad*</code>: palavras que começam assim</li><li><code>-rural</code>: exclui quem tem o termo</li><li>Acentos e maiúsculas não importam; artigos e preposições soltos são ignorados.</li><li><b>Índice</b> procura na hora em número, classe, órgão, ementa e resultado. <b>'+(window.EMENT_FONTE?'Texto disponível':'Texto integral')+'</b> procura também '+(window.EMENT_FONTE?'nos excertos preservados do DJEN':'no inteiro teor')+': escolha antes o período e os filtros, para baixar menos anos.</li></ul></div>':'')+
+    (QAJ?'<div class="e-qaj"><b>Como buscar</b><ul><li>Digite uma palavra ou frase e pressione Enter. O padrão é E; altere o operador entre as etiquetas.</li><li><code>tempo especial</code>: frase exata, sem precisar de aspas. Remova uma etiqueta pelo ×.</li><li><code>vigilante OU vigia</code>: um ou outro</li><li><code>aposentad$</code> ou <code>aposentad*</code>: radical; <code>NÃO rural</code> ou <code>-rural</code>: exclusão.</li><li><code>ADJ3</code>: até três palavras, na ordem; <code>PROX3</code>: em qualquer ordem. Sem número, distância 1.</li><li><code>MESMO</code>: mesmo campo disponível; <code>COM</code>: mesmo parágrafo preservado. No índice e nos excertos, a precisão depende da estrutura da fonte.</li><li>Parênteses agrupam expressões. Precedência: proximidade, OU, E; NÃO exclui seu operando. Acentos e maiúsculas são ignorados.</li><li><b>Índice</b> procura na hora em número, classe, órgão, ementa e resultado. <b>'+(window.EMENT_FONTE?'Texto disponível':'Texto integral')+'</b> procura também '+(window.EMENT_FONTE?'nos excertos preservados do DJEN':'no inteiro teor')+': escolha antes o período e os filtros, para baixar menos anos.</li></ul></div>':'')+
     (SER.ok?'':SER.erro?'<div class="e-qinfo">Série histórica indisponível ('+esc(SER.erro)+'); a busca vale para os julgados curados.</div>':'<div class="e-qinfo">Carregando a série histórica (1999-2026)…</div>');
   $$('input[name="e-qm"]',el).forEach(function(r){r.onchange=function(){E.qm=r.value;qTermCommit();};});
   qTermRender();

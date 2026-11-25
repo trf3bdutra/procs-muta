@@ -16,3 +16,26 @@ test('Enter acumula frases exatas e termos com E, sem duplicatas',()=>{
 test('Mantém operadores explícitos e consulta recebida de outro painel',()=>{
  const c=engine();assert.equal(c.qTermEncode('vigilante OU vigia'),'vigilante OU vigia');assert.equal(c.qTermEncode('-rural'),'-rural');assert.equal(c.qTermEncode('aposentad*'),'aposentad*');c.E.q='vigilante OU vigia';c.draft='tempo especial';assert.equal(c.qTermDraft().join(' '),'vigilante OU vigia "tempo especial"');assert.equal(c.casa(c.parseQ(c.qTermDraft().join(' ')),'vigia tempo especial'),true);
 });
+
+test('Operadores TRF3: booleanos, grupos, exclusão e radicais',()=>{
+ const c=engine(),m=(q,t)=>c.casa(c.parseQ(q),t);
+ assert.equal(m('(vigilante OU vigia) E aposentadoria NÃO rural','aposentadoria vigia'),true);
+ assert.equal(m('(vigilante OU vigia) E aposentadoria NÃO rural','aposentadoria vigilante rural'),false);
+ assert.equal(m('previdenci$','previdenciario'),true);
+ assert.equal(m('previdenci$','aprevidenciario'),false);
+ assert.equal(m('aposentadoria E (rural OU urbana)','aposentadoria'),false);
+ assert.ok(c.parseQ('rural OU').error);assert.ok(c.parseQ('(rural').error);assert.ok(c.parseQ('a ADJ100 b').error);
+});
+test('Proximidade por distância, ordem e fronteira de campo/parágrafo',()=>{
+ const c=engine(),m=(q,t)=>c.casa(c.parseQ(q),t);
+ assert.equal(m('ruido ADJ3 exposicao','ruido com intensa exposicao'),true);
+ assert.equal(m('ruido ADJ2 exposicao','ruido com intensa exposicao'),false);
+ assert.equal(m('ruido ADJ3 exposicao','exposicao ao ruido'),false);
+ assert.equal(m('ruido PROX3 exposicao','exposicao ao ruido'),true);
+ assert.equal(m('ruido PROX3 exposicao','exposicao\truido'),false);
+ assert.equal(m('ruido MESMO exposicao','ruido\u2029exposicao'),true);
+ assert.equal(m('ruido MESMO exposicao','ruido\texposicao'),false);
+ assert.equal(m('ruido COM exposicao','ruido\u2029exposicao'),false);
+ assert.equal(m('ruido COM exposicao','ruido e exposicao'),true);
+ assert.equal(m('causa ADJ(2) aumento ADJ2 pena','causa de aumento da pena'),true);
+});
