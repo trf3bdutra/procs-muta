@@ -708,6 +708,36 @@ function sinteseQuestoes() {
   var res = [tc || 'sem tipo de caso', nq ? nq + (nq > 1 ? ' questões' : ' questão') : 'sem questões', sp ? 'síntese preenchida' : 'sem síntese'].join(' · ');
   return '<details class="card sq-card"' + (ab ? ' open' : '') + '><summary><b>Síntese e questões</b><small>' + esc(res) + '</small></summary><div class="gr">' + SQ_HTML + '</div></details>';
 }
+
+/* Análise e Indexação: modelo atual e lote de produção; registros importados permanecem históricos.
+   Mesmas chaves da ficha. Uma seção operacional no início da Produção, recolhida por processo. */
+var PROD_INDEX_STATE={cnj:'',open:false};
+function producaoIndexCampos(){
+ var A=grupoModelo('Análise e Indexação'),B=grupoModelo('Lote e correção (Index)'),seen=new Set();
+ return (A&&A.campos||[]).concat(B&&B.campos||[]).filter(function(c){var k=c.secao+'.'+c.chave;if(seen.has(k))return false;seen.add(k);return true;});
+}
+function producaoIndex(){
+ if(PROD_INDEX_STATE.cnj!==G.cnj)PROD_INDEX_STATE={cnj:G.cnj,open:false};
+ var fields=producaoIndexCampos(),M=(window.MUTA_WEB&&window.MUTA_WEB.matriz)||{},sg=window.MutaSigilo;
+ if(sg&&(sg.bloqueado()||sg.sigiloso()))return '';
+ function find(k){return fields.find(function(c){return c.chave===k;});}
+ function render(c){return c?campo(c):'';}
+ function ro(label,value){return '<div class="gf w"><span class="gl">'+esc(label)+'</span><span class="ro">'+esc(S(value)||'—')+'</span></div>';}
+ function hist(k,fallback){var c=find(k);if(c&&S(V(c.secao,c.chave)))return render(Object.assign({},c,{editavel:false}));return ro(c?c.rotulo:k,fallback);}
+ function sub(title,content){return content?'<section class="hero-prod-index-group"><h4 class="pm-mer-h">'+esc(title)+'</h4><div class="gr">'+content+'</div></section>':'';}
+ var model=['Modelo aplicável','Variação do modelo'],lote=fields.filter(function(c){return c.secao==='producao'&&model.indexOf(c.chave)<0;}),histKeys=['Registro - Lote','Registro - Grupo','Registro - Variações','Registro - Modelo'];
+ var title=S(V('producao','Modelo aplicável')),lot=S(V('producao','Lote')),desc=[lot?'Lote '+lot:'',title].filter(Boolean).join(' · ');
+ var histBody=hist(histKeys[0],M.lote)+hist(histKeys[1],M.grupo)+hist(histKeys[2],M.variacoes)+hist(histKeys[3],M.modelo);
+ if(S(M.proposta)||S(V('triagem','Registro - Proposta')))histBody+=ro('Proposta registrada na triagem',V('triagem','Registro - Proposta')||M.proposta);
+ if(S(M.resultado))histBody+=ro('Resultado proposto pelo grupo · histórico',M.resultado);
+ return '<details id="hero-prod-index" class="card gg hero-prod-index"'+(PROD_INDEX_STATE.open?' open':'')+'><summary><h4>Análise e Indexação</h4><span class="gn">'+esc(desc||'Modelo e lote')+'</span></summary>'+
+ sub('Modelo de produção',model.map(function(k){return render(find(k));}).join(''))+
+ sub('Lote e correção',lote.map(render).join(''))+
+ '<details class="gg hero-prod-index-history"><summary><h4>Indexação de origem · histórico</h4></summary><div class="gr">'+histBody+'</div></details>'+
+ '</details>';
+}
+document.addEventListener('toggle',function(e){var d=e.target;if(d&&d.id==='hero-prod-index'&&d.isConnected&&PROD_INDEX_STATE.cnj===G.cnj)PROD_INDEX_STATE.open=d.open;},true);
+
 function corpoProcesso() {
   /* 0.60: a aba Processo = Roteiro de triagem + Roteiro de produção; sinalizações, notas e registro no acervo foram para o card do topo (snCard) */
   /* 0.66: o painel Síntese e questões foi desfeito; os campos estão no cartão do processo (CAB_HTML) */
@@ -718,8 +748,11 @@ function corpoProcesso() {
   sc += SN_HTML + CAB_HTML;
   (h + sc).replace(/data-(?:fk|ch)="([^"]+)"/g, function (m, k) { ja[k.replace(/&quot;/g, '"').replace(/&amp;/g, '&').replace(/&#39;/g, "'")] = 1; return m; });
   /* 0.63: a aba Processo se divide em Roteiro de triagem | Roteiro de produção (a deduplicação usa sempre os dois) */
-  var pro = camposCaso(ja);
-  return rot === 'sol' ? '<div id="hero-sol-main"></div>' : rot === 'tri' ? h : pro || '<div class="empty">Sem campos de produção para este processo.</div>';
+  if(rot==='sol')return '<div id="hero-sol-main"></div>';
+  if(rot==='tri')return h;
+  producaoIndexCampos().forEach(function(c){ja[c.secao+'.'+c.chave]=1;});
+  var pro=camposCaso(ja);
+  return producaoIndex()+(pro||'<div class="empty">Sem campos de produção para este processo.</div>');
 }
 /* 0.54 · Roteiro de produção: todos os campos da ficha que a Minuta-Matriz do Compendium usa (@apelido), do destino do caso
    (sessão ou monocrática). Preenchimento automatizado: a leitura dos autos põe sozinha o que acha nos campos vazios

@@ -1612,3 +1612,14 @@ html[data-tema=escuro] .rt-tipos .rt-kind-option{border-color:var(--line)}
 #pauta-app .pa-sol-resumo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px;padding:8px;border:1px solid var(--line);border-radius:6px;background:var(--card);font-size:11px}
 #pauta-app .pa-sol-resumo span{text-align:right;color:var(--muted-fg)}
 #pauta-app .pa-ped .gx-tx{white-space:pre-wrap;overflow-wrap:anywhere}
+
+/* Produção · seção inicial de indexação, sem duplicar os campos do roteiro. */
+#gab .hero-prod-index{margin:0 0 8px;min-width:0;border-radius:7px}
+#gab .hero-prod-index>summary{display:flex;align-items:center;gap:6px;min-height:32px;padding:8px 10px}
+#gab .hero-prod-index>summary h4{flex:1;min-width:0;font-size:12px}
+#gab .hero-prod-index>summary .gn{max-width:50%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#gab .hero-prod-index-group{padding:7px 9px 0;border-top:1px solid var(--line);min-width:0}
+#gab .hero-prod-index-group>.pm-mer-h{margin:0 0 4px}
+#gab .hero-prod-index-group>.gr{padding:4px 0 8px}
+#gab .hero-prod-index-history{margin:4px 9px 9px;box-shadow:none}
+#gab .hero-prod-index .gf{min-width:0;overflow-wrap:anywhere}

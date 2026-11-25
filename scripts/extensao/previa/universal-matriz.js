@@ -14,7 +14,8 @@
    [['triagem','Tema','Tipo de caso / matéria'],['triagem','Alegações','Questões controvertidas'],['triagem','Especificidades','Particularidades'],['producao','Modelo aplicável','Modelo ou minuta-matriz'],['producao','Variação do modelo','Variação do modelo'],['producao','Tópico-síntese','Tópico-síntese'],['producao','Precedentes aplicáveis','Precedentes aplicáveis'],['producao','Distinção de precedente','Distinções']].forEach(function(x){h+=campoRot(x[0],x[1],x[2]);});
    return h+'</div></details>';
  }
- corpoRoteiro=function(){return base()+bloco();};
+ /* No Universal, o bloco agora é nativo da Produção. Mantém-se o adaptador antigo fora da prévia apenas para os clientes que o utilizam. */
+ corpoRoteiro=function(){return base();};
 })();
 
 /* Revisão da prévia: reutiliza o prontuário real, sem afetar o painel instalado nem web.html. */
