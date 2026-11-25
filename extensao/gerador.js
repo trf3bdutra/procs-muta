@@ -417,7 +417,7 @@
   function pintar(forca) {
     var g = $('ger-app'); if (!g || (!forca && !visivel())) return;
     var p = $(novoHero()?'panel-pront':'panel-min'), y = p ? p.scrollTop : 0;
-    try { g.innerHTML = html(); if(window.MutaModelosHero)window.MutaModelosHero.montarGerador(g); } catch (e) { g.innerHTML = '<div class="empty">Gerador indisponível: ' + esc(e && e.message || e) + '</div>'; }
+    try { g.innerHTML = html(); if(novoHero()){g.querySelectorAll('.gr-l').forEach(function(l){if(l.querySelector('[data-gr-tipo],[data-gr-res]'))l.remove();});g.querySelectorAll('.gr-av').forEach(function(p){if(/^Sem resultado do voto na ficha/.test(p.textContent.trim()))p.textContent='Registre o resultado em Produção para completar a ementa.';});} if(window.MutaModelosHero)window.MutaModelosHero.montarGerador(g); } catch (e) { g.innerHTML = '<div class="empty">Gerador indisponível: ' + esc(e && e.message || e) + '</div>'; }
     if (p) p.scrollTop = y;
   }
   function modo(m) {
