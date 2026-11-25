@@ -1358,6 +1358,27 @@ header#top::before{background:linear-gradient(90deg,var(--eg) 0 50%,var(--eg2) 5
 @container(max-width:570px){.cog-op-card .cog-op-grid{grid-template-columns:minmax(0,1fr)!important}}
 @media(max-width:800px){.cog-op-card .cog-op-grid{grid-template-columns:minmax(0,1fr)!important}}
 </style>
+<style id="cog-list-toolbar-v2">
+.cog-list-header{background:var(--w,#fff);border:1px solid var(--l2,#dce3de);border-radius:8px;margin:8px 0 10px;padding:8px 10px;display:grid;gap:7px}
+.cog-list-header-main,.cog-list-header-actions{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px}
+.cog-list-header-main .at-ver{margin:0;flex:none}
+.cog-list-header-main .cog-lotbar{border:0;background:transparent;padding:0;margin:0;flex:1 1 300px;min-width:0}
+.cog-list-header-main .cog-lot-groups{flex:1 1 250px}
+.cog-list-header-main .cog-lotbar label{min-width:0;white-space:nowrap}
+.cog-list-header-actions{border-top:1px solid var(--l2,#dce3de);padding-top:7px;justify-content:space-between}
+.cog-list-header-actions .cog-list-tools{margin:0;padding:0;justify-content:flex-start;gap:6px;align-items:center;flex-wrap:wrap}
+#cog-matrix-tools:empty{display:none}
+.cog-list-header .cog-list-help{display:none}
+.cog-list-header .cog-work-actions{margin-left:auto}
+.cog-simple-table{width:100%;min-width:760px;table-layout:fixed;border-collapse:separate;border-spacing:0}
+.cog-simple-table th:first-child{width:32px}.cog-simple-table th:nth-child(2){width:28%}.cog-simple-table th:nth-child(3){width:150px}.cog-simple-table th:nth-child(4){width:23%}
+.cog-simple-table td{vertical-align:top;padding:6px 8px;white-space:normal;overflow-wrap:anywhere}
+.cog-simple-table .cog-simple-id .cog-proc-id{display:flex;align-items:center;gap:4px;flex-wrap:wrap}
+.cog-simple-table small{display:block;font-size:11px;color:var(--m);margin-top:3px}
+.cog-simple-detail{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+.cog-simple-table .cog-note-row td{padding:0}
+.cog-simple-table .cog-sign-cell{width:150px}
+</style>
 </head>
 <body>
 <header id="top">
@@ -3252,7 +3273,7 @@ async function cogLoteAbrir(id){if(!id){COG_LOTE=null;COG_GRUPO='';SEL.clear();r
 function cogLoteBar(){
  const idsDest=COG==='triagem'?null:new Set(cogDestinoBase().map(o=>o.d)),L=(COG_LOTES||[]).filter(l=>{if(!idsDest)return true;const full=(_colD.triados?.lotes||[]).find(x=>x.id===l.id);return !full||(full.itens||[]).some(it=>idsDest.has(dg(it.processo)));}),id=COG_LOTE&&COG_LOTE.id||'',opt=(l)=>'<option value="'+esc(l.id)+'"'+(l.id===id?' selected':'')+'>'+esc(l.titulo||l.id)+' · '+nf(l.total||0)+'</option>',G=COG_LOTE?.grupos||[],I=(COG_LOTE?.itens||[]).filter(it=>!idsDest||idsDest.has(dg(it.processo)));
  const group=(key,nome)=>'<option value="'+esc(key)+'"'+(COG_GRUPO===key?' selected':'')+'>'+esc(nome)+' · '+nf(I.filter(it=>(it.grupo||'__')===key).length)+'</option>';
- return '<div class="cog-lotbar"><label>Lotes e séries <select data-cog-lote-select><option value="">Matriz geral</option>'+[['Lotes de triagem',L.filter(l=>!cogSerie(l))],['Séries transversais',L.filter(cogSerie)]].filter(x=>x[1].length).map(([n,ls])=>'<optgroup label="'+esc(n)+'">'+ls.map(opt).join('')+'</optgroup>').join('')+(id&&!L.some(l=>l.id===id)?'<option selected value="'+esc(id)+'">'+esc(COG_LOTE.titulo)+'</option>':'')+'</select></label><button type="button" class="btn sm" data-cog-lotes-refresh title="Atualizar lotes e séries">'+(COG_LOTE_LOADING?'Carregando…':'↻ Atualizar')+'</button>'+(id&&COG_SESSAO&&COG_SESSAO.gestor?'<button type="button" class="btn sm" data-cog-col-add>＋ Coluna</button>':'')+(id?'<a class="lk" href="/amicus/collectio/cg/?id='+encodeURIComponent(id)+'">Collectio ↗</a>':'')+(COG_LOTE_ERR?'<small>'+esc(COG_LOTE_ERR)+'</small>':'')+'</div>'+
+ return '<div class="cog-lotbar"><label>Lotes e séries <select data-cog-lote-select><option value="">Todos os lotes e séries</option>'+[['Lotes de triagem',L.filter(l=>!cogSerie(l))],['Séries transversais',L.filter(cogSerie)]].filter(x=>x[1].length).map(([n,ls])=>'<optgroup label="'+esc(n)+'">'+ls.map(opt).join('')+'</optgroup>').join('')+(id&&!L.some(l=>l.id===id)?'<option selected value="'+esc(id)+'">'+esc(COG_LOTE.titulo)+'</option>':'')+'</select></label><button type="button" class="btn sm" data-cog-lotes-refresh title="Atualizar lotes e séries">'+(COG_LOTE_LOADING?'Carregando…':'↻ Atualizar')+'</button>'+(id&&COG_SESSAO&&COG_SESSAO.gestor?'<button type="button" class="btn sm" data-cog-col-add>＋ Coluna</button>':'')+(id?'<a class="lk" href="/amicus/collectio/cg/?id='+encodeURIComponent(id)+'">Collectio ↗</a>':'')+(COG_LOTE_ERR?'<small>'+esc(COG_LOTE_ERR)+'</small>':'')+'</div>'+
  (id?'<div class="cog-lotbar cog-lot-groups"><label>'+ (cogSerie(COG_LOTE)?'Grupos da série':'Grupos do lote')+' <select data-cog-grupo><option value="">Todos os grupos · '+nf(I.length)+'</option>'+G.map(g=>group(g.id,g.rotulo)).join('')+group('__','Sem grupo')+'</select></label><small>'+nf(G.length)+' grupos · '+nf(I.length)+' processos registrados</small></div>':'');
 }
 D.addEventListener('change',e=>{if(e.target.matches('[data-cog-lote-select]'))cogLoteAbrir(e.target.value);if(e.target.matches('[data-cog-grupo]')){COG_GRUPO=e.target.value;SEL.clear();refazTriEm();pintaRodape();}},true);
@@ -3524,10 +3545,10 @@ document.addEventListener('click', (e) => {
 }, true);
 let _atT = null;
 document.addEventListener('input', (e) => { const t = e.target; if (!t.matches || !t.matches('[data-atq]')) return; LS.set('tri_atq', t.value);
-  clearTimeout(_atT); _atT = setTimeout(() => { const tb = document.getElementById('at-tab'); if (tb) tb.innerHTML = COG==='triagem'?atCorpo(LS.get('tri_triar_tarefa', '')):atTabela('');const selBtn=D.querySelector('[data-cog-select-filtered]');if(selBtn)selBtn.textContent='Selecionar filtrados ('+nf(cogTriRecorte(COG==='triagem'?LS.get('tri_triar_tarefa',''):'').length)+')';const ct=D.querySelector('[data-cog-work-count]');if(ct){const task=COG==='triagem'?LS.get('tri_triar_tarefa',''):'';ct.textContent=nf(cogTriRecorte(task).length)+' de '+nf((COG==='triagem'?cogTriRecorte(task,false):cogDestinoBase()).length)+' processos';} const railEl=D.querySelector('[data-tri-fac-root]');if(railEl)railEl.outerHTML=cogTriFacHtml(); }, 250); }, true);
+  clearTimeout(_atT); _atT = setTimeout(() => { const tb = document.getElementById('at-tab'); if (tb) tb.innerHTML = atCorpo(COG==='triagem'?LS.get('tri_triar_tarefa',''):'');const selBtn=D.querySelector('[data-cog-select-filtered]');if(selBtn)selBtn.textContent='Selecionar filtrados ('+nf(cogTriRecorte(COG==='triagem'?LS.get('tri_triar_tarefa',''):'').length)+')';const ct=D.querySelector('[data-cog-work-count]');if(ct){const task=COG==='triagem'?LS.get('tri_triar_tarefa',''):'';ct.textContent=nf(cogTriRecorte(task).length)+' de '+nf((COG==='triagem'?cogTriRecorte(task,false):cogDestinoBase()).length)+' processos';} const railEl=D.querySelector('[data-tri-fac-root]');if(railEl)railEl.outerHTML=cogTriFacHtml(); }, 250); }, true);
 
 document.addEventListener('click', (e) => { const t = e.target.closest && e.target.closest('[data-atmais]'); if (!t) return; e.preventDefault(); e.stopPropagation();
-  const g = t.dataset.atmais; LS.set('tri_atlim_' + g, LS.get('tri_atlim_' + g, 60) + 100); const tb = document.getElementById('at-tab'); if (tb) tb.innerHTML = atTabela(COG==='triagem'?LS.get('tri_triar_tarefa', ''):''); }, true);
+  const g = t.dataset.atmais; LS.set('tri_atlim_' + g, LS.get('tri_atlim_' + g, 60) + 100); const tb = document.getElementById('at-tab'); if (tb) tb.innerHTML = atCorpo(COG==='triagem'?LS.get('tri_triar_tarefa', ''):''); }, true);
 document.addEventListener('change', (e) => { const t = e.target; if (!t.matches || !t.matches('[data-atso],[data-ato]')) return;
   LS.set(t.matches('[data-atso]') ? 'tri_atso' : 'tri_ato', t.value); refazTriEm(); }, true);
 document.addEventListener('change', (e) => {
@@ -3654,11 +3675,20 @@ function cogMatrizGrupo(o,orig,sessoes){
  return (sess?(sess==='reserva'?'Banco de reserva':br(sess))+' · ':'')+(z?(z.l.titulo||z.l.id)+(g?' / '+g.rotulo:''):(o.tarefa||'Sem coleção de origem'));
 }
 function cogMatrizGrupos(soTarefa){const groups=new Map(),orig=COG==='triagem'||COG_LOTE?null:cogOrigemMap(),sessoes=COG==='selecao'?new Map(cogSelecaoData().map(x=>[x.o.d,x.sess])):null;for(const o of cogTriRecorte(soTarefa)){const g=cogMatrizGrupo(o,orig,sessoes);if(!groups.has(g))groups.set(g,[]);groups.get(g).push(o);}return groups;}
-D.addEventListener('click',e=>{const b=e.target.closest?.('[data-cog-groups]');if(!b)return;e.preventDefault();if(COG==='triagem'&&atVer()!=='lista')return;for(const g of cogMatrizGrupos(COG==='triagem'?LS.get('tri_triar_tarefa',''):'').keys())LS.set('tri_em_b_'+g,b.dataset.cogGroups==='open');refazAtTab();},true);
+D.addEventListener('click',e=>{const b=e.target.closest?.('[data-cog-groups]');if(!b)return;e.preventDefault();if(!['lista','matriz'].includes(atVer()))return;for(const g of cogMatrizGrupos(COG==='triagem'?LS.get('tri_triar_tarefa',''):'').keys())LS.set('tri_em_b_'+g,b.dataset.cogGroups==='open');refazAtTab();},true);
+function cogListaOperacional(task){
+ const groups=cogMatrizGrupos(task),span=5;if(!groups.size)return '<div class="tri-ld">Nenhum processo com esses filtros.</div>';
+ let h='<div class="cog-unified-scroll cog-simple-scroll"><table class="at-t cog-simple-table"><thead><tr><th></th><th>Processo · assunto</th><th>Sinais</th><th>Encaminhamento e acompanhamento</th><th>Caso e observações</th></tr></thead><tbody>';
+ groups.forEach((L,g)=>{const ab=LS.get('tri_em_b_'+g,true),lim=LS.get('tri_atlim_'+g,60);h+='<tr class="at-g"><td colspan="'+span+'"><div class="cog-groupbar"><button type="button" class="at-gb" data-tribanda="'+esc(g)+'"><i>'+(ab?'−':'+')+'</i><b>'+esc(g)+'</b><small>'+nf(L.length)+' processos</small></button>'+triExcelIcon('data-tri-xls="'+(COG==='triagem'?'triar':'destino')+'" data-xls-group="'+esc(g)+'" data-xls-title="'+esc(g)+'"')+'</div></td></tr>';
+ if(!ab)return;
+ for(const o of L.slice(0,lim)){const r=o.row||{},det=cogDetalhamento(r),obs=obsCurta(r.Observações),tags=[o.cl,o.secao].filter(Boolean).join(' · '),stage=COG==='mono'||COG==='selecao'?cogPainelEtapa(r,COG):r['Status da triagem'];h+='<tr class="at-r'+(SEL.has(o.d)?' sel':'')+'"><td><input type="checkbox" data-sel="'+o.d+'"'+(SEL.has(o.d)?' checked':'')+' aria-label="Selecionar '+esc(o.cnj)+'"></td><td class="cog-simple-id"><div class="cog-proc-id">'+cogCopyCnj(o)+cogFichaIcon(o.d)+cogQuickIcon(o.d)+'</div><span class="at-sub">'+esc(o.assunto||'')+'</span><small>'+esc(tags)+'</small></td>'+cogSignalCell(o)+'<td><b>'+esc(o.dest?.t||DLAB[o.prov]||'A definir')+'</b><small>'+esc([r['Destino - Situação'],stage,COG==='selecao'?(r['Nova sessão de destino']||r['Sessão Destino']):'',r.SERVIDOR].filter(Boolean).join(' · '))+'</small><small>'+esc(o.tarefa||'')+'</small></td><td><span class="cog-simple-detail" title="'+esc(det)+'">'+esc(det||'—')+'</span>'+(obs?.t?'<small title="'+esc(obs.t)+'">'+esc(obs.t)+'</small>':'')+'</td></tr><tr class="cog-note-row"><td colspan="'+span+'">'+cogNotasRodape(o)+'</td></tr>';}
+ if(L.length>lim)h+='<tr class="at-mais"><td colspan="'+span+'"><button type="button" class="btn sm" data-atmais="'+esc(g)+'">Mostrar mais '+Math.min(100,L.length-lim)+' de '+nf(L.length-lim)+'</button></td></tr>';
+ });return h+'</tbody></table></div>';
+}
 function atTabela(soTarefa) {
   const cols=cogColVis(),span=cogListSpan(cols),groups=cogMatrizGrupos(soTarefa);
-  if (!groups.size) return cogListTools()+'<div class="tri-ld">Nenhum processo com esses filtros.</div>';
-  let h = cogListTools()+'<div class="cog-unified-scroll'+(cogListCompact()?' cog-context-compact':'')+' cog-profile-'+COG+'"><table class="at-t cog-list-table">' + cogListHead(cols) + '<tbody>';
+  if (!groups.size) return '<div class="tri-ld">Nenhum processo com esses filtros.</div>';
+  let h = '<div class="cog-unified-scroll'+(cogListCompact()?' cog-context-compact':'')+' cog-profile-'+COG+'"><table class="at-t cog-list-table">' + cogListHead(cols) + '<tbody>';
   groups.forEach((L, g) => { const ab = LS.get('tri_em_b_' + g, true), lim = LS.get('tri_atlim_' + g, 60), tri = L.filter(atTri).length;
     h += '<tr class="at-g"><td colspan="'+span+'"><div class="cog-groupbar"><button type="button" class="at-gb" data-tribanda="' + esc(g) + '"><i>' + (ab ? '−' : '+') + '</i><b>' + esc(g) + '</b><small>' + nf(L.length) + ' processos · ' + nf(tri) + ' com prontuário</small></button>' + triExcelIcon('data-tri-xls="'+(COG==='triagem'?'triar':'destino')+'" data-xls-group="'+esc(g)+'" data-xls-title="'+esc(g)+'"') + '</div></td></tr>';
     if (ab) { h += L.slice(0, lim).map(o=>atLinha(o,cols)).join(''); if (L.length > lim) h += '<tr class="at-mais"><td colspan="'+span+'"><button type="button" class="btn sm" data-atmais="' + esc(g) + '">Mostrar mais ' + Math.min(100, L.length - lim) + ' de ' + nf(L.length - lim) + '</button></td></tr>'; } });
@@ -3717,8 +3747,8 @@ function atFunil(soTarefa) {
     return '<section class="fn-col" aria-label="' + esc(rot) + '"><header style="border-top-color:' + cor + '"><b style="color:' + cor + '">' + esc(rot) + '</b><span class="fn-n">' + nf(L.length) + '</span>' + lote + triExcelIcon('data-tri-xls="triar" data-xls-id="funil:'+esc(k)+'" data-xls-title="'+esc(rot)+'"') + '</header>' +
       (L.length ? L.slice(0, lim).map((o) => fnCartao(o, k, cor, at)).join('') : '<p class="fn-vz">Nenhum processo.</p>') +
       (L.length > lim ? '<button type="button" class="btn sm fn-mais" data-fn-mais="' + k + '">Mostrar mais ' + Math.min(30, L.length - lim) + ' de ' + nf(L.length - lim) + '</button>' : '') + '</section>'; }).join('') + '</div>'; }
-const atVer = () => {const v=LS.get('tri_atver','lista');return ['lista','funil','fluxo'].includes(v)?v:'lista';};
-const atCorpo = task => atVer()==='fluxo'?cogFluxo(task):atVer()==='funil'?atFunil(task):atTabela(task);
+const atVer = () => {const legacy=LS.get('tri_atver','matriz'),v=LS.get('cog_view_'+COG,COG==='triagem'&&['funil','fluxo'].includes(legacy)?legacy:'matriz');return (COG==='triagem'?['lista','matriz','funil','fluxo']:['lista','matriz']).includes(v)?v:'matriz';};
+const atCorpo = task => atVer()==='fluxo'?cogFluxo(task):atVer()==='funil'?atFunil(task):atVer()==='lista'?cogListaOperacional(task):atTabela(task);
 const COG_FLUXO_DEST=[['definir','Destino a definir','#7b6d55'],['colegiado','Colegiado · sessão','#477762'],['relator','Decisão do relator','#52779d'],['outro','Outros destinos','#726c7e']];
 let COG_FLUXO_NO='',COG_FLUXO_LIM=50;
 function cogFluxoDestino(o){
@@ -3994,7 +4024,7 @@ function cogMatrizEditavelLegada(task){
 }
 D.addEventListener('change',async e=>{const el=e.target;if(!el.matches||!el.matches('[data-cog-mat]'))return;const o=IDX.get(el.dataset.d);if(!o||el.value===el.dataset.ant)return;const old=el.dataset.ant,v=el.value;el.disabled=true;try{await opcoesPainel().gravarFicha(o.cnj,{[el.dataset.cogMat]:v});el.dataset.ant=v;toast('Ficha atualizada.');}catch(err){el.value=old;toast('Não foi possível gravar: '+err.message,true);}finally{el.disabled=false;}},true);
 D.addEventListener('click',e=>{if(!e.target.closest('[data-cog-mat-more]'))return;LS.set('cog_matriz_lim',LS.get('cog_matriz_lim',50)+50);refazAtTab();},true);
-function refazAtTab() { const tb=document.getElementById('at-tab');if(tb){const box=tb.querySelector('.cog-unified-scroll'),left=box?.scrollLeft||0,top=box?.scrollTop||0;tb.innerHTML=COG==='triagem'?atCorpo(LS.get('tri_triar_tarefa','')):atTabela('');const next=tb.querySelector('.cog-unified-scroll');if(next){next.scrollLeft=left;next.scrollTop=top;}} }
+function refazAtTab() { const tools=D.getElementById('cog-matrix-tools');if(tools)tools.innerHTML=atVer()==='matriz'?cogListTools():''; const tb=document.getElementById('at-tab');if(tb){const box=tb.querySelector('.cog-unified-scroll'),left=box?.scrollLeft||0,top=box?.scrollTop||0;tb.innerHTML=atCorpo(COG==='triagem'?LS.get('tri_triar_tarefa',''):'');const next=tb.querySelector('.cog-unified-scroll');if(next){next.scrollLeft=left;next.scrollTop=top;}} }
 function fnConfirmar(ds, k) { const at = fnSesAtiva();
   if (k === 'mono') { acao('Julgar por monocrática', ds, () => ({ sp: '', sd: '', mono: 'Monocrática' })); return; }
   if (k === 'ses') { if (!at) { toast('Nenhuma sessão futura sem pauta oficial. Utilize o Banco Reserva.', true); return; } const nm = nomeSes(at); acao('Pautado na sessão de ' + nm, ds, () => ({ sp: 'SELECIONADO PREVIAMENTE', sd: nm, mono: '' })); } }
@@ -4002,7 +4032,7 @@ async function fnTemaNoTipo(d) { const o = IDX.get(d), t = o && fnTema(o); if (!
   const r = o.row || {}, base = cogDetalhamento(r).trim() || (o.assunto && o.assunto !== '—' ? o.assunto : ''), v = (base ? base + ' · ' : '') + 'Tema ' + t.n;
   try { await opcoesPainel().gravarFicha(o.cnj, { 'triagem.Detalhamento do caso': v }); toast('Detalhamento do caso: ' + v + '.'); refazAtTab(); } catch (e) { toast('Não gravou o tipo de caso: ' + ((e && e.message) || e), true); } }
 document.addEventListener('click', (e) => { const t = e.target.closest && e.target.closest('[data-atver],[data-fn-ok],[data-fn-col],[data-fn-mais],[data-fn-tc]'); if (!t) return; e.preventDefault(); e.stopPropagation();
-  if (t.dataset.atver) { LS.set('tri_atver', t.dataset.atver); document.querySelectorAll('[data-atver]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.atver === t.dataset.atver))); refazAtTab(); return; }
+  if (t.dataset.atver) { LS.set('cog_view_'+COG, t.dataset.atver); document.querySelectorAll('[data-atver]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.atver === t.dataset.atver))); refazAtTab(); return; }
   if (t.dataset.fnOk) { fnConfirmar([t.dataset.fnOk], t.dataset.fnK); return; }
   if (t.dataset.fnCol) { const k = t.dataset.fnCol, so = LS.get('tri_triar_tarefa', ''), q = nz(LS.get('tri_atq', '')).trim(), sf = LS.get('tri_atso', '');
     const ids=cogTriBaseIds();const L = funilTriagem()[k].filter((o) => ids.has(o.d)&&cogTriStatus(o)&&(!so || (o.tarefa || o.grupo || 'Triagem') === so) && (!q || q.split(/\s+/).every((x) => o.hay.includes(x))) && (!sf || (sf === 'com' ? atTri(o) : !atTri(o))) && (k === 'mono' ? o.dest.k !== 'mono' : o.dest.k !== 'pauta'));
@@ -4052,11 +4082,11 @@ function cogCriarLote(serie=false){
 D.addEventListener('click',e=>{if(e.target.closest('[data-cog-select-filtered]')){e.preventDefault();cogVisiveis().forEach(d=>SEL.add(d));render();return;}},true);
 function cogWorkspace(k,soTarefa=''){
  const tri=k==='triagem',P=cogTriRecorte(soTarefa),base=tri?cogTriRecorte(soTarefa,false):cogDestinoBase(k),name=tri?(soTarefa||'Processos em triagem'):COG_PAGES[k],sub=tri?'triar':'destino',loading=k==='selecao'&&!_colD.selecao;
- const modes=tri?[['lista','Matriz'],['funil','Funil'],['fluxo','Fluxo']]:[['lista','Matriz']];
+ const modes=tri?[['lista','Lista'],['matriz','Matriz'],['funil','Funil'],['fluxo','Fluxo']]:[['lista','Lista'],['matriz','Matriz']];
  const ctx=tri?'Processos nas tarefas do PJe':k==='mono'?'Decisões terminativas do relator · ativos e assinados':'Sessões futuras e banco de reserva';
  return '<div class="at cog-workspace"><p class="at-k">Cognitio · ficha única · '+esc(ctx)+(FONTE_EM?' · fonte de '+esc(String(FONTE_EM).slice(0,10).split('-').reverse().join('/')):'')+'</p><div class="cog-work-title"><h2 class="at-h">'+esc(name)+triExcelIcon('data-tri-xls="'+sub+'"'+(tri&&soTarefa?' data-xls-group="'+esc(soTarefa)+'"':'')+' data-xls-title="'+esc(name)+'"')+'</h2><small data-cog-work-count>'+nf(P.length)+' de '+nf(base.length)+' processos</small></div>'+
- '<div class="at-ver" role="group" aria-label="Ver como"><span>Ver como</span>'+modes.map(x=>'<button type="button" '+(tri?'data-atver="'+x[0]+'"':'')+' aria-pressed="'+(!tri||atVer()===x[0])+'">'+x[1]+'</button>').join('')+'</div>'+
- cogLoteBar()+'<div class="cog-list-tools cog-work-actions"><button type="button" class="btn sm" data-cog-select-filtered>Selecionar filtrados ('+nf(P.length)+')</button><button type="button" class="btn sm" data-cog-groups="open">Expandir grupos</button><button type="button" class="btn sm" data-cog-groups="close">Recolher grupos</button></div><div id="at-tab">'+(loading&&!P.length?'<div class="tri-ld">Lendo seleção prévia…</div>':tri?atCorpo(soTarefa):atTabela(''))+'</div></div>';
+ '<div class="cog-list-header"><div class="cog-list-header-main"><div class="at-ver" role="group" aria-label="Ver como"><span>Ver como</span>'+modes.map(x=>'<button type="button" '+'data-atver="'+x[0]+'" aria-pressed="'+(atVer()===x[0])+'">'+x[1]+'</button>').join('')+'</div>'+
+ cogLoteBar()+'</div><div class="cog-list-header-actions"><div id="cog-matrix-tools">'+(atVer()==='matriz'?cogListTools():'')+'</div><div class="cog-list-tools cog-work-actions"><button type="button" class="btn sm" data-cog-select-filtered>Selecionar filtrados ('+nf(P.length)+')</button><button type="button" class="btn sm" data-cog-groups="open">Expandir grupos</button><button type="button" class="btn sm" data-cog-groups="close">Recolher grupos</button></div></div></div><div id="at-tab">'+(loading&&!P.length?'<div class="tri-ld">Lendo seleção prévia…</div>':atCorpo(soTarefa))+'</div></div>';
 }
 function aTriarBands(soTarefa){
  if(COG_LOTES===null&&!COG_LOTE_ERR&&!COG_LOTE_LOADING)setTimeout(()=>{if(COG==='triagem'&&!COG_LOTE_LOADING&&COG_LOTES===null&&!COG_LOTE_ERR)cogLotesCarregar();},0);
