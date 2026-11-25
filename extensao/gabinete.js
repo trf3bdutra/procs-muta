@@ -280,7 +280,7 @@ function pilulas(E) {
     var pode = at || i === E.n - 1, tt = at ? 'Marcar hoje' : i === E.n - 1 ? 'Desfazer' : ok ? 'Feita' : 'Depois da etapa anterior';
     var quem = p[2] ? (G.desEd === p[2] ? '<input type="text" id="pm-des" data-des="' + p[2] + '" value="' + esc(d(p[2])) + '" placeholder="nome" aria-label="' + p[1] + '">' :
       '<button type="button" class="pl-q" data-des-ed="' + p[2] + '"' + (G.gestor ? ' title="Designar (Enter grava)"' : ' disabled title="Designação: só o gestor"') + '>' + esc(nome(p[2]) || 'a designar') + '</button>') : '';
-    return '<span class="pm-pl ' + p[3] + (ok ? ' ok' : at ? ' at' : '') + '"><button type="button" class="pl-e" data-et="' + i + '"' + (pode ? '' : ' disabled') + ' title="' + tt + '">' + esc(p[1]) + (p[2] ? ':' : '') + '</button>' + (quem ? ' ' + quem : '') +
+    return '<span class="pm-pl ' + p[3] + (ok ? ' ok' : at ? ' at' : '') + '"><button type="button" class="pl-e" data-et="' + i + '"' + (pode ? '' : ' disabled') + ' title="' + tt + '">' + SV(IC[p[0]]||IC.et,13) + esc(p[1]) + (p[2] ? ':' : '') + '</button>' + (quem ? ' ' + quem : '') +
       (dt ? '<span class="pl-d"> · ' + esc(dt) + '</span>' : '') + '</span>';
   }).join('');
 }
