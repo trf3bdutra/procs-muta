@@ -366,15 +366,15 @@
     var g = GB(); if (!g.cnj || !g.cnj()) return '<div class="empty">Abra um processo no PJe para gerar as peças.</div>';
     if (g.modelo && !g.modelo()) return '<div class="empty">Lendo o prontuário do processo ' + esc(g.cnj()) + '…</div>';
     /* 0.52.1 · ato monocrático: relatório e ementa do Gerador são de acórdão; a decisão monocrática se monta na Minuta-Matriz do Compendium */
-    if (g.destino && g.destino() === 'monocratica') return '<section class="card pc-sec gr-cfg"><div class="pc-sh"><h3>Gerador</h3><small class="muted">ato monocrático</small></div>' +
-      '<p class="muted">O Gerador monta relatório e ementa de acórdão. Este processo está com destino monocrático: a decisão se monta na Minuta-Matriz do Compendium (pronunciamento Monocrática). Se o destino estiver errado, corrija-o no cartão do processo.</p></section>';
+    if (g.destino && g.destino() === 'monocratica') return '<section class="card pc-sec gr-cfg"><div class="pc-sh"><h3>Minutário</h3><small class="muted">ato monocrático</small></div>' +
+      '<p class="muted">O Minutário monta relatório e ementa de acórdão. Este processo está com destino monocrático: a decisão se monta na Minuta-Matriz do Compendium (pronunciamento Monocrática). Se o destino estiver errado, corrija-o no cartão do processo.</p></section>';
     if (ST.cnj !== g.cnj()) { ST.cnj = g.cnj(); ST.tipo = ''; ST.res = ''; }
     var D = docs(); ULT = D;
     var chips = function (L, at, sel) { return L.map(function (o) { var k = Array.isArray(o) ? o[0] : o, r = Array.isArray(o) ? o[1] : o; return '<button type="button" class="chip' + (k === sel ? ' on' : '') + '" ' + at + '="' + esc(k) + '">' + esc(r) + '</button>'; }).join(''); };
     var relT = D.rel.join('\n'), emT = emTexto(D.em);
     var ai = D.tipo === 'Agravo de Instrumento';
     var aviso = !S(v('origem', 'Sentença - Resultado')) && !/Embargos|Interno|Retrata/.test(D.tipo) ? '<p class="gr-av">' + (ai ? 'A decisão agravada ainda não foi lida: em Prontuário › Autos › Peças e documentos › Decisão agravada, use "Extrair da peça" para trazer o que ela decidiu.' : 'A sentença ainda não foi lida: em Prontuário › Autos › Peças e documentos › Sentença, use "Extrair da peça" para trazer resultado e honorários.') + ' <button type="button" class="lnk" data-gr-ir="Autos">Abrir Autos</button></p>' : '';
-    return '<section class="card pc-sec gr-cfg"><div class="pc-sh"><h3>Gerador</h3><small class="muted">padrão do gabinete · nada é gravado</small></div>' +
+    return '<section class="card pc-sec gr-cfg"><div class="pc-sh"><h3>Minutário</h3><small class="muted">padrão do gabinete · nada é gravado</small></div>' +
       '<div class="gr-l"><span>Tipo de julgamento</span><div class="chips">' + chips(TIPOS, 'data-gr-tipo', D.tipo) + '</div></div>' +
       '<div class="gr-l"><span>Resultado</span><div class="chips">' + chips(opcoesRes(D.tipo), 'data-gr-res', D.k) + '</div></div>' + (D.k ? '' : '<p class="gr-av">Sem resultado do voto na ficha: escolha o resultado acima para completar a ementa (cabeçalho e item IV).</p>') + aviso + '</section>' +
       bloco('rel', 'Relatório', D.rel.map(function (p) { return '<p>' + marca(p) + '</p>'; }).join(''), conta(relT)) +
@@ -411,18 +411,21 @@
   function $(id) { return typeof document !== 'undefined' ? document.getElementById(id) : null; }
   /* 0.45: a aba CORTEX da Minuta é só do gestor */
   function gestor() { var x = window.MutaSessao && window.MutaSessao.estado ? window.MutaSessao.estado() : {}; return x.estado === 'on' && !!x.gestor; }
-  function modoMin() { try { var m = localStorage.getItem(MM_K); return m === 'ger' || m === 'conf' || m === 'dir' || (m === 'lote' && gestor()) ? m : 'cmp'; } catch (e) { return 'cmp'; } }
+  function modoMin() { try { var m = localStorage.getItem(MM_K); return m === 'ger' || m === 'conf' || m === 'dir' ? m : 'cmp'; } catch (e) { return 'cmp'; } }
   function visivel() { var p = $('panel-min'), g = $('ger-app'); return !!(p && !p.hidden && g && !g.hidden); }
   function pintar(forca) {
     var g = $('ger-app'); if (!g || (!forca && !visivel())) return;
     var p = $('panel-min'), y = p ? p.scrollTop : 0;
-    try { g.innerHTML = html(); } catch (e) { g.innerHTML = '<div class="empty">Gerador indisponível: ' + esc(e && e.message || e) + '</div>'; }
+    try { g.innerHTML = html(); } catch (e) { g.innerHTML = '<div class="empty">Minutário indisponível: ' + esc(e && e.message || e) + '</div>'; }
     if (p) p.scrollTop = y;
   }
   function modo(m) {
-    m = m === 'ger' || m === 'conf' || m === 'dir' || (m === 'lote' && gestor()) ? m : 'cmp'; try { localStorage.setItem(MM_K, m); } catch (e) {}
+    if (m === 'cor') { try { m = localStorage.getItem('hero18810:corModo') === 'conf' ? 'conf' : 'cmp'; } catch(e) { m = 'cmp'; } }
+    if (m === 'cmp' || m === 'conf') { try { localStorage.setItem('hero18810:corModo',m); } catch(e) {} }
+    m = m === 'ger' || m === 'conf' || m === 'dir' ? m : 'cmp'; try { localStorage.setItem(MM_K, m); } catch (e) {}
     var bl = typeof document !== 'undefined' ? document.querySelector('[data-mm="lote"]') : null; if (bl) bl.hidden = !gestor();
-    var ger = m === 'ger';
+    var ger = m === 'ger', cor = m === 'cmp' || m === 'conf';
+    var cm = $('cor-modos'); if(cm) cm.hidden = !cor;
     /* Comparar (com o CORTEX embaixo) | Gerador | Conformidade */
     var ca = $('cmp-app'); if (ca) ca.hidden = m !== 'cmp';
     /* 0.45: o CORTEX saiu de baixo do Comparar e virou aba própria, só do gestor */
@@ -432,7 +435,7 @@
     var dr = $('dir-app'); if (dr) dr.hidden = m !== 'dir';
     if (m === 'dir' && window.MutaDiretrizes && window.MutaDiretrizes.abrir) window.MutaDiretrizes.abrir();
     if (m === 'conf' && window.MutaConformidade && window.MutaConformidade.abrir) window.MutaConformidade.abrir();
-    if (typeof document !== 'undefined') Array.prototype.forEach.call(document.querySelectorAll('[data-mm]'), function (b) { b.setAttribute('aria-selected', String(b.dataset.mm === m)); });
+    if (typeof document !== 'undefined') Array.prototype.forEach.call(document.querySelectorAll('[data-mm]'), function (b) { b.setAttribute('aria-selected', String(b.dataset.mm === m || (b.dataset.mm === 'cor' && cor))); });
     if (ger) pintar(true);
   }
   function abrir() { modo(modoMin()); }
