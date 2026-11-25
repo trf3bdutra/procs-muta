@@ -170,3 +170,17 @@ body.dsk #x-main .dtabs .dpill{align-self:center;margin:0 0 4px;flex:0 1 auto}
 body.dsk #x-main .dtabs .dtsp{display:block;flex:1 1 auto}
 @media(max-width:1050px){body.dsk #x-main .dtabs .dpillw{display:flex;order:0;width:100%;justify-content:flex-start}body.dsk #x-main .dtabs .dtsp{display:none}}
 @media print{#dk-conf,#cq-prec-panel{display:none!important}}
+
+/* Caso, estrutura e modelo: um único módulo, com as ações na linha das partes. */
+#x-top .d-unica{display:grid!important;grid-template-columns:minmax(0,1fr);gap:8px!important;padding:10px 12px!important;border:1px solid var(--line);background:var(--panel)}
+#x-top .d-unica>.d-caso-grupo,#x-top .d-unica>.d-estrutura-grupo{display:flex;flex-wrap:wrap;align-items:center;gap:8px;min-width:0}
+#x-top .d-unica>.d-estrutura-grupo:empty{display:none}
+#x-top .d-unica .dgrp{background:transparent;border:0;max-width:100%;min-width:0;padding:0}
+#x-top .d-unica .d-estrutura-grupo,#x-top .d-unica>.dtxt{border-top:1px solid var(--line);padding-top:8px}
+#x-top .d-unica>.dtxt{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+#x-top .d-unica .dbsp{display:none}
+#x-top .d-unica .dmodl{flex:1 1 260px!important}
+#x-top .d-unica .dglab{min-width:104px;flex:0 0 auto}
+#x-top .d-unica .dexp{margin-left:auto}
+body.dsk #x-main .dtabs{align-items:center}
+@media(max-width:860px){#x-top .d-unica .dglab{flex:1 0 100%;min-width:0}#x-top .d-unica>.dtxt{align-items:stretch}}

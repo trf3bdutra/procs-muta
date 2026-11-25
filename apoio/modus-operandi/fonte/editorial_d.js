@@ -349,14 +349,14 @@ function dkResumo(t){if(XP.fora[t.k])return 'retirado';if(t.opc&&!XP.abre[t.k])r
 function dkOutros(pt,sel){var L=pt.tr.filter(function(t){return !(t.n==='Sentença'&&sentNaAbertura(pt.tr,XP.alt));});if(L.length<2)return '';
   return '<div class="dout2"><div class="cfl">'+(sel?'Outros blocos':'Blocos da parte')+'</div><ol>'+L.map(function(t,i){if(sel&&t.k===sel.k)return '';var fo=XP.fora[t.k],op=t.opc&&!XP.abre[t.k];return '<li><button type="button" data-'+(fo?'xvolta':op?'xabre':'dsel')+'="'+esc(t.k)+'"><span class="n">'+('0'+(i+1)).slice(-2)+'</span><b>'+esc(t.n)+'</b><small>'+esc(dkResumo(t))+' ›</small></button></li>';}).join('')+'</ol></div>';}
 function dkHead(){var h=$('#v-edit .pg-h');if(!h)return;var ed=XS.ed||'pecas',t=$('#v-edit .pg-t h1'),k=$('#v-edit .pg-t .dkk');if(!k&&t){k=document.createElement('p');k.className='dkk';t.parentNode.insertBefore(k,t);}
-  var I={pecas:['PADRÃO · MINUTÁRIO','Minutário','Estrutura do pronunciamento conforme o tipo de julgamento. Ao abrir um processo, os campos recebem os dados disponíveis da ficha e da pauta. Na ausência de modelo específico, a Minuta-Matriz sustenta a redação; modelos temáticos são oferecidos separadamente.','Parte das funcionalidades ainda está em construção e teste.'],par:['PADRÃO · PARÁGRAFOS','Parágrafos-padrão','Trechos prontos por matéria e situação, com campos que se preenchem com o caso. Busque, abra e copie para a minuta.',''],mod:['PADRÃO · MODELOS','Modelos','Modelos de acórdão, decisão e despacho extraídos de votos e decisões do Relator, para consulta.','Os modelos ainda não são regra do gabinete: a curadoria está em andamento e a maior parte deles não foi revisada como padrão. Já disponível: busca e filtros por tipo, julgamento, assunto e classe; leitura da peça completa, com ficha e referências rápidas; preenchimento das variáveis pelo número do processo; cópia da peça ou do esqueleto, .docx e PDF.'],dir:['BREVIÁRIO DO GABINETE','Breviário','Entradas rápidas do que o Desembargador fixar e o manual de redação do gabinete: frase, citação, vocabulário, grafias, formatação e estrutura das peças.']}[ed]||['','Editorial',''];
+  var I={pecas:['PADRÃO · MINUTÁRIO','Minutário','Estrutura do pronunciamento conforme o tipo de julgamento. Ao abrir um processo, os campos recebem os dados disponíveis da ficha e da pauta. Na ausência de modelo específico, a Minuta-Matriz sustenta a redação; modelos temáticos são oferecidos separadamente.',''],par:['PADRÃO · PARÁGRAFOS','Parágrafos-padrão','Trechos prontos por matéria e situação, com campos que se preenchem com o caso. Busque, abra e copie para a minuta.',''],mod:['PADRÃO · MODELOS','Modelos','Modelos de acórdão, decisão e despacho extraídos de votos e decisões do Relator, para consulta.','Os modelos ainda não são regra do gabinete: a curadoria está em andamento e a maior parte deles não foi revisada como padrão. Já disponível: busca e filtros por tipo, julgamento, assunto e classe; leitura da peça completa, com ficha e referências rápidas; preenchimento das variáveis pelo número do processo; cópia da peça ou do esqueleto, .docx e PDF.'],dir:['BREVIÁRIO DO GABINETE','Breviário','Entradas rápidas do que o Desembargador fixar e o manual de redação do gabinete: frase, citação, vocabulário, grafias, formatação e estrutura das peças.']}[ed]||['','Editorial',''];
   if(k)k.textContent=I[0];if(t)t.textContent=I[1];var d=$('#x-desc');if(d)d.textContent=I[2];var dv=$('#x-dev');if(!dv&&d){dv=document.createElement('p');dv.id='x-dev';d.parentNode.insertBefore(dv,d.nextSibling);}if(dv){dv.hidden=!I[3];dv.innerHTML=I[3]?'<b>Em desenvolvimento.</b> '+esc(I[3]):'';}
   var sb=$('#x-sub');if(sb&&!sb.querySelector('.dgp')){var gp=document.createElement('span');gp.className='dgp';gp.setAttribute('role','group');gp.setAttribute('aria-label','Padrão: versões alternativas');gp.innerHTML='<span class="dgl" data-n="01">Padrão</span><span class="dgs"></span>';
     sb.insertBefore(gp,sb.firstChild);['pecas','mod'].forEach(function(k){var b=sb.querySelector('button[data-s="'+k+'"]');if(b)gp.querySelector('.dgs').appendChild(b);});}
   $$('#x-sub button').forEach(function(b){var k=b.getAttribute('data-s'),n={dir:'02'}[k];if(n)b.setAttribute('data-n',n);else b.removeAttribute('data-n');var tx={pecas:'Minutário',mod:'Modelos',dir:'Breviário'}[k];if(tx&&b.textContent!==tx)b.textContent=tx;});}
 document.addEventListener('click',function(e){if(e.target.closest&&e.target.closest('#x-sub button'))setTimeout(dkHead,0);});
 function xPagina(){
-  if(dk28()){var w28=$('#x-wrap'),t28=$('#x-top');if(!t28){t28=document.createElement('div');t28.id='x-top';w28.insertBefore(t28,w28.firstChild);}t28.innerHTML=dkBarra2();dkModo28(true);CQX.render28();dkHead();return;}
+  if(dk28()){var w28=$('#x-wrap'),t28=$('#x-top');if(!t28){t28=document.createElement('div');t28.id='x-top';w28.insertBefore(t28,w28.firstChild);}t28.innerHTML=dkBarraUnica(true);dkModo28(true);CQX.render28();dkHead();return;}
   dkModo28(false);
   var PT=xPartes(),FMT=((ED.pecas.forma.filter(function(f){return f.t==='Formatação para o PJe';})[0]||{}).r)||[];XP._PT=PT;xAuto(PT);
   var ids=PT.map(function(p){return p.id;}),sel=null;
@@ -365,7 +365,7 @@ function xPagina(){
   if(sel)DK.parte=sel.pt.id;else if(ids.indexOf(DK.parte)<0)DK.parte=ids.indexOf('relatorio')>=0?'relatorio':ids[0];
   var pt=PT.filter(function(p){return p.id===DK.parte;})[0];XP._SEL=sel?sel.t:null;
   var wrap=$('#x-wrap'),top=$('#x-top');if(!top){top=document.createElement('div');top.id='x-top';wrap.insertBefore(top,wrap.firstChild);}
-  top.innerHTML=xBarra()+dkBarra2();
+  top.innerHTML=dkBarraUnica();
   /* folha */
   var tabs='<div class="dtabs" role="tablist" aria-label="Partes da peça">'+PT.map(function(p,i){var n=p.tr.filter(function(t){return !t.opc&&!xSai(t,p.tr,XP.alt,XP.fora);}).length;return '<button type="button" class="ftab'+(p.id===DK.parte?' on':'')+'" role="tab" aria-selected="'+(p.id===DK.parte)+'" data-dparte="'+p.id+'"><span class="n">'+('0'+(i+1)).slice(-2)+'</span>'+esc(p.t)+'<small>'+n+'</small></button>';}).join('')+'<span class="dtsp"></span>'+(PT.length>1?'<button type="button" class="dcpp" data-xcpp="'+pt.id+'" title="Copiar '+esc(pt.t.toLowerCase())+' com a formatação do PJe">'+DICO.copy+'<span> Copiar '+esc(pt.t.toLowerCase())+'</span></button>':'')+'</div>';
   var h=pt.pj?'<div class="dpj" id="xp-'+pt.id+'">'+esc(pt.pj)+' <small>(inserido pelo PJe)</small></div>':'<div id="xp-'+pt.id+'" style="height:6px"></div>',aposVoc=false,opcs=[];
@@ -630,8 +630,8 @@ var _xLimparBase=xLimpar;xLimpar=function(){DK.inc={};DK.pick='';dkGuarda();_xLi
 function dkJulgDe(m){return ({ed:'ed',ain:'agint',ai:'ai',rn:'rn',apc:'ap',ades:'ap'})[rrTipoJulg(m)]||'';}
 function dkJulgAtual(){if(XP.pc==='acordao'){var v=XP.v.acordao;return {ap:'ap',dap:'ap',aprn:'ap',ai:'ai',ed:'ed',agint:'agint'}[v]||'';}return XP.v.decisao==='desp'?'':({ap:'ap',ai:'ai',rn:'rn'})[XP.mrec]||'';}
 function dkModOpts(){
-  if(!BASE)return '<option value="">carregando os modelos…</option>';
-  var pr=dkPron(),q=nz(DK.modq||''),cur=DK.fonte==='m28'?'':DK.mod,jg=dkJulgAtual(),R=window.CQX&&CQX.tem()&&CQX.R(),ja={},o='<option value="">'+(q?'Escolha entre os filtrados':'Escolha o modelo')+'</option>';
+  if(!BASE)return '<option value="">Minuta-Matriz · padrão</option><option disabled>Carregando os modelos…</option>';
+  var pr=dkPron(),q=nz(DK.modq||''),cur=DK.fonte==='mod'?DK.mod:'',jg=dkJulgAtual(),R=window.CQX&&CQX.tem()&&CQX.R(),ja={},o='<option value=""'+(DK.fonte==='mat'?' selected':'')+'>Minuta-Matriz · padrão</option>';
   var L=(BASE.mod||[]).filter(function(m){if(dkPronMod(m)!==pr)return false;if(!q||m.id===cur)return true;if(!m._dq)m._dq=nz([m.nomeModelo,m.assunto,m.temas,m.tese,m.classe,m.resultado,mTextoBase(m)].join(' '));return m._dq.indexOf(q)>=0;});
   function op(m,pre){ja[m.id]=1;var n=String(m.nomeModelo||m.id);return '<option value="'+esc(m.id)+'"'+(m.id===cur?' selected':'')+' title="'+esc(n)+'">'+esc((pre||'')+(n.length>110?n.slice(0,108)+'…':n))+'</option>';}
   if(window.CQX&&CQX.e28()&&pr==='ac'&&(!q||'28,86% cumprimento individual acp matriz'.indexOf(q)>=0||DK.fonte==='m28'))o+='<optgroup label="Matrizes"><option value="m28"'+(DK.fonte==='m28'?' selected':'')+'>★ 28,86% · cumprimento individual da ACP</option></optgroup>';
@@ -642,14 +642,13 @@ function dkModOpts(){
   if(outros.length)o+='<optgroup label="Outros tipos de julgamento">'+outros.map(function(m){return op(m);}).join('')+'</optgroup>';
   return o;}
 function dkBarraTexto(){var e28=!!(window.CQX&&CQX.e28()),f=DK.fonte==='m28'&&!e28?'mat':DK.fonte,m=dkModelo(),fora=f==='mod'&&m&&dkPronMod(m)!==dkPron();
-  var h='<div class="dgrp dtxt"><span class="dglab">Texto da folha</span><div class="dseg" role="group" aria-label="Texto da folha">'+
-    [['mat','Minuta-Matriz'],['mod','Modelo']].map(function(o){return '<button type="button" data-dfonte="'+o[0]+'" aria-pressed="'+(f===o[0]||(o[0]==='mod'&&f==='m28'))+'">'+o[1]+'</button>';}).join('')+'</div>';
+  var h='<div class="dgrp dtxt"><span class="dglab">Modelo da peça</span>';
   h+='<label class="dmodl"><span>Modelo</span><select data-dmod aria-label="Modelo do gabinete">'+dkModOpts()+'</select></label><label class="dmodq"><input data-dmodq type="search" autocomplete="off" value="'+esc(DK.modq||'')+'" placeholder="filtrar modelos" aria-label="Filtrar modelos"></label>'+(window.CQX&&CQX.tem()?'<button type="button" class="dsug-b" data-dsug aria-expanded="'+!!DK.sug+'" title="Modelos sugeridos para o processo aberto">Para o caso ▾</button>':'');
   h+='</div>';
   if(fora)h+='<span class="dcx-nota">O modelo escolhido é de '+esc(mTipo(m).toLowerCase())+': a folha segue a Minuta-Matriz neste pronunciamento.</span>';
   else if(f==='mod'&&!m&&BASE)h+='<span class="dcx-nota">Escolha um modelo: até lá, a folha segue a Minuta-Matriz.</span>';
   return h;}
-function dkBarra2(){return '<div class="dbar d2">'+(window.CQX?CQX.barra():'')+'<span class="dbsp"></span>'+dkBarraTexto()+'</div>'+(window.CQX?CQX.extra():'');}
+function dkBarraUnica(modular){var estrutura=modular?'':xBarra().replace(/^<div class="dbar">/,'').replace(/<\/div>$/,'').replace('<div class="dgrp">','<div class="dgrp destrutura"><span class="dglab">Estrutura da peça</span>');return '<div class="dbar d-unica"><div class="d-caso-grupo">'+(window.CQX?CQX.barra():'')+'</div><div class="d-estrutura-grupo">'+estrutura+'</div>'+dkBarraTexto()+'</div>'+(window.CQX?CQX.extra():'');}
 function dkFonte(v){if(v==='m28'&&!(window.CQX&&CQX.e28()))return;
   if(v==='mod'&&!dkModelo()){DK.rtab='caso';xPagina();var q=document.querySelector('[data-dmodq]');if(q)q.focus();return;}
   if(v==='mat'){DK.mod='';var P=window.CQX&&CQX.tem()?CQX.P():null;if(P){dkAplicaCaso(P,{tipo:'mat',mat:CQX.matrizDoCaso(P)});return;}}
@@ -741,7 +740,7 @@ document.addEventListener('click',function(e){var t=e.target,b;if(!t.closest||!t
   if((b=t.closest('[data-dincmv]'))){fim();var p2=b.getAttribute('data-dincmv').split('|'),d=+p2.pop(),i2=+p2.pop(),k3=p2.join('|'),M=DK.inc[k3]||[],j2=i2+d;if(j2<0||j2>=M.length)return;var tmp=M[i2];M[i2]=M[j2];M[j2]=tmp;dkGuarda();xPagina();return;}
 },true);
 document.addEventListener('change',function(e){var t=e.target;if(!t.matches||!t.closest('#v-edit'))return;
-  if(t.matches('[data-dmod]')){if(!t.value)return;if(t.value==='m28'){dkFonte('m28');return;}dkUsaModelo(t.value);}});
+  if(t.matches('[data-dmod]')){if(!t.value){dkFonte('mat');return;}if(t.value==='m28'){dkFonte('m28');return;}dkUsaModelo(t.value);}});
 document.addEventListener('input',function(e){var t=e.target;if(!t.matches||!t.closest('#v-edit'))return;
   if(t.matches('[data-dmodq]')){DK.modq=t.value;var s=document.querySelector('#x-top [data-dmod]');if(s)s.innerHTML=dkModOpts();return;}
   if(t.id==='dk-pickq'){DK.pickq=t.value;var ol=$('#dk-pickl'),sel=XP._SEL;if(ol&&sel&&window.CQX)ol.innerHTML=CQX.pickLista(sel.n,sel.k,DK.pickq);

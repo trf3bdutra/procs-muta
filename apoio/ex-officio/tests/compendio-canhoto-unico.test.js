@@ -94,3 +94,5 @@ test('Minutário: fórmula única, ficha fornece dados, não um construtor paral
 });
 
 test('Minutário: conformidade no banner, precedentes na barra e sem gerador LIA',()=>{const js=ler('fonte/editorial_d.js'),pa=ler('fonte/padrao_paginas.js'),cq=ler('fonte/consulta.js'),build=ler('fonte/build.py');assert.match(pa,/data-dconfmin aria-controls="dk-conf"/);assert.match(js,/banner.appendChild\(el\)/);assert.match(cq,/data-cq-prec aria-controls="cq-prec-panel"/);assert.match(cq,/function precedentesCaso\(/);assert.doesNotMatch(cq,/liaPainel|liaMontar|liaAcao|CQ\.lia|data-lia/);assert.doesNotMatch(build,/LIA3|id="lia-v3"|id="lia-gerar"/);});
+
+test('Minutário: barra única e seletor de modelo com retorno à Minuta-Matriz',()=>{const js=ler('fonte/editorial_d.js');assert.match(js,/top.innerHTML=dkBarraUnica\(\)/);assert.match(js,/Minuta-Matriz · padrão/);assert.doesNotMatch(js,/Parte das funcionalidades ainda está em construção e teste/);assert.doesNotMatch(js,/dkBarra2\(/);assert.match(js,/if\(!t.value\)\{dkFonte\('mat'\);return;\}/);});
