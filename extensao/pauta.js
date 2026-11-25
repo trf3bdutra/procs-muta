@@ -14,8 +14,9 @@
   var dg = function (s) { return S(s).replace(/\D/g, ''); };
   var br = function (d) { var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(S(d)); return m ? m[3] + '/' + m[2] + '/' + m[1] : S(d); };
   var hoje = function () { return new Date(Date.now() - 4 * 3600e3).toISOString().slice(0, 10); };
-  var P = { cal: null, data: '', doc: null, ped: null, pedPauta: null, pedErro: false, erro: '', lendo: false, f: 'todos', aba: 'itens', solFiltro: 'todas', aberto: false, seq: 0 };
+  var P = { cal: null, data: '', doc: null, ped: null, pedPauta: null, pedErro: false, erro: '', lendo: false, f: 'todos', aba: 'itens', solFiltro: 'todas', solTipo: 'todas', aberto: false, seq: 0 };
 
+  var solEditor=null,solCnj='',solEditOpen=false;
   function GB() { return window.MutaGabinete || {}; }
   function app() { return $('pauta-app'); }
   function visivel() { var p = $('panel-pauta'); return !!(p && !p.hidden); }
@@ -109,26 +110,22 @@
   /* 0.64: sigla da classe (TPU/CNJ) e recurso julgado dentro do processo */
   function etqCl(it) { var e2 = window.ClassesCNJ ? window.ClassesCNJ.etiqueta(it.classe, ((it.ctl || {}).cartao || {}).tipoJ || '') : null; return e2 && e2.t ? ' <span class="pc-cl pa-cl" title="' + esc(e2.nome) + '">' + esc(e2.t) + '</span>' : ''; }
 
+  function solGrupo(t){t=S(t);return /sustenta|presenc|video|virtual/i.test(t)?'so':/prefer/i.test(t)?'pref':/retirada|adiamento/i.test(t)?'alt':/despacho/i.test(t)?'desp':'out';}
   function solicitacoesHtml(itens){
     var externas=(P.pedPauta||[]).filter(function(r){return sesDe(r)===P.data;}),internas=(P.doc&&P.doc.solicitacoes)||[];
-    var pend=internas.filter(function(r){return r.estado==='Pendente';}).length,av=externas.filter(aVincular).length;
-    var h='<div class="pa-sol-resumo"><b>'+internas.length+' internas</b><span>'+pend+' pendentes</span><b>'+externas.length+' externas</b><span>'+av+' a vincular</span></div>';
-    h+='<div class="pa-f" role="group" aria-label="Filtrar solicitações">'+[['todas','Todas'],['internas','Internas'],['externas','Sustentações e preferências'],['pendentes','Pendentes / a vincular']].map(function(x){return '<button type="button" class="chip'+(P.solFiltro===x[0]?' on':'')+'" data-pa="sol:'+x[0]+'" aria-pressed="'+(P.solFiltro===x[0])+'">'+esc(x[1])+'</button>';}).join('')+'</div>';
+    var L=internas.map(function(r){return {r:r,ex:false,g:solGrupo(r.tipo),estado:S(r.estado)||'Pendente'};}).concat(externas.map(function(r){return {r:r,ex:true,g:solGrupo(tipoPed(r)),estado:aVincular(r)?'a vincular':'Vinculada'};}));
+    var G=[['so','Sustentações orais'],['pref','Preferências'],['alt','Retirada / adiamento'],['desp','Despachos'],['out','Outras solicitações']];
+    var h='<div class="pa-sol-resumo"><b>'+L.length+' solicitações</b><span>'+L.filter(function(x){return x.estado==='Pendente';}).length+' pendentes</span><b>'+externas.length+' pedidos externos</b><span>'+externas.filter(aVincular).length+' a vincular</span></div>';
+    h+='<div class="pa-f" role="group" aria-label="Tipo de solicitação">'+[['todas','Todas']].concat(G).map(function(x){var n=x[0]==='todas'?L.length:L.filter(function(v){return v.g===x[0];}).length;return '<button type="button" class="chip'+(P.solTipo===x[0]?' on':'')+'" data-pa="tipo:'+x[0]+'" aria-pressed="'+(P.solTipo===x[0])+'">'+esc(x[1])+' · '+n+'</button>';}).join('')+'</div>';
+    h+='<div class="pa-session-head"><label class="pa-sel"><span class="sr">Situação</span><select data-pa="sol-estado">'+[['todas','Todas as situações'],['pendentes','Pendentes'],['deferidas','Deferidas'],['indeferidas','Indeferidas'],['vincular','A vincular'],['vinculadas','Vinculadas']].map(function(x){return '<option value="'+x[0]+'"'+(P.solFiltro===x[0]?' selected':'')+'>'+x[1]+'</option>';}).join('')+'</select></label><button type="button" class="btn line sm" data-pa="editor">'+(solEditOpen?'Fechar gestão do processo':'+ Solicitação / gestão')+'</button></div>';
+    if(solEditOpen)h+='<div id="pa-sol-editor"><p class="muted">Selecione um processo para registrar ou apreciar solicitações.</p></div>';
     if(P.pedErro)h+='<p class="status err">Não foi possível atualizar os pedidos externos.</p>';
     if(!P.doc||P.doc.solicitacoesErro||!Array.isArray(P.doc.solicitacoes))h+='<p class="status err">'+esc(P.doc&&P.doc.solicitacoesErro||'Solicitações internas indisponíveis nesta versão da API.')+'</p>';
-    var f=P.solFiltro;
-    if(f!=='externas'){
-      var L=internas.filter(function(r){return f!=='pendentes'||r.estado==='Pendente';});
-      h+='<h4 class="pm-mer-h">Solicitações internas</h4>';
-      if(!L.length)h+='<p class="muted">Nenhum registro nesta visualização.</p>';
-      L.forEach(function(r){h+='<article class="gx-it pa-ped"><div class="gx-h"><b class="gx-t">'+esc(r.tipo)+'</b><span class="gx-c">'+esc(r.estado)+'</span>'+(r.item?'<span class="gx-c">item '+esc(r.item)+'</span>':'')+'</div><p class="gx-m"><button type="button" class="lnk mono" data-pa="sol-abrir:'+esc(r.cnj)+'">'+esc(r.cnj)+'</button></p><p class="gx-m">'+esc([r.origem,r.solicitante,br(S(r.data).slice(0,10)),r.inferido?'vínculo pela pauta atual':''].filter(Boolean).join(' · '))+'</p>'+(r.sessaoPretendida?'<p class="gx-m">Sessão pretendida: '+esc(br(r.sessaoPretendida))+'</p>':'')+(r.justificativa||r.descricao?'<p class="gx-tx">'+esc(r.justificativa||r.descricao)+'</p>':'')+(r.resposta?'<p class="gx-ob">'+esc(r.resposta)+'</p>':'')+(r.decididoPor?'<p class="gx-m">Apreciada por '+esc(r.decididoPor)+' · '+esc(br(S(r.decididoEm).slice(0,10)))+'</p>':'')+'</article>';});
-    }
-    if(f!=='internas'){
-      h+='<h4 class="pm-mer-h">Sustentações orais e preferências</h4>';
-      var E=externas.filter(function(r){return f!=='pendentes'||aVincular(r);});
-      h+=E.length?E.map(function(r){return pedCard(r,{itens:itens,ses:1});}).join(''):'<p class="muted">Nenhum pedido nesta visualização.</p>';
-    }
-    return h;
+    var estados={pendentes:'Pendente',deferidas:'Deferida',indeferidas:'Indeferida',vincular:'a vincular',vinculadas:'Vinculada'};
+    var vis=L.filter(function(x){return (P.solTipo==='todas'||x.g===P.solTipo)&&(P.solFiltro==='todas'||x.estado===estados[P.solFiltro]);});
+    G.forEach(function(gr){var A=vis.filter(function(x){return x.g===gr[0];});if(!A.length)return;h+='<h4 class="pm-mer-h">'+esc(gr[1])+' · '+A.length+'</h4>';A.forEach(function(x){var r=x.r;if(x.ex){h+=pedCard(r,{itens:itens,ses:1});return;}
+      h+='<article class="gx-it pa-ped"><div class="gx-h"><b class="gx-t">'+esc(r.tipo)+'</b><span class="gx-c">'+esc(x.estado)+'</span>'+(r.item?'<span class="gx-c">item '+esc(r.item)+'</span>':'')+'</div><p class="gx-m"><button type="button" class="lnk mono" data-pa="gerir:'+esc(r.cnj)+'">'+esc(r.cnj)+'</button></p><p class="gx-m">'+esc([r.origem,r.solicitante,br(S(r.data).slice(0,10)),r.inferido?'vínculo pela pauta atual':''].filter(Boolean).join(' · '))+'</p>'+(r.sessaoPretendida?'<p class="gx-m">Sessão pretendida: '+esc(br(r.sessaoPretendida))+'</p>':'')+(r.justificativa||r.descricao?'<p class="gx-tx">'+esc(r.justificativa||r.descricao)+'</p>':'')+(r.resposta?'<p class="gx-ob">'+esc(r.resposta)+'</p>':'')+(r.decididoPor?'<p class="gx-m">Apreciada por '+esc(r.decididoPor)+' · '+esc(br(S(r.decididoEm).slice(0,10)))+'</p>':'')+'</article>';});});
+    return h+(vis.length?'':'<p class="muted">Nenhuma solicitação nesta visualização.</p>');
   }
 
   function listaHtml() {
@@ -185,6 +182,7 @@
     if (s.estado !== 'on') { c.innerHTML = '<div class="empty">Entre no Ex Officio (aba Prontuário) para ver as pautas.</div>'; return; }
     var y = c.scrollTop;
     c.innerHTML = (P.erro ? '<p class="status err">' + esc(P.erro) + '</p>' : '') + listaHtml();
+    var host=$('pa-sol-editor');if(host&&solEditor&&dg(solCnj)===dg(GB().cnj&&GB().cnj())){host.replaceChildren();var head=document.createElement('p');head.className='muted';head.textContent='Processo em gestão · '+solCnj;host.append(head,solEditor);}
     c.scrollTop = y;
   }
 
@@ -193,6 +191,9 @@
     var b = e.target.closest && e.target.closest('#pauta-app [data-pa]'); if (!b) return;
     var a = b.getAttribute('data-pa');
     if (/^aba:/.test(a)) { P.aba=a.slice(4);pintar();return; }
+    if(a==='editor'){solEditOpen=!solEditOpen;pintar();return;}
+    if(/^tipo:/.test(a)){P.solTipo=a.slice(5);pintar();return;}
+    if(/^gerir:/.test(a)){solEditOpen=true;var n=a.slice(6),brg=window.MutaProntuarioBridge;if(brg&&brg.abrirProcesso)brg.abrirProcesso(n);pintar();return;}
     if (/^sol:/.test(a)) { P.solFiltro=a.slice(4);pintar();return; }
     if (/^sol-abrir:/.test(a)) { var n=a.slice(10),brg=window.MutaProntuarioBridge;if(brg&&brg.abrirProcesso)brg.abrirProcesso(n);if(window.MutaAbas)window.MutaAbas.ir('pront');return; }
     if (/^f:/.test(a)) { P.f = a.slice(2); pintar(); return; }
@@ -200,6 +201,7 @@
   });
   document.addEventListener('change', function (e) {
     var t = e.target; if (!t || !t.closest || !t.closest('#pauta-app')) return;
+    if(t.getAttribute('data-pa')==='sol-estado'){P.solFiltro=t.value;pintar();return;}
     if (t.getAttribute('data-pa') === 'ses') { trocar(t.value); return; }
     if (t.getAttribute('data-pa-vi')) { vincular(t.getAttribute('data-pa-vi'), t.value); return; }
     if (t.dataset && t.dataset.fk && GB().marcar) { GB().marcar(t.dataset.fk, t.value); if (GB().gravar) GB().gravar().catch(function () {}); }
@@ -223,5 +225,5 @@
     pedConsulta.then(desenhar,function(){if(node.isConnected)node.innerHTML='<p class="muted">Não foi possível consultar as solicitações.</p>';});
   }
   function registrarPedido(p){return ses.api('/api/sessoes?pedidos=1',{method:'POST',body:JSON.stringify(Object.assign({manual:true},p))}).then(function(j){pedConsultadoEm=0;return j;});}
-  window.MutaPauta = { pedidosProcesso: pedidosProcesso, registrarPedido: registrarPedido, abrir: function () { if (!P.cal || !P.doc) ler(); else { pintar(); if(P.data&&!P.lendo)trocar(P.data); } }, pintar: pintar, etapa: etapa, alertas: alertas };
+  window.MutaPauta = { receberEditor:function(cnj,node){solCnj=cnj;solEditor=node;if(visivel()&&P.aba==='sol'&&solEditOpen)pintar();}, pedidosProcesso: pedidosProcesso, registrarPedido: registrarPedido, abrir: function () { if (!P.cal || !P.doc) ler(); else { pintar(); if(P.data&&!P.lendo)trocar(P.data); } }, pintar: pintar, etapa: etapa, alertas: alertas };
 })();
