@@ -1036,8 +1036,10 @@ function heroOrganizarProntuario(){
   var ctl=aut.querySelector('.pm-ctl2');if(ctl){var ch=ctl.previousElementSibling;if(ch&&ch.tagName==='H4'&&/^Controles/.test(ch.textContent))ch.remove();ctlGroup.append(ctl);}
   body.append(ctlGroup);
   var notes=caixa.querySelector('#g-nt');if(notes){var noteBox=el('details','hero-case-notes'),noteHead=el('summary');noteHead.innerHTML=SV(IC.nt,13);noteHead.append(el('span','','Notas do caso'),el('small','muted',String(notasL().length)));noteBox.append(noteHead,notes);noteBox.open=!!heroTopo.notas;noteBox.addEventListener('toggle',function(){if(noteBox.isConnected)heroTopo.notas=noteBox.open;});notes.classList.add('hero-notes-inner');var nh=notes.querySelector('.pc-sh h3');if(nh)nh.remove();id.insertBefore(noteBox,steps);}
-  var prior=caixa.querySelector('#pv-acomp');if(prior){var pb=prior.querySelector('.pv-acomp-b');if(pb)while(pb.firstChild)body.append(pb.firstChild);prior.remove();}
-  if(resp){var enc=resp.querySelector('.pm-enc');if(enc)body.append(enc);resp.remove();}
+  /* O Acompanhamento é proprietário dos campos, não depende do DOM da aba Triagem. */
+  var prior=caixa.querySelector('#pv-acomp');if(prior)prior.remove();
+  caixa.querySelectorAll('#pv-tri-enc,.pv-followup').forEach(function(x){x.remove();});
+  if(resp)resp.remove();
   var sel=caixa.querySelector('.rt-tsel');
   if(!sel&&window.MutaRoteiro){var tmp=el('div');html(tmp,corpoRoteiro());sel=tmp.querySelector('.rt-tsel');}
   if(sel){sel.classList.add('hero-tipo-roteiro');tj.prepend(sel);caixa.querySelectorAll('.rt-tsel').forEach(function(x){if(x!==sel)x.remove();});}
@@ -1066,22 +1068,21 @@ function heroOrganizarProntuario(){
   }
   tj.classList.add('hero-julgamento-top');if(identity)identity.remove();
   /* Encaminhamento é uma seção interna, comum a todos os modos. */
-  var encs=Array.from(body.querySelectorAll('#pv-tri-enc,.pm-enc,.pv-acomp-sit'));
   var encSection=el('section','hero-enc-integrado');encSection.append(el('h4','pm-mer-h','Encaminhamento'));
   var encFields=el('div','gr hero-enc-fields');encSection.append(encFields);
-  var sitNode=body.querySelector('.pm-sitj');
-  if(sitNode)encFields.append(sitNode);else html(encFields,situacaoHtml());
-  var seen=new Set(Array.from(encFields.querySelectorAll('[data-fk]')).map(function(x){return x.dataset.fk;}));
-  encs.forEach(function(x){
-    if(!x.parentNode)return;
-    x.querySelectorAll('.gf').forEach(function(f){
-      if(f.classList.contains('pm-sitj')||f.closest('.pm-sitj'))return;
-      var k=f.querySelector('[data-fk]');if(k&&seen.has(k.dataset.fk))return;
-      if(k)seen.add(k.dataset.fk);
-      if(!f.parentElement.closest('.gf'))encFields.append(f);
-    });
-    x.remove();
-  });
+  body.querySelectorAll('.pm-enc,.pv-acomp-sit,.pv-followup,.pm-sitj').forEach(function(x){x.remove();});
+  html(encFields,situacaoHtml());
+  var destinoAtual=destGrav(),destRow=el('div','gf');destRow.append(el('span','gl','Destino'),el('span','ro',destinoAtual||'A definir'));encFields.append(destRow);
+  if(destinoAtual==='Outro destino')html(encFields,campoRot('producao','Destino - Outro','Especificar destino'));
+  if(destinoAtual==='Sessão'){
+    var sp=el('label','gf'),spSel=el('select');sp.append(el('span','gl','Seleção prévia'));spSel.dataset.fk='triagem.Seleção Prévia';spSel.setAttribute('aria-label','Seleção prévia');
+    [['','Não selecionado'],['SELECIONADO PREVIAMENTE','Selecionado previamente']].forEach(function(x){var op=el('option','',x[1]);op.value=x[0];spSel.append(op);});
+    spSel.value=S(V('triagem','Seleção Prévia'));spSel.disabled=!!(window.MUTA_WEB&&window.MUTA_WEB.leitura);sp.append(spSel);encFields.append(sp);
+    if(spSel.value==='SELECIONADO PREVIAMENTE')html(encFields,campoRot('pauta','Nova sessão de destino','Sessão prevista (vazio = banco reserva)'));
+  }
+  if(N(destinoAtual)==='monocratica')html(encFields,campoRot('triagem','Hipóteses Monocrática','Hipótese do artigo 932'));
+  html(encFields,campoRot('origem','Próxima ação','Próxima fase / providência após o cumprimento'));
+  tj.prepend(el('h4','pm-mer-h','Julgamento'));
   body.prepend(tj,encSection);body.append(tagsGroup);
   /* Responsável pelo acompanhamento: mesma chave da ficha, agora ao lado das designações. */
   var responsaveis=Array.from(caixa.querySelectorAll('[data-fk="origem.Responsável"],[data-pv-field="origem.Responsável"]'));
@@ -1224,7 +1225,7 @@ caixa.addEventListener('change', function (e) {
   if (!t.dataset || !t.dataset.fk) return;
   marcar(t.dataset.fk, t.value); var l = t.closest('label'); if (l) l.classList.add('mud');
   agendar(900);
-  if (/^(triagem\.(Urgência|Padrão - Espécie)|producao\.Destino|controles\.Sensível - (In|Ex)cluído)$/.test(t.dataset.fk) || G.aba === 'Processo') render();
+  if (t.closest('.hero-acomp') || /^(triagem\.(Urgência|Padrão - Espécie)|producao\.Destino|controles\.Sensível - (In|Ex)cluído)$/.test(t.dataset.fk) || G.aba === 'Processo') render();
 });
 caixa.addEventListener('toggle', function (e) { var c = e.target.classList; if (!c) return; if (c.contains('pm-sn')) { SN_AB = e.target.open; return; } if (c.contains('sq-card')) { SQ_AB = e.target.open; return; } if (c.contains('pm-mer')) { if (G.merAb !== e.target.open) { G.merAb = e.target.open; render(); } return; } if (c.contains('pm-aut')) { if (G.autAb !== e.target.open) { G.autAb = e.target.open; render(); } return; } if (c.contains('au-it') && window.MutaAutos) { window.MutaAutos.abrirTexto(e.target.dataset.auIt, e.target.open); return; } if (c.contains('au-auto-d') && window.MutaAutos) window.MutaAutos.estado().autoAb = e.target.open; if (c.contains('pc-s')) { G.pecAb = G.pecAb || {}; G.pecAb[e.target.dataset.grupo] = e.target.open; } }, true);
 caixa.addEventListener('keydown', function (e) {
