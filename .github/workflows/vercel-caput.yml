@@ -61,6 +61,9 @@ jobs:
       - name: Validar prontuário ampliado e montagem da prévia
         if: steps.v.outputs.publicar == '1'
         run: node --test apoio/ex-officio/tests/prontuario-ampliado.test.js apoio/ex-officio/tests/extensao-previa.test.js apoio/ex-officio/tests/abertura-editorial.test.js
+      - name: Validar Cognitio e a sessão do Office
+        if: steps.v.outputs.publicar == '1'
+        run: node --test cognitio/tests/cognitio.test.js
       - name: Monta a pasta publicada
         if: steps.v.outputs.publicar == '1'
         run: |

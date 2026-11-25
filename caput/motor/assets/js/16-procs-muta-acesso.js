@@ -13,7 +13,7 @@
   /* pede o token uma vez; confere no GitHub antes de aceitar; "Agora não" vale para esta aba até novo pedido explícito */
   function pedir(motivo,forcar){return pronto.then(function(){return pedir0(motivo,forcar)})}
   function pedir0(motivo,forcar){
-    if(OFFICE)return window.__ghPonte.confere().then(function(ok){tok=ok?window.__ghPonte.SENT:'';return tok});
+    if(OFFICE){if(tok===window.__ghPonte.SENT)return Promise.resolve(tok);return window.__ghPonte.confere().then(function(ok){tok=ok?window.__ghPonte.SENT:'';return tok})}
     if(tok)return Promise.resolve(tok);
     if(recusado&&!forcar)return Promise.resolve('');
     if(pedido)return pedido;
