@@ -41,7 +41,7 @@ def montar(saida):
     js = '(function(){"use strict";\nvar ED='+json.dumps(dados, ensure_ascii=False)+';\nvar XP={q:""},MAN='+json.dumps(man, ensure_ascii=False)+';\n'
     js += '\n'.join(trecho(em,a,b) for a,b in pares)
     js += '\nfunction man(){return MAN.filter(function(r){return r["Código"];});}\nfunction refs(t){return esc(t);}\n'
-    bloco = trecho(ed, '  /* manual da parte (orientações gerais, formatação e tensões) */', '  XP._G={h:g,t:pt.t};')
+    bloco = trecho(ed, '  /* manual da parte (orientações gerais, formatação e tensões) */', '  var TS=(ED.pecas.tensoes||[]),PR=')
     js += '\nfunction geral(pid){var pt=ED.pecas.pecas.find(function(p){return p.id===pid;})||{id:pid,notas:[]};var XP={pc:/^(monocratica|despacho)$/.test(pid)?"decisao":"acordao"},FMT=((ED.pecas.forma.filter(function(f){return f.t==="Formatação para o PJe";})[0]||{}).r)||[];\n'+bloco+'\nreturn g;}\n'
     js += '\nwindow.MutaManualCanhoto={geral:geral,tab:function(tab,q){XP.q=q||"";return xRefTab(tab);}};\n})();\n'
     js += '\nwindow.MutaManualCanhoto.capitulos='+json.dumps(caps, ensure_ascii=False)+';\nwindow.MutaManualCanhoto.orientacoes='+json.dumps(orientacoes, ensure_ascii=False)+';\n'
