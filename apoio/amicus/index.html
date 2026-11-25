@@ -228,6 +228,8 @@ html[data-theme=dark] #fluxos{--af-entry:#8fb7e3;--af-mono:#dcae58;--af-susp:#b8
 .am-home-header .am-nav-links{display:flex;gap:4px;border-left:1px solid var(--el);padding-left:10px}
 .am-home-header .am-nav-links a{flex:0 0 auto;padding:7px 10px;border:1px solid var(--el);white-space:nowrap;font-size:11.5px;color:var(--ei);text-decoration:none}
 .am-tabpane{margin:0;padding:0}
+.am-tabpane[hidden],.am-home-header [hidden]{display:none!important}
+.am-access-status{margin:12px auto;padding:10px 14px;max-width:1420px;border:1px solid var(--el,#d8d3c6);border-radius:6px;color:var(--ei,#123244);background:var(--ep,#fbfaf5);font-size:13px}.am-access-status[hidden]{display:none!important}.am-access-status a{color:inherit;text-decoration:underline}
 .am-tabpane iframe{display:block;width:100%;height:calc(100vh - var(--am-hh,64px));border:0;background:var(--ebg,#fbfaf5)}
 body.am-com-aba{overflow:hidden}
 
@@ -383,7 +385,8 @@ body.am-com-aba{overflow:hidden}
 .am-enc-list li{margin:5px 0}
 .am-enc-status{font-size:12px;color:var(--em)}
 @media(max-width:700px){.am-area-nav{grid-template-columns:repeat(2,minmax(0,1fr))}.am-group-heading h2{font-size:18px}}
-</style></head><body><header class="am-home-header"><div class="am-legacy"><b>Amicus Curiae.</b><span>Gabinete CMT · Ferramentas</span></div><nav class="am-over-nav am-home-overview" aria-label="Aplicações e áreas de consulta"><div class="am-nav-apps cn-in" role="tablist" aria-label="Abas do Amicus"><button type="button" role="tab" data-amtab="ref" aria-selected="true">Referências</button><button type="button" role="tab" data-amtab="collegium" aria-selected="false">Collegium</button><button type="button" role="tab" data-amtab="collectio" aria-selected="false" hidden title="Só para servidores logados">Collectio</button><button type="button" role="tab" data-amtab="hero" aria-selected="false" hidden title="Prévia do painel da extensão HERO18810, ao lado de um PJe simulado (nada é gravado) · só para servidores logados">HERO · prévia</button></div><div class="am-nav-links" aria-label="Aplicações"><a href="/amicus/compendium/">Compendium</a><a href="/amicus/cognitio/">Cognitio</a></div></nav><nav class="am-context-nav am-home-overview" aria-label="Subabas da aplicação" hidden><span class="am-context-label"></span><div class="cn-in" role="group"></div></nav></header>
+</style></head><body><header class="am-home-header"><div class="am-legacy"><b>Amicus Curiae.</b><span>Gabinete CMT · Ferramentas</span></div><nav class="am-over-nav am-home-overview" aria-label="Aplicações e áreas de consulta"><div class="am-nav-apps cn-in" role="tablist" aria-label="Abas do Amicus"><button type="button" role="tab" data-amtab="ref" aria-selected="true">Referências</button><button type="button" role="tab" data-amtab="collegium" aria-selected="false">Collegium</button><button type="button" role="tab" data-amtab="collectio" aria-selected="false" hidden title="Só para servidores logados">Collectio</button><button type="button" role="tab" data-amtab="hero" aria-selected="false" hidden title="Prévia do painel da extensão HERO18810, ao lado de um PJe simulado (nada é gravado) · só para servidores logados">HERO · prévia</button></div><div class="am-nav-links" aria-label="Aplicações"><a href="/amicus/cortex/">CORTEX</a><a href="/amicus/compendium/">Compendium</a><a href="/amicus/cognitio/">Cognitio</a></div></nav><nav class="am-context-nav am-home-overview" aria-label="Subabas da aplicação" hidden><span class="am-context-label"></span><div class="cn-in" role="group"></div></nav></header>
+<p class="am-access-status" id="am-access-status" role="status" hidden></p>
 <main class="am-dashboard am-workspace">
 <aside class="am-rail am-competence" id="referencias-operacionais" aria-labelledby="am-competence-title"><div class="am-rail-head"><small>Referências operacionais</small><h2 id="am-competence-title">Competência e imparcialidade</h2></div><div class="am-rail-panels"><section class="busca" id="competencia"><div class="pane-title"><div><small>Referência · competência</small><h2>Competência</h2></div></div><p>Turma Regional de Mato Grosso do Sul, competência delegada e distribuição por matéria nas Seções do TRF3. Síntese do material fornecido, sujeita à conferência normativa.</p>
 <div class="comp-grid" id="comp-body"></div></section><section class="busca" id="impedimentos"><div class="pane-title"><div><small>Referencial interno · imparcialidade</small><h2>Impedimentos e suspeições</h2></div><div class="imp-actions"><button type="button" class="more" id="imp-refresh" aria-label="Atualizar referencial" title="Atualizar referencial">↻</button></div></div>
@@ -640,10 +643,12 @@ document.addEventListener('click',e=>{const k=e.target.closest&&e.target.closest
 <script>
 /* Barra única: espelha controles reais dos módulos, sem alterar seus motores. */
 (function(){'use strict';
-const D=document,btns=()=>D.querySelectorAll('[data-amtab]'),main=D.querySelector('main.am-dashboard'),bar=D.querySelector('.am-context-nav'),group=bar.querySelector('.cn-in'),label=bar.querySelector('.am-context-label');let logado=false,active='ref',obs=null,doc=null;
+const D=document,btns=()=>D.querySelectorAll('[data-amtab]'),main=D.querySelector('main.am-dashboard'),bar=D.querySelector('.am-context-nav'),group=bar.querySelector('.cn-in'),label=bar.querySelector('.am-context-label');let logado=false,active='ref',obs=null,doc=null,sessionState='pending';
+const accessStatus=D.getElementById('am-access-status');
+function notice(state){if(!accessStatus)return;accessStatus.replaceChildren();accessStatus.hidden=!state;if(!state)return;accessStatus.append(D.createTextNode(state==='pending'?'Confirmando o acesso às aplicações restritas…':state==='error'?'Não foi possível confirmar a sessão. Atualize a página ou ':'Esta aplicação exige autenticação. '));if(state!=='pending'){const a=D.createElement('a');a.href='/exofficio/#inicio';a.textContent='Entrar no Ex Officio';accessStatus.append(a);}}
 const frames=()=>Array.from(D.querySelectorAll('.am-tabpane iframe'));
 function altura(){const h=D.querySelector('body>header');D.documentElement.style.setProperty('--am-hh',(h?h.getBoundingClientRect().height:64)+'px');}
-function disconnect(){if(obs)obs.disconnect();obs=null;doc=null;}
+function disconnect(){if(obs)obs.disconnect();if(doc)doc.documentElement.classList.remove('amicus-unified-child');obs=null;doc=null;}
 function render(){
  if(!doc||active==='ref')return;
  const selector=active==='collectio'?'#cmp-nav [data-ct-view],#cmp-nav [data-ct-manage]':'#e-modes [data-m]';
@@ -656,20 +661,21 @@ function render(){
  }
  Array.from(group.children).forEach((b,i)=>{const source=controls[i];b.textContent=source.textContent.trim();b.disabled=source.disabled;b.setAttribute('aria-current',String(source.getAttribute('aria-current')==='true'||source.getAttribute('aria-pressed')==='true'));b.onclick=()=>{if(source.isConnected&&!source.disabled&&!source.hidden){source.click();render();}};});
  if(focus&&D.activeElement===D.body){const b=Array.from(group.children).find(b=>b.dataset.amControl===focus);if(b)b.focus();}
+ doc.documentElement.classList.toggle('amicus-unified-child',controls.length>0);
  bar.hidden=!controls.length;label.textContent=active==='collectio'?'Collectio':'Collegium';altura();
 }
 function connect(f){
  disconnect();bar.hidden=true;group.replaceChildren();
  if(!f||active==='ref'||active==='hero')return;
  try{doc=f.contentDocument;if(!doc||!doc.body||!f.getAttribute('src'))return;
-  const child=doc.documentElement;child.classList.add('amicus-unified-child');
+  doc.documentElement.classList.remove('amicus-unified-child');
   let style=doc.getElementById('amicus-unified-css');if(!style){style=doc.createElement('style');style.id='amicus-unified-css';style.textContent='html.amicus-unified-child body>header.top.nx{display:none!important} html.amicus-unified-child #e-modes>.seg{display:none!important} html.amicus-unified-child #x-sub{display:none!important}';doc.head.append(style);}
   let pending=false;obs=new MutationObserver(()=>{if(pending)return;pending=true;requestAnimationFrame(()=>{pending=false;render();});});
   obs.observe(doc.body,{childList:true,subtree:true,attributes:true,attributeFilter:['hidden','aria-current','aria-pressed','disabled']});render();
  }catch(e){bar.hidden=true;disconnect();}
 }
 function abre(t,semHash,extra){
- if((t==='collectio'||t==='hero')&&!logado)t='ref';if(t!=='ref'&&!D.getElementById('am-tab-'+t))t='ref';
+ const restricted=t==='collectio'||t==='hero';if(restricted&&!logado){notice(sessionState);t='ref';semHash=true;}else notice('');if(t!=='ref'&&!D.getElementById('am-tab-'+t))t='ref';
  active=t;disconnect();bar.hidden=true;group.replaceChildren();
  btns().forEach(b=>b.setAttribute('aria-selected',String(b.dataset.amtab===t)));
  if(main)main.hidden=t!=='ref';
@@ -681,9 +687,10 @@ frames().forEach(f=>f.addEventListener('load',()=>{if(f.closest('.am-tabpane')?.
 D.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-amtab]');if(b){e.preventDefault();abre(b.dataset.amtab);return;}
  const m=e.target.closest&&e.target.closest('.amicus-brand a[href="/amicus/"],.am-legacy');if(m&&!(e.ctrlKey||e.metaKey||e.shiftKey)){e.preventDefault();abre('ref');scrollTo({top:0,behavior:'smooth'});}});
 window.addEventListener('resize',altura);if(window.ResizeObserver)new ResizeObserver(altura).observe(D.querySelector('body>header'));
-let inicial='';try{inicial=decodeURIComponent((location.hash||'').slice(1));}catch(e){}
-fetch('/api/login',{credentials:'same-origin',cache:'no-store'}).then(r=>r.ok?r.json():null).catch(()=>null).then(j=>{logado=!!(j&&j.usuario);const c=D.querySelector('[data-amtab="collectio"]');if(c)c.hidden=!logado;const hx=D.querySelector('[data-amtab="hero"]');if(hx)hx.hidden=!logado;if(inicial.split('&')[0]==='collectio')abre(logado?'collectio':'ref',!logado,inicial.includes('&')?inicial.slice(inicial.indexOf('&')+1):'');if(inicial==='hero')abre(logado?'hero':'ref',!logado);});
-if(inicial.split('&')[0]==='collegium')abre('collegium',true,inicial.includes('&')?inicial.slice(inicial.indexOf('&')+1):'');
+function fromHash(){let raw='';try{raw=decodeURIComponent((location.hash||'').slice(1));}catch(e){}const [tab,...rest]=raw.split('&');if(['collectio','hero','collegium'].includes(tab))abre(tab,true,rest.join('&'));else if(!tab||tab==='ref')abre('ref',true);}
+window.addEventListener('hashchange',fromHash);
+fromHash();
+fetch('/api/login',{credentials:'same-origin',cache:'no-store'}).then(async r=>{if(r.status===401||r.status===403)return null;if(!r.ok)throw Error('HTTP '+r.status);return r.json();}).then(j=>{logado=!!(j&&j.usuario);sessionState=logado?'authenticated':'unauthenticated';}).catch(()=>{sessionState='error';}).then(()=>{btns().forEach(b=>{if(['collectio','hero'].includes(b.dataset.amtab))b.hidden=!logado;});const tab=location.hash.split('&')[0];if(tab==='#collectio'||tab==='#hero')fromHash();});
 })();
 </script><script>
 /* Amicus: módulos independentes, sem duplicar os motores nem os registros. */
