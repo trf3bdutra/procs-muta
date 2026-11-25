@@ -1858,6 +1858,26 @@
        "editavel": false,
        "regra": "do lote de triagem (acervo/lotes); atualizado por scripts/triagem/ficha_lote.py",
        "apelido": "registro_situacao_atual"
+      },
+      {
+       "rotulo": "Espécie",
+       "chave": "Padrão - Espécie",
+       "tipo": "lista",
+       "secao": "triagem",
+       "opcoes": [
+        "Embargos de declaração",
+        "Agravo interno",
+        "Juízo de retratação"
+       ],
+       "mapa": {
+        "ed": "Embargos de declaração",
+        "interno": "Agravo interno",
+        "retratacao": "Juízo de retratação"
+       },
+       "apelido": "padrao_especie",
+       "editavel": false,
+       "legado": true,
+       "regra": "Espelho legado do Tipo de julgamento; não editar. Em seleção múltipla, representa o primeiro tipo incidental compatível."
       }
      ]
     },
@@ -2368,32 +2388,11 @@
      ]
     },
     {
-     "grupo": "Espécie de julgamento",
-     "campos": [
-      {
-       "rotulo": "Espécie",
-       "chave": "Padrão - Espécie",
-       "tipo": "lista",
-       "secao": "triagem",
-       "opcoes": [
-        "Embargos de declaração",
-        "Agravo interno",
-        "Juízo de retratação"
-       ],
-       "mapa": {
-        "ed": "Embargos de declaração",
-        "interno": "Agravo interno",
-        "retratacao": "Juízo de retratação"
-       },
-       "apelido": "padrao_especie"
-      }
-     ]
-    },
-    {
      "grupo": "Embargos de declaração",
      "quando": {
-      "campo": "triagem.Padrão - Espécie",
-      "valor": "Embargos de declaração"
+      "campo": "triagem.Tipo de Julgamento",
+      "valor": "Embargos de declaração",
+      "operador": "contem_tipo"
      },
      "campos": [
       {
@@ -2415,8 +2414,9 @@
     {
      "grupo": "Agravo interno",
      "quando": {
-      "campo": "triagem.Padrão - Espécie",
-      "valor": "Agravo interno"
+      "campo": "triagem.Tipo de Julgamento",
+      "valor": "Agravo interno",
+      "operador": "contem_tipo"
      },
      "campos": [
       {
@@ -2431,8 +2431,9 @@
     {
      "grupo": "Juízo de retratação",
      "quando": {
-      "campo": "triagem.Padrão - Espécie",
-      "valor": "Juízo de retratação"
+      "campo": "triagem.Tipo de Julgamento",
+      "valor": "Juízo de retratação",
+      "operador": "contem_tipo"
      },
      "campos": [
       {
