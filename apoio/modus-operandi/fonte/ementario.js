@@ -342,6 +342,7 @@ function ppMetadados(x,it){
 function abrirIT(x){
   if(!x)return;var mesmo=E.det===x.id,aba=mesmo?(E.detAba||'julgado'):'julgado';E.det=x.id;if(aba==='catalogacao')aba='processo';if(aba==='referencias')aba='julgado';E.detAba=aba;
   var anterior=$('#e-det'),drawer=$('#e-drb');if(!anterior||anterior.hidden)anterior=drawer;
+  var acoesAbertas=mesmo&&anterior&&!!anterior.querySelector('.pp-process-strip[open]');
   var pos=mesmo&&anterior?anterior.scrollTop:0,ppAberto=mesmo&&anterior&&!!anterior.querySelector('.pp-em:not(.cut)'),itAberto=mesmo&&anterior&&!!anterior.querySelector('[data-ppsec="julgado"] details.pp-d[open]');
   if(window.EMENT_FONTE&&x.sid&&!x._origemEstado){x._origemEstado='carregando';origemCol(x).catch(function(){x._origemEstado='erro';}).then(function(){if(E.det===x.id)abrirIT(x);});}
   $$('#e-out li.e-proc.sel').forEach(function(l){l.classList.remove('sel');});var li=$('#e-out li.e-proc[data-id="'+x.id+'"]');if(li)li.classList.add('sel');
@@ -350,13 +351,13 @@ function abrirIT(x){
   var ct=citados([x.temas,x.tese,x.e,x.r,x.jur,x.disp,it].join('\n'));
   var ass=x._ass||titulo(x)||'(sem assunto)';
   /* 1. cabeçalho: identificação, área › assunto › tipo de caso, resultado e datas */
-  var h='<div class="e-dhead pp"><div class="e-dtit"><span class="e-tag '+x.t+'">'+(x.t==='A'?'Acórdão':'Decisão monocrática')+'</span><span class="e-num big">'+esc(x.n)+'</span><button class="e-dx" data-dx title="Fechar (Esc)" aria-label="Fechar">×</button></div>';
+  var col=!!window.EMENT_FONTE,origem=x._origem||{};
+  var h='<div class="e-dhead pp"><div class="e-dtit pp-process-head"><details class="pp-process-strip"'+(acoesAbertas?' open':'')+'><summary title="Expandir ações do processo"><span class="e-tag '+x.t+'">'+(x.t==='A'?'Acórdão':'Decisão monocrática')+'</span><span class="e-num big">'+esc(x.n)+'</span><span class="pp-strip-chevron" aria-hidden="true"></span></summary><div class="e-dacts pp-process-actions" role="group" aria-label="Ações do processo"><button type="button" class="e-mini" data-dcnj>Copiar número</button><button type="button" class="e-mini pri" data-dcit>'+ICO.cit+'Copiar citação</button><button type="button" class="e-mini" data-dem>Copiar '+(col&&x.t==='M'?'abertura':'ementa')+'</button>'+(it?'<button type="button" class="e-mini" data-dit>Copiar '+(col?'excerto':'inteiro teor')+'</button>':'')+'<button type="button" class="e-mini" data-ddocx>DOCX</button><button type="button" class="e-mini" data-dpdf>PDF</button></div></details><button type="button" class="e-dx" data-dx title="Fechar (Esc)" aria-label="Fechar">×</button></div>';
   var area=x._rd||x._ramo||'Área não informada',resto=tcResto(x);
   h+='<div class="pp-path">'+esc(area)+(x.mat&&nz(area).indexOf(nz(x.mat))<0?' · '+esc(x.mat):'')+'</div><h2 class="pp-ass">'+esc(ass)+(resto&&nz(ass)!==nz(resto)?'<span class="pp-sub"> › '+esc(resto)+'</span>':'')+'</h2>';
   h+=ppMetadados(x,it);
-  var col=!!window.EMENT_FONTE,origem=x._origem||{};
   h+='<div class="pp-dt">'+(col?'Assinatura: ':'Julgado em ')+'<b>'+fmtD(x.d)+'</b>'+(col?(origem.data_disponibilizacao_djen?' · DJEN: <b>'+esc(origem.data_disponibilizacao_djen)+'</b>':''):(x.p?' · publicado em <b>'+fmtD(x.p)+'</b>':''))+' · Rel. '+esc(x.rl||(col?'não informado':'CARLOS MUTA'))+(x.gab?' · '+esc(x.gab):'')+'</div>';
-  h+='<div class="e-dacts"><button class="e-mini pri" data-dcit>'+ICO.cit+'Copiar citação</button><button class="e-mini" data-dem>Copiar '+(col&&x.t==='M'?'abertura':'ementa')+'</button>'+(it?'<button class="e-mini" data-dit>Copiar '+(window.EMENT_FONTE?'excerto':'inteiro teor')+'</button>':'')+'<button class="e-mini" data-ddocx>.docx</button><button class="e-mini" data-dpdf>PDF</button></div>'+
+  h+=
     '<div class="pp-tabs" role="tablist" aria-label="Prontuário jurisprudencial">'+PP_ABAS.map(function(t){return '<button type="button" id="pp-tab-'+t[0]+'" role="tab" data-ppaba="'+t[0]+'" aria-controls="pp-sec-'+t[0]+'" aria-selected="'+(t[0]===aba)+'" tabindex="'+(t[0]===aba?'0':'-1')+'">'+t[1]+'</button>';}).join('')+'</div></div>';
   var head=h,P={};h='';
   /* 2. tese e resultado */
@@ -413,6 +414,7 @@ function abrirIT(x){
   var colref=box.querySelector('[data-colref]');if(colref)colref.onclick=function(){copiar(citacao(x),'Referência copiada');};
   var colretry=box.querySelector('[data-colretry]');if(colretry)colretry.onclick=function(){x._origemEstado=null;abrirIT(x);};
   box.querySelector('[data-dx]').onclick=function(){fecharIT();};
+  box.querySelector('[data-dcnj]').onclick=function(){copiar(x.n,'Número do processo copiado');};
   box.querySelector('[data-dcit]').onclick=function(){copiar(citacao(x),'Citação copiada; confira o veículo de publicação');};
   box.querySelector('[data-dem]').onclick=function(){copiar(x.e,col&&x.t==='M'?'Abertura copiada':'Ementa copiada');};
   var bi=box.querySelector('[data-dit]');if(bi)bi.onclick=function(){copiar(it,window.EMENT_FONTE?'Excerto copiado':'Inteiro teor copiado');};
