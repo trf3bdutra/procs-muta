@@ -157,7 +157,7 @@
     var s = ses ? ses.estado() : {};
     if (s.estado !== 'on') { c.innerHTML = '<div class="empty">Entre no Ex Officio (aba Prontuário) para ver as pautas.</div>'; return; }
     var y = c.scrollTop;
-    c.innerHTML = (P.erro ? '<p class="status err">' + esc(P.erro) + '</p>' : '') + procHtml() + listaHtml();
+    c.innerHTML = (P.erro ? '<p class="status err">' + esc(P.erro) + '</p>' : '') + listaHtml();
     c.scrollTop = y;
   }
 
@@ -182,5 +182,15 @@
   document.addEventListener('muta:prontuario', function () { setTimeout(pintar, 300); });
   if (ses && ses.ouvir) ses.ouvir(function () { if (visivel()) ler(); });
 
-  window.MutaPauta = { abrir: function () { if (!P.cal || !P.doc) ler(); else pintar(); }, pintar: pintar, etapa: etapa, alertas: alertas };
+  /* Consulta independente da aba Pauta; não redesenha o prontuário durante a edição. */
+  var pedConsulta=null,pedConsultadoEm=0;
+  function pedidosProcesso(node,cnj){
+    function desenhar(){if(node.isConnected&&dg(node.dataset.cnj)===dg(cnj))node.innerHTML=soProcesso(cnj);}
+    if(P.ped!==null){node.innerHTML=soProcesso(cnj);if(Date.now()-pedConsultadoEm<60000)return;}
+    else node.innerHTML='<p class="muted">Lendo pedidos recebidos…</p>';
+    if(!ses||ses.estado().estado!=='on')return;
+    if(!pedConsulta)pedConsulta=ses.api('/api/sessoes?pedidos=1').then(function(j){P.ped=j.registros||[];pedConsultadoEm=Date.now();}).finally(function(){pedConsulta=null;});
+    pedConsulta.then(desenhar,function(){if(node.isConnected&&P.ped===null)node.innerHTML='<p class="muted">Não foi possível consultar os pedidos recebidos.</p>';});
+  }
+  window.MutaPauta = { pedidosProcesso: pedidosProcesso, abrir: function () { if (!P.cal || !P.doc) ler(); else pintar(); }, pintar: pintar, etapa: etapa, alertas: alertas };
 })();
