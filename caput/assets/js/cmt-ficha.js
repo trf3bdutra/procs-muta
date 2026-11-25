@@ -958,7 +958,7 @@ function controlesDe(fo, op) {
 /* ───── estado ───── */
 var ST = { cnj: '', ad: null, d: null, err: '', tab: 'resumo', edit: false, draft: {}, busy: false, view: 'ficha', mostra: {}, histAll: false, teor: null, vz: {}, vzTodos: false };
 /* organização: a aba Pauta fica no fim da Produção (a aba Controles especiais se chama Monitoramento); quem abre a ficha na aba Pauta cai na Produção */
-var PAUTA = 'Pauta', ROT_CE = 'Monitoramento', PRI_PROC = ['Autuação', 'Partes', 'Tramitação'];
+var PAUTA = 'Pauta', ROT_CE = 'Monitoramento especial', PRI_PROC = ['Autuação', 'Matéria', 'Partes', 'Tramitação'];
 ST.v2 = true;
 function tabNorm(t) { return t === PAUTA ? (ST.v2 ? 'Produção' : CE) : t; }
 function temValor(c) { return c.tipo === 'tabela' ? linhas(c.secao, c.chave).length > 0 : !!S(valorCampo(c)).trim(); }
@@ -1357,6 +1357,61 @@ function indexacaoFicha(){
  return h+L.map(function(l){return '<details open style="padding:8px 0;border-bottom:1px solid #dce4df"><summary><b>'+E(l.titulo||l.id)+'</b> '+E(l.grupo||'')+(l.arquivado?' · arquivado':'')+'</summary>'+['proposta','modelo','variacoes','resultado'].map(function(k){return l[k]?'<p><b>'+E({proposta:'Proposta',modelo:'Modelo',variacoes:'Variações',resultado:'Resultado registrado no lote'}[k])+':</b> '+E(l[k])+'</p>':'';}).join('')+'<div class="fx-g3">'+(l.campos||[]).map(function(c){var v=S(c.valor),a=' data-fx-index-lote="'+E(l.id)+'" data-fx-index-col="'+E(c.id)+'" aria-label="'+E(c.nome)+'"';return '<div class="fx-f"><span class="fx-lab">'+E(c.nome)+'</span>'+(!ed||l.arquivado?'<span class="fx-v">'+E(v||'—')+'</span>':/^(lista|simnao)$/.test(c.tipo)?'<select'+a+'><option value="">—</option>'+[...new Set((c.opcoes||[]).concat(v?[v]:[]))].map(function(x){return '<option'+(x===v?' selected':'')+'>'+E(x)+'</option>';}).join('')+'</select>':c.tipo==='longo'?'<textarea rows="2"'+a+'>'+E(v)+'</textarea>':'<input type="'+(c.tipo==='data'?'date':c.tipo==='numero'?'number':'text')+'"'+a+' value="'+E(v)+'">')+'</div>';}).join('')+'</div><small class="fx-dim">Colunas próprias do lote · gravação direta na matriz.</small></details>';}).join('')+'</div>';
 }
 document.addEventListener('change',async function(e){var el=e.target;if(!el.matches||!el.matches('[data-fx-index-col]')||!ST.ad||!ST.ad.gravarIndexacao)return;var l=(ST.d.indexacao||[]).find(function(x){return x.id===el.dataset.fxIndexLote;}),c=l&&(l.campos||[]).find(function(x){return x.id===el.dataset.fxIndexCol;});if(!c)return;var v=el.value,old=c.valor;el.disabled=true;try{await ST.ad.gravarIndexacao(l.id,c.id,ST.cnj,v);c.valor=v;}catch(err){el.value=old;alert('Não foi possível gravar a coluna: '+err.message);}finally{el.disabled=false;}},true);
+
+/* Acompanhamento: mesmas chaves e mapa versionado utilizados no Cognitio e na HERO. */
+var FX_TR='origem.Mapa de próximos passos', FX_HJ='triagem.Histórico de julgamento';
+function fxModelo(sec,key){var c=null;(F().abas||[]).forEach(function(a){(a.grupos||[]).forEach(function(g){(g.campos||[]).forEach(function(x){if(x.secao===sec&&x.chave===key)c=x;});});});return c;}
+function fxCampo(sec,key,label){var c=fxModelo(sec,key);return c?campo(Object.assign({},c,label?{rotulo:label}:{})):'';}
+function fxOpt(L,v){return '<option value="">—</option>'+Array.from(new Set(L.concat(v?[v]:[]))).map(function(x){return '<option value="'+E(x)+'"'+(x===v?' selected':'')+'>'+E(x)+'</option>';}).join('');}
+function fxTrMap(){try{var m=JSON.parse(val('origem','Mapa de próximos passos')||'{}');if(!m||Array.isArray(m)||typeof m!=='object')return null;m.versao=m.versao||1;m.passos=Array.isArray(m.passos)?m.passos:[];m.historico=Array.isArray(m.historico)?m.historico:[];return m;}catch(e){return null;}}
+function fxTrPend(){return S(val('triagem','O que falta sanar')).split(/\n+/).map(function(x){return x.trim();}).filter(Boolean);}
+function fxTrLog(m,p,acao){m.historico.push({id:p.id,texto:p.texto,acao:acao,origem:'Ficha',data:new Date().toISOString(),autor:S(ST.d&&ST.d.usuario)});}
+function fxTrStore(m){ST.draft[FX_TR]=JSON.stringify(m);}
+function fxTrHtml(ed){
+ var m=fxTrMap();if(!m)return '<p class="fx-note">Mapa de trâmite inválido; registro preservado.</p>';
+ var h=m.passos.map(function(p,i){var cond=p.tipo==='pendencia',done=cond?fxTrPend().some(function(x){return /^✓/.test(x)&&x.replace(/^✓\s*/,'')===p.vinculo;}):p.feito,at=' data-fx-tr-i="'+i+'" ',field=function(k){return at+'data-fx-tr-k="'+k+'"';};
+ var b=function(a,t){return '<button type="button" class="fx-pill fx-mini" data-fx="tr-'+a+'"'+at+'>'+E(t)+'</button>';};
+ return '<div class="fx-subgrupo" style="padding:10px 0;border-bottom:1px solid #dce4df"><b>'+String(i+1).padStart(2,'0')+' · '+E(p.tipo==='ato'?'Pronunciamento':cond?'Pendência condicionante':'Providência')+'</b> · '+(done?'Concluído':'Pendente')+
+ (!ed?'<p>'+E(p.texto||'')+'</p><small>'+E([p.responsavel,p.prazo,p.vinculo].filter(Boolean).join(' · '))+'</small>':
+ '<div class="fx-grid"><div class="fx-f s2"><span class="fx-lab">Tipo</span><select '+field('tipo')+(cond?' disabled':'')+'>'+fxOpt(cond?['pendencia']:['ato','providencia'],p.tipo).replace('>ato</option>','>Pronunciamento</option>').replace('>providencia</option>','>Providência</option>').replace('>pendencia</option>','>Pendência condicionante</option>')+'</select></div><div class="fx-f s2"><span class="fx-lab">Responsável</span><input '+field('responsavel')+' value="'+E(p.responsavel||'')+'"></div><div class="fx-f s4"><span class="fx-lab">Descrição</span><textarea rows="2" '+field('texto')+(cond?' readonly':'')+'>'+E(p.texto||'')+'</textarea></div><div class="fx-f s2"><span class="fx-lab">Prazo</span><input type="date" '+field('prazo')+' value="'+E(p.prazo||'')+'"></div><div class="fx-f s2"><span class="fx-lab">Pendência vinculada</span><select '+field('vinculo')+(cond?' disabled':'')+'>'+fxOpt(fxTrPend().map(function(x){return x.replace(/^✓\s*/,'');}),p.vinculo||'')+'</select></div><div class="fx-f s4"><label><input type="checkbox" '+field('feito')+(done?' checked':'')+(cond?' disabled':'')+'> Concluído</label>'+(cond?'<small>Resolva a pendência em Sinalizações.</small>':'')+'</div></div><div class="fx-acts">'+b('up','↑')+b('down','↓')+b('remove','Remover')+'</div>')+'</div>';}).join('');
+ return (h||'<p class="fx-dim">Nenhum passo registrado.</p>')+(ed?'<button type="button" class="fx-pill" data-fx="tr-add">+ Passo</button>':'')+(m.historico.length?'<details><summary>Histórico do trâmite · '+m.historico.length+'</summary>'+m.historico.slice().reverse().map(function(x){return '<p>'+E([x.data,x.acao,x.texto,x.autor].filter(Boolean).join(' · '))+'</p>';}).join('')+'</details>':'');
+}
+function fxHistHtml(ed){
+ var c=fxModelo('triagem','Histórico de julgamento'),L=linhas('triagem','Histórico de julgamento'),cols=c?c.colunas||[]:[],P=op().pauta||{},ss=sessoes(),seen={};
+ if(P['Sessão original'])ss=ss.concat([{sessao:P['Sessão original'],item:P['Item (Pauta de Julgamento)'],status:P['Status de Julgamento'],motivo:P['Motivo da remarcação']}]);
+ var auto=ss.filter(function(x){var k=[x.sessao||x.data,x.item,x.status||x.resultado].join('|');if(seen[k])return false;seen[k]=true;return true;}).map(function(x){return '<p>'+E([brD(iso(x.sessao||x.data))||x.sessao||x.data,x.item?'Item '+x.item:'',x.status,x.resultado,x.motivo].filter(Boolean).join(' · '))+'</p>';}).join('');
+ var rec=linhas('origem','Recursos').map(function(x){return '<p>'+E([x.data,'Recurso interposto',x.parte,x.ids].filter(Boolean).join(' · '))+'</p>';}).join('');
+ return '<div><b>Registros da pauta e dos autos</b>'+(auto+rec||'<p class="fx-dim">Sem registros disponíveis.</p>')+'</div><div><b>Eventos e justificativas</b>'+L.map(function(x,i){return '<details class="fx-subgrupo" '+(ed?'open':'')+' style="padding:8px 0;border-bottom:1px solid #dce4df"><summary>'+E([x.data,x.evento,x.tipo_julgamento,x.sessao].filter(Boolean).join(' · ')||'Novo evento')+'</summary>'+(ed?'<div class="fx-grid">'+cols.map(function(k){var v=S(x[k.chave]),at=' data-fx-tb="'+FX_HJ+'" data-fx-i="'+i+'" data-fx-c="'+E(k.chave)+'" aria-label="'+E(k.rotulo)+'"';return '<div class="fx-f s'+(k.tipo==='texto-longo'?4:2)+'"><span class="fx-lab">'+E(k.rotulo)+'</span>'+(k.opcoes?'<select'+at+'>'+fxOpt(k.opcoes,v)+'</select>':k.tipo==='texto-longo'?'<textarea rows="2"'+at+'>'+E(v)+'</textarea>':'<input type="'+(k.tipo==='data'?'date':'text')+'"'+at+' value="'+E(v)+'">')+'</div>';}).join('')+'</div><button type="button" class="fx-pill fx-mini" data-fx="hj-remove" data-fx-i="'+i+'">Remover evento</button>':cols.filter(function(k){return x[k.chave];}).map(function(k){return '<p><b>'+E(k.rotulo)+':</b> '+E(x[k.chave])+'</p>';}).join(''))+'</details>';}).join('')+(ed&&c?'<button type="button" class="fx-pill" data-fx="hj-add">+ Evento de julgamento</button>':'')+'</div>';
+}
+function fxAcomp(g){
+ var ed=ST.edit&&!ST.ad.leitura,d=val('producao','Destino'),j=val('triagem','Tipo de Julgamento'),jt=S(j).split(/\s*(?:\+|;|,|·)\s*/).filter(Boolean),types=['Apelação','Remessa necessária','Agravo de instrumento','Mandado de segurança','Embargos de declaração','Agravo interno','Juízo de retratação'];
+ var tipos=ed?'<div class="fx-f s4"><span class="fx-lab">Tipo de julgamento</span><div class="fx-acts">'+Array.from(new Set(types.concat(jt))).map(function(x){return '<label><input type="checkbox" data-fx-jtipo value="'+E(x)+'"'+(jt.indexOf(x)>=0?' checked':'')+'> '+E(x)+'</label>';}).join('')+'</div></div>':fxCampo('triagem','Tipo de Julgamento');
+ var sel=ed?'<div class="fx-f s4"><span class="fx-lab">Enquadramento</span><select data-fx-ac-dest>'+[['','A definir'],['Sessão','Seleção prévia'],['Monocrática','Hipóteses de monocrática'],['Outro destino','Outro destino final']].map(function(x){return '<option value="'+E(x[0])+'"'+(d===x[0]?' selected':'')+'>'+E(x[1])+'</option>';}).join('')+'</select></div>':'<p>'+E(d||'A definir')+'</p>';
+ var sub='';
+ if(d==='Sessão'){
+   var sp=val('triagem','Seleção Prévia'),ses=val('pauta','Nova sessão de destino'),sv=sp==='SELECIONADO PREVIAMENTE'?(ses||'__reserva'):'',av=ST.ad.sessoesDisponiveis?ST.ad.sessoesDisponiveis():[];
+   sub=ed?'<div class="fx-f s4"><span class="fx-lab">Seleção prévia</span><select data-fx-ac-sess><option value="">Não selecionado</option><option value="__reserva"'+(sv==='__reserva'?' selected':'')+'>Banco de reserva</option>'+Array.from(new Set((av||[]).concat(ses?[ses]:[]))).map(function(x){return '<option value="'+E(x)+'"'+(x===sv?' selected':'')+'>'+E(x)+'</option>';}).join('')+'</select></div>':'<p>'+E(sv==='__reserva'?'Banco de reserva':sv||'Não selecionado')+'</p>';
+   sub+=fxCampo('triagem','Seleção Prévia - Nota','Nota de enquadramento');
+ }else if(d==='Monocrática')sub=fxCampo('triagem','Hipóteses Monocrática','Hipótese do artigo 932')+fxCampo('triagem','Art. 932 - Nota de enquadramento','Nota de enquadramento');
+ else if(d==='Outro destino')sub=fxCampo('producao','Destino - Outro')+fxCampo('triagem','Destino - Outro Nota','Nota de enquadramento');
+ var final=d==='Sessão'?'Colegiado · Acórdão':d==='Monocrática'?'Relator · Monocrática terminativa':d==='Outro destino'?'Conforme destino indicado':'A definir';
+ return '<div class="fx-grid">'+fxCampo('triagem','Status da triagem')+tipos+fxCampo('producao','Destino - Situação')+'</div>'+fxSubcard('Encaminhamento','<div class="fx-grid">'+sel+sub+'</div><p><b>Destino e pronunciamento final:</b> '+E(final)+'</p>')+fxSubcard('Trâmite','<div class="fx-grid">'+fxCampo('origem','Próxima ação','Próxima providência')+'</div>'+fxTrHtml(ed))+fxSubcard('Histórico de julgamento',fxHistHtml(ed));
+}
+function fxAcompChange(t){
+ if(!ST.edit||ST.ad.leitura)return false;
+ if(t.hasAttribute('data-fx-jtipo')){ST.draft['triagem.Tipo de Julgamento']=Array.from(host.querySelectorAll('[data-fx-jtipo]:checked')).map(function(x){return x.value;}).join(' + ');render();return true;}
+ if(t.hasAttribute('data-fx-ac-dest')){ST.draft['producao.Destino']=t.value;if(t.value==='Monocrática')ST.draft['producao.Mono - Tipo de ato']='Decisão monocrática (art. 932)';render();return true;}
+ if(t.hasAttribute('data-fx-ac-sess')){ST.draft['triagem.Seleção Prévia']=t.value?'SELECIONADO PREVIAMENTE':'';ST.draft['pauta.Nova sessão de destino']=t.value==='__reserva'?'':t.value;render();return true;}
+ return false;
+}
+function fxAcompAction(a,t){
+ if(!/^tr-|^hj-/.test(a||''))return false;if(!ST.edit||ST.ad.leitura)return true;
+ if(a.indexOf('hj-')===0){var L=linhas('triagem','Histórico de julgamento').map(function(x){return Object.assign({},x);});if(a==='hj-add'){if(L.length>=60){avisar('Limite de 60 eventos.','warn');return true;}L.push({data:hoje()});}else if(window.confirm('Excluir este evento?'))L.splice(+t.dataset.fxI,1);else return true;ST.draft[FX_HJ]=L;render();return true;}
+ var m=fxTrMap();if(!m)return true;var i=+t.dataset.fxTrI,p=m.passos[i];if(a==='tr-add'){p={id:'tr-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,8),tipo:'providencia',texto:'',feito:false,data:new Date().toISOString()};m.passos.push(p);fxTrLog(m,p,'incluído');}else if(a==='tr-remove'&&p){if(!window.confirm('Remover o passo? A sinalização será preservada.'))return true;fxTrLog(m,p,'removido');m.passos.splice(i,1);}else if(p){var j=i+(a==='tr-up'?-1:1);if(j<0||j>=m.passos.length)return true;m.passos.splice(i,1);m.passos.splice(j,0,p);fxTrLog(m,p,'reordenado');}fxTrStore(m);render();return true;
+}
+function fxAcompInput(t){if(!t.hasAttribute('data-fx-tr-k')||!ST.edit||ST.ad.leitura)return false;var m=fxTrMap(),p=m&&m.passos[+t.dataset.fxTrI],k=t.dataset.fxTrK;if(!p)return true;var v=t.type==='checkbox'?t.checked:t.value;if(p[k]!==v){p[k]=v;if(k==='feito')fxTrLog(m,p,v?'concluído':'reaberto');fxTrStore(m);}var b=host.querySelector('[data-fx="salvar"]');if(b)b.textContent='Salvar alterações ('+Object.keys(ST.draft).length+')';return true;}
+function fxAcompValid(){if(Object.prototype.hasOwnProperty.call(ST.draft,FX_TR)){var m=fxTrMap();if(!m||m.passos.some(function(p){return !S(p.texto).trim();}))return 'Preencha a descrição de todos os passos do Trâmite.';}if(Object.prototype.hasOwnProperty.call(ST.draft,FX_HJ)&&ST.draft[FX_HJ].some(function(x){return !x.data||!x.evento||(['Retirada','Adiamento','Vista','Suspensão','Conversão em diligência'].indexOf(x.evento)>=0&&!S(x.justificativa).trim());}))return 'Informe data, evento e justificativa das intercorrências.';return '';}
+
 function abaGruposCorpo(A) {
   var dn = destino(), h = '', n = 0;
   if (A.destino && A.destino !== dn) return card('Não se aplica a este processo', '<p>' + (A.destino === 'sessao' ? 'O destino do julgamento é decisão monocrática: o processo não vai à pauta. A decisão fica em Produção › Decisão monocrática.' : 'Esta parte só vale para a decisão monocrática.') + '</p><p>Para mudar, use o destino no fim do fluxo, acima.</p>');
@@ -1375,12 +1430,13 @@ function abaGruposCorpo(A) {
   var gs = (A.grupos || []).filter(function (g) { return !(ST.v2 && A.aba==='Triagem' && g.grupo==='Sinalizações') && (!g.destino || g.destino === dn) && grupoVisivel(g) && !(ST.v2 && !ST.edit && FX2_SO_LADO.indexOf(g.grupo) >= 0); }), vazios = [];
   if (A.aba === 'Processo') gs = gs.map(function (g, i) { var k = PRI_PROC.indexOf(g.grupo); return [k < 0 ? 99 + i : k, g]; }).sort(function (a, b) { return a[0] - b[0]; }).map(function (x) { return x[1]; });
   if(A.aba==='Triagem')gs=gs.map(function(g){return Object.assign({},g,{campos:g.campos.filter(function(c){return ['Registro - Teor dos autos','Registro - Peças'].indexOf(c.chave)<0;})});}).filter(function(g){return g.campos.length;});
-  if(ST.v2)gs=gs.map(function(g){return Object.assign({},g,{campos:g.campos.filter(function(c){return ['Detalhamento do caso','Síntese Processual','Síntese Fática','Alegações','Observações'].indexOf(c.chave)<0;})});}).filter(function(g){return g.campos.length;});
+  if(ST.v2)gs=gs.map(function(g){return Object.assign({},g,{campos:g.campos.filter(function(c){return (g.grupo==='Matéria'||['Detalhamento do caso','Síntese Processual','Síntese Fática'].indexOf(c.chave)<0)&&['Alegações','Observações'].indexOf(c.chave)<0;})});}).filter(function(g){return g.campos.length;});
   h += gs.map(function (g) {
+    if(A.aba==='Triagem'&&g.grupo==='Análise e Acompanhamento')return card(g.grupo,fxAcomp(g),{n:('0'+(++n)).slice(-2)});
     var analise=A.aba==='Triagem'&&/^(Análise e Indexação|Análise|Conclusão da análise)$/.test(g.grupo), adm=A.aba==='Triagem'&&g.grupo==='Admissibilidade e regularidade';
     if(analise&&ST.v2)g=Object.assign({},g,{campos:g.campos.filter(function(c){return ['Destino - Situação','Destino - Confirmado em','Destino - Confirmado por'].indexOf(c.chave)<0 && (ST.edit||c.chave!=='Status da triagem');})});
     var cheios = (g.campos || []).filter(temValor), tudo = ST.edit || ST.vzTodos || ST.vz[g.grupo], nv = (g.campos || []).length - cheios.length;
-    if(analise)return card('Análise e Indexação',analiseStatus+cardDestino(true)+grade(tudo?g.campos:cheios)+indexacaoFicha(),{n:('0'+(++n)).slice(-2)});
+    if(analise)return card('Análise e Indexação',grade(tudo?g.campos:cheios)+indexacaoFicha(),{n:('0'+(++n)).slice(-2)});
     if(adm)return card('Admissibilidade e regularidade',grade(tudo?g.campos:cheios)+cardTempest(true),{n:('0'+(++n)).slice(-2),acoes:!ST.edit&&nv?'<button type="button" class="fx-pill fx-mini" data-fx-vz="'+E(g.grupo)+'">'+(ST.vz[g.grupo]?'Esconder vazios':'+ '+nv+' campos vazios')+'</button>':''});
     if (!tudo && !cheios.length && g.grupo!=='Lote e correção (Index)') { vazios.push(g.grupo); return ''; }
     var ac = !ST.edit && !ST.vzTodos && nv ? '<button type="button" class="fx-pill fx-mini" data-fx-vz="' + E(g.grupo) + '">' + (ST.vz[g.grupo] ? 'esconder vazios' : '+ ' + nv + (nv > 1 ? ' campos vazios' : ' campo vazio')) + '</button>' : '';
@@ -1690,6 +1746,7 @@ function onClick(ev) {
   if (t.hasAttribute('data-fx-inc')) { var g = t.getAttribute('data-fx-inc'), x = CE_INC[g][1]; ST.mostra[g] = true; ST.edit = true; if (x) ST.draft[x[0]] = x[1]; render(); return; }
   if (t.hasAttribute('data-fx-ir')) { var c = t.getAttribute('data-fx-ir'); fechar(); if (!host.classList.contains('on') && ST.ad.irPara) ST.ad.irPara(c); return; }
   var a = t.getAttribute('data-fx');
+  if(fxAcompAction(a,t))return;
   if (a === 'fechar') return fechar();
   if (a === 'ant') return passo(-1);
   if (a === 'prox') return passo(1);
@@ -1697,7 +1754,7 @@ function onClick(ev) {
   if (a === 'editar' && ST.ad.leitura) return;
   if (a === 'editar') { if (ST.edit && Object.keys(ST.draft).length && !window.confirm('Descartar as alterações não salvas?')) return; ST.edit = !ST.edit; ST.draft = {}; if (ST.edit && ST.tab === 'resumo') ST.tab = 'Triagem'; render(); return; }
   if (a === 'descartar') { ST.draft = {}; ST.edit = false; ST.mostra = {}; render(); return; }
-  if (a === 'salvar') { var K = Object.keys(ST.draft); if (!K.length) { ST.edit = false; render(); return; } var C = {}; K.forEach(function (k) { C[k] = ST.draft[k]; }); gravar(C, K.length + ' campo(s) da ficha gravado(s).').catch(function () {}); return; }
+  if (a === 'salvar') { var valid=fxAcompValid();if(valid){avisar(valid,'warn');return;}var K = Object.keys(ST.draft); if (!K.length) { ST.edit = false; render(); return; } var C = {}; K.forEach(function (k) { C[k] = ST.draft[k]; }); gravar(C, K.length + ' campo(s) da ficha gravado(s).').catch(function () {}); return; }
   if (t.hasAttribute('data-fx-tba') || t.hasAttribute('data-fx-tbx')) {
     var id = t.getAttribute('data-fx-tba') || t.getAttribute('data-fx-tbx'), i = id.indexOf('.'), L = linhas(id.slice(0, i), id.slice(i + 1)).map(function (x) { return Object.assign({}, x); });
     if (t.hasAttribute('data-fx-tba')) L.push({}); else L.splice(+t.getAttribute('data-fx-i'), 1);
@@ -1723,6 +1780,7 @@ function onClick(ev) {
 }
 function onChange(ev) {
   var t = ev.target;
+  if(fxAcompChange(t))return;if(fxAcompInput(t))return;
   if (t.hasAttribute('data-fx-destino')) { if (t.value === destSel()) return; var dp = t.value.split('|'), dm = { 'producao.Destino': dp[0] || '', 'producao.Destino - Situação': dp[1] || '' }; if (ST.edit) { Object.assign(ST.draft, dm); render(); } else gravar(dm, dp[0] === 'Monocrática' ? 'Destino: decisão monocrática' + (dp[1] ? ' · ' + dp[1].toLowerCase() : '') + '.' : dp[0] === 'Sessão' ? 'Destino: colegiado' + (dp[1] ? ' · ' + dp[1].toLowerCase() : '') + '.' : dp[0] ? 'Destino: outro destino.' : 'Destino a definir na triagem.').catch(function () {}); return; }
   if (t.hasAttribute('data-fx-file')) { var f = t.files && t.files[0]; if (f) lerTxt(f); t.value = ''; return; }
   if (t.hasAttribute('data-fx-dest')) { ST.teor.parsed.docs[+t.getAttribute('data-fx-dest')].target = t.value; render(); return; }
@@ -1738,6 +1796,7 @@ function onPastePostit(ev) {
 }
 function onInput(ev) {
   var t = ev.target; if (!t.hasAttribute) return;
+  if(fxAcompInput(t))return;
   if (t.hasAttribute('data-fx-obs')) { ST.obsTx = t.value; return; }
   if (t.hasAttribute('data-fx-val')) { var it = ST.teor && ST.teor.items && ST.teor.items[+t.getAttribute('data-fx-val')]; if (it) { it.value = t.value; it.status = !S(it.current) ? 'novo' : N(it.current) === N(it.value) ? 'igual' : 'conflito'; } return; }
   if (t.hasAttribute('data-fx-tb')) { var tid = t.getAttribute('data-fx-tb'), ti = tid.indexOf('.'), TL = linhas(tid.slice(0, ti), tid.slice(ti + 1)).map(function (x) { return Object.assign({}, x); }), li = +t.getAttribute('data-fx-i');
