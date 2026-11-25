@@ -10,22 +10,53 @@ O procs-muta é o repositório principal: a partir desta importação, nada aqui
 
 | Pasta | Período | Registros |
 | --- | --- | --- |
-| `acordaos/` | 1999–2026 | 26.050 |
-| `monocraticas/` | 2016–2026 | 7.157 |
-| **Total** | | **33.207** |
+| `acordaos/` | 1999–2026 | 26.234 |
+| `monocraticas/` | 2016–2026 | 7.261 |
+| **Total** | | **33.495** |
 
-Um arquivo por ano, em JSON comprimido (`AAAA.json.gz`). O `indice.json.gz` traz os 33.207
+Um arquivo por ano, em JSON comprimido (`AAAA.json.gz`). O `indice.json.gz` traz os 33.495
 registros em forma resumida, com chaves curtas, para busca sem abrir os arquivos de ano.
 
-Dos acórdãos: 12.694 com inteiro teor, 11.751 só com o acórdão e 1.605 só com a ementa.
-Por atuação: 25.402 como relator e 648 como relator para o acórdão.
+Dos acórdãos: 12.877 com inteiro teor, 11.752 só com o acórdão e 1.605 só com a ementa.
+Por atuação: 25.586 como relator e 648 como relator para o acórdão.
 
 ## Critério da coleta
 
 - Monocráticas: `relator_t: CARLOS MUTA`
 - Acórdãos: `relator_t | relator_acordao_t: CARLOS MUTA`
 
-Coleta original em 30/10/2026, registrada em `MANIFESTO.json`.
+Coleta original em 30/10/2026, registrada em `MANIFESTO.json`, que também registra cada
+incorporação posterior (campo `incorporacoes`).
+
+## Coleta semanal
+
+A série é mantida por acréscimo: a cada semana pesquisam-se as duas coleções na base do TRF-3
+(magistrado CARLOS MUTA, por data de **julgamento**), de trinta dias antes do julgado mais
+recente da série até hoje — a sobreposição é proposital, porque a incorporação descarta o que
+já existe.
+
+A base não tem API: a lista de resultados é lida no navegador. Página 1 vem do formulário de
+pesquisa; as seguintes de `Home/ListaResumida/2?np=N`. De cada `li.acordao-retorno` saem o
+número do processo, os `span.info` de `.informacoes-basicas`, `.info-relator`,
+`.info-publicacao`, `.info-ementa`, `.info-acordao` e os `data-link` dos botões, com `<br>`
+convertido em quebra de linha. Esse material bruto vira registros da série com
+`scripts/jurisprudencia/normalizar_coleta.py` e entra com
+`scripts/jurisprudencia/incorporar.py`, que:
+
+- descarta os repetidos pelo par (número do processo, data de julgamento/decisão);
+- acrescenta os novos ao fim do arquivo do ano, numerando `seq`/`id` na sequência;
+- acrescenta as entradas ao fim do `indice.json.gz`, sem reordenar nada;
+- refaz `MANIFESTO.json` e `SHA256SUMS`.
+
+`incorporar.py --conferir` confere totais, ids, hashes e o casamento entre índice e arquivos.
+
+Campos derivados do texto do documento, por não virem separados da base: `partes`,
+`relator_no_documento`, `resultado_colegiado` (acórdãos) e `orgao_julgador` das monocráticas.
+As regras foram conferidas contra a série já existente — `partes` e `relator_no_documento`
+reproduzem 100% dos registros de 2026, `orgao_julgador` 100% das monocráticas de 2026 e
+`resultado_colegiado` 99,2% dos acórdãos de 2026. O `dispositivo` das monocráticas **não** é
+preenchido nas incorporações: a derivação da coleta original não foi reproduzível (6% de
+coincidência), e o campo fica ausente em vez de receber valor de outra regra [VALIDAR].
 
 ## Lacunas conhecidas
 

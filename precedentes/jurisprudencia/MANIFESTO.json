@@ -10,8 +10,8 @@
   "acordaos": "2026-10-30T06:00:26.052Z"
  },
  "totais": {
-  "monocraticas": 7157,
-  "acordaos": 26050,
+  "monocraticas": 7261,
+  "acordaos": 26234,
   "acordaos_na_base": 26212,
   "acordaos_nao_coletados": {
    "quantidade": 162,
@@ -36,7 +36,7 @@
    "2023": 1252,
    "2024": 72,
    "2025": 1,
-   "2026": 781
+   "2026": 885
   },
   "acordaos": {
    "1999": 5,
@@ -66,7 +66,7 @@
    "2023": 2319,
    "2024": 314,
    "2025": 8,
-   "2026": 1940
+   "2026": 2124
   }
  },
  "arquivos_de_entrada": [
@@ -192388,6 +192388,19 @@
    "arquivo": "dados/acordaos/2026.json.gz",
    "sha256_inteiro_teor": "2e066ddebd4f2618d6918c076e93aa41c9689b0fc663a9c1546abeed2bb1dddf",
    "sha256_ementa": "8f65c0c2d3c6dcdf2dbb62142f34e4b24cf2530f289f9909b75e2b943e4d8d9f"
+  }
+ ],
+ "incorporacoes": [
+  {
+   "em": "2026-11-21T09:43:32+00:00",
+   "novos": {
+    "acordaos": 184,
+    "monocraticas": 104
+   },
+   "totais": {
+    "monocraticas": 7261,
+    "acordaos": 26234
+   }
   }
  ]
 }
