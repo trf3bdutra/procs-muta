@@ -14,7 +14,7 @@
   function aplica(){var av=avOn();document.documentElement.classList.toggle('modo-av',av);
     Array.prototype.forEach.call(document.querySelectorAll('[data-av]'),function(el){el.hidden=!av;var w=el.parentElement;if(w&&w.classList.contains('tabw'))w.hidden=!av;});
     var cur=q('.tab[aria-selected="true"]');if(!av&&cur&&cur.hasAttribute('data-av')){var b=q('.tab[data-v="ement"]');if(b)b.click();}
-    var ed0=!!window.VDM_EDITOR;window.VDM_EDITOR=!!AC.editor||!!window.VDM_PAGINA_EDITOR;
+    var ed0=!!window.VDM_EDITOR;window.VDM_EDITOR=!!AC.editor||!!window.VDM_PAGINA_EDITOR&&!window.VDM_COLLECTIO;
     if(ed0!==window.VDM_EDITOR){try{var v=function(id){var x=q(id);return x&&!x.hidden;};if(v('#v-edit')&&typeof xRender==='function')xRender();}catch(x){}}
     if(av&&!AC.enc){AC.enc=1;api('/api/compendio').then(function(j){if(window.VDM_encDados)window.VDM_encDados(j.enciclopedia);}).catch(function(x){AC.enc=0;if(window.VDM_encDados)window.VDM_encDados(null,x.message);});}
     var el=q('#ed-lnk');if(el)el.hidden=!(AC.editor&&!window.VDM_PAGINA_EDITOR);
@@ -32,7 +32,7 @@
     o.querySelector('form').addEventListener('submit',function(ev){ev.preventDefault();var er=q('#ac-er');er.hidden=true;var n=q('#ac-nome').value;
       api('/api/login',{method:'POST',body:JSON.stringify({usuario:n,senha:q('#ac-senha').value})}).then(function(){try{localStorage.setItem('eq_ultimo',n);}catch(x){}o.hidden=true;return verifica();}).catch(function(x){er.textContent=x.message;er.hidden=false;});});}
   /* editor aberto no painel do desembargador (/editor/?cmt=1): quem edita é o CMT; o servidor confere a chave do painel */
-  var CMTED=!!window.VDM_PAGINA_EDITOR&&/[?&]cmt=1(?:&|$)/.test(location.search);
+  var CMTED=!!window.VDM_PAGINA_EDITOR&&!window.VDM_COLLECTIO&&/[?&]cmt=1(?:&|$)/.test(location.search);
   function verifica(){if(CMTED)return new Promise(function(ok){setTimeout(function(){AC.usuario='CMT';AC.perfil='editor';AC.editor=true;AC.avancado=true;AC.ok=true;aplica();document.dispatchEvent(new CustomEvent('cmt-acesso',{detail:AC}));ok(AC);},0);});
     if(!SITE){AC.ok=true;aplica();document.dispatchEvent(new CustomEvent('cmt-acesso',{detail:AC}));return Promise.resolve(AC);}
     return api('/api/acesso').then(function(j){AC.usuario=j.usuario||'';AC.editor=!!j.editor;AC.avancado=AC.editor||!!j.avancado;AC.perfil=AC.editor?'editor':AC.avancado?'avancado':'equipe';}).catch(function(){AC.usuario='';AC.perfil='equipe';AC.avancado=false;AC.editor=false;})
