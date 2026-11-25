@@ -734,9 +734,43 @@ function dkIncHtml(t){var L=(DK.inc[t.k]||[]),ab=DK.pick===t.k,caso=!!(window.CQ
     '<p class="meta">'+(DK.pickq?'Resultados da busca.':'Sugestões pelo bloco'+(caso?' e pelo caso':'')+'. Busque para ver outros.')+' Clique para incluir ou retirar.</p><ol class="cq-pick-l" id="dk-pickl">'+(window.CQX?CQX.pickLista(t.n,t.k,DK.pickq):'')+'</ol></div>';
   else h+='<button type="button" class="dbt" data-dpick="'+esc(t.k)+'">+ Incluir parágrafo do banco</button>';
   return h+'</div>';}
-var _dkCanTrechoBase=dkCanTrecho;dkCanTrecho=function(sel){var h=(window.CQX&&CQX.tem()?CQX.prontuario():'')+_dkCanTrechoBase(sel);if(sel.pt.id==='acordao'||xFixo(sel.pt.id,sel.t))return h;var inc=dkIncHtml(sel.t);
+
+/* Prontuário de trabalho: lacunas reais da versão/parte ativa da folha, não uma segunda ficha. */
+var DKPR={cnj:'',modo:'pendentes'};
+function dkProntLacunas(){
+ var all=Array.from(document.querySelectorAll('#x-main .xblk .fill[data-fk]')),seen=new Set(),L=[];
+ all.forEach(function(f){var key=f.getAttribute('data-fk'),blk=f.closest('.xblk'),ph=f.getAttribute('data-ph')||'',alias=dkAlias(ph),v=String(FILL[key]||AUTO[alias]||f.textContent||'').trim();
+  if(!key||!blk||seen.has(key))return;seen.add(key);
+  L.push({key:key,bloco:blk.getAttribute('data-xk'),titulo:(blk.querySelector('.bl')||{}).textContent||'Trecho',label:dkCampoRot(f)||ph||'Campo da minuta',v:v,auto:!FILL[key]&&!!AUTO[alias]});
+ });
+ return L;
+}
+function dkProntLacunasHtml(){
+ var L=dkProntLacunas(),pend=L.filter(function(x){return !x.v;}),show=DKPR.modo==='todos'?L:pend;
+ var h='<div class="dk-pront-progress"><b>'+pend.length+' campo(s) em aberto</b><small>'+L.length+' lacunas na parte atual</small></div><div class="dk-pront-modes" role="group" aria-label="Filtrar campos">'+[['pendentes','Em aberto'],['todos','Todos']].map(function(x){return '<button type="button" data-dkpr-modo="'+x[0]+'" aria-pressed="'+(DKPR.modo===x[0])+'">'+x[1]+'</button>';}).join('')+'</div>';
+ if(!L.length)return h+'<p class="meta">A versão atual não contém campos de preenchimento direto. Confira os blocos de texto e as orientações.</p>';
+ if(!show.length)return h+'<p class="meta">Nenhuma lacuna direta em aberto nesta parte. Isso não equivale à revisão jurídica da minuta.</p>';
+ h+='<ol class="dk-pront-lacunas">'+show.map(function(x){return '<li><button type="button" data-dkpr-campo="'+esc(x.key)+'" data-dkpr-bloco="'+esc(x.bloco)+'"><span><b>'+esc(x.label)+'</b><small>'+esc(x.titulo)+(x.v?' · '+(x.auto?'Ficha / automático':'Preenchido na minuta'):' · em aberto')+'</small></span><i aria-hidden="true">'+(x.v?'✓':'→')+'</i></button></li>';}).join('')+'</ol>';
+ return h;
+}
+function dkProntuarioAtivo(){
+ if(!window.CQX||!CQX.tem())return '';
+ var cnj=String((CQX.P()||{}).processo||'');if(DKPR.cnj!==cnj)DKPR={cnj:cnj,modo:'pendentes'};
+ return '<section class="cf dk-pront-ativo"><div class="cfl">Prontuário de trabalho <span class="pill">parte ativa</span></div><div id="dk-pront-lacunas">'+dkProntLacunasHtml()+'</div><p class="meta">Clique no campo para preencher no canhoto ou na folha. Alterações de redação não gravam na ficha.</p><details class="dk-pront-ficha"><summary>Consultar ficha do processo</summary>'+CQX.prontuario()+'</details></section>';
+}
+function dkProntAtualizar(){var p=document.getElementById('dk-pront-lacunas');if(p)p.innerHTML=dkProntLacunasHtml();}
+document.addEventListener('click',function(ev){var t=ev.target,b=t.closest&&t.closest('[data-dkpr-modo],[data-dkpr-campo]');if(!b||!b.closest('#v-edit'))return;
+ ev.preventDefault();ev.stopImmediatePropagation();
+ if(b.hasAttribute('data-dkpr-modo')){DKPR.modo=b.getAttribute('data-dkpr-modo');dkProntAtualizar();return;}
+ var key=b.getAttribute('data-dkpr-campo'),block=b.getAttribute('data-dkpr-bloco');XP.sel=block;xPagina();
+ var f=Array.from(document.querySelectorAll('#x-aside [data-dfk]')).find(function(x){return x.getAttribute('data-dfk')===key;})||Array.from(document.querySelectorAll('#x-main .fill[data-fk]')).find(function(x){return x.getAttribute('data-fk')===key;});
+ if(f){f.scrollIntoView({block:'nearest'});if(f.matches('input,textarea,[contenteditable="true"]'))f.focus();}
+},true);
+document.addEventListener('input',function(ev){var t=ev.target;if(t.closest&&t.closest('#v-edit')&&(t.matches('[data-dfk]')||t.closest('#x-main .fill')))dkProntAtualizar();});
+
+var _dkCanTrechoBase=dkCanTrecho;dkCanTrecho=function(sel){var h=dkProntuarioAtivo()+_dkCanTrechoBase(sel);if(sel.pt.id==='acordao'||xFixo(sel.pt.id,sel.t))return h;var inc=dkIncHtml(sel.t);
   var i=h.indexOf('<div class="cf xrot">');return i>=0?h.slice(0,i)+inc+h.slice(i):h+inc;};
-var _dkCanPecaBase=dkCanPeca;dkCanPeca=function(PT,pt){var h=(window.CQX&&CQX.tem()?CQX.prontuario():'')+_dkCanPecaBase(PT,pt);
+var _dkCanPecaBase=dkCanPeca;dkCanPeca=function(PT,pt){var h=dkProntuarioAtivo()+_dkCanPecaBase(PT,pt);
   if(pt.ref)h+='<details class="cf dsec dref"><summary class="cfl">'+esc(pt.ref.t)+' <span class="pill">referência</span></summary><p class="meta" style="margin:6px 0">Forma de ementa do caso-exemplo: os fatos e o resultado não são deste processo.</p><div class="dref-t">'+esc(pt.ref.f).replace(/\n/g,'<br>')+'</div></details>';
   return h;};
 /* ---------- eventos ---------- */
