@@ -6,7 +6,7 @@
 'use strict';
 var $ = function (id) { return document.getElementById(id); };
 var FT = window.MutaFontes, caixa = $('par-app');
-var P = { q: '', cat: '', erro: '', lista: null, abertos: {} };
+var P = { q: '', cat: '', modo:'todos', erro: '', lista: null, abertos: {} };
 function esc(v) { return String(v == null ? '' : v).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
 function N(v) { return String(v == null ? '' : v).normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase(); }
 function aberta() { var p = $('panel-par'); return p && !p.hidden; }
@@ -19,12 +19,13 @@ function carregar() {
 }
 function filtrados() {
   var t = N(P.q).split(/\s+/).filter(Boolean);
-  return (P.lista || []).filter(function (p) {
+  var L=(P.lista || []).filter(function (p) {
     if (P.cat && p.cat.split(' › ')[0] !== P.cat) return false;
     if (!t.length) return true;
     var h = N(p.cat + ' ' + p.titulo + ' ' + p.texto);
     return t.every(function (w) { return h.indexOf(w) >= 0; });
   });
+  return FT.rank(L,P.modo,function(p){return [p.cat,p.titulo,p.texto].join(' ');});
 }
 function render() {
   if (!caixa || !aberta()) return;
@@ -36,7 +37,7 @@ function render() {
   L.forEach(function (p) { if (!grupos[p.cat]) { grupos[p.cat] = []; ordem.push(p.cat); } grupos[p.cat].push(p); });
   caixa.innerHTML = '<div class="pp-top"><input type="search" id="pp-q" placeholder="Buscar: honorários, gratuidade, tempestividade…" value="' + esc(P.q) + '">' +
     '<select id="pp-cat" title="Filtrar por categoria"><option value="">Todas as categorias</option>' + cats.map(function (c) { return '<option' + (c === P.cat ? ' selected' : '') + '>' + esc(c) + '</option>'; }).join('') + '</select>' +
-    '<p class="muted pp-n">' + L.length + ' de ' + P.lista.length + ' parágrafos · as partes destacadas são vagas a preencher</p></div>' +
+    FT.scopeHTML(P.modo)+'<p class="muted pp-n">' + L.length + ' de ' + P.lista.length + ' parágrafos · as partes destacadas são vagas a preencher</p></div>' +
     ordem.map(function (c) {
       return '<h4 class="tr-g">' + esc(c) + ' <small class="muted">' + grupos[c].length + '</small></h4>' + grupos[c].map(function (p) {
         return '<article class="pp-i"><div class="pp-h"><b>' + esc(p.titulo) + '</b><span class="pp-ac"><button type="button" class="btn solid sm" data-ins="' + esc(p.id) + '" title="Inserir no editor do PJe, na posição do cursor">Inserir</button><button type="button" class="btn line sm" data-cp="' + esc(p.id) + '">Copiar</button></span></div><p class="pp-t">' + comVagas(p.texto) + '</p></article>';
@@ -47,8 +48,9 @@ function render() {
 var tq = 0;
 if (caixa) {
   caixa.addEventListener('input', function (e) { if (e.target.id !== 'pp-q') return; clearTimeout(tq); tq = setTimeout(function () { P.q = e.target.value; render(); }, 250); });
-  caixa.addEventListener('change', function (e) { if (e.target.id === 'pp-cat') { P.cat = e.target.value; render(); } });
+  caixa.addEventListener('change', function (e) { if(e.target.hasAttribute('data-rep-scope')){P.modo=e.target.value;render();return;} if (e.target.id === 'pp-cat') { P.cat = e.target.value; render(); } });
   caixa.addEventListener('click', function (e) {
+    if(e.target.closest('[data-rep-read]')){FT.lerEditor().then(render,function(err){var b=e.target.closest('[data-rep-read]');if(b)b.title=err.message;});return;}
     var bi = e.target.closest('[data-ins]');
     if (bi) {
       var pi = (P.lista || []).filter(function (x) { return x.id === bi.dataset.ins; })[0]; if (!pi || !window.MutaPje || !window.MutaPje.inserir) return;
