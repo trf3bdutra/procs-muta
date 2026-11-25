@@ -2314,7 +2314,7 @@ function repModeloLinks(m){
  if(!repPermitido()||!BASE)return '';var L=repModeloIndex(BASE,rpDB()).porModelo.get(m.id)||[],C=new Map(repCatalogo().lista.map(function(x){return [x.grupo+'|'+x.k,x];}));
  if(!L.length)return '';return '<div class="xrg">Referências do Repertório</div><div class="rep-citacoes">'+Object.keys(REP_ROT).map(function(g){var A=L.filter(function(x){return x.grupo===g;});return A.length?'<div class="rep-cit-grupo"><b>'+REP_ROT[g]+'</b><div>'+A.map(function(x){var c=C.get(g+'|'+x.k);return '<button type="button" data-rep-link="'+esc(x.k)+'" data-rep-grupo="'+g+'">'+esc(c?c.label:x.k)+'</button>';}).join('')+'</div></div>':'';}).join('')+'</div>';
 }
-document.addEventListener('click',function(ev){var b=ev.target.closest&&ev.target.closest('[data-nexus-modelo]');if(!b)return;ev.preventDefault();ev.stopImmediatePropagation();if(!repPermitido())return;
+if(typeof document!=='undefined')document.addEventListener('click',function(ev){var b=ev.target.closest&&ev.target.closest('[data-nexus-modelo]');if(!b)return;ev.preventDefault();ev.stopImmediatePropagation();if(!repPermitido())return;
  var id=b.dataset.nexusModelo;base().then(function(B){var m=(B.mod||[]).find(function(x){return x.id===id;});if(!m){toast('Modelo não encontrado.');return;}irModelos(mTipo(m));MSF={};MS.sel=id;MS.tab='ficha';MS.blk=null;MS.fora={};MS.alt={};MS.abre={};MVZ.modo='lista';mRender();}).catch(function(){toast('Não foi possível abrir o modelo.');});
 },true);
 
