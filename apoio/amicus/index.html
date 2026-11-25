@@ -221,7 +221,7 @@ html[data-theme=dark] #fluxos{--af-entry:#8fb7e3;--af-mono:#dcae58;--af-susp:#b8
 .cx-g{font:400 9.5px/1.4 var(--emono,monospace);letter-spacing:.11em;text-transform:uppercase;color:var(--em);margin:12px 0 2px}
 #comp-body details summary{cursor:pointer;font-size:12px;color:var(--em)}
 
-/* abas do Amicus (Referências · Collegium · Collectio) */
+/* abas do Amicus (Referências · Collectio) */
 .am-home-header .am-nav-apps button{flex:0 0 auto;padding:7px 12px;border:1px solid var(--el);background:transparent;color:var(--ei);font:600 11.5px Figtree,system-ui,sans-serif;cursor:pointer;white-space:nowrap}
 .am-home-header .am-nav-apps button[aria-selected="true"]{background:var(--eg,#173f3d);border-color:var(--eg,#173f3d);color:#fff}
 .am-home-header .am-nav-apps button:not([aria-selected="true"]):hover{background:var(--ep2)}
@@ -384,6 +384,13 @@ body.am-com-aba{overflow:hidden}
 #operacional.full-panel{padding:16px 20px}
 #operacional.full-panel #fluxos .af-body{grid-template-columns:minmax(0,1fr) 280px}
 #operacional.full-panel #ro-list{grid-template-columns:repeat(3,minmax(0,1fr))}
+
+/* Collegium no próprio Amicus (painel, sem iframe) */
+#jur-collegium .cg-host{height:calc(100vh - var(--am-hh,64px) - 140px);min-height:560px;border:1px solid var(--el);background:var(--ebg,#fbfaf5);overflow:hidden}
+#jur-collegium .cg-nota{margin:6px 0 10px}
+#jur-collegium.full-panel{padding:14px 18px;display:flex;flex-direction:column}
+#jur-collegium.full-panel .cg-host{flex:1;height:auto;min-height:0}
+#jur-collegium.full-panel .cg-nota{display:none}
 </style><style id="am-areas-css">
 .am-modular>.am-area-nav,.am-modular>.am-group-heading{grid-column:1/-1}
 .am-modular>.am-module-nav{order:0}
@@ -404,7 +411,7 @@ body.am-com-aba{overflow:hidden}
 .am-enc-list li{margin:5px 0}
 .am-enc-status{font-size:12px;color:var(--em)}
 @media(max-width:700px){.am-area-nav{grid-template-columns:repeat(2,minmax(0,1fr))}.am-group-heading h2{font-size:18px}}
-</style></head><body><header class="am-home-header"><div class="am-legacy"><b>Amicus Curiae.</b><span>Gabinete CMT · Ferramentas</span></div><nav class="am-over-nav am-home-overview" aria-label="Aplicações e áreas de consulta"><div class="am-nav-apps cn-in" role="tablist" aria-label="Abas do Amicus"><button type="button" role="tab" data-amtab="ref" aria-selected="true">Referências</button><button type="button" role="tab" data-amtab="collegium" aria-selected="false">Collegium</button><button type="button" role="tab" data-amtab="collectio" aria-selected="false" hidden title="Só para servidores logados">Collectio</button></div><div class="am-nav-links" aria-label="Aplicações"><a href="/amicus/cortex/">CORTEX</a><a href="/amicus/compendium/">Compendium</a><a href="/amicus/cognitio/">Cognitio</a></div></nav><nav class="am-context-nav am-home-overview" aria-label="Subabas da aplicação" hidden><span class="am-context-label"></span><div class="cn-in" role="group"></div></nav></header>
+</style></head><body><header class="am-home-header"><div class="am-legacy"><b>Amicus Curiae.</b><span>Gabinete CMT · Ferramentas</span></div><nav class="am-over-nav am-home-overview" aria-label="Aplicações e áreas de consulta"><div class="am-nav-apps cn-in" role="tablist" aria-label="Abas do Amicus"><button type="button" role="tab" data-amtab="ref" aria-selected="true">Referências</button><button type="button" role="tab" data-amtab="collectio" aria-selected="false" hidden title="Só para servidores logados">Collectio</button></div><div class="am-nav-links" aria-label="Aplicações"><a href="/amicus/cortex/">CORTEX</a><a href="/amicus/compendium/">Compendium</a><a href="/amicus/cognitio/">Cognitio</a></div></nav><nav class="am-context-nav am-home-overview" aria-label="Subabas da aplicação" hidden><span class="am-context-label"></span><div class="cn-in" role="group"></div></nav></header>
 <p class="am-access-status" id="am-access-status" role="status" hidden></p>
 <main class="am-dashboard am-workspace">
 <aside class="am-rail am-competence" id="referencias-operacionais" aria-labelledby="am-competence-title"><div class="am-rail-head"><small>Referências operacionais</small><h2 id="am-competence-title">Competência e imparcialidade</h2></div><div class="am-rail-panels"><section class="busca" id="competencia"><div class="pane-title"><div><small>Referência · competência</small><h2>Competência</h2></div></div><p>Turma Regional de Mato Grosso do Sul, competência delegada e distribuição por matéria nas Seções do TRF3. Síntese do material fornecido, sujeita à conferência normativa.</p>
@@ -657,7 +664,6 @@ document.addEventListener('keydown',e=>{if(e.ctrlKey||e.metaKey||e.altKey||/^(IN
 document.addEventListener('click',e=>{const k=e.target.closest&&e.target.closest('.cx-kbd');if(k){const s=k.closest('section.busca');s&&vai(s);}});
 })();
 </script></main>
-<section class="am-tabpane" id="am-tab-collegium" role="tabpanel" aria-label="Collegium" hidden><iframe title="Collegium · ementário da Turma Regional de MS" data-src="/amicus/collegium/#v=ement"></iframe></section>
 <section class="am-tabpane" id="am-tab-collectio" role="tabpanel" aria-label="Collectio" hidden><iframe title="Collectio" data-src="/amicus/collectio/"></iframe></section>
 <script>
 /* Barra única: espelha controles reais dos módulos, sem alterar seus motores. */
@@ -706,7 +712,7 @@ frames().forEach(f=>f.addEventListener('load',()=>{if(f.closest('.am-tabpane')?.
 D.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-amtab]');if(b){e.preventDefault();abre(b.dataset.amtab);return;}
  const m=e.target.closest&&e.target.closest('.amicus-brand a[href="/amicus/"],.am-legacy');if(m&&!(e.ctrlKey||e.metaKey||e.shiftKey)){e.preventDefault();abre('ref');scrollTo({top:0,behavior:'smooth'});}});
 window.addEventListener('resize',altura);if(window.ResizeObserver)new ResizeObserver(altura).observe(D.querySelector('body>header'));
-function fromHash(){let raw='';try{raw=decodeURIComponent((location.hash||'').slice(1));}catch(e){}const [tab,...rest]=raw.split('&');if(['collectio','collegium'].includes(tab))abre(tab,true,rest.join('&'));else if(!tab||tab==='ref')abre('ref',true);}
+function fromHash(){let raw='';try{raw=decodeURIComponent((location.hash||'').slice(1));}catch(e){}const [tab,...rest]=raw.split('&');if(tab==='collectio')abre(tab,true,rest.join('&'));else if(!tab||tab==='ref')abre('ref',true);}
 window.addEventListener('hashchange',fromHash);
 fromHash();
 fetch('/api/login',{credentials:'same-origin',cache:'no-store'}).then(async r=>{if(r.status===401||r.status===403)return null;if(!r.ok)throw Error('HTTP '+r.status);return r.json();}).then(j=>{logado=!!(j&&j.usuario);sessionState=logado?'authenticated':'unauthenticated';}).catch(()=>{sessionState='error';}).then(()=>{btns().forEach(b=>{if(b.dataset.amtab==='collectio')b.hidden=!logado;});const tab=location.hash.split('&')[0];if(tab==='#collectio')fromHash();});
@@ -723,9 +729,7 @@ const groups=[
 ];
 const cfg=groups.flatMap(g=>g[3]);
 function module(id,title,subtitle,body){const el=D.createElement('section');el.className='busca';el.id=id;el.innerHTML='<div class="pane-title"><div><small>'+subtitle+'</small><h2>'+title+'</h2></div></div>'+body;W.append(el);return el;}
-module('jur-collegium','Collegium','Jurisprudência · Turma Regional de MS','<p>Consulte o ementário da Turma Regional, com pesquisa e filtros por relator, preservando a origem dos julgados.</p><button class="more" type="button" data-amtab="collegium-open">Abrir ementário</button>');
-D.querySelector('[data-amtab="collegium-open"]').removeAttribute('data-amtab');
-D.querySelector('#jur-collegium button').onclick=()=>D.querySelector('header [data-amtab="collegium"]')?.click();
+module('jur-collegium','Collegium','Jurisprudência · Turma Regional de MS','<p class="cg-nota">Ementário da Turma Regional de MS: a série do Relator Carlos Muta (Gab. A) e os julgados dos Gabs. B e C, com pesquisa, filtros por relator, inteiro teor e linha do tempo.</p><p class="cg-status bmeta" aria-live="polite" hidden></p><div class="cg-host"></div>').querySelector('.pane-title').insertAdjacentHTML('beforeend','<button type="button" class="more" data-full="jur-collegium">⛶ Tela cheia</button>');
 module('norm-atos','Assentos e referências normativas','Repertório normativo','<p>Consulte os assentos regimentais e as referências de aplicação cotidiana, vinculados ao Regimento.</p><div class="am-norm-links"></div>');
 const norm=D.querySelector('#norm-atos .am-norm-links');['rit-dia','rit-ass'].forEach(id=>{const node=D.getElementById(id);if(node)norm.append(node);});
 const loading='<p class="am-enc-status" aria-live="polite">Consultando a fonte da Enciclopédia…</p><div class="am-enc-content"></div>';
@@ -796,6 +800,136 @@ const reset=D.createElement('button');reset.type='button';reset.textContent='Res
 D.addEventListener('click',e=>{const b=e.target.closest('[data-req],[data-tema],[data-rart]');if(!b)return;const id=b.hasAttribute('data-req')?'recursos':b.hasAttribute('data-tema')?'temas-proc':'regimento';const el=D.getElementById(id);if(pref[id]?.fold){pref[id].fold=false;apply(el);save();}},true);
 D.addEventListener('keydown',e=>{if(e.ctrlKey||e.metaKey||e.altKey||/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)||e.target.isContentEditable||!/^\d$/.test(e.key)||W.hidden)return;const k=[...W.querySelectorAll('.cx-kbd')].find(x=>x.textContent.trim()===e.key);const el=k?.closest('.am-module');if(el&&pref[el.id]?.fold){pref[el.id].fold=false;apply(el);save();}},true);
 D.getElementById('af-fit')?.click();
+})();
+</script><script>
+/* Collegium dentro do Amicus, sem iframe: o ementário publicado em /amicus/collegium/fonte.html (o mesmo collegium.html do build.py)
+   é montado num shadow root do módulo #jur-collegium. O CSS fica isolado ali (html/body/:root viram .cg-html/.cg-body) e os scripts
+   rodam com document, window, location e history apontados para o painel: o endereço do ementário vive em /amicus/#collegium&… */
+(function(){'use strict';
+const D=document,W=window,FONTE='/amicus/collegium/fonte.html';
+const mod=D.getElementById('jur-collegium');if(!mod)return;
+const host=mod.querySelector('.cg-host'),status=mod.querySelector('.cg-status');
+let fase=0,raiz=null,html=null,corpo=null,ativo=false,padrao='v=ement';
+/* ---- endereço: o ementário lê e grava o que vem depois de #collegium& ---- */
+function hashCg(){const m=(location.hash||'').match(/^#collegium(?:&(.*))?$/);return m?(m[1]||''):null;}
+function gravaHash(x){try{history.replaceState(history.state,'','#collegium'+(x?'&'+x:''));}catch(e){}}
+const LOC={
+ get hash(){const h=hashCg();return '#'+(h===null||h===''?padrao:h);},set hash(v){gravaHash(String(v).replace(/^#/,''));},
+ get href(){return location.href;},set href(v){const s=String(v);if(s.charAt(0)==='#')gravaHash(s.slice(1));else location.href=s;},
+ get protocol(){return location.protocol;},get host(){return location.host;},get hostname(){return location.hostname;},get origin(){return location.origin;},
+ get port(){return location.port;},get pathname(){return location.pathname;},get search(){return location.search;},
+ reload(){location.reload();},assign(u){LOC.href=u;},replace(u){const s=String(u);if(s.charAt(0)==='#')gravaHash(s.slice(1));else location.replace(s);},toString(){return location.href;}
+};
+function urlCg(u){if(u==null)return null;const s=String(u),i=s.indexOf('#');if(i<0)return '';return s.slice(i+1);}
+const HIST={
+ replaceState(st,t,u){const h=urlCg(u);if(h===null)return;gravaHash(h);},
+ pushState(st,t,u){const h=urlCg(u);if(h===null)return;gravaHash(h);},
+ back(){history.back();},forward(){history.forward();},go(n){history.go(n);},get length(){return history.length;},get state(){return history.state;}
+};
+/* ---- teclado: só quando a pessoa está no Collegium (foco ou último clique nele) ---- */
+D.addEventListener('pointerdown',e=>{ativo=e.composedPath().includes(host);},true);
+D.addEventListener('focusin',e=>{ativo=e.composedPath().includes(host);},true);
+const TECLAS=new Set(['keydown','keyup','keypress']),DOC_EV=new Set(['DOMContentLoaded','readystatechange','visibilitychange','selectionchange','copy','paste','fullscreenchange']);
+const embrulhos=new WeakMap();
+function soNoPainel(f){if(typeof f!=='function'&&!(f&&f.handleEvent))return f;let g=embrulhos.get(f);if(!g){g=function(e){if(!ativo||e.composedPath().includes(host))return;return typeof f==='function'?f.call(this,e):f.handleEvent(e);};embrulhos.set(f,g);}return g;}
+function alvoEv(t){return DOC_EV.has(t)?D:raiz;}
+/* ---- seletores: html/body/:root do ementário apontam para as camadas do painel ---- */
+function sel(s){return String(s).replace(/:root\b/g,'.cg-html').replace(/(^|[\s,>+~(])(html|body)(?![\w-])/g,(m,a,b)=>a+(b==='html'?'.cg-html':'.cg-body'));}
+function docProxy(){
+ const M={
+  getElementById:id=>raiz.getElementById(id),
+  querySelector:s=>raiz.querySelector(sel(s)),
+  querySelectorAll:s=>raiz.querySelectorAll(sel(s)),
+  getElementsByClassName:c=>html.getElementsByClassName(c),
+  getElementsByTagName:t=>/^(html|body|head)$/i.test(t)?[t.toLowerCase()==='html'?html:corpo]:html.getElementsByTagName(t),
+  getElementsByName:n=>raiz.querySelectorAll('[name="'+String(n).replace(/"/g,'\\"')+'"]'),
+  addEventListener:(t,f,o)=>{if(TECLAS.has(t)){raiz.addEventListener(t,f,o);D.addEventListener(t,soNoPainel(f),o);}else alvoEv(t).addEventListener(t,f,o);},
+  removeEventListener:(t,f,o)=>{if(TECLAS.has(t)){raiz.removeEventListener(t,f,o);D.removeEventListener(t,soNoPainel(f),o);}else alvoEv(t).removeEventListener(t,f,o);},
+  dispatchEvent:e=>alvoEv(e.type).dispatchEvent(e),
+  elementFromPoint:(x,y)=>raiz.elementFromPoint(x,y),elementsFromPoint:(x,y)=>raiz.elementsFromPoint(x,y),
+  getSelection:()=>(raiz.getSelection?raiz.getSelection():D.getSelection())
+ };
+ return new Proxy(D,{get(t,k){if(Object.prototype.hasOwnProperty.call(M,k))return M[k];
+   if(k==='body')return corpo;if(k==='documentElement')return html;if(k==='head')return raiz;if(k==='readyState')return 'complete';
+   if(k==='activeElement')return raiz.activeElement||D.activeElement;if(k==='location')return LOC;if(k==='defaultView')return WIN;
+   const v=Reflect.get(t,k);return typeof v==='function'?v.bind(t):v;},
+  set(t,k,v){t[k]=v;return true;}});
+}
+let DOC=null,WIN=null;
+function winProxy(){
+ const M={
+  scrollTo:(...a)=>corpo.scrollTo(...a),scroll:(...a)=>corpo.scrollTo(...a),scrollBy:(...a)=>corpo.scrollBy(...a),
+  addEventListener:(t,f,o)=>{if(t==='scroll')corpo.addEventListener(t,f,o);else if(TECLAS.has(t))DOC.addEventListener(t,f,o);else W.addEventListener(t,f,o);},
+  removeEventListener:(t,f,o)=>{if(t==='scroll')corpo.removeEventListener(t,f,o);else if(TECLAS.has(t))DOC.removeEventListener(t,f,o);else W.removeEventListener(t,f,o);},
+  getComputedStyle:(e,p)=>W.getComputedStyle(e,p)
+ };
+ return new Proxy(W,{get(t,k){if(Object.prototype.hasOwnProperty.call(M,k))return M[k];
+   if(k==='document')return DOC;if(k==='location')return LOC;if(k==='history')return HIST;if(k==='window'||k==='self'||k==='globalThis')return WIN;
+   if(k==='scrollY'||k==='pageYOffset')return corpo.scrollTop;if(k==='scrollX'||k==='pageXOffset')return corpo.scrollLeft;
+   const v=Reflect.get(t,k);return typeof v==='function'&&!/^[A-Z]/.test(String(k))?v.bind(t):v;},
+  set(t,k,v){t[k]=v;return true;},has(t,k){return k in t;}});
+}
+/* ---- CSS: só os seletores mudam (declarações e @font-face/@page intactos) ---- */
+function cssPainel(css){
+ let out='',i=0;const n=css.length;
+ function bloco(j){let d=0,q=null;for(;j<n;j++){const c=css[j];if(q){if(c==='\\'){j++;continue;}if(c===q)q=null;continue;}if(c==='"'||c==="'"){q=c;continue;}if(c==='/'&&css[j+1]==='*'){j=css.indexOf('*/',j+2);if(j<0)return n;j++;continue;}if(c==='{')d++;else if(c==='}'){d--;if(d===0)return j;}}return n;}
+ while(i<n){
+  if(css.startsWith('/*',i)){const j=css.indexOf('*/',i+2);i=j<0?n:j+2;continue;}
+  const a=css.indexOf('{',i),f=css.indexOf('}',i);
+  if(a<0){out+=css.slice(i);break;}
+  if(f>=0&&f<a){out+=css.slice(i,f+1);i=f+1;continue;}
+  const pre=css.slice(i,a),p=pre.trim();
+  if(p.charAt(0)==='@'){
+   if(/^@(media|supports|layer|container|document|scope)\b/i.test(p)){out+=pre+'{';i=a+1;continue;}
+   const j=bloco(a);out+=css.slice(i,j+1);i=j+1;continue;
+  }
+  const j=bloco(a);out+=sel(pre)+css.slice(a,j+1);i=j+1;
+ }
+ return out;
+}
+/* ---- montagem ---- */
+function tema(){if(html)html.setAttribute('data-theme',D.documentElement.getAttribute('data-theme')||'light');}
+new MutationObserver(tema).observe(D.documentElement,{attributes:true,attributeFilter:['data-theme']});
+function fontes(doc){doc.querySelectorAll('head link[href*="fonts.googleapis"],head link[rel=preconnect]').forEach(l=>{if(!D.head.querySelector('link[href="'+l.getAttribute('href')+'"]'))D.head.append(l.cloneNode());});}
+function montar(texto){
+ if(fase===2)return;fase=2;
+ const doc=new DOMParser().parseFromString(texto,'text/html');fontes(doc);
+ raiz=host.shadowRoot||host.attachShadow({mode:'open'});raiz.replaceChildren();
+ const st=D.createElement('style');
+ st.textContent=[...doc.querySelectorAll('style')].map(s=>cssPainel(s.textContent)).join('\n')+
+  '\n:host{display:block}.cg-html{height:100%;color-scheme:light}.cg-html[data-theme=dark]{color-scheme:dark}'+
+  '.cg-body{height:100%;overflow:auto;margin:0;position:relative;overscroll-behavior:contain}'+
+  '.cg-body>header.top.nx{display:none!important}';
+ raiz.append(st);
+ html=D.createElement('div');html.className='cg-html';[...doc.documentElement.attributes].forEach(a=>{if(a.name!=='lang')html.setAttribute(a.name,a.value);});
+ corpo=D.createElement('div');corpo.className='cg-body';[...doc.body.attributes].forEach(a=>corpo.setAttribute(a.name==='class'?'data-body-class':a.name,a.value));if(doc.body.className)corpo.className+=' '+doc.body.className;
+ html.append(corpo);raiz.append(html);tema();
+ const exec=[];
+ [...doc.body.childNodes].forEach(nd=>{
+  if(nd.nodeName==='SCRIPT'){const ty=(nd.getAttribute('type')||'').trim();if(!ty||/javascript|module/i.test(ty)){if(!nd.src)exec.push(nd.textContent);return;}}
+  corpo.append(D.importNode(nd,true));
+ });
+ DOC=docProxy();WIN=winProxy();
+ const codigo=exec.join('\n;\n')+'\n//# sourceURL=collegium-painel.js';
+ try{new Function('document','window','self','globalThis','location','history','scrollTo','scrollBy','addEventListener','removeEventListener',codigo)
+   .call(WIN,DOC,WIN,WIN,WIN,LOC,HIST,WIN.scrollTo,WIN.scrollBy,WIN.addEventListener,WIN.removeEventListener);}
+ catch(e){console.error('Collegium:',e);status.textContent='O ementário carregou com erro: '+e.message;status.hidden=false;return;}
+ tema();status.hidden=true;mod.classList.add('cg-pronto');
+}
+async function carregar(){
+ if(fase)return;fase=1;status.hidden=false;status.textContent='Carregando o ementário da Turma Regional…';
+ try{const r=await fetch(FONTE,{cache:'no-cache'});if(!r.ok)throw Error('HTTP '+r.status);montar(await r.text());}
+ catch(e){if(fase===2)return;fase=0;status.textContent='Não foi possível carregar o ementário ('+e.message+'). ';const b=D.createElement('button');b.type='button';b.className='more';b.textContent='Tentar de novo';b.onclick=carregar;status.append(b);}
+}
+W.AmicusCollegium={carregar,montar};
+/* abre quando o módulo entra na tela, ou pelo endereço /amicus/#collegium (links antigos e do Compendium) */
+if('IntersectionObserver' in W){const io=new IntersectionObserver(es=>{if(es.some(e=>e.isIntersecting)&&!mod.classList.contains('am-folded')){io.disconnect();carregar();}},{rootMargin:'300px'});io.observe(mod);}
+function peloEndereco(){if(hashCg()===null)return;mod.classList.remove('am-folded');const b=mod.querySelector('[data-am-fold]');if(b&&b.textContent==='Expandir')b.click();carregar();requestAnimationFrame(()=>mod.scrollIntoView({block:'start'}));}
+W.addEventListener('hashchange',peloEndereco);peloEndereco();
+mod.querySelector('[data-am-fold]')?.addEventListener('click',()=>{if(!mod.classList.contains('am-folded'))carregar();});
+/* tela cheia */
+const full=mod.querySelector('[data-full="jur-collegium"]');
+full.addEventListener('click',()=>{mod.classList.toggle('full-panel');full.textContent=mod.classList.contains('full-panel')?'× Sair da tela cheia':'⛶ Tela cheia';carregar();});
 })();
 </script><script>
 /* Fonte única: Enciclopédia autenticada, sem publicar dados restritos no HTML. */

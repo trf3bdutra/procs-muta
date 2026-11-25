@@ -2,7 +2,7 @@
 
 Ementário dos julgados da Turma Regional de Mato Grosso do Sul **sem os do Relator** (Des. Fed. Carlos Muta,
 Gab. A): acórdãos e decisões monocráticas terminativas do **Gab. B** e do **Gab. C**. É lido pelo Collegium
-(`/amicus/collegium/`), que usa o mesmo ementário do Compendium (`apoio/modus-operandi/fonte/ementario.js`,
+(painel do `/amicus/`, aberto por `/amicus/#collegium`), que usa o mesmo ementário do Compendium (`apoio/modus-operandi/fonte/ementario.js`,
 montado por `build.py › gerar_html('collegium')`), com a dimensão **Relator** a mais.
 
 ## Fonte

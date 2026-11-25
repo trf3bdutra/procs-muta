@@ -188,7 +188,7 @@ if _M28.exists():
     except Exception as _ex:
         print('matriz 28,86%: conferência não rodou:', _ex)
 gz = base64.b64encode(gzip.compress(json.dumps(pacote, ensure_ascii=False, separators=(',', ':')).encode(), 9, mtime=0)).decode()
-# Collegium (/amicus/collegium/): o mesmo ementário com os julgados da Turma Regional de MS — os dos Gabs. B e C (precedentes/collegium)
+# Collegium (painel do /amicus, publicado como /amicus/collegium/fonte.html): o mesmo ementário com os julgados da Turma Regional de MS — os dos Gabs. B e C (precedentes/collegium)
 # e a série do Relator, juntados na publicação por scripts/jurisprudencia/collegium_turma.py
 gz_col = base64.b64encode(gzip.compress(json.dumps(dict(pacote, prec=[], it={}), ensure_ascii=False, separators=(',', ':')).encode(), 9, mtime=0)).decode()
 

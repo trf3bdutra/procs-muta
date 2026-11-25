@@ -15,7 +15,7 @@ ROUTES = (
     'amicus/cortex/index.html', 'amicus/cortex/previa/index.html',
     'amicus/cortex/classico/index.html', 'amicus/cortex/cg/index.html',
     'amicus/cortex/cmt/index.html', 'amicus/cortex/gc/index.html',
-    'amicus/collectio/index.html', 'amicus/compendium/index.html', 'amicus/collegium/index.html',
+    'amicus/collectio/index.html', 'amicus/compendium/index.html',
     'modus/index.html', 'compendio/index.html', 'editor/index.html',
 )
 def apply(html):

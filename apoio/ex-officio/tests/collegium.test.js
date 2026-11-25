@@ -6,10 +6,12 @@ const read=p=>fs.readFileSync(path.join(root,p),'utf8');
 
 test('Amicus tem o cartão do Collegium e o site publica a página e os dados',()=>{
   const amicus=read('apoio/amicus/index.html'),wf=read('.github/workflows/vercel-caput.yml');
-  // Collegium e Collectio são abas do /amicus (Collectio só para servidores logados)
-  assert.ok(amicus.includes('data-amtab="collegium"')&&amicus.includes('data-src="/amicus/collegium/#v=ement"'));
+  // Collegium é painel interno do /amicus (sem iframe nem aba); Collectio segue como aba (só para servidores logados)
+  assert.ok(!amicus.includes('data-amtab="collegium"')&&!amicus.includes('data-src="/amicus/collegium/'),'sem aba nem iframe do Collegium');
+  for(const x of ["FONTE='/amicus/collegium/fonte.html'",'attachShadow','function cssPainel(css)','function docProxy()','function winProxy()','data-full="jur-collegium"','#collegium'])assert.ok(amicus.includes(x),x);
+  assert.ok(wf.includes('"source":"/amicus/collegium/","destination":"/amicus/#collegium"'),'página antiga redireciona para o painel');
   assert.ok(/data-amtab="collectio"[^>]*hidden/.test(amicus),'Collectio escondida até o login');
-  for(const x of ['site/public/amicus/collegium/index.html','gerar_busca.py --pasta precedentes/collegium','site/public/collegium/','"precedentes/collegium/**"'])
+  for(const x of ['site/public/amicus/collegium/fonte.html','gerar_busca.py --pasta precedentes/collegium','site/public/collegium/','"precedentes/collegium/**"'])
     assert.ok(wf.includes(x),x);
 });
 
