@@ -1150,7 +1150,7 @@ function heroOrganizarProntuario(){
   if(flow){
     var people=flow.querySelector('.pv-people'),tags=el('div','hero-designacoes');
     if(people){people.querySelectorAll('.pv-person').forEach(function(x){tags.append(x);});people.remove();}
-    else{flow.querySelectorAll('[data-des-ed],[data-des]').forEach(function(x){var tag=el('span','chip');tag.append(el('small','muted',x.getAttribute('data-des-ed')==='CORRETOR'||x.getAttribute('data-des')==='CORRETOR'?'Corretor · ':'Minutador · '),x);tags.append(tag);});}
+    else{flow.querySelectorAll('[data-des-ed],[data-des]').forEach(function(x){var k=x.getAttribute('data-des-ed')||x.getAttribute('data-des'),v=S(V('producao',k));if(x.closest('.pm-pl')){var label=el('span','pl-q',v||'a designar');x.replaceWith(label);}else{x.remove();}});}
     flow.querySelectorAll('.pv-stage-situacao,.pm-enc').forEach(function(x){body.append(x);});
     flow.querySelectorAll('.pv-enc-summary').forEach(function(x){x.remove();});
     steps.append(flow,tags);
