@@ -1618,27 +1618,6 @@
        "apelido": "alegacoes"
       },
       {
-       "rotulo": "Pendências",
-       "chave": "O que falta sanar",
-       "tipo": "texto-longo",
-       "secao": "triagem",
-       "apelido": "que_falta_sanar"
-      },
-      {
-       "rotulo": "Intercorrências",
-       "chave": "Intercorrências",
-       "tipo": "texto-longo",
-       "secao": "triagem",
-       "apelido": "intercorrencias"
-      },
-      {
-       "rotulo": "Avisos",
-       "chave": "Avisos",
-       "tipo": "texto-longo",
-       "secao": "triagem",
-       "apelido": "avisos"
-      },
-      {
        "rotulo": "Situação para julgar",
        "chave": "Destino - Situação",
        "tipo": "lista",
@@ -1766,6 +1745,32 @@
        "editavel": false,
        "regra": "do lote de triagem (acervo/lotes); atualizado por scripts/triagem/ficha_lote.py",
        "apelido": "registro_triagem"
+      }
+     ]
+    },
+    {
+     "grupo": "Sinalizações",
+     "campos": [
+      {
+       "rotulo": "Pendências",
+       "chave": "O que falta sanar",
+       "tipo": "texto-longo",
+       "secao": "triagem",
+       "apelido": "que_falta_sanar"
+      },
+      {
+       "rotulo": "Intercorrências",
+       "chave": "Intercorrências",
+       "tipo": "texto-longo",
+       "secao": "triagem",
+       "apelido": "intercorrencias"
+      },
+      {
+       "rotulo": "Avisos",
+       "chave": "Avisos",
+       "tipo": "texto-longo",
+       "secao": "triagem",
+       "apelido": "avisos"
       }
      ]
     },
