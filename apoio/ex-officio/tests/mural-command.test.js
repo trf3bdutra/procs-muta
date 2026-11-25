@@ -39,3 +39,7 @@ test('Mural Command: sessões independem de seleção e mês; convocações púb
   agenda=[];vm.runInContext('commandMarcos()',ctx);
   assert.match(nodes['.fx-command-conv'].innerHTML,/Nenhuma convocação futura/);
 });
+
+test('Agenda Mural: sessões e marcos integrados, sem meta duplicada e com afazeres no mesmo bloco',()=>{
+ assert.match(script,/function sessoesNaAgenda\(cal\)/);assert.match(script,/stats=p&&p\.querySelector\('\.sc-p'\)/);assert.match(script,/fx-sess-source" hidden/);assert.match(script,/td=es&&es\.querySelector\('\.cc-td'\)/);assert.match(script,/Meus prazos e afazeres/);assert.match(html,/ME\.hoje='';/);const cal=fs.readFileSync(path.resolve(__dirname,'../../../caput/motor/assets/js/11-calendario.js'),'utf8');assert.match(cal,/data-a="lado-ses"/);assert.match(cal,/ex\.sessoesLateral/);assert.doesNotThrow(()=>new vm.Script(cal));
+});

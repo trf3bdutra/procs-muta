@@ -15,7 +15,7 @@ const DIA=864e5, P=s=>new Date(s+'T12:00:00'), F=s=>s.slice(8,10)+'/'+s.slice(5,
 const ls={get(k,d){try{const v=localStorage.getItem(k);return v==null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
 function montar(el,cal,ex){
   ex=ex||{}; const hoje=ex.hoje||iso(new Date());
-  const st={vista:ls.get('cc_vista2','ambos'),semRef:null,foco:null,passo:ls.get('cc_passo','mes'),alx:false,dia:null,tl:ls.get('cc_tl',false),off:ls.get('cc_off',[]),min:ls.get('cc_min',false),lado:ls.get('cc_lado','hoje'),ini:null,mes:null};
+  const st={vista:ls.get('cc_vista2','ambos'),semRef:null,foco:null,passo:ls.get('cc_passo','mes'),alx:false,dia:null,tl:ls.get('cc_tl',false),off:ls.get('cc_off',[]),min:ls.get('cc_min',false),lado:ls.get(ex.sessoesLateral?'cc_lado_mural':'cc_lado','hoje'),ini:null,mes:null};
   const ses=cal.sessoes.map((s,i)=>({...s,corFixa:s.cor||'',cor:s.cor||CORES[i%CORES.length]}))
     .filter(s=>s.date>=iso(new Date(P(hoje)-45*DIA)));
   ses.forEach((s,i)=>s.cor=s.corFixa||(s.date<hoje?'#8a98a3':CORES[i%CORES.length]));
@@ -302,7 +302,7 @@ function montar(el,cal,ex){
       
       
       ${st.min&&ex.semanaRecolhida?faixaSemana(ses):''}
-      <div class="cc-body">${(()=>{const [e2,d2]=lateral();const b=st.mes||hoje.slice(0,7),[y,m]=b.split('-').map(Number),n2=iso(new Date(y,m,15)).slice(0,7),ML=x=>cap(new Date(+P(x+'-15')).toLocaleDateString('pt-BR',{month:'long'}));const grade=ex.meses===2&&st.passo==='mes'?`<div class="cc-2m"><div><b class="cc-mt">${ML(b)}</b>${mes(vis,b)}</div><div><b class="cc-mt">${ML(n2)}</b>${mes(vis,n2)}</div></div>`:mes(vis);const abas=`<div class="cc-lado" role="tablist"><button role="tab" class="${st.lado==='sem'?'':'on'}" data-a="lado-hoje" aria-selected="${st.lado!=='sem'}">Hoje</button><button role="tab" class="${st.lado==='sem'?'on':''}" data-a="lado-sem" aria-selected="${st.lado==='sem'}">Semana</button></div>`;const e3=!ex.semanaLateral?e2:st.lado==='sem'?`<div class="cc-sb cc-esq">${abas}${semanaLista(vis)}</div>`:e2.replace('<div class="cc-sb cc-esq">','<div class="cc-sb cc-esq">'+abas);return ex.ordemVertical?`<div class="cc-top cc-vertical"><div class="cc-grade">${grade}</div>${e3}${d2}</div>`:`<div class="cc-top">${e3}<div>${grade}</div>${d2}</div>`})()}${ex.semanaLateral?'':semanaFaixa(vis)}</div>
+      <div class="cc-body">${(()=>{const [e2,d2]=lateral();const b=st.mes||hoje.slice(0,7),[y,m]=b.split('-').map(Number),n2=iso(new Date(y,m,15)).slice(0,7),ML=x=>cap(new Date(+P(x+'-15')).toLocaleDateString('pt-BR',{month:'long'}));const grade=ex.meses===2&&st.passo==='mes'?`<div class="cc-2m"><div><b class="cc-mt">${ML(b)}</b>${mes(vis,b)}</div><div><b class="cc-mt">${ML(n2)}</b>${mes(vis,n2)}</div></div>`:mes(vis);const abas=`<div class="cc-lado" role="tablist" aria-label="Agenda pessoal"><button role="tab" class="${st.lado==='hoje'?'on':''}" data-a="lado-hoje" aria-selected="${st.lado==='hoje'}">Hoje</button><button role="tab" class="${st.lado==='sem'?'on':''}" data-a="lado-sem" aria-selected="${st.lado==='sem'}">Semana</button>${ex.sessoesLateral?`<button role="tab" class="${st.lado==='ses'?'on':''}" data-a="lado-ses" aria-selected="${st.lado==='ses'}">Sessões</button>`:''}</div>`;const e3=!ex.semanaLateral?e2:st.lado==='sem'?`<div class="cc-sb cc-esq">${abas}${semanaLista(vis)}</div>`:ex.sessoesLateral&&st.lado==='ses'?`<div class="cc-sb cc-esq">${abas}<div class="cc-session-host" role="tabpanel" aria-label="Minhas sessões e marcos"></div></div>`:e2.replace('<div class="cc-sb cc-esq">','<div class="cc-sb cc-esq">'+abas);return ex.ordemVertical?`<div class="cc-top cc-vertical"><div class="cc-grade">${grade}</div>${e3}${d2}</div>`:`<div class="cc-top">${e3}<div>${grade}</div>${d2}</div>`})()}${ex.semanaLateral?'':semanaFaixa(vis)}</div>
       <div class="cc-lg" hidden>${MK.map(m=>`<span><i class="ti ${m[2]}"></i>${m[1]}</span>`).join('')}<span style="margin-left:auto">cheio = cumprido · pulsando = próximo · vermelho = vencido sem cumprir · tracejado = datas a definir · teclas ← → H A S M</span></div>
       ${ex.alertasNoTopo?`<div class="cc-alertas-fonte" hidden>${alertasHtml()}</div>`:''}<div class="cc-tip" hidden></div>${dialogo()}</div>`;
     t=el.querySelector('.cc-tip'); ajustaForm(); const f1=el.querySelector('form.cc-dl [name=titulo]'); if(f1&&!f1.value) f1.focus();
@@ -317,7 +317,7 @@ function montar(el,cal,ex){
       else if(k==='tl'||k==='dvm'||k==='dvt'){st.tl=k==='tl'?!st.tl:k==='dvt';ls.set('cc_tl',st.tl);}
       else if(k==='min'){st.min=!st.min;ls.set('cc_min',st.min);}
       else if(k==='feito'){st.fe=!st.fe;}
-      else if(k==='lado-hoje'||k==='lado-sem'){st.lado=k==='lado-sem'?'sem':'hoje';ls.set('cc_lado',st.lado);if(k==='lado-hoje')st.dia=null;}
+      else if(k==='lado-hoje'||k==='lado-sem'||(ex.sessoesLateral&&k==='lado-ses')){st.lado=k==='lado-sem'?'sem':k==='lado-ses'?'ses':'hoje';ls.set(ex.sessoesLateral?'cc_lado_mural':'cc_lado',st.lado);if(k==='lado-hoje')st.dia=null;}
       else if(k==='sem'||k==='mes'||k==='ambos'){st.vista=k;ls.set('cc_vista2',k);}
       else if(k==='hoje'){st.ini=null;st.mes=null;st.semRef=null;st.dia=null;}
       else if(k==='wprev'||k==='wnext'){st.semRef=iso(new Date(+P(st.semRef||hoje)+(k==='wnext'?7:-7)*DIA));st.dia=st.semRef;st.mes=st.semRef.slice(0,7);}
@@ -333,7 +333,7 @@ function montar(el,cal,ex){
     if(del){if(confirmDel(del)){salvarItens(itens().filter(i=>i.id!==del.dataset.del));st.dlg={modo:'lista'};render();}return;}
     if(e.target.classList.contains('cc-ov')){st.dlg=null;render();return;}
     if(st.dlg) return;
-    const cel=e.target.closest('.cc-c[data-d]'); if(cel&&!m){st.semRef=cel.dataset.d;st.dia=cel.dataset.d;render();return;}
+    const cel=e.target.closest('.cc-c[data-d]'); if(cel&&!m){st.semRef=cel.dataset.d;st.dia=cel.dataset.d;if(ex.sessoesLateral){st.lado='hoje';ls.set('cc_lado_mural',st.lado);}render();return;}
     const tn=e.target.closest('.cc-td-i[data-dia]'); if(tn){st.dia=tn.dataset.dia;st.semRef=tn.dataset.dia;render();return;}
     const wc=e.target.closest('.cc-wc[data-dia]'); if(wc&&!e.target.closest('.cc-we')){st.dia=wc.dataset.dia;render();return;}
     if(sc){const d=sc.dataset.ses;st.foco=(st.foco||focoPad())===d?null:d;render();return;}
