@@ -89,12 +89,12 @@ test('Portal Amicus: visão geral dentro do cabeçalho e duas colunas laterais',
  assert.doesNotMatch(hd[1],/href="#/);assert.doesNotMatch(hd[1],/am-nav-areas/);
  for(const id of ['recursos','fluxos','enunciados','regimento','temas-proc','assuntos','competencia','impedimentos'])
   assert.equal((home.match(new RegExp('id="'+id+'"','g'))||[]).length,1,id);
- // material da Central de Comando (central.json → central.py)
- const C=JSON.parse(read('apoio/amicus/central.json'));
+ // material de referência do Amicus (material.json → material.py)
+ const C=JSON.parse(read('apoio/amicus/material.json'));
  assert.equal(C.recursos.length,10);assert.ok(C.atos.length>=8&&C.temas.length>=8&&C.assuntos.length>=30);
  assert.ok(!C.lexico&&!home.includes('id="lexico"'),'léxico só na Enciclopédia');
  assert.ok(!home.includes('id="jurisprudencia"'),'sem a pesquisa federada');
- assert.match(home,/<script type="application\/json" id="amicus-central">\{/);
+ assert.match(home,/<script type="application\/json" id="amicus-material">\{/);
  assert.ok(shared.includes("!e.classList.contains('am-home-overview')"));
  for(const m of home.matchAll(/<script>([\s\S]*?)<\/script>/g))new vm.Script(m[1]);
 });
