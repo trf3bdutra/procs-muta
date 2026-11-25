@@ -1624,6 +1624,20 @@ body.dsk #x-main .fill.arr.ok{background:#e7f1ee;color:#1d4f49;box-shadow:inset 
 .xri .xrfa{margin:2px 0 0}.xri .xrfa .lnk{font-size:11px}
 .xrna{margin-top:6px;font-size:12px;color:#5b6b67}.xrna>summary{cursor:pointer;padding:3px 0}
 
+/* Prontuário contextual da Minuta-Matriz */
+.dk-pront-ativo .dk-pront-progress{display:flex;align-items:baseline;justify-content:space-between;gap:5px;flex-wrap:wrap;font-size:11px;margin:6px 0}
+.dk-pront-progress small{font-size:10px;opacity:.75}
+.dk-pront-modes{display:flex;gap:4px;margin:6px 0}
+.dk-pront-modes button{font:inherit;font-size:11px;padding:4px 7px;background:transparent;color:inherit;border:1px solid currentColor;border-radius:5px;cursor:pointer}
+.dk-pront-modes button[aria-pressed=true]{font-weight:700;text-decoration:underline;text-underline-offset:3px}
+.dk-pront-lacunas{list-style:none;padding:0;margin:4px 0;max-height:200px;overflow:auto}
+.dk-pront-lacunas li{border-bottom:1px solid #8793a344}
+.dk-pront-lacunas button{width:100%;display:flex;align-items:center;justify-content:space-between;gap:8px;text-align:left;background:transparent;border:0;color:inherit;font:inherit;padding:6px 3px;cursor:pointer}
+.dk-pront-lacunas button:hover{background:#8793a318}
+.dk-pront-lacunas button span{min-width:0;display:grid;gap:3px;overflow-wrap:anywhere}
+.dk-pront-lacunas button b{font-size:11px}.dk-pront-lacunas button small{font-size:10px;opacity:.75}.dk-pront-lacunas button i{font-style:normal}
+.dk-pront-ficha{border-top:1px solid #8793a344;margin-top:7px;padding-top:6px}.dk-pront-ficha>summary{cursor:pointer;font-size:11px;font-weight:600}
+
 /* ===== modo noturno de #v-edit (gerado por escuro.py a partir de editorial_d.css) ===== */
 :root:not([data-theme="light"]) .dbar label{color:var(--ink)}
 :root:not([data-theme="light"]) .dbar select{border:1px solid var(--line);background:var(--card);color:var(--ink)}
@@ -4796,9 +4810,43 @@ function dkIncHtml(t){var L=(DK.inc[t.k]||[]),ab=DK.pick===t.k,caso=!!(window.CQ
     '<p class="meta">'+(DK.pickq?'Resultados da busca.':'Sugestões pelo bloco'+(caso?' e pelo caso':'')+'. Busque para ver outros.')+' Clique para incluir ou retirar.</p><ol class="cq-pick-l" id="dk-pickl">'+(window.CQX?CQX.pickLista(t.n,t.k,DK.pickq):'')+'</ol></div>';
   else h+='<button type="button" class="dbt" data-dpick="'+esc(t.k)+'">+ Incluir parágrafo do banco</button>';
   return h+'</div>';}
-var _dkCanTrechoBase=dkCanTrecho;dkCanTrecho=function(sel){var h=(window.CQX&&CQX.tem()?CQX.prontuario():'')+_dkCanTrechoBase(sel);if(sel.pt.id==='acordao'||xFixo(sel.pt.id,sel.t))return h;var inc=dkIncHtml(sel.t);
+
+/* Prontuário de trabalho: lacunas reais da versão/parte ativa da folha, não uma segunda ficha. */
+var DKPR={cnj:'',modo:'pendentes'};
+function dkProntLacunas(){
+ var all=Array.from(document.querySelectorAll('#x-main .xblk .fill[data-fk]')),seen=new Set(),L=[];
+ all.forEach(function(f){var key=f.getAttribute('data-fk'),blk=f.closest('.xblk'),ph=f.getAttribute('data-ph')||'',alias=dkAlias(ph),v=String(FILL[key]||AUTO[alias]||f.textContent||'').trim();
+  if(!key||!blk||seen.has(key))return;seen.add(key);
+  L.push({key:key,bloco:blk.getAttribute('data-xk'),titulo:(blk.querySelector('.bl')||{}).textContent||'Trecho',label:dkCampoRot(f)||ph||'Campo da minuta',v:v,auto:!FILL[key]&&!!AUTO[alias]});
+ });
+ return L;
+}
+function dkProntLacunasHtml(){
+ var L=dkProntLacunas(),pend=L.filter(function(x){return !x.v;}),show=DKPR.modo==='todos'?L:pend;
+ var h='<div class="dk-pront-progress"><b>'+pend.length+' campo(s) em aberto</b><small>'+L.length+' lacunas na parte atual</small></div><div class="dk-pront-modes" role="group" aria-label="Filtrar campos">'+[['pendentes','Em aberto'],['todos','Todos']].map(function(x){return '<button type="button" data-dkpr-modo="'+x[0]+'" aria-pressed="'+(DKPR.modo===x[0])+'">'+x[1]+'</button>';}).join('')+'</div>';
+ if(!L.length)return h+'<p class="meta">A versão atual não contém campos de preenchimento direto. Confira os blocos de texto e as orientações.</p>';
+ if(!show.length)return h+'<p class="meta">Nenhuma lacuna direta em aberto nesta parte. Isso não equivale à revisão jurídica da minuta.</p>';
+ h+='<ol class="dk-pront-lacunas">'+show.map(function(x){return '<li><button type="button" data-dkpr-campo="'+esc(x.key)+'" data-dkpr-bloco="'+esc(x.bloco)+'"><span><b>'+esc(x.label)+'</b><small>'+esc(x.titulo)+(x.v?' · '+(x.auto?'Ficha / automático':'Preenchido na minuta'):' · em aberto')+'</small></span><i aria-hidden="true">'+(x.v?'✓':'→')+'</i></button></li>';}).join('')+'</ol>';
+ return h;
+}
+function dkProntuarioAtivo(){
+ if(!window.CQX||!CQX.tem())return '';
+ var cnj=String((CQX.P()||{}).processo||'');if(DKPR.cnj!==cnj)DKPR={cnj:cnj,modo:'pendentes'};
+ return '<section class="cf dk-pront-ativo"><div class="cfl">Prontuário de trabalho <span class="pill">parte ativa</span></div><div id="dk-pront-lacunas">'+dkProntLacunasHtml()+'</div><p class="meta">Clique no campo para preencher no canhoto ou na folha. Alterações de redação não gravam na ficha.</p><details class="dk-pront-ficha"><summary>Consultar ficha do processo</summary>'+CQX.prontuario()+'</details></section>';
+}
+function dkProntAtualizar(){var p=document.getElementById('dk-pront-lacunas');if(p)p.innerHTML=dkProntLacunasHtml();}
+document.addEventListener('click',function(ev){var t=ev.target,b=t.closest&&t.closest('[data-dkpr-modo],[data-dkpr-campo]');if(!b||!b.closest('#v-edit'))return;
+ ev.preventDefault();ev.stopImmediatePropagation();
+ if(b.hasAttribute('data-dkpr-modo')){DKPR.modo=b.getAttribute('data-dkpr-modo');dkProntAtualizar();return;}
+ var key=b.getAttribute('data-dkpr-campo'),block=b.getAttribute('data-dkpr-bloco');XP.sel=block;xPagina();
+ var f=Array.from(document.querySelectorAll('#x-aside [data-dfk]')).find(function(x){return x.getAttribute('data-dfk')===key;})||Array.from(document.querySelectorAll('#x-main .fill[data-fk]')).find(function(x){return x.getAttribute('data-fk')===key;});
+ if(f){f.scrollIntoView({block:'nearest'});if(f.matches('input,textarea,[contenteditable="true"]'))f.focus();}
+},true);
+document.addEventListener('input',function(ev){var t=ev.target;if(t.closest&&t.closest('#v-edit')&&(t.matches('[data-dfk]')||t.closest('#x-main .fill')))dkProntAtualizar();});
+
+var _dkCanTrechoBase=dkCanTrecho;dkCanTrecho=function(sel){var h=dkProntuarioAtivo()+_dkCanTrechoBase(sel);if(sel.pt.id==='acordao'||xFixo(sel.pt.id,sel.t))return h;var inc=dkIncHtml(sel.t);
   var i=h.indexOf('<div class="cf xrot">');return i>=0?h.slice(0,i)+inc+h.slice(i):h+inc;};
-var _dkCanPecaBase=dkCanPeca;dkCanPeca=function(PT,pt){var h=(window.CQX&&CQX.tem()?CQX.prontuario():'')+_dkCanPecaBase(PT,pt);
+var _dkCanPecaBase=dkCanPeca;dkCanPeca=function(PT,pt){var h=dkProntuarioAtivo()+_dkCanPecaBase(PT,pt);
   if(pt.ref)h+='<details class="cf dsec dref"><summary class="cfl">'+esc(pt.ref.t)+' <span class="pill">referência</span></summary><p class="meta" style="margin:6px 0">Forma de ementa do caso-exemplo: os fatos e o resultado não são deste processo.</p><div class="dref-t">'+esc(pt.ref.f).replace(/\n/g,'<br>')+'</div></details>';
   return h;};
 /* ---------- eventos ---------- */
