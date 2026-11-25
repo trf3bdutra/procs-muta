@@ -1933,3 +1933,16 @@ html[data-tema=escuro] #gab .hero-proc-tags .hero-secao-3{--tag-ink:#efa7cf}
 #gab .hero-autos-workspace .au-fx>.seg{flex:1 1 auto;min-width:0}
 #gab .hero-autos-workspace .au-docs{min-width:0;overflow-wrap:anywhere}
 @media(max-width:360px){#gab .hero-case-grid{grid-template-columns:minmax(0,1fr)}}
+
+/* HERO · monitoramento alterna com as etapas */
+#gab .hero-steps.hero-steps-mon>.pv-flowbox,#gab .hero-steps.hero-steps-mon>.pm-pills,#gab .hero-steps.hero-steps-mon>.hero-designacoes{display:none!important}
+#gab .hero-steps>#hero-dock-pane-monitoramento[hidden],#gab .hero-steps>#hero-dock-pane-sinalizacoes[hidden]{display:none!important}
+#gab .hero-steps.hero-steps-mon>#hero-dock-pane-monitoramento{border:0;margin:2px 0 0;padding:0;background:transparent;box-shadow:none}
+#gab #hero-dock-pane-monitoramento>summary{display:none!important}
+#gab #hero-dock-pane-monitoramento>.hero-acomp-b{padding:5px 0 0}
+#gab #hero-dock-pane-monitoramento .hero-ctl-integrado{min-width:0;margin:0}
+#gab #hero-dock-pane-monitoramento .hero-sig-details{margin:0 0 6px}
+#gab #hero-dock-pane-monitoramento .hero-mon-foco{outline:1px solid var(--gold);outline-offset:-1px;border-radius:5px}
+#gab .hero-case-status .status-urgencia[data-ativo=true]{color:#c4572b;background:#c4572b18}
+#gab .hero-case-status .hero-status-icon[aria-pressed=true]{box-shadow:0 0 0 1px currentColor}
+#gab .hero-case-status .hero-monitor-hover[aria-pressed=true]{opacity:1;pointer-events:auto}
