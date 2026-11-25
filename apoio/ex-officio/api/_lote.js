@@ -476,6 +476,36 @@ async function gravar(req, res, u, gestor) {
   const rel = 'acervo/lotes/' + id + '.json';
   /* Colunas de análise da triagem: dados próprios do lote, não substituem campos da ficha.
      Alterações pontuais, sob o mesmo controle de concorrência do Collectio. */
+  /* Grupos nativos e séries transversais: atualizações pontuais, sem sobrescrever a análise existente. */
+  if (b.acao === 'triagem-grupo' || b.acao === 'triagem-serie-incluir') {
+    const CNJ=/^\d{7}-\d{2}\.\d{4}\.\d\.\d{2}\.\d{4}$/;
+    const ps=[...new Set((Array.isArray(b.processos)?b.processos:[]).map(String))];
+    if(!ps.length||ps.length>600||ps.some(p=>!CNJ.test(p)))return res.status(400).json({erro:'Selecione de 1 a 600 processos válidos.'});
+    for(let t=0;t<4;t++){
+      const {dados:lote,sha}=await lerLote(rel).catch(nada);
+      if(!lote||lote.tipo!=='triagem')return res.status(404).json({erro:'Lote de triagem não encontrado.'});
+      const itens=lote.itens||[],mapa=new Map(itens.map(it=>[it.processo,it]));
+      if(b.acao==='triagem-grupo'){
+        if(ps.some(p=>!mapa.has(p)))return res.status(400).json({erro:'Há processos fora do lote.'});
+        const grupos=lote.grupos||[],nome=String(b.nome||'').trim().slice(0,200);
+        let g=String(b.grupo||'');
+        if(nome){if(grupos.length>=60||grupos.some(x=>String(x.rotulo).toLowerCase()===nome.toLowerCase()))return res.status(409).json({erro:'Grupo existente ou limite de grupos atingido.'});
+          g='g-'+require('crypto').randomBytes(5).toString('hex');grupos.push({id:g,rotulo:nome,cor:'#527c6b',resultado:'',modelo:''});lote.grupos=grupos;
+        }else if(g&&!grupos.some(x=>x.id===g))return res.status(400).json({erro:'Grupo inválido.'});
+        ps.forEach(p=>{mapa.get(p).grupo=g||null;});
+      }else{
+        if(!/^adp-serie-/.test(id)&&!lote.serie)return res.status(400).json({erro:'O destino não é uma série.'});
+        const novos=ps.filter(p=>!mapa.has(p));if(itens.length+novos.length>600)return res.status(400).json({erro:'A série excederia 600 processos.'});
+        const dados=new Map((Array.isArray(b.itens)?b.itens:[]).filter(x=>x&&CNJ.test(String(x.processo))).map(x=>[x.processo,x]));
+        novos.forEach(p=>{const x=dados.get(p)||{};itens.push({processo:p,item:itens.length+1,sessao:'',grupo:null,recurso:String(x.recurso||'').slice(0,200),assunto:String(x.assunto||'').slice(0,2000),tipo_caso:String(x.tipo_caso||'').slice(0,2000),tarefa:String(x.tarefa||'').slice(0,200),variacoes:[],pecas:[],triagem:{},pendencias:[],equipe:{minuta:'',correcao:'',situacao:'A minutar'},minuta:false});});
+        lote.itens=itens;
+      }
+      lote.atualizado_em=new Date().toISOString().slice(0,10);
+      try{await gravarLote(rel,lote,sha,'Collectio ('+u+'): organização da triagem '+id);return res.status(200).json({ok:true,id,total:itens.length,grupos:lote.grupos||[]});}
+      catch(e){if(e.status!==409&&e.status!==422)throw e;}
+    }
+    return res.status(409).json({erro:'O lote mudou; tente novamente.'});
+  }
   if (b.acao === 'triagem-coluna' || b.acao === 'triagem-celula') {
     for (let t=0;t<4;t++) {
       const {dados:lote,sha}=await lerLote(rel).catch(nada);
