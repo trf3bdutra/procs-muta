@@ -16,7 +16,7 @@ var EDCMTK=(function(){try{return localStorage.getItem('cmt_k')||sessionStorage.
 if(EDCMT){delete EDCOL.mod;delete EDCOL.nor;EDCOL.par='Parágrafos';EDCOL.pec='Peças';EDS.col='par';document.documentElement.classList.add('ed-cmt');}
 /* gravação pelo servidor do site (login da Ex Officio + acesso de editor) */
 function edSrv(){return !!(window.CMT_SITE&&window.CMT_ACESSO&&window.CMT_ACESSO().editor);}
-var EDK='vdm-ed-rascunho-v1';
+var EDK=window.VDM_COLLECTIO?'collectio-ed-rascunho-v1':'vdm-ed-rascunho-v1';
 /* mesmo formato do json.dumps do Python (separadores “, ” e “: ”), para o diff ficar limpo */
 function pyDumps(v){if(v===null||v===undefined)return 'null';if(Array.isArray(v))return '['+v.map(pyDumps).join(', ')+']';if(typeof v==='object')return '{'+Object.keys(v).map(function(k){return JSON.stringify(k)+': '+pyDumps(v[k]);}).join(', ')+'}';return JSON.stringify(v);}
 function edHoje(){return new Date().toISOString().slice(0,10);}
@@ -44,7 +44,7 @@ function edPoe(r,n){Object.keys(r).forEach(function(k){delete r[k];});Object.key
 function edToca(c,r,novo){if(!(r.id in EDS.orig[c]))EDS.orig[c][r.id]=novo?'__novo__':edJ(r);}
 function edSit(c,id){var o=EDS.orig[c][id];if(o===undefined)return '';var cur=edAcha(c,id);
   if(o==='__novo__')return cur?'novo':'';if(!cur)return 'excluído';return edJ(cur)===o?'':'editado';}
-function edPendentes(){var P=[];Object.keys(EDS.orig).forEach(function(c){if(EDCMT&&!EDCOL[c])return;Object.keys(EDS.orig[c]).forEach(function(id){var s=edSit(c,id);if(!s){delete EDS.orig[c][id];return;}
+function edPendentes(){var P=[];Object.keys(EDS.orig).forEach(function(c){if((EDCMT||window.VDM_COLLECTIO)&&!EDCOL[c])return;Object.keys(EDS.orig[c]).forEach(function(id){var s=edSit(c,id);if(!s){delete EDS.orig[c][id];return;}
   var cur=edAcha(c,id),r=cur||JSON.parse(EDS.orig[c][id]);P.push({col:c,id:id,sit:s,t:edRot(c,r).t});});});return P;}
 function edSujo(c){return Object.keys(EDS.orig[c]).some(function(id){return !!edSit(c,id);});}
 function edGuarda(){var P=edPendentes();try{if(!P.length){localStorage.removeItem(EDK);return;}
@@ -55,7 +55,7 @@ function edLeRascunho(){if(EDS.lido)return;EDS.lido=true;var d=null;try{d=JSON.p
   if(!d||!d.cols)return;var n=0,mudou=false;Object.keys(d.cols).forEach(function(c){n+=Object.keys(d.cols[c]).length;if(d.sha&&EDM.arquivos[EDARQ[c]]&&d.sha[c]&&d.sha[c]!==EDM.arquivos[EDARQ[c]].sha)mudou=true;});
   if(n)EDS.restaura={d:d,n:n,mudou:mudou};}
 function edRestaura(){var d=EDS.restaura&&EDS.restaura.d;EDS.restaura=null;if(!d)return;
-  Object.keys(d.cols).forEach(function(c){var L=edListaDe(c);Object.keys(d.cols[c]).forEach(function(id){var x=d.cols[c][id],cur=edAcha(c,id);
+  Object.keys(d.cols).forEach(function(c){if(window.VDM_COLLECTIO&&!EDCOL[c])return;var L=edListaDe(c);Object.keys(d.cols[c]).forEach(function(id){var x=d.cols[c][id],cur=edAcha(c,id);
     if(x.sit==='excluído'){if(cur){edToca(c,cur);L.splice(L.indexOf(cur),1);}return;}
     if(cur){edToca(c,cur);edPoe(cur,x.rec);}else{edToca(c,x.rec,true);L.splice(Math.max(0,Math.min(x.idx,L.length)),0,x.rec);}});});
   edAtualizaVista();edGuarda();toast('Rascunho restaurado');}
@@ -319,7 +319,7 @@ function edArquivo(c){var a=EDM.arquivos[EDARQ[c]],agora=edAgora();
   if(c==='pec')return {path:a.path,txt:JSON.stringify(ED.pecas,null,2)+'\n'};
   if(c==='nor'){var o={};Object.keys(a.head).forEach(function(k){o[k]=a.head[k];});o.atualizadoEm=agora.slice(0,10);o.registros=edLimpa(edListaDe('nor'));return {path:a.path,txt:JSON.stringify(o,null,1)+'\n'};}
   return {path:a.path,txt:JSON.stringify({schema:ED.padrao.schema,versao:ED.padrao.versao,atualizadoEm:agora,registros:ED.padrao.registros},null,1)+'\n'};}
-function edMudados(){return Object.keys(EDARQ).filter(function(c){return (!EDCMT||EDCOL[c])&&edSujo(c);}).map(edArquivo);}
+function edMudados(){return Object.keys(EDARQ).filter(function(c){return (!(EDCMT||window.VDM_COLLECTIO)||EDCOL[c])&&edSujo(c);}).map(edArquivo);}
 function edZip(){var F=edMudados();if(!F.length)return;var bl=zipStore(F.map(function(f){return {n:f.path,d:f.txt};}));baixarBlob(new Blob([bl],{type:'application/zip'}),'modus-operandi-alteracoes-'+edHoje()+'.zip');toast('Arquivos gerados nos caminhos do repositório; o rascunho continua guardado até o envio');}
 function edResumo(){var c={};edPendentes().forEach(function(l){var k=EDCOL[l.col];c[k]=(c[k]||0)+1;});return Object.keys(c).map(function(k){return k.toLowerCase()+': '+c[k];}).join('; ');}
 function edDlgToken(){var F=edMudados(),P=edPendentes();return '<div class="ed-dlg" role="dialog" aria-label="'+(EDCMT?'Salvar alterações':'Gravar no GitHub')+'"><div class="ed-dlgc"><h3>'+(EDCMT?'Salvar alterações':'Gravar no GitHub')+'</h3>'+(EDCMT?'<p class="meta">Passam a valer no Compendium em alguns minutos, em nome do CMT.</p>':'<p class="meta">Um commit em <b>'+esc(EDM.repo)+'</b> ('+esc(EDM.ramo)+') com '+F.map(function(f){return '<code>'+esc(f.path)+'</code>';}).join(', ')+'. Em seguida o GitHub valida a base e reconstrói o Compendium.</p>')+
