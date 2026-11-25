@@ -58,7 +58,7 @@
     }
   };
   document.addEventListener('click', function (e) {
-    var b = e.target.closest && e.target.closest('[data-sg]'); if (!b) return;
+    var b = e.target.closest && e.target.closest('button[data-sg="abrir"],button[data-sg="ok"]'); if (!b) return;
     e.preventDefault(); e.stopPropagation();
     if (b.getAttribute('data-sg') === 'abrir') { T.form = true; avisar(); setTimeout(function () { var i = document.getElementById('sg-senha'); if (i) i.focus(); }, 0); return; }
     var i = document.getElementById('sg-senha'); if (i && S(i.value)) desbloquear(i.value);

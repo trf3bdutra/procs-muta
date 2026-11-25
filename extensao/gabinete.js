@@ -1777,7 +1777,7 @@ function questoesDe(sem) {
 
 caixa.addEventListener('change', function (e) {
   var t = e.target;
-  if (t.dataset && t.dataset.sg != null) { if (window.MutaAutos) window.MutaAutos.marcarSugestao(Number(t.dataset.sg), t.checked); return; }
+  if (t.dataset && t.dataset.auSug != null) { if (window.MutaAutos) window.MutaAutos.marcarSugestao(Number(t.dataset.auSug), t.checked); return; }
   if (t.dataset && t.dataset.esp) { if (window.MutaAutos) window.MutaAutos.especificarJa(t.dataset.esp); return; }
   if (t.dataset && t.dataset.auG) { if (window.MutaAutos) window.MutaAutos.selecionar(t.dataset.auG, t.checked); return; }
   if (t.dataset && t.dataset.auAuto != null) { if (window.MutaAutos) window.MutaAutos.autoLigar(t.checked); return; }
@@ -2083,7 +2083,7 @@ window.MutaGabinete = { recarregar: function () { carregar(true); }, gravarPende
  }
  window.MutaGabinete.classificacaoDoc=docHtml;
  window.MutaGabinete.classificacaoFiltro=function(ds){if(restricted()||!model(DOC))return '';ds=ds.filter(function(d){return !restricted(d);});
- return '<div class="plus-docfilter"><span class="gl">Classificação funcional</span><div class="plus-tags">'+['Todos'].concat(A.categorias,['Não classificados']).map(function(c){var n=c==='Todos'?ds.length:ds.filter(function(d){var v=classified(d).classes;return c==='Não classificados'?!v.length:v.indexOf(c)>=0;}).length;return '<button type="button" class="chip'+(docFilter===c?' on':'')+'" data-plus="filter" data-plus-id="'+esc(c)+'">'+esc(c)+' · '+n+'</button>';}).join('')+'</div></div>';};
+ return '<details class="plus-docfilter au-class-filter"><summary><span>Classificação funcional</span><b>'+esc(docFilter)+'</b></summary><div class="plus-tags">'+['Todos'].concat(A.categorias,['Não classificados']).map(function(c){var n=c==='Todos'?ds.length:ds.filter(function(d){var v=classified(d).classes;return c==='Não classificados'?!v.length:v.indexOf(c)>=0;}).length;return '<button type="button" class="chip'+(docFilter===c?' on':'')+'" data-plus="filter" data-plus-id="'+esc(c)+'">'+esc(c)+' · '+n+'</button>';}).join('')+'</div></details>';};
  window.MutaGabinete.limparFiltroDocumental=function(){docFilter='Todos';};
  window.MutaGabinete.classificacaoVisivel=function(d){if(docFilter==='Todos'||blocked(d))return true;var c=classified(d).classes;return docFilter==='Não classificados'?!c.length:c.indexOf(docFilter)>=0;};
  FORA_PROC['Classificação documental']=1;

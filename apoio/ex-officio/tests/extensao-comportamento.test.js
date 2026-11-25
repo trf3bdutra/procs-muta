@@ -416,7 +416,7 @@ test('universal 0.75.2: aba aberta ligada ao painel (cor do papel, sem linha de 
   } finally { await P.fim(); }
 });
 
-test('universal 0.76: Pauta no padrão do Office — título em Georgia, marcos em linha do tempo e filtros segmentados', { skip: pular, timeout: 90000 }, async () => {
+test('universal 0.76: Pauta sem título duplicado, marcos externos e filtros segmentados', { skip: pular, timeout: 90000 }, async () => {
   const op = { processo: CNJ, origem: {}, triagem: {}, producao: { SERVIDOR: 'Rodrigo', MINUTADO: '2026-11-13', Destino: 'Sessão' }, pauta: {}, controles: {} };
   const P = await abrir(op, { sigilo: '', liberado: true, porque: 'gestor' });
   try {
@@ -427,10 +427,10 @@ test('universal 0.76: Pauta no padrão do Office — título em Georgia, marcos 
     await pg.waitForSelector('#pauta-app .pa-f .chip', { timeout: 15000 });
     const v = await pg.evaluate(() => {
       const t = document.querySelector('#pauta-app .pa-titulo'), c = document.querySelector('#pauta-app .pa-busca .pa-f .chip'), cs = getComputedStyle(c);
-      return { titulo: t.textContent, fonte: getComputedStyle(t).fontFamily, raio: cs.borderTopLeftRadius + '|' + cs.borderTopRightRadius, borda: cs.borderTopWidth, metr: [...document.querySelectorAll('#pauta-app .hero-v53-pa-metric b')].map(b => b.textContent) };
+      return { titulo: !!t, marcosDentro: !!document.querySelector('#pauta-app .pa-ses .pa-marcos'), raio: cs.borderTopLeftRadius + '|' + cs.borderTopRightRadius, borda: cs.borderTopWidth, metr: [...document.querySelectorAll('#pauta-app .hero-v53-pa-metric b')].map(b => b.textContent) };
     });
-    assert.equal(v.titulo, 'Pauta de julgamento.');
-    assert.match(v.fonte, /Georgia/);
+    assert.equal(v.titulo, false, 'sem título redundante');
+    assert.equal(v.marcosDentro, false, 'marcos fora do card');
     assert.equal(v.borda, '1px', 'filtros com borda fina, sem a pílula de contorno grosso');
     assert.notEqual(v.raio, '9999px|9999px');
     assert.deepEqual(v.metr, ['1 de 1', '1 de 1', '0 de 1', '0 de 1']);
@@ -456,4 +456,17 @@ test('universal 0.76.1: seção e assunto sempre no cabeçalho; primeiro bloco d
     assert.ok(a.gap <= 2, 'colada à faixa: ' + a.gap);
     assert.deepEqual(P.erros, [], 'sem erro de script');
   } finally { await P.fim(); }
+});
+
+// A conferência de autos não usa a namespace reservada aos botões de sigilo.
+test('conferência dos autos: seletor independente de sigilo', () => {
+  const fs = require('node:fs'); const path = require('node:path');
+  const root = path.resolve(__dirname,'../../..');
+  const a = fs.readFileSync(path.join(root,'extensao/autos.js'),'utf8');
+  const g = fs.readFileSync(path.join(root,'extensao/gabinete.js'),'utf8');
+  const s = fs.readFileSync(path.join(root,'extensao/sigilo.js'),'utf8');
+  assert.match(a,/type="checkbox" data-au-sug=/);
+  assert.match(g,/dataset\.auSug/);
+  assert.doesNotMatch(a,/type="checkbox" data-sg=/);
+  assert.match(s,/button\[data-sg="abrir"\]/);
 });

@@ -2074,3 +2074,37 @@ body.hero-redesign-v53 #gab .hero-ger-part-head h4{flex:1;margin:0;color:var(--g
 body.hero-redesign-v53 #gab .hero-ger-part .gr-tx{font-family:Georgia,serif;overflow-wrap:anywhere}
 body.hero-redesign-v53 #gab .hero-ger-part .gr-tx p{font-size:13px;line-height:1.55;white-space:pre-wrap}
 body.hero-redesign-v53 #gab .hero-ger-part mark.gv{background:#f7e9ba;color:#684712;padding:0 2px}
+
+/* Autos · faixa integrada de consulta, classificação e gravação documental. */
+body.hero-redesign-v53 #gab .au-doc-toolbar{display:grid;gap:6px;border:1px solid var(--line);border-radius:7px;background:var(--card);padding:7px;margin:7px 0 9px;min-width:0}
+body.hero-redesign-v53 #gab .au-doc-toolbar :is(.au-fx,.au-gv,.plus-docfilter){margin:0!important}
+body.hero-redesign-v53 #gab .au-doc-toolbar .au-fx{display:flex;gap:5px;flex-wrap:wrap}
+body.hero-redesign-v53 #gab .au-doc-toolbar .au-gv{border:0;border-top:1px solid var(--line);border-radius:0;padding:6px 0 0}
+body.hero-redesign-v53 #gab .au-doc-toolbar .au-class-filter{border-top:1px solid var(--line);padding:5px 0 0;min-width:0}
+body.hero-redesign-v53 #gab .au-class-filter>summary{display:flex;align-items:center;gap:6px;cursor:pointer;font-size:11px;list-style:none}
+body.hero-redesign-v53 #gab .au-class-filter>summary::after{content:'▾';color:var(--muted-fg)}
+body.hero-redesign-v53 #gab .au-class-filter>summary>b{margin-left:auto;font-weight:600;color:var(--gold)}
+body.hero-redesign-v53 #gab .au-class-filter .plus-tags{padding-top:5px}
+body.hero-redesign-v53 #gab input[data-au-sug]{cursor:pointer;accent-color:var(--primary);width:15px;height:15px;flex:none;pointer-events:auto}
+body.hero-redesign-v53 #gab input[data-au-sug]:disabled{cursor:not-allowed;opacity:.5}
+body.hero-redesign-v53 #gab #g-cf .tr-g{font-size:10px!important;text-transform:uppercase!important;letter-spacing:.08em!important;color:var(--gold)!important;font-weight:650!important;border-bottom:1px solid var(--line)!important;padding-bottom:4px!important}
+/* Pauta · seletor e subabas sem título editorial duplicado; régua independente. */
+body.hero-redesign-v53 #pauta-app .pa-session-head{display:grid!important;grid-template-columns:minmax(90px,auto) minmax(0,1fr);gap:6px;align-items:center;margin:0 0 8px!important;padding:0 0 6px!important;border-bottom:1px solid var(--line)}
+body.hero-redesign-v53 #pauta-app .pa-session-head .pa-sel select{width:100%;min-width:0;max-width:none}
+body.hero-redesign-v53 #pauta-app .pa-session-tabs{min-width:0}
+body.hero-redesign-v53 #pauta-app .pa-session-tabs>button{white-space:normal!important}
+body.hero-redesign-v53 #pauta-app .pa-marcos{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(49px,1fr);overflow-x:auto;gap:0;padding:9px 0 11px;margin:0 0 10px;border-bottom:1px solid var(--line);background:transparent;scrollbar-width:thin}
+body.hero-redesign-v53 #pauta-app .pa-mk{position:relative;display:grid;justify-items:center;align-content:start;gap:3px;min-width:0;text-align:center}
+body.hero-redesign-v53 #pauta-app .pa-mk::after{content:'';position:absolute;top:8px;left:calc(50% + 8px);right:calc(-50% + 8px);border-top:1px solid var(--line);pointer-events:none}
+body.hero-redesign-v53 #pauta-app .pa-mk:last-child::after{display:none}
+body.hero-redesign-v53 #pauta-app .pa-mk.past::after{border-top-color:var(--muted-fg)}
+body.hero-redesign-v53 #pauta-app .pa-mk i{display:block;width:17px;height:17px;border:1px solid var(--line);border-radius:50%;background:var(--card);position:relative;z-index:1;box-sizing:border-box;margin:0}
+body.hero-redesign-v53 #pauta-app .pa-mk.past i{background:var(--muted-fg);border-color:var(--muted-fg)}
+body.hero-redesign-v53 #pauta-app .pa-mk.past i::after{content:none}
+body.hero-redesign-v53 #pauta-app .pa-mk.now i{width:17px;height:17px;margin:0;background:var(--gold);border:3px solid var(--card);outline:1px solid var(--gold)}
+body.hero-redesign-v53 #pauta-app .pa-mk.ses i{border:2px solid var(--primary);background:var(--card)}
+body.hero-redesign-v53 #pauta-app .pa-mk small{font:600 9px/1.2 system-ui,sans-serif;letter-spacing:0;text-transform:none;overflow-wrap:normal;margin:1px 0 0;color:var(--muted-fg)}
+body.hero-redesign-v53 #pauta-app .pa-mk b{font:600 12px/1.2 var(--mono);color:var(--fg)}
+body.hero-redesign-v53 #pauta-app .pa-mk em{font:400 9px/1.2 system-ui,sans-serif;color:var(--muted-fg)}
+body.hero-redesign-v53 #pauta-app .pa-mk.now :is(small,b,em){color:var(--gold)}
+body.hero-redesign-v53 #pauta-app .pa-mk.ses b{color:var(--primary)}

@@ -654,11 +654,11 @@ function htmlDocs(pecas) {
   var nSel = ok ? marcados().length : 0;
   var lidos = Object.keys(A.docs).filter(function (k) { return /^(ok|sem)$/.test(A.docs[k].estado); }).length;
   var cab = '<div class="pc-sh"><h3>Peças e documentos</h3><small class="muted">' + (ok ? C.length + ' na cronologia · ' + lidos + ' com texto lido' : 'da ficha do processo') + '</small></div>';
-  if (ok && GB().classificacaoFiltro) cab += GB().classificacaoFiltro(L.filter(function(d){return !docBloq(d);}));
-  var seg = ok ? '<div class="au-fx"><span class="seg"><button type="button" data-au="f:pecas" aria-selected="' + (F === 'pecas') + '" title="As peças da ficha com os seus documentos: decisões, recursos, contrarrazões, parecer, procuração, custas e inicial" >Peças principais (' + (P.length+HP.length) + ')</button><button type="button" data-au="f:todos" aria-selected="' + (F === 'todos') + '" title="A cronologia inteira do PJe, do mais recente ao mais antigo">Cronologia (' + C.length + ')</button></span>' +
+  var filtroFuncional=ok&&GB().classificacaoFiltro?GB().classificacaoFiltro(L.filter(function(d){return !docBloq(d);})) : '';
+  var seg = ok ? '<div class="au-doc-toolbar"><div class="au-fx"><span class="seg"><button type="button" data-au="f:pecas" aria-selected="' + (F === 'pecas') + '" title="As peças da ficha com os seus documentos: decisões, recursos, contrarrazões, parecer, procuração, custas e inicial" >Peças principais (' + (P.length+HP.length) + ')</button><button type="button" data-au="f:todos" aria-selected="' + (F === 'todos') + '" title="A cronologia inteira do PJe, do mais recente ao mais antigo">Cronologia (' + C.length + ')</button></span>' +
     '<button type="button" class="btn line sm au-js" data-au="tudojs"' + (A.todo ? ' disabled' : '') + ' title="Lê o texto de todos os documentos (PDF digitalizado vai ao OCR) e baixa num arquivo JSON, no formato do acervo" aria-label="Baixar o inteiro teor em JSON">' + SVGDL + (A.todo ? A.todo.feitos + '/' + A.todo.total : 'JSON') + '</button></div>' +
-    '<div class="au-gv"><span class="muted">Marcar: <button type="button" class="lnk" data-au="sel:principais">principais</button> · <button type="button" class="lnk" data-au="sel:todos">todos</button> · <button type="button" class="lnk" data-au="sel:nenhum">nenhum</button></span>' +
-    '<button type="button" class="btn solid sm" data-au="gravar"' + (A.grav || !nSel ? ' disabled' : '') + ' title="Registra os marcados na ficha (Outras peças) e grava o inteiro teor de cada um no acervo">' + (A.grav ? (A.grav.fase === 'lendo' ? 'Lendo ' + A.grav.feitos + '/' + A.grav.total + '…' : 'Gravando…') : 'Gravar ' + nSel + ' na ficha') + '</button></div>' +
+    filtroFuncional+'<div class="au-gv"><span class="muted">Marcar: <button type="button" class="lnk" data-au="sel:principais">principais</button> · <button type="button" class="lnk" data-au="sel:todos">todos</button> · <button type="button" class="lnk" data-au="sel:nenhum">nenhum</button></span>' +
+    '<button type="button" class="btn solid sm" data-au="gravar"' + (A.grav || !nSel ? ' disabled' : '') + ' title="Registra os marcados na ficha (Outras peças) e grava o inteiro teor de cada um no acervo">' + (A.grav ? (A.grav.fase === 'lendo' ? 'Lendo ' + A.grav.feitos + '/' + A.grav.total + '…' : 'Gravando…') : 'Gravar ' + nSel + ' na ficha') + '</button></div></div>' +
     (A.gravMsg ? '<p class="status' + (/Não gravou/.test(A.gravMsg) ? ' err' : ' ok') + '">' + esc(A.gravMsg) + '</p>' : '') : '';
   var corpo;
   if (F === 'todos') corpo = '<div class="au-docs">' + C.map(linhaHistorica).join('') + '</div>';
@@ -703,7 +703,7 @@ function htmlSugestoes(secoes) {
   var h = ordem.map(function (sec) {
     return '<h4 class="tr-g">' + esc(sec) + '</h4>' + G[sec].map(function (x) {
       var it = x[0], k = x[1], v = valor(it);
-      return '<div class="sg-i is-' + it.status + '"><input type="checkbox" data-sg="' + k + '"' + (it.apply ? ' checked' : '') + '>' +
+      return '<div class="sg-i is-' + it.status + '"><input type="checkbox" data-au-sug="' + k + '" aria-label="Selecionar ' + esc(it.label) + ' para gravar na ficha"' + (it.apply ? ' checked' : '') + (window.MUTA_WEB&&window.MUTA_WEB.leitura?' disabled':'') + '>' +
         '<span class="sg-bd"><span class="sg-h"><b>' + esc(it.label) + '</b><i class="sg-s">' + (it.status === 'conflito' ? 'diverge' : 'novo') + '</i>' + (it.doc ? '<small class="mono">ID ' + esc(it.doc) + '</small>' : '') + '</span>' +
         '<span class="sg-v">' + esc(v.slice(0, 600)) + '</span>' + (it.status === 'conflito' && it.kind !== 'tabela' ? '<small class="muted">Na ficha: ' + esc(dataBr(S(it.current))) + '</small>' : '') + (it.note ? '<small class="muted">' + esc(it.note) + '</small>' : '') + (mesmoId(it)?'<small class="muted">Mesmo documento · conferir conteúdo</small><button type="button" class="btn line sm" data-au="manter:'+k+'">Manter registro histórico</button>':'') + '</span></div>';
     }).join('');
