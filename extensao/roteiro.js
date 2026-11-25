@@ -150,8 +150,11 @@
   }
   function tipos(g, cnj) {
     if (R.cnj !== cnj) { R.cnj = cnj; R.tipos = null; R.aberto = {}; }
-    var loc = lerLocal(cnj);
-    return loc._tipos ? loc._tipos.reduce(function (o, k) { o[k] = 1; return o; }, {}) : detectar(g);
+    var valor=S(g.V('triagem','Tipo de Julgamento')),T=tiposFicha(valor);return Object.keys(T).length?T:detectar(g);
+  }
+  function tiposFicha(valor){var t={},v=N(valor);TIPOS.forEach(function(x){var nome=N(x[1]);if(v.indexOf(nome)>=0)t[x[0]]=1;});var aliases={ap:/^(ap|apciv)$|\bapelacao\b/,rn:/\b(remnec|reexame|remessa necessaria)\b/,ai:/\bai\b/,ms:/\bms\b/,ed:/\bed\b/,agint:/\bagint\b/,ret:/\b(jr|retratacao)\b/};Object.keys(aliases).forEach(function(k){if(aliases[k].test(v))t[k]=1;});return t;
+  }
+  function gravarTipos(g,T){var nomes=TIPOS.filter(function(x){return T[x[0]];}).map(function(x){return x[1];});if(g.marcar){g.marcar('triagem.Tipo de Julgamento',nomes.join(' / '));if(g.gravar)g.gravar().catch(function(){});}return true;
   }
 
   /* ---------- desenho ---------- */
@@ -213,9 +216,9 @@
       (n.al ? '<span class="rt-al">' + n.al + ' alerta' + (n.al > 1 ? 's' : '') + '</span>' : '') + '</div>' +
       '<div class="rt-bar"><i style="width:' + pct + '%"></i></div>' +
       /* 0.63: seletor do tipo de julgamento recolhido no começo do roteiro; o resumo mostra o tipo em uso */
-      '<details class="rt-tsel"' + (R.tipoAb ? ' open' : '') + '><summary><span class="rt-kind-main"><span class="rt-kind-label">Tipo de julgamento</span><b>' + esc(TIPOS.filter(function (x) { return T[x[0]]; }).map(function (x) { return x[1]; }).join(' · ') || 'A definir') + '</b></span><span class="rt-kind-mode">' + (loc._tipos ? 'Manual' : 'Auto') + '</span><span class="rt-kind-arrow" aria-hidden="true"></span></summary>' +
+      '<details class="rt-tsel"' + (R.tipoAb ? ' open' : '') + '><summary><span class="rt-kind-main"><span class="rt-kind-label">Tipo de julgamento</span><b>' + esc(TIPOS.filter(function (x) { return T[x[0]]; }).map(function (x) { return x[1]; }).join(' · ') || 'A definir') + '</b></span><span class="rt-kind-mode">' + (S(g.V('triagem','Tipo de Julgamento')) ? 'Registrado' : 'Auto') + '</span><span class="rt-kind-arrow" aria-hidden="true"></span></summary>' +
       '<div class="rt-kind-body"><div class="rt-tipos" role="group" aria-label="Tipo de julgamento">' + TIPOS.map(function (x) { var sig={ap:'Ap',rn:'RemNec',ai:'AI',ms:'MS',ed:'ED',agint:'AgInt',ret:'JR'}[x[0]]; return '<button type="button" class="chip rt-kind-option' + (T[x[0]] ? ' on' : '') + '" data-rt="t:' + x[0] + '" aria-pressed="' + !!T[x[0]] + '"><span class="rt-kind-sig">' + esc(sig) + '</span><span class="rt-kind-name">' + esc(x[1]) + '</span><span class="rt-kind-check" aria-hidden="true">' + (T[x[0]]?'✓':'') + '</span></button>'; }).join('') + '</div>' +
-      '<div class="rt-kind-foot"><small>Seleção múltipla</small>' + (loc._tipos ? '<button type="button" class="lnk" data-rt="auto" title="Volta ao tipo identificado pela classe, espécie e tarefa">Restaurar automático</button>' : '<small>Identificado automaticamente</small>') + '</div></div></details>' + (X.barra || '') + (alTopo.length ? '<div class="al-l rt-alt">' + alTopo.map(alHtml).join('') + '</div>' : '') + '@@USAR@@</section>';
+      '<div class="rt-kind-foot"><small>Seleção múltipla</small>' + (S(g.V('triagem','Tipo de Julgamento')) ? '<button type="button" class="lnk" data-rt="auto" title="Volta ao tipo identificado pela classe, espécie e tarefa">Restaurar automático</button>' : '<small>Identificado automaticamente</small>') + '</div></div></details>' + (X.barra || '') + (alTopo.length ? '<div class="al-l rt-alt">' + alTopo.map(alHtml).join('') + '</div>' : '') + '@@USAR@@</section>';
     h += '<ol class="rt">';
     FASES.forEach(function (f) {
       var F = L.filter(function (x) { return x.p.f === f[0]; }); if (!F.length) return;
@@ -263,12 +266,12 @@
   function clique(b, g) {
     var a = b.dataset.rt || '', cnj = g.cnj(), loc = lerLocal(cnj);
     if (/^a:/.test(a)) { var id = a.slice(2), el = b.closest('.rt-p'); R.aberto[id] = !(el && el.classList.contains('ab')); return true; }
-    if (/^t:/.test(a)) { var T = tipos(g, cnj), k = a.slice(2); if (T[k]) delete T[k]; else T[k] = 1; var L = Object.keys(T); loc._tipos = L.length ? L : null; if (!loc._tipos) delete loc._tipos; gravarLocal(cnj, loc); return true; }
+    if (/^t:/.test(a)) { if(window.MUTA_WEB&&window.MUTA_WEB.leitura)return false;var T=tipos(g,cnj),k=a.slice(2);if(!TIPOS.some(function(x){return x[0]===k;}))return false;if(T[k]){if(Object.keys(T).length===1)return false;delete T[k];}else T[k]=1;delete loc._tipos;gravarLocal(cnj,loc);R.tipoAb=true;return gravarTipos(g,T); }
     if (/^u:/.test(a)) { var it = (window.MutaAutos && window.MutaAutos.sugestoes ? window.MutaAutos.sugestoes() : [])[Number(a.slice(2))]; if (it && it.alvo && g.marcar) { g.marcar(it.alvo, it.value); if (g.gravar) g.gravar().catch(function () {}); } return true; }
     if (a === 'ut') { var SG = window.MutaAutos && window.MutaAutos.sugestoes ? window.MutaAutos.sugestoes() : []; (R.usados || []).forEach(function (k) { var x = SG[k]; if (x && x.alvo && g.marcar) g.marcar(x.alvo, x.value); }); if (g.gravar) g.gravar().catch(function () {}); return true; }
-    if (a === 'auto') { delete loc._tipos; gravarLocal(cnj, loc); return true; }
+    if (a === 'auto') { if(window.MUTA_WEB&&window.MUTA_WEB.leitura)return false;delete loc._tipos;gravarLocal(cnj,loc);return gravarTipos(g,{}); }
     return false;
   }
   function conferir(id, on, g) { var cnj = g.cnj(), loc = lerLocal(cnj); if (on) loc[id] = new Date().toISOString().slice(0, 10); else delete loc[id]; gravarLocal(cnj, loc); }
-  window.MutaRoteiro = { tipos: tipos, html: html, resumo: resumo, clique: clique, conferir: conferir, detectar: detectar, PASSOS: PASSOS, TIPOS: TIPOS, admEditavel: admEditavel };
+  window.MutaRoteiro = { tipos: tipos, html: html, resumo: resumo, clique: clique, conferir: conferir, detectar: detectar, PASSOS: PASSOS, TIPOS: TIPOS, tiposFicha: tiposFicha, admEditavel: admEditavel };
 })();
