@@ -1136,22 +1136,36 @@
    "aba": "Triagem",
    "grupos": [
     {
-     "grupo": "Análise e Acompanhamento",
+     "grupo": "Matéria e gestão",
      "campos": [
+      {
+       "rotulo": "Ramo do direito",
+       "chave": "Ramo do direito",
+       "tipo": "texto",
+       "secao": "triagem",
+       "apelido": "ramo_direito"
+      },
+      {
+       "rotulo": "Assunto detalhado",
+       "chave": "Assunto detalhado",
+       "tipo": "texto-longo",
+       "secao": "triagem",
+       "regra": "complementa o do lote (Registro - Assunto detalhado): o cartão da extensão e o Caput mostram o do lote e, na falta, este",
+       "apelido": "assunto_detalhado"
+      },
+      {
+       "rotulo": "Outros assuntos",
+       "chave": "Outros assuntos",
+       "tipo": "texto-longo",
+       "secao": "triagem",
+       "apelido": "outros_assuntos"
+      },
       {
        "rotulo": "Detalhamento",
        "chave": "Detalhamento do caso",
        "tipo": "texto-longo",
        "secao": "triagem",
        "apelido": "detalhamento"
-      },
-      {
-       "rotulo": "Tipo de julgamento",
-       "chave": "Tipo de Julgamento",
-       "tipo": "texto",
-       "secao": "triagem",
-       "apelido": "tipo_julgamento",
-       "regra": "Campo único de tipos de julgamento; seleção múltipla conforme vocabulário da HERO18810, preservando formato de armazenamento existente."
       },
       {
        "rotulo": "Síntese processual",
@@ -1166,6 +1180,128 @@
        "tipo": "texto-longo",
        "secao": "triagem",
        "apelido": "sintese_fatica"
+      },
+      {
+       "rotulo": "Complexidade",
+       "chave": "COMPLEXIDADE",
+       "tipo": "texto",
+       "secao": "triagem",
+       "calculado": true,
+       "regra": "lê COMPLEXIDADE ou Dificuldade; 1/2/3 → Ω/Α/Σ",
+       "apelido": "complexidade"
+      },
+      {
+       "rotulo": "Tipo de voto",
+       "chave": "Tipo de Voto",
+       "tipo": "texto",
+       "secao": "triagem",
+       "apelido": "tipo_voto"
+      },
+      {
+       "rotulo": "Preliminares",
+       "chave": "Prelim.",
+       "tipo": "lista",
+       "secao": "triagem",
+       "opcoes": [
+        "Sem preliminares",
+        "Há preliminares",
+        "Preliminar de ofício"
+       ],
+       "vocabulario": "prelim",
+       "apelido": "prelim"
+      },
+      {
+       "rotulo": "Descrição da preliminar",
+       "chave": "Descrição da Preliminar",
+       "tipo": "texto-longo",
+       "secao": "triagem",
+       "apelido": "descricao_preliminar"
+      },
+      {
+       "rotulo": "Mídias",
+       "chave": "Mídias",
+       "tipo": "lista",
+       "secao": "triagem",
+       "opcoes": [
+        "Juntadas",
+        "Faltantes",
+        "Não se aplica",
+        "Não verificado"
+       ],
+       "vocabulario": "midias",
+       "apelido": "midias"
+      },
+      {
+       "rotulo": "Etiquetas do gabinete",
+       "chave": "Etiquetas",
+       "tipo": "texto",
+       "secao": "triagem",
+       "apelido": "etiquetas"
+      },
+      {
+       "rotulo": "Etiquetas sugeridas para o PJe",
+       "chave": "Etiquetas sugeridas",
+       "tipo": "texto",
+       "secao": "triagem",
+       "regra": "escolhidas no prontuário de triagem do Caput, entre as sugestões calculadas pela triagem",
+       "apelido": "etiquetas_sugeridas"
+      },
+      {
+       "rotulo": "Recurso adesivo",
+       "chave": "Recurso adesivo",
+       "tipo": "simnao",
+       "secao": "triagem",
+       "apelido": "recurso_adesivo"
+      },
+      {
+       "rotulo": "Má-fé alegada",
+       "chave": "Má-fé alegada",
+       "tipo": "simnao",
+       "secao": "triagem",
+       "apelido": "ma_fe_alegada"
+      },
+      {
+       "rotulo": "Tipo de pessoa (gratuidade)",
+       "chave": "Gratuidade - Tipo de pessoa",
+       "tipo": "lista",
+       "secao": "triagem",
+       "opcoes": [
+        "Pessoa natural",
+        "Pessoa jurídica",
+        "Não se aplica"
+       ],
+       "apelido": "gratuidade_tipo_pessoa"
+      },
+      {
+       "rotulo": "Assunto detalhado · histórico",
+       "chave": "Registro - Assunto detalhado",
+       "tipo": "texto-longo",
+       "secao": "triagem",
+       "editavel": false,
+       "regra": "do lote de triagem (acervo/lotes); atualizado por scripts/triagem/ficha_lote.py",
+       "apelido": "registro_assunto_detalhado"
+      },
+      {
+       "rotulo": "Análise do caso · histórico",
+       "chave": "Registro - Triagem",
+       "tipo": "texto-longo",
+       "secao": "triagem",
+       "editavel": false,
+       "regra": "do lote de triagem (acervo/lotes); atualizado por scripts/triagem/ficha_lote.py",
+       "apelido": "registro_triagem"
+      }
+     ]
+    },
+    {
+     "grupo": "Análise e Acompanhamento",
+     "campos": [
+      {
+       "rotulo": "Tipo de julgamento",
+       "chave": "Tipo de Julgamento",
+       "tipo": "texto",
+       "secao": "triagem",
+       "apelido": "tipo_julgamento",
+       "regra": "Campo único de tipos de julgamento; seleção múltipla conforme vocabulário da HERO18810, preservando formato de armazenamento existente."
       },
       {
        "rotulo": "Alegações",
@@ -1835,142 +1971,6 @@
        "tipo": "texto",
        "secao": "triagem",
        "apelido": "parecer_sentido_outro"
-      }
-     ]
-    },
-    {
-     "grupo": "Matéria e gestão",
-     "campos": [
-      {
-       "rotulo": "Assunto detalhado",
-       "chave": "Assunto detalhado",
-       "tipo": "texto-longo",
-       "secao": "triagem",
-       "regra": "complementa o do lote (Registro - Assunto detalhado): o cartão da extensão e o Caput mostram o do lote e, na falta, este",
-       "apelido": "assunto_detalhado"
-      },
-      {
-       "rotulo": "Complexidade",
-       "chave": "COMPLEXIDADE",
-       "tipo": "texto",
-       "secao": "triagem",
-       "calculado": true,
-       "regra": "lê COMPLEXIDADE ou Dificuldade; 1/2/3 → Ω/Α/Σ",
-       "apelido": "complexidade"
-      },
-      {
-       "rotulo": "Tipo de voto",
-       "chave": "Tipo de Voto",
-       "tipo": "texto",
-       "secao": "triagem",
-       "apelido": "tipo_voto"
-      },
-      {
-       "rotulo": "Preliminares",
-       "chave": "Prelim.",
-       "tipo": "lista",
-       "secao": "triagem",
-       "opcoes": [
-        "Sem preliminares",
-        "Há preliminares",
-        "Preliminar de ofício"
-       ],
-       "vocabulario": "prelim",
-       "apelido": "prelim"
-      },
-      {
-       "rotulo": "Descrição da preliminar",
-       "chave": "Descrição da Preliminar",
-       "tipo": "texto-longo",
-       "secao": "triagem",
-       "apelido": "descricao_preliminar"
-      },
-      {
-       "rotulo": "Mídias",
-       "chave": "Mídias",
-       "tipo": "lista",
-       "secao": "triagem",
-       "opcoes": [
-        "Juntadas",
-        "Faltantes",
-        "Não se aplica",
-        "Não verificado"
-       ],
-       "vocabulario": "midias",
-       "apelido": "midias"
-      },
-      {
-       "rotulo": "Etiquetas do gabinete",
-       "chave": "Etiquetas",
-       "tipo": "texto",
-       "secao": "triagem",
-       "apelido": "etiquetas"
-      },
-      {
-       "rotulo": "Etiquetas sugeridas para o PJe",
-       "chave": "Etiquetas sugeridas",
-       "tipo": "texto",
-       "secao": "triagem",
-       "regra": "escolhidas no prontuário de triagem do Caput, entre as sugestões calculadas pela triagem",
-       "apelido": "etiquetas_sugeridas"
-      },
-      {
-       "rotulo": "Ramo do direito",
-       "chave": "Ramo do direito",
-       "tipo": "texto",
-       "secao": "triagem",
-       "apelido": "ramo_direito"
-      },
-      {
-       "rotulo": "Outros assuntos",
-       "chave": "Outros assuntos",
-       "tipo": "texto-longo",
-       "secao": "triagem",
-       "apelido": "outros_assuntos"
-      },
-      {
-       "rotulo": "Recurso adesivo",
-       "chave": "Recurso adesivo",
-       "tipo": "simnao",
-       "secao": "triagem",
-       "apelido": "recurso_adesivo"
-      },
-      {
-       "rotulo": "Má-fé alegada",
-       "chave": "Má-fé alegada",
-       "tipo": "simnao",
-       "secao": "triagem",
-       "apelido": "ma_fe_alegada"
-      },
-      {
-       "rotulo": "Tipo de pessoa (gratuidade)",
-       "chave": "Gratuidade - Tipo de pessoa",
-       "tipo": "lista",
-       "secao": "triagem",
-       "opcoes": [
-        "Pessoa natural",
-        "Pessoa jurídica",
-        "Não se aplica"
-       ],
-       "apelido": "gratuidade_tipo_pessoa"
-      },
-      {
-       "rotulo": "Assunto detalhado · histórico",
-       "chave": "Registro - Assunto detalhado",
-       "tipo": "texto-longo",
-       "secao": "triagem",
-       "editavel": false,
-       "regra": "do lote de triagem (acervo/lotes); atualizado por scripts/triagem/ficha_lote.py",
-       "apelido": "registro_assunto_detalhado"
-      },
-      {
-       "rotulo": "Análise do caso · histórico",
-       "chave": "Registro - Triagem",
-       "tipo": "texto-longo",
-       "secao": "triagem",
-       "editavel": false,
-       "regra": "do lote de triagem (acervo/lotes); atualizado por scripts/triagem/ficha_lote.py",
-       "apelido": "registro_triagem"
       }
      ]
     },
