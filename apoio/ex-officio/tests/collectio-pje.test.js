@@ -1,5 +1,5 @@
 'use strict';
-/* Collectio: ponte que recebe as minutas lidas no editor do PJe e as registra como versões no lote. */
+/* CORTEX: ponte que recebe as minutas lidas no editor do PJe e as registra como versões no lote. */
 const { test } = require('node:test'), assert = require('node:assert/strict');
 const path = require('node:path'), fs = require('node:fs');
 const ROOT = path.resolve(__dirname, '../../..');
@@ -21,6 +21,6 @@ test('a ponte registra cada minuta pela API de versões, uma de cada vez', () =>
   assert.match(pag, /CNJ\.test\(String\(it\.processo/);
 });
 
-test('o deploy publica a ponte em /amicus/collectio/pje.html', () => {
-  assert.match(wf, /cp apoio\/ex-officio\/lotes\/pje\.html site\/public\/amicus\/collectio\/pje\.html/);
+test('o deploy publica a ponte em /amicus/cortex/pje.html', () => {
+  assert.match(wf, /cp apoio\/ex-officio\/lotes\/pje\.html site\/public\/amicus\/cortex\/pje\.html/);
 });
