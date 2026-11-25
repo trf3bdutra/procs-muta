@@ -1216,7 +1216,7 @@ function fx2Topo() {
 function fx2Lado() {
   var f = fo(), cl = S(f.classe_judicial || f.Classe || f['Descrição da Classe']), as = S(f.Assunto || f.Assunto_Principal || f.assunto_judicial), ta = S(f.tarefa_atual);
   var partes = [S(f.polo_ativo || f.Polo_Ativo || f['Polo Ativo']), S(f.polo_passivo || f.Polo_Passivo || f['Polo Passivo'])].filter(Boolean).join(' × ');
-  var caso = '<section class="fx2-cd"><div class="fx2-l1"><h2 id="fx-titulo">' + E(ST.cnj) + '</h2>' + (cl ? '<span class="fx2-cl" title="' + E(cl) + '">' + E(fx2Cl(cl)) + '</span>' : '') + '<button type="button" class="fx-sq fx2-cp" data-fx="copiar-num" aria-label="Copiar número do processo" title="Copiar número">' + svg('copy') + '</button></div>' +
+  var caso = '<section class="fx2-cd"><div class="fx2-l1"><h2 id="fx-titulo">' + E(ST.cnj) + '</h2>' + (cl ? '<span class="fx2-cl" title="' + E(cl) + '">' + E(fx2Cl(cl)) + '</span>' : '') + fxTipoHeader() + '<button type="button" class="fx-sq fx2-cp" data-fx="copiar-num" aria-label="Copiar número do processo" title="Copiar número">' + svg('copy') + '</button></div>' +
     (as || ta ? '<p class="fx2-as">' + (as ? '<b>' + E(as) + '</b>' : '') + (ta ? '<span>' + E(ta) + '</span>' : '') + '</p>' : '') +
     (partes ? '<p class="fx2-pt" title="' + E(partes) + '">' + fx2Sv('<circle cx="9" cy="8" r="3"/><path d="M3 20c0-3 3-5 6-5s6 2 6 5"/><circle cx="17" cy="9" r="2.5"/><path d="M15 15c3 0 6 1.5 6 4"/>', 14) + E(partes) + '</p>' : '') + '</section>';
   var FL = fluxo(), nOk = FL.filter(function (x) { return x.feito; }).length, dest = FL.filter(function (x) { return x.destino; })[0];
@@ -1441,7 +1441,7 @@ function fxAcomp(g){
  }else if(d==='Monocrática')sub=fxCampo('triagem','Hipóteses Monocrática','Hipótese do artigo 932')+fxCampo('triagem','Art. 932 - Nota de enquadramento','Nota de enquadramento');
  else if(d==='Outro destino')sub=fxCampo('producao','Destino - Outro')+fxCampo('triagem','Destino - Outro Nota','Nota de enquadramento');
  var final=d==='Sessão'?'Colegiado · Acórdão':d==='Monocrática'?'Relator · Monocrática terminativa':d==='Outro destino'?'Conforme destino indicado':'A definir';
- return '<div class="fx-grid">'+fxCampo('triagem','Status da triagem')+tipos+fxCampo('producao','Destino - Situação')+fxCampo('origem','Responsável')+'</div>'+fxSubcard('Encaminhamento','<div class="fx-grid">'+sel+sub+'</div><p><b>Destino e pronunciamento final:</b> '+E(final)+'</p>')+fxSubcard('Trâmite','<div class="fx-grid">'+fxCampo('origem','Próxima ação','Próxima providência')+fxCampo('origem','Próximo pronunciamento')+fxCampo('origem','Ato a proferir')+'</div>'+fxTrHtml(ed))+fxSubcard('Conferência, notas e solicitações','<div class="fx-grid">'+['Conferência dos autos','Notas fixadas','Solicitações manuais','Solicitações de despacho'].map(function(k){return fxCampo('origem',k);}).join('')+'</div>')+'<div class="fx-acts"><button type="button" class="fx-pill fx-mini" data-fx-tab="Histórico">Consultar histórico de julgamento ›</button></div>';
+ return '<div class="fx-grid">'+fxCampo('triagem','Status da triagem')+fxCampo('producao','Destino - Situação')+fxCampo('origem','Responsável')+'</div>'+fxSubcard('Encaminhamento','<div class="fx-grid">'+sel+sub+'</div><p><b>Destino e pronunciamento final:</b> '+E(final)+'</p>')+fxSubcard('Trâmite','<div class="fx-grid">'+fxCampo('origem','Próxima ação','Próxima providência')+fxCampo('origem','Próximo pronunciamento')+fxCampo('origem','Ato a proferir')+'</div>'+fxTrHtml(ed))+fxSubcard('Conferência, notas e solicitações','<div class="fx-grid">'+['Conferência dos autos','Notas fixadas','Solicitações manuais','Solicitações de despacho'].map(function(k){return fxCampo('origem',k);}).join('')+'</div>')+'<div class="fx-acts"><button type="button" class="fx-pill fx-mini" data-fx-tab="Histórico">Consultar histórico de julgamento ›</button></div>';
 }
 function fxAcompChange(t){
  if(!ST.edit||ST.ad.leitura)return false;
@@ -1479,11 +1479,71 @@ function fxGrau(g){
  var by=new Map();(g.campos||[]).forEach(function(c){if(c.chave==='Sucumbência da decisão recorrida')return;var k=c.subgrupo||'Dados';if(!by.has(k))by.set(k,[]);by.get(k).push(c);});
  return Array.from(by.entries()).map(function(pair){var title=pair[0],C=pair[1],flag=C.find(function(c){return /^[12]G - .*recorrid[ao]$/.test(c.chave);}),cheios=C.filter(temValor),flagHtml=flag?campo(flag):'',isPron=!!flag,rest=(ST.edit?C:cheios).filter(function(c){return c!==flag&&(!isPron||['Sentença - Honorários','Sentença - Custas'].indexOf(c.chave)<0);}),on=flag&&sim(valorCampo(flag)),leg=C.filter(function(c){return ['Sentença - Honorários','Sentença - Custas'].indexOf(c.chave)>=0&&(ST.edit||temValor(c));});return '<details class="fx-subgrupo" style="padding:10px 0;border-bottom:1px solid #dce4df"'+(ST.edit||cheios.length?' open':'')+'><summary style="cursor:pointer;font-weight:650">'+E(title)+(on?' <span class="fx-chip t-ouro">Recorrida</span>':'')+'</summary><div class="fx-grid" style="padding-top:8px">'+flagHtml+rest.map(campo).join('')+'</div>'+(!rest.length?'<p class="fx-dim">Sem dados registrados.</p>':'')+(isPron?(leg.length?'<div class="fx-grid" style="padding-top:8px">'+leg.map(campo).join('')+'</div>':'')+fxSucPron(title):'')+'</details>';}).join('')+(g.grupo==='2º grau'?fxSucPron(''):'');
 }
+
+/* Aba Processo: projeção das chaves existentes, sem migração nem exclusão de registros. */
+function fxProcDetalhe(t,html,ab){return '<details class="fx-subgrupo" style="padding:9px 0;border-top:1px solid #dce4df"'+(ab?' open':'')+'><summary style="cursor:pointer;font-weight:650">'+E(t)+'</summary><div style="padding-top:8px">'+html+'</div></details>';}
+function fxTipoHeader(){
+ var j=val('triagem','Tipo de Julgamento')||val('triagem','Padrão - Espécie'),jt=S(j).split(/\s*(?:\+|;|,|·)\s*/).filter(Boolean),types=['Primeiro julgamento','Apelação','Remessa necessária','Agravo de instrumento','Mandado de segurança','Embargos de declaração','Agravo interno','Juízo de retratação'];
+ if(!ST.edit||ST.ad.leitura)return ST.ad.leitura?'<span class="fx2-cl" title="Tipo de julgamento">'+E(j||'A definir')+'</span>':'<button type="button" class="fx-pill fx-mini" data-fx="editar" title="Editar tipo de julgamento">'+E(j||'Tipo de julgamento')+'</button>';
+ return '<details class="fx-subgrupo" open><summary class="fx-pill fx-mini" style="cursor:pointer">'+E(j||'Tipo de julgamento')+'</summary><div class="fx-acts" style="padding:6px;flex-wrap:wrap">'+Array.from(new Set(types.concat(jt))).map(function(x){return '<label><input type="checkbox" data-fx-jtipo value="'+E(x)+'"'+(jt.indexOf(x)>=0?' checked':'')+'> '+E(x)+'</label>';}).join('')+'</div></details>';
+}
+function fxProcesso(A){
+ var gs=A.grupos||[],ident=[],caso=[],docs=[],docg=null;
+ gs.forEach(function(g){
+  if(g.grupo==='Teor dos autos · Documentos e peças'){docg=g;return;}
+  if(g.grupo==='1º grau'){
+   var dados=g.campos.filter(function(c){return c.subgrupo==='Origem e dados do processo'&&c.tipo!=='tabela';});
+   if(dados.length)ident.push(fxProcDetalhe('Origem e dados do processo',grade(dados),ST.edit||dados.some(temValor)));
+   var rest=g.campos.filter(function(c){return dados.indexOf(c)<0;});docs.push(fxProcDetalhe('Atos e peças · 1º grau',fxGrau(Object.assign({},g,{campos:rest})),false));return;
+  }
+  if(g.grupo==='2º grau'){docs.push(fxProcDetalhe('Atos e peças · 2º grau',fxGrau(g),false));return;}
+  if(/^(Identificação e Autuação|Autuação|Partes|Tramitação|Registro no acervo)$/.test(g.grupo)){ident.push(g.grupo==='Identificação e Autuação'||g.grupo==='Autuação'?grade(g.campos):fxProcDetalhe(g.grupo,grade(g.campos),g.grupo==='Partes'));return;}
+  if(/^(Caso, Conteúdo e Questões|Matéria)$/.test(g.grupo)){caso.push(grade(g.campos));return;}
+  docs.push(fxProcDetalhe(g.grupo,grade(g.campos),false));
+ });
+ var parecer=(abaDe('Triagem')||{grupos:[]}).grupos.find(function(g){return g.grupo==='Ministério Público';});
+ if(parecer)docs.push(fxProcDetalhe('Pareceres e manifestações · campos vinculados',grade(parecer.campos),false));
+ var pr=fxModelo('triagem','Procurações');if(pr)docs.push(fxProcDetalhe('Representação processual · instrumentos',grade([pr]),false));
+ var subs={};(docg?docg.campos:[]).forEach(function(c){var k=c.subgrupo||'Outros registros';(subs[k]||(subs[k]=[])).push(c);});
+ Object.keys(subs).forEach(function(k){docs.push(fxProcDetalhe(k,grade(subs[k]),false));});
+ return card('Identificação e Autuação',ident.join(''),{n:'01'})+card('Caso, Conteúdo e Questões',caso.join(''),{n:'02'})+cardDocumental('03','<h4 style="margin:12px 0 4px">Registros especializados e fontes documentais</h4>'+docs.join(''));
+}
+var FX_DOC_CATS=['Decisões e atos judiciais','Recursos e respostas','Pareceres e manifestações','Representação processual','Peças postulatórias','Documentos e provas','Certidões e expedientes','Outras peças e ocorrências'];
+function fxDocCat(r){
+ if(FX_DOC_CATS.indexOf(r.categoria)>=0)return r.categoria;
+ var v=N([r.tipo,r.titulo,r.descricao].filter(Boolean).join(' '));
+ if(/sentenca|acordao|decisao|despacho/.test(v)&&!/recurso|agravo|embargo|apelacao|contra/.test(v))return FX_DOC_CATS[0];
+ if(/apelacao|agravo|embargo|recurso|contrarrazo|contraminuta|resposta/.test(v))return FX_DOC_CATS[1];
+ if(/parecer|ministerio publico|manifestacao ministerial/.test(v))return FX_DOC_CATS[2];
+ if(/procuracao|substabelecimento|mandato/.test(v))return FX_DOC_CATS[3];
+ if(/inicial|contestacao|replica|peticao/.test(v))return FX_DOC_CATS[4];
+ if(/certidao|expediente|intimacao/.test(v))return FX_DOC_CATS[6];
+ if(/laudo|prova|documento/.test(v))return FX_DOC_CATS[5];
+ return FX_DOC_CATS[7];
+}
+function fxDocMeta(r,i){
+ var c=fxModelo('origem','Classificação documental'),ed=ST.edit&&!ST.ad.leitura;
+ if(!c)return '';
+ if(i<0)return ed?'<button type="button" class="fx-pill fx-mini" data-fx="doc-meta-add" data-id="'+E(r.id||'')+'" data-titulo="'+E(r.titulo||r.descricao||r.tipo||'')+'" data-tipo="'+E(r.tipo||'')+'" data-data="'+E(r.data||'')+'" data-cat="'+E(fxDocCat(r))+'">Editar título e detalhamento</button>':'';
+ var l=linhas(c.secao,c.chave)[i]||{}, universal=['id','titulo','detalhamento','data','categoria','instancia','cnj_referencia','ato_impugnado','recursos_vinculados','pertinencia_atual'],spec=['fundamentos','dispositivo','resultado','sucumbencia'];
+ return '<div class="fx-grid">'+(c.colunas||[]).filter(function(k){return universal.indexOf(k.chave)>=0||spec.indexOf(k.chave)>=0&&([0,1,2].indexOf(FX_DOC_CATS.indexOf(fxDocCat(r)))>=0||S(l[k.chave]));}).filter(function(k){return ed||S(l[k.chave]).trim();}).map(function(k){
+ var v=S(l[k.chave]),at=' data-fx-tb="origem.Classificação documental" data-fx-i="'+i+'" data-fx-c="'+E(k.chave)+'" aria-label="'+E(k.rotulo)+'"';
+ return '<div class="fx-f s'+(k.tipo==='texto-longo'?4:2)+'"><span class="fx-lab">'+E(k.rotulo)+'</span>'+(ed?(k.chave==='categoria'?'<select'+at+'>'+fxOpt(FX_DOC_CATS,v)+'</select>':k.tipo==='texto-longo'?'<textarea rows="3"'+at+'>'+E(v)+'</textarea>':'<input'+at+' value="'+E(v)+'">'):'<span class="fx-v">'+E(v)+'</span>')+'</div>';
+ }).join('')+'</div>';
+}
+function fxDocMetaAdd(t){
+ if(!ST.edit||ST.ad.leitura)return;
+ var L=linhas('origem','Classificação documental').map(function(x){return Object.assign({},x);}),id=t.getAttribute('data-id')||'';
+ if(id&&L.some(function(x){return S(x.id)===id;}))return;
+ L.push({id:id,titulo:t.getAttribute('data-titulo')||'',tipo:t.getAttribute('data-tipo')||'',data:t.getAttribute('data-data')||'',categoria:t.getAttribute('data-cat')||'',detalhamento:''});ST.draft['origem.Classificação documental']=L;render();
+}
+
 function fxDocGrupo(g,n){
  var details=['Extração do PJe','Peças e ocorrências complementares','Classificação documental','Registros históricos'].map(function(sub){var C=g.campos.filter(function(c){return c.subgrupo===sub;});return C.length?'<details class="fx-subgrupo" style="padding:8px 0;border-top:1px solid #dce4df"><summary style="cursor:pointer;font-weight:650">'+E(sub)+'</summary><div class="fx-grid" style="padding-top:8px">'+C.map(campo).join('')+'</div></details>':'';}).join('');
  return cardDocumental(n,details);
 }
 function abaGruposCorpo(A) {
+  if(A.aba==='Processo')return fxProcesso(A);
   var dn = destino(), h = '', n = 0;
   if (A.destino && A.destino !== dn) return card('Não se aplica a este processo', '<p>' + (A.destino === 'sessao' ? 'O destino do julgamento é decisão monocrática: o processo não vai à pauta. A decisão fica em Produção › Decisão monocrática.' : 'Esta parte só vale para a decisão monocrática.') + '</p><p>Para mudar, use o destino no fim do fluxo, acima.</p>');
   if (A.seletor) h += '<p class="fx-info-p">' + svg('rule') + '<span><b>' + E(A.seletor.rotulo) + ':</b> ' + (dn === 'monocratica' ? 'decisão monocrática' : destinoDef() ? 'sessão (acórdão)' : 'a definir na triagem (o fluxo mostra o da sessão)') + '. ' + E(A.seletor.regra || '') + '</span></p>';
@@ -1689,20 +1749,30 @@ function cnjFmt(v) { var d = dg(v); return d.length === 20 ? d.slice(0, 7) + '-'
 /* Vista documental nativa: usa a ficha e o mesmo inteiro teor gravado pela HERO, sem copiar o texto para o operacional. */
 function docArray(v){if(Array.isArray(v))return v;try{var j=JSON.parse(v||'[]');return Array.isArray(j)?j:[];}catch(e){return [];}}
 function cardDocumental(n,extras){
- var M=new Map(),a=ST.documental,semId=[],historico=linhas('triagem','Registro - Peças');
+ var M=new Map(),a=ST.documental,semId=[],historico=linhas('triagem','Registro - Peças'),meta=linhas('origem','Classificação documental');
  function add(id,fields){id=S(id).trim();if(!/^\d+$/.test(id))return;var r=M.get(id)||{id:id};Object.keys(fields).forEach(function(k){if(fields[k]!==''&&fields[k]!=null)r[k]=fields[k];});M.set(id,r);}
  linhas('origem','Autos - Documentos').forEach(function(r){add(r.id,{tipo:r.documento,data:r.data,formato:r.formato});});
  linhas('origem','Outras peças').forEach(function(r){var ids=S(r.ids).split(/[,;\s]+/).filter(function(id){return /^\d+$/.test(id);});if(!ids.length){semId.push({peca:r.tipo,data:r.data,nota:r.texto});return;}ids.forEach(function(id){add(id,{tipo:r.tipo,data:r.data,nota:r.texto});});});
  historico.forEach(function(r){var id=S(r.id).trim();if(!/^\d+$/.test(id)){semId.push(r);return;}add(id,{tipo:r.peca,data:r.data});var d=M.get(id);(d.historico||(d.historico=[])).push(r);});
  linhas('origem','Classificação documental').forEach(function(r){add(r.id,{tipo:r.tipo,data:r.data,classes:r.classes,sintese:r.sintese,fato:r.fato,questoes:r.questoes,trecho:r.trecho,paginas:r.paginas,destinacao:r.destinacao,citar:r.citar,confirmada:r.confirmada});});
  if(a&&a.data){docArray(a.data.lista).forEach(function(r){add(r[0],{tipo:r[1],descricao:r[2],data:r[4]});});docArray(a.data.docs).forEach(function(r){add(r.id,{tipo:r.tipo,descricao:r.descricao,data:r.juntado_em,formato:r.formato,detalhe:r.detalhamento});});Object.keys(a.textos||{}).forEach(function(id){add(id,{inteiro:a.textos[id]});});}
+
+ function addIds(ids,fields){S(ids).split(/[,;\s]+/).forEach(function(id){if(/^\d+$/.test(id))add(id,fields);});}
+ fxSucPronMap().forEach(function(x){if(x.id)add(x.id,{tipo:x.nome,categoria:FX_DOC_CATS[0]});});
+ linhas('origem','Recursos').forEach(function(x){addIds(x.ids,{categoria:FX_DOC_CATS[1],data:x.data});});
+ linhas('origem','Contrarrazões').forEach(function(x){addIds(x.ids,{tipo:'Contrarrazões',data:x.data,categoria:FX_DOC_CATS[1]});});
+ linhas('triagem','Procurações').forEach(function(x){add(x.id,{tipo:'Procuração',data:x.data,categoria:FX_DOC_CATS[3]});});
+ addIds(val('triagem','ID da Procuração'),{tipo:'Procuração',categoria:FX_DOC_CATS[3]});
+ addIds(val('triagem','ID do Parecer MPF'),{tipo:'Parecer MPF',data:val('triagem','MPF - Data'),categoria:FX_DOC_CATS[2]});
+ meta.forEach(function(r,i){if(/^\d+$/.test(S(r.id).trim())){add(r.id,{titulo:r.titulo,detalhamento:r.detalhamento,categoria:r.categoria,instancia:r.instancia,cnj_referencia:r.cnj_referencia,pertinencia_atual:r.pertinencia_atual});M.get(S(r.id).trim()).metaI=i;}});
  var ac='<button type="button" class="fx-pill" data-fx="doc-autos-load"'+(a&&a.loading?' disabled':'')+'>'+(a&&a.loading?'Carregando…':a&&a.data?'Atualizar documentos':'Consultar inteiro teor')+'</button>';
  var h='<p class="fx-note">Documentos e classificações registrados na HERO e na ficha, reunidos pelo ID. O conteúdo integral permanece no acervo de autos.</p>';
  var resumo=val('triagem','Registro - Teor dos autos');if(S(resumo).trim())h+='<details open><summary><b>Síntese geral dos autos · registro histórico</b></summary><p style="white-space:pre-wrap;overflow-wrap:anywhere">'+E(resumo)+'</p></details>';
  if(a&&a.erro)h+='<p class="fx-alert-p">'+E(a.erro)+'</p>';
  if(!M.size)h+='<p class="fx-dim">Ainda não há documentos registrados nesta visão. Consulte o inteiro teor gravado, quando disponível.</p>';
- var L=Array.from(M.values());h+='<div class="fx-doc-native">'+L.map(function(r){var p=function(k,v){return S(v).trim()?'<p style="white-space:pre-wrap;overflow-wrap:anywhere"><b>'+E(k)+':</b> '+E(v)+'</p>':'';};
- return '<details style="border-top:1px solid #dce4df;padding:9px 0"><summary style="cursor:pointer"><b>'+E(r.tipo||'Documento')+'</b> · ID '+E(r.id)+(r.data?' · '+E(r.data):'')+(r.classes?' · '+E(r.classes):'')+(r.inteiro?' · texto disponível':'')+'</summary><div style="padding:8px 12px">'+p('Descrição',r.descricao)+p('Classificação',r.classes)+p('Síntese',r.sintese)+p('Fato / requisito comprovado',r.fato)+p('Questões vinculadas',r.questoes)+p('Trecho relevante',r.trecho)+p('Páginas',r.paginas)+p('Destinação',r.destinacao)+p('Mencionar ID',r.citar)+p('Confirmada',r.confirmada)+p('Nota na ficha',r.nota)+p('Detalhamento da HERO',r.detalhe)+p('Nota histórica do lote',r.notaLote)+p('Trecho histórico do lote',r.trechoLote)+(r.historico||[]).map(function(x){return '<div style="border-top:1px solid #dce4df;margin-top:8px">'+p('Peça histórica',x.peca)+p('Data histórica',x.data)+p('Referência PJe',x.pje)+p('Nota histórica do lote',x.nota)+p('Trecho histórico do lote',x.trecho)+'</div>';}).join('')+(r.inteiro?'<details><summary>Inteiro teor da peça</summary><pre style="white-space:pre-wrap;overflow-wrap:anywhere;max-height:340px;overflow:auto;font:inherit">'+E(r.inteiro)+'</pre></details>':'')+'</div></details>';}).join('')+'</div>';
+ var L=Array.from(M.values()),modo=ST.docModo||'categoria',ord=ST.docOrdem||'asc';if(modo==='cronologico')L.sort(function(a,b){var x=iso(a.data),y=iso(b.data);return !x&&!y?0:!x?1:!y?-1:(ord==='desc'?-1:1)*x.localeCompare(y);});else L.sort(function(a,b){return FX_DOC_CATS.indexOf(fxDocCat(a))-FX_DOC_CATS.indexOf(fxDocCat(b));});h+='<div class="fx-acts" style="margin:8px 0"><select aria-label="Visualização dos autos" data-fx-doc-view>'+fxOpt(['categoria','cronologico'],modo).replace('>categoria</option>','>Por categoria</option>').replace('>cronologico</option>','>Cronológico</option>')+'</select>'+(modo==='cronologico'?'<select aria-label="Ordem cronológica" data-fx-doc-order>'+fxOpt(['asc','desc'],ord).replace('>asc</option>','>Mais antigos primeiro</option>').replace('>desc</option>','>Mais recentes primeiro</option>')+'</select>':'')+(ST.edit&&!ST.ad.leitura?'<button type="button" class="fx-pill" data-fx="doc-meta-add">+ Peça</button>':'')+'</div><div class="fx-doc-native">'+L.map(function(r,idx){var p=function(k,v){return S(v).trim()?'<p style="white-space:pre-wrap;overflow-wrap:anywhere"><b>'+E(k)+':</b> '+E(v)+'</p>':'';};
+ return (modo==='categoria'&&(idx===0||fxDocCat(L[idx-1])!==fxDocCat(r))?'<h4 style="margin:12px 0 4px">'+E(fxDocCat(r))+'</h4>':'')+'<details style="border-top:1px solid #dce4df;padding:9px 0"'+(ST.edit&&r.metaI!=null?' open':'')+'><summary style="cursor:pointer"><b>'+E(r.titulo||r.tipo||'Documento')+'</b> · ID '+E(r.id)+(r.data?' · '+E(r.data):'')+(r.classes?' · '+E(r.classes):'')+(r.inteiro?' · texto disponível':'')+'</summary><div style="padding:8px 12px">'+fxDocMeta(r,r.metaI==null?-1:r.metaI)+p('Categoria',fxDocCat(r))+p('Descrição',r.descricao)+p('Detalhamento',r.detalhamento)+p('Classificação',r.classes)+p('Síntese',r.sintese)+p('Fato / requisito comprovado',r.fato)+p('Questões vinculadas',r.questoes)+p('Trecho relevante',r.trecho)+p('Páginas',r.paginas)+p('Destinação',r.destinacao)+p('Mencionar ID',r.citar)+p('Confirmada',r.confirmada)+p('Nota na ficha',r.nota)+p('Detalhamento da HERO',r.detalhe)+p('Nota histórica do lote',r.notaLote)+p('Trecho histórico do lote',r.trechoLote)+(r.historico||[]).map(function(x){return '<div style="border-top:1px solid #dce4df;margin-top:8px">'+p('Peça histórica',x.peca)+p('Data histórica',x.data)+p('Referência PJe',x.pje)+p('Nota histórica do lote',x.nota)+p('Trecho histórico do lote',x.trecho)+'</div>';}).join('')+(r.inteiro?'<details><summary>Inteiro teor da peça</summary><pre style="white-space:pre-wrap;overflow-wrap:anywhere;max-height:340px;overflow:auto;font:inherit">'+E(r.inteiro)+'</pre></details>':'')+'</div></details>';}).join('')+'</div>';
+ meta.forEach(function(r,i){if(!/^\d+$/.test(S(r.id).trim()))h+='<details class="fx-subgrupo"'+(ST.edit?' open':'')+'><summary>'+E(r.titulo||r.tipo||'Nova peça sem ID')+'</summary>'+fxDocMeta(r,i)+'</details>';});
  if(semId.length)h+='<details open><summary><b>Peças históricas sem ID individual ('+semId.length+')</b></summary>'+semId.map(function(r){return '<div style="white-space:pre-wrap;overflow-wrap:anywhere;border-top:1px solid #dce4df;padding:8px">'+['data','id','peca','pje','nota','trecho'].map(function(k){return S(r[k])?'<p><b>'+E(k)+':</b> '+E(r[k])+'</p>':'';}).join('')+'</div>';}).join('')+'</details>';
  return card('Teor dos autos · Documentos e peças',h+(extras||''),{n:n,nota:L.length+' documentos identificados',acoes:ac});
 }
@@ -1842,6 +1912,7 @@ function onClick(ev) {
   if (a === 'teor') { if (ST.teor) fecharTeor(); else { ST.teor = { step: 0 }; render(); } return; }
   if (a === 'teor-fechar') return fecharTeor();
   if (a === 'doc-autos-load') return carregarAutosFicha();
+  if (a === 'doc-meta-add') return fxDocMetaAdd(t);
   if (a === 'teor-json') return baixarTeorJson();
   if (a === 'teor-voltar') { ST.teor.step = 1; render(); return; }
   if (a === 'teor-extrair') { try { ST.teor.items = itensTeor(ST.teor.parsed); ST.teor.step = 2; } catch (e) { console.error('[ficha] inteiro teor · sugestões', e); avisar('Não foi possível extrair os campos: ' + ((e && e.message) || e), 'err'); } render(); return; }
@@ -1854,6 +1925,8 @@ function onClick(ev) {
 }
 function onChange(ev) {
   var t = ev.target;
+  if(t.hasAttribute('data-fx-doc-view')){ST.docModo=t.value;render();return;}
+  if(t.hasAttribute('data-fx-doc-order')){ST.docOrdem=t.value;render();return;}
   if(fxAcompChange(t))return;if(fxAcompInput(t))return;
   if (t.hasAttribute('data-fx-destino')) { if (t.value === destSel()) return; var dp = t.value.split('|'), dm = { 'producao.Destino': dp[0] || '', 'producao.Destino - Situação': dp[1] || '' }; if (ST.edit) { Object.assign(ST.draft, dm); render(); } else gravar(dm, dp[0] === 'Monocrática' ? 'Destino: decisão monocrática' + (dp[1] ? ' · ' + dp[1].toLowerCase() : '') + '.' : dp[0] === 'Sessão' ? 'Destino: colegiado' + (dp[1] ? ' · ' + dp[1].toLowerCase() : '') + '.' : dp[0] ? 'Destino: outro destino.' : 'Destino a definir na triagem.').catch(function () {}); return; }
   if (t.hasAttribute('data-fx-file')) { var f = t.files && t.files[0]; if (f) lerTxt(f); t.value = ''; return; }

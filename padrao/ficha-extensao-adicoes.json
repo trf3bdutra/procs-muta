@@ -238,6 +238,66 @@
        "Não informado",
        "Não se aplica"
       ]
+     },
+     {
+      "chave": "titulo",
+      "rotulo": "Título da peça",
+      "tipo": "texto"
+     },
+     {
+      "chave": "detalhamento",
+      "rotulo": "Detalhamento da peça",
+      "tipo": "texto-longo"
+     },
+     {
+      "chave": "categoria",
+      "rotulo": "Categoria documental",
+      "tipo": "texto"
+     },
+     {
+      "chave": "instancia",
+      "rotulo": "Instância de origem",
+      "tipo": "texto"
+     },
+     {
+      "chave": "cnj_referencia",
+      "rotulo": "Processo de referência",
+      "tipo": "texto"
+     },
+     {
+      "chave": "ato_impugnado",
+      "rotulo": "ID(s) do(s) ato(s) impugnado(s)",
+      "tipo": "texto"
+     },
+     {
+      "chave": "recursos_vinculados",
+      "rotulo": "ID(s) do(s) recurso(s) vinculado(s)",
+      "tipo": "texto"
+     },
+     {
+      "chave": "pertinencia_atual",
+      "rotulo": "Pertinência à apreciação atual",
+      "tipo": "texto"
+     },
+     {
+      "chave": "fundamentos",
+      "rotulo": "Fundamentos",
+      "tipo": "texto-longo"
+     },
+     {
+      "chave": "dispositivo",
+      "rotulo": "Dispositivo / conclusão",
+      "tipo": "texto-longo"
+     },
+     {
+      "chave": "resultado",
+      "rotulo": "Resultado",
+      "tipo": "texto"
+     },
+     {
+      "chave": "sucumbencia",
+      "rotulo": "Custas, honorários e sucumbência",
+      "tipo": "texto-longo"
      }
     ]
    }
