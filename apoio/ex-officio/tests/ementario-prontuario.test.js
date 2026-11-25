@@ -40,6 +40,8 @@ test('Ementário: julgado sem abas, expansão vertical e rodapé',()=>{
   assert.ok(!m.sec('julgado').includes('Partes X'));
   assert.match(m.sec('julgado'),/class="pp-sintese"[\s\S]*Julgado em[\s\S]*Publicado em[\s\S]*Relator[\s\S]*pp-sintese-conteudo[\s\S]*Tese X[\s\S]*Resultado X/);
   assert.doesNotMatch(m.html(),/class="pp-dt"/);
+  assert.match(m.sec('julgado'),/class="pp-sintese"[\s\S]*pp-sintese-meta[\s\S]*pp-sintese-conteudo[\s\S]*pp-sintese-ementa[\s\S]*Ementa X[\s\S]*<\/div><\/div><\/div><div class="pp-k"[^>]*>Referências/);
+  assert.match(m.html(),/class="pp-action-group pp-copy-group"[\s\S]*data-dcnj[\s\S]*data-dcit[\s\S]*data-dem[\s\S]*data-dit[\s\S]*class="pp-action-group pp-export-group"[\s\S]*data-ddocx[\s\S]*data-dpdf/);
   assert.match(m.sec('processo'),/Detalhamento do caso/);
   assert.match(m.sec('processo'),/Tag X/);
   assert.doesNotMatch(m.html(),/data-ppaba="(?:catalogacao|referencias)"/);
