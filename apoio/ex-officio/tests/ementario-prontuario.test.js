@@ -4,7 +4,7 @@ const src=fs.readFileSync(path.resolve(__dirname,'../../modus-operandi/fonte/eme
 const css=fs.readFileSync(path.resolve(__dirname,'../../modus-operandi/fonte/ementario.css'),'utf8');
 const code=src.slice(src.indexOf('var PP_ABAS='),src.indexOf('function fecharIT()'));
 function montar(col){
-  const keys=['julgado','processo','catalogacao','referencias','correspondencias','rastreabilidade'];
+  const keys=['julgado','processo','referencias','correspondencias','rastreabilidade'];
   const tabs=keys.map(k=>({dataset:{ppaba:k},setAttribute(n,v){this[n]=v;},focus(){this.focused=true;}}));
   const sections=keys.map(k=>({dataset:{ppsec:k}})),buttons=new Map(),copias=[];
   const box={scrollTop:0,querySelector(q){if(q==='.pp-em:not(.cut)'||q.includes('details.pp-d[open]')||q==='[data-ppm]')return null;if(!buttons.has(q))buttons.set(q,{});return buttons.get(q);}};
@@ -16,17 +16,21 @@ function montar(col){
   const sec=k=>(html.match(new RegExp('data-ppsec="'+k+'"[^>]*>([\\s\\S]*?)</section>'))||[])[1]||'';
   return {ctx,box,tabs,sections,buttons,copias,sec,x,y,html:()=>html};
 }
-test('Ementário: sintaxe e seis abas no painel, com suporte a ocultação',()=>{
+test('Ementário: sintaxe e cinco abas no painel, com suporte a ocultação',()=>{
   assert.doesNotThrow(()=>new vm.Script(src));
   assert.match(css,/\.pp-section\[hidden\]\{display:none!important\}/);
   const m=montar(false);
-  assert.deepEqual(m.tabs.map(t=>t.dataset.ppaba),['julgado','processo','catalogacao','referencias','correspondencias','rastreabilidade']);
+  assert.deepEqual(m.tabs.map(t=>t.dataset.ppaba),['julgado','processo','referencias','correspondencias','rastreabilidade']);
   assert.match(m.html(),/data-ppaba="julgado"[^>]+aria-selected="true"/);
   assert.match(m.html(),/data-ppsec="processo"[^>]+ hidden/);
-  for(const [k,v] of [['julgado','Tese X'],['julgado','Resultado X'],['julgado','Ementa X'],['julgado','Texto X'],['processo','Partes X'],['catalogacao','Tipo X'],['catalogacao','Especificidade X'],['catalogacao','Nota X'],['referencias','Artigo X'],['referencias','Jurisprudência X'],['referencias','Repertório X'],['correspondencias','5000001-00'],['rastreabilidade','origem.jsonl']])assert.ok(m.sec(k).includes(v),k+': '+v);
+  for(const [k,v] of [['julgado','Tese X'],['julgado','Resultado X'],['julgado','Ementa X'],['julgado','Texto X'],['processo','Partes X'],['processo','Tipo X'],['processo','Especificidade X'],['processo','Nota X'],['referencias','Artigo X'],['referencias','Jurisprudência X'],['referencias','Repertório X'],['correspondencias','5000001-00'],['rastreabilidade','origem.jsonl']])assert.ok(m.sec(k).includes(v),k+': '+v);
   assert.ok(!m.sec('julgado').includes('Partes X'));
-  m.tabs[3].onclick();assert.equal(m.ctx.E.detAba,'referencias');assert.equal(m.sections[3].hidden,false);assert.equal(m.sections[0].hidden,true);
-  m.tabs[3].onkeydown({key:'ArrowRight',preventDefault(){}});assert.equal(m.ctx.E.detAba,'correspondencias');
+  assert.match(m.sec('processo'),/Detalhamento do caso/);
+  assert.match(m.sec('processo'),/Tag X/);
+  assert.doesNotMatch(m.html(),/data-ppaba="catalogacao"/);
+  assert.doesNotMatch(m.sec('processo'),/<span>Tipo de caso<\/span>|>Especificidades<\/div>/);
+  m.tabs[2].onclick();assert.equal(m.ctx.E.detAba,'referencias');assert.equal(m.sections[2].hidden,false);assert.equal(m.sections[0].hidden,true);
+  m.tabs[2].onkeydown({key:'ArrowRight',preventDefault(){}});assert.equal(m.ctx.E.detAba,'correspondencias');
   m.ctx.abrirIT(m.x);assert.match(m.html(),/data-ppaba="correspondencias"[^>]+aria-selected="true"/);
   m.ctx.abrirIT(m.y);assert.equal(m.ctx.E.detAba,'julgado');
   m.buttons.get('[data-dem]').onclick();assert.equal(m.copias[0],'Ementa X');
