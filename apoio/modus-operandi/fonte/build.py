@@ -288,7 +288,7 @@ def montar(var):
         css += (H/'editor.css').read_text(encoding='utf-8')
         if var == 'collectio':
             js = 'window.VDM_COLLECTIO=true;window.VDM_EDITOR=false;window.VDM_PAGINA_EDITOR=true;\n' + js
-            t = t.replace('<title>Modus Operandi</title>', '<title>Collectio · Minutário · Gabinete CMT</title>', 1)
+            t = t.replace('<title>Modus Operandi</title>', '<title>Collectio · Modelos e parágrafos · Gabinete CMT</title>', 1)
             t = t.replace('<button data-s="dir" aria-selected="false">Breviário</button>', '<button data-s="par" aria-selected="false">Parágrafos</button>', 1)
             js += '\n' + (H/'collectio.js').read_text(encoding='utf-8')
             css += (H/'collectio.css').read_text(encoding='utf-8')
