@@ -349,12 +349,18 @@ function abrirIT(x){
   var area=x._rd||x._ramo||'Área não informada',resto=tcResto(x);
   h+='<div class="pp-path">'+esc(area)+(x.mat&&nz(area).indexOf(nz(x.mat))<0?' · '+esc(x.mat):'')+'</div><h2 class="pp-ass">'+esc(ass)+(resto&&nz(ass)!==nz(resto)?'<span class="pp-sub"> › '+esc(resto)+'</span>':'')+'</h2>';
   h+=ppMetadados(x,it);
-  h+='<div class="pp-dt">'+(col?'Assinatura: ':'Julgado em ')+'<b>'+fmtD(x.d)+'</b>'+(col?(origem.data_disponibilizacao_djen?' · DJEN: <b>'+esc(origem.data_disponibilizacao_djen)+'</b>':''):(x.p?' · publicado em <b>'+fmtD(x.p)+'</b>':''))+' · Rel. '+esc(x.rl||(col?'não informado':'CARLOS MUTA'))+(x.gab?' · '+esc(x.gab):'')+'</div>';
+
   var acoes='<header class="e-dacts pp-process-actions" role="group" aria-label="Ações do processo"><button type="button" class="e-mini pp-process-toggle" data-dprocesso aria-controls="pp-processo-card" aria-expanded="'+processoAberto+'">Processo <span class="pp-strip-chevron" aria-hidden="true"></span></button><button type="button" class="e-mini" data-dcnj>Copiar número</button><button type="button" class="e-mini pri" data-dcit>'+ICO.cit+'Copiar citação</button><button type="button" class="e-mini" data-dem>Copiar '+(col&&x.t==='M'?'abertura':'ementa')+'</button>'+(it?'<button type="button" class="e-mini" data-dit>Copiar '+(col?'excerto':'inteiro teor')+'</button>':'')+'<button type="button" class="e-mini" data-ddocx>DOCX</button><button type="button" class="e-mini" data-dpdf>PDF</button></header>';
   h+='</div>';
   var head=h,P={};h='';
   /* 2. tese e resultado */
-  if(x.tese||x.r)h+='<div class="pp-top">'+(x.tese?'<div class="pp-card"><div class="pp-k">Tese</div><div>'+refs(x.tese)+'</div></div>':'')+(x.r?'<div class="pp-card res" style="--rc:'+corRes(x._res)+'"><div class="pp-k">Resultado</div><div>'+refs(x.r)+'</div></div>':'')+'</div>';
+  /* Síntese do julgamento: cronologia e relatoria no mesmo cartão da tese e resultado. */
+  h+='<div class="pp-sintese"><div class="pp-sintese-meta">'+
+    (x.d?'<div><span class="pp-k">'+(col?'Assinatura':'Julgado em')+'</span><b>'+fmtD(x.d)+'</b></div>':'')+
+    (col?(origem.data_disponibilizacao_djen?'<div><span class="pp-k">Disponibilizado no DJEN</span><b>'+esc(origem.data_disponibilizacao_djen)+'</b></div>':''):(x.p?'<div><span class="pp-k">Publicado em</span><b>'+fmtD(x.p)+'</b></div>':''))+
+    '<div><span class="pp-k">Relator</span><b>'+esc(x.rl||(col?'Não informado':'CARLOS MUTA'))+'</b></div>'+
+    (x.gab?'<div><span class="pp-k">Gabinete</span><b>'+esc(x.gab)+'</b></div>':'')+'</div>'+
+    ((x.tese||x.r)?'<div class="pp-top pp-sintese-conteudo">'+(x.tese?'<div class="pp-card"><div class="pp-k">Tese</div><div>'+refs(x.tese)+'</div></div>':'')+(x.r?'<div class="pp-card res" style="--rc:'+corRes(x._res)+'"><div class="pp-k">Resultado</div><div>'+refs(x.r)+'</div></div>':'')+'</div>':'')+'</div>';
   /* Julgado: tese, resultado, ementa e texto preservado, reunidos. */
   var em=String(x.e||'');
   h+='<div class="pp-k" style="margin-top:14px">'+(window.EMENT_FONTE&&x.t==='M'?'Abertura da decisão':'Ementa')+'</div><div class="e-box serif pp-em'+(em.length>1200&&!ppAberto?' cut':'')+'">'+refs(em)+'</div>'+(em.length>1200&&!ppAberto?'<button class="pp-more" data-ppm>Ver texto completo do campo</button>':'');
