@@ -25,7 +25,7 @@
   /* Reaproveita os botões reais e seus contadores, sem clonagem ou duplicação. */
   function gestaoNaFaixa(q){
     var slot=$('tu-gestao'),faixa=$('pv-nav-main');if(!slot)return;
-    if(faixa){slot.hidden=true;return;}
+    /* Gestão na faixa do perfil também na prévia universal. */
     [['tab-dil','Diligências'],['tab-del','Deliberações']].forEach(function(x){
       var b=$(x[0]);if(!b)return;
       if(b.parentNode!==slot)slot.appendChild(b);
