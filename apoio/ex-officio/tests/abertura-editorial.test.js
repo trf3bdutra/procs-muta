@@ -22,3 +22,14 @@ test('composição confirmada mantém comandos e base de cálculo',()=>{
  cp['origem.Sentença - Comandos'][0].confirmado='Não';assert.match(w.MutaGerador.comporFicha(cp,{},'Apelação').rel[0],/conferir capítulos/);
  assert.match(read('extensao/gabinete.js'),/esp\.after\(nt\)/);
 });
+
+test('Editorial: honorários dependem de resultado, verba prévia, recorrente e solução registrada',()=>{
+ const w={};new Function('window',read('extensao/gerador.js'))(w);
+ const cp={'origem.Sentença - Data':'2026-05-02','producao.Voto - Resultado':'Negado provimento','producao.Voto - Honorários':'Majorados','producao.Honorários - Percentual ou valor':'1%','origem.Recursos':[{ids:'123456789',parte:'parte autora'}],'origem.Sucumbência da decisão recorrida':[{devedor:'parte autora',honorarios:'Sim',base:'valor da causa',criterio:'Percentual',percentual:'10',suspensao:'Não',gratuidade:'Indeferida'}]};
+ const f=(c,fo={})=>w.MutaGerador.comporFicha(c,fo,'Apelação').variaveis;
+ assert.match(f(cp).honorarios_recursais_texto,/deve suportar/);assert.doesNotMatch(f(cp).honorarios_recursais_texto,/gratuidade/);assert.match(f(cp).dispositivo_ementa_ficha,/acréscimo/);
+ assert.match(f({...cp,'producao.Voto - Resultado':'Parcialmente provido'}).honorarios_recursais_texto,/incompatível/);
+ assert.match(f({...cp,'origem.Sucumbência da decisão recorrida':[]}).honorarios_recursais_texto,/VALIDAR/);
+ assert.match(f({...cp,'producao.Voto - Honorários':''},{classe_judicial:'Mandado de segurança'}).honorarios_recursais_texto,/artigo 25/);
+ assert.match(f({...cp,'origem.Sentença - Publicação':'2016-03-17'}).honorarios_recursais_texto,/anterior/);
+});

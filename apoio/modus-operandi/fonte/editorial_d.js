@@ -727,7 +727,7 @@ var _camposTBase=camposT;camposT=function(raw,ctx){return _camposTBase(raw,ctx).
 function dkValorFicha(v){if(v==null)return '';if(Array.isArray(v))return v.map(function(x){return x&&typeof x==='object'?Object.keys(x).map(function(z){return x[z];}).filter(Boolean).join(' · '):String(x);}).filter(Boolean).join('; ');return String(v);}
 var _xAutoCasoBase=xAutoCaso;xAutoCaso=function(){_xAutoCasoBase();
   var P=window.CQX&&CQX.tem()?CQX.P():null,J=P?CQX.J():null,cp=(J&&String(J.processo||'').replace(/\D/g,'')===String(P.processo||'').replace(/\D/g,'')&&J.campos)||{};
-  Object.keys(ARR).forEach(function(a){var c=ARR[a],v='';if(c.s==='*')return;
+  Object.keys(ARR).forEach(function(a){var c=ARR[a],v='';if(c.s==='*')return;delete AUTO['@'+a];
     if(c.s)v=cp[c.s+'.'+c.c];else{var fs=c.f||[],keys=[c.c].concat(fs);if(fs.length>1)keys.push(fs.join('.'));keys.some(function(n){v=cp['acervo.'+n];return v!=null&&v!=='';});}
     if(c.col){if(typeof v==='string'){try{v=JSON.parse(v);}catch(er){v=[];}}v=Array.isArray(v)?v.map(function(row){return row&&row[c.col];}).filter(function(x){return x!=null&&String(x).trim()!=='';}):[];}
     v=dkValorFicha(v).trim();if(v)AUTO['@'+a]=v;});
@@ -736,7 +736,7 @@ var _xAutoCasoBase=xAutoCaso;xAutoCaso=function(){_xAutoCasoBase();
   if(P){var res=AUTO['@resultado_julgamento']||P.resultado;if(res){AUTO.resultado=dkValorFicha(res);AUTO['@resultado']=AUTO.resultado;}else{delete AUTO.resultado;delete AUTO['@resultado'];delete AUTO.CONCLUSÃO;delete AUTO['dispositivo da ementa'];}}
   Object.keys(E).forEach(function(a){if(!AUTO['@'+a]&&AUTO[E[a]])AUTO['@'+a]=AUTO[E[a]];});
   // Variáveis compostas da mesma ficha e do mesmo gerador da HERO.
-  ['abertura_relatorio','resultado_decisao_recorrida','comandos_dispositivos','frase_honorarios_origem','razoes_recursais','contrarrazoes_relatorio','parecer_relatorio','caso_em_exame','questao_em_discussao'].forEach(function(a){delete AUTO['@'+a];});
+  ['abertura_relatorio','resultado_decisao_recorrida','comandos_dispositivos','frase_honorarios_origem','razoes_recursais','contrarrazoes_relatorio','parecer_relatorio','caso_em_exame','questao_em_discussao','razoes_primeiro_recurso','razoes_segundo_recurso','razoes_agravo_interno','vicios_relatorio','ementa_embargada_literal','sentenca_paragrafo','parecer_sentido_redacional','dispositivo_voto','honorarios_recursais_texto','honorarios_ementa','dispositivo_ementa_ficha','acordao_recorrido_id','decisao_agravada_id'].forEach(function(a){delete AUTO['@'+a];});
   if(P&&J&&String(J.processo||'').replace(/\D/g,'')===String(P.processo||'').replace(/\D/g,'')&&window.MutaGerador&&MutaGerador.comporFicha){
     var fo={};Object.keys(cp).forEach(function(k){if(k.indexOf('acervo.')===0)fo[k.slice(7)]=cp[k];});
     fo.classe_judicial=fo.classe_judicial||P.classe||'';fo.Assunto=fo.Assunto||P.assunto||'';

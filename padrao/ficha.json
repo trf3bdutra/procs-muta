@@ -153,6 +153,13 @@
         }
        ],
        "apelido": "sentenca_comandos"
+      },
+      {
+       "secao": "origem",
+       "chave": "Sentença - Publicação",
+       "rotulo": "Publicação da sentença",
+       "tipo": "data",
+       "apelido": "sentenca_publicacao"
       }
      ]
     },
@@ -1670,6 +1677,20 @@
        "tipo": "texto-longo",
        "secao": "triagem",
        "apelido": "impugnada_sintese"
+      },
+      {
+       "secao": "triagem",
+       "chave": "Impugnada - Publicação",
+       "rotulo": "Publicação da decisão impugnada",
+       "tipo": "data",
+       "apelido": "impugnada_publicacao"
+      },
+      {
+       "secao": "triagem",
+       "chave": "Impugnada - Ementa literal",
+       "rotulo": "Ementa literal do acórdão recorrido",
+       "tipo": "texto-longo",
+       "apelido": "impugnada_ementa_literal"
       }
      ]
     },

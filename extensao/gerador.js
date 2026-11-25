@@ -116,6 +116,7 @@
   function designa(polo) {
     var P = polos(), nome = polo === 'autor' ? P.a : P.p, nm = porNome(nome);
     if (nm) return nm;
+    if(CONTEXTO)return polo==='autor'?'a parte autora':'a parte ré';
     var ms = /mandado de seguran/i.test(fo('classe_judicial') || fo('Classe'));
     if (polo === 'autor') { var f = feminino(nome); return ms ? (f ? 'a impetrante' : 'o impetrante') : (P.aN > 1 ? 'os autores' : f ? 'a autora' : 'o autor'); }
     var fr = feminino(nome); return P.pN > 1 ? 'os réus' : fr ? 'a ré' : 'o réu';
@@ -231,22 +232,32 @@
       if (C.length === 1) return 'Houve ' + nome + ' ' + idOu(C[0].ids, 'ID') + (com.length ? ', com arguição preliminar de ' + linhas(com[0].preliminares).join('; ') : '') + '.';
       return 'Houve ' + nome + ' ' + C.map(function (c, i) { var q = quem(c.parte), d = q.replace(/^(o|a) /, function (m) { return m === 'o ' ? 'do ' : 'da '; }).replace(/^os /, 'dos '); return d + ' ' + idOu(c.ids, 'ID') + (S(c.preliminares) ? ', com arguição preliminar de ' + linhas(c.preliminares).join('; ') : ''); }).reduce(function (a, x, i, L) { return a + (i === 0 ? '' : i === L.length - 1 ? ' e ' : ', ') + x; }, '') + '.';
     }
-    if (/nao|sem|decorr/.test(sit)) return 'Não houve ' + nome + '.';
+    if (/^(nao apresentadas?|nao houve|sem contrarrazoes|sem contraminuta|prazo decorrido sem manifestacao|decorrido o prazo sem manifestacao)$/.test(sit)) return 'Não houve ' + nome + '.';
     if (/apresent/.test(sit)) return 'Houve ' + nome + ' (ID ' + VAL('ID') + ').';
     return VAL('Houve ' + nome + ' (ID …). | Não houve ' + nome + '.');
   }
-  function pMpf() {
-    var m = N(v('triagem', 'MPF')), s = N(v('triagem', 'Parecer - Sentido')), id = S(v('triagem', 'ID do Parecer MPF'));
-    if (!/com parecer/.test(m) && !id) return '';
-    var t = /prosseguimento/.test(s) ? 'manifestou-se pelo prosseguimento do feito' : /desprovimento|nao provimento/.test(s) ? 'opinou pelo desprovimento do recurso' : /parcial.*provimento|provimento.*parcial/.test(s) ? 'opinou pelo parcial provimento do recurso' : /provimento/.test(s) ? 'opinou pelo provimento do recurso' : 'opinou ' + VAL(S(v('triagem', 'Parecer - Sentido (outro)')) || 'sentido do parecer');
-    return 'A Procuradoria Regional da República ' + t + ' ' + idOu(id, 'ID do parecer') + '.';
+  function pMpf(){
+    var m=N(v('triagem','MPF')),s=N(v('triagem','Parecer - Sentido')),id=S(v('triagem','ID do Parecer MPF')),outro=S(v('triagem','Parecer - Sentido (outro)')),o=N(outro),t='';
+    if(!id&&m==='nao se aplica')return '';
+    if(!id&&m==='intimado sem manifestacao')return 'Intimada, a Procuradoria Regional da República não se manifestou.';
+    if(!id&&m!=='com parecer')return '';
+    if(m&&m!=='com parecer')return VAL('conferir situação da manifestação do MPF e ID');
+    if(/^(sem hipotese de intervencao|ausencia de hipotese de intervencao)$/.test(s)||/^(sem hipotese de intervencao|ausencia de hipotese de intervencao)$/.test(o))return 'A Procuradoria Regional da República '+idOu(id,'ID do parecer')+' deixou de opinar quanto ao mérito, por ausência de hipótese de intervenção.';
+    if(/^(sem interesse publico|inexistencia de interesse publico)$/.test(s)||/^(sem interesse publico|inexistencia de interesse publico)$/.test(o))t='opinou pela inexistência de interesse público para intervenção no feito';
+    else if(/^(sem exame do merito|nao se manifestou sobre o merito)$/.test(s)||/^(sem exame do merito|nao se manifestou sobre o merito)$/.test(o))t='não se manifestou sobre o mérito da demanda';
+    else if(/prosseguimento/.test(s))t='opinou pelo regular prosseguimento do feito';
+    else if(/desprovimento|nao provimento/.test(s))t='opinou pelo desprovimento do recurso';
+    else if(/parcial.*provimento|provimento.*parcial/.test(s))t='opinou pelo parcial provimento do recurso';
+    else if(/^provimento( do recurso)?$/.test(s))t='opinou pelo provimento do recurso';
+    else t='opinou '+VAL(outro||'sentido do parecer');
+    return 'A Procuradoria Regional da República '+t+' '+idOu(id,'ID do parecer')+'.';
   }
   function relatorio(tipo) {
     var P = [], sid = S(v('origem', 'Sentença - ID')), rn = N(v('origem', 'Sentença - Reexame')) === 'sim', nRec = tab('origem', 'Recursos').length;
     var imp = S(v('triagem', 'Impugnada - ID')), impS = S(v('triagem', 'Impugnada - Síntese'));
     if (tipo === 'Embargos de Declaração') {
-      P.push('Trata-se de embargos de declaração contra acórdão assim ementado:');
-      P.push('“' + (impS || VAL('ementa do acórdão embargado' + (imp ? ' (ID ' + imp + ')' : ''))) + '”');
+      P.push('Trata-se de embargos de declaração contra acórdão '+idOu(v('producao','Acórdão - ID')||imp,'ID do acórdão embargado')+' assim ementado:');
+      var literal=S(v('triagem','Impugnada - Ementa literal'));P.push(literal?'“'+literal+'”':VAL('transcrever a ementa literal do acórdão embargado'));
       var pts = linhas(v('triagem', 'ED - Ponto')).concat(linhas(v('triagem', 'Alegações')));
       var vicio = S(v('triagem', 'ED - Vício')).toLowerCase() || VAL('vício alegado');
       P.push('Alegou-se ' + vicio + ', inclusive em prequestionamento, pois: ' + (pts.length ? enumerar(pts) : VAL('pontos, em itens')) + '.');
@@ -263,7 +274,7 @@
       P.push('Na tramitação dos recursos excepcionais perante a Vice-Presidência, houve, em ' + (S(v('triagem', 'Retratação - Devolução mês')) || VAL('mês/ano')) + ', decisão para devolução dos autos à Turma para eventual juízo de retratação face ao julgamento do ' + (prec || VAL('precedente')) + ' ' + (trib === 'STJ' ? 'pelo Superior Tribunal de Justiça' : 'pela Suprema Corte') + ' (Tema ' + (tema || VAL('número')) + ') ' + idOu(v('triagem', 'Retratação - Devolução ID'), 'ID') + '.');
     } else if (tipo === 'Agravo de Instrumento') {
       /* no agravo de instrumento a decisão agravada é a de origem (Sentença - ID); "Impugnada" serve ao agravo interno e aos embargos */
-      P.push('Trata-se de agravo de instrumento à decisão ' + idOu(sid || imp, 'ID da decisão agravada') + ' que ' + (sid || !impS ? resultadoSentenca('decisão') : impS) + '.');
+      P.push('Trata-se de agravo de instrumento à decisão ' + idOu(imp || sid, 'ID da decisão agravada') + ' que ' + (imp?impS||VAL('o que a decisão agravada decidiu'):resultadoSentenca('decisão')) + '.');
       pRecursos(tipo).forEach(function (x) { P.push(x); });
       P.push(pContrarrazoes(tipo));
     } else if (tipo === 'Remessa Necessária') {
@@ -286,6 +297,7 @@
     [/servidor|28,86|militar|licenciamento|concurso|improbidade|licitacao|administrativ|perdimento|aduan/, 'ADMINISTRATIVO'], [/sfh|mcmv|minha casa|contrato|dano moral|responsabilidade civil|consumidor|fies|caixa/, 'CIVIL'],
     [/saude|medicamento|sus\b|tratamento/, 'CONSTITUCIONAL E ADMINISTRATIVO'], [/ambient|ibama/, 'AMBIENTAL'], [/indigena|funai|terra/, 'CONSTITUCIONAL']];
   function ramo() {
+    var informado=S(v('triagem','Ramo do direito'));if(informado)return informado.replace(/^direito\s+/i,'').toUpperCase();
     var t = N([fo('Assunto'), v('triagem', 'Assunto detalhado'), v('triagem', 'Registro - Assunto detalhado'), v('triagem', 'Tema')].join(' '));
     for (var i = 0; i < RAMOS.length; i++) if (RAMOS[i][0].test(t)) return RAMOS[i][1];
     return VAL('RAMO');
@@ -423,6 +435,51 @@
     if (b && acao(b)) pintar(true);
   });
   /* Composição compartilhada: recebe apenas os dados registrados do CNJ, sem recorrer ao estado da extensão. */
-  function comporFicha(campos, fonte, tipo){var ant=CONTEXTO,t0=TIPO;try{CONTEXTO={V:function(sec,k){return campos[sec+'.'+k];},fo:function(){return fonte||{};}};TIPO=tipo||tipoDetectado();var rel=relatorio(TIPO),em=ementa(TIPO,resDaFicha(TIPO)),R={abertura_relatorio:rel[0],razoes_recursais:/^(Apelação|Agravo de Instrumento)$/.test(TIPO)?pRecursos(TIPO).join('\n\n'):'',contrarrazoes_relatorio:pContrarrazoes(TIPO),parecer_relatorio:pMpf()||'',caso_em_exame:em.sec[0][1].map(function(x){return x.t;}).join('\n'),questao_em_discussao:em.sec[1][1].map(function(x){return x.t;}).join('\n')};if(/^(Apelação|Remessa Necessária|Agravo de Instrumento)$/.test(TIPO)){R.resultado_decisao_recorrida=resultadoSentenca();R.comandos_dispositivos=comandosOrigem();R.frase_honorarios_origem=honorariosAbertura();}return {tipo:TIPO,rel:rel,em:em,variaveis:R};}finally{CONTEXTO=ant;TIPO=t0;}}
+  /* Fórmulas de sucumbência consultivas: nenhum dado vazio é tratado como negativa. */
+  function honorariosEditorial(tipo){
+    var r=resDaFicha(tipo),sol=N(v('producao','Voto - Honorários')),sol2=N(v('producao','Honorários recursais')),cls=N(fo('classe_judicial')||fo('Classe')),tj=N(v('triagem','Tipo de Julgamento')),R=tab('origem','Recursos'),C=tab('origem','Sucumbência da decisão recorrida');
+    var livre=S(v('producao','Fundamento da sucumbência')),texto='',item='',validar=function(x){return {texto:VAL(x),ementa:''};};
+    if(/mandado de seguranca|msciv/.test(cls+' '+tj)){
+      if(sol==='majorados'||sol2==='majorados')return validar('mandado de segurança: conferir solução de honorários incompatível com artigo 25 da Lei 12.016/2009');
+      return {texto:'Sem condenação em honorários advocatícios (artigo 25 da Lei 12.016/2009 e Súmula 512/STF).',ementa:''};
+    }
+    if(R.length>1)return validar('individualizar a sucumbência por recurso e recorrente; não aplicar uma fórmula global');
+    if(r==='prov'||r==='parc'){
+      if(sol==='majorados'||sol2==='majorados')return validar('resultado provido: incompatível com majoração pelo Tema 1.059/STJ');
+      if(/invertidos|redistribuidos|fixados/.test(sol))return livre?{texto:livre,ementa:''}:validar('redimensionamento da sucumbência, critérios e base de cálculo');
+      return {texto:'Por fim, deixa-se de determinar a majoração dos honorários advocatícios, nos termos do Tema 1.059/STJ.',ementa:''};
+    }
+    if(tipo==='Remessa Necessária'||tipo==='Embargos de Declaração'||tipo==='Agravo Interno'||tipo==='Juízo de Retratação')return livre?{texto:livre,ementa:''}:validar('conferir o cabimento de honorários nesta espécie de julgamento');
+    if(tipo==='Agravo de Instrumento')return livre?{texto:livre,ementa:''}:validar('conferir natureza da decisão agravada e cabimento de honorários');
+    if(r!=='desp'&&r!=='nc')return livre?{texto:livre,ementa:''}:validar('resultado e solução da sucumbência, inclusive eventual anulação ou perda do objeto');
+    var pub=S(v('origem','Sentença - Publicação')),date=S(v('origem','Sentença - Data'));
+    if(/^\d{4}-\d{2}-\d{2}$/.test(pub)&&pub<'2016-03-18'){
+      if(sol==='majorados'||sol2==='majorados')return validar('publicação anterior a 18/03/2016: conferir incompatibilidade com Enunciado Administrativo 7/STJ');
+      return validar('não majorar pelo artigo 85, § 11: publicação anterior a 18/03/2016; validar redação');
+    }
+    if(!(/^\d{4}-\d{2}-\d{2}$/.test(pub)&&pub>='2016-03-18')&&!(/^\d{4}-\d{2}-\d{2}$/.test(date)&&date>='2016-03-18'))return validar('data de publicação da decisão recorrida e regime temporal');
+    if(C.length&&C.every(function(x){return /^(nao|nao se aplica)$/.test(N(x.honorarios));})||/^sem (?:condenacao em )?honorarios/.test(N(v('origem','Sentença - Honorários')))){
+      return validar('sem honorários previamente fixados: não majorar verba inexistente; validar redação');
+    }
+    if(sol!=='majorados'&&sol2!=='majorados')return livre?{texto:livre,ementa:''}:validar('confirmar solução dos honorários recursais');
+    if(sol&&sol!=='majorados'||sol2&&sol2!=='majorados'&&sol2!=='a definir')return validar('divergência entre os campos de honorários do julgamento');
+    if(!R.length||!S(R[0].parte))return validar('identificar recorrente e devedor da verba fixada na origem');
+    var parte=R[0].parte,polo=poloDe(parte),match=C.filter(function(x){return N(x.honorarios)==='sim'&&S(x.devedor)&&(N(x.devedor)===N(parte)||(polo&&poloDe(x.devedor)===polo));});
+    if(!match.length)return validar('confirmar honorários previamente fixados contra o recorrente');
+    var pct=S(v('producao','Honorários - Percentual ou valor'));if(!/^\d+(?:[.,]\d+)?\s*%$/.test(pct))return validar('percentual de majoração confirmado pelo servidor');
+    if(!match.every(function(x){return S(x.base)&&S(x.criterio)&&(/^(sim|nao|nao se aplica)$/.test(N(x.suspensao))||/^(indeferida|nao se aplica|revogada)$/.test(N(x.gratuidade)));}))return validar('base, critério e exigibilidade dos honorários na origem');
+    if(!polo&&!porNome(parte))return validar('designação da parte recorrente');
+    var nome=porNome(parte)||(polo==='autor'?'a parte autora':'a parte ré'),grat=match.every(function(x){return N(x.gratuidade)==='deferida'&&N(x.suspensao)==='sim';});
+    if(match.some(function(x){return N(x.gratuidade)==='deferida'||N(x.suspensao)==='sim';})&&!grat)return validar('gratuidade e suspensão da exigibilidade do recorrente');
+    texto='Pela sucumbência recursal, '+nome+' deve suportar condenação adicional (artigo 85, § 11, do CPC), no equivalente a '+pct.replace(/\s+/g,'')+', a ser acrescido ao fixado na origem'+(grat?', observada a gratuidade de justiça concedida (artigo 98, § 3º, do CPC)':'')+'.';
+    if(livre)texto=livre;item=(r==='desp'?'Apelação desprovida':'Apelação não conhecida')+', honorários recursais em acréscimo ao fixado na origem.';
+    return {texto:texto,ementa:item};
+  }
+  function variaveisEditorial(tipo,rel,em){
+    var rec=tab('origem','Recursos'),rs=/^(Apelação|Agravo de Instrumento)$/.test(tipo)?pRecursos(tipo):[],hon=honorariosEditorial(tipo),d=resultado(tipo,resDaFicha(tipo)),sid=S(v('origem','Sentença - ID')),imp=S(v('triagem','Impugnada - ID'));
+    var literal=S(v('triagem','Impugnada - Ementa literal')),per=S(v('triagem','Parecer - Sentido'));
+    return {razoes_primeiro_recurso:rs[0]||VAL('razões do primeiro recurso'),razoes_segundo_recurso:rec.length>1&&rs[1]||VAL('razões do segundo recurso'),razoes_agravo_interno:tipo==='Agravo Interno'?rel[1]:VAL('razões do agravo interno'),vicios_relatorio:tipo==='Embargos de Declaração'?rel[2]:VAL('vícios alegados'),ementa_embargada_literal:literal||VAL('transcrever ementa literal'),sentenca_paragrafo:'A sentença '+idOu(sid,'ID da sentença')+' '+comandosOrigem()+'. '+honorariosAbertura(),parecer_sentido_redacional:/^nao provimento|^desprovimento/.test(N(per))?'desprovimento':/^parcial.*provimento/.test(N(per))?'parcial provimento':/^provimento/.test(N(per))?'provimento':VAL('sentido do parecer'),dispositivo_voto:S(v('producao','Dispositivo do pronunciamento'))||'Ante o exposto, '+d[0]+'.',honorarios_recursais_texto:hon.texto,honorarios_ementa:hon.ementa,dispositivo_ementa_ficha:hon.ementa||d[3],acordao_recorrido_id:S(v('producao','Acórdão - ID'))||imp||VAL('ID do acórdão'),decisao_agravada_id:imp||VAL('ID da decisão agravada')};
+  }
+  function comporFicha(campos, fonte, tipo){var ant=CONTEXTO,t0=TIPO;try{CONTEXTO={V:function(sec,k){return campos[sec+'.'+k];},fo:function(){return fonte||{};}};TIPO=tipo||tipoDetectado();var rel=relatorio(TIPO),em=ementa(TIPO,resDaFicha(TIPO)),R={abertura_relatorio:rel[0],razoes_recursais:/^(Apelação|Agravo de Instrumento)$/.test(TIPO)?pRecursos(TIPO).join('\n\n'):'',contrarrazoes_relatorio:pContrarrazoes(TIPO),parecer_relatorio:pMpf()||'',caso_em_exame:em.sec[0][1].map(function(x){return x.t;}).join('\n'),questao_em_discussao:em.sec[1][1].map(function(x){return x.t;}).join('\n')};if(/^(Apelação|Remessa Necessária|Agravo de Instrumento)$/.test(TIPO)){R.resultado_decisao_recorrida=resultadoSentenca();R.comandos_dispositivos=comandosOrigem();R.frase_honorarios_origem=honorariosAbertura();}Object.assign(R,variaveisEditorial(TIPO,rel,em));return {tipo:TIPO,rel:rel,em:em,variaveis:R};}finally{CONTEXTO=ant;TIPO=t0;}}
   window.MutaGerador = { comporFicha: comporFicha, pintar: pintar, abrir: abrir, modo: modo, html: html, acao: acao, docs: docs, _ST: ST, _t: { resultado: resultado, fraseHonorarios: fraseHonorarios, designa: designa, feminino: feminino } };
 })();

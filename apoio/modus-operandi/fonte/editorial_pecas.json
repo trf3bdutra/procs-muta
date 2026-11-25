@@ -62,7 +62,7 @@
       "elementos": [
         {
           "n": "Abertura",
-          "f": "Apelação: “Trata-se de apelação interposta em ação de […]”.\nAgravo de instrumento: “Trata-se de agravo de instrumento à decisão que, em […], […] (ID …).”",
+          "f": "Apelação: “Trata-se de apelação interposta em ação de @assunto_detalhado”.\nAgravo de instrumento: “Trata-se de agravo de instrumento à decisão que, em […], […] (ID …).”",
           "r": [
             "Identifica o recurso e o objeto da ação."
           ],
@@ -82,21 +82,31 @@
             },
             {
               "lab": "Fórmula original",
-              "f": "Trata-se de apelação à sentença (ID …) que {{verbo nuclear}} …"
+              "f": "Trata-se de apelação à sentença (ID @sentenca_id) que @comandos_dispositivos. @frase_honorarios_origem"
             }
           ]
         },
         {
           "n": "Sentença",
-          "f": "A sentença (ID …) …",
+          "f": "@sentenca_paragrafo",
           "r": [
             "Resultado e, na mesma frase, honorários, base de cálculo, suspensão da exigibilidade e eventual multa."
           ],
-          "fo": "P"
+          "fo": "P",
+          "alts": [
+            {
+              "lab": "Automático · ficha",
+              "f": "@sentenca_paragrafo"
+            },
+            {
+              "lab": "Fórmula original",
+              "f": "A sentença (ID @sentenca_id) …"
+            }
+          ]
         },
         {
           "n": "Razões",
-          "f": "Apelou {{o autor / a autora}} (ID …), alegando, em suma: (1) […]; (2) […]; e (3) […]",
+          "f": "@razoes_recursais",
           "r": [
             "Orações no infinitivo.",
             "O pedido integra o último item ou fecha o parágrafo com “pelo que requereu”.",
@@ -106,18 +116,18 @@
           "fo": "P+M",
           "alts": [
             {
-              "lab": "Fórmula original",
-              "f": "Apelou {{o autor / a autora}} (ID …), alegando, em suma: (1) […]; (2) […]; e (3) […]"
+              "lab": "Automático · ficha",
+              "f": "@razoes_recursais"
             },
             {
-              "lab": "Dados da ficha",
-              "f": "@razoes_recursais"
+              "lab": "Fórmula original",
+              "f": "Apelou {{o autor / a autora}} (ID …), alegando, em suma: (1) […]; (2) […]; e (3) […]"
             }
           ]
         },
         {
           "n": "Contrarrazões",
-          "f": "Houve contrarrazões (ID …).\nNão houve contrarrazões.",
+          "f": "@contrarrazoes_relatorio",
           "r": [
             "Parágrafo próprio.",
             "Com preliminar nas contrarrazões, indicar qual (ex.: ilegitimidade ativa)."
@@ -125,32 +135,32 @@
           "fo": "P",
           "alts": [
             {
+              "lab": "Automático · ficha",
+              "f": "@contrarrazoes_relatorio"
+            },
+            {
               "lab": "Houve",
-              "f": "Houve contrarrazões (ID …).",
+              "f": "Houve contrarrazões (ID @contrarrazoes_ids).",
               "sub": [
                 {
                   "lab": "Sem preliminar",
-                  "f": "Houve contrarrazões (ID …)."
+                  "f": "Houve contrarrazões (ID @contrarrazoes_ids)."
                 },
                 {
                   "lab": "Com preliminar",
-                  "f": "Houve contrarrazões, apontando {{preliminar}} (ID …)."
+                  "f": "Houve contrarrazões, apontando @contrarrazoes_preliminares (ID @contrarrazoes_ids)."
                 }
               ]
             },
             {
               "lab": "Não houve",
               "f": "Não houve contrarrazões."
-            },
-            {
-              "lab": "Dados da ficha",
-              "f": "@contrarrazoes_relatorio"
             }
           ]
         },
         {
           "n": "Ministério Público",
-          "f": "A Procuradoria Regional da República opinou […] (ID …).",
+          "f": "@parecer_relatorio",
           "r": [
             "Manifestação em 2º grau: Procuradoria Regional da República, por extenso.",
             "Parecer de 1º grau: “Ministério Público Federal”."
@@ -158,24 +168,24 @@
           "fo": "P",
           "alts": [
             {
+              "lab": "Automático · ficha",
+              "f": "@parecer_relatorio"
+            },
+            {
               "lab": "Opinou no mérito",
-              "f": "A Procuradoria Regional da República opinou pelo {{provimento / desprovimento}} do recurso (ID …)."
+              "f": "A Procuradoria Regional da República opinou pelo @parecer_sentido_redacional do recurso (ID @parecer_mpf_id)."
             },
             {
               "lab": "Pelo prosseguimento",
-              "f": "A Procuradoria Regional da República opinou pelo regular prosseguimento do feito (ID …)."
+              "f": "A Procuradoria Regional da República opinou pelo regular prosseguimento do feito (ID @parecer_mpf_id)."
             },
             {
               "lab": "Sem exame do mérito",
-              "f": "A Procuradoria Regional da República deixou de analisar o mérito, considerando {{motivo}} (ID …)."
+              "f": "A Procuradoria Regional da República deixou de analisar o mérito, considerando {{motivo}} (ID @parecer_mpf_id)."
             },
             {
               "lab": "Sem intervenção",
-              "f": "[VALIDAR: redação para o Ministério Público que deixou de intervir no feito] (ID …)."
-            },
-            {
-              "lab": "Dados da ficha",
-              "f": "@parecer_relatorio"
+              "f": "[VALIDAR: redação para o Ministério Público que deixou de intervir no feito] (ID @parecer_mpf_id)."
             }
           ]
         },
@@ -318,10 +328,14 @@
         },
         {
           "n": "Honorários recursais",
-          "f": "Pela sucumbência recursal, … condenação adicional (artigo 85, § 11, do CPC), no equivalente a 1%, a ser acrescido ao fixado na origem, observada a gratuidade de justiça concedida (artigo 98, § 3º, do CPC).",
+          "f": "@honorarios_recursais_texto",
           "r": [],
           "fo": "M",
           "alts": [
+            {
+              "lab": "Automático · ficha",
+              "f": "@honorarios_recursais_texto"
+            },
             {
               "lab": "Autor com gratuidade",
               "f": "Pela sucumbência recursal, {{o autor / a autora}} deve suportar condenação adicional (artigo 85, § 11, do CPC), no equivalente a 1%, a ser acrescido ao fixado na origem, observada a gratuidade de justiça concedida (artigo 98, § 3º, do CPC)."
@@ -349,6 +363,22 @@
             {
               "lab": "Dados da ficha",
               "f": "@fundamento_sucumbencia"
+            },
+            {
+              "lab": "Texto padrão sem gratuidade",
+              "f": "Pela sucumbência recursal, {{parte responsável}} deve suportar condenação adicional (artigo 85, § 11, do CPC), no equivalente a 1%, a ser acrescido ao fixado na origem."
+            },
+            {
+              "lab": "Mandado de segurança",
+              "f": "Sem condenação em honorários advocatícios (artigo 25 da Lei 12.016/2009 e Súmula 512/STF)."
+            },
+            {
+              "lab": "Sem fixação na origem",
+              "f": "[VALIDAR: não majorar honorários não fixados na origem; redação do gabinete]"
+            },
+            {
+              "lab": "Anulação / extinção",
+              "f": "[VALIDAR: solução de custas e honorários diante da anulação ou extinção]"
             }
           ],
           "info": {
@@ -438,13 +468,17 @@
         },
         {
           "n": "Dispositivo",
-          "f": "Ante o exposto, …",
+          "f": "@dispositivo_voto",
           "r": [
             "Direto e completo: resultado, ato anulado e extensão, destino dos autos, providências e situação do recurso.",
             "Verbos por classe: recurso provido/desprovido; embargos de declaração acolhidos/rejeitados; segurança concedida/denegada."
           ],
           "fo": "P+M",
           "alts": [
+            {
+              "lab": "Automático · ficha",
+              "f": "@dispositivo_voto"
+            },
             {
               "lab": "Fórmula original",
               "f": "Ante o exposto, …"
@@ -537,11 +571,21 @@
         },
         {
           "n": "IV. DISPOSITIVO",
-          "f": "@dispositivo_ementa",
+          "f": "@dispositivo_ementa_ficha",
           "r": [
             "Preenchido a partir do dispositivo do voto; confira a redação."
           ],
-          "fo": "M"
+          "fo": "M",
+          "alts": [
+            {
+              "lab": "Automático · ficha",
+              "f": "@dispositivo_ementa_ficha"
+            },
+            {
+              "lab": "Fórmula original",
+              "f": "@dispositivo_ementa"
+            }
+          ]
         },
         {
           "n": "Itens",
@@ -914,16 +958,16 @@
           "f": "@abertura_relatorio",
           "alts": [
             {
-              "lab": "Ficha do processo",
+              "lab": "Automático · ficha",
               "f": "@abertura_relatorio"
             },
             {
               "lab": "À sentença",
-              "f": "Trata-se de apelação à sentença (ID …) que {{verbo nuclear}} …"
+              "f": "Trata-se de apelação à sentença (ID @sentenca_id) que @comandos_dispositivos. @frase_honorarios_origem"
             },
             {
               "lab": "Em ação",
-              "f": "Trata-se de apelação interposta em ação de […]."
+              "f": "Trata-se de apelação interposta em ação de @assunto_detalhado."
             }
           ],
           "r": [
@@ -934,15 +978,25 @@
         },
         {
           "n": "Sentença",
-          "f": "A sentença (ID …) …",
+          "f": "@sentenca_paragrafo",
           "r": [
             "Resultado e, na mesma frase, honorários, base de cálculo, suspensão da exigibilidade e eventual multa."
           ],
-          "fo": "P"
+          "fo": "P",
+          "alts": [
+            {
+              "lab": "Automático · ficha",
+              "f": "@sentenca_paragrafo"
+            },
+            {
+              "lab": "Fórmula original",
+              "f": "A sentença (ID @sentenca_id) …"
+            }
+          ]
         },
         {
           "n": "Razões",
-          "f": "Apelou {{o autor / a autora}} (ID …), alegando, em suma: (1) […]; (2) […]; e (3) […]",
+          "f": "@razoes_recursais",
           "r": [
             "Orações no infinitivo.",
             "O pedido integra o último item ou fecha o parágrafo com “pelo que requereu”.",
@@ -952,18 +1006,18 @@
           "fo": "P+M",
           "alts": [
             {
-              "lab": "Fórmula original",
-              "f": "Apelou {{o autor / a autora}} (ID …), alegando, em suma: (1) […]; (2) […]; e (3) […]"
+              "lab": "Automático · ficha",
+              "f": "@razoes_recursais"
             },
             {
-              "lab": "Dados da ficha",
-              "f": "@razoes_recursais"
+              "lab": "Fórmula original",
+              "f": "Apelou {{o autor / a autora}} (ID …), alegando, em suma: (1) […]; (2) […]; e (3) […]"
             }
           ]
         },
         {
           "n": "Contrarrazões",
-          "f": "Houve contrarrazões (ID …).\nNão houve contrarrazões.",
+          "f": "@contrarrazoes_relatorio",
           "r": [
             "Parágrafo próprio.",
             "Com preliminar nas contrarrazões, indicar qual (ex.: ilegitimidade ativa)."
@@ -971,56 +1025,56 @@
           "fo": "P",
           "alts": [
             {
+              "lab": "Automático · ficha",
+              "f": "@contrarrazoes_relatorio"
+            },
+            {
               "lab": "Houve",
-              "f": "Houve contrarrazões (ID …).",
+              "f": "Houve contrarrazões (ID @contrarrazoes_ids).",
               "sub": [
                 {
                   "lab": "Sem preliminar",
-                  "f": "Houve contrarrazões (ID …)."
+                  "f": "Houve contrarrazões (ID @contrarrazoes_ids)."
                 },
                 {
                   "lab": "Com preliminar",
-                  "f": "Houve contrarrazões, apontando {{preliminar}} (ID …)."
+                  "f": "Houve contrarrazões, apontando @contrarrazoes_preliminares (ID @contrarrazoes_ids)."
                 }
               ]
             },
             {
               "lab": "Não houve",
               "f": "Não houve contrarrazões."
-            },
-            {
-              "lab": "Dados da ficha",
-              "f": "@contrarrazoes_relatorio"
             }
           ]
         },
         {
           "n": "Ministério Público",
-          "f": "A Procuradoria Regional da República opinou pelo regular prosseguimento do feito (ID …).",
+          "f": "@parecer_relatorio",
           "alts": [
             {
+              "lab": "Automático · ficha",
+              "f": "@parecer_relatorio"
+            },
+            {
               "lab": "Prosseguimento",
-              "f": "A Procuradoria Regional da República opinou pelo regular prosseguimento do feito (ID …)."
+              "f": "A Procuradoria Regional da República opinou pelo regular prosseguimento do feito (ID @parecer_mpf_id)."
             },
             {
               "lab": "Mérito",
-              "f": "A Procuradoria Regional da República opinou pelo {{provimento / desprovimento}} do recurso (ID …)."
+              "f": "A Procuradoria Regional da República opinou pelo @parecer_sentido_redacional do recurso (ID @parecer_mpf_id)."
             },
             {
               "lab": "Sem exame do mérito",
-              "f": "A Procuradoria Regional da República não se manifestou sobre o mérito da demanda (ID …)."
+              "f": "A Procuradoria Regional da República não se manifestou sobre o mérito da demanda (ID @parecer_mpf_id)."
             },
             {
               "lab": "Sem hipótese de intervenção",
-              "f": "A Procuradoria Regional da República (ID …) deixou de opinar quanto ao mérito, por ausência de hipótese de intervenção."
+              "f": "A Procuradoria Regional da República (ID @parecer_mpf_id) deixou de opinar quanto ao mérito, por ausência de hipótese de intervenção."
             },
             {
               "lab": "Sem interesse público",
-              "f": "A Procuradoria Regional da República opinou pela inexistência de interesse público para intervenção no feito (ID …)."
-            },
-            {
-              "lab": "Dados da ficha",
-              "f": "@parecer_relatorio"
+              "f": "A Procuradoria Regional da República opinou pela inexistência de interesse público para intervenção no feito (ID @parecer_mpf_id)."
             }
           ],
           "r": [
@@ -1057,32 +1111,52 @@
           "fo": "P",
           "alts": [
             {
-              "lab": "Ficha do processo",
+              "lab": "Automático · ficha",
               "f": "@abertura_relatorio"
             },
             {
               "lab": "Fórmula original",
-              "f": "Trata-se de apelações à sentença (ID …) que {{verbo nuclear}} …"
+              "f": "Trata-se de apelações à sentença (ID @sentenca_id) que @comandos_dispositivos. @frase_honorarios_origem"
             }
           ]
         },
         {
           "n": "Razões do primeiro apelante",
-          "f": "Apelou {{a parte autora}} (ID …), alegando, em suma, que: (1) […]; (2) […]; e (3) […].",
+          "f": "@razoes_primeiro_recurso",
           "r": [
             "Um parágrafo para cada apelante."
           ],
-          "fo": "P"
+          "fo": "P",
+          "alts": [
+            {
+              "lab": "Automático · ficha",
+              "f": "@razoes_primeiro_recurso"
+            },
+            {
+              "lab": "Fórmula original",
+              "f": "Apelou {{a parte autora}} (ID …), alegando, em suma, que: (1) […]; (2) […]; e (3) […]."
+            }
+          ]
         },
         {
           "n": "Razões do segundo apelante",
-          "f": "Apelou {{a parte ré}} (ID …), alegando, em suma, que: (1) […]; (2) […]; e (3) […].",
+          "f": "@razoes_segundo_recurso",
           "r": [],
-          "fo": "P"
+          "fo": "P",
+          "alts": [
+            {
+              "lab": "Automático · ficha",
+              "f": "@razoes_segundo_recurso"
+            },
+            {
+              "lab": "Fórmula original",
+              "f": "Apelou {{a parte ré}} (ID …), alegando, em suma, que: (1) […]; (2) […]; e (3) […]."
+            }
+          ]
         },
         {
           "n": "Contrarrazões",
-          "f": "Houve contrarrazões (ID …).\nNão houve contrarrazões.",
+          "f": "@contrarrazoes_relatorio",
           "r": [
             "Parágrafo próprio.",
             "Com preliminar nas contrarrazões, indicar qual (ex.: ilegitimidade ativa)."
@@ -1090,56 +1164,56 @@
           "fo": "P",
           "alts": [
             {
+              "lab": "Automático · ficha",
+              "f": "@contrarrazoes_relatorio"
+            },
+            {
               "lab": "Houve",
-              "f": "Houve contrarrazões (ID …).",
+              "f": "Houve contrarrazões (ID @contrarrazoes_ids).",
               "sub": [
                 {
                   "lab": "Sem preliminar",
-                  "f": "Houve contrarrazões (ID …)."
+                  "f": "Houve contrarrazões (ID @contrarrazoes_ids)."
                 },
                 {
                   "lab": "Com preliminar",
-                  "f": "Houve contrarrazões, apontando {{preliminar}} (ID …)."
+                  "f": "Houve contrarrazões, apontando @contrarrazoes_preliminares (ID @contrarrazoes_ids)."
                 }
               ]
             },
             {
               "lab": "Não houve",
               "f": "Não houve contrarrazões."
-            },
-            {
-              "lab": "Dados da ficha",
-              "f": "@contrarrazoes_relatorio"
             }
           ]
         },
         {
           "n": "Ministério Público",
-          "f": "A Procuradoria Regional da República opinou pelo regular prosseguimento do feito (ID …).",
+          "f": "@parecer_relatorio",
           "alts": [
             {
+              "lab": "Automático · ficha",
+              "f": "@parecer_relatorio"
+            },
+            {
               "lab": "Prosseguimento",
-              "f": "A Procuradoria Regional da República opinou pelo regular prosseguimento do feito (ID …)."
+              "f": "A Procuradoria Regional da República opinou pelo regular prosseguimento do feito (ID @parecer_mpf_id)."
             },
             {
               "lab": "Mérito",
-              "f": "A Procuradoria Regional da República opinou pelo {{provimento / desprovimento}} do recurso (ID …)."
+              "f": "A Procuradoria Regional da República opinou pelo @parecer_sentido_redacional do recurso (ID @parecer_mpf_id)."
             },
             {
               "lab": "Sem exame do mérito",
-              "f": "A Procuradoria Regional da República não se manifestou sobre o mérito da demanda (ID …)."
+              "f": "A Procuradoria Regional da República não se manifestou sobre o mérito da demanda (ID @parecer_mpf_id)."
             },
             {
               "lab": "Sem hipótese de intervenção",
-              "f": "A Procuradoria Regional da República (ID …) deixou de opinar quanto ao mérito, por ausência de hipótese de intervenção."
+              "f": "A Procuradoria Regional da República (ID @parecer_mpf_id) deixou de opinar quanto ao mérito, por ausência de hipótese de intervenção."
             },
             {
               "lab": "Sem interesse público",
-              "f": "A Procuradoria Regional da República opinou pela inexistência de interesse público para intervenção no feito (ID …)."
-            },
-            {
-              "lab": "Dados da ficha",
-              "f": "@parecer_relatorio"
+              "f": "A Procuradoria Regional da República opinou pela inexistência de interesse público para intervenção no feito (ID @parecer_mpf_id)."
             }
           ],
           "r": [
@@ -1171,16 +1245,16 @@
           "f": "@abertura_relatorio",
           "alts": [
             {
-              "lab": "Ficha do processo",
+              "lab": "Automático · ficha",
               "f": "@abertura_relatorio"
             },
             {
               "lab": "Apelação e remessa",
-              "f": "Trata-se de apelação e remessa necessária à sentença (ID …) que …"
+              "f": "Trata-se de apelação e remessa necessária à sentença (ID @sentenca_id) que …"
             },
             {
               "lab": "Só remessa",
-              "f": "Trata-se de remessa necessária à sentença (ID …) que …"
+              "f": "Trata-se de remessa necessária à sentença (ID @sentenca_id) que …"
             }
           ],
           "r": [
@@ -1190,18 +1264,28 @@
         },
         {
           "n": "Razões",
-          "f": "Apelou {{o autor / a autora}} (ID …), alegando, em suma: (1) […]; (2) […]; e (3) […]",
+          "f": "@razoes_recursais",
           "r": [
             "Orações no infinitivo.",
             "O pedido integra o último item ou fecha o parágrafo com “pelo que requereu”.",
             "Um parágrafo por recurso, sem conectivo.",
             "“aduz” só para acréscimo."
           ],
-          "fo": "P+M"
+          "fo": "P+M",
+          "alts": [
+            {
+              "lab": "Automático · ficha",
+              "f": "@razoes_recursais"
+            },
+            {
+              "lab": "Fórmula original",
+              "f": "Apelou {{o autor / a autora}} (ID …), alegando, em suma: (1) […]; (2) […]; e (3) […]"
+            }
+          ]
         },
         {
           "n": "Contrarrazões",
-          "f": "Houve contrarrazões (ID …).\nNão houve contrarrazões.",
+          "f": "@contrarrazoes_relatorio",
           "r": [
             "Parágrafo próprio.",
             "Com preliminar nas contrarrazões, indicar qual (ex.: ilegitimidade ativa)."
@@ -1209,60 +1293,60 @@
           "fo": "P",
           "alts": [
             {
+              "lab": "Automático · ficha",
+              "f": "@contrarrazoes_relatorio"
+            },
+            {
               "lab": "Houve",
-              "f": "Houve contrarrazões (ID …).",
+              "f": "Houve contrarrazões (ID @contrarrazoes_ids).",
               "sub": [
                 {
                   "lab": "Sem preliminar",
-                  "f": "Houve contrarrazões (ID …)."
+                  "f": "Houve contrarrazões (ID @contrarrazoes_ids)."
                 },
                 {
                   "lab": "Com preliminar",
-                  "f": "Houve contrarrazões, apontando {{preliminar}} (ID …)."
+                  "f": "Houve contrarrazões, apontando @contrarrazoes_preliminares (ID @contrarrazoes_ids)."
                 }
               ]
             },
             {
               "lab": "Não houve",
               "f": "Não houve contrarrazões."
-            },
-            {
-              "lab": "Dados da ficha",
-              "f": "@contrarrazoes_relatorio"
             }
           ]
         },
         {
           "n": "Ministério Público",
-          "f": "A Procuradoria Regional da República opinou pelo regular prosseguimento do feito (ID …).",
+          "f": "@parecer_relatorio",
           "alts": [
             {
+              "lab": "Automático · ficha",
+              "f": "@parecer_relatorio"
+            },
+            {
               "lab": "Prosseguimento",
-              "f": "A Procuradoria Regional da República opinou pelo regular prosseguimento do feito (ID …)."
+              "f": "A Procuradoria Regional da República opinou pelo regular prosseguimento do feito (ID @parecer_mpf_id)."
             },
             {
               "lab": "Mérito",
-              "f": "A Procuradoria Regional da República opinou pelo {{provimento / desprovimento}} do recurso (ID …)."
+              "f": "A Procuradoria Regional da República opinou pelo @parecer_sentido_redacional do recurso (ID @parecer_mpf_id)."
             },
             {
               "lab": "Remessa",
-              "f": "A Procuradoria Regional da República opinou pelo {{provimento / desprovimento}} da remessa necessária (ID …)."
+              "f": "A Procuradoria Regional da República opinou pelo @parecer_sentido_redacional da remessa necessária (ID @parecer_mpf_id)."
             },
             {
               "lab": "Sem exame do mérito",
-              "f": "A Procuradoria Regional da República não se manifestou sobre o mérito da demanda (ID …)."
+              "f": "A Procuradoria Regional da República não se manifestou sobre o mérito da demanda (ID @parecer_mpf_id)."
             },
             {
               "lab": "Sem hipótese de intervenção",
-              "f": "A Procuradoria Regional da República (ID …) deixou de opinar quanto ao mérito, por ausência de hipótese de intervenção."
+              "f": "A Procuradoria Regional da República (ID @parecer_mpf_id) deixou de opinar quanto ao mérito, por ausência de hipótese de intervenção."
             },
             {
               "lab": "Sem interesse público",
-              "f": "A Procuradoria Regional da República opinou pela inexistência de interesse público para intervenção no feito (ID …)."
-            },
-            {
-              "lab": "Dados da ficha",
-              "f": "@parecer_relatorio"
+              "f": "A Procuradoria Regional da República opinou pela inexistência de interesse público para intervenção no feito (ID @parecer_mpf_id)."
             }
           ],
           "r": [
@@ -1291,53 +1375,53 @@
       "elementos": [
         {
           "n": "Abertura",
-          "f": "Trata-se de agravo de instrumento à decisão que, em […], […] (ID …).",
+          "f": "@abertura_relatorio",
           "r": [],
           "fo": "P",
           "alts": [
             {
-              "lab": "Fórmula original",
-              "f": "Trata-se de agravo de instrumento à decisão que, em […], […] (ID …)."
+              "lab": "Automático · ficha",
+              "f": "@abertura_relatorio"
             },
             {
-              "lab": "Dados da ficha",
-              "f": "@abertura_relatorio"
+              "lab": "Fórmula original",
+              "f": "Trata-se de agravo de instrumento à decisão que, em @impugnada_data, @impugnada_sintese (ID @decisao_agravada_id)."
             }
           ]
         },
         {
           "n": "Razões",
-          "f": "Alegou {{a agravante}} (ID …) que: (1) […]; (2) […]; e (3) […].",
+          "f": "@razoes_recursais",
           "r": [
             "Pedido de efeito suspensivo ou de tutela recursal, quando houver, com a decisão do Relator e o ID."
           ],
           "fo": "P",
           "alts": [
             {
-              "lab": "Fórmula original",
-              "f": "Alegou {{a agravante}} (ID …) que: (1) […]; (2) […]; e (3) […]."
+              "lab": "Automático · ficha",
+              "f": "@razoes_recursais"
             },
             {
-              "lab": "Dados da ficha",
-              "f": "@razoes_recursais"
+              "lab": "Fórmula original",
+              "f": "Alegou {{a agravante}} (ID …) que: (1) […]; (2) […]; e (3) […]."
             }
           ]
         },
         {
           "n": "Contraminuta",
-          "f": "Houve contraminuta (ID …).",
+          "f": "@contrarrazoes_relatorio",
           "alts": [
             {
+              "lab": "Automático · ficha",
+              "f": "@contrarrazoes_relatorio"
+            },
+            {
               "lab": "Houve",
-              "f": "Houve contraminuta (ID …)."
+              "f": "Houve contraminuta (ID @contrarrazoes_ids)."
             },
             {
               "lab": "Não houve",
               "f": "Não houve contraminuta."
-            },
-            {
-              "lab": "Dados da ficha",
-              "f": "@contrarrazoes_relatorio"
             }
           ],
           "r": [
@@ -1347,31 +1431,31 @@
         },
         {
           "n": "Ministério Público",
-          "f": "A Procuradoria Regional da República opinou pelo regular prosseguimento do feito (ID …).",
+          "f": "@parecer_relatorio",
           "alts": [
             {
+              "lab": "Automático · ficha",
+              "f": "@parecer_relatorio"
+            },
+            {
               "lab": "Prosseguimento",
-              "f": "A Procuradoria Regional da República opinou pelo regular prosseguimento do feito (ID …)."
+              "f": "A Procuradoria Regional da República opinou pelo regular prosseguimento do feito (ID @parecer_mpf_id)."
             },
             {
               "lab": "Mérito",
-              "f": "A Procuradoria Regional da República opinou pelo {{provimento / desprovimento}} do recurso (ID …)."
+              "f": "A Procuradoria Regional da República opinou pelo @parecer_sentido_redacional do recurso (ID @parecer_mpf_id)."
             },
             {
               "lab": "Sem exame do mérito",
-              "f": "A Procuradoria Regional da República não se manifestou sobre o mérito da demanda (ID …)."
+              "f": "A Procuradoria Regional da República não se manifestou sobre o mérito da demanda (ID @parecer_mpf_id)."
             },
             {
               "lab": "Sem hipótese de intervenção",
-              "f": "A Procuradoria Regional da República (ID …) deixou de opinar quanto ao mérito, por ausência de hipótese de intervenção."
+              "f": "A Procuradoria Regional da República (ID @parecer_mpf_id) deixou de opinar quanto ao mérito, por ausência de hipótese de intervenção."
             },
             {
               "lab": "Sem interesse público",
-              "f": "A Procuradoria Regional da República opinou pela inexistência de interesse público para intervenção no feito (ID …)."
-            },
-            {
-              "lab": "Dados da ficha",
-              "f": "@parecer_relatorio"
+              "f": "A Procuradoria Regional da República opinou pela inexistência de interesse público para intervenção no feito (ID @parecer_mpf_id)."
             }
           ],
           "r": [
@@ -1400,8 +1484,12 @@
       "elementos": [
         {
           "n": "Abertura",
-          "f": "Trata-se de embargos de declaração contra acórdão assim ementado:",
+          "f": "@abertura_relatorio",
           "alts": [
+            {
+              "lab": "Automático · ficha",
+              "f": "@abertura_relatorio"
+            },
             {
               "lab": "Contra acórdão",
               "f": "Trata-se de embargos de declaração contra acórdão assim ementado:"
@@ -1416,22 +1504,46 @@
         },
         {
           "n": "Ementa embargada",
-          "f": "“{{ementa do acórdão embargado}}”",
+          "f": "@ementa_embargada_literal",
           "r": [
             "Transcrição integral, em bloco recuado."
           ],
-          "fo": "P"
+          "fo": "P",
+          "alts": [
+            {
+              "lab": "Automático · ficha",
+              "f": "@ementa_embargada_literal"
+            },
+            {
+              "lab": "Fórmula original",
+              "f": "“{{ementa do acórdão embargado}}”"
+            }
+          ]
         },
         {
           "n": "Vícios alegados",
-          "f": "Alegou-se {{omissão / contradição / obscuridade}}, inclusive em prequestionamento, pois: (1) […]; (2) […]; e (3) […].",
+          "f": "@vicios_relatorio",
           "r": [],
-          "fo": "P"
+          "fo": "P",
+          "alts": [
+            {
+              "lab": "Automático · ficha",
+              "f": "@vicios_relatorio"
+            },
+            {
+              "lab": "Fórmula original",
+              "f": "Alegou-se {{omissão / contradição / obscuridade}}, inclusive em prequestionamento, pois: (1) […]; (2) […]; e (3) […]."
+            }
+          ]
         },
         {
           "n": "Resposta",
-          "f": "Houve contrarrazões.",
+          "f": "@contrarrazoes_relatorio",
           "alts": [
+            {
+              "lab": "Automático · ficha",
+              "f": "@contrarrazoes_relatorio"
+            },
             {
               "lab": "Houve",
               "f": "Houve contrarrazões."
@@ -1443,10 +1555,6 @@
             {
               "lab": "Pela rejeição",
               "f": "Em resposta aos embargos de declaração, pugnou-se por sua rejeição."
-            },
-            {
-              "lab": "Dados da ficha",
-              "f": "@contrarrazoes_relatorio"
             }
           ],
           "r": [],
@@ -1454,31 +1562,31 @@
         },
         {
           "n": "Ministério Público",
-          "f": "A Procuradoria Regional da República opinou pelo regular prosseguimento do feito (ID …).",
+          "f": "@parecer_relatorio",
           "alts": [
             {
+              "lab": "Automático · ficha",
+              "f": "@parecer_relatorio"
+            },
+            {
               "lab": "Prosseguimento",
-              "f": "A Procuradoria Regional da República opinou pelo regular prosseguimento do feito (ID …)."
+              "f": "A Procuradoria Regional da República opinou pelo regular prosseguimento do feito (ID @parecer_mpf_id)."
             },
             {
               "lab": "Mérito",
-              "f": "A Procuradoria Regional da República opinou pelo {{provimento / desprovimento}} do recurso (ID …)."
+              "f": "A Procuradoria Regional da República opinou pelo @parecer_sentido_redacional do recurso (ID @parecer_mpf_id)."
             },
             {
               "lab": "Sem exame do mérito",
-              "f": "A Procuradoria Regional da República não se manifestou sobre o mérito da demanda (ID …)."
+              "f": "A Procuradoria Regional da República não se manifestou sobre o mérito da demanda (ID @parecer_mpf_id)."
             },
             {
               "lab": "Sem hipótese de intervenção",
-              "f": "A Procuradoria Regional da República (ID …) deixou de opinar quanto ao mérito, por ausência de hipótese de intervenção."
+              "f": "A Procuradoria Regional da República (ID @parecer_mpf_id) deixou de opinar quanto ao mérito, por ausência de hipótese de intervenção."
             },
             {
               "lab": "Sem interesse público",
-              "f": "A Procuradoria Regional da República opinou pela inexistência de interesse público para intervenção no feito (ID …)."
-            },
-            {
-              "lab": "Dados da ficha",
-              "f": "@parecer_relatorio"
+              "f": "A Procuradoria Regional da República opinou pela inexistência de interesse público para intervenção no feito (ID @parecer_mpf_id)."
             }
           ],
           "r": [
@@ -1507,43 +1615,53 @@
       "elementos": [
         {
           "n": "Abertura",
-          "f": "Trata-se de agravo interno à decisão que […].",
+          "f": "@abertura_relatorio",
           "r": [
             "Uma frase: o que decidiu a monocrática agravada."
           ],
           "fo": "P",
           "alts": [
             {
-              "lab": "Fórmula original",
-              "f": "Trata-se de agravo interno à decisão que […]."
+              "lab": "Automático · ficha",
+              "f": "@abertura_relatorio"
             },
             {
-              "lab": "Dados da ficha",
-              "f": "@abertura_relatorio"
+              "lab": "Fórmula original",
+              "f": "Trata-se de agravo interno à decisão que […]."
             }
           ]
         },
         {
           "n": "Razões",
-          "f": "Alegou {{a agravante}} (ID …) que […].",
+          "f": "@razoes_agravo_interno",
           "r": [],
-          "fo": "P"
+          "fo": "P",
+          "alts": [
+            {
+              "lab": "Automático · ficha",
+              "f": "@razoes_agravo_interno"
+            },
+            {
+              "lab": "Fórmula original",
+              "f": "Alegou {{a agravante}} (ID …) que […]."
+            }
+          ]
         },
         {
           "n": "Contraminuta",
-          "f": "Houve contraminuta (ID …).",
+          "f": "@contrarrazoes_relatorio",
           "alts": [
             {
+              "lab": "Automático · ficha",
+              "f": "@contrarrazoes_relatorio"
+            },
+            {
               "lab": "Houve",
-              "f": "Houve contraminuta (ID …)."
+              "f": "Houve contraminuta (ID @contrarrazoes_ids)."
             },
             {
               "lab": "Não houve",
               "f": "Não houve contraminuta."
-            },
-            {
-              "lab": "Dados da ficha",
-              "f": "@contrarrazoes_relatorio"
             }
           ],
           "r": [

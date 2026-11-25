@@ -764,5 +764,35 @@
     "tipo": "texto-longo"
    }
   ]
+ },
+ {
+  "aba": "Processo",
+  "grupo": "Sentença",
+  "campos": [
+   {
+    "secao": "origem",
+    "chave": "Sentença - Publicação",
+    "rotulo": "Publicação da sentença",
+    "tipo": "data"
+   }
+  ]
+ },
+ {
+  "aba": "Triagem",
+  "grupo": "Espécie e decisão impugnada",
+  "campos": [
+   {
+    "secao": "triagem",
+    "chave": "Impugnada - Publicação",
+    "rotulo": "Publicação da decisão impugnada",
+    "tipo": "data"
+   },
+   {
+    "secao": "triagem",
+    "chave": "Impugnada - Ementa literal",
+    "rotulo": "Ementa literal do acórdão recorrido",
+    "tipo": "texto-longo"
+   }
+  ]
  }
 ]
