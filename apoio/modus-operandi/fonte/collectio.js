@@ -1,6 +1,7 @@
 /* Collectio: gestão dos bancos; Minutário e redação de casos continuam no Compendium. */
 (function(){
  if(!window.VDM_COLLECTIO)return;
+ var qs=new URLSearchParams(location.search);if(qs.has('id')||qs.has('k')||qs.has('lote')||/[?&#]k=/.test(location.hash)){location.replace('/amicus/cortex/'+location.search+location.hash);return;}
  var D=document, nav=D.getElementById('cmp-nav');
  if(nav){
   nav.setAttribute('aria-label','Seções do Collectio');
@@ -12,10 +13,10 @@
  }
  function open(v){window.VDM_irEditorial(v==='par'?'par':'mod');sync();}
  function initial(){var p=new URLSearchParams(location.hash.slice(1)),s=p.get('s');open(s==='par'||/^#par=/.test(location.hash)?'par':'mod');}
- if(nav)nav.addEventListener('click',function(e){var b=e.target.closest('[data-ct-view],[data-ct-manage]');if(!b)return;
+ if(nav)nav.addEventListener('click',function(e){var b=e.target.closest('[data-ct-view],[data-ct-manage]');if(!b)return;e.preventDefault();e.stopImmediatePropagation();
   if(b.hasAttribute('data-ct-manage')){if(window.CMT_ACESSO&&window.CMT_ACESSO().editor&&window.VDM_abrirEditorBanco){var cur=nav.querySelector('[data-ct-view][aria-current=true]');window.VDM_abrirEditorBanco(cur?cur.dataset.ctView:'mod');}return;}
   var v=b.getAttribute('data-ct-view');history.replaceState(null,'','#v=edit&s='+v);open(v);
- });
+ },true);
  D.addEventListener('cmt-acesso',function(){initial();sync();});window.addEventListener('hashchange',initial);
  initial();sync();
 })();
