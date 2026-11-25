@@ -225,7 +225,18 @@ for a in abas:
 abas.append(CONTROLES)
 ordem = ['Processo', 'Triagem', 'Produção', 'Controles especiais', 'Pauta']
 abas.sort(key=lambda a: ordem.index(a['aba']) if a['aba'] in ordem else 99)
-out = {'schema': 'gabcmt.padrao.ficha', 'versao': '1.2.0', 'origem': 'padrao/integracoes-ficha.md (Ficha do Caput), por scripts/ficha/gerar_ficha.py',
+# Adições declarativas, preservando os campos legados.
+for item in json.loads((R / 'padrao/ficha-extensao-adicoes.json').read_text(encoding='utf-8')):
+    a = next(a for a in abas if a['aba'] == item['aba'])
+    g = next((g for g in a['grupos'] if g['grupo'] == item['grupo']), None)
+    if g is None:
+        g = {'grupo': item['grupo'], 'campos': []}
+        a['grupos'].append(g)
+    existentes = {(c.get('secao'), c['chave']) for c in g['campos']}
+    for c in item['campos']:
+        if (c.get('secao'), c['chave']) not in existentes:
+            g['campos'].append(c)
+out = {'schema': 'gabcmt.padrao.ficha', 'versao': '1.3.0', 'origem': 'padrao/integracoes-ficha.md (Ficha do Caput), por scripts/ficha/gerar_ficha.py',
        'descricao': 'Ficha única padrão de processo, usada pelo Caput e pela Ex Officio. Campos com "tipo": "tabela" são listas de linhas com as "colunas" indicadas. Grupos com "quando" só aparecem quando o campo indicado tem o valor. Campos com "secao" ficam em acervo/operacional.json (registro do processo, seção indicada: origem, triagem, producao, pauta ou controles) e são editáveis, salvo "editavel": false; campos com "fonte" vêm de acervo/fonte.json e são só leitura.',
        'abas': abas}
 # apelidos dos campos (@apelido nas peças e modelos do Compendium): scripts/ficha/apelidos.py

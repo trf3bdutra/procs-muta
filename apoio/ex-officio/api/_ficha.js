@@ -50,11 +50,19 @@ function registro(doc, cnj, F, criar) {
   return r;
 }
 /* aplica {secao: {chave: valor}} ao registro; devolve a lista do que mudou */
+/* Atualiza por ID, inclusive em retry de concorrência, sem apagar outras classificações. */
+function mesclarClassificacao(old, patch) {
+  const m = new Map();
+  (Array.isArray(old) ? old : []).concat(Array.isArray(patch) ? patch : []).forEach(r => {
+    if (r && /^\d{1,30}$/.test(String(r.id || ''))) m.set(String(r.id), Object.assign({}, r, { id: String(r.id) }));
+  });
+  return Array.from(m.values());
+}
 function aplica(r, mud) {
   const out = [];
   /* texto, ou lista de linhas (campos "tabela" da ficha) */
   const igual = (x, y) => (typeof x === 'object' && x) || (typeof y === 'object' && y) ? JSON.stringify(x == null || x === '' ? [] : x) === JSON.stringify(y == null || y === '' ? [] : y) : String(x == null ? '' : x) === String(y == null ? '' : y);
-  Object.keys(mud).forEach(s => { r[s] = r[s] || {}; Object.keys(mud[s]).forEach(k => { const raw = mud[s][k], v = Array.isArray(raw) ? raw : String(raw == null ? '' : raw); if (!igual(r[s][k], v)) { r[s][k] = v; out.push(s + '.' + k); } }); });
+  Object.keys(mud).forEach(s => { r[s] = r[s] || {}; Object.keys(mud[s]).forEach(k => { const raw = mud[s][k], v = s === 'origem' && k === 'Classificação documental' ? mesclarClassificacao(r[s][k], raw) : Array.isArray(raw) ? raw : String(raw == null ? '' : raw); if (!igual(r[s][k], v)) { r[s][k] = v; out.push(s + '.' + k); } }); });
   if (out.length) { r.origem = r.origem || {}; r.origem.atualizado_em = agora(); }
   return out;
 }

@@ -1,6 +1,6 @@
 {
  "schema": "gabcmt.padrao.ficha",
- "versao": "1.2.0",
+ "versao": "1.3.0",
  "origem": "padrao/integracoes-ficha.md (Ficha do Caput), por scripts/ficha/gerar_ficha.py",
  "descricao": "Ficha única padrão de processo, usada pelo Caput e pela Ex Officio. Campos com \"tipo\": \"tabela\" são listas de linhas com as \"colunas\" indicadas. Grupos com \"quando\" só aparecem quando o campo indicado tem o valor. Campos com \"secao\" ficam em acervo/operacional.json (registro do processo, seção indicada: origem, triagem, producao, pauta ou controles) e são editáveis, salvo \"editavel\": false; campos com \"fonte\" vêm de acervo/fonte.json e são só leitura.",
  "abas": [
@@ -741,6 +741,209 @@
        "apelido": "sessao_atual_excel"
       }
      ]
+    },
+    {
+     "grupo": "Sucumbência da decisão recorrida",
+     "campos": [
+      {
+       "rotulo": "Capítulos de sucumbência",
+       "chave": "Sucumbência da decisão recorrida",
+       "tipo": "tabela",
+       "secao": "origem",
+       "colunas": [
+        {
+         "chave": "id_decisao",
+         "rotulo": "ID da decisão",
+         "tipo": "texto"
+        },
+        {
+         "chave": "capitulo",
+         "rotulo": "Capítulo / pedido",
+         "tipo": "texto"
+        },
+        {
+         "chave": "devedor",
+         "rotulo": "Parte devedora",
+         "tipo": "texto"
+        },
+        {
+         "chave": "credor",
+         "rotulo": "Parte credora",
+         "tipo": "texto"
+        },
+        {
+         "chave": "custas",
+         "rotulo": "Custas e despesas",
+         "tipo": "texto"
+        },
+        {
+         "chave": "gratuidade",
+         "rotulo": "Gratuidade",
+         "tipo": "lista",
+         "opcoes": [
+          "Deferida",
+          "Indeferida",
+          "Pendente",
+          "Revogada",
+          "Não se aplica",
+          "Não informada"
+         ]
+        },
+        {
+         "chave": "honorarios",
+         "rotulo": "Honorários fixados",
+         "tipo": "lista",
+         "opcoes": [
+          "Sim",
+          "Não",
+          "Não informado",
+          "Não se aplica"
+         ]
+        },
+        {
+         "chave": "criterio",
+         "rotulo": "Critério",
+         "tipo": "lista",
+         "opcoes": [
+          "Percentual",
+          "Valor certo",
+          "Equidade",
+          "Faixas da Fazenda Pública",
+          "Outro",
+          "Não informado"
+         ]
+        },
+        {
+         "chave": "percentual",
+         "rotulo": "Percentual (%)",
+         "tipo": "texto"
+        },
+        {
+         "chave": "valor",
+         "rotulo": "Valor fixado (R$)",
+         "tipo": "texto"
+        },
+        {
+         "chave": "base",
+         "rotulo": "Base de cálculo",
+         "tipo": "texto"
+        },
+        {
+         "chave": "distribuicao",
+         "rotulo": "Distribuição da sucumbência",
+         "tipo": "texto"
+        },
+        {
+         "chave": "suspensao",
+         "rotulo": "Exigibilidade suspensa",
+         "tipo": "lista",
+         "opcoes": [
+          "Sim",
+          "Não",
+          "Não informado",
+          "Não se aplica"
+         ]
+        },
+        {
+         "chave": "fundamento",
+         "rotulo": "Fundamento / observação",
+         "tipo": "texto-longo"
+        }
+       ],
+       "apelido": "sucumbencia_decisao_recorrida"
+      }
+     ]
+    },
+    {
+     "grupo": "Classificação documental",
+     "campos": [
+      {
+       "rotulo": "Classificação documental por ID",
+       "chave": "Classificação documental",
+       "tipo": "tabela",
+       "secao": "origem",
+       "colunas": [
+        {
+         "chave": "id",
+         "rotulo": "ID",
+         "tipo": "texto"
+        },
+        {
+         "chave": "tipo",
+         "rotulo": "Tipo documental PJe",
+         "tipo": "texto"
+        },
+        {
+         "chave": "data",
+         "rotulo": "Data",
+         "tipo": "texto"
+        },
+        {
+         "chave": "classes",
+         "rotulo": "Classificações",
+         "tipo": "texto"
+        },
+        {
+         "chave": "sintese",
+         "rotulo": "Síntese documental",
+         "tipo": "texto-longo"
+        },
+        {
+         "chave": "fato",
+         "rotulo": "Fato / requisito comprovado",
+         "tipo": "texto-longo"
+        },
+        {
+         "chave": "questoes",
+         "rotulo": "Questões vinculadas",
+         "tipo": "texto-longo"
+        },
+        {
+         "chave": "trecho",
+         "rotulo": "Trecho relevante",
+         "tipo": "texto-longo"
+        },
+        {
+         "chave": "paginas",
+         "rotulo": "Páginas",
+         "tipo": "texto"
+        },
+        {
+         "chave": "destinacao",
+         "rotulo": "Destinação textual",
+         "tipo": "texto"
+        },
+        {
+         "chave": "citar",
+         "rotulo": "Mencionar ID",
+         "tipo": "lista",
+         "opcoes": [
+          "Sim",
+          "Não",
+          "Não informado",
+          "Não se aplica"
+         ]
+        },
+        {
+         "chave": "origem",
+         "rotulo": "Origem da classificação",
+         "tipo": "texto"
+        },
+        {
+         "chave": "confirmada",
+         "rotulo": "Confirmada",
+         "tipo": "lista",
+         "opcoes": [
+          "Sim",
+          "Não",
+          "Não informado",
+          "Não se aplica"
+         ]
+        }
+       ],
+       "apelido": "classificacao_documental"
+      }
+     ]
     }
    ]
   },
@@ -1219,6 +1422,20 @@
        "tipo": "texto-longo",
        "secao": "triagem",
        "apelido": "especificidades"
+      },
+      {
+       "rotulo": "Ramo do direito",
+       "chave": "Ramo do direito",
+       "tipo": "texto",
+       "secao": "triagem",
+       "apelido": "ramo_direito"
+      },
+      {
+       "rotulo": "Outros assuntos",
+       "chave": "Outros assuntos",
+       "tipo": "texto-longo",
+       "secao": "triagem",
+       "apelido": "outros_assuntos"
       }
      ]
     },
@@ -2034,6 +2251,414 @@
        "tipo": "data",
        "secao": "producao",
        "apelido": "mono_data_publicacao"
+      }
+     ]
+    },
+    {
+     "grupo": "Plano do pronunciamento",
+     "campos": [
+      {
+       "rotulo": "Modelo ou minuta-matriz",
+       "chave": "Modelo aplicável",
+       "tipo": "texto",
+       "secao": "producao",
+       "apelido": "modelo_aplicavel"
+      },
+      {
+       "rotulo": "Variação do modelo",
+       "chave": "Variação do modelo",
+       "tipo": "texto",
+       "secao": "producao",
+       "apelido": "variacao_modelo"
+      },
+      {
+       "rotulo": "Objeto do recurso",
+       "chave": "Objeto do recurso",
+       "tipo": "texto-longo",
+       "secao": "producao",
+       "apelido": "objeto_recurso"
+      },
+      {
+       "rotulo": "Objeto devolvido ao Tribunal",
+       "chave": "Objeto devolvido",
+       "tipo": "texto-longo",
+       "secao": "producao",
+       "apelido": "objeto_devolvido"
+      },
+      {
+       "rotulo": "Limites do julgamento",
+       "chave": "Limites do julgamento",
+       "tipo": "texto-longo",
+       "secao": "producao",
+       "apelido": "limites_julgamento"
+      },
+      {
+       "rotulo": "Matérias cognoscíveis de ofício",
+       "chave": "Matérias de ofício",
+       "tipo": "texto-longo",
+       "secao": "producao",
+       "apelido": "materias_oficio"
+      }
+     ]
+    },
+    {
+     "grupo": "Solução processual",
+     "campos": [
+      {
+       "rotulo": "Conhecimento do recurso",
+       "chave": "Conhecimento do recurso",
+       "tipo": "lista",
+       "secao": "producao",
+       "opcoes": [
+        "Integral",
+        "Parcial",
+        "Não conhecido",
+        "Não se aplica"
+       ],
+       "apelido": "conhecimento_recurso"
+      },
+      {
+       "rotulo": "Preliminares acolhidas",
+       "chave": "Preliminares acolhidas",
+       "tipo": "texto-longo",
+       "secao": "producao",
+       "apelido": "preliminares_acolhidas"
+      },
+      {
+       "rotulo": "Preliminares rejeitadas",
+       "chave": "Preliminares rejeitadas",
+       "tipo": "texto-longo",
+       "secao": "producao",
+       "apelido": "preliminares_rejeitadas"
+      },
+      {
+       "rotulo": "Prejudiciais de mérito",
+       "chave": "Prejudiciais de mérito",
+       "tipo": "texto-longo",
+       "secao": "producao",
+       "apelido": "prejudiciais_merito"
+      },
+      {
+       "rotulo": "Extensão do conhecimento",
+       "chave": "Extensão do conhecimento",
+       "tipo": "texto-longo",
+       "secao": "producao",
+       "apelido": "extensao_conhecimento"
+      }
+     ]
+    },
+    {
+     "grupo": "Fundamentação e dispositivo",
+     "campos": [
+      {
+       "rotulo": "Tese jurídica adotada",
+       "chave": "Tese jurídica adotada",
+       "tipo": "texto-longo",
+       "secao": "producao",
+       "apelido": "tese_juridica_adotada"
+      },
+      {
+       "rotulo": "Dispositivos legais aplicáveis",
+       "chave": "Dispositivos legais aplicáveis",
+       "tipo": "texto-longo",
+       "secao": "producao",
+       "apelido": "dispositivos_legais_aplicaveis"
+      },
+      {
+       "rotulo": "Precedentes aplicáveis",
+       "chave": "Precedentes aplicáveis",
+       "tipo": "texto-longo",
+       "secao": "producao",
+       "apelido": "precedentes_aplicaveis"
+      },
+      {
+       "rotulo": "Distinção ou superação de precedente",
+       "chave": "Distinção de precedente",
+       "tipo": "texto-longo",
+       "secao": "producao",
+       "apelido": "distincao_precedente"
+      },
+      {
+       "rotulo": "Aplicação ao caso concreto",
+       "chave": "Aplicação ao caso concreto",
+       "tipo": "texto-longo",
+       "secao": "producao",
+       "apelido": "aplicacao_ao_caso_concreto"
+      },
+      {
+       "rotulo": "Extensão da reforma",
+       "chave": "Extensão da reforma",
+       "tipo": "texto-longo",
+       "secao": "producao",
+       "apelido": "extensao_reforma"
+      },
+      {
+       "rotulo": "Capítulos mantidos",
+       "chave": "Capítulos mantidos",
+       "tipo": "texto-longo",
+       "secao": "producao",
+       "apelido": "capitulos_mantidos"
+      },
+      {
+       "rotulo": "Capítulos reformados",
+       "chave": "Capítulos reformados",
+       "tipo": "texto-longo",
+       "secao": "producao",
+       "apelido": "capitulos_reformados"
+      },
+      {
+       "rotulo": "Providências determinadas",
+       "chave": "Providências determinadas",
+       "tipo": "texto-longo",
+       "secao": "producao",
+       "apelido": "providencias_determinadas"
+      },
+      {
+       "rotulo": "Dispositivo",
+       "chave": "Dispositivo do pronunciamento",
+       "tipo": "texto-longo",
+       "secao": "producao",
+       "apelido": "dispositivo_pronunciamento"
+      },
+      {
+       "rotulo": "Particularidades do relatório",
+       "chave": "Particularidades do relatório",
+       "tipo": "texto-longo",
+       "secao": "producao",
+       "apelido": "particularidades_relatorio"
+      }
+     ]
+    },
+    {
+     "grupo": "Sucumbência e consectários do julgamento",
+     "campos": [
+      {
+       "rotulo": "Percentual ou valor",
+       "chave": "Honorários - Percentual ou valor",
+       "tipo": "texto",
+       "secao": "producao",
+       "apelido": "honorarios_percentual_ou_valor"
+      },
+      {
+       "rotulo": "Base de cálculo",
+       "chave": "Honorários - Base de cálculo",
+       "tipo": "texto",
+       "secao": "producao",
+       "apelido": "honorarios_base_calculo"
+      },
+      {
+       "rotulo": "Honorários recursais",
+       "chave": "Honorários recursais",
+       "tipo": "lista",
+       "secao": "producao",
+       "opcoes": [
+        "Majorados",
+        "Não majorados",
+        "Não se aplica",
+        "A definir"
+       ],
+       "apelido": "honorarios_recursais"
+      },
+      {
+       "rotulo": "Custas e despesas no julgamento",
+       "chave": "Custas no julgamento",
+       "tipo": "texto-longo",
+       "secao": "producao",
+       "apelido": "custas_julgamento"
+      },
+      {
+       "rotulo": "Justiça gratuita e exigibilidade",
+       "chave": "Gratuidade no julgamento",
+       "tipo": "texto-longo",
+       "secao": "producao",
+       "apelido": "gratuidade_julgamento"
+      },
+      {
+       "rotulo": "Juros e correção monetária",
+       "chave": "Juros e correção monetária",
+       "tipo": "texto-longo",
+       "secao": "producao",
+       "apelido": "juros_correcao_monetaria"
+      },
+      {
+       "rotulo": "Termo inicial dos efeitos financeiros",
+       "chave": "Termo inicial dos efeitos",
+       "tipo": "texto",
+       "secao": "producao",
+       "apelido": "termo_inicial_efeitos"
+      },
+      {
+       "rotulo": "Fundamento da solução sucumbencial",
+       "chave": "Fundamento da sucumbência",
+       "tipo": "texto-longo",
+       "secao": "producao",
+       "apelido": "fundamento_sucumbencia"
+      }
+     ]
+    },
+    {
+     "grupo": "Resultado individualizado",
+     "campos": [
+      {
+       "rotulo": "Resultado por recurso",
+       "chave": "Resultado por recurso",
+       "tipo": "tabela",
+       "secao": "producao",
+       "colunas": [
+        {
+         "chave": "id_recurso",
+         "rotulo": "ID do recurso",
+         "tipo": "texto"
+        },
+        {
+         "chave": "recorrente",
+         "rotulo": "Recorrente",
+         "tipo": "texto"
+        },
+        {
+         "chave": "resultado",
+         "rotulo": "Resultado",
+         "tipo": "lista",
+         "opcoes": [
+          "Não conhecido",
+          "Negado provimento",
+          "Dado provimento",
+          "Parcialmente provido",
+          "Anulado",
+          "Prejudicado",
+          "Deferido",
+          "Indeferido",
+          "Parcialmente deferido",
+          "Homologado",
+          "Extinto",
+          "Outro"
+         ]
+        },
+        {
+         "chave": "devedor",
+         "rotulo": "Parte responsável pela sucumbência",
+         "tipo": "texto"
+        },
+        {
+         "chave": "honorarios",
+         "rotulo": "Honorários no julgamento",
+         "tipo": "texto"
+        },
+        {
+         "chave": "custas",
+         "rotulo": "Custas",
+         "tipo": "texto"
+        },
+        {
+         "chave": "fundamento",
+         "rotulo": "Fundamento / ressalvas",
+         "tipo": "texto-longo"
+        }
+       ],
+       "apelido": "resultado_recurso"
+      }
+     ]
+    },
+    {
+     "grupo": "Questões específicas da espécie",
+     "campos": [
+      {
+       "rotulo": "Apelação · capítulos impugnados",
+       "chave": "Apelação - Capítulos impugnados",
+       "tipo": "texto-longo",
+       "secao": "producao",
+       "apelido": "apelacao_capitulos_impugnados"
+      },
+      {
+       "rotulo": "Remessa · extensão do reexame",
+       "chave": "Remessa - Extensão do reexame",
+       "tipo": "texto-longo",
+       "secao": "producao",
+       "apelido": "remessa_extensao_reexame"
+      },
+      {
+       "rotulo": "AI · tutela recursal",
+       "chave": "AI - Tutela recursal",
+       "tipo": "texto-longo",
+       "secao": "producao",
+       "apelido": "ai_tutela_recursal"
+      },
+      {
+       "rotulo": "AI · perda do objeto",
+       "chave": "AI - Perda do objeto",
+       "tipo": "texto-longo",
+       "secao": "producao",
+       "apelido": "ai_perda_objeto"
+      },
+      {
+       "rotulo": "ED · vício reconhecido",
+       "chave": "ED - Vício reconhecido",
+       "tipo": "texto-longo",
+       "secao": "producao",
+       "apelido": "ed_vicio_reconhecido"
+      },
+      {
+       "rotulo": "ED · ponto integrado",
+       "chave": "ED - Integração",
+       "tipo": "texto-longo",
+       "secao": "producao",
+       "apelido": "ed_integracao"
+      },
+      {
+       "rotulo": "ED · efeitos modificativos",
+       "chave": "ED - Efeitos modificativos",
+       "tipo": "simnao",
+       "secao": "producao",
+       "apelido": "ed_efeitos_modificativos"
+      },
+      {
+       "rotulo": "ED · prequestionamento",
+       "chave": "ED - Prequestionamento",
+       "tipo": "texto-longo",
+       "secao": "producao",
+       "apelido": "ed_prequestionamento"
+      },
+      {
+       "rotulo": "AgInt · manutenção ou reforma",
+       "chave": "AgInt - Solução",
+       "tipo": "texto-longo",
+       "secao": "producao",
+       "apelido": "agint_solucao"
+      },
+      {
+       "rotulo": "AgInt · multa",
+       "chave": "AgInt - Multa",
+       "tipo": "texto-longo",
+       "secao": "producao",
+       "apelido": "agint_multa"
+      },
+      {
+       "rotulo": "JR · aderência ao precedente",
+       "chave": "JR - Aderência ao precedente",
+       "tipo": "texto-longo",
+       "secao": "producao",
+       "apelido": "jr_aderencia_ao_precedente"
+      },
+      {
+       "rotulo": "JR · manutenção ou retratação",
+       "chave": "JR - Solução",
+       "tipo": "texto-longo",
+       "secao": "producao",
+       "apelido": "jr_solucao"
+      },
+      {
+       "rotulo": "MS · direito líquido e certo",
+       "chave": "MS - Direito líquido e certo",
+       "tipo": "texto-longo",
+       "secao": "producao",
+       "apelido": "ms_direito_liquido_certo"
+      },
+      {
+       "rotulo": "MS · prova pré-constituída",
+       "chave": "MS - Prova pré-constituída",
+       "tipo": "texto-longo",
+       "secao": "producao",
+       "apelido": "ms_prova_pre_constituida"
       }
      ]
     }
