@@ -210,3 +210,55 @@ if __name__ == '__main__':
     print(rel or 'manual em dia com as diretrizes')
     if '-w' in sys.argv:
         src.write_text(H, encoding='utf-8')
+
+
+# Padrões decisórios › Roteiros por assunto: o catálogo de perguntas da minuta (roteiros.json), que saiu do Minutário por ora.
+# Gerado a cada build, para o capítulo acompanhar o catálogo; fica na aba restrita (data-aba="padroes").
+_ROT_GRUPOS = (('assunto', 'Por assunto'), ('especie', 'Por espécie de recurso'), ('transversal', 'Transversais'), ('mestre', 'Roteiro-mestre'))
+
+
+def roteiros(H, rot):
+    import html as _h
+    e = lambda x: _h.escape(str(x or ''), quote=True)
+    blocos = rot.get('blocos') or []
+    ordem = [b for g, _ in _ROT_GRUPOS for b in blocos if b.get('g') == g]
+    if not ordem or 'id="mn-roteiros"' in H:
+        return H
+    ix, secs, toc, n, ness = [], [], [], 0, 0
+    grupo_ant = None
+    for i, b in enumerate(ordem):
+        sid = 'roteiros-%d' % i
+        rotulo = dict(_ROT_GRUPOS).get(b.get('g'), '')
+        ix.append('<a href="#mn-%s" data-mngo="%s"><b>R.%d</b>%s</a>' % (sid, sid, i + 1, e(b['nome'])))
+        toc.append('<li><a href="#mn-%s" data-mngo="%s">%s</a></li>' % (sid, sid, e(b['nome'])))
+        corpo = ''
+        if rotulo != grupo_ant:
+            grupo_ant = rotulo
+        por_pos = {}
+        for it in b.get('itens') or []:
+            por_pos.setdefault(it.get('pos') or '', []).append(it)
+        for pos, L in por_pos.items():
+            corpo += '<h5 class="mn-h5">%s</h5>' % e(pos)
+            for it in sorted(L, key=lambda x: not x.get('e')):
+                n += 1
+                ness += 1 if it.get('e') else 0
+                corpo += ('<div class="mn-r"><span class="rn" title="Número da pergunta neste capítulo">R.%02d</span><h4>%s%s</h4>' % (n, e(it.get('q')), ' <span class="rt-ess">essencial</span>' if it.get('e') else '')
+                          + ('<p><span class="xlb ok">Orientação</span>%s</p>' % e(it['o']) if it.get('o') else '')
+                          + ('<p class="mn-obs rt-f"><b>Fórmula</b> %s</p>' % e(it['f']) if it.get('f') else '')
+                          + ('<p class="mn-obs">Fonte: %s</p>' % e(it['fn']) if it.get('fn') else '') + '</div>')
+        secs.append('<div class="mn-sec" id="mn-%s"><h3><span class="h3n">R.%d</span>%s</h3><p class="mn-k rt-g">%s</p>%s%s</div>'
+                    % (sid, i + 1, e(b['nome']), e(rotulo), ('<p class="mn-lead">%s</p>' % e(b['nota'])) if b.get('nota') else '', corpo))
+    cap = ('<section class="mn-cap" id="mn-roteiros" data-aba="padroes"><h2><span>R</span>Roteiros da minuta por assunto</h2>'
+           '<div class="cap-meta"><span class="cap-st">%d seções · %d perguntas · %d essenciais</span><nav class="cap-ix" aria-label="Seções do capítulo">%s</nav></div>'
+           '<p class="mn-lead">Perguntas do catálogo do gabinete para conferir a minuta, por assunto, espécie de recurso e temas transversais, com a orientação e a fórmula de cada uma. '
+           'No Minutário, o roteiro está fora por ora.</p>%s</section>') % (len(ordem), n, ness, ''.join(ix), ''.join(secs))
+    css = ('<style>.rt-ess{font:600 9.5px var(--sans,Inter,sans-serif);letter-spacing:.08em;text-transform:uppercase;color:#805b18;border:1px solid #d9c49a;border-radius:4px;padding:1px 5px;margin-left:6px;vertical-align:2px}'
+           '.rt-f{white-space:pre-wrap}.rt-g{margin:-4px 0 6px}</style>')
+    a = '<section class="mn-cap" id="mn-vocabulario"'
+    if a not in H:
+        return H
+    H = H.replace(a, cap + a, 1)
+    t = '</ol><div class="lab tp" data-aba="manual">Anexos</div>'
+    if t in H:
+        H = H.replace(t, '<li><a href="#mn-roteiros" data-mngo="roteiros">Roteiros por assunto</a><ol>%s</ol></li>%s' % (''.join(toc), t), 1)
+    return H.replace('</head>', css + '</head>', 1) if '</head>' in H else css + H

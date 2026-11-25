@@ -156,7 +156,7 @@
     if(forte)return {tipo:'mod',x:b.x,s:b.s,ach:b.ach,mat:mt};
     return {tipo:'mat',x:mt,cand:b||null};
   }
-  function nomeDe(A){if(A.tipo==='m28')return 'matriz modular de 28,86%';return A.tipo==='mod'?(A.x.nomeModelo||A.x.id):(A.x?(A.x.nome||A.x.id):'');}
+  function nomeDe(A){if(A.tipo==='m28')return 'modelo 28,86% (matriz)';return A.tipo==='mod'?(A.x.nomeModelo||A.x.id):(A.x?(A.x.nome||A.x.id):'');}
   /* pesquisa do caso, refeita só quando o caso muda */
   function Rcaso(){if(!CQ.perfil||!BASE)return null;if(CQ.Rp!==CQ.perfil){CQ.R=buscar(CQ.perfil);CQ.Rp=CQ.perfil;}return CQ.R;}
   function e28(){return !!(CQ.perfil&&BASE&&window.M2886&&M2886.disponivel()&&M2886.e2886(CQ.perfil,CQ.pront));}
@@ -208,7 +208,7 @@
     if(ct==='jr')add('pc','Folha × caso','Juízo de retratação: a Minuta-Matriz ainda não tem estrutura própria; a folha segue '+(tf.lab||'a estrutura escolhida').toLowerCase()+'. Confira o tema vinculante.');
     else if(ct&&!ok)add('pc','Folha × caso','O caso é de '+tj+'; a folha está em '+(tf.lab||'outro pronunciamento')+'. Ajuste o pronunciamento, a classe e o julgamento na barra.');
     else if(ct)add('ok','Folha × caso','Folha no mesmo tipo de julgamento do caso ('+tj+').');
-    if(A.tipo==='m28')add('ok','Texto da folha','Matriz modular de 28,86%: motor especializado do gabinete.');
+    if(A.tipo==='m28')add('ok','Texto da folha','Modelo 28,86% · cumprimento individual da ACP (matriz do gabinete, com enquadramento, módulos e variáveis).');
     else if(A.tipo==='mod')add('ok','Texto da folha','Modelo do banco: '+nomeDe(A)+'.');
     else add('ok','Texto da folha','Minuta-Matriz ('+nomeDe(A)+'): estrutura do tipo de julgamento. A escolha de modelo é facultativa e não constitui requisito de conformidade.');
     if(A.tipo==='mod'){
@@ -242,11 +242,10 @@
     var q=nq(CQ.modelq||''),filt=function(z){return !q||nq([z.x.nomeModelo,z.x.assunto,z.x.tese,z.x.classe,z.x.resultado,[].concat(z.x.especificidadesTags||[]).join(' '),mTextoBase(z.x)].join(' ')).indexOf(q)>=0;};
     var compat=function(z){var j=dkJulgAtual(),m=dkJulgDe(z.x);return dkPronMod(z.x)===dkPron()&&(!j||!m||j===m||(XP.v.acordao==='aprn'&&m==='rn'));};
     var todos=(q?(R.modTodos||[]):(R.modElegiveis||R.mod||[])).filter(compat).filter(filt).slice(0,30),fora=(R.modFora||[]).filter(filt).slice(0,5),tem28=e28();
-    return '<div class="dori cq-solucoes"><p class="kick2"><span>Buscador de modelos</span><span>Aplicação facultativa</span></p>'+
-      '<div class="cq-tipo"><b>Matriz modular</b><p>Motor especializado: enquadra o caso e monta módulos, versões e variáveis.</p>'+
-      (tem28?'<button type="button" class="cq-sol rec'+(A.tipo==='m28'?' sel':'')+'" data-dfonte="m28"><strong>28,86% · cumprimento individual da ACP</strong><small>Elegível para este processo · recomendada</small></button>':'<span class="meta">Nenhuma matriz modular elegível identificada.</span>')+'</div>'+
-      '<div class="cq-tipo"><b>Modelos</b><p>Busque no banco ou selecione uma sugestão. Ao ativar um modelo compatível, a folha passa a usar seu conteúdo e os mesmos dados do processo. Confira a aderência jurídica.</p><input class="cq-modelq" id="cq-modelq" type="search" value="'+e(CQ.modelq||'')+'" placeholder="Buscar por assunto, tese ou texto" aria-label="Buscar modelos do gabinete">'+
-      (todos.length?'<div class="cq-modsel">'+todos.map(function(z){var sel=A.tipo==='mod'&&A.x&&A.x.id===z.x.id;return '<button type="button" class="cq-sol'+(sel?' sel':'')+'" data-dusar="'+e(z.x.id)+'"><strong>'+e(z.x.nomeModelo||z.x.id)+'</strong><small>'+e((z.el.razoes||[]).join(' · ')||('aderência '+z.s))+'</small></button>';}).join('')+'</div>':'<span class="meta">Nenhum modelo encontrado. Digite outros termos para pesquisar o banco.</span>')+
+    var m28=tem28&&dkPron()==='ac'&&(!q||'28,86% cumprimento individual acp matriz'.indexOf(q)>=0)?'<button type="button" class="cq-sol rec'+(A.tipo==='m28'?' sel':'')+'" data-dfonte="m28"><strong>28,86% · cumprimento individual da ACP</strong><small>Matriz · elegível para este processo · recomendada</small></button>':'';
+    return '<div class="dori cq-solucoes"><p class="kick2"><span>Modelos para o caso</span><span>Aplicação facultativa</span></p>'+
+      '<div class="cq-tipo"><b>Modelos</b><p>Sugestões para este processo, matrizes incluídas. Aplicado, o modelo vai para o seletor “Modelo” da barra e a folha passa a usar o conteúdo dele com os dados do processo. Confira a aderência jurídica.</p><input class="cq-modelq" id="cq-modelq" type="search" value="'+e(CQ.modelq||'')+'" placeholder="Buscar por assunto, tese ou texto" aria-label="Buscar modelos do gabinete">'+
+      (todos.length||m28?'<div class="cq-modsel">'+m28+todos.map(function(z){var sel=A.tipo==='mod'&&A.x&&A.x.id===z.x.id;return '<button type="button" class="cq-sol'+(sel?' sel':'')+'" data-dusar="'+e(z.x.id)+'"><strong>'+e(z.x.nomeModelo||z.x.id)+'</strong><small>'+e((z.el.razoes||[]).join(' · ')||('aderência '+z.s))+'</small></button>';}).join('')+'</div>':'<span class="meta">Nenhum modelo encontrado. Digite outros termos para pesquisar o banco.</span>')+
       (fora.length?'<details class="cq-fora"><summary>Fora dos critérios do caso · '+fora.length+'</summary>'+fora.map(function(z){return '<div><b>'+e(z.x.nomeModelo||z.x.id)+'</b><small>'+e((z.el.impedimentos||[]).join(' · ')||'aderência insuficiente')+'</small></div>';}).join('')+'</details>':'')+'</div>'+
       '<div class="cq-tipo"><b>Minuta-Matriz</b><p>Estrutura por tipo de julgamento, preenchida com os dados disponíveis do processo. Na ausência de modelo específico, é o suporte à redação da minuta.</p><button type="button" class="cq-sol'+(A.tipo==='mat'?' sel':'')+'" data-dfonte="mat"><strong>Usar a Minuta-Matriz</strong><small>'+e(A.tipo==='mat'?nomeDe(A):(A.mat?(A.mat.nome||A.mat.id):'estrutura pelo tipo de recurso'))+'</small></button></div></div>';
   }

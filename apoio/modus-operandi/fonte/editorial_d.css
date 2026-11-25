@@ -497,3 +497,26 @@ body.dsk #x-main .fill.arr.ok{background:#e7f1ee;color:#1d4f49;box-shadow:inset 
 .dk-pront-lacunas button span{min-width:0;display:grid;gap:3px;overflow-wrap:anywhere}
 .dk-pront-lacunas button b{font-size:11px}.dk-pront-lacunas button small{font-size:10px;opacity:.75}.dk-pront-lacunas button i{font-style:normal}
 .dk-pront-ficha{border-top:1px solid #8793a344;margin-top:7px;padding-top:6px}.dk-pront-ficha>summary{cursor:pointer;font-size:11px;font-weight:600}
+/* ===== Canhoto único: o antigo painel direito (#x-ref) vive dentro do canhoto; a folha fica com a largura ===== */
+body.dsk #v-edit .xa,body.dsk #v-edit .xa:has(#x-aside.cxon){grid-template-columns:340px minmax(0,1fr);grid-template-areas:"top top" "can main"}
+body.dsk #v-edit .xa:has(#x-aside.cxon){grid-template-columns:384px minmax(0,1fr)}
+body.dsk #x-aside #x-ref.dorip{grid-area:auto;display:block;margin:16px 0 0;padding:6px 0 0;border:0;border-top:1px solid #d8d3c6;background:transparent;position:static!important;max-height:none!important;overflow:visible!important}
+body.dsk #x-aside #x-ref.dorip:empty{display:none}
+body.dsk #x-aside #x-ref.dorip+#dcan-bot{margin-top:6px}
+@media (max-width:1180px){body.dsk #v-edit .xa,body.dsk #v-edit .xa:has(#x-aside.cxon){grid-template-columns:290px minmax(0,1fr);grid-template-areas:"top top" "can main"}}
+@media (max-width:860px){body.dsk #v-edit .xa,body.dsk #v-edit .xa:has(#x-aside.cxon){grid-template-columns:minmax(0,1fr)!important;grid-template-areas:"top" "main" "can"}}
+
+/* ===== Pílula única acima da folha: Copiar <parte> · Copiar peça · .docx · PDF · limpar · Conferir ===== */
+.dtabs .dpill{flex:0 0 auto;display:inline-flex;align-items:stretch;height:30px;margin:0 0 7px;border:1px solid #d8d3c6;border-radius:6px;overflow:hidden;background:#fff}
+.dtabs .dpill>button{display:inline-flex;align-items:center;gap:5px;margin:0;height:auto;padding:0 10px;border:0;border-left:1px solid #e1ddd2;border-radius:0;background:transparent;color:#235a55;font:600 12px Inter,"Segoe UI",system-ui,sans-serif;white-space:nowrap;cursor:pointer;width:auto}
+.dtabs .dpill>button:first-child{border-left:0}
+.dtabs .dpill>button:hover{background:#e7f1ee}
+.dtabs .dpill>button.pri{background:#235a55;color:#fff}
+.dtabs .dpill>button.pri:hover{background:#173f3d}
+.dtabs .dpill svg{width:13px;height:13px;flex:0 0 auto}
+.dtabs .dpill>button[data-xdocx] svg,.dtabs .dpill>button[data-xpdf] svg{display:none}
+.dtabs .dpillw{display:contents}
+/* tela estreita: a pílula ganha linha própria acima das abas, alinhada à direita, para não cortar o Conferir */
+@media (max-width:1380px){.dtabs{flex-wrap:wrap;overflow:visible}.dtabs .dpillw{display:flex;order:-1;width:100%;justify-content:flex-end}.dtabs .dpill{margin:0 0 8px}.dtabs .dtsp{display:none}}
+@media (max-width:860px){.dtabs .dpillw{justify-content:flex-start;overflow-x:auto}.dtabs .dpill>button:not([data-xdocx]):not([data-xpdf]):not(.pri) .pa-tx,.dtabs .dpill>.dcpp span{display:none}}
+.dcan>#x-ref.dorip:first-child{margin-top:0;padding-top:0;border-top:0;margin-bottom:14px;padding-bottom:6px;border-bottom:1px solid #d8d3c6}

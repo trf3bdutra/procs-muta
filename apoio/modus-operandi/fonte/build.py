@@ -222,6 +222,8 @@ def montar(var):
     from manual_sync import sincroniza
     MANUAL, _rel = sincroniza((H/'diretrizes_manual.html').read_text(encoding='utf-8'), dir_)
     if _rel: print('manual de redação ← diretrizes:', _rel)
+    from manual_sync import roteiros as _roteiros
+    MANUAL = _roteiros(MANUAL, _ROT)  # Padrões decisórios › Roteiros por assunto (fora do Minutário por ora)
     t = troca(t, '<section id="v-dir" hidden>', '<script type="application/json" id="dir-manual">' + json.dumps(MANUAL, ensure_ascii=False).replace('<', '\\u003c') + '</script>\n<section id="v-dir" hidden>')
     js = 'window.VDM_PUBLICO=true;\n' + js + '\n' + (H/'enciclopedia.js').read_text(encoding='utf-8') + '\n' + (H/'acesso.js').read_text(encoding='utf-8')
     # identidade gêmea do Ex Officio: cabeçalho, paleta e tema compartilhado (cmt-eq-tema)
