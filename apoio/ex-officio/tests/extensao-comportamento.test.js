@@ -9,6 +9,7 @@ let pw = null;
 for (const p of ['playwright', '/opt/npm-tools/node_modules/playwright']) { try { pw = require(p); break; } catch (e) {} }
 const CHROME = ['/usr/bin/google-chrome', '/usr/bin/chromium', '/usr/bin/chromium-browser'].find(f => fs.existsSync(f));
 const pular = !pw || !CHROME ? 'sem Playwright/Chrome nesta máquina' : false;
+if (process.env.HERO_TEST_REQUIRED === '1' && pular) throw new Error(pular);
 
 const CNJ = '5033560-12.2026.4.03.0000';
 const FICHA = JSON.parse(fs.readFileSync(path.join(ROOT, 'padrao/ficha.json'), 'utf8'));
@@ -38,7 +39,9 @@ async function abrir(op, sig) {
     fs.createReadStream(f).pipe(res);
   });
   await new Promise(ok => srv.listen(0, ok));
-  const b = await pw.chromium.launch({ executablePath: CHROME, args: ['--no-sandbox'] });
+  let b; const fim = async () => { try { if (b) await b.close(); } finally { await new Promise(ok => srv.close(ok)); fs.rmSync(saida, { recursive: true, force: true }); } };
+  try {
+  b = await pw.chromium.launch({ executablePath: CHROME, args: ['--no-sandbox'] });
   const pg = await b.newPage({ viewport: { width: 520, height: 1400 } });
   const erros = []; pg.on('pageerror', e => erros.push(e.message));
   await pg.goto('http://127.0.0.1:' + srv.address().port + '/painel/painel.html');
@@ -46,11 +49,12 @@ async function abrir(op, sig) {
   /* o "PJe" informa o processo aberto, como o conteudo-pje.js faria */
   await pg.evaluate(cnj => { var reg = { numero: cnj, classe: 'ApCiv', tarefa: '[Sessão] Aguardando a sessão', ctx: '', ed: false, lib: '' }; window.chrome.storage.session.set({ 'aba:1': reg }); }, CNJ);
   await pg.waitForSelector('.pm-pills', { timeout: 15000 });
-  return { pg, erros, fim: async () => { await b.close(); srv.close(); } };
+  return { pg, erros, fim };
+  } catch (e) { await fim(); throw e; }
 }
 
 test('painel: abre o processo com sigla, etapas, roteiros e notas; sem erro de script', { skip: pular, timeout: 90000 }, async () => {
-  const op = { processo: CNJ, origem: {}, triagem: { 'Tema': 'IMO-A' }, producao: { SERVIDOR: 'Rodrigo', MINUTADO: '2026-11-13' }, pauta: { sessoes: [{ sessao: '2026-12-07', item: '3', resultado: '' }] }, controles: {} };
+  const op = { processo: CNJ, origem: {}, triagem: { 'Tema': 'IMO-A' }, producao: { SERVIDOR: 'Rodrigo', MINUTADO: '2026-11-13', Destino: 'Sessão' }, pauta: { sessoes: [{ sessao: '2026-12-07', item: '3', resultado: '' }] }, controles: {} };
   const P = await abrir(op, { sigilo: '', liberado: true, porque: 'gestor' });
   try {
     const { pg } = P;
@@ -58,17 +62,23 @@ test('painel: abre o processo com sigla, etapas, roteiros e notas; sem erro de s
     const pil = await pg.$$eval('.pm-pl', L => L.map(x => ({ t: x.textContent.trim(), c: x.className })));
     assert.ok(pil.some(x => /^Minuta: Rodrigo · 13\/11\/2026$/.test(x.t) && /k-min ok/.test(x.c)), 'minuta verde com nome e data: ' + JSON.stringify(pil));
     assert.ok(!pil.some(x => /Liberada/.test(x.t)), 'sem "Liberada" sem as caixas do editor nem registro');
-    assert.equal(await pg.$$eval('.rt-modos [data-rot]', L => L.length), 2, 'Roteiro de triagem | Roteiro de produção');
-    assert.ok(await pg.$('.rt-tsel'), 'tipo de julgamento recolhido');
-    assert.ok(await pg.$('.pm-sn'), 'seta síntese · notas · sinalizações');
-    assert.ok(await pg.$('.nt-add[data-cs="sp"]'), 'síntese vazia vira botão "+"');
+    assert.deepEqual(await pg.$eval('.hero-main-tabs [data-rot]', L => L.map(b=>b.dataset.rot)), ['tri','pro','sol'], 'Triagem, Produção e Solicitações como abas irmãs');
+    assert.ok(await pg.$('.hero-main-tabs [data-aba="Autos"]'), 'Autos em aba própria');
+    assert.ok(await pg.$('.hero-tipo-ref'), 'tipo de julgamento no cartão');
+    assert.equal(await pg.$eval('.hero-sn-ind [data-sn-kind]', L => L.length), 3, 'sinalizações independentes');
+    assert.ok(await pg.$('.hero-ann-unified button[title="Incluir anotação"]'), 'inclusão de sínteses e anotações no cartão');
     assert.ok(!(await pg.$('#hs-mod')), 'todos os módulos carregaram');
     assert.deepEqual(P.erros, [], 'sem erro de script');
     /* Roteiro de produção: perfil acórdão, sem Pauta e julgamento (está na aba Pauta) */
-    await pg.click('[data-rot="pro"]');
-    const prod = await pg.$$eval('[data-cc]', L => L.map(x => x.getAttribute('data-cc')));
-    assert.ok(prod.some(x => /^Acórdão · /.test(x)), 'produção de acórdão: ' + prod.join(' | '));
-    assert.ok(!prod.some(x => /Pauta e julgamento|Admissibilidade|Ministério Público/.test(x)), 'sem repetir triagem nem pauta');
+    await pg.click('.hero-main-tabs [data-rot="pro"]');
+    await pg.waitForSelector('.hero-minuta-roteiro', { timeout: 15000 });
+    assert.equal(await pg.getAttribute('.hero-main-tabs [data-rot="pro"]','aria-selected'),'true');
+    const prod = await pg.$eval('.hero-minuta-secao[data-cc]', L => L.map(x => x.getAttribute('data-cc')));
+    assert.deepEqual(prod,['minuta-relatorio','minuta-questoes','minuta-solucao','minuta-fundamentacao','minuta-sucumbencia','minuta-dispositivo']);
+    await pg.click('.hero-minuta-nav-steps [data-minuta-nav="solucao"]');
+    await pg.waitForSelector('#pv-julgamento', { timeout: 15000 });
+    assert.ok((await botoes(pg)).includes('Desprovido'), 'resultado de recurso na seção Solução');
+    assert.equal(await pg.$eval('.gbody [data-fk="producao.Destino"]', L=>L.length),0,'destino não se repete no roteiro');
     /* Pauta: processo em tela com o pedido de sustentação e a lista da sessão com a sigla */
     await pg.evaluate(() => window.MutaAbas.ir('pauta'));
     await pg.waitForSelector('.pa-it', { timeout: 15000 });
@@ -93,14 +103,18 @@ test('painel: processo sigiloso sem liberação bloqueia a leitura dos autos e m
 /* prontuário universal (prévia): painel Julgamento na Produção, com as opções pelo pronunciamento e pelo tipo de julgamento */
 async function abrirUniversal(op) {
   const P = await abrir(op, { sigilo: '', liberado: true, porque: 'gestor' });
+  try {
   const url = P.pg.url().replace('/painel/painel.html', '/painel/universal.html');
   await P.pg.goto(url);
   await P.pg.waitForFunction(() => window.MutaSessao && window.MutaSessao.estado().estado === 'on', null, { timeout: 15000 });
   await P.pg.evaluate(cnj => { window.chrome.storage.session.set({ 'aba:1': { numero: cnj, classe: 'ApCiv', tarefa: '[Sessão] Aguardando a sessão', ctx: '', ed: false, lib: '' } }); }, CNJ);
-  await P.pg.waitForSelector('[data-pv-tab="pro"]', { timeout: 15000 });
-  await P.pg.click('[data-pv-tab="pro"]');
+  await P.pg.waitForSelector('.hero-main-tabs [data-rot="pro"]', { timeout: 15000 });
+  await P.pg.click('.hero-main-tabs [data-rot="pro"]');
+  await P.pg.waitForSelector('.hero-minuta-roteiro', { timeout: 15000 });
+  await P.pg.click('.hero-minuta-nav-steps [data-minuta-nav="solucao"]');
   await P.pg.waitForSelector('#pv-julgamento', { timeout: 15000 });
   return P;
+  } catch(e) { await P.fim(); throw e; }
 }
 const RJ = '[data-fk="producao.Voto - Resultado"],[data-ch="producao.Voto - Resultado"]';
 const botoes = pg => pg.$$eval('#pv-julgamento :is(' + RJ + ')', L => L.map(x => x.tagName === 'SELECT' ? [].map.call(x.options, o => o.value).filter(Boolean) : [x.getAttribute('data-v')]).flat());
@@ -108,9 +122,10 @@ test('universal: Julgamento do acórdão — resultado de recurso, tese e preced
   const op = { processo: CNJ, origem: {}, triagem: { 'Tipo de Julgamento': 'Apelação' }, producao: { Destino: 'Sessão', 'Voto - Resultado': 'Negado provimento' }, pauta: {}, controles: {} };
   const P = await abrirUniversal(op);
   try {
-    const { pg } = P, t = await pg.textContent('#pv-julgamento');
-    assert.match(t, /Pronunciamento\s*Acórdão/);
-    assert.match(t, /Tese jurídica adotada/); assert.doesNotMatch(t, /Hipótese do art\. 932/);
+    const { pg } = P;
+    assert.match(await pg.textContent('#pv-julgamento'), /Solução do julgamento/);
+    assert.ok(await pg.$('[data-cc="minuta-fundamentacao"] [data-fk="producao.Tese jurídica adotada"]'), 'tese na Fundamentação');
+    assert.equal(await pg.$eval('#hero-encaminhamento [data-fk="triagem.Hipóteses Monocrática"]', L=>L.length),0,'sem art. 932 em acórdão');
     const R = await botoes(pg);
     assert.ok(R.includes('Desprovido') && !R.includes('Deferido'), 'opções de recurso: ' + R.join(', '));
     assert.equal(await pg.getAttribute('#pv-julgamento [data-ch="producao.Voto - Resultado"].on', 'data-v'), 'Desprovido', '"Negado provimento" convertido');
@@ -123,42 +138,44 @@ test('universal: Julgamento da monocrática e da urgência — hipótese do art.
   const op = { processo: CNJ, origem: {}, triagem: { 'Tipo de Julgamento': 'Apelação' }, producao: { Destino: 'Monocrática', 'Mono - Tipo de ato': 'Decisão monocrática (art. 932)' }, pauta: {}, controles: {} };
   const P = await abrirUniversal(op);
   try {
-    const { pg } = P, t = await pg.textContent('#pv-julgamento');
-    assert.match(t, /Decisão monocrática \(art\. 932\)/); assert.match(t, /Hipótese do art\. 932/); assert.match(t, /Precedente ou fundamento/);
+    const { pg } = P;
+    assert.ok(await pg.$('#hero-encaminhamento [data-fk="triagem.Hipóteses Monocrática"]'), 'art. 932 no Encaminhamento');
+    assert.ok(await pg.$('[data-cc="minuta-fundamentacao"] [data-fk="producao.Mono - Fundamento"]'), 'precedente ou fundamento na Fundamentação');
     assert.ok((await botoes(pg)).includes('Desprovido'));
     if (process.env.HERO_FOTO) await pg.screenshot({ path: process.env.HERO_FOTO + '-mono.png', fullPage: true });
     assert.deepEqual(P.erros, [], 'sem erro de script');
   } finally { await P.fim(); }
   const P2 = await abrirUniversal(Object.assign({}, op, { producao: { Destino: 'Monocrática', 'Mono - Tipo de ato': 'Decisão de urgência' } }));
   try {
-    const R = await botoes(P2.pg), t = await P2.pg.textContent('#pv-julgamento');
+    const R = await botoes(P2.pg);
     assert.ok(R.includes('Deferido') && !R.includes('Desprovido'), 'urgência: ' + R.join(', '));
-    assert.doesNotMatch(t, /Hipótese do art\. 932|Honorários/);
+    assert.equal(await P2.pg.$eval('#hero-encaminhamento [data-fk="triagem.Hipóteses Monocrática"]', L=>L.length),0,'urgência não é enquadramento no art. 932');
+    assert.equal(await P2.pg.$eval('[data-cc="minuta-sucumbencia"]', L=>L.length),0,'sem sucumbência na urgência');
   } finally { await P2.fim(); }
 });
 
-test('universal: Acompanhamento no alto da Triagem; sinalizações em janela móvel; registro em Autuação', { skip: pular, timeout: 90000 }, async () => {
-  const op = { processo: CNJ, origem: {}, triagem: { 'Tipo de Julgamento': 'Apelação', 'Seleção Prévia': 'Sim', Avisos: 'x' }, producao: { Destino: 'Sessão' }, pauta: {}, controles: {} };
+test('universal: Encaminhamento e Monitoramento no cartão; sinalizações por categoria; registro em Autuação', { skip: pular, timeout: 90000 }, async () => {
+  const op = { processo: CNJ, origem: {}, triagem: { 'Tipo de Julgamento': 'Apelação', 'Seleção Prévia': 'SELECIONADO PREVIAMENTE', Avisos: 'x', 'Registro - Situação atual': 'Acervo importado' }, producao: { Destino: 'Sessão' }, pauta: {}, controles: {} };
   const P = await abrir(op, { sigilo: '', liberado: true, porque: 'gestor' });
   try {
     const { pg } = P;
     await pg.goto(pg.url().replace('/painel/painel.html', '/painel/universal.html'));
     await pg.waitForFunction(() => window.MutaSessao && window.MutaSessao.estado().estado === 'on', null, { timeout: 15000 });
     await pg.evaluate(cnj => { window.chrome.storage.session.set({ 'aba:1': { numero: cnj, classe: 'ApCiv', tarefa: 'x', ctx: '', ed: false, lib: '' } }); }, CNJ);
-    await pg.waitForSelector('[data-pv-tab="tri"]', { timeout: 15000 });
-    await pg.click('[data-pv-tab="tri"]');
-    await pg.waitForSelector('#pv-acomp', { timeout: 15000 });
-    assert.ok(await pg.$eval('#pv-acomp', d => d.nextElementSibling && d.nextElementSibling.classList.contains('rt-top')), 'antes do roteiro');
-    assert.ok(await pg.$('#pv-acomp #pv-tri-enc'), 'encaminhamento (destino e seleção prévia) no Acompanhamento');
-    assert.ok(await pg.$('#pv-acomp .pv-followup'), 'responsável e próxima ação no Acompanhamento');
-    assert.ok(!(await pg.$('details.pm-sn')), 'sinalizações fora do cartão');
-    assert.ok(await pg.$('#pv-acomp .pm-sitj'), 'situação para julgar no Acompanhamento');
-    assert.ok(await pg.$('.pv-stage-head .pv-sit-tag'), 'só a etiqueta na faixa das etapas');
-    assert.ok(!(await pg.$('.pv-flowbox .pm-sitj')), 'sem o quadro na faixa');
-    assert.ok(await pg.$('details.pm-aut1 .pv-reg'), 'registro no acervo em Autuação');
-    await pg.click('[data-pv-sn]');
-    assert.equal(await pg.$eval('#pv-sn-dlg', d => d.open), true, 'janela de sinalizações aberta');
-    assert.ok(await pg.$('#pv-sn-dlg #g-sn'), 'sinalizações dentro da janela');
+    await pg.waitForSelector('.hero-main-tabs [data-rot="tri"]', { timeout: 15000 });
+    await pg.click('.hero-main-tabs [data-rot="tri"]');
+    await pg.click('#hero-dock-tab-acompanhamento');
+    await pg.waitForSelector('#hero-encaminhamento', { timeout: 15000 });
+    assert.ok(await pg.$('#hero-encaminhamento [data-fk="producao.Destino"]'), 'destino no Encaminhamento');
+    assert.equal(await pg.inputValue('#hero-encaminhamento [data-fk="triagem.Seleção Prévia"]'),'SELECIONADO PREVIAMENTE');
+    assert.ok(await pg.$('#hero-encaminhamento .pm-sitj'), 'situação para julgar no Encaminhamento');
+    assert.ok(await pg.$('.hero-designacoes [data-fk="origem.Responsável"]'), 'responsável na faixa de designações');
+    assert.ok(!(await pg.$('.pv-flowbox .pm-sitj')), 'sem duplicação na faixa de etapas');
+    assert.ok(await pg.$('.hero-top-page .hero-reg-acervo'), 'registro no acervo em Autuação');
+    await pg.click('.hero-sn-ind [data-sn-kind="av"]');
+    await pg.waitForSelector('#hero-dock-pane-sinalizacoes #g-sn', { timeout: 15000 });
+    assert.equal(await pg.getAttribute('.hero-sn-ind [data-sn-kind="av"]','aria-pressed'),'true');
+    assert.ok(await pg.$('#hero-dock-pane-sinalizacoes .sn-i.av'), 'avisos na categoria selecionada');
     assert.deepEqual(P.erros, [], 'sem erro de script');
   } finally { await P.fim(); }
 });
