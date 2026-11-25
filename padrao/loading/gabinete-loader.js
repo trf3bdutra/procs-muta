@@ -76,7 +76,7 @@ function bindHeaderIcon(){
  selectors.forEach(function(selector){
   D.querySelectorAll(selector).forEach(function(old){
    if(old.closest('.amicus-legacy-brand'))return;
-   var img=D.createElement('img');img.className='cmt-app-header-icon';img.src=link.href;img.alt='';img.width=36;img.height=36;img.setAttribute('aria-hidden','true');old.replaceWith(img);
+   var img=D.createElement('img');img.className='cmt-app-header-icon';img.src=link.href.replace(/\.svg(?=\?|$)/,'-header.svg');img.alt='';img.width=36;img.height=36;img.setAttribute('aria-hidden','true');if(old.parentElement)old.parentElement.classList.add('cmt-app-icon-host');old.replaceWith(img);
   });
  });
 }

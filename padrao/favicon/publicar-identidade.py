@@ -6,7 +6,7 @@ import sys
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
-VERSION = "20261125f"
+VERSION = "20261125g"
 FAMILIES = {
     "monitor": "caput", "caput": "caput", "office": "office",
     "equipe": "office", "exofficio": "office", "cmt": "office",
@@ -29,7 +29,7 @@ def apply(html, fam):
         inner = ICONS.sub("", MARKS.sub("", m[2]))
         inner = re.sub(r"""<link\b[^>]*href=["'][^"']*/padrao/loading/gabinete-loader\.css[^"']*["'][^>]*>""", "", inner, flags=re.I)
         inner = re.sub(r"""<script\b[^>]*src=["'][^"']*/padrao/loading/gabinete-loader\.js[^"']*["'][^>]*>\s*</script>""", "", inner, flags=re.I)
-        inner += '\n<link rel="stylesheet" href="/padrao/loading/gabinete-loader.css?v=20261125f">\n<script defer src="/padrao/loading/gabinete-loader.js?v=20261125f"></script>\n'
+        inner += '\n<link rel="stylesheet" href="/padrao/loading/gabinete-loader.css?v=20261125g">\n<script defer src="/padrao/loading/gabinete-loader.js?v=20261125g"></script>\n'
         icon = f'<link rel="icon" type="image/svg+xml" href="/padrao/favicon/{fam}.svg?v={VERSION}">'
         apple = f'<link rel="apple-touch-icon" sizes="180x180" href="/padrao/favicon/{fam}.png?v={VERSION}">'
         return m[1] + "\n<!-- favicon:cmt · identidade GAB.18810 -->\n" + icon + "\n" + apple + "\n<!-- /favicon:cmt -->\n" + inner + m[3]
@@ -44,6 +44,9 @@ def main(public):
     for name in set(FAMILIES.values()):
         src = HERE / (name + ".svg")
         shutil.copyfile(src, fav / src.name)
+        # Cabeçalhos: margem óptica para arcos e sombras, sem reduzir o favicon da aba.
+        header_svg = src.read_text(encoding='utf-8').replace('viewBox="0 0 100 100"', 'viewBox="-12 -12 124 124"', 1)
+        (fav / (name + '-header.svg')).write_text(header_svg, encoding='utf-8')
         cairosvg.svg2png(url=str(src), write_to=str(fav / (name + ".png")), output_width=180, output_height=180)
     for name in ("gab18810.svg", "gab18810-negativa.svg", "estrela.svg", "grafismo-login.svg", "grafismo-loading.svg", "gabinete-loader.js", "gabinete-loader.css"):
         shutil.copyfile(ROOT / "padrao/loading" / name, loading / name)
