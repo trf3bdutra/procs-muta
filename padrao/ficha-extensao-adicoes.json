@@ -1363,5 +1363,94 @@
     "secao": "producao"
    }
   ]
+ },
+ {
+  "aba": "Triagem",
+  "grupo": "Admissibilidade e regularidade",
+  "campos": [
+   {
+    "rotulo": "Tempestividade por recurso",
+    "chave": "Tempestividade por recurso",
+    "tipo": "tabela",
+    "secao": "triagem",
+    "apelido": "tempestividade_por_recurso",
+    "colunas": [
+     {
+      "chave": "id_recurso",
+      "rotulo": "ID do recurso",
+      "tipo": "texto"
+     },
+     {
+      "chave": "recorrente",
+      "rotulo": "Recorrente",
+      "tipo": "texto"
+     },
+     {
+      "chave": "id_decisao",
+      "rotulo": "ID do ato recorrido",
+      "tipo": "texto"
+     },
+     {
+      "chave": "id_intimacao",
+      "rotulo": "ID da intimação / publicação",
+      "tipo": "texto"
+     },
+     {
+      "chave": "protocolo",
+      "rotulo": "Data do protocolo",
+      "tipo": "data"
+     },
+     {
+      "chave": "publicacao",
+      "rotulo": "Marco inicial comprovado",
+      "tipo": "data"
+     },
+     {
+      "chave": "prazo",
+      "rotulo": "Prazo legal (dias úteis)",
+      "tipo": "texto"
+     },
+     {
+      "chave": "dobro",
+      "rotulo": "Contagem",
+      "tipo": "lista",
+      "opcoes": [
+       "1",
+       "2"
+      ]
+     },
+     {
+      "chave": "suspensoes",
+      "rotulo": "Suspensões",
+      "tipo": "texto"
+     },
+     {
+      "chave": "situacao",
+      "rotulo": "Situação",
+      "tipo": "lista",
+      "opcoes": [
+       "Tempestivo",
+       "Intempestivo",
+       "Não verificado",
+       "Não se aplica"
+      ]
+     },
+     {
+      "chave": "evidencia",
+      "rotulo": "Evidência do vínculo e marco inicial",
+      "tipo": "texto-longo"
+     },
+     {
+      "chave": "confirmado",
+      "rotulo": "Conferido",
+      "tipo": "lista",
+      "opcoes": [
+       "Sim",
+       "Não"
+      ]
+     }
+    ]
+   }
+  ]
  }
 ]

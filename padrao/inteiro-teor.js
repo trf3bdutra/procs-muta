@@ -774,25 +774,22 @@ function preparoExtrair(parsed,r,used,add){
 }
 
 function regSuggestions(parsed,r,used,add){
-  const key=d=>(d.date||'')+'|'+String(d.id).padStart(12,'0'),f=d=>br(d?.date)||'—';
-  const recs=used.filter(d=>d.target==='recurso').sort((a,b)=>key(a).localeCompare(key(b)));const rec=recs[0];if(!rec)return;
-  const who=recorrenteInfo(parsed,rec),sec=`Regularidade · ${rec.recursoTipo||'recurso'} ID ${rec.id}${who.name?' · '+who.name:''}`;
-  /* tempestividade: contado da própria data da decisão (antes de qualquer intimação), o prazo ainda não teria terminado? */
-  const dec=used.filter(d=>(d.target==='impugnada'||d.target==='sentenca')&&key(d)<key(rec)).sort((a,b)=>key(a).localeCompare(key(b))).pop();
-  const prazo=rec.recursoTipo==='Embargos de declaração'?5:15,dobro=who.dobro?2:1;
-  let c=null;
-  if(dec&&rec.date&&dec.date){try{c=page()?.tempCalc?.({...r,'Tempest - Publicação':iso10(dec.date),'Tempest - Protocolo':iso10(rec.date),'Tempest - Prazo legal':String(prazo),'Tempest - Dobro':String(dobro),'Tempest - Suspensões':r['Tempest - Suspensões']||''});}catch(_){}}
-  if(rec.date){add({sec,key:'Tempest - Protocolo',label:'Protocolo do recurso (calculador)',value:iso10(rec.date),current:r['Tempest - Protocolo'],doc:rec.id,kind:'field',
-      note:`Juntada do recurso no PJe em ${f(rec)}.`+(c&&c.ok===false?` Contado da própria data da decisão (${f(dec)}, ID ${dec.id}), o prazo terminaria em ${br(c.limit)}: a conclusão depende da data da intimação, que o inteiro teor não traz — informe-a no calculador.`:!dec?' Decisão recorrida não selecionada: informe a data da intimação no calculador.':'')});
-    add({sec,key:'Tempest - Prazo legal',label:'Prazo legal (dias úteis)',value:String(prazo),current:r['Tempest - Prazo legal'],doc:rec.id,kind:'select',options:['5','15','8','10','30']});
-    if(dobro===2)add({sec,key:'Tempest - Dobro',label:'Contagem',value:'2',current:String(r['Tempest - Dobro']||'')==='1'?'':r['Tempest - Dobro'],doc:rec.id,kind:'select',options:['1','2'],note:`Em dobro: ${who.dpu?'Defensoria Pública':who.mp?'Ministério Público':who.conselho?'conselho profissional (autarquia)':'Fazenda Pública'} (arts. 180, 183 e 186 do CPC).`});}
-  if(c&&c.ok===true)add({sec,key:'Tempestividade',label:'Tempestividade',value:'Tempestivo',current:VZ('tempest',r.Tempestividade),doc:`${dec.id}, ${rec.id}`,kind:'select',options:VL('tempest',['Não Verificado','Tempestivo','Intempestivo']),
-    note:`Recurso juntado em ${f(rec)}. Ainda que contado da própria data da decisão (${f(dec)}, ID ${dec.id}), o prazo de ${c.total} dias úteis${dobro===2?' (em dobro)':''} só terminaria em ${br(c.limit)}: tempestivo qualquer que seja a data da intimação.`});
-  preparoExtrair(parsed,r,used,add);
+ const key=d=>(d.date||'')+'|'+String(d.id).padStart(12,'0');
+ const recs=used.filter(d=>d.target==='recurso').sort((a,b)=>key(a).localeCompare(key(b)));
+ if(!recs.length)return;
+ const rows=recs.map(rec=>{const who=recorrenteInfo(parsed,rec);
+  return {id_recurso:String(rec.id),recorrente:who.name||'',protocolo:iso10(rec.date)||'',prazo:rec.recursoTipo==='Embargos de declaração'?'5':'15',dobro:who.dobro?'2':'1',situacao:'Não verificado',confirmado:'Não'};
+ });
+ add({sec:'Tempestividade por recurso',key:'Tempestividade por recurso',label:'Tempestividade por recurso',kind:'tempest-table',rows,doc:rows.map(x=>x.id_recurso).join(', '),note:'Protocolo e prazo sugeridos; vincule o ato recorrido e a intimação e confira o marco inicial. A data da decisão não equivale à data da intimação.'});
+ if(recs.length===1){
+  const rec=recs[0],row=rows[0],who=recorrenteInfo(parsed,rec),sec='Regularidade · '+(rec.recursoTipo||'recurso')+' ID '+rec.id+(who.name?' · '+who.name:'');
+  if(row.protocolo)add({sec,key:'Tempest - Protocolo',label:'Protocolo do recurso (calculador)',value:row.protocolo,current:r['Tempest - Protocolo'],doc:rec.id,kind:'field',note:'Data de juntada do recurso; conferir a data efetiva de protocolo.'});
+  add({sec,key:'Tempest - Prazo legal',label:'Prazo legal (dias úteis)',value:row.prazo,current:r['Tempest - Prazo legal'],doc:rec.id,kind:'select',options:['5','15','8','10','30']});
+  add({sec,key:'Tempest - Dobro',label:'Contagem',value:row.dobro,current:r['Tempest - Dobro'],doc:rec.id,kind:'select',options:['1','2'],note:'Conferir o regime de contagem aplicável ao recorrente.'});
   if(who.dpu)add({sec,key:'DPU (controle)',label:'Defensoria Pública da União',value:'Sim',current:yes(r['DPU (controle)'])?'Sim':'',doc:rec.id,kind:'select',options:['','Sim']});
-  /* representação ex lege: dispensa procuração */
-  if((who.publico||who.dpu||who.mp)&&!used.some(d=>d.target==='procuracao'))add({sec:'Representação',key:'Representação',label:'Representação',value:who.dpu?'Dispensada (DPU)':'Dispensada (procurador público)',current:VZ('repres',r.Representação),doc:rec.id,kind:'select',options:VL('repres',['Não Verificado','Regular','Negativo']),
-    note:`${who.dpu?'Defensoria Pública':who.mp?'Ministério Público':'Advocacia pública'}: representação decorrente da lei, sem procuração nos autos.`});
+  if((who.publico||who.dpu||who.mp)&&!used.some(d=>d.target==='procuracao'))add({sec:'Representação',key:'Representação',label:'Representação',value:who.dpu?'Dispensada (DPU)':'Dispensada (procurador público)',current:VZ('repres',r.Representação),doc:rec.id,kind:'select',options:VL('repres',['Não Verificado','Regular','Negativo']),note:'Representação legal do recorrente; conferir a identidade e a qualidade do representante.'});
+ }
+ preparoExtrair(parsed,r,used,add);
 }
 /* data do documento (juntada/assinatura no cabeçalho do PJe) em DD/MM/AAAA, para os botões de data do card */
 function docBr(d){const m=/^(\d{4})-(\d{2})-(\d{2})/.exec(S(d&&d.date));return m?`${m[3]}/${m[2]}/${m[1]}`:'';}

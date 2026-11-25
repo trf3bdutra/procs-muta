@@ -1,0 +1,5 @@
+'use strict';
+const {test}=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path');
+const root=path.resolve(__dirname,'../../..'),read=p=>fs.readFileSync(path.join(root,p),'utf8');
+test('tempestividade individual consta da ficha e do roteiro',()=>{const f=JSON.parse(read('padrao/ficha.json')),c=f.abas.flatMap(a=>a.grupos.flatMap(g=>g.campos)).find(c=>c.chave==='Tempestividade por recurso');assert.ok(c);for(const k of ['id_recurso','id_decisao','id_intimacao','publicacao','evidencia','confirmado'])assert.ok(c.colunas.some(x=>x.chave===k));assert.match(read('extensao/roteiro.js'),/Tempestividade por recurso/);assert.match(read('extensao/autos.js'),/tempest-table/);});
+test('motor compartilhado não presume publicação pela data da decisão',()=>{const m=read('padrao/inteiro-teor.js');assert.equal(m,read('extensao/padrao-inteiro-teor.js'));const s=m.slice(m.indexOf('function regSuggestions'),m.indexOf('/* data do documento',m.indexOf('function regSuggestions')));assert.match(s,/recs.map/);assert.match(s,/recs.length===1/);assert.doesNotMatch(s,/tempCalc|value:'Tempestivo'/);});

@@ -249,6 +249,13 @@ function linhasGravadas(sec, k) { var v = gravado(sec, k); return Array.isArray(
 function mapear(L) {
   var out = [], contra = [], proc = [], TB = { rec: Object.create(null), contra: Object.create(null), proc: [], ocorr: [], docs: { rec: [], contra: [], proc: [], ocorr: [] } };
   L.forEach(function (it) {
+    if(it.kind==='tempest-table'){
+      var tc=alvoDe('Tempestividade por recurso');if(!tc)return;
+      var old=linhasGravadas(tc.secao,tc.chave),value=old.map(function(r){return Object.assign({},r);}),rows=Array.isArray(it.rows)?it.rows:[];
+      rows.forEach(function(r){if(!S(r.id_recurso))return;var matches=value.filter(function(x){return S(x.id_recurso)===S(r.id_recurso);});if(matches.length===1){var x=matches[0];if(N(x.confirmado)==='sim')return;['recorrente','protocolo','prazo','dobro'].forEach(function(k){if(!S(x[k])&&S(r[k]))x[k]=r[k];});}else if(!matches.length)value.push(r);});
+      var igual=JSON.stringify(old)===JSON.stringify(value);
+      out.push(Object.assign({},it,{kind:'tabela',alvo:tc.secao+'.'+tc.chave,campo:tc,value:value,current:old,status:igual?'igual':old.length?'conflito':'novo',apply:false,manual:true}));return;
+    }
     if(it.kind==='prep-table'){var pc=alvoDe('Preparo por recurso');if(!pc)return;var old=linhasGravadas(pc.secao,pc.chave),value=it.rows||[],igual=JSON.stringify(old)===JSON.stringify(value);out.push(Object.assign({},it,{kind:'tabela',alvo:pc.secao+'.'+pc.chave,campo:pc,value:value,current:old,status:igual?'igual':old.length?'conflito':'novo',apply:false,manual:true}));return;}
     if (it.kind === 'contra') { if (it.key === 'ids') contra.push(it.value); (TB.contra[S(it.doc)||('idx:'+it.idx)] = TB.contra[S(it.doc)||('idx:'+it.idx)] || {})[it.key==='merito'?'teses':it.key] = it.key === 'data' ? (iso(it.value) || it.value) : it.value; TB.docs.contra.push(it.doc); return; }
     if (it.kind === 'rec') { (TB.rec[S(it.doc)||('idx:'+it.idx)] = TB.rec[S(it.doc)||('idx:'+it.idx)] || {})[it.key] = it.key === 'data' ? (iso(it.value) || it.value) : it.value; TB.docs.rec.push(it.doc); return; }
@@ -804,7 +811,7 @@ function referenciasTempestividade(){
  var g=GB(),empty={recursos:[],intimacoes:[],candidatos:[]};
  if(!lidoDoProcesso()||sigBloq()||(SG()&&SG().sigiloso()))return empty;
  var ids=function(x){return S(x).match(/\b\d{6,}\b/g)||[];},D=lista().filter(function(d){return !d.anexo&&!docBloq(d)&&!(SG()&&SG().docSigiloso(d));});
- var R=linhasGravadas('origem','Recursos'),s=(A.sug||[]).find(function(x){return x.alvo==='origem.Recursos';}),sug=s&&Array.isArray(s.value)?s.value:[],known=new Set(R.reduce(function(o,r){return o.concat(ids(r.ids));},[]));
+ var T=linhasGravadas('triagem','Tempestividade por recurso'),R=linhasGravadas('origem','Recursos'),s=(A.sug||[]).find(function(x){return x.alvo==='origem.Recursos';}),sug=s&&Array.isArray(s.value)?s.value:[],known=new Set(R.reduce(function(o,r){return o.concat(ids(r.ids));},[]));
  var recursos=R.filter(function(r){return ids(r.ids).length;}).map(function(r){return Object.assign({},r,{fonte:'Ficha'});});
  sug.forEach(function(r){if(ids(r.ids).length&&!ids(r.ids).some(function(i){return known.has(i);}))recursos.push(Object.assign({},r,{fonte:'Extração · a conferir'}));});
  var tipo=N(g.V&&g.V('triagem','Tipo de Julgamento')),ato=ids(g.V&&g.V('triagem','Impugnada - ID'));
@@ -812,9 +819,9 @@ function referenciasTempestividade(){
  if(!ato.length&&/agravo de instrumento/.test(tipo)&&N(g.V('origem','1G - Decisão recorrida'))==='sim')ato=ids(g.V('origem','1G - Decisão ID'));
  if(!ato.length&&/agravo interno/.test(tipo)&&N(g.V('origem','2G - Monocrática recorrida'))==='sim')ato=ids(g.V('origem','2G - Monocrática ID'));
  var I=D.filter(function(d){return d.k==='intimacao'&&!/\bpauta\b|sessao de julgamento|inclusao em mesa/.test(N(d.tipo+' '+(d.desc||'')));}),candidatos=[];
- recursos.forEach(function(r){var rid=ids(r.ids),rd=iso(r.data),ref=ids(r.id_decisao);if(!ref.length)ref=ato;
+ recursos.forEach(function(r){var rid=ids(r.ids),tr=T.filter(function(t){return rid.indexOf(S(t.id_recurso))>=0;}),reg=tr.length===1?tr[0]:{},rd=iso(reg.protocolo||r.data),ref=ids(reg.id_decisao||r.id_decisao);if(!ref.length)ref=ato;
  I.forEach(function(d){var dd=iso(d.data),doc=A.docs[d.id],body=doc&&doc.estado==='ok'?S(doc.texto):'';if(rd&&dd&&dd<=rd&&ref.length===1&&ids(body).indexOf(ref[0])>=0)candidatos.push(Object.assign({},d,{recurso:rid.join(', '),vinculo:'Menciona ID do ato recorrido · confirmar destinatário e marco inicial'}));});});
- return {recursos:recursos,intimacoes:[],candidatos:candidatos};
+ var confirmadas=T.filter(function(t){return N(t.confirmado)==='sim'&&S(t.id_recurso)&&S(t.id_decisao)&&S(t.id_intimacao)&&iso(t.publicacao)&&S(t.evidencia);});return {recursos:recursos,intimacoes:confirmadas,candidatos:candidatos};
 }
 function htmlCamposIguais(){
  if(!lidoDoProcesso()||sigBloq()||(SG()&&SG().sigiloso()))return '';
