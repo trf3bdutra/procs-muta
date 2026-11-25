@@ -335,7 +335,35 @@ body.am-com-aba{overflow:hidden}
 .am-dashboard.am-workspace .cx-req{background:var(--ep);border:0!important;border-radius:5px;padding:8px 12px!important}
 .am-dashboard.am-workspace .busca.full-panel{border-radius:0}
 </style>
-</head><body><header class="am-home-header"><div class="am-legacy"><b>Amicus Curiae.</b><span>Gabinete CMT · Ferramentas</span></div><nav class="am-over-nav am-home-overview" aria-label="Aplicações e áreas de consulta"><div class="am-nav-apps cn-in" role="tablist" aria-label="Abas do Amicus"><button type="button" role="tab" data-amtab="ref" aria-selected="true">Referências</button><button type="button" role="tab" data-amtab="collegium" aria-selected="false">Collegium</button><button type="button" role="tab" data-amtab="collectio" aria-selected="false" hidden title="Só para servidores logados">Collectio</button></div><div class="am-nav-links" aria-label="Aplicações"><a href="/amicus/compendium/">Compendium</a><a href="/amicus/cognitio/">Cognitio</a></div></nav><nav class="am-context-nav am-home-overview" aria-label="Subabas da aplicação" hidden><span class="am-context-label"></span><div class="cn-in" role="group"></div></nav></header>
+<style id="am-modular-css">
+.am-dashboard.am-workspace.am-modular{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));grid-template-areas:none;gap:16px;max-width:1920px;align-items:start}
+.am-dashboard.am-modular[hidden]{display:none!important}
+.am-modular>.am-module{grid-column:span 6;min-width:0;margin:0!important;display:block}
+.am-modular>.am-wide,.am-modular>.am-module-nav{grid-column:1/-1}
+.am-modular>.am-module.am-expanded{grid-column:1/-1}
+.am-modular>.am-module[hidden]{display:none!important}
+.am-modular .am-module-nav{display:flex;flex-wrap:wrap;align-items:center;gap:6px;padding:10px 12px;background:var(--ew);border:1px solid var(--el)}
+.am-modular .am-module-nav strong{margin-right:12px;font-size:13px}
+.am-modular .am-module-nav button,.am-modular .am-mod-actions button{font:600 11px Figtree,system-ui,sans-serif;background:transparent;color:var(--ei);border:1px solid var(--el);padding:6px 10px;cursor:pointer;border-radius:5px}
+.am-modular .am-module-nav button[aria-pressed=true]{background:var(--ep2);border-color:var(--eg)}
+.am-modular .am-mod-actions{display:flex;gap:5px;flex-wrap:wrap;margin-left:auto}
+.am-modular .am-module.am-folded>:not(.pane-title){display:none!important}
+.am-modular .am-module.am-folded>.pane-title{margin-bottom:0!important}
+.am-modular .am-module .pane-title{position:relative}
+.am-modular #fluxos:not(.full-panel) .af-body{grid-template-columns:minmax(0,1fr) minmax(245px,300px)}
+.am-modular #ro-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;max-height:none;align-items:start}
+.am-modular #ro-list>details[open]{grid-column:1/-1}
+.am-modular .am-checks{border-top:1px solid var(--el);margin-top:12px;padding-top:12px}
+.am-modular .am-checks h3{font-size:15px;margin:0 0 8px}
+.am-modular .am-check-tools{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+.am-modular .am-check-tools select{font:inherit;color:var(--ei);background:var(--ep);border:1px solid var(--el);padding:7px;max-width:100%}
+.am-modular .am-check-group{padding:9px 12px;border:1px solid var(--el);background:var(--ep);border-radius:5px;margin:6px 0}
+.am-modular .am-check-group summary{cursor:pointer;font-weight:600;font-size:13px}
+.am-modular .am-check-group .cx-ck{margin:7px 0;display:flex;align-items:flex-start;gap:8px;font-size:12px}
+.am-modular .am-check-group input{flex:none}
+@media(max-width:1050px){.am-dashboard.am-workspace.am-modular{grid-template-columns:repeat(2,minmax(0,1fr))}.am-modular>.am-module{grid-column:span 1}.am-modular>.am-wide,.am-modular>.am-expanded,.am-modular>.am-module-nav{grid-column:1/-1}.am-modular #fluxos:not(.full-panel) .af-body{grid-template-columns:1fr}}
+@media(max-width:700px){.am-dashboard.am-workspace.am-modular{grid-template-columns:minmax(0,1fr)}.am-modular>.am-module{grid-column:1/-1}.am-modular #ro-list{grid-template-columns:1fr}}
+</style></head><body><header class="am-home-header"><div class="am-legacy"><b>Amicus Curiae.</b><span>Gabinete CMT · Ferramentas</span></div><nav class="am-over-nav am-home-overview" aria-label="Aplicações e áreas de consulta"><div class="am-nav-apps cn-in" role="tablist" aria-label="Abas do Amicus"><button type="button" role="tab" data-amtab="ref" aria-selected="true">Referências</button><button type="button" role="tab" data-amtab="collegium" aria-selected="false">Collegium</button><button type="button" role="tab" data-amtab="collectio" aria-selected="false" hidden title="Só para servidores logados">Collectio</button></div><div class="am-nav-links" aria-label="Aplicações"><a href="/amicus/compendium/">Compendium</a><a href="/amicus/cognitio/">Cognitio</a></div></nav><nav class="am-context-nav am-home-overview" aria-label="Subabas da aplicação" hidden><span class="am-context-label"></span><div class="cn-in" role="group"></div></nav></header>
 <main class="am-dashboard am-workspace">
 <aside class="am-rail am-competence" id="referencias-operacionais" aria-labelledby="am-competence-title"><div class="am-rail-head"><small>Referências operacionais</small><h2 id="am-competence-title">Competência e imparcialidade</h2></div><div class="am-rail-panels"><section class="busca" id="competencia"><div class="pane-title"><div><small>Referência · competência</small><h2>Competência</h2></div></div><p>Turma Regional de Mato Grosso do Sul, competência delegada e distribuição por matéria nas Seções do TRF3. Síntese do material fornecido, sujeita à conferência normativa.</p>
 <div class="comp-grid" id="comp-body"></div></section><section class="busca" id="impedimentos"><div class="pane-title"><div><small>Referencial interno · imparcialidade</small><h2>Impedimentos e suspeições</h2></div><div class="imp-actions"><button type="button" class="more" id="imp-refresh" aria-label="Atualizar referencial" title="Atualizar referencial">↻</button></div></div>
@@ -537,6 +565,19 @@ if(ra){ra.addEventListener('click',e=>{const b=e.target.closest('[data-ato]');if
  lst.addEventListener('change',e=>{const c=e.target.closest('[data-rk]');if(!c)return;if(c.checked)feito[c.dataset.rk]=1;else delete feito[c.dataset.rk];SS('am-rec-rot',feito);
   const r=R.find(x=>x.id===c.dataset.rk.split(':')[0]),p=lst.querySelector('[data-prog="'+r.id+'"]');if(p)p.outerHTML=prog(r);});
  $('rc-q').addEventListener('input',rec);rec();}
+/* Checklists já existentes no material de referência: mesma chave e estado dos recursos. */
+const checkHost=$('ro-list');if(checkHost){
+ const panel=document.createElement('section');panel.className='am-checks';panel.innerHTML='<h3>Checklists por atividade recursal</h3><p class="bmeta">Selecione o recurso. As marcações são locais neste navegador e compartilhadas com a ficha do recurso; não registram conclusão no PJe.</p><div class="am-check-tools"><label for="am-check-rec">Recurso</label><select id="am-check-rec"></select><button type="button" class="more" id="am-check-reset">Reiniciar checklist</button><span id="am-check-progress" aria-live="polite"></span></div><div id="am-check-list"></div>';
+ checkHost.after(panel);const sel=$('am-check-rec'),list=$('am-check-list'),progress=$('am-check-progress');
+ const available=R.filter(r=>(r.rot||[]).length);available.forEach(r=>sel.add(new Option(r.nome,r.id)));
+ function current(){return available.find(r=>r.id===sel.value);}
+ function updateProgress(){const r=current();if(!r)return;const keys=r.rot.flatMap((g,i)=>g.i.map((_,j)=>r.id+':'+i+':'+j));progress.textContent=keys.filter(k=>feito[k]).length+' de '+keys.length+' conferidos';}
+ function draw(){const r=current();list.innerHTML=r?r.rot.map((g,i)=>'<details class="am-check-group" open><summary>'+esc(g.t)+'</summary>'+g.i.map((v,j)=>{const k=r.id+':'+i+':'+j;return '<label class="cx-ck"><input type="checkbox" data-am-rk="'+k+'"'+(feito[k]?' checked':'')+'><span>'+v+'</span></label>';}).join('')+'</details>').join(''):'';updateProgress();}
+ function sync(k){document.querySelectorAll('[data-rk],[data-am-rk]').forEach(el=>{if((el.dataset.rk||el.dataset.amRk)===k)el.checked=!!feito[k]});const r=R.find(x=>x.id===k.split(':')[0]);const p=document.querySelector('[data-prog="'+r.id+'"]');if(p)p.outerHTML=prog(r);updateProgress();}
+ sel.addEventListener('change',draw);list.addEventListener('change',e=>{const k=e.target.dataset.amRk;if(!k)return;if(e.target.checked)feito[k]=1;else delete feito[k];SS('am-rec-rot',feito);sync(k);});
+ document.addEventListener('change',e=>{const k=e.target.dataset.rk;if(k)sync(k);});
+ $('am-check-reset').onclick=()=>{const r=current();if(!r)return;r.rot.forEach((g,i)=>g.i.forEach((_,j)=>{const k=r.id+':'+i+':'+j;delete feito[k];sync(k);}));SS('am-rec-rot',feito);draw();};draw();
+}
 /* requisitos de admissibilidade */
 const rq=$('rc-req-b');if(rq)rq.innerHTML=(C.requisitos||[]).map(g=>'<h4>'+esc(g.t)+'</h4><p>'+esc(g.p)+'</p><ul>'+g.i.map(x=>'<li><b>'+esc(x.t)+'</b> — '+x.pl+(x.tc?' <span class="cx-sub">'+x.tc+'</span>':'')+'</li>').join('')+'</ul>').join('');
 /* rotina do gabinete: fases, caixas do PJe e o que fazer; o que já está em Temas processuais vira atalho */
@@ -625,15 +666,22 @@ fetch('/api/login',{credentials:'same-origin',cache:'no-store'}).then(r=>r.ok?r.
 if(inicial.split('&')[0]==='collegium')abre('collegium',true,inicial.includes('&')?inicial.slice(inicial.indexOf('&')+1):'');
 })();
 </script><script>
-/* minimizar as colunas do Amicus (lembrado neste navegador) */
-(function(){'use strict';const W=document.querySelector('main.am-workspace');if(!W)return;
-const C=[['esq',W.querySelector('aside.am-competence'),'minmax(310px,1fr)'],['cen',W.querySelector('.am-main'),'minmax(420px,1.6fr)'],['dir',W.querySelector('aside.am-refs'),'minmax(300px,1fr)']].filter(c=>c[1]);
-let st={};try{st=JSON.parse(localStorage.getItem('amicus-colunas'))||{}}catch(e){}
-function aplica(){C.forEach(([k,el])=>{const m=!!st[k];el.classList.toggle('am-col-min',m);const b=el.querySelector('.am-min');if(b){b.textContent=m?'+':'–';b.title=m?'Abrir painel':'Minimizar painel';b.setAttribute('aria-expanded',String(!m));}});
- W.style.gridTemplateColumns=innerWidth>1150&&C.length===3?C.map(([k,,t])=>st[k]?'38px':t).join(' '):'';
- if(innerWidth>1150&&C.every(([k])=>st[k]))W.style.gridTemplateColumns='38px 38px 38px';try{localStorage.setItem('amicus-colunas',JSON.stringify(st))}catch(e){}}
-C.forEach(([k,el])=>{const h=el.querySelector('.am-rail-head,.am-area-title');if(!h)return;const b=document.createElement('button');b.type='button';b.className='am-min';h.appendChild(b);
- b.addEventListener('click',e=>{e.stopPropagation();st[k]=!st[k];aplica();});
- el.addEventListener('click',e=>{if(st[k]&&innerWidth>1150){st[k]=false;aplica();}});});
-addEventListener('resize',aplica);aplica();})();
+/* Amicus: módulos independentes, sem duplicar os motores nem os registros. */
+(function(){'use strict';
+const D=document,W=D.querySelector('main.am-workspace');if(!W)return;
+const cfg=[['fluxos','Fluxos',true],['rotina','Rotinas e checklists',true],['recursos','Recursos'],['temas-proc','Temas processuais'],['competencia','Competência'],['impedimentos','Imparcialidade'],['enunciados','Enunciados'],['regimento','Regimento'],['assuntos','Assuntos'],['metas','Metas']];
+let pref={};try{pref=JSON.parse(localStorage.getItem('amicus-modulos-v1'))||{}}catch(e){}
+const save=()=>{try{localStorage.setItem('amicus-modulos-v1',JSON.stringify(pref))}catch(e){}};
+const nav=D.createElement('nav');nav.className='am-module-nav';nav.setAttribute('aria-label','Módulos do Amicus');nav.innerHTML='<strong>Área de trabalho</strong>';W.prepend(nav);W.classList.add('am-modular');
+const old=[...W.querySelectorAll(':scope > .am-rail,:scope > .am-main')];
+function apply(el){const v=pref[el.id]||{};el.classList.toggle('am-folded',!!v.fold);el.classList.toggle('am-expanded',!!v.wide);const b=el.querySelector('[data-am-fold]');if(b){b.textContent=v.fold?'Expandir':'Recolher';b.setAttribute('aria-expanded',String(!v.fold));}const w=el.querySelector('[data-am-wide]');if(w){w.textContent=v.wide?'Reduzir largura':'Ampliar';w.setAttribute('aria-pressed',String(!!v.wide));}}
+function reveal(el){if(!el)return;if(pref[el.id]?.fold){pref[el.id].fold=false;apply(el);save();}el.scrollIntoView({behavior:'smooth',block:'start'});}
+cfg.forEach(([id,title,wide])=>{const el=D.getElementById(id);if(!el)return;W.append(el);el.classList.add('am-module');if(wide)el.classList.add('am-wide');const b=D.createElement('button');b.type='button';b.textContent=title;b.onclick=()=>reveal(el);nav.append(b);
+const h=el.querySelector('.pane-title'),a=D.createElement('div');a.className='am-mod-actions';a.innerHTML=(wide?'':'<button type="button" data-am-wide>Ampliar</button>')+'<button type="button" data-am-fold>Recolher</button>';h.append(a);a.onclick=e=>{const t=e.target;if(!t.matches('button'))return;const v=pref[id]||(pref[id]={});if(t.hasAttribute('data-am-fold'))v.fold=!v.fold;else v.wide=!v.wide;apply(el);save();if(id==='fluxos'&&!v.fold)D.getElementById('af-fit')?.click();};apply(el);});
+old.forEach(el=>{if(!el.querySelector('section.busca'))el.remove();});
+const reset=D.createElement('button');reset.type='button';reset.textContent='Restaurar layout';reset.onclick=()=>{pref={};save();W.querySelectorAll('.am-module').forEach(apply);D.getElementById('af-fit')?.click();};nav.append(reset);
+D.addEventListener('click',e=>{const b=e.target.closest('[data-req],[data-tema],[data-rart]');if(!b)return;const id=b.hasAttribute('data-req')?'recursos':b.hasAttribute('data-tema')?'temas-proc':'regimento';const el=D.getElementById(id);if(pref[id]?.fold){pref[id].fold=false;apply(el);save();}},true);
+D.addEventListener('keydown',e=>{if(e.ctrlKey||e.metaKey||e.altKey||/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)||e.target.isContentEditable||!/^\d$/.test(e.key)||W.hidden)return;const k=[...W.querySelectorAll('.cx-kbd')].find(x=>x.textContent.trim()===e.key);const el=k?.closest('.am-module');if(el&&pref[el.id]?.fold){pref[el.id].fold=false;apply(el);save();}},true);
+D.getElementById('af-fit')?.click();
+})();
 </script></body></html>
