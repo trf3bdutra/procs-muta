@@ -103,9 +103,12 @@ test('painel: processo sigiloso sem liberação bloqueia a leitura dos autos e m
   const P = await abrir({ processo: CNJ, origem: {}, triagem: {}, producao: {}, pauta: {}, controles: {} }, { sigilo: 'Segredo de Justiça', liberado: false, porque: '' });
   try {
     const { pg } = P;
-    await pg.waitForSelector('.sg-b', { timeout: 15000 });
-    assert.match(await pg.textContent('.sg-b'), /Segredo de Justiça · leitura e gravação do inteiro teor bloqueadas/);
-    assert.ok(await pg.$('.sg-b [data-sg="abrir"]'), 'liberar com senha');
+    await pg.waitForSelector('.status-sigilo[data-estado="restrito"]', { timeout: 15000 });
+    assert.equal(await pg.evaluate(() => window.MutaSigilo.bloqueado()), true);
+    await pg.click('.status-sigilo[data-estado="restrito"]');
+    await pg.waitForSelector('#hero-mon-dlg .hero-sig-details .sg-b', { timeout: 15000 });
+    assert.match(await pg.textContent('#hero-mon-dlg .hero-sig-details .sg-b'), /Segredo de Justiça · leitura e gravação do inteiro teor bloqueadas/);
+    assert.ok(await pg.$('#hero-mon-dlg .hero-sig-details [data-sg="abrir"]'), 'liberar com senha');
     assert.equal(await pg.evaluate(() => window.MutaSigilo.bloqueado()), true);
     assert.deepEqual(P.erros, []);
   } finally { await P.fim(); }
