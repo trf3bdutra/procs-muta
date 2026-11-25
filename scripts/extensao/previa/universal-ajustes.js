@@ -35,7 +35,7 @@
   $('pv-ajustes-controle').addEventListener('click',function(){if(!gestorAutenticado()){sync();return;}if(window.MutaAbas){fechar();window.MutaAbas.ir('ctl');}});
   if(window.MutaSessao&&window.MutaSessao.ouvir)window.MutaSessao.ouvir(sync);
   sync();
-  dlg.addEventListener('close',function(){b.focus();});
+  dlg.addEventListener('close',function(){var p=$('tu-sino');if(p)p.focus();});
   document.addEventListener('change',function(e){if(dlg.open&&(e.target.id==='pje-seguir'||e.target.id==='pje-aba'))sync();});
   Array.from(document.querySelectorAll('#pv-nav-main button')).forEach(function(t){
     var l=t.querySelector('.nav-text b');if(l){var n=l.textContent.trim();t.title=n;t.setAttribute('aria-label',n);}
