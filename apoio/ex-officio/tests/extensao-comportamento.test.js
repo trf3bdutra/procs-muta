@@ -484,3 +484,5 @@ test('conferência dos autos: seletor independente de sigilo', () => {
   assert.doesNotMatch(a,/type="checkbox" data-sg=/);
   assert.match(s,/button\[data-sg="abrir"\]/);
 });
+
+test('Autos: card de cobertura separa Localizados e A conferir; produção sem atalho externo',()=>{const fs=require('node:fs'),path=require('node:path'),root=path.resolve(__dirname,'../../..'),a=fs.readFileSync(path.join(root,'extensao/autos.js'),'utf8'),g=fs.readFileSync(path.join(root,'extensao/gabinete.js'),'utf8');assert.match(a,/function htmlLocalizados\(/);assert.match(a,/Comprovante de preparo/);assert.match(a,/ID na ficha · não localizado/);assert.match(g,/au-coverage-card/);assert.doesNotMatch(g,/>Minutário ↗<\/a>/);});

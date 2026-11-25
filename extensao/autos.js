@@ -740,41 +740,60 @@ function htmlPreencher() {
 }
 
 /* 0.38 · Autos › Leitura dos autos: botões, o que a cronologia e as peças mostram e o que foi preenchido */
+/* Cobertura documental: fonte e estado de leitura distintos; não infere regularidade. */
+function coberturaLocalizada(){
+ if(sigBloq()||!lidoDoProcesso()||SG()&&SG().sigiloso())return null;
+ var all=lista(),L=all.filter(function(d){return !docBloq(d);}),byId=new Map(L.map(function(d){return [S(d.id),d];})),blocked=new Set(all.filter(docBloq).map(function(d){return S(d.id);}));
+ var v1=valorFicha('origem.Origem - Peças vinculadas 1G');v1=Array.isArray(v1)?v1:[];
+ var defs=[
+ ['Decisão recorrida',function(d){return false;},['triagem.Impugnada - ID'],/decisao recorrida|decisao agravada/],
+ ['Sentença',function(d){return d.k==='sentenca';},['origem.Sentença - ID'],/senten/],
+ ['Acórdão',function(d){return d.k==='acordao';},['producao.Acórdão - ID'],/acordao/],
+ ['Decisões',function(d){return d.k==='decisao';},[],/^decisao/],
+ ['Recursos',function(d){return /^(apelacao|adesivo|agravo|agint|ed|recurso)$/.test(d.k);},['origem.Recursos'],/apelacao|agravo|embargos|recurso/],
+ ['Contrarrazões',function(d){return d.k==='contrarrazoes';},['origem.Contrarrazões'],/contrarraz|contraminuta/],
+ ['Parecer / manifestação MPF',function(d){return d.k==='parecer';},['triagem.ID do Parecer MPF'],/parecer|manifestacao do mp/],
+ ['Procuração / substabelecimento',function(d){return d.k==='procuracao'||/procura[cç][aã]o|substabelecimento/i.test(d.desc||'');},['triagem.ID da Procuração','origem.Procurações'],/procuracao|substabelecimento/],
+ ['Guia de preparo / GRU',function(d){return /\bgru\b|guia de recolhimento|guia de custas/i.test(d.tipo+' '+(d.desc||''));},['triagem.Preparo - ID guia'],/guia|\bgru\b/],
+ ['Comprovante de preparo',function(d){return d.k==='custas'&&/comprovante|pagamento|recibo/i.test(d.tipo+' '+(d.desc||''));},['triagem.Preparo - ID comprovante'],/comprovante|recibo/],
+ ['Custas e preparo',function(d){return d.k==='custas'&&!/\bgru\b|guia de|comprovante|pagamento|recibo/i.test(d.tipo+' '+(d.desc||''));},[],/custas|preparo/],
+ ['Gratuidade da justiça',function(d){return /gratuidade|justica gratuita|hipossuficiencia/.test(N(d.tipo+' '+(d.desc||'')))||d.k==='decisao'&&/gratuidade deferida|(?:defiro|concedo)\s+(?:a\s+)?(?:gratuidade|justi[cç]a gratuita)/i.test((A.docs[d.id]||{}).texto||'');},[],/gratuidade|justica gratuita|hipossuficiencia/],
+ ['Intimações / certidões',function(d){return d.k==='intimacao'||d.k==='transito';},[],/intimacao|certidao de transito/],
+ ['Petição inicial',function(d){return d.k==='inicial';},[],/peticao inicial/],
+ ['Contestação / réplica',function(d){return /^(contestacao|replica)$/.test(d.k);},[],/contestacao|replica/],
+ ['Laudos e perícias',function(d){return d.k==='laudo';},[],/laudo|pericia/]
+ ];
+ function ids(v){if(Array.isArray(v))return v.reduce(function(out,r){return out.concat(ids(r&&(r.ids||r.id||r.id_guia||r.id_comprovante)));},[]);return S(v).match(/\b\d{6,}\b/g)||[];}
+ var groups=defs.map(function(def){
+   var m=new Map();
+   function add(id,src,d){id=S(id);if(!id||blocked.has(id)||m.has(id))return;m.set(id,{id:id,src:src,d:d});}
+   L.filter(def[1]).forEach(function(d){add(d.id,'cronologia',d);});
+   v1.filter(function(r){return r&&def[3].test(N(r.documento));}).forEach(function(r){add(r.id,'1g',r);});
+   def[2].forEach(function(key){ids(valorFicha(key)).forEach(function(id){var d=byId.get(id);add(id,d?'cronologia':'ficha',d);});});
+   /* IDs específicos da tabela de preparo, sem confundir o ID do recurso com o do comprovante. */
+   if(def[0]==='Guia de preparo / GRU'||def[0]==='Comprovante de preparo'){
+     ['triagem.Preparo recursal','triagem.Preparo - Registros','triagem.Preparo'].forEach(function(key){var v=valorFicha(key);if(Array.isArray(v))v.forEach(function(r){ids(r&&(def[0]==='Guia de preparo / GRU'?(r.id_guia||r['Preparo - ID guia']):(r.id_comprovante||r['Preparo - ID comprovante']))).forEach(function(id){var d=byId.get(id);add(id,d?'cronologia':'ficha',d);});});});
+   }
+   return {label:def[0],rows:Array.from(m.values())};
+ });
+ return groups;
+}
+function htmlLocalizados(){
+ var groups=coberturaLocalizada();if(!groups)return '';
+ function row(r){var st=r.src==='1g'?'Vinculado · 1º grau':r.src==='ficha'?'ID na ficha · não localizado':(A.docs[r.id]||{}).estado==='ok'?'Localizado · texto lido':(A.docs[r.id]||{}).estado==='sem'?'Localizado · sem texto extraível':'Localizado · leitura pendente';
+ var tag=r.src==='cronologia'?'button':'span',action=r.src==='cronologia'?' type="button" data-au="loc:'+esc(r.id)+'" title="Abrir documento na cronologia"':'';
+ return '<'+tag+action+' class="au-loc-row src-'+r.src+'"><span class="au-loc-state">'+esc(st)+'</span><span class="au-loc-id mono">ID '+esc(r.id)+(r.src==='cronologia'?' ↗':'')+'</span></'+tag+'>';
+ }
+ var found=groups.filter(function(g){return g.rows.length;}),n=found.reduce(function(s,g){return s+g.rows.length;},0);
+ return '<section class="au-localizados" aria-label="Localizados"><div class="au-loc-head"><h4>Localizados</h4><small>'+found.length+' categorias</small></div>'+
+ (n?'<div class="au-loc-grid">'+found.map(function(g){return '<article class="au-loc-card"><header><b>'+esc(g.label)+'</b><small>'+g.rows.length+'</small></header>'+g.rows.slice(0,2).map(row).join('')+(g.rows.length>2?'<details class="au-loc-more"><summary>Mais '+(g.rows.length-2)+'</summary>'+g.rows.slice(2).map(row).join('')+'</details>':'')+'</article>';}).join('')+'</div>':'<p class="muted">Nenhuma peça relevante identificada nesta leitura.</p>')+'</section>';
+}
 function resumoLeitura() {
-  var L = lista().filter(function (d) { return !d.anexo; }), lido = function (d) { return d && A.docs[d.id] && A.docs[d.id].estado === 'ok'; };
-  var ai = /agravo de instrumento/i.test(S(((GB().fo && GB().fo()) || {}).classe_judicial) + ' ' + S(valorFicha('triagem.Tipo de Julgamento')));
-  var dec = null;
-  try { var ds = A.P ? A.P.docs.filter(function (d) { return d.target === 'sentenca' && !d.edDe; }) : []; if (ds.length) { var x = ds[ds.length - 1]; dec = L.filter(function (d) { return d.id === String(x.id); })[0] || { id: String(x.id), data: '' }; } } catch (e) {}
-  if (!dec) dec = L.filter(function (d) { return d.k === 'sentenca'; })[0] || (ai ? null : null);
-  var R = L.filter(function (d) { return /^(apelacao|adesivo|agravo|agint|ed|recurso)$/.test(d.k); }), C = L.filter(function (d) { return d.k === 'contrarrazoes'; });
-  var M = L.filter(function (d) { return d.k === 'parecer'; })[0], P = L.filter(function (d) { return d.k === 'procuracao'; })[0];
-  /* 0.74.2: o que não está na cronologia do 2º grau não vira chip "não achada": se a ficha já tem o ID (ou a peça foi vinculada do 1º grau),
-     o chip diz de onde vem; o resto vai numa linha só, com o caminho para vincular as peças do 1º grau */
-  var fichaIds = function (alvo, col) { var v = valorFicha(alvo); if (Array.isArray(v)) return v.map(function (r) { return S(r && (r[col || 'ids'] || r.id)); }).filter(Boolean).join(', '); return S(v); };
-  var v1g = valorFicha('origem.Origem - Peças vinculadas 1G'); v1g = Array.isArray(v1g) ? v1g : [];
-  var de1g = function (re) { var r = v1g.filter(function (x) { return re.test(N(x && x.documento)); })[0]; return r ? S(r.id) : ''; };
-  var faltam = [];
-  var chip = function (rot, d, n, dica, naFicha, no1g) {
-    var tem = n != null ? n > 0 : !!d;
-    if (!tem) {
-      if (no1g) return '<span class="au-ch fi" title="Vinculada do processo de referência no 1º grau"><b>' + esc(rot) + '</b> <small>1º grau</small> <i class="mono">ID ' + esc(no1g) + '</i></span>';
-      if (naFicha) return '<span class="au-ch fi" title="Não está na cronologia do 2º grau; o ID vem da ficha"><b>' + esc(rot) + '</b> <small>na ficha</small> <i class="mono">ID ' + esc(naFicha) + '</i></span>';
-      faltam.push(rot); return '';
-    }
-    return '<span class="au-ch ' + (d && !lido(d) ? 'nl' : 'ok') + '" title="' + esc(dica || '') + '"><b>' + esc(rot) + '</b>' + (n > 1 ? ' ' + n : '') + (d ? ' <i class="mono">ID ' + esc(d.id) + '</i>' : '') + (d && !lido(d) ? ' <small>não lida</small>' : '') + '</span>';
-  };
-  var todosD = lista(), nl = todosD.filter(function (d) { return A.docs[d.id] && /^(ok|sem)$/.test(A.docs[d.id].estado); }).length;
-  var chips = chip(ai ? 'Decisão agravada' : 'Sentença', dec, null, ai ? 'No agravo de instrumento, a decisão agravada costuma vir anexa à inicial: confira em Peças' : 'A decisão recorrida', fichaIds(ai ? 'triagem.Impugnada - ID' : 'origem.Sentença - ID'), ai ? '' : de1g(/senten/)) +
-    chip(R.length > 1 ? 'Recursos' : 'Recurso', R[0], R.length, R.map(function (d) { return d.tipo + ' ID ' + d.id + ' (' + d.data + ')'; }).join('; '), fichaIds('origem.Recursos'), de1g(/apela|recurso/)) +
-    chip('Contrarrazões', C[0], C.length, C.map(function (d) { return 'ID ' + d.id + ' (' + d.data + ')'; }).join('; '), fichaIds('origem.Contrarrazões'), de1g(/contrarraz/)) +
-    chip('MPF', M, null, M ? 'Parecer ID ' + M.id + ' (' + M.data + ')' : 'Sem parecer na cronologia lida', fichaIds('triagem.ID do Parecer MPF')) +
-    chip('Procuração', P, null, '', fichaIds('triagem.ID da Procuração'));
-  var falta = faltam.length ? '<p class="au-falta"><span>Fora da cronologia do 2º grau: <b>' + faltam.map(esc).join('</b>, <b>') + '</b>.</span> <small>Se estão nos autos do 1º grau, vincule-as em <button type="button" class="lnk" data-au="ir1g">1º grau › Peças vinculadas</button>.</small></p>' : '';
-  /* 0.75 · métricas da leitura (como no protótipo v53): peças identificadas, textos lidos e o que há a conferir */
-  if (!A.sug) calcular();
-  var nConf = (A.sug || []).filter(function (it) { return it.status !== 'igual' && !preservado(it) && !(it.alvo && preenchido(it.alvo)); }).length + alertas().filter(function (x) { return !/^Tipo de julgamento:/.test(x.t); }).length;
-  var metr = '<div class="au-metr"><div><b>' + L.length + '</b><small>Peças identificadas</small></div><div><b>' + nl + '/' + todosD.length + '</b><small>Textos lidos</small></div><div' + (nConf ? ' class="at"' : '') + '><b>' + nConf + '</b><small>A conferir</small></div></div>';
-  return metr + '<div class="au-res">' + chips + '</div>' + falta + '<p class="muted au-nl">' + (A.integra ? 'Lendo a íntegra: ' + A.integra.feitos + ' de ' + A.integra.total + ' documentos…' : nl + ' de ' + todosD.length + ' documentos com texto lido (íntegra)') + '</p>';
+ var todosD=lista().filter(function(d){return !docBloq(d);}),L=todosD.filter(function(d){return !d.anexo;}),nl=todosD.filter(function(d){return (A.docs[d.id]||{}).estado==='ok';}).length;
+ if(!A.sug)calcular();
+ var nConf=(A.sug||[]).filter(function(it){return it.status!=='igual'&&!preservado(it)&&!(it.alvo&&preenchido(it.alvo));}).length+alertas().filter(function(x){return !/^Tipo de julgamento:/.test(x.t);}).length;
+ var metr='<div class="au-metr"><div><b>'+L.length+'</b><small>Peças identificadas</small></div><div><b>'+nl+'/'+todosD.length+'</b><small>Textos lidos</small></div><div'+(nConf?' class="at"':'')+'><b>'+nConf+'</b><small>A conferir</small></div></div>';
+ return metr+'<p class="muted au-nl">'+(A.integra?'Lendo a íntegra: '+A.integra.feitos+' de '+A.integra.total+' documentos…':nl+' de '+todosD.length+' documentos com texto extraído')+'</p>';
 }
 function htmlLeitura() {
   var tela = window.MutaPje && window.MutaPje.tela ? window.MutaPje.tela() : '';
@@ -791,9 +810,10 @@ function htmlConferir() {
   if (!A.sug) calcular();
   var al = alertas().map(function (a, i) { return [a, i]; }).filter(function (x) { return !/^Tipo de julgamento:/.test(x[0].t); });
   var pend = (A.sug || []).filter(function (it) { return it.status !== 'igual' && !preservado(it) && !(it.alvo && preenchido(it.alvo)); }).length;
-  var sg = htmlSugestoes(null);
+  var sg = htmlSugestoes(null),cv=coberturaLocalizada(),faltam=cv?cv.filter(function(g){return !g.rows.length&&['Decisão recorrida','Recursos','Contrarrazões','Parecer / manifestação MPF','Procuração / substabelecimento','Guia de preparo / GRU','Comprovante de preparo'].includes(g.label);}).map(function(g){return g.label;}):[];
+  var falta=faltam.length?'<div class="au-loc-missing"><small>Não identificados nesta leitura (quando aplicáveis)</small><p>'+faltam.map(esc).join(' · ')+'</p><button type="button" class="lnk" data-au="ir1g">Consultar peças vinculadas do 1º grau</button></div>':'';
   var nA = autoItens().filter(function (x) { return preenchido(x.alvo); }).length;
-  return '<section class="card pc-sec" id="g-cf"><div class="pc-sh"><h3>A conferir</h3><small class="muted">' + [nA ? nA + ' preenchido(s)' : '', al.length ? al.length + ' alerta(s)' : '', pend ? pend + ' divergência(s)' : ''].filter(Boolean).join(' · ') + '</small></div>' + htmlAuto(false) +
+  return '<section class="card pc-sec" id="g-cf"><div class="pc-sh"><h3>A conferir</h3><small class="muted">' + [nA ? nA + ' preenchido(s)' : '', al.length ? al.length + ' alerta(s)' : '', pend ? pend + ' divergência(s)' : ''].filter(Boolean).join(' · ') + '</small></div>' + falta + htmlAuto(false) +
     (al.length ? '<div class="al-l">' + al.map(function (x) { var a = x[0];
       return '<div class="al-i ' + a.nivel + '"><span>' + esc(a.t) + '</span>' + (a.campo && vazioFicha(a.campo) ? '<button type="button" class="btn line sm" data-au="al:' + x[1] + '">Gravar “' + esc(a.valor) + '”</button>' : '') + '</div>'; }).join('') + '</div>' : '') +
     sg + '</section>';
@@ -834,6 +854,7 @@ function clique(b) {
   else if (/^sel:/.test(a)) selecionarTodos(a.slice(4));
   else if (/^f:/.test(a)) { A.filtro = a.slice(2); redesenhar(); }
   else if (/^ext:/.test(a)) { var id = a.slice(4), d = A.docs[id]; if (d && /^(ok|sem)$/.test(d.estado)) { A.abertos[id] = !A.abertos[id]; redesenhar(); } else { A.abertos[id] = true; extrair(id); } }
+  else if(/^loc:/.test(a)){var id=a.slice(4),d=lista().find(function(x){return S(x.id)===id;});if(!lidoDoProcesso()||sigBloq()||!d||docBloq(d))return;A.filtro='todos';if(GB().limparFiltroDocumental)GB().limparFiltroDocumental();redesenhar();var el=Array.from(document.querySelectorAll('#g-docs [data-au-it]')).find(function(e){return e.dataset.auIt===id;});if(el){el.open=true;el.scrollIntoView({block:'start'});}}
   else if (a === 'tudojs') baixarTudo();
   else if (a === 'ir1g') { var g1 = document.querySelector('#gab details.pc-s[data-grupo="1º grau"]'); if (g1) { g1.open = true; g1.scrollIntoView({ block: 'start', behavior: 'smooth' }); } }
   else if (/^js:/.test(a)) baixarPeca(a.slice(3));
@@ -847,7 +868,7 @@ function especificar(id, v) { A.esp[id] = v; clearTimeout(A.tEsp); A.tEsp = setT
 function especificarJa(id) { if (id in A.esp) { clearTimeout(A.tEsp); gravarEspecificacao(id); } }
 
 document.addEventListener('muta:prontuario', function () { var c = cnjAtual(); if (A.cnj && c && Muta.chaveProcesso(A.cnj) !== Muta.chaveProcesso(c)) { A.sug = null; } });
-window.MutaAutos = { barra: function () { var tela = window.MutaPje && window.MutaPje.tela ? window.MutaPje.tela() : ''; if ((!A.itens || !lidoDoProcesso()) && !A.lendo && !A.fila && window.MutaGabinete && window.MutaGabinete.irAutos) return '<p class="au-aviso"><span>Autos ainda não lidos.</span> <button type="button" class="lnk" data-au-ir>Ler na aba Autos</button></p>'; if (!A.itens || !lidoDoProcesso()) return '<div class="bar au-bl rt-ler">' + botaoLer() + '<small class="muted">' + (tela === 'autos' ? 'Leia os autos para conferir.' : 'Abra os autos digitais no PJe.') + '</small></div>'; return '<div class="bar au-bl rt-ler">' + botaoLer() + '</div>' + htmlAuto(true); }, sugestoes: function () { if (!A.itens || !lidoDoProcesso()) return []; if (!A.sug) calcular(); return A.sug || []; }, ler: ler, extrair: extrair, extrairPrincipais: extrairPrincipais, htmlDocs: htmlDocs, htmlSituacao: htmlSituacao, htmlConferencia: htmlConferencia, htmlPreencher: htmlPreencher, htmlLeitura: htmlLeitura, doProcesso: function () { return A.itens && lidoDoProcesso() ? { lista: lista(), todos: !!A.tudo } : null; },
+window.MutaAutos = { barra: function () { var tela = window.MutaPje && window.MutaPje.tela ? window.MutaPje.tela() : ''; if ((!A.itens || !lidoDoProcesso()) && !A.lendo && !A.fila && window.MutaGabinete && window.MutaGabinete.irAutos) return '<p class="au-aviso"><span>Autos ainda não lidos.</span> <button type="button" class="lnk" data-au-ir>Ler na aba Autos</button></p>'; if (!A.itens || !lidoDoProcesso()) return '<div class="bar au-bl rt-ler">' + botaoLer() + '<small class="muted">' + (tela === 'autos' ? 'Leia os autos para conferir.' : 'Abra os autos digitais no PJe.') + '</small></div>'; return '<div class="bar au-bl rt-ler">' + botaoLer() + '</div>' + htmlAuto(true); }, sugestoes: function () { if (!A.itens || !lidoDoProcesso()) return []; if (!A.sug) calcular(); return A.sug || []; }, ler: ler, extrair: extrair, extrairPrincipais: extrairPrincipais, htmlDocs: htmlDocs, htmlSituacao: htmlSituacao, htmlConferencia: htmlConferencia, htmlPreencher: htmlPreencher, htmlLeitura: htmlLeitura, htmlLocalizados:htmlLocalizados, doProcesso: function () { return A.itens && lidoDoProcesso() ? { lista: lista(), todos: !!A.tudo } : null; },
   cobertura: function(){if(sigBloq()||SG()&&SG().sigiloso())return null;var ids=idsNaFicha(),g=GB(),real=lidoDoProcesso(),D=real?lista().filter(function(d){return !docBloq(d);}):[],stored=g.V&&g.V('origem','Autos - Documentos'),seen=new Set(D.map(function(d){return S(d.id);}));(Array.isArray(stored)?stored:[]).forEach(function(d){if(!d||!S(d.id)||seen.has(S(d.id))||docBloq(d))return;seen.add(S(d.id));D.push({id:S(d.id),tipo:S(d.documento),data:d.data,historico:true});});return D.map(function(d){var x=real&&!d.historico?A.docs[d.id]:null;return {id:d.id,tipo:d.tipo,desc:d.desc,data:d.data,historico:!!d.historico,naFicha:!!ids[d.id]||naFicha(d.id),texto:!!(x&&x.estado==='ok'),gravado:!!(real&&!d.historico&&A.gravados[d.id])};});}, docsDoGrupo: docsDoGrupo, selecionar: selecionar, abrirTexto: abrirTexto, gravarMarcados: gravarMarcados, marcados: marcados, htmlConferir: htmlConferir, htmlAuto: htmlAuto, preenchido: preenchido, autoLigado: autoLigado, autoLigar: autoLigar, autoPreencher: autoPreencher,
   clique: clique, marcarSugestao: marcarSugestao, especificar: especificar, especificarJa: especificarJa, lista: lista, alertas: alertas, md: md, estado: function () { return A; },
   /* para testes: carrega uma cronologia e textos sem o PJe */

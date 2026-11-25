@@ -824,7 +824,7 @@ function producaoMinuta(){
  if(idx<0){HERO_MINUTA_NAV.sec=nav[0]?nav[0].id:'';return producaoMinuta();}
  var totalCampos=nav.reduce(function(n,x){return n+x.n;},0),F=nav.reduce(function(n,x){return n+x.filled;},0);
  var labels={relatorio:'Relatório',questoes:'Questões',solucao:'Solução',fundamentacao:'Fundamentos',sucumbencia:'Sucumbência',dispositivo:'Dispositivo'};
- var toolbar='<div class="hero-minuta-nav"><div class="hero-minuta-nav-head"><small>'+F+'/'+totalCampos+' campos registrados · não é checklist obrigatório</small><button type="button" class="lnk" data-minuta-nav="todos">'+(HERO_MINUTA_NAV.todos?'Modo guiado':'Ver todas')+'</button></div><div class="hero-minuta-meter"><i style="width:'+(totalCampos?Math.round(F/totalCampos*100):0)+'%"></i></div><div class="hero-minuta-nav-steps" role="group" aria-label="Partes da minuta">'+nav.map(function(x,i){return '<button type="button" data-minuta-nav="'+x.id+'" aria-pressed="'+(!HERO_MINUTA_NAV.todos&&HERO_MINUTA_NAV.sec===x.id)+'"><span>'+String(i+1).padStart(2,'0')+' · '+esc(labels[x.id]||x.title)+'</span><small>'+x.filled+'/'+x.n+'</small></button>';}).join('')+'</div><div class="hero-minuta-nav-foot"><button type="button" class="btn line sm" data-minuta-nav="anterior"'+(idx===0?' disabled':'')+'>← Anterior</button><button type="button" class="btn line sm" data-minuta-nav="proximo"'+(idx===nav.length-1?' disabled':'')+'>Próximo →</button><a class="btn line sm" target="_blank" rel="noopener noreferrer" href="'+esc(SITE+'/amicus/compendium/#processo='+encodeURIComponent(G.cnj))+'" title="Abre o processo no Minutário com os dados gravados na ficha">Minutário ↗</a></div></div>';
+ var toolbar='<div class="hero-minuta-nav"><div class="hero-minuta-nav-head"><small>'+F+'/'+totalCampos+' campos registrados · não é checklist obrigatório</small><button type="button" class="lnk" data-minuta-nav="todos">'+(HERO_MINUTA_NAV.todos?'Modo guiado':'Ver todas')+'</button></div><div class="hero-minuta-meter"><i style="width:'+(totalCampos?Math.round(F/totalCampos*100):0)+'%"></i></div><div class="hero-minuta-nav-steps" role="group" aria-label="Partes da minuta">'+nav.map(function(x,i){return '<button type="button" data-minuta-nav="'+x.id+'" aria-pressed="'+(!HERO_MINUTA_NAV.todos&&HERO_MINUTA_NAV.sec===x.id)+'"><span>'+String(i+1).padStart(2,'0')+' · '+esc(labels[x.id]||x.title)+'</span><small>'+x.filled+'/'+x.n+'</small></button>';}).join('')+'</div><div class="hero-minuta-nav-foot"><button type="button" class="btn line sm" data-minuta-nav="anterior"'+(idx===0?' disabled':'')+'>← Anterior</button><button type="button" class="btn line sm" data-minuta-nav="proximo"'+(idx===nav.length-1?' disabled':'')+'>Próximo →</button></div></div>';
  return h.replace('@@HERO_MINUTA_NAV@@',toolbar)+'</section>';
 }
 caixa.addEventListener('click',function(e){
@@ -1090,7 +1090,9 @@ function corpoAutos() {
   var cf = AU.htmlConferir(), dc = AU.htmlDocs(function () { return pecasCartao(true); });
   if (cf) cf = cf.replace(/^<section class="card pc-sec" id="g-cf"><div class="pc-sh"><h3>A conferir<\/h3>(<small[^>]*>[\s\S]*?<\/small>)<\/div>/, '<details class="gg au-cf" id="g-cf"' + (CF_ABERTO ? ' open' : '') + '><summary><h4>A conferir</h4>$1</summary><div class="gr au-cf-b">').replace(/<\/section>$/, '</div></details>');
   var leitura=AU.htmlLeitura();
-  if(cf) leitura=leitura.replace(/<\/section>$/,cf+'</section>');
+  var loc=AU.htmlLocalizados?AU.htmlLocalizados():'';
+  var cobertura=loc||cf?'<div class="card au-coverage-card">'+loc+cf+'</div>':'';
+  if(cobertura) leitura=leitura.replace(/<\/section>$/,cobertura+'</section>');
   return '<div class="hero-autos-workspace">'+leitura+dc+'</div>';
 }
 document.addEventListener('toggle', function (e) { if (e.target && e.target.id === 'g-cf' && e.target.tagName === 'DETAILS') CF_ABERTO = e.target.open; }, true);
