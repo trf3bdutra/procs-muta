@@ -4,6 +4,7 @@
       rt=corpoRoteiro, etapa=marcarEtapa, ed=editavel, valor=gravado, ct=controlesProcesso;
   var open={}, noteOpen=false, current='', saved=Object.create(null);
   var sintEdit='', sintDraft='';
+  var identOpen=false, tabCnj='', extras=Object.create(null), tipoOriginal=Object.create(null);
   var sintKeys={sp:'Síntese Processual',sf:'Síntese Fática'};
   function fragment(h){var t=document.createElement('template');t.innerHTML=h;return t.content;}
   function html(f){var d=document.createElement('div');d.append(f);return d.innerHTML;}
@@ -120,7 +121,7 @@
   }
   var prodBase=camposCaso;
   camposCaso=function(ja){
-    var all=Object.assign({},ja);ownedGroups.forEach(function(n){var g=grupoModelo(n);if(g)(g.campos||[]).forEach(function(c){var k=c.secao+'.'+c.chave;if(owned(k))all[k]=1;});});
+    var all=Object.assign({},ja,{'producao.Voto - Resultado':1,'triagem.Tema':1,'triagem.Especificidades':1,'triagem.Assunto detalhado':1,'triagem.Tipo de Julgamento':1});ownedGroups.forEach(function(n){var g=grupoModelo(n);if(g)(g.campos||[]).forEach(function(c){var k=c.secao+'.'+c.chave;if(owned(k))all[k]=1;});});
     PECAS_DOC.forEach(function(d){d.campos.forEach(function(k){var id=k.join('.');if(owned(id))all[id]=1;});});
     var f=fragment(prodBase(all)),root=f.querySelector('.cc-caso');if(!root)return html(f);
     var T=ccTipos(), ids=['origem'];if(T.ap||T.rn||T.ms||S(V('origem','Sentença - ID')))ids.push('sent');
@@ -157,28 +158,89 @@
   };
   notaIncluir=function(){var t=$('nt-tx');if(t&&S(t.value))noteOpen=false;return nota();};
   snCard=function(){return sn().replace(/síntese · notas · sinalizações/g,'acompanhamento · notas · sinalizações').replace(/Síntese, notas e sinalizações/g,'Acompanhamento, notas e sinalizações');};
+  /* Classificação: formulário único em Autos; o cartão superior só espelha os dados.
+     Ramo e outros assuntos não têm chaves no modelo atual: rascunho da prévia, por CNJ. */
+  function source(keys){
+    for(var i=0;i<keys.length;i++){var v=(G.fo||{})[keys[i]];if(Array.isArray(v))v=v.map(function(x){return typeof x==='object'?(x.nome||x.descricao||''):String(x);}).filter(Boolean).join('; ');if(v!=null&&typeof v!=='object'&&S(v))return S(v);}return '';
+  }
+  function extraValue(k){var e=extras[G.cnj]||{};return Object.prototype.hasOwnProperty.call(e,k)?e[k]:source(k==='ramo'?['Ramo do direito','Ramo do Direito','ramo_direito','ramo']:['Outros assuntos','outros_assuntos','Assuntos secundários','subassunto']);}
+  function extraField(k,label){
+    var p=elem('div','pv-field'),head=elem('div','pv-head'),v=extraValue(k);
+    head.append(elem('span','gl',label),btn(open['extra:'+k]?'−':v?'✎':'+','data-pv-extra',k+':ed'));p.append(head);
+    if(open['extra:'+k]){var t=elem('textarea');t.id='pv-extra-'+k;t.rows=2;t.value=v;t.placeholder=label;t.setAttribute('aria-label',label);p.append(t);var a=elem('div','pm-ad-b');a.append(btn('Gravar','data-pv-extra',k+':ok'),btn('cancelar','data-pv-extra',k+':x'));p.append(a);}
+    else if(v)p.append(elem('div','pv-value',v));else p.append(elem('small','muted','Não informado'));
+    p.append(elem('small','muted','Classificação demonstrativa · sem campo próprio na ficha'));return p;
+  }
+  function readRow(label,v){var p=elem('div','pv-idrow');p.append(elem('span','gl',label),elem('div','pv-value',S(v)||'—'));return p;}
+  function tipoText(){var T=ccTipos(),R=window.MutaRoteiro;return R?R.TIPOS.filter(function(t){return T[t[0]];}).map(function(t){return t[1];}).join(' + '):S(V('triagem','Tipo de Julgamento'));}
+  function tipoField(){
+    var f=fragment(rt()),t=f.querySelector('.rt-tsel');
+    if(t){t.open=true;return t;}return readRow('Tipo de julgamento',tipoText());
+  }
+  function identity(){
+    var d=elem('details','card pv-identity');d.id='pv-identity';d.open=identOpen;var su=elem('summary','pv-id-title'),title=elem('div');title.append(elem('b','','Identificação e matéria'),elem('small','muted','Classe, julgamento e caracterização do caso'));su.append(title,elem('span','pv-id-chevron','⌄'));d.append(su);
+    var sec=elem('div','pv-id-content');
+    sec.append(elem('h4','pm-mer-h','ID'));
+    var classe=source(['classe_judicial','Classe','DataJud · Classe'])||(pjeDoProcesso()?window.MutaPje.classe():'');
+    sec.append(readRow('Classe',classe),tipoField());
+    var ato=elem('div','pv-idrow');add(ato,atoSel());sec.append(ato);
+    var dest=elem('div','pv-idrow');dest.append(elem('span','gl','Destino'),elem('div','pv-value',destGrav()||'A definir pelo tipo de ato'));
+    if(destGrav()==='Outro destino')add(dest,campoRot('producao','Destino - Outro','Especificar destino'));sec.append(dest);
+    var res=elem('div','pv-idrow'),c=destino()==='monocratica'?campoLista('producao','Voto - Resultado'):campoModelo('producao','Voto - Resultado');
+    if(c)add(res,campo(Object.assign({},c,{rotulo:'Conclusão / resultado'})));sec.append(res);
+    sec.append(elem('h4','pm-mer-h','Matéria'),extraField('ramo','Ramo do direito'),readRow('Assunto CNJ',source(['Assunto'])),extraField('outros','Outros assuntos'));
+    var ad=elem('div','pv-idrow');ad.append(elem('span','gl','Assunto detalhado'));
+    var detail=assuntoDetalhado();if(detail)add(ad,detail);else{var plus=btn('+ Detalhamento do assunto','data-ad','ed');plus.className='pm-ad-add';ad.append(plus);}sec.append(ad);
+    sec.append(field('triagem','Tema','Tipo de caso'),field('triagem','Especificidades','Especificidades',true),sintese('sp','Síntese processual','Resumo da tramitação, decisões, recursos e pedidos.'),sintese('sf','Síntese fática','Fatos materiais relevantes para a controvérsia.'));
+    d.append(sec);return d;
+  }
+  var autosBase=corpoAutos;
+  corpoAutos=function(){return html(identity())+autosBase();};
+  function irIdent(){identOpen=true;G.aba='Autos';render();var d=$('pv-identity');if(d){d.open=true;d.scrollIntoView({block:'start'});}}
   cabeca=function(s){
     if(current!==G.cnj){current=G.cnj;open={};noteOpen=false;sintEdit='';sintDraft='';}
-    var f=fragment(cab(s)),p=f.querySelector('.pc.pm');if(!p)return html(f);p.classList.add('pv-universal');
+    var f=fragment(cab(s)),p=f.querySelector('.pc.pm');if(!p)return html(f);
     p.querySelectorAll('.pm-tj:not(.sug)').forEach(function(x){x.remove();});
+    p.querySelectorAll('.pm-as [data-ad],.pm-ad').forEach(function(x){x.remove();});
+    var assunto=S(gravado('triagem','Registro - Assunto detalhado'))||S(V('triagem','Assunto detalhado'));
     var e=p.querySelector('.pm-esp'),ctx=p.querySelector('.pm-aut1');
-    if(e){var tags=elem('div','pv-tags');S(V('triagem','Especificidades')).split(/[;|\n]+/).map(S).filter(Boolean).forEach(function(v){tags.append(elem('span','chip',v));});e.replaceWith(tags);}
+    if(e){var block=elem('div','pv-topmatter');if(assunto)block.append(elem('div','muted pv-value',assunto));var tags=elem('div','pv-tags');S(V('triagem','Especificidades')).split(/[;|\n]+/).map(S).filter(Boolean).forEach(function(v){tags.append(elem('span','chip',v));});block.append(tags);e.replaceWith(block);}
     if(ctx){var l=ctx.querySelector('.pm-aut-t');if(l)l.textContent='Autuação e contexto';
-      var sub=elem('div','pv-context');sub.append(field('triagem','Tema','Tipo de caso'),field('triagem','Especificidades','Especificidades',true));
-      var q=elem('details','pv-sub');q.append(elem('summary','','Questões jurídicas'));add(q,questoes());sub.append(q);
-      var ctl=ctx.querySelector('.pm-ctl2');if(ctl&&ctl.previousElementSibling)ctx.insertBefore(sub,ctl.previousElementSibling);else ctx.append(sub);}
-    var pills=p.querySelector('.pm-pills');if(pills){var syn=elem('div','pv-sint-list');syn.append(sintese('sp','Síntese processual','Resumo da tramitação, decisões, recursos e pedidos.'),sintese('sf','Síntese fática','Fatos materiais relevantes para a controvérsia.'));pills.before(syn);pills.replaceWith(flow());}
-    var resp=p.querySelector('.pm-resp');if(resp)resp.classList.add('pv-enc');
+      var q=elem('details','pv-sub');q.append(elem('summary','','Questões jurídicas'));add(q,questoes());var ctl=ctx.querySelector('.pm-ctl2');if(ctl&&ctl.previousElementSibling)ctx.insertBefore(q,ctl.previousElementSibling);else ctx.append(q);}
+    var pills=p.querySelector('.pm-pills');if(pills){var syn=elem('div','pv-top-summary'),head=elem('div','pv-head'),go=btn('Editar identificação','data-pv-ident','');go.className='lnk';head.append(elem('span','gl','Identificação e matéria'),go);syn.append(head);
+      [['Tipo de julgamento',tipoText()],['Tipo de caso',V('triagem','Tema')],['Síntese processual',V('triagem','Síntese Processual')],['Síntese fática',V('triagem','Síntese Fática')]].forEach(function(z){if(S(z[1]))syn.append(readRow(z[0],z[1]));});pills.before(syn);pills.replaceWith(flow());}
+    var resp=p.querySelector('.pm-resp');if(resp){resp.classList.add('pv-enc');var ato=resp.querySelector('.pm-ato');if(ato){var k=pronAtual(),r=elem('div','pv-operational');r.append(readRow('Tipo de ato',k>=0?PRON[k][0]:''),readRow('Destino',destGrav()),readRow('Conclusão / resultado',V('producao','Voto - Resultado')));ato.replaceWith(r);}}
     return html(f);
   };
-  /* Move o seletor original para o contexto quando o roteiro está ativo.
-     Não recria o motor nem as ações data-rt. */
+  /* Autos primeiro; triagem e produção ficam como abas irmãs, usando o motor original. */
+  MODOS=['Autos','Processo'];
   var renderBase=render0;
   render0=function(){
+    if(tabCnj!==G.cnj){tabCnj=G.cnj;identOpen=false;G.aba='Autos';G.rot='tri';G.adEd=false;}
     renderBase();
-    var ctx=caixa.querySelector('.pm-aut1'),sel=caixa.querySelector('.gbody .rt-tsel');
-    if(ctx&&sel)ctx.insertBefore(sel,ctx.querySelector('.pv-context')||ctx.lastElementChild);
+    var top=caixa.querySelector('.pc.pm');if(top)top.classList.add('pv-universal');
+    var tabs=caixa.querySelector('.gtabs'),proc=tabs&&tabs.querySelector('[data-aba="Processo"]');
+    if(proc){var tri=btn('Triagem','data-pv-tab','tri'),pro=btn('Produção','data-pv-tab','pro');
+      [tri,pro].forEach(function(b){b.setAttribute('role','tab');b.className='';b.setAttribute('aria-selected',String(G.aba==='Processo'&&G.rot===(b===pro?'pro':'tri')));});
+      proc.replaceWith(tri,pro);}
+    var nested=caixa.querySelector('.gbody .rt-modos');if(nested)nested.hidden=true;
+    var sel=caixa.querySelector('.gbody .rt-tsel');if(sel&&G.aba==='Processo')sel.remove();
   };
+  caixa.addEventListener('toggle',function(e){if(e.target.id==='pv-identity'&&e.target.isConnected)identOpen=e.target.open;},true);
+  caixa.addEventListener('click',function(e){
+    var b=e.target.closest&&e.target.closest('[data-pv-tab],[data-pv-ident],[data-cl-tipo],[data-pv-extra],#pv-identity [data-rt]');if(!b)return;
+    e.preventDefault();e.stopImmediatePropagation();
+    if(b.hasAttribute('data-pv-tab')){G.aba='Processo';G.rot=b.dataset.pvTab;render();return;}
+    if(b.hasAttribute('data-pv-ident')||b.hasAttribute('data-cl-tipo')){irIdent();return;}
+    if(b.hasAttribute('data-pv-extra')){var a=b.dataset.pvExtra.split(':'),k=a[0];if(a[1]==='ok'){var t=$('pv-extra-'+k);if(t)(extras[G.cnj]||(extras[G.cnj]={}))[k]=S(t.value);}open['extra:'+k]=a[1]==='ed'?!open['extra:'+k]:false;render();return;}
+    if(b.dataset.rt&&window.MutaRoteiro){
+      if(!Object.prototype.hasOwnProperty.call(tipoOriginal,G.cnj))tipoOriginal[G.cnj]=S(V('triagem','Tipo de Julgamento'));
+      if(b.dataset.rt==='auto')marcar('triagem.Tipo de Julgamento',tipoOriginal[G.cnj]);
+      window.MutaRoteiro.clique(b,gRot());
+      if(b.dataset.rt.indexOf('t:')===0)marcar('triagem.Tipo de Julgamento',tipoText());
+      agendar(400);render();
+    }
+  },true);
   caixa.addEventListener('input',function(e){if(e.target.dataset&&e.target.dataset.pvSintDraft===sintEdit)sintDraft=e.target.value;},true);
   caixa.addEventListener('keydown',function(e){
     var id=e.target.dataset&&e.target.dataset.pvSintDraft;if(!id)return;

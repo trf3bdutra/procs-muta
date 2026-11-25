@@ -98,3 +98,17 @@ test('referências documentais preservam decisões de triagem e centralizam edi�
     assert.equal(fs.readFileSync(path.join(pn,'roteiro.js'),'utf8'),fs.readFileSync(path.join(ROOT,'extensao','roteiro.js'),'utf8'));
   } finally {fs.rmSync(saida,{recursive:true,force:true});}
 });
+
+test('prévia: Autos primeiro e identificação editável única, separada do resumo operacional',()=>{
+ const s=fs.readFileSync(path.join(ROOT,'scripts/extensao/previa/universal-layout.js'),'utf8');
+ assert.match(s,/MODOS=\['Autos','Processo'\]/);
+ assert.match(s,/G\.aba='Autos';G\.rot='tri'/);
+ assert.match(s,/d\.open=identOpen/);
+ assert.match(s,/corpoAutos=function\(\)\{return html\(identity\(\)\)\+autosBase\(\)/);
+ assert.match(s,/extraField\('ramo','Ramo do direito'\)/);
+ assert.match(s,/extraField\('outros','Outros assuntos'\)/);
+ assert.match(s,/Conclusão \/ resultado/);
+ assert.match(s,/data-pv-ident/);
+ assert.match(s,/pv-top-summary/);
+ new Function(s);
+});
