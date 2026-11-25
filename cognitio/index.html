@@ -1228,7 +1228,7 @@ header#top::before{background:linear-gradient(90deg,var(--eg) 0 50%,var(--eg2) 5
 .cog-ac-over .ini-grid{margin:0}
 .cog-ac-search-head{margin-top:22px;scroll-margin-top:80px}
 @media(max-width:760px){.cog-ac-head{align-items:flex-start;gap:8px}.cog-ac-head h1{font-size:22px}}
-</style><style>.cog-dest-sub{border-top:1px solid var(--b);margin:0}.cog-dest-sub .ch h3{font:650 15px/1.3 Figtree,"Segoe UI",sans-serif;color:var(--v);margin:0 0 4px}.cog-pauta-linha{grid-template-columns:minmax(0,1fr) 64px!important;text-align:left}.cog-dest-sub .ch{padding-top:14px}</style></head>
+</style><style>.cog-dest-sub{border-top:1px solid var(--b);margin:0}.cog-dest-sub .ch h3{font:650 15px/1.3 Figtree,"Segoe UI",sans-serif;color:var(--v);margin:0 0 4px}.cog-pauta-linha{grid-template-columns:minmax(0,1fr) 64px!important;text-align:left}.cog-dest-sub .ch{padding-top:14px}</style><style>#rodape[hidden]{display:none!important}#rodape:not([hidden]){display:flex!important;gap:0;align-items:center;flex-wrap:wrap;padding:4px 10px;max-height:42vh;overflow:auto;z-index:35}#rodape .sel{display:flex;align-items:center;gap:8px;min-width:0}#rodape .ac{flex:1 1 200px;padding:6px 10px}#rodape .cog-destinar{flex:2 1 340px}#rodape .lin{display:flex;flex-wrap:wrap;gap:5px}#rodape .lin select{min-width:0;max-width:100%;flex:1}#rodape .ac small{font-size:10px}body.cog-rod-on main{padding-bottom:130px!important}@media(max-width:850px){body.cog-rod-on main{padding-bottom:230px!important}}</style></head>
 <body>
 <header id="top">
   <div id="marca"><i class="star" aria-hidden="true"></i><div class="mc-bc"><a class="nx-ey" href="/amicus/" title="Voltar ao Amicus Curiae">CMT · Amicus Curiae</a><div class="mc-cad"><a class="nx-on" href="/cognitio/" aria-current="page">Cognitio<em>.</em></a></div></div></div>
@@ -1249,6 +1249,7 @@ header#top::before{background:linear-gradient(90deg,var(--eg) 0 50%,var(--eg2) 5
 <script src="/padrao/acervo-fonte.js"></script>
 <script src="/init/assets/js/cmt-ficha.js"></script>
 <script src="/init/assets/js/cmt-ficha-monitor.js"></script>
+<script src="/extensao/previa/painel/prontuario-host.js"></script>
 <script src="/init/assets/js/regras-gerais.js"></script>
 <link rel="stylesheet" href="/init/motor/assets/css/02-calendario.css">
 <script src="/init/motor/assets/js/11-calendario.js"></script>
@@ -2125,11 +2126,13 @@ let F = F0;
 const FE = { q: '', lim: 100, ver: 'lista' };
 
 
-function destinoAtual(o) { const r = o.row;
-  if (r['Seleção Prévia'] === 'SELECIONADO PREVIAMENTE' && /^\d{2}\/\d{2}\/\d{4}$/.test(String(r['Sessão Destino'] || '').trim())) return { k: 'pauta', t: 'pauta ' + String(r['Sessão Destino']).slice(0, 5), s: r['Sessão Destino'] };
-  if (r['Seleção Prévia'] === 'SELECIONADO PREVIAMENTE') return { k: 'pauta', t: 'banco reserva', s: '' };
-  if (r.Destino === 'Monocrática') return { k: 'mono', t: 'monocrática' };
-  return { k: '', t: 'sem destino' }; }
+function destinoAtual(o){const r=o.row||{},d=nz(r.Destino||''),a=String(r['Mono - Tipo de ato']||''),s=String(r['Nova sessão de destino']||r['Sessão Destino']||'');
+ if(r['Seleção Prévia']==='SELECIONADO PREVIAMENTE'&&(!d||d==='sessao'))return {k:'pauta',t:s?'seleção prévia '+s:'banco reserva',s};
+ if(d==='sessao')return {k:'sessao',t:'colegiado · a selecionar'};
+ if(d==='monocratica'){if(/despacho|urg[eê]ncia|interlocut/i.test(a))return {k:'outro',t:a};return {k:'mono',t:a||'monocrática · tipo a confirmar'};}
+ if(d==='outro destino'||d==='despacho'||d==='interlocutoria')return {k:'outro',t:r['Destino - Outro']||r.Destino};
+ return {k:'',t:'sem destino'};
+}
 function proc(f, r) {
   r = r || f;
   const etq = etqDe(f), classe = f.classe_judicial || f.Classe || r.classe_judicial || '', cl = abrev(classe), tarefa = String(f.tarefa_atual || '').trim();
@@ -2167,7 +2170,7 @@ function construir() {
   IDX = new Map(ALL.map((o) => [o.d, o]));
   ALL.forEach((o) => { o.dest = destinoAtual(o); o.hay = nz([o.cnj, o.d, o.classe, o.cl, o.assunto, o.tarefa, o.secao, o.partes, o.etq.join(' '), o.dest.t].join(' ')); });
   for (const d of [...SEL]) if (!IDX.has(d)) SEL.delete(d); }
-function refazDest(o) { o.dest = destinoAtual(o); o.hay = nz([o.cnj, o.d, o.classe, o.cl, o.assunto, o.tarefa, o.secao, o.partes, o.etq.join(' '), o.dest.t].join(' ')); }
+function refazDest(o) { o.monoE=o.etq.some(e=>/monocr/i.test(e))||o.row.Destino==='Monocrática';o.pend=pendDe(o);o.dest = destinoAtual(o); o.hay = nz([o.cnj, o.d, o.classe, o.cl, o.assunto, o.tarefa, o.secao, o.partes, o.etq.join(' '), o.dest.t].join(' ')); }
 const DLAB = Object.fromEntries(DEST.map((x) => [x[0], x[1]])), CLAB = Object.fromEntries(CAND.map((x) => [x[0], x[1]]));
 
 /* ===================== sessões (calendário, pelo motor) ===================== */
@@ -2175,16 +2178,19 @@ function sessoes() { const s = SES(); let L = []; try { L = ((s && s.estado && s
 const nomeSes = (ss) => br(ss.data);
 
 /* ===================== gravação (acervo/operacional.json), com fila e nova tentativa ===================== */
-function estadoDe(o) { const r = o.row; return { sp: r['Seleção Prévia'] === 'SELECIONADO PREVIAMENTE' ? 'SELECIONADO PREVIAMENTE' : '', sd: r['Seleção Prévia'] === 'SELECIONADO PREVIAMENTE' ? (r['Sessão Destino'] || '') : '', mono: r.Destino === 'Monocrática' ? 'Monocrática' : '' }; }
-function poeEstado(o, st) {
-  const r = o.row, ch = Object.assign({}, PEND.get(o.d) || {});
-  if (st.sp !== undefined) { const ant = r['Seleção Prévia'] === 'SELECIONADO PREVIAMENTE' ? r['Sessão Destino'] || '' : ''; const novo = st.sp ? st.sd : '';
-    if (ant !== novo || (r['Seleção Prévia'] || '') !== (st.sp || '')) { r['Seleção Prévia'] = st.sp || ''; r['Sessão Destino'] = st.sp ? st.sd : ''; r['Nova sessão de destino'] = r['Sessão Destino']; ch.sp = r['Seleção Prévia']; ch.sd = r['Sessão Destino']; } }
-  if (st.mono !== undefined && (r.Destino === 'Monocrática' ? 'Monocrática' : '') !== st.mono) { if (st.mono) r.Destino = 'Monocrática'; else if (r.Destino === 'Monocrática') r.Destino = ''; ch.mono = st.mono; }
-  if (Object.keys(ch).length) PEND.set(o.d, ch);
-  refazDest(o); }
+function estadoDe(o){const r=o.row;return {sp:r['Seleção Prévia']||'',sd:r['Nova sessão de destino']||r['Sessão Destino']||'',dest:r.Destino||'',ato:r['Mono - Tipo de ato']||'',outro:r['Destino - Outro']||''};}
+function poeEstado(o,st){
+ const r=o.row,ch=Object.assign({},PEND.get(o.d)||{});
+ if(st.dest===undefined&&st.mono!==undefined){st=Object.assign({},st,{dest:st.sp?'Sessão':st.mono?'Monocrática':'',ato:st.mono?'Decisão monocrática (art. 932)':'',outro:''});}
+ const keys={sp:'triagem.Seleção Prévia',sd:'pauta.Nova sessão de destino',dest:'producao.Destino',ato:'producao.Mono - Tipo de ato',outro:'producao.Destino - Outro'};
+ for(const [k,id] of Object.entries(keys)){if(st[k]===undefined)continue;const field=id.slice(id.indexOf('.')+1),v=st[k]||'';if(String(r[field]||'')!==v||k==='sd'&&String(r['Sessão Destino']||'')!==v){ch[id]=v;r[field]=v;if(k==='sd')r['Sessão Destino']=v;}}
+ if(Object.keys(ch).length)PEND.set(o.d,ch);refazDest(o);
+}
+function cogAtualizaFicha(r){const o=IDX.get(dg(r&&r.processo));if(!o)return;for(const sec of ['triagem','producao','origem','pauta','controles'])for(const [k,v] of Object.entries(r[sec]||{})){if(v===null||typeof v!=='object')o.row[k]=v==null?'':v;}if(r.pauta&&Object.prototype.hasOwnProperty.call(r.pauta,'Nova sessão de destino'))o.row['Sessão Destino']=r.pauta['Nova sessão de destino'];refazDest(o);}
+async function cogApi(path,opts){const r=await fetch(path,Object.assign({credentials:'same-origin',cache:'no-store'},opts||{}));const j=await r.json();if(!r.ok)throw Error(j.erro||'HTTP '+r.status);return j;}
+W.addEventListener('message',async e=>{if(e.origin!==location.origin||!e.data||e.data.tipo!=='cmt:hero-gravado'||dg(e.data.cnj).length!==20)return;const d=dg(e.data.cnj);try{const j=await cogApi('/api/pauta?ficha='+encodeURIComponent(e.data.cnj));if(j.operacional&&!PEND.has(d)){cogAtualizaFicha(j.operacional);const o=IDX.get(d);if(o){D.querySelectorAll('[data-sel="'+d+'"]').forEach(b=>{const row=b.closest('.row');if(row){const tg=row.querySelector('.tg[class*="d-"]')||row.querySelector(':scope > span:nth-child(6) .tg');if(tg)tg.textContent=o.dest.t;}});}}}catch(e){toast('Ficha gravada; atualização da lista pendente.',true);}});
 function acao(rot, ds, fn) {
-  const L = ds.map((d) => IDX.get(d)).filter(Boolean), fora = ds.length - L.length; if (!L.length) { toast(fora ? 'Os processos marcados não estão no acervo em triagem: a ficha deles não pode receber destino daqui.' : 'Marque ao menos um processo.', true); return; }
+  const L = ds.map((d) => IDX.get(d)).filter(o=>o&&o.grupo!=='pauta'), fora = ds.length - L.length; if (!L.length) { toast(fora ? 'Os processos marcados não estão no acervo em triagem: a ficha deles não pode receber destino daqui.' : 'Marque ao menos um processo.', true); return; }
   const antes = new Map(L.map((o) => [o.d, estadoDe(o)]));
   L.forEach((o) => poeEstado(o, fn(o)));
   DESF.push({ rot, antes }); if (DESF.length > 30) DESF.shift();
@@ -2200,34 +2206,17 @@ function pintaGrava() { const b = $('#st-grava'); if (!b) return; const mg = (W.
   const tx = b.querySelector('span') || b; tx.textContent = !pr ? 'carregando' : ing ? 'gravando' : err ? 'erro · tentar (' + n + ')' : n ? n + ' a gravar' : ult ? 'gravado ' + ult : 'gravado';
   b.title = err ? 'Erro: ' + err : n ? n + ' alteração(ões) a gravar no procs-muta; grava sozinho em instantes, ou clique para gravar já' : 'Tudo gravado no procs-muta (triagem, sessões, regras e equipe)'; }
 W.pintaGrava = pintaGrava;
-async function gravar() {
-  if (GRAVANDO || !PRONTO) return; const P = PM(); if (!P || !P.gravar) { ERRO = 'motor ainda carregando'; pintaGrava(); return; }
-  if (!pendentes()) { pintaGrava(); return; }
-  GRAVANDO = true; ERRO = ''; pintaGrava();
-  const snap = new Map(PEND), arq = {}, agora = new Date().toISOString(); let msg = [];
-  try {
-    if (snap.size) {
-      const op = JSON.parse(await P.ler('acervo/operacional.json'));
-      if (!op || !Array.isArray(op.registros)) throw new Error('acervo/operacional.json ilegível');
-      const por = new Map(op.registros.map((r) => [dg(r.processo), r]));
-      snap.forEach((ch, d) => { let r = por.get(d);
-        if (!r) { r = { processo: fmtCnj(d), origem: { atualizado_em: agora }, triagem: {}, producao: {}, pauta: { sessoes: [] } }; op.registros.push(r); por.set(d, r); }
-        r.origem = r.origem || {}; r.triagem = r.triagem || {}; r.producao = r.producao || {}; r.pauta = r.pauta || { sessoes: [] };
-        if ('sp' in ch) { r.triagem['Seleção Prévia'] = ch.sp; r.pauta['Nova sessão de destino'] = ch.sd; }
-        if ('mono' in ch) { r.producao.Destino = ch.mono; if (ch.mono) { const c = r.controles = r.controles || {};
-            if (!c['Monocrática - Registrada em']) { c['Monocrática - Registrada em'] = HOJE; c['Monocrática - Prazo'] = somaDias(HOJE, 30); }
-            c['Monocrática - Atualizado por'] = 'Triagem (Ab Initio)'; c['Monocrática - Atualizado em'] = HOJE; } }
-        r.origem.atualizado_em = agora; });
-      op.registros.sort((a, b) => String(a.processo).localeCompare(String(b.processo))); op.atualizado_em = agora;
-      arq['acervo/operacional.json'] = JSON.stringify(op, null, 1) + '\n'; msg.push(snap.size + ' destino(s)');
-    }
-    await P.gravar(arq, 'Triagem (Ab Initio): ' + msg.join(' e '));
-    snap.forEach((ch, d) => { if (PEND.get(d) === ch) PEND.delete(d); });
-    ULT = hhmm(); TENT = 0; ERRO = '';
-  } catch (e) { ERRO = (e && e.message) || String(e); TENT++; toast('Não gravou: ' + ERRO + '. Nova tentativa em instantes.', true); }
-  GRAVANDO = false; pintaGrava();
-  if (pendentes()) agendar(ERRO ? Math.min(120000, 10000 * TENT) : 1500);
-  if (ABA === 'chefia') render(); }
+async function gravar(){
+ if(GRAVANDO||!PRONTO||!PEND.size)return;GRAVANDO=true;ERRO='';pintaGrava();
+ const snap=new Map(PEND);
+ try{const itens=[...snap].map(([d,campos])=>({cnj:fmtCnj(d),campos}));
+ for(let i=0;i<itens.length;i+=200){const lote=itens.slice(i,i+200),r=await cogApi('/api/pauta?ficha=1',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({destinos:lote})});
+ (r.registros||[]).forEach(x=>{const d=dg(x.processo);if(PEND.get(d)===snap.get(d)){PEND.delete(d);cogAtualizaFicha(x);}});
+ }
+ ULT=hhmm();TENT=0;
+ }catch(e){ERRO=e.message||String(e);TENT++;toast('Não gravou o destino: '+ERRO,true);}
+ GRAVANDO=false;pintaGrava();if(PEND.size)agendar(ERRO?Math.min(120000,10000*TENT):1500);
+}
 W.addEventListener('beforeunload', (e) => { if (pendentes() || GRAVANDO) { e.preventDefault(); e.returnValue = ''; } });
 
 /* ===================== abas e roteamento ===================== */
@@ -2885,7 +2874,7 @@ function matrizTriagem() {
 /* Candidatos à pauta: destino explícito prevalece sobre indícios; seleção prévia e pauta já constituídas ficam fora. */
 function cogCandidatoPauta(o){
  const r=o.row||{}, d=nz(r.Destino||''), s=nz(r['Destino - Situação']||'');
- if(o.grupo==='pauta'||(o.dest||{}).k||nz(r['Seleção Prévia']||'')==='selecionado previamente')return '';
+ if(o.grupo==='pauta'||(o.dest||{}).k==='pauta'||nz(r['Seleção Prévia']||'')==='selecionado previamente')return '';
  if(d&&d!=='sessao'&&d!=='acordao')return '';
  const explicito=d==='sessao'||d==='acordao';
  if(!explicito&&(!o.apto||o.monoE||o.cand))return '';
@@ -2977,7 +2966,7 @@ function abrirConj(k) { const r = REG[k]; if (!r) return; limparFiltros(); F.con
 /* ---------- filtros da Fila ---------- */
 const CAMPOS = [['tarefa', 'Tarefa no PJe'], ['assunto', 'Assunto'], ['etq', 'Etiqueta'], ['classe', 'Classe'], ['secao', 'Seção'], ['partes', 'Partes'], ['desde', 'Data de entrada na tarefa'], ['dist', 'Data de distribuição'], ['prior', 'Prioridade legal'], ['dest', 'Destino da triagem'], ['prov', 'Destino provável']];
 const CONDS = [['in', 'é um destes'], ['notin', 'não é nenhum destes'], ['has', 'contém algum trecho'], ['nothas', 'não contém'], ['empty', 'está vazio'], ['notempty', 'não está vazio'], ['between', 'entre datas']];
-const valDe = (o, c) => c === 'etq' ? o.etq : c === 'classe' ? [o.cl] : c === 'prior' ? [o.prior ? 'Sim' : 'Não'] : c === 'dest' ? [o.dest.k ? (o.dest.k === 'esc' ? 'Escaninho: ' + o.dest.t : o.dest.k === 'pauta' ? 'Pauta ' + o.dest.s : 'Monocrática') : 'Sem destino'] : c === 'prov' ? [DLAB[o.prov]] : [o[c] || ''];
+const valDe = (o, c) => c === 'etq' ? o.etq : c === 'classe' ? [o.cl] : c === 'prior' ? [o.prior ? 'Sim' : 'Não'] : c === 'dest' ? [o.dest.k ? (o.dest.t) : 'Sem destino'] : c === 'prov' ? [DLAB[o.prov]] : [o[c] || ''];
 function tokens(q) { const out = []; String(q || '').replace(/(-?)"([^"]+)"|(-?)(\S+)/g, (m, n1, f, n2, w) => { const neg = !!(n1 || n2), t = nz(f || w); if (t && t !== '-') out.push({ neg, t }); return ''; }); return out; }
 function loteSet() { const s = new Set(); String(F.lote || '').replace(/\d{7}-?\d{2}\.?\d{4}\.?\d\.?\d{2}\.?\d{4}/g, (m) => { s.add(dg(m)); return m; }); return s; }
 function passaCrit(o, c) { const v = valDe(o, c.campo).filter((x) => x !== '' && x != null);
@@ -3200,7 +3189,7 @@ async function lerColecoes(sub) {
   _colD[sub] = { gerado_em: new Date().toLocaleString('pt-BR'), commit: '', lotes };
   _colLendo[sub] = false; refazTriEm();
 }
-function fichaDe(cnj) { const o = IDX.get(dg(cnj)), P = W.CMTProntuario; if (P && P.abrir) P.abrir(o ? o.cnj : cnj, o ? [o.d] : []); else toast('A ficha ainda está carregando.', true); }
+function fichaDe(cnj){const o=IDX.get(dg(cnj));if(!W.CMTUniversal)return toast('Prontuário Universal indisponível.',true);W.CMTUniversal.abrir(o?o.cnj:cnj,{modo:COG==='mono'||COG==='selecao'?'pro':'tri'});}
 /* a ficha atual do processo (operacional), com as seções achatadas: o painel do processo mostra o prontuário gravado */
 async function fichaPlana(cnj) { const ad = W.CMTFichaMonitor; let r = null; try { if (ad && ad.carregar) r = (await ad.carregar(cnj)).operacional; } catch (e) {}
   if (!r) { const o = IDX.get(dg(cnj)); return o ? Object.assign({}, o.row) : {}; }
@@ -3228,14 +3217,7 @@ function itemPainel(cnj) {
   if (!it) { it = { processo: o ? o.cnj : cnj, recurso: (o && (o.classe || o.cl)) || '', partes: (o && o.partes) || '', tarefa: (o && o.tarefa) || '', etiquetas: o && o.etq ? o.etq.join(', ') : '', assunto: (o && o.assunto) || '' }; l = { id: '', titulo: '', grupos: [], colunas: [], itens: [it] }; }
   return { l, it };
 }
-function abrirPainelProcesso(cnj) {
-  const C = W.CaputColecoes;
-  if (!C || !C.painel) { fichaDe(cnj); return; }
-  const { l, it } = itemPainel(cnj);
-  gaveta('<div class="pp-gav"><div class="pp-gav-h"><b>Painel do processo</b><button type="button" class="btn" data-pp-fecha aria-label="Fechar">×</button></div><div id="pp-host"></div></div>');
-  const g = $('#gaveta'); if (g) { g.classList.add('gaveta-pp'); const x = g.querySelector('[data-pp-fecha]'); if (x) x.onclick = fecharGaveta; }
-  C.painel(document.getElementById('pp-host'), l, it, opcoesPainel());
-}
+function abrirPainelProcesso(cnj){fichaDe(cnj);}
 /* A triar: o número do processo abre, na própria linha, o mesmo painel que se abre nos Triados */
 function montarAtPP() {
   const C = W.CaputColecoes;
@@ -3801,10 +3783,10 @@ function procExp(o){const r=o.row||{},B=[['Próxima ação','pa',r['Próxima aç
     (tri.length?'<div class="pe-tri">'+tri.map(x=>'<span><i>'+esc(x[0])+'</i>'+esc(x[1])+'</span>').join('')+'</div>':'')+
     (cheios.length?'<div class="pe-grid">'+cheios.map(x=>'<section class="pe-b pe-'+x[1]+'"><h4>'+esc(x[0])+'</h4><div class="pe-t">'+expItens(x[2])+'</div></section>').join('')+'</div>':'<p class="pe-vz">Nada anotado neste processo. Use o prontuário de triagem para registrar providências.</p>')+
     '<div class="pe-foot">'+(vazios.length&&cheios.length?'<span class="pe-sem">sem registro: '+vazios.map(x=>esc(x[0].toLowerCase())).join(' · ')+'</span>':'<span></span>')+
-    '<span class="pe-ac"><button type="button" class="btn sm" data-ficha="'+o.d+'">Ficha</button><button type="button" class="btn sm pri" data-prontuario="'+o.d+'">Prontuário de triagem</button></span></div></div>';}
+    '<span class="pe-ac"><button type="button" class="btn sm pri" data-prontuario="'+o.d+'">Abrir Prontuário Universal</button></span></div>'+ (W.CMTUniversal?W.CMTUniversal.html(o.cnj,{modo:'tri'}):'')+'</div>';}
 function linha(o) { const dt = o.dest, tg = dt.k ? '<span class="tg d-' + dt.k + '"' + (dt.k === 'esc' && dt.e && dt.e.cor ? ' style="border-color:' + esc(dt.e.cor) + '"' : '') + ' title="' + esc(dt.t) + '">' + esc(dt.t) + '</span>' : '<span class="tg">sem destino</span>', exp = true, aberto = PROC_EXP_ABERTO === o.d;
   const detalhes = exp && aberto ? procExp(o) : '';
-  return '<div class="proc-item"><div class="row' + (SEL.has(o.d) ? ' sel' : '') + '"><input type="checkbox" data-sel="' + o.d + '"' + (SEL.has(o.d) ? ' checked' : '') + ' aria-label="Selecionar ' + o.cnj + '"><button type="button" class="nm" data-ficha="' + o.d + '" title="Abrir a ficha">' + o.cnj + '</button><span title="' + esc(o.classe) + '">' + esc(o.cl) + '</span><span class="as"><b title="' + esc(o.assunto) + '">' + esc(o.assunto) + '</b><span>' + esc(o.secao) + (o.div ? ' <span title="etiqueta de seção divergente" style="color:var(--r)">⚑</span>' : '') + (o.prior ? ' <span class="tg pri">prioridade</span>' : '') + '</span></span><span class="as tar"><b title="' + esc(o.tarefa || 'sem tarefa no PJe') + '"' + (o.tarefa ? '' : ' style="color:var(--m);font-weight:500"') + '>' + esc(o.tarefa || 'sem tarefa no PJe') + '</b><span class="mono" style="font-size:11.5px">' + (o.desde ? 'desde ' + br(o.desde) + (dias(o.desde) != null ? ' · ' + nf(dias(o.desde)) + ' d' : '') : 'data de entrada não informada') + '</span></span><span>' + tg + '</span><button type="button" class="btn pront" data-prontuario="' + o.d + '" title="Abrir prontuário rápido">Triagem</button>' + obsLinha(o) + (exp ? '<button type="button" class="proc-exp-toggle" data-proc-exp="'+o.d+'" aria-expanded="'+aberto+'" title="'+(aberto?'Recolher':'Anotações e providências')+'">'+(aberto?'Recolher ▴':'Anotações ▾')+'</button>' : '') + '</div>' + detalhes + '</div>'; }
+  return '<div class="proc-item"><div class="row' + (SEL.has(o.d) ? ' sel' : '') + '"><input type="checkbox" data-sel="' + o.d + '"' + (SEL.has(o.d) ? ' checked' : '') + ' aria-label="Selecionar ' + o.cnj + '"><button type="button" class="nm" data-ficha="' + o.d + '" title="Abrir a ficha">' + o.cnj + '</button><span title="' + esc(o.classe) + '">' + esc(o.cl) + '</span><span class="as"><b title="' + esc(o.assunto) + '">' + esc(o.assunto) + '</b><span>' + esc(o.secao) + (o.div ? ' <span title="etiqueta de seção divergente" style="color:var(--r)">⚑</span>' : '') + (o.prior ? ' <span class="tg pri">prioridade</span>' : '') + '</span></span><span class="as tar"><b title="' + esc(o.tarefa || 'sem tarefa no PJe') + '"' + (o.tarefa ? '' : ' style="color:var(--m);font-weight:500"') + '>' + esc(o.tarefa || 'sem tarefa no PJe') + '</b><span class="mono" style="font-size:11.5px">' + (o.desde ? 'desde ' + br(o.desde) + (dias(o.desde) != null ? ' · ' + nf(dias(o.desde)) + ' d' : '') : 'data de entrada não informada') + '</span></span><span>' + tg + '</span><button type="button" class="btn pront" data-prontuario="' + o.d + '" title="Prontuário Universal">Prontuário</button>' + obsLinha(o) + (exp ? '<button type="button" class="proc-exp-toggle" data-proc-exp="'+o.d+'" aria-expanded="'+aberto+'" title="'+(aberto?'Recolher':'Anotações e providências')+'">'+(aberto?'Recolher ▴':'Anotações ▾')+'</button>' : '') + '</div>' + detalhes + '</div>'; }
 function lista(L, st, onde) {
   const hdr = (k, t) => '<button type="button" data-ord="' + k + '">' + t + (F.ord === k ? (F.dir > 0 ? ' ↑' : ' ↓') : '') + '</button>';
   const todosMarc = L.length && L.every((o) => SEL.has(o.d));
@@ -3980,46 +3962,31 @@ const RODA = {}; let ROD_MIN = LS.get('tri_rod_min', true); /* rodapé de açõe
 /* o rodapé de ações fica na coluna da esquerda da Triagem (painel fixo ao pé da coluna); fora dela (busca geral aberta, outras telas), volta ao pé da página */
 var ROD_EL = null;
 function rodEl() { return ROD_EL || (ROD_EL = D.getElementById('rodape')); }
-function docarRodape() { try {
-  const r = rodEl(); if (!r) return;
-  const em = D.getElementById('tri-em'), bgAb = LS.get('cog_bg', false);
-  let alvo = null;
-  if (em && COG!=='acervo' && typeof abaTriagem === 'function' && abaTriagem()) alvo = TRI_SUBABA === 'triar' ? em.querySelector('aside.tri-lado') : D.getElementById('tri-col-host');
-  if (alvo) {
-    if (r.parentNode !== alvo) { if (alvo.id === 'tri-col-host') r.setAttribute('slot', 'rodape'); else r.removeAttribute('slot'); alvo.appendChild(r); }
-    if (!r.classList.contains('doca')) { r.classList.add('doca'); D.body.classList.add('rod-doca'); pintaRodape(); }
-  } else {
-    if (r.parentNode !== D.body) { r.removeAttribute('slot'); D.body.appendChild(r); }
-    if (r.classList.contains('doca')) { r.classList.remove('doca'); D.body.classList.remove('rod-doca'); pintaRodape(); }
-  }
-} catch (e) {} }
-let _rodRaf = 0;
-new MutationObserver(() => { if (_rodRaf) return; _rodRaf = requestAnimationFrame(() => { _rodRaf = 0; docarRodape(); }); }).observe(D.body, { childList: true, subtree: true });
-function pintaRodape() { const r = rodEl(); if (!PRONTO || !abaTriagem()) { r.hidden = true; D.body.classList.remove('rod-min'); return; } r.hidden = false;
-  const L = ABA === 'fila' ? FILA : [], n = SEL.size, S = sessoes();
-  if (!RODA['r-ses'] || (RODA['r-ses'] !== 'reserva' && !S.some((s) => s.data === RODA['r-ses']))) RODA['r-ses'] = S[0] ? S[0].data : 'reserva';
-  const dis = n ? '' : ' disabled';
-  const rMin = ROD_MIN && !r.classList.contains('doca');
-  if (r.classList.contains('doca') && !n) { r.classList.add('off'); r.classList.remove('min'); D.body.classList.remove('rod-min');
-    r.innerHTML = '<div class="sel dc0"><span style="font-size:12px;opacity:.85">Ações em bloco · nenhum processo marcado</span>' + (L.length ? '<button type="button" class="lk" data-r="todos">marcar os ' + nf(L.length) + ' filtrados da busca geral</button>' : '') + '<small style="color:#cfe0dc">Marque processos nas listas para pautar, julgar por monocrática ou editar em lote.</small></div>'; return; }
-  r.classList.toggle('off', !n); r.classList.toggle('min', rMin); D.body.classList.toggle('rod-min', rMin);
-  if (rMin) { r.innerHTML = '<div class="rmin"><div class="sel"><b>' + nf(n) + '</b><span style="font-size:13px;opacity:.85">selecionado(s)</span>' + (L.length ? '<button type="button" class="lk" data-r="todos">marcar os ' + nf(L.length) + ' filtrados</button>' : '') + (n ? '<button type="button" class="lk cl" data-r="limpar">limpar</button>' : '') + '</div><span style="font-size:12.5px;color:var(--m);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + (n ? 'Pautar ou julgar por monocrática: abra as ações' : 'Marque processos nas listas para pautar ou julgar por monocrática') + '</span><span style="flex:1"></span>' + (DESF.length ? '<button type="button" class="btn sm" data-r="desfazer" title="' + esc('Desfazer: ' + DESF[DESF.length - 1].rot) + '">Desfazer última</button>' : '') + '</div><button type="button" class="tog" data-r="rodmax" aria-expanded="false">Ações de triagem ▴</button>'; return; }
-  r.innerHTML = '<button type="button" class="tog cheio" data-r="rodmin" aria-expanded="true" title="Minimizar o rodapé">minimizar ▾</button><div class="sel"><span style="font-size:13px;opacity:.8">Selecionados</span><b>' + nf(n) + '</b><span style="display:flex;gap:10px;flex-wrap:wrap">' + (L.length ? '<button type="button" class="lk" data-r="todos">marcar os ' + nf(L.length) + ' filtrados</button>' : '<span style="font-size:12px;color:#cfe0dc">marque nas listas</span>') + (n ? '<button type="button" class="lk cl" data-r="limpar">limpar</button>' : '') + '</span></div>' +
-    '<div class="ac"><span class="k" style="color:var(--ok)">Pauta</span><div class="lin"><select id="r-ses" aria-label="Sessão">' + S.map((s) => '<option value="' + s.data + '"' + (s.data === RODA['r-ses'] ? ' selected' : '') + '>Sessão de ' + nomeSes(s) + ' · ' + nf((s.itens || []).length || (s.previa || []).length) + (s.itens && s.itens.length ? ' itens' : ' na pré-pauta') + '</option>').join('') + '<option value="reserva"' + (RODA['r-ses'] === 'reserva' ? ' selected' : '') + '>Banco reserva (sem sessão)</option></select><button type="button" class="btn" style="background:var(--v2);border-color:var(--v2);color:#fff" data-r="pautar"' + dis + '>' + (RODA['r-ses'] === 'reserva' ? 'Reservar' : 'Pautar') + '</button></div><small>' + (RODA['r-ses'] === 'reserva' ? 'seleção prévia sem sessão: fica no banco reserva até ganhar sessão' : 'entra na seleção prévia da sessão, na página Pautas') + '</small></div>' +
-    '<div class="ac"><span class="k" style="color:var(--az)">Monocrática</span><button type="button" class="btn" style="background:var(--az);border-color:var(--az);color:#fff" data-r="mono"' + dis + '>Julgar por monocrática</button><small>vai para o Collectio › Monocrática e para as Monocráticas da Ex Officio</small></div>' +
-    '<div class="ac"><span class="k" style="color:var(--g)">Editar em lote</span><div class="lin">' + loteCtl() + '<button type="button" class="btn" style="background:var(--v);border-color:var(--v);color:#fff" data-r="lote"' + dis + '>Aplicar</button></div><small>grava o campo na ficha de todos os marcados, num só registro</small></div>' +
-    '<div class="ac" style="border-right:0;gap:5px"><button type="button" class="btn sm" data-r="desfazer"' + (DESF.length ? '' : ' disabled') + ' title="' + esc(DESF.length ? 'Desfazer: ' + DESF[DESF.length - 1].rot : '') + '">Desfazer última</button><button type="button" class="btn sm" style="color:var(--r);border-color:var(--r2)" data-r="limpardest"' + dis + '>Limpar destino</button></div>'; }
-rodEl().addEventListener('click', (e) => { const b = e.target.closest('[data-r]'); if (!b || b.disabled) return; const k = b.dataset.r, ds = [...SEL];
-  if (k === 'rodmin' || k === 'rodmax') { ROD_MIN = k === 'rodmin'; LS.set('tri_rod_min', ROD_MIN); pintaRodape(); return; }
-  if (k === 'todos') { FILA.forEach((o) => SEL.add(o.d)); render(); return; }
-  if (k === 'limpar') { SEL.clear(); render(); return; }
-  if (k === 'desfazer') { desfazer(); return; }
-  if (k === 'pautar' && RODA['r-ses'] === 'reserva') { acao('Banco reserva da seleção prévia', ds, () => ({ sp: 'SELECIONADO PREVIAMENTE', sd: '', mono: '' })); return; }
-  if (k === 'pautar') { const ss = sessoes().find((s) => s.data === RODA['r-ses']); if (!ss) return; const nm = nomeSes(ss); acao('Pautado na sessão de ' + nm, ds, () => ({ sp: 'SELECIONADO PREVIAMENTE', sd: nm, mono: '' })); return; }
-  if (k === 'lote') { aplicarLote(ds); return; }
-  if (k === 'mono') { acao('Julgar por monocrática', ds, () => ({ sp: '', sd: '', mono: 'Monocrática' })); return; }
-  if (k === 'limpardest') { acao('Destino limpo', ds, () => ({ sp: '', sd: '', mono: '' })); } });
-
+function docarRodape(){const r=rodEl();if(!r)return;if(r.parentNode!==D.body)D.body.appendChild(r);r.removeAttribute('slot');r.classList.remove('doca');D.body.classList.remove('rod-doca');}
+function cogVisiveis(){
+ if(COG==='acervo')return FILA.map(o=>o.d);
+ const out=new Set();function scan(root){root.querySelectorAll('[data-sel],[data-selx]').forEach(el=>{const d=dg(el.dataset.sel||el.dataset.selx);if(d.length===20)out.add(d);});root.querySelectorAll('*').forEach(el=>{if(el.shadowRoot)scan(el.shadowRoot);});}
+ const em=D.getElementById('tri-em');if(em)scan(em);return [...out];
+}
+function pintaRodape(){
+ const r=rodEl();docarRodape();const on=PRONTO&&(COG==='acervo'||COG==='triagem'||COG==='selecao'||COG==='mono'),n=SEL.size,S=sessoes();
+ r.hidden=!on;D.body.classList.toggle('cog-rod-on',on);if(!on)return;
+ const dis=n?'':' disabled',val=RODA.dest||'sessao',vis=COG==='acervo'?FILA.length:null;
+ r.classList.remove('off','min');D.body.classList.remove('rod-min');
+ const op=(k,t,v)=>'<option value="'+esc(k)+'"'+(k===v?' selected':'')+'>'+esc(t)+'</option>';
+ r.innerHTML='<div class="sel"><b>'+nf(n)+'</b><span>selecionados</span><button type="button" class="btn sm" data-r="todos">'+(vis==null?'Selecionar visíveis':'Selecionar filtrados ('+nf(vis)+')')+'</button><button type="button" class="lk" data-r="limpar"'+dis+'>Limpar</button></div>'+
+ '<div class="ac cog-destinar"><span class="k">Destinar selecionados</span><div class="lin"><select id="r-dest" aria-label="Pronunciamento">'+[['sessao','Acórdão / seleção prévia'],['mono','Decisão monocrática terminativa'],['inter','Decisão interlocutória'],['desp','Despacho'],['outro','Outro destino'],['limpar','Limpar destino']].map(x=>op(x[0],x[1],val)).join('')+'</select>'+
+ (val==='sessao'?'<select id="r-ses" aria-label="Sessão prevista">'+op('reserva','Banco reserva',RODA['r-ses']||'reserva')+S.map(s=>op(s.data,'Sessão de '+nomeSes(s),RODA['r-ses'])).join('')+'</select>':val==='outro'?'<select id="r-outro" aria-label="Outro encaminhamento">'+['Vista ao MPF','Devolução ao órgão prolator','Sobrestamento','Redistribuição ou prevenção','Diligência ou intimação','Baixa ou arquivamento','Outro'].map(x=>op(x,x,RODA.outro||'Vista ao MPF')).join('')+'</select>':'')+
+ '<button type="button" class="btn pri" data-r="destinar"'+dis+'>Destinar</button></div><small>Grava o pronunciamento e o encaminhamento na ficha única. Não inclui efetivamente em pauta.</small></div>'+
+ '<div class="ac"><span class="k">Editar em lote</span><div class="lin">'+loteCtl()+'<button type="button" class="btn" data-r="lote"'+dis+'>Aplicar</button></div></div><div class="ac"><button type="button" class="btn sm" data-r="desfazer"'+(DESF.length?'':' disabled')+'>Desfazer última</button></div>';
+}
+rodEl().addEventListener('change',e=>{if(e.target.id==='r-dest'){RODA.dest=e.target.value;pintaRodape();}if(e.target.id==='r-outro')RODA.outro=e.target.value;});
+rodEl().addEventListener('click',e=>{const b=e.target.closest('[data-r]');if(!b||b.disabled)return;const k=b.dataset.r,ds=[...SEL];
+ if(k==='todos'){cogVisiveis().forEach(d=>SEL.add(d));render();return;}if(k==='limpar'){SEL.clear();render();return;}if(k==='desfazer'){desfazer();return;}if(k==='lote'){aplicarLote(ds);return;}
+ if(k!=='destinar')return;const v=RODA.dest||'sessao',s=sessoes().find(s=>s.data===RODA['r-ses']);
+ const z=v==='sessao'?{dest:'Sessão',ato:'',outro:'',sp:'SELECIONADO PREVIAMENTE',sd:s?nomeSes(s):''}:v==='outro'?{dest:'Outro destino',ato:'',outro:RODA.outro||'Vista ao MPF',sp:'',sd:''}:v==='limpar'?{dest:'',ato:'',outro:'',sp:'',sd:''}:{dest:'Monocrática',ato:{mono:'Decisão monocrática (art. 932)',inter:'Decisão interlocutória',desp:'Despacho'}[v],outro:'',sp:'',sd:''};
+ acao('Destinar · '+(z.ato||z.outro||z.dest||'limpar'),ds,()=>z);
+});
 /* ---------- atualizar acervo fonte (padrao/acervo-fonte.js: as três planilhas do dia → carga → GitHub Action) ---------- */
 let IMP = null;
 async function fonteInfo() { try { const P = PM(), k = P && P.atual; if (!k) return null; const r = await fetch('https://api.github.com/repos/trf3bdutra/procs-muta/commits?path=acervo/fonte.json&per_page=1', { cache: 'no-store', headers: { Accept: 'application/vnd.github+json', Authorization: 'Bearer ' + k } }); if (!r.ok) return null; const j = await r.json(); if (!j[0]) return null; return { em: j[0].commit.committer.date, msg: j[0].commit.message.split('\n')[0] }; } catch (e) { return null; } }
@@ -5409,6 +5376,13 @@ function painel(host,l,it,o){
   refazer=novo;ligarPf(r);desenha();
 }
 function cartao(l,it){
+ const g=(l.grupos||[]).find(x=>x.id===it.grupo)||{},e=it.equipe||{},p=it.processo,vars=(it.variacoes||[]).map(v=>((l.colunas||[]).find(x=>x.id===v)||{}).rotulo||v);
+ const m={lote:l.titulo||l.id,grupo:g.rotulo||'',variacoes:vars.join(' · '),proposta:prop(it),modelo:it.modelo||g.modelo||'',resultado:g.resultado||''};
+ const tx=(k,v)=>v?'<div class="kv"><span>'+esc(k)+'</span><p>'+esc(v)+'</p></div>':'';
+ const info=tx('Coleção',m.lote)+tx('Grupo',m.grupo)+tx('Variações',m.variacoes)+tx('Tarefa no PJe',it.tarefa)+tx('Assunto',it.assunto_detalhado||it.assunto)+tx('Partes',it.partes||[it.exequente,it.executado].filter(Boolean).join(' × '))+tx('Designação',[e.minuta,e.correcao].filter(Boolean).join(' · '));
+ return '<div class="pc2" data-pp="'+esc(p)+'"><div class="pc2-h"><div><b class="cnj">'+esc(p)+'</b> <span class="cl">'+esc(rec(it.recurso||it.classe))+'</span></div><button type="button" data-acao="ficha" data-p="'+esc(p)+'">Abrir prontuário</button></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;padding:12px"><section><h4>Painel do processo · contexto</h4>'+info+tx('Observação original do lote',it.observacao)+tx('Orientação original',it.orientacao)+'</section><section style="min-width:0"><h4>Prontuário Universal</h4>'+(window.CMTUniversal?window.CMTUniversal.html(p,{modo:OPC.chave==='mono'||OPC.chave==='selecao'?'pro':'tri',matriz:m}):'<p>Prontuário indisponível. Recarregue a página.</p>')+'</section></div></div>';
+}
+function cartaoLegado(l,it){
   const g=l.grupos.find(x=>x.id===it.grupo), c=ctl(it), cr=crt(it), t=it.triagem||{}, sa=it.situacao_atual||{}, teor=it.teor||{}, rel=cr.rel||{}, orig=cr.orig||{}, e=it.equipe||{};
   if(!FX[it.processo])lerFx(it.processo); const fx=FX[it.processo]||null, F=k=>fx&&fx[k]!=null&&fx[k]!==''?String(fx[k]):'';
   lerDecisoes(); const dec=DEC[it.processo]||null;
