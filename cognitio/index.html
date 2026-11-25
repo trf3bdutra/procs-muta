@@ -1464,6 +1464,23 @@ header#top::before{background:linear-gradient(90deg,var(--eg) 0 50%,var(--eg2) 5
 .cog-workspace.cog-full{position:fixed!important;inset:0!important;z-index:1000!important;background:var(--p,#f6f8f6);padding:16px!important;overflow:auto!important;box-sizing:border-box;max-width:none!important;width:100vw!important;height:100dvh!important}
 .cog-workspace.cog-full .cog-unified-scroll{max-height:calc(100dvh - 180px)!important}
 </style>
+<style id="cog-shared-list-v3">
+.cog-unified-scroll,.cog-unified-scroll.cog-context-compact{--cog-cnj:258px}
+.cog-list-table :is(.cog-base-case,.cog-case-cell){width:270px!important;min-width:270px!important;max-width:270px!important;white-space:normal!important;vertical-align:top!important}
+.cog-list-table :is(.cog-base-pending,.cog-pending-cell){width:224px!important;min-width:224px!important;max-width:224px!important;white-space:normal!important;vertical-align:top!important}
+.cog-list-table :is(.cog-case-cell,.cog-pending-cell){padding:7px 8px!important}
+.cog-case-actions,.cog-pending-actions{display:flex;align-items:center;flex-wrap:wrap;gap:4px;margin-bottom:4px}
+.cog-case-actions .cog-matrix-icon,.cog-pending-actions .cog-matrix-icon{font-size:10px;min-height:20px;padding:2px 4px}
+.cog-case-content{display:grid;gap:6px;max-height:190px;overflow:auto;scrollbar-width:thin}
+.cog-case-entry{min-width:0}.cog-case-entry+ .cog-case-entry{border-top:1px solid var(--line,#dce3df);padding-top:5px}
+.cog-case-entry>small{display:block;font-size:9px;font-weight:600;letter-spacing:.025em;opacity:.75;margin-bottom:2px}
+.cog-case-text{white-space:pre-wrap;overflow-wrap:anywhere;font-size:11px;line-height:1.4}
+.cog-cell-empty{font-size:10px;opacity:.65}
+.cog-pending-cell .cog-task-card{margin:0 0 5px;padding:4px 5px;grid-template-columns:auto auto 1fr;gap:5px;justify-items:start}
+.cog-pending-cell .cog-task-card small:last-child{justify-self:end}
+.cog-pending-cell .cog-id-pend{max-height:150px;overflow:auto;scrollbar-width:thin}
+.cog-id-signs .cog-id-edit{margin:0}.cog-id-signs .cog-reg-actions{margin:0}
+</style>
 </head>
 <body>
 <header id="top">
@@ -3715,7 +3732,7 @@ const COG_LIST_FIELDS=[["triagem.Tipo de Julgamento","Julg.","Tipo de julgamento
 D.addEventListener('pointerover',e=>{const td=e.target.closest?.('td[data-cog-tip]');if(!td)return;const el=td.querySelector('input:not([type=checkbox]),select,textarea');const v=el?(el.tagName==='SELECT'?el.selectedOptions[0]?.textContent:el.value):td.textContent;const tip=td.dataset.cogTip+': '+(String(v||'').trim()||'Sem registro');td.title=tip;if(el)el.title=tip;});
 function cogSideButton(k){const fechado=LS.get('cog_side_'+k,false);return '<div class="cog-side-toolbar"><button type="button" class="btn sm cog-side-toggle" data-cog-side="'+k+'" aria-expanded="'+(!fechado)+'" title="'+(fechado?'Expandir painel lateral':'Recolher painel lateral')+'" aria-label="'+(fechado?'Expandir painel lateral':'Recolher painel lateral')+'"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M9 4v16"/><path d="'+(fechado?'m13 9 3 3-3 3':'m16 9-3 3 3 3')+'"/></svg><span>Filtros</span></button></div>';}
 D.addEventListener('click',e=>{const b=e.target.closest?.('[data-cog-side]');if(!b)return;const k=b.dataset.cogSide,grid=b.closest('.cog-side-grid');if(!grid)return;const fechado=!LS.get('cog_side_'+k,false);LS.set('cog_side_'+k,fechado);grid.classList.toggle('cog-side-closed',fechado);b.closest('.cog-side-toolbar').outerHTML=cogSideButton(k);grid.querySelector('[data-cog-side]')?.focus({preventScroll:true});},true);
-const COG_FIXED_IDS=new Set(['triagem.Tipo de Julgamento','triagem.Status da triagem','triagem.O que falta sanar']);
+const COG_FIXED_IDS=new Set(['triagem.Tipo de Julgamento','triagem.Status da triagem','triagem.O que falta sanar','triagem.Detalhamento do caso','origem.Observações']);
 const COG_ROUTE_IDS=new Set(['producao.Destino','producao.Destino - Situação','producao.Mono - Tipo de ato']);
 function cogCriteriaOn(){return LS.get('cog_criteria_'+COG,LS.get('cog_view_'+COG,'matriz')!=='lista');}
 function cogShownCols(){return cogCriteriaOn()?cogColVis():[];}
@@ -3724,7 +3741,7 @@ function cogListHead(cols=cogShownCols()){
  const groups=cogDisplayGroups(cols),context=!cogListCompact(),hasBands=groups.length>0||context;
  const head=(c,i,g)=>'<th class="cog-ind-head cog-mw-'+(c.route?'route':cogMatrixWidth(c))+(i===0?' cog-band-start':'')+(c.custom?' cog-list-custom':'')+'" data-cog-group="'+esc(g)+'" title="'+esc(c.nome+' · '+(c.route?'Destino, situação para julgar e pronunciamento':cogColInfo(c).guide))+'">'+esc(c.route?'Encaminhamento':cogHeadLabel(c))+'</th>';
  const span=hasBands?' rowspan="2"':'';
- const bands='<tr class="cog-list-bands"><th class="cog-fix-check"'+span+'></th><th class="cog-fix-cnj"'+span+'>Processo · assunto / sinais</th><th class="cog-base-route"'+span+'>Encaminhamento</th>'+ (context?'<th class="cog-context-band" data-cog-band="Contexto do processo">Contexto</th>':'')+groups.map(([g,L])=>{const n=L.filter(c=>!c.route).length;return n?'<th class="cog-band" data-cog-band="'+esc(g)+'" colspan="'+n+'"><span>'+esc(g)+'</span> <small>'+n+'</small></th>':'';}).join('')+'</tr>';
+ const bands='<tr class="cog-list-bands"><th class="cog-fix-check"'+span+'></th><th class="cog-fix-cnj"'+span+'>Processo · assunto / sinais</th><th class="cog-base-case"'+span+'>Detalhamento do caso · observações</th><th class="cog-base-pending"'+span+'>Pendências · na tarefa</th><th class="cog-base-route"'+span+'>Encaminhamento</th>'+ (context?'<th class="cog-context-band" data-cog-band="Contexto do processo">Contexto</th>':'')+groups.map(([g,L])=>{const n=L.filter(c=>!c.route).length;return n?'<th class="cog-band" data-cog-band="'+esc(g)+'" colspan="'+n+'"><span>'+esc(g)+'</span> <small>'+n+'</small></th>':'';}).join('')+'</tr>';
  const fields=(context?'<th data-cog-group="Contexto do processo">Partes</th>':'')+groups.map(([g,L])=>L.filter(c=>!c.route).map((c,i)=>head(c,i,g)).join('')).join('');
  return '<thead>'+bands+(fields?'<tr class="cog-list-fields">'+fields+'</tr>':'')+'</thead>';
 }
@@ -3732,7 +3749,24 @@ function cogHeadLabel(c){const labels={'triagem.Tempestividade':'Prazo','triagem
 function cogSymbol(v){const n=nz(v||'');if(!n)return ['·',''];if(/nao se aplica|omitir|^n\/a$/.test(n))return ['–',''];if(/nao verificad|a conferir|a examinar/.test(n))return ['?',''];if(/aguard|prazo em curso|vista a abrir/.test(n))return ['◷','al'];if(/intempestiv|incabiv|^irregular|^ausente|^indeferid|^revogad|^nao recolhido|^faltante|^divergente/.test(n))return ['×','cr'];if(/pendente|incomplet|parcial|a menor|nao apresentad|^nao$/.test(n))return ['!','al'];if(/^(tempestivo|regular|cabivel|presente|confirmado|comprovado|deferida|cumprida|juntadas|apresentadas|com parecer|pronto para julgar|nao identificad[ao]|sem preliminares|dispensad[ao]|isento|assistencia da dpu)(\b|$)/.test(n))return ['✓','ok'];return ['≡',''];}
 function cogCompactField(o,c,label){const v=cogColValue(o,c),sym=cogSymbol(v),tip=c.nome+': '+(v||'Sem registro'),txt=label||sym[0];return '<button type="button" class="cog-matrix-icon '+sym[1]+'" data-cog-compact="'+esc(c.id)+'" data-d="'+esc(o.d)+'" title="'+esc(tip)+'" aria-label="'+esc(tip)+'">'+esc(txt)+'</button>';}
 function cogRouteCell(o){const d=cogFindColumn('producao.Destino'),a=cogFindColumn('producao.Destino - Situação'),p=cogFindColumn('producao.Mono - Tipo de ato'),dv=cogColValue(o,d),pv=cogColValue(o,p),dest={'Sessão':'Colegiado','Monocrática':'Relator','Outro destino':'Outro'}[dv]||dv||'A definir',ato={'Decisão monocrática (art. 932)':'Dec. mono','Decisão de urgência':'Dec. urgência','Decisão interlocutória':'Interlocutória','Decisão de admissibilidade':'Dec. admissib.','Juízo de retratação':'JR','Homologação / extinção':'Homol. / extinção'}[pv]||pv||(dv==='Sessão'?'Acórdão (previsto)':'Pronunciamento —');return '<td class="cog-route-cell"><div class="cog-route-top">'+cogCompactField(o,d,dest)+cogCompactField(o,a)+'</div>'+cogCompactField(o,p,ato)+'</td>';}
-function cogIdentity(o){const r=o.row||{},j=cogFindColumn('triagem.Tipo de Julgamento'),st=cogFindColumn('triagem.Status da triagem'),pc=cogFindColumn('triagem.O que falta sanar'),raw=cogColValue(o,j),types=raw.split(/\s*(?:\+|;|,|·)\s*/).filter(Boolean),abbr={'primeiro julgamento':'1º','apelacao':'Ap','remessa necessaria':'RemNec','agravo de instrumento':'AI','mandado de seguranca':'MS','embargos de declaracao':'ED','agravo interno':'AgInt','juizo de retratacao':'JR'},tag=types.length?types.map(t=>abbr[nz(t)]||t).join(' · '):({pj:'1º',ed:'ED',ag:'AgInt',jr:'JR'}[mpTipo(o)]||'—')+'*',manual=cogColValue(o,pc).split(/\r?\n/).map(x=>x.trim()).filter(Boolean),auto=[...new Set((o.pend||[]).map(String))].filter(x=>!manual.some(l=>nz(l).includes(nz(x)))),pend=manual.concat(auto),sign=cogSignalCell(o).replace(/^<td[^>]*>/,'').replace(/<\/td>$/,'');return '<div class="cog-id-block"><div class="cog-id-top">'+cogCopyCnj(o)+cogQuickIcon(o.d)+cogFichaIcon(o.d)+'</div><div class="cog-id-meta"><span class="at-cl" title="'+esc(o.classe||o.cl||'')+'">'+esc(o.cl||'—')+'</span>'+cogCompactField(o,j,tag)+'<span class="at-se">'+esc(o.secao||'Sem seção')+'</span></div><div class="cog-id-subject">'+esc(o.assunto||'Sem assunto')+'</div></div><div class="cog-id-signs">'+sign+'<div class="cog-id-edit">'+cogCompactField(o,st,cogTriAnalisado(o)?'✓ Triado':'○ A triar')+cogCompactField(o,pc,pend.length?'Pendências · '+pend.length:'＋ Pendência')+'</div>'+(pend.length?'<ul class="cog-id-pend">'+pend.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul>':'')+'</div>';}
+function cogIdentity(o){
+ const j=cogFindColumn('triagem.Tipo de Julgamento'),st=cogFindColumn('triagem.Status da triagem'),raw=cogColValue(o,j),types=raw.split(/\s*(?:\+|;|,|·)\s*/).filter(Boolean),abbr={'primeiro julgamento':'1º','apelacao':'Ap','remessa necessaria':'RemNec','agravo de instrumento':'AI','mandado de seguranca':'MS','embargos de declaracao':'ED','agravo interno':'AgInt','juizo de retratacao':'JR'},tag=types.length?types.map(t=>abbr[nz(t)]||t).join(' · '):({pj:'1º',ed:'ED',ag:'AgInt',jr:'JR'}[mpTipo(o)]||'—')+'*',sign=cogSignalCell(o,true).replace(/^<td[^>]*>/,'').replace(/<\/td>$/,'');
+ return '<div class="cog-id-block"><div class="cog-id-top">'+cogCopyCnj(o)+cogQuickIcon(o.d)+cogFichaIcon(o.d)+'</div><div class="cog-id-meta"><span class="at-cl" title="'+esc(o.classe||o.cl||'')+'">'+esc(o.cl||'—')+'</span>'+cogCompactField(o,j,tag)+'<span class="at-se">'+esc(o.secao||'Sem seção')+'</span></div><div class="cog-id-subject">'+esc(o.assunto||'Sem assunto')+'</div></div><div class="cog-id-signs"><div class="cog-id-edit">'+cogCompactField(o,st,cogTriAnalisado(o)?'✓ Triado':'○ A triar')+'</div>'+sign+'</div>';
+}
+function cogCaseCell(o){
+ const c=cogFindColumn('triagem.Detalhamento do caso'),detail=cogDetalhamento(o.row).trim(),notes=cogRegFields('notas').map(f=>[f.nome,cogColValue(o,f).trim()]).filter(x=>x[1]),seen=new Set(detail?[nz(detail)]:[]),unique=notes.filter(x=>{const k=nz(x[1]);if(seen.has(k))return false;seen.add(k);return true;});
+ const item=(label,body)=>'<div class="cog-case-entry"><small>'+esc(label)+'</small><div class="cog-case-text">'+esc(body)+'</div></div>';
+ return '<td class="cog-case-cell"><div class="cog-case-actions">'+cogCompactField(o,c,'✎ Caso')+cogRegLabels(o,['notas'])+'</div><div class="cog-case-content">'+(detail?item('Detalhamento',detail):'')+unique.map(x=>item(x[0],x[1])).join('')+(!detail&&!unique.length?'<span class="cog-cell-empty">Sem registro</span>':'')+'</div></td>';
+}
+function cogPendingItems(o){
+ const c=cogFindColumn('triagem.O que falta sanar'),manual=cogColValue(o,c).split(/\r?\n|;\s*/).map(x=>x.replace(/^\s*(?:[•–-]|\d+[.)])\s+/,'').trim()).filter(Boolean),out=[],seen=new Set();
+ for(const x of manual.concat((o.pend||[]).map(String))){const k=nz(x).trim();if(k&&!seen.has(k)){seen.add(k);out.push(x);}}return out;
+}
+function cogTaskMarkup(o){const d=atDias(o);return '<div class="cog-task-card" title="'+esc(o.tarefa||'')+'"><small>Na tarefa</small><b class="at-d'+(d>180?' cr':d>60?' al':'')+'">'+(d==null?'—':d+' dias')+'</b><small>'+esc(o.desde?br(o.desde):'')+'</small></div>';}
+function cogPendingCell(o){
+ const c=cogFindColumn('triagem.O que falta sanar'),pend=cogPendingItems(o);
+ return '<td class="cog-pending-cell">'+cogTaskMarkup(o)+'<div class="cog-pending-actions">'+cogCompactField(o,c,pend.length?'✎ Pendências · '+pend.length:'＋ Pendência')+'</div>'+(pend.length?'<ul class="cog-id-pend">'+pend.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul>':'<span class="cog-cell-empty">Sem pendências registradas</span>')+'</td>';
+}
 async function cogCompactDialog(o,c){const fields=[c,...cogExtraFields(c.id)],d=D.createElement('dialog');d.className='cog-create-lot cog-reg-dialog cog-criterion-dialog';d.innerHTML='<form><header><h3>'+esc(c.nome)+'</h3><button type="button" data-cancel aria-label="Fechar">×</button></header><small>'+esc(o.cnj)+'</small><div data-reg-fields>Lendo a ficha única…</div><p role="status"></p><footer><button type="button" class="btn" data-cancel>Cancelar</button><button type="submit" class="btn pri" disabled>Salvar</button></footer></form>';D.body.appendChild(d);d.addEventListener('close',()=>d.remove(),{once:true});d.querySelectorAll('[data-cancel]').forEach(b=>b.onclick=()=>d.close());d.showModal();const form=d.querySelector('form'),status=form.querySelector('[role=status]'),save=form.querySelector('[type=submit]');let current;try{current=await fichaPlana(o.cnj);}catch(err){status.textContent=err.message;return;}if(!d.open)return;const base={};form.querySelector('[data-reg-fields]').innerHTML=fields.map(f=>{const key=f.id.slice(f.id.indexOf('.')+1),v=String(current[key]??cogColValue(o,f));base[f.id]=v;let input=cogCriterionInput(o,f,v);if(f.id==='triagem.Tipo de Julgamento'){const selected=v.split(/\s*(?:\+|;|,|·)\s*/).filter(Boolean);input='<select multiple size="5" data-criterion-field="'+esc(f.id)+'" aria-label="Tipo de julgamento">'+[...new Set(cogColInfo(f).opts.concat(selected))].map(x=>'<option value="'+esc(x)+'"'+(selected.includes(x)?' selected':'')+'>'+esc(x)+'</option>').join('')+'</select><small>Ctrl ou Shift para selecionar mais de um tipo.</small>';}return '<label>'+esc(f.nome)+input+'</label>';}).join('');save.disabled=false;form.onsubmit=async e=>{e.preventDefault();const patch={};form.querySelectorAll('[data-criterion-field]').forEach(el=>{const v=el.multiple?[...el.selectedOptions].map(x=>x.value).join(' + '):el.value;if(v!==base[el.dataset.criterionField])patch[el.dataset.criterionField]=v;});if(!Object.keys(patch).length){d.close();return;}save.disabled=true;try{await cogFichaGravar(o.cnj,patch);d.close();refazAtTab();toast('Registro atualizado.');}catch(err){status.textContent=err.message;save.disabled=false;}};}
 D.addEventListener('click',e=>{const b=e.target.closest?.('[data-cog-compact]');if(!b)return;e.preventDefault();e.stopPropagation();const o=IDX.get(b.dataset.d),c=cogFindColumn(b.dataset.cogCompact);if(o&&c)cogCompactDialog(o,c);},true);
 D.addEventListener('click',e=>{const b=e.target.closest?.('[data-cog-criteria]');if(!b)return;e.preventDefault();LS.set('cog_criteria_'+COG,!cogCriteriaOn());refazAtTab();},true);
@@ -3749,7 +3783,7 @@ function cogListIndicador(o,f){
 }
 function atLinha(o,cols=cogShownCols()){
  const tri=atTri(o),groups=cogDisplayGroups(cols),prt=groups.flatMap(([g,L])=>L.filter(c=>!c.route).map((c,i)=>{const h=cogColCell(o,c);return i===0?h.replace('class="at-pr','class="cog-band-start at-pr'):h;}));
- return '<tr tabindex="0" aria-expanded="false" class="at-r'+(SEL.has(o.d)?' sel':'')+(tri?' tri':'')+'"><td class="cog-fix-check"><input type="checkbox" data-sel="'+o.d+'"'+(SEL.has(o.d)?' checked':'')+' aria-label="Selecionar '+esc(o.cnj)+'"></td><td class="at-p cog-fix-cnj">'+cogIdentity(o)+'</td>'+cogRouteCell(o)+(!cogListCompact()?'<td class="cog-context-id">'+esc(o.partes||'')+'</td>':'')+prt.join('')+'</tr><tr class="cog-note-row'+(SEL.has(o.d)?' sel':'')+'"><td colspan="'+cogListSpan(cols)+'">'+cogNotasRodape(o)+'</td></tr>';
+ return '<tr tabindex="0" aria-expanded="false" class="at-r'+(SEL.has(o.d)?' sel':'')+(tri?' tri':'')+'"><td class="cog-fix-check"><input type="checkbox" data-sel="'+o.d+'"'+(SEL.has(o.d)?' checked':'')+' aria-label="Selecionar '+esc(o.cnj)+'"></td><td class="at-p cog-fix-cnj">'+cogIdentity(o)+'</td>'+cogCaseCell(o)+cogPendingCell(o)+cogRouteCell(o)+(!cogListCompact()?'<td class="cog-context-id">'+esc(o.partes||'')+'</td>':'')+prt.join('')+'</tr><tr class="cog-note-row'+(SEL.has(o.d)?' sel':'')+'"><td colspan="'+cogListSpan(cols)+'">'+cogNotasRodape(o)+'</td></tr>';
 }
 /* Um único recorte e uma única ordenação para as visualizações nativas. */
 function cogTriOrdenar(L,ord=LS.get('tri_ato','antigos')){
@@ -3944,7 +3978,7 @@ function cogColGroup(c){if(!c.custom&&COG_PREPARO_MATRIX.has(c.id))return 'Prepa
 function cogColAgrupar(cols){const M=new Map(COG_COL_GROUPS.map(g=>[g,[]]));cols.forEach(c=>M.get(cogColGroup(c)).push(c));return [...M.entries()].filter(x=>x[1].length);}
 function cogColVis(){const l=cogMatLayout();const ordered=[...l.S,...l.C].filter(c=>!cogRegKind(c)&&(!cogListCompact()||!cogContextField(c))&&cogColumnEnabled(c,l.p)).sort((a,b)=>{if(!l.p)return 0;const i=l.p.ord.indexOf(a.id),j=l.p.ord.indexOf(b.id);return (i<0?999:i)-(j<0?999:j);});return cogColAgrupar(ordered).flatMap(x=>x[1]);}
 function cogListCompact(){return !!LS.get('cog_list_compact_'+COG,true);}
-function cogListSpan(cols){return 3+(!cogListCompact()?1:0)+cogDisplayGroups(cols).reduce((n,[g,L])=>n+L.filter(c=>!c.route).length,0);}
+function cogListSpan(cols){return 5+(!cogListCompact()?1:0)+cogDisplayGroups(cols).reduce((n,[g,L])=>n+L.filter(c=>!c.route).length,0);}
 
 function cogServidorCampo(k){return /(?:^|\.)(?:Responsável|SERVIDOR|CORRETOR|Destino - Confirmado por)$| - Responsável$/.test(k);}
 function cogEquipeCadastro(){const a=equipeAtual();return a.length?a:(COG_SESSAO?.equipe||[]);}
@@ -3965,14 +3999,14 @@ function cogRegFields(kind){
  return [...M.values()].filter(c=>cogRegKind(c)===kind);
 }
 function cogLiminarPendente(o){return !!o.liminar&&!/apreciad|deferid|indeferid|prejudicad|revogad|julgad/i.test(String(o.row?.['Urgência - Apreciação']||'').replace(/^não apreciad[ao]/i,''));}
-function cogSignalCell(o){
- const r=o.row||{},d=atDias(o),tri=cogTriAnalisado(o),pr=atTri(o),lim=cogLiminarPendente(o);
- const chips=[tri?['Triado','ok']:['A triar',''],pr?['Com prontuário','ok']:null,o.prior?['Prioridade','al']:null,lim?['Liminar pendente','cr']:null,o.sigiloso?['Sigiloso','al']:null,o.div?['Divergência','al']:null].filter(Boolean);
- return '<td class="cog-sign-cell"><div class="cog-sign-tags">'+chips.map(([t,c])=>'<span class="cog-sign-chip '+c+'">'+esc(t)+'</span>').join('')+'</div><div class="cog-task-card" title="'+esc(o.tarefa||'')+'"><small>Na tarefa</small><b class="at-d'+(d>180?' cr':d>60?' al':'')+'">'+(d==null?'—':d+' dias')+'</b><small>'+esc(o.desde?br(o.desde):'')+'</small></div><div class="cog-reg-actions">'+cogRegLabels(o)+'</div></td>';
+function cogSignalCell(o,compact=false){
+ const tri=cogTriAnalisado(o),pr=atTri(o),lim=cogLiminarPendente(o);
+ const chips=[compact?null:tri?['Triado','ok']:['A triar',''],pr?['Com prontuário','ok']:null,o.prior?['Prioridade','al']:null,lim?['Liminar pendente','cr']:null,o.sigiloso?['Sigiloso','al']:null,o.div?['Divergência','al']:null].filter(Boolean);
+ return '<td class="cog-sign-cell"><div class="cog-sign-tags">'+chips.map(([t,c])=>'<span class="cog-sign-chip '+c+'">'+esc(t)+'</span>').join('')+'</div>'+(compact?'':cogTaskMarkup(o))+'<div class="cog-reg-actions">'+cogRegLabels(o,compact?['sinais']:['sinais','notas'])+'</div></td>';
 }
-function cogRegLabels(o){
+function cogRegLabels(o,kinds=['sinais','notas']){
  const r=o.row||{},sys=[o.prior?'Prioridade legal':'',cogLiminarPendente(o)?'Liminar pendente':'',o.sigiloso?'Sigiloso':'',o.div?'Divergência de seção':''].filter(Boolean);
- return ['sinais','notas'].map(kind=>{
+ return kinds.map(kind=>{
  const list=cogRegFields(kind).map(c=>[c.nome,cogColValue(o,c)]).filter(x=>x[1]);
  const tip=(kind==='sinais'?'Sinalizações':'Observações')+(list.length||kind==='sinais'&&sys.length?':\n'+(kind==='sinais'?sys.concat(list.map(x=>x.join(': '))):list.map(x=>x.join(': '))).join('\n'):' · adicionar');
  return '<button type="button" class="cog-reg-label'+(list.length||kind==='sinais'&&sys.length?' has-reg':'')+'" data-cog-reg="'+kind+'" data-d="'+esc(o.d)+'" title="'+esc(tip)+'" aria-label="'+esc(tip)+'">'+(kind==='sinais'?'⚑':'✎')+' '+(kind==='sinais'?'Sinais':'Notas')+(list.length?' · '+list.length:'')+'</button>';
