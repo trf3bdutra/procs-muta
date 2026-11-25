@@ -3,11 +3,12 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
 *{box-sizing:border-box}body{margin:0;font:14px Figtree,system-ui,sans-serif;color:#263b34;background:#f5f6f3}header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 24px;background:#fff;border-bottom:1px solid #d8ded8}header a{color:inherit;text-decoration:none;font-weight:650}header nav{display:flex;gap:18px;align-items:center}header small{color:#637469}#pagina{max-width:1450px;margin:auto;padding:24px}h1{font-size:25px;margin:0 0 8px}p{line-height:1.5}#estado{color:#52695d}#motor{position:absolute;width:1px;height:1px;left:-10000px;border:0}#editor #rg.embutida{min-height:65vh}#editor #rg.embutida>nav{display:none}#editor #rg.embutida>main{grid-column:1/-1;width:100%}#editor #rg.embutida{grid-template-columns:minmax(0,1fr)}@media(max-width:600px){header{padding:12px;flex-wrap:wrap}#pagina{padding:12px}}
+#motor.etiquetas-pronto{position:static;display:block;width:100%;height:calc(100dvh - 155px);min-height:440px;border:1px solid #d8ded8;border-radius:8px;background:#edf1f3}#pagina:has(+ #motor.etiquetas-pronto){padding-bottom:8px}body>#motor.etiquetas-pronto{width:calc(100% - 32px);margin:0 16px 16px}
 </style></head><body>
 <header><a href="/caput/">CMT · Caput</a><nav><a href="/caput/chefia">Chefia</a><a href="/cognitio/">Cognitio</a><a href="/exofficio/">Ex Officio</a></nav><small id="usuario"></small></header>
 <main id="pagina"><h1>Regras de etiquetas</h1><p>Administração das conversões de etiquetas do PJe. As regras gerais são compartilhadas com a preparação das pautas e os demais consumidores do motor.</p><p id="estado" role="status">Verificando a sessão institucional…</p><div id="editor"></div></main>
 <iframe id="motor" title="Motor de regras" src="about:blank" aria-hidden="true"></iframe>
-<script src="/cognitio/auth.js"></script><script src="/init/assets/js/regras-gerais.js"></script>
+<script src="/cognitio/auth.js"></script>
 <script>
 (async function(){
  const estado=document.getElementById('estado'),frame=document.getElementById('motor'),motor=()=>frame.contentWindow;
@@ -17,14 +18,15 @@
  if(!s){estado.textContent='Entre no Ex Officio e retorne a esta página.';return;}
  if(!s.gestor){estado.textContent='A administração das regras é restrita à Chefia.';return;}
  document.getElementById('usuario').textContent=s.usuario+' · Gestor';
- await CognitioAuth.ponte();estado.textContent='Carregando regras do gabinete…';frame.src='/init/motor/index.html?cognitio=1';
+ await CognitioAuth.ponte();estado.textContent='Carregando regras do gabinete…';frame.src='/caput/motor/index.html?cognitio=1';
  const P=await aguardar(()=>motor().ProcsMuta);if(P.pronto)await P.pronto;
  const bridge=await aguardar(()=>motor().__ghPonte);if(!await bridge.confere())throw Error('Sessão sem acesso ao acervo.');
  if(P.atual!==bridge.SENT){const r=await P.definir(bridge.SENT,false);if(!r||!r.ok)throw Error('Não foi possível conectar o motor.');}
  const G=motor().__acervoGitHub;if(G&&G.token){G.token(bridge.SENT);if(G.puxar)G.puxar(true);}
  await aguardar(()=>{const sm=motor().CMTSessao;return sm&&sm.regrasEtiquetas&&(!sm.repoLido||sm.repoLido());});
- if(!window.CMTRegrasGerais)throw Error('Editor de regras indisponível.');
- CMTRegrasGerais.embutir(document.getElementById('editor'),{motor, pagina:'chefia',etiquetasAdmin:true,aba:'etiquetas',abas:['etiquetas'],abrirMotor:(aba)=>motor().CMTSessao.abrir(aba)});
+ if(!motor().CMTSessao.abrirEtiquetasCaput)throw Error('Editor original de regras indisponível nesta versão.');
+ motor().CMTSessao.abrirEtiquetasCaput();
+ frame.classList.add('etiquetas-pronto');frame.removeAttribute('aria-hidden');
  estado.hidden=true;
  window.addEventListener('focus',async()=>{try{const atual=await CognitioAuth.lerSessao();if(!atual||!atual.gestor||atual.usuario!==s.usuario)location.reload();}catch(e){}});
  }catch(e){estado.hidden=false;estado.textContent=e.message;}
