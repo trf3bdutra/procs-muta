@@ -1445,31 +1445,7 @@ html[data-theme=dark] .pc-s.inc{background:#2a1c1f;border-color:#6b3a36}html[dat
   }
   function alcance(r) { var n = 0, ex = []; contagemEtiquetas().forEach(function (e) { if (casaRegra(r, N(e.t))) { n += e.n; if (ex.length < 6) ex.push(e.t); } }); return { n: n, ex: ex }; }
   function telaRegras() {
-    var h = '<div class="cs-note">As regras convertem etiquetas do acervo em marcações (META, ED, AgInt, JR, tema, especificidade, MPF) ou mandam ignorá-las. A etiqueta continua no acervo principal; no painel aparece só a marcação. ' +
-      'Termos: sem prefixo = <b>começa por</b>; <code>=</code> igual; <code>*</code> contém; <code>$</code> termina com; <code>/…/</code> expressão regular. Um termo por linha.</div>';
-    h += '<div class="cs-bar"><select class="cs-sel" data-cs-novo-ef>' + Object.keys(EF).map(function (k) { return '<option value="' + k + '">' + esc(EF[k].t) + '</option>'; }).join('') + '</select><button class="cs-btn pri" data-cs="nova-regra">Nova regra</button>' +
-      '<button class="cs-btn" data-cs="exp-regras">Exportar regras (JSON)</button><button class="cs-btn" data-cs="imp">Importar JSON</button><button class="cs-btn" data-cs="regras-padrao">Restaurar padrão</button></div>';
-    h += '<div class="cs-grid"><div>';
-    S.regras.forEach(function (r) {
-      var a = alcance(r), aberta = UI.regraAberta === r.id;
-      h += '<div class="cs-rule' + (r.on ? '' : ' off') + '" data-regra="' + esc(r.id) + '"><div class="h"><button class="cs-tg" data-cs="on-regra" aria-pressed="' + r.on + '">' + (r.on ? 'ativa' : 'desligada') + '</button>' +
-        '<b>' + esc(r.nome || EF[r.ef].t) + (r.v ? ' · ' + esc(r.v) : '') + '</b><span class="cs-mut">' + a.n + ' processo(s)</span><span class="cs-sp" style="flex:1"></span>' +
-        '<button class="cs-btn" data-cs="abrir-regra">' + (aberta ? 'Fechar' : 'Editar') + '</button></div>' +
-        '<div class="cs-mut" style="margin-top:4px">' + r.termos.map(function (x) { return '<code>' + esc(termoParaTexto(x)) + '</code>'; }).join(' ') + (a.ex.length ? ' · ex.: ' + a.ex.map(esc).join(', ') : '') + '</div>';
-      if (aberta) {
-        h += '<div class="cs-row"><label>Efeito <select class="cs-sel" data-rf="ef">' + Object.keys(EF).map(function (k) { return '<option value="' + k + '"' + (k === r.ef ? ' selected' : '') + '>' + esc(EF[k].t) + '</option>'; }).join('') + '</select></label>' +
-          (EF[r.ef].v ? '<label>' + esc(EF[r.ef].v) + ' <input class="cs-in" data-rf="v" value="' + esc(r.v) + '"></label>' : '') +
-          '<label>Nome <input class="cs-in" data-rf="nome" value="' + esc(r.nome) + '"></label></div>' +
-          '<label class="cs-mut">Termos (um por linha)</label><textarea data-rf="termos">' + esc(r.termos.map(termoParaTexto).join('\n')) + '</textarea>' +
-          '<label class="cs-mut">Exceções (um por linha; padrão: contém)</label><textarea data-rf="exceto" style="min-height:44px">' + esc(r.exceto.map(function (x) { return x.m === 'contem' ? x.t : termoParaTexto(x); }).join('\n')) + '</textarea>' +
-          '<div class="cs-row"><label>Só para as classes (separe por ;) <input class="cs-in" style="min-width:260px" data-rf="classes" value="' + esc(r.classes.join('; ')) + '"></label><label>Nota <input class="cs-in" style="min-width:220px" data-rf="nota" value="' + esc(r.nota) + '"></label></div>' +
-          '<div class="cs-row"><button class="cs-btn pri" data-cs="salvar-regra">Aplicar</button><button class="cs-btn" data-cs="apagar-regra">Apagar regra</button></div>';
-      }
-      h += '</div>';
-    });
-    h += '</div><div><div class="cs-card"><h2>Etiquetas do acervo</h2><p class="n">Cada etiqueta, quantos processos a têm e o que as regras fazem com ela.</p>' +
-      '<input class="cs-in" style="width:100%" placeholder="Buscar etiqueta…" data-cs-etq value="' + esc(UI.etqQ) + '"><div id="cs-etq-list">' + listaEtiquetas() + '</div></div></div></div>';
-    return h;
+    return '<div class="cs-note">A administração das regras gerais de etiquetas está centralizada no Caput. As regras específicas de pauta permanecem no fluxo de etiquetagem da sessão.</div><a class="cs-btn pri" href="/caput/etiquetas/" target="_top">Abrir Regras de etiquetas</a>';
   }
   function listaEtiquetas() {
     var q = N(UI.etqQ), L = contagemEtiquetas().filter(function (e) { return !q || N(e.t).indexOf(q) >= 0; });
