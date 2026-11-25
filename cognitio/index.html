@@ -1215,6 +1215,19 @@ header#top::before{background:linear-gradient(90deg,var(--eg) 0 50%,var(--eg2) 5
 #top #marca{min-height:44px}#top .nx-ey{font-size:9px}#top .nx-on{font-size:19px}#top .eqsp{display:none}#top #modulos{order:4;flex:1 1 100%;margin:0 -12px;border-top:1px solid var(--el);min-height:50px}
 #top .cn-in{flex:1;border-left:0}#top #modulos .cn-b{flex:1 1 0;min-width:max-content;flex-direction:column;justify-content:center;gap:2px;padding:6px 8px;font-size:12px}#top #modulos .cn-b::before{display:block}
 #top #estado{order:5;flex:1 1 100%;justify-content:flex-end;border-top:1px solid var(--el);min-height:38px}#top #st-grava span{display:inline}#top .ac-u{max-width:96px}}
+</style><style>
+/* Acervo: duas seções permanentes, sem acordeões ou duplicação da matriz operacional. */
+.cog-ac-over{margin:0 0 22px}
+.cog-ac-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:14px 0 12px;border-bottom:1px solid var(--b);margin-bottom:12px}
+.cog-ac-head .k{color:var(--m);font-size:10px;letter-spacing:.13em}
+.cog-ac-head h1,.cog-ac-head h2{font:650 25px/1.1 Figtree,"Segoe UI",sans-serif;letter-spacing:-.035em;color:var(--v);margin:5px 0 0}
+.cog-ac-head h2{font-size:21px}
+.cog-ac-meta{font:12px/1.5 Figtree,"Segoe UI",sans-serif;color:var(--m)}
+.cog-ac-meta b{font-family:"JetBrains Mono",monospace;color:var(--v)}
+.cog-ac-over .kpis{margin:0 0 12px}
+.cog-ac-over .ini-grid{margin:0}
+.cog-ac-search-head{margin-top:22px;scroll-margin-top:80px}
+@media(max-width:760px){.cog-ac-head{align-items:flex-start;gap:8px}.cog-ac-head h1{font-size:22px}}
 </style></head>
 <body>
 <header id="top">
@@ -2872,7 +2885,7 @@ function vInicio(emb) {
   const semD = U.filter((o) => !o.dest.k), tri = semD.filter((o) => o.prov === 'tri');
   const aptos = U.filter((o) => o.apto), comPend = aptos.filter((o) => o.pend.length), prontos = aptos.filter((o) => !o.pend.length), prM = prontos.filter((o) => o.monoE), prC = prontos.filter((o) => !o.monoE);
   const cands = U.filter((o) => o.cand && !o.dest.k), dados = U.filter((o) => o.dest.k);
-  const k = (cor, rot, n, sub, rg, conj) => '<button type="button" class="kpi" style="box-shadow:inset 0 3px 0 ' + cor + '" data-conj="' + conj + '"><span class="k" style="color:' + cor + '">' + rot + '</span><b style="color:' + cor + '">' + nf(n) + '</b><span class="sub">' + sub + '</span>' + (rg ? '<span class="kr">' + rg + '</span>' : '') + '<span class="lk" style="margin-top:2px">Abrir na Fila →</span></button>';
+  const k = (cor, rot, n, sub, rg, conj) => '<button type="button" class="kpi" style="box-shadow:inset 0 3px 0 ' + cor + '" data-conj="' + conj + '"><span class="k" style="color:' + cor + '">' + rot + '</span><b style="color:' + cor + '">' + nf(n) + '</b><span class="sub">' + sub + '</span>' + (rg ? '<span class="kr">' + rg + '</span>' : '') + '<span class="lk" style="margin-top:2px">Consultar processos →</span></button>';
   REG = {}; reg('tri', 'Sem caminho definido', tri); reg('pr', 'Prontos para julgar', prontos); reg('prc', 'Prontos · colegiado', prC); reg('prm', 'Prontos · decisão do relator', prM); reg('cand', 'Candidatos à monocrática', cands); reg('dados', 'Já com destino da triagem', dados); reg('novas', 'Tarefas não classificadas', NOVAS); reg('pend', 'Aptos com pendência', comPend);
   let h = emb ? '' : '<div class="wrap"><div class="ini-cab"><div><p class="k" style="margin:0">Triagem · início</p><p>Só o que leva a uma decisão de triagem. Cada número abre os processos na Fila, já filtrados.</p></div><div style="display:flex;gap:10px;align-items:center;font-size:12.5px;color:var(--m2)"><span><b class="mono" style="font-weight:500;color:var(--v)">' + nf(U.length) + '</b> em triagem</span><span><b class="mono" style="font-weight:500;color:var(--v)">' + nf(U.filter((o) => o.dest.k).length) + '</b> com destino da triagem</span></div></div>';
   /* totais do funil de triagem (prévia "Triagem · funil", 23/11/2026): cada processo em triagem cai num só total */
@@ -2882,7 +2895,7 @@ function vInicio(emb) {
     k('#8a2f22', 'Com pendência', F4.pend.length, 'aguardam ato ou prazo', 'etiqueta ou tarefa de pendência, ainda sem destino', 'fpend') +
     k('#3f6f94', 'Prontos · monocrática', F4.mono.length, nf(F4.mono.filter((o) => o.dest.k === 'mono').length) + ' com destino confirmado', 'aptos para decisão do relator ou candidatos à monocrática, sem pendência', 'fmono') +
     k('#235a55', 'Prontos · sessão', F4.ses.length, tp(F4.ses), 'aptos para o colegiado ou já mandados à pauta, sem pendência', 'fses') + '</div>';
-  h += selecoesPrevias(prC, prM);
+  /* Cognitio: a seleção prévia tem página própria. Não repetir as sessões no Acervo. */
   /* destino provável */
   const tot = U.length || 1, gD = DEST.map((x) => [x, U.filter((o) => o.prov === x[0])]).filter((x) => x[1].length).sort((a, b) => b[1].length - a[1].length), mx = Math.max(1, ...gD.map((x) => x[1].length));
   let dp = '<section class="card"><div class="ch"><h2>Destino provável</h2><p>' + nf(U.length) + ' em triagem · pela tarefa no PJe e pelas etiquetas</p></div><div class="li hd" style="grid-template-columns:minmax(0,1fr) 120px 56px 40px"><span>Destino</span><span></span><span style="text-align:right">Proc.</span><span style="text-align:right">%</span></div>';
@@ -2912,14 +2925,12 @@ function vInicio(emb) {
   ESCOPO.triar.map((x) => [x, U.filter((o) => nzT(o.tarefa) === nzT(x[0]))]).sort((a, b) => b[1].length - a[1].length).forEach(([x, L], i) => { reg('tf' + i, 'Tarefa: ' + x[0], L);
     pr += '<button type="button" class="li" data-conj="tf' + i + '" style="grid-template-columns:minmax(0,1fr) 90px 56px"><span><b style="font-weight:600">' + esc(x[0]) + '</b><small>' + esc(x[1]) + '</small></span><span class="hb"><i style="width:' + Math.max(1, Math.round(100 * L.length / tot)) + '%;background:var(--v2)"></i></span><span class="n">' + nf(L.length) + '</span></button>'; });
   pr += '</section>';
-  h += '<div class="ini-grid"><div class="col">' + dp + cd + '</div><div class="col">' + ms + pr + '</div></div>' + matrizTriagem() + (emb ? '' : '</div>');
+  h += '<div class="ini-grid"><div class="col">' + dp + cd + '</div><div class="col">' + ms + pr + '</div></div>' + (emb ? '' : '</div>');
   return h; }
 let REG = {}, INI_MAS = false;
 /* Visão geral da triagem (o antigo Início) no topo da Triagem, recolhível; cada número abre o conjunto na lista */
 function visaoGeral() {
-  const ab = LS.get('cog_vg', true), F4 = funilTriagem();
-  const res = [['#5c6b67', nf(F4.nao.length), 'não triados'], ['#8a2f22', nf(F4.pend.length), 'com pendência'], ['#3f6f94', nf(F4.mono.length), 'prontos · monocrática'], ['#235a55', nf(F4.ses.length), 'prontos · sessão']].map((x) => '<span><b style="color:' + x[0] + '">' + x[1] + '</b> ' + x[2] + '</span>').join('');
-  return '<section class="tri-vg' + (ab ? ' ab' : '') + '"><button type="button" class="tri-vg-h" data-vg aria-expanded="' + ab + '"><span class="k">Visão geral da triagem</span><span class="tri-vg-r">' + res + '</span><span class="tri-vg-t">' + (ab ? 'recolher ▴' : 'abrir ▾') + '</span></button>' + (ab ? '<div class="tri-vg-c">' + vInicio(true) + '</div>' : '') + '</section>'; }
+  return '<section class="cog-ac-over" aria-labelledby="cog-ac-title"><div class="cog-ac-head"><div><span class="k">Acervo processual</span><h1 id="cog-ac-title">Visão geral da triagem</h1></div><span class="cog-ac-meta"><b>' + nf(U.length) + '</b> em triagem · <b>' + nf(ALL.length) + '</b> na fonte</span></div>' + vInicio(true) + '</section>'; }
 /* funil de triagem: Com pendência, Prontos · monocrática, Prontos · sessão e, no resto, Não triados */
 function funilTriagem() {
   const pend = [], mono = [], ses = [], nao = [];
@@ -3272,7 +3283,7 @@ document.addEventListener('click', (e) => {
 let _atT = null;
 document.addEventListener('input', (e) => { const t = e.target; if (!t.matches || !t.matches('[data-atq]')) return; LS.set('tri_atq', t.value);
   clearTimeout(_atT); _atT = setTimeout(() => { const tb = document.getElementById('at-tab'); if (tb) tb.innerHTML = atCorpo(LS.get('tri_triar_tarefa', '')); }, 250); }, true);
-document.addEventListener('click', (e) => { const t = e.target.closest && e.target.closest('[data-bg]'); if (!t) return; e.preventDefault(); e.stopPropagation(); LS.set('cog_bg', !LS.get('cog_bg', false)); render(); }, true);
+
 document.addEventListener('click', (e) => { const t = e.target.closest && e.target.closest('[data-atmais]'); if (!t) return; e.preventDefault(); e.stopPropagation();
   const g = t.dataset.atmais; LS.set('tri_atlim_' + g, LS.get('tri_atlim_' + g, 60) + 100); const tb = document.getElementById('at-tab'); if (tb) tb.innerHTML = atTabela(LS.get('tri_triar_tarefa', '')); }, true);
 document.addEventListener('change', (e) => { const t = e.target; if (!t.matches || !t.matches('[data-atso],[data-ato]')) return;
@@ -3583,13 +3594,10 @@ function subPainelEm(p, aba) {
 function vFila(cab, estilo) {
   if(COG!=='acervo'){FILA=[];return '<div class="wrap tri-larga">'+painelEmTriagem()+'</div>';}
   const L = ordenar(filtrar(F.conj ? ALL : BASE())); FILA = L;
-  /* Busca geral recolhida (padrão): a lista do acervo só é montada ao abrir, como a Visão geral */
-  const bgAb = LS.get('cog_bg', true);
-  const bgBarra = (ab) => '<section class="tri-vg tri-bg' + (ab ? ' ab' : '') + '"><button type="button" class="tri-vg-h" data-bg aria-expanded="' + ab + '"><span class="k">Busca geral no acervo em triagem</span><span class="tri-vg-r"><span><b>' + nf(L.length) + '</b> no acervo filtrado</span><span><b>' + nf(ALL.length) + '</b> na fonte</span><span>busca, critérios, filtros salvos, mapa do fluxo e exportação</span></span><span class="tri-vg-t">' + (ab ? 'recolher ▴' : 'abrir ▾') + '</span></button></section>';
-  if (!F.conj && !bgAb) return '<div class="wrap tri-larga"' + (estilo || '') + '>' + (cab || '') + visaoGeral() + bgBarra(false) + '</div>';
+  const bgBarra = () => '<div class="cog-ac-head cog-ac-search-head"><div><span class="k">Consulta processual</span><h2>Busca geral no acervo</h2></div><span class="cog-ac-meta"><b>' + nf(L.length) + '</b> no acervo filtrado · <b>' + nf(ALL.length) + '</b> na fonte</span></div>';
   const ch = chipsAtivos(), salvos = LS.get('tri_filtros', []);
   /* visão geral da triagem primeiro; busca e filtros depois dela */
-  let h = '<div class="wrap tri-larga"' + (estilo || '') + '>' + (cab || '') + (visaoGeral() + bgBarra(true)) + '<div class="fl-cab" id="tri-busca-geral"><div class="fl-l1" style="position:relative">' +
+  let h = '<div class="wrap tri-larga"' + (estilo || '') + '>' + (cab || '') + (visaoGeral() + bgBarra()) + '<div class="fl-cab" id="tri-busca-geral"><div class="fl-l1" style="position:relative">' +
     '<div class="seg" role="group" aria-label="Modo de busca"><button type="button" data-modo="texto" class="' + (F.modo === 'texto' ? 'on' : '') + '" title="Busca em todos os campos">Texto</button><button type="button" data-modo="lote" class="' + (F.modo === 'lote' ? 'on' : '') + '" title="Colar uma lista de números de processo">Lote</button></div>' +
     (F.modo === 'texto' ? '<label class="busca"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#5c6b67" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="fl-q" type="search" aria-label="Buscar" placeholder="número, assunto, partes, etiqueta, tarefa…" value="' + esc(F.q) + '"><small>“trecho exato” · -exclui</small></label>'
       : '<label class="busca"><textarea id="fl-lote" aria-label="Números de processo" rows="2" placeholder="Cole os números (um por linha ou em qualquer formato)">' + esc(F.lote) + '</textarea></label>') +
@@ -3605,7 +3613,7 @@ function vFila(cab, estilo) {
   h += '<div class="fl-grid"><aside class="rail" aria-label="Filtros">' + rail() + '</aside><div class="fl-main">';
   h += '<div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center"><b style="font-size:14px"><span class="mono">' + nf(L.length) + '</span> de ' + nf(F.conj ? F.conj.ids.size : BASE().length) + (' no acervo filtrado') + '</b><span style="font-size:12.5px;color:var(--m)">' + (ch.length ? ch.length + ' critério(s) ativo(s)' : '') + '</span><span style="flex:1"></span>' + (F.statsAberto ? '' : '<button type="button" class="btn sm" data-stats>Estatísticas dos filtrados ▾</button>') + '</div>';
   if (F.statsAberto) h += stats(L);
-  h += painelEtq(L);
+  /* Etiquetas consultáveis pelos filtros laterais e critérios, sem painel redundante. */
   h += lista(L, F, 'fila') + '</div></div></div>';
   return h; }
 /* ---------- Fila · modo Mapa do fluxo: etapas em faixas proporcionais (cor = tipo de julgamento) e painéis de processos por etapa ---------- */
@@ -4107,7 +4115,7 @@ D.addEventListener('click', (e) => { const t = e.target;
   if ((b = q('#crit-pop [data-cp]'))) { const k = b.dataset.cp; if (k === 'fechar') fecharPops(); else if (k === 'todos' || k === 'nenhum') { if (k === 'nenhum') CP.c.vals = []; else $$('#crit-pop [data-cpv]').forEach((i) => { if (CP.c.vals.indexOf(i.dataset.cpv) < 0) CP.c.vals.push(i.dataset.cpv); }); pintaCrit(); }
     else if (k === 'aplicar') { const c = CP.c; if (/^(in|notin|has|nothas)$/.test(c.cond) && !c.vals.length && !c.trechos.length) { toast('Marque um valor ou escreva um trecho.', true); return; } if (CP.edit != null) F.crit[CP.edit] = c; else F.crit.push(c); F.lim = 100; fecharPops(); render(); } return; }
   if ((b = q('.menu [data-ex]'))) { const p = b.closest('.menu'); const k = b.dataset.ex; fecharPops(); exportar(k, p.__L, p.__t, p.__b); return; }
-  if ((b = q('[data-vg]'))) { LS.set('cog_vg', !LS.get('cog_vg', true)); render(); return; }
+
   if ((b = q('[data-conj]'))) { abrirConj(b.dataset.conj); return; }
   if ((b = q('[data-mono-conj]'))) { const r = REG[b.dataset.monoConj]; if (r) acao('Julgar por monocrática', r.ids, () => ({ sp: '', sd: '', mono: 'Monocrática' })); return; }
   if (q('[data-ini-mas]')) { INI_MAS = !INI_MAS; render(); return; }
