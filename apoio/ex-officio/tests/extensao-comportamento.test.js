@@ -258,7 +258,11 @@ test('universal v53: quatro subabas, sinalizações na barra, cinco páginas no 
     assert.ok(v.etapas.some(c => /\bok\b/.test(c)) && v.etapas.some(c => /\bat\b/.test(c)) && v.etapas.some(c => /\bpend\b/.test(c)), 'feita, atual e pendente: ' + v.etapas.join(' | '));
     for (const k of ['pd','ic','av']) assert.ok(await pg.locator('.hero-steps-head [data-sn-kind="'+k+'"]').getAttribute('aria-label'), 'sinalização com rótulo acessível: '+k);
     assert.equal(v.lerAutos, 0, 'leitura exclusiva da aba Autos');
-    assert.ok(await pg.$$eval('.hero-ann-card.pv-ann-vazia', L => L.length) >= 1, 'anotações vazias em linha tracejada');
+    await pg.click('.hero-sn-ind [data-sn-kind="av"]');
+    await pg.waitForSelector('#hero-dock-pane-sinalizacoes .hero-ann-unified button[title="Incluir anotação"]',{state:'visible'});
+    await pg.click('#hero-dock-pane-sinalizacoes .hero-ann-unified button[title="Incluir anotação"]');
+    await pg.waitForSelector('#hero-dock-pane-sinalizacoes textarea[placeholder="Registrar anotação"]',{state:'visible'});
+    await pg.click('.hero-v53-dock-tabs [data-hero-dock=""]');
     assert.ok(v.frase <= 1, 'sem a frase repetida');
     await pg.evaluate(() => [...document.querySelectorAll('button')].find(b => b.offsetParent && b.textContent.trim() === 'Triagem').click());
     await pg.waitForSelector('.hero-v53-autos-link', { timeout: 15000 });
