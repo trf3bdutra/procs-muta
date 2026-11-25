@@ -235,3 +235,15 @@ body #v-edit .pg-h.pa-ab.dk-conf-open>#dk-conf{grid-column:2;grid-row:2;align-se
 #v-edit #dk-conf .cqih b{font-size:11px;color:var(--ink)}
 #v-edit #dk-conf .cqi p{font-size:11px;line-height:1.3}
 @media(max-width:860px){body #v-edit .pg-h.pa-ab.dk-conf-open{grid-template-columns:minmax(0,1fr);padding:7px 16px!important}body #v-edit .pg-h.pa-ab.dk-conf-open>.pg-t{display:none}body #v-edit .pg-h.pa-ab.dk-conf-open>.pa-dir,body #v-edit .pg-h.pa-ab.dk-conf-open>#dk-conf{grid-column:1}}
+/* Minutário: faixa de modos sob o título; barra com o pronunciamento em lista e o modelo na altura dos demais campos */
+body #v-edit .pg-h.pa-ab{height:auto!important;min-height:184px;padding:18px 40px!important}
+#v-edit .pg-h.pa-ab .pg-t .pa-sob{margin:2px 0 10px}
+#v-edit .pg-h.pa-ab .pg-t .pa-sob[hidden]{display:none}
+#v-edit .pg-h.pa-ab .pg-t .pa-sob .pa-modo{margin:0;align-self:auto;flex-wrap:wrap}
+body #v-edit .pg-h.pa-ab.dk-conf-open{height:auto!important;max-height:none!important;min-height:184px}
+body #v-edit .pg-h.pa-ab.dk-conf-open>.pg-t{max-height:none;overflow:visible}
+body #v-edit .pg-h.pa-ab.dk-conf-open>#dk-conf{max-height:210px}
+body #v-edit .pg-h.pa-ab.dk-conf-open:has(>.pa-dir:empty)>#dk-conf{grid-row:1/3}
+#x-top .d-unica .dgrp.dtxt>label.dmodl>select{flex:none!important;height:34px!important}
+#x-top .d-unica .dgrp>label>select[data-dprs]{min-width:118px!important}
+#x-top .d-unica .destrutura>label:has([data-dprs]){flex:0 1 130px!important}

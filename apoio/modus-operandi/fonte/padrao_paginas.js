@@ -39,6 +39,10 @@
       return '<a href="#v=edit&amp;s='+x[0]+'" data-xmodo="'+x[0]+'"'+(a===x[0]?' aria-current="page"':'')+' title="'+x[2]+'">'+x[1]+'</a>';}).join('')+(a==='pecas'?'<button type="button" data-dconfmin aria-controls="dk-conf" aria-expanded="false">Conformidade</button>':'')+'</div>';}
   D.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('.pa-modo a[data-xmodo]');if(!a)return;e.preventDefault();
     if(a.getAttribute('aria-current')!=='page'&&window.VDM_minModo)window.VDM_minModo(a.getAttribute('data-xmodo'));});
+  /* faixa Minutário · Modelos · Parágrafos (e Conformidade) logo abaixo do título da página */
+  function sobTitulo(h,html){var t=h.querySelector('.pg-t'),h1=t&&t.querySelector('h1');if(!h1)return;var d=t.querySelector('.pa-sob');
+    if(!d){d=D.createElement('div');d.className='pa-sob';h1.parentNode.insertBefore(d,h1.nextSibling);}else if(d.previousElementSibling!==h1)h1.parentNode.insertBefore(d,h1.nextSibling);
+    por(d,html);d.hidden=!html;}
   function abertura(){
     D.querySelectorAll('.pg-h').forEach(function(h){h.classList.add('pa-ab');});
     var he=D.querySelector('#v-ement .pg-h');
@@ -47,15 +51,15 @@
     if(hx){var x=D.getElementById('x-dev'),s=slot(hx),tt=hx.querySelector('.pg-t'),kk=tt&&tt.querySelector('.dkk'),bd=tt&&tt.querySelector('.pa-dev');
       var on=x&&!x.hidden&&(x.textContent||'').trim(),dir=D.querySelector('#v-edit #x-alt.x-alt-dir:not([hidden])'),mod=/MODELOS/i.test((kk&&kk.textContent)||'');
       if(dir&&!on){/* Entradas rápidas: coluna própria do manual; abertura sem duplicação. */
-        por(s,'');hx.classList.remove('pa-com-dev');if(bd)bd.remove();var pr0=tt&&tt.querySelector('.pa-pre');if(pr0)pr0.remove();if(typeof dkConf==='function')dkConf();return;}
+        por(s,'');sobTitulo(hx,'');hx.classList.remove('pa-com-dev');if(bd)bd.remove();var pr0=tt&&tt.querySelector('.pa-pre');if(pr0)pr0.remove();if(typeof dkConf==='function')dkConf();return;}
       if(on){var v=dev(x);
         if(!bd&&kk){bd=D.createElement('span');bd.className='pa-dev';kk.parentNode.insertBefore(bd,kk.nextSibling);}
         if(bd){bd.textContent='Em desenvolvimento';bd.title=v.pre;}
         var pr=tt.querySelector('.pa-pre'),ds=D.getElementById('x-desc');if(!pr&&ds){pr=D.createElement('p');pr.className='pa-pre';ds.parentNode.insertBefore(pr,ds.nextSibling);}if(pr&&pr.textContent!==v.pre)pr.textContent=v.pre;
         var c3=D.querySelector('#v-edit #e-cnt');
-        por(s,modoSel()+(mod?(c3?numero(c3):''):''));
+        sobTitulo(hx,modoSel());por(s,mod?(c3?numero(c3):''):'');
         hx.classList.toggle('pa-com-dev',mod);}
-      else{if(bd)bd.remove();var pr2=tt&&tt.querySelector('.pa-pre');if(pr2)pr2.remove();var c2=D.querySelector('#v-edit #e-cnt');por(s,modoSel()+(c2&&D.querySelector('#v-edit #e-layout')&&!D.querySelector('#x-banco[hidden] #e-layout')?numero(c2):''));hx.classList.remove('pa-com-dev');}if(typeof dkConf==='function')dkConf();}
+      else{if(bd)bd.remove();var pr2=tt&&tt.querySelector('.pa-pre');if(pr2)pr2.remove();var c2=D.querySelector('#v-edit #e-cnt');sobTitulo(hx,modoSel());por(s,(c2&&D.querySelector('#v-edit #e-layout')&&!D.querySelector('#x-banco[hidden] #e-layout')?numero(c2):''));hx.classList.remove('pa-com-dev');}if(typeof dkConf==='function')dkConf();}
   }
 
   /* ---------- Minuta-Matriz: exportações com rótulo ---------- */
