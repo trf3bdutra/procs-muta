@@ -15,30 +15,36 @@
   function avisar() { try { document.dispatchEvent(new CustomEvent('muta:sigilo', { detail: { cnj: T.cnj } })); } catch (e) {} if (window.MutaGabinete && window.MutaGabinete.render) window.MutaGabinete.render(); }
   function consultar(cnj) {
     if (!ses || dg(cnj).length !== 20) { T = { cnj: '', sig: '', lib: true, porque: '' }; return Promise.resolve(T); }
-    if (T.cnj === dg(cnj) && !T.lendo) return Promise.resolve(T);
+    if (T.cnj === dg(cnj)) return T.pendente || Promise.resolve(T);
     T = { cnj: dg(cnj), sig: '', lib: false, porque: '', lendo: true };
     var t = token(cnj);
-    return ses.api('/api/pauta?sigilo=' + encodeURIComponent(cnj) + (t ? '&t=' + encodeURIComponent(t) : '')).then(function (r) {
-      if (T.cnj !== dg(cnj)) return T; T.sig = r.sigilo || ''; T.lib = !!r.liberado; T.porque = r.porque || ''; T.lendo = false; avisar(); return T;
-    }, function (e) {
-      /* sem resposta do servidor: na dúvida, restringe só o que o PJe já marca como sigiloso (documentos) */
-      if (T.cnj !== dg(cnj)) return T; T.lendo = false; T.lib = true; T.erro = e.message; avisar(); return T;
+    var atual = T;
+    atual.pendente = Promise.resolve().then(function () { return ses.api('/api/pauta?sigilo=' + encodeURIComponent(cnj) + (t ? '&t=' + encodeURIComponent(t) : '')); }).then(function (r) {
+      if (T !== atual) return T;
+      if (!r || typeof r.liberado !== 'boolean') throw new Error('Resposta de sigilo inválida.');
+      T.sig = r.sigilo || ''; T.lib = r.liberado; T.porque = r.porque || ''; T.lendo = false; T.pendente = null; avisar(); return T;
+    }).catch(function () {
+      /* Sem confirmação do servidor, não ler nem gravar inteiro teor. */
+      if (T !== atual) return T; T.lendo = false; T.lib = false; T.indisponivel = true; T.pendente = null; avisar(); return T;
     });
+    return atual.pendente;
   }
   function desbloquear(senha) {
-    var cnj = T.cnj; if (!cnj) return Promise.resolve();
+    var cnj = T.cnj, atual = T; if (!cnj || T.lendo || T.indisponivel) return Promise.resolve();
     T.erro = ''; T.envio = true; avisar();
     return ses.api('/api/pauta?sigilo=1', { method: 'POST', body: JSON.stringify({ cnj: cnj, senha: senha }) }).then(function (r) {
+      if (T !== atual) return;
+      if (!r || typeof r.token !== 'string' || !r.token) { T.envio = false; T.erro = 'Liberação não confirmada.'; avisar(); return; }
       try { sessionStorage.setItem(K + cnj, r.token); } catch (e) {}
       T.lib = true; T.porque = 'senha'; T.form = false; T.envio = false; avisar();
-    }, function (e) { T.envio = false; T.erro = e.message || 'Senha incorreta.'; avisar(); });
+    }, function (e) { if (T !== atual) return; T.envio = false; T.erro = e.message || 'Senha incorreta.'; avisar(); });
   }
   /* documento sigiloso no PJe: o tipo ou a descrição dizem */
   function docSigiloso(d) { return !!d && /sigil|segredo de just/i.test(S(d.tipo) + ' ' + S(d.desc) + ' ' + S(d.descricao)); }
   var API = {
     consultar: consultar,
     sigiloso: function () { return !!T.sig; },
-    bloqueado: function () { return T.lendo || (!!T.sig && !T.lib); },
+    bloqueado: function () { return !!(T.lendo || (T.cnj && !T.lib)); },
     /* documento: bloqueado se o processo está bloqueado ou se o documento é sigiloso e ninguém liberou */
     docBloqueado: function (d) { return API.bloqueado() || (docSigiloso(d) && !(T.lib && T.porque)); },
     docSigiloso: docSigiloso,
@@ -46,6 +52,7 @@
     /* quantos documentos sigilosos a leitura achou (para o aviso) */
     docs: function (n) { if (T.docs !== n) { T.docs = n; } },
     html: function () {
+      if (T.indisponivel) return '<div class="sg-b"><b>Sigilo não confirmado</b> · leitura e gravação do inteiro teor bloqueadas até confirmação do servidor <button type="button" class="lnk" data-sg="repetir">tentar novamente</button></div>';
       if (!T.sig && !T.lendo && !(T.docs && !T.porque)) return '';
       if (!T.sig && !T.lendo) return '<div class="sg-b">' + T.docs + (T.docs > 1 ? ' documentos sigilosos' : ' documento sigiloso') + ' nos autos · não são lidos nem gravados' +
         (T.form ? '<span class="sg-f"><input type="password" id="sg-senha" placeholder="senha" autocomplete="off" aria-label="Senha do sigilo"><button type="button" class="btn solid sm" data-sg="ok">Liberar</button></span>' : ' <button type="button" class="lnk" data-sg="abrir">liberar com senha</button>') + (T.erro ? '<small class="sg-e">' + esc(T.erro) + '</small>' : '') + '</div>';
@@ -60,6 +67,7 @@
   document.addEventListener('click', function (e) {
     var b = e.target.closest && e.target.closest('[data-sg]'); if (!b) return;
     e.preventDefault(); e.stopPropagation();
+    if (b.getAttribute('data-sg') === 'repetir') { var cnj = T.cnj; if (cnj) { T.cnj = ''; consultar(cnj); avisar(); } return; }
     if (b.getAttribute('data-sg') === 'abrir') { T.form = true; avisar(); setTimeout(function () { var i = document.getElementById('sg-senha'); if (i) i.focus(); }, 0); return; }
     var i = document.getElementById('sg-senha'); if (i && S(i.value)) desbloquear(i.value);
   }, true);

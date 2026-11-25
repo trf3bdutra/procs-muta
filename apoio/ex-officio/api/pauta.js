@@ -36,14 +36,28 @@ function solicitacoesSessao(data,dados,doc,pen,acervo){
 }
 
 /* grava campos de um processo da pauta; devolve {status, body}. gestorOk: pode designar e registrar o desfecho */
-async function gravarItem(data, b, u, gestorOk, whatsappEvent) {
-  const rel = 'acervo/sessoes/' + data + '.json', alvo = dg(b.cnj), C = b.campos || {};
+const ETAPAS = ['dataMinuta', 'dataCorrecao', 'dataLiberacao'];
+function camposEtapa(it, etapa) {
+  const k = ETAPAS.indexOf(etapa.campo), campos = {};
+  if (k < 0) throw new Error('Etapa inválida.');
+  ETAPAS.forEach((f, i) => {
+    if (etapa.desfazer) { if (i >= k) campos[f] = ''; }
+    else if (i <= k) campos[f] = it[f] || etapa.hoje;
+  });
+  return campos;
+}
+async function gravarItem(data, b, u, gestorOk, whatsappEvent, etapa) {
+  const rel = 'acervo/sessoes/' + data + '.json', alvo = dg(b.cnj);
+  // Etapa em cascata é argumento interno do servidor, não um campo aceito do corpo HTTP.
+  if (etapa && (!gestorOk || !ETAPAS.includes(etapa.campo) || !L.dataOk(etapa.hoje)))
+    return { status: 400, body: { erro: 'Etapa inválida.' } };
   if (alvo.length !== 20) return { status: 400, body: { erro: 'número do processo inválido' } };
   for (let t = 0; t < 4; t++) {
     const { dados, sha } = await L.lerJson(rel);
     const lista = b.lista === 'previa' && !(dados.itens || []).length ? 'previa' : 'itens';
     const it = (dados[lista] || []).find(i => dg(i.cnj) === alvo);
     if (!it) return { status: 404, body: { erro: 'processo fora desta pauta' } };
+    const C = Object.assign({}, b.campos || {}, etapa ? camposEtapa(it, etapa) : {});
     const mud = [];
     const designacoes = gestorOk ? ['servidor', 'corretor'].filter(k => k in C && L.norm(it[k]) !== L.norm(C[k]))
       .map(k => ({ papel: k === 'servidor' ? 'minuta' : 'correção', de: it[k] || '', para: String(C[k] || '') })) : [];
@@ -126,3 +140,5 @@ module.exports = async (req, res) => {
 module.exports.gravarItem = gravarItem;
 
 module.exports.solicitacoesSessao = solicitacoesSessao;
+
+module.exports.camposEtapa = camposEtapa;

@@ -4526,7 +4526,7 @@ function prontLateralLegado(){var vp=$('#v-pauta'),el=$('#prq');if(!el)return;
       '<div class="f"><span>Assinatura</span><div class="v">'+(it.assinado||it.dataAssinatura?'<b class="ass">Assinada'+(it.dataAssinatura?' em '+esc(br(it.dataAssinatura)):'')+'</b>':'<span class="mut">ainda não assinada · registrar na ficha (▤ › Produção)</span>')+'</div></div>'+
       '</div></section>'+(function(){var us=secs.filter(function(x){var h=x.querySelector('h3');return h&&/Pedido urgente/.test(h.textContent);})[0],on=!!urgDe(it);if(!us)return '';var h3=us.querySelector('h3');if(h3)h3.remove();
       return '<div class="prt-urgf'+(on?' on':'')+'"><label class="prt-urgs"><input type="checkbox" data-urg-sw'+(on?' checked':'')+'><b>Pedido urgente</b>'+(on?'<span class="prt-urgt'+(urgPend(it)?' pend':'')+'">'+esc((it.ctl||{}).urgSit||'Pendente · não apreciada')+'</span>':'<small>desligado · ligue para registrar liminar, tutela ou efeito suspensivo</small>')+'</label><div class="prt-urgc"'+(on?'':' hidden')+'>'+us.outerHTML+'</div></div>';})();abas[0].n=3;abas[0].ch=['dataMinuta','dataCorrecao','dataLiberacao'].filter(function(x){return it[x];}).length;}
-  else {abas[0].html+=prtPrecedentes(it);/* prévia da minuta retirada do prontuário */abas.unshift({nome:'Acompanhamento',html:acompHtml(it),n:0,ch:0,cont:acompAberto(it)});}
+  else {/* Precedentes e minuta consultados pelo botão Compendium. */abas.unshift({nome:'Acompanhamento',html:acompHtml(it),n:0,ch:0,cont:acompAberto(it)});}
   var ab=Math.min(S.prtAba||0,abas.length-1),V=filtrar(),ix=V.findIndex(function(i){return dg(i.cnj)===S.prt;}),et=etapa(it),ssx=S.cal.filter(function(s){return s.date===S.ses;})[0]||{},pz=mono?'':(ssx.marcos||{}).entregaMinutas||'',dd=pz?dias(hoje(),pz):null,A=alertas(it);
   var mins=it.servidor||'—',cor=it.corretor||'—';
   el.setAttribute('data-k',S.prt);
@@ -5684,7 +5684,7 @@ function tempo(t){var d=new Date(t);if(isNaN(d))return '';var m=Math.round((Date
 function chaveLido(){return 'eq_not_lido_'+nq(U.eu);}
 function acaoNot(e){
   if(e.sessao){
-    var rotulo=e.numero?'Abrir item':'Abrir sessão';
+    var rotulo=e.numero?'Localizar na pauta':'Abrir sessão';
     return '<button type="button" class="b nt-abrir" data-ir="'+esc(e.sessao+'|'+(e.numero||''))+'">'+rotulo+'</button>';
   }
   return e.pedidoId?'<button type="button" class="b nt-abrir" data-ped-ver="'+esc(e.pedidoId)+'">Ver pedido</button>':'';
@@ -5728,7 +5728,7 @@ function hh(){var h=document.querySelector('#app header .nx1')||document.querySe
 window.addEventListener('resize',function(){hh();mirarTodos();});window.addEventListener('scroll',function(){hh();mirarTodos();},{passive:true});
 $('#b-not').onclick=function(){hh();if(abrePainel('#p-not')){notificacoes();setTimeout(marcarLido,1500);}};
 $('#av-tudo').onclick=function(){if(abrePainel('#p-not'))setTimeout(marcarLido,1500);};
-document.addEventListener('click',function(e){if(e.target.closest('[data-fecha]')){e.target.closest('.drw').hidden=true;return;}
+document.addEventListener('click',function(e){if(e.target.closest('[data-fecha]')){var d=e.target.closest('.drw');if(d){d.hidden=true;var gat=GAT['#'+d.id];if(gat&&$(gat))$(gat).classList.remove('ap');}return;}
   if(!e.target.closest('.drw')&&!e.target.closest('.hbx')&&!e.target.closest('#av-tudo')&&!e.target.closest('dialog')){$('#p-not').hidden=true;if(!$('#p-pen').closest('#cmt-gv'))$('#p-pen').hidden=true;}});
 /* Pedidos do AgentMail e seção de fechamento diário */
 var PED_URI='/api/sessoes?pedidos=1';
@@ -5789,7 +5789,7 @@ function pedCarregar(foco){
         '<label>Data da sessão<input required type="date" name="data" value="'+esc(p.data||'')+'"></label>'+
         '<label>Processo<input required type="text" name="cnj" maxlength="25" value="'+esc(p.cnj)+'"></label></div>'+
         '<div class="ac"><button class="b" type="submit">Vincular à pauta</button></div></form>':'';
-      var motivo=!p.vinculo&&pedMotivos.get(p.id);
+      var motivo=!p.vinculo&&(pedMotivos.get(p.id)||p.motivo);
       return '<article class="ped-card" data-ped-card="'+esc(p.id)+'" tabindex="-1">'+pedResumo(p)+
         (motivo?'<p class="mut">'+esc(motivo)+'</p>':'')+abrir+vincular+'</article>';
     }).join('')||'<p class="mut">Nenhum pedido disponível.</p>';
@@ -5822,7 +5822,12 @@ async function abrirPautaDaNotificacao(data,cnj){
   if(seq!==ntNavegacao||S.ses!==inicial||S.fonte!==fonteInicial)return;
   if(nPend()||gravando){pedeSalvar('Salve ou descarte as alterações antes de abrir a pauta.');return;}
   var alvo=achar(doc);
-  if(chave&&!alvo){toast('O processo não está mais na pauta de '+br(data)+'.');return;}
+  if(chave&&!alvo){
+    toast('O CNJ não consta na pauta de '+br(data)+'. Confira a sessão no pedido recebido.');
+    var pedidoAberto=$('#ped-list');
+    if(pedidoAberto&&!$('#p-not').hidden){pedidoAberto.hidden=false;if(!pedidoAberto.open)pedidoAberto.open=true;}
+    return;
+  }
   if(!mesma){S.aberto={};S.sel={};S.kx={};}
   S.req=(S.req||0)+1;
   S.ses=S.sesAnt=data;
@@ -5850,9 +5855,9 @@ $('#p-not').addEventListener('click',function(e){
   }
   if(!abrir)return;
   var ref=abrir.dataset.ir.split('|');
-  abrir.disabled=true;
+  abrir.disabled=true;abrir.setAttribute('aria-busy','true');
   abrirPautaDaNotificacao(ref[0],ref[1]).catch(function(e){toast(e.message||'Não foi possível abrir a pauta.');})
-    .finally(function(){abrir.disabled=false;});
+    .finally(function(){abrir.disabled=false;abrir.removeAttribute('aria-busy');});
 });
 $('#ped-fech').addEventListener('toggle',function(){if(this.open&&!$('#ped-fech-data').value)$('#ped-fech-data').value=pedDia();});
 $('#ped-fech-data').addEventListener('change',function(){$('#ped-fech-prev').hidden=true;$('#ped-fech-imagens').hidden=true;$('#ped-fech-status').textContent='';});
@@ -6137,7 +6142,14 @@ function cmtClasseCanon(c){var s=String(c||'').trim();if(!s)return s;var k=cmtNo
   var M={'apelacao civel':'Apelação Cível','apelacao / remessa necessaria':'Apelação / Remessa Necessária','agravo de instrumento':'Agravo de Instrumento',
     'remessa necessaria civel':'Remessa Necessária Cível','pedido de efeito suspensivo a apelacao':'Pedido de Efeito Suspensivo à Apelação'};
   return M[k]||s;}
-function cmtCanon(j){(((j||{}).pauta||{}).itens||[]).forEach(function(x){x.classe=cmtClasseCanon(x.classe);});return j;}
+var CMTET=['dataMinuta','dataCorrecao','dataLiberacao'],CMTPEND=Object.create(null);
+function cmtEtapaDados(x,v){CMTET.forEach(function(k){x[k]=v[k]||'';});x.etapa=x.dataLiberacao?'liberado':x.dataCorrecao?'corrigido':x.dataMinuta?'minutado':'pendente';}
+function cmtEtapaChave(ses,cnj){return String(ses||'')+'|'+String(cnj||'');}
+function cmtEtapaConfirmada(corpo,j){if(!corpo||!j||!['etapa','liberar'].includes(corpo.acao)||!CMTET.every(function(k){return Object.prototype.hasOwnProperty.call(j,k);}))return false;
+  var key=cmtEtapaChave(corpo.sessao,corpo.cnj);CMTPEND[key]={v:j,ate:Date.now()+120000};
+  var p=(CMT.dados||{}).pauta||{};if(p.date!==corpo.sessao)return false;
+  var x=(p.itens||[]).find(function(it){return it.cnj===corpo.cnj;});if(!x)return false;cmtEtapaDados(x,j);return true;}
+function cmtCanon(j){var p=(j||{}).pauta||{},agora=Date.now();Object.keys(CMTPEND).forEach(function(k){if(CMTPEND[k].ate<agora)delete CMTPEND[k];});(p.itens||[]).forEach(function(x){x.classe=cmtClasseCanon(x.classe);var k=cmtEtapaChave(p.date,x.cnj),pend=CMTPEND[k];if(!pend)return;if(CMTET.every(function(f){return (x[f]||'')===(pend.v[f]||'');}))delete CMTPEND[k];else cmtEtapaDados(x,pend.v);});return j;}
 /* valores da ficha: data e hora ISO (UTC) no horário de Mato Grosso do Sul; data simples em dd/mm/aaaa */
 function cmtFmtValor(v){var s=String(v==null?'':v);if(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}/.test(s)){var d=new Date(s);
   if(!isNaN(d))return d.toLocaleString('pt-BR',{timeZone:'America/Campo_Grande',day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'}).replace(',','');}
@@ -6485,7 +6497,7 @@ if(et){if(/\binf\b/.test(et.className)){toast('Etapa sem data registrada: não h
     var sd0=((CMT.dados||{}).pauta||{}).date||'';
     cmtPost({acao:'etapa',sessao:sd0,cnj:cj,campo:cp,desfazer:ja},ja?'Marca desfeita.':'Minuta '+nm+'.',ja?null:{acao:'etapa',sessao:sd0,cnj:cj,campo:cp,desfazer:true},et,
       function(b){b.classList.toggle(cp==='dataMinuta'?'s1':'s2',!ja);});};
-  if(ja)cmtConfirmar('ob','Desfazer a marca',cj,'O item deixa de constar como '+nm+'.','Desfazer').then(function(ok){if(ok)grava();});
+  if(ja)cmtConfirmar('ob','Desfazer a marca',cj,'A etapa '+nm+' e as posteriores serão desmarcadas, inclusive a liberação, se registrada.','Desfazer').then(function(ok){if(ok)grava();});
   else grava();
   return;}});
 /* devolutiva: apontamento do relator que vira diligência para quem minutou */
@@ -7254,8 +7266,10 @@ document.addEventListener('click',function(e){if(e.target&&e.target.closest&&e.t
 /* decisões: gravam onde já era gravado e podem ser desfeitas */
 function cmtPost(corpo,ok,volta,el,feito){
   if(el){if(el.classList.contains('ocupado'))return Promise.resolve();el.classList.add('ocupado');el.setAttribute('aria-busy','true');}
-  return api('/api/painel?cmt=1',{method:'POST',body:JSON.stringify(corpo)}).then(function(){
+  return api('/api/painel?cmt=1',{method:'POST',body:JSON.stringify(corpo)}).then(function(j){
+    var atual=cmtEtapaConfirmada(corpo,j);
     if(el){el.classList.remove('ocupado');el.removeAttribute('aria-busy');if(feito)feito(el);el.classList.add('feito');}
+    if(atual){cmtPauta();cmtAtuLote();}
     if(volta)toastAcao(ok,'Desfazer',function(){cmtPost(volta,'Desfeito.');});else toast(ok);
     /* com botão: a marca fica um instante à vista antes de a pauta se recompor */
     var rec=function(){CMT.atualizado=0;cmtCarregar(((CMT.dados||{}).pauta||{}).date);};if(el)setTimeout(rec,1100);else rec();})
@@ -7288,7 +7302,7 @@ document.addEventListener('click',function(e){
   if(e.target&&e.target.closest&&e.target.closest('#cmt-selt')){CMT.sel=CMT.sel||{};var L=cmtFiltra(),todos=L.every(function(x){return CMT.sel[x.cnj];});L.forEach(function(x){CMT.sel[x.cnj]=!todos;});cmtPauta();cmtAtuLote();return;}
   if(e.target&&e.target.closest&&e.target.closest('#cmt-libl')){var m=cmtMarcados();if(!m.length)return;
     cmtConfirmar('env','Liberar em lote',m.length+(m.length===1?' voto selecionado':' votos selecionados'),'Os votos marcados passam a constar como liberados.','Liberar').then(function(ok){if(!ok)return;
-    var seq=Promise.resolve();m.forEach(function(cnj){seq=seq.then(function(){return api('/api/painel?cmt=1',{method:'POST',body:JSON.stringify({acao:'liberar',sessao:sd,cnj:cnj})});});});
+    var seq=Promise.resolve();m.forEach(function(cnj){seq=seq.then(function(){return api('/api/painel?cmt=1',{method:'POST',body:JSON.stringify({acao:'liberar',sessao:sd,cnj:cnj})}).then(function(j){cmtEtapaConfirmada({acao:'liberar',sessao:sd,cnj:cnj},j);return j;});});});
     seq.then(function(){CMT.sel={};toast(m.length+(m.length===1?' voto liberado.':' votos liberados.'));CMT.atualizado=0;cmtCarregar(sd);})
       .catch(function(e){toast((e&&e.erro)||'Não foi possível liberar tudo.');CMT.atualizado=0;cmtCarregar(sd);});});return;}});
 document.addEventListener('click',function(e){var at2=e.target&&e.target.closest&&e.target.closest('#cmt-atu,#cmt-atu2');if(at2){CMT.atualizado=0;CMT.avisar=true;cmtCarregar();}});
@@ -12409,6 +12423,8 @@ html body #prq .prt.pmn2{display:flex;flex-direction:column;gap:0;padding:0 14px
 html body #prq .pmn2 .pm-caso{padding:0!important;background:transparent!important;border:0!important}
 /* prontuário (Monocráticas e Pauta): etapas dentro do cartão do processo; se o alto não couber, rola por dentro */
 html body #prq .pmn2 .pm-caso{flex:none;max-height:58vh;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
+/* processo urgente: o cartão reaproveita a moldura .prt-urgf, mas não a margem negativa dela (deslocava o cartão 12 px para a esquerda) */
+html body #prq .pmn2 .pm-caso.prt-urgf{margin:0!important}
 html body #prq .pmn2 .pm-top{position:sticky;top:0;z-index:3;background:var(--ep,#f7f4ec)}
 html body #prq .pmn2 .pm-cd .pm-sh0{margin:14px 0 4px;padding-top:12px;border-top:1px dashed #e2ddd0}
 html body #prq .pmn2 .pm-cd .pm-et{border:0;padding:14px 0 6px;background:none;border-radius:0}

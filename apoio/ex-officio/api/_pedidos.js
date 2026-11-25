@@ -57,9 +57,14 @@ async function marcar(data, achado, p) {
   return gravarItem(data, { cnj: p.cnj, lista: achado.lista, campos: { sopref: p.tipo, cartao: { so } } }, p.origem === 'manual' ? p.registradoPor : 'AgentMail', false);
 }
 function acharNoDocumento(dados, cnj) {
+  if (!dados || !cnjFmt(cnj)) return null;
+  // Mantém a lista oficial, em conformidade com gravarItem. A pré-pauta
+  // residual não pode receber gravações quando já existe pauta publicada.
   const lista = (dados.itens || []).length ? 'itens' : 'previa';
-  const item = (dados[lista] || []).find(it => dg(it.cnj) === dg(cnj));
-  return item ? { lista, item: item.item || '', servidor: item.servidor, corretor: item.corretor } : null;
+  const encontrados = (Array.isArray(dados[lista]) ? dados[lista] : []).filter(it => it && dg(it.cnj) === dg(cnj));
+  if (encontrados.length !== 1) return null;
+  const item = encontrados[0];
+  return { lista, item: item.item || '', servidor: item.servidor, corretor: item.corretor };
 }
 
 async function lerRegistros() {
@@ -84,17 +89,21 @@ async function paraUsuario(usuario, registros, obterSessao, gestor = L.gestor(us
   const pedidos = await Promise.all(registros.map(async pedido => {
     const data = pedido.vinculo?.sessao;
     if (pedido.estado !== 'vinculado' || !L.dataOk(data)) {
-      return assessoria || L.norm(pedido.registradoPor)===eu ? { ...pedido, vinculo: null } : null;
+      return assessoria || L.norm(pedido.registradoPor)===eu ? { ...pedido, vinculo: null,
+        motivo: !L.dataOk(pedido.data) ? 'Data da sessão ausente ou inválida.'
+          : !cnjFmt(pedido.cnj) ? 'Número CNJ ausente ou inválido.'
+          : 'Pedido pendente: conferir vínculo à lista oficial da sessão indicada.' } : null;
     }
     if (!sessoes.has(data)) sessoes.set(data, obterSessao(data));
     const dados = await sessoes.get(data);
     const item = dados && acharNoDocumento(dados, pedido.cnj);
-    if (!item) return assessoria ? { ...pedido, estado: 'a vincular', vinculo: null } : null;
+    if (!item) return assessoria ? { ...pedido, estado: 'a vincular', vinculo: null,
+      motivo: 'Processo ausente ou vínculo ambíguo na lista oficial da sessão registrada.' } : null;
     if (!assessoria && ![item.servidor, item.corretor].some(n => nomes.has(L.norm(n)))) return null;
     return { ...pedido, vinculo: { sessao: data, item: item.item, lista: item.lista } };
   }));
-  return pedidos.filter(Boolean).map(({ id, tipo, cnj, data, advogado, oab, parte, recebidoEm, vinculadoEm, estado, vinculo, origem, registradoPor }) =>
-    ({ id, tipo, titulo: tipoExibido(tipo), cnj, data, advogado, oab, parte, recebidoEm, vinculadoEm, estado, vinculo, origem: origem || 'e-mail', registradoPor }));
+  return pedidos.filter(Boolean).map(({ id, tipo, cnj, data, advogado, oab, parte, recebidoEm, vinculadoEm, estado, vinculo, origem, registradoPor, motivo }) =>
+    ({ id, tipo, titulo: tipoExibido(tipo), cnj, data, advogado, oab, parte, recebidoEm, vinculadoEm, estado, vinculo, origem: origem || 'e-mail', registradoPor, motivo: motivo || '' }));
 }
 
 async function obterSessao(data) {
@@ -252,3 +261,6 @@ module.exports.lerRegistros = lerRegistros;
 module.exports.paraUsuario = paraUsuario;
 module.exports.obterSessao = obterSessao;
 module.exports.marcar = marcar;
+
+// Testes isolados de vinculação, sem chamadas externas.
+module.exports.acharNoDocumento = acharNoDocumento;

@@ -51,7 +51,7 @@ module.exports = async (req, res) => {
         action: 'pedido-sessao', user: 'AgentMail',
         title: [p.titulo, p.data && 'sessão de ' + p.data.split('-').reverse().join('/'),
           !vinculo && 'a vincular'].filter(Boolean).join(' · '),
-        message: mensagem.join(' · '), nivel: 'importante', pedidoId: p.id,
+        message: [...mensagem, !vinculo && p.motivo].filter(Boolean).join(' · '), nivel: 'importante', pedidoId: p.id, estado: p.estado,
         ...(vinculo && porData.has(vinculo.sessao) && { sessao: vinculo.sessao, numero: p.cnj }),
       });
     });
