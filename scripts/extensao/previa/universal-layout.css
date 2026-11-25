@@ -409,3 +409,22 @@ body.hero-redesign-v53 #gab .hero-v53-rs-v .lnk{font-size:12px;padding:0}
 body.hero-redesign-v53 #gab .hero-v53-autos-resumo .au-res{display:flex;flex-wrap:wrap;gap:4px}
 body.hero-redesign-v53 #gab .hero-v53-rs-foot{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:8px;padding-top:8px;border-top:1px solid var(--line)}
 body.hero-redesign-v53 #gab .hero-v53-rs-foot .btn{margin-left:auto}
+/* 0.74.4 · painel com as abas Perfil do processo e Pauta e julgamento; Ficha completa por botão, numa janela */
+body.hero-redesign-v53 #gab .hero-v53-painel{margin-top:10px!important;padding:0!important;overflow:hidden}
+body.hero-redesign-v53 #gab .hero-v53-painel-head{display:flex;align-items:center;gap:6px;padding:6px 8px 6px 4px;border-bottom:1px solid transparent}
+body.hero-redesign-v53 #gab .hero-v53-painel.aberto>.hero-v53-painel-head{border-bottom-color:var(--line)}
+body.hero-redesign-v53 #gab .hero-v53-painel-tabs{display:flex;gap:2px;flex:1;min-width:0}
+body.hero-redesign-v53 #gab .hero-v53-painel-tabs>button{font:650 12px 'IBM Plex Sans',system-ui,sans-serif;border:0;background:transparent;color:inherit;padding:7px 9px;border-radius:6px;cursor:pointer;white-space:nowrap}
+body.hero-redesign-v53 #gab .hero-v53-painel-tabs>button::after{content:' ▾';font-size:10px;opacity:.55}
+body.hero-redesign-v53 #gab .hero-v53-painel-tabs>button[aria-selected=true]{color:var(--hero53-gold);background:color-mix(in srgb,var(--hero53-gold) 10%,transparent)}
+body.hero-redesign-v53 #gab .hero-v53-painel-tabs>button[aria-selected=true]::after{content:' ▴'}
+body.hero-redesign-v53 #gab .hero-v53-ficha-btn{flex:none}
+body.hero-redesign-v53 #gab .hero-v53-painel-body{padding:0 12px}
+body.hero-redesign-v53 #gab .hero-v53-painel .hero-v53-profile{border:0!important;margin:0!important;padding:0!important;background:transparent!important}
+body.hero-redesign-v53 #gab .hero-v53-painel .hero-v53-profile>summary{display:none!important}
+body.hero-redesign-v53 #gab .hero-v53-painel .hero-v53-profile[open]{padding:8px 0 12px!important}
+body.hero-redesign-v53 .hero-v53-ficha-dlg{width:min(96vw,720px);max-height:90vh;padding:0;border:1px solid var(--line);border-radius:10px;background:var(--card);color:inherit}
+body.hero-redesign-v53 .hero-v53-ficha-dlg::backdrop{background:rgb(0 0 0 / .35)}
+body.hero-redesign-v53 .hero-v53-ficha-dlg .hero-v53-dlg-head{position:sticky;top:0;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 12px;background:var(--card);border-bottom:1px solid var(--line)}
+body.hero-redesign-v53 .hero-v53-ficha-dlg .hero-v53-dlg-head h4{margin:0}
+body.hero-redesign-v53 .hero-v53-ficha-dlg .hero-v53-ficha-body{padding:10px 12px;overflow:auto}

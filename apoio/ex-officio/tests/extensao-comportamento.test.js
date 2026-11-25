@@ -353,3 +353,28 @@ test('universal 0.74.3: Resumo com o cartão Resumo do processo e o cartão Auto
     assert.deepEqual(P.erros, [], 'sem erro de script');
   } finally { await P.fim(); }
 });
+
+test('universal 0.74.4: Perfil do processo e Pauta e julgamento como abas de um painel; Ficha completa por botão', { skip: pular, timeout: 90000 }, async () => {
+  const op = { processo: CNJ, origem: {}, triagem: { 'Tipo de Julgamento': 'Apelação' }, producao: { SERVIDOR: 'Rodrigo', MINUTADO: '2026-11-13', Destino: 'Sessão' }, pauta: { sessoes: [{ sessao: '2026-12-07', item: '3', resultado: '' }] }, controles: {} };
+  const P = await abrir(op, { sigilo: '', liberado: true, porque: 'gestor' });
+  try {
+    const { pg } = P;
+    await pg.goto(pg.url().replace('/painel/painel.html', '/painel/universal.html'));
+    await pg.waitForFunction(() => window.MutaSessao && window.MutaSessao.estado().estado === 'on', null, { timeout: 15000 });
+    await pg.evaluate(cnj => { window.chrome.storage.session.set({ 'aba:1': { numero: cnj, classe: 'ApCiv', tarefa: '[Sessão] Aguardando a sessão', ctx: '', ed: false, lib: '' } }); }, CNJ);
+    await pg.waitForSelector('.hero-v53-painel', { timeout: 15000 });
+    const abas = await pg.$$eval('.hero-v53-painel-tabs [data-painel]', L => L.map(b => b.textContent));
+    assert.deepEqual(abas, ['Perfil do processo', 'Pauta e julgamento']);
+    assert.equal(await pg.$$eval('#gab details.hero-v53-profile>summary', L => L.filter(s => s.offsetParent).length), 0, 'sem os acordeões soltos');
+    await pg.click('.hero-v53-painel-tabs [data-painel="pauta"]');
+    const st = await pg.evaluate(() => [...document.querySelectorAll('.hero-v53-painel .hero-v53-profile')].map(d => d.open));
+    assert.deepEqual(st, [false, true], 'uma aba aberta por vez');
+    await pg.click('.hero-v53-painel-tabs [data-painel="perfil"]');
+    assert.deepEqual(await pg.evaluate(() => [...document.querySelectorAll('.hero-v53-painel .hero-v53-profile')].map(d => d.open)), [true, false]);
+    await pg.click('.hero-v53-painel-head .hero-v53-ficha-btn');
+    await pg.waitForSelector('.hero-v53-ficha-dlg[open] .hero-v53-ficha-body *', { timeout: 15000 });
+    await pg.click('.hero-v53-ficha-dlg .hero-v53-dlg-head .btn');
+    assert.equal(await pg.$('.hero-v53-ficha-dlg[open]'), null, 'janela fecha');
+    assert.deepEqual(P.erros, [], 'sem erro de script');
+  } finally { await P.fim(); }
+});
