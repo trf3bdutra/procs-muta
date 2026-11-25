@@ -5,17 +5,17 @@ const read=p=>fs.readFileSync(path.join(root,p),'utf8');
 const app=read('apoio/ex-officio/lotes/index.html');
 const api=read('apoio/ex-officio/api/_lote.js');
 const workflow=read('.github/workflows/vercel-caput.yml');
-test('Collectio e backend possuem JavaScript sintaticamente válido',()=>{
+test('CORTEX e backend possuem JavaScript sintaticamente válido',()=>{
  new vm.Script(api,{filename:'_lote.js'});
  const scripts=[...app.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g)];
  assert.ok(scripts.length>0);
  scripts.forEach((m,i)=>new vm.Script(m[1],{filename:'collectio-script-'+i+'.js'}));
 });
 test('Amicus tem URLs canônicas e redirecionamentos de compatibilidade',()=>{
- for(const x of ['site/public/amicus/collectio/cg','site/public/amicus/collectio/cmt','site/public/amicus/collectio/gc','site/public/amicus/compendium','site/public/amicus/index.html']) assert.ok(workflow.includes(x),x);
+ for(const x of ['site/public/amicus/cortex/cg','site/public/amicus/cortex/cmt','site/public/amicus/cortex/gc','site/public/amicus/compendium','site/public/amicus/index.html']) assert.ok(workflow.includes(x),x);
  for(const x of ['/index/cmt','/index/gc','/lote/cg','/amicus/compendium/']) assert.ok(workflow.includes(x),x);
- assert.ok(app.includes('/amicus/collectio/cg/'));
- assert.ok(!workflow.includes('"destination":"/amicus/collectio/cmt/"'),'rotas antigas do CMT levam à página geral');
+ assert.ok(app.includes('/amicus/cortex/cg/'));
+ assert.ok(!workflow.includes('"destination":"/amicus/cortex/cmt/"'),'rotas antigas do CMT levam à página geral');
  assert.ok(read('apoio/amicus/index.html').includes('/amicus/compendium/'));
 });
 test('Seletor separa sessões e lotes avulsos',()=>{
@@ -36,10 +36,10 @@ test('Permissões originais preservadas',()=>{
  assert.ok(api.includes('loteVe(lote)'));
  assert.ok(api.includes('it.verRelator'));
 });
-test('Collectio tem só as páginas Geral e CG; cabeçalho enxuto',()=>{
+test('CORTEX tem só as páginas Geral e CG; cabeçalho enxuto',()=>{
  assert.ok(!/MODO=.*'rel'/.test(app.split('\n').find(l=>l.startsWith('const MODO='))||''),'sem modo CMT');
  for(const x of ['id="b-topo"','class="hb ic" id="tema"','class="lx-ir"']) assert.ok(app.includes(x),x);
- for(const x of ['Painel do relator</span>','Collectio · CMT</span>','Matriz ↑']) assert.ok(!app.includes(x),x);
+ for(const x of ['Painel do relator</span>','CORTEX · CMT</span>','Matriz ↑']) assert.ok(!app.includes(x),x);
 });
 test('Leitura da pauta tira o cabeçalho da sessão grudado no processo',()=>{
  const m=api.match(/const CAB_SESSAO = .*;\nconst limpaPauta = .*;/); assert.ok(m);
@@ -63,11 +63,11 @@ test('Pendência do prontuário confrontada com a tabela de peças',()=>{
  assert.match(confPend('Confirmar no sistema o ID 598870878 atribuído à sentença.',P,{}),/ID 598870878 não está na tabela de peças, que registra sentença com ID 396555413/);
  assert.equal(confPend('Conferir a tempestividade.',P,{}),'');
 });
-test('Barra do Amicus Curiae: Collectio e Compendium com a mesma barra, sem citar um ao outro, ambos com o Ex Officio',()=>{
+test('Barra do Amicus Curiae: CORTEX e Compendium com a mesma barra, sem citar um ao outro, ambos com o Ex Officio',()=>{
  const build=read('apoio/modus-operandi/fonte/build.py'), nav=read('apoio/modus-operandi/fonte/nav_editorial.css');
- assert.ok(!app.includes('title="Compendium: Ementário'),'Collectio sem o Compendium na barra');
+ assert.ok(!app.includes('title="Compendium: Ementário'),'CORTEX sem o Compendium na barra');
  assert.ok(app.includes('href="/exofficio/" title="Ex Officio'));
  assert.ok(build.includes('CMT · Amicus Curiae') && build.includes('<span>Ex Officio</span>'));
- assert.ok(!/collectio/i.test(build.slice(build.indexOf('EXO = '),build.indexOf("a = '  </div>\\n</header>\\n'"))),'Compendium sem o Collectio na barra');
+ assert.ok(!/collectio/i.test(build.slice(build.indexOf('EXO = '),build.indexOf("a = '  </div>\\n</header>\\n'"))),'Compendium sem o CORTEX na barra');
  assert.ok(nav.includes('header.top.nx #cmp-nav{flex:0 1 auto;min-width:0;overflow-x:auto'));
 });
