@@ -968,7 +968,7 @@ function heroOrganizarProntuario(){
   var nav=el('div','hero-header-nav'),prev=el('button','','‹'),next=el('button','','›'),label=el('span','muted');
   prev.type=next.type='button';prev.setAttribute('aria-label','Face anterior');next.setAttribute('aria-label','Próxima face');var faixa=top.querySelector('.pm-top');nav.append(prev);if(faixa){nav.append(faixa);faixa.querySelectorAll('.sp').forEach(function(x){x.remove();});var phase=faixa.querySelector('.pm-fase');if(phase)phase.before(label);else faixa.prepend(label);}else nav.append(label);label.classList.add('hero-face-label');nav.append(next);
   var pages=el('div','hero-top-pages'),id=el('div','hero-top-page'),aut=el('div','hero-top-page'),mat=el('div','hero-top-page');
-  pages.append(id,aut,mat);var pn=[id,aut,mat],names=['Resumo','Autuação','Matéria'];
+  pages.append(id,aut,mat);var pn=[id,aut,mat],names=['Resumo','Autuação','Caso, conteúdo e questões'];
   function show(i){heroTopo.pagina=(i+3)%3;pn.forEach(function(p,j){p.hidden=j!==heroTopo.pagina;});label.textContent=heroTopo.pagina===0?'':names[heroTopo.pagina];label.hidden=heroTopo.pagina===0;prev.title='Anterior: '+names[(heroTopo.pagina+2)%3];next.title='Próxima: '+names[(heroTopo.pagina+1)%3];prev.setAttribute('aria-label',prev.title);next.setAttribute('aria-label',next.title);nav.setAttribute('aria-label',names[heroTopo.pagina]);}
   prev.addEventListener('click',function(){show(heroTopo.pagina-1);});next.addEventListener('click',function(){show(heroTopo.pagina+1);});
   var sx=0;pages.addEventListener('touchstart',function(e){sx=e.changedTouches[0].clientX;},{passive:true});pages.addEventListener('touchend',function(e){var dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>65)show(heroTopo.pagina+(dx<0?1:-1));},{passive:true});
@@ -1021,7 +1021,7 @@ function heroOrganizarProntuario(){
   var au=top.querySelector('.pm-aut1');if(au){au.open=true;var sm=au.querySelector('summary');if(sm)sm.classList.add('hero-hidden-summary');var dl=au.querySelector('.pc-dl');if(!dl){dl=el('dl','pc-dl');au.append(dl);}var c=el('div');c.append(el('dt','','Classe'),el('dd','',S(R['Classe']||classText)));dl.prepend(c);var dist,val;Array.from(dl.children).forEach(function(x){var k=x.querySelector('dt');if(!k)return;if(k.textContent==='Seção')x.remove();if(k.textContent==='Distribuição')dist=x;if(k.textContent==='Valor da causa')val=x;});if(dist&&val){dl.prepend(dist,val);}aut.append(au);}
   /* Matéria usa a mesma estrutura de títulos e campos da Autuação. */
   var identity=caixa.querySelector('#pv-identity'),materia=el('section','hero-materia'),mg=el('div','gr');
-  materia.append(el('h4','pm-mer-h','Matéria'));
+  materia.append(el('h4','pm-mer-h','Caso, conteúdo e questões'));
   if(identity){
     var ic=identity.querySelector('.pv-id-content');
     if(ic){Array.from(ic.children).forEach(function(x){
