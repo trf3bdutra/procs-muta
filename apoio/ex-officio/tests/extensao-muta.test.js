@@ -608,7 +608,7 @@ test('extensão 0.46: 2ª seta do cartão com síntese, questões, mérito e enc
 
 test('extensão 0.47: Roteiro dentro da aba Processo; controles na 1ª seta; Parágrafos-padrão sub-aba do Ementário; Diretrizes na Minuta; Comparar compacto; sem a Ajuda', () => {
   const g = read('extensao/gabinete.js'), h = read('extensao/painel.html'), c = read('extensao/comparar.js');
-  assert.match(g, /var MODOS = \['Processo', 'Autos'\];/); assert.match(g, /var h = '<div class="rt-em-proc">' \+ corpoRoteiro\(\) \+ '<\/div>';/);
+  assert.match(g, /var MODOS = \['Processo', 'Autos'\];/); assert.match(g, /var h = '<div class="rt-em-proc">' \+ corpoRoteiro\(\) \+ '<\/div>', rot = /);
   assert.match(g, /controlesProcesso\(true\) \+ '<\/details>';/, '0.49.1: controles na 2ª seta');
   assert.match(h, /id="tab-par"[^>]*hidden/); assert.match(h, /data-emd="par"/); assert.match(h, /id="tab-dir"[^>]*hidden/); assert.match(h, /data-mm="dir"/); assert.match(h, /<div id="dir-app" class="min-dir" hidden><\/div>/);
   assert.match(h, /id="tab-ajuda"[^>]*hidden>\?<\/button>/);

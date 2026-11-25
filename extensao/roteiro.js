@@ -189,8 +189,10 @@
     var topo = '<section class="card rt-top"><div class="rt-tt"><b>Roteiro de triagem</b><span class="rt-n">' + n.ok + '/' + L.length + '</span>' +
       (n.al ? '<span class="rt-al">' + n.al + ' alerta' + (n.al > 1 ? 's' : '') + '</span>' : '') + '</div>' +
       '<div class="rt-bar"><i style="width:' + pct + '%"></i></div>' +
+      /* 0.63: seletor do tipo de julgamento recolhido no começo do roteiro; o resumo mostra o tipo em uso */
+      '<details class="rt-tsel"' + (R.tipoAb ? ' open' : '') + '><summary>Tipo de julgamento: <b>' + esc(TIPOS.filter(function (x) { return T[x[0]]; }).map(function (x) { return x[1]; }).join(', ') || 'não identificado') + '</b>' + (loc._tipos ? ' <small>escolhido</small>' : ' <small>automático</small>') + '</summary>' +
       '<div class="rt-tipos" role="group" aria-label="Tipo de julgamento">' + TIPOS.map(function (x) { return '<button type="button" class="chip' + (T[x[0]] ? ' on' : '') + '" data-rt="t:' + x[0] + '" aria-pressed="' + !!T[x[0]] + '">' + esc(x[1]) + '</button>'; }).join('') +
-      (loc._tipos ? '<button type="button" class="lnk" data-rt="auto" title="Volta ao tipo identificado pela classe, espécie e tarefa">automático</button>' : '') + '</div>' + (X.barra || '') + (alTopo.length ? '<div class="al-l rt-alt">' + alTopo.map(alHtml).join('') + '</div>' : '') + '@@USAR@@</section>';
+      (loc._tipos ? '<button type="button" class="lnk" data-rt="auto" title="Volta ao tipo identificado pela classe, espécie e tarefa">automático</button>' : '') + '</div></details>' + (X.barra || '') + (alTopo.length ? '<div class="al-l rt-alt">' + alTopo.map(alHtml).join('') + '</div>' : '') + '@@USAR@@</section>';
     h += '<ol class="rt">';
     FASES.forEach(function (f) {
       var F = L.filter(function (x) { return x.p.f === f[0]; }); if (!F.length) return;
@@ -234,6 +236,7 @@
     var ok = L.filter(function (p) { var st = p.manual ? (loc[p.id] ? 'ok' : 'pend') : p.estado(ctx); if (p.manual && p.estado && p.estado(ctx) === 'al') st = 'al'; return st === 'ok'; }).length;
     return { ok: ok, total: L.length };
   }
+  if (typeof document !== 'undefined') document.addEventListener('toggle', function (e) { var d = e.target; if (d && d.classList && d.classList.contains('rt-tsel')) R.tipoAb = d.open; }, true);
   function clique(b, g) {
     var a = b.dataset.rt || '', cnj = g.cnj(), loc = lerLocal(cnj);
     if (/^a:/.test(a)) { var id = a.slice(2), el = b.closest('.rt-p'); R.aberto[id] = !(el && el.classList.contains('ab')); return true; }

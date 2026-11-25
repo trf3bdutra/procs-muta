@@ -1469,3 +1469,7 @@ html[data-tema=escuro] .sn-st.av,html[data-tema=escuro] .sn-tp.av{background:#16
 .pa-tl small{width:100%;color:var(--muted-fg);font-size:10.5px}.pa-tl-so{font-size:10px;padding:0 6px;border-radius:8px;border:1px solid #6b8fd6;color:#4a6fb8}
 .pa-reg{margin:8px 0 0!important}
 .pc.pm.pa-proc{margin:0 0 10px!important;border-radius:10px!important;border:1px solid #e1e5ea!important}
+/* 0.63 · Processo = Roteiro de triagem | Roteiro de produção; tipo de julgamento recolhido */
+.rt-modos{margin:0 0 8px}
+.rt-tsel{margin:4px 0 6px;font-size:11.5px}.rt-tsel>summary{cursor:pointer;color:var(--muted-fg)}.rt-tsel>summary b{color:var(--fg,inherit)}.rt-tsel small{opacity:.7}
+.rt-tsel[open] .rt-tipos{margin-top:6px}

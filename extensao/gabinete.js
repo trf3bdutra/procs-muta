@@ -618,13 +618,16 @@ function snCard() {
 }
 function corpoProcesso() {
   /* 0.60: a aba Processo = Roteiro de triagem + Roteiro de produção; sinalizações, notas e registro no acervo foram para o card do topo (snCard) */
-  var h = '<div class="rt-em-proc">' + corpoRoteiro() + '</div>';
+  var h = '<div class="rt-em-proc">' + corpoRoteiro() + '</div>', rot = G.rot === 'pro' ? 'pro' : 'tri';
   /* 0.55: sem repetição — o Roteiro de produção não repete o que já aparece no Roteiro de triagem, nesta aba ou nas setas do cartão */
   var ja = {}, sc = '';
   try { var ab0 = G.merAb; G.merAb = true; G._seco = 1; sc = merEnc() + controlesProcesso(true); G.merAb = ab0; G._seco = 0; } catch (e) { G._seco = 0; }
   sc += SN_HTML;
   (h + sc).replace(/data-(?:fk|ch)="([^"]+)"/g, function (m, k) { ja[k.replace(/&quot;/g, '"').replace(/&amp;/g, '&').replace(/&#39;/g, "'")] = 1; return m; });
-  return h + camposCaso(ja);
+  /* 0.63: a aba Processo se divide em Roteiro de triagem | Roteiro de produção (a deduplicação usa sempre os dois) */
+  var pro = camposCaso(ja);
+  return '<div class="seg pmodos rt-modos" role="tablist" aria-label="Roteiro"><button type="button" role="tab" data-rot="tri" aria-selected="' + (rot === 'tri') + '">Roteiro de triagem</button><button type="button" role="tab" data-rot="pro" aria-selected="' + (rot === 'pro') + '">Roteiro de produção</button></div>' +
+    (rot === 'tri' ? h : pro || '<div class="empty">Sem campos de produção para este processo.</div>');
 }
 /* 0.54 · Roteiro de produção: todos os campos da ficha que a Minuta-Matriz do Compendium usa (@apelido), do destino do caso
    (sessão ou monocrática). Preenchimento automatizado: a leitura dos autos põe sozinha o que acha nos campos vazios
@@ -965,6 +968,7 @@ caixa.addEventListener('input', function (e) {
   agendar(1800);
 });
 caixa.addEventListener('click', function (e) {
+  var rb = e.target.closest && e.target.closest('[data-rot]'); if (rb) { G.rot = rb.getAttribute('data-rot'); render(); return; }
   var b = e.target.closest('button,a'); if (!b) return;
   if (b.tagName === 'BUTTON' && b.closest('summary')) e.preventDefault(); /* botão no título de um campo expansível não abre nem fecha o campo */
   if (b.dataset.au != null) { if (window.MutaAutos) window.MutaAutos.clique(b); return; }
