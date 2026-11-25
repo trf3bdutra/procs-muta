@@ -62,6 +62,22 @@ function V(sec, k) { var id = sec + '.' + k; return id in G.pend ? G.pend[id] : 
 function fonteVal(c) { var f = G.fo || {}, L = c.fonte || [];
   if (L.length === 2 && f[L[0]] && typeof f[L[0]] === 'object') { var x = f[L[0]][L[1]]; return x == null ? '' : S(x); }
   for (var i = 0; i < L.length; i++) { var v = f[L[i]]; if (v != null && S(v) !== '' && typeof v !== 'object') return S(v); } return ''; }
+/* O cadastro do PJe (mesmo CNJ) tem precedência sobre a fonte importada; nunca confundir assunto CNJ com detalhamento editorial. */
+function autuacaoAtual(){var p=window.MutaPje,a=p&&p.autuacao?p.autuacao():{};return a&&a.numero&&Muta.chaveProcesso(a.numero)===Muta.chaveProcesso(G.cnj)?a:{};}
+function textoTaxonomia(x){
+ if(x==null)return '';if(Array.isArray(x)){var principal=x.find(function(v){return v&&typeof v==='object'&&(v.principal===true||v.principal==='Sim');});return textoTaxonomia(principal||x[0]);}
+ if(typeof x==='object'){var nome=x.nome||x.descricao||x.description||x.label||x.titulo||x.assunto||x.name||'';return nome?S(nome)+(x.codigo&&!/\(\d+\)$/.test(S(nome))?' ('+x.codigo+')':''):'';}
+ var v=S(x);return /^(?:[-—?]+|não informado|nao informado|a definir|null|undefined)$/i.test(v)?'':v;
+}
+function assuntoCNJ(){
+ var a=autuacaoAtual(),f=G.fo||{},L=['Assunto CNJ','Assunto','assunto','assunto_judicial','assuntoJudicial','Assunto_Principal','assunto_principal','assuntoPrincipal','assuntos','Assuntos','DataJud · Assunto'];
+ if(textoTaxonomia(a.assunto))return textoTaxonomia(a.assunto);
+ var m=grupoModelo('Autuação'),cs=(m&&m.campos||[]).filter(function(c){return c.rotulo==='Assunto CNJ';});
+ for(var i=0;i<cs.length;i++){var x=textoTaxonomia(cs[i].secao?V(cs[i].secao,cs[i].chave):fonteVal(cs[i]));if(x)return x;}
+ for(var j=0;j<L.length;j++){var v=textoTaxonomia(f[L[j]]);if(v)return v;}
+ var d=f.datajud||f.DataJud||{};return textoTaxonomia(d.assuntos||d.assunto);
+}
+function classeAutuacao(){var a=autuacaoAtual();if(a.classe)return S(a.classe);var f=G.fo||{},L=['classe_judicial','Classe','classe','DataJud · Classe'];for(var i=0;i<L.length;i++){var v=textoTaxonomia(f[L[i]]);if(v)return v;}return pjeDoProcesso()?S(window.MutaPje.classe()):'';}
 function editavel(c) { return !(window.MUTA_WEB&&window.MUTA_WEB.leitura) && !!c.secao && c.editavel !== false && !c.calculado; }
 function destGrav() { return S(V('producao', 'Destino')); }
 function destino() { if (G.dest) return G.dest; return destGrav() === 'Monocrática' ? 'monocratica' : 'sessao'; }
@@ -190,7 +206,7 @@ function abaModelo(nome) { return ((G.F && G.F.abas) || []).filter(function (a) 
 function grupoModelo(nome) { var g = null; var aliases={'Autuação':'Identificação e Autuação','Matéria':'Caso, Conteúdo e Questões','Origem':'1º grau'}; ((G.F && G.F.abas) || []).forEach(function (a) { (a.grupos || []).forEach(function (x) { if (!g && (x.grupo === nome || x.grupo === aliases[nome])) g = x; }); }); return g; }
 function campoModelo(sec, chave) { var c = null; ((G.F && G.F.abas) || []).forEach(function (a) { (a.grupos || []).forEach(function (g) { (g.campos || []).forEach(function (x) { if (!c && x.chave === chave && (x.secao || '') === sec) c = x; }); }); }); return c; }
 function fmtV(v) { v = S(v); return /^\d{4}-\d{2}-\d{2}$/.test(v) ? brD(v) : v; }
-function valorDe(c) { var v = c.secao ? gravado(c.secao, c.chave) : fonteVal(c); return typeof v === 'object' ? '' : S(v); }
+function valorDe(c) { if(c.rotulo==='Assunto CNJ')return assuntoCNJ();if(c.rotulo==='Classe')return classeAutuacao()||(c.secao?S(gravado(c.secao,c.chave)):fonteVal(c));var v = c.secao ? gravado(c.secao, c.chave) : fonteVal(c); return typeof v === 'object' ? '' : S(v); }
 function pjeDoProcesso() { return window.MutaPje && window.MutaPje.processo && Muta.chaveProcesso(window.MutaPje.processo()) === Muta.chaveProcesso(G.cnj); }
 
 /* valor da causa: número cru vira R$ 1.518,00; texto já formatado fica como está */
@@ -200,7 +216,7 @@ function moeda(v) { v = S(v); if (!/^\d+([.,]\d{1,2})?$/.test(v)) return v; var 
 function cartao(s) {
   var R = {};
   ['Autuação', 'Partes'].forEach(function (n) { var g = grupoModelo(n); (g ? g.campos : []).forEach(function (c) { R[c.rotulo] = valorDe(c); }); });
-  var classe = R['Classe'] || fonteVal({ fonte: ['classe_judicial', 'Classe'] }), assunto = R['Assunto CNJ'] || fonteVal({ fonte: ['Assunto'] });
+  var classe = R['Classe'] || fonteVal({ fonte: ['classe_judicial', 'Classe'] }), assunto = assuntoCNJ();
   var abrev = pjeDoProcesso() ? window.MutaPje.classe() : '';
   var tarefa = (pjeDoProcesso() && window.MutaPje.tarefa && window.MutaPje.tarefa()) || fonteVal({ fonte: ['tarefa_atual'] });
   var etq = S(R['Etiquetas do PJe']).split(/\s*[;,|]\s*/).filter(Boolean);
@@ -297,7 +313,7 @@ function diasDesde(v) { var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(S(v)) || /^(\d{2
 function cabeca(s) {
   var R = {};
   ['Autuação', 'Partes'].forEach(function (n) { var g = grupoModelo(n); (g ? g.campos : []).forEach(function (c) { R[c.rotulo] = valorDe(c); }); });
-  var classe = R['Classe'] || fonteVal({ fonte: ['classe_judicial', 'Classe'] }), assunto = R['Assunto CNJ'] || fonteVal({ fonte: ['Assunto'] });
+  var classe = R['Classe'] || fonteVal({ fonte: ['classe_judicial', 'Classe'] }), assunto = assuntoCNJ();
   var abrev = (pjeDoProcesso() ? window.MutaPje.classe() : '') || classe.split(/\s*[\/(]/)[0];
   /* 0.64: etiqueta com a sigla da classe (TPU/CNJ) e o recurso julgado dentro do processo — "ApCiv · ED" */
   var etqCl = null; try { var TT = window.MutaRoteiro && window.MutaRoteiro.tipos ? window.MutaRoteiro.tipos(gRot(), G.cnj) : null; etqCl = window.ClassesCNJ ? window.ClassesCNJ.etiqueta((pjeDoProcesso() ? window.MutaPje.classe() : '') || classe, TT || V('triagem', 'Tipo de Julgamento')) : null; } catch (e) {}
@@ -605,7 +621,7 @@ function controlesProcesso(naSeta) {
   return '<section class="card pc-sec" id="g-ctl"><div class="pc-sh"><h3>Controles</h3><small class="muted">' + (n ? n + ' em vigor' : 'nenhum em vigor') + '</small></div><div class="ct-l">' + linhas + '</div></section>';
 }
 /* precedentes relacionados do processo aberto: no topo da aba Ementário */
-function casoPrec() { return { cnj: G.cnj, assunto: fonteVal({ fonte: ['Assunto'] }),
+function casoPrec() { return { cnj: G.cnj, assunto: assuntoCNJ(),
     subassuntos: S(gravado('triagem', 'Registro - Assunto detalhado')) || S(V('triagem', 'Assunto detalhado')), questoes: S(V('triagem', 'Alegações')),
     sintese: [S(V('triagem', 'Síntese Processual')), S(V('triagem', 'Síntese Fática'))].join(' '), especificidades: [S(V('triagem', 'Especificidades')), S(V('triagem', 'Tema'))].join(' ') }; }
 function precEmentario(k) { if (window.MutaEmentario && window.MutaEmentario.caso) window.MutaEmentario.caso(k); }
@@ -1119,8 +1135,8 @@ function heroOrganizarProntuario(){
   var m=grupoModelo('Autuação'),R={};(m&&m.campos||[]).forEach(function(c){R[c.rotulo]=valorDe(c);});
   var tj=el('div','gr');
   /* Classe abreviada e julgamento são etiquetas distintas; a classe completa continua em Autuação. */
-  var classFull=S(R['Classe']||fonteVal({fonte:['classe_judicial','Classe']})||classText),classShort=classFull;
-  try{var clInfo=window.ClassesCNJ&&window.ClassesCNJ.etiqueta(classFull,null);if(clInfo&&clInfo.t)classShort=clInfo.t.split(' · ')[0];else if(cls)classShort=cls.textContent.split(' · ')[0];}catch(e){}
+  var classFull=S(classeAutuacao()||R['Classe']),classShort=classFull.replace(/\s*\(\d+\)\s*$/,'');
+  try{var clInfo=window.ClassesCNJ&&window.ClassesCNJ.etiqueta(classFull,null);if(clInfo&&clInfo.t)classShort=clInfo.t.split(' · ')[0];else if(classFull&&/^[A-Za-z]{2,14}$/.test(classFull))classShort=classFull;}catch(e){}
   if(cls)cls.remove();
   var procTags=el('div','hero-proc-tags');
   if(classShort){var clTag=el('span','pc-cl hero-class-only',classShort);clTag.title=classFull;procTags.append(clTag);}
@@ -1134,12 +1150,12 @@ function heroOrganizarProntuario(){
   var secao=S(R['Seção competente']||fonteVal({fonte:['Seção Competente','Seção competente']}));
   if(!secao){var etqS=[R['Etiquetas do PJe'],R['Etiquetas do gabinete'],V('origem','Etiquetas do gabinete'),fonteVal({fonte:['Etiquetas','etiquetas']})].map(S).join(';');var mS=etqS.match(/(?:^|[;,|\s])([1-4])\s*[ªº°a]?\s*se[cç][aã]o\b/i);if(mS)secao=mS[1]+'ª Seção';}
   var smatch=secao.match(/([1-4])\s*[ªº°a]?/),stag=el('span','hero-secao'+(smatch?' hero-secao-'+smatch[1]:secao?'':' hero-secao-vazia'),smatch?smatch[1]+'ª':secao||'Seção ?');stag.title=smatch?smatch[1]+'ª Seção':secao||'Seção competente não informada (na Autuação, na fonte ou nas etiquetas)';stag.setAttribute('aria-label',stag.title);as.append(stag);
-  var assuntoTopo=S(R['Assunto CNJ']||fonteVal({fonte:['Assunto','assunto_judicial','Assunto_Principal']})||V('triagem','Assunto detalhado')||((G.fo||{}).assunto));
-  if(assuntoTopo)as.append(el('span','',assuntoTopo));else{var semAs=el('button','hero-assunto-vazio','Assunto não informado');semAs.type='button';semAs.title='Registrar o assunto em Caso, Conteúdo e Questões';semAs.onclick=function(){heroTopo.pagina=2;heroTopo.perfil=true;if(heroV53()){G.aba='Processo';G.rot='res';render();}else show(2);};as.append(semAs);}
+  var assuntoTopo=assuntoCNJ();
+  if(assuntoTopo){var assuntoEl=el('span','hero-assunto-cnj',assuntoTopo);assuntoEl.title='Assunto CNJ da autuação';as.append(assuntoEl);}else{var semAs=el('span','hero-assunto-vazio','Assunto CNJ ainda não sincronizado');semAs.title='Abra os autos do mesmo processo no PJe para recuperar a autuação';as.append(semAs);}
   id.append(as);
   var old=top.querySelector('.pm-as');if(old)old.remove();var ad=top.querySelector('.pm-ad');if(ad)ad.remove();var esp=top.querySelector('.pm-esp');if(esp)esp.remove();
   var detail=el('div','hero-detalhes');
-  var assuntoPrincipal=S(R['Assunto CNJ']||fonteVal({fonte:['Assunto','assunto_judicial','Assunto_Principal']})),assuntoComp=S(gravado('triagem','Registro - Assunto detalhado'))||S(V('triagem','Assunto detalhado'));
+  var assuntoPrincipal=assuntoCNJ(),assuntoComp=S(gravado('triagem','Registro - Assunto detalhado'))||S(V('triagem','Assunto detalhado'));
   function normalAssunto(v){return N(S(v)).replace(/\s+/g,' ').trim();}
   var assuntoStack=el('div','hero-assunto-stack'),principal=Array.from(as.children).find(function(x){return !x.classList.contains('hero-secao');});if(principal)assuntoStack.append(principal);as.append(assuntoStack);
   if(assuntoComp&&normalAssunto(assuntoComp)!==normalAssunto(assuntoPrincipal)){var sub=el('button','hero-case-preview',assuntoComp);sub.type='button';sub.title='Editar assunto detalhado em Caso, Conteúdo e Questões';sub.onclick=function(){show(2);};assuntoStack.append(sub);}
@@ -1184,7 +1200,7 @@ function heroOrganizarProntuario(){
       mg.append(x);
     });}
   }else{
-    var dlm=el('dl','pc-dl'),line=el('div');line.append(el('dt','','Assunto CNJ'),el('dd','',S(R['Assunto CNJ']||fonteVal({fonte:['Assunto']}))));dlm.append(line);materia.append(dlm);
+    var dlm=el('dl','pc-dl'),line=el('div');line.append(el('dt','','Assunto CNJ'),el('dd','',assuntoCNJ()));dlm.append(line);materia.append(dlm);
     html(mg,campoRot('triagem','Ramo do direito','Ramo do direito')+campoRot('triagem','Outros assuntos','Outros assuntos'));
   }
   /* A inclusão fica em Matéria, não na face de resumo. */
@@ -1992,6 +2008,7 @@ function trazer() {
 
 /* ---------- ligações ---------- */
 ses.ouvir(function () { if (modo === 'ficha') carregar(false); if (window.MutaLote) window.MutaLote.sessao(); });
+document.addEventListener('muta:autuacao',function(e){if(modo==='ficha'&&G.F&&e.detail&&Muta.chaveProcesso(e.detail.numero)===Muta.chaveProcesso(G.cnj))render();});
 document.addEventListener('muta:prontuario', function () { if (modo === 'ficha') carregar(false); else if (G.pend && Object.keys(G.pend).length) gravarJa().catch(function () {}); });
 window.addEventListener('pagehide', function () { if (Object.keys(G.pend).length) gravarJa(true); });
 document.addEventListener('visibilitychange', function () { if (document.hidden && Object.keys(G.pend).length) gravarJa().catch(function () {}); });
@@ -2037,7 +2054,7 @@ function trazerFicha(f, op, fonte, substituir) {
 window.MutaMapa = { camposFicha: camposFicha, trazerFicha: trazerFicha, getP: getP, setP: setP };
 window.MutaGabinete = { recarregar: function () { carregar(true); }, gravarPendente: function () { return gravarJa(); }, modo: function () { return modo; },
   /* para os autos (autos.js) e a aba Minuta: o prontuário aberto e a gravação */
-  render: function () { render(); }, cnj: function () { return G.cnj; }, modelo: function () { return G.F; }, op: function () { return G.op; }, fo: function () { return G.fo; },
+  render: function () { render(); }, cnj: function () { return G.cnj; }, modelo: function () { return G.F; }, op: function () { return G.op; }, fo: function () { var a=autuacaoAtual(),f=Object.assign({},G.fo||{});if(a.assunto)f.Assunto=a.assunto;if(a.classe)f.classe_judicial=a.classe;return f; }, assuntoCNJ:assuntoCNJ, classeAutuacao:classeAutuacao,
   api: function (p, o) { return ses.api(p, o); },
   gravado: gravado, V: V, F: function (k) { return fonteVal({ fonte: [k] }); }, marcar: marcar, gravar: function () { return gravarJa(); }, ir: function (aba) { if (aba === 'Triagem' || aba === 'Roteiro') {aba = 'Processo';if(heroV53())G.rot='tri';} if(heroV53()&&aba==='Produção'){aba='Processo';G.rot='pro';} if(heroV53()&&aba==='Resumo'){aba='Processo';G.rot='res';} if (MODOS.indexOf(aba) >= 0) { G.aba = aba; render(); } },
   destino: function () { return G.F ? destino() : ''; }, pronunciamento: function(){var i=pronAtual();return i>=0?PRON[i][0]:'';},

@@ -2108,3 +2108,13 @@ body.hero-redesign-v53 #pauta-app .pa-mk b{font:600 12px/1.2 var(--mono);color:v
 body.hero-redesign-v53 #pauta-app .pa-mk em{font:400 9px/1.2 system-ui,sans-serif;color:var(--muted-fg)}
 body.hero-redesign-v53 #pauta-app .pa-mk.now :is(small,b,em){color:var(--gold)}
 body.hero-redesign-v53 #pauta-app .pa-mk.ses b{color:var(--primary)}
+
+/* Cabeçalho do processo: assunto TPU em linha de leitura, sem centralização nem lacuna editorial. */
+body.hero-redesign-v53 #gab .hero-top-classif{display:flex!important;justify-content:flex-start!important;align-items:flex-start!important;gap:6px!important;min-width:0;width:100%;margin:7px 0 3px!important}
+body.hero-redesign-v53 #gab .hero-top-classif>.hero-secao{flex:none;margin:2px 0 0!important}
+body.hero-redesign-v53 #gab .hero-assunto-stack{flex:1;display:grid!important;gap:3px;min-width:0;text-align:left!important;justify-items:start!important}
+body.hero-redesign-v53 #gab .hero-assunto-stack>span:first-child{font-size:14px!important;line-height:1.35!important;font-weight:500!important;white-space:normal;overflow-wrap:anywhere;text-align:left!important}
+body.hero-redesign-v53 #gab .hero-assunto-stack>span:first-child::after{content:none!important}
+body.hero-redesign-v53 #gab .hero-assunto-stack>.hero-assunto-vazio{font-family:inherit!important;font-size:11px!important;font-style:normal!important;color:var(--muted-fg);text-decoration:none;cursor:default}
+body.hero-redesign-v53 #gab .hero-proc-tags>.hero-class-only{max-width:100%;overflow:hidden;text-overflow:ellipsis}
+body.hero-redesign-v53 #gab .pm-l1{flex-wrap:wrap;justify-content:flex-start}

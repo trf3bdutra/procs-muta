@@ -40,6 +40,8 @@ function consolidar(reg) {
   reg.host = melhor ? melhor.host || '' : '';
   reg.classe = melhor ? (melhor.classe || '') : '';
   reg.via = melhor ? (melhor.via || '') : '';
+  var aut = Object.keys(fr).map(function(k){return fr[k];}).filter(function(q){return q&&melhor&&q.numero===melhor.numero&&q.host===melhor.host&&q.classeJudicial;}).sort(function(a,b){return b.t-a.t;})[0];
+  reg.classeJudicial=aut?aut.classeJudicial:'';reg.assuntoCNJ=aut?aut.assuntoCNJ||'':'';
   /* nome da tarefa aberta ("[Sessão] Aguardando a sessão"): de qualquer quadro com o mesmo número */
   reg.tarefa = '';
   Object.keys(fr).forEach(function (k) { var q = fr[k]; if (q && q.tarefa && melhor && q.numero === melhor.numero && !reg.tarefa) reg.tarefa = q.tarefa; });
@@ -70,7 +72,7 @@ chrome.runtime.onMessage.addListener(function (msg, sender) {
     return chrome.storage.session.get(chave).then(function (o) {
       var reg = o[chave] || { quadros: {} };
       var host = ''; try { host = new URL(sender.url || sender.tab.url).hostname; } catch (e) {}
-      reg.quadros[quadro] = { host: host, numero: numero, classe: classe, forca: forca, via: String(msg.via || '').slice(0, 20), ctx: String(msg.ctx || '').slice(0, 10), ed: !!msg.ed, tarefa: typeof msg.tarefa === 'string' ? msg.tarefa.slice(0, 120) : '', lib: /^\d{1,2}\/\d{1,2}$/.test(String(msg.lib || '')) ? msg.lib : '', t: Date.now() };
+      reg.quadros[quadro] = { host: host, numero: numero, classe: classe, classeJudicial: numero&&typeof msg.classeJudicial==='string'?msg.classeJudicial.slice(0,200):'', assuntoCNJ: numero&&typeof msg.assuntoCNJ==='string'?msg.assuntoCNJ.slice(0,500):'', forca: forca, via: String(msg.via || '').slice(0, 20), ctx: String(msg.ctx || '').slice(0, 10), ed: !!msg.ed, tarefa: typeof msg.tarefa === 'string' ? msg.tarefa.slice(0, 120) : '', lib: /^\d{1,2}\/\d{1,2}$/.test(String(msg.lib || '')) ? msg.lib : '', t: Date.now() };
       consolidar(reg);
       var s = {}; s[chave] = reg;
       return chrome.storage.session.set(s);

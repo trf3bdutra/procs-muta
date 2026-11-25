@@ -254,12 +254,12 @@
     var d=elem('details','card pv-identity');d.id='pv-identity';d.open=identOpen;var su=elem('summary','pv-id-title'),title=elem('div');title.append(elem('b','','Identificação e matéria'),elem('small','muted','Classe, julgamento e caracterização do caso'));su.append(title,elem('span','pv-id-chevron','⌄'));d.append(su);
     var sec=elem('div','pv-id-content');
     sec.append(elem('h4','pm-mer-h','ID'));
-    var classe=source(['classe_judicial','Classe','DataJud · Classe'])||(pjeDoProcesso()?window.MutaPje.classe():'');
+    var classe=classeAutuacao()||source(['classe_judicial','Classe','DataJud · Classe']);
     sec.append(readRow('Classe',classe),tipoField());
     // Próximo ato, destino e seleção prévia são definidos na Triagem.
     var res=elem('div','pv-idrow'),c=destino()==='monocratica'?campoLista('producao','Voto - Resultado'):campoModelo('producao','Voto - Resultado');
     if(c)add(res,campo(Object.assign({},c,{rotulo:'Conclusão / resultado'})));sec.append(res);
-    sec.append(elem('h4','pm-mer-h','Matéria'),(campoModelo('triagem','Ramo do direito')?field('triagem','Ramo do direito','Ramo do direito'):extraField('ramo','Ramo do direito')),readRow('Assunto CNJ',source(['Assunto'])),(campoModelo('triagem','Outros assuntos')?field('triagem','Outros assuntos','Outros assuntos'):extraField('outros','Outros assuntos')));
+    sec.append(elem('h4','pm-mer-h','Matéria'),(campoModelo('triagem','Ramo do direito')?field('triagem','Ramo do direito','Ramo do direito'):extraField('ramo','Ramo do direito')),readRow('Assunto CNJ',assuntoCNJ()),(campoModelo('triagem','Outros assuntos')?field('triagem','Outros assuntos','Outros assuntos'):extraField('outros','Outros assuntos')));
     var ad=elem('div','pv-idrow');ad.append(elem('span','gl','Assunto detalhado'));
     var detail=assuntoDetalhado();if(detail)add(ad,detail);else{var plus=btn('+ Detalhamento do assunto','data-ad','ed');plus.className='pm-ad-add';ad.append(plus);}sec.append(ad);
     sec.append(field('triagem','Tema','Tipo de caso'),field('triagem','Especificidades','Especificidades',true),sintese('sp','Síntese processual','Resumo da tramitação, decisões, recursos e pedidos.'),sintese('sf','Síntese fática','Fatos materiais relevantes para a controvérsia.'));

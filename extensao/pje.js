@@ -8,7 +8,7 @@
   var br = window.MutaProntuarioBridge;
   var temChrome = !!(window.chrome && chrome.storage && chrome.storage.session && chrome.tabs);
   var PREF = 'muta-pje:seguir';
-  var abaAtiva = null, ultimoPje = '', ultimaClasse = '', ultimaTarefa = '', ultimoCtxTela = '', ultimaLib = '';
+  var abaAtiva = null, ultimoPje = '', ultimaClasse = '', ultimaTarefa = '', ultimoCtxTela = '', ultimaLib = '', ultimaAutuacao={};
 
   var seguir = $('pje-seguir'), trocar = $('pje-aba'), PREF_ABA = 'muta-pje:aba-auto', ultimoCtx = '';
   try { seguir.checked = localStorage.getItem(PREF) !== '0'; } catch (e) {}
@@ -35,14 +35,16 @@
   function aplicar(reg) {
     hostAtual=reg&&reg.host||'';
     if(primeiroGrau(hostAtual)){
-      ultimoPje=reg.numero||'';ultimaClasse='';ultimaTarefa='';ultimaLib='';ultimoCtxTela='referencia';ultimoCtx='';
+      ultimoPje=reg.numero||'';ultimaAutuacao={};ultimaClasse='';ultimaTarefa='';ultimaLib='';ultimoCtxTela='referencia';ultimoCtx='';
       mostrar(ultimoPje,'PJe 1º grau: '+(ultimoPje||'sem processo identificado')+' · prontuário de 2º grau preservado','pausa');
       document.dispatchEvent(new CustomEvent('muta:referencia',{detail:{numero:ultimoPje,host:hostAtual}}));return;
     }
     document.dispatchEvent(new CustomEvent('muta:referencia',{detail:{numero:'',host:hostAtual}}));
     var numero = reg && reg.numero || '', classe = reg && reg.classe || '';
+    var antigaAut=JSON.stringify(ultimaAutuacao);ultimaAutuacao={numero:numero,classe:reg&&reg.classeJudicial||'',assunto:reg&&reg.assuntoCNJ||''};
     ultimoPje = numero; ultimaClasse = classe; ultimaTarefa = reg && reg.tarefa || ''; ultimaLib = reg && reg.lib || ''; ultimoCtxTela = reg ? (reg.ctx === 'autos' ? 'autos' : reg.ed ? 'editor' : reg.ctx || '') : '';
     try { document.dispatchEvent(new CustomEvent('muta:pje', { detail: { numero: numero, classe: classe, tarefa: ultimaTarefa, ctx: ultimoCtxTela } })); } catch (e) {}
+    if(antigaAut!==JSON.stringify(ultimaAutuacao))document.dispatchEvent(new CustomEvent('muta:autuacao',{detail:ultimaAutuacao}));
     if (!numero) { mostrar('', temChrome ? 'Nenhum processo aberto na aba ativa do PJe.' : 'Fora da extensão: sem leitura do PJe.', 'off'); return; }
     var atual = br.chaveAtual(), k = Muta.chaveProcesso(numero);
     var tela = reg.ctx === 'autos' ? ' · autos digitais' : reg.ed ? ' · editor da minuta' : reg.via === 'seleção na lista' ? ' · escolhido na lista' : '';
@@ -85,6 +87,7 @@
     /* número do processo aberto na aba ativa do PJe (vazio se nenhum) */
     processo: function () { return ultimoPje; },
     classe: function () { return ultimaClasse; },
+    autuacao: function(){return Object.assign({},ultimaAutuacao);},
     /* nome da tarefa aberta ("[Sessão] Aguardando a sessão") e a tela (autos, editor, tarefa, lista) */
     tarefa: function () { return ultimaTarefa; },
     /* 0.67: { ok, tot } das caixas de liberação do editor em "Aguardando a sessão", ou null */

@@ -141,17 +141,32 @@
       if (!/libera/i.test(t)) return; tot++; if (c.checked) ok++; }); });
     return tot ? ok + '/' + tot : '';
   }
+  /* A autuação do PJe é a fonte primária da classe e do assunto TPU.
+     Só lê os rótulos da área de identificação dos autos do CNJ reconhecido, nunca o texto da minuta ou das peças. */
+  function autuacaoPje(d) {
+    if (!d || !d.numero || d.ctx !== 'autos' || !document.body) return {};
+    var texto = (document.body.innerText || '').slice(0,18000);
+    var linhas = texto.split(/\r?\n/).map(function(x){return x.trim();}).filter(Boolean);
+    var ci = linhas.findIndex(function(x){return /^classe judicial:?$/i.test(x);});
+    if(ci<0||ci>100)return {};
+    var ai = linhas.findIndex(function(x,i){return i>ci&&i<=ci+8&&/^assuntos?(?: principal)?:?$/i.test(x);});
+    var classe=linhas[ci+1]||'', assunto=ai>=0?linhas[ai+1]||'':'';
+    if(!classe||classe.length>200||!/\(\d+\)\s*$/.test(classe))return {};
+    if(!assunto||assunto.length>500||/^(processo refer[eê]ncia|[oó]rg[aã]o julgador|compet[eê]ncia|relator|partes|valor da causa)$/i.test(assunto))assunto='';
+    return {classe:classe,assunto:assunto};
+  }
   var ultimo = null, espera = null;
   function informar() {
     espera = null;
     var d;
     try { d = detectar(); } catch (e) { return; }
     try { d.lib = liberacaoEditor(d.tarefa); } catch (e) { d.lib = ''; }
-    var chave = d.numero + '|' + d.classe + '|' + d.forca + '|' + d.ctx + '|' + d.ed + '|' + (d.tarefa || '') + '|' + d.lib;
+    var aut=autuacaoPje(d);
+    var chave = d.numero + '|' + d.classe + '|' + d.forca + '|' + d.ctx + '|' + d.ed + '|' + (d.tarefa || '') + '|' + d.lib + '|' + (aut.classe||'') + '|' + (aut.assunto||'');
     if (chave === ultimo) return;
     ultimo = chave;
     try { if (d.ctx === 'autos') sinaisAutos(d.numero); } catch (e) {}
-    try { chrome.runtime.sendMessage({ tipo: 'muta-processo', numero: d.numero, classe: d.classe, forca: d.forca, via: d.via, ctx: d.ctx, ed: !!d.ed, tarefa: d.tarefa || '', lib: d.lib || '', host: location.host }); }
+    try { chrome.runtime.sendMessage({ tipo: 'muta-processo', numero: d.numero, classe: d.classe, forca: d.forca, via: d.via, ctx: d.ctx, ed: !!d.ed, tarefa: d.tarefa || '', lib: d.lib || '', classeJudicial: aut.classe||'', assuntoCNJ: aut.assunto||'', host: location.host }); }
     catch (e) { /* extensão recarregada: esta página fica sem vínculo até ser recarregada */ }
   }
   function agendar() { if (!espera) espera = setTimeout(informar, 700); }

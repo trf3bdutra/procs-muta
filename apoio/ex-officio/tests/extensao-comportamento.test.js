@@ -411,7 +411,7 @@ test('universal 0.75.2: aba aberta ligada ao painel (cor do papel, sem linha de 
     });
     assert.equal(v.aba, v.painel, 'aba aberta na cor do painel');
     assert.ok(v.sobrepoe, 'aba aberta cobre a linha da faixa');
-    assert.match(v.fonte, /Georgia/); assert.match(v.titulo, /Georgia/); assert.equal(v.ponto, '"."');
+    assert.match(v.fonte, /Georgia/); assert.match(v.titulo, /Georgia/); assert.equal(v.ponto, 'none');
     assert.deepEqual(P.erros, [], 'sem erro de script');
   } finally { await P.fim(); }
 });
@@ -449,6 +449,10 @@ test('universal 0.76.1: seção e assunto sempre no cabeçalho; primeiro bloco d
     await pg.waitForSelector('.hero-top-classif', { timeout: 15000 });
     const v = await pg.evaluate(() => ({ secao: document.querySelector('.hero-top-classif .hero-secao').textContent, vazia: document.querySelector('.hero-top-classif .hero-secao').classList.contains('hero-secao-vazia'), assunto: document.querySelector('.hero-assunto-stack>span').textContent }));
     assert.deepEqual(v, { secao: 'Seção ?', vazia: true, assunto: 'Atraso na Entrega do Imóvel' }, 'sem seção na fonte, a etiqueta aparece vazia');
+    await pg.evaluate(cnj => { window.MutaPje.autuacao=()=>({numero:cnj,classe:'PETIÇÃO CÍVEL (241)',assunto:'Esbulho / Turbação / Ameaça (10445)'}); window.MutaGabinete.render(); }, CNJ);
+    await pg.waitForFunction(()=>document.querySelector('.hero-assunto-cnj')?.textContent==='Esbulho / Turbação / Ameaça (10445)');
+    assert.match(await pg.locator('.hero-class-only').innerText(),/PETIÇÃO CÍVEL/i);
+
     await pg.click('.hero-v53-tabs [data-aba="Autos"]');
     await pg.waitForSelector('#g-lei', { timeout: 15000 });
     const a = await pg.evaluate(() => { const l = document.getElementById('g-lei'), n = document.querySelector('.hero-header-nav'), cs = getComputedStyle(l); return { borda: cs.borderTopWidth, gap: Math.round(l.getBoundingClientRect().top - n.getBoundingClientRect().bottom) }; });
