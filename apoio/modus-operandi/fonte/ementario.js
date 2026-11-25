@@ -277,7 +277,7 @@ function painel(html,ondeSplit){
   var dr=$('#e-dr'),b=$('#e-drb');dr.hidden=false;b.innerHTML=html;b.scrollTop=0;return b;
 }
 function ppValor(k,v){if(k==='Valor da causa'&&/^\d+(\.\d+)?$/.test(v))return 'R$ '+Number(v).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});if(k==='Distribuição')return v.replace(/\s+\d{2}:\d{2}(:\d{2})?$/,'').replace(/^(\d{4})-(\d{2})-(\d{2})$/,'$3/$2/$1');return v;}
-function ppPartes(P){
+function ppPartes(P,integrado){
   if(!P)return '';
   /* partes e advogados: do cabeçalho do inteiro teor (PJe), quando houver; senão, do acervo */
   var pt=(P.pt||[]).filter(function(z){return !/^RELATOR$/i.test(z[0]);}),ac=P.ac||[],h='';
@@ -290,7 +290,7 @@ function ppPartes(P){
   var info=ac.filter(function(z){return !/^(Polo|Advogado)/.test(z[0])&&z[0]!=='Etiquetas';});
   var et=ac.filter(function(z){return z[0]==='Etiquetas';})[0];
   if(!linhas.length&&!info.length&&!et)return '';
-  h+='<div class="pp-k" style="margin-top:14px">Partes e processo</div><div class="pp-proc">'+linhas.join('')+(info.length?'<div class="pp-pg">'+info.map(function(z){return '<div><span>'+esc(z[0])+'</span>'+esc(ppValor(z[0],z[1]))+'</div>';}).join('')+'</div>':'')+(et?'<div class="pp-et"><span>Etiquetas do PJe</span>'+String(et[1]).split(/\s*,\s*/).filter(Boolean).map(function(t){return '<i>'+esc(t)+'</i>';}).join('')+'</div>':'')+'</div>';
+  h+=(integrado?'<div class="pp-interna"><div class="pp-k">Partes e dados processuais</div>':'<div class="pp-k" style="margin-top:14px">Partes e processo</div><div class="pp-proc">')+linhas.join('')+(info.length?'<div class="pp-pg">'+info.map(function(z){return '<div><span>'+esc(z[0])+'</span>'+esc(ppValor(z[0],z[1]))+'</div>';}).join('')+'</div>':'')+(et?'<div class="pp-et"><span>Etiquetas do PJe</span>'+String(et[1]).split(/\s*,\s*/).filter(Boolean).map(function(t){return '<i>'+esc(t)+'</i>';}).join('')+'</div>':'')+'</div>';
   return h;
 }
 var COL_ORIGENS={};
@@ -307,7 +307,7 @@ function painelOrigemCol(x){
     (x._origemEstado==='carregando'?'<p role="status">Carregando proveniência…</p>':x._origemEstado!=='ok'?'<p>Metadados de origem indisponíveis. <button class="e-mini" data-colretry>Tentar novamente</button></p>':'')+
     '<div class="pp-pg">'+rows.filter(function(z){return z[1]!==null&&z[1]!==undefined&&z[1]!=='';}).map(function(z){return '<div style="overflow-wrap:anywhere"><span>'+esc(z[0])+'</span>'+esc(z[1])+'</div>';}).join('')+'</div><p>Sem curadoria. A data do ato é extraída do documento assinado; disponibilização não equivale à data jurídica de publicação. A base não preserva o inteiro teor. Confira o original antes de citar.</p></div>';
 }
-var PP_ABAS=[['julgado','Julgado'],['processo','Processo'],['referencias','Referências'],['correspondencias','Correspondências'],['rastreabilidade','Rastreabilidade']];
+var PP_ABAS=[['julgado','Julgado'],['processo','Processo'],['correspondencias','Correspondências'],['rastreabilidade','Rastreabilidade']];
 function ppSelecionar(box,k,focus){
   if(!PP_ABAS.some(function(t){return t[0]===k;}))k='julgado';
   E.detAba=k;
@@ -315,7 +315,7 @@ function ppSelecionar(box,k,focus){
   $$('[data-ppsec]',box).forEach(function(p){p.hidden=p.dataset.ppsec!==k;});
 }
 function abrirIT(x){
-  if(!x)return;var mesmo=E.det===x.id,aba=mesmo?(E.detAba||'julgado'):'julgado';E.det=x.id;if(aba==='catalogacao')aba='processo';E.detAba=aba;
+  if(!x)return;var mesmo=E.det===x.id,aba=mesmo?(E.detAba||'julgado'):'julgado';E.det=x.id;if(aba==='catalogacao')aba='processo';if(aba==='referencias')aba='julgado';E.detAba=aba;
   var anterior=$('#e-det'),drawer=$('#e-drb');if(!anterior||anterior.hidden)anterior=drawer;
   var pos=mesmo&&anterior?anterior.scrollTop:0,ppAberto=mesmo&&anterior&&!!anterior.querySelector('.pp-em:not(.cut)'),itAberto=mesmo&&anterior&&!!anterior.querySelector('[data-ppsec="julgado"] details.pp-d[open]');
   if(window.EMENT_FONTE&&x.sid&&!x._origemEstado){x._origemEstado='carregando';origemCol(x).catch(function(){x._origemEstado='erro';}).then(function(){if(E.det===x.id)abrirIT(x);});}
@@ -339,31 +339,32 @@ function abrirIT(x){
   /* Julgado: tese, resultado, ementa e texto preservado, reunidos. */
   var em=String(x.e||'');
   h+='<div class="pp-k" style="margin-top:14px">'+(window.EMENT_FONTE&&x.t==='M'?'Abertura da decisão':'Ementa')+'</div><div class="e-box serif pp-em'+(em.length>1200&&!ppAberto?' cut':'')+'">'+refs(em)+'</div>'+(em.length>1200&&!ppAberto?'<button class="pp-more" data-ppm>Ver texto completo do campo</button>':'');
-  /* 8. inteiro teor e observações, recolhíveis */
+  /* Referências do julgado — imediatamente após a ementa; vínculos por CNJ seguem identificados à parte. */
+  h+='<div class="pp-k" style="margin-top:14px">Referências</div><div class="pp-proc pp-referencias">';
+  var gruposRef=[['Dispositivos legais',ct.norm,x.disp],['Jurisprudência',[],x.jur],['Temas e súmulas',ct.enun,x.temas]];
+  gruposRef.forEach(function(g){h+='<div class="pp-interna pp-ref-grupo"><div class="pp-k">'+g[0]+'</div>'+(g[1].length?'<div class="e-chipl pp-cita">'+g[1].map(function(t){return '<span>'+refs(t)+'</span>';}).join('')+'</div>':'')+(g[2]?'<div class="pp-ref-text">'+refs(g[2])+'</div>':'')+(!g[1].length&&!g[2]?'<p class="meta">Nenhuma referência identificada neste registro.</p>':'')+'</div>';});
+  var repV=repLinksDoProcesso(x.n||x.proc);
+  if(repV)h+='<div class="pp-interna">'+repV+'</div>';
+  h+='</div>';
+  /* Inteiro teor */
   if(!it&&x.sid&&!x._itFalhou)h+='<p class="meta" style="margin-top:14px">Carregando o texto disponível na série…</p>';
   if(!it&&x._itFalhou)h+='<p class="meta">Texto complementar indisponível.</p>';
   if(it)h+='<details class="pp-d"'+(x.serie||itAberto?' open':'')+'><summary>'+(window.EMENT_FONTE?(x.t==='A'?'Resultado do acórdão':'Abertura e dispositivo'):'Inteiro teor')+' <small>'+n0(it.length)+' caracteres</small></summary><div class="e-texto">'+refs(it)+'</div></details>';
   P.julgado=h;h='';
   /* Processo: identificação de autuação e dados do acervo/documento. */
-  h+='<div class="pp-k">Identificação e autuação</div><div class="pp-proc"><div class="pp-pg">'+[['Processo',x.n],['Classe',x.cl||x.c],['Órgão julgador',x.o],['Relator',x.rl||(!col?'CARLOS MUTA':'')]].filter(function(z){return z[1];}).map(function(z){return '<div><span>'+esc(z[0])+'</span>'+esc(z[1])+'</div>';}).join('')+'</div></div>';
-  h+=ppPartes(x.proc)||'<p class="meta">Dados complementares das partes e do processo não disponíveis neste registro.</p>';
+  h+='<div class="pp-k">Processo</div><div class="pp-proc pp-processo-unico"><div class="pp-interna"><div class="pp-k">Identificação e autuação</div><div class="pp-pg">'+[['Processo',x.n],['Classe',x.cl||x.c],['Órgão julgador',x.o],['Relator',x.rl||(!col?'CARLOS MUTA':'')]].filter(function(z){return z[1];}).map(function(z){return '<div><span>'+esc(z[0])+'</span>'+esc(z[1])+'</div>';}).join('')+'</div></div>';
+  h+=ppPartes(x.proc,true)||'<div class="pp-interna"><div class="pp-k">Partes e dados processuais</div><p class="meta">Dados complementares das partes e do processo não disponíveis neste registro.</p></div>';
   /* Catalogação dentro de Processo, preservando a separação dos dados originais. */
   var R0=x.rast||{},catalogo=[['Área',area],['Matéria',x.mat],['Assunto',x._ass],['Apreciação',x._apr],['Resultado classificado',x._res],['Curadoria',x.serie?'Série sem curadoria':R0.cur]];
-  h+='<div class="pp-k">Classificação jurídica</div><div class="pp-proc"><div class="pp-pg">'+catalogo.filter(function(z){return z[1];}).map(function(z){return '<div><span>'+esc(z[0])+'</span>'+esc(z[1])+'</div>';}).join('')+'</div></div>';
+  h+='<div class="pp-interna"><div class="pp-k">Classificação jurídica</div><div class="pp-pg">'+catalogo.filter(function(z){return z[1];}).map(function(z){return '<div><span>'+esc(z[0])+'</span>'+esc(z[1])+'</div>';}).join('')+'</div></div>';
   if(x.tcS||x.serie)h+='<p class="meta">Classificação automática: conferir antes de utilizar como dado validado.</p>';
   /* Detalhamento do caso: tipo legado + particularidades textuais + etiquetas, sem perder a procedência. */
   var det=String(x.tc||'').trim(),esp=String(x.esp||'').trim(),seen={},detTags=[];
   (x.tags||[]).forEach(function(t){var k=nz(t).trim();if(k&&!seen[k]&&k!==nz(det).trim()&&k!==nz(esp).trim()){seen[k]=true;detTags.push(t);}});
   if(det&&esp&&nz(det).trim()===nz(esp).trim())esp='';
-  h+='<div class="pp-k" style="margin-top:14px">Detalhamento do caso</div><div class="pp-proc pp-detalhamento">'+(det?'<div class="pp-det-text">'+refs(det)+(x.tcS?' <small class="pp-sugerido">sugerido</small>':'')+'</div>':'')+(esp?'<div class="pp-det-text">'+refs(esp)+'</div>':'')+(detTags.length?'<div class="e-chipl pp-tags">'+detTags.map(function(t){return '<span>'+esc(t)+'</span>';}).join('')+'</div>':'')+(!det&&!esp&&!detTags.length?'<p class="meta">Detalhamento não registrado.</p>':'')+'</div>';
+  h+='<div class="pp-interna pp-detalhamento"><div class="pp-k">Detalhamento do caso</div>'+(det?'<div class="pp-det-text">'+refs(det)+(x.tcS?' <small class="pp-sugerido">sugerido</small>':'')+'</div>':'')+(esp?'<div class="pp-det-text">'+refs(esp)+'</div>':'')+(detTags.length?'<div class="e-chipl pp-tags">'+detTags.map(function(t){return '<span>'+esc(t)+'</span>';}).join('')+'</div>':'')+(!det&&!esp&&!detTags.length?'<p class="meta">Detalhamento não registrado.</p>':'')+'</div>';
   if(x.obs)h+='<details class="pp-d"><summary>Observações do registro</summary><div class="e-box">'+esc(x.obs)+'</div></details>';
-  P.processo=h;h='';
-  /* 6. cita: enunciados e normas, dispositivos e jurisprudência citados */
-  if(ct.enun.length||ct.norm.length||x.disp||x.jur){h+='<div class="pp-k" style="margin-top:14px">Cita</div>';
-    if(ct.enun.length||ct.norm.length)h+='<div class="e-chipl pp-cita">'+ct.enun.map(function(t){return '<span class="en">'+refs(t)+'</span>';}).join('')+ct.norm.map(function(t){return '<span class="no">'+refs(t)+'</span>';}).join('')+'</div>';
-    if(x.disp)h+='<div class="pp-ci"><span>Dispositivos citados</span>'+refs(x.disp)+'</div>';
-    if(x.jur)h+='<div class="pp-ci"><span>Jurisprudência citada</span>'+refs(x.jur)+'</div>';}
-  h+=repLinksDoProcesso(x.n||x.proc);P.referencias=h||'<p class="meta">Nenhuma referência identificada ou cadastrada neste registro.</p>';h='';
+  P.processo=h+'</div>';h='';
   /* 7. correspondentes */
   var TG={};x.tags.forEach(function(t){TG[nz(t)]=1;});
   var CR=E.idx.filter(function(z){return z.id!==x.id;}).map(function(z){var c=z.tags.filter(function(t){return TG[nz(t)];});var sc=(tcIgual(x,z)?3:0)+c.length+(z._ass&&z._ass===x._ass?1:0);return {z:z,c:c,sc:sc};}).filter(function(o){return o.sc>=3;}).sort(function(a,b){return b.sc-a.sc||String(b.z.d).localeCompare(String(a.z.d));});
