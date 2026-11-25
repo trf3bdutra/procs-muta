@@ -742,9 +742,9 @@ function pautaHtml() {
   /* resumo, no formato da 1ª seta do cartão */
   var dl = [['Situação', esc(st)], ['Sessão original', dt('Sessão original')], ['Item', esc(S(P['Item (Pauta de Julgamento)']) || '—')],
     ['Sessão de destino', dt('Nova sessão de destino')], ['Sustentação / preferência', esc(so || '—')], ['Julgamento', esc(S(P.JULGAMENTO) || '—')]]
-    .map(function (x) { return '<dt>' + x[0] + '</dt><dd>' + x[1] + '</dd>'; }).join('');
+    .map(function (x) { return '<div><dt>' + x[0] + '</dt><dd>' + x[1] + '</dd></div>'; }).join('');
   var pje = [['Publicação da pauta', 'Pauta - Publicação'], ['Inclusão na pauta', 'Pauta - Inclusão'], ['Proclamação', 'Pauta - Proclamação'], ['Último movimento', 'Pauta - Último movimento']]
-    .filter(function (x) { return S(P[x[1]]); }).map(function (x) { return '<dt>' + x[0] + '</dt><dd>' + esc(br2(P[x[1]])) + '</dd>'; }).join('');
+    .filter(function (x) { return S(P[x[1]]); }).map(function (x) { return '<div><dt>' + x[0] + '</dt><dd>' + esc(br2(P[x[1]])) + '</dd></div>'; }).join('');
   var ed = cs.filter(function (c) { return editavel(c); });
   return '<div class="pc pa-pc"><div class="pa-st0"><span class="pa-sit s-' + esc(N(st).replace(/\s+/g, '-')) + '">' + esc(st) + '</span>' + (mono ? '<small class="muted">destino monocrático: sem pauta de sessão</small>' : '') + '</div>' +
     '<h4 class="pm-mer-h">Sessões de julgamento</h4>' + historicoPautas() +

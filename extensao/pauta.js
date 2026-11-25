@@ -103,7 +103,7 @@
     var g = GB(), cnj = g.cnj ? g.cnj() : '';
     if (!cnj) return '<section class="card pc-sec"><div class="pc-sh"><h3>Processo em tela</h3></div><p class="muted">Abra um processo no PJe ou na lista abaixo.</p></section>';
     /* 0.62: no formato do cartão do processo (fundo cinza, como "autuação e partes") */
-    return '<section class="pc pm pa-proc"><div class="pa-ph"><b>Processo em tela</b><span class="mono">' + esc(cnj) + '</span></div>' + (g.pautaHtml ? g.pautaHtml() : '') + soProcesso(cnj) + '</section>';
+    return '<section class="pc pm pa-proc"><div class="pa-ph"><b>Processo em tela</b><span class="mono">' + esc(cnj) + '</span></div>' + (g.pautaHtml ? g.pautaHtml() : '').replace('<details class="pm-aut pa-reg"', soProcesso(cnj) + '<details class="pm-aut pa-reg"') + '</section>';
   }
   /* 0.64: sigla da classe (TPU/CNJ) e recurso julgado dentro do processo */
   function etqCl(it) { var e2 = window.ClassesCNJ ? window.ClassesCNJ.etiqueta(it.classe, ((it.ctl || {}).cartao || {}).tipoJ || '') : null; return e2 && e2.t ? ' <span class="pc-cl pa-cl" title="' + esc(e2.nome) + '">' + esc(e2.t) + '</span>' : ''; }

@@ -1494,3 +1494,6 @@ html[data-tema=escuro] .pm-pl{background:#0f2230;border-color:#2b4558;color:#a9b
 html[data-tema=escuro] .pm-pl.k-min.ok{background:#12301c;border-color:#2f6b40;color:#9be0ad}
 html[data-tema=escuro] .pm-pl.k-rev.ok{background:#112a45;border-color:#2e5a8e;color:#a9c9f2}
 html[data-tema=escuro] .pm-pl.k-lib.ok{background:#25173a;border-color:#5a3d8a;color:#d3bdf3}
+/* 0.65.1 · Pauta: chips de filtro mais leves; seta de registro discreta */
+.pa-f .chip{border-width:1px}
+.pa-reg>summary{border:0!important;border-top:1px solid #e1e5ea!important}
