@@ -795,3 +795,11 @@ html.emb-cmt body #e-aside{top:0!important;max-height:100vh!important}
 .e-drb .pp-processo-expand:not([hidden]){padding-inline:0}
 @keyframes pp-processo-descer{from{grid-template-rows:0fr;opacity:.25}to{grid-template-rows:1fr;opacity:1}}
 @media(prefers-reduced-motion:reduce){.pp-processo-expand:not([hidden]){animation:none}}
+
+/* O cartão Processo tem uma única borda: cabeçalho de ações + corpo expansível. */
+.pp-process-card{border:1px solid var(--line);background:var(--card);margin:0 0 12px;min-width:0}
+.pp-process-card>.pp-process-actions{margin:0;padding:5px 6px;gap:5px;align-items:center;background:var(--panel)}
+.pp-process-card>.pp-processo-expand:not([hidden]){margin:0;padding:0;border-top:1px solid var(--line)}
+.pp-process-card .pp-processo-slide>.pp-processo-unico{padding:10px 12px;margin:0;border:0;background:transparent}
+.pp-process-card .pp-processo-unico>.pp-interna:first-child{margin-top:0}
+.pp-process-card .pp-processo-unico>.pp-interna:last-child{padding-bottom:0}
