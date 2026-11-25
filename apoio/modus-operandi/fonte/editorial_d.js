@@ -330,7 +330,7 @@ function xRef(){
   /* orientações fora do canhoto: estão no Breviário (capítulo 7) e, o que importa ao bloco, no balão sobre a folha (dkBalao);
      aqui fica só o material do caso aberto (modelos relacionados e parágrafos) */
   h=window.CQX&&CQX.tem()?'<div class="dori"><p class="kick2"><span>Material do caso</span></p></div>'+CQX.painel():'';
-  el.innerHTML=h;
+  h+=modeloReferencias(dkModeloAtivo());el.innerHTML=h;
   if(foco){var q=$('#x-rq');if(q){q.focus();try{q.setSelectionRange(pos,pos);}catch(e){}}}
 }
 /* barra: Minuta-Matriz e modelos escolhidos expressamente */

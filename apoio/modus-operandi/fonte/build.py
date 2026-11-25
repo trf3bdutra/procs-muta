@@ -165,6 +165,8 @@ pacote = {'prec': prec, 'it': it, 'mod': mod, 'par': par, 'ref': ref, 'ac': acx}
 _M28 = RAIZ/'modelos/matrizes-2886.json'
 if _M28.exists():
     pacote['m2886'] = ler(_M28)
+    for _grupo in pacote['m2886']['grupos']:
+        _grupo.setdefault('julgamento', 'ed' if _grupo['id'] in ('8', '3d') else 'agint' if _grupo['id'] == '9' else 'ap')
     if not any(m.get('id') == 'mod-cumprimento-acp-2886' for m in mod):
         mod.append({'id': 'mod-cumprimento-acp-2886', 'tipo': 'Modelo', 'formatoModelo': 'Modelo-matriz',
                     'nomeModelo': '28,86% — cumprimento individual da ACP', 'assunto': 'Cumprimento de sentença — reajuste de 28,86%',
