@@ -395,3 +395,23 @@ test('universal 0.75.1: faixa das subabas colada ao cabeçalho, da mesma cor, e 
     assert.deepEqual(P.erros, [], 'sem erro de script');
   } finally { await P.fim(); }
 });
+
+test('universal 0.75.2: aba aberta ligada ao painel (cor do papel, sem linha de baixo) e estética do Office', { skip: pular, timeout: 90000 }, async () => {
+  const op = { processo: CNJ, origem: {}, triagem: { 'Tipo de Julgamento': 'Apelação' }, producao: { SERVIDOR: 'Rodrigo', MINUTADO: '2026-11-13', Destino: 'Sessão' }, pauta: {}, controles: {} };
+  const P = await abrir(op, { sigilo: '', liberado: true, porque: 'gestor' });
+  try {
+    const { pg } = P;
+    await pg.goto(pg.url().replace('/painel/painel.html', '/painel/universal.html'));
+    await pg.waitForFunction(() => window.MutaSessao && window.MutaSessao.estado().estado === 'on', null, { timeout: 15000 });
+    await pg.evaluate(cnj => { window.chrome.storage.session.set({ 'aba:1': { numero: cnj, classe: 'ApCiv', tarefa: '[Sessão] Aguardando a sessão', ctx: '', ed: false, lib: '' } }); }, CNJ);
+    await pg.waitForSelector('.hero-v53-tabs', { timeout: 15000 });
+    const v = await pg.evaluate(() => {
+      const b = document.querySelector('.hero-v53-tabs>[aria-selected=true]'), nav = document.querySelector('.hero-header-nav'), cs = getComputedStyle(b);
+      return { aba: cs.backgroundColor, painel: getComputedStyle(document.getElementById('gab')).backgroundColor, sobrepoe: Math.round(b.getBoundingClientRect().bottom) >= Math.round(nav.getBoundingClientRect().bottom), fonte: cs.fontFamily, titulo: getComputedStyle(document.querySelector('.hero-assunto-stack>span')).fontFamily, ponto: getComputedStyle(document.querySelector('.hero-assunto-stack>span'), '::after').content };
+    });
+    assert.equal(v.aba, v.painel, 'aba aberta na cor do painel');
+    assert.ok(v.sobrepoe, 'aba aberta cobre a linha da faixa');
+    assert.match(v.fonte, /Georgia/); assert.match(v.titulo, /Georgia/); assert.equal(v.ponto, '"."');
+    assert.deepEqual(P.erros, [], 'sem erro de script');
+  } finally { await P.fim(); }
+});

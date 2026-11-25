@@ -573,3 +573,32 @@ body.hero-redesign-v53 #gab .pc.pm:has(.hero-v53-tabs>[aria-selected=true]:not([
 body.hero-redesign-v53 #gab .pc.pm:has(.hero-v53-tabs>[aria-selected=true]:not([data-rot="res"])) .hero-header-nav{position:static}
 /* no prontuário web (Ex Officio, Caput) a barra do topo não aparece: a faixa prende no alto da página */
 body.hero-redesign-v53.muta-web,.muta-web body.hero-redesign-v53{--h53-topo:0px}
+/* ==== 0.75.2 · estética do Ex Officio e faixa integrada ao conteúdo ====
+   Paleta das páginas do Office (papel #fbfaf5, linhas #d8d3c6, tinta #203b39, petróleo #235a55, ouro #a57829; no escuro
+   #10222e/#1e3747/#ebeff1/#6eba8a/#e6c27a), títulos em Georgia com ponto dourado (como "Ementário." e "Collegium."),
+   ênfase em itálico dourado. A aba aberta se abre para o painel de conteúdo: mesma cor do papel, bordas laterais e filete
+   dourado no alto, sem a linha de baixo — faixa e conteúdo formam um só painel. */
+body.hero-redesign-v53{--p53-surface:#fbfaf5;--p53-card:#fff;--p53-soft:#f3f0e7;--p53-line:#d8d3c6;--p53-ink:#203b39;--p53-muted:#55584f;--p53-accent:#235a55;--p53-accent-soft:#dfe9e4;--p53-gold:#a57829;--p53-tab:#a57829;--p53-fato:#a57829;--p53-proc:#235a55;--p53-serif:Georgia,"Times New Roman",serif}
+html[data-tema=escuro] body.hero-redesign-v53{--p53-surface:#10222e;--p53-card:#132a3b;--p53-soft:#16303e;--p53-line:#1e3747;--p53-ink:#ebeff1;--p53-muted:#a7a8a9;--p53-accent:#6eba8a;--p53-accent-soft:#14301f;--p53-gold:#e6c27a;--p53-tab:#e6c27a;--p53-fato:#e6c27a;--p53-proc:#6eba8a}
+html[data-tema=escuro] body.hero-redesign-v53,html[data-tema=escuro] body.hero-redesign-v53 :is(main,.layout,#gab,main>section){background:var(--p53-surface)!important}
+/* faixa: aba aberta ligada ao painel */
+body.hero-redesign-v53 #gab .hero-header-nav{padding-top:5px!important;margin-bottom:12px!important}
+body.hero-redesign-v53 #gab .hero-header-nav .hero-v53-tabs{gap:2px!important;align-items:flex-end}
+body.hero-redesign-v53 #gab .hero-header-nav .hero-v53-tabs>button{position:relative;border:1px solid transparent!important;border-bottom:0!important;border-radius:7px 7px 0 0!important;margin-bottom:-1px!important;padding:8px 3px 9px!important;color:var(--p53-muted)!important}
+body.hero-redesign-v53 #gab .hero-header-nav .hero-v53-tabs>button:hover{color:var(--p53-ink)!important;background:color-mix(in srgb,var(--p53-surface) 55%,transparent)!important}
+body.hero-redesign-v53 #gab .hero-header-nav .hero-v53-tabs>button[aria-selected=true]{background:var(--p53-surface)!important;border-color:var(--p53-line)!important;box-shadow:inset 0 2px 0 var(--p53-gold)!important;color:var(--p53-ink)!important;font-family:var(--p53-serif)!important;font-style:italic;font-weight:400!important;font-size:12.5px!important;z-index:1}
+/* título do caso à moda do Office: Georgia com ponto dourado */
+body.hero-redesign-v53 #gab .hero-assunto-stack>span:first-child{font-family:var(--p53-serif)!important;font-size:16px!important;font-weight:400!important;letter-spacing:-.005em;line-height:1.25}
+body.hero-redesign-v53 #gab .hero-assunto-stack>span:first-child::after{content:'.';color:var(--p53-gold)}
+body.hero-redesign-v53 #gab .pc-cnj{color:var(--p53-ink)!important}
+/* rótulos de seção com o filete dourado do Office e ênfase em itálico */
+body.hero-redesign-v53 #gab .pc-sh{border-bottom:1px solid var(--p53-line);padding-bottom:7px;margin-bottom:9px!important}
+body.hero-redesign-v53 #gab .pc-sh small,body.hero-redesign-v53 #gab .hero-v53-painel-head .muted{font-family:var(--p53-serif);font-style:italic;font-size:11.5px!important;color:var(--p53-muted)!important}
+body.hero-redesign-v53 #gab .pc-sh h3::before{display:none!important}
+/* sínteses: citação editorial */
+body.hero-redesign-v53 #gab .hero-v53-highlight{font-family:var(--p53-serif)!important;font-size:12.5px!important;line-height:1.5!important;background:transparent!important;padding:2px 0 2px 10px!important}
+body.hero-redesign-v53 #gab .hero-v53-highlight:hover{background:var(--p53-soft)!important}
+body.hero-redesign-v53 #gab .hero-v53-question{font-family:var(--p53-serif)!important;font-size:12px!important}
+/* números das métricas e das etapas em Georgia, como os números do Mural */
+body.hero-redesign-v53 #gab :is(.au-metr b,.rt-ov b){font-family:var(--p53-serif)!important;font-weight:400!important;font-size:19px!important}
+body.hero-redesign-v53 #gab .hero-header-nav .hero-v53-tabs{margin:0!important;overflow:visible!important}
