@@ -1141,7 +1141,7 @@ function heroOrganizarProntuario(){
   expand.onclick=function(){heroTopo.detalhamento=!heroTopo.detalhamento;ajustarDetalhe();};
   db.addEventListener('click',function(){var t=el('textarea');t.rows=3;t.value=dv;t.setAttribute('aria-label','Detalhamento do caso');var ok=el('button','btn solid sm','Gravar'),cancel=el('button','lnk','Cancelar');ok.type=cancel.type='button';dt.replaceChildren(t,ok,cancel);t.focus();ok.onclick=function(){if(window.MUTA_WEB&&window.MUTA_WEB.leitura)return;marcar(dkey,t.value.trim());agendar(400);render();};cancel.onclick=function(){dt.replaceChildren(db);if(!expand.closest('.hero-detail-footer'))dt.append(expand);ajustarDetalhe();};});
   if(window.MUTA_WEB&&window.MUTA_WEB.leitura)db.disabled=true;if(!dv)db.textContent='Registrar detalhamento do caso';if(detail.childNodes.length)id.append(detail);
-  var ac=el('details','hero-acomp hero-enc-pane'),sum=el('summary','','Encaminhamento'),fase=top.querySelector('.pm-fase');if(fase)sum.append(el('small','muted',fase.textContent));var urg=el('button','hero-urg-short');urg.type='button';urg.innerHTML=SV('<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',15);urg.setAttribute('aria-pressed',String(ctlSim('urgencia')));urg.title='Controle de urgência';urg.setAttribute('aria-label',urg.title);urg.disabled=false;sum.append(urg);urg.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();heroTopo.monFoco='urgencia';});ac.append(sum);var body=el('div','hero-acomp-b');ac.append(body);ac.open=true;ac.addEventListener('toggle',function(){if(ac.isConnected)heroTopo.acompanhamento=ac.open;});
+  var ac=el('details','hero-acomp hero-enc-pane'),sum=el('summary','','Encaminhamento'),fase=top.querySelector('.pm-fase');if(fase)sum.append(el('small','muted',fase.textContent));var urg=el('button','hero-urg-short');urg.type='button';urg.innerHTML=SV('<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',15);urg.setAttribute('aria-pressed',String(ctlSim('urgencia')));urg.title='Controle de urgência';urg.setAttribute('aria-label',urg.title);urg.disabled=false;sum.append(urg);urg.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();});ac.append(sum);var body=el('div','hero-acomp-b');ac.append(body);ac.open=true;ac.addEventListener('toggle',function(){if(ac.isConnected)heroTopo.acompanhamento=ac.open;});
   var flow=top.querySelector('.pv-flowbox,.pm-pills'),steps=el('section','hero-steps'),stepsHead=el('div','hero-steps-head');
   var oldHead=flow&&flow.querySelector('.pv-stage-head');if(oldHead)oldHead.remove();
   stepsHead.append(el('h4','pm-mer-h','Etapas'));
@@ -1506,53 +1506,54 @@ function heroOrganizarProntuario(){
     item.append(el('span','gl',label));var disabled=!!(window.MUTA_WEB&&window.MUTA_WEB.leitura)||(sec==='producao'&&!G.gestor);
     html(item,heroEquipeInput(found?found.nome:cur,'data-fk="'+esc(sec+'.'+key)+'" aria-label="'+esc(label)+'"'+(disabled?' disabled':''),'design-'+key));design.append(item);
   });
-  /* Rodapé do próprio cartão superior, fora das três páginas horizontais. */
-  var dock=el('section','hero-acomp-dock hero-enc-monitor-dock'),navA=el('div','hero-acomp-tabs');navA.setAttribute('aria-label','Monitoramento');
-  var tabsA=[['monitoramento','Monitoramento',mon],['sinalizacoes','Sinalizações',sd]];
-  tabsA.forEach(function(x){x[2].id='hero-dock-pane-'+x[0];var s0=x[2].querySelector('summary');if(s0)s0.hidden=true;});
-  /* Monitoramento: janela (dialog), aberta pelos indicadores do cabeçalho ou pelo botão do rodapé; não expande o cartão. */
-  var monDlg=el('dialog','hero-mon-dlg'),mdh=el('div','hero-mon-dlg-h'),mdt=el('b','','Monitoramento especial'),mdx=el('button','hero-mon-dlg-x','×'),mdc=el('div','hero-mon-dlg-c'),sgBox=null;
-  monDlg.id='hero-mon-dlg';mdt.id='hero-mon-dlg-t';monDlg.setAttribute('aria-labelledby',mdt.id);mdx.type='button';mdx.setAttribute('aria-label','Fechar');mdh.append(mdt,mdx);monDlg.append(mdh,mdc);mdc.append(mon);mon.open=true;
-  var velho=document.getElementById('hero-mon-dlg');if(velho)velho.remove();caixa.append(monDlg);
-  function fecharMon(){heroTopo.monDlg='';heroTopo.monFoco='';if(monDlg.open)monDlg.close();}
-  function abrirMon(modo){
-    heroTopo.monDlg=modo;var sigModo=modo==='sigilo';mdt.textContent=sigModo?'Condições de acesso':'Monitoramento especial';mon.hidden=sigModo;if(sgBox)sgBox.hidden=!sigModo;
-    if(!monDlg.open){try{monDlg.showModal();}catch(e){monDlg.setAttribute('open','');}}
-    var k=!sigModo&&heroTopo.monFoco,t=k&&mon.querySelector('.ct-i.'+k);if(t){t.scrollIntoView({block:'nearest'});var f=t.querySelector('button,select,input,textarea');if(f)f.focus();}
+  /* Três visões mutuamente exclusivas do mesmo cartão: Etapas, Sinalizações e Monitoramento. */
+  var sgBox=null;
+  [['monitoramento',mon],['sinalizacoes',sd]].forEach(function(x){x[1].id='hero-dock-pane-'+x[0];var sm=x[1].querySelector('summary');if(sm)sm.hidden=true;});
+  mon.hidden=true;mon.open=true;
+  function abrirMon(foco){
+    foco=foco||'';
+    var fechar=heroTopo.abaAcomp==='monitoramento'&&heroTopo.monFoco===foco&&heroTopo.pagina===0;
+    heroTopo.monFoco=fechar?'':foco;
+    show(0);abrirA(fechar?'':'monitoramento');
+    if(!fechar&&foco){
+      var t=foco==='sigilo'?sgBox:mon.querySelector('.ct-i.'+foco);
+      if(t){t.scrollIntoView({block:'nearest'});}
+    }
   }
-  mdx.onclick=fecharMon;monDlg.addEventListener('cancel',function(e){e.preventDefault();fecharMon();});
-  monDlg.addEventListener('click',function(e){if(e.target===monDlg)fecharMon();});
-  /* O monitoramento é aberto exclusivamente pelo cabeçalho; sem faixa no corpo. */
   /* Sinalizações: ocupam o lugar das etapas no mesmo cartão (não abrem abaixo); "‹ Etapas" ou a mesma categoria voltam. */
   var SNR={pd:'Pendências',ic:'Intercorrências',av:'Avisos'},stepsTitle=stepsHead.querySelector('h4'),voltar=el('button','hero-steps-voltar','‹ Etapas');
   voltar.type='button';voltar.title='Voltar às etapas';voltar.hidden=true;voltar.onclick=function(){abrirA('');};
   function abrirA(k){
     if(k==='acompanhamento'){show(1);return;}
-    if(k==='monitoramento'){abrirMon('monitoramento');return;}
-    var on=k==='sinalizacoes';heroTopo.abaAcomp=on?k:'';heroTopo.sinalizacoes=on;sd.hidden=!on;sd.open=on;steps.classList.toggle('hero-steps-sn',on);
-    if(stepsTitle)stepsTitle.textContent=on?'Sinalizações'+(SNR[heroTopo.snKind]?' · '+SNR[heroTopo.snKind]:''):'Etapas';voltar.hidden=!on;
+    var on=k==='sinalizacoes',monitor=k==='monitoramento';heroTopo.abaAcomp=on||monitor?k:'';heroTopo.sinalizacoes=on;
+    if(!monitor)heroTopo.monFoco='';
+    sd.hidden=!on;sd.open=on;mon.hidden=!monitor;mon.open=monitor;
+    steps.classList.toggle('hero-steps-sn',on);steps.classList.toggle('hero-steps-mon',monitor);
+    if(stepsTitle)stepsTitle.textContent=monitor?'Monitoramento':on?'Sinalizações'+(SNR[heroTopo.snKind]?' · '+SNR[heroTopo.snKind]:''):'Etapas';voltar.hidden=!(on||monitor);
+    status.querySelectorAll('[data-mon-foco]').forEach(function(b){var p=monitor&&b.dataset.monFoco===(heroTopo.monFoco||'');b.setAttribute('aria-expanded',String(monitor));b.setAttribute('aria-pressed',String(p));});
+    mon.querySelectorAll('.ct-i').forEach(function(c){c.classList.toggle('hero-mon-foco',monitor&&!!heroTopo.monFoco&&c.classList.contains(heroTopo.monFoco));});
     ind.querySelectorAll('button').forEach(function(b){var p=on&&b.dataset.snKind===heroTopo.snKind;b.setAttribute('aria-pressed',String(p));b.setAttribute('aria-expanded',String(p));});
     sig.querySelectorAll('.sn-i').forEach(function(r){r.hidden=on&&!!heroTopo.snKind&&!r.classList.contains(heroTopo.snKind);});
   }
   ind.querySelectorAll('button').forEach(function(b){b.setAttribute('aria-controls',sd.id);b.onclick=function(){var kind=b.dataset.snKind,close=heroTopo.abaAcomp==='sinalizacoes'&&heroTopo.snKind===kind;heroTopo.snKind=kind;G.snTp=kind;abrirA(close?'':'sinalizacoes');};});
   ind.setAttribute('role','group');ind.setAttribute('aria-label','Sinalizações');stepsHead.append(voltar,ind);
-  urg.addEventListener('click',function(){abrirA('monitoramento');});
-  if(flow&&flow.parentNode===steps)flow.after(sd);else steps.append(sd);
+  urg.onclick=function(){abrirMon('urgencia');};
+  if(flow&&flow.parentNode===steps)flow.after(sd,mon);else steps.append(sd,mon);
   encFace.append(ac);
   /* Condições processuais: apenas indicadores no cabeçalho, sem alteração de estado ao consultar. */
   var status=el('div','hero-case-status');status.setAttribute('role','group');status.setAttribute('aria-label','Condições do processo');
-  urg.classList.add('hero-status-icon','status-urgencia');urg.title='Urgência'+(ctlSim('urgencia')?' · ativa':' · não registrada');urg.setAttribute('aria-label',urg.title);urg.setAttribute('aria-haspopup','dialog');urg.disabled=false;urg.dataset.ativo=String(ctlSim('urgencia'));urg.hidden=!ctlSim('urgencia');status.append(urg);
+  urg.classList.add('hero-status-icon','status-urgencia');urg.title='Urgência'+(ctlSim('urgencia')?' · ativa':' · não registrada');urg.setAttribute('aria-label',urg.title);urg.setAttribute('aria-controls',mon.id);urg.dataset.monFoco='urgencia';urg.disabled=false;urg.dataset.ativo=String(ctlSim('urgencia'));urg.hidden=!ctlSim('urgencia');status.append(urg);
   var sg=top.querySelector('.sg-b'),lock=el('button','hero-status-icon status-sigilo');lock.type='button';lock.innerHTML=SV('<rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/>',14);
   lock.title=sg?sg.textContent.trim():'Sigilo · sem restrição identificada';lock.setAttribute('aria-label',lock.title);lock.dataset.ativo=String(!!sg);lock.dataset.estado=sg?(sg.classList.contains('sg-ok')?'liberado':sg.classList.contains('sg-l')?'consulta':'restrito'):'inativo';
-  if(sg){sgBox=el('section','hero-sig-details');sgBox.hidden=true;sgBox.append(sg);mdc.append(sgBox);if(sg.querySelector('.sg-f,.sg-e'))heroTopo.monDlg='sigilo';lock.setAttribute('aria-haspopup','dialog');lock.onclick=function(){abrirMon('sigilo');};}else{lock.disabled=true;}
+  if(sg){sgBox=el('section','hero-sig-details');sgBox.append(sg);mb.prepend(sgBox);lock.setAttribute('aria-controls',mon.id);lock.dataset.monFoco='sigilo';lock.onclick=function(){abrirMon('sigilo');};}else{lock.disabled=true;}
   lock.hidden=!sg;status.append(lock);
-  [['meta','Meta','<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/>'],['sensivel','Caso sensível','<path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11z"/><path d="M12 8v4m0 4h.01"/>']].forEach(function(x){var b=el('button','hero-status-icon status-'+x[0]);b.type='button';b.innerHTML=SV(x[2],14);b.dataset.ativo=String(ctlSim(x[0]));b.hidden=!ctlSim(x[0]);b.title=x[1]+(ctlSim(x[0])?' · ativo':' · não registrado');b.setAttribute('aria-label',b.title);b.setAttribute('aria-haspopup','dialog');b.onclick=function(){heroTopo.monFoco=x[0];abrirA('monitoramento');};status.append(b);});
-  var openMon=el('button','hero-monitor-hover','Monitoramento');openMon.type='button';openMon.title='Abrir monitoramento';openMon.setAttribute('aria-label','Abrir monitoramento');openMon.setAttribute('aria-haspopup','dialog');openMon.setAttribute('aria-controls',monDlg.id);openMon.onclick=function(){heroTopo.monFoco='';abrirMon('monitoramento');};status.append(openMon);status.classList.toggle('hero-monitor-empty',!Array.from(status.querySelectorAll('.hero-status-icon')).some(function(b){return !b.hidden;}));nav.append(status);
+  [['meta','Meta','<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/>'],['sensivel','Caso sensível','<path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11z"/><path d="M12 8v4m0 4h.01"/>']].forEach(function(x){var b=el('button','hero-status-icon status-'+x[0]);b.type='button';b.innerHTML=SV(x[2],14);b.dataset.ativo=String(ctlSim(x[0]));b.hidden=!ctlSim(x[0]);b.title=x[1]+(ctlSim(x[0])?' · ativo':' · não registrado');b.setAttribute('aria-label',b.title);b.setAttribute('aria-controls',mon.id);b.dataset.monFoco=x[0];b.onclick=function(){abrirMon(x[0]);};status.append(b);});
+  var openMon=el('button','hero-monitor-hover','Monitoramento');openMon.type='button';openMon.title='Abrir monitoramento';openMon.setAttribute('aria-label','Abrir monitoramento');openMon.setAttribute('aria-controls',mon.id);openMon.dataset.monFoco='';openMon.onclick=function(){abrirMon('');};status.append(openMon);status.classList.toggle('hero-monitor-empty',!Array.from(status.querySelectorAll('.hero-status-icon')).some(function(b){return !b.hidden;}));nav.append(status);
   solBody.classList.add('hero-sol-main-body');
   var solMain=caixa.querySelector('#hero-sol-main');
   if(solMain){solMain.append(solBody);if(window.MutaPauta&&window.MutaPauta.receberEditor)window.MutaPauta.receberEditor(G.cnj,solBody);}
   if(heroTopo.abaAcomp==='solicitacoes')heroTopo.abaAcomp='';
-  abrirA(heroTopo.abaAcomp==='sinalizacoes'||(!heroTopo.abaAcomp&&heroTopo.sinalizacoes)?'sinalizacoes':'');if(heroTopo.monDlg&&(heroTopo.monDlg!=='sigilo'||sgBox))abrirMon(heroTopo.monDlg);else heroTopo.monDlg='';show(heroTopo.pagina);
+  abrirA(heroTopo.abaAcomp==='monitoramento'?'monitoramento':heroTopo.abaAcomp==='sinalizacoes'||(!heroTopo.abaAcomp&&heroTopo.sinalizacoes)?'sinalizacoes':'');show(heroTopo.pagina);
 }
 
 function render() { render0(); heroOrganizarProntuario(); if (window.MutaGerador && window.MutaGerador.pintar) window.MutaGerador.pintar(); }
