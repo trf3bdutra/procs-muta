@@ -2037,3 +2037,10 @@ body.hero-redesign-v53 #gab .hero-v53-profile>summary{text-transform:uppercase;f
 body.hero-redesign-v53 .emd-modos{background:transparent;border:0;border-bottom:1px solid var(--hero53-line);border-radius:0}
 body.hero-redesign-v53 .emd-modos button[aria-selected=true]{box-shadow:inset 0 -2px var(--hero53-gold);color:var(--hero53-gold);border-radius:0;background:transparent}
 body.hero-redesign-v53 :is(#panel-par,#panel-modelos,#panel-acervo) .acv-faixa{background:var(--hero53-surface);border-color:var(--hero53-line)}
+/* 0.74.2 · Leitura dos autos: peça fora da cronologia do 2º grau com ID na ficha ou vinculada do 1º grau; as ausentes numa linha só */
+.au-ch.fi{border-color:color-mix(in srgb,var(--ok) 30%,var(--line));background:var(--card)}
+.au-ch.fi small{color:var(--ok)}
+.au-falta{margin:6px 0 0;font-size:11.5px;line-height:1.45;color:var(--muted-fg)}
+.au-falta b{font-weight:600;color:inherit}
+.au-falta small{display:block;font-size:11px;margin-top:1px}
+.au-falta .lnk{font-size:inherit;padding:0}

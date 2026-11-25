@@ -292,3 +292,35 @@ test('universal 0.73.5: Controle dentro dos Ajustes, Gerador na Produção e cab
     assert.equal(await pg.locator('#panel-min #ger-app').count(),0,'Corretor não tem o Gerador');
   } finally { await P.fim(); }
 });
+
+test('universal 0.74.2: faixa das abas sem caixa, títulos sem repetição em Autos e hierarquia padronizada', { skip: pular, timeout: 90000 }, async () => {
+  const op = { processo: CNJ, origem: {}, triagem: { 'Tipo de Julgamento': 'Apelação' }, producao: { SERVIDOR: 'Rodrigo', MINUTADO: '2026-11-13', Destino: 'Sessão' }, pauta: {}, controles: {} };
+  const P = await abrir(op, { sigilo: '', liberado: true, porque: 'gestor' });
+  try {
+    const { pg } = P;
+    await pg.goto(pg.url().replace('/painel/painel.html', '/painel/universal.html'));
+    await pg.waitForFunction(() => window.MutaSessao && window.MutaSessao.estado().estado === 'on', null, { timeout: 15000 });
+    await pg.evaluate(cnj => { window.chrome.storage.session.set({ 'aba:1': { numero: cnj, classe: 'ApCiv', tarefa: '[Sessão] Aguardando a sessão', ctx: '', ed: false, lib: '' } }); }, CNJ);
+    await pg.waitForSelector('.hero-v53-tabs', { timeout: 15000 });
+    await pg.click('.hero-v53-tabs [data-aba="Autos"]');
+    await pg.waitForSelector('#g-docs', { timeout: 15000 });
+    const v = await pg.evaluate(() => {
+      const cs = e => getComputedStyle(e), pm = document.querySelector('#gab .pc.pm');
+      return {
+        caixa: cs(pm).borderTopWidth + ' ' + cs(pm).backgroundColor,
+        merito: !!(document.querySelector('#gab .pc.pm>.pm-mer') && document.querySelector('#gab .pc.pm>.pm-mer').offsetParent),
+        titulos: [...document.querySelectorAll('#gab .pc-sh h3')].filter(h => h.offsetParent).map(h => h.textContent.trim()),
+        grupos: [...document.querySelectorAll('#g-docs details.pc-s>summary b')].map(b => b.textContent.trim()),
+        l1: [...new Set([...document.querySelectorAll('#gab .pc-sh h3')].map(h => cs(h).fontSize + ' ' + cs(h).textTransform))],
+        raio: [...new Set([...document.querySelectorAll('#gab section.card')].map(c => cs(c).borderTopLeftRadius))]
+      };
+    });
+    assert.equal(v.caixa, '0px rgba(0, 0, 0, 0)', 'faixa das abas sem caixa');
+    assert.equal(v.merito, false, 'fora do Resumo, sem a faixa do mérito');
+    assert.deepEqual(v.titulos, ['Leitura dos autos', 'Peças e documentos']);
+    assert.ok(v.grupos.includes('Extração e outras peças') && !v.grupos.includes('Teor dos autos · Documentos e peças'), 'grupo da ficha sem repetir o título do cartão: ' + v.grupos);
+    assert.deepEqual(v.l1, ['10.5px uppercase'], 'rótulo de cartão num só tamanho');
+    assert.deepEqual(v.raio, ['10px'], 'cartões com um só raio');
+    assert.deepEqual(P.erros, [], 'sem erro de script');
+  } finally { await P.fim(); }
+});

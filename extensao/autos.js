@@ -653,7 +653,7 @@ function htmlDocs(pecas) {
   var L = ok ? lista() : [], P = ok ? principais() : [], H=historicosIntegrados(L), C=cronologiaIntegrada(L,H), HP=H.filter(function(d){return PRINC[d.k]&&d.k!=='intimacao';}), HO=H.filter(function(d){return !PRINC[d.k]||d.k==='intimacao';});
   var nSel = ok ? marcados().length : 0;
   var lidos = Object.keys(A.docs).filter(function (k) { return /^(ok|sem)$/.test(A.docs[k].estado); }).length;
-  var cab = '<div class="pc-sh"><h3>Teor dos autos · Documentos e peças</h3><small class="muted">' + (ok ? C.length + ' na cronologia · ' + lidos + ' com texto lido' : 'da ficha do processo') + '</small></div>';
+  var cab = '<div class="pc-sh"><h3>Peças e documentos</h3><small class="muted">' + (ok ? C.length + ' na cronologia · ' + lidos + ' com texto lido' : 'da ficha do processo') + '</small></div>';
   if (ok && GB().classificacaoFiltro) cab += GB().classificacaoFiltro(L.filter(function(d){return !docBloq(d);}));
   var seg = ok ? '<div class="au-fx"><span class="seg"><button type="button" data-au="f:pecas" aria-selected="' + (F === 'pecas') + '" title="As peças da ficha com os seus documentos: decisões, recursos, contrarrazões, parecer, procuração, custas e inicial" >Peças principais (' + (P.length+HP.length) + ')</button><button type="button" data-au="f:todos" aria-selected="' + (F === 'todos') + '" title="A cronologia inteira do PJe, do mais recente ao mais antigo">Cronologia (' + C.length + ')</button></span>' +
     '<button type="button" class="btn line sm au-js" data-au="tudojs"' + (A.todo ? ' disabled' : '') + ' title="Lê o texto de todos os documentos (PDF digitalizado vai ao OCR) e baixa num arquivo JSON, no formato do acervo" aria-label="Baixar o inteiro teor em JSON">' + SVGDL + (A.todo ? A.todo.feitos + '/' + A.todo.total : 'JSON') + '</button></div>' +
@@ -748,16 +748,29 @@ function resumoLeitura() {
   if (!dec) dec = L.filter(function (d) { return d.k === 'sentenca'; })[0] || (ai ? null : null);
   var R = L.filter(function (d) { return /^(apelacao|adesivo|agravo|agint|ed|recurso)$/.test(d.k); }), C = L.filter(function (d) { return d.k === 'contrarrazoes'; });
   var M = L.filter(function (d) { return d.k === 'parecer'; })[0], P = L.filter(function (d) { return d.k === 'procuracao'; })[0];
-  var chip = function (rot, d, n, dica) {
+  /* 0.74.2: o que não está na cronologia do 2º grau não vira chip "não achada": se a ficha já tem o ID (ou a peça foi vinculada do 1º grau),
+     o chip diz de onde vem; o resto vai numa linha só, com o caminho para vincular as peças do 1º grau */
+  var fichaIds = function (alvo, col) { var v = valorFicha(alvo); if (Array.isArray(v)) return v.map(function (r) { return S(r && (r[col || 'ids'] || r.id)); }).filter(Boolean).join(', '); return S(v); };
+  var v1g = valorFicha('origem.Origem - Peças vinculadas 1G'); v1g = Array.isArray(v1g) ? v1g : [];
+  var de1g = function (re) { var r = v1g.filter(function (x) { return re.test(N(x && x.documento)); })[0]; return r ? S(r.id) : ''; };
+  var faltam = [];
+  var chip = function (rot, d, n, dica, naFicha, no1g) {
     var tem = n != null ? n > 0 : !!d;
-    return '<span class="au-ch ' + (tem ? (d && !lido(d) ? 'nl' : 'ok') : 'vz') + '" title="' + esc(dica || '') + '"><b>' + esc(rot) + '</b>' + (tem ? (n > 1 ? ' ' + n : '') + (d ? ' <i class="mono">ID ' + esc(d.id) + '</i>' : '') + (d && !lido(d) ? ' <small>não lida</small>' : '') : ' <small>não achada</small>') + '</span>';
+    if (!tem) {
+      if (no1g) return '<span class="au-ch fi" title="Vinculada do processo de referência no 1º grau"><b>' + esc(rot) + '</b> <small>1º grau</small> <i class="mono">ID ' + esc(no1g) + '</i></span>';
+      if (naFicha) return '<span class="au-ch fi" title="Não está na cronologia do 2º grau; o ID vem da ficha"><b>' + esc(rot) + '</b> <small>na ficha</small> <i class="mono">ID ' + esc(naFicha) + '</i></span>';
+      faltam.push(rot); return '';
+    }
+    return '<span class="au-ch ' + (d && !lido(d) ? 'nl' : 'ok') + '" title="' + esc(dica || '') + '"><b>' + esc(rot) + '</b>' + (n > 1 ? ' ' + n : '') + (d ? ' <i class="mono">ID ' + esc(d.id) + '</i>' : '') + (d && !lido(d) ? ' <small>não lida</small>' : '') + '</span>';
   };
   var todosD = lista(), nl = todosD.filter(function (d) { return A.docs[d.id] && /^(ok|sem)$/.test(A.docs[d.id].estado); }).length;
-  return '<div class="au-res">' + chip(ai ? 'Decisão agravada' : 'Sentença', dec, null, ai ? 'No agravo de instrumento, a decisão agravada costuma vir anexa à inicial: confira em Peças' : 'A decisão recorrida') +
-    chip(R.length > 1 ? 'Recursos' : 'Recurso', R[0], R.length, R.map(function (d) { return d.tipo + ' ID ' + d.id + ' (' + d.data + ')'; }).join('; ')) +
-    chip('Contrarrazões', C[0], C.length, C.map(function (d) { return 'ID ' + d.id + ' (' + d.data + ')'; }).join('; ')) +
-    chip('MPF', M, null, M ? 'Parecer ID ' + M.id + ' (' + M.data + ')' : 'Sem parecer na cronologia lida') +
-    chip('Procuração', P, null, '') + '</div><p class="muted au-nl">' + (A.integra ? 'Lendo a íntegra: ' + A.integra.feitos + ' de ' + A.integra.total + ' documentos…' : nl + ' de ' + todosD.length + ' documentos com texto lido (íntegra)') + '</p>';
+  var chips = chip(ai ? 'Decisão agravada' : 'Sentença', dec, null, ai ? 'No agravo de instrumento, a decisão agravada costuma vir anexa à inicial: confira em Peças' : 'A decisão recorrida', fichaIds(ai ? 'triagem.Impugnada - ID' : 'origem.Sentença - ID'), ai ? '' : de1g(/senten/)) +
+    chip(R.length > 1 ? 'Recursos' : 'Recurso', R[0], R.length, R.map(function (d) { return d.tipo + ' ID ' + d.id + ' (' + d.data + ')'; }).join('; '), fichaIds('origem.Recursos'), de1g(/apela|recurso/)) +
+    chip('Contrarrazões', C[0], C.length, C.map(function (d) { return 'ID ' + d.id + ' (' + d.data + ')'; }).join('; '), fichaIds('origem.Contrarrazões'), de1g(/contrarraz/)) +
+    chip('MPF', M, null, M ? 'Parecer ID ' + M.id + ' (' + M.data + ')' : 'Sem parecer na cronologia lida', fichaIds('triagem.ID do Parecer MPF')) +
+    chip('Procuração', P, null, '', fichaIds('triagem.ID da Procuração'));
+  var falta = faltam.length ? '<p class="au-falta"><span>Fora da cronologia do 2º grau: <b>' + faltam.map(esc).join('</b>, <b>') + '</b>.</span> <small>Se estão nos autos do 1º grau, vincule-as em <button type="button" class="lnk" data-au="ir1g">1º grau › Peças vinculadas</button>.</small></p>' : '';
+  return '<div class="au-res">' + chips + '</div>' + falta + '<p class="muted au-nl">' + (A.integra ? 'Lendo a íntegra: ' + A.integra.feitos + ' de ' + A.integra.total + ' documentos…' : nl + ' de ' + todosD.length + ' documentos com texto lido (íntegra)') + '</p>';
 }
 function htmlLeitura() {
   var tela = window.MutaPje && window.MutaPje.tela ? window.MutaPje.tela() : '';
@@ -819,6 +832,7 @@ function clique(b) {
   else if (/^f:/.test(a)) { A.filtro = a.slice(2); redesenhar(); }
   else if (/^ext:/.test(a)) { var id = a.slice(4), d = A.docs[id]; if (d && /^(ok|sem)$/.test(d.estado)) { A.abertos[id] = !A.abertos[id]; redesenhar(); } else { A.abertos[id] = true; extrair(id); } }
   else if (a === 'tudojs') baixarTudo();
+  else if (a === 'ir1g') { var g1 = document.querySelector('#gab details.pc-s[data-grupo="1º grau"]'); if (g1) { g1.open = true; g1.scrollIntoView({ block: 'start', behavior: 'smooth' }); } }
   else if (/^js:/.test(a)) baixarPeca(a.slice(3));
   else if (/^ocr:/.test(a)) { A.abertos[a.slice(4)] = true; extrair(a.slice(4), 'ocr'); }
   else if (/^pdf:/.test(a)) abrirPdf(a.slice(4));

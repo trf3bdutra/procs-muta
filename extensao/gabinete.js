@@ -641,7 +641,7 @@ function pecasCartao(soGrupos) {
     var n = C.filter(function (c) { return !!val(c); }).length, ab = G.pecAb && G.pecAb[g.grupo] != null ? G.pecAb[g.grupo] : false;
     var res = (PECAS_RESUMO[g.grupo] || []).map(function (k) { var c = C.filter(function (x) { return x.chave === k; })[0]; var v = c ? val(c) : ''; return /^\d{4}-\d{2}-\d{2}$/.test(v) ? brD(v) : k.indexOf('ID') >= 0 && v ? 'ID ' + v : v; }).filter(Boolean).join(' · ');
     /* no agravo de instrumento a "Sentença" da ficha guarda a decisão agravada */
-    var titulo = g.grupo === 'Sentença' && /agravo de instrumento/i.test(((G.fo || {})['classe_judicial'] || (G.fo || {})['Classe'] || '') + ' ' + V('triagem', 'Tipo de Julgamento')) ? 'Decisão agravada' : g.grupo;
+    var titulo = g.grupo === 'Teor dos autos · Documentos e peças' ? 'Extração e outras peças' : g.grupo === 'Sentença' && /agravo de instrumento/i.test(((G.fo || {})['classe_judicial'] || (G.fo || {})['Classe'] || '') + ' ' + V('triagem', 'Tipo de Julgamento')) ? 'Decisão agravada' : g.grupo;
     return '<details class="pc-s"' + (ab ? ' open' : '') + ' data-grupo="' + esc(g.grupo) + '"><summary><span class="pc-s-t"><b>' + esc(titulo) + '</b>' + (res ? '<small>' + esc(res.slice(0, 120)) + '</small>' : '<small class="vz">sem registro</small>') + '</span><span class="gn">' + n + '/' + C.length + '</span></summary>' +
       (AU && AU.docsDoGrupo ? AU.docsDoGrupo(g.grupo) : '') + pecaExtracao(C, val) + '<div class="gr">' + C.map(campo).join('') + '</div></details>';
   }).join('') + (soGrupos ? '' : '</section>');

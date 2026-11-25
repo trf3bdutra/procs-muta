@@ -349,3 +349,46 @@ html[data-tema=escuro] .pv-universal-body{--pv-bg:#25282d;--pv-line:#444a52;--pv
 .pv-universal-body main{scroll-padding-bottom:calc(var(--hero-dock-h) + 12px)}
 .pv-universal-body #gab .hero-case-block>summary{color:var(--pv-ink)}
 .pv-universal-body #gab .hero-autos-workspace{gap:10px}
+/* ==== 0.74.2 · Padronização do prontuário (v53): faixa das abas, hierarquia de texto e dois desenhos de cartão ====
+   Rótulo de cartão (L1): mono 10.5px, caixa alta, dourado. Seção/grupo dentro do cartão (L2): 12.5px, 650.
+   Rótulo de campo (L3): mono 9.5px, caixa alta, apagado. Texto 12.5px; meta 11px.
+   Cartão: raio 10px, borda 1px, fundo do cartão, sem sombra. Subcartão (dentro de cartão): raio 8px, fundo suave. */
+body.hero-redesign-v53{--h53-r:10px;--h53-r2:8px;--h53-sub:color-mix(in srgb,var(--card) 55%,var(--bg))}
+/* faixa das abas: sem caixa, uma linha só; o cabeçalho do processo fica no fundo da página */
+body.hero-redesign-v53 #gab .pc.pm,body.hero-redesign-v53 #gab .pc.pm.pv-universal{background:transparent!important;border:0!important;box-shadow:none!important;padding:0 2px 4px!important;border-radius:0!important}
+body.hero-redesign-v53 #gab .hero-header-nav{border:0!important;padding:0!important;margin:0 0 10px!important;box-shadow:none!important;background:transparent!important}
+body.hero-redesign-v53 #gab .hero-header-nav::before,body.hero-redesign-v53 #gab .hero-header-nav::after{display:none!important}
+body.hero-redesign-v53 #gab .hero-v53-tabs>button{font-size:12px!important;font-weight:650!important;padding:9px 3px 8px!important}
+/* fora do Resumo, o cabeçalho é só a faixa: sem o "mérito" (complexidade e tipo de voto ficam no Resumo) */
+body.hero-redesign-v53 #gab .pc.pm:has(.hero-v53-tabs>[aria-selected=true]:not([data-rot="res"]))>.pm-mer{display:none!important}
+body.hero-redesign-v53 #gab .pc.pm>.pm-mer>summary{border-top:0!important}
+/* L1 · rótulo de cartão */
+body.hero-redesign-v53 #gab :is(.pc-sh h3,h4.pm-mer-h,.hero-prod-index h4,.rt-top>b,.rt-top .rt-h b,.hero-minuta-roteiro>b,.pv-stage-head>.pm-mer-h,.hero-v53-section-head h4,.hero-v53-page-title,h3.pm-mer-h),
+body.hero-redesign-v53 #gab .hero-enc-pane .pm-mer-h,body.hero-redesign-v53 #gab .hero-etiquetas .pm-mer-h,
+body.hero-redesign-v53 :is(#cmp-app,#pauta-app,#dir-app,#del-app,#dil-app) :is(.pc-sh h3,.hero-v53-page-title){font-family:'IBM Plex Mono',ui-monospace,monospace!important;font-size:10.5px!important;font-weight:700!important;text-transform:uppercase!important;letter-spacing:.1em!important;line-height:1.3!important;opacity:1!important}
+body.hero-redesign-v53 #gab :is(.pc-sh h3,.hero-prod-index h4,.hero-v53-section-head h4){color:var(--hero53-gold)!important}
+/* L2 · seção ou grupo dentro do cartão (acordeões e títulos de item) */
+body.hero-redesign-v53 #gab :is(details.hero-v53-profile>summary,details.hero-v53-coverage>summary,details.hero-case-block>summary,details.pc-s>summary .pc-s-t>b,details.pc-s>summary>b,.rt-c b.rt-t,.rt-c>summary b,.hero-minuta-secao>summary b){font-family:'IBM Plex Sans',system-ui,sans-serif!important;font-size:12.5px!important;font-weight:650!important;text-transform:none!important;letter-spacing:0!important;line-height:1.35!important}
+body.hero-redesign-v53 #gab :is(details.hero-v53-profile>summary,details.hero-v53-coverage>summary){color:var(--fg)!important;padding:9px 0!important}
+/* meta e texto */
+body.hero-redesign-v53 #gab :is(.pc-sh small,.pc-s-t small,details.pc-s>summary small){font-size:11px!important;letter-spacing:0!important;text-transform:none!important}
+body.hero-redesign-v53 #gab .pc-sh{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin:0 0 8px!important}
+body.hero-redesign-v53 #gab :is(.au-nl,.pc-sec>p.muted){font-size:11.5px!important}
+/* cartão (nível 1) */
+body.hero-redesign-v53 #gab :is(.card,section.hero-steps,.hero-v53-enc,details.gg.hero-ann-group,details.gg.hero-minuta-secao,details.card.hero-prod-index),
+body.hero-redesign-v53 :is(#cmp-app,#pauta-app,#dir-app,#del-app,#dil-app) .card{border:1px solid var(--line)!important;border-radius:var(--h53-r)!important;background:var(--card)!important;box-shadow:none!important}
+body.hero-redesign-v53 #gab :is(section.card,section.hero-steps,section.hero-v53-enc){padding:12px!important}
+body.hero-redesign-v53 #gab :is(.card,section.hero-steps,.hero-v53-enc,details.gg)+:is(.card,section.hero-steps,.hero-v53-enc,details.gg){margin-top:10px!important}
+/* subcartão (dentro de um cartão) */
+body.hero-redesign-v53 #gab :is(.card,.hero-v53-enc,section.hero-steps,details.gg) :is(.rt-c,.hero-case-block,.rt-tsel,.rt-adm-doc,.pv-synthesis,.au-auto-av){border:1px solid var(--line)!important;border-radius:var(--h53-r2)!important;background:var(--h53-sub)!important;box-shadow:none!important}
+body.hero-redesign-v53 #gab .hero-case-block{border:1px solid var(--line)!important;border-radius:var(--h53-r2)!important;background:var(--h53-sub)!important}
+/* grupos de peças: separador único entre itens, sem caixa */
+body.hero-redesign-v53 #gab .pc-sec details.pc-s{border:0!important;border-top:1px solid var(--line)!important;border-radius:0!important;background:transparent!important;padding:8px 0!important;margin:0!important}
+body.hero-redesign-v53 #gab .pc-sec details.pc-s:first-of-type{border-top:0!important}
+body.hero-redesign-v53 #gab .rt-tt>b{font-family:'IBM Plex Mono',ui-monospace,monospace!important;font-size:10.5px!important;font-weight:700!important;text-transform:uppercase!important;letter-spacing:.1em!important;color:var(--hero53-gold)!important}
+body.hero-redesign-v53 #gab :is(details.hero-aut-historico>summary,details.hero-minuta-secao>summary h4,details.hero-case-block>summary h4){font-family:'IBM Plex Sans',system-ui,sans-serif!important;font-size:12.5px!important;font-weight:650!important;text-transform:none!important;letter-spacing:0!important}
+body.hero-redesign-v53 #gab :is(.rt-c,.pv-docref,.rt-adm-doc){border:1px solid var(--line)!important;border-radius:var(--h53-r2)!important;background:var(--h53-sub)!important;box-shadow:none!important}
+body.hero-redesign-v53 #gab section.pv2-index{border:1px solid var(--line)!important;border-radius:var(--h53-r)!important;background:var(--card)!important;padding:12px!important}
+body.hero-redesign-v53 #gab .rt-c .pv-docref{background:transparent!important;border-radius:6px!important}
+/* Produção: o cartão do Gerador já traz o título; sem o rótulo repetido por fora */
+body.hero-redesign-v53 #gab .hero-v53-gerador>h4.pm-mer-h{display:none!important}
