@@ -61,6 +61,7 @@ test('navegador universal: utilidades, ferramentas do gabinete, processo em tela
     assert.deepEqual(ids(html),ids(old));
     assert.ok(html.indexOf('id="topo-u"')<html.indexOf('id="pv-nav-main"'));
     assert.ok(html.indexOf('id="pv-ajustes"')<html.indexOf('id="pv-nav-main"'));
+    assert.match(html,/<button[^>]*id="pv-ajustes"[^>]*\bhidden\b[^>]*tabindex="-1"/,'Ajustes é acionado pelo painel do perfil, sem botão duplicado');
     assert.doesNotMatch(html,/id="pv-nav-(tools|case)"/);
     assert.doesNotMatch(old,/id="pv-ajustes"/);
     assert.ok(fs.existsSync(path.join(saida,'painel','universal-ajustes.js')));
@@ -229,7 +230,7 @@ test('diálogo Ajustes controla preferências reais e conserva os controles orig
  e('pv-ajustes-seguir').checked=false;e('pv-ajustes-seguir').events.change();assert.equal(e('pje-seguir').checked,false);assert.equal(e('pv-ajustes-aba').disabled,true);
  e('pv-ajustes-tema').value='claro';e('pv-ajustes-tema').events.change();assert.equal(h.prefs.tema,'claro');
  e('pv-ajustes-auto').checked=false;e('pv-ajustes-auto').events.change();assert.equal(h.prefs.auto,false);
- e('pv-ajustes-ok').events.click();assert.equal(e('pv-ajustes-dialog').open,false);assert.equal(e('pv-ajustes').focused,true);
+ e('pv-ajustes-ok').events.click();assert.equal(e('pv-ajustes-dialog').open,false);assert.equal(e('tu-sino').focused,true,'o foco retorna ao perfil visível, que abriu os Ajustes');assert.notEqual(e('pv-ajustes').focused,true,'o acionador interno oculto não recebe foco');
 });
 
 test('Controle fica nos Ajustes apenas para gestor autenticado',()=>{
