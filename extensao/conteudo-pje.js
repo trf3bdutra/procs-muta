@@ -219,11 +219,11 @@
       lista.push({
         t: t, tag: b.tagName.toLowerCase(), cls: String(b.className || '').slice(0, 120),
         recuo: cs ? parseFloat(cs.textIndent) || 0 : 0, alinha: cs ? cs.textAlign : '',
-        neg: proporcao(b, negrito), ita: proporcao(b, italico), h: (function () { try { var x = leve(b, 0).trim(); return /<(b|i|u)>/.test(x) ? x.slice(0, 20000) : ''; } catch (e) { return ''; } })(),
+        fmtConfiavel: !!cs, neg: cs ? proporcao(b, negrito) : null, ita: cs ? proporcao(b, italico) : null, h: (function () { try { var x = leve(b, 0).trim(); return /<(b|i|u)>/.test(x) ? x.slice(0, 20000) : ''; } catch (e) { return ''; } })(),
         cita: !!(b.closest && b.closest('blockquote')) || /cita/i.test(String(b.className || ''))
       });
     });
-    if (!lista.length) { var tx = textoDe(raiz); if (tx) tx.split(/\n+/).forEach(function (l) { l = l.trim(); if (l) lista.push({ t: l, tag: 'p', cls: '', recuo: 0, alinha: '', neg: 0, ita: 0, cita: false }); }); }
+    if (!lista.length) { var tx = textoDe(raiz); if (tx) tx.split(/\n+/).forEach(function (l) { l = l.trim(); if (l) lista.push({ t: l, tag: 'p', cls: '', recuo: 0, alinha: '', fmtConfiavel: false, neg: null, ita: null, cita: false }); }); }
     return lista;
   }
   /* o documento e as shadow roots abertas (editores montados como componentes) */
@@ -269,7 +269,7 @@
     }
     Array.prototype.forEach.call(document.querySelectorAll('textarea'), function (el) {
       var v = el.value || '';
-      if (v.length > 300) c.push({ t: v.trim(), ps: v.split(/\n+/).map(function (l) { return { t: l.trim(), tag: 'p', cls: '', recuo: 0, alinha: '', neg: 0, ita: 0, cita: false }; }).filter(function (p) { return p.t; }), vis: visivel(el), fonte: 'caixa de texto' });
+      if (v.length > 300) c.push({ t: v.trim(), ps: v.split(/\n+/).map(function (l) { return { t: l.trim(), tag: 'p', cls: '', recuo: 0, alinha: '', fmtConfiavel: false, neg: null, ita: null, cita: false }; }).filter(function (p) { return p.t; }), vis: visivel(el), fonte: 'caixa de texto' });
     });
     return c.sort(function (a, b) { return (b.vis - a.vis) || (b.t.length - a.t.length); });
   }
