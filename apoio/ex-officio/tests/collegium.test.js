@@ -45,3 +45,11 @@ test('dados do Collegium: nenhum julgado do Relator (Gab. A ou CARLOS MUTA)',()=
     assert.ok(x.id&&x.t&&x.n&&x.d&&x.y,'campos mínimos em '+x.id);
   }
 });
+
+test('Amicus tem o painel de busca do Collegium, que abre o ementário com termos e filtros',()=>{
+  const amicus=read('apoio/amicus/index.html'),e=read('apoio/modus-operandi/fonte/ementario.js'),wf=read('.github/workflows/vercel-caput.yml');
+  for(const x of ['id="bc"','id="bc-q"','name="qm" value="ft"','name="t" value="A"','id="bc-rl"',"'/collegium/resumo.json'","location.href='/amicus/collegium/#'"])
+    assert.ok(amicus.includes(x),x);
+  for(const x of ["!p.q&&!p.rl&&!p.t","if(p.rl&&DIM.rl)E.F.rl=p.rl;","E.qm=p.qm==='ft'&&E.q?'ft':'idx';"]) assert.ok(e.includes(x),x);
+  assert.ok(wf.includes('precedentes/collegium/resumo.json site/public/collegium/'),'resumo publicado');
+});

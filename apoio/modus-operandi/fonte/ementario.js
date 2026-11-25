@@ -1389,14 +1389,19 @@ function irEmentarioProc(nums,lab,pre){
   var b=document.querySelector('.tab[data-v="ement"]');if(b&&b.getAttribute('aria-selected')==='true'){fecharIT();mostrar();}else if(b)b.click();window.scrollTo(0,0);
 }
 /* endereço vindo do Ex Officio (prontuário · precedentes relacionados):
-   #v=ement&proc=N1,N2&lab=… abre o Ementário só com esses julgados; #v=ement&q=termos abre a busca com os termos */
+   #v=ement&proc=N1,N2&lab=… abre o Ementário só com esses julgados; #v=ement&q=termos abre a busca com os termos;
+   opcionais (painel de busca do Amicus): qm=ft (texto integral), t=A|M (acórdãos ou monocráticas), rl=RELATOR (Collegium) */
 (function(){
   function lerHash(){var p={};location.hash.replace(/^#/,'').split('&').forEach(function(kv){var i=kv.indexOf('=');if(i>0)p[kv.slice(0,i)]=decodeURIComponent(kv.slice(i+1));});return p;}
   var ult='';
-  function vai(){var p=lerHash();if(p.v!=='ement'||(!p.proc&&!p.q))return;if(location.hash===ult)return;ult=location.hash;
+  function vai(){var p=lerHash();if(p.v!=='ement'||(!p.proc&&!p.q&&!p.rl&&!p.t))return;if(location.hash===ult)return;ult=location.hash;
     if(p.proc){irEmentarioProc(p.proc.split(',').filter(Boolean),p.lab||'processo do prontuário','Relacionados a');return;}
-    irEmentarioProc([],'',null);E.plist=null;E.q=p.q;$('#e-q').value=p.q;
-    setTimeout(function(){try{buscar();}catch(e){}},60);}
+    irEmentarioProc([],'',null);E.plist=null;E.q=p.q||'';$('#e-q').value=E.q;
+    if(p.t==='A'||p.t==='M')E.F.t=p.t==='A'?'Acórdão':'Monocrática';
+    if(p.rl&&DIM.rl)E.F.rl=p.rl;
+    E.qm=p.qm==='ft'&&E.q?'ft':'idx';
+    /* a busca no texto integral precisa do manifesto da série; espera até ele chegar (no máximo 20 s) */
+    var n=0;(function tenta(){if(E.qm==='ft'&&!SER.ok&&!SER.erro&&n++<66){setTimeout(tenta,300);return;}try{if(E.q)buscar();else render();}catch(e){}})();}
   window.addEventListener('hashchange',vai);
   document.addEventListener('cmt-acesso',function(){setTimeout(vai,60);},{once:true});
   setTimeout(vai,700);

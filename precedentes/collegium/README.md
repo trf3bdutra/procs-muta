@@ -28,6 +28,7 @@ Diário de Justiça Eletrônico Nacional (DJEN, CNJ), API pública `comunicaapi.
   conferida contra a série do Relator em 398 de 398 casos.
 - Repetição (o DJEN traz a mesma decisão uma vez por destinatário): fica um registro por processo, tipo e data.
 
+`resumo.json` (totais, relatores, período e última coleta) alimenta o painel de busca do Amicus.
 `indice.json.gz` tem o mesmo formato do índice da série do Relator, com `rl` (relator) e `g` (gabinete).
 `MANIFESTO.json` traz totais, contagem por ano, por relator e por gabinete, o histórico de coletas e os hashes;
 `SHA256SUMS` confere os arquivos. A busca em texto (`busca/`) é gerada na publicação, fora do Git.

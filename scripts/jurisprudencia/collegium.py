@@ -236,6 +236,9 @@ def main():
     arquivos = sorted([p for p in C.rglob("*.json.gz") if "busca" not in p.parts])
     man["arquivos"] = [{"arquivo": str(p.relative_to(C)), "bytes": p.stat().st_size, "sha256": sha_arq(p)} for p in arquivos]
     (C / "MANIFESTO.json").write_text(json.dumps(man, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+    # resumo para o painel de busca do Amicus (/collegium/resumo.json): totais, relatores e última coleta
+    (C / "resumo.json").write_text(json.dumps({k: man[k] for k in ("totais", "por_relator", "periodo", "ultima_coleta")},
+                                              ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     (C / "SHA256SUMS").write_text("".join(f"{x['sha256']}  {x['arquivo']}\n" for x in man["arquivos"]), encoding="utf-8")
     print(f"Collegium: {total_antes} → {len(man['registros'])} registros")
 
