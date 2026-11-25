@@ -766,9 +766,9 @@ body.hero-redesign-v53 #gab .rt-kind-mode{font-size:10px!important}
 body.hero-redesign-v53 #gab li.rt-f>span:first-child{font:700 9.5px/1.3 'IBM Plex Sans',system-ui,sans-serif!important;letter-spacing:.1em!important;text-transform:uppercase!important;color:var(--p53-muted)!important}
 
 /* A prévia carrega esta folha depois de painel.css: preserva a mesma superfície branca. */
-body.hero-redesign-v53 #gab{--hero-paper:#fff;background:var(--hero-paper)!important}
+body.hero-redesign-v53 #gab{--hero-paper:#fff}
 html[data-tema=escuro] body.hero-redesign-v53 #gab{--hero-paper:var(--p53-card)}
-body.hero-redesign-v53 #gab :is(.pc.pm,.hero-top-pages,.hero-top-page,.gbody,.hero-autos-workspace),body.hero-redesign-v53 #gab .hero-header-nav .hero-v53-tabs>button[aria-selected=true]{background:var(--hero-paper)!important}
+
 body.hero-redesign-v53 #gab #hero-encaminhamento{background:var(--hero-paper)!important;padding:12px 2px!important}
 body.hero-redesign-v53 #gab details.hero-prod-index{padding:0!important;border:0!important;border-top:1px solid var(--p53-line)!important;margin:12px 0 0!important;border-radius:0!important}
 body.hero-redesign-v53 #gab details.hero-prod-index>summary{padding:9px 2px!important}
@@ -816,3 +816,23 @@ body.hero-redesign-v53 #gab .hero-assunto-stack>span:first-child::after{content:
 body.hero-redesign-v53 #gab .hero-assunto-stack>.hero-assunto-vazio{font-family:inherit!important;font-size:11px!important;font-style:normal!important;color:var(--muted-fg);text-decoration:none;cursor:default}
 body.hero-redesign-v53 #gab .hero-proc-tags>.hero-class-only{max-width:100%;overflow:hidden;text-overflow:ellipsis}
 body.hero-redesign-v53 #gab .pm-l1{flex-wrap:wrap;justify-content:flex-start}
+
+
+/* HERO · duas superfícies, com a régua de subabas como divisória física.
+   O cabeçalho permanece marfim; a aba selecionada se abre para a folha branca.
+   Aplicado igualmente a Resumo, Autos, Triagem e Produção, sem afetar as demais páginas. */
+body.hero-redesign-v53{--hero-pront-header:#f3f0e7;--hero-pront-paper:#fff;--hero-pront-divider:#d8d3c6}
+html[data-tema=escuro] body.hero-redesign-v53{--hero-pront-header:#0a1821;--hero-pront-paper:#132a3b;--hero-pront-divider:#2b4657}
+body.hero-redesign-v53:has(#panel-pront:not([hidden]) .hero-v53-tabs) #topo-u{background:var(--hero-pront-header)!important;border-bottom-color:transparent!important;box-shadow:none!important}
+html body.hero-redesign-v53 #panel-pront:has(.hero-v53-tabs),
+html body.hero-redesign-v53 #gab:has(.hero-v53-tabs){--hero-paper:var(--hero-pront-paper);background:var(--hero-pront-paper)!important;gap:0!important}
+body.hero-redesign-v53 #gab:has(.hero-v53-tabs) .pc.pm,
+body.hero-redesign-v53 #gab:has(.hero-v53-tabs) :is(.hero-top-pages,.hero-top-page,.gbody,.hero-autos-workspace){background:var(--hero-pront-paper)!important}
+body.hero-redesign-v53 #gab .pc.pm:has(.hero-v53-tabs){border:0!important;box-shadow:none!important}
+body.hero-redesign-v53 #gab .hero-header-nav:has(.hero-v53-tabs){background:var(--hero-pront-header)!important;border:0!important;border-bottom:1px solid var(--hero-pront-divider)!important;box-shadow:none!important;padding-top:5px!important;margin-bottom:0!important}
+body.hero-redesign-v53 #gab .hero-header-nav .hero-v53-tabs{background:transparent!important;border:0!important;box-shadow:none!important;gap:2px!important;align-items:flex-end;margin:0!important;overflow:visible!important}
+body.hero-redesign-v53 #gab .hero-header-nav .hero-v53-tabs>button{position:relative;background:transparent!important;border:1px solid transparent!important;border-bottom:0!important;border-radius:7px 7px 0 0!important;margin-bottom:-1px!important;box-shadow:none!important;min-width:0}
+body.hero-redesign-v53 #gab .hero-header-nav .hero-v53-tabs>button[aria-selected=true]{background:var(--hero-pront-paper)!important;border-color:var(--hero-pront-divider)!important;border-bottom:0!important;box-shadow:inset 0 2px 0 var(--hero53-gold)!important;z-index:1}
+body.hero-redesign-v53 #gab .hero-header-nav .hero-v53-tabs>button:not([aria-selected=true]):hover{background:color-mix(in srgb,var(--hero-pront-paper) 45%,var(--hero-pront-header))!important}
+body.hero-redesign-v53 #gab .hero-top-pages:not([hidden]){padding-top:10px}
+body.hero-redesign-v53 #gab .gbody:not([hidden]){min-width:0;margin-top:0!important}

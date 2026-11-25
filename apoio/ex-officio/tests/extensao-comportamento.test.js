@@ -407,9 +407,11 @@ test('universal 0.75.2: aba aberta ligada ao painel (cor do papel, sem linha de 
     await pg.waitForSelector('.hero-v53-tabs', { timeout: 15000 });
     const v = await pg.evaluate(() => {
       const b = document.querySelector('.hero-v53-tabs>[aria-selected=true]'), nav = document.querySelector('.hero-header-nav'), cs = getComputedStyle(b);
-      return { aba: cs.backgroundColor, painel: getComputedStyle(document.getElementById('gab')).backgroundColor, sobrepoe: Math.round(b.getBoundingClientRect().bottom) >= Math.round(nav.getBoundingClientRect().bottom), fonte: cs.fontFamily, titulo: getComputedStyle(document.querySelector('.hero-assunto-stack>span')).fontFamily, ponto: getComputedStyle(document.querySelector('.hero-assunto-stack>span'), '::after').content };
+      return { aba: cs.backgroundColor, painel: getComputedStyle(document.getElementById('gab')).backgroundColor, faixa: getComputedStyle(nav).backgroundColor, divisor: getComputedStyle(nav).borderBottomWidth, inativa: getComputedStyle(document.querySelector('.hero-v53-tabs>button[aria-selected=false]')).backgroundColor, sobrepoe: Math.round(b.getBoundingClientRect().bottom) >= Math.round(nav.getBoundingClientRect().bottom), fonte: cs.fontFamily, titulo: getComputedStyle(document.querySelector('.hero-assunto-stack>span')).fontFamily, ponto: getComputedStyle(document.querySelector('.hero-assunto-stack>span'), '::after').content };
     });
-    assert.equal(v.aba, v.painel, 'aba aberta na cor do painel');
+    assert.equal(v.aba, v.painel, 'aba aberta na cor da folha');
+    assert.notEqual(v.faixa, v.painel, 'a linha divide superfícies de cores distintas');
+    assert.equal(v.divisor, '1px', 'divisória fina');
     assert.ok(v.sobrepoe, 'aba aberta cobre a linha da faixa');
     assert.match(v.fonte, /Georgia/); assert.match(v.titulo, /Georgia/); assert.equal(v.ponto, 'none');
     assert.deepEqual(P.erros, [], 'sem erro de script');
