@@ -166,7 +166,7 @@ test('universal: Julgamento da monocrática e da urgência — hipótese do art.
   } finally { await P2.fim(); }
 });
 
-test('universal: Encaminhamento e Monitoramento no cartão; sinalizações por categoria; registro em Autuação', { skip: pular, timeout: 90000 }, async () => {
+test('universal: Encaminhamento como segunda face; Monitoramento em janela; sinalizações no lugar das etapas; registro em Autuação', { skip: pular, timeout: 90000 }, async () => {
   const op = { processo: CNJ, origem: {}, triagem: { 'Tipo de Julgamento': 'Apelação', 'Seleção Prévia': 'SELECIONADO PREVIAMENTE', Avisos: 'x', 'Registro - Situação atual': 'Acervo importado' }, producao: { Destino: 'Sessão' }, pauta: {}, controles: {} };
   const P = await abrir(op, { sigilo: '', liberado: true, porque: 'gestor' });
   try {
@@ -176,18 +176,35 @@ test('universal: Encaminhamento e Monitoramento no cartão; sinalizações por c
     await pg.evaluate(cnj => { window.chrome.storage.session.set({ 'aba:1': { numero: cnj, classe: 'ApCiv', tarefa: 'x', ctx: '', ed: false, lib: '' } }); }, CNJ);
     await pg.waitForSelector('.hero-main-tabs [data-rot="tri"]', { timeout: 15000 });
     await pg.click('.hero-main-tabs [data-rot="tri"]');
-    await pg.click('#hero-dock-tab-acompanhamento');
-    await pg.waitForSelector('#hero-encaminhamento', { timeout: 15000 });
+    /* Encaminhamento é a segunda face do prontuário (seta ›), não aba do rodapé */
+    assert.ok(!(await pg.$('#hero-dock-tab-acompanhamento')), 'sem a aba Encaminhamento no rodapé');
+    await pg.click('.hero-header-nav>button[aria-label^="Próxima"]');
+    await pg.waitForSelector('.hero-enc-face #hero-encaminhamento', { state: 'visible', timeout: 15000 });
+    assert.equal(await pg.getAttribute('.hero-header-nav', 'aria-label'), 'Encaminhamento', 'segunda face');
     assert.ok(await pg.$('#hero-encaminhamento [data-fk="producao.Destino"]'), 'destino no Encaminhamento');
     assert.equal(await pg.inputValue('#hero-encaminhamento [data-fk="triagem.Seleção Prévia"]'),'SELECIONADO PREVIAMENTE');
     assert.ok(await pg.$('#hero-encaminhamento .pm-sitj'), 'situação para julgar no Encaminhamento');
     assert.ok(await pg.$('.hero-designacoes [data-fk="origem.Responsável"]'), 'responsável na faixa de designações');
     assert.ok(!(await pg.$('.pv-flowbox .pm-sitj')), 'sem duplicação na faixa de etapas');
     assert.ok(await pg.$('.hero-top-page .hero-reg-acervo'), 'registro no acervo em Autuação');
+    await pg.click('.hero-header-nav>button[aria-label^="Anterior"]');
     await pg.click('.hero-sn-ind [data-sn-kind="av"]');
     await pg.waitForSelector('#hero-dock-pane-sinalizacoes #g-sn', { timeout: 15000 });
     assert.equal(await pg.getAttribute('.hero-sn-ind [data-sn-kind="av"]','aria-pressed'),'true');
     assert.ok(await pg.$('#hero-dock-pane-sinalizacoes .sn-i.av'), 'avisos na categoria selecionada');
+    /* as sinalizações ocupam o lugar das etapas no mesmo cartão */
+    const sn = await pg.evaluate(() => ({ noCartao: !!document.querySelector('.hero-steps.hero-steps-sn>#hero-dock-pane-sinalizacoes'), etapasOcultas: !document.querySelector('.hero-steps .pv-flowbox').offsetParent, titulo: document.querySelector('.hero-steps-head h4').textContent }));
+    assert.ok(sn.noCartao && sn.etapasOcultas, 'sinalizações no lugar das etapas: ' + JSON.stringify(sn));
+    assert.equal(sn.titulo, 'Sinalizações · Avisos');
+    await pg.click('.hero-steps-voltar');
+    assert.ok(await pg.$eval('.hero-steps .pv-flowbox', e => !!e.offsetParent), 'volta às etapas');
+    /* os indicadores do cabeçalho abrem o monitoramento numa janela, sem expandir o cartão */
+    await pg.click('.hero-case-status .status-meta');
+    await pg.waitForSelector('#hero-mon-dlg[open] .hero-monitoramento .ct-i.meta', { state: 'visible', timeout: 15000 });
+    assert.ok(await pg.$eval('#hero-mon-dlg', d => d.matches(':modal')), 'janela modal');
+    assert.ok(!(await pg.$('.pc.pm .hero-monitoramento')), 'monitoramento fora do cartão');
+    await pg.click('#hero-mon-dlg .hero-mon-dlg-x');
+    assert.equal(await pg.$eval('#hero-mon-dlg', d => d.open), false, 'fecha a janela');
     assert.deepEqual(P.erros, [], 'sem erro de script');
   } finally { await P.fim(); }
 });
