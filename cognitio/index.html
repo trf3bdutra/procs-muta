@@ -1379,6 +1379,20 @@ header#top::before{background:linear-gradient(90deg,var(--eg) 0 50%,var(--eg2) 5
 .cog-simple-table .cog-note-row td{padding:0}
 .cog-simple-table .cog-sign-cell{width:150px}
 </style>
+<style id="cog-acervo-stats-fix">
+.lst .proc-item .row>.cog-proc-id{min-width:0;display:flex;align-items:center;flex-wrap:wrap;gap:3px 5px;white-space:normal;overflow:visible}
+.lst .proc-item .row>.cog-proc-id .cog-copy-cnj{flex:0 0 100%;min-width:0;max-width:100%;white-space:nowrap;text-align:left;font-size:11px;letter-spacing:-.025em;overflow:hidden;text-overflow:ellipsis}
+.lst .proc-item .row>.cog-proc-id .cog-ficha-icon{flex:0 0 auto;position:static;margin:0}
+.lst .proc-item .row>span:nth-child(3){min-width:0;overflow-wrap:anywhere}
+.cog-work-title .cog-filter-stats{margin-left:8px}.cog-work-title .cog-filter-stats+.cog-xls-icon{margin-left:4px!important}
+.cog-filter-stats-dialog{width:min(920px,94vw);max-width:94vw;max-height:88vh;overflow:auto;padding:18px}
+.cog-filter-stats-dialog>header,.cog-filter-stats-dialog>footer{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.cog-filter-stats-dialog h3,.cog-filter-stats-dialog h4{margin:0 0 8px}
+.cog-stat-metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin:14px 0}
+.cog-stat-metric{border:1px solid #dce3de;border-radius:6px;padding:10px;display:grid;gap:5px}.cog-stat-metric small{color:#61736b}.cog-stat-metric b{font-size:20px}
+.cog-stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin-bottom:14px}.cog-stat-grid>section{border:1px solid #dce3de;border-radius:6px;padding:10px;min-width:0}
+.cog-stat-row{display:grid;grid-template-columns:minmax(0,1fr) 54px 38px;gap:6px;align-items:center;padding:4px 0;font-size:11px}.cog-stat-row span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.cog-stat-row i{height:5px;background:#e7eeea;border-radius:4px}.cog-stat-row em{display:block;height:100%;background:#48746a;border-radius:4px}.cog-stat-row b{text-align:right}
+</style>
 </head>
 <body>
 <header id="top">
@@ -4080,11 +4094,18 @@ function cogCriarLote(serie=false){
  }catch(err){msg.textContent='Não foi possível criar: '+err.message;btn.disabled=false;}};
 }
 D.addEventListener('click',e=>{if(e.target.closest('[data-cog-select-filtered]')){e.preventDefault();cogVisiveis().forEach(d=>SEL.add(d));render();return;}},true);
+function cogFilteredStats(){
+ const task=COG==='triagem'?LS.get('tri_triar_tarefa',''):'',L=cogTriRecorte(task),n=L.length,ds=L.map(o=>atDias(o)).filter(x=>x!=null&&Number.isFinite(x)).sort((a,b)=>a-b),med=ds.length?(ds[Math.floor((ds.length-1)/2)]+ds[Math.floor(ds.length/2)])/2:null;
+ const metric=(t,v)=>'<div class="cog-stat-metric"><small>'+esc(t)+'</small><b>'+esc(String(v))+'</b></div>';
+ const dist=(t,f,lim=10)=>{const C=contar(L,f).slice(0,lim);return '<section><h4>'+esc(t)+'</h4>'+(C.length?C.map(([k,v])=>'<div class="cog-stat-row"><span title="'+esc(k)+'">'+esc(k)+'</span><i><em style="width:'+(n?Math.min(100,100*v/n):0)+'%"></em></i><b>'+nf(v)+'</b></div>').join(''):'<p>Sem registros.</p>')+'</section>';};
+ const d=D.createElement('dialog');d.className='cog-create-lot cog-filter-stats-dialog';d.innerHTML='<header><div><small>'+esc(COG_PAGES[COG]||'Triagem')+'</small><h3>Estatísticas dos filtrados</h3></div><button type="button" data-close aria-label="Fechar">×</button></header><p>Recorte atual · '+esc(COG_LOTE?.titulo||'Todos os lotes e séries')+(COG_GRUPO?' · '+esc(cogGrupoNome(COG_GRUPO)):'')+'. Inclui todos os processos filtrados, mesmo os que não aparecem na página.</p><div class="cog-stat-metrics">'+metric('Processos',nf(n))+metric('Com prontuário',nf(L.filter(atTri).length))+metric('Prioridade legal',nf(L.filter(o=>o.prior).length))+metric('Com pendências',nf(L.filter(o=>(o.pend||[]).length>0||nz(o.row?.['Destino - Situação']||'')==='pendente').length))+metric('Mediana na tarefa',med==null?'—':nf(med)+' dias')+metric('Mais de 180 dias',nf(ds.filter(x=>x>180).length))+'</div><div class="cog-stat-grid">'+dist('Seção',o=>o.secao)+dist('Classe',o=>o.cl)+dist('Assunto',o=>o.assunto)+dist('Tarefa no PJe',o=>o.tarefa||'Sem tarefa')+dist('Destino',o=>o.dest?.t||'A definir')+dist('Etiquetas',o=>[...new Set(o.etq||[])])+'</div><footer><button type="button" class="btn" data-close>Fechar</button></footer>';D.body.appendChild(d);d.addEventListener('close',()=>d.remove(),{once:true});d.querySelectorAll('[data-close]').forEach(b=>b.onclick=()=>d.close());d.showModal();
+}
+D.addEventListener('click',e=>{if(e.target.closest?.('[data-cog-filter-stats]')){e.preventDefault();cogFilteredStats();}},true);
 function cogWorkspace(k,soTarefa=''){
  const tri=k==='triagem',P=cogTriRecorte(soTarefa),base=tri?cogTriRecorte(soTarefa,false):cogDestinoBase(k),name=tri?(soTarefa||'Processos em triagem'):COG_PAGES[k],sub=tri?'triar':'destino',loading=k==='selecao'&&!_colD.selecao;
  const modes=tri?[['lista','Lista'],['matriz','Matriz'],['funil','Funil'],['fluxo','Fluxo']]:[['lista','Lista'],['matriz','Matriz']];
  const ctx=tri?'Processos nas tarefas do PJe':k==='mono'?'Decisões terminativas do relator · ativos e assinados':'Sessões futuras e banco de reserva';
- return '<div class="at cog-workspace"><p class="at-k">Cognitio · ficha única · '+esc(ctx)+(FONTE_EM?' · fonte de '+esc(String(FONTE_EM).slice(0,10).split('-').reverse().join('/')):'')+'</p><div class="cog-work-title"><h2 class="at-h">'+esc(name)+triExcelIcon('data-tri-xls="'+sub+'"'+(tri&&soTarefa?' data-xls-group="'+esc(soTarefa)+'"':'')+' data-xls-title="'+esc(name)+'"')+'</h2><small data-cog-work-count>'+nf(P.length)+' de '+nf(base.length)+' processos</small></div>'+
+ return '<div class="at cog-workspace"><p class="at-k">Cognitio · ficha única · '+esc(ctx)+(FONTE_EM?' · fonte de '+esc(String(FONTE_EM).slice(0,10).split('-').reverse().join('/')):'')+'</p><div class="cog-work-title"><h2 class="at-h">'+esc(name)+'<button type="button" class="cog-xls-icon cog-filter-stats" data-cog-filter-stats title="Estatísticas dos filtrados" aria-label="Estatísticas dos filtrados"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M3 3v18h18M8 16v-4m5 4V7m5 9V4"/></svg></button>'+triExcelIcon('data-tri-xls="'+sub+'"'+(tri&&soTarefa?' data-xls-group="'+esc(soTarefa)+'"':'')+' data-xls-title="'+esc(name)+'"')+'</h2><small data-cog-work-count>'+nf(P.length)+' de '+nf(base.length)+' processos</small></div>'+
  '<div class="cog-list-header"><div class="cog-list-header-main"><div class="at-ver" role="group" aria-label="Ver como"><span>Ver como</span>'+modes.map(x=>'<button type="button" '+'data-atver="'+x[0]+'" aria-pressed="'+(atVer()===x[0])+'">'+x[1]+'</button>').join('')+'</div>'+
  cogLoteBar()+'</div><div class="cog-list-header-actions"><div id="cog-matrix-tools">'+(atVer()==='matriz'?cogListTools():'')+'</div><div class="cog-list-tools cog-work-actions"><button type="button" class="btn sm" data-cog-select-filtered>Selecionar filtrados ('+nf(P.length)+')</button><button type="button" class="btn sm" data-cog-groups="open">Expandir grupos</button><button type="button" class="btn sm" data-cog-groups="close">Recolher grupos</button></div></div></div><div id="at-tab">'+(loading&&!P.length?'<div class="tri-ld">Lendo seleção prévia…</div>':atCorpo(soTarefa))+'</div></div>';
 }
