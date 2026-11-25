@@ -103,8 +103,11 @@ test('painel: processo sigiloso sem liberação bloqueia a leitura dos autos e m
   const P = await abrir({ processo: CNJ, origem: {}, triagem: {}, producao: {}, pauta: {}, controles: {} }, { sigilo: 'Segredo de Justiça', liberado: false, porque: '' });
   try {
     const { pg } = P;
-    await pg.waitForSelector('.sg-b', { timeout: 15000 });
-    assert.match(await pg.textContent('.sg-b'), /Segredo de Justiça · leitura e gravação do inteiro teor bloqueadas/);
+    await pg.waitForSelector('.status-sigilo[data-estado="restrito"]', { timeout: 15000 });
+    assert.equal(await pg.evaluate(() => window.MutaSigilo.bloqueado()), true);
+    await pg.click('.status-sigilo[data-estado="restrito"]');
+    await pg.waitForSelector('.hero-steps.hero-steps-mon .hero-sig-details .sg-b', { timeout: 15000 });
+    assert.match(await pg.textContent('.hero-steps .hero-sig-details .sg-b'), /Segredo de Justiça · leitura e gravação do inteiro teor bloqueadas/);
     assert.ok(await pg.$('.sg-b [data-sg="abrir"]'), 'liberar com senha');
     assert.equal(await pg.evaluate(() => window.MutaSigilo.bloqueado()), true);
     assert.deepEqual(P.erros, []);
@@ -198,13 +201,20 @@ test('universal: Encaminhamento como segunda face; Monitoramento em janela; sina
     assert.equal(sn.titulo, 'Sinalizações · Avisos');
     await pg.click('.hero-steps-voltar');
     assert.ok(await pg.$eval('.hero-steps .pv-flowbox', e => !!e.offsetParent), 'volta às etapas');
-    /* os indicadores do cabeçalho abrem o monitoramento numa janela, sem expandir o cartão */
+    /* Monitoramento é uma terceira visão do cartão Etapas, sem janela sobreposta. */
     await pg.click('.hero-case-status .status-meta');
-    await pg.waitForSelector('#hero-mon-dlg[open] .hero-monitoramento .ct-i.meta', { state: 'visible', timeout: 15000 });
-    assert.ok(await pg.$eval('#hero-mon-dlg', d => d.matches(':modal')), 'janela modal');
-    assert.ok(!(await pg.$('.pc.pm .hero-monitoramento')), 'monitoramento fora do cartão');
-    await pg.click('#hero-mon-dlg .hero-mon-dlg-x');
-    assert.equal(await pg.$eval('#hero-mon-dlg', d => d.open), false, 'fecha a janela');
+    await pg.waitForSelector('.hero-steps.hero-steps-mon>#hero-dock-pane-monitoramento .ct-i.meta', { state: 'visible', timeout: 15000 });
+    assert.equal(await pg.textContent('.hero-steps-head h4'), 'Monitoramento');
+    assert.equal(await pg.getAttribute('.hero-case-status .status-meta','aria-pressed'),'true');
+    assert.ok(!(await pg.$('#hero-mon-dlg')), 'sem diálogo');
+    assert.ok(await pg.$eval('.hero-steps .pv-flowbox', e => !e.offsetParent), 'etapas substituídas');
+    await pg.click('.hero-sn-ind [data-sn-kind="av"]');
+    await pg.waitForSelector('.hero-steps.hero-steps-sn>#hero-dock-pane-sinalizacoes', { state: 'visible', timeout: 15000 });
+    assert.ok(await pg.$eval('#hero-dock-pane-monitoramento', e => e.hidden), 'visões mutuamente exclusivas');
+    await pg.click('.hero-case-status .status-meta');
+    await pg.waitForSelector('.hero-steps.hero-steps-mon>#hero-dock-pane-monitoramento', { state: 'visible', timeout: 15000 });
+    await pg.click('.hero-case-status .status-meta');
+    assert.ok(await pg.$eval('.hero-steps .pv-flowbox', e => !!e.offsetParent), 'mesmo indicador volta às etapas');
     assert.deepEqual(P.erros, [], 'sem erro de script');
   } finally { await P.fim(); }
 });
