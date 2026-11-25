@@ -89,3 +89,17 @@ test('HERO18810 0.61: dados da decisão monocrática pela cronologia dos autos',
   assert.match(a, /function monoAutos\(\)/);
   ['producao.Decisão - ID', 'producao.Data da Assinatura', 'producao.Mono - Data da publicação', 'producao.Publicado'].forEach(k => assert.ok(a.includes("alvo: '" + k + "'"), k));
 });
+
+test('HERO18810 0.64: sigla da classe, Síntese e questões acima dos roteiros, pedidos por processo e por sessão', () => {
+  const fs = require('node:fs'), R = f => fs.readFileSync(path.resolve(__dirname, '../../..', f), 'utf8');
+  assert.equal(R('padrao/classes-cnj.js'), R('extensao/padrao-classes-cnj.js'), 'cópia da extensão igual');
+  require(path.resolve(__dirname, '../../../padrao/classes-cnj.js'));
+  const C = globalThis.ClassesCNJ;
+  assert.equal(C.etiqueta('ApCiv - APELAÇÃO CÍVEL', { ed: 1 }).t, 'ApCiv · ED');
+  assert.equal(C.etiqueta('AGRAVO DE INSTRUMENTO', '').t, 'AI');
+  assert.equal(C.etiqueta('APELAÇÃO / REMESSA NECESSÁRIA', '').t, 'ApelRemNec');
+  const g = R('extensao/gabinete.js'), p = R('extensao/pauta.js');
+  assert.match(g, /return sq \+ '<div class="seg pmodos rt-modos"/); assert.match(g, /function sinteseQuestoes\(\)/);
+  assert.match(p, /function soProcesso\(cnj\)/); assert.match(p, /function pedSessao\(itens\)/); assert.match(p, /procHtml\(\) \+ listaHtml\(\);/);
+  assert.match(R('extensao/painel.html'), /<script src="padrao-classes-cnj\.js"><\/script>/);
+});

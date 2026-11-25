@@ -255,6 +255,9 @@ function cabeca(s) {
   ['Autuação', 'Partes'].forEach(function (n) { var g = grupoModelo(n); (g ? g.campos : []).forEach(function (c) { R[c.rotulo] = valorDe(c); }); });
   var classe = R['Classe'] || fonteVal({ fonte: ['classe_judicial', 'Classe'] }), assunto = R['Assunto CNJ'] || fonteVal({ fonte: ['Assunto'] });
   var abrev = (pjeDoProcesso() ? window.MutaPje.classe() : '') || classe.split(/\s*[\/(]/)[0];
+  /* 0.64: etiqueta com a sigla da classe (TPU/CNJ) e o recurso julgado dentro do processo — "ApCiv · ED" */
+  var etqCl = null; try { var TT = window.MutaRoteiro && window.MutaRoteiro.tipos ? window.MutaRoteiro.tipos(gRot(), G.cnj) : null; etqCl = window.ClassesCNJ ? window.ClassesCNJ.etiqueta((pjeDoProcesso() ? window.MutaPje.classe() : '') || classe, TT || V('triagem', 'Tipo de Julgamento')) : null; } catch (e) {}
+  if (etqCl && etqCl.t) abrev = etqCl.t;
   var tarefa = (pjeDoProcesso() && window.MutaPje.tarefa && window.MutaPje.tarefa()) || fonteVal({ fonte: ['tarefa_atual'] });
   var dias = diasDesde(fonteVal({ fonte: ['data_entrada_tarefa'] }));
   var AL = window.MutaAutos && window.MutaAutos.estado().itens ? window.MutaAutos.alertas().filter(function (a) { return a.nivel === 'al'; }) : [];
@@ -285,7 +288,7 @@ function cabeca(s) {
     return '<button type="button" class="pm-pp' + (v ? '' : ' vz') + '" data-des-ed="' + k + '"' + (G.gestor ? ' title="Designar (Enter grava)"' : ' disabled title="Designação: só o gestor"') + '><span class="pm-av">' + esc(v ? iniciais(v) : '—') + '</span><span class="pm-pn"><small>' + rot + '</small>' + esc(v || 'não designado') + '</span></button>'; };
   return '<section class="pc pm">' +
     '<div class="pm-top"><span class="pm-fase">' + FASE[Math.min(E.n, FASE.length - 1)] + '</span>' + (dias != null ? '<span class="pm-dd' + (dias > 30 ? ' al' : '') + '">' + dias + ' dias na tarefa<i><i style="width:' + Math.min(100, dias / 60 * 100) + '%"></i></i></span>' : '') + '<span class="sp"></span>' + pills + '</div>' +
-    '<div class="pm-l1"><button type="button" class="mono pc-cnj" data-copia="' + esc(G.cnj) + '" title="Copiar o número">' + esc(G.cnj) + '</button>' + (abrev ? '<span class="pc-cl" title="' + esc(classe) + '">' + esc(abrev) + '</span>' : '') +
+    '<div class="pm-l1"><button type="button" class="mono pc-cnj" data-copia="' + esc(G.cnj) + '" title="Copiar o número">' + esc(G.cnj) + '</button>' + (abrev ? '<button type="button" class="pc-cl" data-cl-tipo title="' + esc((etqCl && etqCl.nome) || classe) + ' · clique para o tipo de julgamento">' + esc(abrev) + '</button>' : '') +
       tjHtml + (AL.length ? '<button type="button" class="pm-al" data-aba="Autos" title="' + esc(AL.map(function (a) { return a.t; }).join(' · ')) + '">' + AL.length + ' alerta' + (AL.length > 1 ? 's' : '') + '</button>' : '') + '</div>' +
     '<p class="pm-as">' + (assunto ? '<b>' + esc(assunto) + '</b>' : '') + (!G.adEd && !S(gravado('triagem', 'Registro - Assunto detalhado')) && !S(V('triagem', 'Assunto detalhado')) ? '<button type="button" class="pm-ad-ic" data-ad="ed" title="Incluir o assunto detalhado (vai para a ficha; o Caput mostra o mesmo)" aria-label="Incluir o assunto detalhado">' + SV('<path d="M12 5v14M5 12h14"/>', 12) + '</button>' : '') + '</p>' +
     assuntoDetalhado() +
@@ -316,8 +319,8 @@ function merEnc() {
   var etqX = (TR && TR.etiquetasDe ? TR.etiquetasDe(G.op, G.fo) : '') + (window.MutaAlertas ? window.MutaAlertas.htmlRoteiro(G.cnj, V('triagem', 'Etiquetas sugeridas'), function () { render(); }) : '');
   var ag = autoGabItens();
   return h + (ag.length ? '<div class="au-auto-av pm-auto"><span><b>' + ag.length + (ag.length === 1 ? ' campo preenchido' : ' campos preenchidos') + ' pela extensão</b> · marcados “auto”: confira</span><button type="button" class="lnk" data-autog="desfazer" title="Limpa o que a extensão pôs e não o repõe neste processo">Desfazer</button></div>' : '') +
-    '<h4 class="pm-mer-h">Síntese e questões</h4><div class="gr">' + campoRot('triagem', 'Síntese Processual', 'Síntese do processo') + questoes() + '</div>' +
-    '<h4 class="pm-mer-h">Mérito</h4><div class="gr">' + campoRot('triagem', 'Tema', 'Tipo de caso') + campoRot('triagem', 'Especificidades') + campoRot('triagem', 'Síntese Fática', 'Síntese fática') +
+    /* 0.64: síntese, questões, tipo de caso e especificidades foram para o painel acima dos roteiros (sinteseQuestoes) */
+    '<h4 class="pm-mer-h">Mérito</h4><div class="gr">' + campoRot('triagem', 'Síntese Fática', 'Síntese fática') +
       (S(V('triagem', 'COMPLEXIDADE')) ? campoRot('triagem', 'COMPLEXIDADE', 'Complexidade') : '') + campoRot('triagem', 'Tipo de Voto', 'Tipo de voto') + '</div>' +
     /* 0.50: pendências e etiquetas do gabinete saíram daqui (estão em Sinalizações e na 1ª seta); a situação é calculada pelas sinalizações */
     '<h4 class="pm-mer-h">Encaminhamento</h4><div class="gr">' + situacaoHtml() + (mono ? campoRot('triagem', 'Hipóteses Monocrática', 'Hipótese do artigo 932') : '') + '</div>' + /* 0.59: etiquetas foram para o Roteiro de triagem */
@@ -616,17 +619,27 @@ function snCard() {
   /* 0.62: 3ª seta do cartão do processo (fundo cinza), no formato de "autuação e partes" */
   return '<details class="pm-aut pm-sn"' + (ab ? ' open' : '') + '><summary aria-label="Sinalizações e notas" title="Sinalizações e notas"><span class="pm-aut-t">sinalizações e notas' + (n ? ' · <b class="pm-sn-n">' + n + ' em aberto</b>' : '') + '</span><i class="pm-aut-h"></i></summary><div class="sn-b">' + si + nt + rg + '</div></details>';
 }
+/* 0.64 · Síntese e questões: painel acima do seletor dos roteiros (vale para a triagem e para a produção) */
+var SQ_AB = null, SQ_HTML = '';
+function sinteseQuestoes() {
+  var tc = S(V('triagem', 'Tema')), sp = S(V('triagem', 'Síntese Processual')), nq = S(V('triagem', 'Alegações')).split(/\n+/).filter(function (x) { return S(x); }).length;
+  var vazio = !tc && !sp && !nq, ab = SQ_AB != null ? SQ_AB : vazio;
+  SQ_HTML = campoRot('triagem', 'Tema', 'Tipo de caso') + campoRot('triagem', 'Especificidades') + campoRot('triagem', 'Síntese Processual', 'Síntese do processo') + questoes();
+  var res = [tc || 'sem tipo de caso', nq ? nq + (nq > 1 ? ' questões' : ' questão') : 'sem questões', sp ? 'síntese preenchida' : 'sem síntese'].join(' · ');
+  return '<details class="card sq-card"' + (ab ? ' open' : '') + '><summary><b>Síntese e questões</b><small>' + esc(res) + '</small></summary><div class="gr">' + SQ_HTML + '</div></details>';
+}
 function corpoProcesso() {
   /* 0.60: a aba Processo = Roteiro de triagem + Roteiro de produção; sinalizações, notas e registro no acervo foram para o card do topo (snCard) */
+  var sq = sinteseQuestoes();
   var h = '<div class="rt-em-proc">' + corpoRoteiro() + '</div>', rot = G.rot === 'pro' ? 'pro' : 'tri';
   /* 0.55: sem repetição — o Roteiro de produção não repete o que já aparece no Roteiro de triagem, nesta aba ou nas setas do cartão */
   var ja = {}, sc = '';
   try { var ab0 = G.merAb; G.merAb = true; G._seco = 1; sc = merEnc() + controlesProcesso(true); G.merAb = ab0; G._seco = 0; } catch (e) { G._seco = 0; }
-  sc += SN_HTML;
+  sc += SN_HTML + SQ_HTML;
   (h + sc).replace(/data-(?:fk|ch)="([^"]+)"/g, function (m, k) { ja[k.replace(/&quot;/g, '"').replace(/&amp;/g, '&').replace(/&#39;/g, "'")] = 1; return m; });
   /* 0.63: a aba Processo se divide em Roteiro de triagem | Roteiro de produção (a deduplicação usa sempre os dois) */
   var pro = camposCaso(ja);
-  return '<div class="seg pmodos rt-modos" role="tablist" aria-label="Roteiro"><button type="button" role="tab" data-rot="tri" aria-selected="' + (rot === 'tri') + '">Roteiro de triagem</button><button type="button" role="tab" data-rot="pro" aria-selected="' + (rot === 'pro') + '">Roteiro de produção</button></div>' +
+  return sq + '<div class="seg pmodos rt-modos" role="tablist" aria-label="Roteiro"><button type="button" role="tab" data-rot="tri" aria-selected="' + (rot === 'tri') + '">Roteiro de triagem</button><button type="button" role="tab" data-rot="pro" aria-selected="' + (rot === 'pro') + '">Roteiro de produção</button></div>' +
     (rot === 'tri' ? h : pro || '<div class="empty">Sem campos de produção para este processo.</div>');
 }
 /* 0.54 · Roteiro de produção: todos os campos da ficha que a Minuta-Matriz do Compendium usa (@apelido), do destino do caso
@@ -951,7 +964,7 @@ caixa.addEventListener('change', function (e) {
   agendar(900);
   if (/^(triagem\.(Urgência|Padrão - Espécie)|producao\.Destino|controles\.Sensível - (In|Ex)cluído)$/.test(t.dataset.fk) || G.aba === 'Processo') render();
 });
-caixa.addEventListener('toggle', function (e) { var c = e.target.classList; if (!c) return; if (c.contains('pm-sn')) { SN_AB = e.target.open; return; } if (c.contains('pm-mer')) { if (G.merAb !== e.target.open) { G.merAb = e.target.open; render(); } return; } if (c.contains('pm-aut')) { if (G.autAb !== e.target.open) { G.autAb = e.target.open; render(); } return; } if (c.contains('au-it') && window.MutaAutos) { window.MutaAutos.abrirTexto(e.target.dataset.auIt, e.target.open); return; } if (c.contains('au-auto-d') && window.MutaAutos) window.MutaAutos.estado().autoAb = e.target.open; if (c.contains('pc-s')) { G.pecAb = G.pecAb || {}; G.pecAb[e.target.dataset.grupo] = e.target.open; } }, true);
+caixa.addEventListener('toggle', function (e) { var c = e.target.classList; if (!c) return; if (c.contains('pm-sn')) { SN_AB = e.target.open; return; } if (c.contains('sq-card')) { SQ_AB = e.target.open; return; } if (c.contains('pm-mer')) { if (G.merAb !== e.target.open) { G.merAb = e.target.open; render(); } return; } if (c.contains('pm-aut')) { if (G.autAb !== e.target.open) { G.autAb = e.target.open; render(); } return; } if (c.contains('au-it') && window.MutaAutos) { window.MutaAutos.abrirTexto(e.target.dataset.auIt, e.target.open); return; } if (c.contains('au-auto-d') && window.MutaAutos) window.MutaAutos.estado().autoAb = e.target.open; if (c.contains('pc-s')) { G.pecAb = G.pecAb || {}; G.pecAb[e.target.dataset.grupo] = e.target.open; } }, true);
 caixa.addEventListener('keydown', function (e) {
   if (e.target.id === 'sn-tx' && e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); snIncluir(); }
   else if (e.target.id === 'pm-ad-tx' && e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); adAcao('ok'); }
@@ -969,6 +982,7 @@ caixa.addEventListener('input', function (e) {
 });
 caixa.addEventListener('click', function (e) {
   var rb = e.target.closest && e.target.closest('[data-rot]'); if (rb) { G.rot = rb.getAttribute('data-rot'); render(); return; }
+  if (e.target.closest && e.target.closest('[data-cl-tipo]')) { G.aba = 'Processo'; G.rot = 'tri'; render(); setTimeout(function () { var d = caixa.querySelector('.rt-tsel'); if (d) { d.open = true; d.scrollIntoView({ block: 'center' }); } }, 0); return; }
   var b = e.target.closest('button,a'); if (!b) return;
   if (b.tagName === 'BUTTON' && b.closest('summary')) e.preventDefault(); /* botão no título de um campo expansível não abre nem fecha o campo */
   if (b.dataset.au != null) { if (window.MutaAutos) window.MutaAutos.clique(b); return; }

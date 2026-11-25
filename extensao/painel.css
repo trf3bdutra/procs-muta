@@ -1473,3 +1473,11 @@ html[data-tema=escuro] .sn-st.av,html[data-tema=escuro] .sn-tp.av{background:#16
 .rt-modos{margin:0 0 8px}
 .rt-tsel{margin:4px 0 6px;font-size:11.5px}.rt-tsel>summary{cursor:pointer;color:var(--muted-fg)}.rt-tsel>summary b{color:var(--fg,inherit)}.rt-tsel small{opacity:.7}
 .rt-tsel[open] .rt-tipos{margin-top:6px}
+/* 0.64 · Síntese e questões acima dos roteiros; sigla da classe */
+.sq-card{margin:0 0 8px;padding:0}.sq-card>summary{display:flex;align-items:baseline;gap:8px;padding:8px 10px;cursor:pointer;list-style:none}
+.sq-card>summary::-webkit-details-marker{display:none}.sq-card>summary small{margin-left:auto;color:var(--muted-fg);font-size:10.5px;text-align:right}
+.sq-card>.gr{padding:0 10px 10px}
+button.pc-cl{all:unset;cursor:pointer;font:700 10px var(--mono);padding:1px 6px;border-radius:5px;background:var(--primary);color:var(--primary-fg)}
+.pa-cl{margin-left:6px;vertical-align:1px}
+.pa-soc{margin-top:8px}.pa-soc .gx-it{background:var(--card)}
+.pa-pses{margin:0 0 8px}.pa-ped.venc{border-left:3px solid #c79a2b}.pa-vinc select{margin-top:4px;font:inherit;font-size:11px;max-width:100%}
