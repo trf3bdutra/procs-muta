@@ -1,4 +1,4 @@
-"""Integra o tipo de caso e as especificidades dos itens de um lote do Collectio.
+"""Integra o tipo de caso e as especificidades dos itens de um lote do CORTEX.
 
 Padrão (o mesmo dos cartões do prontuário e das fichas):
 - assunto: o assunto cadastrado no PJe, como veio (pode estar errado ou vago).
