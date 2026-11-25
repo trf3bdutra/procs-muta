@@ -11,7 +11,7 @@ function ler(silencioso) {
   if (!window.MutaPje || !window.MutaPje.lerEditor) return Promise.reject(new Error('Fora da extensão: sem acesso ao PJe.'));
   if (!silencioso) { E.lendo = true; avisar(); }
   return window.MutaPje.lerEditor().then(function (r) {
-    var mudou = hash(r.texto) !== hash(E.texto) || E.colado;
+    var mudou = hash(r.texto) !== hash(E.texto) || JSON.stringify(r.paragrafos||[]) !== JSON.stringify(E.paragrafos||[]) || E.colado;
     E.texto = r.texto; E.paragrafos = r.paragrafos || String(r.texto || '').split(/\n+/).map(function (t) { return { t: t.trim() }; }).filter(function (p) { return p.t; });
     E.fonte = r.fonte + (r.outros ? ' · ' + (r.outros + 1) + ' editores na página; usado o maior visível' : ''); E.numero = r.numero || ''; E.colado = false; E.erro = ''; E.em = Date.now();
     E.lendo = false;
