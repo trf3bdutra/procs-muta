@@ -83,12 +83,16 @@ test('Portal Amicus: laterais modulares mais largas e Referências jurídicas em
 test('Portal Amicus: visão geral dentro do cabeçalho e duas colunas laterais',()=>{
  const home=read('apoio/amicus/index.html'), shared=read('apoio/amicus/header.py');
  const hd=home.match(/<header class="am-home-header">([\s\S]*?)<\/header>/);assert.ok(hd);
- assert.doesNotMatch(hd[1],/am-over-head|Visão geral|Triagem, organização e apoio à elaboração/);assert.match(hd[1],/am-over-nav am-home-overview/);assert.match(home,/\.am-home-header>\.am-over-nav\{grid-column:2;grid-row:1;/);for(const id of ['ferramentas','referencias-juridicas','referencias-operacionais'])assert.ok(hd[1].includes('href="#'+id+'"'));
- assert.match(home,/<aside class="am-rail am-apps"/);assert.match(home,/<aside class="am-rail am-refs"/);
- for(const id of ['jurisprudencia','enunciados','regimento','fluxos','competencia','impedimentos']){
+ assert.doesNotMatch(hd[1],/am-over-head|Visão geral|Triagem, organização e apoio à elaboração/);assert.match(hd[1],/am-over-nav am-home-overview/);assert.match(home,/\.am-home-header>\.am-over-nav\{grid-column:2;grid-row:1;/);for(const id of ['ferramentas','referencias-juridicas','referencias-operacionais'])assert.equal((home.match(new RegExp('id="'+id+'"','g'))||[]).length,1,id);
+ assert.match(home,/<aside class="am-rail am-refs"/);assert.match(home,/<aside class="am-rail am-competence"/);
+ // a navbar só leva às aplicações: sem atalhos internos da página
+ assert.doesNotMatch(hd[1],/href="#/);assert.doesNotMatch(hd[1],/am-nav-areas/);
+ for(const id of ['jurisprudencia','recursos','fluxos','enunciados','regimento','temas-proc','assuntos','lexico','competencia','impedimentos'])
   assert.equal((home.match(new RegExp('id="'+id+'"','g'))||[]).length,1,id);
-  assert.ok(home.includes('href="#'+id+'"'),id);
- }
+ // material da Central de Comando (central.json → central.py)
+ const C=JSON.parse(read('apoio/amicus/central.json'));
+ assert.equal(C.recursos.length,10);assert.ok(C.atos.length>=8&&C.temas.length>=8&&C.assuntos.length>=30&&C.lexico.length>=15);
+ assert.match(home,/<script type="application\/json" id="amicus-central">\{/);
  assert.ok(shared.includes("!e.classList.contains('am-home-overview')"));
  for(const m of home.matchAll(/<script>([\s\S]*?)<\/script>/g))new vm.Script(m[1]);
 });
