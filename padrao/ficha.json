@@ -362,6 +362,41 @@
         }
        ],
        "apelido": "contrarrazoes"
+      },
+      {
+       "rotulo": "Preliminares",
+       "chave": "Prelim.",
+       "tipo": "lista",
+       "secao": "triagem",
+       "opcoes": [
+        "Sem preliminares",
+        "Há preliminares",
+        "Preliminar de ofício"
+       ],
+       "vocabulario": "prelim",
+       "apelido": "prelim",
+       "regra": "Identificação de preliminares suscitadas nos recursos ou respostas, ou cognoscíveis de ofício. A solução judicial é registrada na Produção."
+      },
+      {
+       "rotulo": "Descrição da preliminar",
+       "chave": "Descrição da Preliminar",
+       "tipo": "texto-longo",
+       "secao": "triagem",
+       "apelido": "descricao_preliminar"
+      },
+      {
+       "rotulo": "Recurso adesivo",
+       "chave": "Recurso adesivo",
+       "tipo": "simnao",
+       "secao": "triagem",
+       "apelido": "recurso_adesivo"
+      },
+      {
+       "rotulo": "Má-fé alegada",
+       "chave": "Má-fé alegada",
+       "tipo": "simnao",
+       "secao": "triagem",
+       "apelido": "ma_fe_alegada"
       }
      ]
     },
@@ -703,6 +738,21 @@
        "editavel": false,
        "regra": "do PJe",
        "apelido": "orgao_julgador"
+      },
+      {
+       "rotulo": "Etiquetas do gabinete",
+       "chave": "Etiquetas",
+       "tipo": "texto",
+       "secao": "triagem",
+       "apelido": "etiquetas"
+      },
+      {
+       "rotulo": "Etiquetas sugeridas para o PJe",
+       "chave": "Etiquetas sugeridas",
+       "tipo": "texto",
+       "secao": "triagem",
+       "regra": "escolhidas no prontuário de triagem do Caput, entre as sugestões calculadas pela triagem",
+       "apelido": "etiquetas_sugeridas"
       }
      ]
     },
@@ -742,7 +792,7 @@
        "apelido": "outros_assuntos"
       },
       {
-       "rotulo": "Detalhamento",
+       "rotulo": "Detalhamento do caso",
        "chave": "Detalhamento do caso",
        "tipo": "texto-longo",
        "secao": "triagem",
@@ -1202,102 +1252,6 @@
    "aba": "Triagem",
    "grupos": [
     {
-     "grupo": "Matéria e gestão",
-     "campos": [
-      {
-       "rotulo": "Tipo de voto",
-       "chave": "Tipo de Voto",
-       "tipo": "texto",
-       "secao": "triagem",
-       "apelido": "tipo_voto"
-      },
-      {
-       "rotulo": "Preliminares",
-       "chave": "Prelim.",
-       "tipo": "lista",
-       "secao": "triagem",
-       "opcoes": [
-        "Sem preliminares",
-        "Há preliminares",
-        "Preliminar de ofício"
-       ],
-       "vocabulario": "prelim",
-       "apelido": "prelim"
-      },
-      {
-       "rotulo": "Descrição da preliminar",
-       "chave": "Descrição da Preliminar",
-       "tipo": "texto-longo",
-       "secao": "triagem",
-       "apelido": "descricao_preliminar"
-      },
-      {
-       "rotulo": "Mídias",
-       "chave": "Mídias",
-       "tipo": "lista",
-       "secao": "triagem",
-       "opcoes": [
-        "Juntadas",
-        "Faltantes",
-        "Não se aplica",
-        "Não verificado"
-       ],
-       "vocabulario": "midias",
-       "apelido": "midias"
-      },
-      {
-       "rotulo": "Etiquetas do gabinete",
-       "chave": "Etiquetas",
-       "tipo": "texto",
-       "secao": "triagem",
-       "apelido": "etiquetas"
-      },
-      {
-       "rotulo": "Etiquetas sugeridas para o PJe",
-       "chave": "Etiquetas sugeridas",
-       "tipo": "texto",
-       "secao": "triagem",
-       "regra": "escolhidas no prontuário de triagem do Caput, entre as sugestões calculadas pela triagem",
-       "apelido": "etiquetas_sugeridas"
-      },
-      {
-       "rotulo": "Recurso adesivo",
-       "chave": "Recurso adesivo",
-       "tipo": "simnao",
-       "secao": "triagem",
-       "apelido": "recurso_adesivo"
-      },
-      {
-       "rotulo": "Má-fé alegada",
-       "chave": "Má-fé alegada",
-       "tipo": "simnao",
-       "secao": "triagem",
-       "apelido": "ma_fe_alegada"
-      },
-      {
-       "rotulo": "Tipo de pessoa (gratuidade)",
-       "chave": "Gratuidade - Tipo de pessoa",
-       "tipo": "lista",
-       "secao": "triagem",
-       "opcoes": [
-        "Pessoa natural",
-        "Pessoa jurídica",
-        "Não se aplica"
-       ],
-       "apelido": "gratuidade_tipo_pessoa"
-      },
-      {
-       "rotulo": "Análise do caso · histórico",
-       "chave": "Registro - Triagem",
-       "tipo": "texto-longo",
-       "secao": "triagem",
-       "editavel": false,
-       "regra": "do lote de triagem (acervo/lotes); atualizado por scripts/triagem/ficha_lote.py",
-       "apelido": "registro_triagem"
-      }
-     ]
-    },
-    {
      "grupo": "Análise e Acompanhamento",
      "campos": [
       {
@@ -1529,6 +1483,15 @@
        "secao": "triagem",
        "tipo": "texto-longo",
        "regra": "Seleção de questões do caso para exibição resumida no prontuário."
+      },
+      {
+       "rotulo": "Análise do caso · histórico",
+       "chave": "Registro - Triagem",
+       "tipo": "texto-longo",
+       "secao": "triagem",
+       "editavel": false,
+       "regra": "do lote de triagem (acervo/lotes); atualizado por scripts/triagem/ficha_lote.py",
+       "apelido": "registro_triagem"
       }
      ]
     },
@@ -1889,6 +1852,32 @@
        "secao": "triagem",
        "tipo": "texto-longo",
        "apelido": "admissibilidade_observacao"
+      },
+      {
+       "rotulo": "Mídias",
+       "chave": "Mídias",
+       "tipo": "lista",
+       "secao": "triagem",
+       "opcoes": [
+        "Juntadas",
+        "Faltantes",
+        "Não se aplica",
+        "Não verificado"
+       ],
+       "vocabulario": "midias",
+       "apelido": "midias"
+      },
+      {
+       "rotulo": "Tipo de pessoa (gratuidade)",
+       "chave": "Gratuidade - Tipo de pessoa",
+       "tipo": "lista",
+       "secao": "triagem",
+       "opcoes": [
+        "Pessoa natural",
+        "Pessoa jurídica",
+        "Não se aplica"
+       ],
+       "apelido": "gratuidade_tipo_pessoa"
       }
      ]
     },
@@ -2594,6 +2583,13 @@
        "tipo": "texto-longo",
        "secao": "producao",
        "apelido": "voto_descricao"
+      },
+      {
+       "rotulo": "Tipo de voto",
+       "chave": "Tipo de Voto",
+       "tipo": "texto",
+       "secao": "triagem",
+       "apelido": "tipo_voto"
       }
      ],
      "destino": "sessao"
