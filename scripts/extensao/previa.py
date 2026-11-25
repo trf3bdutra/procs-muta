@@ -14,6 +14,7 @@ import pathlib
 import re
 import shutil
 import sys
+import manual_canhoto
 
 RAIZ = pathlib.Path(__file__).resolve().parents[2]
 EXT = RAIZ / 'extensao'
@@ -31,6 +32,7 @@ def montar(saida: pathlib.Path) -> None:
     for sub in ('icones', 'vendor'):
         if (EXT / sub).is_dir():
             shutil.copytree(EXT / sub, painel / sub)
+    manual_canhoto.montar(painel)
     shutil.copy2(AQUI / 'shim.js', painel / 'shim-previa.js')
 
     html = (painel / 'painel.html').read_text(encoding='utf-8')

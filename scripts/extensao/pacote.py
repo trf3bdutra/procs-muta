@@ -22,7 +22,7 @@ EXT = RAIZ / 'extensao'
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import previa  # noqa: E402
 
-UNIVERSAL = ('gabinete-universal.js', 'roteiro-universal.js', 'universal-layout.css', 'universal-ajustes.js')
+UNIVERSAL = ('gabinete-universal.js', 'roteiro-universal.js', 'universal-layout.css', 'universal-ajustes.js', 'manual-canhoto.js', 'manual-canhoto.css')
 
 
 def montar(zip_saida: pathlib.Path) -> None:
