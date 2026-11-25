@@ -7,7 +7,8 @@ const read=p=>fs.readFileSync(path.join(root,p),'utf8');
 test('Amicus tem o cartão do Collegium e o site publica a página e os dados',()=>{
   const amicus=read('apoio/amicus/index.html'),wf=read('.github/workflows/vercel-caput.yml');
   assert.ok(amicus.includes('href="/amicus/collegium/"'));
-  assert.ok(amicus.includes('04 · Collegium'));
+  assert.ok(amicus.includes('03 · Collegium'));
+  assert.ok(!amicus.includes('<small>01 · Collectio</small>'),'Collectio fora da página inicial do Amicus');
   for(const x of ['site/public/amicus/collegium/index.html','gerar_busca.py --pasta precedentes/collegium','site/public/collegium/','"precedentes/collegium/**"'])
     assert.ok(wf.includes(x),x);
 });
