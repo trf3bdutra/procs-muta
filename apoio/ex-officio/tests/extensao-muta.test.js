@@ -513,7 +513,7 @@ test('extensão 0.38: Autos preenche sozinho os campos vazios do Roteiro (e desf
   /* 0.52.2: A conferir vai dentro de Peças e documentos (recolhível), logo após o cabeçalho */
   assert.match(gab, /var cf = AU\.htmlConferir\(\), dc = AU\.htmlDocs\(function \(\) \{ return pecasCartao\(true\); \}\)/);
   assert.match(gab, /<details class="gg au-cf" id="g-cf"/);
-  assert.match(html, /data-mm="ger"/); assert.match(html, /<div id="ger-app" hidden><\/div>/);
+  assert.doesNotMatch(html, /id="ger-app"/); assert.match(gab, /<div id="ger-app"><\/div>/);
   assert.match(read('extensao/prontuario.js'), /ger:'min'/);
   assert.match(read('extensao/gerador.js'), /pintar: pintar, abrir: abrir, modo: modo/);
   assert.match(read('extensao/roteiro.js'), /AU0\.preenchido/);
@@ -590,7 +590,7 @@ test('extensão 0.43: Gerador só com relatório e ementa (dispositivo, acórdã
   const g = read('extensao/gerador.js');
   assert.match(g, /var PECAS = \{ rel: true, em: true, disp: false, ac: false, pr: false \};/);
   assert.match(g, /\(PECAS\.disp \? bloco\('disp'/); assert.match(g, /\(PECAS\.ac \? bloco\('ac'/); assert.match(g, /\(PECAS\.pr \? bloco\('pr'/);
-  assert.match(read('extensao/painel.html'), /data-mm="ger" aria-selected="false">Minutário</);
+  assert.match(read('extensao/painel.html'), /<b>Corretor /); assert.match(read('extensao/gabinete.js'), /hero-v53-gerador/);
   assert.doesNotMatch(read('extensao/comparar.js'), />Localizar no Collectio<|>Mandar ao Collectio</, 'sem os botões do Collectio no texto do editor');
 });
 
@@ -628,7 +628,7 @@ test('extensão 0.47: Roteiro dentro da aba Processo; controles na 1ª seta; Par
   const g = read('extensao/gabinete.js'), h = read('extensao/painel.html'), c = read('extensao/comparar.js');
   assert.match(g, /var MODOS = \['Processo', 'Autos'\];/); assert.match(g, /var h = '<div class="rt-em-proc">' \+ corpoRoteiro\(\) \+ '<\/div>', rot = /);
   assert.match(g, /controlesProcesso\(true\) \+ '<\/details>' \+/, '0.66: controles na 1ª seta');
-  assert.match(h, /id="tab-par"[^>]*hidden/); assert.match(h, /data-emd="par"/); assert.match(h, /id="tab-dir"[^>]*hidden/); assert.match(h, /data-mm="dir"/); assert.match(h, /<div id="dir-app" class="min-dir" hidden><\/div>/);
+  assert.match(h, /id="tab-par"[^>]*hidden/); assert.match(h, /data-emd="par"/); assert.doesNotMatch(h, /id="tab-dir"[^>]*hidden/); assert.doesNotMatch(h, /data-mm="dir"/); assert.match(h, /<div id="dir-app"><\/div>/);
   assert.match(h, /id="tab-ajuda"[^>]*hidden>\?<\/button>/);
   assert.match(read('extensao/diretrizes.js'), /d = \$\('dir-app'\); return !!\(p && !p\.hidden && d && !d\.hidden\)/);
   assert.match(c, /class="cx-op1"/); assert.doesNotMatch(c, /Leia o editor do PJe \(ou cole o texto\) para comparar/);
