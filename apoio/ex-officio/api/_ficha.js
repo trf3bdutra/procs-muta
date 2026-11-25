@@ -75,7 +75,7 @@ function mesclarOcorrencias(old,patch){
   const base=parse(old),inc=parse(patch);
   for(const [k,v] of Object.entries(inc)){if(!/^\d{4}-\d{2}-\d{2}\|[^|]{1,30}$/.test(k)||!v||typeof v!=='object')continue;
     const ingresso=['PAUTADO','EM MESA',''].includes(v.ingresso)?v.ingresso:'',ocorrencia=['Retirada de pauta','Adiamento'].includes(v.ocorrencia)?v.ocorrencia:'';
-    base[k]={ingresso,ocorrencia,justificativa:ocorrencia?String(v.justificativa||'').trim().slice(0,4000):'',solicitacao:ocorrencia?String(v.solicitacao||'').slice(0,80):''};
+    base[k]={ingresso,ocorrencia,justificativa:ocorrencia?String(v.justificativa||'').trim().slice(0,4000):'',solicitacao:ocorrencia?String(v.solicitacao||'').slice(0,80):'',efetivada:!!(ocorrencia&&String(v.justificativa||'').trim()&&v.efetivada===true)};
   }return JSON.stringify(base);
 }
 function aplica(r, mud) {
