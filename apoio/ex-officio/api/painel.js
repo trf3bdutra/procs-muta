@@ -1,5 +1,5 @@
 /* GET /api/painel?cmt=1  painel do desembargador (api/_cmt.js)
-   GET /api/painel?lote=1  Amicus Curiae · Collectio (api/_lote.js; /amicus/collectio/ e /amicus/collectio/cg/)
+   GET /api/painel?lote=1  Amicus Curiae · CORTEX (api/_lote.js; /amicus/cortex/ e /amicus/cortex/cg/)
    GET /api/painel?atividades=1&dias=3  registro de atividades (api/_atividades.js; Chefia do Caput)
    GET /api/painel  página inicial do servidor: calendário das pautas publicadas e todos os processos dele (minuta e correção) */
 const L = require('./_lib');
@@ -9,7 +9,7 @@ module.exports = async (req, res) => {
   res.setHeader('Cache-Control', 'no-store');
   if (req.query && req.query.whatsapp === '1') return require('./_whatsapp')(req, res);
   if (req.query && req.query.fechamento === '1') return require('./_fechamento-auto')(req, res);
-  /* Amicus Curiae · Collectio: login do Ex Officio ou chave do relator, conferidos em _lote.js */
+  /* Amicus Curiae · CORTEX: login do Ex Officio ou chave do relator, conferidos em _lote.js */
   if (req.query && req.query.lote) return require('./_lote')(req, res);
   /* painel do desembargador: abre sem senha só com o link pessoal (chave CMT_CHAVE, guardada no aparelho na
      primeira abertura de /cmt/?k=…) ou com a sessão do Ex Officio. Sem uma nem outra, ninguém vira o relator. */
