@@ -1481,6 +1481,39 @@ header#top::before{background:linear-gradient(90deg,var(--eg) 0 50%,var(--eg2) 5
 .cog-pending-cell .cog-id-pend{max-height:150px;overflow:auto;scrollbar-width:thin}
 .cog-id-signs .cog-id-edit{margin:0}.cog-id-signs .cog-reg-actions{margin:0}
 </style>
+<style id="cog-over-office">
+#cog-over-panel{--ep:#fbfaf5;--ep2:#ece9df;--el:#d8d3c6;--el2:#c8c3b6;--ei:#203b39;--em:#55584f;--eg:#235a55;--eo:#a57829;--eo2:#805b18;--ew:#fff;--etx:rgba(32,59,57,.085);--emono:SFMono-Regular,Consolas,"Liberation Mono",ui-monospace,monospace;background-color:var(--ep)!important;background-image:radial-gradient(var(--etx) 1px,transparent 1px)!important;background-size:13px 13px!important;border:1px solid var(--el)!important;border-top:2px solid var(--eg)!important;border-radius:0!important;color:var(--ei);box-shadow:0 24px 60px rgba(32,59,57,.18)!important}
+html[data-theme=dark] #cog-over-panel{--ep:#10222e;--ep2:#132835;--el:#1e3747;--el2:#2c4a5c;--ei:#ebeff1;--em:#a7a8a9;--eg:#6eba8a;--eo:#e6c27a;--eo2:#e6c27a;--ew:#16303e;--etx:rgba(235,239,241,.075)}
+#cog-over-panel .cog-ac-over{padding:0 20px 18px;margin:0 auto}
+#cog-over-panel .cog-ac-head{background:var(--ep);margin:0 -20px 0;padding:8px 20px!important;min-height:42px;border-bottom:1px solid var(--el);gap:10px}
+#cog-over-panel .cog-ac-head h2{font:650 16px/1.25 Figtree,system-ui,sans-serif;color:var(--ei);margin:0}
+#cog-over-panel .cog-ac-head .k,#cog-over-panel .cog-over-lane-title{font:400 9.5px var(--emono);letter-spacing:.12em;text-transform:uppercase;color:var(--em)}
+#cog-over-panel .cog-over-metrics{display:flex;gap:0;flex-wrap:wrap;margin-left:auto}
+#cog-over-panel .cog-over-metrics span{display:inline-flex;flex-direction:row-reverse;align-items:baseline;gap:7px;padding:0 12px;border-left:1px solid var(--el);font:400 9.5px var(--emono);text-transform:uppercase;letter-spacing:.08em;color:var(--em)}
+#cog-over-panel .cog-over-metrics b{font:400 14px var(--emono);color:var(--eo2)}
+#cog-over-panel .cog-ac-head .btn{border-radius:0!important;border:1px solid var(--el2);background:var(--ew);color:var(--ei);min-width:30px;min-height:28px}
+#cog-over-panel .kpis{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:0!important;margin:0!important;border-bottom:1px solid var(--el)}
+#cog-over-panel .kpi{border:0!important;border-right:1px solid var(--el)!important;border-radius:0!important;box-shadow:none!important;background:transparent!important;padding:10px 14px!important;text-align:left;min-height:0}
+#cog-over-panel .kpi:last-child{border-right:0!important}#cog-over-panel .kpi b{font:400 23px var(--emono)!important;color:var(--eo2)!important}#cog-over-panel .kpi .k{font:400 10px var(--emono);color:var(--em)!important}
+#cog-over-panel .kpi .sub{font-size:11px;color:var(--ei)}#cog-over-panel .kpi .kr{display:none}
+#cog-over-panel .cog-over-board{display:grid;grid-template-columns:minmax(0,1.18fr) minmax(0,1fr) minmax(0,1fr)!important;gap:0!important;padding:0!important}
+#cog-over-panel .cog-over-lane{display:flex;flex-direction:column;gap:8px!important;padding:12px 12px 0;min-width:0;border-left:1px solid var(--el)}
+#cog-over-panel .cog-over-lane:first-child{border-left:0;padding-left:0}#cog-over-panel .cog-over-lane:last-child{padding-right:0}
+#cog-over-panel .cog-over-lane-title{margin:0;padding:0 0 8px;border-bottom:1px solid var(--el)}
+#cog-over-panel .card{min-width:0;border:1px solid var(--el)!important;border-left:3px solid var(--eg)!important;border-radius:0!important;background:var(--ew)!important;box-shadow:none!important;overflow:hidden}
+#cog-over-panel .card .ch{padding:9px 10px!important;background:transparent;border-bottom:1px solid var(--el)}
+#cog-over-panel .card .ch :is(h2,h3){font:650 13px/1.25 Figtree,system-ui,sans-serif;color:var(--ei);margin:0 0 3px}
+#cog-over-panel .card .ch p,#cog-over-panel .card small,#cog-over-panel .card .nota{font-size:11px;line-height:1.35;color:var(--em)}
+#cog-over-panel .card .li{padding:6px 9px!important;gap:5px!important;border-color:var(--el)!important;font-size:11.5px;color:var(--ei);white-space:normal;overflow-wrap:anywhere;grid-template-columns:minmax(0,1fr) minmax(0,auto) minmax(0,auto) minmax(0,auto)!important}
+#cog-over-panel .card .li:has(>span.n:first-child){grid-template-columns:38px minmax(0,1fr) auto!important}
+#cog-over-panel .card .li:has(>span.n:last-child):not(:has(>span.n:first-child)){grid-template-columns:minmax(0,1fr) auto auto!important}
+#cog-over-panel .card .li>span{min-width:0}#cog-over-panel .card .li>span[style*="justify-content:flex-end"]{flex-wrap:wrap!important;gap:4px!important}
+#cog-over-panel .card .li .hb{min-width:28px;max-width:65px}#cog-over-panel .card .li .n{font:400 13px var(--emono);color:var(--eo2)}
+#cog-over-panel .cog-dest-sub{border-color:var(--el)}
+#cog-over-panel.cog-over-full{inset:0!important;max-height:100dvh!important;z-index:1000!important}
+@media(max-width:1100px){#cog-over-panel .cog-over-board{grid-template-columns:repeat(2,minmax(0,1fr))!important}#cog-over-panel .cog-over-lane:last-child{grid-column:1/-1;border-left:0;padding-left:0;border-top:1px solid var(--el)}}
+@media(max-width:700px){#cog-over-panel .cog-over-board,#cog-over-panel .kpis{grid-template-columns:repeat(2,minmax(0,1fr))!important}#cog-over-panel .cog-over-board{grid-template-columns:1fr!important}#cog-over-panel .cog-over-lane{border-left:0!important;padding-left:0!important;padding-right:0!important}#cog-over-panel .cog-ac-head{flex-wrap:wrap}#cog-over-panel .cog-over-metrics{order:3;flex-basis:100%}}
+</style>
 </head>
 <body>
 <header id="top">
@@ -3204,14 +3237,14 @@ function vInicio(emb) {
   ESCOPO.triar.map((x) => [x, U.filter((o) => nzT(o.tarefa) === nzT(x[0]))]).sort((a, b) => b[1].length - a[1].length).forEach(([x, L], i) => { reg('tf' + i, 'Tarefa: ' + x[0], L);
     pr += '<button type="button" class="li" data-conj="tf' + i + '" style="grid-template-columns:minmax(0,1fr) 90px 56px"><span><b style="font-weight:600">' + esc(x[0]) + '</b><small>' + esc(x[1]) + '</small></span><span class="hb"><i style="width:' + Math.max(1, Math.round(100 * L.length / tot)) + '%;background:var(--v2)"></i></span><span class="n">' + nf(L.length) + '</span></button>'; });
   pr += '</section>';
-  h += '<div class="ini-grid"><div class="col">' + dp + '</div><div class="col">' + ms + pr + '</div></div>' + (emb ? '' : '</div>');
+  h += emb ? '<div class="ini-grid cog-over-board"><div class="col cog-over-lane"><h3 class="cog-over-lane-title">01 · Encaminhamento</h3>'+dp+'</div><div class="col cog-over-lane"><h3 class="cog-over-lane-title">02 · Conferência e agrupamentos</h3>'+conf+ms+'</div><div class="col cog-over-lane"><h3 class="cog-over-lane-title">03 · Tarefas do PJe</h3>'+pr+'</div></div>' : '<div class="ini-grid"><div class="col">' + dp + '</div><div class="col">' + conf + ms + pr + '</div></div></div>';
   return h; }
 let REG = {}, INI_MAS = false;
 /* Visão geral compartilhada, independente da aba corrente. */
-let COG_OVER=false;
+let COG_OVER=false, COG_OVER_FULL=false;
 function visaoGeral() {
   const corpo=vInicio(true).replace(/data-conj="([^"]+)"/g,(m,k)=>m+' aria-pressed="'+String(!!F.conj&&F.conj.key===k)+'"');
-  return '<div class="cog-ac-over" aria-labelledby="cog-ac-title"><div class="cog-ac-head"><div><span class="k">Acervo processual</span><h2 id="cog-ac-title">Visão geral da triagem</h2></div><span class="cog-ac-meta"><b>' + nf(U.length) + '</b> em triagem · <b>' + nf(ALL.length) + '</b> na fonte</span><button type="button" class="btn ib" data-cog-over-close aria-label="Recolher visão geral" title="Recolher visão geral">×</button></div>'+corpo+'</div>';
+  return '<div class="cog-ac-over" aria-labelledby="cog-ac-title"><div class="cog-ac-head"><div><span class="k">Acervo processual</span><h2 id="cog-ac-title">Visão geral da triagem</h2></div><div class="cog-ac-meta cog-over-metrics"><span><b>' + nf(U.length) + '</b> em triagem</span><span><b>' + nf(ALL.length) + '</b> na fonte</span></div><button type="button" class="btn ib" data-cog-over-full title="Tela cheia" aria-label="Tela cheia" aria-pressed="'+String(COG_OVER_FULL)+'">⛶</button><button type="button" class="btn ib" data-cog-over-close aria-label="Recolher visão geral" title="Recolher visão geral">×</button></div>'+corpo+'</div>';
 }
 function posicionaVisaoGeral(){
   if(!COG_OVER)return;
@@ -3220,7 +3253,8 @@ function posicionaVisaoGeral(){
 function pintaVisaoGeral(){
   const p=$('#cog-over-panel'),b=$('#cog-over-toggle');if(!p||!b)return;
   b.disabled=!PRONTO||!COG_SESSAO;b.setAttribute('aria-expanded',String(COG_OVER&&!b.disabled));
-  if(!COG_OVER||b.disabled){p.hidden=true;p.innerHTML='';return;}
+  if(!COG_OVER||b.disabled){p.hidden=true;p.innerHTML='';p.classList.remove('cog-over-full');COG_OVER_FULL=false;return;}
+  p.classList.toggle('cog-over-full',COG_OVER_FULL);
   const y=p.scrollTop;p.innerHTML=visaoGeral();p.hidden=false;posicionaVisaoGeral();p.scrollTop=y;
 }
 function abreVisaoGeral(on,foco){
@@ -4949,6 +4983,7 @@ D.addEventListener('click', (e) => { const t = e.target;
     else if (k === 'aplicar') { const c = CP.c; if (/^(in|notin|has|nothas)$/.test(c.cond) && !c.vals.length && !c.trechos.length) { toast('Marque um valor ou escreva um trecho.', true); return; } if (CP.edit != null) F.crit[CP.edit] = c; else F.crit.push(c); F.lim = 100; fecharPops(); render(); } return; }
   if ((b = q('.menu [data-ex]'))) { const p = b.closest('.menu'); const k = b.dataset.ex; fecharPops(); exportar(k, p.__L, p.__t, p.__b); return; }
 
+  if(q('[data-cog-over-full]')){COG_OVER_FULL=!COG_OVER_FULL;pintaVisaoGeral();$('#cog-over-panel [data-cog-over-full]')?.focus({preventScroll:true});return;}
   if(q('[data-cog-over-close]')){abreVisaoGeral(false,true);return;}
   if(q('[data-cog-over]')){abreVisaoGeral(!COG_OVER,false);return;}
   if (q('[data-cog-transfer]')){COG_LOTE=null;COG_GRUPO='';cogTriFacLimpar();COG_TRANSFER=true;COG_SUB='todos';TRI_SUBABA='todos';LS.set('tri_triar_tarefa','');LS.set('tri_atq','');LS.set('tri_atso','');cogIr('triagem');return;}
