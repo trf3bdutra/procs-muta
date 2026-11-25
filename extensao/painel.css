@@ -1679,3 +1679,21 @@ html[data-tema=escuro] .rt-tipos .rt-kind-option{border-color:var(--line)}
 .topo-u .tu-gestao .nav-icon{width:13px;height:13px}.topo-u .tu-gestao .nav-icon svg{width:13px;height:13px}
 @media(max-width:410px){.topo-u .tu-gestao>button{height:33px;flex-direction:column;gap:1px;padding:2px 3px}.topo-u .tu-gestao .nav-text b{font-size:9px}.topo-u .tu-profile-notif{padding:2px;gap:3px}}
 @media(max-width:345px){.topo-u{flex-wrap:wrap}.topo-u .tu-l{flex:1 1 100%}}
+
+/* Encaminhamento unificado · tipo, destino e trâmite no mesmo cartão. */
+#gab .hero-enc-card{border:1px solid var(--line,#8793a344);border-radius:7px;padding:0;min-width:0;background:var(--card)}
+#gab .hero-enc-card>.pm-mer-h{margin:0;padding:9px 10px;font-size:12px}
+#gab .hero-enc-card>.hero-enc-tipo-section{padding:0;border-top:1px solid var(--line,#8793a344)}
+#gab .hero-enc-card .hero-enc-tipo{padding:0;margin:0;display:block;min-width:0}
+#gab .hero-enc-card .hero-enc-tipo .rt-tsel{margin:0;padding:0;border:0;box-shadow:none;background:transparent;border-radius:0}
+#gab .hero-enc-card .hero-enc-tipo .rt-tsel>summary{padding:9px 10px;min-height:32px;box-sizing:border-box}
+#gab .hero-enc-card .hero-enc-tipo .rt-kind-body{padding:4px 10px 10px}
+#gab .hero-enc-card>.hero-enc-group{margin:0!important;border:0!important;border-top:1px solid var(--line,#8793a344)!important;border-radius:0!important;box-shadow:none!important;background:transparent}
+#gab .hero-enc-card>.hero-enc-group>summary{min-height:32px;padding:9px 10px;box-sizing:border-box}
+#gab .hero-enc-card>.hero-enc-group>summary h4{font-size:11px}
+#gab .hero-enc-card>.hero-enc-group>.hero-enc-fields,#gab .hero-enc-card>.hero-enc-group>.hero-tramite{padding:4px 10px 10px}
+#gab .hero-proc-tags{display:flex;align-items:center;flex-wrap:wrap;gap:4px;min-width:0}
+#gab .hero-proc-tags .hero-tipo-ref{font:inherit;font-size:10px;font-weight:600;cursor:pointer;max-width:100%;white-space:normal}
+#gab .hero-proc-tags .hero-secao{display:inline-flex;align-items:center;border:1px solid var(--line,#8793a344);border-radius:4px;padding:2px 5px;font-size:10px;font-weight:650}
+#gab .hero-aut-historico{margin:9px 0 0;padding:8px 0 0;border-top:1px solid var(--line,#8793a344)}
+#gab .hero-aut-historico .hero-hist-body{min-width:0;overflow-wrap:anywhere}
