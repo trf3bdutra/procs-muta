@@ -38,6 +38,12 @@ editorial = {'padrao': {'schema': dir_.get('schema'), 'versao': dir_.get('versao
              'pecas': ler(H/'editorial_pecas.json')}
 # repertório normativo: dispositivos acrescentados no procs-muta (somam-se aos da planilha)
 editorial['normasComplemento'] = ler(RAIZ/'apoio/repertorio-normativo-complemento.json')['registros']
+# Recalcula as referências registradas nos julgados a cada geração do Compendium.
+import sys
+sys.path.insert(0, str(RAIZ/'scripts/repertorio'))
+from atualizar_normas import gerar as gerar_normas
+_NOVAS_NORMAS, _USOS_ATUAIS = gerar_normas(RAIZ, ler(RAIZ/'apoio/vade-mecum.json'), editorial['normasComplemento'], ler(H/'usos_auto.json'))
+editorial['normasComplemento'] += _NOVAS_NORMAS
 # quadro de entradas rápidas das Diretrizes (atualizado na hora pelo /api/rapidas no site)
 editorial['rapidas'] = ler(RAIZ/'apoio/diretrizes-rapidas.json')['registros']
 # matrizes estruturais (recurso × resultado, sem matéria): moldes do Editorial
@@ -339,7 +345,7 @@ def gerar_html(var):
     js = 'window.TIPO_CASO=' + TCJ + ';\n' + js   # vocabulário comum do tipo de caso (Ementário e Consulta)
     js = (RAIZ/'extensao/gerador.js').read_text(encoding='utf-8') + '\n' + js  # composição redacional comum à HERO18810
     js = 'window.CAMPOS_AUTO=' + CAJ + ';\n' + js   # campos automáticos (@apelido) da Minuta-Matriz e do editor (antes preso num comentário: a ficha não chegava à folha)
-    for a, b in [('/*__USOS__*/', (H/'usos_auto.json').read_text(encoding='utf-8').strip()),
+    for a, b in [('/*__USOS__*/', js_([] if var == 'collegium' else _USOS_ATUAIS)),
              ('/*__DATA__*/', (RAIZ/'apoio/vade-mecum.json').read_text(encoding='utf-8').strip().replace('</', '<\\/')),
              ('/*__EDITORIAL__*/', EDJ),
              ('<script type="application/octet-stream" id="modelos-gz">/*__MODELOS__*/</script>', '<script type="application/octet-stream" id="base-gz">' + (gz_col if var == 'collegium' else gz) + '</script>' + LIA3),
