@@ -69,8 +69,8 @@ test('navegador universal: utilidades, ferramentas do gabinete, processo em tela
     assert.ok(html.indexOf('id="tab-pront"')<html.indexOf('id="tab-min"'));
     assert.ok(html.indexOf('id="tab-min"')<html.indexOf('class="pv-nav-divider"'));
     assert.ok(html.indexOf('class="pv-nav-divider"')<html.indexOf('id="tab-acervo"'));
-    assert.match(html,/<b>Minutário /);
-    assert.match(old,/<b>Minuta /);
+    assert.match(html,/<b>Corretor /); assert.match(html,/id="tab-dir"/);
+    assert.match(old,/<b>Corretor /);
   } finally {fs.rmSync(saida,{recursive:true,force:true});}
 });
 
@@ -110,7 +110,7 @@ test('prévia: Autos primeiro e identificação editável única, separada do re
  assert.match(s,/MODOS=\['Autos','Processo'\]/);
  assert.match(s,/G\.aba='Autos';G\.rot='tri'/);
  assert.match(s,/d\.open=identOpen/);
- assert.match(s,/corpoAutos=function\(\)\{return html\(identity\(\)\)\+autosBase\(\)/);
+ assert.match(s,/corpoAutos=function\(\)\{if\(heroV53\(\)\)return autosBase\(\);return html\(identity\(\)\)\+autosBase\(\)/);
  assert.match(s,/extraField\('ramo','Ramo do direito'\)/);
  assert.match(s,/extraField\('outros','Outros assuntos'\)/);
  assert.match(s,/Conclusão \/ resultado/);
