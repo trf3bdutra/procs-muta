@@ -186,3 +186,14 @@ html[data-tema=escuro] .pv-universal-body{--pv-bg:#25282d;--pv-line:#444a52;--pv
 #gab .hero-minuta-ref .ro{overflow-wrap:anywhere;white-space:normal}
 #gab .hero-minuta-questoes{margin:3px 0 7px;padding-left:19px;font-size:12px;line-height:1.4}
 #gab .hero-minuta-roteiro [data-minuta-autos],#gab .hero-minuta-roteiro [data-minuta-caso]{margin-top:4px}
+
+/* Perfil Office integrado e Controle dentro de Ajustes. */
+.pv-universal-body .topo-u .tu-profile-office{display:inline-flex;align-items:center;gap:5px;text-decoration:none;color:inherit;padding:2px 3px;border-radius:5px;flex:0 1 auto!important;min-width:0}
+.pv-universal-body .topo-u .tu-profile-office:hover{background:var(--soft)}
+.pv-universal-body .tu-profile-office .tu-profile-name{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pv-universal-body .tu-profile-link{flex:none;display:grid;place-items:center;color:var(--muted-fg)}
+.pv-universal-body .tu-profile-office:focus-visible{outline:2px solid currentColor;outline-offset:2px}
+.pv-ajustes-sec[hidden]{display:none!important}
+.pv-ajustes-control{display:flex!important;text-align:left;align-items:center;justify-content:space-between;gap:8px;padding:8px!important;width:100%;box-sizing:border-box}
+.pv-ajustes-control>span:first-child{display:grid;gap:3px;min-width:0}
+.pv-ajustes-control small{font-size:10.5px;font-weight:400;color:var(--muted-fg)}

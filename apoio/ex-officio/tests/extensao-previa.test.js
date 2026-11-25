@@ -215,12 +215,12 @@ test('universal: encaminhamento editável na triagem e espelhado no cartão',()=
 
 
 function testarAjustes(src){
- const nodes={},prefs={tema:'escuro',auto:true};
+ const nodes={},prefs={tema:'escuro',auto:true},sess={estado:'on',usuario:'Bruno',gestor:true},routes=[];
  function el(id){return nodes[id]||(nodes[id]={id,checked:false,value:'',disabled:false,open:false,events:{},setAttribute(){},addEventListener(k,f){this.events[k]=f},click(){this.checked=!this.checked;if(this.events.click)this.events.click();if(this.events.change)this.events.change()},focus(){this.focused=true},showModal(){this.open=true},close(){this.open=false;if(this.events.close)this.events.close()}});}
  const doc={getElementById:el,createElement(){return el('pv-ajustes-dialog')},body:{appendChild(){},classList:{add(){}}},documentElement:{dataset:{}},querySelectorAll(){return []},addEventListener(){}};
  el('pje-seguir').checked=true;el('pje-aba').checked=true;el('pje-tema').click=()=>{prefs.tema=prefs.tema==='escuro'?'claro':'escuro'};
- new Function('document','window',src)(doc,{MutaTema:{atual:()=>prefs.tema},MutaAutos:{autoLigado:()=>prefs.auto,autoLigar:v=>{prefs.auto=v}}});
- return {el,prefs};
+ new Function('document','window',src)(doc,{MutaTema:{atual:()=>prefs.tema},MutaAutos:{autoLigado:()=>prefs.auto,autoLigar:v=>{prefs.auto=v}},MutaSessao:{estado:()=>sess},MutaAbas:{ir:n=>routes.push(n)}});
+ return {el,prefs,sess,routes};
 }
 
 test('diálogo Ajustes controla preferências reais e conserva os controles originais',()=>{
@@ -232,6 +232,13 @@ test('diálogo Ajustes controla preferências reais e conserva os controles orig
  e('pv-ajustes-ok').events.click();assert.equal(e('pv-ajustes-dialog').open,false);assert.equal(e('pv-ajustes').focused,true);
 });
 
+test('Controle fica nos Ajustes apenas para gestor autenticado',()=>{
+ const src=fs.readFileSync(path.join(ROOT,'scripts/extensao/previa/universal-ajustes.js'),'utf8'),h=testarAjustes(src),e=h.el;
+ e('pv-ajustes').events.click();assert.equal(e('pv-ajustes-gestao').hidden,false);
+ e('pv-ajustes-controle').events.click();assert.deepEqual(h.routes,['ctl']);assert.equal(e('pv-ajustes-dialog').open,false);
+ h.sess.gestor=false;e('pv-ajustes').events.click();assert.equal(e('pv-ajustes-gestao').hidden,true);e('pv-ajustes-controle').events.click();assert.deepEqual(h.routes,['ctl']);
+ h.sess.gestor=true;h.sess.estado='off';e('pv-ajustes').events.click();assert.equal(e('pv-ajustes-gestao').hidden,true);
+});
 test('próximo ato no título de Etapas, paleta neutra e faixa de três campos',()=>{
  const s=fs.readFileSync(path.join(ROOT,'scripts/extensao/previa/universal-layout.js'),'utf8'),c=fs.readFileSync(path.join(ROOT,'scripts/extensao/previa/universal-layout.css'),'utf8');
  assert.match(s,/pv-stage-head/);assert.match(s,/head\.append\(next\)/);assert.match(s,/faixa\.prepend\(dest\)/);assert.doesNotMatch(s,/faixa\.prepend\(next,dest\)/);assert.match(c,/--pv-bg:#f0f2f4/);assert.match(c,/grid-template-columns:repeat\(3,minmax\(0,1fr\)\)/);new Function(s);

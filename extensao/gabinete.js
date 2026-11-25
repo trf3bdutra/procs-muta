@@ -441,10 +441,10 @@ function faixaUsuario(s) {
   t0.hidden = false;
   var on = s && s.estado === 'on';
   var q = function (attr, tit, svg) { return '<button type="button" class="tu-b" ' + attr + ' title="' + tit + '" aria-label="' + tit + '">' + SV(svg, 14) + '</button>'; };
-  t.innerHTML = (on ? '<span class="tu-n"><i class="tu-av">' + esc(iniciais(s.usuario)) + '</i>' + esc(s.usuario) + '</span>' : '<span class="tu-n muted">HERO18810</span>') + '<span class="tu-pje" id="tu-pje-slot"></span>' +
+  t.innerHTML = (on ? '<a class="tu-n tu-profile-office" target="_blank" rel="noopener noreferrer" href="' + SITE + '/exofficio/" title="Abrir meu Office" aria-label="Abrir Office de ' + esc(s.usuario) + '"><i class="tu-av">' + esc(iniciais(s.usuario)) + '</i><span class="tu-profile-name">' + esc(s.usuario) + '</span><span class="tu-profile-link" aria-hidden="true">' + SV('<path d="M14 4h6v6M20 4 10 14M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5"/>', 12) + '</span></a>' : '<span class="tu-n muted">HERO18810</span>') + '<span class="tu-pje" id="tu-pje-slot"></span>' +
     (on && G.cnj ? q('data-g="atualizar"', 'Atualizar o prontuário', '<path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 4v7h-7"/>') : '') +
-    '<a class="tu-b" target="_blank" rel="noopener noreferrer" href="' + SITE + '/exofficio/" title="Abrir o Ex Officio" aria-label="Abrir o Ex Officio">' + SV('<path d="M14 4h6v6"/><path d="M20 4 10 14"/><path d="M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5"/>', 14) + '</a>' +
-    (on && s.gestor ? '<button type="button" class="tu-b" data-tu-ctl title="Controle: prazos e etiquetas" aria-label="Controle: prazos e etiquetas">' + SV('<path d="M5 7h14M5 12h14M5 17h14"/><circle cx="9" cy="7" r="1.8"/><circle cx="15" cy="12" r="1.8"/><circle cx="8" cy="17" r="1.8"/>', 14) + '</button>' : '') +
+
+    (on && s.gestor && !$('pv-ajustes') ? '<button type="button" class="tu-b" data-tu-ctl title="Controle: prazos e etiquetas" aria-label="Controle: prazos e etiquetas">' + SV('<path d="M5 7h14M5 12h14M5 17h14"/><circle cx="9" cy="7" r="1.8"/><circle cx="15" cy="12" r="1.8"/><circle cx="8" cy="17" r="1.8"/>', 14) + '</button>' : '') +
     q('data-tema-tu', 'Tema claro ou escuro', '<path d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9z"/>') +
     (on ? q('data-sair', 'Sair', '<path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3"/><path d="M10 17l-5-5 5-5M5 12h11"/>') : '');
   var sl = $('tu-pje-slot'); if (sl && pb) { if (!PJE_CASA) { PJE_CASA = document.createComment('pje-bar'); pb.parentNode.insertBefore(PJE_CASA, pb); } sl.appendChild(pb); }
@@ -452,7 +452,7 @@ function faixaUsuario(s) {
 (function () { var t = $('topo-u'); if (!t) return; t.addEventListener('click', function (e) { var b = e.target.closest('button'); if (!b) return;
   if (b.hasAttribute('data-sair')) { gravarJa().catch(function () {}).then(function () { ses.sair(); }); }
   else if (b.dataset.g === 'atualizar') { gravarJa().catch(function () {}).then(function () { carregar(true); }); }
-  else if (b.hasAttribute('data-tu-ctl')) { if (window.MutaAbas) window.MutaAbas.ir('ctl'); }
+  else if (b.hasAttribute('data-tu-ctl')) { var u=ses.estado(); if(u.estado==='on'&&u.gestor&&window.MutaAbas)window.MutaAbas.ir('ctl'); }
   else if (b.hasAttribute('data-tema-tu')) { var tb = $('pje-tema'); if (tb) tb.click(); } }); })();
 /* assunto detalhado logo abaixo do assunto: o do Caput (lote) e, na falta, o da ficha, incluído aqui pelo ícone */
 function adAcao(a) {
