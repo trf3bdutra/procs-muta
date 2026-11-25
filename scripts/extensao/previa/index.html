@@ -131,6 +131,7 @@ html[data-theme=dark] .side-h{border-color:#1e3747;color:#a7a8a9}
   <div><p class="k">Prévia · comparação de layouts</p><h1>Painel <em class="it">ao lado do PJe.</em></h1></div>
   <p class="d">À direita, o Prontuário Universal mantém todas as abas e os roteiros da extensão real. As alterações no modo Universal são demonstrativas; a versão atual continua disponível para comparação.</p>
   <label class="f"><span>Sessão</span><select id="ses"><option>Lendo…</option></select></label>
+  <button type="button" class="b" id="recarregar-sessoes">Recarregar sessões</button>
   <label class="f"><span>Processo</span><input id="cnj" list="cnjs" placeholder="0000000-00.0000.4.03.0000" autocomplete="off"><datalist id="cnjs"></datalist></label>
   <div class="f"><span>Tela do PJe</span><span class="seg w" role="group" aria-label="Tela do PJe" id="telas"><button type="button" data-tela="lista" aria-pressed="true">Lista de tarefas</button><button type="button" data-tela="autos" aria-pressed="false">Autos</button><button type="button" data-tela="editor" aria-pressed="false">Editor</button></span></div>
   <label class="f"><span>Texto do editor</span><select id="fonte"><option value="collectio">Minuta vigente no Collectio</option><option value="colar">Colar um texto</option><option value="vazio">Sem editor aberto</option></select></label>
@@ -163,7 +164,7 @@ window.__previaGrava=()=>S.grava;
 function posBotoes(){const r=$('#pje-b').getBoundingClientRect();document.documentElement.style.setProperty('--pje-x',Math.round(r.left+12)+'px')}
 window.addEventListener('resize',posBotoes);
 const pn=$('#pn');
-$('#pv-layout button').forEach(b=>b.onclick=()=>{const next=b.dataset.layout==='universal'?'painel/universal.html':'painel/painel.html';$('#pv-layout button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));if(pn.getAttribute('src')!==next)pn.src=next;});
+$$('#pv-layout button').forEach(b=>b.onclick=()=>{const next=b.dataset.layout==='universal'?'painel/universal.html':'painel/painel.html';$$('#pv-layout button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));if(pn.getAttribute('src')!==next)pn.src=next;});
 async function get(u){const r=await fetch(u,{credentials:'same-origin',cache:'no-store'});const j=await r.json().catch(()=>({}));if(!r.ok){const e=new Error(j.erro||('HTTP '+r.status));e.status=r.status;throw e}return j}
 function item(){return S.itens.find(x=>x.cnj===S.cnj)||null}
 
@@ -232,10 +233,10 @@ async function desenharPje(){
   const ps=S.cnj?await textoEditor():null;
   b.innerHTML=ps?'<div class="doc">'+ps.map(p=>`<p class="${p.neg&&p.alinha==='center'?'t':''}">${esc(p.t)}</p>`).join('')+'</div>':`<p class="vz">${S.fonte==='vazio'?'Sem editor aberto.':S.cnj?'Este processo não tem minuta no Collectio: cole um texto para simular o editor.':'Escolha um processo.'}</p>`;
 }
-function escolher(cnj){S.cnj=cnj||'';$('#cnj').value=S.cnj;desenharPje();mandar()}
+function escolher(cnj){S.texto=null;S.cnj=cnj||'';$('#cnj').value=S.cnj;desenharPje();mandar()}
 
 async function carregarSessao(d){
-  S.data=d;S.itens=[];S.texto=null;desenharPje();$('#pje-b').innerHTML='<p class="vz">Lendo a pauta e as fichas…</p>';
+  S.data=d;S.itens=[];S.texto=null;S.etq={};desenharPje();$('#pje-b').innerHTML='<p class="vz">Lendo a pauta e as fichas…</p>';
   try{const j=await get('/api/pauta?data='+d);S.itens=(j.itens||[]).slice().sort((a,b)=>(Number(a.item)||0)-(Number(b.item)||0))
     /* etiquetas do PJe registradas na ficha, para o cartão simulado */
     const ks=S.itens.map(i=>String(i.cnj).replace(/\D/g,'')).filter(k=>k.length===20);
@@ -245,16 +246,19 @@ async function carregarSessao(d){
   $('#cnj').value=S.cnj;desenharPje();mandar();
 }
 async function iniciar(){
+  $('#ses').innerHTML='<option value="">Lendo…</option>';$('#recarregar-sessoes').disabled=true;
   try{const m=await fetch('painel/manifest.json').then(r=>r.json());$('#ver').textContent='versão '+m.version}catch(e){}
   try{const L=await get('/api/painel?lote=1');
     S.sessoes=(L.sessoes||[]).filter(s=>s.publicada!==false&&(s.processos||0)>0).sort((a,b)=>a.date<b.date?-1:1);
     const at=S.sessoes.filter(s=>s.date>=hoje()), d=(at[0]||S.sessoes[S.sessoes.length-1]||{}).date||'';
     $('#ses').innerHTML=S.sessoes.map(s=>`<option value="${s.date}"${s.date===d?' selected':''}>${br(s.date)} · ${s.processos||0}${s.date<hoje()?' (passada)':''}</option>`).join('')||'<option value="">Sem sessões</option>';
-    if(d)carregarSessao(d);else desenharPje();
-  }catch(e){$('#ses').innerHTML='<option value="">'+esc(e.status===401?'Entre no Ex Officio':'Sem acesso à pauta')+'</option>';$('#pje-b').innerHTML='<p class="vz">'+esc(e.status===401?'Entre no Ex Officio para ler as sessões (o painel ao lado tem o mesmo login).':e.message)+'</p>'}
+    if(d)await carregarSessao(d);else desenharPje();
+  }catch(e){$('#ses').innerHTML='<option value="">'+esc(e.status===401?'Entre no Ex Officio':'Sem acesso à pauta')+'</option>';$('#pje-b').innerHTML='<p class="vz">'+esc(e.status===401?'Entre no Ex Officio e clique em Recarregar sessões.':e.message)+'</p>'}finally{$('#recarregar-sessoes').disabled=false;}
 }
-$('#ses').onchange=e=>carregarSessao(e.target.value);
-$('#cnj').onchange=e=>{const v=e.target.value.trim();if(/^\d{7}-\d{2}\.\d{4}\.\d\.\d{2}\.\d{4}$/.test(v)||!v)escolher(v)};
+$('#ses').onchange=e=>{if(e.target.value)carregarSessao(e.target.value)};
+$('#recarregar-sessoes').onclick=()=>iniciar();
+function confirmarCnj(){const el=$('#cnj'),v=el.value.trim(),k=v.replace(/\D/g,'');if(!v){el.setCustomValidity('');escolher('');return;}if(k.length===20&&/^[\d.\-\s]+$/.test(v)){el.setCustomValidity('');escolher(k.replace(/^(\d{7})(\d{2})(\d{4})(\d)(\d{2})(\d{4})$/,'$1-$2.$3.$4.$5.$6'));}else{el.setCustomValidity('Informe os 20 dígitos do número CNJ.');el.reportValidity();}}
+$('#cnj').oninput=()=>$('#cnj').setCustomValidity('');$('#cnj').onchange=confirmarCnj;$('#cnj').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();confirmarCnj();}};
 $$('#telas button').forEach(b=>b.onclick=()=>{S.tela=b.dataset.tela;$$('#telas button').forEach(x=>x.setAttribute('aria-pressed',x===b));desenharPje();mandar()});
 $('#fonte').onchange=e=>{S.fonte=e.target.value;$('#colar-w').hidden=S.fonte!=='colar';S.texto=null;desenharPje();mandar()};
 $('#colar').oninput=()=>{if(S.tela==='editor')desenharPje()};

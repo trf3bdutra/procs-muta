@@ -167,3 +167,28 @@ test('universal: mérito integra o plano da produção, sem seta no cartão',()=
  assert.match(s,/data-autog','desfazer'/);
  new Function(s);
 });
+
+
+function testarSimulador(src){
+  const script=[...src.matchAll(/<script>([\s\S]*?)<\/script>/g)].at(-1)[1], nodes={}, posts=[], calls=[];
+  const node=(id,dataset={})=>({id,dataset,value:'',hidden:false,disabled:false,style:{},attrs:{},innerHTML:'',textContent:'',getAttribute(k){return this.attrs[k]||''},setAttribute(k,v){this.attrs[k]=String(v)},addEventListener(){},setCustomValidity(v){this.invalid=v},reportValidity(){},getBoundingClientRect(){return {left:0}}});
+  const groups={'#pv-layout button':[node('universal',{layout:'universal'}),node('atual',{layout:'atual'})],'#telas button':[node('lista',{tela:'lista'}),node('autos',{tela:'autos'}),node('editor',{tela:'editor'})],'#larg button':[node('360',{w:'360'}),node('420',{w:'420'}),node('520',{w:'520'})],'.tf':[]};
+  const get=s=>nodes[s]||(nodes[s]=node(s));
+  const pn=get('#pn');pn.attrs.src='painel/universal.html';pn.contentWindow={postMessage(m){posts.push(m)}};Object.defineProperty(pn,'src',{get(){return this.attrs.src},set(v){this.attrs.src=v}});
+  const document={querySelector(s){return groups[s]?groups[s][0]||null:get(s)},querySelectorAll(s){return groups[s]||[]},documentElement:{style:{setProperty(){}},getAttribute(){return 'light'},setAttribute(){}}};
+  const window={addEventListener(){}},fetch=async u=>{calls.push(u);return {ok:true,json:async()=>u.includes('manifest')?{version:'0.70.0'}:u.includes('lote=1')?{sessoes:[{date:'2026-12-07',processos:1}]}:u.includes('fichas=')?{resumos:{}}:{itens:[{cnj:'5000000-00.2026.4.03.6000',item:1,classe:'APELAÇÃO CÍVEL'}]}}};
+  const api=new Function('document','window','fetch','localStorage',script.replace(/\niniciar\(\);\s*$/,'')+';return {S,iniciar,confirmarCnj};')(document,window,fetch,{setItem(){}});
+  return {api,groups,get,pn,posts,calls};
+}
+
+test('simulador inicializa e controles do painel esquerdo enviam estado ao HERO',async()=>{
+ const src=fs.readFileSync(path.join(ROOT,'scripts/extensao/previa/index.html'),'utf8'),h=testarSimulador(src);
+ await h.api.iniciar();
+ assert.equal(h.api.S.cnj,'5000000-00.2026.4.03.6000');
+ h.groups['#pv-layout button'][1].onclick();assert.equal(h.pn.src,'painel/painel.html');
+ h.groups['#telas button'][1].onclick();assert.ok(h.posts.some(m=>m.tipo==='previa-aba'&&m.reg.ctx==='autos'));
+ h.groups['#larg button'][2].onclick();assert.equal(h.get('#side').style.width,'520px');
+ h.get('#fonte').onchange({target:{value:'colar'}});assert.equal(h.get('#colar-w').hidden,false);
+ h.get('#cnj').value='50000000020264036001';h.api.confirmarCnj();assert.equal(h.api.S.cnj,'5000000-00.2026.4.03.6001');
+ assert.equal(typeof h.get('#recarregar-sessoes').onclick,'function');
+});
