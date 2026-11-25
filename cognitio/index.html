@@ -1515,15 +1515,15 @@ html[data-theme=dark] #cog-over-panel{--ep:#10222e;--ep2:#132835;--el:#1e3747;--
 @media(max-width:700px){#cog-over-panel .cog-over-board,#cog-over-panel .kpis{grid-template-columns:repeat(2,minmax(0,1fr))!important}#cog-over-panel .cog-over-board{grid-template-columns:1fr!important}#cog-over-panel .cog-over-lane{border-left:0!important;padding-left:0!important;padding-right:0!important}#cog-over-panel .cog-ac-head{flex-wrap:wrap}#cog-over-panel .cog-over-metrics{order:3;flex-basis:100%}}
 </style>
 <style id="cog-accents-v4">
-:root{--cog-accent:#526d85;--cog-accent-soft:#edf2f6}
-:root[data-cog-page=acervo]{--cog-accent:#526d85;--cog-accent-soft:#edf2f6}
-:root[data-cog-page=triagem]{--cog-accent:#9a702e;--cog-accent-soft:#f6efdf}
-:root[data-cog-page=selecao]{--cog-accent:#685b91;--cog-accent-soft:#f0edf7}
-:root[data-cog-page=mono]{--cog-accent:#8c5364;--cog-accent-soft:#f7edf0}
-:root[data-theme=dark][data-cog-page=acervo]{--cog-accent:#9bb8d5;--cog-accent-soft:#203747}
-:root[data-theme=dark][data-cog-page=triagem]{--cog-accent:#e0b46a;--cog-accent-soft:#3b3023}
-:root[data-theme=dark][data-cog-page=selecao]{--cog-accent:#c0b1e8;--cog-accent-soft:#302b45}
-:root[data-theme=dark][data-cog-page=mono]{--cog-accent:#e4a1b5;--cog-accent-soft:#422b36}
+/* Acervo e triagem: paleta editorial padrão; seleção: verde; monocráticas: azul. */
+:root{--cog-accent:#5c6b67;--cog-accent-soft:#f0ece2}
+:root[data-cog-page=acervo],:root[data-cog-page=triagem]{--cog-accent:#5c6b67;--cog-accent-soft:#f0ece2}
+:root[data-cog-page=selecao]{--cog-accent:#3b7150;--cog-accent-soft:#e7f1e9}
+:root[data-cog-page=mono]{--cog-accent:#24506f;--cog-accent-soft:#e7eff7}
+:root[data-theme=dark]{--cog-accent:#b3c0ba;--cog-accent-soft:#283431}
+:root[data-theme=dark][data-cog-page=acervo],:root[data-theme=dark][data-cog-page=triagem]{--cog-accent:#b3c0ba;--cog-accent-soft:#283431}
+:root[data-theme=dark][data-cog-page=selecao]{--cog-accent:#9bd3a8;--cog-accent-soft:#203d2d}
+:root[data-theme=dark][data-cog-page=mono]{--cog-accent:#9bc5ec;--cog-accent-soft:#20374c}
 :root[data-cog-page]{--v:var(--cog-accent);--v2:var(--cog-accent)}
 #top #modulos [data-cog].on{color:var(--cog-accent)!important;border-bottom-color:var(--cog-accent)!important;background:var(--cog-accent-soft)!important}
 .cog-workspace .cog-list-bands th,.cog-workspace .cog-list-fields th{color:var(--cog-accent)!important;background:var(--cog-accent-soft)!important}
