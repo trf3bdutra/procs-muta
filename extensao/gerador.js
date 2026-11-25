@@ -60,14 +60,21 @@
   }
   /* sem resultado na ficha, nenhum é presumido: o gerador marca [VALIDAR] (regra: nunca escolher o resultado em silêncio) */
   function resDaFicha(tipo) {
-    var r = N(v('producao', 'Voto - Resultado'));
-    if (!r) return '';
-    if (tipo === 'Embargos de Declaração') return /acolh|provid|provimento/.test(r) && !/negad|nao provid|desprov/.test(r) ? 'acol' : /nao conhec/.test(r) ? 'nc' : 'rej';
-    if (tipo === 'Juízo de Retratação') return 'mant';
-    if (/nao conhec/.test(r)) return 'nc';
-    if (/parcial/.test(r)) return 'parc';
-    if (/dado provimento|^provid|deferido/.test(r)) return 'prov';
-    return 'desp';
+    var r=N(v('producao','Voto - Resultado'));
+    if(!r||/\b(e|mas|porem|enquanto)\b|[;\/]/.test(r))return '';
+    if(tipo==='Embargos de Declaração'){
+      if(/^(acolhimento parcial|parcialmente acolhidos?|parcialmente provido)$/.test(r))return 'acolp';
+      if(/^(acolhimento|acolhidos?|dado provimento)$/.test(r))return 'acol';
+      if(/^(rejeicao|rejeitados?|negado provimento|desprovimento)$/.test(r))return 'rej';
+      return /^(nao conhecido|nao conhecimento)$/.test(r)?'nc':'';
+    }
+    if(tipo==='Juízo de Retratação')return /^(mantem o acordao|acordao mantido|mantido|nao exercido)$/.test(r)?'mant':/^(exerce a retratacao|retratacao exercida|retratado)$/.test(r)?'retr':'';
+    if(/^(nao conhecido|nao conhecimento)$/.test(r))return 'nc';
+    if(/^(parcialmente provido|parcial provimento|provimento parcial)$/.test(r))return 'parc';
+    if(/^(dado provimento|provimento|provido)$/.test(r))return 'prov';
+    if(/^(negado provimento|desprovimento|desprovido)$/.test(r))return 'desp';
+    if(/^(prejudicado|recurso prejudicado)$/.test(r))return 'prej';
+    return '';
   }
   function resultado(tipo, k) {
     if (!k) return [VAL('resultado do voto: escolha acima'), VAL('resultado do julgamento'), VAL('CONCLUSÃO'), VAL('conclusão')];
@@ -152,13 +159,15 @@
   function comandosOrigem(){
     var x=confirmadosOrigem();
     if(x.length)return x.filter(function(r){return r.categoria==='Resultado'||r.categoria==='Providência'||r.categoria==='Custas / gratuidade';}).map(function(r){return limpaComando(r.redacao);}).join('; ');
-    var r=resultadoSentenca(),p=linhas(v('origem','Sentença - Providências')).map(limpaComando).filter(function(t){return t&&r.indexOf(t)<0;});
-    return [r].concat(p).map(limpaComando).join('; ');
+    var r=resultadoSentenca(),p=S(v('origem','Sentença - Providências')).split(/\n+/).map(limpaComando).filter(function(t){return t&&r.indexOf(t)<0;});
+    var aviso=GB().V&&GB().V('origem','Sentença - Comandos');return [r].concat(p).map(limpaComando).join('; ')+(Array.isArray(aviso)&&aviso.length?' '+VAL('conferir capítulos dispositivos e ID da decisão'):'');
   }
   function honorariosAbertura(){
     var h=confirmadosOrigem().filter(function(r){return r.categoria==='Honorários';});
     if(h.length)return h.map(function(r){
       var s=limpaComando(r.redacao).replace(/^fixou (?:os )?honorários advocatícios\s*/i,'Honorários advocatícios fixados ').replace(/^fixou (?:os )?honorários\s*/i,'Honorários advocatícios fixados ');
+      var m=/^condenou (o|a|os|as) (.+?) ao pagamento de honorários(?: advocatícios)? (?:de|em) (.+)$/i.exec(s);
+      if(m){var art={o:'do',a:'da',os:'dos',as:'das'};s='Honorários advocatícios fixados em '+m[3]+', a cargo '+art[m[1].toLowerCase()]+' '+m[2];}
       return cap(s)+'.';
     }).join(' ');
     return fraseHonorarios();
@@ -229,7 +238,7 @@
   function pMpf() {
     var m = N(v('triagem', 'MPF')), s = N(v('triagem', 'Parecer - Sentido')), id = S(v('triagem', 'ID do Parecer MPF'));
     if (!/com parecer/.test(m) && !id) return '';
-    var t = /prosseguimento/.test(s) ? 'manifestou-se pelo prosseguimento do feito' : /nao provimento/.test(s) ? 'opinou pelo desprovimento do recurso' : /provimento/.test(s) ? 'opinou pelo provimento do recurso' : 'opinou ' + VAL(S(v('triagem', 'Parecer - Sentido (outro)')) || 'sentido do parecer');
+    var t = /prosseguimento/.test(s) ? 'manifestou-se pelo prosseguimento do feito' : /desprovimento|nao provimento/.test(s) ? 'opinou pelo desprovimento do recurso' : /parcial.*provimento|provimento.*parcial/.test(s) ? 'opinou pelo parcial provimento do recurso' : /provimento/.test(s) ? 'opinou pelo provimento do recurso' : 'opinou ' + VAL(S(v('triagem', 'Parecer - Sentido (outro)')) || 'sentido do parecer');
     return 'A Procuradoria Regional da República ' + t + ' ' + idOu(id, 'ID do parecer') + '.';
   }
   function relatorio(tipo) {
@@ -414,6 +423,6 @@
     if (b && acao(b)) pintar(true);
   });
   /* Composição compartilhada: recebe apenas os dados registrados do CNJ, sem recorrer ao estado da extensão. */
-  function comporFicha(campos, fonte, tipo){var ant=CONTEXTO,t0=TIPO;try{CONTEXTO={V:function(sec,k){return campos[sec+'.'+k];},fo:function(){return fonte||{};}};TIPO=tipo||tipoDetectado();var rel=relatorio(TIPO);return {tipo:TIPO,rel:rel,em:ementa(TIPO,resDaFicha(TIPO)),variaveis:{abertura_relatorio:rel[0],resultado_decisao_recorrida:resultadoSentenca(),comandos_dispositivos:comandosOrigem(),frase_honorarios_origem:honorariosAbertura()}};}finally{CONTEXTO=ant;TIPO=t0;}}
+  function comporFicha(campos, fonte, tipo){var ant=CONTEXTO,t0=TIPO;try{CONTEXTO={V:function(sec,k){return campos[sec+'.'+k];},fo:function(){return fonte||{};}};TIPO=tipo||tipoDetectado();var rel=relatorio(TIPO),em=ementa(TIPO,resDaFicha(TIPO)),R={abertura_relatorio:rel[0],razoes_recursais:/^(Apelação|Agravo de Instrumento)$/.test(TIPO)?pRecursos(TIPO).join('\n\n'):'',contrarrazoes_relatorio:pContrarrazoes(TIPO),parecer_relatorio:pMpf()||'',caso_em_exame:em.sec[0][1].map(function(x){return x.t;}).join('\n'),questao_em_discussao:em.sec[1][1].map(function(x){return x.t;}).join('\n')};if(/^(Apelação|Remessa Necessária|Agravo de Instrumento)$/.test(TIPO)){R.resultado_decisao_recorrida=resultadoSentenca();R.comandos_dispositivos=comandosOrigem();R.frase_honorarios_origem=honorariosAbertura();}return {tipo:TIPO,rel:rel,em:em,variaveis:R};}finally{CONTEXTO=ant;TIPO=t0;}}
   window.MutaGerador = { comporFicha: comporFicha, pintar: pintar, abrir: abrir, modo: modo, html: html, acao: acao, docs: docs, _ST: ST, _t: { resultado: resultado, fraseHonorarios: fraseHonorarios, designa: designa, feminino: feminino } };
 })();

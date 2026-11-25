@@ -11,3 +11,14 @@ test('Editorial usa as variáveis calculadas e a ficha tem os comandos',()=>{
  const e=JSON.parse(read('apoio/modus-operandi/fonte/editorial_pecas.json'));assert.equal(e.pecas.find(p=>p.id==='rel-ap').elementos[0].f,'@abertura_relatorio');
  assert.match(read('extensao/gerador.js'),/confirmadosOrigem/);assert.match(read('extensao/autos.js'),/!it.manual/);
 });
+test('composição confirmada mantém comandos e base de cálculo',()=>{
+ const w={},s=read('extensao/gerador.js');new Function('window',s)(w);
+ const cp={'origem.Sentença - ID':'123456789','origem.Sentença - Comandos':[
+ {id_decisao:'123456789',ordem:'1',categoria:'Resultado',redacao:'julgou parcialmente procedente o pedido',confirmado:'Sim'},
+ {id_decisao:'123456789',ordem:'2',categoria:'Providência',redacao:'determinou a averbação',confirmado:'Sim'},
+ {id_decisao:'123456789',ordem:'3',categoria:'Honorários',redacao:'fixou honorários advocatícios em 10% sobre o valor atualizado da causa',confirmado:'Sim'}]};
+ let d=w.MutaGerador.comporFicha(cp,{},'Apelação');assert.equal(d.rel[0],'Trata-se de apelação à sentença (ID 123456789) que julgou parcialmente procedente o pedido; determinou a averbação. Honorários advocatícios fixados em 10% sobre o valor atualizado da causa.');
+ cp['producao.Voto - Resultado']='Extinto';assert.match(w.MutaGerador.comporFicha(cp,{},'Apelação').em.cab,/VALIDAR/);
+ cp['origem.Sentença - Comandos'][0].confirmado='Não';assert.match(w.MutaGerador.comporFicha(cp,{},'Apelação').rel[0],/conferir capítulos/);
+ assert.match(read('extensao/gabinete.js'),/esp\.after\(nt\)/);
+});

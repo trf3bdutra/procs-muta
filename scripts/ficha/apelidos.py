@@ -24,7 +24,7 @@ FIXOS = {
     ('producao', 'Voto - Resultado'): 'resultado_julgamento', ('producao', 'Voto - Honorários'): 'honorarios_julgamento', ('producao', 'Destino'): 'destino',
 }
 # nomes que o Compendium calcula na própria peça ou no caso: não podem ser apelido de campo da ficha
-RESERVADOS = {'processo', 'ramo', 'recorrente', 'resultado', 'conclusao', 'dispositivo_ementa'}
+RESERVADOS = {'processo', 'ramo', 'recorrente', 'resultado', 'conclusao', 'dispositivo_ementa', 'abertura_relatorio', 'resultado_decisao_recorrida', 'comandos_dispositivos', 'frase_honorarios_origem', 'razoes_recursais', 'contrarrazoes_relatorio', 'parecer_relatorio', 'caso_em_exame', 'questao_em_discussao'}
 
 
 def slug(s):

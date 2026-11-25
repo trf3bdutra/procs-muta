@@ -103,7 +103,17 @@
             "Um parágrafo por recurso, sem conectivo.",
             "“aduz” só para acréscimo."
           ],
-          "fo": "P+M"
+          "fo": "P+M",
+          "alts": [
+            {
+              "lab": "Fórmula original",
+              "f": "Apelou {{o autor / a autora}} (ID …), alegando, em suma: (1) […]; (2) […]; e (3) […]"
+            },
+            {
+              "lab": "Dados da ficha",
+              "f": "@razoes_recursais"
+            }
+          ]
         },
         {
           "n": "Contrarrazões",
@@ -131,6 +141,10 @@
             {
               "lab": "Não houve",
               "f": "Não houve contrarrazões."
+            },
+            {
+              "lab": "Dados da ficha",
+              "f": "@contrarrazoes_relatorio"
             }
           ]
         },
@@ -158,6 +172,10 @@
             {
               "lab": "Sem intervenção",
               "f": "[VALIDAR: redação para o Ministério Público que deixou de intervir no feito] (ID …)."
+            },
+            {
+              "lab": "Dados da ficha",
+              "f": "@parecer_relatorio"
             }
           ]
         },
@@ -255,7 +273,11 @@
             },
             {
               "lab": "Solução registrada na ficha",
-              "f": "Na espécie, @aplicacao_caso_concreto"
+              "f": "Na espécie, @aplicacao_ao_caso_concreto"
+            },
+            {
+              "lab": "Dados da ficha",
+              "f": "Na espécie, @aplicacao_ao_caso_concreto"
             }
           ]
         },
@@ -276,7 +298,17 @@
             "Ordem: STF → STJ → TRF-3 → outros; TNU vedada.",
             "Veículo conforme a fonte (DJe, DJEN, e-DJF3, intimação via sistema)."
           ],
-          "fo": "P+M"
+          "fo": "P+M",
+          "alts": [
+            {
+              "lab": "Fórmula original",
+              "f": "Em casos que tais, assim tem decidido esta Turma Regional:\nNeste sentido:\nclasse número, Rel. …, veículo de data: “ementa” (g.n.)"
+            },
+            {
+              "lab": "Dados da ficha",
+              "f": "@precedentes_aplicaveis"
+            }
+          ]
         },
         {
           "n": "Síntese",
@@ -313,6 +345,10 @@
             {
               "lab": "Inversão",
               "f": "Em razão da reforma da sentença, impõe-se a inversão da sucumbência, [critérios: percentual, base, faixas do artigo 85, § 3º, do CPC; parcelas vencidas até a sentença no previdenciário — Súmula 111/STJ]."
+            },
+            {
+              "lab": "Dados da ficha",
+              "f": "@fundamento_sucumbencia"
             }
           ],
           "info": {
@@ -453,13 +489,33 @@
           "r": [
             "Sem “Trata-se de”."
           ],
-          "fo": "M"
+          "fo": "M",
+          "alts": [
+            {
+              "lab": "Fórmula original",
+              "f": ""
+            },
+            {
+              "lab": "Dados da ficha",
+              "f": "@caso_em_exame"
+            }
+          ]
         },
         {
           "n": "II. QUESTÃO EM DISCUSSÃO",
           "f": "… consiste em saber se …\nHá duas questões em discussão: (i) saber se …; e (ii) saber se …",
           "r": [],
-          "fo": "M"
+          "fo": "M",
+          "alts": [
+            {
+              "lab": "Fórmula original",
+              "f": "… consiste em saber se …\nHá duas questões em discussão: (i) saber se …; e (ii) saber se …"
+            },
+            {
+              "lab": "Dados da ficha",
+              "f": "@questao_em_discussao"
+            }
+          ]
         },
         {
           "n": "III. RAZÕES DE DECIDIR",
@@ -467,7 +523,17 @@
           "r": [
             "Um fundamento por item."
           ],
-          "fo": "M"
+          "fo": "M",
+          "alts": [
+            {
+              "lab": "Fórmula original",
+              "f": ""
+            },
+            {
+              "lab": "Dados da ficha",
+              "f": "@tese_juridica_adotada\n@aplicacao_ao_caso_concreto"
+            }
+          ]
         },
         {
           "n": "IV. DISPOSITIVO",
@@ -493,7 +559,17 @@
           "r": [
             "Rótulos em itálico após “__________”."
           ],
-          "fo": "P+M"
+          "fo": "P+M",
+          "alts": [
+            {
+              "lab": "Fórmula original",
+              "f": "__________\nDispositivos relevantes citados: …\nJurisprudência relevante citada: STF, …; STJ, …; e TRF-3, …"
+            },
+            {
+              "lab": "Dados da ficha",
+              "f": "__________\nDispositivos relevantes citados: @dispositivos_legais_aplicaveis\nJurisprudência relevante citada: @precedentes_aplicaveis"
+            }
+          ]
         }
       ],
       "notas": [
@@ -540,7 +616,17 @@
           "n": "Relato",
           "f": "Trata-se de …",
           "r": [],
-          "fo": "M"
+          "fo": "M",
+          "alts": [
+            {
+              "lab": "Fórmula original",
+              "f": "Trata-se de …"
+            },
+            {
+              "lab": "Dados da ficha",
+              "f": "@abertura_relatorio"
+            }
+          ]
         },
         {
           "n": "Marco decisório",
@@ -554,7 +640,17 @@
           "n": "Fundamentação",
           "f": "",
           "r": [],
-          "fo": "M"
+          "fo": "M",
+          "alts": [
+            {
+              "lab": "Fórmula original",
+              "f": ""
+            },
+            {
+              "lab": "Dados da ficha",
+              "f": "@mono_fundamento\n@aplicacao_ao_caso_concreto"
+            }
+          ]
         },
         {
           "n": "Dispositivo",
@@ -562,13 +658,33 @@
           "r": [
             "Primeira pessoa e base legal."
           ],
-          "fo": "M"
+          "fo": "M",
+          "alts": [
+            {
+              "lab": "Fórmula original",
+              "f": "Ante o exposto, com esteio no artigo 932, III, do CPC, …"
+            },
+            {
+              "lab": "Dados da ficha",
+              "f": "@dispositivo_pronunciamento"
+            }
+          ]
         },
         {
           "n": "Comunicação",
           "f": "Publique-se. Intime-se.",
           "r": [],
-          "fo": "M"
+          "fo": "M",
+          "alts": [
+            {
+              "lab": "Fórmula original",
+              "f": "Publique-se. Intime-se."
+            },
+            {
+              "lab": "Dados da ficha",
+              "f": "@providencias_determinadas"
+            }
+          ]
         },
         {
           "n": "Destino dos autos",
@@ -833,7 +949,17 @@
             "Um parágrafo por recurso, sem conectivo.",
             "“aduz” só para acréscimo."
           ],
-          "fo": "P+M"
+          "fo": "P+M",
+          "alts": [
+            {
+              "lab": "Fórmula original",
+              "f": "Apelou {{o autor / a autora}} (ID …), alegando, em suma: (1) […]; (2) […]; e (3) […]"
+            },
+            {
+              "lab": "Dados da ficha",
+              "f": "@razoes_recursais"
+            }
+          ]
         },
         {
           "n": "Contrarrazões",
@@ -861,6 +987,10 @@
             {
               "lab": "Não houve",
               "f": "Não houve contrarrazões."
+            },
+            {
+              "lab": "Dados da ficha",
+              "f": "@contrarrazoes_relatorio"
             }
           ]
         },
@@ -887,6 +1017,10 @@
             {
               "lab": "Sem interesse público",
               "f": "A Procuradoria Regional da República opinou pela inexistência de interesse público para intervenção no feito (ID …)."
+            },
+            {
+              "lab": "Dados da ficha",
+              "f": "@parecer_relatorio"
             }
           ],
           "r": [
@@ -972,6 +1106,10 @@
             {
               "lab": "Não houve",
               "f": "Não houve contrarrazões."
+            },
+            {
+              "lab": "Dados da ficha",
+              "f": "@contrarrazoes_relatorio"
             }
           ]
         },
@@ -998,6 +1136,10 @@
             {
               "lab": "Sem interesse público",
               "f": "A Procuradoria Regional da República opinou pela inexistência de interesse público para intervenção no feito (ID …)."
+            },
+            {
+              "lab": "Dados da ficha",
+              "f": "@parecer_relatorio"
             }
           ],
           "r": [
@@ -1083,6 +1225,10 @@
             {
               "lab": "Não houve",
               "f": "Não houve contrarrazões."
+            },
+            {
+              "lab": "Dados da ficha",
+              "f": "@contrarrazoes_relatorio"
             }
           ]
         },
@@ -1113,6 +1259,10 @@
             {
               "lab": "Sem interesse público",
               "f": "A Procuradoria Regional da República opinou pela inexistência de interesse público para intervenção no feito (ID …)."
+            },
+            {
+              "lab": "Dados da ficha",
+              "f": "@parecer_relatorio"
             }
           ],
           "r": [
@@ -1143,7 +1293,17 @@
           "n": "Abertura",
           "f": "Trata-se de agravo de instrumento à decisão que, em […], […] (ID …).",
           "r": [],
-          "fo": "P"
+          "fo": "P",
+          "alts": [
+            {
+              "lab": "Fórmula original",
+              "f": "Trata-se de agravo de instrumento à decisão que, em […], […] (ID …)."
+            },
+            {
+              "lab": "Dados da ficha",
+              "f": "@abertura_relatorio"
+            }
+          ]
         },
         {
           "n": "Razões",
@@ -1151,7 +1311,17 @@
           "r": [
             "Pedido de efeito suspensivo ou de tutela recursal, quando houver, com a decisão do Relator e o ID."
           ],
-          "fo": "P"
+          "fo": "P",
+          "alts": [
+            {
+              "lab": "Fórmula original",
+              "f": "Alegou {{a agravante}} (ID …) que: (1) […]; (2) […]; e (3) […]."
+            },
+            {
+              "lab": "Dados da ficha",
+              "f": "@razoes_recursais"
+            }
+          ]
         },
         {
           "n": "Contraminuta",
@@ -1164,6 +1334,10 @@
             {
               "lab": "Não houve",
               "f": "Não houve contraminuta."
+            },
+            {
+              "lab": "Dados da ficha",
+              "f": "@contrarrazoes_relatorio"
             }
           ],
           "r": [
@@ -1194,6 +1368,10 @@
             {
               "lab": "Sem interesse público",
               "f": "A Procuradoria Regional da República opinou pela inexistência de interesse público para intervenção no feito (ID …)."
+            },
+            {
+              "lab": "Dados da ficha",
+              "f": "@parecer_relatorio"
             }
           ],
           "r": [
@@ -1265,6 +1443,10 @@
             {
               "lab": "Pela rejeição",
               "f": "Em resposta aos embargos de declaração, pugnou-se por sua rejeição."
+            },
+            {
+              "lab": "Dados da ficha",
+              "f": "@contrarrazoes_relatorio"
             }
           ],
           "r": [],
@@ -1293,6 +1475,10 @@
             {
               "lab": "Sem interesse público",
               "f": "A Procuradoria Regional da República opinou pela inexistência de interesse público para intervenção no feito (ID …)."
+            },
+            {
+              "lab": "Dados da ficha",
+              "f": "@parecer_relatorio"
             }
           ],
           "r": [
@@ -1325,7 +1511,17 @@
           "r": [
             "Uma frase: o que decidiu a monocrática agravada."
           ],
-          "fo": "P"
+          "fo": "P",
+          "alts": [
+            {
+              "lab": "Fórmula original",
+              "f": "Trata-se de agravo interno à decisão que […]."
+            },
+            {
+              "lab": "Dados da ficha",
+              "f": "@abertura_relatorio"
+            }
+          ]
         },
         {
           "n": "Razões",
@@ -1344,6 +1540,10 @@
             {
               "lab": "Não houve",
               "f": "Não houve contraminuta."
+            },
+            {
+              "lab": "Dados da ficha",
+              "f": "@contrarrazoes_relatorio"
             }
           ],
           "r": [
