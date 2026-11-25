@@ -1515,3 +1515,6 @@ html[data-tema=escuro] .sg-b{background:#2a1414;border-color:#6b2f2f;color:#f0b8
 .hs-av{margin:6px 10px;padding:7px 10px;border-radius:8px;font-size:11.5px}
 .hs-av.hs-v{background:#eef4fd;border:1px solid #a9c6ee;color:#1d4f91}.hs-av.hs-e{background:#fbeeee;border:1px solid #d6a3a3;color:#8a2c2c}
 .hs-av code{font:600 11px var(--mono)}
+
+/* Ampliação incremental: tabelas, classificação e indicadores documentais. */
+.plus-head{display:flex;align-items:center;justify-content:space-between;gap:5px;flex-wrap:wrap}.plus-table,.plus-doc,.plus-docfilter{min-width:0;display:grid;gap:5px}.plus-row{border:1px solid var(--line,#d8d9d6);border-radius:5px;padding:6px;margin:3px 0}.plus-tags{display:flex;flex-wrap:wrap;gap:3px}.plus-tags .chip{font-size:10px;white-space:normal}.plus-tags .chip.on{background:#31566e;color:white}.plus-doc{padding:5px 0;border-top:1px solid var(--line,#ded9cc);margin:4px 0}.plus-docfilter{margin:6px 0}.plus-ind-item{padding:6px;border-left:2px solid #967b43;background:rgba(150,123,67,.07)}.plus-ind-item p{margin:3px 0;font-size:11px}.plus-table input,.plus-table textarea,.plus-table select,.plus-doc input,.plus-doc textarea,.plus-doc select{width:100%;min-width:0}.plus-doc .gr,.plus-row .gr{min-width:0}

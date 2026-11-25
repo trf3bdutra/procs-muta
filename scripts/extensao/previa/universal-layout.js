@@ -19,6 +19,7 @@
   gravarJa=function(){
     clearTimeout(G.t);G.t=null;var cnj=G.pendCnj||G.cnj,P=G.pend;
     if(!cnj||!Object.keys(P).length)return Promise.resolve({});
+    var idDoc='origem.Classificação documental';if(P[idDoc]&&window.MutaAnaliseProntuario)P[idDoc]=window.MutaAnaliseProntuario.mesclar(gravado('origem','Classificação documental'),P[idDoc]);
     Object.assign(saved[cnj]||(saved[cnj]={}),P);G.pend={};G.pendCnj='';
     if(cnj===G.cnj){G.op=G.op||{};Object.keys(P).forEach(function(k){var i=k.indexOf('.'),s=k.slice(0,i);(G.op[s]||(G.op[s]={}))[k.slice(i+1)]=P[k];});st('Prévia: alterações apenas em memória.','ok');}
     return Promise.resolve({operacional:G.op});
@@ -81,7 +82,7 @@
   var stepDocs={decisao:['sent'],impugnada:['imp'],prolator:['imp'],tempest:['rec','intim'],preparo:['custas'],repres:['proc'],reexame:['sent'],cabimento:['imp','rec'],vicios:['ac','rec'],impug:['imp','rec'],dialet:['rec'],mpf:['mpf'],contra:['contra'],efeito:['imp'],infring:['ac','contra'],retrat:['imp']};
   // As conclusões da triagem continuam editáveis no respectivo passo.
   var triagemOwn={'triagem.MPF':1,'triagem.MPF - Custos Legis':1};
-  var ownedGroups=['Sentença','Origem','Recursos e contrarrazões','Outras peças e ocorrências','Acórdão recorrido (embargos de declaração)'];
+  var ownedGroups=['Sentença','Origem','Recursos e contrarrazões','Outras peças e ocorrências','Acórdão recorrido (embargos de declaração)','Sucumbência da decisão recorrida','Classificação documental'];
   function owned(id){
     if(triagemOwn[id])return false;
     if(ownedGroups.some(function(n){var g=grupoModelo(n);return g&&(g.campos||[]).some(function(c){return c.secao+'.'+c.chave===id;});}))return true;
@@ -124,7 +125,7 @@
   }
   var prodBase=camposCaso;
   camposCaso=function(ja){
-    var all=Object.assign({},ja,{'producao.Voto - Resultado':1,'triagem.Tema':1,'triagem.Especificidades':1,'triagem.Assunto detalhado':1,'triagem.Tipo de Julgamento':1,'producao.Destino - Outro':1});ownedGroups.forEach(function(n){var g=grupoModelo(n);if(g)(g.campos||[]).forEach(function(c){var k=c.secao+'.'+c.chave;if(owned(k))all[k]=1;});});
+    var all=Object.assign({},ja,{'producao.Voto - Resultado':1,'triagem.Tema':1,'triagem.Especificidades':1,'triagem.Assunto detalhado':1,'triagem.Tipo de Julgamento':1,'triagem.Ramo do direito':1,'triagem.Outros assuntos':1,'producao.Destino - Outro':1});ownedGroups.forEach(function(n){var g=grupoModelo(n);if(g)(g.campos||[]).forEach(function(c){var k=c.secao+'.'+c.chave;if(owned(k))all[k]=1;});});
     PECAS_DOC.forEach(function(d){d.campos.forEach(function(k){var id=k.join('.');if(owned(id))all[id]=1;});});
     var f=fragment(prodBase(all)),root=f.querySelector('.cc-caso');if(!root)return html(f);
     var T=ccTipos(), ids=['origem'];if(T.ap||T.rn||T.ms||S(V('origem','Sentença - ID')))ids.push('sent');
@@ -189,7 +190,7 @@
     // Tipo de ato e destino são definidos exclusivamente na faixa superior.
     var res=elem('div','pv-idrow'),c=destino()==='monocratica'?campoLista('producao','Voto - Resultado'):campoModelo('producao','Voto - Resultado');
     if(c)add(res,campo(Object.assign({},c,{rotulo:'Conclusão / resultado'})));sec.append(res);
-    sec.append(elem('h4','pm-mer-h','Matéria'),extraField('ramo','Ramo do direito'),readRow('Assunto CNJ',source(['Assunto'])),extraField('outros','Outros assuntos'));
+    sec.append(elem('h4','pm-mer-h','Matéria'),(campoModelo('triagem','Ramo do direito')?field('triagem','Ramo do direito','Ramo do direito'):extraField('ramo','Ramo do direito')),readRow('Assunto CNJ',source(['Assunto'])),(campoModelo('triagem','Outros assuntos')?field('triagem','Outros assuntos','Outros assuntos'):extraField('outros','Outros assuntos')));
     var ad=elem('div','pv-idrow');ad.append(elem('span','gl','Assunto detalhado'));
     var detail=assuntoDetalhado();if(detail)add(ad,detail);else{var plus=btn('+ Detalhamento do assunto','data-ad','ed');plus.className='pm-ad-add';ad.append(plus);}sec.append(ad);
     sec.append(field('triagem','Tema','Tipo de caso'),field('triagem','Especificidades','Especificidades',true),sintese('sp','Síntese processual','Resumo da tramitação, decisões, recursos e pedidos.'),sintese('sf','Síntese fática','Fatos materiais relevantes para a controvérsia.'));

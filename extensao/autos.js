@@ -580,10 +580,12 @@ function principais() { return lista().filter(function (d) { return PRINC[d.k] &
 function espDe(id) { if (id in A.esp) return A.esp[id]; var r = linhasGravadas('origem', 'Outras peças').filter(function (x) { return S(x.ids) === id; })[0]; return r ? S(r.texto) : ''; }
 function linhaDoc(d) {
       var ab = A.abertos[d.id], dd = A.docs[d.id];
+      if (GB().classificacaoVisivel && !GB().classificacaoVisivel(d)) return '';
       return '<div class="au-doc' + (d.anexo ? ' anx' : '') + (PRINC[d.k] ? ' pr' : '') + (marcado(d) ? ' sel' : '') + '"><div class="au-h"><input type="checkbox" class="au-g" data-au-g="' + esc(d.id) + '"' + (marcado(d) ? ' checked' : '') + ' title="Gravar na ficha com o inteiro teor" aria-label="Gravar ' + esc(d.tipo) + ' ID ' + esc(d.id) + ' na ficha"><span class="au-d">' + esc(d.data) + (d.hora ? '<small>' + esc(d.hora) + '</small>' : '') + '</span>' +
         '<div class="au-n"><b>' + esc(d.tipo) + '</b>' + (d.desc && N(d.desc) !== N(d.tipo) ? '<small>' + esc(d.desc) + '</small>' : '') + '</div>' +
         '<button type="button" class="mono lnk" data-copia="' + esc(d.id) + '" title="Copiar o ID">' + esc(d.id) + '</button></div>' +
         '<div class="au-inf">' + [d.rot, d.anexo ? 'anexo' : '', d.origem].filter(Boolean).map(function (x) { return '<span>' + esc(x) + '</span>'; }).join('') + (d.movs && d.movs.length && !d.anexo ? '<small>' + esc(d.movs.join(' · ')) + '</small>' : '') + '</div>' +
+        (GB().classificacaoDoc && !docBloq(d) ? GB().classificacaoDoc(d) : '') +
         /* 0.39: o detalhamento numa linha só; o inteiro teor num campo que se expande (lê o texto ao abrir) */
         '<input type="text" class="au-esp au-esp-l" data-esp="' + esc(d.id) + '" placeholder="Detalhamento (vai para Outras peças da ficha)" title="Vai para Outras peças e ocorrências da ficha" value="' + esc(espDe(d.id)) + '">' +
         '<details class="au-it" data-au-it="' + esc(d.id) + '"' + (ab ? ' open' : '') + '><summary><span>Inteiro teor</span>' + estadoDoc(d.id) +
@@ -612,6 +614,7 @@ function htmlDocs(pecas) {
   var nSel = ok ? marcados().length : 0;
   var lidos = Object.keys(A.docs).filter(function (k) { return /^(ok|sem)$/.test(A.docs[k].estado); }).length;
   var cab = '<div class="pc-sh"><h3>Peças e documentos</h3><small class="muted">' + (ok ? L.length + ' na cronologia · ' + lidos + ' com texto lido' : 'da ficha do processo') + '</small></div>';
+  if (ok && GB().classificacaoFiltro) cab += GB().classificacaoFiltro(L.filter(function(d){return !docBloq(d);}));
   var seg = ok ? '<div class="au-fx"><span class="seg"><button type="button" data-au="f:pecas" aria-selected="' + (F === 'pecas') + '" title="As peças da ficha com os seus documentos: decisões, recursos, contrarrazões, parecer, procuração, custas e inicial">Principais (' + P.length + ')</button><button type="button" data-au="f:todos" aria-selected="' + (F === 'todos') + '" title="A cronologia inteira do PJe, do mais recente ao mais antigo">Todos (' + L.length + ')</button></span>' +
     '<button type="button" class="btn line sm au-js" data-au="tudojs"' + (A.todo ? ' disabled' : '') + ' title="Lê o texto de todos os documentos (PDF digitalizado vai ao OCR) e baixa num arquivo JSON, no formato do acervo" aria-label="Baixar o inteiro teor em JSON">' + SVGDL + (A.todo ? A.todo.feitos + '/' + A.todo.total : 'JSON') + '</button></div>' +
     '<div class="au-gv"><span class="muted">Marcar: <button type="button" class="lnk" data-au="sel:principais">principais</button> · <button type="button" class="lnk" data-au="sel:todos">todos</button> · <button type="button" class="lnk" data-au="sel:nenhum">nenhum</button></span>' +
