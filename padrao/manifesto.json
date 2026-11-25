@@ -2,7 +2,7 @@
  "padrao": "gabcmt",
  "versao": "1.0.0",
  "compatibilidade": "apps declaram a versão maior que leem (1); versão menor nova só acrescenta campos",
- "atualizadoEm": "2026-11-25T03:35:44Z",
+ "atualizadoEm": "2026-11-25T04:54:03Z",
  "areas": {
   "acervo": "processos em tramitação no gabinete (acervo/)",
   "precedentes": "processos já julgados pelo relator: ementário, inteiros teores e catálogo CMT",
@@ -46,14 +46,14 @@
    "sha256": "c7feec008995f6542fd4f240f76e300245bc2d741760233ffddd74d6bc6b6558"
   },
   "precedentes/inteiros-teores/2026.jsonl": {
-   "registros": 138,
-   "bytes": 3312431,
-   "sha256": "203997bed4a4037decb318bafb54c1332dc17bb09e5bb91a9bfd14d65125ab51"
+   "registros": 360,
+   "bytes": 9254421,
+   "sha256": "e48dc5304716c8e1f0486cd6e278123b042c42a4498075298449a2bc58dbf54d"
   },
   "precedentes/precedentes.jsonl": {
    "registros": 2117,
-   "bytes": 16212341,
-   "sha256": "c2bde00b0abcec58cfa0f3e613b449fb0cef2b2ba59d2c563f4800bca18f2454"
+   "bytes": 16214117,
+   "sha256": "664713792a7be59e0a669e94feb7a24086c0685239b442a0b280f9be454940ea"
   }
  }
 }

@@ -11,13 +11,13 @@ O procs-muta é o repositório principal: a partir desta importação, nada aqui
 | Pasta | Período | Registros |
 | --- | --- | --- |
 | `acordaos/` | 1999–2026 | 26.276 |
-| `monocraticas/` | 2016–2026 | 7.248 |
-| **Total** | | **33.524** |
+| `monocraticas/` | 2016–2026 | 7.311 |
+| **Total** | | **33.587** |
 
-Um arquivo por ano, em JSON comprimido (`AAAA.json.gz`). O `indice.json.gz` traz os 33.524
+Um arquivo por ano, em JSON comprimido (`AAAA.json.gz`). O `indice.json.gz` traz os 33.587
 registros em forma resumida, com chaves curtas, para busca sem abrir os arquivos de ano.
 
-Dos acórdãos: 12.694 com inteiro teor, 11.751 só com o acórdão e 1.831 só com a ementa.
+Dos acórdãos: 12.916 com inteiro teor, 11.751 só com o acórdão e 1.609 só com a ementa.
 Por atuação: 25.402 como relator e 648 como relator para o acórdão.
 
 ## Critério da coleta
@@ -34,6 +34,13 @@ a próxima coleta completa os substitui pela versão integral. Em 25/11/2026 ent
 publicadas de 30/09 a 24/11/2026, com inteiro teor (`scripts/jurisprudencia/acrescentar_monocraticas.py`);
 das 220 da base nesse período, 124 ficaram por coletar porque o servidor do TRF-3 passou a responder com
 erro — as posições estão na lacuna registrada no MANIFESTO.
+
+Ainda em 25/11/2026, pelo Diário de Justiça Eletrônico Nacional (DJEN, CNJ — `comunicaapi.pje.jus.br`,
+`orgaoId` 101584 = Gab. A da Turma Regional de MS; o antigo gabinete em SP é "Gab. 42 - DES. FED. CARLOS
+MUTA"), 222 dos 226 acórdãos colhidos só com ementa receberam o inteiro teor e entraram 63 monocráticas que
+faltavam (`scripts/jurisprudencia/completar_djen.py`). Os 4 acórdãos restantes não foram publicados no DJEN
+(intimação só pelo sistema). Nos registros vindos do DJEN o texto está numa linha só e a data da decisão
+foi lida do número do documento no PJe (conferida contra a série em 398 de 398 casos).
 
 ## Lacunas conhecidas
 
