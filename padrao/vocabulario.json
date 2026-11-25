@@ -404,40 +404,16 @@
       }
     },
     "outro_destino": {
-      "rotulo": "Outro destino",
+      "rotulo": "Outro destino final",
       "ficha": "Destino - Outro",
       "secao": "producao",
       "prontuario": "",
       "motor": "",
       "opcoes": [
-        [
-          "Vista ao MPF",
-          "pendente"
-        ],
-        [
-          "Devolução ao órgão prolator",
-          "na"
-        ],
-        [
-          "Sobrestamento",
-          "pendente"
-        ],
-        [
-          "Redistribuição ou prevenção",
-          "pendente"
-        ],
-        [
-          "Diligência ou intimação",
-          "pendente"
-        ],
-        [
-          "Baixa ou arquivamento",
-          "na"
-        ],
-        [
-          "Outro",
-          "na"
-        ]
+        ["Devolução definitiva ao órgão prolator", "na"],
+        ["Redistribuição definitiva a outro órgão", "na"],
+        ["Baixa ou arquivamento", "na"],
+        ["Outro destino final", "na"]
       ],
       "sinonimos": {}
     },
