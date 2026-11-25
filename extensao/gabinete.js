@@ -1003,9 +1003,8 @@ function heroOrganizarProntuario(){
   var classFull=S(R['Classe']||fonteVal({fonte:['classe_judicial','Classe']})||classText),classShort=classFull;
   try{var clInfo=window.ClassesCNJ&&window.ClassesCNJ.etiqueta(classFull,null);if(clInfo&&clInfo.t)classShort=clInfo.t.split(' · ')[0];else if(cls)classShort=cls.textContent.split(' · ')[0];}catch(e){}
   if(cls)cls.remove();
-  var procTags=el('div','hero-proc-tags'),julgamento=S(V('triagem','Tipo de Julgamento')||V('triagem','Padrão - Espécie')),tagText=classShort;
-  try{var combinado=window.ClassesCNJ&&window.ClassesCNJ.etiqueta(classFull,ccTipos());if(combinado&&combinado.t)tagText=combinado.t;}catch(e){}
-  if(classShort||julgamento){var jt=el('button','pc-cl hero-cl-jg',tagText||julgamento);jt.type='button';jt.title=[classFull,julgamento,'Alterar tipo de julgamento'].filter(Boolean).join(' · ');jt.onclick=function(){abrirA('acompanhamento');var d=ac.querySelector('.rt-tsel');if(d){d.open=true;d.scrollIntoView({block:'nearest'});}else{var f=ac.querySelector('.hero-enc-tipo');if(f)f.scrollIntoView({block:'nearest'});}};procTags.append(jt);}
+  var procTags=el('div','hero-proc-tags');
+  if(classShort){var clTag=el('span','pc-cl hero-class-only',classShort);clTag.title=classFull;procTags.append(clTag);}
   if(l1)l1.querySelectorAll('.pm-tj').forEach(function(x){if(x.classList.contains('sug'))tj.append(x);else x.remove();});
   if(l1&&procTags.childNodes.length)l1.append(procTags);
   if(l1)l1.querySelectorAll('.pm-al').forEach(function(x){x.remove();});
@@ -1184,11 +1183,12 @@ function heroOrganizarProntuario(){
   if(sel){sel.classList.add('hero-tipo-roteiro');tj.prepend(sel);caixa.querySelectorAll('.rt-tsel').forEach(function(x){if(x!==sel)x.remove();});}
   else html(tj,campoRot('triagem','Tipo de Julgamento','Tipo de julgamento'));
   /* Especificações jurídicas ficam na Produção; planejamento não altera resultado. */
-  /* O seletor de julgamento permanece exclusivamente no Acompanhamento, inclusive em Produção. */
+  /* O seletor de julgamento fica no cabeçalho do prontuário. */
   if(identity)identity.remove();
   /* Encaminhamento é uma seção interna, comum a todos os modos. */
   var encSection=el('section','hero-enc-integrado');encSection.append(el('h4','pm-mer-h','Encaminhamento'));
-  tj.classList.add('hero-enc-tipo');encSection.append(tj);
+  tj.classList.add('hero-header-kind');
+  if(l1){if(!procTags.isConnected)l1.append(procTags);procTags.append(tj);}else id.prepend(tj);
   var encFields=el('div','gr hero-enc-fields');encSection.append(encFields);
   body.querySelectorAll('.pm-enc,.pv-acomp-sit,.pv-followup,.pm-sitj').forEach(function(x){x.remove();});
   var destinoAtual=destGrav(),destRow=el('label','gf'),destSel=el('select'),destTop=el('div','hero-dest-top');
