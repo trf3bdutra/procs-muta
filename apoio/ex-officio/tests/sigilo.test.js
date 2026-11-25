@@ -27,13 +27,13 @@ test('sigilo: a senha certa devolve token do processo; senha errada e token de o
   assert.equal(g.b.liberado, true);
 });
 
-test('extensão 0.69: sigilo no cliente, aviso de versão e publicação sem cancelar a anterior', () => {
+test('extensão: sigilo no cliente, aviso de versão e prioridade da publicação', () => {
   const fs = require('node:fs'), R = f => fs.readFileSync(path.resolve(__dirname, '../../..', f), 'utf8');
   const h = R('extensao/painel.html'), a = R('extensao/autos.js');
   assert.match(h, /<script src="sigilo\.js"><\/script>/); assert.match(h, /<script src="saude\.js"><\/script>/);
   assert.ok(h.indexOf('sessao.js') < h.indexOf('sigilo.js'), 'sigilo depois da sessão');
   assert.match(a, /if \(sigBloq\(\)\) \{ A\.erro = 'Processo sigiloso/); assert.match(a, /if \(sigBloq\(\) \|\| docBloq\(dl\)\)/); assert.match(a, /sigilo: SG\(\) \? SG\(\)\.token\(\) : ''/);
   assert.match(R('apoio/ex-officio/api/_ficha.js'), /require\('\.\/_sigilo'\)\.situacao\(u, cnjA, req\.body\.sigilo/);
-  assert.match(R('.github/workflows/vercel-caput.yml'), /cancel-in-progress: false/);
+  assert.match(R('.github/workflows/vercel-caput.yml'), /group: vercel-caput\s*(?:#.*\r?\n\s*)*cancel-in-progress: \$\{\{\s*github\.event_name != 'workflow_run'\s*\}\}/, 'push e acionamento manual substituem a publicação anterior, conclusão do Base não');
   assert.match(R('extensao/saude.js'), /\/extensao\/versao\.json/);
 });

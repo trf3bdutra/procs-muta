@@ -31,7 +31,7 @@ test('coleções: escaninhos da triagem viram lotes avulsos e o arquivo antigo f
   assert.equal(L.cor, '#123456'); assert.equal(L.bilhete, 'b');
   assert.deepEqual(L.itens.map(i => i.processo), [A, B]);
   const E = le(T, 'acervo/triagem/escaninhos.json');
-  assert.ok(E.migrado); assert.deepEqual(E.escaninhos, []); assert.deepEqual(E.lotes, ['esc-emwjs6hgo']);
+  assert.match(E.migrado, /^acervo\/lotes\b/); assert.deepEqual(E.escaninhos, []); assert.deepEqual(E.lotes, ['esc-emwjs6hgo']);
   const I = le(T, 'acervo/lotes/colecoes.json');
   assert.equal(I.colecoes.avulsos[0].id, 'esc-emwjs6hgo'); assert.equal(I.colecoes.avulsos[0].escaninho, true);
   assert.match(roda(T), /nada a mudar/, 'segunda rodada não muda nada');
@@ -91,20 +91,19 @@ test('coleções: banco reserva (seleção prévia sem sessão) agrupado pela tr
   assert.match(roda(T), /nada a mudar/, 'segunda rodada não muda nada');
 });
 
-test('coleções: Caput, Collectio, alimentar e fluxo usam a mesma fonte', () => {
+test('coleções: Caput, CORTEX, alimentar e fluxo usam a mesma fonte', () => {
   const tri = read('caput/triagem/index.html');
   assert.ok(tri.includes("const ESC_IDX = 'acervo/lotes/colecoes.json'"), 'Caput lê o índice das coleções');
   /* o escaninho vira lote avulso em scripts/lotes/colecoes.py (fonte única), não mais no próprio Caput */
   assert.match(read('scripts/lotes/colecoes.py'), /lote_novo\(id_, 'avulso', [^\n]*origem='escaninho'/, 'escaninho novo nasce como lote avulso');
   const col = read('scripts/lotes/colecoes.py');
-  assert.ok(col.includes("'migrado': 'acervo/lotes (coleção Avulsos do Collectio)'"), 'arquivo antigo marcado como migrado');
   assert.ok(col.includes("id_ = 'esc-' + re.sub("), 'id do escaninho vira id de lote');
   const api = read('apoio/ex-officio/api/_lote.js');
   assert.ok(api.includes("if (l.tipo === 'selecao') return 'selecao'"));
   assert.ok(api.includes("selecao:lotes.filter(l=>l.tipo==='selecao'&&!l.arquivado)"));
   assert.ok(api.includes("dados.schema !== 'gabcmt.lote'"), 'colecoes.json não aparece como lote');
   const pg = read('apoio/ex-officio/lotes/index.html');
-  /* Triagem (tarefas, séries e escaninhos) e Seleção prévia foram integradas à aba de triagem do Caput: o Collectio só avisa */
+  /* Triagem (tarefas, séries e escaninhos) e Seleção prévia foram integradas à aba de triagem do Caput: o CORTEX só avisa */
   assert.ok(pg.includes('Seleção prévia') && /lotes das tarefas, séries e escaninhos/.test(pg));
   const al = read('scripts/lotes/alimentar.py');
   assert.ok(al.includes("L.get('arquivado')") && al.includes('sorted(todos, key=prioridade)'));

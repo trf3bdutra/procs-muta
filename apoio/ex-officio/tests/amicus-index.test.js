@@ -15,7 +15,12 @@ test('Amicus tem URLs canônicas e redirecionamentos de compatibilidade',()=>{
  for(const x of ['site/public/amicus/cortex/cg','site/public/amicus/cortex/cmt','site/public/amicus/cortex/gc','site/public/amicus/compendium','site/public/amicus/index.html']) assert.ok(workflow.includes(x),x);
  for(const x of ['/index/cmt','/index/gc','/lote/cg','/amicus/compendium/']) assert.ok(workflow.includes(x),x);
  assert.ok(app.includes('/amicus/cortex/cg/'));
- assert.ok(!workflow.includes('"destination":"/amicus/cortex/cmt/"'),'rotas antigas do CMT levam à página geral');
+ const config=workflow.match(/^\s*printf '(\{"framework":.*\})\\n' > site\/vercel\.json$/m);
+ assert.ok(config,'configuração Vercel gerada pelo workflow');
+ const routes=new Map(JSON.parse(config[1]).redirects.map(({source,destination})=>[source,destination]));
+ for(const old of ['/index/cmt','/lote/cmt','/cmt/lotes','/amicus/index/cmt']){
+  for(const suffix of ['','/']) assert.equal(routes.get(old+suffix),'/amicus/cortex/',old+suffix);
+ }
  assert.ok(read('apoio/amicus/index.html').includes('/amicus/compendium/'));
 });
 test('Seletor separa sessões e lotes avulsos',()=>{

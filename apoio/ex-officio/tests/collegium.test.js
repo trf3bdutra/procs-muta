@@ -22,7 +22,7 @@ test('build monta o Collegium a partir do mesmo ementário, só com a aba Ement�
   const e=read('apoio/modus-operandi/fonte/ementario.js');
   assert.ok(e.includes("(window.EMENT_FONTE||'/jurisprudencia/')"),'a série vem da fonte configurada');
   assert.ok(e.includes("DIM.rl={n:'Relator'"),'dimensão Relator no Collegium');
-  assert.ok(e.includes("Rel. '+esc(x.rl||'CARLOS MUTA')"),'relator do julgado no detalhe');
+  assert.match(e,/class="pp-k">Relator<\/span><b>'\+esc\(x\.rl\|\|\(col\?'Não informado':'CARLOS MUTA'\)\)/,'o detalhe mostra a relatoria registrada e só usa o Relator padrão fora do Collegium');
 });
 
 test('página gerada: Collegium com a fonte própria e sem os precedentes do Relator embutidos',()=>{
