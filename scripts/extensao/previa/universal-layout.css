@@ -392,3 +392,20 @@ body.hero-redesign-v53 #gab section.pv2-index{border:1px solid var(--line)!impor
 body.hero-redesign-v53 #gab .rt-c .pv-docref{background:transparent!important;border-radius:6px!important}
 /* Produção: o cartão do Gerador já traz o título; sem o rótulo repetido por fora */
 body.hero-redesign-v53 #gab .hero-v53-gerador>h4.pm-mer-h{display:none!important}
+/* 0.74.3 · Resumo: cartões Resumo do processo e Autos (mesma hierarquia do bloco acima) */
+body.hero-redesign-v53 #gab :is(.hero-v53-resumo,.hero-v53-autos-resumo){margin-top:10px!important}
+body.hero-redesign-v53 #gab .hero-v53-resumo>.pc-sh{flex-wrap:wrap}
+body.hero-redesign-v53 #gab .hero-v53-rs-tags{display:flex;flex-wrap:wrap;gap:4px}
+body.hero-redesign-v53 #gab .hero-v53-rs-tags .chip{font-size:11px;padding:2px 7px;border-radius:999px}
+body.hero-redesign-v53 #gab .hero-v53-rs-row{display:grid;grid-template-columns:1fr;gap:2px;padding:8px 0;border-top:1px solid var(--line)}
+body.hero-redesign-v53 #gab .hero-v53-rs-row:first-of-type{border-top:0;padding-top:0}
+body.hero-redesign-v53 #gab .hero-v53-rs-k{font:600 9.5px/1.3 'IBM Plex Mono',ui-monospace,monospace;text-transform:uppercase;letter-spacing:.08em;color:var(--muted-fg)}
+body.hero-redesign-v53 #gab .hero-v53-rs-row.fix .hero-v53-rs-k::after{content:' · em destaque';color:var(--hero53-gold)}
+body.hero-redesign-v53 #gab .hero-v53-rs-v p{margin:0;font-size:12.5px;line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere}
+body.hero-redesign-v53 #gab .hero-v53-rs-q{margin:0;padding-left:18px;font-size:12.5px;line-height:1.45}
+body.hero-redesign-v53 #gab .hero-v53-rs-q li{margin:2px 0}
+body.hero-redesign-v53 #gab .hero-v53-rs-q li.fix{font-weight:600}
+body.hero-redesign-v53 #gab .hero-v53-rs-v .lnk{font-size:12px;padding:0}
+body.hero-redesign-v53 #gab .hero-v53-autos-resumo .au-res{display:flex;flex-wrap:wrap;gap:4px}
+body.hero-redesign-v53 #gab .hero-v53-rs-foot{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:8px;padding-top:8px;border-top:1px solid var(--line)}
+body.hero-redesign-v53 #gab .hero-v53-rs-foot .btn{margin-left:auto}

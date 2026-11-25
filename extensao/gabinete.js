@@ -1597,7 +1597,27 @@ function heroOrganizarProntuario(){
       if(fieldNode){var lab=fieldNode.querySelector('.gl');(lab||fieldNode).append(pin(x[0]));}
       var value=S(V('triagem',x[1]));if(value&&destacado(x[0])){var b=el('button','hero-v53-highlight '+x[2],value);b.type='button';b.title='Editar '+x[1];b.onclick=function(){perfil.open=true;heroTopo.perfil=true;secConteudo.open=true;contentGrid.scrollIntoView({block:'nearest'});};highlight.append(b);}
     });
-    if(highlight.childNodes.length)id.insertBefore(highlight,qtags.parentNode===id?qtags:steps);
+    if(highlight.childNodes.length&&!resumo)id.insertBefore(highlight,qtags.parentNode===id?qtags:steps);
+    /* 0.74.3 · face Resumo: cartão Resumo do processo (encaminhamento, sínteses e questões, só leitura, com atalho para editar no Perfil)
+       e cartão Autos (o mesmo resumo da Leitura dos autos, com Ler e Abrir Autos). Sem campos novos nem segunda edição. */
+    if(resumo){
+      var rsm=el('section','card hero-v53-resumo'),rsh=el('div','pc-sh');rsh.append(el('h3','','Resumo do processo'));rsm.append(rsh);
+      var editar=function(alvo){return function(){perfil.open=true;heroTopo.perfil=true;secConteudo.open=true;(alvo||contentGrid).scrollIntoView({block:'nearest'});};};
+      var linha=function(rot,val,cls,onEdit,fixo){var r=el('div','hero-v53-rs-row'+(cls?' '+cls:'')+(fixo?' fix':''));r.append(el('span','hero-v53-rs-k',rot));var v=el('div','hero-v53-rs-v');if(val){v.append(el('p','',val));}else{var a=el('button','lnk','+ registrar');a.type='button';a.onclick=onEdit;v.append(a);}r.append(v);rsm.append(r);return r;};
+      var tj=S(V('triagem','Tipo de Julgamento')),dst=S(V('producao','Destino'));
+      if(tj||dst){var en=el('div','hero-v53-rs-tags');[tj,dst&&('Destino · '+dst)].filter(Boolean).forEach(function(x){en.append(el('span','chip',x));});rsh.append(en);}
+      linha('Síntese fática',S(V('triagem','Síntese Fática')),'',editar(),destacado('@fatica'));
+      linha('Síntese processual',S(V('triagem','Síntese Processual')),'',editar(),destacado('@processual'));
+      var qr=el('div','hero-v53-rs-row');qr.append(el('span','hero-v53-rs-k','Questões'+(qs.length?' · '+qs.length:'')));var qv=el('div','hero-v53-rs-v');
+      if(qs.length){var ol=el('ol','hero-v53-rs-q');qs.forEach(function(q){var li=el('li',qfix.includes(q)?'fix':'',q);ol.append(li);});qv.append(ol);}
+      else{var qa=el('button','lnk','+ registrar');qa.type='button';qa.onclick=function(){perfil.open=true;heroTopo.perfil=true;qd.open=true;qd.scrollIntoView({block:'nearest'});};qv.append(qa);}
+      qr.append(qv);rsm.append(qr);
+      var aus=el('section','card hero-v53-autos-resumo'),ash=el('div','pc-sh');ash.append(el('h3','','Autos'));aus.append(ash);
+      if(window.MutaSigilo&&(window.MutaSigilo.bloqueado()||window.MutaSigilo.sigiloso()))aus.append(el('p','muted','Acesso restrito: processo ou documento sigiloso.'));
+      else if(auDocs&&auDocs.htmlLeitura){var tmp=el('div');html(tmp,auDocs.htmlLeitura());var lei=tmp.querySelector('section');if(lei){var lh=lei.querySelector('.pc-sh small');if(lh)ash.append(lh);lei.querySelector('.pc-sh')&&lei.querySelector('.pc-sh').remove();lei.querySelectorAll('.au-bl').forEach(function(x){x.remove();});lei.querySelectorAll('p.muted').forEach(function(x){if(/^Abra os autos|^Leia os autos/.test(x.textContent))x.textContent='Autos ainda não lidos: a leitura fica na aba Autos.';});while(lei.firstChild)aus.append(lei.firstChild);}
+        var cvn=live?live.filter(function(d){return d.naFicha;}).length:0;var foot=el('div','hero-v53-rs-foot');if(cvn)foot.append(el('small','muted',cvn+' documento(s) referenciado(s) na ficha'));var go=el('button','btn line sm','Abrir Autos');go.type='button';go.onclick=function(){G.aba='Autos';render();};foot.append(go);aus.append(foot);}
+      var antes=steps&&steps.parentNode?steps:null;if(antes){antes.after(rsm);rsm.after(aus);}else{id.append(rsm,aus);}
+    }
     if(qtags.childNodes.length){qtags.replaceChildren();qs.forEach(function(q,i){if(qfix.includes(q)){var b=el('button','hero-v53-question',String(i+1).padStart(2,'0')+' · '+q);b.type='button';b.onclick=function(){perfil.open=true;heroTopo.perfil=true;qd.open=true;qd.scrollIntoView({block:'nearest'});};qtags.append(b);}});}
     /* Mantém a seção imediatamente antes do assunto; tags reais ficam agrupadas. */
     if(secTag)as.prepend(secTag);
