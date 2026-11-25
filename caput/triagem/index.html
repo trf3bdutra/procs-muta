@@ -287,6 +287,7 @@ html[data-theme="dark"] .row>.obs{background:#2a2a1c}html[data-theme="dark"] .ro
 .grp-h b{color:var(--v)}
 .mais{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border-top:1px solid var(--l);font-size:12.5px;color:var(--m);flex-wrap:wrap;gap:8px}
 .vazio{padding:28px 16px;text-align:center;color:var(--m)}
+tr.at-r:has([data-triexp]){cursor:pointer}
 /* gaveta */
 .veu{position:fixed;inset:0;background:rgba(23,63,61,.28);z-index:45}
 .gaveta{position:fixed;top:0;right:0;bottom:0;width:min(560px,100vw);background:var(--p);border-left:2px solid var(--v);box-shadow:-16px 0 40px rgba(23,63,61,.2);display:flex;flex-direction:column;z-index:46}
@@ -4050,6 +4051,8 @@ D.addEventListener('click', (e) => { const t = e.target;
     if (onde === 'fila') { F.conj = { rot: b.dataset.grpso, ids: new Set(L.filter((o) => fn(o) === b.dataset.grpso).map((o) => o.d)) }; F.ver = 'lista'; F.lim = 100; } else { FE.q = '"' + b.dataset.grpso + '"'; FE.ver = 'lista'; } render(); return; }
   if ((b = q('[data-trisub]'))) { TRI_SUBABA = b.dataset.trisub; LS.set('tri_subaba', TRI_SUBABA); const corpo = document.getElementById('tri-em-corpo'); if (corpo) corpo.innerHTML = conteudoSubAba(); document.querySelectorAll('[data-trisub]').forEach(x => { x.classList.toggle('on', x.dataset.trisub === TRI_SUBABA); x.setAttribute('aria-selected', String(x.dataset.trisub === TRI_SUBABA)); }); return; }
   if ((b = q('[data-triexp]'))) { const d = b.dataset.triexp; TRI_EXP_D = TRI_EXP_D === d ? null : d; const emEl = document.getElementById('tri-em'); if (emEl) emEl.outerHTML = painelEmTriagem(); return; }
+  /* A triar: a faixa abre a expansão já existente, preservando seleção, links e controles. */
+  if ((b = q('tr.at-r')) && !t.closest('input,button,a,select,label,textarea,[contenteditable]') && !String(W.getSelection ? W.getSelection() : '').trim()) { const ctl = b.querySelector('[data-triexp]'); if (ctl) { ctl.click(); return; } }
   if ((b = q('[data-tribanda]'))) { const id = b.dataset.tribanda; const cur = LS.get('tri_em_b_'+id, true); LS.set('tri_em_b_'+id, !cur); const emEl = document.getElementById('tri-em'); if (emEl) emEl.outerHTML = painelEmTriagem(); return; }
   if ((b = q('[data-proc-exp]'))) { const d=b.dataset.procExp;PROC_EXP_ABERTO=PROC_EXP_ABERTO===d?'':d;render();return; }
   if ((b = q('[data-prontuario]'))) { abrirProntuarioTriagem(b.dataset.prontuario);return; }
