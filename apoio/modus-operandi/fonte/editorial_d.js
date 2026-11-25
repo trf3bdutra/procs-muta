@@ -515,30 +515,20 @@ function dkVolta(){var m=$('#x-man'),c=$('#cq'),a=$('#x-alt');if(m&&a&&m.parentN
 document.addEventListener('click',function(e){var t=e.target.closest&&e.target.closest('.tab[data-v="dir"],.tab[data-v="consulta"]');if(!t)return;e.preventDefault();e.stopImmediatePropagation();irEditorial(t.getAttribute('data-v')==='consulta'?'pecas':t.getAttribute('data-v'));},true);
 document.addEventListener('cmt-acesso',function(){if(XS.ed==='dir'&&!$('#v-edit').hidden)setTimeout(function(){if(XS.ed==='dir')xManual();},1500);});
 
-/* ===== Referenciais (acesso avançado): Enunciados, Repertório e Enciclopédia num só menu, com navegação interna como a do Editorial ===== */
+/* Repertório único: motores e identificadores anteriores permanecem para links e referências. */
 (function(){
-  var RV=['temas','rep','enc'],RI={temas:['01','Enunciados','AVANÇADO · ENUNCIADOS','Temas repetitivos, de repercussão geral e súmulas, com as teses e os usos no gabinete.'],
-    rep:['02','Repertório','AVANÇADO · REPERTÓRIO','Jurisprudência, normas e Regimento citados nas peças do gabinete.'],
-    enc:['03','Enciclopédia','AVANÇADO · ENCICLOPÉDIA','Recursos, guias práticos, rotina do gabinete, PJe, competência, matérias, léxico e Regimento.']};
-  var ult='temas';
-  var et=document.querySelector('.tab[data-v="edit"]');if(!et)return;var ancora=et.closest('.tabw')||et;
-  var rt=document.createElement('button');rt.className='tab';rt.type='button';rt.setAttribute('role','tab');rt.setAttribute('data-v','refs');rt.setAttribute('data-av','');rt.setAttribute('aria-selected','false');rt.hidden=true;
-  rt.innerHTML='Referenciais<span class="tab-cur"></span>';ancora.parentNode.insertBefore(rt,ancora.nextSibling);
-  var hd=document.createElement('div');hd.className='pg-h dref';
-  hd.innerHTML='<div class="sub pg-seg" role="tablist" aria-label="Referenciais">'+RV.map(function(v){return '<button type="button" data-rs="'+v+'" data-n="'+RI[v][0]+'" aria-selected="false">'+RI[v][1]+'</button>';}).join('')+'</div><div class="pg-t"><p class="dkk"></p><h1></h1><p class="dsc"></p></div>';
-  function vis(){for(var i=0;i<RV.length;i++){var s=document.getElementById('v-'+RV[i]);if(s&&!s.hidden)return RV[i];}return '';}
-  function sync(){var v=vis();rt.setAttribute('aria-selected',String(!!v));rt.querySelector('.tab-cur').textContent=v?RI[v][1]:'';
-    if(!v)return;ult=v;document.body.classList.add('dsk');var s=document.getElementById('v-'+v);if(hd.parentNode!==s)s.insertBefore(hd,s.firstChild);
-    $$('[data-rs]',hd).forEach(function(b){b.setAttribute('aria-selected',String(b.getAttribute('data-rs')===v));});
-    hd.querySelector('.dkk').textContent=RI[v][2];hd.querySelector('h1').textContent=RI[v][1];hd.querySelector('.dsc').textContent=RI[v][3];}
-  function abre(v){var t=document.querySelector('.tab[data-v="'+v+'"]');if(t)t.click();setTimeout(sync,0);}
-  rt.addEventListener('click',function(e){e.preventDefault();abre(vis()||ult);});
-  hd.addEventListener('click',function(e){var b=e.target.closest('[data-rs]');if(!b)return;abre(b.getAttribute('data-rs'));window.scrollTo(0,0);});
-  document.addEventListener('click',function(e){if(e.target.closest&&e.target.closest('.tab,.tabw .dd button'))setTimeout(sync,0);});
-  window.addEventListener('hashchange',function(){setTimeout(sync,50);});
-  document.addEventListener('cmt-acesso',function(){setTimeout(sync,50);});
+  var views=['temas','rep'],hd=document.createElement('div');hd.className='pg-h rep-unified-head';
+  var tabs=[['temas','Enunciados'],['juris','Jurisprudência'],['normas','Normas'],['reg','Regimento']];
+  hd.innerHTML='<div class="pg-t"><p class="dkk">AVANÇADO · REFERÊNCIAS JURÍDICAS</p><h1>Repertório</h1><p>Enunciados, jurisprudência, normas e Regimento Interno · fontes e citações do gabinete.</p></div><div class="rep-unified-tools"><div class="rep-unified-tabs" role="tablist" aria-label="Repertório">'+tabs.map(function(x){return '<button type="button" role="tab" data-rs="'+x[0]+'" aria-selected="false">'+x[1]+'</button>';}).join('')+'</div><div class="rep-cross-search"><label for="rep-cross-q" class="sr-only">Busca transversal no repertório</label><input id="rep-cross-q" class="q" type="search" placeholder="Buscar em todas as fontes…" autocomplete="off"><button type="button" data-rep-cross-clear title="Limpar busca">×</button></div><div id="rep-cross-results" hidden aria-live="polite"></div></div>';
+  function visible(){return views.find(function(v){var x=document.getElementById('v-'+v);return x&&!x.hidden;});}
+  function sync(){var v=visible();if(!v)return;var s=document.getElementById('v-'+v);s.classList.add('rep-unificado');if(hd.parentNode!==s)s.insertBefore(hd,s.firstChild);var active=v==='temas'?'temas':(window.VDM_repTab&&({Jurisprudência:'juris',Normas:'normas',Regimento:'reg'})[window.VDM_repTab()]||'juris');hd.querySelectorAll('[data-rs]').forEach(function(b){b.setAttribute('aria-selected',String(b.dataset.rs===active));});}
+  function abre(k){if(window.VDM_repertorioAbrir)window.VDM_repertorioAbrir(k);sync();}
+  function busca(){var q=hd.querySelector('#rep-cross-q').value.trim(),out=hd.querySelector('#rep-cross-results');out.hidden=!q;out.innerHTML=q&&window.VDM_repertorioBusca?window.VDM_repertorioBusca(q):'';}
+  hd.addEventListener('click',function(e){var b=e.target.closest('[data-rs]');if(b){abre(b.dataset.rs);return;}if(e.target.closest('[data-rep-cross-clear]')){hd.querySelector('#rep-cross-q').value='';busca();return;}var r=e.target.closest('[data-rep-result]');if(r){hd.querySelector('#rep-cross-q').value='';busca();if(window.VDM_repertorioAbrir)window.VDM_repertorioAbrir(r.dataset.repGrupo,r.dataset.repResult);sync();}});
+  hd.querySelector('#rep-cross-q').addEventListener('input',function(){clearTimeout(hd._busca);hd._busca=setTimeout(busca,140);});
+  document.addEventListener('click',function(e){if(e.target.closest&&e.target.closest('.tab,.cn-b,[data-rs],.dd button,[data-rep-link]'))setTimeout(sync,0);});
+  window.addEventListener('hashchange',function(){setTimeout(sync,0);});document.addEventListener('cmt-acesso',function(){setTimeout(sync,0);});window.VDM_repSync=sync;setTimeout(sync,0);
 })();
-
 /* ===== Diretrizes: manual de redação novo (diretrizes_manual.html), com Padrões decisórios só no acesso avançado ===== */
 function dirAv(){try{return !!(window.CMT_ACESSO&&window.CMT_ACESSO().avancado);}catch(e){return false;}}
 function xManual(){if(window.VDM_RAP_TAB&&window.VDM_RAPTAB){window.VDM_RAPTAB();return;}if(window.VDM_MN_DADOS&&typeof xManualDados==='function'){xManualDados();return;}var M=$('#x-man');if(!M)return;var f=document.getElementById('dir-fr');
@@ -583,17 +573,17 @@ try{new MutationObserver(function(){var f=document.getElementById('dir-fr');if(f
 /* ===== Navegação única do Compendium, dentro da barra do cabeçalho (como as abas do Ex Officio): sem "Editorial";
    abas comuns (Ementário · Padrão: Minuta-Matriz e Modelos · Diretrizes; a Consulta saiu da navegação e só abre pelo botão do cartão no Ex Officio) e abas do acesso avançado (Enunciados · Repertório · Enciclopédia) ===== */
 (function(){var top=document.querySelector('header.top');if(!top)return;
-  var IT=[['ement','Ementário'],['dir','Breviário'],['pecas','Minutário'],['||'],['temas','Enunciados','Acesso avançado'],['rep','Repertório'],['enc','Enciclopédia']];
+  var IT=[['ement','Ementário'],['dir','Breviário'],['pecas','Minutário'],['||'],['rep','Repertório','Acesso avançado'],['enc','Enciclopédia']];
   var bar=document.createElement('nav');bar.id='cmp-nav';bar.setAttribute('aria-label','Seções do Compendium');
   var h='<div class="cn-in">';IT.forEach(function(x){if(x[0]==='|'){h+='<span class="cn-sep" aria-hidden="true"></span>';return;}if(x[0]==='||'){h+='<span class="cn-sep av" data-av hidden aria-hidden="true"></span>';return;}
     var av=['temas','rep','enc'].indexOf(x[0])>=0;h+=(x[2]?'<span class="cn-g'+(av?' av':'')+'"'+(av?' data-av hidden':'')+'>'+x[2]+'</span>':'')+'<button type="button" class="cn-b" data-cn="'+x[0]+'"'+(av?' data-av hidden':'')+' aria-current="false">'+x[1]+'</button>';});
   bar.innerHTML=h+'</div>';var sp=top.querySelector('.eqsp');if(sp)top.insertBefore(bar,sp);else top.parentNode.insertBefore(bar,top.nextSibling);document.body.classList.add(sp?'cmp-nav-dentro':'cmp-nav-fora');
   function aba(v){var t=document.querySelector('.tab[data-v="'+v+'"]');if(t)t.click();}
   function atual(){var vs=function(id){var e=document.getElementById(id);return e&&!e.hidden;};if(vs('v-ement'))return 'ement';if(vs('v-edit'))return ['par','mod','pecas'].indexOf(XS.ed||'pecas')>=0?'pecas':XS.ed;
-    var r=['temas','rep','enc'].filter(function(v){return vs('v-'+v);})[0];return r||'';}
+    var r=['temas','rep','enc'].filter(function(v){return vs('v-'+v);})[0];return r==='temas'?'rep':r||'';}
   function sync(){var a=atual();$$('.cn-b',bar).forEach(function(b){b.setAttribute('aria-current',String(b.getAttribute('data-cn')===a));});}
   bar.addEventListener('click',function(e){var b=e.target.closest('.cn-b');if(!b)return;var v=b.getAttribute('data-cn');
-    if(v==='ement')aba('ement');else if(['temas','rep','enc'].indexOf(v)>=0)aba(v);else irEditorial(v);setTimeout(sync,0);window.scrollTo(0,0);});
+    if(v==='ement')aba('ement');else if(v==='rep'&&window.VDM_repertorioAbrir)window.VDM_repertorioAbrir('temas');else if(['rep','enc'].indexOf(v)>=0)aba(v);else irEditorial(v);setTimeout(sync,0);window.scrollTo(0,0);});
   document.addEventListener('click',function(e){if(e.target.closest&&e.target.closest('.tab,#x-sub button,[data-rs]'))setTimeout(sync,0);});
   window.addEventListener('hashchange',function(){setTimeout(sync,60);});document.addEventListener('cmt-acesso',function(){setTimeout(sync,60);});
   window.VDM_cnSync=sync;setTimeout(sync,0);})();
