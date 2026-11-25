@@ -603,3 +603,17 @@ html.cmt-fx-open{overflow:hidden!important}
 #cmt-fx .fx-v2 .fx-card>h4 .fx-mini{white-space:nowrap!important}
 #cmt-fx .fx-v2 .fx-seg[role=tablist]{-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 28px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 28px),transparent)}
 }
+
+/* Ficha: cadeia de alturas limitada ao viewport, com rolagem interna real. */
+#cmt-fx .fx-dlg{min-height:0!important;max-height:calc(100dvh - 24px)!important}
+#cmt-fx .fx-work{min-height:0!important;min-width:0!important;overflow:hidden!important}
+#cmt-fx .fx-main{min-height:0!important;min-width:0!important;overflow-y:auto!important;overflow-x:hidden!important;overscroll-behavior-y:contain;scrollbar-width:thin;touch-action:pan-y}
+#cmt-fx .fx-main>*{flex-shrink:0!important}
+#cmt-fx .fx-v2 .fx2-body{min-height:0!important;min-width:0!important;grid-template-rows:minmax(0,1fr)!important;overflow:hidden!important}
+#cmt-fx .fx-v2 .fx2-main{min-height:0!important;min-width:0!important;overflow:hidden!important}
+#cmt-fx .fx-v2 .fx2-nav{flex-shrink:0!important}
+#cmt-fx .fx-v2 .fx2-side{min-height:0!important;overscroll-behavior-y:contain}
+@media(max-width:900px){
+#cmt-fx .fx-v2 .fx2-body{overflow-y:auto!important;overflow-x:hidden!important;overscroll-behavior-y:contain;touch-action:pan-y}
+#cmt-fx .fx-v2 .fx2-main,#cmt-fx .fx-v2 .fx-work,#cmt-fx .fx-v2 .fx-main{overflow:visible!important;height:auto!important;max-height:none!important;flex:none!important}
+}
