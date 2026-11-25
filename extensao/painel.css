@@ -2387,3 +2387,43 @@ html body.hero-redesign-v53 #gab .hero-summary-fields :is(input:not([type=checkb
 html body.hero-redesign-v53 #gab .hero-summary-section>.hero-tags-content{padding:4px 0 10px!important;gap:8px}
 html body.hero-redesign-v53 #gab .hero-summary-section .hero-ann-questions>.hero-ann-card{border:0;border-bottom:1px solid var(--line);border-radius:0;padding:6px 0;background:transparent;box-shadow:none}
 html body.hero-redesign-v53 #gab .hero-summary-section .hero-ann-questions>.hero-ann-card:last-child{border-bottom:0}
+
+/* HERO: padrão único de linhas e cabeçalhos em Autos e Triagem. */
+html body.hero-redesign-v53 #gab #g-lei .au-coverage-card>.au-coverage-section>summary{display:grid!important;grid-template-columns:minmax(0,1fr) auto 12px!important;align-items:center!important;gap:7px!important;padding:9px 11px!important;min-height:39px!important}
+html body.hero-redesign-v53 #gab #g-lei .au-coverage-card>.au-coverage-section>summary h4{display:block!important;margin:0!important;padding:0!important;font:650 11px/1.35 var(--sans,system-ui)!important;text-transform:none!important;letter-spacing:0!important}
+html body.hero-redesign-v53 #gab #g-lei .au-coverage-card>.au-coverage-section>summary h4::before{display:none!important;content:none!important}
+html body.hero-redesign-v53 #gab #g-lei .au-coverage-card>.au-coverage-section>summary :is(small,.gn){background:none!important;border:0!important;padding:0!important;margin:0!important;text-align:right!important;white-space:normal}
+html body.hero-redesign-v53 #gab #g-lei .au-coverage-card>.au-coverage-section>summary:after{justify-self:end}
+html body.hero-redesign-v53 #gab .au-group-card .au-review-row{display:flex!important;align-items:flex-start!important;gap:6px!important;padding:5px 9px!important;margin:0!important;min-height:29px!important;border:0!important;border-top:1px solid var(--line)!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;font-size:11px!important}
+html body.hero-redesign-v53 #gab .au-group-card .au-review-row:first-child{border-top:0!important}
+html body.hero-redesign-v53 #gab .au-review-row>input{flex:none;width:13px;height:13px;margin:3px 0 0!important}
+html body.hero-redesign-v53 #gab .au-review-row .sg-compact-main{display:grid!important;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr) auto;align-items:start;gap:5px}
+html body.hero-redesign-v53 #gab .au-review-row .sg-bd{flex:1;min-width:0}
+html body.hero-redesign-v53 #gab .au-review-row .sg-h b{font:600 11px/1.35 var(--sans,system-ui)!important}
+html body.hero-redesign-v53 #gab .au-review-row .sg-s{justify-self:end;align-self:start;font-size:9.5px!important;font-style:normal;white-space:nowrap}
+html body.hero-redesign-v53 #gab .au-review-row .sg-row-detail>summary{font-size:10px!important;padding:0!important;line-height:1.3!important}
+html body.hero-redesign-v53 #gab .au-review-row.au-target-field{background:color-mix(in srgb,var(--gold) 12%,transparent)!important}
+html body.hero-redesign-v53 #gab .au-cov-group{margin-top:7px!important}
+html body.hero-redesign-v53 #gab .au-cov-main{display:flex;align-items:baseline;justify-content:space-between;gap:6px}
+html body.hero-redesign-v53 #gab .au-cov-main b{font:600 11px/1.35 var(--sans,system-ui)}
+html body.hero-redesign-v53 #gab .au-cov-detail{border:0!important;background:transparent!important;margin:2px 0 0!important;padding:0!important}
+html body.hero-redesign-v53 #gab .au-cov-detail>summary{font-size:10px!important;color:var(--muted-fg)!important;cursor:pointer}
+html body.hero-redesign-v53 #gab .au-cov-fields>div{display:grid;gap:2px;padding:5px 0;border-top:1px solid var(--line)}
+html body.hero-redesign-v53 #gab .au-cov-fields small{font-size:10px;color:var(--muted-fg)}
+html body.hero-redesign-v53 #gab .au-cov-fields button{justify-self:start;font-size:10px}
+html body.hero-redesign-v53 #gab .au-cov-refs{display:flex;gap:5px;flex-wrap:wrap;padding:5px 0}
+html body.hero-redesign-v53 #gab .au-cov-refs>small:first-child{flex-basis:100%;color:var(--muted-fg)}
+html body.hero-redesign-v53 #gab .au-cov-id{font-size:10px;overflow-wrap:anywhere}
+html body.hero-redesign-v53 #gab .rt-c .pv-docref{padding:0!important;gap:0!important;border:1px solid var(--hero-pront-divider,var(--line))!important;border-radius:6px!important;box-shadow:none!important;background:var(--hero-pront-paper,#fff)!important;overflow:hidden}
+html body.hero-redesign-v53 #gab .rt-c .pv-dochead{padding:7px 9px!important;background:color-mix(in srgb,var(--hero-pront-paper,#fff) 84%,var(--hero-pront-header,#f0ede4));border-bottom:1px solid var(--hero-pront-divider,var(--line))}
+html body.hero-redesign-v53 #gab .rt-c .pv-dochead b{font:650 11px/1.35 var(--sans,system-ui)!important}
+html body.hero-redesign-v53 #gab .rt-c .pv-docitem{padding:5px 9px!important;gap:2px!important;border:0!important;border-top:1px solid var(--hero-pront-divider,var(--line))!important;border-radius:0!important}
+html body.hero-redesign-v53 #gab .rt-c .pv-dochead+.pv-docitem{border-top:0!important}
+html body.hero-redesign-v53 #gab .rt-c .pv-docline{font-size:11px!important;gap:5px;line-height:1.35}
+html body.hero-redesign-v53 #gab .rt-c .pv-docref>small{padding:5px 9px}
+html body.hero-redesign-v53 #gab .rt-c{background:var(--hero-pront-paper,#fff)!important;border-radius:6px!important;box-shadow:none!important}
+html body.hero-redesign-v53 #gab .rt-c>.rt-h{padding:7px 9px!important}
+html body.hero-redesign-v53 #gab .rt-c>.rt-h b{font:650 12px/1.35 var(--sans,system-ui)!important}
+html body.hero-redesign-v53 #gab .rt-c .rt-b{padding:6px 9px!important}
+html body.hero-redesign-v53 #panel-min,html body.hero-redesign-v53 #panel-min .min-wrap,html body.hero-redesign-v53 #panel-min .hero-review-workspace,html body.hero-redesign-v53 #panel-min .hero-review-divider{background:var(--hero-pront-header,#f1eee5)!important}
+html body.hero-redesign-v53 #panel-min .hero-review-document,html body.hero-redesign-v53 #panel-min .hero-conf-dock{background:var(--hero-pront-paper,#fff)!important}

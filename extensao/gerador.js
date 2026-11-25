@@ -390,14 +390,52 @@
 
   /* ---------- montagem ---------- */
   function inventarioFicha(){
-    var G=GB(),F=G.modelo&&G.modelo(),fonte=G.fo?G.fo()||{}:{},A=CONTEXTO?null:window.MutaAutos,sug=A&&A.sugestoes?A.sugestoes():[],by=new Map(),seen=new Set(),L=[];
-    sug.forEach(function(s){if(s&&s.alvo&&s.status!=='igual'&&!(A.preenchido&&A.preenchido(s.alvo))){var x=by.get(s.alvo)||[];x.push(s);by.set(s.alvo,x);}});
-    ((F&&F.abas)||[]).forEach(function(a){(a.grupos||[]).forEach(function(gr){(gr.campos||[]).forEach(function(c){
-      var id=(c.secao||'acervo')+'.'+c.chave;if(seen.has(id))return;seen.add(id);
-      var x=c.secao?v(c.secao,c.chave):fonteCampo({k:c.chave,f:c.fonte||[]},fonte);
-      var reg=Array.isArray(x)?x.length>0:!!S(x),ss=by.get(id)||[];
-      L.push({alvo:id,rotulo:c.rotulo||c.chave,aba:a.aba,grupo:gr.grupo,tipo:c.tipo,apelido:c.apelido,valor:x,registrado:reg,estado:ss.some(function(s){return s.status==='conflito';})?'Divergência':!reg&&ss.length?'Extraído · a conferir':reg?'Registrado':'Sem registro',docs:ss.map(function(s){return s.doc;}).filter(Boolean).join(', ')});
-    });});});return L;
+    var G=GB(),F=G.modelo&&G.modelo(),fonte=G.fo?G.fo()||{}:{},A=CONTEXTO?null:window.MutaAutos,sug=A&&A.sugestoes?A.sugestoes():[],by=new Map(),L=[];
+    sug.forEach(function(s){if(s&&s.alvo){var x=by.get(s.alvo)||[];x.push(s);by.set(s.alvo,x);}});
+    mapaFicha(F).forEach(function(c){
+      var id=(c.s||'acervo')+'.'+c.k,x=c.s?v(c.s,c.k):fonteCampo(c,fonte),ss=by.get(id)||[];
+      var reg=Array.isArray(x)?x.length>0:!!S(x)&&!/\[VALIDAR:/.test(S(x));
+      var pend=ss.filter(function(s){return s.status!=='igual'&&!(A.preenchido&&A.preenchido(s.alvo));});
+      var docs=Array.from(new Set(ss.flatMap(function(s){return S(s.doc).match(/\b\d{6,}\b/g)||[];})));
+      L.push({alvo:id,rotulo:c.rotulo||c.k,aba:c.aba,grupo:c.grupo,tipo:c.t,apelido:c.a,valor:x,registrado:reg,estado:pend.some(function(s){return s.status==='conflito';})?'Divergência':pend.length?'Extraído · a conferir':reg?(ss.some(function(s){return s.status==='igual';})?'Coincidente com os autos':A&&A.preenchido&&A.preenchido(id)?'Preenchido pelos autos':'Registrado'):'Sem registro',docs:docs.join(', '),pendente:pend.length>0});
+    });return L;
+  }
+  function dependenciasCobertura(a,tipo){
+    var D=[a],G=[],analise=false;
+    function add(keys,groups){D=D.concat(keys||[]);G=G.concat(groups||[]);}
+    if(a==='triagem.Assunto detalhado')add(['acervo.Assunto'],['Petição inicial','Recursos']);
+    if(/^origem\.Sentença - /.test(a))add(a==='origem.Sentença - ID'?[]:a==='origem.Sentença - Resultado'?['origem.Sentença - ID','origem.Sentença - Comandos','origem.Sentença - Decisão']:['origem.Sentença - ID','origem.Sentença - Comandos'],['Sentença']);
+    if(/^triagem\.Impugnada - /.test(a)){
+      if(tipo==='Agravo de Instrumento')add(['origem.1G - Decisão recorrida','origem.1G - Decisão ID','origem.1G - Decisão Resultado'],['Decisão recorrida','Decisões']);
+      else if(tipo==='Agravo Interno')add(['origem.2G - Monocrática recorrida','origem.2G - Monocrática ID','origem.2G - Monocrática Resultado'],['Decisão recorrida','Decisões']);
+      else add(['origem.2G - Acórdão recorrido','producao.Acórdão - ID','origem.2G - Acórdão Ementa'],['Decisão recorrida','Acórdão']);
+    }
+    if(a==='origem.Recursos'||/^triagem\.ED - /.test(a))add(['origem.Recursos'],['Recursos']);
+    if(a==='origem.Contrarrazões - Situação')add(['origem.Contrarrazões'],['Contrarrazões']);
+    if(a==='triagem.MPF')add(['triagem.ID do Parecer MPF','triagem.Parecer - Sentido','triagem.Parecer - Sentido (outro)'],['Parecer / manifestação MPF']);
+    if(a==='triagem.Tempestividade por recurso')add(['origem.Recursos','triagem.Tempest - Protocolo','triagem.Tempest - Publicação'],['Recursos']);
+    if(a==='triagem.Questões jurídicas individualizadas')add(['triagem.Alegações','origem.Recursos'],['Recursos']);
+    if(a==='producao.Aplicação ao caso concreto'){add(['triagem.Questões jurídicas individualizadas','producao.Tese jurídica adotada'],[]);analise=true;}
+    if(a==='producao.Voto - Resultado'){add(['producao.Resultado por recurso'],[]);analise=true;}
+    if(a==='producao.Fundamento da sucumbência'){add(['producao.Resultado por recurso','origem.Sentença - Honorários'],[]);analise=true;}
+    return {campos:Array.from(new Set(D)),grupos:Array.from(new Set(G)),analise:analise};
+  }
+  function cruzarCobertura(L,I,grupos,tipo){
+    var by=new Map(I.map(function(c){return [c.alvo,c];})),byGroup=new Map((grupos||[]).map(function(x){return [x.label,x.rows||[]];})),docMap=new Map();
+    (grupos||[]).forEach(function(gr){(gr.rows||[]).forEach(function(d){if(!docMap.has(S(d.id))||d.src==='cronologia')docMap.set(S(d.id),d);});});
+    return L.map(function(c){
+      var dep=dependenciasCobertura(c.alvo,tipo),fs=dep.campos.map(function(k){return by.get(k);}).filter(Boolean),direct=by.get(c.alvo),pending=fs.filter(function(f){return f.pendente;}),conflict=pending.some(function(f){return f.estado==='Divergência';});
+      var refs=Array.from(new Set(fs.flatMap(function(f){return S(f.docs).match(/\b\d{6,}\b/g)||[];})));
+      fs.forEach(function(f){if(/(?:\.ID do | - ID$| ID$)/.test(f.alvo))refs=refs.concat(S(f.valor).match(/\b\d{6,}\b/g)||[]);if(Array.isArray(f.valor))f.valor.forEach(function(r){['ids','id_recurso','id_decisao','id_intimacao','id_guia','id_comprovante','documentos'].forEach(function(k){refs=refs.concat(S(r&&r[k]).match(/\b\d{6,}\b/g)||[]);});});});
+      refs=Array.from(new Set(refs));var candidates=[],seen=new Set(refs);
+      dep.grupos.forEach(function(k){(byGroup.get(k)||[]).forEach(function(d){var id=S(d.id);if(d.src==='ficha'||seen.has(id))return;seen.add(id);candidates.push({id:id,src:d.src,grupo:k});});});
+      var ok=c.ok&&!conflict&&!pending.length;
+      return Object.assign({},c,{ok:ok,estado:conflict?'Divergência':pending.length?'Extraído · a conferir':ok?'Registrado':dep.analise?'Análise jurídica pendente':candidates.length?'Peça localizada · a conferir':direct&&direct.registrado?'Registro incompleto':'Sem registro',campos:fs,refs:refs.map(function(id){return {id:id,src:(docMap.get(id)||{}).src||'ficha'};}),candidatos:candidates});
+    });
+  }
+  function htmlRefsCobertura(L){return L.slice(0,6).map(function(d){return d.src==='cronologia'?'<button type="button" class="lnk au-cov-id" data-au="loc:'+esc(d.id)+'">ID '+esc(d.id)+' ↗</button>':'<span class="au-cov-id">ID '+esc(d.id)+(d.src==='1g'?' · 1º grau':' · ficha')+'</span>';}).join('')+(L.length>6?'<small class="muted">+'+(L.length-6)+'</small>':'');}
+  function htmlLinhaCobertura(c){
+    return '<div class="au-group-row au-cov-row"><div class="au-cov-main"><b>'+esc(c.rotulo)+'</b><span class="au-row-state">'+esc(c.estado)+'</span></div><details class="au-cov-detail"><summary>Campos e fontes</summary><div class="au-cov-fields">'+c.campos.map(function(f){return '<div><span>'+esc(f.rotulo)+'</span><small>'+esc([f.aba,f.grupo].filter(Boolean).join(' › '))+' · '+esc(f.estado)+'</small>'+(f.pendente?'<button type="button" class="lnk" data-au="campo:'+esc(f.alvo)+'">Ver em A conferir ↗</button>':'')+'</div>';}).join('')+'</div>'+(c.refs.length?'<div class="au-cov-refs"><small>Referências dos campos</small>'+htmlRefsCobertura(c.refs)+'</div>':'')+(c.candidatos.length?'<div class="au-cov-refs"><small>Peças possíveis · vínculo a confirmar</small>'+htmlRefsCobertura(c.candidatos)+'</div>':'')+'</details></div>';
   }
   function cobertura(){
     var tipo=tipoDetectado(),m=[];
@@ -431,8 +469,8 @@
   function htmlInventario(){var F=inventarioFicha(),groups=new Map();F.forEach(function(c){var k=c.aba+' · '+c.grupo;if(!groups.has(k))groups.set(k,[]);groups.get(k).push(c);});return F.length?'<details class="gr-cov-catalog"><summary>Catálogo completo da ficha · '+F.filter(function(c){return c.registrado;}).length+'/'+F.length+' registrados</summary><small class="muted">Inventário de todos os campos; nem todos são necessários ao pronunciamento. Sugestões não gravadas não compõem a minuta.</small>'+Array.from(groups).map(function(p){return '<details class="au-group-card"><summary class="au-group-head"><b>'+esc(p[0])+'</b><small>'+p[1].filter(function(c){return c.registrado;}).length+'/'+p[1].length+'</small></summary>'+p[1].map(function(c){return '<div class="au-group-row au-equal-row"><span>'+esc(c.rotulo)+'</span><small>'+esc(c.estado)+(c.docs?' · ID '+esc(c.docs):'')+'</small></div>';}).join('')+'</details>';}).join('')+'</details>':'';}
   function htmlCobertura(){
     var g=GB();if(!g.cnj||!g.cnj()||window.MutaSigilo&&window.MutaSigilo.bloqueado())return '';
-    var I=inventarioFicha(),by=new Map(I.map(function(c){return [c.alvo,c];})),L=cobertura().map(function(c){var f=by.get(c.alvo);return Object.assign(c,{estado:f&&f.estado==='Divergência'?'Divergência':c.ok?'Registrado':f&&f.estado==='Extraído · a conferir'?f.estado:'A conferir',ok:c.ok&&!(f&&f.estado==='Divergência')});}),N=L.filter(function(x){return x.ok;}).length;
-    return '<details class="gg"><summary><h4>Dados para a Minuta-Matriz</h4><span class="gn">'+N+'/'+L.length+'</span></summary><div class="gr"><div class="gf w"><small class="muted">Cobertura de campos mínimos; preenchido não significa revisão jurídica concluída.</small>'+['Identificação','Relatório','Fundamentação','Dispositivo'].map(function(e){return '<p><b>'+esc(e)+'</b></p><ul>'+L.filter(function(x){return x.etapa===e;}).map(function(x){return '<li>'+esc(x.rotulo)+' · '+esc(x.estado)+'</li>';}).join('')+'</ul>';}).join('')+htmlInventario()+'</div></div></details>';
+    var I=inventarioFicha(),A=window.MutaAutos,L=cruzarCobertura(cobertura(),I,A&&A.gruposLocalizados?A.gruposLocalizados():[],tipoDetectado()),N=L.filter(function(x){return x.ok;}).length;
+    return '<details class="gg"><summary><h4>Dados para a Minuta-Matriz</h4><span class="gn">'+N+'/'+L.length+'</span></summary><div class="gr"><div class="gf w"><small class="muted">Requisitos por pronunciamento, cruzados com os campos da ficha e as peças dos autos. Localizado não significa confirmado.</small>'+['Identificação','Relatório','Fundamentação','Dispositivo'].map(function(e){var F=L.filter(function(x){return x.etapa===e;});return '<section class="au-group-card au-cov-group"><header class="au-group-head"><div class="au-group-title"><h4>'+esc(e)+'</h4></div><small class="au-group-count">'+F.filter(function(x){return x.ok;}).length+'/'+F.length+'</small></header><div class="au-group-rows">'+F.map(htmlLinhaCobertura).join('')+'</div></section>';}).join('')+htmlInventario()+'</div></div></details>';
   }
   function docs() {
     var tipo = ST.tipo || tipoDetectado(), k = ST.res || resDaFicha(tipo);
@@ -639,5 +677,5 @@
     return res;
   }
   function comporFicha(campos, fonte, tipo, modelo){var ant=CONTEXTO,t0=TIPO;try{campos=campos||{};var f=Object.assign({},fonte||{});Object.keys(campos).filter(function(k){return k.indexOf('acervo.')===0;}).forEach(function(k){f[k.slice(7)]=campos[k];});CONTEXTO={V:function(sec,k){return campos[sec+'.'+k];},fo:function(){return f;},modelo:function(){return modelo;}};TIPO=tipo||tipoDetectado();var rel=relatorio(TIPO),em=ementa(TIPO,resDaFicha(TIPO)),R={abertura_relatorio:rel[0],razoes_recursais:/^(Apelação|Agravo de Instrumento)$/.test(TIPO)?pRecursos(TIPO).join('\n\n'):'',contrarrazoes_relatorio:pContrarrazoes(TIPO),parecer_relatorio:pMpf()||'',caso_em_exame:em.sec[0][1].map(function(x){return x.t;}).join('\n'),questao_em_discussao:em.sec[1][1].map(function(x){return x.t;}).join('\n')};if(/^(Apelação|Remessa Necessária)$/.test(TIPO)){R.resultado_decisao_recorrida=resultadoSentenca();R.comandos_dispositivos=comandosOrigem();R.frase_honorarios_origem=honorariosAbertura();}else if(TIPO==='Agravo de Instrumento'){R.resultado_decisao_recorrida=atoRecorrido(TIPO).sintese||VAL('resultado da decisão agravada');}Object.assign(R,variaveisEditorial(TIPO,rel,em));Object.assign(R,fragmentosRecursos(TIPO));var qf=questoesFicha();if(qf.length){R.tese_juridica_adotada=qf.map(function(q){return questaoConfirmada(q)&&S(q.tese_adotada)||VAL('tese: '+textoQuestao(q));}).join('\n\n');R.aplicacao_ao_caso_concreto=qf.map(fundamentosQuestao).join('\n\n');R.dispositivos_legais_aplicaveis=refsQuestoes('dispositivos_legais');R.precedentes_aplicaveis=refsQuestoes('precedentes');}if(R.honorarios_ementa)em.sec[3][1][0].t=R.honorarios_ementa;Object.assign(R,fragmentosEditorialDiretos(TIPO,R));var dados=aliasesFicha(modelo);return {tipo:TIPO,rel:rel,em:em,variaveis:Object.assign({},dados,R),dados:dados};}finally{CONTEXTO=ant;TIPO=t0;}}
-  window.MutaGerador = { comporFicha: comporFicha, cobertura: cobertura, inventarioFicha: inventarioFicha, aliasesFicha: aliasesFicha, htmlCobertura: htmlCobertura, pintar: pintar, abrir: abrir, modo: modo, html: html, acao: acao, docs: docs, _ST: ST, _t: { resultado: resultado, fraseHonorarios: fraseHonorarios, designa: designa, feminino: feminino } };
+  window.MutaGerador = { comporFicha: comporFicha, cobertura: cobertura, inventarioFicha: inventarioFicha, cruzarCobertura: cruzarCobertura, aliasesFicha: aliasesFicha, htmlCobertura: htmlCobertura, pintar: pintar, abrir: abrir, modo: modo, html: html, acao: acao, docs: docs, _ST: ST, _t: { resultado: resultado, fraseHonorarios: fraseHonorarios, designa: designa, feminino: feminino } };
 })();
