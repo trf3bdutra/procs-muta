@@ -325,7 +325,7 @@ async function espelho(arqPauta, cnj, campos, cartao, msg) {
 }
 module.exports = async (req, res, u) => {
   try {
-    const F = await ficha();
+    const F = await ficha(), perfil = await L.acessos(u).catch(() => ({desembargador:false}));
     if (req.method === 'GET') {
       const cnj = String(req.query.ficha || '');
       if (dg(cnj).length !== 20) return res.status(200).json({ ficha: F });
@@ -352,7 +352,7 @@ module.exports = async (req, res, u) => {
       L.equipe().forEach(nome=>{if(!conhecidos.has(normal(nome))&&!/^(cm|dr\.? muta|carlos muta|des\.? carlos muta)$/i.test(nome)){equipe.push({nome,aliases:[],apelido:''});conhecidos.add(normal(nome));}});
       let devolutivas=[], devolutivasErro=false;
       try { const pen=await L.lerJson('apoio/equipe-pendencias.json'); devolutivas=(pen.dados.registros||[]).filter(t=>dg(t.numero)===dg(cnj)&&/^devolutiva\b/i.test(String(t.title||''))).map(t=>({id:t.id,autor:t.creator,destinatario:t.assignee,data:t.criadoEm,atualizado:t.atualizadoEm,situacao:t.stage,texto:t.description,sessao:t.sessao,resposta:t.resposta||''})); } catch(e) { devolutivasErro=e.status!==404; }
-      return res.status(200).json({ ficha: F, operacional: op, fonte, sinais, equipe, devolutivas, devolutivasErro, gestor: L.gestor(u), controles: ativos(op, { metas: bMeta, sobrestados: bSobr, sensiveis: bSens }) });
+      return res.status(200).json({ ficha: F, operacional: op, fonte, sinais, equipe, devolutivas, devolutivasErro, desembargador: !!perfil.desembargador, gestor: L.gestor(u), controles: ativos(op, { metas: bMeta, sobrestados: bSobr, sensiveis: bSens }) });
     }
     if (req.method !== 'POST') return res.status(405).json({ erro: 'método não aceito' });
     /* 0.38: inteiro teor dos documentos marcados na extensão (Autos › Peças e documentos › Gravar) */
@@ -400,8 +400,29 @@ module.exports = async (req, res, u) => {
     });
     if (!Object.keys(mud).length) return res.status(400).json({ erro: 'nenhum campo editável', recusados: recus });
     /* volta: o que tem correspondência no cartão é gravado também na pauta das sessões onde o processo está, no mesmo commit */
+    /* Solicitações manuais: operação incremental, decisão exclusiva do perfil desembargador.
+       Revalida a cada tentativa de commit, sem permitir que uma edição da equipe apague decisão existente. */
+    let solicitPatch=null;
+    if(mud.origem&&Object.prototype.hasOwnProperty.call(mud.origem,'Solicitações manuais')){
+      try{solicitPatch=JSON.parse(mud.origem['Solicitações manuais']);if(!Array.isArray(solicitPatch))throw Error();}catch(e){return res.status(400).json({erro:'Solicitações manuais inválidas.'});}
+      delete mud.origem['Solicitações manuais'];
+    }
     const cart = [];
-    const { r, out } = await gravar(cnj, mud, 'Ficha (' + u + '): ' + cnj, null, u, async () => {
+    const { r, out } = await gravar(cnj, mud, 'Ficha (' + u + '): ' + cnj, solicitPatch===null?null:(reg,alterados)=>{
+      let antigos=[];try{antigos=JSON.parse((reg.origem||{})['Solicitações manuais']||'[]');if(!Array.isArray(antigos))antigos=[];}catch(e){}
+      const por=new Map(antigos.filter(x=>x&&x.id).map(x=>[String(x.id),x]));
+      const tipos=['Sustentação presencial','Sustentação por videoconferência','Preferência','Despacho','Retirada de pauta','Adiamento','Outra solicitação'];
+      for(const x of solicitPatch){
+        if(!x||!x.id||!tipos.includes(x.tipo))continue;
+        const id=String(x.id).slice(0,80),ant=por.get(id),interno=x.tipo==='Retirada de pauta'||x.tipo==='Adiamento';
+        if(!ant){const justificativa=String(x.justificativa||x.descricao||'').trim().slice(0,4000);if(interno&&!justificativa)continue;
+          por.set(id,{id,tipo:x.tipo,solicitante:String(interno?u:x.solicitante||'').slice(0,160),descricao:justificativa,justificativa:interno?justificativa:'',data:L.dataOk(x.data)?x.data:agora().slice(0,10),autor:u,estado:'Pendente',criadoEm:agora(),sessaoPretendida:interno&&x.tipo==='Adiamento'?String(x.sessaoPretendida||'').slice(0,30):''});continue;}
+        if(perfil.desembargador&&['Deferida','Indeferida'].includes(x.estado)&&!['Deferida','Indeferida'].includes(ant.estado)){
+          por.set(id,Object.assign({},ant,{estado:x.estado,decididoPor:u,decididoEm:agora()}));
+        }
+      }
+      const v=JSON.stringify(Array.from(por.values()));if(v!==JSON.stringify(antigos)){reg.origem=reg.origem||{};reg.origem['Solicitações manuais']=v;alterados.push('origem.Solicitações manuais');}
+    }, u, async () => {
       const arqs = []; cart.length = 0;
       for (const a of await ondeEsta(cnj)) {
         let mudou = false; a.its.forEach(it => { if (aplicaCartao(it, paraCartao(mud, it), u)) mudou = true; });
