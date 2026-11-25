@@ -82,7 +82,8 @@
   function sino() {
     var b = $('tu-sino'); if (!b) return;
     var nApp = appPend().length, n = vermelhos() + nApp, t = A.itens.length;
-    b.querySelector('b').textContent = n ? String(n) : '';
+    var count=b.querySelector('b');if(count)count.textContent=n?String(n):'';
+    b.setAttribute('aria-expanded',String(!!aberto()));
     b.classList.toggle('al', !!vermelhos()); b.classList.toggle('ap', !vermelhos() && !!nApp);
     b.title = n ? n + ' processo' + (n > 1 ? 's' : '') + ' com alerta' + (n > 1 ? 's' : '') + ' na lista do PJe' : t ? t + ' processo' + (t > 1 ? 's' : '') + ' com aviso' : 'Alertas, prazos e etiquetas do gabinete';
   }
@@ -90,7 +91,7 @@
   function aberto() { var p = $('tu-pop'); return p && !p.hidden; }
   function abrir(s) {
     var p = $('tu-pop'); if (!p) return;
-    p.hidden = !s; $('tu-sino').setAttribute('aria-expanded', s ? 'true' : 'false');
+    p.hidden = !s; var b=$('tu-sino');if(b)b.setAttribute('aria-expanded', s ? 'true' : 'false');
     if (s) { try { chrome.runtime.sendMessage({ tipo: 'muta-app-ler' }).catch(function () {}); } catch (e) {} Promise.all([lerAlertas(), lerCfg(), lerCatalogo(), lerCmt()]).then(pintar); pintar(); }
   }
   function quando(iso) { if (!iso) return ''; var d = new Date(iso); return isNaN(d) ? '' : d.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' }) + ' ' + d.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }); }
@@ -98,15 +99,17 @@
 
   function pintar() {
     var p = $('tu-pop'); if (!p) return;
-    var gst = A.gestor0 || (ses && ses.estado().gestor);
+    var q=ses&&ses.estado?ses.estado():{},on=q.estado==='on',gst=on&&q.gestor;
     var cm = A.cmt && !A.cmt.fora && !A.cmt.erro, nCm = cm ? (A.cmt.assinatura || []).length + (A.cmt.duvidas || []).length : 0;
     /* 0.49: o quadro do Desembargador (para assinar e dúvidas) saiu do sino para a aba Deliberações */
     var abas = [['al', 'PJe'], ['app', 'Gabinete']].concat(gst ? [['ch', 'Chegadas']] : []).concat([['ver', 'Versão']]);   /* 0.48: Prazos e Etiquetas saíram do sino para a aba Controle (só o gestor) */
     if (A.aba === 'cm') A.aba = 'al';
     if (A.aba === 'ch' && !gst) A.aba = 'al';
     if (A.aba === 'pz' || A.aba === 'et') A.aba = 'al';
-    var h = '<div class="ap-t" role="tablist">' + abas.map(function (a) { return '<button type="button" role="tab" class="ap-tab-' + a[0] + '" data-ap="' + a[0] + '" aria-selected="' + (A.aba === a[0]) + '">' + a[1] + (a[0] === 'al' && A.itens.length ? ' <i>' + A.itens.length + '</i>' : a[0] === 'app' && appPend().length ? ' <i>' + appPend().length + '</i>' : a[0] === 'ch' && A.cheg.length ? ' <i>' + A.cheg.length + '</i>' : a[0] === 'cm' && nCm ? ' <i>' + nCm + '</i>' : '') + '</button>'; }).join('') +
-      '<button type="button" class="ap-x" data-ap-x title="Fechar" aria-label="Fechar">×</button></div>';
+    var site=(window.Muta&&window.Muta.SITE)||'https://www.gabinete-cmt.com';
+    var h='<header class="tu-profile-panel-head"><div class="tu-profile-panel-id"><b>'+esc(on?q.usuario:'HERO18810')+'</b><small>Notificações'+(gst?' · Gestão':'')+'</small></div><div class="tu-profile-panel-actions">'+(on?'<a href="'+esc(site)+'/exofficio/" target="_blank" rel="noopener noreferrer" title="Abrir Office">'+SVG('<path d="M14 4h6v6M20 4 10 14M19 14v5H5V5h5"/>',13)+'<span>Office</span></a><button type="button" data-ap-sair title="Sair da conta">'+SVG('<path d="M15 4h4v16h-4M10 17l-5-5 5-5M5 12h11"/>',13)+'<span>Sair</span></button>':'')+'<button type="button" class="ap-x" data-ap-x title="Fechar" aria-label="Fechar">×</button></div></header>';
+    h += '<div class="ap-t" role="tablist">' + abas.map(function (a) { return '<button type="button" role="tab" class="ap-tab-' + a[0] + '" data-ap="' + a[0] + '" aria-selected="' + (A.aba === a[0]) + '">' + a[1] + (a[0] === 'al' && A.itens.length ? ' <i>' + A.itens.length + '</i>' : a[0] === 'app' && appPend().length ? ' <i>' + appPend().length + '</i>' : a[0] === 'ch' && A.cheg.length ? ' <i>' + A.cheg.length + '</i>' : a[0] === 'cm' && nCm ? ' <i>' + nCm + '</i>' : '') + '</button>'; }).join('') +
+      '</div>';
     h += '<div class="ap-c">' + (A.aba === 'cm' ? '<div id="ap-cmt">' + (window.MutaCmt ? window.MutaCmt.html(A.cmt) : '') + '</div>' : A.aba === 'al' ? pAlertas() : A.aba === 'app' ? pApp() : A.aba === 'ch' ? pChegadas() : pVersao()) + '</div>';
     p.innerHTML = h;
     var bx = $('ap-cmt');
@@ -224,20 +227,17 @@
 
   /* ---------- eventos ---------- */
   function montar() {
-    var t0 = $('topo-u'); if (!t0 || $('tu-sino')) return;
-    var b = document.createElement('button'); b.type = 'button'; b.id = 'tu-sino'; b.className = 'tu-b tu-sino'; b.setAttribute('aria-haspopup', 'dialog'); b.setAttribute('aria-expanded', 'false');
-    b.innerHTML = SVG(SINO, 14) + '<b></b>';
-    var st = $('tu-st'); t0.insertBefore(b, st || null);
-    var p = document.createElement('div'); p.id = 'tu-pop'; p.className = 'tu-pop'; p.hidden = true; p.setAttribute('role', 'dialog'); p.setAttribute('aria-label', 'Alertas, prazos e etiquetas'); t0.appendChild(p);
-    b.addEventListener('click', function (e) { e.stopPropagation(); abrir(!aberto()); });
-    document.addEventListener('click', function (e) { if (aberto() && !p.contains(e.target) && e.target !== b) abrir(false); });
-    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && aberto()) abrir(false); });
+    var t0=$('topo-u');if(!t0||$('tu-pop'))return;
+    var p=document.createElement('div');p.id='tu-pop';p.className='tu-pop tu-profile-pop';p.hidden=true;p.setAttribute('role','dialog');p.setAttribute('aria-label','Perfil e notificações');t0.appendChild(p);
+    t0.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('#tu-sino');if(!b)return;e.stopPropagation();abrir(!aberto());});
+    document.addEventListener('click',function(e){var b=$('tu-sino');if(aberto()&&!p.contains(e.target)&&!(b&&b.contains(e.target)))abrir(false);});
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'&&aberto()){abrir(false);var b=$('tu-sino');if(b)b.focus();}});
     var ctl = $('ctl-app');
     p.addEventListener('click', clique); p.addEventListener('change', mudou);
     if (ctl) { ctl.addEventListener('click', clique); ctl.addEventListener('change', mudou); }
     if (temChrome && chrome.storage.onChanged) chrome.storage.onChanged.addListener(function (ch, area) { if ((area === 'session' && (ch['muta-alertas'] || ch['muta-app'])) || (area === 'local' && ch['muta-chegadas'])) lerAlertas(); });
     lerAlertas(); lerCfg(); iniciarVersao();
-    if (ses && ses.ouvir) ses.ouvir(function () { A.cat = null; A.res = {}; var c0 = $('ctl-app'); if (c0 && c0.offsetParent) controle(); });
+    if (ses && ses.ouvir) ses.ouvir(function () { abrir(false); A.cat = null; A.res = {}; sino(); var c0 = $('ctl-app'); if (c0 && c0.offsetParent) controle(); });
   }
   /* cliques do sino e da aba Controle (o mesmo conjunto de botões) */
   function clique(e) {
@@ -246,6 +246,7 @@
       if (x.dataset.ap) { colher(); A.aba = x.dataset.ap; pintar(); return; }
       if (x.dataset.ctl) { colher(); colherCat(); A.ctl = x.dataset.ctl; pintarCtl(); return; }
       if (x.hasAttribute('data-ap-x')) { abrir(false); return; }
+      if(x.hasAttribute('data-ap-sair')){abrir(false);var u=ses&&ses.estado?ses.estado():null;if(u&&u.estado==='on'){var gb=window.MutaGabinete;Promise.resolve().then(function(){return gb&&gb.gravarPendente?gb.gravarPendente():null;}).catch(function(){}).then(function(){return ses.sair();});}return;}
       if (x.dataset.apCnj) { try { navigator.clipboard.writeText(x.dataset.apCnj).then(function () { var o = x.textContent; x.textContent = 'Copiado'; setTimeout(function () { x.textContent = o; }, 1000); }); } catch (er) {} return; }
       if (x.hasAttribute('data-ap-ed')) { A.ed = JSON.parse(JSON.stringify(A.cat.etiquetas || [])); tudo(); return; }
       if (x.hasAttribute('data-ap-cancelar')) { A.ed = null; A.edCat = null; tudo(); return; }
@@ -308,7 +309,7 @@
     var t0 = $('topo-u'), b = $('tu-nova'); if (!t0) return;
     var nova = VER.site && VER.local && cmpV(VER.site, VER.local) > 0;
     if (!nova) { if (b) b.remove(); return; }
-    if (!b) { b = document.createElement('button'); b.type = 'button'; b.id = 'tu-nova'; b.className = 'tu-nova'; t0.insertBefore(b, $('tu-sino') || $('tu-st') || null);
+    if (!b) { b = document.createElement('button'); b.type = 'button'; b.id = 'tu-nova'; b.className = 'tu-nova'; t0.insertBefore(b, $('tu-st') || null);
       b.addEventListener('click', function (e) { e.stopPropagation(); A.aba = 'ver'; abrir(true); }); }
     b.textContent = '↑ ' + VER.site; b.title = 'Versão nova do HERO18810 (' + VER.site + '; esta é ' + VER.local + '). Dê dois cliques em atualizar-muta.cmd, na pasta da extensão: o painel se recarrega sozinho.';
   }
@@ -322,6 +323,6 @@
     olharSite(); setInterval(olharSite, 30 * 60e3);
   }
 
-  window.MutaAlertas = { controle: controle, resumoJa: resumoJa, esquecer: esquecer, htmlRoteiro: htmlRoteiro, catalogo: lerCatalogo, montar: montar, _A: A };
+  window.MutaAlertas = { controle: controle, resumoJa: resumoJa, esquecer: esquecer, htmlRoteiro: htmlRoteiro, catalogo: lerCatalogo, montar: montar, sincronizarPerfil: sino, _A: A };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', montar); else montar();
 })();

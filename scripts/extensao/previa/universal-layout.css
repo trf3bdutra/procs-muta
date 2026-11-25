@@ -202,3 +202,6 @@ html[data-tema=escuro] .pv-universal-body{--pv-bg:#25282d;--pv-line:#444a52;--pv
 .pv-universal-body .topo-u .tu-profile-trigger{flex:0 1 auto;gap:4px}
 .pv-universal-body .topo-u .tu-profile-menu{font-size:11px}
 .pv-universal-body .topo-u [data-tema-tu]{display:grid!important}
+
+.pv-universal-body .topo-u .tu-profile-notif{flex:1 1 auto;min-width:0;overflow:visible;max-width:100%}
+.pv-universal-body .tu-profile-notif .tu-profile-name{overflow:hidden;text-overflow:ellipsis}
