@@ -112,3 +112,14 @@ test('prévia: Autos primeiro e identificação editável única, separada do re
  assert.match(s,/pv-top-summary/);
  new Function(s);
 });
+
+test('tipo de ato e destino na faixa superior; etiquetas apenas na autuação',()=>{
+ const s=fs.readFileSync(path.join(ROOT,'scripts/extensao/previa/universal-layout.js'),'utf8');
+ assert.match(s,/pv-ato-destino/);
+ assert.match(s,/cnj\.after\(faixa\)/);
+ assert.match(s,/function etiquetasAutuacao\(ctx\)/);
+ assert.match(s,/etiquetas:''/);
+ assert.match(s,/m\.t='Mídias e seleção prévia'/);
+ assert.doesNotMatch(s,/sec\.append\(ato\)/);
+ new Function(s);
+});
