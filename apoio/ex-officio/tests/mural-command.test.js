@@ -43,3 +43,7 @@ test('Mural Command: sessões independem de seleção e mês; convocações púb
 test('Agenda Mural: sessões e marcos integrados, sem meta duplicada e com afazeres no mesmo bloco',()=>{
  assert.match(script,/function sessoesNaAgenda\(cal\)/);assert.match(script,/stats=p&&p\.querySelector\('\.sc-p'\)/);assert.match(script,/fx-sess-source" hidden/);assert.match(script,/td=es&&es\.querySelector\('\.cc-td'\)/);assert.match(script,/Meus prazos e afazeres/);assert.match(html,/ME\.hoje='';/);const cal=fs.readFileSync(path.resolve(__dirname,'../../../caput/motor/assets/js/11-calendario.js'),'utf8');assert.match(cal,/data-a="lado-ses"/);assert.match(cal,/ex\.sessoesLateral/);assert.doesNotThrow(()=>new vm.Script(cal));
 });
+
+test('Mural: painéis superiores independentes e designações à esquerda da agenda vertical',()=>{
+ assert.match(script,/class="fx-mk fx-strip-panel"/);assert.match(script,/class="fx-kpanel fx-strip-panel"/);assert.match(script,/class="fx-alert fx-strip-panel"/);assert.match(script,/class="fx-av fx-strip-panel"/);assert.match(script,/fx\.querySelector\('\.fx-work-left'\)\.appendChild\(fx\.querySelector\('\.fx-mid'\)\)/);assert.match(script,/b\.style\.removeProperty\('grid-column'\)/);assert.match(script,/cc-vertical:has\(\.cc-session-host\)>\.cc-dir/);assert.match(script,/\.fx-command-work \.fx-kp #kpis\{display:grid!important/);
+});
