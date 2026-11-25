@@ -1057,7 +1057,7 @@ function ensureHost() {
 function abrir(cnj, ad) {
   ensureHost();
   ST.ad = ad || ST.ad || {}; ST.cnj = cnjFmt(cnj); ST.d = null; ST.err = ''; ST.edit = !!(ST.ad.editarAoAbrir && !ST.ad.leitura); ST.draft = {}; ST.busy = false; ST.view = 'ficha'; ST.mostra = {}; ST.histAll = false; ST.obsEd = false; ST.obsTx = ''; descartarTeor();
-  ST.tab = tabNorm((ad && ad.aba) || 'resumo'); ST.vz = {};
+  ST.tab = tabNorm((ad && ad.aba) || 'resumo'); ST.vz = {}; ST.documental=null;
   host.classList.add('on'); host.setAttribute('aria-hidden', 'false'); doc.documentElement.classList.add('cmt-fx-open');
   doc.addEventListener('keydown', onKey, true);
   render();
@@ -1071,7 +1071,7 @@ function abrir(cnj, ad) {
 function fechar(force) {
   if (!host) return;
   if (!force && Object.keys(ST.draft).length && !window.confirm('Descartar as alterações não salvas da ficha?')) return;
-  descartarTeor(); host.classList.remove('on', 'is-drop'); host.setAttribute('aria-hidden', 'true'); host.innerHTML = '';
+  descartarTeor(); ST.documental=null; host.classList.remove('on', 'is-drop'); host.setAttribute('aria-hidden', 'true'); host.innerHTML = '';
   doc.documentElement.classList.remove('cmt-fx-open'); doc.removeEventListener('keydown', onKey, true); ST.edit = false; ST.draft = {};
 }
 function passo(n) {
@@ -1347,7 +1347,7 @@ function abaGruposCorpo(A) {
       var ac = ST.ad.leitura ? '' : '<button type="button" class="fx-pill" data-fx="cog-tri-status" data-status="' + (triado ? 'A triar' : 'Triado') + '"' + (ST.busy ? ' disabled' : '') + '>' + (triado ? 'Reabrir triagem' : 'Concluir triagem') + '</button>';
       h += card('Status da análise', '<p><b>' + (triado ? 'Triado' : 'A triar') + '</b> · independente do destino e das pendências.</p>', {acoes:ac});
     }
-    h += cardDestino() + cardTempest();
+    h += cardDestino() + cardTempest() + cardDocumental();
   }
   var gs = (A.grupos || []).filter(function (g) { return !(A.aba === 'Triagem' && !ST.edit && g.grupo === 'Conclusão da análise') && (!g.destino || g.destino === dn) && grupoVisivel(g) && !(ST.v2 && !ST.edit && FX2_SO_LADO.indexOf(g.grupo) >= 0); }), vazios = [];
   if (A.aba === 'Processo') gs = gs.map(function (g, i) { var k = PRI_PROC.indexOf(g.grupo); return [k < 0 ? 99 + i : k, g]; }).sort(function (a, b) { return a[0] - b[0]; }).map(function (x) { return x[1]; });
@@ -1355,7 +1355,7 @@ function abaGruposCorpo(A) {
     var cheios = (g.campos || []).filter(temValor), tudo = ST.edit || ST.vzTodos || ST.vz[g.grupo], nv = (g.campos || []).length - cheios.length;
     if (!tudo && !cheios.length) { vazios.push(g.grupo); return ''; }
     var ac = !ST.edit && !ST.vzTodos && nv ? '<button type="button" class="fx-pill fx-mini" data-fx-vz="' + E(g.grupo) + '">' + (ST.vz[g.grupo] ? 'esconder vazios' : '+ ' + nv + (nv > 1 ? ' campos vazios' : ' campo vazio')) + '</button>' : '';
-    return card(g.grupo, grade(tudo ? g.campos : cheios), { n: ('0' + (++n)).slice(-2), nota: g.destino ? (g.destino === 'sessao' ? 'acórdão' : 'monocrática') : '', acoes: ac });
+    return card(g.grupo === 'Registro da triagem (lote)' ? 'Registros históricos da triagem por lote' : g.grupo, grade(tudo ? g.campos : cheios), { n: ('0' + (++n)).slice(-2), nota: g.destino ? (g.destino === 'sessao' ? 'acórdão' : 'monocrática') : '', acoes: ac });
   }).join('');
   if (!ST.edit && vazios.length) h += card('Sem registro', '<div class="fx-acts">' + vazios.map(function (g) { return '<button type="button" class="fx-pill fx-mini" data-fx-vz="' + E(g) + '">' + E(g) + '</button>'; }).join('') + '</div><p class="fx-note">Grupos sem nenhum campo preenchido. Clique num deles para abrir; em Editar, todos os campos aparecem.</p>', { cls: 'fx-vazios', acoes: '<button type="button" class="fx-pill fx-mini" data-fx-vz="*">Mostrar todos os campos</button>' });
   else if (!ST.edit && ST.vzTodos) h += '<p class="fx-note fx-vz-off"><button type="button" class="fx-pill fx-mini" data-fx-vz="*">Esconder campos vazios</button></p>';
@@ -1522,6 +1522,31 @@ function descartarTeor() { if (ST.teor && ST.teor.parsed && ST.teor.parsed.docs)
 function fecharTeor() { descartarTeor(); render(); }
 /* inteiro teor extraído do PJe (acervo/autos/<CNJ>.json.gz, gravado pela extração dos autos): baixa como .json pela ponte da Ex Officio (sessão de nome e senha) */
 function cnjFmt(v) { var d = dg(v); return d.length === 20 ? d.slice(0, 7) + '-' + d.slice(7, 9) + '.' + d.slice(9, 13) + '.' + d.slice(13, 14) + '.' + d.slice(14, 16) + '.' + d.slice(16) : S(v); }
+/* Vista documental nativa: usa a ficha e o mesmo inteiro teor gravado pela HERO, sem copiar o texto para o operacional. */
+function docArray(v){if(Array.isArray(v))return v;try{var j=JSON.parse(v||'[]');return Array.isArray(j)?j:[];}catch(e){return [];}}
+function cardDocumental(){
+ var M=new Map(),a=ST.documental;
+ function add(id,fields){id=S(id).trim();if(!/^\d+$/.test(id))return;var r=M.get(id)||{id:id};Object.keys(fields).forEach(function(k){if(fields[k]!==''&&fields[k]!=null)r[k]=fields[k];});M.set(id,r);}
+ linhas('origem','Autos - Documentos').forEach(function(r){add(r.id,{tipo:r.documento,data:r.data,formato:r.formato});});
+ linhas('origem','Outras peças').forEach(function(r){S(r.ids).split(/[,;\s]+/).forEach(function(id){add(id,{tipo:r.tipo,data:r.data,nota:r.texto});});});
+ linhas('triagem','Registro - Peças').forEach(function(r){add(r.id,{tipo:r.peca,data:r.data,notaLote:r.nota,trechoLote:r.trecho});});
+ linhas('origem','Classificação documental').forEach(function(r){add(r.id,{tipo:r.tipo,data:r.data,classes:r.classes,sintese:r.sintese,fato:r.fato,questoes:r.questoes,trecho:r.trecho,paginas:r.paginas,destinacao:r.destinacao,citar:r.citar,confirmada:r.confirmada});});
+ if(a&&a.data){docArray(a.data.lista).forEach(function(r){add(r[0],{tipo:r[1],descricao:r[2],data:r[4]});});docArray(a.data.docs).forEach(function(r){add(r.id,{tipo:r.tipo,descricao:r.descricao,data:r.juntado_em,formato:r.formato,detalhe:r.detalhamento});});Object.keys(a.textos||{}).forEach(function(id){add(id,{inteiro:a.textos[id]});});}
+ var ac='<button type="button" class="fx-pill" data-fx="doc-autos-load"'+(a&&a.loading?' disabled':'')+'>'+(a&&a.loading?'Carregando…':a&&a.data?'Atualizar documentos':'Consultar inteiro teor')+'</button>';
+ var h='<p class="fx-note">Documentos e classificações registrados na HERO e na ficha, reunidos pelo ID. O conteúdo integral permanece no acervo de autos.</p>';
+ if(a&&a.erro)h+='<p class="fx-alert-p">'+E(a.erro)+'</p>';
+ if(!M.size)h+='<p class="fx-dim">Ainda não há documentos registrados nesta visão. Consulte o inteiro teor gravado, quando disponível.</p>';
+ var L=Array.from(M.values());h+='<div class="fx-doc-native">'+L.map(function(r){var p=function(k,v){return S(v).trim()?'<p style="white-space:pre-wrap;overflow-wrap:anywhere"><b>'+E(k)+':</b> '+E(v)+'</p>':'';};
+ return '<details style="border-top:1px solid #dce4df;padding:9px 0"><summary style="cursor:pointer"><b>'+E(r.tipo||'Documento')+'</b> · ID '+E(r.id)+(r.data?' · '+E(r.data):'')+(r.classes?' · '+E(r.classes):'')+(r.inteiro?' · texto disponível':'')+'</summary><div style="padding:8px 12px">'+p('Descrição',r.descricao)+p('Classificação',r.classes)+p('Síntese',r.sintese)+p('Fato / requisito comprovado',r.fato)+p('Questões vinculadas',r.questoes)+p('Trecho relevante',r.trecho)+p('Páginas',r.paginas)+p('Destinação',r.destinacao)+p('Mencionar ID',r.citar)+p('Confirmada',r.confirmada)+p('Nota na ficha',r.nota)+p('Detalhamento da HERO',r.detalhe)+p('Nota histórica do lote',r.notaLote)+p('Trecho histórico do lote',r.trechoLote)+(r.inteiro?'<details><summary>Inteiro teor da peça</summary><pre style="white-space:pre-wrap;overflow-wrap:anywhere;max-height:340px;overflow:auto;font:inherit">'+E(r.inteiro)+'</pre></details>':'')+'</div></details>';}).join('')+'</div>';
+ return card('Teor dos autos',h,{nota:L.length+' documentos identificados',acoes:ac});
+}
+function carregarAutosFicha(){
+ var c=cnjFmt(ST.cnj),alvo=ST.cnj,ad=ST.ad;if(dg(c).length!==20||!window.DecompressionStream)return avisar('Navegador ou número de processo incompatível.','warn');
+ var st=ST.documental={loading:true};render();
+ var abre=function(buf){var b=new Uint8Array(buf);return b.length>2&&b[0]===31&&b[1]===139?new Response(new Blob([buf]).stream().pipeThrough(new DecompressionStream('gzip'))).arrayBuffer().then(abre):buf;};
+ fetch('/api/acesso?gh=1&p='+encodeURIComponent('contents/acervo/autos/'+c+'.json.gz?ref=main'),{headers:{'X-Ponte-Accept':'application/vnd.github.raw+json'},cache:'no-store',credentials:'same-origin'}).then(function(r){if(!r.ok)throw Error(r.status===404?'Ainda não existe inteiro teor gravado para este processo.':r.status===401||r.status===403?'Sem autorização para consultar o inteiro teor.':'HTTP '+r.status);return r.arrayBuffer();}).then(abre).then(function(buf){if(ST.cnj!==alvo||ST.ad!==ad||ST.documental!==st)return;var j=JSON.parse(new TextDecoder('utf-8').decode(buf)),T=Object.create(null),cur='',arr=[];function fechar(){if(cur)T[cur]=arr.slice(1).join('\n').trim();}
+ String(j.texto||'').split('\n').forEach(function(l){var m=/^===== ID (\d+) \|/.exec(l);if(m||/^===== MOVIMENTA/.test(l)){fechar();cur=m?m[1]:'';arr=[l];}else if(cur)arr.push(l);});fechar();st.data=j;st.textos=T;st.loading=false;render();}).catch(function(e){if(ST.documental!==st)return;st.loading=false;st.erro=e.message;render();});
+}
 function baixarTeorJson() {
   var c = cnjFmt(ST.cnj); if (dg(c).length !== 20) return avisar('Número do processo inválido para baixar o inteiro teor.', 'err');
   if (!window.DecompressionStream) return avisar('Este navegador não abre o arquivo compactado; use o Chrome atualizado.', 'err');
@@ -1649,6 +1674,7 @@ function onClick(ev) {
     gravar({ 'origem.Observações': ov }, 'Observações gravadas.').then(function (ok) { if (ok) { ST.obsEd = false; ST.obsTx = ''; render(); } }).catch(function () {}); return; }
   if (a === 'teor') { if (ST.teor) fecharTeor(); else { ST.teor = { step: 0 }; render(); } return; }
   if (a === 'teor-fechar') return fecharTeor();
+  if (a === 'doc-autos-load') return carregarAutosFicha();
   if (a === 'teor-json') return baixarTeorJson();
   if (a === 'teor-voltar') { ST.teor.step = 1; render(); return; }
   if (a === 'teor-extrair') { try { ST.teor.items = itensTeor(ST.teor.parsed); ST.teor.step = 2; } catch (e) { console.error('[ficha] inteiro teor · sugestões', e); avisar('Não foi possível extrair os campos: ' + ((e && e.message) || e), 'err'); } render(); return; }
