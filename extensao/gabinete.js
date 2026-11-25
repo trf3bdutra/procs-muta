@@ -113,6 +113,7 @@ function dicaCampo(c) {
 function rotuloDe(c) { var E = window.MutaEtiquetas; return (/Honorários/.test(c.chave || '') && !/Recursais|Majora/i.test(c.chave || '') && E && E.svg ? '<i class="gl-ic" title="Quem paga, quanto e sobre o quê">' + E.svg('triste', 12) + '</i>' : '') + esc(c.rotulo); }
 /* 0.38: o campo que a leitura dos autos preencheu sozinha leva a marca "autos" até ser conferido ou mudado */
 function campo(c) {
+  if(c.chave==='Origem - Peças vinculadas 1G'&&window.MutaReferencia)return window.MutaReferencia.html();
   var h = campo0(c), AU = window.MutaAutos;
   if (c.secao && AU && AU.preenchido && AU.preenchido(c.secao + '.' + c.chave)) h = h.replace(/^<div class="gf/, '<div class="gf au-auto').replace('</span>', ' <i class="au-tag" title="Preenchido pela leitura dos autos: confira">autos</i></span>');
   else if (c.secao && G.cnj && autoGabPos(c.secao + '.' + c.chave)) h = h.replace(/^<div class="gf/, '<div class="gf au-auto').replace('</span>', ' <i class="au-tag" title="Preenchido pela extensão: confira">auto</i></span>');
@@ -1279,6 +1280,7 @@ window.MutaGabinete = { recarregar: function () { carregar(true); }, gravarPende
   destino: function () { return G.F ? destino() : ''; },
   casoPrec: function () { return G.cnj ? casoPrec() : null; },
   pautaHtml: pautaHtml,
+  abrirReferencia: function(){G.pecAb=G.pecAb||{};G.pecAb.Origem=true;G.aba='Autos';if(window.MutaAbas)window.MutaAbas.ir('pront');render();},
   /* a sincronia gravou a ficha: o painel da ficha mostra o novo registro sem nova leitura */
   registro: function (cnj, op) { if (op && dg(cnj) === dg(G.cnj)) { G.op = op; if (modo === 'ficha') render(); } } };
 /* Ampliação incremental: preserva os controles, OCR, cronologia e motores dos roteiros. */

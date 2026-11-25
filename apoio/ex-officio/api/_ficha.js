@@ -58,11 +58,19 @@ function mesclarClassificacao(old, patch) {
   });
   return Array.from(m.values());
 }
+/* Vínculo de origem: chave composta, não sobrescreve registros de outros usuários. */
+function mesclarReferencia(old,patch){
+ const m=new Map();(Array.isArray(old)?old:[]).concat(Array.isArray(patch)?patch:[]).forEach(x=>{
+   if(x&&dg(x.cnj_referencia).length===20&&/^\d{6,30}$/.test(String(x.id||'')))m.set(dg(x.cnj_referencia)+'|'+String(x.id),x);
+ });
+ if(m.size>500){const e=new Error('Limite de 500 peças vinculadas. Nenhum registro foi alterado.');e.status=400;throw e;}
+ return Array.from(m.values());
+}
 function aplica(r, mud) {
   const out = [];
   /* texto, ou lista de linhas (campos "tabela" da ficha) */
   const igual = (x, y) => (typeof x === 'object' && x) || (typeof y === 'object' && y) ? JSON.stringify(x == null || x === '' ? [] : x) === JSON.stringify(y == null || y === '' ? [] : y) : String(x == null ? '' : x) === String(y == null ? '' : y);
-  Object.keys(mud).forEach(s => { r[s] = r[s] || {}; Object.keys(mud[s]).forEach(k => { const raw = mud[s][k], v = s === 'origem' && k === 'Classificação documental' ? mesclarClassificacao(r[s][k], raw) : Array.isArray(raw) ? raw : String(raw == null ? '' : raw); if (!igual(r[s][k], v)) { r[s][k] = v; out.push(s + '.' + k); } }); });
+  Object.keys(mud).forEach(s => { r[s] = r[s] || {}; Object.keys(mud[s]).forEach(k => { const raw = mud[s][k], v = s === 'origem' && k === 'Classificação documental' ? mesclarClassificacao(r[s][k], raw) : s === 'origem' && k === 'Origem - Peças vinculadas 1G' ? mesclarReferencia(r[s][k],raw) : Array.isArray(raw) ? raw : String(raw == null ? '' : raw); if (!igual(r[s][k], v)) { r[s][k] = v; out.push(s + '.' + k); } }); });
   if (out.length) { r.origem = r.origem || {}; r.origem.atualizado_em = agora(); }
   return out;
 }
@@ -318,6 +326,11 @@ module.exports = async (req, res, u) => {
     if (dg(cnj).length !== 20) return res.status(400).json({ erro: 'número do processo inválido' });
     if (Object.prototype.hasOwnProperty.call(C, 'origem.Classificação documental') && require('./_sigilo').sigiloDe(await fonteDe(cnj))) {
       return res.status(403).json({ erro: 'Classificação documental detalhada não pode ser gravada na ficha compartilhada de processo sigiloso.' });
+    }
+    if(Object.prototype.hasOwnProperty.call(C,'origem.Origem - Peças vinculadas 1G')){
+      const f=await fonteDe(cnj),ref=dg(f&&f.Processo_Referencia),linhas=C['origem.Origem - Peças vinculadas 1G'],SG=require('./_sigilo');
+      if(!f||ref.length!==20||ref===dg(cnj)||SG.sigiloDe(f)||SG.sigiloDe(await fonteDe(ref)))return res.status(403).json({erro:'Referência não confirmada na fonte ou processo sigiloso.'});
+      if(!Array.isArray(linhas)||linhas.length>60||!linhas.length||linhas.some(x=>!x||dg(x.cnj_referencia)!==ref||!/^\d{6,30}$/.test(String(x.id||''))||!String(x.documento||'').trim()||/sigilos|segredo de just|acesso restrito/i.test(String(x.documento))))return res.status(400).json({erro:'Peças inválidas ou referência divergente.'});
     }
     Object.keys(C).forEach(k => {
       if (!E[k]) { recus.push(k); return; }

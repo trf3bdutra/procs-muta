@@ -221,6 +221,40 @@
        "editavel": false,
        "regra": "data_doc_1g, documento_1g e magistrado_1g do relatório 151 do PJe (uma linha por documento)",
        "apelido": "origem_documentos_1g"
+      },
+      {
+       "rotulo": "Peças vinculadas do primeiro grau",
+       "chave": "Origem - Peças vinculadas 1G",
+       "tipo": "tabela",
+       "secao": "origem",
+       "colunas": [
+        {
+         "chave": "cnj_referencia",
+         "rotulo": "CNJ de origem",
+         "tipo": "texto"
+        },
+        {
+         "chave": "id",
+         "rotulo": "ID no primeiro grau",
+         "tipo": "texto"
+        },
+        {
+         "chave": "data",
+         "rotulo": "Data",
+         "tipo": "data"
+        },
+        {
+         "chave": "documento",
+         "rotulo": "Tipo de documento",
+         "tipo": "texto"
+        },
+        {
+         "chave": "id_origem",
+         "rotulo": "ID de origem informado pelo PJe",
+         "tipo": "texto"
+        }
+       ],
+       "apelido": "origem_pecas_vinculadas_1g"
       }
      ]
     },

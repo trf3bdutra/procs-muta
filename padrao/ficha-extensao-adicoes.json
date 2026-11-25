@@ -794,5 +794,44 @@
     "tipo": "texto-longo"
    }
   ]
+ },
+ {
+  "aba": "Processo",
+  "grupo": "Origem",
+  "campos": [
+   {
+    "rotulo": "Peças vinculadas do primeiro grau",
+    "chave": "Origem - Peças vinculadas 1G",
+    "tipo": "tabela",
+    "secao": "origem",
+    "colunas": [
+     {
+      "chave": "cnj_referencia",
+      "rotulo": "CNJ de origem",
+      "tipo": "texto"
+     },
+     {
+      "chave": "id",
+      "rotulo": "ID no primeiro grau",
+      "tipo": "texto"
+     },
+     {
+      "chave": "data",
+      "rotulo": "Data",
+      "tipo": "data"
+     },
+     {
+      "chave": "documento",
+      "rotulo": "Tipo de documento",
+      "tipo": "texto"
+     },
+     {
+      "chave": "id_origem",
+      "rotulo": "ID de origem informado pelo PJe",
+      "tipo": "texto"
+     }
+    ]
+   }
+  ]
  }
 ]

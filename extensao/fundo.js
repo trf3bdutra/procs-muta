@@ -17,6 +17,7 @@ function injetarNasAbasAbertas() {
       chrome.scripting.executeScript({ target: { tabId: t.id, allFrames: true }, files: ['etiquetas.js', 'cmt.js', 'conteudo-pje.js', 'tarefas-pje.js'] }).catch(function () {});
     });
   }).catch(function () {});
+  chrome.tabs.query({url:["https://pje1g.trf3.jus.br/*","https://pje1g-jus.trf3.jus.br/*"]}).then(function(abas){(abas||[]).forEach(function(t){chrome.scripting.executeScript({target:{tabId:t.id,allFrames:true},files:['conteudo-1g.js']}).catch(function(){});});}).catch(function(){});
 }
 chrome.runtime.onInstalled.addListener(function () {
   chrome.sidePanel.setPanelBehavior({ openPanelOnActionClick: true }).catch(function () {});
@@ -36,6 +37,7 @@ function consolidar(reg) {
     if (!melhor || (q.forca || 1) > (melhor.forca || 1) || ((q.forca || 1) === (melhor.forca || 1) && q.t > melhor.t)) melhor = q;
   });
   reg.numero = melhor ? melhor.numero : '';
+  reg.host = melhor ? melhor.host || '' : '';
   reg.classe = melhor ? (melhor.classe || '') : '';
   reg.via = melhor ? (melhor.via || '') : '';
   /* nome da tarefa aberta ("[Sessão] Aguardando a sessão"): de qualquer quadro com o mesmo número */
@@ -67,7 +69,8 @@ chrome.runtime.onMessage.addListener(function (msg, sender) {
   emFila(chave, function () {
     return chrome.storage.session.get(chave).then(function (o) {
       var reg = o[chave] || { quadros: {} };
-      reg.quadros[quadro] = { numero: numero, classe: classe, forca: forca, via: String(msg.via || '').slice(0, 20), ctx: String(msg.ctx || '').slice(0, 10), ed: !!msg.ed, tarefa: typeof msg.tarefa === 'string' ? msg.tarefa.slice(0, 120) : '', lib: /^\d{1,2}\/\d{1,2}$/.test(String(msg.lib || '')) ? msg.lib : '', t: Date.now() };
+      var host = ''; try { host = new URL(sender.url || sender.tab.url).hostname; } catch (e) {}
+      reg.quadros[quadro] = { host: host, numero: numero, classe: classe, forca: forca, via: String(msg.via || '').slice(0, 20), ctx: String(msg.ctx || '').slice(0, 10), ed: !!msg.ed, tarefa: typeof msg.tarefa === 'string' ? msg.tarefa.slice(0, 120) : '', lib: /^\d{1,2}\/\d{1,2}$/.test(String(msg.lib || '')) ? msg.lib : '', t: Date.now() };
       consolidar(reg);
       var s = {}; s[chave] = reg;
       return chrome.storage.session.set(s);

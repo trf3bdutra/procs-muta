@@ -20,6 +20,7 @@
     clearTimeout(G.t);G.t=null;var cnj=G.pendCnj||G.cnj,P=G.pend;
     if(!cnj||!Object.keys(P).length)return Promise.resolve({});
     var idDoc='origem.Classificação documental';if(P[idDoc]&&window.MutaAnaliseProntuario)P[idDoc]=window.MutaAnaliseProntuario.mesclar(gravado('origem','Classificação documental'),P[idDoc]);
+    var r1='origem.Origem - Peças vinculadas 1G';if(P[r1]){var map=new Map();[].concat(gravado('origem','Origem - Peças vinculadas 1G')||[],P[r1]).forEach(function(r){if(r&&r.id)map.set(String(r.cnj_referencia).replace(/\D/g,'')+'|'+r.id,r);});P[r1]=Array.from(map.values());}
     Object.assign(saved[cnj]||(saved[cnj]={}),P);G.pend={};G.pendCnj='';
     if(cnj===G.cnj){G.op=G.op||{};Object.keys(P).forEach(function(k){var i=k.indexOf('.'),s=k.slice(0,i);(G.op[s]||(G.op[s]={}))[k.slice(i+1)]=P[k];});st('Prévia: alterações apenas em memória.','ok');}
     return Promise.resolve({operacional:G.op});

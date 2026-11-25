@@ -30,7 +30,16 @@
     $('pje-status').textContent = texto;
     $('pje-bar').dataset.estado = estado || '';
   }
+  var hostAtual='';
+  function primeiroGrau(host){return /^(pje1g|pje1g-jus)\.trf3\.jus\.br$/i.test(String(host||''));}
   function aplicar(reg) {
+    hostAtual=reg&&reg.host||'';
+    if(primeiroGrau(hostAtual)){
+      ultimoPje=reg.numero||'';ultimaClasse='';ultimaTarefa='';ultimaLib='';ultimoCtxTela='referencia';ultimoCtx='';
+      mostrar(ultimoPje,'PJe 1º grau: '+(ultimoPje||'sem processo identificado')+' · prontuário de 2º grau preservado','pausa');
+      document.dispatchEvent(new CustomEvent('muta:referencia',{detail:{numero:ultimoPje,host:hostAtual}}));return;
+    }
+    document.dispatchEvent(new CustomEvent('muta:referencia',{detail:{numero:'',host:hostAtual}}));
     var numero = reg && reg.numero || '', classe = reg && reg.classe || '';
     ultimoPje = numero; ultimaClasse = classe; ultimaTarefa = reg && reg.tarefa || ''; ultimaLib = reg && reg.lib || ''; ultimoCtxTela = reg ? (reg.ctx === 'autos' ? 'autos' : reg.ed ? 'editor' : reg.ctx || '') : '';
     try { document.dispatchEvent(new CustomEvent('muta:pje', { detail: { numero: numero, classe: classe, tarefa: ultimaTarefa, ctx: ultimoCtxTela } })); } catch (e) {}
@@ -81,6 +90,22 @@
     /* 0.67: { ok, tot } das caixas de liberação do editor em "Aguardando a sessão", ou null */
     liberacao: function () { var m = /^(\d+)\/(\d+)$/.exec(ultimaLib); return m ? { ok: +m[1], tot: +m[2] } : null; },
     tela: function () { return ultimoCtxTela; },
+    primeiroGrau: function(){return primeiroGrau(hostAtual);},
+    lerReferencia: function(ref){
+      if(!temChrome||!primeiroGrau(hostAtual))return Promise.reject(new Error('Abra os autos digitais do processo de referência no PJe de 1º grau.'));
+      var alvo=Muta.chaveProcesso(ref);
+      if(Muta.chaveProcesso(ultimoPje)!==alvo)return Promise.reject(new Error('O CNJ aberto não corresponde ao processo de referência.'));
+      return chrome.tabs.query({active:true,lastFocusedWindow:true}).then(function(t){
+        if(!t||!t[0])throw new Error('Nenhuma aba ativa.');
+        var host='';try{host=new URL(t[0].url).hostname;}catch(e){}
+        if(!primeiroGrau(host))throw new Error('A aba ativa não é do PJe de primeiro grau.');
+        return chrome.tabs.sendMessage(t[0].id,{tipo:'muta-autos-referencia',referencia:ref});
+      }).then(function(r){
+        if(!r||r.erro)throw new Error(r&&r.erro||'Não foi possível ler a cronologia do primeiro grau.');
+        if(!primeiroGrau(r.host)||Muta.chaveProcesso(r.numero)!==alvo||!Array.isArray(r.itens))throw new Error('Referência não confirmada.');
+        return r;
+      });
+    },
     /* conteúdo de um documento dos autos (o download do próprio PJe): {fmt:'html', texto} ou {fmt:'pdf', b64} */
     lerDocumento: function (idp, id) {
       if (!temChrome) return Promise.reject(new Error('Fora da extensão: sem acesso ao PJe.'));
@@ -122,6 +147,7 @@
     },
     /* cronologia dos autos digitais (painel esquerdo da página dos autos): documentos com ID, tipo, descrição e data */
     lerAutos: function (tudo) {
+      if(primeiroGrau(hostAtual))return Promise.reject(new Error('Use Origem → Peças vinculadas do primeiro grau para registrar documentos do processo de referência.'));
       if (!temChrome) return Promise.reject(new Error('Fora da extensão: sem acesso ao PJe.'));
       return chrome.tabs.query({ active: true, lastFocusedWindow: true }).then(function (t) {
         var id = t && t[0] ? t[0].id : abaAtiva;

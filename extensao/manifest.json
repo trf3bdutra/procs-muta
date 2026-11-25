@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "HERO18810 · Assistente do Gab. Muta",
   "short_name": "HERO18810",
-  "version": "0.70.0",
+  "version": "0.71.0",
   "description": "HERO18810: prontuário do processo, leitura dos autos e aba Minuta (matriz, Collectio, conformidade) ao lado do PJe. Gab. Des. Fed. Carlos Muta.",
   "minimum_chrome_version": "116",
   "icons": {
@@ -35,7 +35,9 @@
     "https://www.gabinete-cmt.com/*",
     "https://gabinete-cmt.com/*",
     "https://pje2g.trf3.jus.br/*",
-    "https://frontend-pje.app.trf3.jus.br/*"
+    "https://frontend-pje.app.trf3.jus.br/*",
+    "https://pje1g.trf3.jus.br/*",
+    "https://pje1g-jus.trf3.jus.br/*"
   ],
   "content_scripts": [
     {
@@ -52,6 +54,18 @@
       "all_frames": true,
       "match_about_blank": true,
       "match_origin_as_fallback": true,
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://pje1g.trf3.jus.br/*",
+        "https://pje1g-jus.trf3.jus.br/*"
+      ],
+      "js": [
+        "conteudo-1g.js"
+      ],
+      "all_frames": true,
+      "match_about_blank": false,
       "run_at": "document_idle"
     }
   ],
