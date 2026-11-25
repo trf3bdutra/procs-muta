@@ -717,13 +717,19 @@ function htmlSugestoes(secoes) {
   var pend = I.filter(function (it) { return !feito(it); }), iguais = I.filter(function (it) { return feito(it) && !(it.alvo && preenchido(it.alvo)); });
   var G = {}, ordem = [];
   pend.forEach(function (it) { var k = (A.sug || []).indexOf(it); if (!G[it.sec]) { G[it.sec] = []; ordem.push(it.sec); } G[it.sec].push([it, k]); });
-  var h = ordem.map(function (sec) {
-    return '<h4 class="tr-g">' + esc(sec) + '</h4>' + G[sec].map(function (x) {
-      var it = x[0], k = x[1], v = valor(it);
-      return '<div class="sg-i is-' + it.status + '"><input type="checkbox" data-au-sug="' + k + '" aria-label="Selecionar ' + esc(it.label) + ' para gravar na ficha"' + (it.apply ? ' checked' : '') + (window.MUTA_WEB&&window.MUTA_WEB.leitura?' disabled':'') + '>' +
-        '<span class="sg-bd"><span class="sg-h"><b>' + esc(it.label) + '</b><i class="sg-s">' + (it.status === 'conflito' ? 'diverge' : 'novo') + '</i>' + (it.doc ? '<small class="mono">ID ' + esc(it.doc) + '</small>' : '') + '</span>' +
-        '<span class="sg-v">' + esc(v.slice(0, 600)) + '</span>' + (it.status === 'conflito' && it.kind !== 'tabela' ? '<small class="muted">Na ficha: ' + esc(dataBr(S(it.current))) + '</small>' : '') + (it.note ? '<small class="muted">' + esc(it.note) + '</small>' : '') + (mesmoId(it)?'<small class="muted">Mesmo documento · conferir conteúdo</small><button type="button" class="btn line sm" data-au="manter:'+k+'">Manter registro histórico</button>':'') + '</span></div>';
-    }).join('');
+  var h = ordem.map(function(sec){
+    var rows=G[sec],docs=Array.from(new Set(rows.map(function(x){return S(x[0].doc);}).filter(Boolean))),common=docs.length===1&&rows.every(function(x){return S(x[0].doc)===docs[0];})?docs[0]:'';
+    var title=common?sec.replace('ID '+common,'').replace(/\s*·\s*·\s*/g,' · ').replace(/\s*·\s*$/,'').trim()||sec:sec;
+    var conflitos=rows.filter(function(x){return x[0].status==='conflito';}).length;
+    return '<section class="au-group-card sg-group"><header class="au-group-head"><div class="au-group-title"><h4>'+esc(title)+'</h4>'+(common?'<small class="mono">ID '+esc(common)+'</small>':'')+'</div><small class="au-group-count">'+rows.length+' '+(rows.length===1?'campo':'campos')+(conflitos?' · '+conflitos+' diverg.':'')+'</small></header><div class="au-group-rows">'+rows.map(function(x){
+      var it=x[0],k=x[1],v=valor(it),long=v.length>100||it.kind==='tabela',div=it.status==='conflito',same=mesmoId(it),note=S(it.note),details=long||note||div||same;
+      var full=it.kind==='tabela'?it.value.map(function(r,i){return 'Registro '+(i+1)+'\n'+Object.keys(r).filter(function(c){return S(r[c]);}).map(function(c){return c+': '+S(r[c]);}).join('\n');}).join('\n\n'):v;
+      var preview=it.kind==='tabela'?it.value.length+' registro(s)':long?v.slice(0,95).trim()+'…':v;
+      return '<div class="sg-i au-group-row sg-compact-row is-'+esc(it.status)+'"><input type="checkbox" data-au-sug="'+k+'" aria-label="Selecionar '+esc(it.label)+' para gravar na ficha"'+(it.apply?' checked':'')+(!sugElegivel(it)||ro?' disabled':'')+'>'+
+        '<div class="sg-bd"><div class="sg-compact-main"><span class="sg-h"><b>'+esc(it.label)+'</b>'+(it.doc&&S(it.doc)!==common?'<small class="mono">ID '+esc(it.doc)+'</small>':'')+'</span><span class="sg-v">'+esc(preview)+'</span><i class="sg-s au-row-state">'+(div?'Diverge':'Novo')+'</i></div>'+
+        (div?'<div class="sg-current"><span>Na ficha:</span> '+esc(it.kind==='tabela'?(Array.isArray(it.current)?it.current.length:0)+' registro(s)':dataBr(S(it.current)).slice(0,100))+'</div>':'')+
+        (details?'<details class="sg-row-detail"><summary>'+(long?'Ver conteúdo':'Detalhes')+(note?' · observação':'')+'</summary><div class="sg-row-detail-body">'+(long?'<div class="sg-detail-value"><small>Valor sugerido</small><div>'+esc(full)+'</div></div>':'')+(div?'<div class="sg-detail-value"><small>Registro atual</small><div>'+esc(it.kind==='tabela'&&Array.isArray(it.current)?JSON.stringify(it.current,null,2):dataBr(S(it.current)))+'</div></div>':'')+(note?'<p>'+esc(note)+'</p>':'')+(same?'<small class="muted">Mesmo documento · conferir conteúdo</small><button type="button" class="btn line sm" data-au="manter:'+k+'"'+(ro?' disabled':'')+'>Manter registro histórico</button>':'')+'</div></details>':'')+'</div></div>';
+    }).join('')+'</div></section>';
   }).join('');
   var conf = iguais.length ? '<details class="sg-ig"><summary>' + (pend.length ? '' : 'Tudo confere com a ficha · ') + iguais.length + ' campo(s) já iguais na ficha</summary><ul>' +
     iguais.map(function (it) { return '<li><b>' + esc(it.label) + '</b> ' + esc(valor(it).slice(0, 160)) + (it.doc ? ' <small class="mono">ID ' + esc(it.doc) + '</small>' : '') + '</li>'; }).join('') + '</ul></details>' : '';
@@ -798,13 +804,14 @@ function coberturaLocalizada(){
 }
 function htmlLocalizados(){
  var groups=coberturaLocalizada();if(!groups)return '';
- function row(r){var st=r.src==='1g'?'Vinculado · 1º grau':r.src==='ficha'?'ID na ficha · não localizado':(A.docs[r.id]||{}).estado==='ok'?'Localizado · texto lido':(A.docs[r.id]||{}).estado==='sem'?'Localizado · sem texto extraível':'Localizado · leitura pendente';
- var tag=r.src==='cronologia'?'button':'span',action=r.src==='cronologia'?' type="button" data-au="loc:'+esc(r.id)+'" title="Abrir documento na cronologia"':'';
- return '<'+tag+action+' class="au-loc-row src-'+r.src+'"><span class="au-loc-state">'+esc(st)+'</span><span class="au-loc-id mono">ID '+esc(r.id)+(r.src==='cronologia'?' ↗':'')+'</span></'+tag+'>';
+ function row(r){
+   var estado=(A.docs[r.id]||{}).estado,st=r.src==='1g'?'Vinculado · 1º grau':r.src==='ficha'?'ID na ficha · não localizado':estado==='ok'?'Texto lido':estado==='sem'?'Sem texto extraível':'Leitura pendente';
+   var tag=r.src==='cronologia'?'button':'div',action=r.src==='cronologia'?' type="button" data-au="loc:'+esc(r.id)+'" title="Abrir documento na cronologia"':'';
+   return '<'+tag+action+' class="au-group-row au-loc-row src-'+r.src+'"><span class="au-loc-id mono">ID '+esc(r.id)+(r.src==='cronologia'?' ↗':'')+'</span><span class="au-row-state au-loc-state" data-read="'+esc(estado||'')+'">'+esc(st)+'</span></'+tag+'>';
  }
  var found=groups.filter(function(g){return g.rows.length;}),n=found.reduce(function(s,g){return s+g.rows.length;},0);
  return '<section class="au-localizados" aria-label="Localizados"><div class="au-loc-head"><h4>Localizados</h4><small>'+found.length+' categorias</small></div>'+
- (n?'<div class="au-loc-grid">'+found.map(function(g){return '<article class="au-loc-card"><header><b>'+esc(g.label)+'</b><small>'+g.rows.length+'</small></header>'+g.rows.slice(0,2).map(row).join('')+(g.rows.length>2?'<details class="au-loc-more"><summary>Mais '+(g.rows.length-2)+'</summary>'+g.rows.slice(2).map(row).join('')+'</details>':'')+'</article>';}).join('')+'</div>':'<p class="muted">Nenhuma peça relevante identificada nesta leitura.</p>')+'</section>';
+ (n?'<div class="au-loc-grid au-group-stack">'+found.map(function(g){return '<article class="au-loc-card au-group-card"><header class="au-group-head"><div class="au-group-title"><h4>'+esc(g.label)+'</h4></div><small class="au-group-count">'+g.rows.length+' '+(g.rows.length===1?'peça':'peças')+'</small></header><div class="au-group-rows">'+g.rows.slice(0,3).map(row).join('')+(g.rows.length>3?'<details class="au-loc-more"><summary>Mais '+(g.rows.length-3)+' peça(s)</summary>'+g.rows.slice(3).map(row).join('')+'</details>':'')+'</div></article>';}).join('')+'</div>':'<p class="muted">Nenhuma peça relevante identificada nesta leitura.</p>')+'</section>';
 }
 function resumoLeitura() {
  var todosD=lista().filter(function(d){return !docBloq(d);}),L=todosD.filter(function(d){return !d.anexo;}),nl=todosD.filter(function(d){return (A.docs[d.id]||{}).estado==='ok';}).length;

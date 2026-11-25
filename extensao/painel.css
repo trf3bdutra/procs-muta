@@ -2289,3 +2289,37 @@ html body.hero-redesign-v53 #gab #hero-encaminhamento .hero-pauta-resumo{grid-co
 #gab .au-sug-pill>.au-sug-save:disabled{background:var(--soft,#eee);color:var(--muted-fg,#777);cursor:default}
 #gab .au-sug-pill>button:focus-visible{outline:2px solid var(--gold,#8a692f);outline-offset:-3px}
 #gab .au-sug-count{font-size:10px;white-space:nowrap;font-variant-numeric:tabular-nums}
+
+/* Autos · padrão compartilhado de agrupamento documental e conferência. */
+#gab .au-coverage-card .au-group-stack,#gab .au-loc-grid.au-group-stack{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:6px!important}
+#gab .au-group-card{border:1px solid var(--line)!important;border-radius:6px!important;overflow:hidden;background:var(--hero-pront-paper,var(--card,#fff))!important;min-width:0;padding:0!important;margin:0 0 6px!important;box-shadow:none!important}
+#gab .au-group-stack .au-group-card{margin:0!important}
+#gab .au-group-card>.au-group-head{display:flex!important;align-items:baseline!important;justify-content:space-between;gap:5px;padding:7px 9px!important;margin:0!important;background:color-mix(in srgb,var(--hero-pront-paper,var(--card,#fff)) 84%,var(--hero-pront-header,var(--soft,#eee)));border-bottom:1px solid var(--line)}
+#gab .au-group-title{display:flex;align-items:baseline;flex-wrap:wrap;gap:2px 7px;min-width:0;flex:1}
+#gab .au-group-title h4{margin:0!important;font:650 11px/1.35 var(--sans,system-ui)!important;letter-spacing:0!important;text-transform:none!important;color:var(--fg)!important;overflow-wrap:anywhere}
+#gab .au-group-title>small,#gab .au-group-count{font-size:10px!important;color:var(--muted-fg);font-weight:500;line-height:1.3}
+#gab .au-group-count{flex:none;text-align:right}
+#gab .au-group-rows{padding:0!important;margin:0;min-width:0}
+#gab .au-group-card .au-group-row{box-sizing:border-box;min-width:0;width:100%;padding:5px 9px!important;margin:0!important;min-height:29px;border:0!important;border-top:1px solid var(--line)!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;font-size:11px}
+#gab .au-group-card .au-group-rows>.au-group-row:first-child{border-top:0!important}
+#gab .au-group-card .au-group-row:hover{background:var(--soft,#f3f2ef)!important}
+#gab .au-group-card .au-loc-row{display:flex!important;align-items:center;justify-content:space-between;gap:6px;text-align:left}
+#gab .au-group-card .au-loc-id{font-size:11px!important;color:var(--fg)}
+#gab .au-group-card .au-row-state{font-size:9.5px!important;line-height:1.35;font-weight:600;white-space:normal;text-align:right;padding:2px 5px;border-radius:4px;background:var(--soft,#f1f0ed);color:var(--muted-fg)}
+#gab .au-group-card .au-loc-state[data-read=ok]{color:var(--ok,#38724d)}
+#gab .au-group-card .src-ficha .au-row-state,#gab .au-group-card .is-conflito .au-row-state{color:var(--gold,#8a692f);background:color-mix(in srgb,var(--gold,#8a692f) 12%,transparent)}
+#gab .au-group-card .sg-compact-row{display:flex!important;align-items:flex-start;gap:6px}
+#gab .au-group-card .sg-compact-row>input{width:13px;height:13px;margin:3px 0 0!important;flex:none}
+#gab .au-group-card .sg-bd{display:block;flex:1;min-width:0}
+#gab .au-group-card .sg-compact-main{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr) auto;align-items:baseline;gap:5px;min-height:18px}
+#gab .au-group-card .sg-h{display:flex;flex-wrap:wrap;gap:2px 5px;min-width:0;line-height:1.35}
+#gab .au-group-card .sg-h b{font-size:11px;line-height:1.35;overflow-wrap:anywhere;font-weight:600}
+#gab .au-group-card .sg-v{font-size:11px;line-height:1.35;overflow-wrap:anywhere;white-space:pre-wrap}
+#gab .au-group-card .sg-current{font-size:10px;color:var(--muted-fg);margin-top:3px;overflow-wrap:anywhere}
+#gab .au-group-card .sg-row-detail{margin:2px 0 0;padding:0;border:0;background:transparent;box-shadow:none}
+#gab .au-group-card .sg-row-detail>summary,#gab .au-group-card .au-loc-more>summary{font:500 10px/1.4 var(--sans,system-ui);color:var(--muted-fg);cursor:pointer;padding:2px 0}
+#gab .au-group-card .au-loc-more>summary{padding:5px 9px;border-top:1px solid var(--line)}
+#gab .au-group-card .sg-row-detail-body{display:grid;gap:5px;margin:4px 0;padding:6px 8px;border-left:2px solid var(--line);font-size:11px;white-space:pre-wrap;overflow-wrap:anywhere}
+#gab .au-group-card .sg-row-detail-body p{margin:0;font-size:11px}
+#gab .au-group-card .sg-detail-value>small{display:block;font-size:10px;color:var(--muted-fg);font-weight:600}
+@media(max-width:340px){#gab .au-group-card .sg-compact-main{grid-template-columns:minmax(0,1fr) auto}#gab .au-group-card .sg-compact-main>.sg-v{grid-row:2;grid-column:1/-1}#gab .au-group-card .sg-compact-main>.sg-s{grid-column:2;grid-row:1}}
