@@ -7,7 +7,7 @@ on:
 permissions:
   contents: read
 jobs:
-  testes:
+  codigo:
     runs-on: ubuntu-latest
     timeout-minutes: 12
     steps:
@@ -17,13 +17,19 @@ jobs:
           node-version: "22"
       - name: Testes de código e integração
         run: node --test apoio/ex-officio/tests/extensao-muta.test.js apoio/ex-officio/tests/prontuario-extensao.test.js
+  navegador:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
       - name: Instala Playwright
-        if: always()
         run: |
           npm install --prefix /tmp/hero-ci --no-audit --no-fund playwright
           command -v google-chrome || command -v chromium || command -v chromium-browser
       - name: Comportamento no Chrome sem janela
-        if: always()
         env:
           NODE_PATH: /tmp/hero-ci/node_modules
           HERO_TEST_REQUIRED: "1"
