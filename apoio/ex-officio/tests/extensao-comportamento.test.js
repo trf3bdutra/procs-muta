@@ -194,7 +194,7 @@ test('universal: Encaminhamento e Monitoramento no cartão; sinalizações por c
 
 /* 0.73 · organização do prontuário universal: abas das faces sem as setas, Diligências e Deliberações na faixa de abas,
    etapa atual distinta, sinalizações com rótulo e um só "Ler os autos" (nas outras abas, aviso que leva à aba Autos) */
-test('universal: organização — faces sem setas, faixa de abas única, etapa atual, rótulos e aviso dos autos', { skip: pular, timeout: 90000 }, async () => {
+test('universal: organização — faces por setas compactas, sinalizações na barra, faixa de abas única, etapa atual, rótulos e aviso dos autos', { skip: pular, timeout: 90000 }, async () => {
   const op = { processo: CNJ, origem: {}, triagem: { 'Tipo de Julgamento': 'Apelação' }, producao: { SERVIDOR: 'Rodrigo', MINUTADO: '2026-11-13', Destino: 'Sessão' }, pauta: {}, controles: {} };
   const P = await abrir(op, { sigilo: '', liberado: true, porque: 'gestor' });
   try {
@@ -202,7 +202,7 @@ test('universal: organização — faces sem setas, faixa de abas única, etapa 
     await pg.goto(pg.url().replace('/painel/painel.html', '/painel/universal.html'));
     await pg.waitForFunction(() => window.MutaSessao && window.MutaSessao.estado().estado === 'on', null, { timeout: 15000 });
     await pg.evaluate(cnj => { window.chrome.storage.session.set({ 'aba:1': { numero: cnj, classe: 'ApCiv', tarefa: '[Sessão] Aguardando a sessão', ctx: '', ed: false, lib: '' } }); }, CNJ);
-    await pg.waitForSelector('.pv3-face-nav button', { timeout: 15000 });
+    await pg.waitForSelector('.hero-header-nav .pv-sn-row', { timeout: 15000 });
     const v = await pg.evaluate(() => {
       const vis = e => !!(e && e.offsetParent);
       return {
@@ -215,8 +215,9 @@ test('universal: organização — faces sem setas, faixa de abas única, etapa 
         frase: (document.body.innerText.match(/Abra os autos digitais/g) || []).length
       };
     });
-    assert.equal(v.setas, 0, 'sem as setas ‹ ›');
-    assert.ok(['Resumo', 'Autuação', 'Caso'].every(x => v.faces.includes(x)), 'abas das faces: ' + v.faces.join('|'));
+    assert.equal(v.setas, 2, 'faces pelas setas compactas ‹ ›');
+    assert.equal(v.faces.length, 0, 'sem as abas das faces');
+    assert.ok(await pg.$('.hero-header-nav .pv-sn-row .hero-sn-ind'), 'sinalizações na barra do prontuário');
     assert.ok(v.abas.includes('Diligências') && v.abas.includes('Deliberações') && v.abas.includes('Pauta'), 'faixa de abas: ' + v.abas.join('|'));
     assert.ok(v.etapas.some(c => /\bok\b/.test(c)) && v.etapas.some(c => /\bat\b/.test(c)) && v.etapas.some(c => /\bpend\b/.test(c)), 'feita, atual e pendente: ' + v.etapas.join(' | '));
     assert.deepEqual(v.rotulos.sort(), ['avisos', 'intercorrências', 'pendências', 'urgência'], 'sinalizações com rótulo');

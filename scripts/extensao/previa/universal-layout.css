@@ -207,8 +207,6 @@ html[data-tema=escuro] .pv-universal-body{--pv-bg:#25282d;--pv-line:#444a52;--pv
 .pv-universal-body .tu-profile-notif .tu-profile-name{overflow:hidden;text-overflow:ellipsis}
 /* 0.73 · organização: uma navegação só das faces (sem as setas), etapa atual distinta, sinalizações com rótulo,
    aviso discreto de autos não lidos e Solicitações só com o que há */
-#gab .hero-header-nav>button{display:none!important}
-#gab .hero-header-nav span.muted:has(+ .pm-fase){display:none!important}
 .pv-universal .pv-stage.at .pv-stage-btn{background:transparent!important;color:#c99a3c!important;border:2px solid #c99a3c!important}
 .pv-universal .pv-stage.at small{color:#c99a3c;font-weight:600}
 .pv-universal .pv-stage.pend{opacity:.55}
@@ -264,4 +262,27 @@ html[data-tema=escuro] .pv-universal-body{--pv-bg:#25282d;--pv-line:#444a52;--pv
 /* sinalizações: filtro escolhido visível */
 #gab .hero-sn-mini[aria-pressed="true"]{border-color:#c99a3c!important;color:#c99a3c!important}
 #gab .hero-sn-mini.has-count{border-color:#c99a3c}
+/* 0.73.2 · barra do prontuário: faces por setas compactas (sem as abas) e sinalizações integradas à barra */
+#gab .pv3-face-nav{display:none!important}
+#gab .hero-header-nav{display:flex!important;align-items:center;gap:6px;flex-wrap:wrap}
+#gab .hero-header-nav>button{flex:none;width:22px;height:22px;min-height:0!important;padding:0!important;border:1px solid var(--pv-line,#d6d1c5)!important;border-radius:4px!important;background:transparent!important;font:600 14px/1 system-ui,sans-serif!important;display:inline-flex;align-items:center;justify-content:center;cursor:pointer}
+#gab .hero-header-nav>button:hover{border-color:#c99a3c!important;color:#c99a3c}
+#gab .hero-header-nav .pm-top{display:flex;align-items:baseline;gap:6px;min-width:0}
+#gab .hero-header-nav .hero-face-label{font-size:11px;white-space:nowrap}
+#gab .hero-header-nav>.pv-sn-row{margin-left:auto;display:flex;align-items:center;gap:3px;border:0!important;padding:0!important;flex:none!important}
+#gab .hero-header-nav .pv-snr{display:none}
+#gab .hero-header-nav .hero-sn-mini,#gab .hero-header-nav .hero-urg-short{min-height:22px!important;height:22px;padding:0 5px!important;font-size:11px!important}
+#gab .hero-header-nav .pv-sn-row>.hero-sn-ind{gap:3px}
+/* o card das sinalizações abre logo abaixo da barra, compacto */
+#gab .hero-header-nav+#hero-dock-pane-sinalizacoes{margin:4px 0 8px!important}
+#gab .hero-header-nav+#hero-dock-pane-sinalizacoes>summary{display:none}
+#gab #g-sn{padding:8px 10px!important;margin:0!important}
+#gab #g-sn .pc-sh{display:flex;align-items:center;gap:6px;margin:0 0 6px}
+#gab #g-sn .pc-sh .btn{min-height:24px;padding:2px 10px;font-size:11.5px}
+#gab #g-sn .pc-sh [data-sn-add][aria-expanded="true"]{background:transparent!important;color:inherit!important;border:1px solid var(--pv-line,#d6d1c5)!important}
+#gab #g-sn .sn-novo{display:grid!important;grid-template-columns:auto minmax(0,1fr) auto;gap:6px;align-items:start;margin:0 0 6px}
+#gab #g-sn .sn-novo select{height:32px;min-width:0}
+#gab #g-sn .sn-novo textarea{min-height:32px;height:32px;resize:vertical;padding:6px 8px;font-size:12px;line-height:1.35}
+#gab #g-sn .sn-novo [data-sn-inc]{height:32px;padding:0 12px}
+#gab #g-sn .sn-h{display:block;font-size:10.5px;line-height:1.35;opacity:.75}
 
