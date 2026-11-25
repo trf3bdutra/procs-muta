@@ -3343,15 +3343,6 @@ function itemPainel(cnj) {
 }
 function abrirPainelProcesso(cnj){fichaDe(cnj);}
 function montarAnotacoesAcervo(){const h=D.querySelector('[data-cog-anotacoes]');if(!h||h.dataset.montado||COG!=='acervo')return;const C=W.CaputColecoes;if(!C||!C.painel){h.textContent='Painel de anotações indisponível.';return;}h.dataset.montado='1';const o=IDX.get(h.dataset.cogAnotacoes);if(!o)return;const it={processo:o.cnj,recurso:o.classe,assunto:o.assunto,partes:o.partes,tarefa:o.tarefa};C.painel(h,{id:'',titulo:'',grupos:[],colunas:[],itens:[it]},it,opcoesPainel());}
-/* A triar: o número do processo abre, na própria linha, o mesmo painel que se abre nos Triados */
-function montarAtPP() {
-  const C = W.CaputColecoes;
-  document.querySelectorAll('[data-at-pp]').forEach((h) => {
-    if (h.dataset.montado) return; h.dataset.montado = '1';
-    if (!C || !C.painel) { h.innerHTML = subPainelEm(IDX.get(h.dataset.atPp) || {}, 'triar'); return; }
-    const { l, it } = itemPainel(h.dataset.atPp); C.painel(h, l, it, opcoesPainel());
-  });
-}
 function cogTipo(o){
  const r=o.row||{},d=nz(r.Destino||''),a=nz(r['Mono - Tipo de ato']||'');
  if(d==='sessao'||(o.dest||{}).k==='pauta')return '';
@@ -3532,7 +3523,7 @@ function cogListIndicador(o,f){
  return '<span class="cog-ind-value" title="'+esc(v)+'">'+esc(v)+'</span>';
 }
 function atLinha(o) {
-  const r = o.row || {}, d = atDias(o), tri = atTri(o), exp = TRI_EXP_D === o.d;
+  const r = o.row || {}, d = atDias(o), tri = atTri(o);
   const ind = (o.prior ? '<span class="at-in al" title="Prioridade legal">P</span>' : '') + (o.liminar ? '<span class="at-in cr" title="Liminar pendente">⚡</span>' : '') +
     (o.sigiloso ? '<span class="at-in" title="Sigiloso">🔒</span>' : '') + (o.div ? '<span class="at-in cr" title="Seção da etiqueta diferente da competente">⚑</span>' : '') +
     (o.cand && !(o.dest || {}).k ? '<span class="at-in in" title="' + esc(CLAB[o.cand] || o.cand) + '">◆</span>' : '') + (o.pend && o.pend.length ? '<span class="at-in cr" title="' + esc(o.pend.join(', ')) + '">⚠' + o.pend.length + '</span>' : '') +
@@ -3540,14 +3531,13 @@ function atLinha(o) {
   const prt = COG_LIST_FIELDS.map(f=>{const h=cogListIndicador(o,f),m=/title="([^"]*)"/.exec(h),tip=esc(f[2])+': '+(m?m[1]:esc(String(r[f[0].slice(f[0].indexOf('.')+1)]||'Sem registro')));return '<td class="at-pr cog-ind-cell" title="'+tip+'" aria-label="'+tip+'">'+h.replace(/title="[^"]*"/g,'')+'</td>';});
   const dest = (o.dest || {}).k ? '<span class="at-de k-' + esc(o.dest.k) + '">' + esc(o.dest.t) + '</span>' : '<span class="at-pv" title="Destino provável pelas etiquetas e pela tarefa">' + esc(DLAB[o.prov] || '—') + '</span>';
   const prox = r['Próxima ação'] || '';
-  return '<tr class="at-r' + (SEL.has(o.d) ? ' sel' : '') + (exp ? ' on' : '') + (tri ? ' tri' : '') + '"><td><input type="checkbox" data-sel="' + o.d + '"' + (SEL.has(o.d) ? ' checked' : '') + ' aria-label="Selecionar ' + esc(o.cnj) + '"></td>' +
+  return '<tr class="at-r' + (SEL.has(o.d) ? ' sel' : '') + (tri ? ' tri' : '') + '"><td><input type="checkbox" data-sel="' + o.d + '"' + (SEL.has(o.d) ? ' checked' : '') + ' aria-label="Selecionar ' + esc(o.cnj) + '"></td>' +
     '<td class="at-p"><span class="cog-proc-id">'+cogCopyCnj(o)+cogQuickIcon(o.d)+cogFichaIcon(o.d)+'</span> <span class="at-cl">' + esc(o.cl || '') + '</span> <span class="at-se">' + esc((o.secao || '').replace(/ª\s*Seção/, 'ª Seção')) + '</span>' +
       '<span class="at-pa">' + esc(o.partes || '') + '</span></td>' +
     '<td class="at-tc">' + (r['Detalhamento do caso']||r['Tema'] ? '<b>' + esc(r['Detalhamento do caso']||r['Tema']) + '</b>'+((r['Detalhamento do caso']||r['Tema'])!==o.assunto?'<span class="at-sub">'+esc(o.assunto)+'</span>':'') : esc(o.assunto)) + '<div class="cog-case-tags">'+(cogTriAnalisado(o)?'<span class="at-tg ok">Triado</span>':'<span class="at-tg">A triar</span>')+(tri?'<span class="at-tg ok">Com prontuário</span>':'')+(o.minutante?'<span class="at-tg">'+esc(o.minutante.split(' ')[0])+'</span>':'')+'</div></td>' +
     '<td class="at-ta"><span class="at-d' + (d > 180 ? ' cr' : d > 60 ? ' al' : '') + '">' + (d == null ? '—' : d + ' d') + '</span><span class="at-sub">' + esc(o.desde ? br(o.desde) : '') + '</span></td>' +
     '<td class="at-ic">' + ind + '</td>' + prt.join('') + '<td class="at-dt">' + dest + (prox ? '<span class="at-sub at-cl2" title="' + esc(prox) + '">' + esc(prox) + '</span>' : '') + '</td>' +
-    '</tr><tr class="cog-note-row'+(SEL.has(o.d)?' sel':'')+'"><td colspan="40">'+cogNotasRodape(o)+'</td></tr>' +
-    (exp ? (setTimeout(montarAtPP, 0), '<tr class="at-det"><td></td><td colspan="39"><div class="at-pp" data-at-pp="' + esc(o.d) + '"></div></td></tr>') : '');
+    '</tr><tr class="cog-note-row'+(SEL.has(o.d)?' sel':'')+'"><td colspan="40">'+cogNotasRodape(o)+'</td></tr>';
 }
 /* Um único recorte e uma única ordenação para as visualizações nativas. */
 function cogTriOrdenar(L,ord=LS.get('tri_ato','antigos')){
@@ -3787,19 +3777,14 @@ function selecaoBands() {
 }
 
 function linhaEm(p, aba) {
-  const d = p.d||p.num||p.processo||'';
-  const partes = p.partes||p.parte||p.autor||'';
-  const assunto = p.assunto||p.classe||'';
-  const exp = TRI_EXP_D===d;
-  let h = '<div class="tri-row'+(exp?' exp':'')+(p.sel?' sel':'')+'">';
-  h += '<span style="font-size:10px;color:var(--m2)">'+(p.sel?'✓':'')+'</span>';
-  h += '<button class="nm" data-proc-exp="'+esc(d)+'" title="'+esc(d)+'">'+esc(d)+'</button>';
-  h += '<span class="as"><b>'+esc(partes)+'</b><span>'+esc(assunto)+'</span></span>';
-  if (p.pjes||p.pje) { const link=p.pjes||p.pje; h += '<a href="'+esc(link)+'" target="_blank" style="font-size:11px;color:var(--m2);text-decoration:none" title="Abrir no PJe">PJe↗</a>'; }
-  h += '<button class="tri-row-exp" data-triexp="'+esc(d)+'">'+(exp?'▲ fechar':'▼ ver')+'</button>';
-  h += '</div>';
-  if (exp) h += subPainelEm(p, aba);
-  return h;
+  const d = p.d||p.num||p.processo||'', o=IDX.get(dg(d))||{d:dg(d),cnj:fmtCnj(dg(d)),row:{}};
+  const partes=p.partes||p.parte||p.autor||'', assunto=p.assunto||p.classe||'';
+  let h='<div class="proc-item"><div class="tri-row'+(p.sel?' sel':'')+'">';
+  h+='<span style="font-size:10px;color:var(--m2)">'+(p.sel?'✓':'')+'</span>';
+  h+='<span class="cog-proc-id">'+cogCopyCnj(o)+(IDX.has(o.d)?cogQuickIcon(o.d):'')+cogFichaIcon(o.d)+'</span>';
+  h+='<span class="as"><b>'+esc(partes)+'</b><span>'+esc(assunto)+'</span></span>';
+  if(p.pjes||p.pje)h+='<a href="'+esc(p.pjes||p.pje)+'" target="_blank" rel="noopener" title="Abrir no PJe">PJe↗</a>';
+  return h+'</div>'+(IDX.has(o.d)?cogNotasRodape(o):'')+'</div>';
 }
 
 function subPainelEm(p, aba) {
@@ -3954,7 +3939,7 @@ let FILA = [];
 let TRI_SUBABA = LS.get('tri_subaba', 'triar');
 let _triCache = null;  // {items: Map<d,{...}>, lotes:[], series: Map<d,lote>}
 let _selCache = null;  // {items: Map<d,{...}>, lotes:[]}
-let TRI_EXP_D = null;
+
 function BASE() { const S = new Set(F.base); return ALL.filter((o) => S.has(o.grupo)); }
 function painelBase(nF, nCrit) { const cnt = {}; ALL.forEach((o) => { cnt[o.grupo] = (cnt[o.grupo] || 0) + 1; }); const S = new Set(F.base), n = ALL.filter((o) => S.has(o.grupo)).length;
   const vivos = (L) => L.filter((g) => cnt[g]).sort().join(','), pr = PRESETS.find((p) => vivos(p[2]) === vivos(F.base)); /* grupos sem processo não contam */
@@ -4432,7 +4417,7 @@ D.addEventListener('click', (e) => { const t = e.target;
   if ((b = q('[data-grpso]'))) { const onde = b.dataset.onde, st = onde === 'fila' ? F : FE, L = onde === 'fila' ? FILA : FILA, fn = { assunto: (o) => o.assunto, tarefa: (o) => o.tarefa || 'Sem tarefa', secao: (o) => o.secao, classe: (o) => o.cl, dest: (o) => o.dest.k ? o.dest.t : 'sem destino' }[st.ver];
     if (onde === 'fila') { F.conj = { rot: b.dataset.grpso, ids: new Set(L.filter((o) => fn(o) === b.dataset.grpso).map((o) => o.d)) }; F.ver = 'lista'; F.lim = 100; } else { FE.q = '"' + b.dataset.grpso + '"'; FE.ver = 'lista'; } render(); return; }
   if ((b = q('[data-trisub]'))) { TRI_SUBABA = b.dataset.trisub; LS.set('tri_subaba', TRI_SUBABA); const corpo = document.getElementById('tri-em-corpo'); if (corpo) corpo.innerHTML = conteudoSubAba(); document.querySelectorAll('[data-trisub]').forEach(x => { x.classList.toggle('on', x.dataset.trisub === TRI_SUBABA); x.setAttribute('aria-selected', String(x.dataset.trisub === TRI_SUBABA)); }); return; }
-  if ((b = q('[data-triexp]'))) { const d = b.dataset.triexp; TRI_EXP_D = TRI_EXP_D === d ? null : d; const emEl = document.getElementById('tri-em'); if (emEl) emEl.outerHTML = painelEmTriagem(); return; }
+
   if ((b = q('[data-tribanda]'))) { const id = b.dataset.tribanda; const cur = LS.get('tri_em_b_'+id, true); LS.set('tri_em_b_'+id, !cur); const emEl = document.getElementById('tri-em'); if (emEl) emEl.outerHTML = painelEmTriagem(); return; }
   if ((b = q('[data-proc-exp]'))) { const d=b.dataset.procExp;PROC_EXP_ABERTO=PROC_EXP_ABERTO===d?'':d;render();return; }
   if ((b = q('[data-prontuario]'))) { abrirProntuarioTriagem(b.dataset.prontuario);return; }
