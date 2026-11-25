@@ -424,6 +424,25 @@ html[data-theme=dark] #competencia-imparcialidade .ci-imp>.pane-title small{colo
 .am-op-rot-f details .cx-html h4{font-size:11px!important;margin:6px 0 2px!important}
 .am-op-rot-f details .cx-html ul{margin:2px 0 4px;padding-left:16px}
 .am-op-rot-f>button{justify-self:start;border:0;background:transparent;color:var(--eg);font:600 11px system-ui;padding:2px 0;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+
+/* Regimento Interno no painel lateral */
+.am-drawer{position:fixed;top:0;right:0;bottom:0;width:min(520px,94vw);z-index:900;background:var(--ep,#fbfaf5);border-left:1px solid var(--el);box-shadow:-18px 0 40px rgb(0 0 0 / .12);transform:translateX(102%);transition:transform .22s ease,width .22s ease;display:flex;flex-direction:column}
+.am-drawer.open{transform:none}
+.am-drawer.wide{width:min(980px,96vw)}
+.am-drawer-head{display:flex;align-items:flex-start;gap:6px;padding:14px 16px 10px;border-bottom:1px solid var(--el);border-top:3px solid var(--eo,#a57829)}
+.am-drawer-head>div{flex:1;min-width:0}
+.am-drawer-head small{font:700 9.5px/1.3 system-ui;letter-spacing:.12em;text-transform:uppercase;color:var(--em)}
+.am-drawer-head h2{font:400 22px/1.2 var(--eser,Georgia);margin:2px 0 0;color:var(--ei)}
+.am-drawer-head h2 em{font-style:italic;color:var(--eo,#a57829)}
+.am-drawer-body{flex:1;overflow:auto;padding:12px 16px 24px}
+.am-drawer-body>.am-drawer-reg{border:0!important;padding:0!important;margin:0!important;background:transparent!important;box-shadow:none!important}
+.am-drawer-body>.am-drawer-reg>.pane-title{display:none}
+.am-drawer-tab{position:fixed;right:0;top:50%;z-index:899;transform:translateY(-50%);writing-mode:vertical-rl;rotate:180deg;border:1px solid var(--el);border-right:0;border-radius:0 7px 7px 0;background:var(--ew,#fff);color:var(--ei);font:650 12px/1 system-ui;padding:14px 8px;box-shadow:2px 0 12px rgb(0 0 0 / .08);cursor:pointer;border-left:3px solid var(--eo,#a57829)}
+.am-drawer-tab:hover{color:var(--eo,#a57829)}
+body.am-reg-on .am-drawer-tab{right:min(520px,94vw)}
+body.am-reg-on:has(.am-drawer.wide) .am-drawer-tab{right:min(980px,96vw)}
+.am-drawer-tab{transition:right .22s ease}
+@media(max-width:700px){body.am-reg-on .am-drawer-tab{display:none}}
 </style><style id="am-areas-css">
 .am-modular>.am-area-nav,.am-modular>.am-group-heading{grid-column:1/-1}
 .am-modular>.am-module-nav{order:0}
@@ -757,9 +776,9 @@ const D=document,W=D.querySelector('main.am-workspace');if(!W)return;
 const groups=[
  ['operacional','Operacional','Fluxos, rotinas, checklists e tarefas do PJe',[['operacional','Operação do gabinete',true]]],
  ['jurisprudencial','Repertório jurisprudencial','Julgados da Turma Regional, temas e súmulas',[['jur-collegium','Collegium',true],['enunciados','Enunciados',true]]],
- ['normativo','Repertório legislativo e normativo','Regimento Interno e atos regimentais',[['regimento','Regimento',true],['norm-atos','Assentos e referências normativas',true]]],
+ ['normativo','Repertório legislativo e normativo','Atos regimentais (o Regimento Interno abre no painel lateral, à direita)',[['norm-atos','Assentos e referências normativas',true]]],
  ['competencia-grupo','Competência e imparcialidade','Impedimentos, suspeições e competência da Turma',[['competencia-imparcialidade','Competência e imparcialidade',true]]],
- ['referencias','Referências jurídicas','Recursos, temas e matérias',[['recursos','Recursos'],['temas-proc','Temas processuais'],['assuntos','Assuntos recorrentes'],['lexico-recursal','Léxico recursal'],['guias-praticos','Guias práticos']]]
+ ['referencias','Referências jurídicas','Recursos, temas e matérias',[['recursos-temas','Recursos, temas e assuntos',true],['lexico-recursal','Léxico recursal'],['guias-praticos','Guias práticos']]]
 ];
 const cfg=groups.flatMap(g=>g[3]);
 function module(id,title,subtitle,body){const el=D.createElement('section');el.className='busca';el.id=id;el.innerHTML='<div class="pane-title"><div><small>'+subtitle+'</small><h2>'+title+'</h2></div></div>'+body;W.append(el);return el;}
@@ -844,6 +863,38 @@ module('guias-praticos','Guias práticos','Enciclopédia · consulta autenticada
 })();
 
 
+/* Recursos cabíveis, Temas processuais e Assuntos recorrentes: faces de um mesmo painel (motores e ids mantidos) */
+(function(){
+ const P=[['recursos','Recursos cabíveis'],['temas-proc','Temas processuais'],['assuntos','Assuntos recorrentes']];
+ const rt=module('recursos-temas','Recursos, temas e assuntos','Referência processual · do cabimento à tese que decide','<div class="am-op-bar"><div class="am-op-tabs" role="tablist" aria-label="Recursos, temas e assuntos"></div></div><div class="am-op-panes"></div>');
+ const tabs=rt.querySelector('.am-op-tabs'),panes=rt.querySelector('.am-op-panes');let cur='';
+ P.forEach(([id,l])=>{const el=D.getElementById(id);if(!el)return;el.classList.remove('busca');el.classList.add('am-op-pane');el.setAttribute('role','tabpanel');el.hidden=true;panes.append(el);const b=D.createElement('button');b.type='button';b.setAttribute('role','tab');b.dataset.rt=id;b.innerHTML='<span>'+l+'</span>';tabs.append(b);});
+ function abre(id){if(!D.getElementById(id))return;cur=id;try{localStorage.setItem('amicus-recursos-aba',id);}catch(e){}tabs.querySelectorAll('[data-rt]').forEach(b=>{const on=b.dataset.rt===id;b.setAttribute('aria-selected',String(on));b.tabIndex=on?0:-1;});panes.querySelectorAll(':scope>.am-op-pane').forEach(p=>p.hidden=p.id!==id);}
+ tabs.addEventListener('click',e=>{const b=e.target.closest('[data-rt]');if(b)abre(b.dataset.rt);});
+ tabs.addEventListener('keydown',e=>{if(!/^Arrow(Left|Right)$/.test(e.key))return;const L=[...tabs.querySelectorAll('[data-rt]')],i=L.findIndex(b=>b.dataset.rt===cur),n=L[(i+(e.key==='ArrowLeft'?L.length-1:1))%L.length];abre(n.dataset.rt);n.focus();e.preventDefault();});
+ /* atalhos de outras partes ("ver em Temas processuais", requisitos do recurso) abrem a face certa antes de rolar até ela */
+ D.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-req],[data-tema]');if(b)abre(b.hasAttribute('data-req')?'recursos':'temas-proc');},true);
+ let ini='recursos';try{ini=localStorage.getItem('amicus-recursos-aba')||ini;}catch(e){}if(!D.getElementById(ini))ini='recursos';abre(ini);
+})();
+/* Regimento Interno: painel lateral expansível à direita (aba presa na borda; Ampliar; Esc fecha) */
+(function(){
+ const reg=D.getElementById('regimento');if(!reg)return;
+ const dr=D.createElement('aside');dr.className='am-drawer';dr.id='am-regimento';dr.setAttribute('aria-label','Regimento Interno');
+ dr.innerHTML='<div class="am-drawer-head"><div><small>Regimento Interno · fonte do Compendium</small><h2>Regimento <em>Interno.</em></h2></div><button type="button" class="more" data-dr="wide" aria-pressed="false">Ampliar</button><button type="button" class="more" data-dr="close" aria-label="Fechar o Regimento">×</button></div><div class="am-drawer-body"></div>';
+ reg.classList.remove('busca');reg.classList.add('am-drawer-reg');dr.querySelector('.am-drawer-body').append(reg);
+ const tab=D.createElement('button');tab.type='button';tab.className='am-drawer-tab';tab.setAttribute('aria-controls','am-regimento');tab.innerHTML='<span>Regimento Interno</span>';
+ D.body.append(dr,tab);
+ let st={};try{st=JSON.parse(localStorage.getItem('amicus-regimento'))||{};}catch(e){}
+ const grava=()=>{try{localStorage.setItem('amicus-regimento',JSON.stringify(st));}catch(e){}};
+ function aplica(){dr.classList.toggle('open',!!st.open);dr.classList.toggle('wide',!!st.wide);tab.setAttribute('aria-expanded',String(!!st.open));D.body.classList.toggle('am-reg-on',!!st.open);const w=dr.querySelector('[data-dr="wide"]');w.textContent=st.wide?'Reduzir':'Ampliar';w.setAttribute('aria-pressed',String(!!st.wide));}
+ function abrir(on){st.open=on===undefined?!st.open:on;grava();aplica();if(st.open)setTimeout(()=>D.getElementById('rit-q')?.focus({preventScroll:true}),150);}
+ tab.onclick=()=>abrir();
+ dr.addEventListener('click',e=>{const b=e.target.closest('[data-dr]');if(!b)return;if(b.dataset.dr==='close')abrir(false);else{st.wide=!st.wide;grava();aplica();}});
+ D.addEventListener('keydown',e=>{if(e.key==='Escape'&&st.open&&!D.querySelector('.full-panel')){abrir(false);}});
+ /* artigo citado em outra parte (Assentos, Temas…) abre o painel antes da busca */
+ D.addEventListener('click',e=>{if(e.target.closest&&e.target.closest('[data-rart]'))abrir(true);},true);
+ aplica();
+})();
 let pref={};try{pref=JSON.parse(localStorage.getItem('amicus-modulos-v1'))||{}}catch(e){}
 const save=()=>{try{localStorage.setItem('amicus-modulos-v1',JSON.stringify(pref))}catch(e){}};
 const nav=D.createElement('nav');nav.className='am-module-nav';nav.setAttribute('aria-label','Módulos do Amicus');nav.innerHTML='<strong>Amicus · área de trabalho</strong>';W.prepend(nav);W.classList.add('am-modular');

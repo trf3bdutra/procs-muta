@@ -120,3 +120,9 @@ test('Amicus: a parte da Rotina relativa à tarefa aparece no painel lateral do 
  const home=read('apoio/amicus/index.html');
  for(const x of ['function rotinaNoFluxo(nome)','function fasesDe(nome)','data-rot-fase','.am-op-rot-cx i.on'])assert.ok(home.includes(x),x);
 });
+test('Amicus: Recursos, Temas processuais e Assuntos recorrentes como faces de um painel; Regimento no painel lateral',()=>{
+ const home=read('apoio/amicus/index.html');
+ assert.ok(home.includes("[['recursos-temas','Recursos, temas e assuntos',true]"),'um só módulo nas Referências jurídicas');
+ for(const x of ["[['recursos','Recursos cabíveis'],['temas-proc','Temas processuais'],['assuntos','Assuntos recorrentes']]","class='am-drawer'","dr.className='am-drawer'","aria-controls','am-regimento'","amicus-regimento"].filter(x=>!x.startsWith("class=")))assert.ok(home.includes(x),x);
+ assert.ok(!home.includes("[['regimento','Regimento',true]"),'Regimento fora da grade de módulos');
+});
