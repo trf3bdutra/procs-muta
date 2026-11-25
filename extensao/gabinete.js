@@ -42,7 +42,7 @@ function carregar(forcar) {
   if (!cnj) { G.cnj = ''; G.F = null; G.op = null; render(); return; }
   if (!forcar && cnj === G.cnj && (G.F || G.carregando)) { render(); return; }
   if (G.cnj && G.cnj !== cnj) gravarJa().catch(function () {});
-  G.cnj = cnj; G.F = null; G.op = null; G.fo = null; G.erro = ''; G.dest = null; G.mostra = {}; G.qVazia = false; G.carregando = true;
+  if(heroV53()&&G.cnj!==cnj){G.aba='Processo';G.rot='res';} G.cnj = cnj; G.F = null; G.op = null; G.fo = null; G.erro = ''; G.dest = null; G.mostra = {}; G.qVazia = false; G.carregando = true;
   var tok = ++G.tok;
   render();
   ses.api('/api/pauta?ficha=' + encodeURIComponent(cnj)).then(function (j) {
@@ -1094,7 +1094,7 @@ function corpoRoteiro() {
 /* HERO: apresentação compartilhada pela extensão, prévia e prontuário web.
    Move os controles existentes; conserva chaves da ficha e eventos delegados. */
 var heroTopo = {cnj:'', pagina:0, acompanhamento:false};
-function heroV53(){return document.body.classList.contains('hero-redesign-v53');}
+function heroV53(){return typeof document!=='undefined'&&document.body&&document.body.classList.contains('hero-redesign-v53');}
 function heroOrganizarProntuario(){
   var top=caixa.querySelector('.pc.pm'); if(!top||top.querySelector('.hero-header-nav'))return;
   if(heroTopo.cnj!==G.cnj)heroTopo={cnj:G.cnj,pagina:0,acompanhamento:false,sinalizacoes:false};
@@ -1114,7 +1114,7 @@ function heroOrganizarProntuario(){
   function show(i){var n=pn.length;heroTopo.pagina=(i+n)%n;pn.forEach(function(p,j){p.hidden=j!==heroTopo.pagina;});label.textContent='';label.hidden=true;prev.title='Anterior: '+names[(heroTopo.pagina+n-1)%n];next.title='Próxima: '+names[(heroTopo.pagina+1)%n];prev.setAttribute('aria-label',prev.title);next.setAttribute('aria-label',next.title);nav.setAttribute('aria-label',names[heroTopo.pagina]);if(ficha){if(heroTopo.pagina===n-1&&fichaFacePermitida()){if(!ficha.childElementCount)html(ficha,window.MutaGabinete.fichaFace());}else ficha.replaceChildren();}if(faceNav)Array.from(faceNav.children).forEach(function(b,j){b.setAttribute('aria-pressed',String(j===heroTopo.pagina));});}
   var faceNav=enhanced||document.querySelector('link[href="universal-layout.css"]')?el('div','pv3-face-nav'):null;if(faceNav){faceNav.style.gridTemplateColumns='repeat('+pn.length+',minmax(0,1fr))';['Resumo','Encaminhamento','Autuação','Caso'].concat(ficha?['Ficha']:[]).forEach(function(name,i){var b=el('button','',name);b.type='button';b.onclick=function(){show(i);};faceNav.append(b);});}
   prev.addEventListener('click',function(){show(heroTopo.pagina-1);});next.addEventListener('click',function(){show(heroTopo.pagina+1);});
-  var sx=0;pages.addEventListener('touchstart',function(e){sx=e.changedTouches[0].clientX;},{passive:true});pages.addEventListener('touchend',function(e){var dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>65)show(heroTopo.pagina+(dx<0?1:-1));},{passive:true});
+  var sx=0;pages.addEventListener('touchstart',function(e){sx=e.changedTouches[0].clientX;},{passive:true});pages.addEventListener('touchend',function(e){if(heroV53())return;var dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>65)show(heroTopo.pagina+(dx<0?1:-1));},{passive:true});
   var l1=top.querySelector('.pm-l1'),cls=l1&&l1.querySelector('.pc-cl'),classText=cls&&cls.title?cls.title.split(' · ')[0]:'';
   var m=grupoModelo('Autuação'),R={};(m&&m.campos||[]).forEach(function(c){R[c.rotulo]=valorDe(c);});
   var tj=el('div','gr');
@@ -1574,7 +1574,7 @@ function heroOrganizarProntuario(){
     else if(resumo){var pg=grupoModelo('Pauta e julgamento');if(pg)html(pautaBody,pg.campos.filter(function(c){return c.chave!=='Ingresso e ocorrências da sessão';}).map(campo).join(''));}
     pautaPerfil.append(pautaBody);pautaPerfil.open=!!heroTopo.pautaPerfil;
     pautaPerfil.addEventListener('toggle',function(){if(pautaPerfil.isConnected)heroTopo.pautaPerfil=pautaPerfil.open;});
-    if(resumo&&destGrav()==='Sessão')id.append(pautaPerfil);
+    if(resumo&&destGrav()==='Sessão'){var full=id.querySelector('.hero-v53-profile:nth-last-child(1)');perfil.after(pautaPerfil);}
     /* Acesso aos documentos: fonte existente da leitura, IDs registrados na ficha. */
     var auDocs=window.MutaAutos,coverage=el('details','hero-v53-coverage'),cvSum=el('summary','','Documentos extraídos');
     coverage.append(cvSum);
@@ -1626,7 +1626,7 @@ function heroOrganizarProntuario(){
       var b=el('button','',x[1]);b.type='button';b.dataset.heroDock=x[0];b.onclick=function(){abrirA(x[0]);};dockTabs.append(b);
     });
     stepsHead.replaceChildren(dockTabs,ind);
-    ind.querySelectorAll('.hero-sn-count').forEach(function(n){n.remove();});
+    /* Conserva os contadores de pendências, avisos e intercorrências. */
     var nextFoot=el('div','hero-v53-next');
     var first=map.passos.find(function(p){return p.tipo==='pendencia'?tramiteEstado(snLinhas('pd'),p)!=='resolvida':!p.feito;});
     if(first){var nextBtn=el('button','hero-v53-next-button');nextBtn.type='button';nextBtn.append(el('small','','Próximo passo'),el('b','',S(first.texto)));if(first.condicao)nextBtn.append(el('small','muted','Após: '+tramiteDescricao(first.condicao.vinculo)));nextBtn.onclick=function(){abrirA('acompanhamento');};nextFoot.append(nextBtn);}
@@ -1643,8 +1643,8 @@ function heroOrganizarProntuario(){
     /* O cabeçalho é a navegação única; a área de resumo não aparece nas outras subabas. */
     if(faixa)id.prepend(faixa);
     nav.replaceChildren();if(mainTabs)nav.append(mainTabs);
-    pages.replaceChildren(id);id.hidden=!resumo;pages.hidden=!resumo; if(!resumo){var resumoLink=el('button','lnk hero-v53-cnj-link',G.cnj);resumoLink.type='button';resumoLink.title='Voltar ao resumo do processo';resumoLink.onclick=function(){G.aba='Processo';G.rot='res';render();};nav.prepend(resumoLink);}
-    if(gbody){if(G.aba==='Processo'&&G.rot==='tri')gbody.prepend(encTr);gbody.hidden=resumo;}
+    pages.replaceChildren(id);id.hidden=!resumo;pages.hidden=!resumo;
+    if(gbody){if(G.aba==='Processo'&&G.rot==='tri'){gbody.prepend(encTr);var av=el('button','lnk hero-v53-autos-link','Conferir documentos em Autos');av.type='button';av.onclick=function(){G.aba='Autos';render();};encTr.append(av);}gbody.hidden=resumo;}
     if(!resumo&&gbody&&top.parentNode)top.after(gbody);
     if(window.MutaPauta&&window.MutaPauta.receberEditor)window.MutaPauta.receberEditor(G.cnj,solBody);
     show=function(i){if(i===1){G.aba='Processo';G.rot='tri';render();}else if(i>=2){heroTopo.perfil=true;perfil.open=true;}else if(!resumo){G.aba='Processo';G.rot='res';render();}};
