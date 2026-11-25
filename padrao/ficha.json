@@ -8,8 +8,121 @@
    "aba": "Processo",
    "grupos": [
     {
-     "grupo": "Sentença",
+     "grupo": "1º grau",
      "campos": [
+      {
+       "rotulo": "Juízo de origem",
+       "chave": "Origem - Juízo",
+       "tipo": "texto",
+       "secao": "origem",
+       "apelido": "juizo_origem",
+       "subgrupo": "Origem e dados do processo"
+      },
+      {
+       "rotulo": "Julgador(a) de origem",
+       "chave": "Origem - Julgador",
+       "tipo": "texto",
+       "secao": "origem",
+       "apelido": "juiz_origem",
+       "subgrupo": "Origem e dados do processo"
+      },
+      {
+       "rotulo": "Valor da causa",
+       "chave": "Origem - Valor da causa",
+       "tipo": "texto",
+       "secao": "origem",
+       "apelido": "valor_causa_origem",
+       "subgrupo": "Origem e dados do processo"
+      },
+      {
+       "rotulo": "Processo de referência",
+       "chave": "Origem - Processo de referência",
+       "tipo": "texto",
+       "secao": "origem",
+       "editavel": false,
+       "regra": "Processo_Referencia do relatório 151 do PJe; no agravo de instrumento, o processo de 1º grau",
+       "apelido": "origem_processo_referencia",
+       "subgrupo": "Origem e dados do processo"
+      },
+      {
+       "rotulo": "Documentos do 1º grau",
+       "chave": "Origem - Documentos 1G",
+       "tipo": "tabela",
+       "secao": "origem",
+       "colunas": [
+        {
+         "chave": "data",
+         "rotulo": "Data",
+         "tipo": "data"
+        },
+        {
+         "chave": "documento",
+         "rotulo": "Documento",
+         "tipo": "texto"
+        },
+        {
+         "chave": "magistrado",
+         "rotulo": "Magistrado(a)",
+         "tipo": "texto"
+        }
+       ],
+       "editavel": false,
+       "regra": "data_doc_1g, documento_1g e magistrado_1g do relatório 151 do PJe (uma linha por documento)",
+       "apelido": "origem_documentos_1g",
+       "subgrupo": "Origem e dados do processo"
+      },
+      {
+       "rotulo": "Peças vinculadas do primeiro grau",
+       "chave": "Origem - Peças vinculadas 1G",
+       "tipo": "tabela",
+       "secao": "origem",
+       "colunas": [
+        {
+         "chave": "cnj_referencia",
+         "rotulo": "CNJ de origem",
+         "tipo": "texto"
+        },
+        {
+         "chave": "id",
+         "rotulo": "ID no primeiro grau",
+         "tipo": "texto"
+        },
+        {
+         "chave": "data",
+         "rotulo": "Data",
+         "tipo": "data"
+        },
+        {
+         "chave": "documento",
+         "rotulo": "Tipo de documento",
+         "tipo": "texto"
+        },
+        {
+         "chave": "id_origem",
+         "rotulo": "ID de origem informado pelo PJe",
+         "tipo": "texto"
+        }
+       ],
+       "apelido": "origem_pecas_vinculadas_1g",
+       "subgrupo": "Origem e dados do processo"
+      },
+      {
+       "rotulo": "Data de ajuizamento",
+       "chave": "Origem - Data de ajuizamento",
+       "tipo": "data",
+       "secao": "origem",
+       "apelido": "origem_data_ajuizamento",
+       "subgrupo": "Origem e dados do processo"
+      },
+      {
+       "secao": "origem",
+       "chave": "1G - Sentença recorrida",
+       "rotulo": "Decisão recorrida no julgamento atual",
+       "tipo": "simnao",
+       "subgrupo": "Sentença",
+       "regra": "Marcar apenas se este pronunciamento for objeto do julgamento atual; pode haver mais de um pronunciamento impugnado. Não corresponde ao resultado a proferir.",
+       "apelido": "1g_sentenca_recorrida"
+      },
       {
        "rotulo": "Decisão",
        "chave": "Sentença - Decisão",
@@ -23,56 +136,64 @@
         "Homologatória",
         "Outra"
        ],
-       "apelido": "sentenca_decisao"
+       "apelido": "sentenca_decisao",
+       "subgrupo": "Sentença"
       },
       {
        "rotulo": "ID da sentença",
        "chave": "Sentença - ID",
        "tipo": "texto",
        "secao": "origem",
-       "apelido": "sentenca_id"
+       "apelido": "sentenca_id",
+       "subgrupo": "Sentença"
       },
       {
        "rotulo": "Honorários",
        "chave": "Sentença - Honorários",
        "tipo": "texto",
        "secao": "origem",
-       "apelido": "sentenca_honorarios"
+       "apelido": "sentenca_honorarios",
+       "subgrupo": "Sentença"
       },
       {
        "rotulo": "Custas / gratuidade",
        "chave": "Sentença - Custas",
        "tipo": "texto",
        "secao": "origem",
-       "apelido": "sentenca_custas"
+       "apelido": "sentenca_custas",
+       "subgrupo": "Sentença"
       },
       {
        "rotulo": "Resultado",
        "chave": "Sentença - Resultado",
        "tipo": "texto",
        "secao": "origem",
-       "apelido": "sentenca_resultado"
+       "apelido": "sentenca_resultado",
+       "subgrupo": "Sentença"
       },
       {
        "rotulo": "Fundamento",
        "chave": "Sentença - Fundamento",
        "tipo": "texto-longo",
        "secao": "origem",
-       "apelido": "sentenca_fundamento"
+       "apelido": "sentenca_fundamento",
+       "subgrupo": "Sentença"
       },
       {
        "rotulo": "Providências",
        "chave": "Sentença - Providências",
        "tipo": "texto-longo",
        "secao": "origem",
-       "apelido": "sentenca_providencias"
+       "apelido": "sentenca_providencias",
+       "subgrupo": "Sentença"
       },
       {
        "rotulo": "Data da sentença",
        "chave": "Sentença - Data",
        "tipo": "data",
        "secao": "origem",
-       "apelido": "sentenca_data"
+       "apelido": "sentenca_data",
+       "subgrupo": "Sentença"
       },
       {
        "rotulo": "Remessa necessária",
@@ -84,7 +205,8 @@
         "Não",
         "Dispensada"
        ],
-       "apelido": "sentenca_reexame"
+       "apelido": "sentenca_reexame",
+       "subgrupo": "Sentença"
       },
       {
        "rotulo": "Tutela na sentença",
@@ -97,7 +219,8 @@
         "Revogada",
         "Não"
        ],
-       "apelido": "sentenca_tutela"
+       "apelido": "sentenca_tutela",
+       "subgrupo": "Sentença"
       },
       {
        "rotulo": "Comandos dispositivos e evidências",
@@ -152,116 +275,296 @@
          ]
         }
        ],
-       "apelido": "sentenca_comandos"
+       "apelido": "sentenca_comandos",
+       "subgrupo": "Sentença"
       },
       {
        "secao": "origem",
        "chave": "Sentença - Publicação",
        "rotulo": "Publicação da sentença",
        "tipo": "data",
-       "apelido": "sentenca_publicacao"
+       "apelido": "sentenca_publicacao",
+       "subgrupo": "Sentença"
+      },
+      {
+       "secao": "origem",
+       "chave": "1G - Decisão recorrida",
+       "rotulo": "Decisão recorrida no julgamento atual",
+       "tipo": "simnao",
+       "subgrupo": "Decisão interlocutória / outra decisão",
+       "regra": "Marcar apenas se este pronunciamento for objeto do julgamento atual; pode haver mais de um pronunciamento impugnado. Não corresponde ao resultado a proferir.",
+       "apelido": "1g_decisao_recorrida"
+      },
+      {
+       "secao": "origem",
+       "chave": "1G - Decisão ID",
+       "rotulo": "ID da decisão",
+       "tipo": "texto",
+       "subgrupo": "Decisão interlocutória / outra decisão",
+       "apelido": "1g_decisao_id"
+      },
+      {
+       "secao": "origem",
+       "chave": "1G - Decisão Data",
+       "rotulo": "Data da decisão",
+       "tipo": "data",
+       "subgrupo": "Decisão interlocutória / outra decisão",
+       "apelido": "1g_decisao_data"
+      },
+      {
+       "secao": "origem",
+       "chave": "1G - Decisão Publicação",
+       "rotulo": "Publicação",
+       "tipo": "data",
+       "subgrupo": "Decisão interlocutória / outra decisão",
+       "apelido": "1g_decisao_publicacao"
+      },
+      {
+       "secao": "origem",
+       "chave": "1G - Decisão Julgador",
+       "rotulo": "Julgador(a)",
+       "tipo": "texto",
+       "subgrupo": "Decisão interlocutória / outra decisão",
+       "apelido": "1g_decisao_julgador"
+      },
+      {
+       "secao": "origem",
+       "chave": "1G - Decisão Resultado",
+       "rotulo": "Resultado / dispositivo",
+       "tipo": "texto-longo",
+       "subgrupo": "Decisão interlocutória / outra decisão",
+       "apelido": "1g_decisao_resultado"
+      },
+      {
+       "secao": "origem",
+       "chave": "1G - Decisão Fundamentos",
+       "rotulo": "Fundamentos",
+       "tipo": "texto-longo",
+       "subgrupo": "Decisão interlocutória / outra decisão",
+       "apelido": "1g_decisao_fundamentos"
       }
      ]
     },
     {
-     "grupo": "Origem",
+     "grupo": "2º grau",
      "campos": [
       {
-       "rotulo": "Juízo de origem",
-       "chave": "Origem - Juízo",
+       "secao": "origem",
+       "chave": "2G - Monocrática recorrida",
+       "rotulo": "Decisão recorrida no julgamento atual",
+       "tipo": "simnao",
+       "subgrupo": "Decisão monocrática anterior",
+       "regra": "Marcar apenas se este pronunciamento for objeto do julgamento atual; pode haver mais de um pronunciamento impugnado. Não corresponde ao resultado a proferir.",
+       "apelido": "2g_monocratica_recorrida"
+      },
+      {
+       "secao": "origem",
+       "chave": "2G - Monocrática ID",
+       "rotulo": "ID da decisão",
        "tipo": "texto",
-       "secao": "origem",
-       "apelido": "juizo_origem"
+       "subgrupo": "Decisão monocrática anterior",
+       "apelido": "2g_monocratica_id"
       },
       {
-       "rotulo": "Julgador(a) de origem",
-       "chave": "Origem - Julgador",
-       "tipo": "texto",
        "secao": "origem",
-       "apelido": "juiz_origem"
-      },
-      {
-       "rotulo": "Valor da causa",
-       "chave": "Origem - Valor da causa",
-       "tipo": "texto",
-       "secao": "origem",
-       "apelido": "valor_causa_origem"
-      },
-      {
-       "rotulo": "Processo de referência",
-       "chave": "Origem - Processo de referência",
-       "tipo": "texto",
-       "secao": "origem",
-       "editavel": false,
-       "regra": "Processo_Referencia do relatório 151 do PJe; no agravo de instrumento, o processo de 1º grau",
-       "apelido": "origem_processo_referencia"
-      },
-      {
-       "rotulo": "Documentos do 1º grau",
-       "chave": "Origem - Documentos 1G",
-       "tipo": "tabela",
-       "secao": "origem",
-       "colunas": [
-        {
-         "chave": "data",
-         "rotulo": "Data",
-         "tipo": "data"
-        },
-        {
-         "chave": "documento",
-         "rotulo": "Documento",
-         "tipo": "texto"
-        },
-        {
-         "chave": "magistrado",
-         "rotulo": "Magistrado(a)",
-         "tipo": "texto"
-        }
-       ],
-       "editavel": false,
-       "regra": "data_doc_1g, documento_1g e magistrado_1g do relatório 151 do PJe (uma linha por documento)",
-       "apelido": "origem_documentos_1g"
-      },
-      {
-       "rotulo": "Peças vinculadas do primeiro grau",
-       "chave": "Origem - Peças vinculadas 1G",
-       "tipo": "tabela",
-       "secao": "origem",
-       "colunas": [
-        {
-         "chave": "cnj_referencia",
-         "rotulo": "CNJ de origem",
-         "tipo": "texto"
-        },
-        {
-         "chave": "id",
-         "rotulo": "ID no primeiro grau",
-         "tipo": "texto"
-        },
-        {
-         "chave": "data",
-         "rotulo": "Data",
-         "tipo": "data"
-        },
-        {
-         "chave": "documento",
-         "rotulo": "Tipo de documento",
-         "tipo": "texto"
-        },
-        {
-         "chave": "id_origem",
-         "rotulo": "ID de origem informado pelo PJe",
-         "tipo": "texto"
-        }
-       ],
-       "apelido": "origem_pecas_vinculadas_1g"
-      },
-      {
-       "rotulo": "Data de ajuizamento",
-       "chave": "Origem - Data de ajuizamento",
+       "chave": "2G - Monocrática Data",
+       "rotulo": "Data da decisão",
        "tipo": "data",
+       "subgrupo": "Decisão monocrática anterior",
+       "apelido": "2g_monocratica_data"
+      },
+      {
        "secao": "origem",
-       "apelido": "origem_data_ajuizamento"
+       "chave": "2G - Monocrática Publicação",
+       "rotulo": "Publicação",
+       "tipo": "data",
+       "subgrupo": "Decisão monocrática anterior",
+       "apelido": "2g_monocratica_publicacao"
+      },
+      {
+       "secao": "origem",
+       "chave": "2G - Monocrática Relator",
+       "rotulo": "Relator(a)",
+       "tipo": "texto",
+       "subgrupo": "Decisão monocrática anterior",
+       "apelido": "2g_monocratica_relator"
+      },
+      {
+       "secao": "origem",
+       "chave": "2G - Monocrática Órgão",
+       "rotulo": "Órgão julgador",
+       "tipo": "texto",
+       "subgrupo": "Decisão monocrática anterior",
+       "apelido": "2g_monocratica_orgao"
+      },
+      {
+       "secao": "origem",
+       "chave": "2G - Monocrática Resultado",
+       "rotulo": "Resultado / dispositivo",
+       "tipo": "texto-longo",
+       "subgrupo": "Decisão monocrática anterior",
+       "apelido": "2g_monocratica_resultado"
+      },
+      {
+       "secao": "origem",
+       "chave": "2G - Monocrática Fundamentos",
+       "rotulo": "Fundamentos",
+       "tipo": "texto-longo",
+       "subgrupo": "Decisão monocrática anterior",
+       "apelido": "2g_monocratica_fundamentos"
+      },
+      {
+       "secao": "origem",
+       "chave": "2G - Acórdão recorrido",
+       "rotulo": "Decisão recorrida no julgamento atual",
+       "tipo": "simnao",
+       "subgrupo": "Acórdão anterior",
+       "regra": "Marcar apenas se este pronunciamento for objeto do julgamento atual; pode haver mais de um pronunciamento impugnado. Não corresponde ao resultado a proferir.",
+       "apelido": "2g_acordao_recorrido"
+      },
+      {
+       "rotulo": "ID do acórdão",
+       "chave": "Acórdão - ID",
+       "tipo": "texto",
+       "secao": "producao",
+       "apelido": "acordao_id",
+       "subgrupo": "Acórdão anterior"
+      },
+      {
+       "rotulo": "Acórdão assinado",
+       "chave": "Acórdão - Assinado",
+       "tipo": "simnao",
+       "secao": "producao",
+       "apelido": "acordao_assinado",
+       "subgrupo": "Acórdão anterior"
+      },
+      {
+       "rotulo": "Acórdão publicado",
+       "chave": "Acórdão - Publicado",
+       "tipo": "simnao",
+       "secao": "producao",
+       "apelido": "acordao_publicado",
+       "subgrupo": "Acórdão anterior"
+      },
+      {
+       "rotulo": "Data da publicação",
+       "chave": "Acórdão - Data da publicação",
+       "tipo": "data",
+       "secao": "producao",
+       "apelido": "acordao_data_publicacao",
+       "subgrupo": "Acórdão anterior"
+      },
+      {
+       "rotulo": "Embargos de declaração opostos",
+       "chave": "Acórdão - ED opostos",
+       "tipo": "simnao",
+       "secao": "producao",
+       "apelido": "acordao_ed_opostos",
+       "subgrupo": "Acórdão anterior"
+      },
+      {
+       "rotulo": "Trânsito em julgado",
+       "chave": "Acórdão - Trânsito",
+       "tipo": "data",
+       "secao": "producao",
+       "apelido": "acordao_transito",
+       "subgrupo": "Acórdão anterior"
+      },
+      {
+       "secao": "origem",
+       "chave": "2G - Acórdão Data",
+       "rotulo": "Data do julgamento",
+       "tipo": "data",
+       "subgrupo": "Acórdão anterior",
+       "apelido": "2g_acordao_data"
+      },
+      {
+       "secao": "origem",
+       "chave": "2G - Acórdão Relator",
+       "rotulo": "Relator(a)",
+       "tipo": "texto",
+       "subgrupo": "Acórdão anterior",
+       "apelido": "2g_acordao_relator"
+      },
+      {
+       "secao": "origem",
+       "chave": "2G - Acórdão Órgão",
+       "rotulo": "Órgão julgador",
+       "tipo": "texto",
+       "subgrupo": "Acórdão anterior",
+       "apelido": "2g_acordao_orgao"
+      },
+      {
+       "secao": "origem",
+       "chave": "2G - Acórdão Resultado",
+       "rotulo": "Resultado / dispositivo",
+       "tipo": "texto-longo",
+       "subgrupo": "Acórdão anterior",
+       "apelido": "2g_acordao_resultado"
+      },
+      {
+       "secao": "origem",
+       "chave": "2G - Acórdão Ementa",
+       "rotulo": "Ementa",
+       "tipo": "texto-longo",
+       "subgrupo": "Acórdão anterior",
+       "apelido": "2g_acordao_ementa"
+      },
+      {
+       "rotulo": "ID da decisão impugnada",
+       "chave": "Impugnada - ID",
+       "tipo": "texto",
+       "secao": "triagem",
+       "apelido": "impugnada_id",
+       "subgrupo": "Decisão impugnada · registro anterior"
+      },
+      {
+       "rotulo": "Data do julgamento / decisão",
+       "chave": "Impugnada - Data",
+       "tipo": "data",
+       "secao": "triagem",
+       "apelido": "impugnada_data",
+       "subgrupo": "Decisão impugnada · registro anterior"
+      },
+      {
+       "rotulo": "Órgão julgador",
+       "chave": "Impugnada - Órgão",
+       "tipo": "texto",
+       "secao": "triagem",
+       "apelido": "impugnada_orgao",
+       "subgrupo": "Decisão impugnada · registro anterior"
+      },
+      {
+       "rotulo": "Relator(a)",
+       "chave": "Impugnada - Relator",
+       "tipo": "texto",
+       "secao": "triagem",
+       "apelido": "impugnada_relator",
+       "subgrupo": "Decisão impugnada · registro anterior"
+      },
+      {
+       "rotulo": "Síntese / ementa",
+       "chave": "Impugnada - Síntese",
+       "tipo": "texto-longo",
+       "secao": "triagem",
+       "apelido": "impugnada_sintese",
+       "subgrupo": "Decisão impugnada · registro anterior"
+      },
+      {
+       "secao": "triagem",
+       "chave": "Impugnada - Publicação",
+       "rotulo": "Publicação da decisão impugnada",
+       "tipo": "data",
+       "apelido": "impugnada_publicacao",
+       "subgrupo": "Decisão impugnada · registro anterior"
+      },
+      {
+       "secao": "triagem",
+       "chave": "Impugnada - Ementa literal",
+       "rotulo": "Ementa literal do acórdão recorrido",
+       "tipo": "texto-longo",
+       "apelido": "impugnada_ementa_literal",
+       "subgrupo": "Decisão impugnada · registro anterior"
       }
      ]
     },
@@ -636,7 +939,7 @@
      ]
     },
     {
-     "grupo": "Autuação",
+     "grupo": "Identificação e Autuação",
      "campos": [
       {
        "rotulo": "Classe",
@@ -759,7 +1062,7 @@
      ]
     },
     {
-     "grupo": "Matéria",
+     "grupo": "Caso, Conteúdo e Questões",
      "campos": [
       {
        "rotulo": "Assunto CNJ",
@@ -831,6 +1134,20 @@
        "editavel": false,
        "regra": "do lote de triagem (acervo/lotes); atualizado por scripts/triagem/ficha_lote.py",
        "apelido": "registro_assunto_detalhado"
+      },
+      {
+       "rotulo": "Alegações",
+       "chave": "Alegações",
+       "tipo": "texto-longo",
+       "secao": "triagem",
+       "apelido": "alegacoes"
+      },
+      {
+       "rotulo": "Questões destacadas",
+       "chave": "Questões destacadas",
+       "secao": "triagem",
+       "tipo": "texto-longo",
+       "regra": "Seleção de questões do caso para exibição resumida no prontuário."
       }
      ]
     },
@@ -1265,13 +1582,6 @@
        "regra": "Campo único de tipos de julgamento; seleção múltipla conforme vocabulário da HERO18810, preservando formato de armazenamento existente."
       },
       {
-       "rotulo": "Alegações",
-       "chave": "Alegações",
-       "tipo": "texto-longo",
-       "secao": "triagem",
-       "apelido": "alegacoes"
-      },
-      {
        "rotulo": "Situação da triagem",
        "chave": "Status da triagem",
        "tipo": "lista",
@@ -1488,13 +1798,6 @@
          "tipo": "texto-longo"
         }
        ]
-      },
-      {
-       "rotulo": "Questões destacadas",
-       "chave": "Questões destacadas",
-       "secao": "triagem",
-       "tipo": "texto-longo",
-       "regra": "Seleção de questões do caso para exibição resumida no prontuário."
       },
       {
        "rotulo": "Análise do caso · histórico",
@@ -2014,7 +2317,7 @@
      ]
     },
     {
-     "grupo": "Espécie e decisão impugnada",
+     "grupo": "Espécie de julgamento",
      "campos": [
       {
        "rotulo": "Espécie",
@@ -2032,102 +2335,6 @@
         "retratacao": "Juízo de retratação"
        },
        "apelido": "padrao_especie"
-      },
-      {
-       "rotulo": "ID da decisão impugnada",
-       "chave": "Impugnada - ID",
-       "tipo": "texto",
-       "secao": "triagem",
-       "apelido": "impugnada_id"
-      },
-      {
-       "rotulo": "Data do julgamento / decisão",
-       "chave": "Impugnada - Data",
-       "tipo": "data",
-       "secao": "triagem",
-       "apelido": "impugnada_data"
-      },
-      {
-       "rotulo": "Órgão julgador",
-       "chave": "Impugnada - Órgão",
-       "tipo": "texto",
-       "secao": "triagem",
-       "apelido": "impugnada_orgao"
-      },
-      {
-       "rotulo": "Relator(a)",
-       "chave": "Impugnada - Relator",
-       "tipo": "texto",
-       "secao": "triagem",
-       "apelido": "impugnada_relator"
-      },
-      {
-       "rotulo": "Síntese / ementa",
-       "chave": "Impugnada - Síntese",
-       "tipo": "texto-longo",
-       "secao": "triagem",
-       "apelido": "impugnada_sintese"
-      },
-      {
-       "secao": "triagem",
-       "chave": "Impugnada - Publicação",
-       "rotulo": "Publicação da decisão impugnada",
-       "tipo": "data",
-       "apelido": "impugnada_publicacao"
-      },
-      {
-       "secao": "triagem",
-       "chave": "Impugnada - Ementa literal",
-       "rotulo": "Ementa literal do acórdão recorrido",
-       "tipo": "texto-longo",
-       "apelido": "impugnada_ementa_literal"
-      }
-     ]
-    },
-    {
-     "grupo": "Acórdão recorrido (embargos de declaração)",
-     "campos": [
-      {
-       "rotulo": "ID do acórdão",
-       "chave": "Acórdão - ID",
-       "tipo": "texto",
-       "secao": "producao",
-       "apelido": "acordao_id"
-      },
-      {
-       "rotulo": "Acórdão assinado",
-       "chave": "Acórdão - Assinado",
-       "tipo": "simnao",
-       "secao": "producao",
-       "apelido": "acordao_assinado"
-      },
-      {
-       "rotulo": "Acórdão publicado",
-       "chave": "Acórdão - Publicado",
-       "tipo": "simnao",
-       "secao": "producao",
-       "apelido": "acordao_publicado"
-      },
-      {
-       "rotulo": "Data da publicação",
-       "chave": "Acórdão - Data da publicação",
-       "tipo": "data",
-       "secao": "producao",
-       "apelido": "acordao_data_publicacao"
-      },
-      {
-       "rotulo": "Embargos de declaração opostos",
-       "chave": "Acórdão - ED opostos",
-       "tipo": "simnao",
-       "secao": "producao",
-       "apelido": "acordao_ed_opostos"
-      },
-      {
-       "rotulo": "Trânsito em julgado",
-       "chave": "Acórdão - Trânsito",
-       "tipo": "data",
-       "secao": "producao",
-       "apelido": "acordao_transito"
       }
      ]
     },
