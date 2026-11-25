@@ -65,8 +65,8 @@
   function procHtml() {
     var g = GB(), cnj = g.cnj ? g.cnj() : '';
     if (!cnj) return '<section class="card pc-sec"><div class="pc-sh"><h3>Processo em tela</h3></div><p class="muted">Abra um processo no PJe ou na lista abaixo.</p></section>';
-    return '<section class="card pc-sec pa-proc"><div class="pc-sh"><h3>Processo em tela</h3><small class="mono">' + esc(cnj) + '</small></div>' +
-      (g.pautaHtml ? g.pautaHtml() : '') + '</section>';
+    /* 0.62: no formato do cartão do processo (fundo cinza, como "autuação e partes") */
+    return '<section class="pc pm pa-proc"><div class="pa-ph"><b>Processo em tela</b><span class="mono">' + esc(cnj) + '</span></div>' + (g.pautaHtml ? g.pautaHtml() : '') + '</section>';
   }
   function listaHtml() {
     var opts = (P.cal || []).map(function (s) { return '<option value="' + esc(s.date) + '"' + (s.date === P.data ? ' selected' : '') + '>' + esc(br(s.date)) + (s.date < hoje() ? ' (passada)' : '') + '</option>'; }).join('');

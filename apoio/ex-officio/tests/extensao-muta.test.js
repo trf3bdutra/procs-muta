@@ -130,7 +130,7 @@ test('extensão 0.15: cabeçalho no formato da gaveta da pauta (etapas, designa�
   ['producao.MINUTADO', 'producao.CORRIGIDO', 'producao.Data da Revisão', 'producao.LIBERADO', 'producao.Data da Liberação', 'producao.Assinado', 'producao.Data da Assinatura',
     'producao.SERVIDOR', 'producao.CORRETOR', 'triagem.O que falta sanar', 'triagem.Intercorrências', 'origem.Observações', 'producao.Voto - Resultado', 'producao.Voto - Honorários', 'producao.Tópico-síntese']
     .forEach(k => assert.ok(ks.has(k), k));
-  assert.match(gab, /function cabeca\(s\)/); assert.match(gab, /cabeca\(s\) \+ snc \+ tabs/);
+  assert.match(gab, /function cabeca\(s\)/); assert.match(gab, /cabeca\(s\)\.replace\(\/<\\\/section>\$\/, snc \+ '<\/section>'\) \+ tabs/);
   assert.match(gab, /function sinalizacoes\(\)/); assert.match(gab, /function notas\(\)/); assert.match(gab, /data-et=/);
 });
 

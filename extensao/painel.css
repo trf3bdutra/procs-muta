@@ -1455,3 +1455,17 @@ html[data-tema=escuro] .sn-st.av,html[data-tema=escuro] .sn-tp.av{background:#16
 .sn-card>summary .gn,.sn-card>summary .rt-al{margin-left:auto}
 .sn-card>summary::before{content:'›';display:inline-block;transition:transform .15s}.sn-card[open]>summary::before{transform:rotate(90deg)}
 .sn-card>.sn-b{padding:0 10px 10px}
+/* 0.62 · sinalizações e notas como 3ª seta do cartão; Processo em tela da aba Pauta no formato do cartão */
+.pm-sn .sn-b{padding:6px 14px 4px}.pm-sn-n{color:var(--danger);font-weight:650}
+.pa-proc{margin-bottom:10px}.pa-ph{display:flex;align-items:baseline;gap:8px;margin-bottom:6px}.pa-ph b{font-size:13px}.pa-ph .mono{font-size:11px;color:var(--muted-fg)}
+.pa-pc{border:0;box-shadow:none;background:none;padding:0}
+.pa-st0{display:flex;align-items:center;gap:8px;margin-bottom:4px}
+.pa-sit{font:700 10.5px var(--mono);padding:2px 8px;border-radius:10px;border:1px solid var(--line);background:var(--card)}
+.pa-sit.s-adiado,.pa-sit.s-retirado-de-pauta{border-color:#c79a2b;color:#a07a18}.pa-sit.s-em-mesa{border-color:#6b8fd6;color:#4a6fb8}
+.pa-tl{list-style:none;padding:0;margin:4px 0 6px;border-left:2px solid var(--line);display:grid;gap:4px}
+.pa-tl li{position:relative;padding-left:12px;display:flex;flex-wrap:wrap;gap:4px 8px;align-items:baseline}
+.pa-tl li::before{content:'';position:absolute;left:-5px;top:5px;width:8px;height:8px;border-radius:50%;background:var(--muted-fg)}
+.pa-tl .pa-tl-fut::before{background:#6b8fd6}.pa-tl .pa-tl-jul::before{background:#3a8f5c}.pa-tl .pa-tl-adi::before,.pa-tl .pa-tl-ret::before{background:#c79a2b}
+.pa-tl small{width:100%;color:var(--muted-fg);font-size:10.5px}.pa-tl-so{font-size:10px;padding:0 6px;border-radius:8px;border:1px solid #6b8fd6;color:#4a6fb8}
+.pa-reg{margin:8px 0 0!important}
+.pc.pm.pa-proc{margin:0 0 10px!important;border-radius:10px!important;border:1px solid #e1e5ea!important}

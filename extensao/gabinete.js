@@ -613,7 +613,8 @@ function snCard() {
   SN_HTML = si + nt;
   var n = (si.match(/class="sn-i [a-z]+"/g) || []).length;
   var ab = SN_AB != null ? SN_AB : n > 0;
-  return '<details class="card sn-card"' + (ab ? ' open' : '') + '><summary><b>Sinalizações e notas</b>' + (n ? '<span class="rt-al">' + n + ' em aberto</span>' : '<span class="gn">sem pendências</span>') + '</summary><div class="sn-b">' + si + nt + rg + '</div></details>';
+  /* 0.62: 3ª seta do cartão do processo (fundo cinza), no formato de "autuação e partes" */
+  return '<details class="pm-aut pm-sn"' + (ab ? ' open' : '') + '><summary aria-label="Sinalizações e notas" title="Sinalizações e notas"><span class="pm-aut-t">sinalizações e notas' + (n ? ' · <b class="pm-sn-n">' + n + ' em aberto</b>' : '') + '</span><i class="pm-aut-h"></i></summary><div class="sn-b">' + si + nt + rg + '</div></details>';
 }
 function corpoProcesso() {
   /* 0.60: a aba Processo = Roteiro de triagem + Roteiro de produção; sinalizações, notas e registro no acervo foram para o card do topo (snCard) */
@@ -704,21 +705,39 @@ function camposCaso(ja) {
 /* 0.58 · aba Pauta › Processo em tela: situação, remarcação e sustentação/preferência (gravam na ficha) e o histórico de pautas */
 function pautaHtml() {
   if (!G.F || !G.cnj) return '<p class="muted">Lendo o prontuário…</p>';
-  var g = grupoModelo('Pauta e julgamento'), cs = g ? g.campos || [] : [];
-  var ed = cs.filter(editavel), ro = cs.filter(function (c) { return !editavel(c) && c.secao && S(gravado(c.secao, c.chave)); });
-  return '<p class="pm-lb">Histórico de pautas</p>' + historicoPautas() + '<div class="gr">' + ed.map(campo).join('') + ro.map(campo).join('') + '</div>' +
-    (destino() === 'monocratica' ? '<p class="muted">Destino monocrático: sem pauta de sessão.</p>' : '');
+  var P = (G.op || {}).pauta || {}, br2 = function (d) { return /^\d{4}-\d{2}-\d{2}/.test(S(d)) ? S(d).slice(0, 10).split('-').reverse().join('/') : S(d); };
+  var g = grupoModelo('Pauta e julgamento'), cs = g ? g.campos || [] : [], dt = function (k) { var v = S(P[k]); return v ? esc(br2(v)) : '—'; };
+  var mono = destino() === 'monocratica', st = S(V('pauta', 'Status de Julgamento')) || 'PAUTADO', so = S(V('pauta', 'Sustentação oral'));
+  /* resumo, no formato da 1ª seta do cartão */
+  var dl = [['Situação', esc(st)], ['Sessão original', dt('Sessão original')], ['Item', esc(S(P['Item (Pauta de Julgamento)']) || '—')],
+    ['Sessão de destino', dt('Nova sessão de destino')], ['Sustentação / preferência', esc(so || '—')], ['Julgamento', esc(S(P.JULGAMENTO) || '—')]]
+    .map(function (x) { return '<dt>' + x[0] + '</dt><dd>' + x[1] + '</dd>'; }).join('');
+  var pje = [['Publicação da pauta', 'Pauta - Publicação'], ['Inclusão na pauta', 'Pauta - Inclusão'], ['Proclamação', 'Pauta - Proclamação'], ['Último movimento', 'Pauta - Último movimento']]
+    .filter(function (x) { return S(P[x[1]]); }).map(function (x) { return '<dt>' + x[0] + '</dt><dd>' + esc(br2(P[x[1]])) + '</dd>'; }).join('');
+  var ed = cs.filter(function (c) { return editavel(c); });
+  return '<div class="pc pa-pc"><div class="pa-st0"><span class="pa-sit s-' + esc(N(st).replace(/\s+/g, '-')) + '">' + esc(st) + '</span>' + (mono ? '<small class="muted">destino monocrático: sem pauta de sessão</small>' : '') + '</div>' +
+    '<h4 class="pm-mer-h">Sessões de julgamento</h4>' + historicoPautas() +
+    '<h4 class="pm-mer-h">Resumo da pauta</h4><dl class="pc-dl">' + dl + '</dl>' +
+    (pje ? '<h4 class="pm-mer-h">No PJe</h4><dl class="pc-dl">' + pje + '</dl>' : '') +
+    '<details class="pm-aut pa-reg"><summary><span class="pm-aut-t">registrar situação, remarcação e sustentação</span><i class="pm-aut-h"></i></summary><div class="gr">' + ed.map(campo).join('') + '</div></details></div>';
 }
 /* histórico de pautas do processo: sessões registradas na ficha e cartões das pautas em curso (retirado, adiado, sustentação, preferência) */
 function historicoPautas() {
-  var L = [], ses = ((G.op || {}).pauta || {}).sessoes, br2 = function (d) { return /^\d{4}-\d{2}-\d{2}/.test(S(d)) ? S(d).slice(0, 10).split('-').reverse().join('/') : S(d); };
-  (Array.isArray(ses) ? ses : []).forEach(function (x) { if (x && x.sessao) L.push({ s: x.sessao, i: S(x.item), r: S(x.resultado) }); });
+  var P = (G.op || {}).pauta || {}, L = [], br2 = function (d) { return /^\d{4}-\d{2}-\d{2}/.test(S(d)) ? S(d).slice(0, 10).split('-').reverse().join('/') : S(d); };
+  var poe = function (d, o) { d = S(d).slice(0, 10); if (!/^\d{4}-\d{2}-\d{2}$/.test(d)) return; var e = L.filter(function (x) { return x.s === d; })[0]; if (!e) { e = { s: d }; L.push(e); } Object.keys(o).forEach(function (k) { if (o[k] && !e[k]) e[k] = o[k]; }); };
+  (Array.isArray(P.sessoes) ? P.sessoes : []).forEach(function (x) { if (x) poe(x.sessao, { i: S(x.item), r: S(x.resultado) }); });
+  if (P['Sessão original']) poe(P['Sessão original'], { i: S(P['Item (Pauta de Julgamento)']), o: 'sessão original' });
+  if (P['Nova sessão de destino']) poe(P['Nova sessão de destino'], { o: 'remarcado para esta sessão', m: S(P['Motivo da remarcação']) });
   var SI = window.MutaSincronia && window.MutaSincronia.situacao ? window.MutaSincronia.situacao() : null, C = SI && SI.cnj && SI.cnj.replace(/\D/g, '') === S(G.cnj).replace(/\D/g, '') ? SI.cartoes : [];
-  (C || []).forEach(function (c) { var e = L.filter(function (x) { return x.s === c.sessao; })[0] || (L.push({ s: c.sessao, i: '', r: '' }), L[L.length - 1]);
-    e.i = e.i || S(c.item); e.r = e.r || S(c.resultado); var so = (c.ctl || {}).sopref || (c.cartao || {}).sopref; if (so) e.so = so; e.atual = true; });
+  (C || []).forEach(function (c) { poe(c.sessao, { i: S(c.item), r: S(c.resultado), so: (c.ctl || {}).sopref || '', atual: 1, srv: S(c.servidor), lib: S(c.dataLiberacao) }); });
   if (!L.length) return '<p class="muted">Sem pauta registrada para este processo.</p>';
-  L.sort(function (a, b) { return S(a.s).localeCompare(S(b.s)); });
-  return '<ol class="cc-pautas">' + L.map(function (x) { return '<li><b>' + esc(br2(x.s)) + '</b>' + (x.i ? ' · item ' + esc(x.i) : '') + (x.r ? ' · <span class="cc-pr">' + esc(x.r) + '</span>' : x.atual ? ' · em pauta' : '') + (x.so ? ' · ' + esc(x.so) : '') + '</li>'; }).join('') + '</ol>';
+  L.sort(function (a, b) { return a.s.localeCompare(b.s); });
+  var hj = new Date(Date.now() - 4 * 3600e3).toISOString().slice(0, 10);
+  return '<ol class="cc-pautas pa-tl">' + L.map(function (x) {
+    var r = x.r || (x.s >= hj ? (x.atual ? 'em pauta' : 'prevista') : ''), k = /retirad/i.test(r) ? 'ret' : /adiad/i.test(r) ? 'adi' : x.s >= hj ? 'fut' : r ? 'jul' : 'pas';
+    return '<li class="pa-tl-' + k + '"><b>' + esc(br2(x.s)) + '</b>' + (x.i ? '<span>item ' + esc(x.i) + '</span>' : '') + (r ? '<span class="cc-pr">' + esc(r) + '</span>' : '') +
+      (x.so ? '<span class="pa-tl-so">' + esc(x.so) + '</span>' : '') + (x.o ? '<small>' + esc(x.o) + (x.m ? ' · ' + esc(x.m) : '') + '</small>' : '') + (x.lib ? '<small>liberado em ' + esc(br2(x.lib)) + '</small>' : '') + '</li>';
+  }).join('') + '</ol>';
 }
 document.addEventListener('toggle', function (e) { var d = e.target; if (d && d.getAttribute && d.getAttribute('data-cc') != null) CC_ABERTO[d.getAttribute('data-cc')] = d.open; }, true);
 function corpoTriagem() {
@@ -858,7 +877,7 @@ function render0() {
   var ab = document.activeElement && document.activeElement.dataset ? (document.activeElement.dataset.fk || (document.activeElement.dataset.esp ? 'esp:' + document.activeElement.dataset.esp : '') || (document.activeElement.dataset.q != null ? 'q:' + document.activeElement.dataset.q : '')) : '';
   var y = window.scrollY, pp = $('panel-pront'), yp = pp ? pp.scrollTop : 0;
   precEmentario(casoPrec());
-  caixa.innerHTML = cabeca(s) + snc + tabs + st0 + '<div class="gbody">' + corpo + '</div>';
+  caixa.innerHTML = cabeca(s).replace(/<\/section>$/, snc + '</section>') + tabs + st0 + '<div class="gbody">' + corpo + '</div>';
   stEl = $('g-st');
   if (ab) {
     var sel = /^esp:/.test(ab) ? '[data-esp="' + ab.slice(4) + '"]' : /^q:/.test(ab) ? '[data-q="' + ab.slice(2) + '"]' : '[data-fk="' + ab.replace(/"/g, '\\"') + '"]';
@@ -929,7 +948,7 @@ caixa.addEventListener('change', function (e) {
   agendar(900);
   if (/^(triagem\.(Urgência|Padrão - Espécie)|producao\.Destino|controles\.Sensível - (In|Ex)cluído)$/.test(t.dataset.fk) || G.aba === 'Processo') render();
 });
-caixa.addEventListener('toggle', function (e) { var c = e.target.classList; if (!c) return; if (c.contains('sn-card')) { SN_AB = e.target.open; return; } if (c.contains('pm-mer')) { if (G.merAb !== e.target.open) { G.merAb = e.target.open; render(); } return; } if (c.contains('pm-aut')) { if (G.autAb !== e.target.open) { G.autAb = e.target.open; render(); } return; } if (c.contains('au-it') && window.MutaAutos) { window.MutaAutos.abrirTexto(e.target.dataset.auIt, e.target.open); return; } if (c.contains('au-auto-d') && window.MutaAutos) window.MutaAutos.estado().autoAb = e.target.open; if (c.contains('pc-s')) { G.pecAb = G.pecAb || {}; G.pecAb[e.target.dataset.grupo] = e.target.open; } }, true);
+caixa.addEventListener('toggle', function (e) { var c = e.target.classList; if (!c) return; if (c.contains('pm-sn')) { SN_AB = e.target.open; return; } if (c.contains('pm-mer')) { if (G.merAb !== e.target.open) { G.merAb = e.target.open; render(); } return; } if (c.contains('pm-aut')) { if (G.autAb !== e.target.open) { G.autAb = e.target.open; render(); } return; } if (c.contains('au-it') && window.MutaAutos) { window.MutaAutos.abrirTexto(e.target.dataset.auIt, e.target.open); return; } if (c.contains('au-auto-d') && window.MutaAutos) window.MutaAutos.estado().autoAb = e.target.open; if (c.contains('pc-s')) { G.pecAb = G.pecAb || {}; G.pecAb[e.target.dataset.grupo] = e.target.open; } }, true);
 caixa.addEventListener('keydown', function (e) {
   if (e.target.id === 'sn-tx' && e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); snIncluir(); }
   else if (e.target.id === 'pm-ad-tx' && e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); adAcao('ok'); }
