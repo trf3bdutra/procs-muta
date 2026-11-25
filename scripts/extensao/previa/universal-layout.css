@@ -26,3 +26,9 @@ html[data-tema=escuro] .pv-universal-body{--pv-bg:#112530;--pv-line:#344854;--pv
 .pv-universal-body .topo-u{border-bottom:1px solid var(--pv-line)!important;padding-bottom:5px}
 .pv-universal-body .tu-l{flex-wrap:wrap}
 .pv-universal-body .topo-u .tu-n{flex-shrink:1;min-width:0}
+
+/* Sínteses: mesmo padrão compacto do detalhamento do assunto. */
+.pv-universal .pv-sint-list{display:flex;flex-wrap:wrap;gap:4px 7px;margin:5px 0;min-width:0}
+.pv-universal .pv-sintese{min-width:0;max-width:100%}.pv-universal .pv-sintese:has(.pm-ad){flex:1 0 100%}
+.pv-sint-label{font-size:10px;font-weight:600;color:var(--muted-fg);margin-top:3px}.pv-universal .pv-sintese .pm-ad{margin:1px 0 3px}.pv-sint-value{white-space:pre-wrap;overflow-wrap:anywhere}.pv-sintese textarea{width:100%;min-width:0;resize:vertical}
+.pv-universal .pv-sintese .pm-ad-add{font-size:10.5px;white-space:normal;padding:2px 7px}.pv-universal .pv-sintese .pm-ad-b{margin-top:4px}

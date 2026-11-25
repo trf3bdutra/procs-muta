@@ -67,3 +67,16 @@ test('navegador universal: utilidades, ferramentas do gabinete, processo em tela
     assert.match(old,/<b>Minuta /);
   } finally {fs.rmSync(saida,{recursive:true,force:true});}
 });
+
+test('sínteses: chaves distintas, padrão de assunto detalhado e gravação explícita', () => {
+  const src=fs.readFileSync(path.join(ROOT,'scripts/extensao/previa/universal-layout.js'),'utf8');
+  assert.match(src,/sintKeys=\{sp:'Síntese Processual',sf:'Síntese Fática'\}/);
+  assert.match(src,/sintese\('sp','Síntese processual'/);
+  assert.match(src,/sintese\('sf','Síntese fática'/);
+  assert.match(src,/plus\.className='pm-ad-add'/);
+  assert.match(src,/b\.className='pm-ad-i'/);
+  assert.match(src,/marcar\('triagem\.'\+sintKeys\[id\]/);
+  assert.doesNotMatch(src,/field\('triagem','Síntese Fática'/);
+  assert.match(src,/sintEdit='';sintDraft='';render\(\)/);
+  new Function(src);
+});
