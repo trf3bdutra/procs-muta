@@ -43,7 +43,7 @@ async function abrir(op, sig) {
   try {
   b = await pw.chromium.launch({ executablePath: CHROME, args: ['--no-sandbox'] });
   const pg = await b.newPage({ viewport: { width: 520, height: 1400 } });
-  const erros = []; pg.on('pageerror', e => erros.push(e.message));
+  const erros = []; pg.on('pageerror', e => erros.push(e.stack || e.message));
   await pg.goto('http://127.0.0.1:' + srv.address().port + '/painel/painel.html');
   await pg.waitForFunction(() => window.MutaSessao && window.MutaSessao.estado().estado === 'on', null, { timeout: 15000 });
   /* o "PJe" informa o processo aberto, como o conteudo-pje.js faria */
@@ -62,10 +62,10 @@ test('painel: abre o processo com sigla, etapas, roteiros e notas; sem erro de s
     const pil = await pg.$$eval('.pm-pl', L => L.map(x => ({ t: x.textContent.trim(), c: x.className })));
     assert.ok(pil.some(x => /^Minuta: Rodrigo · 13\/11\/2026$/.test(x.t) && /k-min ok/.test(x.c)), 'minuta verde com nome e data: ' + JSON.stringify(pil));
     assert.ok(!pil.some(x => /Liberada/.test(x.t)), 'sem "Liberada" sem as caixas do editor nem registro');
-    assert.deepEqual(await pg.$eval('.hero-main-tabs [data-rot]', L => L.map(b=>b.dataset.rot)), ['tri','pro','sol'], 'Triagem, Produção e Solicitações como abas irmãs');
+    assert.deepEqual(await pg.$$eval('.hero-main-tabs [data-rot]', L => L.map(b=>b.dataset.rot)), ['tri','pro','sol'], 'Triagem, Produção e Solicitações como abas irmãs');
     assert.ok(await pg.$('.hero-main-tabs [data-aba="Autos"]'), 'Autos em aba própria');
     assert.ok(await pg.$('.hero-tipo-ref'), 'tipo de julgamento no cartão');
-    assert.equal(await pg.$eval('.hero-sn-ind [data-sn-kind]', L => L.length), 3, 'sinalizações independentes');
+    assert.equal(await pg.$$eval('.hero-sn-ind [data-sn-kind]', L => L.length), 3, 'sinalizações independentes');
     assert.ok(await pg.$('.hero-ann-unified button[title="Incluir anotação"]'), 'inclusão de sínteses e anotações no cartão');
     assert.ok(!(await pg.$('#hs-mod')), 'todos os módulos carregaram');
     assert.deepEqual(P.erros, [], 'sem erro de script');
@@ -73,12 +73,12 @@ test('painel: abre o processo com sigla, etapas, roteiros e notas; sem erro de s
     await pg.click('.hero-main-tabs [data-rot="pro"]');
     await pg.waitForSelector('.hero-minuta-roteiro', { timeout: 15000 });
     assert.equal(await pg.getAttribute('.hero-main-tabs [data-rot="pro"]','aria-selected'),'true');
-    const prod = await pg.$eval('.hero-minuta-secao[data-cc]', L => L.map(x => x.getAttribute('data-cc')));
+    const prod = await pg.$$eval('.hero-minuta-secao[data-cc]', L => L.map(x => x.getAttribute('data-cc')));
     assert.deepEqual(prod,['minuta-relatorio','minuta-questoes','minuta-solucao','minuta-fundamentacao','minuta-sucumbencia','minuta-dispositivo']);
     await pg.click('.hero-minuta-nav-steps [data-minuta-nav="solucao"]');
     await pg.waitForSelector('#pv-julgamento', { timeout: 15000 });
     assert.ok((await botoes(pg)).includes('Desprovido'), 'resultado de recurso na seção Solução');
-    assert.equal(await pg.$eval('.gbody [data-fk="producao.Destino"]', L=>L.length),0,'destino não se repete no roteiro');
+    assert.equal(await pg.$$eval('.gbody [data-fk="producao.Destino"]', L=>L.length),0,'destino não se repete no roteiro');
     /* Pauta: processo em tela com o pedido de sustentação e a lista da sessão com a sigla */
     await pg.evaluate(() => window.MutaAbas.ir('pauta'));
     await pg.waitForSelector('.pa-it', { timeout: 15000 });
@@ -114,7 +114,7 @@ async function abrirUniversal(op) {
   await P.pg.click('.hero-minuta-nav-steps [data-minuta-nav="solucao"]');
   await P.pg.waitForSelector('#pv-julgamento', { timeout: 15000 });
   return P;
-  } catch(e) { await P.fim(); throw e; }
+  } catch(e) { const diagnostico = await P.pg.evaluate(() => ({ abas: [...document.querySelectorAll('.hero-main-tabs button')].map(x=>[x.textContent,x.getAttribute('aria-selected')]), corpo: document.querySelector('.gbody')?.innerText?.slice(0,800) || '', gabinete: document.querySelector('#gab')?.innerText?.slice(0,800) || '' })).catch(()=>({})); await P.fim(); throw new Error(e.message+'\nErros da página: '+P.erros.join('\n')+'\nEstado: '+JSON.stringify(diagnostico),{cause:e}); }
 }
 const RJ = '[data-fk="producao.Voto - Resultado"],[data-ch="producao.Voto - Resultado"]';
 const botoes = pg => pg.$$eval('#pv-julgamento :is(' + RJ + ')', L => L.map(x => x.tagName === 'SELECT' ? [].map.call(x.options, o => o.value).filter(Boolean) : [x.getAttribute('data-v')]).flat());
@@ -125,10 +125,11 @@ test('universal: Julgamento do acórdão — resultado de recurso, tese e preced
     const { pg } = P;
     assert.match(await pg.textContent('#pv-julgamento'), /Solução do julgamento/);
     assert.ok(await pg.$('[data-cc="minuta-fundamentacao"] [data-fk="producao.Tese jurídica adotada"]'), 'tese na Fundamentação');
-    assert.equal(await pg.$eval('#hero-encaminhamento [data-fk="triagem.Hipóteses Monocrática"]', L=>L.length),0,'sem art. 932 em acórdão');
+    assert.equal(await pg.$$eval('#hero-encaminhamento [data-fk="triagem.Hipóteses Monocrática"]', L=>L.length),0,'sem art. 932 em acórdão');
     const R = await botoes(pg);
     assert.ok(R.includes('Desprovido') && !R.includes('Deferido'), 'opções de recurso: ' + R.join(', '));
-    assert.equal(await pg.getAttribute('#pv-julgamento [data-ch="producao.Voto - Resultado"].on', 'data-v'), 'Desprovido', '"Negado provimento" convertido');
+    const escolhido = await pg.evaluate(() => { const p=document.querySelector('#pv-julgamento'),sel=p.querySelector('select[data-fk="producao.Voto - Resultado"]'),bt=p.querySelector('[data-ch="producao.Voto - Resultado"].on');return sel?sel.value:bt?.dataset.v;});
+    assert.equal(escolhido, 'Desprovido', '"Negado provimento" convertido');
     if (process.env.HERO_FOTO) await pg.screenshot({ path: process.env.HERO_FOTO + '-ac.png', fullPage: true });
     assert.equal(await pg.$$eval(RJ, L => L.filter(x => !x.closest('#pv-julgamento')).length), 0, 'resultado editável só no Julgamento');
     assert.deepEqual(P.erros, [], 'sem erro de script');
@@ -149,8 +150,8 @@ test('universal: Julgamento da monocrática e da urgência — hipótese do art.
   try {
     const R = await botoes(P2.pg);
     assert.ok(R.includes('Deferido') && !R.includes('Desprovido'), 'urgência: ' + R.join(', '));
-    assert.equal(await P2.pg.$eval('#hero-encaminhamento [data-fk="triagem.Hipóteses Monocrática"]', L=>L.length),0,'urgência não é enquadramento no art. 932');
-    assert.equal(await P2.pg.$eval('[data-cc="minuta-sucumbencia"]', L=>L.length),0,'sem sucumbência na urgência');
+    assert.equal(await P2.pg.$$eval('#hero-encaminhamento [data-fk="triagem.Hipóteses Monocrática"]', L=>L.length),0,'urgência não é enquadramento no art. 932');
+    assert.equal(await P2.pg.$$eval('[data-cc="minuta-sucumbencia"]', L=>L.length),0,'sem sucumbência na urgência');
   } finally { await P2.fim(); }
 });
 
