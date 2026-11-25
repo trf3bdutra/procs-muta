@@ -1,5 +1,5 @@
 'use strict';
-/* Collectio: mais de uma minuta do mesmo processo no lote (versões), com a vigente no arquivo de sempre e as demais guardadas. */
+/* CORTEX: mais de uma minuta do mesmo processo no lote (versões), com a vigente no arquivo de sempre e as demais guardadas. */
 const { test } = require('node:test'), assert = require('node:assert/strict');
 const path = require('node:path'), fs = require('node:fs');
 const ROOT = path.resolve(__dirname, '../../..');
@@ -147,7 +147,7 @@ test('só o gestor grava; o relator vê só a vigente, sem o histórico', async 
   });
 });
 
-test('página do Collectio tem o registro e a comparação de versões', () => {
+test('página do CORTEX tem o registro e a comparação de versões', () => {
   const html = fs.readFileSync(path.join(ROOT, 'apoio/ex-officio/lotes/index.html'), 'utf8');
   for (const k of ['data-vers=', 'data-vreg=', "acao:'minuta-versao'", "acao:'minuta-vigente'", 'function difSecoes', 'function parteMinuta', 'data-vcmp><b>Comparar</b>'])
     assert.ok(html.includes(k), 'falta ' + k);
@@ -163,10 +163,10 @@ test('comparação só na caixa de versões, com outras fontes e conformidade; p
   const html = fs.readFileSync(path.join(ROOT, 'apoio/ex-officio/lotes/index.html'), 'utf8');
   assert.ok(!html.includes('id="cx-cmp"') && !html.includes('data-cx="cmp"') && !html.includes('async function compara('), 'o painel lateral não compara mais');
   for (const k of ['data-vfb', "['modelo','Modelo do banco']", "['matriz','Minuta-Matriz']", "['prec','Precedente do Ementário']", "['texto','Texto colado']",
-    '/extensao/dados/base.json.gz', '/jurisprudencia/indice.json.gz', '/amicus/collectio/conformidade-motor.js', 'function confVersao', 'data-vconf'])
+    '/extensao/dados/base.json.gz', '/jurisprudencia/indice.json.gz', '/amicus/cortex/conformidade-motor.js', 'function confVersao', 'data-vconf'])
     assert.ok(html.includes(k), 'falta ' + k);
   const wf = fs.readFileSync(path.join(ROOT, '.github/workflows/vercel-caput.yml'), 'utf8');
-  assert.ok(wf.includes('cp extensao/conformidade-motor.js site/public/amicus/collectio/conformidade-motor.js'), 'o motor é publicado com o Collectio');
+  assert.ok(wf.includes('cp extensao/conformidade-motor.js site/public/amicus/cortex/conformidade-motor.js'), 'o motor é publicado com o CORTEX');
   /* títulos espaçados dos inteiros teores (“R E L A T Ó R I O”) */
   const src = html.match(/const TIT_SEC=[\s\S]*?\n(?=const textoSecoes)/)[0];
   const parteMinuta = new Function(src + ';return parteMinuta')();
