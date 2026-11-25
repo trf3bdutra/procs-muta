@@ -538,8 +538,11 @@ var SO_SESSAO = { 'Tipo de Voto': 1, 'Relatório Padronizado': 1, 'Adequação E
 function soSessao(chave) { return !!SO_SESSAO[chave] && destino() === 'monocratica'; }
 function campoRot(sec, chave, rot) { if (soSessao(chave)) return ''; var c = campoModelo(sec, chave); if (!c) return ''; return campo(Object.assign({}, c, { rotulo: rot || c.rotulo })); }
 /* questões do processo: uma por linha do campo "Alegações" da ficha */
+function questoesLista(v) {
+  return S(v).split(/(?:[;\r\n]+|\s+(?=\d{1,3}\)\s*))/).map(function(q){return S(q).replace(/^\d{1,3}\)\s*/,'').trim();}).filter(Boolean);
+}
 function questoes() {
-  var v = S(V('triagem', 'Alegações')), L = v ? v.split(/\n+/).map(S).filter(Boolean) : [];
+  var L = questoesLista(V('triagem', 'Alegações'));
   if (G.qVazia) L.push('');
   return '<div class="gf w q-w"><span class="gl">Questões do processo</span><ol class="q-l">' + L.map(function (q, i) {
     return '<li><input type="text" data-q="' + i + '" value="' + esc(q) + '" placeholder="Questão a decidir"><button type="button" class="lnk" data-qdel="' + i + '" title="Tirar a questão">×</button></li>';
@@ -1105,8 +1108,8 @@ function heroOrganizarProntuario(){
   linhas.forEach(function(l,n){var m=/^(\d{2}\/\d{2}\/\d{4}(?: \d{2}:\d{2})?)\s*·\s*(?:([^·]{2,40}?)\s*·\s*)?(.+)$/.exec(l);
     var item=card(l,String(n+1).padStart(2,'0'),m?m[3]:l,m?[m[2],m[1]].filter(Boolean).join(' · '):'',function(t){t=S(t).replace(/\s*\n+\s*/g,' ');if(!t)return;var novo=m?m[1]+' · '+(m[2]||'equipe')+' · '+t:t,at=fixados.indexOf(l);if(at>=0){fixados[at]=novo;gravaFix();}var L=notasL();L[n]=novo;marcar('origem.Observações',L.join('\n'));agendar(500);render();},function(){if(!confirm('Excluir esta anotação?'))return;var L=notasL();L.splice(n,1);fixados=fixados.filter(function(x){return x!==l;});gravaFix();marcar('origem.Observações',L.join('\n'));agendar(500);render();});(destacado(l)?fixed:others).append(item);
   });
-  var qv=S(V('triagem','Alegações')),qs=qv?qv.split(/\n+/).map(S).filter(Boolean):[];
-  var qfix=[],qCampo=campoModelo('triagem','Questões destacadas');try{var qraw=JSON.parse(S(V('triagem','Questões destacadas'))||'[]');if(Array.isArray(qraw))qfix=qraw.filter(function(q){return typeof q==='string'&&qs.includes(q);});}catch(e){}
+  var qs=questoesLista(V('triagem','Alegações'));
+  var qfix=[],qCampo=campoModelo('triagem','Questões destacadas');try{var qraw=JSON.parse(S(V('triagem','Questões destacadas'))||'[]');if(Array.isArray(qraw))qfix=[...new Set(qraw.filter(function(q){return typeof q==='string';}).flatMap(questoesLista).filter(function(q){return qs.includes(q);}))];}catch(e){}
   function gravarQfix(){if(qCampo&&editavel(qCampo))marcar('triagem.Questões destacadas',JSON.stringify([...new Set(qfix)]));}
   function pinQ(q){var b=action('','Destacar questão',function(){if(!qCampo||!editavel(qCampo))return;var i=qfix.indexOf(q);if(i>=0)qfix.splice(i,1);else qfix.push(q);gravarQfix();heroTopo.questoes=true;agendar(500);render();});b.classList.add('hero-note-pin');b.innerHTML=SV('<path d="m16 3 5 5-4 1-3 5v3l-2 2-3-5-5-3 2-2h3l5-3zM9 14l-6 7"/>',13);b.disabled=!qCampo||!editavel(qCampo);b.setAttribute('aria-pressed',String(qfix.includes(q)));b.title=qfix.includes(q)?'Retirar destaque':'Destacar questão';b.setAttribute('aria-label',b.title);return b;}
 
@@ -1118,9 +1121,9 @@ function heroOrganizarProntuario(){
   var fb=el('div','hero-ann-tools');fb.append(action('Gravar','Gravar anotação',function(){var t=S(nt.value),r=regs.find(function(x){return x[0]===kind.value;});if(r)marcar('triagem.'+r[1],t);else{if(!t)return;var L=notasL();L.push(agoraBr()+' · '+(ses.estado().usuario||'equipe')+' · '+t.replace(/\s*\n+\s*/g,' '));marcar('origem.Observações',L.join('\n'));}agendar(500);render();}),action('Cancelar','Cancelar inclusão',function(){form.hidden=true;}));form.append(kind,nt,fb);ann.append(form,others);
   if(!others.childNodes.length)others.append(el('small','muted','Nenhuma anotação adicional.'));
   var qh=el('div','hero-ann-head'),qa=action('+','Incluir questão',function(){qform.hidden=false;qt.focus();});qb.append(qa);qa.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();heroTopo.questoes=true;atualizaAnn();});
-  function salvarQ(L){marcar('triagem.Alegações',L.map(function(x){return S(x).replace(/\s*\n+\s*/g,' ');}).filter(Boolean).join('\n'));heroTopo.questoes=true;agendar(500);render();}
-  var qform=el('div','hero-ann-edit'),qt=el('textarea'),qbuttons=el('div','hero-ann-tools');qt.rows=2;qt.placeholder='Questão a apreciar';qform.hidden=true;qbuttons.append(action('Incluir','Gravar questão',function(){if(S(qt.value))salvarQ(qs.concat([qt.value]));}),action('Cancelar','Cancelar questão',function(){qform.hidden=true;}));qform.append(qt,qbuttons);questions.append(qform);
-  qs.forEach(function(q,n){var r=el('article','hero-ann-card'),h=el('div','hero-ann-head'),t=el('div','hero-ann-text',q),b=el('div','hero-ann-tools');h.append(el('span','hero-note-tag',String(n+1).padStart(2,'0')),b);b.append(pinQ(q),action('✎','Editar questão',function(){var x=el('textarea'),f=el('div','hero-ann-edit'),a=el('div','hero-ann-tools');x.rows=3;x.value=q;a.append(action('Gravar','Gravar questão',function(){if(!S(x.value))return;var L=qs.slice();var novo=S(x.value).replace(/\s*\n+\s*/g,' ');L[n]=novo;if(qfix.includes(q)){qfix=qfix.map(function(v){return v===q?novo:v;});gravarQfix();}salvarQ(L);}),action('Cancelar','Cancelar edição',function(){f.remove();t.hidden=false;}));f.append(x,a);t.hidden=true;r.append(f);x.focus();}),action('×','Excluir questão',function(){if(confirm('Excluir esta questão?')){var L=qs.filter(function(x,i){return i!==n;});if(!L.includes(q)){qfix=qfix.filter(function(x){return x!==q;});gravarQfix();}salvarQ(L);}}));r.append(h,t);questions.append(r);});
+  function salvarQ(L){marcar('triagem.Alegações',L.flatMap(questoesLista).join('\n'));heroTopo.questoes=true;agendar(500);render();}
+  var qform=el('div','hero-ann-edit'),qt=el('textarea'),qbuttons=el('div','hero-ann-tools');qt.rows=2;qt.placeholder='1) Primeira questão; 2) Segunda questão';qform.hidden=true;qbuttons.append(action('Incluir','Gravar questão',function(){if(S(qt.value))salvarQ(qs.concat([qt.value]));}),action('Cancelar','Cancelar questão',function(){qform.hidden=true;}));qform.append(qt,qbuttons);questions.append(qform);
+  qs.forEach(function(q,n){var r=el('article','hero-ann-card'),h=el('div','hero-ann-head'),t=el('div','hero-ann-text',q),b=el('div','hero-ann-tools');h.append(el('span','hero-note-tag',String(n+1).padStart(2,'0')),b);b.append(pinQ(q),action('✎','Editar questão',function(){var x=el('textarea'),f=el('div','hero-ann-edit'),a=el('div','hero-ann-tools');x.rows=3;x.value=q;a.append(action('Gravar','Gravar questão',function(){if(!S(x.value))return;var L=qs.slice();var novos=questoesLista(x.value);if(!novos.length)return;L.splice(n,1,...novos);if(qfix.includes(q)){qfix=qfix.flatMap(function(v){return v===q?novos:[v];});gravarQfix();}salvarQ(L);}),action('Cancelar','Cancelar edição',function(){f.remove();t.hidden=false;}));f.append(x,a);t.hidden=true;r.append(f);x.focus();}),action('×','Excluir questão',function(){if(confirm('Excluir esta questão?')){var L=qs.filter(function(x,i){return i!==n;});if(!L.includes(q)){qfix=qfix.filter(function(x){return x!==q;});gravarQfix();}salvarQ(L);}}));r.append(h,t);questions.append(r);});
   if(!qs.length)questions.append(el('small','muted','Nenhuma questão registrada.'));
   var nd=el('details','gg hero-etiquetas hero-ann-group hero-ann-notes'),qd=el('details','gg hero-etiquetas hero-ann-group hero-ann-questions-group');
   ann.classList.add('hero-tags-content');questions.classList.add('hero-tags-content');
@@ -1441,7 +1444,7 @@ function copiar(t, el) { (navigator.clipboard ? navigator.clipboard.writeText(t)
 function questoesDe(sem) {
   var L = Array.prototype.map.call(caixa.querySelectorAll('[data-q]'), function (i) { return S(i.value); });
   if (sem != null) L.splice(sem, 1);
-  return L.filter(Boolean).join('\n');
+  return L.flatMap(questoesLista).join('\n');
 }
 
 caixa.addEventListener('change', function (e) {
