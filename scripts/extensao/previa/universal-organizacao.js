@@ -4,6 +4,9 @@
 (function(){
  var ROT={pd:'pendências',ic:'intercorrências',av:'avisos'};
  function organizar(){
+  /* anotações vazias: uma linha tracejada com "+ registrar"; clicar abre a edição */
+  caixa.querySelectorAll('.hero-ann-card').forEach(function(c){var t=c.querySelector('.hero-ann-text');var vazia=!!(t&&t.classList.contains('muted')&&/^não registrad/i.test(t.textContent.trim()));c.classList.toggle('pv-ann-vazia',vazia);
+   if(vazia&&!c.__pv){c.__pv=1;c.addEventListener('click',function(e){if(e.target.closest('button'))return;var ed=c.querySelector('.hero-ann-tools button[title^="Editar"]');if(ed)ed.click();});}});
   caixa.querySelectorAll('.hero-sn-ind .hero-sn-mini').forEach(function(b){if(b.querySelector('.pv-snr'))return;var k=Object.keys(ROT).filter(function(x){return b.classList.contains(x);})[0];if(!k)return;var s=document.createElement('span');s.className='pv-snr';s.textContent=ROT[k];b.append(s);});
   var u=caixa.querySelector('.hero-urg-short');if(u&&!u.querySelector('.pv-snr')){var s=document.createElement('span');s.className='pv-snr';s.textContent='urgência';u.append(s);}
   /* sinalizações e urgência numa linha própria, abaixo de Encaminhamento | Monitoramento */

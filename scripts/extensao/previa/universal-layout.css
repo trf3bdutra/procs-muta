@@ -228,4 +228,40 @@ html[data-tema=escuro] .pv-universal-body{--pv-bg:#25282d;--pv-line:#444a52;--pv
 #gab .pv-sn-row>.hero-urg-short{margin-left:auto;min-height:26px;padding:3px 7px;border-radius:4px}
 #gab .pv-sn-row svg{flex:none}
 #gab .hero-enc-monitor-dock .hero-monitor-tab{gap:6px!important}
+/* 0.73.1 · revisão visual: anotações, destino, monitoramento e sinalizações */
+/* anotações: vazias em uma linha tracejada, sem os ícones de expandir e destacar */
+#gab .hero-ann-card.pv-ann-vazia{border:1px dashed var(--pv-line,#d6d1c5)!important;background:transparent!important;border-radius:6px;padding:6px 10px!important;margin:4px 0!important;cursor:pointer;opacity:.85}
+#gab .hero-ann-card.pv-ann-vazia:hover{opacity:1;border-style:solid!important}
+#gab .hero-ann-card.pv-ann-vazia .hero-ann-text{display:none}
+#gab .hero-ann-card.pv-ann-vazia .hero-ann-head{margin:0!important;align-items:center}
+#gab .hero-ann-card.pv-ann-vazia .hero-ann-tools>button:not([title^="Editar"]){display:none}
+#gab .hero-ann-card.pv-ann-vazia .hero-ann-tools>button[title^="Editar"]{font-size:0}
+#gab .hero-ann-card.pv-ann-vazia .hero-ann-tools>button[title^="Editar"]:after{content:"+ registrar";font:600 11px Inter,"Segoe UI",system-ui,sans-serif;color:#c99a3c}
+#gab .hero-ann-card .hero-ann-tools>button{opacity:.6}
+#gab .hero-ann-card:hover .hero-ann-tools>button,#gab .hero-ann-card .hero-ann-tools>button[aria-pressed="true"]{opacity:1}
+/* encaminhamento: um só estilo de seção (sem o quadradinho), subtítulos discretos, sem repetir o nome da aba */
+#gab #hero-encaminhamento>h4.pm-mer-h{display:none}
+#gab .hero-enc-pane details.gg>summary h4,#gab details.hero-etiquetas>summary h4,#gab .hero-proposta-julg>summary h4{font:650 12.5px/1.3 Inter,"Segoe UI",system-ui,sans-serif!important;letter-spacing:0!important;text-transform:none!important;color:inherit!important}
+#gab .hero-enc-pane details.gg>summary h4::before,#gab details.hero-etiquetas>summary h4::before,#gab .hero-proposta-julg>summary h4::before{display:none!important}
+#gab .hero-enc-pane details.gg>summary,#gab details.hero-etiquetas>summary{padding:8px 2px!important;border-top:1px solid var(--pv-line,#d6d1c5)}
+#gab .hero-enc-pane .pm-mer-h,#gab .hero-etiquetas .pm-mer-h{color:inherit!important;opacity:.65;font-size:9.5px!important;letter-spacing:.1em!important;margin:10px 0 4px!important}
+#gab .hero-enc-pane .pm-mer-h::before,#gab .hero-etiquetas .pm-mer-h::before{display:none!important}
+/* pauta oficial em grade 2 × 2, rótulos numa linha */
+#gab .hero-pauta-linha{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px 12px!important}
+#gab .hero-pauta-linha .gl{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#gab .hero-pauta-linha select{width:100%;min-width:0}
+/* monitoramento: a opção marcada fica preenchida; "Sim" em destaque */
+#gab .ct-sn{border:1px solid var(--pv-line,#d6d1c5);border-radius:5px;overflow:hidden;display:inline-flex}
+#gab .ct-sn button{border:0!important;border-radius:0!important;padding:3px 10px!important;background:transparent!important;text-decoration:none!important;opacity:.7}
+#gab .ct-sn button,#gab .ct-sn button[aria-selected]{border-bottom:0!important;box-shadow:none!important}
+#gab .ct-sn button::after,#gab .ct-sn button::before{display:none!important}
+#gab .ct-sn button[aria-selected="true"]{opacity:1;font-weight:700}
+#gab .ct-sn button[data-ct$=":0"][aria-selected="true"]{background:var(--pv-line,#d6d1c5)!important}
+#gab .ct-sn button[data-ct$=":1"][aria-selected="true"]{background:#c99a3c!important;color:#1b1b14!important}
+#gab .ct-i:has([data-ct$=":1"][aria-selected="true"]) .ct-h>b{color:#c99a3c}
+#gab #g-ctl .ct-i{padding:7px 0;border-bottom:1px solid var(--pv-line,#d6d1c5)}
+#gab #g-ctl .ct-i:last-child{border-bottom:0}
+/* sinalizações: filtro escolhido visível */
+#gab .hero-sn-mini[aria-pressed="true"]{border-color:#c99a3c!important;color:#c99a3c!important}
+#gab .hero-sn-mini.has-count{border-color:#c99a3c}
 

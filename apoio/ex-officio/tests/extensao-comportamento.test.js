@@ -192,6 +192,7 @@ test('universal: organização — faces sem setas, faixa de abas única, etapa 
     assert.ok(v.etapas.some(c => /\bok\b/.test(c)) && v.etapas.some(c => /\bat\b/.test(c)) && v.etapas.some(c => /\bpend\b/.test(c)), 'feita, atual e pendente: ' + v.etapas.join(' | '));
     assert.deepEqual(v.rotulos.sort(), ['avisos', 'intercorrências', 'pendências', 'urgência'], 'sinalizações com rótulo');
     assert.equal(v.lerAutos, 1, 'um só "Ler os autos" (aba Autos)');
+    assert.ok(await pg.$$eval('.hero-ann-card.pv-ann-vazia', L => L.length) >= 1, 'anotações vazias em linha tracejada');
     assert.ok(v.frase <= 1, 'sem a frase repetida');
     await pg.evaluate(() => [...document.querySelectorAll('button')].find(b => b.offsetParent && b.textContent.trim() === 'Triagem').click());
     await pg.waitForSelector('.au-aviso [data-au-ir]', { timeout: 15000 });
