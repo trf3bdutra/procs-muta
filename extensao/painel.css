@@ -1732,3 +1732,8 @@ html[data-tema=escuro] .rt-tipos .rt-kind-option{border-color:var(--line)}
 #pauta-app .pa-session-head .pa-sel select{width:100%;max-width:115px;font-size:11px}
 #pauta-app .pa-session-head .pa-session-tabs{flex:1;min-width:0;margin:0;padding:2px;gap:2px}
 #pauta-app .pa-session-head .pa-session-tabs>button{min-height:28px;padding:3px 5px;font-size:10px;white-space:nowrap}
+
+/* Corretor: subnavegação exclusiva, mesma linguagem visual do Ementário. */
+#cor-modos[hidden]{display:none!important} #cor-modos{display:flex;gap:3px;margin:0;padding:3px;border:1px solid var(--line);border-radius:6px;background:var(--card2)} #cor-modos>button{flex:1;min-width:0;font-size:11px} #cor-modos small{display:block;font-size:10px}
+/* Gestão: botões retangulares, ícone e texto na linha do perfil. */
+.topo-u .tu-gestao{justify-content:center;align-items:center;gap:4px;border:0;padding:0;margin-inline:auto} .topo-u .tu-gestao>button{display:flex;flex-direction:row;align-items:center;justify-content:center;gap:4px;height:29px;padding:0 6px;border-radius:4px;white-space:nowrap} .topo-u .tu-gestao .nav-text b{font-size:10px;line-height:1.2} @media(max-width:345px){.topo-u .tu-gestao>button{padding:0 3px;gap:2px}.topo-u .tu-gestao .nav-text b{font-size:9px}}
