@@ -1,6 +1,6 @@
 /* HERO18810 · Gerador (Minuta › Gerador; até a 0.37, Prontuário › Gerador): relatório, dispositivo do voto, ementa, acórdão e proclamação no padrão do
    gabinete (Padrão Muta 1 e 2; Padrão de ementa do gabinete), pelo tipo de julgamento e pelo resultado escolhido.
-   Fonte: a ficha do processo (o que está gravado ou a gravar) e, onde a ficha está vazia, o que a leitura dos autos achou.
+   Fonte: a ficha do processo (o que está gravado ou a gravar); propostas de leitura precisam ser incorporadas à ficha.
    Fórmulas transcritas sem reescrever; o que não se confirma na ficha ou nos autos sai como [VALIDAR: …]. Nada é gravado. */
 (function () {
   'use strict';
@@ -352,9 +352,9 @@
       var j=L[0];used.add(j);
       var nome=S(r.parte),rot=N(j.resultado),a={'desprovido':'nego provimento','provido':'dou provimento','parcialmente provido':'dou parcial provimento','nao conhecido':'não conheço','prejudicado':'julgo prejudicado'}[rot];
       if(!nome||!a||(S(j.recorrente)&&N(j.recorrente)!==N(nome))){invalid=true;return;}
-      var alvo=(rot==='nao conhecido'?' da apelação de ':rot==='prejudicado'?' o recurso de ':' à apelação de ')+nome;
+      var gen=(/^INSS$/i.test(nome)?'o INSS':quem(nome)).replace(/^o /i,'do ').replace(/^a /i,'da ').replace(/^os /i,'dos ').replace(/^as /i,'das ');if(!/^(d[oa]s?) /i.test(gen))gen='de '+nome;var alvo=(rot==='nao conhecido'?' da apelação ':rot==='prejudicado'?' o recurso ':' à apelação ')+gen;
       V.push(a+alvo+(/^(provido|parcialmente provido)$/.test(rot)?' '+VAL('comando específico do recurso ID '+S(j.id_recurso)):''));
-      E.push('Apelação de '+nome+': '+S(j.resultado).toLowerCase());
+      E.push('Apelação '+gen+': '+S(j.resultado).toLowerCase().replace(/o$/,'a'));
     });
     if(invalid||used.size!==J.length||R.length!==V.length)return {v:VAL('conferir resultado individual por ID de recurso'),e:VAL('resultado individual por recurso')};
     if(N(v('origem','Sentença - Reexame'))==='sim'){V.push(VAL('resultado da remessa necessária'));E.push(VAL('resultado da remessa necessária'));}
@@ -383,14 +383,47 @@
   }
 
   /* ---------- montagem ---------- */
+  function cobertura(){
+    var tipo=tipoDetectado(),m=[];
+    function add(sec,k,rot,etapa,check){var x=v(sec,k);var ok=check?check(x):Array.isArray(x)?x.length>0:!!S(x)&&!/\[VALIDAR:/.test(S(x));m.push({alvo:sec+'.'+k,rotulo:rot,etapa:etapa,ok:!!ok});}
+    add('triagem','Tipo de Julgamento','Tipo de julgamento','Identificação');
+    add('triagem','Ramo do direito','Ramo do direito','Identificação');
+    add('triagem','Assunto detalhado','Assunto detalhado','Identificação',function(x){return !!S(x)||!!fo('Assunto');});
+    if(/Apelação|Remessa/.test(tipo)){
+      add('origem','Sentença - ID','ID da sentença','Relatório',function(x){return !!ids(x);});
+      add('origem','Sentença - Resultado','Resultado da sentença','Relatório',function(x){return !!S(x)||confirmadosOrigem().length>0||!!S(v('origem','Sentença - Decisão'));});
+      add('origem','Sentença - Honorários','Honorários de origem','Relatório',function(x){return !!S(x)||confirmadosOrigem().some(function(r){return r.categoria==='Honorários';});});
+      add('origem','Sentença - Reexame','Remessa necessária','Relatório');
+    }else{
+      add('triagem','Impugnada - ID','ID do ato impugnado','Relatório',function(x){return !!ids(x)||!!ids(atoRecorrido(tipo).id);});
+      if(tipo==='Embargos de Declaração'){add('triagem','Impugnada - Ementa literal','Ementa literal','Relatório');add('triagem','ED - Vício','Vício alegado','Relatório');add('triagem','ED - Ponto','Pontos dos embargos','Relatório');}
+      else add('triagem','Impugnada - Síntese','Síntese do ato impugnado','Relatório',function(x){return !!S(x)||!!S(atoRecorrido(tipo).sintese);});
+    }
+    if(!/Remessa Necessária|Juízo de Retratação/.test(tipo)){
+      add('origem','Recursos','Partes e IDs dos recursos','Relatório',function(){var R=tab('origem','Recursos');return R.length&&R.every(function(x){return !!S(x.parte)&&!!ids(x.ids);});});
+      if(/Apelação|Agravo/.test(tipo))add('origem','Recursos','Razões de cada recurso','Relatório',function(){return tab('origem','Recursos').length&&tab('origem','Recursos').every(function(r){return !!S(r.teses)||!!S(r.preliminares)||!!S(r.merito);});});
+      add('origem','Contrarrazões - Situação','Resposta recursal','Relatório',function(){return !/\[VALIDAR:/.test(pContrarrazoes(tipo));});
+    }
+    add('triagem','MPF','Manifestação do MPF','Relatório',function(){return !!S(v('triagem','MPF'))&&!/\[VALIDAR:/.test(pMpf())&&!/aguardando|vista a abrir|nao verificado/.test(N(v('triagem','MPF')));});
+    add('triagem','Questões jurídicas individualizadas','Questões delimitadas e conferidas','Fundamentação',function(){var Q=questoesFicha();return Q.length?Q.every(function(q){return questaoConfirmada(q)&&!!S(q.questao);}):!!S(v('triagem','Alegações'));});
+    add('producao','Aplicação ao caso concreto','Fundamentação das questões','Fundamentação',function(x){var Q=questoesFicha();return Q.length?Q.every(function(q){return questaoConfirmada(q)&&!!S(q.fundamentacao);}):!!S(x);});
+    add('producao','Voto - Resultado','Resultado do julgamento','Dispositivo',function(){var ind=resultadosIndividuais(tipo);return ind?!/\[VALIDAR:/.test(ind.e):!!resDaFicha(tipo);});
+    add('producao','Fundamento da sucumbência','Sucumbência (quando aplicável)','Dispositivo',function(){return !/\[VALIDAR:/.test(honorariosEditorial(tipo).texto);});
+    return m;
+  }
+  function htmlCobertura(){
+    var g=GB();if(!g.cnj||!g.cnj()||window.MutaSigilo&&window.MutaSigilo.bloqueado())return '';
+    var L=cobertura(),N=L.filter(function(x){return x.ok;}).length;
+    return '<details class="gg"><summary><h4>Dados para a Minuta-Matriz</h4><span class="gn">'+N+'/'+L.length+'</span></summary><div class="gr"><div class="gf w"><small class="muted">Cobertura de campos mínimos; preenchido não significa revisão jurídica concluída.</small>'+['Identificação','Relatório','Fundamentação','Dispositivo'].map(function(e){return '<p><b>'+esc(e)+'</b></p><ul>'+L.filter(function(x){return x.etapa===e;}).map(function(x){return '<li>'+esc(x.rotulo)+' · '+(x.ok?'Registrado':'A conferir')+'</li>';}).join('')+'</ul>';}).join('')+'</div></div></details>';
+  }
   function docs() {
     var tipo = ST.tipo || tipoDetectado(), k = ST.res || resDaFicha(tipo);
     if (k && !opcoesRes(tipo).some(function (o) { return o[0] === k; })) k = '';
     TIPO = tipo;
-    var R = resultado(tipo, k), E = ementa(tipo, k);
+    var R = resultado(tipo, k), E = ementa(tipo, k), individual=resultadosIndividuais(tipo), proclamacao=individual?VAL('proclamar resultados individualizados após a sessão'):R[1];
     return { tipo: tipo, k: k, rel: relatorio(tipo), disp: [dispositivoFicha(tipo,k), 'É como voto.'], em: E,
-      acordao: 'Vistos e relatados estes autos em que são partes as acima indicadas, a Turma Regional de Mato Grosso do Sul, ' + VAL('quórum e proclamação da sessão') + ', ' + R[1] + ', nos termos do relatório e voto que ficam fazendo parte integrante do presente julgado.',
-      procl: VAL('quórum da sessão') + ', ' + R[1] + '.' };
+      acordao: 'Vistos e relatados estes autos em que são partes as acima indicadas, a Turma Regional de Mato Grosso do Sul, ' + VAL('quórum e proclamação da sessão')  + ', ' + proclamacao + ', nos termos do relatório e voto que ficam fazendo parte integrante do presente julgado.',
+      procl: VAL('quórum da sessão') + ', ' + proclamacao + '.' };
   }
   function marca(t) { return esc(t).replace(/\[VALIDAR:[^\]]*\]/g, function (m) { return '<mark class="gv">' + m + '</mark>'; }); }
   function emTexto(E) { return E.cab + '\n' + E.sec.map(function (s) { return s[0] + '\n' + s[1].map(function (x) { return x.n + '. ' + x.t; }).join('\n'); }).join('\n') + '\n__________\n' + E.rod.join('\n'); }
@@ -428,7 +461,7 @@
     FOLHA=folhaPartes(pron,D);
     if(!FOLHA.length)return '<p class="muted">Defina o pronunciamento em Triagem › Encaminhamento para montar a folha.</p>';
     var cnj=g.cnj(),n=FOLHA.reduce(function(s,p){return s+conta(p.texto);},0);
-    return '<div class="hero-ger-sheet"><header class="hero-ger-head"><small class="muted">MINUTA-MATRIZ · FICHA DO PROCESSO</small><b>'+esc(pron)+'</b><small class="muted">'+esc(cnj)+' · '+FOLHA.length+' partes · '+n+' pontos a validar</small><div class="hero-ger-tools"><button type="button" class="btn line sm" data-gr-copia="folha">Copiar folha</button><a class="btn line sm" target="_blank" rel="noopener noreferrer" href="'+esc(window.Muta.SITE+'/amicus/compendium/#processo='+encodeURIComponent(cnj))+'">Abrir no Minutário</a></div><small class="muted">Prévia de redação: conferir lacunas, fundamentação e resultado. Nada é gravado.</small></header><nav class="hero-ger-toc" aria-label="Partes da peça">'+FOLHA.map(function(p){return '<a href="#gr-folha-'+p.id+'">'+esc(p.titulo)+'</a>';}).join('')+'</nav>'+FOLHA.map(function(p){var k=conta(p.texto);return '<section class="hero-ger-part" id="gr-folha-'+p.id+'"><header class="hero-ger-part-head"><h4>'+esc(p.titulo)+'</h4>'+(k?'<small class="gr-nv">'+k+' a validar</small>':'')+'<button type="button" class="btn line sm" data-gr-copia="folha-'+p.id+'">Copiar</button></header><div class="gr-tx">'+p.html+'</div></section>';}).join('')+'</div>';
+    return '<div class="hero-ger-sheet"><header class="hero-ger-head"><small class="muted">MINUTA-MATRIZ · FICHA DO PROCESSO</small><b>'+esc(pron)+'</b><small class="muted">'+esc(cnj)+' · '+FOLHA.length+' partes · '+n+' pontos a validar</small><div class="hero-ger-tools"><button type="button" class="btn line sm" data-gr-copia="folha">Copiar folha</button><a class="btn line sm" target="_blank" rel="noopener noreferrer" href="'+esc(window.Muta.SITE+'/amicus/compendium/#processo='+encodeURIComponent(cnj))+'">Abrir no Minutário</a></div><small class="muted">Prévia de redação: conferir lacunas, fundamentação e resultado. Nada é gravado.</small></header>'+htmlCobertura()+'<nav class="hero-ger-toc" aria-label="Partes da peça">'+FOLHA.map(function(p){return '<a href="#gr-folha-'+p.id+'">'+esc(p.titulo)+'</a>';}).join('')+'</nav>'+FOLHA.map(function(p){var k=conta(p.texto);return '<section class="hero-ger-part" id="gr-folha-'+p.id+'"><header class="hero-ger-part-head"><h4>'+esc(p.titulo)+'</h4>'+(k?'<small class="gr-nv">'+k+' a validar</small>':'')+'<button type="button" class="btn line sm" data-gr-copia="folha-'+p.id+'">Copiar</button></header><div class="gr-tx">'+p.html+'</div></section>';}).join('')+'</div>';
   }
 
   var ULT = null;
@@ -573,5 +606,5 @@
     return out;
   }
   function comporFicha(campos, fonte, tipo){var ant=CONTEXTO,t0=TIPO;try{CONTEXTO={V:function(sec,k){return campos[sec+'.'+k];},fo:function(){return fonte||{};}};TIPO=tipo||tipoDetectado();var rel=relatorio(TIPO),em=ementa(TIPO,resDaFicha(TIPO)),R={abertura_relatorio:rel[0],razoes_recursais:/^(Apelação|Agravo de Instrumento)$/.test(TIPO)?pRecursos(TIPO).join('\n\n'):'',contrarrazoes_relatorio:pContrarrazoes(TIPO),parecer_relatorio:pMpf()||'',caso_em_exame:em.sec[0][1].map(function(x){return x.t;}).join('\n'),questao_em_discussao:em.sec[1][1].map(function(x){return x.t;}).join('\n')};if(/^(Apelação|Remessa Necessária|Agravo de Instrumento)$/.test(TIPO)){R.resultado_decisao_recorrida=resultadoSentenca();R.comandos_dispositivos=comandosOrigem();R.frase_honorarios_origem=honorariosAbertura();}Object.assign(R,variaveisEditorial(TIPO,rel,em));Object.assign(R,fragmentosRecursos(TIPO));var qf=questoesFicha();if(qf.length){R.tese_juridica_adotada=qf.map(function(q){return questaoConfirmada(q)&&S(q.tese_adotada)||VAL('tese: '+textoQuestao(q));}).join('\n\n');R.aplicacao_ao_caso_concreto=qf.map(fundamentosQuestao).join('\n\n');R.dispositivos_legais_aplicaveis=refsQuestoes('dispositivos_legais');R.precedentes_aplicaveis=refsQuestoes('precedentes');}if(R.honorarios_ementa)em.sec[3][1][0].t=R.honorarios_ementa;return {tipo:TIPO,rel:rel,em:em,variaveis:R};}finally{CONTEXTO=ant;TIPO=t0;}}
-  window.MutaGerador = { comporFicha: comporFicha, pintar: pintar, abrir: abrir, modo: modo, html: html, acao: acao, docs: docs, _ST: ST, _t: { resultado: resultado, fraseHonorarios: fraseHonorarios, designa: designa, feminino: feminino } };
+  window.MutaGerador = { comporFicha: comporFicha, cobertura: cobertura, htmlCobertura: htmlCobertura, pintar: pintar, abrir: abrir, modo: modo, html: html, acao: acao, docs: docs, _ST: ST, _t: { resultado: resultado, fraseHonorarios: fraseHonorarios, designa: designa, feminino: feminino } };
 })();

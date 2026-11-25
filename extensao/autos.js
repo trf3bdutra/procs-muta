@@ -135,20 +135,21 @@ function textoPdf(b64, max, modo, aviso) {
 }
 /* modo 'ocr': lê de novo o documento passando todas as páginas pelo OCR */
 function extrair(id, modo) {
-  var d = A.docs[id], dl = lista().filter(function (x) { return x.id === id; })[0];
+  var origemLeitura=A.docs,cnjLeitura=A.cnj,d = A.docs[id], dl = lista().filter(function (x) { return x.id === id; })[0]; if(!lidoDoProcesso()||!dl)return Promise.resolve({estado:'erro',erro:'Documento não pertence aos autos abertos'});
   if (sigBloq() || docBloq(dl)) { A.docs[id] = { estado: 'sig' }; redesenhar(); return Promise.resolve(A.docs[id]); }
   if (d && (d.estado === 'lendo' || (d.estado === 'ok' && modo !== 'ocr') || (modo === 'ocr' && d.modo === 'ocr' && d.estado === 'ok'))) return Promise.resolve(d);
   var doc = lista().filter(function (x) { return x.id === id; })[0];
   A.docs[id] = { estado: 'lendo', modo: modo || '' }; redesenhar();
-  var aviso = function (f, t) { var x = A.docs[id]; if (x && x.estado === 'lendo') { x.prog = 'OCR ' + f + '/' + t; redesenhar(); } };
+  var aviso = function (f, t) { if(A.docs!==origemLeitura||A.cnj!==cnjLeitura||!lidoDoProcesso())return; var x = A.docs[id]; if (x && x.estado === 'lendo') { x.prog = 'OCR ' + f + '/' + t; redesenhar(); } };
   return window.MutaPje.lerDocumento(A.idp, id).then(function (r) {
     if (r.fmt === 'pdf') return textoPdf(r.b64, doc && PRINC[doc.k] ? 60 : 25, modo, aviso).then(function (t) { return { fmt: 'pdf', texto: t.texto, pags: t.pags, lidas: t.lidas, ocr: t.ocr, url: r.url }; });
     return { fmt: 'html', texto: r.texto, html: r.html || null, pags: 0, url: r.url };
   }).then(function (x) {
+    if(A.docs!==origemLeitura||A.cnj!==cnjLeitura||!lidoDoProcesso()||sigBloq()||docBloq(dl))return {estado:'erro',erro:'Leitura descartada: processo alterado ou acesso restrito'};
     var sem = S(x.texto).replace(/\s/g, '').length < 40;
     A.docs[id] = { estado: sem ? 'sem' : 'ok', modo: modo || '', texto: S(x.texto), html: x.html || null, fmt: x.fmt, pags: x.pags, lidas: x.lidas, ocr: x.ocr || 0, url: x.url };
     A.sug = null; redesenhar(); agendarAuto(); return A.docs[id];
-  }, function (e) { A.docs[id] = { estado: 'erro', erro: e.message }; redesenhar(); return A.docs[id]; });
+  }, function (e) { if(A.docs!==origemLeitura||A.cnj!==cnjLeitura||!lidoDoProcesso())return {estado:'erro',erro:e.message}; A.docs[id] = { estado: 'erro', erro: e.message }; redesenhar(); return A.docs[id]; });
 }
 /* ---------- baixar em JSON: cada peça e o inteiro teor (formato de acervo/autos/<CNJ>.json.gz, o mesmo do Caput e da Ex Officio) ---------- */
 function baixar(nome, obj) {
@@ -211,7 +212,7 @@ function abrirPdf(id) {
 /* o texto no formato .md que o motor lê: cabeçalho do processo e uma seção por documento, em ordem cronológica */
 function md() {
   var g = GB(), fo = g.fo ? g.fo() || {} : {}, cnj = A.cnj || cnjAtual();
-  var L = lista().slice().sort(function (a, b) { return Number(a.id) - Number(b.id); });
+  var L = lista().filter(function(d){return !docBloq(d)&&!(SG()&&SG().docSigiloso(d));}).sort(function (a, b) { return Number(a.id) - Number(b.id); });
   var out = ['# Processo ' + cnj];
   [['Classe', fo.classe_judicial || fo.Classe], ['Assunto', fo.Assunto], ['Polo ativo', fo.polo_ativo], ['Polo passivo', fo.polo_passivo]].forEach(function (x) { if (S(x[1])) out.push('- ' + x[0] + ': ' + String(x[1]).replace(/\n+/g, '; ')); });
   out.push('');
@@ -219,7 +220,7 @@ function md() {
     out.push('# ' + d.id + ' - ' + d.tipo + (d.desc && N(d.desc) !== N(d.tipo) ? ' (' + d.desc + ')' : ''));
     out.push('- Juntado em: ' + d.data + (d.hora ? ' ' + d.hora : ''));
     out.push('');
-    var t = A.docs[d.id] && A.docs[d.id].texto;
+    var x=A.docs[d.id],t=x&&x.estado==='ok'&&x.texto;
     if (t) out.push(t);
     out.push('');
   });
@@ -246,18 +247,18 @@ function gravado(sec, k) { var g = GB(); return g.gravado ? g.gravado(sec, k) : 
 function linhasGravadas(sec, k) { var v = gravado(sec, k); return Array.isArray(v) ? v : []; }
 /* as sugestões do motor, no formato da ficha (o mesmo da Ex Officio: padrao/ficha-dialogo.js · itensTeor) */
 function mapear(L) {
-  var out = [], contra = [], proc = [], TB = { rec: [], contra: [], proc: [], ocorr: [], docs: { rec: [], contra: [], proc: [], ocorr: [] } };
+  var out = [], contra = [], proc = [], TB = { rec: Object.create(null), contra: Object.create(null), proc: [], ocorr: [], docs: { rec: [], contra: [], proc: [], ocorr: [] } };
   L.forEach(function (it) {
     if(it.kind==='prep-table'){var pc=alvoDe('Preparo por recurso');if(!pc)return;var old=linhasGravadas(pc.secao,pc.chave),value=it.rows||[],igual=JSON.stringify(old)===JSON.stringify(value);out.push(Object.assign({},it,{kind:'tabela',alvo:pc.secao+'.'+pc.chave,campo:pc,value:value,current:old,status:igual?'igual':old.length?'conflito':'novo',apply:false,manual:true}));return;}
-    if (it.kind === 'contra') { if (it.key === 'ids') contra.push(it.value); (TB.contra[it.idx || 0] = TB.contra[it.idx || 0] || {})[it.key] = it.key === 'data' ? (iso(it.value) || it.value) : it.value; TB.docs.contra.push(it.doc); return; }
-    if (it.kind === 'rec') { (TB.rec[it.idx || 0] = TB.rec[it.idx || 0] || {})[it.key] = it.key === 'data' ? (iso(it.value) || it.value) : it.value; TB.docs.rec.push(it.doc); return; }
+    if (it.kind === 'contra') { if (it.key === 'ids') contra.push(it.value); (TB.contra[S(it.doc)||('idx:'+it.idx)] = TB.contra[S(it.doc)||('idx:'+it.idx)] || {})[it.key==='merito'?'teses':it.key] = it.key === 'data' ? (iso(it.value) || it.value) : it.value; TB.docs.contra.push(it.doc); return; }
+    if (it.kind === 'rec') { (TB.rec[S(it.doc)||('idx:'+it.idx)] = TB.rec[S(it.doc)||('idx:'+it.idx)] || {})[it.key] = it.key === 'data' ? (iso(it.value) || it.value) : it.value; TB.docs.rec.push(it.doc); return; }
     if (it.kind === 'proc') { proc.push(it); var q = it.proc || {}; TB.proc.push({ id: S(q.id) || S(it.doc), data: iso(q.data) || S(q.data), validade: S(q.validade), advogados: S(q.advogados) }); TB.docs.proc.push(it.doc); return; }
     if (it.kind === 'ocorr') { TB.ocorr.push({ tipo: S(it.value), ids: S(it.ids || it.doc), data: '' }); TB.docs.ocorr.push(it.doc); return; }
     var c = alvoDe(it.key);
     if (!c) return; /* dado do acervo (só leitura) ou sem campo na ficha: fica de fora */
     it.alvo = c.secao + '.' + c.chave; it.campo = c; it.value = valorPara(c, it.value);
     var atual = gravado(c.secao, c.chave); if (typeof atual === 'object') atual = '';
-    it.current = atual; it.status = !S(atual) ? 'novo' : N(atual) === N(it.value) || (iso(atual) && iso(atual) === iso(it.value)) ? 'igual' : 'conflito'; it.manual = !!it.manual || c.secao==='producao' || /texto-longo/.test(c.tipo) || /Sentença - (Decisão|Resultado|Honorários|Custas)|Impugnada - Síntese|Parecer - Sentido/.test(c.chave); it.apply = it.status === 'novo'&&!it.manual; out.push(it);
+    it.current = atual; it.status = !S(atual) ? 'novo' : N(atual) === N(it.value) || (iso(atual) && iso(atual) === iso(it.value)) ? 'igual' : 'conflito'; it.manual = !!it.manual || c.secao==='producao' || !(/^(Sentença - (ID|Data)|ID do Parecer MPF|MPF - Data|Origem - (Juízo|Julgador|Valor da causa)|ID da Procuração)$/.test(c.chave)) || (c.chave==='Sentença - ID'&&(S(it.value).match(/\b\d{6,}\b/g)||[]).length!==1) || /texto-longo/.test(c.tipo) || /Sentença - (Decisão|Resultado|Honorários|Custas)|Impugnada - Síntese|Parecer - Sentido/.test(c.chave); it.apply = it.status === 'novo'&&!it.manual; out.push(it);
   });
   var c1 = alvoDe('Contrarrazões - Situação');
   if (contra.length && c1) { var a1 = gravado(c1.secao, c1.chave); out.push({ sec: 'Recursos e contrarrazões', key: c1.chave, label: 'Contrarrazões', value: 'apresentadas', doc: contra.join(', '), kind: 'field', alvo: c1.secao + '.' + c1.chave, campo: c1, current: a1, status: !a1 ? 'novo' : N(a1) === 'apresentadas' ? 'igual' : 'conflito', apply: !a1 }); }
@@ -268,13 +269,13 @@ function mapear(L) {
   function tab(chave, sec, rotulo, novas, porChave, docs) {
     var c = alvoDe(chave); novas = novas.filter(function (x) { return x && Object.keys(x).some(function (k) { return S(x[k]); }); }); if (!c || !novas.length) return;
     var atual = linhasGravadas(c.secao, c.chave), res = atual.map(function (x) { return Object.assign({}, x); });
-    novas.forEach(function (n, i) { var k = porChave && S(n[porChave]) ? res.map(function (x) { return S(x[porChave]); }).indexOf(S(n[porChave])) : -1; if (k < 0 || k >= res.length) res.push(n); else Object.keys(n).forEach(function (f) { if (S(n[f]) && !S(res[k][f])) res[k][f] = n[f]; }); });
+    novas.forEach(function (n, i) { var nids=S(n[porChave]).match(/\b\d{6,}\b/g)||[],ks=res.map(function(x,i){var xi=S(x[porChave]).match(/\b\d{6,}\b/g)||[];return porChave&&nids.length&&xi.some(function(z){return nids.indexOf(z)>=0;})?i:-1;}).filter(function(i){return i>=0;});var k=ks.length===1?ks[0]:-1;if(ks.length>1)return; if (k < 0 || k >= res.length) res.push(n); else Object.keys(n).forEach(function (f) { if (S(n[f]) && !S(res[k][f])) res[k][f] = n[f]; }); });
     var igual = JSON.stringify(atual) === JSON.stringify(res);
     out.push({ sec: sec, key: chave, label: rotulo, value: res, doc: docs.filter(Boolean).filter(function (v, i, a) { return a.indexOf(v) === i; }).join(', '), kind: 'tabela', alvo: c.secao + '.' + c.chave, campo: c, current: atual,
-      status: !atual.length ? 'novo' : igual ? 'igual' : 'conflito', manual: /^(Recursos|Contrarrazões)$/.test(chave), apply: !atual.length&&!/^(Recursos|Contrarrazões)$/.test(chave), note: res.length + (res.length === 1 ? ' linha' : ' linhas') + (atual.length ? ' (hoje: ' + atual.length + ')' : '') });
+      status: !atual.length ? 'novo' : igual ? 'igual' : 'conflito', manual: /^(Recursos|Contrarrazões|Procurações)$/.test(chave), apply: !atual.length&&!/^(Recursos|Contrarrazões|Procurações)$/.test(chave), note: res.length + (res.length === 1 ? ' linha' : ' linhas') + (atual.length ? ' (hoje: ' + atual.length + ')' : '') });
   }
-  tab('Recursos', 'Recursos e contrarrazões', 'Recursos', TB.rec, 'ids', TB.docs.rec);
-  tab('Contrarrazões', 'Recursos e contrarrazões', 'Contrarrazões (peças)', TB.contra, 'ids', TB.docs.contra);
+  tab('Recursos', 'Recursos e contrarrazões', 'Recursos', Object.values(TB.rec), 'ids', TB.docs.rec);
+  tab('Contrarrazões', 'Recursos e contrarrazões', 'Contrarrazões (peças)', Object.values(TB.contra), 'ids', TB.docs.contra);
   tab('Procurações', 'Representação', 'Procurações', TB.proc, 'id', TB.docs.proc);
   tab('Outras peças', 'Outras peças e ocorrências', 'Outras peças', TB.ocorr, 'ids', TB.docs.ocorr);
   return out;
@@ -346,7 +347,7 @@ function autoPreencher() {
       L.push({ alvo: it.alvo, rot: it.label || it.key, v: it.value, doc: it.doc || '' });
   });
   try { alertas().forEach(function (a) {
-    if (a.campo && AUTO_AL.test(a.campo) && a.nivel !== 'al' && S(a.valor) && !rec[a.campo] && vazioFicha(a.campo) && !L.some(function (x) { return x.alvo === a.campo; }))
+    if (a.campo === 'triagem.Tipo de Julgamento' && AUTO_AL.test(a.campo) && a.nivel !== 'al' && S(a.valor) && !rec[a.campo] && vazioFicha(a.campo) && !L.some(function (x) { return x.alvo === a.campo; }))
       L.push({ alvo: a.campo, rot: a.campo.slice(a.campo.indexOf('.') + 1), v: a.valor, doc: a.doc || '' });
   }); } catch (e) {}
   /* 0.50: questões do processo (uma por tese dos recursos) e síntese do processo (sentença e recursos), só se vazios */
@@ -818,7 +819,7 @@ function htmlLeitura() {
   if (A.erro) return h + '<p class="status err">' + esc(A.erro) + '</p></section>';
   if (!A.itens) return h + '<p class="muted">' + (tela === 'autos' ? 'Leia os autos: o Roteiro se preenche com o que for achado.' : 'Abra os autos digitais no PJe.') + '</p></section>';
   if (!lidoDoProcesso()) return h + '<p class="status err">Os autos lidos são do processo ' + esc(A.cnj || 'sem número') + ', não do aberto no painel. Leia de novo na aba dos autos certos.</p></section>';
-  return h + resumoLeitura() + (A.sugMsg ? '<p class="status err">' + esc(A.sugMsg) + '</p>' : '') + '</section>';
+  return h + resumoLeitura() + chk + (window.MutaGerador&&window.MutaGerador.htmlCobertura?window.MutaGerador.htmlCobertura(): '') + (A.sugMsg ? '<p class="status err">' + esc(A.sugMsg) + '</p>' : '') + '</section>';
 }
 /* Autos › A conferir: os alertas e o que a leitura achou e não foi sozinho para a ficha (diverge, ou com o automático desligado) */
 function htmlConferir() {
@@ -885,7 +886,7 @@ function especificar(id, v) { A.esp[id] = v; clearTimeout(A.tEsp); A.tEsp = setT
 function especificarJa(id) { if (id in A.esp) { clearTimeout(A.tEsp); gravarEspecificacao(id); } }
 
 document.addEventListener('muta:prontuario', function () { var c = cnjAtual(); if (A.cnj && c && Muta.chaveProcesso(A.cnj) !== Muta.chaveProcesso(c)) { A.sug = null; } });
-window.MutaAutos = { barra: function () { var tela = window.MutaPje && window.MutaPje.tela ? window.MutaPje.tela() : ''; if ((!A.itens || !lidoDoProcesso()) && !A.lendo && !A.fila && window.MutaGabinete && window.MutaGabinete.irAutos) return '<p class="au-aviso"><span>Autos ainda não lidos.</span> <button type="button" class="lnk" data-au-ir>Ler na aba Autos</button></p>'; if (!A.itens || !lidoDoProcesso()) return '<div class="bar au-bl rt-ler">' + botaoLer() + '<small class="muted">' + (tela === 'autos' ? 'Leia os autos para conferir.' : 'Abra os autos digitais no PJe.') + '</small></div>'; return '<div class="bar au-bl rt-ler">' + botaoLer() + '</div>' + htmlAuto(true); }, sugestoes: function () { if (!A.itens || !lidoDoProcesso()) return []; if (!A.sug) calcular(); return A.sug || []; }, ler: ler, extrair: extrair, extrairPrincipais: extrairPrincipais, htmlDocs: htmlDocs, htmlSituacao: htmlSituacao, htmlConferencia: htmlConferencia, htmlPreencher: htmlPreencher, htmlLeitura: htmlLeitura, htmlLocalizados:htmlLocalizados, doProcesso: function () { return A.itens && lidoDoProcesso() ? { lista: lista(), todos: !!A.tudo } : null; },
+window.MutaAutos = { barra: function () { var tela = window.MutaPje && window.MutaPje.tela ? window.MutaPje.tela() : ''; if ((!A.itens || !lidoDoProcesso()) && !A.lendo && !A.fila && window.MutaGabinete && window.MutaGabinete.irAutos) return '<p class="au-aviso"><span>Autos ainda não lidos.</span> <button type="button" class="lnk" data-au-ir>Ler na aba Autos</button></p>'; if (!A.itens || !lidoDoProcesso()) return '<div class="bar au-bl rt-ler">' + botaoLer() + '<small class="muted">' + (tela === 'autos' ? 'Leia os autos para conferir.' : 'Abra os autos digitais no PJe.') + '</small></div>'; return '<div class="bar au-bl rt-ler">' + botaoLer() + '</div>' + htmlAuto(true); }, sugestoes: function () { if (!A.itens || !lidoDoProcesso()||sigBloq()||(SG()&&SG().sigiloso())) return []; if (!A.sug) calcular(); return A.sug || []; }, ler: ler, extrair: extrair, extrairPrincipais: extrairPrincipais, htmlDocs: htmlDocs, htmlSituacao: htmlSituacao, htmlConferencia: htmlConferencia, htmlPreencher: htmlPreencher, htmlLeitura: htmlLeitura, htmlLocalizados:htmlLocalizados, doProcesso: function () { return A.itens && lidoDoProcesso() ? { lista: lista(), todos: !!A.tudo } : null; },
   cobertura: function(){if(sigBloq()||SG()&&SG().sigiloso())return null;var ids=idsNaFicha(),g=GB(),real=lidoDoProcesso(),D=real?lista().filter(function(d){return !docBloq(d);}):[],stored=g.V&&g.V('origem','Autos - Documentos'),seen=new Set(D.map(function(d){return S(d.id);}));(Array.isArray(stored)?stored:[]).forEach(function(d){if(!d||!S(d.id)||seen.has(S(d.id))||docBloq(d))return;seen.add(S(d.id));D.push({id:S(d.id),tipo:S(d.documento),data:d.data,historico:true});});return D.map(function(d){var x=real&&!d.historico?A.docs[d.id]:null;return {id:d.id,tipo:d.tipo,desc:d.desc,data:d.data,historico:!!d.historico,naFicha:!!ids[d.id]||naFicha(d.id),texto:!!(x&&x.estado==='ok'),gravado:!!(real&&!d.historico&&A.gravados[d.id])};});}, docsDoGrupo: docsDoGrupo, selecionar: selecionar, abrirTexto: abrirTexto, gravarMarcados: gravarMarcados, marcados: marcados, htmlConferir: htmlConferir, htmlAuto: htmlAuto, preenchido: preenchido, autoLigado: autoLigado, autoLigar: autoLigar, autoPreencher: autoPreencher,
   clique: clique, marcarSugestao: marcarSugestao, especificar: especificar, especificarJa: especificarJa, lista: lista, alertas: alertas, md: md, estado: function () { return A; },
   /* para testes: carrega uma cronologia e textos sem o PJe */

@@ -799,7 +799,7 @@ function producaoMinuta(){
  rel+=prod(['Particularidades do relatório']);
  h+=block('relatorio','Relatório',rel,true);
  var Q=questoesLista(V('triagem','Alegações')),q='<div class="gf w"><span class="gl">Questões da ficha</span>'+(Q.length?'<ol class="hero-minuta-questoes">'+Q.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ol>':'<span class="ro">Nenhuma questão registrada.</span>')+'<button type="button" class="lnk" data-minuta-caso>Editar no cartão Caso, Conteúdo e Questões</button></div>';
- q+=prod(['Objeto do recurso','Objeto devolvido','Limites do julgamento','Matérias de ofício']);h+=block('questoes','Questões a decidir',q,true);
+ q+=field('triagem','Questões jurídicas individualizadas')+prod(['Objeto do recurso','Objeto devolvido','Limites do julgamento','Matérias de ofício']);h+=block('questoes','Questões a decidir',q,true);
  if(!desp){
   var sol=prod(['Conhecimento do recurso','Extensão do conhecimento','Preliminares acolhidas','Preliminares rejeitadas','Prejudiciais de mérito'])+resultado();
   var rec=V('origem','Recursos'),res=V('producao','Resultado por recurso');
@@ -809,7 +809,7 @@ function producaoMinuta(){
   (g&&g.campos||[]).forEach(function(c){var k=species[c.chave.split(' - ')[0]];if(!k||T[k]||S(V(c.secao,c.chave)))sol+=field(c.secao,c.chave);});
   h+=block('solucao','Solução do julgamento',sol,true);
  }
- var fund=prod(['Tese jurídica adotada','Dispositivos legais aplicáveis','Precedentes aplicáveis','Distinção de precedente','Aplicação ao caso concreto']);
+ var fund=field('triagem','Questões jurídicas individualizadas')+prod(['Tese jurídica adotada','Dispositivos legais aplicáveis','Precedentes aplicáveis','Distinção de precedente','Aplicação ao caso concreto']);
  if(mono)fund+=prod(['Mono - Fundamento']);
  fund+=prod([['Voto - Descrição','Desenvolvimento / detalhes da minuta'],'Tópico-síntese']);
  if(ac||S(V('triagem','Tipo de Voto')))fund+=field('triagem','Tipo de Voto');

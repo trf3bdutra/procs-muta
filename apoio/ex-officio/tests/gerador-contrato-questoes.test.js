@@ -17,5 +17,5 @@ test('dupla apelação não recebe resultado global quando falta vínculo',()=>{
  assert.match(g.comporFicha(cp,{},'Apelação').variaveis.dispositivo_voto,/nego provimento.*dou provimento/);
 });
 test('contrato compartilhado na ficha e leitura por ID',()=>{
- const f=JSON.parse(read('padrao/ficha.json')),q=f.abas.flatMap(a=>a.grupos.flatMap(g=>g.campos)).filter(c=>c.chave==='Questões jurídicas individualizadas');assert.equal(q.length,2);assert.deepEqual(q[0].colunas,q[1].colunas);assert.match(read('extensao/autos.js'),/sugerirQuestoes/);assert.match(read('extensao/autos.js'),/TB.rec, 'ids'/);
+ const f=JSON.parse(read('padrao/ficha.json')),q=f.abas.flatMap(a=>a.grupos.flatMap(g=>g.campos)).filter(c=>c.chave==='Questões jurídicas individualizadas');assert.equal(q.length,2);assert.deepEqual(q[0].colunas,q[1].colunas);assert.match(read('extensao/autos.js'),/sugerirQuestoes/);assert.match(read('extensao/autos.js'),/Object\.values\(TB\.rec\), 'ids'/);
 });

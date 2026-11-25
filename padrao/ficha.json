@@ -782,6 +782,16 @@
          "chave": "teses",
          "rotulo": "Teses",
          "tipo": "texto-longo"
+        },
+        {
+         "chave": "pedidos",
+         "rotulo": "Pedidos",
+         "tipo": "texto-longo"
+        },
+        {
+         "chave": "id_recurso",
+         "rotulo": "ID do recurso respondido (confirmar)",
+         "tipo": "texto"
         }
        ],
        "apelido": "contrarrazoes"
