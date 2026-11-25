@@ -53,8 +53,8 @@
         if(bd){bd.textContent='Em desenvolvimento';bd.title=v.pre;}
         var pr=tt.querySelector('.pa-pre'),ds=D.getElementById('x-desc');if(!pr&&ds){pr=D.createElement('p');pr.className='pa-pre';ds.parentNode.insertBefore(pr,ds.nextSibling);}if(pr&&pr.textContent!==v.pre)pr.textContent=v.pre;
         var c3=D.querySelector('#v-edit #e-cnt');
-        por(s,modoSel()+(mod?(c3?numero(c3):''):'<div class="pa-disp"><p class="pa-k">Já disponível</p><ul>'+v.itens.map(function(i){return '<li><span aria-hidden="true">✓</span>'+esc(i)+'</li>';}).join('')+'</ul></div>'));
-        hx.classList.add('pa-com-dev');}
+        por(s,modoSel()+(mod?(c3?numero(c3):''):''));
+        hx.classList.toggle('pa-com-dev',mod);}
       else{if(bd)bd.remove();var pr2=tt&&tt.querySelector('.pa-pre');if(pr2)pr2.remove();var c2=D.querySelector('#v-edit #e-cnt');por(s,modoSel()+(c2&&D.querySelector('#v-edit #e-layout')&&!D.querySelector('#x-banco[hidden] #e-layout')?numero(c2):''));hx.classList.remove('pa-com-dev');}}
   }
 
