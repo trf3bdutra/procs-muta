@@ -1737,3 +1737,22 @@ html[data-tema=escuro] .rt-tipos .rt-kind-option{border-color:var(--line)}
 #cor-modos[hidden]{display:none!important} #cor-modos{display:flex;gap:3px;margin:0;padding:3px;border:1px solid var(--line);border-radius:6px;background:var(--card2)} #cor-modos>button{flex:1;min-width:0;font-size:11px} #cor-modos small{display:block;font-size:10px}
 /* Gestão: botões retangulares, ícone e texto na linha do perfil. */
 .topo-u .tu-gestao{justify-content:center;align-items:center;gap:4px;border:0;padding:0;margin-inline:auto} .topo-u .tu-gestao>button{display:flex;flex-direction:row;align-items:center;justify-content:center;gap:4px;height:29px;padding:0 6px;border-radius:4px;white-space:nowrap} .topo-u .tu-gestao .nav-text b{font-size:10px;line-height:1.2} @media(max-width:345px){.topo-u .tu-gestao>button{padding:0 3px;gap:2px}.topo-u .tu-gestao .nav-text b{font-size:9px}}
+
+/* Gestão: navegação operacional fixa no rodapé, sem clonar abas. */
+body.hero-gestao-ativa .layout>aside{position:fixed!important;top:auto!important;bottom:0;left:0;right:0;width:100%!important;height:auto!important;z-index:45;background:var(--card2);border-top:1px solid var(--line)}
+body.hero-gestao-ativa .layout>aside>.brand,body.hero-gestao-ativa .layout>aside>.nav-label,body.hero-gestao-ativa .layout>aside>.side-foot{display:none!important}
+body.hero-gestao-ativa .layout{display:block!important;padding-bottom:68px}
+body.hero-gestao-ativa .layout>main{width:100%;min-width:0}
+body.hero-gestao-ativa .layout>aside>.nav{display:flex;flex-direction:row;justify-content:space-around;padding:5px 8px}
+body.hero-gestao-ativa .layout>aside>.nav>button{flex:1;min-width:0}
+.topo-u .tu-utils{display:inline-flex;align-items:center;gap:2px;border:1px solid var(--line);border-radius:999px;padding:2px;flex:none;background:var(--card2)}
+.topo-u .tu-utils>.tu-b{border:0!important;border-radius:50%!important;background:transparent;width:24px;height:24px;flex:none;padding:0}
+#gab .pm-l1{display:flex;align-items:center;gap:4px;flex-wrap:wrap}
+#gab .pm-l1 .hero-proc-tags{display:inline-flex;flex-wrap:wrap;gap:3px;align-items:center}
+#gab .hero-assunto-stack>span{font-weight:650;font-size:13px;color:var(--fg)}
+#gab .hero-sig-urg{display:inline-flex;align-items:center;gap:3px;border:1px solid var(--line);border-radius:999px;padding:2px 4px;min-width:0}
+#gab .hero-sig-urg .sg-b{display:inline-flex;flex-direction:row;align-items:center;gap:4px;margin:0;border:0;padding:2px 4px;border-radius:999px;font-size:10px}
+#gab .hero-sig-urg .sg-b svg{flex:none}
+#gab .hero-sig-urg .hero-urg-short{border:0!important}
+#pauta-app .pa-session-head{background:transparent;border:0;box-shadow:none;margin:0 0 8px;padding:0}
+#pauta-app .pa-session-head .pa-session-tabs{border:0;background:transparent;padding:0}
