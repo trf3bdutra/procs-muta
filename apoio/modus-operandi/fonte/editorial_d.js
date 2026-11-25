@@ -8,7 +8,7 @@ var DAJ=/*__DAJ__*/{}; var DROT=/*__DROT__*/{};
 /* ===== Roteiro da minuta: perguntas do catálogo do gabinete, na posição do bloco aberto =====
    Camadas: roteiro-mestre + espécie do recurso + assunto escolhido + transversais. Só exibe; não escreve na peça. */
 var DROTP={relatorio:['Relatório'],
-  voto:['Admissibilidade','Preliminares e prejudiciais','Decisão recorrida','Questão em discussão','Moldura jurídica','Na espécie: fatos','Na espécie: provas','Aplicação ao caso','Fecho da questão','Consectários','Honorários','Complementos','Dispositivo'],
+  voto:['Admissibilidade','Preliminares e prejudiciais','Decisão recorrida','Questão em discussão','Moldura jurídica','Na espécie: fatos','Na espécie: provas','Aplicação ao caso','Fecho da questão','Consectários','Honorários','Complementos','Dispositivo','Encerramento'],
   ementa:['Ementa e acórdão','Revisão redacional'],acordao:['Ementa e acórdão']};
 DROTP.monocratica=DROTP.voto;DROTP['acordao-completo']=DROTP.relatorio.concat(DROTP.voto,DROTP.ementa);
 function dkRotPos(id){if(DROTP[id])return DROTP[id];if(/^rel-/.test(id))return DROTP.relatorio;if(id==='ed'||id==='agint')return DROTP.voto;return [];}
@@ -23,7 +23,7 @@ var DROTB=[
   ['voto',/^Abertura/,['Admissibilidade','Preliminares e prejudiciais','Decisão recorrida','Questão em discussão']],['voto',/^Transição/,['Questão em discussão']],
   ['voto',/^Moldura|^Fundamentação/,['Moldura jurídica']],['voto',/^Exame do caso|^Caso vertente/,['Na espécie: fatos','Na espécie: provas']],
   ['voto',/^Enfrentamento|^Precedente/,['Aplicação ao caso']],['voto',/^Síntese|^Fecho/,['Fecho da questão']],
-  ['voto',/^Dispositivo/,['Dispositivo','Consectários','Honorários','Complementos']],['voto',/^Encerramento/,['Dispositivo']],
+  ['voto',/^Honorários/,['Honorários']],['voto',/^Consectários/,['Consectários']],['voto',/^Dispositivo/,['Dispositivo','Complementos']],['voto',/^Encerramento/,['Encerramento']],
   ['monocratica',/^Abertura/,['Admissibilidade']],['monocratica',/^Relato/,['Decisão recorrida']],['monocratica',/^Marco decisório/,['Decisão recorrida','Questão em discussão']],
   ['monocratica',/^Fundamentação/,['Moldura jurídica','Na espécie: fatos','Na espécie: provas','Aplicação ao caso','Fecho da questão']],
   ['monocratica',/^Dispositivo/,['Dispositivo','Consectários','Honorários','Complementos']],
@@ -31,11 +31,64 @@ var DROTB=[
 function dkRotBloco(pid,n){var b=/^rel-/.test(pid)?'relatorio':pid;
   for(var i=0;i<DROTB.length;i++){var o=DROTB[i];if(o[0]===b&&o[1].test(n||''))return o;}return null;}
 function dkRotAssuntos(){return (DROT.blocos||[]).filter(function(b){return b.g==='assunto';}).map(function(b){return b.nome;});}
-function dkRotItem(b,it){
-  return '<li class="xri'+(it.e?' ess':'')+'"><b>'+esc(it.q)+'</b>'+(it.e?' <span class="xrie">essencial</span>':'')+
+function dkRotItem(b,it,av,ff){
+  var st=av&&av.s,bd=st==='ok'?'<span class="xrs ok" title="Conferido pela ficha e pelo texto">✓</span>':st==='al'?'<span class="xrs al" title="Conferir">⚠</span>':'';
+  var f=ff!=null?ff:it.f,i=-1;if(f){DK.rotF=DK.rotF||[];i=DK.rotF.push(f)-1;}
+  return '<li class="xri'+(it.e?' ess':'')+(st?' s-'+st:'')+'">'+bd+'<b>'+esc(it.q)+'</b>'+(it.e?' <span class="xrie">essencial</span>':'')+
+    (av&&av.m?'<p class="xrm">'+esc(av.m)+'</p>':'')+
     (it.o?'<p>'+xFm(it.o)+'</p>':'')+
-    (it.f?'<p class="xrif">'+esc(it.f).replace(/\n/g,'<br>')+'</p>':'')+
+    (f?'<p class="xrif">'+esc(f).replace(/\n/g,'<br>')+'</p><p class="xrfa"><button type="button" class="lnk" data-xrcp="'+i+'">Copiar fórmula</button></p>':'')+
     '<small>'+esc(b.nome)+(it.fn?' · '+esc(it.fn):'')+'</small></li>';}
+/* roteiro aplicado ao caso: cada pergunta lê a ficha do processo aberto e, no bloco selecionado, o texto da folha.
+   Situação: ok (atendido), al (conferir, com o motivo) ou na (não se aplica a este caso: fica recolhido). Sem dado, o item fica neutro. */
+function dkRotNorm(v){return String(v==null?'':v).normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();}
+function dkRotCtx(t){
+  var P=window.CQX&&CQX.tem()?CQX.P():null,J=P?CQX.J():null,cp=(J&&P&&String(J.processo||'').replace(/\D/g,'')===String(P.processo||'').replace(/\D/g,'')&&J.campos)||{};
+  var g=function(k){var v=cp[k];return v==null?'':typeof v==='object'?JSON.stringify(v):String(v).trim();};
+  var txt='';if(t&&t.k){var el=document.querySelector('#x-main [data-xk="'+(window.CSS&&CSS.escape?CSS.escape(t.k):t.k)+'"]');if(el)txt=el.textContent||'';}
+  var tj=dkRotNorm(g('triagem.Tipo de Julgamento')||(P&&(P.tipoJulgamento||P.classe))||''),r=dkRotNorm(g('producao.Voto - Resultado')||(P&&P.resultado)||'');
+  var res=/rejeit/.test(r)?'rej':/acolhid/.test(r)?'aco':/parcial/.test(r)?'par':/nao conhec/.test(r)?'nc':/desprov|negad|nego provimento|negar provimento|improvid/.test(r)?'des':/provid|dado provimento|dou provimento/.test(r)?'pro':'';
+  var rec=cp['origem.Recursos'];if(typeof rec==='string'){try{rec=JSON.parse(rec);}catch(e){rec=null;}}rec=Array.isArray(rec)?rec:[];
+  var partes=dkRotNorm(Object.keys(cp).filter(function(k){return /polo/i.test(k);}).map(function(k){return cp[k];}).join(' ')+' '+(P&&P.partes||''));
+  return {tem:!!P&&Object.keys(cp).length>0,g:g,txt:dkRotNorm(txt),tj:tj,res:res,rec:rec,ed:/embargos de declara/.test(tj),rn:/remessa/.test(tj),ms:/mandado de seguran|msciv/.test(tj),ai:/agravo de instrumento/.test(tj),
+    inss:/\binss\b|instituto nacional do seguro/.test(partes),ajg:/^sim$/i.test(g('triagem.AJG'))};}
+var DROT_VERBO={des:/neg(o|ar)(-lhe)? provimento/,pro:/dou provimento|dar provimento/,par:/dou parcial provimento|dar parcial provimento/,nc:/nao conhec/,rej:/rejeit/,aco:/acolh/};
+function dkRotAval(it,C){if(!C||!C.tem)return null;var q=it.q,g=C.g,x=C.txt,ok=function(m){return {s:'ok',m:m||''};},al=function(m){return {s:'al',m:m};},na=function(m){return {s:'na',m:m||''};};
+  var nat=g('producao.Natureza da condenação'),sc=nat==='Sem condenação';
+  if(/^Dispositivo coerente/.test(q)){if(!x)return null;var E=[];
+    if(/nos termos da fundamenta/.test(x))E.push('tirar "nos termos da fundamentação"');
+    if(!C.ed&&/apela/.test(C.tj)&&/\brecurso\b/.test(x.replace(/recurso adesivo/g,'')))E.push('usar "apelação", não "recurso"');
+    if(/procedenc/.test(x))E.push('"procedência/improcedência" é só da sentença');
+    if(C.res&&DROT_VERBO[C.res]&&!DROT_VERBO[C.res].test(x))E.push('o verbo não corresponde ao resultado da ficha');
+    return E.length?al(E.join('; ')):ok();}
+  if(/^Tipo de voto no PJe/.test(q)){var tv=dkRotNorm(g('triagem.Tipo de Voto'));if(!tv)return al('Tipo de voto não registrado na ficha.');
+    if(/procedenc/.test(tv))return al('"Procedência" é só da sentença.');if(C.ed&&/provid/.test(tv))return al('Embargos são acolhidos ou rejeitados, nunca providos.');
+    if(C.res==='des'&&!/nao provid|desprov|negad/.test(tv))return al('Tipo de voto não bate com o resultado (desprovido).');return ok();}
+  if(/^Recurso adesivo e remessa/.test(q)){var ad=/^sim$/i.test(g('triagem.Recurso adesivo'));if(!C.rn&&!ad&&C.rec.length<2)return na('Sem adesivo, remessa ou segundo recurso.');
+    if(x&&C.rn&&!/remessa/.test(x))return al('A remessa necessária não está no dispositivo.');if(x&&ad&&!/adesivo/.test(x))return al('O recurso adesivo não está no dispositivo.');return x?ok():null;}
+  if(/^Sucumbência recursal/.test(q)){if(C.ms)return al('Mandado de segurança: sem honorários (art. 25 da Lei 12.016/2009).');if(C.ai)return na('Agravo de instrumento: honorários na ação originária.');
+    if(!x)return null;if(/validar|incompat/.test(x))return al('O bloco ainda tem pendência [VALIDAR].');if(/98, § 3/.test(x)&&!C.ajg)return al('Ressalva da gratuidade sem AJG na ficha.');return ok();}
+  if(/^Hipóteses sem majoração/.test(q))return C.ms?al('Mandado de segurança: não há honorários.'):null;
+  if(/^Sem honorários na origem/.test(q))return g('origem.Sentença - Honorários')?na('A sentença fixou honorários.'):al('A ficha não registra honorários na sentença.');
+  if(/^Beneficiário da gratuidade/.test(q))return C.ajg?ok('AJG na ficha: exigibilidade suspensa.'):na('Sem AJG na ficha.');
+  if(/^Previdenciário/.test(q))return C.inss||nat==='Previdenciária'?null:na('Não é previdenciário.');
+  if(/^Regime anterior|^Selic a partir|^Critério específico/.test(q))return sc?na('Sem condenação.'):null;
+  if(/^Juros de mora em benefício/.test(q))return sc?na('Sem condenação.'):C.inss||nat==='Previdenciária'?null:na('Não é benefício previdenciário.');
+  if(/^A reforma altera/.test(q))return C.res==='pro'||C.res==='par'?al('Resultado altera a sentença: rever sucumbência e consectários.'):C.res?na('Sentença mantida.'):null;
+  if(/^Pessoa natural|^ADC 80|^Pessoa jurídica/.test(q)){var gr=g('triagem.Gratuidade pedida no recurso')||g('producao.Gratuidade no julgamento');if(!gr)return na('Gratuidade não está em discussão.');
+    var tp=g('triagem.Gratuidade - Tipo de pessoa');if(/^Pessoa natural/.test(q)&&tp==='Pessoa jurídica')return na('Pessoa jurídica.');if(/^Pessoa jurídica/.test(q)&&tp==='Pessoa natural')return na('Pessoa natural.');
+    if(/^ADC 80/.test(q)){var aj=g('origem.Origem - Data de ajuizamento');if(!aj)return al('Data de ajuizamento não registrada na ficha.');return aj<'2026-09-16'?na('Ajuizada antes da ata da ADC 80 (16/09/2026): vale o Tema 1.178/STJ.'):al('Ajuizada após a ata: aplicar a ADC 80.');}
+    return null;}
+  if(/^Pedidos residuais/.test(q)){var mf=/^sim$/i.test(g('triagem.Má-fé alegada'));if(mf&&x&&!/ma-fe|litigancia/.test(x))return al('Má-fé alegada: enfrentar.');return mf?(x?ok():al('Má-fé alegada: enfrentar.')):null;}
+  return null;}
+/* fórmula do roteiro com os dados do caso: parte recorrente e ressalva da gratuidade só com AJG */
+function dkRotFormula(f,C){if(!f||!C||!C.tem)return f;var p=(C.rec[0]&&(C.rec[0].parte||C.rec[0].recorrente))||'';
+  f=f.replace(/\[, observada a gratuidade([^\]]*)\]/,C.ajg?', observada a gratuidade$1':'');
+  if(p)f=f.replace(/\[a parte\]|\[o autor \/ a autora\]/g,p);return f;}
+function dkRotLista(L,C){var V=L.map(function(x){return {x:x,a:dkRotAval(x.i,C)};}),na=V.filter(function(v){return v.a&&v.a.s==='na';}),vi=V.filter(function(v){return !(v.a&&v.a.s==='na');});
+  var li=function(v){return dkRotItem(v.x.b,v.x.i,v.a,dkRotFormula(v.x.i.f,C));};
+  return xLista(vi.map(li))+(na.length?'<details class="xrna"><summary>'+na.length+(na.length>1?' itens não se aplicam':' item não se aplica')+' a este caso</summary>'+xLista(na.map(li))+'</details>':'');}
+document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-xrcp]');if(!b)return;var f=(DK.rotF||[])[+b.getAttribute('data-xrcp')];if(f)dkCopy(f,'Fórmula copiada');});
 /* assunto do roteiro pelo caso aberto (assunto, tipo de caso, especificidades), até a escolha à mão no seletor */
 var DROT_AUTO=[[/28,86/,/28[,.]86|0005019-15\.1997/],[/^PIS\/COFINS: cr/,/(pis|cofins)[\s\S]*(credit|monof|ressarc)/],[/^PIS\/COFINS: ex/,/pis|cofins/],[/^PASEP/,/pasep/],
 ['Anuidades de conselhos profissionais',/anuidade|conselho (regional|federal)/],[/^Execução fiscal/,/execucao fiscal|embargos a execucao fiscal|\bcda\b/],[/^Perdimento/,/perdimento|aduan/],
@@ -52,7 +105,7 @@ function dkRotCamadas(){var esp=dkRotEsp(),as=dkRotAs();
 function dkRotSel(){var cur=dkRotAs(),opc='<option value="">Sem assunto</option>'+dkRotAssuntos().map(function(x){return '<option value="'+esc(x)+'"'+(x===cur?' selected':'')+'>'+esc(x)+(x===cur&&!DK.rotAsMan?' · pelo caso':'')+'</option>';}).join('');
   return '<div class="xrsel"><label for="drot-as">Assunto</label><select id="drot-as">'+opc+'</select></div>';}
 /* roteiro do trecho selecionado, no canhoto */
-function dkRotTrecho(pid,n){
+function dkRotTrecho(pid,n,t){
   var o=dkRotBloco(pid,n);if(!o)return '';
   var usa=dkRotCamadas(),L=[];
   usa.forEach(function(b){(b.itens||[]).forEach(function(it){if(o[2].indexOf(it.pos)>=0)L.push({b:b,i:it});});});
@@ -61,11 +114,11 @@ function dkRotTrecho(pid,n){
   L.sort(function(x,y){return (y.i.e?1:0)-(x.i.e?1:0);});
   var ne=L.filter(function(x){return x.i.e;}).length;
   return '<div class="cf xrot"><div class="cfl">Roteiro <span class="pill">'+L.length+'</span>'+(ne?'<em class="xrie">'+ne+(ne>1?' essenciais':' essencial')+'</em>':'')+'</div>'+
-    dkRotSel()+xLista(L.map(function(x){return dkRotItem(x.b,x.i);}))+'</div>';}
+    dkRotSel()+dkRotLista(L,dkRotCtx(t))+'</div>';}
 /* roteiro da parte inteira, no painel de orientações, quando nenhum trecho está selecionado */
 function dkRoteiro(pid){
   var poss=dkRotPos(pid),B=DROT.blocos||[];if(!poss.length||!B.length)return '';
-  var esp=dkRotEsp(),n=0,ess=0,corpo='',usa=dkRotCamadas();
+  var esp=dkRotEsp(),n=0,ess=0,corpo='',usa=dkRotCamadas(),C=dkRotCtx(null);DK.rotF=[];
   (DROT.posicoes||[]).forEach(function(ps){
     if(poss.indexOf(ps)<0)return;
     var L=[];usa.forEach(function(b){(b.itens||[]).forEach(function(it){if(it.pos===ps)L.push({b:b,i:it});});});
@@ -74,7 +127,7 @@ function dkRoteiro(pid){
     var ne=L.filter(function(x){return x.i.e;}).length;ess+=ne;
     DK.rotPs=DK.rotPs||{};
     corpo+='<details class="xrps"'+(DK.rotPs[ps]?' open':'')+' data-rotps="'+esc(ps)+'"><summary>'+esc(ps)+'<small>'+L.length+(ne?' · '+ne+(ne>1?' essenciais':' essencial'):'')+'</small></summary>'+
-      xLista(L.map(function(x){return dkRotItem(x.b,x.i);}))+'</details>';});
+      dkRotLista(L,C)+'</details>';});
   if(!n)return '';
   return '<div class="dori xrot"><div class="ohd"><p class="kick2">Roteiro · '+esc(String(pid==='relatorio'?'relatório':pid).toUpperCase())+'</p><span class="xrqt">'+n+' · '+ess+(ess>1?' essenciais':' essencial')+'</span></div>'+
     '<p class="ointro">Perguntas do catálogo do gabinete para esta parte. Ao abrir um trecho da folha, o roteiro dele vai para o canhoto.</p>'+
@@ -419,7 +472,7 @@ function dkCanTrecho(sel){var t=sel.t,pt=sel.pt,E=escolha(t,XP.alt),ai=E.ai,h=''
     h+='<div class="cf"><div class="cfl">'+esc(t.n)+' <span class="pill">'+esc(E.a.lab||'')+'</span></div><div class="dpl">'+t.alts.map(function(x,i){if(x.base&&hb&&!vb)return '';return '<button type="button" data-xalt="'+esc(t.k)+'" data-i="'+i+'" aria-pressed="'+(i===ai)+'"'+(x.base?' class="b"':'')+'>'+esc(x.lab||('Versão '+(i+1)))+'</button>';}).join('')+(hb?'<button type="button" class="mais" data-xbase="'+esc(t.k)+'">'+(vb?'menos':'+ '+(t.alts.length-nb)+' da base')+'</button>':'')+'</div>'+
       (E.sub?'<div class="cfl" style="margin-top:10px">Variação</div><div class="dpl">'+E.sub.map(function(x,i){return '<button type="button" data-xsub="'+esc(t.k)+'" data-i="'+i+'" aria-pressed="'+(i===E.si)+'">'+esc(x.lab)+'</button>';}).join('')+'</div>':'')+'</div>';}
   h+=dkCampos(t.k);
-  h+=dkRotTrecho(t.pid||pt.id,t.n);
+  DK.rotF=[];h+=dkRotTrecho(t.pid||pt.id,t.n,t);
   if(t.info)h+='<details class="cf dsec"><summary class="cfl">Tabela de referência</summary>'+xInfo(t.info)+'</details>';
   if(pt.id==='ementa')h+=dkEmenta(t.n);
   if((pt.id==='voto'&&/^(Abertura|Transição ao mérito)/.test(t.n))||(pt.id==='monocratica'&&/^(Marco decisório|Fundamentação)/.test(t.n)))

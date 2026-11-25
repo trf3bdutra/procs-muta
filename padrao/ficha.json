@@ -255,6 +255,13 @@
         }
        ],
        "apelido": "origem_pecas_vinculadas_1g"
+      },
+      {
+       "rotulo": "Data de ajuizamento",
+       "chave": "Origem - Data de ajuizamento",
+       "tipo": "data",
+       "secao": "origem",
+       "apelido": "origem_data_ajuizamento"
       }
      ]
     },
@@ -1654,6 +1661,32 @@
        "tipo": "texto-longo",
        "secao": "triagem",
        "apelido": "outros_assuntos"
+      },
+      {
+       "rotulo": "Recurso adesivo",
+       "chave": "Recurso adesivo",
+       "tipo": "simnao",
+       "secao": "triagem",
+       "apelido": "recurso_adesivo"
+      },
+      {
+       "rotulo": "Má-fé alegada",
+       "chave": "Má-fé alegada",
+       "tipo": "simnao",
+       "secao": "triagem",
+       "apelido": "ma_fe_alegada"
+      },
+      {
+       "rotulo": "Tipo de pessoa (gratuidade)",
+       "chave": "Gratuidade - Tipo de pessoa",
+       "tipo": "lista",
+       "secao": "triagem",
+       "opcoes": [
+        "Pessoa natural",
+        "Pessoa jurídica",
+        "Não se aplica"
+       ],
+       "apelido": "gratuidade_tipo_pessoa"
       }
      ]
     },
@@ -2387,6 +2420,13 @@
        "tipo": "texto-longo",
        "secao": "producao",
        "apelido": "mono_fundamento"
+      },
+      {
+       "rotulo": "Título do caso (painel do Desembargador)",
+       "chave": "Mono - Título",
+       "tipo": "texto",
+       "secao": "producao",
+       "apelido": "mono_titulo"
       }
      ]
     },
@@ -2731,6 +2771,27 @@
        "tipo": "texto-longo",
        "secao": "producao",
        "apelido": "fundamento_sucumbencia"
+      },
+      {
+       "rotulo": "Natureza da condenação",
+       "chave": "Natureza da condenação",
+       "tipo": "lista",
+       "secao": "producao",
+       "opcoes": [
+        "Sem condenação",
+        "Previdenciária",
+        "Administrativa (não tributária)",
+        "Tributária",
+        "Outra"
+       ],
+       "apelido": "natureza_condenacao"
+      },
+      {
+       "rotulo": "Consectários no julgamento",
+       "chave": "Consectários no julgamento",
+       "tipo": "simnao",
+       "secao": "producao",
+       "apelido": "consectarios_julgamento"
       }
      ]
     },

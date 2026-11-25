@@ -689,7 +689,7 @@ var CC_ABERTO = {};
    Caso (o que o Compendium usa e não está acima) → Decisão monocrática (o mesmo do prontuário da página Monocráticas do Ex Officio)
    ou Acórdão (designação e minuta, revisão, relatório/voto/ementa, liberação) + Pauta e julgamento (histórico de pautas,
    sustentação/preferência, retirado/adiado e para quando). */
-var CC_MONO = [['Decisão', [['producao', 'Mono - Fundamento', 'Precedente ou fundamento'], ['triagem', 'Hipóteses Monocrática', 'Hipótese do art. 932'], ['producao', 'Voto - Resultado', 'Resultado'],
+var CC_MONO = [['Decisão', [['producao', 'Mono - Título', 'Título do caso (painel do Desembargador)'], ['producao', 'Mono - Fundamento', 'Precedente ou fundamento'], ['triagem', 'Hipóteses Monocrática', 'Hipótese do art. 932'], ['producao', 'Voto - Resultado', 'Resultado'],
     ['producao', 'Voto - Honorários', 'Honorários'], ['producao', 'Tópico-síntese', 'Tópico-síntese (INSS)'], ['producao', 'Voto - Descrição', 'Detalhes da minuta']]],
   ['Designação e minuta', 'Designação e minuta'], ['Revisão', 'Revisão'],
   ['Assinatura e publicação', [['producao', 'Data da Liberação'], ['producao', 'Assinado'], ['producao', 'Data da Assinatura'], ['producao', 'Decisão - ID'], ['producao', 'Publicado'], ['producao', 'Mono - Data da publicação']]],

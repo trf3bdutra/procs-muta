@@ -14,6 +14,29 @@
     "chave": "Outros assuntos",
     "tipo": "texto-longo",
     "secao": "triagem"
+   },
+   {
+    "rotulo": "Recurso adesivo",
+    "chave": "Recurso adesivo",
+    "tipo": "simnao",
+    "secao": "triagem"
+   },
+   {
+    "rotulo": "Má-fé alegada",
+    "chave": "Má-fé alegada",
+    "tipo": "simnao",
+    "secao": "triagem"
+   },
+   {
+    "rotulo": "Tipo de pessoa (gratuidade)",
+    "chave": "Gratuidade - Tipo de pessoa",
+    "tipo": "lista",
+    "secao": "triagem",
+    "opcoes": [
+     "Pessoa natural",
+     "Pessoa jurídica",
+     "Não se aplica"
+    ]
    }
   ]
  },
@@ -433,6 +456,25 @@
     "chave": "Fundamento da sucumbência",
     "tipo": "texto-longo",
     "secao": "producao"
+   },
+   {
+    "rotulo": "Natureza da condenação",
+    "chave": "Natureza da condenação",
+    "tipo": "lista",
+    "secao": "producao",
+    "opcoes": [
+     "Sem condenação",
+     "Previdenciária",
+     "Administrativa (não tributária)",
+     "Tributária",
+     "Outra"
+    ]
+   },
+   {
+    "rotulo": "Consectários no julgamento",
+    "chave": "Consectários no julgamento",
+    "tipo": "simnao",
+    "secao": "producao"
    }
   ]
  },
@@ -831,6 +873,24 @@
       "tipo": "texto"
      }
     ]
+   },
+   {
+    "rotulo": "Data de ajuizamento",
+    "chave": "Origem - Data de ajuizamento",
+    "tipo": "data",
+    "secao": "origem"
+   }
+  ]
+ },
+ {
+  "aba": "Produção",
+  "grupo": "Ato e fundamento",
+  "campos": [
+   {
+    "rotulo": "Título do caso (painel do Desembargador)",
+    "chave": "Mono - Título",
+    "tipo": "texto",
+    "secao": "producao"
    }
   ]
  }

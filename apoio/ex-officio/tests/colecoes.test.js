@@ -94,15 +94,18 @@ test('coleções: banco reserva (seleção prévia sem sessão) agrupado pela tr
 test('coleções: Caput, Collectio, alimentar e fluxo usam a mesma fonte', () => {
   const tri = read('caput/triagem/index.html');
   assert.ok(tri.includes("const ESC_IDX = 'acervo/lotes/colecoes.json'"), 'Caput lê o índice das coleções');
-  assert.ok(tri.includes("tipo: 'avulso', origem: 'escaninho'"), 'escaninho novo nasce como lote avulso');
-  assert.ok(tri.includes("migrado: 'acervo/lotes (coleção Avulsos do Collectio)'"), 'arquivo antigo marcado como migrado');
-  assert.ok(tri.includes("id: 'esc-e' + Date.now().toString(36)"), 'id do escaninho já é id de lote');
+  /* o escaninho vira lote avulso em scripts/lotes/colecoes.py (fonte única), não mais no próprio Caput */
+  assert.match(read('scripts/lotes/colecoes.py'), /lote_novo\(id_, 'avulso', [^\n]*origem='escaninho'/, 'escaninho novo nasce como lote avulso');
+  const col = read('scripts/lotes/colecoes.py');
+  assert.ok(col.includes("'migrado': 'acervo/lotes (coleção Avulsos do Collectio)'"), 'arquivo antigo marcado como migrado');
+  assert.ok(col.includes("id_ = 'esc-' + re.sub("), 'id do escaninho vira id de lote');
   const api = read('apoio/ex-officio/api/_lote.js');
   assert.ok(api.includes("if (l.tipo === 'selecao') return 'selecao'"));
   assert.ok(api.includes("selecao:lotes.filter(l=>l.tipo==='selecao'&&!l.arquivado)"));
   assert.ok(api.includes("dados.schema !== 'gabcmt.lote'"), 'colecoes.json não aparece como lote');
   const pg = read('apoio/ex-officio/lotes/index.html');
-  assert.ok(pg.includes('Seleção prévia') && pg.includes('Escaninhos da triagem do Caput'));
+  /* Triagem (tarefas, séries e escaninhos) e Seleção prévia foram integradas à aba de triagem do Caput: o Collectio só avisa */
+  assert.ok(pg.includes('Seleção prévia') && /lotes das tarefas, séries e escaninhos/.test(pg));
   const al = read('scripts/lotes/alimentar.py');
   assert.ok(al.includes("L.get('arquivado')") && al.includes('sorted(todos, key=prioridade)'));
   const wf = read('.github/workflows/lotes-alimentar.yml');

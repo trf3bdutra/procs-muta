@@ -10,7 +10,7 @@ const L = require('./_lib');
 const FICHA = require('./_ficha');
 const GESTOR = ['servidor', 'corretor'];
 /* campos sem lugar próprio na ficha (cartão completo, consectários): guardados juntos, no mesmo registro */
-const EXTRA = '_monoExtra', SEM_FICHA = ['consect', 'cartao', 'intercorOk', 'titulo', 'intercorTipo', 'intercorChamado', 'retidoOk'];
+const EXTRA = '_monoExtra', SEM_FICHA = ['cartao', 'intercorOk', 'intercorTipo', 'intercorChamado', 'retidoOk']; /* título e consectários foram para a ficha (Mono - Título, Consectários no julgamento); o registro extra antigo ainda é lido */
 /* sugestões: etiquetas do PJe que indicam pedido urgente, em processo que ainda está no gabinete */
 const URG = /urgen|tutela de urg|tutela antecip|tutela provis|efeito suspensivo|liminar(?! indeferida)|cirurgia|medicamento/i;
 const FORA = /^\[Sess|Baixad|Arquivo|prazo em curso|Sobrestad/i;
@@ -48,7 +48,8 @@ function item(r) {
   return { cnj: r.processo, mono: p.Destino === 'Monocrática', monoEm: c['Monocrática - Registrada em'] || '', obs: c['Monocrática - Observação'] || '',
     servidor: p.SERVIDOR || '', corretor: p.CORRETOR || '', dataMinuta: p.MINUTADO || '', dataCorrecao: p['Data da Revisão'] || '', dataLiberacao: p['Data da Liberação'] || '',
     /* assinatura e publicação (ficha · Decisão monocrática): a etapa final da monocrática */
-    assinado: p.Assinado === 'Sim' || !!p['Data da Assinatura'], dataAssinatura: p['Data da Assinatura'] || '', publicado: p.Publicado === 'Sim', decisaoId: p['Decisão - ID'] || '', ctl };
+    assinado: p.Assinado === 'Sim' || !!p['Data da Assinatura'], dataAssinatura: p['Data da Assinatura'] || '', publicado: p.Publicado === 'Sim' || !!p['Mono - Data da publicação'], decisaoId: p['Decisão - ID'] || '', dataPublicacao: p['Mono - Data da publicação'] || '',
+    prazo: c['Monocrática - Prazo'] || '', ctl };
 }
 const vale = r => (r.producao || {}).Destino === 'Monocrática' || !!(r.triagem || {})['Urgência'];
 module.exports = async (req, res, u) => {
@@ -88,6 +89,7 @@ async function gravarMono(cnj, campos, u, gestorOk) {
     const mud = FICHA.doCartao(C, C.cartao);
     if ('mono' in C) (mud.producao = mud.producao || {}).Destino = C.mono ? 'Monocrática' : '';
     if ('obs' in C) (mud.controles = mud.controles || {})['Monocrática - Observação'] = String(C.obs || '');
+    if ('prazo' in C) (mud.controles = mud.controles || {})['Monocrática - Prazo'] = String(C.prazo || '');
     if ('urgTipo' in C && !C.urgTipo) { mud.triagem = mud.triagem || {}; URG_CAMPOS.forEach(k => { mud.triagem[k] = ''; }); }
     const { r, out } = await FICHA.gravar(cnj, mud, 'Monocráticas e urgências (' + u + '): ' + cnj, (r, out) => {
       const c = r.controles = r.controles || {};

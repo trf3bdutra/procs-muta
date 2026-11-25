@@ -30,7 +30,7 @@
   var ROT={ac:'Acórdão',mono:'Decisão monocrática (art. 932)',urg:'Decisão de urgência',desp:'Despacho',adm:'Decisão de admissibilidade',ret:'Juízo de retratação',hom:'Homologação / extinção',outro:'Outro destino',indef:'A definir na Triagem'};
   /* campos que só este painel mostra (o restante da produção não os repete) */
   var MEUS=['triagem.Hipóteses Monocrática','producao.Voto - Resultado','producao.Resultado por recurso','producao.Voto - Honorários','producao.Fundamento da sucumbência',
-    'producao.Juros e correção monetária','producao.Tópico-síntese','producao.Mono - Fundamento','producao.Tese jurídica adotada','producao.Precedentes aplicáveis','producao.Voto - Descrição',
+    'producao.Juros e correção monetária','producao.Natureza da condenação','producao.Mono - Título','producao.Tópico-síntese','producao.Mono - Fundamento','producao.Tese jurídica adotada','producao.Precedentes aplicáveis','producao.Voto - Descrição',
     'producao.ED - Vício reconhecido','producao.ED - Integração','producao.ED - Efeitos modificativos','producao.ED - Prequestionamento','producao.Remessa - Extensão do reexame',
     'triagem.Retratação - Tema','triagem.Retratação - Precedente'];
   function painel(){
@@ -62,11 +62,12 @@
     else{
       if(T.ai)h+=nota('Agravo de instrumento: honorários tratados na ação originária, salvo decisão que ponha termo ao processo.');
       h+=campoDe('producao','Voto - Honorários','Honorários')+campoDe('producao','Fundamento da sucumbência','Fundamento da sucumbência');
-      h+=campoDe('producao','Juros e correção monetária','Consectários (juros e correção)');
+      h+=campoDe('producao','Natureza da condenação','Natureza da condenação');
+      if(S(V('producao','Natureza da condenação'))!=='Sem condenação')h+=campoDe('producao','Juros e correção monetária','Consectários (juros e correção)');
     }
     if(inss()||S(V('producao','Tópico-síntese')))h+=campoDe('producao','Tópico-síntese','Tópico-síntese (INSS)');
     /* fundamento: monocrática no campo da monocrática; acórdão na tese e nos precedentes */
-    if(mono)h+=campoDe('producao','Mono - Fundamento','Precedente ou fundamento');
+    if(mono)h+=campoDe('producao','Mono - Título','Título do caso (painel do Desembargador)')+campoDe('producao','Mono - Fundamento','Precedente ou fundamento');
     else h+=campoDe('producao','Tese jurídica adotada','Tese jurídica adotada')+campoDe('producao','Precedentes aplicáveis','Precedentes aplicáveis');
     h+=campoDe('producao','Voto - Descrição','Detalhes da minuta');
     return h;

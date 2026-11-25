@@ -145,7 +145,7 @@ test('Mural do servidor: desenho do protótipo num shadow root, com o quadro ant
   assert.match(h, /<slot name=\\"cal\\"><\\\/slot>/);
   const cal = fs.readFileSync(path.join(__dirname, '..', '..', '..', 'caput', 'motor', 'assets', 'js', '11-calendario.js'), 'utf8');
   assert.match(cal, /return \(ex\.alertasExtra\|\|\[\]\)\.concat\(U,A\.slice\(0,4\)\)/);
-  assert.match(h, /<script id="cc-cal-lib" src="\/init\/motor\/assets\/js\/11-calendario\.js"><\/script>/);
+  assert.match(h, /<script id="cc-cal-lib" src="\/monitor\/motor\/assets\/js\/11-calendario\.js(\?v=[^"]*)?"><\/script>/);
   assert.match(h, /semanaLateral:true,semanaRecolhida:true/);
   assert.match(h, /function calMeus\(D\)/);
   assert.match(p, /meta: \(it\.ctl \|\| \{\}\)\.meta/);
@@ -169,7 +169,8 @@ test('Mural: sem a lista de avisos na coluna (destaque no topo), ausências como
   assert.match(h, /#mu-host \.cc-dir\{display:none!important\}/);
   assert.doesNotMatch(h, /av\.setAttribute\('slot','avisos'\)/);
   assert.match(h, /body:not\(\.painel-gab\) #v-inicio>:not\(#mu-host\)\{display:none!important\}/);
-  assert.match(h, /if\(au\)\{au\.removeAttribute\('slot'\);cal\.appendChild\(au\);\}/);
+  /* desde 946706b/3f43a28: ausências e histórico ficam em slots próprios do Mural, sob as designações */
+  assert.match(h, /if\(au\)\{au\.setAttribute\('slot','aus'\);host\.appendChild\(au\);\}/);
   assert.match(h, /<slot name=\\"avisos\\"><\\\/slot>/);
 });
 
@@ -251,7 +252,7 @@ test('Mural: registros da Assessoria fora do calendário de quem não é da asse
 test('Mural: histórico sob a lista (coluna da esquerda) e Minhas ausências logo abaixo dos avisos', () => {
   const fs = require('fs'), path = require('path');
   const h = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
-  assert.match(h, /hi\.open=true;hi\.removeAttribute\('slot'\);cal\.appendChild\(hi\)/);
+  assert.match(h, /hi\.open=true;hi\.setAttribute\('slot','hist'\);host\.appendChild\(hi\)/);
   assert.match(h, /<slot name=\\"avisos\\"><\\\/slot><slot name=\\"aus\\"><\\\/slot>/);
   assert.match(h, /<slot name=\\"hist\\"><\\\/slot>/);
 });
@@ -284,10 +285,11 @@ test('Mural: cabeçalho do calendário no padrão da Pauta, com a cor da borda n
   assert.match(h, /#mu-host>#hc-cal-full\{padding:0!important;overflow:hidden;border-color:var\(--l\)!important\}/);
 });
 
-test('Mural: Histórico como vista alternativa do painel do calendário; dia do canhoto no cabeçalho', () => {
+test('Mural: Histórico no próprio slot (não mais vista do calendário); dia do canhoto no cabeçalho', () => {
   const fs = require('fs'), path = require('path');
   const h = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
-  assert.match(h, /data-vista="cal">Calendário<\/button><button type="button" data-vista="hist">Histórico<\/button>/);
+  assert.doesNotMatch(h, /data-vista="hist">Histórico</);
+  assert.match(h, /<slot name=\\"hist\\"><\\\/slot>/);
   assert.match(h, /#hc-cal-full\.ver-hist #cc-cal \.cc-body\{display:none!important\}/);
   assert.match(h, /#hc-cal-full:not\(\.ver-hist\) #prod\{display:none!important\}/);
   assert.match(h, /new MutationObserver\(function\(\)\{sinc\(\);cantoJa\(\);copia\(\);\}\)\.observe\(cal,\{childList:true,subtree:true\}\)/);
@@ -394,8 +396,8 @@ test('Ausências: datas pessoais (aniversário, posse, chegada) gravadas por usu
   const h = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
   const lib = fs.readFileSync(path.join(__dirname, '../../../caput/motor/assets/js/11-calendario.js'), 'utf8');
   assert.match(h, /id="pf-aniv"[^]*id="pf-posse"[^]*id="pf-cheg"/);
-  assert.match(h, /data-vista="aus">Ausências</);
-  assert.match(h, /canto:PAINEL_GAB\?'':ausCanto\(\)/);
+  assert.match(h, /<slot name=\\"aus\\">/);
+  assert.match(h, /function ausCanto/);
   assert.match(lib, /class="cc-c cc-canto fim"/);
   assert.match(h, /function destGira\(L\)\{/);
   assert.match(h, /<slot name=\\"dest\\">/);

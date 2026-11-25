@@ -58,8 +58,11 @@ test('prontuário: POST grava arquivo, ficha e cartão num só commit; conflito 
   const alvo = processoEmPauta();
   assert.ok(alvo, 'precisa de um processo em pauta futura');
   const pr = { caso: { numero: alvo.cnj }, regularidade: { tempestividade: 'Tempestivo' }, observacoes: 'teste' };
+  /* o valor gravado precisa diferir do que a ficha já tem, senão a ficha não muda e o teste depende dos dados do acervo */
+  const opAtual = JSON.parse(fs.readFileSync(path.join(root, 'acervo/operacional.json'), 'utf8')), regA = (opAtual.registros || []).find(x => String(x.processo).replace(/\D/g, '') === alvo.cnj.replace(/\D/g, ''));
+  const TEMP = ((regA || {}).triagem || {}).Tempestividade === 'Tempestivo' ? 'Intempestivo' : 'Tempestivo';
   const r1 = await chamada(h, { method: 'POST', query: { prontuario: '1' }, body: { cnj: alvo.cnj, prontuario: pr, base: '',
-    campos: { 'triagem.Tempestividade': 'Tempestivo', 'producao.SERVIDOR': 'Fulano' }, cartao: { pecas: [{ desc: 'Sentença', id: '123', data: '2026-01-01' }], hack: 1 } }, u: 'Maria Eduarda' });
+    campos: { 'triagem.Tempestividade': TEMP, 'producao.SERVIDOR': 'Fulano' }, cartao: { pecas: [{ desc: 'Sentença', id: '123', data: '2026-01-01' }], hack: 1 } }, u: 'Maria Eduarda' });
   assert.equal(r1.status, 200, JSON.stringify(r1.body));
   assert.equal(G.commits.length, 1);
   const paths = G.commits[0].paths;
@@ -74,7 +77,7 @@ test('prontuário: POST grava arquivo, ficha e cartão num só commit; conflito 
   const it = ses.itens.concat(ses.previa || []).find(i => i.cnj === alvo.cnj);
   assert.equal(it.ctl.cartao.pecas[0].id, '123');
   assert.equal(it.ctl.cartao.hack, undefined, 'só chaves conhecidas do cartão');
-  assert.equal(it.ctl.tempest, 'Tempestivo', 'espelho da ficha no cartão');
+  assert.equal(it.ctl.tempest, TEMP, 'espelho da ficha no cartão');
   /* mesma gravação: nada muda */
   const r2 = await chamada(h, { method: 'POST', query: { prontuario: '1' }, body: { cnj: alvo.cnj, prontuario: pr, base: salvo.atualizadoEm } });
   assert.equal(r2.status, 200); assert.equal(r2.body.semMudanca, true);

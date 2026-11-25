@@ -93,6 +93,9 @@ const V = {
   resJulg: v => ({ producao: { 'Voto - Resultado': VOC.norm('resJulg', v) } }),
   honor: v => ({ producao: { 'Voto - Honorários': v } }),
   topico: v => ({ producao: { 'Tópico-síntese': v } }),
+  /* título do caso (painel do Desembargador) e consectários: campos da ficha desde 0.71.2 (antes só no registro extra da monocrática) */
+  titulo: v => ({ producao: { 'Mono - Título': String(v || '').slice(0, 90) } }),
+  consect: v => ({ producao: { 'Consectários no julgamento': v } }),
   servidor: v => ({ producao: { 'SERVIDOR': v } }),
   corretor: v => ({ producao: { 'CORRETOR': v } }),
   dataMinuta: v => ({ producao: { 'MINUTADO': v } }),
@@ -100,6 +103,9 @@ const V = {
   dataLiberacao: v => ({ producao: { 'Data da Liberação': v, 'LIBERADO': v ? 'Sim' : '' } }),
   /* assinatura da monocrática, confirmada no prontuário da Ex Officio */
   dataAssinatura: v => ({ producao: { 'Data da Assinatura': v, 'Assinado': v ? 'Sim' : '' } }),
+  /* publicação da monocrática (a extensão também a tira dos autos) */
+  decisaoId: v => ({ producao: { 'Decisão - ID': String(v || '').trim() } }),
+  dataPublicacao: v => ({ producao: { 'Mono - Data da publicação': v, 'Publicado': v ? 'Sim' : '' } }),
   /* urgências e monocráticas (aba Urgências / Monocráticas da Ex Officio) */
   /* Controles especiais · urgência: vocabulário único da ficha (padrao/ficha.json) */
   urgTipo: v => ({ triagem: { 'Urgência': v } }), urgNivel: v => ({ triagem: { 'Urgência - Nível': v } }), urgSit: v => ({ triagem: { 'Urgência - Apreciação': v } }),
@@ -134,6 +140,7 @@ function paraCartao(mud, it) {
   if (tem(p, 'Voto - Resultado')) { const rj = VOC.norm('resJulg', p['Voto - Resultado']); if (naLista(LISTAS.resJulg, rj) || !rj) k.resJulg = naLista(LISTAS.resJulg, rj) || ''; }
   if (tem(p, 'Voto - Honorários') && (naLista(LISTAS.honor, p['Voto - Honorários']) || !p['Voto - Honorários'])) k.honor = naLista(LISTAS.honor, p['Voto - Honorários']) || '';
   if (tem(p, 'Tópico-síntese') && naLista(LISTAS.simnao, p['Tópico-síntese'])) k.topico = naLista(LISTAS.simnao, p['Tópico-síntese']);
+  if (tem(p, 'Consectários no julgamento') && (naLista(LISTAS.simnao, p['Consectários no julgamento']) || !p['Consectários no julgamento'])) k.consect = naLista(LISTAS.simnao, p['Consectários no julgamento']) || '';
   if (tem(p, 'MINUTADO') && /^(\d{4}-\d{2}-\d{2})?$/.test(p.MINUTADO)) d.dataMinuta = p.MINUTADO;
   if (tem(p, 'Data da Revisão') && /^(\d{4}-\d{2}-\d{2})?$/.test(p['Data da Revisão'])) d.dataCorrecao = p['Data da Revisão'];
   if (tem(p, 'Data da Liberação') && /^(\d{4}-\d{2}-\d{2})?$/.test(p['Data da Liberação'])) d.dataLiberacao = p['Data da Liberação'];
@@ -203,6 +210,7 @@ const INV = {
   parecer: r => VOC.norm('parecer', r.triagem.MPF),
   resJulg: r => VOC.norm('resJulg', r.producao['Voto - Resultado']), honor: r => r.producao['Voto - Honorários'], topico: r => r.producao['Tópico-síntese'],
   hip932: r => r.triagem['Hipóteses Monocrática'], tipoAto: r => r.producao['Mono - Tipo de ato'], fundamento: r => r.producao['Mono - Fundamento'],
+  titulo: r => r.producao['Mono - Título'], consect: r => r.producao['Consectários no julgamento'],
   urgTipo: r => r.triagem['Urgência'], urgNivel: r => r.triagem['Urgência - Nível'], urgSit: r => r.triagem['Urgência - Apreciação'], urgPedido: r => r.triagem['Urgência - Data'],
   urgData: r => r.triagem['Urgência - Apreciada em'], urgObs: r => r.triagem['Urgência - Observação'], urgPainel: r => r.triagem['Urgência - Painel']
 };
