@@ -944,6 +944,7 @@ function heroOrganizarProntuario(){
   if(classShort||julgamento){var jt=el('button','pc-cl hero-cl-jg',tagText||julgamento);jt.type='button';jt.title=[classFull,julgamento,'Alterar tipo de julgamento'].filter(Boolean).join(' · ');jt.onclick=function(){ac.open=true;heroTopo.acompanhamento=true;var d=ac.querySelector('.rt-tsel');if(d){d.open=true;d.scrollIntoView({block:'nearest'});}};procTags.append(jt);}
   if(l1)l1.querySelectorAll('.pm-tj').forEach(function(x){if(x.classList.contains('sug'))tj.append(x);else x.remove();});
   if(l1&&procTags.childNodes.length)l1.append(procTags);
+  if(l1)l1.querySelectorAll('.pm-al').forEach(function(x){x.remove();});
   top.insertBefore(nav,l1||top.firstChild);nav.after(pages);if(l1)id.append(l1);
   var as=el('div','hero-top-classif');var secao=S(R['Seção competente']||fonteVal({fonte:['Seção Competente','Seção competente']}));if(secao){var smatch=secao.match(/([123])\s*[ªº°a]?/),stag=el('span','hero-secao'+(smatch?' hero-secao-'+smatch[1]:''),smatch?smatch[1]+'ª':secao);stag.title=smatch?smatch[1]+'ª Seção':secao;stag.setAttribute('aria-label',stag.title);as.append(stag);}if(S(R['Assunto CNJ']||fonteVal({fonte:['Assunto']})))as.append(el('span','',S(R['Assunto CNJ']||fonteVal({fonte:['Assunto']}))));id.append(as);
   var old=top.querySelector('.pm-as');if(old)old.remove();var ad=top.querySelector('.pm-ad');if(ad)ad.remove();var esp=top.querySelector('.pm-esp');if(esp)esp.remove();
