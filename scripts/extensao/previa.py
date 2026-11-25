@@ -37,7 +37,7 @@ def montar(saida: pathlib.Path) -> None:
     primeiro = html.find('<script src="')
     if primeiro < 0:
         sys.exit('painel.html sem <script src=…>: a prévia não sabe onde pôr o shim.')
-    html = html[:primeiro] + '<script src="shim-previa.js"></script>\n' + html[primeiro:]
+    html = html[:primeiro] + '<script src="shim-previa.js"></script>\n<script>window.MUTA_PREVIA = true;</script>\n' + html[primeiro:]
     comum = '<script src="comum.js"></script>'
     if comum not in html:
         sys.exit('painel.html sem comum.js: a prévia não sabe onde trocar o endereço do site.')
