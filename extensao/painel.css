@@ -1481,3 +1481,16 @@ button.pc-cl{all:unset;cursor:pointer;font:700 10px var(--mono);padding:1px 6px;
 .pa-cl{margin-left:6px;vertical-align:1px}
 .pa-soc{margin-top:8px}.pa-soc .gx-it{background:var(--card)}
 .pa-pses{margin:0 0 8px}.pa-ped.venc{border-left:3px solid #c79a2b}.pa-vinc select{margin-top:4px;font:inherit;font-size:11px;max-width:100%}
+/* 0.65 · etapas compactas no cartão: Minuta verde, Correção/Revisão azul, Liberada/Assinada roxo */
+.pm-pills{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 4px}
+.pm-pl{display:inline-flex;align-items:center;gap:2px;font-size:11.5px;padding:3px 10px;border-radius:999px;border:1px solid #d5dae0;background:#f3f5f7;color:#5b6570;white-space:nowrap}
+.pm-pl button{all:unset;cursor:pointer}.pm-pl button:disabled{cursor:default}.pm-pl .pl-q{text-decoration:underline dotted;text-underline-offset:2px}
+.pm-pl input{font:inherit;width:90px;padding:0 4px;border:1px solid #c5ccd4;border-radius:5px}
+.pm-pl.at{border-style:dashed;border-color:#8a96a3;color:#2e3a46}
+.pm-pl.k-min.ok{background:#e4f4e8;border-color:#a8d8b4;color:#1f6b35}
+.pm-pl.k-rev.ok{background:#e3eefb;border-color:#a9c6ee;color:#1d4f91}
+.pm-pl.k-lib.ok{background:#efe7fa;border-color:#c9b3ea;color:#5a2d91}
+html[data-tema=escuro] .pm-pl{background:#0f2230;border-color:#2b4558;color:#a9bccb}
+html[data-tema=escuro] .pm-pl.k-min.ok{background:#12301c;border-color:#2f6b40;color:#9be0ad}
+html[data-tema=escuro] .pm-pl.k-rev.ok{background:#112a45;border-color:#2e5a8e;color:#a9c9f2}
+html[data-tema=escuro] .pm-pl.k-lib.ok{background:#25173a;border-color:#5a3d8a;color:#d3bdf3}

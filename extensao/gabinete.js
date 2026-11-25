@@ -240,6 +240,20 @@ function etapas() {
   var n = 0; L.forEach(function (x, i) { if (x.ok) n = i + 1; });
   return { L: L, n: n, mono: mono };
 }
+function pilulas(E) {
+  var d = function (k) { return S(V('producao', k)); }, nome = function (k) { return d(k).split(/\s*[\/,;]\s*/).map(function (x) { return x.split(/\s+/)[0]; }).filter(Boolean).join('/'); };
+  var idx = function (ic) { for (var i = 0; i < E.L.length; i++) if (E.L[i].ic === ic) return i; return -1; };
+  var P = [['min', 'Minuta', 'SERVIDOR', 'k-min'], ['rev', E.mono ? 'Revisão' : 'Correção', 'CORRETOR', 'k-rev']];
+  if (E.mono) P.push(['env', 'Enviada', '', 'k-lib'], ['ass', 'Assinada', '', 'k-lib']); else P.push(['env', 'Liberada', '', 'k-lib']);
+  return P.map(function (p) {
+    var i = idx(p[0]), x = E.L[i] || {}, ok = !!x.ok, at = i === E.n, dt = x.dt ? brD(x.dt) : '';
+    var pode = at || i === E.n - 1, tt = at ? 'Marcar hoje' : i === E.n - 1 ? 'Desfazer' : ok ? 'Feita' : 'Depois da etapa anterior';
+    var quem = p[2] ? (G.desEd === p[2] ? '<input type="text" id="pm-des" data-des="' + p[2] + '" value="' + esc(d(p[2])) + '" placeholder="nome" aria-label="' + p[1] + '">' :
+      '<button type="button" class="pl-q" data-des-ed="' + p[2] + '"' + (G.gestor ? ' title="Designar (Enter grava)"' : ' disabled title="Designação: só o gestor"') + '>' + esc(nome(p[2]) || 'a designar') + '</button>') : '';
+    return '<span class="pm-pl ' + p[3] + (ok ? ' ok' : at ? ' at' : '') + '"><button type="button" class="pl-e" data-et="' + i + '"' + (pode ? '' : ' disabled') + ' title="' + tt + '">' + esc(p[1]) + (p[2] ? ':' : '') + '</button>' + (quem ? ' ' + quem : '') +
+      (dt ? '<span class="pl-d"> · ' + esc(dt) + '</span>' : '') + '</span>';
+  }).join('');
+}
 function marcarEtapa(i) {
   var E = etapas(), x = E.L[i]; if (!x) return;
   var cam = function (k) { return k.indexOf('.') > 0 && /^(triagem|producao|origem)\./.test(k) ? k : 'producao.' + k; };
@@ -293,8 +307,9 @@ function cabeca(s) {
     '<p class="pm-as">' + (assunto ? '<b>' + esc(assunto) + '</b>' : '') + (!G.adEd && !S(gravado('triagem', 'Registro - Assunto detalhado')) && !S(V('triagem', 'Assunto detalhado')) ? '<button type="button" class="pm-ad-ic" data-ad="ed" title="Incluir o assunto detalhado (vai para a ficha; o Caput mostra o mesmo)" aria-label="Incluir o assunto detalhado">' + SV('<path d="M12 5v14M5 12h14"/>', 12) + '</button>' : '') + '</p>' +
     assuntoDetalhado() +
 
-    '<div class="pm-et" style="--n:' + E.L.length + '"><i class="pm-ln"><i style="width:' + (E.L.length > 1 ? Math.min(E.n, E.L.length - 1) / (E.L.length - 1) * 100 : 0) + '%"></i></i>' + et + '</div>' +
-    '<div class="pm-resp">' + atoSel() + pess('SERVIDOR', 'Minuta') + pess('CORRETOR', E.mono ? 'Revisão' : 'Correção') + '</div>' +
+    /* 0.65: etapas compactas — Minuta (verde), Correção/Revisão (azul), Liberada/Assinada (roxo); o nome designa, a data marca ou desfaz */
+    '<div class="pm-pills">' + pilulas(E) + '</div>' +
+    '<div class="pm-resp">' + atoSel() + '</div>' +
     /* 0.49.1: 1ª seta = autuação e partes, em blocos com título (como a 2ª); os controles foram para a 2ª seta */
     '<details class="pm-aut pm-aut1"' + (G.autAb ? ' open' : '') + '><summary data-aut aria-label="Autuação e partes" title="Autuação e partes"><span class="pm-aut-t">autuação e partes</span><i class="pm-aut-h"></i></summary>' +
       ((partes && !polos) || polos ? '<h4 class="pm-mer-h">Partes</h4>' : '') +
