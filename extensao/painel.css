@@ -1702,3 +1702,13 @@ html[data-tema=escuro] .rt-tipos .rt-kind-option{border-color:var(--line)}
 #gab .hero-enc-fields>.hero-enq-label{display:flex;flex-direction:row;align-items:baseline;gap:7px;min-width:0;grid-column:1/-1;margin:0}
 #gab .hero-enq-label>.gl{flex:none;white-space:nowrap;margin:0}
 #gab .hero-enq-label>.ro{flex:1;min-width:0;overflow-wrap:anywhere;margin:0}
+
+/* Encaminhamento e Monitoramento são abas irmãs do mesmo painel. */
+#gab .hero-enc-monitor-dock>.hero-acomp-tabs{display:flex;align-items:stretch;gap:3px;min-width:0;padding:3px 0 0}
+#gab .hero-enc-monitor-dock .hero-acomp-label,#gab .hero-enc-monitor-dock .hero-monitor-label{font-size:10.5px;min-height:28px;white-space:nowrap;overflow:visible;text-overflow:clip;padding:5px 4px}
+#gab .hero-enc-monitor-dock .hero-acomp-label{flex:1 0 auto}
+#gab .hero-enc-monitor-dock .hero-monitor-tab{flex:1 0 auto;justify-content:center}
+#gab .hero-enc-monitor-dock .hero-monitor-label{flex:1}
+#gab .hero-enc-monitor-dock>.hero-acomp-tabs>.hero-sn-ind{margin-left:auto;align-self:center}
+#gab .hero-enc-monitor-dock .hero-enc-pane .hero-enc-card>.pm-mer-h{display:none}
+#gab .hero-enc-monitor-dock .hero-enc-pane .hero-enc-card>.hero-enc-tipo-section{border-top:0}
