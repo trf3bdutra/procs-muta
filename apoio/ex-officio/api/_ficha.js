@@ -16,10 +16,12 @@ async function ficha() {
   if (!FIC || Date.now() - FIC_T > 300e3) { FIC = (await L.lerJson(FICHA)).dados; FIC_T = Date.now(); }
   return FIC;
 }
+function detalhamento(t) { t=t||{}; if(Object.prototype.hasOwnProperty.call(t,'Detalhamento do caso')) return String(t['Detalhamento do caso']||''); return [...new Set([t.Tema,t.Especificidades].map(x=>String(x||'').trim()).filter(Boolean))].join('\n'); }
 function editaveis(F) {
   const m = {};
   F.abas.forEach(a => a.grupos.forEach(g => g.campos.forEach(c => { if (c.secao && c.editavel !== false && !c.calculado) m[c.secao + '.' + c.chave] = c; })));
   F.abas.forEach(a => { if (a.seletor) m[a.seletor.secao + '.' + a.seletor.chave] = a.seletor; });
+  const dc=m['triagem.Detalhamento do caso']||m['triagem.Especificidades']||m['triagem.Tema'];if(dc){m['triagem.Detalhamento do caso']=dc;m['triagem.Tema']=dc;m['triagem.Especificidades']=dc;}
   return m;
 }
 async function fonteDe(cnj) {
@@ -68,6 +70,14 @@ function mesclarReferencia(old,patch){
 }
 function aplica(r, mud) {
   const out = [];
+  const t=mud.triagem, has=(o,k)=>Object.prototype.hasOwnProperty.call(o||{},k);
+  if(t&&(has(t,'Detalhamento do caso')||has(t,'Tema')||has(t,'Especificidades'))){
+    const ant=r.triagem||{};
+    let v=has(t,'Detalhamento do caso')?String(t['Detalhamento do caso']||''): [...new Set([has(t,'Tema')?t.Tema:ant.Tema,has(t,'Especificidades')?t.Especificidades:ant.Especificidades].map(x=>String(x||'').trim()).filter(Boolean))].join('\n');
+    t['Detalhamento do caso']=v;
+    /* Espelho legado temporário: leitores antigos continuam funcionando. */
+    t.Tema=v;t.Especificidades=v;
+  }
   /* texto, ou lista de linhas (campos "tabela" da ficha) */
   const igual = (x, y) => (typeof x === 'object' && x) || (typeof y === 'object' && y) ? JSON.stringify(x == null || x === '' ? [] : x) === JSON.stringify(y == null || y === '' ? [] : y) : String(x == null ? '' : x) === String(y == null ? '' : y);
   Object.keys(mud).forEach(s => { r[s] = r[s] || {}; Object.keys(mud[s]).forEach(k => { const raw = mud[s][k], v = s === 'origem' && k === 'Classificação documental' ? mesclarClassificacao(r[s][k], raw) : s === 'origem' && k === 'Origem - Peças vinculadas 1G' ? mesclarReferencia(r[s][k],raw) : Array.isArray(raw) ? raw : String(raw == null ? '' : raw); if (!igual(r[s][k], v)) { r[s][k] = v; out.push(s + '.' + k); } }); });
@@ -148,6 +158,7 @@ function paraCartao(mud, it) {
   if (tem(p, 'CORRETOR')) d.corretor = p.CORRETOR;
   const C2 = { 'Especificidades': 'especificidades', 'Alegações': 'questoes', 'Tipo de Julgamento': 'tipoJ', 'Síntese Fática': 'sintese', 'Tema': 'subassuntos', 'Assunto detalhado': 'assuntoDet' };
   Object.keys(C2).forEach(x => { if (tem(t, x)) cart[C2[x]] = t[x]; });
+  if(tem(t,'Detalhamento do caso')){cart.detalhamento=t['Detalhamento do caso'];cart.especificidades=cart.subassuntos=cart.detalhamento;}
   /* decisão de origem: o que a HERO18810 grava na ficha aparece no prontuário da pauta */
   const g = mud.origem || {}, O2 = { 'Origem - Juízo': 'juizo', 'Origem - Julgador': 'julgador', 'Origem - Valor da causa': 'valor', 'Sentença - Custas': 'custas', 'Sentença - Honorários': 'honor' };
   const og = Object.assign({}, (c.cartao || {}).orig); let om = false;
@@ -186,7 +197,7 @@ async function ondeEsta(cnj) {
   return out;
 }
 const VC = {
-  tipoJ: v => ({ triagem: { 'Tipo de Julgamento': v } }), especificidades: v => ({ triagem: { 'Especificidades': v } }), questoes: v => ({ triagem: { 'Alegações': v } }),
+  detalhamento: v => ({ triagem: { 'Detalhamento do caso': v } }), tipoJ: v => ({ triagem: { 'Tipo de Julgamento': v } }), especificidades: v => ({ triagem: { 'Especificidades': v } }), questoes: v => ({ triagem: { 'Alegações': v } }),
   sintese: v => ({ triagem: { 'Síntese Fática': v } }), obsGeral: v => ({ origem: { 'Observações': v } }),
   'mpfx.sentido': v => ({ triagem: { 'Parecer - Sentido': v } }), 'mpfx.id': v => ({ triagem: { 'ID do Parecer MPF': v } }),
   'adm.intim': v => ({ triagem: { 'Tempest - Publicação': v } }), 'adm.prot': v => ({ triagem: { 'Tempest - Protocolo': v } }), 'adm.prazo': v => ({ triagem: { 'Tempest - Prazo legal': v } }),
@@ -256,6 +267,7 @@ function cartaoDaFicha(r, base) {
   const c = JSON.parse(JSON.stringify(base || {}));
   Object.keys(VCI).forEach(p => { const [s, k, b] = VCI[p], v = ((r && r[s]) || {})[k]; if (!v) return;
     const ks = p.split('.'); let o = c; ks.slice(0, -1).forEach(x => { o = o[x] = (o[x] && typeof o[x] === 'object') ? o[x] : {}; }); o[ks[ks.length - 1]] = b ? (v === 'Sim' || v === '2') : v; });
+  c.detalhamento=detalhamento(r&&r.triagem);
   const og = origDaFicha(r, c.orig); if (og) c.orig = og;
   return c;
 }
@@ -469,7 +481,7 @@ function etqTriagem(t, f) {
   if (/aguardando/.test(SN(t.MPF)) || (t['MPF - Custos Legis'] && !/^(sem hip|nao se aplica)/.test(SN(t['MPF - Custos Legis'])) && !/com parecer|nao se aplica/.test(SN(t.MPF)))) add('aguardando parecer', 'intervenção do MPF sem parecer');
   if ((t['Urgência'] && /pendente|nao apreciada/.test(SN(t['Urgência - Apreciação']))) || /^(sim|s|true|1)$/i.test(String(f['Liminar Pendente'] || '').trim())) add('LIMINAR PENDENTE', 'urgência não apreciada');
   if (/^(possivel|provavel|cabivel)/.test(SN(t['Hipóteses Monocrática']))) add('MONOCRÁTICA TERMINATIVA', 'hipótese de monocrática na triagem');
-  const tc = tipoCasoDe(t.Tema); if (tc) add(tc, 'tipo de caso na ficha', true);
+  const tc = tipoCasoDe(detalhamento(t)); if (tc) add(tc, 'tipo de caso na ficha', true);
   return out;
 }
 module.exports.tipoCasoDe = tipoCasoDe;
@@ -500,11 +512,11 @@ async function resumos(req, res) {
         tarefa: f.tarefa_atual || '', desde: f.data_entrada_tarefa || '', etqPje: f['Etiquetas Originais'] || '', assunto: f.Assunto || '',
         classe: f.classe_judicial || f.Classe || '', prioridade: f.prioridade || '', mpf: f.mpf || '', registrado: !!por[k],
         preparo: t.Preparo || '', repres: t['Representação'] || '', mpfSit: t.MPF || '', custos: t['MPF - Custos Legis'] || '',
-        tipoCaso: tipoCasoDe(t.Tema), tema: String(t.Tema || '').slice(0, 300), etqTri: etqTriagem(t, f),
+        detalhamento: detalhamento(t), tipoCaso: tipoCasoDe(detalhamento(t)), tema: detalhamento(t).slice(0, 300), etqTri: etqTriagem(t, f),
         /* famílias do cartão (0.31): classificação, movimentação, estado atual e próxima providência */
         secao: String(f['Seção Competente'] || '').trim(),
         subassuntos: [...new Set(String(f['DataJud · Assuntos'] || '').split(/\s*;\s*/).map(x => x.trim()).filter(x => x && SN(x) !== SN(f.Assunto)))].slice(0, 4),
-        especificidade: String(t.Especificidades || '').split(/\n+/).map(x => x.trim()).filter(Boolean)[0] || '',
+        especificidade: detalhamento(t).split(/\n+/).map(x => x.trim()).filter(Boolean)[0] || '',
         movimento: String(f.ultimo_movimento || '').trim().slice(0, 240), movimentoEm: String(f['Data Último Movimento'] || '').trim(),
         proxima: String((r.origem || {})['Próxima ação'] || '').trim().slice(0, 400),
         sessao: String((r.pauta || {})['Sessão original'] || (r.pauta || {})['Sessão Destino'] || t['Sessão Destino'] || '').trim()
