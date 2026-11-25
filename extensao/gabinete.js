@@ -244,7 +244,7 @@ function etapas() {
 function pautado() {
   var P = (G.op || {}).pauta || {}, SI = window.MutaSincronia && window.MutaSincronia.situacao ? window.MutaSincronia.situacao() : null;
   var C = SI && SI.cnj && SI.cnj.replace(/\D/g, '') === S(G.cnj).replace(/\D/g, '') ? SI.cartoes || [] : [];
-  return C.length > 0 || (Array.isArray(P.sessoes) && P.sessoes.length > 0) || !!S(P['Sessão original']) || !!S(P['Nova sessão de destino']);
+  return C.length > 0 || (Array.isArray(P.sessoes) && P.sessoes.length > 0) || !!S(P['Sessão original']) || !!S(P['Item (Pauta de Julgamento)']);
 }
 function pilulas(E) {
   var d = function (k) { return S(V('producao', k)); }, nome = function (k) { return d(k).split(/\s*[\/,;]\s*/).map(function (x) { return x.split(/\s+/)[0]; }).filter(Boolean).join('/'); };
@@ -809,7 +809,7 @@ function corpoTriagem() {
 /* tipo de ato / pronunciamento, no topo de Produção: define o destino (sessão, monocrática, outro) e o tipo de ato */
 var PRON = [['Acórdão (sessão)', 'Sessão', ''], ['Decisão monocrática', 'Monocrática', 'Decisão monocrática (art. 932)'], ['Decisão de urgência', 'Monocrática', 'Decisão de urgência'],
   ['Despacho', 'Monocrática', 'Despacho'], ['Admissibilidade', 'Monocrática', 'Decisão de admissibilidade'], ['Juízo de retratação', 'Monocrática', 'Juízo de retratação'],
-  ['Homologação / extinção', 'Monocrática', 'Homologação / extinção'], ['Outro destino', 'Outro destino', '']];
+  ['Homologação / extinção', 'Monocrática', 'Homologação / extinção'], ['Outro destino', 'Outro destino', ''], ['Decisão interlocutória', 'Monocrática', 'Decisão interlocutória']];
 function pronAtual() { var d = destGrav(), t = S(V('producao', 'Mono - Tipo de ato'));
   for (var i = 0; i < PRON.length; i++) { if (PRON[i][1] === d && (d !== 'Monocrática' || PRON[i][2] === t || (!t && i === 1))) return i; } return -1; }
 /* 0.44 · sem tipo de ato gravado: sugestão pela tarefa do PJe, pela triagem e pelas últimas peças e movimentações dos autos lidos.

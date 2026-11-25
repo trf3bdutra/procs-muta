@@ -18,16 +18,16 @@
   function especie(){
     var k=pronAtual(),d=destGrav();
     if(k===0||(k<0&&d==='Sessão'))return 'ac';
-    return ['ac','mono','urg','desp','adm','ret','hom','outro'][k]||'indef';
+    return ['ac','mono','urg','desp','adm','ret','hom','outro','inter'][k]||'indef';
   }
   function inss(){var f=G.fo||{};return /\bINSS\b|INSTITUTO NACIONAL DO SEGURO/i.test([f['Polo ativo'],f['Polo passivo'],f['Partes (texto da pauta)']].join(' '));}
   function variosRecursos(){var r=V('origem','Recursos');try{if(typeof r==='string')r=JSON.parse(r);}catch(e){r=null;}return Array.isArray(r)&&r.length>1;}
   function opcoesResultado(e,T){
-    if(e==='urg')return RES.urg;if(e==='hom')return RES.hom;
+    if(e==='urg'||e==='inter')return RES.urg;if(e==='hom')return RES.hom;
     if(e==='ret'||T.ret)return RES.ret;if(T.ed)return RES.ed;return RES.rec;
   }
   function campoDe(sec,k,rot,extra){var c=campoLista(sec,k);if(!c)return '';return campo(Object.assign({},c,{rotulo:rot||c.rotulo},extra||{}));}
-  var ROT={ac:'Acórdão',mono:'Decisão monocrática (art. 932)',urg:'Decisão de urgência',desp:'Despacho',adm:'Decisão de admissibilidade',ret:'Juízo de retratação',hom:'Homologação / extinção',outro:'Outro destino',indef:'A definir na Triagem'};
+  var ROT={ac:'Acórdão',mono:'Decisão monocrática (art. 932)',urg:'Decisão de urgência',inter:'Decisão interlocutória',desp:'Despacho',adm:'Decisão de admissibilidade',ret:'Juízo de retratação',hom:'Homologação / extinção',outro:'Outro destino',indef:'A definir na Triagem'};
   /* campos que só este painel mostra (o restante da produção não os repete) */
   var MEUS=['triagem.Hipóteses Monocrática','producao.Voto - Resultado','producao.Resultado por recurso','producao.Voto - Honorários','producao.Fundamento da sucumbência',
     'producao.Juros e correção monetária','producao.Natureza da condenação','producao.Mono - Título','producao.Tópico-síntese','producao.Mono - Fundamento','producao.Tese jurídica adotada','producao.Precedentes aplicáveis','producao.Voto - Descrição',
@@ -57,7 +57,7 @@
     if(e==='ret'||T.ret)h+=campoDe('triagem','Retratação - Tema','Tema da devolução')+campoDe('triagem','Retratação - Precedente','Precedente da devolução');
     if(T.rn)h+=campoDe('producao','Remessa - Extensão do reexame','Extensão do reexame');
     /* sucumbência e consectários */
-    if(e==='urg'||e==='hom'){}
+    if(e==='urg'||e==='inter'||e==='hom'){}
     else if(T.ms)h+=nota('Mandado de segurança: sem honorários (artigo 25 da Lei 12.016/2009; Súmula 512/STF).');
     else{
       if(T.ai)h+=nota('Agravo de instrumento: honorários tratados na ação originária, salvo decisão que ponha termo ao processo.');

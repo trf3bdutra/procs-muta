@@ -125,10 +125,16 @@
     var box=elem('section','card pv-tri-enc');box.id='pv-tri-enc';
     box.append(elem('h4','pm-mer-h','Encaminhamento'));
     var gr=elem('div','gr pv-tri-enc-fields'),ato=fragment(atoSel()),rot=ato.querySelector('.pm-pn small');
-    if(rot)rot.textContent='Próximo ato';
+    if(rot)rot.textContent='Pronunciamento a proferir';
     gr.append(ato,readRow('Destino',destGrav()||'A definir'));
     if(destGrav()==='Outro destino')add(gr,campoRot('producao','Destino - Outro','Especificar destino'));
-    add(gr,campoRot('triagem','Seleção Prévia','Seleção prévia'));
+    if(destGrav()==='Sessão'||S(V('triagem','Seleção Prévia'))==='SELECIONADO PREVIAMENTE'){
+      var sp=elem('div','gf w');sp.innerHTML='<span class="gl">Seleção prévia</span><select data-fk="triagem.Seleção Prévia" aria-label="Seleção prévia"><option value="">Não selecionado</option><option value="SELECIONADO PREVIAMENTE"'+(S(V('triagem','Seleção Prévia'))==='SELECIONADO PREVIAMENTE'?' selected':'')+'>Selecionado previamente</option></select>';if(window.MUTA_WEB&&window.MUTA_WEB.leitura)sp.querySelector('select').disabled=true;gr.append(sp);
+      if(S(V('triagem','Seleção Prévia'))==='SELECIONADO PREVIAMENTE')add(gr,campoRot('pauta','Nova sessão de destino','Sessão prevista (vazio = banco reserva)'));
+    }
+    gr.append(readRow('Etapa atual',etapas().L[etapas().n]?etapas().L[etapas().n].r:'Etapas registradas'));
+    add(gr,campoRot('producao','Destino - Situação','Situação para julgar (registro)'));
+    gr.append(elem('small','muted','Seleção prévia não equivale à inclusão em pauta. A próxima fase deve indicar o que fazer depois do cumprimento, não apenas “aguardando”.'));
     box.append(gr);return box;
   }
   function setupRoteiro(){
@@ -223,7 +229,7 @@
     var f=fragment(sn()),s=f.querySelector('.pm-sn .pm-aut-t'),body=f.querySelector('.sn-b');
     if(s){var first=s.firstChild;if(first&&first.nodeType===3)first.nodeValue=first.nodeValue.replace(/síntese · notas · sinalizações/i,'Sinalizações e acompanhamento');}
     var sm=f.querySelector('.pm-sn>summary');if(sm){sm.title='Sinalizações e acompanhamento';sm.setAttribute('aria-label','Sinalizações e acompanhamento');}
-    if(body){var follow=elem('div','pv-followup');follow.append(elem('h4','pm-mer-h','Acompanhamento'),field('origem','Responsável','Responsável pelo acompanhamento'),field('origem','Próxima ação','Próxima ação'));body.append(follow);}
+    if(body){var follow=elem('div','pv-followup');follow.append(elem('h4','pm-mer-h','Acompanhamento'),field('origem','Responsável','Responsável pelo acompanhamento'),field('origem','Próxima ação','Próxima fase / providência após o cumprimento'));body.append(follow);}
     return html(f);
   };
   /* Classificação: formulário único em Autos; o cartão superior só espelha os dados.

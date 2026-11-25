@@ -225,7 +225,7 @@ function regras(r, out, u) {
   const t = r.triagem = r.triagem || {}, p = r.producao = r.producao || {}, c = r.controles = r.controles || {}, hj = agora().slice(0, 10), mud = new Set(out);
   if (mud.has('producao.Destino') && p.Destino === 'Monocrática' && !c['Monocrática - Registrada em']) { c['Monocrática - Registrada em'] = hj; out.push('controles.Monocrática - Registrada em'); }
   /* destino confirmado (Sessão ou Monocrática): data e autor da confirmação; vazio volta a "a definir na triagem" */
-  if (mud.has('producao.Destino')) { const cf = p.Destino === 'Sessão' || p.Destino === 'Monocrática'; t['Destino - Confirmado em'] = cf ? hj : ''; t['Destino - Confirmado por'] = cf ? (u || '') : ''; out.push('triagem.Destino - Confirmado em', 'triagem.Destino - Confirmado por'); }
+  if (mud.has('producao.Destino')) { const cf = ['Sessão','Monocrática','Outro destino'].includes(p.Destino); t['Destino - Confirmado em'] = cf ? hj : ''; t['Destino - Confirmado por'] = cf ? (u || '') : ''; out.push('triagem.Destino - Confirmado em', 'triagem.Destino - Confirmado por'); }
   if (mud.has('triagem.Urgência') && t['Urgência']) {
     if (!t['Urgência - Data']) { t['Urgência - Data'] = hj; out.push('triagem.Urgência - Data'); }
     if (!t['Urgência - Apreciação']) { t['Urgência - Apreciação'] = 'Pendente · não apreciada'; out.push('triagem.Urgência - Apreciação'); }
@@ -259,11 +259,24 @@ function cartaoDaFicha(r, base) {
   const og = origDaFicha(r, c.orig); if (og) c.orig = og;
   return c;
 }
+/* Destinação comum ao Cognitio e à HERO. Não modifica inclusão efetiva em pauta. */
+function destinoCoerente(r,m){
+ const p=r.producao||{},t=r.triagem||{},P=m.producao||{},T=m.triagem||{},A=m.pauta||{},has=(o,k)=>Object.prototype.hasOwnProperty.call(o,k);
+ if(!has(P,'Destino')&&!has(P,'Mono - Tipo de ato')&&!has(P,'Destino - Outro')&&!has(T,'Seleção Prévia')&&!has(A,'Nova sessão de destino'))return m;
+ const set=(s,k,v)=>{(m[s]||(m[s]={}))[k]=v;};
+ let d=has(P,'Destino')?P.Destino:p.Destino||'',sp=has(T,'Seleção Prévia')?T['Seleção Prévia']:t['Seleção Prévia']||'';
+ if(has(T,'Seleção Prévia')&&sp==='SELECIONADO PREVIAMENTE'&&!has(P,'Destino')){d='Sessão';set('producao','Destino',d);}
+ if(d!=='Sessão'&&(sp==='SELECIONADO PREVIAMENTE'||t['Seleção Prévia']==='SELECIONADO PREVIAMENTE')){set('triagem','Seleção Prévia','');set('pauta','Nova sessão de destino','');}
+ else if(d==='Sessão'&&has(T,'Seleção Prévia')&&sp!=='SELECIONADO PREVIAMENTE'&&t['Seleção Prévia']==='SELECIONADO PREVIAMENTE')set('pauta','Nova sessão de destino','');
+ if(d!=='Monocrática'&&(has(P,'Destino')||has(T,'Seleção Prévia')))set('producao','Mono - Tipo de ato','');
+ if(d!=='Outro destino'&&has(P,'Destino'))set('producao','Destino - Outro','');
+ return m;
+}
 /* grava {secao: {chave: valor}} no registro do processo (cria se faltar), com nova tentativa se o arquivo mudou no meio */
 async function gravar(cnj, mud, msg, extra, u, outros) {
   const F = await ficha();
   for (let t = 0; t < 4; t++) {
-    const { doc, sha } = await lerOp(), r = registro(doc, cnj, F, true), out = aplica(r, mud);
+    const { doc, sha } = await lerOp(), r = registro(doc, cnj, F, true), out = aplica(r, destinoCoerente(r,mud));
     if (extra) extra(r, out);
     if (!out.length) return { r, out };
     regras(r, out, u);
@@ -329,6 +342,24 @@ module.exports = async (req, res, u) => {
       const cnjA = String(req.body.cnj || ''), st = await require('./_sigilo').situacao(u, cnjA, req.body.sigilo, await fonteDe(cnjA));
       if (!st.liberado) return res.status(403).json({ erro: 'Processo sigiloso (' + st.sigilo + '): o inteiro teor não é gravado sem a liberação do Desembargador, do gestor ou da senha.', sigilo: st.sigilo });
       return res.status(200).json(await gravarAutos(cnjA, req.body.autos, u));
+    }
+    if(Array.isArray((req.body||{}).destinos)){
+      const lista=req.body.destinos,allowed=new Set(['producao.Destino','producao.Mono - Tipo de ato','producao.Destino - Outro','triagem.Seleção Prévia','pauta.Nova sessão de destino']), E=editaveis(F);
+      if(!lista.length||lista.length>200||new Set(lista.map(x=>dg(x&&x.cnj))).size!==lista.length)return res.status(400).json({erro:'Selecione de 1 a 200 processos distintos.'});
+      for(const x of lista){if(!x||dg(x.cnj).length!==20||!x.campos||!Object.keys(x.campos).length||Object.entries(x.campos).some(([k,v])=>!allowed.has(k)||!E[k]||typeof v!=='string'||v.length>250||(E[k].tipo==='lista'&&v&&!(E[k].opcoes||[]).includes(v))))return res.status(400).json({erro:'Destino ou campo inválido.'});}
+      for(let tentativa=0;tentativa<4;tentativa++){
+        const {doc,sha}=await lerOp(),registros=[],outAll=[];
+        for(const x of lista){
+          const r=registro(doc,x.cnj,F,true),m={};for(const [k,v] of Object.entries(x.campos)){const i=k.indexOf('.');(m[k.slice(0,i)]||(m[k.slice(0,i)]={}))[k.slice(i+1)]=v;}
+          const out=aplica(r,destinoCoerente(r,m));if(out.length){regras(r,out,u);outAll.push(r.processo);}
+          const t=r.triagem||{},p=r.producao||{},a=r.pauta||{};
+          registros.push({processo:r.processo,triagem:{'Seleção Prévia':t['Seleção Prévia']||'','Destino - Confirmado em':t['Destino - Confirmado em']||'','Destino - Confirmado por':t['Destino - Confirmado por']||''},producao:{Destino:p.Destino||'','Mono - Tipo de ato':p['Mono - Tipo de ato']||'','Destino - Outro':p['Destino - Outro']||''},pauta:{'Nova sessão de destino':a['Nova sessão de destino']||''}});
+        }
+        if(!outAll.length)return res.status(200).json({ok:true,alterados:0,registros});
+        doc.atualizado_em=agora();
+        try{await commitConferido([{path:OP,sha,txt:JSON.stringify(doc,null,1)+'\n'}],'Destinação Cognitio ('+u+'): '+outAll.length+' processo(s)');return res.status(200).json({ok:true,alterados:outAll.length,registros});}catch(e){if(e.status!==409)throw e;}
+      }
+      return res.status(409).json({erro:'A ficha mudou durante a gravação. Tente novamente.'});
     }
     const b = req.body || {}, cnj = String(b.cnj || ''), C = b.campos || {}, E = editaveis(F), mud = {}, recus = [];
     if (dg(cnj).length !== 20) return res.status(400).json({ erro: 'número do processo inválido' });
