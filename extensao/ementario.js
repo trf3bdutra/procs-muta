@@ -239,7 +239,7 @@ function erro(msg) {
 }
 function rotuloTipo(x) { return x.cur ? 'Curado' : x.t === 'M' ? 'Monocrática' : 'Acórdão'; }
 function cnjF(d) { d = dig(d); return d.length === 20 ? d.replace(/^(\d{7})(\d{2})(\d{4})(\d)(\d{2})(\d{4})$/, '$1-$2.$3.$4.$5.$6') : d; }
-function faixaRel(){var b=$('acv-modo-rel');if(!b)return;b.innerHTML=window.MutaFontes.scopeHTML(R.modo)+(R.modo!=='todos'&&!window.MutaFontes.contexto(R.modo)?'<p class="muted rep-context">'+(R.modo==='editor'?'Leia o editor do processo atual.':'Preencha o caso no prontuário.')+'</p>':'');}
+function faixaRel(){var b=$('acv-modo-rel');if(!b)return;b.innerHTML=window.MutaFontes.scopeHTML(R.modo);}
 function render() {
   var list = $('acv-list'); list.replaceChildren(); V.shown = 0; faixaRel();
   if (!B.ok) {
