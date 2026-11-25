@@ -6,7 +6,7 @@ import sys
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
-VERSION = "20261125g"
+VERSION = "20261125h"
 FAMILIES = {
     "monitor": "caput", "caput": "caput", "office": "office",
     "equipe": "office", "exofficio": "office", "cmt": "office",
@@ -29,7 +29,7 @@ def apply(html, fam):
         inner = ICONS.sub("", MARKS.sub("", m[2]))
         inner = re.sub(r"""<link\b[^>]*href=["'][^"']*/padrao/loading/gabinete-loader\.css[^"']*["'][^>]*>""", "", inner, flags=re.I)
         inner = re.sub(r"""<script\b[^>]*src=["'][^"']*/padrao/loading/gabinete-loader\.js[^"']*["'][^>]*>\s*</script>""", "", inner, flags=re.I)
-        inner += '\n<link rel="stylesheet" href="/padrao/loading/gabinete-loader.css?v=20261125g">\n<script defer src="/padrao/loading/gabinete-loader.js?v=20261125g"></script>\n'
+        inner += f'\n<link rel="stylesheet" href="/padrao/loading/gabinete-loader.css?v={VERSION}">\n<script defer src="/padrao/loading/gabinete-loader.js?v=20261125g"></script>\n'
         icon = f'<link rel="icon" type="image/svg+xml" href="/padrao/favicon/{fam}.svg?v={VERSION}">'
         apple = f'<link rel="apple-touch-icon" sizes="180x180" href="/padrao/favicon/{fam}.png?v={VERSION}">'
         return m[1] + "\n<!-- favicon:cmt · identidade GAB.18810 -->\n" + icon + "\n" + apple + "\n<!-- /favicon:cmt -->\n" + inner + m[3]

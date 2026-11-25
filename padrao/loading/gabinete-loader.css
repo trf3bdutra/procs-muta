@@ -163,13 +163,23 @@
 @media(max-width:800px){#am-welcome .cmt-entry-apps ul{grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}#am-welcome .cmt-entry-apps li{font-size:11px}#am-welcome .cmt-entry-apps img{width:40px;height:40px}}
 @media(max-width:360px){#am-welcome .cmt-entry-apps ul{grid-template-columns:repeat(3,minmax(0,1fr))}}
 
-/* Ícone próprio do aplicativo, com a mesma arte da aba do navegador. */
-header .cmt-app-header-icon{display:block!important;width:36px!important;height:36px!important;min-width:36px;flex:0 0 36px;object-fit:contain;object-position:center;background:none!important;border:0!important;border-radius:0!important;box-shadow:none!important;filter:none;mask:none!important;clip-path:none!important;padding:0!important;margin:0;align-self:center}
-@media(max-width:600px){header .cmt-app-header-icon{width:30px!important;height:30px!important;min-width:30px;flex-basis:30px}}
-
-/* A caixa do símbolo tem espaço próprio, não herda recorte da estrela antiga. */
-header .cmt-app-header-icon{box-sizing:content-box!important;width:36px!important;height:36px!important;min-width:36px!important;min-height:36px!important;max-width:none!important;max-height:none!important;flex:0 0 auto!important;padding:2px!important;overflow:visible!important;aspect-ratio:1;transform:none!important;object-fit:contain!important;object-position:center!important}
-header .cmt-app-icon-host{overflow:visible!important;min-width:40px!important;min-height:40px!important;flex-shrink:0!important;clip-path:none!important;mask:none!important;-webkit-mask:none!important}
+/* Marca dos apps no cabeçalho, com espaço para a margem óptica do SVG. */
+header{--cmt-header-logo-size:46px;--cmt-header-logo-padding:2px}
+header .cmt-app-header-icon{
+  display:block!important;box-sizing:content-box!important;
+  width:var(--cmt-header-logo-size)!important;height:var(--cmt-header-logo-size)!important;
+  min-width:var(--cmt-header-logo-size)!important;min-height:var(--cmt-header-logo-size)!important;
+  max-width:none!important;max-height:none!important;flex:0 0 auto!important;
+  padding:var(--cmt-header-logo-padding)!important;margin:0;align-self:center;
+  overflow:visible!important;aspect-ratio:1;object-fit:contain!important;object-position:center!important;
+  background:none!important;border:0!important;border-radius:0!important;box-shadow:none!important;
+  filter:none;mask:none!important;clip-path:none!important;transform:none!important
+}
+header .cmt-app-icon-host{
+  --cmt-header-logo-box:calc(var(--cmt-header-logo-size) + 2 * var(--cmt-header-logo-padding));
+  overflow:visible!important;min-width:var(--cmt-header-logo-box)!important;min-height:var(--cmt-header-logo-box)!important;
+  flex-shrink:0!important;clip-path:none!important;mask:none!important;-webkit-mask:none!important
+}
 header.nx .nx1>a.br.cmt-app-icon-host{display:flex!important;align-items:center;justify-content:center;width:auto!important;height:auto!important}
 header.amicus-shell .amicus-brand,header#top #marca,header.top.nx .brand.tw{overflow:visible!important;flex-shrink:0!important}
-@media(max-width:600px){header .cmt-app-header-icon{width:30px!important;height:30px!important;min-width:30px!important;min-height:30px!important}header .cmt-app-icon-host{min-width:34px!important;min-height:34px!important}}
+@media(max-width:600px){header{--cmt-header-logo-size:36px}}
