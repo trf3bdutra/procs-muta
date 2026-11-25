@@ -4019,6 +4019,13 @@
        "editavel": false,
        "regra": "data e hora da importação do relatório 151",
        "apelido": "pauta_importado"
+      },
+      {
+       "rotulo": "Ingresso e ocorrências da sessão",
+       "chave": "Ingresso e ocorrências da sessão",
+       "secao": "pauta",
+       "tipo": "texto-longo",
+       "regra": "Mapa JSON por sessão e item: tipo de ingresso, ocorrência de não julgamento, justificativa e ID da solicitação correspondente."
       }
      ]
     }
