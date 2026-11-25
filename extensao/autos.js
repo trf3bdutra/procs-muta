@@ -618,7 +618,7 @@ function espDe(id) { if (id in A.esp) return A.esp[id]; var r = linhasGravadas('
 function linhaDoc(d) {
       var ab = A.abertos[d.id], dd = A.docs[d.id];
       if (GB().classificacaoVisivel && !GB().classificacaoVisivel(d)) return '';
-      return '<div class="au-doc' + (d.anexo ? ' anx' : '') + (PRINC[d.k] ? ' pr' : '') + (marcado(d) ? ' sel' : '') + '"><div class="au-h"><input type="checkbox" class="au-g" data-au-g="' + esc(d.id) + '"' + (marcado(d) ? ' checked' : '') + ' title="Gravar na ficha com o inteiro teor" aria-label="Gravar ' + esc(d.tipo) + ' ID ' + esc(d.id) + ' na ficha"><span class="au-d">' + esc(d.data) + (d.hora ? '<small>' + esc(d.hora) + '</small>' : '') + '</span>' +
+      return '<div class="au-doc hero-doc-card' + (d.anexo ? ' anx' : '') + (PRINC[d.k] ? ' pr' : '') + (marcado(d) ? ' sel' : '') + '" data-doc-kind="' + esc(d.k||'outro') + '"><div class="au-h"><input type="checkbox" class="au-g" data-au-g="' + esc(d.id) + '"' + (marcado(d) ? ' checked' : '') + ' title="Gravar na ficha com o inteiro teor" aria-label="Gravar ' + esc(d.tipo) + ' ID ' + esc(d.id) + ' na ficha"><span class="au-d">' + esc(d.data) + (d.hora ? '<small>' + esc(d.hora) + '</small>' : '') + '</span>' +
         '<div class="au-n"><b>' + esc(d.tipo) + '</b>' + (d.desc && N(d.desc) !== N(d.tipo) ? '<small>' + esc(d.desc) + '</small>' : '') + '</div>' +
         '<button type="button" class="mono lnk" data-copia="' + esc(d.id) + '" title="Copiar o ID">' + esc(d.id) + '</button></div>' +
         '<div class="au-inf">' + [d.rot, d.anexo ? 'anexo' : '', d.origem].filter(Boolean).map(function (x) { return '<span>' + esc(x) + '</span>'; }).join('') + (d.movs && d.movs.length && !d.anexo ? '<small>' + esc(d.movs.join(' · ')) + '</small>' : '') + '</div>' +
@@ -658,7 +658,7 @@ function cronologiaIntegrada(L,H){return L.concat(H).map(function(d,i){return {d
 function linhaHistorica(d){
  if(!d.historico)return linhaDoc(d);
  var texto=d.registros.map(function(r){return ['pje','nota','trecho'].map(function(k){return S(r[k])?'<p style="white-space:pre-wrap;overflow-wrap:anywhere"><b>'+esc({pje:'Referência PJe',nota:'Nota histórica',trecho:'Trecho histórico'}[k])+':</b> '+esc(r[k])+'</p>':'';}).join('');}).join('<hr>');
- return '<div class="au-doc au-historico"><div class="au-h"><span class="au-d">'+esc(d.data||'Sem data')+'</span><div class="au-n"><b>'+esc(d.tipo)+'</b><small>Registro histórico · '+(PRINC[d.k]&&d.k!=='intimacao'?'Peça principal':'Outro documento')+'</small></div>'+(d.id?'<button type="button" class="mono lnk" data-copia="'+esc(d.id)+'" title="Copiar ID">'+esc(d.id)+'</button>':'')+'</div>'+texto+'<small class="muted">Inteiro teor ainda não localizado na cronologia lida.</small></div>';
+ return '<div class="au-doc au-historico hero-doc-card" data-doc-kind="'+esc(d.k||'outro')+'"><div class="au-h"><span class="au-d">'+esc(d.data||'Sem data')+'</span><div class="au-n"><b>'+esc(d.tipo)+'</b><small>Registro histórico · '+(PRINC[d.k]&&d.k!=='intimacao'?'Peça principal':'Outro documento')+'</small></div>'+(d.id?'<button type="button" class="mono lnk" data-copia="'+esc(d.id)+'" title="Copiar ID">'+esc(d.id)+'</button>':'')+'</div>'+texto+'<small class="muted">Inteiro teor ainda não localizado na cronologia lida.</small></div>';
 }
 function historicoDocsFicha(){
  var gb=GB(),sig=window.MutaSigilo;if(!gb.gravado||sig&&(sig.bloqueado()||sig.sigiloso()))return '';
@@ -677,7 +677,7 @@ function htmlDocs(pecas) {
   var L = ok ? lista() : [], P = ok ? principais() : [], H=historicosIntegrados(L), C=cronologiaIntegrada(L,H), HP=H.filter(function(d){return PRINC[d.k]&&d.k!=='intimacao';}), HO=H.filter(function(d){return !PRINC[d.k]||d.k==='intimacao';});
   var nSel = ok ? marcados().length : 0;
   var lidos = Object.keys(A.docs).filter(function (k) { return /^(ok|sem)$/.test(A.docs[k].estado); }).length;
-  var cab = '<div class="pc-sh"><h3>Peças e documentos</h3><small class="muted">' + (ok ? C.length + ' na cronologia · ' + lidos + ' com texto lido' : 'da ficha do processo') + '</small></div>';
+  var cab = '<div class="pc-sh hero-doc-panel-head"><div><small class="hero-doc-kicker">ACERVO DOCUMENTAL</small><h3>Peças e documentos</h3></div><small class="muted">' + (ok ? C.length + ' na cronologia · ' + lidos + ' leituras concluídas' : 'da ficha do processo') + '</small></div>';
   var filtroFuncional=ok&&GB().classificacaoFiltro?GB().classificacaoFiltro(L.filter(function(d){return !docBloq(d);})) : '';
   var seg = ok ? '<div class="au-doc-toolbar"><div class="au-fx"><span class="seg"><button type="button" data-au="f:pecas" aria-selected="' + (F === 'pecas') + '" title="As peças da ficha com os seus documentos: decisões, recursos, contrarrazões, parecer, procuração, custas e inicial" >Peças principais (' + (P.length+HP.length) + ')</button><button type="button" data-au="f:todos" aria-selected="' + (F === 'todos') + '" title="A cronologia inteira do PJe, do mais recente ao mais antigo">Cronologia (' + C.length + ')</button></span>' +
     '<button type="button" class="btn line sm au-js" data-au="tudojs"' + (A.todo ? ' disabled' : '') + ' title="Lê o texto de todos os documentos (PDF digitalizado vai ao OCR) e baixa num arquivo JSON, no formato do acervo" aria-label="Baixar o inteiro teor em JSON">' + SVGDL + (A.todo ? A.todo.feitos + '/' + A.todo.total : 'JSON') + '</button></div>' +
@@ -692,7 +692,7 @@ function htmlDocs(pecas) {
   }
   if(F!=='todos'&&HO.length)corpo+='<details class="pc-s" open><summary><b>Outros documentos ('+HO.length+')</b></summary><div class="au-docs">'+cronologiaIntegrada([],HO).map(linhaHistorica).join('')+'</div></details>';
   var aviso = A.itens && !lidoDoProcesso() ? '<p class="status err">Os autos lidos são de outro processo (' + esc(A.cnj || 'sem número') + ').</p>' : !A.itens ? '<p class="muted au-nl">Leia os autos para ver os documentos de cada peça.</p>' : '';
-  return '<section class="card pc-sec pecas" id="g-docs">' + cab + seg + (A.msg ? '<p class="status ok">' + esc(A.msg) + '</p>' : '') + aviso + corpo + '</section>';
+  return '<section class="card pc-sec pecas hero-doc-panel" id="g-docs">' + cab + seg + (A.msg ? '<p class="status ok">' + esc(A.msg) + '</p>' : '') + aviso + '<div class="hero-doc-panel-body">'+corpo+'</div></section>';
 }
 function idSet(v){return String(v||'').match(/\b\d{6,}\b/g)||[];}
 function idsTabela(L){return Array.from(new Set((Array.isArray(L)?L:[]).reduce(function(a,r){return a.concat(idSet(r.id||r.ids||''));},[]))).sort();}
