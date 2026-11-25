@@ -2355,3 +2355,16 @@ body.hero-redesign-v53 .hero-conf-dock:not([open])>.mc-b{display:none!important}
 body.hero-redesign-v53 .hero-conf-dock[open]>.mc-b{display:block!important;max-height:min(64dvh,calc(100dvh - var(--hero-review-nav-height,58px) - 116px));overflow:auto;overscroll-behavior:contain;background:#fff!important;padding:8px 11px 12px}
 body.hero-redesign-v53 .hero-conf-dock :is(.cf-top,.cf-res){background:#fff!important;box-shadow:none}
 body.hero-redesign-v53 .hero-v53-conf-expanded #cmp-app{display:flex!important}
+
+/* Corretor · duas folhas independentes, faixa de comparação entre elas. */
+body.hero-redesign-v53 .hero-review-workspace{border:0!important;border-radius:0!important;background:#fff!important;overflow:visible}
+body.hero-redesign-v53 .hero-review-documents{display:flex!important;flex-direction:column;gap:0;min-width:0}
+body.hero-redesign-v53 .hero-review-workspace .hero-review-document{border:1px solid var(--hero53-line)!important;border-radius:5px!important;overflow:hidden;background:#fff!important;box-shadow:0 1px 3px #00000006!important}
+body.hero-redesign-v53 .hero-review-divider{display:flex;align-items:center;justify-content:center;gap:9px;min-width:0;padding:10px 0;background:#fff}
+body.hero-redesign-v53 .hero-review-divider::before,body.hero-redesign-v53 .hero-review-divider::after{content:"";height:1px;background:var(--hero53-line);flex:1 1 14px;min-width:8px}
+body.hero-redesign-v53 .hero-review-cross{display:grid;place-items:center;width:25px;height:25px;flex:0 0 25px;font:400 22px/1 var(--serif,Georgia,serif);color:var(--hero53-gold)}
+body.hero-redesign-v53 .hero-review-divider .hero-v53-review-actions{display:flex;align-items:center;justify-content:center;flex:0 1 auto;flex-wrap:wrap;gap:5px 8px;padding:0!important;border:0!important;margin:0!important;background:transparent!important;min-width:0}
+body.hero-redesign-v53 .hero-review-divider .cx-op1{display:flex;align-items:center;flex-wrap:wrap;gap:5px 8px;margin:0!important;padding:0!important;border:0!important;min-width:0}
+body.hero-redesign-v53 .hero-review-divider .cx-op1 label{font-size:10px;white-space:nowrap}
+body.hero-redesign-v53 .hero-review-divider .btn{white-space:nowrap;font-size:11px}
+@media(min-width:700px){body.hero-redesign-v53 .hero-review-document :is(.mn-tx,.hero-v53-ref-text){min-height:160px;max-height:42vh}}

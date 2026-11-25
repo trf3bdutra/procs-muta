@@ -425,7 +425,10 @@ function render() {
       var busca=document.createElement('details');busca.className='hero-v53-ref-search';busca.open=!!C.buscaRefAberta;var sm=document.createElement('summary');sm.textContent='Buscar referência';busca.append(sm,fontesEl,pick);busca.addEventListener('toggle',function(){if(busca.isConnected)C.buscaRefAberta=busca.open;});ref.insertBefore(busca,ref.children[1]||null);
       var bar=document.createElement('div');bar.className='hero-v53-review-actions';var go=document.createElement('button');go.type='button';go.className='btn solid sm';go.dataset.c='comparar';go.textContent='Comparar textos';go.disabled=!ED.estado().texto||!it;bar.append(go);
       var side=res.querySelector('[data-c="janela"]');if(side)bar.append(side);if(op)bar.append(op);
-      var work=document.createElement('section');work.className='hero-review-workspace';var grid=document.createElement('div');grid.className='hero-review-documents';ed.classList.add('hero-review-document');ref.classList.add('hero-review-document');ed.before(work);grid.append(ed,ref);work.append(grid,bar);if(res.parentNode!==caixa)caixa.append(res);
+      var work=document.createElement('section');work.className='hero-review-workspace';var grid=document.createElement('div');grid.className='hero-review-documents';ed.classList.add('hero-review-document');ref.classList.add('hero-review-document');ed.before(work);
+      var divider=document.createElement('div');divider.className='hero-review-divider';
+      var mark=document.createElement('span');mark.className='hero-review-cross';mark.setAttribute('aria-label','Comparação entre os textos');mark.textContent='×';
+      divider.append(mark,bar);grid.append(ed,divider,ref);work.append(grid);if(res.parentNode!==caixa)caixa.append(res);
     }
   }
   $('panel-min').scrollTop = y;
