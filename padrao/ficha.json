@@ -1105,7 +1105,7 @@
    "aba": "Triagem",
    "grupos": [
     {
-     "grupo": "Conclusão da análise",
+     "grupo": "Análise",
      "campos": [
       {
        "rotulo": "Status da triagem",
@@ -1118,6 +1118,63 @@
        ],
        "apelido": "status_triagem",
        "regra": "Conclusão da análise, independente do destino e das pendências."
+      },
+      {
+       "rotulo": "Seleção prévia",
+       "chave": "Seleção Prévia",
+       "tipo": "texto",
+       "secao": "triagem",
+       "apelido": "selecao_previa"
+      },
+      {
+       "rotulo": "Situação para julgar",
+       "chave": "Destino - Situação",
+       "tipo": "lista",
+       "secao": "producao",
+       "opcoes": [
+        "Pronto para julgar",
+        "Pendente"
+       ],
+       "vocabulario": "situacao",
+       "apelido": "destino_situacao"
+      },
+      {
+       "rotulo": "Outro destino",
+       "chave": "Destino - Outro",
+       "tipo": "lista",
+       "secao": "producao",
+       "opcoes": [
+        "Vista ao MPF",
+        "Devolução ao órgão prolator",
+        "Sobrestamento",
+        "Redistribuição ou prevenção",
+        "Diligência ou intimação",
+        "Baixa ou arquivamento",
+        "Outro"
+       ],
+       "vocabulario": "outro_destino",
+       "apelido": "destino_outro"
+      },
+      {
+       "rotulo": "Destino confirmado em",
+       "chave": "Destino - Confirmado em",
+       "tipo": "data",
+       "secao": "triagem",
+       "apelido": "destino_confirmado"
+      },
+      {
+       "rotulo": "Destino confirmado por",
+       "chave": "Destino - Confirmado por",
+       "tipo": "texto",
+       "secao": "triagem",
+       "apelido": "triagem_destino_confirmado"
+      },
+      {
+       "rotulo": "Hipóteses de monocrática",
+       "chave": "Hipóteses Monocrática",
+       "tipo": "texto",
+       "secao": "triagem",
+       "apelido": "hipoteses_monocratica"
       }
      ]
     },
@@ -1575,13 +1632,6 @@
        "apelido": "descricao_preliminar"
       },
       {
-       "rotulo": "Seleção prévia",
-       "chave": "Seleção Prévia",
-       "tipo": "texto",
-       "secao": "triagem",
-       "apelido": "selecao_previa"
-      },
-      {
        "rotulo": "Mídias",
        "chave": "Mídias",
        "tipo": "lista",
@@ -1618,61 +1668,11 @@
        "apelido": "alegacoes"
       },
       {
-       "rotulo": "Situação para julgar",
-       "chave": "Destino - Situação",
-       "tipo": "lista",
-       "secao": "producao",
-       "opcoes": [
-        "Pronto para julgar",
-        "Pendente"
-       ],
-       "vocabulario": "situacao",
-       "apelido": "destino_situacao"
-      },
-      {
-       "rotulo": "Outro destino",
-       "chave": "Destino - Outro",
-       "tipo": "lista",
-       "secao": "producao",
-       "opcoes": [
-        "Vista ao MPF",
-        "Devolução ao órgão prolator",
-        "Sobrestamento",
-        "Redistribuição ou prevenção",
-        "Diligência ou intimação",
-        "Baixa ou arquivamento",
-        "Outro"
-       ],
-       "vocabulario": "outro_destino",
-       "apelido": "destino_outro"
-      },
-      {
-       "rotulo": "Destino confirmado em",
-       "chave": "Destino - Confirmado em",
-       "tipo": "data",
-       "secao": "triagem",
-       "apelido": "destino_confirmado"
-      },
-      {
-       "rotulo": "Destino confirmado por",
-       "chave": "Destino - Confirmado por",
-       "tipo": "texto",
-       "secao": "triagem",
-       "apelido": "triagem_destino_confirmado"
-      },
-      {
        "rotulo": "Tipo de julgamento",
        "chave": "Tipo de Julgamento",
        "tipo": "texto",
        "secao": "triagem",
        "apelido": "tipo_julgamento"
-      },
-      {
-       "rotulo": "Hipóteses de monocrática",
-       "chave": "Hipóteses Monocrática",
-       "tipo": "texto",
-       "secao": "triagem",
-       "apelido": "hipoteses_monocratica"
       },
       {
        "rotulo": "Síntese processual",
