@@ -1433,6 +1433,14 @@ header#top::before{background:linear-gradient(90deg,var(--eg) 0 50%,var(--eg2) 5
 .cog-unified-scroll .cog-list-table .cog-criterion-extra[hidden]{display:none!important}
 .cog-unified-scroll .cog-list-table .cog-inline-extras summary{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .cog-unified-scroll .cog-list-table tr.at-r>td{vertical-align:top!important}
+</style><style id="cog-shared-acervo-list">
+.cog-acervo-list-scroll{overflow-x:auto}
+.cog-operacional-list{min-width:820px}
+.cog-operacional-list .cog-list-group{background:var(--p,#eeece3);border-top:1px solid var(--l2,#dedbd0)}
+.cog-operacional-list .cog-groupbar{display:flex;align-items:center;padding:3px 10px;gap:8px}
+.cog-operacional-list .at-gb{flex:1;min-width:0;text-align:left}
+.cog-operacional-list .cog-groupbar .cog-xls-icon{margin:0!important}
+.cog-operacional-list .row.hd{position:sticky;top:0;z-index:2}
 </style></head>
 <body>
 <header id="top">
@@ -3731,13 +3739,15 @@ function cogMatrizGrupo(o,orig,sessoes){
 function cogMatrizGrupos(soTarefa){const groups=new Map(),orig=COG==='triagem'||COG_LOTE?null:cogOrigemMap(),sessoes=COG==='selecao'?new Map(cogSelecaoData().map(x=>[x.o.d,x.sess])):null;for(const o of cogTriRecorte(soTarefa)){const g=cogMatrizGrupo(o,orig,sessoes);if(!groups.has(g))groups.set(g,[]);groups.get(g).push(o);}return groups;}
 D.addEventListener('click',e=>{const b=e.target.closest?.('[data-cog-groups]');if(!b)return;e.preventDefault();if(!['lista','matriz'].includes(atVer()))return;for(const g of cogMatrizGrupos(COG==='triagem'?LS.get('tri_triar_tarefa',''):'').keys())LS.set('tri_em_b_'+g,b.dataset.cogGroups==='open');refazAtTab();},true);
 function cogListaOperacional(task){
- const groups=cogMatrizGrupos(task),span=5;if(!groups.size)return '<div class="tri-ld">Nenhum processo com esses filtros.</div>';
- let h='<div class="cog-unified-scroll cog-simple-scroll"><table class="at-t cog-simple-table"><thead><tr><th></th><th>Processo · assunto</th><th>Sinais</th><th>Encaminhamento e acompanhamento</th><th>Caso e observações</th></tr></thead><tbody>';
- groups.forEach((L,g)=>{const ab=LS.get('tri_em_b_'+g,true),lim=LS.get('tri_atlim_'+g,60);h+='<tr class="at-g"><td colspan="'+span+'"><div class="cog-groupbar"><button type="button" class="at-gb" data-tribanda="'+esc(g)+'"><i>'+(ab?'−':'+')+'</i><b>'+esc(g)+'</b><small>'+nf(L.length)+' processos</small></button>'+triExcelIcon('data-tri-xls="'+(COG==='triagem'?'triar':'destino')+'" data-xls-group="'+esc(g)+'" data-xls-title="'+esc(g)+'"')+'</div></td></tr>';
+ const groups=cogMatrizGrupos(task);
+ if(!groups.size)return '<div class="tri-ld">Nenhum processo com esses filtros.</div>';
+ let h='<div class="cog-unified-scroll cog-acervo-list-scroll"><div class="lst cog-operacional-list">'+cogListaCabecalho(false);
+ groups.forEach((L,g)=>{const ab=LS.get('tri_em_b_'+g,true),lim=LS.get('tri_atlim_'+g,60),tri=L.filter(atTri).length;
+ h+='<div class="cog-list-group"><div class="cog-groupbar"><button type="button" class="at-gb" data-tribanda="'+esc(g)+'" aria-expanded="'+ab+'"><i>'+(ab?'−':'+')+'</i><b>'+esc(g)+'</b><small>'+nf(L.length)+' processos · '+nf(tri)+' com prontuário</small></button>'+triExcelIcon('data-tri-xls="'+(COG==='triagem'?'triar':'destino')+'" data-xls-group="'+esc(g)+'" data-xls-title="'+esc(g)+'"')+'</div></div>';
  if(!ab)return;
- for(const o of L.slice(0,lim)){const r=o.row||{},det=cogDetalhamento(r),obs=obsCurta(r.Observações),tags=[o.cl,o.secao].filter(Boolean).join(' · '),stage=COG==='mono'||COG==='selecao'?cogPainelEtapa(r,COG):r['Status da triagem'];h+='<tr tabindex="0" aria-expanded="false" class="at-r'+(SEL.has(o.d)?' sel':'')+'"><td><input type="checkbox" data-sel="'+o.d+'"'+(SEL.has(o.d)?' checked':'')+' aria-label="Selecionar '+esc(o.cnj)+'"></td><td class="cog-simple-id"><div class="cog-proc-id">'+cogCopyCnj(o)+'</div><span class="at-sub">'+esc(o.assunto||'')+'</span><small>'+esc(tags)+'</small></td>'+cogSignalCell(o)+'<td><b>'+esc(o.dest?.t||DLAB[o.prov]||'A definir')+'</b><small>'+esc([r['Destino - Situação'],stage,COG==='selecao'?(r['Nova sessão de destino']||r['Sessão Destino']):'',r.SERVIDOR].filter(Boolean).join(' · '))+'</small><small>'+esc(o.tarefa||'')+'</small></td><td><span class="cog-simple-detail" title="'+esc(det)+'">'+esc(det||'—')+'</span>'+(obs?.t?'<small title="'+esc(obs.t)+'">'+esc(obs.t)+'</small>':'')+'<div class="cog-open-ficha">'+cogFichaIcon(o.d)+'</div></td></tr><tr class="cog-note-row"><td colspan="'+span+'">'+cogNotasRodape(o)+'</td></tr>';}
- if(L.length>lim)h+='<tr class="at-mais"><td colspan="'+span+'"><button type="button" class="btn sm" data-atmais="'+esc(g)+'">Mostrar mais '+Math.min(100,L.length-lim)+' de '+nf(L.length-lim)+'</button></td></tr>';
- });return h+'</tbody></table></div>';
+ h+=L.slice(0,lim).map(linha).join('');
+ if(L.length>lim)h+='<div class="mais"><span>'+nf(Math.min(lim,L.length))+' de '+nf(L.length)+'</span><button type="button" class="btn sm" data-atmais="'+esc(g)+'">Mostrar mais '+Math.min(100,L.length-lim)+'</button></div>';
+ });return h+'</div></div>';
 }
 function atTabela(soTarefa) {
   const cols=cogColVis(),span=cogListSpan(cols),groups=cogMatrizGrupos(soTarefa);
@@ -4523,10 +4533,13 @@ function procExp(o){return '<div class="proc-exp on" id="proc-exp-'+o.d+'"><div 
 function linha(o) { const dt = o.dest, tg = dt.k ? '<span class="tg d-' + dt.k + '"' + (dt.k === 'esc' && dt.e && dt.e.cor ? ' style="border-color:' + esc(dt.e.cor) + '"' : '') + ' title="' + esc(dt.t) + '">' + esc(dt.t) + '</span>' : '<span class="tg">sem destino</span>', exp = true, aberto = PROC_EXP_ABERTO === o.d;
   const detalhes = cogNotasRodape(o);
   return '<div class="proc-item"><div tabindex="0" aria-expanded="false" class="row' + (SEL.has(o.d) ? ' sel' : '') + '"><input type="checkbox" data-sel="' + o.d + '"' + (SEL.has(o.d) ? ' checked' : '') + ' aria-label="Selecionar ' + o.cnj + '"><span class="nm cog-proc-id">'+cogCopyCnj(o)+'</span><span title="' + esc(o.classe) + '">' + esc(o.cl) + '</span><span class="as"><b title="' + esc(o.assunto) + '">' + esc(o.assunto) + '</b><span>' + esc(o.secao) + (o.div ? ' <span title="etiqueta de seção divergente" style="color:var(--r)">⚑</span>' : '') + (o.prior ? ' <span class="tg pri">prioridade</span>' : '') + '</span></span><span class="as tar"><b title="' + esc(o.tarefa || 'sem tarefa no PJe') + '"' + (o.tarefa ? '' : ' style="color:var(--m);font-weight:500"') + '>' + esc(o.tarefa || 'sem tarefa no PJe') + '</b><span class="mono" style="font-size:11.5px">' + (o.desde ? 'desde ' + br(o.desde) + (dias(o.desde) != null ? ' · ' + nf(dias(o.desde)) + ' d' : '') : 'data de entrada não informada') + '</span></span><span class="cog-acervo-dest">' + tg + '<span class="cog-open-ficha">'+cogFichaIcon(o.d)+'</span></span>' + obsLinha(o) + '</div>' + detalhes + '</div>'; }
+function cogListaCabecalho(ordenavel=true,L=[],onde=''){
+ const hdr=(k,t)=>ordenavel?'<button type="button" data-ord="'+k+'">'+t+(F.ord===k?(F.dir>0?' ↑':' ↓'):'')+'</button>':esc(t);
+ const todosMarc=L.length&&L.every(o=>SEL.has(o.d));
+ return '<div class="row hd">'+(ordenavel?'<input type="checkbox" data-selall="'+esc(onde)+'"'+(todosMarc?' checked':'')+' aria-label="Marcar todos os '+L.length+'">':'<span></span>')+'<span>'+hdr('cnj','Processo')+'</span><span>'+hdr('classe','Classe')+'</span><span>'+hdr('assunto','Assunto · seção')+'</span><span>'+hdr('tarefa','Tarefa atual no PJe')+' · '+hdr('desde','desde')+'</span><span>'+hdr('dest','Destino')+'</span></div>';
+}
 function lista(L, st, onde) {
-  const hdr = (k, t) => '<button type="button" data-ord="' + k + '">' + t + (F.ord === k ? (F.dir > 0 ? ' ↑' : ' ↓') : '') + '</button>';
-  const todosMarc = L.length && L.every((o) => SEL.has(o.d));
-  let h = '<div class="lst"><div class="row hd"><input type="checkbox" data-selall="' + onde + '"' + (todosMarc ? ' checked' : '') + ' aria-label="Marcar todos os ' + L.length + '"><span>' + hdr('cnj', 'Processo') + '</span><span>' + hdr('classe', 'Classe') + '</span><span>' + hdr('assunto', 'Assunto · seção') + '</span><span>' + hdr('tarefa', 'Tarefa atual no PJe') + ' · ' + hdr('desde', 'desde') + '</span><span>' + hdr('dest', 'Destino') + '</span></div>';
+ let h='<div class="lst">'+cogListaCabecalho(true,L,onde);
   if (!L.length) return h + '<div class="vazio">Nenhum processo com esses critérios.</div></div>';
   if (st.ver === 'lista') { h += L.slice(0, st.lim).map(linha).join('');
     h += '<div class="mais"><span>' + nf(Math.min(st.lim, L.length)) + ' de ' + nf(L.length) + ' na tela · marcar todos marca os ' + nf(L.length) + '</span>' + (L.length > st.lim ? '<button type="button" class="lk" data-mais="' + onde + '">Mostrar mais 100</button>' : '') + '</div>'; }
