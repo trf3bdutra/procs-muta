@@ -171,44 +171,58 @@ body.dsk #x-main .dtabs .dtsp{display:block;flex:1 1 auto}
 @media(max-width:1050px){body.dsk #x-main .dtabs .dpillw{display:flex;order:0;width:100%;justify-content:flex-start}body.dsk #x-main .dtabs .dtsp{display:none}}
 @media print{#dk-conf,#cq-prec-panel{display:none!important}}
 
-/* Caso, estrutura e modelo: um único módulo, com as ações na linha das partes. */
-#x-top .d-unica{display:grid!important;grid-template-columns:minmax(0,1fr);gap:8px!important;padding:10px 12px!important;border:1px solid var(--line);background:var(--panel)}
-#x-top .d-unica>.d-caso-grupo,#x-top .d-unica>.d-estrutura-grupo{display:flex;flex-wrap:wrap;align-items:center;gap:8px;min-width:0}
-#x-top .d-unica>.d-estrutura-grupo:empty{display:none}
-#x-top .d-unica .dgrp{background:transparent;border:0;max-width:100%;min-width:0;padding:0}
-#x-top .d-unica .d-estrutura-grupo,#x-top .d-unica>.dtxt{border-top:1px solid var(--line);padding-top:8px}
-#x-top .d-unica>.dtxt{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
-#x-top .d-unica .dbsp{display:none}
-#x-top .d-unica .dmodl{flex:1 1 260px!important}
-#x-top .d-unica .dglab{min-width:104px;flex:0 0 auto}
-#x-top .d-unica .dexp{margin-left:auto}
-body.dsk #x-main .dtabs{align-items:center}
-@media(max-width:860px){#x-top .d-unica .dglab{flex:1 0 100%;min-width:0}#x-top .d-unica>.dtxt{align-items:stretch}}
 
-/* Barra compacta, com quebra responsiva entre grupos. */
-#x-top .d-unica{display:flex!important;flex-wrap:wrap!important;align-items:center!important;gap:5px 8px!important;padding:5px 7px!important}
-#x-top .d-unica>.d-caso-grupo,#x-top .d-unica>.d-estrutura-grupo{flex:0 1 auto;gap:4px;border-top:0;padding:0;min-width:0}
-#x-top .d-unica>.d-caso-grupo{border-right:1px solid var(--line);padding-right:8px}
-#x-top .d-unica>.d-estrutura-grupo{flex:1 1 570px;border-right:1px solid var(--line);padding-right:8px}
-#x-top .d-unica>.dtxt{flex:1 1 300px!important;min-width:min(100%,280px);border:0;padding:0;gap:4px}
-#x-top .d-unica .dgrp{box-shadow:none;overflow:visible;gap:0;align-items:center}
-#x-top .d-unica .dgrp>label{height:33px;padding:0 5px!important;gap:4px!important}
-#x-top .d-unica .dgrp>label>span{font-size:8px;letter-spacing:.025em!important}
-#x-top .d-unica .dgrp>label>select,#x-top .d-unica .dgrp>label>input{height:32px;font-size:12px!important;padding:0 3px}
-#x-top .d-unica .dcaso #cq-item{width:clamp(116px,12vw,205px)}
-#x-top .d-unica .dcaso #cq-ses{max-width:128px!important}
-#x-top .d-unica .destrutura>.dseg{height:33px}
-#x-top .d-unica .destrutura>.dseg button{padding:0 9px!important;font-size:12px}
-#x-top .d-unica .dcx-go,#x-top .d-unica .cq-prec-toggle{height:33px}
-#x-top .d-unica .dcx-info{height:auto;min-height:33px;flex-wrap:wrap;padding:4px 7px;gap:4px}
-#x-top .d-unica .dcx-info small{max-width:150px}
-#x-top .d-unica .dmodl{flex:1 1 180px!important;min-width:0}
-#x-top .d-unica .dmodq{flex:0 1 100px!important}
-#x-top .d-unica .dmodq input{width:100%;min-width:80px}
-#x-top .d-unica .dmodl>span{display:none}
-#x-top .d-unica .dcx-nota{flex:1 1 100%;font-size:11px;margin:0}
-@media(max-width:1100px){#x-top .d-unica>.d-caso-grupo,#x-top .d-unica>.d-estrutura-grupo{border-right:0}#x-top .d-unica>.d-estrutura-grupo{flex:1 1 100%}}
-@media(max-width:860px){#x-top .d-unica>.d-caso-grupo{flex:1 1 100%}#x-top .d-unica .dgrp>label{flex:1 1 auto!important}#x-top .d-unica .dcaso #cq-item{width:100%}#x-top .d-unica .dmodl{flex:1 1 150px!important}}
+/* Minutário: rótulos acima, controles na mesma linha e quebra por módulo. */
+#x-top .dbar.d-unica{display:grid!important;grid-template-columns:minmax(350px,1.03fr) minmax(610px,1.8fr) minmax(280px,1fr);grid-template-areas:"caso estrutura modelo";align-items:end!important;gap:10px!important;padding:9px 12px 10px!important;border:1px solid var(--line);background:var(--panel);box-sizing:border-box}
+#x-top .d-unica>.d-caso-grupo{grid-area:caso}
+#x-top .d-unica>.d-estrutura-grupo{grid-area:estrutura}
+#x-top .d-unica>.dtxt{grid-area:modelo}
+#x-top .d-unica>.d-caso-grupo,#x-top .d-unica>.d-estrutura-grupo{display:flex;align-items:flex-end;gap:5px;min-width:0;padding:0 10px 0 0;border:0;border-right:1px solid var(--line)}
+#x-top .d-unica>.d-estrutura-grupo:empty{display:none}
+#x-top .d-unica .dgrp{border:0;border-radius:0;box-shadow:none;background:transparent;padding:0;margin:0;min-width:0;max-width:100%;overflow:visible}
+#x-top .d-unica .dcaso{display:grid;grid-template-columns:minmax(130px,1.5fr) minmax(92px,.8fr) auto;gap:5px;flex:1 1 auto;align-items:end}
+#x-top .d-unica .destrutura{display:flex;flex:1 1 auto;flex-wrap:nowrap;gap:5px;align-items:flex-end}
+#x-top .d-unica>.dtxt{display:flex;flex-wrap:nowrap;gap:5px;align-items:flex-end;min-width:0}
+#x-top .d-unica .dgrp>label,#x-top .d-unica .d-pr-field{display:flex;flex-direction:column!important;align-items:stretch!important;justify-content:flex-end;gap:4px!important;padding:0!important;height:auto!important;border:0!important;min-width:0!important;width:auto!important}
+#x-top .d-unica .dgrp>label>span,#x-top .d-unica .d-pr-field>span{display:block;white-space:nowrap;font:600 10px/1.15 "IBM Plex Mono",monospace;color:var(--mut);letter-spacing:.04em!important;text-transform:uppercase}
+#x-top .d-unica .dgrp>label>select,#x-top .d-unica .dgrp>label>input{box-sizing:border-box;width:100%!important;min-width:0!important;max-width:none!important;height:34px!important;flex:none;border:1px solid var(--pa-l2)!important;border-radius:0!important;background:var(--card);color:var(--ink);padding:0 7px;font:500 12px Inter,"Segoe UI",system-ui,sans-serif!important;letter-spacing:0;text-overflow:ellipsis}
+#x-top .d-unica .dgrp>label>select:focus,#x-top .d-unica .dgrp>label>input:focus{outline:2px solid var(--pa-deep);outline-offset:-2px}
+#x-top .d-unica .destrutura>label{flex:1 1 120px!important}
+#x-top .d-unica .destrutura>label:has([data-xsres]){flex:1.3 1 155px!important}
+#x-top .d-unica .d-pr-field{flex:0 0 auto}
+#x-top .d-unica .d-pr-field .dseg{height:34px;display:flex;flex-wrap:nowrap;border:1px solid var(--pa-l2);border-radius:0;background:var(--card)}
+#x-top .d-unica .d-pr-field .dseg button{font:600 12px Inter,"Segoe UI",system-ui,sans-serif;padding:0 9px!important;color:var(--ink);white-space:nowrap}
+#x-top .d-unica .d-pr-field .dseg button[aria-pressed=true]{background:var(--pa-deep);color:var(--panel)}
+#x-top .d-unica .dcaso>label{min-width:0}
+#x-top .d-unica .dcx-go,#x-top .d-unica .cq-prec-toggle{height:34px;flex:0 0 auto;border-radius:0}
+#x-top .d-unica .dcx-go{padding:0 12px}
+#x-top .d-unica .dcx-info{display:flex;flex:1 1 auto;min-width:0;height:auto;min-height:34px;flex-wrap:wrap;gap:5px;padding:5px 8px}
+#x-top .d-unica .dcx-info small{max-width:180px}
+#x-top .d-unica .dcx-info b{overflow-wrap:anywhere}
+#x-top .d-unica .dgrp.dtxt>label.dmodl{flex:1 1 170px!important}
+#x-top .d-unica .dgrp.dtxt>label.dmodq{flex:0 1 95px!important;min-width:74px!important}
+#x-top .d-unica .dsug-b{height:34px;flex:0 0 auto;padding:0 6px;font-size:11px;white-space:nowrap}
+#x-top .d-unica .dbsp,#x-top .d-unica .dglab{display:none}
+#x-top .d-unica>.dcx-nota{grid-column:1/-1;font-size:11px;margin:0}
+#x-top .d-unica.d-unica-modular{grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"caso modelo"}
+body.dsk #x-main .dtabs{align-items:center}
+@media(max-width:1500px){
+ #x-top .dbar.d-unica{grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"caso modelo" "estrutura estrutura";gap:8px 12px!important}
+ #x-top .d-unica>.d-estrutura-grupo{border-right:0;border-top:1px solid var(--line);padding:8px 0 0}
+}
+#x-top .dbar.d-unica:has(.dcx-info){grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"caso modelo" "estrutura estrutura"}
+#x-top .d-unica:has(.dcx-info)>.d-estrutura-grupo{border-right:0;border-top:1px solid var(--line);padding:8px 0 0}
+#x-top .d-unica.d-unica-modular:has(.dcx-info){grid-template-areas:"caso modelo"}
+@media(max-width:860px){
+ #x-top .dbar.d-unica,#x-top .dbar.d-unica:has(.dcx-info){grid-template-columns:minmax(0,1fr);grid-template-areas:"caso" "estrutura" "modelo";gap:9px!important}
+ #x-top .d-unica.d-unica-modular,#x-top .d-unica.d-unica-modular:has(.dcx-info){grid-template-areas:"caso" "modelo"}
+ #x-top .d-unica>.d-caso-grupo{border-right:0;padding-right:0;flex-wrap:wrap}
+ #x-top .d-unica>.dtxt{border-top:1px solid var(--line);padding-top:8px;flex-wrap:wrap}
+ #x-top .d-unica .destrutura{flex-wrap:wrap}
+ #x-top .d-unica .d-pr-field{flex:1 0 100%}
+ #x-top .d-unica .d-pr-field .dseg button{flex:1 1 auto}
+}
+@media(max-width:480px){#x-top .d-unica .dcaso{grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto}#x-top .d-unica .destrutura>label{flex:1 1 42%!important}}
 /* Conformidade ocupa a direita do banner existente, com rolagem interna. */
 body #v-edit .pg-h.pa-ab.dk-conf-open>.pg-t{grid-column:1;grid-row:1/3;align-self:center;max-height:100%;overflow:auto}
 body #v-edit .pg-h.pa-ab.dk-conf-open>.pa-dir{grid-column:2;grid-row:1;justify-self:stretch;align-self:center;min-width:0}

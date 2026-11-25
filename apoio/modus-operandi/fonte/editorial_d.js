@@ -623,12 +623,12 @@ function dkModOpts(){
   return o;}
 function dkBarraTexto(){var e28=!!(window.CQX&&CQX.e28()),f=DK.fonte==='m28'&&!e28?'mat':DK.fonte,m=dkModelo(),fora=f==='mod'&&m&&dkPronMod(m)!==dkPron();
   var h='<div class="dgrp dtxt">';
-  h+='<label class="dmodl"><span>Modelo</span><select data-dmod aria-label="Modelo do gabinete">'+dkModOpts()+'</select></label><label class="dmodq"><input data-dmodq type="search" autocomplete="off" value="'+esc(DK.modq||'')+'" placeholder="filtrar modelos" aria-label="Filtrar modelos"></label>'+(window.CQX&&CQX.tem()?'<button type="button" class="dsug-b" data-dsug aria-expanded="'+!!DK.sug+'" title="Modelos sugeridos para o processo aberto">Para o caso ▾</button>':'');
+  h+='<label class="dmodl"><span>Modelo</span><select data-dmod aria-label="Modelo do gabinete">'+dkModOpts()+'</select></label><label class="dmodq"><span>Filtrar</span><input data-dmodq type="search" autocomplete="off" value="'+esc(DK.modq||'')+'" placeholder="Buscar…" aria-label="Filtrar modelos"></label>'+(window.CQX&&CQX.tem()?'<button type="button" class="dsug-b" data-dsug aria-expanded="'+!!DK.sug+'" title="Modelos sugeridos para o processo aberto">Para o caso ▾</button>':'');
   h+='</div>';
   if(fora)h+='<span class="dcx-nota">O modelo escolhido é de '+esc(mTipo(m).toLowerCase())+': a folha segue a Minuta-Matriz neste pronunciamento.</span>';
   else if(f==='mod'&&!m&&BASE)h+='<span class="dcx-nota">Escolha um modelo: até lá, a folha segue a Minuta-Matriz.</span>';
   return h;}
-function dkBarraUnica(modular){var estrutura=modular?'':xBarra().replace(/^<div class="dbar">/,'').replace(/<\/div>$/,'').replace('<div class="dgrp">','<div class="dgrp destrutura">');return '<div class="dbar d-unica"><div class="d-caso-grupo">'+(window.CQX?CQX.barra():'')+'</div><div class="d-estrutura-grupo">'+estrutura+'</div>'+dkBarraTexto()+'</div>'+(window.CQX?CQX.extra():'');}
+function dkBarraUnica(modular){var estrutura=modular?'':xBarra().replace(/^<div class="dbar">/,'').replace(/<\/div>$/,'').replace('<div class="dgrp">','<div class="dgrp destrutura">').replace(/(<div class="dseg"[\s\S]*?<\/div>)/,'<div class="d-pr-field"><span>Pronunciamento</span>$1</div>');return '<div class="dbar d-unica'+(modular?' d-unica-modular':'')+'"><div class="d-caso-grupo">'+(window.CQX?CQX.barra():'')+'</div><div class="d-estrutura-grupo">'+estrutura+'</div>'+dkBarraTexto()+'</div>'+(window.CQX?CQX.extra():'');}
 function dkFonte(v){if(v==='m28'&&!(window.CQX&&CQX.e28()))return;
   if(v==='mod'&&!dkModelo()){DK.rtab='caso';xPagina();var q=document.querySelector('[data-dmodq]');if(q)q.focus();return;}
   if(v==='mat'){DK.mod='';var P=window.CQX&&CQX.tem()?CQX.P():null;if(P){dkAplicaCaso(P,{tipo:'mat',mat:CQX.matrizDoCaso(P)});return;}}

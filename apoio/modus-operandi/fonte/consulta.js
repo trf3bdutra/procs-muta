@@ -285,7 +285,7 @@
     var prec='<button type="button" class="dcx-t cq-prec-toggle" data-cq-prec aria-controls="cq-prec-panel" aria-expanded="'+CQ.precOpen+'" title="Precedentes associados e correspondentes" aria-label="Precedentes associados e correspondentes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 4h6a3 3 0 0 1 3 3v14a4 4 0 0 0-4-4H4zM20 4h-3a4 4 0 0 0-4 4v13a4 4 0 0 1 4-4h3z"/><path d="M7 8h3m6 0h2M7 11h3m6 0h2"/></svg></button>';
     if(P&&!CQ.trocar&&!CQ.busy)return chip+prec;
     var h='<div class="dgrp dcaso">'+
-      '<label><span>Processo ou item</span><input id="cq-item" value="'+e(CQ.item)+'" placeholder="Processo / item" autocomplete="off" title="Número do processo (abre a ficha) ou item da pauta da sessão escolhida"></label>'+
+      '<label><span>Processo / item</span><input aria-label="Processo ou item da pauta" id="cq-item" value="'+e(CQ.item)+'" placeholder="Número ou item" autocomplete="off" title="Número do processo (abre a ficha) ou item da pauta da sessão escolhida"></label>'+
       '<label'+(CQ.calErro?' title="'+e(CQ.calErro)+'"':'')+'><span>Sessão</span><select id="cq-ses" title="Só para abrir pelo item da pauta"><option value="">'+ph+'</option>'+opts+'</select></label>'+
       '<button type="button" class="dcx-go" id="cq-go"'+(CQ.busy?' disabled':'')+'>'+(CQ.busy?'Abrindo…':'Abrir')+'</button></div>';
     return h+chip+prec;}
