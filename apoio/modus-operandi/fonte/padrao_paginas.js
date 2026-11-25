@@ -35,7 +35,7 @@
   /* seletor de modo do Minutário (Minutário · Modelos · Parágrafos), no desenho do Relator/Turma do Ementário */
   function modoSel(){if(!window.VDM_minAtual)return '';var a=window.VDM_minAtual();if(['pecas','mod','par'].indexOf(a)<0)return '';
     return '<div class="pa-fonte pa-modo" role="group" aria-label="Modo do Minutário">'+[['pecas','Minutário','Estrutura da peça e folha de trabalho'],['mod','Modelos','Modelos do gabinete, matrizes incluídas'],['par','Parágrafos','Banco de parágrafos-padrão']].map(function(x){
-      return '<a href="#v=edit&amp;s='+x[0]+'" data-xmodo="'+x[0]+'"'+(a===x[0]?' aria-current="page"':'')+' title="'+x[2]+'">'+x[1]+'</a>';}).join('')+'</div>';}
+      return '<a href="#v=edit&amp;s='+x[0]+'" data-xmodo="'+x[0]+'"'+(a===x[0]?' aria-current="page"':'')+' title="'+x[2]+'">'+x[1]+'</a>';}).join('')+(a==='pecas'?'<button type="button" data-dconfmin aria-controls="dk-conf" aria-expanded="false">Conformidade</button>':'')+'</div>';}
   D.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('.pa-modo a[data-xmodo]');if(!a)return;e.preventDefault();
     if(a.getAttribute('aria-current')!=='page'&&window.VDM_minModo)window.VDM_minModo(a.getAttribute('data-xmodo'));});
   function abertura(){
@@ -55,7 +55,7 @@
         var c3=D.querySelector('#v-edit #e-cnt');
         por(s,modoSel()+(mod?(c3?numero(c3):''):''));
         hx.classList.toggle('pa-com-dev',mod);}
-      else{if(bd)bd.remove();var pr2=tt&&tt.querySelector('.pa-pre');if(pr2)pr2.remove();var c2=D.querySelector('#v-edit #e-cnt');por(s,modoSel()+(c2&&D.querySelector('#v-edit #e-layout')&&!D.querySelector('#x-banco[hidden] #e-layout')?numero(c2):''));hx.classList.remove('pa-com-dev');}}
+      else{if(bd)bd.remove();var pr2=tt&&tt.querySelector('.pa-pre');if(pr2)pr2.remove();var c2=D.querySelector('#v-edit #e-cnt');por(s,modoSel()+(c2&&D.querySelector('#v-edit #e-layout')&&!D.querySelector('#x-banco[hidden] #e-layout')?numero(c2):''));hx.classList.remove('pa-com-dev');}if(typeof dkConf==='function')dkConf();}
   }
 
   /* ---------- Minuta-Matriz: exportações com rótulo ---------- */

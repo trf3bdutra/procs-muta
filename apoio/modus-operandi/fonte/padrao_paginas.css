@@ -158,3 +158,15 @@ body.dsk #x-main .dtabs .dtsp{display:none}
  #x-top .dgrp.dtxt>label.dmodl{flex:1 1 100%!important}
  #x-top .dsug-b{white-space:normal;min-height:36px}
 }
+
+/* Banner expansível e comandos alinhados ao rótulo da folha. */
+body #v-edit .pg-h.pa-ab.dk-conf-open{height:auto;min-height:184px;padding-top:18px!important;padding-bottom:14px!important;align-content:start}
+#v-edit .pg-h .pa-modo{flex-wrap:wrap;align-items:center}
+#v-edit .pa-modo [data-dconfmin]{font:500 11px/1.3 "IBM Plex Mono",monospace;text-transform:uppercase;color:var(--mut);background:none;border:0;border-left:1px solid var(--line);padding:5px 12px;cursor:pointer}
+#v-edit .pa-modo [data-dconfmin][aria-expanded=true]{color:var(--pa-deep);background:var(--pa-och-bg)}
+#v-edit #dk-conf[hidden]{display:none!important}
+body.dsk #x-main .dtabs .dpillw{display:contents;order:0;width:auto}
+body.dsk #x-main .dtabs .dpill{align-self:center;margin:0 0 4px;flex:0 1 auto}
+body.dsk #x-main .dtabs .dtsp{display:block;flex:1 1 auto}
+@media(max-width:1050px){body.dsk #x-main .dtabs .dpillw{display:flex;order:0;width:100%;justify-content:flex-start}body.dsk #x-main .dtabs .dtsp{display:none}}
+@media print{#dk-conf,#cq-prec-panel{display:none!important}}

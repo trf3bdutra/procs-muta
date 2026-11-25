@@ -327,7 +327,7 @@ function xRef(){
   if(DK.man){var T=[['par','Parágrafos'],['cit','Citação'],['voc','Vocabulário'],['forma','Forma']],R={};T.forEach(function(t){R[t[0]]=xRefTab(t[0]);});var G=XP._G||{h:''};
     h+='<div class="dori man"><div class="ohd"><p class="kick2">Manual · '+esc(pt.t||'')+'</p></div>'+G.h+'<div class="xrtabs" role="tablist" style="margin-top:10px">'+T.map(function(t){return '<button role="tab" data-xrt="'+t[0]+'" aria-selected="'+(XP.tab===t[0])+'">'+t[1]+(XP.q?' <small>'+R[t[0]].n+'</small>':'')+'</button>';}).join('')+'</div><input id="x-rq" type="search" placeholder="Buscar nas orientações…" aria-label="Buscar nas orientações" value="'+esc(XP.q)+'"><div class="xrb">'+(R[XP.tab].h||'<p class="meta">Nada encontrado.</p>')+'</div></div>';}
   /* orientações fora do canhoto: estão no Breviário (capítulo 7) e, o que importa ao bloco, no balão sobre a folha (dkBalao);
-     aqui fica só o material do caso aberto (LIA, modelos relacionados, precedentes e parágrafos) */
+     aqui fica só o material do caso aberto (modelos relacionados e parágrafos) */
   h=window.CQX&&CQX.tem()&&!dk28()?'<div class="dori"><p class="kick2"><span>Material do caso</span></p></div>'+CQX.painel():'';
   el.innerHTML=h;
   if(foco){var q=$('#x-rq');if(q){q.focus();try{q.setSelectionRange(pos,pos);}catch(e){}}}
@@ -596,7 +596,7 @@ function dkPartesModelo(m,PT){
     return [em,rel,{id:'voto',t:'Voto',pj:'VOTO',tr:xTrechos('voto',['Cabeçalho','Vocativo']).concat(dkTrModelo(m,'voto')),notas:(BY.voto||{}).notas||[],res:res,md:1},ac];}
   if(pr==='mono')return [{id:'monocratica',t:'Decisão monocrática',tr:dkTrModelo(m,'monocratica'),notas:(BY.monocratica||{}).notas||[],res:res,md:1}];
   return [{id:'despacho',t:'Despacho',tr:dkTrModelo(m,'despacho'),notas:(BY.despacho||{}).notas||[],res:res,md:1}];}
-/* parágrafos do banco incluídos num bloco: entram no fim do texto do bloco (folha, cópia, .docx, conferência e LIA) */
+/* parágrafos do banco incluídos num bloco: entram no fim do texto do bloco (folha, cópia, .docx, conferência) */
 function dkPar(id){var L=(BASE&&BASE.par)||[];for(var i=0;i<L.length;i++)if(L[i].id===id)return L[i];return null;}
 function dkParTxt(id){var p=dkPar(id);if(!p)return '';return String(p.texto||'').trim().replace(/(^|[^{])\{([^{}]{1,120})\}(?!\})/g,'$1{{$2}}').replace(/\{\{([^{}|]{1,120})\|([^{}]{1,120})\}\}/g,'{{$2}}');}
 function dkComInc(PT){var I=DK.inc||{};if(!Object.keys(I).length)return PT;
@@ -803,7 +803,7 @@ xAutoAplica=function(){_xAutoAplicaCanhoto();$$('#x-aside [data-dfk]').forEach(f
 
 /* ===== Canhoto único: as orientações e o roteiro (antigo painel direito, #x-ref) ficam dentro do canhoto.
    O nó #x-ref é mudado de lugar, não recriado: xRef, o painel Caso e a Consulta continuam escrevendo nele.
-   Sem bloco: resumo da parte, lista de blocos e orientações. Com bloco: o bloco, as regras dele e os outros blocos. Os modelos do caso ficam no seletor Modelo da barra; a conformidade, no painel flutuante. ===== */
+   Sem bloco: resumo da parte, lista de blocos e orientações. Com bloco: o bloco, as regras dele e os outros blocos. Os modelos do caso ficam no seletor Modelo da barra; a conformidade, no banner. ===== */
 function dkJunta(){var as=$('#x-aside'),ref=$('#x-ref'),c=as&&as.querySelector('.dcan'),bot=$('#dcan-bot');if(!ref||!c||!bot)return;
   ref.setAttribute('aria-label','Orientações e roteiro');ref.classList.add('dorip');
   if(XP.sel){if(bot.previousSibling!==ref||ref.parentNode!==c)c.insertBefore(ref,bot);}
@@ -839,14 +839,13 @@ document.addEventListener('click',function(e){var t=e.target;if(!t.closest)retur
   if(t.closest('[data-dsugx]')){e.preventDefault();e.stopImmediatePropagation();dkSugAbre(false);return;}
   if(DK.sug&&!t.closest('.dsug'))dkSugAbre(false);},true);
 document.addEventListener('keydown',function(e){if(e.key==='Escape'&&DK.sug&&e.target.closest&&(e.target.closest('.dsug')||e.target===document.body))dkSugAbre(false);});
-/* conformidade do caso: painel flutuante e minimizável, no canto da folha (só no Minutário, com processo aberto) */
-DK.confMin=(function(){try{return localStorage.getItem('dk-conf-min')==='1';}catch(e){return false;}})();
-function dkConf(){var V=$('#v-edit');if(!V)return;var el=$('#dk-conf'),on=window.CQX&&CQX.tem()&&!dk28()&&!V.hidden&&$('#x-wrap')&&!$('#x-wrap').hidden;
-  if(!on){if(el)el.hidden=true;return;}
-  if(!el){el=document.createElement('div');el.id='dk-conf';el.setAttribute('role','complementary');el.setAttribute('aria-label','Conformidade do caso');V.appendChild(el);
-    el.addEventListener('click',function(e){var b=e.target.closest('[data-dconfmin]');if(!b)return;e.preventDefault();e.stopPropagation();DK.confMin=!DK.confMin;try{localStorage.setItem('dk-conf-min',DK.confMin?'1':'0');}catch(er){}dkConf();});}
-  var C=CQX.conformidade()||{h:'',ok:0,n:0,mau:0};el.hidden=false;el.classList.toggle('min',!!DK.confMin);
-  el.innerHTML='<button type="button" class="dkc-h" data-dconfmin aria-expanded="'+!DK.confMin+'" title="'+(DK.confMin?'Abrir':'Minimizar')+' a conformidade"><b>Conformidade</b><span class="dkc-n'+(C.mau?' pc':'')+'">'+(C.n?C.ok+'/'+C.n:'…')+'</span><i aria-hidden="true">'+(DK.confMin?'▴':'▾')+'</i></button>'+(DK.confMin?'':'<div class="dkc-b">'+C.h+'</div>');}
+/* Conformidade no banner, expandida no fluxo. */
+DK.confOpen=false;
+function dkConf(){var V=$('#v-edit'),banner=V&&V.querySelector('.pg-h');if(!banner)return;var el=$('#dk-conf'),btn=banner.querySelector('[data-dconfmin]'),on=!V.hidden&&(XS.ed||'pecas')==='pecas'&&$('#x-wrap')&&!$('#x-wrap').hidden,open=!!(on&&DK.confOpen);
+if(!el){el=document.createElement('section');el.id='dk-conf';el.setAttribute('aria-label','Conformidade do caso');el.hidden=true;banner.appendChild(el);}
+if(el.hidden===open)el.hidden=!open;if(banner.classList.contains('dk-conf-open')!==open)banner.classList.toggle('dk-conf-open',open);if(btn&&btn.getAttribute('aria-expanded')!==String(open))btn.setAttribute('aria-expanded',String(open));if(!open)return;
+var C=window.CQX&&CQX.tem()?CQX.conformidade():null,h='<div class="dkc-h"><b>Conformidade do caso</b>'+(C&&C.n?'<span class="dkc-n">'+C.ok+'/'+C.n+' em ordem</span>':'')+'</div><div class="dkc-b">'+(C?C.h:'<p class="meta">Abra um processo ou item para consultar a conformidade.</p>')+'</div>';if(el.__conf!==h){el.__conf=h;el.innerHTML=h;}}
+document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('#v-edit [data-dconfmin]');if(!b)return;e.preventDefault();DK.confOpen=!DK.confOpen;dkConf();});
 var _xRefConf=xRef;xRef=function(){var r=_xRefConf.apply(this,arguments);dkConf();return r;};
 var _xRenderConf=xRender;xRender=function(){var r=_xRenderConf.apply(this,arguments);dkConf();return r;};
 /* balão de orientações: o que importa ao bloco (regras do trecho, editoriais e jurídicas de orientacoes.json) surge com o cursor
