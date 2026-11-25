@@ -110,6 +110,8 @@ html[data-theme=dark] .side{background:#0a1821;border-color:#1e3747}
 html[data-theme=dark] .side-h{border-color:#1e3747;color:#a7a8a9}
 .side iframe{flex:1;width:100%;border:0;min-height:calc(100vh - 220px);background:#fff}
 @media(max-width:1100px){.pv{grid-template-columns:1fr}.pv-ctl{position:static}.pje{display:none}}
+#side iframe[hidden]{display:none!important}.side #pv-layout{margin:5px 8px}.side #universal{background:#f8f7f2}
+@media(max-width:520px){#side{width:100%!important}.pv{padding:10px}.cr-top{overflow:hidden}}
 </style>
 </head>
 <body>
@@ -126,8 +128,8 @@ html[data-theme=dark] .side-h{border-color:#1e3747;color:#a7a8a9}
 </div></header>
 <main class="pv">
  <aside class="pv-ctl" aria-label="Simular o PJe">
-  <div><p class="k">Prévia · como a extensão está agora</p><h1>Painel <em class="it">ao lado do PJe.</em></h1></div>
-  <p class="d">À direita, o painel de verdade, com os mesmos arquivos da versão publicada. Aqui você simula o PJe: o processo, a tela e o texto do editor.</p>
+  <div><p class="k">Prévia · comparação de layouts</p><h1>Painel <em class="it">ao lado do PJe.</em></h1></div>
+  <p class="d">À direita, compare o Prontuário Universal demonstrativo com o painel da versão publicada. O protótipo usa dados fictícios e não grava na ficha. Os controles abaixo continuam disponíveis na versão atual.</p>
   <label class="f"><span>Sessão</span><select id="ses"><option>Lendo…</option></select></label>
   <label class="f"><span>Processo</span><input id="cnj" list="cnjs" placeholder="0000000-00.0000.4.03.0000" autocomplete="off"><datalist id="cnjs"></datalist></label>
   <div class="f"><span>Tela do PJe</span><span class="seg w" role="group" aria-label="Tela do PJe" id="telas"><button type="button" data-tela="lista" aria-pressed="true">Lista de tarefas</button><button type="button" data-tela="autos" aria-pressed="false">Autos</button><button type="button" data-tela="editor" aria-pressed="false">Editor</button></span></div>
@@ -142,7 +144,7 @@ html[data-theme=dark] .side-h{border-color:#1e3747;color:#a7a8a9}
   <div class="cr-top"><i></i><i></i><i></i><span class="cr-url" id="url">pje2g.trf3.jus.br/pje/Painel/painel_usuario/advogado.seam</span><span class="cr-ext"><img src="painel/icones/32.png" alt="">Muta</span></div>
   <div class="cr-c">
    <div class="pje"><div class="pje-h"><b>PJe 2º grau</b><span id="pje-t">Painel do usuário · tarefas</span></div><div class="pje-b" id="pje-b"><p class="vz">Lendo a pauta…</p></div></div>
-   <div class="side" id="side" style="width:420px"><div class="side-h"><img src="painel/icones/16.png" alt="" width="14" height="14"><span>HERO18810 · Assistente do Gab. Muta</span></div><iframe id="pn" title="Painel da extensão HERO18810" src="painel/painel.html"></iframe></div>
+   <div class="side" id="side" style="width:420px"><div class="side-h"><img src="painel/icones/16.png" alt="" width="14" height="14"><span>HERO18810 · Assistente do Gab. Muta</span></div><div class="seg w" id="pv-layout" role="group" aria-label="Layout do painel"><button type="button" aria-pressed="true" data-layout="universal">Prontuário universal</button><button type="button" aria-pressed="false" data-layout="atual">Versão atual</button></div><iframe id="universal" title="Protótipo interativo do Prontuário Universal" src="universal.html"></iframe><iframe id="pn" title="Painel da extensão HERO18810" src="painel/painel.html" hidden></iframe></div>
   </div>
  </section>
 </main>
@@ -161,6 +163,7 @@ window.__previaGrava=()=>S.grava;
 function posBotoes(){const r=$('#pje-b').getBoundingClientRect();document.documentElement.style.setProperty('--pje-x',Math.round(r.left+12)+'px')}
 window.addEventListener('resize',posBotoes);
 const pn=$('#pn');
+$('#pv-layout button').forEach(b=>b.onclick=()=>{const u=b.dataset.layout==='universal';$('#universal').hidden=!u;pn.hidden=u;$('#pv-layout button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));if(!u)mandar()});
 async function get(u){const r=await fetch(u,{credentials:'same-origin',cache:'no-store'});const j=await r.json().catch(()=>({}));if(!r.ok){const e=new Error(j.erro||('HTTP '+r.status));e.status=r.status;throw e}return j}
 function item(){return S.itens.find(x=>x.cnj===S.cnj)||null}
 

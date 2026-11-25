@@ -45,6 +45,8 @@ def montar(saida: pathlib.Path) -> None:
 
     shutil.copy2(AQUI / 'index.html', saida / 'index.html')
     shutil.copy2(AQUI / 'pje-shim.js', saida / 'pje-shim.js')
+    shutil.copy2(AQUI / 'universal.html', saida / 'universal.html')
+    shutil.copy2(RAIZ / 'padrao' / 'ficha.json', saida / 'universal-ficha.json')
 
 
 def main() -> None:

@@ -26,3 +26,18 @@ test('prévia do painel: por padrão nada é gravado (o shim bloqueia POST, PUT 
   assert.match(shim, /m !== 'GET' && m !== 'HEAD' && !grava && !vivo && !\/\\\/api\\\/login/);
   assert.match(shim, /status: 423/);
 });
+
+
+test('prévia universal: protótipo isolado e esquema da ficha real', () => {
+  const saida = fs.mkdtempSync(path.join(os.tmpdir(), 'muta-universal-'));
+  try {
+    execFileSync('python3', [path.join(ROOT, 'scripts/extensao/previa.py'), '--saida', saida]);
+    const idx = fs.readFileSync(path.join(saida, 'index.html'), 'utf8');
+    const html = fs.readFileSync(path.join(saida, 'universal.html'), 'utf8');
+    assert.match(idx, /id="universal"[^>]+src="universal.html"/);
+    assert.match(idx, /id="pn"[^>]+src="painel\/painel.html"/);
+    assert.deepEqual(JSON.parse(fs.readFileSync(path.join(saida, 'universal-ficha.json'), 'utf8')), JSON.parse(fs.readFileSync(path.join(ROOT, 'padrao/ficha.json'), 'utf8')));
+    for (const m of html.matchAll(/<script>([\s\S]*?)<\/script>/g)) new Function(m[1]);
+    assert.doesNotMatch(html, /\/api\/|localStorage|sendBeacon/);
+  } finally { fs.rmSync(saida, {recursive:true,force:true}); }
+});
