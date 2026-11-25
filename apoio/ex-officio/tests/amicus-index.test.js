@@ -109,3 +109,9 @@ test('Amicus: Operação do gabinete reúne Fluxos, Rotina, Checklists, Guia do 
  for(const x of ["['fluxos','Fluxos'],['rotina','Rotina'],['checks','Checklists'],['guia-pje','Guia do PJe'],['metas','Metas']",'class="am-op-q"',"dataset.full='operacional'",'am-op-links','amicus-operacional-aba'])assert.ok(home.includes(x),x);
  assert.ok(!home.includes('data-amtab="hero"')&&!home.includes('am-tab-hero'),'sem a aba HERO · prévia');
 });
+test('Amicus: Competência e imparcialidade num painel, com Impedimentos e suspeições em destaque',()=>{
+ const home=read('apoio/amicus/index.html');
+ assert.ok(home.includes("['competencia-grupo','Competência e imparcialidade','Impedimentos, suspeições e competência da Turma',[['competencia-imparcialidade','Competência e imparcialidade',true]]]"));
+ for(const x of ['class="ci-destaque"',"[['competencia','Competência da Turma'],['competencia-assuntos','Competência por assunto']]","dataset.full='competencia-imparcialidade'"])assert.ok(home.includes(x),x);
+ assert.ok(!/\['impedimentos','Imparcialidade'\]/.test(home),'imparcialidade não é mais módulo solto');
+});

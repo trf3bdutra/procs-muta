@@ -391,11 +391,25 @@ body.am-com-aba{overflow:hidden}
 #jur-collegium.full-panel{padding:14px 18px;display:flex;flex-direction:column}
 #jur-collegium.full-panel .cg-host{flex:1;height:auto;min-height:0}
 #jur-collegium.full-panel .cg-nota{display:none}
+
+/* painel Competência e imparcialidade: impedimentos e suspeições em destaque */
+#competencia-imparcialidade .ci-destaque{margin:10px 0 16px;border:1px solid color-mix(in srgb,#b23a48 45%,var(--el));border-left:5px solid #b23a48;background:color-mix(in srgb,#b23a48 6%,transparent);padding:12px 14px;border-radius:4px}
+html[data-theme=dark] #competencia-imparcialidade .ci-destaque{border-color:color-mix(in srgb,#ef8f8f 45%,var(--el));border-left-color:#ef8f8f;background:color-mix(in srgb,#ef8f8f 8%,transparent)}
+#competencia-imparcialidade .ci-imp>.pane-title{margin-bottom:4px}
+#competencia-imparcialidade .ci-imp>.pane-title small{color:#b23a48;letter-spacing:.1em}
+html[data-theme=dark] #competencia-imparcialidade .ci-imp>.pane-title small{color:#ef8f8f}
+#competencia-imparcialidade .ci-imp>.pane-title h2{font-size:20px!important;box-shadow:inset 3px 0 0 #b23a48!important}
+#competencia-imparcialidade .ci-comp{border-top:1px solid var(--el);padding-top:12px}
+.ci-tabs{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:10px}
+.ci-tabs button{font:600 12.5px Figtree,system-ui,sans-serif;border:1px solid var(--el);background:transparent;color:inherit;padding:7px 11px;border-radius:4px;cursor:pointer}
+.ci-tabs button[aria-selected=true]{background:color-mix(in srgb,var(--mod,var(--eg)) 14%,transparent);border-color:var(--mod,var(--eg));color:var(--ei)}
+.ci-pane>.pane-title{display:none}
+#competencia-imparcialidade.full-panel{padding:16px 20px}
 </style><style id="am-areas-css">
 .am-modular>.am-area-nav,.am-modular>.am-group-heading{grid-column:1/-1}
 .am-modular>.am-module-nav{order:0}
 .am-modular>.am-module-nav>button:not(:last-child){display:none}
-.am-area-nav{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.am-area-nav{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:8px}
 .am-area-nav button{font:650 13px Figtree,system-ui,sans-serif;text-align:left;cursor:pointer;padding:14px 12px;border:1px solid var(--el);border-top:2px solid var(--eg);background:var(--ew);color:var(--ei);border-radius:5px}
 .am-area-nav button:hover{background:var(--ep2)}
 .am-group-heading{padding:12px 0 4px;border-bottom:1px solid var(--el);scroll-margin-top:100px}
@@ -725,7 +739,8 @@ const groups=[
  ['operacional','Operacional','Fluxos, rotinas, checklists e tarefas do PJe',[['operacional','Operação do gabinete',true]]],
  ['jurisprudencial','Repertório jurisprudencial','Julgados da Turma Regional, temas e súmulas',[['jur-collegium','Collegium',true],['enunciados','Enunciados',true]]],
  ['normativo','Repertório legislativo e normativo','Regimento Interno e atos regimentais',[['regimento','Regimento',true],['norm-atos','Assentos e referências normativas',true]]],
- ['referencias','Referências jurídicas','Competência, recursos, temas e matérias',[['recursos','Recursos'],['temas-proc','Temas processuais'],['competencia','Competência'],['competencia-assuntos','Competência por assunto'],['impedimentos','Imparcialidade'],['assuntos','Assuntos recorrentes'],['lexico-recursal','Léxico recursal'],['guias-praticos','Guias práticos']]]
+ ['competencia-grupo','Competência e imparcialidade','Impedimentos, suspeições e competência da Turma',[['competencia-imparcialidade','Competência e imparcialidade',true]]],
+ ['referencias','Referências jurídicas','Recursos, temas e matérias',[['recursos','Recursos'],['temas-proc','Temas processuais'],['assuntos','Assuntos recorrentes'],['lexico-recursal','Léxico recursal'],['guias-praticos','Guias práticos']]]
 ];
 const cfg=groups.flatMap(g=>g[3]);
 function module(id,title,subtitle,body){const el=D.createElement('section');el.className='busca';el.id=id;el.innerHTML='<div class="pane-title"><div><small>'+subtitle+'</small><h2>'+title+'</h2></div></div>'+body;W.append(el);return el;}
@@ -737,6 +752,20 @@ module('guia-pje','Guia de tarefas do PJe','Enciclopédia · consulta autenticad
 module('competencia-assuntos','Competência por assunto','Enciclopédia · consulta autenticada',loading);
 module('lexico-recursal','Léxico recursal','Enciclopédia · consulta autenticada',loading);
 module('guias-praticos','Guias práticos','Enciclopédia · consulta autenticada',loading);
+/* Competência e imparcialidade: um painel para tudo de competência, com Impedimentos e suspeições em destaque no alto. Os motores continuam os mesmos (#impedimentos, #competencia, #competencia-assuntos). */
+(function(){
+ const ci=module('competencia-imparcialidade','Competência e imparcialidade','Antes de minutar: quem pode julgar e de quem é a competência','<div class="ci-destaque" role="region" aria-label="Impedimentos e suspeições"></div><div class="ci-comp"><div class="ci-tabs" role="tablist" aria-label="Competência"></div><div class="ci-panes"></div></div>');
+ const dest=ci.querySelector('.ci-destaque'),tabs=ci.querySelector('.ci-tabs'),panes=ci.querySelector('.ci-panes');
+ const imp=D.getElementById('impedimentos');if(imp){imp.classList.remove('busca');imp.classList.add('ci-imp');dest.append(imp);}
+ const P=[['competencia','Competência da Turma'],['competencia-assuntos','Competência por assunto']];let cur='';
+ P.forEach(([id,l])=>{const el=D.getElementById(id);if(!el)return;el.classList.remove('busca');el.classList.add('ci-pane');el.setAttribute('role','tabpanel');panes.append(el);const b=D.createElement('button');b.type='button';b.setAttribute('role','tab');b.dataset.ci=id;b.textContent=l;tabs.append(b);});
+ function abre(id){if(!D.getElementById(id))return;cur=id;try{localStorage.setItem('amicus-competencia-aba',id);}catch(e){}tabs.querySelectorAll('[data-ci]').forEach(b=>{const on=b.dataset.ci===id;b.setAttribute('aria-selected',String(on));b.tabIndex=on?0:-1;});panes.querySelectorAll(':scope>.ci-pane').forEach(p=>p.hidden=p.id!==id);}
+ tabs.addEventListener('click',e=>{const b=e.target.closest('[data-ci]');if(b)abre(b.dataset.ci);});
+ tabs.addEventListener('keydown',e=>{if(!/^Arrow(Left|Right)$/.test(e.key))return;const L=[...tabs.querySelectorAll('[data-ci]')],i=L.findIndex(b=>b.dataset.ci===cur);const n=L[(i+(e.key==='ArrowLeft'?L.length-1:1))%L.length];abre(n.dataset.ci);n.focus();e.preventDefault();});
+ const full=D.createElement('button');full.type='button';full.className='more';full.dataset.full='competencia-imparcialidade';full.textContent='⛶ Tela cheia';ci.querySelector('.pane-title').append(full);
+ full.addEventListener('click',()=>{ci.classList.toggle('full-panel');full.textContent=ci.classList.contains('full-panel')?'× Sair da tela cheia':'⛶ Tela cheia';});
+ let ini='competencia';try{ini=localStorage.getItem('amicus-competencia-aba')||ini;}catch(e){}if(!D.getElementById(ini))ini='competencia';abre(ini);
+})();
 /* Operação do gabinete: Fluxos, Rotina, Checklists, Guia de tarefas do PJe e Metas num só painel, com pesquisa comum. Os motores de cada parte continuam os mesmos (ids preservados). */
 (function(){
  const P=[['fluxos','Fluxos'],['rotina','Rotina'],['checks','Checklists'],['guia-pje','Guia do PJe'],['metas','Metas']];
