@@ -115,6 +115,8 @@ jobs:
           mkdir -p site/public/caput site/public/monitor/triagem
           cp caput/triagem/index.html site/public/caput/index.html
           mkdir -p site/public/cognitio && cp cognitio/index.html cognitio/auth.js site/public/cognitio/
+          # Cabeçalho compartilhado: Cognitio, Collectio, Compendium, Collegium, editor e portal Amicus.
+          python3 apoio/amicus/header.py site/public
           cp caput/triagem/index.html site/public/monitor/triagem/index.html
           # Competências da equipe: moldura da Coordenação do Caput (lê e grava pelo motor do Caput)
           mkdir -p site/public/caput/competencias && cp caput/competencias/index.html site/public/caput/competencias/index.html
