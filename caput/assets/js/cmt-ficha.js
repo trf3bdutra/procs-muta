@@ -1395,7 +1395,7 @@ function fxAcomp(g){
  }else if(d==='Monocrática')sub=fxCampo('triagem','Hipóteses Monocrática','Hipótese do artigo 932')+fxCampo('triagem','Art. 932 - Nota de enquadramento','Nota de enquadramento');
  else if(d==='Outro destino')sub=fxCampo('producao','Destino - Outro')+fxCampo('triagem','Destino - Outro Nota','Nota de enquadramento');
  var final=d==='Sessão'?'Colegiado · Acórdão':d==='Monocrática'?'Relator · Monocrática terminativa':d==='Outro destino'?'Conforme destino indicado':'A definir';
- return '<div class="fx-grid">'+fxCampo('triagem','Status da triagem')+tipos+fxCampo('producao','Destino - Situação')+'</div>'+fxSubcard('Encaminhamento','<div class="fx-grid">'+sel+sub+'</div><p><b>Destino e pronunciamento final:</b> '+E(final)+'</p>')+fxSubcard('Trâmite','<div class="fx-grid">'+fxCampo('origem','Próxima ação','Próxima providência')+'</div>'+fxTrHtml(ed))+fxSubcard('Histórico de julgamento',fxHistHtml(ed));
+ return '<div class="fx-grid">'+fxCampo('triagem','Status da triagem')+tipos+fxCampo('producao','Destino - Situação')+'</div>'+fxSubcard('Encaminhamento','<div class="fx-grid">'+sel+sub+'</div><p><b>Destino e pronunciamento final:</b> '+E(final)+'</p>')+fxSubcard('Trâmite','<div class="fx-grid">'+fxCampo('origem','Próxima ação','Próxima providência')+'</div>'+fxTrHtml(ed))+fxSubcard('Histórico de julgamento',fxHistHtml(ed))+(val('triagem','Registro - Triagem')?'<details class="fx-subgrupo"><summary>Registro histórico da análise</summary><div class="fx-grid">'+fxCampo('triagem','Registro - Triagem')+'</div></details>':'');
 }
 function fxAcompChange(t){
  if(!ST.edit||ST.ad.leitura)return false;
