@@ -1756,3 +1756,13 @@ body.hero-gestao-ativa .layout>aside>.nav>button{flex:1;min-width:0}
 #gab .hero-sig-urg .hero-urg-short{border:0!important}
 #pauta-app .pa-session-head{background:transparent;border:0;box-shadow:none;margin:0 0 8px;padding:0}
 #pauta-app .pa-session-head .pa-session-tabs{border:0;background:transparent;padding:0}
+
+/* Pauta: mesmo cabeçalho de busca do Repertório. */
+#pauta-app .pa-busca{padding:6px 0;margin:0 0 8px;background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:4}
+#pauta-app .pa-busca .pa-f{gap:4px;margin:0;align-items:center}
+#pauta-app .pa-busca .pa-f .chip{font-size:11px;min-height:24px}
+#pauta-app .pa-busca .pa-sol-resumo{border:0;background:transparent;padding:3px 0;font-size:11px}
+#pauta-app .pa-busca .pa-session-head{margin:0;gap:5px}
+#pauta-app .pa-busca .pa-session-head .pa-sel{flex:1;min-width:0}
+#pauta-app .pa-busca .pa-session-head .pa-sel select{max-width:none;width:100%}
+#pauta-app .pa-busca .status{color:var(--muted-fg);font-size:10.5px;margin:0}
