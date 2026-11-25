@@ -64,8 +64,8 @@
   function flow(){
     var E=etapas(),box=elem('div','pv-flowbox'),r=elem('div','pv-flow'),head=elem('div','pv-stage-head');head.append(elem('h4','pm-mer-h','Etapas'));box.append(head);
     E.L.forEach(function(x,i){
-      var cell=elem('div','pv-stage'+(x.ok?' ok':i===E.n?' at':'')),b=btn('','data-et',String(i));b.className='pv-stage-btn';b.innerHTML=SV(IC[x.ic],14);b.disabled=i===E.L.length-1||!(i===E.n||i===E.n-1);b.title=i===E.L.length-1?'Ato do relator · somente leitura':'Marcar ou desfazer';
-      cell.append(b,elem('b','',x.ic==='ass'?'Assinatura':x.r),elem('small','muted',x.dt?brD(x.dt).slice(0,5):'—'));r.append(cell);});
+      var cell=elem('div','pv-stage'+(x.ok?' ok':i===E.n?' at':' pend')),b=btn('','data-et',String(i));b.className='pv-stage-btn';b.innerHTML=SV(x.ic==='rev'?'<circle cx="11" cy="11" r="6"/><path d="m20 20-4.5-4.5"/>':IC[x.ic],14);b.disabled=i===E.L.length-1||!(i===E.n||i===E.n-1);b.title=i===E.L.length-1?'Ato do relator · somente leitura':'Marcar ou desfazer';
+      cell.append(b,elem('b','',x.ic==='ass'?'Assinatura':x.r),elem('small','muted',x.dt?brD(x.dt).slice(0,5):i===E.n&&!x.ok?'atual':'—'));r.append(cell);});
     box.append(r);var people=elem('div','pv-people');
     [['SERVIDOR','Minuta'],['CORRETOR',E.mono?'Revisão':'Correção']].forEach(function(z){var p=elem('div','pv-person'),v=S(V('producao',z[0]));p.append(elem('small','muted',z[1]));if(G.desEd===z[0]){var i=elem('input');i.id='pm-des';i.setAttribute('data-des',z[0]);i.value=v;p.append(i);}else{var b=btn(v||'Não designado','data-des-ed',z[0]);b.disabled=!G.gestor;p.append(b);}people.append(p);});box.append(people);return box;
   }

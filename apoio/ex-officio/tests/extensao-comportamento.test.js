@@ -162,3 +162,42 @@ test('universal: Acompanhamento no alto da Triagem; sinalizações em janela mó
     assert.deepEqual(P.erros, [], 'sem erro de script');
   } finally { await P.fim(); }
 });
+
+/* 0.73 · organização do prontuário universal: abas das faces sem as setas, Diligências e Deliberações na faixa de abas,
+   etapa atual distinta, sinalizações com rótulo e um só "Ler os autos" (nas outras abas, aviso que leva à aba Autos) */
+test('universal: organização — faces sem setas, faixa de abas única, etapa atual, rótulos e aviso dos autos', { skip: pular, timeout: 90000 }, async () => {
+  const op = { processo: CNJ, origem: {}, triagem: { 'Tipo de Julgamento': 'Apelação' }, producao: { SERVIDOR: 'Rodrigo', MINUTADO: '2026-11-13', Destino: 'Sessão' }, pauta: {}, controles: {} };
+  const P = await abrir(op, { sigilo: '', liberado: true, porque: 'gestor' });
+  try {
+    const { pg } = P;
+    await pg.goto(pg.url().replace('/painel/painel.html', '/painel/universal.html'));
+    await pg.waitForFunction(() => window.MutaSessao && window.MutaSessao.estado().estado === 'on', null, { timeout: 15000 });
+    await pg.evaluate(cnj => { window.chrome.storage.session.set({ 'aba:1': { numero: cnj, classe: 'ApCiv', tarefa: '[Sessão] Aguardando a sessão', ctx: '', ed: false, lib: '' } }); }, CNJ);
+    await pg.waitForSelector('.pv3-face-nav button', { timeout: 15000 });
+    const v = await pg.evaluate(() => {
+      const vis = e => !!(e && e.offsetParent);
+      return {
+        setas: [...document.querySelectorAll('.hero-header-nav>button')].filter(vis).length,
+        faces: [...document.querySelectorAll('.pv3-face-nav button')].filter(vis).map(b => b.textContent.trim()),
+        abas: [...document.querySelectorAll('#pv-nav-main button')].filter(vis).map(b => b.querySelector('b').textContent.trim()),
+        etapas: [...document.querySelectorAll('.pv-stage')].map(e => e.className),
+        rotulos: [...document.querySelectorAll('.pv-snr')].map(e => e.textContent),
+        lerAutos: [...document.querySelectorAll('[data-au="ler"]')].filter(vis).length,
+        frase: (document.body.innerText.match(/Abra os autos digitais/g) || []).length
+      };
+    });
+    assert.equal(v.setas, 0, 'sem as setas ‹ ›');
+    assert.ok(['Resumo', 'Autuação', 'Caso'].every(x => v.faces.includes(x)), 'abas das faces: ' + v.faces.join('|'));
+    assert.ok(v.abas.includes('Diligências') && v.abas.includes('Deliberações') && v.abas.includes('Pauta'), 'faixa de abas: ' + v.abas.join('|'));
+    assert.ok(v.etapas.some(c => /\bok\b/.test(c)) && v.etapas.some(c => /\bat\b/.test(c)) && v.etapas.some(c => /\bpend\b/.test(c)), 'feita, atual e pendente: ' + v.etapas.join(' | '));
+    assert.deepEqual(v.rotulos.sort(), ['avisos', 'intercorrências', 'pendências', 'urgência'], 'sinalizações com rótulo');
+    assert.equal(v.lerAutos, 1, 'um só "Ler os autos" (aba Autos)');
+    assert.ok(v.frase <= 1, 'sem a frase repetida');
+    await pg.evaluate(() => [...document.querySelectorAll('button')].find(b => b.offsetParent && b.textContent.trim() === 'Triagem').click());
+    await pg.waitForSelector('.au-aviso [data-au-ir]', { timeout: 15000 });
+    assert.equal(await pg.$$eval('[data-au="ler"]', L => L.filter(x => x.offsetParent).length), 0, 'na Triagem, só o aviso');
+    await pg.click('.au-aviso [data-au-ir]');
+    await pg.waitForSelector('#g-lei [data-au="ler"]', { timeout: 15000 });
+    assert.deepEqual(P.erros, [], 'sem erro de script');
+  } finally { await P.fim(); }
+});

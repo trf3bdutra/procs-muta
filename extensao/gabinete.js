@@ -1108,7 +1108,7 @@ function heroOrganizarProntuario(){
   pages.append(id,aut,mat);var pn=[id,aut,mat],names=['Resumo','Identificação e Autuação','Caso, Conteúdo e Questões'];
   if(ficha){pages.append(ficha);pn.push(ficha);names.push('Ficha');}
   function show(i){var n=pn.length;heroTopo.pagina=(i+n)%n;pn.forEach(function(p,j){p.hidden=j!==heroTopo.pagina;});label.textContent=heroTopo.pagina===0?'':names[heroTopo.pagina];label.hidden=heroTopo.pagina===0;prev.title='Anterior: '+names[(heroTopo.pagina+n-1)%n];next.title='Próxima: '+names[(heroTopo.pagina+1)%n];prev.setAttribute('aria-label',prev.title);next.setAttribute('aria-label',next.title);nav.setAttribute('aria-label',names[heroTopo.pagina]);if(ficha){if(heroTopo.pagina===n-1&&fichaFacePermitida()){if(!ficha.childElementCount)html(ficha,window.MutaGabinete.fichaFace());}else ficha.replaceChildren();}if(faceNav)Array.from(faceNav.children).forEach(function(b,j){b.setAttribute('aria-pressed',String(j===heroTopo.pagina));});}
-  var faceNav=enhanced?el('div','pv3-face-nav'):null;if(faceNav){faceNav.style.gridTemplateColumns='repeat('+pn.length+',minmax(0,1fr))';['Resumo','Autuação','Caso'].concat(ficha?['Ficha']:[]).forEach(function(name,i){var b=el('button','',name);b.type='button';b.onclick=function(){show(i);};faceNav.append(b);});}
+  var faceNav=enhanced||document.querySelector('link[href="universal-layout.css"]')?el('div','pv3-face-nav'):null;if(faceNav){faceNav.style.gridTemplateColumns='repeat('+pn.length+',minmax(0,1fr))';['Resumo','Autuação','Caso'].concat(ficha?['Ficha']:[]).forEach(function(name,i){var b=el('button','',name);b.type='button';b.onclick=function(){show(i);};faceNav.append(b);});}
   prev.addEventListener('click',function(){show(heroTopo.pagina-1);});next.addEventListener('click',function(){show(heroTopo.pagina+1);});
   var sx=0;pages.addEventListener('touchstart',function(e){sx=e.changedTouches[0].clientX;},{passive:true});pages.addEventListener('touchend',function(e){var dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>65)show(heroTopo.pagina+(dx<0?1:-1));},{passive:true});
   var l1=top.querySelector('.pm-l1'),cls=l1&&l1.querySelector('.pc-cl'),classText=cls&&cls.title?cls.title.split(' · ')[0]:'';
@@ -1518,7 +1518,7 @@ function render0() {
   var s = ses.estado();
   if (s.estado === 'verificando') { caixa.innerHTML = '<div class="empty">Verificando a sessão do Ex Officio…</div>'; return; }
   if (s.estado !== 'on') { ses.formulario(caixa, 'Entrar para ver o prontuário do processo'); return; }
-  if (!G.cnj) { caixa.innerHTML = '<div class="empty"><h3>Nenhum processo aberto</h3>Abra os autos ou a tarefa no PJe, ou escolha um processo na lista acima.</div>'; return; }
+  if (!G.cnj) { caixa.innerHTML = '<div class="empty"><h3>Nenhum processo aberto</h3>Abra os autos ou a tarefa no PJe.</div>'; return; }
   var st0 = '<p class="status" id="g-st" role="status" aria-live="polite"></p>';
   if (G.carregando) { caixa.innerHTML = '<div class="pc"><div class="pc-n"><span class="mono pc-cnj">' + esc(G.cnj) + '</span></div></div><div class="empty">Lendo o prontuário do processo…</div>' + st0; stEl = $('g-st'); return; }
   if (G.erro) { caixa.innerHTML = '<div class="pc"><div class="pc-n"><span class="mono pc-cnj">' + esc(G.cnj) + '</span><span class="sp"></span><button type="button" class="lnk" data-g="atualizar">Atualizar</button></div></div><div class="err-box">Não foi possível ler o prontuário: ' + esc(G.erro) + '</div>' + st0; stEl = $('g-st'); return; }

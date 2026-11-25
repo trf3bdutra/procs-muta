@@ -132,9 +132,9 @@ html[data-tema=escuro] .pv-universal-body{--pv-bg:#25282d;--pv-line:#444a52;--pv
 @media(max-width:380px){#gab.pv2-enhanced .hero-designacoes{grid-template-columns:repeat(2,minmax(0,1fr))}#gab.pv2-enhanced .hero-pauta-resumo>.hero-pauta-linha{grid-template-columns:repeat(2,minmax(0,1fr))}}
 
 /* Revisão do cartão superior e solicitações · apenas Prontuário Universal. */
-#gab.pv2-enhanced .pv3-face-nav{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:3px;padding:3px;margin:0 0 8px;border:1px solid var(--line);border-radius:6px;background:var(--soft)}
-#gab.pv2-enhanced .pv3-face-nav button{font:inherit;font-size:10.5px;border:0;border-radius:4px;padding:6px 2px;color:inherit;background:transparent;cursor:pointer;min-width:0}
-#gab.pv2-enhanced .pv3-face-nav button[aria-pressed=true]{background:var(--card);font-weight:700;box-shadow:0 1px 2px #0002}
+#gab .pv3-face-nav{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:3px;padding:3px;margin:0 0 8px;border:1px solid var(--line);border-radius:6px;background:var(--soft)}
+#gab .pv3-face-nav button{font:inherit;font-size:10.5px;border:0;border-radius:4px;padding:6px 2px;color:inherit;background:transparent;cursor:pointer;min-width:0}
+#gab .pv3-face-nav button[aria-pressed=true]{background:var(--card);font-weight:700;box-shadow:0 1px 2px #0002}
 #gab.pv2-enhanced .hero-top-page[hidden],#gab.pv2-enhanced [data-sol-estado][hidden]{display:none!important}
 #gab.pv2-enhanced .pv2-ficha-face{padding:4px 0;min-width:0}
 #gab.pv2-enhanced .pv2-fields{padding:8px;border:1px solid var(--line);border-radius:6px;background:var(--card)}
@@ -205,3 +205,27 @@ html[data-tema=escuro] .pv-universal-body{--pv-bg:#25282d;--pv-line:#444a52;--pv
 
 .pv-universal-body .topo-u .tu-profile-notif{flex:1 1 auto;min-width:0;overflow:visible;max-width:100%}
 .pv-universal-body .tu-profile-notif .tu-profile-name{overflow:hidden;text-overflow:ellipsis}
+/* 0.73 · organização: uma navegação só das faces (sem as setas), etapa atual distinta, sinalizações com rótulo,
+   aviso discreto de autos não lidos e Solicitações só com o que há */
+#gab .hero-header-nav>button{display:none!important}
+#gab .hero-header-nav span.muted:has(+ .pm-fase){display:none!important}
+.pv-universal .pv-stage.at .pv-stage-btn{background:transparent!important;color:#c99a3c!important;border:2px solid #c99a3c!important}
+.pv-universal .pv-stage.at small{color:#c99a3c;font-weight:600}
+.pv-universal .pv-stage.pend{opacity:.55}
+.pv-universal .pv-stage.ok .pv-stage-btn{position:relative}
+.pv-universal .pv-stage.ok .pv-stage-btn:after{content:"✓";position:absolute;right:-5px;bottom:-4px;width:13px;height:13px;border-radius:50%;background:#34785c;color:#fff;font:700 8px/13px system-ui,sans-serif;text-align:center;border:1.5px solid var(--pv-card,#fff)}
+#gab .hero-sn-mini,#gab .hero-urg-short{display:inline-flex;align-items:center;gap:3px}
+#gab .pv-snr{font-size:9.5px;letter-spacing:.01em;white-space:nowrap;opacity:.85}
+.au-aviso{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 8px;margin:6px 0;padding:6px 9px;border:1px dashed var(--pv-line,#d6d1c5);border-radius:6px;font-size:11.5px;color:inherit}
+.au-aviso>span{opacity:.8}
+.au-aviso .lnk{border:0;background:none;padding:0;color:inherit;text-decoration:underline;cursor:pointer;font:inherit;font-weight:600}
+.pv-sol-todas .hero-sol-panel[data-pv-vazio]:not(:has(.hero-sol-item)):not(:has(.pa-ped)){display:none!important}
+.pv-sol-vazio{display:none;margin:8px 0;font-size:12px}
+.pv-sol-todas .hero-sol-panels:not(:has(.hero-sol-panel:not([data-pv-vazio]))):not(:has(.hero-sol-item)):not(:has(.pa-ped))+.pv-sol-vazio{display:block}
+#gab .hero-enc-monitor-dock>.hero-acomp-tabs{flex-wrap:wrap!important;overflow-x:visible!important}
+#gab .hero-enc-monitor-dock>.hero-acomp-tabs>.pv-sn-row{flex:1 0 100%;display:flex;flex-wrap:wrap;align-items:center;gap:4px;border-top:1px dashed var(--pv-line,#d6d1c5);padding-top:4px}
+#gab .pv-sn-row>.hero-sn-ind{margin-left:0!important;display:flex;flex-wrap:wrap;gap:4px}
+#gab .pv-sn-row>.hero-urg-short{margin-left:auto;min-height:26px;padding:3px 7px;border-radius:4px}
+#gab .pv-sn-row svg{flex:none}
+#gab .hero-enc-monitor-dock .hero-monitor-tab{gap:6px!important}
+
