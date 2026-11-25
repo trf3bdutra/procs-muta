@@ -257,7 +257,7 @@ function mapear(L) {
     if (!c) return; /* dado do acervo (só leitura) ou sem campo na ficha: fica de fora */
     it.alvo = c.secao + '.' + c.chave; it.campo = c; it.value = valorPara(c, it.value);
     var atual = gravado(c.secao, c.chave); if (typeof atual === 'object') atual = '';
-    it.current = atual; it.status = !S(atual) ? 'novo' : N(atual) === N(it.value) || (iso(atual) && iso(atual) === iso(it.value)) ? 'igual' : 'conflito'; it.apply = it.status === 'novo'; out.push(it);
+    it.current = atual; it.status = !S(atual) ? 'novo' : N(atual) === N(it.value) || (iso(atual) && iso(atual) === iso(it.value)) ? 'igual' : 'conflito'; it.manual = !!it.manual || c.secao==='producao' || /texto-longo/.test(c.tipo) || /Sentença - (Decisão|Resultado|Honorários|Custas)|Impugnada - Síntese|Parecer - Sentido/.test(c.chave); it.apply = it.status === 'novo'&&!it.manual; out.push(it);
   });
   var c1 = alvoDe('Contrarrazões - Situação');
   if (contra.length && c1) { var a1 = gravado(c1.secao, c1.chave); out.push({ sec: 'Recursos e contrarrazões', key: c1.chave, label: 'Contrarrazões', value: 'apresentadas', doc: contra.join(', '), kind: 'field', alvo: c1.secao + '.' + c1.chave, campo: c1, current: a1, status: !a1 ? 'novo' : N(a1) === 'apresentadas' ? 'igual' : 'conflito', apply: !a1 }); }
@@ -268,13 +268,13 @@ function mapear(L) {
   function tab(chave, sec, rotulo, novas, porChave, docs) {
     var c = alvoDe(chave); novas = novas.filter(function (x) { return x && Object.keys(x).some(function (k) { return S(x[k]); }); }); if (!c || !novas.length) return;
     var atual = linhasGravadas(c.secao, c.chave), res = atual.map(function (x) { return Object.assign({}, x); });
-    novas.forEach(function (n, i) { var k = porChave ? res.map(function (x) { return S(x[porChave]); }).indexOf(S(n[porChave])) : i; if (k < 0 || k >= res.length) res.push(n); else Object.keys(n).forEach(function (f) { if (S(n[f])) res[k][f] = n[f]; }); });
+    novas.forEach(function (n, i) { var k = porChave && S(n[porChave]) ? res.map(function (x) { return S(x[porChave]); }).indexOf(S(n[porChave])) : -1; if (k < 0 || k >= res.length) res.push(n); else Object.keys(n).forEach(function (f) { if (S(n[f]) && !S(res[k][f])) res[k][f] = n[f]; }); });
     var igual = JSON.stringify(atual) === JSON.stringify(res);
     out.push({ sec: sec, key: chave, label: rotulo, value: res, doc: docs.filter(Boolean).filter(function (v, i, a) { return a.indexOf(v) === i; }).join(', '), kind: 'tabela', alvo: c.secao + '.' + c.chave, campo: c, current: atual,
-      status: !atual.length ? 'novo' : igual ? 'igual' : 'conflito', apply: !atual.length, note: res.length + (res.length === 1 ? ' linha' : ' linhas') + (atual.length ? ' (hoje: ' + atual.length + ')' : '') });
+      status: !atual.length ? 'novo' : igual ? 'igual' : 'conflito', manual: /^(Recursos|Contrarrazões)$/.test(chave), apply: !atual.length&&!/^(Recursos|Contrarrazões)$/.test(chave), note: res.length + (res.length === 1 ? ' linha' : ' linhas') + (atual.length ? ' (hoje: ' + atual.length + ')' : '') });
   }
-  tab('Recursos', 'Recursos e contrarrazões', 'Recursos', TB.rec, null, TB.docs.rec);
-  tab('Contrarrazões', 'Recursos e contrarrazões', 'Contrarrazões (peças)', TB.contra, null, TB.docs.contra);
+  tab('Recursos', 'Recursos e contrarrazões', 'Recursos', TB.rec, 'ids', TB.docs.rec);
+  tab('Contrarrazões', 'Recursos e contrarrazões', 'Contrarrazões (peças)', TB.contra, 'ids', TB.docs.contra);
   tab('Procurações', 'Representação', 'Procurações', TB.proc, 'id', TB.docs.proc);
   tab('Outras peças', 'Outras peças e ocorrências', 'Outras peças', TB.ocorr, 'ids', TB.docs.ocorr);
   return out;
@@ -290,15 +290,31 @@ function sugerirAbertura(P,T){
  A.sug.push({sec:'Decisão recorrida / sentença',key:k,label:c.rotulo,kind:'tabela',alvo:c.secao+'.'+c.chave,campo:c,value:L,current:old,status:'novo',apply:false,manual:true,doc:S(d.id),note:'Conferir ID, capítulos, base literal e ressalvas. Comandos só alimentam o relatório depois de confirmados na ficha.'});}
  add('Sentença - Comandos',rows);add('Sucumbência da decisão recorrida',T.sucumbenciaRelatorio(rows));
 }
+function sugerirQuestoes(){
+  var c=alvoDe('Questões jurídicas individualizadas');if(!c||sigBloq()||(SG()&&SG().sigiloso()))return;
+  var rec=(A.sug||[]).find(function(x){return x.key==='Recursos';}),R=rec&&rec.value||[],rows=linhasGravadas(c.secao,c.chave).map(function(x){return Object.assign({},x);}),added=0;
+  R.forEach(function(r){
+    var ids=S(r.ids).match(/\b\d{6,}\b/g)||[];if(!ids.length)return;
+    var D=lista().filter(function(d){return ids.indexOf(S(d.id))>=0;});
+    if(!D.length||D.some(function(d){return docBloq(d)||!A.docs[d.id]||A.docs[d.id].estado!=='ok';}))return;
+    [['preliminares','Preliminar'],['teses','Mérito'],['merito','Mérito']].forEach(function(p){
+      S(r[p[0]]).split(/\n+|;\s*(?=\(?\d+\)|[A-Za-zÀ-ÿ])/).map(function(t){return S(t).replace(/^\s*(?:\(?\d+[).]|[-–•])\s*/,'');}).filter(Boolean).forEach(function(t){
+        if(rows.some(function(q){return S(q.id_recurso)===ids[0]&&N(q.alegacao)===N(t);}))return;
+        rows.push({ordem:String(rows.length+1),questao:'',natureza:p[1],id_recurso:ids[0],alegacao:t,documentos:ids.join(', '),confirmado:'Não'});added++;
+      });
+    });
+  });
+  if(added)A.sug.push({sec:'Caso, Conteúdo e Questões',key:c.chave,label:c.rotulo,kind:'tabela',alvo:c.secao+'.'+c.chave,campo:c,value:rows,current:linhasGravadas(c.secao,c.chave),status:linhasGravadas(c.secao,c.chave).length?'conflito':'novo',manual:true,apply:false,doc:rec.doc||'',note:'Alegações extraídas por ID; delimite e confirme cada questão. Não são conclusões judiciais.'});
+}
 function calcular() {
   var T = window.CMTInteiroTeor;
   if (!T || !T.parseTxt) { A.sugMsg = 'Motor de leitura indisponível.'; return; }
-  if (!A.itens || !lidoDoProcesso()) { A.sug = null; return; }
+  if (!A.itens || !lidoDoProcesso() || sigBloq() || (SG()&&SG().sigiloso())) { A.sug = null; return; }
   try {
     var P = T.parseTxt(md());
     T.preselect(P); try { P.kind = T.especie(P); T.preselectKind(P); } catch (e) {}
-    A.P = P; A.sug = mapear(T.buildSuggestions(P, linhaAntiga(), null) || []); A.sugMsg = '';
-    try { sugerirAbertura(P,T); } catch (e) { console.warn('[HERO] abertura estruturada',e); }
+    A.P = P; A.sug = mapear(T.buildSuggestions(P, linhaAntiga(), null) || []); A.sugMsg = ''; if(!sigBloq()&&!(SG()&&SG().sigiloso()))derivAutos().filter(function(x){return /^triagem\./.test(x.alvo);}).forEach(function(x){var key=x.alvo.split('.').slice(1).join('.'),c=alvoDe(key);if(c&&!(A.sug||[]).some(function(y){return y.alvo===x.alvo;}))A.sug.push({sec:'Caso, Conteúdo e Questões',key:key,label:x.rot,kind:'field',alvo:x.alvo,campo:c,value:x.v,current:valorFicha(x.alvo),status:vazioFicha(x.alvo)?'novo':'conflito',apply:false,manual:true,doc:x.doc});});
+    sugerirQuestoes(); try { sugerirAbertura(P,T); } catch (e) { console.warn('[HERO] abertura estruturada',e); }
     agendarAuto();
   } catch (e) { A.sug = []; A.sugMsg = 'Não foi possível ler as peças: ' + ((e && e.message) || e); }
 }
@@ -320,7 +336,7 @@ function assinatura() { return chave() + '|' + Object.keys(A.docs).filter(functi
 function agendarAuto() { if (A.tAuto || !autoLigado()) return; A.tAuto = setTimeout(autoPreencher, 0); }
 function autoPreencher() {
   A.tAuto = 0;
-  if (!autoLigado() || !A.itens || !lidoDoProcesso() || A.fila) return;
+  if (!autoLigado() || !A.itens || !lidoDoProcesso() || A.fila || sigBloq() || (SG()&&SG().sigiloso())) return;
   if (!A.sug) calcular(); if (!A.sug || !A.sug.length && A.sugMsg) return;
   var g = GB(); if (!g.marcar || !g.gravar || !g.V) return;
   var sig = assinatura(); if (A.autoSig[sig]) return; A.autoSig[sig] = 1;
@@ -334,7 +350,7 @@ function autoPreencher() {
       L.push({ alvo: a.campo, rot: a.campo.slice(a.campo.indexOf('.') + 1), v: a.valor, doc: a.doc || '' });
   }); } catch (e) {}
   /* 0.50: questões do processo (uma por tese dos recursos) e síntese do processo (sentença e recursos), só se vazios */
-  try { derivAutos().forEach(function (x) { if (!rec[x.alvo] && vazioFicha(x.alvo) && !L.some(function (y) { return y.alvo === x.alvo; })) L.push(x); }); } catch (e) {}
+  /* Sínteses e proposta jurídica não são gravadas automaticamente; exigem conferência. */
   if (!L.length) return;
   L.forEach(function (x) { g.marcar(x.alvo, x.v); });
   var ant = A.auto && A.auto.ck === ck ? A.auto.itens : [];
@@ -821,6 +837,7 @@ function htmlConferir() {
 
 /* ---------- ações ---------- */
 function aplicar() {
+  if(!lidoDoProcesso()||sigBloq()||(SG()&&SG().sigiloso()))return;
   var C = {};
   (A.sug || []).forEach(function (i) { if (i.apply && i.alvo && i.status !== 'igual' && !preservado(i)) C[i.alvo] = i.value; });
   var ks = Object.keys(C); if (!ks.length) return;

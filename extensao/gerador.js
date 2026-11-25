@@ -20,7 +20,7 @@
     var x = (AU.sugestoes() || []).filter(function (s) { return s.alvo === alvo; })[0];
     return x ? x.value : '';
   }
-  function v(sec, k) { var g = GB(), x = g.V ? g.V(sec, k) : ''; if (Array.isArray(x) ? x.length : S(x)) return x; return sugDe(sec + '.' + k) || ''; }
+  function v(sec, k) { var g = GB(), x = g.V ? g.V(sec, k) : ''; if (Array.isArray(x) ? x.length : S(x)) return x; return ''; // somente o registro da ficha, nunca sugestão ainda não gravada }
   function tab(sec, k) { var x = v(sec, k); if (typeof x === 'string') { try { x = JSON.parse(x); } catch (e) { x = []; } } return Array.isArray(x) ? x.filter(function (r) { return r && typeof r === 'object'; }) : []; }
   function fo(k) { var f = (GB().fo && GB().fo()) || {}; return S(f[k]); }
   /* itens de alegação: descarta o que não é texto de razão (cabeçalho de documento, carimbo de hora, rótulo solto) */
@@ -228,12 +228,12 @@
   function pContrarrazoes(tipo) {
     var C = tab('origem', 'Contrarrazões'), sit = N(v('origem', 'Contrarrazões - Situação')), nome = /agravo/.test(N(tipo)) ? 'contraminuta' : 'contrarrazões';
     if (C.length) {
-      if(/^(nao apresentadas?|nao houve|sem contrarrazoes|sem contraminuta|prazo decorrido sem manifestacao)$/.test(sit))return VAL('divergência entre a situação e as peças de resposta registradas');
+      if(/^(nao|nao apresentadas?|nao houve|sem contrarrazoes|sem contraminuta|prazo decorrido sem manifestacao)$/.test(sit))return VAL('divergência entre a situação e as peças de resposta registradas');
       var com = C.filter(function (c) { return S(c.preliminares); });
       if (C.length === 1) return 'Houve ' + nome + ' ' + idOu(C[0].ids, 'ID') + (com.length ? ', com arguição preliminar de ' + linhas(com[0].preliminares).join('; ') : '') + '.';
       return 'Houve ' + nome + ' ' + C.map(function (c, i) { var q = quem(c.parte), d = q.replace(/^(o|a) /, function (m) { return m === 'o ' ? 'do ' : 'da '; }).replace(/^os /, 'dos '); return d + ' ' + idOu(c.ids, 'ID') + (S(c.preliminares) ? ', com arguição preliminar de ' + linhas(c.preliminares).join('; ') : ''); }).reduce(function (a, x, i, L) { return a + (i === 0 ? '' : i === L.length - 1 ? ' e ' : ', ') + x; }, '') + '.';
     }
-    if (/^(nao apresentadas?|nao houve|sem contrarrazoes|sem contraminuta|prazo decorrido sem manifestacao|decorrido o prazo sem manifestacao)$/.test(sit)) return 'Não houve ' + nome + '.';
+    if (/^(nao|nao apresentadas?|nao houve|sem contrarrazoes|sem contraminuta|prazo decorrido sem manifestacao|decorrido o prazo sem manifestacao)$/.test(sit)) return 'Não houve ' + nome + '.';
     if (/apresent/.test(sit)) return 'Houve ' + nome + ' (ID ' + VAL('ID') + ').';
     return VAL('Houve ' + nome + ' (ID …). | Não houve ' + nome + '.');
   }
@@ -241,7 +241,7 @@
     var m=N(v('triagem','MPF')),s=N(v('triagem','Parecer - Sentido')),id=S(v('triagem','ID do Parecer MPF')),outro=S(v('triagem','Parecer - Sentido (outro)')),o=N(outro),t='';
     if(!id&&m==='nao se aplica')return '';
     if(!id&&m==='intimado sem manifestacao')return 'Intimada, a Procuradoria Regional da República não se manifestou.';
-    if(!id&&m!=='com parecer')return '';
+    if(!id&&m!=='com parecer')return VAL('verificar situação do MPF');
     if(m&&m!=='com parecer')return VAL('conferir situação da manifestação do MPF e ID');
     if(/^(sem hipotese de intervencao|ausencia de hipotese de intervencao)$/.test(s)||/^(sem hipotese de intervencao|ausencia de hipotese de intervencao)$/.test(o))return 'A Procuradoria Regional da República '+idOu(id,'ID do parecer')+' deixou de opinar quanto ao mérito, por ausência de hipótese de intervenção.';
     if(/^(sem interesse publico|inexistencia de interesse publico)$/.test(s)||/^(sem interesse publico|inexistencia de interesse publico)$/.test(o))t='opinou pela inexistência de interesse público para intervenção no feito';
@@ -325,9 +325,45 @@
     a = a.replace(/\s*\(\d+\)\s*/g, ' ').split(/\s*[|›>]\s*|\s*-\s+(?=[A-ZÁ-Ú])/).filter(Boolean).slice(-2).join('. ');
     return a ? a.toUpperCase().replace(/\.+$/, '') : VAL('ASSUNTO');
   }
+  /* Questões: apenas análise confirmada compõe o julgamento; alegação nunca é tese adotada. */
+  function questoesFicha(){
+    return tab('triagem','Questões jurídicas individualizadas').filter(function(q){return S(q.questao)||S(q.alegacao);}).sort(function(a,b){return (Number(a.ordem)||0)-(Number(b.ordem)||0);});
+  }
+  function questaoConfirmada(q){return N(q.confirmado)==='sim';}
+  function textoQuestao(q){return S(q.questao)||S(q.alegacao);}
+  function fundamentosQuestao(q){
+    if(!questaoConfirmada(q))return VAL('conferir questão: '+textoQuestao(q));
+    var L=[S(q.tese_adotada),S(q.fundamentacao),S(q.solucao)].filter(Boolean);
+    return L.length&&S(q.fundamentacao)?L.join('\n\n'):VAL('fundamentar: '+textoQuestao(q));
+  }
+  function refsQuestoes(k){
+    var L=questoesFicha().filter(questaoConfirmada).map(function(q){return S(q[k]);}).filter(Boolean);
+    var global=S(v('producao',k==='precedentes'?'Precedentes aplicáveis':'Dispositivos legais aplicáveis'));
+    if(global)L.unshift(global);return Array.from(new Set(L)).join('; ');
+  }
+  function resultadosIndividuais(tipo){
+    var R=tab('origem','Recursos'),J=tab('producao','Resultado por recurso');
+    if(R.length<2&&J.length<2)return null;
+    if(tipo!=='Apelação')return {v:VAL('individualizar resultado de cada recurso'),e:VAL('resultado individualizado')};
+    var used=new Set(),V=[],E=[],invalid=false;
+    R.forEach(function(r){
+      var idsR=S(r.ids).match(/\b\d{6,}\b/g)||[],L=J.filter(function(j){return idsR.indexOf(S(j.id_recurso))>=0;});
+      if(L.length!==1||used.has(L[0])){invalid=true;return;}
+      var j=L[0];used.add(j);
+      var nome=S(r.parte),rot=N(j.resultado),a={'desprovido':'nego provimento','provido':'dou provimento','parcialmente provido':'dou parcial provimento','nao conhecido':'não conheço','prejudicado':'julgo prejudicado'}[rot];
+      if(!nome||!a||(S(j.recorrente)&&N(j.recorrente)!==N(nome))){invalid=true;return;}
+      var alvo=(rot==='nao conhecido'?' da apelação de ':rot==='prejudicado'?' o recurso de ':' à apelação de ')+nome;
+      V.push(a+alvo+(/^(provido|parcialmente provido)$/.test(rot)?' '+VAL('comando específico do recurso ID '+S(j.id_recurso)):''));
+      E.push('Apelação de '+nome+': '+S(j.resultado).toLowerCase());
+    });
+    if(invalid||used.size!==J.length||R.length!==V.length)return {v:VAL('conferir resultado individual por ID de recurso'),e:VAL('resultado individual por recurso')};
+    if(N(v('origem','Sentença - Reexame'))==='sim'){V.push(VAL('resultado da remessa necessária'));E.push(VAL('resultado da remessa necessária'));}
+    return {v:V.join('; '),e:E.join('; ') + '.'};
+  }
+  function dispositivoFicha(tipo,k){var ind=resultadosIndividuais(tipo);return S(v('producao','Dispositivo do pronunciamento'))||'Ante o exposto, '+(ind?ind.v:resultado(tipo,k)[0])+'.';}
   function ementa(tipo, k) {
     var R = resultado(tipo, k), n = 0, it = function (t) { n++; return { n: n, t: t }; }, I = [], II = [], III = [], IV = [];
-    var cab = 'DIREITO ' + ramo() + '. ' + classeEmenta(tipo) + '. ' + assuntoCx() + '. ' + R[2] + '.';
+    var indiv=resultadosIndividuais(tipo); var cab = 'DIREITO ' + ramo() + '. ' + classeEmenta(tipo) + '. ' + assuntoCx() + '. ' + (indiv?'RESULTADOS INDIVIDUALIZADOS':R[2]) + '.';
     if (tipo === 'Embargos de Declaração') I.push(it('Embargos de declaração opostos contra acórdão que ' + VAL('resultado do acórdão embargado') + ', alegando ' + (S(v('triagem', 'ED - Vício')).toLowerCase() || VAL('vício alegado')) + '.'));
     else if (tipo === 'Agravo Interno') I.push(it('Agravo interno contra decisão que ' + (S(v('triagem', 'Impugnada - Síntese')) || VAL('o que a decisão decidiu')) + '.'));
     else if (tipo === 'Juízo de Retratação') I.push(it('Juízo de retratação de acórdão da Turma, após devolução dos autos pela Vice-Presidência, em razão do Tema ' + (S(v('triagem', 'Retratação - Tema')) || VAL('número')) + '.'));
@@ -338,9 +374,12 @@
     if (Q.length <= 1) II.push(it('A questão em discussão consiste em saber se ' + VAL(Q[0] ? 'reescrever como pergunta: ' + Q[0] : 'questão') + '.'));
     else { var nn = ['duas', 'três', 'quatro', 'cinco', 'seis'][Math.min(Q.length, 6) - 2]; II.push(it('Há ' + nn + ' questões em discussão: ' + Q.slice(0, 6).map(function (q, i) { return '(' + ['i', 'ii', 'iii', 'iv', 'v', 'vi'][i] + ') saber se ' + VAL(q); }).reduce(function (a, x, i, L) { return a + (i === 0 ? '' : i === L.length - 1 ? '; e ' : '; ') + x; }, '') + '.')); }
     (Q.length ? Q.slice(0, 6) : ['']).forEach(function (q, i) { III.push(it(VAL('fundamento' + (Q.length > 1 ? ' da questão (' + ['i', 'ii', 'iii', 'iv', 'v', 'vi'][i] + ')' : '')))); });
-    IV.push(it(R[3]));
+    var QF=questoesFicha();
+    if(QF.length){n=I.length;II=[];III=[];QF.forEach(function(q){II.push(it(questaoConfirmada(q)&&S(q.questao)?S(q.questao):VAL('delimitar: '+textoQuestao(q))));});QF.forEach(function(q){III.push(it(fundamentosQuestao(q)));});}
+    else if(S(v('producao','Tese jurídica adotada'))&&S(v('producao','Aplicação ao caso concreto'))){n=I.length+II.length;III=[it(S(v('producao','Tese jurídica adotada'))+' '+S(v('producao','Aplicação ao caso concreto')))];}
+    IV.push(it(indiv?indiv.e:R[3]));
     return { cab: cab, sec: [['I. Caso em exame', I], ['II. Questão em discussão', II], ['III. Razões de decidir', III], ['IV. Dispositivo', IV]],
-      rod: ['Dispositivos relevantes citados: ' + VAL('CF/1988, artigo …; Lei …/…, artigo …; e CPC, artigo …') + '.', 'Jurisprudência relevante citada: ' + VAL('STF, …; STJ, …; e TRF-3, …') + '.'] };
+      rod: ['Dispositivos relevantes citados: ' + (refsQuestoes('dispositivos_legais')||VAL('dispositivos legais aplicáveis')) + '.', 'Jurisprudência relevante citada: ' + (refsQuestoes('precedentes')||VAL('precedentes aplicáveis')) + '.'] };
   }
 
   /* ---------- montagem ---------- */
@@ -349,9 +388,9 @@
     if (k && !opcoesRes(tipo).some(function (o) { return o[0] === k; })) k = '';
     TIPO = tipo;
     var R = resultado(tipo, k), E = ementa(tipo, k);
-    return { tipo: tipo, k: k, rel: relatorio(tipo), disp: ['Ante o exposto, ' + R[0] + '.', 'É como voto.'], em: E,
-      acordao: 'Vistos e relatados estes autos em que são partes as acima indicadas, a Turma Regional de Mato Grosso do Sul, por unanimidade, ' + R[1] + ', nos termos do relatório e voto que ficam fazendo parte integrante do presente julgado.',
-      procl: 'Por unanimidade, ' + R[1] + '.' };
+    return { tipo: tipo, k: k, rel: relatorio(tipo), disp: [dispositivoFicha(tipo,k), 'É como voto.'], em: E,
+      acordao: 'Vistos e relatados estes autos em que são partes as acima indicadas, a Turma Regional de Mato Grosso do Sul, ' + VAL('quórum e proclamação da sessão') + ', ' + R[1] + ', nos termos do relatório e voto que ficam fazendo parte integrante do presente julgado.',
+      procl: VAL('quórum da sessão') + ', ' + R[1] + '.' };
   }
   function marca(t) { return esc(t).replace(/\[VALIDAR:[^\]]*\]/g, function (m) { return '<mark class="gv">' + m + '</mark>'; }); }
   function emTexto(E) { return E.cab + '\n' + E.sec.map(function (s) { return s[0] + '\n' + s[1].map(function (x) { return x.n + '. ' + x.t; }).join('\n'); }).join('\n') + '\n__________\n' + E.rod.join('\n'); }
@@ -369,20 +408,20 @@
     function ps(L){return L.filter(Boolean).map(function(p){return '<p>'+marca(p)+'</p>';}).join('');}
     function part(id,t,L,h){return {id:id,titulo:t,texto:L.join('\n\n'),html:h||ps(L)};}
     var fund=['Tese jurídica adotada','Aplicação ao caso concreto','Voto - Descrição'].map(function(k){return S(v('producao',k));}).filter(Boolean);
-    if(!fund.length)fund.push(VAL('desenvolver fundamentação jurídica e aplicação ao caso concreto'));
+    var qf=questoesFicha();if(qf.length)fund=qf.map(fundamentosQuestao); if(!fund.length)fund.push(VAL('desenvolver fundamentação jurídica e aplicação ao caso concreto'));
     var prec=S(v('producao','Precedentes aplicáveis'));if(prec)fund.push(prec);
-    var dis=S(v('producao','Dispositivo do pronunciamento'));
-    var suc=S(v('producao','Fundamento da sucumbência'));var atos=S(v('producao','Providências determinadas'));
+    var dis=dispositivoFicha(D.tipo,D.k);
+    var suc=S(v('producao','Fundamento da sucumbência'));var atos=S(v('producao','Providências determinadas'));var juros=S(v('producao','Juros e correção monetária'));if(juros)fund.push(juros);
     if(pron==='Acórdão (sessão)'){
       var R=resultado(D.tipo,D.k),voto=['O Desembargador Federal Carlos Muta (Relator):','Senhores Desembargadores,'].concat(fund,[suc||honorariosEditorial(D.tipo).texto,dis||'Ante o exposto, '+R[0]+'.','É como voto.']);
       var em=D.em,eh='<p><b>'+marca(em.cab)+'</b></p>'+em.sec.map(function(s){return '<p><b>'+esc(s[0])+'</b></p>'+s[1].map(function(x){return '<p><b>'+x.n+'.</b> '+marca(x.t)+'</p>';}).join('');}).join('')+'<p>__________</p>'+em.rod.map(function(r){return '<p>'+marca(r)+'</p>';}).join('');
       return [part('ementa','Ementa',[emTexto(em)],eh),part('relatorio','Relatório',D.rel),part('voto','Voto',voto),part('acordao','Acórdão',['Vistos e relatados estes autos em que são partes as acima indicadas, a Turma Regional de Mato Grosso do Sul, '+VAL('quórum e resultado proclamado em sessão')+', nos termos do relatório e voto que ficam fazendo parte integrante do presente julgado.'])];
     }
     if(pron==='Outro destino'||!pron)return [];
-    if(pron==='Despacho')return [part('despacho','Despacho',[reg('Particularidades do relatório','contexto da providência'),atos||dis||VAL('providência a determinar')])];
+    if(pron==='Despacho')return [part('despacho','Despacho',[reg('Particularidades do relatório','contexto da providência'),atos||S(v('producao','Dispositivo do pronunciamento'))||VAL('providência a determinar')])];
     var mono=S(v('producao','Mono - Fundamento'));if(mono)fund.unshift(mono);
     var titulo=pron==='Decisão monocrática'?'Decisão monocrática':pron;
-    return [part('relatorio','Relatório',D.rel),part('fundamentacao','Fundamentação',fund),part('dispositivo','Dispositivo',[suc,dis||VAL('dispositivo adequado ao pronunciamento'),atos])];
+    return [part('relatorio','Relatório',D.rel),part('fundamentacao','Fundamentação',fund),part('dispositivo','Dispositivo',[suc,S(v('producao','Dispositivo do pronunciamento'))||(/Apelação|Agravo|Remessa/.test(D.tipo)?dis:VAL('dispositivo adequado ao pronunciamento')),atos])];
   }
   function folhaHtml(g,D){
     var pron=g.pronunciamento?g.pronunciamento():g.destino&&g.destino()==='monocratica'?'Decisão monocrática':g.destino&&g.destino()==='sessao'?'Acórdão (sessão)':'';
@@ -519,7 +558,7 @@
   function variaveisEditorial(tipo,rel,em){
     var rec=tab('origem','Recursos'),rs=/^(Apelação|Agravo de Instrumento)$/.test(tipo)?pRecursos(tipo):[],hon=honorariosEditorial(tipo),d=resultado(tipo,resDaFicha(tipo)),sid=S(v('origem','Sentença - ID')),imp=S(v('triagem','Impugnada - ID'));
     var literal=S(v('triagem','Impugnada - Ementa literal')),per=S(v('triagem','Parecer - Sentido'));
-    return {razoes_primeiro_recurso:rs[0]||VAL('razões do primeiro recurso'),razoes_segundo_recurso:rec.length>1&&rs[1]||VAL('razões do segundo recurso'),razoes_agravo_interno:tipo==='Agravo Interno'?rel[1]:VAL('razões do agravo interno'),vicios_relatorio:tipo==='Embargos de Declaração'?rel[2]:VAL('vícios alegados'),ementa_embargada_literal:literal||VAL('transcrever ementa literal'),sentenca_paragrafo:'A sentença '+idOu(sid,'ID da sentença')+' '+comandosOrigem()+'. '+honorariosAbertura(),parecer_sentido_redacional:/^nao provimento|^desprovimento/.test(N(per))?'desprovimento':/^parcial.*provimento/.test(N(per))?'parcial provimento':/^provimento/.test(N(per))?'provimento':VAL('sentido do parecer'),dispositivo_voto:S(v('producao','Dispositivo do pronunciamento'))||'Ante o exposto, '+d[0]+'.',honorarios_recursais_texto:hon.texto,honorarios_ementa:hon.ementa,dispositivo_ementa_ficha:hon.ementa||d[3],acordao_recorrido_id:imp||VAL('ID do acórdão recorrido'),decisao_agravada_id:atoRecorrido(tipo).id||VAL('ID da decisão agravada'),decisao_agravada_sintese:atoRecorrido(tipo).sintese||VAL('síntese da decisão agravada')};
+    return {razoes_primeiro_recurso:rs[0]||VAL('razões do primeiro recurso'),razoes_segundo_recurso:rec.length>1&&rs[1]||VAL('razões do segundo recurso'),razoes_agravo_interno:tipo==='Agravo Interno'?rel[1]:VAL('razões do agravo interno'),vicios_relatorio:tipo==='Embargos de Declaração'?rel[2]:VAL('vícios alegados'),ementa_embargada_literal:literal||VAL('transcrever ementa literal'),sentenca_paragrafo:'A sentença '+idOu(sid,'ID da sentença')+' '+comandosOrigem()+'. '+honorariosAbertura(),parecer_sentido_redacional:/^nao provimento|^desprovimento/.test(N(per))?'desprovimento':/^parcial.*provimento/.test(N(per))?'parcial provimento':/^provimento/.test(N(per))?'provimento':VAL('sentido do parecer'),dispositivo_voto:dispositivoFicha(tipo,resDaFicha(tipo)),honorarios_recursais_texto:hon.texto,honorarios_ementa:hon.ementa,dispositivo_ementa_ficha:(resultadosIndividuais(tipo)||{}).e||hon.ementa||d[3],acordao_recorrido_id:imp||VAL('ID do acórdão recorrido'),decisao_agravada_id:atoRecorrido(tipo).id||VAL('ID da decisão agravada'),decisao_agravada_sintese:atoRecorrido(tipo).sintese||VAL('síntese da decisão agravada')};
   }
   /* A tabela é a fonte dos fragmentos; não separar frases já compostas por regex. */
   function fragmentosRecursos(tipo){
@@ -533,6 +572,6 @@
     if(tipo==='Agravo Interno'&&R.length){var r=R[0],L=linhas(v('triagem','AgInt - Fundamentos')).concat(linhas(r.preliminares),linhas(r.teses),linhas(r.merito));if(!L.length)L=linhas(v('triagem','Alegações'));out.agint_parte=quem(r.parte);out.agint_referencia=idOu(r.ids,'ID do agravo');out.agint_razoes=L.length?enumerar(L):VAL('razões, em itens');}
     return out;
   }
-  function comporFicha(campos, fonte, tipo){var ant=CONTEXTO,t0=TIPO;try{CONTEXTO={V:function(sec,k){return campos[sec+'.'+k];},fo:function(){return fonte||{};}};TIPO=tipo||tipoDetectado();var rel=relatorio(TIPO),em=ementa(TIPO,resDaFicha(TIPO)),R={abertura_relatorio:rel[0],razoes_recursais:/^(Apelação|Agravo de Instrumento)$/.test(TIPO)?pRecursos(TIPO).join('\n\n'):'',contrarrazoes_relatorio:pContrarrazoes(TIPO),parecer_relatorio:pMpf()||'',caso_em_exame:em.sec[0][1].map(function(x){return x.t;}).join('\n'),questao_em_discussao:em.sec[1][1].map(function(x){return x.t;}).join('\n')};if(/^(Apelação|Remessa Necessária|Agravo de Instrumento)$/.test(TIPO)){R.resultado_decisao_recorrida=resultadoSentenca();R.comandos_dispositivos=comandosOrigem();R.frase_honorarios_origem=honorariosAbertura();}Object.assign(R,variaveisEditorial(TIPO,rel,em));Object.assign(R,fragmentosRecursos(TIPO));if(R.honorarios_ementa)em.sec[3][1][0].t=R.honorarios_ementa;return {tipo:TIPO,rel:rel,em:em,variaveis:R};}finally{CONTEXTO=ant;TIPO=t0;}}
+  function comporFicha(campos, fonte, tipo){var ant=CONTEXTO,t0=TIPO;try{CONTEXTO={V:function(sec,k){return campos[sec+'.'+k];},fo:function(){return fonte||{};}};TIPO=tipo||tipoDetectado();var rel=relatorio(TIPO),em=ementa(TIPO,resDaFicha(TIPO)),R={abertura_relatorio:rel[0],razoes_recursais:/^(Apelação|Agravo de Instrumento)$/.test(TIPO)?pRecursos(TIPO).join('\n\n'):'',contrarrazoes_relatorio:pContrarrazoes(TIPO),parecer_relatorio:pMpf()||'',caso_em_exame:em.sec[0][1].map(function(x){return x.t;}).join('\n'),questao_em_discussao:em.sec[1][1].map(function(x){return x.t;}).join('\n')};if(/^(Apelação|Remessa Necessária|Agravo de Instrumento)$/.test(TIPO)){R.resultado_decisao_recorrida=resultadoSentenca();R.comandos_dispositivos=comandosOrigem();R.frase_honorarios_origem=honorariosAbertura();}Object.assign(R,variaveisEditorial(TIPO,rel,em));Object.assign(R,fragmentosRecursos(TIPO));var qf=questoesFicha();if(qf.length){R.tese_juridica_adotada=qf.map(function(q){return questaoConfirmada(q)&&S(q.tese_adotada)||VAL('tese: '+textoQuestao(q));}).join('\n\n');R.aplicacao_ao_caso_concreto=qf.map(fundamentosQuestao).join('\n\n');R.dispositivos_legais_aplicaveis=refsQuestoes('dispositivos_legais');R.precedentes_aplicaveis=refsQuestoes('precedentes');}if(R.honorarios_ementa)em.sec[3][1][0].t=R.honorarios_ementa;return {tipo:TIPO,rel:rel,em:em,variaveis:R};}finally{CONTEXTO=ant;TIPO=t0;}}
   window.MutaGerador = { comporFicha: comporFicha, pintar: pintar, abrir: abrir, modo: modo, html: html, acao: acao, docs: docs, _ST: ST, _t: { resultado: resultado, fraseHonorarios: fraseHonorarios, designa: designa, feminino: feminino } };
 })();

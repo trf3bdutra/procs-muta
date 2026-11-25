@@ -289,3 +289,7 @@ Tempestividade, Preparo, Representação, Preliminares, Mídias, Hipótese de in
 | 5 | Gravação | a Ficha edita em memória e exporta JSON; falta gravar direto no operacional do GitHub |
 | 6 | Status de julgamento | sem valor gravado; a Ficha usa a entrada de pauta da sessão |
 | 7 | Ramo | mudanças em `separar-fonte-operacional`, ainda fora do `main` |
+
+## Contrato de composição e leitura — HERO / Minuta-Matriz
+
+`triagem.Questões jurídicas individualizadas` é uma tabela compartilhada: o leitor propõe alegações com ID de recurso, natureza e referência documental; o servidor delimita a questão e confirma, registra fatos, normas, precedentes, tese, fundamentação e solução. Não se extrai resultado do julgamento atual dos autos anteriores. Recursos e respostas são mesclados pelo ID, não pela posição; conteúdo existente é preservado. O gerador usa somente dados gravados, e não sugestões pendentes. A ausência de registro não equivale à ausência de peça. Resultados múltiplos exigem vínculo por ID de recurso. A decisão sobre sucumbência e os comandos de reforma permanecem sujeitos à confirmação.

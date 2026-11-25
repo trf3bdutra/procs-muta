@@ -1374,6 +1374,96 @@
        "secao": "triagem",
        "tipo": "texto-longo",
        "regra": "Seleção de questões do caso para exibição resumida no prontuário."
+      },
+      {
+       "rotulo": "Questões jurídicas individualizadas",
+       "chave": "Questões jurídicas individualizadas",
+       "tipo": "tabela",
+       "secao": "triagem",
+       "apelido": "questoes_juridicas_individualizadas",
+       "regra": "Uma linha por questão; alegações são dados dos autos. Tese, fundamentos e solução são de produção e exigem conferência humana. IDs documentais e recursais distintos.",
+       "colunas": [
+        {
+         "chave": "ordem",
+         "rotulo": "Ordem",
+         "tipo": "texto"
+        },
+        {
+         "chave": "questao",
+         "rotulo": "Questão",
+         "tipo": "texto-longo"
+        },
+        {
+         "chave": "natureza",
+         "rotulo": "Natureza",
+         "tipo": "lista",
+         "opcoes": [
+          "Preliminar",
+          "Mérito",
+          "Consectários",
+          "A conferir"
+         ]
+        },
+        {
+         "chave": "id_recurso",
+         "rotulo": "ID do recurso",
+         "tipo": "texto"
+        },
+        {
+         "chave": "alegacao",
+         "rotulo": "Alegação literal ou síntese",
+         "tipo": "texto-longo"
+        },
+        {
+         "chave": "documentos",
+         "rotulo": "IDs de documentos",
+         "tipo": "texto"
+        },
+        {
+         "chave": "fatos_relevantes",
+         "rotulo": "Fatos relevantes",
+         "tipo": "texto-longo"
+        },
+        {
+         "chave": "dispositivos_legais",
+         "rotulo": "Dispositivos legais",
+         "tipo": "texto-longo"
+        },
+        {
+         "chave": "precedentes",
+         "rotulo": "Precedentes / referências",
+         "tipo": "texto-longo"
+        },
+        {
+         "chave": "tese_adotada",
+         "rotulo": "Tese adotada",
+         "tipo": "texto-longo"
+        },
+        {
+         "chave": "fundamentacao",
+         "rotulo": "Fundamentação",
+         "tipo": "texto-longo"
+        },
+        {
+         "chave": "solucao",
+         "rotulo": "Solução",
+         "tipo": "texto-longo"
+        },
+        {
+         "chave": "repercussao_no_dispositivo",
+         "rotulo": "Repercussão no dispositivo",
+         "tipo": "texto-longo"
+        },
+        {
+         "chave": "confirmado",
+         "rotulo": "Questão conferida",
+         "tipo": "lista",
+         "opcoes": [
+          "Sim",
+          "Não"
+         ]
+        }
+       ]
       }
      ]
     },
@@ -3627,6 +3717,96 @@
        "tipo": "texto-longo",
        "secao": "producao",
        "apelido": "particularidades_relatorio"
+      },
+      {
+       "rotulo": "Questões jurídicas individualizadas",
+       "chave": "Questões jurídicas individualizadas",
+       "tipo": "tabela",
+       "secao": "triagem",
+       "apelido": "questoes_juridicas_individualizadas",
+       "regra": "Uma linha por questão; alegações são dados dos autos. Tese, fundamentos e solução são de produção e exigem conferência humana. IDs documentais e recursais distintos.",
+       "colunas": [
+        {
+         "chave": "ordem",
+         "rotulo": "Ordem",
+         "tipo": "texto"
+        },
+        {
+         "chave": "questao",
+         "rotulo": "Questão",
+         "tipo": "texto-longo"
+        },
+        {
+         "chave": "natureza",
+         "rotulo": "Natureza",
+         "tipo": "lista",
+         "opcoes": [
+          "Preliminar",
+          "Mérito",
+          "Consectários",
+          "A conferir"
+         ]
+        },
+        {
+         "chave": "id_recurso",
+         "rotulo": "ID do recurso",
+         "tipo": "texto"
+        },
+        {
+         "chave": "alegacao",
+         "rotulo": "Alegação literal ou síntese",
+         "tipo": "texto-longo"
+        },
+        {
+         "chave": "documentos",
+         "rotulo": "IDs de documentos",
+         "tipo": "texto"
+        },
+        {
+         "chave": "fatos_relevantes",
+         "rotulo": "Fatos relevantes",
+         "tipo": "texto-longo"
+        },
+        {
+         "chave": "dispositivos_legais",
+         "rotulo": "Dispositivos legais",
+         "tipo": "texto-longo"
+        },
+        {
+         "chave": "precedentes",
+         "rotulo": "Precedentes / referências",
+         "tipo": "texto-longo"
+        },
+        {
+         "chave": "tese_adotada",
+         "rotulo": "Tese adotada",
+         "tipo": "texto-longo"
+        },
+        {
+         "chave": "fundamentacao",
+         "rotulo": "Fundamentação",
+         "tipo": "texto-longo"
+        },
+        {
+         "chave": "solucao",
+         "rotulo": "Solução",
+         "tipo": "texto-longo"
+        },
+        {
+         "chave": "repercussao_no_dispositivo",
+         "rotulo": "Repercussão no dispositivo",
+         "tipo": "texto-longo"
+        },
+        {
+         "chave": "confirmado",
+         "rotulo": "Questão conferida",
+         "tipo": "lista",
+         "opcoes": [
+          "Sim",
+          "Não"
+         ]
+        }
+       ]
       }
      ]
     },
