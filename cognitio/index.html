@@ -1418,6 +1418,21 @@ header#top::before{background:linear-gradient(90deg,var(--eg) 0 50%,var(--eg2) 5
 .cog-filter-stats-inline>p{font-size:11px;color:var(--m);margin:4px 0}
 .cog-filter-stats-inline .cog-stat-metrics{margin:8px 0}
 .cog-filter-stats-inline .cog-stat-grid{margin:0 0 4px}
+</style><style id="cog-matrix-readable">
+.cog-unified-scroll .cog-list-table :is(.cog-ind-head,.cog-ind-cell).cog-mw-choice{width:125px!important;min-width:125px!important;max-width:125px!important}
+.cog-unified-scroll .cog-list-table :is(.cog-ind-head,.cog-ind-cell).cog-mw-wide{width:160px!important;min-width:160px!important;max-width:160px!important}
+.cog-unified-scroll .cog-list-table :is(.cog-ind-head,.cog-ind-cell).cog-mw-long{width:215px!important;min-width:215px!important;max-width:215px!important}
+.cog-unified-scroll .cog-list-table :is(.cog-ind-head,.cog-ind-cell).cog-mw-normal{width:110px!important;min-width:110px!important;max-width:110px!important}
+.cog-unified-scroll .cog-list-table .cog-ind-cell{vertical-align:top!important;padding:5px!important}
+.cog-unified-scroll .cog-list-table .cog-ind-head{writing-mode:vertical-rl;transform:rotate(180deg);height:138px;text-align:left;vertical-align:middle}
+.cog-unified-scroll .cog-list-table .cog-ind-cell :is(select,input,textarea){font-size:11px!important;min-height:27px;padding:3px 5px!important}
+.cog-unified-scroll .cog-list-table .cog-ind-cell textarea{field-sizing:fixed!important;height:44px!important;min-height:44px!important;max-height:44px!important;resize:none!important;overflow:auto!important;white-space:pre-wrap!important}
+.cog-unified-scroll .cog-list-table .cog-ind-cell .cog-readonly{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:normal;word-break:normal}
+.cog-unified-scroll .cog-list-table .cog-pend-auto{max-height:34px;overflow:auto}
+.cog-unified-scroll .cog-list-table .cog-criterion-extra{width:auto!important;min-width:30px!important;max-width:100%!important;min-height:20px!important;white-space:nowrap!important;display:inline-flex;align-items:center;justify-content:center;margin-top:3px}
+.cog-unified-scroll .cog-list-table .cog-criterion-extra[hidden]{display:none!important}
+.cog-unified-scroll .cog-list-table .cog-inline-extras summary{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cog-unified-scroll .cog-list-table tr.at-r>td{vertical-align:top!important}
 </style></head>
 <body>
 <header id="top">
@@ -3671,7 +3686,7 @@ function cogSideButton(k){const fechado=LS.get('cog_side_'+k,false);return '<div
 D.addEventListener('click',e=>{const b=e.target.closest?.('[data-cog-side]');if(!b)return;const k=b.dataset.cogSide,grid=b.closest('.cog-side-grid');if(!grid)return;const fechado=!LS.get('cog_side_'+k,false);LS.set('cog_side_'+k,fechado);grid.classList.toggle('cog-side-closed',fechado);b.closest('.cog-side-toolbar').outerHTML=cogSideButton(k);grid.querySelector('[data-cog-side]')?.focus({preventScroll:true});},true);
 function cogListHead(cols=cogColVis()){
  const compact=cogListCompact(),context=cols.filter(cogContextField),groups=cogColAgrupar(cols.filter(c=>!cogContextField(c)));
- const head=(c,i,g)=>'<th class="cog-ind-head'+(i===0?' cog-band-start':'')+(c.custom?' cog-list-custom':'')+'" data-cog-group="'+esc(g)+'" title="'+esc(c.nome+' · '+cogColInfo(c).guide)+'">'+esc(c.nome)+'</th>';
+ const head=(c,i,g)=>'<th class="cog-ind-head cog-mw-'+cogMatrixWidth(c)+(i===0?' cog-band-start':'')+(c.custom?' cog-list-custom':'')+'" data-cog-group="'+esc(g)+'" title="'+esc(c.nome+' · '+cogColInfo(c).guide)+'">'+esc(c.nome)+'</th>';
  const bands='<tr class="cog-list-bands"><th class="cog-fix-check" rowspan="2"></th><th class="cog-fix-cnj" rowspan="2">Processo · assunto</th><th class="cog-sign-head" rowspan="2">Sinais</th>'+(!compact?'<th colspan="'+(2+context.length)+'" class="cog-context-band" data-cog-band="Contexto do processo">Contexto do processo</th>':'')+groups.map(([g,L])=>'<th class="cog-band" data-cog-band="'+esc(g)+'" colspan="'+L.length+'"><span>'+esc(g)+'</span> <small>'+L.length+'</small></th>').join('')+'</tr>';
  const fields=(!compact?'<th data-cog-group="Contexto do processo">Classe · partes · seção</th>'+context.map((c,i)=>head(c,i,'Contexto do processo')).join('')+'<th>Destino · próxima ação</th>':'')+groups.map(([g,L])=>L.map((c,i)=>head(c,i,g)).join('')).join('');
  return '<thead>'+bands+'<tr class="cog-list-fields">'+fields+'</tr></thead>';
@@ -3934,6 +3949,7 @@ async function cogRegDialog(o,kind){
  form.onsubmit=async e=>{e.preventDefault();const patch={};form.querySelectorAll('[data-reg-field]').forEach(el=>{if(el.value!==base[el.dataset.regField])patch[el.dataset.regField]=el.value;});if(!Object.keys(patch).length){d.close();return;}b.disabled=true;try{await cogFichaGravar(o.cnj,patch);d.close();refazAtTab();toast('Registro atualizado.');}catch(err){st.textContent=err.message;b.disabled=false;}};
 }
 D.addEventListener('click',e=>{const b=e.target.closest?.('[data-cog-reg]');if(!b)return;e.preventDefault();e.stopPropagation();const o=IDX.get(b.dataset.d);if(o)cogRegDialog(o,b.dataset.cogReg);},true);
+function cogMatrixAbbr(x){const n=nz(x);return ({'nao verificado':'Não verif.','nao verificada':'Não verif.','nao se aplica':'N/A','regular':'✓ Regular','irregular':'× Irregular','pendente':'! Pendente','tempestivo':'✓ Tempestivo','intempestivo':'× Intempestivo','cabivel':'✓ Cabível','incabivel':'× Incabível','nao identificada':'Não identif.','nao identificado':'Não identif.','justica gratuita':'Gratuidade','nao apresentadas':'Não apresent.'})[n]||x;}
 function cogInlineLabel(id,x){return id==='origem.Contrarrazões - Situação'?({apresentadas:'Apresentadas',nao:'Não apresentadas',omitir:'Omitir'}[x]||x):id==='producao.Destino'?({Sessão:'Colegiado (sessão)',Monocrática:'Decisão do relator'}[x]||x):x;}
 function cogInlineControl(o,c){
  const v=cogColValue(o,c),m=cogColInfo(c),title=c.nome+' · '+o.cnj,a=' data-cog-inline="'+esc(c.id)+'" data-d="'+esc(o.d)+'" data-ant="'+esc(v)+'" aria-label="'+esc(title)+'" title="'+esc(c.nome+': '+(v||'Sem registro'))+'"';
@@ -3941,12 +3957,12 @@ function cogInlineControl(o,c){
  if(!m.ed)h='<span class="cog-readonly" title="'+esc(m.guide)+'">'+esc(v||'—')+'</span>';
  else if(c.id==='triagem.O que falta sanar'){
  const lines=v.split(/\r?\n/).filter(x=>x.trim()),auto=[...new Set((o.pend||[]).map(String))].filter(x=>!lines.some(l=>nz(l).includes(nz(x))));
- h='<textarea class="cog-pend-input" rows="'+Math.max(2,lines.length)+'"'+a+' placeholder="Uma pendência por linha">'+esc(v)+'</textarea>'+(auto.length?'<div class="cog-pend-auto"><small>Indicadas pelas etiquetas</small><ul>'+auto.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul></div>':'');
+ h='<textarea class="cog-pend-input" rows="2"'+a+' placeholder="Uma pendência por linha">'+esc(v)+'</textarea>'+(auto.length?'<div class="cog-pend-auto"><small>Indicadas pelas etiquetas</small><ul>'+auto.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul></div>':'');
  }else if(c.id==='triagem.Tipo de Julgamento'){
  const sel=v.split(/\s*(?:\+|;|,|·)\s*/).filter(Boolean);
  h='<select multiple size="2"'+a+' data-cog-multi aria-description="Selecione múltiplos tipos com Ctrl ou Shift; grava ao sair da célula.">'+[...new Set(m.opts.concat(sel))].map(x=>'<option value="'+esc(x)+'"'+(sel.includes(x)?' selected':'')+'>'+esc(x)+'</option>').join('')+'</select>';
  }else if(cogServidorCampo(c.id)||c.custom&&/responsável|servidor|minutador|corretor/i.test(c.nome))h=cogEquipeInput(v,a,'inline-'+o.d+'-'+c.id.replace(/[^a-z0-9]/gi,'-'));
- else if(m.opts.length)h='<select'+a+'><option value="">—</option>'+[...new Set(m.opts.concat(v?[v]:[]))].map(x=>'<option value="'+esc(x)+'"'+(x===v?' selected':'')+'>'+esc(cogInlineLabel(c.id,x))+'</option>').join('')+'</select>';
+ else if(m.opts.length)h='<select'+a+'><option value="">—</option>'+[...new Set(m.opts.concat(v?[v]:[]))].map(x=>'<option value="'+esc(x)+'"'+(x===v?' selected':'')+'>'+esc(cogMatrixAbbr(cogInlineLabel(c.id,x)))+'</option>').join('')+'</select>';
  else if(/^(texto-longo|longo)$/.test(m.tip))h='<textarea rows="1"'+a+'>'+esc(v)+'</textarea>';
  else h='<input type="'+(m.tip==='data'&&(!v||/^\d{4}-\d{2}-\d{2}$/.test(v))?'date':m.tip==='numero'?'number':'text')+'"'+(m.tip==='numero'?' step="any"':'')+a+' value="'+esc(v)+'">';
  return h;
@@ -3957,12 +3973,13 @@ function cogExtraMarkup(o,c){
  const v=cogColValue(o,c),recorded=fields.filter(f=>cogColValue(o,f).trim()),applicable=cogExtraApplicable(c.id,v),tip=recorded.map(f=>f.nome+': '+cogColValue(o,f)).join('\n');
  if(COG_CRITERIO_PARENTS.has(c.id)){
  const conditional=['triagem.Tipo de Julgamento','producao.Mono - Tipo de ato'].includes(c.id),visible=!conditional||applicable||recorded.length;
- return '<button type="button" class="cog-criterion-extra'+(recorded.length?' has-reg':'')+'" data-cog-criterion="'+esc(c.id)+'" data-d="'+esc(o.d)+'"'+(!visible?' hidden':'')+' title="'+esc(tip||('Detalhar '+c.nome))+'" aria-label="'+esc('Detalhar '+c.nome+' · '+o.cnj)+'"><span>⋯ '+(recorded.length?'Detalhes · '+recorded.length:'Detalhes')+'</span></button>';
+ return '<button type="button" class="cog-criterion-extra'+(recorded.length?' has-reg':'')+'" data-cog-criterion="'+esc(c.id)+'" data-d="'+esc(o.d)+'"'+(!visible?' hidden':'')+' title="'+esc(tip||('Detalhar '+c.nome))+'" aria-label="'+esc('Detalhar '+c.nome+' · '+o.cnj)+'"><span>⋯ '+(recorded.length?String(recorded.length):'')+'</span></button>';
  }
  const title=c.id==='triagem.MPF'?'Dados do parecer':'Detalhes do controle';
  return '<details class="cog-inline-extras" data-cog-extras="'+esc(c.id)+'"'+(!applicable&&!recorded.length?' hidden':'')+'><summary title="'+esc(tip||title)+'">'+title+' <small data-extra-count>'+ (recorded.length||'')+'</small></summary><div class="cog-extra-fields">'+fields.map(f=>'<label><span>'+esc(f.nome)+'</span>'+cogInlineControl(o,f)+'</label>').join('')+'</div></details>';
 }
-function cogColCell(o,c){return '<td class="at-pr cog-ind-cell'+(c.custom?' cog-list-custom':'')+'" data-cog-tip="'+esc(c.nome)+'">'+cogInlineControl(o,c)+cogExtraMarkup(o,c)+'</td>';}
+function cogMatrixWidth(c){const m=cogColInfo(c);if(c.id==='triagem.O que falta sanar'||/Próxima ação|Detalhamento|Síntese/.test(c.id)||/^(texto-longo|longo)$/.test(m.tip))return 'long';if(/Destino|Pronunciamento|Tipo de ato|Hipóteses|Art\. 932|Tipo de Julgamento/.test(c.id))return 'wide';if(m.opts.length)return 'choice';return 'normal';}
+function cogColCell(o,c){return '<td class="at-pr cog-ind-cell cog-mw-'+cogMatrixWidth(c)+(c.custom?' cog-list-custom':'')+'" data-cog-tip="'+esc(c.nome)+'">'+cogInlineControl(o,c)+cogExtraMarkup(o,c)+'</td>';}
 function cogPreparoAlert(v){
  const money=x=>{const t=String(x||'').replace(/R\$\s*/g,'').trim();if(!t)return null;const n=Number(t.includes(',')?t.replace(/\./g,'').replace(',','.'):t);return Number.isFinite(n)?n:null;},s=nz(v.situacao),a=money(v.valor_devido),b=money(v.valor_recolhido),L=[];
  if(s==='comprovado'&&v.conferencia_stn!=='Confirmado')L.push('Preparo comprovado sem confirmação STN.');
@@ -4008,7 +4025,7 @@ async function cogCriterionDialog(o,parent){
 D.addEventListener('click',e=>{const b=e.target.closest?.('[data-cog-criterion]');if(!b)return;e.preventDefault();e.stopPropagation();const o=IDX.get(b.dataset.d);if(o)cogCriterionDialog(o,b.dataset.cogCriterion);},true);
 function cogRefreshExtras(el,o,c){
  const td=el.closest('td'),parent=cogExtraParent(c)||c.id,btn=td?.querySelector('[data-cog-criterion]'),detail=td?.querySelector('details[data-cog-extras]');
- if(btn&&btn.dataset.cogCriterion===parent){const fields=cogExtraFields(parent),rec=fields.filter(f=>cogColValue(o,f).trim()),main=cogFindColumn(parent);btn.hidden=['triagem.Tipo de Julgamento','producao.Mono - Tipo de ato'].includes(parent)&&!rec.length&&!cogExtraApplicable(parent,main?cogColValue(o,main):'');btn.classList.toggle('has-reg',!!rec.length);btn.title=rec.map(f=>f.nome+': '+cogColValue(o,f)).join('\n')||'Informações complementares';btn.querySelector('span').textContent='⋯ Detalhes'+(rec.length?' · '+rec.length:'');}
+ if(btn&&btn.dataset.cogCriterion===parent){const fields=cogExtraFields(parent),rec=fields.filter(f=>cogColValue(o,f).trim()),main=cogFindColumn(parent);btn.hidden=['triagem.Tipo de Julgamento','producao.Mono - Tipo de ato'].includes(parent)&&!rec.length&&!cogExtraApplicable(parent,main?cogColValue(o,main):'');btn.classList.toggle('has-reg',!!rec.length);btn.title=rec.map(f=>f.nome+': '+cogColValue(o,f)).join('\n')||'Informações complementares';btn.querySelector('span').textContent='⋯'+(rec.length?' '+rec.length:'');}
  if(!detail||detail.dataset.cogExtras!==parent)return;
  const fields=cogExtraFields(parent),recorded=fields.filter(f=>cogColValue(o,f).trim()),main=cogFindColumn(parent);
  detail.hidden=!cogExtraApplicable(parent,main?cogColValue(o,main):'')&&!recorded.length;
@@ -4033,7 +4050,7 @@ function cogListTools(){const G=cogColAgrupar(cogColVis());if(!cogListCompact()&
 D.addEventListener('click',e=>{const b=e.target.closest?.('[data-cog-context]');if(!b)return;e.preventDefault();LS.set('cog_list_compact_'+COG,!cogListCompact());refazAtTab();},true);
 D.addEventListener('change',e=>{const b=e.target.closest?.('[data-cog-jump]');if(!b||!b.value)return;const box=D.querySelector('.cog-unified-scroll'),th=box&&[...box.querySelectorAll('[data-cog-group]')].find(x=>x.dataset.cogGroup===b.value);if(th){const fixed=box.querySelector('.cog-fix-cnj'),w=(fixed?.offsetWidth||230)+(box.querySelector('.cog-fix-check')?.offsetWidth||32);box.scrollLeft+=th.getBoundingClientRect().left-box.getBoundingClientRect().left-w;}b.value='';});
 
-D.addEventListener('input',e=>{const el=e.target;if(!el.matches?.('.cog-pend-input'))return;el.style.height='auto';el.style.height=Math.max(44,el.scrollHeight+2)+'px';},true);
+D.addEventListener('input',e=>{const el=e.target;if(!el.matches?.('.cog-pend-input'))return;el.style.height='44px';},true);
 function cogMatPrefId(){return (COG==='triagem'?'':COG+'-')+(COG_LOTE?.id||'geral');}
 function cogMatLayout(){
  const S=cogColDefs().map(f=>({id:f[0],nome:f[1],field:f})),C=(COG_LOTE?COG_LOTE.colunas_triagem||[]:[]).map(c=>({id:c.id,nome:c.nome,custom:c})),prefKey='cog_mat_cols_'+cogMatPrefId(),old=LS.get(prefKey,null),canon=k=>['triagem.Tema','triagem.Especificidades'].includes(k)?'triagem.Detalhamento do caso':k,uniq=L=>[...new Set(L.map(canon))],p=old?{...old,ord:uniq(old.ord||[]),hidden:uniq(old.hidden||[]),monitorV2:true}:null,sort=L=>p?L.slice().sort((a,b)=>{const i=p.ord.indexOf(a.id),j=p.ord.indexOf(b.id);return (i<0?999:i)-(j<0?999:j);}):L;
