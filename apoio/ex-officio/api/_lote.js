@@ -474,6 +474,35 @@ async function gravar(req, res, u, gestor) {
   if (!ID.test(id)) return res.status(400).json({ erro: 'Identificador inválido: use letras, números e hífen (até 40).' });
   const ss = [...new Set((Array.isArray(b.sessoes) ? b.sessoes : []).filter(s => DATA.test(s)))].sort();
   const rel = 'acervo/lotes/' + id + '.json';
+  /* Colunas de análise da triagem: dados próprios do lote, não substituem campos da ficha.
+     Alterações pontuais, sob o mesmo controle de concorrência do Collectio. */
+  if (b.acao === 'triagem-coluna' || b.acao === 'triagem-celula') {
+    for (let t=0;t<4;t++) {
+      const {dados:lote,sha}=await lerLote(rel).catch(nada);
+      if (!lote || lote.tipo!=='triagem') return res.status(404).json({erro:'Lote de triagem não encontrado.'});
+      const C=Array.isArray(lote.colunas_triagem)?lote.colunas_triagem:[];
+      const col=String(b.coluna||'');
+      if (b.acao==='triagem-coluna') {
+        const nome=String(b.nome||'').trim().slice(0,80),tipo=String(b.tipo||'texto');
+        if (!nome||!['texto','longo','lista','simnao','numero','data','id'].includes(tipo)||C.length>=30) return res.status(400).json({erro:'Coluna inválida ou limite de 30 colunas atingido.'});
+        if (C.some(c=>c.nome.toLowerCase()===nome.toLowerCase())) return res.status(409).json({erro:'Já existe uma coluna com esse nome.'});
+        const opcoes=tipo==='lista'?[...new Set((Array.isArray(b.opcoes)?b.opcoes:[]).map(x=>String(x).trim().slice(0,120)).filter(Boolean))].slice(0,40):tipo==='simnao'?['Sim','Não','A verificar','Não se aplica']:[];
+        if(tipo==='lista'&&!opcoes.length)return res.status(400).json({erro:'Informe as opções da lista.'});
+        C.push({id:'c-'+require('crypto').randomBytes(6).toString('hex'),nome,tipo,opcoes});lote.colunas_triagem=C;
+      } else {
+        const c=C.find(x=>x.id===col);if(!c)return res.status(400).json({erro:'Coluna não encontrada.'});
+        const valor=String(b.valor??'').slice(0,c.tipo==='longo'?10000:1000);
+        if(valor&&((['lista','simnao'].includes(c.tipo)&&!c.opcoes.includes(valor))||(c.tipo==='numero'&&!Number.isFinite(Number(valor)))||(c.tipo==='data'&&!DATA.test(valor))||(c.tipo==='id'&&!/^\d+$/.test(valor))))return res.status(400).json({erro:'Valor incompatível com o tipo de coluna.'});
+        const ps=new Set((Array.isArray(b.processos)?b.processos:[b.processo]).map(String));const I=(lote.itens||[]).filter(it=>ps.has(it.processo));
+        if(!I.length||I.length!==ps.size)return res.status(400).json({erro:'Há processos fora deste lote.'});
+        for(const it of I){it.valores_triagem=Object.assign({},it.valores_triagem||{}, {[col]:valor});}
+      }
+      lote.atualizado_em=new Date().toISOString().slice(0,10);
+      try {await gravarLote(rel,lote,sha,'Collectio ('+u+'): análise personalizada do lote '+id);return res.status(200).json({ok:true,id,colunas_triagem:C});}
+      catch(e){if(e.status!==409&&e.status!==422)throw e;}
+    }
+    return res.status(409).json({erro:'O lote mudou; tente novamente.'});
+  }
   if (b.acao === 'matriz') {
     const grupos = Array.isArray(b.grupos) ? limpaGrupos(b.grupos) : null, colunas = Array.isArray(b.colunas) ? limpaColunas(b.colunas) : null;
     const marcas = (Array.isArray(b.itens) ? b.itens : []).filter(x => x && /^\d{7}-\d{2}\.\d{4}\.\d\.\d{2}\.\d{4}$/.test(String(x.processo || ''))).slice(0, 800);
