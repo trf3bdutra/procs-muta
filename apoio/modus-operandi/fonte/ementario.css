@@ -730,3 +730,30 @@ html.emb-cmt body #e-aside{top:0!important;max-height:100vh!important}
 .pp-metadados>.pp-chip.ok b{color:var(--good)}
 .pp-metadados>.pp-chip-muted b{color:var(--mut);font-weight:500}
 @media(max-width:520px){.pp-metadados>span.pp-chip{padding:5px 7px}.pp-metadados>.pp-chip b{font-size:11px}}
+
+/* Tipologia visual: natureza do ato, espécie de apreciação e desfecho são dimensões distintas. */
+.e-dhead.pp .e-tag.A{background:#235a55;color:#fff;border-color:#235a55;letter-spacing:.07em}
+.e-dhead.pp .e-tag.M{background:#805b18;color:#fff;border-color:#805b18;letter-spacing:.07em}
+.pp-metadados>span.pp-chip{--tag-tone:var(--mut);--tag-fill:var(--card);display:inline-flex;flex-direction:row;align-items:center;gap:6px;padding:5px 8px 5px 7px;background:var(--tag-fill)!important;border:1px solid color-mix(in srgb,var(--tag-tone) 40%,var(--line))!important;color:var(--tag-tone)!important}
+.pp-metadados>span.pp-chip>.pp-chip-info{display:flex;flex-direction:column;gap:2px;align-items:flex-start;border:0;padding:0;background:transparent;border-radius:0;font-weight:inherit;color:inherit;min-width:0}
+.pp-metadados .pp-chip-icon{width:15px;height:15px;flex:0 0 15px;color:var(--tag-tone)}
+.pp-metadados>.pp-chip small{color:var(--tag-tone);font-size:8px}
+.pp-metadados>.pp-chip b{font-size:11.5px;font-weight:650;color:var(--ink)}
+.pp-metadados>.pp-res{border-left:3px solid var(--tag-tone)!important}
+.pp-metadados>.pp-r-favoravel{--tag-tone:#386b4c;--tag-fill:#edf4ed}
+.pp-metadados>.pp-r-desfavoravel{--tag-tone:#a04b39;--tag-fill:#faf0e9}
+.pp-metadados>.pp-r-parcial{--tag-tone:#906418;--tag-fill:#fbf2da}
+.pp-metadados>.pp-r-processual{--tag-tone:#536578;--tag-fill:#edf0f4}
+.pp-metadados>.pp-ap-ed{--tag-tone:#66558a;--tag-fill:#f1edf7}
+.pp-metadados>.pp-ap-agint{--tag-tone:#355e85;--tag-fill:#edf2f8}
+.pp-metadados>.pp-ap-retrata{--tag-tone:#826528;--tag-fill:#f6f1e4}
+.pp-metadados>.pp-ap-recurso{--tag-tone:#235a55;--tag-fill:#edf3ef}
+.pp-metadados>.pp-inteiro{--tag-tone:#386b4c;--tag-fill:#f2f6f0}
+.pp-metadados>.pp-excerto{--tag-tone:#906418;--tag-fill:#fbf2da}
+:root:not([data-theme="light"]) .pp-metadados>span.pp-chip{--tag-fill:color-mix(in srgb,var(--tag-tone) 12%,var(--card))}
+:root:not([data-theme="light"]) .pp-metadados>.pp-r-favoravel,:root:not([data-theme="light"]) .pp-metadados>.pp-inteiro{--tag-tone:#9bc8a4}
+:root:not([data-theme="light"]) .pp-metadados>.pp-r-desfavoravel{--tag-tone:#e4a38c}
+:root:not([data-theme="light"]) .pp-metadados>.pp-r-parcial,:root:not([data-theme="light"]) .pp-metadados>.pp-excerto,:root:not([data-theme="light"]) .pp-metadados>.pp-ap-retrata{--tag-tone:#e6c27a}
+:root:not([data-theme="light"]) .pp-metadados>.pp-ap-ed{--tag-tone:#c5b3e5}
+:root:not([data-theme="light"]) .pp-metadados>.pp-ap-agint,:root:not([data-theme="light"]) .pp-metadados>.pp-r-processual{--tag-tone:#a4c1dc}
+:root:not([data-theme="light"]) .pp-metadados>.pp-ap-recurso{--tag-tone:#9fd6c2}
