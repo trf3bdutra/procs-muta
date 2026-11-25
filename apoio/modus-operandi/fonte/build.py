@@ -213,7 +213,7 @@ def montar(var):
     """var = 'compendio' (um só código: modo padrão para todos; modo avançado liberado pelo login, ver acesso.js)
              'editor'    (página do editor: grava no procs-muta pelo servidor; /editor/)"""
     t = t0
-    js = JS.replace('/*__EDITOR__*/', ((H/'editor.js').read_text(encoding='utf-8') if var == 'editor' else '') + '\n' + (H/'consulta.js').read_text(encoding='utf-8') + '\n' + (H/'consulta_2886.js').read_text(encoding='utf-8'))
+    js = JS.replace('/*__EDITOR__*/', ((H/'editor.js').read_text(encoding='utf-8') if var in ('editor', 'collectio') else '') + '\n' + (H/'consulta.js').read_text(encoding='utf-8') + '\n' + (H/'consulta_2886.js').read_text(encoding='utf-8'))
     css = (H/'ementario.css').read_text(encoding='utf-8') + (H/'consulta.css').read_text(encoding='utf-8') + (H/'consulta_2886.css').read_text(encoding='utf-8') + (H/'enciclopedia.css').read_text(encoding='utf-8') + (H/'editorial_d.css').read_text(encoding='utf-8')
     from escuro import escuro  # modo noturno de #v-edit (Minuta-Matriz, Modelos, Diretrizes), gerado de editorial_d.css
     css += escuro((H/'editorial_d.css').read_text(encoding='utf-8'))
@@ -245,7 +245,7 @@ def montar(var):
     SV = lambda d: '<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + d + '</svg>'
     # sem Notificações e Diligências na barra do Compendium (ficam no Ex Officio)
     t = troca(t, a, a + '    <a class="mon-lnk" href="https://trf3-muta.vercel.app/caput/" target="_blank" rel="noopener" title="Abrir o Caput" data-av hidden>Caput ' + ARR + '</a>'
-              + ('' if var == 'editor' else '<a class="mon-lnk" id="ed-lnk" href="/editor/" title="Abrir o editor do Compendium" hidden>Editor ' + ARR + '</a>') +
+              + ('' if var in ('editor', 'collectio') else '<a class="mon-lnk" id="ed-lnk" href="/editor/" title="Abrir o editor do Compendium" hidden>Editor ' + ARR + '</a>') +
               '<button class="hb ic" id="eq-atu" type="button" onclick="location.reload()" title="Atualizar" aria-label="Atualizar">' + SV('<path d="M20 11a8 8 0 1 0-2.34 5.66"/><path d="M20 4v7h-7"/>') + '</button>\n')
     # barra unificada com o Ex Officio: cadernos no título e as seções na faixa de baixo
     i0 = t.index('  <nav class="tabs" role="tablist"'); i1 = t.index('</nav>', i0) + len('</nav>\n')
@@ -257,13 +257,13 @@ def montar(var):
         l = l.strip(); lin[l.split('data-v="')[1].split('"')[0]] = l
     abas = ''.join(lin[v] for v in ordem if v in lin)
     SL = '<span class="nx-sl" aria-hidden="true">/</span>'
-    rotulo = ('<a class="eq-cmp" href="/amicus/compendium/">Compendium</a>' + SL + '<span class="eq-cmp eq-ed nx-on" aria-current="page">Editor<em>.</em></span>' if var == 'editor'
+    rotulo = ('<a class="eq-cmp nx-on" href="/amicus/collectio/" aria-current="page">Collectio<em>.</em></a>' if var == 'collectio' else '<a class="eq-cmp" href="/amicus/compendium/">Compendium</a>' + SL + '<span class="eq-cmp eq-ed nx-on" aria-current="page">Editor<em>.</em></span>' if var == 'editor'
               else '<a class="eq-cmp nx-on" href="/amicus/collegium/" aria-current="page">Collegium<em>.</em></a>' if var == 'collegium'
               else '<a class="eq-cmp nx-on" href="/amicus/compendium/" aria-current="page">Compendium<em>.</em></a>')
     k = t.index('<div class="brand tw"><i></i></div>\n') + len('<div class="brand tw"><i></i></div>\n')
     # barra editorial (Expediente), gêmea do Ex Officio: cadernos no título; as abas (.tab) seguem no cabeçalho, ocultas, e a faixa #cmp-nav as aciona
-    # barra do Amicus Curiae, a mesma do Collectio: marca "CMT · Amicus Curiae", título da ferramenta e, à direita dele, o atalho do Ex Officio.
-    # O Collectio não aparece aqui (nem o Compendium na barra do Collectio); o Ex Officio aparece nas duas.
+    # barra do Amicus Curiae, a mesma do CORTEX: marca "CMT · Amicus Curiae", título da ferramenta e, à direita dele, o atalho do Ex Officio.
+    # O CORTEX não aparece aqui (nem o Compendium na barra do CORTEX); o Ex Officio aparece nas duas.
     EXO = ('<nav class="nx-ir" aria-label="Outras ferramentas"><a class="nx-irl" href="/exofficio/#inicio" data-eqlink title="Ex Officio: pautas, cartões e ficha do processo">'
            + SV('<path d="M3 7h18M3 12h18M3 17h18"/>') + '<span>Ex Officio</span></a></nav>')
     t = t[:k] + ('  <div class="nx-bc"><span class="nx-ey">CMT · Amicus Curiae</span><nav class="nx-cad" aria-label="Amicus Curiae">' + rotulo + '</nav></div>' + EXO +
@@ -276,7 +276,7 @@ def montar(var):
               "try{var th=localStorage.getItem('cmt-eq-tema')||'light';document.documentElement.setAttribute('data-theme',th);}catch(e){}")
     t = troca(t, "localStorage.setItem('vdm-theme',nv);", "localStorage.setItem('vdm-theme',nv);localStorage.setItem('cmt-eq-tema',nv);")
     pre = ''
-    if var == 'editor':
+    if var in ('editor', 'collectio'):
         cab = lambda p: {k: v for k, v in ler(p).items() if k != 'registros'}
         meta = {'repo': 'trf3bdutra/procs-muta', 'ramo': 'main', 'arquivos': {
             'modelos': {'path': 'modelos/modelos.json', 'sha': blob_sha(RAIZ/'modelos/modelos.json'), 'head': cab(RAIZ/'modelos/modelos.json')},
@@ -286,8 +286,15 @@ def montar(var):
             'normas': {'path': 'apoio/repertorio-normativo-complemento.json', 'sha': blob_sha(RAIZ/'apoio/repertorio-normativo-complemento.json'), 'head': cab(RAIZ/'apoio/repertorio-normativo-complemento.json')}}}
         pre = '<script type="application/json" id="editor-meta">' + js_(meta) + '</script>\n'
         css += (H/'editor.css').read_text(encoding='utf-8')
-        js = 'window.VDM_EDITOR=true;window.VDM_PAGINA_EDITOR=true;\n' + js
-        t = t.replace('<title>Modus Operandi</title>', '<title>Editor · Compendium · Gabinete CMT</title>', 1)
+        if var == 'collectio':
+            js = 'window.VDM_COLLECTIO=true;window.VDM_EDITOR=false;window.VDM_PAGINA_EDITOR=true;\n' + js
+            t = t.replace('<title>Modus Operandi</title>', '<title>Collectio · Minutário · Gabinete CMT</title>', 1)
+            t = t.replace('<button data-s="dir" aria-selected="false">Breviário</button>', '<button data-s="par" aria-selected="false">Parágrafos</button>', 1)
+            js += '\n' + (H/'collectio.js').read_text(encoding='utf-8')
+            css += (H/'collectio.css').read_text(encoding='utf-8')
+        else:
+            js = 'window.VDM_EDITOR=true;window.VDM_PAGINA_EDITOR=true;\n' + js
+            t = t.replace('<title>Modus Operandi</title>', '<title>Editor · Compendium · Gabinete CMT</title>', 1)
     elif var == 'collegium':
         t = t.replace('<title>Modus Operandi</title>', '<title>Collegium · Turma Regional de MS · Gabinete CMT</title>', 1)
         # só o Ementário: as demais seções (Editorial, Diretrizes, Enunciados, Repertório, Enciclopédia) ficam fora da página
@@ -356,11 +363,12 @@ def gerar_html(var):
              ('</script>\n</body>', '</script>\n' + pre + '<script>\n' + js + '</script>\n</body>')]:
         assert t.count(a) == 1, a[:60]
         t = t.replace(a, b)
-    out = H.parent/('modus-operandi-editor.html' if var == 'editor' else 'collegium.html' if var == 'collegium' else 'modus-operandi.html')
+    out = H.parent/('collectio.html' if var == 'collectio' else 'modus-operandi-editor.html' if var == 'editor' else 'collegium.html' if var == 'collegium' else 'modus-operandi.html')
     out.write_text(t, encoding='utf-8')
     print(f'ok {out} {len(t)//1024} KB · {len(prec)} precedentes, {len(it)} inteiros teores, {len(mod)} modelos, {len(par)} parágrafos')
 gerar_html('compendio')
 gerar_html('editor')
+gerar_html('collectio')
 gerar_html('collegium')
 velho = H.parent/'modus-operandi-avancado.html'
 if velho.exists():
