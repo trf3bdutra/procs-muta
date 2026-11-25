@@ -1209,9 +1209,26 @@
       {
        "rotulo": "Hipóteses de monocrática",
        "chave": "Hipóteses Monocrática",
-       "tipo": "texto",
+       "tipo": "lista",
        "secao": "triagem",
-       "apelido": "hipoteses_monocratica"
+       "apelido": "hipoteses_monocratica",
+       "opcoes": [
+        "III · recurso inadmissível, prejudicado ou sem impugnação específica",
+        "IV a · contrário a súmula do STF, STJ ou do TRF",
+        "IV b · contrário a repetitivo do STF ou STJ",
+        "IV c · contrário a IRDR ou IAC",
+        "V a · decisão recorrida contrária a súmula",
+        "V b · decisão recorrida contrária a repetitivo",
+        "V c · decisão recorrida contrária a IRDR ou IAC",
+        "Não se aplica"
+       ]
+      },
+      {
+       "rotulo": "Nota de enquadramento no artigo 932",
+       "chave": "Art. 932 - Nota de enquadramento",
+       "tipo": "texto-longo",
+       "secao": "triagem",
+       "apelido": "art932_nota"
       },
       {
        "rotulo": "Lote de origem · histórico",
@@ -2527,6 +2544,14 @@
        "tipo": "texto",
        "secao": "producao",
        "apelido": "mono_titulo"
+      },
+      {
+       "rotulo": "Hipótese confirmada na produção",
+       "chave": "Art. 932 - Confirmação",
+       "tipo": "texto-longo",
+       "secao": "producao",
+       "apelido": "art932_confirmacao",
+       "regra": "Registro da hipótese e nota confirmadas, com autor e data."
       }
      ]
     },
