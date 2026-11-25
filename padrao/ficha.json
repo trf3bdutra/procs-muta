@@ -565,6 +565,126 @@
        "tipo": "texto-longo",
        "apelido": "impugnada_ementa_literal",
        "subgrupo": "Decisão impugnada · registro anterior"
+      },
+      {
+       "rotulo": "Capítulos de sucumbência dos pronunciamentos anteriores",
+       "chave": "Sucumbência da decisão recorrida",
+       "tipo": "tabela",
+       "secao": "origem",
+       "colunas": [
+        {
+         "chave": "pronunciamento",
+         "rotulo": "Pronunciamento de referência",
+         "tipo": "lista",
+         "opcoes": [
+          "Sentença",
+          "Decisão interlocutória / outra decisão",
+          "Decisão monocrática anterior",
+          "Acórdão anterior"
+         ]
+        },
+        {
+         "chave": "id_decisao",
+         "rotulo": "ID da decisão",
+         "tipo": "texto"
+        },
+        {
+         "chave": "capitulo",
+         "rotulo": "Capítulo / pedido",
+         "tipo": "texto"
+        },
+        {
+         "chave": "devedor",
+         "rotulo": "Parte devedora",
+         "tipo": "texto"
+        },
+        {
+         "chave": "credor",
+         "rotulo": "Parte credora",
+         "tipo": "texto"
+        },
+        {
+         "chave": "custas",
+         "rotulo": "Custas e despesas",
+         "tipo": "texto"
+        },
+        {
+         "chave": "gratuidade",
+         "rotulo": "Gratuidade",
+         "tipo": "lista",
+         "opcoes": [
+          "Deferida",
+          "Indeferida",
+          "Pendente",
+          "Revogada",
+          "Não se aplica",
+          "Não informada"
+         ]
+        },
+        {
+         "chave": "honorarios",
+         "rotulo": "Honorários fixados",
+         "tipo": "lista",
+         "opcoes": [
+          "Sim",
+          "Não",
+          "Não informado",
+          "Não se aplica"
+         ]
+        },
+        {
+         "chave": "criterio",
+         "rotulo": "Critério",
+         "tipo": "lista",
+         "opcoes": [
+          "Percentual",
+          "Valor certo",
+          "Equidade",
+          "Faixas da Fazenda Pública",
+          "Outro",
+          "Não informado"
+         ]
+        },
+        {
+         "chave": "percentual",
+         "rotulo": "Percentual (%)",
+         "tipo": "texto"
+        },
+        {
+         "chave": "valor",
+         "rotulo": "Valor fixado (R$)",
+         "tipo": "texto"
+        },
+        {
+         "chave": "base",
+         "rotulo": "Base de cálculo",
+         "tipo": "texto"
+        },
+        {
+         "chave": "distribuicao",
+         "rotulo": "Distribuição da sucumbência",
+         "tipo": "texto"
+        },
+        {
+         "chave": "suspensao",
+         "rotulo": "Exigibilidade suspensa",
+         "tipo": "lista",
+         "opcoes": [
+          "Sim",
+          "Não",
+          "Não informado",
+          "Não se aplica"
+         ]
+        },
+        {
+         "chave": "fundamento",
+         "rotulo": "Fundamento / observação",
+         "tipo": "texto-longo"
+        }
+       ],
+       "apelido": "sucumbencia_decisao_recorrida",
+       "subgrupo": "Sucumbência não vinculada",
+       "regra": "Uma linha por capítulo, vinculada ao ID do pronunciamento anterior ou ao tipo de pronunciamento quando o ID não estiver disponível. Não é a sucumbência do julgamento atual."
       }
      ]
     },
@@ -704,41 +824,7 @@
      ]
     },
     {
-     "grupo": "Outras peças e ocorrências",
-     "campos": [
-      {
-       "rotulo": "Outras peças",
-       "chave": "Outras peças",
-       "tipo": "tabela",
-       "secao": "origem",
-       "colunas": [
-        {
-         "chave": "tipo",
-         "rotulo": "Peça",
-         "tipo": "texto"
-        },
-        {
-         "chave": "ids",
-         "rotulo": "IDs",
-         "tipo": "texto"
-        },
-        {
-         "chave": "data",
-         "rotulo": "Data",
-         "tipo": "data"
-        },
-        {
-         "chave": "texto",
-         "rotulo": "Observação",
-         "tipo": "texto-longo"
-        }
-       ],
-       "apelido": "outras_pecas"
-      }
-     ]
-    },
-    {
-     "grupo": "Autos extraídos do PJe",
+     "grupo": "Teor dos autos · Documentos e peças",
      "campos": [
       {
        "rotulo": "Extraído em",
@@ -747,7 +833,8 @@
        "secao": "origem",
        "editavel": false,
        "regra": "do lote no Index (acervo/lotes); atualizado por scripts/lotes/alimentar.py",
-       "apelido": "autos_extraido"
+       "apelido": "autos_extraido",
+       "subgrupo": "Extração do PJe"
       },
       {
        "rotulo": "Documentos",
@@ -756,7 +843,8 @@
        "secao": "origem",
        "editavel": false,
        "regra": "do lote no Index (acervo/lotes); atualizado por scripts/lotes/alimentar.py",
-       "apelido": "autos_total"
+       "apelido": "autos_total",
+       "subgrupo": "Extração do PJe"
       },
       {
        "rotulo": "PDF sem texto (digitalizado)",
@@ -765,7 +853,8 @@
        "secao": "origem",
        "editavel": false,
        "regra": "do lote no Index (acervo/lotes); atualizado por scripts/lotes/alimentar.py",
-       "apelido": "autos_sem_texto"
+       "apelido": "autos_sem_texto",
+       "subgrupo": "Extração do PJe"
       },
       {
        "rotulo": "Lista de documentos (IDs)",
@@ -801,7 +890,177 @@
          "tipo": "texto"
         }
        ],
-       "apelido": "autos_documentos"
+       "apelido": "autos_documentos",
+       "subgrupo": "Extração do PJe"
+      },
+      {
+       "rotulo": "Outras peças",
+       "chave": "Outras peças",
+       "tipo": "tabela",
+       "secao": "origem",
+       "colunas": [
+        {
+         "chave": "tipo",
+         "rotulo": "Peça",
+         "tipo": "texto"
+        },
+        {
+         "chave": "ids",
+         "rotulo": "IDs",
+         "tipo": "texto"
+        },
+        {
+         "chave": "data",
+         "rotulo": "Data",
+         "tipo": "data"
+        },
+        {
+         "chave": "texto",
+         "rotulo": "Observação",
+         "tipo": "texto-longo"
+        }
+       ],
+       "apelido": "outras_pecas",
+       "subgrupo": "Peças e ocorrências complementares"
+      },
+      {
+       "rotulo": "Classificação documental por ID",
+       "chave": "Classificação documental",
+       "tipo": "tabela",
+       "secao": "origem",
+       "colunas": [
+        {
+         "chave": "id",
+         "rotulo": "ID",
+         "tipo": "texto"
+        },
+        {
+         "chave": "tipo",
+         "rotulo": "Tipo documental PJe",
+         "tipo": "texto"
+        },
+        {
+         "chave": "data",
+         "rotulo": "Data",
+         "tipo": "texto"
+        },
+        {
+         "chave": "classes",
+         "rotulo": "Classificações",
+         "tipo": "texto"
+        },
+        {
+         "chave": "sintese",
+         "rotulo": "Síntese documental",
+         "tipo": "texto-longo"
+        },
+        {
+         "chave": "fato",
+         "rotulo": "Fato / requisito comprovado",
+         "tipo": "texto-longo"
+        },
+        {
+         "chave": "questoes",
+         "rotulo": "Questões vinculadas",
+         "tipo": "texto-longo"
+        },
+        {
+         "chave": "trecho",
+         "rotulo": "Trecho relevante",
+         "tipo": "texto-longo"
+        },
+        {
+         "chave": "paginas",
+         "rotulo": "Páginas",
+         "tipo": "texto"
+        },
+        {
+         "chave": "destinacao",
+         "rotulo": "Destinação textual",
+         "tipo": "texto"
+        },
+        {
+         "chave": "citar",
+         "rotulo": "Mencionar ID",
+         "tipo": "lista",
+         "opcoes": [
+          "Sim",
+          "Não",
+          "Não informado",
+          "Não se aplica"
+         ]
+        },
+        {
+         "chave": "origem",
+         "rotulo": "Origem da classificação",
+         "tipo": "texto"
+        },
+        {
+         "chave": "confirmada",
+         "rotulo": "Confirmada",
+         "tipo": "lista",
+         "opcoes": [
+          "Sim",
+          "Não",
+          "Não informado",
+          "Não se aplica"
+         ]
+        }
+       ],
+       "apelido": "classificacao_documental",
+       "subgrupo": "Classificação documental"
+      },
+      {
+       "rotulo": "Síntese dos autos · histórico",
+       "chave": "Registro - Teor dos autos",
+       "tipo": "texto-longo",
+       "secao": "triagem",
+       "editavel": false,
+       "regra": "do lote de triagem (acervo/lotes); atualizado por scripts/triagem/ficha_lote.py",
+       "apelido": "registro_teor_autos",
+       "subgrupo": "Registros históricos"
+      },
+      {
+       "rotulo": "Peças · notas e trechos históricos",
+       "chave": "Registro - Peças",
+       "tipo": "tabela",
+       "secao": "triagem",
+       "editavel": false,
+       "regra": "do lote de triagem (acervo/lotes); atualizado por scripts/triagem/ficha_lote.py",
+       "colunas": [
+        {
+         "chave": "data",
+         "rotulo": "Data",
+         "tipo": "data"
+        },
+        {
+         "chave": "id",
+         "rotulo": "ID",
+         "tipo": "texto"
+        },
+        {
+         "chave": "peca",
+         "rotulo": "Peça",
+         "tipo": "texto"
+        },
+        {
+         "chave": "pje",
+         "rotulo": "No PJe",
+         "tipo": "texto"
+        },
+        {
+         "chave": "nota",
+         "rotulo": "Nota da triagem",
+         "tipo": "texto-longo"
+        },
+        {
+         "chave": "trecho",
+         "rotulo": "Trecho dos autos",
+         "tipo": "texto-longo"
+        }
+       ],
+       "apelido": "registro_pecas",
+       "subgrupo": "Registros históricos"
       }
      ]
     },
@@ -842,99 +1101,6 @@
        "editavel": false,
        "regra": "do lote de triagem (acervo/lotes); atualizado por scripts/triagem/ficha_lote.py",
        "apelido": "registro_atualizado"
-      }
-     ]
-    },
-    {
-     "grupo": "Acompanhamento",
-     "campos": [
-      {
-       "rotulo": "Responsável pelo acompanhamento",
-       "chave": "Responsável",
-       "tipo": "texto",
-       "secao": "origem",
-       "apelido": "responsavel",
-       "vocabulario": "equipe",
-       "regra": "Selecionar no cadastro da equipe ou informar nome personalizado; preservar os nomes históricos."
-      },
-      {
-       "rotulo": "Solicitações manuais",
-       "chave": "Solicitações manuais",
-       "tipo": "texto-longo",
-       "secao": "origem",
-       "apelido": "solicitacoes_manuais",
-       "regra": "Registro JSON de solicitações manuais, com tipo, descrição, solicitante, data, autor e situação; independente dos pedidos recebidos por integração."
-      },
-      {
-       "rotulo": "Solicitações de despacho",
-       "chave": "Solicitações de despacho",
-       "tipo": "texto-longo",
-       "secao": "origem",
-       "apelido": "solicitacoes_despacho"
-      },
-      {
-       "rotulo": "Próximo pronunciamento",
-       "chave": "Próximo pronunciamento",
-       "tipo": "lista",
-       "secao": "origem",
-       "opcoes": [
-        "Acórdão",
-        "Monocrática terminativa",
-        "Decisão de urgência",
-        "Despacho",
-        "Decisão de admissibilidade",
-        "Juízo de retratação",
-        "Homologação / extinção",
-        "Decisão interlocutória"
-       ],
-       "apelido": "proximo_pronunciamento"
-      },
-      {
-       "rotulo": "Ato a proferir",
-       "chave": "Ato a proferir",
-       "tipo": "texto-longo",
-       "secao": "origem",
-       "apelido": "ato_a_proferir"
-      },
-      {
-       "rotulo": "Próxima providência",
-       "chave": "Próxima ação",
-       "tipo": "texto",
-       "secao": "origem",
-       "apelido": "proxima_acao",
-       "regra": "Etapa intermediária: vista ao MPF, diligência, intimação, sobrestamento ou verificação de prevenção, entre outras. Não altera o destino final."
-      },
-      {
-       "rotulo": "Conferência dos autos",
-       "chave": "Conferência dos autos",
-       "tipo": "texto-longo",
-       "secao": "origem",
-       "apelido": "conferencia_autos",
-       "regra": "JSON com decisões de preservação de registros históricos por campo, ID e valores comparados."
-      },
-      {
-       "rotulo": "Notas fixadas no prontuário",
-       "chave": "Notas fixadas",
-       "tipo": "texto-longo",
-       "secao": "origem",
-       "apelido": "notas_fixadas",
-       "regra": "Referências às linhas do registro Observações, em JSON; não substitui as notas."
-      },
-      {
-       "rotulo": "Notas",
-       "chave": "Observações",
-       "tipo": "texto-longo",
-       "secao": "origem",
-       "apelido": "observacoes"
-      },
-      {
-       "rotulo": "Situação registrada · histórico",
-       "chave": "Registro - Situação atual",
-       "tipo": "texto-longo",
-       "secao": "triagem",
-       "editavel": false,
-       "regra": "do lote de triagem (acervo/lotes); atualizado por scripts/triagem/ficha_lote.py",
-       "apelido": "registro_situacao_atual"
       }
      ]
     },
@@ -1361,209 +1527,6 @@
        "apelido": "sessao_atual_excel"
       }
      ]
-    },
-    {
-     "grupo": "Sucumbência da decisão recorrida",
-     "campos": [
-      {
-       "rotulo": "Capítulos de sucumbência",
-       "chave": "Sucumbência da decisão recorrida",
-       "tipo": "tabela",
-       "secao": "origem",
-       "colunas": [
-        {
-         "chave": "id_decisao",
-         "rotulo": "ID da decisão",
-         "tipo": "texto"
-        },
-        {
-         "chave": "capitulo",
-         "rotulo": "Capítulo / pedido",
-         "tipo": "texto"
-        },
-        {
-         "chave": "devedor",
-         "rotulo": "Parte devedora",
-         "tipo": "texto"
-        },
-        {
-         "chave": "credor",
-         "rotulo": "Parte credora",
-         "tipo": "texto"
-        },
-        {
-         "chave": "custas",
-         "rotulo": "Custas e despesas",
-         "tipo": "texto"
-        },
-        {
-         "chave": "gratuidade",
-         "rotulo": "Gratuidade",
-         "tipo": "lista",
-         "opcoes": [
-          "Deferida",
-          "Indeferida",
-          "Pendente",
-          "Revogada",
-          "Não se aplica",
-          "Não informada"
-         ]
-        },
-        {
-         "chave": "honorarios",
-         "rotulo": "Honorários fixados",
-         "tipo": "lista",
-         "opcoes": [
-          "Sim",
-          "Não",
-          "Não informado",
-          "Não se aplica"
-         ]
-        },
-        {
-         "chave": "criterio",
-         "rotulo": "Critério",
-         "tipo": "lista",
-         "opcoes": [
-          "Percentual",
-          "Valor certo",
-          "Equidade",
-          "Faixas da Fazenda Pública",
-          "Outro",
-          "Não informado"
-         ]
-        },
-        {
-         "chave": "percentual",
-         "rotulo": "Percentual (%)",
-         "tipo": "texto"
-        },
-        {
-         "chave": "valor",
-         "rotulo": "Valor fixado (R$)",
-         "tipo": "texto"
-        },
-        {
-         "chave": "base",
-         "rotulo": "Base de cálculo",
-         "tipo": "texto"
-        },
-        {
-         "chave": "distribuicao",
-         "rotulo": "Distribuição da sucumbência",
-         "tipo": "texto"
-        },
-        {
-         "chave": "suspensao",
-         "rotulo": "Exigibilidade suspensa",
-         "tipo": "lista",
-         "opcoes": [
-          "Sim",
-          "Não",
-          "Não informado",
-          "Não se aplica"
-         ]
-        },
-        {
-         "chave": "fundamento",
-         "rotulo": "Fundamento / observação",
-         "tipo": "texto-longo"
-        }
-       ],
-       "apelido": "sucumbencia_decisao_recorrida"
-      }
-     ]
-    },
-    {
-     "grupo": "Classificação documental",
-     "campos": [
-      {
-       "rotulo": "Classificação documental por ID",
-       "chave": "Classificação documental",
-       "tipo": "tabela",
-       "secao": "origem",
-       "colunas": [
-        {
-         "chave": "id",
-         "rotulo": "ID",
-         "tipo": "texto"
-        },
-        {
-         "chave": "tipo",
-         "rotulo": "Tipo documental PJe",
-         "tipo": "texto"
-        },
-        {
-         "chave": "data",
-         "rotulo": "Data",
-         "tipo": "texto"
-        },
-        {
-         "chave": "classes",
-         "rotulo": "Classificações",
-         "tipo": "texto"
-        },
-        {
-         "chave": "sintese",
-         "rotulo": "Síntese documental",
-         "tipo": "texto-longo"
-        },
-        {
-         "chave": "fato",
-         "rotulo": "Fato / requisito comprovado",
-         "tipo": "texto-longo"
-        },
-        {
-         "chave": "questoes",
-         "rotulo": "Questões vinculadas",
-         "tipo": "texto-longo"
-        },
-        {
-         "chave": "trecho",
-         "rotulo": "Trecho relevante",
-         "tipo": "texto-longo"
-        },
-        {
-         "chave": "paginas",
-         "rotulo": "Páginas",
-         "tipo": "texto"
-        },
-        {
-         "chave": "destinacao",
-         "rotulo": "Destinação textual",
-         "tipo": "texto"
-        },
-        {
-         "chave": "citar",
-         "rotulo": "Mencionar ID",
-         "tipo": "lista",
-         "opcoes": [
-          "Sim",
-          "Não",
-          "Não informado",
-          "Não se aplica"
-         ]
-        },
-        {
-         "chave": "origem",
-         "rotulo": "Origem da classificação",
-         "tipo": "texto"
-        },
-        {
-         "chave": "confirmada",
-         "rotulo": "Confirmada",
-         "tipo": "lista",
-         "opcoes": [
-          "Sim",
-          "Não",
-          "Não informado",
-          "Não se aplica"
-         ]
-        }
-       ],
-       "apelido": "classificacao_documental"
-      }
-     ]
     }
    ]
   },
@@ -1807,6 +1770,94 @@
        "editavel": false,
        "regra": "do lote de triagem (acervo/lotes); atualizado por scripts/triagem/ficha_lote.py",
        "apelido": "registro_triagem"
+      },
+      {
+       "rotulo": "Responsável pelo acompanhamento",
+       "chave": "Responsável",
+       "tipo": "texto",
+       "secao": "origem",
+       "apelido": "responsavel",
+       "vocabulario": "equipe",
+       "regra": "Selecionar no cadastro da equipe ou informar nome personalizado; preservar os nomes históricos."
+      },
+      {
+       "rotulo": "Solicitações manuais",
+       "chave": "Solicitações manuais",
+       "tipo": "texto-longo",
+       "secao": "origem",
+       "apelido": "solicitacoes_manuais",
+       "regra": "Registro JSON de solicitações manuais, com tipo, descrição, solicitante, data, autor e situação; independente dos pedidos recebidos por integração."
+      },
+      {
+       "rotulo": "Solicitações de despacho",
+       "chave": "Solicitações de despacho",
+       "tipo": "texto-longo",
+       "secao": "origem",
+       "apelido": "solicitacoes_despacho"
+      },
+      {
+       "rotulo": "Próximo pronunciamento",
+       "chave": "Próximo pronunciamento",
+       "tipo": "lista",
+       "secao": "origem",
+       "opcoes": [
+        "Acórdão",
+        "Monocrática terminativa",
+        "Decisão de urgência",
+        "Despacho",
+        "Decisão de admissibilidade",
+        "Juízo de retratação",
+        "Homologação / extinção",
+        "Decisão interlocutória"
+       ],
+       "apelido": "proximo_pronunciamento"
+      },
+      {
+       "rotulo": "Ato a proferir",
+       "chave": "Ato a proferir",
+       "tipo": "texto-longo",
+       "secao": "origem",
+       "apelido": "ato_a_proferir"
+      },
+      {
+       "rotulo": "Próxima providência",
+       "chave": "Próxima ação",
+       "tipo": "texto",
+       "secao": "origem",
+       "apelido": "proxima_acao",
+       "regra": "Etapa intermediária: vista ao MPF, diligência, intimação, sobrestamento ou verificação de prevenção, entre outras. Não altera o destino final."
+      },
+      {
+       "rotulo": "Conferência dos autos",
+       "chave": "Conferência dos autos",
+       "tipo": "texto-longo",
+       "secao": "origem",
+       "apelido": "conferencia_autos",
+       "regra": "JSON com decisões de preservação de registros históricos por campo, ID e valores comparados."
+      },
+      {
+       "rotulo": "Notas fixadas no prontuário",
+       "chave": "Notas fixadas",
+       "tipo": "texto-longo",
+       "secao": "origem",
+       "apelido": "notas_fixadas",
+       "regra": "Referências às linhas do registro Observações, em JSON; não substitui as notas."
+      },
+      {
+       "rotulo": "Notas",
+       "chave": "Observações",
+       "tipo": "texto-longo",
+       "secao": "origem",
+       "apelido": "observacoes"
+      },
+      {
+       "rotulo": "Situação registrada · histórico",
+       "chave": "Registro - Situação atual",
+       "tipo": "texto-longo",
+       "secao": "triagem",
+       "editavel": false,
+       "regra": "do lote de triagem (acervo/lotes); atualizado por scripts/triagem/ficha_lote.py",
+       "apelido": "registro_situacao_atual"
       }
      ]
     },
@@ -2467,61 +2518,6 @@
        "tipo": "data",
        "secao": "triagem",
        "apelido": "retratacao_ed_data"
-      }
-     ]
-    },
-    {
-     "grupo": "Documentos e peças",
-     "campos": [
-      {
-       "rotulo": "Síntese dos autos · histórico",
-       "chave": "Registro - Teor dos autos",
-       "tipo": "texto-longo",
-       "secao": "triagem",
-       "editavel": false,
-       "regra": "do lote de triagem (acervo/lotes); atualizado por scripts/triagem/ficha_lote.py",
-       "apelido": "registro_teor_autos"
-      },
-      {
-       "rotulo": "Peças · notas e trechos históricos",
-       "chave": "Registro - Peças",
-       "tipo": "tabela",
-       "secao": "triagem",
-       "editavel": false,
-       "regra": "do lote de triagem (acervo/lotes); atualizado por scripts/triagem/ficha_lote.py",
-       "colunas": [
-        {
-         "chave": "data",
-         "rotulo": "Data",
-         "tipo": "data"
-        },
-        {
-         "chave": "id",
-         "rotulo": "ID",
-         "tipo": "texto"
-        },
-        {
-         "chave": "peca",
-         "rotulo": "Peça",
-         "tipo": "texto"
-        },
-        {
-         "chave": "pje",
-         "rotulo": "No PJe",
-         "tipo": "texto"
-        },
-        {
-         "chave": "nota",
-         "rotulo": "Nota da triagem",
-         "tipo": "texto-longo"
-        },
-        {
-         "chave": "trecho",
-         "rotulo": "Trecho dos autos",
-         "tipo": "texto-longo"
-        }
-       ],
-       "apelido": "registro_pecas"
       }
      ]
     }
