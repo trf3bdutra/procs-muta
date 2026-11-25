@@ -46,7 +46,7 @@
     if(G.aba==='Processo'&&G.rot==='tri'){
       var enc=caixa.querySelector('#pv-tri-enc'),rtop=caixa.querySelector('.rt-em-proc .rt-top')||caixa.querySelector('.rt-em-proc');
       if(enc&&rtop){
-        var ac=document.createElement('details');ac.className='card pv-acomp';ac.id='pv-acomp';if(G.pvAcAb)ac.open=true;
+        var ac=document.createElement('details');ac.className='card pv-acomp';ac.id='pv-acomp';ac.open=G.pvAcAb!==false;
         var dest=destGrav()||'destino a definir';
         ac.innerHTML='<summary>Acompanhamento<small>'+esc(dest)+(S(V('triagem','Seleção Prévia'))?' · seleção prévia: '+esc(V('triagem','Seleção Prévia')):'')+'</small></summary><div class="pv-acomp-b"></div>';
         var b=ac.querySelector('.pv-acomp-b');if(sit){sit.classList.add('pv-acomp-sit');b.appendChild(sit);}b.appendChild(enc);if(fol)b.appendChild(fol);

@@ -1191,6 +1191,7 @@ body.so-tri #modulos [data-mod]:not([data-mod=triagem]),body.so-tri #bt-acervo,b
 <script src="/padrao/acervo-fonte.js"></script>
 <script src="/init/assets/js/cmt-ficha.js"></script>
 <script src="/init/assets/js/cmt-ficha-monitor.js"></script>
+<script src="/extensao/previa/painel/prontuario-host.js"></script>
 <script src="/init/assets/js/regras-gerais.js"></script>
 <link rel="stylesheet" href="/init/motor/assets/css/02-calendario.css">
 <script src="/init/motor/assets/js/11-calendario.js"></script>
@@ -4373,7 +4374,7 @@ function entrarPeloLink() { return new Promise((fim) => {
     const k = [['Tarefa no PJe', x.tarefa || '—'], ['Seção', x.secao || '—'], ['Distribuição', x.dist ? A.br(x.dist) : '—'], ['Apreciação', p['Apreciação'] || '—'], ['Meta', p.Meta || (x.metas || []).join(' ') || '—'], ['Etapa', p.Etapa || situacao(x)], ['Minutante', x.servidor || '—'], ['Corretor', x.corretor || '—'], ['Tempestividade', p.Tempestividade || '—'], ['Preparo', p.Preparo || '—'], ['Intervenção do MPF', p['Intervenção MPF'] || '—'], ['Etiquetas', r.Etiquetas || r.etiquetas || '—'], ['Julgadores', (() => { let L = []; try { L = A.getSes()?.julgadoresDoItem?.(d.ss.id, x.cnj) || []; } catch (er) { L = []; } if (!L.length) L = julgDe(d.ss).composicao || []; return L.map((m) => m.nome + (m.substitui ? ' (substitui ' + m.substitui + ')' : '')).join(' · ') || '—'; })()], ['Pautas anteriores', (x.anteriores || []).join(' · ') || '—'], ['Pendências', p['Pendências'] || 'nenhuma']];
     return `<section class="cwe-prt" aria-label="Prontuário"><div class="cwe-prt-h"><span class="cwe-k">PRONTUÁRIO</span><b>Item ${e(x.item || '—')}</b><button type="button" class="cwe-cnj" data-cwt="ficha" data-p="${e(est.sel)}">${e(A.cnj(x.cnj))}</button><span>${e(x.assunto || '—')} · ${e(x.classe || '')}</span>${it.partes ? `<small>${e(it.partes)}</small>` : ''}
       <span class="cwe-prt-a"><button type="button" data-cwe="prt-prev" title="Anterior">‹</button><button type="button" data-cwe="prt-next" title="Próximo">›</button><button type="button" data-cwt="ficha" data-p="${e(est.sel)}">Abrir a ficha completa</button><button type="button" data-cwe="prt-x" title="Fechar">×</button></span></div>
-      <div class="cwe-prt-g">${k.map(([t, v]) => `<span><small>${e(t)}</small>${e(v)}</span>`).join('')}</div></section>`;
+      <div class="cwe-prt-g">${k.map(([t, v]) => `<span><small>${e(t)}</small>${e(v)}</span>`).join('')}</div>${W.CMTUniversal?W.CMTUniversal.html(x.cnj,{modo:'pro'}):''}</section>`;
   }
   function listagem(d, titulo) {
     const l = filtrar(d.lines), vis = l.slice(0, est.take);
@@ -4932,7 +4933,7 @@ function entrarPeloLink() { return new Promise((fim) => {
     const ss = selectedSession(); settings.sessId = ss?.id || ''; try { sessionStorage.setItem('pt-ses', settings.sessId); } catch (e) {}
     W.CMTEsteira.render(api);
   }
-  function abrirFicha(p) { if (digits(p).length !== 20) return msg('Número CNJ inválido para abrir a ficha.', true); try { const ss = selectedSession(); W.CMTProntuario.abrir(p, ss ? sesInfo(ss).lines.map((x) => digits(x.cnj)) : []); } catch (e) { msg('Falha ao abrir a ficha: ' + e.message, true); } }
+  function abrirFicha(p) { if (digits(p).length !== 20) return msg('Número CNJ inválido para abrir a ficha.', true); if(W.CMTUniversal){W.CMTUniversal.abrir(p,{modo:'pro'});return;} try { const ss = selectedSession(); W.CMTProntuario.abrir(p, ss ? sesInfo(ss).lines.map((x) => digits(x.cnj)) : []); } catch (e) { msg('Falha ao abrir a ficha: ' + e.message, true); } }
   const api = { view, settings, getMotor, getCore, getSes, sessionData, selectedSession, sesInfo, openFicha: abrirFicha, msg, render, esc, br, cnj, digits, norm };
   W.CMTPautas = api;
   /* comandos de página (data-cwt), sessão (data-cwt-ses) e importação do PDF da pauta */

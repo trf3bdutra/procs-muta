@@ -2939,10 +2939,10 @@ function visaoGeral() {
 /* funil de triagem: Com pendência, Prontos · monocrática, Prontos · sessão e, no resto, Não triados */
 function funilTriagem() {
   const pend = [], mono = [], ses = [], nao = [];
-  U.forEach((o) => { if (o.dest.k === 'esc') return;
-    if (o.pend.length && !o.dest.k) pend.push(o);
+  U.forEach((o) => { if (o.dest.k === 'esc' || o.dest.k==='outro') return;
+    if (o.pend.length && (!o.dest.k || o.dest.k==='sessao' || o.dest.k==='pauta')) pend.push(o);
     else if (o.dest.k === 'mono' || (!o.dest.k && !o.pend.length && (o.cand || (o.apto && o.monoE)))) mono.push(o);
-    else if (o.dest.k === 'pauta' || (!o.dest.k && !o.pend.length && o.apto)) ses.push(o);
+    else if ((o.dest.k === 'pauta' || o.dest.k === 'sessao') && !o.pend.length || (!o.dest.k && !o.pend.length && o.apto)) ses.push(o);
     else nao.push(o); });
   return { pend, mono, ses, nao }; }
 /* seleções prévias: uma por sessão futura; a ativa é a do próximo peço dia; mínimo de 1º julgamento igual para todas */

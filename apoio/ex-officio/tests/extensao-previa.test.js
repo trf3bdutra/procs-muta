@@ -157,7 +157,7 @@ test('universal: questões apenas em produção e campos operacionais com propri
  assert.match(s,/d\.after\(q\)/);
  assert.match(s,/return original\(g,c,null,Object\.assign/);
  assert.doesNotMatch(s,/ctx\.insertBefore\(q,/);
- assert.match(s,/field\('origem','Próxima ação','Próxima ação'\)/);
+ assert.match(s,/field\('origem','Próxima ação','Próxima fase \/ providência após o cumprimento'\)/);
  new Function(s);
 });
 
@@ -203,7 +203,7 @@ test('universal: encaminhamento editável na triagem e espelhado no cartão',()=
  const s=fs.readFileSync(path.join(ROOT,'scripts/extensao/previa/universal-layout.js'),'utf8');
  assert.match(s,/function encaminhamentoTriagem\(\)/);
  assert.match(s,/fragment\(atoSel\(\)\)/);
- assert.match(s,/campoRot\('triagem','Seleção Prévia','Seleção prévia'\)/);
+ assert.match(s,/data-fk="triagem.Seleção Prévia"/);assert.match(s,/campoRot\('pauta','Nova sessão de destino'/);
  assert.match(s,/f\.append\(encaminhamentoTriagem\(\)\)/);
  assert.match(s,/faixa\.prepend\(dest\);ato\.remove\(\)/);
  assert.match(s,/readRow\('Seleção prévia',V\('triagem','Seleção Prévia'\)\)/);
@@ -235,4 +235,8 @@ test('diálogo Ajustes controla preferências reais e conserva os controles orig
 test('próximo ato no título de Etapas, paleta neutra e faixa de três campos',()=>{
  const s=fs.readFileSync(path.join(ROOT,'scripts/extensao/previa/universal-layout.js'),'utf8'),c=fs.readFileSync(path.join(ROOT,'scripts/extensao/previa/universal-layout.css'),'utf8');
  assert.match(s,/pv-stage-head/);assert.match(s,/head\.append\(next\)/);assert.match(s,/faixa\.prepend\(dest\)/);assert.doesNotMatch(s,/faixa\.prepend\(next,dest\)/);assert.match(c,/--pv-bg:#f0f2f4/);assert.match(c,/grid-template-columns:repeat\(3,minmax\(0,1fr\)\)/);new Function(s);
+});
+
+test('site: mesma compilação da HERO, sem shim, com sessão real e CNJ fixo',()=>{
+ const dir=fs.mkdtempSync(path.join(os.tmpdir(),'muta-web-'));try{execFileSync('python3',[path.join(ROOT,'scripts/extensao/previa.py'),'--saida',dir]);const pn=path.join(dir,'painel'),h=fs.readFileSync(path.join(pn,'web.html'),'utf8');assert.match(h,/src="gabinete-universal.js"/);assert.match(h,/src="roteiro-universal.js"/);assert.match(h,/src="web-bootstrap.js"/);assert.doesNotMatch(h,/shim-previa|MUTA_PREVIA = true|src="sincronia.js"/);for(const [,arq] of h.matchAll(/<script src="([^"]+)"/g))assert.ok(fs.existsSync(path.join(pn,arq)),arq);assert.match(fs.readFileSync(path.join(pn,'gabinete-universal.js'),'utf8'),/Matriz e proposta/);}finally{fs.rmSync(dir,{recursive:true,force:true});}
 });

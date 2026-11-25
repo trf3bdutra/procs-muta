@@ -133,7 +133,6 @@
       if(S(V('triagem','Seleção Prévia'))==='SELECIONADO PREVIAMENTE')add(gr,campoRot('pauta','Nova sessão de destino','Sessão prevista (vazio = banco reserva)'));
     }
     gr.append(readRow('Etapa atual',etapas().L[etapas().n]?etapas().L[etapas().n].r:'Etapas registradas'));
-    add(gr,campoRot('producao','Destino - Situação','Situação para julgar (registro)'));
     gr.append(elem('small','muted','Seleção prévia não equivale à inclusão em pauta. A próxima fase deve indicar o que fazer depois do cumprimento, não apenas “aguardando”.'));
     box.append(gr);return box;
   }
@@ -152,7 +151,7 @@
     'origem.Responsável','origem.Próxima ação','origem.Observações',
     'producao.SERVIDOR','producao.CORRETOR','producao.MINUTADO','producao.CORRIGIDO',
     'producao.Data da Revisão','producao.LIBERADO','producao.Data da Liberação','producao.Assinado','producao.Data da Assinatura',
-    'triagem.Registro - Situação atual','triagem.Etiquetas','triagem.Etiquetas sugeridas','triagem.Seleção Prévia',
+    'triagem.Registro - Situação atual','triagem.Etiquetas','triagem.Etiquetas sugeridas','triagem.Seleção Prévia','pauta.Nova sessão de destino',
     'triagem.COMPLEXIDADE','triagem.Tipo de Voto','triagem.Hipóteses Monocrática'
   ];
   function productionExclusions(ja){
@@ -331,7 +330,7 @@
   MODOS=['Autos','Processo'];
   var renderBase=render0;
   render0=function(){
-    if(tabCnj!==G.cnj){tabCnj=G.cnj;identOpen=false;G.aba=window.MUTA_WEB?'Processo':'Autos';G.rot=window.MUTA_WEB?window.MUTA_WEB.modo:'tri';G.adEd=false;}
+    if(tabCnj!==G.cnj){tabCnj=G.cnj;identOpen=false;G.aba='Autos';G.rot='tri';if(window.MUTA_WEB){G.aba='Processo';G.rot=window.MUTA_WEB.modo;}G.adEd=false;}
     setupRoteiro();
     // Preserva a derivação e a sincronização antes de desenhar a produção, sem depender da antiga seta.
     if(G.aba==='Processo'&&G.rot==='pro'&&G.cnj&&G.op)try{autoGab();situacaoSync();}catch(e){}

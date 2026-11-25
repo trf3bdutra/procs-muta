@@ -407,7 +407,7 @@ function abertas(t) { return snLinhas(t).filter(function (l) { return !/^✓/.te
 function situacaoCalc() { var pd = abertas('pd'), ic = abertas('ic'); return { v: pd || ic ? 'Pendente' : 'Pronto para julgar', pd: pd, ic: ic }; }
 function situacaoSync() { if (window.MUTA_WEB || !G.cnj || !G.op || sitManual()) return; var c = situacaoCalc(); if (S(V('producao', 'Destino - Situação')) !== c.v) { marcar('producao.Destino - Situação', c.v); agendar(800); } }
 function situacaoHtml() {
-  var c = situacaoCalc(), man = sitManual(), motivo = [c.pd ? c.pd + (c.pd > 1 ? ' pendências' : ' pendência') : '', c.ic ? c.ic + (c.ic > 1 ? ' intercorrências' : ' intercorrência') : ''].filter(Boolean).join(' e ');
+  var c = situacaoCalc(), man = sitManual() || !!S(V('producao','Destino - Situação')), motivo = [c.pd ? c.pd + (c.pd > 1 ? ' pendências' : ' pendência') : '', c.ic ? c.ic + (c.ic > 1 ? ' intercorrências' : ' intercorrência') : ''].filter(Boolean).join(' e ');
   if (man) return '<div class="gf w pm-sitj"><span class="gl">Situação para julgar <i class="au-tag">à mão</i></span>' + chips('producao', 'Destino - Situação') + '<small class="muted">pelas sinalizações seria “' + esc(c.v) + '” · <button type="button" class="lnk" data-sitman="0">voltar ao cálculo</button></small></div>';
   return '<div class="gf w pm-sitj"><span class="gl">Situação para julgar</span><span class="pm-sitv ' + (c.v === 'Pendente' ? 'pend' : 'ok') + '">' + esc(c.v) + '</span><small class="muted">' + (motivo ? motivo + ' em aberto' : 'nenhuma pendência ou intercorrência em aberto') + ' · <button type="button" class="lnk" data-sitman="1" title="Para motivo que não está nas sinalizações">marcar à mão</button></small></div>';
 }
@@ -1060,7 +1060,7 @@ caixa.addEventListener('click', function (e) {
   if (b.dataset.snX) { var px = b.dataset.snX.split(':'), Lx = snLinhas(px[0]); Lx.splice(Number(px[1]), 1); snGravar(px[0], Lx); return; }
   if (b.hasAttribute('data-nt-add')) { notaIncluir(); return; }
   if (b.dataset.autog === 'desfazer') { autoGabDesfazer(); return; }
-  if (b.dataset.sitman) { sitManualSet(b.dataset.sitman === '1'); if (b.dataset.sitman === '0') situacaoSync(); render(); return; }
+  if (b.dataset.sitman) { sitManualSet(b.dataset.sitman === '1'); if (b.dataset.sitman === '0') { if(window.MUTA_WEB){marcar('producao.Destino - Situação',situacaoCalc().v);agendar(400);}else situacaoSync(); } render(); return; }
   if (b.hasAttribute('data-sn-add')) { G.snAb = !G.snAb; render(); var sx = $('sn-tx'); if (sx) sx.focus(); return; }
   if (b.hasAttribute('data-sn-inc')) { snIncluir(); return; }
   if (b.dataset.ntX != null) { var Ln = notasL(); Ln.splice(Number(b.dataset.ntX), 1); marcar('origem.Observações', Ln.join('\n')); agendar(500); render(); return; }
