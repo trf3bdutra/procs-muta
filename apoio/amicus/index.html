@@ -19,13 +19,66 @@ main{max-width:1420px}.busca{margin-top:22px;padding:20px}.pane-title{display:fl
 
 .overview{border:1px solid #d4dcd9;padding:10px;margin:12px 0}.overview summary{cursor:pointer;font-size:13px;font-weight:600}#flow-overview{overflow:auto;margin-top:10px}#flow-overview svg{width:100%;min-width:780px;max-height:660px}.flow-lane rect{fill:#edf2ef;stroke:#c2d0ca}.flow-lane text{font:600 10px system-ui;fill:#516b5f}.flow-edge{fill:none;stroke:#82968c;stroke-width:1.2;marker-end:url(#am-arrow);opacity:.7}.flow-edge.selected{stroke:#9b7a3c;stroke-width:2.7;opacity:1}.overview-node{cursor:pointer}.overview-node rect{fill:#fbfaf5;stroke:#7d9b8b}.overview-node text{fill:#213b43;font:500 11px system-ui}.overview-node.selected rect,.overview-node:focus-visible rect{stroke:#9b7a3c;stroke-width:3;fill:#f5efd9}html[data-theme=dark] .flow-lane rect{fill:#193441;stroke:#46626e}html[data-theme=dark] .flow-lane text{fill:#c5d2d8}
 .imp-actions{display:flex;gap:6px}.imp-scroll{overflow:auto;max-height:520px}.imp-table{border-collapse:collapse;width:100%;font-size:12px;line-height:1.45}.imp-table th,.imp-table td{padding:8px;text-align:left;vertical-align:top;border-bottom:1px solid #d4dcd9}.imp-table th{font-weight:600;white-space:nowrap}.imp-table td:first-child{font-weight:600}.imp-rule{padding:8px 0}.imp-rule h3{font-size:15px}.imp-rule li{margin:6px 0;font-size:13px}#imp-tabs button[aria-pressed=true]{background:#e9efed;color:#213b43;border-color:#2e615c}.full-panel .imp-scroll{max-height:70vh}
+
+/* Painel de Diligências · composição editorial: papel, filetes e rótulos mono */
+.am-dashboard{--ep:#fbfaf5;--ep2:#ece9df;--el:#d8d3c6;--el2:#c8c3b6;--ei:#203b39;--em:#55584f;--eg:#235a55;--eo:#a57829;--eo2:#805b18;--ew:#fff;--etx:rgba(32,59,57,.085);--emono:SFMono-Regular,Consolas,"Liberation Mono",ui-monospace,monospace;max-width:1680px;margin:18px auto 32px;padding:0 clamp(12px,2.4vw,34px);color:var(--ei)}
+html[data-theme=dark] .am-dashboard{--ep:#10222e;--ep2:#132835;--el:#1e3747;--el2:#2c4a5c;--ei:#ebeff1;--em:#a7a8a9;--eg:#6eba8a;--eo:#e6c27a;--eo2:#e6c27a;--ew:#16303e;--etx:rgba(235,239,241,.075)}
+.am-over-head{display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px solid var(--el);border-top:2px solid var(--eg);background:var(--ep);padding:12px 16px}
+.am-over-head h1{font:650 22px/1.25 Figtree,system-ui,sans-serif;letter-spacing:-.025em;margin:3px 0;color:var(--ei)}
+.am-dashboard :is(small,.am-number,.am-over-label){font:400 9.5px/1.4 var(--emono);letter-spacing:.11em;text-transform:uppercase;color:var(--em)}
+.am-over-head p,.am-area-title p{font-size:12px;line-height:1.35;margin:3px 0 0;color:var(--em)}
+.am-over-label{color:var(--eo2)!important;text-align:right}
+.am-over-nav{display:flex;gap:0;border:1px solid var(--el);border-top:0;background:var(--ep)}
+.am-over-nav a{flex:1;display:flex;align-items:center;gap:8px;padding:9px 14px;color:var(--ei);font-size:12px;font-weight:600;text-decoration:none;border-left:1px solid var(--el)}
+.am-over-nav a:first-child{border-left:0}.am-over-nav a span{font:400 11px var(--emono);color:var(--eo2)}.am-over-nav a:hover,.am-over-nav a:focus-visible{background:var(--ep2)}
+.am-area{margin-top:16px;border:1px solid var(--el);border-top:2px solid var(--eg);background-color:var(--ep);background-image:radial-gradient(var(--etx) 1px,transparent 1px);background-size:13px 13px;padding:0 14px 14px;scroll-margin-top:80px;min-width:0}
+.am-area-title{display:flex;gap:10px;align-items:flex-start;padding:10px 14px;margin:0 -14px 12px;border-bottom:1px solid var(--el);background:var(--ep)}
+.am-area-title .am-number{color:var(--eo2);font-size:13px;padding-top:2px}
+.am-area-title h2{font:650 15px/1.25 Figtree,system-ui,sans-serif;margin:0;color:var(--ei)}
+.am-dashboard .grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:0 0 10px}
+.am-dashboard a.card{padding:12px 14px;min-height:0;border:1px solid var(--el);border-left:3px solid var(--eg);border-top:1px solid var(--el);background:var(--ew);box-shadow:none;transform:none}
+.am-dashboard a.card:hover{border-color:var(--eg);box-shadow:none;transform:none}
+.am-dashboard .card h2{font:650 15px/1.3 Figtree,system-ui,sans-serif;margin:5px 0;color:var(--ei)}
+.am-dashboard .card p{font-size:12px;line-height:1.4;margin:0;color:var(--em)}
+.am-area-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;align-items:start}
+.am-area-grid>.busca{margin:0;min-width:0}
+.am-legal-grid>.busca:nth-child(2),.am-op-grid>#impedimentos{border-left:1px solid var(--el);margin-left:7px}
+.am-legal-grid>#enunciados,.am-op-grid>#competencia{margin-right:7px}
+.am-op-grid>#fluxos{grid-column:1/-1;margin-bottom:12px}
+.am-dashboard .busca{background:var(--ew);color:var(--ei);margin-top:0;border:1px solid var(--el);border-top:1px solid var(--el);border-left:3px solid var(--eg);padding:12px;min-width:0;scroll-margin-top:80px}
+.am-dashboard .busca h2{font:650 15px/1.3 Figtree,system-ui,sans-serif;margin:4px 0;color:var(--ei)}
+.am-dashboard .pane-title{margin:-12px -12px 8px;padding:9px 12px;background:var(--ep);border-bottom:1px solid var(--el);gap:6px}
+.am-dashboard .pane-title>div:first-child{flex:1 1 auto;min-width:0}
+.am-dashboard .pane-title a{font-size:11px;color:var(--eg)}
+.am-dashboard .busca>p,.am-dashboard .bdica,.am-dashboard .bmeta{font-size:11.5px;line-height:1.4;color:var(--em);margin:6px 0 10px}
+.am-dashboard .bq input[type=search],.am-dashboard .panel-filter :is(input[type=search],select),.am-dashboard .bf select{border-radius:0;border:1px solid var(--el2);background:var(--ep);color:var(--ei);font-size:12px;padding:7px 9px}
+.am-dashboard .bq button{font:600 12px Figtree,system-ui,sans-serif;letter-spacing:0;text-transform:none;background:var(--eg);color:var(--ep);padding:7px 15px}
+.am-dashboard .bf{gap:8px 16px;margin-top:9px;font-size:11.5px;color:var(--em)}
+.am-dashboard .bf legend{font:400 9.5px var(--emono)}
+.am-dashboard .more{border-radius:0;border:1px solid var(--el2);background:var(--ew);color:var(--ei);font-size:11px;padding:5px 8px}
+.am-dashboard .more:hover{border-color:var(--eg);color:var(--eg)}
+.am-dashboard .ref-list{max-height:430px;overflow:auto;scrollbar-width:thin}
+.am-dashboard .ref-list details,.am-dashboard .imp-table :is(th,td){border-color:var(--el)}
+.am-dashboard .ref-list details{font-size:12px;padding:7px 3px}
+.am-dashboard .ref-list p,.am-dashboard .comp-grid p{color:var(--ei);font-size:12px}
+.am-dashboard .comp-grid{grid-template-columns:minmax(0,1fr);gap:5px;max-height:510px;overflow:auto}
+.am-dashboard .comp-grid article{padding:8px 10px;border-color:var(--el);border-left-color:var(--eo)}
+.am-dashboard .comp-grid h3{font:600 12px Figtree,system-ui,sans-serif;color:var(--ei)}
+.am-dashboard .comp-grid p{margin:4px 0}
+.am-dashboard .flow-node,.am-dashboard .overview,.am-dashboard .federated section{border-radius:0;border-color:var(--el);color:var(--ei)}
+.am-dashboard .flow-node[aria-pressed=true],.am-dashboard [aria-pressed=true].more{background:var(--ep2);color:var(--ei);border-color:var(--eg)}
+.am-dashboard .flow-detail{border-color:var(--el)}
+.am-dashboard .busca.full-panel{position:fixed;inset:0;z-index:1000;margin:0!important;padding:20px;overflow:auto;background:var(--ep);max-width:none}
+.am-dashboard .full-panel .ref-list,.am-dashboard .full-panel .comp-grid{max-height:none;overflow:visible}
+.am-dashboard .full-panel .federated iframe{height:calc(100dvh - 220px);min-height:400px}
+@media(max-width:950px){.am-dashboard .am-area-grid{grid-template-columns:minmax(0,1fr);gap:10px}.am-dashboard .am-area-grid>.busca{margin:0!important;border-left:3px solid var(--eg)}.am-dashboard .am-op-grid>#fluxos{grid-column:auto}.am-dashboard .comp-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){.am-dashboard{margin-top:10px;padding:0 9px}.am-over-head{flex-wrap:wrap}.am-over-nav{flex-wrap:wrap}.am-over-nav a{flex-basis:100%;border-left:0;border-top:1px solid var(--el)}.am-over-nav a:first-child{border-top:0}.am-dashboard .grid,.am-dashboard .comp-grid{grid-template-columns:1fr}}
+
 </style></head><body><header><b>Amicus Curiae.</b><span>Gabinete CMT · Ferramentas</span></header>
-<main><small>Projeto · Amicus Curiae</small><h1>Triagem, organização e apoio à elaboração.</h1><p>Ferramentas integradas à organização de processos, precedentes, modelos e sessões do gabinete.</p>
-<!-- Collectio (/amicus/collectio/) fora da página inicial a pedido; o endereço continua funcionando -->
-<div class="grid"><a class="card" href="/amicus/compendium/"><small>01 · Compendium</small><h2>Conhecimento e modelos</h2><p>Consulta à base de apoio jurídico e aos instrumentos editoriais do gabinete.</p></a>
+<main class="am-dashboard"><div class="am-over-head"><div><small>Projeto · Amicus Curiae</small><h1>Visão geral</h1><p>Triagem, organização e apoio à elaboração.</p></div><span class="am-over-label">3 áreas · 6 painéis de consulta</span></div><nav class="am-over-nav" aria-label="Áreas da página"><a href="#ferramentas"><span>01</span> Ferramentas e pesquisa</a><a href="#referencias-juridicas"><span>02</span> Referências jurídicas</a><a href="#referencias-operacionais"><span>03</span> Referências operacionais</a></nav><section class="am-area" id="ferramentas" aria-labelledby="ferramentas-title"><div class="am-area-title"><span class="am-number">01</span><div><h2 id="ferramentas-title">Ferramentas e pesquisa</h2><p>Acesso aos componentes e pesquisa federada de jurisprudência.</p></div></div><div class="grid"><a class="card" href="/amicus/compendium/"><small>01 · Compendium</small><h2>Conhecimento e modelos</h2><p>Consulta à base de apoio jurídico e aos instrumentos editoriais do gabinete.</p></a>
 <a class="card" href="/amicus/cognitio/"><small>02 · Cognitio</small><h2>Acervo e triagem</h2><p>Triagem processual, seleção prévia para julgamento, decisões monocráticas e acompanhamento dos demais atos, com a ficha única do gabinete.</p></a>
 <a class="card" href="/amicus/collegium/"><small>03 · Collegium</small><h2>Jurisprudência da Turma</h2><p>Ementário dos demais gabinetes da Turma Regional de MS, sem os julgados do Relator: acórdãos e decisões monocráticas publicados no DJEN.</p></a></div>
-<section class="busca" aria-labelledby="bc-t"><small>Pesquisa federada · bases independentes</small><h2 id="bc-t">Jurisprudência</h2>
+<section class="busca" id="jurisprudencia" aria-labelledby="bc-t"><div class="pane-title"><div><small>Pesquisa federada · bases independentes</small><h2 id="bc-t">Jurisprudência</h2></div><button type="button" class="more" data-full="jurisprudencia">⛶ Tela cheia</button></div>
 <p>Uma pesquisa, duas fontes. Consulte os julgados do Relator Carlos Muta e os demais gabinetes da Turma Regional de MS, sem fundir os acervos.</p>
 <form id="bc" role="search" autocomplete="off">
 <div class="bq"><input type="search" id="bc-q" name="q" placeholder="Termos, &quot;frase exata&quot;, OU, -excluir, radical*" aria-label="Termos da busca"><button type="submit">Buscar</button></div>
@@ -39,14 +92,16 @@ main{max-width:1420px}.busca{margin-top:22px;padding:20px}.pane-title{display:fl
 <section data-source="col"><div class="pane-title"><div><small>Collegium · demais gabinetes</small><h3>Turma Regional de MS</h3></div><a id="bc-col-link" target="_blank" rel="noopener">Abrir ementário ↗</a></div><iframe title="Resultados dos demais gabinetes no Collegium" id="bc-col"></iframe></section>
 </div><p class="bmeta" id="bc-meta"></p></section>
 
-<section class="busca" id="enunciados"><div class="pane-title"><div><small>Compendium · Vade Mecum</small><h2>Enunciados</h2></div><a href="/amicus/compendium/#v=temas">Abrir Compendium ↗</a></div>
+</section><section class="am-area" id="referencias-juridicas" aria-labelledby="referencias-juridicas-title"><div class="am-area-title"><span class="am-number">02</span><div><h2 id="referencias-juridicas-title">Referências jurídicas</h2><p>Consulta ao Vade Mecum e ao Regimento Interno.</p></div></div><div class="am-area-grid am-legal-grid"><section class="busca" id="enunciados"><div class="pane-title"><div><small>Compendium · Vade Mecum</small><h2>Enunciados</h2></div><a href="/amicus/compendium/#v=temas">Abrir Compendium ↗</a><button type="button" class="more" data-full="enunciados">⛶ Tela cheia</button></div>
 <p>Temas e súmulas do repertório do gabinete, consultados na mesma fonte utilizada pelo Compendium.</p>
 <div class="panel-filter"><input type="search" id="en-q" placeholder="Número, assunto, tese ou enunciado…" aria-label="Buscar enunciados"><select id="en-t" aria-label="Tipo de enunciado"><option value="">Temas e súmulas</option><option value="Temas">Temas</option><option value="Súmulas">Súmulas</option></select><select id="en-o" aria-label="Tribunal"><option value="">Todos os órgãos</option></select></div><p id="en-meta" class="bmeta"></p><div id="en-list" class="ref-list"></div><button class="more" id="en-more" hidden>Mostrar mais</button></section>
 
-<section class="busca" id="fluxos"><div class="pane-title"><div><small>Central de Comando · referência operacional</small><h2>Fluxos de trabalho</h2></div><button type="button" class="more" data-full="fluxos">⛶ Tela cheia</button></div>
+<section class="busca" id="regimento"><div class="pane-title"><div><small>Regimento Interno · fonte do Compendium</small><h2>Regimento Interno</h2></div><a href="/amicus/compendium/#v=rep">Abrir Repertório ↗</a><button type="button" class="more" data-full="regimento">⛶ Tela cheia</button></div><p>Consulta por artigo, assunto ou palavra; texto e notas da base regimental existente.</p>
+<div class="panel-filter"><input type="search" id="rit-q" placeholder="Artigo 33, prevenção, sessão…" aria-label="Buscar artigos"><select id="rit-p" aria-label="Parte do Regimento"><option value="">Todas as partes</option></select><label><input id="rit-rev" type="checkbox"> Incluir revogados</label></div><p class="bmeta" id="rit-meta"></p><div id="rit-list" class="ref-list"></div><button class="more" id="rit-more" hidden>Mostrar mais</button></section>
+</div></section><section class="am-area" id="referencias-operacionais" aria-labelledby="referencias-operacionais-title"><div class="am-area-title"><span class="am-number">03</span><div><h2 id="referencias-operacionais-title">Referências operacionais</h2><p>Fluxos, competência e registros de imparcialidade.</p></div></div><div class="am-area-grid am-op-grid"><section class="busca" id="fluxos"><div class="pane-title"><div><small>Central de Comando · referência operacional</small><h2>Fluxos de trabalho</h2></div><button type="button" class="more" data-full="fluxos">⛶ Tela cheia</button></div>
 <p>Percursos do fluxograma do HTML de referência. Selecione uma via para examinar etapas e transições. Não representa contagem atual de processos.</p><details class="overview" open><summary>Mapa geral · tarefas e conexões</summary><div id="flow-overview"></div><p id="flow-overview-note" aria-live="polite" class="bmeta">Selecione uma tarefa para consultar as transições.</p></details><div id="flow-tabs" class="panel-filter flow-tabs"></div><div id="flow-description" class="bmeta"></div><div id="flow-map" class="flow-map"></div><div id="flow-step" class="flow-detail" aria-live="polite"></div></section>
 
-<section class="busca" id="competencia"><small>Central de Comando · referência</small><h2>Competência</h2><p>Turma Regional de Mato Grosso do Sul, competência delegada e distribuição por matéria nas Seções do TRF3. Síntese do material fornecido, sujeita à conferência normativa.</p>
+<section class="busca" id="competencia"><div class="pane-title"><div><small>Central de Comando · referência</small><h2>Competência</h2></div><button type="button" class="more" data-full="competencia">⛶ Tela cheia</button></div><p>Turma Regional de Mato Grosso do Sul, competência delegada e distribuição por matéria nas Seções do TRF3. Síntese do material fornecido, sujeita à conferência normativa.</p>
 <div class="comp-grid">
 <article><h3>Turma Regional de MS</h3><p>Instituição: Res. PRES 33/2025. Jurisdição: Seção Judiciária de MS, excluídos processos criminais e de improbidade administrativa, conforme o material de referência. Composição: três membros.</p><p>Implantação: Portaria PRES 4528/2026. Acervo por desmembramento gradual.</p></article>
 <article><h3>Competência delegada</h3><p>Causas previdenciárias na Justiça Estadual nas hipóteses indicadas no artigo 109, §§ 3º e 4º, da Constituição Federal e Lei 13.876/2019. O recurso da sentença do juízo estadual sobe ao TRF3.</p></article>
@@ -60,9 +115,7 @@ main{max-width:1420px}.busca{margin-top:22px;padding:20px}.pane-title{display:fl
 <p id="imp-status" class="bmeta" role="status">Consultando referencial interno…</p>
 <div id="imp-body" hidden><div class="panel-filter"><input type="search" id="imp-q" placeholder="Julgador, advogado, OAB, vara, processo…" aria-label="Buscar impedimentos e suspeições"><select id="imp-judge" aria-label="Julgador"><option value="">Todos os julgadores</option></select><select id="imp-type" aria-label="Tipo de registro"><option value="">Impedimento e suspeição</option><option value="imp">Impedimento</option><option value="susp">Suspeição</option></select></div>
 <div id="imp-tabs" class="panel-filter" role="group" aria-label="Conteúdo do referencial"></div><div id="imp-content" class="ref-list"></div></div></section>
-<section class="busca" id="regimento"><div class="pane-title"><div><small>Regimento Interno · fonte do Compendium</small><h2>Regimento Interno</h2></div><a href="/amicus/compendium/#v=rep">Abrir Repertório ↗</a></div><p>Consulta por artigo, assunto ou palavra; texto e notas da base regimental existente.</p>
-<div class="panel-filter"><input type="search" id="rit-q" placeholder="Artigo 33, prevenção, sessão…" aria-label="Buscar artigos"><select id="rit-p" aria-label="Parte do Regimento"><option value="">Todas as partes</option></select><label><input id="rit-rev" type="checkbox"> Incluir revogados</label></div><p class="bmeta" id="rit-meta"></p><div id="rit-list" class="ref-list"></div><button class="more" id="rit-more" hidden>Mostrar mais</button></section>
-<script type="application/json" id="amicus-references">{"Temas":[],"Súmulas":[],"Regimento":[]}</script>
+</div></section><script type="application/json" id="amicus-references">{"Temas":[],"Súmulas":[],"Regimento":[]}</script>
 <script>
 (function(){
 'use strict';
