@@ -2427,3 +2427,16 @@ html body.hero-redesign-v53 #gab .rt-c>.rt-h b{font:650 12px/1.35 var(--sans,sys
 html body.hero-redesign-v53 #gab .rt-c .rt-b{padding:6px 9px!important}
 html body.hero-redesign-v53 #panel-min,html body.hero-redesign-v53 #panel-min .min-wrap,html body.hero-redesign-v53 #panel-min .hero-review-workspace,html body.hero-redesign-v53 #panel-min .hero-review-divider{background:var(--hero-pront-header,#f1eee5)!important}
 html body.hero-redesign-v53 #panel-min .hero-review-document,html body.hero-redesign-v53 #panel-min .hero-conf-dock{background:var(--hero-pront-paper,#fff)!important}
+
+/* Corretor: cabeçalho em uma linha; busca como rodapé da folha de referência. */
+html body.hero-redesign-v53 #panel-min .hero-review-document .mn-ed-h{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(78px,34%) auto!important;align-items:center!important;gap:6px!important;flex-wrap:nowrap!important;padding:8px 10px!important}
+html body.hero-redesign-v53 #panel-min .hero-review-document .mn-ed-h>.sp{display:none!important}
+html body.hero-redesign-v53 #panel-min .hero-review-document .mn-tg{min-width:0!important;display:flex!important;flex-direction:column!important;align-items:flex-start!important;gap:2px!important;text-align:left!important}
+html body.hero-redesign-v53 #panel-min .hero-review-document .mn-tg b{font-size:11.5px!important;line-height:1.3!important;white-space:nowrap}
+html body.hero-redesign-v53 #panel-min .hero-review-document .mn-tg .muted{max-width:100%;overflow:hidden;text-overflow:ellipsis;font-size:9.5px!important}
+html body.hero-redesign-v53 #panel-min .hero-review-document .mn-ed-h>.hero-v53-pron{width:100%!important;min-width:0!important;max-width:100%!important;margin:0!important;font-size:10.5px!important}
+html body.hero-redesign-v53 #panel-min .hero-review-document .mn-ed-h>[data-c=ler]{min-width:38px;white-space:nowrap;padding:5px 8px!important;margin:0!important}
+html body.hero-redesign-v53 #panel-min .hero-review-part{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:5px 10px;border-bottom:1px solid var(--hero53-line);font-size:10px;color:var(--muted-fg)}
+html body.hero-redesign-v53 #panel-min .hero-review-part select{max-width:55%;min-width:0;font-size:10.5px}
+html body.hero-redesign-v53 #panel-min .hero-review-document .hero-v53-ref-search{margin:0!important;padding:0 11px!important;border:0!important;border-top:1px solid var(--hero53-line)!important;border-radius:0!important;background:var(--hero-pront-paper,#fff)!important}
+html body.hero-redesign-v53 #panel-min .hero-review-document .hero-v53-ref-search>summary{padding:8px 0!important;margin:0!important;font-size:11px!important}
