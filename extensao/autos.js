@@ -597,7 +597,7 @@ function linhaDoc(d) {
         '<div class="au-n"><b>' + esc(d.tipo) + '</b>' + (d.desc && N(d.desc) !== N(d.tipo) ? '<small>' + esc(d.desc) + '</small>' : '') + '</div>' +
         '<button type="button" class="mono lnk" data-copia="' + esc(d.id) + '" title="Copiar o ID">' + esc(d.id) + '</button></div>' +
         '<div class="au-inf">' + [d.rot, d.anexo ? 'anexo' : '', d.origem].filter(Boolean).map(function (x) { return '<span>' + esc(x) + '</span>'; }).join('') + (d.movs && d.movs.length && !d.anexo ? '<small>' + esc(d.movs.join(' · ')) + '</small>' : '') + '</div>' +
-        (GB().classificacaoDoc && !docBloq(d) ? GB().classificacaoDoc(d) : '') +
+        (GB().classificacaoDoc && !docBloq(d) ? GB().classificacaoDoc(d) : '') + notasHistoricasDoc(d) +
         /* 0.39: o detalhamento numa linha só; o inteiro teor num campo que se expande (lê o texto ao abrir) */
         '<input type="text" class="au-esp au-esp-l" data-esp="' + esc(d.id) + '" placeholder="Detalhamento (vai para Outras peças da ficha)" title="Vai para Outras peças e ocorrências da ficha" value="' + esc(espDe(d.id)) + '">' +
         '<details class="au-it" data-au-it="' + esc(d.id) + '"' + (ab ? ' open' : '') + '><summary><span>Inteiro teor</span>' + estadoDoc(d.id) +
@@ -618,6 +618,19 @@ function docsDoGrupo(grupo) {
   L.forEach(function (d) { A.mostrados[d.id] = 1; });
   return L.length ? '<div class="au-docs au-dg">' + L.map(linhaDoc).join('') + '</div>' : '';
 }
+function historicoDocsFicha(L){
+ var gb=GB(),sig=window.MutaSigilo;if(!gb.gravado||sig&&(sig.bloqueado()||sig.sigiloso()))return '';
+ var v=S(gb.gravado('triagem','Registro - Teor dos autos')),R=gb.gravado('triagem','Registro - Peças');R=Array.isArray(R)?R:[];
+ var ids=new Set((L||[]).map(function(d){return S(d.id);}));
+ var H=R.filter(function(r){return !ids.has(S(r.id));});
+ var row=function(r){return ['peca','id','data','pje','nota','trecho'].map(function(k){return S(r[k])?'<p style="white-space:pre-wrap;overflow-wrap:anywhere"><b>'+esc({peca:'Peça',id:'ID',data:'Data',pje:'Referência PJe',nota:'Nota histórica do lote',trecho:'Trecho histórico do lote'}[k])+':</b> '+esc(r[k])+'</p>':'';}).join('');};
+ return (v?'<details class="pc-s" open><summary><b>Síntese geral dos autos · registro histórico</b></summary><p style="white-space:pre-wrap;overflow-wrap:anywhere">'+esc(v)+'</p></details>':'')+(H.length?'<details class="pc-s"><summary><b>Peças históricas fora da cronologia lida ('+H.length+')</b></summary>'+H.map(function(r){return '<div class="au-doc">'+row(r)+'</div>';}).join('')+'</details>':'');
+}
+function notasHistoricasDoc(d){
+ var gb=GB(),sig=window.MutaSigilo;if(!gb.gravado||docBloq(d)||sig&&(sig.bloqueado()||sig.sigiloso()||sig.docSigiloso&&sig.docSigiloso(d)))return '';
+ var R=gb.gravado('triagem','Registro - Peças');R=Array.isArray(R)?R.filter(function(r){return S(r.id)===S(d.id);}):[];
+ return R.length?'<details class="au-it"><summary>Notas e trechos históricos ('+R.length+')</summary>'+R.map(function(r){return ['peca','data','pje','nota','trecho'].map(function(k){return S(r[k])?'<p style="white-space:pre-wrap;overflow-wrap:anywhere"><b>'+esc({peca:'Peça',data:'Data',pje:'Referência PJe',nota:'Nota histórica do lote',trecho:'Trecho histórico do lote'}[k])+':</b> '+esc(r[k])+'</p>':'';}).join('');}).join('<hr>')+'</details>':'';
+}
 function htmlDocs(pecas) {
   A.mostrados = {};
   var F = A.filtro === 'todos' ? 'todos' : 'pecas', ok = A.itens && lidoDoProcesso();
@@ -625,7 +638,7 @@ function htmlDocs(pecas) {
   var L = ok ? lista() : [], P = ok ? principais() : [];
   var nSel = ok ? marcados().length : 0;
   var lidos = Object.keys(A.docs).filter(function (k) { return /^(ok|sem)$/.test(A.docs[k].estado); }).length;
-  var cab = '<div class="pc-sh"><h3>Peças e documentos</h3><small class="muted">' + (ok ? L.length + ' na cronologia · ' + lidos + ' com texto lido' : 'da ficha do processo') + '</small></div>';
+  var cab = '<div class="pc-sh"><h3>Teor dos autos · Documentos e peças</h3><small class="muted">' + (ok ? L.length + ' na cronologia · ' + lidos + ' com texto lido' : 'da ficha do processo') + '</small></div>';
   if (ok && GB().classificacaoFiltro) cab += GB().classificacaoFiltro(L.filter(function(d){return !docBloq(d);}));
   var seg = ok ? '<div class="au-fx"><span class="seg"><button type="button" data-au="f:pecas" aria-selected="' + (F === 'pecas') + '" title="As peças da ficha com os seus documentos: decisões, recursos, contrarrazões, parecer, procuração, custas e inicial">Principais (' + P.length + ')</button><button type="button" data-au="f:todos" aria-selected="' + (F === 'todos') + '" title="A cronologia inteira do PJe, do mais recente ao mais antigo">Todos (' + L.length + ')</button></span>' +
     '<button type="button" class="btn line sm au-js" data-au="tudojs"' + (A.todo ? ' disabled' : '') + ' title="Lê o texto de todos os documentos (PDF digitalizado vai ao OCR) e baixa num arquivo JSON, no formato do acervo" aria-label="Baixar o inteiro teor em JSON">' + SVGDL + (A.todo ? A.todo.feitos + '/' + A.todo.total : 'JSON') + '</button></div>' +
@@ -639,7 +652,7 @@ function htmlDocs(pecas) {
     corpo = gr + (resto.length ? '<details class="pc-s" open><summary><span class="pc-s-t"><b>Demais peças</b><small>' + resto.length + ' documento(s)</small></span></summary><div class="au-docs au-dg">' + resto.map(linhaDoc).join('') + '</div></details>' : '');
   }
   var aviso = A.itens && !lidoDoProcesso() ? '<p class="status err">Os autos lidos são de outro processo (' + esc(A.cnj || 'sem número') + ').</p>' : !A.itens ? '<p class="muted au-nl">Leia os autos para ver os documentos de cada peça.</p>' : '';
-  return '<section class="card pc-sec pecas" id="g-docs">' + cab + seg + (A.msg ? '<p class="status ok">' + esc(A.msg) + '</p>' : '') + aviso + corpo + '</section>';
+  return '<section class="card pc-sec pecas" id="g-docs">' + cab + seg + (A.msg ? '<p class="status ok">' + esc(A.msg) + '</p>' : '') + aviso + historicoDocsFicha(F==='todos'?L:P) + corpo + '</section>';
 }
 function htmlSugestoes(secoes) {
   if (!A.itens || !lidoDoProcesso()) return '';
