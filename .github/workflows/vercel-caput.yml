@@ -21,8 +21,8 @@ on:
 permissions:
   contents: read
 env:
-  VERCEL_ORG_ID: team_qybhS0eH5w9TNuZIApQncd9L
-  VERCEL_PROJECT_ID: prj_RvxAJtVYRZd6rouWDzxewAyFE3bR
+  VERCEL_SCOPE: ${{ vars.VERCEL_SCOPE || 'brndutras-projects' }}
+  VERCEL_NAME: ${{ vars.VERCEL_NAME || 'gabinete-cmt' }}
 jobs:
   # Um job só (cada job cobra no mínimo um minuto). Depois do Base: só publica se ele gravou alguma coisa (o commit "Base: validação e manifesto (<sha>)").
   # Sem isso, cada gravação da equipe virava uma publicação nova, que ainda cancelava a publicação em curso.
@@ -167,19 +167,18 @@ jobs:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
         run: |
           test -n "$VERCEL_TOKEN" || { echo "Falta o segredo VERCEL_TOKEN."; exit 1; }
-          # O projeto pode mudar de equipe (ex.: equipe Pro): procura, com a própria chave, a equipe em que ele está;
-          # se o identificador do projeto também mudou, procura pelo domínio gabinete-cmt.com.
+          # A equipe Pro atual foi confirmada no painel da Vercel. Não publique em outra equipe por aproximação.
           API=https://api.vercel.com; H="Authorization: Bearer $VERCEL_TOKEN"
-          acha() { curl -s -o /dev/null -w '%{http_code}' -H "$H" "$API/v9/projects/$VERCEL_PROJECT_ID?teamId=$1"; }
-          ORG="$VERCEL_ORG_ID"; PRJ="$VERCEL_PROJECT_ID"
-          if [ "$(acha "$ORG")" != "200" ]; then
-            ORG=""
-            for t in $(curl -s -H "$H" "$API/v2/teams?limit=50" | jq -r '.teams[]?.id'); do
-              if [ "$(acha "$t")" = "200" ]; then ORG="$t"; break; fi
-              p=$(curl -s -H "$H" "$API/v9/projects?teamId=$t&limit=100" | jq -r '[.projects[]? | select([(.targets.production.alias // [])[], (.alias // [] | map(.domain? // .))[]] | map(tostring) | any(test("gabinete-cmt\\.com$")))][0].id // empty')
-              if [ -n "$p" ]; then ORG="$t"; PRJ="$p"; break; fi
-            done
-            test -n "$ORG" || { echo "Projeto não encontrado em nenhuma equipe acessível pela chave VERCEL_TOKEN."; exit 1; }
+          SCOPE="${VERCEL_SCOPE:-brndutras-projects}"
+          NAME="${VERCEL_NAME:-gabinete-cmt}"
+          HTTP=$(curl -sS -o /tmp/vercel-project.json -w '%{http_code}' -H "$H" "$API/v9/projects/$NAME?slug=$SCOPE")
+          if [ "$HTTP" != 200 ]; then
+            echo "::error::Vercel HTTP $HTTP ao consultar $SCOPE/$NAME. Verifique se VERCEL_TOKEN tem acesso à equipe Pro atual."
+            exit 1
           fi
-          echo "Publicando no projeto $PRJ da equipe $ORG"
+          ORG=$(jq -er '.accountId // .teamId' /tmp/vercel-project.json)
+          PRJ=$(jq -er '.id' /tmp/vercel-project.json)
+          # Confirma domínio antes de enviar qualquer arquivo ao projeto.
+          curl -fsS -H "$H" "$API/v9/projects/$PRJ/domains?teamId=$ORG" | jq -e 'any(.domains[]?; .name == "gabinete-cmt.com" or .name == "www.gabinete-cmt.com")' >/dev/null || { echo "::error::O projeto não possui o domínio institucional esperado."; exit 1; }
+          echo "Publicando no projeto $NAME da equipe $SCOPE"
           VERCEL_ORG_ID="$ORG" VERCEL_PROJECT_ID="$PRJ" npx --yes vercel@latest deploy site --prod --yes --token "$VERCEL_TOKEN"
