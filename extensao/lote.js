@@ -399,7 +399,7 @@ function copiar(t, el) {
   (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(function () { if (el) { var o = el.textContent; el.textContent = 'Copiado'; setTimeout(function () { el.textContent = o; }, 1200); } }).catch(function () {});
 }
 var tCol = 0;
-caixa.addEventListener('click', function (e) {
+if (caixa) caixa.addEventListener('click', function (e) {
   var b = e.target.closest('button'); if (!b) return;
   if (b.dataset.i != null) { V.sel = +b.dataset.i; render(); prepararAchado(); return; }
   if (b.hasAttribute('data-atu')) { V.minuta = {}; V.vers = {}; V.vtx = {}; V.conf = {}; atualizar(true); return; }
@@ -415,19 +415,19 @@ caixa.addEventListener('click', function (e) {
   if (b.dataset.copia) { copiar(b.dataset.copia, b); return; }
   if (b.dataset.copsec) { e.preventDefault(); var m = minutaAtual(); if (m && m.secoes) copiar(textoSec(m.secoes[b.dataset.copsec]), b); return; }
 });
-caixa.addEventListener('change', function (e) {
+if (caixa) caixa.addEventListener('change', function (e) {
   if (e.target.dataset && e.target.dataset.tx === 'vigente') { TX.vigente = e.target.checked; return; }
   if (e.target.dataset && e.target.dataset.lt === 'refsel') { V.ref[chaveMin()] = e.target.value; V.verv[chaveMin()] = e.target.value; render(); confrontar(); return; }
   var t = e.target, k = t.dataset && t.dataset.cp; if (!k) return;
   if (k === 'ws') CP.ws = t.checked; else if (k === 'sd') CP.sd = t.checked; else return;
   confrontar();
 });
-caixa.addEventListener('input', function (e) {
+if (caixa) caixa.addEventListener('input', function (e) {
   if (e.target.dataset && e.target.dataset.tx === 'rotulo') { TX.rotulo = e.target.value; return; }
   var t = e.target; if (!t.dataset || t.dataset.cp !== 'txt') return;
   clearTimeout(tCol); tCol = setTimeout(function () { CP.texto = t.value; CP.ps = null; CP.colado = !!t.value.trim(); CP.erro = ''; CP.fonte = ''; confrontar(); }, 600);
 });
-document.addEventListener('muta:prontuario', function () { if (aberta()) atualizar(false); autoAba(); });
+document.addEventListener('muta:prontuario', function () { if (aberta()) atualizar(false); if (caixa) autoAba(); });
 /* 0.51: para o gestor, processo de lote abre a aba Minuta no CORTEX (se ela estava no Comparar); fora de lote, volta ao Comparar */
 var ultAuto = '';
 function autoAba() {
