@@ -177,7 +177,7 @@ function pills() {
 var MODOS = ['Processo', 'Autos'];  /* 0.38: o Gerador foi para a aba Minuta; 0.47: o Roteiro entrou na aba Processo */
 var ROT_MODO = {};
 var FORA_PROC = { 'Autuação': 1, 'Partes': 1, 'Tramitação': 1, 'Autos extraídos do PJe': 1, 'Registro no acervo': 1, 'Acompanhamento': 1 };
-var NO_TOPO = { 'Avisos': 1, 'Síntese Processual': 1, 'Alegações': 1, 'Etiquetas sugeridas': 1, 'O que falta sanar': 1, 'Intercorrências': 1, 'Assunto detalhado': 1 };
+var NO_TOPO = { 'Tipo de Julgamento': 1, 'Histórico de julgamento': 1, 'Mapa de próximos passos': 1, 'Avisos': 1, 'Síntese Processual': 1, 'Alegações': 1, 'Etiquetas sugeridas': 1, 'O que falta sanar': 1, 'Intercorrências': 1, 'Assunto detalhado': 1 };
 var CTL_PROC = ['urgencia', 'meta', 'sobrestamento', 'sensivel'];
 function abaModelo(nome) { return ((G.F && G.F.abas) || []).filter(function (a) { return a.aba === nome; })[0] || null; }
 function grupoModelo(nome) { var g = null; ((G.F && G.F.abas) || []).forEach(function (a) { (a.grupos || []).forEach(function (x) { if (!g && x.grupo === nome) g = x; }); }); return g; }
@@ -1001,7 +1001,7 @@ function heroOrganizarProntuario(){
   expand.onclick=function(){heroTopo.detalhamento=!heroTopo.detalhamento;ajustarDetalhe();};
   db.addEventListener('click',function(){var t=el('textarea');t.rows=3;t.value=dv;t.setAttribute('aria-label','Detalhamento do caso');var ok=el('button','btn solid sm','Gravar'),cancel=el('button','lnk','Cancelar');ok.type=cancel.type='button';dt.replaceChildren(t,ok,cancel);t.focus();ok.onclick=function(){if(window.MUTA_WEB&&window.MUTA_WEB.leitura)return;marcar(dkey,t.value.trim());agendar(400);render();};cancel.onclick=function(){dt.replaceChildren(db);if(!expand.closest('.hero-detail-footer'))dt.append(expand);ajustarDetalhe();};});
   if(window.MUTA_WEB&&window.MUTA_WEB.leitura)db.disabled=true;if(!dv)db.textContent='Registrar detalhamento do caso';if(detail.childNodes.length)id.append(detail);
-  var ac=el('details','hero-acomp'),sum=el('summary','','Acompanhamento'),fase=top.querySelector('.pm-fase');if(fase)sum.append(el('small','muted',fase.textContent));var urg=el('button','hero-urg-short');urg.type='button';urg.innerHTML=SV('<path d="m13 2-9 12h7l-1 8 10-12h-7l1-8z"/>',15);urg.setAttribute('aria-pressed',String(ctlSim('urgencia')));urg.title='Controle de urgência';urg.setAttribute('aria-label',urg.title);urg.disabled=!!(window.MUTA_WEB&&window.MUTA_WEB.leitura);sum.append(urg);urg.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();heroTopo.abaAcomp='monitoramento';heroTopo.monitoramento=true;mon.open=true;if(!ctlSim('urgencia')){ctlMarcar('urgencia',true);}var u=caixa.querySelector('.hero-monitoramento .ct-i.urgencia');if(u){u.scrollIntoView({block:'nearest'});var f=u.querySelector('select,input,textarea');if(f)f.focus();}});ac.append(sum);var body=el('div','hero-acomp-b');ac.append(body);ac.open=heroTopo.acompanhamento;ac.addEventListener('toggle',function(){if(ac.isConnected)heroTopo.acompanhamento=ac.open;});
+  var ac=el('details','hero-acomp'),sum=el('summary','','Análise e Acompanhamento'),fase=top.querySelector('.pm-fase');if(fase)sum.append(el('small','muted',fase.textContent));var urg=el('button','hero-urg-short');urg.type='button';urg.innerHTML=SV('<path d="m13 2-9 12h7l-1 8 10-12h-7l1-8z"/>',15);urg.setAttribute('aria-pressed',String(ctlSim('urgencia')));urg.title='Controle de urgência';urg.setAttribute('aria-label',urg.title);urg.disabled=!!(window.MUTA_WEB&&window.MUTA_WEB.leitura);sum.append(urg);urg.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();heroTopo.abaAcomp='monitoramento';heroTopo.monitoramento=true;mon.open=true;if(!ctlSim('urgencia')){ctlMarcar('urgencia',true);}var u=caixa.querySelector('.hero-monitoramento .ct-i.urgencia');if(u){u.scrollIntoView({block:'nearest'});var f=u.querySelector('select,input,textarea');if(f)f.focus();}});ac.append(sum);var body=el('div','hero-acomp-b');ac.append(body);ac.open=heroTopo.acompanhamento;ac.addEventListener('toggle',function(){if(ac.isConnected)heroTopo.acompanhamento=ac.open;});
   var flow=top.querySelector('.pv-flowbox,.pm-pills'),steps=el('section','hero-steps'),stepsHead=el('div','hero-steps-head');
   var oldHead=flow&&flow.querySelector('.pv-stage-head');if(oldHead)oldHead.remove();
   stepsHead.append(el('h4','pm-mer-h','Etapas'));
@@ -1074,7 +1074,7 @@ function heroOrganizarProntuario(){
   if(regExistente)regExistente.classList.add('hero-reg-acervo');
   var ctlGroup=el('section','hero-ctl-integrado');
   var ctl=aut.querySelector('.pm-ctl2');if(ctl){var ch=ctl.previousElementSibling;if(ch&&ch.tagName==='H4'&&/^Controles/.test(ch.textContent))ch.remove();ctlGroup.append(ctl);}
-  var mon=el('details','hero-acomp hero-monitoramento'),ms=el('summary','','Monitoramento'),mb=el('div','hero-acomp-b');
+  var mon=el('details','hero-acomp hero-monitoramento'),ms=el('summary','','Monitoramento especial'),mb=el('div','hero-acomp-b');
   mb.append(ctlGroup);mon.append(ms,mb);mon.open=!!heroTopo.monitoramento;
   mon.addEventListener('toggle',function(){if(mon.isConnected)heroTopo.monitoramento=mon.open;});
   /* Anotações e questões: uma representação por registro, sem mover controles legados. */
@@ -1131,23 +1131,20 @@ function heroOrganizarProntuario(){
   if(sel){sel.classList.add('hero-tipo-roteiro');tj.prepend(sel);caixa.querySelectorAll('.rt-tsel').forEach(function(x){if(x!==sel)x.remove();});}
   else html(tj,campoRot('triagem','Tipo de Julgamento','Tipo de julgamento'));
   /* Especificações jurídicas ficam na Produção; planejamento não altera resultado. */
-  if(G.aba==='Produção'||G.aba==='Roteiro'){
-    var prod=caixa.querySelector('.gbody')||caixa.querySelector('.pm-pron');
-    if(prod&&sel)prod.prepend(sel);
-  }
+  /* O seletor de julgamento permanece exclusivamente no Acompanhamento, inclusive em Produção. */
   if(identity)identity.remove();
   /* Encaminhamento é uma seção interna, comum a todos os modos. */
   var encSection=el('section','hero-enc-integrado');encSection.append(el('h4','pm-mer-h','Encaminhamento'));
   var encFields=el('div','gr hero-enc-fields');encSection.append(encFields);
   body.querySelectorAll('.pm-enc,.pv-acomp-sit,.pv-followup,.pm-sitj').forEach(function(x){x.remove();});
   html(encFields,situacaoHtml());
-  var destinoAtual=destGrav(),destRow=el('label','gf'),destSel=el('select');destRow.append(el('span','gl','Destino'));destSel.dataset.fk='producao.Destino';[['','A definir'],['Monocrática','Relator'],['Sessão','Colegiado'],['Outro destino','Outro']].forEach(function(x){var o=el('option','',x[1]);o.value=x[0];destSel.append(o);});destSel.value=destinoAtual;destSel.disabled=!!(window.MUTA_WEB&&window.MUTA_WEB.leitura);destRow.append(destSel);encFields.append(destRow);
-  if(destinoAtual==='Outro destino')html(encFields,campoRot('producao','Destino - Outro','Especificar destino'));
+  var destinoAtual=destGrav(),destRow=el('label','gf'),destSel=el('select');destRow.append(el('span','gl','Enquadramento'));destSel.dataset.fk='producao.Destino';[['','A definir'],['Sessão','Seleção prévia'],['Monocrática','Hipóteses de monocrática'],['Outro destino','Outro destino final']].forEach(function(x){var o=el('option','',x[1]);o.value=x[0];destSel.append(o);});destSel.value=destinoAtual;destSel.disabled=!!(window.MUTA_WEB&&window.MUTA_WEB.leitura);destRow.append(destSel);encFields.append(destRow);
+  if(destinoAtual==='Outro destino'){html(encFields,campoRot('producao','Destino - Outro','Especificar destino'));html(encFields,campoRot('triagem','Destino - Outro Nota','Nota de enquadramento'));}
   if(destinoAtual==='Sessão'){
     var sp=el('label','gf'),spSel=el('select');sp.append(el('span','gl','Seleção prévia'));spSel.dataset.fk='triagem.Seleção Prévia';spSel.setAttribute('aria-label','Seleção prévia');
     [['','Não selecionado'],['SELECIONADO PREVIAMENTE','Selecionado previamente']].forEach(function(x){var op=el('option','',x[1]);op.value=x[0];spSel.append(op);});
     spSel.value=S(V('triagem','Seleção Prévia'));spSel.disabled=!!(window.MUTA_WEB&&window.MUTA_WEB.leitura);sp.append(spSel);encFields.append(sp);
-    html(encFields,campoRot('pauta','Nova sessão de destino',spSel.value==='SELECIONADO PREVIAMENTE'?'Sessão da seleção prévia (vazio = banco reserva)':'Sessão provável'));
+    html(encFields,campoRot('pauta','Nova sessão de destino',spSel.value==='SELECIONADO PREVIAMENTE'?'Sessão da seleção prévia (vazio = banco de reserva)':'Sessão provável'));html(encFields,campoRot('triagem','Seleção Prévia - Nota','Nota de enquadramento'));
   }
   /* Pauta do processo: os mesmos campos da ficha, sem depender da aba Pauta. */
   var pautaOficial=pautado(),Pp=(G.op||{}).pauta||{},grupoPauta=grupoModelo('Pauta e julgamento');
@@ -1166,6 +1163,7 @@ function heroOrganizarProntuario(){
     var hip=campoLista('triagem','Hipóteses Monocrática');if(hip)html(encFields,campo(Object.assign({},hip,{rotulo:'Hipótese do artigo 932'})));
     html(encFields,campoRot('triagem','Art. 932 - Nota de enquadramento','Nota de enquadramento'));
   }
+  encFields.append(el('p','gf w muted',destinoAtual==='Sessão'?'Destino final: Colegiado · Pronunciamento final: Acórdão':destinoAtual==='Monocrática'?'Destino final: Relator · Pronunciamento final: Monocrática terminativa':destinoAtual==='Outro destino'?'Destino final: conforme indicação · Pronunciamento a definir':'Destino a definir'));
   var tramite=el('section','hero-tramite'),trFields=el('div','gr hero-enc-fields');
   tramite.append(trFields);
   html(trFields,campoRot('origem','Próximo pronunciamento','Próximo pronunciamento'));
@@ -1238,7 +1236,25 @@ function heroOrganizarProntuario(){
     if(!registros.length&&!externo)panel.append(el('small','muted','Nenhuma solicitação registrada.'));
   });
   var hist=el('details','hero-pauta-hist'),histTitle=el('summary','','Histórico de julgamento'),histBody=el('div','hero-hist-body');hist.append(histTitle,histBody);hist.open=!!heroTopo.histJulg;hist.addEventListener('toggle',function(){if(hist.isConnected)heroTopo.histJulg=hist.open;});
-  html(histBody,historicoJulgamento());encSection.append(hist);
+  html(histBody,historicoJulgamento());
+  var histModelo=campoModelo('triagem','Histórico de julgamento'),histRaw=V('triagem','Histórico de julgamento');
+  if(histModelo){
+    var histRows=Array.isArray(histRaw)?JSON.parse(JSON.stringify(histRaw)):[],histEdit=editavel(histModelo)&&!(window.MUTA_WEB&&window.MUTA_WEB.leitura),histValid=Array.isArray(histRaw)||!histRaw;
+    function histGravar(){marcar('triagem.Histórico de julgamento',histRows);heroTopo.histJulg=true;agendar(500);render();}
+    var custom=el('div','hero-hist-custom');histBody.append(custom);
+    custom.append(el('h4','pm-mer-h','Registros e justificativas'));
+    if(!histValid)custom.append(el('p','muted','Registro em formato não reconhecido; preservado.'));
+    else {
+      function historicoEditor(row,i){
+        var form=el('div','hero-sol-form'),grid=el('div','gr'),refs={};form.append(grid);
+        (histModelo.colunas||[]).forEach(function(c){var label=el('label','gf'+(c.tipo==='texto-longo'?' w':'')),input=el(c.opcoes?'select':c.tipo==='texto-longo'?'textarea':'input');label.append(el('span','gl',c.rotulo));if(c.opcoes){var empty=el('option','','—');empty.value='';input.append(empty);var vals=c.opcoes.slice();if(row[c.chave]&&vals.indexOf(row[c.chave])<0)vals.push(row[c.chave]);vals.forEach(function(v){var op=el('option','',v);op.value=v;input.append(op);});}else if(c.tipo==='data')input.type='date';else if(c.tipo==='texto-longo')input.rows=2;input.value=S(row[c.chave]);refs[c.chave]=input;label.append(input);grid.append(label);});
+        var save=el('button','btn solid sm','Salvar evento'),cancel=el('button','lnk','Cancelar');save.type=cancel.type='button';form.append(save,cancel);custom.append(form);cancel.onclick=function(){form.remove();};save.onclick=function(){var next=Object.assign({},row);Object.keys(refs).forEach(function(k){next[k]=S(refs[k].value);});if(!next.data||!next.evento||(['Retirada','Adiamento','Vista','Suspensão','Conversão em diligência'].includes(next.evento)&&!next.justificativa)){st('Informe data, evento e justificativa da intercorrência.','err');return;}if(i<0){if(histRows.length>=60){st('Limite atual: 60 eventos.','err');return;}histRows.push(next);}else histRows[i]=next;histGravar();};
+      }
+      histRows.forEach(function(row,i){var d=el('details','hero-tr-item'),h=el('summary','', [fmtV(row.data),row.evento,row.tipo_julgamento,row.sessao].filter(Boolean).join(' · ')||'Evento');d.append(h);(histModelo.colunas||[]).filter(function(c){return !!row[c.chave];}).forEach(function(c){d.append(el('div','',c.rotulo+': '+row[c.chave]));});if(histEdit){var b=el('button','btn line sm','Editar'),del=el('button','btn line sm','Remover');b.type=del.type='button';b.onclick=function(){historicoEditor(row,i);};del.onclick=function(){if(confirm('Excluir este evento registrado?')){histRows.splice(i,1);histGravar();}};d.append(b,del);}custom.append(d);});
+      if(histEdit){var add=el('button','btn line sm','+ Evento de julgamento');add.type='button';add.onclick=function(){historicoEditor({data:new Date().toISOString().slice(0,10)},-1);};custom.append(add);}
+    }
+  }
+  encSection.append(hist);
   body.prepend(encSection);body.append(tagsGroup);
   /* A confirmação da hipótese é própria da produção, vinculada ao conteúdo conferido. */
   if(destinoAtual==='Monocrática'&&(G.aba==='Produção'||(G.aba==='Processo'&&G.rot==='pro'))){
