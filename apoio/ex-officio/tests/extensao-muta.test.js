@@ -643,7 +643,7 @@ test('extensão 0.48: abas Diligências e Deliberações (Desembargador e gestor
   assert.match(x, /ses\.api\('\/api\/pendencias'\)/); assert.match(x, /method: 'PUT', body: JSON\.stringify\(\{ id: id, _rev: t\._rev, stage: st \}\)/);
   assert.match(x, /ses\.api\('\/api\/painel\?cmt=1'\)/); assert.match(x, /acao: 'situacao'/); assert.match(x, /acao: 'responder'/); assert.match(x, /n\.tipo === 'sustentacao'/);
   assert.match(x, /ctl: q\.on && q\.gestor, pauta: q\.on/); assert.match(x, /function pode\(q\) \{ return q\.on && \(q\.gestor \|\| q\.des\); \}/);
-  assert.match(a, /concat\(\[\['ver', 'Versão'\]\]\)/); assert.doesNotMatch(a, /\['pz', 'Prazos'\], \['et', 'Etiquetas'\]/); assert.match(a, /function pintarCtl\(\)/);
+  assert.match(a, /var abas = \[\['al', 'PJe'\], \['app', 'Gabinete'\], \['ver', 'Versão'\]\];/); assert.doesNotMatch(a, /\['pz', 'Prazos'\], \['et', 'Etiquetas'\]/); assert.match(a, /function pintarCtl\(\)/);
   assert.match(c, /function etqLigadas\(\)/); assert.match(c, /function botaoEtq\(\)/); assert.match(c, /if \(!E \|\| !E\.categoriaDe \|\| !etqLigadas\(\)\) return;/);
   assert.match(read('apoio/ex-officio/api/pendencias.js'), /PUT \{id,_rev,…\} altera/);
 });
