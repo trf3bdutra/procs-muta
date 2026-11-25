@@ -70,43 +70,35 @@
         },
         {
           "n": "Abertura (variante)",
-          "f": "@abertura_relatorio",
+          "f": "Trata-se de apelação à sentença (ID @sentenca_id) que @comandos_dispositivos. @frase_honorarios_origem",
           "r": [
             "Honorários em nova frase."
           ],
           "fo": "M",
           "alts": [
             {
-              "lab": "Ficha do processo",
-              "f": "@abertura_relatorio"
-            },
-            {
-              "lab": "Fórmula original",
+              "lab": "Fórmula padrão",
               "f": "Trata-se de apelação à sentença (ID @sentenca_id) que @comandos_dispositivos. @frase_honorarios_origem"
             }
           ]
         },
         {
           "n": "Sentença",
-          "f": "@sentenca_paragrafo",
+          "f": "A sentença (ID @sentenca_id) @comandos_dispositivos. @frase_honorarios_origem",
           "r": [
             "Resultado e, na mesma frase, honorários, base de cálculo, suspensão da exigibilidade e eventual multa."
           ],
           "fo": "P",
           "alts": [
             {
-              "lab": "Automático · ficha",
-              "f": "@sentenca_paragrafo"
-            },
-            {
-              "lab": "Fórmula original",
-              "f": "A sentença (ID @sentenca_id) …"
+              "lab": "Fórmula padrão",
+              "f": "A sentença (ID @sentenca_id) @comandos_dispositivos. @frase_honorarios_origem"
             }
           ]
         },
         {
           "n": "Razões",
-          "f": "@razoes_recursais",
+          "f": "Apelou @recurso_1_parte @recurso_1_referencia, alegando, em suma, que: @recurso_1_razoes.",
           "r": [
             "Orações no infinitivo.",
             "O pedido integra o último item ou fecha o parágrafo com “pelo que requereu”.",
@@ -116,18 +108,14 @@
           "fo": "P+M",
           "alts": [
             {
-              "lab": "Automático · ficha",
-              "f": "@razoes_recursais"
-            },
-            {
-              "lab": "Fórmula original",
-              "f": "Apelou {{o autor / a autora}} (ID …), alegando, em suma: (1) […]; (2) […]; e (3) […]"
+              "lab": "Fórmula padrão",
+              "f": "Apelou @recurso_1_parte @recurso_1_referencia, alegando, em suma, que: @recurso_1_razoes."
             }
           ]
         },
         {
           "n": "Contrarrazões",
-          "f": "@contrarrazoes_relatorio",
+          "f": "@resposta_ocorrencia contrarrazões@resposta_complemento.",
           "r": [
             "Parágrafo próprio.",
             "Com preliminar nas contrarrazões, indicar qual (ex.: ilegitimidade ativa)."
@@ -135,8 +123,8 @@
           "fo": "P",
           "alts": [
             {
-              "lab": "Automático · ficha",
-              "f": "@contrarrazoes_relatorio"
+              "lab": "Manifestação",
+              "f": "@resposta_ocorrencia contrarrazões@resposta_complemento."
             },
             {
               "lab": "Houve",
@@ -160,7 +148,7 @@
         },
         {
           "n": "Ministério Público",
-          "f": "@parecer_relatorio",
+          "f": "A Procuradoria Regional da República @parecer_manifestacao.",
           "r": [
             "Manifestação em 2º grau: Procuradoria Regional da República, por extenso.",
             "Parecer de 1º grau: “Ministério Público Federal”."
@@ -168,8 +156,8 @@
           "fo": "P",
           "alts": [
             {
-              "lab": "Automático · ficha",
-              "f": "@parecer_relatorio"
+              "lab": "Manifestação",
+              "f": "A Procuradoria Regional da República @parecer_manifestacao."
             },
             {
               "lab": "Opinou no mérito",
@@ -248,7 +236,7 @@
         },
         {
           "n": "Moldura jurídica",
-          "f": "",
+          "f": "@tese_juridica_adotada",
           "r": [
             "Fundamentação geral antes do caso.",
             "Normas e teses transcritas em parágrafo próprio, entre aspas e em itálico."
@@ -256,18 +244,14 @@
           "fo": "P+M",
           "alts": [
             {
-              "lab": "Fórmula original",
-              "f": ""
-            },
-            {
-              "lab": "Solução registrada na ficha",
+              "lab": "Fórmula padrão",
               "f": "@tese_juridica_adotada"
             }
           ]
         },
         {
           "n": "Exame do caso",
-          "f": "Na espécie,",
+          "f": "Na espécie, @aplicacao_ao_caso_concreto",
           "r": [
             "Marca a análise concreta.",
             "Indica o ID de cada prova.",
@@ -278,15 +262,7 @@
           "fo": "P+M",
           "alts": [
             {
-              "lab": "Fórmula original",
-              "f": "Na espécie,"
-            },
-            {
-              "lab": "Solução registrada na ficha",
-              "f": "Na espécie, @aplicacao_ao_caso_concreto"
-            },
-            {
-              "lab": "Dados da ficha",
+              "lab": "Fórmula padrão",
               "f": "Na espécie, @aplicacao_ao_caso_concreto"
             }
           ]
@@ -301,7 +277,7 @@
         },
         {
           "n": "Precedente",
-          "f": "Em casos que tais, assim tem decidido esta Turma Regional:\nNeste sentido:\nclasse número, Rel. …, veículo de data: “ementa” (g.n.)",
+          "f": "Neste sentido:\n@precedentes_aplicaveis",
           "r": [
             "Vem depois do raciocínio que sustenta: confirma, não inaugura.",
             "Classe e número sem UF; nome regimental em caixa alta.",
@@ -311,12 +287,8 @@
           "fo": "P+M",
           "alts": [
             {
-              "lab": "Fórmula original",
-              "f": "Em casos que tais, assim tem decidido esta Turma Regional:\nNeste sentido:\nclasse número, Rel. …, veículo de data: “ementa” (g.n.)"
-            },
-            {
-              "lab": "Dados da ficha",
-              "f": "@precedentes_aplicaveis"
+              "lab": "Fórmula padrão",
+              "f": "Neste sentido:\n@precedentes_aplicaveis"
             }
           ]
         },
@@ -328,13 +300,13 @@
         },
         {
           "n": "Honorários recursais",
-          "f": "@honorarios_recursais_texto",
+          "f": "Pela sucumbência recursal, @honorarios_solucao.",
           "r": [],
           "fo": "M",
           "alts": [
             {
-              "lab": "Automático · ficha",
-              "f": "@honorarios_recursais_texto"
+              "lab": "Solução do caso",
+              "f": "Pela sucumbência recursal, @honorarios_solucao."
             },
             {
               "lab": "Autor com gratuidade",
@@ -359,10 +331,6 @@
             {
               "lab": "Inversão",
               "f": "Em razão da reforma da sentença, impõe-se a inversão da sucumbência, [critérios: percentual, base, faixas do artigo 85, § 3º, do CPC; parcelas vencidas até a sentença no previdenciário — Súmula 111/STJ]."
-            },
-            {
-              "lab": "Dados da ficha",
-              "f": "@fundamento_sucumbencia"
             },
             {
               "lab": "Texto padrão sem gratuidade",
@@ -468,7 +436,7 @@
         },
         {
           "n": "Dispositivo",
-          "f": "@dispositivo_voto",
+          "f": "Ante o exposto, @dispositivo_conclusao.",
           "r": [
             "Direto e completo: resultado, ato anulado e extensão, destino dos autos, providências e situação do recurso.",
             "Verbos por classe: recurso provido/desprovido; embargos de declaração acolhidos/rejeitados; segurança concedida/denegada."
@@ -476,16 +444,8 @@
           "fo": "P+M",
           "alts": [
             {
-              "lab": "Automático · ficha",
-              "f": "@dispositivo_voto"
-            },
-            {
-              "lab": "Fórmula original",
-              "f": "Ante o exposto, …"
-            },
-            {
-              "lab": "Solução registrada na ficha",
-              "f": "Ante o exposto, @dispositivo_pronunciamento"
+              "lab": "Fórmula padrão",
+              "f": "Ante o exposto, @dispositivo_conclusao."
             }
           ]
         },
@@ -519,52 +479,40 @@
         },
         {
           "n": "I. CASO EM EXAME",
-          "f": "",
+          "f": "@caso_em_exame",
           "r": [
             "Sem “Trata-se de”."
           ],
           "fo": "M",
           "alts": [
             {
-              "lab": "Fórmula original",
-              "f": ""
-            },
-            {
-              "lab": "Dados da ficha",
+              "lab": "Fórmula padrão",
               "f": "@caso_em_exame"
             }
           ]
         },
         {
           "n": "II. QUESTÃO EM DISCUSSÃO",
-          "f": "… consiste em saber se …\nHá duas questões em discussão: (i) saber se …; e (ii) saber se …",
+          "f": "@questao_em_discussao",
           "r": [],
           "fo": "M",
           "alts": [
             {
-              "lab": "Fórmula original",
-              "f": "… consiste em saber se …\nHá duas questões em discussão: (i) saber se …; e (ii) saber se …"
-            },
-            {
-              "lab": "Dados da ficha",
+              "lab": "Fórmula padrão",
               "f": "@questao_em_discussao"
             }
           ]
         },
         {
           "n": "III. RAZÕES DE DECIDIR",
-          "f": "",
+          "f": "@tese_juridica_adotada\n@aplicacao_ao_caso_concreto",
           "r": [
             "Um fundamento por item."
           ],
           "fo": "M",
           "alts": [
             {
-              "lab": "Fórmula original",
-              "f": ""
-            },
-            {
-              "lab": "Dados da ficha",
+              "lab": "Fórmula padrão",
               "f": "@tese_juridica_adotada\n@aplicacao_ao_caso_concreto"
             }
           ]
@@ -578,12 +526,8 @@
           "fo": "M",
           "alts": [
             {
-              "lab": "Automático · ficha",
+              "lab": "Fórmula padrão",
               "f": "@dispositivo_ementa_ficha"
-            },
-            {
-              "lab": "Fórmula original",
-              "f": "@dispositivo_ementa"
             }
           ]
         },
@@ -599,18 +543,14 @@
         },
         {
           "n": "Rodapé",
-          "f": "__________\nDispositivos relevantes citados: …\nJurisprudência relevante citada: STF, …; STJ, …; e TRF-3, …",
+          "f": "__________\nDispositivos relevantes citados: @dispositivos_legais_aplicaveis\nJurisprudência relevante citada: @precedentes_aplicaveis",
           "r": [
             "Rótulos em itálico após “__________”."
           ],
           "fo": "P+M",
           "alts": [
             {
-              "lab": "Fórmula original",
-              "f": "__________\nDispositivos relevantes citados: …\nJurisprudência relevante citada: STF, …; STJ, …; e TRF-3, …"
-            },
-            {
-              "lab": "Dados da ficha",
+              "lab": "Fórmula padrão",
               "f": "__________\nDispositivos relevantes citados: @dispositivos_legais_aplicaveis\nJurisprudência relevante citada: @precedentes_aplicaveis"
             }
           ]
@@ -658,17 +598,13 @@
         },
         {
           "n": "Relato",
-          "f": "Trata-se de …",
+          "f": "Trata-se de @relato_objeto.",
           "r": [],
           "fo": "M",
           "alts": [
             {
-              "lab": "Fórmula original",
-              "f": "Trata-se de …"
-            },
-            {
-              "lab": "Dados da ficha",
-              "f": "@abertura_relatorio"
+              "lab": "Fórmula padrão",
+              "f": "Trata-se de @relato_objeto."
             }
           ]
         },
@@ -682,35 +618,27 @@
         },
         {
           "n": "Fundamentação",
-          "f": "",
+          "f": "@mono_fundamento\n@aplicacao_ao_caso_concreto",
           "r": [],
           "fo": "M",
           "alts": [
             {
-              "lab": "Fórmula original",
-              "f": ""
-            },
-            {
-              "lab": "Dados da ficha",
+              "lab": "Fórmula padrão",
               "f": "@mono_fundamento\n@aplicacao_ao_caso_concreto"
             }
           ]
         },
         {
           "n": "Dispositivo",
-          "f": "Ante o exposto, com esteio no artigo 932, III, do CPC, …",
+          "f": "Ante o exposto, @dispositivo_conclusao.",
           "r": [
             "Primeira pessoa e base legal."
           ],
           "fo": "M",
           "alts": [
             {
-              "lab": "Fórmula original",
-              "f": "Ante o exposto, com esteio no artigo 932, III, do CPC, …"
-            },
-            {
-              "lab": "Dados da ficha",
-              "f": "@dispositivo_pronunciamento"
+              "lab": "Fórmula padrão",
+              "f": "Ante o exposto, @dispositivo_conclusao."
             }
           ]
         },
@@ -955,7 +883,7 @@
       "elementos": [
         {
           "n": "Abertura",
-          "f": "@abertura_relatorio",
+          "f": "Trata-se de apelação à sentença (ID @sentenca_id) que @comandos_dispositivos. @frase_honorarios_origem",
           "alts": [
             {
               "lab": "À sentença",
@@ -970,25 +898,21 @@
         },
         {
           "n": "Sentença",
-          "f": "@sentenca_paragrafo",
+          "f": "A sentença (ID @sentenca_id) @comandos_dispositivos. @frase_honorarios_origem",
           "r": [
             "Resultado e, na mesma frase, honorários, base de cálculo, suspensão da exigibilidade e eventual multa."
           ],
           "fo": "P",
           "alts": [
             {
-              "lab": "Automático · ficha",
-              "f": "@sentenca_paragrafo"
-            },
-            {
-              "lab": "Fórmula original",
-              "f": "A sentença (ID @sentenca_id) …"
+              "lab": "Fórmula padrão",
+              "f": "A sentença (ID @sentenca_id) @comandos_dispositivos. @frase_honorarios_origem"
             }
           ]
         },
         {
           "n": "Razões",
-          "f": "@razoes_recursais",
+          "f": "Apelou @recurso_1_parte @recurso_1_referencia, alegando, em suma, que: @recurso_1_razoes.",
           "r": [
             "Orações no infinitivo.",
             "O pedido integra o último item ou fecha o parágrafo com “pelo que requereu”.",
@@ -998,18 +922,14 @@
           "fo": "P+M",
           "alts": [
             {
-              "lab": "Automático · ficha",
-              "f": "@razoes_recursais"
-            },
-            {
-              "lab": "Fórmula original",
-              "f": "Apelou {{o autor / a autora}} (ID …), alegando, em suma: (1) […]; (2) […]; e (3) […]"
+              "lab": "Fórmula padrão",
+              "f": "Apelou @recurso_1_parte @recurso_1_referencia, alegando, em suma, que: @recurso_1_razoes."
             }
           ]
         },
         {
           "n": "Contrarrazões",
-          "f": "@contrarrazoes_relatorio",
+          "f": "@resposta_ocorrencia contrarrazões@resposta_complemento.",
           "r": [
             "Parágrafo próprio.",
             "Com preliminar nas contrarrazões, indicar qual (ex.: ilegitimidade ativa)."
@@ -1017,8 +937,8 @@
           "fo": "P",
           "alts": [
             {
-              "lab": "Automático · ficha",
-              "f": "@contrarrazoes_relatorio"
+              "lab": "Manifestação",
+              "f": "@resposta_ocorrencia contrarrazões@resposta_complemento."
             },
             {
               "lab": "Houve",
@@ -1042,11 +962,11 @@
         },
         {
           "n": "Ministério Público",
-          "f": "@parecer_relatorio",
+          "f": "A Procuradoria Regional da República @parecer_manifestacao.",
           "alts": [
             {
-              "lab": "Automático · ficha",
-              "f": "@parecer_relatorio"
+              "lab": "Manifestação",
+              "f": "A Procuradoria Regional da República @parecer_manifestacao."
             },
             {
               "lab": "Prosseguimento",
@@ -1095,7 +1015,7 @@
       "elementos": [
         {
           "n": "Abertura",
-          "f": "@abertura_relatorio",
+          "f": "Trata-se de dupla apelação à sentença (ID @sentenca_id) que @comandos_dispositivos. @frase_honorarios_origem",
           "r": [
             "[VALIDAR] Abertura no plural não localizada nos inteiros teores da base.",
             "Composição pela ficha: ID, resultado, comandos e honorários; não repetir Sentença quando integrada."
@@ -1103,52 +1023,40 @@
           "fo": "P",
           "alts": [
             {
-              "lab": "Automático · ficha",
-              "f": "@abertura_relatorio"
-            },
-            {
-              "lab": "Fórmula original",
-              "f": "Trata-se de apelações à sentença (ID @sentenca_id) que @comandos_dispositivos. @frase_honorarios_origem"
+              "lab": "Fórmula padrão",
+              "f": "Trata-se de dupla apelação à sentença (ID @sentenca_id) que @comandos_dispositivos. @frase_honorarios_origem"
             }
           ]
         },
         {
           "n": "Razões do primeiro apelante",
-          "f": "@razoes_primeiro_recurso",
+          "f": "Apelou @recurso_1_parte @recurso_1_referencia, alegando, em suma, que: @recurso_1_razoes.",
           "r": [
             "Um parágrafo para cada apelante."
           ],
           "fo": "P",
           "alts": [
             {
-              "lab": "Automático · ficha",
-              "f": "@razoes_primeiro_recurso"
-            },
-            {
-              "lab": "Fórmula original",
-              "f": "Apelou {{a parte autora}} (ID …), alegando, em suma, que: (1) […]; (2) […]; e (3) […]."
+              "lab": "Fórmula padrão",
+              "f": "Apelou @recurso_1_parte @recurso_1_referencia, alegando, em suma, que: @recurso_1_razoes."
             }
           ]
         },
         {
           "n": "Razões do segundo apelante",
-          "f": "@razoes_segundo_recurso",
+          "f": "Apelou @recurso_2_parte @recurso_2_referencia, alegando, em suma, que: @recurso_2_razoes.",
           "r": [],
           "fo": "P",
           "alts": [
             {
-              "lab": "Automático · ficha",
-              "f": "@razoes_segundo_recurso"
-            },
-            {
-              "lab": "Fórmula original",
-              "f": "Apelou {{a parte ré}} (ID …), alegando, em suma, que: (1) […]; (2) […]; e (3) […]."
+              "lab": "Fórmula padrão",
+              "f": "Apelou @recurso_2_parte @recurso_2_referencia, alegando, em suma, que: @recurso_2_razoes."
             }
           ]
         },
         {
           "n": "Contrarrazões",
-          "f": "@contrarrazoes_relatorio",
+          "f": "@resposta_ocorrencia contrarrazões@resposta_complemento.",
           "r": [
             "Parágrafo próprio.",
             "Com preliminar nas contrarrazões, indicar qual (ex.: ilegitimidade ativa)."
@@ -1156,8 +1064,8 @@
           "fo": "P",
           "alts": [
             {
-              "lab": "Automático · ficha",
-              "f": "@contrarrazoes_relatorio"
+              "lab": "Manifestação",
+              "f": "@resposta_ocorrencia contrarrazões@resposta_complemento."
             },
             {
               "lab": "Houve",
@@ -1181,11 +1089,11 @@
         },
         {
           "n": "Ministério Público",
-          "f": "@parecer_relatorio",
+          "f": "A Procuradoria Regional da República @parecer_manifestacao.",
           "alts": [
             {
-              "lab": "Automático · ficha",
-              "f": "@parecer_relatorio"
+              "lab": "Manifestação",
+              "f": "A Procuradoria Regional da República @parecer_manifestacao."
             },
             {
               "lab": "Prosseguimento",
@@ -1234,19 +1142,15 @@
       "elementos": [
         {
           "n": "Abertura",
-          "f": "@abertura_relatorio",
+          "f": "Trata-se de apelação e remessa necessária à sentença (ID @sentenca_id) que @comandos_dispositivos. @frase_honorarios_origem",
           "alts": [
             {
-              "lab": "Automático · ficha",
-              "f": "@abertura_relatorio"
-            },
-            {
-              "lab": "Apelação e remessa",
-              "f": "Trata-se de apelação e remessa necessária à sentença (ID @sentenca_id) que …"
+              "lab": "Fórmula padrão",
+              "f": "Trata-se de apelação e remessa necessária à sentença (ID @sentenca_id) que @comandos_dispositivos. @frase_honorarios_origem"
             },
             {
               "lab": "Só remessa",
-              "f": "Trata-se de remessa necessária à sentença (ID @sentenca_id) que …"
+              "f": "Trata-se de remessa necessária à sentença (ID @sentenca_id) que @comandos_dispositivos. @frase_honorarios_origem"
             }
           ],
           "r": [
@@ -1256,7 +1160,7 @@
         },
         {
           "n": "Razões",
-          "f": "@razoes_recursais",
+          "f": "Apelou @recurso_1_parte @recurso_1_referencia, alegando, em suma, que: @recurso_1_razoes.",
           "r": [
             "Orações no infinitivo.",
             "O pedido integra o último item ou fecha o parágrafo com “pelo que requereu”.",
@@ -1266,18 +1170,14 @@
           "fo": "P+M",
           "alts": [
             {
-              "lab": "Automático · ficha",
-              "f": "@razoes_recursais"
-            },
-            {
-              "lab": "Fórmula original",
-              "f": "Apelou {{o autor / a autora}} (ID …), alegando, em suma: (1) […]; (2) […]; e (3) […]"
+              "lab": "Fórmula padrão",
+              "f": "Apelou @recurso_1_parte @recurso_1_referencia, alegando, em suma, que: @recurso_1_razoes."
             }
           ]
         },
         {
           "n": "Contrarrazões",
-          "f": "@contrarrazoes_relatorio",
+          "f": "@resposta_ocorrencia contrarrazões@resposta_complemento.",
           "r": [
             "Parágrafo próprio.",
             "Com preliminar nas contrarrazões, indicar qual (ex.: ilegitimidade ativa)."
@@ -1285,8 +1185,8 @@
           "fo": "P",
           "alts": [
             {
-              "lab": "Automático · ficha",
-              "f": "@contrarrazoes_relatorio"
+              "lab": "Manifestação",
+              "f": "@resposta_ocorrencia contrarrazões@resposta_complemento."
             },
             {
               "lab": "Houve",
@@ -1310,11 +1210,11 @@
         },
         {
           "n": "Ministério Público",
-          "f": "@parecer_relatorio",
+          "f": "A Procuradoria Regional da República @parecer_manifestacao.",
           "alts": [
             {
-              "lab": "Automático · ficha",
-              "f": "@parecer_relatorio"
+              "lab": "Manifestação",
+              "f": "A Procuradoria Regional da República @parecer_manifestacao."
             },
             {
               "lab": "Prosseguimento",
@@ -1367,45 +1267,37 @@
       "elementos": [
         {
           "n": "Abertura",
-          "f": "@abertura_relatorio",
+          "f": "Trata-se de agravo de instrumento à decisão (ID @decisao_agravada_id) que @decisao_agravada_sintese.",
           "r": [],
           "fo": "P",
           "alts": [
             {
-              "lab": "Automático · ficha",
-              "f": "@abertura_relatorio"
-            },
-            {
-              "lab": "Fórmula original",
-              "f": "Trata-se de agravo de instrumento à decisão que, em @impugnada_data, @impugnada_sintese (ID @decisao_agravada_id)."
+              "lab": "Fórmula padrão",
+              "f": "Trata-se de agravo de instrumento à decisão (ID @decisao_agravada_id) que @decisao_agravada_sintese."
             }
           ]
         },
         {
           "n": "Razões",
-          "f": "@razoes_recursais",
+          "f": "Agravou @recurso_1_parte @recurso_1_referencia, alegando, em suma, que: @recurso_1_razoes.",
           "r": [
             "Pedido de efeito suspensivo ou de tutela recursal, quando houver, com a decisão do Relator e o ID."
           ],
           "fo": "P",
           "alts": [
             {
-              "lab": "Automático · ficha",
-              "f": "@razoes_recursais"
-            },
-            {
-              "lab": "Fórmula original",
-              "f": "Alegou {{a agravante}} (ID …) que: (1) […]; (2) […]; e (3) […]."
+              "lab": "Fórmula padrão",
+              "f": "Agravou @recurso_1_parte @recurso_1_referencia, alegando, em suma, que: @recurso_1_razoes."
             }
           ]
         },
         {
           "n": "Contraminuta",
-          "f": "@contrarrazoes_relatorio",
+          "f": "@resposta_ocorrencia contraminuta@resposta_complemento.",
           "alts": [
             {
-              "lab": "Automático · ficha",
-              "f": "@contrarrazoes_relatorio"
+              "lab": "Manifestação",
+              "f": "@resposta_ocorrencia contraminuta@resposta_complemento."
             },
             {
               "lab": "Houve",
@@ -1423,11 +1315,11 @@
         },
         {
           "n": "Ministério Público",
-          "f": "@parecer_relatorio",
+          "f": "A Procuradoria Regional da República @parecer_manifestacao.",
           "alts": [
             {
-              "lab": "Automático · ficha",
-              "f": "@parecer_relatorio"
+              "lab": "Manifestação",
+              "f": "A Procuradoria Regional da República @parecer_manifestacao."
             },
             {
               "lab": "Prosseguimento",
@@ -1476,19 +1368,15 @@
       "elementos": [
         {
           "n": "Abertura",
-          "f": "@abertura_relatorio",
+          "f": "Trata-se de embargos de declaração contra acórdão (ID @acordao_recorrido_id) assim ementado:",
           "alts": [
             {
-              "lab": "Automático · ficha",
-              "f": "@abertura_relatorio"
-            },
-            {
-              "lab": "Contra acórdão",
-              "f": "Trata-se de embargos de declaração contra acórdão assim ementado:"
+              "lab": "Fórmula padrão",
+              "f": "Trata-se de embargos de declaração contra acórdão (ID @acordao_recorrido_id) assim ementado:"
             },
             {
               "lab": "Opostos contra acórdão",
-              "f": "Trata-se de embargos de declaração opostos contra acórdão assim ementado:"
+              "f": "Trata-se de embargos de declaração opostos contra acórdão (ID @acordao_recorrido_id) assim ementado:"
             }
           ],
           "r": [],
@@ -1496,45 +1384,37 @@
         },
         {
           "n": "Ementa embargada",
-          "f": "@ementa_embargada_literal",
+          "f": "“@ementa_embargada_literal”",
           "r": [
             "Transcrição integral, em bloco recuado."
           ],
           "fo": "P",
           "alts": [
             {
-              "lab": "Automático · ficha",
-              "f": "@ementa_embargada_literal"
-            },
-            {
-              "lab": "Fórmula original",
-              "f": "“{{ementa do acórdão embargado}}”"
+              "lab": "Fórmula padrão",
+              "f": "“@ementa_embargada_literal”"
             }
           ]
         },
         {
           "n": "Vícios alegados",
-          "f": "@vicios_relatorio",
+          "f": "Alegou-se @ed_vicio_redacao, inclusive em prequestionamento, pois: @ed_pontos_redacao.",
           "r": [],
           "fo": "P",
           "alts": [
             {
-              "lab": "Automático · ficha",
-              "f": "@vicios_relatorio"
-            },
-            {
-              "lab": "Fórmula original",
-              "f": "Alegou-se {{omissão / contradição / obscuridade}}, inclusive em prequestionamento, pois: (1) […]; (2) […]; e (3) […]."
+              "lab": "Fórmula padrão",
+              "f": "Alegou-se @ed_vicio_redacao, inclusive em prequestionamento, pois: @ed_pontos_redacao."
             }
           ]
         },
         {
           "n": "Resposta",
-          "f": "@contrarrazoes_relatorio",
+          "f": "@resposta_ocorrencia contrarrazões@resposta_complemento.",
           "alts": [
             {
-              "lab": "Automático · ficha",
-              "f": "@contrarrazoes_relatorio"
+              "lab": "Manifestação",
+              "f": "@resposta_ocorrencia contrarrazões@resposta_complemento."
             },
             {
               "lab": "Houve",
@@ -1554,11 +1434,11 @@
         },
         {
           "n": "Ministério Público",
-          "f": "@parecer_relatorio",
+          "f": "A Procuradoria Regional da República @parecer_manifestacao.",
           "alts": [
             {
-              "lab": "Automático · ficha",
-              "f": "@parecer_relatorio"
+              "lab": "Manifestação",
+              "f": "A Procuradoria Regional da República @parecer_manifestacao."
             },
             {
               "lab": "Prosseguimento",
@@ -1607,45 +1487,37 @@
       "elementos": [
         {
           "n": "Abertura",
-          "f": "@abertura_relatorio",
+          "f": "Trata-se de agravo interno à decisão (ID @decisao_agravada_id) que @impugnada_sintese.",
           "r": [
             "Uma frase: o que decidiu a monocrática agravada."
           ],
           "fo": "P",
           "alts": [
             {
-              "lab": "Automático · ficha",
-              "f": "@abertura_relatorio"
-            },
-            {
-              "lab": "Fórmula original",
-              "f": "Trata-se de agravo interno à decisão que […]."
+              "lab": "Fórmula padrão",
+              "f": "Trata-se de agravo interno à decisão (ID @decisao_agravada_id) que @impugnada_sintese."
             }
           ]
         },
         {
           "n": "Razões",
-          "f": "@razoes_agravo_interno",
+          "f": "Alegou @agint_parte, em suma @agint_referencia: @agint_razoes.",
           "r": [],
           "fo": "P",
           "alts": [
             {
-              "lab": "Automático · ficha",
-              "f": "@razoes_agravo_interno"
-            },
-            {
-              "lab": "Fórmula original",
-              "f": "Alegou {{a agravante}} (ID …) que […]."
+              "lab": "Fórmula padrão",
+              "f": "Alegou @agint_parte, em suma @agint_referencia: @agint_razoes."
             }
           ]
         },
         {
           "n": "Contraminuta",
-          "f": "@contrarrazoes_relatorio",
+          "f": "@resposta_ocorrencia contraminuta@resposta_complemento.",
           "alts": [
             {
-              "lab": "Automático · ficha",
-              "f": "@contrarrazoes_relatorio"
+              "lab": "Manifestação",
+              "f": "@resposta_ocorrencia contraminuta@resposta_complemento."
             },
             {
               "lab": "Houve",

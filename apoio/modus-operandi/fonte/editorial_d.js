@@ -222,7 +222,7 @@ function dkMarcaIds(r){$$('.fill',r).forEach(function(f){var p=f.previousSibling
 function xPagina(){
   var PT=xPartes(),FMT=((ED.pecas.forma.filter(function(f){return f.t==='Formatação para o PJe';})[0]||{}).r)||[];XP._PT=PT;xAuto(PT);
   var ids=PT.map(function(p){return p.id;}),sel=null;
-  PT.forEach(function(p){p.tr.forEach(function(t){if(t.k===XP.sel)sel={t:t,pt:p};});});
+  PT.forEach(function(p){p.tr.forEach(function(t){if(t.k===XP.sel&&!dkFixoCanhoto(p,t))sel={t:t,pt:p};});});
   if(!sel)XP.sel=null;
   if(sel)DK.parte=sel.pt.id;else if(ids.indexOf(DK.parte)<0)DK.parte=ids.indexOf('relatorio')>=0?'relatorio':ids[0];
   var pt=PT.filter(function(p){return p.id===DK.parte;})[0];
@@ -346,7 +346,8 @@ DICO.conf='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-wid
 var DSIG={'Abertura':'ABR','Sentença':'SEN','Razões':'RAZ','Recurso':'RAZ','Razões do primeiro apelante':'RAZ','Razões do segundo apelante':'RAZ','Contrarrazões':'CTR','Contraminuta':'CTR','Resposta':'CTR','Ministério Público':'MP','Parecer':'MP','Ocorrência':'OCO','Encerramento':'FEC','Cabeçalho':'CAB','Vocativo':'VOC','Transição ao mérito':'TRA','Moldura jurídica':'MOL','Fundamentação':'FUN','Exame do caso':'CAS','Caso vertente':'CAS','Enfrentamento das alegações':'ENF','Precedente':'PRE','Síntese':'SÍN','Honorários recursais':'HON','Consectários':'CON','Dispositivo':'DIS','Itens':'ITE','Rodapé':'ROD','Fórmula':'PRO','Relato':'REL','Síntese do caso':'REL','Marco decisório':'MAR','Comunicação':'COM','Destino dos autos':'DES','Local e data':'LOC','Assinatura':'ASS','Fecho':'FEC','Ementa embargada':'EME','Vícios alegados':'VÍC'};
 function dkSig(n){if(DSIG[n])return DSIG[n];var m=/^([IV]+)\./.exec(n);if(m)return m[1];var d=/^(\d)\./.exec(n);if(d)return d[1];return String(n).normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^A-Za-z]/g,'').slice(0,3).toUpperCase();}
 function dkResumo(t){if(XP.fora[t.k])return 'retirado';if(t.opc&&!XP.abre[t.k])return 'opcional';var E=escolha(t,XP.alt);if(t.alts.length>1)return (E.a.lab||'')+(E.sub?' · '+E.sub[E.si].lab:'');var f=String(E.a.f||'').replace(/\s+/g,' ').trim();return f.length>34?f.slice(0,32)+'…':f;}
-function dkOutros(pt,sel){var L=pt.tr.filter(function(t){return !(t.n==='Sentença'&&sentNaAbertura(pt.tr,XP.alt));});if(L.length<2)return '';
+function dkFixoCanhoto(pt,t){var f=t.alts.length===1?String(t.alts[0].f||'').trim():'';return !t.opc&&(xFixo(pt.id,t)&&!!f&&!/@|\{\{|\[…|…/.test(f)||/^(Vistos\.|DECIDO\.)$/i.test(f));}
+function dkOutros(pt,sel){var L=pt.tr.filter(function(t){return !dkFixoCanhoto(pt,t)&&!(t.n==='Sentença'&&sentNaAbertura(pt.tr,XP.alt));});if(!L.length||sel&&L.length<2)return '';
   return '<div class="dout2"><div class="cfl">'+(sel?'Outros blocos':'Blocos da parte')+'</div><ol>'+L.map(function(t,i){if(sel&&t.k===sel.k)return '';var fo=XP.fora[t.k],op=t.opc&&!XP.abre[t.k];return '<li><button type="button" data-'+(fo?'xvolta':op?'xabre':'dsel')+'="'+esc(t.k)+'"><span class="n">'+('0'+(i+1)).slice(-2)+'</span><b>'+esc(t.n)+'</b><small>'+esc(dkResumo(t))+' ›</small></button></li>';}).join('')+'</ol></div>';}
 function dkHead(){var h=$('#v-edit .pg-h');if(!h)return;var ed=XS.ed||'pecas',t=$('#v-edit .pg-t h1'),k=$('#v-edit .pg-t .dkk');if(!k&&t){k=document.createElement('p');k.className='dkk';t.parentNode.insertBefore(k,t);}
   var I={pecas:['PADRÃO · MINUTÁRIO','Minutário','Estrutura do pronunciamento conforme o tipo de julgamento. Ao abrir um processo, os campos recebem os dados disponíveis da ficha e da pauta. Na ausência de modelo específico, a Minuta-Matriz sustenta a redação; modelos temáticos são oferecidos separadamente.',''],par:['PADRÃO · PARÁGRAFOS','Parágrafos-padrão','Trechos prontos por matéria e situação, com campos que se preenchem com o caso. Busque, abra e copie para a minuta.',''],mod:['PADRÃO · MODELOS','Modelos','Modelos de acórdão, decisão e despacho extraídos de votos e decisões do Relator, para consulta.','Os modelos ainda não são regra do gabinete: a curadoria está em andamento e a maior parte deles não foi revisada como padrão. Já disponível: busca e filtros por tipo, julgamento, assunto e classe; leitura da peça completa, com ficha e referências rápidas; preenchimento das variáveis pelo número do processo; cópia da peça ou do esqueleto, .docx e PDF.'],dir:['BREVIÁRIO DO GABINETE','Breviário','Entradas rápidas do que o Desembargador fixar e o manual de redação do gabinete: frase, citação, vocabulário, grafias, formatação e estrutura das peças.']}[ed]||['','Editorial',''];
@@ -360,7 +361,7 @@ function xPagina(){
   dkModo28(false);
   var PT=xPartes(),FMT=((ED.pecas.forma.filter(function(f){return f.t==='Formatação para o PJe';})[0]||{}).r)||[];XP._PT=PT;xAuto(PT);
   var ids=PT.map(function(p){return p.id;}),sel=null;
-  PT.forEach(function(p){p.tr.forEach(function(t){if(t.k===XP.sel)sel={t:t,pt:p};});});
+  PT.forEach(function(p){p.tr.forEach(function(t){if(t.k===XP.sel&&!dkFixoCanhoto(p,t))sel={t:t,pt:p};});});
   if(!sel)XP.sel=null;
   if(sel)DK.parte=sel.pt.id;else if(ids.indexOf(DK.parte)<0)DK.parte=ids.indexOf('relatorio')>=0?'relatorio':ids[0];
   var pt=PT.filter(function(p){return p.id===DK.parte;})[0];XP._SEL=sel?sel.t:null;
@@ -381,8 +382,8 @@ function xPagina(){
     var vers='';if(t.alts.length>1){var nb=t.alts.filter(function(x){return !x.base;}).length,hb=nb&&nb<t.alts.length,vb=XP.vb[t.k]||(t.alts[ai]&&t.alts[ai].base);
       vers='<div class="vs" role="group" aria-label="Versões">'+t.alts.map(function(x,i){if(x.base&&hb&&!vb)return '';return '<button type="button"'+(x.base&&hb?' class="b"':'')+' data-xalt="'+esc(t.k)+'" data-i="'+i+'" aria-pressed="'+(i===ai)+'">'+esc(x.lab||('Versão '+(i+1)))+'</button>';}).join('')+'</div>'+(hb?'<button type="button" class="dact" data-xbase="'+esc(t.k)+'">'+(vb?'menos':'+ '+(t.alts.length-nb)+' da base')+'</button>':'');}
     var sub=E.sub?'<div class="vs sub" role="group">'+E.sub.map(function(x,i){return '<button type="button" data-xsub="'+esc(t.k)+'" data-i="'+i+'" aria-pressed="'+(i===E.si)+'">'+esc(x.lab)+'</button>';}).join('')+'</div>':'';
-    var pick=pt.id!=='acordao'&&!xFixo(pt.id,t)?'<button type="button" class="dact dpk" data-dpick="'+esc(t.k)+'" title="Incluir neste bloco um parágrafo do banco de parágrafos-padrão">+ parágrafo</button>':'';
-    var acts=t.opc?'<button type="button" class="dact" data-xfecha="'+esc(t.k)+'" title="Tirar o trecho opcional da peça">recolher</button>':(xFixo(pt.id,t)?'':'<button type="button" class="dact" data-xfora="'+esc(t.k)+'" title="Retirar da peça, da cópia e do .docx">retirar</button>');
+    var pick=pt.id!=='acordao'&&!dkFixoCanhoto(pt,t)&&!xFixo(pt.id,t)?'<button type="button" class="dact dpk" data-dpick="'+esc(t.k)+'" title="Incluir neste bloco um parágrafo do banco de parágrafos-padrão">+ parágrafo</button>':'';
+    var acts=t.opc?'<button type="button" class="dact" data-xfecha="'+esc(t.k)+'" title="Tirar o trecho opcional da peça">recolher</button>':(dkFixoCanhoto(pt,t)||xFixo(pt.id,t)?'':'<button type="button" class="dact" data-xfora="'+esc(t.k)+'" title="Retirar da peça, da cópia e do .docx">retirar</button>');
     var rn=(t.r||[]).length,tag='';
     var body=(pt.id==='ementa'&&/^[IV]+\./.test(t.n)?'<p class="em"><b>'+esc(t.n)+'</b></p>':'')+
       (a.f?xParas(a.f,pt.id,t.n,min&&!/^\s*(\[|\{\{|…)/.test(a.f)?' <span class="drn" title="Primeiro parágrafo após o vocativo">inicia em minúscula</span>':'',{k:t.k+'@'+E.key,i:0,auto:true})
@@ -445,7 +446,7 @@ function dkCanTrecho(sel){var t=sel.t,pt=sel.pt,E=escolha(t,XP.alt),ai=E.ai,h=''
   var ac=t.opc?'<button type="button" class="dact" data-xfecha="'+esc(t.k)+'">Recolher este bloco opcional</button>':(!xFixo(pt.id,t)?'<button type="button" class="dact" data-xfora="'+esc(t.k)+'">Retirar este bloco da peça</button>':'');
   if(ac)h+='<div class="cf dacts">'+ac+'</div>';
   return h;}
-function dkCanPeca(PT,pt){var n=pt.tr.filter(function(t){return !t.opc&&!xSai(t,pt.tr,XP.alt,XP.fora);}).length,op=pt.tr.filter(function(t){return t.opc&&!XP.abre[t.k];}).length,fo=pt.tr.filter(function(t){return XP.fora[t.k];}).length;
+function dkCanPeca(PT,pt){var n=pt.tr.filter(function(t){return !t.opc&&!dkFixoCanhoto(pt,t)&&!xSai(t,pt.tr,XP.alt,XP.fora);}).length,op=pt.tr.filter(function(t){return t.opc&&!XP.abre[t.k];}).length,fo=pt.tr.filter(function(t){return !dkFixoCanhoto(pt,t)&&XP.fora[t.k];}).length;
   var F=$$('#x-main .fill'),ok=F.filter(function(f){return f.textContent.trim();}).length;
   var h='<div class="cvh"><div><p class="cvk">'+esc(XPECAS[XP.pc].t)+' · parte '+(PT.indexOf(pt)+1)+' de '+PT.length+'</p><p class="cvt">'+esc(pt.t)+'</p></div></div>';
   h+='<div class="cf"><div class="dkpi"><div><b>'+n+'</b><span>blocos</span></div><div><b>'+op+'</b><span>opcionais</span></div><div><b>'+ok+'/'+F.length+'</b><span>campos</span></div></div>'+(fo?'<p class="meta" style="margin:8px 0 0">'+fo+(fo>1?' blocos retirados':' bloco retirado')+'.</p>':'')+'</div>';
@@ -746,6 +747,33 @@ var _camposRBase=camposR;camposR=function(raw,ctx){return _camposRBase(raw,ctx).
 var _camposTBase=camposT;camposT=function(raw,ctx){return _camposTBase(raw,ctx).replace(/\[@([a-z0-9_]+)\]/g,function(m,a){return '['+arrRot(a)+']';});};
 /* valores: ficha do processo aberto (campos “seção.Campo” e, para os do acervo, “acervo.coluna”) e os valores que a peça e o caso já calculam */
 function dkValorFicha(v){if(v==null)return '';if(Array.isArray(v))return v.map(function(x){return x&&typeof x==='object'?Object.keys(x).map(function(z){return x[z];}).filter(Boolean).join(' · '):String(x);}).filter(Boolean).join('; ');return String(v);}
+/* Fórmulas visíveis, com fragmentos da mesma composição da HERO. Nunca inferir ausência de manifestação. */
+function dkFragmentosFicha(V){
+  var R={};V=V||{};
+  function put(k,v){v=String(v||'').trim();if(v)R[k]=v;}
+  function fim(t){return String(t||'').trim().replace(/\.$/,'');}
+  function recurso(n,t){
+    var m=/^(?:Apelou|Agravou)\s+(.+?)\s+(\(IDs?\b[^\n]*?\)), alegando, em suma, que:\s*([\s\S]+)$/i.exec(String(t||''));
+    if(m){put('recurso_'+n+'_parte',m[1]);put('recurso_'+n+'_referencia',m[2]);put('recurso_'+n+'_razoes',fim(m[3]));}
+  }
+  recurso(1,V.razoes_primeiro_recurso||V.razoes_recursais);recurso(2,V.razoes_segundo_recurso);
+  var extra=String(V.razoes_recursais||'').split('\n\n').slice(1);if(extra.length&&R.recurso_1_razoes)put('recurso_1_razoes_todas',R.recurso_1_razoes+'.\n\n'+fim(extra.join('\n\n')));
+  var m=/^(Houve|Não houve)\s+(?:contrarrazões|contraminuta)([\s\S]*)$/i.exec(String(V.contrarrazoes_relatorio||''));
+  if(m){put('resposta_ocorrencia',m[1]);put('resposta_complemento',fim(m[2]));}
+  else if(V.contrarrazoes_relatorio)put('resposta_ocorrencia',V.contrarrazoes_relatorio);
+  m=/^A Procuradoria Regional da República\s+([\s\S]+)$/.exec(String(V.parecer_relatorio||''));
+  if(m)put('parecer_manifestacao',fim(m[1]));else if(V.parecer_relatorio)put('parecer_manifestacao',fim(V.parecer_relatorio));
+  m=/^Alegou-se\s+(.+?), inclusive em prequestionamento, pois:\s*([\s\S]+)$/.exec(String(V.vicios_relatorio||''));
+  if(m){put('ed_vicio_redacao',m[1]);put('ed_pontos_redacao',fim(m[2]));}
+  m=/^Alegou\s+(.+?), em suma\s+(\(IDs?\b[^\n]*?\)):\s*([\s\S]+)$/.exec(String(V.razoes_agravo_interno||''));
+  if(m){put('agint_parte',m[1]);put('agint_referencia',m[2]);put('agint_razoes',fim(m[3]));}
+  m=/^Trata-se de agravo de instrumento à decisão\s+\(IDs?\b[^\n]*?\)\s+que\s+([\s\S]+)$/.exec(String(V.abertura_relatorio||''));
+  if(m)put('decisao_agravada_sintese',fim(m[1]));
+  m=/^Trata-se de\s+([\s\S]+)$/.exec(String(V.abertura_relatorio||''));if(m)put('relato_objeto',fim(m[1]));
+  put('dispositivo_conclusao',fim(String(V.dispositivo_voto||'').replace(/^Ante o exposto,\s*/i,'')));
+  put('honorarios_solucao',fim(String(V.honorarios_recursais_texto||'').replace(/^Pela sucumbência recursal,\s*/i,'')));
+  return R;
+}
 var _xAutoCasoBase=xAutoCaso;xAutoCaso=function(){_xAutoCasoBase();
   var dados=(typeof MS!=='undefined'&&XS.ed==='mod'&&MS.fichaCaso&&String(MS.fichaCaso.P.processo||'').replace(/\D/g,'')===String(XD.proc||'').replace(/\D/g,''))?MS.fichaCaso:null;
   var P=dados?dados.P:(window.CQX&&CQX.tem()?CQX.P():null),J=dados?dados.J:(P?CQX.J():null);if(P&&String(P.processo||'').replace(/\D/g,'')!==String(XD.proc||'').replace(/\D/g,'')){P=null;J=null;}var cp=(J&&String(J.processo||'').replace(/\D/g,'')===String(P.processo||'').replace(/\D/g,'')&&J.campos)||{};
@@ -766,6 +794,9 @@ var _xAutoCasoBase=xAutoCaso;xAutoCaso=function(){_xAutoCasoBase();
     if(/apela|remessa|agravo|embargos de declara|retrata/i.test(tj)){
       var D=MutaGerador.comporFicha(cp,fo);
       Object.keys(D.variaveis||{}).forEach(function(a){if(D.variaveis[a])AUTO['@'+a]=D.variaveis[a];});
+       var F=dkFragmentosFicha(D.variaveis);Object.keys(F).forEach(function(a){AUTO['@'+a]=F[a];});
+       if(F.recurso_1_razoes_todas&&XP.v[XP.pc]!=='dap')AUTO['@recurso_1_razoes']=F.recurso_1_razoes_todas;
+       if(cp['origem.Sentença - ID']&&!cp['triagem.Impugnada - ID']&&D.tipo==='Agravo de Instrumento')AUTO['@decisao_agravada_id']=dkValorFicha(cp['origem.Sentença - ID']);
     }else if(/mandado de seguran[çc]a|msciv/i.test(tj)){
       var H=MutaGerador.comporFicha(cp,fo,'Apelação').variaveis;AUTO['@honorarios_recursais_texto']=H.honorarios_recursais_texto;
     }
@@ -774,6 +805,30 @@ var _xAutoCasoBase=xAutoCaso;xAutoCaso=function(){_xAutoCasoBase();
   /* cabeçalho da ementa: classe e assunto em maiúsculas, da ficha quando o acervo embutido não tiver o processo */
   ['classe','assunto'].forEach(function(a){if(!AUTO['@'+a+'_ementa']&&AUTO['@'+a])AUTO['@'+a+'_ementa']=String(AUTO['@'+a]).toUpperCase();});
   if(P){var C={processo:P.processo,classe:P.classe,assunto:P.assunto,tipo_julgamento:P.tipoJulgamento,tipo_de_caso:P.subassuntos,especificidades:P.especificidades,alegacoes:P.questoes,resultado_julgamento:P.resultado,honorarios_julgamento:P.honorarios};Object.keys(C).forEach(function(a){if(C[a]&&!AUTO['@'+a])AUTO['@'+a]=dkValorFicha(C[a]);});['classe','assunto'].forEach(function(a){if(AUTO['@'+a]){AUTO[a.toUpperCase()]=String(AUTO['@'+a]).toUpperCase();AUTO['@'+a+'_ementa']=AUTO[a.toUpperCase()];}});}};
+/* Redação condicional: preservar o sentido do gerador, sem uma versão "por fonte". */
+var _dkEscolhaIntegrada=escolha;
+escolha=function(t,ST){var E=_dkEscolhaIntegrada(t,ST),f=E.a.f||'',n=f;
+  if(/@resposta_ocorrencia/.test(f)){
+    var s=AUTO['@resposta_ocorrencia']||'';
+    if(/^não houve$/i.test(s))n=f.replace('@resposta_complemento','');
+    else if(/^\[VALIDAR:/.test(s))n='@resposta_ocorrencia';
+  }
+  if(f==='A Procuradoria Regional da República @parecer_manifestacao.'&&/^Intimada, a Procuradoria Regional da República não se manifestou\.$/.test(AUTO['@parecer_relatorio']||''))n='Intimada, a Procuradoria Regional da República não se manifestou.';
+  if(f==='A Procuradoria Regional da República @parecer_manifestacao.'&&/^\[VALIDAR:/.test(AUTO['@parecer_relatorio']||''))n='@parecer_manifestacao';
+  if(f==='Pela sucumbência recursal, @honorarios_solucao.'&&AUTO['@honorarios_recursais_texto']&&!/^Pela sucumbência recursal,/i.test(AUTO['@honorarios_recursais_texto']))n='@honorarios_solucao.';
+  if(n!==f){E.a=Object.assign({},E.a,{f:n});}
+  return E;
+};
+
+/* Uma única vez por navegador: preservar valores antigos no rascunho, sem reutilizar uma
+   lacuna de parágrafo inteiro como se fosse ID, parte ou outro campo da nova fórmula. */
+(function(){try{var k='vdm-minutario-formulas-v2';if(localStorage.getItem(k))return;
+  var antigos={};Object.keys(FILL).forEach(function(k){if(/^(rel-|relatorio\||voto\||ementa\||monocratica\|)/.test(k)){antigos[k]=FILL[k];delete FILL[k];}});
+  if(Object.keys(antigos).length)localStorage.setItem(k+'-rascunho-anterior',JSON.stringify(antigos));
+  Object.keys(XP.alt).forEach(function(k){if(/^(rel-|relatorio\||voto\||ementa\||monocratica\|)/.test(k))delete XP.alt[k];});
+  localStorage.setItem(k,'1');xRascunho();
+}catch(e){}})();
+
 /* canhoto “Campos do bloco”: o campo da ficha aparece pelo rótulo */
 var _dkCampoRotBase=dkCampoRot;dkCampoRot=function(f){var ph=dkAlias(f.getAttribute('data-ph')||'');if(ph.charAt(0)==='@')return arrRot(ph.slice(1))+' · ficha';return _dkCampoRotBase(f);};
 

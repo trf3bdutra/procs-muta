@@ -8,7 +8,7 @@ test('extrator estruturado conserva comandos, evidências e base literal',()=>{
 });
 test('Editorial usa as variáveis calculadas e a ficha tem os comandos',()=>{
  const f=JSON.parse(read('padrao/ficha.json'));assert.ok(f.abas.flatMap(a=>a.grupos.flatMap(g=>g.campos)).some(c=>c.chave==='Sentença - Comandos'));
- const e=JSON.parse(read('apoio/modus-operandi/fonte/editorial_pecas.json'));assert.equal(e.pecas.find(p=>p.id==='rel-ap').elementos[0].f,'@abertura_relatorio');
+ const e=JSON.parse(read('apoio/modus-operandi/fonte/editorial_pecas.json'));assert.match(e.pecas.find(p=>p.id==='rel-ap').elementos[0].f,/^Trata-se de apelação à sentença \(ID @sentenca_id\)/);
  assert.match(read('extensao/gerador.js'),/confirmadosOrigem/);assert.match(read('extensao/autos.js'),/!it.manual/);
 });
 test('composição confirmada mantém comandos e base de cálculo',()=>{
@@ -41,3 +41,11 @@ test('contrarrazões não verificadas ou contraditórias não viram ausência co
  const y=w.MutaGerador.comporFicha({'origem.Contrarrazões - Situação':'Não houve','origem.Contrarrazões':[{ids:'123456789'}]},{},'Apelação');
  assert.match(y.variaveis.contrarrazoes_relatorio,/divergência/);
 });
+
+ test('fórmulas integradas: sem modo separado de preenchimento e fecho fora do canhoto',()=>{
+ const e=JSON.parse(read('apoio/modus-operandi/fonte/editorial_pecas.json')),js=read('apoio/modus-operandi/fonte/editorial_d.js');
+ assert.equal(e.pecas.find(p=>p.id==='rel-ap').elementos[0].alts.length,1);
+ assert.ok(e.pecas.flatMap(p=>p.elementos).flatMap(x=>x.alts||[]).every(a=>! /^(Automático · ficha|Ficha do processo)$/.test(a.lab)));
+ const r=e.pecas.find(p=>p.id==='rel-ap').elementos.find(x=>x.n==='Razões');assert.match(r.f,/Apelou @recurso_1_parte @recurso_1_referencia/);
+ assert.match(js,/!dkFixoCanhoto\(pt,t\)/);assert.match(js,/function dkFragmentosFicha/);
+ });
