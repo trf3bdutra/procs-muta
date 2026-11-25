@@ -254,13 +254,15 @@ function pautaFluxo(P,C,hoje){
   (Array.isArray(P.sessoes)?P.sessoes:[]).forEach(function(x){if(x)put(x.sessao,x.item,x.resultado);});
   put(P['Sessão original'],P['Item (Pauta de Julgamento)'],P['Status de Julgamento']);
   C.forEach(function(x){if(x)put(x.sessao,x.item,x.resultado||x.status);});
+  var ocorrencias={};try{ocorrencias=JSON.parse(S(P['Ingresso e ocorrências da sessão'])||'{}')||{};}catch(e){}
+  Object.values(rows).forEach(function(x){var o=ocorrencias[x.sessao+'|'+x.item];if(o&&o.efetivada===true&&S(o.justificativa)&&! /retirad|adiad|julgad|provimento|prejudic|nao conhec|acolhid|rejeitad|homolog/i.test(N(x.status))){if(o.ocorrencia==='Adiamento')x.status='ADIADO';else if(o.ocorrencia==='Retirada de pauta')x.status='RETIRADO DE PAUTA';}});
   var L=Object.values(rows).sort(function(a,b){return b.sessao.localeCompare(a.sessao);}),cur=L.find(function(x){return !/retirad|adiad|julgad|provimento|prejudic|nao conhec|acolhid|rejeitad|homolog/i.test(N(x.status));}),last=L[0],alvo=dia(P['Nova sessão de destino']);
   if(last&&cur&&last.sessao>cur.sessao)cur=null;
   var estado=cur?'oficial':last&&/adiad/.test(N(last.status))?'adiado':last&&/retirad/.test(N(last.status))?'retirado':last?'historico':'previa';
   return {estado:estado,atual:cur||null,ultima:last||null,alvo:alvo,lista:L};
 }
 function pautaAtualFluxo(){
- var P=Object.assign({},(G.op||{}).pauta||{});['Sessão original','Item (Pauta de Julgamento)','Status de Julgamento','Nova sessão de destino'].forEach(function(k){var v=V('pauta',k);if(v!=null&&S(v))P[k]=v;});
+ var P=Object.assign({},(G.op||{}).pauta||{});['Sessão original','Item (Pauta de Julgamento)','Status de Julgamento','Nova sessão de destino','Ingresso e ocorrências da sessão'].forEach(function(k){var v=V('pauta',k);if(v!=null&&S(v))P[k]=v;});
  var SI=window.MutaSincronia&&window.MutaSincronia.situacao?window.MutaSincronia.situacao():null,C=SI&&dg(SI.cnj)===dg(G.cnj)?SI.cartoes||[]:[];
  return pautaFluxo(P,C);
 }
@@ -1211,11 +1213,12 @@ function heroOrganizarProntuario(){
       spSel.value=S(V('triagem','Seleção Prévia'));spSel.disabled=!!(window.MUTA_WEB&&window.MUTA_WEB.leitura);sp.append(spSel);encFields.append(sp);
       if(spSel.value==='SELECIONADO PREVIAMENTE'||pf.estado==='adiado')encFields.append(dataPlano(pf.estado==='adiado'?'Sessão prevista para remarcação':'Sessão pretendida (vazio = banco de reserva)'));
       html(encFields,campoRot('triagem','Seleção Prévia - Nota','Nota de enquadramento'));
-      if(ultimo)encFields.append(pLinha('Última pauta',brD(ultimo.sessao)+' · item '+ultimo.item+' · '+(ultimo.status||'Sem resultado registrado')));
+      if(ultimo&&pf.estado!=='adiado'&&pf.estado!=='retirado')encFields.append(pLinha('Última pauta',brD(ultimo.sessao)+' · item '+ultimo.item+' · '+(ultimo.status||'Sem resultado registrado')));
       if(pf.estado==='adiado'||pf.estado==='retirado')html(encFields,campoRot('pauta','Motivo da remarcação'));
-    }else{
-      var resumoP=el('div','hero-pauta-resumo gf w'),resumoL=el('div','gr');resumoP.append(el('h4','pm-mer-h','Pauta oficial'),resumoL);
-      resumoL.classList.add('hero-pauta-linha');resumoL.append(pLinha('Sessão atual',brD(ultimo.sessao)),pLinha('Item',ultimo.item));
+    }
+    if(oficial||ultimo&&(pf.estado==='adiado'||pf.estado==='retirado')){
+      var resumoP=el('div','hero-pauta-resumo gf w'),resumoL=el('div','gr');resumoP.append(el('h4','pm-mer-h',oficial?'Pauta oficial':'Pauta de origem'),resumoL);
+      resumoL.classList.add('hero-pauta-linha');resumoL.append(pLinha(oficial?'Sessão atual':'Sessão de origem',brD(ultimo.sessao)),pLinha('Item',ultimo.item));
       var stP=el('label','gf'),selP=el('select'),cP=campoLista('pauta','Status de Julgamento'),ocCampo=campoModelo('pauta','Ingresso e ocorrências da sessão'),ocMap={};
       try{var om=JSON.parse(S(V('pauta','Ingresso e ocorrências da sessão'))||'{}');if(om&&typeof om==='object'&&!Array.isArray(om))ocMap=om;}catch(e){}
       var ocKey=ultimo.sessao+'|'+ultimo.item,oc=ocMap[ocKey]||{},vP=S(ultimo.status||V('pauta','Status de Julgamento'));
@@ -1224,14 +1227,14 @@ function heroOrganizarProntuario(){
       function gravarOc(){if(!ocCampo||!editavel(ocCampo))return;ocMap[ocKey]=oc;marcar('pauta.Ingresso e ocorrências da sessão',JSON.stringify(ocMap));agendar(500);}
       selP.onchange=function(){oc.ingresso=selP.value;gravarOc();};
       var occ=el('div','hero-nao-julg gf w'),oh=el('div','hero-sol-head'),os=el('select'),ot=el('textarea'),ol=el('select'),oe=el('small','muted'),ob=el('button','btn line sm','Registrar solicitação'),og=el('button','btn line sm','Vincular solicitação'),cancelO=el('button','lnk','Limpar seleção');
-      var naoJulgLabel=el('label','gf');naoJulgLabel.append(el('span','gl','Não julgamento'));os.setAttribute('aria-label','Não julgamento');os.disabled=!ocCampo||!editavel(ocCampo);[['','Sem ocorrência'],['Retirada de pauta','Retirada de pauta'],['Adiamento','Adiamento']].forEach(function(x){var o=el('option','',x[1]);o.value=x[0];os.append(o);});os.value=oc.ocorrencia||'';ot.rows=2;ot.placeholder='Justificativa obrigatória';ot.value=oc.justificativa||'';
+      var naoJulgLabel=el('label','gf');naoJulgLabel.append(el('span','gl','Não julgamento'));os.setAttribute('aria-label','Não julgamento');os.disabled=!ocCampo||!editavel(ocCampo);[['','Sem ocorrência'],['Retirada de pauta','Retirada de pauta'],['Adiamento','Adiamento']].forEach(function(x){var o=el('option','',x[1]);o.value=x[0];os.append(o);});os.value=oc.ocorrencia||(pf.estado==='adiado'?'Adiamento':pf.estado==='retirado'?'Retirada de pauta':'');ot.rows=2;ot.placeholder='Justificativa obrigatória';ot.value=oc.justificativa||'';
       var of=el('div','hero-sol-form'),olabel=el('label','gf');olabel.append(el('span','gl','Solicitação de origem (opcional)'),ol);of.append(olabel,ot,oe,ob,og,cancelO);naoJulgLabel.append(os);resumoL.append(naoJulgLabel);occ.append(of);resumoP.append(occ);
       var oMan=[];try{var omr=JSON.parse(S(V('origem','Solicitações manuais'))||'[]');if(Array.isArray(omr))oMan=omr;}catch(e){}
       function refreshO(){of.hidden=!os.value;occ.hidden=!os.value;ol.replaceChildren();var blank=el('option','','Registro direto · sem solicitação');blank.value='';ol.append(blank);oMan.filter(function(r){return r.tipo===os.value&&(!r.sessaoOrigem||r.sessaoOrigem===ultimo.sessao)&&(!r.itemOrigem||String(r.itemOrigem)===String(ultimo.item));}).forEach(function(r){var o=el('option','',(r.estado||'Pendente')+' · '+S(r.justificativa||r.descricao).slice(0,90));o.value=r.id;ol.append(o);});ol.value=oc.ocorrencia===os.value?oc.solicitacao||'':'';if(ol.selectedIndex<0)ol.value='';ot.value=oc.ocorrencia===os.value?oc.justificativa||'':'';syncO(false);}
       function syncO(copy){var r=oMan.find(function(r){return r.id===ol.value;});ot.readOnly=false;if(r&&(copy||!S(ot.value)))ot.value=S(r.justificativa||r.descricao);oe.textContent=r?'Origem: solicitação '+(r.estado||'Pendente')+'. A justificativa do não julgamento pode ser complementada.':'Registro independente, sem criar solicitação.';ob.hidden=false;og.hidden=true;ob.disabled=!ocCampo||!editavel(ocCampo);ol.disabled=os.disabled;ot.disabled=os.disabled;cancelO.disabled=os.disabled;}
       os.onchange=refreshO;ol.onchange=function(){syncO(true);};ob.type=og.type=cancelO.type='button';ob.textContent='Gravar não julgamento';
-      ob.onclick=function(){if(!ocCampo||!editavel(ocCampo)||!os.value)return;var t=S(ot.value);if(!t){oe.textContent='Informe a justificativa obrigatória.';return;}oc.ocorrencia=os.value;oc.justificativa=t;oc.solicitacao=ol.value||'';gravarOc();render();};
-      cancelO.onclick=function(){if(!ocCampo||!editavel(ocCampo))return;delete oc.ocorrencia;delete oc.justificativa;delete oc.solicitacao;gravarOc();render();};refreshO();
+      ob.onclick=function(){if(!ocCampo||!editavel(ocCampo)||!os.value)return;var t=S(ot.value);if(!t){oe.textContent='Informe a justificativa obrigatória.';return;}if(!confirm('Registrar a ocorrência efetiva de não julgamento nesta sessão? Isto não decide uma solicitação vinculada.'))return;oc.ocorrencia=os.value;oc.justificativa=t;oc.solicitacao=ol.value||'';oc.efetivada=true;gravarOc();render();};
+      cancelO.onclick=function(){if(!ocCampo||!editavel(ocCampo))return;if(oc.efetivada&&!confirm('Remover o registro de não julgamento desta sessão?'))return;delete oc.ocorrencia;delete oc.justificativa;delete oc.solicitacao;delete oc.efetivada;gravarOc();render();};refreshO();
       encFields.append(resumoP);
     }
   }
