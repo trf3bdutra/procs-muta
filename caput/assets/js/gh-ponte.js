@@ -9,7 +9,8 @@
   if (window.__ghPonte) return;
   var BASE = 'https://api.github.com/repos/trf3bdutra/procs-muta', F = window.fetch.bind(window), SENT = 'ponte';
   var GUARDA = /^contents\/acervo\/(fonte|operacional|operacional-arquivo|importado)\.json$/;
-  window.__ghPonte = { SENT: SENT };
+  var OFFICE = /^\/cognitio(?:\/|$)/.test(location.pathname) || new URLSearchParams(location.search).get('cognitio')==='1';
+  window.__ghPonte = { SENT: SENT, office: OFFICE };
   function gz(txt) { return new Response(new Blob([txt]).stream().pipeThrough(new CompressionStream('gzip'))).arrayBuffer(); }
 
   /* ---------- cópia guardada (IndexedDB) ---------- */
@@ -21,13 +22,13 @@
 
   /* ---------- envio: direto ao GitHub (token pessoal) ou pela ponte (sessão) ---------- */
   async function enviar(url, init, h) {
-    if ((h.get('Authorization') || '') !== 'Bearer ' + SENT) return F(url, Object.assign({}, init, { headers: h }));
+    if ((h.get('Authorization') || '') !== 'Bearer ' + SENT) return OFFICE ? new Response(JSON.stringify({message:'Use a sessão do Office.'}),{status:401,headers:{'Content-Type':'application/json'}}) : F(url, Object.assign({}, init, { headers: h }));
     var resto = url.slice(BASE.length).replace(/^\//, ''), metodo = String(init.method || 'GET').toUpperCase(), corpo = init.body, H = { 'X-Ponte-Accept': h.get('Accept') || 'application/vnd.github+json' };
     if (corpo != null) {
       if (typeof corpo === 'string' && corpo.length > 1e6 && window.CompressionStream) { corpo = await gz(corpo); H['X-Ponte-Gz'] = '1'; H['Content-Type'] = 'application/octet-stream'; }
       else H['Content-Type'] = 'application/json';
     }
-    var r = await F('/api/acesso?gh=1&p=' + encodeURIComponent(resto), { method: metodo, body: corpo, headers: H, cache: 'no-store', credentials: 'same-origin' });
+    var r = await F(('/api/acesso?gh=1'+(OFFICE?'&office=1':'')+'&p=') + encodeURIComponent(resto), { method: metodo, body: corpo, headers: H, cache: 'no-store', credentials: 'same-origin' });
     if (r.headers.get('X-Ponte-Gz') !== '1') return r;
     var txt = await new Response(r.body.pipeThrough(new DecompressionStream('gzip'))).text();
     return new Response(txt, { status: r.status, headers: { 'Content-Type': r.headers.get('X-Ponte-Tipo') || 'application/json' } });
@@ -61,5 +62,5 @@
   };
   window.__ghPonte.limparCache = function () { return idb('readwrite', function (s) { return s.clear(); }); };
   /* sessão da Ex Officio com acesso ao acervo? (GET /api/acesso?gh=1&p= só confere) */
-  window.__ghPonte.confere = function () { return F('/api/acesso?gh=1&p=', { cache: 'no-store', credentials: 'same-origin' }).then(function (r) { return r.ok; }).catch(function () { return false; }); };
+  window.__ghPonte.confere = function () { return F(('/api/acesso?gh=1'+(OFFICE?'&office=1':'')+'&p='), { cache: 'no-store', credentials: 'same-origin' }).then(function (r) { return r.ok; }).catch(function () { return false; }); };
 })();

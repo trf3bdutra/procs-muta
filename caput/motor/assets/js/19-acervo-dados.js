@@ -279,7 +279,8 @@
 
 
   /* ---------- escrita (API do GitHub, token só na memória da aba) ---------- */
-  let TOKEN = (() => { try { return sessionStorage.getItem(LS_TOKEN) || localStorage.getItem(LS_TOKEN) || ""; } catch (e) { return ""; } })();
+  const OFFICE = !!(window.__ghPonte&&window.__ghPonte.office);
+  let TOKEN = OFFICE ? '' : (() => { try { return sessionStorage.getItem(LS_TOKEN) || localStorage.getItem(LS_TOKEN) || ""; } catch (e) { return ""; } })();
   function b64(str) {
     const bytes = new TextEncoder().encode(str); let s = "";
     for (let i = 0; i < bytes.length; i += 0x8000) s += String.fromCharCode.apply(null, bytes.subarray(i, i + 0x8000));
@@ -315,6 +316,7 @@
     return novo.sha;
   }
   function pedirToken(motivo) {
+    if(OFFICE)return window.ProcsMuta.token(motivo).then(v=>{TOKEN=v;return v});
     return new Promise(res => {
       if (TOKEN) { res(TOKEN); return; }
       const bg = document.createElement("div"); bg.className = "acv-modal";
@@ -814,7 +816,7 @@ ${linhas}
     if (!iniciado) { iniciado = true; envolver(c); protegerConfiguracoes(c); colunasPrimeiroGrau(c); setTimeout(async () => { if (!TOKEN && window.ProcsMuta) { try { TOKEN = await window.ProcsMuta.token("Para ler o acervo do gabinete."); } catch (e) {} } if (TOKEN) { await puxar(true); if (GST.doc) impor(c, GST.doc); } else { ST.erro = "repositório privado não conectado — abra ACERVO · SINCRONIA e clique em ATUALIZAR"; desenhar(); } }, 300); }
   }, 400);
 
-  window.__acervoGitHub = { puxar, encaminhar, receber, docLocal, serializar, mesclar, registroDe, sigiloso, paginaHtml, docDeArquivo, csv, carimbar, colunasDe, estado: ST, GH, PUB, lerRemoto, token: v => { TOKEN = v; },
+  window.__acervoGitHub = { puxar, encaminhar, receber, docLocal, serializar, mesclar, registroDe, sigiloso, paginaHtml, docDeArquivo, csv, carimbar, colunasDe, estado: ST, GH, PUB, lerRemoto, token: v => { TOKEN = OFFICE && v!==window.__ghPonte.SENT ? '' : v; },
     gabinete: { puxar: puxarGabinete, estado: GST, servidorPublico, impor: () => impor(comp(), GST.doc), enviarMarcos } };
 })();
 

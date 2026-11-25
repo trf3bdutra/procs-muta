@@ -3,7 +3,7 @@ const L = require('./_lib');
    Guarda as 500 mais recentes; o commit "Entrada (Nome): <app>" é o que o registro lê. Nunca atrapalha o login. */
 const REG = 'apoio/registro-entradas.json';
 function ondeDe(req) { let p = ''; try { p = new URL(String(req.headers.referer || '')).pathname; } catch (e) {}
-  return /^\/caput/.test(p) ? 'Caput' : /^\/(modus|editor|compendio)/.test(p) ? 'Compendium' : /^\/amicus/.test(p) ? 'Amicus Curiae' : /^\/cmt/.test(p) ? 'Painel do Desembargador' : 'Ex Officio'; }
+  return /^\/cognitio(?:\/|$)/.test(p) ? 'Cognitio' : /^\/caput/.test(p) ? 'Caput' : /^\/(modus|editor|compendio)/.test(p) ? 'Compendium' : /^\/amicus/.test(p) ? 'Amicus Curiae' : /^\/cmt/.test(p) ? 'Painel do Desembargador' : 'Ex Officio'; }
 /* falha = senha que não confere: grava com o nome do cadastro (ou "nome não cadastrado"), no máximo uma vez a cada 10 minutos por nome */
 async function registrarEntrada(nome, onde, falha) {
   for (let t = 0; t < 3; t++) {
