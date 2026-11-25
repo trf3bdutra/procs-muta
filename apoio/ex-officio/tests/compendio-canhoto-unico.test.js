@@ -60,14 +60,14 @@ test('parágrafos do banco num painel flutuante preso ao bloco; canhoto sem "Edi
   assert.match(ler('fonte/editorial_d.css'), /\.dflut\{position:absolute;/);
 });
 
-test('modelos do caso presos ao seletor Modelo da barra; conformidade em painel flutuante e minimizável', () => {
+test('modelos do caso presos ao seletor Modelo da barra; conformidade no banner', () => {
   const js = ler('fonte/editorial_d.js'), c = ler('fonte/consulta.js');
   assert.match(js, /function dkSugAbre\(on\)/);
   assert.match(js, /data-dsug aria-expanded=/);
   assert.match(js, /function dkConf\(\)/);
   assert.match(c, /solucoes:solucoesCaso,conformidade:conformidadeCaso,/);
   assert.doesNotMatch(c, /var h=solucoes\(P,A,R\)\+/, 'modelos ainda dentro do painel do canhoto');
-  assert.match(ler('fonte/editorial_d.css'), /#dk-conf\{position:fixed!important;/);
+  assert.match(ler('fonte/editorial_d.css'), /#dk-conf\{position:static;/);
 });
 
 test('orientações fora do canhoto: no Breviário (capítulo 7) e em balão sobre a folha, da mesma fonte', () => {
@@ -92,3 +92,5 @@ test('Minutário: fórmula única, ficha fornece dados, não um construtor paral
   assert.match(js,/function dkUsaModelo\(id\)/);
   assert.match(c,/dkAplicaCaso\(P,\{tipo:'mat',mat:matrizDoCaso\(P\)\}\)/);
 });
+
+test('Minutário: conformidade no banner, precedentes na barra e sem gerador LIA',()=>{const js=ler('fonte/editorial_d.js'),pa=ler('fonte/padrao_paginas.js'),cq=ler('fonte/consulta.js'),build=ler('fonte/build.py');assert.match(pa,/data-dconfmin aria-controls="dk-conf"/);assert.match(js,/banner.appendChild\(el\)/);assert.match(cq,/data-cq-prec aria-controls="cq-prec-panel"/);assert.match(cq,/function precedentesCaso\(/);assert.doesNotMatch(cq,/liaPainel|liaMontar|liaAcao|CQ\.lia|data-lia/);assert.doesNotMatch(build,/LIA3|id="lia-v3"|id="lia-gerar"/);});

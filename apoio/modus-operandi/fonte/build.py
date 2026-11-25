@@ -18,7 +18,7 @@ Fontes (todas no procs-muta):
   ../../../modelos/matrizes-estruturais.json        moldes do Editorial por recurso e resultado
   ../../../precedentes/precedentes.jsonl · inteiros-teores/*.jsonl   ementário do Relator
   ../../referencias-rapidas.json                   referências rápidas ao lado dos modelos
-  consulta.js · consulta.css                        caso na Minuta-Matriz (pauta ou prontuário), conformidade, LIA e material
+  consulta.js · consulta.css                        caso na Minuta-Matriz (pauta ou prontuário), conformidade e material
   consulta_2886.js · consulta_2886.css · ../../../modelos/matrizes-2886.json   matriz modular de 28,86% na Minuta-Matriz
   ../../repertorio-normativo-complemento.json      dispositivos do repertório normativo além dos da planilha
   ../../../acervo/fonte.json                        partes, advogados e dados do processo, quando o processo está no acervo
@@ -160,11 +160,6 @@ def ramo_mat(a):
 acx = {}
 for n, a in AC.items():
     acx[n] = [_v(a.get('Classe') or a.get('classe_judicial')), _v(a.get('Assunto_Principal') or a.get('assunto_judicial')), _v(a.get('polo_ativo') or a.get('Polo_Ativo')), _v(a.get('polo_passivo') or a.get('Polo_Passivo')), ramo_mat(a)]
-# prompt do gabinete para a LIA (Prompt_Minuta_CMT v3): a Minuta-Matriz, com o caso, recorta pela peça e junta os dados do caso
-_L3 = RAIZ/'padrao/lia/Prompt_Minuta_CMT_v3.txt'
-LIA3 = ('<script type="text/plain" id="lia-v3">' + base64.b64encode(gzip.compress(_L3.read_bytes(), 9, mtime=0)).decode() + '</script>') if _L3.exists() else ''
-_LG = RAIZ/'padrao/lia/Prompt_Gerar_CMT.txt'
-LIA3 += ('<script type="text/plain" id="lia-gerar">' + base64.b64encode(gzip.compress(_LG.read_bytes(), 9, mtime=0)).decode() + '</script>') if _LG.exists() else ''
 pacote = {'prec': prec, 'it': it, 'mod': mod, 'par': par, 'ref': ref, 'ac': acx}
 # matrizes modulares de 28,86% (Minuta-Matriz com o caso): modelos/matrizes-2886.json
 _M28 = RAIZ/'modelos/matrizes-2886.json'
@@ -358,7 +353,7 @@ def gerar_html(var):
     for a, b in [('/*__USOS__*/', js_([] if var == 'collegium' else _USOS_ATUAIS)),
              ('/*__DATA__*/', (RAIZ/'apoio/vade-mecum.json').read_text(encoding='utf-8').strip().replace('</', '<\\/')),
              ('/*__EDITORIAL__*/', EDJ),
-             ('<script type="application/octet-stream" id="modelos-gz">/*__MODELOS__*/</script>', '<script type="application/octet-stream" id="base-gz">' + (gz_col if var == 'collegium' else gz) + '</script>' + LIA3),
+             ('<script type="application/octet-stream" id="modelos-gz">/*__MODELOS__*/</script>', '<script type="application/octet-stream" id="base-gz">' + (gz_col if var == 'collegium' else gz) + '</script>'),
              ('</style>', css + '</style>'),
              ('</script>\n</body>', '</script>\n' + pre + '<script>\n' + js + '</script>\n</body>')]:
         assert t.count(a) == 1, a[:60]
