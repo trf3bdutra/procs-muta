@@ -47,3 +47,7 @@ test('Agenda Mural: sessões e marcos integrados, sem meta duplicada e com afaze
 test('Mural: painéis superiores independentes e designações à esquerda da agenda vertical',()=>{
  assert.match(script,/class="fx-mk fx-strip-panel"/);assert.match(script,/class="fx-kpanel fx-strip-panel"/);assert.match(script,/class="fx-alert fx-strip-panel"/);assert.match(script,/class="fx-av fx-strip-panel"/);assert.match(script,/fx\.querySelector\('\.fx-work-left'\)\.appendChild\(fx\.querySelector\('\.fx-mid'\)\)/);assert.match(script,/b\.style\.removeProperty\('grid-column'\)/);assert.match(script,/cc-vertical:has\(\.cc-session-host\)>\.cc-dir/);assert.match(script,/\.fx-command-work \.fx-kp #kpis\{display:grid!important/);
 });
+
+test('Mural: colunas com altura comum, atalhos retirados e painéis pessoais refinados',()=>{
+ assert.doesNotMatch(script,/class="fx-command-links"/);assert.match(script,/--fx-oper-height:clamp/);assert.match(script,/grid-template-rows:minmax\(0,2fr\) minmax\(0,1fr\)/);assert.match(html,/class="mu-date-editor"/);assert.match(html,/data-hview="registros"/);assert.match(html,/data-hpanel="registros" hidden/);assert.match(html,/id="aus-perfil"/);assert.match(html,/id="xlsx"/);
+});
