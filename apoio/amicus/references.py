@@ -9,7 +9,13 @@ def apply(html, snapshot):
     end=html.index('</script>',start)
     data={k:snapshot.get(k,[]) for k in ('Temas','Súmulas','Regimento')}
     payload=json.dumps(data,ensure_ascii=False,separators=(',',':')).replace('</','<\\/')
-    return html[:start]+payload+html[end:]
+    # A montagem deve preservar os quatro ambientes do portal e o contrato da API.
+    result=html[:start]+payload+html[end:]
+    required=('am-area-nav','competencia-assuntos','guia-pje','lexico-recursal','guias-praticos','jur-collegium','norm-atos')
+    missing=[key for key in required if key not in result]
+    if missing:
+        raise ValueError('Amicus: módulos ausentes: '+', '.join(missing))
+    return result
 if __name__=='__main__':
     p=Path(sys.argv[1])
     snapshot=json.loads((RAIZ/'apoio/vade-mecum.json').read_text(encoding='utf-8'))
