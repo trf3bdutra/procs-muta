@@ -819,7 +819,7 @@ function htmlLeitura() {
   if (A.erro) return h + '<p class="status err">' + esc(A.erro) + '</p></section>';
   if (!A.itens) return h + '<p class="muted">' + (tela === 'autos' ? 'Leia os autos: o Roteiro se preenche com o que for achado.' : 'Abra os autos digitais no PJe.') + '</p></section>';
   if (!lidoDoProcesso()) return h + '<p class="status err">Os autos lidos são do processo ' + esc(A.cnj || 'sem número') + ', não do aberto no painel. Leia de novo na aba dos autos certos.</p></section>';
-  return h + resumoLeitura() + chk + (window.MutaGerador&&window.MutaGerador.htmlCobertura?window.MutaGerador.htmlCobertura(): '') + (A.sugMsg ? '<p class="status err">' + esc(A.sugMsg) + '</p>' : '') + '</section>';
+  return h + resumoLeitura() + chk + (A.sugMsg ? '<p class="status err">' + esc(A.sugMsg) + '</p>' : '') + '</section>';
 }
 /* Autos › A conferir: os alertas e o que a leitura achou e não foi sozinho para a ficha (diverge, ou com o automático desligado) */
 function htmlConferir() {

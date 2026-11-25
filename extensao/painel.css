@@ -2227,3 +2227,52 @@ html body.hero-redesign-v53 #gab .au-loc-missing{border-left:2px solid var(--gol
 html body.hero-redesign-v53 #gab .au-loc-missing small{font-size:10px;font-weight:600}
 html body.hero-redesign-v53 #gab .au-loc-missing p{font-size:11px!important;margin:3px 0}
 @media(max-width:320px){html body.hero-redesign-v53 #gab .au-loc-grid{grid-template-columns:1fr}}
+
+/* HERO · leitura dos autos: um único card, três seções independentes. */
+html body.hero-redesign-v53 #gab #g-lei .au-coverage-card{padding:0!important;overflow:hidden}
+html body.hero-redesign-v53 #gab #g-lei .au-coverage-card>.au-coverage-section{margin:0!important;padding:0!important;border:0!important;border-bottom:1px solid var(--line)!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;min-width:0}
+html body.hero-redesign-v53 #gab #g-lei .au-coverage-card>.au-coverage-section:last-child{border-bottom:0!important}
+html body.hero-redesign-v53 #gab #g-lei .au-coverage-card>.au-coverage-section>summary{display:flex!important;align-items:center;gap:8px;min-height:39px;padding:9px 11px!important;margin:0!important;cursor:pointer;list-style:none;box-sizing:border-box}
+html body.hero-redesign-v53 #gab #g-lei .au-coverage-card>.au-coverage-section>summary::-webkit-details-marker{display:none}
+html body.hero-redesign-v53 #gab #g-lei .au-coverage-card>.au-coverage-section>summary h4{margin:0!important;flex:1;min-width:0;font:650 11px/1.35 var(--sans,system-ui)!important;letter-spacing:0!important;text-transform:none!important;color:var(--fg)!important}
+html body.hero-redesign-v53 #gab #g-lei .au-coverage-card>.au-coverage-section>summary :is(small,.gn){margin:0;font:500 10px/1.3 var(--sans,system-ui);color:var(--muted-fg);text-align:right}
+html body.hero-redesign-v53 #gab #g-lei .au-coverage-card>.au-coverage-section>summary:after{content:"";width:7px;height:7px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg);flex:none;margin:0 2px 3px 1px;opacity:.65}
+html body.hero-redesign-v53 #gab #g-lei .au-coverage-card>.au-coverage-section[open]>summary:after{transform:rotate(225deg);margin-bottom:-3px}
+html body.hero-redesign-v53 #gab #g-lei .au-coverage-card>.au-coverage-section[open]>summary{border-bottom:1px solid var(--line);background:color-mix(in srgb,var(--hero-pront-paper,#fff) 80%,var(--hero-pront-header,#eee6da))}
+html body.hero-redesign-v53 #gab #g-lei .au-coverage-card>.au-coverage-section>summary:focus-visible{outline:2px solid var(--gold);outline-offset:-3px}
+html body.hero-redesign-v53 #gab #g-lei .au-coverage-card>.au-coverage-section>:is(.au-coverage-body,.gr){padding:10px 11px!important;margin:0!important;min-width:0}
+html body.hero-redesign-v53 #gab #g-lei .au-coverage-card .au-matriz ul{margin:3px 0 8px;padding-left:16px;font-size:11px;line-height:1.5}
+html body.hero-redesign-v53 #gab #g-lei .au-coverage-card .au-matriz p{margin:8px 0 3px}
+html body.hero-redesign-v53 #gab #g-lei .au-coverage-card .au-cf-b{display:grid;gap:8px}
+html body.hero-redesign-v53 #gab #g-lei .au-coverage-card .au-loc-grid{gap:6px}
+/* Encaminhamento · cabeçalho único e campos alinhados em superfície branca. */
+html body.hero-redesign-v53 #gab #hero-encaminhamento.hero-enc-integrated{display:block!important;gap:0!important;padding:0!important;border:1px solid var(--hero-pront-divider,var(--line))!important;border-radius:7px!important;background:var(--hero-pront-paper,#fff)!important;overflow:hidden}
+html body.hero-redesign-v53 #gab #hero-encaminhamento.hero-enc-integrated>.hero-v53-section-head{display:flex!important;flex-wrap:wrap;align-items:baseline;gap:4px 8px!important;padding:11px 12px;background:var(--hero-pront-header);border-bottom:1px solid var(--hero-pront-divider,var(--line))}
+html body.hero-redesign-v53 #gab #hero-encaminhamento.hero-enc-integrated>.hero-v53-section-head>.pm-mer-h{margin:0!important;font-size:13px;flex:1 0 auto}
+html body.hero-redesign-v53 #gab #hero-encaminhamento.hero-enc-integrated>.hero-v53-section-head>small{font-size:10px}
+html body.hero-redesign-v53 #gab #hero-encaminhamento.hero-enc-integrated .hero-v53-autos-link{margin-left:auto;font-size:10px}
+html body.hero-redesign-v53 #gab #hero-encaminhamento .hero-enc-part{padding:10px 12px;border-bottom:1px solid var(--line);min-width:0}
+html body.hero-redesign-v53 #gab #hero-encaminhamento .hero-enc-part-head{margin:0 0 8px}
+html body.hero-redesign-v53 #gab #hero-encaminhamento .hero-enc-part-head h5{font:650 10px/1.4 var(--sans,system-ui);letter-spacing:.055em;text-transform:uppercase;color:var(--muted-fg);margin:0}
+html body.hero-redesign-v53 #gab #hero-encaminhamento .hero-enc-part-tipo .hero-enc-part-head{display:none}
+html body.hero-redesign-v53 #gab #hero-encaminhamento .hero-enc-tipo-section,html body.hero-redesign-v53 #gab #hero-encaminhamento .hero-enc-tipo,html body.hero-redesign-v53 #gab #hero-encaminhamento .rt-tsel{padding:0!important;margin:0!important;border:0!important;border-radius:0!important;box-shadow:none!important;background:transparent!important}
+html body.hero-redesign-v53 #gab #hero-encaminhamento .rt-tsel>summary{padding:4px 0!important}
+html body.hero-redesign-v53 #gab #hero-encaminhamento .rt-kind-body{padding:9px 0 0!important}
+html body.hero-redesign-v53 #gab #hero-encaminhamento :is(.hero-enc-fields,.hero-enc-note-fields,.hero-dest-top){display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px 9px!important;align-items:start;min-width:0;padding:0!important;margin:0!important}
+html body.hero-redesign-v53 #gab #hero-encaminhamento .hero-enc-fields>.hero-dest-top{grid-column:1/-1}
+html body.hero-redesign-v53 #gab #hero-encaminhamento :is(.hero-enc-fields,.hero-enc-note-fields,.hero-dest-top)>.gf{margin:0!important;min-width:0;width:auto;display:grid;gap:4px;align-content:start}
+html body.hero-redesign-v53 #gab #hero-encaminhamento :is(.hero-enc-fields,.hero-enc-note-fields)>.gf.w{grid-column:1/-1}
+html body.hero-redesign-v53 #gab #hero-encaminhamento .hero-dest-top>.hero-enq-label{grid-column:auto!important;padding:0!important;display:grid!important;gap:4px}
+html body.hero-redesign-v53 #gab #hero-encaminhamento .gf .gl{font-size:10.5px!important;font-weight:600;line-height:1.3;white-space:normal;overflow-wrap:anywhere}
+html body.hero-redesign-v53 #gab #hero-encaminhamento .gf :is(select,input:not([type=checkbox]),textarea){box-sizing:border-box;width:100%;max-width:100%;min-width:0;min-height:32px;font-size:12px;padding:6px 8px;border:1px solid var(--line);border-radius:5px;background:var(--field,var(--hero-pront-paper,#fff))}
+html body.hero-redesign-v53 #gab #hero-encaminhamento .gf textarea{min-height:64px;resize:vertical}
+html body.hero-redesign-v53 #gab #hero-encaminhamento .hero-dest-top .hero-enq-label>.ro{box-sizing:border-box;min-height:32px;display:flex;align-items:center;padding:5px 8px;border-radius:5px;border:1px solid var(--line);background:var(--hero-pront-paper,#fff);overflow-wrap:anywhere;font-size:11px}
+html body.hero-redesign-v53 #gab #hero-encaminhamento .hero-dest-top>.pm-sitj{grid-column:1/-1;display:grid!important;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:4px 8px!important;padding:8px 0 0!important;border:0!important;border-top:1px solid var(--line)!important;background:transparent!important;border-radius:0!important}
+html body.hero-redesign-v53 #gab #hero-encaminhamento .hero-dest-top>.pm-sitj>small{grid-column:1/-1}
+html body.hero-redesign-v53 #gab #hero-encaminhamento .hero-dest-top>.pm-sitj .pm-sitv{justify-self:end}
+html body.hero-redesign-v53 #gab #hero-encaminhamento .hero-enc-confirm{display:flex!important;flex-wrap:wrap;align-items:center;justify-content:space-between;padding-top:6px!important}
+html body.hero-redesign-v53 #gab #hero-encaminhamento>.hero-enc-proposal{padding:0!important;margin:0!important;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important}
+html body.hero-redesign-v53 #gab #hero-encaminhamento>.hero-enc-proposal>summary{padding:11px 12px!important;margin:0!important}
+html body.hero-redesign-v53 #gab #hero-encaminhamento>.hero-enc-proposal>.gr{padding:0 12px 12px!important}
+html body.hero-redesign-v53 #gab #hero-encaminhamento .hero-pauta-resumo{grid-column:1/-1;margin:0!important;padding:8px 0 0!important;border:0!important;border-top:1px solid var(--line)!important;background:transparent!important;box-shadow:none!important}
+@media(max-width:320px){html body.hero-redesign-v53 #gab #hero-encaminhamento :is(.hero-enc-fields,.hero-enc-note-fields,.hero-dest-top){grid-template-columns:1fr!important}}

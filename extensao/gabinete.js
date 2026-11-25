@@ -1084,18 +1084,26 @@ var FORA_ROT = { 'Avisos': 1, 'Síntese Processual': 1, 'Alegações': 1, 'O que
 /* Autos: a conferência automática, a lista de peças (com detalhamento, JSON, OCR e PDF) e o preenchimento pelos autos */
 /* 0.38: Leitura dos autos (o que achou e o que pôs na ficha) → A conferir (alertas e divergências) → Peças e documentos */
 /* 0.52.2 · A conferir dentro de Peças e documentos: um só painel para conferir, editar e gravar na ficha */
-var CF_ABERTO = true;
+var CF_ABERTO = false, AU_SECOES = {matriz:false,localizados:false};
 function corpoAutos() {
   var AU = window.MutaAutos; if (!AU || !AU.htmlLeitura) return pecasCartao();
   var cf = AU.htmlConferir(), dc = AU.htmlDocs(function () { return pecasCartao(true); });
-  if (cf) cf = cf.replace(/^<section class="card pc-sec" id="g-cf"><div class="pc-sh"><h3>A conferir<\/h3>(<small[^>]*>[\s\S]*?<\/small>)<\/div>/, '<details class="gg au-cf" id="g-cf"' + (CF_ABERTO ? ' open' : '') + '><summary><h4>A conferir</h4>$1</summary><div class="gr au-cf-b">').replace(/<\/section>$/, '</div></details>');
+  if (cf) cf = cf.replace(/^<section class="card pc-sec" id="g-cf"><div class="pc-sh"><h3>A conferir<\/h3>(<small[^>]*>[\s\S]*?<\/small>)<\/div>/, '<details class="gg au-cf au-coverage-section" id="g-cf"' + (CF_ABERTO ? ' open' : '') + '><summary><h4>A conferir</h4>$1</summary><div class="au-coverage-body au-cf-b">').replace(/<\/section>$/, '</div></details>');
   var leitura=AU.htmlLeitura();
   var loc=AU.htmlLocalizados?AU.htmlLocalizados():'';
-  var cobertura=loc||cf?'<div class="card au-coverage-card">'+loc+cf+'</div>':'';
+  if(loc)loc=loc.replace(/^<section class="au-localizados" aria-label="Localizados"><div class="au-loc-head"><h4>Localizados<\/h4>(<small>[\s\S]*?<\/small>)<\/div>/,'<details class="gg au-localizados au-coverage-section" id="g-au-localizados"'+(AU_SECOES.localizados?' open':'')+'><summary><h4>Localizados</h4>$1</summary><div class="au-coverage-body">').replace(/<\/section>$/,'</div></details>');
+  var matriz=cf&&window.MutaGerador&&window.MutaGerador.htmlCobertura?window.MutaGerador.htmlCobertura():'';
+  if(matriz)matriz=matriz.replace(/^<details class="gg">/,'<details class="gg au-coverage-section au-matriz" id="g-au-matriz"'+(AU_SECOES.matriz?' open':'')+'>');
+  var cobertura=matriz||loc||cf?'<div class="card au-coverage-card" aria-label="Cobertura e conferência dos autos">'+matriz+loc+cf+'</div>':'';
   if(cobertura) leitura=leitura.replace(/<\/section>$/,cobertura+'</section>');
   return '<div class="hero-autos-workspace">'+leitura+dc+'</div>';
 }
-document.addEventListener('toggle', function (e) { if (e.target && e.target.id === 'g-cf' && e.target.tagName === 'DETAILS') CF_ABERTO = e.target.open; }, true);
+document.addEventListener('toggle', function (e) {
+  var d=e.target;if(!d||d.tagName!=='DETAILS'||!d.isConnected)return;
+  if(d.id==='g-cf')CF_ABERTO=d.open;
+  if(d.id==='g-au-matriz')AU_SECOES.matriz=d.open;
+  if(d.id==='g-au-localizados')AU_SECOES.localizados=d.open;
+}, true);
 /* 0.55: Roteiro de triagem = admissibilidade e MPF (e os passos); matéria, espécie e decisão impugnada ficam no Roteiro de produção */
 var GRUPOS_TRIAGEM = { 'Admissibilidade e regularidade': 1, 'Ministério Público': 1 };
 /* 0.59: mídias e etiquetas do gabinete (e as sugeridas, no quadro de etiquetas) também são triagem */
@@ -1643,16 +1651,22 @@ function heroOrganizarProntuario(){
     /* Seletor de tipo abre o cartão de Encaminhamento da Triagem. */
     refTipo.onclick=function(){G.aba='Processo';G.rot='tri';render();var t=caixa.querySelector('#hero-encaminhamento');if(t)t.scrollIntoView({block:'start'});};
     /* Encaminhamento deixa de ser face; os campos continuam os mesmos da ficha. */
-    var encTr=el('section','hero-v53-enc card'),encHd=el('div','hero-v53-section-head'),encTitle=el('h4','pm-mer-h','Encaminhamento');
-    encTr.id='hero-encaminhamento';encTr.append(encHd,tipoSec,encFields);encHd.append(encTitle);
-    var sit=encFields.querySelector('.pm-sitj');if(sit)encHd.append(sit);
-    var destActions=el('div','hero-v53-dest-actions');encFields.append(destActions);destTop.append(enquad);
-    function destDialog(titulo,nodes){if(!nodes.length)return;var btn=el('button','btn line sm',titulo),dlg=el('dialog','hero-v53-field-dialog'),dh=el('h4','pm-mer-h',titulo),close=el('button','btn line sm','Fechar');btn.type=close.type='button';dlg.append(dh);nodes.forEach(function(n){dlg.append(n);});dlg.append(close);close.onclick=function(){dlg.close();};btn.onclick=function(){if(!dlg.open)dlg.showModal();};destActions.append(btn);encTr.append(dlg);}
+    var encTr=el('section','hero-v53-enc card hero-enc-integrated'),encHd=el('div','hero-v53-section-head'),encTitle=el('h4','pm-mer-h','Encaminhamento');
+    encTr.id='hero-encaminhamento';encHd.append(encTitle,el('small','muted','Julgamento · destino · enquadramento'));encTr.append(encHd);
+    function encGroup(n,t,content){var s=el('section','hero-enc-part hero-enc-part-'+n),h=el('div','hero-enc-part-head');h.append(el('h5','',t));s.append(h,content);encTr.append(s);return s;}
+    encGroup('tipo','Tipo de julgamento',tipoSec);
+    var sit=encFields.querySelector('.pm-sitj');if(sit)sit.remove();
+    destTop.append(enquad);
+    var triStatus=campoModelo('triagem','Situação da triagem');
+    if(triStatus&&triStatus.chave!=='Destino - Situação')html(destTop,campo(triStatus));
+    if(sit)destTop.append(sit);
+    var destinoSec=encGroup('destino','Destino e situação',encFields);
     var notaKeys=['triagem.Seleção Prévia - Nota','triagem.Art. 932 - Nota de enquadramento','triagem.Destino - Outro Nota'];
     var notaNodes=notaKeys.map(function(k){var n=Array.from(encFields.querySelectorAll('[data-fk]')).find(function(e){return e.dataset.fk===k;});return n&&n.closest('.gf,.pv-field,.pv-idrow');}).filter(Boolean);
     var confirmar=encFields.querySelector('.hero-enc-confirm');if(confirmar)notaNodes.push(confirmar);
-    destDialog('Enquadramento',Array.from(new Set(notaNodes)));prop.open=true;destDialog('Proposta',[prop]);
-    var triStatus=campoModelo('triagem','Situação da triagem');if(triStatus&&triStatus.chave!=='Destino - Situação')html(encHd,campo(triStatus));
+    var hipEl=Array.from(encFields.querySelectorAll('[data-fk]')).find(function(e){return e.dataset.fk==='triagem.Hipóteses Monocrática';});if(hipEl){var hipRow=hipEl.closest('.gf,.pv-field,.pv-idrow');if(hipRow)notaNodes.unshift(hipRow);}
+    if(notaNodes.length){var notas=el('div','gr hero-enc-note-fields');Array.from(new Set(notaNodes)).forEach(function(n){notas.append(n);});encGroup('enquadramento','Detalhamento do enquadramento',notas);}
+    prop.classList.add('hero-enc-proposal');encTr.append(prop);
     /* Acompanhamento é a cronologia real do mapa de próximos passos. */
     body.replaceChildren(tramite);ac.classList.remove('hero-enc-pane');ac.classList.add('hero-v53-acomp');sum.hidden=true;ac.open=true;
     steps.append(ac);
@@ -1682,7 +1696,7 @@ function heroOrganizarProntuario(){
     if(resumo&&painel.parentNode===id){var firstPanel=el('div','hero-first-panel');id.insertBefore(firstPanel,id.firstChild);while(firstPanel.nextSibling&&firstPanel.nextSibling!==painel)firstPanel.append(firstPanel.nextSibling);}
     nav.replaceChildren();if(mainTabs)nav.append(mainTabs);
     pages.replaceChildren(id);id.hidden=!resumo;pages.hidden=!resumo;
-    if(gbody){if(G.aba==='Processo'&&G.rot==='tri'){gbody.prepend(encTr);var av=el('button','lnk hero-v53-autos-link','Conferir documentos em Autos');av.type='button';av.onclick=function(){G.aba='Autos';render();};encTr.append(av);}gbody.hidden=resumo;}
+    if(gbody){if(G.aba==='Processo'&&G.rot==='tri'){gbody.prepend(encTr);var av=el('button','lnk hero-v53-autos-link','Conferir documentos em Autos');av.type='button';av.onclick=function(){G.aba='Autos';render();};encHd.append(av);}gbody.hidden=resumo;}
     if(!resumo&&gbody&&top.parentNode)top.after(gbody);
     if(window.MutaPauta&&window.MutaPauta.receberEditor)window.MutaPauta.receberEditor(G.cnj,solBody);
     show=function(i){if(i===1){G.aba='Processo';G.rot='tri';render();}else if(i>=2){heroTopo.perfil=true;perfil.open=true;}else if(!resumo){G.aba='Processo';G.rot='res';render();}};
