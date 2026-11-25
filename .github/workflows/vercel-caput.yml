@@ -115,6 +115,7 @@ jobs:
           mkdir -p site/public/caput/competencias && cp caput/competencias/index.html site/public/caput/competencias/index.html
           # Mesa de designação da pauta: moldura sobre Pautas › Preparar › B do Caput (lê e grava pelo motor do Caput)
           mkdir -p site/public/caput/designacao && cp caput/designacao/index.html site/public/caput/designacao/index.html
+          mkdir -p site/public/caput/etiquetas && cp caput/etiquetas/index.html site/public/caput/etiquetas/index.html
           # Módulo comum "Atualizar acervo fonte" (planilhas → carga → Action acervo-fonte.yml), para qualquer página do site
           mkdir -p site/public/padrao && cp padrao/acervo-fonte.js site/public/padrao/acervo-fonte.js
           # Série histórica do Relator (precedentes/jurisprudencia): índice e arquivos de busca em texto integral,
