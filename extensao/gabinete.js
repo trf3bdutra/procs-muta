@@ -912,7 +912,52 @@ function corpoRoteiro() {
     etiquetas: (TR && TR.etiquetasDe ? TR.etiquetasDe(G.op, G.fo) : '') + (window.MutaAlertas ? window.MutaAlertas.htmlRoteiro(G.cnj, V('triagem', 'Etiquetas sugeridas'), function () { render(); }) : ''), registro: '' /* 0.46.1: o quadro "Registro da triagem" saiu do prontuário (pedido do gestor); triagem.js › registroDe fica */ });
 }
 /* a aba Minuta › Gerador acompanha o prontuário: cada redesenho repinta o Gerador, se estiver à vista */
-function render() { render0(); if (window.MutaGerador && window.MutaGerador.pintar) window.MutaGerador.pintar(); }
+
+/* HERO: apresentação compartilhada pela extensão, prévia e prontuário web.
+   Move os controles existentes; conserva chaves da ficha e eventos delegados. */
+var heroTopo = {cnj:'', pagina:0, acompanhamento:false};
+function heroOrganizarProntuario(){
+  var top=caixa.querySelector('.pc.pm'); if(!top||top.querySelector('.hero-top-nav'))return;
+  if(heroTopo.cnj!==G.cnj)heroTopo={cnj:G.cnj,pagina:0,acompanhamento:false};
+  function el(tag,cls,txt){var n=document.createElement(tag);if(cls)n.className=cls;if(txt)n.textContent=txt;return n;}
+  function html(n,h){var t=document.createElement('template');t.innerHTML=h;n.append(t.content);}
+  function move(n,q){var x=caixa.querySelector(q);if(x)n.append(x);return x;}
+  if(!document.getElementById('hero-top-style')){
+    var st=el('style');st.id='hero-top-style';st.textContent='.hero-top-nav{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:6px 0}.hero-top-nav button{border:0;background:transparent;color:inherit;cursor:pointer;padding:4px 12px;font-size:18px}.hero-top-nav button:disabled{opacity:.3}.hero-top-page[hidden]{display:none!important}.hero-top-page{min-width:0;overflow-wrap:anywhere}.hero-top-pages{min-height:150px}.hero-top-classif{display:flex;gap:6px;align-items:baseline;flex-wrap:wrap;margin:5px 0}.hero-top-classif span{font-weight:600}.hero-top-page .pc-dl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.hero-top-page .pc-dl>div{min-width:0}.hero-top-page .pm-aut,.hero-top-page .pv-identity{margin:0;border:0;box-shadow:none}.hero-top-page details>summary.hero-hidden-summary{display:none}.hero-acomp{margin-top:10px;border:1px solid var(--line,#8793a344);border-radius:8px;padding:8px}.hero-acomp>summary{cursor:pointer;font-weight:600;display:flex;justify-content:space-between;gap:8px}.hero-acomp>summary small{font-weight:400}.hero-acomp-b{display:grid;gap:10px;padding-top:10px}.hero-designacoes{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}.hero-destino{margin:6px 0}.hero-destino small{display:block;opacity:.75}.hero-detalhes{display:grid;gap:4px}.hero-detalhes .gl{display:none}.hero-detalhes input,.hero-detalhes textarea{width:100%}';document.head.append(st);
+  }
+  var nav=el('div','hero-top-nav'),prev=el('button','','‹'),next=el('button','','›'),label=el('span','muted');
+  prev.type=next.type='button';prev.setAttribute('aria-label','Seção anterior');next.setAttribute('aria-label','Próxima seção');nav.append(prev,label,next);
+  var pages=el('div','hero-top-pages'),id=el('div','hero-top-page'),aut=el('div','hero-top-page'),sig=el('div','hero-top-page');
+  pages.append(id,aut,sig);var pn=[id,aut,sig],names=['Identificação','Autuação','Sinalização'];
+  function show(i){heroTopo.pagina=Math.max(0,Math.min(2,i));pn.forEach(function(p,j){p.hidden=j!==heroTopo.pagina;});label.textContent=names[heroTopo.pagina];prev.disabled=heroTopo.pagina===0;next.disabled=heroTopo.pagina===2;}
+  prev.addEventListener('click',function(){show(heroTopo.pagina-1);});next.addEventListener('click',function(){show(heroTopo.pagina+1);});
+  var sx=0;pages.addEventListener('touchstart',function(e){sx=e.changedTouches[0].clientX;},{passive:true});pages.addEventListener('touchend',function(e){var dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>65)show(heroTopo.pagina+(dx<0?1:-1));},{passive:true});
+  var l1=top.querySelector('.pm-l1'),cls=l1&&l1.querySelector('.pc-cl'),classText=cls&&cls.title?cls.title.split(' · ')[0]:'';
+  var m=grupoModelo('Autuação'),R={};(m&&m.campos||[]).forEach(function(c){R[c.rotulo]=valorDe(c);});
+  if(cls)cls.remove();var tj=el('div','gr');if(l1)l1.querySelectorAll('.pm-tj').forEach(function(x){tj.append(x);});
+  top.insertBefore(nav,l1||top.firstChild);nav.after(pages);if(l1)id.append(l1);
+  var as=el('div','hero-top-classif');if(S(R['Seção competente']))as.append(el('span','',S(R['Seção competente'])));if(S(R['Assunto CNJ']||fonteVal({fonte:['Assunto']})))as.append(el('span','',S(R['Assunto CNJ']||fonteVal({fonte:['Assunto']}))));id.append(as);
+  var old=top.querySelector('.pm-as');if(old)old.remove();var ad=top.querySelector('.pm-ad');if(ad)ad.remove();var esp=top.querySelector('.pm-esp');if(esp)esp.remove();
+  var detail=el('div','hero-detalhes');html(detail,assuntoDetalhado());if(!detail.childNodes.length){var plus=el('button','pm-ad-add','+ Assunto detalhado');plus.type='button';plus.setAttribute('data-ad','ed');detail.append(plus);}
+  /* Um editor de detalhamento; os dois campos antigos são conservados e concatenados na leitura. */
+  var dkey='triagem.Especificidades',oldTema=S(V('triagem','Tema')),oldEsp=S(V('triagem','Especificidades')),dv=[oldTema,oldEsp].filter(Boolean).filter(function(v,i,a){return a.indexOf(v)===i;}).join(' · ');
+  var dt=el('div','hero-detalhamento'),db=el('button','lnk',dv||'+ Detalhamento do caso');db.type='button';db.title='Editar detalhamento do caso';dt.append(db);
+  db.addEventListener('click',function(){var t=el('textarea');t.rows=2;t.value=dv;t.setAttribute('aria-label','Detalhamento do caso');var ok=el('button','btn solid sm','Gravar'),cancel=el('button','lnk','Cancelar');ok.type=cancel.type='button';dt.replaceChildren(t,ok,cancel);t.focus();ok.onclick=function(){if(window.MUTA_WEB&&window.MUTA_WEB.leitura)return;marcar(dkey,t.value.trim());marcar('triagem.Tema','');agendar(400);render();};cancel.onclick=function(){dt.replaceChildren(db);};});if(window.MUTA_WEB&&window.MUTA_WEB.leitura)db.disabled=true;detail.append(dt);id.append(detail);
+  var ac=el('details','hero-acomp'),sum=el('summary','','Acompanhamento'),fase=top.querySelector('.pm-fase');if(fase)sum.append(el('small','muted',fase.textContent));ac.append(sum);var body=el('div','hero-acomp-b');ac.append(body);ac.open=heroTopo.acompanhamento;ac.addEventListener('toggle',function(){if(ac.isConnected)heroTopo.acompanhamento=ac.open;});
+  var flow=top.querySelector('.pv-flowbox,.pm-pills');if(flow){var people=flow.querySelector('.pv-people');var tags=el('div','hero-designacoes');if(people){people.querySelectorAll('.pv-person').forEach(function(x){tags.append(x);});people.remove();}else{flow.querySelectorAll('[data-des-ed],[data-des]').forEach(function(x){var tag=el('span','chip');tag.append(el('small','muted',x.getAttribute('data-des-ed')==='CORRETOR'||x.getAttribute('data-des')==='CORRETOR'?'Corretor · ':'Minutador · '),x);tags.append(tag);});}id.append(tags);body.append(flow);}
+  var dest=el('div','hero-destino'),resp=top.querySelector('.pm-resp'),ato=resp&&resp.querySelector('.pm-ato');if(ato)dest.append(ato);else html(dest,atoSel());if(N(V('producao','Destino'))==='sessao'&&S(V('triagem','Seleção Prévia')))dest.append(el('small','muted','Seleção prévia · '+S(V('pauta','Nova sessão de destino')||V('triagem','Seleção Prévia'))));id.append(dest);
+  var au=top.querySelector('.pm-aut1');if(au){au.open=true;var sm=au.querySelector('summary');if(sm)sm.classList.add('hero-hidden-summary');var dl=au.querySelector('.pc-dl');if(!dl){dl=el('dl','pc-dl');au.append(dl);}var c=el('div');c.append(el('dt','','Classe'),el('dd','',S(R['Classe']||classText)));dl.prepend(c);var dist,val;Array.from(dl.children).forEach(function(x){var k=x.querySelector('dt');if(!k)return;if(k.textContent==='Seção')x.remove();if(k.textContent==='Distribuição')dist=x;if(k.textContent==='Valor da causa')val=x;});if(dist&&val){dl.prepend(dist,val);}aut.append(au);}
+  var sn=top.querySelector('.pm-sn'),dialog=caixa.querySelector('#pv-sn-dlg');if(sn){var sb=sn.querySelector('.sn-b');if(sb)while(sb.firstChild)sig.append(sb.firstChild);sn.remove();}else if(dialog){var sc=dialog.querySelector('.pv-sn-c');if(sc)while(sc.firstChild)sig.append(sc.firstChild);dialog.remove();var bar=top.querySelector('.pv-sn-bar');if(bar)bar.remove();}
+  var notes=caixa.querySelector('#g-nt');if(notes)body.append(notes);
+  var prior=caixa.querySelector('#pv-acomp');if(prior){var pb=prior.querySelector('.pv-acomp-b');if(pb)while(pb.firstChild)body.append(pb.firstChild);prior.remove();}
+  if(resp){var enc=resp.querySelector('.pm-enc');if(enc)body.append(enc);resp.remove();}
+  var sel=caixa.querySelector('#pv-identity .rt-tsel');if(sel)tj.append(sel);else html(tj,campoRot('triagem','Tipo de Julgamento','Tipo de julgamento'));
+  var result=caixa.querySelector('#pv-julgamento [data-fk="producao.Voto - Resultado"]');if(result){var rr=result.closest('.gf');if(rr)tj.append(rr);}else if(pronAtual()<0||!/(despacho|outro)/i.test(PRON[pronAtual()][0]))html(tj,campoRot('producao','Voto - Resultado','Conclusão / resultado'));
+  body.insertBefore(tj,notes&&notes.parentNode===body?notes:null);
+  var gbody=caixa.querySelector('.gbody');if(gbody)gbody.after(ac);else caixa.append(ac);show(heroTopo.pagina);
+}
+
+function render() { render0(); heroOrganizarProntuario(); if (window.MutaGerador && window.MutaGerador.pintar) window.MutaGerador.pintar(); }
 function render0() {
   if (!caixa) return;
   faixaUsuario(ses.estado());
