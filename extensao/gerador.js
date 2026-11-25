@@ -363,13 +363,13 @@
   function conta(t) { return (String(t).match(/\[VALIDAR:/g) || []).length; }
   var ULT = null;
   function html() {
-    var g = GB(); if (!g.cnj || !g.cnj()) return '<div class="empty">Abra um processo no PJe para gerar as peças.</div>';
+    var g = GB();if(window.MutaSigilo&&window.MutaSigilo.bloqueado())return '<p class="muted">Acesso restrito.</p>'; if (!g.cnj || !g.cnj()) return '<div class="empty">Abra um processo no PJe para gerar as peças.</div>';
     if (g.modelo && !g.modelo()) return '<div class="empty">Lendo o prontuário do processo ' + esc(g.cnj()) + '…</div>';
     /* 0.52.1 · ato monocrático: relatório e ementa do Gerador são de acórdão; a decisão monocrática se monta na Minuta-Matriz do Compendium */
     if (g.destino && g.destino() === 'monocratica') return '<section class="card pc-sec gr-cfg"><div class="pc-sh"><h3>Gerador</h3><small class="muted">ato monocrático</small></div>' +
       '<p class="muted">O Gerador monta relatório e ementa de acórdão. Este processo está com destino monocrático: a decisão se monta na Minuta-Matriz do Compendium (pronunciamento Monocrática). Se o destino estiver errado, corrija-o no cartão do processo.</p></section>';
     if (ST.cnj !== g.cnj()) { ST.cnj = g.cnj(); ST.tipo = ''; ST.res = ''; }
-    var D = docs(); ULT = D;
+    if(novoHero()){ST.tipo='';ST.res='';} var D = docs(); ULT = D;
     var chips = function (L, at, sel) { return L.map(function (o) { var k = Array.isArray(o) ? o[0] : o, r = Array.isArray(o) ? o[1] : o; return '<button type="button" class="chip' + (k === sel ? ' on' : '') + '" ' + at + '="' + esc(k) + '">' + esc(r) + '</button>'; }).join(''); };
     var relT = D.rel.join('\n'), emT = emTexto(D.em);
     var ai = D.tipo === 'Agravo de Instrumento';
