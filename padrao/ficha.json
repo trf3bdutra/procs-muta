@@ -614,16 +614,6 @@
        "apelido": "classe"
       },
       {
-       "rotulo": "Assunto CNJ",
-       "chave": "Assunto",
-       "tipo": "texto",
-       "fonte": [
-        "Assunto"
-       ],
-       "editavel": false,
-       "apelido": "assunto"
-      },
-      {
        "rotulo": "Seção competente",
        "chave": "Seção",
        "tipo": "texto",
@@ -713,6 +703,82 @@
        "editavel": false,
        "regra": "do PJe",
        "apelido": "orgao_julgador"
+      }
+     ]
+    },
+    {
+     "grupo": "Matéria",
+     "campos": [
+      {
+       "rotulo": "Assunto CNJ",
+       "chave": "Assunto",
+       "tipo": "texto",
+       "fonte": [
+        "Assunto"
+       ],
+       "editavel": false,
+       "apelido": "assunto"
+      },
+      {
+       "rotulo": "Ramo do direito",
+       "chave": "Ramo do direito",
+       "tipo": "texto",
+       "secao": "triagem",
+       "apelido": "ramo_direito"
+      },
+      {
+       "rotulo": "Assunto detalhado",
+       "chave": "Assunto detalhado",
+       "tipo": "texto-longo",
+       "secao": "triagem",
+       "regra": "complementa o do lote (Registro - Assunto detalhado): o cartão da extensão e o Caput mostram o do lote e, na falta, este",
+       "apelido": "assunto_detalhado"
+      },
+      {
+       "rotulo": "Outros assuntos",
+       "chave": "Outros assuntos",
+       "tipo": "texto-longo",
+       "secao": "triagem",
+       "apelido": "outros_assuntos"
+      },
+      {
+       "rotulo": "Detalhamento",
+       "chave": "Detalhamento do caso",
+       "tipo": "texto-longo",
+       "secao": "triagem",
+       "apelido": "detalhamento"
+      },
+      {
+       "rotulo": "Síntese processual",
+       "chave": "Síntese Processual",
+       "tipo": "texto-longo",
+       "secao": "triagem",
+       "apelido": "sintese_processual"
+      },
+      {
+       "rotulo": "Síntese fática",
+       "chave": "Síntese Fática",
+       "tipo": "texto-longo",
+       "secao": "triagem",
+       "apelido": "sintese_fatica"
+      },
+      {
+       "rotulo": "Complexidade",
+       "chave": "COMPLEXIDADE",
+       "tipo": "texto",
+       "secao": "triagem",
+       "calculado": true,
+       "regra": "lê COMPLEXIDADE ou Dificuldade; 1/2/3 → Ω/Α/Σ",
+       "apelido": "complexidade"
+      },
+      {
+       "rotulo": "Assunto detalhado · histórico",
+       "chave": "Registro - Assunto detalhado",
+       "tipo": "texto-longo",
+       "secao": "triagem",
+       "editavel": false,
+       "regra": "do lote de triagem (acervo/lotes); atualizado por scripts/triagem/ficha_lote.py",
+       "apelido": "registro_assunto_detalhado"
       }
      ]
     },
@@ -1139,58 +1205,6 @@
      "grupo": "Matéria e gestão",
      "campos": [
       {
-       "rotulo": "Ramo do direito",
-       "chave": "Ramo do direito",
-       "tipo": "texto",
-       "secao": "triagem",
-       "apelido": "ramo_direito"
-      },
-      {
-       "rotulo": "Assunto detalhado",
-       "chave": "Assunto detalhado",
-       "tipo": "texto-longo",
-       "secao": "triagem",
-       "regra": "complementa o do lote (Registro - Assunto detalhado): o cartão da extensão e o Caput mostram o do lote e, na falta, este",
-       "apelido": "assunto_detalhado"
-      },
-      {
-       "rotulo": "Outros assuntos",
-       "chave": "Outros assuntos",
-       "tipo": "texto-longo",
-       "secao": "triagem",
-       "apelido": "outros_assuntos"
-      },
-      {
-       "rotulo": "Detalhamento",
-       "chave": "Detalhamento do caso",
-       "tipo": "texto-longo",
-       "secao": "triagem",
-       "apelido": "detalhamento"
-      },
-      {
-       "rotulo": "Síntese processual",
-       "chave": "Síntese Processual",
-       "tipo": "texto-longo",
-       "secao": "triagem",
-       "apelido": "sintese_processual"
-      },
-      {
-       "rotulo": "Síntese fática",
-       "chave": "Síntese Fática",
-       "tipo": "texto-longo",
-       "secao": "triagem",
-       "apelido": "sintese_fatica"
-      },
-      {
-       "rotulo": "Complexidade",
-       "chave": "COMPLEXIDADE",
-       "tipo": "texto",
-       "secao": "triagem",
-       "calculado": true,
-       "regra": "lê COMPLEXIDADE ou Dificuldade; 1/2/3 → Ω/Α/Σ",
-       "apelido": "complexidade"
-      },
-      {
        "rotulo": "Tipo de voto",
        "chave": "Tipo de Voto",
        "tipo": "texto",
@@ -1271,15 +1285,6 @@
         "Não se aplica"
        ],
        "apelido": "gratuidade_tipo_pessoa"
-      },
-      {
-       "rotulo": "Assunto detalhado · histórico",
-       "chave": "Registro - Assunto detalhado",
-       "tipo": "texto-longo",
-       "secao": "triagem",
-       "editavel": false,
-       "regra": "do lote de triagem (acervo/lotes); atualizado por scripts/triagem/ficha_lote.py",
-       "apelido": "registro_assunto_detalhado"
       },
       {
        "rotulo": "Análise do caso · histórico",
