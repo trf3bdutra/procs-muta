@@ -108,7 +108,8 @@ test('extensão 0.13: Roteiro por tipo de julgamento usa campos que existem na f
   vm.createContext(sandbox); vm.runInContext(read('extensao/roteiro.js'), sandbox);
   const RT = sandbox.window.MutaRoteiro, ficha = JSON.parse(read('padrao/ficha.json')), ks = new Set();
   ficha.abas.forEach(a => a.grupos.forEach(g => g.campos.forEach(c => ks.add((c.secao || '') + '.' + c.chave))));
-  RT.PASSOS.forEach(p => (p.campos || []).forEach(c => assert.ok(ks.has(c[0] + '.' + c[1]), p.id + ': ' + c[0] + '.' + c[1])));
+  RT.PASSOS.forEach(p => (p.campos || []).concat(p.mais || []).forEach(c => assert.ok(ks.has(c[0] + '.' + c[1]), p.id + ': ' + c[0] + '.' + c[1])));
+  assert.deepEqual(Array.from(RT.PASSOS.find(p=>p.id==='materia').campos, c=>c[1]), ['Detalhamento do caso']);
   const g = (op, fo) => ({ V: (s, k) => ((op || {})[s] || {})[k] || '', F: k => (fo || {})[k] || '', cnj: () => '1' });
   assert.deepEqual(Object.keys(RT.detectar(g({}, { classe_judicial: 'APELAÇÃO / REMESSA NECESSÁRIA' }))).sort(), ['ap', 'rn']);
   assert.deepEqual(Object.keys(RT.detectar(g({ triagem: { 'Padrão - Espécie': 'Embargos de declaração' } }, { classe_judicial: 'APELAÇÃO CÍVEL' }))), ['ed']);
@@ -363,7 +364,10 @@ test('extensão 0.30: tipo de caso e etiquetas sugeridas da triagem no cartão; 
   const S = F.etqTriagem({ 'Etiquetas sugeridas': 'APTO', Preparo: 'Não Recolhido', Tema: 'Saúde · Fornecimento de medicamento', 'Urgência': 'Tutela de urgência', 'Urgência - Apreciação': 'Pendente' }, { 'Seção Competente': '2ª Seção', 'Etiquetas Originais': 'AI' });
   assert.deepEqual(S.map(x => x.e), ['APTO', '2ª Seção', 'ver. preparo', 'LIMINAR PENDENTE', 'Saúde - Fornecimento de medicamento']);
   assert.ok(S[S.length - 1].caso);
-  assert.match(read('apoio/ex-officio/api/_ficha.js'), /tipoCaso: tipoCasoDe\(t\.Tema\)[\s\S]*etqTri: etqTriagem\(t, f\)/);
+  const atual = F.etqTriagem({ 'Detalhamento do caso': 'Saúde · Fornecimento de medicamento', Tema: 'Cadastro legado' }, {});
+  assert.equal(atual.find(x=>x.caso).e, 'Saúde - Fornecimento de medicamento', 'campo canônico prevalece sobre o legado');
+  assert.ok(!F.etqTriagem({ 'Detalhamento do caso': '', Tema: 'Cadastro legado' }, {}).some(x=>x.caso), 'limpeza explícita não revive o legado');
+  assert.match(read('apoio/ex-officio/api/_ficha.js'), /tipoCaso: tipoCasoDe\(detalhamento\(t\)\)[\s\S]*etqTri: etqTriagem\(t, f\)/);
   const c = read('extensao/conteudo-pje.js');
   assert.match(c, /hf-c hf-c-t/); assert.match(c, /class="m-sgs"><small>Sugeridas/); assert.match(c, /function quadroCmt\(\)/); assert.match(c, /id = 'hero-cmt'/);
   const cm = read('apoio/ex-officio/api/_cmt.js');
@@ -590,11 +594,11 @@ test('extensão 0.44: Ler/Reler sempre a íntegra; documentos do Roteiro em Auto
   assert.match(r, /var DOC_RT = \{/); assert.match(r, /data-aba="Autos" title="Editar em Autos › Peças e documentos"/);
 });
 
-test('extensão 0.45: Comparar só com modelos, precedentes, texto colado e 28,86%; minuta-matriz na Conformidade; Collectio em aba só do gestor', () => {
+test('extensão 0.45: Comparar só com modelos, precedentes, texto colado e 28,86%; minuta-matriz na Conformidade; CORTEX em aba só do gestor', () => {
   const c = read('extensao/comparar.js'), h = read('extensao/painel.html'), g = read('extensao/gerador.js');
   assert.match(c, /var FORA_CMP = \{ matriz: 1, lote: 1, tri: 1, par: 1 \};/); assert.match(c, /function estruturaConformidade\(aoBaixar\)/);
   assert.match(read('extensao/conformidade.js'), /window\.MutaComparar\.estruturaConformidade\(render\)/);
-  assert.match(h, /data-mm="lote" aria-selected="false" hidden title="Só para o gestor">Collectio</); assert.match(h, /id="panel-lote" open hidden/);
+  assert.match(h, /data-mm="lote" aria-selected="false" hidden title="Só para o gestor">CORTEX</); assert.match(h, /id="panel-lote" open hidden/);
   assert.match(g, /function gestor\(\) \{/); assert.match(g, /\(m === 'lote' && gestor\(\)\)/);
 });
 
@@ -672,13 +676,13 @@ test('extensão 0.50: 2ª seta sem duplicados; situação calculada pelas sinali
   assert.match(c, /matriz: function \(\) \{ try \{ return C\.dados \? matrizDoProcesso\(\) : null;/);
 });
 
-test('extensão 0.51: Collectio com o PJe aberto — referência na versão final, versões, confronto por seção, veredito, PJe conferido e tag nos cartões', () => {
+test('extensão 0.51: CORTEX com o PJe aberto — referência na versão final, versões, confronto por seção, veredito, PJe conferido e tag nos cartões', () => {
   const l = read('extensao/lote.js'), c = read('extensao/conteudo-pje.js');
   assert.match(l, /function refPadrao\(\)/); assert.match(l, /a\.it\.final && a\.it\.final\.versao/); assert.match(l, /&versoes=1/); assert.match(l, /&versao=/);
   assert.match(l, /function confrontar\(\)/); assert.match(l, /function qualVersao\(ed, ref\)/); assert.match(l, /acao: 'minuta-pje'/);
   assert.match(l, /'muta-collectio-conf'/); assert.match(l, /function autoAba\(\)/); assert.match(l, /window\.MutaGerador\.modo\('lote'\)/);
-  assert.match(l, /\[\['cmp', 'Editor × Collectio'/); assert.match(l, /function confVersao\(m\)/);
-  assert.match(c, /function colTag\(k, r, texto\)/); assert.match(c, /'= Collectio' : '≠ Collectio'/);
+  assert.match(l, /\[\['cmp', 'Editor × CORTEX'/); assert.match(l, /function confVersao\(m\)/);
+  assert.match(c, /function colTag\(k, r, texto\)/); assert.match(c, /'= CORTEX' : '≠ CORTEX'/);
   assert.match(read('extensao/conformidade-motor.js'), /cabecalhoPje: cabecalhoPje/); assert.match(read('extensao/conformidade.js'), /contexto: function \(\)/);
 });
 
