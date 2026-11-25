@@ -49,7 +49,7 @@ jobs:
       - name: Sem chave da API
         if: env.ANTHROPIC_API_KEY == ''
         run: echo "::warning::O segredo ANTHROPIC_API_KEY não está configurado; nada foi feito."
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         if: env.ANTHROPIC_API_KEY != ''
       - uses: actions/setup-python@v5
         if: env.ANTHROPIC_API_KEY != ''

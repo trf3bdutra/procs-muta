@@ -102,13 +102,14 @@
     var q=ses&&ses.estado?ses.estado():{},on=q.estado==='on',gst=on&&q.gestor;
     var cm = A.cmt && !A.cmt.fora && !A.cmt.erro, nCm = cm ? (A.cmt.assinatura || []).length + (A.cmt.duvidas || []).length : 0;
     /* 0.49: o quadro do Desembargador (para assinar e dúvidas) saiu do sino para a aba Deliberações */
-    var abas = [['al', 'PJe'], ['app', 'Gabinete']].concat(gst ? [['ch', 'Chegadas']] : []).concat([['ver', 'Versão']]);   /* 0.48: Prazos e Etiquetas saíram do sino para a aba Controle (só o gestor) */
+    var abas = [['al', 'PJe'], ['app', 'Gabinete'], ['ver', 'Versão']];   /* 0.73.5: as Chegadas (gestor) ficam dentro de PJe */
+    A.gst = gst;   /* 0.48: Prazos e Etiquetas saíram do sino para a aba Controle (só o gestor) */
     if (A.aba === 'cm') A.aba = 'al';
-    if (A.aba === 'ch' && !gst) A.aba = 'al';
+    if (A.aba === 'ch') A.aba = 'al';
     if (A.aba === 'pz' || A.aba === 'et') A.aba = 'al';
     var site=(window.Muta&&window.Muta.SITE)||'https://www.gabinete-cmt.com';
     var h='<header class="tu-profile-panel-head"><div class="tu-profile-panel-id"><b>'+esc(on?q.usuario:'HERO18810')+'</b><small>Notificações'+(gst?' · Gestão':'')+'</small></div><div class="tu-profile-panel-actions">'+(on&&window.MutaGabinete&&window.MutaGabinete.cnj()?'<button type="button" data-ap-refresh title="Atualizar prontuário" aria-label="Atualizar prontuário">'+SVG('<path d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7"/>',14)+'</button>':'')+($('pv-ajustes')||gst?'<button type="button" data-ap-ajustes title="Configurações" aria-label="Configurações">'+SVG('<circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="7"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3M5 5l2 2m10 10 2 2M5 19l2-2M17 7l2-2"/>',14)+'</button>':'')+(on?'<a href="'+esc(site)+'/exofficio/" target="_blank" rel="noopener noreferrer" title="Abrir Office">'+SVG('<path d="M14 4h6v6M20 4 10 14M19 14v5H5V5h5"/>',13)+'<span>Office</span></a><button type="button" data-ap-sair title="Sair da conta">'+SVG('<path d="M15 4h4v16h-4M10 17l-5-5 5-5M5 12h11"/>',13)+'<span>Sair</span></button>':'')+'<button type="button" class="ap-x" data-ap-x title="Fechar" aria-label="Fechar">×</button></div></header>';
-    h += '<div class="ap-t" role="tablist">' + abas.map(function (a) { return '<button type="button" role="tab" class="ap-tab-' + a[0] + '" data-ap="' + a[0] + '" aria-selected="' + (A.aba === a[0]) + '">' + a[1] + (a[0] === 'al' && A.itens.length ? ' <i>' + A.itens.length + '</i>' : a[0] === 'app' && appPend().length ? ' <i>' + appPend().length + '</i>' : a[0] === 'ch' && A.cheg.length ? ' <i>' + A.cheg.length + '</i>' : a[0] === 'cm' && nCm ? ' <i>' + nCm + '</i>' : '') + '</button>'; }).join('') +
+    h += '<div class="ap-t" role="tablist">' + abas.map(function (a) { return '<button type="button" role="tab" class="ap-tab-' + a[0] + '" data-ap="' + a[0] + '" aria-selected="' + (A.aba === a[0]) + '">' + a[1] + (a[0] === 'al' && (A.itens.length + (gst ? A.cheg.length : 0)) ? ' <i>' + (A.itens.length + (gst ? A.cheg.length : 0)) + '</i>' : a[0] === 'app' && appPend().length ? ' <i>' + appPend().length + '</i>' : a[0] === 'ch' && A.cheg.length ? ' <i>' + A.cheg.length + '</i>' : a[0] === 'cm' && nCm ? ' <i>' + nCm + '</i>' : '') + '</button>'; }).join('') +
       '</div>';
     h += '<div class="ap-c">' + (A.aba === 'cm' ? '<div id="ap-cmt">' + (window.MutaCmt ? window.MutaCmt.html(A.cmt) : '') + '</div>' : A.aba === 'al' ? pAlertas() : A.aba === 'app' ? pApp() : A.aba === 'ch' ? pChegadas() : pVersao()) + '</div>';
     p.innerHTML = h;
@@ -131,7 +132,9 @@
     if (!temChrome) return Promise.resolve();
     return chrome.runtime.sendMessage({ tipo: 'muta-cmt', forcar: !!forcar }).then(function (v) { A.cmt = v || null; /* 0.49: sem aba do Desembargador no sino */ }, function () {});
   }
-  function pAlertas() {
+  /* PJe = chegadas de hoje (só o gestor) + alertas da lista */
+  function pAlertas() { return (A.gst ? '<section class="ap-sec ap-sec-ch"><h4 class="ap-sh">Chegadas de hoje' + (A.cheg.length ? ' <i>' + A.cheg.length + '</i>' : '') + '</h4>' + pChegadas() + '</section><h4 class="ap-sh">Alertas da lista</h4>' : '') + pAlertas0(); }
+  function pAlertas0() {
     if (!A.itens.length) return '<p class="muted ap-v">Nenhum alerta. Os alertas surgem quando a lista de tarefas do PJe é aberta com o HERO18810 ligado.</p>';
     var L = A.itens.slice().sort(function (a, b) { return al(b) - al(a); });
     return '<small class="muted ap-em">Leitura da lista em ' + esc(quando(A.em)) + ' · toque no número para copiar</small><ul class="ap-l">' + L.map(function (i) {
@@ -156,7 +159,7 @@
       (A.cheg.length ? '<ul class="ap-l">' + A.cheg.slice().sort(function (a, b) { return b.urg - a.urg; }).map(function (x) {
         return '<li class="org-pje"><div class="ap-h"><i class="ap-org pje">PJe</i><button type="button" class="ap-k" data-ap-cnj="' + esc(fmtCnj(x.k)) + '">' + esc(fmtCnj(x.k)) + '</button><small>' + esc(quando(x.em)) + '</small></div>' +
           '<div class="ap-as">' + (x.urg ? '<span class="ap-a al">Urgente: ' + esc(x.motivos.join(', ')) + '</span>' : (x.motivos || []).length ? '<span class="ap-a av">' + esc(x.motivos.join(', ')) + '</span>' : '') + (x.tarefa ? '<span class="ap-a">' + esc(x.tarefa) + '</span>' : '') + '</div></li>';
-      }).join('') + '</ul>' : '<p class="muted ap-v">Nenhuma chegada vista hoje. As chegadas são registradas quando a lista de tarefas do PJe é aberta com a extensão ligada.</p>') +
+      }).join('') + '</ul>' : '<p class="muted ap-v">Nenhuma chegada vista hoje.</p>') +
       '<a class="lnk" target="_blank" href="' + lk + '">Relatório completo do dia</a>';
   }
   function pPrazos() {

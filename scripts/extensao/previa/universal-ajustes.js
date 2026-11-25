@@ -10,13 +10,13 @@
   dlg.innerHTML='<div class="pv-ajustes-head"><div><h2 id="pv-ajustes-titulo">Ajustes</h2><small class="muted">Preferências do HERO18810 neste navegador</small></div><button type="button" class="btn line sm" id="pv-ajustes-fechar" aria-label="Fechar ajustes">×</button></div>'+
     '<section class="pv-ajustes-sec"><h3>Aparência</h3><label class="pv-ajustes-select"><span>Tema do painel</span><select id="pv-ajustes-tema"><option value="claro">Claro</option><option value="escuro">Escuro</option></select></label></section>'+
     '<section class="pv-ajustes-sec"><h3>Integração com o PJe</h3><label class="pv-ajustes-row"><span><b>Acompanhar o PJe</b><small>Abre o prontuário do processo selecionado.</small></span><input type="checkbox" id="pv-ajustes-seguir"></label><label class="pv-ajustes-row"><span><b>Trocar de aba automaticamente</b><small>Alterna entre Autos e Minutário conforme a tela do PJe.</small></span><input type="checkbox" id="pv-ajustes-aba"></label><label class="pv-ajustes-row"><span><b>Preencher campos automaticamente</b><small>Usa a leitura dos autos para preencher campos vazios; não substitui dados gravados.</small></span><input type="checkbox" id="pv-ajustes-auto"></label></section>'+
-    '<section class="pv-ajustes-sec" id="pv-ajustes-gestao" hidden><h3>Gestão</h3><button type="button" class="pv-ajustes-control btn line" id="pv-ajustes-controle"><span><b>Controle</b><small>Prazos, avisos e catálogo de etiquetas</small></span><span aria-hidden="true">›</span></button></section>'+
+    '<section class="pv-ajustes-sec" id="pv-ajustes-gestao" hidden><h3>Gestão</h3><button type="button" class="pv-ajustes-control btn line" id="pv-ajustes-controle" aria-expanded="false" aria-controls="pv-ajustes-ctl"><span><b>Controle</b><small>Prazos, avisos e catálogo de etiquetas</small></span><span aria-hidden="true" id="pv-ajustes-ctl-seta">▾</span></button><div id="pv-ajustes-ctl" class="pv-ajustes-ctl" hidden></div></section>'+
     '<div class="pv-ajustes-foot"><small class="muted">As preferências são aplicadas imediatamente. A gravação real continua bloqueada no modo Universal.</small><button type="button" class="btn solid sm" id="pv-ajustes-ok">Concluir</button></div>';
   document.body.appendChild(dlg);
   var tema=$('pv-ajustes-tema'),seguir=$('pv-ajustes-seguir'),aba=$('pv-ajustes-aba'),auto=$('pv-ajustes-auto');
   function gestorAutenticado(){var S=window.MutaSessao,u=S&&S.estado?S.estado():null;return !!(u&&u.estado==='on'&&u.gestor);}
   function sync(){
-    var gestao=$('pv-ajustes-gestao'),ctl=$('pv-ajustes-controle'),permitido=gestorAutenticado();gestao.hidden=!permitido;ctl.disabled=!permitido;
+    var gestao=$('pv-ajustes-gestao'),ctl=$('pv-ajustes-controle'),permitido=gestorAutenticado();gestao.hidden=!permitido;ctl.disabled=!permitido;if(!permitido&&ctlAberto)controle(false);
     var s=$('pje-seguir'),a=$('pje-aba'),A=window.MutaAutos,T=window.MutaTema;
     tema.value=T?T.atual():document.documentElement.dataset.tema||'escuro';tema.disabled=!$('pje-tema');
     seguir.checked=!!(s&&s.checked);seguir.disabled=!s;
@@ -29,13 +29,29 @@
   tema.addEventListener('change',function(){var T=window.MutaTema,t=$('pje-tema');if(T&&t&&T.atual()!==tema.value)t.click();sync();});
   auto.addEventListener('change',function(){var A=window.MutaAutos;if(A&&A.autoLigar)A.autoLigar(auto.checked);sync();});
   b.addEventListener('click',function(){sync();if(!dlg.open)dlg.showModal();});
-  function fechar(){if(dlg.open)dlg.close();}
+  function fechar(){if(dlg.open)dlg.close();controle(false);}
   $('pv-ajustes-fechar').addEventListener('click',fechar);
   $('pv-ajustes-ok').addEventListener('click',fechar);
-  $('pv-ajustes-controle').addEventListener('click',function(){if(!gestorAutenticado()){sync();return;}if(window.MutaAbas){fechar();window.MutaAbas.ir('ctl');}});
+  /* Controle (Prazos e Etiquetas, conteúdo de alertas.js) abre aqui dentro, sem tela à parte: o #ctl-app é trazido para o diálogo */
+  var ctlAberto=false;
+  function controle(abrir){
+    var box=$('pv-ajustes-ctl'),bt=$('pv-ajustes-controle'),seta=$('pv-ajustes-ctl-seta');
+    if(abrir&&!gestorAutenticado()){sync();abrir=false;}
+    ctlAberto=!!abrir;box.hidden=!abrir;bt.setAttribute('aria-expanded',String(!!abrir));if(seta)seta.textContent=abrir?'▴':'▾';
+    if(dlg.classList)dlg.classList.toggle('pv-ajustes-largo',!!abrir);
+    if(!abrir)return;
+    var app=$('ctl-app');if(app&&app.parentNode!==box&&box.appendChild)box.appendChild(app);
+    if(window.MutaAlertas&&window.MutaAlertas.controle)window.MutaAlertas.controle();
+  }
+  $('pv-ajustes-controle').addEventListener('click',function(){controle(!ctlAberto);});
+  /* quem pedia a aba Controle (atalhos antigos, alertas, perfil) agora abre os Ajustes com o Controle aberto */
+  function abrirControle(){sync();if(!dlg.open)dlg.showModal();controle(true);}
+  function prender(){var M=window.MutaAbas;if(!M||M.__ajCtl)return;var ir=M.ir;M.ir=function(n){if(n==='ctl'||n==='controle'){abrirControle();return;}return ir.apply(this,arguments);};M.__ajCtl=true;}
+  prender();setTimeout(prender,0);
+  window.MutaAjustes={abrir:function(){sync();if(!dlg.open)dlg.showModal();},controle:abrirControle};
   if(window.MutaSessao&&window.MutaSessao.ouvir)window.MutaSessao.ouvir(sync);
   sync();
-  dlg.addEventListener('close',function(){var p=$('tu-sino');if(p)p.focus();});
+  dlg.addEventListener('close',function(){var bx=$('pv-ajustes-ctl');if(ctlAberto)controle(false);var p=$('tu-sino');if(p)p.focus();});
   document.addEventListener('change',function(e){if(dlg.open&&(e.target.id==='pje-seguir'||e.target.id==='pje-aba'))sync();});
   Array.from(document.querySelectorAll('#pv-nav-main button')).forEach(function(t){
     var l=t.querySelector('.nav-text b');if(l){var n=l.textContent.trim();t.title=n;t.setAttribute('aria-label',n);}

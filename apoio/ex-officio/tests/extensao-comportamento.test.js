@@ -258,3 +258,23 @@ test('universal: organização — faces por setas compactas, sinalizações na 
     assert.deepEqual(P.erros, [], 'sem erro de script');
   } finally { await P.fim(); }
 });
+
+test('universal 0.73.5: Controle dentro dos Ajustes, Gerador na Produção e cabeçalho do resumo no padrão do painel', { skip: pular, timeout: 90000 }, async () => {
+  const op = { processo: CNJ, origem: {}, triagem: { 'Tipo de Julgamento': 'Apelação', 'Assunto detalhado': 'Saúde — vosoritida para acondroplasia', 'Detalhamento do caso': 'Apelação da União e remessa necessária em ação de obrigação de fazer.' }, producao: { SERVIDOR: 'Rodrigo', MINUTADO: '2026-11-13', Destino: 'Sessão' }, pauta: {}, controles: {} };
+  const P = await abrirUniversal(op);
+  try {
+    const { pg } = P;
+    const cab = await pg.evaluate(() => { const b = document.querySelector('button.hero-case-detail'), s = b && getComputedStyle(b); return s ? [s.textAlign, s.borderTopStyle, s.backgroundColor] : null; });
+    assert.ok(cab, 'detalhamento no cabeçalho'); assert.equal(cab[0], 'left'); assert.notEqual(cab[1], 'outset', 'sem o botão padrão do navegador');
+    await pg.evaluate(() => window.MutaAbas.ir('ctl'));
+    await pg.waitForSelector('#pv-ajustes-ctl:not([hidden]) #ctl-app', { timeout: 10000 });
+    assert.equal(await pg.evaluate(() => document.getElementById('pv-ajustes-dialog').open), true, 'Controle abre nos Ajustes, sem tela à parte');
+    assert.match(await pg.evaluate(() => document.getElementById('pv-ajustes-ctl').innerText), /Prazos/);
+    await pg.evaluate(() => document.getElementById('pv-ajustes-ok').click());
+    await pg.evaluate(() => window.MutaGabinete.irGerador());
+    await pg.waitForSelector('#pv-gerador[open] #pv-ger-app .gr-doc', { timeout: 10000 });
+    assert.equal(await pg.evaluate(() => document.querySelectorAll('#pv-gerador').length), 1);
+    assert.match(await pg.evaluate(() => document.getElementById('pv-ger-app').innerText), /RELATÓRIO|Relatório/);
+    assert.equal(await pg.evaluate(() => getComputedStyle(document.querySelector('[data-mm="ger"]')).display), 'none', 'o Minutário não tem mais o Gerador');
+  } finally { await P.fim(); }
+});

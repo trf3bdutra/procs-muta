@@ -377,7 +377,15 @@ test('extensão 0.30: tipo de caso e etiquetas sugeridas da triagem no cartão; 
   assert.match(fu, /\/api\/painel\?cmt=1/); assert.match(fu, /origem: 'extensao'/); assert.match(fu, /'muta-cmt', \{ periodInMinutes: 1/);
   const vm = require('vm'), ctx = { window: {}, self: {} }; ctx.window.MutaEtiquetas = null; vm.createContext(ctx); vm.runInContext(read('extensao/cmt.js'), ctx);
   const h = ctx.window.MutaCmt.html({ em: '2026-11-21T20:00:00Z', des: true, assinatura: [{ cnj: '5001234-56.2026.4.03.6000', tipoAto: 'Decisão terminativa', servidor: 'José Victor', corretor: 'Bruno', dataMinuta: '2026-11-19', dataCorrecao: '2026-11-20', desde: '2026-11-20', aguarda: 1, urg: { tipo: 'Liminar', espera: 3 } }], duvidas: [{ id: 'pen-1', titulo: 'Honorários', de: 'Dalete' }], liberacao: [] });
-  assert.match(h, /Para assinatura/); assert.match(h, /Decisão terminativa/); assert.match(h, /data-hcm="assinar"/); assert.match(h, /cópia ao gestor/);
+  assert.match(h, /Quadro do Desembargador/); assert.match(h, /Decisão terminativa/); assert.doesNotMatch(h, /A liberar/);
+  assert.match(h, /Assinatura urgente/); assert.match(h, /Retirada \/ adiamento/);
+  const h2 = ctx.window.MutaCmt.html({ assinatura: [{ cnj: '5000001-00.2026.4.03.6000', tipoAto: 'Voto comum' }, { cnj: '5000002-00.2026.4.03.6000', tipoAto: 'Liminar urgente', urg: { tipo: 'Liminar', situacao: 'Apreciada' } }], duvidas: [], pedidos: [] });
+  assert.doesNotMatch(h2, /Voto comum|Liminar urgente/, 'só a assinatura com urgência ativa');
+  ctx.window.MutaCmt.UI.aba = 'pe';
+  const h3 = ctx.window.MutaCmt.html({ assinatura: [], duvidas: [], pedidos: [{ id: 'p1', tipo: 'retirada', numero: '5000003-00.2026.4.03.6000', de: 'Dra. Ana', sessao: '2026-12-07', razao: 'acordo' }] });
+  assert.match(h3, /Retirada de pauta/); assert.match(h3, /data-hcm="pe" data-decisao="defere"/); assert.match(h3, /Indeferir/);
+  ctx.window.MutaCmt.UI.aba = 'as';
+  assert.match(read('extensao/fundo.js'), /pedidos: d\.pedidos \|\| \[\]/); assert.match(read('extensao/fundo.js'), /function pedidoCmt\(msg\)/); assert.match(h, /data-hcm="assinar"/); assert.match(h, /cópia ao gestor/);
   assert.match(read('extensao/manifest.json'), /"cmt\.js"/); assert.match(read('extensao/painel.html'), /cmt\.js/);
 });
 
@@ -656,7 +664,7 @@ test('extensão 0.48.2: Diligências divididas por fase do andamento (A fazer, E
 test('extensão 0.49: Assinatura nas Deliberações (urgência no topo) e fora do sino; sinalizações com aviso e inclusão no alto, com seletor do tipo', () => {
   const x = read('extensao/gestao.js'), a = read('extensao/alertas.js'), g = read('extensao/gabinete.js'), c = read('extensao/conteudo-pje.js'), f = read('extensao/fundo.js');
   assert.match(x, /function itemAs\(a\)/); assert.match(x, /acao: 'assinar', cnj: cnj/); assert.match(x, /acao: 'devolver'/); assert.match(x, /var X = \{ aba: 'as'/);
-  assert.match(a, /var abas = \[\['al', 'PJe'\], \['app', 'Gabinete'\]\]/);
+  assert.match(a, /var abas = \[\['al', 'PJe'\], \['app', 'Gabinete'\], \['ver', 'Versão'\]\];/); assert.doesNotMatch(a, /\['ch', 'Chegadas'\]/, '0.73.5: chegadas dentro de PJe'); assert.match(a, /Chegadas de hoje/);
   assert.match(g, /\['av', 'Aviso', 'triagem', 'Avisos'\]/); assert.match(g, /data-sn-add/); assert.doesNotMatch(g, /placeholder="Nova sinalização: descreva e tecle Enter"/);
   assert.match(c, /data-hd-novo-f/); assert.match(c, /\[\['av', 'Aviso'\], \['ic', 'Intercorrência'\], \['pd', 'Pendência'\], \['nt', 'Nota'\]\]/);
   assert.match(f, /av: \['triagem', 'Avisos'\]/);
