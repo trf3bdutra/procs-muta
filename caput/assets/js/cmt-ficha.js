@@ -1348,6 +1348,8 @@ function abaGruposCorpo(A) {
       h += card('Status da análise', '<p><b>' + (triado ? 'Triado' : 'A triar') + '</b> · independente do destino e das pendências.</p>', {acoes:ac});
     }
     h += cardDestino() + cardTempest() + cardDocumental();
+    var registros=ST.ad.registrosLote?ST.ad.registrosLote(ST.cnj):[];
+    if(registros&&registros.length)h+=card('Registros por lote',registros.map(function(l){return '<details open><summary><b>'+E(l.titulo)+'</b></summary><div style="padding:8px 12px">'+(l.campos||[]).map(function(c){return '<p style="white-space:pre-wrap;overflow-wrap:anywhere"><b>'+E(c.nome)+':</b> '+E(S(c.valor)||'—')+'</p>';}).join('')+'</div></details>';}).join('')+'<p class="fx-note">Campos específicos do lote atualmente aberto na Triagem. São editados na matriz do lote, sem duplicação na ficha.</p>');
   }
   var gs = (A.grupos || []).filter(function (g) { return !(A.aba === 'Triagem' && !ST.edit && g.grupo === 'Conclusão da análise') && (!g.destino || g.destino === dn) && grupoVisivel(g) && !(ST.v2 && !ST.edit && FX2_SO_LADO.indexOf(g.grupo) >= 0); }), vazios = [];
   if (A.aba === 'Processo') gs = gs.map(function (g, i) { var k = PRI_PROC.indexOf(g.grupo); return [k < 0 ? 99 + i : k, g]; }).sort(function (a, b) { return a[0] - b[0]; }).map(function (x) { return x[1]; });
