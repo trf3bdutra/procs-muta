@@ -136,3 +136,26 @@ test('universal: Julgamento da monocrática e da urgência — hipótese do art.
     assert.doesNotMatch(t, /Hipótese do art\. 932|Honorários/);
   } finally { await P2.fim(); }
 });
+
+test('universal: Acompanhamento no alto da Triagem; sinalizações em janela móvel; registro em Autuação', { skip: pular, timeout: 90000 }, async () => {
+  const op = { processo: CNJ, origem: {}, triagem: { 'Tipo de Julgamento': 'Apelação', 'Seleção Prévia': 'Sim', Avisos: 'x' }, producao: { Destino: 'Sessão' }, pauta: {}, controles: {} };
+  const P = await abrir(op, { sigilo: '', liberado: true, porque: 'gestor' });
+  try {
+    const { pg } = P;
+    await pg.goto(pg.url().replace('/painel/painel.html', '/painel/universal.html'));
+    await pg.waitForFunction(() => window.MutaSessao && window.MutaSessao.estado().estado === 'on', null, { timeout: 15000 });
+    await pg.evaluate(cnj => { window.chrome.storage.session.set({ 'aba:1': { numero: cnj, classe: 'ApCiv', tarefa: 'x', ctx: '', ed: false, lib: '' } }); }, CNJ);
+    await pg.waitForSelector('[data-pv-tab="tri"]', { timeout: 15000 });
+    await pg.click('[data-pv-tab="tri"]');
+    await pg.waitForSelector('#pv-acomp', { timeout: 15000 });
+    assert.ok(await pg.$eval('#pv-acomp', d => d.nextElementSibling && d.nextElementSibling.classList.contains('rt-top')), 'antes do roteiro');
+    assert.ok(await pg.$('#pv-acomp #pv-tri-enc'), 'encaminhamento (destino e seleção prévia) no Acompanhamento');
+    assert.ok(await pg.$('#pv-acomp .pv-followup'), 'responsável e próxima ação no Acompanhamento');
+    assert.ok(!(await pg.$('details.pm-sn')), 'sinalizações fora do cartão');
+    assert.ok(await pg.$('details.pm-aut1 .pv-reg'), 'registro no acervo em Autuação');
+    await pg.click('[data-pv-sn]');
+    assert.equal(await pg.$eval('#pv-sn-dlg', d => d.open), true, 'janela de sinalizações aberta');
+    assert.ok(await pg.$('#pv-sn-dlg #g-sn'), 'sinalizações dentro da janela');
+    assert.deepEqual(P.erros, [], 'sem erro de script');
+  } finally { await P.fim(); }
+});
