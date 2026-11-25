@@ -618,13 +618,27 @@ function docsDoGrupo(grupo) {
   L.forEach(function (d) { A.mostrados[d.id] = 1; });
   return L.length ? '<div class="au-docs au-dg">' + L.map(linhaDoc).join('') + '</div>' : '';
 }
-function historicoDocsFicha(L){
+/* A cronologia de apresentação agrega o histórico sem simular leitura do PJe. */
+function historicosIntegrados(L){
+ var gb=GB(),sig=window.MutaSigilo;if(!gb.gravado||sig&&(sig.bloqueado()||sig.sigiloso()))return [];
+ var R=gb.gravado('triagem','Registro - Peças');if(!Array.isArray(R))return [];
+ var ids=new Set(L.map(function(d){return S(d.id);}).filter(Boolean)),out=[],por={};
+ R.forEach(function(r,n){if(!r||typeof r!=='object')return;var id=S(r.id);if(id&&ids.has(id))return;
+ var key=id?'id:'+id:'sem-id:'+n,c=categoria(S(r.peca)),d=por[key];
+ if(!d){d={id:id,tipo:S(r.peca)||'Documento',data:brD(r.data),hora:'',k:c.k,rot:c.rot,g:c.g,historico:true,registros:[]};por[key]=d;out.push(d);}d.registros.push(r);
+ });
+ return out;
+}
+function cronologiaIntegrada(L,H){return L.concat(H).map(function(d,i){return {d:d,i:i};}).sort(function(a,b){var da=iso(a.d.data)||'',db=iso(b.d.data)||'';return db.localeCompare(da)||S(b.d.hora).localeCompare(S(a.d.hora))||a.i-b.i;}).map(function(x){return x.d;});}
+function linhaHistorica(d){
+ if(!d.historico)return linhaDoc(d);
+ var texto=d.registros.map(function(r){return ['pje','nota','trecho'].map(function(k){return S(r[k])?'<p style="white-space:pre-wrap;overflow-wrap:anywhere"><b>'+esc({pje:'Referência PJe',nota:'Nota histórica',trecho:'Trecho histórico'}[k])+':</b> '+esc(r[k])+'</p>':'';}).join('');}).join('<hr>');
+ return '<div class="au-doc au-historico"><div class="au-h"><span class="au-d">'+esc(d.data||'Sem data')+'</span><div class="au-n"><b>'+esc(d.tipo)+'</b><small>Registro histórico · '+(PRINC[d.k]&&d.k!=='intimacao'?'Peça principal':'Outro documento')+'</small></div>'+(d.id?'<button type="button" class="mono lnk" data-copia="'+esc(d.id)+'" title="Copiar ID">'+esc(d.id)+'</button>':'')+'</div>'+texto+'<small class="muted">Inteiro teor ainda não localizado na cronologia lida.</small></div>';
+}
+function historicoDocsFicha(){
  var gb=GB(),sig=window.MutaSigilo;if(!gb.gravado||sig&&(sig.bloqueado()||sig.sigiloso()))return '';
- var v=S(gb.gravado('triagem','Registro - Teor dos autos')),R=gb.gravado('triagem','Registro - Peças');R=Array.isArray(R)?R:[];
- var ids=new Set((L||[]).map(function(d){return S(d.id);}));
- var H=R.filter(function(r){return !ids.has(S(r.id));});
- var row=function(r){return ['peca','id','data','pje','nota','trecho'].map(function(k){return S(r[k])?'<p style="white-space:pre-wrap;overflow-wrap:anywhere"><b>'+esc({peca:'Peça',id:'ID',data:'Data',pje:'Referência PJe',nota:'Nota histórica do lote',trecho:'Trecho histórico do lote'}[k])+':</b> '+esc(r[k])+'</p>':'';}).join('');};
- return (v?'<details class="pc-s" open><summary><b>Síntese geral dos autos · registro histórico</b></summary><p style="white-space:pre-wrap;overflow-wrap:anywhere">'+esc(v)+'</p></details>':'')+(H.length?'<details class="pc-s"><summary><b>Peças históricas fora da cronologia lida ('+H.length+')</b></summary>'+H.map(function(r){return '<div class="au-doc">'+row(r)+'</div>';}).join('')+'</details>':'');
+ var v=S(gb.gravado('triagem','Registro - Teor dos autos'));
+ return v?'<details class="pc-s"><summary><b>Síntese geral dos autos · registro histórico</b></summary><p style="white-space:pre-wrap;overflow-wrap:anywhere">'+esc(v)+'</p></details>':'';
 }
 function notasHistoricasDoc(d){
  var gb=GB(),sig=window.MutaSigilo;if(!gb.gravado||docBloq(d)||sig&&(sig.bloqueado()||sig.sigiloso()||sig.docSigiloso&&sig.docSigiloso(d)))return '';
@@ -635,24 +649,25 @@ function htmlDocs(pecas) {
   A.mostrados = {};
   var F = A.filtro === 'todos' ? 'todos' : 'pecas', ok = A.itens && lidoDoProcesso();
   var gr = F === 'pecas' && typeof pecas === 'function' ? pecas() : '';
-  var L = ok ? lista() : [], P = ok ? principais() : [];
+  var L = ok ? lista() : [], P = ok ? principais() : [], H=historicosIntegrados(L), C=cronologiaIntegrada(L,H), HP=H.filter(function(d){return PRINC[d.k]&&d.k!=='intimacao';}), HO=H.filter(function(d){return !PRINC[d.k]||d.k==='intimacao';});
   var nSel = ok ? marcados().length : 0;
   var lidos = Object.keys(A.docs).filter(function (k) { return /^(ok|sem)$/.test(A.docs[k].estado); }).length;
-  var cab = '<div class="pc-sh"><h3>Teor dos autos · Documentos e peças</h3><small class="muted">' + (ok ? L.length + ' na cronologia · ' + lidos + ' com texto lido' : 'da ficha do processo') + '</small></div>';
+  var cab = '<div class="pc-sh"><h3>Teor dos autos · Documentos e peças</h3><small class="muted">' + (ok ? C.length + ' na cronologia · ' + lidos + ' com texto lido' : 'da ficha do processo') + '</small></div>';
   if (ok && GB().classificacaoFiltro) cab += GB().classificacaoFiltro(L.filter(function(d){return !docBloq(d);}));
-  var seg = ok ? '<div class="au-fx"><span class="seg"><button type="button" data-au="f:pecas" aria-selected="' + (F === 'pecas') + '" title="As peças da ficha com os seus documentos: decisões, recursos, contrarrazões, parecer, procuração, custas e inicial">Principais (' + P.length + ')</button><button type="button" data-au="f:todos" aria-selected="' + (F === 'todos') + '" title="A cronologia inteira do PJe, do mais recente ao mais antigo">Todos (' + L.length + ')</button></span>' +
+  var seg = ok ? '<div class="au-fx"><span class="seg"><button type="button" data-au="f:pecas" aria-selected="' + (F === 'pecas') + '" title="As peças da ficha com os seus documentos: decisões, recursos, contrarrazões, parecer, procuração, custas e inicial">Principais (' + (P.length+HP.length) + ')</button><button type="button" data-au="f:todos" aria-selected="' + (F === 'todos') + '" title="A cronologia inteira do PJe, do mais recente ao mais antigo">Todos (' + C.length + ')</button></span>' +
     '<button type="button" class="btn line sm au-js" data-au="tudojs"' + (A.todo ? ' disabled' : '') + ' title="Lê o texto de todos os documentos (PDF digitalizado vai ao OCR) e baixa num arquivo JSON, no formato do acervo" aria-label="Baixar o inteiro teor em JSON">' + SVGDL + (A.todo ? A.todo.feitos + '/' + A.todo.total : 'JSON') + '</button></div>' +
     '<div class="au-gv"><span class="muted">Marcar: <button type="button" class="lnk" data-au="sel:principais">principais</button> · <button type="button" class="lnk" data-au="sel:todos">todos</button> · <button type="button" class="lnk" data-au="sel:nenhum">nenhum</button></span>' +
     '<button type="button" class="btn solid sm" data-au="gravar"' + (A.grav || !nSel ? ' disabled' : '') + ' title="Registra os marcados na ficha (Outras peças) e grava o inteiro teor de cada um no acervo">' + (A.grav ? (A.grav.fase === 'lendo' ? 'Lendo ' + A.grav.feitos + '/' + A.grav.total + '…' : 'Gravando…') : 'Gravar ' + nSel + ' na ficha') + '</button></div>' +
     (A.gravMsg ? '<p class="status' + (/Não gravou/.test(A.gravMsg) ? ' err' : ' ok') + '">' + esc(A.gravMsg) + '</p>' : '') : '';
   var corpo;
-  if (F === 'todos') corpo = '<div class="au-docs">' + L.map(linhaDoc).join('') + '</div>';
+  if (F === 'todos') corpo = '<div class="au-docs">' + C.map(linhaHistorica).join('') + '</div>';
   else {
-    var resto = P.filter(function (d) { return !A.mostrados[d.id]; });
-    corpo = gr + (resto.length ? '<details class="pc-s" open><summary><span class="pc-s-t"><b>Demais peças</b><small>' + resto.length + ' documento(s)</small></span></summary><div class="au-docs au-dg">' + resto.map(linhaDoc).join('') + '</div></details>' : '');
+    var resto = cronologiaIntegrada(P.filter(function (d) { return !A.mostrados[d.id]; }),HP);
+    corpo = gr + (resto.length ? '<details class="pc-s" open><summary><span class="pc-s-t"><b>Demais peças</b><small>' + resto.length + ' documento(s)</small></span></summary><div class="au-docs au-dg">' + resto.map(linhaHistorica).join('') + '</div></details>' : '');
   }
+  if(F!=='todos'&&HO.length)corpo+='<details class="pc-s" open><summary><b>Outros documentos ('+HO.length+')</b></summary><div class="au-docs">'+cronologiaIntegrada([],HO).map(linhaHistorica).join('')+'</div></details>';
   var aviso = A.itens && !lidoDoProcesso() ? '<p class="status err">Os autos lidos são de outro processo (' + esc(A.cnj || 'sem número') + ').</p>' : !A.itens ? '<p class="muted au-nl">Leia os autos para ver os documentos de cada peça.</p>' : '';
-  return '<section class="card pc-sec pecas" id="g-docs">' + cab + seg + (A.msg ? '<p class="status ok">' + esc(A.msg) + '</p>' : '') + aviso + historicoDocsFicha(F==='todos'?L:P) + corpo + '</section>';
+  return '<section class="card pc-sec pecas" id="g-docs">' + cab + seg + (A.msg ? '<p class="status ok">' + esc(A.msg) + '</p>' : '') + aviso + historicoDocsFicha() + corpo + '</section>';
 }
 function htmlSugestoes(secoes) {
   if (!A.itens || !lidoDoProcesso()) return '';
