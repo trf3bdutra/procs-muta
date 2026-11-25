@@ -31,7 +31,9 @@ jobs:
     if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     concurrency:
       group: vercel-caput
-      cancel-in-progress: false
+      # Um push ou acionamento manual mais recente substitui a publicação anterior.
+      # Um evento do Base pode não ter gerado alterações: não interrompe uma publicação em curso.
+      cancel-in-progress: ${{ github.event_name != 'workflow_run' }}
     steps:
       - uses: actions/checkout@v5
         with:
