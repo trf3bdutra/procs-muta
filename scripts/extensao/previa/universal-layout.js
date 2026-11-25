@@ -225,9 +225,12 @@
     var pills=p.querySelector('.pm-pills');if(pills){var syn=elem('div','pv-top-summary'),head=elem('div','pv-head'),go=btn('Editar identificação','data-pv-ident','');go.className='lnk';head.append(elem('span','gl','Identificação e matéria'),go);syn.append(head);
       [['Tipo de julgamento',tipoText()],['Tipo de caso',V('triagem','Tema')],['Síntese processual',V('triagem','Síntese Processual')],['Síntese fática',V('triagem','Síntese Fática')]].forEach(function(z){if(S(z[1]))syn.append(readRow(z[0],z[1]));});pills.before(syn);pills.replaceWith(flow());}
     var resp=p.querySelector('.pm-resp');if(resp){resp.classList.add('pv-enc');var ato=resp.querySelector('.pm-ato');if(ato){
-      var faixa=elem('div','pv-ato-destino'),dest=readRow('Destino',destGrav()||'A definir');faixa.append(ato,dest);
-      if(destGrav()==='Outro destino'){var extra=elem('div','pv-ato-outro');add(extra,campoRot('producao','Destino - Outro','Especificar destino'));faixa.append(extra);}
-      var cnj=p.querySelector('.pm-l1');if(cnj)cnj.after(faixa);else p.prepend(faixa);
+      var faixa=p.querySelector('.pv-people'),dest=readRow('Destino',destGrav()||'A definir');
+      if(faixa){
+        faixa.classList.add('pv-ato-destino');ato.classList.add('pv-oper-cell');dest.classList.add('pv-oper-cell');
+        faixa.prepend(ato,dest);
+        if(destGrav()==='Outro destino'){var extra=elem('div','pv-ato-outro');add(extra,campoRot('producao','Destino - Outro','Especificar destino'));faixa.after(extra);}
+      }
       var result=V('producao','Voto - Resultado');if(S(result))resp.prepend(readRow('Conclusão / resultado',result));
     }}
     return html(f);
