@@ -1,11 +1,11 @@
 /* Muta · aba Minuta (0.11: Lote, Comparar e Conformidade numa aba só)
    No topo, o tipo de pronunciamento (sugerido pela tarefa do PJe e pelo destino do prontuário) e o texto do editor do PJe,
-   minimizável, com os botões do Collectio (localizar o processo nos lotes e mandar o texto do editor para lá).
+   minimizável, com os botões do CORTEX (localizar o processo nos lotes e mandar o texto do editor para lá).
    Embaixo, "Comparar com": a minuta-matriz do tipo de julgamento (padrão: confere a estrutura, bloco a bloco), a minuta do
-   Collectio (por seção), os modelos, os precedentes, o texto colado, a triagem, o 28,86% e os parágrafos-padrão.
+   CORTEX (por seção), os modelos, os precedentes, o texto colado, a triagem, o 28,86% e os parágrafos-padrão.
    A conformidade fica na sua própria aba da Minuta (conformidade.js; até a 0.41, no rodapé). A minuta-matriz é a do processo, sem lista para escolher (0.42). Texto original:
    compara o texto do editor da minuta no PJe (ou um texto colado) com:
-   - a minuta do processo registrada nos lotes do Amicus Curiae · Collectio;
+   - a minuta do processo registrada nos lotes do Amicus Curiae · CORTEX;
    - os modelos do banco do gabinete (sugeridos pela semelhança com o editor);
    - as minutas-matriz por recurso e resultado;
    - a matriz modular do 28,86% (minuta-base de cada grupo) e os acórdãos-modelo na íntegra;
@@ -18,7 +18,7 @@
 var $ = function (id) { return document.getElementById(id); };
 var CX = window.MutaComparador, FT = window.MutaFontes, ED = window.MutaEditor, br = window.MutaProntuarioBridge, esc = CX.esc;
 var caixa = $('cmp-app');
-var FONTES = [['matriz', 'Minuta-matriz'], ['lote', 'Collectio'], ['modelo', 'Modelos'], ['ement', 'Precedentes'], ['colar', 'Texto colado'], ['tri', 'Triagem'], ['m2886', '28,86%'], ['par', 'Parágrafos-padrão']];
+var FONTES = [['matriz', 'Minuta-matriz'], ['lote', 'CORTEX'], ['modelo', 'Modelos'], ['ement', 'Precedentes'], ['colar', 'Texto colado'], ['tri', 'Triagem'], ['m2886', '28,86%'], ['par', 'Parágrafos-padrão']];
 /* tipo de pronunciamento: os mesmos rótulos do banco de modelos e das minutas-matriz */
 var PRONS = [['Voto', 'Acórdão (voto)'], ['Decisão monocrática terminativa', 'Decisão monocrática'], ['Decisão interlocutória', 'Decisão interlocutória'], ['Despacho', 'Despacho']];
 var PARTES = [['tudo', 'Tudo'], ['relatorio', 'Relatório'], ['voto', 'Voto'], ['ementa', 'Ementa'], ['acordao', 'Acórdão']];
@@ -48,7 +48,7 @@ function eh2886() {
   var ed = ED && ED.estado ? String((ED.estado() || {}).texto || '').slice(0, 20000) : '';
   return /28[,.]86|2886|0005019-15\.1997/.test(t + ' ' + ed);
 }
-/* 0.45 (pedido do gestor): Comparar só com modelos, precedentes, texto colado e 28,86%; a minuta-matriz foi para a Conformidade; Collectio, triagem e parágrafos-padrão saíram da lista (o código fica) */
+/* 0.45 (pedido do gestor): Comparar só com modelos, precedentes, texto colado e 28,86%; a minuta-matriz foi para a Conformidade; CORTEX, triagem e parágrafos-padrão saíram da lista (o código fica) */
 var FORA_CMP = { matriz: 1, lote: 1, tri: 1, par: 1 };
 function fontes() { var ok = eh2886(); if (FORA_CMP[C.fonte] || (!ok && C.fonte === 'm2886')) C.fonte = 'modelo'; return FONTES.filter(function (f) { return !FORA_CMP[f[0]] && (f[0] !== 'm2886' || ok); }); }
 function processo() {
