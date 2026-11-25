@@ -69,7 +69,7 @@
     opt = opt || {}; var item = (r.vinculo && r.vinculo.item) || r.item || '', av = aVincular(r), n = r.cnj || r.numero || '';
     return '<article class="gx-it pa-ped' + (av ? ' venc' : '') + '"><div class="gx-h"><b class="gx-t">' + esc(tipoPed(r)) + '</b>' +
       (av ? '<span class="gx-c venc" title="Ainda sem item correspondente na pauta">a vincular</span>' : item ? '<span class="gx-c">item ' + esc(item) + '</span>' : '') +
-      (opt.ses ? '<span class="gx-c">sessão de ' + esc(br(sesDe(r))) + '</span>' : '') + '</div>' +
+      (r.origem==='manual'?'<span class="gx-c">manual</span>':'') + (opt.ses ? '<span class="gx-c">sessão de ' + esc(br(sesDe(r))) + '</span>' : '') + '</div>' +
       '<p class="gx-m">' + [n && !opt.semNum ? '<button type="button" class="lnk mono" data-pa="abrir:' + esc(n) + '">' + esc(n) + '</button>' : '', r.recebidoEm || r.em ? 'recebido em ' + esc(br(S(r.recebidoEm || r.em).slice(0, 10))) : ''].filter(Boolean).join(' · ') + '</p>' +
       ((r.advogado || r.parte) ? '<p class="gx-tx">' + [r.advogado ? esc(r.advogado) + (r.oab ? ' (OAB ' + esc(r.oab) + ')' : '') : '', r.parte ? 'por ' + esc(r.parte) : ''].filter(Boolean).join(', ') + '</p>' : '') +
       (av && opt.itens && ses && ses.estado().gestor ? '<div class="pa-vinc"><select data-pa-vi="' + esc(r.id) + '"><option value="">vincular ao item…</option>' + opt.itens.map(function (it) { return '<option value="' + esc(it.cnj) + '">' + esc((it.item || '—') + ' · ' + it.cnj) + '</option>'; }).join('') + '</select></div>' : '') + '</article>';
@@ -184,13 +184,14 @@
 
   /* Consulta independente da aba Pauta; não redesenha o prontuário durante a edição. */
   var pedConsulta=null,pedConsultadoEm=0;
-  function pedidosProcesso(node,cnj){
-    function desenhar(){if(node.isConnected&&dg(node.dataset.cnj)===dg(cnj))node.innerHTML=soProcesso(cnj);}
-    if(P.ped!==null){node.innerHTML=soProcesso(cnj);if(Date.now()-pedConsultadoEm<60000)return;}
-    else node.innerHTML='<p class="muted">Lendo pedidos recebidos…</p>';
+  function pedidosProcesso(node,cnj,tipo){
+    function desenhar(){if(!node.isConnected||dg(node.dataset.cnj)!==dg(cnj))return;var L=(P.ped||[]).filter(function(r){return dg(r.cnj||r.numero)===dg(cnj)&&(!tipo||(tipo==='Preferência')===(r.tipo==='Preferência'));});node.innerHTML=L.length?L.map(function(r){return pedCard(r,{ses:1,semNum:1});}).join(''):'<p class="muted">Nenhuma solicitação registrada.</p>';}
+    if(P.ped!==null&&Date.now()-pedConsultadoEm<60000){setTimeout(desenhar,0);return;}
+    node.innerHTML='<p class="muted">Lendo solicitações…</p>';
     if(!ses||ses.estado().estado!=='on')return;
-    if(!pedConsulta)pedConsulta=ses.api('/api/sessoes?pedidos=1').then(function(j){P.ped=j.registros||[];pedConsultadoEm=Date.now();}).finally(function(){pedConsulta=null;});
-    pedConsulta.then(desenhar,function(){if(node.isConnected&&P.ped===null)node.innerHTML='<p class="muted">Não foi possível consultar os pedidos recebidos.</p>';});
+    if(!pedConsulta)pedConsulta=ses.api('/api/sessoes?pedidos=1&cnj='+encodeURIComponent(cnj)).then(function(j){var d=dg(cnj);P.ped=(P.ped||[]).filter(function(r){return dg(r.cnj||r.numero)!==d;}).concat(j.registros||[]);pedConsultadoEm=Date.now();}).finally(function(){pedConsulta=null;});
+    pedConsulta.then(desenhar,function(){if(node.isConnected)node.innerHTML='<p class="muted">Não foi possível consultar as solicitações.</p>';});
   }
-  window.MutaPauta = { pedidosProcesso: pedidosProcesso, abrir: function () { if (!P.cal || !P.doc) ler(); else pintar(); }, pintar: pintar, etapa: etapa, alertas: alertas };
+  function registrarPedido(p){return ses.api('/api/sessoes?pedidos=1',{method:'POST',body:JSON.stringify(Object.assign({manual:true},p))}).then(function(j){pedConsultadoEm=0;return j;});}
+  window.MutaPauta = { pedidosProcesso: pedidosProcesso, registrarPedido: registrarPedido, abrir: function () { if (!P.cal || !P.doc) ler(); else pintar(); }, pintar: pintar, etapa: etapa, alertas: alertas };
 })();
