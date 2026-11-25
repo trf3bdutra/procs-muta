@@ -1216,7 +1216,7 @@ header#top::before{background:linear-gradient(90deg,var(--eg) 0 50%,var(--eg2) 5
 #top .cn-in{flex:1;border-left:0}#top #modulos .cn-b{flex:1 1 0;min-width:max-content;flex-direction:column;justify-content:center;gap:2px;padding:6px 8px;font-size:12px}#top #modulos .cn-b::before{display:block}
 #top #estado{order:5;flex:1 1 100%;justify-content:flex-end;border-top:1px solid var(--el);min-height:38px}#top #st-grava span{display:inline}#top .ac-u{max-width:96px}}
 </style><style>
-/* Acervo: duas seções permanentes, sem acordeões ou duplicação da matriz operacional. */
+/* Visão geral compartilhada, aberta pelo navegador do Cognitio; Acervo conserva a busca. */
 .cog-ac-over{margin:0 0 22px}
 .cog-ac-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:14px 0 12px;border-bottom:1px solid var(--b);margin-bottom:12px}
 .cog-ac-head .k{color:var(--m);font-size:10px;letter-spacing:.13em}
@@ -1226,7 +1226,19 @@ header#top::before{background:linear-gradient(90deg,var(--eg) 0 50%,var(--eg2) 5
 .cog-ac-meta b{font-family:"JetBrains Mono",monospace;color:var(--v)}
 .cog-ac-over .kpis{margin:0 0 12px}
 .cog-ac-over .ini-grid{margin:0}
-.cog-ac-search-head{margin-top:22px;scroll-margin-top:80px}
+.cog-ac-search-head{margin-top:0;scroll-margin-top:80px}
+#top #modulos .cn-over{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:0 12px;border:0;border-right:1px solid var(--el);background:none;color:var(--ei2);font:650 12px Figtree,"Segoe UI",sans-serif!important;letter-spacing:normal;cursor:pointer;white-space:nowrap}
+#top #modulos .cn-over:hover,#top #modulos .cn-over[aria-expanded="true"]{color:var(--ei);background:var(--ew)}
+#top #modulos .cn-over[aria-expanded="true"]{box-shadow:inset 0 -3px 0 var(--eo)}
+#top #modulos .cn-over[aria-expanded="true"] .cn-chevron{transform:rotate(180deg)}
+#top #modulos .cn-over:disabled{opacity:.5;cursor:default}
+#cog-over-panel{position:fixed;z-index:36;top:var(--cog-over-top,65px);left:0;right:0;max-height:calc(100dvh - var(--cog-over-top,65px) - 16px);overflow:auto;overscroll-behavior:contain;background:var(--bg,#f5f6f5);border-bottom:1px solid var(--b,#c9d3ce);box-shadow:0 10px 24px #172b2524}
+#cog-over-panel[hidden]{display:none!important}
+#cog-over-panel .cog-ac-over{max-width:1680px;margin:0 auto;padding:12px 24px 24px}
+#cog-over-panel .cog-ac-head{position:sticky;top:0;z-index:2;background:var(--bg,#f5f6f5);align-items:center;padding:10px 0 12px}
+#cog-over-panel .cog-ac-head .cog-ac-meta{margin-left:auto}
+@media(max-width:1320px){#top #modulos .cn-over{padding:0 8px}}
+@media(max-width:760px){#top #modulos .cn-over{min-width:92px;padding:5px 8px;gap:3px;flex-direction:column}#top #modulos .cn-over .cn-chevron{display:none}#cog-over-panel .cog-ac-over{padding:8px 12px 18px}#cog-over-panel .cog-ac-head .cog-ac-meta{margin-left:0}}
 @media(max-width:760px){.cog-ac-head{align-items:flex-start;gap:8px}.cog-ac-head h1{font-size:22px}}
 </style><style>.cog-dest-sub{border-top:1px solid var(--b);margin:0}.cog-dest-sub .ch h3{font:650 15px/1.3 Figtree,"Segoe UI",sans-serif;color:var(--v);margin:0 0 4px}.cog-pauta-linha{grid-template-columns:minmax(0,1fr) 64px!important;text-align:left}.cog-dest-sub .ch{padding-top:14px}</style><style>#rodape[hidden]{display:none!important}#rodape:not([hidden]){display:flex!important;gap:0;align-items:center;flex-wrap:wrap;padding:4px 10px;max-height:42vh;overflow:auto;z-index:35}#rodape .sel{display:flex;align-items:center;gap:8px;min-width:0}#rodape .ac{flex:1 1 200px;padding:6px 10px}#rodape .cog-destinar{flex:2 1 340px}#rodape .lin{display:flex;flex-wrap:wrap;gap:5px}#rodape .lin select{min-width:0;max-width:100%;flex:1}#rodape .ac small{font-size:10px}body.cog-rod-on main{padding-bottom:130px!important}@media(max-width:850px){body.cog-rod-on main{padding-bottom:230px!important}}</style><style>
 .cog-ac-head{gap:12px}.cog-ac-over [data-conj][aria-pressed="true"]{outline:2px solid #235a55;outline-offset:-2px;background:#e9f1ee}.cog-ac-over [hidden]{display:none!important}
@@ -1236,11 +1248,12 @@ header#top::before{background:linear-gradient(90deg,var(--eg) 0 50%,var(--eg2) 5
 <header id="top">
   <div id="marca"><i class="star" aria-hidden="true"></i><div class="mc-bc"><a class="nx-ey" href="/amicus/" title="Voltar ao Amicus Curiae">CMT · Amicus Curiae</a><div class="mc-cad"><a class="nx-on" href="/cognitio/" aria-current="page">Cognitio<em>.</em></a></div></div></div>
   <nav class="nx-ir" aria-label="Outras ferramentas"><a class="nx-irl" href="/exofficio/#inicio" title="Ex Officio"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 7h18M3 12h18M3 17h18"/></svg><span>Ex Officio</span></a></nav>
-  <nav id="modulos" class="cog-nav" aria-label="Seções do Cognitio"><div class="cn-in"><button type="button" class="cn-b on" data-cog="acervo" aria-current="page">Acervo</button><button type="button" class="cn-b" data-cog="triagem" aria-current="false">Triagem</button><button type="button" class="cn-b" data-cog="selecao" aria-current="false">Seleção Prévia</button><button type="button" class="cn-b" data-cog="mono" aria-current="false">Monocráticas</button></div></nav>
+  <nav id="modulos" class="cog-nav" aria-label="Seções do Cognitio"><div class="cn-in"><button type="button" class="cn-b on" data-cog="acervo" aria-current="page">Acervo</button><button type="button" class="cn-b" data-cog="triagem" aria-current="false">Triagem</button><button type="button" class="cn-b" data-cog="selecao" aria-current="false">Seleção Prévia</button><button type="button" class="cn-b" data-cog="mono" aria-current="false">Monocráticas</button><button type="button" class="cn-over" id="cog-over-toggle" data-cog-over aria-expanded="false" aria-controls="cog-over-panel" title="Visão geral da triagem" disabled><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3" y="3" width="7" height="8" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="3" y="15" width="7" height="6" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/></svg><span>Visão geral</span><svg class="cn-chevron" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg></button></div></nav>
   <span class="eqsp" aria-hidden="true"></span>
   <nav id="abas" role="tablist" aria-label="Abas abertas"></nav>
   <div id="estado"><button type="button" class="cog-util" data-cog-regras hidden title="Regras de etiquetas" aria-label="Regras de etiquetas"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 3h8l10 10-8 8L3 11z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg><span>Etiquetas</span></button><span class="k" id="st-acervo" style="color:var(--m)" title="data da última gravação da fonte do acervo">acervo …</span><button class="btn ib" id="bt-acervo" type="button" hidden title="Atualizar acervo fonte" aria-label="Atualizar acervo fonte"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.7 3.6 3 8 3 .9 0 1.8-.1 2.6-.2"/><path d="M4 11v6c0 1.7 3.6 3 8 3"/><path d="M20 5v5"/><path d="M21 16a4 4 0 1 1-1.2-2.8L21 14.4"/><path d="M21 12v2.4h-2.4"/></svg></button><button class="btn ib" id="bt-regras" type="button" hidden title="Regras gerais: escopo da triagem, acervo fonte, etiquetas, designação, produtividade e equipe" aria-label="Regras gerais"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button><button id="st-grava" type="button" title="Estado da gravação no procs-muta"><i aria-hidden="true"></i><span>carregando</span></button><span class="ac-chip" id="cog-chip" hidden><span class="ac-u" id="cog-user"></span><span class="ac-p" id="cog-role"></span></span></div>
 </header>
+<section id="cog-over-panel" aria-label="Visão geral da triagem" hidden></section>
 <main id="main"><div id="carga" data-cmt-loader="adopt-inline" data-cmt-loader-family="central"><b>Carregando o acervo…</b><span id="carga-msg">Lendo a fonte do acervo e o trabalho do gabinete no procs-muta.</span></div></main>
 <section id="aba-pautas" hidden aria-label="Pautas de julgamento"><main id="pt-view"><div id="pt-carga" role="status" data-cmt-loader="adopt-inline" data-cmt-loader-family="central"><b>Carregando as pautas…</b><span>Lendo o acervo, as sessões e as regras no procs-muta.</span></div></main></section>
 <div id="cwt-toast" role="status" hidden></div>
@@ -2291,7 +2304,7 @@ function render() {
   const naT = ABA === 'fila'  ;
   /* o acervo inteiro só segura a Triagem; Pautas, Chefia, Coordenação e Comunicação abrem sem esperar */
   if (!PRONTO && (ABA === 'pautas' || naT)) { const naP = ABA === 'pautas'; $('#main').hidden = naP; $('#aba-pautas').hidden = !naP; D.querySelectorAll('#modulos [data-mod]').forEach((b) => b.classList.toggle('on', b.dataset.mod === modAtual())); if (naP) { try { if (W.CMTPautas) W.CMTPautas.render(); } catch (e) {} } else if (!$('#carga')) $('#main').innerHTML = CARGA_HTML; $('#rodape').hidden = true; return; }
-  F = F0; pintaAbas(); pintaGrava();
+  F = F0; pintaAbas(); pintaGrava(); pintaVisaoGeral();
   const m = $('#main'), ap = $('#aba-pautas'), naPauta = ABA === 'pautas';
   m.hidden = naPauta; ap.hidden = !naPauta;
   const tit = {pautas:'Pautas',coordenacao:'Coordenação',comunicacao:'Comunicação',inteligencia:'Inteligência',chefia:'Chefia'}[ABA] || 'Triagem';
@@ -2936,10 +2949,30 @@ function vInicio(emb) {
   h += '<div class="ini-grid"><div class="col">' + dp + '</div><div class="col">' + ms + pr + '</div></div>' + (emb ? '' : '</div>');
   return h; }
 let REG = {}, INI_MAS = false;
-/* Visão geral da triagem (o antigo Início) no topo da Triagem, recolhível; cada número abre o conjunto na lista */
+/* Visão geral compartilhada, independente da aba corrente. */
+let COG_OVER=false;
 function visaoGeral() {
-  const aberto=LS.get('cog_ac_over_aberto',true), corpo=vInicio(true).replace(/data-conj="([^"]+)"/g,(m,k)=>m+' aria-pressed="'+String(!!F.conj&&F.conj.key===k)+'"');
-  return '<section class="cog-ac-over" aria-labelledby="cog-ac-title"><div class="cog-ac-head"><div><span class="k">Acervo processual</span><h1 id="cog-ac-title">Visão geral da triagem</h1></div><span class="cog-ac-meta"><b>' + nf(U.length) + '</b> em triagem · <b>' + nf(ALL.length) + '</b> na fonte</span><button type="button" class="btn ib" data-cog-over aria-expanded="'+aberto+'" aria-label="'+(aberto?'Recolher visão geral':'Expandir visão geral')+'" title="'+(aberto?'Recolher':'Expandir')+'">'+(aberto?'▴':'▾')+'</button></div><div'+(aberto?'':' hidden')+'>'+corpo+'</div></section>'; }
+  const corpo=vInicio(true).replace(/data-conj="([^"]+)"/g,(m,k)=>m+' aria-pressed="'+String(!!F.conj&&F.conj.key===k)+'"');
+  return '<div class="cog-ac-over" aria-labelledby="cog-ac-title"><div class="cog-ac-head"><div><span class="k">Acervo processual</span><h2 id="cog-ac-title">Visão geral da triagem</h2></div><span class="cog-ac-meta"><b>' + nf(U.length) + '</b> em triagem · <b>' + nf(ALL.length) + '</b> na fonte</span><button type="button" class="btn ib" data-cog-over-close aria-label="Recolher visão geral" title="Recolher visão geral">×</button></div>'+corpo+'</div>';
+}
+function posicionaVisaoGeral(){
+  if(!COG_OVER)return;
+  const p=$('#cog-over-panel'),h=$('#top');if(p&&h)p.style.setProperty('--cog-over-top',Math.max(0,Math.round(h.getBoundingClientRect().bottom))+'px');
+}
+function pintaVisaoGeral(){
+  const p=$('#cog-over-panel'),b=$('#cog-over-toggle');if(!p||!b)return;
+  b.disabled=!PRONTO||!COG_SESSAO;b.setAttribute('aria-expanded',String(COG_OVER&&!b.disabled));
+  if(!COG_OVER||b.disabled){p.hidden=true;p.innerHTML='';return;}
+  const y=p.scrollTop;p.innerHTML=visaoGeral();p.hidden=false;posicionaVisaoGeral();p.scrollTop=y;
+}
+function abreVisaoGeral(on,foco){
+  if(on&&(!PRONTO||!COG_SESSAO))return;
+  COG_OVER=!!on;pintaVisaoGeral();
+  if(foco){const el=on?$('#cog-over-panel [data-cog-over-close]'):$('#cog-over-toggle');if(el)el.focus({preventScroll:true});}
+}
+W.addEventListener('resize',posicionaVisaoGeral);
+W.addEventListener('scroll',posicionaVisaoGeral,{passive:true});
+D.addEventListener('keydown',e=>{if(e.key==='Escape'&&COG_OVER&&(e.target.closest('#cog-over-panel')||e.target.closest('#cog-over-toggle'))){e.preventDefault();e.stopPropagation();abreVisaoGeral(false,true);}},true);
 /* funil de triagem: Com pendência, Prontos · monocrática, Prontos · sessão e, no resto, Não triados */
 function funilTriagem() {
   const pend = [], mono = [], ses = [], nao = [];
@@ -2965,7 +2998,7 @@ function selecoesPrevias(prC, prM) {
   const ps = (sec) => prC.filter((o) => o.secao === sec).length + ' col. · ' + prM.filter((o) => o.secao === sec).length + ' rel.';
   return h + '<p class="nota sp-nota">Prontos por seção: 1ª ' + ps('1ª Seção') + ' · 2ª ' + ps('2ª Seção') + ' · 3ª ' + ps('3ª Seção') + ' · Para mandar à sessão, marque na Fila e use Pauta no rodapé.</p></section>'; }
 function reg(k, rot, L) { REG[k] = { rot, ids: L.map((o) => o.d) }; }
-function abrirConj(k) { const r = REG[k]; if (!r) return; const y=scrollY; F.conj=F.conj&&F.conj.key===k?null:{key:k,rot:r.rot,ids:new Set(r.ids)}; F.lim=100; render(); W.scrollTo(0,y); }
+function abrirConj(k) { const r = REG[k]; if (!r) return; const y=scrollY; F.conj=F.conj&&F.conj.key===k?null:{key:k,rot:r.rot,ids:new Set(r.ids)}; F.lim=100; abreVisaoGeral(false,false); if(COG!=='acervo'){cogIr('acervo');return;}render(); W.scrollTo(0,y); }
 
 /* ---------- filtros da Fila ---------- */
 const CAMPOS = [['tarefa', 'Tarefa no PJe'], ['assunto', 'Assunto'], ['etq', 'Etiqueta'], ['classe', 'Classe'], ['secao', 'Seção'], ['partes', 'Partes'], ['desde', 'Data de entrada na tarefa'], ['dist', 'Data de distribuição'], ['prior', 'Prioridade legal'], ['dest', 'Destino da triagem'], ['prov', 'Destino provável']];
@@ -3662,8 +3695,8 @@ function vFila(cab, estilo) {
   const L = ordenar(filtrar(F.conj ? ALL : BASE())); FILA = L;
   const bgBarra = () => '<div class="cog-ac-head cog-ac-search-head"><div><span class="k">Consulta processual</span><h2>Busca geral no acervo</h2></div><span class="cog-ac-meta"><b>' + nf(L.length) + '</b> no acervo filtrado · <b>' + nf(ALL.length) + '</b> na fonte</span></div>';
   const ch = chipsAtivos(), salvos = LS.get('tri_filtros', []);
-  /* visão geral da triagem primeiro; busca e filtros depois dela */
-  let h = '<div class="wrap tri-larga"' + (estilo || '') + '>' + (cab || '') + (visaoGeral() + bgBarra()) + '<div class="fl-cab" id="tri-busca-geral"><div class="fl-l1" style="position:relative">' +
+  /* A visão geral pertence ao navegador comum; o Acervo começa pela busca. */
+  let h = '<div class="wrap tri-larga"' + (estilo || '') + '>' + (cab || '') + bgBarra() + '<div class="fl-cab" id="tri-busca-geral"><div class="fl-l1" style="position:relative">' +
     '<div class="seg" role="group" aria-label="Modo de busca"><button type="button" data-modo="texto" class="' + (F.modo === 'texto' ? 'on' : '') + '" title="Busca em todos os campos">Texto</button><button type="button" data-modo="lote" class="' + (F.modo === 'lote' ? 'on' : '') + '" title="Colar uma lista de números de processo">Lote</button></div>' +
     (F.modo === 'texto' ? '<label class="busca"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#5c6b67" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="fl-q" type="search" aria-label="Buscar" placeholder="número, assunto, partes, etiqueta, tarefa…" value="' + esc(F.q) + '"><small>“trecho exato” · -exclui</small></label>'
       : '<label class="busca"><textarea id="fl-lote" aria-label="Números de processo" rows="2" placeholder="Cole os números (um por linha ou em qualquer formato)">' + esc(F.lote) + '</textarea></label>') +
@@ -4167,12 +4200,13 @@ D.addEventListener('click', (e) => { const t = e.target;
     else if (k === 'aplicar') { const c = CP.c; if (/^(in|notin|has|nothas)$/.test(c.cond) && !c.vals.length && !c.trechos.length) { toast('Marque um valor ou escreva um trecho.', true); return; } if (CP.edit != null) F.crit[CP.edit] = c; else F.crit.push(c); F.lim = 100; fecharPops(); render(); } return; }
   if ((b = q('.menu [data-ex]'))) { const p = b.closest('.menu'); const k = b.dataset.ex; fecharPops(); exportar(k, p.__L, p.__t, p.__b); return; }
 
-  if(q('[data-cog-over]')){const y=scrollY;LS.set('cog_ac_over_aberto',!LS.get('cog_ac_over_aberto',true));render();W.scrollTo(0,y);return;}
+  if(q('[data-cog-over-close]')){abreVisaoGeral(false,true);return;}
+  if(q('[data-cog-over]')){abreVisaoGeral(!COG_OVER,false);return;}
   if (q('[data-cog-transfer]')){COG_TRANSFER=true;COG_SUB='todos';TRI_SUBABA='todos';LS.set('tri_triar_tarefa','');LS.set('tri_atq','');LS.set('tri_atso','');cogIr('triagem');return;}
   if (q('[data-cog-clear-transfer]')){COG_TRANSFER=false;refazTriEm();return;}
   if ((b = q('[data-conj]'))) { abrirConj(b.dataset.conj); return; }
   if ((b = q('[data-mono-conj]'))) { const r = REG[b.dataset.monoConj]; if (r) acao('Julgar por monocrática', r.ids, () => ({ sp: '', sd: '', mono: 'Monocrática' })); return; }
-  if (q('[data-ini-mas]')) { INI_MAS = !INI_MAS; render(); return; }
+  if (q('[data-ini-mas]')) { INI_MAS = !INI_MAS; if(COG_OVER)pintaVisaoGeral();else render(); return; }
   if (q('#bt-pje')) { F.pjeAberto = !F.pjeAberto; render(); return; }
   if (q('[data-pjlimpa]')) { F.pje = PJ0(); render(); return; }
   if (q('[data-vertar]')) { F.verTar = !F.verTar; render(); return; }
