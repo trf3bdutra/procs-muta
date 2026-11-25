@@ -71,7 +71,7 @@ function render() {
     '<label class="cf-fmt" title="Confere negrito, itálico e recuo"><input type="checkbox" data-k="fmt"' + (K.fmt ? ' checked' : '') + '> formatação</label></div>' +
     (K.erroDados ? '<p class="status err">' + esc(K.erroDados) + ' A análise segue sem as regras de redação do Compendium.</p>' : '') +
     (E.erro ? '<p class="status err">' + esc(E.erro) + '</p>' : '') +
-    (E.texto ? '<p class="muted cf-fonte">Texto: ' + esc(E.fonte) + ' · ' + E.texto.split(/\s+/).length.toLocaleString('pt-BR') + ' palavras' + (K.em ? ' · analisado às ' + new Date(K.em).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', second: '2-digit' }) : '') + '</p>' : '') + '</div>';
+    (E.texto ? '<p class="muted cf-fonte">Texto: ' + esc(E.fonte) + (K.em ? ' · analisado às ' + new Date(K.em).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', second: '2-digit' }) : '') + '</p>' : '') + '</div>';
   if (!r) { caixa.innerHTML = topo + '<div class="empty"><h3>Nada analisado</h3>Abra a minuta no editor do PJe e clique em Analisar agora, ou ligue a conformidade ativa.</div>'; return; }
   var grupos = {}; r.itens.forEach(function (x) { grupos[x.grupo] = (grupos[x.grupo] || 0) + 1; });
   var lista = r.itens.filter(function (x) { return !K.grupo || x.grupo === K.grupo; });
