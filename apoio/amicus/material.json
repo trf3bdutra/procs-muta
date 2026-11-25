@@ -1130,5 +1130,471 @@
     ]
    }
   ]
- }
+ },
+ "rotina": [
+  {
+   "id": "chegada",
+   "t": "Chegada e admissibilidade",
+   "s": "O processo entra: triagem, competência, alfândega processual.",
+   "caixas": [
+    {
+     "rot": "Caixas do PJe",
+     "itens": [
+      "Recebidos da unidade processante",
+      "Triagem de Gabinete",
+      "Analisar tipo de decisão a proferir"
+     ]
+    },
+    {
+     "rot": "Procedimentos",
+     "itens": [
+      "Procuração",
+      "Preparo",
+      "Custas",
+      "Substabelecimento",
+      "Representação de incapaz",
+      "Documento de identificação",
+      "Comprovante de residência",
+      "Assinatura da peça",
+      "Intempestividade",
+      "Deserção",
+      "Ausência de dialeticidade",
+      "Gratuidade de justiça",
+      "Declínio de competência"
+     ]
+    }
+   ],
+   "blocos": [
+    {
+     "h": "Alfândega processual",
+     "ver": "requisitos"
+    },
+    {
+     "h": "Remessa necessária — quando sobe",
+     "ver": "Remessa necessária"
+    },
+    {
+     "h": "Recurso adesivo × apelações cruzadas",
+     "html": "<div><table> <thead><tr><th>Critério</th><th>Apelações autônomas cruzadas</th><th><span>Recurso adesivo</span></th></tr></thead> <tbody> <tr><td><b>Conceito</b></td><td>Ambas as partes, vencidas em parte, apelam de forma independente</td><td>Uma parte se conforma, mas adere ao recurso da outra ao responder</td></tr> <tr><td><b>Prazo</b></td><td>15 dias úteis da intimação da sentença</td><td>15 dias úteis, no prazo das contrarrazões</td></tr> <tr><td><b>Autonomia</b></td><td>Total: a inadmissão ou desistência de uma não afeta a outra</td><td>Subordinado: inadmitido o principal ou havendo desistência, não é conhecido</td></tr> <tr><td><b>Cabimento</b></td><td>Qualquer recurso</td><td>Só apelação, REsp e RE</td></tr> <tr><td><b>Contraditório</b></td><td>Cada parte responde à apelação da outra</td><td>O recorrente principal responde ao adesivo em 15 dias (<span>art. 1.010, §2º</span>)</td></tr> <tr><td><b><span>Preparo</span></b></td><td>Próprio, para cada apelação</td><td>Próprio e independente</td></tr> <tr><td><b>Autuação no TRF3</b></td><td>Ambas as partes como apelantes e apeladas</td><td>Anotação distintiva de “<span>recurso adesivo</span>” (<span>RITRF3, art. 64, I</span>)</td></tr> </tbody></table></div> <h4>Ordem de verificação no gabinete</h4> <div><b>Exemplo.</b> Pedidos R$ 100 mil contra a União, a sentença concede R$ 40 mil. A União apela para afastar a condenação; o autor, ao responder, interpõe <span>apelação adesiva</span> pedindo os R$ 60 mil restantes. Se a apelação da União não for conhecida, a do autor também não será.</div>"
+    }
+   ]
+  },
+  {
+   "id": "urgencia",
+   "t": "Urgências",
+   "s": "Pedidos liminares furam a fila.",
+   "caixas": [
+    {
+     "rot": "Caixas do PJe",
+     "itens": [
+      "Minutar ato judicial",
+      "[Sessão] Minutar decisão intercorrente",
+      "Minutar ato judicial - Processo sobrestado"
+     ]
+    }
+   ],
+   "blocos": [
+    {
+     "h": "Tutelas & efeito suspensivo",
+     "ver": "Tutelas & efeito suspensivo"
+    }
+   ]
+  },
+  {
+   "id": "minuta",
+   "t": "Minuta",
+   "s": "Decisão monocrática ou voto colegiado; tarefas no PJe.",
+   "caixas": [
+    {
+     "rot": "Caixas do PJe",
+     "itens": [
+      "Analisar tipo de decisão a proferir",
+      "Minutar ato judicial",
+      "Revisar ato judicial",
+      "Revisar Ato minutado órgão diverso",
+      "Assinar ato judicial",
+      "[Sessão] Preparar relatório e voto"
+     ]
+    },
+    {
+     "rot": "Procedimentos",
+     "itens": [
+      "Habilitação de herdeiros",
+      "Conversão em diligência",
+      "Homologação de acordo",
+      "Homologação de desistência",
+      "Perda superveniente do objeto"
+     ]
+    }
+   ],
+   "blocos": [
+    {
+     "h": "Decisão monocrática — art. 932",
+     "ver": "Monocrática"
+    },
+    {
+     "h": "Rotina no PJe",
+     "html": "<h4>Julgamento colegiado</h4> <ul> <li>Minutar em <code>Preparar relatório e voto</code>.</li> <li>Mover para <code>Aptos para julgamento</code>.</li> <li>Mover para <code>[Sessão] Aguardando a sessão</code> — libera relatório, voto e ementa aos pares.</li> <li>Preencher a proclamação antecipada para acelerar a lavratura do acórdão.</li> </ul> <h4>Feitos em mesa</h4> <ul> <li>Agravo interno e regimental: voto e seleção da inclusão em mesa, sem pauta convencional.</li> <li>Embargos de declaração contra acórdão: voto e mesa na sessão subsequente.</li> <li>Retorno da Vice-Presidência (<span>art. 1.030, II</span>): voto de retratação ou de <i>distinguishing</i>, submetido à Turma.</li> </ul> <h4>Urgências</h4> <ul> <li>Pedidos de <span>efeito suspensivo</span> e de tutela recursal furam a fila: decisão imediata, com intimação e ciência à origem.</li> </ul>"
+    }
+   ]
+  },
+  {
+   "id": "dispositivo",
+   "t": "Dispositivo",
+   "s": "Honorários recursais, custas e preparo, juros e correção.",
+   "caixas": [
+    {
+     "rot": "Caixas do PJe",
+     "itens": [
+      "Minutar ato judicial",
+      "[Sessão] Preparar relatório e voto",
+      "[Sessão] Confirmar Inteiro Teor"
+     ]
+    }
+   ],
+   "blocos": [
+    {
+     "h": "Honorários, custas e consectários",
+     "ver": "Honorários, custas e consectários"
+    }
+   ]
+  },
+  {
+   "id": "sessao",
+   "t": "Sessão de julgamento",
+   "s": "Pauta, sustentação oral, julgamento ampliado.",
+   "caixas": [
+    {
+     "rot": "Caixas do PJe",
+     "itens": [
+      "[Sessão] Aptos para julgamento",
+      "[Sessão] Aguardando a sessão",
+      "[Sessão] Processos retirados e adiados",
+      "[Sessão] Minutar decisão intercorrente"
+     ]
+    }
+   ],
+   "blocos": [
+    {
+     "h": "Sustentação oral",
+     "html": "<div><table> <thead><tr><th>Feito</th><th>Sustentação oral</th><th>Base</th></tr></thead> <tbody> <tr><td><b>Apelação</b></td><td>Cabível — 15 minutos para cada parte</td><td><span>CPC 937, I</span> · <span>RITRF3, arts. 143, I</span>, e 143-A</td></tr> <tr><td><b>Agravo de instrumento</b></td><td>Só contra interlocutória sobre tutela de urgência ou de evidência</td><td><span>CPC 937, VIII</span> · <span>RITRF3, art. 143, VI</span></td></tr> <tr><td><b>Agravo interno</b></td><td>Contra decisão do Relator que extinga ação rescisória, mandado de segurança ou reclamação; pelo Regimento, também contra a que concede ou denega liminar em mandado de segurança</td><td><span>CPC 937, §3º</span> · <span>RITRF3, art. 143, VII</span></td></tr> <tr><td><b>Embargos de declaração</b></td><td>Não</td><td><span>RITRF3, art. 143, p. ú.</span>, b</td></tr> <tr><td><b><span>Remessa necessária</span> autônoma</b></td><td>Não prevista; com apelação conjunta, segue a desta</td><td><span>CPC 937</span> · <span>RITRF3, art. 143, p. ú.</span>, a</td></tr> <tr><td><b>Ação rescisória · MS originário</b></td><td>Cabível</td><td><span>CPC 937, VI</span></td></tr> <tr><td><b>Julgamento ampliado</b></td><td>Nova sustentação perante os julgadores convocados</td><td><span>CPC 942</span> · <span>RITRF3, art. 143, VIII</span></td></tr> </tbody></table></div> <p>O pedido pode ser feito até o início da sessão (<span>CPC 937, §2º</span>). A DJTR verifica os casos de sustentação oral e os pedidos de preferência ao montar a pauta.</p>"
+    },
+    {
+     "h": "Julgamento ampliado — art. 942",
+     "ver": "Julgamento ampliado"
+    }
+   ]
+  },
+  {
+   "id": "pos",
+   "t": "Pós-julgamento",
+   "s": "Embargos de declaração e agravos.",
+   "caixas": [
+    {
+     "rot": "Caixas do PJe",
+     "itens": [
+      "[Sessão] Confirmar Inteiro Teor",
+      "Recebidos com Embargos de Declaração",
+      "[ED] Minutar ato judicial",
+      "[Ag. Int] Minutar ato judicial",
+      "[Sessão - ED] Preparar relatório e voto",
+      "[Sessão - ED] Aguardando a sessão"
+     ]
+    }
+   ],
+   "blocos": [
+    {
+     "h": "Qual agravo?",
+     "ver": "Qual agravo?"
+    }
+   ]
+  },
+  {
+   "id": "vice",
+   "t": "Retorno da Vice-Presidência",
+   "s": "Juízo de retratação, sobrestamento, pedidos urgentes em REsp e RE.",
+   "caixas": [
+    {
+     "rot": "Caixas do PJe",
+     "itens": [
+      "Sobrestado por Determinação de Tribunais Superiores",
+      "[SU] Sobrestado por Determinação de Tribunais Superiores",
+      "[SU] Sobrestado por Determinação em IRDR ou IAC",
+      "Sobrestados - Analisar petição",
+      "[SU] Sobrestados - Analisar petição",
+      "Minutar ato judicial - Processo sobrestado"
+     ]
+    },
+    {
+     "rot": "Procedimentos",
+     "itens": [
+      "Sobrestamento — tema repetitivo ou repercussão geral",
+      "Juízo de retratação"
+     ]
+    }
+   ],
+   "blocos": [
+    {
+     "h": "Juízo de retratação",
+     "ver": "Juízo de retratação"
+    }
+   ]
+  },
+  {
+   "id": "regim",
+   "t": "Ritos regimentais e Presidência",
+   "s": "Quando o Regimento, e não o CPC, dita o rito — e os canais administrativos internos.",
+   "caixas": [
+    {
+     "rot": "Caixas do PJe",
+     "itens": [
+      "[Sessão] Minutar decisão intercorrente"
+     ]
+    }
+   ],
+   "blocos": [
+    {
+     "h": "Ritos regimentais & Presidência",
+     "ver": "Ritos regimentais & Presidência"
+    },
+    {
+     "h": "Canais administrativos internos",
+     "html": "<p>Atividade interna de gestão de pessoal, orçamento e disciplina no TRF3 e nas Seções Judiciárias de SP e MS — fora da jurisdição, mas próxima do cotidiano do gabinete.</p> <div><table> <thead><tr><th>Demanda</th><th>Decisão de origem</th><th>Órgão julgador</th><th>Prazo</th></tr></thead> <tbody> <tr><td><b>Recurso de servidor / gestão</b></td><td>Presidência ou Diretoria-Geral (férias, licenças, remoções)</td><td>Conselho de Administração (CATRF3R)</td><td>30 dias da ciência</td></tr> <tr><td><b>Contra ato da Corregedoria</b></td><td>Corregedor Regional (serviços forenses, escalas)</td><td>Conselho da Justiça Federal da 3ª Região (CJF3R)</td><td>30 dias</td></tr> <tr><td><b>Segunda instância interna</b></td><td>Decisões do CATRF3R ou do CJF3R</td><td>Plenário / Órgão Especial</td><td>30 dias</td></tr> <tr><td><b>PAD de magistrado</b></td><td>Proposta do Presidente (desembargador) ou do Corregedor (juiz)</td><td>Órgão Especial</td><td>Defesa prévia em 15 dias; <span>rito regimental</span></td></tr> <tr><td><b>Licitações do próprio Tribunal</b></td><td>Agente de contratação / pregoeiro (UCOT, DILI)</td><td>Diretoria-Geral ou Presidência</td><td>3 dias úteis (Lei 14.133/2021)</td></tr> </tbody></table></div> <div><b>Penas graves a magistrados</b> — remoção compulsória, disponibilidade, aposentadoria compulsória — exigem maioria absoluta do Órgão Especial. Prazos internos conforme o material de apoio: conferir no RITRF3 e nos atos do CATRF3R e do CJF3R.</div>"
+    }
+   ]
+  },
+  {
+   "id": "baixa",
+   "t": "Baixa",
+   "s": "Em diligência ou definitiva — o processo volta à origem.",
+   "caixas": [
+    {
+     "rot": "Caixas do PJe",
+     "itens": [
+      "Certificar trânsito · Remessa para 1º grau · Arquivamento"
+     ]
+    }
+   ],
+   "blocos": [
+    {
+     "h": "Baixa dos autos",
+     "html": "<p>A baixa devolve o processo à origem. Ambas ficam disponíveis na tarefa <code>Analisar resultado de diligência ou recurso</code>; a <b>definitiva</b> só depois da certificação do trânsito em julgado.</p> <div> <div><b>Baixa em diligência</b>O processo desce para cumprir uma providência e retorna ao Tribunal. No 2º Grau fica em “Baixados em diligência”; no 1º, em “Recebido da instância superior”.</div> <div><b>Baixa definitiva</b>Encerrada a fase recursal, após o trânsito. No 2º Grau fica em “Baixados ao juízo de origem”; no 1º, em “Recebido da instância superior”.</div> </div> <div><table> <thead><tr><th>Origem</th><th>Passos</th><th>Onde o processo aparece</th></tr></thead> <tbody> <tr><td><b>Justiça Federal de 1º Grau</b></td><td>1. Motivo da remessa: “em diligência” ou “baixa”.<br>2. <code>Retornar para instância de origem</code>.</td><td>“Baixados em diligência” ou “Baixados ao juízo de origem”</td></tr> <tr><td><b>Competência delegada — TJSP</b></td><td>Selecionar o juízo; a comunicação é automática via MNI.</td><td>“… — Competência Delegada TJSP”, disponível à UFOR</td></tr> <tr><td><b>Competência delegada — TJMS</b></td><td>Selecionar o juízo; <b>enviar via malote digital (UFOR)</b>.</td><td>“… — Competência Delegada TJMS”, disponível à UFOR</td></tr> <tr><td><b>Originária do TRF3</b></td><td>O sistema disponibiliza as opções de arquivamento.</td><td>—</td></tr> </tbody></table></div> <div><b>Erro “processo não encontrado na origem”?</b> Verificar se o número do processo de referência está correto e, se for o caso, retificar a autuação. A certidão de trânsito das monocráticas e a baixa em diligência são atribuições da DTTR (Res. CATRF3R 205/2025).</div>"
+    }
+   ]
+  },
+  {
+   "id": "prazos",
+   "t": "Tabela de prazos",
+   "s": "Todos os prazos recursais e as regras de contagem.",
+   "caixas": [],
+   "blocos": [
+    {
+     "h": "Prazos do gabinete",
+     "html": "<div><table><thead><tr><th>Recurso</th><th>Prazo</th></tr></thead> <tbody><tr><td><b>Apelação Cível</b></td><td>15 dias úteis (contrarrazões: 15)</td></tr><tr><td><b><span>Remessa Necessária</span></b></td><td>Sem prazo — sobe de ofício</td></tr><tr><td><b>Agravo de Instrumento</b></td><td>15 dias úteis (resposta: 15)</td></tr><tr><td><b><span>Recurso Adesivo</span></b></td><td>15 dias úteis — o mesmo prazo das contrarrazões</td></tr><tr><td><b>Agravo Interno</b></td><td>15 dias úteis (contrarrazões: 15)</td></tr><tr><td><b>Agravo Regimental</b></td><td>5 dias (prazo regimental)</td></tr><tr><td><b>Embargos de Declaração</b></td><td>5 dias úteis (contrarrazões: 5)</td></tr><tr><td><b>Recurso Especial</b></td><td>15 dias úteis</td></tr><tr><td><b>Recurso Extraordinário</b></td><td>15 dias úteis</td></tr><tr><td><b>Agravo em REsp / RE</b></td><td>15 dias úteis (resposta: 15)</td></tr> <tr><td><b>Parecer do MPF</b> (apelação)</td><td>30 dias</td></tr></tbody></table></div> <h4>Regras de contagem</h4> <ul> <li>Prazos processuais em <b>dias úteis</b> (<span>CPC, art. 219</span>).</li> <li>Fazenda Pública — União, INSS, autarquias e fundações — em <b>dobro</b>, a partir da intimação pessoal (<span>art. 183</span>).</li> <li>Ministério Público (<span>art. 180</span>) e Defensoria Pública (<span>art. 186</span>): também em dobro.</li> <li>Não há dobra quando a lei fixa prazo próprio para o ente público (<span>art. 183, §2º</span>).</li> </ul>"
+    }
+   ]
+  }
+ ],
+ "requisitos": [
+  {
+   "t": "Requisitos intrínsecos",
+   "p": "O direito de recorrer: pode esta pessoa interpor este recurso?",
+   "i": [
+    {
+     "t": "Cabimento",
+     "pl": "O recurso escolhido é o correto contra aquela decisão: sentença → apelação; interlocutória → agravo.",
+     "tc": "Fungibilidade só com dúvida objetiva e sem erro grosseiro. Apelação contra interlocutória ou agravo contra sentença, em regra, não se aproveitam."
+    },
+    {
+     "t": "Legitimidade",
+     "pl": "Só recorrem as partes, o terceiro prejudicado e o Ministério Público.",
+     "tc": "CPC, art. 996: o terceiro deve demonstrar que a decisão atinge direito de que se afirma titular; o MP recorre como parte ou fiscal da ordem jurídica."
+    },
+    {
+     "t": "Interesse recursal",
+     "pl": "É preciso ter perdido algo (sucumbência). Quem obteve tudo o que pediu não tem interesse em recorrer.",
+     "tc": "Mede-se pela utilidade e necessidade do recurso. Atenção ao recurso que só discute fundamentação sem alterar o dispositivo: em regra, falta interesse."
+    },
+    {
+     "t": "Sem fato impeditivo ou extintivo",
+     "pl": "A parte não aceitou a decisão nem desistiu ou renunciou ao direito de recorrer.",
+     "tc": "Renúncia (art. 999) e desistência (art. 998) independem de anuência; aceitação tácita por ato incompatível com a vontade de recorrer (art. 1.000). A desistência não impede o julgamento de tese de RG ou repetitivo (art. 998, p. ú.)."
+    }
+   ]
+  },
+  {
+   "t": "Requisitos extrínsecos",
+   "p": "O modo de recorrer: o recurso foi feito do jeito certo?",
+   "i": [
+    {
+     "t": "Tempestividade",
+     "pl": "Protocolado estritamente no prazo — em regra, 15 dias úteis; 5 nos embargos de declaração.",
+     "tc": "Dias úteis (art. 219); prazo em dobro para Fazenda, MP e Defensoria; feriado local comprovável e sanável (art. 1.003, §6º)."
+    },
+    {
+     "t": "Preparo",
+     "pl": "Custas recolhidas e comprovadas na interposição, salvo gratuidade ou isenção.",
+     "tc": "Pagou a menos: 5 dias para complementar. Não pagou: recolher em dobro. Só então há deserção (art. 1.007, §§2º e 4º)."
+    },
+    {
+     "t": "Regularidade formal",
+     "pl": "Petição escrita com as partes, as razões da insatisfação e o pedido expresso de reforma ou anulação.",
+     "tc": "Apelação: art. 1.010, I a IV. Dialeticidade: as razões devem atacar especificamente os fundamentos da decisão (art. 932, III · Súm. 182/STJ)."
+    }
+   ]
+  }
+ ],
+ "regimentoDia": [
+  {
+   "a": "15",
+   "t": "Prevenção do Relator",
+   "x": "A Turma que primeiro conhece do feito tem o Relator prevento para incidentes e recursos."
+  },
+  {
+   "a": "33",
+   "t": "Atribuições do Relator",
+   "x": "XII e XIII: monocráticas do art. 932 do CPC · XV: tutela no agravo · XVIII: agravos de suas decisões."
+  },
+  {
+   "a": "64",
+   "t": "Anotações na autuação",
+   "x": "Recurso adesivo, réu preso, impedimentos e prevenção."
+  },
+  {
+   "a": "10",
+   "t": "Competência das Seções",
+   "x": "A matéria define a Seção e as Turmas que a integram."
+  },
+  {
+   "a": "24",
+   "t": "Presidente de Turma",
+   "x": "Preside as sessões, manda incluir em pauta, assina ofícios executórios."
+  },
+  {
+   "a": "103",
+   "t": "Assunção de competência",
+   "x": "IAC — arts. 103 a 106."
+  },
+  {
+   "a": "106A",
+   "t": "IRDR",
+   "x": "Do pedido à aplicação da tese — arts. 106-A a 106-J."
+  },
+  {
+   "a": "133A",
+   "t": "Sessões virtuais",
+   "x": "Julgamento em ambiente eletrônico, não presencial."
+  },
+  {
+   "a": "143",
+   "t": "Sustentação oral",
+   "x": "Cabimento (I a X) e vedações (parágrafo único)."
+  },
+  {
+   "a": "171",
+   "t": "Inconstitucionalidade",
+   "x": "Arguição e reserva de plenário — arts. 171 a 177."
+  },
+  {
+   "a": "247",
+   "t": "Recursos internos",
+   "x": "Quadro dos recursos contra decisões do Órgão Especial, Seções, Turmas e Relatores."
+  },
+  {
+   "a": "251",
+   "t": "Agravo regimental",
+   "x": "Reconsideração pelo prolator; empate mantém a decisão."
+  },
+  {
+   "a": "260",
+   "t": "Julgamento não unânime",
+   "x": "Nas Turmas, prosseguimento com mais dois votos (CPC, art. 942)."
+  },
+  {
+   "a": "262",
+   "t": "Embargos de declaração",
+   "x": "Cabimento, prazo e negativa de seguimento — arts. 262 a 264."
+  },
+  {
+   "a": "277",
+   "t": "REsp e RE",
+   "x": "Interpostos na Vice-Presidência, em petições distintas."
+  },
+  {
+   "a": "279",
+   "t": "Suspensão de liminar",
+   "x": "Lei 8.437/1992, art. 4º, e Lei 12.016/2009, art. 15."
+  },
+  {
+   "a": "298",
+   "t": "Tutela provisória",
+   "x": "Pedido ao Relator; efeito suspensivo em REsp/RE na Vice-Presidência (§ 3º)."
+  },
+  {
+   "a": "355",
+   "t": "Precatórios e RPV",
+   "x": "Requisições de pagamento — arts. 355 a 358."
+  },
+  {
+   "a": "368",
+   "t": "Gabinete do Desembargador",
+   "x": "Estrutura e atribuições — arts. 368 a 371."
+  }
+ ],
+ "assentos": [
+  {
+   "n": "1/1999",
+   "pub": "DJ de 22.03.2000",
+   "ref": "art. 11, II, “n”",
+   "t": "Cabe ao Corregedor-Geral da Justiça Federal da Terceira Região “colher subsídios e prestar todas as informações necessárias sobre candidato a promoção.”"
+  },
+  {
+   "n": "2/1999",
+   "pub": "DJ de 22.03.2000",
+   "ref": "art. 11, I",
+   "t": "Cabe ao Plenário “propor a alteração do número de membros do Tribunal.”"
+  },
+  {
+   "n": "3/2000",
+   "pub": "DJ de 30.11.2000",
+   "ref": "art. 26",
+   "t": "“A expressão membros do Tribunal se refere à composição integral do Tribunal.”"
+  },
+  {
+   "n": "4/2003",
+   "pub": "DJ de 07.07.2003",
+   "ref": "arts. 5º, parágrafo único, e 7º",
+   "t": "Compete ao Plenário eleger os membros do Conselho de Administração e do Conselho da Justiça Federal da 3ª Região; o Conselho de Administração deve, sempre que possível, preservar a paridade representativa entre as Seções."
+  }
+ ],
+ "metasCnj": [
+  {
+   "n": "1",
+   "t": "julgar mais processos que os distribuídos"
+  },
+  {
+   "n": "2",
+   "t": "processos mais antigos"
+  },
+  {
+   "n": "4",
+   "t": "improbidade e crimes contra a administração pública"
+  },
+  {
+   "n": "6",
+   "t": "ações coletivas"
+  },
+  {
+   "n": "7",
+   "t": "repetitivos e demandas repetitivas"
+  },
+  {
+   "n": "9",
+   "t": "Agenda 2030 · ODS"
+  },
+  {
+   "n": "10",
+   "t": "ações ambientais"
+  }
+ ]
 }
