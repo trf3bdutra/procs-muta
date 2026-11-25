@@ -1107,14 +1107,20 @@ function heroOrganizarProntuario(){
     encFields.append(resumoP);
     var hist=el('section','hero-pauta-hist');hist.append(el('h4','pm-mer-h','Histórico de sessões'));html(hist,historicoPautas());aut.append(hist);
     var pjeP=el('div','gr');['Pauta - Publicação','Pauta - Inclusão','Pauta - Proclamação','Pauta - Último movimento','Pauta - MPU','Pauta - Importado em'].forEach(function(k){if(S(V('pauta',k)))html(pjeP,campoRot('pauta',k));});if(pjeP.childNodes.length){hist.append(el('h4','pm-mer-h','Registro no PJe'),pjeP);}
-    var pautaSig=el('section','hero-pauta-sig');pautaSig.append(el('h4','pm-mer-h','Sustentação oral e preferência'));html(pautaSig,campoRot('pauta','Sustentação oral'));
-    var pedidos=el('div','hero-pauta-pedidos');pedidos.dataset.cnj=G.cnj;pautaSig.append(pedidos);sig.append(pautaSig);
-    if(window.MutaPauta&&window.MutaPauta.pedidosProcesso)window.MutaPauta.pedidosProcesso(pedidos,G.cnj);
   }
+  /* Solicitações: bloco único anterior ao encaminhamento, inclusive sem pauta oficial. */
+  var solicit=el('section','hero-solicitacoes hero-enc-integrado');solicit.append(el('h4','pm-mer-h','Solicitações'));
+  var solFields=el('div','gr hero-enc-fields');solicit.append(solFields);
+  if(pautaOficial||destinoAtual==='Sessão'||S(V('pauta','Sustentação oral'))){
+    html(solFields,campoRot('pauta','Sustentação oral','Sustentação oral / preferência'));
+  }
+  html(solFields,campoRot('origem','Solicitações de despacho','Despachos solicitados'));
+  var pedidos=el('div','hero-pauta-pedidos');pedidos.dataset.cnj=G.cnj;solicit.append(pedidos);
+  if(window.MutaPauta&&window.MutaPauta.pedidosProcesso)window.MutaPauta.pedidosProcesso(pedidos,G.cnj);
   if(N(destinoAtual)==='monocratica')html(encFields,campoRot('triagem','Hipóteses Monocrática','Hipótese do artigo 932'));
   html(encFields,campoRot('origem','Próxima ação','Próxima fase / providência após o cumprimento'));
   tj.prepend(el('h4','pm-mer-h','Julgamento'));
-  body.prepend(tj,encSection);body.append(tagsGroup);
+  body.prepend(tj,solicit,encSection);body.append(tagsGroup);
   /* Responsável pelo acompanhamento: mesma chave da ficha, agora ao lado das designações. */
   var responsaveis=Array.from(caixa.querySelectorAll('[data-fk="origem.Responsável"],[data-pv-field="origem.Responsável"]'));
   responsaveis.forEach(function(x){var f=x.closest('.gf,.pv-field,.pv-idrow');if(f)f.remove();else x.remove();});
