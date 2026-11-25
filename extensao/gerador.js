@@ -20,7 +20,7 @@
     var x = (AU.sugestoes() || []).filter(function (s) { return s.alvo === alvo; })[0];
     return x ? x.value : '';
   }
-  function v(sec, k) { var g = GB(), x = g.V ? g.V(sec, k) : ''; if (Array.isArray(x) ? x.length : S(x)) return x; return ''; // somente o registro da ficha, nunca sugestão ainda não gravada }
+  function v(sec, k) { var g = GB(), x = g.V ? g.V(sec, k) : ''; if (Array.isArray(x) ? x.length : S(x)) return x; return ''; /* somente o registro da ficha, nunca sugestão ainda não gravada */ }
   function tab(sec, k) { var x = v(sec, k); if (typeof x === 'string') { try { x = JSON.parse(x); } catch (e) { x = []; } } return Array.isArray(x) ? x.filter(function (r) { return r && typeof r === 'object'; }) : []; }
   function fo(k) { var f = (GB().fo && GB().fo()) || {}; return S(f[k]); }
   /* itens de alegação: descarta o que não é texto de razão (cabeçalho de documento, carimbo de hora, rótulo solto) */
