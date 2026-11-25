@@ -707,7 +707,7 @@ function htmlSugestoes(secoes) {
   if (!A.itens || !lidoDoProcesso()) return '';
   if (!A.sug) calcular();
   var I = (A.sug || []).filter(function (it) { return !secoes || naSecao(it.sec, secoes); });
-  var marc = I.filter(function (i) { return i.apply && i.status !== 'igual' && !preservado(i) && !(i.alvo && preenchido(i.alvo)); }).length;
+  var elegiveis=I.filter(sugElegivel),marc=elegiveis.filter(function(i){return i.apply;}).length,ro=!!(window.MUTA_WEB&&window.MUTA_WEB.leitura);
   if (A.sugMsg) return '<p class="status err">' + esc(A.sugMsg) + '</p>';
   if (!I.length) return '<p class="muted">Nada a sugerir nestas partes com o que foi lido' + (Object.keys(A.docs).length ? '' : ' (leia as peças principais)') + '.</p>';
   var valor = function (it) { return dataBr(it.kind === 'tabela' ? it.value.map(function (l) { return Object.keys(l).filter(function (c) { return S(l[c]); }).map(function (c) { return c + ': ' + S(l[c]).slice(0, 90); }).join(' · '); }).join(' | ') : S(it.value)); };
@@ -727,7 +727,8 @@ function htmlSugestoes(secoes) {
   }).join('');
   var conf = iguais.length ? '<details class="sg-ig"><summary>' + (pend.length ? '' : 'Tudo confere com a ficha · ') + iguais.length + ' campo(s) já iguais na ficha</summary><ul>' +
     iguais.map(function (it) { return '<li><b>' + esc(it.label) + '</b> ' + esc(valor(it).slice(0, 160)) + (it.doc ? ' <small class="mono">ID ' + esc(it.doc) + '</small>' : '') + '</li>'; }).join('') + '</ul></details>' : '';
-  return '<div class="sg">' + h + conf + (pend.length ? '<div class="bar"><button type="button" class="btn solid sm" data-au="aplicar" title="Só vai o que está marcado"' + (marc ? '' : ' disabled') + '>Gravar ' + marc + ' na ficha</button></div>' : '') + '</div>';
+  var barra=elegiveis.length?'<div class="au-sug-toolbar"><div class="au-sug-pill" role="group" aria-label="Seleção e gravação das sugestões"><button type="button" class="au-sug-select" data-au="sug-todos" aria-pressed="'+(marc===elegiveis.length)+'"'+(ro?' disabled':'')+'><span class="au-sug-check" aria-hidden="true">'+(marc===elegiveis.length?'✓':marc?'−':'')+'</span><span>'+(marc===elegiveis.length?'Desmarcar todos':'Selecionar todos')+'</span></button><button type="button" class="au-sug-save" data-au="aplicar" title="Gravar os campos selecionados na ficha"'+(marc&&!ro?'':' disabled')+'>Gravar '+marc+'</button></div><small class="muted au-sug-count">'+marc+'/'+elegiveis.length+' selecionados</small></div>':'';
+  return '<div class="sg">'+barra+h+conf+'</div>';
 }
 /* datas ISO (2025-07-01) aparecem como 01/07/2025 */
 function dataBr(t) { return String(t || '').replace(/\b(\d{4})-(\d{2})-(\d{2})\b/g, '$3/$2/$1'); }
@@ -837,14 +838,34 @@ function htmlConferir() {
 }
 
 /* ---------- ações ---------- */
-function aplicar() {
-  if(!lidoDoProcesso()||sigBloq()||(SG()&&SG().sigiloso()))return;
-  var C = {};
-  (A.sug || []).forEach(function (i) { if (i.apply && i.alvo && i.status !== 'igual' && !preservado(i)) C[i.alvo] = i.value; });
-  var ks = Object.keys(C); if (!ks.length) return;
-  var g = GB(); if (!g.marcar) return;
-  ks.forEach(function (k) { g.marcar(k, C[k]); });
-  g.gravar().then(function () { A.sug = null; redesenhar(); }, function () {});
+function sugElegivel(i){return !!(i&&i.alvo&&i.status!=='igual'&&!preservado(i)&&!preenchido(i.alvo));}
+function sugPainel(b){
+  var p=b&&b.closest('.sg');if(!p)return [];
+  return Array.from(p.querySelectorAll('[data-au-sug]')).map(function(x){return {el:x,k:Number(x.dataset.auSug),it:(A.sug||[])[Number(x.dataset.auSug)]};}).filter(function(x){return !x.el.disabled&&sugElegivel(x.it);});
+}
+function atualizarPill(){
+  document.querySelectorAll('.au-sug-pill').forEach(function(p){
+    var L=sugPainel(p),n=L.filter(function(x){return x.it.apply;}).length,all=!!L.length&&n===L.length,ro=!!(window.MUTA_WEB&&window.MUTA_WEB.leitura),sel=p.querySelector('[data-au="sug-todos"]'),save=p.querySelector('[data-au="aplicar"]'),count=p.parentNode.querySelector('.au-sug-count');
+    if(sel){sel.disabled=ro||!L.length;sel.setAttribute('aria-pressed',String(all));sel.querySelector('.au-sug-check').textContent=all?'✓':n?'−':'';sel.lastElementChild.textContent=all?'Desmarcar todos':'Selecionar todos';}
+    if(save){save.disabled=ro||!n;save.textContent='Gravar '+n;}
+    if(count)count.textContent=n+'/'+L.length+' selecionados';
+  });
+}
+function selecionarSugestoes(b){
+  if(window.MUTA_WEB&&window.MUTA_WEB.leitura)return;
+  var L=sugPainel(b),on=L.some(function(x){return !x.it.apply;});L.forEach(function(x){x.it.apply=on;});
+  document.querySelectorAll('[data-au-sug]').forEach(function(x){var it=(A.sug||[])[Number(x.dataset.auSug)];if(it)x.checked=!!it.apply;});atualizarPill();
+}
+function aplicar(b) {
+  if(!lidoDoProcesso()||sigBloq()||(SG()&&SG().sigiloso())||(window.MUTA_WEB&&window.MUTA_WEB.leitura)||A.gravandoSug)return;
+  var L=(b?sugPainel(b).map(function(x){return x.it;}):(A.sug||[])).filter(function(i){return i.apply&&sugElegivel(i);}),C=Object.create(null),divergentes=0,duplicados=[];
+  L.forEach(function(i){if(Object.prototype.hasOwnProperty.call(C,i.alvo)&&JSON.stringify(C[i.alvo])!==JSON.stringify(i.value)){duplicados.push(i.label||i.alvo);return;} C[i.alvo]=i.value;if(i.status==='conflito'||(!vazioFicha(i.alvo)&&JSON.stringify(valorFicha(i.alvo))!==JSON.stringify(i.value)))divergentes++;});
+  if(duplicados.length){window.alert('Há sugestões incompatíveis para o mesmo campo. Desmarque uma delas antes de gravar: '+duplicados.join(', '));return;}
+  var ks=Object.keys(C);if(!ks.length)return;
+  if(divergentes&&!window.confirm('Gravar '+ks.length+' campo(s), incluindo '+divergentes+' divergência(s) que podem substituir dados existentes na ficha?'))return;
+  var g=GB();if(!g.marcar||!g.gravar)return;A.gravandoSug=true;if(b)b.disabled=true;
+  ks.forEach(function(k){g.marcar(k,C[k]);});
+  g.gravar().then(function(){A.gravandoSug=false;A.sug=null;redesenhar();},function(){A.gravandoSug=false;atualizarPill();});
 }
 function gravarEspecificacao(id) {
   var g = GB(); if (!g.marcar) return;
@@ -865,7 +886,8 @@ function clique(b) {
   var a = b.dataset.au || '';
   if (a === 'ler' || a === 'tudo') ler();
   else if (a === 'princ') extrairPrincipais();
-  else if (a === 'aplicar') aplicar();
+  else if (a === 'aplicar') aplicar(b);
+  else if (a === 'sug-todos') selecionarSugestoes(b);
   else if (/^manter:/.test(a)) manterHistorico(Number(a.slice(7)));
   else if (a === 'desfazer') desfazerAuto();
   else if (a === 'gravar') gravarMarcados();
@@ -881,7 +903,7 @@ function clique(b) {
   else if (/^cp:/.test(a)) { var x = A.docs[a.slice(3)]; if (x && x.texto) copiar(x.texto, b); }
   else if (/^al:/.test(a)) { var al = alertas()[Number(a.slice(3))], g = GB(); if (al && al.campo && g.marcar) { g.marcar(al.campo, al.valor); g.gravar().catch(function () {}); } }
 }
-function marcarSugestao(k, on) { var it = (A.sug || [])[k]; if (it) it.apply = !!on; var n=(A.sug||[]).filter(function(i){return i.apply&&i.status!=='igual'&&!preservado(i)&&!(i.alvo&&preenchido(i.alvo));}).length;document.querySelectorAll('[data-au="aplicar"]').forEach(function(b){b.disabled=!n;b.textContent='Gravar '+n+' na ficha';}); }
+function marcarSugestao(k,on){var it=(A.sug||[])[k];if(!sugElegivel(it)||(window.MUTA_WEB&&window.MUTA_WEB.leitura))return;it.apply=!!on;document.querySelectorAll('[data-au-sug]').forEach(function(x){if(Number(x.dataset.auSug)===k)x.checked=!!on;});atualizarPill();}
 function especificar(id, v) { A.esp[id] = v; clearTimeout(A.tEsp); A.tEsp = setTimeout(function () { gravarEspecificacao(id); }, 1500); }
 function especificarJa(id) { if (id in A.esp) { clearTimeout(A.tEsp); gravarEspecificacao(id); } }
 

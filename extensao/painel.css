@@ -2276,3 +2276,16 @@ html body.hero-redesign-v53 #gab #hero-encaminhamento>.hero-enc-proposal>summary
 html body.hero-redesign-v53 #gab #hero-encaminhamento>.hero-enc-proposal>.gr{padding:0 12px 12px!important}
 html body.hero-redesign-v53 #gab #hero-encaminhamento .hero-pauta-resumo{grid-column:1/-1;margin:0!important;padding:8px 0 0!important;border:0!important;border-top:1px solid var(--line)!important;background:transparent!important;box-shadow:none!important}
 @media(max-width:320px){html body.hero-redesign-v53 #gab #hero-encaminhamento :is(.hero-enc-fields,.hero-enc-note-fields,.hero-dest-top){grid-template-columns:1fr!important}}
+
+/* Conferência dos autos: seleção coletiva e gravação na mesma pill. */
+#gab .au-sug-toolbar{display:flex;align-items:center;justify-content:space-between;gap:5px;flex-wrap:wrap;margin:0 0 8px;padding:4px 0 7px;border-bottom:1px solid var(--line);min-width:0}
+#gab .au-sug-pill{display:inline-flex;align-items:stretch;border:1px solid var(--line);border-radius:999px;overflow:hidden;min-width:0;background:var(--card,var(--field,#fff))}
+#gab .au-sug-pill>button{display:inline-flex;align-items:center;justify-content:center;gap:5px;border:0;margin:0;padding:6px 10px;min-height:29px;font:600 10.5px/1.35 var(--sans,system-ui);cursor:pointer;white-space:nowrap}
+#gab .au-sug-select{color:var(--fg);background:transparent}
+#gab .au-sug-select:hover:not(:disabled){background:var(--soft,#eee)}
+#gab .au-sug-check{box-sizing:border-box;display:inline-flex;justify-content:center;align-items:center;width:13px;height:13px;border:1px solid var(--muted-fg,#777);border-radius:3px;font-size:10px}
+#gab .au-sug-select[aria-pressed=true] .au-sug-check{background:var(--gold,#8a692f);border-color:var(--gold,#8a692f);color:#fff}
+#gab .au-sug-pill>.au-sug-save{border-left:1px solid var(--line);background:var(--gold,#8a692f);color:#fff;font-variant-numeric:tabular-nums}
+#gab .au-sug-pill>.au-sug-save:disabled{background:var(--soft,#eee);color:var(--muted-fg,#777);cursor:default}
+#gab .au-sug-pill>button:focus-visible{outline:2px solid var(--gold,#8a692f);outline-offset:-3px}
+#gab .au-sug-count{font-size:10px;white-space:nowrap;font-variant-numeric:tabular-nums}
