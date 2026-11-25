@@ -1551,3 +1551,57 @@ html[data-tema=escuro] .sg-b{background:#2a1414;border-color:#6b2f2f;color:#f0b8
 .rt-kind-foot .lnk{font-size:10px;padding:2px 0}
 html[data-tema=escuro] .rt-tipos .rt-kind-option.on{background:var(--soft);border-color:var(--primary);color:var(--fg)}
 html[data-tema=escuro] .rt-tipos .rt-kind-option{border-color:var(--line)}
+
+/* HERO · refinamento visual restrito ao prontuário. */
+#prontuario-app{min-width:0;gap:7px}
+#prontuario-app .pc.pm{padding:10px 11px!important;background:var(--soft)!important;border-bottom:1px solid var(--line)!important}
+#prontuario-app .hero-header-nav{gap:5px;min-width:0}
+#prontuario-app .hero-header-nav>button{min-width:26px;min-height:26px;border-radius:5px}
+#prontuario-app .hero-top-pages{min-height:0}
+#prontuario-app .pm-l1{display:flex;align-items:center;flex-wrap:wrap;gap:5px}
+#prontuario-app .pc-cnj{font-size:13px;line-height:1.35;font-weight:700;letter-spacing:-.02em;overflow-wrap:anywhere}
+#prontuario-app .hero-proc-tags{display:flex;align-items:flex-start;flex-wrap:wrap;gap:5px;min-width:0}
+#prontuario-app .hero-class-only{min-height:26px;height:auto;padding:4px 7px;cursor:default;white-space:normal;line-height:1.25}
+#prontuario-app .hero-header-kind{display:flex;flex:1 1 155px;align-items:flex-start;flex-wrap:wrap;gap:4px;min-width:0;padding:0;margin:0}
+#prontuario-app .hero-header-kind .rt-tsel{flex:1 1 100%;min-width:0;margin:0}
+#prontuario-app .hero-header-kind .rt-tsel>summary{min-height:26px;padding:4px 6px;gap:5px}
+#prontuario-app .hero-header-kind .rt-kind-main{display:flex;flex-direction:row;align-items:baseline;flex-wrap:wrap;gap:3px 5px}
+#prontuario-app .hero-header-kind .rt-kind-label{font-size:9px}
+#prontuario-app .hero-header-kind .rt-kind-main b{font-size:11px}
+#prontuario-app .hero-header-kind .rt-kind-mode{font-size:9px;padding:1px 4px}
+#prontuario-app .hero-main-tabs{padding:3px;border:1px solid var(--line);border-radius:8px;background:var(--soft);gap:2px}
+#prontuario-app .hero-main-tabs>button{min-height:32px;font-size:11px;border-radius:5px;padding:5px 3px}
+#prontuario-app .hero-main-tabs>button[aria-selected=true]{background:var(--card);color:var(--fg);box-shadow:0 1px 2px #00000012}
+#prontuario-app .hero-acomp-tabs{gap:4px;scrollbar-width:thin}
+#prontuario-app .hero-acomp-tabs>button,#prontuario-app .hero-monitor-tab>button,#prontuario-app .hero-sn-mini{min-height:28px}
+#prontuario-app .hero-steps{margin:6px 0;padding:7px;border-radius:7px}
+#prontuario-app .hero-designacoes{gap:5px}
+#prontuario-app .hero-design-cell select{min-height:27px}
+#prontuario-app .gbody{gap:7px;min-width:0}
+#prontuario-app .gbody .gg{margin:0 0 5px;border-radius:7px;box-shadow:none;min-width:0}
+#prontuario-app .gbody .gg>summary{min-height:31px;padding:7px 9px;gap:6px}
+#prontuario-app .gbody .gg>summary h4{font-size:12px;line-height:1.3;overflow-wrap:anywhere}
+#prontuario-app .gbody .gg[open]>summary{border-bottom:1px solid var(--line)}
+#prontuario-app .gbody .gr{grid-template-columns:repeat(2,minmax(0,1fr));padding:8px 9px;gap:7px}
+#prontuario-app .gbody .gl{font-size:10.5px;line-height:1.3}
+#prontuario-app .gbody .gf :is(input,select,textarea){box-sizing:border-box;font-size:12px;min-width:0}
+#prontuario-app .gbody .gf :is(input,select){min-height:29px}
+#prontuario-app .gbody .gf :disabled{background:var(--soft);color:var(--muted-fg)}
+#prontuario-app .gbody .pc-sec{border-radius:8px;box-shadow:none;min-width:0}
+#prontuario-app .gbody .pc-sh{gap:6px;flex-wrap:wrap}
+#prontuario-app .gbody .pc-sh h3{font-size:12px;line-height:1.35}
+#prontuario-app .au-doc{padding:7px 0;min-width:0}
+#prontuario-app .au-h{min-width:0;gap:5px}
+#prontuario-app .au-n{min-width:0;overflow-wrap:anywhere}
+#prontuario-app .au-fx,#prontuario-app .au-gv{flex-wrap:wrap;gap:5px}
+#prontuario-app .au-fx .seg{flex:1 1 160px;min-width:0}
+#prontuario-app .au-fx .seg button{min-height:29px;white-space:normal;font-size:11px}
+#prontuario-app .plus-docfilter{border-top:1px solid var(--line);padding-top:6px;margin:6px 0}
+#prontuario-app .plus-row,#prontuario-app .plus-doc{min-width:0}
+#prontuario-app :is(button,summary,input,select,textarea):focus-visible{outline:2px solid var(--primary);outline-offset:2px}
+@media(max-width:380px){
+ #prontuario-app .hero-header-kind{flex-basis:130px}
+ #prontuario-app .hero-main-tabs>button{font-size:10.5px}
+ #prontuario-app .hero-designacoes{grid-template-columns:repeat(2,minmax(0,1fr))}
+ #prontuario-app .hero-pauta-resumo>.hero-pauta-linha{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
