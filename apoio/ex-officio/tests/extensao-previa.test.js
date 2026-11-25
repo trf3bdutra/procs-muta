@@ -117,11 +117,11 @@ test('tipo de ato e destino na faixa superior; etiquetas apenas na autuação',(
  const s=fs.readFileSync(path.join(ROOT,'scripts/extensao/previa/universal-layout.js'),'utf8');
  assert.match(s,/pv-ato-destino/);
  assert.match(s,/faixa=p\.querySelector\('\.pv-people'\)/);
- assert.match(s,/faixa\.prepend\(ato,dest\)/);
+ assert.match(s,/faixa\.prepend\(next,dest\)/);
  assert.doesNotMatch(s,/cnj\.after\(faixa\)/);
  assert.match(s,/function etiquetasAutuacao\(ctx\)/);
  assert.match(s,/etiquetas:''/);
- assert.match(s,/m\.t='Mídias e seleção prévia'/);
+ assert.match(s,/m\.t='Mídias'/);
  assert.doesNotMatch(s,/sec\.append\(ato\)/);
  new Function(s);
 });
@@ -191,4 +191,18 @@ test('simulador inicializa e controles do painel esquerdo enviam estado ao HERO'
  h.get('#fonte').onchange({target:{value:'colar'}});assert.equal(h.get('#colar-w').hidden,false);
  h.get('#cnj').value='50000000020264036001';h.api.confirmarCnj();assert.equal(h.api.S.cnj,'5000000-00.2026.4.03.6001');
  assert.equal(typeof h.get('#recarregar-sessoes').onclick,'function');
+});
+
+test('universal: encaminhamento editável na triagem e espelhado no cartão',()=>{
+ const s=fs.readFileSync(path.join(ROOT,'scripts/extensao/previa/universal-layout.js'),'utf8');
+ assert.match(s,/function encaminhamentoTriagem\(\)/);
+ assert.match(s,/fragment\(atoSel\(\)\)/);
+ assert.match(s,/campoRot\('triagem','Seleção Prévia','Seleção prévia'\)/);
+ assert.match(s,/f\.append\(encaminhamentoTriagem\(\)\)/);
+ assert.match(s,/faixa\.prepend\(next,dest\);ato\.remove\(\)/);
+ assert.match(s,/readRow\('Seleção prévia',V\('triagem','Seleção Prévia'\)\)/);
+ assert.match(s,/data-pv-enc/);
+ const a=s.indexOf('var operationalFields='),z=s.indexOf('var prodBase=camposCaso;',a);
+ assert.match(s.slice(a,z),/'triagem.Seleção Prévia'/);
+ new Function(s);
 });

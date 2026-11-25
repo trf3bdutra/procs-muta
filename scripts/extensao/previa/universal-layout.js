@@ -116,12 +116,23 @@
     return box;
   }
   function docsHtml(ids){var f=elem('div','pv-docrefs'),T=ccTipos();ids.forEach(function(id){if(id==='sent'&&T.ai&&!T.ap&&!T.rn&&!S(V('origem','Sentença - ID')))return;if(id==='imp'&&T.ap&&!T.ai&&!T.agint&&!T.ed&&!T.ret&&!S(V('triagem','Impugnada - ID')))return;f.append(docRef(id));});return html(f);}
+  // Encaminhamento: edição na Triagem e resumo no cartão.
+  function encaminhamentoTriagem(){
+    var box=elem('section','card pv-tri-enc');box.id='pv-tri-enc';
+    box.append(elem('h4','pm-mer-h','Encaminhamento'));
+    var gr=elem('div','gr pv-tri-enc-fields'),ato=fragment(atoSel()),rot=ato.querySelector('.pm-pn small');
+    if(rot)rot.textContent='Próximo ato';
+    gr.append(ato,readRow('Destino',destGrav()||'A definir'));
+    if(destGrav()==='Outro destino')add(gr,campoRot('producao','Destino - Outro','Especificar destino'));
+    add(gr,campoRot('triagem','Seleção Prévia','Seleção prévia'));
+    box.append(gr);return box;
+  }
   function setupRoteiro(){
     var R=window.MutaRoteiro;if(!R||R._pvDoc)return;
-    // Etiquetas são editadas em Autuação. O passo restante verifica mídias, não etiquetas.
+    // Etiquetas em Autuação; seleção prévia em Encaminhamento.
     var m=R.PASSOS.find(function(p){return p.id==='etiquetas';});
-    if(m){m.t='Mídias e seleção prévia';m.campos=m.campos.filter(function(c){return c[1]!=='Etiquetas';});delete m.extra;delete m.dica;m.estado=function(c){var v=N(c.v('triagem','Mídias'));return v==='faltantes'?'al':v==='juntadas'||v==='nao se aplica'?'ok':'pend';};}
-    var original=R.html;R.html=function(g,c,q,x){return original(g,c,null,Object.assign({},x,{etiquetas:'',docOwned:function(id){return owned(id)||id==='triagem.Etiquetas'||id==='triagem.Etiquetas sugeridas';},docRef:function(id){return docsHtml(stepDocs[id]||[]);}}));};R._pvDoc=true;
+    if(m){m.t='Mídias';m.campos=m.campos.filter(function(c){return c[1]!=='Etiquetas'&&c[1]!=='Seleção Prévia';});delete m.extra;delete m.dica;m.estado=function(c){var v=N(c.v('triagem','Mídias'));return v==='faltantes'?'al':v==='juntadas'||v==='nao se aplica'?'ok':'pend';};}
+    var original=R.html;R.html=function(g,c,q,x){return original(g,c,null,Object.assign({},x,{etiquetas:'',todos:((x&&x.todos)||[]).filter(function(c){return c[1]!=='Seleção Prévia';}),docOwned:function(id){return owned(id)||id==='triagem.Etiquetas'||id==='triagem.Etiquetas sugeridas';},docRef:function(id){return docsHtml(stepDocs[id]||[]);}}));};R._pvDoc=true;
   }
   // Proprietários fixos, independentemente de estarem recolhidos ou preenchidos.
   var operationalFields=[
@@ -131,7 +142,7 @@
     'origem.Responsável','origem.Próxima ação','origem.Observações',
     'producao.SERVIDOR','producao.CORRETOR','producao.MINUTADO','producao.CORRIGIDO',
     'producao.Data da Revisão','producao.LIBERADO','producao.Data da Liberação','producao.Assinado','producao.Data da Assinatura',
-    'triagem.Registro - Situação atual','triagem.Etiquetas','triagem.Etiquetas sugeridas',
+    'triagem.Registro - Situação atual','triagem.Etiquetas','triagem.Etiquetas sugeridas','triagem.Seleção Prévia',
     'triagem.COMPLEXIDADE','triagem.Tipo de Voto','triagem.Hipóteses Monocrática'
   ];
   function productionExclusions(ja){
@@ -189,8 +200,8 @@
   /* Roteiro real de triagem, incluindo estados, prazos, conferência e seleção de espécies.
      Retira só a explicação redundante do catálogo, não as etiquetas nem as ações. */
   corpoRoteiro=function(){
-    setupRoteiro();var f=fragment(rt());f.querySelectorAll('.rt-f').forEach(function(x){var t=x.querySelector('span');if(t&&t.textContent==='Mídias e etiquetas')t.textContent='Mídias e seleção prévia';});f.querySelectorAll('.etq-cat').forEach(function(c){if(!c.querySelector('.etq-cs'))c.remove();else{var b=c.querySelector('.etq-cat-h b');if(b)b.remove();}});
-    f.querySelectorAll('p,small').forEach(function(p){if(p.textContent.trim().startsWith('As sugeridas seguem as regras do Caput'))p.remove();});return html(f);
+    setupRoteiro();var f=fragment(rt());f.querySelectorAll('.rt-f').forEach(function(x){var t=x.querySelector('span');if(t&&t.textContent==='Mídias e etiquetas')t.textContent='Mídias';});f.querySelectorAll('.etq-cat').forEach(function(c){if(!c.querySelector('.etq-cs'))c.remove();else{var b=c.querySelector('.etq-cat-h b');if(b)b.remove();}});
+    f.querySelectorAll('p,small').forEach(function(p){if(p.textContent.trim().startsWith('As sugeridas seguem as regras do Caput'))p.remove();});f.append(encaminhamentoTriagem());return html(f);
   };
   /* Reaproveita controles originais e disponibiliza os demais campos de Meta. */
   controlesProcesso=function(naSeta){
@@ -236,7 +247,7 @@
     sec.append(elem('h4','pm-mer-h','ID'));
     var classe=source(['classe_judicial','Classe','DataJud · Classe'])||(pjeDoProcesso()?window.MutaPje.classe():'');
     sec.append(readRow('Classe',classe),tipoField());
-    // Tipo de ato e destino são definidos exclusivamente na faixa superior.
+    // Próximo ato, destino e seleção prévia são definidos na Triagem.
     var res=elem('div','pv-idrow'),c=destino()==='monocratica'?campoLista('producao','Voto - Resultado'):campoModelo('producao','Voto - Resultado');
     if(c)add(res,campo(Object.assign({},c,{rotulo:'Conclusão / resultado'})));sec.append(res);
     sec.append(elem('h4','pm-mer-h','Matéria'),(campoModelo('triagem','Ramo do direito')?field('triagem','Ramo do direito','Ramo do direito'):extraField('ramo','Ramo do direito')),readRow('Assunto CNJ',source(['Assunto'])),(campoModelo('triagem','Outros assuntos')?field('triagem','Outros assuntos','Outros assuntos'):extraField('outros','Outros assuntos')));
@@ -286,11 +297,15 @@
       var tagsBox=etiquetasAutuacao(ctx),ctl=ctx.querySelector('.pm-ctl2');if(ctl&&ctl.previousElementSibling){ctx.insertBefore(tagsBox,ctl.previousElementSibling);}else ctx.append(tagsBox);}
     var pills=p.querySelector('.pm-pills');if(pills)pills.replaceWith(flow());
     var resp=p.querySelector('.pm-resp');if(resp){resp.classList.add('pv-enc');var ato=resp.querySelector('.pm-ato');if(ato){
-      var faixa=p.querySelector('.pv-people'),dest=readRow('Destino',destGrav()||'A definir');
+      var faixa=p.querySelector('.pv-people'),idx=pronAtual(),dest=readRow('Destino',destGrav()||'A definir');
       if(faixa){
-        faixa.classList.add('pv-ato-destino');ato.classList.add('pv-oper-cell');dest.classList.add('pv-oper-cell');
-        faixa.prepend(ato,dest);
-        if(destGrav()==='Outro destino'){var extra=elem('div','pv-ato-outro');add(extra,campoRot('producao','Destino - Outro','Especificar destino'));faixa.after(extra);}
+        var next=readRow('Próximo ato',idx>=0?PRON[idx][0]:'A definir');
+        next.classList.add('pv-oper-cell');dest.classList.add('pv-oper-cell');
+        faixa.classList.add('pv-ato-destino');faixa.prepend(next,dest);ato.remove();
+        var sum=elem('div','pv-enc-summary'),sel=readRow('Seleção prévia',V('triagem','Seleção Prévia')),go=btn('Editar na Triagem','data-pv-enc','');
+        go.className='lnk';sum.append(sel,go);
+        if(destGrav()==='Outro destino'&&S(V('producao','Destino - Outro')))sum.prepend(readRow('Encaminhamento',V('producao','Destino - Outro')));
+        faixa.after(sum);
       }
       var flowBox=p.querySelector('.pv-flowbox'),enc=resp.querySelector('.pm-enc');
       if(flowBox&&enc){enc.classList.add('pv-stage-situacao');flowBox.append(enc);}
@@ -318,8 +333,9 @@
   };
   caixa.addEventListener('toggle',function(e){if(!e.target.isConnected)return;if(e.target.id==='pv-identity')identOpen=e.target.open;if(e.target.id==='pv-etiquetas')open.etiquetasAutuacao=e.target.open;if(e.target.id==='pv-questoes-producao')open.questoesProducao=e.target.open;},true);
   caixa.addEventListener('click',function(e){
-    var b=e.target.closest&&e.target.closest('[data-pv-tab],[data-pv-ident],[data-cl-tipo],[data-pv-extra],#pv-identity [data-rt]');if(!b)return;
+    var b=e.target.closest&&e.target.closest('[data-pv-tab],[data-pv-ident],[data-cl-tipo],[data-pv-extra],[data-pv-enc],#pv-identity [data-rt]');if(!b)return;
     e.preventDefault();e.stopImmediatePropagation();
+    if(b.hasAttribute('data-pv-enc')){G.aba='Processo';G.rot='tri';render();var enc=$('pv-tri-enc');if(enc)enc.scrollIntoView({block:'start'});return;}
     if(b.hasAttribute('data-pv-tab')){G.aba='Processo';G.rot=b.dataset.pvTab;render();return;}
     if(b.hasAttribute('data-pv-ident')||b.hasAttribute('data-cl-tipo')){irIdent();return;}
     if(b.hasAttribute('data-pv-extra')){var a=b.dataset.pvExtra.split(':'),k=a[0];if(a[1]==='ok'){var t=$('pv-extra-'+k);if(t)(extras[G.cnj]||(extras[G.cnj]={}))[k]=S(t.value);}open['extra:'+k]=a[1]==='ed'?!open['extra:'+k]:false;render();return;}
