@@ -266,7 +266,7 @@
     d.append(sec);return d;
   }
   var autosBase=corpoAutos;
-  corpoAutos=function(){return html(identity())+autosBase();};
+  corpoAutos=function(){if(heroV53())return autosBase();return html(identity())+autosBase();};
   function irIdent(){identOpen=true;G.aba='Autos';render();var d=$('pv-identity');if(d){d.open=true;d.scrollIntoView({block:'start'});}}
   function etiquetasAutuacao(ctx){
     var box=elem('details','pv-sub pv-etiquetas'),sum=elem('summary','','Etiquetas');
@@ -330,11 +330,12 @@
   MODOS=['Autos','Processo'];
   var renderBase=render0;
   render0=function(){
-    if(tabCnj!==G.cnj){tabCnj=G.cnj;identOpen=false;G.aba='Autos';G.rot='tri';if(window.MUTA_WEB){G.aba='Processo';G.rot=window.MUTA_WEB.modo;}G.adEd=false;}
+    if(tabCnj!==G.cnj){tabCnj=G.cnj;identOpen=false;G.aba='Autos';G.rot='tri';if(heroV53()&&!window.MUTA_WEB){G.aba='Processo';G.rot='res';}if(window.MUTA_WEB){G.aba='Processo';G.rot=window.MUTA_WEB.modo;}G.adEd=false;}
     setupRoteiro();
     // Preserva a derivação e a sincronização antes de desenhar a produção, sem depender da antiga seta.
     if(G.aba==='Processo'&&G.rot==='pro'&&G.cnj&&G.op)try{autoGab();situacaoSync();}catch(e){}
     renderBase();
+    if(heroV53()&&G.aba==='Processo'&&G.rot==='res'){var root=caixa.querySelector('.pc.pm');if(root)root.append(identity());}
     var top=caixa.querySelector('.pc.pm');if(top)top.classList.add('pv-universal');
     var tabs=caixa.querySelector('.gtabs'),proc=tabs&&tabs.querySelector('[data-aba="Processo"]');
     if(proc){var tri=btn('Triagem','data-pv-tab','tri'),pro=btn('Produção','data-pv-tab','pro');
@@ -349,7 +350,7 @@
     e.preventDefault();e.stopImmediatePropagation();
     if(b.hasAttribute('data-pv-enc')){G.aba='Processo';G.rot='tri';render();var enc=$('pv-tri-enc');if(enc)enc.scrollIntoView({block:'start'});return;}
     if(b.hasAttribute('data-pv-tab')){G.aba='Processo';G.rot=b.dataset.pvTab;render();return;}
-    if(b.hasAttribute('data-pv-ident')||b.hasAttribute('data-cl-tipo')){irIdent();return;}
+    if(b.hasAttribute('data-pv-ident')||b.hasAttribute('data-cl-tipo')){if(heroV53()){G.aba='Processo';G.rot=b.hasAttribute('data-cl-tipo')?'tri':'res';render();var p=caixa.querySelector('.hero-v53-profile');if(p&&G.rot==='res')p.open=true;}else irIdent();return;}
     if(b.hasAttribute('data-pv-extra')){var a=b.dataset.pvExtra.split(':'),k=a[0];if(a[1]==='ok'){var t=$('pv-extra-'+k);if(t)(extras[G.cnj]||(extras[G.cnj]={}))[k]=S(t.value);}open['extra:'+k]=a[1]==='ed'?!open['extra:'+k]:false;render();return;}
     if(b.dataset.rt&&window.MutaRoteiro){
       if(!Object.prototype.hasOwnProperty.call(tipoOriginal,G.cnj))tipoOriginal[G.cnj]=S(V('triagem','Tipo de Julgamento'));
