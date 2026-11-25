@@ -13,7 +13,7 @@
     '.pv-sn-dlg{position:fixed;margin:0;z-index:50;width:min(440px,92vw);max-height:75vh;overflow:auto;padding:0;border-radius:10px;border:1px solid rgba(127,127,127,.4);box-shadow:0 12px 32px rgba(0,0,0,.35);background:var(--bg,#14202b);color:inherit}'+
     '.pv-sn-dlg .pv-sn-h{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 12px;cursor:move;user-select:none;border-bottom:1px solid rgba(127,127,127,.25);position:sticky;top:0;background:inherit}'+
     '.pv-sn-dlg .pv-sn-h button{font:inherit;background:transparent;border:0;color:inherit;font-size:18px;cursor:pointer;line-height:1}.pv-sn-dlg .pv-sn-c{padding:8px 12px 12px}'+
-    '.pv-reg{margin-top:10px}';document.head.appendChild(st);}
+    '.pv-reg{margin-top:10px}.pv-sit-tag{font:inherit;font-size:11.5px;cursor:pointer;margin-left:auto}.pv-acomp-sit{margin:0 0 10px}';document.head.appendChild(st);}
   var base=render0;
   render0=function(){
     base();
@@ -37,6 +37,11 @@
       var pos=G.pvSnPos||{x:Math.max(8,(window.innerWidth-440)/2),y:80};d.style.left=pos.x+'px';d.style.top=pos.y+'px';
       if(G.pvSnAb)try{d.show();}catch(e){d.setAttribute('open','');}
     }
+    /* situação para julgar: na faixa das etapas só a etiqueta (apto ou pendências); o quadro completo vai para o Acompanhamento */
+    var sit=top.querySelector('.pv-stage-situacao'),sh=top.querySelector('.pv-stage-head');
+    if(sit){var tg=sit.querySelector('.pm-sitv');
+      if(tg&&sh){var t=document.createElement('button');t.type='button';t.className=tg.className+' pv-sit-tag';t.setAttribute('data-pv-sit','');t.title='Situação para julgar · detalhes no Acompanhamento (Triagem)';t.textContent=tg.textContent;sh.appendChild(t);}
+      sit.remove();}
     /* Triagem: Acompanhamento antes do roteiro */
     if(G.aba==='Processo'&&G.rot==='tri'){
       var enc=caixa.querySelector('#pv-tri-enc'),rtop=caixa.querySelector('.rt-em-proc .rt-top')||caixa.querySelector('.rt-em-proc');
@@ -44,11 +49,13 @@
         var ac=document.createElement('details');ac.className='card pv-acomp';ac.id='pv-acomp';if(G.pvAcAb)ac.open=true;
         var dest=destGrav()||'destino a definir';
         ac.innerHTML='<summary>Acompanhamento<small>'+esc(dest)+(S(V('triagem','Seleção Prévia'))?' · seleção prévia: '+esc(V('triagem','Seleção Prévia')):'')+'</small></summary><div class="pv-acomp-b"></div>';
-        var b=ac.querySelector('.pv-acomp-b');b.appendChild(enc);if(fol)b.appendChild(fol);
+        var b=ac.querySelector('.pv-acomp-b');if(sit){sit.classList.add('pv-acomp-sit');b.appendChild(sit);}b.appendChild(enc);if(fol)b.appendChild(fol);
         rtop.parentNode.insertBefore(ac,rtop);
       }
     }
   };
+  caixa.addEventListener('click',function(e){var t=e.target.closest&&e.target.closest('[data-pv-sit]');if(!t)return;e.preventDefault();e.stopImmediatePropagation();
+    G.aba='Processo';G.rot='tri';G.pvAcAb=true;render();var a=$('pv-acomp');if(a)a.scrollIntoView({block:'start'});},true);
   caixa.addEventListener('toggle',function(e){if(e.target&&e.target.id==='pv-acomp')G.pvAcAb=e.target.open;},true);
   /* "Editar na Triagem" (cartão) abre o Acompanhamento antes de rolar até o encaminhamento */
   document.addEventListener('click',function(e){if(e.target.closest&&e.target.closest('[data-pv-enc]'))G.pvAcAb=true;},true);

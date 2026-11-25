@@ -152,6 +152,9 @@ test('universal: Acompanhamento no alto da Triagem; sinalizações em janela mó
     assert.ok(await pg.$('#pv-acomp #pv-tri-enc'), 'encaminhamento (destino e seleção prévia) no Acompanhamento');
     assert.ok(await pg.$('#pv-acomp .pv-followup'), 'responsável e próxima ação no Acompanhamento');
     assert.ok(!(await pg.$('details.pm-sn')), 'sinalizações fora do cartão');
+    assert.ok(await pg.$('#pv-acomp .pm-sitj'), 'situação para julgar no Acompanhamento');
+    assert.ok(await pg.$('.pv-stage-head .pv-sit-tag'), 'só a etiqueta na faixa das etapas');
+    assert.ok(!(await pg.$('.pv-flowbox .pm-sitj')), 'sem o quadro na faixa');
     assert.ok(await pg.$('details.pm-aut1 .pv-reg'), 'registro no acervo em Autuação');
     await pg.click('[data-pv-sn]');
     assert.equal(await pg.$eval('#pv-sn-dlg', d => d.open), true, 'janela de sinalizações aberta');
