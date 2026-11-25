@@ -1337,6 +1337,10 @@ function abaGrupos(A) {
   return abaGruposCorpo(A);
 }
 /* grupos de uma aba: na leitura, só os campos preenchidos; grupo sem nada vai para "Sem registro" (abre com um clique); na edição, tudo */
+function devolutivasFicha(){
+ var L=(ST.d&&ST.d.devolutivas)||[],estado={todo:'Pendente',doing:'Em andamento',done:'Concluída'};
+ return '<div style="margin-top:12px;border-top:1px solid #dce4df;padding-top:8px"><b>Devolutivas às minutas · '+L.length+'</b>'+((ST.d&&ST.d.devolutivasErro)?'<p class="fx-dim">Não foi possível consultar as diligências.</p>':!L.length?'<p class="fx-dim">Sem devolutivas vinculadas ao processo.</p>':L.slice().sort(function(a,b){return S(b.data).localeCompare(S(a.data));}).map(function(t){return '<details style="border-bottom:1px solid #dce4df;padding:8px 0"><summary style="cursor:pointer"><b>'+E(t.autor||'Autor não identificado')+'</b> → '+E(t.destinatario||'Equipe')+' · '+E(t.data?brD(iso(t.data)||t.data):'')+' · '+E(estado[t.situacao]||t.situacao||'Sem situação')+'</summary><p style="white-space:pre-wrap;overflow-wrap:anywhere">'+E(t.texto||'')+'</p>'+(t.resposta?'<p style="white-space:pre-wrap;overflow-wrap:anywhere"><b>Resposta:</b> '+E(t.resposta)+'</p>':'')+'</details>';}).join(''))+'</div>';
+}
 function abaGruposCorpo(A) {
   var dn = destino(), h = '', n = 0;
   if (A.destino && A.destino !== dn) return card('Não se aplica a este processo', '<p>' + (A.destino === 'sessao' ? 'O destino do julgamento é decisão monocrática: o processo não vai à pauta. A decisão fica em Produção › Decisão monocrática.' : 'Esta parte só vale para a decisão monocrática.') + '</p><p>Para mudar, use o destino no fim do fluxo, acima.</p>');
@@ -1356,9 +1360,13 @@ function abaGruposCorpo(A) {
   if(A.aba==='Triagem')gs=gs.map(function(g){return Object.assign({},g,{campos:g.campos.filter(function(c){return ['Registro - Teor dos autos','Registro - Peças'].indexOf(c.chave)<0;})});}).filter(function(g){return g.campos.length;});
   h += gs.map(function (g) {
     var cheios = (g.campos || []).filter(temValor), tudo = ST.edit || ST.vzTodos || ST.vz[g.grupo], nv = (g.campos || []).length - cheios.length;
-    if (!tudo && !cheios.length) { vazios.push(g.grupo); return ''; }
+    if (!tudo && !cheios.length && g.grupo!=='Lote e correção (Index)') { vazios.push(g.grupo); return ''; }
     var ac = !ST.edit && !ST.vzTodos && nv ? '<button type="button" class="fx-pill fx-mini" data-fx-vz="' + E(g.grupo) + '">' + (ST.vz[g.grupo] ? 'esconder vazios' : '+ ' + nv + (nv > 1 ? ' campos vazios' : ' campo vazio')) + '</button>' : '';
-    return card(g.grupo === 'Registro da triagem (lote)' ? 'Registros históricos da triagem por lote' : g.grupo, grade(tudo ? g.campos : cheios), { n: ('0' + (++n)).slice(-2), nota: g.destino ? (g.destino === 'sessao' ? 'acórdão' : 'monocrática') : '', acoes: ac });
+    var rev=g.grupo==='Lote e correção (Index)', ocas=!!g.quando||!!g.controle||/^(Espécie e decisão impugnada|Acórdão recorrido|Embargos de declaração|Agravo interno|Juízo de retratação|Questões específicas da espécie|Sucumbência e consectários do julgamento)/.test(g.grupo);
+    var corpo=grade(tudo?g.campos:cheios)+(rev?devolutivasFicha():'');
+    var titulo=rev?'Revisão e devolutivas':g.grupo;
+    if(ocas)return '<details class="fx-card fx-ocasional" style="padding:10px 12px"><summary style="cursor:pointer;font-weight:650">'+E(titulo)+' <small class="fx-dim">· '+cheios.length+' campo(s) registrado(s)</small></summary><div style="padding-top:10px">'+corpo+'</div></details>';
+    return card(titulo,corpo,{n:('0'+(++n)).slice(-2),nota:g.destino?(g.destino==='sessao'?'acórdão':'monocrática'):'',acoes:ac});
   }).join('');
   if (!ST.edit && vazios.length) h += card('Sem registro', '<div class="fx-acts">' + vazios.map(function (g) { return '<button type="button" class="fx-pill fx-mini" data-fx-vz="' + E(g) + '">' + E(g) + '</button>'; }).join('') + '</div><p class="fx-note">Grupos sem nenhum campo preenchido. Clique num deles para abrir; em Editar, todos os campos aparecem.</p>', { cls: 'fx-vazios', acoes: '<button type="button" class="fx-pill fx-mini" data-fx-vz="*">Mostrar todos os campos</button>' });
   else if (!ST.edit && ST.vzTodos) h += '<p class="fx-note fx-vz-off"><button type="button" class="fx-pill fx-mini" data-fx-vz="*">Esconder campos vazios</button></p>';
