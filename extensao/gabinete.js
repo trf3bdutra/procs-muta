@@ -1565,7 +1565,7 @@ function heroOrganizarProntuario(){
     perfil.append(perfilSum,aut,mat);aut.hidden=mat.hidden=false;
     perfil.open=!!heroTopo.perfil||heroTopo.pagina>=2;
     perfil.addEventListener('toggle',function(){if(perfil.isConnected){heroTopo.perfil=perfil.open;if(!perfil.open)heroTopo.pagina=0;}});
-    id.append(perfil);
+    id.append(perfil);if(fichaFacePermitida()&&window.MutaGabinete&&window.MutaGabinete.fichaFace){var inv=el('details','hero-v53-profile'),ih=el('summary','','Ficha completa'),ib=el('div');inv.append(ih,ib);inv.addEventListener('toggle',function(){if(!inv.isConnected)return;if(inv.open&&fichaFacePermitida())html(ib,window.MutaGabinete.fichaFace());else ib.replaceChildren();});id.append(inv);}
     var pautaPerfil=el('details','hero-v53-profile'),pautaSum=el('summary','','Pauta e julgamento');
     pautaPerfil.append(pautaSum);
     /* Usa os controles e histórico já construídos; não cria segunda edição da pauta. */
@@ -1595,10 +1595,10 @@ function heroOrganizarProntuario(){
     [['@fatica','Síntese Fática','fatica'],['@processual','Síntese Processual','processual']].forEach(function(x){
       var inp=contentGrid.querySelector('[data-fk="triagem.'+x[1]+'"],[data-pv-field="triagem.'+x[1]+'"]'),fieldNode=inp&&inp.closest('.gf,.pv-field,.pv-idrow');
       if(fieldNode){var lab=fieldNode.querySelector('.gl');(lab||fieldNode).append(pin(x[0]));}
-      var value=S(V('triagem',x[1]));if(value&&destacado(x[0])){var b=el('button','hero-v53-highlight '+x[2],value);b.type='button';b.title='Editar '+x[1];b.onclick=function(){perfil.open=true;contentGrid.scrollIntoView({block:'nearest'});};highlight.append(b);}
+      var value=S(V('triagem',x[1]));if(value&&destacado(x[0])){var b=el('button','hero-v53-highlight '+x[2],value);b.type='button';b.title='Editar '+x[1];b.onclick=function(){perfil.open=true;heroTopo.perfil=true;secConteudo.open=true;contentGrid.scrollIntoView({block:'nearest'});};highlight.append(b);}
     });
-    if(highlight.childNodes.length)id.insertBefore(highlight,qtags.isConnected?qtags:steps);
-    if(qtags.childNodes.length){qtags.replaceChildren();qs.forEach(function(q,i){if(qfix.includes(q)){var b=el('button','hero-v53-question',String(i+1).padStart(2,'0')+' · '+q);b.type='button';b.onclick=function(){perfil.open=true;qd.open=true;qd.scrollIntoView({block:'nearest'});};qtags.append(b);}});}
+    if(highlight.childNodes.length)id.insertBefore(highlight,qtags.parentNode===id?qtags:steps);
+    if(qtags.childNodes.length){qtags.replaceChildren();qs.forEach(function(q,i){if(qfix.includes(q)){var b=el('button','hero-v53-question',String(i+1).padStart(2,'0')+' · '+q);b.type='button';b.onclick=function(){perfil.open=true;heroTopo.perfil=true;qd.open=true;qd.scrollIntoView({block:'nearest'});};qtags.append(b);}});}
     /* Mantém a seção imediatamente antes do assunto; tags reais ficam agrupadas. */
     if(secTag)as.prepend(secTag);
     if(l1){l1.append(status);openMon.remove();status.querySelectorAll('.hero-status-icon').forEach(function(b){var labels={urgencia:'Urgência',sigilo:'Sigilo',meta:'Meta',sensivel:'Caso sensível'};b.append(el('span','',labels[b.dataset.monFoco]||b.title));});}
