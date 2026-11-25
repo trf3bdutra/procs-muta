@@ -683,7 +683,7 @@ test('extensão 0.51: Collectio com o PJe aberto — referência na versão fina
 });
 
 test('tipo de ato sugerido dentro da opção, sem seleção automática',()=>{
- const src=fs.readFileSync(path.join(ROOT,'extensao/gabinete.js'),'utf8');
+ const src=fs.readFileSync(path.join(root,'extensao/gabinete.js'),'utf8');
  const code=src.slice(src.indexOf('function atoOpcoes(k)'),src.indexOf('function corpoProducao()'));
  const render=new Function('PRON','sugerirAto','esc','pronAtual',code+';return {atoOpcoes,atoSel,pronunciamento};')([['Acórdão','Sessão',''],['Decisão monocrática','Monocrática','']],()=>({i:1,por:'triagem'}),String,()=>-1);
  const html=render.atoSel();
