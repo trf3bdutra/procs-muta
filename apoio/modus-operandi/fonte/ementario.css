@@ -708,3 +708,14 @@ html.emb-cmt body #e-aside{top:0!important;max-height:100vh!important}
 @media(max-width:680px){.pp-tabs>button{padding-inline:8px;min-height:42px}.e-dhead.pp .pp-tabs{padding-inline:8px}.pp-section .pp-top{grid-template-columns:minmax(0,1fr)}}
 
 .pp-detalhamento{padding:10px 12px}.pp-detalhamento .pp-det-text{font-size:13px;line-height:1.55;overflow-wrap:anywhere}.pp-detalhamento .pp-det-text+.pp-det-text{margin-top:6px;padding-top:6px;border-top:1px solid var(--line)}.pp-detalhamento .pp-tags{margin-top:8px}.pp-detalhamento>p.meta{margin:0}
+
+/* Processo e referências: cartão único, divisões internas sem caixas aninhadas. */
+.pp-processo-unico,.pp-referencias{padding:10px 12px}
+.pp-interna+.pp-interna{border-top:1px solid var(--line);margin-top:10px;padding-top:10px}
+.pp-interna>.pp-pg:first-of-type{border-top:0;padding-top:0;margin-top:5px}
+.pp-processo-unico .pp-detalhamento{padding:0;padding-top:10px}
+.pp-processo-unico .pp-d{margin-bottom:2px}
+.pp-ref-grupo .pp-ref-text{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12.5px;line-height:1.55}
+.pp-ref-grupo .pp-ref-text:not(:first-child){margin-top:5px}
+.pp-ref-grupo p.meta{margin:0}
+.pp-referencias .pp-interna>.pp-k:first-child{margin-top:0!important}
