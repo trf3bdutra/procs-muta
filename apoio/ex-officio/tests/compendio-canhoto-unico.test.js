@@ -82,3 +82,13 @@ test('orientações fora do canhoto: no Breviário (capítulo 7) e em balão sob
   O.itens.forEach(i => assert.ok(H.includes(i.rotulo.replace(/&/g, '&amp;')), 'falta no Breviário: ' + i.rotulo));
   assert.ok(H.includes(O.itens.length + ' orientações'));
 });
+
+test('Minutário: fórmula única, ficha fornece dados, não um construtor paralelo',()=>{
+  const js=ler('fonte/editorial_d.js'), c=ler('fonte/consulta.js');
+  assert.doesNotMatch(js,/Automático · ficha|cxQual|cxPartes|cxBoot|cxMostra|cxSyncBar|DK\.cx|cx-host/);
+  assert.match(js,/var PT=xPartes\(\),FMT=/);
+  assert.match(js,/DK\.fonteManual=false;DK\.fonte='mat';DK\.mod='';/);
+  assert.match(js,/MutaGerador\.comporFicha\(cp,fo\)/);
+  assert.match(js,/function dkUsaModelo\(id\)/);
+  assert.match(c,/dkAplicaCaso\(P,\{tipo:'mat',mat:matrizDoCaso\(P\)\}\)/);
+});
