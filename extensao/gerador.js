@@ -416,27 +416,20 @@
   function pintar(forca) {
     var g = $('ger-app'); if (!g || (!forca && !visivel())) return;
     var p = $('panel-min'), y = p ? p.scrollTop : 0;
-    try { g.innerHTML = html(); } catch (e) { g.innerHTML = '<div class="empty">Gerador indisponível: ' + esc(e && e.message || e) + '</div>'; }
+    try { g.innerHTML = html(); if(window.MutaModelosHero)window.MutaModelosHero.montarGerador(g); } catch (e) { g.innerHTML = '<div class="empty">Gerador indisponível: ' + esc(e && e.message || e) + '</div>'; }
     if (p) p.scrollTop = y;
   }
   function modo(m) {
-    if (m === 'cor') { try { m = localStorage.getItem('hero18810:corModo') === 'conf' ? 'conf' : 'cmp'; } catch(e) { m = 'cmp'; } }
-    if (m === 'cmp' || m === 'conf') { try { localStorage.setItem('hero18810:corModo',m); } catch(e) {} }
-    m = m === 'ger' || m === 'conf' || m === 'dir' ? m : 'cmp'; try { localStorage.setItem(MM_K, m); } catch (e) {}
-    var bl = typeof document !== 'undefined' ? document.querySelector('[data-mm="lote"]') : null; if (bl) bl.hidden = !gestor();
-    var ger = m === 'ger', cor = m === 'cmp' || m === 'conf';
-    var cm = $('cor-modos'); if(cm) cm.hidden = !cor;
-    /* Comparar (com o CORTEX embaixo) | Gerador | Conformidade */
-    var ca = $('cmp-app'); if (ca) ca.hidden = m !== 'cmp';
-    /* 0.45: o CORTEX saiu de baixo do Comparar e virou aba própria, só do gestor */
-    var pl = $('panel-lote'); if (pl) { pl.hidden = m !== 'lote'; if (m === 'lote') { pl.open = true; if (window.MutaLote && window.MutaLote.abrir) window.MutaLote.abrir(); } }
-    var g = $('ger-app'); if (g) g.hidden = !ger;
-    var cf = $('min-conf'); if (cf) cf.hidden = m !== 'conf';
-    var dr = $('dir-app'); if (dr) dr.hidden = m !== 'dir';
-    if (m === 'dir' && window.MutaDiretrizes && window.MutaDiretrizes.abrir) window.MutaDiretrizes.abrir();
-    if (m === 'conf' && window.MutaConformidade && window.MutaConformidade.abrir) window.MutaConformidade.abrir();
-    if (typeof document !== 'undefined') Array.prototype.forEach.call(document.querySelectorAll('[data-mm]'), function (b) { b.setAttribute('aria-selected', String(b.dataset.mm === m || (b.dataset.mm === 'cor' && cor))); });
-    if (ger) pintar(true);
+    var dir=$('dir-consulta');
+    if(m==='dir'&&dir){dir.hidden=!dir.hidden;if(!dir.hidden){dir.open=true;if(window.MutaDiretrizes)window.MutaDiretrizes.abrir();}return;}
+    var ger=m==='ger',cor=!ger;
+    try{localStorage.setItem(MM_K,ger?'ger':'cmp');}catch(e){}
+    var ca=$('cmp-app'),cf=$('min-conf'),g=$('ger-app');
+    if(ca)ca.hidden=!cor;if(cf)cf.hidden=!cor;if(g)g.hidden=!ger;
+    if(cor&&window.MutaConformidade){window.MutaConformidade.abrir();if(m==='conf'&&cf){cf.open=true;cf.scrollIntoView({block:'nearest'});}}
+    if(cor&&window.MutaComparar)window.MutaComparar.abrir();
+    if(typeof document!=='undefined')document.querySelectorAll('.min-modos [role="tab"]').forEach(function(b){b.setAttribute('aria-selected',String(b.dataset.mm===(ger?'ger':'cor')));});
+    if(ger)pintar(true);
   }
   function abrir() { modo(modoMin()); }
   try { if (window.MutaSessao && window.MutaSessao.ouvir) window.MutaSessao.ouvir(function () { var p = $('panel-min'); if (p && !p.hidden) modo(modoMin()); else { var b = typeof document !== 'undefined' ? document.querySelector('[data-mm="lote"]') : null; if (b) b.hidden = !gestor(); } }); } catch (e) {}
