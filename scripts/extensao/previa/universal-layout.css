@@ -891,3 +891,10 @@ html body.hero-redesign-v53 #gab section.hero-steps .pv-stage-btn{width:27px!imp
 html body.hero-redesign-v53 #gab section.hero-steps .pv-stage.at .pv-stage-btn{border:1.5px solid var(--stage-color,var(--p53-accent,var(--ok)))!important;color:var(--stage-color,var(--p53-accent,var(--ok)))!important}
 html body.hero-redesign-v53 #gab section.hero-steps .pv-stage.ok .pv-stage-btn{background:var(--stage-color,var(--p53-accent,var(--ok)))!important;color:white!important;border-color:var(--stage-color,var(--p53-accent,var(--ok)))!important}
 html body.hero-redesign-v53 #gab section.hero-steps .pv-stage.pend{opacity:1}
+
+/* Leitura dos autos: ação e horário na linha do título, não em faixa separada. */
+html body.hero-redesign-v53 #gab #g-lei>.pc-sh{display:flex!important;align-items:center!important;gap:5px!important;flex-wrap:wrap;min-width:0;margin:0 0 8px!important;padding:0 0 7px!important}
+html body.hero-redesign-v53 #gab #g-lei>.pc-sh h3{flex:1 1 auto;min-width:0;margin:0!important}
+html body.hero-redesign-v53 #gab #g-lei>.pc-sh>small{margin:0!important;flex:0 0 auto;font-size:10px!important;white-space:nowrap}
+html body.hero-redesign-v53 #gab #g-lei .au-leitura-actions{display:inline-flex;align-items:center;gap:4px;flex:0 0 auto;margin-left:auto}
+html body.hero-redesign-v53 #gab #g-lei .au-leitura-actions .btn{min-height:24px;font-size:10.5px;padding:3px 7px;white-space:nowrap}

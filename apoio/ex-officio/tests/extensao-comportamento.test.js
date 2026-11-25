@@ -304,6 +304,8 @@ test('universal 0.74.2: faixa das abas sem caixa, títulos sem repetição em Au
     await pg.waitForSelector('.hero-v53-tabs', { timeout: 15000 });
     await pg.click('.hero-v53-tabs [data-aba="Autos"]');
     await pg.waitForSelector('#g-docs', { timeout: 15000 });
+    assert.equal(await pg.locator('#g-lei>.pc-sh [data-au="ler"]').count(),1,'botão de leitura no cabeçalho');
+    assert.equal(await pg.locator('#g-lei [data-au="ler"]').count(),1,'sem botão duplicado');
     const v = await pg.evaluate(() => {
       const cs = e => getComputedStyle(e), pm = document.querySelector('#gab .pc.pm');
       return {

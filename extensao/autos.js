@@ -778,13 +778,12 @@ function resumoLeitura() {
 }
 function htmlLeitura() {
   var tela = window.MutaPje && window.MutaPje.tela ? window.MutaPje.tela() : '';
-  var h = '<section class="card pc-sec cf" id="g-lei"><div class="pc-sh"><h3>Leitura dos autos</h3><small class="muted">' + (A.itens && lidoDoProcesso() ? 'lidos às ' + hora() : 'cronologia do PJe') + '</small></div>';
+  var h = '<section class="card pc-sec cf" id="g-lei"><div class="pc-sh"><h3>Leitura dos autos</h3><small class="muted">' + (A.itens && lidoDoProcesso() ? 'lidos às ' + hora() : 'cronologia do PJe') + '</small><div class="au-leitura-actions">'+botaoLer()+'</div></div>';
   var chk = '<label class="au-sw" title="Lidos os autos, lê as peças principais e põe nos campos vazios da ficha o que achou (nunca troca o que já está gravado)"><input type="checkbox" data-au-auto' + (autoLigado() ? ' checked' : '') + '> Preencher sozinho</label>';
-  if (A.erro) return h + '<div class="bar au-bl">' + botaoLer() + '</div><p class="status err">' + esc(A.erro) + '</p></section>';
-  if (!A.itens) return h + '<div class="bar au-bl">' + botaoLer() + '</div><p class="muted">' + (tela === 'autos' ? 'Leia os autos: o Roteiro se preenche com o que for achado.' : 'Abra os autos digitais no PJe.') + '</p></section>';
-  if (!lidoDoProcesso()) return h + '<div class="bar au-bl">' + botaoLer() + '</div><p class="status err">Os autos lidos são do processo ' + esc(A.cnj || 'sem número') + ', não do aberto no painel. Leia de novo na aba dos autos certos.</p></section>';
-  return h + '<div class="bar au-bl">' + botaoLer() + '</div>' +
-    resumoLeitura() + (A.sugMsg ? '<p class="status err">' + esc(A.sugMsg) + '</p>' : '') + '</section>';
+  if (A.erro) return h + '<p class="status err">' + esc(A.erro) + '</p></section>';
+  if (!A.itens) return h + '<p class="muted">' + (tela === 'autos' ? 'Leia os autos: o Roteiro se preenche com o que for achado.' : 'Abra os autos digitais no PJe.') + '</p></section>';
+  if (!lidoDoProcesso()) return h + '<p class="status err">Os autos lidos são do processo ' + esc(A.cnj || 'sem número') + ', não do aberto no painel. Leia de novo na aba dos autos certos.</p></section>';
+  return h + resumoLeitura() + (A.sugMsg ? '<p class="status err">' + esc(A.sugMsg) + '</p>' : '') + '</section>';
 }
 /* Autos › A conferir: os alertas e o que a leitura achou e não foi sozinho para a ficha (diverge, ou com o automático desligado) */
 function htmlConferir() {
