@@ -53,8 +53,8 @@ async function acharNaPauta(data, cnj) {
 async function marcar(data, achado, p) {
   const { gravarItem } = require('./pauta');
   /* o tipo vai para o campo do cartão (sopref); advogado, OAB, parte e recebimento vão para a seção do prontuário (cartao.so) */
-  const so = { advogado: p.advogado || '', oab: p.oab || '', parte: p.parte || '', recebido: p.recebidoEm ? dataLocal(p.recebidoEm) : '', origem: 'e-mail', pedido: p.id || '' };
-  return gravarItem(data, { cnj: p.cnj, lista: achado.lista, campos: { sopref: p.tipo, cartao: { so } } }, 'AgentMail', false);
+  const so = { advogado: p.advogado || '', oab: p.oab || '', parte: p.parte || '', recebido: p.recebidoEm ? dataLocal(p.recebidoEm) : '', origem: p.origem === 'manual' ? 'manual' : 'e-mail', pedido: p.id || '' };
+  return gravarItem(data, { cnj: p.cnj, lista: achado.lista, campos: { sopref: p.tipo, cartao: { so } } }, p.origem === 'manual' ? p.registradoPor : 'AgentMail', false);
 }
 function acharNoDocumento(dados, cnj) {
   const lista = (dados.itens || []).length ? 'itens' : 'previa';
@@ -84,7 +84,7 @@ async function paraUsuario(usuario, registros, obterSessao, gestor = L.gestor(us
   const pedidos = await Promise.all(registros.map(async pedido => {
     const data = pedido.vinculo?.sessao;
     if (pedido.estado !== 'vinculado' || !L.dataOk(data)) {
-      return assessoria ? { ...pedido, vinculo: null } : null;
+      return assessoria || L.norm(pedido.registradoPor)===eu ? { ...pedido, vinculo: null } : null;
     }
     if (!sessoes.has(data)) sessoes.set(data, obterSessao(data));
     const dados = await sessoes.get(data);
@@ -93,8 +93,8 @@ async function paraUsuario(usuario, registros, obterSessao, gestor = L.gestor(us
     if (!assessoria && ![item.servidor, item.corretor].some(n => nomes.has(L.norm(n)))) return null;
     return { ...pedido, vinculo: { sessao: data, item: item.item, lista: item.lista } };
   }));
-  return pedidos.filter(Boolean).map(({ id, tipo, cnj, data, advogado, oab, parte, recebidoEm, vinculadoEm, estado, vinculo }) =>
-    ({ id, tipo, titulo: tipoExibido(tipo), cnj, data, advogado, oab, parte, recebidoEm, vinculadoEm, estado, vinculo }));
+  return pedidos.filter(Boolean).map(({ id, tipo, cnj, data, advogado, oab, parte, recebidoEm, vinculadoEm, estado, vinculo, origem, registradoPor }) =>
+    ({ id, tipo, titulo: tipoExibido(tipo), cnj, data, advogado, oab, parte, recebidoEm, vinculadoEm, estado, vinculo, origem: origem || 'e-mail', registradoPor }));
 }
 
 async function obterSessao(data) {
@@ -208,14 +208,25 @@ module.exports = async (req, res) => {
         registros = registros.filter(r => dataLocal(r.recebidoEm) === hoje || dataLocal(r.vinculadoEm) === hoje);
       } else {
         if (data) registros = registros.filter(r => (r.vinculo?.sessao || r.data) === data);
-        if (cnj) registros = registros.filter(r => dg(r.cnj) === dg(cnj) && r.estado === 'vinculado');
+        if (cnj) registros = registros.filter(r => dg(r.cnj) === dg(cnj) );
       }
       const pedidos = await paraUsuario(u, registros, obterSessao);
       return res.status(200).json({ registros: pedidos, ...(fechamento && { data: hoje }) });
     }
     if (req.method !== 'POST') return res.status(405).json({ erro: 'método não aceito' });
-    if (!L.gestor(u)) return res.status(403).json({ erro: 'Só o gestor vincula pedidos à mão.' });
     const b = req.body || {};
+    if(b.manual===true){
+      const cnj=cnjFmt(b.cnj),tipo=String(b.tipo||''),data=String(b.data||''),advogado=String(b.advogado||'').trim().slice(0,180),oab=String(b.oab||'').trim().slice(0,40),parte=String(b.parte||'').trim().slice(0,180);
+      if(!cnj||!L.dataOk(data)||!['Presencial','Virtual','Preferência'].includes(tipo)||!advogado||!parte)return res.status(400).json({erro:'Informe processo, sessão, modalidade, advogado e parte representada.'});
+      const achado=await acharNaPauta(data,cnj),ac=await L.acessos(u);
+      if(!L.gestor(u)&&!ac.desembargador&&!ac.assessoria&&(!achado||![achado.servidor,achado.corretor].some(n=>L.norm(n)===L.norm(u))))return res.status(403).json({erro:'Registro permitido à equipe designada ou à assessoria.'});
+      const id='so-m-'+crypto.createHash('sha256').update([cnj,data,tipo,L.norm(advogado),L.norm(oab),L.norm(parte)].join('|')).digest('hex').slice(0,20);
+      const existentes=await lerRegistros(),ant=existentes.find(r=>r.id===id||(dg(r.cnj)===dg(cnj)&&r.data===data&&r.tipo===tipo&&L.norm(r.advogado)===L.norm(advogado)&&L.norm(r.parte)===L.norm(parte)));
+      if(ant)return res.status(200).json({ok:true,pedido:ant,duplicado:true});
+      const p={id,cnj,tipo,data,advogado,oab,parte,origem:'manual',registradoPor:u,recebidoEm:new Date().toISOString()};
+      return res.status(200).json({ok:true,pedido:await tratar(p)});
+    }
+    if (!L.gestor(u)) return res.status(403).json({ erro: 'Só o gestor vincula pedidos à mão.' });
     if (b.reconciliar === true) {
       const resultados = await reconciliarPedidos();
       return res.status(200).json({ resultados });
