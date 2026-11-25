@@ -92,6 +92,7 @@ var DIM={
   y:{n:'Mês',v:function(x){return x.y||'—';}}
 };
 var DIMS=['t','apr','ramo','mat','ass','tc','c','o','res','y'];
+if(window.EMENT_FONTE){DIM.rl={n:'Relator',v:function(x){return x.rl||'Relator não informado';}};DIMS.splice(1,0,'rl');}
 var MODOS=[['lista','Lista'],['mapa','Mapa mental'],['tempo','Linha do tempo'],['matriz','Matriz']];
 var Y4=(function(){var d=new Date();return (d.getFullYear()-4)+'-'+('0'+(d.getMonth()+1)).slice(-2);})();
 var E={idx:null,err:null,carregando:false,F:{},q:'',qm:'idx',ord:'data',y1:'',y2:'',modo:'lista',shown:60,open:{},sel:null,mais:{},
@@ -192,7 +193,9 @@ function renderAside(){
   var opt=function(v){return '<option value="">—</option>'+anos.map(function(y){return '<option value="'+y+'"'+(y===v?' selected':'')+'>'+mesL(y)+'</option>';}).join('');};
   a+='<div class="lab">Período</div><div class="e-yr"><select id="e-y1" aria-label="Ano inicial">'+opt(E.y1)+'</select> a <select id="e-y2" aria-label="Ano final">'+opt(E.y2)+'</select></div>';
   var base=function(d){return E.idx.filter(function(x){return passa(x,d);});};
+  if(DIM.rl)a+=facet('rl','Relator',base('rl'),8);
   a+=facet('apr','Apreciação',base('apr'),6)+facet('ramo','Ramo',base('ramo'),8)+facet('mat','Matéria',base('mat'),8)+facet('ass','Assunto',base('ass'),8)+facet('tc','Tipo de caso',base('tc'),8)+facet('res','Resultado',base('res'),8)+facet('o','Órgão julgador',base('o'),6)+facet('c','Classe',base('c'),8);
+  if(window.EMENT_NOTA)a+='<div class="note">'+window.EMENT_NOTA+' ('+(SER.ok?n0(SER.n)+' registros':'carregando')+').</div>';else
   a+='<div class="note">Julgamentos do Relator: os curados do gabinete (procs-muta · precedentes, com ramo, assunto e resultado catalogados) e a série histórica da Base de Jurisprudência do TRF-3 ('+(SER.ok?n0(SER.n)+' registros, 1999-2026':'carregando')+'), sem curadoria: ramo, assunto e resultado vêm da ementa, por classificação automática. Inteiro teor disponível para '+n0(E.idx.filter(function(x){return x.it;}).length)+' julgamentos.</div>';
   var as=$('#e-aside'),st=as.scrollTop;as.innerHTML=a;as.scrollTop=st;
   $$('#e-tipo button').forEach(function(b){b.onclick=function(){setF('t',b.getAttribute('data-v'));};});
@@ -237,7 +240,7 @@ function linha(x){
   var h='<li class="e-proc'+(sel?' sel':'')+(op?' open':'')+'" data-id="'+x.id+'"><div class="e-crow" data-act="abrir">';
   h+='<div class="e-c0"><button class="e-chev" data-act="tg" aria-expanded="'+op+'" aria-label="'+(op?'Recolher':'Expandir')+'">'+ICO.chev+'</button><span class="e-tag '+x.t+'" title="'+(x.t==='A'?'Acórdão':'Decisão monocrática')+'">'+x.t+'</span></div>';
   h+='<div class="e-c1"><span class="e-num">'+esc(x.n)+'</span><span class="e-sub" title="'+esc(x.cl||'')+'">'+esc(x.c||'')+' · '+esc(x.cl||'')+'</span></div>';
-  h+='<div class="e-c2"><span class="e-ass" title="'+esc(tit+(x.tc?' › '+x.tc:''))+'">'+esc(tit)+(tcResto(x)?'<span class="e-subl"> › '+esc(tcResto(x))+'</span>':'')+'</span><div class="e-ctags">'+(APRS[x._apr]?'<span class="e-ct apr" title="'+esc(x._apr)+'">'+esc(APRS[x._apr])+'</span>':'')+'<span class="e-ct org" title="'+esc(x.o||'Órgão não informado')+'">'+esc(siglaO(x.o))+'</span>'+(x._ramo?'<span class="e-ct ramo">'+esc(x._ramo)+'</span>':'')+'<span class="e-ct res" style="--rc:'+corRes(x._res)+'" title="'+esc(x.r||x._res)+'">'+esc(x._res)+'</span>'+(x.it?'<span class="e-ct dash" title="Inteiro teor na base">inteiro teor</span>':'')+'</div></div>';
+  h+='<div class="e-c2"><span class="e-ass" title="'+esc(tit+(x.tc?' › '+x.tc:''))+'">'+esc(tit)+(tcResto(x)?'<span class="e-subl"> › '+esc(tcResto(x))+'</span>':'')+'</span><div class="e-ctags">'+(APRS[x._apr]?'<span class="e-ct apr" title="'+esc(x._apr)+'">'+esc(APRS[x._apr])+'</span>':'')+(x.rl?'<span class="e-ct org" title="Relator: '+esc(x.rl)+'">'+esc(x.rl.replace(/^(DES(EMBARGADOR[A]?)?\.? ?FED(ERAL)?\.?|JUIZ[A]? FEDERAL CONVOCAD[OA]|JU[IÍ]ZA? CONV\.?)\s*/i,'').split(/\s+/).slice(-2).join(' '))+'</span>':'')+'<span class="e-ct org" title="'+esc(x.o||'Órgão não informado')+'">'+esc(siglaO(x.o))+'</span>'+(x._ramo?'<span class="e-ct ramo">'+esc(x._ramo)+'</span>':'')+'<span class="e-ct res" style="--rc:'+corRes(x._res)+'" title="'+esc(x.r||x._res)+'">'+esc(x._res)+'</span>'+(x.it?'<span class="e-ct dash" title="Inteiro teor na base">inteiro teor</span>':'')+'</div></div>';
   var sn=trechoLinha(x);
   h+='<div class="e-c3"><span class="e-dt" title="Julgado em">'+fmtD(x.d)+'</span><button class="e-ib" data-act="cit" title="Copiar citação" aria-label="Copiar citação">'+ICO.cit+'</button><button class="e-ib" data-act="abrir" title="Abrir" aria-label="Abrir">'+ICO.doc+'</button></div></div>';
   if(sn)h+='<div class="e-snip">'+sn+'</div>';
@@ -262,7 +265,7 @@ function vLista(L,out){
 var POR_ID=null;
 function porId(id){if(!POR_ID){POR_ID={};E.idx.forEach(function(x){POR_ID[x.id]=x;});}return POR_ID[id];}
 function citacao(x){
-  return (x.c||'')+' '+x.n+', Rel. Des. Fed. CARLOS MUTA, [VALIDAR: veículo] '+fmtD(x.p||x.d)+': "'+String(x.e||'').replace(/\s*\n\s*/g,' ').trim()+'"';
+  return (x.c||'')+' '+x.n+', Rel. '+(x.rl?x.rl:'Des. Fed. CARLOS MUTA')+', [VALIDAR: veículo] '+fmtD(x.p||x.d)+': "'+String(x.e||'').replace(/\s*\n\s*/g,' ').trim()+'"';
 }
 function painel(html,ondeSplit){
   var d=$('#e-det');if(d&&d.parentNode.classList.contains('rot'))d=null;
@@ -297,7 +300,7 @@ function abrirIT(x){
   var h='<div class="e-dhead pp"><div class="e-dtit"><span class="e-tag '+x.t+'">'+(x.t==='A'?'Acórdão':'Decisão monocrática')+'</span><span class="e-num big">'+esc(x.n)+'</span><button class="e-dx" data-dx title="Fechar (Esc)" aria-label="Fechar">×</button></div>';
   h+='<div class="pp-path">'+esc(x._rd||x._ramo||'Área não informada')+'</div><h2 class="pp-ass">'+esc(ass)+(tcResto(x)?'<span class="pp-sub"> › '+esc(tcResto(x))+'</span>':'')+'</h2>'+(x.tc?'<p class="pp-tc" title="Matéria · tipo · aspecto distintivo — o mesmo padrão dos processos; a matéria liga o precedente ao processo">Tipo de caso: <b>'+esc(x.tc)+'</b>'+(x.tcS?' <small title="Sugerido pelo agrupamento automático; conferir na curadoria">sugerido</small>':'')+'</p>':'');
   h+='<div class="pp-chips"><span class="pp-res" style="--rc:'+corRes(x._res)+'">'+esc(x._res)+'</span>'+(x._apr?'<span>'+esc(x._apr)+'</span>':'')+'<span title="'+esc(x.cl||'')+'">'+esc(x.c||x.cl||'')+'</span><span title="'+esc(x.o||'')+'">'+esc(siglaO(x.o))+'</span>'+(it?'<span class="ok">inteiro teor</span>':'')+'</div>';
-  h+='<div class="pp-dt">Julgado em <b>'+fmtD(x.d)+'</b>'+(x.p?' · publicado em <b>'+fmtD(x.p)+'</b>':'')+' · Rel. CARLOS MUTA'+(x.cl?' · '+esc(x.cl):'')+'</div>';
+  h+='<div class="pp-dt">Julgado em <b>'+fmtD(x.d)+'</b>'+(x.p?' · publicado em <b>'+fmtD(x.p)+'</b>':'')+' · Rel. '+esc(x.rl||'CARLOS MUTA')+(x.cl?' · '+esc(x.cl):'')+'</div>';
   h+='<div class="e-dacts"><button class="e-mini pri" data-dcit>'+ICO.cit+'Copiar citação</button><button class="e-mini" data-dem>Copiar ementa</button>'+(it?'<button class="e-mini" data-dit>Copiar inteiro teor</button>':'')+'<button class="e-mini" data-ddocx>.docx</button><button class="e-mini" data-dpdf>PDF</button></div></div>';
   h+='<div class="e-dbody pp-b">';
   /* 2. tese e resultado */
@@ -329,7 +332,7 @@ function abrirIT(x){
     h+='<ul class="pp-rel">'+outros.slice(0,5).map(function(z){return '<li data-pprel="'+z.id+'"><span class="e-tag '+z.t+'">'+z.t+'</span><b>'+esc(z.n)+'</b><span class="meta">'+fmtD(z.d)+'</span><span class="pp-res sm" style="--rc:'+corRes(z._res)+'">'+esc(z._res)+'</span></li>';}).join('')+'</ul>'+(outros.length>5?'<button class="pp-more" data-ppall>Ver os '+MS.length+' julgados do assunto</button>':'');}
   /* 10. rastreabilidade */
   var R=x.rast||{};
-  if(x.serie)R={arq:'precedentes/jurisprudencia/'+(x.t==='A'?'acordaos':'monocraticas')+'/'+x.ano+'.json.gz',ln:'—',cur:'série histórica sem curadoria (Base de Jurisprudência do TRF-3)'};
+  if(x.serie)R=window.EMENT_FONTE?{arq:'precedentes/collegium/'+(x.t==='A'?'acordaos':'monocraticas')+'/'+x.ano+'.json.gz',ln:'—',cur:'sem curadoria (Diário de Justiça Eletrônico Nacional · CNJ)'}:{arq:'precedentes/jurisprudencia/'+(x.t==='A'?'acordaos':'monocraticas')+'/'+x.ano+'.json.gz',ln:'—',cur:'série histórica sem curadoria (Base de Jurisprudência do TRF-3)'};
   h+='<div class="pp-rast"><div class="pp-k">Rastreabilidade</div><code>'+(R.it?'SHA-256 do inteiro teor: '+esc(R.it.sha)+'<br>Inteiro teor: '+esc(R.it.arq)+' · linha '+R.it.ln+'<br>':'')+'Registro: '+esc(R.arq||'precedentes/precedentes.jsonl')+' · linha '+(R.ln||'—')+' · id '+esc(x.id)+(R.idAnt?'<br>Id anterior: '+esc(R.idAnt):'')+'<br>Curadoria: '+esc(R.cur||'—')+'</code>'+(R.fonte?'<p>'+esc(R.fonte)+'</p>':'')+(R.origens&&R.origens.length?'<p>Origens: '+R.origens.map(esc).join(' · ')+'</p>':'')+'<p>A versão oficial é o documento assinado no PJe e a publicação no diário. A citação traz [VALIDAR: veículo], porque a base não registra o veículo de publicação.</p></div></div>';
   var box=painel(h,true);
   box.querySelector('[data-dx]').onclick=function(){fecharIT();};
@@ -1225,10 +1228,11 @@ function deSerie(r){
     temas:'',tese:'',disp:'',jur:'',it:r.k==='integral',tags:[],sub:'',esp:'',ano:r.y||String(r.d||'').slice(0,4)};
   x.y=(x.d||'').slice(0,7);x._apr=apreciacao({ementa:x.e,resultado:x.r,classeSigla:x.c});ramoAss(x);x._rd='';
   x._res=x.r?classRes(x.r):'Sem classificação';
-  x._q=nz([x.n,x.c,x.cl,x.o,x.e,x.r,x._ass].join(' '));if(x.c&&x.cl&&!E.clsNome[x.c])E.clsNome[x.c]=x.cl;return x;
+  if(r.rl)x.rl=r.rl;if(r.g)x.gab=r.g;
+  x._q=nz([x.n,x.c,x.cl,x.o,x.e,x.r,x._ass,x.rl||''].join(' '));if(x.c&&x.cl&&!E.clsNome[x.c])E.clsNome[x.c]=x.cl;return x;
 }
 function serie(cur){
-  SER.base=/^https?:/.test(location.protocol)?'/jurisprudencia/':null;
+  SER.base=/^https?:/.test(location.protocol)?(window.EMENT_FONTE||'/jurisprudencia/'):null;
   if(!SER.base){SER.erro='a série histórica só abre no site';return;}
   Promise.all([baixaGz(SER.base+'indice.json.gz').then(JSON.parse),baixaGz(SER.base+'busca/indice.json').then(JSON.parse).catch(function(){return null;})]).then(function(v){
     var I=v[0],M=v[1],por={};SER.man=M&&M.arquivos||null;
@@ -1305,7 +1309,7 @@ function arquivoTxt(nome){
   return baixaGz(SER.base+'busca/'+nome+'.txt.gz').then(function(t){var n=nz(t);var o={t:t,n:n.length===t.length?n:null};FT.cache[nome]=o;FT.ordem.push(nome);while(FT.ordem.length>8)delete FT.cache[FT.ordem.shift()];return o;});
 }
 function textoSerie(x){
-  var nome=x.sid.charAt(0)+'-'+x.ano;
+  var nome=(x.serie&&x.t?x.t:x.sid.charAt(0))+'-'+x.ano;
   return arquivoTxt(nome).then(function(o){
     var t=o.t,i=t.indexOf('\n'+x.sid+'\t');if(i<0&&t.indexOf(x.sid+'\t')===0)i=-1;else if(i<0){x._itFalhou=1;return;}
     var a=i+1,b=t.indexOf('\n',a);var l=t.slice(a,b<0?t.length:b).split('\t');
@@ -1325,7 +1329,7 @@ function buscaIntegral(){
   var tok=FT.tok,base=E.idx.filter(function(x){return passa(x,'__q');}),cand={},need={};
   var ft={q:E.q,P:P,hits:{},lidos:0,total:0,busy:true,atual:''};
   base.forEach(function(x){
-    if(x.sid&&SER.base){cand[x.sid]=1;need[x.sid.charAt(0)+'-'+x.ano]=1;return;}
+    if(x.sid&&SER.base){cand[x.sid]=1;need[(x.serie&&x.t?x.t:x.sid.charAt(0))+'-'+x.ano]=1;return;}
     var t=((BASE&&BASE.it&&BASE.it[x.id])||'');var o=(x.e||'')+'\u2029'+t,h=avalia(P,o,nz(o));if(h)ft.hits[x.id]=h;});
   var nomes=Object.keys(need).filter(function(k){return !SER.man||SER.man[k];}).sort().reverse();
   ft.total=nomes.length;E.ft=ft;E.qp=null;render();

@@ -12,6 +12,7 @@ o (órgão), l (link do documento no PJe), x (texto integral)}, já sem repetiç
 O que faz:
 - Acórdãos: os registros da série com conteudo_texto "apenas_ementa" recebem o inteiro teor do DJEN quando o
   número do processo e a data do julgamento coincidem; passam a "integral", com partes, resultado e hash.
+  Os que não estão na série (outro processo ou outra data) entram como registros novos (A…), com inteiro teor.
 - Monocráticas ("Decisão Monocrática Terminativa…"): entram as que ainda não estão na série (mesmo processo e
   mesmo início de texto), com ids novos (M…).
 - Data da decisão/julgamento: lida do número do documento no link do PJe (x=AAMMDDhhmmss…, data da assinatura),
@@ -24,6 +25,9 @@ from collections import Counter
 from pathlib import Path
 import importlib.util
 
+import sys as _sys
+_sys.path.insert(0, str(Path(__file__).resolve().parent))
+import djen  # noqa: E402
 _spec = importlib.util.spec_from_file_location("ae", Path(__file__).with_name("acrescentar_ementas.py"))
 ae = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(ae)
@@ -95,13 +99,42 @@ def main():
             arqs[k] = json.load(gzip.open(p)) if p.exists() else {"tipo": tipo, "ano": y, "total": 0, "registros": []}
         return arqs[k]
 
-    # acórdãos: completar os "apenas_ementa"
+    siglas = Counter()
+    for x in idx:  # sigla da classe pelo nome, como a série já registra
+        if x.get("c") and x.get("cl"):
+            siglas[(x["cl"].upper(), x["c"])] += 1
+    sigla_de = {}
+    for (nome, sg), n in siglas.most_common():
+        sigla_de.setdefault(nome, sg)
+    # acórdãos: completar os "apenas_ementa" e acrescentar os que faltam
     completados = 0
+    proxA = max(int(r["id"][1:]) for r in man["registros"] if r["id"].startswith("A")) + 1
+    novosA = []
     for i in [x for x in itens if x["t"] == "Acórdão"]:
         dj = data_link(i["l"])
         if not dj:
             continue
         d = arq("acordaos", dj[6:])
+        if not any(r["numero_processo"] == i["p"] and r["data_julgamento"] == dj for r in d["registros"]):
+            texto = norm(i["x"])
+            ementa, _ = djen.ementa_e_acordao(texto)
+            completo, curto = resultado(texto)
+            nome_cl = (i.get("c") or "").upper()
+            reg = {"id": f"A{proxA:05d}", "seq": None, "numero_processo": i["p"], "classe_sigla": sigla_de.get(nome_cl),
+                   "classe": nome_cl or None, "numero_classe_legado": None, "orgao_julgador": "Turma Regional de Mato Grosso do Sul",
+                   "relator": "Desembargador Federal LUIS CARLOS HIROKI MUTA", "relator_no_documento": "RELATOR: " + (i.get("o") or ""),
+                   "data_julgamento": dj, "data_julgamento_iso": ae.iso(dj), "publicacao_veiculo": "DJEN", "data_publicacao": None,
+                   "data_disponibilizacao_djen": "/".join(reversed((i.get("d") or "").split("-"))), "publicacao_complemento": None,
+                   "partes": partes(texto), "resultado_colegiado": completo, "ementa": ementa, "inteiro_teor": texto,
+                   "possui_inteiro_teor": True, "caracteres_inteiro_teor": len(texto),
+                   "link_pje": "https://pje2g.trf3.jus.br/pje/ConsultaPublica/listView.seam?numProcesso=" + re.sub(r"\D", "", i["p"]),
+                   "link_integra_externa": None, "link_impressao": None, "link_pdf": None, "link_documento_djen": i["l"],
+                   "atuacao_muta": "relator", "sha256_inteiro_teor": ae.sha(texto), "sha256_ementa": ae.sha(ementa),
+                   "conteudo_texto": "integral", "fonte_inteiro_teor": "DJEN", "data_julgamento_fonte": "número do documento no PJe (DJEN)"}
+            proxA += 1
+            d["registros"].append(reg)
+            novosA.append((dj[6:], reg, curto))
+            continue
         for r in d["registros"]:
             if r["numero_processo"] == i["p"] and r["data_julgamento"] == dj and r["conteudo_texto"] == "apenas_ementa":
                 texto = norm(i["x"])
@@ -121,13 +154,6 @@ def main():
 
     # monocráticas: acrescentar as que faltam
     prox = max(int(r["id"][1:]) for r in man["registros"] if r["id"].startswith("M")) + 1
-    siglas = Counter()
-    for x in idx:  # sigla da classe pelo nome, como a série já registra
-        if x.get("c") and x.get("cl"):
-            siglas[(x["cl"].upper(), x["c"])] += 1
-    sigla_de = {}
-    for (nome, sg), n in siglas.most_common():
-        sigla_de.setdefault(nome, sg)
     novas = []
     for i in [x for x in itens if x["t"].startswith("Decisão Monocrática")]:
         dj = data_link(i["l"])
@@ -160,13 +186,19 @@ def main():
         d["registros"].append(reg)
         novas.append((y, reg))
 
-    print(f"acórdãos completados: {completados} · monocráticas novas: {len(novas)} {dict(Counter(y for y, _ in novas))}")
+    print(f"acórdãos completados: {completados} · acórdãos novos: {len(novosA)} · monocráticas novas: {len(novas)} {dict(Counter(y for y, _ in novas))}")
     if a.simular:
         return
 
     for (tipo, y), d in arqs.items():
         d["total"] = len(d["registros"])
         ae.grava_gz(J / tipo / f"{y}.json.gz", d)
+    for y, reg, curto in novosA:
+        idx.append({"id": reg["id"], "t": "A", "n": reg["numero_processo"], "c": reg["classe_sigla"], "cl": reg["classe"],
+                    "o": reg["orgao_julgador"], "d": reg["data_julgamento_iso"], "p": None, "v": "DJEN", "a": "relator",
+                    "k": "integral", "e": ae.resumo(reg["ementa"]), "r": curto, "y": y})
+        man["registros"].append({"id": reg["id"], "arquivo": f"dados/acordaos/{y}.json.gz",
+                                 "sha256_inteiro_teor": reg["sha256_inteiro_teor"], "sha256_ementa": reg["sha256_ementa"]})
     for y, reg in novas:
         idx.append({"id": reg["id"], "t": "M", "n": reg["numero_processo"], "c": reg["classe_sigla"], "cl": reg["classe"],
                     "o": reg["orgao_julgador"], "d": reg["data_decisao_iso"], "p": reg["data_publicacao"], "v": "DJEN",
@@ -182,6 +214,12 @@ def main():
     pc = tot["acordaos_por_conteudo_texto"]
     pc["apenas_ementa"] -= completados
     pc["integral"] = pc.get("integral", 0) + completados
+    pc["integral"] += len(novosA)
+    tot["acordaos"] += len(novosA)
+    ca = man["contagem_por_ano"]["acordaos"]
+    for y, _, _ in novosA:
+        ca[y] = ca.get(y, 0) + 1
+    man["contagem_por_ano"]["acordaos"] = dict(sorted(ca.items()))
     tot["monocraticas"] += len(novas)
     cont = man["contagem_por_ano"]["monocraticas"]
     for y, _ in novas:
@@ -189,7 +227,7 @@ def main():
     man["contagem_por_ano"]["monocraticas"] = dict(sorted(cont.items()))
     man.setdefault("coletas_incrementais", []).append({
         "data": a.coleta, "colecao": "acordaos e monocraticas", "fonte": "DJEN (CNJ) — comunicaapi.pje.jus.br, orgaoId 101584",
-        "criterio": a.criterio, "lidos": len(itens), "acordaos_completados": completados,
+        "criterio": a.criterio, "lidos": len(itens), "acordaos_completados": completados, "acordaos_acrescentados": len(novosA),
         "monocraticas_acrescentadas": len(novas),
         "observacao": "texto do DJEN numa linha só; data da decisão lida do número do documento no PJe"})
 

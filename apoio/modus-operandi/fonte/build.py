@@ -179,6 +179,8 @@ if _M28.exists():
     except Exception as _ex:
         print('matriz 28,86%: conferência não rodou:', _ex)
 gz = base64.b64encode(gzip.compress(json.dumps(pacote, ensure_ascii=False, separators=(',', ':')).encode(), 9, mtime=0)).decode()
+# Collegium (/amicus/collegium/): o mesmo ementário, só com os julgados dos demais gabinetes da Turma Regional de MS (precedentes/collegium)
+gz_col = base64.b64encode(gzip.compress(json.dumps(dict(pacote, prec=[], it={}), ensure_ascii=False, separators=(',', ':')).encode(), 9, mtime=0)).decode()
 
 js_ = js
 EDJ = js(editorial)
@@ -245,6 +247,7 @@ def montar(var):
     abas = ''.join(lin[v] for v in ordem if v in lin)
     SL = '<span class="nx-sl" aria-hidden="true">/</span>'
     rotulo = ('<a class="eq-cmp" href="/amicus/compendium/">Compendium</a>' + SL + '<span class="eq-cmp eq-ed nx-on" aria-current="page">Editor<em>.</em></span>' if var == 'editor'
+              else '<a class="eq-cmp nx-on" href="/amicus/collegium/" aria-current="page">Collegium<em>.</em></a>' if var == 'collegium'
               else '<a class="eq-cmp nx-on" href="/amicus/compendium/" aria-current="page">Compendium<em>.</em></a>')
     k = t.index('<div class="brand tw"><i></i></div>\n') + len('<div class="brand tw"><i></i></div>\n')
     # barra editorial (Expediente), gêmea do Ex Officio: cadernos no título; as abas (.tab) seguem no cabeçalho, ocultas, e a faixa #cmp-nav as aciona
@@ -274,6 +277,24 @@ def montar(var):
         css += (H/'editor.css').read_text(encoding='utf-8')
         js = 'window.VDM_EDITOR=true;window.VDM_PAGINA_EDITOR=true;\n' + js
         t = t.replace('<title>Modus Operandi</title>', '<title>Editor · Compendium · Gabinete CMT</title>', 1)
+    elif var == 'collegium':
+        t = t.replace('<title>Modus Operandi</title>', '<title>Collegium · Turma Regional de MS · Gabinete CMT</title>', 1)
+        # só o Ementário: as demais seções (Editorial, Diretrizes, Enunciados, Repertório, Enciclopédia) ficam fora da página
+        for v in ('temas', 'rep', 'edit', 'dir', 'enc'):
+            t = re.sub(r'<button class="tab" role="tab" data-v="' + v + r'" aria-selected="(true|false)"([^>]*)>', r'<button class="tab" role="tab" data-v="' + v + r'" aria-selected="false"\2 hidden data-collegium-fora>', t)
+        t = troca(t, '<button class="tab" role="tab" data-v="ement" aria-selected="false">', '<button class="tab" role="tab" data-v="ement" aria-selected="true">')
+        t = troca(t, '<p>Precedentes do Relator: ementas, inteiros teores, catalogação e linha do tempo.</p>',
+                  '<p>Julgados dos demais gabinetes da Turma Regional de MS, sem os do Relator: ementas, relatores, catalogação e linha do tempo.</p>')
+        t = t.replace('<a class="mon-lnk" id="ed-lnk" href="/editor/" title="Abrir o editor do Compendium" hidden>', '<a class="mon-lnk" id="ed-lnk" href="/editor/" title="Abrir o editor do Compendium" hidden data-collegium-fora>', 1)
+        js = ('window.EMENT_FONTE="/collegium/";window.EMENT_COLETA_ROT="Última coleta no DJEN";'
+              'window.EMENT_COLETA_FONTE="Diário de Justiça Eletrônico Nacional (CNJ) · comunicaapi.pje.jus.br";'
+              'window.EMENT_NOTA="Julgados dos demais gabinetes da Turma Regional de Mato Grosso do Sul (Gab. B e Gab. C), sem os do Relator: '
+              'acórdãos e decisões monocráticas publicados no Diário de Justiça Eletrônico Nacional (CNJ), sem curadoria. Ramo, assunto e resultado '
+              'vêm da ementa, por classificação automática; o texto guardado é a ementa e o resultado (acórdãos) ou a abertura e o dispositivo (monocráticas)";\n'
+              + js + "\n;(function(){function vai(){var b=document.querySelector('.tab[data-v=\"ement\"]');if(b)b.click();"
+              "document.querySelectorAll('[data-collegium-fora],#cmp-nav .cn-b:not([data-cn=ement]),#cmp-nav .cn-sep,#cmp-nav .cn-g').forEach(function(e){e.hidden=true;});}"
+              "if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',vai);else vai();"
+              "document.addEventListener('cmt-acesso',function(){setTimeout(vai,0);setTimeout(vai,400);});setTimeout(vai,300);})();")
     else:
         t = t.replace('<title>Modus Operandi</title>', '<title>Compendium · Gabinete CMT</title>', 1)
     css += (H/'nav_editorial.css').read_text(encoding='utf-8') + (H/'tema_editorial.css').read_text(encoding='utf-8') + (H/'padrao_paginas.css').read_text(encoding='utf-8')
@@ -308,25 +329,28 @@ CAJ = json.dumps({'campos': [{'a': x, 'r': r, 's': '*', 'g': 'Caso e peça'} for
 _MAN = ler(RAIZ/'precedentes/jurisprudencia/MANIFESTO.json')
 COLETA = max(list((_MAN.get('coleta_original') or {}).values()) + [c.get('data') or '' for c in _MAN.get('coletas_incrementais') or []]
              or [_MAN.get('gerado_em') or ''])[:10]
+_MANC = RAIZ/'precedentes/collegium/MANIFESTO.json'
+COLETA_COL = ((ler(_MANC).get('ultima_coleta') or '') if _MANC.exists() else '')[:10]
 def gerar_html(var):
     t, js, css, pre = montar(var)
-    js = 'window.EMENT_COLETA=' + json.dumps(COLETA) + ';\n' + js   # última coleta na Base de Jurisprudência do TRF-3 (abertura do Ementário)
+    js = 'window.EMENT_COLETA=' + json.dumps(COLETA_COL if var == 'collegium' else COLETA) + ';\n' + js   # última coleta na Base de Jurisprudência do TRF-3 (abertura do Ementário)
     js = 'window.TIPO_CASO=' + TCJ + ';\n' + js   # vocabulário comum do tipo de caso (Ementário e Consulta)
     js = (RAIZ/'extensao/gerador.js').read_text(encoding='utf-8') + '\n' + js  # composição redacional comum à HERO18810
     js = 'window.CAMPOS_AUTO=' + CAJ + ';\n' + js   # campos automáticos (@apelido) da Minuta-Matriz e do editor (antes preso num comentário: a ficha não chegava à folha)
     for a, b in [('/*__USOS__*/', (H/'usos_auto.json').read_text(encoding='utf-8').strip()),
              ('/*__DATA__*/', (RAIZ/'apoio/vade-mecum.json').read_text(encoding='utf-8').strip().replace('</', '<\\/')),
              ('/*__EDITORIAL__*/', EDJ),
-             ('<script type="application/octet-stream" id="modelos-gz">/*__MODELOS__*/</script>', '<script type="application/octet-stream" id="base-gz">' + gz + '</script>' + LIA3),
+             ('<script type="application/octet-stream" id="modelos-gz">/*__MODELOS__*/</script>', '<script type="application/octet-stream" id="base-gz">' + (gz_col if var == 'collegium' else gz) + '</script>' + LIA3),
              ('</style>', css + '</style>'),
              ('</script>\n</body>', '</script>\n' + pre + '<script>\n' + js + '</script>\n</body>')]:
         assert t.count(a) == 1, a[:60]
         t = t.replace(a, b)
-    out = H.parent/('modus-operandi-editor.html' if var == 'editor' else 'modus-operandi.html')
+    out = H.parent/('modus-operandi-editor.html' if var == 'editor' else 'collegium.html' if var == 'collegium' else 'modus-operandi.html')
     out.write_text(t, encoding='utf-8')
     print(f'ok {out} {len(t)//1024} KB · {len(prec)} precedentes, {len(it)} inteiros teores, {len(mod)} modelos, {len(par)} parágrafos')
 gerar_html('compendio')
 gerar_html('editor')
+gerar_html('collegium')
 velho = H.parent/'modus-operandi-avancado.html'
 if velho.exists():
     velho.unlink()   # o modo avançado agora é o próprio modus-operandi.html, liberado pelo login

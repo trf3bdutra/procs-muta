@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Arquivos de busca em texto integral da série histórica (precedentes/jurisprudencia/busca/).
 
-Uso:  python3 scripts/jurisprudencia/gerar_busca.py [--raiz .]
+Uso:  python3 scripts/jurisprudencia/gerar_busca.py [--raiz .] [--pasta precedentes/jurisprudencia | precedentes/collegium]
 
 Um arquivo por tipo e ano (A-AAAA.txt.gz acórdãos, M-AAAA.txt.gz monocráticas), uma linha por julgado:
   id <TAB> ementa <TAB> texto (inteiro teor; sem ele, o resultado)
@@ -23,8 +23,10 @@ def limpa(t):
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("--raiz", default="."); a = ap.parse_args()
-    J = Path(a.raiz) / "precedentes/jurisprudencia"; S = J / "busca"; S.mkdir(exist_ok=True)
+    ap = argparse.ArgumentParser(); ap.add_argument("--raiz", default=".")
+    ap.add_argument("--pasta", default="precedentes/jurisprudencia", help="precedentes/collegium para o Collegium")
+    a = ap.parse_args()
+    J = Path(a.raiz) / a.pasta; S = J / "busca"; S.mkdir(exist_ok=True)
     man = {"schema": "gabcmt.jurisprudencia.busca", "formato": "id\\tementa\\ttexto; quebras = U+2029", "arquivos": {}}
     for pasta, t in (("acordaos", "A"), ("monocraticas", "M")):
         for f in sorted((J / pasta).glob("*.json.gz")):
@@ -32,7 +34,7 @@ def main():
             regs = json.load(gzip.open(f)).get("registros", [])
             linhas = []
             for r in regs:
-                txt = r.get("inteiro_teor") or r.get("resultado_colegiado") or ""
+                txt = r.get("inteiro_teor") or r.get("resultado_colegiado") or r.get("texto_guardado") or ""
                 linhas.append(f'{r["id"]}\t{limpa(r.get("ementa"))}\t{limpa(txt)}')
             dado = ("\n".join(linhas) + "\n").encode("utf-8")
             out = S / f"{t}-{ano}.txt.gz"

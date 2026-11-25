@@ -20,7 +20,7 @@
     return {pre:pre,itens:L.map(function(s){return s.charAt(0).toUpperCase()+s.slice(1);})};}
   /* data da última coleta na Base de Jurisprudência do TRF-3 (precedentes/jurisprudencia/MANIFESTO.json, gravada pelo build) */
   function coleta(){var m=/^(\d{4})-(\d{2})-(\d{2})/.exec(window.EMENT_COLETA||'');
-    return m?'<p class="pa-c" title="Base de Jurisprudência do TRF-3 (web.trf3.jus.br/jurisprudencia)">Última coleta no TRF-3: <b>'+m[3]+'/'+m[2]+'/'+m[1]+'</b></p>':'';}
+    return m?'<p class="pa-c" title="'+(window.EMENT_COLETA_FONTE||'Base de Jurisprudência do TRF-3 (web.trf3.jus.br/jurisprudencia)')+'">'+(window.EMENT_COLETA_ROT||'Última coleta no TRF-3')+': <b>'+m[3]+'/'+m[2]+'/'+m[1]+'</b></p>':'';}
   function abertura(){
     D.querySelectorAll('.pg-h').forEach(function(h){h.classList.add('pa-ab');});
     var he=D.querySelector('#v-ement .pg-h');
