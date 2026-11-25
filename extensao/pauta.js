@@ -14,7 +14,7 @@
   var dg = function (s) { return S(s).replace(/\D/g, ''); };
   var br = function (d) { var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(S(d)); return m ? m[3] + '/' + m[2] + '/' + m[1] : S(d); };
   var hoje = function () { return new Date(Date.now() - 4 * 3600e3).toISOString().slice(0, 10); };
-  var P = { cal: null, data: '', doc: null, ped: null, pedPauta: null, pedErro: false, erro: '', lendo: false, f: 'todos', aba: 'itens', solFiltro: 'todas', solTipo: 'todas', aberto: false, seq: 0 };
+  var P = { cal: null, data: '', doc: null, ped: null, pedPauta: null, pedErro: false, erro: '', lendo: false, f: 'todos', aba: 'itens', solFiltro: 'todas', solTipo: 'todas', qItens:'', qSol:'', modalidade:'todas', aberto: false, seq: 0 };
 
   var solEditor=null,solCnj='',solEditOpen=false;
   function GB() { return window.MutaGabinete || {}; }
@@ -111,18 +111,23 @@
   function etqCl(it) { var e2 = window.ClassesCNJ ? window.ClassesCNJ.etiqueta(it.classe, ((it.ctl || {}).cartao || {}).tipoJ || '') : null; return e2 && e2.t ? ' <span class="pc-cl pa-cl" title="' + esc(e2.nome) + '">' + esc(e2.t) + '</span>' : ''; }
 
   function solGrupo(t){t=S(t);return /sustenta|presenc|video|virtual/i.test(t)?'so':/prefer/i.test(t)?'pref':/retirada|adiamento/i.test(t)?'alt':/despacho/i.test(t)?'desp':'out';}
+  function normalBusca(v){return S(v).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();}
+  function buscaCasa(q,campos){var t=normalBusca(campos.filter(Boolean).join(' '));return normalBusca(q).split(/\s+/).filter(Boolean).every(function(w){return t.includes(w)||(/^\d[\d.\-]+$/.test(w)&&dg(t).includes(dg(w)));});}
+  function buscaFaixa(k,q,placeholder){return '<div class="af-l"><input type="search" data-pa-q="'+k+'" aria-label="'+esc(placeholder)+'" placeholder="'+esc(placeholder)+'" value="'+esc(q)+'" autocomplete="off"><button type="button" class="tu-b" data-pa="limpar:'+k+'" title="Limpar busca" aria-label="Limpar busca">×</button><button type="button" class="tu-b" data-pa="reler" title="Atualizar sessão" aria-label="Atualizar sessão">↻</button></div>';}
   function solicitacoesHtml(itens){
     var externas=(P.pedPauta||[]).filter(function(r){return sesDe(r)===P.data;}),internas=(P.doc&&P.doc.solicitacoes)||[];
     var L=internas.map(function(r){return {r:r,ex:false,g:solGrupo(r.tipo),estado:S(r.estado)||'Pendente'};}).concat(externas.map(function(r){return {r:r,ex:true,g:solGrupo(tipoPed(r)),estado:aVincular(r)?'a vincular':'Vinculada'};}));
     var G=[['so','Sustentações orais'],['pref','Preferências'],['alt','Retirada / adiamento'],['desp','Despachos'],['out','Outras solicitações']];
-    var h='<div class="pa-sol-resumo"><b>'+L.length+' solicitações</b><span>'+L.filter(function(x){return x.estado==='Pendente';}).length+' pendentes</span><b>'+externas.length+' pedidos externos</b><span>'+externas.filter(aVincular).length+' a vincular</span></div>';
+    var h='<div class="acv-faixa pa-busca"><div class="acv-form">'+buscaFaixa('sol',P.qSol,'Buscar solicitação, processo, advogado…')+'<div class="pa-sol-resumo"><b>'+L.length+' solicitações</b><span>'+L.filter(function(x){return x.estado==='Pendente';}).length+' pendentes</span><b>'+externas.length+' pedidos externos</b><span>'+externas.filter(aVincular).length+' a vincular</span></div>';
     h+='<div class="pa-f" role="group" aria-label="Tipo de solicitação">'+[['todas','Todas']].concat(G).map(function(x){var n=x[0]==='todas'?L.length:L.filter(function(v){return v.g===x[0];}).length;return '<button type="button" class="chip'+(P.solTipo===x[0]?' on':'')+'" data-pa="tipo:'+x[0]+'" aria-pressed="'+(P.solTipo===x[0])+'">'+esc(x[1])+' · '+n+'</button>';}).join('')+'</div>';
     h+='<div class="pa-session-head"><label class="pa-sel"><span class="sr">Situação</span><select data-pa="sol-estado">'+[['todas','Todas as situações'],['pendentes','Pendentes'],['deferidas','Deferidas'],['indeferidas','Indeferidas'],['vincular','A vincular'],['vinculadas','Vinculadas']].map(function(x){return '<option value="'+x[0]+'"'+(P.solFiltro===x[0]?' selected':'')+'>'+x[1]+'</option>';}).join('')+'</select></label><button type="button" class="btn line sm" data-pa="editor">'+(solEditOpen?'Fechar gestão do processo':'+ Solicitação / gestão')+'</button></div>';
+        if(P.solTipo==='so')h+='<div class="af-l"><select data-pa="modalidade" aria-label="Modalidade da sustentação">'+[['todas','Todas as modalidades'],['presencial','Presencial'],['video','Videoconferência']].map(function(x){return '<option value="'+x[0]+'"'+(P.modalidade===x[0]?' selected':'')+'>'+x[1]+'</option>';}).join('')+'</select></div>';
+    h+='</div></div>';
     if(solEditOpen)h+='<div id="pa-sol-editor"><p class="muted">Selecione um processo para registrar ou apreciar solicitações.</p></div>';
     if(P.pedErro)h+='<p class="status err">Não foi possível atualizar os pedidos externos.</p>';
     if(!P.doc||P.doc.solicitacoesErro||!Array.isArray(P.doc.solicitacoes))h+='<p class="status err">'+esc(P.doc&&P.doc.solicitacoesErro||'Solicitações internas indisponíveis nesta versão da API.')+'</p>';
     var estados={pendentes:'Pendente',deferidas:'Deferida',indeferidas:'Indeferida',vincular:'a vincular',vinculadas:'Vinculada'};
-    var vis=L.filter(function(x){return (P.solTipo==='todas'||x.g===P.solTipo)&&(P.solFiltro==='todas'||x.estado===estados[P.solFiltro]);});
+    var vis=L.filter(function(x){return (P.solTipo==='todas'||x.g===P.solTipo)&&(P.solFiltro==='todas'||x.estado===estados[P.solFiltro])&& (P.solTipo!=='so'||P.modalidade==='todas'||normalBusca(tipoPed(x.r)).includes(P.modalidade))&&buscaCasa(P.qSol,[x.r.cnj,x.r.numero,x.r.item,x.r.tipo,x.r.advogado,x.r.solicitante,x.r.parte,x.r.justificativa,x.r.descricao,x.estado]);});
     G.forEach(function(gr){var A=vis.filter(function(x){return x.g===gr[0];});if(!A.length)return;h+='<h4 class="pm-mer-h">'+esc(gr[1])+' · '+A.length+'</h4>';A.forEach(function(x){var r=x.r;if(x.ex){h+=pedCard(r,{itens:itens,ses:1});return;}
       h+='<article class="gx-it pa-ped"><div class="gx-h"><b class="gx-t">'+esc(r.tipo)+'</b><span class="gx-c">'+esc(x.estado)+'</span>'+(r.item?'<span class="gx-c">item '+esc(r.item)+'</span>':'')+'</div><p class="gx-m"><button type="button" class="lnk mono" data-pa="gerir:'+esc(r.cnj)+'">'+esc(r.cnj)+'</button></p><p class="gx-m">'+esc([r.origem,r.solicitante,br(S(r.data).slice(0,10)),r.inferido?'vínculo pela pauta atual':''].filter(Boolean).join(' · '))+'</p>'+(r.sessaoPretendida?'<p class="gx-m">Sessão pretendida: '+esc(br(r.sessaoPretendida))+'</p>':'')+(r.justificativa||r.descricao?'<p class="gx-tx">'+esc(r.justificativa||r.descricao)+'</p>':'')+(r.resposta?'<p class="gx-ob">'+esc(r.resposta)+'</p>':'')+(r.decididoPor?'<p class="gx-m">Apreciada por '+esc(r.decididoPor)+' · '+esc(br(S(r.decididoEm).slice(0,10)))+'</p>':'')+'</article>';});});
     return h+(vis.length?'':'<p class="muted">Nenhuma solicitação nesta visualização.</p>');
@@ -144,9 +149,9 @@
     var cont = {}; R.forEach(function (x) { cont[x.e.k] = (cont[x.e.k] || 0) + 1; });
     var nAl = R.filter(function (x) { return x.a.some(function (a) { return a[0] === 'al'; }); }).length;
     var F = [['todos', 'Todos', L.length], ['al', 'Com alerta', nAl], ['nd', 'A designar', cont.nd || 0], ['des', 'Minutando', cont.des || 0], ['min', 'Em correção', cont.min || 0], ['cor', 'A liberar', cont.cor || 0], ['lib', 'Liberados', cont.lib || 0], ['fora', 'Retirados/adiados', (cont.ret || 0) + (cont.adi || 0)]];
-    var vis = R.filter(function (x) { return P.f === 'todos' ? true : P.f === 'al' ? x.a.some(function (a) { return a[0] === 'al'; }) : P.f === 'fora' ? /ret|adi/.test(x.e.k) : x.e.k === P.f; });
+    var vis = R.filter(function (x) { var it=x.it;return (P.f === 'todos' ? true : P.f === 'al' ? x.a.some(function (a) { return a[0] === 'al'; }) : P.f === 'fora' ? /ret|adi/.test(x.e.k) : x.e.k === P.f)&&buscaCasa(P.qItens,[it.cnj,it.item,it.classe,it.assunto,it.servidor,it.corretor,x.e.t]); });
     h += (previa ? '<p class="muted">Prévia da pauta (ainda sem a relação oficial do PJe).</p>' : '') +
-      '<div class="pa-f">' + F.filter(function (f) { return f[2] || f[0] === 'todos'; }).map(function (f) { return '<button type="button" class="chip' + (P.f === f[0] ? ' on' : '') + '" data-pa="f:' + f[0] + '">' + f[1] + ' <i>' + f[2] + '</i></button>'; }).join('') + '</div>';
+      '<div class="acv-faixa pa-busca"><div class="acv-form">'+buscaFaixa('itens',P.qItens,'Buscar processo, item, assunto, servidor…')+'<div class="pa-f">' + F.filter(function (f) { return f[2] || f[0] === 'todos'; }).map(function (f) { return '<button type="button" class="chip' + (P.f === f[0] ? ' on' : '') + '" data-pa="f:' + f[0] + '">' + f[1] + ' <i>' + f[2] + '</i></button>'; }).join('') + '</div><p class="status">'+vis.length+' de '+L.length+' processos</p></div></div>';
     /* Os pedidos da sessão estão na subaba Solicitações. */
     h += '<ol class="pa-l">' + vis.map(function (x) {
       var it = x.it, at = dg(it.cnj) === cur, passo = PASSOS.map(function (p) { return '<i class="' + (it[p[0]] ? 'ok' : '') + '" title="' + p[1] + '"></i>'; }).join('');
@@ -180,17 +185,20 @@
     var c = app(); if (!c || !visivel()) return;
     var s = ses ? ses.estado() : {};
     if (s.estado !== 'on') { c.innerHTML = '<div class="empty">Entre no Ex Officio (aba Prontuário) para ver as pautas.</div>'; return; }
-    var y = c.scrollTop;
+    var y = c.scrollTop, ativo=document.activeElement, chave=ativo&&ativo.dataset&&ativo.dataset.paQ;
     c.innerHTML = (P.erro ? '<p class="status err">' + esc(P.erro) + '</p>' : '') + listaHtml();
     var host=$('pa-sol-editor');if(host&&solEditor&&dg(solCnj)===dg(GB().cnj&&GB().cnj())){host.replaceChildren();var head=document.createElement('p');head.className='muted';head.textContent='Processo em gestão · '+solCnj;host.append(head,solEditor);}
-    c.scrollTop = y;
+    c.scrollTop = y;if(chave){var inp=c.querySelector('[data-pa-q="'+chave+'"]');if(inp)inp.focus({preventScroll:true});}
   }
 
   /* ---------- ações ---------- */
+  document.addEventListener('input',function(e){var t=e.target;if(!t.dataset||!t.dataset.paQ||!t.closest('#pauta-app'))return;P[t.dataset.paQ==='sol'?'qSol':'qItens']=t.value;pintar();});
   document.addEventListener('click', function (e) {
     var b = e.target.closest && e.target.closest('#pauta-app [data-pa]'); if (!b) return;
     var a = b.getAttribute('data-pa');
     if (/^aba:/.test(a)) { P.aba=a.slice(4);pintar();return; }
+    if(a==='reler'){if(P.data)trocar(P.data);else ler();return;}
+    if(/^limpar:/.test(a)){P[a.slice(7)==='sol'?'qSol':'qItens']='';pintar();return;}
     if(a==='editor'){solEditOpen=!solEditOpen;pintar();return;}
     if(/^tipo:/.test(a)){P.solTipo=a.slice(5);pintar();return;}
     if(/^gerir:/.test(a)){solEditOpen=true;var n=a.slice(6),brg=window.MutaProntuarioBridge;if(brg&&brg.abrirProcesso)brg.abrirProcesso(n);pintar();return;}
@@ -201,6 +209,7 @@
   });
   document.addEventListener('change', function (e) {
     var t = e.target; if (!t || !t.closest || !t.closest('#pauta-app')) return;
+    if(t.getAttribute('data-pa')==='modalidade'){P.modalidade=t.value;pintar();return;}
     if(t.getAttribute('data-pa')==='sol-estado'){P.solFiltro=t.value;pintar();return;}
     if (t.getAttribute('data-pa') === 'ses') { trocar(t.value); return; }
     if (t.getAttribute('data-pa-vi')) { vincular(t.getAttribute('data-pa-vi'), t.value); return; }
