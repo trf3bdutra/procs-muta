@@ -792,14 +792,14 @@ var _xAutoCasoBase=xAutoCaso;xAutoCaso=function(){_xAutoCasoBase();
   /* Resultado redacional deriva do dispositivo escolhido, não do rótulo classificatório da ficha. */
   Object.keys(E).forEach(function(a){if(!AUTO['@'+a]&&AUTO[E[a]])AUTO['@'+a]=AUTO[E[a]];});
   // Variáveis compostas da mesma ficha e do mesmo gerador da HERO.
-  ['abertura_relatorio','resultado_decisao_recorrida','comandos_dispositivos','frase_honorarios_origem','razoes_recursais','contrarrazoes_relatorio','parecer_relatorio','caso_em_exame','questao_em_discussao','razoes_primeiro_recurso','razoes_segundo_recurso','razoes_agravo_interno','vicios_relatorio','ementa_embargada_literal','sentenca_paragrafo','parecer_sentido_redacional','dispositivo_voto','honorarios_recursais_texto','honorarios_ementa','dispositivo_ementa_ficha','acordao_recorrido_id','decisao_agravada_id'].forEach(function(a){delete AUTO['@'+a];});
+  ['abertura_relatorio','resultado_decisao_recorrida','comandos_dispositivos','frase_honorarios_origem','razoes_recursais','contrarrazoes_relatorio','parecer_relatorio','caso_em_exame','questao_em_discussao','razoes_primeiro_recurso','razoes_segundo_recurso','razoes_agravo_interno','vicios_relatorio','ementa_embargada_literal','sentenca_paragrafo','parecer_sentido_redacional','dispositivo_voto','honorarios_recursais_texto','honorarios_ementa','dispositivo_ementa_ficha','acordao_recorrido_id','decisao_agravada_id','decisao_agravada_sintese','resposta_ocorrencia','resposta_complemento','contrarrazoes_ids','contrarrazoes_preliminares','parecer_manifestacao','honorarios_solucao','dispositivo_conclusao','relato_objeto','ed_vicio_redacao','ed_pontos_redacao','agint_parte','agint_referencia','agint_razoes','recurso_1_parte','recurso_1_referencia','recurso_1_razoes','recurso_2_parte','recurso_2_referencia','recurso_2_razoes','recurso_1_razoes_todas'].forEach(function(a){delete AUTO['@'+a];});
   if(P&&J&&String(J.processo||'').replace(/\D/g,'')===String(P.processo||'').replace(/\D/g,'')&&window.MutaGerador&&MutaGerador.comporFicha){
     var fo={};Object.keys(cp).forEach(function(k){if(k.indexOf('acervo.')===0)fo[k.slice(7)]=cp[k];});
     fo.classe_judicial=fo.classe_judicial||P.classe||'';fo.Assunto=fo.Assunto||P.assunto||'';
     var tj=String(cp['triagem.Tipo de Julgamento']||P.tipoJulgamento||fo.classe_judicial||'');
     if(/apela|remessa|agravo|embargos de declara|retrata/i.test(tj)){
       var D=MutaGerador.comporFicha(cp,fo);
-      Object.keys(D.variaveis||{}).forEach(function(a){if(D.variaveis[a])AUTO['@'+a]=D.variaveis[a];});
+      Object.keys(D.variaveis||{}).forEach(function(a){var v=dkValorFicha(D.variaveis[a]);if(v)AUTO['@'+a]=v;});
        var F=dkFragmentosFicha(D.variaveis);Object.keys(F).forEach(function(a){if(!D.variaveis[a])AUTO['@'+a]=F[a];});
        /* Cada recurso conserva os seus próprios dados. Não concatenar recursos em campo do primeiro. */
 

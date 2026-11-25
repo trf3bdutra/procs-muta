@@ -234,8 +234,8 @@ function alvoDe(chave) {
 function valorPara(c, v) {
   v = S(v); if (c.mapa && c.mapa[v]) return c.mapa[v];
   if (c.tipo === 'lista') { var o = (c.opcoes || []).map(function (x) { return typeof x === 'string' ? x : x.valor; }).filter(function (x) { return N(x) === N(v); })[0]; if (o) return o; }
-  if (c.tipo === 'simnao') return /^(2|sim|s|true)$/i.test(v) ? 'Sim' : /^(1|n[aã]o)$/i.test(v) ? '' : v;
-  if (c.tipo === 'data') return iso(v) || v;
+  if (c.tipo === 'simnao') return /^(2|sim|s|true)$/i.test(v) ? 'Sim' : /^(1|n[aã]o|false)$/i.test(v) ? 'Não' : v;
+  if (c.tipo === 'data') return iso(v) || '';
   return v;
 }
 function linhaAntiga() {
@@ -256,7 +256,7 @@ function mapear(L) {
     if (it.kind === 'ocorr') { TB.ocorr.push({ tipo: S(it.value), ids: S(it.ids || it.doc), data: '' }); TB.docs.ocorr.push(it.doc); return; }
     var c = alvoDe(it.key);
     if (!c) return; /* dado do acervo (só leitura) ou sem campo na ficha: fica de fora */
-    it.alvo = c.secao + '.' + c.chave; it.campo = c; it.value = valorPara(c, it.value);
+    it.alvo = c.secao + '.' + c.chave; it.campo = c; it.value = valorPara(c, it.value);if(!S(it.value))return;
     var atual = gravado(c.secao, c.chave); if (typeof atual === 'object') atual = '';
     it.current = atual; it.status = !S(atual) ? 'novo' : N(atual) === N(it.value) || (iso(atual) && iso(atual) === iso(it.value)) ? 'igual' : 'conflito'; it.manual = !!it.manual || c.secao==='producao' || !(/^(Sentença - (ID|Data)|ID do Parecer MPF|MPF - Data|Origem - (Juízo|Julgador|Valor da causa)|ID da Procuração)$/.test(c.chave)) || (c.chave==='Sentença - ID'&&(S(it.value).match(/\b\d{6,}\b/g)||[]).length!==1) || /texto-longo/.test(c.tipo) || /Sentença - (Decisão|Resultado|Honorários|Custas)|Impugnada - Síntese|Parecer - Sentido/.test(c.chave); it.apply = it.status === 'novo'&&!it.manual; out.push(it);
   });

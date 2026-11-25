@@ -1092,7 +1092,7 @@ function corpoAutos() {
   var leitura=AU.htmlLeitura();
   var loc=AU.htmlLocalizados?AU.htmlLocalizados():'';
   if(loc)loc=loc.replace(/^<section class="au-localizados" aria-label="Localizados"><div class="au-loc-head"><h4>Localizados<\/h4>(<small>[\s\S]*?<\/small>)<\/div>/,'<details class="gg au-localizados au-coverage-section" id="g-au-localizados"'+(AU_SECOES.localizados?' open':'')+'><summary><h4>Localizados</h4>$1</summary><div class="au-coverage-body">').replace(/<\/section>$/,'</div></details>');
-  var matriz=cf&&window.MutaGerador&&window.MutaGerador.htmlCobertura?window.MutaGerador.htmlCobertura():'';
+  var matriz=window.MutaGerador&&window.MutaGerador.htmlCobertura?window.MutaGerador.htmlCobertura():'';
   if(matriz)matriz=matriz.replace(/^<details class="gg">/,'<details class="gg au-coverage-section au-matriz" id="g-au-matriz"'+(AU_SECOES.matriz?' open':'')+'>');
   var cobertura=matriz||loc||cf?'<div class="card au-coverage-card" aria-label="Cobertura e conferência dos autos">'+matriz+loc+cf+'</div>':'';
   if(cobertura) leitura=leitura.replace(/<\/section>$/,cobertura+'</section>');
