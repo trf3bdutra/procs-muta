@@ -13,7 +13,7 @@
     'js:': 'Baixa esta peça em JSON', 'pdf:': 'Abre o PDF no PJe, numa aba nova', 'cp:': 'Copia o texto lido do documento', 'al:': 'Grava na ficha o valor indicado pela leitura dos autos' };
   var ABA = { Processo: 'Processo: sinalizações em aberto, notas, síntese, questões, peças e controles',
     Autos: 'Autos: conferência automática e peças (lidas/total; texto, OCR, JSON e PDF)', Roteiro: 'Roteiro de triagem: passos conferidos/total do tipo de julgamento, com todos os campos da triagem',
-    'Produção': 'Produção: campos preenchidos/total — tipo de ato, decisão, revisão, ementa, liberação e pauta' };
+    'Produção': 'Produção: campos preenchidos/total — pronunciamento, decisão, revisão, ementa, liberação e pauta' };
   var NAV = { 'tab-pront': 'Prontuário do processo aberto no PJe', 'tab-min': 'Minuta: o texto do editor do PJe comparado com a matriz, o Collectio e a conformidade',
     'tab-acervo': 'Ementário: precedentes do Relator e do gabinete', 'tab-par': 'Parágrafos-padrão do gabinete, para buscar e copiar', 'tab-dir': 'Diretrizes: Manual CMT e lista de caça',
     'tab-ajuda': 'Ajuda e instalação' };
@@ -21,7 +21,7 @@
     'pje-aba': 'Trocar de aba: autos digitais abrem o modo Autos; a tarefa com o editor abre a aba Minuta',
     'pje-tema': 'Tema claro ou escuro', 'sn-tp': 'Tipo da nova sinalização (pendência é aviso; intercorrência retém a liberação)', 'sn-tx': 'Descreva a sinalização e tecle Enter para incluir',
     'nt-tx': 'Escreva a nota e tecle Ctrl+Enter (ou "+ Incluir nota"); ela entra no log com data, hora e autor', 'pm-ad-tx': 'Assunto detalhado: Enter grava, Esc cancela',
-    'pm-des': 'Nome de quem fica com a etapa: Enter grava, Esc cancela', 'pm-pron': 'Tipo de ato: com acórdão o processo vai à sessão; os demais são decisão do relator' };
+    'pm-des': 'Nome de quem fica com a etapa: Enter grava, Esc cancela', 'pm-pron': 'Pronunciamento: com acórdão o processo vai à sessão; os demais são decisão do relator' };
   function dica(el) {
     var d = el.dataset || {}, v;
     if (el.id && ID[el.id]) return ID[el.id];
@@ -35,7 +35,7 @@
     if (d.snX) return 'Exclui esta sinalização';
     if (d.ntX != null) return 'Exclui esta nota';
     if (d.hasOwnProperty('ntAdd') || el.hasAttribute('data-nt-add')) return 'Inclui a nota escrita abaixo (Ctrl+Enter)';
-    if (d.pron != null) return 'Define o tipo de ato: com acórdão o processo vai à sessão; os demais são decisão do relator';
+    if (d.pron != null) return 'Define o pronunciamento: com acórdão o processo vai à sessão; os demais são decisão do relator';
     if (d.rt) { if (/^t:/.test(d.rt)) return 'Soma ou tira este tipo de julgamento do roteiro'; if (/^a:/.test(d.rt)) return 'Abre ou fecha este passo';
       if (/^u:/.test(d.rt)) return 'Grava na ficha o valor lido nos autos'; if (d.rt === 'ut') return 'Grava na ficha todas as sugestões da leitura dos autos'; if (d.rt === 'auto') return 'Volta ao tipo identificado pela classe, espécie e tarefa'; }
     if (d.rtc) return 'Marque quando tiver conferido este passo (fica só neste navegador)';

@@ -55,7 +55,7 @@ for x in linhas:
     poe(r, 'producao', 'CORRETOR', pessoa(x.get('Revisor')) if x.get('Revisor') else '', cnj)
     poe(r, 'producao', 'MINUTADO', min_, cnj); poe(r, 'producao', 'Data da Revisão', iso(x.get('Revisada em')), cnj)
     poe(r, 'producao', 'Mono - Tipo de ato', ATO.get(tipo, tipo), cnj)
-    if tipo == 'Negar provimento': poe(r, 'producao', 'Voto - Resultado', 'Negado provimento', cnj)
+    if tipo == 'Negar provimento': poe(r, 'producao', 'Voto - Resultado', 'Desprovido', cnj)
     if andam == 'Assinada':
         poe(r, 'producao', 'Assinado', 'Sim', cnj); poe(r, 'producao', 'Data da Assinatura', ass, cnj)
         if ass and ass > hoje: junta(r, 'controles', 'Monocrática - Observação', f'[VALIDAR] data da assinatura {br(ass)} (posterior a hoje, na planilha)', cnj)

@@ -90,7 +90,7 @@ const V = {
   resultado: v => (/^retirad/i.test(v) ? { pauta: { 'Status de Julgamento': 'RETIRADO DE PAUTA' } }
     : /^adiad/i.test(v) ? { pauta: { 'Status de Julgamento': 'ADIADO' } }
     : String(v || '').trim() === '' ? { pauta: { 'Status de Julgamento': 'PAUTADO' } } : {}),
-  resJulg: v => ({ producao: { 'Voto - Resultado': v } }),
+  resJulg: v => ({ producao: { 'Voto - Resultado': VOC.norm('resJulg', v) } }),
   honor: v => ({ producao: { 'Voto - Honorários': v } }),
   topico: v => ({ producao: { 'Tópico-síntese': v } }),
   servidor: v => ({ producao: { 'SERVIDOR': v } }),
@@ -113,7 +113,7 @@ const V = {
 };
 /* ficha → cartão (volta): só o que tem correspondência sem ambiguidade; o cartão guarda o vocabulário da equipe */
 const LISTAS = {
-  resJulg: ['Provido', 'Parcialmente provido', 'Desprovido', 'Não conhecido', 'Prejudicado', 'Rejeitados', 'Acolhidos sem efeito infringente', 'Acolhidos com efeito infringente', 'Retratação exercida', 'Acórdão mantido'],
+  resJulg: VOC.lista('resJulg'), /* vocabulário único: acórdão e monocrática */
   honor: ['Majorados', 'Mantidos', 'Invertidos', 'Fixados', 'Redistribuídos', 'Sem honorários recursais'], prelim: ['Sem preliminares', 'Há preliminares', 'Preliminar de ofício'], simnao: ['Sim', 'Não']
 };
 const naLista = (L, v) => L.find(x => x.toLowerCase() === String(v || '').trim().toLowerCase()) || null;
@@ -131,7 +131,7 @@ function paraCartao(mud, it) {
   if (tem(t, 'Intercorrências')) k.intercor = t['Intercorrências'];
   const pa = mud.pauta || {};
   if (tem(pa, 'Sustentação oral')) k.sopref = ({ 'Videoconferência': 'Virtual', 'Virtual': 'Virtual', 'Presencial': 'Presencial', 'Preferência': 'Preferência' })[pa['Sustentação oral']] || '';
-  if (tem(p, 'Voto - Resultado') && (naLista(LISTAS.resJulg, p['Voto - Resultado']) || !p['Voto - Resultado'])) k.resJulg = naLista(LISTAS.resJulg, p['Voto - Resultado']) || '';
+  if (tem(p, 'Voto - Resultado')) { const rj = VOC.norm('resJulg', p['Voto - Resultado']); if (naLista(LISTAS.resJulg, rj) || !rj) k.resJulg = naLista(LISTAS.resJulg, rj) || ''; }
   if (tem(p, 'Voto - Honorários') && (naLista(LISTAS.honor, p['Voto - Honorários']) || !p['Voto - Honorários'])) k.honor = naLista(LISTAS.honor, p['Voto - Honorários']) || '';
   if (tem(p, 'Tópico-síntese') && naLista(LISTAS.simnao, p['Tópico-síntese'])) k.topico = naLista(LISTAS.simnao, p['Tópico-síntese']);
   if (tem(p, 'MINUTADO') && /^(\d{4}-\d{2}-\d{2})?$/.test(p.MINUTADO)) d.dataMinuta = p.MINUTADO;
@@ -201,7 +201,7 @@ const INV = {
   midias: r => VOC.norm('midias', r.triagem['Mídias']),
   mpf: r => VOC.norm('mpf', r.triagem['MPF - Custos Legis'] === 'Sim' ? (r.triagem['Observação MPF'] || '') : r.triagem['MPF - Custos Legis']),
   parecer: r => VOC.norm('parecer', r.triagem.MPF),
-  resJulg: r => r.producao['Voto - Resultado'], honor: r => r.producao['Voto - Honorários'], topico: r => r.producao['Tópico-síntese'],
+  resJulg: r => VOC.norm('resJulg', r.producao['Voto - Resultado']), honor: r => r.producao['Voto - Honorários'], topico: r => r.producao['Tópico-síntese'],
   hip932: r => r.triagem['Hipóteses Monocrática'], tipoAto: r => r.producao['Mono - Tipo de ato'], fundamento: r => r.producao['Mono - Fundamento'],
   urgTipo: r => r.triagem['Urgência'], urgNivel: r => r.triagem['Urgência - Nível'], urgSit: r => r.triagem['Urgência - Apreciação'], urgPedido: r => r.triagem['Urgência - Data'],
   urgData: r => r.triagem['Urgência - Apreciada em'], urgObs: r => r.triagem['Urgência - Observação'], urgPainel: r => r.triagem['Urgência - Painel']

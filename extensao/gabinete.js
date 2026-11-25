@@ -137,7 +137,7 @@ function campo0(c) {
   /* lista curta e Sim/Não viram botões, como na gaveta da pauta */
   var OC = c.tipo === 'simnao' ? ['Sim', 'Não'] : c.tipo === 'lista' ? (c.opcoes || []).map(function (o) { return typeof o === 'string' ? o : o.valor; }) : null;
   if (OC && !bloq && OC.length && OC.length <= 6 && OC.every(function (o) { return o.length <= 26; })) {
-    return '<div class="' + cls + (OC.length > 3 ? ' w' : '') + (id in G.pend ? ' mud' : '') + '" title="' + esc(dicaCampo(c)) + '"><span class="gl">' + rotuloDe(c) + '</span><div class="pm-seg gf-seg" role="group" aria-label="' + rotuloDe(c) + '">' +
+    return '<div class="' + cls + (OC.length > 3 ? ' w' : '') + (id in G.pend ? ' mud' : '') + '" title="' + esc(dicaCampo(c)) + '"><span class="gl">' + rotuloDe(c) + '</span><div class="pm-seg gf-seg" role="group" aria-label="' + esc(c.rotulo) + '">' +
       OC.map(function (o) { return '<button type="button" class="pm-ch' + (o === v ? ' on' : '') + '" data-ch="' + esc(id) + '" data-v="' + esc(o) + '" aria-pressed="' + (o === v) + '">' + esc(o) + '</button>'; }).join('') +
       (v && OC.indexOf(v) < 0 ? '<span class="pm-ch on">' + esc(v) + '</span>' : '') + '</div></div>';
   }
@@ -753,7 +753,7 @@ function camposCaso(ja) {
   var pct = Math.round(100 * ok / tot);
   return '<section class="card rt-top cc-caso"><div class="rt-tt"><b>Roteiro de produção</b><span class="rt-n">' + ok + '/' + tot + '</span>' + (au ? '<span class="rt-al cc-au">' + au + ' automático' + (au > 1 ? 's' : '') + '</span>' : '') + '</div>' +
     '<div class="rt-bar"><i style="width:' + pct + '%"></i></div>' + (AU && AU.barra ? AU.barra() : '') +
-    '<p class="muted">Perfil da minuta: <b>' + (mono ? 'decisão monocrática' : 'acórdão') + '</b>, pelo tipo de ato do cartão do processo' + (Object.keys(T).length && window.MutaRoteiro ? '; campos do caso de <b>' + window.MutaRoteiro.TIPOS.filter(function (x) { return T[x[0]]; }).map(function (x) { return x[1].toLowerCase(); }).join(', ') + '</b>, pelo tipo de julgamento do Roteiro de triagem' : '') + '. Os autos lidos preenchem sozinhos os vazios; confira o que vier marcado. Grava na ficha.</p>' +
+    '<p class="muted">Perfil da minuta: <b>' + (mono ? 'decisão monocrática' : 'acórdão') + '</b>, pelo pronunciamento do cartão do processo' + (Object.keys(T).length && window.MutaRoteiro ? '; campos do caso de <b>' + window.MutaRoteiro.TIPOS.filter(function (x) { return T[x[0]]; }).map(function (x) { return x[1].toLowerCase(); }).join(', ') + '</b>, pelo tipo de julgamento do Roteiro de triagem' : '') + '. Os autos lidos preenchem sozinhos os vazios; confira o que vier marcado. Grava na ficha.</p>' +
     caso + perfil + '</section>';
 }
 /* 0.58 · aba Pauta › Processo em tela: situação, remarcação e sustentação/preferência (gravam na ficha) e o histórico de pautas */
@@ -847,12 +847,12 @@ function atoOpcoes(k) {
 }
 function atoSel() {
   var k = pronAtual();
-  return '<label class="pm-pp pm-ato"><span class="pm-pn"><small>Tipo de ato</small><select id="pm-pron" aria-label="Tipo de ato ou pronunciamento">' + atoOpcoes(k) + '</select></span></label>';
+  return '<label class="pm-pp pm-ato"><span class="pm-pn"><small>Pronunciamento</small><select id="pm-pron" aria-label="Pronunciamento">' + atoOpcoes(k) + '</select></span></label>';
 }
 function pronunciamento() {
   var k = pronAtual();
-  return '<section class="card pc-sec pm-pron"><div class="pc-sh"><h3>Tipo de ato · pronunciamento</h3><small class="muted">' + (k < 0 ? 'a definir na triagem' : esc(PRON[k][1] === 'Sessão' ? 'vai à sessão' : PRON[k][1] === 'Monocrática' ? 'decisão do relator' : 'outro destino')) + '</small></div>' +
-    '<select id="pm-pron" class="pm-pron-s" aria-label="Tipo de ato ou pronunciamento">' + atoOpcoes(k) + '</select></section>';
+  return '<section class="card pc-sec pm-pron"><div class="pc-sh"><h3>Pronunciamento</h3><small class="muted">' + (k < 0 ? 'a definir na triagem' : esc(PRON[k][1] === 'Sessão' ? 'vai à sessão' : PRON[k][1] === 'Monocrática' ? 'decisão do relator' : 'outro destino')) + '</small></div>' +
+    '<select id="pm-pron" class="pm-pron-s" aria-label="Pronunciamento">' + atoOpcoes(k) + '</select></section>';
 }
 function corpoProducao() {
   var A = abaModelo('Produção'), h = '';

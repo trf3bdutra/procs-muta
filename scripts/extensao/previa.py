@@ -52,6 +52,8 @@ def montar(saida: pathlib.Path) -> None:
     if fonte.count(ancora) != 1:
         sys.exit('gabinete.js: ponto de integração da prévia ausente')
     overlay = (AQUI / 'universal-layout.js').read_text(encoding='utf-8')
+    # Painel Julgamento (acórdão e monocrática, pelo pronunciamento): depois do adaptador, no mesmo ponto.
+    overlay += '\n' + (AQUI / 'universal-julgamento.js').read_text(encoding='utf-8')
     (painel / 'gabinete-universal.js').write_text(fonte.replace(ancora, overlay + '\n' + ancora, 1), encoding='utf-8')
     # Ganchos de apresentação do roteiro, sem modificar as regras nem os estados dos passos.
     roteiro = (painel / 'roteiro.js').read_text(encoding='utf-8')

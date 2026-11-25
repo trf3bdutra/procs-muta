@@ -97,7 +97,7 @@
   }
   g.MutaEtiquetas = { CFG: CFG, CATEGORIAS: CATEGORIAS, ICONES: ICONES, svg: svg, categoriaDe: categoriaDe, preparar: preparar, vale: vale, devidas: devidas, faltando: faltando, etapa: etapa, estado: estado, alertas: alertas, iniciais: iniciais, dias: dias, N: N,
     CAMPOS: [['urgPend', 'Urgência não apreciada'], ['urg', 'Medida urgente'], ['preparo', 'Preparo'], ['repres', 'Representação'], ['tempest', 'Tempestividade'], ['mpfSit', 'Parecer do MPF'],
-      ['custos', 'Hipótese de intervenção do MPF'], ['destino', 'Destino'], ['tipoAto', 'Tipo de ato'], ['tipoJ', 'Tipo de julgamento'], ['icN', 'Intercorrências em aberto'], ['pendN', 'Pendências em aberto'],
+      ['custos', 'Hipótese de intervenção do MPF'], ['destino', 'Destino'], ['tipoAto', 'Pronunciamento'], ['tipoJ', 'Tipo de julgamento'], ['icN', 'Intercorrências em aberto'], ['pendN', 'Pendências em aberto'],
       ['meta', 'Meta do CNJ'], ['sobr', 'Sobrestado'], ['sens', 'Caso sensível'], ['assunto', 'Assunto'], ['classe', 'Classe'], ['prioridade', 'Prioridade'], ['dias', 'Dias na tarefa'], ['tarefa', 'Tarefa']],
     OPS: [['tem', 'está preenchido / sim'], ['vazio', 'está vazio / não'], ['igual', 'é igual a'], ['contem', 'contém'], ['re', 'combina com (expressão)'], ['maior', 'é maior que']] };
 })(typeof window !== 'undefined' ? window : self);

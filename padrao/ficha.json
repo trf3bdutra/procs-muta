@@ -2350,7 +2350,7 @@
      "destino": "monocratica",
      "campos": [
       {
-       "rotulo": "Tipo de ato",
+       "rotulo": "Pronunciamento",
        "chave": "Mono - Tipo de ato",
        "tipo": "lista",
        "secao": "producao",
@@ -2400,18 +2400,24 @@
        "tipo": "lista",
        "secao": "producao",
        "opcoes": [
-        "Não conhecido",
-        "Negado provimento",
-        "Dado provimento",
+        "Provido",
         "Parcialmente provido",
-        "Deferido",
-        "Indeferido",
-        "Parcialmente deferido",
+        "Desprovido",
+        "Não conhecido",
         "Prejudicado",
+        "Rejeitados",
+        "Acolhidos sem efeito infringente",
+        "Acolhidos com efeito infringente",
+        "Retratação exercida",
+        "Acórdão mantido",
+        "Deferido",
+        "Parcialmente deferido",
+        "Indeferido",
         "Homologado",
         "Extinto"
        ],
-       "apelido": "resultado_julgamento"
+       "apelido": "resultado_julgamento",
+       "vocabulario": "resJulg"
       },
       {
        "rotulo": "Honorários",
@@ -2753,8 +2759,8 @@
          "tipo": "lista",
          "opcoes": [
           "Não conhecido",
-          "Negado provimento",
-          "Dado provimento",
+          "Desprovido",
+          "Provido",
           "Parcialmente provido",
           "Anulado",
           "Prejudicado",

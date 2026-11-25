@@ -89,3 +89,50 @@ test('painel: processo sigiloso sem liberação bloqueia a leitura dos autos e m
     assert.deepEqual(P.erros, []);
   } finally { await P.fim(); }
 });
+
+/* prontuário universal (prévia): painel Julgamento na Produção, com as opções pelo pronunciamento e pelo tipo de julgamento */
+async function abrirUniversal(op) {
+  const P = await abrir(op, { sigilo: '', liberado: true, porque: 'gestor' });
+  const url = P.pg.url().replace('/painel/painel.html', '/painel/universal.html');
+  await P.pg.goto(url);
+  await P.pg.waitForFunction(() => window.MutaSessao && window.MutaSessao.estado().estado === 'on', null, { timeout: 15000 });
+  await P.pg.evaluate(cnj => { window.chrome.storage.session.set({ 'aba:1': { numero: cnj, classe: 'ApCiv', tarefa: '[Sessão] Aguardando a sessão', ctx: '', ed: false, lib: '' } }); }, CNJ);
+  await P.pg.waitForSelector('[data-pv-tab="pro"]', { timeout: 15000 });
+  await P.pg.click('[data-pv-tab="pro"]');
+  await P.pg.waitForSelector('#pv-julgamento', { timeout: 15000 });
+  return P;
+}
+const RJ = '[data-fk="producao.Voto - Resultado"],[data-ch="producao.Voto - Resultado"]';
+const botoes = pg => pg.$$eval('#pv-julgamento :is(' + RJ + ')', L => L.map(x => x.tagName === 'SELECT' ? [].map.call(x.options, o => o.value).filter(Boolean) : [x.getAttribute('data-v')]).flat());
+test('universal: Julgamento do acórdão — resultado de recurso, tese e precedentes, um só lugar de edição', { skip: pular, timeout: 90000 }, async () => {
+  const op = { processo: CNJ, origem: {}, triagem: { 'Tipo de Julgamento': 'Apelação' }, producao: { Destino: 'Sessão', 'Voto - Resultado': 'Negado provimento' }, pauta: {}, controles: {} };
+  const P = await abrirUniversal(op);
+  try {
+    const { pg } = P, t = await pg.textContent('#pv-julgamento');
+    assert.match(t, /Pronunciamento\s*Acórdão/);
+    assert.match(t, /Tese jurídica adotada/); assert.doesNotMatch(t, /Hipótese do art\. 932/);
+    const R = await botoes(pg);
+    assert.ok(R.includes('Desprovido') && !R.includes('Deferido'), 'opções de recurso: ' + R.join(', '));
+    assert.equal(await pg.getAttribute('#pv-julgamento [data-ch="producao.Voto - Resultado"].on', 'data-v'), 'Desprovido', '"Negado provimento" convertido');
+    if (process.env.HERO_FOTO) await pg.screenshot({ path: process.env.HERO_FOTO + '-ac.png', fullPage: true });
+    assert.equal(await pg.$$eval(RJ, L => L.filter(x => !x.closest('#pv-julgamento')).length), 0, 'resultado editável só no Julgamento');
+    assert.deepEqual(P.erros, [], 'sem erro de script');
+  } finally { await P.fim(); }
+});
+test('universal: Julgamento da monocrática e da urgência — hipótese do art. 932 e opções próprias', { skip: pular, timeout: 90000 }, async () => {
+  const op = { processo: CNJ, origem: {}, triagem: { 'Tipo de Julgamento': 'Apelação' }, producao: { Destino: 'Monocrática', 'Mono - Tipo de ato': 'Decisão monocrática (art. 932)' }, pauta: {}, controles: {} };
+  const P = await abrirUniversal(op);
+  try {
+    const { pg } = P, t = await pg.textContent('#pv-julgamento');
+    assert.match(t, /Decisão monocrática \(art\. 932\)/); assert.match(t, /Hipótese do art\. 932/); assert.match(t, /Precedente ou fundamento/);
+    assert.ok((await botoes(pg)).includes('Desprovido'));
+    if (process.env.HERO_FOTO) await pg.screenshot({ path: process.env.HERO_FOTO + '-mono.png', fullPage: true });
+    assert.deepEqual(P.erros, [], 'sem erro de script');
+  } finally { await P.fim(); }
+  const P2 = await abrirUniversal(Object.assign({}, op, { producao: { Destino: 'Monocrática', 'Mono - Tipo de ato': 'Decisão de urgência' } }));
+  try {
+    const R = await botoes(P2.pg), t = await P2.pg.textContent('#pv-julgamento');
+    assert.ok(R.includes('Deferido') && !R.includes('Desprovido'), 'urgência: ' + R.join(', '));
+    assert.doesNotMatch(t, /Hipótese do art\. 932|Honorários/);
+  } finally { await P2.fim(); }
+});

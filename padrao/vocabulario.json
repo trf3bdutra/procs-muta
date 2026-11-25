@@ -440,6 +440,93 @@
         ]
       ],
       "sinonimos": {}
+    },
+    "resJulg": {
+      "rotulo": "Resultado do julgamento",
+      "ficha": "",
+      "secao": "producao",
+      "prontuario": "resJulg",
+      "motor": "",
+      "opcoes": [
+        [
+          "Provido",
+          "na"
+        ],
+        [
+          "Parcialmente provido",
+          "na"
+        ],
+        [
+          "Desprovido",
+          "na"
+        ],
+        [
+          "Não conhecido",
+          "na"
+        ],
+        [
+          "Prejudicado",
+          "na"
+        ],
+        [
+          "Rejeitados",
+          "na"
+        ],
+        [
+          "Acolhidos sem efeito infringente",
+          "na"
+        ],
+        [
+          "Acolhidos com efeito infringente",
+          "na"
+        ],
+        [
+          "Retratação exercida",
+          "na"
+        ],
+        [
+          "Acórdão mantido",
+          "na"
+        ],
+        [
+          "Deferido",
+          "na"
+        ],
+        [
+          "Parcialmente deferido",
+          "na"
+        ],
+        [
+          "Indeferido",
+          "na"
+        ],
+        [
+          "Homologado",
+          "na"
+        ],
+        [
+          "Extinto",
+          "na"
+        ]
+      ],
+      "sinonimos": {
+        "Dado provimento": "Provido",
+        "Dar provimento": "Provido",
+        "Negado provimento": "Desprovido",
+        "Negar provimento": "Desprovido",
+        "Não provido": "Desprovido",
+        "Nao provido": "Desprovido",
+        "Improvido": "Desprovido",
+        "Parcial": "Parcialmente provido",
+        "Parcialmente deferida": "Parcialmente deferido",
+        "Rejeitado": "Rejeitados",
+        "Acolhidos": "Acolhidos sem efeito infringente",
+        "Não conhecida": "Não conhecido",
+        "Prejudicada": "Prejudicado",
+        "Desprovida": "Desprovido",
+        "Provida": "Provido",
+        "Parcialmente provida": "Parcialmente provido"
+      }
     }
   }
 }

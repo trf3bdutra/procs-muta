@@ -90,7 +90,7 @@ def _prod(a):
     TIPO_ATO = ['Decisão monocrática (art. 932)', 'Decisão de urgência', 'Despacho', 'Decisão de admissibilidade', 'Juízo de retratação', 'Homologação / extinção']
     HIP932 = ['III · recurso inadmissível, prejudicado ou sem impugnação específica', 'IV a · contrário a súmula do STF, STJ ou do TRF', 'IV b · contrário a repetitivo do STF ou STJ',
               'IV c · contrário a IRDR ou IAC', 'V a · decisão recorrida contrária a súmula', 'V b · decisão recorrida contrária a repetitivo', 'V c · decisão recorrida contrária a IRDR ou IAC', 'Não se aplica']
-    RES_MONO = ['Não conhecido', 'Negado provimento', 'Dado provimento', 'Parcialmente provido', 'Deferido', 'Indeferido', 'Parcialmente deferido', 'Prejudicado', 'Homologado', 'Extinto']
+    RES_MONO = [o[0] for o in json.loads((R / 'padrao/vocabulario.json').read_text(encoding='utf-8'))['campos']['resJulg']['opcoes']]  # vocabulário único
     HONOR = ['Majorados', 'Mantidos', 'Invertidos', 'Fixados', 'Redistribuídos', 'Sem honorários recursais']
     a['seletor'] = {'secao': 'producao', 'chave': 'Destino', 'rotulo': 'Destino do julgamento',
                     'opcoes': [{'valor': '', 'rotulo': 'A definir na triagem'}, {'valor': 'Sessão', 'rotulo': 'Sessão (colegiado)'}, {'valor': 'Monocrática', 'rotulo': 'Decisão monocrática'}],
@@ -104,7 +104,7 @@ def _prod(a):
         g('Relatório, voto e ementa', ['Relatório Padronizado', 'Adequação Ementa', 'Formatação Subementa', 'Voto - Resultado', 'Voto - Honorários', 'Tópico-síntese', 'Mídias Necessárias', 'Voto - Descrição'], 'sessao'),
         g('Liberação para a sessão', ['LIBERADO', 'Data da Liberação'], 'sessao'),
         # versão monocrática (art. 932)
-        {'grupo': 'Ato e fundamento', 'destino': 'monocratica', 'campos': [NOVO('Tipo de ato', 'Mono - Tipo de ato', 'lista', op=TIPO_ATO),
+        {'grupo': 'Ato e fundamento', 'destino': 'monocratica', 'campos': [NOVO('Pronunciamento', 'Mono - Tipo de ato', 'lista', op=TIPO_ATO),
             NOVO('Hipótese do art. 932', 'Hipóteses Monocrática', 'lista', 'triagem', HIP932), NOVO('Precedente ou fundamento', 'Mono - Fundamento', 'texto-longo')]},
         {'grupo': 'Decisão monocrática', 'destino': 'monocratica', 'campos': [com('Voto - Resultado', rotulo='Resultado', tipo='lista', opcoes=RES_MONO),
             com('Voto - Honorários', rotulo='Honorários', tipo='lista', opcoes=HONOR), NOVO('Tópico-síntese', 'Tópico-síntese', 'texto'),

@@ -217,7 +217,7 @@ function seletor() {
     var mx = matrizDoProcesso(), res = resEditor();
     return '<p class="muted cx-n">' + (mx ? 'Minuta-matriz do processo: <b>' + esc(mx.nome) + '</b>' + ([mx.classe, mx.resultado].filter(Boolean).length ? ' · ' + esc([mx.classe, mx.resultado].filter(Boolean).join(' · ')) : '') :
       'Sem minuta-matriz para este pronunciamento e tipo de julgamento: o editor é conferido pela estrutura do gabinete.') +
-      ' <small>(pelo tipo de ato e pelo tipo de julgamento do Prontuário' + (res ? '; resultado do editor: ' + esc(window.MutaConformidadeMotor.RES_TXT[res]) : '') + ')</small></p>';
+      ' <small>(pelo pronunciamento e pelo tipo de julgamento do Prontuário' + (res ? '; resultado do editor: ' + esc(window.MutaConformidadeMotor.RES_TXT[res]) : '') + ')</small></p>';
   }
   if (C.fonte === 'm2886') {
     var G = d.m2886.grupos.map(function (g) { return { id: 'g:' + g.id, nome: 'Grupo ' + g.id + ' · ' + g.nome, sub: 'minuta-base da matriz modular · ' + g.resJulg, secoes: g.secoes }; });
@@ -363,7 +363,7 @@ function estruturaConformidade(aoBaixar) {
     var lis = L.map(function (x) { var tem = ps.some(function (t) { return x[1].test(t); }); if (tem) ok++; return '<li class="' + (tem ? 'ok' : 'no') + '"><i>' + (tem ? 'ok' : 'falta') + '</i><span>' + esc(x[0]) + '</span></li>'; }).join('');
     var mx = C.dados ? matrizDoProcesso() : null;
     return '<details class="card cf-mx"' + (ok < L.length ? ' open' : '') + '><summary><b>Estrutura × minuta-matriz</b><small>' + ok + '/' + L.length + ' elementos obrigatórios' + (mx ? ' · ' + esc(mx.nome) : ' · sem minuta-matriz: estrutura do gabinete') + '</small></summary>' +
-      '<p class="muted cx-n">' + (mx ? 'Minuta-matriz do processo: <b>' + esc(mx.nome) + '</b> (pelo tipo de ato e pelo tipo de julgamento do Prontuário).' : 'Sem minuta-matriz para este pronunciamento e tipo de julgamento.') + '</p>' +
+      '<p class="muted cx-n">' + (mx ? 'Minuta-matriz do processo: <b>' + esc(mx.nome) + '</b> (pelo pronunciamento e pelo tipo de julgamento do Prontuário).' : 'Sem minuta-matriz para este pronunciamento e tipo de julgamento.') + '</p>' +
       '<div class="mn-est"><ul class="mn-ck">' + lis + '</ul></div>' + (mx ? estruturaHtml(mx) : '') + '</details>';
   } finally { C.parteEd = parte; }
 }
