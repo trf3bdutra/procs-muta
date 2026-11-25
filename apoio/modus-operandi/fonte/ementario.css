@@ -803,3 +803,15 @@ html.emb-cmt body #e-aside{top:0!important;max-height:100vh!important}
 .pp-process-card .pp-processo-slide>.pp-processo-unico{padding:10px 12px;margin:0;border:0;background:transparent}
 .pp-process-card .pp-processo-unico>.pp-interna:first-child{margin-top:0}
 .pp-process-card .pp-processo-unico>.pp-interna:last-child{padding-bottom:0}
+
+/* Síntese do julgamento: um cartão, cronologia no cabeçalho e conteúdo em duas colunas. */
+.pp-sintese{border:1px solid var(--line);background:var(--card);min-width:0}
+.pp-sintese-meta{display:flex;flex-wrap:wrap;align-items:flex-start;gap:8px 20px;padding:8px 11px;background:var(--panel);font-size:12px}
+.pp-sintese-meta>div{min-width:0;flex:1 1 auto}
+.pp-sintese-meta .pp-k{display:block;margin:0 0 3px}
+.pp-sintese-meta b{font-size:12px;font-weight:650;overflow-wrap:anywhere}
+.pp-sintese .pp-sintese-conteudo{border-top:1px solid var(--line);gap:0;align-items:stretch}
+.pp-sintese-conteudo>.pp-card{border:0;border-left:0;background:transparent;padding:10px 11px;margin:0;border-radius:0}
+.pp-sintese-conteudo>.pp-card.res{border-left:1px solid var(--line);box-shadow:inset 3px 0 0 var(--rc)}
+.pp-sintese-conteudo>.pp-card.res:only-child{border-left:0}
+@media(max-width:860px){.pp-sintese-conteudo>.pp-card.res:not(:only-child){border-left:0;border-top:1px solid var(--line)}}
