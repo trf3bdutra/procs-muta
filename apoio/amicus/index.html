@@ -248,7 +248,59 @@ body.am-com-aba{overflow:hidden}
 .cx-metas{margin:0;padding-left:0;list-style:none;font-size:12px}.cx-metas li{padding:4px 0;border-top:1px dashed var(--el)}.cx-metas li:first-child{border-top:0}
 .cx-cx{font-size:11.5px;color:var(--ei);margin:4px 0}.cx-cx span{display:block;font:400 9.5px/1.4 var(--emono,monospace);letter-spacing:.1em;text-transform:uppercase;color:var(--em)}
 .cx-rot details>summary{flex-direction:column;align-items:flex-start;gap:1px}
-</style></head><body><header class="am-home-header"><div class="am-legacy"><b>Amicus Curiae.</b><span>Gabinete CMT · Ferramentas</span></div><nav class="am-over-nav am-home-overview" aria-label="Aplicações e áreas de consulta"><div class="am-nav-apps" role="tablist" aria-label="Abas do Amicus"><button type="button" role="tab" data-amtab="ref" aria-selected="true">Referências</button><button type="button" role="tab" data-amtab="collegium" aria-selected="false">Collegium</button><button type="button" role="tab" data-amtab="collectio" aria-selected="false" hidden title="Só para servidores logados">Collectio</button></div><div class="am-nav-links" aria-label="Aplicações"><a href="/amicus/compendium/">Compendium</a><a href="/amicus/cognitio/">Cognitio</a></div></nav></header>
+
+/* cores do Amicus: cada seção tem a sua (rótulo, fio do título, itens abertos); famílias de recursos com cor própria */
+.am-dashboard{--m-comp:#227246;--m-imp:#8c2f47;--m-met:#5a4a8c;--m-rec:#00628f;--m-rot:#1b7244;--m-flx:#1c4a65;--m-enu:#a9640c;--m-rit:#8a4b1c;--m-tp:#3d4f96;--m-as:#8b3a6c;--f-civel:#00547b;--f-interno:#a57829;--f-exc:#227246;--f-alerta:#8c2f47}
+[data-theme=dark] .am-dashboard{--m-comp:#7acd98;--m-imp:#e48aa0;--m-met:#b8a8ea;--m-rec:#7cbfea;--m-rot:#82d09e;--m-flx:#86bee3;--m-enu:#e7b469;--m-rit:#e7a76f;--m-tp:#a9b4f0;--m-as:#e39ac6;--f-civel:#74b8e4;--f-interno:#e6c27a;--f-exc:#7acd98;--f-alerta:#e48aa0}
+#competencia{--mod:var(--m-comp)}#impedimentos{--mod:var(--m-imp)}#metas{--mod:var(--m-met)}#recursos{--mod:var(--m-rec)}#rotina{--mod:var(--m-rot)}#fluxos{--mod:var(--m-flx)}#enunciados{--mod:var(--m-enu)}#regimento{--mod:var(--m-rit)}#temas-proc{--mod:var(--m-tp)}#assuntos{--mod:var(--m-as)}
+.am-dashboard section.busca .pane-title small{color:var(--mod,var(--em))!important;font-weight:600}
+.am-dashboard section.busca .pane-title h2{box-shadow:inset 3px 0 0 var(--mod,var(--eg));padding-left:9px!important}
+.am-dashboard section.busca .more:hover,.am-dashboard section.busca .panel-filter :is(input,select):focus{border-color:var(--mod)!important;outline:none}
+.am-dashboard section.busca .panel-filter :is(input,select):focus{box-shadow:0 0 0 2px color-mix(in srgb,var(--mod) 22%,transparent)}
+.am-dashboard section.busca{scroll-margin-top:calc(var(--am-hh,64px) + 6px)}
+.cx-kbd{display:inline-grid;place-items:center;min-width:15px;height:15px;margin-right:6px;border:1px solid currentColor;border-radius:3px;font:600 9px/1 var(--emono,monospace);cursor:pointer;vertical-align:1px}
+.cx-flash{animation:cxflash 1.3s ease-out}
+@keyframes cxflash{0%{box-shadow:inset 0 0 0 999px color-mix(in srgb,var(--mod) 14%,transparent)}100%{box-shadow:inset 0 0 0 999px transparent}}
+/* listas: item com fio colorido; aberto ganha fundo leve da cor */
+.am-dashboard .ref-list>details,.cx-rec>details{border-left:3px solid transparent;padding-left:8px;transition:background .15s,border-color .15s}
+.am-dashboard .ref-list>details:hover,.cx-rec>details:hover{border-left-color:color-mix(in srgb,var(--fc,var(--mod)) 45%,transparent)}
+.am-dashboard .ref-list>details[open],.cx-rec>details[open]{border-left-color:var(--fc,var(--mod));background:color-mix(in srgb,var(--fc,var(--mod)) 5%,transparent)}
+.am-dashboard .ref-list>details[open]>summary b,.cx-rec>details[open]>summary b{color:var(--fc,var(--mod))}
+/* recursos */
+.cx-atos .more[aria-pressed="true"]{background:var(--mod)!important;border-color:var(--mod)!important;color:#fff!important}
+.cx-hint{border-left-color:var(--mod)!important;background:color-mix(in srgb,var(--mod) 6%,transparent)!important}
+.cx-bar{display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:space-between;margin:6px 0}
+.cx-fams{display:flex;flex-wrap:wrap;gap:4px}
+.cx-fams button,.cx-vista button{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border:1px solid var(--el);border-radius:999px;background:transparent;color:var(--ei);font:600 11.5px Figtree,system-ui,sans-serif;cursor:pointer}
+.cx-fams i{width:9px;height:9px;border-radius:2px;background:var(--fc)}.cx-fams b{font:600 10px var(--emono,monospace);color:var(--em)}
+.cx-fams button:hover{border-color:var(--fc)}.cx-fams button[aria-pressed="true"]{border-color:var(--fc);background:color-mix(in srgb,var(--fc) 12%,transparent);color:var(--fc)}
+.cx-vista{display:inline-flex;border:1px solid var(--el);border-radius:999px;padding:2px}.cx-vista button{border:0;padding:4px 11px}
+.cx-vista button[aria-pressed="true"]{background:var(--mod);color:#fff}
+.cx-badge{color:var(--fc,var(--eo2))!important;border-color:color-mix(in srgb,var(--fc,var(--eo2)) 40%,transparent)!important;background:color-mix(in srgb,var(--fc,var(--eo2)) 8%,transparent)}
+.cx-rec>details>summary{position:relative;padding:7px 30px 7px 0}
+.cx-star{position:absolute;right:2px;top:5px;border:0;background:none;color:var(--el2);font-size:15px;line-height:1;cursor:pointer;padding:2px}
+.cx-star:hover{color:var(--f-interno)}.cx-star[aria-pressed="true"]{color:var(--f-interno)}
+.cx-prog{font:600 10px var(--emono,monospace);color:var(--em);border-bottom:2px solid var(--el)}.cx-prog.ok{color:var(--f-exc);border-color:var(--f-exc)}
+.cx-base{font:400 11px var(--emono,monospace);color:var(--fc,var(--em));margin:0 0 6px}
+.cx-grid4{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:1px;background:var(--el);border:1px solid var(--el);margin:6px 0 8px;font-size:12px;color:var(--ei)}
+.cx-grid4>div{background:var(--ew,#fff);padding:6px 8px}.cx-grid4 small{display:block;font:400 9.5px/1.5 var(--emono,monospace);letter-spacing:.08em;text-transform:uppercase;color:var(--em)}
+.cx-ess{list-style:none;padding-left:0!important}.cx-ess li{position:relative;padding:3px 0 3px 14px;border-top:1px dashed var(--el)}.cx-ess li:first-child{border-top:0}
+.cx-ess li::before{content:'';position:absolute;left:2px;top:.75em;width:5px;height:5px;background:var(--fc,var(--mod));transform:rotate(45deg)}
+.cx-atn{border-left:3px solid var(--f-alerta)!important;background:color-mix(in srgb,var(--f-alerta) 7%,transparent);padding:7px 10px!important}.cx-atn b:first-child{color:var(--f-alerta)}
+.cx-ckl h5{font:400 9.5px/1.4 var(--emono,monospace);letter-spacing:.09em;text-transform:uppercase;color:var(--fc,var(--em));margin:8px 0 2px}
+.cx-ck{display:flex;gap:7px;align-items:flex-start;padding:3px 0;cursor:pointer}.cx-ck input{margin-top:3px;accent-color:var(--fc,var(--mod))}.cx-ck input:checked+span{color:var(--em);text-decoration:line-through;text-decoration-color:color-mix(in srgb,var(--em) 50%,transparent)}
+.cx-tab{width:100%;border-collapse:collapse;font-size:12px;color:var(--ei)}.cx-tab th{font:400 9.5px/1.4 var(--emono,monospace);letter-spacing:.08em;text-transform:uppercase;color:var(--mod);text-align:left;border-bottom:2px solid var(--mod);padding:5px 6px}
+.cx-tab td{padding:6px;border-bottom:1px solid var(--el);vertical-align:top}.cx-tab td:first-child{box-shadow:inset 3px 0 0 var(--fc)}.cx-tab tr[data-ir]{cursor:pointer}.cx-tab tr[data-ir]:hover td,.cx-tab tr[data-ir]:focus td{background:color-mix(in srgb,var(--fc) 7%,transparent)}
+.cx-quadro{overflow-x:auto}
+/* rotina do gabinete */
+.cx-num{display:inline-grid;place-items:center;min-width:20px;height:20px;margin-right:7px;border-radius:50%;background:var(--fc);color:#fff;font:700 10.5px/1 var(--emono,monospace)}
+.cx-cx{margin:6px 0!important}.cx-cx i{display:inline-block;font-style:normal;margin:2px 3px 2px 0;padding:1px 8px;border-radius:999px;border:1px solid color-mix(in srgb,var(--fc,var(--mod)) 35%,transparent);background:color-mix(in srgb,var(--fc,var(--mod)) 7%,transparent);font-size:11px}
+.cx-cx span{color:var(--fc,var(--em))!important}
+/* metas */
+.cx-metas li{display:flex;gap:9px;align-items:baseline}.cx-mn{flex:0 0 auto;min-width:24px;text-align:center;padding:1px 6px;border-radius:4px;background:var(--fc);color:#fff;font:700 11px var(--emono,monospace)}
+/* grupos dos assuntos */
+.cx-g{display:flex;align-items:center;gap:6px;color:var(--fc,var(--em))!important}.cx-g i{width:8px;height:8px;border-radius:2px;background:var(--fc)}.cx-g b{font-weight:400;color:var(--em)}
+</style></head><body><header class="am-home-header"><div class="am-legacy"><b>Amicus Curiae.</b><span>Gabinete CMT · Ferramentas</span></div><nav class="am-over-nav am-home-overview" aria-label="Aplicações e áreas de consulta"><div class="am-nav-apps" role="tablist" aria-label="Abas do Amicus"><button type="button" role="tab" data-amtab="collegium" aria-selected="false">Collegium</button><button type="button" role="tab" data-amtab="collectio" aria-selected="false" hidden title="Só para servidores logados">Collectio</button></div><div class="am-nav-links" aria-label="Aplicações"><a href="/amicus/compendium/">Compendium</a><a href="/amicus/cognitio/">Cognitio</a></div></nav></header>
 <main class="am-dashboard am-workspace">
 <aside class="am-rail am-competence" id="referencias-operacionais" aria-labelledby="am-competence-title"><div class="am-rail-head"><small>Referências operacionais</small><h2 id="am-competence-title">Competência e imparcialidade</h2></div><div class="am-rail-panels"><section class="busca" id="competencia"><div class="pane-title"><div><small>Referência · competência</small><h2>Competência</h2></div><button type="button" class="more" data-full="competencia">⛶ Tela cheia</button></div><p>Turma Regional de Mato Grosso do Sul, competência delegada e distribuição por matéria nas Seções do TRF3. Síntese do material fornecido, sujeita à conferência normativa.</p>
 <div class="comp-grid" id="comp-body"></div></section><section class="busca" id="impedimentos"><div class="pane-title"><div><small>Referencial interno · imparcialidade</small><h2>Impedimentos e suspeições</h2></div><div class="imp-actions"><button type="button" class="more" id="imp-refresh" aria-label="Atualizar referencial" title="Atualizar referencial">↻</button><button type="button" class="more" data-full="impedimentos">⛶ Tela cheia</button></div></div>
@@ -259,7 +311,7 @@ body.am-com-aba{overflow:hidden}
 <div class="am-main" id="ferramentas"><section class="am-area" aria-labelledby="ferramentas-title"><div class="am-area-title"><div><h2 id="ferramentas-title">Recursos e fluxos</h2><p>Recursos cabíveis e mapa operacional do gabinete.</p></div></div><section class="busca" id="recursos"><div class="pane-title"><div><small>Referência · cabimento e prazos</small><h2>Recursos cabíveis</h2></div><button type="button" class="more" data-full="recursos">⛶ Tela cheia</button></div>
 <p>Do ato impugnado à via cabível: prazo, cabimento, órgão julgador e sustentação oral de cada recurso, com o essencial e a rotina do gabinete.</p>
 <div class="cx-atos" id="rc-atos" role="group" aria-label="Ato impugnado"></div><p class="cx-hint" id="rc-hint" hidden></p>
-<div class="panel-filter"><input type="search" id="rc-q" placeholder="Filtrar: 942, preparo, retratação, 1.042…" aria-label="Filtrar recursos"><select id="rc-f" aria-label="Família"><option value="">Todas as famílias</option></select></div>
+<div class="panel-filter"><input type="search" id="rc-q" placeholder="Filtrar: 942, preparo, retratação, 1.042…" aria-label="Filtrar recursos"></div><div class="cx-bar"><div class="cx-fams" id="rc-fams" role="group" aria-label="Família"></div><div class="cx-vista" role="group" aria-label="Visualização"><button type="button" data-vista="fichas" aria-pressed="true">Fichas</button><button type="button" data-vista="quadro" aria-pressed="false">Quadro</button></div></div>
 <p class="bmeta" id="rc-meta"></p><div id="rc-list" class="ref-list cx-rec"></div><details class="cx-req" id="rc-req"><summary>Requisitos de admissibilidade</summary><div id="rc-req-b" class="cx-html"></div></details></section><section class="busca" id="rotina"><div class="pane-title"><div><small>Referência operacional</small><h2>Rotina do gabinete</h2></div><button type="button" class="more" data-full="rotina">⛶ Tela cheia</button></div><p>Da chegada à baixa, etapa por etapa: as caixas do PJe de cada fase e o que fazer nela.</p><div id="ro-list" class="ref-list cx-html cx-rot"></div></section><section class="busca" id="fluxos"><div class="pane-title"><div><small>Referência operacional</small><h2>Fluxos de trabalho</h2></div><button type="button" class="more" data-full="fluxos">⛶ Tela cheia</button></div>
 <p>Explore as seis estações do gabinete: selecione tarefas, siga percursos e visualize suas conexões. Mapa de referência, sem contagens do acervo.</p>
 <div class="af-toolbar"><div id="flow-tabs" class="flow-tabs" role="group" aria-label="Percursos"></div><div class="af-tools"><button class="more" id="af-minus" type="button" aria-label="Reduzir mapa">−</button><button class="more" id="af-fit" type="button">Ajustar</button><button class="more" id="af-plus" type="button" aria-label="Ampliar mapa">+</button><button class="more" id="af-reset" type="button">Visão geral</button></div></div>
@@ -418,23 +470,44 @@ const cb=$('comp-body');if(cb&&C.competencia){const K=C.competencia;
  cb.innerHTML=sec('Turma Regional de MS',K.turma,true)+sec('Competência delegada',K.delegada)+sec('Turma Regional × Turma Recursal',K.distincao)+
   (K.secoes||[]).map(x=>'<article><h3>'+esc(x.n)+' · '+esc(x.t)+'</h3><details><summary>'+x.m.length+' matérias</summary>'+li(x.m.map(esc))+'</details><small>'+esc(x.b)+'</small></article>').join('');}
 /* recursos e ato → via cabível */
-let ato='';const R=C.recursos||[],F=C.familias||{};
-const rf=$('rc-f');if(rf)Object.keys(F).forEach(k=>rf.insertAdjacentHTML('beforeend','<option value="'+k+'">'+esc(F[k].n)+' · '+esc(F[k].s)+'</option>'));
+let ato='',fam='',vista='fichas',abrir='';const R=C.recursos||[],F=C.familias||{};
+const LS=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))||d}catch(e){return d}},SS=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+let fav=LS('am-rec-fav',[]),feito=LS('am-rec-rot',{});
+const FC=k=>'var(--f-'+k+')';
+const rf=$('rc-fams');if(rf)rf.innerHTML=Object.keys(F).map(k=>'<button type="button" data-fam="'+k+'" aria-pressed="false" style="--fc:'+FC(k)+'" title="'+esc(F[k].s)+'"><i></i>'+esc(F[k].n)+' <b>'+R.filter(r=>r.fam===k).length+'</b></button>').join('');
 const ra=$('rc-atos');if(ra)ra.innerHTML=(C.atos||[]).map(a=>'<button type="button" class="more" data-ato="'+a.k+'" aria-pressed="false" title="'+esc(a.d)+'">'+esc(a.t)+'</button>').join('');
-function rec(){const q=norm($('rc-q').value),f=$('rc-f').value,A=(C.atos||[]).find(a=>a.k===ato);
- const L=R.filter(r=>(!f||r.fam===f)&&(!A||A.ids.includes(r.id))&&(!q||norm([r.nome,r.kw,r.base,r.contra,r.prazo,r.orgao,r.sust].join(' ')+' '+txt((r.ess||[]).join(' ')+r.atn)).includes(q)));
+const nRot=r=>(r.rot||[]).reduce((n,x)=>n+x.i.length,0),nFeito=r=>(r.rot||[]).reduce((n,x,i)=>n+x.i.filter((_,j)=>feito[r.id+':'+i+':'+j]).length,0);
+const prog=r=>{const t=nRot(r),f=nFeito(r);return t?'<span class="cx-prog'+(f===t?' ok':'')+'" data-prog="'+r.id+'">rotina '+f+'/'+t+'</span>':''};
+function ficha(r){return '<details data-rid="'+r.id+'" style="--fc:'+FC(r.fam)+'"'+(abrir===r.id?' open':'')+'><summary><b>'+esc(r.nome)+'</b><span class="cx-badge">'+esc(r.badge)+'</span><span class="cx-fam">'+esc((F[r.fam]||{}).n||'')+'</span>'+prog(r)+
+ '<button type="button" class="cx-star" data-fav="'+r.id+'" aria-pressed="'+fav.includes(r.id)+'" title="Fixar no alto">★</button></summary>'+
+ '<p class="cx-base">'+esc(r.base)+'</p><div class="cx-grid4"><div><small>Prazo</small>'+esc(r.prazo)+'</div><div><small>Cabe contra</small>'+esc(r.contra)+'</div><div><small>Órgão julgador</small>'+esc(r.orgao)+'</div><div><small>Sustentação oral</small>'+esc(r.sust)+'</div></div>'+
+ '<div class="cx-html"><ul class="cx-ess">'+(r.ess||[]).map(x=>'<li>'+x+'</li>').join('')+'</ul>'+(r.atn?'<p class="cx-atn">'+r.atn+'</p>':'')+
+ ((r.rot||[]).length?'<div class="cx-ckl"><h4>Rotina do gabinete <span class="cx-sub">marque o que já foi feito</span></h4>'+r.rot.map((x,i)=>'<h5>'+esc(x.t)+'</h5>'+x.i.map((t,j)=>{const k=r.id+':'+i+':'+j;return '<label class="cx-ck"><input type="checkbox" data-rk="'+k+'"'+(feito[k]?' checked':'')+'><span>'+t+'</span></label>'}).join('')).join('')+'</div>':'')+'</div></details>';}
+function rec(){const q=norm($('rc-q').value),A=(C.atos||[]).find(a=>a.k===ato);
+ const L=R.filter(r=>(!fam||r.fam===fam)&&(!A||A.ids.includes(r.id))&&(!q||norm([r.nome,r.kw,r.base,r.contra,r.prazo,r.orgao,r.sust].join(' ')+' '+txt((r.ess||[]).join(' ')+r.atn)).includes(q)))
+  .sort((a,b)=>fav.includes(b.id)-fav.includes(a.id));
  const h=$('rc-hint');h.hidden=!A;if(A)h.innerHTML='<b>'+esc(A.d)+'.</b> '+A.hint;
- $('rc-meta').textContent=L.length+' de '+R.length+' recursos'+(A?' · cabíveis contra: '+A.t.toLowerCase():'');
- $('rc-list').innerHTML=L.map(r=>'<details><summary><b>'+esc(r.nome)+'</b><span class="cx-badge">'+esc(r.badge)+'</span><span class="cx-fam">'+esc((F[r.fam]||{}).n||'')+'</span></summary>'+
-  '<dl class="cx-dl"><dt>Cabe contra</dt><dd>'+esc(r.contra)+'</dd><dt>Prazo</dt><dd>'+esc(r.prazo)+'</dd><dt>Órgão</dt><dd>'+esc(r.orgao)+'</dd><dt>Sustentação</dt><dd>'+esc(r.sust)+'</dd><dt>Base</dt><dd>'+esc(r.base)+'</dd></dl>'+
-  '<div class="cx-html"><h4>Essencial</h4>'+li(r.ess)+(r.atn?'<p class="cx-atn">'+r.atn+'</p>':'')+(r.rot||[]).map(x=>'<h4>'+esc(x.t)+'</h4>'+li(x.i)).join('')+'</div></details>').join('')||'<p class="bmeta">Nenhum recurso com esse filtro.</p>';}
+ $('rc-meta').textContent=L.length+' de '+R.length+' recursos'+(A?' · cabíveis contra: '+A.t.toLowerCase():'')+(fav.length?' · ★ fixados no alto':'');
+ const el=$('rc-list');el.classList.toggle('cx-quadro',vista==='quadro');
+ el.innerHTML=!L.length?'<p class="bmeta">Nenhum recurso com esse filtro.</p>':vista==='quadro'?
+  '<table class="cx-tab"><thead><tr><th>Recurso</th><th>Prazo</th><th>Cabe contra</th><th>Órgão</th><th>Sustentação</th></tr></thead><tbody>'+L.map(r=>'<tr data-ir="'+r.id+'" style="--fc:'+FC(r.fam)+'" tabindex="0"><td><b>'+esc(r.nome)+'</b></td><td>'+esc(r.prazo)+'</td><td>'+esc(r.contra)+'</td><td>'+esc(r.orgao)+'</td><td>'+esc(r.sust)+'</td></tr>').join('')+'</tbody></table>':
+  L.map(ficha).join('');abrir='';}
 if(ra){ra.addEventListener('click',e=>{const b=e.target.closest('[data-ato]');if(!b)return;ato=ato===b.dataset.ato?'':b.dataset.ato;ra.querySelectorAll('[data-ato]').forEach(x=>x.setAttribute('aria-pressed',String(x.dataset.ato===ato)));rec();});
- $('rc-q').addEventListener('input',rec);$('rc-f').addEventListener('change',rec);rec();}
+ rf.addEventListener('click',e=>{const b=e.target.closest('[data-fam]');if(!b)return;fam=fam===b.dataset.fam?'':b.dataset.fam;rf.querySelectorAll('[data-fam]').forEach(x=>x.setAttribute('aria-pressed',String(x.dataset.fam===fam)));rec();});
+ document.querySelector('#recursos .cx-vista').addEventListener('click',e=>{const b=e.target.closest('[data-vista]');if(!b)return;vista=b.dataset.vista;e.currentTarget.querySelectorAll('[data-vista]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));rec();});
+ const lst=$('rc-list');
+ lst.addEventListener('click',e=>{const s=e.target.closest('[data-fav]');if(s){e.preventDefault();const id=s.dataset.fav;fav=fav.includes(id)?fav.filter(x=>x!==id):fav.concat(id);SS('am-rec-fav',fav);rec();return;}
+  const tr=e.target.closest('[data-ir]');if(tr){abrir=tr.dataset.ir;vista='fichas';document.querySelectorAll('#recursos [data-vista]').forEach(x=>x.setAttribute('aria-pressed',String(x.dataset.vista==='fichas')));rec();const d=lst.querySelector('[data-rid="'+abrir+'"]')||lst.querySelector('details[open]');d&&d.scrollIntoView({behavior:'smooth',block:'start'});}});
+ lst.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.dataset.ir)e.target.click();});
+ lst.addEventListener('change',e=>{const c=e.target.closest('[data-rk]');if(!c)return;if(c.checked)feito[c.dataset.rk]=1;else delete feito[c.dataset.rk];SS('am-rec-rot',feito);
+  const r=R.find(x=>x.id===c.dataset.rk.split(':')[0]),p=lst.querySelector('[data-prog="'+r.id+'"]');if(p)p.outerHTML=prog(r);});
+ $('rc-q').addEventListener('input',rec);rec();}
 /* requisitos de admissibilidade */
 const rq=$('rc-req-b');if(rq)rq.innerHTML=(C.requisitos||[]).map(g=>'<h4>'+esc(g.t)+'</h4><p>'+esc(g.p)+'</p><ul>'+g.i.map(x=>'<li><b>'+esc(x.t)+'</b> — '+x.pl+(x.tc?' <span class="cx-sub">'+x.tc+'</span>':'')+'</li>').join('')+'</ul>').join('');
 /* rotina do gabinete: fases, caixas do PJe e o que fazer; o que já está em Temas processuais vira atalho */
-const ro=$('ro-list');if(ro)ro.innerHTML=(C.rotina||[]).map((f,i)=>'<details><summary><b>'+(f.id==='prazos'?'§':(i+1))+' · '+esc(f.t)+'</b><span class="cx-sub">'+esc(f.s)+'</span></summary>'+
- (f.caixas||[]).map(c=>'<p class="cx-cx"><span>'+esc(c.rot)+'</span>'+c.itens.map(esc).join(' · ')+'</p>').join('')+
+const PAL=['--m-rec','--m-rot','--m-met','--m-enu','--m-imp','--m-tp','--m-flx','--m-as','--m-comp','--m-rit'];
+const ro=$('ro-list');if(ro)ro.innerHTML=(C.rotina||[]).map((f,i)=>'<details style="--fc:var('+PAL[i%PAL.length]+')"><summary><b><span class="cx-num">'+(f.id==='prazos'?'§':(i+1))+'</span>'+esc(f.t)+'</b><span class="cx-sub">'+esc(f.s)+'</span></summary>'+
+ (f.caixas||[]).map(c=>'<div class="cx-cx"><span>'+esc(c.rot)+'</span>'+c.itens.map(x=>'<i>'+esc(x)+'</i>').join('')+'</div>').join('')+
  f.blocos.map(b=>b.ver==='requisitos'?'<p class="cx-ver">'+esc(b.h)+': <button type="button" class="cx-lnk" data-req>ver os requisitos de admissibilidade, em Recursos cabíveis</button></p>':b.ver?'<p class="cx-ver">'+esc(b.h)+': <button type="button" class="cx-lnk" data-tema="'+esc(b.ver)+'">ver em Temas processuais</button></p>':'<h4>'+esc(b.h)+'</h4>'+b.html).join('')+'</details>').join('');
 document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-req]');if(!b)return;const d=$('rc-req');if(d){d.open=true;d.scrollIntoView({behavior:'smooth',block:'start'});}});
 document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-tema]');if(!b)return;const t=b.dataset.tema;
@@ -444,25 +517,32 @@ const rd=$('rit-dia-b');if(rd)rd.innerHTML='<ul>'+(C.regimentoDia||[]).map(x=>'<
 document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-rart]');if(!b)return;const q=$('rit-q');if(q){q.value='RITRF3-'+b.dataset.rart+' ';q.dispatchEvent(new Event('input'));q.scrollIntoView({behavior:'smooth',block:'center'});}});
 const ras=$('rit-ass-b');if(ras)ras.innerHTML='<ul>'+(C.assentos||[]).map(x=>'<li><b>Assento '+esc(x.n)+'</b> <span class="cx-sub">'+esc(x.pub)+' · '+esc(x.ref)+'</span><br>'+esc(x.t)+'</li>').join('')+'</ul><p class="cx-tags">Uso interno do gabinete. Conferir vigência e alcance antes de minutar.</p>';
 /* metas do CNJ */
-const mt=$('mt-list');if(mt)mt.innerHTML=(C.metasCnj||[]).map(x=>'<li><b>Meta '+esc(x.n)+'</b> '+esc(x.t)+'</li>').join('');
+const mt=$('mt-list');if(mt)mt.innerHTML=(C.metasCnj||[]).map((x,i)=>'<li style="--fc:var('+PAL[i%PAL.length]+')"><b class="cx-mn">'+esc(x.n)+'</b><span>'+esc(x.t)+'</span></li>').join('');
 /* temas processuais */
-const tp=$('tp-list');if(tp)tp.innerHTML=(C.temas||[]).map(t=>'<details><summary><b>'+esc(t.t)+'</b><span class="cx-sub">'+esc(t.s)+'</span></summary>'+t.html+'</details>').join('');
+const tp=$('tp-list');if(tp)tp.innerHTML=(C.temas||[]).map((t,i)=>'<details style="--fc:var('+PAL[i%PAL.length]+')"><summary><b>'+esc(t.t)+'</b><span class="cx-sub">'+esc(t.s)+'</span></summary>'+t.html+'</details>').join('');
 /* assuntos recorrentes: lista agrupada com filtro (o léxico recursal fica só na Enciclopédia do Compendium) */
 function grupo(lista,grupos,ids,item){const q=norm($(ids.q).value),g=$(ids.g).value;
  const L=lista.filter(x=>(!g||x.g===g)&&(!q||txt(item(x)).includes(q)));
  $(ids.m).textContent=L.length+' de '+lista.length+' verbetes';
- $(ids.l).innerHTML=grupos.filter(G=>L.some(x=>x.g===G.id)).map(G=>'<h4 class="cx-g">'+esc(G.t)+'</h4>'+L.filter(x=>x.g===G.id).map(x=>'<details>'+item(x)+'</details>').join('')).join('')||'<p class="bmeta">Nada com esse filtro.</p>';}
+ $(ids.l).innerHTML=grupos.filter(G=>L.some(x=>x.g===G.id)).map(G=>{const c='var('+PAL[grupos.indexOf(G)%PAL.length]+')';return '<h4 class="cx-g" style="--fc:'+c+'"><i></i>'+esc(G.t)+' <b>'+L.filter(x=>x.g===G.id).length+'</b></h4>'+L.filter(x=>x.g===G.id).map(x=>'<details style="--fc:'+c+'">'+item(x)+'</details>').join('')}).join('')||'<p class="bmeta">Nada com esse filtro.</p>';}
 const AS={q:'as-q',g:'as-g',m:'as-meta',l:'as-list'};
 const itAs=a=>'<summary><b>'+esc(a.t)+'</b><span class="cx-sub">'+esc(a.sec)+'</span></summary><p>'+a.d+'</p>'+li(a.pts)+(a.tags.length?'<p class="cx-tags">'+a.tags.map(esc).join(' · ')+'</p>':'');
 [[AS,C.assuntos||[],C.assuntosGrupos||[],itAs]].forEach(([ids,lista,grupos,item])=>{const sel=$(ids.g);if(!sel)return;
  grupos.forEach(G=>sel.insertAdjacentHTML('beforeend','<option value="'+G.id+'">'+esc(G.t)+'</option>'));
  const f=()=>grupo(lista,grupos,ids,item);$(ids.q).addEventListener('input',f);sel.addEventListener('change',f);f();});
+/* atalhos: teclas 1–0 levam às seções (o número aparece no rótulo de cada uma) */
+const SEC=[...document.querySelectorAll('.am-dashboard section.busca[id]')].slice(0,10);
+SEC.forEach((s,i)=>{const sm=s.querySelector('.pane-title small');if(sm)sm.insertAdjacentHTML('afterbegin','<kbd class="cx-kbd" title="Tecla '+((i+1)%10)+'">'+((i+1)%10)+'</kbd>');});
+function vai(s){s.scrollIntoView({behavior:'smooth',block:'start'});s.classList.remove('cx-flash');void s.offsetWidth;s.classList.add('cx-flash');}
+document.addEventListener('keydown',e=>{if(e.ctrlKey||e.metaKey||e.altKey||/^(INPUT|TEXTAREA|SELECT)$/.test((e.target.tagName||''))||e.target.isContentEditable)return;
+ const m=document.querySelector('main.am-dashboard');if(!m||m.hidden||!/^[0-9]$/.test(e.key))return;const s=SEC[(+e.key+9)%10];if(s){e.preventDefault();vai(s);}});
+document.addEventListener('click',e=>{const k=e.target.closest&&e.target.closest('.cx-kbd');if(k){const s=k.closest('section.busca');s&&vai(s);}});
 })();
 </script></main>
 <section class="am-tabpane" id="am-tab-collegium" role="tabpanel" aria-label="Collegium" hidden><iframe title="Collegium · ementário da Turma Regional de MS" data-src="/amicus/collegium/#v=ement"></iframe></section>
 <section class="am-tabpane" id="am-tab-collectio" role="tabpanel" aria-label="Collectio" hidden><iframe title="Collectio" data-src="/amicus/collectio/"></iframe></section>
 <script>
-/* abas do Amicus: Referências (esta página), Collegium e Collectio (só para servidores logados), carregadas no próprio portal */
+/* abas do Amicus: a página de referências é o próprio Amicus (volta-se a ela pela marca); Collegium e Collectio (só para servidores logados), carregadas no próprio portal */
 (function(){'use strict';
 const D=document,btns=()=>D.querySelectorAll('[data-amtab]'),main=D.querySelector('main.am-dashboard');let logado=false;
 function altura(){const h=D.querySelector('body>header');D.documentElement.style.setProperty('--am-hh',(h?h.getBoundingClientRect().height:64)+'px');}
@@ -472,7 +552,8 @@ function abre(t,semHash,extra){if(t==='collectio'&&!logado)t='ref';if(!D.getElem
  D.querySelectorAll('.am-tabpane').forEach(p=>{const on=p.id==='am-tab-'+t;p.hidden=!on;const f=p.querySelector('iframe');if(on&&f&&(!f.src||extra))f.src=extra?f.dataset.src.split('#')[0]+'#'+extra:f.dataset.src;});
  D.body.classList.toggle('am-com-aba',t!=='ref');altura();
  if(!semHash)history.replaceState(null,'',t==='ref'?location.pathname:'#'+t);}
-D.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-amtab]');if(!b)return;e.preventDefault();abre(b.dataset.amtab);});
+D.addEventListener('click',e=>{const m=e.target.closest&&e.target.closest('.amicus-brand a[href="/amicus/"],.am-legacy');if(m&&!(e.ctrlKey||e.metaKey||e.shiftKey)){e.preventDefault();abre('ref');D.activeElement&&D.activeElement.blur&&D.activeElement.blur();scrollTo({top:0,behavior:'smooth'});return;}
+ const b=e.target.closest&&e.target.closest('[data-amtab]');if(!b)return;e.preventDefault();abre(b.dataset.amtab);});
 window.addEventListener('resize',altura);
 const inicial=decodeURIComponent((location.hash||'').slice(1));
 fetch('/api/login',{credentials:'same-origin',cache:'no-store'}).then(r=>r.ok?r.json():null).catch(()=>null).then(j=>{
