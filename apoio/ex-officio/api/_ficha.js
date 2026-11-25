@@ -22,6 +22,8 @@ function editaveis(F) {
   F.abas.forEach(a => a.grupos.forEach(g => g.campos.forEach(c => { if (c.secao && c.editavel !== false && !c.calculado) m[c.secao + '.' + c.chave] = c; })));
   F.abas.forEach(a => { if (a.seletor) m[a.seletor.secao + '.' + a.seletor.chave] = a.seletor; });
   const dc=m['triagem.Detalhamento do caso']||m['triagem.Especificidades']||m['triagem.Tema'];if(dc){m['triagem.Detalhamento do caso']=dc;m['triagem.Tema']=dc;m['triagem.Especificidades']=dc;}
+  /* Compatibilidade de clientes anteriores: a escrita legada é convertida no campo canônico. */
+  if(m['triagem.Tipo de Julgamento'])m['triagem.Padrão - Espécie']=m['triagem.Tipo de Julgamento'];
   return m;
 }
 async function fonteDe(cnj) {
@@ -71,6 +73,14 @@ function mesclarReferencia(old,patch){
 function aplica(r, mud) {
   const out = [];
   const t=mud.triagem, has=(o,k)=>Object.prototype.hasOwnProperty.call(o||{},k);
+  if(t&&(has(t,'Tipo de Julgamento')||has(t,'Padrão - Espécie'))){
+    const aliases={ed:'Embargos de declaração',interno:'Agravo interno',agint:'Agravo interno',retratacao:'Juízo de retratação'};
+    const parse=v=>String(v||'').split(/\s*(?:\+|;|,|·)\s*/).filter(Boolean).map(x=>aliases[x.toLowerCase()]||x);
+    const prev=parse((r.triagem||{})['Tipo de Julgamento']),legacy=parse(t['Padrão - Espécie']);
+    const types=has(t,'Tipo de Julgamento')?parse(t['Tipo de Julgamento']):[...new Set(prev.concat(legacy))];
+    t['Tipo de Julgamento']=[...new Set(types)].join(' + ');
+    t['Padrão - Espécie']=types.find(x=>['Embargos de declaração','Agravo interno','Juízo de retratação'].includes(x))||'';
+  }
   if(t&&(has(t,'Detalhamento do caso')||has(t,'Tema')||has(t,'Especificidades'))){
     const ant=r.triagem||{};
     let v=has(t,'Detalhamento do caso')?String(t['Detalhamento do caso']||''): [...new Set([has(t,'Tema')?t.Tema:ant.Tema,has(t,'Especificidades')?t.Especificidades:ant.Especificidades].map(x=>String(x||'').trim()).filter(Boolean))].join('\n');
