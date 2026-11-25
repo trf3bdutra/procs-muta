@@ -168,8 +168,8 @@ function wireTabs(tabs,onSelect){
 }
 function selectTab(tabs,idx){tabs.forEach(function(t,i){var on=i===idx;t.setAttribute('aria-selected',on);t.tabIndex=on?0:-1;$(t.getAttribute('aria-controls')).hidden=!on;});}
 /* 0.11: Prontuário (com a triagem), Minuta (lote, comparar e conformidade), Ementário, Parágrafos-padrão e Diretrizes; a Ajuda abre pelo "?" */
-var mainTabs=[$('tab-pront'),$('tab-min'),$('tab-acervo'),$('tab-par'),$('tab-dir'),$('tab-ajuda'),$('tab-dil'),$('tab-del'),$('tab-ctl'),$('tab-pauta')];
-var NOMES=['pront','min','ementario','par','dir','ajuda','dil','del','ctl','pauta'];
+var mainTabs=[$('tab-pront'),$('tab-min'),$('tab-acervo'),$('tab-par'),$('tab-dir'),$('tab-ajuda'),$('tab-dil'),$('tab-del'),$('tab-ctl'),$('tab-pauta'),$('tab-modelos')];
+var NOMES=['pront','min','ementario','par','dir','ajuda','dil','del','ctl','pauta','modelos'];
 var ALIAS={tri:'pront',lote:'min',cmp:'min',conf:'min',ger:'min',acervo:'ementario',diligencias:'dil',deliberacoes:'del',controle:'ctl'};
 function abrirAba(i){
   if(NOMES[i]==='dil'||NOMES[i]==='del'){
@@ -181,10 +181,11 @@ function abrirAba(i){
   selectTab(mainTabs,i);var n=NOMES[i];
   document.body.classList.toggle('hero-gestao-ativa',n==='dil'||n==='del');
   /* 0.47: Parágrafos-padrão é sub-aba do Ementário: a barra mantém o Ementário marcado */
-  if(n==='par'){var te=$('tab-acervo');if(te)te.setAttribute('aria-selected','true');}
+  if(n==='par'||n==='modelos'){var te=$('tab-acervo');if(te)te.setAttribute('aria-selected','true');}
   if(n==='pront'&&window.MutaGabinete&&window.MutaGabinete.render)window.MutaGabinete.render();
   if(n==='ementario'&&window.MutaEmentario)window.MutaEmentario.abrir();
   if(n==='min'){if(window.MutaGerador&&window.MutaGerador.abrir)window.MutaGerador.abrir();if(window.MutaComparar)window.MutaComparar.abrir();if(window.MutaConformidade)window.MutaConformidade.abrir();if(window.MutaLote)window.MutaLote.sessao();}
+  if(n==='modelos'&&window.MutaModelosHero)window.MutaModelosHero.abrir();
   if(n==='par'&&window.MutaParagrafos)window.MutaParagrafos.abrir();
   if(n==='dir'&&window.MutaDiretrizes)window.MutaDiretrizes.abrir();
   /* 0.48: Diligências e Deliberações (Desembargador e gestor); Controle — prazos e etiquetas — só do gestor */
