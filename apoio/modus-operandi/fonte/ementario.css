@@ -815,3 +815,15 @@ html.emb-cmt body #e-aside{top:0!important;max-height:100vh!important}
 .pp-sintese-conteudo>.pp-card.res{border-left:1px solid var(--line);box-shadow:inset 3px 0 0 var(--rc)}
 .pp-sintese-conteudo>.pp-card.res:only-child{border-left:0}
 @media(max-width:860px){.pp-sintese-conteudo>.pp-card.res:not(:only-child){border-left:0;border-top:1px solid var(--line)}}
+
+/* Faixa de ações: controles compactos e uniformes, agrupados por função. */
+.pp-process-card>.pp-process-actions{gap:6px;padding:6px;align-items:center;flex-wrap:wrap}
+.pp-process-actions .pp-action-group{display:flex;align-items:center;flex-wrap:wrap;gap:4px;min-width:0}
+.pp-process-actions .pp-export-group{margin-left:auto;border-left:1px solid var(--line);padding-left:6px}
+.pp-process-actions .e-mini.pp-action{height:30px;min-height:30px;box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;gap:5px;padding:0 8px;border:1px solid var(--line);border-radius:0;background:var(--field);color:var(--ink);font-size:11px;font-weight:600;line-height:1;white-space:nowrap;flex:0 0 auto}
+.pp-process-actions .pp-action svg{width:13px;height:13px;flex:0 0 13px;color:var(--mut)}
+.pp-process-actions .pp-action:hover{border-color:var(--gold);background:var(--gold-soft);color:var(--gold)}
+.pp-process-actions .pp-action:focus-visible{outline:2px solid var(--gold);outline-offset:1px}
+.pp-process-actions .pp-process-toggle{margin:0;border-color:var(--gold);color:var(--gold);background:var(--gold-soft);font-weight:700}
+.pp-process-actions .pp-process-toggle[aria-expanded=true]{background:var(--gold);color:var(--gold-ink);border-color:var(--gold)}
+@media(max-width:520px){.pp-process-actions .pp-export-group{margin-left:0}.pp-process-actions .e-mini.pp-action{padding:0 6px}}
