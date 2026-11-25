@@ -550,6 +550,14 @@
        "apelido": "proxima_acao"
       },
       {
+       "rotulo": "Notas fixadas no prontuário",
+       "chave": "Notas fixadas",
+       "tipo": "texto-longo",
+       "secao": "origem",
+       "apelido": "notas_fixadas",
+       "regra": "Referências às linhas do registro Observações, em JSON; não substitui as notas."
+      },
+      {
        "rotulo": "Notas",
        "chave": "Observações",
        "tipo": "texto-longo",
