@@ -2368,3 +2368,22 @@ body.hero-redesign-v53 .hero-review-divider .cx-op1{display:flex;align-items:cen
 body.hero-redesign-v53 .hero-review-divider .cx-op1 label{font-size:10px;white-space:nowrap}
 body.hero-redesign-v53 .hero-review-divider .btn{white-space:nowrap;font-size:11px}
 @media(min-width:700px){body.hero-redesign-v53 .hero-review-document :is(.mn-tx,.hero-v53-ref-text){min-height:160px;max-height:42vh}}
+
+/* Resumo · campos complementares da ficha na superfície branca antes do Perfil. */
+html body.hero-redesign-v53 #gab .hero-summary-complement{display:grid;gap:0;min-width:0;padding:0 10px 10px;margin:0 0 8px;background:#fff!important;border:0!important;box-shadow:none!important}
+html body.hero-redesign-v53 #gab .hero-summary-complement>.pm-mer-h{font:650 11px/1.4 var(--sans,system-ui);letter-spacing:.035em;color:var(--hero53-gold,var(--fg));margin:0;padding:6px 0 8px}
+html body.hero-redesign-v53 #gab .hero-summary-complement>.hero-summary-section{border:0!important;border-top:1px solid var(--hero-pront-divider,var(--line))!important;border-radius:0!important;box-shadow:none!important;background:#fff!important;padding:0!important;margin:0!important;min-width:0}
+html body.hero-redesign-v53 #gab .hero-summary-complement>.hero-summary-section>summary{display:flex!important;align-items:center;gap:7px;min-height:34px;padding:7px 0!important;margin:0!important;list-style:none;cursor:pointer;box-sizing:border-box}
+html body.hero-redesign-v53 #gab .hero-summary-section>summary::-webkit-details-marker{display:none}
+html body.hero-redesign-v53 #gab .hero-summary-section>summary h4{flex:1;margin:0!important;font:650 12px/1.35 var(--sans,system-ui);color:var(--fg);text-transform:none;letter-spacing:0}
+html body.hero-redesign-v53 #gab .hero-summary-section>summary h4::before{display:none!important}
+html body.hero-redesign-v53 #gab .hero-summary-section>summary::after{content:"";width:7px;height:7px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg);margin:0 3px 4px 0;flex:none;opacity:.65}
+html body.hero-redesign-v53 #gab .hero-summary-section[open]>summary::after{transform:rotate(225deg);margin-bottom:-2px}
+html body.hero-redesign-v53 #gab .hero-summary-section>.hero-summary-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding:4px 0 10px!important;min-width:0}
+html body.hero-redesign-v53 #gab .hero-summary-fields>.gf{margin:0!important;min-width:0}
+html body.hero-redesign-v53 #gab .hero-summary-fields>:is(.w,.pc-dl,.pv-field,.pv-idrow){grid-column:1/-1}
+html body.hero-redesign-v53 #gab .hero-summary-fields .gl{font-size:10.5px;white-space:normal}
+html body.hero-redesign-v53 #gab .hero-summary-fields :is(input:not([type=checkbox]),select,textarea){width:100%;min-width:0;box-sizing:border-box;font-size:12px}
+html body.hero-redesign-v53 #gab .hero-summary-section>.hero-tags-content{padding:4px 0 10px!important;gap:8px}
+html body.hero-redesign-v53 #gab .hero-summary-section .hero-ann-questions>.hero-ann-card{border:0;border-bottom:1px solid var(--line);border-radius:0;padding:6px 0;background:transparent;box-shadow:none}
+html body.hero-redesign-v53 #gab .hero-summary-section .hero-ann-questions>.hero-ann-card:last-child{border-bottom:0}
