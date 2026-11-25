@@ -1433,7 +1433,7 @@ function heroOrganizarProntuario(){
   var manCampo=campoModelo('origem','Solicitações manuais'),man=[];
   try{var raw=JSON.parse(S(V('origem','Solicitações manuais'))||'[]');if(Array.isArray(raw))man=raw.filter(function(x){return x&&typeof x==='object';});}catch(e){}
   var canSol=!!manCampo&&editavel(manCampo),canDec=canSol&&!!G.desembargador;
-  function salvarSol(r){if(!canSol)return;marcar('origem.Solicitações manuais',JSON.stringify(man));G.aba='Processo';G.rot='sol';agendar(500);render();}
+  function salvarSol(r){if(!canSol)return;marcar('origem.Solicitações manuais',JSON.stringify(man));agendar(500);render();}
   var solGroups=[['Sustentação oral',['Sustentação presencial','Sustentação por videoconferência']],['Preferência',['Preferência']],['Despacho',['Despacho']],['Retirada de pauta',['Retirada de pauta']],['Adiamento',['Adiamento']],['Outras',['Outra solicitação']]];
   var solHead=el('div','pc-sh hero-sol-head'),add=el('button','btn line sm','+ Solicitação');add.type='button';add.disabled=!canSol;solHead.append(el('h3','','Solicitações'),add);solBody.append(solHead);
   var form=el('div','hero-sol-form');form.hidden=true;var tipo=el('select'),pessoa=el('input'),oab=el('input'),parte=el('input'),desc=el('textarea'),data=el('input'),sessao=el('input'),save=el('button','btn solid sm','Registrar'),cancel=el('button','lnk','Cancelar'),err=el('small','status err');
@@ -1447,7 +1447,7 @@ function heroOrganizarProntuario(){
   function ajustarForm(){var t=tipo.value,ex=extTipo(t),interno=intTipo(t);lp.firstChild.textContent=interno?'Servidor solicitante':'Solicitante / advogado';pessoa.readOnly=interno;if(interno)pessoa.value=ses.estado().usuario||'';else if(pessoa.value===ses.estado().usuario)pessoa.value='';lo.hidden=la.hidden=!ex;ls.hidden=!ex&&t!=='Adiamento';ls.firstChild.textContent=t==='Adiamento'?'Sessão pretendida':'Sessão';ld.hidden=ex;lt.hidden=ex;lt.firstChild.textContent=interno?'Justificativa obrigatória':'Descrição ou observação';err.textContent='';}
   tipo.onchange=ajustarForm;add.onclick=function(){form.hidden=!form.hidden;if(!form.hidden){var g=solGroups.find(function(g){return g[0]===heroTopo.tipoSol;});if(g)tipo.value=g[1][0];ajustarForm();tipo.focus();}};cancel.onclick=function(){form.hidden=true;};
   save.onclick=function(){if(!canSol)return;var t=tipo.value,interno=intTipo(t),txt=S(desc.value),g=solGroups.find(function(g){return g[1].indexOf(t)>=0;});heroTopo.tipoSol=g?g[0]:t;
-    if(extTipo(t)){if(!S(pessoa.value)||!S(parte.value)||!sessao.value){err.textContent='Informe advogado, parte e sessão.';return;}if(!window.MutaPauta||!window.MutaPauta.registrarPedido){err.textContent='Integração de pedidos indisponível.';return;}save.disabled=true;var cnj=G.cnj;window.MutaPauta.registrarPedido({cnj:cnj,tipo:t==='Preferência'?t:t==='Sustentação presencial'?'Presencial':'Virtual',data:sessao.value,advogado:S(pessoa.value),oab:S(oab.value),parte:S(parte.value)}).then(function(){if(G.cnj===cnj){G.aba='Processo';G.rot='sol';render();}},function(e){err.textContent=e.message||'Não foi possível registrar.';save.disabled=false;});return;}
+    if(extTipo(t)){if(!S(pessoa.value)||!S(parte.value)||!sessao.value){err.textContent='Informe advogado, parte e sessão.';return;}if(!window.MutaPauta||!window.MutaPauta.registrarPedido){err.textContent='Integração de pedidos indisponível.';return;}save.disabled=true;var cnj=G.cnj;window.MutaPauta.registrarPedido({cnj:cnj,tipo:t==='Preferência'?t:t==='Sustentação presencial'?'Presencial':'Virtual',data:sessao.value,advogado:S(pessoa.value),oab:S(oab.value),parte:S(parte.value)}).then(function(){if(G.cnj===cnj){render();}},function(e){err.textContent=e.message||'Não foi possível registrar.';save.disabled=false;});return;}
     if(interno&&!txt){err.textContent='Informe a justificativa.';return;}var fluxoSol=pautaAtualFluxo(),origSol=fluxoSol.atual;man.push({id:Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,8),tipo:t,solicitante:S(pessoa.value),descricao:txt,justificativa:interno?txt:'',data:data.value||hojeIso(),sessaoPretendida:sessao.value,...(origSol?{sessaoOrigem:origSol.sessao||'',itemOrigem:origSol.item||''}:{}),autor:ses.estado().usuario||'',estado:'Pendente',criadoEm:new Date().toISOString()});salvarSol();};
   var solNav=el('div','hero-sol-nav'),solPanels=el('div','hero-sol-panels');solBody.append(solNav,solPanels);
   var activeSol=heroTopo.tipoSol||(enhanced?'Todas':'Sustentação oral');
@@ -1507,7 +1507,8 @@ function heroOrganizarProntuario(){
   tabsA.forEach(function(x){var b=el('button','',x[1]);b.type='button';b.setAttribute('role','tab');x[3]=b;b.id='hero-dock-tab-'+x[0];x[2].id='hero-dock-pane-'+x[0];b.setAttribute('aria-controls',x[2].id);if(x[0]!=='sinalizacoes'){x[2].setAttribute('role','tabpanel');x[2].setAttribute('aria-labelledby',b.id);}b.addEventListener('click',function(){abrirA(heroTopo.abaAcomp===x[0]?'':x[0]);});if(x[0]==='sinalizacoes'){x[3]=ind;ind.setAttribute('role','group');ind.setAttribute('aria-label','Sinalizações');navA.append(ind);}else if(x[0]==='monitoramento'){var mgp=el('div','hero-monitor-tab');b.classList.add('hero-monitor-label');b.title='Monitoramento';mgp.append(b,urg);navA.append(mgp);}else{b.classList.add('hero-acomp-label');b.title=x[1];navA.append(b);}x[2].querySelector('summary').hidden=true;});
   urg.addEventListener('click',function(){abrirA('monitoramento');});
   dock.append(navA,ac,mon,sd);top.append(dock);
-  var solMain=caixa.querySelector('#hero-sol-main');if(solMain){solBody.classList.add('hero-sol-main-body');solMain.append(solBody);}
+  solBody.classList.add('hero-sol-main-body');
+  if(window.MutaPauta&&window.MutaPauta.receberEditor)window.MutaPauta.receberEditor(G.cnj,solBody);
   if(heroTopo.abaAcomp==='solicitacoes')heroTopo.abaAcomp='';
   abrirA(heroTopo.abaAcomp||(heroTopo.sinalizacoes?'sinalizacoes':heroTopo.monitoramento?'monitoramento':heroTopo.acompanhamento?'acompanhamento':''));show(heroTopo.pagina);
 }
@@ -1530,10 +1531,11 @@ function render0() {
   if (G.aba === 'Produção') { G.aba = 'Processo'; G.rot = 'pro'; }
   if (G.aba === 'Gerador') { G.aba = 'Processo'; if (window.MutaAbas) setTimeout(function () { window.MutaAbas.ir('ger'); }, 0); }
   if (MODOS.indexOf(G.aba) < 0) G.aba = 'Processo';
+  if(G.rot==='sol')G.rot='tri';
   var nAl = window.MutaAutos && window.MutaAutos.estado().itens ? window.MutaAutos.alertas().filter(function (a) { return a.nivel === 'al'; }).length : 0;
   var tabs = '<div class="seg gtabs pmodos hero-main-tabs" role="tablist" aria-label="Parte do prontuário">' +
     '<button type="button" role="tab" data-aba="Autos" aria-selected="'+(G.aba==='Autos')+'"><span>Autos'+(nAl?' <i class="gnum">'+nAl+'</i>':'')+'</span><small>'+esc(contaModo('Autos'))+'</small></button>'+
-    [['tri','Triagem'],['pro','Produção'],['sol','Solicitações']].map(function(x){var on=G.aba==='Processo'&&(G.rot||'tri')===x[0];return '<button type="button" role="tab" data-rot="'+x[0]+'" data-pv-tab="'+x[0]+'" aria-selected="'+on+'"><span>'+x[1]+'</span></button>';}).join('')+'</div>';
+    [['tri','Triagem'],['pro','Produção']].map(function(x){var on=G.aba==='Processo'&&(G.rot||'tri')===x[0];return '<button type="button" role="tab" data-rot="'+x[0]+'" data-pv-tab="'+x[0]+'" aria-selected="'+on+'"><span>'+x[1]+'</span></button>';}).join('')+'</div>';
   var snc = snCard(), cab = cabeca(s); CAB_HTML = cab;
   /* 0.69: aviso de sigilo no alto do cartão (processo sigiloso ou documento sigiloso nos autos) */
   if (window.MutaSigilo) { window.MutaSigilo.consultar(G.cnj); var sgh = window.MutaSigilo.html(); if (sgh) cab = cab.replace('<section class="pc pm">', '<section class="pc pm">' + sgh); }
