@@ -1,0 +1,24 @@
+name: Office · Mural
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'apoio/ex-officio/index.html'
+      - 'apoio/ex-officio/tests/mural-command.test.js'
+      - '.github/workflows/office-mural.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: office-mural-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  mural:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --test apoio/ex-officio/tests/mural-command.test.js
