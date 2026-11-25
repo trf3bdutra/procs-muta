@@ -3,13 +3,15 @@
 'use strict';
 var CATS=['Principal','Relatável','Comprobatório','Fundamentável','Admissibilidade','Precedente','Consectários','Incidental','Complementar','Dispensável'];
 function n(s){return String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();}
+/* Principal e Relatável são mutuamente exclusivos; no máximo duas funções. */
+function classesValidas(v){var L=Array.isArray(v)?v:String(v||'').split(';');L=Array.from(new Set(L.map(function(x){return String(x).trim();}).filter(function(x){return CATS.indexOf(x)>=0;})));if(L.indexOf('Principal')>=0)L=L.filter(function(x){return x!=='Relatável';});if(L.indexOf('Dispensável')>=0&&L.length>1)L=L.filter(function(x){return x!=='Dispensável';});return L.slice(0,2);}
 function suggest(d){var t=n(d.tipo+' '+(d.desc||'')),a=[];
-if(!d.anexo&&/sentenca|acordao|decisao|apelacao|agravo|embargos|contrarrazo|peticao inicial|parecer/.test(t))a.push('Principal','Relatável');
+if(!d.anexo&&/sentenca|acordao|decisao|apelacao|agravo|embargos|contrarrazo|peticao inicial|parecer/.test(t))a.push('Principal');
 if(/procuracao|substabelec|custas|preparo|intimacao|publicacao|certidao/.test(t))a.push('Admissibilidade');
 if(/comprovante|laudo|pericia|perfil profissiografico|contrato|extrato|atestado|documento medico/.test(t))a.push('Comprobatório','Fundamentável');
 if(/honorario|custas|gratuidade|calculo|sucumbencia|sentenca|acordao/.test(t))a.push('Consectários');
 if(/jurisprudencia|precedente|tema repetitivo/.test(t))a.push('Precedente','Fundamentável');
-if(/tutela|liminar|incidente/.test(t))a.push('Incidental');return Array.from(new Set(a));}
+if(/tutela|liminar|incidente/.test(t))a.push('Incidental');return classesValidas(a);}
 function mergeRows(old,patch){var m=new Map();(Array.isArray(old)?old:[]).concat(Array.isArray(patch)?patch:[]).forEach(function(r){if(r&&/^\d{1,30}$/.test(String(r.id||'')))m.set(String(r.id),Object.assign({},r,{id:String(r.id)}));});return Array.from(m.values());}
 function outcome(v){var s=n(v).replace(/[.!]$/,'');if(!s||s==='a definir')return 'indefinido';
 if(/\b(e|mas|porem|enquanto)\b|[;\/]/.test(s))return 'outro';
@@ -37,5 +39,5 @@ else {if(rows.some(function(x){return !x.custas||!x.gratuidade||!x.honorarios;})
 if(rows.some(function(x){return n(x.gratuidade)==='deferida'||n(x.suspensao)==='sim';}))s.push('Conferir suspensão da exigibilidade e eventual alteração da gratuidade.');
 if(rows.some(function(x){return n(x.honorarios)==='sim'&&(!x.devedor||!x.base||(!x.percentual&&!x.valor));}))s.push('Completar parte devedora, base de cálculo e percentual/valor dos honorários prévios.');}
 return {itens:s};}
-var api={categorias:CATS,sugerir:suggest,mesclar:mergeRows,resultado:outcome,indicador:indicador};if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.MutaAnaliseProntuario=api;
+var api={categorias:CATS,classesValidas:classesValidas,sugerir:suggest,mesclar:mergeRows,resultado:outcome,indicador:indicador};if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.MutaAnaliseProntuario=api;
 })(typeof window!=='undefined'?window:this);
