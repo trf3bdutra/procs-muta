@@ -229,6 +229,7 @@ function faixa() {
 function abas() {
   var P = pendencias(), L = [['resumo', 'Resumo', 0]];
   (F().abas || []).forEach(function (a) { if (a.aba === PAUTA) return; var n = a.aba === CE ? (ST.v2 ? ativos().filter(function (g) { return g !== 'monocratica'; }).length : ativos().length + P.filter(function (p) { return p[1] === PAUTA; }).length) : P.filter(function (p) { return p[1] === a.aba || (ST.v2 && a.aba === 'Produção' && p[1] === PAUTA); }).length; L.push([a.aba, a.aba === CE ? ROT_CE : a.aba, n, a.aba === CE]); });
+  if(!L.some(function(a){return a[0]==='Histórico';}))L.push(['Histórico','Histórico',0]);
   return L;
 }
 /* ───── casca v2: topo fino; à esquerda o caso, as etapas, as regras e as pendências; à direita as abas (mesmos campos) ───── */
@@ -310,7 +311,7 @@ function fx2Lado() {
   var et = '<section class="fx2-m"><p class="fx2-sh"><span class="fx2-ic">' + fx2Sv('<path d="M4 12h4l3-8 4 16 3-8h2"/>') + '</span>Etapas<i>' + nOk + ' de ' + FL.length + '</i></p><ol class="fx2-et" style="--n:' + FL.length + ';--p:' + (FL.length > 1 ? Math.round(Math.max(0, FL.findIndex(function (x) { return !x.feito; }) < 0 ? FL.length - 1 : FL.findIndex(function (x) { return !x.feito; })) / (FL.length - 1) * 100) : 0) + '%" aria-label="Fluxo do processo"><i class="fx2-ln"><i></i></i>' +
     FL.map(function (x) { return '<li class="c-' + (FX2_COR[x.etapa] || 'p') + (x.feito ? ' is-done' : x.atual ? ' is-cur' : '') + '"' + (x.atual ? ' aria-current="step"' : '') + ' title="' + E([x.etapa, x.quem, x.quando].filter(Boolean).join(' · ')) + '">' + (x.atual ? '<em class="fx2-ag">agora</em>' : '') + '<span class="fx2-c">' + fx2Sv(x.feito ? '<path d="M5 12.5l4.5 4.5L19 7.5"/>' : FX2_IC[x.etapa] || '', 14) + '</span><b>' + E(x.etapa) + '</b><small>' + E(x.quando && x.quando !== 'sem data' && x.quando !== 'pendente' && x.quando !== 'aguardando' && x.quando !== 'sem sessão' ? String(x.quando).replace(/^(\d{2}\/\d{2})\/\d{4}$/, '$1') : '—') + '</small></li>'; }).join('') + '</ol>' +
     fx2Prod() + '</section>';
-  var R = regras(), rg = '<section class="fx2-m"><p class="fx2-sh"><span class="fx2-ic">' + svg('rule') + '</span>Regras<i>calculadas</i></p><div class="fx2-rg">' + (R.length ? R.map(function (r) { return '<span class="fx2-ch t-' + r[2] + '"><i>' + E(r[0]) + '</i>' + E(r[1]) + '</span>'; }).join('') : '<span class="fx-dim">sem regras calculadas</span>') + '</div></section>';
+  var rg = fxHistLado();
   var pd = fx2Sinais();
   return '<aside class="fx2-side" aria-label="O processo">' + caso + et + rg + pd + '</aside>';
 }
@@ -321,7 +322,7 @@ function fichaView() {
   var corpo, nav = '', pode = !!ST.d && !ST.err;
   if (ST.err) corpo = '<section class="fx-card fx-alert"><h4>' + svg('warn') + 'Não foi possível ler a ficha</h4><p>' + E(ST.err) + '</p></section>';
   else if (!ST.d) corpo = '<section class="fx-card"><p class="fx-lead">Lendo a ficha do processo…</p><p>Modelo (padrao/ficha.json), registro do gabinete (operacional) e dados do acervo (fonte).</p></section>';
-  else corpo = ST.tab === 'resumo' ? abaResumo() : abaGrupos(abaDe(ST.tab) || F().abas[0]);
+  else corpo = ST.tab === 'resumo' ? abaResumo() : ST.tab === 'Histórico' ? fxHistAba() : abaGrupos(abaDe(ST.tab) || F().abas[0]);
   if (pode) nav = '<nav class="fx-nav" aria-label="Seções da ficha"><div class="fx-seg" role="tablist">' + abas().map(function (a) {
     return '<button type="button" role="tab" data-fx-tab="' + E(a[0]) + '" aria-selected="' + (ST.tab === a[0]) + '">' + E(a[1]) + (a[2] ? '<span class="fx-badge' + (a[3] ? ' is-ce' : '') + '">' + a[2] + '</span>' : '') + '</button>';
   }).join('') + '</div><span class="fx-grow"></span><div class="fx-seg fx-acts2" role="group" aria-label="Ficha completa e edição"><button type="button" data-fx="doc" aria-label="Ficha completa" title="Ficha completa · ler, imprimir ou salvar em PDF">' + svg('print') + '</button>' +
@@ -335,7 +336,7 @@ function fichaView() {
     '</footer></section>';
 }
 function fichaView2() {
-  var corpo = ST.tab === 'resumo' ? abaResumo() : abaGrupos(abaDe(ST.tab) || F().abas[0]);
+  var corpo = ST.tab === 'resumo' ? abaResumo() : ST.tab === 'Histórico' ? fxHistAba() : abaGrupos(abaDe(ST.tab) || F().abas[0]);
   var nav = '<nav class="fx-nav fx2-nav" aria-label="Seções da ficha"><div class="fx-seg" role="tablist">' + abas().map(function (a) {
     return '<button type="button" role="tab" data-fx-tab="' + E(a[0]) + '" aria-selected="' + (ST.tab === a[0]) + '">' + E(a[1]) + (a[2] ? '<span class="fx-badge' + (a[3] ? ' is-ce' : '') + '">' + a[2] + '</span>' : '') + '</button>';
   }).join('') + '</div><span class="fx-grow"></span>' + (ST.ad.leitura ? '' : '<div class="fx-seg fx-acts2" role="group" aria-label="Edição"><button type="button" data-fx="editar" aria-pressed="' + ST.edit + '" title="Liberar a edição dos campos do gabinete">' + svg('edit') + (ST.edit ? 'Editando' : 'Editar') + '</button></div>') + '</nav>';
@@ -494,6 +495,19 @@ function fxHistHtml(ed){
  var rec=linhas('origem','Recursos').map(function(x){return '<p>'+E([x.data,'Recurso interposto',x.parte,x.ids].filter(Boolean).join(' · '))+'</p>';}).join('');
  return '<div><b>Registros da pauta e dos autos</b>'+(auto+rec||'<p class="fx-dim">Sem registros disponíveis.</p>')+'</div><div><b>Eventos e justificativas</b>'+L.map(function(x,i){return '<details class="fx-subgrupo" '+(ed?'open':'')+' style="padding:8px 0;border-bottom:1px solid #dce4df"><summary>'+E([x.data,x.evento,x.tipo_julgamento,x.sessao].filter(Boolean).join(' · ')||'Novo evento')+'</summary>'+(ed?'<div class="fx-grid">'+cols.map(function(k){var v=S(x[k.chave]),at=' data-fx-tb="'+FX_HJ+'" data-fx-i="'+i+'" data-fx-c="'+E(k.chave)+'" aria-label="'+E(k.rotulo)+'"';return '<div class="fx-f s'+(k.tipo==='texto-longo'?4:2)+'"><span class="fx-lab">'+E(k.rotulo)+'</span>'+(k.opcoes?'<select'+at+'>'+fxOpt(k.opcoes,v)+'</select>':k.tipo==='texto-longo'?'<textarea rows="2"'+at+'>'+E(v)+'</textarea>':'<input type="'+(k.tipo==='data'?'date':'text')+'"'+at+' value="'+E(v)+'">')+'</div>';}).join('')+'</div><button type="button" class="fx-pill fx-mini" data-fx="hj-remove" data-fx-i="'+i+'">Remover evento</button>':cols.filter(function(k){return x[k.chave];}).map(function(k){return '<p><b>'+E(k.rotulo)+':</b> '+E(x[k.chave])+'</p>';}).join(''))+'</details>';}).join('')+(ed&&c?'<button type="button" class="fx-pill" data-fx="hj-add">+ Evento de julgamento</button>':'')+'</div>';
 }
+
+function fxHistAba(){
+ var ed=ST.edit&&!ST.ad.leitura,m=fxTrMap(),h=m&&m.historico||[],p=op().producao||{},prod=[['MINUTADO','Minuta elaborada','SERVIDOR'],['Data da Revisão','Revisão','CORRETOR'],['Data da Liberação','Liberação / envio à assinatura',''],['Data da Assinatura','Assinatura',''],['Mono - Data da publicação','Publicação','']].filter(function(x){return p[x[0]];}).map(function(x){return {data:p[x[0]],evento:x[1],autor:p[x[2]]||''};}).sort(function(a,b){return (iso(a.data)||S(a.data)).localeCompare(iso(b.data)||S(b.data));});
+ var list=function(L){return L.length?'<ol style="padding-left:20px;margin:8px 0">'+L.map(function(x){return '<li style="padding:5px 0"><b>'+E(brD(iso(x.data))||S(x.data)||'Sem data')+'</b> · '+E(x.evento||x.acao||'Registro')+(x.texto?'<p style="margin:2px 0;white-space:pre-wrap">'+E(x.texto)+'</p>':'')+(x.autor?'<small class="fx-dim">'+E(x.autor)+'</small>':'')+'</li>';}).join('')+'</ol>':'<p class="fx-dim">Sem registros disponíveis.</p>';};
+ var leg=['Registro - Triagem','Registro - Proposta','Registro - Situação atual','Registro - Lote','Registro - Grupo','Registro - Modelo','Registro - Variações'].filter(function(k){return val('triagem',k);}).map(function(k){return fxCampo('triagem',k);}).join('');
+ return card('Histórico de julgamento',fxHistHtml(ed),{n:'01'})+card('Histórico do trâmite',list(h.slice().sort(function(a,b){return S(a.data).localeCompare(S(b.data));})),{n:'02'})+card('Histórico da produção',list(prod),{n:'03'})+card('Registros históricos da análise e indexação',leg?'<div class="fx-grid">'+leg+'</div>':'<p class="fx-dim">Sem registros históricos.</p>',{n:'04'});
+}
+function fxHistLado(){
+ var L=linhas('triagem','Histórico de julgamento'),ss=sessoes(),m=fxTrMap(),events=L.map(function(x){return {data:x.data,texto:[x.evento,x.tipo_julgamento,x.sessao].filter(Boolean).join(' · ')};}).concat(ss.map(function(x){return {data:x.sessao||x.data,texto:['Sessão',x.item?'Item '+x.item:'',x.resultado||x.status].filter(Boolean).join(' · ')};})),seen={};
+ events=events.filter(function(x){var k=[x.data,x.texto].join('|');if(seen[k])return false;seen[k]=true;return true;}).sort(function(a,b){return (iso(b.data)||S(b.data)).localeCompare(iso(a.data)||S(a.data));});
+ return '<section class="fx2-m"><p class="fx2-sh"><span class="fx2-ic">'+fx2Sv('<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>')+'</span>Histórico<button type="button" class="fx-pill fx-mini" style="margin-left:auto" data-fx-tab="Histórico">Abrir ›</button></p>'+ (events.length?events.slice(0,3).map(function(x){return '<div style="padding:5px 0;font-size:11px;border-bottom:1px solid #dce4df"><b>'+E(brD(iso(x.data))||S(x.data)||'Sem data')+'</b> · '+E(x.texto)+'</div>';}).join(''):'<p class="fx-dim">Sem eventos de julgamento registrados.</p>')+'<small class="fx-dim">'+events.length+' registro(s) de julgamento · '+(m&&m.historico?m.historico.length:0)+' de trâmite</small></section>';
+}
+
 function fxAcomp(g){
  var ed=ST.edit&&!ST.ad.leitura,d=val('producao','Destino'),j=val('triagem','Tipo de Julgamento'),jt=S(j).split(/\s*(?:\+|;|,|·)\s*/).filter(Boolean),types=['Apelação','Remessa necessária','Agravo de instrumento','Mandado de segurança','Embargos de declaração','Agravo interno','Juízo de retratação'];
  var tipos=ed?'<div class="fx-f s4"><span class="fx-lab">Tipo de julgamento</span><div class="fx-acts">'+Array.from(new Set(types.concat(jt))).map(function(x){return '<label><input type="checkbox" data-fx-jtipo value="'+E(x)+'"'+(jt.indexOf(x)>=0?' checked':'')+'> '+E(x)+'</label>';}).join('')+'</div></div>':fxCampo('triagem','Tipo de Julgamento');
@@ -506,7 +520,7 @@ function fxAcomp(g){
  }else if(d==='Monocrática')sub=fxCampo('triagem','Hipóteses Monocrática','Hipótese do artigo 932')+fxCampo('triagem','Art. 932 - Nota de enquadramento','Nota de enquadramento');
  else if(d==='Outro destino')sub=fxCampo('producao','Destino - Outro')+fxCampo('triagem','Destino - Outro Nota','Nota de enquadramento');
  var final=d==='Sessão'?'Colegiado · Acórdão':d==='Monocrática'?'Relator · Monocrática terminativa':d==='Outro destino'?'Conforme destino indicado':'A definir';
- return '<div class="fx-grid">'+fxCampo('triagem','Status da triagem')+tipos+fxCampo('producao','Destino - Situação')+'</div>'+fxSubcard('Encaminhamento','<div class="fx-grid">'+sel+sub+'</div><p><b>Destino e pronunciamento final:</b> '+E(final)+'</p>')+fxSubcard('Trâmite','<div class="fx-grid">'+fxCampo('origem','Próxima ação','Próxima providência')+'</div>'+fxTrHtml(ed))+fxSubcard('Histórico de julgamento',fxHistHtml(ed))+(val('triagem','Registro - Triagem')?'<details class="fx-subgrupo"><summary>Registro histórico da análise</summary><div class="fx-grid">'+fxCampo('triagem','Registro - Triagem')+'</div></details>':'');
+ return '<div class="fx-grid">'+fxCampo('triagem','Status da triagem')+tipos+fxCampo('producao','Destino - Situação')+'</div>'+fxSubcard('Encaminhamento','<div class="fx-grid">'+sel+sub+'</div><p><b>Destino e pronunciamento final:</b> '+E(final)+'</p>')+fxSubcard('Trâmite','<div class="fx-grid">'+fxCampo('origem','Próxima ação','Próxima providência')+'</div>'+fxTrHtml(ed))+'<div class="fx-acts"><button type="button" class="fx-pill fx-mini" data-fx-tab="Histórico">Consultar histórico de julgamento ›</button></div>';
 }
 function fxAcompChange(t){
  if(!ST.edit||ST.ad.leitura)return false;
