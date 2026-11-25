@@ -136,7 +136,7 @@ function campo0(c) {
     if (typeof v0 === 'object') v0 = '';
     return '<div class="' + cls + '" title="' + esc(dicaCampo(c)) + '"><span class="gl">' + rotuloDe(c) + '</span><span class="ro">' + (S(v0) ? esc(/^\d{4}-\d{2}-\d{2}$/.test(S(v0)) ? brD(v0) : v0) : '—') + '</span></div>';
   }
-  var id = c.secao + '.' + c.chave, v = V(c.secao, c.chave), bloq = (id === 'producao.SERVIDOR' || id === 'producao.CORRETOR') && !G.gestor, h;
+  var id = c.secao + '.' + c.chave, v = c.valorExibicao == null ? V(c.secao, c.chave) : c.valorExibicao, bloq = (id === 'producao.SERVIDOR' || id === 'producao.CORRETOR') && !G.gestor, h;
   if (typeof v === 'object') v = '';
   v = String(v);
   var at = ' data-fk="' + esc(id) + '"' + (bloq ? ' disabled title="Designação: só o gestor"' : '');
@@ -770,7 +770,10 @@ function producaoMinuta(){
   if(urg)L=['Deferido','Parcialmente deferido','Indeferido','Prejudicado'];
   else if(hom)L=['Homologado','Extinto'];
   else{var types=[];if(T.ed)types=types.concat(['Rejeitados','Acolhidos sem efeito infringente','Acolhidos com efeito infringente','Não conhecido']);if(T.ret||p===5)types=types.concat(['Retratação exercida','Acórdão mantido']);if(T.rn)types=types.concat(['Sentença confirmada','Sentença parcialmente reformada','Sentença reformada','Não conhecida']);if(T.ms)types=types.concat(['Concedido','Parcialmente concedido','Denegado','Extinto']);if(types.length)L=(T.ap||T.ai||T.agint?L:[]).concat(types);}
-  return field('producao','Voto - Resultado','Resultado proposto',{tipo:'lista',opcoes:Array.from(new Set(L))});
+  var atual=S(V('producao','Voto - Resultado')), aliases={'negado provimento':'Desprovido','negar provimento':'Desprovido','dado provimento':'Provido','dar provimento':'Provido','dado parcial provimento':'Parcialmente provido','dar parcial provimento':'Parcialmente provido','nao conhecer':'Não conhecido'};
+  var normal=window.VOC&&typeof window.VOC.norm==='function'?window.VOC.norm('resJulg',atual):atual;
+  if(L.indexOf(normal)<0)normal=aliases[N(atual)]||atual;
+  return field('producao','Voto - Resultado','Resultado proposto',{tipo:'lista',opcoes:Array.from(new Set(L)),valorExibicao:L.indexOf(normal)>=0?normal:atual});
  }
  var AU=window.MutaAutos,auto=AU&&AU.barra?AU.barra():'',h='<section class="card rt-top cc-caso hero-minuta-roteiro"><div class="rt-tt"><b>Preparação da minuta</b></div><p class="muted">Roteiro por parte do pronunciamento · dados da ficha única.</p>@@HERO_MINUTA_NAV@@'+auto;
  var rel='<div class="gf w"><small class="muted">Relatório: dados recuperados da ficha, sem nova transcrição.</small></div>';
@@ -797,7 +800,7 @@ function producaoMinuta(){
  fund+=prod([['Voto - Descrição','Desenvolvimento / detalhes da minuta'],'Tópico-síntese']);
  if(ac||S(V('triagem','Tipo de Voto')))fund+=field('triagem','Tipo de Voto');
  h+=block('fundamentacao','Fundamentação',fund,false);
- if(!desp){
+ if(!desp&&!urg){
   var suc='<div class="gf w"><small class="muted">Compare a solução proposta com a sucumbência da decisão recorrida, registrada nos Autos.</small><button type="button" class="lnk" data-minuta-autos>Consultar decisão recorrida</button></div>';
   suc+=prod(['Voto - Honorários','Honorários - Percentual ou valor','Honorários - Base de cálculo','Honorários recursais','Fundamento da sucumbência','Custas no julgamento','Gratuidade no julgamento','Natureza da condenação','Consectários no julgamento','Juros e correção monetária','Termo inicial dos efeitos']);
   h+=block('sucumbencia','Sucumbência e consectários',suc,false);
@@ -1357,7 +1360,7 @@ function heroOrganizarProntuario(){
     }
   }
   /* Solicitações: bloco único anterior ao encaminhamento, inclusive sem pauta oficial. */
-  if(N(destinoAtual)==='monocratica'){
+  if(N(destinoAtual)==='monocratica'&&(pronAtual()===1||pronAtual()===4)){
     var hip=campoLista('triagem','Hipóteses Monocrática');if(hip)html(encFields,campo(Object.assign({},hip,{rotulo:'Hipótese do artigo 932'})));
     html(encFields,campoRot('triagem','Art. 932 - Nota de enquadramento','Nota de enquadramento'));
     /* Enquadramento único no Encaminhamento; confirmação usa os valores vigentes da ficha. */
@@ -1523,14 +1526,14 @@ function render0() {
   if (G.carregando) { caixa.innerHTML = '<div class="pc"><div class="pc-n"><span class="mono pc-cnj">' + esc(G.cnj) + '</span></div></div><div class="empty">Lendo o prontuário do processo…</div>' + st0; stEl = $('g-st'); return; }
   if (G.erro) { caixa.innerHTML = '<div class="pc"><div class="pc-n"><span class="mono pc-cnj">' + esc(G.cnj) + '</span><span class="sp"></span><button type="button" class="lnk" data-g="atualizar">Atualizar</button></div></div><div class="err-box">Não foi possível ler o prontuário: ' + esc(G.erro) + '</div>' + st0; stEl = $('g-st'); return; }
   if (!G.F) { caixa.innerHTML = st0; stEl = $('g-st'); return; }
-  if (G.aba === 'Triagem' || G.aba === 'Roteiro') G.aba = 'Processo';
-  if (G.aba === 'Produção') G.aba = 'Processo';
+  if (G.aba === 'Triagem' || G.aba === 'Roteiro') { G.aba = 'Processo'; G.rot = 'tri'; }
+  if (G.aba === 'Produção') { G.aba = 'Processo'; G.rot = 'pro'; }
   if (G.aba === 'Gerador') { G.aba = 'Processo'; if (window.MutaAbas) setTimeout(function () { window.MutaAbas.ir('ger'); }, 0); }
   if (MODOS.indexOf(G.aba) < 0) G.aba = 'Processo';
   var nAl = window.MutaAutos && window.MutaAutos.estado().itens ? window.MutaAutos.alertas().filter(function (a) { return a.nivel === 'al'; }).length : 0;
   var tabs = '<div class="seg gtabs pmodos hero-main-tabs" role="tablist" aria-label="Parte do prontuário">' +
     '<button type="button" role="tab" data-aba="Autos" aria-selected="'+(G.aba==='Autos')+'"><span>Autos'+(nAl?' <i class="gnum">'+nAl+'</i>':'')+'</span><small>'+esc(contaModo('Autos'))+'</small></button>'+
-    [['tri','Triagem'],['pro','Produção'],['sol','Solicitações']].map(function(x){var on=G.aba==='Processo'&&(G.rot||'tri')===x[0];return '<button type="button" role="tab" data-rot="'+x[0]+'" aria-selected="'+on+'"><span>'+x[1]+'</span></button>';}).join('')+'</div>';
+    [['tri','Triagem'],['pro','Produção'],['sol','Solicitações']].map(function(x){var on=G.aba==='Processo'&&(G.rot||'tri')===x[0];return '<button type="button" role="tab" data-rot="'+x[0]+'" data-pv-tab="'+x[0]+'" aria-selected="'+on+'"><span>'+x[1]+'</span></button>';}).join('')+'</div>';
   var snc = snCard(), cab = cabeca(s); CAB_HTML = cab;
   /* 0.69: aviso de sigilo no alto do cartão (processo sigiloso ou documento sigiloso nos autos) */
   if (window.MutaSigilo) { window.MutaSigilo.consultar(G.cnj); var sgh = window.MutaSigilo.html(); if (sgh) cab = cab.replace('<section class="pc pm">', '<section class="pc pm">' + sgh); }
