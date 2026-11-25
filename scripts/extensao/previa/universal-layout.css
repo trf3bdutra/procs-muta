@@ -328,3 +328,24 @@ html[data-tema=escuro] .pv-universal-body{--pv-bg:#25282d;--pv-line:#444a52;--pv
 #gab .pv-ger-corpo{display:grid;gap:8px;padding-top:8px}
 #gab .pv-ger-corpo .gr-cfg .gr-l{grid-template-columns:1fr!important}
 #gab .pv-ger-corpo .gr-cfg .pc-sh{display:none}
+
+/* HERO · navegação principal fixa no rodapé, dentro do painel da extensão. */
+.pv-universal-body{--hero-dock-h:58px;padding-bottom:calc(var(--hero-dock-h) + env(safe-area-inset-bottom,0px))}
+.pv-universal-body .layout{min-height:calc(100dvh - var(--hero-dock-h));min-width:0}
+.pv-universal-body .layout>aside{position:fixed!important;inset:auto 0 0!important;width:100%!important;min-width:0;height:auto!important;z-index:45;overflow:visible!important;padding:0 0 env(safe-area-inset-bottom,0px)!important;border:0!important;border-top:1px solid var(--pv-line)!important;box-shadow:0 -4px 16px #00000014;background:var(--pv-card)!important}
+.pv-universal-body .layout>aside::before{display:none}
+.pv-universal-body .layout>aside>[role=tablist].nav{display:flex!important;min-height:var(--hero-dock-h);box-sizing:border-box;align-items:center;justify-content:center;padding:5px 7px!important;gap:0}
+.pv-universal-body #pv-nav-main{display:flex;flex:1 1 100%;justify-content:space-between;align-items:stretch;gap:4px;overflow:visible}
+.pv-universal-body #pv-nav-main .pv-nav-divider{display:none}
+.pv-universal-body #pv-nav-main>button{display:flex;flex:1 1 0;min-width:0;min-height:44px;border:1px solid transparent;border-radius:7px;gap:3px;padding:4px 2px;box-sizing:border-box;color:var(--pv-ink)!important;box-shadow:none}
+.pv-universal-body #pv-nav-main>button .nav-icon{width:21px;height:21px;flex:0 0 21px;background:none!important;border-radius:0;color:var(--pv-gold)!important}
+.pv-universal-body #pv-nav-main>button .nav-icon svg{width:17px;height:17px}
+.pv-universal-body #pv-nav-main>button[aria-selected=true]{background:var(--pv-bg)!important;border-color:var(--pv-line)!important;color:var(--pv-ink)!important}
+.pv-universal-body #pv-nav-main>button[aria-selected=true] .nav-icon{color:var(--pv-ink)!important}
+.pv-universal-body #pv-nav-main .nav-text b{font-size:10.5px;font-weight:650;white-space:nowrap}
+.pv-universal-body #pv-nav-main #tab-dil,.pv-universal-body #pv-nav-main #tab-del{display:none!important}
+.pv-universal-body #pv-nav-main>button[hidden],.pv-universal-body .layout>aside .nav>button[hidden]{display:none!important}
+.pv-universal-body #gab .hero-header-nav .hero-face-label{display:none!important}
+.pv-universal-body main{scroll-padding-bottom:calc(var(--hero-dock-h) + 12px)}
+.pv-universal-body #gab .hero-case-block>summary{color:var(--pv-ink)}
+.pv-universal-body #gab .hero-autos-workspace{gap:10px}
