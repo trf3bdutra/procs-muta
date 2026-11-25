@@ -230,3 +230,8 @@ test('diálogo Ajustes controla preferências reais e conserva os controles orig
  e('pv-ajustes-auto').checked=false;e('pv-ajustes-auto').events.change();assert.equal(h.prefs.auto,false);
  e('pv-ajustes-ok').events.click();assert.equal(e('pv-ajustes-dialog').open,false);assert.equal(e('pv-ajustes').focused,true);
 });
+
+test('próximo ato no título de Etapas, paleta neutra e faixa de três campos',()=>{
+ const s=fs.readFileSync(path.join(ROOT,'scripts/extensao/previa/universal-layout.js'),'utf8'),c=fs.readFileSync(path.join(ROOT,'scripts/extensao/previa/universal-layout.css'),'utf8');
+ assert.match(s,/pv-stage-head/);assert.match(s,/head\.append\(next\)/);assert.match(s,/faixa\.prepend\(dest\)/);assert.doesNotMatch(s,/faixa\.prepend\(next,dest\)/);assert.match(c,/--pv-bg:#f0f2f4/);assert.match(c,/grid-template-columns:repeat\(3,minmax\(0,1fr\)\)/);new Function(s);
+});

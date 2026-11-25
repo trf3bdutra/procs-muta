@@ -59,7 +59,7 @@
     sintEdit='';sintDraft='';render();
   }
   function flow(){
-    var E=etapas(),box=elem('div','pv-flowbox'),r=elem('div','pv-flow');box.append(elem('h4','pm-mer-h','Etapas'));
+    var E=etapas(),box=elem('div','pv-flowbox'),r=elem('div','pv-flow'),head=elem('div','pv-stage-head');head.append(elem('h4','pm-mer-h','Etapas'));box.append(head);
     E.L.forEach(function(x,i){
       var cell=elem('div','pv-stage'+(x.ok?' ok':i===E.n?' at':'')),b=btn('','data-et',String(i));b.className='pv-stage-btn';b.innerHTML=SV(IC[x.ic],14);b.disabled=i===E.L.length-1||!(i===E.n||i===E.n-1);b.title=i===E.L.length-1?'Ato do relator · somente leitura':'Marcar ou desfazer';
       cell.append(b,elem('b','',x.ic==='ass'?'Assinatura':x.r),elem('small','muted',x.dt?brD(x.dt).slice(0,5):'—'));r.append(cell);});
@@ -300,9 +300,12 @@
     var resp=p.querySelector('.pm-resp');if(resp){resp.classList.add('pv-enc');var ato=resp.querySelector('.pm-ato');if(ato){
       var faixa=p.querySelector('.pv-people'),idx=pronAtual(),dest=readRow('Destino',destGrav()||'A definir');
       if(faixa){
-        var next=readRow('Próximo ato',idx>=0?PRON[idx][0]:'A definir');
-        next.classList.add('pv-oper-cell');dest.classList.add('pv-oper-cell');
-        faixa.classList.add('pv-ato-destino');faixa.prepend(next,dest);ato.remove();
+        var head=p.querySelector('.pv-stage-head'),next=btn('','data-pv-enc','');
+        next.className='pv-next-ato';next.title='Editar próximo ato na Triagem';
+        next.append(elem('small','','Próximo ato'),elem('b','',idx>=0?PRON[idx][0]:'A definir'));
+        if(head)head.append(next);
+        dest.classList.add('pv-oper-cell');
+        faixa.classList.add('pv-ato-destino');faixa.prepend(dest);ato.remove();
         var sum=elem('div','pv-enc-summary'),sel=readRow('Seleção prévia',V('triagem','Seleção Prévia')),go=btn('Editar na Triagem','data-pv-enc','');
         go.className='lnk';sum.append(sel,go);
         if(destGrav()==='Outro destino'&&S(V('producao','Destino - Outro')))sum.prepend(readRow('Encaminhamento',V('producao','Destino - Outro')));
