@@ -1473,11 +1473,11 @@
           "grupo": "Matéria e gestão",
           "campos": [
             {
-              "rotulo": "Tipo de caso",
-              "chave": "Tema",
+              "rotulo": "Detalhamento do caso",
+              "chave": "Detalhamento do caso",
               "tipo": "texto-longo",
               "secao": "triagem",
-              "apelido": "tipo_de_caso"
+              "apelido": "detalhamento"
             },
             {
               "rotulo": "Assunto detalhado",
@@ -1657,13 +1657,6 @@
               "tipo": "texto-longo",
               "secao": "triagem",
               "apelido": "sintese_fatica"
-            },
-            {
-              "rotulo": "Especificidades",
-              "chave": "Especificidades",
-              "tipo": "texto-longo",
-              "secao": "triagem",
-              "apelido": "especificidades"
             },
             {
               "rotulo": "Ramo do direito",
@@ -2202,7 +2195,7 @@
               "apelido": "lote"
             },
             {
-              "rotulo": "Tipo de caso",
+              "rotulo": "Detalhamento do lote",
               "chave": "Lote - Tipo de caso",
               "tipo": "texto",
               "secao": "producao",
