@@ -147,10 +147,10 @@
          e Conformidade (aba própria: a análise da minuta pelo padrão do gabinete) -->
     <section id="panel-min" role="tabpanel" aria-labelledby="tab-min" hidden>
       <div class="wrap min-wrap">
-        <div class="seg pmodos min-modos" role="tablist" aria-label="Parte da aba Minuta"><button type="button" role="tab" data-mm="cmp" aria-selected="true">Comparar</button><button type="button" role="tab" data-mm="ger" aria-selected="false">Gerador</button><button type="button" role="tab" data-mm="lote" aria-selected="false" hidden title="Só para o gestor">CORTEX</button><button type="button" role="tab" data-mm="dir" aria-selected="false">Breviário</button><button type="button" role="tab" data-mm="conf" aria-selected="false">Conformidade <i class="conf-badge" id="mm-conf-n" hidden></i><small id="mc-resumo">leia o editor</small></button></div>
+        <div class="seg pmodos min-modos" role="tablist" aria-label="Parte da aba Minuta"><button type="button" role="tab" data-mm="ger" aria-selected="false">Minutário</button><button type="button" role="tab" data-mm="cor" aria-selected="true">Corretor</button><button type="button" role="tab" data-mm="dir" aria-selected="false">Breviário</button></div>
+        <div id="cor-modos" class="seg pmodos cor-modos" role="tablist" aria-label="Parte do Corretor"><button type="button" role="tab" data-mm="cmp" aria-selected="true">Comparativo</button><button type="button" role="tab" data-mm="conf" aria-selected="false">Conformidade <i class="conf-badge" id="mm-conf-n" hidden></i><small id="mc-resumo">leia o editor</small></button></div>
         <div id="cmp-app"></div>
-        <details class="card min-col" id="panel-lote" open hidden><summary><b>CORTEX</b><span class="muted">minuta do processo nos lotes, versões e transferência</span></summary><div id="lote-app"></div></details>
-        <div id="ger-app" hidden></div>
+                <div id="ger-app" hidden></div>
         <div id="dir-app" class="min-dir" hidden></div>
         <!-- 0.42: a conformidade é uma aba própria da Minuta (antes, rodapé fixo) -->
         <div class="min-conf aba" id="min-conf" data-aberto="1" hidden><div class="mc-b" id="panel-conf"><div id="conf-app"></div></div></div>
@@ -186,7 +186,7 @@
               <li>Com <strong>Acompanhar o PJe</strong> ligado, o painel abre o processo que está na tela; com <strong>Trocar de aba</strong>, os autos digitais abrem o Prontuário e a tarefa com o editor abre a Minuta.</li>
               <li><strong>Prontuário</strong>: a ficha do processo do Ex Officio, com o mesmo login. No topo, o cartão com a autuação e as partes. <em>Processo</em>: assunto, síntese e questões, situação atual, documentos dos autos (especificação e inteiro teor), sentença, origem, recursos, outras peças e os controles. <em>Triagem</em>: a conferência automática dos autos e o prontuário de triagem. <em>Produção</em>: destino, designação, revisão, pauta ou monocrática. O que você altera é gravado na ficha e a equipe vê.</li>
               <li><strong>Conferência automática</strong>: nos autos digitais, “Ler as peças principais” lê o texto das decisões, recursos, contrarrazões, pareceres, procurações e custas; o painel sugere os campos (tempestividade pelo calendário forense, preparo, procuração, MPF, contrarrazões, remessa necessária, tipo de julgamento) e só grava o que você marcar.</li>
-              <li><strong>Minuta</strong>: o texto do editor do PJe (lido sozinho), o tipo de pronunciamento e a comparação com a minuta-matriz (estrutura), a minuta do CORTEX, modelos, precedentes ou texto colado. No rodapé, a conformidade com o padrão do gabinete. O botão CORTEX localiza o processo nos lotes e manda o texto do editor para lá.</li>
+              <li><strong>Minuta</strong>: Minutário, Corretor (Comparativo e Conformidade) e Breviário. Os lotes são geridos no Caput.</li>
               <li><strong>Ementário</strong>, <strong>Parágrafos-padrão</strong> e <strong>Breviário</strong>: pesquise, copie e cole no editor.</li>
             </ol>
             <p class="muted">No PJe, o painel só lê: o número do processo, o texto do editor, a cronologia dos autos e, quando você pede, o documento (o mesmo download do botão do PJe). Não clica, não grava e não protocola nada no tribunal.</p>
