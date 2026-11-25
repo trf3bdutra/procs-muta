@@ -550,7 +550,9 @@
        "chave": "Responsável",
        "tipo": "texto",
        "secao": "origem",
-       "apelido": "responsavel"
+       "apelido": "responsavel",
+       "vocabulario": "equipe",
+       "regra": "Selecionar no cadastro da equipe ou informar nome personalizado; preservar os nomes históricos."
       },
       {
        "rotulo": "Solicitações manuais",
@@ -1270,7 +1272,7 @@
        "apelido": "alegacoes"
       },
       {
-       "rotulo": "Status da triagem",
+       "rotulo": "Situação da triagem",
        "chave": "Status da triagem",
        "tipo": "lista",
        "secao": "triagem",
@@ -1328,7 +1330,9 @@
        "chave": "Destino - Confirmado por",
        "tipo": "texto",
        "secao": "triagem",
-       "apelido": "triagem_destino_confirmado"
+       "apelido": "triagem_destino_confirmado",
+       "vocabulario": "equipe",
+       "regra": "Selecionar no cadastro da equipe ou informar nome personalizado; preservar os nomes históricos."
       },
       {
        "rotulo": "Hipóteses de monocrática",
@@ -2327,8 +2331,9 @@
        "chave": "SERVIDOR",
        "tipo": "texto",
        "secao": "producao",
-       "regra": "também de sessoes/*.json",
-       "apelido": "servidor"
+       "regra": "também de sessoes/*.json Selecionar no cadastro da equipe ou informar nome personalizado; preservar os nomes históricos.",
+       "apelido": "servidor",
+       "vocabulario": "equipe"
       },
       {
        "rotulo": "Minutado em",
@@ -2355,8 +2360,9 @@
        "chave": "CORRETOR",
        "tipo": "texto",
        "secao": "producao",
-       "regra": "também de sessoes/*.json",
-       "apelido": "corretor"
+       "regra": "também de sessoes/*.json Selecionar no cadastro da equipe ou informar nome personalizado; preservar os nomes históricos.",
+       "apelido": "corretor",
+       "vocabulario": "equipe"
       },
       {
        "rotulo": "Corrigido",
@@ -3422,7 +3428,9 @@
        "chave": "Meta - Responsável",
        "tipo": "texto",
        "secao": "controles",
-       "apelido": "meta_responsavel"
+       "apelido": "meta_responsavel",
+       "vocabulario": "equipe",
+       "regra": "Selecionar no cadastro da equipe ou informar nome personalizado; preservar os nomes históricos."
       },
       {
        "rotulo": "Observação",
@@ -3518,7 +3526,9 @@
        "chave": "Sobrestamento - Responsável",
        "tipo": "texto",
        "secao": "controles",
-       "apelido": "sobrestamento_responsavel"
+       "apelido": "sobrestamento_responsavel",
+       "vocabulario": "equipe",
+       "regra": "Selecionar no cadastro da equipe ou informar nome personalizado; preservar os nomes históricos."
       },
       {
        "rotulo": "Observação",
@@ -3645,7 +3655,9 @@
        "chave": "Sensível - Responsável",
        "tipo": "texto",
        "secao": "controles",
-       "apelido": "sensivel_responsavel"
+       "apelido": "sensivel_responsavel",
+       "vocabulario": "equipe",
+       "regra": "Selecionar no cadastro da equipe ou informar nome personalizado; preservar os nomes históricos."
       },
       {
        "rotulo": "Observação",
