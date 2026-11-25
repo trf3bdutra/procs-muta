@@ -111,3 +111,18 @@
 .cmt-load[data-cmt-loader="legacy"] .cmt-ld-mk .star:has(.cmtl-brand){width:100%!important;height:auto!important;}
 .cmtl-mini svg{transform-origin:center;animation:cmtl-spin 1.6s linear infinite;}
 @keyframes cmtl-spin{to{transform:rotate(360deg)}}
+
+/* Marca aplicada diretamente, sem máscara do símbolo legado. */
+[data-cmt-loader="legacy"] .cmt-ld-mk{width:min(280px,76vw)!important;height:auto!important;aspect-ratio:700/430;border:0!important;border-radius:0!important;animation:none!important;box-shadow:none!important}
+[data-cmt-loader="legacy"] .cmt-ld-mk:before,[data-cmt-loader="legacy"] .cmt-ld-mk:after{content:none!important}
+[data-cmt-loader="legacy"] .cmt-ld-mk>.cmtl-brand{display:block!important;width:100%!important;height:auto!important;animation:none!important;mask:none!important;-webkit-mask:none!important}
+.cmtl-inline .cmtl-mini:has(.cmtl-brand){width:58px;height:40px;flex-basis:58px}
+.cmtl-adopt-inline>.cmtl-mini:has(.cmtl-brand){width:144px;height:auto;aspect-ratio:700/430}
+.cmtl-mini>.cmtl-brand{width:100%;height:auto;display:block}
+.cmtl-mini:has(.cmtl-brand):before,.cmtl-mini:has(.cmtl-brand):after{content:none!important}
+#entrada .en-top .cmtl-login-brand{display:block;width:94px;height:auto;flex:none}
+#entrada .cmtl-auth-status{display:flex;align-items:center;justify-content:center;gap:12px;margin:14px 0;color:inherit;font-size:12px}
+#entrada .cmtl-auth-status[hidden]{display:none!important}
+#entrada .cmtl-auth-status .cmtl-brand{width:110px;height:auto}
+.load>.cmtl-local-brand{display:block;width:100px;height:auto;margin:0 auto 8px}
+@media(prefers-reduced-motion:reduce){.cmtl-mini svg{animation:none!important}}
