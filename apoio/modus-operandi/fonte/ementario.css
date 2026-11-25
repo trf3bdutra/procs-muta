@@ -732,8 +732,10 @@ html.emb-cmt body #e-aside{top:0!important;max-height:100vh!important}
 @media(max-width:520px){.pp-metadados>span.pp-chip{padding:5px 7px}.pp-metadados>.pp-chip b{font-size:11px}}
 
 /* Tipologia visual: natureza do ato, espécie de apreciação e desfecho são dimensões distintas. */
-.e-dhead.pp .e-tag.A{background:#235a55;color:#fff;border-color:#235a55;letter-spacing:.07em}
-.e-dhead.pp .e-tag.M{background:#805b18;color:#fff;border-color:#805b18;letter-spacing:.07em}
+.e-dhead.pp .e-tag.A{background:#294e70;color:#fff;border-color:#294e70;letter-spacing:.07em}
+.e-dhead.pp .e-tag.M{background:#74475b;color:#fff;border-color:#74475b;letter-spacing:.07em}
+:root:not([data-theme="light"]) .e-dhead.pp .e-tag.A{background:#a9c6e1;color:#17354f;border-color:#a9c6e1}
+:root:not([data-theme="light"]) .e-dhead.pp .e-tag.M{background:#d5b0c3;color:#47273a;border-color:#d5b0c3}
 .pp-metadados>span.pp-chip{--tag-tone:var(--mut);--tag-fill:var(--card);display:inline-flex;flex-direction:row;align-items:center;gap:6px;padding:5px 8px 5px 7px;background:var(--tag-fill)!important;border:1px solid color-mix(in srgb,var(--tag-tone) 40%,var(--line))!important;color:var(--tag-tone)!important}
 .pp-metadados>span.pp-chip>.pp-chip-info{display:flex;flex-direction:column;gap:2px;align-items:flex-start;border:0;padding:0;background:transparent;border-radius:0;font-weight:inherit;color:inherit;min-width:0}
 .pp-metadados .pp-chip-icon{width:15px;height:15px;flex:0 0 15px;color:var(--tag-tone)}
