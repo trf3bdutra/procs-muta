@@ -90,7 +90,7 @@ test('painel: abre o processo com sigla, etapas, roteiros e notas; sem erro de s
     assert.match(await pg.textContent('.pa-it .pa-al'), /Sustentação/);
     await pg.click('[data-pa="aba:sol"]');
     await pg.waitForSelector('#pauta-app .pa-ped', { timeout: 15000 });
-    assert.match(await pg.textContent('#pauta-app .pa-sol-resumo'), /1 externas/);
+    assert.match(await pg.textContent('#pauta-app .pa-sol-resumo'), /1 pedidos externos/);
     const pedido = await pg.textContent('#pauta-app .pa-ped');
     assert.match(pedido, /Sustentação presencial/);
     assert.match(pedido, /item 3/);
@@ -169,8 +169,8 @@ test('universal: Julgamento da monocrática e da urgência — hipótese do art.
   } finally { await P2.fim(); }
 });
 
-test('universal: Encaminhamento como segunda face; Monitoramento em janela; sinalizações no lugar das etapas; registro em Autuação', { skip: pular, timeout: 90000 }, async () => {
-  const op = { processo: CNJ, origem: {}, triagem: { 'Tipo de Julgamento': 'Apelação', 'Seleção Prévia': 'SELECIONADO PREVIAMENTE', Avisos: 'x', 'Registro - Situação atual': 'Acervo importado' }, producao: { Destino: 'Sessão' }, pauta: {}, controles: {} };
+test('universal: Encaminhamento como segunda face; Monitoramento e sinalizações no cartão Etapas; registro em Autuação', { skip: pular, timeout: 90000 }, async () => {
+  const op = { processo: CNJ, origem: {}, triagem: { 'Tipo de Julgamento': 'Apelação', 'Seleção Prévia': 'SELECIONADO PREVIAMENTE', META: 'Sim', Avisos: 'x', 'Registro - Situação atual': 'Acervo importado' }, producao: { Destino: 'Sessão' }, pauta: {}, controles: {} };
   const P = await abrir(op, { sigilo: '', liberado: true, porque: 'gestor' });
   try {
     const { pg } = P;
@@ -229,7 +229,7 @@ test('universal: organização — faces por setas compactas, sinalizações na 
     await pg.goto(pg.url().replace('/painel/painel.html', '/painel/universal.html'));
     await pg.waitForFunction(() => window.MutaSessao && window.MutaSessao.estado().estado === 'on', null, { timeout: 15000 });
     await pg.evaluate(cnj => { window.chrome.storage.session.set({ 'aba:1': { numero: cnj, classe: 'ApCiv', tarefa: '[Sessão] Aguardando a sessão', ctx: '', ed: false, lib: '' } }); }, CNJ);
-    await pg.waitForSelector('.hero-header-nav .pv-sn-row', { timeout: 15000 });
+    await pg.waitForSelector('.hero-steps-head .hero-sn-ind', { timeout: 15000 });
     const v = await pg.evaluate(() => {
       const vis = e => !!(e && e.offsetParent);
       return {
@@ -244,8 +244,14 @@ test('universal: organização — faces por setas compactas, sinalizações na 
     });
     assert.equal(v.setas, 2, 'faces pelas setas compactas ‹ ›');
     assert.equal(v.faces.length, 0, 'sem as abas das faces');
-    assert.ok(await pg.$('.hero-header-nav .pv-sn-row .hero-sn-ind'), 'sinalizações na barra do prontuário');
-    assert.deepEqual(v.abas, ['Prontuário', 'Minutário', 'Ementário', 'Pauta'], 'faixa principal sem gestão duplicada');
+    assert.ok(await pg.$('.hero-steps-head .hero-sn-ind'), 'sinalizações na barra do cartão Etapas');
+    assert.ok(await pg.$eval('.hero-header-nav .hero-face-label', e => e.hidden), 'sem nome da face no display');
+    assert.equal(await pg.$eval('.hero-case-status .hero-status-icon[data-ativo="false"]', L => L.filter(x => x.offsetParent).length),0,'ícones inativos ocultos');
+    await pg.hover('.hero-case-status');
+    await pg.click('.hero-monitor-hover');
+    await pg.waitForSelector('.hero-steps.hero-steps-mon>#hero-dock-pane-monitoramento');
+    await pg.click('.hero-steps-voltar');
+    assert.deepEqual(v.abas, ['Prontuário', 'Minutário', 'Repertório', 'Pauta'], 'faixa principal sem gestão duplicada');
     for (const [id, nome] of [['tab-dil', 'Diligências'], ['tab-del', 'Deliberações']]) {
       const seletor = '#tu-gestao #' + id;
       await pg.waitForSelector(seletor, { state: 'visible', timeout: 15000 });
@@ -256,7 +262,7 @@ test('universal: organização — faces por setas compactas, sinalizações na 
     }
     await pg.click('#tab-pront');
     assert.ok(v.etapas.some(c => /\bok\b/.test(c)) && v.etapas.some(c => /\bat\b/.test(c)) && v.etapas.some(c => /\bpend\b/.test(c)), 'feita, atual e pendente: ' + v.etapas.join(' | '));
-    assert.deepEqual(v.rotulos.sort(), ['avisos', 'intercorrências', 'pendências', 'urgência'], 'sinalizações com rótulo');
+    for (const k of ['pd','ic','av']) assert.ok(await pg.locator('.hero-steps-head [data-sn-kind="'+k+'"]').getAttribute('aria-label'), 'sinalização com rótulo acessível: '+k);
     assert.equal(v.lerAutos, 1, 'um só "Ler os autos" (aba Autos)');
     assert.ok(await pg.$$eval('.hero-ann-card.pv-ann-vazia', L => L.length) >= 1, 'anotações vazias em linha tracejada');
     assert.ok(v.frase <= 1, 'sem a frase repetida');
