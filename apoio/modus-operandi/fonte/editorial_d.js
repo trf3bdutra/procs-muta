@@ -307,34 +307,9 @@ function dkGuarda(){try{localStorage.setItem('dk-ed-d',JSON.stringify({man:DK.ma
 var KX={ready:false,falhou:false};function cxQual(){return '';}function cxBoot(){}function cxMostra(){}function cxSyncBar(){}function cxPartes(){return [];}
 var CXSEC={};
 /* ===== orientações (painel direito): editoriais e jurídicas do bloco selecionado ===== */
-var ORI=[
- ['relatorio',/^Abertura/,[['FORMA A','Parágrafo único: “Trata-se de apelação à sentença (ID …) que …”; Forma B só por escolha, em previdenciário ou sentença com três ou mais comandos.'],['DECISÃO RECORRIDA','Verbo nuclear e comandos enumerados; honorários e custas em nova frase.']],[['ARTIGO 489, I, DO CPC','O relatório traz as partes, a identificação do caso, a suma do pedido e da resposta e as principais ocorrências.']]],
- ['relatorio',/^Senten/,[['COMANDOS','Comandos da sentença enumerados; honorários e custas em nova frase.']],[['ARTIGO 489, I, DO CPC','Suma do pedido, da resposta e das principais ocorrências.']]],
- ['relatorio',/^(Recurso|Razões|Vícios)/,[['ALEGAÇÕES','“alegando, em suma:” + infinitivo, ou “alegando, em suma, que:” + verbo flexionado; itens numerados.'],['PEDIDO','Fechar com o pedido: “pelo que requereu …”.']],[['EFEITO DEVOLUTIVO','A apelação devolve ao tribunal a matéria impugnada (artigo 1.013, caput, do CPC).'],['PRELIMINARES','Preliminares do recurso entram no relatório e são decididas antes do mérito (artigo 938 do CPC).']]],
- ['relatorio',/^(Contrarraz|Contraminuta|Resposta)/,[['PARÁGRAFO PRÓPRIO','Contrarrazões em parágrafo próprio, depois das razões.'],['COM PRELIMINAR','Indicar qual preliminar foi apontada (ex.: ilegitimidade ativa).'],['RELATÓRIO','Conciso, objetivo e descritivo; sem adjetivação; fecho “É o relatório.”']],[['PRAZO','Contrarrazões em 15 dias (artigo 1.010, § 1º, do CPC); no agravo de instrumento, contraminuta (artigo 1.019, II).'],['PRELIMINAR','A preliminar das contrarrazões é enfrentada no voto, na abertura.']]],
- ['relatorio',/^(Parecer|Ministério)/,[['DENOMINAÇÃO','Em 2º grau, Procuradoria Regional da República, por extenso.'],['MODO','Prosseguimento, mérito, sem exame do mérito, sem hipótese de intervenção ou sem interesse público.']],[['INTERVENÇÃO','O Ministério Público intervém como fiscal da ordem jurídica nas hipóteses do artigo 178 do CPC.']]],
- ['relatorio',/^Ocorr/,[['ORDEM DIRETA','Memoriais, efeito suspensivo, embargos e incidentes, cada um em parágrafo próprio, na posição em que ocorreram.']],[['ARTIGO 489, I, DO CPC','O relatório registra as principais ocorrências havidas no andamento do processo.']]],
- ['relatorio',/^Encerramento/,[['FECHO','“É o relatório.” em parágrafo próprio.']],[]],
- ['voto',/^(Abertura|Cabeçalho|Vocativo)/,[['VOCATIVO','“Senhores Desembargadores,” abre o primeiro parágrafo; a frase segue em minúscula.'],['ORDEM','Admissibilidade → efeito suspensivo → perda do objeto → questões processuais.'],['PRELIMINAR','Decisão em frase curta, com o objeto e o ID; depois “Com efeito,” com os fatos.']],[['PRAZO','15 dias úteis (artigos 219 e 1.003, § 5º, do CPC); em dobro para a Fazenda Pública (artigo 183).'],['PREPARO','Entes públicos e autarquias dispensados (artigo 1.007, § 1º, do CPC).'],['CABIMENTO','Apelação contra sentença (artigo 1.009); agravo de instrumento no rol do artigo 1.015.']]],
- ['voto',/^Sobrestamento/,[['SEM SUSPENSÃO','Registrar o tema e por que o caso não se suspende.']],[['SOBRESTAMENTO','Suspensão por afetação de repetitivo ou repercussão geral (artigos 1.036 e 1.037, II, do CPC).']]],
- ['voto',/^(Transição|Moldura|Fundamentação)/,[['MOLDURA','Norma e jurisprudência antes do caso; “No mérito,” abre a transição.']],[['FUNDAMENTAÇÃO','Enfrentar os argumentos capazes de infirmar a conclusão (artigo 489, § 1º, IV, do CPC).'],['PRECEDENTES','Seguir ou distinguir precedentes com os fundamentos determinantes (artigos 927 e 489, § 1º, V e VI, do CPC).']]],
- ['voto',/^(Exame do caso|Caso vertente|Enfrentamento)/,[['CASO CONCRETO','Fato → prova (com ID) → norma → consequência. Uma ideia por frase.'],['ENFRENTAMENTO','“Nem se alegue …” ou “Contrariamente …” para afastar a tese do recurso.']],[['ARGUMENTOS','Enfrentar os argumentos capazes de infirmar a conclusão (artigo 489, § 1º, IV, do CPC).'],['ÔNUS DA PROVA','Artigo 373 do CPC.']]],
- ['voto',/^Precedente/,[['CITAÇÃO','“Em casos que tais, assim tem decidido esta Turma Regional:” e transcrição em bloco.']],[['PRECEDENTES','Observar os precedentes do artigo 927 do CPC; distinguir com fundamento (artigo 489, § 1º, VI).']]],
- ['voto',/^(Síntese|Encerramento)/,[['SÍNTESE','“Em suma,” ou “Assim,”, em uma frase.'],['HONORÁRIOS','“Pela sucumbência recursal, … deve suportar condenação adicional (artigo 85, § 11, do CPC)…”']],[['MAJORAÇÃO','Tema 1.059/STJ: só no desprovimento ou não conhecimento do recurso do vencido.'],['SEM MAJORAÇÃO','Parcial provimento, embargos de declaração, agravo interno, sentença anulada, recurso do MPF.'],['MANDADO DE SEGURANÇA','Sem honorários (artigo 25 da Lei 12.016/2009).']]],
- ['voto',/^Honor/,[['FÓRMULA','“Pela sucumbência recursal, … deve suportar condenação adicional (artigo 85, § 11, do CPC)…”'],['GRATUIDADE','Com gratuidade do devedor: “observada a gratuidade de justiça concedida (artigo 98, § 3º, do CPC)”.']],[['MAJORAÇÃO','Tema 1.059/STJ: só no desprovimento ou não conhecimento do recurso do vencido.'],['SEM MAJORAÇÃO','Parcial provimento, embargos de declaração, agravo interno, sentença anulada, recurso do MPF.'],['MANDADO DE SEGURANÇA','Sem honorários (artigo 25 da Lei 12.016/2009).']]],
- ['voto',/^Consect/,[['POR PERÍODO','Índices e juros por período, conforme o Manual de Cálculos da Justiça Federal vigente.']],[['CORREÇÃO E JUROS','Temas 810/STF e 905/STJ; a partir de 9/12/2021, Selic (artigo 3º da EC 113/2021).']]],
- ['voto',/^Dispositivo/,[['RESULTADO','Resultado expresso: conhecer ou não; dar ou negar provimento; nos embargos, acolher ou rejeitar.'],['FECHO','“É como voto.” em parágrafo próprio.']],[['JULGAMENTO NÃO UNÂNIME','Apelação com resultado não unânime: prosseguimento com outros julgadores (artigo 942 do CPC).']]],
- ['voto',/^\d\.\s*(Vícios|Rediscussão|Enfrentamento|Natureza)/,[['SEQUÊNCIA FIXA','Vícios, rediscussão, enfrentamento, natureza do inconformismo, prequestionamento.']],[['VÍCIOS','Obscuridade, contradição, omissão ou erro material (artigo 1.022 do CPC).']]],
- ['voto',/Prequestionamento/,[['FÓRMULA','Prequestionamento ficto, sem repetir as teses.']],[['ARTIGO 1.025 DO CPC','Os elementos suscitados consideram-se incluídos no acórdão para fins de prequestionamento.']]],
- ['voto',/Multa protelatória/,[['FUNDAMENTO','Indicar por que os embargos são protelatórios.']],[['ARTIGO 1.026, § 2º, DO CPC','Embargos manifestamente protelatórios: multa de até 2% do valor atualizado da causa.']]],
- ['voto',/^Multa:/,[['FUNDAMENTO','Só com votação unânime e recurso manifestamente inadmissível ou improcedente.']],[['ARTIGO 1.021, § 4º, DO CPC','Multa entre 1% e 5% do valor atualizado da causa.']]],
- ['ementa',/./,[['CABEÇALHO','Negrito e caixa alta. Ramo → classe → assunto → conclusão, em até 3 linhas.'],['CASO EM EXAME','Sem “Trata-se de”.'],['QUESTÃO EM DISCUSSÃO','Um só item: “A questão em discussão consiste em saber se …”.'],['RAZÕES DE DECIDIR','Um fundamento por item.'],['ITENS','Numeração contínua e em negrito. Frases com até 40 palavras e menos de 5 vírgulas. Sem ID.'],['RODAPÉ','Rótulos em itálico após “__________”.']],[['O QUE DEVE CONSTAR','O caso, a questão decidida, os fundamentos determinantes e o resultado, tal como no voto.'],['TESE','Só quando houver tese de julgamento; não incluir a seção por obrigação.'],['RODAPÉ','Dispositivos e precedentes efetivamente usados no voto; ordem STF → STJ → TRF-3; TNU vedada.']]],
- ['acordao',/./,[['ESPELHO DO VOTO','O resultado repete literalmente o dispositivo do voto.'],['JULGADORES','Vêm preenchidos e podem ser trocados.']],[['MAIORIA NA APELAÇÃO','Resultado não unânime: prosseguimento com outros julgadores (artigo 942 do CPC).']]],
- ['monocratica',/^(Abertura|Relato|Síntese)/,[['RELATO','Síntese objetiva do caso e do recurso, com IDs.']],[['ARTIGO 932 DO CPC','O relator decide monocraticamente nas hipóteses dos incisos III a V.']]],
- ['monocratica',/^(Marco|Fundamenta)/,[['ENQUADRAMENTO','Enquadrar no artigo 932 antes de decidir: “Segundo a Corte Superior…”.']],[['JULGAMENTO MONOCRÁTICO','Artigo 932, III a V, do CPC; Súmula 568/STJ.']]],
- ['monocratica',/^Dispositivo/,[['FÓRMULA','“Ante o exposto, com esteio no artigo 932, … do CPC, …”.']],[['ARTIGO 932 DO CPC','Indicar o inciso aplicado.']]],
- ['monocratica',/./,[['FECHO','Publique-se. Intime-se. Local e data.']],[['AGRAVO INTERNO','Cabe agravo interno da decisão monocrática (artigo 1.021 do CPC).']]],
- ['despacho',/./,[['OBJETO','Uma providência por despacho, em frase direta.']],[['DESPACHO','Ato sem conteúdo decisório (artigo 203, § 3º, do CPC).']]]];
+/* orientações por parte e bloco: fonte única em orientacoes.json (a mesma do capítulo do Breviário), injetada no build */
+var DORI=/*__DORI__*/{};
+var ORI=(DORI.itens||[]).map(function(o){return [o.pid,new RegExp(o.re),o.ed||[],o.ju||[]];});
 var ORI_ALIAS={'Recurso':'Razões','Parecer':'Ministério Público','Fundamentação':'Moldura jurídica','Caso vertente':'Exame do caso','Encerramento':'Síntese','Síntese do caso':'Relato'};
 function dkRegras(pid,n){var nm=ORI_ALIAS[n]||n,R=[];(ED.pecas.pecas||[]).forEach(function(p){var vv=XP.pc==='acordao'?XP.v.acordao:'';if(p.id!==pid&&!(pid==='relatorio'&&p.id==='rel-'+vv)&&!(pid==='voto'&&p.id===vv))return;(p.elementos||[]).forEach(function(e){if(e.n===nm||e.n===n)(e.r||[]).forEach(function(x){if(R.indexOf(x)<0)R.push(x);});});});return R;}
 function dkOri(pid,n){for(var i=0;i<ORI.length;i++){var o=ORI[i];if(o[0]===pid&&o[1].test(n||''))return o;}return null;}
@@ -352,8 +327,9 @@ function xRef(){
   if(!sel)h+=dkRoteiro(pid);
   if(DK.man){var T=[['par','Parágrafos'],['cit','Citação'],['voc','Vocabulário'],['forma','Forma']],R={};T.forEach(function(t){R[t[0]]=xRefTab(t[0]);});var G=XP._G||{h:''};
     h+='<div class="dori man"><div class="ohd"><p class="kick2">Manual · '+esc(pt.t||'')+'</p></div>'+G.h+'<div class="xrtabs" role="tablist" style="margin-top:10px">'+T.map(function(t){return '<button role="tab" data-xrt="'+t[0]+'" aria-selected="'+(XP.tab===t[0])+'">'+t[1]+(XP.q?' <small>'+R[t[0]].n+'</small>':'')+'</button>';}).join('')+'</div><input id="x-rq" type="search" placeholder="Buscar nas orientações…" aria-label="Buscar nas orientações" value="'+esc(XP.q)+'"><div class="xrb">'+(R[XP.tab].h||'<p class="meta">Nada encontrado.</p>')+'</div></div>';}
-  if(window.CQX&&CQX.tem()&&!dk28()){var rt=DK.rtab||'caso',rs=CQX.resumo();
-    h='<div class="drtab" role="tablist" aria-label="Painel"><button type="button" role="tab" data-drtab="caso" aria-selected="'+(rt==='caso')+'">Caso'+(rs?' <small>'+esc(rs)+'</small>':'')+'</button><button type="button" role="tab" data-drtab="ori" aria-selected="'+(rt!=='caso')+'">Orientações</button></div>'+(rt==='caso'?CQX.painel():h);}
+  /* orientações fora do canhoto: estão no Breviário (capítulo 7) e, o que importa ao bloco, no balão sobre a folha (dkBalao);
+     aqui fica só o material do caso aberto (LIA, modelos relacionados, precedentes e parágrafos) */
+  h=window.CQX&&CQX.tem()&&!dk28()?'<div class="dori"><p class="kick2"><span>Material do caso</span></p></div>'+CQX.painel():'';
   el.innerHTML=h;
   if(foco){var q=$('#x-rq');if(q){q.focus();try{q.setSelectionRange(pos,pos);}catch(e){}}}
 }
@@ -694,7 +670,7 @@ function dkModOpts(){
 function dkBarraTexto(){var e28=!!(window.CQX&&CQX.e28()),f=DK.fonte==='m28'&&!e28?'mat':DK.fonte,m=dkModelo(),fora=f==='mod'&&m&&dkPronMod(m)!==dkPron();
   var h='<div class="dgrp dtxt"><span class="dglab">Texto da folha</span><div class="dseg" role="group" aria-label="Texto da folha">'+
     [['mat','Minuta-Matriz'],['mod','Modelo']].map(function(o){return '<button type="button" data-dfonte="'+o[0]+'" aria-pressed="'+(f===o[0]||(o[0]==='mod'&&f==='m28'))+'">'+o[1]+'</button>';}).join('')+'</div>';
-  h+='<label class="dmodl"><span>Modelo</span><select data-dmod aria-label="Modelo do gabinete">'+dkModOpts()+'</select></label><label class="dmodq"><input data-dmodq type="search" autocomplete="off" value="'+esc(DK.modq||'')+'" placeholder="filtrar modelos" aria-label="Filtrar modelos"></label>';
+  h+='<label class="dmodl"><span>Modelo</span><select data-dmod aria-label="Modelo do gabinete">'+dkModOpts()+'</select></label><label class="dmodq"><input data-dmodq type="search" autocomplete="off" value="'+esc(DK.modq||'')+'" placeholder="filtrar modelos" aria-label="Filtrar modelos"></label>'+(window.CQX&&CQX.tem()?'<button type="button" class="dsug-b" data-dsug aria-expanded="'+!!DK.sug+'" title="Modelos sugeridos para o processo aberto">Para o caso ▾</button>':'');
   h+='</div>';
   if(fora)h+='<span class="dcx-nota">O modelo escolhido é de '+esc(mTipo(m).toLowerCase())+': a folha segue a Minuta-Matriz neste pronunciamento.</span>';
   else if(f==='mod'&&!m&&BASE)h+='<span class="dcx-nota">Escolha um modelo: até lá, a folha segue a Minuta-Matriz.</span>';
@@ -716,7 +692,7 @@ function dkAplicaCaso(P,sg){
   var tj=nz(P.tipoJulgamento||''),cl=nz(P.classe||''),v=/embargos de declar/.test(tj)?'ed':/agravo interno/.test(tj)?'agint':/agravo de instrumento/.test(tj)||/agravo de instrumento/.test(cl)?'ai':(/remessa/.test(tj)||/remessa/.test(cl))?'aprn':'ap';
   if(v==='ap'&&(P.recursos||[]).filter(function(r){return /apela/i.test(r);}).length>1)v='dap';
   var novo=String(XD.proc||'').replace(/\D/g,'')!==String(P.processo||'').replace(/\D/g,'');
-  if(novo){XP.alt={};XP.abre={};XP.fora={};XP.vb={};XP.res={};XD.rec='';Object.keys(FILL).forEach(function(k){if(!/^mod-|^par:/.test(k))delete FILL[k];});DK.inc={};DK.rotAs='';DK.rotAsMan=false;}
+  if(novo){DK.sug=true;XP.alt={};XP.abre={};XP.fora={};XP.vb={};XP.res={};XD.rec='';Object.keys(FILL).forEach(function(k){if(!/^mod-|^par:/.test(k))delete FILL[k];});DK.inc={};DK.rotAs='';DK.rotAsMan=false;}
   XP.v.acordao=v;if(v==='ap'||v==='aprn'||v==='ai')DK.cl=v;
   /* destino na ficha: monocrática abre a decisão monocrática; senão, acórdão */
   if(/despacho/i.test((P.destino||'')+' '+tj)){XP.pc='decisao';XP.v.decisao='desp';}else if(/monocr/i.test((P.destino||'')+' '+tj)){XP.pc='decisao';XP.v.decisao='mono';XP.mrec=v==='ai'?'ai':/remessa/.test(tj)&&!/apela/.test(tj)?'rn':'ap';}else XP.pc='acordao';
@@ -853,13 +829,10 @@ xAutoAplica=function(){_xAutoAplicaCanhoto();$$('#x-aside [data-dfk]').forEach(f
 
 /* ===== Canhoto único: as orientações e o roteiro (antigo painel direito, #x-ref) ficam dentro do canhoto.
    O nó #x-ref é mudado de lugar, não recriado: xRef, o painel Caso e a Consulta continuam escrevendo nele.
-   Sem bloco: resumo da parte, lista de blocos e orientações. Com bloco: o bloco, as regras dele e os outros blocos. Com caso aberto: o painel do caso (modelos) primeiro. ===== */
+   Sem bloco: resumo da parte, lista de blocos e orientações. Com bloco: o bloco, as regras dele e os outros blocos. Os modelos do caso ficam no seletor Modelo da barra; a conformidade, no painel flutuante. ===== */
 function dkJunta(){var as=$('#x-aside'),ref=$('#x-ref'),c=as&&as.querySelector('.dcan'),bot=$('#dcan-bot');if(!ref||!c||!bot)return;
   ref.setAttribute('aria-label','Orientações e roteiro');ref.classList.add('dorip');
-  var caso=!XP.sel&&window.CQX&&CQX.tem()&&!dk28()&&(DK.rtab||'caso')==='caso';
-  /* caso aberto: os modelos para o caso (e a conformidade) abrem o canhoto, antes do prontuário */
-  if(caso){if(c.firstChild!==ref)c.insertBefore(ref,c.firstChild);}
-  else if(XP.sel){if(bot.previousSibling!==ref||ref.parentNode!==c)c.insertBefore(ref,bot);}
+  if(XP.sel){if(bot.previousSibling!==ref||ref.parentNode!==c)c.insertBefore(ref,bot);}
   else if(bot.nextSibling!==ref||ref.parentNode!==c)c.insertBefore(ref,bot.nextSibling);}
 /* exportações (Copiar peça, .docx, PDF, limpar, Conferir) saem da barra do topo e entram na pílula do "Copiar <parte>", logo acima da folha */
 var DPILL={'data-xcp':'Copiar peça','data-xdocx':'.docx','data-xpdf':'PDF','data-xlimpar':'Limpar','data-dconf':'Conferir'};
@@ -876,7 +849,59 @@ function dkFlutuante(){var k=DK.pick;if(!k)return;var B=document.querySelector('
   p.innerHTML='<div class="dflut-h"><b>Parágrafos do banco</b><span>'+esc(t.n)+'</span></div>'+dkIncHtml(t);
   p.addEventListener('click',function(e){e.stopPropagation();});B.classList.add('dflut-on');B.appendChild(p);
   var r=p.getBoundingClientRect();if(r.bottom>window.innerHeight&&r.height<window.innerHeight)window.scrollBy({top:r.bottom-window.innerHeight+16,behavior:'smooth'});}
-(function(){var _xp=xPagina;xPagina=function(){var r=_xp.apply(this,arguments);dkJunta();dkPilula();dkFlutuante();return r;};})();
+/* modelos para o caso: painel preso ao seletor "Modelo" da barra (abre sozinho quando um processo novo é aberto);
+   aplicar um modelo o põe no seletor e fecha o painel; fecha também por fora, por Esc ou pelo botão */
+function dkSugAbre(on){DK.sug=!!on;var g=$('#x-top .dtxt'),v=g&&g.querySelector('.dsug');if(v)v.remove();
+  var bt=g&&g.querySelector('[data-dsug]');if(bt)bt.setAttribute('aria-expanded',String(DK.sug));
+  if(!DK.sug||!g||!(window.CQX&&CQX.tem()))return;
+  var d=document.createElement('div');d.className='dsug';d.setAttribute('role','dialog');d.setAttribute('aria-label','Modelos para o caso');
+  d.innerHTML='<div class="dsug-h"><b>Modelos para o caso</b><button type="button" class="dsug-x" data-dsugx aria-label="Fechar">×</button></div>'+CQX.solucoes();g.appendChild(d);}
+function dkSugRender(){var d=$('#x-top .dtxt .dsug');if(!d||!(window.CQX&&CQX.tem()))return;
+  d.innerHTML='<div class="dsug-h"><b>Modelos para o caso</b><button type="button" class="dsug-x" data-dsugx aria-label="Fechar">×</button></div>'+CQX.solucoes();}
+var _dkUsaM=dkUsaModelo;dkUsaModelo=function(){DK.sug=false;return _dkUsaM.apply(this,arguments);};
+var _dkFonteB=dkFonte;dkFonte=function(){DK.sug=false;return _dkFonteB.apply(this,arguments);};
+document.addEventListener('click',function(e){var t=e.target;if(!t.closest)return;
+  if(t.closest('[data-dsug]')){e.preventDefault();e.stopImmediatePropagation();dkSugAbre(!DK.sug);if(DK.sug){var q=$('#cq-modelq');if(q)q.focus();}return;}
+  if(t.closest('[data-dsugx]')){e.preventDefault();e.stopImmediatePropagation();dkSugAbre(false);return;}
+  if(DK.sug&&!t.closest('.dsug'))dkSugAbre(false);},true);
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&DK.sug&&e.target.closest&&(e.target.closest('.dsug')||e.target===document.body))dkSugAbre(false);});
+/* conformidade do caso: painel flutuante e minimizável, no canto da folha (só no Minutário, com processo aberto) */
+DK.confMin=(function(){try{return localStorage.getItem('dk-conf-min')==='1';}catch(e){return false;}})();
+function dkConf(){var V=$('#v-edit');if(!V)return;var el=$('#dk-conf'),on=window.CQX&&CQX.tem()&&!dk28()&&!V.hidden&&$('#x-wrap')&&!$('#x-wrap').hidden;
+  if(!on){if(el)el.hidden=true;return;}
+  if(!el){el=document.createElement('div');el.id='dk-conf';el.setAttribute('role','complementary');el.setAttribute('aria-label','Conformidade do caso');V.appendChild(el);
+    el.addEventListener('click',function(e){var b=e.target.closest('[data-dconfmin]');if(!b)return;e.preventDefault();e.stopPropagation();DK.confMin=!DK.confMin;try{localStorage.setItem('dk-conf-min',DK.confMin?'1':'0');}catch(er){}dkConf();});}
+  var C=CQX.conformidade()||{h:'',ok:0,n:0,mau:0};el.hidden=false;el.classList.toggle('min',!!DK.confMin);
+  el.innerHTML='<button type="button" class="dkc-h" data-dconfmin aria-expanded="'+!DK.confMin+'" title="'+(DK.confMin?'Abrir':'Minimizar')+' a conformidade"><b>Conformidade</b><span class="dkc-n'+(C.mau?' pc':'')+'">'+(C.n?C.ok+'/'+C.n:'…')+'</span><i aria-hidden="true">'+(DK.confMin?'▴':'▾')+'</i></button>'+(DK.confMin?'':'<div class="dkc-b">'+C.h+'</div>');}
+var _xRefConf=xRef;xRef=function(){var r=_xRefConf.apply(this,arguments);dkConf();return r;};
+var _xRenderConf=xRender;xRender=function(){var r=_xRenderConf.apply(this,arguments);dkConf();return r;};
+/* balão de orientações: o que importa ao bloco (regras do trecho, editoriais e jurídicas de orientacoes.json) surge com o cursor
+   sobre o texto do bloco ou sobre o título da parte; some ao sair, ao clicar, ao digitar ou ao rolar. O completo está no Breviário. */
+var DBAL={t:0,k:''};
+/* rótulo em caixa alta → frase ("ARTIGO 489, I, DO CPC" → "Artigo 489, I, do CPC"), mantendo siglas e romanos */
+function dkRotCaixa(s){var SIG=/^(CPC|CF|STJ|STF|CNJ|MPF|MS|ED|TRF|TNU|INSS|EC|ACP|I|II|III|IV|V|VI|VII|VIII|IX|X)$/,P=String(s).split(/(\s+)/);
+  return P.map(function(w,i){var c=w.replace(/[^A-Za-zÀ-ÿ]/g,'');if(SIG.test(c)||(c.length===1&&i===P.length-1))return w;w=w.toLowerCase();return i===0?w.charAt(0).toUpperCase()+w.slice(1):w;}).join('');}
+function dkBalaoHtml(pid,n){var o=dkOri(pid,n||(pid==='ementa'?'Cabeçalho':''))||(!n?ORI.filter(function(x){return x[0]===pid;})[0]:null),RG=n?dkRegras(pid,n):[];
+  var ed=(o?o[2]:[]).slice(),ju=o?o[3]:[];
+  if(pid==='ementa'&&n){var mk={'Cabeçalho':'CABEÇALHO','I. CASO EM EXAME':'CASO EM EXAME','II. QUESTÃO EM DISCUSSÃO':'QUESTÃO EM DISCUSSÃO','III. RAZÕES DE DECIDIR':'RAZÕES DE DECIDIR','Itens':'ITENS','Rodapé':'RODAPÉ'}[n];if(mk)ed=ed.filter(function(x){return x[0]===mk;});}
+  RG=RG.filter(function(r){return !ed.some(function(x){return x[1]===r;});});
+  if(!ed.length&&!ju.length&&!RG.length)return '';
+  var li=function(L,cls){return L.map(function(x){return '<li class="'+cls+'">'+(x[0]?'<b>'+esc(dkRotCaixa(x[0]))+'.</b> ':'')+xFm(x[1])+'</li>';}).join('');};
+  return '<p class="dbal-k">'+esc(n?n.replace(/^[IV]+\.\s*/,''):'Orientações da parte')+'</p><ul>'+li(RG.map(function(r){return ['',r];}),'rg')+li(ed,'ed')+li(ju,'ju')+'</ul><p class="dbal-f">Completo no Breviário › Orientações por parte e bloco</p>';}
+function dkBalaoFecha(){clearTimeout(DBAL.t);DBAL.k='';var b=document.getElementById('dk-balao');if(b)b.hidden=true;}
+function dkBalaoPos(b,x,y){var w=b.offsetWidth,h=b.offsetHeight,X=Math.min(x+16,window.innerWidth-w-10),Y=y+18;if(Y+h>window.innerHeight-10)Y=Math.max(10,y-h-14);b.style.left=Math.max(10,X)+'px';b.style.top=Y+'px';}
+document.addEventListener('mousemove',function(e){var t=e.target;if(!t.closest){return;}
+  var alvo=t.closest('#x-main .xblk .dbody,#x-main .dpj');
+  if(!alvo||t.closest('.dflut,.band,button,select,input')||DK.pick||DK.sug){if(DBAL.k)dkBalaoFecha();else clearTimeout(DBAL.t);return;}
+  var blk=alvo.closest('.xblk'),n=blk?((blk.querySelector('.bl')||{}).textContent||''):'',k=(DK.parte||'')+'|'+n,b=document.getElementById('dk-balao');
+  if(k===DBAL.k&&b&&!b.hidden){dkBalaoPos(b,e.clientX,e.clientY);return;}
+  clearTimeout(DBAL.t);DBAL.k='';if(b)b.hidden=true;var x=e.clientX,y=e.clientY;
+  DBAL.t=setTimeout(function(){var h=dkBalaoHtml(DK.parte,n);if(!h)return;var bb=document.getElementById('dk-balao');
+    if(!bb){bb=document.createElement('div');bb.id='dk-balao';bb.setAttribute('role','tooltip');document.body.appendChild(bb);}
+    bb.innerHTML=h;bb.hidden=false;DBAL.k=k;dkBalaoPos(bb,x,y);},450);});
+['mousedown','keydown','scroll','wheel'].forEach(function(ev){window.addEventListener(ev,function(){if(DBAL.k||DBAL.t)dkBalaoFecha();},true);});
+document.addEventListener('mouseleave',dkBalaoFecha);
+(function(){var _xp=xPagina;xPagina=function(){var r=_xp.apply(this,arguments);dkJunta();dkPilula();dkFlutuante();dkSugAbre(DK.sug);dkConf();return r;};})();
 
 /* Minutário com três modos (Minutário · Modelos · Parágrafos), trocados pelo seletor da abertura, como o Relator/Turma do Ementário */
 window.VDM_minAtual=function(){return XS.ed||'pecas';};

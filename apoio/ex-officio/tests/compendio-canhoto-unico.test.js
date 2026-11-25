@@ -8,7 +8,7 @@ const ler = f => fs.readFileSync(path.join(MO, f), 'utf8');
 test('o antigo painel direito vive no canhoto e a folha fica com duas colunas', () => {
   const js = ler('fonte/editorial_d.js'), css = ler('fonte/editorial_d.css');
   assert.match(js, /function dkJunta\(\)/);
-  assert.match(js, /xPagina=function\(\)\{var r=_xp\.apply\(this,arguments\);dkJunta\(\);dkPilula\(\);(?:dkFlutuante\(\);)?return r;\};/);
+  assert.match(js, /xPagina=function\(\)\{var r=_xp\.apply\(this,arguments\);dkJunta\(\);dkPilula\(\);/);
   assert.match(css, /grid-template-areas:"top top" "can main"\}/);
   assert.match(css, /#x-aside #x-ref\.dorip\{/);
 });
@@ -58,4 +58,27 @@ test('parágrafos do banco num painel flutuante preso ao bloco; canhoto sem "Edi
   assert.match(js, /dkCanTrecho=function\(sel\)\{return dkProntuarioAtivo\(\)\+_dkCanTrechoBase\(sel\);\};/);
   assert.doesNotMatch(js, /Editar esta peça/);
   assert.match(ler('fonte/editorial_d.css'), /\.dflut\{position:absolute;/);
+});
+
+test('modelos do caso presos ao seletor Modelo da barra; conformidade em painel flutuante e minimizável', () => {
+  const js = ler('fonte/editorial_d.js'), c = ler('fonte/consulta.js');
+  assert.match(js, /function dkSugAbre\(on\)/);
+  assert.match(js, /data-dsug aria-expanded=/);
+  assert.match(js, /function dkConf\(\)/);
+  assert.match(c, /solucoes:solucoesCaso,conformidade:conformidadeCaso,/);
+  assert.doesNotMatch(c, /var h=solucoes\(P,A,R\)\+/, 'modelos ainda dentro do painel do canhoto');
+  assert.match(ler('fonte/editorial_d.css'), /#dk-conf\{position:fixed!important;/);
+});
+
+test('orientações fora do canhoto: no Breviário (capítulo 7) e em balão sobre a folha, da mesma fonte', () => {
+  const js = ler('fonte/editorial_d.js'), O = JSON.parse(ler('fonte/orientacoes.json'));
+  assert.ok(O.itens.length >= 27);
+  assert.match(js, /var DORI=\/\*__DORI__\*\/\{\};/);
+  assert.match(js, /function dkBalaoHtml\(pid,n\)/);
+  assert.match(js, /Material do caso/);
+  const t = ler('modus-operandi.html'), m = /<script type="application\/json" id="dir-manual">(.*?)<\/script>/s.exec(t);
+  const H = JSON.parse(m[1]);
+  assert.match(H, /<section class="mn-cap" id="mn-orientacoes" data-aba="manual">/);
+  O.itens.forEach(i => assert.ok(H.includes(i.rotulo.replace(/&/g, '&amp;')), 'falta no Breviário: ' + i.rotulo));
+  assert.ok(H.includes(O.itens.length + ' orientações'));
 });

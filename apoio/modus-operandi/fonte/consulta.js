@@ -244,7 +244,7 @@
     var todos=(q?(R.modTodos||[]):(R.modElegiveis||R.mod||[])).filter(compat).filter(filt).slice(0,30),fora=(R.modFora||[]).filter(filt).slice(0,5),tem28=e28();
     var m28=tem28&&dkPron()==='ac'&&(!q||'28,86% cumprimento individual acp matriz'.indexOf(q)>=0)?'<button type="button" class="cq-sol rec'+(A.tipo==='m28'?' sel':'')+'" data-dfonte="m28"><strong>28,86% · cumprimento individual da ACP</strong><small>Matriz · elegível para este processo · recomendada</small></button>':'';
     return '<div class="dori cq-solucoes"><p class="kick2"><span>Modelos para o caso</span><span>Aplicação facultativa</span></p>'+
-      '<div class="cq-tipo"><b>Modelos</b><p>Sugestões para este processo, matrizes incluídas. Aplicado, o modelo vai para o seletor “Modelo” da barra e a folha passa a usar o conteúdo dele com os dados do processo. Confira a aderência jurídica.</p><input class="cq-modelq" id="cq-modelq" type="search" value="'+e(CQ.modelq||'')+'" placeholder="Buscar por assunto, tese ou texto" aria-label="Buscar modelos do gabinete">'+
+      '<div class="cq-tipo"><b>Modelos</b><p>Sugestões para este processo, matrizes incluídas. Aplicado, o modelo fica no seletor “Modelo” e a folha passa a usar o conteúdo dele com os dados do processo. Confira a aderência jurídica.</p><input class="cq-modelq" id="cq-modelq" type="search" value="'+e(CQ.modelq||'')+'" placeholder="Buscar por assunto, tese ou texto" aria-label="Buscar modelos do gabinete">'+
       (todos.length||m28?'<div class="cq-modsel">'+m28+todos.map(function(z){var sel=A.tipo==='mod'&&A.x&&A.x.id===z.x.id;return '<button type="button" class="cq-sol'+(sel?' sel':'')+'" data-dusar="'+e(z.x.id)+'"><strong>'+e(z.x.nomeModelo||z.x.id)+'</strong><small>'+e((z.el.razoes||[]).join(' · ')||('aderência '+z.s))+'</small></button>';}).join('')+'</div>':'<span class="meta">Nenhum modelo encontrado. Digite outros termos para pesquisar o banco.</span>')+
       (fora.length?'<details class="cq-fora"><summary>Fora dos critérios do caso · '+fora.length+'</summary>'+fora.map(function(z){return '<div><b>'+e(z.x.nomeModelo||z.x.id)+'</b><small>'+e((z.el.impedimentos||[]).join(' · ')||'aderência insuficiente')+'</small></div>';}).join('')+'</details>':'')+'</div>'+
       '<div class="cq-tipo"><b>Minuta-Matriz</b><p>Estrutura por tipo de julgamento, preenchida com os dados disponíveis do processo. Na ausência de modelo específico, é o suporte à redação da minuta.</p><button type="button" class="cq-sol'+(A.tipo==='mat'?' sel':'')+'" data-dfonte="mat"><strong>Usar a Minuta-Matriz</strong><small>'+e(A.tipo==='mat'?nomeDe(A):(A.mat?(A.mat.nome||A.mat.id):'estrutura pelo tipo de recurso'))+'</small></button></div></div>';
@@ -253,18 +253,25 @@
   function painel(){
     var P=CQ.perfil;if(!P)return '';var R=Rcaso();
     if(!R){base().then(function(){if(typeof xRef==='function')xRef();});return '<div class="dori"><p class="meta">Carregando a base do gabinete…</p></div>';}
-    var A=atual(),C=conformidade(P,A,R),mau=C.filter(function(z){return z.s!=='ok';}).length;
-    var h=solucoes(P,A,R)+'<div class="dori"><p class="kick2"><span>Conformidade</span><span>'+(C.length-mau)+'/'+C.length+'</span></p><div class="cqc">'+
-      C.map(function(z){return '<div class="cqi '+z.s+'"><div class="cqih"><b>'+e(z.k)+'</b><i>'+(z.s==='ok'?'em ordem':z.s==='pc'?'conferir':'falta')+'</i></div><p>'+e(z.t)+'</p></div>';}).join('')+'</div>';
-    h+='<div class="cqacs">'+(A.tipo==='mod'?'<button type="button" class="dbt" data-cq="mod" data-id="'+e(A.x.id)+'">Abrir o modelo na página Modelos</button>':'')+
-      (DK.fonteManual?'<button type="button" class="dbt" data-dauto="1">Restaurar Minuta-Matriz</button>':'')+'</div></div>';
-    h+=liaPainel(P,A,R);
+    var A=atual(),h=liaPainel(P,A,R);
     var alt=(R.mod||[]).filter(function(z){return !(A.tipo==='mod'&&z.x.id===A.x.id);}).slice(0,5);
     h+=lista('Modelos relacionados','mod',alt,function(m){return e(m.nomeModelo||m.id);});
     h+=lista('Precedentes do relator','prec',R.prec,function(p){return e([p.processo||p.id,p.resultado].filter(Boolean).join(' · '));});
     h+=lista('Parágrafos-padrão','par',R.par,function(p){return e([p.titulo||p.id,p.categoria].filter(Boolean).join(' · '));});
     return h;
   }
+  /* modelos para o caso, no seletor "Modelo" da barra (editorial_d.js › dkSugAbre) */
+  function solucoesCaso(){var P=CQ.perfil;if(!P)return '';var R=Rcaso();
+    if(!R){base().then(function(){if(typeof dkSugRender==='function')dkSugRender();});return '<div class="dori"><p class="meta">Carregando os modelos do gabinete…</p></div>';}
+    return solucoes(P,atual(),R);}
+  /* conformidade do caso, no painel flutuante e minimizável da folha (editorial_d.js › dkConf) */
+  function conformidadeCaso(){var P=CQ.perfil;if(!P)return null;var R=Rcaso();
+    if(!R){base().then(function(){if(typeof dkConf==='function')dkConf();});return {h:'<p class="meta">Carregando a base do gabinete…</p>',ok:0,n:0,mau:0};}
+    var A=atual(),C=conformidade(P,A,R),mau=C.filter(function(z){return z.s!=='ok';}).length;
+    var h='<div class="cqc">'+C.map(function(z){return '<div class="cqi '+z.s+'"><div class="cqih"><b>'+e(z.k)+'</b><i>'+(z.s==='ok'?'em ordem':z.s==='pc'?'conferir':'falta')+'</i></div><p>'+e(z.t)+'</p></div>';}).join('')+'</div>'+
+      '<div class="cqacs">'+(A.tipo==='mod'?'<button type="button" class="dbt" data-cq="mod" data-id="'+e(A.x.id)+'">Abrir o modelo na página Modelos</button>':'')+
+      (DK.fonteManual?'<button type="button" class="dbt" data-dauto="1">Restaurar Minuta-Matriz</button>':'')+'</div>';
+    return {h:h,ok:C.length-mau,n:C.length,mau:mau};}
   /* ---------- Minuta com a LIA: prompt do gabinete (Prompt_Minuta_CMT v3, recortado pela peça) + dados do caso + material da base ---------- */
   var LIAT={};
   function liaTxt(id){if(LIAT[id])return LIAT[id];var el=document.getElementById(id),t=(el&&el.textContent||'').trim();
@@ -366,7 +373,7 @@
     if(t.closest('[data-dcxt]')){fim();CQ.trocar=true;pinta();var it=document.getElementById('cq-item');if(it)it.focus();return;}
     if((b=t.closest('[data-dusar]'))){fim();dkUsaModelo(b.getAttribute('data-dusar'));return;}
     if(t.closest('[data-dauto]')){fim();dkFonte('mat');return;}
-    if((b=t.closest('#x-ref [data-cq][data-id]'))){fim();abrir(b.getAttribute('data-cq'),b.getAttribute('data-id'));return;}
+    if((b=t.closest('#x-ref [data-cq][data-id],#dk-conf [data-cq][data-id]'))){fim();abrir(b.getAttribute('data-cq'),b.getAttribute('data-id'));return;}
     if((b=t.closest('[data-lia]'))){fim();liaAcao(b.getAttribute('data-lia'));return;}
   },true);
   document.addEventListener('change',function(ev){var t=ev.target;if(!emEdit(t))return;
@@ -381,7 +388,7 @@
   document.addEventListener('input',function(ev){var t=ev.target;if(!emEdit(t))return;
     if(t.id==='cq-item'){CQ.item=t.value;return;}
     if(t.id==='cq-lr'){CQ.lia.res=t.value;return;}
-    if(t.id==='cq-modelq'){CQ.modelq=t.value;var pos=t.selectionStart;xRef();var n=document.getElementById('cq-modelq');if(n){n.focus();try{n.setSelectionRange(pos,pos);}catch(er){}}}
+    if(t.id==='cq-modelq'){CQ.modelq=t.value;var pos=t.selectionStart;if(typeof dkSugRender==='function')dkSugRender();else xRef();var n=document.getElementById('cq-modelq');if(n){n.focus();try{n.setSelectionRange(pos,pos);}catch(er){}}}
   });
   document.addEventListener('keydown',function(ev){var t=ev.target;if(!t||t.id!=='cq-item'||ev.key!=='Enter')return;ev.preventDefault();
     var s=document.getElementById('cq-ses');CQ.ses=s?s.value:CQ.ses;CQ.item=t.value;abrirCaso();});
@@ -392,7 +399,7 @@
     J:function(){return CQ.pront;},
     R:Rcaso,e28:e28,sugestao:sugestao,matrizDoCaso:matrizDoCaso,
     barra:function(){if(!CQ.cal&&!CQ._cal){CQ._cal=1;carregarCal().then(pinta);}return barraCaso();},
-    extra:barraExtra,painel:painel,pickLista:pickLista,
+    extra:barraExtra,painel:painel,pickLista:pickLista,solucoes:solucoesCaso,conformidade:conformidadeCaso,
     resumo:function(){var R=Rcaso();if(!CQ.perfil||!R)return '';var C=conformidade(CQ.perfil,atual(),R),m=C.filter(function(z){return z.s!=='ok';}).length;return m?m+' a conferir':'em ordem';},
     prontuario:function(){return CQ.perfil?'<div class="dcx-pront">'+prontBase(CQ.perfil,CQ.pront)+'</div>':'';},
     render28:function(){window.M2886.render(CQ.perfil,CQ.pront,{can:document.getElementById('cq-can'),mn:document.getElementById('cq-main'),or:document.getElementById('cq-ori')},CQ,

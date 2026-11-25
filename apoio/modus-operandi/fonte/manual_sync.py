@@ -262,3 +262,67 @@ def roteiros(H, rot):
     if t in H:
         H = H.replace(t, '<li><a href="#mn-roteiros" data-mngo="roteiros">Roteiros por assunto</a><ol>%s</ol></li>%s' % (''.join(toc), t), 1)
     return H.replace('</head>', css + '</head>', 1) if '</head>' in H else css + H
+
+
+# Breviário › 7. Orientações por parte e bloco: as orientações editoriais e jurídicas (orientacoes.json) e as regras de cada bloco
+# (editorial_pecas.json › elementos), que saíram do canhoto do Minutário; lá ficam só em balão sobre a folha.
+def orientacoes(H, ori, pecas):
+    import html as _h
+    e = lambda x: _h.escape(str(x or ''), quote=True)
+    if 'id="mn-orientacoes"' in H:
+        return H
+    partes = ori.get('partes') or {}
+    itens = ori.get('itens') or []
+    ordem = [p for p in partes if any(i.get('pid') == p for i in itens)]
+    secs, ix, toc, n = [], [], [], 0
+    import re as _re
+    _sig = _re.compile(r'^(CPC|CF|STJ|STF|CNJ|MPF|MS|ED|TRF|TNU|INSS|EC|ACP|I|II|III|IV|V|VI|VII|VIII|IX|X)$')
+    def cap(x):
+        ws = _re.split(r'(\s+)', x)
+        out = []
+        for i, w in enumerate(ws):
+            c = _re.sub(r'[^A-Za-zÀ-ÿ]', '', w)
+            if _sig.match(c) or (len(c) == 1 and i == len(ws) - 1):
+                out.append(w)
+                continue
+            w = w.lower()
+            out.append(w[:1].upper() + w[1:] if i == 0 else w)
+        return ''.join(out)
+    for k, pid in enumerate(ordem):
+        sid = 'orientacoes-%d' % k
+        ix.append('<a href="#mn-%s" data-mngo="%s"><b>7.%d</b>%s</a>' % (sid, sid, k + 1, e(partes[pid])))
+        toc.append('<li><a href="#mn-%s" data-mngo="%s">%s</a></li>' % (sid, sid, e(partes[pid])))
+        corpo = ''
+        for it in [i for i in itens if i.get('pid') == pid]:
+            n += 1
+            corpo += ('<div class="mn-r"><span class="rn" title="Número neste capítulo">7.%02d</span><h4>%s</h4>' % (n, e(it.get('rotulo')))
+                      + ''.join('<p><span class="xlb ok">%s</span>%s</p>' % (e(cap(t)), e(x)) for t, x in it.get('ed') or [])
+                      + ''.join('<p class="mn-obs"><b>%s.</b> %s</p>' % (e(cap(t)), e(x)) for t, x in it.get('ju') or []) + '</div>')
+        secs.append('<div class="mn-sec" id="mn-%s"><h3><span class="h3n">7.%d</span>%s</h3>%s</div>' % (sid, k + 1, e(partes[pid]), corpo))
+    # regras de cada bloco, por peça (editorial_pecas.json)
+    k = len(ordem)
+    sid = 'orientacoes-%d' % k
+    ix.append('<a href="#mn-%s" data-mngo="%s"><b>7.%d</b>Regras dos blocos, por peça</a>' % (sid, sid, k + 1))
+    toc.append('<li><a href="#mn-%s" data-mngo="%s">Regras dos blocos, por peça</a></li>' % (sid, sid))
+    corpo, nr = '', 0
+    for p in pecas.get('pecas') or []:
+        els = [x for x in p.get('elementos') or [] if x.get('r')]
+        if not els:
+            continue
+        corpo += '<h5 class="mn-h5">%s</h5>' % e(p.get('t') or p.get('id'))
+        for x in els:
+            nr += len(x['r'])
+            corpo += '<div class="mn-r"><h4>%s</h4><ul class="mn-ul">%s</ul></div>' % (e(x.get('n')), ''.join('<li>%s</li>' % e(r) for r in x['r']))
+    secs.append('<div class="mn-sec" id="mn-%s"><h3><span class="h3n">7.%d</span>Regras dos blocos, por peça</h3>%s</div>' % (sid, k + 1, corpo))
+    sec = ('<section class="mn-cap" id="mn-orientacoes" data-aba="manual"><h2><span>7</span>Orientações por parte e bloco</h2>'
+           '<div class="cap-meta"><span class="cap-st">%d seções · %d orientações · %d regras de bloco</span><nav class="cap-ix" aria-label="Seções do capítulo">%s</nav></div>'
+           '<p class="mn-lead">Orientações editoriais e jurídicas de cada parte e bloco da peça e as regras de cada bloco. No Minutário, o que importa ao bloco aparece em balão ao passar o cursor sobre a folha.</p>%s</section>'
+           ) % (len(secs), n, nr, ''.join(ix), ''.join(secs))
+    a = '<header class="mn-hd" data-aba="padroes">'
+    if a not in H:
+        return H
+    H = H.replace(a, sec + a, 1)
+    t = '<li><a href="#mn-normas" data-mngo="normas">6. Normas, referências e remissões</a></li>'
+    if t in H:
+        H = H.replace(t, t + '<li><a href="#mn-orientacoes" data-mngo="orientacoes">7. Orientações por parte e bloco</a><ol>%s</ol></li>' % ''.join(toc), 1)
+    return H

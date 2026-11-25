@@ -1,0 +1,585 @@
+{
+ "schema": "orientacoes-minuta",
+ "versao": 1,
+ "nota": "Orientações editoriais e jurídicas por parte e bloco da peça. Fonte única: o Minutário mostra em balões sobre a folha; o Breviário traz o capítulo completo (manual_sync.py › orientacoes).",
+ "partes": {
+  "relatorio": "Relatório",
+  "voto": "Voto",
+  "ementa": "Ementa",
+  "acordao": "Proclamação",
+  "monocratica": "Decisão monocrática",
+  "despacho": "Despacho"
+ },
+ "itens": [
+  {
+   "pid": "relatorio",
+   "re": "^Abertura",
+   "rotulo": "Abertura",
+   "ed": [
+    [
+     "FORMA A",
+     "Parágrafo único: “Trata-se de apelação à sentença (ID …) que …”; Forma B só por escolha, em previdenciário ou sentença com três ou mais comandos."
+    ],
+    [
+     "DECISÃO RECORRIDA",
+     "Verbo nuclear e comandos enumerados; honorários e custas em nova frase."
+    ]
+   ],
+   "ju": [
+    [
+     "ARTIGO 489, I, DO CPC",
+     "O relatório traz as partes, a identificação do caso, a suma do pedido e da resposta e as principais ocorrências."
+    ]
+   ]
+  },
+  {
+   "pid": "relatorio",
+   "re": "^Senten",
+   "rotulo": "Sentença",
+   "ed": [
+    [
+     "COMANDOS",
+     "Comandos da sentença enumerados; honorários e custas em nova frase."
+    ]
+   ],
+   "ju": [
+    [
+     "ARTIGO 489, I, DO CPC",
+     "Suma do pedido, da resposta e das principais ocorrências."
+    ]
+   ]
+  },
+  {
+   "pid": "relatorio",
+   "re": "^(Recurso|Razões|Vícios)",
+   "rotulo": "Razões (recurso, vícios)",
+   "ed": [
+    [
+     "ALEGAÇÕES",
+     "“alegando, em suma:” + infinitivo, ou “alegando, em suma, que:” + verbo flexionado; itens numerados."
+    ],
+    [
+     "PEDIDO",
+     "Fechar com o pedido: “pelo que requereu …”."
+    ]
+   ],
+   "ju": [
+    [
+     "EFEITO DEVOLUTIVO",
+     "A apelação devolve ao tribunal a matéria impugnada (artigo 1.013, caput, do CPC)."
+    ],
+    [
+     "PRELIMINARES",
+     "Preliminares do recurso entram no relatório e são decididas antes do mérito (artigo 938 do CPC)."
+    ]
+   ]
+  },
+  {
+   "pid": "relatorio",
+   "re": "^(Contrarraz|Contraminuta|Resposta)",
+   "rotulo": "Contrarrazões",
+   "ed": [
+    [
+     "PARÁGRAFO PRÓPRIO",
+     "Contrarrazões em parágrafo próprio, depois das razões."
+    ],
+    [
+     "COM PRELIMINAR",
+     "Indicar qual preliminar foi apontada (ex.: ilegitimidade ativa)."
+    ],
+    [
+     "RELATÓRIO",
+     "Conciso, objetivo e descritivo; sem adjetivação; fecho “É o relatório.”"
+    ]
+   ],
+   "ju": [
+    [
+     "PRAZO",
+     "Contrarrazões em 15 dias (artigo 1.010, § 1º, do CPC); no agravo de instrumento, contraminuta (artigo 1.019, II)."
+    ],
+    [
+     "PRELIMINAR",
+     "A preliminar das contrarrazões é enfrentada no voto, na abertura."
+    ]
+   ]
+  },
+  {
+   "pid": "relatorio",
+   "re": "^(Parecer|Ministério)",
+   "rotulo": "Ministério Público",
+   "ed": [
+    [
+     "DENOMINAÇÃO",
+     "Em 2º grau, Procuradoria Regional da República, por extenso."
+    ],
+    [
+     "MODO",
+     "Prosseguimento, mérito, sem exame do mérito, sem hipótese de intervenção ou sem interesse público."
+    ]
+   ],
+   "ju": [
+    [
+     "INTERVENÇÃO",
+     "O Ministério Público intervém como fiscal da ordem jurídica nas hipóteses do artigo 178 do CPC."
+    ]
+   ]
+  },
+  {
+   "pid": "relatorio",
+   "re": "^Ocorr",
+   "rotulo": "Ocorrências",
+   "ed": [
+    [
+     "ORDEM DIRETA",
+     "Memoriais, efeito suspensivo, embargos e incidentes, cada um em parágrafo próprio, na posição em que ocorreram."
+    ]
+   ],
+   "ju": [
+    [
+     "ARTIGO 489, I, DO CPC",
+     "O relatório registra as principais ocorrências havidas no andamento do processo."
+    ]
+   ]
+  },
+  {
+   "pid": "relatorio",
+   "re": "^Encerramento",
+   "rotulo": "Encerramento",
+   "ed": [
+    [
+     "FECHO",
+     "“É o relatório.” em parágrafo próprio."
+    ]
+   ],
+   "ju": []
+  },
+  {
+   "pid": "voto",
+   "re": "^(Abertura|Cabeçalho|Vocativo)",
+   "rotulo": "Abertura do voto (cabeçalho e vocativo)",
+   "ed": [
+    [
+     "VOCATIVO",
+     "“Senhores Desembargadores,” abre o primeiro parágrafo; a frase segue em minúscula."
+    ],
+    [
+     "ORDEM",
+     "Admissibilidade → efeito suspensivo → perda do objeto → questões processuais."
+    ],
+    [
+     "PRELIMINAR",
+     "Decisão em frase curta, com o objeto e o ID; depois “Com efeito,” com os fatos."
+    ]
+   ],
+   "ju": [
+    [
+     "PRAZO",
+     "15 dias úteis (artigos 219 e 1.003, § 5º, do CPC); em dobro para a Fazenda Pública (artigo 183)."
+    ],
+    [
+     "PREPARO",
+     "Entes públicos e autarquias dispensados (artigo 1.007, § 1º, do CPC)."
+    ],
+    [
+     "CABIMENTO",
+     "Apelação contra sentença (artigo 1.009); agravo de instrumento no rol do artigo 1.015."
+    ]
+   ]
+  },
+  {
+   "pid": "voto",
+   "re": "^Sobrestamento",
+   "rotulo": "Sobrestamento",
+   "ed": [
+    [
+     "SEM SUSPENSÃO",
+     "Registrar o tema e por que o caso não se suspende."
+    ]
+   ],
+   "ju": [
+    [
+     "SOBRESTAMENTO",
+     "Suspensão por afetação de repetitivo ou repercussão geral (artigos 1.036 e 1.037, II, do CPC)."
+    ]
+   ]
+  },
+  {
+   "pid": "voto",
+   "re": "^(Transição|Moldura|Fundamentação)",
+   "rotulo": "Moldura jurídica",
+   "ed": [
+    [
+     "MOLDURA",
+     "Norma e jurisprudência antes do caso; “No mérito,” abre a transição."
+    ]
+   ],
+   "ju": [
+    [
+     "FUNDAMENTAÇÃO",
+     "Enfrentar os argumentos capazes de infirmar a conclusão (artigo 489, § 1º, IV, do CPC)."
+    ],
+    [
+     "PRECEDENTES",
+     "Seguir ou distinguir precedentes com os fundamentos determinantes (artigos 927 e 489, § 1º, V e VI, do CPC)."
+    ]
+   ]
+  },
+  {
+   "pid": "voto",
+   "re": "^(Exame do caso|Caso vertente|Enfrentamento)",
+   "rotulo": "Exame do caso e enfrentamento",
+   "ed": [
+    [
+     "CASO CONCRETO",
+     "Fato → prova (com ID) → norma → consequência. Uma ideia por frase."
+    ],
+    [
+     "ENFRENTAMENTO",
+     "“Nem se alegue …” ou “Contrariamente …” para afastar a tese do recurso."
+    ]
+   ],
+   "ju": [
+    [
+     "ARGUMENTOS",
+     "Enfrentar os argumentos capazes de infirmar a conclusão (artigo 489, § 1º, IV, do CPC)."
+    ],
+    [
+     "ÔNUS DA PROVA",
+     "Artigo 373 do CPC."
+    ]
+   ]
+  },
+  {
+   "pid": "voto",
+   "re": "^Precedente",
+   "rotulo": "Precedente",
+   "ed": [
+    [
+     "CITAÇÃO",
+     "“Em casos que tais, assim tem decidido esta Turma Regional:” e transcrição em bloco."
+    ]
+   ],
+   "ju": [
+    [
+     "PRECEDENTES",
+     "Observar os precedentes do artigo 927 do CPC; distinguir com fundamento (artigo 489, § 1º, VI)."
+    ]
+   ]
+  },
+  {
+   "pid": "voto",
+   "re": "^(Síntese|Encerramento)",
+   "rotulo": "Síntese",
+   "ed": [
+    [
+     "SÍNTESE",
+     "“Em suma,” ou “Assim,”, em uma frase."
+    ],
+    [
+     "HONORÁRIOS",
+     "“Pela sucumbência recursal, … deve suportar condenação adicional (artigo 85, § 11, do CPC)…”"
+    ]
+   ],
+   "ju": [
+    [
+     "MAJORAÇÃO",
+     "Tema 1.059/STJ: só no desprovimento ou não conhecimento do recurso do vencido."
+    ],
+    [
+     "SEM MAJORAÇÃO",
+     "Parcial provimento, embargos de declaração, agravo interno, sentença anulada, recurso do MPF."
+    ],
+    [
+     "MANDADO DE SEGURANÇA",
+     "Sem honorários (artigo 25 da Lei 12.016/2009)."
+    ]
+   ]
+  },
+  {
+   "pid": "voto",
+   "re": "^Honor",
+   "rotulo": "Honorários recursais",
+   "ed": [
+    [
+     "FÓRMULA",
+     "“Pela sucumbência recursal, … deve suportar condenação adicional (artigo 85, § 11, do CPC)…”"
+    ],
+    [
+     "GRATUIDADE",
+     "Com gratuidade do devedor: “observada a gratuidade de justiça concedida (artigo 98, § 3º, do CPC)”."
+    ]
+   ],
+   "ju": [
+    [
+     "MAJORAÇÃO",
+     "Tema 1.059/STJ: só no desprovimento ou não conhecimento do recurso do vencido."
+    ],
+    [
+     "SEM MAJORAÇÃO",
+     "Parcial provimento, embargos de declaração, agravo interno, sentença anulada, recurso do MPF."
+    ],
+    [
+     "MANDADO DE SEGURANÇA",
+     "Sem honorários (artigo 25 da Lei 12.016/2009)."
+    ]
+   ]
+  },
+  {
+   "pid": "voto",
+   "re": "^Consect",
+   "rotulo": "Consectários",
+   "ed": [
+    [
+     "POR PERÍODO",
+     "Índices e juros por período, conforme o Manual de Cálculos da Justiça Federal vigente."
+    ]
+   ],
+   "ju": [
+    [
+     "CORREÇÃO E JUROS",
+     "Temas 810/STF e 905/STJ; a partir de 9/12/2021, Selic (artigo 3º da EC 113/2021)."
+    ]
+   ]
+  },
+  {
+   "pid": "voto",
+   "re": "^Dispositivo",
+   "rotulo": "Dispositivo",
+   "ed": [
+    [
+     "RESULTADO",
+     "Resultado expresso: conhecer ou não; dar ou negar provimento; nos embargos, acolher ou rejeitar."
+    ],
+    [
+     "FECHO",
+     "“É como voto.” em parágrafo próprio."
+    ]
+   ],
+   "ju": [
+    [
+     "JULGAMENTO NÃO UNÂNIME",
+     "Apelação com resultado não unânime: prosseguimento com outros julgadores (artigo 942 do CPC)."
+    ]
+   ]
+  },
+  {
+   "pid": "voto",
+   "re": "^\\d\\.\\s*(Vícios|Rediscussão|Enfrentamento|Natureza)",
+   "rotulo": "Embargos de declaração: tópicos do voto",
+   "ed": [
+    [
+     "SEQUÊNCIA FIXA",
+     "Vícios, rediscussão, enfrentamento, natureza do inconformismo, prequestionamento."
+    ]
+   ],
+   "ju": [
+    [
+     "VÍCIOS",
+     "Obscuridade, contradição, omissão ou erro material (artigo 1.022 do CPC)."
+    ]
+   ]
+  },
+  {
+   "pid": "voto",
+   "re": "Prequestionamento",
+   "rotulo": "Prequestionamento",
+   "ed": [
+    [
+     "FÓRMULA",
+     "Prequestionamento ficto, sem repetir as teses."
+    ]
+   ],
+   "ju": [
+    [
+     "ARTIGO 1.025 DO CPC",
+     "Os elementos suscitados consideram-se incluídos no acórdão para fins de prequestionamento."
+    ]
+   ]
+  },
+  {
+   "pid": "voto",
+   "re": "Multa protelatória",
+   "rotulo": "Multa protelatória (embargos)",
+   "ed": [
+    [
+     "FUNDAMENTO",
+     "Indicar por que os embargos são protelatórios."
+    ]
+   ],
+   "ju": [
+    [
+     "ARTIGO 1.026, § 2º, DO CPC",
+     "Embargos manifestamente protelatórios: multa de até 2% do valor atualizado da causa."
+    ]
+   ]
+  },
+  {
+   "pid": "voto",
+   "re": "^Multa:",
+   "rotulo": "Multa do agravo interno",
+   "ed": [
+    [
+     "FUNDAMENTO",
+     "Só com votação unânime e recurso manifestamente inadmissível ou improcedente."
+    ]
+   ],
+   "ju": [
+    [
+     "ARTIGO 1.021, § 4º, DO CPC",
+     "Multa entre 1% e 5% do valor atualizado da causa."
+    ]
+   ]
+  },
+  {
+   "pid": "ementa",
+   "re": ".",
+   "rotulo": "Ementa",
+   "ed": [
+    [
+     "CABEÇALHO",
+     "Negrito e caixa alta. Ramo → classe → assunto → conclusão, em até 3 linhas."
+    ],
+    [
+     "CASO EM EXAME",
+     "Sem “Trata-se de”."
+    ],
+    [
+     "QUESTÃO EM DISCUSSÃO",
+     "Um só item: “A questão em discussão consiste em saber se …”."
+    ],
+    [
+     "RAZÕES DE DECIDIR",
+     "Um fundamento por item."
+    ],
+    [
+     "ITENS",
+     "Numeração contínua e em negrito. Frases com até 40 palavras e menos de 5 vírgulas. Sem ID."
+    ],
+    [
+     "RODAPÉ",
+     "Rótulos em itálico após “__________”."
+    ]
+   ],
+   "ju": [
+    [
+     "O QUE DEVE CONSTAR",
+     "O caso, a questão decidida, os fundamentos determinantes e o resultado, tal como no voto."
+    ],
+    [
+     "TESE",
+     "Só quando houver tese de julgamento; não incluir a seção por obrigação."
+    ],
+    [
+     "RODAPÉ",
+     "Dispositivos e precedentes efetivamente usados no voto; ordem STF → STJ → TRF-3; TNU vedada."
+    ]
+   ]
+  },
+  {
+   "pid": "acordao",
+   "re": ".",
+   "rotulo": "Proclamação",
+   "ed": [
+    [
+     "ESPELHO DO VOTO",
+     "O resultado repete literalmente o dispositivo do voto."
+    ],
+    [
+     "JULGADORES",
+     "Vêm preenchidos e podem ser trocados."
+    ]
+   ],
+   "ju": [
+    [
+     "MAIORIA NA APELAÇÃO",
+     "Resultado não unânime: prosseguimento com outros julgadores (artigo 942 do CPC)."
+    ]
+   ]
+  },
+  {
+   "pid": "monocratica",
+   "re": "^(Abertura|Relato|Síntese)",
+   "rotulo": "Relato",
+   "ed": [
+    [
+     "RELATO",
+     "Síntese objetiva do caso e do recurso, com IDs."
+    ]
+   ],
+   "ju": [
+    [
+     "ARTIGO 932 DO CPC",
+     "O relator decide monocraticamente nas hipóteses dos incisos III a V."
+    ]
+   ]
+  },
+  {
+   "pid": "monocratica",
+   "re": "^(Marco|Fundamenta)",
+   "rotulo": "Marco decisório e fundamentação",
+   "ed": [
+    [
+     "ENQUADRAMENTO",
+     "Enquadrar no artigo 932 antes de decidir: “Segundo a Corte Superior…”."
+    ]
+   ],
+   "ju": [
+    [
+     "JULGAMENTO MONOCRÁTICO",
+     "Artigo 932, III a V, do CPC; Súmula 568/STJ."
+    ]
+   ]
+  },
+  {
+   "pid": "monocratica",
+   "re": "^Dispositivo",
+   "rotulo": "Dispositivo",
+   "ed": [
+    [
+     "FÓRMULA",
+     "“Ante o exposto, com esteio no artigo 932, … do CPC, …”."
+    ]
+   ],
+   "ju": [
+    [
+     "ARTIGO 932 DO CPC",
+     "Indicar o inciso aplicado."
+    ]
+   ]
+  },
+  {
+   "pid": "monocratica",
+   "re": ".",
+   "rotulo": "Fecho",
+   "ed": [
+    [
+     "FECHO",
+     "Publique-se. Intime-se. Local e data."
+    ]
+   ],
+   "ju": [
+    [
+     "AGRAVO INTERNO",
+     "Cabe agravo interno da decisão monocrática (artigo 1.021 do CPC)."
+    ]
+   ]
+  },
+  {
+   "pid": "despacho",
+   "re": ".",
+   "rotulo": "Despacho",
+   "ed": [
+    [
+     "OBJETO",
+     "Uma providência por despacho, em frase direta."
+    ]
+   ],
+   "ju": [
+    [
+     "DESPACHO",
+     "Ato sem conteúdo decisório (artigo 203, § 3º, do CPC)."
+    ]
+   ]
+  }
+ ]
+}

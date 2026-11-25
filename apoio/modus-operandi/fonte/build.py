@@ -195,7 +195,8 @@ JS = (H/'ementario.js').read_text(encoding='utf-8')
 # Editorial · Minuta-Matriz (arquitetura D): folha com abas, canhoto do bloco e orientações; substitui a apresentação da página Peças
 _AP = ler(H/'editorial_apoios.json')
 _ROT = ler(H/'roteiros.json')  # catálogo de roteiros por posição, espécie e assunto (Minuta-Matriz)
-_ED = ((H/'editorial_d.js').read_text(encoding='utf-8').replace('/*__DAJ__*/{}', js(_AP['ajuda'])).replace('/*__DPREL__*/[]', js(_AP['preliminares'])).replace('/*__DEMP__*/{}', js(_AP['ementa'])).replace('/*__DROT__*/{}', js(_ROT)))
+_ORI = ler(H/'orientacoes.json')  # orientações editoriais e jurídicas por parte e bloco (balões da folha e capítulo do Breviário)
+_ED = ((H/'editorial_d.js').read_text(encoding='utf-8').replace('/*__DAJ__*/{}', js(_AP['ajuda'])).replace('/*__DPREL__*/[]', js(_AP['preliminares'])).replace('/*__DEMP__*/{}', js(_AP['ementa'])).replace('/*__DROT__*/{}', js(_ROT)).replace('/*__DORI__*/{}', js(_ORI)))
 _ANC = "$('#v-edit').addEventListener('click',function(e){"
 assert JS.count(_ANC) == 1
 JS = JS.replace(_ANC, _ED + '\n' + _ANC)
@@ -230,6 +231,8 @@ def montar(var):
     if _rel: print('manual de redação ← diretrizes:', _rel)
     from manual_sync import roteiros as _roteiros
     MANUAL = _roteiros(MANUAL, _ROT)  # Padrões decisórios › Roteiros por assunto (fora do Minutário por ora)
+    from manual_sync import orientacoes as _orientacoes
+    MANUAL = _orientacoes(MANUAL, _ORI, ler(H/'editorial_pecas.json'))  # Breviário › 7. Orientações por parte e bloco (no Minutário, só em balão)
     t = troca(t, '<section id="v-dir" hidden>', '<script type="application/json" id="dir-manual">' + json.dumps(MANUAL, ensure_ascii=False).replace('<', '\\u003c') + '</script>\n<section id="v-dir" hidden>')
     js = 'window.VDM_PUBLICO=true;\n' + js + '\n' + (H/'enciclopedia.js').read_text(encoding='utf-8') + '\n' + (H/'acesso.js').read_text(encoding='utf-8')
     # identidade gêmea do Ex Officio: cabeçalho, paleta e tema compartilhado (cmt-eq-tema)
