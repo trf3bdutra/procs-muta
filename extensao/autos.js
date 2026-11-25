@@ -248,6 +248,7 @@ function linhasGravadas(sec, k) { var v = gravado(sec, k); return Array.isArray(
 function mapear(L) {
   var out = [], contra = [], proc = [], TB = { rec: [], contra: [], proc: [], ocorr: [], docs: { rec: [], contra: [], proc: [], ocorr: [] } };
   L.forEach(function (it) {
+    if(it.kind==='prep-table'){var pc=alvoDe('Preparo por recurso');if(!pc)return;var old=linhasGravadas(pc.secao,pc.chave),value=it.rows||[],igual=JSON.stringify(old)===JSON.stringify(value);out.push(Object.assign({},it,{kind:'tabela',alvo:pc.secao+'.'+pc.chave,campo:pc,value:value,current:old,status:igual?'igual':old.length?'conflito':'novo',apply:false,manual:true}));return;}
     if (it.kind === 'contra') { if (it.key === 'ids') contra.push(it.value); (TB.contra[it.idx || 0] = TB.contra[it.idx || 0] || {})[it.key] = it.key === 'data' ? (iso(it.value) || it.value) : it.value; TB.docs.contra.push(it.doc); return; }
     if (it.kind === 'rec') { (TB.rec[it.idx || 0] = TB.rec[it.idx || 0] || {})[it.key] = it.key === 'data' ? (iso(it.value) || it.value) : it.value; TB.docs.rec.push(it.doc); return; }
     if (it.kind === 'proc') { proc.push(it); var q = it.proc || {}; TB.proc.push({ id: S(q.id) || S(it.doc), data: iso(q.data) || S(q.data), validade: S(q.validade), advogados: S(q.advogados) }); TB.docs.proc.push(it.doc); return; }
@@ -325,7 +326,7 @@ function autoPreencher() {
   var sig = assinatura(); if (A.autoSig[sig]) return; A.autoSig[sig] = 1;
   var ck = chave(), rec = A.recusa[ck] || {}, L = [];
   A.sug.forEach(function (it) {
-    if (!it.manual && it.alvo && it.status === 'novo' && !rec[it.alvo] && cheio(it.value) && vazioFicha(it.alvo) && !L.some(function (x) { return x.alvo === it.alvo; }))
+    if (!it.manual && !/^triagem\.Preparo(?:$| - Conferência STN$)/.test(it.alvo||'') && it.alvo && it.status === 'novo' && !rec[it.alvo] && cheio(it.value) && vazioFicha(it.alvo) && !L.some(function (x) { return x.alvo === it.alvo; }))
       L.push({ alvo: it.alvo, rot: it.label || it.key, v: it.value, doc: it.doc || '' });
   });
   try { alertas().forEach(function (a) {
