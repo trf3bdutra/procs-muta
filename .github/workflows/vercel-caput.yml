@@ -57,7 +57,9 @@ jobs:
         run: node --test tests/collectio-previa.test.js tests/collectio-matriz.test.js
       - name: Gerar Editorial e Compendium da ficha atual
         if: steps.v.outputs.publicar == '1'
-        run: python3 apoio/modus-operandi/fonte/build.py
+        run: |
+          python3 scripts/repertorio/test_atualizar_normas.py
+          python3 apoio/modus-operandi/fonte/build.py
       - name: Validar prontuário ampliado e montagem da prévia
         if: steps.v.outputs.publicar == '1'
         run: node --test apoio/ex-officio/tests/prontuario-ampliado.test.js apoio/ex-officio/tests/extensao-previa.test.js apoio/ex-officio/tests/abertura-editorial.test.js
