@@ -442,9 +442,6 @@ function faixaUsuario(s) {
   var on = s && s.estado === 'on';
   var q = function (attr, tit, svg) { return '<button type="button" class="tu-b" ' + attr + ' title="' + tit + '" aria-label="' + tit + '">' + SV(svg, 14) + '</button>'; };
   t.innerHTML = '<button type="button" id="tu-sino" class="tu-n tu-profile-trigger tu-profile-notif" aria-haspopup="dialog" aria-controls="tu-pop" aria-expanded="false" aria-label="Perfil e notificações">'+(on?'<i class="tu-av">'+esc(iniciais(s.usuario))+'</i><span class="tu-profile-name">'+esc(s.usuario)+'</span>':'<span class="tu-profile-name">HERO18810</span>')+SV('<path d="m6 9 6 6 6-6"/>',11)+'<b class="tu-profile-count"></b></button><span class="tu-pje" id="tu-pje-slot"></span>' +
-    (on && G.cnj ? q('data-g="atualizar"', 'Atualizar o prontuário', '<path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 4v7h-7"/>') : '') +
-
-    (on && s.gestor && !$('pv-ajustes') ? '<button type="button" class="tu-b" data-tu-ctl title="Controle: prazos e etiquetas" aria-label="Controle: prazos e etiquetas">' + SV('<path d="M5 7h14M5 12h14M5 17h14"/><circle cx="9" cy="7" r="1.8"/><circle cx="15" cy="12" r="1.8"/><circle cx="8" cy="17" r="1.8"/>', 14) + '</button>' : '') +
     q('data-tema-tu', 'Tema claro ou escuro', '<path d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9z"/>');
   var sl = $('tu-pje-slot'); if (sl && pb) { if (!PJE_CASA) { PJE_CASA = document.createComment('pje-bar'); pb.parentNode.insertBefore(PJE_CASA, pb); } sl.appendChild(pb); }
   if(window.MutaAlertas&&window.MutaAlertas.sincronizarPerfil)window.MutaAlertas.sincronizarPerfil();
