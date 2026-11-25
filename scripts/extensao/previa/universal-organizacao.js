@@ -9,8 +9,8 @@
    if(vazia&&!c.__pv){c.__pv=1;c.addEventListener('click',function(e){if(e.target.closest('button'))return;var ed=c.querySelector('.hero-ann-tools button[title^="Editar"]');if(ed)ed.click();});}});
   /* Etapas contém os contadores; o cabeçalho usa os indicadores do núcleo da extensão. */
   var hd=caixa.querySelector('.hero-header-nav');
-  /* faces por setas: o nome da face atual fica visível ao lado da fase */
-  var lb=hd&&hd.querySelector('.hero-face-label');if(lb){lb.hidden=false;lb.textContent=hd.getAttribute('aria-label')||'';}
+  /* Faces por setas, sem título no display; descrição acessível permanece nas setas. */
+  var lb=hd&&hd.querySelector('.hero-face-label');if(lb){lb.hidden=true;lb.textContent='';}
   caixa.querySelectorAll('.pv3-solicitacoes').forEach(function(sb){
    sb.classList.toggle('pv-sol-todas',(heroTopo.tipoSol||'Todas')==='Todas');
    sb.querySelectorAll('.hero-sol-panel').forEach(function(p){var t=p.querySelector('textarea'),vazio=!p.querySelector('.hero-sol-item')&&!(t&&String(t.value||'').trim());if(vazio)p.setAttribute('data-pv-vazio','');else p.removeAttribute('data-pv-vazio');});
