@@ -109,7 +109,7 @@ test('prévia: Autos primeiro e identificação editável única, separada do re
  assert.match(s,/extraField\('outros','Outros assuntos'\)/);
  assert.match(s,/Conclusão \/ resultado/);
  assert.match(s,/data-pv-ident/);
- assert.match(s,/pv-top-summary/);
+ assert.doesNotMatch(s,/var syn=elem\('div','pv-top-summary'\)/);
  new Function(s);
 });
 
@@ -124,4 +124,16 @@ test('tipo de ato e destino na faixa superior; etiquetas apenas na autuação',(
  assert.match(s,/m\.t='Mídias e seleção prévia'/);
  assert.doesNotMatch(s,/sec\.append\(ato\)/);
  new Function(s);
+});
+
+test('universal: tipo de julgamento na tag, matéria em Autos, situação e notas na sequência das etapas',()=>{
+ const s=fs.readFileSync(path.join(ROOT,'scripts/extensao/previa/universal-layout.js'),'utf8');
+ const g=fs.readFileSync(path.join(ROOT,'extensao/gabinete.js'),'utf8');
+ assert.match(s,/cl\.textContent=label/);
+ assert.match(s,/p\.querySelectorAll\('\.pm-as,\.pm-ad,\.pm-esp'\)/);
+ assert.match(s,/flowBox\.append\(enc\)/);
+ assert.match(g,/esp=caixa\.querySelector\('\.pv-flowbox'\)\|\|caixa\.querySelector\('\.pm-esp'\)/);
+ assert.match(g,/esp\.after\(nt\)/);
+ assert.match(s,/sec\.append\(elem\('h4','pm-mer-h','Matéria'\)/);
+ new Function(s);new Function(g);
 });

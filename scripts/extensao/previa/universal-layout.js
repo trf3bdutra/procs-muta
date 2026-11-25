@@ -217,15 +217,26 @@
   cabeca=function(s){
     if(current!==G.cnj){current=G.cnj;open={};noteOpen=false;sintEdit='';sintDraft='';}
     var f=fragment(cab(s)),p=f.querySelector('.pc.pm');if(!p)return html(f);
-    p.querySelectorAll('.pm-tj:not(.sug)').forEach(function(x){x.remove();});
-    p.querySelectorAll('.pm-as [data-ad],.pm-ad').forEach(function(x){x.remove();});
-    var assunto=S(gravado('triagem','Registro - Assunto detalhado'))||S(V('triagem','Assunto detalhado'));
-    var e=p.querySelector('.pm-esp'),ctx=p.querySelector('.pm-aut1');
-    if(e){var block=elem('div','pv-topmatter');if(assunto)block.append(elem('div','muted pv-value',assunto));var tags=elem('div','pv-tags');S(V('triagem','Especificidades')).split(/[;|\n]+/).map(S).filter(Boolean).forEach(function(v){tags.append(elem('span','chip',v));});block.append(tags);e.replaceWith(block);}
+    // CNJ, classe e julgamento em uma única linha; matéria tem um único lugar de edição em Autos.
+    var l1=p.querySelector('.pm-l1'),cl=l1&&l1.querySelector('.pc-cl'),T=ccTipos(),R=window.MutaRoteiro;
+    if(l1&&R){
+      var compact={ap:'Apelação',rn:'RemNec',ai:'AI',ms:'MS',ed:'ED',agint:'AgInt',ret:'JR'};
+      var cls=cl?cl.textContent.split(' · ')[0]:'',included={};
+      if(/^Ap/.test(cls))included.ap=true;if(/RemNec/.test(cls))included.rn=true;
+      if(cls==='AI')included.ai=true;if(cls==='MSCiv')included.ms=true;
+      if(cls==='EDCiv')included.ed=true;if(cls==='AgIntCiv')included.agint=true;
+      var list=R.TIPOS.filter(function(t){return T[t[0]];});
+      var label=[cls].concat(list.filter(function(t){return !included[t[0]];}).map(function(t){return compact[t[0]]||t[1];})).filter(Boolean).join(' · ');
+      if(label){if(!cl){cl=btn('','data-cl-tipo','');cl.className='pc-cl';var n=l1.querySelector('.pc-cnj');if(n)n.after(cl);else l1.prepend(cl);}
+        cl.textContent=label;cl.title=[cls,list.map(function(t){return t[1];}).join(' + '),'Editar tipo de julgamento'].filter(Boolean).join(' · ');}
+      if(!list.length){var tj=tipoText();if(tj&&cl)cl.title+=' · '+tj;}
+    }
+    p.querySelectorAll('.pm-tj:not(.sug)').forEach(function(x){if(cl)x.remove();});
+    p.querySelectorAll('.pm-as,.pm-ad,.pm-esp').forEach(function(x){x.remove();});
+    var ctx=p.querySelector('.pm-aut1');
     if(ctx){var l=ctx.querySelector('.pm-aut-t');if(l)l.textContent='Autuação e contexto';
       var q=elem('details','pv-sub');q.append(elem('summary','','Questões jurídicas'));add(q,questoes());var tagsBox=etiquetasAutuacao(ctx),ctl=ctx.querySelector('.pm-ctl2');if(ctl&&ctl.previousElementSibling){ctx.insertBefore(q,ctl.previousElementSibling);ctx.insertBefore(tagsBox,ctl.previousElementSibling);}else ctx.append(q,tagsBox);}
-    var pills=p.querySelector('.pm-pills');if(pills){var syn=elem('div','pv-top-summary'),head=elem('div','pv-head'),go=btn('Editar identificação','data-pv-ident','');go.className='lnk';head.append(elem('span','gl','Identificação e matéria'),go);syn.append(head);
-      [['Tipo de julgamento',tipoText()],['Tipo de caso',V('triagem','Tema')],['Síntese processual',V('triagem','Síntese Processual')],['Síntese fática',V('triagem','Síntese Fática')]].forEach(function(z){if(S(z[1]))syn.append(readRow(z[0],z[1]));});pills.before(syn);pills.replaceWith(flow());}
+    var pills=p.querySelector('.pm-pills');if(pills)pills.replaceWith(flow());
     var resp=p.querySelector('.pm-resp');if(resp){resp.classList.add('pv-enc');var ato=resp.querySelector('.pm-ato');if(ato){
       var faixa=p.querySelector('.pv-people'),dest=readRow('Destino',destGrav()||'A definir');
       if(faixa){
@@ -233,7 +244,10 @@
         faixa.prepend(ato,dest);
         if(destGrav()==='Outro destino'){var extra=elem('div','pv-ato-outro');add(extra,campoRot('producao','Destino - Outro','Especificar destino'));faixa.after(extra);}
       }
+      var flowBox=p.querySelector('.pv-flowbox'),enc=resp.querySelector('.pm-enc');
+      if(flowBox&&enc){enc.classList.add('pv-stage-situacao');flowBox.append(enc);}
       var result=V('producao','Voto - Resultado');if(S(result))resp.prepend(readRow('Conclusão / resultado',result));
+      if(!resp.childElementCount)resp.remove();
     }}
     return html(f);
   };

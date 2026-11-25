@@ -940,8 +940,8 @@ function render0() {
   var y = window.scrollY, pp = $('panel-pront'), yp = pp ? pp.scrollTop : 0;
   precEmentario(casoPrec());
   caixa.innerHTML = cab.replace(/<\/section>$/, snc + '</section>') + tabs + st0 + '<div class="gbody">' + corpo + '</div>';
-  // O log de notas permanece único: move a seção para depois das especificidades.
-  var nt=caixa.querySelector('#g-nt'),esp=caixa.querySelector('.pv-topmatter,.pm-esp');
+  // Universal: notas depois das etapas; no layout original, depois das especificidades.
+  var nt=caixa.querySelector('#g-nt'),esp=caixa.querySelector('.pv-flowbox')||caixa.querySelector('.pm-esp');
   if(nt&&esp){
     var sx=Array.from(nt.querySelectorAll('.nt-cs,.nt-vz'));esp.after(nt);
     if(sx.length)nt.after(...sx);
