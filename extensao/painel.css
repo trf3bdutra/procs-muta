@@ -1645,3 +1645,18 @@ html[data-tema=escuro] .rt-tipos .rt-kind-option{border-color:var(--line)}
 .tu-profile-menu svg{flex:none;color:var(--muted-fg)}
 .tu-profile-menu>button[data-sair]{border-top:1px solid var(--line);border-radius:0 0 4px 4px}
 .tu-profile-trigger:focus-visible,.tu-profile-menu :focus-visible{outline:2px solid currentColor;outline-offset:2px}
+
+/* Gestão na faixa superior: os mesmos tabs, badges e painéis. */
+.topo-u .tu-gestao{display:flex;flex:none;align-items:center;gap:4px;padding-left:4px;border-left:1px solid var(--line)}
+.topo-u .tu-gestao[hidden],.topo-u .tu-gestao button[hidden]{display:none!important}
+.topo-u .tu-gestao>button{position:relative;display:grid;place-items:center;box-sizing:border-box;flex:none;width:26px;height:26px;min-width:0;min-height:0;padding:0;border:1px solid var(--line);border-radius:7px;background:transparent;color:var(--muted-fg);cursor:pointer}
+.topo-u .tu-gestao>button[aria-selected=true]{background:var(--card2);border-color:currentColor;color:var(--fg)}
+.topo-u .tu-gestao>button:hover{border-color:var(--gold);color:var(--gold)}
+.topo-u .tu-gestao>button:focus-visible{outline:2px solid currentColor;outline-offset:2px}
+.topo-u .tu-gestao .nav-icon{width:16px;height:16px;flex:none;display:grid;place-items:center;color:inherit;background:none}
+.topo-u .tu-gestao .nav-icon svg{width:15px;height:15px}
+.topo-u .tu-gestao .nav-text{position:absolute;width:0;height:0;overflow:visible;pointer-events:none;right:0;top:0}
+.topo-u .tu-gestao .nav-text b{font-size:0;line-height:0}
+.topo-u .tu-gestao .nav-text small{display:none}
+.topo-u .tu-gestao .conf-badge{position:absolute;top:-5px;right:-4px;box-sizing:border-box;min-width:13px;padding:0 3px;margin:0;font-size:9px;line-height:13px;border:1px solid var(--card)}
+.topo-u .tu-gestao .conf-badge[hidden]{display:none!important}

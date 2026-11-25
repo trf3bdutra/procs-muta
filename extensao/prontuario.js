@@ -172,6 +172,10 @@ var mainTabs=[$('tab-pront'),$('tab-min'),$('tab-acervo'),$('tab-par'),$('tab-di
 var NOMES=['pront','min','ementario','par','dir','ajuda','dil','del','ctl','pauta'];
 var ALIAS={tri:'pront',lote:'min',cmp:'min',conf:'min',ger:'min',acervo:'ementario',diligencias:'dil',deliberacoes:'del',controle:'ctl'};
 function abrirAba(i){
+  if(NOMES[i]==='dil'||NOMES[i]==='del'){
+    var ses=window.MutaSessao,u=ses&&ses.estado?ses.estado():null;
+    if(!u||u.estado!=='on'||!(u.gestor||u.perfil==='desembargador'))return;
+  }
   /* 0.47: Diretrizes é parte da Minuta */
   if(NOMES[i]==='dir'){abrirAba(NOMES.indexOf('min'));if(window.MutaGerador&&window.MutaGerador.modo)window.MutaGerador.modo('dir');return;}
   selectTab(mainTabs,i);var n=NOMES[i];

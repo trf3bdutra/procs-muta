@@ -22,6 +22,17 @@
   function pode(q) { return q.on && (q.gestor || q.des); }
   function copiaBtn(n) { return n ? '<button type="button" class="gx-k" data-gx-copia="' + esc(n) + '" title="Copiar o número">' + esc(n) + '</button>' : ''; }
 
+  /* Reaproveita os botões reais e seus contadores, sem clonagem ou duplicação. */
+  function gestaoNaFaixa(q){
+    var slot=$('tu-gestao');if(!slot)return;
+    [['tab-dil','Diligências'],['tab-del','Deliberações']].forEach(function(x){
+      var b=$(x[0]);if(!b)return;
+      if(b.parentNode!==slot)slot.appendChild(b);
+      b.title=x[1];b.setAttribute('aria-label',x[1]);
+    });
+    slot.hidden=!pode(q);
+  }
+
   /* ---------- visibilidade das abas ---------- */
   function mostrar() {
     var q = quem(), dil = $('tab-dil'), del = $('tab-del'), ctl = $('tab-ctl'), pa = $('tab-pauta');
@@ -32,6 +43,7 @@
       p[0].hidden = !p[1] || !!p[2];
       if (!p[1] && p[0].getAttribute('aria-selected') === 'true' && window.MutaAbas) window.MutaAbas.ir('pront');
     });
+    gestaoNaFaixa(q);
     if (pode(q)) { if (!D.lista && !D.lendo) lerDil(); if (!X.dados && !X.lendo) lerDel(); }
   }
 
