@@ -351,7 +351,7 @@ html[data-theme=dark] .am-dashboard.am-workspace{--ep:#142a36;--ep2:#1b3543;--el
 .am-dashboard.am-workspace section.busca.full-panel[data-panel-number]{padding:20px!important;border-radius:0!important}
 @media(max-width:700px){.am-dashboard.am-workspace section.busca[data-panel-number]{padding:13px!important}.am-dashboard.am-workspace section.busca[data-panel-number]>.pane-title h2{font-size:16px!important}}
 </style>
-</head><body><header class="am-home-header"><div class="am-legacy"><b>Amicus Curiae.</b><span>Gabinete CMT · Ferramentas</span></div><nav class="am-over-nav am-home-overview" aria-label="Aplicações e áreas de consulta"><div class="am-nav-apps" role="tablist" aria-label="Abas do Amicus"><button type="button" role="tab" data-amtab="collegium" aria-selected="false">Collegium</button><button type="button" role="tab" data-amtab="collectio" aria-selected="false" hidden title="Só para servidores logados">Collectio</button></div><div class="am-nav-links" aria-label="Aplicações"><a href="/amicus/compendium/">Compendium</a><a href="/amicus/cognitio/">Cognitio</a></div></nav></header>
+</head><body><header class="am-home-header"><div class="am-legacy"><b>Amicus Curiae.</b><span>Gabinete CMT · Ferramentas</span></div><nav class="am-over-nav am-home-overview" aria-label="Aplicações e áreas de consulta"><div class="am-nav-apps cn-in" role="tablist" aria-label="Abas do Amicus"><button type="button" role="tab" data-amtab="ref" aria-selected="true">Referências</button><button type="button" role="tab" data-amtab="collegium" aria-selected="false">Collegium</button><button type="button" role="tab" data-amtab="collectio" aria-selected="false" hidden title="Só para servidores logados">Collectio</button></div><div class="am-nav-links" aria-label="Aplicações"><a href="/amicus/compendium/">Compendium</a><a href="/amicus/cognitio/">Cognitio</a></div></nav><nav class="am-context-nav am-home-overview" aria-label="Subabas da aplicação" hidden><span class="am-context-label"></span><div class="cn-in" role="group"></div></nav></header>
 <main class="am-dashboard am-workspace">
 <aside class="am-rail am-competence" id="referencias-operacionais" aria-labelledby="am-competence-title"><div class="am-rail-head"><small>Referências operacionais</small><h2 id="am-competence-title">Competência e imparcialidade</h2></div><div class="am-rail-panels"><section class="busca" id="competencia" data-panel-number="I"><div class="pane-title"><div><small>Referência · competência</small><h2><span class="am-panel-num" aria-hidden="true">I</span>Competência</h2></div></div><p>Turma Regional de Mato Grosso do Sul, competência delegada e distribuição por matéria nas Seções do TRF3. Síntese do material fornecido, sujeita à conferência normativa.</p>
 <div class="comp-grid" id="comp-body"></div></section><section class="busca" id="impedimentos" data-panel-number="II"><div class="pane-title"><div><small>Referencial interno · imparcialidade</small><h2><span class="am-panel-num" aria-hidden="true">II</span>Impedimentos e suspeições</h2></div><div class="imp-actions"><button type="button" class="more" id="imp-refresh" aria-label="Atualizar referencial" title="Atualizar referencial">↻</button></div></div>
@@ -593,25 +593,52 @@ document.addEventListener('click',e=>{const k=e.target.closest&&e.target.closest
 <section class="am-tabpane" id="am-tab-collegium" role="tabpanel" aria-label="Collegium" hidden><iframe title="Collegium · ementário da Turma Regional de MS" data-src="/amicus/collegium/#v=ement"></iframe></section>
 <section class="am-tabpane" id="am-tab-collectio" role="tabpanel" aria-label="Collectio" hidden><iframe title="Collectio" data-src="/amicus/collectio/"></iframe></section>
 <script>
-/* abas do Amicus: a página de referências é o próprio Amicus (volta-se a ela pela marca); Collegium e Collectio (só para servidores logados), carregadas no próprio portal */
+/* Barra única: espelha controles reais dos módulos, sem alterar seus motores. */
 (function(){'use strict';
-const D=document,btns=()=>D.querySelectorAll('[data-amtab]'),main=D.querySelector('main.am-dashboard');let logado=false;
+const D=document,btns=()=>D.querySelectorAll('[data-amtab]'),main=D.querySelector('main.am-dashboard'),bar=D.querySelector('.am-context-nav'),group=bar.querySelector('.cn-in'),label=bar.querySelector('.am-context-label');let logado=false,active='ref',obs=null,doc=null;
+const frames=()=>Array.from(D.querySelectorAll('.am-tabpane iframe'));
 function altura(){const h=D.querySelector('body>header');D.documentElement.style.setProperty('--am-hh',(h?h.getBoundingClientRect().height:64)+'px');}
-function abre(t,semHash,extra){if(t==='collectio'&&!logado)t='ref';if(!D.getElementById('am-tab-'+t)&&t!=='ref')t='ref';
+function disconnect(){if(obs)obs.disconnect();obs=null;doc=null;}
+function render(){
+ if(!doc||active==='ref')return;
+ const selector=active==='collectio'?'#cmp-nav [data-ct-view],#cmp-nav [data-ct-manage]':'#e-modes [data-m]';
+ const controls=Array.from(doc.querySelectorAll(selector)).filter(b=>!b.hidden&&!b.closest('[hidden]'));
+ const focus=D.activeElement&&D.activeElement.dataset.amControl;
+ const existing=Array.from(group.children);
+ const keys=controls.map(b=>b.dataset.ctView||b.dataset.m||'manage');
+ if(existing.length!==controls.length||existing.some((b,i)=>b.dataset.amControl!==keys[i])){
+  group.replaceChildren();controls.forEach((source,i)=>{const b=D.createElement('button');b.type='button';b.className='cn-b';b.dataset.amControl=keys[i];group.append(b);});
+ }
+ Array.from(group.children).forEach((b,i)=>{const source=controls[i];b.textContent=source.textContent.trim();b.disabled=source.disabled;b.setAttribute('aria-current',String(source.getAttribute('aria-current')==='true'||source.getAttribute('aria-pressed')==='true'));b.onclick=()=>{if(source.isConnected&&!source.disabled&&!source.hidden){source.click();render();}};});
+ if(focus&&D.activeElement===D.body){const b=Array.from(group.children).find(b=>b.dataset.amControl===focus);if(b)b.focus();}
+ bar.hidden=!controls.length;label.textContent=active==='collectio'?'Collectio':'Collegium';altura();
+}
+function connect(f){
+ disconnect();bar.hidden=true;group.replaceChildren();
+ if(!f||active==='ref')return;
+ try{doc=f.contentDocument;if(!doc||!doc.body||!f.getAttribute('src'))return;
+  const child=doc.documentElement;child.classList.add('amicus-unified-child');
+  let style=doc.getElementById('amicus-unified-css');if(!style){style=doc.createElement('style');style.id='amicus-unified-css';style.textContent='html.amicus-unified-child body>header.top.nx{display:none!important} html.amicus-unified-child #e-modes>.seg{display:none!important} html.amicus-unified-child #x-sub{display:none!important}';doc.head.append(style);}
+  let pending=false;obs=new MutationObserver(()=>{if(pending)return;pending=true;requestAnimationFrame(()=>{pending=false;render();});});
+  obs.observe(doc.body,{childList:true,subtree:true,attributes:true,attributeFilter:['hidden','aria-current','aria-pressed','disabled']});render();
+ }catch(e){bar.hidden=true;disconnect();}
+}
+function abre(t,semHash,extra){
+ if(t==='collectio'&&!logado)t='ref';if(t!=='ref'&&!D.getElementById('am-tab-'+t))t='ref';
+ active=t;disconnect();bar.hidden=true;group.replaceChildren();
  btns().forEach(b=>b.setAttribute('aria-selected',String(b.dataset.amtab===t)));
  if(main)main.hidden=t!=='ref';
- D.querySelectorAll('.am-tabpane').forEach(p=>{const on=p.id==='am-tab-'+t;p.hidden=!on;const f=p.querySelector('iframe');if(on&&f&&(!f.src||extra))f.src=extra?f.dataset.src.split('#')[0]+'#'+extra:f.dataset.src;});
+ D.querySelectorAll('.am-tabpane').forEach(p=>{const on=p.id==='am-tab-'+t;p.hidden=!on;const f=p.querySelector('iframe');if(on&&f){if(!f.getAttribute('src')||extra)f.src=extra?f.dataset.src.split('#')[0]+'#'+extra:f.dataset.src;else connect(f);}});
  D.body.classList.toggle('am-com-aba',t!=='ref');altura();
- if(!semHash)history.replaceState(null,'',t==='ref'?location.pathname:'#'+t);}
-D.addEventListener('click',e=>{const m=e.target.closest&&e.target.closest('.amicus-brand a[href="/amicus/"],.am-legacy');if(m&&!(e.ctrlKey||e.metaKey||e.shiftKey)){e.preventDefault();abre('ref');D.activeElement&&D.activeElement.blur&&D.activeElement.blur();scrollTo({top:0,behavior:'smooth'});return;}
- const b=e.target.closest&&e.target.closest('[data-amtab]');if(!b)return;e.preventDefault();abre(b.dataset.amtab);});
-window.addEventListener('resize',altura);
-const inicial=decodeURIComponent((location.hash||'').slice(1));
-fetch('/api/login',{credentials:'same-origin',cache:'no-store'}).then(r=>r.ok?r.json():null).catch(()=>null).then(j=>{
- logado=!!(j&&j.usuario);const c=D.querySelector('[data-amtab="collectio"]');if(c)c.hidden=!logado;
- if(!logado){const p=D.getElementById('am-tab-collectio');if(p)p.remove();}
- if(inicial.split('&')[0]==='collectio')abre(logado?'collectio':'ref',!logado);});
-if(inicial.split('&')[0]==='collegium')abre('collegium',true,inicial.indexOf('&')>0?inicial.slice(inicial.indexOf('&')+1):'');
+ if(!semHash)history.replaceState(null,'',t==='ref'?location.pathname:'#'+t);
+}
+frames().forEach(f=>f.addEventListener('load',()=>{if(f.closest('.am-tabpane')?.id==='am-tab-'+active)connect(f);}));
+D.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-amtab]');if(b){e.preventDefault();abre(b.dataset.amtab);return;}
+ const m=e.target.closest&&e.target.closest('.amicus-brand a[href="/amicus/"],.am-legacy');if(m&&!(e.ctrlKey||e.metaKey||e.shiftKey)){e.preventDefault();abre('ref');scrollTo({top:0,behavior:'smooth'});}});
+window.addEventListener('resize',altura);if(window.ResizeObserver)new ResizeObserver(altura).observe(D.querySelector('body>header'));
+let inicial='';try{inicial=decodeURIComponent((location.hash||'').slice(1));}catch(e){}
+fetch('/api/login',{credentials:'same-origin',cache:'no-store'}).then(r=>r.ok?r.json():null).catch(()=>null).then(j=>{logado=!!(j&&j.usuario);const c=D.querySelector('[data-amtab="collectio"]');if(c)c.hidden=!logado;if(inicial.split('&')[0]==='collectio')abre(logado?'collectio':'ref',!logado,inicial.includes('&')?inicial.slice(inicial.indexOf('&')+1):'');});
+if(inicial.split('&')[0]==='collegium')abre('collegium',true,inicial.includes('&')?inicial.slice(inicial.indexOf('&')+1):'');
 })();
 </script><script>
 /* minimizar as colunas do Amicus (lembrado neste navegador) */
