@@ -96,7 +96,7 @@ def montar(saida: pathlib.Path) -> None:
     universal = universal.replace('<div class="nav-label">PRODUÇÃO</div>', '', 1)
     universal = universal.replace('aria-label="Parte da aba Minuta"', 'aria-label="Parte do Minutário"', 1)
     # Ajustes independentes do HTML reconstruído por faixaUsuario().
-    universal = universal.replace('<span class="tu-st" id="tu-st"', '<button type="button" id="pv-ajustes" class="tu-b" title="Ajustes" aria-label="Ajustes" aria-haspopup="dialog" aria-controls="pv-ajustes-dialog"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3M4.9 4.9 7 7m10 10 2.1 2.1M4.9 19.1 7 17m10-10 2.1-2.1"/><circle cx="12" cy="12" r="7"/></svg></button><span class="tu-st" id="tu-st"', 1)
+    universal = universal.replace('<span class="tu-st" id="tu-st"', '<button type="button" id="pv-ajustes" class="tu-b" hidden tabindex="-1" title="Ajustes" aria-label="Ajustes" aria-haspopup="dialog" aria-controls="pv-ajustes-dialog"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3M4.9 4.9 7 7m10 10 2.1 2.1M4.9 19.1 7 17m10-10 2.1-2.1"/><circle cx="12" cy="12" r="7"/></svg></button><span class="tu-st" id="tu-st"', 1)
     universal = universal.replace('</body>', '<script src="universal-ajustes.js"></script>\n</body>', 1)
     shutil.copy2(AQUI / 'universal-ajustes.js', painel / 'universal-ajustes.js')
     (painel / 'universal.html').write_text(universal, encoding='utf-8')
