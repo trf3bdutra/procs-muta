@@ -786,3 +786,12 @@ html.emb-cmt body #e-aside{top:0!important;max-height:100vh!important}
 .pp-processo-expand{margin:0 0 16px}
 .pp-footer{margin-top:20px;border-top:1px solid var(--line);padding-top:12px}
 .pp-footer>.pp-rast{border-top:0;margin-top:0;padding-top:0}
+
+/* Expansão vertical em fluxo normal: a faixa fica no cabeçalho e o cartão empurra o julgado. */
+.pp-processo-expand:not([hidden]){display:grid;grid-template-rows:1fr;margin:0;padding:0 22px;animation:pp-processo-descer .22s ease-out}
+.pp-processo-slide{min-height:0;overflow:hidden;padding:0}
+.pp-processo-slide>.pp-k{margin:10px 0 5px}
+.pp-processo-slide>.pp-processo-unico{margin-bottom:3px}
+.e-drb .pp-processo-expand:not([hidden]){padding-inline:0}
+@keyframes pp-processo-descer{from{grid-template-rows:0fr;opacity:.25}to{grid-template-rows:1fr;opacity:1}}
+@media(prefers-reduced-motion:reduce){.pp-processo-expand:not([hidden]){animation:none}}
