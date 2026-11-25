@@ -182,7 +182,7 @@
   function listas() {
     var j = X.dados || {};
     var as = ((j.assinar || {}).assinatura || []).filter(function(a){return a&&a.urg&&a.urg.tipo&&!/^Apreciada/i.test(String(a.urg.situacao||''));}).sort(function (a, b) { return String(a.desde || '').localeCompare(String(b.desde || '')); });
-    return { as: as, du: j.duvidas || [], pe: j.pedidos || [], so: (j.notificacoes || []).filter(function (n) { return n.tipo === 'sustentacao'; }) };
+    var assinaturaCNJ=new Set(as.map(function(a){return String(a.cnj||'').replace(/\D/g,'');}));var pend=(j.urgencias||[]).filter(function(u){return u&&u.cnj&&!assinaturaCNJ.has(String(u.cnj).replace(/\D/g,''));});return { as: as, urg: pend, du: j.duvidas || [], pe: j.pedidos || [], so: (j.notificacoes || []).filter(function (n) { return n.tipo === 'sustentacao'; }) };
   }
   /* decisão submetida à assinatura (antes no sino › Desembargador): urgência em destaque e no topo */
   function itemAs(a) {
@@ -203,6 +203,7 @@
         '<span class="gx-fb"><button type="button" class="lnk" data-gx-dev="' + esc(a.cnj) + '">cancelar</button><button type="submit" class="btn solid sm">Enviar devolutiva</button></span></form>'
         : '<div class="gx-ac"><span class="gx-bt"><button type="button" class="btn sm ok" data-gx-ass="' + esc(a.cnj) + '" title="Registra no app do gabinete que a decisão foi assinada (a assinatura em si é no PJe)">Marcar assinada</button><button type="button" class="btn sm" data-gx-dev="' + esc(a.cnj) + '">Devolver com apontamento</button></span></div>') + '</article>';
   }
+  function itemUrg(a){var etapa=a.assinado?'Assinada · urgência ainda aberta':a.dataLiberacao?'Liberada · conferir situação':a.dataCorrecao?'A liberar':a.dataMinuta?'Em correção':a.servidor?'Para minuta':'A designar';return '<article class="gx-it gx-urg"><div class="gx-h">'+copiaBtn(a.cnj)+'<span class="gx-c gx-urgc">'+esc(a.tipo||'Urgência')+'</span><span class="gx-c">'+esc(etapa)+'</span></div><p class="gx-m">'+[a.nivel,a.situacao,a.pedidoEm?'Pedido em '+data(a.pedidoEm):'',a.espera!=null?a.espera+' d':''].filter(Boolean).map(esc).join(' · ')+'</p><p class="gx-m">'+[a.servidor?'Minuta: '+a.servidor:'',a.corretor?'Correção: '+a.corretor:'',a.obs].filter(Boolean).map(esc).join(' · ')+'</p></article>';}
   function itemDu(d) {
     var ab = X.resp[d.id];
     return '<article class="gx-it" data-id="' + esc(d.id) + '"><div class="gx-h"><b class="gx-t">' + esc(d.titulo || 'Dúvida') + '</b>' +
@@ -236,15 +237,15 @@
     var q = quem();
     if (!pode(q)) { c.innerHTML = '<p class="muted gx-v">' + (q.on ? 'As Deliberações são do Desembargador e do gestor.' : 'Entre no painel para ver as deliberações.') + '</p>'; return; }
     var L = listas();
-    var tab = function (k, r, d) { return '<button type="button" role="tab" data-gx-a="' + k + '" aria-selected="' + (X.aba === k) + '" title="' + esc(d) + '">' + r + ' <i' + (k === 'as' && nUrg ? ' class="gx-iu"' : '') + '>' + L[k].length + '</i></button>'; };
+    var tab = function (k, r, d) { return '<button type="button" role="tab" data-gx-a="' + k + '" aria-selected="' + (X.aba === k) + '" title="' + esc(d) + '">' + r + ' <i' + (k === 'as' && nUrg ? ' class="gx-iu"' : '') + '>' + (L[k].length+(k==='as'?L.urg.length:0)) + '</i></button>'; };
     var nUrg = L.as.filter(function (a) { return a.urg; }).length;
-    var corpo = X.aba === 'as' ? (L.as.length ? (nUrg ? '<p class="gx-msg err">' + nUrg + ' aguardando assinatura · urgência ativa.</p>' : '') + L.as.map(itemAs).join('') : '<p class="muted gx-v">Nenhuma decisão urgente submetida à assinatura.</p>')
+    var corpo = X.aba === 'as' ? ('<h4 class="hero-v53-page-title">Aguardando assinatura · '+L.as.length+'</h4>'+(L.as.length?L.as.map(itemAs).join(''):'<p class="muted gx-v">Nenhuma decisão urgente submetida à assinatura.</p>')+'<h4 class="hero-v53-page-title">Demais urgências em aberto · '+L.urg.length+'</h4>'+(L.urg.length?L.urg.map(itemUrg).join(''):'<p class="muted gx-v">Nenhuma outra urgência em aberto.</p>'))
       : X.aba === 'pe' ? (L.pe.length ? L.pe.map(itemPe).join('') : '<p class="muted gx-v">Nenhum pedido de retirada ou de adiamento em aberto.</p>')
       : X.aba === 'so' ? (L.so.length ? L.so.map(itemSo).join('') : '<p class="muted gx-v">Nenhum pedido de sustentação oral ou de preferência recebido para as próximas sessões.</p>')
       : (L.du.length ? L.du.map(itemDu).join('') : '<p class="muted gx-v">Nenhuma dúvida em aberto dirigida a você.</p>');
     c.innerHTML = '<div class="gx-top"><div><b>Deliberações</b><small class="muted">o que aguarda decisão' + (X.dados && X.dados.hoje ? ' · ' + esc(data(X.dados.hoje)) : '') + '</small></div>' +
       '<span><button type="button" class="lnk" data-gx="ler-del">' + (X.lendo ? 'lendo…' : 'atualizar') + '</button></span></div>' +
-      '<div class="seg pmodos gx-modos" role="tablist" aria-label="Tipo de deliberação">' + tab('as', 'Urgências', 'Decisões urgentes já submetidas à assinatura') + tab('du', 'Dúvidas', 'dúvidas da equipe') + tab('pe', 'Pauta', 'pedidos de retirada e de adiamento') + tab('so', 'Sustentações', 'pedidos de sustentação e preferência') + '</div>' +
+      '<div class="seg pmodos gx-modos" role="tablist" aria-label="Tipo de deliberação">' + tab('as', 'Urgências', 'Urgências em aberto, separadas das decisões prontas para assinatura') + tab('du', 'Dúvidas', 'dúvidas da equipe') + tab('pe', 'Pauta', 'pedidos de retirada e de adiamento') + tab('so', 'Sustentações', 'pedidos de sustentação e preferência') + '</div>' +
       (X.msg ? '<p class="gx-msg' + (/^Não/.test(X.msg) ? ' err' : '') + '">' + esc(X.msg) + '</p>' : '') +
       (X.erro ? '<p class="gx-v err">' + esc(X.erro) + '</p>' : !X.dados ? '<p class="muted gx-v">Lendo…</p>' : corpo);
   }
@@ -293,7 +294,7 @@
   function badges() {
     var b1 = $('dil-badge'), b2 = $('del-badge');
     if (b1) { var n1 = D.lista ? abertasComigo().length : 0; b1.hidden = !n1; b1.textContent = n1 ? String(n1) : ''; b1.title = n1 ? n1 + ' diligência(s) com você' : ''; }
-    if (b2) { var L = X.dados ? listas() : { as: [], du: [], pe: [], so: [] }, n2 = L.as.length + L.du.length + L.pe.length + L.so.filter(function (s) { return s.aVincular; }).length; b2.hidden = !n2; b2.textContent = n2 ? String(n2) : ''; b2.title = n2 ? n2 + ' aguardando decisão' : ''; }
+    if (b2) { var L = X.dados ? listas() : { as: [], urg: [], du: [], pe: [], so: [] }, n2 = L.as.length + L.urg.length + L.du.length + L.pe.length + L.so.filter(function (s) { return s.aVincular; }).length; b2.hidden = !n2; b2.textContent = n2 ? String(n2) : ''; b2.title = n2 ? n2 + ' aguardando decisão' : ''; }
   }
 
   /* ---------- eventos ---------- */
