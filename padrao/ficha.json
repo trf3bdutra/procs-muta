@@ -497,24 +497,6 @@
        "apelido": "atualizado"
       },
       {
-       "rotulo": "Lote de origem · histórico",
-       "chave": "Registro - Lote",
-       "tipo": "texto",
-       "secao": "triagem",
-       "editavel": false,
-       "regra": "do lote de triagem (acervo/lotes); atualizado por scripts/triagem/ficha_lote.py",
-       "apelido": "registro_lote"
-      },
-      {
-       "rotulo": "Grupo de origem · histórico",
-       "chave": "Registro - Grupo",
-       "tipo": "texto-longo",
-       "secao": "triagem",
-       "editavel": false,
-       "regra": "do lote de triagem (acervo/lotes); atualizado por scripts/triagem/ficha_lote.py",
-       "apelido": "registro_grupo"
-      },
-      {
        "rotulo": "Data do registro histórico",
        "chave": "Registro - Atualizado em",
        "tipo": "texto",
@@ -1153,7 +1135,7 @@
    "aba": "Triagem",
    "grupos": [
     {
-     "grupo": "Análise",
+     "grupo": "Análise e Indexação",
      "campos": [
       {
        "rotulo": "Status da triagem",
@@ -1223,6 +1205,65 @@
        "tipo": "texto",
        "secao": "triagem",
        "apelido": "hipoteses_monocratica"
+      },
+      {
+       "rotulo": "Lote de origem · histórico",
+       "chave": "Registro - Lote",
+       "tipo": "texto",
+       "secao": "triagem",
+       "editavel": false,
+       "regra": "do lote de triagem (acervo/lotes); atualizado por scripts/triagem/ficha_lote.py",
+       "apelido": "registro_lote"
+      },
+      {
+       "rotulo": "Grupo de origem · histórico",
+       "chave": "Registro - Grupo",
+       "tipo": "texto-longo",
+       "secao": "triagem",
+       "editavel": false,
+       "regra": "do lote de triagem (acervo/lotes); atualizado por scripts/triagem/ficha_lote.py",
+       "apelido": "registro_grupo"
+      },
+      {
+       "rotulo": "Modelo ou minuta-matriz",
+       "chave": "Modelo aplicável",
+       "tipo": "texto",
+       "secao": "producao",
+       "apelido": "modelo_aplicavel"
+      },
+      {
+       "rotulo": "Variação do modelo",
+       "chave": "Variação do modelo",
+       "tipo": "texto",
+       "secao": "producao",
+       "apelido": "variacao_modelo"
+      },
+      {
+       "rotulo": "Variações · histórico",
+       "chave": "Registro - Variações",
+       "tipo": "texto",
+       "secao": "triagem",
+       "editavel": false,
+       "regra": "do lote de triagem (acervo/lotes); atualizado por scripts/triagem/ficha_lote.py",
+       "apelido": "registro_variacoes"
+      },
+      {
+       "rotulo": "Proposta de julgamento · histórico",
+       "chave": "Registro - Proposta",
+       "tipo": "texto-longo",
+       "secao": "triagem",
+       "editavel": false,
+       "regra": "do lote de triagem (acervo/lotes); atualizado por scripts/triagem/ficha_lote.py",
+       "apelido": "registro_proposta"
+      },
+      {
+       "rotulo": "Modelo indicado · histórico",
+       "chave": "Registro - Modelo",
+       "tipo": "texto-longo",
+       "secao": "triagem",
+       "editavel": false,
+       "regra": "do lote de triagem (acervo/lotes); atualizado por scripts/triagem/ficha_lote.py",
+       "apelido": "registro_modelo"
       }
      ]
     },
@@ -2588,20 +2629,6 @@
      "grupo": "Plano do pronunciamento",
      "campos": [
       {
-       "rotulo": "Modelo ou minuta-matriz",
-       "chave": "Modelo aplicável",
-       "tipo": "texto",
-       "secao": "producao",
-       "apelido": "modelo_aplicavel"
-      },
-      {
-       "rotulo": "Variação do modelo",
-       "chave": "Variação do modelo",
-       "tipo": "texto",
-       "secao": "producao",
-       "apelido": "variacao_modelo"
-      },
-      {
        "rotulo": "Objeto do recurso",
        "chave": "Objeto do recurso",
        "tipo": "texto-longo",
@@ -2628,33 +2655,6 @@
        "tipo": "texto-longo",
        "secao": "producao",
        "apelido": "materias_oficio"
-      },
-      {
-       "rotulo": "Variações · histórico",
-       "chave": "Registro - Variações",
-       "tipo": "texto",
-       "secao": "triagem",
-       "editavel": false,
-       "regra": "do lote de triagem (acervo/lotes); atualizado por scripts/triagem/ficha_lote.py",
-       "apelido": "registro_variacoes"
-      },
-      {
-       "rotulo": "Proposta de julgamento · histórico",
-       "chave": "Registro - Proposta",
-       "tipo": "texto-longo",
-       "secao": "triagem",
-       "editavel": false,
-       "regra": "do lote de triagem (acervo/lotes); atualizado por scripts/triagem/ficha_lote.py",
-       "apelido": "registro_proposta"
-      },
-      {
-       "rotulo": "Modelo indicado · histórico",
-       "chave": "Registro - Modelo",
-       "tipo": "texto-longo",
-       "secao": "triagem",
-       "editavel": false,
-       "regra": "do lote de triagem (acervo/lotes); atualizado por scripts/triagem/ficha_lote.py",
-       "apelido": "registro_modelo"
       }
      ]
     },
