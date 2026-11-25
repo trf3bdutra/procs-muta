@@ -137,17 +137,20 @@
   /* ---------- variáveis a partir do prontuário ---------- */
   function preVal(P,J,g){
     var V={},C=(J&&J.campos)||{},rec=(J&&J.recursos)||[],es=String(C.especificidades||P.especificidades||'');
-    if(C['orig.id'])V.sentenca_id=String(C['orig.id']).replace(/\D/g,'');
+    var canon=J&&J.fonte==='ficha',tj=nq(P.tipoJulgamento||''),idUnico=function(v){var a=String(v||'').match(/\d{6,}/g)||[];return a.length===1?a[0]:'';};
+    var sid=idUnico(canon?C['origem.Sentença - ID']:C['orig.id']);if(sid)V.sentenca_id=sid;
     var ap=rec.filter(function(r){return /apela|agravo|embargos/i.test(r.tipo||'');})[0];
-    if(ap&&ap.id){V.apelacao_id=String(ap.id).replace(/\D/g,'');V.agint_id=V.apelacao_id;}
+    if(canon&&rec.length===1){var r=rec[0],id=idUnico(r.ids);if(id){if(/agravo interno/.test(tj))V.agint_id=id;else if(/embargos de declar/.test(tj))V.ed_id=id;else if(/apela/.test(tj))V.apelacao_id=id;}
+      if(/apela/.test(tj)){var ra=[r.preliminares,r.teses,r.merito].filter(Boolean).join('; ');if(ra)V.razoes=ra;}}
+    else if(!canon&&ap&&ap.id){var id=idUnico(ap.id);if(id){if(/agravo interno/.test(nq(ap.tipo)))V.agint_id=id;else if(/apela/.test(nq(ap.tipo)))V.apelacao_id=id;else if(/embargos/.test(nq(ap.tipo)))V.ed_id=id;}}
     if(ap&&ap.parte){var pa=nq(ap.parte);V.apelante=/uniao/.test(pa)?'a União':/bacen|banco central/.test(pa)?'o BACEN':'a parte exequente';}
-    if(C['mpfx.id'])V.mpf_id=String(C['mpfx.id']).replace(/\D/g,'');
+    var mp=idUnico(canon?C['triagem.ID do Parecer MPF']:C['mpfx.id']);if(mp)V.mpf_id=mp;
     if(C['adm.ajg']===false)V.clausula_gratuidade='';
     var f7=/F7[^·\n]*?\(ID\s*(\d{6,})/.exec(es);if(f7)V.fichas_id=f7[1];
-    if(C['ed.id'])V.ed_id=String(C['ed.id']);
-    if(C['agint.id'])V.decisao_agravada_id=String(C['agint.id']).replace(/\D/g,'');
-    if(C['ed.vicio']){var vi=nq(C['ed.vicio']);V.ed_vicio=/mais de um/.test(vi)?'omissão e contradição':vi.indexOf('contradi')>=0?'contradição':vi.indexOf('obscur')>=0?'obscuridade':'omissão';}
-    var acc=[C['orig.custas'],C['orig.honor']].filter(function(x){return x&&String(x).trim();});if(acc.length)V.rel_acessorios=', '+acc.join(', ').replace(/\.\s*$/,'').replace(/^./,function(c){return c.toLowerCase();});
+    if(!canon&&C['ed.id'])V.ed_id=idUnico(C['ed.id']);
+    var imp=idUnico(canon?C['triagem.Impugnada - ID']:C['agint.id']);if(imp&&/agravo interno/.test(tj))V.decisao_agravada_id=imp;
+    var vi=canon?C['triagem.ED - Vício']:C['ed.vicio'];if(vi&& !/mais de um/i.test(vi))V.ed_vicio=String(vi);
+    var acc=(canon?[C['origem.Sentença - Custas'],C['origem.Sentença - Honorários']]:[C['orig.custas'],C['orig.honor']]).filter(function(x){return x&&String(x).trim();});if(acc.length)V.rel_acessorios=', '+acc.join(', ').replace(/\.\s*$/,'').replace(/^./,function(c){return c.toLowerCase();});
     if(C['rel.razoes'])V.razoes=[].concat(C['rel.razoes']).join('; ');
     if(C['rel.contrarrazoes'])V.contrarrazoes=' '+[].concat(C['rel.contrarrazoes']).join('; ');
     if(C['orig.dispositivo'])V.sentenca_transcricao='“'+C['orig.dispositivo']+'”';
@@ -164,12 +167,12 @@
     S={proc:P.processo,j:J||null,g:ga[0],gPorque:ga[1],gSugerido:!!ga[2],gManual:false,on:{},ver:{},um:{},val:{},der:{},porque:{},manual:{},em:'',em1:'rel',mpf:0,mpfNota:''};
     S.sin=sinais(P,J);S.val=preVal(P,J,ga[0]);doOffice(P,J,ga[0],S.val,S.der);
     aplicarGrupo(P,J,t);
-    var C=(J&&J.campos)||{},sx=nq(C['mpfx.sentido']||P.mpf||''),hip=nq(C.mpf||''),par=nq(C.parecer||'');
+    var C=(J&&J.campos)||{},sx=nq(C['triagem.Parecer - Sentido']||C['mpfx.sentido']||P.mpf||''),hip=nq(C['triagem.MPF - Custos Legis']||C.mpf||''),par=nq(C['triagem.MPF']||C.parecer||'');
     S.mpf=/nao provimento|desprovimento/.test(sx)?4:/provimento do recurso/.test(sx)?3:/sem hipotese|ausencia de hipotese/.test(sx)?1:/interesse publico/.test(sx)&&/inexist|ausencia/.test(sx)?2:/prosseguimento|outro/.test(sx)?0:-2;
     if(S.mpf===-2){
       if(/intimado sem manifest/.test(par)){S.mpf=-1;S.mpfNota='Prontuário: MPF intimado sem manifestação — o modelo não tem fórmula própria; parágrafo omitido. Conferir nos autos.';}
-      else if(/sem hipotese/.test(hip)&&!par&&!C['mpfx.id']){S.mpf=-1;S.mpfNota='Prontuário: sem hipótese de intervenção e sem parecer — parágrafo do MPF omitido. Conferir se houve intimação da PRR.';}
-      else if(C['mpfx.id']||/com parecer/.test(par)){S.mpf=0;S.mpfNota='Parecer registrado sem sentido definido: conferir a fórmula.';}
+      else if(/sem hipotese/.test(hip)&&!par&&!(C['triagem.ID do Parecer MPF']||C['mpfx.id'])){S.mpf=-1;S.mpfNota='Prontuário: sem hipótese de intervenção e sem parecer — parágrafo do MPF omitido. Conferir se houve intimação da PRR.';}
+      else if(C['triagem.ID do Parecer MPF']||C['mpfx.id']||/com parecer/.test(par)){S.mpf=0;S.mpfNota='Parecer registrado sem sentido definido: conferir a fórmula.';}
       else{S.mpf=-1;S.mpfNota=J?'Prontuário sem dado do parecer: parágrafo do MPF omitido. Conferir nos autos.':'';if(!J)S.mpf=0;}
     }
   }
