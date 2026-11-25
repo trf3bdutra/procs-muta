@@ -19,7 +19,7 @@ test('Ementário: julgado sem abas, expansão vertical e rodapé',()=>{
   assert.match(css,/\.pp-section\[hidden\]\{display:none!important\}/);
   const m=montar(false);
   assert.doesNotMatch(m.html(),/role="tablist"|data-ppaba=|Correspondentes/);
-  assert.match(m.html(),/data-dpdf[\s\S]*?<\/div><\/div><section id="pp-processo-card"[\s\S]*?<\/section><div class="e-dbody pp-b">/);
+  assert.match(m.html(),/<section class="pp-process-card"[^>]*><header class="e-dacts pp-process-actions"[\s\S]*?data-dpdf[\s\S]*?<\/header><div id="pp-processo-card"[\s\S]*?<\/section><section class="pp-section pp-julgado"/);
   assert.match(css,/@keyframes pp-processo-descer/);
   assert.match(m.html(),/<small>Resultado<\/small><b>Desprovido<\/b>/);
   for(const k of ['Apreciação','Classe','Órgão','Documento'])assert.ok(m.html().includes('<small>'+k+'</small>'));
@@ -41,14 +41,16 @@ test('Ementário: julgado sem abas, expansão vertical e rodapé',()=>{
   assert.match(m.sec('processo'),/Detalhamento do caso/);
   assert.match(m.sec('processo'),/Tag X/);
   assert.doesNotMatch(m.html(),/data-ppaba="(?:catalogacao|referencias)"/);
-  assert.equal((m.sec('processo').match(/class="pp-proc\b/g)||[]).length,1,'cartão único de processo');
+  assert.equal((m.html().match(/class="pp-process-card"/g)||[]).length,1,'cartão único de processo');
+  assert.equal((m.sec('processo').match(/class="pp-processo-unico"/g)||[]).length,1);
+  assert.doesNotMatch(m.sec('processo'),/class="pp-proc\b/);
   assert.match(m.sec('julgado'),/Ementa X[\s\S]*Referências[\s\S]*Dispositivos legais[\s\S]*Jurisprudência[\s\S]*Temas e súmulas[\s\S]*Inteiro teor/);
   assert.doesNotMatch(m.sec('processo'),/<span>Tipo de caso<\/span>|>Especificidades<\/div>/);
   m.buttons.get('[data-dprocesso]').onclick();assert.equal(m.ctx.E.detProcessoAberto,true);assert.equal(m.buttons.get('#pp-processo-card').hidden,false);
   assert.match(m.sec('julgado'),/Inteiro teor[\s\S]*<footer class="pp-footer">[\s\S]*Rastreabilidade/);
   m.ctx.abrirIT(m.x);assert.match(m.html(),/data-dprocesso[^>]+aria-expanded="true"/);
   m.ctx.abrirIT(m.y);assert.equal(m.ctx.E.detProcessoAberto,false);
-  assert.match(m.html(),/<div class="e-dacts pp-process-actions"[\s\S]*?data-dprocesso[\s\S]*?data-dcnj[\s\S]*?data-dcit[\s\S]*?data-dem[\s\S]*?data-dit[\s\S]*?data-ddocx[\s\S]*?data-dpdf[\s\S]*?<\/div>/);
+  assert.match(m.html(),/<header class="e-dacts pp-process-actions"[\s\S]*?data-dprocesso[\s\S]*?data-dcnj[\s\S]*?data-dcit[\s\S]*?data-dem[\s\S]*?data-dit[\s\S]*?data-ddocx[\s\S]*?data-dpdf[\s\S]*?<\/header>/);
   m.buttons.get('[data-dem]').onclick();assert.equal(m.copias[0],'Ementa X');
   m.buttons.get('[data-dcnj]').onclick();assert.equal(m.copias[1],m.y.n);
 });
