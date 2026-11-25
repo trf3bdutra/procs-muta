@@ -79,10 +79,10 @@ def montar(saida: pathlib.Path) -> None:
     if not all(k in itens for k in ferramentas + processo):
         sys.exit('painel.html: abas principais da prévia não encontradas')
     itens['min'] = itens['min'].replace('<b>Minuta ', '<b>Minutário ', 1).replace('Editor × padrão', 'Elaboração e revisão', 1)
-    # Uma faixa de abas. A ordem mantém as ferramentas do gabinete antes das abas do processo.
-    ordem = ferramentas + processo
+    # Uma faixa de abas: processo à esquerda, ferramentas após o divisor.
+    ordem = processo + ferramentas
     resto = ''.join(v for k, v in itens.items() if k not in ordem)
-    conteudo = '<div class="pv-nav-row" id="pv-nav-main">' + ''.join(itens[k] for k in ordem) + '</div>' + resto
+    conteudo = '<div class="pv-nav-row" id="pv-nav-main">' + ''.join(itens[k] for k in processo) + '<span class="pv-nav-divider" aria-hidden="true"></span>' + ''.join(itens[k] for k in ferramentas) + '</div>' + resto
     universal = universal[:nav.start()] + nav.group(1) + conteudo + nav.group(3) + universal[nav.end():]
     universal = universal.replace('<div class="nav-label">PRODUÇÃO</div>', '', 1)
     universal = universal.replace('aria-label="Parte da aba Minuta"', 'aria-label="Parte do Minutário"', 1)

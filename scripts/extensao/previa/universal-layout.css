@@ -72,3 +72,5 @@ html[data-tema=escuro] .pv-universal-body{--pv-bg:#112530;--pv-line:#344854;--pv
 
 /* Encaminhamento: edição única na triagem; cartão mostra os valores registrados. */
 .pv-tri-enc{padding:8px!important;margin:8px 0;min-width:0}.pv-tri-enc>.pm-mer-h{margin:0 0 7px}.pv-tri-enc-fields{gap:8px;min-width:0}.pv-tri-enc-fields .pm-ato{min-width:0;max-width:100%;width:100%}.pv-tri-enc-fields .pm-pn{width:100%;min-width:0;display:grid;gap:3px}.pv-tri-enc-fields select{max-width:100%;min-width:0;width:100%}.pv-enc-summary{display:flex;align-items:flex-start;justify-content:space-between;gap:6px;margin:5px 0;flex-wrap:wrap}.pv-enc-summary>.pv-idrow{flex:1;min-width:0}.pv-enc-summary .pv-value{font-size:11px;overflow-wrap:anywhere}.pv-enc-summary>.lnk{font-size:10px;flex:none}
+
+.pv-universal-body .pv-nav-divider{flex:0 0 1px;align-self:stretch;background:var(--pv-line,#d6d1c5);margin:5px 3px;pointer-events:none}

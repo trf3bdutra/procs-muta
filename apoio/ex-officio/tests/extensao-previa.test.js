@@ -65,8 +65,9 @@ test('navegador universal: utilidades, ferramentas do gabinete, processo em tela
     assert.doesNotMatch(old,/id="pv-ajustes"/);
     assert.ok(fs.existsSync(path.join(saida,'painel','universal-ajustes.js')));
     new Function(fs.readFileSync(path.join(saida,'painel','universal-ajustes.js'),'utf8'));
-    assert.ok(html.indexOf('id="tab-acervo"')<html.indexOf('id="tab-pront"'));
-    assert.ok(html.indexOf('id="tab-del"')<html.indexOf('id="tab-pront"'));
+    assert.ok(html.indexOf('id="tab-pront"')<html.indexOf('id="tab-min"'));
+    assert.ok(html.indexOf('id="tab-min"')<html.indexOf('class="pv-nav-divider"'));
+    assert.ok(html.indexOf('class="pv-nav-divider"')<html.indexOf('id="tab-acervo"'));
     assert.match(html,/<b>Minutário /);
     assert.match(old,/<b>Minuta /);
   } finally {fs.rmSync(saida,{recursive:true,force:true});}
