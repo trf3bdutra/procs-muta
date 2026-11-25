@@ -37,3 +37,24 @@ test('extensão 0.69: sigilo no cliente, aviso de versão e publicação sem can
   assert.match(R('.github/workflows/vercel-caput.yml'), /cancel-in-progress: false/);
   assert.match(R('extensao/saude.js'), /\/extensao\/versao\.json/);
 });
+
+test('sigilo no cliente: falha ou resposta inválida bloqueia até nova confirmação', async () => {
+  const vm = require('node:vm'), fs = require('node:fs');
+  const src = fs.readFileSync(path.resolve(__dirname, '../../../extensao/sigilo.js'), 'utf8');
+  const listeners = {}, store = new Map();
+  let respostas = [new Error('rede indisponível'), {}, { sigilo: '', liberado: true, porque: '' }], chamadas = 0;
+  const window = { MutaSessao: { api: async () => { chamadas++; const r = respostas.shift(); if (r instanceof Error) throw r; return r; } } };
+  const document = { addEventListener: (n, f) => { listeners[n] = f; }, dispatchEvent() {} };
+  vm.runInNewContext(src, { window, document, sessionStorage: { getItem: k => store.get(k), setItem: (k,v) => store.set(k,v) }, CustomEvent: class {}, setTimeout });
+  const sg = window.MutaSigilo;
+  const p = sg.consultar(CNJ); assert.equal(sg.bloqueado(), true);
+  await Promise.all([p, sg.consultar(CNJ)]);
+  assert.equal(chamadas, 1, 'consulta concorrente compartilhada');
+  assert.equal(sg.bloqueado(), true); assert.match(sg.html(), /Sigilo não confirmado/);
+  const retry = () => listeners.click({ target: { closest: () => ({ getAttribute: () => 'repetir' }) }, preventDefault() {}, stopPropagation() {} });
+  retry(); await sg.consultar(CNJ);
+  assert.equal(sg.bloqueado(), true, 'resposta malformada não libera acesso');
+  retry(); await sg.consultar(CNJ);
+  assert.equal(sg.bloqueado(), false, 'só libera após resposta válida');
+  assert.equal(chamadas, 3);
+});
