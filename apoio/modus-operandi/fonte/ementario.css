@@ -827,3 +827,12 @@ html.emb-cmt body #e-aside{top:0!important;max-height:100vh!important}
 .pp-process-actions .pp-process-toggle{margin:0;border-color:var(--gold);color:var(--gold);background:var(--gold-soft);font-weight:700}
 .pp-process-actions .pp-process-toggle[aria-expanded=true]{background:var(--gold);color:var(--gold-ink);border-color:var(--gold)}
 @media(max-width:520px){.pp-process-actions .pp-export-group{margin-left:0}.pp-process-actions .e-mini.pp-action{padding:0 6px}}
+
+/* Um cartão de julgamento: cronologia, síntese e ementa com divisórias internas. */
+.pp-sintese-ementa{border-top:1px solid var(--line);padding:10px 11px 8px}
+.pp-sintese-ementa>.pp-k{margin:0 0 6px}
+.pp-sintese-ementa>.pp-em{border:0;border-radius:0;padding:0;background:transparent}
+.pp-sintese-ementa>.pp-more{margin-top:5px}
+.pp-sintese .pp-top{grid-template-columns:minmax(0,2fr) minmax(0,1fr)}
+@media(max-width:520px){.pp-sintese .pp-top{grid-template-columns:minmax(0,1fr)}}
+@media(min-width:521px){.pp-sintese .pp-sintese-conteudo>.pp-card.res:not(:only-child){border-top:0;border-left:1px solid var(--line)}}
