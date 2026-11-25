@@ -11,10 +11,10 @@ O procs-muta é o repositório principal: a partir desta importação, nada aqui
 | Pasta | Período | Registros |
 | --- | --- | --- |
 | `acordaos/` | 1999–2026 | 26.276 |
-| `monocraticas/` | 2016–2026 | 7.157 |
-| **Total** | | **33.433** |
+| `monocraticas/` | 2016–2026 | 7.248 |
+| **Total** | | **33.524** |
 
-Um arquivo por ano, em JSON comprimido (`AAAA.json.gz`). O `indice.json.gz` traz os 33.433
+Um arquivo por ano, em JSON comprimido (`AAAA.json.gz`). O `indice.json.gz` traz os 33.524
 registros em forma resumida, com chaves curtas, para busca sem abrir os arquivos de ano.
 
 Dos acórdãos: 12.694 com inteiro teor, 11.751 só com o acórdão e 1.831 só com a ementa.
@@ -30,16 +30,19 @@ Coleta original em 30/10/2026, registrada em `MANIFESTO.json`.
 Coletas incrementais ficam em `MANIFESTO.json › coletas_incrementais`. Em 24/11/2026 entraram 226
 acórdãos publicados de 14/10 a 24/11/2026, colhidos só com a ementa (`conteudo_texto: apenas_ementa`,
 sem partes, resultado, inteiro teor e links de impressão), por `scripts/jurisprudencia/acrescentar_ementas.py`;
-a próxima coleta completa os substitui pela versão integral. As monocráticas desse período ainda não
-foram coletadas.
+a próxima coleta completa os substitui pela versão integral. Em 25/11/2026 entraram 91 monocráticas
+publicadas de 30/09 a 24/11/2026, com inteiro teor (`scripts/jurisprudencia/acrescentar_monocraticas.py`);
+das 220 da base nesse período, 124 ficaram por coletar porque o servidor do TRF-3 passou a responder com
+erro — as posições estão na lacuna registrada no MANIFESTO.
 
 ## Lacunas conhecidas
 
 - 162 acórdãos não foram coletados: o servidor do TRF-3 recusou as últimas requisições. São os
   mais antigos, de cerca de 1999 a 2001, em regra só com ementa.
-- A contagem por ano tem quedas que não se explicam pela produção: 2018 com 6 registros, 2019
-  com 7, 2024 com 312 e 2025 com 7, contra mais de 2.900 em 2020. Conferir antes de usar a série
-  para qualquer estatística de produtividade [VALIDAR].
+- A contagem de acórdãos por ano tem quedas (2018 com 6, 2019 com 7, 2024 com 314 e 2025 com 8,
+  contra mais de 2.900 em 2020). Conferido em 25/11/2026: a própria base do TRF-3 tem 13 acórdãos
+  do Relator julgados em 2018–2019 e 322 em 2024–2025, os mesmos números da série; as quedas são
+  da base, não falha da coleta.
 
 ## Integridade
 
