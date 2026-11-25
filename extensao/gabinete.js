@@ -1128,10 +1128,18 @@ function heroOrganizarProntuario(){
   if(l1&&procTags.childNodes.length)l1.append(procTags);
   if(l1)l1.querySelectorAll('.pm-al').forEach(function(x){x.remove();});
   top.insertBefore(nav,l1||top.firstChild);nav.after(pages);if(faceNav)pages.before(faceNav);if(l1)id.append(l1);
-  var as=el('div','hero-top-classif');var secao=S(R['Seção competente']||fonteVal({fonte:['Seção Competente','Seção competente']}));if(secao){var smatch=secao.match(/([123])\s*[ªº°a]?/),stag=el('span','hero-secao'+(smatch?' hero-secao-'+smatch[1]:''),smatch?smatch[1]+'ª':secao);stag.title=smatch?smatch[1]+'ª Seção':secao;stag.setAttribute('aria-label',stag.title);as.append(stag);}if(S(R['Assunto CNJ']||fonteVal({fonte:['Assunto']})))as.append(el('span','',S(R['Assunto CNJ']||fonteVal({fonte:['Assunto']}))));id.append(as);
+  /* 0.76.1: seção e assunto sempre no cabeçalho. Seção: Autuação, fonte, etiqueta "Nª Seção" do PJe ou do gabinete; sem nenhuma, etiqueta "Seção ?".
+     Assunto: Autuação, fonte (Assunto, assunto_judicial, Assunto_Principal), assunto detalhado ou o da pauta; sem nenhum, "Assunto não informado", que abre o Caso. */
+  var as=el('div','hero-top-classif');
+  var secao=S(R['Seção competente']||fonteVal({fonte:['Seção Competente','Seção competente']}));
+  if(!secao){var etqS=[R['Etiquetas do PJe'],R['Etiquetas do gabinete'],V('origem','Etiquetas do gabinete'),fonteVal({fonte:['Etiquetas','etiquetas']})].map(S).join(';');var mS=etqS.match(/(?:^|[;,|\s])([1-4])\s*[ªº°a]?\s*se[cç][aã]o\b/i);if(mS)secao=mS[1]+'ª Seção';}
+  var smatch=secao.match(/([1-4])\s*[ªº°a]?/),stag=el('span','hero-secao'+(smatch?' hero-secao-'+smatch[1]:secao?'':' hero-secao-vazia'),smatch?smatch[1]+'ª':secao||'Seção ?');stag.title=smatch?smatch[1]+'ª Seção':secao||'Seção competente não informada (na Autuação, na fonte ou nas etiquetas)';stag.setAttribute('aria-label',stag.title);as.append(stag);
+  var assuntoTopo=S(R['Assunto CNJ']||fonteVal({fonte:['Assunto','assunto_judicial','Assunto_Principal']})||V('triagem','Assunto detalhado')||((G.fo||{}).assunto));
+  if(assuntoTopo)as.append(el('span','',assuntoTopo));else{var semAs=el('button','hero-assunto-vazio','Assunto não informado');semAs.type='button';semAs.title='Registrar o assunto em Caso, Conteúdo e Questões';semAs.onclick=function(){heroTopo.pagina=2;heroTopo.perfil=true;if(heroV53()){G.aba='Processo';G.rot='res';render();}else show(2);};as.append(semAs);}
+  id.append(as);
   var old=top.querySelector('.pm-as');if(old)old.remove();var ad=top.querySelector('.pm-ad');if(ad)ad.remove();var esp=top.querySelector('.pm-esp');if(esp)esp.remove();
   var detail=el('div','hero-detalhes');
-  var assuntoPrincipal=S(R['Assunto CNJ']||fonteVal({fonte:['Assunto']})),assuntoComp=S(gravado('triagem','Registro - Assunto detalhado'))||S(V('triagem','Assunto detalhado'));
+  var assuntoPrincipal=S(R['Assunto CNJ']||fonteVal({fonte:['Assunto','assunto_judicial','Assunto_Principal']})),assuntoComp=S(gravado('triagem','Registro - Assunto detalhado'))||S(V('triagem','Assunto detalhado'));
   function normalAssunto(v){return N(S(v)).replace(/\s+/g,' ').trim();}
   var assuntoStack=el('div','hero-assunto-stack'),principal=Array.from(as.children).find(function(x){return !x.classList.contains('hero-secao');});if(principal)assuntoStack.append(principal);as.append(assuntoStack);
   if(assuntoComp&&normalAssunto(assuntoComp)!==normalAssunto(assuntoPrincipal)){var sub=el('button','hero-case-preview',assuntoComp);sub.type='button';sub.title='Editar assunto detalhado em Caso, Conteúdo e Questões';sub.onclick=function(){show(2);};assuntoStack.append(sub);}

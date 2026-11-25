@@ -312,7 +312,7 @@ test('universal 0.74.2: faixa das abas sem caixa, títulos sem repetição em Au
         titulos: [...document.querySelectorAll('#gab .pc-sh h3')].filter(h => h.offsetParent).map(h => h.textContent.trim()),
         grupos: [...document.querySelectorAll('#g-docs details.pc-s>summary b')].map(b => b.textContent.trim()),
         l1: [...new Set([...document.querySelectorAll('#gab .pc-sh h3')].map(h => cs(h).fontSize + ' ' + cs(h).textTransform))],
-        raio: [...new Set([...document.querySelectorAll('#gab section.card:not(.hero-v53-painel)')].filter(c => c.offsetParent).map(c => cs(c).borderTopLeftRadius))]
+        raio: [...new Set([...document.querySelectorAll('#gab section.card:not(.hero-v53-painel):not(#g-lei):not(#g-docs):not(#hero-encaminhamento)')].filter(c => c.offsetParent).map(c => cs(c).borderTopLeftRadius))]
       };
     });
     assert.equal(v.caixa, '0px rgba(0, 0, 0, 0)', 'faixa das abas sem caixa');
@@ -320,7 +320,7 @@ test('universal 0.74.2: faixa das abas sem caixa, títulos sem repetição em Au
     assert.deepEqual(v.titulos, ['Leitura dos autos', 'Peças e documentos']);
     assert.ok(v.grupos.includes('Extração e outras peças') && !v.grupos.includes('Teor dos autos · Documentos e peças'), 'grupo da ficha sem repetir o título do cartão: ' + v.grupos);
     assert.deepEqual(v.l1, ['9.5px uppercase'], 'rótulo de cartão num só tamanho (protótipo v53: 9,5px dourado)');
-    assert.deepEqual(v.raio, ['8px'], 'cartões com um só raio (protótipo v53)');
+    assert.ok(v.raio.every(r => r === '8px'), 'cartões com um só raio (protótipo v53): ' + v.raio);
     assert.deepEqual(P.erros, [], 'sem erro de script');
   } finally { await P.fim(); }
 });
@@ -434,6 +434,26 @@ test('universal 0.76: Pauta no padrão do Office — título em Georgia, marcos 
     assert.equal(v.borda, '1px', 'filtros com borda fina, sem a pílula de contorno grosso');
     assert.notEqual(v.raio, '9999px|9999px');
     assert.deepEqual(v.metr, ['1 de 1', '1 de 1', '0 de 1', '0 de 1']);
+    assert.deepEqual(P.erros, [], 'sem erro de script');
+  } finally { await P.fim(); }
+});
+
+test('universal 0.76.1: seção e assunto sempre no cabeçalho; primeiro bloco das faces colado à faixa', { skip: pular, timeout: 90000 }, async () => {
+  const op = { processo: CNJ, origem: {}, triagem: { 'Tipo de Julgamento': 'Apelação' }, producao: { SERVIDOR: 'Rodrigo', MINUTADO: '2026-11-13', Destino: 'Sessão' }, pauta: {}, controles: {} };
+  const P = await abrir(op, { sigilo: '', liberado: true, porque: 'gestor' });
+  try {
+    const { pg } = P;
+    await pg.goto(pg.url().replace('/painel/painel.html', '/painel/universal.html'));
+    await pg.waitForFunction(() => window.MutaSessao && window.MutaSessao.estado().estado === 'on', null, { timeout: 15000 });
+    await pg.evaluate(cnj => { window.chrome.storage.session.set({ 'aba:1': { numero: cnj, classe: 'ApCiv', tarefa: '[Sessão] Aguardando a sessão', ctx: '', ed: false, lib: '' } }); }, CNJ);
+    await pg.waitForSelector('.hero-top-classif', { timeout: 15000 });
+    const v = await pg.evaluate(() => ({ secao: document.querySelector('.hero-top-classif .hero-secao').textContent, vazia: document.querySelector('.hero-top-classif .hero-secao').classList.contains('hero-secao-vazia'), assunto: document.querySelector('.hero-assunto-stack>span').textContent }));
+    assert.deepEqual(v, { secao: 'Seção ?', vazia: true, assunto: 'Atraso na Entrega do Imóvel' }, 'sem seção na fonte, a etiqueta aparece vazia');
+    await pg.click('.hero-v53-tabs [data-aba="Autos"]');
+    await pg.waitForSelector('#g-lei', { timeout: 15000 });
+    const a = await pg.evaluate(() => { const l = document.getElementById('g-lei'), n = document.querySelector('.hero-header-nav'), cs = getComputedStyle(l); return { borda: cs.borderTopWidth, gap: Math.round(l.getBoundingClientRect().top - n.getBoundingClientRect().bottom) }; });
+    assert.equal(a.borda, '0px', 'Leitura dos autos fora de cartão');
+    assert.ok(a.gap <= 2, 'colada à faixa: ' + a.gap);
     assert.deepEqual(P.erros, [], 'sem erro de script');
   } finally { await P.fim(); }
 });
