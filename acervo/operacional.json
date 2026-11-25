@@ -6,7 +6,7 @@
   "arquivo": "acervo/fonte.json",
   "chave": "processo"
  },
- "atualizado_em": "2026-11-25T19:18:29.936Z",
+ "atualizado_em": "2026-11-25T19:29:12.515Z",
  "registros": [
   {
    "processo": "0000008-23.2025.4.03.6000",
@@ -17526,17 +17526,39 @@
    "processo": "0001552-89.2015.4.03.6002",
    "origem": {
     "Sentença - Decisão": "",
-    "Sentença - ID": "",
-    "Sentença - Honorários": "",
+    "Sentença - ID": "324969137",
+    "Sentença - Honorários": "Parte autora · 10% sobre o valor da causa",
     "Sentença - Custas": "",
     "Sentença - Resultado": "",
     "Sentença - Fundamento": "",
-    "Sentença - Providências": "",
-    "Contrarrazões - Situação": "",
+    "Sentença - Providências": "Decide-se\nApreciam-se os embargos eis que tempestivos\nNo mais, trasladem-se cópias desta e da Sentença de ID 289846330 aos autos dos Embargos à Execução Fiscal 0001088-94.2017.8.12.6002\nNesse cenário, conhecem-se os embargos e, no mérito, são providos, nos termos da fundamentação supra",
+    "Contrarrazões - Situação": "apresentadas",
     "Responsável": "",
     "Próxima ação": "",
     "Observações": "",
-    "atualizado_em": "2026-11-21T11:28:39.008Z"
+    "atualizado_em": "2026-11-25T19:29:12.515Z",
+    "Sentença - Data": "2024-07-08",
+    "Origem - Juízo": "1ª Vara Federal de Dourados",
+    "Recursos": [
+     {
+      "parte": "parte exequente",
+      "ids": "324969138",
+      "data": "2024-09-23"
+     }
+    ],
+    "Contrarrazões": [
+     {
+      "parte": "ANS",
+      "ids": "324969140",
+      "data": "2025-03-07"
+     }
+    ],
+    "Outras peças": [
+     {
+      "tipo": "Petição intercorrente",
+      "ids": "324969142"
+     }
+    ]
    },
    "triagem": {
     "Urgência": "",
@@ -17546,17 +17568,17 @@
     "Urgência - Data": "",
     "Urgência - Painel": "",
     "Tempest - Publicação": "",
-    "Tempest - Protocolo": "",
-    "Tempest - Prazo legal": "",
-    "Tempest - Dobro": "",
+    "Tempest - Protocolo": "2024-09-23",
+    "Tempest - Prazo legal": "5",
+    "Tempest - Dobro": "2",
     "Tempest - Suspensões": "",
-    "Tipo de Julgamento": "",
+    "Tipo de Julgamento": "Apelação",
     "Hipóteses Monocrática": "",
     "Tempestividade": "",
     "Preparo": "",
     "AJG": "",
     "DPU (controle)": "",
-    "Representação": "",
+    "Representação": "Dispensada (procurador público)",
     "ID da Procuração": "",
     "Impedimento / Suspeição": "",
     "Observação do Impedimento": "",
@@ -17581,8 +17603,11 @@
     "Alegações": "",
     "O que falta sanar": "",
     "Intercorrências": "",
-    "Síntese Processual": "",
-    "Especificidades": ""
+    "Síntese Processual": "Recurso. Recorre parte exequente.",
+    "Especificidades": "",
+    "Preparo - ID recurso": "324969138",
+    "Preparo - Recorrente": "ANS",
+    "Preparo - Fundamento dispensa": "Ente público / MP identificado no recurso; conferir hipótese legal."
    },
    "producao": {
     "Destino": "",
@@ -17628,7 +17653,8 @@
       "resultado": ""
      }
     ]
-   }
+   },
+   "controles": {}
   },
   {
    "processo": "0001583-23.2012.4.03.6000",
