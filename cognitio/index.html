@@ -1174,12 +1174,56 @@ body.so-tri #modulos [data-mod]:not([data-mod=triagem]),body.so-tri #bt-acervo,b
 });
 </script><!-- voc:fim -->
 <script defer src="/padrao/loading/gabinete-loader.js"></script>
-<style>#modulos [data-cog],#modulos [data-cog-regras]{font:inherit;color:inherit;white-space:nowrap;border:0;background:none;cursor:pointer;padding:8px 10px}#modulos [data-cog].on{font-weight:700;background:rgba(0,0,0,.06);border-bottom:2px solid currentColor}#modulos [hidden]{display:none!important}#modulos{flex-wrap:wrap}#bt-acervo,#bt-regras{display:none!important}</style></head>
+<style>/* Cabeçalho do Amicus Curiae: padrão de nav_editorial.css do Compendium,
+   escopado ao Cognitio para não alterar o prontuário, matriz ou painéis. */
+#top{--ep:#fbfaf5;--el:#ded9cc;--ei:#1c3344;--ei2:#2b4556;--em:#5d6b72;--eg:#1b5878;--eg2:#2f7ba3;--eo:#a57829;--eo2:#805b18;--ew:#fff;--emono:SFMono-Regular,Consolas,"Liberation Mono",ui-monospace,monospace;--eser:Georgia,"Times New Roman",serif}
+html[data-theme="dark"] #top{--ep:#10222e;--el:#1e3747;--ei:#ebeff1;--ei2:#c5d2d8;--em:#a7a8a9;--eg:#4e9bcb;--eg2:#76bae6;--eo:#e6c27a;--eo2:#e6c27a;--ew:#0a1821}
+header#top{position:sticky!important;top:0;z-index:30;display:flex!important;flex-wrap:nowrap!important;align-items:center!important;gap:10px!important;min-height:65px!important;height:65px!important;padding:5px 22px 0!important;background:var(--ep)!important;color:var(--ei)!important;border-bottom:1px solid var(--el)!important;overflow:visible!important;box-sizing:border-box}
+header#top::before{background:linear-gradient(90deg,var(--eg) 0 50%,var(--eg2) 50% 100%)!important;box-shadow:none}
+#top #marca{flex:none;align-self:center;display:flex;align-items:center;gap:12px;padding:0!important;margin:0!important;height:auto!important;border:0}
+#top #marca i.star{width:26px!important;height:29px!important;background:var(--eo)!important}
+#top .mc-bc{display:flex;flex-direction:column;flex:none}
+#top .nx-ey{font:400 10px/1.4 var(--emono);letter-spacing:.18em;text-transform:uppercase;color:var(--em);text-decoration:none;white-space:nowrap}
+#top .mc-cad{display:flex;align-items:baseline;gap:9px;white-space:nowrap}
+#top .nx-on{font:650 22px/1.15 Figtree,"Segoe UI",system-ui,sans-serif;letter-spacing:-.04em;color:var(--ei);text-decoration:none}
+#top .nx-on em{font-family:var(--eser);font-style:italic;font-weight:400;color:var(--eo)}
+#top .nx-ir{display:flex;align-items:center;flex:none;min-height:30px;margin-left:clamp(6px,1.6vw,22px);padding-left:clamp(6px,1.2vw,14px);border-left:1px solid var(--el)}
+#top .nx-irl,#top .cog-util{display:inline-flex;align-items:center;gap:6px;min-height:34px;padding:0 9px;border:0;background:none;color:var(--ei);font:400 10.5px var(--emono);letter-spacing:.1em;text-transform:uppercase;text-decoration:none;white-space:nowrap;cursor:pointer}
+#top .nx-irl:hover,#top .cog-util:hover,#top .nx-ey:hover{color:var(--eo2)}
+#top #modulos{display:flex!important;align-self:stretch;flex:0 1 auto;min-width:0;gap:0;padding:0;margin:0 0 0 8px;background:none;border:0;overflow-x:auto;overflow-y:hidden;scrollbar-width:none}
+#top #modulos::-webkit-scrollbar{display:none}
+#top .cn-in{display:flex;align-items:stretch;flex:none;counter-reset:cn;gap:0;border-left:1px solid var(--el)}
+#top #modulos .cn-b{display:inline-flex;align-items:center;gap:9px;padding:0 14px;margin:0;font:650 12.5px Figtree,"Segoe UI",system-ui,sans-serif;letter-spacing:normal;color:var(--ei2);border:0;border-right:1px solid var(--el);border-radius:0;background:none;white-space:nowrap;counter-increment:cn;cursor:pointer;box-shadow:none}
+#top #modulos .cn-b::before{content:counter(cn,decimal-leading-zero);font:400 9px/1 var(--emono);color:var(--em);letter-spacing:.06em}
+#top #modulos .cn-b::after{content:none!important}
+#top #modulos .cn-b:hover{color:var(--ei)}
+#top #modulos .cn-b[aria-current="page"]{background:var(--ew);color:var(--ei);font-weight:750;box-shadow:inset 0 3px 0 var(--eo)}
+#top #modulos .cn-b[aria-current="page"]::before{color:var(--eo2)}
+#top .eqsp{flex:1 1 0;min-width:0}
+#top #estado{flex:none;align-self:center;display:flex;align-items:center;gap:2px;padding:0;margin:0;white-space:nowrap}
+#top #st-acervo{color:var(--em)!important;font:400 10.5px var(--emono)!important;padding:0 8px}
+#top #st-grava{border:0;border-left:1px solid var(--el);border-radius:0;background:none;font:400 10.5px var(--emono);color:var(--ei2);margin-left:4px;padding:0 8px}
+#top .ac-chip{display:inline-flex;align-items:center;gap:8px;min-height:30px;padding-left:12px;margin-left:4px;border-left:1px solid var(--el)}
+#top .ac-u{font:700 12.5px Figtree,"Segoe UI",system-ui,sans-serif;color:var(--ei);max-width:116px;overflow:hidden;text-overflow:ellipsis}
+#top .ac-p{font:400 9.5px var(--emono);letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--el);color:var(--eo2);padding:2px 6px}
+#top [hidden],#top #bt-acervo,#top #bt-regras{display:none!important}
+#top a:focus-visible,#top button:focus-visible{outline:2px solid var(--eg);outline-offset:-3px}
+@media(max-width:1900px){#top #modulos .cn-b::before{display:none}#top #modulos .cn-b{padding:0 10px}}
+@media(max-width:1320px){header#top{padding:5px 14px 0!important;gap:8px!important}#top #modulos .cn-b{padding:0 8px;font-size:12px}#top .cog-util span,#top .ac-p{display:none}}
+@media(max-width:1100px){#top .nx-irl span,#top #st-acervo{display:none}#top .nx-irl{padding:0 6px}#top .nx-ir{margin-left:0;padding-left:5px}}
+@media(max-width:760px){header#top{position:relative!important;flex-wrap:wrap!important;height:auto!important;padding:5px 12px 2px!important;row-gap:0!important}
+#top #marca{min-height:44px}#top .nx-ey{font-size:9px}#top .nx-on{font-size:19px}#top .eqsp{display:none}#top #modulos{order:4;flex:1 1 100%;margin:0 -12px;border-top:1px solid var(--el);min-height:50px}
+#top .cn-in{flex:1;border-left:0}#top #modulos .cn-b{flex:1 1 0;min-width:max-content;flex-direction:column;justify-content:center;gap:2px;padding:6px 8px;font-size:12px}#top #modulos .cn-b::before{display:block}
+#top #estado{order:5;flex:1 1 100%;justify-content:flex-end;border-top:1px solid var(--el);min-height:38px}#top #st-grava span{display:inline}#top .ac-u{max-width:96px}}
+</style></head>
 <body>
 <header id="top">
-  <div id="marca"><i class="star" aria-hidden="true"></i><div class="mc-bc"><span class="mc-ey">Gabinete CMT · Cognitio</span><div class="mc-cad"><nav id="modulos" aria-label="Cognitio"><button type="button" data-cog="acervo" class="on">Acervo</button><button type="button" data-cog="triagem">Triagem</button><button type="button" data-cog="selecao">Seleção Prévia</button><button type="button" data-cog="mono">Monocráticas</button><button type="button" data-cog="outras">Outras Decisões</button><button type="button" data-cog-regras hidden>Regras de etiquetas</button><a href="/amicus/" class="btn sm">Amicus Curiae</a><a href="/exofficio/" class="btn sm">Office</a><a href="/caput/chefia" id="cog-chefia" class="btn sm" hidden>Chefia</a></nav></div></div></div>
+  <div id="marca"><i class="star" aria-hidden="true"></i><div class="mc-bc"><a class="nx-ey" href="/amicus/" title="Voltar ao Amicus Curiae">CMT · Amicus Curiae</a><div class="mc-cad"><a class="nx-on" href="/cognitio/" aria-current="page">Cognitio<em>.</em></a></div></div></div>
+  <nav class="nx-ir" aria-label="Outras ferramentas"><a class="nx-irl" href="/exofficio/#inicio" title="Ex Officio"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 7h18M3 12h18M3 17h18"/></svg><span>Ex Officio</span></a></nav>
+  <nav id="modulos" class="cog-nav" aria-label="Seções do Cognitio"><div class="cn-in"><button type="button" class="cn-b on" data-cog="acervo" aria-current="page">Acervo</button><button type="button" class="cn-b" data-cog="triagem" aria-current="false">Triagem</button><button type="button" class="cn-b" data-cog="selecao" aria-current="false">Seleção Prévia</button><button type="button" class="cn-b" data-cog="mono" aria-current="false">Monocráticas</button><button type="button" class="cn-b" data-cog="outras" aria-current="false">Outras Decisões</button></div></nav>
+  <span class="eqsp" aria-hidden="true"></span>
   <nav id="abas" role="tablist" aria-label="Abas abertas"></nav>
-  <div id="estado"><span class="k" id="st-acervo" style="color:var(--m)" title="data da última gravação da fonte do acervo">acervo …</span><button class="btn ib" id="bt-acervo" type="button" hidden title="Atualizar acervo fonte" aria-label="Atualizar acervo fonte"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.7 3.6 3 8 3 .9 0 1.8-.1 2.6-.2"/><path d="M4 11v6c0 1.7 3.6 3 8 3"/><path d="M20 5v5"/><path d="M21 16a4 4 0 1 1-1.2-2.8L21 14.4"/><path d="M21 12v2.4h-2.4"/></svg></button><button class="btn ib" id="bt-regras" type="button" hidden title="Regras gerais: escopo da triagem, acervo fonte, etiquetas, designação, produtividade e equipe" aria-label="Regras gerais"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button><button id="st-grava" type="button" title="Estado da gravação no procs-muta"><i aria-hidden="true"></i><span>carregando</span></button></div>
+  <div id="estado"><button type="button" class="cog-util" data-cog-regras hidden title="Regras de etiquetas" aria-label="Regras de etiquetas"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 3h8l10 10-8 8L3 11z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg><span>Etiquetas</span></button><a href="/caput/chefia" id="cog-chefia" class="cog-util" hidden>Chefia</a><span class="k" id="st-acervo" style="color:var(--m)" title="data da última gravação da fonte do acervo">acervo …</span><button class="btn ib" id="bt-acervo" type="button" hidden title="Atualizar acervo fonte" aria-label="Atualizar acervo fonte"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.7 3.6 3 8 3 .9 0 1.8-.1 2.6-.2"/><path d="M4 11v6c0 1.7 3.6 3 8 3"/><path d="M20 5v5"/><path d="M21 16a4 4 0 1 1-1.2-2.8L21 14.4"/><path d="M21 12v2.4h-2.4"/></svg></button><button class="btn ib" id="bt-regras" type="button" hidden title="Regras gerais: escopo da triagem, acervo fonte, etiquetas, designação, produtividade e equipe" aria-label="Regras gerais"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button><button id="st-grava" type="button" title="Estado da gravação no procs-muta"><i aria-hidden="true"></i><span>carregando</span></button><span class="ac-chip" id="cog-chip" hidden><span class="ac-u" id="cog-user"></span><span class="ac-p" id="cog-role"></span></span></div>
 </header>
 <main id="main"><div id="carga" data-cmt-loader="adopt-inline" data-cmt-loader-family="central"><b>Carregando o acervo…</b><span id="carga-msg">Lendo a fonte do acervo e o trabalho do gabinete no procs-muta.</span></div></main>
 <section id="aba-pautas" hidden aria-label="Pautas de julgamento"><main id="pt-view"><div id="pt-carga" role="status" data-cmt-loader="adopt-inline" data-cmt-loader-family="central"><b>Carregando as pautas…</b><span>Lendo o acervo, as sessões e as regras no procs-muta.</span></div></main></section>
@@ -4132,7 +4176,7 @@ var SO_TRI='';
     COG_SESSAO=await W.CognitioAuth.lerSessao();
     if(!COG_SESSAO)COG_SESSAO=await portaOffice();
     await W.CognitioAuth.ponte();
-    const ey=$('.mc-ey');if(ey)ey.textContent='Gabinete CMT · Cognitio · '+COG_SESSAO.usuario;
+    const chip=$('#cog-chip');$('#cog-user').textContent=COG_SESSAO.usuario;$('#cog-role').textContent=COG_SESSAO.gestor?'Gestor':'Equipe';chip.hidden=false;
     if(COG_SESSAO.gestor){$('[data-cog-regras]').hidden=false;$('#cog-chefia').hidden=false;}
     else {SO_TRI=COG_SESSAO.usuario;D.body.classList.add('so-tri');}
     frame.src='/init/motor/index.html?cognitio=1';
