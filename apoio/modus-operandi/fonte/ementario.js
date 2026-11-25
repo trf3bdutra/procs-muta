@@ -598,7 +598,7 @@ function rapHtml(nq,duas){
 function rapGrava(ops,msg,ok){RAP.grav=true;xManual();
   fetch('/api/editor',{method:'POST',credentials:'same-origin',cache:'no-store',headers:Object.assign({'Content-Type':'application/json'},(typeof EDCMT!=='undefined'&&EDCMT)?{'x-cmt':'1','x-cmt-chave':EDCMTK}:{}),body:JSON.stringify({msg:msg,colecoes:{rap:ops}})})
   .then(function(r){return r.json().catch(function(){return {};}).then(function(j){if(!r.ok)throw new Error(j.erro||('HTTP '+r.status));return j;});})
-  .then(function(){RAP.grav=false;ok();xManual();toast('Gravado nas Diretrizes');})
+  .then(function(){RAP.grav=false;ok();xManual();toast('Gravado no Breviário');})
   .catch(function(e){RAP.grav=false;xManual();toast('Não foi possível gravar: '+e.message);});}
 function rapCarrega(){if(!window.CMT_SITE)return;fetch('/api/rapidas',{credentials:'same-origin',cache:'no-store'}).then(function(r){if(!r.ok)throw 0;return r.json();}).then(function(j){RAP.vivo=j.registros||[];if(!$('#v-dir').hidden)xManual();}).catch(function(){});}
 document.addEventListener('cmt-acesso',function(){rapCarrega();if(!$('#v-dir').hidden&&ED)xManual();});
@@ -607,7 +607,7 @@ function rapBase(){if(!RAP.vivo)RAP.vivo=((ED&&ED.rapidas)||[]).slice();return R
 function rapNovo(){var t=RAP.txt.trim();if(!t){toast('Escreva a entrada');return;}var A=window.CMT_ACESSO?window.CMT_ACESSO():{};
   var d=new Date(),id='rap-'+d.toISOString().slice(0,10).replace(/-/g,'')+'-'+d.getTime().toString(36).slice(-5);
   var rec={id:id,data:d.toISOString().slice(0,10),tipo:RAP.tipo,texto:t,origem:RAP.orig.trim(),autor:A.usuario||'',situacao:'nova',destino:''};
-  rapGrava([{op:'set',id:id,rec:rec,orig:'__novo__',idx:0}],'Diretrizes: entrada rápida ('+RAP.tipo.toLowerCase()+')',function(){rapBase().unshift(rec);RAP.txt='';RAP.orig='';});}
+  rapGrava([{op:'set',id:id,rec:rec,orig:'__novo__',idx:0}],'Breviário: entrada rápida ('+RAP.tipo.toLowerCase()+')',function(){rapBase().unshift(rec);RAP.txt='';RAP.orig='';});}
 function rapMuda(id,fn,msg){var r=rapAcha(id);if(!r)return;var o=rapJ(r),n=JSON.parse(o);if(fn(n)===false)return;
   rapGrava([{op:'set',id:id,rec:n,orig:o,idx:0}],msg,function(){var L=rapBase();var i=L.indexOf(rapAcha(id));if(i>=0)L[i]=n;});}
 /* manual gerado das diretrizes (dados): no editor, é o que se edita no lugar; no Compendium vale o manual de redação de editorial_d.js */
@@ -676,10 +676,10 @@ $('#x-man').addEventListener('click',function(e){var b=e.target.closest('[data-r
   if(b.hasAttribute('data-rapf')){RAP.filtro=b.getAttribute('data-rapf');xManual();return;}
   if(b.hasAttribute('data-rapadd')){rapNovo();return;}
   var id=b.getAttribute('data-rapinc')||b.getAttribute('data-rapsit')||b.getAttribute('data-rapdel');
-  if(b.hasAttribute('data-rapinc')){var dst=window.prompt('Onde foi incorporada? (ex.: Manual · Vocabulário, modelo, parágrafo)','');if(dst===null)return;rapMuda(id,function(n){n.situacao='incorporada';n.destino=dst.trim();},'Diretrizes: entrada rápida incorporada');return;}
-  if(b.hasAttribute('data-rapsit')){rapMuda(id,function(n){n.situacao='nova';n.destino='';},'Diretrizes: entrada rápida reaberta');return;}
+  if(b.hasAttribute('data-rapinc')){var dst=window.prompt('Onde foi incorporada? (ex.: Manual · Vocabulário, modelo, parágrafo)','');if(dst===null)return;rapMuda(id,function(n){n.situacao='incorporada';n.destino=dst.trim();},'Breviário: entrada rápida incorporada');return;}
+  if(b.hasAttribute('data-rapsit')){rapMuda(id,function(n){n.situacao='nova';n.destino='';},'Breviário: entrada rápida reaberta');return;}
   if(b.hasAttribute('data-rapdel')){if(!window.confirm('Excluir esta entrada rápida?'))return;var r=rapAcha(id);if(!r)return;
-    rapGrava([{op:'del',id:id,orig:rapJ(r)}],'Diretrizes: entrada rápida excluída',function(){var L=rapBase();L.splice(L.indexOf(rapAcha(id)),1);});}});
+    rapGrava([{op:'del',id:id,orig:rapJ(r)}],'Breviário: entrada rápida excluída',function(){var L=rapBase();L.splice(L.indexOf(rapAcha(id)),1);});}});
 $('#x-man').addEventListener('input',function(e){if(e.target.matches('[data-raptxt]')){RAP.txt=e.target.value;return;}if(e.target.matches('[data-raporig]')){RAP.orig=e.target.value;return;}});
 $('#x-man').addEventListener('change',function(e){if(e.target.matches('[data-raptipo]'))RAP.tipo=e.target.value;});
 $('#x-man').addEventListener('keydown',function(e){if(e.target.matches('[data-raptxt]')&&(e.ctrlKey||e.metaKey)&&e.key==='Enter'){e.preventDefault();rapNovo();}});

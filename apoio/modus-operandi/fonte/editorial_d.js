@@ -378,7 +378,7 @@ function dkHead(){var h=$('#v-edit .pg-h');if(!h)return;var ed=XS.ed||'pecas',t=
   if(k)k.textContent=I[0];if(t)t.textContent=I[1];var d=$('#x-desc');if(d)d.textContent=I[2];var dv=$('#x-dev');if(!dv&&d){dv=document.createElement('p');dv.id='x-dev';d.parentNode.insertBefore(dv,d.nextSibling);}if(dv){dv.hidden=!I[3];dv.innerHTML=I[3]?'<b>Em desenvolvimento.</b> '+esc(I[3]):'';}
   var sb=$('#x-sub');if(sb&&!sb.querySelector('.dgp')){var gp=document.createElement('span');gp.className='dgp';gp.setAttribute('role','group');gp.setAttribute('aria-label','Padrão: versões alternativas');gp.innerHTML='<span class="dgl" data-n="01">Padrão</span><span class="dgs"></span>';
     sb.insertBefore(gp,sb.firstChild);['pecas','mod'].forEach(function(k){var b=sb.querySelector('button[data-s="'+k+'"]');if(b)gp.querySelector('.dgs').appendChild(b);});}
-  $$('#x-sub button').forEach(function(b){var k=b.getAttribute('data-s'),n={dir:'02'}[k];if(n)b.setAttribute('data-n',n);else b.removeAttribute('data-n');var tx={pecas:'Minutário',mod:'Modelos',dir:'Diretrizes'}[k];if(tx&&b.textContent!==tx)b.textContent=tx;});}
+  $$('#x-sub button').forEach(function(b){var k=b.getAttribute('data-s'),n={dir:'02'}[k];if(n)b.setAttribute('data-n',n);else b.removeAttribute('data-n');var tx={pecas:'Minutário',mod:'Modelos',dir:'Breviário'}[k];if(tx&&b.textContent!==tx)b.textContent=tx;});}
 document.addEventListener('click',function(e){if(e.target.closest&&e.target.closest('#x-sub button'))setTimeout(dkHead,0);});
 function xPagina(){
   if(dk28()){var w28=$('#x-wrap'),t28=$('#x-top');if(!t28){t28=document.createElement('div');t28.id='x-top';w28.insertBefore(t28,w28.firstChild);}t28.innerHTML=dkBarra2();dkModo28(true);CQX.render28();dkHead();return;}
@@ -567,7 +567,7 @@ document.addEventListener('cmt-acesso',function(){if(XS.ed==='dir'&&!$('#v-edit'
 function dirAv(){try{return !!(window.CMT_ACESSO&&window.CMT_ACESSO().avancado);}catch(e){return false;}}
 function xManual(){if(window.VDM_RAP_TAB&&window.VDM_RAPTAB){window.VDM_RAPTAB();return;}if(window.VDM_MN_DADOS&&typeof xManualDados==='function'){xManualDados();return;}var M=$('#x-man');if(!M)return;var f=document.getElementById('dir-fr');
   if(!f||!M.contains(f)){var src=document.getElementById('dir-manual');if(!src){M.innerHTML='<p class="empty">Manual de redação indisponível.</p>';return;}
-    M.innerHTML='<iframe id="dir-fr" title="Diretrizes · Manual de redação" scrolling="no"></iframe>';f=M.querySelector('#dir-fr');
+    M.innerHTML='<iframe id="dir-fr" title="Breviário · Manual de redação" scrolling="no"></iframe>';f=M.querySelector('#dir-fr');
     f.addEventListener('load',function(){dirPrep(f);});var h='';try{h=JSON.parse(src.textContent);}catch(e){}f.srcdoc=h;return;}
   dirPrep(f);}
 function dirAjusta(f){try{var D=f.contentDocument;var h=Math.max(D.documentElement.scrollHeight,D.body.scrollHeight);if(Math.abs((parseInt(f.style.height)||0)-h)>2)f.style.height=h+'px';}catch(e){}}
@@ -577,10 +577,10 @@ function rapLiga(R){
       if(b.hasAttribute('data-rapf')){RAP.filtro=b.getAttribute('data-rapf');xManual();return;}
       if(b.hasAttribute('data-rapadd')){rapNovo();return;}
       var id=b.getAttribute('data-rapinc')||b.getAttribute('data-rapsit')||b.getAttribute('data-rapdel');
-      if(b.hasAttribute('data-rapinc')){var dst=window.prompt('Onde foi incorporada? (ex.: Manual · Vocabulário, modelo, parágrafo)','');if(dst===null)return;rapMuda(id,function(n){n.situacao='incorporada';n.destino=dst.trim();},'Diretrizes: entrada rápida incorporada');return;}
-      if(b.hasAttribute('data-rapsit')){rapMuda(id,function(n){n.situacao='nova';n.destino='';},'Diretrizes: entrada rápida reaberta');return;}
+      if(b.hasAttribute('data-rapinc')){var dst=window.prompt('Onde foi incorporada? (ex.: Manual · Vocabulário, modelo, parágrafo)','');if(dst===null)return;rapMuda(id,function(n){n.situacao='incorporada';n.destino=dst.trim();},'Breviário: entrada rápida incorporada');return;}
+      if(b.hasAttribute('data-rapsit')){rapMuda(id,function(n){n.situacao='nova';n.destino='';},'Breviário: entrada rápida reaberta');return;}
       if(b.hasAttribute('data-rapdel')){if(!window.confirm('Excluir esta entrada rápida?'))return;var x=rapAcha(id);if(!x)return;
-        rapGrava([{op:'del',id:id,orig:rapJ(x)}],'Diretrizes: entrada rápida excluída',function(){var L=rapBase();L.splice(L.indexOf(rapAcha(id)),1);});}});
+        rapGrava([{op:'del',id:id,orig:rapJ(x)}],'Breviário: entrada rápida excluída',function(){var L=rapBase();L.splice(L.indexOf(rapAcha(id)),1);});}});
   R.addEventListener('input',function(e){if(e.target.matches('[data-raptxt]'))RAP.txt=e.target.value;else if(e.target.matches('[data-raporig]'))RAP.orig=e.target.value;});
   R.addEventListener('change',function(e){if(e.target.matches('[data-raptipo]'))RAP.tipo=e.target.value;});
   R.addEventListener('keydown',function(e){if(e.target.matches('[data-raptxt]')&&(e.ctrlKey||e.metaKey)&&e.key==='Enter'){e.preventDefault();rapNovo();}});
@@ -607,7 +607,7 @@ try{new MutationObserver(function(){var f=document.getElementById('dir-fr');if(f
 /* ===== Navegação única do Compendium, dentro da barra do cabeçalho (como as abas do Ex Officio): sem "Editorial";
    abas comuns (Ementário · Padrão: Minuta-Matriz e Modelos · Diretrizes; a Consulta saiu da navegação e só abre pelo botão do cartão no Ex Officio) e abas do acesso avançado (Enunciados · Repertório · Enciclopédia) ===== */
 (function(){var top=document.querySelector('header.top');if(!top)return;
-  var IT=[['ement','Ementário'],['mod','Modelos'],['dir','Diretrizes'],['pecas','Minutário'],['||'],['temas','Enunciados','Acesso avançado'],['rep','Repertório'],['enc','Enciclopédia']];
+  var IT=[['ement','Ementário'],['mod','Modelos'],['dir','Breviário'],['pecas','Minutário'],['||'],['temas','Enunciados','Acesso avançado'],['rep','Repertório'],['enc','Enciclopédia']];
   var bar=document.createElement('nav');bar.id='cmp-nav';bar.setAttribute('aria-label','Seções do Compendium');
   var h='<div class="cn-in">';IT.forEach(function(x){if(x[0]==='|'){h+='<span class="cn-sep" aria-hidden="true"></span>';return;}if(x[0]==='||'){h+='<span class="cn-sep av" data-av hidden aria-hidden="true"></span>';return;}
     var av=['temas','rep','enc'].indexOf(x[0])>=0;h+=(x[2]?'<span class="cn-g'+(av?' av':'')+'"'+(av?' data-av hidden':'')+'>'+x[2]+'</span>':'')+'<button type="button" class="cn-b" data-cn="'+x[0]+'"'+(av?' data-av hidden':'')+' aria-current="false">'+x[1]+'</button>';});
