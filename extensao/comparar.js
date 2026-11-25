@@ -145,10 +145,11 @@ function triagem() {
 /* semelhança de cada candidato com o editor (para sugerir e ordenar) */
 function textoItem(it) { return (it.secoes || []).map(function (s) { return (s.ps || []).join(' '); }).join(' '); }
 function ranquear(lista) {
-  var tx = (ED.estado().texto || '');
+  var k = window.MutaGabinete && window.MutaGabinete.casoPrec ? window.MutaGabinete.casoPrec() : null;
+  var tx = k ? [k.assunto,k.subassuntos,k.questoes,k.sintese,k.especificidades].filter(Boolean).join(' ') : '';
   if (!tx) return lista.map(function (x) { return { x: x, s: 0 }; });
   var W = CX.palavras(tx);
-  return lista.map(function (x) { if (!x._w) x._w = CX.palavras(textoItem(x) || x.texto || ''); return { x: x, s: CX.semelhanca(x._w, W) }; }).sort(function (a, b) { return b.s - a.s; });
+  return lista.map(function (x) { if (!x._w) x._w = CX.palavras([x.nome,x.assunto,x.classe,x.tags,textoItem(x) || x.texto || ''].filter(Boolean).join(' ')); return { x: x, s: CX.semelhanca(x._w, W) }; }).sort(function (a, b) { return b.s - a.s; });
 }
 function filtra(lista, campos) {
   var q = String(C.q || '').trim(); if (!q) return lista;
@@ -173,7 +174,7 @@ function itemAtual() {
 function itens(lista, rot, sub, val, atual) {
   return '<div class="cx-lista">' + lista.map(function (z) {
     var x = z.x || z, v = val(x);
-    return '<button type="button" class="cx-it' + (v === atual ? ' sel' : '') + '" data-s="' + esc(v) + '"><b>' + esc(rot(x)) + '</b><small>' + esc(sub(x)) + (z.s ? ' · ' + Math.round(100 * z.s) + '% de palavras em comum com o editor' : '') + '</small></button>';
+    return '<button type="button" class="cx-it' + (v === atual ? ' sel' : '') + '" data-s="' + esc(v) + '"><b>' + esc(rot(x)) + '</b><small>' + esc(sub(x)) + (z.s ? ' · ' + Math.round(100 * z.s) + '% de similaridade textual com o caso' : '') + '</small></button>';
   }).join('') + '</div>';
 }
 function seletor() {
@@ -209,7 +210,7 @@ function seletor() {
   if (!d) return '<p class="muted">Baixando os modelos do gabinete…</p>';
   if (C.fonte === 'modelo') {
     var L = ranquear(filtra(d.modelos, ['nome', 'assunto', 'classe', 'tags', 'pron'])).slice(0, C.q ? 40 : 12);
-    return busca + '<p class="muted cx-n">' + (C.q ? 'com “' + esc(C.q) + '”' : 'mais parecidos com o editor') + ' · ' + d.modelos.length + ' no banco</p>' +
+    return busca + '<p class="muted cx-n">' + (C.q ? 'com “' + esc(C.q) + '”' : 'mais relacionados ao caso') + ' · ' + d.modelos.length + ' no banco</p>' +
       itens(L, function (x) { return x.nome; }, function (x) { return [x.pron, x.classe, x.assunto].filter(Boolean).join(' · '); }, function (x) { return x.id; }, s);
   }
   if (C.fonte === 'matriz') {
@@ -430,20 +431,20 @@ function Sg(v) { return v == null ? '' : String(v).trim(); }
 var SUG = { k: '', L: null, busy: false, erro: '' };
 function sugPrec(atual) {
   var GB = window.MutaGabinete, P = window.MutaPrecedentes, E = window.MutaEmentario;
-  var k = GB && GB.casoPrec ? GB.casoPrec() : null, tx = Sg(ED.estado().texto || '');
+  var k = GB && GB.casoPrec ? GB.casoPrec() : null;
   if (!k || !P || !P.buscar || !E || !E.porNumero) return '';
-  var caso = Object.assign({}, k, { questoes: [k.questoes, tx.slice(0, 4000)].join(' ') }), chv = JSON.stringify(caso).length + '|' + JSON.stringify(k) + '|' + tx.length + tx.slice(0, 200);
+  var caso = k, chv = JSON.stringify(k);
   if (SUG.k !== chv && !SUG.busy) {
     SUG.k = chv; SUG.busy = true; SUG.L = null; SUG.erro = '';
     P.buscar(caso).then(function (L) {
       return Promise.all(L.map(function (o) { return E.porNumero(o.r.n).then(function (j) { var x = (j || []).filter(function (y) { return !o.r.d || y.rotulo.indexOf(o.r.d.split('-').reverse().join('/')) >= 0; })[0] || (j || [])[0];
-        return x ? { x: { id: x.id, n: x.rotulo, cl: '', d: [o.r.r ? Sg(o.r.r).replace(/\.$/, '') : '', o.mot.join(' · ') || 'palavras do caso e do editor'].filter(Boolean).join(' · ') } } : null; }).catch(function () { return null; }); }));
+        return x ? { x: { id: x.id, n: x.rotulo, cl: '', d: [o.r.r ? Sg(o.r.r).replace(/\.$/, '') : '', o.mot.join(' · ') || 'palavras do caso'].filter(Boolean).join(' · ') } } : null; }).catch(function () { return null; }); }));
     }).then(function (R) { SUG.L = R.filter(Boolean); }, function (e) { SUG.erro = e.message; SUG.L = []; }).then(function () { SUG.busy = false; if (C.fonte === 'ement') render(); });
   }
-  var cab = '<p class="muted cx-n">Sugeridos pelo caso' + (tx ? ' e pelo texto do editor' : '') + '</p>';
+  var cab = '<p class="muted cx-n">Sugeridos pelo caso' + '</p>';
   if (SUG.busy || SUG.L == null) return cab + '<p class="muted">Procurando no Ementário…</p>';
   if (SUG.erro) return cab + '<p class="status err">' + esc(SUG.erro) + '</p>';
-  if (!SUG.L.length) return cab + '<p class="muted">Nenhum julgado compatível. Preencha assunto detalhado e questões no prontuário, ou leia o editor.</p>';
+  if (!SUG.L.length) return cab + '<p class="muted">Nenhum julgado compatível. Preencha assunto detalhado e questões no prontuário.</p>';
   return cab + itens(SUG.L, function (x) { return x.n; }, function (x) { return x.d; }, function (x) { return x.id; }, atual) + '<p class="muted cx-n">Vinculados ao prontuário</p>';
 }
 function carregarJulgado(id) {
