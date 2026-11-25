@@ -38,3 +38,18 @@ test('Zernio replica em destinatário distinto sem duplicar o número principal'
     for(const k of keys) { if(backup[k]===undefined) delete process.env[k]; else process.env[k]=backup[k]; }
   }
 });
+
+test('Etapas CMT preservam datas anteriores e desfazem somente a etapa e as seguintes', () => {
+  const {camposEtapa} = require('../api/pauta');
+  const it={dataMinuta:'2026-11-20',dataCorrecao:'',dataLiberacao:''};
+  assert.deepEqual(camposEtapa(it,{campo:'dataLiberacao',hoje:'2026-11-25'}),
+    {dataMinuta:'2026-11-20',dataCorrecao:'2026-11-25',dataLiberacao:'2026-11-25'});
+  assert.deepEqual(camposEtapa(it,{campo:'dataCorrecao',desfazer:true}),{dataCorrecao:'',dataLiberacao:''});
+  assert.deepEqual(camposEtapa(it,{campo:'dataLiberacao',desfazer:true}),{dataLiberacao:''});
+  assert.throws(()=>camposEtapa(it,{campo:'campo_inexistente'}),/Etapa inválida/);
+});
+test('A triar: a faixa delega ao painel existente, sem interceptar controles', () => {
+  const src=require('node:fs').readFileSync(require('node:path').join(__dirname,'../../../caput/triagem/index.html'),'utf8');
+  assert.ok(src.includes("q('tr.at-r')") && src.includes("!t.closest('input,button,a,select,label,textarea,[contenteditable]')"));
+  assert.ok(src.includes("const ctl = b.querySelector('[data-triexp]'); if (ctl) { ctl.click(); return; }"));
+});
