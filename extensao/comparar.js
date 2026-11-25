@@ -52,7 +52,7 @@ var FORA_CMP = { matriz: 1, lote: 1, tri: 1, par: 1 };
 function fontes() { var ok = eh2886(); if (FORA_CMP[C.fonte] || C.fonte === 'm2886') C.fonte = 'modelo'; return FONTES.filter(function (f) { return !FORA_CMP[f[0]] && f[0] !== 'm2886'; }); }
 function processo() {
   var k = chave();
-  if (k !== C.pronChave) { C.pronChave = k; C.pron = ''; C.fonte = 'modelo'; C.sel = {}; C.q = ''; C.ref=''; C.parteFonte='inteira'; ULT=null; }
+  if (k !== C.pronChave) { C.pronChave = k; C.pron = ''; C.fonte = 'modelo'; C.sel = {}; C.q = ''; C.ref=''; C.parteFonte='inteira'; C.fusao=false; ULT=null; }
   C.pronAuto = pronSugerido();
   return C.pron || C.pronAuto;
 }
@@ -405,14 +405,22 @@ function paragrafosPadrao() {
 }
 
 /* ---------- desenho ---------- */
+function sincronizarFusao(){
+  var work=caixa.querySelector('.hero-review-workspace'),go=caixa.querySelector('[data-c="comparar"]'),out=caixa.querySelector('.hero-review-fused-content');
+  if(!work||!go||!out)return;
+  var ok=!!(ED.estado().texto&&itemAtual()),on=!!(C.fusao&&ok);
+  if(!ok)C.fusao=false;
+  work.classList.toggle('is-fused',on);out.hidden=!on;
+  go.textContent=on?'Separar textos':'Comparar textos';go.setAttribute('aria-pressed',String(on));go.disabled=!ok;
+}
 function atualizarResultado(){
   var out=caixa.querySelector('.cx-res');if(!out)return;
   out.innerHTML=resultadoHtml();var bar=caixa.querySelector('.hero-v53-review-actions'),side=out.querySelector('[data-c="janela"]');if(bar){var old=bar.querySelector('[data-c="janela"]');if(old)old.remove();if(side)bar.append(side);}
-  var d=out.closest('.hero-review-result');if(d)d.open=true;
+  sincronizarFusao();
 }
 function render() {
   if (!caixa || !aberta()) return;
-  var y = $('panel-min').scrollTop, previous=caixa.querySelector('.hero-review-result'), resultOpen=previous?previous.open:!!C.resultOpen, scrolls=Array.from(caixa.querySelectorAll('.mn-tx,.hero-v53-ref-text')).map(function(e){return e.scrollTop;}), foco = document.activeElement && document.activeElement.dataset ? document.activeElement.dataset.c : null;
+  var y = $('panel-min').scrollTop, scrolls=Array.from(caixa.querySelectorAll('.mn-tx,.hero-v53-ref-text')).map(function(e){return e.scrollTop;}), foco = document.activeElement && document.activeElement.dataset ? document.activeElement.dataset.c : null;
   caixa.innerHTML = editorHtml() +
     '<div class="seg cx-fontes" role="tablist" aria-label="Comparar com">' + fontes().map(function (f) { return '<button type="button" role="tab" data-f="' + f[0] + '" aria-selected="' + (C.fonte === f[0]) + '">' + f[1] + '</button>'; }).join('') + '</div>' +
     '<div class="cx-pick">' + seletor() + '</div>' +
@@ -424,7 +432,7 @@ function render() {
     var fontesEl=caixa.querySelector('.cx-fontes'),pick=caixa.querySelector('.cx-pick'),op=caixa.querySelector('.cx-op1'),res=caixa.querySelector('.cx-res'),ed=caixa.querySelector('.mn-ed');
     if(ed&&fontesEl&&pick&&res){
       var it=itemAtual(),ref=document.createElement('section');ref.className='card hero-v53-ref';
-      var head=document.createElement('header');head.className='hero-review-ref-head';var h=document.createElement('h4');h.className='hero-v53-page-title';h.textContent='Texto de referência';var meta=document.createElement('small');meta.className='muted';meta.textContent=it?String(it.titulo||it.title||it.nome||'Referência selecionada'):'Nenhuma referência selecionada';head.append(h,meta);ref.append(head);
+      var head=document.createElement('header');head.className='hero-review-ref-head';var h=document.createElement('h4');h.className='hero-v53-page-title';h.textContent='Texto de referência';var meta=document.createElement('small');meta.className='muted';meta.textContent=it?String(it.rotulo||it.titulo||it.title||it.nome||'Referência selecionada'):'Nenhuma referência selecionada';head.append(h,meta);ref.append(head);
       if(C.fonte==='colar'){var ta=pick.querySelector('textarea');if(ta)ref.append(ta);}
       else{var tx=document.createElement('div');tx.className='hero-v53-ref-text tx-j';var bs=it?blocosFonte(it):[];bs.forEach(function(b){var p=document.createElement(b.h?'h4':'p');p.textContent=String(b.h||b.p||'');tx.append(p);});if(!bs.length)tx.textContent='Selecione um modelo ou precedente.';ref.append(tx);}
       var busca=document.createElement('details');busca.className='hero-v53-ref-search';busca.open=!!C.buscaRefAberta;var sm=document.createElement('summary');sm.textContent='Buscar referência';busca.append(sm,fontesEl,pick);busca.addEventListener('toggle',function(){if(busca.isConnected)C.buscaRefAberta=busca.open;});ref.append(busca);
@@ -436,7 +444,8 @@ function render() {
       var work=document.createElement('section');work.className='hero-review-workspace';var grid=document.createElement('div');grid.className='hero-review-documents';ed.classList.add('hero-review-document');ref.classList.add('hero-review-document');ed.before(work);
       var divider=document.createElement('div');divider.className='hero-review-divider';
       var mark=document.createElement('span');mark.className='hero-review-cross';mark.setAttribute('aria-label','Comparação entre os textos');mark.textContent='×';
-      divider.append(mark,bar);grid.append(ed,divider,ref);work.append(grid);var result=document.createElement('details');result.className='hero-review-result card';result.open=resultOpen;var rs=document.createElement('summary');rs.textContent='Resultado da comparação';result.append(rs,res);caixa.append(result);result.addEventListener('toggle',function(){if(result.isConnected)C.resultOpen=result.open;});
+      divider.append(mark,bar);grid.append(ed,divider,ref);work.append(grid);
+      var result=document.createElement('section');result.className='hero-review-fused-content';result.setAttribute('aria-label','Folha de comparação');result.append(res);ref.insertBefore(result,busca);sincronizarFusao();
     }
   }
   $('panel-min').scrollTop = y;Array.from(caixa.querySelectorAll('.mn-tx,.hero-v53-ref-text')).forEach(function(e,i){if(scrolls[i]!=null)e.scrollTop=scrolls[i];});
@@ -482,7 +491,7 @@ function carregarJulgado(id) {
 var tq = 0;
 caixa.addEventListener('click', function (e) {
   var b = e.target.closest('button'); if (!b) return;
-  if(b.dataset.c==='comparar'){atualizarResultado();return;}
+  if(b.dataset.c==='comparar'){if(C.fusao){C.fusao=false;sincronizarFusao();}else if(ED.estado().texto&&itemAtual()){C.fusao=true;C.vista='folha';atualizarResultado();}return;}
   if (b.dataset.c === 'ler') { ED.ler().catch(function () {}); return; }
   if (b.dataset.c === 'v:recortes' || b.dataset.c === 'v:folha') { C.vista = b.dataset.c.slice(2); render(); return; }
   if (b.dataset.c === 'janela') { if (ULT && ULT.it && window.MutaJanela) window.MutaJanela.abrir('comparar', 'Comparação · ' + ULT.rotulo, ladoALadoHtml(alinhar(ULT.it), ULT.rotulo)); return; }
@@ -491,9 +500,9 @@ caixa.addEventListener('click', function (e) {
   if (b.dataset.c === 'edtg') { C.edAberto = !C.edAberto; guarda(); render(); return; }
   if (b.dataset.c === 'col-loc') { var d = $('panel-lote'); if (d) { d.open = true; if (window.MutaLote) window.MutaLote.abrir(); d.scrollIntoView({ block: 'start' }); } return; }
   if (b.dataset.c === 'col-env') { if (window.MutaLote && window.MutaLote.transferir) window.MutaLote.transferir(); return; }
-  if (b.dataset.f) { C.fonte = b.dataset.f; C.q = ''; C.parteFonte = 'inteira'; guarda(); preparar(); return; }
+  if (b.dataset.f) { C.fusao=false; C.fonte = b.dataset.f; C.q = ''; C.parteFonte = 'inteira'; guarda(); preparar(); return; }
   if (b.dataset.s != null) {
-    C.sel[C.fonte] = b.dataset.s; C.parteFonte = 'inteira';
+    C.fusao=false; C.sel[C.fonte] = b.dataset.s; C.parteFonte = 'inteira';
     if (C.fonte === 'ement' && !C.ement[b.dataset.s]) { carregarJulgado(b.dataset.s); return; }
     if (C.fonte === 'tri' && /^e:/.test(b.dataset.s) && !C.ement[b.dataset.s.slice(2)]) { carregarJulgado(b.dataset.s.slice(2)); return; }
     render(); return;
@@ -501,7 +510,7 @@ caixa.addEventListener('click', function (e) {
 });
 caixa.addEventListener('change', function (e) {
   var t = e.target, k = t.dataset && t.dataset.c; if (!k) return;
-  if(k==='pron'){C.pron=t.value;C.sel.matriz='';preparar();return;}
+  if(k==='pron'){C.fusao=false;C.pron=t.value;C.sel.matriz='';preparar();return;}
   if (k === 'parteEd') C.parteEd = t.value; else if (k === 'parteFonte') C.parteFonte = t.value; else if (k === 'ws') C.ws = t.checked; else if (k === 'sd') C.sd = t.checked; else return;
   guarda(); render();
 });
@@ -510,7 +519,7 @@ caixa.addEventListener('input', function (e) {
   clearTimeout(tq);
   tq = setTimeout(function () {
     if (k === 'q') { C.q = t.value; render(); }
-    else if (k === 'ref') { C.ref = t.value; var r = caixa.querySelector('.cx-res'); if (r) r.innerHTML = resultadoHtml();var go=caixa.querySelector('[data-c="comparar"]');if(go)go.disabled=!ED.estado().texto||!itemAtual();var bar=caixa.querySelector('.hero-v53-review-actions'),side=r&&r.querySelector('[data-c="janela"]');if(bar){var old=bar.querySelector('[data-c="janela"]');if(old)old.remove();if(side)bar.append(side);} }
+    else if (k === 'ref') { C.ref = t.value; atualizarResultado(); }
     else if (k === 'colarEd') ED.colar(t.value);
   }, 350);
 });
@@ -520,11 +529,11 @@ window.MutaComparar = {
   estruturaConformidade: estruturaConformidade,
   /* 0.50: a minuta-matriz do processo (para o tipo de voto no cartão), só se os modelos já foram lidos */
   matriz: function () { try { return C.dados ? matrizDoProcesso() : null; } catch (e) { return null; } },
-  triagem: function () { processo(); C.fonte = 'tri'; C.tri = null; C.triChave = ''; guarda(); if (window.MutaAbas) window.MutaAbas.ir('min'); else window.MutaComparar.abrir(); },
+  triagem: function () { processo(); C.fusao=false; C.fonte = 'tri'; C.tri = null; C.triChave = ''; guarda(); if (window.MutaAbas) window.MutaAbas.ir('min'); else window.MutaComparar.abrir(); },
   abrir: function () { processo(); if (C.fonte === 'matriz' || C.fonte === 'modelo' || C.fonte === 'm2886' || C.fonte === 'par') dados().then(render); preparar(); var E = ED.estado(); if (!E.texto && !E.lendo) ED.ler().catch(function () {}); },
   /* o Ementário manda um julgado para comparar */
   precedente: function (id) {
-    processo(); C.fonte = 'ement'; C.sel.ement = id; guarda();
+    processo(); C.fusao=false; C.fonte = 'ement'; C.sel.ement = id; guarda();
     if (C.ement[id] && C.ement[id].erro) delete C.ement[id];
     if (window.MutaAbas) window.MutaAbas.ir('min'); else window.MutaComparar.abrir();
   },
