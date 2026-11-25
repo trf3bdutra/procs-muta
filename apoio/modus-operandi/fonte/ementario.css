@@ -719,3 +719,14 @@ html.emb-cmt body #e-aside{top:0!important;max-height:100vh!important}
 .pp-ref-grupo .pp-ref-text:not(:first-child){margin-top:5px}
 .pp-ref-grupo p.meta{margin:0}
 .pp-referencias .pp-interna>.pp-k:first-child{margin-top:0!important}
+
+/* Cabeçalho do prontuário: etiquetas informativas, rótulo e valor em uma unidade. */
+.pp-metadados{gap:5px;align-items:stretch;margin:7px 0 0}
+.pp-metadados>span.pp-chip{display:inline-flex;flex-direction:column;justify-content:center;gap:2px;padding:5px 9px 6px;border-radius:3px;line-height:1.15;min-width:0;max-width:100%;background:var(--card);font-weight:600}
+.pp-metadados>.pp-chip small{font:500 8.5px/1.2 var(--emono,monospace);letter-spacing:.09em;text-transform:uppercase;color:var(--mut);white-space:nowrap}
+.pp-metadados>.pp-chip b{font-size:11.5px;font-weight:650;color:var(--ink);overflow-wrap:anywhere}
+.pp-metadados>.pp-res{border-left:3px solid var(--rc)!important;background:color-mix(in srgb,var(--rc) 9%,var(--card))!important}
+.pp-metadados>.pp-chip.ok{border-color:color-mix(in srgb,var(--good) 55%,var(--line));background:color-mix(in srgb,var(--good) 6%,var(--card))}
+.pp-metadados>.pp-chip.ok b{color:var(--good)}
+.pp-metadados>.pp-chip-muted b{color:var(--mut);font-weight:500}
+@media(max-width:520px){.pp-metadados>span.pp-chip{padding:5px 7px}.pp-metadados>.pp-chip b{font-size:11px}}
