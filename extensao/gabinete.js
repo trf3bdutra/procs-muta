@@ -62,7 +62,7 @@ function V(sec, k) { var id = sec + '.' + k; return id in G.pend ? G.pend[id] : 
 function fonteVal(c) { var f = G.fo || {}, L = c.fonte || [];
   if (L.length === 2 && f[L[0]] && typeof f[L[0]] === 'object') { var x = f[L[0]][L[1]]; return x == null ? '' : S(x); }
   for (var i = 0; i < L.length; i++) { var v = f[L[i]]; if (v != null && S(v) !== '' && typeof v !== 'object') return S(v); } return ''; }
-function editavel(c) { return !!c.secao && c.editavel !== false && !c.calculado; }
+function editavel(c) { return !(window.MUTA_WEB&&window.MUTA_WEB.leitura) && !!c.secao && c.editavel !== false && !c.calculado; }
 function destGrav() { return S(V('producao', 'Destino')); }
 function destino() { if (G.dest) return G.dest; return destGrav() === 'Monocrática' ? 'monocratica' : 'sessao'; }
 function naLista() { return (G.ctl || {}).naLista || {}; }
@@ -379,7 +379,7 @@ function derivados() {
   return L.filter(function (x) { return S(x[2]); });
 }
 function autoGab() {
-  if (!G.cnj || !G.op) return;
+  if (window.MUTA_WEB || !G.cnj || !G.op) return;
   var k = Muta.chaveProcesso(G.cnj), M = autoGabMem(), m = M[k] = M[k] || { pos: {}, rec: {} }, mud = 0;
   derivados().forEach(function (x) {
     var i = x[0].indexOf('.'), atual = S(V(x[0].slice(0, i), x[0].slice(i + 1)));
@@ -405,7 +405,7 @@ function sitManual() { try { return !!JSON.parse(localStorage.getItem(SIT_M) || 
 function sitManualSet(on) { try { var o = JSON.parse(localStorage.getItem(SIT_M) || '{}'), k = Muta.chaveProcesso(G.cnj); if (on) o[k] = 1; else delete o[k]; localStorage.setItem(SIT_M, JSON.stringify(o)); } catch (e) {} }
 function abertas(t) { return snLinhas(t).filter(function (l) { return !/^✓/.test(l); }).length; }
 function situacaoCalc() { var pd = abertas('pd'), ic = abertas('ic'); return { v: pd || ic ? 'Pendente' : 'Pronto para julgar', pd: pd, ic: ic }; }
-function situacaoSync() { if (!G.cnj || !G.op || sitManual()) return; var c = situacaoCalc(); if (S(V('producao', 'Destino - Situação')) !== c.v) { marcar('producao.Destino - Situação', c.v); agendar(800); } }
+function situacaoSync() { if (window.MUTA_WEB || !G.cnj || !G.op || sitManual()) return; var c = situacaoCalc(); if (S(V('producao', 'Destino - Situação')) !== c.v) { marcar('producao.Destino - Situação', c.v); agendar(800); } }
 function situacaoHtml() {
   var c = situacaoCalc(), man = sitManual(), motivo = [c.pd ? c.pd + (c.pd > 1 ? ' pendências' : ' pendência') : '', c.ic ? c.ic + (c.ic > 1 ? ' intercorrências' : ' intercorrência') : ''].filter(Boolean).join(' e ');
   if (man) return '<div class="gf w pm-sitj"><span class="gl">Situação para julgar <i class="au-tag">à mão</i></span>' + chips('producao', 'Destino - Situação') + '<small class="muted">pelas sinalizações seria “' + esc(c.v) + '” · <button type="button" class="lnk" data-sitman="0">voltar ao cálculo</button></small></div>';
@@ -995,6 +995,7 @@ function gravarJa(keepalive) {
   return ses.api('/api/pauta?ficha=1', { method: 'POST', body: corpo }).then(function (j) {
     if (window.MutaAlertas) window.MutaAlertas.esquecer(cnj);
     if (cnj === G.cnj) { G.op = j.operacional || G.op; render(); }
+    if(window.MUTA_WEB&&window.parent!==window)window.parent.postMessage({tipo:'cmt:hero-gravado',cnj:cnj},location.origin);
     var rec = j.recusados || [];
     st(rec.length ? 'Gravado, exceto (sem permissão): ' + rec.join(', ') : j.semMudanca ? 'Nada mudou no prontuário.' : 'Gravado na ficha do processo' + ((j.cartoes || []).length ? ' e no cartão da pauta' : '') + ' às ' + new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }) + '.', rec.length ? 'err' : 'ok');
     return j;
@@ -1004,7 +1005,7 @@ function gravarJa(keepalive) {
     throw e;
   });
 }
-function marcar(id, v) { G.pend[id] = v; G.pendCnj = G.cnj; }
+function marcar(id, v) { if(window.MUTA_WEB&&window.MUTA_WEB.leitura)return; G.pend[id] = v; G.pendCnj = G.cnj; }
 function copiar(t, el) { (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(function () { if (el) { var o = el.textContent; el.textContent = 'Copiado'; setTimeout(function () { el.textContent = o; }, 1100); } }, function () {}); }
 function questoesDe(sem) {
   var L = Array.prototype.map.call(caixa.querySelectorAll('[data-q]'), function (i) { return S(i.value); });

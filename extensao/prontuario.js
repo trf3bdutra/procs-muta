@@ -6,6 +6,7 @@
    - confirmações no próprio painel (Muta.confirmar). */
 (function () {
 'use strict';
+var localStorage=window.MUTA_WEB?window.MutaWebStorage:window.localStorage;
 var PREFIXO = 'muta-pje:prontuario:', INDICE = 'muta-pje:indice', ATUAL = 'muta-pje:atual';
 var FORMAT = 'muta-independente-prontuario', VERSION = 2;
 var $ = function (id) { return document.getElementById(id); };
@@ -281,7 +282,7 @@ var PL=$('pront-lista');if(PL)PL.addEventListener('change',function(){
 });
 
 /* ---------- Início ---------- */
-var inicial=ler(ATUAL)||'avulso';
+var inicial=window.MUTA_WEB?(window.MUTA_WEB.cnj||'avulso'):(ler(ATUAL)||'avulso');
 if(inicial!=='avulso'&&!Muta.chaveProcesso(inicial))inicial='avulso';
 var r0=carregar(inicial);render();
 if(r0==='ok')setStatus('Prontuário restaurado'+(state.atualizadoEm?' (última gravação: '+new Date(state.atualizadoEm).toLocaleString('pt-BR')+')':'')+'.','ok');
@@ -296,7 +297,7 @@ window.MutaProntuarioBridge={
   hasLink:function(id){return state.vinculos.some(function(x){return x.id===id;});},
   getFullSanitized:sanitizeFull,
   lerSalvo:lerSalvo,
-  abrirProcesso:function(numero,classe){var k=Muta.chaveProcesso(numero);if(!k)return false;return abrir(k,{classe:classe});},
+  abrirProcesso:function(numero,classe){var k=Muta.chaveProcesso(numero);if(!k||(window.MUTA_WEB&&k!==window.MUTA_WEB.cnj))return false;return abrir(k,{classe:classe});},
   chaveAtual:function(){return chaveAtual;},
   setStatus:setStatus,
   /* sincronia com o GitHub (sincronia.js): o prontuário inteiro, como é guardado, e a troca pelo que veio do servidor */

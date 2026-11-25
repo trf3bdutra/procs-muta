@@ -18,12 +18,12 @@
   window.MutaGabinete.gravado=gravado;
   /* Na extensão (fora da prévia) a gravação é a real; só a prévia guarda em memória. As fusões abaixo valem nas duas. */
   var gravarReal=gravarJa;
-  gravarJa=function(){
+  gravarJa=function(keepalive){
     clearTimeout(G.t);G.t=null;var cnj=G.pendCnj||G.cnj,P=G.pend;
     if(!cnj||!Object.keys(P).length)return Promise.resolve({});
     var idDoc='origem.Classificação documental';if(P[idDoc]&&window.MutaAnaliseProntuario)P[idDoc]=window.MutaAnaliseProntuario.mesclar(gravado('origem','Classificação documental'),P[idDoc]);
     var r1='origem.Origem - Peças vinculadas 1G';if(P[r1]){var map=new Map();[].concat(gravado('origem','Origem - Peças vinculadas 1G')||[],P[r1]).forEach(function(r){if(r&&r.id)map.set(String(r.cnj_referencia).replace(/\D/g,'')+'|'+r.id,r);});P[r1]=Array.from(map.values());}
-    if(!window.MUTA_PREVIA)return gravarReal();
+    if(!window.MUTA_PREVIA)return gravarReal(keepalive);
     Object.assign(saved[cnj]||(saved[cnj]={}),P);G.pend={};G.pendCnj='';
     if(cnj===G.cnj){G.op=G.op||{};Object.keys(P).forEach(function(k){var i=k.indexOf('.'),s=k.slice(0,i);(G.op[s]||(G.op[s]={}))[k.slice(i+1)]=P[k];});st('Prévia: alterações apenas em memória.','ok');}
     return Promise.resolve({operacional:G.op});
@@ -325,7 +325,7 @@
   MODOS=['Autos','Processo'];
   var renderBase=render0;
   render0=function(){
-    if(tabCnj!==G.cnj){tabCnj=G.cnj;identOpen=false;G.aba='Autos';G.rot='tri';G.adEd=false;}
+    if(tabCnj!==G.cnj){tabCnj=G.cnj;identOpen=false;G.aba=window.MUTA_WEB?'Processo':'Autos';G.rot=window.MUTA_WEB?window.MUTA_WEB.modo:'tri';G.adEd=false;}
     setupRoteiro();
     // Preserva a derivação e a sincronização antes de desenhar a produção, sem depender da antiga seta.
     if(G.aba==='Processo'&&G.rot==='pro'&&G.cnj&&G.op)try{autoGab();situacaoSync();}catch(e){}

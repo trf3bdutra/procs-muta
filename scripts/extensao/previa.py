@@ -56,6 +56,7 @@ def montar(saida: pathlib.Path) -> None:
     overlay += '\n' + (AQUI / 'universal-julgamento.js').read_text(encoding='utf-8')
     # Acompanhamento no alto da Triagem; sinalizações numa janela móvel; registro no acervo em Autuação.
     overlay += '\n' + (AQUI / 'universal-triagem.js').read_text(encoding='utf-8')
+    overlay += '\n' + (AQUI / 'universal-matriz.js').read_text(encoding='utf-8')
     (painel / 'gabinete-universal.js').write_text(fonte.replace(ancora, overlay + '\n' + ancora, 1), encoding='utf-8')
     # Ganchos de apresentação do roteiro, sem modificar as regras nem os estados dos passos.
     roteiro = (painel / 'roteiro.js').read_text(encoding='utf-8')
@@ -95,6 +96,18 @@ def montar(saida: pathlib.Path) -> None:
     universal = universal.replace('</body>', '<script src="universal-ajustes.js"></script>\n</body>', 1)
     shutil.copy2(AQUI / 'universal-ajustes.js', painel / 'universal-ajustes.js')
     (painel / 'universal.html').write_text(universal, encoding='utf-8')
+    # O site usa o mesmo resultado do compilador, sem o shim demonstrativo.
+    web = universal.replace('<script src="shim-previa.js"></script>\n<script>window.MUTA_PREVIA = true;</script>\n', '', 1)
+    web = web.replace('<script src="sincronia.js"></script>', '', 1)
+    web = web.replace('<script src="alertas.js"></script>', '', 1)
+    web = web.replace('<script src="tema.js"></script>', '<script src="web-bootstrap.js"></script>\n<script src="tema.js"></script>', 1)
+    web = web.replace('</head>', '<link rel="stylesheet" href="web.css">\n</head>', 1)
+    web = web.replace('<div id="gab" class="gab"></div>', '<p class="web-aviso">Ficha única do Office · leitura direta dos autos e inserção no PJe somente na extensão instalada.</p><div id="gab" class="gab"></div>', 1)
+    if 'MUTA_PREVIA = true' in web or 'shim-previa.js' in web:
+        sys.exit('web.html: ambiente demonstrativo não permitido')
+    (painel / 'web.html').write_text(web, encoding='utf-8')
+    for arq in ('web-bootstrap.js', 'web.css', 'prontuario-host.js'):
+        shutil.copy2(AQUI / arq, painel / arq)
     for antigo in ('universal.html', 'universal-ficha.json'):
         (saida / antigo).unlink(missing_ok=True)
 

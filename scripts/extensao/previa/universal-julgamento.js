@@ -47,7 +47,7 @@
     /* resultado: opções pelo pronunciamento e pelo tipo de julgamento; valor antigo em texto livre fica visível */
     var L=opcoesResultado(e,T),atual=S(V('producao','Voto - Resultado')),n=(window.VOC?VOC.norm('resJulg',atual):atual);
     /* valor do vocabulário antigo (ex.: "Negado provimento"): convertido ao único, gravado junto com a próxima alteração */
-    if(atual&&n!==atual&&L.indexOf(n)>=0){marcar('producao.Voto - Resultado',n);atual=n;}
+    if(!window.MUTA_WEB&&atual&&n!==atual&&L.indexOf(n)>=0){marcar('producao.Voto - Resultado',n);atual=n;}
     h+=campoDe('producao','Voto - Resultado','Resultado',{tipo:'lista',opcoes:L});
     if(atual&&L.indexOf(n)<0)h+=nota('O resultado gravado ('+atual+') não está entre as opções deste pronunciamento: escolha uma para substituí-lo.');
     if(e==='ac'&&(T.rn||T.ap&&variosRecursos()||variosRecursos()))h+=campoDe('producao','Resultado por recurso','Resultado por recurso');

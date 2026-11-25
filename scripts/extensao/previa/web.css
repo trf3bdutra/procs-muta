@@ -1,0 +1,8 @@
+html.muta-web,html.muta-web body{height:auto!important;min-height:100%;margin:0}
+.muta-web .layout{display:block!important;height:auto!important;min-height:0!important}
+.muta-web .layout>aside,.muta-web #topo-u,.muta-web #pje-bar,.muta-web #pmodo,.muta-web #sinc,.muta-web #rascunho{display:none!important}
+.muta-web .layout>main{display:block!important;width:100%!important;max-width:none!important;min-width:0!important;height:auto!important;overflow:visible!important}
+.muta-web #panel-pront{display:block!important;height:auto!important;overflow:visible!important;padding:6px!important}
+.muta-web #gab{min-width:0;margin:0!important;padding:0!important}
+.web-aviso{font-size:11px;color:var(--mut,#64748b);padding:6px 9px;border-bottom:1px solid var(--pv-line,#d5d9de)}
+.pv-matriz .ro{white-space:pre-wrap;overflow-wrap:anywhere}
