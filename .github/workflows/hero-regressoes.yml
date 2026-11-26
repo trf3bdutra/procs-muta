@@ -13,6 +13,16 @@ concurrency:
   group: hero-regressoes-${{ github.ref }}
   cancel-in-progress: true
 jobs:
+  arquitetura:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: "22"
+      - name: Paridade da extensão, prévia e web
+        run: node --test --test-name-pattern="arquitetura HERO" apoio/ex-officio/tests/extensao-previa.test.js
   codigo:
     runs-on: ubuntu-latest
     timeout-minutes: 12
