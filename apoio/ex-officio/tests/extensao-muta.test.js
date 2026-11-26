@@ -662,15 +662,25 @@ test('extensão 0.48.1: sem o seletor de prontuários salvos; Diligências com e
   assert.match(sh, /var vivo = \/\\\/api\\\/pendencias/);
 });
 
-test('extensão 0.48.2: Diligências divididas por fase do andamento (A fazer, Em andamento, Em revisão, Concluída)', () => {
-  const x = read('extensao/gestao.js');
-  assert.match(x, /fase: \{ todo: true, doing: true, review: true, done: false \}/); assert.match(x, /class="gx-fase gx-fase-' \+ e\[0\]/);
-  assert.match(x, /cd\.addEventListener\('toggle'/); assert.doesNotMatch(x, /data-gx-conc/);
+test('HERO: Kanban sem arraste, etapas oficiais e distribuição de urgências', () => {
+  const x=read('extensao/gestao.js'), css=read('extensao/hero-design.css');
+  const f=x.slice(x.indexOf('  function kanban('),x.indexOf('  function pintarDil()'));
+  const render=new Function('esc',f+';return kanban;')(String);
+  const grupos=[['todo','A fazer',[{id:'a'}]],['done','Concluída',[{id:'b'}]]];
+  const all=render(grupos,'todas','dil',t=>'<article>'+t.id+'</article>');
+  assert.match(all, /data-gx-board="dil:todo"/);assert.match(all, /<article>a<\/article>/);assert.match(all, /<article>b<\/article>/);
+  const one=render(grupos,'done','dil',t=>'<article>'+t.id+'</article>');
+  assert.doesNotMatch(one, /<article>a<\/article>/);assert.match(one, /<article>b<\/article>/);
+  assert.doesNotMatch(all, /draggable=|ondrag|ondrop/);
+  const etapa=new Function(x.slice(x.indexOf('  function urgEtapa('),x.indexOf('  function pintarUrg()'))+';return urgEtapa;')();
+  assert.equal(etapa({}),'designar');assert.equal(etapa({servidor:'A'}),'minuta');assert.equal(etapa({dataMinuta:'x'}),'corrigir');
+  assert.equal(etapa({dataCorrecao:'x'}),'liberar');assert.equal(etapa({dataLiberacao:'x'}),'assinar');assert.equal(etapa({assinado:true}),'conferir');
+  assert.match(css,/\.hero-kanban-board/);assert.match(x,/method: 'PUT', body: JSON\.stringify\(\{ id: id, _rev: t\._rev, stage: st \}\)/);
 });
 
-test('extensão 0.49: Assinatura nas Deliberações (urgência no topo) e fora do sino; sinalizações com aviso e inclusão no alto, com seletor do tipo', () => {
+test('HERO: Assinatura nas Urgências e fora do sino; sinalizações com aviso e inclusão no alto, com seletor do tipo', () => {
   const x = read('extensao/gestao.js'), a = read('extensao/alertas.js'), g = read('extensao/gabinete.js'), c = read('extensao/conteudo-pje.js'), f = read('extensao/fundo.js');
-  assert.match(x, /function itemAs\(a\)/); assert.match(x, /acao: 'assinar', cnj: cnj/); assert.match(x, /acao: 'devolver'/); assert.match(x, /var X = \{ aba: 'as'/);
+  assert.match(x, /function itemAs\(a\)/); assert.match(x, /acao: 'assinar', cnj: cnj/); assert.match(x, /acao: 'devolver'/); assert.match(x, /g\[0\]==='assinar'\?L\.as\.map/);
   assert.match(a, /var abas = \[\['al', 'PJe'\], \['app', 'Gabinete'\], \['ver', 'Versão'\]\];/); assert.doesNotMatch(a, /\['ch', 'Chegadas'\]/, '0.73.5: chegadas dentro de PJe'); assert.match(a, /Chegadas de hoje/);
   assert.match(g, /\['av', 'Aviso', 'triagem', 'Avisos'\]/); assert.match(g, /data-sn-add/); assert.doesNotMatch(g, /placeholder="Nova sinalização: descreva e tecle Enter"/);
   assert.match(c, /data-hd-novo-f/); assert.match(c, /\[\['av', 'Aviso'\], \['ic', 'Intercorrência'\], \['pd', 'Pendência'\], \['nt', 'Nota'\]\]/);
@@ -721,13 +731,12 @@ test('tipo de ato sugerido dentro da opção, sem seleção automática',()=>{
 });
 
 
-test('HERO: Diligências e Deliberações sem cabeçalho redundante, atualização na faixa das abas', () => {
-  const x = read('extensao/gestao.js'), css = read('extensao/painel.css');
-  assert.doesNotMatch(x, /class="gx-top"/);
-  assert.doesNotMatch(x, /data-gx="nova"/);
-  assert.match(x, /faixaGestao\('Filtro das diligências'[^\n]*'ler-dil'/);
-  assert.match(x, /faixaGestao\('Tipo de deliberação'[^\n]*'ler-del'/);
-  assert.match(x, /class="gx-nav-actions"/);
-  assert.match(x, /aria-label="Atualizar"/);
-  assert.match(css, /\.gx-nav\{display:flex;align-items:center/);
+test('HERO: faixas compactas, notificações em aba única e Pauta integrada', () => {
+  const x=read('extensao/gestao.js'), a=read('extensao/alertas.js'), p=read('extensao/pauta.js'), h=read('extensao/painel.html'), css=read('extensao/hero-design.css'), api=read('apoio/ex-officio/api/_cmt.js');
+  assert.match(x,/hero-gestao-strip/);assert.match(x,/painelGestao\('Diligências'[^\n]*atualizaBtn\('ler-dil'/);
+  assert.match(x,/painelGestao\('Notificações'[^\n]*atualizaBtn\('ler-del'/);
+  assert.match(x,/tab\('cronologia','Cronologia'\)\+tab\('categorias','Categorias'\)/);
+  assert.match(a,/data-ap-not/);assert.match(a,/window\.MutaAbas\.ir\('del'\)/);assert.match(h,/<b>Notificações <i class="conf-badge" id="del-badge"/);
+  assert.match(x,/acao:'notificacao-lida'/);assert.match(api,/b\.acao==='notificacao-lida'/);
+  assert.match(p,/MG\.pautaPendencias/);assert.match(p,/MG\.pautaCard/);assert.match(p,/hero-pa-balanced/);assert.match(css,/\.pa-card-people/);
 });
