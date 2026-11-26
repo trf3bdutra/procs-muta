@@ -2789,3 +2789,12 @@ html body.hero-redesign-v53 #gab #g-docs .au-ficha-gravada{appearance:auto!impor
 html body.hero-redesign-v53 #gab #g-docs .au-ficha-status{color:#426e56!important;font-weight:600}
 html body.hero-redesign-v53 #gab #g-docs .au-regravar{display:inline-flex;align-items:center;gap:3px;font-size:9px;white-space:nowrap}
 html body.hero-redesign-v53 #gab #g-docs .au-regravar input{width:12px;height:12px;margin:0;accent-color:var(--primary,#31565a)}
+
+/* Sustentações: modalidade e sessão em indicadores, sem título redundante. */
+.hero-so-head{display:flex!important;align-items:center;justify-content:flex-start!important;gap:4px 6px!important;flex-wrap:wrap}
+.hero-so-head .gx-c{margin:0!important;white-space:nowrap;font-size:10px;line-height:1.4}
+.hero-so-head .hero-so-tipo{font-weight:650;border:1px solid var(--hero-pront-divider,var(--line));border-radius:3px;padding:2px 6px}
+.hero-so-tipo[data-modal=pres]{color:#396b57!important;background:#e8f0e9!important;border-color:#c7d9cb!important}
+.hero-so-tipo[data-modal=video]{color:#426d88!important;background:#eaf0f5!important;border-color:#c9d8e3!important}
+.hero-so-tipo[data-modal=pref]{color:#8a6c35!important;background:#f5eddb!important;border-color:#e3d5b4!important}
+.hero-so-head .hero-so-sessao{color:var(--fg);background:var(--hero-pront-header,#f3f0e7)!important;border:1px solid var(--hero-pront-divider,var(--line));border-radius:3px;font:600 10px/1.4 var(--mono,monospace);padding:2px 6px}

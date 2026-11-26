@@ -226,10 +226,12 @@
         '<span><button type="button" class="lnk" data-gx-pe="cancelar" data-id="' + esc(p.id) + '">cancelar</button><button type="button" class="btn solid sm" data-gx-pe="confirmar" data-id="' + esc(p.id) + '">Confirmar</button></span></div>'
         : '<div class="gx-ac"><button type="button" class="btn sm ok" data-gx-pe="defere" data-id="' + esc(p.id) + '">Deferir</button><button type="button" class="btn sm" data-gx-pe="indefere" data-id="' + esc(p.id) + '">Indeferir</button></div>') + '</article>';
   }
+  function indicadorSo(t){t=String(t||'');var v=/prefer/i.test(t)?['pref','Preferência']:/presenc/i.test(t)?['pres','Presencial']:/v[ií]deo|virtual/i.test(t)?['video','Videoconferência']:['neutro','Modalidade não informada'];return '<span class="gx-c hero-so-tipo" data-modal="'+v[0]+'" title="'+esc(t||'Modalidade não informada')+'">'+v[1]+'</span>';}
+  function indicadorSessaoSo(d){return '<span class="gx-c hero-so-sessao" title="Sessão de julgamento">'+esc(d||'Sessão a definir')+'</span>';}
   function itemSo(s) {
-    return '<article class="gx-it" data-id="' + esc(s.id) + '"><div class="gx-h"><b class="gx-t">' + esc(String(s.titulo || '').replace(/ · a vincular$/, '')) + '</b>' +
+    return '<article class="gx-it" data-id="' + esc(s.id) + '"><div class="gx-h hero-so-head">' + indicadorSo([s.modalidade,s.titulo,s.tipo].filter(Boolean).join(' · ')) + indicadorSessaoSo(s.sessao?data(s.sessao):'') +
       (s.aVincular ? '<span class="gx-c venc" title="Ainda sem item correspondente na pauta">a vincular</span>' : s.item ? '<span class="gx-c">item ' + esc(s.item) + '</span>' : '') + '</div>' +
-      '<p class="gx-m">' + [copiaBtn(s.numero), s.sessao ? 'sessão de ' + esc(data(s.sessao)) : '', s.em ? 'recebido em ' + esc(diaMes(s.em)) : ''].filter(Boolean).join(' · ') + '</p>' +
+      '<p class="gx-m">' + [copiaBtn(s.numero), s.em ? 'recebido em ' + esc(diaMes(s.em)) : ''].filter(Boolean).join(' · ') + '</p>' +
       ((s.advogado || s.parte) ? '<p class="gx-tx">' + [s.advogado ? esc(s.advogado) + (s.oab ? ' (OAB ' + esc(s.oab) + ')' : '') : '', s.parte ? 'por ' + esc(s.parte) : ''].filter(Boolean).join(', ') + '</p>' : '') + '</article>';
   }
   function grupoDel(t,L,fn,empty,tone){return '<section class="hero-gx-group" data-tone="'+esc(tone||'neutro')+'"><header><b>'+esc(t)+'</b><small>'+L.length+'</small></header>'+(L.length?L.map(fn).join(''):'<p class="muted gx-v">'+esc(empty)+'</p>')+'</section>';}
