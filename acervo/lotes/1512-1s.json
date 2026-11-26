@@ -138,11 +138,11 @@
    "assunto": "Atraso na Entrega do Imóvel",
    "assunto_detalhado": "",
    "grupo": "assunto-7",
-   "tipo_caso": "Atraso na Entrega do Imóvel",
-   "resultado": "",
-   "modelo": "",
+   "tipo_caso": "Atraso na entrega do imóvel (CEF) · apelações cruzadas",
+   "resultado": "Proposta: [VALIDAR paradigma] apelações do autor (majoração do dano moral para R$ 15.000,00) e da CEF (afastar lucros cessantes; redução e base de cálculo); seguir a linha IMO da sessão de 07/12/2026 (5003937-23.2018; 0008188-48.2013) [VALIDAR: valor do dano moral fixado na sentença; empreendimento e programa (PMCMV-FAR ou Entidades)]",
+   "modelo": "5003937-23.2018; 0008188-48.2013",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença procedente: lucros cessantes de 0,5% ao mês sobre o valor atualizado do imóvel entre 17/04/2015 e 13/07/2017, e dano moral.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -151,11 +151,43 @@
     "correcao": "Vanilda",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "388928929"
+    },
+    {
+     "peca": "Apelação",
+     "id": "388928930"
+    },
+    {
+     "peca": "Apelação",
+     "id": "388928931"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "388929283"
+    }
+   ],
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Civil — SFH/PMCMV, atraso na entrega",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 388928929 (10/03/2026)",
+    "recurso": "apelação (ID 388928930, 29/05/2026); apelação (ID 388928931, 29/05/2026)",
+    "preparo": "[VALIDAR]",
+    "representacao": "procuração/substabelecimento ID 388928901, 388928911, 388928912",
+    "mpf": "Não consta parecer",
+    "autos": "47 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] valor do dano moral fixado na sentença",
+    "[VALIDAR] empreendimento e programa (PMCMV-FAR ou Entidades)"
+   ],
    "minuta": false
   },
   {
@@ -169,11 +201,11 @@
    "assunto": "Benfeitorias",
    "assunto_detalhado": "",
    "grupo": "assunto-8",
-   "tipo_caso": "Benfeitorias",
-   "resultado": "",
+   "tipo_caso": "Locação/renovação com a CEF · desistência homologada",
+   "resultado": "Proposta: [VALIDAR] apelação contra a sentença que homologou a desistência (artigo 485, VIII, do CPC) após termo aditivo de renovação; discute se o termo é acordo (artigo 487, III, b) e a sucumbência: voto próprio [VALIDAR: apelante e objeto do recurso (custas, honorários, natureza do termo aditivo)]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença homologou a desistência, condenou a autora em custas e não fixou honorários pelo acordo extrajudicial (ID 347426137); embargos de declaração rejeitados (ID 369878803).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -182,11 +214,38 @@
     "correcao": "Vanilda",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "369878799"
+    },
+    {
+     "peca": "Embargos de declaração",
+     "id": "369878800"
+    },
+    {
+     "peca": "Apelação",
+     "id": "369878804"
+    }
+   ],
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Civil — locação (renovatória)",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 369878799 (03/10/2025)",
+    "recurso": "embargos de declaração (ID 369878800, 14/10/2025); apelação (ID 369878804, 09/02/2026)",
+    "preparo": "comprovante juntado (ID 369878805) — conferir o tipo",
+    "representacao": "procuração/substabelecimento ID 369878204, 369878739, 369878757",
+    "mpf": "Não consta parecer",
+    "autos": "112 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] apelante e objeto do recurso (custas, honorários, natureza do termo aditivo)"
+   ],
    "minuta": false
   },
   {
@@ -200,11 +259,11 @@
    "assunto": "Remoção",
    "assunto_detalhado": "",
    "grupo": "assunto-4",
-   "tipo_caso": "Remoção",
-   "resultado": "",
+   "tipo_caso": "Remoção por motivo de saúde de familiar (ABIN) · apelações do autor e da União",
+   "resultado": "Proposta: [VALIDAR paradigma] apelações cruzadas: autor (cerceamento de defesa, decisão surpresa e remoção definitiva) e União (dependência econômica nos assentamentos e junta médica oficial; artigo 36, parágrafo único, III, b, da Lei 8.112/1990) [VALIDAR: tempestividade das duas apelações após os embargos]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença parcialmente procedente: submeter o autor, a genitora e o padrasto à perícia oficial em Brasília/DF e reexaminar o pedido; embargos de declaração rejeitados (ID 388338325).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -213,11 +272,46 @@
     "correcao": "Vanilda",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "388338312"
+    },
+    {
+     "peca": "Embargos de declaração",
+     "id": "388338313"
+    },
+    {
+     "peca": "Apelação",
+     "id": "388338326"
+    },
+    {
+     "peca": "Apelação",
+     "id": "388338332"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "388338340"
+    }
+   ],
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — servidor público, remoção",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 388338312 (21/02/2025)",
+    "recurso": "embargos de declaração (ID 388338313, 10/03/2025); apelação (ID 388338326, 04/08/2025); apelação (ID 388338332, 08/09/2025)",
+    "preparo": "comprovante juntado (ID 388338329, 388338330) — conferir o tipo",
+    "representacao": "procuração/substabelecimento ID 388337697, 388338327",
+    "mpf": "Não consta parecer",
+    "autos": "107 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] tempestividade das duas apelações após os embargos"
+   ],
    "minuta": false
   },
   {
@@ -231,11 +325,11 @@
    "assunto": "Vícios de Construção",
    "assunto_detalhado": "",
    "grupo": "assunto-15",
-   "tipo_caso": "Vícios de Construção",
-   "resultado": "",
+   "tipo_caso": "SFH/CEF · correção de contrato e de matrícula; dano moral",
+   "resultado": "Proposta: [VALIDAR paradigma] apelação dos autores só para majorar o dano moral (R$ 15.000,00 para cada um) [VALIDAR: valor do dano moral fixado na sentença]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença procedente: obrigação de fazer (correção do contrato 8444414675925 e das matrículas 131.852 e 131.851) e dano moral.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -244,11 +338,38 @@
     "correcao": "Vanilda",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "362838213"
+    },
+    {
+     "peca": "Apelação",
+     "id": "362838214"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "362838217"
+    }
+   ],
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Civil — SFH, contrato e registro",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 362838213 (19/02/2026)",
+    "recurso": "apelação (ID 362838214, 13/03/2026)",
+    "preparo": "[VALIDAR]",
+    "representacao": "procuração/substabelecimento ID 362838103, 362838104, 362838121",
+    "mpf": "Não consta parecer",
+    "autos": "78 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] valor do dano moral fixado na sentença"
+   ],
    "minuta": false
   },
   {
@@ -262,11 +383,11 @@
    "assunto": "Esbulho / Turbação / Ameaça",
    "assunto_detalhado": "",
    "grupo": "assunto-2",
-   "tipo_caso": "Esbulho / Turbação / Ameaça",
-   "resultado": "",
+   "tipo_caso": "Possessória em terra indígena (União × ocupante)",
+   "resultado": "Proposta: [VALIDAR] processo sobrestado pelo Tema 1.031/STF (RE 1.017.365); conferir o levantamento do sobrestamento e a situação atual (Lei 14.701/2023 e ações no STF) antes do julgamento [VALIDAR: sentença e apelação são de autos digitalizados (sem texto); há determinação nova de suspensão no STF?]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sobrestamento determinado em 29/05/2020 (ID 133042693) até o julgamento do Tema 1.031/STF; pareceres do MPF (IDs 122783870, 122783872).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -275,11 +396,35 @@
     "correcao": "Vanilda",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Parecer do MPF",
+     "id": "122783870"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "122783872"
+    }
+   ],
+   "mpf": "parecer ID 122783872 (27/01/2020)",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Constitucional — terras indígenas, posse",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "[VALIDAR]",
+    "recurso": "[VALIDAR]",
+    "preparo": "[VALIDAR]",
+    "representacao": "[VALIDAR]",
+    "mpf": "parecer ID 122783872 (27/01/2020)",
+    "autos": "43 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] sentença e apelação são de autos digitalizados (sem texto)",
+    "[VALIDAR] há determinação nova de suspensão no STF?"
+   ],
    "minuta": false
   },
   {
@@ -293,11 +438,11 @@
    "assunto": "Esbulho / Turbação / Ameaça",
    "assunto_detalhado": "",
    "grupo": "assunto-2",
-   "tipo_caso": "Esbulho / Turbação / Ameaça",
-   "resultado": "",
+   "tipo_caso": "Possessória em terra indígena (FUNAI × ocupante)",
+   "resultado": "Proposta: [VALIDAR] processo sobrestado pelo Tema 1.031/STF (RE 1.017.365); conferir o levantamento do sobrestamento e a situação atual (Lei 14.701/2023 e ações no STF) antes do julgamento [VALIDAR: sentença e apelação são de autos digitalizados (sem texto); há determinação nova de suspensão no STF?]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sobrestamento determinado em 29/05/2020 (ID 133043705); pareceres do MPF (IDs 122783867, 122783869). Par com 0014701-27.2016.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -306,11 +451,35 @@
     "correcao": "Vanilda",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Parecer do MPF",
+     "id": "122783867"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "122783869"
+    }
+   ],
+   "mpf": "parecer ID 122783869 (27/01/2020)",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Constitucional — terras indígenas, posse",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "[VALIDAR]",
+    "recurso": "[VALIDAR]",
+    "preparo": "[VALIDAR]",
+    "representacao": "[VALIDAR]",
+    "mpf": "parecer ID 122783869 (27/01/2020)",
+    "autos": "62 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] sentença e apelação são de autos digitalizados (sem texto)",
+    "[VALIDAR] há determinação nova de suspensão no STF?"
+   ],
    "minuta": false
   },
   {
@@ -324,11 +493,11 @@
    "assunto": "Contribuição sobre a folha de salários",
    "assunto_detalhado": "",
    "grupo": "assunto-9",
-   "tipo_caso": "Contribuição sobre a folha de salários",
-   "resultado": "",
+   "tipo_caso": "Contribuição previdenciária sobre verbas (MS coletivo de sindicato) · 2º julgamento",
+   "resultado": "Proposta: [VALIDAR paradigma] apelação da União e remessa contra a nova sentença (concessão parcial); verba por verba, conforme os temas repetitivos e de repercussão geral (Temas 20, 985 e 1.170/STF e Temas 478, 479 e 738/STJ) [VALIDAR: verbas impugnadas na apelação ID 373403142; é o 2º julgamento: conferir prevenção e o acórdão anterior]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Acórdão anterior anulou a sentença (28/11/2024, ID 309199438); nova sentença em 17/12/2025 (ID 373403137); parecer do MPF pelo prosseguimento (ID 377357579); redistribuído pela Resolução 33/2025 (ID 377934610).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -337,11 +506,47 @@
     "correcao": "Vanilda",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "373403137"
+    },
+    {
+     "peca": "Apelação",
+     "id": "373403142"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "291219408"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "294499506"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "377357579"
+    }
+   ],
+   "mpf": "parecer ID 377357579 (29/05/2026)",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Tributário — contribuições previdenciárias",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 373403137 (17/12/2025)",
+    "recurso": "apelação (ID 373403142, 06/03/2026)",
+    "preparo": "[VALIDAR]",
+    "representacao": "procuração/substabelecimento ID 291219386, 291219418, 291219419",
+    "mpf": "parecer ID 377357579 (29/05/2026)",
+    "autos": "116 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] verbas impugnadas na apelação ID 373403142",
+    "[VALIDAR] é o 2º julgamento: conferir prevenção e o acórdão anterior"
+   ],
    "minuta": false
   },
   {
@@ -355,11 +560,11 @@
    "assunto": "Natureza do Cargo Acumulável",
    "assunto_detalhado": "",
    "grupo": "assunto-10",
-   "tipo_caso": "Natureza do Cargo Acumulável",
-   "resultado": "",
+   "tipo_caso": "Vacância para posse em cargo inacumulável (IFMS) · MS",
+   "resultado": "Proposta: negar provimento à apelação e à remessa necessária [VALIDAR paradigma: vacância do artigo 33, VIII, da Lei 8.112/1990] [VALIDAR: fundamento da apelação (artigo 33, I, da Lei 8.112/1990)]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença concedeu a segurança para viabilizar o pedido de vacância do cargo de professor do IFMS; parecer do MPF pela manutenção (ID 387930325).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -368,11 +573,46 @@
     "correcao": "Vanilda",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "385978510"
+    },
+    {
+     "peca": "Apelação",
+     "id": "385978511"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "385978513"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "385978508"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "387930325"
+    }
+   ],
+   "mpf": "parecer ID 387930325 (22/07/2026)",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — servidor público, vacância",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 385978510 (18/02/2026)",
+    "recurso": "apelação (ID 385978511, 09/04/2026)",
+    "preparo": "comprovante juntado (ID 385978496, 385978498) — conferir o tipo",
+    "representacao": "procuração/substabelecimento ID 385978484",
+    "mpf": "parecer ID 387930325 (22/07/2026)",
+    "autos": "44 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] fundamento da apelação (artigo 33, I, da Lei 8.112/1990)"
+   ],
    "minuta": false
   },
   {
@@ -386,11 +626,11 @@
    "assunto": "Pensão",
    "assunto_detalhado": "",
    "grupo": "assunto-11",
-   "tipo_caso": "Pensão",
-   "resultado": "",
+   "tipo_caso": "Pensão militar · restabelecimento",
+   "resultado": "Proposta: [VALIDAR paradigma] apelação da União contra o restabelecimento da pensão por morte de militar desde a cessação; conferir o fundamento da cessação (filha, Lei 3.765/1960; TCU?) [VALIDAR: contrarrazões ID 380568451 com texto ilegível; consectários: EC 113/2021 (Tema 810/STF)]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença procedente, com tutela de urgência confirmada; correção e juros pelo artigo 1º-F da Lei 9.494/1997.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -399,11 +639,39 @@
     "correcao": "Vanilda",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "380568448"
+    },
+    {
+     "peca": "Apelação",
+     "id": "380568449"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "380568451"
+    }
+   ],
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — militar, pensão",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 380568448 (13/03/2026)",
+    "recurso": "apelação (ID 380568449, 15/05/2026)",
+    "preparo": "[VALIDAR]",
+    "representacao": "procuração/substabelecimento ID 380568389, 380568409",
+    "mpf": "Não consta parecer",
+    "autos": "75 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] contrarrazões ID 380568451 com texto ilegível",
+    "[VALIDAR] consectários: EC 113/2021 (Tema 810/STF)"
+   ],
    "minuta": false
   },
   {
@@ -417,11 +685,11 @@
    "assunto": "Posse e Exercício",
    "assunto_detalhado": "",
    "grupo": "assunto-12",
-   "tipo_caso": "Posse e Exercício",
-   "resultado": "",
+   "tipo_caso": "Servidor · data de ingresso no serviço público (UFGD) · MS",
+   "resultado": "Proposta: [VALIDAR paradigma] apelação da UFGD contra a concessão da segurança que fixou 23/06/1988 como ingresso no serviço público, para as regras de transição previdenciárias [VALIDAR: há remessa necessária (artigo 14, § 1º, da Lei 12.016/2009)?]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença concedeu a segurança (ID 375018259); MPF sem manifestação de mérito (IDs 375018258 e 378190414).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -430,11 +698,46 @@
     "correcao": "Vanilda",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "375018259"
+    },
+    {
+     "peca": "Apelação",
+     "id": "375018262"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "375018263"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "375018258"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "378190414"
+    }
+   ],
+   "mpf": "parecer ID 378190414 (02/06/2026)",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — servidor público, ingresso e regras de transição",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 375018259 (12/12/2025)",
+    "recurso": "apelação (ID 375018262, 13/04/2026)",
+    "preparo": "comprovante juntado (ID 375018250, 375018251) — conferir o tipo",
+    "representacao": "procuração/substabelecimento ID 375016417",
+    "mpf": "parecer ID 378190414 (02/06/2026)",
+    "autos": "57 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] há remessa necessária (artigo 14, § 1º, da Lei 12.016/2009)?"
+   ],
    "minuta": false
   },
   {
@@ -448,11 +751,11 @@
    "assunto": "Serviço Militar dos Profissionais da Saúde",
    "assunto_detalhado": "",
    "grupo": "assunto-14",
-   "tipo_caso": "Serviço Militar dos Profissionais da Saúde",
-   "resultado": "",
+   "tipo_caso": "Serviço militar de profissional de saúde (MFDV) · incapacidade e isenção",
+   "resultado": "Proposta: [VALIDAR paradigma] apelação da União para manter o ato de convocação (Lei 5.292/1967) contra a sentença que declarou a incapacidade definitiva e a isenção do autor [VALIDAR: honorários fixados por equidade (artigo 85, § 8º-A) contra a Fazenda: Tema 1.076/STJ]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença procedente (ID 379900272); embargos de declaração acolhidos para fixar honorários de R$ 6.772,00 só contra a União (ID 379900276).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -461,11 +764,42 @@
     "correcao": "Vanilda",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "379900272"
+    },
+    {
+     "peca": "Embargos de declaração",
+     "id": "379900273"
+    },
+    {
+     "peca": "Apelação",
+     "id": "379900274"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "379900278"
+    }
+   ],
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — militar, serviço militar obrigatório (MFDV)",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 379900272 (16/04/2025)",
+    "recurso": "embargos de declaração (ID 379900273, 08/05/2025); apelação (ID 379900274, 19/06/2025)",
+    "preparo": "[VALIDAR]",
+    "representacao": "procuração/substabelecimento ID 379900216, 379900259",
+    "mpf": "Não consta parecer",
+    "autos": "93 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] honorários fixados por equidade (artigo 85, § 8º-A) contra a Fazenda: Tema 1.076/STJ"
+   ],
    "minuta": false
   },
   {
@@ -479,11 +813,11 @@
    "assunto": "Cédula de Crédito Rural",
    "assunto_detalhado": "",
    "grupo": "assunto-1",
-   "tipo_caso": "Cédula de Crédito Rural",
-   "resultado": "",
+   "tipo_caso": "Execução fiscal de crédito rural (STN) · prescrição intercorrente",
+   "resultado": "Proposta: [VALIDAR paradigma] apelação da União: conferir a prescrição intercorrente pelo Tema 566/STJ, com a suspensão da Lei 11.775/2008 (27/05/2008 a 30/06/2011) e a penhora efetiva via BACENJUD em 26/03/2013 [VALIDAR: autos migrados do TJMS: peças sem tipo e muitas sem texto; ID da sentença e da apelação (IDs 338448360 e 338448367?)]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença do juízo estadual (Angélica-MS) extinguiu a execução (artigo 40, § 4º, da Lei 6.830/1980); redistribuído à 1ª Seção (ID 340158927). Autos migrados com documentos genéricos.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -493,10 +827,25 @@
     "situacao": "A minutar"
    },
    "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Tributário/execução fiscal — crédito rural securitizado",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "[VALIDAR]",
+    "recurso": "[VALIDAR]",
+    "preparo": "[VALIDAR]",
+    "representacao": "[VALIDAR]",
+    "mpf": "Não consta parecer",
+    "autos": "207 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] autos migrados do TJMS: peças sem tipo e muitas sem texto",
+    "[VALIDAR] ID da sentença e da apelação (IDs 338448360 e 338448367?)"
+   ],
    "minuta": false
   },
   {
@@ -510,11 +859,11 @@
    "assunto": "Cédula de Crédito Rural",
    "assunto_detalhado": "",
    "grupo": "assunto-1",
-   "tipo_caso": "Cédula de Crédito Rural",
-   "resultado": "",
+   "tipo_caso": "Crédito rural (União/FN) · autos digitalizados",
+   "resultado": "Proposta: [VALIDAR] autos do TJMS digitalizados em 2 PDFs (IDs 291021513 sem texto e 291021517): ler a sentença e a apelação no PJe [VALIDAR: triagem sem leitura da sentença e da apelação]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Redistribuído pela Resolução 33/2025 (ID 356962064).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -524,10 +873,24 @@
     "situacao": "A minutar"
    },
    "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Crédito rural securitizado",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "[VALIDAR]",
+    "recurso": "[VALIDAR]",
+    "preparo": "[VALIDAR]",
+    "representacao": "[VALIDAR]",
+    "mpf": "Não consta parecer",
+    "autos": "11 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] triagem sem leitura da sentença e da apelação"
+   ],
    "minuta": false
   },
   {
@@ -541,11 +904,11 @@
    "assunto": "Cédula de Crédito Rural",
    "assunto_detalhado": "",
    "grupo": "assunto-1",
-   "tipo_caso": "Cédula de Crédito Rural",
-   "resultado": "",
+   "tipo_caso": "Embargos à execução fiscal de crédito rural · título inexigível",
+   "resultado": "Proposta: [VALIDAR paradigma] apelação da União contra a sentença que acolheu os embargos e anulou a execução 0001401-66.2006.8.12.0017 (título inexigível pela revisional do TJMS), com honorários de 15% [VALIDAR: autos migrados: ID da apelação; honorários contra a Fazenda: artigo 85, § 3º, do CPC]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença do juízo estadual (ID 338463000); autos migrados do TJMS.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -555,10 +918,25 @@
     "situacao": "A minutar"
    },
    "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Tributário/execução fiscal — crédito rural securitizado",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "[VALIDAR]",
+    "recurso": "[VALIDAR]",
+    "preparo": "[VALIDAR]",
+    "representacao": "[VALIDAR]",
+    "mpf": "Não consta parecer",
+    "autos": "263 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] autos migrados: ID da apelação",
+    "[VALIDAR] honorários contra a Fazenda: artigo 85, § 3º, do CPC"
+   ],
    "minuta": false
   },
   {
@@ -572,11 +950,11 @@
    "assunto": "Salário- Maternidade",
    "assunto_detalhado": "",
    "grupo": "assunto-13",
-   "tipo_caso": "Salário- Maternidade",
-   "resultado": "",
+   "tipo_caso": "Salário-maternidade · restituição da contribuição patronal (Tema 72/STF)",
+   "resultado": "Proposta: negar provimento à apelação da União [VALIDAR: objeto da apelação; honorários e dispensa do artigo 19, § 1º, I, da Lei 10.522/2002] [VALIDAR: ponto impugnado pela União (forma de restituição ou honorários)]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença procedente: restituição do recolhido nos 5 anos anteriores ao mandado de segurança, com SELIC.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -585,11 +963,38 @@
     "correcao": "Alexander",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "357673724"
+    },
+    {
+     "peca": "Apelação",
+     "id": "357673726"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "357673728"
+    }
+   ],
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Tributário — contribuição previdenciária",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 357673724 (12/11/2025)",
+    "recurso": "apelação (ID 357673726, 15/01/2026)",
+    "preparo": "comprovante juntado (ID 357673717) — conferir o tipo",
+    "representacao": "procuração/substabelecimento ID 357673695",
+    "mpf": "Não consta parecer",
+    "autos": "42 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] ponto impugnado pela União (forma de restituição ou honorários)"
+   ],
    "minuta": false
   },
   {
@@ -603,11 +1008,11 @@
    "assunto": "Aquisição",
    "assunto_detalhado": "",
    "grupo": "assunto-6",
-   "tipo_caso": "Aquisição",
-   "resultado": "",
+   "tipo_caso": "Opção de nacionalidade homologada · apelação da União",
+   "resultado": "Proposta: [VALIDAR paradigma] apelação da União contra a homologação da opção de nacionalidade (artigo 12, I, c, da Constituição); conferir o fundamento (residência, registro ou documento) [VALIDAR: fundamento da apelação ID 371953137]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença procedente (ID 371953135).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -616,11 +1021,38 @@
     "correcao": "Vanilda",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "371953135"
+    },
+    {
+     "peca": "Apelação",
+     "id": "371953137"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "371953140"
+    }
+   ],
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Constitucional — nacionalidade",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 371953135 (15/12/2025)",
+    "recurso": "apelação (ID 371953137, 05/03/2026)",
+    "preparo": "[VALIDAR]",
+    "representacao": "procuração/substabelecimento ID 371953071",
+    "mpf": "Não consta parecer",
+    "autos": "29 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] fundamento da apelação ID 371953137"
+   ],
    "minuta": false
   },
   {
@@ -634,11 +1066,11 @@
    "assunto": "FGTS/ Fundo de Garantia Por Tempo de Serviço",
    "assunto_detalhado": "",
    "grupo": "assunto-3",
-   "tipo_caso": "FGTS/ Fundo de Garantia Por Tempo de Serviço",
-   "resultado": "",
+   "tipo_caso": "FGTS · TR × IPCA · agravo interno",
+   "resultado": "Proposta: negar provimento ao agravo interno: correção do FGTS pela TR (Tema 731/STJ; ADI 5.090/STF, efeitos prospectivos) [VALIDAR: honorários recursais no agravo interno]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Decisão monocrática conheceu do recurso inominado como apelação e negou provimento (ID 376487678); agravo interno (ID 380850342) pede afastar a majoração de honorários; memoriais (IDs 403184933 e 414150799).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -647,11 +1079,42 @@
     "correcao": "Vanilda",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Decisão recorrida",
+     "id": "376487678"
+    },
+    {
+     "peca": "Agravo interno",
+     "id": "380850342"
+    },
+    {
+     "peca": "Memoriais",
+     "id": "403184933"
+    },
+    {
+     "peca": "Memoriais",
+     "id": "414150799"
+    }
+   ],
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Agravo interno (voto)",
+    "materia": "FGTS — correção monetária",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Decisão ID 376487678 (12/06/2026)",
+    "recurso": "agravo interno (ID 380850342, 17/06/2026)",
+    "preparo": "[VALIDAR]",
+    "representacao": "[VALIDAR]",
+    "mpf": "Não consta parecer",
+    "autos": "33 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] honorários recursais no agravo interno"
+   ],
    "minuta": false
   },
   {
@@ -665,11 +1128,11 @@
    "assunto": "FGTS/ Fundo de Garantia Por Tempo de Serviço",
    "assunto_detalhado": "",
    "grupo": "assunto-3",
-   "tipo_caso": "FGTS/ Fundo de Garantia Por Tempo de Serviço",
-   "resultado": "",
+   "tipo_caso": "FGTS · TR × IPCA · agravo interno",
+   "resultado": "Proposta: negar provimento ao agravo interno: correção do FGTS pela TR (Tema 731/STJ; ADI 5.090/STF, efeitos prospectivos) [VALIDAR: honorários recursais no agravo interno]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Decisão monocrática (ID 376494205); agravo interno (ID 380864915); memoriais (ID 414150797). Par com 0000128-31.2014 e 0000098-93.2014.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -678,11 +1141,38 @@
     "correcao": "Vanilda",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Decisão recorrida",
+     "id": "376494205"
+    },
+    {
+     "peca": "Agravo interno",
+     "id": "380864915"
+    },
+    {
+     "peca": "Memoriais",
+     "id": "414150797"
+    }
+   ],
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Agravo interno (voto)",
+    "materia": "FGTS — correção monetária",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Decisão ID 376494205 (12/06/2026)",
+    "recurso": "agravo interno (ID 380864915, 17/06/2026)",
+    "preparo": "[VALIDAR]",
+    "representacao": "[VALIDAR]",
+    "mpf": "Não consta parecer",
+    "autos": "24 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] honorários recursais no agravo interno"
+   ],
    "minuta": false
   },
   {
