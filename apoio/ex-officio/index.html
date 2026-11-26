@@ -12524,6 +12524,8 @@ html body #prq .prt.pmn2{display:flex;flex-direction:column;gap:0;padding:0 14px
 html body #prq .pmn2 .pm-caso{padding:0!important;background:transparent!important;border:0!important}
 /* prontuário (Monocráticas e Pauta): etapas dentro do cartão do processo; se o alto não couber, rola por dentro */
 html body #prq .pmn2 .pm-caso{flex:none;max-height:58vh;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
+/* processo urgente: o cartão reaproveita a moldura .prt-urgf, mas não a margem negativa dela (deslocava o cartão 12 px para a esquerda) */
+html body #prq .pmn2 .pm-caso.prt-urgf{margin:0!important}
 html body #prq .pmn2 .pm-top{position:sticky;top:0;z-index:3;background:var(--ep,#f7f4ec)}
 html body #prq .pmn2 .pm-cd .pm-sh0{margin:14px 0 4px;padding-top:12px;border-top:1px dashed #e2ddd0}
 html body #prq .pmn2 .pm-cd .pm-et{border:0;padding:14px 0 6px;background:none;border-radius:0}
