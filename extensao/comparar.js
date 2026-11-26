@@ -274,10 +274,10 @@ function resultadoHtml() {
     (pf.length > 1 ? '<label class="cx-sel">Parte da fonte <select data-c="parteFonte"><option value="inteira">Inteira</option>' + pf.map(function (t) { return '<option' + (C.parteFonte === t ? ' selected' : '') + '>' + esc(t) + '</option>'; }).join('') + '</select></label>' : '') + '</div>';
   var st = (r.npar ? r.npar + ' parágrafo' + (r.npar > 1 ? 's' : '') + ' com diferença' : 'Sem diferenças') + ' · ' + r.pct + '% igual' + (r.vagas ? ' · ' + r.vagas + ' vaga(s) do modelo preenchida(s)' : '') +
     (r.faltam.length ? ' · ' + r.faltam.length + ' parágrafo(s) da fonte ausentes no editor' : '') + (r.sobram.length ? ' · ' + r.sobram.length + ' só no editor' : '');
-  var vis = '<div class="cx-vis"><span class="seg"><button type="button" data-c="v:recortes" aria-selected="' + (C.vista !== 'folha') + '">Recortes</button><button type="button" data-c="v:folha" aria-selected="' + (C.vista === 'folha') + '">Folha</button></span>' +
+  var vis = '<div class="cx-vis"><span class="seg"><button type="button" data-c="v:recortes" aria-selected="' + (C.vista !== 'folha' && C.vista !== 'lado') + '">Recortes</button><button type="button" data-c="v:folha" aria-selected="' + (C.vista === 'folha') + '">Folha</button><button type="button" data-c="v:lado" aria-selected="' + (C.vista === 'lado') + '">Lado a lado</button></span>' +
     '<button type="button" class="btn line sm" data-c="janela" title="Abre a fonte e o editor lado a lado, numa janela grande">Lado a lado em janela</button></div>';
   ULT = { it: it, rotulo: it.rotulo || it.nome || '' };
-  var corpo = C.vista === 'folha' ? folhaHtml(alinhar(it)) : '<div class="cx-out">' + r.html + '</div>';
+  var corpo = C.vista === 'folha' ? folhaHtml(alinhar(it)) : C.vista==='lado'?'<div class="cx-out hero-cortex-side" lang="pt-BR">'+ladoALadoHtml(alinhar(it),ULT.rotulo,true)+'</div>':'<div class="cx-out">' + r.html + '</div>';
   if (est) return cab + est + vis + '<p class="status" role="status">' + st + '</p>' + corpo;
   return cab + vis + '<p class="status" role="status">' + st + '</p>' + corpo;
 }
@@ -303,8 +303,10 @@ function alinhar(it) {
   return rows;
 }
 function soLado(h, lado) { return lado === 'a' ? h.replace(/<ins>[\s\S]*?<\/ins>/g, '') : h.replace(/<del>[\s\S]*?<\/del>/g, ''); }
-function ladoALadoHtml(rows, titulo) {
+function ladoALadoHtml(rows, titulo, compacto) {
+  if(compacto&&C.sd){var compact=[],eq=0;function flushEq(){if(eq)compact.push({t:'iguais',n:eq});eq=0;}rows.forEach(function(x){if(x.t==='eq')eq++;else{flushEq();compact.push(x);}});flushEq();rows=compact;}
   return '<div class="lal-h"><b>' + esc(titulo || 'Fonte') + '</b><b>Editor do PJe</b></div><div class="lal">' + rows.map(function (x) {
+    if(x.t==='iguais')return '<div class="lal-eq">'+x.n+' parágrafo'+(x.n===1?' igual':'s iguais')+'</div>';
     if (x.t === 'tit') return '<div class="lal-t">' + esc(x.a) + '</div>';
     if (x.t === 'eq') return '<div class="lal-r eq"><p>' + esc(x.a) + '</p><p>' + esc(x.b) + '</p></div>';
     if (x.t === 'mod') { var d = CX.difPal(x.a, x.b, C.ws).h; return '<div class="lal-r mod"><p>' + soLado(d, 'a') + '</p><p>' + soLado(d, 'b') + '</p></div>'; }
@@ -446,7 +448,7 @@ function render() {
       var eh=ed.querySelector('.mn-ed-h'),part=eh&&eh.querySelector('.mn-pt'),read=eh&&eh.querySelector('[data-c="ler"]');
       if(read){read.title=read.textContent;read.setAttribute('aria-label',read.textContent);read.textContent='Ler';}
       if(part){var sub=document.createElement('div');sub.className='hero-review-part';var lab=document.createElement('span');lab.textContent='Parte em revisão';sub.append(lab,part);eh.after(sub);}
-      var work=document.createElement('section');work.className='hero-review-workspace hero-review-editorial';var grid=document.createElement('div');grid.className='hero-review-documents';ed.classList.add('hero-review-document');ref.classList.add('hero-review-document');var edText=ed.querySelector('.mn-tx');if(edText)edText.setAttribute('lang','pt-BR');ed.before(work);
+      var work=document.createElement('section');work.className='hero-review-workspace hero-review-editorial hero-cortex-editorial';var grid=document.createElement('div');grid.className='hero-review-documents';ed.classList.add('hero-review-document','hero-cortex-panel');ref.classList.add('hero-review-document','hero-cortex-panel');var edText=ed.querySelector('.mn-tx');if(edText)edText.setAttribute('lang','pt-BR');ed.before(work);
       var divider=document.createElement('div');divider.className='hero-review-divider';var comparisonTitle=document.createElement('span');comparisonTitle.className='hero-comparison-kicker';comparisonTitle.textContent='Comparação de textos';
       var mark=document.createElement('span');mark.className='hero-review-cross';mark.setAttribute('aria-label','Comparação entre os textos');mark.textContent='×';
       divider.append(comparisonTitle,mark,bar);grid.append(ed,divider,ref);work.append(grid);
@@ -497,10 +499,10 @@ var tq = 0;
 caixa.addEventListener('click', function (e) {
   var b = e.target.closest('button'); if (!b) return;
   if(/^fonte-(menor|maior|padrao)$/.test(b.dataset.c||'')){C.fontePx=tamanhoFonte(b.dataset.c==='fonte-padrao'?11.5:C.fontePx+(b.dataset.c==='fonte-maior'?0.5:-0.5));aplicarFonte();guarda();return;}
-  if(b.dataset.c==='comparar'){if(C.fusao){C.fusao=false;sincronizarFusao();}else if(ED.estado().texto&&itemAtual()){C.fusao=true;C.vista='folha';atualizarResultado();}return;}
+  if(b.dataset.c==='comparar'){if(C.fusao){C.fusao=false;sincronizarFusao();}else if(ED.estado().texto&&itemAtual()){C.fusao=true;C.vista=C.vista||'folha';atualizarResultado();}return;}
   if(b.dataset.c==='buscar-ref'||b.dataset.c==='limpar-ref'){clearTimeout(tq);var q=caixa.querySelector('[data-c="q"]');C.q=b.dataset.c==='limpar-ref'?'':q?q.value:C.q;render();return;}
   if (b.dataset.c === 'ler') { ED.ler().catch(function () {}); return; }
-  if (b.dataset.c === 'v:recortes' || b.dataset.c === 'v:folha') { C.vista = b.dataset.c.slice(2); render(); return; }
+  if (b.dataset.c === 'v:recortes' || b.dataset.c === 'v:folha' || b.dataset.c === 'v:lado') { C.vista = b.dataset.c.slice(2); render(); return; }
   if (b.dataset.c === 'janela') { if (ULT && ULT.it && window.MutaJanela) window.MutaJanela.abrir('comparar', 'Comparação · ' + ULT.rotulo, ladoALadoHtml(alinhar(ULT.it), ULT.rotulo)); return; }
   if (b.dataset.c === 'janela-folha') { if (window.MutaJanela) window.MutaJanela.abrir('comparar', 'Folha do editor', folhaHtml(null)); return; }
   if (b.dataset.pron != null) { C.pron = b.dataset.pron; C.sel.matriz = ''; render(); return; }

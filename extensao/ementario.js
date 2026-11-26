@@ -254,7 +254,7 @@ function pintarCombinados(list){
    var L=FT.rank(gr.items.filter(function(x){return matches(gr.tx(x));}),modo,gr.tx),group=el('details','hero-rep-group');group.open=true;
    var head=el('summary','hero-rep-group-head',gr.titulo+' · '+n0(L.length));group.append(head);
    L.slice(0,5).forEach(function(x){var c=el('article','hero-rep-card hero-rep-'+(gr.tipo==='Modelo'?'model':'para')),body=gr.body(x),h=el('div','hero-rep-card-head'),title=el('b','',gr.name(x)),tag=el('span','hero-rep-kind',gr.tipo);h.append(title,tag);c.append(h,el('p','hero-rep-preview',body.slice(0,180)+(body.length>180?'…':'')));
-    var det=el('details','hero-rep-details');det.append(el('summary','','Ver conteúdo'),el('pre','gr-tx',body));c.append(det);
+    var det=el('details','hero-rep-details hero-cortex-reading');det.append(el('summary','','Ver conteúdo'),el('pre','gr-tx hero-cortex-sheet',body));c.append(det);
     var bar=el('div','hero-rep-actions');bar.append(btn('Copiar',function(){copiar(body,'Texto copiado.');}),FT.botaoMaterial({tipo:gr.tipo,id:x.id,titulo:gr.name(x),texto:body}));
     if(gr.tipo==='Modelo')bar.append(btn('Usar no Gerador',function(){if(window.MutaModelosHero)window.MutaModelosHero.usar(x);}));
     else bar.append(btn('Inserir',function(){var tx=body.replace(/\{([^{}|]*)(?:\|([^{}]*))?\}/g,function(_,a,b){return '['+(b||a).toUpperCase()+']';});if(window.MutaPje&&window.MutaPje.inserir)window.MutaPje.inserir(tx.split(/\n+/).map(function(l){return '<p>'+esc(l)+'</p>';}).join(''),tx).then(function(){status('Parágrafo inserido.');},function(er){status(er.message);});}));
@@ -269,7 +269,7 @@ function pintarCombinados(list){
 }
 
 function render() {
-  var list = $('acv-list'); list.replaceChildren(); V.shown = 0; faixaRel(); if(window.MutaFontes){window.MutaFontes.pintarTabs();pintarCombinados(list);}
+  var list = $('acv-list'); list.classList.add('hero-cortex-results'); list.replaceChildren(); V.shown = 0; faixaRel(); if(window.MutaFontes){window.MutaFontes.pintarTabs();pintarCombinados(list);}
   if (!B.ok) {
     if (B.carregando) for (var i = 0; i < 4; i++) { var sk = el('div', 'row'); sk.style.opacity = '.5'; sk.style.height = '86px'; list.append(sk); }
     $('acv-more').hidden = true; return;
@@ -309,7 +309,7 @@ function mais() {
       '<button type="button" class="btn solid sm" data-ej="cit" title="Inserir no editor do PJe a citação (classe, número, relator, data) e a ementa entre aspas">Citar no editor</button>' +
       '<button type="button" class="btn line sm" data-ej="cp" title="Copiar a ementa">Copiar ementa</button></div>';
     var actions=c.querySelector('.ej-a');if(actions&&window.MutaFontes)actions.append(window.MutaFontes.botaoMaterial({tipo:'Precedente',id:x.id,titulo:x.n||x.id,texto:citacao(x).texto}));
-    if (ab) { var d = el('div', 'ej-d detail'); detalhe(x, d); c.append(d); }
+    if (ab) { var d = el('div', 'ej-d detail hero-cortex-detail'); detalhe(x, d); c.append(d); }
     c.addEventListener('click', function (e) {
       var b = e.target.closest('[data-ej]'); if (!b) return;
       if (b.dataset.ej === 'exp') { V.ab[x.id] = !V.ab[x.id]; var s0 = V.shown; render(); while (V.shown < s0 && V.shown < V.res.length) mais(); var n = list.querySelector('[data-id="' + x.id + '"]'); if (n) n.scrollIntoView({ block: 'nearest' }); }
@@ -375,18 +375,20 @@ function detalhe(x, d) {
   /* ementa justificada; o cabeçalho em caixa alta (ramo, classe, assunto, conclusão) em negrito, como no acórdão */
   var emd = el('div', 'tx-j ementa'), et = String(x.e || 'Sem ementa no índice.'), mc = /^([^a-zà-ú]{12,}[.:])\s/.exec(et); if (mc) { var cab = mc[1].replace(/\s+(\d+|[IVX]+)\.$/, ''); mc = [cab, cab]; }
   emd.innerHTML = (mc ? '<p><b>' + esc(mc[1]) + '</b> ' + esc(et.slice(mc[0].length)).replace(/\n+/g, '</p><p>') + '</p>' : '<p>' + esc(et).replace(/\n+/g, '</p><p>') + '</p>');
-  d.append(el('p', 'tag', 'Ementa'), emd);
-  if (x.r) d.append(el('p', 'tag', 'Resultado'), el('pre', 'res', x.r));
-  var itBox = el('div');
+  function banda(t,body){var s=el('section','hero-cortex-reading'),h=el('header','hero-cortex-reading-head');h.append(el('span','',t));s.append(h,body);return s;}
+  emd.classList.add('hero-cortex-sheet');emd.setAttribute('lang','pt-BR');
+  d.append(banda('Ementa',emd));
+  if (x.r) d.append(banda('Resultado',el('pre','res hero-cortex-sheet',x.r)));
+  var itBox = el('section','hero-cortex-reading hero-cortex-fulltext');
   if (x.it || x.sid || x.cur) {
     var bi = el('button', 'btn line', 'Ler o inteiro teor'); bi.type = 'button';
     bi.addEventListener('click', function () {
       bi.disabled = true; bi.textContent = 'Abrindo o inteiro teor…';
       inteiroTeor(x).then(function (t) {
-        itBox.replaceChildren(el('p', 'tag', 'Inteiro teor'));
-        var pre = el('div', 'tx-j it'), pz = function (h) { return '<p>' + h.replace(/\n+/g, '</p><p>') + '</p>'; };
+        itBox.replaceChildren();
+        var pre = el('div', 'tx-j it hero-cortex-sheet'), pz = function (h) { return '<p>' + h.replace(/\n+/g, '</p><p>') + '</p>'; };
         if (t && V.ft && V.ft.P) pre.innerHTML = pz(destacar(t, V.ft.P)); else if (t && V.qp) pre.innerHTML = pz(destacar(t, V.qp)); else pre.innerHTML = pz(esc(t || 'Inteiro teor indisponível na base; consulte a fonte no TRF-3.'));
-        itBox.append(pre);
+        pre.setAttribute('lang','pt-BR');var h=el('header','hero-cortex-reading-head');h.append(el('span','','Inteiro teor'),el('small','',t?n0(t.length)+' caracteres':'Indisponível'));itBox.append(h,pre);
         var m = pre.querySelector('mark'); if (m) m.scrollIntoView({ block: 'center' });
       });
     });
