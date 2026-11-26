@@ -313,11 +313,11 @@
    "assunto": "Oncológico",
    "assunto_detalhado": "",
    "grupo": "assunto-17",
-   "tipo_caso": "Oncológico",
-   "resultado": "",
+   "tipo_caso": "Saúde · medicamento oncológico (abemaciclibe) · extinção sem mérito · apelação da DPU",
+   "resultado": "Proposta: [VALIDAR paradigma] apelação da autora (DPU) contra a extinção sem mérito (artigo 485, VI e IX, do CPC); conferir a causa (óbito? perda do objeto?) e os honorários pedidos pelo MPF (artigo 85, § 8º); competência e responsabilidade pelo Tema 1.234/STF [VALIDAR: causa da extinção (inciso IX: morte da parte?); habilitação de sucessores]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença (ID 329592705); NATJUS favorável ao abemaciclibe sob responsabilidade da União (ID 329592413); parecer do MPF (ID 369939652).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -326,14 +326,57 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "329592705"
+    },
+    {
+     "peca": "Apelação",
+     "id": "329592707"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "329592709"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "329592710"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "329592711"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "329592413"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "369939652"
+    }
+   ],
+   "mpf": "parecer ID 369939652 (29/04/2026)",
    "triagem": {
     "prontidao": "APTO",
-    "prontidao_em": "26/11/2026"
+    "prontidao_em": "26/11/2026",
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Saúde — fornecimento de medicamento",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 329592705 (25/04/2025)",
+    "recurso": "apelação (ID 329592707, 12/05/2025)",
+    "preparo": "[VALIDAR]",
+    "representacao": "[VALIDAR]",
+    "mpf": "parecer ID 369939652 (29/04/2026)",
+    "autos": "74 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
    },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] causa da extinção (inciso IX: morte da parte?)",
+    "[VALIDAR] habilitação de sucessores"
+   ],
    "minuta": false
   },
   {
@@ -347,11 +390,11 @@
    "assunto": "Impostos",
    "assunto_detalhado": "",
    "grupo": "assunto-28",
-   "tipo_caso": "Impostos",
-   "resultado": "",
+   "tipo_caso": "Tributário · tutela confirmada · honorários da autora",
+   "resultado": "Proposta: [VALIDAR paradigma] apelação da autora só quanto aos honorários (afastar a condenação ou reduzir pela metade, artigo 90, § 4º, do CPC)",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença parcialmente procedente, confirmando a tutela antecipada (ID 326508640).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -360,11 +403,35 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "326508640"
+    },
+    {
+     "peca": "Apelação",
+     "id": "326508642"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "326508646"
+    }
+   ],
+   "mpf": "Não consta parecer",
    "triagem": {
     "prontidao": "APTO",
-    "prontidao_em": "26/11/2026"
+    "prontidao_em": "26/11/2026",
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Tributário — sucumbência",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 326508640 (04/04/2025)",
+    "recurso": "apelação (ID 326508642, 12/05/2025)",
+    "preparo": "comprovante juntado (ID 326508643, 326508644) — conferir o tipo",
+    "representacao": "procuração/substabelecimento ID 326508207, 326508209",
+    "mpf": "Não consta parecer",
+    "autos": "130 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
    },
    "ajustes": [],
    "pendencias": [],
@@ -381,11 +448,11 @@
    "assunto": "IRPJ/ Imposto de Renda de Pessoa Jurídica",
    "assunto_detalhado": "",
    "grupo": "assunto-9",
-   "tipo_caso": "IRPJ/ Imposto de Renda de Pessoa Jurídica",
-   "resultado": "",
+   "tipo_caso": "Execução fiscal (IRPJ) · exceção de pré-executividade · honorários",
+   "resultado": "Proposta: [VALIDAR paradigma] apelação do executado/sócio pela condenação da Fazenda em honorários (causalidade; Tema 961/STJ e Tema 1.076/STJ)",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença (ID 336620373); embargos de declaração rejeitados (ID 336620382).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -394,11 +461,43 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "336620373"
+    },
+    {
+     "peca": "Embargos de declaração",
+     "id": "336620375"
+    },
+    {
+     "peca": "Apelação",
+     "id": "336620385"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "336620378"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "336620399"
+    }
+   ],
+   "mpf": "Não consta parecer",
    "triagem": {
     "prontidao": "APTO",
-    "prontidao_em": "26/11/2026"
+    "prontidao_em": "26/11/2026",
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Tributário — execução fiscal, honorários",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 336620373 (20/10/2024)",
+    "recurso": "embargos de declaração (ID 336620375, 20/12/2024); apelação (ID 336620385, 22/07/2025)",
+    "preparo": "[VALIDAR]",
+    "representacao": "procuração/substabelecimento ID 336620247, 336620250, 336620370",
+    "mpf": "Não consta parecer",
+    "autos": "140 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
    },
    "ajustes": [],
    "pendencias": [],
@@ -415,11 +514,11 @@
    "assunto": "Multas e demais Sanções",
    "assunto_detalhado": "",
    "grupo": "assunto-1",
-   "tipo_caso": "Multas e demais Sanções",
-   "resultado": "",
+   "tipo_caso": "Execução fiscal do INMETRO extinta (artigo 485, IV) · honorários contra a exequente",
+   "resultado": "Proposta: [VALIDAR paradigma] apelação do INMETRO (ID 336480406, petição de 08/08/2025) contra os honorários de 10% fixados na extinção da execução fiscal [VALIDAR: ID da apelação (juntada como petição intercorrente)]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença extinguiu a execução (artigos 485, IV, e 925 do CPC) (ID 336480405); contrarrazões (ID 336480408).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -428,15 +527,35 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "336480405"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "336480408"
+    }
+   ],
+   "mpf": "Não consta parecer",
    "triagem": {
     "prontidao": "PENDENTE — apelação não localizada pelo tipo do documento: conferir recurso e contrarrazões",
-    "prontidao_em": "26/11/2026"
+    "prontidao_em": "26/11/2026",
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — execução fiscal, honorários",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 336480405 (03/08/2025)",
+    "recurso": "[VALIDAR]",
+    "preparo": "[VALIDAR]",
+    "representacao": "procuração/substabelecimento ID 336480395, 336480409",
+    "mpf": "Não consta parecer",
+    "autos": "36 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
    },
    "ajustes": [],
    "pendencias": [
-    "[PRONTIDÃO] apelação não localizada pelo tipo do documento: conferir recurso e contrarrazões"
+    "[VALIDAR] ID da apelação (juntada como petição intercorrente)"
    ],
    "minuta": false
   },
@@ -451,11 +570,11 @@
    "assunto": "CNH - Carteira Nacional de Habilitação",
    "assunto_detalhado": "",
    "grupo": "assunto-3",
-   "tipo_caso": "CNH - Carteira Nacional de Habilitação",
-   "resultado": "",
+   "tipo_caso": "Autos de infração do DNIT · CNH · procedência",
+   "resultado": "Proposta: [VALIDAR paradigma] apelações do DNIT (ID 282149961) e do autor (ID 338469388, com tutela cautelar sobre a CNH) contra a sentença que anulou os Autos de Infração S019711344 e S018613237 [VALIDAR: objeto da apelação do autor (honorários? tutela)]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença procedente (ID 282149956); embargos de declaração rejeitados (ID 338469387).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -464,14 +583,48 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "282149956"
+    },
+    {
+     "peca": "Apelação",
+     "id": "282149961"
+    },
+    {
+     "peca": "Apelação",
+     "id": "338469388"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "338469389"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "338469391"
+    }
+   ],
+   "mpf": "Não consta parecer",
    "triagem": {
     "prontidao": "APTO",
-    "prontidao_em": "26/11/2026"
+    "prontidao_em": "26/11/2026",
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — trânsito, autos de infração",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 282149956 (28/06/2023)",
+    "recurso": "apelação (ID 282149961, 13/07/2023); apelação (ID 338469388, 03/03/2025)",
+    "preparo": "[VALIDAR]",
+    "representacao": "procuração/substabelecimento ID 282149915",
+    "mpf": "Não consta parecer",
+    "autos": "51 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
    },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] objeto da apelação do autor (honorários? tutela)"
+   ],
    "minuta": false
   },
   {
@@ -485,11 +638,11 @@
    "assunto": "Restituição ao Erário",
    "assunto_detalhado": "",
    "grupo": "assunto-37",
-   "tipo_caso": "Restituição ao Erário",
-   "resultado": "",
+   "tipo_caso": "Execução fiscal do INSS (ressarcimento) extinta · honorários por equidade",
+   "resultado": "Proposta: [VALIDAR paradigma] apelação do INSS pela fixação dos honorários por equidade na extinção por perda superveniente do interesse (Tema 1.076/STJ)",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença extinguiu a execução (artigo 485, VI, do CPC) (ID 349347530); redistribuição (ID 352231371).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -498,11 +651,35 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "349347530"
+    },
+    {
+     "peca": "Apelação",
+     "id": "349347531"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "349347533"
+    }
+   ],
+   "mpf": "Não consta parecer",
    "triagem": {
     "prontidao": "APTO",
-    "prontidao_em": "26/11/2026"
+    "prontidao_em": "26/11/2026",
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Processual — execução fiscal, honorários",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 349347530 (05/11/2025)",
+    "recurso": "apelação (ID 349347531, 06/11/2025)",
+    "preparo": "[VALIDAR]",
+    "representacao": "[VALIDAR]",
+    "mpf": "Não consta parecer",
+    "autos": "33 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
    },
    "ajustes": [],
    "pendencias": [],
@@ -519,11 +696,11 @@
    "assunto": "Multas e demais Sanções",
    "assunto_detalhado": "",
    "grupo": "assunto-1",
-   "tipo_caso": "Multas e demais Sanções",
-   "resultado": "",
+   "tipo_caso": "Pena de perdimento/multa (Receita) · veículo · improcedência",
+   "resultado": "Proposta: [VALIDAR paradigma] apelação do autor contra a improcedência; discute restrição do veículo e boa-fé (série de perdimento)",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença improcedente com honorários de 10% suspensos (ID 304966320); embargos rejeitados (ID 304966324).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -532,11 +709,39 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "304966320"
+    },
+    {
+     "peca": "Embargos de declaração",
+     "id": "304966321"
+    },
+    {
+     "peca": "Apelação",
+     "id": "304966325"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "304966328"
+    }
+   ],
+   "mpf": "Não consta parecer",
    "triagem": {
     "prontidao": "APTO",
-    "prontidao_em": "26/11/2026"
+    "prontidao_em": "26/11/2026",
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Tributário/aduaneiro — perdimento",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 304966320 (30/07/2024)",
+    "recurso": "embargos de declaração (ID 304966321, 01/08/2024); apelação (ID 304966325, 12/08/2024)",
+    "preparo": "[VALIDAR]",
+    "representacao": "procuração/substabelecimento ID 304966302",
+    "mpf": "Não consta parecer",
+    "autos": "37 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
    },
    "ajustes": [],
    "pendencias": [],
@@ -553,11 +758,11 @@
    "assunto": "Infração Administrativa",
    "assunto_detalhado": "",
    "grupo": "assunto-29",
-   "tipo_caso": "Infração Administrativa",
-   "resultado": "",
+   "tipo_caso": "CREA · registro de empresa de extintores · procedência",
+   "resultado": "Proposta: [VALIDAR paradigma] apelações do CREA/MS (incompetência para fiscalizar) e da autora (majorar honorários, artigo 85 do CPC)",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença procedente: incompetência do CREA/MS para fiscalizar a autora e exigir registro (ID 321796268).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -566,11 +771,43 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "321796268"
+    },
+    {
+     "peca": "Apelação",
+     "id": "321796269"
+    },
+    {
+     "peca": "Apelação",
+     "id": "321796273"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "321796276"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "321796278"
+    }
+   ],
+   "mpf": "Não consta parecer",
    "triagem": {
     "prontidao": "APTO",
-    "prontidao_em": "26/11/2026"
+    "prontidao_em": "26/11/2026",
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — conselho profissional",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 321796268 (18/02/2025)",
+    "recurso": "apelação (ID 321796269, 14/03/2025); apelação (ID 321796273, 09/04/2025)",
+    "preparo": "comprovante juntado (ID 321796251, 321796252, 321796267, 321796270, 321796271, 321796274) — conferir o tipo",
+    "representacao": "procuração/substabelecimento ID 321796243, 321796258",
+    "mpf": "Não consta parecer",
+    "autos": "44 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
    },
    "ajustes": [],
    "pendencias": [],
@@ -587,11 +824,11 @@
    "assunto": "Exercício Profissional",
    "assunto_detalhado": "",
    "grupo": "assunto-15",
-   "tipo_caso": "Exercício Profissional",
-   "resultado": "",
+   "tipo_caso": "COREN × Município · improcedência · honorários do conselho",
+   "resultado": "Proposta: [VALIDAR paradigma] apelação do COREN/MS só quanto aos honorários fixados contra o conselho [VALIDAR: contrarrazões do Município não localizadas]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença improcedente (ID 317374445); embargos rejeitados (ID 317374448); MPF sem interesse (ID 319154703).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -600,15 +837,47 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "317374445"
+    },
+    {
+     "peca": "Embargos de declaração",
+     "id": "317374447"
+    },
+    {
+     "peca": "Apelação",
+     "id": "317374450"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "317374442"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "319154703"
+    }
+   ],
+   "mpf": "parecer ID 319154703 (27/03/2025)",
    "triagem": {
     "prontidao": "PENDENTE — sem contrarrazões nem certidão de decurso após a apelação (ID 317374450)",
-    "prontidao_em": "26/11/2026"
+    "prontidao_em": "26/11/2026",
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — conselho profissional, honorários",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 317374445 (02/09/2024)",
+    "recurso": "embargos de declaração (ID 317374447, 04/09/2024); apelação (ID 317374450, 16/09/2024)",
+    "preparo": "comprovante juntado (ID 317374451) — conferir o tipo",
+    "representacao": "procuração/substabelecimento ID 317374306, 317374434, 317374436",
+    "mpf": "parecer ID 319154703 (27/03/2025)",
+    "autos": "96 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
    },
    "ajustes": [],
    "pendencias": [
-    "[PRONTIDÃO] sem contrarrazões nem certidão de decurso após a apelação (ID 317374450)"
+    "[VALIDAR] contrarrazões do Município não localizadas"
    ],
    "minuta": false
   },
