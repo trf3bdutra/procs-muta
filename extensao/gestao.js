@@ -26,12 +26,12 @@
   function gestaoNaFaixa(q){
     var slot=$('tu-gestao'),faixa=$('pv-nav-main');if(!slot)return;
     /* Gestão na faixa do perfil também na prévia universal. */
-    [['tab-dil','Diligências'],['tab-del','Deliberações']].forEach(function(x){
+    [['tab-pauta','Pauta'],['tab-dil','Diligências'],['tab-del','Deliberações']].forEach(function(x){
       var b=$(x[0]);if(!b)return;
       if(b.parentNode!==slot)slot.appendChild(b);
       b.title=x[1];b.setAttribute('aria-label',x[1]);
     });
-    slot.hidden=!pode(q);
+    slot.hidden=!q.on; /* Pauta permanece acessível a toda a equipe autenticada. */
   }
 
   /* ---------- visibilidade das abas ---------- */
@@ -244,11 +244,10 @@
     var nUrg = L.as.filter(function (a) { return a.urg; }).length;
     var corpo = X.aba==='as'?grupoDel('Aguardando assinatura',L.as,itemAs,'Nenhuma decisão urgente submetida à assinatura.','urgente')+grupoDel('Demais urgências em aberto',L.urg,itemUrg,'Nenhuma outra urgência em aberto.','urgente'):
       X.aba==='pe'?grupoDel('Retiradas de pauta',L.pe.filter(function(x){return x.tipo==='retirada';}),itemPe,'Nenhum pedido em aberto.','pendente')+grupoDel('Adiamentos',L.pe.filter(function(x){return x.tipo!=='retirada';}),itemPe,'Nenhum pedido em aberto.','pendente'):
-      X.aba==='so'?grupoDel('Sustentações e preferências',L.so,itemSo,'Nenhum pedido recebido.','sessao'):
       grupoDel('Dúvidas em aberto',L.du,itemDu,'Nenhuma dúvida em aberto dirigida a você.','pendente');
     c.innerHTML = '<div class="gx-top"><div><b>Deliberações</b><small class="muted">o que aguarda decisão' + (X.dados && X.dados.hoje ? ' · ' + esc(data(X.dados.hoje)) : '') + '</small></div>' +
       '<span><button type="button" class="lnk" data-gx="ler-del">' + (X.lendo ? 'lendo…' : 'atualizar') + '</button></span></div>' +
-      '<div class="seg pmodos gx-modos" role="tablist" aria-label="Tipo de deliberação">' + tab('as', 'Urgências', 'Urgências em aberto, separadas das decisões prontas para assinatura') + tab('du', 'Dúvidas', 'dúvidas da equipe') + tab('pe', 'Pauta', 'pedidos de retirada e de adiamento') + tab('so', 'Sustentações', 'pedidos de sustentação e preferência') + '</div>' +
+      '<div class="seg pmodos gx-modos" role="tablist" aria-label="Tipo de deliberação">' + tab('as', 'Urgências', 'Urgências em aberto, separadas das decisões prontas para assinatura') + tab('du', 'Dúvidas', 'dúvidas da equipe') + tab('pe', 'Pauta', 'pedidos de retirada e de adiamento') + '</div>' +
       (X.msg ? '<p class="gx-msg' + (/^Não/.test(X.msg) ? ' err' : '') + '">' + esc(X.msg) + '</p>' : '') +
       (X.erro ? '<p class="gx-v err">' + esc(X.erro) + '</p>' : !X.dados ? '<p class="muted gx-v">Lendo…</p>' : corpo);
   }
@@ -297,7 +296,7 @@
   function badges() {
     var b1 = $('dil-badge'), b2 = $('del-badge');
     if (b1) { var n1 = D.lista ? abertasComigo().length : 0; b1.hidden = !n1; b1.textContent = n1 ? String(n1) : ''; b1.title = n1 ? n1 + ' diligência(s) com você' : ''; }
-    if (b2) { var L = X.dados ? listas() : { as: [], urg: [], du: [], pe: [], so: [] }, n2 = L.as.length + L.urg.length + L.du.length + L.pe.length + L.so.filter(function (s) { return s.aVincular; }).length; b2.hidden = !n2; b2.textContent = n2 ? String(n2) : ''; b2.title = n2 ? n2 + ' aguardando decisão' : ''; }
+    if (b2) { var L = X.dados ? listas() : { as: [], urg: [], du: [], pe: [], so: [] }, n2 = L.as.length + L.urg.length + L.du.length + L.pe.length; b2.hidden = !n2; b2.textContent = n2 ? String(n2) : ''; b2.title = n2 ? n2 + ' aguardando decisão' : ''; }
   }
 
   /* ---------- eventos ---------- */
