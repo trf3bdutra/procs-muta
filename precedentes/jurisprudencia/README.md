@@ -11,10 +11,10 @@ O procs-muta é o repositório principal: a partir desta importação, nada aqui
 | Pasta | Período | Registros |
 | --- | --- | --- |
 | `acordaos/` | 1999–2026 | 26.276 |
-| `monocraticas/` | 2016–2026 | 7.311 |
-| **Total** | | **33.587** |
+| `monocraticas/` | 2016–2026 | 7.313 |
+| **Total** | | **33.589** |
 
-Um arquivo por ano, em JSON comprimido (`AAAA.json.gz`). O `indice.json.gz` traz os 33.587
+Um arquivo por ano, em JSON comprimido (`AAAA.json.gz`). O `indice.json.gz` traz os 33.589
 registros em forma resumida, com chaves curtas, para busca sem abrir os arquivos de ano.
 
 Dos acórdãos: 12.916 com inteiro teor, 11.751 só com o acórdão e 1.609 só com a ementa.
