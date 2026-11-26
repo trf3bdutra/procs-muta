@@ -60,7 +60,8 @@ def montar_universal(painel: pathlib.Path) -> str:
     if universal == html:
         sys.exit('painel.html: gabinete.js não encontrado')
     universal = universal.replace('<script src="roteiro.js"></script>', '<script src="roteiro-universal.js"></script>', 1)
-    universal = universal.replace('</head>', '<link rel="stylesheet" href="universal-layout.css">\n</head>', 1)
+    # O Design System é a última camada; permanece único nos três ambientes.
+    universal = universal.replace('<link rel="stylesheet" href="hero-design.css">', '<link rel="stylesheet" href="universal-layout.css">\n<link rel="stylesheet" href="hero-design.css">', 1)
     # A navegação conserva todos os IDs e painéis originais, inclusive as abas
     # ocultas por permissão ou acessadas por atalhos. Só agrupa a apresentação.
     nav = re.search(r'(<div class="nav" role="tablist"[^>]*>)([\s\S]*?)(</div>)', universal)
