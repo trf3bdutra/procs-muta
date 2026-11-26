@@ -2216,6 +2216,7 @@ html body.hero-redesign-v53 #topo-u>#pv-nav-main{
  grid-row:1!important;grid-column:2!important;display:flex!important;
  align-items:center!important;justify-content:space-evenly!important;gap:2px!important;
  min-width:0;min-height:28px;overflow-x:auto;scrollbar-width:none;
+ background:var(--hero-nav-white,#fff)!important;
 }
 html body.hero-redesign-v53 #topo-u>#pv-nav-main::-webkit-scrollbar{display:none}
 html body.hero-redesign-v53 #topo-u>#pv-nav-main>button{
@@ -2223,6 +2224,7 @@ html body.hero-redesign-v53 #topo-u>#pv-nav-main>button{
  flex:0 0 auto;min-height:25px!important;height:25px!important;
  padding:2px 4px!important;gap:3px!important;border:0!important;
  border-radius:0!important;white-space:nowrap;
+ background:var(--hero-nav-white,#fff)!important;
 }
 html body.hero-redesign-v53 #topo-u>#pv-nav-main .nav-text{display:block!important;position:static!important;width:auto!important;height:auto!important}
 html body.hero-redesign-v53 #topo-u>#pv-nav-main .nav-text small{display:none!important}
@@ -2232,15 +2234,16 @@ html body.hero-redesign-v53 #topo-u>#pv-nav-main .nav-text b{font-size:10px!impo
 html body.hero-redesign-v53 .layout>aside>.nav>.tu-gestao:not([hidden]){
  display:grid!important;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);width:100%;
  align-items:stretch;gap:2px;min-width:0;
+ background:var(--hero-nav-cream,#f3efe6)!important;
 }
 html body.hero-redesign-v53 .layout>aside .tu-gestao[hidden],html body.hero-redesign-v53 .layout>aside .tu-gestao button[hidden]{display:none!important}
 html body.hero-redesign-v53 .layout>aside .tu-gestao>button{
  display:flex!important;flex-direction:column;justify-content:center;align-items:center;gap:3px;
  min-width:0;min-height:40px;padding:4px 1px;border:0;border-radius:0;
- background:transparent;color:var(--cmt-muted);font:500 10px/1.15 var(--cmt-font,system-ui);white-space:nowrap
+ background:var(--hero-nav-cream,#f3efe6)!important;color:var(--cmt-muted);font:500 10px/1.15 var(--cmt-font,system-ui);white-space:nowrap
 }
 html body.hero-redesign-v53 .layout>aside .tu-gestao>button[aria-selected=true]{
- background:var(--cmt-paper)!important;box-shadow:inset 0 -2px var(--cmt-gold);color:var(--cmt-ink)!important
+ background:var(--hero-nav-cream,#f3efe6)!important;box-shadow:inset 0 -2px var(--cmt-gold);color:var(--cmt-ink)!important
 }
 html body.hero-redesign-v53 .layout>aside .tu-gestao .nav-icon{display:grid;place-items:center;width:17px;height:17px;flex:none;background:none;color:inherit}
 html body.hero-redesign-v53 .layout>aside .tu-gestao .nav-icon svg{width:16px;height:16px}
@@ -2257,3 +2260,10 @@ html body.hero-redesign-v53 .layout>aside .tu-gestao .conf-badge{font-size:9px;v
  html body.hero-redesign-v53 #topo-u>#pv-nav-main>button{padding-inline:3px!important}
  html body.hero-redesign-v53 #topo-u>#pv-nav-main .nav-text b{font-size:9.5px!important}
 }
+
+/* Separação cromática das duas faixas, inclusive no estado selecionado. */
+html body.hero-redesign-v53{--hero-nav-white:#fff;--hero-nav-cream:#f3efe6}
+html[data-tema=escuro] body.hero-redesign-v53{--hero-nav-white:var(--cmt-paper);--hero-nav-cream:var(--cmt-beige)}
+html body.hero-redesign-v53 #topo-u:not([hidden]),html body.hero-redesign-v53 #topo-u>#pv-nav-main>button[aria-selected=true]{background:var(--hero-nav-white)!important}
+html body.hero-redesign-v53 .layout>aside,html body.hero-redesign-v53 .layout>aside>.nav{background:var(--hero-nav-cream)!important}
+html body.hero-redesign-v53 #topo-u>#pv-nav-main>button[aria-selected=true],html body.hero-redesign-v53 .layout>aside .tu-gestao>button[aria-selected=true]{box-shadow:inset 0 -2px var(--cmt-gold)!important}
