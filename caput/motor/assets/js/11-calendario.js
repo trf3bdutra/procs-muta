@@ -249,7 +249,7 @@ function montar(el,cal,ex){
         /* rodapé "Feito": afazeres marcados como feitos hoje e o que foi registrado hoje (minutas, correções, liberações) */
         return `<div class="cc-fe2${st.fe?' on':''}"><button type="button" class="cc-td-t cc-fe-t" data-a="feito" aria-expanded="${!!st.fe}"${n?'':' disabled'}>Feito <small>${n||'nada ainda'}</small>${n?`<i class="cc-fe-c">${st.fe?'▾':'▸'}</i>`:''}</button>${n&&st.fe?`<ul class="cc-feito">${A.map(x=>`<li><span class="t af">Afazer</span>${x.o}${x.s.date?`<small>Sessão ${F(x.s.date)}</small>`:''}</li>`).join('')}${ex.feitoHtml}</ul>`:''}</div>`;})():''}
 </div>`;
-    const futuras=ex.sessoesLateral&&st.lado==='ses'
+    const futuras=ex.sessoesLateral
       ? Array.from(new Map(ses.filter(s=>s.date>=hoje).map(s=>[s.date,s])).values()).sort((a,b)=>a.date.localeCompare(b.date))
       : [];
     const dir=ex.sessoesLateral
@@ -258,7 +258,9 @@ function montar(el,cal,ex){
       <div class="cc-dh"><b>${st.tl?'Linha do tempo das sessões':'Sessões em andamento'}</b><small>${st.tl?'10 semanas · marcos de todas as sessões':(ativas.length?ativas.length+(ativas.length>1?' sessões':' sessão')+' · ':'')+(dia===hoje?'hoje':'em '+F(dia))}</small>
         <span class="cc-sg" role="tablist"><button role="tab" class="${st.tl?'':'on'}" data-a="dvm" aria-selected="${!st.tl}"><i class="ti ti-layout-columns"></i>Marcos</button><button role="tab" class="${st.tl?'on':''}" data-a="dvt" aria-selected="${!!st.tl}" title="Linha do tempo (T)"><i class="ti ti-timeline"></i>Linha do tempo</button></span></div>
       ${st.tl?`<div class="cc-dtl">${semanas(ses)}</div>`:`<div class="cc-dg">${ativas.map(s=>card(s)).join('')||'<div class="cc-wv" style="display:block">Nenhuma sessão em andamento neste dia.</div>'}</div>`}</div>`;
-    return [esq,dir];
+    // O Mural mede uma régua de três cartões reais, independente da aba ativa.
+    const refCards=ex.sessoesLateral&&futuras.length?Array.from({length:3},(_,i)=>futuras[i]||futuras[futuras.length-1]).map(s=>card(s,true).replace(/ data-(?:ses|s|k)="[^"]*"/g,'').replace(/<\/div>$/,'<button type="button" class="cc-sess-filter" tabindex="-1">Ver minhas designações</button></div>')).join(''):'';
+    return [esq,dir,refCards];
   }
   function dialogo(){
     if(!st.dlg) return '';
@@ -304,6 +306,7 @@ function montar(el,cal,ex){
     if(tp==='ausencia'){fm.querySelector('.cc-q-ate').hidden=false; fm.querySelector('.cc-q-ate').firstChild.textContent='Até';}}
   let t;
   function render(){
+    if(ex.sessoesLateral&&st.lado==='sem')st.lado='hoje';
     const vis=ses;
     const dSel=st.dia||hoje, cap=x=>x[0].toUpperCase()+x.slice(1);
     const r0=P(st.semRef||dSel), rf=r0.getDay()%6?r0:new Date(+r0+(r0.getDay()===6?2:1)*DIA), sg=new Date(+rf-((rf.getDay()+6)%7)*DIA), sx=new Date(+sg+4*DIA);
@@ -323,7 +326,10 @@ function montar(el,cal,ex){
       
       
       ${st.min&&ex.semanaRecolhida?faixaSemana(ses):''}
-      <div class="cc-body">${(()=>{const [e2,d2]=lateral();const b=st.mes||hoje.slice(0,7),[y,m]=b.split('-').map(Number),n2=iso(new Date(y,m,15)).slice(0,7),ML=x=>cap(new Date(+P(x+'-15')).toLocaleDateString('pt-BR',{month:'long'}));const grade=ex.meses===2&&st.passo==='mes'?`<div class="cc-2m"><div><b class="cc-mt">${ML(b)}</b>${mes(vis,b)}</div><div><b class="cc-mt">${ML(n2)}</b>${mes(vis,n2)}</div></div>`:mes(vis);const abas=`<div class="cc-lado" role="tablist" aria-label="Agenda pessoal"><button role="tab" class="${st.lado==='hoje'?'on':''}" data-a="lado-hoje" aria-selected="${st.lado==='hoje'}">Hoje</button><button role="tab" class="${st.lado==='sem'?'on':''}" data-a="lado-sem" aria-selected="${st.lado==='sem'}">Semana</button>${ex.sessoesLateral?`<button role="tab" class="${st.lado==='ses'?'on':''}" data-a="lado-ses" aria-selected="${st.lado==='ses'}">Sessões</button>`:''}</div>`;const e3=!ex.semanaLateral?e2:st.lado==='sem'?`<div class="cc-sb cc-esq">${abas}${semanaLista(vis)}</div>`:ex.sessoesLateral&&st.lado==='ses'?`<div class="cc-sb cc-esq">${abas}<div class="cc-session-host" role="tabpanel" aria-label="Sessões e marcos">${d2}</div></div>`:e2.replace('<div class="cc-sb cc-esq">','<div class="cc-sb cc-esq">'+abas);return ex.ordemVertical?`<div class="cc-top cc-vertical"><div class="cc-grade">${grade}</div>${e3}${st.lado==='ses'&&ex.sessoesLateral?'':d2}</div>`:`<div class="cc-top">${e3}<div>${grade}</div>${st.lado==='ses'&&ex.sessoesLateral?'':d2}</div>`})()}${ex.semanaLateral?'':semanaFaixa(vis)}</div>
+      <div class="cc-body">${(()=>{const [e2,d2,refCards]=lateral();const b=st.mes||hoje.slice(0,7),[y,m]=b.split('-').map(Number),n2=iso(new Date(y,m,15)).slice(0,7),ML=x=>cap(new Date(+P(x+'-15')).toLocaleDateString('pt-BR',{month:'long'}));const grade=ex.meses===2&&st.passo==='mes'?`<div class="cc-2m"><div><b class="cc-mt">${ML(b)}</b>${mes(vis,b)}</div><div><b class="cc-mt">${ML(n2)}</b>${mes(vis,n2)}</div></div>`:mes(vis);const abas=`<div class="cc-lado" role="tablist" aria-label="Agenda pessoal"><button role="tab" class="${st.lado==='hoje'||ex.sessoesLateral&&st.lado!=='ses'?'on':''}" data-a="lado-hoje" aria-selected="${st.lado==='hoje'||ex.sessoesLateral&&st.lado!=='ses'}">${ex.sessoesLateral?'Hoje e semana':'Hoje'}</button>${ex.sessoesLateral?'':`<button role="tab" class="${st.lado==='sem'?'on':''}" data-a="lado-sem" aria-selected="${st.lado==='sem'}">Semana</button>`}${ex.sessoesLateral?`<button role="tab" class="${st.lado==='ses'?'on':''}" data-a="lado-ses" aria-selected="${st.lado==='ses'}">Sessões</button>`:''}</div>`;
+      const e3=!ex.semanaLateral?e2:ex.sessoesLateral&&st.lado==='ses'?`<div class="cc-sb cc-esq">${abas}<div class="cc-session-host" role="tabpanel" aria-label="Sessões e marcos">${d2}</div></div>`:ex.sessoesLateral?e2.replace('<div class="cc-sb cc-esq">','<div class="cc-sb cc-esq">'+abas).replace(/<\/div>$/,'<section class="cc-mural-week" aria-label="Visão da semana">'+semanaLista(vis)+'</section></div>'):st.lado==='sem'?`<div class="cc-sb cc-esq">${abas}${semanaLista(vis)}</div>`:e2.replace('<div class="cc-sb cc-esq">','<div class="cc-sb cc-esq">'+abas);
+      const ref=refCards?`<div class="cc-mural-reference-wrap" aria-hidden="true" inert><div class="cc-sb cc-esq cc-mural-reference">${abas}<div class="cc-session-host"><div class="cc-sess-head"><b>Sessões e marcos</b><button type="button" tabindex="-1">Todas as designações</button></div>${refCards}</div></div></div>`:'';
+      return ex.ordemVertical?`<div class="cc-top cc-vertical"><div class="cc-grade">${grade}</div>${e3}${st.lado==='ses'&&ex.sessoesLateral?'':d2}${ref}</div>`:`<div class="cc-top">${e3}<div>${grade}</div>${st.lado==='ses'&&ex.sessoesLateral?'':d2}</div>`})()}${ex.semanaLateral?'':semanaFaixa(vis)}</div>
       <div class="cc-lg" hidden>${MK.map(m=>`<span><i class="ti ${m[2]}"></i>${m[1]}</span>`).join('')}<span style="margin-left:auto">cheio = cumprido · pulsando = próximo · vermelho = vencido sem cumprir · tracejado = datas a definir · teclas ← → H A S M</span></div>
       ${ex.alertasNoTopo?`<div class="cc-alertas-fonte" hidden>${alertasHtml()}</div>`:''}<div class="cc-tip" hidden></div>${dialogo()}</div>`;
     t=el.querySelector('.cc-tip'); ajustaForm(); const f1=el.querySelector('form.cc-dl [name=titulo]'); if(f1&&!f1.value) f1.focus();
@@ -356,6 +362,7 @@ function montar(el,cal,ex){
     if(st.dlg) return;
     const cel=e.target.closest('.cc-c[data-d]'); if(cel&&!m){st.semRef=cel.dataset.d;st.dia=cel.dataset.d;if(ex.sessoesLateral){st.lado='hoje';ls.set('cc_lado_mural',st.lado);}render();return;}
     const tn=e.target.closest('.cc-td-i[data-dia]'); if(tn){st.dia=tn.dataset.dia;st.semRef=tn.dataset.dia;render();return;}
+    const md=e.target.closest('.cc-sl-d[data-dia]');if(ex.sessoesLateral&&md){st.dia=md.dataset.dia;st.semRef=md.dataset.dia;st.mes=md.dataset.dia.slice(0,7);render();return;}
     const wc=e.target.closest('.cc-wc[data-dia]'); if(wc&&!e.target.closest('.cc-we')){st.dia=wc.dataset.dia;render();return;}
     if(sc){const d=sc.dataset.ses;st.foco=(st.foco||focoPad())===d?null:d;render();return;}
     const alvo=(m&&m.dataset.s)||(go&&go.dataset.go); if(alvo&&ex.abrir) ex.abrir(alvo);
