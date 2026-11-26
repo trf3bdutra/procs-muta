@@ -582,7 +582,7 @@
     if (p) p.scrollTop = y;
   }
   function modo(m) {
-    if(novoHero()&&m==='ger'){if(window.MutaAbas)window.MutaAbas.ir('pront');if(window.MutaGabinete)window.MutaGabinete.ir('Produção');return;}
+    if(novoHero()&&m==='ger'){if(window.MutaAbas)window.MutaAbas.ir('pront');var dock=$('hero-ger-dock');if(!dock&&window.MutaGabinete){window.MutaGabinete.ir('Produção');dock=$('hero-ger-dock');}if(dock){dock.open=true;var sum=dock.querySelector('summary');if(sum)sum.focus({preventScroll:true});pintar(true);}return;}
     var dir=$('dir-consulta');
     if(m==='dir'&&!dir&&window.MutaAbas){window.MutaAbas.ir('dir');return;}
     if(m==='dir'&&dir){dir.hidden=!dir.hidden;if(!dir.hidden){dir.open=true;if(window.MutaDiretrizes)window.MutaDiretrizes.abrir();}return;}

@@ -881,7 +881,7 @@ function corpoProcesso() {
   if(rot==='sol')return '<div id="hero-sol-main"></div>';
   if(rot==='tri')return h;
   producaoIndexCampos().forEach(function(c){ja[c.secao+'.'+c.chave]=1;});
-  return producaoMinuta()+(heroV53()?'<section class="hero-v53-gerador"><h4 class="pm-mer-h">Gerador</h4><div id="ger-app"></div></section>':'')+producaoIndex();
+  return producaoMinuta()+producaoIndex();
 }
 /* 0.54 · Roteiro de produção: todos os campos da ficha que a Minuta-Matriz do Compendium usa (@apelido), do destino do caso
    (sessão ou monocrática). Preenchimento automatizado: a leitura dos autos põe sozinha o que acha nos campos vazios
@@ -1698,7 +1698,7 @@ function heroOrganizarProntuario(){
     var complexity=campoModelo('triagem','COMPLEXIDADE'),complexValue=S(V('triagem','COMPLEXIDADE'));
     if(l1&&complexity&&complexValue){var cx=el('span','hero-v53-complexidade',complexValue);cx.dataset.nivel=complexValue;cx.title='Complexidade · '+complexValue;l1.append(cx);}
     /* Seletor de tipo abre o cartão de Encaminhamento da Triagem. */
-    refTipo.onclick=function(){heroTopo.encDockOpen=true;G.aba='Processo';G.rot='tri';render();var t=caixa.querySelector('#hero-enc-dock>summary');if(t)t.focus({preventScroll:true});};
+    refTipo.onclick=function(){heroTopo.gerDockOpen=true;heroTopo.encDockOpen=true;if(G.aba!=='Processo'||['tri','pro'].indexOf(G.rot)<0){G.aba='Processo';G.rot='tri';}render();var t=caixa.querySelector('#hero-enc-dock>summary');if(t)t.focus({preventScroll:true});};
     /* Encaminhamento deixa de ser face; os campos continuam os mesmos da ficha. */
     var encTr=el('section','hero-v53-enc card hero-enc-integrated'),encHd=el('div','hero-v53-section-head'),encTitle=el('h4','pm-mer-h','Encaminhamento');
     encTr.id='hero-encaminhamento';encHd.append(encTitle,el('small','muted','Julgamento · destino · enquadramento'));encTr.append(encHd);
@@ -1780,15 +1780,22 @@ function heroOrganizarProntuario(){
     nav.replaceChildren();if(mainTabs)nav.append(mainTabs);
     pages.replaceChildren(id);id.hidden=!resumo;pages.hidden=!resumo;
     if(gbody){
-      if(G.aba==='Processo'&&G.rot==='tri'){
-        var dock=el('details','hero-enc-dock'),ds=el('summary'),dt=el('span','hero-enc-dock-title','Encaminhamento'),dm=el('small','hero-enc-dock-meta'),dc=el('span','hero-conf-chevron');
+      if(G.aba==='Processo'&&['tri','pro'].indexOf(G.rot)>=0){
+        /* Um único Gerador no prontuário ativo; o Encaminhamento mantém seus editores originais. */
+        var gerDock=el('details','hero-ger-dock'),gs=el('summary'),gt=el('span','hero-ger-dock-title','Gerador'),gm=el('small','hero-ger-dock-meta'),gc=el('span','hero-conf-chevron');
+        gerDock.id='hero-ger-dock';gc.setAttribute('aria-hidden','true');
+        gm.textContent=S(destinoAtual)||'Destino a definir';gs.append(gt,gm,gc);gerDock.append(gs);
+        var gerBody=el('div','hero-ger-dock-body'),dock=el('details','hero-enc-dock'),ds=el('summary'),dt=el('span','hero-enc-dock-title','Encaminhamento'),dm=el('small','hero-enc-dock-meta'),dc=el('span','hero-conf-chevron');
         dock.id='hero-enc-dock';dc.setAttribute('aria-hidden','true');
         dm.textContent=[S(V('triagem','Tipo de Julgamento')),S(destinoAtual)||'A definir'].filter(Boolean).join(' · ');
         ds.append(dt,dm,dc);dock.append(ds);
         var av=el('button','lnk hero-v53-autos-link','Conferir documentos em Autos');av.type='button';av.onclick=function(){G.aba='Autos';render();};encHd.append(av);
         var inner=el('div','hero-enc-dock-body');inner.append(encTr);dock.append(inner);dock.open=!!heroTopo.encDockOpen;
         dock.addEventListener('toggle',function(){if(dock.isConnected)heroTopo.encDockOpen=dock.open;});
-        gbody.classList.add('hero-tri-with-dock');caixa.append(dock);
+        var gerHost=el('div','hero-ger-dock-content');gerHost.id='ger-app';gerBody.append(dock,gerHost);gerDock.append(gerBody);
+        gerDock.open=!!heroTopo.gerDockOpen;
+        gerDock.addEventListener('toggle',function(){if(!gerDock.isConnected)return;heroTopo.gerDockOpen=gerDock.open;if(gerDock.open&&window.MutaGerador)window.MutaGerador.pintar();});
+        gbody.classList.add('hero-shared-ger-dock');if(G.rot==='tri')gbody.classList.add('hero-tri-with-dock');caixa.append(gerDock);
       }
       if(G.aba==='Processo'&&G.rot==='pro')gbody.classList.add('hero-production-route');
       gbody.hidden=resumo;

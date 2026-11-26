@@ -2998,3 +2998,21 @@ html body.hero-redesign-v53 #gab .hero-production-route .hero-prod-step>.hero-mi
 html body.hero-redesign-v53 #gab .hero-production-route .hero-prod-step>.hero-minuta-secao>.gr{margin:0!important;padding:9px!important;background:var(--route-paper)!important;border-top:1px solid var(--route-rule);gap:7px!important}
 html body.hero-redesign-v53 #gab .hero-production-route :is(.hero-v53-gerador,.hero-prod-index){margin:10px!important;border:1px solid var(--route-rule)!important;border-radius:4px!important;background:var(--route-paper)!important;box-shadow:none!important}
 html body.hero-redesign-v53 #gab .hero-production-route :is(.hero-v53-gerador>h4,.hero-prod-index>summary){background:var(--route-head)!important;padding:8px 10px!important;margin:0!important;border-bottom:1px solid var(--route-rule)}
+
+/* Gerador compartilhado · dock único para Triagem e Produção; Encaminhamento é seção interna. */
+html body.hero-redesign-v53 #panel-pront #gab .gbody.hero-shared-ger-dock{padding-bottom:52px!important}
+html body.hero-redesign-v53 #panel-pront #hero-ger-dock{position:fixed!important;inset:auto 0 var(--hero-review-nav-height,58px) 0!important;z-index:44;width:100%!important;box-sizing:border-box;margin:0!important;padding:0!important;max-height:calc(100dvh - var(--hero-review-nav-height,58px) - 72px);background:var(--hero-pront-paper,#fff)!important;border:0!important;border-top:1px solid var(--hero-pront-divider,var(--line))!important;border-radius:0!important;box-shadow:0 -3px 12px #0000000c;overflow:hidden}
+html body.hero-redesign-v53 #panel-pront #hero-ger-dock>summary{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,60%) 12px;align-items:center;gap:7px;min-height:42px;box-sizing:border-box;padding:8px 12px!important;margin:0!important;background:var(--hero-pront-header,#f3f0e7)!important;list-style:none;cursor:pointer;color:var(--fg);font:650 12px/1.35 var(--sans,system-ui)}
+html body.hero-redesign-v53 #panel-pront #hero-ger-dock>summary::-webkit-details-marker{display:none}
+html body.hero-redesign-v53 #panel-pront #hero-ger-dock>summary:focus-visible{outline:2px solid var(--gold,#947333);outline-offset:-3px}
+html body.hero-redesign-v53 #panel-pront #hero-ger-dock .hero-ger-dock-meta{font:400 10px/1.3 var(--sans,system-ui);color:var(--muted-fg);text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+html body.hero-redesign-v53 #panel-pront #hero-ger-dock[open]>summary{border-bottom:1px solid var(--hero-pront-divider,var(--line))}
+html body.hero-redesign-v53 #panel-pront #hero-ger-dock[open]>summary>.hero-conf-chevron{transform:rotate(225deg);margin-top:-4px}
+html body.hero-redesign-v53 #panel-pront #hero-ger-dock:not([open])>.hero-ger-dock-body{display:none!important}
+html body.hero-redesign-v53 #panel-pront #hero-ger-dock[open]>.hero-ger-dock-body{display:block!important;max-height:min(65dvh,calc(100dvh - var(--hero-review-nav-height,58px) - 118px));overflow:auto;overscroll-behavior:contain;background:var(--hero-pront-paper,#fff);padding:0}
+html body.hero-redesign-v53 #panel-pront #hero-ger-dock #hero-enc-dock{position:static!important;inset:auto!important;z-index:auto!important;width:100%!important;max-height:none!important;margin:0!important;box-shadow:none!important;border:0!important;border-bottom:1px solid var(--hero-pront-divider,var(--line))!important;border-radius:0!important;overflow:visible!important}
+html body.hero-redesign-v53 #panel-pront #hero-ger-dock #hero-enc-dock>summary{background:color-mix(in srgb,var(--hero-pront-header,#f3f0e7) 70%,var(--hero-pront-paper,#fff))!important;min-height:37px;font-size:11px}
+html body.hero-redesign-v53 #panel-pront #hero-ger-dock #hero-enc-dock[open]>.hero-enc-dock-body{max-height:none!important;overflow:visible!important}
+html body.hero-redesign-v53 #panel-pront #hero-ger-dock #hero-enc-dock:not([open])>summary>.hero-conf-chevron{transform:rotate(45deg);margin-top:0}
+html body.hero-redesign-v53 #panel-pront #hero-ger-dock .hero-ger-dock-content{min-width:0;padding:8px 10px 12px!important;background:var(--hero-pront-paper,#fff)!important}
+html body.hero-redesign-v53 #panel-pront #hero-ger-dock .hero-ger-dock-content>.card{margin:0 0 8px!important}
