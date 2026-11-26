@@ -126,7 +126,7 @@
   var AL_PASSO = [[/orgao prolator|outra turma/, 'prolator'], [/contrarraz/, 'contra'], [/gratuidade|pix|tesouro|preparo/, 'preparo'], [/remessa necessaria/, 'reexame'], [/mpf|ministerio publico|idos/, 'mpf'], [/procura/, 'repres'], [/tempest|prazo/, 'tempest']];
 
   /* ---------- tipo de julgamento ---------- */
-  var R = { cnj: '', tipos: null, aberto: {} };
+  var R = { cnj: '', tipos: null, aberto: {}, modo:'focus', foco:null };
   function chaveLocal(cnj) { return 'muta-pje:roteiro:' + String(cnj || '').replace(/\D/g, ''); }
   function lerLocal(cnj) { try { return JSON.parse(localStorage.getItem(chaveLocal(cnj)) || '{}'); } catch (e) { return {}; } }
   function gravarLocal(cnj, o) { try { localStorage.setItem(chaveLocal(cnj), JSON.stringify(o)); } catch (e) {} }
@@ -149,7 +149,7 @@
     return t;
   }
   function tipos(g, cnj) {
-    if (R.cnj !== cnj) { R.cnj = cnj; R.tipos = null; R.aberto = {}; }
+    if (R.cnj !== cnj) { R.cnj = cnj; R.tipos = null; R.aberto = {}; R.foco=null; }
     var valor=S(g.V('triagem','Tipo de Julgamento')),T=tiposFicha(valor);return Object.keys(T).length?T:detectar(g);
   }
   function tiposFicha(valor){var t={},v=N(valor);TIPOS.forEach(function(x){var nome=N(x[1]);if(v.indexOf(nome)>=0)t[x[0]]=1;});var aliases={ap:/^(ap|apciv)$|\bapelacao\b/,rn:/\b(remnec|reexame|remessa necessaria)\b/,ai:/\bai\b/,ms:/\bms\b/,ed:/\bed\b/,agint:/\bagint\b/,ret:/\b(jr|retratacao)\b/};Object.keys(aliases).forEach(function(k){if(aliases[k].test(v))t[k]=1;});return t;
@@ -223,21 +223,24 @@
       (dest ? (alPasso[dest] = alPasso[dest] || []) : alTopo).push([a, i]); });
     var alHtml = function (x) { var a = x[0]; return '<div class="al-i ' + a.nivel + '"><span>' + esc(a.t) + '</span>' + (a.campo ? '<button type="button" class="btn line sm" data-au="al:' + x[1] + '">Gravar “' + esc(a.valor) + '”</button>' : '') + '</div>'; };
     var pct = L.length ? Math.round(100 * n.ok / L.length) : 0;
+    if(R.foco===null){var inicial=L.find(function(x){return x.st==='al';})||L.find(function(x){return x.st!=='ok';})||L[0];R.foco=inicial?inicial.p.id:'';}
+    if(R.foco&&!L.some(function(x){return x.p.id===R.foco;})){R.foco=(L.find(function(x){return x.st!=='ok';})||L[0]||{p:{id:''}}).p.id;}
     var h = '@@TOPO@@', avancou=true;
     var topo = '<section class="card rt-top"><div class="rt-tt"><b>Roteiro de triagem</b><span class="rt-n" title="Etapas conferidas">' + n.ok + '/' + L.length + '</span>' +
-      (n.al ? '<span class="rt-al">' + n.al + ' alerta' + (n.al > 1 ? 's' : '') + '</span>' : '') + '</div>' +
+      '</div>' +
+      '<div class="hero-route-metrics" role="group" aria-label="Filtrar etapas">'+[['ok','Conferidas'],['al','Alertas'],['pend','A conferir']].map(function(x){return '<button type="button" data-route-filter="'+x[0]+'" aria-pressed="false"><b>'+n[x[0]]+'</b><span>'+x[1]+'</span></button>';}).join('')+'</div>' +
       '<div class="rt-progress-caption"><span>Etapas conferidas</span><b>'+pct+'%</b></div><div class="rt-bar" role="progressbar" aria-label="Etapas conferidas" aria-valuemin="0" aria-valuemax="100" aria-valuenow="'+pct+'"><i style="width:' + pct + '%"></i></div>' +
       /* 0.63: seletor do tipo de julgamento recolhido no começo do roteiro; o resumo mostra o tipo em uso */
       '<details class="rt-tsel"' + (R.tipoAb ? ' open' : '') + '><summary><span class="rt-kind-main"><span class="rt-kind-label">Tipo de julgamento</span><b>' + esc(TIPOS.filter(function (x) { return T[x[0]]; }).map(function (x) { return x[1]; }).join(' · ') || 'A definir') + '</b></span><span class="rt-kind-mode">' + (S(g.V('triagem','Tipo de Julgamento')) ? 'Registrado' : 'Auto') + '</span><span class="rt-kind-arrow" aria-hidden="true"></span></summary>' +
       '<div class="rt-kind-body"><div class="rt-tipos" role="group" aria-label="Tipo de julgamento">' + TIPOS.map(function (x) { var sig={ap:'Ap',rn:'RemNec',ai:'AI',ms:'MS',ed:'ED',agint:'AgInt',ret:'JR'}[x[0]]; return '<button type="button" class="chip rt-kind-option' + (T[x[0]] ? ' on' : '') + '" data-rt="t:' + x[0] + '" aria-pressed="' + !!T[x[0]] + '"><span class="rt-kind-sig">' + esc(sig) + '</span><span class="rt-kind-name">' + esc(x[1]) + '</span><span class="rt-kind-check" aria-hidden="true">' + (T[x[0]]?'✓':'') + '</span></button>'; }).join('') + '</div>' +
-      '<div class="rt-kind-foot"><small>Seleção múltipla</small>' + (S(g.V('triagem','Tipo de Julgamento')) ? '<button type="button" class="lnk" data-rt="auto" title="Volta ao tipo identificado pela classe, espécie e tarefa">Restaurar automático</button>' : '<small>Identificado automaticamente</small>') + '</div></div></details>' + (X.barra || '') + (alTopo.length ? '<div class="al-l rt-alt">' + alTopo.map(alHtml).join('') + '</div>' : '') + '@@USAR@@</section>';
+      '<div class="rt-kind-foot"><small>Seleção múltipla</small>' + (S(g.V('triagem','Tipo de Julgamento')) ? '<button type="button" class="lnk" data-rt="auto" title="Volta ao tipo identificado pela classe, espécie e tarefa">Restaurar automático</button>' : '<small>Identificado automaticamente</small>') + '</div></div></details>' + (X.barra || '') + (alTopo.length ? '<div class="al-l rt-alt">' + alTopo.map(alHtml).join('') + '</div>' : '') + '@@USAR@@</section><div class="hero-route-tools"><div class="hero-route-modes" role="group" aria-label="Modo do roteiro"><button type="button" data-rt="modo:focus" aria-pressed="'+(R.modo==='focus')+'">Etapa em foco</button><button type="button" data-rt="modo:list" aria-pressed="'+(R.modo==='list')+'">Lista contínua</button></div><div class="hero-route-search"><input type="search" data-route-search aria-label="Localizar etapa ou campo" placeholder="Localizar etapa ou campo…"><button type="button" data-route-filter="all">Todos</button><button type="button" data-route-next>Próxima pendência ›</button><button type="button" data-rt="recolher" title="Recolher etapas" aria-label="Recolher etapas">−</button></div></div>';
     h += '<ol class="rt">';
     FASES.forEach(function (f) {
       var F = L.filter(function (x) { return x.p.f === f[0]; }); if (!F.length) return;
       var fo=F.filter(function(x){return x.st==='ok';}).length, fa=F.filter(function(x){return x.st==='al';}).length;
       h += '<li class="rt-f"><span>' + esc(f[1]) + '</span><small class="rt-phase-count" aria-label="'+fo+' de '+F.length+' etapas conferidas">'+fo+'/'+F.length+'</small>'+(fa?'<small class="rt-phase-alert">'+fa+' alerta'+(fa===1?'':'s')+'</small>':'')+'</li>';
       F.forEach(function (x) {
-        var p = x.p, ab = R.aberto[p.id] != null ? R.aberto[p.id] : x.st !== 'ok', trecho=avancou&&x.st==='ok';if(x.st!=='ok')avancou=false;
+        var p = x.p, ab = R.modo==='focus'?R.foco===p.id:!!R.aberto[p.id], trecho=avancou&&x.st==='ok';if(x.st!=='ok')avancou=false;
         var cs = (p.campos || []).filter(function (c) { return typeof c[3] !== 'function' || c[3](ctx); });
         if(p.id==='tempest'){var rs=g.V('origem','Recursos'),trs=g.V('triagem','Tempestividade por recurso'),ref=AU&&AU.referenciasTempestividade?AU.referenciasTempestividade():null;if((Array.isArray(rs)&&rs.length>1)||(Array.isArray(trs)&&trs.length>1)||(ref&&ref.recursos.length>1))cs=cs.filter(function(c){return c[1]==='Tempestividade por recurso';});}
         var visiveis = cs.filter(function (c) { return c[3] !== 'calc'; }), calc = cs.filter(function (c) { return c[3] === 'calc'; });
@@ -245,7 +248,7 @@
         var dica = typeof p.dica === 'function' ? p.dica(ctx) : p.dica;
         var AP = alPasso[p.id] || [];
         var AU0 = window.MutaAutos, doAuto = AU0 && AU0.preenchido && cs.concat(p.mais || []).some(function (c) { return AU0.preenchido(c[0] + '.' + c[1]); });
-        h += '<li class="rt-p is-' + x.st + (ab ? ' ab' : '') + (trecho?' rt-avanco':'') + '"><span class="rt-i" aria-label="' + ROT[x.st] + '">' + ICO[x.st] + '</span><div class="rt-c">' +
+        h += '<li class="rt-p hero-route-step is-' + x.st + (ab ? ' ab' : '') + (trecho?' rt-avanco':'') + '" data-route-status="'+x.st+'" data-route-text="'+esc([p.t,resumo].concat((p.campos||[]).concat(p.mais||[]).map(function(c){return c[2]||c[1];})).join(' '))+'"><span class="rt-i" aria-label="' + ROT[x.st] + '">' + String(L.indexOf(x)+1).padStart(2,'0') + '</span><div class="rt-c">' +
           '<button type="button" class="rt-h" data-rt="a:' + p.id + '" aria-expanded="' + ab + '"><b>' + esc(p.t) + (AP.length ? ' <i class="rt-av">' + AP.length + ' aviso' + (AP.length > 1 ? 's' : '') + '</i>' : '') + (doAuto ? ' <i class="au-tag" title="Preenchido pela leitura dos autos: confira">autos</i>' : '') + '</b><span class="rt-step-meta"><span class="rt-step-state">'+esc(ROT[x.st]||'A conferir')+'</span><span class="rt-step-chevron" aria-hidden="true"></span></span>' + (!ab && resumo ? '<small>' + esc(resumo.slice(0, 120)) + '</small>' : '') + '</button>';
         if (ab) {
           var mais = (p.mais || []).map(comSug).filter(Boolean);
@@ -279,7 +282,9 @@
   if (typeof document !== 'undefined') document.addEventListener('toggle', function (e) { var d = e.target; if (d && d.classList && d.classList.contains('rt-tsel')) R.tipoAb = d.open; }, true);
   function clique(b, g) {
     var a = b.dataset.rt || '', cnj = g.cnj(), loc = lerLocal(cnj);
-    if (/^a:/.test(a)) { var id = a.slice(2), el = b.closest('.rt-p'); R.aberto[id] = !(el && el.classList.contains('ab')); return true; }
+    if (/^modo:/.test(a)){R.modo=a.slice(5)==='list'?'list':'focus';if(R.modo==='list'&&R.foco)R.aberto[R.foco]=true;return true;}
+    if(a==='recolher'){R.foco='';R.aberto={};return true;}
+    if (/^a:/.test(a)) { var id = a.slice(2), el = b.closest('.rt-p'),open=!(el&&el.classList.contains('ab'));if(R.modo==='focus')R.foco=open?id:'';else{R.aberto[id]=open;if(open)R.foco=id;}return true; }
     if (/^t:/.test(a)) { if(window.MUTA_WEB&&window.MUTA_WEB.leitura)return false;var T=tipos(g,cnj),k=a.slice(2);if(!TIPOS.some(function(x){return x[0]===k;}))return false;if(T[k]){if(Object.keys(T).length===1)return false;delete T[k];}else T[k]=1;delete loc._tipos;gravarLocal(cnj,loc);R.tipoAb=true;return gravarTipos(g,T); }
     if (/^u:/.test(a)) { var it = (window.MutaAutos && window.MutaAutos.sugestoes ? window.MutaAutos.sugestoes() : [])[Number(a.slice(2))]; if (it && it.alvo && g.marcar) { g.marcar(it.alvo, it.value); if (g.gravar) g.gravar().catch(function () {}); } return true; }
     if (a === 'ut') { var SG = window.MutaAutos && window.MutaAutos.sugestoes ? window.MutaAutos.sugestoes() : []; (R.usados || []).forEach(function (k) { var x = SG[k]; if (x && x.alvo && g.marcar) g.marcar(x.alvo, x.value); }); if (g.gravar) g.gravar().catch(function () {}); return true; }

@@ -3016,3 +3016,67 @@ html body.hero-redesign-v53 #panel-pront #hero-ger-dock #hero-enc-dock[open]>.he
 html body.hero-redesign-v53 #panel-pront #hero-ger-dock #hero-enc-dock:not([open])>summary>.hero-conf-chevron{transform:rotate(45deg);margin-top:0}
 html body.hero-redesign-v53 #panel-pront #hero-ger-dock .hero-ger-dock-content{min-width:0;padding:8px 10px 12px!important;background:var(--hero-pront-paper,#fff)!important}
 html body.hero-redesign-v53 #panel-pront #hero-ger-dock .hero-ger-dock-content>.card{margin:0 0 8px!important}
+
+/* Contrato visual da prévia hero-roteiro-triagem-branco.html, com faixas tonais solicitadas. */
+html body.hero-redesign-v53 #gab :is(.hero-tri-with-dock,.hero-production-route){--route-gold:var(--gold,#946f30);--route-ink:var(--fg,#1c3344);--route-alert:#a64c3c;--route-amber:#ad8138}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock .rt-top,html body.hero-redesign-v53 #gab .hero-production-route .hero-prod-top{margin:10px 10px 0!important;padding:0!important;border:1px solid var(--route-rule)!important;border-left:2px solid var(--route-gold)!important;border-radius:0!important;background:var(--route-paper)!important}
+html body.hero-redesign-v53 #gab :is(.hero-tri-with-dock,.hero-production-route) .rt-tt{margin:0!important;padding:9px 10px!important;border-bottom:1px solid var(--route-rule)}
+html body.hero-redesign-v53 #gab :is(.hero-tri-with-dock,.hero-production-route) .rt-tt>b{font:600 10px/1.4 var(--mono,monospace)!important;text-transform:uppercase;letter-spacing:.1em;color:var(--route-gold)}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock .rt-progress-caption{padding:6px 10px 0}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock .rt-bar{margin:5px 10px 9px!important}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock :is(.rt-tsel,.rt-alt,.rt-u){margin:0 9px 7px!important}
+html body.hero-redesign-v53 #gab :is(.hero-tri-with-dock,.hero-production-route) .hero-route-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-block:1px solid var(--route-rule);margin:0}
+html body.hero-redesign-v53 #gab :is(.hero-tri-with-dock,.hero-production-route) .hero-route-metrics>button{display:flex;align-items:center;gap:6px;padding:7px 8px;border:0;border-right:1px solid var(--route-rule);border-radius:0;background:transparent;color:var(--fg);text-align:left}
+html body.hero-redesign-v53 #gab :is(.hero-tri-with-dock,.hero-production-route) .hero-route-metrics>button:last-child{border-right:0}
+html body.hero-redesign-v53 #gab .hero-route-metrics>button>b{font:600 16px/1.2 var(--mono,monospace)}
+html body.hero-redesign-v53 #gab .hero-route-metrics>button>span{font-size:10px}
+html body.hero-redesign-v53 #gab .hero-route-metrics>button[data-route-filter=ok]>b{color:var(--route-green)}
+html body.hero-redesign-v53 #gab .hero-route-metrics>button[data-route-filter=al]>b{color:var(--route-alert)}
+html body.hero-redesign-v53 #gab .hero-route-metrics>button:is([data-route-filter=partial],[data-route-filter=pend])>b{color:var(--route-amber)}
+html body.hero-redesign-v53 #gab .hero-route-metrics>button[aria-pressed=true]{background:color-mix(in srgb,#69838b 12%,var(--route-paper));box-shadow:inset 0 -2px var(--route-gold)}
+html body.hero-redesign-v53 #gab .hero-route-tools{margin:0 10px 10px;padding:7px 8px;border:1px solid var(--route-rule);border-top:0;background:var(--route-paper);display:grid;gap:5px}
+html body.hero-redesign-v53 #gab .hero-route-modes{display:flex;gap:0}
+html body.hero-redesign-v53 #gab .hero-route-modes>button{flex:1;border-radius:0}
+html body.hero-redesign-v53 #gab .hero-route-search{display:flex;gap:4px;flex-wrap:wrap;align-items:center}
+html body.hero-redesign-v53 #gab .hero-route-search>input{flex:1 1 110px;min-width:0;width:auto;max-width:100%;font-size:10.5px;padding:5px 7px;border:1px solid var(--route-rule);border-radius:2px;background:var(--route-paper)}
+html body.hero-redesign-v53 #gab .hero-route-tools button{padding:5px 6px;font-size:10px;border:1px solid var(--route-rule);background:var(--route-paper);color:var(--fg);border-radius:2px;white-space:nowrap}
+html body.hero-redesign-v53 #gab .hero-route-tools button[aria-pressed=true]{background:var(--primary,#21485b);color:var(--primary-fg,#fff)}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock .rt-em-proc,html body.hero-redesign-v53 #gab .hero-production-route{background:var(--route-bg)!important}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock ol.rt{padding:0 10px 8px 10px!important}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock ol.rt::before{left:21px;width:2px;top:12px;bottom:17px}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock ol.rt>li.rt-f{position:relative;margin:8px 0 5px 32px!important;border:1px solid var(--route-rule)!important;border-radius:0!important;padding:6px 9px!important;background:color-mix(in srgb,#a58a55 12%,var(--route-bg))!important}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock ol.rt>li.rt-f::before{content:"";position:absolute;left:-25px;top:50%;width:8px;height:8px;border:2px solid #b7a88c;border-radius:50%;background:var(--route-bg);transform:translateY(-50%);box-sizing:content-box}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock ol.rt>.rt-p{gap:10px;margin-bottom:5px!important}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock .rt-p>.rt-i{flex:0 0 22px;width:22px;height:22px;margin-top:12px;font:600 9px/1 var(--mono,monospace)!important}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock .rt-p.is-pend>.rt-i::after{content:none}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock .rt-p.is-ok>.rt-i,html body.hero-redesign-v53 #gab .hero-production-route .hero-prod-step.is-ok>.hero-prod-marker{background:var(--route-green)!important;border-color:var(--route-green)!important;color:white!important}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock .rt-p.is-al{--rt-state:var(--route-alert)}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock .rt-p.is-pend{--rt-state:var(--route-amber)}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock .rt-p.ab>.rt-i,html body.hero-redesign-v53 #gab .hero-production-route .hero-prod-step:has(details[open])>.hero-prod-marker{outline:3px solid color-mix(in srgb,var(--route-gold) 26%,transparent);outline-offset:2px}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock ol.rt>.rt-p.rt-avanco::before{left:11px;top:-6px;bottom:-7px;width:2px}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock .rt-p>.rt-c,html body.hero-redesign-v53 #gab .hero-production-route .hero-prod-step>.hero-minuta-secao{border-radius:3px!important;border:1px solid var(--route-rule)!important}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock .rt-p.ab>.rt-c,html body.hero-redesign-v53 #gab .hero-production-route .hero-prod-step>details[open]{border-color:#b9a77e!important}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock .rt-c>.rt-h,html body.hero-redesign-v53 #gab .hero-production-route .hero-prod-step>.hero-minuta-secao>summary{min-height:42px!important;padding:8px 9px!important}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock .rt-step-state::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:currentColor;margin-right:4px;vertical-align:1px}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock .rt-b>.gr,html body.hero-redesign-v53 #gab .hero-production-route .hero-minuta-secao>.gr{background:var(--route-paper)!important}
+html body.hero-redesign-v53 #gab .hero-production-route .hero-minuta-roteiro{padding-top:1px!important}
+html body.hero-redesign-v53 #gab .hero-production-route .hero-prod-top>p{padding:0 10px}
+html body.hero-redesign-v53 #gab .hero-production-route .hero-minuta-nav{padding:0!important;gap:5px}
+html body.hero-redesign-v53 #gab .hero-production-route .hero-minuta-nav :is(.hero-minuta-nav-head,.hero-minuta-nav-foot){padding:0 9px}
+html body.hero-redesign-v53 #gab .hero-production-route .hero-minuta-meter{margin:0 10px}
+html body.hero-redesign-v53 #gab .hero-production-route .hero-prod-top>.hero-route-tools{margin:6px 0 0!important;border-inline:0;border-bottom:0;border-top:1px solid var(--route-rule)}
+html body.hero-redesign-v53 #gab .hero-production-route .hero-prod-timeline{padding:0 10px 8px!important}
+html body.hero-redesign-v53 #gab .hero-production-route .hero-prod-step{gap:10px;margin-bottom:5px}
+html body.hero-redesign-v53 #gab .hero-production-route .hero-prod-marker{flex-basis:22px;width:22px;height:22px;margin-top:12px;font-size:9px}
+html body.hero-redesign-v53 #gab .hero-production-route .hero-prod-timeline::before{left:21px;width:2px}
+html body.hero-redesign-v53 #gab .hero-route-step[hidden],html body.hero-redesign-v53 #gab ol.rt>.rt-f[hidden]{display:none!important}
+/* Dock ascendente: faixa Gerador não se move ao abrir; Encaminhamento integra o cabeçalho interno. */
+html body.hero-redesign-v53 #panel-pront #hero-ger-dock{--ger-h:42px;padding-bottom:var(--ger-h)!important;max-height:calc(100dvh - var(--hero-review-nav-height,58px) - 72px)!important}
+html body.hero-redesign-v53 #panel-pront #hero-ger-dock>summary{position:absolute;inset:auto 0 0 0;height:var(--ger-h);min-height:var(--ger-h);z-index:2;border-top:1px solid var(--hero-pront-divider,var(--line));border-bottom:0!important}
+html body.hero-redesign-v53 #panel-pront #hero-ger-dock:not([open])>summary>.hero-conf-chevron{transform:rotate(225deg);margin-top:3px}
+html body.hero-redesign-v53 #panel-pront #hero-ger-dock[open]>summary>.hero-conf-chevron{transform:rotate(45deg);margin-top:-3px}
+html body.hero-redesign-v53 #panel-pront #hero-ger-dock[open]>.hero-ger-dock-body{max-height:min(65dvh,calc(100dvh - var(--hero-review-nav-height,58px) - 118px))!important;overscroll-behavior:contain}
+html body.hero-redesign-v53 #panel-pront #hero-ger-dock .hero-ger-dock-header{position:sticky;top:0;z-index:3;background:var(--hero-pront-header,#f3f0e7);border-bottom:1px solid var(--hero-pront-divider,var(--line))}
+html body.hero-redesign-v53 #panel-pront #hero-ger-dock .hero-ger-dock-header:has(#hero-enc-dock[open]){position:static}
+html body.hero-redesign-v53 #panel-pront #hero-ger-dock .hero-ger-dock-header #hero-enc-dock>summary{border-bottom:1px solid var(--hero-pront-divider,var(--line))}
+@media(max-width:330px){html body.hero-redesign-v53 #gab .hero-route-search>input{flex-basis:100%}html body.hero-redesign-v53 #gab .hero-route-metrics>button{gap:3px;padding:6px 4px}html body.hero-redesign-v53 #gab .hero-tri-with-dock .rt-step-state{display:inline-flex}}
