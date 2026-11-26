@@ -150,9 +150,8 @@
     var tipos={};pedidos.forEach(function(r){tipos[r.tipo]=(tipos[r.tipo]||0)+1;});
     var resumo=Object.keys(tipos).sort().map(function(t){return '<button type="button" class="chip" style="font-size:10px;white-space:normal;padding:2px 5px;cursor:pointer" data-pa="soltipo:'+esc(t)+'" aria-pressed="'+(P.f==='sol'&&P.tipoProcSol===t)+'">'+esc(t)+' · '+tipos[t]+'</button>';}).join('');
     var incompleto=P.pedErro||!Array.isArray(d.solicitacoes)||d.solicitacoesErro;
-    var solCard='<div class="hero-v53-pa-metric pa-m-solicitacoes" data-pa="solcard" style="cursor:pointer;'+(P.f==='sol'&&!P.tipoProcSol?'outline:1px solid var(--primary);':'')+'"><button type="button" data-pa="solcard" aria-pressed="'+(P.f==='sol'&&!P.tipoProcSol)+'" style="background:none;border:0;padding:0;text-align:left;color:inherit;cursor:pointer;width:100%"><small>Solicitações</small><b>'+pedidos.length+'<span> registros</span></b></button><div style="display:flex;flex-wrap:wrap;gap:3px">'+(resumo||'<em>Nenhuma solicitação registrada</em>')+'</div>'+(incompleto?'<em>Consulta parcial · confira em Deliberações</em>':'')+'</div>';
-    h+='<div class="hero-v53-pa-metrics">'+solCard+m+'</div>';
-    var indicadores='<section class="hero-pa-overview" aria-label="Marcos e indicadores da sessão">'+h+'</section>';h=topo;
+    var solCard='<div class="hero-v53-pa-metric pa-m-solicitacoes"><small>Solicitações por tipo</small><b>'+pedidos.length+'<span> registros</span></b><div class="hero-pa-solic-types">'+(resumo||'<em>Nenhuma solicitação registrada</em>')+'</div>'+(incompleto?'<em>Consulta parcial · confira em Deliberações</em>':'')+'</div>';
+    var marcosHtml=h;h=topo;
 
     var cur = dg(GB().cnj ? GB().cnj() : '');
     var R = L.map(function (it) { var a = alertas(it);
@@ -160,9 +159,15 @@
       var ps=pedidos.filter(function(r){return dg(r.cnj)&&dg(r.cnj)===dg(it.cnj);});ps.forEach(function(r){if(!a.some(function(v){return v[1]===r.tipo;}))a.push(['so',r.tipo,'Solicitação registrada']);});return { it: it, e: etapa(it), a: a, ps:ps }; });
     var cont = {}; R.forEach(function (x) { cont[x.e.k] = (cont[x.e.k] || 0) + 1; });
     var nAl = R.filter(function (x) { return x.a.some(function (a) { return a[0] === 'al'; }); }).length;
-    var F = [['todos', 'Todos', L.length], ['al', 'Com alerta', nAl], ['sol', 'Com solicitações', R.filter(function(x){return x.ps.length;}).length], ['nd', 'A designar', cont.nd || 0], ['des', 'Minutando', cont.des || 0], ['min', 'Em correção', cont.min || 0], ['cor', 'A liberar', cont.cor || 0], ['lib', 'Liberados', cont.lib || 0], ['fora', 'Retirados/adiados', (cont.ret || 0) + (cont.adi || 0)]];
+    var F = [['todos', 'Todos', L.length], ['al', 'Com alerta', nAl], ['sol', 'Com solicitações', R.filter(function(x){return x.ps.length;}).length], ['nd', 'A designar', cont.nd || 0], ['des', 'Minutando', cont.des || 0], ['min', 'Em correção', cont.min || 0], ['cor', 'A liberar', cont.cor || 0], ['lib', 'Liberados', cont.lib || 0], ['jul', 'Julgados', cont.jul || 0], ['fora', 'Retirados/adiados', (cont.ret || 0) + (cont.adi || 0)]];
     var vis = R.filter(function (x) { var it=x.it;return (P.f === 'todos' ? true : P.f === 'al' ? x.a.some(function (a) { return a[0] === 'al'; }) : P.f === 'sol' ? x.ps.some(function(r){return !P.tipoProcSol||r.tipo===P.tipoProcSol;}) : P.f === 'fora' ? /ret|adi/.test(x.e.k) : x.e.k === P.f)&&buscaCasa(P.qItens,[it.cnj,it.item,it.classe,it.assunto,it.servidor,it.corretor,x.e.t,x.ps.map(function(r){return r.tipo;}).join(' ')]); });
-    h += buscaPainel('itens')+buscaFaixa('itens',P.qItens,'Buscar processo, item, assunto, servidor…')+'<div class="pa-f hero-rep-filters" role="group" aria-label="Pauta">' + F.filter(function (f) { return f[0] !== 'todos' && (f[2] || P.f === f[0]); }).map(function (f) { return '<button type="button" class="chip' + (P.f === f[0] ? ' on' : '') + '" data-pa="f:' + f[0] + '" aria-pressed="'+(P.f===f[0])+'">' + f[1] + ' <i>' + f[2] + '</i></button>'; }).join('') + '</div><p class="status hero-rep-count" role="status">'+vis.length+' de '+L.length+' processos</p></div></div>'+indicadores+'<section class="pa-ses hero-pa-results" aria-label="Resultados da pauta">'+(previa?'<p class="muted">Prévia da pauta (ainda sem a relação oficial do PJe).</p>':'')+(!vis.length?'<p class="muted">'+(L.length?'Nenhum processo corresponde aos filtros.':'Sem processos nesta pauta.')+'</p>':'');
+    /* Central de Comando: cards por situação são os próprios filtros, sem faixa duplicada. */
+    var cards=F.filter(function(f){return f[0]!=='todos'&&(f[2]||P.f===f[0]);}).map(function(f){
+      var on=P.f===f[0]&&!P.tipoProcSol,pc=L.length?Math.round(100*f[2]/L.length):0;
+      return '<button type="button" class="hero-command-stat hero-pa-stat stat-'+f[0]+(on?' on':'')+'" data-pa="f:'+f[0]+'" aria-pressed="'+on+'" title="'+esc(on?'Clique para remover o filtro':'Filtrar: '+f[1])+'"><span class="hero-stat-title"><i></i>'+esc(f[1])+'</span><span class="hero-stat-number"><b>'+f[2]+'</b><small>'+pc+'% da pauta</small></span><span class="hero-stat-meter" aria-hidden="true"><i style="width:'+pc+'%"></i></span></button>';
+    }).join('');
+    var indicadores='<section class="hero-pa-overview" aria-label="Marcos e indicadores da sessão">'+marcosHtml+'<div class="hero-command-section-label">Situação atual <small>Clique para filtrar</small></div><div class="hero-command-stats hero-pa-stats" role="group" aria-label="Filtrar processos por situação">'+cards+'</div><details class="hero-pa-cumulative"'+(P.cumulativeOpen||P.tipoProcSol?' open':'')+'><summary>Marcos de produção e solicitações <small>'+pedidos.length+' registros</small></summary><div class="hero-v53-pa-metrics">'+solCard+m+'</div></details></section>';
+    h += indicadores+buscaPainel('itens')+buscaFaixa('itens',P.qItens,'Buscar processo, item, assunto, servidor…')+'<p class="status hero-rep-count" role="status">'+vis.length+' de '+L.length+' processos'+(P.f!=='todos'?' · '+esc(P.tipoProcSol||(F.find(function(f){return f[0]===P.f;})||['','Filtro ativo'])[1]):'')+'</p></div></div><section class="pa-ses hero-pa-results" aria-label="Resultados da pauta">'+(previa?'<p class="muted">Prévia da pauta (ainda sem a relação oficial do PJe).</p>':'')+(!vis.length?'<p class="muted">'+(L.length?'Nenhum processo corresponde aos filtros.':'Sem processos nesta pauta.')+'</p>':'');
     /* Solicitações resumidas nos indicadores e na lista de processos. */
     function renderProcessos(grupo){return '<ol class="pa-l">' + grupo.map(function (x) {
       var it = x.it, at = dg(it.cnj) === cur, passo = PASSOS.map(function (p) { return '<i class="' + (it[p[0]] ? 'ok' : '') + '" title="' + p[1] + '"></i>'; }).join('');
@@ -204,6 +209,7 @@
   }
 
   /* ---------- ações ---------- */
+  document.addEventListener('toggle',function(e){var t=e.target;if(t&&t.isConnected&&t.matches&&t.matches('#pauta-app .hero-pa-cumulative'))P.cumulativeOpen=t.open;},true);
   document.addEventListener('input',function(e){var t=e.target;if(!t.dataset||!t.dataset.paQ||!t.closest('#pauta-app'))return;P[t.dataset.paQ==='sol'?'qSol':'qItens']=t.value;pintar();});
   document.addEventListener('click', function (e) {
     var b = e.target.closest && e.target.closest('#pauta-app [data-pa]'); if (!b) return;
