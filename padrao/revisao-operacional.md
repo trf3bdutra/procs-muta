@@ -1,0 +1,9 @@
+# Encaminhamento operacional da revisão — HERO
+
+A partir do Gerador e do Corretor, o usuário seleciona apontamentos de gravidade alta/média e confirma a criação de uma diligência. O servidor registra também as quantidades de pendências e intercorrências abertas na ficha. O registro reutiliza apoio/equipe-pendencias.json e a API /api/pendencias?revisao=1. Não envia inteiro teor, texto da minuta ou descrição dos apontamentos ao servidor; os códigos são uma fotografia indicativa da conferência e podem depender da ordem das questões naquele momento.
+
+Uma diligência em aberto por CNJ. Nova tentativa devolve a existente, sem sobrescrever seu responsável ou seus dados. Após conclusão ou exclusão, uma nova revisão exige ação expressa. Servidor pode encaminhar a si; gestor ou relator pode selecionar também o responsável pela minuta ou correção registrado na ficha. O servidor bloqueia processo não identificado na fonte ou sigiloso. A prioridade inicial é Média, independentemente da gravidade dos apontamentos.
+
+A revisão aparece no quadro existente, conforme as permissões de cada interface, e na seção Revisões operacionais comigo da aba Notificações. A seção é uma lista de trabalho em aberto, não uma notificação de leitura, e atualiza ao abrir ou atualizar a aba. Não envia WhatsApp, não cria urgência, não resolve sinalizações automaticamente e não bloqueia ou autoriza assinatura/liberação. A sincronização de origens automáticas não conclui revisões e não fecha tarefas por ausência em uma fonte cuja consulta falhou.
+
+Ainda pendentes: validação em navegador autenticado, homologação das permissões no Ex Officio, publicação, associação persistente do apontamento ao trecho efetivo e sincronização bidirecional automática com pendências da ficha.

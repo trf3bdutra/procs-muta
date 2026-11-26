@@ -19,12 +19,12 @@ const CAMPOS = ['title', 'description', 'assignee', 'urgency', 'dueDate', 'numer
 const APRECIADA = /^Apreciada · /;
 /* origens automáticas abertas agora, e as urgências travadas (decisão já liberada ou assinada) */
 async function origens() {
-  const abertas = new Map(), travas = {};
+  const abertas = new Map(), travas = {}, completas={intercor:true,retido:true,urgencia:true};
   const cal = (await L.lerJson('acervo/sessoes/calendario.json')).dados;
   const pubs = (cal.sessoes || []).filter(s => s.publicada);
   const docs = await Promise.all(pubs.map(s => L.lerJson('acervo/sessoes/' + s.date + '.json').then(x => x.dados).catch(() => null)));
   pubs.forEach((s, i) => {
-    const d = docs[i]; if (!d) return;
+    const d = docs[i]; if (!d) {completas.intercor=false;completas.retido=false;return;}
     const lista = (d.itens || []).length ? d.itens : (d.previa || []);
     lista.forEach(it => {
       const c = it.ctl || {}, txt = String(c.intercor || '').trim();
@@ -55,8 +55,8 @@ async function origens() {
         description: [String(t['Urgência - Nível'] || ''), String(t['Urgência - Observação'] || '')].filter(Boolean).join(' · ').slice(0, 2000),
         assignee: String(p.SERVIDOR || ''), urgency: 'Urgente', dueDate: '', numero: String(r.processo || ''), sessao: '' });
     });
-  } catch (e) { /* sem ficha legível, só as intercorrências */ }
-  return { abertas, travas };
+  } catch (e) { completas.urgencia=false; /* sem ficha legível, não concluir urgências por ausência */ }
+  return { abertas, travas, completas };
 }
 /* escreve na origem o que o cartão passou a dizer */
 async function naOrigem(alvo, b, u, done, descNova) {
@@ -138,7 +138,7 @@ module.exports = async (req, res) => {
     if (req.method === 'GET') { const { dados } = await ler(); return res.status(200).json({ tasks: (dados.registros || []).filter(t => !t.excluida), equipe: L.equipe() }); }
     /* acerto dos cartões automáticos com as origens: cria o que falta, atualiza o texto, conclui o que a origem já resolveu */
     if (req.method === 'POST' && req.query.sync) {
-      const { abertas, travas } = await origens();
+      const { abertas, travas, completas } = await origens();
       for (let n = 0; n < 4; n++) {
         const { dados, sha } = await ler(); dados.registros = dados.registros || [];
         const agora = new Date().toISOString(), mud = [];
@@ -156,7 +156,7 @@ module.exports = async (req, res) => {
           if (m) { t._rev = Number(t._rev || 0) + 1; t.atualizadoEm = agora; }
         });
         por.forEach((t, chave) => {
-          if (!['intercor','retido','urgencia'].includes(t.origem) || abertas.has(chave) || t.stage === 'done') return;
+          if (!completas[t.origem] || abertas.has(chave) || t.stage === 'done') return;
           t.stage = 'done'; t.concluidaEm = agora; t._rev = Number(t._rev || 0) + 1; t.atualizadoEm = agora; mud.push('concluída ' + chave);
         });
         const corpo = () => ({ tasks: dados.registros.filter(t => !t.excluida), equipe: L.equipe(), travas, acertos: mud.length });
