@@ -205,7 +205,7 @@ header.amicus-shell .amicus-brand,header#top #marca,header.top.nx .brand.tw{over
    da entrada, do login e das telas de carregamento. */
 .cmtl-trf3.circ{display:inline-grid!important;place-items:center;width:4.6em;height:4.6em;border-radius:50%;background:#fff;box-shadow:0 3px 14px rgba(0,0,0,.25);line-height:0}
 .cmtl-trf3.circ img{display:block;width:60%;height:auto;margin-left:2%;pointer-events:none;user-select:none}
-.cmtl-mark .cmtl-brand.cmtl-trf3,.cmt-load[data-cmt-loader="legacy"] .cmt-ld-mk .cmtl-brand.cmtl-trf3{display:inline-grid!important;font-size:20px;width:4.6em!important;height:4.6em!important}
+.cmtl-mark .cmtl-brand.cmtl-trf3,.cmt-load[data-cmt-loader="legacy"] .cmt-ld-mk .cmtl-brand.cmtl-trf3{display:inline-grid!important;font-size:20px;width:4.6em!important;height:4.6em!important;background:#fff!important;border-radius:50%!important;box-shadow:0 3px 14px rgba(0,0,0,.25)!important}
 .cmtl-mark,.cmt-load[data-cmt-loader="legacy"] .cmt-ld-mk{margin:0 auto 22px!important}
 #entrada .en-top .cmtl-trf3-top{font-size:11px}
 .cmt-entry-jf{font-size:15px;margin-bottom:26px}
