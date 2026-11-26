@@ -197,10 +197,11 @@ function paraCartao(mud, it) {
 /* aplica a volta num item da pauta ou das monocráticas; devolve true se mudou */
 function aplicaCartao(it, v, u) {
   let m = false; it.ctl = it.ctl || {};
-  Object.keys(v.d).forEach(x => { if ((it[x] || '') !== v.d[x]) { it[x] = v.d[x]; m = true; } });
+  const designacoes=[];
+  Object.keys(v.d).forEach(x => { if ((it[x] || '') !== v.d[x]) { if(['servidor','corretor'].includes(x))designacoes.push({papel:x==='servidor'?'minuta':'correção',de:it[x]||'',para:v.d[x]||''}); it[x] = v.d[x]; m = true; } });
   Object.keys(v.k).forEach(x => { const val = v.k[x]; if ((it.ctl[x] || '') !== val) { if (val) it.ctl[x] = val; else delete it.ctl[x]; m = true; } });
   if (Object.keys(v.cart).length) { const ant = it.ctl.cartao || {}; Object.keys(v.cart).forEach(x => { if (JSON.stringify(ant[x]) !== JSON.stringify(v.cart[x])) { ant[x] = v.cart[x]; m = true; } }); it.ctl.cartao = ant; }
-  if (m) { it.ctl.editadoPor = u; it.ctl.editadoEm = agora(); }
+  if (m) { it.ctl.editadoPor = u; it.ctl.editadoEm = agora(); if(designacoes.length)it.ctl.historicoDesignacoes=(Array.isArray(it.ctl.historicoDesignacoes)?it.ctl.historicoDesignacoes:[]).concat({em:it.ctl.editadoEm,por:u,alteracoes:designacoes}).slice(-20); }
   return m;
 }
 /* arquivos onde o processo aparece hoje: pautas de sessões de hoje em diante e monocráticas/urgências */
@@ -343,12 +344,12 @@ async function commitConferido(arqs, msg) {
   catch (e) { if (e.status === 422) e.status = 409; throw e; }
 }
 /* pauta e monocráticas: espelha no operacional, no mesmo commit do arquivo da pauta */
-async function espelho(arqPauta, cnj, campos, cartao, msg) {
+async function espelho(arqPauta, cnj, campos, cartao, msg, u) {
   const F = await ficha(), mud = doCartao(campos, cartao);
   if (!Object.keys(mud).length) return commitConferido([arqPauta], msg);
-  const { doc, sha } = await lerOp(), r = registro(doc, cnj, F, true), out = aplica(r, mud);
+  const { doc, sha } = await lerOp(), r = registro(doc, cnj, F, true), out = aplica(r, mudancaCoerente(r,mud));
   const arqs = [arqPauta];
-  if (out.length) { regras(r, out); doc.atualizado_em = agora(); arqs.push({ path: OP, txt: JSON.stringify(doc, null, 1) + '\n', sha }); }
+  if (out.length) { regras(r, out, u); doc.atualizado_em = agora(); arqs.push({ path: OP, txt: JSON.stringify(doc, null, 1) + '\n', sha }); }
   return commitConferido(arqs, msg + (out.length ? '\n\nFicha (operacional): ' + out.slice(0, 12).join(', ') : ''));
 }
 module.exports = async (req, res, u) => {

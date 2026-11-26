@@ -71,7 +71,9 @@ async function gravarItem(data, b, u, gestorOk, whatsappEvent) {
     dados.atualizadoEm = it.ctl.editadoEm;
     /* o que a equipe registra vai também para a ficha do processo (acervo/operacional.json), no mesmo commit */
     const Cf = Object.assign({}, C); if (!gestorOk) GESTOR.forEach(k => delete Cf[k]);
-    try { await FICHA.espelho({ path: rel, txt: JSON.stringify(dados, null, 1) + '\n', sha }, it.cnj, Cf, C.cartao, 'Ex Officio (' + u + '): ' + it.cnj + ' · ' + mud.slice(0, 6).join(', ')); return { status: 200, body: { ok: true, item: it } }; }
+    /* Uma pré-pauta não pode afirmar ingresso ou desfecho oficial na ficha. */
+    if(lista==='previa')delete Cf.resultado;
+    try { await FICHA.espelho({ path: rel, txt: JSON.stringify(dados, null, 1) + '\n', sha }, it.cnj, Cf, C.cartao, 'Ex Officio (' + u + '): ' + it.cnj + ' · ' + mud.slice(0, 6).join(', '),u); return { status: 200, body: { ok: true, item: it } }; }
     catch (e) { if (e.status !== 409 && e.status !== 422) throw e; }
   }
   return { status: 409, body: { erro: 'A pauta mudou várias vezes seguidas; tente de novo.' } };

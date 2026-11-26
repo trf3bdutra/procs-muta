@@ -22,3 +22,10 @@ test('datas de produção sincronizam os indicadores nas duas APIs',()=>{
  assert.equal(v.producao.CORRIGIDO,'Sim');assert.equal(v.producao.LIBERADO,'');assert.equal(v.producao.Assinado,'Sim');assert.equal(v.producao.Publicado,'');
  assert.match(read('apoio/ex-officio/api/_prontuario.js'),/FICHA\.mudancaCoerente\(r,mud\)/);
 });
+
+test('designação a partir da ficha conserva histórico no cartão sem duplicar eventos',()=>{
+ const fn=new Function("const agora=()=> '2026-11-26T00:00:00Z';"+a.slice(a.indexOf('function aplicaCartao('),a.indexOf('/* arquivos onde'))+'return aplicaCartao;')();
+ const item={servidor:'A',corretor:'B',ctl:{}},v={d:{servidor:'C',corretor:'B'},k:{},cart:{}};
+ assert.equal(fn(item,v,'Gestor'),true);assert.deepEqual(item.ctl.historicoDesignacoes[0].alteracoes,[{papel:'minuta',de:'A',para:'C'}]);assert.equal(item.ctl.historicoDesignacoes[0].por,'Gestor');assert.equal(fn(item,v,'Gestor'),false);assert.equal(item.ctl.historicoDesignacoes.length,1);
+});
+test('pré-pauta não espelha resultado oficial; Ex Officio transmite autor da alteração',()=>{const p=read('apoio/ex-officio/api/pauta.js');assert.match(p,/if\(lista==='previa'\)delete Cf\.resultado/);assert.match(p,/FICHA\.espelho\([^\n]+,u\)/);});
