@@ -15,6 +15,22 @@ const br = d => String(d || '').split('-').reverse().join('/');
 const dias = (a, b) => Math.round((Date.parse(a + 'T12:00:00Z') - Date.parse(b + 'T12:00:00Z')) / 86400e3);
 
 const PEN = 'apoio/equipe-pendencias.json';
+/* Leitura pessoal, sem alterar estado de tarefa ou comunicado. Chaves isoladas por usuário. */
+const leituraPath = u => 'apoio/notificacoes-leitura/' + crypto.createHash('sha256').update(L.norm(u)).digest('hex') + '.json';
+async function lerLeitura(u) {
+  try { return await L.lerJson(leituraPath(u)); }
+  catch(e) { if(e.status===404)return {dados:{registros:[]},sha:undefined};throw e; }
+}
+async function gravarLeitura(u,chaves) {
+  const novas=Array.from(new Set(chaves.filter(k=>typeof k==='string'&&k.length>0&&k.length<=512))).slice(0,200);
+  for(let i=0;i<4;i++){
+    const {dados,sha}=await lerLeitura(u);
+    const registros=Array.from(new Set([...(Array.isArray(dados.registros)?dados.registros:[]),...novas])).slice(-1500);
+    try {await L.gravarJson(leituraPath(u),{schema:'gabcmt.notificacoes.leitura',versao:1,registros},sha,'HERO: sincroniza leitura de notificações');return registros;}
+    catch(e){if(e.status!==409&&e.status!==422)throw e;}
+  }
+  throw Object.assign(new Error('Conflito ao registrar leitura.'),{status:409});
+}
 async function lerPen() { try { return await L.lerJson(PEN); } catch (e) { if (e.status === 404) return { dados: { schema: 'gabcmt.equipe.pendencias', versao: 1, registros: [] }, sha: undefined }; throw e; } }
 async function criarDiligencia(campos, u) {
   for (let n = 0; n < 4; n++) {
@@ -131,6 +147,10 @@ async function painel(req, res, u) {
     const b = req.body || {}, cnj = String(b.cnj || '').trim();
     /* gravações feitas daqui levam a marca do painel, para o registro de atividades da Chefia */
     const uw = (L.norm(u) === L.norm(process.env.CMT_RELATOR || 'CM') ? 'Desembargador' : u) + ' · painel CMT';
+    if(b.acao==='notificacao-lida'){
+      if(!Array.isArray(b.chaves)||!b.chaves.length||b.chaves.length>200||b.chaves.some(k=>typeof k!=='string'||!k||k.length>512))return res.status(400).json({erro:'Chaves de leitura inválidas.'});
+      try{return res.status(200).json({ok:true,lidas:await gravarLeitura(u,b.chaves)});}catch(e){return res.status(e.status||500).json({erro:'Não foi possível sincronizar a leitura.'});}
+    }
     if (!cnj && b.acao !== 'responder' && b.acao !== 'acesso' && b.acao !== 'aviso') return res.status(400).json({ erro: 'Informe o processo.' });
     try {
       if (b.acao === 'liberar') {
@@ -419,7 +439,8 @@ async function painel(req, res, u) {
   const eqR = ((equipeDoc || {}).registros || []).filter(r => r.nome && r.ativo !== false);
   const equipe = { minutantes: eqR.filter(r => r.minuta === true).map(r => r.nome),
     corretores: eqR.filter(r => r.papel === 'assessoria' && !['renato', 'cm'].includes(L.norm(r.nome))).map(r => r.nome) };
-  res.status(200).json({ usuario: u, hoje: hj, assinar, equipe, duvidas, pedidos, comunicados, notificacoes, diligencias, urgencias, sessoes, agenda, pauta, prazos, producao, produtividade,
+  let notificacoesLidas=null;try{notificacoesLidas=(await lerLeitura(u)).dados.registros||[];}catch(e){}
+  res.status(200).json({ usuario: u, hoje: hj, notificacoesLidas, assinar, equipe, duvidas, pedidos, comunicados, notificacoes, diligencias, urgencias, sessoes, agenda, pauta, prazos, producao, produtividade,
     equipe: Object.keys(porServidor).map(n => porServidor[n]).sort((x, y) => (y.minutas + y.correcoes) - (x.minutas + x.correcoes)),
     ausencias, fontes: { ficha: !!doc, calendario: !!cal, pautas: docs.filter(Boolean).length, ausencias: !!aus, duvidas: !!pen } });
 }
