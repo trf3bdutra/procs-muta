@@ -356,6 +356,98 @@
        "tipo": "texto-longo",
        "subgrupo": "Decisão interlocutória / outra decisão",
        "apelido": "1g_decisao_fundamentos"
+      },
+      {
+       "rotulo": "Número do benefício (NB)",
+       "chave": "Benefício - NB",
+       "tipo": "texto",
+       "secao": "origem",
+       "subgrupo": "Benefício e perícia",
+       "regra": "Localizado nos autos (sentença, inicial ou recursos); conferir no CNIS ou na carta de concessão.",
+       "apelido": "beneficio_nb"
+      },
+      {
+       "rotulo": "DER",
+       "chave": "Benefício - DER",
+       "tipo": "data",
+       "secao": "origem",
+       "subgrupo": "Benefício e perícia",
+       "apelido": "beneficio_der"
+      },
+      {
+       "rotulo": "DIB",
+       "chave": "Benefício - DIB",
+       "tipo": "data",
+       "secao": "origem",
+       "subgrupo": "Benefício e perícia",
+       "regra": "A da sentença prevalece sobre a da inicial.",
+       "apelido": "beneficio_dib"
+      },
+      {
+       "rotulo": "DCB",
+       "chave": "Benefício - DCB",
+       "tipo": "data",
+       "secao": "origem",
+       "subgrupo": "Benefício e perícia",
+       "apelido": "beneficio_dcb"
+      },
+      {
+       "rotulo": "ID do laudo pericial",
+       "chave": "Perícia - Laudo ID",
+       "tipo": "texto",
+       "secao": "origem",
+       "subgrupo": "Benefício e perícia",
+       "apelido": "pericia_laudo_id"
+      },
+      {
+       "rotulo": "Data do laudo",
+       "chave": "Perícia - Laudo data",
+       "tipo": "data",
+       "secao": "origem",
+       "subgrupo": "Benefício e perícia",
+       "apelido": "pericia_laudo_data"
+      },
+      {
+       "rotulo": "Conclusão do laudo",
+       "chave": "Perícia - Conclusão",
+       "tipo": "lista",
+       "secao": "origem",
+       "subgrupo": "Benefício e perícia",
+       "opcoes": [
+        "Incapacidade total e permanente",
+        "Incapacidade total e temporária",
+        "Incapacidade parcial e permanente",
+        "Incapacidade parcial e temporária",
+        "Sem incapacidade",
+        "A conferir"
+       ],
+       "regra": "Conclusão do perito, não do juízo; conferir a resposta aos quesitos.",
+       "apelido": "pericia_conclusao"
+      },
+      {
+       "rotulo": "DII (início da incapacidade)",
+       "chave": "Perícia - DII",
+       "tipo": "data",
+       "secao": "origem",
+       "subgrupo": "Benefício e perícia",
+       "apelido": "pericia_dii"
+      },
+      {
+       "rotulo": "CID",
+       "chave": "Perícia - CID",
+       "tipo": "texto",
+       "secao": "origem",
+       "subgrupo": "Benefício e perícia",
+       "apelido": "pericia_cid"
+      },
+      {
+       "rotulo": "Laudo impugnado no recurso",
+       "chave": "Perícia - Impugnada no recurso",
+       "tipo": "simnao",
+       "secao": "origem",
+       "subgrupo": "Benefício e perícia",
+       "regra": "Marcar quando as razões atacam o laudo (nulidade, cerceamento, nova perícia, esclarecimentos).",
+       "apelido": "pericia_impugnada_recurso"
       }
      ]
     },
@@ -1488,6 +1580,14 @@
          ]
         }
        ]
+      },
+      {
+       "rotulo": "Temas e súmulas citados nos autos",
+       "chave": "Temas e súmulas citados",
+       "tipo": "texto-longo",
+       "secao": "triagem",
+       "regra": "Uma citação por linha, com a peça e o ID onde aparece. Citação não é aplicação: conferir se vincula a questão e a situação do tema.",
+       "apelido": "temas_sumulas_citados"
       }
      ]
     },

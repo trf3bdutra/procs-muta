@@ -770,3 +770,24 @@ test('extensão 0.77.58: Notificações vistas limpam o número; Marcar todas co
   assert.ok(g.includes('marcarVistas();badges();'),'abrir a aba marca como visto');
   assert.ok(f.includes("msg.tipo === 'muta-app-visto') appVisto();")&&f.includes('!bv[e.id]'),'ícone da extensão limpa ao ver');
 });
+
+test('leitura dos autos 0.77.60: temas e súmulas citados, benefício (NB, DER, DIB, DCB) e laudo pericial como sugestão', () => {
+  assert.equal(read('padrao/inteiro-teor.js'), read('extensao/padrao-inteiro-teor.js'), 'cópia da extensão igual ao padrão');
+  const w = {}; new Function('window', read('padrao/inteiro-teor.js'))(w); const T = w.CMTInteiroTeor;
+  const doc = (id, kind, tipo, text, x) => Object.assign({ id, kind, tipo, descricao: '', date: '2026-03-10', text, empty: false }, x || {});
+  const sent = doc('111111111', 'sentenca', 'Sentença', 'Restabelecimento do auxílio NB 31/612.345.678-9 (DCB em 15/02/2022), DER em 03/01/2022. Aplica-se o Tema 1.013/STJ e a Súmula 111 do STJ, e os Temas 810 e 1.419 do STF. JULGO PROCEDENTE, com DIB em 16/02/2022.', { target: 'sentenca' });
+  const ap = doc('222222222', 'recurso', 'Apelação', 'Alega nulidade do laudo pericial por contradição e pede nova perícia. Invoca o Tema 1.105/STJ.', { target: 'recurso', recursoTipo: 'Apelação' });
+  const laudo = doc('333333333', 'documento', 'Laudo Pericial', 'CID-10: M54.5. Não há incapacidade total e permanente. Há incapacidade total e temporária. DII: 10/12/2021.', { date: '2021-12-20' });
+  const ques = doc('444444444', 'peticao', 'Petição', 'Quesitos', { descricao: 'Quesitos ao laudo pericial' });
+  const v = k => (T.buildSuggestions({ docs: [sent, ap, laudo, ques], polos: {} }, {}, null).find(i => i.key === k) || {}).value;
+  const temas = v('Temas e súmulas citados');
+  for (const t of ['Tema 1.105/STJ — apelação (ID 222222222)', 'Tema 1.013/STJ — sentença (ID 111111111)', 'Tema 810/STF', 'Tema 1.419/STF', 'Súmula 111/STJ', 'Tema 1.105/STJ']) assert.ok(temas.includes(t), t);
+  assert.equal(v('Benefício - NB'), '612.345.678-9 (espécie 31)');
+  assert.equal(v('Benefício - DER'), '03/01/2022'); assert.equal(v('Benefício - DIB'), '16/02/2022'); assert.equal(v('Benefício - DCB'), '15/02/2022');
+  assert.equal(v('Perícia - Laudo ID'), '333333333', 'quesitos não contam como laudo');
+  assert.equal(v('Perícia - Conclusão'), 'Incapacidade total e temporária', 'frase negada não vira conclusão');
+  assert.equal(v('Perícia - DII'), '10/12/2021'); assert.equal(v('Perícia - CID'), 'M54.5'); assert.equal(v('Perícia - Impugnada no recurso'), 'Sim');
+  assert.equal(T.buildSuggestions({ docs: [doc('1', 'sentenca', 'Sentença', 'Processo nº 5001234-55.2025.4.03.6000', { target: 'sentenca' })], polos: {} }, {}, null).find(i => i.key === 'Benefício - NB'), undefined, 'número do processo não é NB');
+  const F = JSON.parse(read('padrao/ficha.json')), chaves = new Set(F.abas.flatMap(a => a.grupos.flatMap(g => g.campos.map(c => c.chave))));
+  for (const k of ['Benefício - NB', 'Benefício - DER', 'Benefício - DIB', 'Benefício - DCB', 'Perícia - Laudo ID', 'Perícia - Laudo data', 'Perícia - Conclusão', 'Perícia - DII', 'Perícia - CID', 'Perícia - Impugnada no recurso', 'Temas e súmulas citados']) assert.ok(chaves.has(k), 'campo na ficha: ' + k);
+});

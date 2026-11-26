@@ -915,6 +915,8 @@ function buildSuggestions(parsed,r,ai){
       items.push({sec:'Representação',kind:'proc',key:'proc:'+d.id,label:`Procuração · ID ${d.id}`,value:d.id,proc,current:cur?fmt(cur):'',status,apply:status==='novo',doc:d.id,note:[d.procMatch?.how?`Do recorrente: ${d.procMatch.how}.`:'',note].filter(Boolean).join(' ')});
     });
   }
+  // 0.77.60 · matéria: temas e súmulas citados, benefício (NB, DER, DIB, DCB) e laudo pericial
+  try{materiaSuggestions(parsed,r,used,add);}catch(err){console.warn('[CMT] importação TXT · matéria',err);}
   // Outras peças
   const occ=Array.isArray(r._ocorrencias)?r._ocorrencias:[];
   /* v43: a peça é gravada com o NOME do documento (tipo “Outro” + Especifique), não como “Juntada de documento”;
@@ -927,6 +929,65 @@ function buildSuggestions(parsed,r,ai){
     add(o);
   });
   return items;
+}
+
+/* 0.77.60 · dados de matéria localizados nos autos; tudo entra como sugestão (A conferir), nunca gravado sem confirmação.
+   Temas e súmulas: citações expressas na sentença, nos recursos, nas contrarrazões, no parecer e na decisão impugnada.
+   Benefício: NB, DER, DIB e DCB, preferindo a sentença, depois a inicial e os recursos.
+   Perícia: o laudo juntado (ID, data, conclusão sobre a incapacidade, DII e CID) e a impugnação ao laudo nas razões. */
+function milhar(n){n=String(n).replace(/\./g,'');return n.length>3?n.slice(0,-3)+'.'+n.slice(-3):n;}
+function citacoes(text){
+  const t=String(text||''),out=[];
+  const TR='(STF|STJ|TNU|TST|TRF ?3|Supremo Tribunal Federal|Superior Tribunal de Justi[çc]a)';
+  const trib=x=>/supremo/i.test(x)?'STF':/superior/i.test(x)?'STJ':x.replace(/\s/g,'').toUpperCase();
+  const reT=new RegExp('\\bTemas?\\s*(?:n\\.?\\s*[ºo°]?\\s*|n[ºo°]\\s*)?(\\d{1,2}\\.\\d{3}|\\d{1,4})((?:\\s*(?:,|e)\\s*(?:\\d{1,2}\\.\\d{3}|\\d{1,4}))*)\\s*(?:/|d[oa]\\s+|,\\s*d[oa]\\s+)\\s*'+TR,'gi');
+  let m;while((m=reT.exec(t))){const ns=[m[1]].concat((m[2]||'').split(/\s*(?:,|e)\s*/).filter(Boolean));ns.forEach(n=>out.push('Tema '+milhar(n)+'/'+trib(m[3])));}
+  const reS=new RegExp('\\bS[úu]mulas?\\s*(Vinculantes?\\s*)?(?:n\\.?\\s*[ºo°]?\\s*|n[ºo°]\\s*)?(\\d{1,3})((?:\\s*(?:,|e)\\s*\\d{1,3})*)\\s*(?:/|d[oa]\\s+|,\\s*d[oa]\\s+)\\s*'+TR,'gi');
+  while((m=reS.exec(t))){const ns=[m[2]].concat((m[3]||'').split(/\s*(?:,|e)\s*/).filter(Boolean));ns.forEach(n=>out.push('Súmula '+(m[1]?'Vinculante ':'')+n+'/'+trib(m[4])));}
+  return out;
+}
+function dataBr(t,re){const m=re.exec(t);return m?m[1].replace(/\b(\d)\//g,'0$1/'):'';}
+function materiaSuggestions(parsed,r,used,add){
+  const docs=parsed.docs||[],sel=used.length?used:docs;
+  const papel=d=>d.target==='sentenca'||d.kind==='sentenca'?'sentença':d.kind==='recurso'||d.target==='recurso'?(d.recursoTipo||'recurso').toLowerCase():d.kind==='contrarrazoes'?'contrarrazões':d.kind==='mpf'?'parecer do MPF':d.kind==='acordao'?'acórdão':d.kind==='decisao'?'decisão':d.kind==='inicial'?'inicial':'';
+  // temas e súmulas citados
+  const cit=new Map();
+  sel.filter(d=>!d.empty&&papel(d)).forEach(d=>{citacoes(d.text).forEach(c=>{const L=cit.get(c)||[];const w=papel(d)+' (ID '+d.id+')';if(!L.includes(w))L.push(w);cit.set(c,L);});});
+  if(cit.size){const L=[...cit.entries()].sort((a,b)=>b[1].length-a[1].length).map(([c,w])=>c+' — '+w.join(', '));
+    add({sec:'Temas e súmulas citados',key:'Temas e súmulas citados',label:'Citados nos autos (conferir se vinculam o caso)',value:L.join('\n'),current:r['Temas e súmulas citados'],doc:[...new Set(sel.filter(d=>citacoes(d.text).length).map(d=>d.id))].join(', '),kind:'area',note:'Citação não é aplicação: confira se o tema ou a súmula decide a questão e a situação do tema (afetado, julgado, suspensão).'});}
+  // benefício previdenciário
+  const ordem=['sentenca','inicial','recurso','decisao','acordao','contrarrazoes'];
+  const fontes=docs.filter(d=>!d.empty&&ordem.includes(d.target==='sentenca'?'sentenca':d.kind)).sort((a,b)=>ordem.indexOf(a.target==='sentenca'?'sentenca':a.kind)-ordem.indexOf(b.target==='sentenca'?'sentenca':b.kind));
+  const D='(\\d{1,2}/\\d{1,2}/\\d{4})';
+  const BEN=[['Benefício - NB','Número do benefício (NB)',/\b(?:NB|N\.?\s?B\.|benef[íi]cio\s+(?:previdenci[áa]rio\s+)?n(?:[ºo°.]|\.\s?[ºo°]|úmero)\s*)\s*[:nº°.]*\s*(?:(\d{2})\s*\/\s*)?(\d{2,3}\.?\d{3}\.?\d{3}-?\d)\b/i],
+    ['Benefício - DER','DER (entrada do requerimento)',new RegExp('\\b(?:DER|data\\s+d[aoe]\\s+entrada\\s+do\\s+requerimento(?:\\s+administrativo)?)\\b[^\\d\\n]{0,40}'+D,'i')],
+    ['Benefício - DIB','DIB (início do benefício)',new RegExp('\\b(?:DIB|data\\s+d[eo]\\s+in[íi]cio\\s+do\\s+benef[íi]cio)\\b[^\\d\\n]{0,40}'+D,'i')],
+    ['Benefício - DCB','DCB (cessação do benefício)',new RegExp('\\b(?:DCB|data\\s+d[ea]\\s+cessa[çc][ãa]o\\s+do\\s+benef[íi]cio)\\b[^\\d\\n]{0,40}'+D,'i')]];
+  BEN.forEach(([key,label,re])=>{for(const d of fontes){const m=re.exec(d.text);if(m){const v=key==='Benefício - NB'?m[2]+(m[1]?' (espécie '+m[1]+')':''):m[1].replace(/\b(\d)\//g,'0$1/');add({sec:'Benefício',key,label,value:v,current:r[key],doc:d.id,kind:'field',note:'Localizado em '+(papel(d)||d.tipo)+' (ID '+d.id+').'});break;}}});
+  // laudo pericial
+  const ehLaudo=d=>{const x=N(d.tipo+' '+d.descricao),h=N(String(d.text||'').slice(0,800));return (/laudo|pericia|pericial/.test(x)||/^\s*laudo (medico )?pericial|laudo de pericia/.test(h))&&!/quesito|nomea|honorario|impugna|manifesta|intima|esclarec|complementa(r|cao) (o|ao) laudo|agendamento|designa/.test(x);};
+  const laudos=docs.filter(ehLaudo);
+  if(laudos.length){
+    const d=laudos[laudos.length-1],t=String(d.text||''),n=N(t);
+    add({sec:'Perícia',key:'Perícia - Laudo ID',label:'ID do laudo pericial'+(laudos.length>1?' (o último juntado)':''),value:d.id,current:r['Perícia - Laudo ID'],doc:laudos.map(z=>z.id).join(', '),kind:'field',note:laudos.length>1?'Laudos juntados: '+laudos.map(z=>'ID '+z.id+(z.date?' ('+docBr(z)+')':'')).join(', ')+'.':''});
+    add({sec:'Perícia',key:'Perícia - Laudo data',label:'Data do laudo',value:docBr(d),current:r['Perícia - Laudo data'],doc:d.id,kind:'field'});
+    if(!d.empty){
+      /* frase negada ("não há incapacidade total e permanente") não conta como positiva */
+      const np=n.replace(/\b(nao|sem|inexiste)\s+(ha\s+|existe\s+|apresenta\s+|foi\s+(constatad|verificad|identificad)a\s+)?incapacidade[^.;\n]*/g,' ');
+      const conc=/incapacidade\s+(laborativa\s+|laboral\s+)?(total\s+e\s+permanente|permanente\s+e\s+total|total\s+e\s+definitiva)/.test(np)?'Incapacidade total e permanente'
+        :/incapacidade\s+(laborativa\s+|laboral\s+)?(total\s+e\s+tempor[a]ria|tempor[a]ria\s+e\s+total)/.test(np)?'Incapacidade total e temporária'
+        :/incapacidade\s+(laborativa\s+|laboral\s+)?(parcial\s+e\s+permanente|permanente\s+e\s+parcial|parcial\s+e\s+definitiva)/.test(np)?'Incapacidade parcial e permanente'
+        :/incapacidade\s+(laborativa\s+|laboral\s+)?(parcial\s+e\s+tempor[a]ria|tempor[a]ria\s+e\s+parcial)/.test(np)?'Incapacidade parcial e temporária'
+        :/\b(nao|sem)\s+(ha|foi\s+(constatad|verificad|identificad)a|apresenta|existe|se\s+verifica)\s+incapacidade|\bcapaz\s+para\s+(o\s+trabalho|as\s+atividades|sua\s+atividade)|\bapt[oa]\s+para\s+(o\s+trabalho|as\s+atividades|sua\s+atividade)|\bincapacidade:\s*nao\b|\bausencia\s+de\s+incapacidade/.test(n)?'Sem incapacidade':'';
+      if(conc)add({sec:'Perícia',key:'Perícia - Conclusão',label:'Conclusão do laudo',value:conc,current:r['Perícia - Conclusão'],doc:d.id,kind:'select',options:['Incapacidade total e permanente','Incapacidade total e temporária','Incapacidade parcial e permanente','Incapacidade parcial e temporária','Sem incapacidade','A conferir'],note:'Frase do laudo: conferir a resposta aos quesitos.'});
+      const dii=dataBr(t,new RegExp('\\b(?:DII|data\\s+d[eo]\\s+in[íi]cio\\s+da\\s+incapacidade)\\b[^\\d\\n]{0,60}'+D,'i'));
+      if(dii)add({sec:'Perícia',key:'Perícia - DII',label:'DII (início da incapacidade)',value:dii,current:r['Perícia - DII'],doc:d.id,kind:'field'});
+      const cid=[...new Set((t.match(/\bCID(?:[- ]?10)?\s*[:\-–]?\s*([A-TV-Z]\d{2}(?:\.\d{1,2})?)/g)||[]).map(x=>(/([A-TV-Z]\d{2}(?:\.\d{1,2})?)$/.exec(x)||[])[1]).filter(Boolean))].slice(0,5);
+      if(cid.length)add({sec:'Perícia',key:'Perícia - CID',label:'CID indicado no laudo',value:cid.join(', '),current:r['Perícia - CID'],doc:d.id,kind:'field'});
+    }
+    const imp=used.filter(z=>z.target==='recurso'&&!z.empty&&/(impugn|nulidade|cerceamento|nova pericia|complementacao|esclarecimento)[^.]{0,120}(laudo|pericia)|(laudo|pericia)[^.]{0,120}(impugn|nulidade|cerceamento|contradit|omiss|inconclusiv)/.test(N(z.text)));
+    if(imp.length)add({sec:'Perícia',key:'Perícia - Impugnada no recurso',label:'O recurso impugna o laudo?',value:'Sim',current:r['Perícia - Impugnada no recurso'],doc:imp.map(z=>z.id).join(', '),kind:'select',options:['Sim','Não'],note:'Pode ser preliminar de cerceamento de defesa.'});
+  }
 }
 
 /* nome da peça: “Tipo — Descrição” do cabeçalho do PJe (sem repetição); ou o nome editado no diálogo */
