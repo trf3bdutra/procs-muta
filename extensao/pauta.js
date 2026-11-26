@@ -14,7 +14,7 @@
   var dg = function (s) { return S(s).replace(/\D/g, ''); };
   var br = function (d) { var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(S(d)); return m ? m[3] + '/' + m[2] + '/' + m[1] : S(d); };
   var hoje = function () { return new Date(Date.now() - 4 * 3600e3).toISOString().slice(0, 10); };
-  var P = { cal: null, data: '', doc: null, ped: null, pedPauta: null, pedErro: false, erro: '', lendo: false, f: 'todos', aba: 'itens', solFiltro: 'todas', solTipo: 'todas', qItens:'', qSol:'', modalidade:'todas', aberto: false, seq: 0 };
+  var P = { cal: null, data: '', doc: null, ped: null, pedPauta: null, pedErro: false, erro: '', lendo: false, f: 'todos', tipoProcSol: '', aba: 'itens', solFiltro: 'todas', solTipo: 'todas', qItens:'', qSol:'', modalidade:'todas', aberto: false, seq: 0 };
 
   var solEditor=null,solCnj='',solEditOpen=false;
   function GB() { return window.MutaGabinete || {}; }
@@ -148,9 +148,9 @@
     var FALTA={servidor:'a designar',dataMinuta:'a minutar',dataCorrecao:'a corrigir',dataLiberacao:'a liberar'};var m=PASSOS.slice(1).map(function(p){var n=L.filter(function(it){return !!it[p[0]];}).length,pc=L.length?Math.round(n*100/L.length):0;return '<div class="hero-v53-pa-metric pa-m-'+esc(p[0])+'"><small>'+esc(p[1])+'</small><span class="pa-pct">'+pc+'%</span><b>'+n+'<span> de '+L.length+'</span></b><progress value="'+n+'" max="'+Math.max(1,L.length)+'"></progress><em class="pa-falta" title="'+(L.length-n?'faltam '+(L.length-n)+' '+(FALTA[p[0]]||''):'')+'">'+(L.length-n?'faltam '+(L.length-n):'completo')+'</em></div>';}).join('');
     var pedidos=(d.solicitacoes||[]).map(function(r){return {tipo:S(r.tipo)||'Outras',cnj:r.cnj};}).concat((P.pedPauta||[]).filter(function(r){return sesDe(r)===P.data;}).map(function(r){return {tipo:tipoPed(r),cnj:r.cnj||r.numero};}));
     var tipos={};pedidos.forEach(function(r){tipos[r.tipo]=(tipos[r.tipo]||0)+1;});
-    var resumo=Object.keys(tipos).sort().map(function(t){return '<em class="pa-falta" style="display:block;white-space:normal">'+tipos[t]+' · '+esc(t)+'</em>';}).join('');
+    var resumo=Object.keys(tipos).sort().map(function(t){return '<button type="button" class="chip" style="font-size:10px;white-space:normal;padding:2px 5px;cursor:pointer" data-pa="soltipo:'+esc(t)+'" aria-pressed="'+(P.f==='sol'&&P.tipoProcSol===t)+'">'+esc(t)+' · '+tipos[t]+'</button>';}).join('');
     var incompleto=P.pedErro||!Array.isArray(d.solicitacoes)||d.solicitacoesErro;
-    var solCard='<div class="hero-v53-pa-metric pa-m-solicitacoes"><small>Solicitações</small><b>'+pedidos.length+'<span> registros</span></b>'+ (resumo||'<em>Nenhuma solicitação registrada</em>')+(incompleto?'<em>Consulta parcial · confira em Deliberações</em>':'')+'</div>';
+    var solCard='<div class="hero-v53-pa-metric pa-m-solicitacoes" data-pa="solcard" style="cursor:pointer;'+(P.f==='sol'&&!P.tipoProcSol?'outline:1px solid var(--primary);':'')+'"><button type="button" data-pa="solcard" aria-pressed="'+(P.f==='sol'&&!P.tipoProcSol)+'" style="background:none;border:0;padding:0;text-align:left;color:inherit;cursor:pointer;width:100%"><small>Solicitações</small><b>'+pedidos.length+'<span> registros</span></b></button><div style="display:flex;flex-wrap:wrap;gap:3px">'+(resumo||'<em>Nenhuma solicitação registrada</em>')+'</div>'+(incompleto?'<em>Consulta parcial · confira em Deliberações</em>':'')+'</div>';
     h+='<div class="hero-v53-pa-metrics">'+solCard+m+'</div>';
     var indicadores='<section class="hero-pa-overview" aria-label="Marcos e indicadores da sessão">'+h+'</section>';h=topo;
 
@@ -161,16 +161,17 @@
     var cont = {}; R.forEach(function (x) { cont[x.e.k] = (cont[x.e.k] || 0) + 1; });
     var nAl = R.filter(function (x) { return x.a.some(function (a) { return a[0] === 'al'; }); }).length;
     var F = [['todos', 'Todos', L.length], ['al', 'Com alerta', nAl], ['sol', 'Com solicitações', R.filter(function(x){return x.ps.length;}).length], ['nd', 'A designar', cont.nd || 0], ['des', 'Minutando', cont.des || 0], ['min', 'Em correção', cont.min || 0], ['cor', 'A liberar', cont.cor || 0], ['lib', 'Liberados', cont.lib || 0], ['fora', 'Retirados/adiados', (cont.ret || 0) + (cont.adi || 0)]];
-    var vis = R.filter(function (x) { var it=x.it;return (P.f === 'todos' ? true : P.f === 'al' ? x.a.some(function (a) { return a[0] === 'al'; }) : P.f === 'sol' ? x.ps.length>0 : P.f === 'fora' ? /ret|adi/.test(x.e.k) : x.e.k === P.f)&&buscaCasa(P.qItens,[it.cnj,it.item,it.classe,it.assunto,it.servidor,it.corretor,x.e.t,x.ps.map(function(r){return r.tipo;}).join(' ')]); });
+    var vis = R.filter(function (x) { var it=x.it;return (P.f === 'todos' ? true : P.f === 'al' ? x.a.some(function (a) { return a[0] === 'al'; }) : P.f === 'sol' ? x.ps.some(function(r){return !P.tipoProcSol||r.tipo===P.tipoProcSol;}) : P.f === 'fora' ? /ret|adi/.test(x.e.k) : x.e.k === P.f)&&buscaCasa(P.qItens,[it.cnj,it.item,it.classe,it.assunto,it.servidor,it.corretor,x.e.t,x.ps.map(function(r){return r.tipo;}).join(' ')]); });
     h += buscaPainel('itens')+buscaFaixa('itens',P.qItens,'Buscar processo, item, assunto, servidor…')+'<div class="pa-f hero-rep-filters" role="group" aria-label="Pauta">' + F.filter(function (f) { return f[2] || f[0] === 'todos'; }).map(function (f) { return '<button type="button" class="chip' + (P.f === f[0] ? ' on' : '') + '" data-pa="f:' + f[0] + '" aria-pressed="'+(P.f===f[0])+'">' + f[1] + ' <i>' + f[2] + '</i></button>'; }).join('') + '</div><p class="status hero-rep-count" role="status">'+vis.length+' de '+L.length+' processos</p></div></div>'+indicadores+'<section class="pa-ses hero-pa-results" aria-label="Resultados da pauta">'+(previa?'<p class="muted">Prévia da pauta (ainda sem a relação oficial do PJe).</p>':'')+(!vis.length?'<p class="muted">'+(L.length?'Nenhum processo corresponde aos filtros.':'Sem processos nesta pauta.')+'</p>':'');
     /* Solicitações resumidas nos indicadores e na lista de processos. */
-    h += '<ol class="pa-l">' + vis.map(function (x) {
+    function renderProcessos(grupo){return '<ol class="pa-l">' + grupo.map(function (x) {
       var it = x.it, at = dg(it.cnj) === cur, passo = PASSOS.map(function (p) { return '<i class="' + (it[p[0]] ? 'ok' : '') + '" title="' + p[1] + '"></i>'; }).join('');
       return '<li class="pa-it e-' + x.e.k + (at ? ' at' : '') + '"><button type="button" class="pa-b" data-pa="abrir:' + esc(it.cnj) + '" title="Abrir o prontuário deste processo">' +
         '<span class="pa-n">' + esc(it.item || '—') + '</span><span class="pa-c"><b class="mono">' + esc(it.cnj) + etqCl(it) + '</b><small>' + esc(S(it.assunto)) + '</small>' +
         '<span class="hero-v53-pa-people">'+(it.servidor?'<em>Minuta · '+esc(S(it.servidor))+'</em>':'')+(it.corretor?'<em>Correção · '+esc(S(it.corretor))+'</em>':'')+'</span><span class="pa-et"><span class="pa-st">' + passo + '</span>' + esc(x.e.t) + '</span>' +
         (x.a.length ? '<span class="pa-al">' + x.a.map(function (a) { return '<em class="k-' + a[0] + '" title="' + esc(a[2]) + '">' + esc(a[1]) + '</em>'; }).join('') + '</span>' : '') + '</span></button></li>';
-    }).join('') + '</ol>';
+    }).join('') + '</ol>';}
+    if(P.f==='sol'){Object.keys(tipos).sort().filter(function(t){return !P.tipoProcSol||P.tipoProcSol===t;}).forEach(function(t){var grupo=vis.filter(function(x){return x.ps.some(function(r){return r.tipo===t;});});if(grupo.length)h+='<h4 class="pm-mer-h" style="margin:10px 0 5px;padding:6px 0;border-top:1px solid var(--line)">'+esc(t)+' · '+grupo.length+' processos</h4>'+renderProcessos(grupo);});}else h+=renderProcessos(vis);
     return h + '</section>';
   }
   function pedidosHtml() {
@@ -216,7 +217,9 @@
     if(/^gerir:/.test(a)){solEditOpen=true;var n=a.slice(6),brg=window.MutaProntuarioBridge;if(brg&&brg.abrirProcesso)brg.abrirProcesso(n);pintar();return;}
     if (/^sol:/.test(a)) { P.solFiltro=a.slice(4);pintar();return; }
     if (/^sol-abrir:/.test(a)) { var n=a.slice(10),brg=window.MutaProntuarioBridge;if(brg&&brg.abrirProcesso)brg.abrirProcesso(n);if(window.MutaAbas)window.MutaAbas.ir('pront');return; }
-    if (/^f:/.test(a)) { P.f = a.slice(2); pintar(); return; }
+    if(a==='solcard'){P.f=P.f==='sol'&&!P.tipoProcSol?'todos':'sol';P.tipoProcSol='';pintar();return;}
+    if(a.indexOf('soltipo:')===0){var tipo=a.slice(8);var desativar=P.f==='sol'&&P.tipoProcSol===tipo;P.f=desativar?'todos':'sol';P.tipoProcSol=desativar?'':tipo;pintar();return;}
+    if (/^f:/.test(a)) { P.f = a.slice(2); P.tipoProcSol=''; pintar(); return; }
     if (/^abrir:/.test(a)) { var n = a.slice(6), brg = window.MutaProntuarioBridge; if (brg && brg.abrirProcesso) brg.abrirProcesso(n); if (window.MutaAbas) window.MutaAbas.ir('pront'); return; }
   });
   document.addEventListener('change', function (e) {
