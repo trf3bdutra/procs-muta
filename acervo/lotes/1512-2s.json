@@ -3718,11 +3718,11 @@
    "assunto": "CNH - Carteira Nacional de Habilitação",
    "assunto_detalhado": "",
    "grupo": "assunto-3",
-   "tipo_caso": "CNH - Carteira Nacional de Habilitação",
-   "resultado": "",
+   "tipo_caso": "Trânsito · transferência de pontuação após o prazo do artigo 257, § 7º, do CTB · improcedência",
+   "resultado": "Proposta: APTO — apelação do autor: o decurso do prazo do artigo 257, § 7º, do CTB só gera preclusão administrativa e admite prova judicial do real condutor [VALIDAR paradigma; série com 5000243-98.2022 e 5001612-30.2022]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença improcedente (ID 347405986); apelação (ID 347405987); contrarrazões (ID 347405990); redistribuído (ID 349387762).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -3731,9 +3731,34 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "347405986"
+    },
+    {
+     "peca": "Apelação",
+     "id": "347405987"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "347405990"
+    }
+   ],
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — trânsito (auto de infração, CNH)",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 347405986 (15/08/2025)",
+    "recurso": "apelação (ID 347405987, 29/08/2025)",
+    "preparo": "[VALIDAR]",
+    "representacao": "procuração/substabelecimento ID 347405822, 347405988",
+    "mpf": "Não consta parecer",
+    "autos": "33 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false
@@ -3749,11 +3774,11 @@
    "assunto": "Controle Externo da atividade policial",
    "assunto_detalhado": "",
    "grupo": "assunto-22",
-   "tipo_caso": "Controle Externo da atividade policial",
-   "resultado": "",
+   "tipo_caso": "Processo administrativo (PRF/União) · nulidade e dano moral · improcedência",
+   "resultado": "Proposta: APTO — apelação da autora pela nulidade do processo administrativo 012518/2018 e por dano moral [VALIDAR paradigma] [VALIDAR: natureza do processo administrativo 012518/2018 (trânsito ou disciplinar)]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença improcedente (ID 277095410); apelação (ID 277095424); contrarrazões (ID 277095429).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -3762,11 +3787,38 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "277095410"
+    },
+    {
+     "peca": "Apelação",
+     "id": "277095424"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "277095429"
+    }
+   ],
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — processo administrativo, responsabilidade civil",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 277095410 (10/04/2023)",
+    "recurso": "apelação (ID 277095424, 08/05/2023)",
+    "preparo": "[VALIDAR]",
+    "representacao": "procuração/substabelecimento ID 277095272",
+    "mpf": "Não consta parecer",
+    "autos": "30 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] natureza do processo administrativo 012518/2018 (trânsito ou disciplinar)"
+   ],
    "minuta": false
   },
   {
@@ -3780,11 +3832,11 @@
    "assunto": "CNH - Carteira Nacional de Habilitação",
    "assunto_detalhado": "",
    "grupo": "assunto-3",
-   "tipo_caso": "CNH - Carteira Nacional de Habilitação",
-   "resultado": "",
+   "tipo_caso": "Trânsito · nulidade de autos de infração (DNIT)",
+   "resultado": "Proposta: APTO — apelação do DNIT contra a nulidade dos autos de infração e penalidades [VALIDAR paradigma: ApCiv 0000861-17.2011.4.03.6002] [VALIDAR: fundamento da nulidade (notificação ou real condutor)]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença procedente (ID 379303867); apelação (ID 379303874); contrarrazões (ID 379303876); MPF sem manifestação de mérito (ID 386433570).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -3793,11 +3845,42 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "379303867"
+    },
+    {
+     "peca": "Apelação",
+     "id": "379303874"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "379303876"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "386433570"
+    }
+   ],
+   "mpf": "parecer ID 386433570 (15/07/2026)",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — trânsito (auto de infração, CNH)",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 379303867 (02/03/2026)",
+    "recurso": "apelação (ID 379303874, 20/04/2026)",
+    "preparo": "comprovante juntado (ID 379303839, 379303840, 379303841, 379303842) — conferir o tipo",
+    "representacao": "procuração/substabelecimento ID 379303831",
+    "mpf": "parecer ID 386433570 (15/07/2026)",
+    "autos": "64 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] fundamento da nulidade (notificação ou real condutor)"
+   ],
    "minuta": false
   },
   {
@@ -3811,11 +3894,11 @@
    "assunto": "PIS",
    "assunto_detalhado": "",
    "grupo": "assunto-2",
-   "tipo_caso": "PIS",
-   "resultado": "",
+   "tipo_caso": "PIS/COFINS sobre combustíveis (álcool) · alíquotas ad rem · MS denegado",
+   "resultado": "Proposta: APTO — apelação da impetrante contra a denegação (formação das alíquotas ad rem do PIS/COFINS pelo preço médio no varejo); contrarrazões com preliminar de não conhecimento [VALIDAR paradigma e preliminar] [VALIDAR: preliminar de não conhecimento da União (dialeticidade?)]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença denegou a segurança (ID 375485950); apelação (ID 375485953); contrarrazões (ID 375485956); MPF sem manifestação de mérito (ID 378847403).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -3824,11 +3907,46 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "375485950"
+    },
+    {
+     "peca": "Apelação",
+     "id": "375485953"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "375485956"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "375485949"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "378847403"
+    }
+   ],
+   "mpf": "parecer ID 378847403 (06/06/2026)",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Tributário — PIS/COFINS, combustíveis",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 375485950 (25/02/2026)",
+    "recurso": "apelação (ID 375485953, 23/03/2026)",
+    "preparo": "comprovante juntado (ID 375485935, 375485936, 375485939, 375485954) — conferir o tipo",
+    "representacao": "procuração/substabelecimento ID 375485923, 375485925",
+    "mpf": "parecer ID 378847403 (06/06/2026)",
+    "autos": "47 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] preliminar de não conhecimento da União (dialeticidade?)"
+   ],
    "minuta": false
   },
   {
@@ -3842,11 +3960,11 @@
    "assunto": "CNH - Carteira Nacional de Habilitação",
    "assunto_detalhado": "",
    "grupo": "assunto-3",
-   "tipo_caso": "CNH - Carteira Nacional de Habilitação",
-   "resultado": "",
+   "tipo_caso": "Trânsito · nulidade de autos de infração (DNIT)",
+   "resultado": "Proposta: APTO — apelação do DNIT contra a nulidade dos AIT E0284899545 e E028488324 (processos 014747/2017 e 014748/2017); notificações regulares (artigos 282 e 282-A do CTB; Resolução CONTRAN 619/2016) [VALIDAR paradigma]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença procedente (ID 307332358); embargos do DNIT rejeitados (ID 307332364); apelação (ID 307332365); contrarrazões (ID 307332368).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -3855,9 +3973,42 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "307332358"
+    },
+    {
+     "peca": "Embargos de declaração",
+     "id": "307332359"
+    },
+    {
+     "peca": "Apelação",
+     "id": "307332365"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "307332362"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "307332368"
+    }
+   ],
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — trânsito (auto de infração, CNH)",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 307332358 (27/09/2023)",
+    "recurso": "embargos de declaração (ID 307332359, 29/09/2023); apelação (ID 307332365, 23/08/2024)",
+    "preparo": "[VALIDAR]",
+    "representacao": "procuração/substabelecimento ID 307332078",
+    "mpf": "Não consta parecer",
+    "autos": "77 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false
@@ -3873,11 +4024,11 @@
    "assunto": "CNH - Carteira Nacional de Habilitação",
    "assunto_detalhado": "",
    "grupo": "assunto-3",
-   "tipo_caso": "CNH - Carteira Nacional de Habilitação",
-   "resultado": "",
+   "tipo_caso": "Trânsito · nulidade de AI (DNIT) · improcedência",
+   "resultado": "Proposta: APTO — apelação da autora contra a improcedência: juntada extemporânea de documentos pelo DNIT e regularidade das notificações [VALIDAR paradigma] [VALIDAR: embargos de declaração de 14/03/2024 (ID 347018053): julgados?]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença improcedente, honorários de 10% suspensos (ID 347018065); apelação (ID 347018067); contrarrazões (ID 347018069).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -3886,11 +4037,38 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "347018065"
+    },
+    {
+     "peca": "Apelação",
+     "id": "347018067"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "347018069"
+    }
+   ],
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — trânsito (auto de infração, CNH)",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 347018065 (14/10/2025)",
+    "recurso": "apelação (ID 347018067, 28/10/2025)",
+    "preparo": "[VALIDAR]",
+    "representacao": "procuração/substabelecimento ID 347017325",
+    "mpf": "Não consta parecer",
+    "autos": "57 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] embargos de declaração de 14/03/2024 (ID 347018053): julgados?"
+   ],
    "minuta": false
   },
   {
