@@ -2457,11 +2457,11 @@
    "assunto": "Contribuições Previdenciárias",
    "assunto_detalhado": "",
    "grupo": "assunto-13",
-   "tipo_caso": "Contribuições Previdenciárias",
-   "resultado": "",
+   "tipo_caso": "Execução fiscal (contribuições) extinta · honorários do executado",
+   "resultado": "Proposta: [VALIDAR paradigma] apelação do executado: nulidade da sentença por falta de fundamentação e fixação de honorários; contrarrazões afastam o Tema 587/STJ",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença extinguiu a execução (artigo 485, VI, do CPC) (ID 368180168); embargos rejeitados (ID 368180172).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -2470,9 +2470,42 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "368180168"
+    },
+    {
+     "peca": "Embargos de declaração",
+     "id": "368180169"
+    },
+    {
+     "peca": "Apelação",
+     "id": "368180175"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "368180171"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "368180181"
+    }
+   ],
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Tributário — execução fiscal, honorários",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 368180168 (07/07/2025)",
+    "recurso": "embargos de declaração (ID 368180169, 16/07/2025); apelação (ID 368180175, 04/03/2026)",
+    "preparo": "comprovante juntado (ID 368180178, 368180179) — conferir o tipo",
+    "representacao": "procuração/substabelecimento ID 368180176",
+    "mpf": "Não consta parecer",
+    "autos": "85 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false
@@ -2488,11 +2521,11 @@
    "assunto": "Contribuições Previdenciárias",
    "assunto_detalhado": "",
    "grupo": "assunto-13",
-   "tipo_caso": "Contribuições Previdenciárias",
-   "resultado": "",
+   "tipo_caso": "Município de Amambai × União · autos de infração (contribuições previdenciárias)",
+   "resultado": "Proposta: [VALIDAR paradigma] apelação do Município contra a improcedência (manutenção dos autos de infração)",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença improcedente (ID 367066375).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -2501,9 +2534,34 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "367066375"
+    },
+    {
+     "peca": "Apelação",
+     "id": "367066379"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "367066381"
+    }
+   ],
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Tributário — contribuições previdenciárias de ente público",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 367066375 (26/11/2025)",
+    "recurso": "apelação (ID 367066379, 26/02/2026)",
+    "preparo": "[VALIDAR]",
+    "representacao": "procuração/substabelecimento ID 367066178",
+    "mpf": "Não consta parecer",
+    "autos": "213 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false
@@ -2519,11 +2577,11 @@
    "assunto": "Contribuições Sociais",
    "assunto_detalhado": "",
    "grupo": "assunto-6",
-   "tipo_caso": "Contribuições Sociais",
-   "resultado": "",
+   "tipo_caso": "PIS/COFINS · créditos sobre insumos (transportadora) · MS denegado",
+   "resultado": "Proposta: [VALIDAR paradigma] apelação da impetrante: creditamento de PIS/COFINS sobre combustíveis, manutenção, IPVA e licenciamento (essencialidade/relevância, Tema 779/STJ)",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença denegou a segurança (ID 373729210); MPF sem manifestação de mérito.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -2532,9 +2590,42 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "373729210"
+    },
+    {
+     "peca": "Apelação",
+     "id": "373729213"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "373729218"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "373729209"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "378866874"
+    }
+   ],
+   "mpf": "parecer ID 378866874 (07/06/2026)",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Tributário — PIS/COFINS não cumulativos",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 373729210 (12/09/2025)",
+    "recurso": "apelação (ID 373729213, 01/10/2025)",
+    "preparo": "comprovante juntado (ID 373729201, 373729202, 373729203, 373729214, 373729215) — conferir o tipo",
+    "representacao": "procuração/substabelecimento ID 373728925",
+    "mpf": "parecer ID 378866874 (07/06/2026)",
+    "autos": "60 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false
@@ -2550,11 +2641,11 @@
    "assunto": "Contribuições Sociais",
    "assunto_detalhado": "",
    "grupo": "assunto-6",
-   "tipo_caso": "Contribuições Sociais",
-   "resultado": "",
+   "tipo_caso": "Contribuições a terceiros · limite de 20 salários mínimos · MS denegado",
+   "resultado": "Proposta: negar provimento à apelação [VALIDAR paradigma]: Tema 1.079/STJ (limite revogado para as contribuições a terceiros, com modulação) [VALIDAR: modulação do Tema 1.079/STJ: ação ou pedido administrativo antes de 25/10/2023?]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença denegou a segurança (ID 373460232); MPF sem interesse (ID 375496137).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -2563,11 +2654,42 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "373460232"
+    },
+    {
+     "peca": "Apelação",
+     "id": "373460235"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "373460240"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "375496137"
+    }
+   ],
+   "mpf": "parecer ID 375496137 (22/05/2026)",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Tributário — contribuições a terceiros",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 373460232 (27/03/2026)",
+    "recurso": "apelação (ID 373460235, 27/04/2026)",
+    "preparo": "comprovante juntado (ID 373460237) — conferir o tipo",
+    "representacao": "procuração/substabelecimento ID 373459128",
+    "mpf": "parecer ID 375496137 (22/05/2026)",
+    "autos": "29 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] modulação do Tema 1.079/STJ: ação ou pedido administrativo antes de 25/10/2023?"
+   ],
    "minuta": false
   },
   {
@@ -2581,11 +2703,11 @@
    "assunto": "Convalidação de Estudos e Reconhecimento de Diploma",
    "assunto_detalhado": "",
    "grupo": "assunto-14",
-   "tipo_caso": "Convalidação de Estudos e Reconhecimento de Diploma",
-   "resultado": "",
+   "tipo_caso": "Diploma · convalidação de estudos · instituição privada · improcedência",
+   "resultado": "Proposta: [VALIDAR paradigma] apelação do autor contra a improcedência (reconhecimento do diploma e dano moral; inversão do ônus da prova) [VALIDAR: competência federal: União ou MEC no polo?]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença improcedente (ID 373233592); embargos acolhidos só para tratar do dano moral (ID 373233596).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -2594,11 +2716,46 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "373233592"
+    },
+    {
+     "peca": "Embargos de declaração",
+     "id": "373233593"
+    },
+    {
+     "peca": "Apelação",
+     "id": "373233597"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "373233595"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "373233600"
+    }
+   ],
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo/consumidor — ensino superior",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 373233592 (18/12/2025)",
+    "recurso": "embargos de declaração (ID 373233593, 20/01/2026); apelação (ID 373233597, 15/04/2026)",
+    "preparo": "[VALIDAR]",
+    "representacao": "[VALIDAR]",
+    "mpf": "Não consta parecer",
+    "autos": "25 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] competência federal: União ou MEC no polo?"
+   ],
    "minuta": false
   },
   {
@@ -2612,11 +2769,11 @@
    "assunto": "Inquérito / Processo / Recurso Administrativo",
    "assunto_detalhado": "",
    "grupo": "assunto-8",
-   "tipo_caso": "Inquérito / Processo / Recurso Administrativo",
-   "resultado": "",
+   "tipo_caso": "Perdimento de veículo (Receita) · segurança concedida · apelação da União",
+   "resultado": "Proposta: [VALIDAR paradigma] apelação da União e remessa: boa-fé do proprietário do veículo apreendido (Súmula 138/TFR; série de perdimento)",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença concedeu a segurança e confirmou a liminar (ID 390287086); parecer do MPF (ID 392616544).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -2625,9 +2782,38 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "390287086"
+    },
+    {
+     "peca": "Apelação",
+     "id": "390287090"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "390287096"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "392616544"
+    }
+   ],
+   "mpf": "parecer ID 392616544 (19/08/2026)",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Tributário/aduaneiro — perdimento",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 390287086 (14/05/2026)",
+    "recurso": "apelação (ID 390287090, 21/05/2026)",
+    "preparo": "[VALIDAR]",
+    "representacao": "procuração/substabelecimento ID 390286903",
+    "mpf": "parecer ID 392616544 (19/08/2026)",
+    "autos": "55 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false
@@ -2643,11 +2829,11 @@
    "assunto": "Inquérito / Processo / Recurso Administrativo",
    "assunto_detalhado": "",
    "grupo": "assunto-8",
-   "tipo_caso": "Inquérito / Processo / Recurso Administrativo",
-   "resultado": "",
+   "tipo_caso": "Perdimento de veículo (Receita) · segurança concedida · apelação da União",
+   "resultado": "Proposta: [VALIDAR paradigma] apelação da União e remessa contra a nulidade da pena de perdimento; série de perdimento (responsabilidade do proprietário)",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença concedeu a segurança (ID 382321647); MPF sem intervenção.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -2656,9 +2842,42 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "382321647"
+    },
+    {
+     "peca": "Apelação",
+     "id": "382321650"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "382321652"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "382321646"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "386087049"
+    }
+   ],
+   "mpf": "parecer ID 386087049 (14/07/2026)",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Tributário/aduaneiro — perdimento",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 382321647 (04/05/2026)",
+    "recurso": "apelação (ID 382321650, 13/05/2026)",
+    "preparo": "[VALIDAR]",
+    "representacao": "procuração/substabelecimento ID 382321542",
+    "mpf": "parecer ID 386087049 (14/07/2026)",
+    "autos": "72 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false
