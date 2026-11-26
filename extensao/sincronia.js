@@ -114,22 +114,22 @@ function trazerCartao(full, c, substituir) {
   return n;
 }
 /* prontuário → cartão: só valores preenchidos e diferentes; peças se somam às do cartão; recursos só se o cartão não tem */
-function patchCartao(full, c) {
+function patchCartao(full, c, base) {
   var p = {}; c = c || {};
   CART.forEach(function (e) {
-    var lv = g(full, e[1]); if (vazio(lv)) return;
+    var lv = g(full, e[1]); if (vazio(lv)||base&&JSON.stringify(lv)===JSON.stringify(g(base,e[1]))) return;
     var cv = paraCartao(e[2], lv);
     if (JSON.stringify(g(c, e[0])) === JSON.stringify(cv)) return;
     poe(p, e[0], cv);
   });
-  var minhas = pecasPara(full.pecas);
+  var minhas = base&&JSON.stringify(full.pecas)===JSON.stringify(base.pecas)?[]:pecasPara(full.pecas);
   if (minhas.length) {
     var atuais = Array.isArray(c.pecas) ? c.pecas : [], ja = {};
     atuais.forEach(function (x) { ja[chavePeca(x)] = 1; });
     var mais = minhas.filter(function (x) { return !ja[chavePeca(x)]; });
     if (mais.length) p.pecas = atuais.concat(mais).slice(0, 100);
   }
-  var recs = recursosPara(full.recursos);
+  var recs = base&&JSON.stringify(full.recursos)===JSON.stringify(base.recursos)?[]:recursosPara(full.recursos);
   if (recs.length && !(Array.isArray(c.recursos) && c.recursos.length)) p.recursos = recs;
   return p;
 }
@@ -184,6 +184,10 @@ function abrir(chave) {
     var nF = MP.trazerFicha(full, S.op, S.fonte, !!(fichaEm && S.em && fichaEm > S.em));
     var nC = trazerCartao(full, c0 && c0.cartao, !!(c0 && c0.editadoEm && S.em && c0.editadoEm > S.em));
     novo.full = full;
+    /* Campos importados não são edições. Para rascunhos pendentes, a base é o último
+       prontuário remoto hidratado; no primeiro envio sem remoto mantém-se o fluxo anterior. */
+    S.espelhoBase = S.pend ? (S.snap&&S.snap.full?clone(S.snap.full):null) : clone(full);
+    if(S.pend&&S.espelhoBase){MP.trazerFicha(S.espelhoBase,S.op,S.fonte,!!(fichaEm&&S.em&&fichaEm>S.em));trazerCartao(S.espelhoBase,c0&&c0.cartao,!!(c0&&c0.editadoEm&&S.em&&c0.editadoEm>S.em));}
     if (!igual(novo, local)) br.aplicarRemoto(alvo, novo);
     /* só abrir o processo não grava nada: o que veio da ficha e do cartão vai ao GitHub com a próxima alteração sua;
        grava já se havia alterações locais pendentes ou se o rascunho deste navegador ainda não estava no GitHub */
@@ -213,7 +217,7 @@ function enviar(saindo) {
   var st = br.estado();
   if (Muta.chaveProcesso((st.full || {}).caso && st.full.caso.numero) && Muta.chaveProcesso(st.full.caso.numero) !== dg(S.cnj)) return Promise.resolve();
   if (S.snap && igual(st, S.snap)) { S.pend = false; gravarMeta(); status('ok', resumoOk()); return Promise.resolve(); }
-  var corpo = { cnj: S.cnj, prontuario: essencialEnvio(st), base: S.base, campos: MP.camposFicha(st.full, S.op, S.gestor), cartao: S.cartoes.length ? patchCartao(st.full, S.cartoes[0].cartao) : {} };
+  var corpo = { cnj: S.cnj, prontuario: essencialEnvio(st), base: S.base, campos: MP.camposFicha(st.full, S.op, S.gestor, S.espelhoBase), cartao: S.cartoes.length ? patchCartao(st.full, S.cartoes[0].cartao, S.espelhoBase) : {} };
   if (saindo) {
     try { fetch(Muta.SITE + '/api/pauta?prontuario=1', { method: 'POST', credentials: 'include', keepalive: true, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(corpo) }); } catch (e) {}
     return Promise.resolve();
@@ -224,7 +228,7 @@ function enviar(saindo) {
     if (S.chave !== alvo) return;
     S.voo = null; S.tentativas = 0;
     if (r.atualizadoEm) { S.base = r.atualizadoEm; S.em = r.atualizadoEm; S.por = r.atualizadoPor || S.por; }
-    S.snap = essencial(corpo.prontuario);
+    S.snap = essencial(corpo.prontuario); S.espelhoBase=clone(corpo.prontuario.full);
     if (r.operacional) { S.op = r.operacional; if (window.MutaGabinete && window.MutaGabinete.registro) window.MutaGabinete.registro(S.cnj, r.operacional); }
     if (r.cartoes && r.cartoes.length) S.cartoes = r.cartoes;
     S.pend = !igual(br.estado(), S.snap); gravarMeta();
@@ -239,7 +243,7 @@ function enviar(saindo) {
       var rem = null; try { rem = br.sanitizar(e.dados.prontuario); } catch (x) {}
       if (rem && S.tentativas++ < 3) {
         var mj = mesclar(S.snap, br.estado(), rem);
-        S.base = e.dados.atualizadoEm || ''; S.em = S.base; S.por = e.dados.atualizadoPor || ''; S.snap = essencial(rem);
+        S.base = e.dados.atualizadoEm || ''; S.em = S.base; S.por = e.dados.atualizadoPor || ''; S.snap = essencial(rem); S.espelhoBase=clone(rem.full);
         br.aplicarRemoto(alvo, mj.obj); S.pend = true; gravarMeta();
         status('pend', S.por + ' alterou este prontuário enquanto você editava. As versões foram juntadas campo a campo; enviando…');
         agendar(800); return;

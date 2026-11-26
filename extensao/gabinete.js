@@ -2103,12 +2103,12 @@ var MAPA = [
   ['origem.Origem - Julgador', 'origem.julgador'],
   ['origem.Sentença - ID', 'origem.decisaoId', null, function (f) { return f.origem.decisao === 'Sentença'; }],
   ['origem.Sentença - Data', 'origem.decisaoData', null, function (f) { return f.origem.decisao === 'Sentença'; }],
-  ['triagem.Tema', 'caso.subassunto'],
+  ['triagem.Detalhamento do caso', 'caso.subassunto'],
   ['triagem.Etiquetas', 'caso.etiquetas'],
   ['triagem.META', 'caso.meta'],
   ['triagem.Síntese Processual', 'triagem.resumo'],
   ['triagem.O que falta sanar', 'triagem.pendencias'],
-  ['triagem.Padrão - Espécie', 'caso.tipoManual', ESP],
+  ['triagem.Tipo de Julgamento', 'caso.tipoManual', 'tipo-julgamento'],
   ['triagem.Impugnada - ID', 'recursoTipo.edId', null, function (f) { return f.caso.tipoManual === 'ed'; }],
   ['triagem.Impugnada - Data', 'recursoTipo.edData', null, function (f) { return f.caso.tipoManual === 'ed'; }],
   ['triagem.Impugnada - Órgão', 'recursoTipo.edOrgao', null, function (f) { return f.caso.tipoManual === 'ed'; }],
@@ -2135,7 +2135,10 @@ var MAPA = [
   ['producao.CORRETOR', 'caso.corretor', null, function () { return G.gestor; }],
   ['origem.Observações', 'observacoes']
 ];
+function tiposCanonicos(v){return S(v).split(/\s*(?:\+|;|,|·)\s*/).filter(Boolean);}
+function tipoIncidental(v){return tiposCanonicos(v).map(function(t){return Object.keys(ESP).find(function(k){return N(ESP[k])===N(t);});}).find(Boolean);}
 function paraFicha(m, v) {
+  if(m==='tipo-julgamento')return ESP[v]||'';
   if (m === 'bool') return v === true ? 'Sim' : '';
   if (typeof v !== 'string' || !S(v)) return '';
   if (m === 'res') return RES[v] || v;
@@ -2143,6 +2146,7 @@ function paraFicha(m, v) {
   return v;
 }
 function paraRascunho(m, v) {
+  if(m==='tipo-julgamento')return tipoIncidental(v);
   v = S(v); if (!v) return undefined;
   if (m === 'bool') return /^(sim|s|true|1|x)$/i.test(v) ? true : undefined;
   if (m === 'res') return inv(RES)[v] || v;
@@ -2161,6 +2165,7 @@ function enviar() {
     var fv = paraFicha(e[2], getP(f, e[1]));
     if (!fv) return;
     var i = e[0].indexOf('.'), atual = S(V(e[0].slice(0, i), e[0].slice(i + 1)));
+    if(e[2]==='tipo-julgamento')fv=juntarTipo(atual,fv);
     if (atual === fv) return;
     C[e[0]] = fv; if (atual) troca.push(e[0].slice(i + 1));
   });
@@ -2182,7 +2187,7 @@ function trazer() {
   if (!G.F || !G.cnj) return;
   var f = rascunho(), n = 0, vazio = function (v) { return v == null || v === '' || v === false; };
   var padrao = { 'regularidade.impedimento': 'Sem impedimento', 'julgamento.situacao': 'PAUTADO' };
-  var esp = S(V('triagem', 'Padrão - Espécie'));
+  var esp = ESP[tipoIncidental(V('triagem','Tipo de Julgamento')||V('triagem','Padrão - Espécie'))]||'';
   function vale(e) {
     if (/^recursoTipo\.ed(Id|Data|Orgao)$/.test(e[1])) return esp === ESP.ed || f.caso.tipoManual === 'ed';
     if (/^recursoTipo\.agint(Id|Data|Sintese)$/.test(e[1])) return esp === ESP.agint || f.caso.tipoManual === 'agint';
@@ -2191,6 +2196,7 @@ function trazer() {
   MAPA.forEach(function (e) {
     if (!vale(e)) return;
     var i = e[0].indexOf('.'), fv = V(e[0].slice(0, i), e[0].slice(i + 1));
+    if(e[2]==='tipo-julgamento'&&!fv)fv=V('triagem','Padrão - Espécie');
     if (typeof fv !== 'string') return;
     var lv = paraRascunho(e[2], fv); if (lv === undefined) return;
     var atual = getP(f, e[1]);
@@ -2219,14 +2225,17 @@ window.addEventListener('pagehide', function () {Object.keys(FILA_FICHA).forEach
 window.addEventListener('beforeunload',function(e){if(Object.keys(FILA_FICHA).some(function(k){return filaSemDisco(FILA_FICHA[k]);})){e.preventDefault();e.returnValue='';}});
 document.addEventListener('visibilitychange', function () { if (document.hidden && Object.keys(G.pend).length) gravarJa().catch(function () {}); });
 /* ---------- correspondência rascunho ↔ ficha, para a sincronia automática (sincronia.js) ---------- */
-function opVal(op, id) { var i = id.indexOf('.'), s = (op || {})[id.slice(0, i)] || {}, v = s[id.slice(i + 1)]; return v == null ? '' : v; }
+function opVal(op, id) { var i=id.indexOf('.'), s=(op||{})[id.slice(0,i)]||{},k=id.slice(i+1),v=s[k];if(v==null&&id==='triagem.Detalhamento do caso')v=[s.Tema,s.Especificidades].map(S).filter(Boolean).filter(function(x,i,a){return a.indexOf(x)===i;}).join('\n');if(v==null&&id==='triagem.Tipo de Julgamento')v=s['Padrão - Espécie'];return v==null?'':v; }
+function juntarTipo(atual,novo){var L=tiposCanonicos(atual);if(novo&&!L.some(function(x){return N(x)===N(novo);}))L.push(novo);return L.join(' + ');}
 /* campos da ficha que o prontuário muda: só valores preenchidos e diferentes do que a ficha já tem */
-function camposFicha(f, op, gestor) {
+function camposFicha(f, op, gestor, base) {
   var C = {};
   MAPA.forEach(function (e) {
     if (/^producao\.(SERVIDOR|CORRETOR)$/.test(e[0]) && !gestor) return;
     if (e[3] && !/^producao\.(SERVIDOR|CORRETOR)$/.test(e[0]) && !e[3](f)) return;
     var fv = paraFicha(e[2], getP(f, e[1]));
+    if(base&&fv===paraFicha(e[2],getP(base,e[1])))return;
+    if(e[2]==='tipo-julgamento'&&fv)fv=juntarTipo(opVal(op,e[0]),fv);
     if (!fv || S(opVal(op, e[0])) === fv) return;
     C[e[0]] = fv;
   });
@@ -2238,7 +2247,7 @@ function camposFicha(f, op, gestor) {
 function trazerFicha(f, op, fonte, substituir) {
   var n = [], vazio = function (v) { return v == null || v === '' || v === false; };
   var padrao = { 'regularidade.impedimento': 'Sem impedimento', 'julgamento.situacao': 'PAUTADO' };
-  var esp = S(opVal(op, 'triagem.Padrão - Espécie'));
+  var esp = ESP[tipoIncidental(opVal(op,'triagem.Tipo de Julgamento'))]||'';
   MAPA.forEach(function (e) {
     if (/^recursoTipo\.ed(Id|Data|Orgao)$/.test(e[1]) && !(esp === ESP.ed || f.caso.tipoManual === 'ed')) return;
     if (/^recursoTipo\.agint(Id|Data|Sintese)$/.test(e[1]) && !(esp === ESP.agint || f.caso.tipoManual === 'agint')) return;
