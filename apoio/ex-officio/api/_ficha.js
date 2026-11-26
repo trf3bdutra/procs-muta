@@ -412,6 +412,7 @@ module.exports = async (req, res, u) => {
     if (req.method !== 'POST') return res.status(405).json({ erro: 'método não aceito' });
     if((req.body||{}).vinculoFundamentacao){
       const b=req.body,cnj=String(b.cnj||''),cmd=b.vinculoFundamentacao,fonte=dg(cnj).length===20?await fonteDe(cnj):null;
+      if(!cmd||typeof cmd!=='object'||Array.isArray(cmd))return res.status(400).json({erro:'Operação de vínculo inválida.'});
       if(!fonte||require('./_sigilo').sigiloDe(fonte))return res.status(403).json({erro:'Vínculos disponíveis somente para processo identificado no acervo e sem sigilo.'});
       if(cmd.acao==='listar'){const {doc}=await lerOpLeitura(),reg=registro(doc,cnj,F,false)||{};return res.status(200).json({ok:true,vinculos:fundVista(reg)});}
       const {r,out}=await gravar(cnj,{},'Rastreabilidade da fundamentação ('+u+'): '+cnj,(reg,alterados)=>{if(fundAplicar(reg,cmd,u,agora()))alterados.push('producao.'+FUND_KEY);},u);

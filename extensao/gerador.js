@@ -615,14 +615,16 @@
     }
     var row=el('div','hero-ger-context-tools');row.append(q,btn('Buscar materiais',buscar),btn('Abrir Repertório',function(){if(!vigente())return;FT.atualizarPesquisa({q:'',modo:'proc',all:true});if(window.MutaAbas)window.MutaAbas.ir('acervo');}));b.append(el('small','muted','Correspondências textuais, não juízo de aplicabilidade. Confira órgão, teor, vigência e aderência ao caso.'),row,out);
   }
+  var fundListener=null;
   function montarVinculosFundamentacao(host){
+   if(fundListener){document.removeEventListener('muta:fund-vinculos',fundListener);fundListener=null;}
    var FT=window.MutaFontes,k=FT&&FT.contextoCaso(),GBx=window.MutaGabinete;if(!k||!GBx||window.MUTA_WEB&&window.MUTA_WEB.leitura)return;
    function el(t,c,v){var n=document.createElement(t);if(c)n.className=c;if(v!=null)n.textContent=v;return n;}
    function btn(t,fn){var b=el('button','btn line sm',t);b.type='button';b.onclick=fn;return b;}
    var d=el('details','hero-ger-contextual hero-fund-ledger'),b=el('div','hero-ger-context-body'),out=el('div','hero-fund-list'),msg=el('small','muted');msg.setAttribute('role','status');d.append(el('summary','','Rastreabilidade da fundamentação'),b);host.append(d);
    var latest=[],seq=0;function vigente(){var a=FT.contextoCaso();return d.isConnected&&a&&a.cnj===k.cnj&&JSON.stringify(a.questoesEstruturadas)===JSON.stringify(k.questoesEstruturadas);}
    function action(cmd){var t=++seq;msg.textContent='Consultando a ficha…';return FT.vinculoApi(k,cmd).then(function(v){if(t!==seq||!vigente())return;latest=v;draw();msg.textContent=cmd.acao==='listar'?'':'Registro confirmado na ficha.';},function(e){if(t===seq&&vigente())msg.textContent=e.message;});}
-   function draw(){out.replaceChildren();var counts={Pesquisa:0,Adotado:0,Descartado:0};latest.forEach(function(x){counts[x.estado]=(counts[x.estado]||0)+1;});out.append(el('p','muted',latest.length+' vínculos · '+counts.Pesquisa+' em pesquisa · '+counts.Adotado+' adotados · '+counts.Descartado+' descartados'));
+   function draw(){out.replaceChildren();var counts={Pesquisa:0,Adotado:0,Descartado:0};latest.forEach(function(x){counts[x.estado]=(counts[x.estado]||0)+1;});var obsoletos=latest.filter(function(x){return !x.questaoVigente;}).length;out.append(el('p','muted',latest.length+' vínculos · '+counts.Pesquisa+' em pesquisa · '+counts.Adotado+' adotados · '+counts.Descartado+' descartados'+(obsoletos?' · '+obsoletos+' a conferir por alteração da questão':'')));
     if(!latest.length){out.append(el('p','muted','Nenhum vínculo registrado. Selecione material no Repertório ou registre um dispositivo legal.'));return;}
     latest.forEach(function(x){var a=el('article','hero-ger-context-card'),h=el('b','',x.material.tipo+' · '+x.material.titulo),q=el('small','muted','Questão '+(x.questao[0]||'sem ordem')+' · '+x.questao[1]+(x.questaoVigente?'':' · Questão alterada ou excluída: conferir')),s=el('select'),uso=el('select'),nota=el('textarea');
       ['Pesquisa','Adotado','Descartado'].forEach(function(t){var o=el('option','',t);o.value=t;s.append(o);});s.value=x.estado;s.setAttribute('aria-label','Situação do vínculo');
@@ -638,10 +640,10 @@
    var control=el('div','hero-ger-context-tools');control.append(btn('Atualizar vínculos',function(){action({acao:'listar'});}));
    b.append(el('small','muted','Adoção é declaração expressa da equipe, não prova de inserção no texto final. Os vínculos não alteram a minuta-matriz.'),control,manual,msg,out);
    d.addEventListener('toggle',function(){if(d.open&&vigente())action({acao:'listar'});});
-   var handler=function(e){if(!d.isConnected){document.removeEventListener('muta:fund-vinculos',handler);return;}if(e.detail.cnj===k.cnj&&vigente()){latest=e.detail.vinculos;draw();}};document.addEventListener('muta:fund-vinculos',handler);
+   fundListener=function(e){if(d.isConnected&&e.detail.cnj===k.cnj&&vigente()){latest=e.detail.vinculos;draw();}};document.addEventListener('muta:fund-vinculos',fundListener);
   }
   function pintar(forca) {
-    var g = $('ger-app'); if (!g || (!forca && !visivel())) return;
+    var g = $('ger-app');if(!g&&fundListener){document.removeEventListener('muta:fund-vinculos',fundListener);fundListener=null;} if (!g || (!forca && !visivel())) return;
     var p = $(novoHero()?'panel-pront':'panel-min'), y = p ? p.scrollTop : 0;
     try { g.innerHTML = html(); if(novoHero()){g.querySelectorAll('.gr-l').forEach(function(l){if(l.querySelector('[data-gr-tipo],[data-gr-res]'))l.remove();});g.querySelectorAll('.gr-av').forEach(function(p){if(/^Sem resultado do voto na ficha/.test(p.textContent.trim()))p.textContent='Registre o resultado em Produção para completar a ementa.';});} if(window.MutaModelosHero)window.MutaModelosHero.montarGerador(g); if(novoHero()){montarRepertorioContextual(g);montarVinculosFundamentacao(g);} } catch (e) { g.innerHTML = '<div class="empty">Gerador indisponível: ' + esc(e && e.message || e) + '</div>'; }
     if (p) p.scrollTop = y;
