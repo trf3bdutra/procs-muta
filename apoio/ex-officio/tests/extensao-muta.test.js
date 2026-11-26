@@ -761,7 +761,7 @@ test('HERO: Gerador preserva seleção da prévia, reseta por processo/ficha e n
  fields['producao.Voto - Resultado']='';assert.equal(G.docs().k,'');G._ST.abertos['part-relatorio']=false;assert.doesNotMatch(G.html(),/data-ger-key="part-relatorio"[^>]* open/);
 });
 
-test('extensão 0.77.57: Notificações vistas limpam o número; Marcar todas como lidas',()=>{
+test('extensão 0.77.58: Notificações vistas limpam o número; Marcar todas como lidas',()=>{
   const fs=require('node:fs'),path=require('node:path'),r=p=>fs.readFileSync(path.resolve(__dirname,'../../..',p),'utf8');
   const g=r('extensao/gestao.js'),f=r('extensao/fundo.js');
   assert.ok(g.includes('function marcarTodas()')&&g.includes("if(x.dataset.gx==='ler-todas')return marcarTodas();"),'botão marca todas');

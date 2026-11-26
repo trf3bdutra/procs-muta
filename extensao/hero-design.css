@@ -645,6 +645,6 @@ html[data-tema=escuro] body.hero-redesign-v53 #gab :is(.hero-tri-with-dock,.hero
 html[data-tema=escuro] body.hero-redesign-v53 #gab :is(.hero-tri-with-dock,.hero-route-production) ol.rt>li.rt-f :is(span,b,.rt-phase-count){color:inherit!important}
 html[data-tema=escuro] body.hero-redesign-v53 #gab :is(.hero-tri-with-dock,.hero-route-production) ol.rt>li.rt-f .rt-phase-count{opacity:.8}
 
-/* 0.77.57: Marcar todas como lidas, na faixa das Notificações */
+/* 0.77.58: Marcar todas como lidas, na faixa das Notificações */
 html body #del-app .gx-ler-todas{font-size:10.5px;white-space:nowrap;padding:0 6px;color:var(--p53-teal,#235a55)}
 html body #del-app .gx-ler-todas:hover{text-decoration:underline}

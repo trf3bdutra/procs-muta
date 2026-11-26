@@ -274,7 +274,7 @@
       badges();pintarDel();
     }).catch(function(){if(u===quem().usuario){X.msg='Leitura salva neste dispositivo; sincronização pendente.';pintarDel();}}).finally(function(){syncLeitura=false;});
   }
-  /* 0.77.57: abrir Notificações conta como visto — o número da aba e o do ícone se limpam; os itens seguem destacados como não lidos até "Marcar lida" ou "Marcar todas como lidas" */
+  /* 0.77.58: abrir Notificações conta como visto — o número da aba e o do ícone se limpam; os itens seguem destacados como não lidos até "Marcar lida" ou "Marcar todas como lidas" */
   function vistasLocal(u){try{var v=JSON.parse(localStorage.getItem('hero-not-vistas:'+norm(u))||'{}');return v&&typeof v==='object'&&!Array.isArray(v)?v:{};}catch(e){return {};}}
   function naoVistas(){if(!X.dados)return 0;var lidas=leituraNot(),v=vistasLocal(quem().usuario);return notificacoes(listas()).filter(function(n){var k=chaveLida(n);return !lidas[k]&&!v[k];}).length;}
   function avisarFundo(){try{chrome.runtime.sendMessage({tipo:'muta-app-visto'}).catch(function(){});}catch(e){}}

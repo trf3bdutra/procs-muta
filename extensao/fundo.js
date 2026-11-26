@@ -227,7 +227,7 @@ function iniciarAlarmes() { chrome.alarms.create('muta-app', { periodInMinutes: 
 chrome.runtime.onInstalled.addListener(iniciarAlarmes);
 chrome.runtime.onStartup.addListener(iniciarAlarmes);
 chrome.storage.onChanged.addListener(function (ch, area) { if (area === 'local' && ch['muta-prazos']) agendarRelatorio(); });
-/* 0.77.57: o painel avisa que as notificações foram vistas (aba Notificações aberta ou "Marcar todas como lidas"); o número do ícone se limpa até chegar aviso novo */
+/* 0.77.58: o painel avisa que as notificações foram vistas (aba Notificações aberta ou "Marcar todas como lidas"); o número do ícone se limpa até chegar aviso novo */
 function appVisto() {
   return chrome.storage.session.get('muta-app').then(function (o) {
     var ev = ((o['muta-app'] || {}).eventos) || [];
