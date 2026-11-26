@@ -84,11 +84,11 @@ test('painel: abre o processo com sigla, etapas, roteiros e notas; sem erro de s
     await pg.waitForSelector('.pa-it', { timeout: 15000 });
     assert.equal(await pg.textContent('.pa-it .pa-cl'), 'ApCiv');
     assert.match(await pg.textContent('.pa-it .pa-al'), /Sustentação/);
-    await pg.click('[data-pa="aba:sol"]');
+    await pg.click('[data-pa="aba:so"]');
     await pg.waitForSelector('#pauta-app .pa-ped', { timeout: 15000 });
-    assert.match(await pg.textContent('#pauta-app .pa-sol-resumo'), /1 pedidos externos/);
+    assert.match(await pg.textContent('#pauta-app .pa-so .pc-sh'), /1 pedidos/);
     const pedido = await pg.textContent('#pauta-app .pa-ped');
-    assert.match(pedido, /Sustentação presencial/);
+    assert.match(pedido, /Presencial/);
     assert.match(pedido, /item 3/);
     assert.ok(pedido.includes(CNJ) && pedido.includes('Fulana'), 'pedido identificado e vinculado à sessão');
     assert.deepEqual(P.erros, [], 'sem erro de script');
@@ -245,8 +245,8 @@ test('universal v53: quatro subabas, sinalizações na barra, cinco páginas no 
     await pg.click('.hero-v53-dock-tabs [data-hero-dock="monitoramento"]');
     await pg.waitForSelector('.hero-steps.hero-steps-mon>#hero-dock-pane-monitoramento');
     await pg.click('.hero-v53-dock-tabs [data-hero-dock=""]');
-    assert.deepEqual(v.abas, ['Prontuário', 'Corretor', 'Repertório', 'Pauta'], 'faixa principal sem gestão duplicada');
-    for (const [id, nome] of [['tab-dil', 'Diligências'], ['tab-del', 'Deliberações']]) {
+    assert.deepEqual(v.abas, ['Prontuário', 'Corretor', 'Repertório'], 'faixa principal sem gestão duplicada');
+    for (const [id, nome] of [['tab-pauta', 'Pauta'], ['tab-dil', 'Diligências'], ['tab-del', 'Deliberações']]) {
       const seletor = '#tu-gestao #' + id;
       await pg.waitForSelector(seletor, { state: 'visible', timeout: 15000 });
       assert.equal(await pg.locator(seletor).getAttribute('aria-label'), nome);
@@ -432,7 +432,7 @@ test('universal 0.76: Pauta sem título duplicado, marcos externos e filtros seg
     const { pg } = P;
     await pg.goto(pg.url().replace('/painel/painel.html', '/painel/universal.html'));
     await pg.waitForFunction(() => window.MutaSessao && window.MutaSessao.estado().estado === 'on', null, { timeout: 15000 });
-    await pg.locator('#pv-nav-main button', { hasText: 'Pauta' }).first().click();
+    await pg.locator('#tu-gestao #tab-pauta').click();
     await pg.waitForSelector('#pauta-app .pa-f .chip', { timeout: 15000 });
     const v = await pg.evaluate(() => {
       const t = document.querySelector('#pauta-app .pa-titulo'), c = document.querySelector('#pauta-app .pa-busca .pa-f .chip'), cs = getComputedStyle(c);
