@@ -2857,3 +2857,14 @@ html body.hero-redesign-v53 #gab .hero-summary-integrated>.hero-summary-section>
 html body.hero-redesign-v53 #gab .hero-summary-integrated>.hero-summary-section>summary h4::before{content:none!important;display:none!important}
 html body.hero-redesign-v53 #gab .hero-summary-integrated>.hero-summary-section>summary :is(small,.gn){font-size:10px!important;background:transparent!important;border:0!important;padding:0!important}
 html body.hero-redesign-v53 #gab .hero-summary-integrated>.hero-summary-section>:not(summary){padding-inline:10px!important}
+
+/* Escala de leitura independente do conteúdo original, compartilhada nas três folhas. */
+html body.hero-redesign-v53 #panel-min #cmp-app .hero-review-font{display:inline-flex;align-items:center;gap:0;border:1px solid var(--hero-pront-divider,var(--line));border-radius:3px;overflow:hidden;background:var(--hero-pront-paper,#fff);flex:none}
+html body.hero-redesign-v53 #panel-min #cmp-app .hero-review-font>button{font:600 10px/1.3 var(--sans,system-ui);padding:4px 6px;min-height:25px;min-width:27px;border:0;border-radius:0;background:transparent;color:var(--fg);cursor:pointer}
+html body.hero-redesign-v53 #panel-min #cmp-app .hero-review-font>button+button{border-left:1px solid var(--hero-pront-divider,var(--line))}
+html body.hero-redesign-v53 #panel-min #cmp-app .hero-review-font>button:disabled{opacity:.45;cursor:default}
+html body.hero-redesign-v53 #panel-min #cmp-app .hero-review-font>button:focus-visible{outline:2px solid var(--primary,#31565a);outline-offset:-2px}
+html body.hero-redesign-v53 #panel-min #cmp-app .hero-review-font small{font-size:8px;margin-left:2px;color:var(--muted-fg)}
+html body.hero-redesign-v53 #panel-min #cmp-app .hero-review-editorial :is(.mn-tx,.hero-v53-ref-text,.folha,.cx-out,.cx-ref,.cp-colar textarea){font-size:var(--hero-review-font,11.5px)!important;line-height:1.5!important}
+html body.hero-redesign-v53 #panel-min #cmp-app .hero-review-editorial :is(.mn-tx,.hero-v53-ref-text,.folha,.cx-out) p:not(.fl-tit):not(.hero-editorial-heading):not(.cx-h):not(.eq){font-size:inherit!important;line-height:inherit!important}
+html body.hero-redesign-v53 #panel-min #cmp-app .hero-review-editorial :is(.mn-tx,.hero-v53-ref-text,.folha,.cx-out) p.cita{font-size:.92em!important}
