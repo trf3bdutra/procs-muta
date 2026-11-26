@@ -177,6 +177,60 @@ function chaves(q) { return nz(q).replace(/^\(?\d+\)?[.)\s-]*/, '').split(/[^a-z
    "NÃO ASSINÁVEL") não é texto da minuta: fica fora de todas as conferências */
 var CAB_PJE = /^(PODER JUDICI[ÁA]RIO|Tribunal Regional Federal|Turma Regional|Gab(inete)?\.?\s|Rua\s|Avenida\s|Av\.\s|CEP\b|https?:\/\/|www\.|N[ÃA]O ASSIN[ÁA]VEL|OUTROS PARTICIPANTES|[A-ZÀ-Ý ]{4,60}\(\d{2,4}\)\s*N[ºo°]|(RELATOR|RELATORA|APELANTE|APELAD[OA]|AGRAVANTE|AGRAVAD[OA]|EMBARGANTE|EMBARGAD[OA]|IMPETRANTE|IMPETRAD[OA]|PARTE AUTORA|PARTE R[ÉE]|AUTOR|R[ÉE]U|INTERESSAD[OA]|TERCEIRO INTERESSADO|FISCAL DA LEI|PROCURADOR|REPRESENTANTE|ADVOGAD[OA])\b[^:]{0,60}:)/;
 function cabecalhoPje(t) { t = S(t); return !!t && t.length < 400 && (CAB_PJE.test(t) || /^(?:UNIÃO FEDERAL|UNIAO FEDERAL|INSTITUTO NACIONAL DO SEGURO SOCIAL(?:\s*[-–]\s*INSS)?|INSS|FAZENDA NACIONAL)$/i.test(t)); }
+/* Conferência processual indicativa, baseada em registros estruturados e evidências textuais. */
+function conferirFluxo(f,txt){
+ var itens=[],stats={questoes:0,recursos:0,adotados:0,vinculosObsoletos:0};
+ function arr(v){return Array.isArray(v)?v.filter(function(x){return x&&typeof x==='object';}):[];}
+ function aviso(sev,regra,msg,sug){itens.push({sev:sev,grupo:'Conformidade processual',regra:regra,msg:msg,sug:sug||'',par:null,sec:'',trecho:null});}
+ if(!f)return {disponivel:false,itens:itens,stats:stats};
+ var Q=arr(f.questoes).filter(function(q){return S(q.questao)||S(q.alegacao);}),R=arr(f.recursos),J=arr(f.resultados),L=arr(f.vinculos);
+ stats.questoes=Q.length;stats.recursos=R.length;stats.adotados=L.filter(function(x){return x.estado==='Adotado';}).length;
+ function ident(q){return ['ordem','questao','id_recurso'].map(function(k){return S(q[k]);});}
+ function norm(s){return nz(s).replace(/[^a-z0-9]+/g,' ').trim();}
+ function ids(s){return Array.from(new Set(S(s).match(/\b\d{6,30}\b/g)||[]));}
+ function semelhante(a,b){var ks=Array.from(new Set(chaves(a))),t=' '+norm(b)+' ';if(ks.length<2||!S(b))return null;return ks.filter(function(k){return t.includes(' '+k+' ');}).length>=2;}
+ function alvo(t,z){var nome=norm(z.recorrente),id=S(z.id_recurso);if(nome.length<4)nome='';
+  var L=S(t).split(/;|\n|\.(?=\s+[A-ZÁÉÍÓÚ])/).filter(function(x){return id&&ids(x).includes(id)||nome&&(' '+norm(x)+' ').includes(' '+nome+' ');});
+  if(L.length!==1)return '';var x=L[0],n=' '+norm(x)+' ';
+  if(J.some(function(y){if(y===z)return false;var a=norm(y.recorrente);return a&&n.includes(' '+a+' ')||S(y.id_recurso)&&ids(x).includes(S(y.id_recurso));}))return '';
+  if(/\[VALIDAR:|\b(?:se|caso|pretende|requer|alega|pede)\b/i.test(x))return '';
+  var tipos=[['parcial',/\bdou parcial provimento\b|\bparcialmente provid[oa]\b/i],['desprovido',/\bnego provimento\b|\bdesprovid[oa]\b/i],['naoconhecido',/\bnão conheço\b|\bnão conhecid[oa]\b/i],['prejudicado',/\bjulgo prejudicad[oa]\b|\brecurso prejudicado\b/i],['provido',/\bdou provimento\b|\bprovid[oa]\b/i]];
+  var matches=tipos.filter(function(p){return p[1].test(x);}).map(function(p){return p[0];});if(matches.includes('parcial')&&matches.includes('provido'))matches=matches.filter(function(v){return v!=='provido';});if(matches.includes('naoconhecido')&&matches.includes('provido'))return '';return matches.length===1?matches[0]:'';
+ }
+ var fund=txt&&S(txt.fundamentacao),disp=txt&&S(txt.dispositivo),sections=txt&&txt.resultados||[],keys=new Map();
+ Q.forEach(function(q,i){var k=JSON.stringify(ident(q)),label='Questão '+(S(q.ordem)||String(i+1)),ref='Q'+(i+1);keys.set(k,(keys.get(k)||0)+1);
+  if(!S(q.questao))aviso('media',ref+'-delimitacao',label+': questão jurídica não delimitada.','Distinguir questão e alegação.');
+  if(nz(q.confirmado)!=='sim')aviso('media',ref+'-conferencia',label+' não marcada como conferida.','Conferir nos autos.');
+  if(!S(q.fundamentacao)||!S(q.solucao))aviso('media',ref+'-solucao',label+': fundamentação ou solução não registrada.','Registrar razões e solução, inclusive eventual prejudicialidade.');
+  if(S(q.id_recurso)&&R.length&&!R.some(function(r){return ids(r.ids).includes(S(q.id_recurso));}))aviso('media',ref+'-recurso',label+': ID de recurso não localizado.','Conferir ID.');
+  var jr=J.filter(function(z){return S(q.id_recurso)&&S(z.id_recurso)===S(q.id_recurso);}),skip=jr.length===1&&['naoconhecido','prejudicado'].includes(resultadoProntuario(jr[0].resultado));
+  if(fund&&!skip&&S(q.fundamentacao)&&semelhante(S(q.questao)+' '+S(q.tese_adotada),fund)===false)aviso('baixa',ref+'-texto',label+': termos da questão ou tese não localizados suficientemente na fundamentação.','Conferir enfrentamento; ausência textual não demonstra omissão jurídica.');
+  if(disp&&S(q.repercussao_no_dispositivo)&&semelhante(q.repercussao_no_dispositivo,disp)===false)aviso('baixa',ref+'-dispositivo',label+': repercussão registrada não localizada textualmente no dispositivo.','Conferir o comando.');
+ });
+ if(Array.from(keys.values()).some(function(n){return n>1;}))aviso('media','questoes-ambiguas','Questões com mesma ordem, texto e ID de recurso.','Individualizar antes de vincular materiais.');
+ var usados=new Map();
+ R.forEach(function(r,i){var rr=ids(r.ids),rows=J.filter(function(z){return rr.includes(S(z.id_recurso));}),label='Recurso '+(S(r.parte)||String(i+1));
+  if((R.length>1||J.length)&&!rr.length)aviso('media','R'+(i+1)+'-id',label+': ID não identificável.','Conferir ID.');
+  if(rr.length&&(R.length>1||J.length)&&rows.length!==1)aviso('media','R'+(i+1)+'-resultado',label+': '+(rows.length?'resultado ambíguo.':'resultado individual não registrado.'),'Individualizar pelo ID.');
+  if(rows.length===1){var z=rows[0];usados.set(z,(usados.get(z)||0)+1);if(!S(z.resultado))aviso('media','R'+(i+1)+'-vazio',label+': resultado em branco.','Registrar resultado.');if(S(r.parte)&&S(z.recorrente)&&norm(r.parte)!==norm(z.recorrente)){usados.set(z,2);aviso('media','R'+(i+1)+'-parte',label+': recorrente diverge do registro de resultado.','Conferir identidade.');}}
+ });
+ J.forEach(function(z,i){var key='J'+(i+1),label='Resultado '+(S(z.recorrente)||S(z.id_recurso)||String(i+1)),esperado=resultadoProntuario(z.resultado);
+  if(usados.get(z)!==1){aviso('media',key+'-associacao',label+': sem associação inequívoca a recurso.','Conferir IDs e recorrentes.');return;}
+  if(!esperado)return;
+  var found=sections.map(function(s){return {nome:s.nome,r:alvo(s.texto,z)};}).filter(function(s){return s.r;});
+  found.forEach(function(s,k){if(s.r!==esperado)aviso('alta',key+'-divergencia-'+k,label+': '+s.nome+' indica '+RES_TXT[s.r]+', mas a ficha registra '+S(z.resultado)+'.','Conferir com o Relator; não corrigir automaticamente.');});
+  if(sections.some(function(s){return S(s.texto);})&&!found.length)aviso('baixa',key+'-texto',label+': não foi possível associar o resultado ao texto de forma inequívoca.','Conferir individualização.');
+ });
+ L.forEach(function(x,i){var key='V'+(i+1),q=Q.filter(function(q){return JSON.stringify(ident(q))===JSON.stringify(x.questao);}),mat=x.material||{},label=S(mat.titulo)||S(mat.id)||'Material';
+  if(q.length!==1){stats.vinculosObsoletos++;if(x.estado!=='Descartado')aviso('media',key+'-obsoleto','Vínculo de questão alterada, excluída ou ambígua: '+label+'.','Refazer vínculo.');return;}
+  if(x.estado!=='Adotado')return;
+  var t=x.uso==='Dispositivo'?disp:x.uso==='Ambos'?[fund,disp].filter(Boolean).join(' '):fund;if(!t)return;
+  if(mat.tipo==='Precedente'){var cnj=(S(mat.id)+' '+S(mat.titulo)).match(/\b\d{7}-\d{2}\.\d{4}\.\d\.\d{2}\.\d{4}\b/);if(cnj){var d=cnj[0].replace(/\D/g,''),achou=(String(t).match(/\b\d{7}-\d{2}\.\d{4}\.\d\.\d{2}\.\d{4}\b|\b\d{20}\b/g)||[]).some(function(v){return v.replace(/\D/g,'')===d;});if(!achou)aviso('baixa',key+'-citacao','Precedente adotado não localizado pelo CNJ na utilização declarada: '+label+'.','Conferir formas alternativas de citação e efetiva utilização.');}}
+  if(mat.tipo==='Dispositivo legal'&&norm(label).length>8&&!(' '+norm(t)+' ').includes(' '+norm(label)+' '))aviso('baixa',key+'-norma','Referência normativa adotada não localizada literalmente: '+label+'.','Conferir variantes de redação.');
+ });
+ if(Q.some(function(q){return S(q.repercussao_no_dispositivo);})&&!S(f.dispositivo))aviso('media','dispositivo-ficha','Há repercussões por questão, mas o dispositivo da ficha está em branco.','Conferir comando a redigir.');
+ return {disponivel:true,itens:itens,stats:stats};
+}
 function analisar(paragrafos, ctx) {
   ctx = ctx || {};
   var ps = (paragrafos || []).map(function (p) { return typeof p === 'string' ? { t: p } : p; }).filter(function (p) { return S(p.t); });
@@ -299,13 +353,14 @@ function analisar(paragrafos, ctx) {
   var resV = dispV.length ? resultadoDe(dispV[dispV.length - 1].t) : '';
   var resA = resultadoDe(P.acordao.map(function (p) { return p.t; }).join(' '));
   var rs = [['dispositivo do voto', resV], ['item IV da ementa', resEm], ['cabeçalho da ementa', resCab], ['acórdão', resA]].filter(function (x) { return x[1]; });
-  for (var a = 1; a < rs.length; a++) if (rs[a][1] !== rs[0][1]) {
+  var individualizado=!!(ctx.fluxo&&Array.isArray(ctx.fluxo.resultados)&&ctx.fluxo.resultados.length>1);
+  for (var a = 1; !individualizado && a < rs.length; a++) if (rs[a][1] !== rs[0][1]) {
     add('alta', 'Resultado', 'resultado', 'Resultado divergente: ' + rs.map(function (x) { return x[0] + ' = ' + RES_TXT[x[1]]; }).join('; ') + '. O acórdão espelha o dispositivo.', dispV[dispV.length - 1] || null);
     break;
   }
   var pr = ctx.prontuario || null;
   var resP = pr ? resultadoProntuario(((pr.julgamento || {}).resultado) || '') : '';
-  if (resP && rs.length && rs[0][1] !== resP) add('alta', 'Prontuário', 'resultado-prontuario', 'O ' + rs[0][0] + ' diz ' + RES_TXT[rs[0][1]] + ', mas o prontuário registra “' + pr.julgamento.resultado + '”. Não alterar o resultado em silêncio: confira com o Relator.', dispV[dispV.length - 1] || null);
+  if (!individualizado && resP && rs.length && rs[0][1] !== resP) add('alta', 'Prontuário', 'resultado-prontuario', 'O ' + rs[0][0] + ' diz ' + RES_TXT[rs[0][1]] + ', mas o prontuário registra “' + pr.julgamento.resultado + '”. Não alterar o resultado em silêncio: confira com o Relator.', dispV[dispV.length - 1] || null);
   /* verbo do resultado pela classe */
   var classe = nz((ctx.classe || '') + ' ' + ((pr && pr.caso) ? (pr.caso.classe || '') + ' ' + (pr.caso.tipoManual || '') : ''));
   var ehED = /embargos de declara|\bed\b/.test(classe) || /^Trata-se de embargos de declara/i.test((P.relatorio[0] || {}).t || '');
@@ -317,7 +372,7 @@ function analisar(paragrafos, ctx) {
   /* honorários recursais */
   var txC = corpo.map(function (p) { return p.t; }).join('\n');
   var maj = /85,?\s*§\s*11/.exec(txC);
-  if (maj && resV === 'provido') add('media', 'Resultado', 'Tema 1.059/STJ', 'Majoração do artigo 85, § 11, do CPC em recurso provido: só cabe em recurso desprovido ou não conhecido (Tema 1.059/STJ).', null);
+  if (!individualizado && maj && resV === 'provido') add('media', 'Resultado', 'Tema 1.059/STJ', 'Majoração do artigo 85, § 11, do CPC em recurso provido: só cabe em recurso desprovido ou não conhecido (Tema 1.059/STJ).', null);
   if (pr) {
     var hon = nz((pr.julgamento || {}).honorarios || '');
     if (/majorar/.test(hon) && !maj) add('media', 'Prontuário', 'honorarios-prontuario', 'O prontuário registra majoração dos honorários (artigo 85, § 11, do CPC), mas o voto não a traz.', dispV[0] || null);
@@ -332,7 +387,7 @@ function analisar(paragrafos, ctx) {
   /* ---------- 3b. o acórdão e a ementa espelham o objeto do dispositivo; o voto enfrenta as questões ---------- */
   if (peca === 'acordao' && dispV.length) {
     var objVr = objetoDe(dispV[dispV.length - 1].t), objAr = objetoDe(P.acordao.map(function (p) { return p.t; }).join(' ')), semV = function (x) { return nz(x).replace(/\b(dou|deu|dar|nego|negou|negar|conheco|conheceu|rejeito|rejeitou|acolho|acolheu|concedo|concedeu|denego|denegou|julgo|julgou|declaro|declarou)\b/g, '').replace(/\s+/g, ' ').trim(); }, objV = semV(objVr), objA = semV(objAr);
-    if (objV && objA && objV.slice(0, 40) !== objA.slice(0, 40) && objV.indexOf(objA.slice(0, 25)) < 0 && objA.indexOf(objV.slice(0, 25)) < 0)
+    if (!individualizado && objV && objA && objV.slice(0, 40) !== objA.slice(0, 40) && objV.indexOf(objA.slice(0, 25)) < 0 && objA.indexOf(objV.slice(0, 25)) < 0)
       add('alta', 'Resultado', 'objeto-acordao', 'O acórdão não espelha o dispositivo: o voto decide “' + objVr + '”, o acórdão “' + objAr + '”.', P.acordao[0] || null);
     var nApel = P.relatorio.filter(function (p) { return /^(Apelou|Apelaram|Recorreu|Agravou)\b/.test(p.t); }).length;
     if (objV && nApel >= 2 && !plural(objV) && /^(a|ao|à) (apelacao|recurso|agravo)\b/.test(objV.replace(/^à/, 'à')) && !/\bda?o?s?\s+(uniao|inss|autor|autora|re|reu|ré|impetrante|impetrad|caixa|cef|estado|municipio|fazenda|parte)/.test(objV))
@@ -449,12 +504,14 @@ function analisar(paragrafos, ctx) {
     if (p.ita != null && /^[“"]/.test(t) && /[”"](\s*\(g\.n\.\))?[.;:]?$/.test(t) && t.length > 60 && (p.ita || 0) < 0.5) add('baixa', 'Formatação', 'MAN-CMT-009', 'Transcrição em parágrafo próprio, entre aspas e em itálico.', p, 0, 1);
   });
 
+  var fluxo=conferirFluxo(ctx.fluxo,{fundamentacao:(peca==='acordao'?P.voto:peca==='decisao'?corpo:[]).filter(function(p){return !citacao(p)&&!/^Ante o exposto,/i.test(p.t);}).map(function(p){return p.t;}).join('\n'),dispositivo:dispV.map(function(p){return p.t;}).join('\n'),resultados:[{nome:'dispositivo',texto:dispV.map(function(p){return p.t;}).join('\n')},{nome:'item IV da ementa',texto:(disE||[]).map(function(p){return p.t;}).join('\n')},{nome:'acórdão',texto:P.acordao.map(function(p){return p.t;}).join('\n')}]});
+  fluxo.itens.forEach(function(x){if(!off[x.regra])itens.push(x);});
   itens.sort(function (x, y) { return (SEV[y.sev] - SEV[x.sev]) || ((x.par == null ? -1 : x.par) - (y.par == null ? -1 : y.par)); });
   var resumo = { alta: 0, media: 0, baixa: 0 };
   itens.forEach(function (x) { resumo[x.sev]++; });
   var nota = Math.max(0, 100 - 12 * resumo.alta - 4 * resumo.media - Math.min(20, resumo.baixa));
-  return { peca: peca, itens: itens, resumo: resumo, nota: nota, resultado: resV || resEm || resA || '', partes: { relatorio: P.relatorio.length, voto: P.voto.length, ementa: P.ementa.length, acordao: P.acordao.length } };
+  return { peca: peca, itens: itens, resumo: resumo, nota: nota, fluxo:fluxo, resultado: individualizado?'':resV || resEm || resA || '', partes: { relatorio: P.relatorio.length, voto: P.voto.length, ementa: P.ementa.length, acordao: P.acordao.length } };
 }
-var API = { analisar: analisar, cabecalhoPje: cabecalhoPje, resultadoDe: resultadoDe, resultadoProntuario: resultadoProntuario, partes: partes, RES_TXT: RES_TXT, CACA: CACA };
+var API = { conferirFluxo:conferirFluxo, analisar: analisar, cabecalhoPje: cabecalhoPje, resultadoDe: resultadoDe, resultadoProntuario: resultadoProntuario, partes: partes, RES_TXT: RES_TXT, CACA: CACA };
 if (typeof module !== 'undefined' && module.exports) module.exports = API; else raiz.MutaConformidadeMotor = API;
 })(typeof window !== 'undefined' ? window : this);
