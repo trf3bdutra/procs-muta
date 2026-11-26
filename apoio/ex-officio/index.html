@@ -3264,18 +3264,18 @@ return {montar:montar,atrasadas:atrasadas};
 
     <section class="cmt-q cmt-dk" id="cmt-pauta">
       <div class="cmt-placar">
-        <div class="cmt-ftl">
+        <div class="cmt-pauta-milestones" id="cmt-pauta-milestones" role="group" aria-label="Linha cronológica da sessão">
           <label class="cmt-ses-c" title="Escolher a sessão de julgamento">
             <b id="cmt-ses-d">—</b><span id="cmt-n-pt">Sessão</span><span class="cmt-ses-tg" id="cmt-ses-tg" hidden></span>
             <select id="cmt-l-ses" aria-label="Sessão de julgamento"></select>
           </label>
-          <div class="cmt-ft" id="cmt-ft"></div>
         </div>
+        <div class="cmt-ftl"><div class="cmt-ft" id="cmt-ft"></div></div>
         <div class="cmt-prog" id="cmt-prog"></div>
       </div>
       <div class="cmt-ph">
         <div class="cmt-ph-2">
-          <label class="cmt-bq cmt-bq-w"><span class="vh">Buscar na pauta</span><svg class="cmt-bq-i" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><input type="search" id="cmt-q" placeholder="cole o número do processo, o item, ou busque por assunto ou servidor"><button type="button" class="cmt-bq-x" id="cmt-q-x" aria-label="Limpar a busca" hidden>×</button><span class="cmt-bq-n" id="cmt-q-n"></span></label>
+          <label class="cmt-bq cmt-bq-w"><span class="vh">Buscar na pauta</span><svg class="cmt-bq-i" viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><input type="search" id="cmt-q" placeholder="Buscar item, processo, assunto ou servidor"><button type="button" class="cmt-bq-x" id="cmt-q-x" aria-label="Limpar a busca" hidden>×</button><span class="cmt-bq-n" id="cmt-q-n"></span></label>
           <span class="cmt-sp"></span>
           <button type="button" class="b" id="cmt-selt" title="Selecionar os processos exibidos" aria-label="Selecionar os processos exibidos"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg><span>Selecionar</span></button>
           <button type="button" class="b" id="cmt-libl" disabled title="Liberar os processos selecionados" aria-label="Liberar os processos selecionados"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21 3-9 18-2.5-7.5L2 11z"/></svg><span>Liberar</span></button>
@@ -6391,8 +6391,28 @@ function cmtFiltra(){
         x.meta?'meta '+x.meta:'',x.sopref?'sustentacao '+x.sopref:'',(x.intercor&&!x.intercorOk)?'intercorrencia':'',x.destaque?'destaque':''].join(' ')).indexOf(q)>=0)return true;
       return porItem(x)||porProc(x);});}
   return L;}
+/* Pauta: o seletor permanece o mesmo elemento, integrado ao marco de julgamento. */
+function cmtPautaMarcos(p,j){
+  var host=$('#cmt-pauta-milestones'),seletor=host&&host.querySelector('.cmt-ses-c');if(!host||!seletor)return;
+  var sess=(j.agenda||[]).find(function(s){return s.date===p.date;})||{},mk=sess.marcos||{},hj=j.hoje||'';
+  var pts=Object.keys(CMTM).map(function(k){return {nome:CMTM[k][1],data:mk[k]};}).filter(function(x){return /^\d{4}-\d{2}-\d{2}$/.test(x.data||'');});
+  if(/^\d{4}-\d{2}-\d{2}$/.test(hj))pts.push({nome:'Hoje',data:hj,hoje:true});
+  pts.push({nome:'Sessão de julgamento',data:p.date||'',sessao:true});
+  pts.sort(function(a,b){return (a.data||'9999').localeCompare(b.data||'9999')||Number(!!a.sessao)-Number(!!b.sessao)||Number(!!b.hoje)-Number(!!a.hoje);});
+  var frag=document.createDocumentFragment(),proximo=pts.find(function(x){return !x.hoje&&x.data>=hj;});
+  pts.forEach(function(x){
+    var estado=x.hoje||x.data===hj?'hoje':x.data&&x.data<hj?'passado':x===proximo?'proximo':'futuro';
+    if(x.sessao){seletor.dataset.marco=estado;frag.appendChild(seletor);return;}
+    var node=document.createElement('div');node.className='cmt-pauta-mk';node.dataset.marco=estado;
+    var dias=hj?cmtDias(x.data,hj):null;
+    node.innerHTML='<span>'+esc(x.nome)+'</span><b>'+esc(br(x.data).slice(0,5))+'</b><small>'+esc(x.hoje?'Data atual':dias===null?'':dias===0?'Hoje':dias<0?'Há '+Math.abs(dias)+(dias===-1?' dia':' dias'):'Em '+dias+(dias===1?' dia':' dias'))+'</small>';
+    frag.appendChild(node);
+  });
+  host.replaceChildren(frag);
+}
 function cmtPauta(){
   var j=CMT.dados,p=j.pauta||{itens:[]},it=p.itens||[];
+  cmtPautaMarcos(p,j);
   var cta={todos:it.length,pendente:0,minutado:0,corrigido:0,liberado:0};
   it.forEach(function(x){cta[x.etapa]=(cta[x.etapa]||0)+1;});
   var retidos=it.filter(cmtRetido).length;
@@ -6407,7 +6427,7 @@ function cmtPauta(){
     var at=[];cmtIcAt(x,at);if(x.sopref)at.push('sustentação');if(x.meta)at.push('meta');
     var lib=x.etapa==='liberado';
     var ped=(((CMT.dados||{}).pedidos)||[]).filter(function(p){return dgx(p.numero)===dgx(x.cnj);})[0];
-    return '<tr'+(at.length?' class="at"':'')+'><td class="cmt-sel"><input type="checkbox" data-cx="'+esc(x.cnj)+'"'+(CMT.sel&&CMT.sel[x.cnj]?' checked':'')+' aria-label="Selecionar item '+esc(String(x.item||''))+'"></td><td class="cmt-ii">'+esc(String(x.item||'—'))+'</td><td class="cnj">'+esc(x.cnj)+'<button type="button" class="cmt-cp" data-ccp="'+esc(x.cnj)+'" title="Copiar número do processo" aria-label="Copiar número do processo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></button><button type="button" class="cmt-mais-m" aria-label="Ações do item '+esc(String(x.item||''))+'" aria-expanded="false">⋯</button>'+(x.partes?'<small class="cmt-pt" title="'+esc(x.partes)+'">'+esc(x.partes)+'</small>':'')+(at.length?'<span class="cmt-at2">'+esc(at.join(' · '))+'</span>':'')+(ped?'<span class="cmt-at2 ped">pedido de '+esc(ped.tipo)+(ped.razao?': '+esc(ped.razao):' em análise')+'</span>':'')+'</td><td class="cmt-asc" data-l="Assunto"><span class="as">'+esc(x.assunto||x.classe||'—')+'</span>'+'</td><td data-l="Servidor">'+esc([x.servidor,x.corretor].filter(Boolean).join(' · ')||'—')+'</td><td class="cmt-tr" data-l="Etapa">'+cmtPasso(x)+'</td><td class="cmt-acd" data-l="Ações">'+cmtAcoes(x,at,ped)+'</td></tr>';}).join(''):'<tr><td colspan="7" style="color:var(--em)">Nada nesta seleção.</td></tr>';
+    return '<tr'+(at.length?' class="at"':'')+'><td class="cmt-sel"><input type="checkbox" data-cx="'+esc(x.cnj)+'"'+(CMT.sel&&CMT.sel[x.cnj]?' checked':'')+' aria-label="Selecionar item '+esc(String(x.item||''))+'"></td><td class="cmt-ii">'+esc(String(x.item||'—'))+'</td><td class="cnj">'+esc(x.cnj)+'<button type="button" class="cmt-cp" data-ccp="'+esc(x.cnj)+'" title="Copiar número do processo" aria-label="Copiar número do processo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></button><button type="button" class="cmt-mais-m" aria-label="Ações do item '+esc(String(x.item||''))+'" aria-expanded="false">⋯</button>'+(x.partes?'<small class="cmt-pt" title="'+esc(x.partes)+'">'+esc(x.partes)+'</small>':'')+((x.assunto||x.classe)?'<small class="cmt-pauta-assunto" title="'+esc(x.assunto||x.classe)+'">'+esc(x.assunto||x.classe)+'</small>':'')+(at.length?'<span class="cmt-at2">'+esc(at.join(' · '))+'</span>':'')+(ped?'<span class="cmt-at2 ped">pedido de '+esc(ped.tipo)+(ped.razao?': '+esc(ped.razao):' em análise')+'</span>':'')+'</td><td class="cmt-asc" data-l="Assunto"><span class="as">'+esc(x.assunto||x.classe||'—')+'</span>'+'</td><td data-l="Servidor">'+esc([x.servidor,x.corretor].filter(Boolean).join(' · ')||'—')+'</td><td class="cmt-tr" data-l="Etapa">'+cmtPasso(x)+'</td><td class="cmt-acd" data-l="Ações">'+cmtAcoes(x,at,ped)+'</td></tr>';}).join(''):'<tr><td colspan="7" style="color:var(--em)">Nada nesta seleção.</td></tr>';
   $('#cmt-rc').textContent=L.length+' de '+it.length+' processos';
   var qn=$('#cmt-q-n');if(qn)qn.textContent=(CMT.q||'').trim()?L.length+' de '+it.length:'';
   var qx=$('#cmt-q-x');if(qx)qx.hidden=!(CMT.q||'').trim();
@@ -12863,6 +12883,57 @@ html[data-theme=dark] body.cmt-pg #v-cmt .cmt-stp li.s3{color:#7fc0e4}
 html[data-theme=dark] body.cmt-pg #v-cmt .cmt-stp li.s3 i{border-color:#3b7fa8;background:#11314a;color:#7fc0e4}
 @media (min-width:781px){html[data-theme=dark] body.cmt-pg #v-cmt #cmt-pauta .cmt-ft button[aria-pressed=true]{background:#132835!important}html[data-theme=dark] body.cmt-pg #v-cmt #cmt-pauta .cmt-ft .cmt-fic{background:transparent}html[data-theme=dark] body.cmt-pg #v-cmt #cmt-pauta #cmt-fsel label.on{background-color:#132b42!important}html[data-theme=dark] body.cmt-pg #v-cmt #cmt-pauta #cmt-fsel label.on::after,html[data-theme=dark] body.cmt-pg #v-cmt #cmt-pauta #cmt-fsel label.on>span{color:#a9cfe6!important}html[data-theme=dark] body.cmt-pg #v-cmt #cmt-pauta .cmt-ses-tg{background:#2c2614;border-color:#4d4222;border-left-color:#e6c27a;color:#e6c27a}html[data-theme=dark] body.cmt-pg #v-cmt #cmt-pauta .cmt-ses-tg.ur{background:#2a1a18;border-color:#5a3434;border-left-color:#e07a6c;color:#f2a397}html[data-theme=dark] body.cmt-pg #v-cmt #cmt-pauta .cmt-prog .br{background:#2e6b49!important}html[data-theme=dark] body.cmt-pg #v-cmt #cmt-pauta .cmt-prog .br i.pe{background:#2c4a5c!important}html[data-theme=dark] body.cmt-pg #v-cmt #cmt-pauta .cmt-prog .pp{color:#b1a8f0}}
 /* fim modo noturno cmt */
+
+/* Pauta /cmt · linha cronológica, busca integrada e cartões de processo. */
+html body #v-cmt #cmt-pauta .cmt-pauta-milestones{display:flex;align-items:stretch;gap:0;padding:12px 14px 9px;background:var(--ep);border-bottom:1px solid var(--el);overflow-x:auto;scrollbar-width:thin}
+html body #v-cmt #cmt-pauta .cmt-pauta-mk,html body #v-cmt #cmt-pauta .cmt-pauta-milestones .cmt-ses-c{position:relative!important;flex:1 0 100px!important;min-width:100px!important;display:flex!important;flex-direction:column!important;align-items:flex-start!important;justify-content:flex-start!important;gap:3px!important;margin:0!important;padding:17px 10px 4px!important;border:0!important;background:none!important;color:var(--em);isolation:isolate}
+html body #v-cmt #cmt-pauta .cmt-pauta-mk::before,html body #v-cmt #cmt-pauta .cmt-pauta-milestones .cmt-ses-c::before{content:"";position:absolute;left:0;right:0;top:5px;height:1px;background:var(--el2);z-index:-1}
+html body #v-cmt #cmt-pauta .cmt-pauta-mk::after{content:"";position:absolute;left:10px;top:1px;width:9px;height:9px;border-radius:50%;border:1px solid var(--el2);background:var(--ew)}
+html body #v-cmt #cmt-pauta .cmt-pauta-mk[data-marco=passado]::after{background:#8ab6a0;border-color:#8ab6a0}
+html body #v-cmt #cmt-pauta .cmt-pauta-mk[data-marco=hoje]::after,html body #v-cmt #cmt-pauta .cmt-pauta-mk[data-marco=proximo]::after{background:var(--eo);border-color:var(--eo)}
+html body #v-cmt #cmt-pauta .cmt-pauta-mk>span{font:500 9px/1.3 var(--emono);text-transform:uppercase;letter-spacing:.06em}
+html body #v-cmt #cmt-pauta .cmt-pauta-mk>b{font:650 15px/1.2 Inter,system-ui,sans-serif;color:var(--ei)}
+html body #v-cmt #cmt-pauta .cmt-pauta-mk>small{font:400 10px/1.2 Inter,system-ui,sans-serif;color:var(--em)}
+html body #v-cmt #cmt-pauta .cmt-pauta-milestones .cmt-ses-c{flex:1.2 0 140px!important;min-width:140px!important;padding-right:24px!important;background:var(--ew)!important;border:1px solid var(--el)!important;border-radius:8px!important;cursor:pointer}
+html body #v-cmt #cmt-pauta .cmt-pauta-milestones .cmt-ses-c::before{left:10px;right:auto;width:9px;height:9px;top:1px;border-radius:50%;background:#5a4aa8}
+html body #v-cmt #cmt-pauta .cmt-pauta-milestones .cmt-ses-c::after{right:10px!important;top:50%!important;margin:0!important}
+html body #v-cmt #cmt-pauta .cmt-pauta-milestones #cmt-n-pt{display:block!important;order:-1;font:500 9px/1.3 var(--emono)!important;letter-spacing:.06em}
+html body #v-cmt #cmt-pauta .cmt-pauta-milestones #cmt-ses-d{font:700 15px/1.2 Inter,system-ui,sans-serif!important;color:var(--ei)!important}
+html body #v-cmt #cmt-pauta .cmt-pauta-milestones #cmt-ses-tg{display:none!important}
+html body #v-cmt #cmt-pauta .cmt-pauta-milestones .cmt-ses-c:focus-within{outline:2px solid var(--eg);outline-offset:-2px}
+html body #v-cmt #cmt-pauta .cmt-pauta-milestones .cmt-ses-c select{position:absolute!important;inset:0!important;opacity:0!important;width:100%!important;height:100%!important;cursor:pointer}
+html body #v-cmt #cmt-pauta .cmt-pauta-assunto{display:none}
+@media(min-width:781px){
+ html body #v-cmt #cmt-pauta .cmt-ph{grid-template-columns:minmax(0,1fr) auto auto!important;gap:8px!important;padding:12px 14px!important;background:var(--ep)!important}
+ html body #v-cmt #cmt-pauta .cmt-ph-2 .cmt-bq{grid-column:1!important;grid-row:1!important;border:1px solid var(--el2)!important;border-radius:8px!important;height:36px!important}
+ html body #v-cmt #cmt-pauta #cmt-selt{grid-column:2!important;grid-row:1!important;border-radius:8px!important;height:36px!important}
+ html body #v-cmt #cmt-pauta #cmt-libl{grid-column:3!important;grid-row:1!important;margin:0!important;border-radius:8px!important;height:36px!important}
+ html body #v-cmt #cmt-pauta #cmt-fsel{grid-column:1/-1!important;grid-row:2!important;display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr)) auto!important;gap:6px!important;height:auto!important;border:0!important;border-radius:0!important;background:none!important;overflow:visible!important}
+ html body #v-cmt #cmt-pauta #cmt-fsel label{display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:3px!important;padding:0!important;border:0!important;background:none!important}
+ html body #v-cmt #cmt-pauta #cmt-fsel label>span{font-size:9px!important;letter-spacing:.05em!important}
+ html body #v-cmt #cmt-pauta #cmt-fsel label select{position:static!important;opacity:1!important;width:100%!important;height:30px!important;padding:0 5px!important;border:1px solid var(--el)!important;border-radius:6px!important;background:var(--ew)!important;font-size:11px!important;color:var(--ei)!important}
+ html body #v-cmt #cmt-pauta #cmt-fsel label.on::after{display:none!important}
+ html body #v-cmt #cmt-pauta #cmt-fsel label.on select{border-color:var(--eg)!important}
+ html body #v-cmt #cmt-pauta #cmt-sit{grid-column:1/-1!important;grid-row:3!important}
+ html body #v-cmt #cmt-pauta .cmt-tw{padding:0 10px 8px!important;background:var(--ep)!important}
+ html body #v-cmt #cmt-pauta .cmt-tb{border-collapse:separate!important;border-spacing:0 6px!important}
+ html body #v-cmt #cmt-pauta #cmt-rows tr>td{background:var(--ew)!important;border-top:1px solid var(--el)!important;border-bottom:1px solid var(--el)!important;padding-top:11px!important;padding-bottom:11px!important;vertical-align:top!important}
+ html body #v-cmt #cmt-pauta #cmt-rows tr>td:first-child{border-left:1px solid var(--el)!important;border-radius:8px 0 0 8px}
+ html body #v-cmt #cmt-pauta #cmt-rows tr>td:last-child{border-right:1px solid var(--el)!important;border-radius:0 8px 8px 0}
+ html body #v-cmt #cmt-pauta #cmt-rows tr:hover>td{background:var(--ep2)!important}
+ html body #v-cmt #cmt-pauta #cmt-rows tr:has(input:checked)>td{background:var(--ep2)!important;border-top-color:var(--eg)!important;border-bottom-color:var(--eg)!important}
+ html body #v-cmt #cmt-pauta #cmt-rows td.cnj{font-size:11px!important}
+ html body #v-cmt #cmt-pauta #cmt-rows td.cnj .cmt-pt{font-size:11.5px!important;line-height:1.4!important;-webkit-line-clamp:unset!important;max-width:none!important;overflow-wrap:anywhere}
+ html body #v-cmt #cmt-pauta #cmt-rows td[data-l=Servidor]{white-space:normal!important;overflow-wrap:anywhere;font-size:12px!important;line-height:1.4}
+ html body #v-cmt #cmt-pauta #cmt-rows .cmt-at2{display:inline-block!important;max-width:100%;white-space:normal!important;padding:2px 5px;border:1px solid var(--el);border-radius:4px;margin-top:4px;line-height:1.35}
+ @container cmtpauta (max-width:960px){html body #v-cmt #cmt-pauta .cmt-pauta-assunto{display:block!important;white-space:normal;overflow-wrap:anywhere;font:500 11px/1.4 Inter,system-ui,sans-serif;color:var(--ei);margin-top:4px}}
+}
+@media(max-width:780px){
+ html body #v-cmt #cmt-pauta .cmt-pauta-milestones{padding:10px 8px!important}
+ html body #v-cmt #cmt-pauta #cmt-rows tr{margin:6px 8px!important;border:1px solid var(--el)!important;border-radius:9px!important;background:var(--ew)!important;padding:10px!important}
+ html body #v-cmt #cmt-pauta #cmt-rows td.cnj{flex-wrap:wrap!important}
+ html body #v-cmt #cmt-pauta #cmt-rows td.cnj .cmt-pt{flex:1 0 100%;max-width:none!important;-webkit-line-clamp:unset!important}
+}
 </style>
 </body>
 </html>
