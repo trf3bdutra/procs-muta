@@ -19,9 +19,31 @@
      documento (GET, com a sessão de quem está logado); HTML vira texto, PDF segue para o painel extrair o texto. Só leitura. */
 (function () {
   'use strict';
-  var VERSAO = '0.19';
+  var VERSAO = '0.20';
   if (window.__mutaPje === VERSAO) return;
   window.__mutaPje = VERSAO;
+  /* 0.20 (26/11/2026) · nada fora do painel lateral, por padrão: travamento na tela dos autos digitais.
+     Sem a escolha do usuário, o leitor não desenha nada nas páginas do PJe (selos, etiquetas redesenhadas, sinalizações
+     ao lado do número, botões HERO/Etiquetas/Ocultar a lista, quadro do Desembargador, painel por etapa): só lê e informa
+     o painel. Quem quiser esses elementos liga em Perfil › Na tela do PJe (muta-prazos.telaPje, só neste navegador).
+     Quadros internos (about:, blob:, data:) — visualizador de documento, editor — não observam a página:
+     leem uma vez e quando o quadro ganha foco; o editor continua lido pelo quadro de cima. */
+  var QUADRO_INTERNO = /^(about|blob|data):/.test(location.protocol);
+  var TELA = { on: window.HERO_PREVIA_PJE === true };
+  function semTela() { return !TELA.on; }
+  /* o que versões anteriores deixaram na página (aba aberta durante a atualização) */
+  function limparInjetados() {
+    try {
+      Array.prototype.forEach.call(document.querySelectorAll('#hero-sinais-autos, #hero-sinais-cab, .muta-selos, #hero-dlg, #hero-cmt, #hero-modo-btn, #hero-etq-btn, #hero-col-btn, .htg, #hcm-css, #htg-css, #muta-selos-css, #hero-ic-css'), function (x) { x.remove(); });
+      Array.prototype.forEach.call(document.querySelectorAll('.htg-oculto, .hero-col-oculta'), function (x) { x.classList.remove('htg-oculto', 'hero-col-oculta'); x.removeAttribute('data-htg-oculto'); });
+      Array.prototype.forEach.call(document.querySelectorAll('.hero-etq'), function (el) {
+        el.classList.remove('hero-etq', 'hero-solido', 'hero-suave', 'hero-contorno', 'hero-sym');
+        ['data-hero-etq', 'data-hero-ic', 'data-hero-sym'].forEach(function (a) { el.removeAttribute(a); });
+        el.style.removeProperty('--hc'); el.style.removeProperty('order');
+      });
+    } catch (e) {}
+  }
+  if (semTela()) limparInjetados();
 
   var CNJ = '(\\d{7}-\\d{2}\\.\\d{4}\\.\\d\\.\\d{2}\\.\\d{4})';
   /* sem \b no fim: no PJe o número pode vir colado ao texto seguinte (ícones sem texto entre eles) */
@@ -155,13 +177,26 @@
     if(!assunto||assunto.length>500||/^(processo refer[eê]ncia|[oó]rg[aã]o julgador|compet[eê]ncia|relator|partes|valor da causa)$/i.test(assunto))assunto='';
     return {classe:classe,assunto:assunto};
   }
-  var ultimo = null, espera = null;
+  var ultimo = null, espera = null, AUTC = { k: '', v: null, n: 0 };
+  /* 0.20: a autuação lê o texto da página uma vez por processo (até 3 tentativas), não a cada mudança da tela */
+  function autuacaoCache(d) {
+    if (!d || !d.numero || d.ctx !== 'autos') return {};
+    if (AUTC.k !== d.numero) AUTC = { k: d.numero, v: null, n: 0 };
+    if (AUTC.v && AUTC.v.classe) return AUTC.v;
+    if (AUTC.n >= 3) return AUTC.v || {};
+    AUTC.n++; AUTC.v = autuacaoPje(d); return AUTC.v;
+  }
+  /* 0.20: nos autos digitais, com o processo já informado nesta página, não relê a tela a cada mudança (a cronologia
+     carrega aos poucos e o visualizador muda o tempo todo); relê ao trocar de página, ao ganhar foco ou após 30 s */
+  var AUTOK = { url: '', t: 0 };
   function informar() {
     espera = null;
+    if (AUTOK.url === location.href && Date.now() - AUTOK.t < 30e3) return;
     var d;
     try { d = detectar(); } catch (e) { return; }
+    if (d.ctx === 'autos' && d.numero && d.forca >= 2) AUTOK = { url: location.href, t: Date.now() }; else AUTOK = { url: '', t: 0 };
     try { d.lib = liberacaoEditor(d.tarefa); } catch (e) { d.lib = ''; }
-    var aut=autuacaoPje(d);
+    var aut=autuacaoCache(d);
     var chave = d.numero + '|' + d.classe + '|' + d.forca + '|' + d.ctx + '|' + d.ed + '|' + (d.tarefa || '') + '|' + d.lib + '|' + (aut.classe||'') + '|' + (aut.assunto||'');
     if (chave === ultimo) return;
     ultimo = chave;
@@ -169,7 +204,7 @@
     try { chrome.runtime.sendMessage({ tipo: 'muta-processo', numero: d.numero, classe: d.classe, forca: d.forca, via: d.via, ctx: d.ctx, ed: !!d.ed, tarefa: d.tarefa || '', lib: d.lib || '', classeJudicial: aut.classe||'', assuntoCNJ: aut.assunto||'', host: location.host }); }
     catch (e) { /* extensão recarregada: esta página fica sem vínculo até ser recarregada */ }
   }
-  function agendar() { if (!espera) espera = setTimeout(informar, 700); }
+  function agendar() { if (!espera) espera = setTimeout(informar, QUADRO_INTERNO ? 1500 : 1200); }
 
   /* ---------- editor da minuta (abas Lote, Comparar e Conformidade) ----------
      Procura editores de texto rico neste quadro: o editor do PJe (ProseMirror), iframes do CKEditor/TinyMCE de mesma
@@ -452,7 +487,9 @@
      dias na tarefa, meta, sobrestamento, caso sensível e as etiquetas do gabinete que faltam no PJe (clique copia). */
   var ENR = { dados: {}, cat: null, cfg: null, t: 0, pedindo: false, tm: 0, pedidos: {} };
   /* a prévia do painel (/extensao/previa/) simula a lista do PJe com este mesmo script (scripts/extensao/previa/pje-shim.js) */
-  var LISTA = location.host === 'frontend-pje.app.trf3.jus.br' || window.HERO_PREVIA_PJE === true;
+  /* 0.20: selos, sinalizações, etiquetas redesenhadas, botões e quadro do Desembargador só na prévia do site (nunca no PJe) */
+  var LISTA_TELA = location.host === 'frontend-pje.app.trf3.jus.br' || window.HERO_PREVIA_PJE === true;
+  var LISTA = LISTA_TELA && !semTela();
   function nrm(t) { return String(t || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/\s+/g, ' ').trim(); }
   var CMTL = { d: null };
   var PDA = {};
@@ -931,7 +968,7 @@
   /* cabeçalho dos autos digitais: os mesmos ícones ao lado do número do processo */
   var AUT = { k: '', t: 0 };
   function sinaisAutos(numero) {
-    if (!autosDigitais() || !numero) return;
+    if (semTela() || !autosDigitais() || !numero) return;
     var k = numero.replace(/\D/g, ''); if (k.length !== 20) return;
     var pintar = function () {
       var r = ENR.dados[k]; if (!r && !AUT.ok) return;
@@ -1045,7 +1082,7 @@
     b.title = off ? 'Ligar o HERO18810 nos cartões (sinalizações; no modo em desenvolvimento, também estado, designação, trilha, sugeridas e etiquetas redesenhadas)' : 'Desligar o HERO18810 nos cartões: voltam ao desenho do PJe';
   }
   /* a escolha guardada vale desde o início da página (sem piscar os selos antes de desligar) */
-  try { if (LISTA) chrome.storage.local.get('muta-prazos').then(function (o) { if (o && o['muta-prazos']) { ENR.cfg = Object.assign({}, ENR.cfg || {}, o['muta-prazos']); agendarSelos(); } }); } catch (e) {}
+  function lerCfgLista() { try { chrome.storage.local.get('muta-prazos').then(function (o) { if (o && o['muta-prazos']) { ENR.cfg = Object.assign({}, ENR.cfg || {}, o['muta-prazos']); agendarSelos(); } }); } catch (e) {} }
   /* outra aba ou o sino mudou a escolha: vale aqui também */
   try { chrome.storage.onChanged.addListener(function (ch, area) { if (area === 'local' && ch['muta-prazos'] && LISTA) { ENR.cfg = Object.assign({}, ENR.cfg || {}, ch['muta-prazos'].newValue || {}); ENR.pedidos = {}; agendarSelos(); } }); } catch (e) {}
   /* recolher a coluna da lista (à esquerda) para dar espaço ao editor e à tarefa aberta; a escolha fica neste navegador */
@@ -1144,9 +1181,18 @@
     var foco = document.activeElement; if (!forca && foco && box.contains(foco) && /TEXTAREA|SELECT|INPUT/.test(foco.tagName)) return;
     box.setAttribute('data-sig', html); box.innerHTML = html;
   }
-  if (LISTA) { setTimeout(function () { cmtPedir(); }, 1500); setInterval(function () { if (!document.hidden) cmtPedir(); }, 60e3); }
   function agendarSelos() { if (!LISTA) return; clearTimeout(ENR.tm); ENR.tm = setTimeout(function () { try { aplicarSelos(); } catch (e) {} }, 700); }
-  if (LISTA) {
+  /* 0.20: o desenho na lista do PJe só começa quando o usuário liga "Na tela do PJe" (e para quando desliga) */
+  var LIGADA = false;
+  function ligarLista() {
+    if (!LISTA_TELA || !TELA.on) return;
+    LISTA = true; ENR.pedidos = {};
+    lerCfgLista(); setTimeout(function () { cmtPedir(); }, 300);
+    if (LIGADA) { agendarSelos(); return; }
+    LIGADA = true;
+    setInterval(function () { if (LISTA && !document.hidden) cmtPedir(); }, 60e3);
+    if (document.body) new MutationObserver(agendarSelos).observe(document.body, { childList: true, subtree: true });
+    agendarSelos();
     document.addEventListener('click', function (e) {
       var b = e.target && e.target.closest && e.target.closest('.muta-selos [data-muta-copia]'); if (!b) return;
       e.preventDefault(); e.stopPropagation();
@@ -1155,12 +1201,22 @@
     }, true);
     try { chrome.runtime.onMessage.addListener(function (msg) { if (msg && msg.tipo === 'muta-selos-atualizar') { ENR.pedidos = {}; ENR.cfg = null; agendarSelos(); } }); } catch (e) {}
   }
+  function desligarTela() { TELA.on = false; LISTA = false; clearTimeout(ENR.tm); limparInjetados(); }
+  function aplicarTela(cfg) {
+    if (window.HERO_PREVIA_PJE === true) { ligarLista(); return; }
+    var on = !!(cfg && cfg.telaPje === true);
+    if (on === TELA.on) return;
+    if (on) { TELA.on = true; ligarLista(); ultimo = null; AUTOK.t = 0; agendar(); } else desligarTela();
+  }
+  try { chrome.storage.local.get('muta-prazos').then(function (o) { aplicarTela(o && o['muta-prazos']); }, function () {}); } catch (e) {}
+  try { chrome.storage.onChanged.addListener(function (ch, area) { if (area === 'local' && ch['muta-prazos']) aplicarTela(ch['muta-prazos'].newValue || {}); }); } catch (e) {}
+  if (window.HERO_PREVIA_PJE === true) ligarLista();
 
   informar();
-  if (document.body) new MutationObserver(agendar).observe(document.body, { childList: true, subtree: true, characterData: true });
-  if (LISTA && document.body) { new MutationObserver(agendarSelos).observe(document.body, { childList: true, subtree: true }); agendarSelos(); }
-  window.addEventListener('focus', function () { ultimo = null; agendar(); });
-  document.addEventListener('visibilitychange', function () { if (!document.hidden) { ultimo = null; agendar(); } });
+  /* 0.20: sem characterData (digitação, relógios e o visualizador mudam texto o tempo todo); quadros internos não observam */
+  if (document.body && !QUADRO_INTERNO) new MutationObserver(agendar).observe(document.body, { childList: true, subtree: true });
+  window.addEventListener('focus', function () { ultimo = null; AUTOK.t = 0; agendar(); });
+  document.addEventListener('visibilitychange', function () { if (!document.hidden) { ultimo = null; AUTOK.t = 0; agendar(); } });
   /* o painel pede de novo quando o registro da aba se perdeu (aba recarregada, extensão atualizada) */
-  try { chrome.runtime.onMessage.addListener(function (msg) { if (msg && msg.tipo === 'muta-reinformar') { ultimo = null; agendar(); } }); } catch (e) {}
+  try { chrome.runtime.onMessage.addListener(function (msg) { if (msg && msg.tipo === 'muta-reinformar') { ultimo = null; AUTOK.t = 0; agendar(); } }); } catch (e) {}
 })();

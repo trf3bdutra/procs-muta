@@ -26,7 +26,9 @@
   function N(t) { return String(t || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/\s+/g, ' ').trim(); }
   function esc(t) { return String(t == null ? '' : t).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
   /* 0.36: o agrupamento fica no modo em desenvolvimento (sino › Prazos) */
-  function desligado() { try { return !window.MutaModo || window.MutaModo.desligado() || !window.MutaModo.dev(); } catch (e) { return true; } }
+  /* 0.20: só com "Na tela do PJe" ligado pelo usuário (muta-prazos.telaPje); sem isso, nem observa a página */
+  var TELA = false;
+  function desligado() { if (!TELA) return true; try { return !window.MutaModo || window.MutaModo.desligado() || !window.MutaModo.dev(); } catch (e) { return true; } }
   function lsGet(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
   function lsSet(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
 
@@ -176,11 +178,18 @@
   }
   var tm = null;
   function agendar() { clearTimeout(tm); tm = setTimeout(function () { try { aplicar(); } catch (e) {} }, 500); }
-  new MutationObserver(function (ms) {
-    /* o que o próprio HERO desenha não dispara nova leitura */
-    for (var i = 0; i < ms.length; i++) { var t = ms[i].target; if (!(t.closest && t.closest('.htg'))) { agendar(); return; } }
-  }).observe(document.documentElement, { childList: true, subtree: true, characterData: true });
-  try { chrome.storage.onChanged.addListener(function (ch, area) { if (area === 'local' && ch['muta-prazos']) agendar(); }); } catch (e) {}
-  agendar();
+  var OBS = null;
+  function observar(on) {
+    if (on && !OBS) {
+      OBS = new MutationObserver(function (ms) {
+        /* o que o próprio HERO desenha não dispara nova leitura */
+        for (var i = 0; i < ms.length; i++) { var t = ms[i].target; if (!(t.closest && t.closest('.htg'))) { agendar(); return; } }
+      });
+      OBS.observe(document.documentElement, { childList: true, subtree: true });
+    } else if (!on && OBS) { OBS.disconnect(); OBS = null; }
+  }
+  function tela(cfg) { TELA = !!(cfg && cfg.telaPje === true); observar(TELA); agendar(); }
+  try { chrome.storage.local.get('muta-prazos').then(function (o) { tela(o && o['muta-prazos']); }, function () {}); } catch (e) {}
+  try { chrome.storage.onChanged.addListener(function (ch, area) { if (area === 'local' && ch['muta-prazos']) tela(ch['muta-prazos'].newValue || {}); }); } catch (e) {}
   window.MutaTarefas = { aplicar: aplicar, grupoDe: grupoDe, linha: linha };
 })();
