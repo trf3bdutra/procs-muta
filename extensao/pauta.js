@@ -148,10 +148,10 @@
     var FALTA={servidor:'a designar',dataMinuta:'a minutar',dataCorrecao:'a corrigir',dataLiberacao:'a liberar'};var m=PASSOS.slice(1).map(function(p){var n=L.filter(function(it){return !!it[p[0]];}).length,pc=L.length?Math.round(n*100/L.length):0;return '<div class="hero-v53-pa-metric pa-m-'+esc(p[0])+'"><small>'+esc(p[1])+'</small><span class="pa-pct">'+pc+'%</span><b>'+n+'<span> de '+L.length+'</span></b><progress value="'+n+'" max="'+Math.max(1,L.length)+'"></progress><em class="pa-falta" title="'+(L.length-n?'faltam '+(L.length-n)+' '+(FALTA[p[0]]||''):'')+'">'+(L.length-n?'faltam '+(L.length-n):'completo')+'</em></div>';}).join('');
     var pedidos=(d.solicitacoes||[]).map(function(r){return {tipo:S(r.tipo)||'Outras',cnj:r.cnj};}).concat((P.pedPauta||[]).filter(function(r){return sesDe(r)===P.data;}).map(function(r){return {tipo:tipoPed(r),cnj:r.cnj||r.numero};}));
     var tipos={};pedidos.forEach(function(r){tipos[r.tipo]=(tipos[r.tipo]||0)+1;});
-    var resumo=Object.keys(tipos).sort().map(function(t){return '<em style="display:block;white-space:normal">'+tipos[t]+' · '+esc(t)+'</em>';}).join('');
+    var resumo=Object.keys(tipos).sort().map(function(t){return '<em class="pa-falta" style="display:block;white-space:normal">'+tipos[t]+' · '+esc(t)+'</em>';}).join('');
     var incompleto=P.pedErro||!Array.isArray(d.solicitacoes)||d.solicitacoesErro;
-    var solCard='<div class="hero-v53-pa-metric pa-m-solicitacoes" style="grid-column:1/-1"><small>Solicitações da sessão</small><b>'+pedidos.length+'<span> registros</span></b>'+ (resumo||'<em>Nenhuma solicitação registrada</em>')+(incompleto?'<em>Consulta parcial · confira em Deliberações</em>':'')+'</div>';
-    h+='<div class="hero-v53-pa-metrics">'+m+solCard+'</div>';
+    var solCard='<div class="hero-v53-pa-metric pa-m-solicitacoes"><small>Solicitações</small><b>'+pedidos.length+'<span> registros</span></b>'+ (resumo||'<em>Nenhuma solicitação registrada</em>')+(incompleto?'<em>Consulta parcial · confira em Deliberações</em>':'')+'</div>';
+    h+='<div class="hero-v53-pa-metrics">'+solCard+m+'</div>';
     var indicadores='<section class="hero-pa-overview" aria-label="Marcos e indicadores da sessão">'+h+'</section>';h=topo;
 
     var cur = dg(GB().cnj ? GB().cnj() : '');
