@@ -482,7 +482,7 @@ test('extensão 0.37: prontuário revisto — teses limpas, 3ª pessoa, decisão
 test('extensão 0.38: Autos preenche metadados inequívocos (e desfaz), exige conferência do resultado e mantém o Gerador compartilhado', async () => {
   const pend = {}, grav = { 'triagem.MPF': 'Não' }, tick = () => new Promise(r => setTimeout(r, 5));
   const F = { abas: [{ aba: 'Processo', grupos: [{ grupo: 'Sentença', campos: [{ secao: 'origem', chave: 'Sentença - ID', tipo: 'texto' }, { secao: 'origem', chave: 'Sentença - Decisão', tipo: 'texto' }, { secao: 'triagem', chave: 'Síntese Processual', tipo: 'texto' }, { secao: 'triagem', chave: 'MPF', tipo: 'texto' }] }] }] };
-  const ctx = { console, setTimeout, clearTimeout, localStorage: { getItem: () => null, setItem() {} }, document: { addEventListener() {} } };
+  const ctx = { console, setTimeout, clearTimeout, localStorage: { getItem: () => null, setItem() {} }, document: { addEventListener() {}, body:{classList:{contains:()=>false}} } };
   ctx.window = ctx; vm.createContext(ctx);
   ctx.Muta = { formatarCnj: k => k, chaveProcesso: c => String(c).replace(/\D/g, '') };
   ctx.MutaProntuarioBridge = { chaveAtual: () => '50000000020264036000' };
@@ -646,7 +646,7 @@ test('extensão 0.48: abas Diligências e Deliberações (Desembargador e gestor
   ['tab-dil', 'tab-del', 'tab-ctl'].forEach(id => assert.match(h, new RegExp('id="' + id + '"[^>]*hidden')));
   assert.match(h, /<div id="dil-app"/); assert.match(h, /<div id="del-app"/); assert.match(h, /<div id="ctl-app"/); assert.match(h, /<script src="gestao\.js"><\/script>/);
   /* 0.58: aba Pauta no fim; Controle segue como aba escondida, aberta pelo ícone da faixa do topo */
-  assert.match(p, /var NOMES=\['pront','min','ementario','par','ajuda','dil','del','ctl','pauta','modelos'\];/);
+  assert.match(p, /var NOMES=\['pront','min','ementario','par','ajuda','dil','del','ctl','pauta','modelos','processo','urg'\];/);
   assert.match(x, /ses\.api\('\/api\/pendencias'\)/); assert.match(x, /method: 'PUT', body: JSON\.stringify\(\{ id: id, _rev: t\._rev, stage: st \}\)/);
   assert.match(x, /ses\.api\('\/api\/painel\?cmt=1'\)/); assert.match(x, /acao: 'situacao'/); assert.match(x, /acao: 'responder'/); assert.match(x, /n\.tipo === 'sustentacao'/);
   assert.match(x, /ctl: q\.on && q\.gestor, pauta: q\.on/); assert.match(x, /function pode\(q\) \{ return q\.on && \(q\.gestor \|\| q\.des\); \}/);
