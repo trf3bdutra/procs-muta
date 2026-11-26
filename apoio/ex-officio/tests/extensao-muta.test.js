@@ -159,7 +159,7 @@ test('extensão 0.16.4: precedentes relacionados com o critério da gaveta do Ex
 test('extensão 0.16.5: dicas em todos os botões e campos; precedentes no Ementário', () => {
   const html = read('extensao/painel.html'), gab = read('extensao/gabinete.js'), d = read('extensao/dicas.js');
   assert.ok(html.indexOf('src="dicas.js"') < html.indexOf('</head>'));
-  assert.ok(html.includes('id="acv-modo-rel"') && html.includes('class="acv-faixa"'));
+  assert.ok(html.includes('id="acv-modo-rel"') && /class="[^"]*\bacv-faixa\b[^"]*"/.test(html));
   assert.match(gab, /function dicaCampo\(c\)/); assert.match(d, /MutationObserver/);
 });
 
@@ -251,8 +251,8 @@ test('extensão 0.20: Gerador monta relatório, dispositivo, ementa, acórdão e
   assert.deepEqual([...D.disp], ['Ante o exposto, nego provimento à apelação.', 'É como voto.']);
   assert.match(D.em.cab, /^DIREITO PREVIDENCIÁRIO\. APELAÇÃO CÍVEL\. .*APELAÇÃO DESPROVIDA\.$/);
   assert.equal(D.em.sec[3][1][0].t, 'Apelação desprovida.');
-  assert.equal(D.acordao, 'Vistos e relatados estes autos em que são partes as acima indicadas, a Turma Regional de Mato Grosso do Sul, por unanimidade, negou provimento à apelação, nos termos do relatório e voto que ficam fazendo parte integrante do presente julgado.');
-  assert.equal(D.procl, 'Por unanimidade, negou provimento à apelação.');
+  assert.equal(D.acordao, 'Vistos e relatados estes autos em que são partes as acima indicadas, a Turma Regional de Mato Grosso do Sul, [VALIDAR: quórum e proclamação da sessão], negou provimento à apelação, nos termos do relatório e voto que ficam fazendo parte integrante do presente julgado.');
+  assert.equal(D.procl, '[VALIDAR: quórum da sessão], negou provimento à apelação.');
   const gab = read('extensao/gabinete.js');
   assert.match(gab, /var MODOS = \['Processo', 'Autos'(, 'Roteiro')?(, 'Gerador')?\]/);
   assert.match(read('extensao/painel.html'), /<script src="gerador\.js"><\/script>/);
@@ -350,7 +350,7 @@ test('extensão 0.29: Minuta-matriz sem seleção confere só a estrutura; folha
   const c = read('extensao/comparar.js');
   assert.doesNotMatch(c, /if \(!s && M\.length\) \{ s = C\.sel\.matriz = M\[0\]\.x\.id; \}/, 'sem matriz pré-selecionada');
   assert.match(c, /if \(C\.fonte === 'matriz' && !matrizDoProcesso\(\)\) return estruturaPadrao\(\);/, '0.42: sem matriz do processo, só a estrutura');
-  assert.match(c, /function folhaHtml\(rows\)/); assert.match(c, /function ladoALadoHtml\(rows, titulo\)/); assert.match(c, /MutaJanela\.abrir\('comparar'/);
+  assert.match(c, /function folhaHtml\(rows\)/); assert.match(c, /function ladoALadoHtml\(rows, titulo(?:, compacto)?\)/); assert.match(c, /MutaJanela\.abrir\('comparar'/);
   assert.match(read('extensao/conformidade.js'), /MutaJanela\.abrir\('conformidade'/);
   assert.match(read('extensao/comum.js'), /window\.MutaJanela = \{/);
   ['janela.html', 'janela.js', 'janela.css'].forEach(f => assert.ok(fs.existsSync(path.join(ext, f)), f));
@@ -479,9 +479,9 @@ test('extensão 0.37: prontuário revisto — teses limpas, 3ª pessoa, decisão
   assert.equal(read('padrao/inteiro-teor.js'), read('extensao/padrao-inteiro-teor.js'));
 });
 
-test('extensão 0.38: Autos preenche sozinho os campos vazios do Roteiro (e desfaz); A conferir; Peças e documentos numa lista; Gerador na aba Minuta', async () => {
+test('extensão 0.38: Autos preenche metadados inequívocos (e desfaz), exige conferência do resultado e mantém o Gerador compartilhado', async () => {
   const pend = {}, grav = { 'triagem.MPF': 'Não' }, tick = () => new Promise(r => setTimeout(r, 5));
-  const F = { abas: [{ aba: 'Processo', grupos: [{ grupo: 'Sentença', campos: [{ secao: 'origem', chave: 'Sentença - Decisão', tipo: 'texto' }, { secao: 'triagem', chave: 'MPF', tipo: 'texto' }] }] }] };
+  const F = { abas: [{ aba: 'Processo', grupos: [{ grupo: 'Sentença', campos: [{ secao: 'origem', chave: 'Sentença - ID', tipo: 'texto' }, { secao: 'origem', chave: 'Sentença - Decisão', tipo: 'texto' }, { secao: 'triagem', chave: 'Síntese Processual', tipo: 'texto' }, { secao: 'triagem', chave: 'MPF', tipo: 'texto' }] }] }] };
   const ctx = { console, setTimeout, clearTimeout, localStorage: { getItem: () => null, setItem() {} }, document: { addEventListener() {} } };
   ctx.window = ctx; vm.createContext(ctx);
   ctx.Muta = { formatarCnj: k => k, chaveProcesso: c => String(c).replace(/\D/g, '') };
@@ -489,35 +489,38 @@ test('extensão 0.38: Autos preenche sozinho os campos vazios do Roteiro (e desf
   const V = (s, k) => { const id = s + '.' + k; return id in pend ? pend[id] : (grav[id] || ''); };
   ctx.MutaGabinete = { modelo: () => F, V, gravado: (s, k) => grav[s + '.' + k] || '', marcar: (id, v) => { pend[id] = v; }, gravar: () => Promise.resolve(), fo: () => ({}), op: () => ({}), render() {} };
   ctx.CMTInteiroTeor = { parseTxt: () => ({ docs: [] }), preselect() {}, especie: () => '', preselectKind() {},
-    buildSuggestions: () => [{ key: 'Sentença - Decisão', label: 'Resultado na origem', value: 'Improcedente', doc: '111', kind: 'field', sec: 'Sentença' }, { key: 'MPF', label: 'MPF', value: 'Sim', doc: '222', kind: 'field', sec: 'MPF' }] };
+    buildSuggestions: () => [{ key: 'Sentença - ID', label: 'ID da sentença', value: '111111111', doc: '111111111', kind: 'field', sec: 'Sentença' }, { key: 'Sentença - Decisão', label: 'Resultado na origem', value: 'Improcedente', doc: '111111111', kind: 'field', sec: 'Sentença' }, { key: 'MPF', label: 'MPF', value: 'Sim', doc: '222', kind: 'field', sec: 'MPF' }] };
   vm.runInContext(read('extensao/autos.js'), ctx);
   const AU = ctx.MutaAutos;
-  AU._carregar({ numero: '5000000-00.2026.4.03.6000', itens: [{ data: '01/02/2026', docs: [{ id: '111', tipo: 'Sentença' }] }] }, { 111: 'texto' });
+  AU._carregar({ numero: '5000000-00.2026.4.03.6000', itens: [{ data: '01/02/2026', docs: [{ id: '111111111', tipo: 'Sentença' }] }] }, { 111111111: 'texto' });
   AU.sugestoes(); await tick();
-  assert.equal(pend['origem.Sentença - Decisão'], 'Improcedente', 'campo vazio preenchido sozinho');
+  assert.equal(pend['origem.Sentença - ID'], '111111111', 'ID inequívoco preenchido sozinho');
+  assert.ok(!('origem.Sentença - Decisão' in pend), 'resultado jurídico não é gravado sem conferência');
+  assert.ok(AU.sugestoes().some(x => x.key === 'Sentença - Decisão' && x.manual && !x.apply && x.value === 'Improcedente'));
   assert.ok(!('triagem.MPF' in pend), 'o que já está gravado não é trocado');
-  assert.ok(AU.preenchido('origem.Sentença - Decisão'));
+  assert.ok(AU.preenchido('origem.Sentença - ID'));
   const cf = AU.htmlConferir();
   /* 0.50: a síntese do processo também sai da leitura (sentença e recursos) */
-  assert.match(cf, /<details class="au-auto-av au-auto-d"><summary><b>2 campos preenchidos pela leitura dos autos/);
-  assert.equal(pend['triagem.Síntese Processual'], 'Recurso contra sentença (ID 111) que julgou improcedente o pedido.');
-  assert.match(cf, /diverge/, 'a divergência fica em A conferir');
-  assert.doesNotMatch(AU.htmlLeitura(), /Preencher sozinho|Peças principais|Cronologia toda/, '0.44: só Ler/Reler (íntegra)'); assert.match(AU.htmlLeitura(), /class="au-metr"[\s\S]*Peças identificadas[\s\S]*Textos lidos[\s\S]*A conferir/);
+  assert.match(AU.htmlLocalizados(), /<details class="au-auto-av au-auto-d"[^>]*><summary><b>1 campo preenchido pela leitura dos autos/);
+  assert.ok(!('triagem.Síntese Processual' in pend), 'síntese exige conferência');
+  assert.ok(AU.sugestoes().some(x => x.key === 'Síntese Processual' && x.manual && !x.apply));
+  assert.match(cf, /diverge/i, 'a divergência fica em A conferir');
+  assert.match(AU.htmlLeitura(), /data-au-auto/); assert.doesNotMatch(AU.htmlLeitura(), /Peças principais|Cronologia toda/, 'Ler/Reler (íntegra)'); assert.match(AU.htmlLeitura(), /class="au-metr"[\s\S]*Peças identificadas[\s\S]*Textos lidos[\s\S]*A conferir/);
   assert.match(AU.htmlLeitura(), /1 de 1 documentos com texto extraído/);
-  assert.match(AU.htmlLocalizados(), /Localizados[\s\S]*Sentença[\s\S]*Localizado · texto lido[\s\S]*ID 111/);
+  assert.match(AU.htmlLocalizados(), /Localizados[\s\S]*Sentença[\s\S]*ID 111111111[\s\S]*Texto lido/);
   assert.match(cf, /Não identificados nesta leitura \(quando aplicáveis\)/);
   assert.match(AU.htmlDocs(() => ''), /Peças principais \(1\)[\s\S]*Cronologia \(1\)/);
   AU.clique({ dataset: { au: 'desfazer' } }); await tick();
-  assert.equal(pend['origem.Sentença - Decisão'], '', 'desfeito');
+  assert.equal(pend['origem.Sentença - ID'], '', 'desfeito');
   AU.estado().autoSig = {}; AU.sugestoes(); await tick();
-  assert.equal(pend['origem.Sentença - Decisão'], '', 'o desfeito não volta neste processo');
+  assert.equal(pend['origem.Sentença - ID'], '', 'o desfeito não volta neste processo');
   const gab = read('extensao/gabinete.js'), html = read('extensao/painel.html');
   assert.match(gab, /var MODOS = \['Processo', 'Autos'(, 'Roteiro')?\];/);
   /* A conferir e Localizados compõem o card de cobertura na leitura dos autos. */
   assert.match(gab, /var cf = AU\.htmlConferir\(\), dc = AU\.htmlDocs\(function \(\) \{ return pecasCartao\(true\); \}\)/);
-  assert.match(gab, /<details class="gg au-cf" id="g-cf"/);
+  assert.match(gab, /<details class="gg au-cf au-coverage-section" id="g-cf"/);
   assert.match(gab, /au-coverage-card/);
-  assert.doesNotMatch(html, /id="ger-app"/); assert.match(gab, /<div id="ger-app"><\/div>/);
+  assert.doesNotMatch(html, /id="ger-app"/); assert.match(gab, /gerHost\.id='ger-app'/);
   assert.match(read('extensao/prontuario.js'), /ger:'min'/);
   assert.match(read('extensao/gerador.js'), /pintar: pintar, abrir: abrir, modo: modo/);
   assert.match(read('extensao/roteiro.js'), /AU0\.preenchido/);
@@ -535,7 +538,7 @@ test('extensão 0.39: gravar na ficha com o inteiro teor (caixa por documento, u
   const n2 = F.juntarAutos(n, { secoes: [{ id: '111', sec: '===== ID 111 | Sentença | Sentença | juntado em 01/02/2026 =====\nTexto novo\n' }] }, velho.cnj);
   assert.ok(/Texto novo/.test(n2.texto) && !/Texto velho/.test(n2.texto), 'o mesmo ID é substituído');
   const au = read('extensao/autos.js');
-  assert.match(au, /data-au-g="/); assert.match(au, /data-au="gravar"/); assert.match(au, /function marcado\(d\) \{ return d\.id in A\.sel \? !!A\.sel\[d\.id\] : !!\(PRINC\[d\.k\]/);
+  assert.match(au, /data-au-g="/); assert.match(au, /data-au="gravar"/); assert.match(au, /function marcado\(d\) \{ return !\(A\.gravados\[d\.id\]&&fichaGravada\(d\.id\)\) && !docBloq\(d\) && \(d\.id in A\.sel \? !!A\.sel\[d\.id\] : !!\(PRINC\[d\.k\]/);
   assert.match(au, /autos: \{ lista: k \? \[\] : lis/);
   assert.match(read('extensao/gabinete.js'), /t\.dataset\.auG/);
   assert.doesNotMatch(read('extensao/comparar.js'), /return pronHtml\(\) \+ editorCaixa/);
@@ -578,8 +581,8 @@ test('extensão 0.41: botões de sinalização em todo cartão (vazio = sino dis
 
 test('extensão 0.42: Conformidade em aba própria da Minuta; minuta-matriz do processo sem lista para escolher; cabeçalho automático do PJe fora das conferências', () => {
   const h = read('extensao/painel.html');
-  assert.match(h, /id="hero-v53-conf-expand"/); assert.match(h, /<details class="min-conf aba" id="min-conf" data-aberto="1" open>/); assert.doesNotMatch(h, /id="mc-t"/);
-  assert.match(read('extensao/conformidade.js'), /hero-v53-conf-expanded/);
+  assert.match(h, /id="hero-v53-conf-expand"/); assert.match(h, /<details class="min-conf aba hero-conf-dock" id="min-conf" data-aberto="0">/); assert.doesNotMatch(h, /id="mc-t"/);
+  assert.match(read('extensao/conformidade.js'), /function expandirHero\(\)\{var w=\$\('min-conf'\);if\(!w\)return false;rodape\(!w\.open\);return true;/);
   const c = read('extensao/comparar.js');
   assert.match(c, /function matrizDoProcesso\(\) \{ var M = matrizesOrdenadas\(\), z = M\[0\]; return z && z\.k >= 6 \? z\.x : null; \}/);
   assert.doesNotMatch(c, /Escolha uma matriz para comparar bloco a bloco/);
@@ -594,7 +597,7 @@ test('extensão 0.43: Gerador só com relatório e ementa (dispositivo, acórdã
   const g = read('extensao/gerador.js');
   assert.match(g, /var PECAS = \{ rel: true, em: true, disp: false, ac: false, pr: false \};/);
   assert.match(g, /\(PECAS\.disp \? bloco\('disp'/); assert.match(g, /\(PECAS\.ac \? bloco\('ac'/); assert.match(g, /\(PECAS\.pr \? bloco\('pr'/);
-  assert.match(read('extensao/painel.html'), /<b>Corretor /); assert.match(read('extensao/gabinete.js'), /hero-v53-gerador/);
+  assert.match(read('extensao/painel.html'), /<b>Corretor /); const gab = read('extensao/gabinete.js'); assert.match(gab, /gerDock\.id='hero-ger-dock'/); assert.match(gab, /gerHost\.id='ger-app'/); assert.match(gab, /\['tri','pro'\]\.indexOf\(G\.rot\)>=0/);
   assert.doesNotMatch(read('extensao/comparar.js'), />Localizar no Collectio<|>Mandar ao Collectio</, 'sem os botões do Collectio no texto do editor');
 });
 
