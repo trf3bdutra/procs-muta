@@ -38,6 +38,7 @@
   var API = {
     consultar: consultar,
     sigiloso: function () { return !!T.sig; },
+    situacaoRascunho: function(cnj){if(T.cnj!==dg(cnj)||T.lendo||T.erro)return 'aguardando';return T.sig||T.docs||!T.lib?'restrito':'permitido';},
     bloqueado: function () { return T.lendo || (!!T.sig && !T.lib); },
     /* documento: bloqueado se o processo está bloqueado ou se o documento é sigiloso e ninguém liberou */
     docBloqueado: function (d) { return API.bloqueado() || (docSigiloso(d) && !(T.lib && T.porque)); },

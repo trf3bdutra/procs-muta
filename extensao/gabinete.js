@@ -19,6 +19,7 @@ function brD(v) { var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(S(v)); return m ? m[3]
 var ABAS = ['Processo', 'Triagem', 'Produção', 'Controles especiais', 'Pauta'], CE = 'Controles especiais';
 var G = { cnj: '', F: null, op: null, fo: null, gestor: false, ctl: {}, aba: 'Processo', qVazia: false, dest: null, pend: {}, pendCnj: '', t: null, carregando: false, erro: '', mostra: {}, tok: 0 };
 var MODO_K = 'muta-pje:modo';
+var FILA_FICHA=Object.create(null), RASCUNHO_FICHA='hero-ficha-pendente:v1:';
 var caixa = $('gab'), stEl = null;
 
 /* ---------- prontuário único (0.11): a ficha do processo; o prontuário completo antigo segue só na sincronia ---------- */
@@ -37,19 +38,19 @@ function cnjAtual() { var k = br.chaveAtual(); return k && k !== 'avulso' ? Muta
 function carregar(forcar) {
   if (modo !== 'ficha') return;
   var s = ses.estado();
-  if (s.estado !== 'on') { render(); return; }
-  var cnj = cnjAtual();
-  if (!cnj) { G.cnj = ''; G.F = null; G.op = null; render(); return; }
-  if (!forcar && cnj === G.cnj && (G.F || G.carregando)) { render(); return; }
-  if (G.cnj && G.cnj !== cnj) gravarJa().catch(function () {});
+  if (s.estado !== 'on') { G.tok++;G.cnj='';G.F=null;G.op=null;G.fo=null;G.pend={};G.saveKey='';G.carregando=false;render();return; }
+  var cnj = cnjAtual(),key=chaveFila(s.usuario,cnj);
+  if(!cnj){if(G.saveKey)gravarJa().catch(function(){});G.tok++;G.cnj='';G.F=null;G.op=null;G.fo=null;G.pend={};G.saveKey='';G.carregando=false;render();return;}
+  if (!forcar && cnj === G.cnj && G.saveKey===key && (G.F || G.carregando)) { render(); return; }
+  if (G.saveKey && G.saveKey!==key) gravarJa().catch(function () {});
+  var fila=obterFila(s.usuario,cnj),rev=fila.rev;G.saveKey=key;G.pend=fila.campos;
   if(heroV53()&&G.cnj!==cnj){G.aba='Processo';G.rot='res';} G.cnj = cnj; G.F = null; G.op = null; G.fo = null; G.erro = ''; G.dest = null; G.mostra = {}; G.qVazia = false; G.carregando = true;
   var tok = ++G.tok;
   render();
   ses.api('/api/pauta?ficha=' + encodeURIComponent(cnj)).then(function (j) {
     if (tok !== G.tok) return;
-    G.F = j.ficha; G.op = j.operacional; G.fo = j.fonte; G.equipe = j.equipe || []; G.desembargador=!!j.desembargador; G.gestor = !!j.gestor; G.ctl = j.controles || {};
-    G.carregando = false; render();
-    st(j.operacional ? '' : 'Sem ficha no Ex Officio ainda: ela é criada na primeira gravação.');
+    G.F = j.ficha; G.op = fila.rev!==rev&&fila.op ? fila.op : j.operacional; G.fo = j.fonte; G.equipe = j.equipe || []; G.desembargador=!!j.desembargador; G.gestor = !!j.gestor; G.ctl = j.controles || {};
+    G.carregando = false; render(); recuperarFila(fila);if(Object.keys(fila.campos).length){estadoFila(fila);programarFila(fila,900);}else st(j.operacional ? '' : 'Sem ficha no Ex Officio ainda: ela é criada na primeira gravação.');
   }).catch(function (e) {
     if (tok !== G.tok) return;
     G.carregando = false; G.erro = e.status === 401 ? '' : e.message; render();
@@ -1874,7 +1875,7 @@ function heroRoteiroFiltros(){
  input.value=st.q;input.oninput=function(){st.q=input.value;apply();};buttons.forEach(function(b){b.onclick=function(){var k=b.dataset.routeFilter;st.status=st.status===k?'all':k;if(k==='all'){st.q='';input.value='';}apply();};});
  if(next)next.onclick=function(){var pending=steps.filter(function(s){return s.dataset.routeStatus!=='ok';}),active=pending.findIndex(function(s){return s.classList.contains('ab')||s.querySelector('details[open]');});if(!pending.length)return;var target=pending[(active+1)%pending.length],b=target.querySelector('.rt-h,summary');st.status='all';st.q='';st.phases={};input.value='';apply();if(b&&!target.classList.contains('ab')&&!target.querySelector('details[open]')){var k=target.querySelector('[data-rt],[data-cc]');var id=target.querySelector('[data-cc]');b.click();var live=id?caixa.querySelector('[data-cc="'+id.getAttribute('data-cc')+'"]'):k?Array.from(caixa.querySelectorAll('[data-rt]')).find(function(n){return n.dataset.rt===k.dataset.rt;}):null;if(live)live.scrollIntoView({block:'nearest'});}else target.scrollIntoView({block:'nearest'});};apply();
 }
-function render() { render0(); heroOrganizarProntuario(); heroDadosFiltros(); heroRoteiroFiltros(); if (window.MutaGerador && window.MutaGerador.pintar) window.MutaGerador.pintar(); }
+function render() { render0(); heroOrganizarProntuario(); heroDadosFiltros(); heroRoteiroFiltros(); if (window.MutaGerador && window.MutaGerador.pintar) window.MutaGerador.pintar();estadoFila(filaAtual()); }
 function render0() {
   if (!caixa) return;
   faixaUsuario(ses.estado());
@@ -1947,32 +1948,44 @@ function st(t, c) {
 }
 
 /* ---------- gravação ---------- */
-function agendar(ms) { clearTimeout(G.t); G.t = setTimeout(function () { gravarJa().catch(function () {}); }, ms); st('Alterações a gravar…'); }
-function gravarJa(keepalive) {
-  clearTimeout(G.t); G.t = null;
-  var P = G.pend, ks = Object.keys(P), cnj = G.pendCnj || G.cnj;
-  if (!ks.length || !cnj) return Promise.resolve();
-  G.pend = {}; G.pendCnj = '';
-  st('Gravando no prontuário…');
-  var corpo = JSON.stringify({ cnj: cnj, campos: P });
-  if (keepalive) {
-    try { fetch(SITE + '/api/pauta?ficha=1', { method: 'POST', credentials: 'include', keepalive: true, headers: { 'Content-Type': 'application/json' }, body: corpo }); } catch (e) {}
-    return Promise.resolve();
-  }
-  return ses.api('/api/pauta?ficha=1', { method: 'POST', body: corpo }).then(function (j) {
-    if (window.MutaAlertas) window.MutaAlertas.esquecer(cnj);
-    if (cnj === G.cnj) { G.op = j.operacional || G.op; render(); }
-    if(window.MUTA_WEB&&window.parent!==window)window.parent.postMessage({tipo:'cmt:hero-gravado',cnj:cnj},location.origin);
-    var rec = j.recusados || [];
-    st(rec.length ? 'Gravado, exceto (sem permissão): ' + rec.join(', ') : j.semMudanca ? 'Nada mudou no prontuário.' : 'Gravado na ficha do processo' + ((j.cartoes || []).length ? ' e no cartão da pauta' : '') + ' às ' + new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }) + '.', rec.length ? 'err' : 'ok');
-    return j;
-  }).catch(function (e) {
-    if (cnj === G.cnj) { Object.keys(P).forEach(function (k) { if (!(k in G.pend)) G.pend[k] = P[k]; }); G.pendCnj = cnj; }
-    st('Não gravou: ' + e.message + (e.status === 401 ? ' Entre de novo.' : ''), 'err');
-    throw e;
-  });
+/* Fila por conta e processo: o rascunho só sai após ACK explícito. */
+function chaveFila(u,c){return encodeURIComponent(String(u||'')) + ':' + dg(c);}
+function obterFila(u,c){var k=chaveFila(u,c);return FILA_FICHA[k]||(FILA_FICHA[k]={key:k,usuario:u,cnj:c,campos:Object.create(null),base:Object.create(null),bloqueados:Object.create(null),rev:0,op:null,t:null,voo:null,erro:'',recuperado:false,local:false,geracao:0,versoes:Object.create(null)});}
+function filaAtual(){return FILA_FICHA[G.saveKey]||null;}
+function mesmaConta(f){var s=ses.estado();return s.estado==='on'&&s.usuario===f.usuario;}
+function igualFila(a,b){return JSON.stringify(a)===JSON.stringify(b);}
+function valorOperacional(op,k){var i=k.indexOf('.'),o=(op||{})[k.slice(0,i)]||{};return o[k.slice(i+1)]==null?'':o[k.slice(i+1)];}
+function condicaoLocal(f){if(window.MUTA_WEB||location.protocol!=='chrome-extension:')return 'restrito';var sg=window.MutaSigilo;return sg&&sg.situacaoRascunho?sg.situacaoRascunho(f.cnj):'aguardando';}
+function persistirFila(f){var k=RASCUNHO_FICHA+f.key,cs=condicaoLocal(f);try{
+ if(cs==='restrito'){localStorage.removeItem(k);f.local=false;return;}
+ if(cs==='permitido')f.local=true;
+ if(!f.local)return;
+ if(!Object.keys(f.campos).length){localStorage.removeItem(k);return;}
+ /* não duplicar classificação documental, peças vinculadas ou inteiro teor. */
+ var campos={},base={},bloqueados={};Object.keys(f.campos).forEach(function(id){if(/Classificação documental|Peças vinculadas|Inteiro teor/i.test(id))return;campos[id]=f.campos[id];base[id]=f.base[id];if(f.bloqueados[id])bloqueados[id]=f.bloqueados[id];});
+ if(Object.keys(campos).length)localStorage.setItem(k,JSON.stringify({campos:campos,base:base,bloqueados:bloqueados}));else localStorage.removeItem(k);
+ }catch(e){f.local=false;f.avisoLocal='Sem recuperação em disco: '+e.message;}}
+function recuperarFila(f){if(!f||f.recuperado||f!==filaAtual()||!G.F||!mesmaConta(f))return;var cs=condicaoLocal(f);if(cs==='aguardando')return;f.recuperado=true;if(cs!=='permitido'){persistirFila(f);return;}f.local=true;
+ try{var q=JSON.parse(localStorage.getItem(RASCUNHO_FICHA+f.key)||'null');if(q&&q.campos)Object.keys(q.campos).forEach(function(k){if(k in f.campos)return;var v=valorOperacional(G.op,k);if(igualFila(v,q.campos[k]))return;f.campos[k]=q.campos[k];f.base[k]=(q.base||{})[k];f.versoes[k]=++f.geracao;if(!igualFila(v,f.base[k]))f.bloqueados[k]='conflito';else if((q.bloqueados||{})[k])f.bloqueados[k]=q.bloqueados[k];});}catch(e){f.avisoLocal='Não foi possível recuperar o rascunho local.';}
+ persistirFila(f);if(Object.keys(f.campos).length){render();estadoFila(f);programarFila(f,900);}}
+function estadoFila(f){if(!f||f!==filaAtual())return;var n=Object.keys(f.campos).length,b=Object.keys(f.bloqueados).filter(function(k){return k in f.campos;});if(f.erro||b.length){st((f.erro||('Alterações requerem conferência: '+b.join(', ')))+(f.avisoLocal?' · '+f.avisoLocal:''),'err');}else if(n)st(f.voo?'Gravando '+n+' campo(s)…':n+' campo(s) a gravar'+(f.local?' · rascunho local':' · somente nesta janela')+'…');}
+function programarFila(f,ms){if(!f)return;clearTimeout(f.t);if(!mesmaConta(f)||!Object.keys(f.campos).some(function(k){return !f.bloqueados[k];}))return;f.t=setTimeout(function(){enviarFila(f).catch(function(){});},ms);}
+function agendar(ms){var f=filaAtual();if(!f)return;persistirFila(f);programarFila(f,ms);estadoFila(f);}
+function enviarFila(f){if(!f||!mesmaConta(f)||window.MUTA_WEB&&window.MUTA_WEB.leitura)return Promise.resolve();clearTimeout(f.t);if(f.voo)return f.voo;var P={},vs={};Object.keys(f.campos).forEach(function(k){if(!f.bloqueados[k]){P[k]=f.campos[k];vs[k]=f.versoes[k];}});if(!Object.keys(P).length)return Promise.resolve();
+ f.erro='';f.voo=Promise.resolve().then(function(){if(!mesmaConta(f))throw Error('Sessão alterada antes do envio.');return ses.api('/api/pauta?ficha=1',{method:'POST',body:JSON.stringify({cnj:f.cnj,campos:P})});}).then(function(j){
+  if(!j||j.ok!==true)throw Error('Resposta sem confirmação de gravação.');
+  var recus=Array.isArray(j.recusados)?j.recusados:[];f.rev++;f.op=j.operacional||f.op;
+  Object.keys(P).forEach(function(k){if(f.versoes[k]!==vs[k]){if(!recus.includes(k))f.base[k]=valorOperacional(f.op,k);return;}if(recus.includes(k)){f.bloqueados[k]='recusado';return;}delete f.campos[k];delete f.base[k];delete f.versoes[k];delete f.bloqueados[k];});
+  persistirFila(f);if(mesmaConta(f)&&window.MutaAlertas)window.MutaAlertas.esquecer(f.cnj);
+  if(f===filaAtual()&&mesmaConta(f)){G.op=f.op||G.op;render();if(Object.keys(f.campos).length)estadoFila(f);else st('Gravado na ficha'+((j.cartoes||[]).length?' e no cartão da pauta':'')+' às '+new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})+'.','ok');}
+  if(mesmaConta(f)&&window.MUTA_WEB&&window.parent!==window)window.parent.postMessage({tipo:'cmt:hero-gravado',cnj:f.cnj},location.origin);return j;
+ }).catch(function(e){var recus=e.dados&&e.dados.recusados;if(Array.isArray(recus))recus.forEach(function(k){if(f.versoes[k]===vs[k])f.bloqueados[k]='recusado';});f.erro='Não gravou: '+e.message+(e.status===401?' Entre de novo.':'');persistirFila(f);estadoFila(f);throw e;}).finally(function(){f.voo=null;if(Object.keys(f.campos).length){if(f===filaAtual())estadoFila(f);programarFila(f,f.erro?30000:600);}});
+ estadoFila(f);return f.voo;
 }
-function marcar(id, v) { if(window.MUTA_WEB&&window.MUTA_WEB.leitura)return; G.pend[id] = v; G.pendCnj = G.cnj; }
+function gravarJa(keepalive){var f=filaAtual();if(!f)return Promise.resolve();persistirFila(f);/* a saída nunca é tratada como confirmação do servidor. */return enviarFila(f);}
+function tentarFicha(){var f=filaAtual();if(!f)return;if(Object.keys(f.bloqueados).length&&!window.confirm('Há campos recusados ou alterados por outra interface. Deseja reenviar os valores pendentes?'))return;f.bloqueados=Object.create(null);f.erro='';persistirFila(f);return enviarFila(f);}
+function marcar(id,v){if(window.MUTA_WEB&&window.MUTA_WEB.leitura)return;var f=filaAtual();if(!f||!mesmaConta(f))return;if(!(id in f.campos))f.base[id]=valorOperacional(G.op,id);f.campos[id]=v;f.versoes[id]=++f.geracao;delete f.bloqueados[id];f.erro='';G.pend=f.campos;G.pendCnj=f.cnj;persistirFila(f);}
+function retomarFilas(){Object.keys(FILA_FICHA).forEach(function(k){var f=FILA_FICHA[k];if(mesmaConta(f))programarFila(f,800);});}
 function copiar(t, el) { (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(function () { if (el) { var o = el.textContent; el.textContent = 'Copiado'; setTimeout(function () { el.textContent = o; }, 1100); } }, function () {}); }
 function questoesDe(sem) {
   var L = Array.prototype.map.call(caixa.querySelectorAll('[data-q]'), function (i) { return S(i.value); });
@@ -2052,7 +2065,7 @@ caixa.addEventListener('click', function (e) {
   if (b.dataset.dest != null) { var v = b.dataset.dest; G.dest = v === 'Monocrática' ? 'monocratica' : 'sessao'; if (v !== destGrav()) { marcar('producao.Destino', v); agendar(300); } render(); return; }
   if (b.dataset.inc) { var g = b.dataset.inc, x = INC[g][1]; G.mostra[g] = true; if (x) { marcar(x[0], x[1]); agendar(300); } render(); return; }
   if (b.dataset.g === 'atualizar') { gravarJa().catch(function () {}).then(function () { carregar(true); }); return; }
-  if (b.dataset.g === 'regravar') { gravarJa().catch(function () {}); return; }
+  if (b.dataset.g === 'regravar') { Promise.resolve(tentarFicha()).catch(function () {}); return; }
   if (b.dataset.g === 'enviar') { enviar(); return; }
   if (b.dataset.g === 'trazer') { trazer(); return; }
 });
@@ -2196,10 +2209,13 @@ function trazer() {
 }
 
 /* ---------- ligações ---------- */
-ses.ouvir(function () { if (modo === 'ficha') carregar(false); if (window.MutaLote) window.MutaLote.sessao(); });
+ses.ouvir(function () { if (modo === 'ficha') carregar(false); retomarFilas();if (window.MutaLote) window.MutaLote.sessao(); });
+window.addEventListener('online',retomarFilas);
+document.addEventListener('muta:sigilo',function(){var f=filaAtual();if(f){recuperarFila(f);persistirFila(f);}});
 document.addEventListener('muta:autuacao',function(e){if(modo==='ficha'&&G.F&&e.detail&&Muta.chaveProcesso(e.detail.numero)===Muta.chaveProcesso(G.cnj))render();});
 document.addEventListener('muta:prontuario', function () { if (modo === 'ficha') carregar(false); else if (G.pend && Object.keys(G.pend).length) gravarJa().catch(function () {}); });
-window.addEventListener('pagehide', function () { if (Object.keys(G.pend).length) gravarJa(true); });
+window.addEventListener('pagehide', function () {Object.keys(FILA_FICHA).forEach(function(k){var f=FILA_FICHA[k];if(mesmaConta(f))persistirFila(f);});});
+window.addEventListener('beforeunload',function(e){var f=filaAtual();if(f&&Object.keys(f.campos).length&&!f.local){e.preventDefault();e.returnValue='';}});
 document.addEventListener('visibilitychange', function () { if (document.hidden && Object.keys(G.pend).length) gravarJa().catch(function () {}); });
 /* ---------- correspondência rascunho ↔ ficha, para a sincronia automática (sincronia.js) ---------- */
 function opVal(op, id) { var i = id.indexOf('.'), s = (op || {})[id.slice(0, i)] || {}, v = s[id.slice(i + 1)]; return v == null ? '' : v; }
