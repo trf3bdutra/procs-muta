@@ -14,7 +14,7 @@
   var dg = function (s) { return S(s).replace(/\D/g, ''); };
   var br = function (d) { var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(S(d)); return m ? m[3] + '/' + m[2] + '/' + m[1] : S(d); };
   var hoje = function () { return new Date(Date.now() - 4 * 3600e3).toISOString().slice(0, 10); };
-  var P = { cal: null, data: '', doc: null, ped: null, pedPauta: null, pedErro: false, erro: '', lendo: false, f: 'todos', tipoProcSol: '', aba: 'itens', solFiltro: 'todas', solTipo: 'todas', qItens:'', qSol:'', modalidade:'todas', filtros:{}, aberto: false, seq: 0 };
+  var P = { cal: null, data: '', doc: null, ped: null, pedPauta: null, pedErro: false, erro: '', lendo: false, f: 'todos', tipoProcSol: '', aba: 'itens', solFiltro: 'todas', solTipo: 'todas', qItens:'', qSol:'', qSo:'', soModal:'todas', soEstado:'todas', soSessao:'todas', modalidade:'todas', filtros:{}, aberto: false, seq: 0 };
 
   var solEditor=null,solCnj='',solEditOpen=false;
   function GB() { return window.MutaGabinete || {}; }
@@ -71,7 +71,7 @@
   function indicadorSessaoSo(d){return '<span class="gx-c hero-so-sessao" title="Sessão de julgamento">'+esc(d||'Sessão a definir')+'</span>';}
   function pedCard(r, opt) {
     opt = opt || {}; var item = (r.vinculo && r.vinculo.item) || r.item || '', av = aVincular(r), n = r.cnj || r.numero || '';
-    return '<article class="gx-it pa-ped' + (av ? ' venc' : '') + '"><div class="gx-h hero-so-head">' + indicadorSo(tipoPed(r)) + indicadorSessaoSo(sesDe(r)?br(sesDe(r)):'') +
+    return '<article class="gx-it pa-ped hero-pa-request' + (av ? ' venc' : '') + '" data-request-state="'+(av?'pend':'ok')+'"><div class="gx-h hero-so-head">' + indicadorSo(tipoPed(r)) + indicadorSessaoSo(sesDe(r)?br(sesDe(r)):'') +
       (av ? '<span class="gx-c venc" title="Ainda sem item correspondente na pauta">a vincular</span>' : item ? '<span class="gx-c">item ' + esc(item) + '</span>' : '') +
       (r.origem==='manual'?'<span class="gx-c">manual</span>':'') + '</div>' +
       '<p class="gx-m">' + [n && !opt.semNum ? '<button type="button" class="lnk mono" data-pa="abrir:' + esc(n) + '">' + esc(n) + '</button>' : '', r.recebidoEm || r.em ? 'recebido em ' + esc(br(S(r.recebidoEm || r.em).slice(0, 10))) : ''].filter(Boolean).join(' · ') + '</p>' +
@@ -115,7 +115,7 @@
   function solGrupo(t){t=S(t);return /sustenta|presenc|video|virtual/i.test(t)?'so':/prefer/i.test(t)?'pref':/retirada|adiamento/i.test(t)?'alt':/despacho/i.test(t)?'desp':'out';}
   function normalBusca(v){return S(v).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();}
   function buscaCasa(q,campos){var t=normalBusca(campos.filter(Boolean).join(' '));return normalBusca(q).split(/\s+/).filter(Boolean).every(function(w){return t.includes(w)||(/^\d[\d.\-]+$/.test(w)&&dg(t).includes(dg(w)));});}
-  function buscaPainel(k){return '<div class="acv-faixa pa-busca hero-rep-search"><div class="hero-rep-search-head"><span class="hero-rep-search-kicker">Pesquisa e visualização</span><small>'+esc(k==='sol'?'Solicitações':'Processos')+(P.data?' · '+esc(br(P.data)):'')+'</small></div><div class="acv-form">';}
+  function buscaPainel(k){return '<div class="acv-faixa pa-busca hero-rep-search"><div class="hero-rep-search-head"><span class="hero-rep-search-kicker">Pesquisa e visualização</span><small>'+esc(k==='sol'?'Solicitações':k==='so'?'Sustentações':'Processos')+(k==='so'?' · Todas as sessões':P.data?' · '+esc(br(P.data)):'')+'</small></div><div class="acv-form">';}
   function buscaFaixa(k,q,placeholder){return '<div class="af-l hero-rep-query"><input type="search" data-pa-q="'+k+'" aria-label="'+esc(placeholder)+'" placeholder="'+esc(placeholder)+'" value="'+esc(q)+'" autocomplete="off"><button type="button" class="tu-b" data-pa="buscar:'+k+'" title="Buscar" aria-label="Buscar"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="10" cy="10" r="6"/><path d="m15 15 5 5"/></svg></button><button type="button" class="tu-b" data-pa="limpar:'+k+'" title="Limpar busca" aria-label="Limpar busca">×</button><button type="button" class="tu-b" data-pa="reler" title="Atualizar sessão" aria-label="Atualizar sessão">↻</button></div>';}
   function solicitacoesHtml(itens,indicadores){
     var externas=(P.pedPauta||[]).filter(function(r){return sesDe(r)===P.data;}),internas=(P.doc&&P.doc.solicitacoes)||[];
@@ -135,8 +135,8 @@
     if(!P.doc||P.doc.solicitacoesErro||!Array.isArray(P.doc.solicitacoes))h+='<p class="status err">'+esc(P.doc&&P.doc.solicitacoesErro||'Solicitações internas indisponíveis nesta versão da API.')+'</p>';
     var estados={pendentes:'Pendente',deferidas:'Deferida',indeferidas:'Indeferida',vincular:'a vincular',vinculadas:'Vinculada'};
     var vis=L.filter(function(x){return (P.solTipo==='todas'||x.g===P.solTipo)&&(P.solFiltro==='todas'||x.estado===estados[P.solFiltro])&& (P.solTipo!=='so'||P.modalidade==='todas'||normalBusca(tipoPed(x.r)).includes(P.modalidade))&&buscaCasa(P.qSol,[x.r.cnj,x.r.numero,x.r.item,x.r.tipo,x.r.advogado,x.r.solicitante,x.r.parte,x.r.justificativa,x.r.descricao,x.estado]);});
-    G.forEach(function(gr){var A=vis.filter(function(x){return x.g===gr[0];});if(!A.length)return;h+='<h4 class="pm-mer-h">'+esc(gr[1])+' · '+A.length+'</h4>';A.forEach(function(x){var r=x.r;if(x.gestao&&MG.pautaCard){h+='<div class="pa-shared-card">'+MG.pautaCard(x.g==='du'?'duvida':'pedido',x.gestao)+'</div>';return;}if(x.ex){h+=pedCard(r,{itens:itens,ses:1});return;}
-      h+='<article class="gx-it pa-ped"><div class="gx-h'+(x.g==='so'||x.g==='pref'?' hero-so-head':'')+'">'+(x.g==='so'||x.g==='pref'?indicadorSo(r.tipo)+indicadorSessaoSo(r.sessaoOrigem||P.data?br(r.sessaoOrigem||P.data):''):'<b class="gx-t">'+esc(r.tipo)+'</b>')+'<span class="gx-c">'+esc(x.estado)+'</span>'+(r.item?'<span class="gx-c">item '+esc(r.item)+'</span>':'')+'</div><p class="gx-m"><button type="button" class="lnk mono" data-pa="gerir:'+esc(r.cnj)+'">'+esc(r.cnj)+'</button></p><p class="gx-m">'+esc([r.origem,r.solicitante,br(S(r.data).slice(0,10)),r.inferido?'vínculo pela pauta atual':''].filter(Boolean).join(' · '))+'</p>'+(r.sessaoPretendida?'<p class="gx-m">Sessão pretendida: '+esc(br(r.sessaoPretendida))+'</p>':'')+(r.justificativa||r.descricao?'<p class="gx-tx">'+esc(r.justificativa||r.descricao)+'</p>':'')+(r.resposta?'<p class="gx-ob">'+esc(r.resposta)+'</p>':'')+(r.decididoPor?'<p class="gx-m">Apreciada por '+esc(r.decididoPor)+' · '+esc(br(S(r.decididoEm).slice(0,10)))+'</p>':'')+'</article>';});});
+    G.forEach(function(gr){var A=vis.filter(function(x){return x.g===gr[0];});if(!A.length)return;h+='<h4 class="pm-mer-h hero-pa-request-group">'+esc(gr[1])+' <small>'+A.length+'</small></h4>';A.forEach(function(x){var r=x.r;if(x.gestao&&MG.pautaCard){h+='<div class="pa-shared-card hero-pa-request" data-request-state="pend">'+MG.pautaCard(x.g==='du'?'duvida':'pedido',x.gestao)+'</div>';return;}if(x.ex){h+=pedCard(r,{itens:itens,ses:1});return;}
+      h+='<article class="gx-it pa-ped hero-pa-request" data-request-state="'+(/indefer/i.test(x.estado)?'no':/defer|vinculad/i.test(x.estado)?'ok':'pend')+'"><div class="gx-h'+(x.g==='so'||x.g==='pref'?' hero-so-head':'')+'">'+(x.g==='so'||x.g==='pref'?indicadorSo(r.tipo)+indicadorSessaoSo(r.sessaoOrigem||P.data?br(r.sessaoOrigem||P.data):''):'<b class="gx-t">'+esc(r.tipo)+'</b>')+'<span class="gx-c">'+esc(x.estado)+'</span>'+(r.item?'<span class="gx-c">item '+esc(r.item)+'</span>':'')+'</div><p class="gx-m"><button type="button" class="lnk mono" data-pa="gerir:'+esc(r.cnj)+'">'+esc(r.cnj)+'</button></p><p class="gx-m">'+esc([r.origem,r.solicitante,br(S(r.data).slice(0,10)),r.inferido?'vínculo pela pauta atual':''].filter(Boolean).join(' · '))+'</p>'+(r.sessaoPretendida?'<p class="gx-m">Sessão pretendida: '+esc(br(r.sessaoPretendida))+'</p>':'')+(r.justificativa||r.descricao?'<p class="gx-tx">'+esc(r.justificativa||r.descricao)+'</p>':'')+(r.resposta?'<p class="gx-ob">'+esc(r.resposta)+'</p>':'')+(r.decididoPor?'<p class="gx-m">Apreciada por '+esc(r.decididoPor)+' · '+esc(br(S(r.decididoEm).slice(0,10)))+'</p>':'')+'</article>';});});
     return h+(vis.length?'':'<p class="muted">Nenhuma solicitação nesta visualização.</p>')+'</section>';
   }
 
@@ -200,10 +200,10 @@
   }
   function pedidosHtml() {
     var L = P.pedPauta || [], por = {}, h0 = hoje();
-    var h = '<section class="card pc-sec pa-so"><div class="pc-sh"><h3>Sustentações e preferências</h3><small class="muted">Todas as sessões · '+L.length+' pedidos</small></div>';
+    var h=buscaPainel('so')+buscaFaixa('so',P.qSo,'Buscar processo, advogado, parte…')+'<div class="pa-sol-resumo"><b>'+L.length+' registros</b><span>'+L.filter(aVincular).length+' a vincular</span><span>'+L.filter(function(r){return !aVincular(r);}).length+' vinculados / registrados</span></div>';var mods=[['todas','Todas'],['presenc','Presencial'],['video','Videoconferência'],['prefer','Preferência']];h+='<div class="pa-f hero-rep-filters" role="group" aria-label="Modalidade">'+mods.map(function(m){return '<button type="button" class="chip'+(P.soModal===m[0]?' on':'')+'" data-pa="so-modal:'+m[0]+'" aria-pressed="'+(P.soModal===m[0])+'">'+m[1]+' · '+L.filter(function(r){return m[0]==='todas'||normalBusca(tipoPed(r)).includes(m[0]);}).length+'</button>';}).join('')+'</div><div class="pa-session-head hero-rep-filters"><select data-pa="so-sessao" aria-label="Sessão"><option value="todas">Todas as sessões</option>'+Array.from(new Set(L.map(sesDe).filter(Boolean))).sort().map(function(d){return '<option value="'+esc(d)+'"'+(P.soSessao===d?' selected':'')+'>'+esc(br(d))+'</option>';}).join('')+'<option value="sem"'+(P.soSessao==='sem'?' selected':'')+'>Sem sessão identificada</option></select><select data-pa="so-estado" aria-label="Vínculo">'+[['todas','Todas as situações'],['pend','A vincular'],['ok','Vinculadas / registradas']].map(function(x){return '<option value="'+x[0]+'"'+(P.soEstado===x[0]?' selected':'')+'>'+x[1]+'</option>';}).join('')+'</select></div></div></div><section class="pa-ses hero-pa-results pa-so">';L=L.filter(function(r){return (P.soModal==='todas'||normalBusca(tipoPed(r)).includes(P.soModal))&&(P.soEstado==='todas'||(P.soEstado==='pend')===aVincular(r))&&(P.soSessao==='todas'||(P.soSessao==='sem'?!sesDe(r):sesDe(r)===P.soSessao))&&buscaCasa(P.qSo,[r.cnj,r.numero,r.advogado,r.parte,r.oab,tipoPed(r),r.item]);});
     if(P.pedErro)h+='<p class="status err">Não foi possível atualizar os pedidos externos.</p>';
     if(P.pedPauta===null&&!P.pedErro)return h+'<p class="muted">Lendo os pedidos…</p></section>';
-    h+='<div class="bar"><button type="button" class="lnk" data-pa="reler">Atualizar</button><small>'+L.filter(aVincular).length+' a vincular</small></div>';
+    h+='<p class="pa-results-count muted">'+L.length+' registros na visualização</p>';
     L.forEach(function(r){var d=sesDe(r)||'sem sessão';(por[d]=por[d]||[]).push(r);});
     var datas=Object.keys(por).sort(function(a,b){return a==='sem sessão'?1:b==='sem sessão'?-1:(a>=h0)===(b>=h0)?a.localeCompare(b):a>=h0?-1:1;});
     var d=P.doc||{},itens=(d.itens||[]).length?d.itens:(d.previa||[]);
@@ -230,18 +230,18 @@
 
   /* ---------- ações ---------- */
   document.addEventListener('toggle',function(e){var t=e.target;if(t&&t.isConnected&&t.matches&&t.matches('#pauta-app .hero-cmt-pauta-filters'))P.filtrosOpen=t.open;if(t&&t.isConnected&&t.matches&&t.matches('#pauta-app .hero-pa-cumulative'))P.cumulativeOpen=t.open;},true);
-  document.addEventListener('input',function(e){var t=e.target;if(!t.dataset||!t.dataset.paQ||!t.closest('#pauta-app'))return;P[t.dataset.paQ==='sol'?'qSol':'qItens']=t.value;pintar();});
+  document.addEventListener('input',function(e){var t=e.target;if(!t.dataset||!t.dataset.paQ||!t.closest('#pauta-app'))return;P[t.dataset.paQ==='sol'?'qSol':t.dataset.paQ==='so'?'qSo':'qItens']=t.value;pintar();});
   document.addEventListener('click', function (e) {
     var b = e.target.closest && e.target.closest('#pauta-app [data-pa]'); if (!b) return;
     var a = b.getAttribute('data-pa');
     if (/^aba:/.test(a)) { var modo=a.slice(4); if(['itens','sol','so'].indexOf(modo)<0)return; P.aba=modo;pintar();return; }
     if (/^ses:/.test(a)) { var dt=a.slice(4);if((P.cal||[]).some(function(x){return x.date===dt;}))trocar(dt);return; }
-    if(/^buscar:/.test(a)){var k=a.slice(7),inp=app().querySelector('[data-pa-q="'+k+'"]');if(inp)P[k==='sol'?'qSol':'qItens']=inp.value;pintar();return;}
+    if(/^buscar:/.test(a)){var k=a.slice(7),inp=app().querySelector('[data-pa-q="'+k+'"]');if(inp)P[k==='sol'?'qSol':k==='so'?'qSo':'qItens']=inp.value;pintar();return;}
     if(a==='limpar-filtros'){P.filtros={};P.f='todos';P.tipoProcSol='';P.qItens='';pintar();return;}
     if(a==='reler'){if(P.data)trocar(P.data);else ler();return;}
-    if(/^limpar:/.test(a)){P[a.slice(7)==='sol'?'qSol':'qItens']='';pintar();return;}
+    if(/^limpar:/.test(a)){P[a.slice(7)==='sol'?'qSol':a.slice(7)==='so'?'qSo':'qItens']='';pintar();return;}
     if(a==='editor'){solEditOpen=!solEditOpen;pintar();return;}
-    if(/^tipo:/.test(a)){P.solTipo=a.slice(5);pintar();return;}
+    if(/^so-modal:/.test(a)){P.soModal=a.slice(9);pintar();return;}if(/^tipo:/.test(a)){P.solTipo=a.slice(5);pintar();return;}
     if(/^gerir:/.test(a)){solEditOpen=true;var n=a.slice(6),brg=window.MutaProntuarioBridge;if(brg&&brg.abrirProcesso)brg.abrirProcesso(n);pintar();return;}
     if (/^sol:/.test(a)) { P.solFiltro=a.slice(4);pintar();return; }
     if (/^sol-abrir:/.test(a)) { var n=a.slice(10),brg=window.MutaProntuarioBridge;if(brg&&brg.abrirProcesso)brg.abrirProcesso(n);if(window.MutaAbas)window.MutaAbas.ir('pront');return; }
@@ -253,7 +253,7 @@
   document.addEventListener('change', function (e) {
     var t = e.target; if (!t || !t.closest || !t.closest('#pauta-app')) return;
     if(t.dataset.paFacet){P.filtros[t.dataset.paFacet]=t.value;pintar();return;}
-    if(t.getAttribute('data-pa')==='modalidade'){P.modalidade=t.value;pintar();return;}
+    if(t.getAttribute('data-pa')==='so-sessao'){P.soSessao=t.value;pintar();return;}if(t.getAttribute('data-pa')==='so-estado'){P.soEstado=t.value;pintar();return;}if(t.getAttribute('data-pa')==='modalidade'){P.modalidade=t.value;pintar();return;}
     if(t.getAttribute('data-pa')==='sol-estado'){P.solFiltro=t.value;pintar();return;}
     if (t.getAttribute('data-pa') === 'ses') { trocar(t.value); return; }
     if (t.getAttribute('data-pa-vi')) { vincular(t.getAttribute('data-pa-vi'), t.value); return; }

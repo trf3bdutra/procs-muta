@@ -333,3 +333,39 @@ html body.hero-redesign-v53 .hero-case-annotations .hero-ann-meta{display:block;
 html body.hero-redesign-v53 .hero-case-annotations .hero-ann-general-heading{font-size:11px;margin:5px 0 2px;padding:4px 6px;background:var(--hero-nav-subtabs,#f9f7f3)}
 html body.hero-redesign-v53 .hero-fixed-history>summary{font-size:10px;cursor:pointer;color:var(--cmt-muted)}
 html body.hero-redesign-v53 .hero-case-annotations .hero-ann-edit[hidden]{display:none!important}
+
+/* HERO: padrão de roteiro compartilhado, cabeçalho e faixa de estado como na referência. */
+html body.hero-redesign-v53 #gab :is(.hero-tri-with-dock,.hero-route-production) ol.rt>li.rt-f{display:flex;align-items:center;gap:6px;background:#e3ddcf!important;color:#574b39!important;border:1px solid #e3ddcf!important;border-radius:5px!important;letter-spacing:0!important;padding:8px!important;font:600 12px/1.3 var(--cmt-font,system-ui)!important}
+html body.hero-redesign-v53 #gab .rt-f>.rt-phase-count{margin-left:auto}
+html body.hero-redesign-v53 #gab .rt-phase-toggle{border:0;background:transparent;color:inherit;font:600 13px/1 system-ui;min-width:25px;min-height:23px;cursor:pointer}
+html body.hero-redesign-v53 #gab :is(.hero-tri-with-dock,.hero-route-production) .hero-route-step{--rs-head:#eaf2f8;--rs-body:#fff;--rs-edge:#d3e0eb;--rs-ink:#45647b}
+html body.hero-redesign-v53 #gab .hero-route-step.is-ok{--rs-head:#dce8db;--rs-body:#edf3eb;--rs-edge:#c7d6c4;--rs-ink:#356449}
+html body.hero-redesign-v53 #gab .hero-route-step.is-partial{--rs-head:#dce6ed;--rs-body:#edf2f6;--rs-edge:#c5d4df;--rs-ink:#375f7b}
+html body.hero-redesign-v53 #gab .hero-route-step.is-al{--rs-head:#f2e6c3;--rs-body:#fcf7e8;--rs-edge:#e6d4a5;--rs-ink:#89651f}
+html body.hero-redesign-v53 #gab :is(.hero-tri-with-dock,.hero-route-production) .hero-route-step>.rt-c{background:var(--rs-body)!important;border:1px solid var(--rs-edge)!important;border-radius:5px!important;overflow:hidden}
+html body.hero-redesign-v53 #gab :is(.hero-tri-with-dock,.hero-route-production) .hero-route-step>.rt-c>.rt-h{background:var(--rs-head)!important;padding:9px!important;min-height:34px;display:flex!important;justify-content:space-between;align-items:center}
+html body.hero-redesign-v53 #gab .hero-route-step .rt-h>b{font:600 12px/1.4 var(--cmt-font,system-ui)!important;color:#263b45!important}
+html body.hero-redesign-v53 #gab .hero-route-step .rt-step-strip{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 8px;padding:6px 9px;background:var(--rs-body);color:var(--rs-ink);font-size:11px;line-height:1.35}
+html body.hero-redesign-v53 #gab .hero-route-step .rt-step-strip .rt-step-state{display:inline!important;color:var(--rs-ink)!important;font:500 11px/1.35 var(--cmt-font,system-ui)!important}
+html body.hero-redesign-v53 #gab .hero-route-step .rt-step-strip .rt-step-state::before{display:none!important}
+html body.hero-redesign-v53 #gab :is(.hero-tri-with-dock,.hero-route-production) .hero-route-step>.rt-c>.rt-b{background:var(--rs-body)!important;border-top:1px solid var(--rs-edge)}
+html body.hero-redesign-v53 #gab .hero-route-step .rt-b :is(input,textarea,select){background:var(--cmt-paper,#fff)!important}
+html[data-tema=escuro] body.hero-redesign-v53 #gab .hero-route-step{--rs-head:color-mix(in srgb,var(--rs-ink) 35%,#20282d);--rs-body:#20282d;--rs-edge:#52616a;--rs-ink:#b5c9d7}
+html[data-tema=escuro] body.hero-redesign-v53 #gab .hero-route-step .rt-h>b{color:#e8ecee!important}
+html body.hero-redesign-v53 #gab ol.rt>li[hidden]{display:none!important}
+/* Pauta: mesmas faixas de busca, grupos e cartões com hierarquia explícita. */
+html body.hero-redesign-v53 #pauta-app .hero-pa-request-group,html body.hero-redesign-v53 #pauta-app .pa-sd>summary{display:flex;align-items:center;justify-content:space-between;background:var(--hero-nav-subtabs,#f9f7f3)!important;border:1px solid var(--cmt-line);border-radius:4px;padding:7px 8px!important;margin:8px 0 4px;font:600 11px/1.3 var(--cmt-font,system-ui)!important}
+html body.hero-redesign-v53 #pauta-app .hero-pa-request{--req-edge:#d8dfe5;--req-head:#edf3f7;border:1px solid var(--req-edge)!important;border-radius:5px!important;background:var(--hero-nav-white,#fff)!important;box-shadow:none!important;margin:5px 0!important;padding:0!important;overflow:hidden;min-width:0}
+html body.hero-redesign-v53 #pauta-app .hero-pa-request[data-request-state=pend]{--req-edge:#e4d3ad;--req-head:#f6edda}
+html body.hero-redesign-v53 #pauta-app .hero-pa-request[data-request-state=ok]{--req-edge:#c9daca;--req-head:#e5eee4}
+html body.hero-redesign-v53 #pauta-app .hero-pa-request[data-request-state=no]{--req-edge:#e2c6c0;--req-head:#f5e6e3}
+html body.hero-redesign-v53 #pauta-app .hero-pa-request .gx-h{background:var(--req-head);padding:7px 8px!important;display:flex;align-items:center;flex-wrap:wrap;gap:4px 6px;margin:0!important}
+html body.hero-redesign-v53 #pauta-app .hero-pa-request :is(.gx-m,.gx-tx,.gx-ob,.gx-ac,.pa-vinc,.gx-f,.gx-nota){margin:5px 8px!important;overflow-wrap:anywhere;min-width:0}
+html body.hero-redesign-v53 #pauta-app .hero-pa-request .gx-nota{width:calc(100% - 16px)!important}
+html body.hero-redesign-v53 #pauta-app .hero-pa-request .gx-m{font-size:11px;line-height:1.4}
+html body.hero-redesign-v53 #pauta-app .hero-pa-request .gx-tx{font-size:12px;line-height:1.45}
+html body.hero-redesign-v53 #pauta-app .pa-shared-card>.gx-it{padding:0!important}
+html body.hero-redesign-v53 #pauta-app .pa-so{padding:0!important;background:transparent!important;border:0!important}
+html body.hero-redesign-v53 #pauta-app .pa-sd>.gr{display:grid;grid-template-columns:minmax(0,1fr);gap:2px;padding:0 4px 5px}
+html body.hero-redesign-v53 #pauta-app .pa-session-head select{flex:1;min-width:0;max-width:100%;font-size:11px}
+html body.hero-redesign-v53 #pauta-app .pa-results-count{font-size:10px;padding:3px 6px}
