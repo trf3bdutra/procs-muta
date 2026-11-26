@@ -185,6 +185,9 @@ header.amicus-shell .amicus-brand,header#top #marca,header.top.nx .brand.tw{over
 @media(max-width:600px){header{--cmt-header-logo-size:36px}}
 
 /* Remove o grafismo de quatro braços das telas de acesso e carregamento; preserva o logotipo estático da entrada. */
-.cmtl-mark,.cmtl-mini,.cmtl-brand,.cmtl-local-brand,.cmtl-watermark,.cmt-load[data-cmt-loader="legacy"] .cmt-ld-mk{display:none!important;animation:none!important;transform:none!important}
+.cmtl-mini,.cmtl-local-brand,.cmtl-watermark{display:none!important;animation:none!important;transform:none!important}
+.cmtl-mark,.cmt-load[data-cmt-loader="legacy"] .cmt-ld-mk{display:grid!important;width:150px!important;height:auto!important;aspect-ratio:auto;border:0!important;border-radius:0!important;animation:none!important;transform:none!important}
+.cmtl-mark .cmtl-brand,.cmt-load[data-cmt-loader="legacy"] .cmt-ld-mk .cmtl-brand{display:block!important;width:150px!important;height:auto!important;animation:none!important;transform:none!important}
+.cmtl-auth-status .cmtl-brand,.cmt-entry-card button .cmtl-brand{display:none!important}
 .cmtl-full:before,.cmt-load[data-cmt-loader="legacy"]:before{background:none!important;mask-image:none!important;-webkit-mask-image:none!important}
 #entrada:not([hidden]),.cmt-entry{background:linear-gradient(110deg,#19452e,#153f3e 55%,#102d39)!important}
