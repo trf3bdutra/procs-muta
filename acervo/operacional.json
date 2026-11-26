@@ -6,7 +6,7 @@
   "arquivo": "acervo/fonte.json",
   "chave": "processo"
  },
- "atualizado_em": "2026-11-26T07:57:02.362Z",
+ "atualizado_em": "2026-11-26T15:35:02.150Z",
  "registros": [
   {
    "processo": "0000008-23.2025.4.03.6000",
@@ -332002,18 +332002,18 @@
   {
    "processo": "5008870-42.2023.4.03.6201",
    "origem": {
-    "Sentença - Decisão": "",
-    "Sentença - ID": "",
-    "Sentença - Honorários": "",
-    "Sentença - Custas": "",
-    "Sentença - Resultado": "",
-    "Sentença - Fundamento": "",
+    "Sentença - Decisão": "Outra",
+    "Sentença - ID": "377284402",
+    "Sentença - Honorários": "Sem honorários (sem citação)",
+    "Sentença - Custas": "Fica, também, dispensada do pagamento das custas processuais por ser beneficiária da Justiça Gratuita",
+    "Sentença - Resultado": "indeferiu a petição inicial e, consequentemente, extinguiu o feito sem resolução de mérito, nos termos dos artigos 534, 320, 321, p.ú. e 330, IV, do Código de Processo Civil",
+    "Sentença - Fundamento": "Vê-se, portanto, que a parte autora não trouxe aos autos os documentos determinados pelo Juízo e tidos por faltantes na certidão de Id. 364893723 (cuja leitura simples e breve denota faltar documento de identidade, número de CPF e comprovante de residência da parte autora) que se revelam indispensáveis à análise da…",
     "Sentença - Providências": "",
-    "Contrarrazões - Situação": "",
+    "Contrarrazões - Situação": "apresentadas",
     "Responsável": "",
     "Próxima ação": "",
     "Observações": "",
-    "atualizado_em": "2026-11-23T21:04:35.456Z",
+    "atualizado_em": "2026-11-26T15:35:02.150Z",
     "Origem - Juízo": "2ª Vara Federal de Campo Grande",
     "Origem - Documentos 1G": [
      {
@@ -332033,7 +332033,22 @@
      }
     ],
     "Sentença - Data": "07/05/2026",
-    "Origem - Julgador": "Rodrigo Vaslin Diniz"
+    "Origem - Julgador": "Rodrigo Vaslin Diniz",
+    "Recursos": [
+     {
+      "parte": "SAID ELIAS KESROUANI",
+      "ids": "377284404",
+      "data": "2026-05-18"
+     }
+    ],
+    "Contrarrazões": [
+     {
+      "parte": "União",
+      "ids": "377284407",
+      "data": "2026-05-29",
+      "pedidos": "negado provimento ao recurso de apelação e a condenação da parte recorrente nos ônus da sucumbência"
+     }
+    ]
    },
    "triagem": {
     "Urgência": "",
@@ -332043,27 +332058,27 @@
     "Urgência - Data": "",
     "Urgência - Painel": "",
     "Tempest - Publicação": "",
-    "Tempest - Protocolo": "",
-    "Tempest - Prazo legal": "",
+    "Tempest - Protocolo": "2026-05-18",
+    "Tempest - Prazo legal": "15",
     "Tempest - Dobro": "",
     "Tempest - Suspensões": "",
-    "Tipo de Julgamento": "",
+    "Tipo de Julgamento": "Apelação",
     "Hipóteses Monocrática": "",
-    "Tempestividade": "",
-    "Preparo": "",
-    "AJG": "",
+    "Tempestividade": "Tempestivo",
+    "Preparo": "Justiça gratuita",
+    "AJG": "Sim",
     "DPU (controle)": "",
-    "Representação": "",
-    "ID da Procuração": "",
+    "Representação": "Regular",
+    "ID da Procuração": "377284323",
     "Impedimento / Suspeição": "",
     "Observação do Impedimento": "",
     "Regularidade": "Representação ainda não verificada.",
     "Regularidade Manual": "",
     "Observação da Representação": "",
-    "MPF": "",
+    "MPF": "Com parecer",
     "MPF - Custos Legis": "",
-    "ID do Parecer MPF": "",
-    "Parecer - Sentido": "",
+    "ID do Parecer MPF": "382225219",
+    "Parecer - Sentido": "Prosseguimento do feito",
     "MPF - Info adicional": "",
     "Observação MPF": "",
     "Tema": "",
@@ -332078,8 +332093,17 @@
     "Alegações": "",
     "O que falta sanar": "",
     "Intercorrências": "",
-    "Síntese Processual": "",
-    "Especificidades": ""
+    "Síntese Processual": "Recurso contra sentença (ID 377284402) que julgou outra o pedido (indeferiu a petição inicial e, consequentemente, extinguiu o feito sem resolução de mérito, nos termos dos artigos 534, 320, 321, p.ú. e 330, IV, do Código de Processo Civil). Recorre SAID ELIAS KESROUANI.",
+    "Especificidades": "",
+    "MPF - Data": "2026-06-23",
+    "Procurações": [
+     {
+      "id": "377284323",
+      "data": "2023-07-04",
+      "validade": "Válida",
+      "advogados": "OAB/MS 2778-B · SORAIA KESROUANI (OAB/MS 5750-B) · OAB/MS 17.902"
+     }
+    ]
    },
    "producao": {
     "Destino": "",
