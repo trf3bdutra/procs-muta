@@ -24,22 +24,28 @@
 
   /* Reaproveita os botões reais e seus contadores, sem clonagem ou duplicação. */
   function gestaoNaFaixa(q){
-    var slot=$('tu-gestao'),faixa=$('pv-nav-main');if(!slot)return;
-    /* Gestão na faixa do perfil também na prévia universal. */
-    [['tab-pauta','Pauta'],['tab-dil','Diligências'],['tab-urg','Urgências'],['tab-del','Deliberações']].forEach(function(x){
-      var b=$(x[0]);if(!b)return;
-      if(b.parentNode!==slot)slot.appendChild(b);
+    var slot=$('tu-gestao'),faixa=$('pv-nav-main'),topo=$('topo-u'),aside=document.querySelector('.layout>aside>.nav');
+    if(!slot||!topo||!aside)return;
+    if(!faixa){faixa=document.createElement('div');faixa.id='pv-nav-main';faixa.className='pv-nav-row';}
+    faixa.setAttribute('role','tablist');faixa.setAttribute('aria-label','Ferramentas processuais');
+    if(faixa.parentNode!==topo)topo.appendChild(faixa);
+    ['tab-processo','tab-pront','tab-min','tab-acervo'].forEach(function(id){var b=$(id);if(b&&b.parentNode!==faixa)faixa.appendChild(b);});
+    var divisor=faixa.querySelector('.pv-nav-divider');if(divisor)divisor.remove();
+    if(slot.parentNode!==aside)aside.appendChild(slot);
+    [['tab-gab','Gabinete'],['tab-pauta','Pauta'],['tab-dil','Diligências'],['tab-urg','Urgências'],['tab-del','Deliberações']].forEach(function(x){
+      var b=$(x[0]);if(!b)return;if(b.parentNode!==slot)slot.appendChild(b);
       b.title=x[1];b.setAttribute('aria-label',x[1]);
     });
-    slot.hidden=!q.on; /* Pauta permanece acessível a toda a equipe autenticada. */
+    slot.hidden=!q.on;
+    document.body.classList.toggle('hero-gestao-rodape',q.on);
   }
 
   /* ---------- visibilidade das abas ---------- */
   function mostrar() {
-    var q = quem(), dil = $('tab-dil'), del = $('tab-del'), urg = $('tab-urg'), ctl = $('tab-ctl'), pa = $('tab-pauta');
+    var q = quem(), dil = $('tab-dil'), del = $('tab-del'), urg = $('tab-urg'), gab = $('tab-gab'), ctl = $('tab-ctl'), pa = $('tab-pauta');
     var ver = { dil: pode(q), del: pode(q), ctl: q.on && q.gestor, pauta: q.on };
     /* 0.58: Controle vira ícone na faixa do topo (gabinete.js › faixaUsuario); a aba fica escondida na barra */
-    [[dil, ver.dil], [del, ver.del], [urg, ver.del], [ctl, ver.ctl, true], [pa, ver.pauta]].forEach(function (p) {
+    [[dil, ver.dil], [del, ver.del], [urg, ver.del], [gab, ver.del], [ctl, ver.ctl, true], [pa, ver.pauta]].forEach(function (p) {
       if (!p[0]) return;
       p[0].hidden = !p[1] || !!p[2];
       if (!p[1] && p[0].getAttribute('aria-selected') === 'true' && window.MutaAbas) window.MutaAbas.ir('pront');
@@ -264,7 +270,21 @@
     var corpo='<section class="hero-cmt-gestion">'+metUrg+'</section>'+grupoDel('01 · Chegou',L.urg.filter(function(a){return !a.servidor&&!a.dataMinuta&&!a.assinado;}),itemUrg,'Nenhuma urgência sem responsável.','urgente')+grupoDel('02 · Em minuta',L.urg.filter(function(a){return !!a.servidor&&!a.dataMinuta&&!a.assinado;}),itemUrg,'Nenhuma urgência em minuta.','urgente')+grupoDel('03 · Revisão e assinatura',L.urg.filter(function(a){return !!(a.dataMinuta||a.assinado);}),itemUrg,'Nenhuma urgência em revisão.','urgente')+grupoDel('Para assinatura',L.as,itemAs,'Nenhuma decisão urgente submetida à assinatura.','urgente');
     c.innerHTML='<div class="gx-top"><div><b>Urgências</b><small class="muted">Providências em aberto · '+esc(X.dados&&X.dados.hoje?data(X.dados.hoje):'')+'</small></div><button type="button" class="lnk" data-gx="ler-del">'+(X.lendo?'lendo…':'atualizar')+'</button></div>'+(X.msg?'<p class="gx-msg">'+esc(X.msg)+'</p>':'')+(X.erro?'<p class="gx-v err">'+esc(X.erro)+'</p>':!X.dados?'<p class="muted gx-v">Lendo…</p>':corpo);
   }
-  function pintarGestao(){pintarDel();pintarUrg();}
+  function pintarGab(){
+    var c=$('gab-app');if(!c)return;if(!pode(quem())){c.textContent='Acesso restrito ao Desembargador e ao gestor.';return;}
+    var j=X.dados||{},hj=j.hoje||hoje();
+    function sec(t,arr,render){return '<section class="hero-gx-group"><header><b>'+esc(t)+'</b><small>'+arr.length+'</small></header>'+(arr.length?arr.map(render).join(''):'<p class="muted gx-v">Nenhum registro.</p>')+'</section>';}
+    var sessoes=(j.agenda||[]).filter(function(a){return a.date>=hj;}).slice(0,5);
+    var nomes={pautarAte:'Peço dia',inicioPreparacao:'Preparação',entregaMinutas:'Minutas',liberacao:'Liberação'};
+    var agenda=sec('Próximas sessões',sessoes,function(a){return '<article class="gx-it"><div class="gx-h"><b>'+esc(data(a.date))+'</b><span class="gx-c">'+esc(a.hora||'')+'</span><span class="gx-c">'+esc(a.publicada?'Publicada':'Marcos')+'</span></div><p class="gx-m">'+esc(a.processos||0)+' processos</p><div class="hero-gab-marcos">'+Object.keys(nomes).filter(function(k){return (a.marcos||{})[k];}).map(function(k){return '<span>'+esc(nomes[k])+' <b>'+esc(data(a.marcos[k]))+'</b></span>';}).join('')+'</div></article>';});
+    var prazos=sec('Próximos marcos',(j.prazos||[]).slice(0,12),function(a){return '<article class="gx-it"><div class="gx-h"><b>'+esc(a.marco)+'</b><span class="gx-c">'+esc(data(a.data))+'</span></div><p class="gx-m">Sessão '+esc(data(a.sessao))+'</p></article>';});
+    var eq=Array.isArray(j.equipe)?j.equipe:[];
+    var equipe=sec('Produção da equipe',eq,function(a){return '<article class="gx-it"><div class="gx-h"><b>'+esc(a.nome)+'</b></div><p class="gx-m">Minutas '+esc(a.minutasFeitas||0)+' / '+esc(a.minutas||0)+' · Correções '+esc(a.correcoesFeitas||0)+' / '+esc(a.correcoes||0)+'</p></article>';});
+    var aus=sec('Ausências pendentes',j.ausencias||[],function(a){return '<article class="gx-it"><div class="gx-h"><b>'+esc(a.nome)+'</b><span class="gx-c">'+esc(a.tipo)+'</span></div><p class="gx-m">'+esc(data(a.de))+' — '+esc(data(a.ate))+'</p></article>';});
+    var comunicados=sec('Comunicados',j.comunicados||[],function(a){return '<article class="gx-it"><b>'+esc(a.titulo||'Comunicado')+'</b><p class="gx-tx">'+esc(a.texto||'')+'</p></article>';});
+    c.innerHTML='<div class="gx-top"><div><b>Gabinete</b><small>Calendário, equipe e comunicados</small></div><button type="button" class="lnk" data-gx="ler-del">Atualizar</button></div>'+(X.erro?'<p class="gx-v err">'+esc(X.erro)+'</p>':!X.dados?'<p class="muted gx-v">Lendo…</p>':agenda+prazos+equipe+aus+comunicados);
+  }
+  function pintarGestao(){pintarDel();pintarUrg();pintarGab();}
   function post(corpo) { return ses.api('/api/painel?cmt=1', { method: 'POST', body: JSON.stringify(Object.assign({ origem: 'extensao' }, corpo)) }); }
   /* observação gravada na pauta junto com a situação, como no painel /cmt (cmtNotaSit) */
   function notaSit(p) {
@@ -317,7 +337,7 @@
   /* ---------- eventos ---------- */
   function copiar(x) { var t = x.getAttribute('data-gx-copia'); try { navigator.clipboard.writeText(t).then(function () { var o = x.textContent; x.textContent = 'Copiado'; setTimeout(function () { x.textContent = o; }, 1000); }); } catch (e) {} }
   function ligar() {
-    var cd = $('dil-app'), cu=$('urg-app'), cx = $('del-app');
+    var cd = $('dil-app'), cu=$('urg-app'), cg=$('gab-app'), cx = $('del-app');
     if (cd) {
       cd.addEventListener('click', function (e) {
         var x = e.target.closest('button'); if (!x) return;
@@ -345,7 +365,7 @@
         var k = f.getAttribute('data-gx-form'); if (k === 'nova') criar(f); else if (k === 'editar') editar(f); else if (k === 'dresp') responderDil(f);
       });
     }
-    [cx,cu].filter(Boolean).forEach(function(cx){
+    [cx,cu,cg].filter(Boolean).forEach(function(cx){
       cx.addEventListener('click', function (e) {
         var x = e.target.closest('button'); if (!x) return;
         if (x.hasAttribute('data-gx-copia')) return copiar(x);
@@ -366,11 +386,11 @@
       });
     });
     /* teclas digitadas nas abas não chegam a atalhos do painel */
-    [cd, cx, cu].forEach(function (el) { if (el) el.addEventListener('keydown', function (e) { e.stopPropagation(); }); });
+    [cd, cx, cu, cg].forEach(function (el) { if (el) el.addEventListener('keydown', function (e) { e.stopPropagation(); }); });
   }
   function abrir(n) {
     if (n === 'dil') { pintarDil(); lerDil(); }
-    if (n === 'del'||n==='urg') { pintarGestao(); lerDel(); }
+    if (n === 'del'||n==='urg'||n==='gab') { pintarGestao(); lerDel(); }
   }
   function iniciar() {
     ligar(); mostrar();
