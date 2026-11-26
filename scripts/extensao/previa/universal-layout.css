@@ -1446,3 +1446,21 @@ html body.hero-redesign-v53 #gab .hero-route-overview-body{background:var(--rout
 html body.hero-redesign-v53 #gab .hero-route-overview-body>.hero-route-intro{padding:6px 10px 0;margin:0;font-size:10px;line-height:1.35}
 html body.hero-redesign-v53 #gab :is(.hero-tri-with-dock,.hero-production-route) .hero-route-overview .hero-route-tools{margin:0!important;padding:7px 8px!important;border:0!important;border-top:1px solid var(--route-rule)!important;background:transparent}
 html body.hero-redesign-v53 #gab :is(.hero-tri-with-dock,.hero-production-route) .hero-route-overview .hero-route-metrics{border-top:0!important}
+
+/* Pauta · buscador autônomo acima dos indicadores e dos resultados. */
+html body.hero-redesign-v53 #pauta-app>.pa-busca.hero-rep-search{margin:0 0 9px!important;min-width:0;align-self:stretch;width:auto!important;position:sticky;top:0;z-index:4}
+html body.hero-redesign-v53 #pauta-app>.hero-pa-overview{min-width:0;margin:0 0 9px;display:grid;gap:5px}
+html body.hero-redesign-v53 #pauta-app>.hero-pa-results{background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;margin:0!important;padding:0!important;min-width:0}
+html body.hero-redesign-v53 #pauta-app>.hero-pa-results>.pa-l{margin:0!important;padding:0!important}
+html body.hero-redesign-v53 #pauta-app>.hero-pa-results>.muted{padding:5px 2px}
+html body.hero-redesign-v53 #pauta-app>.pa-busca .hero-rep-query{display:flex!important;align-items:center;flex-wrap:nowrap!important;width:100%;box-sizing:border-box}
+html body.hero-redesign-v53 #pauta-app>.pa-busca .hero-rep-query>input{flex:1 1 0;min-width:0;width:0!important}
+/* Corretor · dois modos exclusivos da mesma aba, sem ocultar os originais por colapso. */
+html body.hero-redesign-v53 #panel-min #cmp-app .hero-review-view-tabs{display:flex!important;gap:0!important;min-width:0;margin:0 0 8px!important;padding:0!important;border:1px solid var(--hero-pront-divider,var(--line));border-radius:4px;background:var(--hero-pront-paper,#fff);overflow:hidden}
+html body.hero-redesign-v53 #panel-min #cmp-app .hero-review-view-tabs>button{flex:1;min-width:0;font:600 11px/1.4 var(--sans,system-ui);padding:7px 8px;border:0;background:transparent;color:var(--fg);border-radius:0}
+html body.hero-redesign-v53 #panel-min #cmp-app .hero-review-view-tabs>button+button{border-left:1px solid var(--hero-pront-divider,var(--line))}
+html body.hero-redesign-v53 #panel-min #cmp-app .hero-review-view-tabs>button[aria-selected=true]{background:var(--hero-pront-header,#f3f0e7);box-shadow:inset 0 -2px var(--gold,#947333)}
+html body.hero-redesign-v53 #panel-min #cmp-app .hero-review-view-tabs>button:disabled{opacity:.45;cursor:not-allowed}
+html body.hero-redesign-v53 #panel-min #cmp-app .hero-review-workspace>:is(.hero-review-documents,.hero-review-comparison)[hidden]{display:none!important}
+html body.hero-redesign-v53 #panel-min #cmp-app .hero-review-workspace.is-comparing .hero-review-comparison{width:100%!important;min-width:0}
+html body.hero-redesign-v53 #panel-min #cmp-app .hero-review-workspace.is-comparing .hero-review-comparison :is(.folha,.cx-out){max-height:70dvh}
