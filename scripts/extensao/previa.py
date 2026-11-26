@@ -68,7 +68,7 @@ def montar_universal(painel: pathlib.Path) -> str:
     if not nav:
         sys.exit('painel.html: navegador principal não encontrado')
     itens = {m.group(1): m.group(0) for m in re.finditer(r'<button\b[^>]*\bid="tab-([^"]+)"[^>]*>[\s\S]*?</button>', nav.group(2))}
-    ferramentas = ('acervo', 'gab', 'pauta', 'dil', 'urg', 'del')
+    ferramentas = ('acervo', 'pauta', 'dil', 'urg', 'del')
     processo = ('processo', 'pront', 'min')
     if not all(k in itens for k in ferramentas + processo):
         sys.exit('painel.html: abas principais da prévia não encontradas')
