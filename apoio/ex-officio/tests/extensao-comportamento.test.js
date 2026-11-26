@@ -249,8 +249,8 @@ test('universal v53: quatro subabas, sinalizações na barra, cinco páginas no 
     await pg.waitForSelector('.hero-steps.hero-steps-mon>#hero-dock-pane-monitoramento');
     await pg.click('.hero-v53-dock-tabs [data-hero-dock=""]');
     assert.deepEqual(v.abas, ['Processo', 'Prontuário', 'Corretor', 'Repertório'], 'faixa principal sem gestão duplicada');
-    for (const [id, nome] of [['tab-pauta', 'Pauta'], ['tab-dil', 'Diligências'], ['tab-del', 'Deliberações']]) {
-      const seletor = '#tu-gestao #' + id;
+    for (const [id, nome] of [['tab-gab','Gabinete'], ['tab-pauta', 'Pauta'], ['tab-dil', 'Diligências'], ['tab-urg','Urgências'], ['tab-del', 'Deliberações']]) {
+      const seletor = '.layout>aside #tu-gestao #' + id;
       await pg.waitForSelector(seletor, { state: 'visible', timeout: 15000 });
       assert.equal(await pg.locator(seletor).getAttribute('aria-label'), nome);
       assert.equal(await pg.locator('#' + id).count(), 1, nome + ' sem duplicação');
@@ -439,14 +439,14 @@ test('universal 0.76: Pauta sem título duplicado, marcos externos e filtros seg
     await pg.waitForSelector('#pauta-app .pa-f .chip', { timeout: 15000 });
     const v = await pg.evaluate(() => {
       const t = document.querySelector('#pauta-app .pa-titulo'), c = document.querySelector('#pauta-app .pa-busca .pa-f .chip'), cs = getComputedStyle(c);
-      return { titulo: !!t, marcosDentro: !!document.querySelector('#pauta-app .pa-ses .pa-marcos'), indicadoresDentro: !!document.querySelector('#pauta-app .pa-ses .hero-v53-pa-metrics'), raio: cs.borderTopLeftRadius + '|' + cs.borderTopRightRadius, borda: cs.borderTopWidth, metr: [...document.querySelectorAll('#pauta-app .hero-v53-pa-metric b')].map(b => b.textContent) };
+      return { titulo: !!t, marcosDentro: !!document.querySelector('#pauta-app .pa-ses .pa-marcos'), indicadoresDentro: !!document.querySelector('#pauta-app .pa-ses .hero-cmt-pauta-metrics'), raio: cs.borderTopLeftRadius + '|' + cs.borderTopRightRadius, borda: cs.borderTopWidth, metr: [...document.querySelectorAll('#pauta-app .hero-cmt-pauta-metrics b')].map(b => b.textContent) };
     });
     assert.equal(v.titulo, false, 'sem título redundante');
     assert.equal(v.marcosDentro, false, 'marcos fora do card');
     assert.equal(v.indicadoresDentro, false, 'indicadores fora do card');
     assert.equal(v.borda, '1px', 'filtros com borda fina, sem a pílula de contorno grosso');
     assert.notEqual(v.raio, '9999px|9999px');
-    assert.deepEqual(v.metr, ['1 de 1', '1 de 1', '0 de 1', '0 de 1']);
+    assert.equal(v.metr.length,6); assert.equal(v.metr[0],'1'); assert.equal(Number(v.metr[1])+Number(v.metr[4]),Number(v.metr[0]));
     assert.deepEqual(P.erros, [], 'sem erro de script');
   } finally { await P.fim(); }
 });
@@ -507,13 +507,17 @@ test('HERO: Processo e Prontuário compartilham a ficha; Pauta recebe Sustentaç
     await pg.evaluate(()=>window.MutaGabinete.ir('Autos'));
     assert.equal(await pg.locator('#tab-processo').getAttribute('aria-selected'),'true');
     assert.equal(await pg.locator('#panel-pront').getAttribute('aria-labelledby'),'tab-processo');
-    for(const id of ['tab-pauta','tab-dil','tab-del']) assert.equal(await pg.locator('#tu-gestao #'+id).count(),1);
+    for(const id of ['tab-gab','tab-pauta','tab-dil','tab-urg','tab-del']) assert.equal(await pg.locator('#tu-gestao #'+id).count(),1);
     await pg.click('#tab-pauta');
     await pg.click('[data-pa="aba:so"]');
     await pg.waitForSelector('#pauta-app .pa-so .pa-ped');
     assert.match(await pg.locator('#pauta-app .pa-so').innerText(),/Presencial/);
     await pg.click('#tab-del');
-    assert.equal(await pg.locator('#del-app [data-gx-a="so"]').count(),0);
+    assert.equal(await pg.locator('#del-app [data-gx-a="so"],#del-app [data-gx-a="as"]').count(),0);
+    assert.equal(await pg.locator('#topo-u>#pv-nav-main>button:not([hidden])').count(),4);
+    assert.equal(await pg.locator('.layout>aside #tu-gestao>button:not([hidden])').count(),5);
+    await pg.click('#tab-urg'); await pg.waitForSelector('#panel-urg:not([hidden])');
+    await pg.click('#tab-gab'); await pg.waitForSelector('#panel-gab:not([hidden])');
     assert.deepEqual(P.erros,[]);
   } finally {await P.fim();}
 });
