@@ -638,3 +638,9 @@ html body.hero-redesign-v53 #gab .hero-tr-meta-edit :is(select,input){min-width:
 html body.hero-redesign-v53 #gab .hero-tr-meta{display:flex;flex-wrap:wrap;gap:4px 9px;border-top:1px solid var(--cmt-line,#ded5c4);padding-top:4px;font-size:10px}
 html body.hero-redesign-v53 #gab .hero-tr-overdue{color:var(--danger,#a13a32);font-weight:650}
 @media(max-width:360px){html body.hero-redesign-v53 #gab .hero-acomp-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* 0.77.55 · tema escuro: as faixas do Resumo (--sum-*) e as faixas de fase dos roteiros (li.rt-f) tinham fundo claro fixo, com texto claro por cima (contraste 1,0–1,7:1). */
+html[data-tema=escuro] body.hero-redesign-v53 #gab,html[data-tema=escuro] body.hero-redesign-v53 #gab .hero-top-page:has(>.hero-first-panel){--sum-head:#1e3342;--sum-sub:#16303e;--sum-edge:#2b4c63;--sum-paper:var(--card,#112737)}
+html[data-tema=escuro] body.hero-redesign-v53 #gab :is(.hero-tri-with-dock,.hero-route-production) ol.rt>li.rt-f{background:#2a2716!important;border-color:#4a4226!important;color:#e6c27a!important}
+html[data-tema=escuro] body.hero-redesign-v53 #gab :is(.hero-tri-with-dock,.hero-route-production) ol.rt>li.rt-f :is(span,b,.rt-phase-count){color:inherit!important}
+html[data-tema=escuro] body.hero-redesign-v53 #gab :is(.hero-tri-with-dock,.hero-route-production) ol.rt>li.rt-f .rt-phase-count{opacity:.8}

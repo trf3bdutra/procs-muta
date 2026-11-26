@@ -1,9 +1,9 @@
-/* Muta · tema do painel (0.14): escuro por padrão, nas cores do Ex Officio escuro; o botão ◐ alterna e a escolha fica neste navegador.
+/* Muta · tema do painel: claro por padrão desde 0.77.55 (antes escuro); o escuro segue nas cores do Ex Officio escuro; o botão ◐ alterna e a escolha fica neste navegador.
    Carregado no <head> para o painel já abrir no tema certo. */
 (function () {
   'use strict';
   var K = 'muta-pje:tema', h = document.documentElement;
-  function ler() { try { return localStorage.getItem(K) || 'escuro'; } catch (e) { return 'escuro'; } }
+  function ler() { try { return localStorage.getItem(K) || 'claro'; } catch (e) { return 'claro'; } }
   function aplicar(t) { h.dataset.tema = t; var b = document.getElementById('pje-tema'); if (b) b.title = t === 'escuro' ? 'Tema claro' : 'Tema escuro'; }
   aplicar(ler());
   document.addEventListener('DOMContentLoaded', function () {

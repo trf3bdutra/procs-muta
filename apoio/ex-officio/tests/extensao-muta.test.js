@@ -118,11 +118,18 @@ test('extensão 0.13: Roteiro por tipo de julgamento usa campos que existem na f
   assert.ok(html.includes('src="roteiro.js"')); assert.match(gab, /'Roteiro'/);
 });
 
-test('extensão 0.14: tema escuro por padrão, carregado no <head>, com botão para o claro', () => {
+test('extensão 0.77.55: tema claro por padrão (escuro pelo botão), carregado no <head>', () => {
   const html = read('extensao/painel.html'), css = read('extensao/painel.css'), tema = read('extensao/tema.js');
   assert.ok(html.indexOf('src="tema.js"') < html.indexOf('</head>'), 'tema.js no head');
   assert.ok(html.includes('id="pje-tema"'));
   assert.match(css, /html\[data-tema=escuro\]\{/); assert.match(tema, /'escuro'/);
+  assert.match(tema, /getItem\(K\) \|\| 'claro'/, 'sem escolha salva, abre no claro');
+});
+
+test('extensão 0.77.55: no escuro, as faixas do Resumo e as fases dos roteiros não ficam com fundo claro fixo', () => {
+  const css = read('extensao/hero-design.css');
+  assert.match(css, /html\[data-tema=escuro\][^{]*#gab[^{]*\{--sum-head:#1e3342;--sum-sub:#16303e/, 'faixas do Resumo com versão escura');
+  assert.match(css, /html\[data-tema=escuro\][^{]*ol\.rt>li\.rt-f\{background:#2a2716!important/, 'faixa de fase com versão escura');
 });
 
 test('extensão 0.15: cabeçalho no formato da gaveta da pauta (etapas, designação), sinalizações e notas em log nos campos da ficha', () => {
