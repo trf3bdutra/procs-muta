@@ -288,6 +288,21 @@ test('arquitetura HERO: ZIP, prévia e web partem da mesma interface canônica',
       assert.equal(ler(pac, nome), ler(pn, nome), nome + ': conteúdo idêntico nos ambientes');
     }
     assert.equal(ler(pac, 'roteiro-universal.js'), ler(pac, 'roteiro.js'));
+    // O mesmo Design System controla a navegação em todos os ambientes.
+    const ds = ler(pac, 'hero-design.css');
+    assert.equal(ds, ler(pn, 'hero-design.css'));
+    assert.equal(ds, ler(path.join(ROOT,'extensao'), 'hero-design.css'));
+    for (const html of [instalada,demo,web]) {
+      const css=[...html.matchAll(/<link rel="stylesheet" href="([^"]+)"/g)].map(m=>m[1]);
+      assert.equal(css.filter(n=>n==='hero-design.css').length,1);
+      assert.ok(css.indexOf('hero-design.css')>css.indexOf('universal-layout.css'));
+    }
+    assert.match(ds,/--hero-nav-white:#fff/);
+    assert.match(ds,/--hero-nav-cream:#f3efe6/);
+    assert.match(ds,/hero-header-utilities/);
+    for (const nome of ['painel.css','universal-layout.css']) {
+      assert.doesNotMatch(ler(pac,nome),/HERO · cabeçalho em uma linha:/,'sem duplicação da camada de navegação');
+    }
     for (const nome of scriptsHtml(instalada)) assert.ok(fs.existsSync(path.join(pac, nome)), 'script ausente no ZIP: ' + nome);
     for (const nome of ['gabinete-universal.js','roteiro-universal.js','universal-ajustes.js']) new Function(ler(pac,nome));
   } finally {
