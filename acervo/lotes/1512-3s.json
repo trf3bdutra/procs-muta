@@ -2765,11 +2765,11 @@
    "assunto": "Professor",
    "assunto_detalhado": "",
    "grupo": "assunto-24",
-   "tipo_caso": "Professor",
-   "resultado": "",
+   "tipo_caso": "Aposentadoria de professor · procedência · apelação do INSS (consectários)",
+   "resultado": "Proposta: [VALIDAR] apelação do INSS sobre os consectários (SELIC pela EC 113/2021 até 08/2025 e artigo 406 do CC após a EC 136/2025); contrarrazões do autor [VALIDAR: autos do TJMS: conferir se a apelação impugna também o mérito]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença procedente: magistério de 1999 a 2025 e aposentadoria de professor com renda de 100% (ID 358556409); apelação do INSS (ID 358556420).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -2778,15 +2778,35 @@
     "correcao": "Alexander",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
+   "pecas": [
+    {
+     "peca": "Embargos de declaração",
+     "id": "395300453"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "385962444"
+    }
+   ],
+   "mpf": "parecer ID 385962444 (13/07/2026)",
    "triagem": {
     "prontidao": "CONFERIR | conferir: autos do TJMS sem peças tipadas: prontidão não verificável automaticamente",
-    "prontidao_em": "26/11/2026"
+    "prontidao_em": "26/11/2026",
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Previdenciário — benefício (competência delegada, autos do TJMS)",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "[VALIDAR]",
+    "recurso": "embargos de declaração (ID 395300453, 02/09/2026)",
+    "preparo": "[VALIDAR]",
+    "representacao": "[VALIDAR]",
+    "mpf": "parecer ID 385962444 (13/07/2026)",
+    "autos": "78 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
    },
    "ajustes": [],
    "pendencias": [
-    "[PRONTIDÃO · conferir] autos do TJMS sem peças tipadas: prontidão não verificável automaticamente"
+    "[VALIDAR] autos do TJMS: conferir se a apelação impugna também o mérito"
    ],
    "minuta": false
   },
@@ -2801,11 +2821,11 @@
    "assunto": "Curso de Formação",
    "assunto_detalhado": "",
    "grupo": "assunto-20",
-   "tipo_caso": "Curso de Formação",
-   "resultado": "",
+   "tipo_caso": "Servidor militar/curso de formação · embargos de declaração contra acórdão",
+   "resultado": "Proposta: [VALIDAR] embargos de declaração do autor (ID 395543183) contra o acórdão de 27/08/2026 que deu provimento à apelação da União (devolução de valores recebidos por decisão precária); alega omissão no controle de legalidade do parecer da CPG [VALIDAR: contrarrazões aos embargos (artigo 1.023, § 2º, do CPC) se houver efeito modificativo]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Acórdão (ID 393947021).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -2814,14 +2834,36 @@
     "correcao": "Vanilda",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
+   "pecas": [
+    {
+     "peca": "Decisão recorrida",
+     "id": "393947021"
+    },
+    {
+     "peca": "Embargos de declaração",
+     "id": "395543183"
+    }
+   ],
+   "mpf": "Não consta parecer",
    "triagem": {
     "prontidao": "APTO",
-    "prontidao_em": "26/11/2026"
+    "prontidao_em": "26/11/2026",
+    "ato": "Embargos de declaração (voto)",
+    "materia": "Administrativo — militar, curso de formação",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Decisão ID 393947021 (27/08/2026)",
+    "recurso": "embargos de declaração (ID 395543183, 03/09/2026)",
+    "preparo": "[VALIDAR]",
+    "representacao": "[VALIDAR]",
+    "mpf": "Não consta parecer",
+    "autos": "32 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
    },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] contrarrazões aos embargos (artigo 1.023, § 2º, do CPC) se houver efeito modificativo"
+   ],
    "minuta": false
   },
   {
@@ -2835,11 +2877,11 @@
    "assunto": "Pensão por Morte (Art. 74/9)",
    "assunto_detalhado": "",
    "grupo": "assunto-7",
-   "tipo_caso": "Pensão por Morte (Art. 74/9)",
-   "resultado": "",
+   "tipo_caso": "Benefício previdenciário · procedência · apelação do INSS",
+   "resultado": "Proposta: [VALIDAR] apelação do INSS (revogação da tutela, prescrição e consectários) contra a concessão do benefício [VALIDAR: autos do TJMS: espécie do benefício]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença procedente (ID 333266392); apelação do INSS (ID 333266453); contrarrazões (ID 333266459).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -2848,15 +2890,31 @@
     "correcao": "Alexander",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
+   "pecas": [
+    {
+     "peca": "Embargos de declaração",
+     "id": "393059582"
+    }
+   ],
+   "mpf": "Não consta parecer",
    "triagem": {
     "prontidao": "CONFERIR | conferir: autos do TJMS sem peças tipadas: prontidão não verificável automaticamente",
-    "prontidao_em": "26/11/2026"
+    "prontidao_em": "26/11/2026",
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Previdenciário — benefício (competência delegada, autos do TJMS)",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "[VALIDAR]",
+    "recurso": "embargos de declaração (ID 393059582, 21/08/2026)",
+    "preparo": "[VALIDAR]",
+    "representacao": "[VALIDAR]",
+    "mpf": "Não consta parecer",
+    "autos": "96 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
    },
    "ajustes": [],
    "pendencias": [
-    "[PRONTIDÃO · conferir] autos do TJMS sem peças tipadas: prontidão não verificável automaticamente"
+    "[VALIDAR] autos do TJMS: espécie do benefício"
    ],
    "minuta": false
   }
