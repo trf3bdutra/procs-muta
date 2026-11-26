@@ -592,11 +592,11 @@
    "assunto": "Multas e demais Sanções",
    "assunto_detalhado": "",
    "grupo": "assunto-1",
-   "tipo_caso": "Multas e demais Sanções",
-   "resultado": "",
+   "tipo_caso": "Execução fiscal da ANS extinta (artigo 26 da LEF) · honorários",
+   "resultado": "Proposta: negar provimento à apelação da ANS [VALIDAR paradigma]: extinção após embargos gera honorários contra a exequente (Súmula 153/STJ), sem equidade quando o valor não é irrisório (Tema 1.076/STJ) [VALIDAR: valor da causa; Tema 1.229/STJ (honorários e artigo 26 da LEF)]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença extinguiu a execução fiscal (artigo 26 da Lei 6.830/1980); nos embargos de declaração, condenou a ANS em honorários de 10% do valor da causa (ID 324969137); apelação pede fixação por equidade.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -605,11 +605,43 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "324969133"
+    },
+    {
+     "peca": "Embargos de declaração",
+     "id": "324969134"
+    },
+    {
+     "peca": "Apelação",
+     "id": "324969138"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "324969140"
+    }
+   ],
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Tributário/processual — execução fiscal, honorários",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 324969133 (02/06/2023)",
+    "recurso": "embargos de declaração (ID 324969134, 25/09/2023); apelação (ID 324969138, 23/09/2024)",
+    "preparo": "[VALIDAR]",
+    "representacao": "[VALIDAR]",
+    "mpf": "Não consta parecer",
+    "autos": "43 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] valor da causa",
+    "[VALIDAR] Tema 1.229/STJ (honorários e artigo 26 da LEF)"
+   ],
    "minuta": false
   },
   {
