@@ -2279,9 +2279,45 @@ html body.hero-redesign-v53 #topo-u .hero-cmt-brand{grid-row:1!important;grid-co
 html body.hero-redesign-v53 #topo-u>#pv-nav-main{grid-row:1!important;grid-column:2!important}
 @media(max-width:440px){
  html body.hero-redesign-v53 #topo-u:not([hidden]){grid-template-columns:auto minmax(0,1fr) auto!important}
- html body.hero-redesign-v53 #topo-u>#pv-nav-main{grid-column:2/-1!important}
- html body.hero-redesign-v53 #topo-u .hero-header-utilities{grid-row:2!important;grid-column:3!important;padding:2px 4px!important}
- html body.hero-redesign-v53 #topo-u #tu-pje-slot{grid-column:1!important}
- html body.hero-redesign-v53 #topo-u>.tu-st:not([hidden]){grid-column:2!important;justify-self:start!important;margin:0!important}
+ html body.hero-redesign-v53 #topo-u>#pv-nav-main{grid-column:2!important}
+ html body.hero-redesign-v53 #topo-u .hero-header-utilities{grid-row:1!important;grid-column:3!important}
+ html body.hero-redesign-v53 #topo-u #tu-pje-slot{grid-column:1/3!important}
+ html body.hero-redesign-v53 #topo-u>.tu-st:not([hidden]){grid-column:3!important;justify-self:end!important;margin:0!important}
  html body.hero-redesign-v53 #topo-u>#pv-nav-main>button{padding-inline:2px!important}
+}
+
+/* Utilidades e perfil: uma única pill, sempre ao lado do título e das abas. */
+html body.hero-redesign-v53 #topo-u .hero-header-utilities{
+ grid-row:1!important;grid-column:3!important;justify-self:end!important;
+ display:flex!important;flex-wrap:nowrap;align-items:center!important;gap:2px!important;
+ width:max-content;max-width:none;min-width:max-content;min-height:30px;
+ margin:3px 5px 3px 0!important;padding:2px 4px!important;
+ border:1px solid var(--cmt-line)!important;border-radius:999px!important;
+ background:var(--hero-nav-white)!important;box-shadow:none!important;
+}
+html body.hero-redesign-v53 #topo-u .hero-header-utilities>[data-tema-tu],
+html body.hero-redesign-v53 #topo-u .hero-header-utilities>#pv-ajustes:not([hidden]){
+ display:grid!important;flex:0 0 21px!important;width:21px!important;min-width:21px!important;
+ height:23px!important;min-height:23px!important;padding:0!important;
+ border:0!important;border-radius:50%!important;background:transparent!important;
+}
+html body.hero-redesign-v53 #topo-u .hero-header-utilities>#tu-sino{
+ flex:0 0 auto!important;min-width:max-content;min-height:23px!important;
+ padding:0 2px 0 4px!important;margin:0!important;border:0!important;
+ border-left:1px solid var(--cmt-line)!important;border-radius:0!important;gap:3px!important;
+ background:transparent!important;overflow:visible!important;
+}
+html body.hero-redesign-v53 #topo-u .hero-header-utilities>#tu-sino>.tu-av{
+ display:grid!important;place-items:center;flex:none;width:22px!important;height:22px!important;border-radius:50%!important;
+}
+html body.hero-redesign-v53 #topo-u .hero-header-utilities>#tu-sino .tu-profile-count{flex:none}
+@media(min-width:541px){
+ html body.hero-redesign-v53 #topo-u .hero-header-utilities>#tu-sino .tu-profile-name{display:block!important;max-width:86px}
+}
+@media(max-width:540px){
+ html body.hero-redesign-v53 #topo-u .hero-header-utilities{gap:1px!important;padding:1px 3px!important;margin-right:3px!important}
+ html body.hero-redesign-v53 #topo-u .hero-header-utilities>#tu-sino:has(.tu-av) .tu-profile-name{display:none!important}
+ html body.hero-redesign-v53 #topo-u .hero-header-utilities>#tu-sino>.tu-av{width:20px!important;height:20px!important}
+ html body.hero-redesign-v53 #topo-u .hero-header-utilities>[data-tema-tu],
+ html body.hero-redesign-v53 #topo-u .hero-header-utilities>#pv-ajustes:not([hidden]){flex-basis:19px!important;width:19px!important;min-width:19px!important}
 }
