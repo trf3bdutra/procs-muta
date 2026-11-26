@@ -1281,3 +1281,9 @@ html body.hero-redesign-v53 :is(#panel-acervo,#panel-par,#panel-modelos) .hero-r
  box-sizing:border-box;align-self:stretch!important;width:100%!important;min-width:0!important;margin:0!important;padding:6px 9px!important;text-align:left!important
 }
 @media(max-width:330px){html body.hero-redesign-v53 :is(#panel-acervo,#panel-par,#panel-modelos) .hero-rep-search .hero-rep-query{grid-template-columns:minmax(0,1fr) 32px 32px}html body.hero-redesign-v53 :is(#panel-acervo,#panel-par,#panel-modelos) .hero-rep-query .tu-b{width:32px!important}}
+
+/* Caso, conteúdo, questões e etiquetas: seção plana branca, sem card. */
+html body.hero-redesign-v53 #gab .hero-profile-context,html body.hero-redesign-v53 #gab .hero-profile-editorial .hero-profile-context>.hero-materia{background:#fff!important;border:0!important;border-radius:0!important;box-shadow:none!important;margin:0!important}
+html body.hero-redesign-v53 #gab .hero-profile-editorial .hero-profile-context>.hero-materia{padding:9px 11px!important;border-top:1px solid var(--profile-rule,var(--line))!important}
+html body.hero-redesign-v53 #gab .hero-profile-context :is(.hero-case-block,.hero-sint-hist,.pv-synthesis){background:transparent!important;border:0!important;border-top:1px solid var(--profile-rule,var(--line))!important;border-radius:0!important;box-shadow:none!important;margin:0!important;padding:6px 0!important}
+html body.hero-redesign-v53 #gab .hero-profile-context :is(.hero-case-block,.hero-materia)>summary{background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding-inline:0!important}
