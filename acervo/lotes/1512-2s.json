@@ -959,11 +959,11 @@
    "assunto": "IRPJ/ Imposto de Renda de Pessoa Jurídica",
    "assunto_detalhado": "",
    "grupo": "assunto-9",
-   "tipo_caso": "IRPJ/ Imposto de Renda de Pessoa Jurídica",
-   "resultado": "",
+   "tipo_caso": "Execução fiscal (União/FN) · prescrição intercorrente · autos do TJMS",
+   "resultado": "Proposta: [VALIDAR paradigma] apelação da União: não ocorrência da prescrição intercorrente (Tema 566/STJ) [VALIDAR: autos do TJMS: sentença sem tipo]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Apelação ID 362242961; autos migrados do TJMS.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -973,10 +973,24 @@
     "situacao": "A minutar"
    },
    "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Tributário — execução fiscal",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "[VALIDAR]",
+    "recurso": "[VALIDAR]",
+    "preparo": "[VALIDAR]",
+    "representacao": "[VALIDAR]",
+    "mpf": "Não consta parecer",
+    "autos": "57 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] autos do TJMS: sentença sem tipo"
+   ],
    "minuta": false
   },
   {
@@ -990,11 +1004,11 @@
    "assunto": "IPTU/ Imposto Predial e Territorial Urbano",
    "assunto_detalhado": "",
    "grupo": "assunto-30",
-   "tipo_caso": "IPTU/ Imposto Predial e Territorial Urbano",
-   "resultado": "",
+   "tipo_caso": "OAB/MS × Município (IPTU) · acordo homologado · honorários",
+   "resultado": "Proposta: [VALIDAR paradigma] apelação da OAB/MS pela condenação do Município em honorários (causalidade) após a homologação do acordo (artigo 487, III, b, do CPC) [VALIDAR: competência federal (OAB como autora)]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença homologou o acordo, honorários \"nos moldes do acordo\" (ID 302663451); embargos rejeitados (ID 302663483).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -1003,11 +1017,46 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "302663451"
+    },
+    {
+     "peca": "Embargos de declaração",
+     "id": "302663455"
+    },
+    {
+     "peca": "Apelação",
+     "id": "302663484"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "302663480"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "302663481"
+    }
+   ],
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Tributário — IPTU, honorários",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 302663451 (28/04/2023)",
+    "recurso": "embargos de declaração (ID 302663455, 09/05/2023); apelação (ID 302663484, 16/02/2024)",
+    "preparo": "comprovante juntado (ID 302663433, 302663434, 302663467, 302663468, 302663485, 302663486) — conferir o tipo",
+    "representacao": "procuração/substabelecimento ID 302663428",
+    "mpf": "Não consta parecer",
+    "autos": "92 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] competência federal (OAB como autora)"
+   ],
    "minuta": false
   },
   {
@@ -1021,11 +1070,11 @@
    "assunto": "Cofins",
    "assunto_detalhado": "",
    "grupo": "assunto-19",
-   "tipo_caso": "Cofins",
-   "resultado": "",
+   "tipo_caso": "Execução fiscal (COFINS) extinta a pedido · honorários contra a União",
+   "resultado": "Proposta: [VALIDAR paradigma] apelações sobre os honorários da extinção (artigo 26 da LEF e causalidade; Tema 1.076/STJ e artigo 19, § 1º, da Lei 10.522/2002) [VALIDAR: apelante de cada recurso]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença extinguiu a execução e condenou a União em honorários nos embargos de declaração (ID 360001487); apelações IDs 360001488 e 360001490.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -1034,11 +1083,46 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "360001487"
+    },
+    {
+     "peca": "Apelação",
+     "id": "360001488"
+    },
+    {
+     "peca": "Apelação",
+     "id": "360001490"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "360001491"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "360001493"
+    }
+   ],
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Tributário — execução fiscal, honorários",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 360001487 (06/02/2026)",
+    "recurso": "apelação (ID 360001488, 24/02/2026); apelação (ID 360001490, 25/02/2026)",
+    "preparo": "comprovante juntado (ID 360001489) — conferir o tipo",
+    "representacao": "[VALIDAR]",
+    "mpf": "Não consta parecer",
+    "autos": "42 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] apelante de cada recurso"
+   ],
    "minuta": false
   },
   {
@@ -1052,11 +1136,11 @@
    "assunto": "Execução Contratual",
    "assunto_detalhado": "",
    "grupo": "assunto-25",
-   "tipo_caso": "Execução Contratual",
-   "resultado": "",
+   "tipo_caso": "Contrato com o DNIT · cobrança · embargos de declaração contra acórdão",
+   "resultado": "Proposta: [VALIDAR] embargos de declaração (ID 359798137) contra o acórdão de 27/02/2026 (apelação do DNIT e remessa desprovidas; apelação da autora parcialmente provida); pedem exame do artigo 85, §§ 2º, 3º e 11, do CPC",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Contrarrazões aos embargos (ID 366714241).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -1065,9 +1149,34 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Decisão recorrida",
+     "id": "357159875"
+    },
+    {
+     "peca": "Embargos de declaração",
+     "id": "359798137"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "366714241"
+    }
+   ],
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Embargos de declaração (voto)",
+    "materia": "Administrativo — contrato administrativo",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Decisão ID 357159875 (27/02/2026)",
+    "recurso": "embargos de declaração (ID 359798137, 12/03/2026)",
+    "preparo": "[VALIDAR]",
+    "representacao": "[VALIDAR]",
+    "mpf": "Não consta parecer",
+    "autos": "65 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false
@@ -1083,11 +1192,11 @@
    "assunto": "Anulação e Correção de Provas / Questões",
    "assunto_detalhado": "",
    "grupo": "assunto-5",
-   "tipo_caso": "Anulação e Correção de Provas / Questões",
-   "resultado": "",
+   "tipo_caso": "Concurso · anulação de questão objetiva (CESGRANRIO)",
+   "resultado": "Proposta: negar provimento à apelação: vedada a substituição da banca, salvo erro grosseiro ou conteúdo fora do edital (Tema 485/STF) [VALIDAR paradigma e se a questão 37 extrapola o edital]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença improcedente (ID 386608354).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -1096,9 +1205,38 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "386608354"
+    },
+    {
+     "peca": "Apelação",
+     "id": "386608355"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "386608357"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "386608358"
+    }
+   ],
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — concurso público",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 386608354 (20/04/2026)",
+    "recurso": "apelação (ID 386608355, 14/05/2026)",
+    "preparo": "[VALIDAR]",
+    "representacao": "procuração/substabelecimento ID 386608277, 386608349, 386608350",
+    "mpf": "Não consta parecer",
+    "autos": "44 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false
@@ -1114,11 +1252,11 @@
    "assunto": "Anulação e Correção de Provas / Questões",
    "assunto_detalhado": "",
    "grupo": "assunto-5",
-   "tipo_caso": "Anulação e Correção de Provas / Questões",
-   "resultado": "",
+   "tipo_caso": "Concurso · anulação de questão objetiva (CESGRANRIO) · procedência parcial · várias apelações",
+   "resultado": "Proposta: [VALIDAR paradigma] apelações (União, CESGRANRIO e autora) contra a procedência parcial que confirmou a tutela; Tema 485/STF [VALIDAR: identificar cada apelante]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença parcialmente procedente (ID 388898986); apelações IDs 388898987, 388898989, 388898990 e 388898992.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -1127,11 +1265,62 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "388898986"
+    },
+    {
+     "peca": "Apelação",
+     "id": "388898987"
+    },
+    {
+     "peca": "Apelação",
+     "id": "388898989"
+    },
+    {
+     "peca": "Apelação",
+     "id": "388898990"
+    },
+    {
+     "peca": "Apelação",
+     "id": "388898992"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "388898994"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "388898995"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "388898996"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "388898997"
+    }
+   ],
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — concurso público",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 388898986 (02/05/2026)",
+    "recurso": "apelação (ID 388898987, 21/05/2026); apelação (ID 388898989, 26/05/2026); apelação (ID 388898990, 26/05/2026); apelação (ID 388898992, 21/06/2026)",
+    "preparo": "comprovante juntado (ID 388898991) — conferir o tipo",
+    "representacao": "procuração/substabelecimento ID 388898933, 388898961, 388898962",
+    "mpf": "Não consta parecer",
+    "autos": "78 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] identificar cada apelante"
+   ],
    "minuta": false
   },
   {
@@ -1145,11 +1334,11 @@
    "assunto": "Prova Subjetiva",
    "assunto_detalhado": "",
    "grupo": "assunto-35",
-   "tipo_caso": "Prova Subjetiva",
-   "resultado": "",
+   "tipo_caso": "Concurso (CEBRASPE) · prova subjetiva · candidato PcD · MS denegado",
+   "resultado": "Proposta: negar provimento à apelação [VALIDAR paradigma]: critérios de correção da banca (Tema 485/STF); parecer do MPF no mesmo sentido (ID 375216394)",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença denegou a segurança (ID 372623853).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -1158,9 +1347,46 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "372623853"
+    },
+    {
+     "peca": "Apelação",
+     "id": "372623854"
+    },
+    {
+     "peca": "Apelação",
+     "id": "372623855"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "372623857"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "372623818"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "375216394"
+    }
+   ],
+   "mpf": "parecer ID 375216394 (21/05/2026)",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — concurso público",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 372623853 (05/02/2026)",
+    "recurso": "apelação (ID 372623854, 04/03/2026); apelação (ID 372623855, 04/03/2026)",
+    "preparo": "[VALIDAR]",
+    "representacao": "procuração/substabelecimento ID 372623778, 372623833, 372623834",
+    "mpf": "parecer ID 375216394 (21/05/2026)",
+    "autos": "92 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false
@@ -1176,11 +1402,11 @@
    "assunto": "Anulação e Correção de Provas / Questões",
    "assunto_detalhado": "",
    "grupo": "assunto-5",
-   "tipo_caso": "Anulação e Correção de Provas / Questões",
-   "resultado": "",
+   "tipo_caso": "Concurso · anulação de questão objetiva (servidor)",
+   "resultado": "Proposta: [VALIDAR paradigma] apelação do autor pela anulação das questões 35 e 39 (Bloco 4); Tema 485/STF [VALIDAR: dispositivo da sentença (improcedência?)]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença rejeitou a preliminar e julgou o mérito (ID 369941429).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -1189,11 +1415,42 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "369941429"
+    },
+    {
+     "peca": "Apelação",
+     "id": "369941430"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "369941987"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "369941992"
+    }
+   ],
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — concurso público",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 369941429 (13/08/2025)",
+    "recurso": "apelação (ID 369941430, 22/10/2025)",
+    "preparo": "[VALIDAR]",
+    "representacao": "procuração/substabelecimento ID 369941388, 369941414, 369941990",
+    "mpf": "Não consta parecer",
+    "autos": "66 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] dispositivo da sentença (improcedência?)"
+   ],
    "minuta": false
   },
   {
@@ -1207,11 +1464,11 @@
    "assunto": "Conselhos Regionais e Afins (Anuidade)",
    "assunto_detalhado": "",
    "grupo": "assunto-12",
-   "tipo_caso": "Conselhos Regionais e Afins (Anuidade)",
-   "resultado": "",
+   "tipo_caso": "Execução fiscal de anuidade (CRP) · prescrição intercorrente",
+   "resultado": "Proposta: [VALIDAR paradigma] apelação do conselho: a penhora via BACENJUD requerida e deferida em 12/11/2018 interromperia o prazo (Tema 566/STJ) [VALIDAR: executada sem advogado: contrarrazões não esperadas?]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença reconheceu a prescrição intercorrente (ID 406755668).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -1220,11 +1477,34 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "406755668"
+    },
+    {
+     "peca": "Apelação",
+     "id": "406755669"
+    }
+   ],
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Tributário — anuidade de conselho, execução fiscal",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 406755668 (24/08/2026)",
+    "recurso": "apelação (ID 406755669, 09/10/2026)",
+    "preparo": "comprovante juntado (ID 406755670) — conferir o tipo",
+    "representacao": "[VALIDAR]",
+    "mpf": "Não consta parecer",
+    "autos": "52 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] executada sem advogado: contrarrazões não esperadas?"
+   ],
    "minuta": false
   },
   {
@@ -1238,11 +1518,11 @@
    "assunto": "Conselhos Regionais e Afins (Anuidade)",
    "assunto_detalhado": "",
    "grupo": "assunto-12",
-   "tipo_caso": "Conselhos Regionais e Afins (Anuidade)",
-   "resultado": "",
+   "tipo_caso": "Embargos à execução fiscal (COREN) · anuidades · procedência",
+   "resultado": "Proposta: [VALIDAR paradigma] apelação do COREN/MS contra a procedência dos embargos (inscrição/cancelamento e notificação administrativa) [VALIDAR: nome da embargante na sentença (Marlene Maria de Jesus Muniz Grieger) difere do polo (Denise da Silva Pereira)]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença procedente (ID 313183398).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -1251,11 +1531,38 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "313183398"
+    },
+    {
+     "peca": "Apelação",
+     "id": "313183399"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "313183405"
+    }
+   ],
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Tributário — anuidade de conselho",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 313183398 (25/11/2024)",
+    "recurso": "apelação (ID 313183399, 03/12/2024)",
+    "preparo": "comprovante juntado (ID 313183401) — conferir o tipo",
+    "representacao": "procuração/substabelecimento ID 313178616",
+    "mpf": "Não consta parecer",
+    "autos": "48 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] nome da embargante na sentença (Marlene Maria de Jesus Muniz Grieger) difere do polo (Denise da Silva Pereira)"
+   ],
    "minuta": false
   },
   {
@@ -1269,11 +1576,11 @@
    "assunto": "Idoso",
    "assunto_detalhado": "",
    "grupo": "assunto-27",
-   "tipo_caso": "Idoso",
-   "resultado": "",
+   "tipo_caso": "Idosa · demora na análise do requerimento (INSS) · MS denegado",
+   "resultado": "Proposta: [VALIDAR paradigma] apelação da impetrante: prazo do acordo no RE 1.171.152 (Tema 1.066/STF) vencido em 30/08/2025 [VALIDAR: sentido do parecer ID 407539146]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença denegou a segurança (ID 401342640); parecer do MPF (ID 407539146).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -1282,11 +1589,42 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "401342640"
+    },
+    {
+     "peca": "Apelação",
+     "id": "401342641"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "401342639"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "407539146"
+    }
+   ],
+   "mpf": "parecer ID 407539146 (29/10/2026)",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Previdenciário — processo administrativo",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 401342640 (27/04/2026)",
+    "recurso": "apelação (ID 401342641, 18/05/2026)",
+    "preparo": "[VALIDAR]",
+    "representacao": "[VALIDAR]",
+    "mpf": "parecer ID 407539146 (29/10/2026)",
+    "autos": "27 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] sentido do parecer ID 407539146"
+   ],
    "minuta": false
   },
   {
@@ -1300,11 +1638,11 @@
    "assunto": "Fornecimento de medicamentos",
    "assunto_detalhado": "",
    "grupo": "assunto-7",
-   "tipo_caso": "Fornecimento de medicamentos",
-   "resultado": "",
+   "tipo_caso": "Saúde · Estado de MS × União · extinção sem mérito · honorários",
+   "resultado": "Proposta: [VALIDAR paradigma] apelação do Estado de MS contra os honorários fixados na extinção (artigo 485, IV e IX, do CPC); contrarrazões pedem equidade [VALIDAR: causa da extinção (óbito do autor?)]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença extinguiu sem mérito e condenou os réus em honorários (ID 389153015).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -1313,11 +1651,38 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "389153015"
+    },
+    {
+     "peca": "Apelação",
+     "id": "389153016"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "389153018"
+    }
+   ],
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Saúde — medicamentos, honorários entre entes",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 389153015 (13/01/2026)",
+    "recurso": "apelação (ID 389153016, 21/02/2026)",
+    "preparo": "[VALIDAR]",
+    "representacao": "[VALIDAR]",
+    "mpf": "Não consta parecer",
+    "autos": "52 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] causa da extinção (óbito do autor?)"
+   ],
    "minuta": false
   },
   {
