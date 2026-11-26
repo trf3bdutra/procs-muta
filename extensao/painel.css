@@ -3943,10 +3943,11 @@ html body.hero-redesign-v53 #gab .hero-route-overview.hero-route-shared.hero-rou
 html body.hero-redesign-v53 #topo-u:not([hidden]){
  grid-template-columns:auto minmax(0,1fr) auto!important;
  grid-template-rows:auto auto!important;column-gap:3px!important;
+ align-items:center!important;
 }
 html body.hero-redesign-v53 #topo-u>#pv-nav-main{
  grid-row:1!important;grid-column:2!important;display:flex!important;
- align-items:center!important;justify-content:space-evenly!important;gap:2px!important;
+ align-items:center!important;justify-content:flex-start!important;flex-wrap:nowrap!important;gap:2px!important;
  min-width:0;min-height:28px;overflow-x:auto;scrollbar-width:none;
  background:var(--hero-nav-white,#fff)!important;
 }
@@ -3987,7 +3988,12 @@ html body.hero-redesign-v53 .layout>aside .tu-gestao .conf-badge{font-size:9px;v
 .hero-gab-marcos span{background:var(--cmt-beige,var(--card2));padding:3px 5px}
 @media(max-width:540px){
  html body.hero-redesign-v53 #topo-u .hero-cmt-brand{padding:4px!important}
- html body.hero-redesign-v53 #topo-u .hero-cmt-identity{display:none!important}
+ html body.hero-redesign-v53 #topo-u .hero-cmt-identity{display:grid!important;min-width:max-content;gap:0}
+ html body.hero-redesign-v53 #topo-u .hero-cmt-identity>span{display:none!important}
+ html body.hero-redesign-v53 #topo-u .hero-cmt-identity>strong{font-size:12px!important;letter-spacing:-.04em}
+ html body.hero-redesign-v53 #topo-u .hero-cmt-identity em{font-size:11px!important}
+ html body.hero-redesign-v53 #topo-u .hero-cmt-brand{gap:3px!important}
+ html body.hero-redesign-v53 #topo-u .hero-cmt-star{width:13px!important;height:15px!important}
  html body.hero-redesign-v53 #topo-u>#pv-nav-main .nav-icon{display:none!important}
  html body.hero-redesign-v53 #topo-u>#pv-nav-main>button{padding-inline:3px!important}
  html body.hero-redesign-v53 #topo-u>#pv-nav-main .nav-text b{font-size:9.5px!important}
@@ -3999,3 +4005,15 @@ html[data-tema=escuro] body.hero-redesign-v53{--hero-nav-white:var(--cmt-paper);
 html body.hero-redesign-v53 #topo-u:not([hidden]),html body.hero-redesign-v53 #topo-u>#pv-nav-main>button[aria-selected=true]{background:var(--hero-nav-white)!important}
 html body.hero-redesign-v53 .layout>aside,html body.hero-redesign-v53 .layout>aside>.nav{background:var(--hero-nav-cream)!important}
 html body.hero-redesign-v53 #topo-u>#pv-nav-main>button[aria-selected=true],html body.hero-redesign-v53 .layout>aside .tu-gestao>button[aria-selected=true]{box-shadow:inset 0 -2px var(--cmt-gold)!important}
+
+/* O nome HERO 18810 permanece visível na mesma linha das quatro abas. */
+html body.hero-redesign-v53 #topo-u .hero-cmt-brand{grid-row:1!important;grid-column:1!important;white-space:nowrap;flex-wrap:nowrap}
+html body.hero-redesign-v53 #topo-u>#pv-nav-main{grid-row:1!important;grid-column:2!important}
+@media(max-width:440px){
+ html body.hero-redesign-v53 #topo-u:not([hidden]){grid-template-columns:auto minmax(0,1fr) auto!important}
+ html body.hero-redesign-v53 #topo-u>#pv-nav-main{grid-column:2/-1!important}
+ html body.hero-redesign-v53 #topo-u .hero-header-utilities{grid-row:2!important;grid-column:3!important;padding:2px 4px!important}
+ html body.hero-redesign-v53 #topo-u #tu-pje-slot{grid-column:1!important}
+ html body.hero-redesign-v53 #topo-u>.tu-st:not([hidden]){grid-column:2!important;justify-self:start!important;margin:0!important}
+ html body.hero-redesign-v53 #topo-u>#pv-nav-main>button{padding-inline:2px!important}
+}
