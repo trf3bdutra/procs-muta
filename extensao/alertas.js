@@ -83,16 +83,23 @@
     var b = $('tu-sino'); if (!b) return;
     var nApp = appPend().length, n = vermelhos() + nApp, t = A.itens.length;
     var count=b.querySelector('b');if(count)count.textContent=n?String(n):'';
-    b.setAttribute('aria-expanded',String(!!aberto()));
+    b.setAttribute('aria-expanded',String(!!aberto()));posicionarPerfil();
     b.classList.toggle('al', !!vermelhos()); b.classList.toggle('ap', !vermelhos() && !!nApp);
     b.title = n ? n + ' processo' + (n > 1 ? 's' : '') + ' com alerta' + (n > 1 ? 's' : '') + ' na lista do PJe' : t ? t + ' processo' + (t > 1 ? 's' : '') + ' com aviso' : 'Alertas, prazos e etiquetas do gabinete';
   }
   function appPend() { return A.app.filter(function (e) { return !e.resolved && (e.nivel === 'urgente' || e.nivel === 'importante'); }); }
   function aberto() { var p = $('tu-pop'); return p && !p.hidden; }
+  /* Ancoragem ao botão real, independente das linhas e da largura do header. */
+  function posicionarPerfil(){
+    var p=$('tu-pop'),b=$('tu-sino');if(!p||p.hidden||!b)return;
+    var r=b.getBoundingClientRect(),vw=document.documentElement.clientWidth,vh=document.documentElement.clientHeight,gap=6;
+    var width=Math.min(380,Math.max(0,vw-gap*2)),left=Math.max(gap,Math.min(r.right-width,vw-width-gap)),top=Math.max(gap,r.bottom+gap);
+    p.style.width=width+'px';p.style.left=left+'px';p.style.top=top+'px';p.style.right='auto';p.style.maxHeight=Math.max(0,vh-top-gap)+'px';
+  }
   function abrir(s) {
     var p = $('tu-pop'); if (!p) return;
     p.hidden = !s; var b=$('tu-sino');if(b)b.setAttribute('aria-expanded', s ? 'true' : 'false');
-    if (s) { try { chrome.runtime.sendMessage({ tipo: 'muta-app-ler' }).catch(function () {}); } catch (e) {} Promise.all([lerAlertas(), lerCfg(), lerCatalogo(), lerCmt()]).then(pintar); pintar(); }
+    if (s) { posicionarPerfil(); try { chrome.runtime.sendMessage({ tipo: 'muta-app-ler' }).catch(function () {}); } catch (e) {} Promise.all([lerAlertas(), lerCfg(), lerCatalogo(), lerCmt()]).then(pintar); pintar(); }
   }
   function quando(iso) { if (!iso) return ''; var d = new Date(iso); return isNaN(d) ? '' : d.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' }) + ' ' + d.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }); }
   function fmtCnj(k) { var d = String(k).replace(/\D/g, ''); return d.length === 20 ? d.replace(/^(\d{7})(\d{2})(\d{4})(\d)(\d{2})(\d{4})$/, '$1-$2.$3.$4.$5.$6') : k; }
@@ -112,7 +119,7 @@
     h += '<div class="ap-t" role="tablist">' + abas.map(function (a) { return '<button type="button" role="tab" class="ap-tab-' + a[0] + '" data-ap="' + a[0] + '" aria-selected="' + (A.aba === a[0]) + '">' + a[1] + (a[0] === 'al' && (A.itens.length + (gst ? A.cheg.length : 0)) ? ' <i>' + (A.itens.length + (gst ? A.cheg.length : 0)) + '</i>' : a[0] === 'app' && appPend().length ? ' <i>' + appPend().length + '</i>' : a[0] === 'ch' && A.cheg.length ? ' <i>' + A.cheg.length + '</i>' : a[0] === 'cm' && nCm ? ' <i>' + nCm + '</i>' : '') + '</button>'; }).join('') +
       '</div>';
     h += '<div class="ap-c">' + (A.aba === 'cm' ? '<div id="ap-cmt">' + (window.MutaCmt ? window.MutaCmt.html(A.cmt) : '') + '</div>' : A.aba === 'al' ? pAlertas() : A.aba === 'app' ? pApp() : A.aba === 'ch' ? pChegadas() : pVersao()) + '</div>';
-    p.innerHTML = h;
+    p.innerHTML = h;posicionarPerfil();
     var bx = $('ap-cmt');
     if (bx && window.MutaCmt) { window.MutaCmt.css(document); window.MutaCmt.bind(bx, function (m) { return chrome.runtime.sendMessage(m); }, function (v) { if (v) A.cmt = v; pintar(); }); }
   }
@@ -249,7 +256,10 @@
   /* ---------- eventos ---------- */
   function montar() {
     var t0=$('topo-u');if(!t0||$('tu-pop'))return;
-    var p=document.createElement('div');p.id='tu-pop';p.className='tu-pop tu-profile-pop';p.hidden=true;p.setAttribute('role','dialog');p.setAttribute('aria-label','Perfil e notificações');t0.appendChild(p);
+    var p=document.createElement('div');p.id='tu-pop';p.className='tu-pop tu-profile-pop';p.hidden=true;p.setAttribute('role','dialog');p.setAttribute('aria-label','Perfil e notificações');document.body.appendChild(p);
+    window.addEventListener('resize',posicionarPerfil);
+    window.addEventListener('scroll',function(e){if(aberto()&&!p.contains(e.target))posicionarPerfil();},true);
+    if(typeof ResizeObserver!=='undefined')new ResizeObserver(posicionarPerfil).observe(t0);
     t0.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('#tu-sino');if(!b)return;e.stopPropagation();abrir(!aberto());});
     document.addEventListener('click',function(e){var b=$('tu-sino');if(aberto()&&!p.contains(e.target)&&!(b&&b.contains(e.target)))abrir(false);});
     document.addEventListener('keydown',function(e){if(e.key==='Escape'&&aberto()){abrir(false);var b=$('tu-sino');if(b)b.focus();}});
