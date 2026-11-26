@@ -740,3 +740,16 @@ test('HERO: faixas compactas, notificações em aba única e Pauta integrada', (
   assert.match(x,/acao:'notificacao-lida'/);assert.match(api,/b\.acao==='notificacao-lida'/);
   assert.match(p,/MG\.pautaPendencias/);assert.match(p,/MG\.pautaCard/);assert.match(p,/hero-pa-balanced/);assert.match(css,/\.pa-card-people/);
 });
+
+
+test('HERO: Gerador preserva seleção da prévia, reseta por processo/ficha e não presume tipo incompatível',()=>{
+ const ctx={window:{},navigator:{},document:{body:{classList:{contains:()=>true}},addEventListener(){},getElementById(){return null;}}};let cnj='5000000-00.2026.4.03.6000',fields={'triagem.Tipo de Julgamento':'Apelação','producao.Voto - Resultado':'Negado provimento'};
+ ctx.window.MutaGabinete={V:(s,k)=>fields[s+'.'+k]||'',fo:()=>({classe_judicial:'APELAÇÃO CÍVEL'}),cnj:()=>cnj,pronunciamento:()=> 'Acórdão (sessão)'};ctx.window.Muta={SITE:'https://www.gabinete-cmt.com'};
+ vm.createContext(ctx);vm.runInContext(read('extensao/gerador.js'),ctx);const G=ctx.window.MutaGerador;
+ assert.equal(G.docs().tipo,'Apelação');assert.equal(G.docs().k,'desp');
+ for(const tipo of ['Agravo de Instrumento','Embargos de Declaração','Agravo Interno','Juízo de Retratação','Remessa Necessária']){assert.equal(G.selecionarTipo(tipo).tipo,tipo);assert.match(G.html(),/data-ger-tipo/);assert.equal(G.docs().tipo,tipo);}
+ fields['triagem.Tipo de Julgamento']='Apelação / Remessa necessária';assert.equal(G.docs().tipo,'Apelação');assert.match(G.docs().rel[0],/remessa necessária/i);
+ fields['triagem.Tipo de Julgamento']='Mandado de segurança';assert.equal(G.docs().tipo,'');assert.match(G.html(),/Nenhuma fórmula será presumida/);
+ fields['triagem.Tipo de Julgamento']='Agravo interno / Embargos de declaração';assert.equal(G.docs().tipo,'');G.selecionarTipo('Agravo Interno');cnj='5000001-00.2026.4.03.6000';fields['triagem.Tipo de Julgamento']='ED';assert.equal(G.docs().tipo,'Embargos de Declaração');
+ fields['producao.Voto - Resultado']='';assert.equal(G.docs().k,'');G._ST.abertos['part-relatorio']=false;assert.doesNotMatch(G.html(),/data-ger-key="part-relatorio"[^>]* open/);
+});
