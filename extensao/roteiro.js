@@ -183,6 +183,17 @@
     else docs.filter(function(d){return !d.anexo&&cfg.indexOf(d.k)>=0&&!(SG&&SG.docBloqueado(d));}).forEach(function(d){line(d.tipo||'Documento',['ID '+d.id,d.data].filter(Boolean).join(' · '));});
     return '<div class="rt-adm-doc"><div class="rt-adm-head"><b>Referências dos autos</b><button type="button" class="lnk" data-aba="Autos">Ver em Autos</button></div>'+(r.join('')||'<small class="muted">Nenhuma referência documental identificada.</small>')+'</div>';
   }
+
+  /* Um contrato HTML para Triagem e Produção. Conteúdo e eventos pertencem a cada roteiro. */
+  function painelRoteiro(o){
+    var p=Math.max(0,Math.min(100,Number(o.pct)||0)),attr=o.attr;
+    function btn(k,label,on,disabled){return '<button type="button" '+attr+'="'+esc(k)+'"'+(on==null?'':' aria-pressed="'+on+'"')+(disabled?' disabled':'')+'>'+esc(label)+'</button>';}
+    return '<details class="hero-route-overview hero-route-canonical hero-route-shared" open><summary class="rt-tt"><b>'+esc(o.title)+'</b><span class="rt-n" title="'+esc(o.caption)+'">'+esc(o.total)+'</span><span class="hero-route-overview-chevron" aria-hidden="true"></span></summary><div class="hero-route-overview-body"><div class="hero-minuta-nav"><div class="hero-route-metrics" role="group" aria-label="Filtrar etapas">'+o.metrics.map(function(m){return '<button type="button" data-route-filter="'+esc(m[0])+'" aria-pressed="false"><span>'+esc(m[1])+'</span><b>'+esc(m[2])+'</b></button>';}).join('')+'</div><div class="hero-route-progress"><div class="hero-minuta-nav-head rt-progress-caption"><span>'+esc(o.caption)+'</span><b>'+p+'%</b></div><div class="rt-bar hero-minuta-meter" role="progressbar" aria-label="'+esc(o.caption)+'" aria-valuemin="0" aria-valuemax="100" aria-valuenow="'+p+'"><i style="width:'+p+'%"></i></div></div><div class="hero-minuta-nav-foot">'+btn(o.prev,'← Anterior',null,o.index<=0)+'<small>Etapa '+(o.index>=0?o.index+1:'—')+' de '+o.length+'</small>'+btn(o.next,'Próximo →',null,o.index>=o.length-1)+'</div></div><div class="hero-route-tools"><div class="hero-route-modes" role="group" aria-label="Modo do roteiro">'+btn(o.focus,'Etapa em foco',!o.list)+btn(o.listKey,'Lista contínua',o.list)+'</div><div class="hero-route-search"><input type="search" data-route-search aria-label="Localizar etapa ou campo" placeholder="Localizar etapa ou campo…"><button type="button" data-route-filter="all">Todos</button><button type="button" data-route-next>Próxima pendência ›</button><button type="button" '+attr+'="'+esc(o.collapse)+'" title="Recolher etapas" aria-label="Recolher etapas">−</button></div></div></div></details>';
+  }
+  function faseRoteiro(title,ok,total,alerts){return '<li class="rt-f"><span>'+esc(title)+'</span><small class="rt-phase-count" aria-label="'+ok+' de '+total+' etapas concluídas">'+ok+'/'+total+'</small>'+(alerts?'<small class="rt-phase-alert">'+alerts+' alerta'+(alerts===1?'':'s')+'</small>':'')+'</li>';}
+  function inicioEtapa(o){
+    return '<li class="rt-p hero-route-step is-'+esc(o.status)+(o.open?' ab':'')+(o.advance?' rt-avanco':'')+'" data-route-status="'+esc(o.status)+'" data-route-text="'+esc(o.search)+'"><span class="rt-i" aria-label="'+esc(o.state)+'">'+esc(o.number)+'</span><div class="rt-c"'+(o.cardAttrs||'')+'><button type="button" class="rt-h" '+o.attr+'="'+esc(o.key)+'" aria-expanded="'+!!o.open+'"><b>'+esc(o.title)+(o.titleExtra||'')+'</b><span class="rt-step-meta"><span class="rt-step-state">'+esc(o.state)+'</span><span class="rt-step-chevron" aria-hidden="true"></span></span>'+(!o.open&&o.summary?'<small>'+esc(o.summary)+'</small>':'')+'</button>';
+  }
   function html(g, campoRot, questoesHtml, X) {
     X = X || {};
     var mostrados = {};
@@ -226,10 +237,8 @@
     if(R.foco===null){var inicial=L.find(function(x){return x.st==='al';})||L.find(function(x){return x.st!=='ok';})||L[0];R.foco=inicial?inicial.p.id:'';}
     if(R.foco&&!L.some(function(x){return x.p.id===R.foco;})){R.foco=(L.find(function(x){return x.st!=='ok';})||L[0]||{p:{id:''}}).p.id;}
     var h = '@@TOPO@@', avancou=true;
-    var topo = '<details class="hero-route-overview hero-route-canonical" open><summary class="rt-tt"><b>Roteiro de triagem</b><span class="rt-n" title="Etapas conferidas">' + n.ok + '/' + L.length + '</span><span class="hero-route-overview-chevron" aria-hidden="true"></span></summary><div class="hero-route-overview-body">' +
-      '<div class="hero-route-metrics" role="group" aria-label="Filtrar etapas">'+[['ok','Conferidas'],['al','Alertas'],['pend','A conferir']].map(function(x){return '<button type="button" data-route-filter="'+x[0]+'" aria-pressed="false"><span>'+x[1]+'</span><b>'+n[x[0]]+'</b></button>';}).join('')+'</div>' +
-      '<div class="hero-route-progress"><div class="rt-progress-caption"><span>Etapas conferidas</span><b>'+pct+'%</b></div><div class="rt-bar" role="progressbar" aria-label="Etapas conferidas" aria-valuemin="0" aria-valuemax="100" aria-valuenow="'+pct+'"><i style="width:' + pct + '%"></i></div></div>' +
-      '<div class="hero-route-tools"><div class="hero-route-modes" role="group" aria-label="Modo do roteiro"><button type="button" data-rt="modo:focus" aria-pressed="'+(R.modo==='focus')+'">Etapa em foco</button><button type="button" data-rt="modo:list" aria-pressed="'+(R.modo==='list')+'">Lista contínua</button></div><div class="hero-route-search"><input type="search" data-route-search aria-label="Localizar etapa ou campo" placeholder="Localizar etapa ou campo…"><button type="button" data-route-filter="all">Todos</button><button type="button" data-route-next>Próxima pendência ›</button><button type="button" data-rt="recolher" title="Recolher etapas" aria-label="Recolher etapas">−</button></div></div></div></details>';
+    R.ordem=L.map(function(x){return x.p.id;});
+    var topo=painelRoteiro({title:'Roteiro de triagem',total:n.ok+'/'+L.length,caption:'Etapas conferidas',pct:pct,metrics:[['ok','Conferidas',n.ok],['al','Alertas',n.al],['pend','A conferir',n.pend]],attr:'data-rt',index:R.ordem.indexOf(R.foco),length:L.length,prev:'anterior',next:'proximo',focus:'modo:focus',listKey:'modo:list',list:R.modo==='list',collapse:'recolher'});
     var auxiliares = '<details class="rt-tsel"' + (R.tipoAb ? ' open' : '') + '><summary><span class="rt-kind-main"><span class="rt-kind-label">Tipo de julgamento</span><b>' + esc(TIPOS.filter(function (x) { return T[x[0]]; }).map(function (x) { return x[1]; }).join(' · ') || 'A definir') + '</b></span><span class="rt-kind-mode">' + (S(g.V('triagem','Tipo de Julgamento')) ? 'Registrado' : 'Auto') + '</span><span class="rt-kind-arrow" aria-hidden="true"></span></summary>' +
       '<div class="rt-kind-body"><div class="rt-tipos" role="group" aria-label="Tipo de julgamento">' + TIPOS.map(function (x) { var sig={ap:'Ap',rn:'RemNec',ai:'AI',ms:'MS',ed:'ED',agint:'AgInt',ret:'JR'}[x[0]]; return '<button type="button" class="chip rt-kind-option' + (T[x[0]] ? ' on' : '') + '" data-rt="t:' + x[0] + '" aria-pressed="' + !!T[x[0]] + '"><span class="rt-kind-sig">' + esc(sig) + '</span><span class="rt-kind-name">' + esc(x[1]) + '</span><span class="rt-kind-check" aria-hidden="true">' + (T[x[0]]?'✓':'') + '</span></button>'; }).join('') + '</div>' +
       '<div class="rt-kind-foot"><small>Seleção múltipla</small>' + (S(g.V('triagem','Tipo de Julgamento')) ? '<button type="button" class="lnk" data-rt="auto" title="Volta ao tipo identificado pela classe, espécie e tarefa">Restaurar automático</button>' : '<small>Identificado automaticamente</small>') + '</div></div></details>' + (X.barra || '') + (alTopo.length ? '<div class="al-l rt-alt">' + alTopo.map(alHtml).join('') + '</div>' : '') + '@@USAR@@';
@@ -237,7 +246,7 @@
     FASES.forEach(function (f) {
       var F = L.filter(function (x) { return x.p.f === f[0]; }); if (!F.length) return;
       var fo=F.filter(function(x){return x.st==='ok';}).length, fa=F.filter(function(x){return x.st==='al';}).length;
-      h += '<li class="rt-f"><span>' + esc(f[1]) + '</span><small class="rt-phase-count" aria-label="'+fo+' de '+F.length+' etapas conferidas">'+fo+'/'+F.length+'</small>'+(fa?'<small class="rt-phase-alert">'+fa+' alerta'+(fa===1?'':'s')+'</small>':'')+'</li>';
+      h += faseRoteiro(f[1],fo,F.length,fa);
       F.forEach(function (x) {
         var p = x.p, ab = R.modo==='focus'?R.foco===p.id:!!R.aberto[p.id], trecho=avancou&&x.st==='ok';if(x.st!=='ok')avancou=false;
         var cs = (p.campos || []).filter(function (c) { return typeof c[3] !== 'function' || c[3](ctx); });
@@ -247,8 +256,7 @@
         var dica = typeof p.dica === 'function' ? p.dica(ctx) : p.dica;
         var AP = alPasso[p.id] || [];
         var AU0 = window.MutaAutos, doAuto = AU0 && AU0.preenchido && cs.concat(p.mais || []).some(function (c) { return AU0.preenchido(c[0] + '.' + c[1]); });
-        h += '<li class="rt-p hero-route-step is-' + x.st + (ab ? ' ab' : '') + (trecho?' rt-avanco':'') + '" data-route-status="'+x.st+'" data-route-text="'+esc([p.t,resumo].concat((p.campos||[]).concat(p.mais||[]).map(function(c){return c[2]||c[1];})).join(' '))+'"><span class="rt-i" aria-label="' + ROT[x.st] + '">' + String(L.indexOf(x)+1).padStart(2,'0') + '</span><div class="rt-c">' +
-          '<button type="button" class="rt-h" data-rt="a:' + p.id + '" aria-expanded="' + ab + '"><b>' + esc(p.t) + (AP.length ? ' <i class="rt-av">' + AP.length + ' aviso' + (AP.length > 1 ? 's' : '') + '</i>' : '') + (doAuto ? ' <i class="au-tag" title="Preenchido pela leitura dos autos: confira">autos</i>' : '') + '</b><span class="rt-step-meta"><span class="rt-step-state">'+esc(ROT[x.st]||'A conferir')+'</span><span class="rt-step-chevron" aria-hidden="true"></span></span>' + (!ab && resumo ? '<small>' + esc(resumo.slice(0, 120)) + '</small>' : '') + '</button>';
+        h += inicioEtapa({status:x.st,open:ab,advance:trecho,search:[p.t,resumo].concat((p.campos||[]).concat(p.mais||[]).map(function(c){return c[2]||c[1];})).join(' '),state:ROT[x.st]||'A conferir',number:String(L.indexOf(x)+1).padStart(2,'0'),attr:'data-rt',key:'a:'+p.id,title:p.t,titleExtra:(AP.length?' <i class="rt-av">'+AP.length+' aviso'+(AP.length>1?'s':'')+'</i>':'')+(doAuto?' <i class="au-tag" title="Preenchido pela leitura dos autos: confira">autos</i>':''),summary:resumo.slice(0,120)});
         if (ab) {
           var mais = (p.mais || []).map(comSug).filter(Boolean);
           h += '<div class="rt-b">' + (!X.docRef && p.f === 'adm' ? referenciaAdm(p.id,g) : '') + (AP.length ? '<div class="al-l">' + AP.map(alHtml).join('') + '</div>' : '') + (visiveis.length ? '<div class="gr">' + visiveis.map(comSug).join('') + '</div>' : '') +
@@ -282,6 +290,7 @@
   function clique(b, g) {
     var a = b.dataset.rt || '', cnj = g.cnj(), loc = lerLocal(cnj);
     if (/^modo:/.test(a)){R.modo=a.slice(5)==='list'?'list':'focus';if(R.modo==='list'&&R.foco)R.aberto[R.foco]=true;return true;}
+    if(a==='anterior'||a==='proximo'){var ordem=R.ordem||[],i=ordem.indexOf(R.foco);if(!ordem.length)return false;R.foco=ordem[Math.max(0,Math.min(ordem.length-1,i+(a==='anterior'?-1:1)))];if(R.modo==='list')R.aberto[R.foco]=true;return true;}
     if(a==='recolher'){R.foco='';R.aberto={};return true;}
     if (/^a:/.test(a)) { var id = a.slice(2), el = b.closest('.rt-p'),open=!(el&&el.classList.contains('ab'));if(R.modo==='focus')R.foco=open?id:'';else{R.aberto[id]=open;if(open)R.foco=id;}return true; }
     if (/^t:/.test(a)) { if(window.MUTA_WEB&&window.MUTA_WEB.leitura)return false;var T=tipos(g,cnj),k=a.slice(2);if(!TIPOS.some(function(x){return x[0]===k;}))return false;if(T[k]){if(Object.keys(T).length===1)return false;delete T[k];}else T[k]=1;delete loc._tipos;gravarLocal(cnj,loc);R.tipoAb=true;return gravarTipos(g,T); }
@@ -291,5 +300,5 @@
     return false;
   }
   function conferir(id, on, g) { var cnj = g.cnj(), loc = lerLocal(cnj); if (on) loc[id] = new Date().toISOString().slice(0, 10); else delete loc[id]; gravarLocal(cnj, loc); }
-  window.MutaRoteiro = { tipos: tipos, html: html, resumo: resumo, clique: clique, conferir: conferir, detectar: detectar, PASSOS: PASSOS, TIPOS: TIPOS, tiposFicha: tiposFicha, admEditavel: admEditavel };
+  window.MutaRoteiro = { painel:painelRoteiro, fase:faseRoteiro, inicioEtapa:inicioEtapa, tipos: tipos, html: html, resumo: resumo, clique: clique, conferir: conferir, detectar: detectar, PASSOS: PASSOS, TIPOS: TIPOS, tiposFicha: tiposFicha, admEditavel: admEditavel };
 })();
