@@ -328,7 +328,10 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "prontidao": "APTO",
+    "prontidao_em": "26/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false
@@ -359,7 +362,10 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "prontidao": "APTO",
+    "prontidao_em": "26/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false
@@ -390,7 +396,10 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "prontidao": "APTO",
+    "prontidao_em": "26/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false
@@ -421,9 +430,14 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "prontidao": "PENDENTE — apelação não localizada pelo tipo do documento: conferir recurso e contrarrazões",
+    "prontidao_em": "26/11/2026"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[PRONTIDÃO] apelação não localizada pelo tipo do documento: conferir recurso e contrarrazões"
+   ],
    "minuta": false
   },
   {
@@ -452,7 +466,10 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "prontidao": "APTO",
+    "prontidao_em": "26/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false
@@ -483,7 +500,10 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "prontidao": "APTO",
+    "prontidao_em": "26/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false
@@ -514,7 +534,10 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "prontidao": "APTO",
+    "prontidao_em": "26/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false
@@ -545,7 +568,10 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "prontidao": "APTO",
+    "prontidao_em": "26/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false
@@ -576,9 +602,14 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "prontidao": "PENDENTE — sem contrarrazões nem certidão de decurso após a apelação (ID 317374450)",
+    "prontidao_em": "26/11/2026"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[PRONTIDÃO] sem contrarrazões nem certidão de decurso após a apelação (ID 317374450)"
+   ],
    "minuta": false
   },
   {
@@ -635,7 +666,9 @@
     "representacao": "[VALIDAR]",
     "mpf": "Não consta parecer",
     "autos": "43 documentos extraídos",
-    "tempestividade": "[VALIDAR]"
+    "tempestividade": "[VALIDAR]",
+    "prontidao": "APTO",
+    "prontidao_em": "26/11/2026"
    },
    "ajustes": [],
    "pendencias": [
