@@ -156,7 +156,7 @@ Tempestividade, Preparo, Representação, Preliminares, Mídias, Hipótese de in
 | Status de julgamento | `Status de Julgamento` | lista | operacional · `pauta` | 0 de 4.725 | PAUTADO / EM MESA / ADIADO / RETIRADO DE PAUTA; status da entrada de pauta (_pautaEntries) ou campo |
 | Sessão original | `Sessão original` | regra · calculado | operacional · `pauta` | 1.008 de 4.725 | data dd/mm/aaaa |
 | Item | `Item (Pauta de Julgamento)` | regra · calculado | operacional · `pauta` | 0 de 4.725 | item da entrada de pauta da sessão selecionada |
-| Sessão de destino | `Nova sessão de destino` | regra · calculado | operacional · `pauta` | 175 de 4.725 | antes "Sessão Destino" |
+| Sessão de destino | `Nova sessão de destino` | texto | operacional · `pauta` | 175 de 4.725 | Sessão pretendida na seleção prévia ou remarcação; não constitui ingresso oficial em pauta; vazio = sem data definida. |
 | Situação na seleção | `JULGAMENTO` | regra · calculado | operacional · `pauta` | 175 de 4.725 | situação da seleção prévia |
 | Motivo da remarcação | `Motivo da remarcação` | texto | operacional · `pauta` | 0 de 4.725 |  |
 | Sustentação oral ou preferência | `Sustentação oral` | lista | operacional · `pauta` | — | Presencial / Videoconferência / Preferência; espelha o cartão da pauta (ctl.sopref) e os pedidos recebidos por e-mail; Videoconferência = Virtual no cartão |

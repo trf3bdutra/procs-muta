@@ -118,11 +118,12 @@ module.exports = async (req, res, u) => {
       const locais = (Object.keys(mud).length || Object.keys(patch).length) ? await FICHA.ondeEsta(cnj) : [];
       if (Object.keys(mud).length) {
         const { doc, sha } = await FICHA.lerOp(), r = FICHA.registro(doc, cnj, F, true);
-        fichaOut = FICHA.aplica(r, mud);
+        const efetiva=FICHA.mudancaCoerente(r,mud);
+        fichaOut = FICHA.aplica(r, efetiva);
         if (fichaOut.length) {
           FICHA.regras(r, fichaOut, u); doc.atualizado_em = quando; op = r;
           arqs.push({ path: OP, txt: JSON.stringify(doc, null, 1) + '\n', sha });
-          locais.forEach(a => a.its.forEach(it => { if (FICHA.aplicaCartao(it, FICHA.paraCartao(mud, it), u)) a.mudou = true; }));
+          locais.forEach(a => a.its.forEach(it => { if (FICHA.aplicaCartao(it, FICHA.paraCartao(efetiva, it), u)) a.mudou = true; }));
           feito.push('ficha: ' + fichaOut.slice(0, 6).join(', '));
         }
       }

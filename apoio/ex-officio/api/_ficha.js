@@ -300,18 +300,28 @@ function destinoCoerente(r,m){
  else if(d==='Sessão'&&has(T,'Seleção Prévia')&&sp!=='SELECIONADO PREVIAMENTE'&&t['Seleção Prévia']==='SELECIONADO PREVIAMENTE')set('pauta','Nova sessão de destino','');
  if(d!=='Monocrática'&&(has(P,'Destino')||has(T,'Seleção Prévia')))set('producao','Mono - Tipo de ato','');
  if(d!=='Outro destino'&&has(P,'Destino'))set('producao','Destino - Outro','');
+ if(d!=='Sessão'&&(has(P,'Destino')||has(A,'Nova sessão de destino')))set('pauta','Nova sessão de destino','');
+ return m;
+}
+/* Normalização compartilhada: a data explícita prevalece sobre o indicador,
+   sem inventar datas quando a equipe marca somente o indicador. */
+function mudancaCoerente(r,mud){
+ const m=destinoCoerente(r,JSON.parse(JSON.stringify(mud||{}))),p=m.producao||{};
+ [['Data da Revisão','CORRIGIDO'],['Data da Liberação','LIBERADO'],['Data da Assinatura','Assinado'],['Mono - Data da publicação','Publicado']].forEach(([data,flag])=>{
+   if(Object.prototype.hasOwnProperty.call(p,data))p[flag]=String(p[data]||'').trim()?'Sim':'';
+ });
  return m;
 }
 /* grava {secao: {chave: valor}} no registro do processo (cria se faltar), com nova tentativa se o arquivo mudou no meio */
 async function gravar(cnj, mud, msg, extra, u, outros) {
   const F = await ficha();
   for (let t = 0; t < 4; t++) {
-    const { doc, sha } = await lerOp(), r = registro(doc, cnj, F, true), out = aplica(r, destinoCoerente(r,mud));
+    const { doc, sha } = await lerOp(), r = registro(doc, cnj, F, true), efetiva = mudancaCoerente(r,mud), out = aplica(r, efetiva);
     if (extra) extra(r, out);
     if (!out.length) return { r, out };
     regras(r, out, u);
     doc.atualizado_em = agora();
-    const arqs = [{ path: OP, txt: JSON.stringify(doc, null, 1) + '\n', sha }], mais = outros ? await outros(r, out) : [];
+    const arqs = [{ path: OP, txt: JSON.stringify(doc, null, 1) + '\n', sha }], mais = outros ? await outros(r, out, efetiva) : [];
     try { await commitConferido(arqs.concat(mais), msg + ' · ' + out.slice(0, 6).join(', ') + (mais.length ? '\n\nCartão atualizado em: ' + mais.map(x => x.path).join(', ') : '')); return { r, out }; }
     catch (e) { if (e.status !== 409) throw e; }
   }
@@ -388,7 +398,7 @@ module.exports = async (req, res, u) => {
         const {doc,sha}=await lerOp(),registros=[],outAll=[];
         for(const x of lista){
           const r=registro(doc,x.cnj,F,true),m={};for(const [k,v] of Object.entries(x.campos)){const i=k.indexOf('.');(m[k.slice(0,i)]||(m[k.slice(0,i)]={}))[k.slice(i+1)]=v;}
-          const out=aplica(r,destinoCoerente(r,m));if(out.length){regras(r,out,u);outAll.push(r.processo);}
+          const out=aplica(r,mudancaCoerente(r,m));if(out.length){regras(r,out,u);outAll.push(r.processo);}
           const t=r.triagem||{},p=r.producao||{},a=r.pauta||{};
           registros.push({processo:r.processo,triagem:{'Seleção Prévia':t['Seleção Prévia']||'','Destino - Confirmado em':t['Destino - Confirmado em']||'','Destino - Confirmado por':t['Destino - Confirmado por']||''},producao:{Destino:p.Destino||'','Mono - Tipo de ato':p['Mono - Tipo de ato']||'','Destino - Outro':p['Destino - Outro']||''},pauta:{'Nova sessão de destino':a['Nova sessão de destino']||''}});
         }
@@ -440,10 +450,10 @@ module.exports = async (req, res, u) => {
         }
       }
       const v=JSON.stringify(Array.from(por.values()));if(v!==JSON.stringify(antigos)){reg.origem=reg.origem||{};reg.origem['Solicitações manuais']=v;alterados.push('origem.Solicitações manuais');}
-    }, u, async () => {
+    }, u, async (r, out, efetiva) => {
       const arqs = []; cart.length = 0;
       for (const a of await ondeEsta(cnj)) {
-        let mudou = false; a.its.forEach(it => { if (aplicaCartao(it, paraCartao(mud, it), u)) mudou = true; });
+        let mudou = false; a.its.forEach(it => { if (aplicaCartao(it, paraCartao(efetiva, it), u)) mudou = true; });
         if (mudou) { a.dados.atualizadoEm = agora(); arqs.push({ path: a.path, txt: JSON.stringify(a.dados, null, 1) + '\n', sha: a.sha }); cart.push(a.path); }
       }
       return arqs;
@@ -618,6 +628,7 @@ module.exports.editaveis = editaveis;
 module.exports.fonteDe = fonteDe;
 module.exports.registro = registro;
 module.exports.aplica = aplica;
+module.exports.mudancaCoerente = mudancaCoerente;
 module.exports.regras = regras;
 module.exports.ondeEsta = ondeEsta;
 module.exports.aplicaCartao = aplicaCartao;

@@ -4679,8 +4679,7 @@
        "chave": "Nova sessão de destino",
        "tipo": "texto",
        "secao": "pauta",
-       "calculado": true,
-       "regra": "antes \"Sessão Destino\"",
+       "regra": "Sessão pretendida na seleção prévia ou remarcação. Não constitui ingresso oficial em pauta; vazio = sem data definida.",
        "apelido": "nova_sessao_destino"
       },
       {

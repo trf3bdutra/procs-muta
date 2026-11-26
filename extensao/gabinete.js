@@ -270,7 +270,7 @@ function pautaFluxo(P,C,hoje){
   function put(d,it,r){d=dia(d);if(!d||!S(it))return;var x=rows[d]||(rows[d]={sessao:d,item:S(it),status:''});if(it)x.item=S(it);if(r)x.status=S(r);}
   (Array.isArray(P.sessoes)?P.sessoes:[]).forEach(function(x){if(x)put(x.sessao,x.item,x.resultado);});
   put(P['Sessão original'],P['Item (Pauta de Julgamento)'],P['Status de Julgamento']);
-  C.forEach(function(x){if(x)put(x.sessao,x.item,x.resultado||x.status);});
+  C.forEach(function(x){if(x&&x.lista!=='previa')put(x.sessao,x.item,x.resultado||x.status);});
   var ocorrencias={};try{ocorrencias=JSON.parse(S(P['Ingresso e ocorrências da sessão'])||'{}')||{};}catch(e){}
   Object.values(rows).forEach(function(x){var o=ocorrencias[x.sessao+'|'+x.item];if(o&&o.efetivada===true&&S(o.justificativa)&&! /retirad|adiad|julgad|provimento|prejudic|nao conhec|acolhid|rejeitad|homolog/i.test(N(x.status))){if(o.ocorrencia==='Adiamento')x.status='ADIADO';else if(o.ocorrencia==='Retirada de pauta')x.status='RETIRADO DE PAUTA';}});
   var L=Object.values(rows).sort(function(a,b){return b.sessao.localeCompare(a.sessao);}),cur=L.find(function(x){return !/retirad|adiad|julgad|provimento|prejudic|nao conhec|acolhid|rejeitad|homolog/i.test(N(x.status));}),last=L[0],alvo=dia(P['Nova sessão de destino']);
@@ -279,7 +279,7 @@ function pautaFluxo(P,C,hoje){
   return {estado:estado,atual:cur||null,ultima:last||null,alvo:alvo,lista:L};
 }
 function pautaAtualFluxo(){
- var P=Object.assign({},(G.op||{}).pauta||{});['Sessão original','Item (Pauta de Julgamento)','Status de Julgamento','Nova sessão de destino','Ingresso e ocorrências da sessão'].forEach(function(k){var v=V('pauta',k);if(v!=null&&S(v))P[k]=v;});
+ var P=Object.assign({},(G.op||{}).pauta||{});['Sessão original','Item (Pauta de Julgamento)','Status de Julgamento','Nova sessão de destino','Ingresso e ocorrências da sessão'].forEach(function(k){var v=V('pauta',k);if(('pauta.'+k) in G.pend||v!=null&&S(v))P[k]=v;});
  var SI=window.MutaSincronia&&window.MutaSincronia.situacao?window.MutaSincronia.situacao():null,C=SI&&dg(SI.cnj)===dg(G.cnj)?SI.cartoes||[]:[];
  return pautaFluxo(P,C);
 }
