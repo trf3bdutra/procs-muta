@@ -484,3 +484,45 @@ html body.hero-redesign-v53 #gab .hero-case-standard .hero-ann-questions-group .
 html body.hero-redesign-v53 #gab .hero-case-standard .hero-case-grid>.hero-case-field{align-content:start}
 html body.hero-redesign-v53 #gab .hero-case-standard .hero-case-grid .ro{display:block;border:1px solid var(--case-border);border-radius:var(--case-radius);padding:6px 8px;min-height:29px;box-sizing:border-box}
 @media(max-width:360px){html body.hero-redesign-v53 #gab .hero-mon-list .gr{grid-template-columns:minmax(0,1fr)}}
+
+/* HERO: acabamento unificado das seções do Resumo e roteiros sem painel inicial. */
+html body.hero-redesign-v53 #gab .hero-top-page:has(>.hero-first-panel){--sum-head:#eee5d3;--sum-sub:#f7f2e7;--sum-edge:#ded5c4;--sum-paper:var(--cmt-paper,#fff)}
+html body.hero-redesign-v53 #gab .hero-top-page>.hero-case-standard,html body.hero-redesign-v53 #gab .hero-top-page>.hero-v53-painel.hero-profile-panels.hero-summary-standard:has(.hero-profile-editorial){margin:7px 10px!important;padding:0!important;border:0!important;box-shadow:none!important;background:transparent!important;display:grid;gap:6px}
+html body.hero-redesign-v53 #gab .hero-summary-standard>.hero-v53-painel-body{display:grid!important;gap:6px;padding:0!important;margin:0!important;background:transparent!important}
+html body.hero-redesign-v53 #gab .hero-top-page>.hero-case-standard>.hero-editorial-heading-main,html body.hero-redesign-v53 #gab .hero-summary-standard .hero-v53-profile.hero-profile-panel>summary.hero-editorial-heading{background:var(--sum-head)!important;border:1px solid var(--sum-edge)!important;border-radius:5px!important;padding:7px 9px!important;min-height:32px!important;margin:0!important;font:650 12px/1.35 var(--sans,system-ui)!important}
+html body.hero-redesign-v53 #gab .hero-summary-standard .hero-v53-profile.hero-profile-panel{border:1px solid var(--sum-edge)!important;border-radius:5px!important;overflow:hidden;background:var(--sum-paper)!important;margin:0!important}
+html body.hero-redesign-v53 #gab .hero-summary-standard .hero-v53-profile.hero-profile-panel>summary.hero-editorial-heading{border:0!important;border-radius:0!important}
+html body.hero-redesign-v53 #gab .hero-summary-standard .hero-v53-profile.hero-profile-panel[open]>summary{border-bottom:1px solid var(--sum-edge)!important}
+html body.hero-redesign-v53 #gab .hero-top-page>.hero-case-standard>.hero-summary-section{border-color:var(--sum-edge)!important;border-radius:5px!important}
+html body.hero-redesign-v53 #gab .hero-top-page>.hero-case-standard>.hero-summary-section>summary.hero-editorial-heading,html body.hero-redesign-v53 #gab .hero-summary-standard .hero-summary-nested>summary{background:var(--sum-sub)!important;padding:6px 8px!important;min-height:30px!important;font:600 12px/1.4 var(--sans,system-ui)!important}
+html body.hero-redesign-v53 #gab .hero-summary-standard .hero-profile-editorial .hero-profile-aut{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:6px!important;padding:7px!important;background:var(--sum-paper)!important}
+html body.hero-redesign-v53 #gab .hero-summary-standard .hero-profile-editorial .hero-profile-aut>.hero-profile-band,html body.hero-redesign-v53 #gab .hero-summary-standard .hero-summary-nested{border:1px solid var(--sum-edge)!important;border-radius:5px!important;padding:0!important;margin:0!important;overflow:hidden;min-width:0}
+html body.hero-redesign-v53 #gab .hero-summary-standard .hero-profile-band>.pm-mer-h{background:var(--sum-sub)!important;padding:6px 8px!important;margin:0!important;border-bottom:1px solid var(--sum-edge)!important;font:600 11px/1.4 var(--sans,system-ui)!important}
+html body.hero-redesign-v53 #gab .hero-summary-standard .hero-profile-editorial .hero-profile-band>.pc-dl{border:0!important;border-radius:0!important;margin:0!important;padding:0!important}
+html body.hero-redesign-v53 #gab .hero-summary-standard .hero-profile-editorial .hero-profile-band>.pc-dl>div{display:grid!important;grid-template-columns:minmax(80px,36%) minmax(0,1fr);padding:5px 8px!important;gap:6px!important;border-bottom:1px solid var(--sum-edge)!important}
+html body.hero-redesign-v53 #gab .hero-summary-standard .hero-profile-band .pc-dl :is(dt,dd){font-size:11px!important;line-height:1.4!important;overflow-wrap:anywhere;min-width:0;margin:0!important}
+html body.hero-redesign-v53 #gab .hero-summary-standard .hero-profile-band :is(.pm-tf,.pc-ps,.pm-pt,.pm-sit,.hero-reg-acervo){padding:6px 8px!important;margin:0!important;min-width:0}
+html body.hero-redesign-v53 #gab .hero-summary-standard .hero-v53-coverage-list{padding:6px 8px!important;display:grid;gap:4px}
+html body.hero-redesign-v53 #gab .hero-summary-standard .hero-v53-coverage-row{display:grid!important;grid-template-columns:minmax(0,1fr);gap:2px;padding:4px 0;border-bottom:1px solid var(--sum-edge);overflow-wrap:anywhere}
+html body.hero-redesign-v53 #gab .hero-summary-standard .hero-v53-pauta-body{padding:8px!important;display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px!important;min-width:0}
+html body.hero-redesign-v53 #gab .hero-summary-standard .hero-v53-pauta-body>:is(.hero-pauta-resumo,.w,details){grid-column:1/-1;min-width:0}
+html body.hero-redesign-v53 #gab .hero-summary-standard :is(.gf,.pv-field,.pv-idrow){min-width:0;margin:0!important;align-content:start}
+html body.hero-redesign-v53 #gab .hero-summary-standard .gl{font:550 11px/1.4 var(--sans,system-ui)!important;letter-spacing:0!important;text-transform:none!important;white-space:normal}
+html body.hero-redesign-v53 #gab .hero-summary-standard :is(input:not([type=checkbox]):not([type=radio]),select,textarea){box-sizing:border-box;min-width:0;max-width:100%;width:100%;border:1px solid var(--sum-edge)!important;border-radius:5px!important;background:var(--sum-paper)!important;padding:5px 7px!important;font:400 12px/1.4 var(--sans,system-ui)!important}
+html body.hero-redesign-v53 #gab .hero-summary-standard textarea{min-height:54px;resize:vertical}
+html body.hero-redesign-v53 #gab .hero-summary-standard .ro{font-size:12px;overflow-wrap:anywhere}
+html body.hero-redesign-v53 #gab .hero-summary-standard [hidden]{display:none!important}
+html body.hero-redesign-v53 #gab :is(.hero-tri-with-dock,.hero-route-production) ol.rt>li.rt-f{background:#e5d7ba!important;border-color:#ddcdb0!important;color:#53442e!important}
+html body.hero-redesign-v53 #gab :is(.hero-tri-with-dock,.hero-route-production) ol.rt>li.hero-route-step{--rs-head:#dce8f2;--rs-body:#f0f6fb;--rs-edge:#c8daea;--rs-ink:#42617c}
+html body.hero-redesign-v53 #gab :is(.hero-tri-with-dock,.hero-route-production) ol.rt>li.hero-route-step.is-ok{--rs-head:#d7e6d3;--rs-body:#ebf3e9;--rs-edge:#bfd3b9;--rs-ink:#355c43}
+html body.hero-redesign-v53 #gab :is(.hero-tri-with-dock,.hero-route-production) ol.rt>li.hero-route-step.is-partial{--rs-head:#dfdcee;--rs-body:#f1eff8;--rs-edge:#cfc6e5;--rs-ink:#65527f}
+html body.hero-redesign-v53 #gab :is(.hero-tri-with-dock,.hero-route-production) ol.rt>li.hero-route-step.is-al{--rs-head:#f0dfb8;--rs-body:#fcf5e4;--rs-edge:#e3c995;--rs-ink:#845c1b}
+html body.hero-redesign-v53 #gab :is(.hero-tri-with-dock,.hero-route-production) ol.rt>li.hero-route-step>.rt-c{background:var(--rs-body)!important;border-color:var(--rs-edge)!important}
+html body.hero-redesign-v53 #gab :is(.hero-tri-with-dock,.hero-route-production) ol.rt>li.hero-route-step>.rt-c>.rt-h{background:var(--rs-head)!important}
+html body.hero-redesign-v53 #gab :is(.hero-tri-with-dock,.hero-route-production) ol.rt>li.hero-route-step>.rt-c>:is(.rt-b,.rt-step-strip){background:var(--rs-body)!important}
+html body.hero-redesign-v53 #gab .hero-route-footer-tools{display:flex!important;flex-wrap:wrap;align-items:center;gap:4px!important;margin:6px 0;padding:5px 7px!important;background:var(--cmt-paper,#fff);border:1px solid var(--cmt-line);border-radius:5px}
+html body.hero-redesign-v53 #gab .hero-route-footer-tools .hero-route-search{display:flex;flex:1 1 180px;min-width:0;gap:4px}
+html body.hero-redesign-v53 #gab .hero-route-footer-tools .hero-route-search input{flex:1;min-width:0}
+html body.hero-redesign-v53 #gab .hero-route-footer-tools button{font-size:10px;min-height:24px;padding:3px 6px}
+html body.hero-redesign-v53 #gab .hero-route-aux:empty{display:none!important}
+@media(max-width:360px){html body.hero-redesign-v53 #gab .hero-summary-standard .hero-v53-pauta-body{grid-template-columns:minmax(0,1fr)}}
