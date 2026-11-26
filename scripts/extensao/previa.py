@@ -68,7 +68,7 @@ def montar_universal(painel: pathlib.Path) -> str:
         sys.exit('painel.html: navegador principal não encontrado')
     itens = {m.group(1): m.group(0) for m in re.finditer(r'<button\b[^>]*\bid="tab-([^"]+)"[^>]*>[\s\S]*?</button>', nav.group(2))}
     ferramentas = ('acervo', 'pauta', 'dil', 'del')
-    processo = ('pront', 'min')
+    processo = ('processo', 'pront', 'min')
     if not all(k in itens for k in ferramentas + processo):
         sys.exit('painel.html: abas principais da prévia não encontradas')
     itens['min'] = itens['min'].replace('<b>Minuta ', '<b>Minutário ', 1).replace('Editor × padrão', 'Elaboração e revisão', 1)
