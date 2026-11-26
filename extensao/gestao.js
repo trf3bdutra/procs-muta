@@ -66,7 +66,7 @@
   var ETAPAS = [['todo', 'A fazer'], ['doing', 'Em andamento'], ['review', 'Em revisão'], ['done', 'Concluída']];
   var NOME_ET = {}, STAGE_OK = {}; ETAPAS.forEach(function (e) { NOME_ET[e[0]] = e[1]; STAGE_OK[e[0]] = 1; });
   var URG = ['Urgente', 'Alta', 'Média', 'Baixa'];
-  var D = { filtrosAbertos:false, busca:'', responsavel:'', prioridade:'', f: 'comigo', nova: false, lista: null, equipe: [], erro: '', msg: '', lendo: false, abertos: {}, ed: {}, exc: {}, resp: {}, fase: { todo: true, doing: true, review: true, done: false } };
+  var D = { quadro:'todas', filtrosAbertos:false, busca:'', responsavel:'', prioridade:'', f: 'comigo', nova: false, lista: null, equipe: [], erro: '', msg: '', lendo: false, abertos: {}, ed: {}, exc: {}, resp: {}, fase: { todo: true, doing: true, review: true, done: false } };
   function lerDil() {
     if (!ses || !pode(quem())) return Promise.resolve();
     D.lendo = true; pintarDil();
@@ -120,6 +120,10 @@
   function painelGestao(titulo,subtitulo,acoes,metricas,filtros){
     return '<section class="hero-cmt-gestion hero-gestao-strip" aria-label="'+esc(titulo)+' · indicadores"><div class="hero-gestao-inline">'+(metricas||'')+(acoes?'<div class="hero-gestao-tools">'+acoes+'</div>':'')+'</div>'+(filtros?'<details class="hero-gestao-filter"'+(D.filtrosAbertos?' open':'')+'><summary title="Busca e filtros">Filtros</summary>'+filtros+'</details>':'')+'</section>';
   }
+  function kanban(grupos,modo,acao,render){
+    var tabs=[['todas','Todas',grupos.reduce(function(n,g){return n+g[2].length;},0)]].concat(grupos.map(function(g){return [g[0],g[1],g[2].length];}));
+    return '<div class="hero-kanban"><nav class="hero-kanban-nav" aria-label="Filtrar por etapa">'+tabs.map(function(g){return '<button type="button" data-gx-board="'+acao+':'+g[0]+'" data-tone="'+g[0]+'" aria-pressed="'+(modo===g[0])+'">'+esc(g[1])+' <b>'+g[2]+'</b></button>';}).join('')+'</nav><div class="hero-kanban-board">'+grupos.filter(function(g){return modo==='todas'||g[0]===modo;}).map(function(g){return '<section class="hero-kanban-col" data-tone="'+g[0]+'"><header><b>'+esc(g[1])+'</b><span>'+g[2].length+'</span></header><div class="hero-kanban-cards">'+(g[2].length?g[2].map(render).join(''):'<p class="muted gx-v">Nenhum registro.</p>')+'</div></section>';}).join('')+'</div></div>';
+  }
   function pintarDil() {
     var c = $('dil-app'); if (!c) return;
     var q = quem();
@@ -133,21 +137,14 @@
     var metricas=metricasCmt([['total','Em aberto',abertas.length,n.comigo+' suas'],['priority','Prioritárias',abertas.filter(function(t){return /^(Alta|Urgente)$/.test(t.urgency);}).length],['sem','Sem responsável',abertas.filter(function(t){return !t.assignee;}).length]]);
     var eq=Array.from(new Set(D.equipe.concat(L.map(function(t){return t.assignee;}).filter(Boolean)))).sort();
     var filtros='<div class="hero-cmt-gestion-filters"><input type="search" data-gx-filter="busca" placeholder="Buscar diligência ou processo" aria-label="Buscar diligência" value="'+esc(D.busca)+'"><label>Responsável<select data-gx-filter="responsavel"><option value="">Todos os responsáveis</option>'+eq.map(function(n){return '<option value="'+esc(n)+'"'+(n===D.responsavel?' selected':'')+'>'+esc(n)+'</option>';}).join('')+'</select></label><label>Prioridade<select data-gx-filter="prioridade"><option value="">Todas as prioridades</option>'+URG.map(function(n){return '<option value="'+esc(n)+'"'+(n===D.prioridade?' selected':'')+'>'+esc(n)+'</option>';}).join('')+'</select></label></div>';
-    var fases = ETAPAS.map(function (e) {
-      var I = V.filter(function (t) { return (STAGE_OK[t.stage] ? t.stage : 'todo') === e[0]; });
-      if (e[0] === 'done') I.sort(function (a, b) { return String(b.concluidaEm || b.atualizadoEm || '').localeCompare(String(a.concluidaEm || a.atualizadoEm || '')); });
-      var mostra = e[0] === 'done' ? I.slice(0, 30) : I;
-      return '<details class="gx-fase gx-fase-' + e[0] + '" data-fase="' + e[0] + '"' + (D.fase[e[0]] && I.length ? ' open' : '') + '><summary><b>' + e[1] + '</b><i>' + I.length + '</i></summary>' +
-        (mostra.length ? mostra.map(itemDil).join('') + (I.length > mostra.length ? '<p class="muted gx-v">Mostrando as ' + mostra.length + ' concluídas mais recentes de ' + I.length + '; as demais, no Ex Officio.</p>' : '')
-          : '<p class="muted gx-v">Nenhuma.</p>') + '</details>';
-    }).join('');
+    var fases=kanban(ETAPAS.map(function(e){return [e[0],e[1],V.filter(function(t){return (STAGE_OK[t.stage]?t.stage:'todo')===e[0];})];}),D.quadro,'dil',itemDil);
     var tab = function (k, r) { return '<button type="button" role="tab" data-gx-f="' + k + '" aria-selected="' + (D.f === k) + '">' + r + ' <i>' + n[k] + '</i></button>'; };
     var acesso='<a class="gx-nav-action" target="_blank" rel="noopener" title="Abrir no Ex Officio" aria-label="Abrir no Ex Officio" href="'+esc(site())+(q.des&&!q.gestor?'/cmt/':'/exofficio/#pendencias')+'"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 5h6v6M19 5l-9 9M19 13v6H5V5h6"/></svg></a>';
     c.innerHTML = painelGestao('Diligências','Quadro da equipe', '<button type="button" class="btn sm" data-gx="nova"'+(D.nova?' hidden':'')+'>+ Nova</button>'+atualizaBtn('ler-dil',D.lendo)+acesso,metricas,filtros)+faixaGestao('Filtro das diligências',tab('comigo','Comigo')+tab('criei','Que criei')+tab('todas','Todas'),'',D.lendo) +
       (D.nova ? formDil() : '') +
       (D.msg ? '<p class="gx-msg' + (/^Não|erro/i.test(D.msg) ? ' err' : '') + '">' + esc(D.msg) + '</p>' : '') +
       (D.erro ? '<p class="gx-v err">' + esc(D.erro) + '</p>' : !D.lista ? '<p class="muted gx-v">Lendo o quadro…</p>' :
-        V.length ? fases : '<p class="muted gx-v">Nenhuma diligência ' + (D.f === 'comigo' ? 'com você' : D.f === 'criei' ? 'criada por você' : 'no quadro') + '.</p>');
+        fases);
   }
   function etapa(id, st, sel) {
     var t = (D.lista || []).filter(function (x) { return x.id === id; })[0]; if (!t) return;
@@ -192,7 +189,7 @@
   }
 
   /* ---------- Deliberações ---------- */
-  var X = { aba: 'cronologia', categoriasFechadas:{}, dev: {}, dados: null, erro: '', msg: '', lendo: false, resp: {}, conf: {}, nota: {} };
+  var X = { quadro:'todas', aba: 'cronologia', categoriasFechadas:{}, dev: {}, dados: null, erro: '', msg: '', lendo: false, resp: {}, conf: {}, nota: {} };
   function lerDel() {
     if (!ses || !pode(quem())) return Promise.resolve();
     X.lendo = true; pintarGestao();
@@ -302,14 +299,18 @@
     var dia=null,corpo=X.aba==='categorias'?agruparNot(N,lidas):N.map(function(n){var d=String(n.em||'').slice(0,10),h='';if(d!==dia){dia=d;h='<h4 class="hero-not-dia">'+esc(d===hoje()?'Hoje':data(d)||'Sem data')+'</h4>';}return h+itemNot(n,lidas);}).join('');
     c.innerHTML=painelGestao('Notificações','', atualizaBtn('ler-del',X.lendo),m,'')+faixaGestao('Notificações',tab('cronologia','Cronologia')+tab('categorias','Categorias'),'',X.lendo)+(X.msg?'<p class="gx-msg">'+esc(X.msg)+'</p>':'')+(X.erro?'<p class="gx-v err">'+esc(X.erro)+'</p>':!X.dados?'<p class="muted gx-v">Lendo…</p>':corpo||'<p class="muted gx-v">Nenhuma notificação nesta categoria.</p>');
   }
+  function urgEtapa(a){
+    return a.assinado?'conferir':a.dataLiberacao?'assinar':a.dataCorrecao?'liberar':a.dataMinuta?'corrigir':a.servidor?'minuta':'designar';
+  }
   function pintarUrg(){
     var c=$('urg-app');if(!c)return;var q=quem();
     if(!pode(q)){c.textContent='Acesso restrito ao Desembargador e ao gestor.';return;}
-    var L=listas();
-    var totalUrg=L.as.map(function(a){return Object.assign({},a,a.urg||{});}).concat(L.urg);
-    var metUrg=metricasCmt([['total','Em aberto',totalUrg.length],['late','Sem responsável',totalUrg.filter(function(a){return !a.servidor;}).length],['priority','Em minuta',L.urg.filter(function(a){return !!a.servidor&&!a.dataMinuta&&!a.assinado;}).length],['lib','Em revisão / assinatura',L.as.length+L.urg.filter(function(a){return !!(a.dataMinuta||a.assinado);}).length]],'urg-metrics');
-    var corpo=grupoDel('01 · Chegou',L.urg.filter(function(a){return !a.servidor&&!a.dataMinuta&&!a.assinado;}),itemUrg,'Nenhuma urgência sem responsável.','urgente')+grupoDel('02 · Em minuta',L.urg.filter(function(a){return !!a.servidor&&!a.dataMinuta&&!a.assinado;}),itemUrg,'Nenhuma urgência em minuta.','urgente')+grupoDel('03 · Revisão e assinatura',L.urg.filter(function(a){return !!(a.dataMinuta||a.assinado);}),itemUrg,'Nenhuma urgência em revisão.','urgente')+grupoDel('Para assinatura',L.as,itemAs,'Nenhuma decisão urgente submetida à assinatura.','urgente');
-    c.innerHTML=painelGestao('Urgências','Providências em aberto'+(X.dados&&X.dados.hoje?' · '+data(X.dados.hoje):''),atualizaBtn('ler-del',X.lendo),X.dados?metUrg:'','')+(X.msg?'<p class="gx-msg">'+esc(X.msg)+'</p>':'')+(X.erro?'<p class="gx-v err">'+esc(X.erro)+'</p>':!X.dados?'<p class="muted gx-v">Lendo…</p>':corpo);
+    var L=listas(),grupos=[['designar','A designar'],['minuta','Em minuta'],['corrigir','Em correção'],['liberar','A liberar'],['assinar','A assinar'],['conferir','A conferir']];
+    var G=grupos.map(function(g){return [g[0],g[1],L.urg.filter(function(a){return urgEtapa(a)===g[0];}).map(function(a){return {registro:a,assinatura:false};}).concat(g[0]==='assinar'?L.as.map(function(a){return {registro:a,assinatura:true};}):[])];});
+    var total=L.urg.length+L.as.length;
+    var metUrg=metricasCmt([['total','Em aberto',total],['late','Sem responsável',G[0][2].length],['priority','Em produção',G[1][2].length+G[2][2].length],['lib','A liberar / assinar',G[3][2].length+G[4][2].length]]);
+    var corpo=kanban(G,X.quadro,'urg',function(a){return a.assinatura?itemAs(a.registro):itemUrg(a.registro);});
+    c.innerHTML=painelGestao('Urgências','',atualizaBtn('ler-del',X.lendo),X.dados?metUrg:'','')+(X.msg?'<p class="gx-msg">'+esc(X.msg)+'</p>':'')+(X.erro?'<p class="gx-v err">'+esc(X.erro)+'</p>':!X.dados?'<p class="muted gx-v">Lendo…</p>':corpo);
   }
   function pintarGab(){
     var c=$('gab-app');if(!c)return;if(!pode(quem())){c.textContent='Acesso restrito ao Desembargador e ao gestor.';return;}
@@ -396,6 +397,7 @@
       cd.addEventListener('click', function (e) {
         var x = e.target.closest('button'); if (!x) return;
         if (x.hasAttribute('data-gx-copia')) return copiar(x);
+        if(x.dataset.gxBoard){D.quadro=x.dataset.gxBoard.split(':')[1];return pintarDil();}
         if (x.dataset.gxF) { D.f = x.dataset.gxF; D.msg = ''; return pintarDil(); }
         if (x.dataset.gxMais) { D.abertos[x.dataset.gxMais] = !D.abertos[x.dataset.gxMais]; return pintarDil(); }
         if (x.dataset.gx === 'nova') { D.nova = true; D.msg = ''; pintarDil(); var t = cd.querySelector('[name=title]'); if (t) t.focus(); return; }
@@ -423,6 +425,7 @@
       cx.addEventListener('click', function (e) {
         var x = e.target.closest('button'); if (!x) return;
         if (x.hasAttribute('data-gx-copia')) return copiar(x);
+        if(x.dataset.gxBoard){X.quadro=x.dataset.gxBoard.split(':')[1];return pintarUrg();}
         if(x.dataset.gxRead)return marcarNot(x.dataset.gxRead);
         if(x.dataset.gxOpen){var BR=window.MutaProntuarioBridge;if(window.MutaAbas)window.MutaAbas.ir('pront');if(BR&&BR.abrirProcesso)BR.abrirProcesso(x.dataset.gxOpen);return;}
         if (x.dataset.gxA) { X.aba = x.dataset.gxA; X.msg = ''; return pintarGestao(); }
@@ -455,6 +458,6 @@
     /* a cada 3 minutos, enquanto o painel está aberto, os contadores se renovam */
     setInterval(function () { if (pode(quem()) && document.visibilityState === 'visible') { lerDil(); lerDel(); } }, 3 * 60e3);
   }
-  window.MutaGestao = { abrir: abrir, mostrar: mostrar, pautaPendencias:pautaPendencias,pautaCard:pautaCard, _D: D, _X: X };
+  window.MutaGestao = { naoLidas:function(){var m=leituraNot();return X.dados?notificacoes(listas()).filter(function(n){return !m[chaveLida(n)];}).length:null;}, abrir: abrir, mostrar: mostrar, pautaPendencias:pautaPendencias,pautaCard:pautaCard, _D: D, _X: X };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', iniciar); else iniciar();
 })();
