@@ -1778,6 +1778,13 @@ function heroOrganizarProntuario(){
       complement.append(secCaso,secConteudo);
       Array.from(materia.children).forEach(function(n){if(!n.matches('h4')&&n!==qd&&n!==tagsGroup)complement.append(n);});
       complement.append(qd,tagsGroup);
+      /* Um único contrato de cabeçalho: título, contagem/ações existentes e chevron. */
+      function tituloResumo(d,t){var sh=d.querySelector(':scope > summary');if(!sh)return;sh.classList.add('hero-editorial-heading');var h=sh.querySelector('h4');if(!h){h=el('h4','',t);Array.from(sh.childNodes).filter(function(n){return n.nodeType===3&&S(n.textContent)===t;}).forEach(function(n){n.remove();});sh.prepend(h);}h.classList.add('hero-editorial-heading-text');}
+      tituloResumo(secCaso,'Caso');tituloResumo(secConteudo,'Conteúdo');tituloResumo(qd,'Questões');tituloResumo(tagsGroup,'Etiquetas');tituloResumo(perfil,'Perfil do processo');if(pautaPerfil.parentNode)tituloResumo(pautaPerfil,'Pauta e julgamento');
+      ctitle.classList.add('hero-editorial-heading','hero-editorial-heading-main');
+      /* O mesmo assunto CNJ aparece na autuação e no Caso: no Caso, mantém uma única linha de leitura. Não remove editores. */
+      var assuntoLido=false;
+      Array.from(caseGrid.querySelectorAll('.pc-dl>div,.gf')).forEach(function(n){var l=n.querySelector('dt,.gl');if(!l||normalAssunto(l.textContent)!=='assunto cnj')return;if(n.querySelector('input,textarea,select,button,[contenteditable=true]'))return;if(assuntoLido){n.hidden=true;n.classList.add('hero-duplicate-readonly');}else assuntoLido=true;});
       id.insertBefore(complement,painel);
       mat.remove();
 
