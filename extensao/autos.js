@@ -336,6 +336,8 @@ var AUTO_K = 'hero18810:autoPreencher';
 var AUTO_AL = /^(triagem\.Tipo de Julgamento|origem\.Sentença - Reexame)$/;
 function autoLigado() { try { return localStorage.getItem(AUTO_K) !== '0'; } catch (e) { return true; } }
 function autoLigar(on) { try { localStorage.setItem(AUTO_K, on ? '1' : '0'); } catch (e) {} if (on) { A.autoSig = {}; agendarAuto(); } redesenhar(); }
+/* 0.77.58: Perfil › Ajustes › Preencher a ficha sozinho */
+document.addEventListener('hero:ajuste', function (e) { var d = e.detail || {}; if (d.k === 'autoPreencher') autoLigar(!!d.v); });
 function chave() { return A.cnj ? Muta.chaveProcesso(A.cnj) : ''; }
 function cheio(v) { return Array.isArray(v) ? v.length > 0 : !!S(v); }
 function valorFicha(alvo) { var g = GB(), i = alvo.indexOf('.'); return g.V ? g.V(alvo.slice(0, i), alvo.slice(i + 1)) : ''; }

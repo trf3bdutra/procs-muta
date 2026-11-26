@@ -154,6 +154,12 @@ caixa.addEventListener('change', function (e) {
   if (k === 'ativa') { K.ativa = t.checked; guarda(); ED.automatico(K.ativa); render(); }
   else if (k === 'fmt') { K.fmt = t.checked; guarda(); analisar(); }
 });
+/* 0.77.58: Perfil › Ajustes › Minuta (a escolha já vem gravada) */
+document.addEventListener('hero:ajuste', function (e) {
+  var d = e.detail || {};
+  if (d.k === 'confAtiva') { K.ativa = !!d.v; ED.automatico(K.ativa); render(); }
+  else if (d.k === 'confFmt') { K.fmt = !!d.v; analisar(); }
+});
 ED.ouvir(function () { analisar(); });
 document.addEventListener('muta:prontuario', function () { if (ED.estado().texto) analisar(); });
 document.addEventListener('muta:fund-vinculos',function(){if(ED.estado().texto)analisar();});

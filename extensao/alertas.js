@@ -101,7 +101,7 @@
   function abrir(s) {
     var p = $('tu-pop'); if (!p) return;
     p.hidden = !s; var b=$('tu-sino');if(b)b.setAttribute('aria-expanded', s ? 'true' : 'false');
-    if(s&&novoHeroPerfil()){posicionarPerfil();pintar();return;}
+    if(s&&novoHeroPerfil()){posicionarPerfil();pintar();lerCfg().then(pintar);return;}
     if (s) { posicionarPerfil(); try { chrome.runtime.sendMessage({ tipo: 'muta-app-ler' }).catch(function () {}); } catch (e) {} Promise.all([lerAlertas(), lerCfg(), lerCatalogo(), lerCmt()]).then(pintar); pintar(); }
   }
   function quando(iso) { if (!iso) return ''; var d = new Date(iso); return isNaN(d) ? '' : d.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' }) + ' ' + d.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }); }
@@ -118,12 +118,12 @@
     if (A.aba === 'ch') A.aba = 'al';
     if (A.aba === 'pz' || A.aba === 'et') A.aba = 'al';
     var site=(window.Muta&&window.Muta.SITE)||'https://www.gabinete-cmt.com';
-    var h='<header class="tu-profile-panel-head"><div class="tu-profile-panel-id"><b>'+esc(on?q.usuario:'HERO18810')+'</b><small>'+(novoHeroPerfil()?'Perfil':'Notificações')+(gst?' · Gestão':'')+'</small></div><div class="tu-profile-panel-actions">'+(on&&window.MutaGabinete&&window.MutaGabinete.cnj()?'<button type="button" data-ap-refresh title="Atualizar prontuário" aria-label="Atualizar prontuário">'+SVG('<path d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7"/>',14)+'</button>':'')+($('pv-ajustes')||gst?'<button type="button" data-ap-ajustes title="Configurações" aria-label="Configurações">'+SVG('<circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="7"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3M5 5l2 2m10 10 2 2M5 19l2-2M17 7l2-2"/>',14)+'</button>':'')+(on?'<a href="'+esc(site)+'/exofficio/" target="_blank" rel="noopener noreferrer" title="Abrir Office">'+SVG('<path d="M14 4h6v6M20 4 10 14M19 14v5H5V5h5"/>',13)+'<span>Office</span></a><button type="button" data-ap-sair title="Sair da conta">'+SVG('<path d="M15 4h4v16h-4M10 17l-5-5 5-5M5 12h11"/>',13)+'<span>Sair</span></button>':'')+'<button type="button" class="ap-x" data-ap-x title="Fechar" aria-label="Fechar">×</button></div></header>';
-    if(novoHeroPerfil()){p.innerHTML=h+pTela()+'<div class="hero-profile-version">'+pVersao()+'</div>';posicionarPerfil();return;}
+    var h='<header class="tu-profile-panel-head"><div class="tu-profile-panel-id"><b>'+esc(on?q.usuario:'HERO18810')+'</b><small>'+(novoHeroPerfil()?'Perfil':'Notificações')+(gst?' · Gestão':'')+'</small></div><div class="tu-profile-panel-actions">'+(on&&window.MutaGabinete&&window.MutaGabinete.cnj()?'<button type="button" data-ap-refresh title="Atualizar prontuário" aria-label="Atualizar prontuário">'+SVG('<path d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7"/>',14)+'</button>':'')+('<button type="button" data-ap-ajustes title="Configurações" aria-label="Configurações">'+SVG('<circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="7"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3M5 5l2 2m10 10 2 2M5 19l2-2M17 7l2-2"/>',14)+'</button>')+(on?'<a href="'+esc(site)+'/exofficio/" target="_blank" rel="noopener noreferrer" title="Abrir Office">'+SVG('<path d="M14 4h6v6M20 4 10 14M19 14v5H5V5h5"/>',13)+'<span>Office</span></a><button type="button" data-ap-sair title="Sair da conta">'+SVG('<path d="M15 4h4v16h-4M10 17l-5-5 5-5M5 12h11"/>',13)+'<span>Sair</span></button>':'')+'<button type="button" class="ap-x" data-ap-x title="Fechar" aria-label="Fechar">×</button></div></header>';
+    if(novoHeroPerfil()){p.innerHTML=h+pAjustes()+'<div class="hero-profile-version">'+pVersao()+'</div>';posicionarPerfil();if(A.ajFoco){A.ajFoco=false;var sx=$('ap-aj');if(sx&&sx.scrollIntoView)sx.scrollIntoView({block:'start'});}return;}
     if(podeCmt()){var mg=window.MutaGestao,n=mg&&mg.naoLidas?mg.naoLidas():null;h+='<div class="hero-profile-not-link"><button type="button" data-ap-not>Notificações'+(n==null?'': ' · '+n+' não lidas')+' ↗</button></div>';}
     h += '<div class="ap-t" role="tablist">' + abas.map(function (a) { return '<button type="button" role="tab" class="ap-tab-' + a[0] + '" data-ap="' + a[0] + '" aria-selected="' + (A.aba === a[0]) + '">' + a[1] + (a[0] === 'al' && (A.itens.length + (gst ? A.cheg.length : 0)) ? ' <i>' + (A.itens.length + (gst ? A.cheg.length : 0)) + '</i>' : a[0] === 'app' && appPend().length ? ' <i>' + appPend().length + '</i>' : a[0] === 'ch' && A.cheg.length ? ' <i>' + A.cheg.length + '</i>' : a[0] === 'cm' && nCm ? ' <i>' + nCm + '</i>' : '') + '</button>'; }).join('') +
       '</div>';
-    h += '<div class="ap-c">' + (A.aba === 'cm' ? '<div id="ap-cmt">' + (window.MutaCmt ? window.MutaCmt.html(A.cmt) : '') + '</div>' : A.aba === 'not' ? pNotificacoesCmt() : A.aba === 'al' ? pAlertas() : A.aba === 'app' ? pApp() : A.aba === 'ch' ? pChegadas() : pVersao()) + '</div>' + pTela();
+    h += '<div class="ap-c">' + (A.aba === 'cm' ? '<div id="ap-cmt">' + (window.MutaCmt ? window.MutaCmt.html(A.cmt) : '') + '</div>' : A.aba === 'not' ? pNotificacoesCmt() : A.aba === 'al' ? pAlertas() : A.aba === 'app' ? pApp() : A.aba === 'ch' ? pChegadas() : pVersao()) + '</div>' + pAjustes();
     p.innerHTML = h;posicionarPerfil();
     var bx = $('ap-cmt');
     if (bx && window.MutaCmt) { window.MutaCmt.css(document); window.MutaCmt.bind(bx, function (m) { return chrome.runtime.sendMessage(m); }, function (v) { if (v) A.cmt = v; pintar(); }); }
@@ -231,12 +231,7 @@
     var lig = function (k, r, d) { return '<label class="ap-f ap-s"><input type="checkbox" data-pz="' + k + '"' + (c[k] !== false ? ' checked' : '') + '><span>' + r + '</span><small>' + d + '</small></label>'; };
     return num('urgDias', 'Urgência não apreciada', 'dias até o alerta vermelho') +
       num('tarefaDias', 'Tempo na tarefa', 'dias até o aviso (vermelho no dobro)') +
-      '<small class="muted ap-v">Os itens do PJe abaixo só aparecem para quem ligou Perfil › Na tela do PJe (desligado por padrão desde a 0.77.57).</small>' +
-      lig('selos', 'Sinalizações nos cartões da lista do PJe', 'ícones de urgência, avisos, intercorrências, pendências e notas, que abrem o quadro de detalhes') +
-      '<label class="ap-f ap-s"><input type="checkbox" data-pz="dev"' + (c.dev === true ? ' checked' : '') + '><span>Modo em desenvolvimento: cartões e etiquetas</span><small>nos cartões: estado, designação, trilha, classificação, sugeridas e redesenho das etiquetas; no painel do usuário: tarefas por etapa e quadro de assinatura (em teste)</small></label>' +
-      '<label class="ap-f ap-s"><input type="checkbox" data-pz="etqPers"' + (c.etqPers === true || (c.etqPers !== false && c.dev === true && c.etqEstilo !== false) ? ' checked' : '') + '><span>Etiquetas personalizadas no PJe</span><small>cada tipo com cor, estilo e ícone (Controle › Etiquetas); cada usuário também liga ou desliga no botão "Etiquetas" da lista do PJe</small></label>' +
-      (A.cmt && !A.cmt.fora && c.dev === true ? lig('cmtPje', 'Quadro do Desembargador no PJe', 'decisões para assinatura e dúvidas, no topo da coluna "Para assinatura" da lista') : '') +
-      lig('avisosApp', 'Avisos do app do gabinete', 'urgentes e importantes viram notificação (ícone azul, título "Gabinete")') +
+      '<small class="muted ap-v">Tela do PJe, etiquetas personalizadas e avisos de cada pessoa ficam em Perfil › Ajustes.</small>' +
       (A.gestor0 || (ses && ses.estado().gestor) ? lig('chegadas', 'Chegadas com urgência ou liminar (só gestor)', 'processo novo na lista do PJe com pedido urgente avisa na hora; os demais só entram no relatório') +
         lig('relatorio', 'Relatório de chegadas no fim do dia', 'notificação com o total do dia, que abre o relatório') +
         '<label class="ap-f"><span>Hora do relatório</span><input type="time" data-pz="relHora" value="' + esc(c.relHora || '18:00') + '"><small>todo dia, neste navegador</small></label>' : '') +
@@ -320,7 +315,9 @@
       if (x.dataset.ctl) { colher(); colherCat(); A.ctl = x.dataset.ctl; pintarCtl(); return; }
       if (x.hasAttribute('data-ap-x')) { abrir(false); return; }
       if(x.hasAttribute('data-ap-refresh')){var gb=window.MutaGabinete;if(gb&&gb.cnj&&gb.cnj()){abrir(false);Promise.resolve().then(function(){return gb.gravarPendente();}).catch(function(){}).then(function(){return gb.recarregar();});}return;}
-      if(x.hasAttribute('data-ap-ajustes')){abrir(false);var b=$('pv-ajustes'),u=ses&&ses.estado?ses.estado():{};if(b)b.click();else if(u.estado==='on'&&u.gestor&&window.MutaAbas)window.MutaAbas.ir('ctl');return;}
+      if(x.hasAttribute('data-ap-ajustes')){var dj=$('ap-aj');A.ajAberto=!(dj&&dj.open);A.ajFoco=A.ajAberto;pintar();return;}
+      if(x.hasAttribute('data-aj-ctl')){abrir(false);if(window.MutaAbas)window.MutaAbas.ir('ctl');return;}
+      if(x.hasAttribute('data-aj-reset')){if(!A.ajReset){A.ajReset=true;pintar();return;}A.ajReset=false;ajRestaurar();return;}
       if(x.hasAttribute('data-ap-sair')){abrir(false);var u=ses&&ses.estado?ses.estado():null;if(u&&u.estado==='on'){var gb=window.MutaGabinete;Promise.resolve().then(function(){return gb&&gb.gravarPendente?gb.gravarPendente():null;}).catch(function(){}).then(function(){return ses.sair();});}return;}
       if (x.dataset.apFl) { A.filtroAl = A.filtroAl === x.dataset.apFl ? '' : x.dataset.apFl; pintar(); return; }
       if (x.dataset.apAbrir) { var BR = window.MutaProntuarioBridge; abrir(false); if (window.MutaAbas) window.MutaAbas.ir('pront'); if (BR && BR.abrirProcesso) BR.abrirProcesso(x.dataset.apAbrir); return; }
@@ -359,11 +356,7 @@
     }
   function mudou(e) {
       var i = e.target;
-      if (i.dataset.pzTela) {
-        var on = !!i.checked; A.cfg = Object.assign({}, A.cfg || {}, { telaPje: on });
-        if (temChrome) chrome.storage.local.get('muta-prazos').then(function (o) { return chrome.storage.local.set({ 'muta-prazos': Object.assign({}, o['muta-prazos'] || {}, { telaPje: on }) }); }).then(avisarAbas, function () {});
-        return;
-      }
+      if (i.dataset.aj) { ajMudar(i.dataset.aj, i.type === 'checkbox' ? !!i.checked : i.value); return; }
       if (i.dataset.pz) { var c = Object.assign({}, A.cfg || {}); c[i.dataset.pz] = i.type === 'checkbox' ? i.checked : i.type === 'time' ? (i.value || '18:00') : Math.max(1, Number(i.value) || 1); gravarCfg(c); if (i.dataset.pz === 'dev') tudo(); return; }
       if (i.dataset.qf === 'op') { colher(); tudo(); }
       if (i.dataset.cf === 'cor' || i.dataset.cf === 'estilo' || i.dataset.cf === 'icone') { colherCat(); tudo(); }
@@ -395,15 +388,76 @@
       b.addEventListener('click', function (e) { e.stopPropagation(); A.aba = 'ver'; abrir(true); }); }
     b.textContent = '↑ ' + VER.site; b.title = 'Versão nova do HERO18810 (' + VER.site + '; esta é ' + VER.local + '). Dê dois cliques em atualizar-muta.cmd, na pasta da extensão: o painel se recarrega sozinho.';
   }
-  /* 0.20 · ajuste de cada usuário: elementos do HERO desenhados nas páginas do PJe. Desligado por padrão (travamento nos
-     autos digitais, 26/11/2026): o HERO só lê o PJe e mostra tudo no painel. Guarda em muta-prazos.telaPje, neste navegador. */
-  function pTela() {
-    var on = !!(A.cfg && A.cfg.telaPje === true);
-    return '<section class="ap-tela"><b class="ap-ti2">Na tela do PJe</b>' +
-      '<label class="ap-f ap-s"><input type="checkbox" data-pz-tela="1"' + (on ? ' checked' : '') + '><span>Mostrar elementos do HERO no PJe</span>' +
-      '<small>selos e sinalizações nos cartões, etiquetas redesenhadas, ícones ao lado do número nos autos digitais, botões da lista, painel por etapa e quadro do Desembargador. ' +
-      'Desligado, o HERO só lê o PJe e mostra tudo neste painel. Ligado, a tela do PJe pode ficar mais lenta.</small></label>' +
-      '<small class="muted ap-v">Vale só para você, neste navegador. Muda na hora; se algo ficar na tela, recarregue a aba do PJe.</small></section>';
+  /* ---------- 0.77.58 · Perfil › Ajustes: todas as escolhas de cada pessoa num lugar só ----------
+     Painel (acompanhar o PJe, trocar de aba, tema), Na tela do PJe (chave geral e o que ela liga), Leitura e preenchimento,
+     Minuta (Conformidade) e Avisos. Tudo vale só para a pessoa, neste navegador: muta-prazos (chrome.storage.local) para o
+     que o PJe e o service worker leem; localStorage do painel para o resto. Cada mudança vale na hora (evento hero:ajuste).
+     Prazos, chegadas, relatório e o catálogo de etiquetas continuam em Controle, só do gestor. */
+  var AJ_LS = { seguir: 'muta-pje:seguir', abaAuto: 'muta-pje:aba-auto', autoPreencher: 'hero18810:autoPreencher' };
+  var AJ_PZ = ['telaPje', 'selos', 'etqPers', 'etqEstilo', 'dev', 'cmtPje', 'avisosApp'];
+  function lsLer(k, pad) { try { var v = localStorage.getItem(k); return v == null ? pad : v !== '0'; } catch (e) { return pad; } }
+  function confLer() { try { var g = JSON.parse(localStorage.getItem('muta-pje:conformidade') || '{}'); return { ativa: !!g.ativa, fmt: g.fmt !== false }; } catch (e) { return { ativa: false, fmt: true }; } }
+  function temaAtual() { try { return (window.MutaTema && window.MutaTema.atual()) || localStorage.getItem('muta-pje:tema') || 'claro'; } catch (e) { return 'claro'; } }
+  /* grava só as chaves mudadas, sobre o que está guardado (nunca apaga as outras escolhas de muta-prazos) */
+  function pzGravar(o) {
+    A.cfg = Object.assign({}, A.cfg || {}, o);
+    if (!temChrome) return Promise.resolve();
+    return chrome.storage.local.get('muta-prazos').then(function (v) { return chrome.storage.local.set({ 'muta-prazos': Object.assign({}, v['muta-prazos'] || {}, o) }); }).then(avisarAbas, function () {});
+  }
+  function pzSemChaves(ks) {
+    if (A.cfg) ks.forEach(function (k) { delete A.cfg[k]; });
+    if (!temChrome) return Promise.resolve();
+    return chrome.storage.local.get('muta-prazos').then(function (v) { var c = Object.assign({}, v['muta-prazos'] || {}); ks.forEach(function (k) { delete c[k]; }); return chrome.storage.local.set({ 'muta-prazos': c }); }).then(avisarAbas, function () {});
+  }
+  function ajAvisar(k, v) { try { document.dispatchEvent(new CustomEvent('hero:ajuste', { detail: { k: k, v: v } })); } catch (e) {} }
+  /* a mesma caixa do topo do painel, para o pje.js aplicar como sempre */
+  function caixaTopo(id, v) { var c = $(id); if (!c) return; if (c.checked !== v) { c.checked = v; c.dispatchEvent(new Event('change', { bubbles: true })); } }
+  function lsGravar(k, v) { try { localStorage.setItem(k, v ? '1' : '0'); } catch (e) {} }
+  function ajMudar(k, v) {
+    if (k === 'seguir') { lsGravar(AJ_LS.seguir, v); caixaTopo('pje-seguir', v); }
+    else if (k === 'abaAuto') { lsGravar(AJ_LS.abaAuto, v); caixaTopo('pje-aba', v); }
+    else if (k === 'tema') { try { localStorage.setItem('muta-pje:tema', v); } catch (e) {} if (window.MutaTema) window.MutaTema.aplicar(v); }
+    else if (k === 'autoPreencher') { lsGravar(AJ_LS.autoPreencher, v); ajAvisar(k, v); }
+    else if (k === 'confAtiva' || k === 'confFmt') { var c = confLer(); if (k === 'confAtiva') c.ativa = v; else c.fmt = v; try { localStorage.setItem('muta-pje:conformidade', JSON.stringify(c)); } catch (e) {} ajAvisar(k, v); }
+    else if (k === 'etqPers') pzGravar(v ? { etqPers: true, etqEstilo: true } : { etqPers: false });
+    else if (k === 'selos') pzGravar(v ? { selos: true, etqEstilo: true } : { selos: false });
+    else if (AJ_PZ.indexOf(k) >= 0) { var o = {}; o[k] = v; pzGravar(o); }
+    pintar();
+  }
+  function ajRestaurar() {
+    Object.keys(AJ_LS).forEach(function (k) { try { localStorage.removeItem(AJ_LS[k]); } catch (e) {} });
+    try { localStorage.removeItem('muta-pje:conformidade'); localStorage.removeItem('muta-pje:tema'); } catch (e) {}
+    caixaTopo('pje-seguir', true); caixaTopo('pje-aba', true); if (window.MutaTema) window.MutaTema.aplicar('claro');
+    ajAvisar('autoPreencher', true); ajAvisar('confAtiva', false); ajAvisar('confFmt', true);
+    pzSemChaves(AJ_PZ).then(pintar); pintar();
+  }
+  function pAjustes() {
+    var c = A.cfg || {}, cf = confLer(), tela = c.telaPje === true, q = ses && ses.estado ? ses.estado() : {}, gst = q.estado === 'on' && q.gestor;
+    var ck = function (k, on, rot, d, off) { return '<label class="ap-f ap-s' + (off ? ' ap-off' : '') + '"><input type="checkbox" data-aj="' + k + '"' + (on ? ' checked' : '') + (off ? ' disabled' : '') + '><span>' + rot + '</span>' + (d ? '<small>' + d + '</small>' : '') + '</label>'; };
+    var sec = function (t, corpo, nota) { return '<div class="ap-ajs"><b class="ap-ti2">' + t + '</b>' + corpo + (nota ? '<small class="muted">' + nota + '</small>' : '') + '</div>'; };
+    var etq = c.etqPers === true || (c.etqPers !== false && c.dev === true && c.etqEstilo !== false);
+    var tm = temaAtual();
+    return '<details class="ap-aj" id="ap-aj"' + (A.ajAberto ? ' open' : '') + '><summary><b>Ajustes</b><small>só para você, neste navegador</small></summary>' +
+      sec('Painel',
+        ck('seguir', lsLer(AJ_LS.seguir, true), 'Acompanhar o PJe', 'o painel segue o processo aberto na aba do PJe') +
+        ck('abaAuto', lsLer(AJ_LS.abaAuto, true), 'Trocar de aba sozinho', 'autos digitais abrem a Triagem; a tarefa com o editor abre o Comparar') +
+        '<label class="ap-f"><span>Tema</span><select data-aj="tema"><option value="claro"' + (tm !== 'escuro' ? ' selected' : '') + '>Claro</option><option value="escuro"' + (tm === 'escuro' ? ' selected' : '') + '>Escuro</option></select></label>') +
+      sec('Na tela do PJe',
+        ck('telaPje', tela, 'Mostrar elementos do HERO no PJe', 'desligado, o HERO só lê o PJe e mostra tudo neste painel; ligado, a tela do PJe pode ficar mais lenta') +
+        ck('selos', c.selos !== false, 'Sinalizações nos cartões', 'urgência, avisos, intercorrências, pendências e notas; abrem o quadro de detalhes', !tela) +
+        ck('etqPers', etq, 'Etiquetas personalizadas', 'cada tipo de etiqueta com a cor, o estilo e o ícone do gabinete', !tela) +
+        ck('dev', c.dev === true, 'Recursos em teste', 'estado, designação e trilha nos cartões; tarefas agrupadas por etapa no painel do usuário', !tela) +
+        (A.cmt && !A.cmt.fora ? ck('cmtPje', c.cmtPje !== false, 'Quadro do Desembargador', 'decisões para assinatura e dúvidas no topo da coluna "Para assinatura"; depende de Recursos em teste', !tela || c.dev !== true) : ''),
+        tela ? 'Muda na hora; se algo ficar na tela, recarregue a aba do PJe.' : '') +
+      sec('Leitura e preenchimento',
+        ck('autoPreencher', lsLer(AJ_LS.autoPreencher, true), 'Preencher a ficha sozinho', 'lidas as peças, o que a leitura achou vai para os campos vazios; nunca troca o que já está gravado')) +
+      sec('Minuta',
+        ck('confAtiva', cf.ativa, 'Conformidade automática', 'analisa a minuta do editor sempre que ela muda') +
+        ck('confFmt', cf.fmt, 'Conferir a formatação', 'recuo, alinhamento, negrito e itálico, além do texto')) +
+      sec('Avisos',
+        ck('avisosApp', c.avisosApp !== false, 'Avisos do app do gabinete', 'urgentes e importantes viram notificação do Chrome')) +
+      '<div class="ap-ajr">' + (gst ? '<button type="button" class="btn sm" data-aj-ctl>Controle do gabinete (gestor)</button>' : '') +
+      '<button type="button" class="btn sm' + (A.ajReset ? ' ap-perigo' : '') + '" data-aj-reset>' + (A.ajReset ? 'Confirmar: voltar ao padrão' : 'Restaurar o padrão') + '</button></div></details>';
   }
   function pVersao() {
     return '<p class="ap-v">Instalada: <b>' + esc(VER.local) + '</b>' + (VER.site ? ' · no site: <b>' + esc(VER.site) + '</b>' : '') + '</p>' +

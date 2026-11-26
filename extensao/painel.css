@@ -4017,5 +4017,8 @@ html body.hero-redesign-v53 #topo-u :is(#pv-nav-main,#hero-area-header-tabs,#her
  background:transparent!important;
 }
 
-/* 0.77.57 · Perfil › Na tela do PJe */
-.ap-tela{display:grid;gap:4px;padding:10px 12px;border-top:1px solid var(--line)}.ap-tela .ap-ti2{font-size:12px}
+/* 0.77.58 · Perfil › Ajustes */
+.ap-aj{border-top:1px solid var(--line);padding:8px 12px}.ap-aj>summary{cursor:pointer;display:flex;align-items:baseline;gap:8px;list-style:none;padding:2px 0}.ap-aj>summary::-webkit-details-marker{display:none}.ap-aj>summary::before{content:'▸';font-size:10px;color:var(--muted-fg)}.ap-aj[open]>summary::before{content:'▾'}.ap-aj>summary small{color:var(--muted-fg);font-size:10.5px}
+.ap-ajs{display:grid;gap:2px;padding:8px 0 4px;border-bottom:1px dashed var(--line)}.ap-ajs .ap-ti2{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted-fg);margin-bottom:4px}.ap-ajs>small{font-size:10.5px}
+.ap-aj .ap-off{opacity:.5}.ap-aj select{font:inherit;padding:2px 6px;border:1px solid var(--line);border-radius:6px;background:transparent;color:inherit}
+.ap-ajr{display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end;padding-top:8px}.ap-ajr .ap-perigo{border-color:#c62828;color:#c62828}
