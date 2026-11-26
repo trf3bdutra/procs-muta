@@ -192,7 +192,7 @@
   }
 
   /* ---------- Deliberações ---------- */
-  var X = { aba: 'tudo', dev: {}, dados: null, erro: '', msg: '', lendo: false, resp: {}, conf: {}, nota: {} };
+  var X = { aba: 'cronologia', categoriasFechadas:{}, dev: {}, dados: null, erro: '', msg: '', lendo: false, resp: {}, conf: {}, nota: {} };
   function lerDel() {
     if (!ses || !pode(quem())) return Promise.resolve();
     X.lendo = true; pintarGestao();
@@ -272,17 +272,35 @@
     var acao='<div class="hero-not-actions">'+(cnj?'<button type="button" class="lnk" data-gx-open="'+esc(cnj)+'" title="Abrir prontuário" aria-label="Abrir prontuário">↗</button>':'')+(lidas[k]?'<small>Lida</small>':'<button type="button" class="lnk" data-gx-read="'+esc(k)+'">Marcar lida</button>')+'</div>';
     return '<div class="hero-not-entry'+(lidas[k]?' is-read':'')+'">'+(pend?base:'<article class="gx-it hero-not-item"><div class="hero-not-meta"><span>'+esc(titulo)+'</span><small>'+esc(diaMes(n.em))+'</small></div><b>'+esc(n.titulo||titulo)+'</b><p class="gx-m">'+[n.de?esc(n.de):'',copiaBtn(cnj),n.sessao?'Sessão '+esc(data(n.sessao)):'',n.item?'Item '+esc(n.item):'',n.aVincular?'A vincular':''].filter(Boolean).join(' · ')+'</p>'+(n.texto?'<details class="hero-not-detail"><summary>Detalhes</summary><p class="gx-tx">'+esc(n.texto)+'</p></details>':'')+((n.advogado||n.parte)?'<p class="gx-m">'+esc([n.advogado,n.oab?'OAB '+n.oab:'',n.parte].filter(Boolean).join(' · '))+'</p>':'')+'</article>')+acao+'</div>';
   }
+  function categoriaNot(n){
+    if(n.tipo==='duvida')return 'duvida';
+    if(n.tipo==='pedido')return 'pedido';
+    if(n.tipo==='sustentacao'||n.tipo==='preferencia')return 'sustentacao';
+    if(n.tipo==='assinatura'||n.tipo==='liberacao')return 'assinatura';
+    if(n.tipo==='urgencia')return 'urgencia';
+    if(n.tipo==='sessao'||n.tipo==='pauta')return 'pauta';
+    if(n.tipo==='comunicado'||n.tipo==='equipe')return 'comunicado';
+    return 'aviso';
+  }
+  var NOT_CATS=[['duvida','Dúvidas'],['pedido','Solicitações'],['sustentacao','Sustentações e preferências'],['assinatura','Assinaturas e liberações'],['urgencia','Urgências'],['pauta','Pauta e sessões'],['comunicado','Comunicados'],['aviso','Outros avisos']];
+  function agruparNot(N,lidas){
+    return NOT_CATS.map(function(g){
+      var V=N.filter(function(n){return categoriaNot(n)===g[0];});
+      if(!V.length)return '';
+      var nl=V.filter(function(n){return !lidas[chaveLida(n)];}).length;
+      return '<details class="hero-not-group hero-gx-group" data-not-group="'+g[0]+'"'+(!X.categoriasFechadas[g[0]]?' open':'')+'><summary><b>'+esc(g[1])+'</b><small>'+V.length+(nl?' · '+nl+' não lidas':'')+'</small></summary>'+V.map(function(n){return itemNot(n,lidas);}).join('')+'</details>';
+    }).join('');
+  }
   function pintarDel() {
     var c=$('del-app');if(!c)return;var q=quem();
     if(!pode(q)){c.innerHTML='<p class="muted gx-v">Acesso restrito ao Desembargador e ao gestor.</p>';return;}
     var L=listas(),N=notificacoes(L),lidas=leituraNot();
-    var pend=L.du.length+L.pe.length,info=N.length-pend;
-    if(!['tudo','del','info'].includes(X.aba))X.aba='tudo';
-    var tab=function(k,r,n){return '<button type="button" role="tab" data-gx-a="'+k+'" aria-selected="'+(X.aba===k)+'">'+esc(r)+' <i>'+n+'</i></button>';};
-    var V=N.filter(function(n){var p=n.tipo==='duvida'||n.tipo==='pedido';return X.aba==='tudo'||(X.aba==='del'&&p)||(X.aba==='info'&&!p);});
+    var pend=L.du.length+L.pe.length;
+    if(!['cronologia','categorias'].includes(X.aba))X.aba='cronologia';
+    var tab=function(k,r){return '<button type="button" role="tab" data-gx-a="'+k+'" aria-selected="'+(X.aba===k)+'">'+esc(r)+'</button>';};
     var m=X.dados?metricasCmt([['total','Não lidas',N.filter(function(n){return !lidas[chaveLida(n)];}).length],['priority','A deliberar',pend],['lib','Hoje',N.filter(function(n){return String(n.em||'').slice(0,10)===hoje();}).length]]):'';
-    var dia=null,corpo=V.map(function(n){var d=String(n.em||'').slice(0,10),h='';if(d!==dia){dia=d;h='<h4 class="hero-not-dia">'+esc(d===hoje()?'Hoje':data(d)||'Sem data')+'</h4>';}return h+itemNot(n,lidas);}).join('');
-    c.innerHTML=painelGestao('Notificações','', atualizaBtn('ler-del',X.lendo),m,'')+faixaGestao('Notificações',tab('tudo','Todas',N.length)+tab('del','Deliberações',pend)+tab('info','Informativas',info),'',X.lendo)+(X.msg?'<p class="gx-msg">'+esc(X.msg)+'</p>':'')+(X.erro?'<p class="gx-v err">'+esc(X.erro)+'</p>':!X.dados?'<p class="muted gx-v">Lendo…</p>':corpo||'<p class="muted gx-v">Nenhuma notificação nesta categoria.</p>');
+    var dia=null,corpo=X.aba==='categorias'?agruparNot(N,lidas):N.map(function(n){var d=String(n.em||'').slice(0,10),h='';if(d!==dia){dia=d;h='<h4 class="hero-not-dia">'+esc(d===hoje()?'Hoje':data(d)||'Sem data')+'</h4>';}return h+itemNot(n,lidas);}).join('');
+    c.innerHTML=painelGestao('Notificações','', atualizaBtn('ler-del',X.lendo),m,'')+faixaGestao('Notificações',tab('cronologia','Cronologia')+tab('categorias','Categorias'),'',X.lendo)+(X.msg?'<p class="gx-msg">'+esc(X.msg)+'</p>':'')+(X.erro?'<p class="gx-v err">'+esc(X.erro)+'</p>':!X.dados?'<p class="muted gx-v">Lendo…</p>':corpo||'<p class="muted gx-v">Nenhuma notificação nesta categoria.</p>');
   }
   function pintarUrg(){
     var c=$('urg-app');if(!c)return;var q=quem();
@@ -404,6 +422,7 @@
         if (pe === 'cancelar') { delete X.conf[id]; return pintarGestao(); }
         if (pe === 'confirmar') return decidir(id, x);
       });
+      cx.addEventListener('toggle',function(e){var d=e.target;if(d&&d.dataset&&d.dataset.notGroup&&d.isConnected)X.categoriasFechadas[d.dataset.notGroup]=!d.open;},true);
       cx.addEventListener('input', function (e) { var i = e.target; if (i.dataset.gxNota) X.nota[i.dataset.gxNota] = i.value; });
       cx.addEventListener('submit', function (e) {
         var f = e.target.closest('[data-gx-form]'); if (!f) return; e.preventDefault();
