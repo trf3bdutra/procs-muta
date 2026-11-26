@@ -200,3 +200,23 @@ header.amicus-shell .amicus-brand,header#top #marca,header.top.nx .brand.tw{over
 .cmt-entry-jf{font-size:13px;margin-bottom:22px}
 @media(max-width:800px){.cmt-entry-jf{font-size:10px;margin-bottom:14px}}
 .cmtl-mark,.cmt-load[data-cmt-loader="legacy"] .cmt-ld-mk{width:auto!important}
+
+/* 26/11/2026 · pacote de grafismos do gestor: símbolo oficial da JF (PNG) num círculo branco e o grafismo do app (ladrilho branco 11%) no fundo
+   da entrada, do login e das telas de carregamento. */
+.cmtl-trf3.circ{display:inline-grid!important;place-items:center;width:4.6em;height:4.6em;border-radius:50%;background:#fff;box-shadow:0 3px 14px rgba(0,0,0,.25);line-height:0}
+.cmtl-trf3.circ img{display:block;width:60%;height:auto;margin-left:2%;pointer-events:none;user-select:none}
+.cmtl-mark .cmtl-brand.cmtl-trf3,.cmt-load[data-cmt-loader="legacy"] .cmt-ld-mk .cmtl-brand.cmtl-trf3{display:inline-grid!important;font-size:20px;width:4.6em!important;height:4.6em!important}
+.cmtl-mark,.cmt-load[data-cmt-loader="legacy"] .cmt-ld-mk{margin:0 auto 22px!important}
+#entrada .en-top .cmtl-trf3-top{font-size:11px}
+.cmt-entry-jf{font-size:15px;margin-bottom:26px}
+/* Cortex e demais telas antigas: o conteúdo fica agrupado no centro, sem esticar as linhas pela altura da tela. */
+.cmt-load[data-cmt-loader="legacy"]{align-content:center!important;justify-content:center;grid-auto-rows:max-content;row-gap:0}
+.cmt-load[data-cmt-loader="legacy"] .cmt-ld-t{margin-top:12px}
+.cmt-load[data-cmt-loader="legacy"] #ld-m .btn,.cmt-load[data-cmt-loader="legacy"] .cmt-ld-m a{display:inline-block;margin-top:16px;padding:11px 22px;border-radius:8px;font-size:14px}
+/* Topo do login: símbolo da JF no círculo à esquerda, sem a marca GAB18810 (retirada a pedido do gestor). */
+#entrada .en-top{padding:16px 28px!important;gap:14px}
+#entrada .en-top .cmtl-trf3-top{margin-left:0!important;font-size:10px}
+#entrada .en-top .cmtl-login-brand{display:none!important}
+/* Grafismo no fundo. */
+#entrada:not([hidden]),.cmt-entry{background:url("/padrao/loading/grafismo-fundo.svg") 0 0/288px 81px repeat,linear-gradient(120deg,#19452e,#153f3e 55%,#102d39)!important}
+.cmtl-full:before,.cmt-load[data-cmt-loader="legacy"]:before{content:""!important;position:absolute;inset:0!important;z-index:-1;opacity:1!important;background:url("/padrao/loading/grafismo-fundo.svg") 0 0/288px 81px repeat!important;mask-image:none!important;-webkit-mask-image:none!important;pointer-events:none}

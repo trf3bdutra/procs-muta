@@ -6,7 +6,7 @@ import sys
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
-VERSION = "20261126c"
+VERSION = "20261126d"
 FAMILIES = {
     "monitor": "caput", "caput": "caput", "office": "office",
     "equipe": "office", "exofficio": "office", "cmt": "office",
@@ -49,7 +49,7 @@ def main(public):
         header_svg = src.read_text(encoding='utf-8').replace('viewBox="0 0 100 100"', 'viewBox="-12 -12 124 124"', 1)
         (fav / (name + '-header.svg')).write_text(header_svg, encoding='utf-8')
         cairosvg.svg2png(url=str(src), write_to=str(fav / (name + ".png")), output_width=180, output_height=180)
-    for name in ("gab18810.svg", "gab18810-negativa.svg", "estrela.svg", "grafismo-login.svg", "grafismo-loading.svg", "gabinete-loader.js", "gabinete-loader.css"):
+    for name in ("gab18810.svg", "gab18810-negativa.svg", "estrela.svg", "grafismo-login.svg", "grafismo-loading.svg", "grafismo-fundo.svg", "jf-simbolo-cor.png", "gabinete-loader.js", "gabinete-loader.css"):
         shutil.copyfile(ROOT / "padrao/loading" / name, loading / name)
     for page in public.rglob("*.html"):
         fam = family(page.relative_to(public).as_posix().rsplit("/", 1)[0])
