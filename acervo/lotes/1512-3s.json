@@ -201,11 +201,11 @@
    "assunto": "Descontos Indevidos",
    "assunto_detalhado": "",
    "grupo": "assunto-21",
-   "tipo_caso": "Descontos Indevidos",
-   "resultado": "",
+   "tipo_caso": "Descontos em remuneração (UFMS) · MS denegado · verba sucumbencial",
+   "resultado": "Proposta: [VALIDAR paradigma] apelação do impetrante contra a denegação; discute descontos/cobrança e honorários de título anterior (cumprimento voluntário noticiado em 20/11/2023); parecer do MPF pela legalidade dos descontos (ID 405643534) [VALIDAR: objeto exato da apelação ID 395833933]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença denegou a segurança (ID 395833920); embargos de declaração rejeitados (ID 395833930).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -214,11 +214,50 @@
     "correcao": "Alexander",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "395833920"
+    },
+    {
+     "peca": "Embargos de declaração",
+     "id": "395833923"
+    },
+    {
+     "peca": "Apelação",
+     "id": "395833933"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "395833929"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "395833918"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "405643534"
+    }
+   ],
+   "mpf": "parecer ID 405643534 (20/10/2026)",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — servidor público, descontos",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 395833920 (12/02/2025)",
+    "recurso": "embargos de declaração (ID 395833923, 14/03/2025); apelação (ID 395833933, 07/06/2026)",
+    "preparo": "comprovante juntado (ID 395833905, 395833906, 395833907, 395833934, 395833935) — conferir o tipo",
+    "representacao": "procuração/substabelecimento ID 395833895",
+    "mpf": "parecer ID 405643534 (20/10/2026)",
+    "autos": "55 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] objeto exato da apelação ID 395833933"
+   ],
    "minuta": false
   },
   {
@@ -232,11 +271,11 @@
    "assunto": "FIES",
    "assunto_detalhado": "",
    "grupo": "assunto-6",
-   "tipo_caso": "FIES",
-   "resultado": "",
+   "tipo_caso": "FIES · termo aditivo / transação (FNDE)",
+   "resultado": "Proposta: [VALIDAR paradigma] apelação da autora contra a improcedência (manutenção do termo aditivo e transação do FIES) [VALIDAR: réus apelados e pedido de dano moral]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença improcedente, honorários de 10% suspensos (artigo 98, § 3º) (ID 392505169); contrarrazões de dois réus.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -245,11 +284,42 @@
     "correcao": "Vanilda",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "392505169"
+    },
+    {
+     "peca": "Apelação",
+     "id": "392505172"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "392505174"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "392505176"
+    }
+   ],
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — FIES",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 392505169 (29/05/2026)",
+    "recurso": "apelação (ID 392505172, 30/06/2026)",
+    "preparo": "[VALIDAR]",
+    "representacao": "procuração/substabelecimento ID 392505138, 392505152, 392505153",
+    "mpf": "Não consta parecer",
+    "autos": "48 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] réus apelados e pedido de dano moral"
+   ],
    "minuta": false
   },
   {
@@ -263,11 +333,11 @@
    "assunto": "FIES",
    "assunto_detalhado": "",
    "grupo": "assunto-6",
-   "tipo_caso": "FIES",
-   "resultado": "",
+   "tipo_caso": "FIES · abatimento de 1% ao mês (médico na COVID/SUS) · MS",
+   "resultado": "Proposta: [VALIDAR paradigma] recursos dos réus (FNDE/FUNASA e CAIXA: ilegitimidade passiva, requerimento administrativo prévio) e remessa contra a concessão do abatimento de 26% do saldo devedor (artigo 6º-B da Lei 10.260/2001) [VALIDAR: quem são os recorrentes (IDs 395562218 e 395562223); sentido do parecer ID 401682342]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença concedeu a segurança (ID 395562213); pareceres do MPF (IDs 395562212 e 401682342).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -276,11 +346,59 @@
     "correcao": "Vanilda",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "395562213"
+    },
+    {
+     "peca": "Recurso inominado",
+     "id": "395562218"
+    },
+    {
+     "peca": "Recurso inominado",
+     "id": "395562223"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "395562222"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "395562227"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "395562228"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "395562212"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "401682342"
+    }
+   ],
+   "mpf": "parecer ID 401682342 (30/09/2026)",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — FIES, abatimento",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 395562213 (06/07/2026)",
+    "recurso": "recurso inominado (ID 395562218, 09/07/2026); recurso inominado (ID 395562223, 06/08/2026)",
+    "preparo": "comprovante juntado (ID 395562189, 395562190, 395562191, 395562224) — conferir o tipo",
+    "representacao": "procuração/substabelecimento ID 395561874, 395562199, 395562200",
+    "mpf": "parecer ID 401682342 (30/09/2026)",
+    "autos": "73 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] quem são os recorrentes (IDs 395562218 e 395562223)",
+    "[VALIDAR] sentido do parecer ID 401682342"
+   ],
    "minuta": false
   },
   {
@@ -294,11 +412,11 @@
    "assunto": "FIES",
    "assunto_detalhado": "",
    "grupo": "assunto-6",
-   "tipo_caso": "FIES",
-   "resultado": "",
+   "tipo_caso": "FIES · abatimento (médico na ESF) · MS",
+   "resultado": "Proposta: [VALIDAR paradigma] apelações (FNDE, CAIXA e União/Ministério da Saúde) e remessa contra a concessão do abatimento de 19%; competência do Ministério da Saúde para o requerimento (artigo 6º-B da Lei 10.260/2001) [VALIDAR: apelantes de cada recurso (IDs 401803620, 401803624, 401803629)]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença concedeu a segurança (ID 401803619); MPF sem manifestação de mérito.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -307,11 +425,54 @@
     "correcao": "Vanilda",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "401803619"
+    },
+    {
+     "peca": "Apelação",
+     "id": "401803620"
+    },
+    {
+     "peca": "Apelação",
+     "id": "401803624"
+    },
+    {
+     "peca": "Apelação",
+     "id": "401803629"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "401803630"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "401803618"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "405526976"
+    }
+   ],
+   "mpf": "parecer ID 405526976 (19/10/2026)",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — FIES, abatimento",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 401803619 (20/07/2026)",
+    "recurso": "apelação (ID 401803620, 21/07/2026); apelação (ID 401803624, 10/08/2026); apelação (ID 401803629, 02/09/2026)",
+    "preparo": "comprovante juntado (ID 401803604, 401803605) — conferir o tipo",
+    "representacao": "procuração/substabelecimento ID 401803588",
+    "mpf": "parecer ID 405526976 (19/10/2026)",
+    "autos": "62 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] apelantes de cada recurso (IDs 401803620, 401803624, 401803629)"
+   ],
    "minuta": false
   },
   {
@@ -325,11 +486,11 @@
    "assunto": "Anulação e Correção de Provas / Questões",
    "assunto_detalhado": "",
    "grupo": "assunto-14",
-   "tipo_caso": "Anulação e Correção de Provas / Questões",
-   "resultado": "",
+   "tipo_caso": "Concurso (Câmara dos Deputados) · correção de prova · improcedência liminar",
+   "resultado": "Proposta: negar provimento à apelação: vedada a substituição da banca, salvo ilegalidade ou incompatibilidade com o edital (Tema 485/STF) [VALIDAR paradigma] [VALIDAR: honorários recursais: sem fixação na origem]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença julgou liminarmente improcedente (artigos 332, II, e 487, I, do CPC) (ID 398184148).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -338,11 +499,42 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "398184148"
+    },
+    {
+     "peca": "Apelação",
+     "id": "398184150"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "398184160"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "398184184"
+    }
+   ],
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — concurso público",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 398184148 (07/07/2026)",
+    "recurso": "apelação (ID 398184150, 10/08/2026)",
+    "preparo": "comprovante juntado (ID 398184156) — conferir o tipo",
+    "representacao": "procuração/substabelecimento ID 398183763, 414646988, 414646995",
+    "mpf": "Não consta parecer",
+    "autos": "43 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] honorários recursais: sem fixação na origem"
+   ],
    "minuta": false
   },
   {
@@ -356,11 +548,11 @@
    "assunto": "Conselhos Regionais de Fiscalização Profissional e Afins",
    "assunto_detalhado": "",
    "grupo": "assunto-19",
-   "tipo_caso": "Conselhos Regionais de Fiscalização Profissional e Afins",
-   "resultado": "",
+   "tipo_caso": "Conselho de Farmácia · habilitação em farmácia oncológica · MS",
+   "resultado": "Proposta: [VALIDAR paradigma] apelação do CFF e remessa contra a concessão da segurança (nulidade do indeferimento da habilitação em farmácia oncológica) [VALIDAR: norma do CFF invocada para o indeferimento]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença concedeu a segurança e confirmou a liminar (ID 396552828); MPF sem manifestação de mérito.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -369,11 +561,46 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "396552828"
+    },
+    {
+     "peca": "Apelação",
+     "id": "396552830"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "396552834"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "396552820"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "402642747"
+    }
+   ],
+   "mpf": "parecer ID 402642747 (06/10/2026)",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — conselho profissional",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 396552828 (20/07/2026)",
+    "recurso": "apelação (ID 396552830, 03/09/2026)",
+    "preparo": "comprovante juntado (ID 396552831) — conferir o tipo",
+    "representacao": "procuração/substabelecimento ID 396552794, 396552816, 396552822",
+    "mpf": "parecer ID 402642747 (06/10/2026)",
+    "autos": "57 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] norma do CFF invocada para o indeferimento"
+   ],
    "minuta": false
   },
   {
@@ -387,11 +614,11 @@
    "assunto": "Inquérito / Processo / Recurso Administrativo",
    "assunto_detalhado": "",
    "grupo": "assunto-4",
-   "tipo_caso": "Inquérito / Processo / Recurso Administrativo",
-   "resultado": "",
+   "tipo_caso": "Benefício por incapacidade · cancelamento de perícia/prorrogação · MS",
+   "resultado": "Proposta: [VALIDAR paradigma] apelação do impetrante contra a denegação da segurança (cancelamento da perícia e da prorrogação do benefício pelo INSS) [VALIDAR: competência da Turma Regional (matéria previdenciária)]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença denegou a segurança (ID 406039834); MPF sem manifestação de mérito.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -400,11 +627,38 @@
     "correcao": "Vanilda",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "406039834"
+    },
+    {
+     "peca": "Apelação",
+     "id": "406039837"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "406039833"
+    }
+   ],
+   "mpf": "parecer ID 406039833 (19/11/2025)",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Previdenciário — processo administrativo",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 406039834 (22/02/2026)",
+    "recurso": "apelação (ID 406039837, 18/03/2026)",
+    "preparo": "[VALIDAR]",
+    "representacao": "procuração/substabelecimento ID 406039808, 406039809",
+    "mpf": "parecer ID 406039833 (19/11/2025)",
+    "autos": "43 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] competência da Turma Regional (matéria previdenciária)"
+   ],
    "minuta": false
   },
   {
@@ -418,11 +672,11 @@
    "assunto": "Classificação e/ ou Preterição",
    "assunto_detalhado": "",
    "grupo": "assunto-5",
-   "tipo_caso": "Classificação e/ ou Preterição",
-   "resultado": "",
+   "tipo_caso": "Mais Médicos/MAAv · preterição · MS denegado",
+   "resultado": "Proposta: [VALIDAR paradigma] apelação da impetrante contra a denegação (vagas ociosas e preterição no Módulo de Acolhimento e Avaliação) [VALIDAR: sentido do parecer ID 407273126]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença denegou a segurança (ID 400519235); embargos rejeitados (ID 400519238); parecer do MPF (ID 407273126).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -431,11 +685,50 @@
     "correcao": "Vanilda",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "400519235"
+    },
+    {
+     "peca": "Embargos de declaração",
+     "id": "400519236"
+    },
+    {
+     "peca": "Apelação",
+     "id": "400519239"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "400519241"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "400519230"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "407273126"
+    }
+   ],
+   "mpf": "parecer ID 407273126 (28/10/2026)",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — programa Mais Médicos",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 400519235 (08/07/2026)",
+    "recurso": "embargos de declaração (ID 400519236, 10/07/2026); apelação (ID 400519239, 03/09/2026)",
+    "preparo": "[VALIDAR]",
+    "representacao": "procuração/substabelecimento ID 400519213",
+    "mpf": "parecer ID 407273126 (28/10/2026)",
+    "autos": "41 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] sentido do parecer ID 407273126"
+   ],
    "minuta": false
   },
   {
@@ -449,11 +742,11 @@
    "assunto": "Aposentadoria por Incapacidade Permanente",
    "assunto_detalhado": "",
    "grupo": "assunto-3",
-   "tipo_caso": "Aposentadoria por Incapacidade Permanente",
-   "resultado": "",
+   "tipo_caso": "Aposentadoria por incapacidade permanente · autos do TJMS",
+   "resultado": "Proposta: [VALIDAR] autos migrados sem peças tipadas: ler sentença e apelação no PJe [VALIDAR: triagem sem leitura da sentença e da apelação]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Competência delegada (justiça estadual).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -463,10 +756,24 @@
     "situacao": "A minutar"
    },
    "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Previdenciário — benefício por incapacidade",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "[VALIDAR]",
+    "recurso": "[VALIDAR]",
+    "preparo": "[VALIDAR]",
+    "representacao": "[VALIDAR]",
+    "mpf": "Não consta parecer",
+    "autos": "44 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] triagem sem leitura da sentença e da apelação"
+   ],
    "minuta": false
   },
   {
@@ -480,11 +787,11 @@
    "assunto": "Multas e demais Sanções",
    "assunto_detalhado": "",
    "grupo": "assunto-23",
-   "tipo_caso": "Multas e demais Sanções",
-   "resultado": "",
+   "tipo_caso": "Embargos à execução fiscal · multa do CREA · prescrição",
+   "resultado": "Proposta: [VALIDAR paradigma] apelação da embargante: termo inicial da prescrição da multa (constituição definitiva após o prazo de defesa ou pagamento; Lei 9.873/1999 e Súmula 467/STJ) [VALIDAR: apelação do CREA também?]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença parcialmente procedente (ID 393175722): manteve a CDA C2022/177294-9 e declarou inexigíveis outros créditos; embargos rejeitados (ID 393175727).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -493,11 +800,46 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "393175722"
+    },
+    {
+     "peca": "Embargos de declaração",
+     "id": "393175723"
+    },
+    {
+     "peca": "Apelação",
+     "id": "393175729"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "393175726"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "393175731"
+    }
+   ],
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — multa de conselho, execução fiscal",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 393175722 (27/03/2026)",
+    "recurso": "embargos de declaração (ID 393175723, 14/04/2026); apelação (ID 393175729, 20/07/2026)",
+    "preparo": "comprovante juntado (ID 393175730) — conferir o tipo",
+    "representacao": "procuração/substabelecimento ID 393175704",
+    "mpf": "Não consta parecer",
+    "autos": "36 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] apelação do CREA também?"
+   ],
    "minuta": false
   },
   {
