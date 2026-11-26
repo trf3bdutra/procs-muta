@@ -2115,3 +2115,72 @@ html body.hero-redesign-v53 #panel-min #cmp-app .hero-review-workspace.is-compar
 html body.hero-redesign-v53 #panel-min #cmp-app .hero-review-document :is(.mn-ed-h,.hero-review-ref-head,.hero-v53-ref-search),
 html body.hero-redesign-v53 #panel-min #cmp-app .hero-review-workspace.is-fused,
 html body.hero-redesign-v53 #panel-min #min-conf>summary{background:var(--hero-workspace-bg)!important}
+
+/* Faixa principal única: identidade | gestão | utilidades e perfil.
+   A conexão PJe continua na faixa operacional, sem deslocar a gestão. */
+html body.hero-redesign-v53 #topo-u:not([hidden]){
+ grid-template-columns:minmax(0,1fr) max-content minmax(0,1fr)!important;
+ grid-template-rows:auto auto!important;column-gap:4px!important;row-gap:0!important;
+ align-items:center!important;overflow:visible!important
+}
+html body.hero-redesign-v53 #topo-u .hero-cmt-brand{
+ grid-row:1!important;grid-column:1!important;justify-self:start;align-self:center;
+ padding:9px 4px 7px 10px!important;min-width:0;max-width:100%;gap:6px
+}
+html body.hero-redesign-v53 #topo-u>.tu-gestao:not([hidden]){
+ grid-row:1!important;grid-column:2!important;justify-self:center!important;align-self:center!important;
+ display:flex!important;align-items:center!important;justify-content:center!important;
+ padding:0!important;margin:0!important;gap:3px!important;min-width:0;border:0!important
+}
+html body.hero-redesign-v53 #topo-u>.tu-gestao>button:not([hidden]){
+ width:auto!important;min-width:0;min-height:28px!important;height:28px!important;
+ padding:2px 5px!important;gap:4px!important;white-space:nowrap
+}
+html body.hero-redesign-v53 #topo-u>.tu-gestao .nav-text{
+ position:static!important;width:auto!important;height:auto!important;overflow:visible!important
+}
+html body.hero-redesign-v53 #topo-u .hero-header-utilities{
+ grid-row:1;grid-column:3;display:flex;align-items:center;justify-content:flex-end;gap:3px;
+ min-width:0;max-width:100%;padding:4px 8px 2px 0;box-sizing:border-box;justify-self:stretch
+}
+html body.hero-redesign-v53 #topo-u .hero-header-utilities>[data-tema-tu],
+html body.hero-redesign-v53 #topo-u .hero-header-utilities>#pv-ajustes:not([hidden]){
+ flex:0 0 23px;display:grid;place-items:center;width:23px;height:25px;min-width:23px;margin:0!important;padding:0!important;border:0!important
+}
+html body.hero-redesign-v53 #topo-u .hero-header-utilities>#tu-sino{
+ flex:0 1 auto;min-width:0;max-width:100%;height:auto;min-height:28px;
+ margin:0!important;padding:2px 3px 2px 5px!important;gap:3px!important;
+ align-items:center;overflow:visible
+}
+html body.hero-redesign-v53 #topo-u .hero-header-utilities>#tu-sino .tu-profile-name{
+ min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap
+}
+html body.hero-redesign-v53 #topo-u #tu-pje-slot{grid-row:2!important;grid-column:1/3!important;min-width:0;padding:3px 0 3px 10px!important}
+html body.hero-redesign-v53 #topo-u>.tu-st:not([hidden]){grid-row:2!important;grid-column:3!important;justify-self:end;margin:0 8px 0 0!important}
+html body.hero-redesign-v53 #topo-u:not([hidden])::after{grid-row:2!important;grid-column:1/-1!important}
+@media(max-width:520px){
+ html body.hero-redesign-v53 #topo-u:not([hidden]){grid-template-columns:minmax(0,1fr) max-content auto!important}
+ html body.hero-redesign-v53 #topo-u .hero-cmt-brand{padding-left:7px!important;gap:4px}
+ html body.hero-redesign-v53 #topo-u .hero-cmt-star{width:18px;height:21px}
+ html body.hero-redesign-v53 #topo-u .hero-cmt-identity>span{font-size:7px;letter-spacing:.025em}
+ html body.hero-redesign-v53 #topo-u .hero-cmt-identity>strong{font-size:15px}
+ html body.hero-redesign-v53 #topo-u .hero-cmt-identity em{font-size:13px}
+ html body.hero-redesign-v53 #topo-u .hero-header-utilities{padding-right:5px;gap:2px}
+ html body.hero-redesign-v53 #topo-u .hero-header-utilities>#tu-sino:has(.tu-av) .tu-profile-name{display:none}
+ html body.hero-redesign-v53 #topo-u>.tu-gestao>button:not([hidden]){padding:2px 3px!important;gap:3px!important}
+ html body.hero-redesign-v53 #topo-u>.tu-gestao .nav-text b{font-size:9.5px!important}
+}
+@media(max-width:390px){
+ html body.hero-redesign-v53 #topo-u .hero-cmt-identity>span{display:none}
+ html body.hero-redesign-v53 #topo-u>.tu-gestao>button:not([hidden]){flex-direction:column!important;gap:1px!important;height:32px!important;min-height:32px!important}
+ html body.hero-redesign-v53 #topo-u .hero-header-utilities>#tu-sino>.tu-av{width:20px;height:20px}
+}
+/* Popover no nível do documento: posição calculada pela borda inferior do perfil. */
+html body.hero-redesign-v53 #tu-pop.tu-profile-pop{
+ position:fixed!important;z-index:1000!important;box-sizing:border-box;
+ width:min(380px,calc(100vw - 12px));margin:0!important;padding:0;
+ overflow:auto;overscroll-behavior:contain;background:var(--cmt-paper)!important;
+ border:1px solid var(--cmt-line)!important;border-radius:5px!important;
+ box-shadow:0 8px 24px rgb(0 0 0/.13)
+}
+html body.hero-redesign-v53 #tu-pop.tu-profile-pop[hidden]{display:none!important}
