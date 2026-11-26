@@ -2717,8 +2717,8 @@ html body.hero-redesign-v53 #panel-min .hero-review-editorial .hero-review-fused
 .cf-matrix-evidence .cf-tr{font-size:11px;margin:4px 0;padding:5px;overflow-wrap:anywhere}
 
 /* Repertório · faixa de pesquisa comum às três subabas, inspirada no acervo. */
-html body.hero-redesign-v53 :is(#panel-acervo,#panel-par,#panel-modelos) .hero-rep-search{--rep-rule:var(--hero-pront-divider,var(--line));--rep-bg:var(--hero-pront-header,#f3f0e7);--rep-paper:var(--hero-pront-paper,#fff);display:flex!important;flex-direction:column;gap:0!important;padding:0!important;margin:7px 9px 9px!important;background:var(--rep-bg)!important;border:1px solid var(--rep-rule)!important;border-radius:4px!important;overflow:hidden;box-shadow:none!important;min-width:0}
-html body.hero-redesign-v53 :is(#panel-acervo,#panel-par,#panel-modelos) .hero-rep-search-head{display:flex;align-items:center;justify-content:space-between;gap:6px;padding:8px 9px 5px}
+html body.hero-redesign-v53 :is(#panel-acervo,#panel-par,#panel-modelos,#panel-pauta) .hero-rep-search{--rep-rule:var(--hero-pront-divider,var(--line));--rep-bg:var(--hero-pront-header,#f3f0e7);--rep-paper:var(--hero-pront-paper,#fff);display:flex!important;flex-direction:column;gap:0!important;padding:0!important;margin:7px 9px 9px!important;background:var(--rep-bg)!important;border:1px solid var(--rep-rule)!important;border-radius:4px!important;overflow:hidden;box-shadow:none!important;min-width:0}
+html body.hero-redesign-v53 :is(#panel-acervo,#panel-par,#panel-modelos,#panel-pauta) .hero-rep-search-head{display:flex;align-items:center;justify-content:space-between;gap:6px;padding:8px 9px 5px}
 html body.hero-redesign-v53 .hero-rep-search-kicker{font:650 10px/1.4 var(--mono,monospace);text-transform:uppercase;letter-spacing:.1em;color:var(--gold,#96743a)}
 html body.hero-redesign-v53 .hero-rep-search-head>small{font-size:10px;color:var(--muted-fg)}
 html body.hero-redesign-v53 .hero-rep-search .acv-form{gap:0!important;display:flex!important;flex-direction:column}
@@ -2800,9 +2800,9 @@ html body.hero-redesign-v53 #gab #g-docs .au-regravar input{width:12px;height:12
 .hero-so-head .hero-so-sessao{color:var(--fg);background:var(--hero-pront-header,#f3f0e7)!important;border:1px solid var(--hero-pront-divider,var(--line));border-radius:3px;font:600 10px/1.4 var(--mono,monospace);padding:2px 6px}
 
 /* Pesquisa compartilhada · superfícies contínuas, sem fundos alternados entre controles. */
-html body.hero-redesign-v53 :is(#panel-acervo,#panel-par,#panel-modelos,#panel-min) .hero-rep-search{--rep-rule:var(--hero-pront-divider,var(--line));--rep-bg:var(--hero-pront-header,#f3f0e7);--rep-paper:var(--hero-pront-paper,#fff);display:flex!important;flex-direction:column;gap:0!important;background:var(--rep-bg)!important;border:1px solid var(--rep-rule)!important;border-radius:3px!important;padding:0!important;overflow:hidden;box-shadow:none!important;min-width:0}
-html body.hero-redesign-v53 :is(#panel-acervo,#panel-par,#panel-modelos,#panel-min) .hero-rep-search :is(.hero-rep-search-head,.hero-rep-query,.hero-rep-filters,.rep-scope,#acv-status,.pp-n,.hero-rep-count,.acv-form){background:transparent!important;border-radius:0!important;box-shadow:none!important}
-html body.hero-redesign-v53 :is(#panel-acervo,#panel-par,#panel-modelos,#panel-min) .hero-rep-search-head{display:flex;align-items:center;justify-content:space-between;gap:6px;padding:8px 9px 5px}
+html body.hero-redesign-v53 :is(#panel-acervo,#panel-par,#panel-modelos,#panel-min,#panel-pauta) .hero-rep-search{--rep-rule:var(--hero-pront-divider,var(--line));--rep-bg:var(--hero-pront-header,#f3f0e7);--rep-paper:var(--hero-pront-paper,#fff);display:flex!important;flex-direction:column;gap:0!important;background:var(--rep-bg)!important;border:1px solid var(--rep-rule)!important;border-radius:3px!important;padding:0!important;overflow:hidden;box-shadow:none!important;min-width:0}
+html body.hero-redesign-v53 :is(#panel-acervo,#panel-par,#panel-modelos,#panel-min,#panel-pauta) .hero-rep-search :is(.hero-rep-search-head,.hero-rep-query,.hero-rep-filters,.rep-scope,#acv-status,.pp-n,.hero-rep-count,.acv-form){background:transparent!important;border-radius:0!important;box-shadow:none!important}
+html body.hero-redesign-v53 :is(#panel-acervo,#panel-par,#panel-modelos,#panel-min,#panel-pauta) .hero-rep-search-head{display:flex;align-items:center;justify-content:space-between;gap:6px;padding:8px 9px 5px}
 html body.hero-redesign-v53 #panel-min .hero-ref-search-panel{margin:0 0 9px!important}
 html body.hero-redesign-v53 #panel-min .hero-ref-search-panel .cx-fontes{margin:0!important;padding:4px 8px 7px!important;gap:0!important;min-width:0;background:transparent!important;border:0!important}
 html body.hero-redesign-v53 #panel-min .hero-ref-search-panel .cx-fontes>button{background:var(--rep-paper);border:1px solid var(--rep-rule);border-radius:0!important;font-size:10px;padding:5px 6px}
@@ -2907,3 +2907,20 @@ html body.hero-redesign-v53 :is(#panel-acervo,#panel-par,#panel-modelos) .hero-c
 html body.hero-redesign-v53 :is(#panel-acervo,#panel-par,#panel-modelos) .hero-cortex-reading>.hero-cortex-sheet{box-sizing:border-box;max-height:min(52dvh,440px);overflow:auto;scrollbar-width:thin;min-width:0;width:auto!important;max-width:100%;margin:0!important;padding:9px clamp(12px,4vw,26px) 16px!important;border:0!important;border-radius:0!important;box-shadow:none!important;background:var(--cx-ew)!important;color:var(--cx-ei);font:12px/1.6 var(--serif,Georgia,serif)!important;text-align:justify;white-space:pre-wrap;overflow-wrap:anywhere}
 html body.hero-redesign-v53 :is(#panel-acervo,#panel-par,#panel-modelos) .hero-cortex-sheet p{font:inherit!important;text-align:justify!important;margin:0 0 8px!important;text-indent:2em;white-space:normal}
 html body.hero-redesign-v53 :is(#panel-acervo,#panel-par,#panel-modelos) .hero-cortex-sheet.ementa p:first-child{text-indent:0}
+
+/* Pauta · mesmo componente de busca do Repertório, mantendo a lógica da sessão. */
+html body.hero-redesign-v53 #pauta-app .pa-busca.hero-rep-search{margin:0 0 8px!important;position:sticky;top:0;z-index:4;align-items:stretch}
+html body.hero-redesign-v53 #pauta-app .pa-busca .hero-rep-search-head{padding:8px 9px 5px}
+html body.hero-redesign-v53 #pauta-app .pa-busca .hero-rep-search-head>small{white-space:normal;text-align:right}
+html body.hero-redesign-v53 #pauta-app .pa-busca .hero-rep-query{margin:0!important}
+html body.hero-redesign-v53 #pauta-app .pa-busca .hero-rep-query>button{display:inline-flex;align-items:center;justify-content:center;min-width:29px}
+html body.hero-redesign-v53 #pauta-app .pa-busca .pa-f.hero-rep-filters{display:flex!important;position:static;flex-wrap:wrap;gap:4px!important;margin:0!important;padding:6px 8px!important}
+html body.hero-redesign-v53 #pauta-app .pa-busca .pa-f.hero-rep-filters::before{content:none!important;display:none!important}
+html body.hero-redesign-v53 #pauta-app .pa-busca .pa-f>.chip{margin:0!important;min-height:24px!important;padding:4px 6px!important;border:1px solid var(--rep-rule)!important;border-radius:3px!important;background:var(--rep-paper)!important;color:var(--fg)!important;font:500 10px/1.3 var(--sans,system-ui)!important;box-shadow:none!important}
+html body.hero-redesign-v53 #pauta-app .pa-busca .pa-f>.chip[aria-pressed=true]{border-color:var(--primary,#31565a)!important;color:var(--primary,#31565a)!important;background:color-mix(in srgb,var(--primary,#31565a) 9%,var(--rep-paper))!important;font-weight:650!important}
+html body.hero-redesign-v53 #pauta-app .pa-busca .pa-f>.chip i{font:inherit!important;color:inherit!important;opacity:.8;margin-left:3px}
+html body.hero-redesign-v53 #pauta-app .pa-busca .pa-session-head.hero-rep-filters{display:flex!important;gap:5px!important;align-items:center;flex-wrap:wrap;margin:0!important;padding:6px 8px!important;border-bottom:0!important}
+html body.hero-redesign-v53 #pauta-app .pa-busca .pa-session-head .pa-sel{flex:1 1 115px}
+html body.hero-redesign-v53 #pauta-app .pa-busca .pa-session-head .pa-sel select{width:100%;min-width:0;max-width:none}
+html body.hero-redesign-v53 #pauta-app .pa-busca .pa-sol-resumo{border:0!important;border-top:1px solid var(--rep-rule)!important;background:transparent!important;border-radius:0!important;padding:6px 9px!important;margin:0!important;font-size:10px!important;gap:3px 6px}
+html body.hero-redesign-v53 #pauta-app .pa-busca .hero-rep-count{padding:6px 9px!important;margin:0!important;border-top:1px solid var(--rep-rule);font-size:10px!important;line-height:1.35;background:transparent!important}
