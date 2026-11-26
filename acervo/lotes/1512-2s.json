@@ -5139,7 +5139,7 @@
    "assunto_detalhado": "",
    "grupo": "assunto-16",
    "tipo_caso": "Diploma não expedido (Estácio) · obrigação de fazer e dano moral",
-   "resultado": "Proposta: APTO — recurso da instituição contra a procedência (expedição e registro do diploma, multa diária e dano moral) [VALIDAR paradigma: sem precedente direto do Relator no banco 2023–2026; usar os temas indicados]; contrarrazões pedem majoração dos honorários para 20% [VALIDAR: origem no juizado (subseção 6201) e recurso inominado: competência da Turma Regional]",
+   "resultado": "Proposta: recurso da instituição contra a procedência (expedição e registro do diploma, multa diária e dano moral); contrarrazões pedem majoração dos honorários para 20% (o feito começou no JEF de Campo Grande e foi redistribuído por declínio de competência, pelo possível interesse da União (despacho ID 356473358); o \"recurso inominado\" (ID 356473669) impugna sentença de vara comum e é recebido como apelação; redistribuição à Turma Regional confirmada (decisão ID 408850776)) Paradigma: não há precedente direto do Relator; aplicar os temas indicados.",
    "modelo": "",
    "variacoes": [],
    "observacao": "Sentença procedente (ID 356473658); embargos rejeitados (ID 356473664); recurso inominado (ID 356473669); contrarrazões (ID 356473673); redistribuído por decisão de 05/11/2026 (ID 408850776), com base nos CC 5023920-82.2026 e 5021511-36.2026.",
@@ -5185,15 +5185,15 @@
     "representacao": "procuração/substabelecimento ID 356473361, 356473644, 356473645",
     "mpf": "Não consta parecer",
     "autos": "79 documentos extraídos",
-    "tempestividade": "[VALIDAR]",
+    "tempestividade": "recurso inominado de 08/12/2025: tempestivo (sentença de 18/11/2025 publicada em 25/11/2025; prazo de 15 dias úteis até 17/12/2025)",
     "prontidao": "APTO | conferir: origem no JEF com declínio para vara comum (ID 356473358); sentença em procedimento comum; o \"recurso inominado\" (ID 356473669) deve ser recebido como apelação; redistribuição confirmada pelo Órgão Especial (ID 408850776)",
     "prontidao_em": "26/11/2026"
    },
    "ajustes": [],
    "pendencias": [
-    "[VALIDAR] origem no juizado (subseção 6201) e recurso inominado: competência da Turma Regional",
     "[PRONTIDÃO · conferir] origem no juizado (recurso inominado): conferir a competência",
-    "[PRONTIDÃO · conferir] origem no JEF com declínio para vara comum (ID 356473358); sentença em procedimento comum; o \"recurso inominado\" (ID 356473669) deve ser recebido como apelação; redistribuição confirmada pelo Órgão Especial (ID 408850776)"
+    "[PRONTIDÃO · conferir] origem no JEF com declínio para vara comum (ID 356473358); sentença em procedimento comum; o \"recurso inominado\" (ID 356473669) deve ser recebido como apelação; redistribuição confirmada pelo Órgão Especial (ID 408850776)",
+    "Competência: feito redistribuído do JEF por declínio (despacho ID 356473358); recurso inominado (ID 356473669) recebido como apelação; redistribuição à Turma Regional confirmada (decisão ID 408850776)"
    ],
    "minuta": false
   },
@@ -5209,7 +5209,7 @@
    "assunto_detalhado": "",
    "grupo": "assunto-18",
    "tipo_caso": "Matrícula em Medicina (UFGD) · cota/critério econômico · MS",
-   "resultado": "Proposta: APTO — apelação da UFGD (ID 328228519) e remessa contra a concessão parcial (matrícula da impetrante no curso de Medicina); parecer do MPF pelo desprovimento (ID 329041872) [VALIDAR paradigma: sem precedente direto do Relator no banco 2023–2026; usar os temas indicados] [VALIDAR: apelação ID 328228519 não tipada como apelação no PJe]",
+   "resultado": "Proposta: apelação da UFGD (ID 328228519) e remessa contra a concessão parcial (matrícula da impetrante no curso de Medicina); parecer do MPF pelo desprovimento (ID 329041872) (a apelação da UFGD foi juntada como \"Petição intercorrente\" em 15/05/2025, ID 328228519) Paradigma: não há precedente direto do Relator; aplicar os temas indicados.",
    "modelo": "",
    "variacoes": [],
    "observacao": "Sentença concedeu em parte (ID 328228516); contrarrazões (ID 328228524); efeito suspensivo indeferido (ID 334788459); decurso do prazo das partes registrado.",
@@ -5246,18 +5246,18 @@
     "monocratica": "Não (pauta)",
     "analisado_em": "26/11/2026",
     "decisao_agravada": "Sentença ID 328228516 (12/05/2025)",
-    "recurso": "[VALIDAR]",
-    "preparo": "[VALIDAR]",
+    "recurso": "apelação da UFGD (ID 328228519, 15/05/2025, juntada como petição) e remessa necessária",
+    "preparo": "dispensado (artigo 1.007, § 1º, do CPC: ente público)",
     "representacao": "procuração/substabelecimento ID 328228470",
     "mpf": "parecer ID 329041872 (27/06/2025)",
     "autos": "56 documentos extraídos",
-    "tempestividade": "[VALIDAR]",
+    "tempestividade": "sentença de 12/05/2025; apelação de 15/05/2025: tempestiva",
     "prontidao": "APTO",
     "prontidao_em": "26/11/2026"
    },
    "ajustes": [],
    "pendencias": [
-    "[VALIDAR] apelação ID 328228519 não tipada como apelação no PJe"
+    "Apelação da UFGD juntada como \"Petição intercorrente\" (ID 328228519, 15/05/2025)"
    ],
    "minuta": false
   },
@@ -5273,7 +5273,7 @@
    "assunto_detalhado": "",
    "grupo": "assunto-4",
    "tipo_caso": "Concurso EBSERH · extinção por incompetência (juizado)",
-   "resultado": "Proposta: APTO — apelação da autora contra a extinção sem mérito por incompetência absoluta da vara (valor da causa no limite do juizado, artigo 3º da Lei 10.259/2001) [VALIDAR: juizado: extinção ou remessa (artigo 64, § 3º, do CPC)] ‖ Paradigma do Relator: ApCiv 5005007-31.2025.4.03.6000 (acórdão do Relator, TRF-3, Turma Regional de MS, 30/06/2026)",
+   "resultado": "Proposta: apelação da autora contra a extinção sem mérito por incompetência absoluta da vara (valor da causa no limite do juizado, artigo 3º da Lei 10.259/2001) (a apelação pede a anulação da sentença (ID 332508635); ponto a decidir no voto: extinção ou remessa dos autos ao juizado, artigo 64, § 3º, do CPC) ‖ Paradigma do Relator: ApCiv 5005007-31.2025.4.03.6000 (acórdão do Relator, TRF-3, Turma Regional de MS, 30/06/2026)",
    "modelo": "ApCiv 5005007-31.2025.4.03.6000 (acórdão do Relator, TRF-3, Turma Regional de MS, 30/06/2026)",
    "variacoes": [],
    "observacao": "Sentença declarou a incompetência e extinguiu (485, IV) (ID 332508634); apelação (ID 332508635); contrarrazões (ID 332508637).",
@@ -5307,17 +5307,17 @@
     "analisado_em": "26/11/2026",
     "decisao_agravada": "Sentença ID 332508634 (17/06/2025)",
     "recurso": "apelação (ID 332508635, 01/07/2025)",
-    "preparo": "[VALIDAR]",
+    "preparo": "dispensado: apelante beneficiária da gratuidade (declarado na apelação ID 332508635)",
     "representacao": "procuração/substabelecimento ID 332508638",
     "mpf": "Não consta parecer",
     "autos": "26 documentos extraídos",
-    "tempestividade": "[VALIDAR]",
+    "tempestividade": "apelação de 01/07/2025: tempestiva (sentença de 17/06/2025 publicada em 24/06/2025; prazo de 15 dias úteis até 15/07/2025)",
     "prontidao": "APTO",
     "prontidao_em": "26/11/2026"
    },
    "ajustes": [],
    "pendencias": [
-    "[VALIDAR] juizado: extinção ou remessa (artigo 64, § 3º, do CPC)"
+    "Ponto a decidir no voto: extinção ou remessa dos autos ao juizado (artigo 64, § 3º, do CPC); a apelação pede a anulação da sentença (ID 332508635)"
    ],
    "minuta": false
   },
@@ -5333,7 +5333,7 @@
    "assunto_detalhado": "",
    "grupo": "assunto-4",
    "tipo_caso": "Mais Médicos · alocação em vaga ociosa · improcedência",
-   "resultado": "Proposta: APTO — negar provimento à apelação do autor [VALIDAR paradigma: sem precedente direto do Relator no banco 2023–2026; usar os temas indicados]: alocação em vaga ociosa do PMMB sem direito subjetivo; série Mais Médicos da pauta (1512-3s)",
+   "resultado": "Proposta: negar provimento à apelação do autor: alocação em vaga ociosa do PMMB sem direito subjetivo; série Mais Médicos da pauta (1512-3s) Paradigma: não há precedente direto do Relator; aplicar os temas indicados.",
    "modelo": "",
    "variacoes": [],
    "observacao": "Sentença improcedente, honorários de 10% (ID 382841524); apelação (ID 382841525); contrarrazões (ID 382841527).",
@@ -5367,11 +5367,11 @@
     "analisado_em": "26/11/2026",
     "decisao_agravada": "Sentença ID 382841524 (23/01/2026)",
     "recurso": "apelação (ID 382841525, 04/03/2026)",
-    "preparo": "[VALIDAR]",
+    "preparo": "dispensado: gratuidade deferida (ID 360444335)",
     "representacao": "procuração/substabelecimento ID 382841504",
     "mpf": "Não consta parecer",
     "autos": "36 documentos extraídos",
-    "tempestividade": "[VALIDAR]",
+    "tempestividade": "apelação de 04/03/2026: tempestiva (sentença de 23/01/2026 publicada em 20/02/2026; prazo de 15 dias úteis até 13/03/2026)",
     "prontidao": "APTO",
     "prontidao_em": "26/11/2026"
    },
@@ -5429,11 +5429,11 @@
     "analisado_em": "26/11/2026",
     "decisao_agravada": "Sentença ID 275914484 (28/04/2023)",
     "recurso": "apelação (ID 275914486, 23/05/2023)",
-    "preparo": "[VALIDAR]",
+    "preparo": "dispensado: gratuidade deferida (ID 275914448)",
     "representacao": "procuração/substabelecimento ID 275914454, 275914466",
     "mpf": "Não consta parecer",
     "autos": "62 documentos extraídos",
-    "tempestividade": "[VALIDAR]",
+    "tempestividade": "apelação de 23/05/2023: tempestiva (sentença de 28/04/2023 publicada em 04/05/2023; prazo de 15 dias úteis até 25/05/2023)",
     "prontidao": "APTO",
     "prontidao_em": "26/11/2026"
    },
@@ -5453,7 +5453,7 @@
    "assunto_detalhado": "",
    "grupo": "assunto-4",
    "tipo_caso": "Mais Médicos · inclusão · MS concedido em parte",
-   "resultado": "Proposta: APTO — apelação da União (ID 362171382), apelação da impetrante (ID 362171384) e remessa contra a concessão parcial; série Mais Médicos da pauta [VALIDAR paradigma: sem precedente direto do Relator no banco 2023–2026; usar os temas indicados] [VALIDAR: conteúdo da 2ª apelação (o trecho extraído reproduz decisão liminar)]",
+   "resultado": "Proposta: apelação da União (ID 362171382), apelação da impetrante (ID 362171384) e remessa contra a concessão parcial; série Mais Médicos da pauta (a apelação da impetrante, ID 362171384, pede a participação na alocação em vagas remanescentes ou ociosas da ampla concorrência) Paradigma: não há precedente direto do Relator; aplicar os temas indicados.",
    "modelo": "",
    "variacoes": [],
    "observacao": "Sentença concedeu em parte (ID 362171380); contrarrazões (IDs 362171386 e 362171387); MPF sem manifestação de mérito (ID 367252452).",
@@ -5503,17 +5503,17 @@
     "analisado_em": "26/11/2026",
     "decisao_agravada": "Sentença ID 362171380 (30/01/2026)",
     "recurso": "apelação (ID 362171382, 10/02/2026); apelação (ID 362171384, 26/02/2026)",
-    "preparo": "[VALIDAR]",
+    "preparo": "União: dispensado (artigo 1.007, § 1º, do CPC: ente público); impetrante: dispensado: gratuidade deferida (ID 362171354)",
     "representacao": "procuração/substabelecimento ID 362171333",
     "mpf": "parecer ID 367252452 (17/04/2026)",
     "autos": "67 documentos extraídos",
-    "tempestividade": "[VALIDAR]",
+    "tempestividade": "apelação de 10/02/2026: tempestiva (sentença de 30/01/2026 publicada em 03/02/2026; prazo de 15 dias úteis até 26/02/2026); apelação de 26/02/2026: tempestiva (sentença de 30/01/2026 publicada em 03/02/2026; prazo de 15 dias úteis até 26/02/2026)",
     "prontidao": "APTO",
     "prontidao_em": "26/11/2026"
    },
    "ajustes": [],
    "pendencias": [
-    "[VALIDAR] conteúdo da 2ª apelação (o trecho extraído reproduz decisão liminar)"
+    "Apelação da impetrante (ID 362171384): pede a participação na alocação em vagas remanescentes ou ociosas da ampla concorrência"
    ],
    "minuta": false
   },
@@ -5529,7 +5529,7 @@
    "assunto_detalhado": "",
    "grupo": "assunto-16",
    "tipo_caso": "Diploma (Estácio) · obrigação de fazer · apelação da União (ilegitimidade do MEC)",
-   "resultado": "Proposta: APTO — apelação da União (ilegitimidade: o MEC não expede nem registra diploma de IES privada) contra a procedência parcial, integrada nos embargos (ID 312748754) [VALIDAR paradigma: sem precedente direto do Relator no banco 2023–2026; usar os temas indicados] [VALIDAR: conferir se há apelação de outra parte (ID 312748757)]",
+   "resultado": "Proposta: apelação da União (ilegitimidade: o MEC não expede nem registra diploma de IES privada) contra a procedência parcial, integrada nos embargos (ID 312748754) (o documento ID 312748757, juntado como apelação, são as contrarrazões da SESES/Estácio; não há apelação de outra parte) Paradigma: não há precedente direto do Relator; aplicar os temas indicados.",
    "modelo": "",
    "variacoes": [],
    "observacao": "Sentença parcialmente procedente (ID 312748746), integrada (ID 312748754); apelação da União (ID 312748755); o documento ID 312748757, tipado como apelação, traz pedido de desprovimento (contrarrazões?); contrarrazões (ID 312748764).",
@@ -5571,17 +5571,17 @@
     "analisado_em": "26/11/2026",
     "decisao_agravada": "Sentença ID 312748754 (30/10/2024)",
     "recurso": "apelação (ID 312748755, 19/11/2024); apelação (ID 312748757, 02/12/2024)",
-    "preparo": "[VALIDAR]",
+    "preparo": "União: dispensado (artigo 1.007, § 1º, do CPC: ente público); autor: dispensado: gratuidade deferida (ID 312748694)",
     "representacao": "procuração/substabelecimento ID 312748699, 312748700, 312748701",
     "mpf": "Não consta parecer",
     "autos": "60 documentos extraídos",
-    "tempestividade": "[VALIDAR]",
+    "tempestividade": "apelação de 19/11/2024: tempestiva (sentença de 30/10/2024 publicada em 06/11/2024; prazo de 15 dias úteis até 29/11/2024); apelação de 02/12/2024: tempestiva (intimação eletrônica de 04/11/2024, ciência tácita em 14/11/2024; prazo em dobro até 29/01/2025)",
     "prontidao": "APTO",
     "prontidao_em": "26/11/2026"
    },
    "ajustes": [],
    "pendencias": [
-    "[VALIDAR] conferir se há apelação de outra parte (ID 312748757)"
+    "O documento ID 312748757, juntado como apelação, são as contrarrazões da SESES/Estácio; o autor pede majoração dos honorários nas contrarrazões (ID 312748764)"
    ],
    "minuta": false
   },
@@ -5597,7 +5597,7 @@
    "assunto_detalhado": "",
    "grupo": "assunto-10",
    "tipo_caso": "IFMS · certificado de conclusão sem ensino médio completo · fato consumado",
-   "resultado": "Proposta: APTO — apelação do IFMS e remessa contra a concessão (expedição do certificado e do histórico); parecer do MPF pelo fato consumado (ID 346214531) [VALIDAR paradigma: sem precedente direto do Relator no banco 2023–2026; usar os temas indicados]",
+   "resultado": "Proposta: apelação do IFMS e remessa contra a concessão (expedição do certificado e do histórico); parecer do MPF pelo fato consumado (ID 346214531) Paradigma: não há precedente direto do Relator; aplicar os temas indicados.",
    "modelo": "",
    "variacoes": [],
    "observacao": "Sentença concedeu e confirmou a liminar (ID 345479433); apelação (ID 345479438); contrarrazões com pedido de majoração de honorários (ID 345479441).",
@@ -5639,11 +5639,11 @@
     "analisado_em": "26/11/2026",
     "decisao_agravada": "Sentença ID 345479433 (17/10/2025)",
     "recurso": "apelação (ID 345479438, 31/10/2025)",
-    "preparo": "[VALIDAR]",
+    "preparo": "dispensado (artigo 1.007, § 1º, do CPC: ente público)",
     "representacao": "procuração/substabelecimento ID 345479357, 345479362",
     "mpf": "parecer ID 346214531 (10/12/2025)",
     "autos": "53 documentos extraídos",
-    "tempestividade": "[VALIDAR]",
+    "tempestividade": "apelação de 31/10/2025: tempestiva (sentença de 17/10/2025 publicada em 21/10/2025; prazo de 15 dias úteis até 11/11/2025)",
     "prontidao": "APTO",
     "prontidao_em": "26/11/2026"
    },
@@ -5663,7 +5663,7 @@
    "assunto_detalhado": "",
    "grupo": "assunto-33",
    "tipo_caso": "UFGD · reabertura do prazo de matrícula · MS",
-   "resultado": "Proposta: APTO — apelação da UFGD e remessa contra a concessão (reabertura do prazo de matrícula do aprovado); parecer do MPF pelo desprovimento (ID 329052166) [VALIDAR paradigma: sem precedente direto do Relator no banco 2023–2026; usar os temas indicados]",
+   "resultado": "Proposta: apelação da UFGD e remessa contra a concessão (reabertura do prazo de matrícula do aprovado); parecer do MPF pelo desprovimento (ID 329052166) Paradigma: não há precedente direto do Relator; aplicar os temas indicados.",
    "modelo": "",
    "variacoes": [],
    "observacao": "Sentença concedeu a segurança (ID 325202257); apelação (ID 325202259); contrarrazões (ID 325202261).",
@@ -5705,11 +5705,11 @@
     "analisado_em": "26/11/2026",
     "decisao_agravada": "Sentença ID 325202257 (25/11/2024)",
     "recurso": "apelação (ID 325202259, 17/03/2025)",
-    "preparo": "[VALIDAR]",
+    "preparo": "dispensado (artigo 1.007, § 1º, do CPC: ente público)",
     "representacao": "procuração/substabelecimento ID 325201631",
     "mpf": "parecer ID 329052166 (27/06/2025)",
     "autos": "55 documentos extraídos",
-    "tempestividade": "[VALIDAR]",
+    "tempestividade": "apelação de 17/03/2025: tempestiva (intimação eletrônica de 13/03/2025, ciência tácita em 24/03/2025; prazo em dobro até 12/05/2025)",
     "prontidao": "APTO",
     "prontidao_em": "26/11/2026"
    },
@@ -5729,7 +5729,7 @@
    "assunto_detalhado": "",
    "grupo": "assunto-31",
    "tipo_caso": "Transferência compulsória de militar (dependente) para a UFMS · MS denegado",
-   "resultado": "Proposta: APTO — apelação do impetrante contra a denegação (transferência ex officio, artigo 49 da Lei 9.394/1996 e Lei 9.536/1997; congeneridade, ADI 3.324) [VALIDAR paradigma: sem precedente direto do Relator no banco 2023–2026; usar os temas indicados]",
+   "resultado": "Proposta: apelação do impetrante contra a denegação (transferência ex officio, artigo 49 da Lei 9.394/1996 e Lei 9.536/1997; congeneridade, ADI 3.324) Paradigma: não há precedente direto do Relator; aplicar os temas indicados.",
    "modelo": "",
    "variacoes": [],
    "observacao": "Sentença denegou a segurança (ID 292665876); apelação (ID 292665880); contrarrazões (ID 292665885); decisão de declínio de competência (ID 293008728).",
@@ -5775,7 +5775,7 @@
     "representacao": "procuração/substabelecimento ID 292665714",
     "mpf": "parecer ID 292901999 (26/06/2024)",
     "autos": "86 documentos extraídos",
-    "tempestividade": "[VALIDAR]",
+    "tempestividade": "sentença de 29/02/2024 com intimação eletrônica no mesmo dia (ciência tácita em 11/03/2024); apelação do impetrante de 25/03/2024: tempestiva",
     "prontidao": "APTO",
     "prontidao_em": "26/11/2026"
    },
@@ -5795,7 +5795,7 @@
    "assunto_detalhado": "",
    "grupo": "assunto-2",
    "tipo_caso": "PIS/COFINS (combustíveis) · carta de cobrança · JÁ JULGADO em 05/10/2026",
-   "resultado": "Proposta: PENDENTE — a apelação e a remessa já foram julgadas em 05/10/2026 (provimento para denegar a segurança: voto ID 401687052, acórdão ID 402487252); depois vieram \"embargos infringentes\" (ID 404532117, 15/10/2026) e, após a pauta, tutela cautelar incidental URGENTE (ID 413927232, 21/11/2026: protesto de CDA de R$ 6.992.119,04); definir o que vai a julgamento (artigo 942 do CPC? recurso cabível?) e apreciar a tutela [VALIDAR: natureza da pauta: julgamento ampliado (artigo 942) ou embargos; tutela cautelar incidental pendente (urgente)]",
+   "resultado": "Proposta: a apelação e a remessa já foram julgadas em 05/10/2026 (provimento para denegar a segurança: voto ID 401687052, acórdão ID 402487252); depois vieram \"embargos infringentes\" (ID 404532117, 15/10/2026) e, após a pauta, tutela cautelar incidental urgente (ID 413927232, 21/11/2026: protesto de CDA de R$ 6.992.119,04); definir o objeto do julgamento: julgamento ampliado (artigo 942 do CPC) ou exame dos \"embargos infringentes\", recurso não previsto no CPC; a tutela cautelar incidental (ID 413927232) aguarda apreciação urgente",
    "modelo": "",
    "variacoes": [],
    "observacao": "Sentença concedeu em parte (ID 387107473); apelação (ID 387107476); contrarrazões (ID 387107480).",
@@ -5841,15 +5841,15 @@
     "representacao": "procuração/substabelecimento ID 387107443",
     "mpf": "parecer ID 390363175 (03/08/2026)",
     "autos": "69 documentos extraídos",
-    "tempestividade": "[VALIDAR]",
+    "tempestividade": "apelação de 18/06/2026: tempestiva (intimação eletrônica de 27/04/2026, ciência tácita em 07/05/2026; prazo em dobro até 18/06/2026)",
     "prontidao": "PENDENTE — processo já julgado em 05/10/2026 (acórdão ID 402487252); \"embargos infringentes\" (ID 404532117) e tutela cautelar incidental urgente juntada em 21/11/2026 (ID 413927232: protesto de CDA de R$ 6.992.119,04): definir o objeto do julgamento e apreciar a tutela",
     "prontidao_em": "26/11/2026"
    },
    "ajustes": [],
    "pendencias": [
-    "[VALIDAR] natureza da pauta: julgamento ampliado (artigo 942) ou embargos",
-    "[VALIDAR] tutela cautelar incidental pendente (urgente)",
-    "[PRONTIDÃO] processo já julgado em 05/10/2026 (acórdão ID 402487252); \"embargos infringentes\" (ID 404532117) e tutela cautelar incidental urgente juntada em 21/11/2026 (ID 413927232: protesto de CDA de R$ 6.992.119,04): definir o objeto do julgamento e apreciar a tutela"
+    "[PRONTIDÃO] processo já julgado em 05/10/2026 (acórdão ID 402487252); \"embargos infringentes\" (ID 404532117) e tutela cautelar incidental urgente juntada em 21/11/2026 (ID 413927232: protesto de CDA de R$ 6.992.119,04): definir o objeto do julgamento e apreciar a tutela",
+    "Objeto do julgamento a definir: julgamento ampliado (artigo 942 do CPC) ou exame dos \"embargos infringentes\" (ID 404532117)",
+    "Tutela cautelar incidental (ID 413927232, 21/11/2026) pendente de apreciação urgente"
    ],
    "minuta": false
   },
@@ -5865,7 +5865,7 @@
    "assunto_detalhado": "",
    "grupo": "assunto-23",
    "tipo_caso": "Cota racial (UFMS) · agravo interno contra a tutela recursal",
-   "resultado": "Proposta: APTO — agravo interno da UFMS (ID 274249232) contra a antecipação da tutela recursal (ID 273797065); a apelação do autor (ID 271133141) contra a improcedência está pendente [VALIDAR: julgar a apelação em conjunto, com o agravo interno prejudicado] [VALIDAR: pauta só do agravo interno ou também da apelação] ‖ Paradigma do Relator: ApCiv 0001221-64.2025.4.03.6000 (acórdão do Relator, TRF-3, Turma Regional de MS, 09/06/2026); ApCiv 5001089-97.2017.4.03.6000 (acórdão do Relator, TRF-3, Turma Regional de MS, 28/09/2026)",
+   "resultado": "Proposta: agravo interno da UFMS (ID 274249232) contra a antecipação da tutela recursal (ID 273797065); a apelação do autor (ID 271133141) contra a improcedência está pendente; alternativas: julgar a apelação, com o agravo interno prejudicado, ou julgar só o agravo interno; há registros de inclusão em pauta em 19/11/2026, e os autos não indicam se a pauta abrange a apelação ‖ Paradigma do Relator: ApCiv 0001221-64.2025.4.03.6000 (acórdão do Relator, TRF-3, Turma Regional de MS, 09/06/2026); ApCiv 5001089-97.2017.4.03.6000 (acórdão do Relator, TRF-3, Turma Regional de MS, 28/09/2026)",
    "modelo": "ApCiv 0001221-64.2025.4.03.6000 (acórdão do Relator, TRF-3, Turma Regional de MS, 09/06/2026); ApCiv 5001089-97.2017.4.03.6000 (acórdão do Relator, TRF-3, Turma Regional de MS, 28/09/2026)",
    "variacoes": [],
    "observacao": "Sentença improcedente (ID 271133135); contrarrazões (ID 271133148); decurso do prazo do agravado para resposta (25/08/2023).",
@@ -5895,19 +5895,19 @@
     "analisado_em": "26/11/2026",
     "decisao_agravada": "Decisão ID 273797065 (10/05/2023)",
     "recurso": "agravo interno (ID 274249232, 17/05/2023)",
-    "preparo": "[VALIDAR]",
-    "representacao": "[VALIDAR]",
+    "preparo": "não exigido (agravo interno)",
+    "representacao": "recorrente representado por procurador ou defensor público (independe de procuração)",
     "mpf": "Não consta parecer",
     "autos": "49 documentos extraídos",
-    "tempestividade": "[VALIDAR]",
+    "tempestividade": "agravo interno de 17/05/2023: tempestivo (interposto 5 dias úteis após a decisão de 10/05/2023)",
     "prontidao": "APTO — agravo interno da UFMS (ID 274249232, 17/05/2023) com vista para contrarrazões (ato ordinatório ID 274314133, 18/05/2023), sem resposta do agravado (decursos de prazo registrados em 05/07/2023 e 12/07/2023); apelação do autor (ID 271133141) com contrarrazões (ID 271133148) | conferir: julgar a apelação, com o agravo interno prejudicado (sugestão; decidir na minuta)",
     "prontidao_em": "26/11/2026"
    },
    "ajustes": [],
    "pendencias": [
-    "[VALIDAR] pauta só do agravo interno ou também da apelação",
     "[PRONTIDÃO] agravo interno da UFMS (ID 274249232, 17/05/2023) com vista para contrarrazões (ato ordinatório ID 274314133, 18/05/2023), sem resposta do agravado (decursos de prazo registrados em 05/07/2023 e 12/07/2023); apelação do autor (ID 271133141) com contrarrazões (ID 271133148)",
-    "[PRONTIDÃO · conferir] julgar a apelação, com o agravo interno prejudicado (sugestão; decidir na minuta)"
+    "[PRONTIDÃO · conferir] julgar a apelação, com o agravo interno prejudicado (a definir na minuta)",
+    "Pauta: os autos não indicam se a inclusão de 19/11/2026 abrange a apelação ou só o agravo interno; alternativas: julgar a apelação, com o agravo interno prejudicado, ou só o agravo interno"
    ],
    "minuta": false
   },
@@ -5923,7 +5923,7 @@
    "assunto_detalhado": "",
    "grupo": "assunto-14",
    "tipo_caso": "Colação de grau (INEP/ENADE) · agravo interno",
-   "resultado": "Proposta: APTO — agravo interno do INEP (ID 322223582) contra a decisão ID 321241349, que indeferiu o efeito suspensivo às apelações; apelações do INEP e da UFMS (IDs 319967674 e 319967676) contra a concessão (colação de grau; fato consumado) [VALIDAR: julgar as apelações e a remessa em conjunto, com o agravo interno prejudicado] ‖ Paradigma do Relator: AI 5012952-32.2022.4.03.0000 (acórdão do Relator, TRF-3, 3ª Turma, 14/04/2023)",
+   "resultado": "Proposta: agravo interno do INEP (ID 322223582) contra a decisão ID 321241349, que indeferiu o efeito suspensivo às apelações; apelações do INEP e da UFMS (IDs 319967674 e 319967676) contra a concessão (colação de grau; fato consumado); alternativas: julgar as apelações e a remessa, com o agravo interno prejudicado, ou julgar só o agravo interno ‖ Paradigma do Relator: AI 5012952-32.2022.4.03.0000 (acórdão do Relator, TRF-3, 3ª Turma, 14/04/2023)",
    "modelo": "AI 5012952-32.2022.4.03.0000 (acórdão do Relator, TRF-3, 3ª Turma, 14/04/2023)",
    "variacoes": [],
    "observacao": "Sentença concedeu a segurança e confirmou a liminar (ID 319967672); contrarrazões (IDs 319967678 e 322271289); decurso dos prazos registrado.",
@@ -5965,18 +5965,18 @@
     "analisado_em": "26/11/2026",
     "decisao_agravada": "Decisão ID 321241349 (15/04/2025)",
     "recurso": "agravo interno (ID 322223582, 25/04/2025)",
-    "preparo": "[VALIDAR]",
+    "preparo": "não exigido (agravo interno)",
     "representacao": "procuração/substabelecimento ID 319967529, 319967643",
     "mpf": "parecer ID 321120134 (14/04/2025)",
     "autos": "71 documentos extraídos",
-    "tempestividade": "[VALIDAR]",
+    "tempestividade": "agravo interno de 25/04/2025: tempestivo (certidão ID 322267688)",
     "prontidao": "APTO — agravo interno do INEP (ID 322223582, 25/04/2025) contra a decisão de 15/04/2025 (ID 321241349) que indeferiu o efeito suspensivo às apelações do INEP e da FUFMS, com contrarrazões (ID 322271289, 25/04/2025); apelações (IDs 319967674 e 319967676) com contrarrazões (ID 319967678); MPF: parecer de falta de interesse (ID 321120134) e manifestação (ID 322298223) | conferir: julgar as apelações e a remessa, com o agravo interno prejudicado (sugestão; decidir na minuta)",
     "prontidao_em": "26/11/2026"
    },
    "ajustes": [],
    "pendencias": [
     "[PRONTIDÃO] agravo interno do INEP (ID 322223582, 25/04/2025) contra a decisão de 15/04/2025 (ID 321241349) que indeferiu o efeito suspensivo às apelações do INEP e da FUFMS, com contrarrazões (ID 322271289, 25/04/2025); apelações (IDs 319967674 e 319967676) com contrarrazões (ID 319967678); MPF: parecer de falta de interesse (ID 321120134) e manifestação (ID 322298223)",
-    "[PRONTIDÃO · conferir] julgar as apelações e a remessa, com o agravo interno prejudicado (sugestão; decidir na minuta)"
+    "[PRONTIDÃO · conferir] julgar as apelações e a remessa, com o agravo interno prejudicado (a definir na minuta)"
    ],
    "minuta": false
   }
