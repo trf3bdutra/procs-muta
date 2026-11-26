@@ -2024,11 +2024,11 @@
    "assunto": "Multas e demais Sanções",
    "assunto_detalhado": "",
    "grupo": "assunto-1",
-   "tipo_caso": "Autos do TJMS com 8 documentos",
-   "resultado": "Proposta: [VALIDAR] autos com 8 documentos: ler sentença e apelação no PJe [VALIDAR: triagem sem leitura da sentença e da apelação]",
+   "tipo_caso": "CRMV-MS × empresário · execução fiscal extinta por abandono · intimação pessoal do conselho",
+   "resultado": "Proposta: apelação do CRMV-MS contra a sentença (ID 315180139, pp. 175-176, 07/10/2024) que extinguiu a execução fiscal por abandono da causa (artigo 485, III, do CPC), após intimação das procuradoras do conselho pelo Diário da Justiça para dar andamento ao feito; examinar a prerrogativa de intimação pessoal do representante do conselho (artigo 25 da Lei 6.830/1980; Tema 580/STJ), a intimação pessoal da parte exigida pelo artigo 485, § 1º, do CPC e o pedido de aplicação do artigo 40 da Lei 6.830/1980 [VALIDAR paradigma: sem precedente direto do Relator no banco 2023–2026; usar os temas indicados]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "Autos migrados.",
+   "observacao": "Autos do TJMS em um PDF de 186 páginas (ID 315180139), lido no PJe em 26/11/2026. Executado citado por carta (p. 59) e revel sem advogado; não intimado para contrarrazões por falta de endereço (certidão de 27/11/2024, p. 186).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -2037,28 +2037,44 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "Não consta parecer",
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "315180139 (pp. 175-176)"
+    },
+    {
+     "peca": "Apelação",
+     "id": "315180139 (pp. 180-183)"
+    },
+    {
+     "peca": "Preparo (GRU e comprovante)",
+     "id": "315180139 (pp. 184-185)"
+    },
+    {
+     "peca": "Certidão (contrarrazões não intimadas)",
+     "id": "315180139 (p. 186)"
+    }
+   ],
+   "mpf": "Não consta parecer (intervenção não exigida)",
    "triagem": {
     "ato": "Julgamento colegiado (voto)",
-    "materia": "[VALIDAR]",
+    "materia": "Execução fiscal de conselho profissional — abandono da causa e intimação pessoal",
     "monocratica": "Não (pauta)",
     "analisado_em": "26/11/2026",
-    "decisao_agravada": "[VALIDAR]",
-    "recurso": "[VALIDAR]",
-    "preparo": "[VALIDAR]",
-    "representacao": "[VALIDAR]",
-    "mpf": "Não consta parecer",
-    "autos": "8 documentos extraídos",
-    "tempestividade": "[VALIDAR]",
-    "prontidao": "CONFERIR | conferir: autos em um único PDF sem texto legível (ID 315180139): ler no PJe",
+    "decisao_agravada": "Sentença (ID 315180139, pp. 175-176, 07/10/2024)",
+    "recurso": "apelação do CRMV-MS (ID 315180139, pp. 180-183, 26/11/2024)",
+    "preparo": "GRU de R$ 30,00 paga em 26/11/2024 por débito em conta (ID 315180139, pp. 184-185)",
+    "representacao": "procuradoras do CRMV-MS (Lilian Ertzogue Marques e Marina Aparecida Medeiros da Silva)",
+    "mpf": "Não consta parecer (intervenção não exigida)",
+    "autos": "8 documentos; PDF do TJMS (186 páginas) lido no PJe em 26/11/2026",
+    "tempestividade": "sentença publicada em 10/10/2024; prazo até 27/11/2024 (certidão, p. 179); apelação de 26/11/2024: tempestiva",
+    "prontidao": "APTO — sentença, apelação e preparo localizados no PDF do TJMS (ID 315180139, pp. 175-185) | conferir: executado citado por carta (p. 59), revel sem advogado, não intimado para contrarrazões por falta de endereço atualizado (certidão de 27/11/2024, p. 186); os prazos contra o revel sem patrono fluem da publicação (artigo 346 do CPC)",
     "prontidao_em": "26/11/2026"
    },
    "ajustes": [],
    "pendencias": [
-    "[VALIDAR] triagem sem leitura da sentença e da apelação",
-    "[PRONTIDÃO · conferir] autos com 8 documentos: conferir no PJe",
-    "[PRONTIDÃO · conferir] autos em um único PDF sem texto legível (ID 315180139): ler no PJe"
+    "[PRONTIDÃO] sentença, apelação e preparo localizados no PDF do TJMS (ID 315180139, pp. 175-185)",
+    "[PRONTIDÃO · conferir] executado citado por carta (p. 59), revel sem advogado, não intimado para contrarrazões por falta de endereço atualizado (certidão de 27/11/2024, p. 186); os prazos contra o revel sem patrono fluem da publicação (artigo 346 do CPC)"
    ],
    "minuta": false
   },
@@ -4497,14 +4513,14 @@
     "mpf": "Não consta parecer",
     "autos": "53 documentos extraídos",
     "tempestividade": "[VALIDAR]",
-    "prontidao": "CONFERIR | conferir: retirado em sessão de 30/01/2026; o motivo não consta nos autos extraídos e não há ato posterior: confirmar se foi superado",
+    "prontidao": "APTO — apelação da UFMS (ID 285125801) e contrarrazões (ID 285125804) nos autos; nenhuma petição, certidão ou ato após a retirada de 30/01/2026; reincluído em pauta em 19/11/2026 | conferir: retirado em sessão de 30/01/2026 (movimento \"Deliberado em Sessão - Retirado\"); o motivo não consta dos autos: conferir no histórico da sessão",
     "prontidao_em": "26/11/2026"
    },
    "ajustes": [],
    "pendencias": [
     "[VALIDAR] motivo da retirada de pauta em 30/01/2026 e se foi superado",
-    "[PRONTIDÃO · conferir] retirado de pauta em 30/01/2026: conferir o motivo e se foi superado",
-    "[PRONTIDÃO · conferir] retirado em sessão de 30/01/2026; o motivo não consta nos autos extraídos e não há ato posterior: confirmar se foi superado"
+    "[PRONTIDÃO] apelação da UFMS (ID 285125801) e contrarrazões (ID 285125804) nos autos; nenhuma petição, certidão ou ato após a retirada de 30/01/2026; reincluído em pauta em 19/11/2026",
+    "[PRONTIDÃO · conferir] retirado em sessão de 30/01/2026 (movimento \"Deliberado em Sessão - Retirado\"); o motivo não consta dos autos: conferir no histórico da sessão"
    ],
    "minuta": false
   },
@@ -5912,14 +5928,14 @@
     "mpf": "Não consta parecer",
     "autos": "49 documentos extraídos",
     "tempestividade": "[VALIDAR]",
-    "prontidao": "CONFERIR | conferir: pautado como agravo interno (ID 274249232, contra a tutela recursal de 10/05/2023) com a apelação (ID 271133141) e as contrarrazões (ID 271133148) já nos autos: sugestão de julgar a apelação, com o agravo interno prejudicado",
+    "prontidao": "APTO — agravo interno da UFMS (ID 274249232, 17/05/2023) com vista para contrarrazões (ato ordinatório ID 274314133, 18/05/2023), sem resposta do agravado (decursos de prazo registrados em 05/07/2023 e 12/07/2023); apelação do autor (ID 271133141) com contrarrazões (ID 271133148) | conferir: julgar a apelação, com o agravo interno prejudicado (sugestão; decidir na minuta)",
     "prontidao_em": "26/11/2026"
    },
    "ajustes": [],
    "pendencias": [
     "[VALIDAR] pauta só do agravo interno ou também da apelação",
-    "[PRONTIDÃO · conferir] pautado como agravo interno com a apelação ainda pendente: julgar em conjunto?",
-    "[PRONTIDÃO · conferir] pautado como agravo interno (ID 274249232, contra a tutela recursal de 10/05/2023) com a apelação (ID 271133141) e as contrarrazões (ID 271133148) já nos autos: sugestão de julgar a apelação, com o agravo interno prejudicado"
+    "[PRONTIDÃO] agravo interno da UFMS (ID 274249232, 17/05/2023) com vista para contrarrazões (ato ordinatório ID 274314133, 18/05/2023), sem resposta do agravado (decursos de prazo registrados em 05/07/2023 e 12/07/2023); apelação do autor (ID 271133141) com contrarrazões (ID 271133148)",
+    "[PRONTIDÃO · conferir] julgar a apelação, com o agravo interno prejudicado (sugestão; decidir na minuta)"
    ],
    "minuta": false
   },
@@ -5935,7 +5951,7 @@
    "assunto_detalhado": "",
    "grupo": "assunto-14",
    "tipo_caso": "Colação de grau (INEP/ENADE) · agravo interno",
-   "resultado": "Proposta: APTO — agravo interno (ID 322223582) contra a decisão ID 321241349; apelações do INEP e da UFMS (IDs 319967674 e 319967676) contra a concessão (colação de grau; fato consumado) [VALIDAR: julgar as apelações e a remessa em conjunto, com o agravo interno prejudicado] [VALIDAR: quem interpôs o agravo interno e o teor da decisão ID 321241349] ‖ Paradigma do Relator: AI 5012952-32.2022.4.03.0000 (acórdão do Relator, TRF-3, 3ª Turma, 14/04/2023)",
+   "resultado": "Proposta: APTO — agravo interno do INEP (ID 322223582) contra a decisão ID 321241349, que indeferiu o efeito suspensivo às apelações; apelações do INEP e da UFMS (IDs 319967674 e 319967676) contra a concessão (colação de grau; fato consumado) [VALIDAR: julgar as apelações e a remessa em conjunto, com o agravo interno prejudicado] ‖ Paradigma do Relator: AI 5012952-32.2022.4.03.0000 (acórdão do Relator, TRF-3, 3ª Turma, 14/04/2023)",
    "modelo": "AI 5012952-32.2022.4.03.0000 (acórdão do Relator, TRF-3, 3ª Turma, 14/04/2023)",
    "variacoes": [],
    "observacao": "Sentença concedeu a segurança e confirmou a liminar (ID 319967672); contrarrazões (IDs 319967678 e 322271289); decurso dos prazos registrado.",
@@ -5982,15 +5998,13 @@
     "mpf": "parecer ID 321120134 (14/04/2025)",
     "autos": "71 documentos extraídos",
     "tempestividade": "[VALIDAR]",
-    "prontidao": "CONFERIR | conferir: pautado como agravo interno do INEP (ID 322223582, contra a negativa de efeito suspensivo de 15/04/2025) com as apelações (IDs 319967674 e 319967676) e as contrarrazões (ID 319967678) nos autos: sugestão de julgar as apelações, com o agravo interno prejudicado",
+    "prontidao": "APTO — agravo interno do INEP (ID 322223582, 25/04/2025) contra a decisão de 15/04/2025 (ID 321241349) que indeferiu o efeito suspensivo às apelações do INEP e da FUFMS, com contrarrazões (ID 322271289, 25/04/2025); apelações (IDs 319967674 e 319967676) com contrarrazões (ID 319967678); MPF: parecer de falta de interesse (ID 321120134) e manifestação (ID 322298223) | conferir: julgar as apelações e a remessa, com o agravo interno prejudicado (sugestão; decidir na minuta)",
     "prontidao_em": "26/11/2026"
    },
    "ajustes": [],
    "pendencias": [
-    "[VALIDAR] quem interpôs o agravo interno e o teor da decisão ID 321241349",
-    "[PRONTIDÃO · conferir] pautado como agravo interno com a apelação ainda pendente: julgar em conjunto?",
-    "[PRONTIDÃO · conferir] pautado como agravo interno do INEP (ID 322223582, contra a negativa de efeito suspensivo de 15/04/2025) com as apelações (IDs 319967674 e 319967676) e as contrarrazões (ID 319967677?) nos autos: sugestão de julgar as apelações, com o agravo interno prejudicado",
-    "[PRONTIDÃO · conferir] pautado como agravo interno do INEP (ID 322223582, contra a negativa de efeito suspensivo de 15/04/2025) com as apelações (IDs 319967674 e 319967676) e as contrarrazões (ID 319967678) nos autos: sugestão de julgar as apelações, com o agravo interno prejudicado"
+    "[PRONTIDÃO] agravo interno do INEP (ID 322223582, 25/04/2025) contra a decisão de 15/04/2025 (ID 321241349) que indeferiu o efeito suspensivo às apelações do INEP e da FUFMS, com contrarrazões (ID 322271289, 25/04/2025); apelações (IDs 319967674 e 319967676) com contrarrazões (ID 319967678); MPF: parecer de falta de interesse (ID 321120134) e manifestação (ID 322298223)",
+    "[PRONTIDÃO · conferir] julgar as apelações e a remessa, com o agravo interno prejudicado (sugestão; decidir na minuta)"
    ],
    "minuta": false
   }
