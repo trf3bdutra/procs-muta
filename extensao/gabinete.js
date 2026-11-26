@@ -1792,7 +1792,12 @@ function heroOrganizarProntuario(){
         var av=el('button','lnk hero-v53-autos-link','Conferir documentos em Autos');av.type='button';av.onclick=function(){G.aba='Autos';render();};encHd.append(av);
         var inner=el('div','hero-enc-dock-body');inner.append(encTr);dock.append(inner);dock.open=!!heroTopo.encDockOpen;
         dock.addEventListener('toggle',function(){if(dock.isConnected)heroTopo.encDockOpen=dock.open;});
-        var gerHost=el('div','hero-ger-dock-content');gerHost.id='ger-app';gerHead.append(dock);gerBody.append(gerHead,gerHost);gerDock.append(gerBody);
+        var gerHost=el('div','hero-ger-dock-content');gerHost.id='ger-app';gerHead.append(dock);
+        /* Indexação compartilhada: reutiliza o editor da Produção ou monta o mesmo formulário na Triagem. */
+        var idx=gbody.querySelector('#hero-prod-index');
+        if(!idx){var idxHost=el('div');html(idxHost,producaoIndex());idx=idxHost.querySelector('#hero-prod-index');}
+        if(idx){idx.classList.remove('card','gg');idx.classList.add('hero-enc-dock');var ih=idx.querySelector('summary'),it=ih&&ih.querySelector('h4'),im=ih&&ih.querySelector('.gn');if(ih&&it&&im){it.className='hero-enc-dock-title';im.className='hero-enc-dock-meta';var ic=el('span','hero-conf-chevron');ic.setAttribute('aria-hidden','true');ih.append(ic);}gerHead.append(idx);}
+        gerBody.append(gerHead,gerHost);gerDock.append(gerBody);
         gerDock.open=!!heroTopo.gerDockOpen;
         gerDock.addEventListener('toggle',function(){if(!gerDock.isConnected)return;heroTopo.gerDockOpen=gerDock.open;if(gerDock.open&&window.MutaGerador)window.MutaGerador.pintar();});
         gbody.classList.add('hero-shared-ger-dock');if(G.rot==='tri')gbody.classList.add('hero-tri-with-dock');caixa.append(gerDock);
