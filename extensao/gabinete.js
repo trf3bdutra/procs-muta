@@ -1861,11 +1861,13 @@ function render0() {
   if (G.aba === 'Gerador') { G.aba = 'Processo'; if (window.MutaAbas) setTimeout(function () { window.MutaAbas.ir('ger'); }, 0); }
   if (MODOS.indexOf(G.aba) < 0) G.aba = 'Processo';
   if(heroV53()&&!G.rot)G.rot='res';
+  var grupoHero=G.aba==='Autos'||G.rot==='res'?'processo':'pront';
+  if(heroV53()&&window.MutaAbas&&window.MutaAbas.sincronizarProntuario)window.MutaAbas.sincronizarProntuario(grupoHero);
   var nAl = window.MutaAutos && window.MutaAutos.estado().itens ? window.MutaAutos.alertas().filter(function (a) { return a.nivel === 'al'; }).length : 0;
   var tabs = '<div class="seg gtabs pmodos hero-main-tabs" role="tablist" aria-label="Parte do prontuário">' +
     '<button type="button" role="tab" data-aba="Autos" aria-selected="'+(G.aba==='Autos')+'"><span>Autos'+(nAl?' <i class="gnum">'+nAl+'</i>':'')+'</span><small>'+esc(contaModo('Autos'))+'</small></button>'+
     [['tri','Triagem'],['pro','Produção'],['sol','Solicitações']].map(function(x){var on=G.aba==='Processo'&&(G.rot||'tri')===x[0];return '<button type="button" role="tab" data-rot="'+x[0]+'" data-pv-tab="'+x[0]+'" aria-selected="'+on+'"><span>'+x[1]+'</span></button>';}).join('')+'</div>';
-  if(heroV53())tabs='<div class="seg gtabs pmodos hero-main-tabs hero-v53-tabs" role="tablist" aria-label="Parte do prontuário">'+[['res','Resumo'],['autos','Autos'],['tri','Triagem'],['pro','Produção']].map(function(x){var on=x[0]==='autos'?G.aba==='Autos':G.aba==='Processo'&&G.rot===x[0];return '<button type="button" role="tab" '+(x[0]==='autos'?'data-aba="Autos"':'data-rot="'+x[0]+'"')+' aria-selected="'+on+'">'+(x[0]==='pro'?'Produção':x[1])+(x[0]==='autos'&&nAl?' <i class="gnum">'+nAl+'</i>':'')+'</button>';}).join('')+'</div>';
+  if(heroV53())tabs='<div class="seg gtabs pmodos hero-main-tabs hero-v53-tabs" role="tablist" aria-label="Parte do prontuário">'+(grupoHero==='processo'?[['res','Resumo'],['autos','Autos']]:[['tri','Triagem'],['pro','Produção']]).map(function(x){var on=x[0]==='autos'?G.aba==='Autos':G.aba==='Processo'&&G.rot===x[0];return '<button type="button" role="tab" '+(x[0]==='autos'?'data-aba="Autos"':'data-rot="'+x[0]+'"')+' aria-selected="'+on+'">'+(x[0]==='pro'?'Produção':x[1])+(x[0]==='autos'&&nAl?' <i class="gnum">'+nAl+'</i>':'')+'</button>';}).join('')+'</div>';
   var snc = snCard(), cab = cabeca(s); CAB_HTML = cab;
   /* 0.69: aviso de sigilo no alto do cartão (processo sigiloso ou documento sigiloso nos autos) */
   if (window.MutaSigilo) { window.MutaSigilo.consultar(G.cnj); var sgh = window.MutaSigilo.html(); if (sgh) cab = cab.replace('<section class="pc pm">', '<section class="pc pm">' + sgh); }
