@@ -5440,11 +5440,11 @@
    "assunto": "Expedição de diplomas e omissão na entrega das notas",
    "assunto_detalhado": "",
    "grupo": "assunto-16",
-   "tipo_caso": "Expedição de diplomas e omissão na entrega das notas",
-   "resultado": "",
+   "tipo_caso": "Diploma (Estácio) · obrigação de fazer · apelação da União (ilegitimidade do MEC)",
+   "resultado": "Proposta: APTO — apelação da União (ilegitimidade: o MEC não expede nem registra diploma de IES privada) contra a procedência parcial, integrada nos embargos (ID 312748754) [VALIDAR paradigma] [VALIDAR: conferir se há apelação de outra parte (ID 312748757)]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença parcialmente procedente (ID 312748746), integrada (ID 312748754); apelação da União (ID 312748755); o documento ID 312748757, tipado como apelação, traz pedido de desprovimento (contrarrazões?); contrarrazões (ID 312748764).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -5453,11 +5453,46 @@
     "correcao": "Vanilda",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "312748754"
+    },
+    {
+     "peca": "Apelação",
+     "id": "312748755"
+    },
+    {
+     "peca": "Apelação",
+     "id": "312748757"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "312748756"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "312748764"
+    }
+   ],
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — ensino superior",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 312748754 (30/10/2024)",
+    "recurso": "apelação (ID 312748755, 19/11/2024); apelação (ID 312748757, 02/12/2024)",
+    "preparo": "[VALIDAR]",
+    "representacao": "procuração/substabelecimento ID 312748699, 312748700, 312748701",
+    "mpf": "Não consta parecer",
+    "autos": "60 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] conferir se há apelação de outra parte (ID 312748757)"
+   ],
    "minuta": false
   },
   {
@@ -5471,11 +5506,11 @@
    "assunto": "Acesso sem conclusão do Ensino Médio",
    "assunto_detalhado": "",
    "grupo": "assunto-10",
-   "tipo_caso": "Acesso sem conclusão do Ensino Médio",
-   "resultado": "",
+   "tipo_caso": "IFMS · certificado de conclusão sem ensino médio completo · fato consumado",
+   "resultado": "Proposta: APTO — apelação do IFMS e remessa contra a concessão (expedição do certificado e do histórico); parecer do MPF pelo fato consumado (ID 346214531) [VALIDAR paradigma]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença concedeu e confirmou a liminar (ID 345479433); apelação (ID 345479438); contrarrazões com pedido de majoração de honorários (ID 345479441).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -5484,9 +5519,42 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "345479433"
+    },
+    {
+     "peca": "Apelação",
+     "id": "345479438"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "345479441"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "345479432"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "346214531"
+    }
+   ],
+   "mpf": "parecer ID 346214531 (10/12/2025)",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — ensino",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 345479433 (17/10/2025)",
+    "recurso": "apelação (ID 345479438, 31/10/2025)",
+    "preparo": "[VALIDAR]",
+    "representacao": "procuração/substabelecimento ID 345479357, 345479362",
+    "mpf": "parecer ID 346214531 (10/12/2025)",
+    "autos": "53 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false
@@ -5502,11 +5570,11 @@
    "assunto": "Perda de Prazo de Matrícula",
    "assunto_detalhado": "",
    "grupo": "assunto-33",
-   "tipo_caso": "Perda de Prazo de Matrícula",
-   "resultado": "",
+   "tipo_caso": "UFGD · reabertura do prazo de matrícula · MS",
+   "resultado": "Proposta: APTO — apelação da UFGD e remessa contra a concessão (reabertura do prazo de matrícula do aprovado); parecer do MPF pelo desprovimento (ID 329052166) [VALIDAR paradigma]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença concedeu a segurança (ID 325202257); apelação (ID 325202259); contrarrazões (ID 325202261).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -5515,9 +5583,42 @@
     "correcao": "Vanilda",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "325202257"
+    },
+    {
+     "peca": "Apelação",
+     "id": "325202259"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "325202261"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "325202256"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "329052166"
+    }
+   ],
+   "mpf": "parecer ID 329052166 (27/06/2025)",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — ensino superior",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 325202257 (25/11/2024)",
+    "recurso": "apelação (ID 325202259, 17/03/2025)",
+    "preparo": "[VALIDAR]",
+    "representacao": "procuração/substabelecimento ID 325201631",
+    "mpf": "parecer ID 329052166 (27/06/2025)",
+    "autos": "55 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false
@@ -5533,11 +5634,11 @@
    "assunto": "Militar",
    "assunto_detalhado": "",
    "grupo": "assunto-31",
-   "tipo_caso": "Militar",
-   "resultado": "",
+   "tipo_caso": "Transferência compulsória de militar (dependente) para a UFMS · MS denegado",
+   "resultado": "Proposta: APTO — apelação do impetrante contra a denegação (transferência ex officio, artigo 49 da Lei 9.394/1996 e Lei 9.536/1997; congeneridade, ADI 3.324) [VALIDAR paradigma]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença denegou a segurança (ID 292665876); apelação (ID 292665880); contrarrazões (ID 292665885); decisão de declínio de competência (ID 293008728).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -5546,9 +5647,42 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "292665877"
+    },
+    {
+     "peca": "Apelação",
+     "id": "292665880"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "292665885"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "292665845"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "292901999"
+    }
+   ],
+   "mpf": "parecer ID 292901999 (26/06/2024)",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — ensino superior",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 292665877 (29/02/2024)",
+    "recurso": "apelação (ID 292665880, 25/03/2024)",
+    "preparo": "comprovante juntado (ID 292665881, 292665882) — conferir o tipo",
+    "representacao": "procuração/substabelecimento ID 292665714",
+    "mpf": "parecer ID 292901999 (26/06/2024)",
+    "autos": "86 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false
@@ -5564,11 +5698,11 @@
    "assunto": "PIS",
    "assunto_detalhado": "",
    "grupo": "assunto-2",
-   "tipo_caso": "PIS",
-   "resultado": "",
+   "tipo_caso": "PIS/COFINS (combustíveis) · carta de cobrança · JÁ JULGADO em 05/10/2026",
+   "resultado": "Proposta: PENDENTE — a apelação e a remessa já foram julgadas em 05/10/2026 (provimento para denegar a segurança: voto ID 401687052, acórdão ID 402487252); depois vieram \"embargos infringentes\" (ID 404532117, 15/10/2026) e, após a pauta, tutela cautelar incidental URGENTE (ID 413927232, 21/11/2026: protesto de CDA de R$ 6.992.119,04); definir o que vai a julgamento (artigo 942 do CPC? recurso cabível?) e apreciar a tutela [VALIDAR: natureza da pauta: julgamento ampliado (artigo 942) ou embargos; tutela cautelar incidental pendente (urgente)]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença concedeu em parte (ID 387107473); apelação (ID 387107476); contrarrazões (ID 387107480).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -5577,11 +5711,47 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "387107473"
+    },
+    {
+     "peca": "Apelação",
+     "id": "387107476"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "387107480"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "387107470"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "390363175"
+    }
+   ],
+   "mpf": "parecer ID 390363175 (03/08/2026)",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Tributário — PIS/COFINS, combustíveis",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 387107473 (27/04/2026)",
+    "recurso": "apelação (ID 387107476, 18/06/2026)",
+    "preparo": "comprovante juntado (ID 387107455) — conferir o tipo",
+    "representacao": "procuração/substabelecimento ID 387107443",
+    "mpf": "parecer ID 390363175 (03/08/2026)",
+    "autos": "69 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] natureza da pauta: julgamento ampliado (artigo 942) ou embargos",
+    "[VALIDAR] tutela cautelar incidental pendente (urgente)"
+   ],
    "minuta": false
   },
   {
@@ -5595,11 +5765,11 @@
    "assunto": "Cota para Ingresso - Ações Afirmativas",
    "assunto_detalhado": "",
    "grupo": "assunto-23",
-   "tipo_caso": "Cota para Ingresso - Ações Afirmativas",
-   "resultado": "",
+   "tipo_caso": "Cota racial (UFMS) · agravo interno contra a tutela recursal",
+   "resultado": "Proposta: APTO — agravo interno da UFMS (ID 274249232) contra a antecipação da tutela recursal (ID 273797065); a apelação do autor (ID 271133141) contra a improcedência está pendente [VALIDAR: julgar a apelação em conjunto, com o agravo interno prejudicado] [VALIDAR: pauta só do agravo interno ou também da apelação]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença improcedente (ID 271133135); contrarrazões (ID 271133148); decurso do prazo do agravado para resposta (25/08/2023).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -5608,11 +5778,34 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Decisão recorrida",
+     "id": "273797065"
+    },
+    {
+     "peca": "Agravo interno",
+     "id": "274249232"
+    }
+   ],
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Agravo interno (voto)",
+    "materia": "Administrativo — ensino superior, ações afirmativas",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Decisão ID 273797065 (10/05/2023)",
+    "recurso": "agravo interno (ID 274249232, 17/05/2023)",
+    "preparo": "[VALIDAR]",
+    "representacao": "[VALIDAR]",
+    "mpf": "Não consta parecer",
+    "autos": "49 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] pauta só do agravo interno ou também da apelação"
+   ],
    "minuta": false
   },
   {
@@ -5626,11 +5819,11 @@
    "assunto": "Convalidação de Estudos e Reconhecimento de Diploma",
    "assunto_detalhado": "",
    "grupo": "assunto-14",
-   "tipo_caso": "Convalidação de Estudos e Reconhecimento de Diploma",
-   "resultado": "",
+   "tipo_caso": "Colação de grau (INEP/ENADE) · agravo interno",
+   "resultado": "Proposta: APTO — agravo interno (ID 322223582) contra a decisão ID 321241349; apelações do INEP e da UFMS (IDs 319967674 e 319967676) contra a concessão (colação de grau; fato consumado) [VALIDAR: julgar as apelações e a remessa em conjunto, com o agravo interno prejudicado] [VALIDAR: quem interpôs o agravo interno e o teor da decisão ID 321241349]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença concedeu a segurança e confirmou a liminar (ID 319967672); contrarrazões (IDs 319967678 e 322271289); decurso dos prazos registrado.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -5639,11 +5832,46 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Decisão recorrida",
+     "id": "321241349"
+    },
+    {
+     "peca": "Agravo interno",
+     "id": "322223582"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "322271289"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "319967664"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "321120134"
+    }
+   ],
+   "mpf": "parecer ID 321120134 (14/04/2025)",
+   "triagem": {
+    "ato": "Agravo interno (voto)",
+    "materia": "Administrativo — ensino superior",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Decisão ID 321241349 (15/04/2025)",
+    "recurso": "agravo interno (ID 322223582, 25/04/2025)",
+    "preparo": "[VALIDAR]",
+    "representacao": "procuração/substabelecimento ID 319967529, 319967643",
+    "mpf": "parecer ID 321120134 (14/04/2025)",
+    "autos": "71 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] quem interpôs o agravo interno e o teor da decisão ID 321241349"
+   ],
    "minuta": false
   }
  ]
