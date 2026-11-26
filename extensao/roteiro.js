@@ -223,7 +223,7 @@
       (dest ? (alPasso[dest] = alPasso[dest] || []) : alTopo).push([a, i]); });
     var alHtml = function (x) { var a = x[0]; return '<div class="al-i ' + a.nivel + '"><span>' + esc(a.t) + '</span>' + (a.campo ? '<button type="button" class="btn line sm" data-au="al:' + x[1] + '">Gravar “' + esc(a.valor) + '”</button>' : '') + '</div>'; };
     var pct = L.length ? Math.round(100 * n.ok / L.length) : 0;
-    var h = '@@TOPO@@';
+    var h = '@@TOPO@@', avancou=true;
     var topo = '<section class="card rt-top"><div class="rt-tt"><b>Roteiro de triagem</b><span class="rt-n" title="Etapas conferidas">' + n.ok + '/' + L.length + '</span>' +
       (n.al ? '<span class="rt-al">' + n.al + ' alerta' + (n.al > 1 ? 's' : '') + '</span>' : '') + '</div>' +
       '<div class="rt-progress-caption"><span>Etapas conferidas</span><b>'+pct+'%</b></div><div class="rt-bar" role="progressbar" aria-label="Etapas conferidas" aria-valuemin="0" aria-valuemax="100" aria-valuenow="'+pct+'"><i style="width:' + pct + '%"></i></div>' +
@@ -237,7 +237,7 @@
       var fo=F.filter(function(x){return x.st==='ok';}).length, fa=F.filter(function(x){return x.st==='al';}).length;
       h += '<li class="rt-f"><span>' + esc(f[1]) + '</span><small class="rt-phase-count" aria-label="'+fo+' de '+F.length+' etapas conferidas">'+fo+'/'+F.length+'</small>'+(fa?'<small class="rt-phase-alert">'+fa+' alerta'+(fa===1?'':'s')+'</small>':'')+'</li>';
       F.forEach(function (x) {
-        var p = x.p, ab = R.aberto[p.id] != null ? R.aberto[p.id] : x.st !== 'ok';
+        var p = x.p, ab = R.aberto[p.id] != null ? R.aberto[p.id] : x.st !== 'ok', trecho=avancou&&x.st==='ok';if(x.st!=='ok')avancou=false;
         var cs = (p.campos || []).filter(function (c) { return typeof c[3] !== 'function' || c[3](ctx); });
         if(p.id==='tempest'){var rs=g.V('origem','Recursos'),trs=g.V('triagem','Tempestividade por recurso'),ref=AU&&AU.referenciasTempestividade?AU.referenciasTempestividade():null;if((Array.isArray(rs)&&rs.length>1)||(Array.isArray(trs)&&trs.length>1)||(ref&&ref.recursos.length>1))cs=cs.filter(function(c){return c[1]==='Tempestividade por recurso';});}
         var visiveis = cs.filter(function (c) { return c[3] !== 'calc'; }), calc = cs.filter(function (c) { return c[3] === 'calc'; });
@@ -245,7 +245,7 @@
         var dica = typeof p.dica === 'function' ? p.dica(ctx) : p.dica;
         var AP = alPasso[p.id] || [];
         var AU0 = window.MutaAutos, doAuto = AU0 && AU0.preenchido && cs.concat(p.mais || []).some(function (c) { return AU0.preenchido(c[0] + '.' + c[1]); });
-        h += '<li class="rt-p is-' + x.st + (ab ? ' ab' : '') + '"><span class="rt-i" aria-label="' + ROT[x.st] + '">' + ICO[x.st] + '</span><div class="rt-c">' +
+        h += '<li class="rt-p is-' + x.st + (ab ? ' ab' : '') + (trecho?' rt-avanco':'') + '"><span class="rt-i" aria-label="' + ROT[x.st] + '">' + ICO[x.st] + '</span><div class="rt-c">' +
           '<button type="button" class="rt-h" data-rt="a:' + p.id + '" aria-expanded="' + ab + '"><b>' + esc(p.t) + (AP.length ? ' <i class="rt-av">' + AP.length + ' aviso' + (AP.length > 1 ? 's' : '') + '</i>' : '') + (doAuto ? ' <i class="au-tag" title="Preenchido pela leitura dos autos: confira">autos</i>' : '') + '</b><span class="rt-step-meta"><span class="rt-step-state">'+esc(ROT[x.st]||'A conferir')+'</span><span class="rt-step-chevron" aria-hidden="true"></span></span>' + (!ab && resumo ? '<small>' + esc(resumo.slice(0, 120)) + '</small>' : '') + '</button>';
         if (ab) {
           var mais = (p.mais || []).map(comSug).filter(Boolean);

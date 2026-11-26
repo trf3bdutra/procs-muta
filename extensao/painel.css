@@ -2963,3 +2963,38 @@ html body.hero-redesign-v53 :is(#panel-acervo,#panel-par,#panel-modelos) .hero-r
  box-sizing:border-box;align-self:stretch!important;width:100%!important;min-width:0!important;margin:0!important;padding:6px 9px!important;text-align:left!important
 }
 @media(max-width:330px){html body.hero-redesign-v53 :is(#panel-acervo,#panel-par,#panel-modelos) .hero-rep-search .hero-rep-query{grid-template-columns:minmax(0,1fr) 32px 32px}html body.hero-redesign-v53 :is(#panel-acervo,#panel-par,#panel-modelos) .hero-rep-query .tu-b{width:32px!important}}
+
+/* Roteiros irmãos: fundo externo bege, títulos com faixa tonal, campos em papel branco. */
+html body.hero-redesign-v53 #gab :is(.hero-tri-with-dock,.hero-production-route){
+ --route-paper:var(--hero-pront-paper,#fff);--route-bg:var(--hero-pront-header,#f3f0e7);--route-rule:var(--hero-pront-divider,var(--line));--route-green:#527b66;--route-amber:#ac8242;--route-muted:#849096;--route-head:color-mix(in srgb,#69838b 9%,var(--route-paper))
+}
+html[data-tema=escuro] body.hero-redesign-v53 #gab :is(.hero-tri-with-dock,.hero-production-route){--route-green:#91c1a6;--route-amber:#e4b36d;--route-muted:#a1b1bf}
+html body.hero-redesign-v53 #gab .gbody.hero-tri-with-dock .rt-top{background:var(--route-paper)!important}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock ol.rt{background:var(--route-bg)!important}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock ol.rt>li.rt-f{background:color-mix(in srgb,#a58a55 11%,var(--route-bg))!important;border-color:var(--route-rule)!important}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock .rt-c>.rt-h{background:var(--route-head)!important}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock .rt-p.is-ok>.rt-c>.rt-h{background:color-mix(in srgb,var(--route-green) 8%,var(--route-paper))!important}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock .rt-p.is-al>.rt-c>.rt-h{background:color-mix(in srgb,var(--route-amber) 13%,var(--route-paper))!important}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock .rt-c>.rt-b{background:var(--route-paper)!important}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock ol.rt>.rt-p{position:relative}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock ol.rt>.rt-p.rt-avanco::before{content:"";position:absolute;left:9px;top:18px;bottom:-15px;width:2px;background:var(--route-green);pointer-events:none}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock .rt-p>.rt-i{position:relative;z-index:1;background:var(--route-paper)}
+html body.hero-redesign-v53 #gab .hero-production-route .hero-minuta-roteiro{background:var(--route-bg)!important;padding:0!important;margin:0 0 10px!important;border:0!important}
+html body.hero-redesign-v53 #gab .hero-production-route .hero-prod-top{padding:10px 12px 12px;background:var(--route-paper);border-bottom:1px solid var(--route-rule)}
+html body.hero-redesign-v53 #gab .hero-production-route .hero-prod-top>p{font-size:10.5px;line-height:1.4;margin:5px 0}
+html body.hero-redesign-v53 #gab .hero-production-route .hero-minuta-nav-foot>small{font:500 10px/1.4 var(--mono,monospace);color:var(--muted-fg)}
+html body.hero-redesign-v53 #gab .hero-production-route .hero-prod-timeline{list-style:none;position:relative;padding:10px 10px 6px!important;margin:0!important;min-width:0}
+html body.hero-redesign-v53 #gab .hero-production-route .hero-prod-timeline::before{content:"";position:absolute;left:20px;top:26px;bottom:30px;width:1px;background:var(--route-rule)}
+html body.hero-redesign-v53 #gab .hero-production-route .hero-prod-step{--step-tone:var(--route-muted);position:relative;display:flex;align-items:flex-start;gap:8px;margin:0 0 7px;min-width:0}
+html body.hero-redesign-v53 #gab .hero-production-route .hero-prod-step.is-ok{--step-tone:var(--route-green)}
+html body.hero-redesign-v53 #gab .hero-production-route .hero-prod-step.is-partial{--step-tone:var(--route-amber)}
+html body.hero-redesign-v53 #gab .hero-production-route .hero-prod-step.is-ok:not(:last-child)::before{content:"";position:absolute;left:10px;top:20px;bottom:-20px;width:2px;background:var(--route-green);pointer-events:none}
+html body.hero-redesign-v53 #gab .hero-production-route .hero-prod-marker{position:relative;z-index:1;flex:0 0 21px;width:21px;height:21px;box-sizing:border-box;display:grid;place-items:center;margin-top:8px;border:1px solid var(--step-tone);border-radius:50%;background:var(--route-paper);color:var(--step-tone);font:600 10px/1 var(--mono,monospace)}
+html body.hero-redesign-v53 #gab .hero-production-route .hero-prod-step.is-active .hero-prod-marker{outline:2px solid color-mix(in srgb,var(--step-tone) 25%,transparent);outline-offset:2px}
+html body.hero-redesign-v53 #gab .hero-production-route .hero-prod-step>.hero-minuta-secao{flex:1;min-width:0;margin:0!important;padding:0!important;border:1px solid var(--route-rule)!important;border-radius:4px!important;background:var(--route-paper)!important;box-shadow:none!important;overflow:hidden}
+html body.hero-redesign-v53 #gab .hero-production-route .hero-prod-step>.hero-minuta-secao>summary{display:flex!important;align-items:center;gap:6px;min-height:35px;padding:7px 9px!important;background:color-mix(in srgb,var(--step-tone) 9%,var(--route-paper))!important;border:0!important;cursor:pointer}
+html body.hero-redesign-v53 #gab .hero-production-route .hero-prod-step>.hero-minuta-secao>summary h4{flex:1;min-width:0;margin:0!important;font:650 11.5px/1.4 var(--sans,system-ui)!important;color:var(--fg)!important;text-transform:none!important;letter-spacing:0!important}
+html body.hero-redesign-v53 #gab .hero-production-route .hero-prod-step>.hero-minuta-secao>summary .gn{font:500 9px/1.4 var(--mono,monospace)!important;color:var(--step-tone)!important;background:transparent!important;border:0!important;padding:0!important;white-space:nowrap}
+html body.hero-redesign-v53 #gab .hero-production-route .hero-prod-step>.hero-minuta-secao>.gr{margin:0!important;padding:9px!important;background:var(--route-paper)!important;border-top:1px solid var(--route-rule);gap:7px!important}
+html body.hero-redesign-v53 #gab .hero-production-route :is(.hero-v53-gerador,.hero-prod-index){margin:10px!important;border:1px solid var(--route-rule)!important;border-radius:4px!important;background:var(--route-paper)!important;box-shadow:none!important}
+html body.hero-redesign-v53 #gab .hero-production-route :is(.hero-v53-gerador>h4,.hero-prod-index>summary){background:var(--route-head)!important;padding:8px 10px!important;margin:0!important;border-bottom:1px solid var(--route-rule)}
