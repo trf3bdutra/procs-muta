@@ -68,7 +68,7 @@ test('Pendência do prontuário confrontada com a tabela de peças',()=>{
  assert.match(confPend('Confirmar no sistema o ID 598870878 atribuído à sentença.',P,{}),/ID 598870878 não está na tabela de peças, que registra sentença com ID 396555413/);
  assert.equal(confPend('Conferir a tempestividade.',P,{}),'');
 });
-test('Barra do Amicus Curiae: Cortex e Compendium com a mesma barra, sem citar um ao outro, ambos com o Ex Officio',()=>{
+test('Cortex e Compendium sem citar um ao outro, ambos com o Ex Officio',()=>{
  const build=read('apoio/modus-operandi/fonte/build.py'), nav=read('apoio/modus-operandi/fonte/nav_editorial.css');
  assert.ok(!app.includes('title="Compendium: Ementário'),'Cortex sem o Compendium na barra');
  assert.ok(app.includes('href="/exofficio/" title="Ex Officio'));
@@ -125,4 +125,16 @@ test('Amicus: Recursos, Temas processuais e Assuntos recorrentes como faces de u
  assert.ok(home.includes("[['recursos-temas','Recursos, temas e assuntos',true]"),'um só módulo nas Referências jurídicas');
  for(const x of ["[['recursos','Recursos cabíveis'],['temas-proc','Temas processuais'],['assuntos','Assuntos recorrentes']]","class='am-drawer'","dr.className='am-drawer'","aria-controls','am-regimento'","amicus-regimento"].filter(x=>!x.startsWith("class=")))assert.ok(home.includes(x),x);
  assert.ok(!home.includes("[['regimento','Regimento',true]"),'Regimento fora da grade de módulos');
+});
+
+test('Barras por família: Amicus (equipe) e Caput (gestor: Caput, Cognitio, Cortex)',()=>{
+ const shared=read('apoio/amicus/header.py'), home=read('apoio/amicus/index.html');
+ assert.match(shared,/'caput\/index\.html'/,'a barra também entra no Caput');
+ assert.ok(shared.includes("gestor=cognitio||collectio||caput"),'família do gestor');
+ assert.ok(shared.includes("[['Caput','/caput/',caput],['Cognitio','/cognitio/',cognitio],['Cortex','/amicus/cortex/',collectio]]"),'atalhos da família do gestor');
+ assert.ok(shared.includes("if(!gestor)for(const a of h.querySelectorAll('a[href]'))"),'só o Amicus omite o Caput');
+ assert.ok(shared.includes("[['Compendium','/amicus/compendium/'],['Collectio','/amicus/collectio/'],['Collegium','/amicus/collegium/']]"),'Amicus só com as ferramentas da equipe');
+ const hd=home.match(/<header class="am-home-header">([\s\S]*?)<\/header>/)[1];
+ assert.doesNotMatch(hd,/\/amicus\/cortex\/|\/cognitio\//,'portal do Amicus sem as ferramentas do gestor');
+ for(const f of ['cognitio/index.html','apoio/ex-officio/lotes/previa.html']) assert.ok(read(f).includes('CMT · Caput'),f);
 });

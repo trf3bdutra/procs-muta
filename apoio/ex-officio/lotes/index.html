@@ -622,7 +622,7 @@ function cabecalho(lotes,id,usuario){
   const exo=MODO_REL||(CMTK&&!usuario)?'':`<a class="hb" href="/exofficio/" title="Ex Officio: pautas, cartões e ficha do processo"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h18M3 12h18M3 17h18"/></svg><span>Ex Officio</span></a>`;
   /* barra do Amicus Curiae, a mesma do Compendium: o Compendium não aparece aqui (nem o Cortex na barra dele); o Ex Officio aparece nas duas */
   return `<header class="lx-nx"><div class="lx-nx1"><i class="star" aria-hidden="true"></i>
-   <div class="lx-bc"><span class="lx-nxey">CMT · Amicus Curiae</span><div class="lx-cad"><b>Cortex<em>.</em></b><span class="lx-sl" aria-hidden="true">/</span><span class="lx-cr">${ROTULO[MODO]}</span></div></div>
+   <div class="lx-bc"><span class="lx-nxey">CMT · Caput</span><div class="lx-cad"><b>Cortex<em>.</em></b><span class="lx-sl" aria-hidden="true">/</span><span class="lx-cr">${ROTULO[MODO]}</span></div></div>
    ${exo?`<nav class="lx-ir" aria-label="Outras ferramentas">${exo}</nav>`:''}
    <span class="cmt-sp"></span>
    <div class="cmt-ut">
