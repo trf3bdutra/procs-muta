@@ -637,6 +637,36 @@ var PECAS_ORDEM = { 'Sentença': ['Sentença - ID', 'Sentença - Data', 'Senten�
   'Origem': ['Origem - Juízo', 'Origem - Julgador', 'Origem - Valor da causa', 'Origem - Processo de referência', 'Origem - Documentos 1G'],
   'Recursos e contrarrazões': ['Contrarrazões - Situação', 'Recursos', 'Contrarrazões'] };
 var PECAS_RESUMO = { 'Decisão impugnada': ['Impugnada - ID', 'Impugnada - Data'], 'Parecer do MPF': ['MPF', 'ID do Parecer MPF', 'Parecer - Sentido'], 'Procuração': ['ID da Procuração'], 'Sentença': ['Sentença - ID', 'Sentença - Data', 'Sentença - Decisão'], 'Origem': ['Origem - Juízo', 'Origem - Julgador'], 'Recursos e contrarrazões': ['Recursos', 'Contrarrazões - Situação'], 'Outras peças e ocorrências': ['Outras peças'] };
+/* Dados dos autos: as faixas são tópicos estáticos, não novos níveis de expansão. */
+function heroDadosTopico(c,g){
+ var k=c.chave||'';
+ if(g==='1º grau')return /^Origem - (Documentos|Peças vinculadas)/.test(k)?'Documentos vinculados':/^Origem -/.test(k)?'Origem':/^(Sentença -|1G - Sentença)/.test(k)?'Sentença':/^1G - Decisão/.test(k)?'Decisão interlocutória':'Outros dados';
+ if(g==='2º grau')return /^2G - Monocrática/.test(k)?'Decisão monocrática':/^(2G - Acórdão|Acórdão -)/.test(k)?'Acórdão':/^Impugnada -/.test(k)?'Decisão impugnada':/Sucumbência/.test(k)?'Sucumbência':'Outros dados';
+ if(g==='Recursos e contrarrazões')return /^(Recursos|Contrarrazões)/.test(k)?'Registros recursais':'Questões incidentais';
+ if(g==='Teor dos autos · Documentos e peças')return /^Autos -/.test(k)?'Extração':'Classificação e registros';
+ return g;
+}
+function heroDadosEstado(n,t){return n===t?'completo':n?'parcial':'vazio';}
+function heroDadosIndicador(n,t){return '<span class="hero-data-ind" data-status="'+heroDadosEstado(n,t)+'" title="'+n+' de '+t+' campos preenchidos"><i aria-hidden="true"></i>'+n+'/'+t+'</span>';}
+function heroDadosGrupos(C,g,val){
+ var topics=new Map();C.forEach(function(c){var h=campo(c);if(!h)return;var t=heroDadosTopico(c,g);if(!topics.has(t))topics.set(t,[]);topics.get(t).push({c:c,h:h,v:val(c)});});
+ return Array.from(topics).map(function(pair){var t=pair[0],L=pair[1],n=L.filter(function(x){return !!x.v;}).length;return '<section class="hero-data-topic"><header class="hero-data-topic-head"><span>'+esc(t)+'</span>'+heroDadosIndicador(n,L.length)+'</header><div class="gr hero-data-fields">'+L.map(function(x){var c=x.c,w=c.tipo==='tabela'||c.tipo==='texto-longo'||/Honorários|Resultado/.test(c.chave)||/\bclass="gf[^"]*\bw\b/.test(x.h);return '<div class="hero-data-entry'+(w?' wide':'')+'" data-filled="'+!!x.v+'" data-label="'+esc(c.rotulo||c.chave)+'">'+x.h+'</div>';}).join('')+'</div></section>';}).join('');
+}
+var heroDadosView={cnj:'',mode:'all',q:''};
+function heroDadosFiltros(){
+ var root=caixa.querySelector('#g-docs .hero-doc-data');if(!root)return;
+ if(heroDadosView.cnj!==G.cnj)heroDadosView={cnj:G.cnj,mode:'all',q:''};
+ var bar=root.querySelector('.hero-data-toolbar');if(!bar)return;
+ var q=bar.querySelector('input'),buttons=bar.querySelectorAll('[data-dados-mode]');q.value=heroDadosView.q;
+ function apply(){
+ var term=normalDados( heroDadosView.q);
+ buttons.forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.dadosMode===heroDadosView.mode));});
+ root.querySelectorAll('details[data-grupo]').forEach(function(d){var total=0;d.querySelectorAll('.hero-data-topic').forEach(function(s){var n=0;s.querySelectorAll('.hero-data-entry').forEach(function(f){var filled=f.dataset.filled==='true',match=heroDadosView.mode==='all'||(heroDadosView.mode==='filled'?filled:!filled),txt=normalDados(f.dataset.label+' '+f.textContent+' '+Array.from(f.querySelectorAll('input,textarea,select')).map(function(x){return x.value;}).join(' '));f.hidden=!match||!!term&&!txt.includes(term);if(!f.hidden)n++;});s.hidden=!n;total+=n;});d.hidden=!total;if(total&&term)d.open=true;});
+ var empty=root.querySelector('.hero-data-empty');if(empty)empty.hidden=Array.from(root.querySelectorAll('details[data-grupo]')).some(function(d){return !d.hidden;});
+ }
+ function normalDados(s){return String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();}
+ q.oninput=function(){heroDadosView.q=q.value;apply();};buttons.forEach(function(b){b.onclick=function(){heroDadosView.mode=b.dataset.dadosMode;apply();};});bar.querySelector('[data-dados-collapse]').onclick=function(){heroDadosView.q='';q.value='';apply();root.querySelectorAll('details[data-grupo]').forEach(function(d){d.open=false;});};apply();
+}
 function pecasCartao(soGrupos) {
   var A = abaModelo('Processo'); if (!A) return '';
   var AU = window.MutaAutos;
@@ -651,16 +681,17 @@ function pecasCartao(soGrupos) {
   }
   if(heroV53()){var seenDocs=new Set();gs=gs.map(function(g){return Object.assign({},g,{campos:g.campos.filter(function(c){var id=c.secao+'.'+c.chave;if(seenDocs.has(id))return false;seenDocs.add(id);return true;})});}).filter(function(g){return g.campos.length;});}
   if (!gs.length) return '';
-  var val = function (c) { var v = c.secao ? V(c.secao, c.chave) : fonteVal(c); return Array.isArray(v) ? (v.length ? v.length + ' item(ns)' : '') : S(v); };
-  return (soGrupos ? '' : '<section class="card pc-sec pecas" id="g-pecas"><div class="pc-sh"><h3>Peças</h3><small class="muted">da ficha do processo</small></div>') + gs.map(function (g) {
+  var val = function (c) { var v = c.secao ? V(c.secao, c.chave) : fonteVal(c); return Array.isArray(v) ? (v.length ? v.length + ' item(ns)' : '') : S(v); };var fluid=heroV53()&&soGrupos&&AU&&AU.estado().docAba==='ficha';var tool=fluid?'<div class="hero-data-toolbar"><div class="seg" role="group" aria-label="Filtrar campos"><button type="button" data-dados-mode="all">Todos</button><button type="button" data-dados-mode="filled">Preenchidos</button><button type="button" data-dados-mode="empty">A preencher</button></div><input type="search" aria-label="Localizar campo" placeholder="Localizar campo…"><button type="button" data-dados-collapse title="Recolher grupos" aria-label="Recolher grupos">−</button></div>':'';
+  return (soGrupos ? '' : '<section class="card pc-sec pecas" id="g-pecas"><div class="pc-sh"><h3>Peças</h3><small class="muted">da ficha do processo</small></div>') + tool + gs.map(function (g) {
     var ord = PECAS_ORDEM[g.grupo] || [], C = g.campos.slice().sort(function (a, b) { var ia = ord.indexOf(a.chave), ib = ord.indexOf(b.chave); return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib); });
     var n = C.filter(function (c) { return !!val(c); }).length, ab = G.pecAb && G.pecAb[g.grupo] != null ? G.pecAb[g.grupo] : false;
     var res = (PECAS_RESUMO[g.grupo] || []).map(function (k) { var c = C.filter(function (x) { return x.chave === k; })[0]; var v = c ? val(c) : ''; return /^\d{4}-\d{2}-\d{2}$/.test(v) ? brD(v) : k.indexOf('ID') >= 0 && v ? 'ID ' + v : v; }).filter(Boolean).join(' · ');
     /* no agravo de instrumento a "Sentença" da ficha guarda a decisão agravada */
     var titulo = g.grupo === 'Teor dos autos · Documentos e peças' ? 'Extração e outras peças' : g.grupo === 'Sentença' && /agravo de instrumento/i.test(((G.fo || {})['classe_judicial'] || (G.fo || {})['Classe'] || '') + ' ' + V('triagem', 'Tipo de Julgamento')) ? 'Decisão agravada' : g.grupo;
+    if(fluid){var tones={'1º grau':'origin','2º grau':'appeal','Recursos e contrarrazões':'resources','Parecer do MPF':'mpf','Procuração':'mandate','Teor dos autos · Documentos e peças':'extract'};var visible=C.filter(function(c){return !c.legado&&c.chave!=='Padrão - Espécie';});return '<details class="pc-s hero-data-group" data-tone="'+(tones[g.grupo]||'extract')+'"'+(ab?' open':'')+' data-grupo="'+esc(g.grupo)+'"><summary><span class="hero-data-dot" aria-hidden="true"></span><span class="pc-s-t"><b>'+esc(titulo)+'</b></span>'+heroDadosIndicador(visible.filter(function(c){return !!val(c);}).length,visible.length)+'</summary>'+pecaExtracao(C,val)+heroDadosGrupos(C,g.grupo,val)+'</details>';}
     return '<details class="pc-s"' + (ab ? ' open' : '') + ' data-grupo="' + esc(g.grupo) + '"><summary><span class="pc-s-t"><b>' + esc(titulo) + '</b>' + (res ? '<small>' + esc(res.slice(0, 120)) + '</small>' : '<small class="vz">sem registro</small>') + '</span><span class="gn">' + n + '/' + C.length + '</span></summary>' +
       (AU && AU.docsDoGrupo ? AU.docsDoGrupo(g.grupo) : '') + pecaExtracao(C, val) + '<div class="gr">' + C.map(campo).join('') + '</div></details>';
-  }).join('') + (soGrupos ? '' : '</section>');
+  }).join('') + (fluid?'<p class="muted hero-data-empty" hidden>Nenhum campo correspondente.</p>':'') + (soGrupos ? '' : '</section>');
 }
 /* extrair da peça: o ID e a data vêm da cronologia; o resto (decisão, resultado, honorários…) só do texto da peça.
    O botão lê o texto (se ainda não lido) e preenche os campos vazios do grupo; nunca troca o que já está gravado. */
@@ -1713,7 +1744,7 @@ function heroOrganizarProntuario(){
     if(resumo&&painel.parentNode===id){
       var firstPanel=el('div','hero-first-panel');id.insertBefore(firstPanel,id.firstChild);while(firstPanel.nextSibling&&firstPanel.nextSibling!==painel)firstPanel.append(firstPanel.nextSibling);
       /* Campos complementares na faixa branca; move os controles existentes, sem duplicar editores. */
-      var complement=el('section','hero-summary-complement'),ctitle=el('h4','pm-mer-h','Caso, conteúdo, questões e etiquetas');
+      var complement=el('section','hero-summary-complement hero-summary-integrated'),ctitle=el('h4','pm-mer-h','Caso, conteúdo, questões e etiquetas');
       complement.append(ctitle);complement.setAttribute('aria-label','Caso, conteúdo, questões e etiquetas');
       var cg=grupoModelo('Caso, Conteúdo e Questões'),shown=new Set(['Assunto']);
       if(firstPanel.querySelector('.hero-assunto-stack .hero-case-preview'))shown.add('Assunto detalhado');
@@ -1769,7 +1800,7 @@ function heroOrganizarProntuario(){
   abrirA(heroTopo.abaAcomp==='monitoramento'?'monitoramento':heroTopo.abaAcomp==='sinalizacoes'||(!heroTopo.abaAcomp&&heroTopo.sinalizacoes)?'sinalizacoes':'');show(heroTopo.pagina);
 }
 
-function render() { render0(); heroOrganizarProntuario(); if (window.MutaGerador && window.MutaGerador.pintar) window.MutaGerador.pintar(); }
+function render() { render0(); heroOrganizarProntuario(); heroDadosFiltros(); if (window.MutaGerador && window.MutaGerador.pintar) window.MutaGerador.pintar(); }
 function render0() {
   if (!caixa) return;
   faixaUsuario(ses.estado());

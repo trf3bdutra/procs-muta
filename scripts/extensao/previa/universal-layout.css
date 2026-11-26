@@ -1105,3 +1105,62 @@ html body.hero-redesign-v53 #panel-min .hero-review-editorial.is-fused .folha .f
 html body.hero-redesign-v53 #panel-min .hero-review-editorial.is-fused .folha .fl-m.ins{background:color-mix(in srgb,#4caf7a 8%,var(--cmp-paper))!important}
 html body.hero-redesign-v53 #panel-min .hero-review-editorial.is-fused .folha .fl-m.del{background:color-mix(in srgb,#c9624d 7%,var(--cmp-paper))!important}
 html body.hero-redesign-v53 #panel-min .hero-review-editorial.is-fused .hero-v53-ref-search{background:var(--cmp-bg)!important;border-top:1px solid var(--cmp-rule)!important}
+
+/* Pesquisa compartilhada · superfícies contínuas, sem fundos alternados entre controles. */
+html body.hero-redesign-v53 :is(#panel-acervo,#panel-par,#panel-modelos,#panel-min) .hero-rep-search{--rep-rule:var(--hero-pront-divider,var(--line));--rep-bg:var(--hero-pront-header,#f3f0e7);--rep-paper:var(--hero-pront-paper,#fff);display:flex!important;flex-direction:column;gap:0!important;background:var(--rep-bg)!important;border:1px solid var(--rep-rule)!important;border-radius:3px!important;padding:0!important;overflow:hidden;box-shadow:none!important;min-width:0}
+html body.hero-redesign-v53 :is(#panel-acervo,#panel-par,#panel-modelos,#panel-min) .hero-rep-search :is(.hero-rep-search-head,.hero-rep-query,.hero-rep-filters,.rep-scope,#acv-status,.pp-n,.hero-rep-count,.acv-form){background:transparent!important;border-radius:0!important;box-shadow:none!important}
+html body.hero-redesign-v53 :is(#panel-acervo,#panel-par,#panel-modelos,#panel-min) .hero-rep-search-head{display:flex;align-items:center;justify-content:space-between;gap:6px;padding:8px 9px 5px}
+html body.hero-redesign-v53 #panel-min .hero-ref-search-panel{margin:0 0 9px!important}
+html body.hero-redesign-v53 #panel-min .hero-ref-search-panel .cx-fontes{margin:0!important;padding:4px 8px 7px!important;gap:0!important;min-width:0;background:transparent!important;border:0!important}
+html body.hero-redesign-v53 #panel-min .hero-ref-search-panel .cx-fontes>button{background:var(--rep-paper);border:1px solid var(--rep-rule);border-radius:0!important;font-size:10px;padding:5px 6px}
+html body.hero-redesign-v53 #panel-min .hero-ref-search-panel .cx-fontes>button[aria-selected=true]{background:var(--primary,#31565a)!important;color:var(--primary-fg,#fff)!important}
+html body.hero-redesign-v53 #panel-min .hero-ref-search-panel .cx-pick{gap:0!important;padding:0!important;margin:0!important;background:transparent!important}
+html body.hero-redesign-v53 #panel-min .hero-ref-search-panel .cx-n{border-top:1px solid var(--rep-rule);padding:6px 8px!important;margin:0!important;font-size:10px!important}
+html body.hero-redesign-v53 #panel-min .hero-ref-search-panel .cx-lista{gap:0!important;padding:0!important;margin:0!important;border-top:1px solid var(--rep-rule);background:transparent!important}
+html body.hero-redesign-v53 #panel-min .hero-ref-search-panel .cx-lista .cx-it{background:transparent!important;border:0!important;border-bottom:1px solid var(--rep-rule)!important;border-radius:0!important;box-shadow:none!important;padding:7px 9px!important;text-align:left}
+html body.hero-redesign-v53 #panel-min .hero-ref-search-panel .cx-lista .cx-it.sel{background:color-mix(in srgb,var(--primary,#31565a) 10%,var(--rep-paper))!important;box-shadow:inset 2px 0 var(--primary,#31565a)!important}
+html body.hero-redesign-v53 #panel-min .hero-ref-search-panel .cx-lista .cx-it b{font-size:11px!important}
+html body.hero-redesign-v53 #panel-min .hero-ref-search-panel .cx-lista .cx-it small{font-size:10px!important}
+html body.hero-redesign-v53 #panel-min .hero-ref-search-panel .cx-pick>:is(.muted,.status,.empty):not(.cx-n){margin:0!important;padding:7px 9px!important}
+html body.hero-redesign-v53 #panel-min .hero-review-document .hero-v53-ref-search{background:var(--hero-pront-header,#f3f0e7)!important}
+/* Dados: somente grupos principais expansíveis; tópicos estáticos e editores originais. */
+html body.hero-redesign-v53 #gab #g-docs .hero-doc-data{--data-paper:var(--hero-pront-paper,#fff);--data-rule:var(--hero-pront-divider,var(--line));--data-head:var(--hero-pront-header,#f3f0e7);display:block!important;border:1px solid var(--data-rule);border-radius:3px;overflow:hidden;background:var(--data-paper)!important}
+html body.hero-redesign-v53 #gab #g-docs .hero-data-toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:5px;padding:7px;background:var(--data-head);border-bottom:1px solid var(--data-rule)}
+html body.hero-redesign-v53 #gab #g-docs .hero-data-toolbar>.seg{display:flex;flex:1 1 auto;min-width:0}
+html body.hero-redesign-v53 #gab #g-docs .hero-data-toolbar button{font-size:10px;padding:4px 6px;border:1px solid var(--data-rule);background:var(--data-paper);border-radius:2px}
+html body.hero-redesign-v53 #gab #g-docs .hero-data-toolbar button[aria-pressed=true]{background:var(--primary,#31565a);color:var(--primary-fg,#fff)}
+html body.hero-redesign-v53 #gab #g-docs .hero-data-toolbar input{flex:1 1 90px;min-width:0;max-width:100%;padding:5px;font-size:10px;background:var(--data-paper);border:1px solid var(--data-rule);border-radius:2px}
+html body.hero-redesign-v53 #gab #g-docs .hero-doc-data>.hero-data-group{--data-tone:#7c7061;margin:0!important;border:0!important;border-bottom:1px solid var(--data-rule)!important;border-radius:0!important;background:var(--data-paper)!important;box-shadow:none!important}
+html body.hero-redesign-v53 #gab #g-docs .hero-data-group[data-tone=origin]{--data-tone:#6d7f8a}
+html body.hero-redesign-v53 #gab #g-docs .hero-data-group[data-tone=appeal]{--data-tone:#315b60}
+html body.hero-redesign-v53 #gab #g-docs .hero-data-group[data-tone=resources]{--data-tone:#8b6a34}
+html body.hero-redesign-v53 #gab #g-docs .hero-data-group[data-tone=mpf]{--data-tone:#4f7466}
+html body.hero-redesign-v53 #gab #g-docs .hero-data-group[data-tone=mandate]{--data-tone:#78615b}
+html body.hero-redesign-v53 #gab #g-docs .hero-doc-data>.hero-data-group>summary{background:color-mix(in srgb,var(--data-tone) 7%,var(--data-head))!important;padding:7px 9px!important;min-height:33px!important;gap:7px!important}
+html body.hero-redesign-v53 #gab #g-docs .hero-data-dot{width:7px;height:7px;border-radius:50%;background:var(--data-tone);flex:none}
+html body.hero-redesign-v53 #gab #g-docs .hero-data-ind{display:inline-flex;align-items:center;gap:4px;font:600 10px/1.4 var(--mono,monospace);color:var(--muted-fg);white-space:nowrap}
+html body.hero-redesign-v53 #gab #g-docs .hero-data-ind i{width:6px;height:6px;border-radius:50%;background:#929997}
+html body.hero-redesign-v53 #gab #g-docs .hero-data-ind[data-status=completo] i{background:#527b66}
+html body.hero-redesign-v53 #gab #g-docs .hero-data-ind[data-status=parcial] i{background:#bd964d}
+html body.hero-redesign-v53 #gab #g-docs .hero-data-topic-head{display:flex;align-items:center;justify-content:space-between;gap:6px;padding:6px 9px;border-top:1px solid var(--data-rule);border-bottom:1px solid var(--data-rule);background:color-mix(in srgb,var(--data-tone) 6%,var(--data-paper));color:var(--data-tone);font:650 9px/1.4 var(--mono,monospace);letter-spacing:.075em;text-transform:uppercase}
+html body.hero-redesign-v53 #gab #g-docs .hero-data-fields{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 10px!important;padding:0 9px 4px!important}
+html body.hero-redesign-v53 #gab #g-docs .hero-data-entry{min-width:0;padding:3px 0;border-bottom:1px solid color-mix(in srgb,var(--data-rule) 65%,transparent)}
+html body.hero-redesign-v53 #gab #g-docs .hero-data-entry.wide{grid-column:1/-1}
+html body.hero-redesign-v53 #gab #g-docs .hero-data-entry>.gf{display:flex!important;flex-direction:row;align-items:center;gap:5px!important;margin:0!important;padding:0!important;min-width:0}
+html body.hero-redesign-v53 #gab #g-docs .hero-data-entry>.gf>.gl{flex:0 0 42%;min-width:0;font:500 10px/1.35 var(--sans,system-ui)!important;overflow-wrap:anywhere}
+html body.hero-redesign-v53 #gab #g-docs .hero-data-entry>.gf>:not(.gl){flex:1 1 0;min-width:0;max-width:100%}
+html body.hero-redesign-v53 #gab #g-docs .hero-data-entry.wide>.gf{display:grid!important;grid-template-columns:minmax(0,1fr);gap:3px!important}
+html body.hero-redesign-v53 #gab #g-docs .hero-data-entry :is(input:not([type=checkbox]):not([type=radio]),select,textarea){box-sizing:border-box;width:100%;min-height:25px;font-size:11px!important;padding:4px 5px!important;background:var(--data-paper)!important;border-radius:2px!important}
+html body.hero-redesign-v53 #gab #g-docs .hero-data-entry .gf-seg{flex-wrap:wrap;gap:2px!important}
+html body.hero-redesign-v53 #gab #g-docs .hero-data-entry .gf-seg button{font-size:10px!important;padding:3px 5px!important}
+html body.hero-redesign-v53 #gab #g-docs .hero-doc-data [hidden]{display:none!important}
+@media(max-width:350px){html body.hero-redesign-v53 #gab #g-docs .hero-data-fields{grid-template-columns:1fr}}
+/* Resumo e cobertura: um só painel branco, cabeçalhos e separadores comuns. */
+html body.hero-redesign-v53 #gab .hero-summary-integrated{margin:8px 10px!important;padding:0!important;border:1px solid var(--hero-pront-divider,var(--line))!important;border-radius:3px!important;overflow:hidden}
+html body.hero-redesign-v53 #gab .hero-summary-integrated>.pm-mer-h{padding:9px 10px!important;background:var(--hero-pront-header,#f3f0e7)!important;margin:0!important}
+html body.hero-redesign-v53 #gab .hero-summary-integrated>.hero-summary-section{border:0!important;border-top:1px solid var(--hero-pront-divider,var(--line))!important;outline:0!important}
+html body.hero-redesign-v53 #gab .hero-summary-integrated>.hero-summary-section>summary,html body.hero-redesign-v53 #gab #g-lei .au-coverage-card>.au-coverage-section>summary{background:color-mix(in srgb,var(--hero-pront-header,#f3f0e7) 48%,var(--hero-pront-paper,#fff))!important;display:flex!important;align-items:center!important;gap:6px!important;min-height:34px!important;padding:7px 10px!important;border:0!important;box-shadow:none!important;border-radius:0!important;outline-offset:-2px}
+html body.hero-redesign-v53 #gab .hero-summary-integrated>.hero-summary-section>summary h4,html body.hero-redesign-v53 #gab #g-lei .au-coverage-card>.au-coverage-section>summary h4{flex:1;min-width:0;color:var(--fg)!important;font:650 11px/1.35 var(--sans,system-ui)!important;letter-spacing:0!important;text-transform:none!important}
+html body.hero-redesign-v53 #gab .hero-summary-integrated>.hero-summary-section>summary h4::before{content:none!important;display:none!important}
+html body.hero-redesign-v53 #gab .hero-summary-integrated>.hero-summary-section>summary :is(small,.gn){font-size:10px!important;background:transparent!important;border:0!important;padding:0!important}
+html body.hero-redesign-v53 #gab .hero-summary-integrated>.hero-summary-section>:not(summary){padding-inline:10px!important}

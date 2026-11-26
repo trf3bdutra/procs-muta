@@ -179,7 +179,7 @@ function itens(lista, rot, sub, val, atual) {
 }
 function seletor() {
   var d = C.dados, s = C.sel[C.fonte], h = '';
-  var busca = '<input type="search" class="cx-q" data-c="q" placeholder="Filtrar pelo nome, assunto ou classe" value="' + esc(C.q) + '">';
+  var busca = '<div class="hero-rep-query cx-query-row"><input type="search" class="cx-q" data-c="q" aria-label="Filtrar referências disponíveis" placeholder="Filtrar nome, assunto, classe…" value="' + esc(C.q) + '"><button type="button" data-c="buscar-ref" class="btn line sm" title="Buscar" aria-label="Buscar">⌕</button><button type="button" data-c="limpar-ref" class="btn line sm" title="Limpar busca" aria-label="Limpar busca">×</button></div>';
   if (C.fonte === 'lote') {
     if (!chave()) return '<p class="muted">Abra os autos no PJe (ou um prontuário com número) para ver a minuta do lote.</p>';
     if (C.lotes == null) return '<p class="muted">Procurando o processo nos lotes…</p>';
@@ -203,7 +203,7 @@ function seletor() {
     h = sugPrec(s);
     var ids = vs.map(function (v) { return { x: { id: v.id, n: v.n, cl: v.cl, d: v.d } }; });
     Object.keys(C.ement).forEach(function (id) { if (!vs.some(function (v) { return v.id === id; }) && C.ement[id].rotulo) ids.unshift({ x: { id: id, n: C.ement[id].rotulo, cl: 'aberto pelo Ementário', d: '' } }); });
-    return h + (ids.length ? itens(ids, function (x) { return [x.cl, x.n].filter(Boolean).join(' '); }, function (x) { return x.d || ''; }, function (x) { return x.id; }, s) : '<div class="empty">Nenhum precedente vinculado. Abra o Ementário, pesquise e use Comparar com o editor.</div>') +
+    var encontrados=ids.filter(function(z){return filtra([z.x],['n','cl','d','id']).length;});return busca + h + (encontrados.length ? itens(encontrados, function (x) { return [x.cl, x.n].filter(Boolean).join(' '); }, function (x) { return x.d || ''; }, function (x) { return x.id; }, s) : '<div class="empty">Nenhum precedente vinculado. Abra o Ementário, pesquise e use Comparar com o editor.</div>') +
       (s && C.ement[s] && C.ement[s].erro ? '<p class="status err">' + esc(C.ement[s].erro) + '</p>' : '');
   }
   if (C.dadosErro) return '<p class="status err">' + esc(C.dadosErro) + '</p>';
@@ -436,7 +436,7 @@ function render() {
       var head=document.createElement('header');head.className='hero-review-ref-head';var h=document.createElement('h4');h.className='hero-v53-page-title';h.textContent='Texto de referência';var meta=document.createElement('small');meta.className='muted';meta.textContent=it?String(it.rotulo||it.titulo||it.title||it.nome||'Referência selecionada'):'Nenhuma referência selecionada';head.append(h,meta);ref.append(head);
       if(C.fonte==='colar'){var ta=pick.querySelector('textarea');if(ta)ref.append(ta);}
       else{var tx=document.createElement('div');tx.className='hero-v53-ref-text tx-j';tx.setAttribute('lang','pt-BR');var bs=it?blocosFonte(it):[];bs.forEach(function(b){var p=document.createElement(b.h?'h4':'p');p.textContent=String(b.h||b.p||'');tx.append(p);});if(!bs.length)tx.textContent='Selecione um modelo ou precedente.';ref.append(tx);}
-      var busca=document.createElement('details');busca.className='hero-v53-ref-search';busca.open=!!C.buscaRefAberta;var sm=document.createElement('summary');sm.textContent='Buscar referência';busca.append(sm,fontesEl,pick);busca.addEventListener('toggle',function(){if(busca.isConnected)C.buscaRefAberta=busca.open;});ref.append(busca);
+      var busca=document.createElement('details');busca.className='hero-v53-ref-search';busca.open=!!C.buscaRefAberta;var sm=document.createElement('summary');sm.textContent='Buscar referência';var searchPanel=document.createElement('div');searchPanel.className='hero-rep-search hero-ref-search-panel';var sh=document.createElement('div');sh.className='hero-rep-search-head';var sk=document.createElement('span');sk.className='hero-rep-search-kicker';sk.textContent='Pesquisa e visualização';var label=document.createElement('small');label.textContent=(fontes().find(function(f){return f[0]===C.fonte;})||[])[1]||'Referências';sh.append(sk,label);searchPanel.append(sh,fontesEl,pick);busca.append(sm,searchPanel);busca.addEventListener('toggle',function(){if(busca.isConnected)C.buscaRefAberta=busca.open;});ref.append(busca);
       var bar=document.createElement('div');bar.className='hero-v53-review-actions';var go=document.createElement('button');go.type='button';go.className='btn solid sm';go.dataset.c='comparar';go.textContent='Comparar textos';go.disabled=!ED.estado().texto||!it;bar.append(go);
       var side=res.querySelector('[data-c="janela"]');if(side)bar.append(side);if(op)bar.append(op);
       var eh=ed.querySelector('.mn-ed-h'),part=eh&&eh.querySelector('.mn-pt'),read=eh&&eh.querySelector('[data-c="ler"]');
@@ -478,7 +478,7 @@ function sugPrec(atual) {
   if (SUG.busy || SUG.L == null) return cab + '<p class="muted">Procurando no Ementário…</p>';
   if (SUG.erro) return cab + '<p class="status err">' + esc(SUG.erro) + '</p>';
   if (!SUG.L.length) return cab + '<p class="muted">Nenhum julgado compatível. Preencha assunto detalhado e questões no prontuário.</p>';
-  return cab + itens(SUG.L, function (x) { return x.n; }, function (x) { return x.d; }, function (x) { return x.id; }, atual) + '<p class="muted cx-n">Vinculados ao prontuário</p>';
+  var encontrados=SUG.L.filter(function(z){return filtra([z.x||z],['n','d','cl','id']).length;});return cab + (encontrados.length?itens(encontrados, function (x) { return x.n; }, function (x) { return x.d; }, function (x) { return x.id; }, atual):'<p class="muted">Nenhuma sugestão corresponde ao filtro.</p>') + '<p class="muted cx-n">Vinculados ao prontuário</p>';
 }
 function carregarJulgado(id) {
   C.ement[id] = { rotulo: '', secoes: [] }; render();
@@ -493,6 +493,7 @@ var tq = 0;
 caixa.addEventListener('click', function (e) {
   var b = e.target.closest('button'); if (!b) return;
   if(b.dataset.c==='comparar'){if(C.fusao){C.fusao=false;sincronizarFusao();}else if(ED.estado().texto&&itemAtual()){C.fusao=true;C.vista='folha';atualizarResultado();}return;}
+  if(b.dataset.c==='buscar-ref'||b.dataset.c==='limpar-ref'){clearTimeout(tq);var q=caixa.querySelector('[data-c="q"]');C.q=b.dataset.c==='limpar-ref'?'':q?q.value:C.q;render();return;}
   if (b.dataset.c === 'ler') { ED.ler().catch(function () {}); return; }
   if (b.dataset.c === 'v:recortes' || b.dataset.c === 'v:folha') { C.vista = b.dataset.c.slice(2); render(); return; }
   if (b.dataset.c === 'janela') { if (ULT && ULT.it && window.MutaJanela) window.MutaJanela.abrir('comparar', 'Comparação · ' + ULT.rotulo, ladoALadoHtml(alinhar(ULT.it), ULT.rotulo)); return; }
