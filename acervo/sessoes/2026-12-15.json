@@ -3,7 +3,7 @@
  "versao": 1,
  "nome": "15/12/2026",
  "date": "2026-12-15",
- "atualizadoEm": "2026-11-25T19:29:41.799Z",
+ "atualizadoEm": "2026-11-26T19:35:02.368Z",
  "itens": [
   {
    "cnj": "5007018-67.2024.4.03.6000",
@@ -33,11 +33,25 @@
        "ok": false,
        "em": "2026-11-24",
        "por": "Bruno"
+      },
+      {
+       "desc": "[VALIDAR] vínculo com o SINDSPREV/RJ: se a União alegou a ação coletiva 0023278-37.1995, o caso é do grupo 4",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-2886"
       }
-     ]
+     ],
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença por ilegitimidade ativa (servidora fora de MS), com custas e honorários; patrono do SINDSPREV/RJ."
     },
     "intercor": "SDFSDF",
-    "intercorTipo": "Adiado"
+    "intercorTipo": "Adiado",
+    "resJulg": "Proposta: dar provimento à apelação, com retorno à origem (grupo 1) [VALIDAR: vínculo com o SINDSPREV/RJ: se a União alegou a ação coletiva 0023278-37.1995, o caso é do grupo 4]",
+    "lote": {
+     "id": "1512-2886",
+     "item": 1,
+     "autos": 0
+    }
    }
   },
   {
@@ -59,7 +73,25 @@
    "ctl": {
     "midias": "Não se aplica",
     "editadoPor": "Bruno",
-    "editadoEm": "2026-11-23T21:04:47.348Z"
+    "editadoEm": "2026-11-23T21:04:47.348Z",
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença acolheu ilegitimidade ativa e ausência de título por acordo, com custas e honorários; apelação pede gratuidade ou preparo ao final.",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] gratuidade pedida na apelação × custas recolhidas: conferir preparo",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-2886"
+      }
+     ]
+    },
+    "resJulg": "Proposta: negar provimento à apelação: afastada a limitação territorial, mantida a extinção pelo acordo administrativo (grupo 2) [VALIDAR: gratuidade pedida na apelação × custas recolhidas: conferir preparo]",
+    "lote": {
+     "id": "1512-2886",
+     "item": 2,
+     "autos": 0
+    }
    }
   },
   {
@@ -78,7 +110,27 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença por ilegitimidade ativa, sem honorários (relação não angularizada); contrarrazões da FUNASA também com acordo.",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] contrarrazões alegam acordo: módulo TRANS se só nas contrarrazões",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-2886"
+      }
+     ]
+    },
+    "resJulg": "Proposta: dar provimento à apelação, com retorno à origem (grupo 1) [VALIDAR: contrarrazões alegam acordo: módulo TRANS se só nas contrarrazões]",
+    "lote": {
+     "id": "1512-2886",
+     "item": 3,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5006988-95.2025.4.03.6000",
@@ -96,7 +148,39 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença por ilegitimidade ativa, sem honorários; apelação menciona prescrição.",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] herdeiros/sucessores no polo? (módulo PENS/SUC)",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-2886"
+      },
+      {
+       "desc": "[VALIDAR] peça sem texto extraído: ID 402966875",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-2886"
+      },
+      {
+       "desc": "[PRONTIDÃO] peça central sem texto extraído: ID 402966875 (contrarrazões)",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-2886"
+      }
+     ]
+    },
+    "resJulg": "Proposta: dar provimento à apelação, com retorno à origem (grupo 1) [VALIDAR: herdeiros/sucessores no polo? (módulo PENS/SUC); peça sem texto extraído: ID 402966875]",
+    "lote": {
+     "id": "1512-2886",
+     "item": 4,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5003870-14.2025.4.03.6000",
@@ -114,7 +198,27 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença por ilegitimidade ativa (ID 402967745), sem honorários; embargos de declaração rejeitados (ID 402967749); apelação com sobrestamento (Tema 1.433).",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] GRU com a apelação (ID 402967751): conferir preparo",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-2886"
+      }
+     ]
+    },
+    "resJulg": "Proposta: dar provimento à apelação, com retorno à origem (grupo 1) [VALIDAR: GRU com a apelação (ID 402967751): conferir preparo]",
+    "lote": {
+     "id": "1512-2886",
+     "item": 5,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5008394-88.2024.4.03.6000",
@@ -132,7 +236,27 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença por ilegitimidade ativa, com custas e honorários; patrono do SINDSPREV/RJ; contrarrazões com litispendência e sindicato.",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] contrarrazões citam sindicato e litispendência: módulos SIND/LITISP (grupo 4?)",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-2886"
+      }
+     ]
+    },
+    "resJulg": "Proposta: dar provimento à apelação, com retorno à origem (grupo 1) [VALIDAR: contrarrazões citam sindicato e litispendência: módulos SIND/LITISP (grupo 4?)]",
+    "lote": {
+     "id": "1512-2886",
+     "item": 6,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5006915-60.2024.4.03.6000",
@@ -166,7 +290,37 @@
        }
       ]
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença (485, VI) com honorários de 10%; apelação discute absorção do índice pela reestruturação da carreira policial federal; memoriais em 26/11/2026.",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] tese de absorção por reestruturação de carreira: sem modelo direto",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-2886"
+      },
+      {
+       "desc": "[PRONTIDÃO · conferir] memoriais da União após a pauta (ID 414621639, 26/11/2026): exequente fora do universo subjetivo do título",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-2886"
+      },
+      {
+       "desc": "[PRONTIDÃO · conferir] memoriais da União após a pauta (ID 414621639, 26/11/2026): exequente fora do universo subjetivo do título",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-2886"
+      }
+     ]
+    },
+    "resJulg": "Proposta: negar provimento à apelação: acordo administrativo (MP 2.169-43/2001, Tema 550/STJ) (grupo 3) [VALIDAR: tese de absorção por reestruturação de carreira: sem modelo direto]",
+    "lote": {
+     "id": "1512-2886",
+     "item": 7,
+     "autos": 0
+    }
    }
   },
   {
@@ -185,7 +339,27 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença (ID 366441412) e embargos de declaração rejeitados (ID 366441416); parecer do MPF pelo desprovimento (ID 371195346).",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] fundamento da sentença ID 366441412 (lotação fora de MS?)",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-2886"
+      }
+     ]
+    },
+    "resJulg": "Proposta: dar provimento à apelação, com retorno à origem (grupo 1) [VALIDAR: fundamento da sentença ID 366441412 (lotação fora de MS?)]",
+    "lote": {
+     "id": "1512-2886",
+     "item": 8,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5006208-92.2024.4.03.6000",
@@ -203,7 +377,27 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença (31/03/2026) acolheu as impugnações: ilegitimidade passiva da União e do BACEN; apelação do exequente com pedido de gratuidade; contrarrazões do BACEN sobre a gratuidade.",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] honorários da sentença e gratuidade: módulos H-331/GRAT",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-2886"
+      }
+     ]
+    },
+    "resJulg": "Proposta: negar provimento à apelação, conforme explicitado: BACEN não integrou a ACP; honorários (artigo 331 do CPC) e gratuidade (Tema 1.178/STJ) (grupo 6) [VALIDAR: honorários da sentença e gratuidade: módulos H-331/GRAT]",
+    "lote": {
+     "id": "1512-2886",
+     "item": 9,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5006322-31.2024.4.03.6000",
@@ -221,7 +415,27 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença (31/03/2026) acolheu as impugnações: ilegitimidade passiva da União e do BACEN; apelação do exequente com pedido de gratuidade; contrarrazões do BACEN sobre a gratuidade.",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] honorários da sentença e gratuidade: módulos H-331/GRAT",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-2886"
+      }
+     ]
+    },
+    "resJulg": "Proposta: negar provimento à apelação, conforme explicitado: BACEN não integrou a ACP; honorários (artigo 331 do CPC) e gratuidade (Tema 1.178/STJ) (grupo 6) [VALIDAR: honorários da sentença e gratuidade: módulos H-331/GRAT]",
+    "lote": {
+     "id": "1512-2886",
+     "item": 10,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5006402-92.2024.4.03.6000",
@@ -239,7 +453,27 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença (31/03/2026) acolheu as impugnações: ilegitimidade passiva da União e do BACEN; apelação do exequente com pedido de gratuidade; contrarrazões do BACEN sobre a gratuidade.",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] honorários da sentença e gratuidade: módulos H-331/GRAT",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-2886"
+      }
+     ]
+    },
+    "resJulg": "Proposta: negar provimento à apelação, conforme explicitado: BACEN não integrou a ACP; honorários (artigo 331 do CPC) e gratuidade (Tema 1.178/STJ) (grupo 6) [VALIDAR: honorários da sentença e gratuidade: módulos H-331/GRAT]",
+    "lote": {
+     "id": "1512-2886",
+     "item": 11,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5006516-31.2024.4.03.6000",
@@ -257,7 +491,27 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença (31/03/2026) acolheu as impugnações: ilegitimidade passiva da União e do BACEN; apelação do exequente com pedido de gratuidade; contrarrazões do BACEN sobre a gratuidade.",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] honorários da sentença e gratuidade: módulos H-331/GRAT",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-2886"
+      }
+     ]
+    },
+    "resJulg": "Proposta: negar provimento à apelação, conforme explicitado: BACEN não integrou a ACP; honorários (artigo 331 do CPC) e gratuidade (Tema 1.178/STJ) (grupo 6) [VALIDAR: honorários da sentença e gratuidade: módulos H-331/GRAT]",
+    "lote": {
+     "id": "1512-2886",
+     "item": 12,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5006647-06.2024.4.03.6000",
@@ -275,7 +529,27 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença homologou a desistência e condenou em honorários; apelação contra a verba; BACEN apelado.",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] sem modelo no lote",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-2886"
+      }
+     ]
+    },
+    "resJulg": "Proposta: apelação só contra honorários após desistência homologada: voto próprio [VALIDAR: sem modelo no lote]",
+    "lote": {
+     "id": "1512-2886",
+     "item": 13,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5006728-52.2024.4.03.6000",
@@ -293,7 +567,27 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença (31/03/2026) acolheu as impugnações: ilegitimidade passiva da União e do BACEN; apelação do exequente com pedido de gratuidade; contrarrazões do BACEN sobre a gratuidade.",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] honorários da sentença e gratuidade: módulos H-331/GRAT",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-2886"
+      }
+     ]
+    },
+    "resJulg": "Proposta: negar provimento à apelação, conforme explicitado: BACEN não integrou a ACP; honorários (artigo 331 do CPC) e gratuidade (Tema 1.178/STJ) (grupo 6) [VALIDAR: honorários da sentença e gratuidade: módulos H-331/GRAT]",
+    "lote": {
+     "id": "1512-2886",
+     "item": 14,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5006807-31.2024.4.03.6000",
@@ -311,7 +605,27 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença (31/03/2026) acolheu as impugnações: ilegitimidade passiva da União e do BACEN; apelação do exequente com pedido de gratuidade; contrarrazões do BACEN sobre a gratuidade.",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] honorários da sentença e gratuidade: módulos H-331/GRAT",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-2886"
+      }
+     ]
+    },
+    "resJulg": "Proposta: negar provimento à apelação, conforme explicitado: BACEN não integrou a ACP; honorários (artigo 331 do CPC) e gratuidade (Tema 1.178/STJ) (grupo 6) [VALIDAR: honorários da sentença e gratuidade: módulos H-331/GRAT]",
+    "lote": {
+     "id": "1512-2886",
+     "item": 15,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5006887-92.2024.4.03.6000",
@@ -329,7 +643,27 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença (31/03/2026) acolheu as impugnações: ilegitimidade passiva da União e do BACEN; apelação do exequente com pedido de gratuidade; contrarrazões do BACEN sobre a gratuidade.",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] honorários da sentença e gratuidade: módulos H-331/GRAT",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-2886"
+      }
+     ]
+    },
+    "resJulg": "Proposta: negar provimento à apelação, conforme explicitado: BACEN não integrou a ACP; honorários (artigo 331 do CPC) e gratuidade (Tema 1.178/STJ) (grupo 6) [VALIDAR: honorários da sentença e gratuidade: módulos H-331/GRAT]",
+    "lote": {
+     "id": "1512-2886",
+     "item": 16,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5006956-27.2024.4.03.6000",
@@ -347,7 +681,27 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença (31/03/2026) acolheu as impugnações: ilegitimidade passiva da União e do BACEN; apelação do exequente com pedido de gratuidade; contrarrazões do BACEN sobre a gratuidade.",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] honorários da sentença e gratuidade: módulos H-331/GRAT",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-2886"
+      }
+     ]
+    },
+    "resJulg": "Proposta: negar provimento à apelação, conforme explicitado: BACEN não integrou a ACP; honorários (artigo 331 do CPC) e gratuidade (Tema 1.178/STJ) (grupo 6) [VALIDAR: honorários da sentença e gratuidade: módulos H-331/GRAT]",
+    "lote": {
+     "id": "1512-2886",
+     "item": 17,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5007037-73.2024.4.03.6000",
@@ -365,7 +719,27 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença (31/03/2026) acolheu as impugnações: ilegitimidade passiva da União e do BACEN; apelação do exequente com pedido de gratuidade; contrarrazões do BACEN sobre a gratuidade.",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] honorários da sentença e gratuidade: módulos H-331/GRAT",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-2886"
+      }
+     ]
+    },
+    "resJulg": "Proposta: negar provimento à apelação, conforme explicitado: BACEN não integrou a ACP; honorários (artigo 331 do CPC) e gratuidade (Tema 1.178/STJ) (grupo 6) [VALIDAR: honorários da sentença e gratuidade: módulos H-331/GRAT]",
+    "lote": {
+     "id": "1512-2886",
+     "item": 18,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5007375-13.2025.4.03.6000",
@@ -383,7 +757,27 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença indeferiu a inicial (485, VI); apelação discute legitimidade e associação; contrarrazões do BACEN (ilegitimidade passiva); MPF sem manifestação de mérito.",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] fundamento da sentença (BACEN fora do polo × legitimidade ativa)",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-2886"
+      }
+     ]
+    },
+    "resJulg": "Proposta: negar provimento à apelação, conforme explicitado: BACEN não integrou a ACP; honorários (artigo 331 do CPC) e gratuidade (Tema 1.178/STJ) (grupo 6) [VALIDAR: fundamento da sentença (BACEN fora do polo × legitimidade ativa)]",
+    "lote": {
+     "id": "1512-2886",
+     "item": 19,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5007460-33.2024.4.03.6000",
@@ -401,7 +795,27 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença: ausência de título por acordo; contrarrazões com preliminar de não conhecimento e má-fé; MPF pelo não conhecimento.",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] preliminar de dialeticidade nas contrarrazões (grupo 7?)",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-2886"
+      }
+     ]
+    },
+    "resJulg": "Proposta: negar provimento à apelação: acordo administrativo (MP 2.169-43/2001, Tema 550/STJ) (grupo 3) [VALIDAR: preliminar de dialeticidade nas contrarrazões (grupo 7?)]",
+    "lote": {
+     "id": "1512-2886",
+     "item": 20,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5008452-91.2024.4.03.6000",
@@ -419,7 +833,27 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença acolheu a impugnação (485, VI), com honorários; contrarrazões com má-fé e prescrição.",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] fundamento da sentença: territorial + acordo (grupo 2) ou só acordo (grupo 3)",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-2886"
+      }
+     ]
+    },
+    "resJulg": "Proposta: negar provimento à apelação: afastada a limitação territorial, mantida a extinção pelo acordo administrativo (grupo 2) [VALIDAR: fundamento da sentença: territorial + acordo (grupo 2) ou só acordo (grupo 3)]",
+    "lote": {
+     "id": "1512-2886",
+     "item": 21,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5011285-48.2025.4.03.6000",
@@ -437,7 +871,27 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença extinguiu por falta de título para servidor fora de MS.",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] sentido do parecer do MPF",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-2886"
+      }
+     ]
+    },
+    "resJulg": "Proposta: dar provimento à apelação, com retorno à origem (grupo 1) [VALIDAR: sentido do parecer do MPF]",
+    "lote": {
+     "id": "1512-2886",
+     "item": 22,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5011679-55.2025.4.03.6000",
@@ -455,7 +909,20 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença por ilegitimidade ativa, sem honorários.",
+     "pendencias": []
+    },
+    "resJulg": "Proposta: dar provimento à apelação, com retorno à origem (grupo 1)",
+    "lote": {
+     "id": "1512-2886",
+     "item": 23,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5012518-17.2024.4.03.6000",
@@ -473,7 +940,27 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença por ilegitimidade ativa; herdeiros ou sucessores.",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] herdeiros/pensionista no polo: módulo PENS ou SUC",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-2886"
+      }
+     ]
+    },
+    "resJulg": "Proposta: dar provimento à apelação, com retorno à origem (grupo 1) [VALIDAR: herdeiros/pensionista no polo: módulo PENS ou SUC]",
+    "lote": {
+     "id": "1512-2886",
+     "item": 24,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5008089-07.2024.4.03.6000",
@@ -491,7 +978,20 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença acolheu a ausência de título pelo acordo; MPF pelo desprovimento.",
+     "pendencias": []
+    },
+    "resJulg": "Proposta: negar provimento à apelação: acordo administrativo (MP 2.169-43/2001, Tema 550/STJ) (grupo 3)",
+    "lote": {
+     "id": "1512-2886",
+     "item": 25,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5003008-08.2023.4.03.6002",
@@ -510,7 +1010,32 @@
    "dataLiberacao": "",
    "obs": "",
    "ctl": {
-    "itemAnterior": "1"
+    "itemAnterior": "1",
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença procedente: lucros cessantes de 0,5% ao mês sobre o valor atualizado do imóvel entre 17/04/2015 e 13/07/2017, e dano moral.",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] valor do dano moral fixado na sentença",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-1s"
+      },
+      {
+       "desc": "[VALIDAR] empreendimento e programa (PMCMV-FAR ou Entidades)",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-1s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR paradigma] apelações do autor (majoração do dano moral para R$ 15.000,00) e da CEF (afastar lucros cessantes; redução e base de cálculo); seguir a linha IMO da sessão de 07/12/2026 (5003937-23.2018; 0008188-48.2013) [VALIDAR: valor do dano moral fixado na sentença; empreendimento e programa (PMCMV-FAR ou Entidades)]",
+    "lote": {
+     "id": "1512-1s",
+     "item": 26,
+     "autos": 0
+    },
+    "editadoPor": "Index"
    }
   },
   {
@@ -544,7 +1069,25 @@
        }
       ]
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença homologou a desistência, condenou a autora em custas e não fixou honorários pelo acordo extrajudicial (ID 347426137); embargos de declaração rejeitados (ID 369878803).",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] apelante e objeto do recurso (custas, honorários, natureza do termo aditivo)",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-1s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR] apelação contra a sentença que homologou a desistência (artigo 485, VIII, do CPC) após termo aditivo de renovação; discute se o termo é acordo (artigo 487, III, b) e a sucumbência: voto próprio [VALIDAR: apelante e objeto do recurso (custas, honorários, natureza do termo aditivo)]",
+    "lote": {
+     "id": "1512-1s",
+     "item": 27,
+     "autos": 0
+    }
    }
   },
   {
@@ -578,7 +1121,37 @@
        }
       ]
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença denegou a segurança (ID 395833920); embargos de declaração rejeitados (ID 395833930).",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] objeto exato da apelação ID 395833933",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[PRONTIDÃO] intimação para comprovar o preparo pelo comprovante do Tesouro em 5 dias, sob pena de deserção (despacho ID 414453881, 25/11/2026) — sem resposta",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[PRONTIDÃO] sem contrarrazões nem certidão de decurso após a apelação (ID 395833933)",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR paradigma] apelação do impetrante contra a denegação; discute descontos/cobrança e honorários de título anterior (cumprimento voluntário noticiado em 20/11/2023); parecer do MPF pela legalidade dos descontos (ID 405643534) [VALIDAR: objeto exato da apelação ID 395833933]",
+    "lote": {
+     "id": "1512-3s",
+     "item": 28,
+     "autos": 0
+    }
    }
   },
   {
@@ -612,7 +1185,25 @@
        }
       ]
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença parcialmente procedente: submeter o autor, a genitora e o padrasto à perícia oficial em Brasília/DF e reexaminar o pedido; embargos de declaração rejeitados (ID 388338325).",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] tempestividade das duas apelações após os embargos",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-1s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR paradigma] apelações cruzadas: autor (cerceamento de defesa, decisão surpresa e remoção definitiva) e União (dependência econômica nos assentamentos e junta médica oficial; artigo 36, parágrafo único, III, b, da Lei 8.112/1990) [VALIDAR: tempestividade das duas apelações após os embargos]",
+    "lote": {
+     "id": "1512-1s",
+     "item": 29,
+     "autos": 0
+    }
    }
   },
   {
@@ -631,7 +1222,27 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença procedente: obrigação de fazer (correção do contrato 8444414675925 e das matrículas 131.852 e 131.851) e dano moral.",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] valor do dano moral fixado na sentença",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-1s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR paradigma] apelação dos autores só para majorar o dano moral (R$ 15.000,00 para cada um) [VALIDAR: valor do dano moral fixado na sentença]",
+    "lote": {
+     "id": "1512-1s",
+     "item": 30,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "0014701-27.2016.4.03.6000",
@@ -650,7 +1261,44 @@
    "dataLiberacao": "",
    "obs": "",
    "ctl": {
-    "meta": "M2"
+    "meta": "M2",
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sobrestamento determinado em 29/05/2020 (ID 133042693) até o julgamento do Tema 1.031/STF; pareceres do MPF (IDs 122783870, 122783872).",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] sentença e apelação são de autos digitalizados (sem texto)",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-1s"
+      },
+      {
+       "desc": "[VALIDAR] há determinação nova de suspensão no STF?",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-1s"
+      },
+      {
+       "desc": "[PRONTIDÃO] sobrestamento pelo Tema 1.031/STF (ID 133042693): conferir levantamento",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-1s"
+      },
+      {
+       "desc": "[PRONTIDÃO] sentença e apelação digitalizadas sem tipo",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-1s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR] processo sobrestado pelo Tema 1.031/STF (RE 1.017.365); conferir o levantamento do sobrestamento e a situação atual (Lei 14.701/2023 e ações no STF) antes do julgamento [VALIDAR: sentença e apelação são de autos digitalizados (sem texto); há determinação nova de suspensão no STF?]",
+    "lote": {
+     "id": "1512-1s",
+     "item": 31,
+     "autos": 0
+    },
+    "editadoPor": "Index"
    }
   },
   {
@@ -670,7 +1318,44 @@
    "dataLiberacao": "",
    "obs": "",
    "ctl": {
-    "meta": "M2"
+    "meta": "M2",
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sobrestamento determinado em 29/05/2020 (ID 133043705); pareceres do MPF (IDs 122783867, 122783869). Par com 0014701-27.2016.",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] sentença e apelação são de autos digitalizados (sem texto)",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-1s"
+      },
+      {
+       "desc": "[VALIDAR] há determinação nova de suspensão no STF?",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-1s"
+      },
+      {
+       "desc": "[PRONTIDÃO] sobrestamento pelo Tema 1.031/STF (ID 133043705): conferir levantamento",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-1s"
+      },
+      {
+       "desc": "[PRONTIDÃO] sentença e apelação digitalizadas sem tipo",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-1s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR] processo sobrestado pelo Tema 1.031/STF (RE 1.017.365); conferir o levantamento do sobrestamento e a situação atual (Lei 14.701/2023 e ações no STF) antes do julgamento [VALIDAR: sentença e apelação são de autos digitalizados (sem texto); há determinação nova de suspensão no STF?]",
+    "lote": {
+     "id": "1512-1s",
+     "item": 32,
+     "autos": 0
+    },
+    "editadoPor": "Index"
    }
   },
   {
@@ -689,7 +1374,33 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Acórdão anterior anulou a sentença (28/11/2024, ID 309199438); nova sentença em 17/12/2025 (ID 373403137); parecer do MPF pelo prosseguimento (ID 377357579); redistribuído pela Resolução 33/2025 (ID 377934610).",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] verbas impugnadas na apelação ID 373403142",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-1s"
+      },
+      {
+       "desc": "[VALIDAR] é o 2º julgamento: conferir prevenção e o acórdão anterior",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-1s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR paradigma] apelação da União e remessa contra a nova sentença (concessão parcial); verba por verba, conforme os temas repetitivos e de repercussão geral (Temas 20, 985 e 1.170/STF e Temas 478, 479 e 738/STJ) [VALIDAR: verbas impugnadas na apelação ID 373403142; é o 2º julgamento: conferir prevenção e o acórdão anterior]",
+    "lote": {
+     "id": "1512-1s",
+     "item": 33,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5000845-81.2025.4.03.6003",
@@ -707,7 +1418,27 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença concedeu a segurança para viabilizar o pedido de vacância do cargo de professor do IFMS; parecer do MPF pela manutenção (ID 387930325).",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] fundamento da apelação (artigo 33, I, da Lei 8.112/1990)",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-1s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: negar provimento à apelação e à remessa necessária [VALIDAR paradigma: vacância do artigo 33, VIII, da Lei 8.112/1990] [VALIDAR: fundamento da apelação (artigo 33, I, da Lei 8.112/1990)]",
+    "lote": {
+     "id": "1512-1s",
+     "item": 34,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5000337-18.2023.4.03.6000",
@@ -725,7 +1456,33 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença procedente, com tutela de urgência confirmada; correção e juros pelo artigo 1º-F da Lei 9.494/1997.",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] contrarrazões ID 380568451 com texto ilegível",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-1s"
+      },
+      {
+       "desc": "[VALIDAR] consectários: EC 113/2021 (Tema 810/STF)",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-1s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR paradigma] apelação da União contra o restabelecimento da pensão por morte de militar desde a cessação; conferir o fundamento da cessação (filha, Lei 3.765/1960; TCU?) [VALIDAR: contrarrazões ID 380568451 com texto ilegível; consectários: EC 113/2021 (Tema 810/STF)]",
+    "lote": {
+     "id": "1512-1s",
+     "item": 35,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5010743-64.2024.4.03.6000",
@@ -758,7 +1515,25 @@
        }
       ]
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença concedeu a segurança (ID 375018259); MPF sem manifestação de mérito (IDs 375018258 e 378190414).",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] há remessa necessária (artigo 14, § 1º, da Lei 12.016/2009)?",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-1s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR paradigma] apelação da UFGD contra a concessão da segurança que fixou 23/06/1988 como ingresso no serviço público, para as regras de transição previdenciárias [VALIDAR: há remessa necessária (artigo 14, § 1º, da Lei 12.016/2009)?]",
+    "lote": {
+     "id": "1512-1s",
+     "item": 36,
+     "autos": 0
+    }
    }
   },
   {
@@ -777,7 +1552,27 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença procedente (ID 379900272); embargos de declaração acolhidos para fixar honorários de R$ 6.772,00 só contra a União (ID 379900276).",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] honorários fixados por equidade (artigo 85, § 8º-A) contra a Fazenda: Tema 1.076/STJ",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-1s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR paradigma] apelação da União para manter o ato de convocação (Lei 5.292/1967) contra a sentença que declarou a incapacidade definitiva e a isenção do autor [VALIDAR: honorários fixados por equidade (artigo 85, § 8º-A) contra a Fazenda: Tema 1.076/STJ]",
+    "lote": {
+     "id": "1512-1s",
+     "item": 37,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5154427-44.2025.4.03.9999",
@@ -795,7 +1590,45 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença do juízo estadual (Angélica-MS) extinguiu a execução (artigo 40, § 4º, da Lei 6.830/1980); redistribuído à 1ª Seção (ID 340158927). Autos migrados com documentos genéricos.",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] autos migrados do TJMS: peças sem tipo e muitas sem texto",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-1s"
+      },
+      {
+       "desc": "[VALIDAR] ID da sentença e da apelação (IDs 338448360 e 338448367?)",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-1s"
+      },
+      {
+       "desc": "[PRONTIDÃO · conferir] autos do TJMS sem peças tipadas: prontidão não verificável automaticamente",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-1s"
+      },
+      {
+       "desc": "[PRONTIDÃO · conferir] autos do TJMS sem peças tipadas: prontidão não verificável automaticamente",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-1s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR paradigma] apelação da União: conferir a prescrição intercorrente pelo Tema 566/STJ, com a suspensão da Lei 11.775/2008 (27/05/2008 a 30/06/2011) e a penhora efetiva via BACENJUD em 26/03/2013 [VALIDAR: autos migrados do TJMS: peças sem tipo e muitas sem texto; ID da sentença e da apelação (IDs 338448360 e 338448367?)]",
+    "lote": {
+     "id": "1512-1s",
+     "item": 38,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5001281-17.2024.4.03.9999",
@@ -813,7 +1646,39 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Redistribuído pela Resolução 33/2025 (ID 356962064).",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] triagem sem leitura da sentença e da apelação",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-1s"
+      },
+      {
+       "desc": "[PRONTIDÃO · conferir] autos do TJMS sem peças tipadas: prontidão não verificável automaticamente",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-1s"
+      },
+      {
+       "desc": "[PRONTIDÃO · conferir] autos do TJMS sem peças tipadas: prontidão não verificável automaticamente",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-1s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR] autos do TJMS digitalizados em 2 PDFs (IDs 291021513 sem texto e 291021517): ler a sentença e a apelação no PJe [VALIDAR: triagem sem leitura da sentença e da apelação]",
+    "lote": {
+     "id": "1512-1s",
+     "item": 39,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5154463-86.2025.4.03.9999",
@@ -831,7 +1696,45 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença do juízo estadual (ID 338463000); autos migrados do TJMS.",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] autos migrados: ID da apelação",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-1s"
+      },
+      {
+       "desc": "[VALIDAR] honorários contra a Fazenda: artigo 85, § 3º, do CPC",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-1s"
+      },
+      {
+       "desc": "[PRONTIDÃO · conferir] autos do TJMS sem peças tipadas: prontidão não verificável automaticamente",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-1s"
+      },
+      {
+       "desc": "[PRONTIDÃO · conferir] autos do TJMS sem peças tipadas: prontidão não verificável automaticamente",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-1s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR paradigma] apelação da União contra a sentença que acolheu os embargos e anulou a execução 0001401-66.2006.8.12.0017 (título inexigível pela revisional do TJMS), com honorários de 15% [VALIDAR: autos migrados: ID da apelação; honorários contra a Fazenda: artigo 85, § 3º, do CPC]",
+    "lote": {
+     "id": "1512-1s",
+     "item": 40,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5001898-71.2023.4.03.6002",
@@ -864,7 +1767,31 @@
        }
       ]
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença (ID 329592705); NATJUS favorável ao abemaciclibe sob responsabilidade da União (ID 329592413); parecer do MPF (ID 369939652).",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] causa da extinção (inciso IX: morte da parte?)",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-2s"
+      },
+      {
+       "desc": "[VALIDAR] habilitação de sucessores",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-2s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR paradigma] apelação da autora (DPU) contra a extinção sem mérito (artigo 485, VI e IX, do CPC); conferir a causa (óbito? perda do objeto?) e os honorários pedidos pelo MPF (artigo 85, § 8º); competência e responsabilidade pelo Tema 1.234/STF [VALIDAR: causa da extinção (inciso IX: morte da parte?); habilitação de sucessores]",
+    "lote": {
+     "id": "1512-2s",
+     "item": 41,
+     "autos": 0
+    }
    }
   },
   {
@@ -883,7 +1810,20 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença parcialmente procedente, confirmando a tutela antecipada (ID 326508640).",
+     "pendencias": []
+    },
+    "resJulg": "Proposta: [VALIDAR paradigma] apelação da autora só quanto aos honorários (afastar a condenação ou reduzir pela metade, artigo 90, § 4º, do CPC)",
+    "lote": {
+     "id": "1512-2s",
+     "item": 42,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "0002260-73.2000.4.03.6000",
@@ -916,7 +1856,18 @@
        }
       ]
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença (ID 336620373); embargos de declaração rejeitados (ID 336620382).",
+     "pendencias": []
+    },
+    "resJulg": "Proposta: [VALIDAR paradigma] apelação do executado/sócio pela condenação da Fazenda em honorários (causalidade; Tema 961/STJ e Tema 1.076/STJ)",
+    "lote": {
+     "id": "1512-2s",
+     "item": 43,
+     "autos": 0
+    }
    }
   },
   {
@@ -935,7 +1886,33 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença extinguiu a execução (artigos 485, IV, e 925 do CPC) (ID 336480405); contrarrazões (ID 336480408).",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] ID da apelação (juntada como petição intercorrente)",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-2s"
+      },
+      {
+       "desc": "[PRONTIDÃO] apelação não localizada pelo tipo do documento: conferir recurso e contrarrazões",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-2s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR paradigma] apelação do INMETRO (ID 336480406, petição de 08/08/2025) contra os honorários de 10% fixados na extinção da execução fiscal [VALIDAR: ID da apelação (juntada como petição intercorrente)]",
+    "lote": {
+     "id": "1512-2s",
+     "item": 44,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5000302-83.2022.4.03.6003",
@@ -953,7 +1930,27 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença procedente (ID 282149956); embargos de declaração rejeitados (ID 338469387).",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] objeto da apelação do autor (honorários? tutela)",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-2s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR paradigma] apelações do DNIT (ID 282149961) e do autor (ID 338469388, com tutela cautelar sobre a CNH) contra a sentença que anulou os Autos de Infração S019711344 e S018613237 [VALIDAR: objeto da apelação do autor (honorários? tutela)]",
+    "lote": {
+     "id": "1512-2s",
+     "item": 45,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "0006145-41.2013.4.03.6000",
@@ -971,7 +1968,20 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença extinguiu a execução (artigo 485, VI, do CPC) (ID 349347530); redistribuição (ID 352231371).",
+     "pendencias": []
+    },
+    "resJulg": "Proposta: [VALIDAR paradigma] apelação do INSS pela fixação dos honorários por equidade na extinção por perda superveniente do interesse (Tema 1.076/STJ)",
+    "lote": {
+     "id": "1512-2s",
+     "item": 46,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5000195-93.2023.4.03.6006",
@@ -989,7 +1999,20 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença improcedente com honorários de 10% suspensos (ID 304966320); embargos rejeitados (ID 304966324).",
+     "pendencias": []
+    },
+    "resJulg": "Proposta: [VALIDAR paradigma] apelação do autor contra a improcedência; discute restrição do veículo e boa-fé (série de perdimento)",
+    "lote": {
+     "id": "1512-2s",
+     "item": 47,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5003108-32.2024.4.03.6000",
@@ -1030,7 +2053,15 @@
      "tipoJ": "Apelação",
      "adm": {
       "prot": "2025-03-14"
-     }
+     },
+     "obsGeral": "Sentença procedente: incompetência do CREA/MS para fiscalizar a autora e exigir registro (ID 321796268).",
+     "pendencias": []
+    },
+    "resJulg": "Proposta: [VALIDAR paradigma] apelações do CREA/MS (incompetência para fiscalizar) e da autora (majorar honorários, artigo 85 do CPC)",
+    "lote": {
+     "id": "1512-2s",
+     "item": 48,
+     "autos": 0
     }
    }
   },
@@ -1050,7 +2081,33 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença improcedente (ID 317374445); embargos rejeitados (ID 317374448); MPF sem interesse (ID 319154703).",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] contrarrazões do Município não localizadas",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-2s"
+      },
+      {
+       "desc": "[PRONTIDÃO] sem contrarrazões nem certidão de decurso após a apelação (ID 317374450)",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-2s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR paradigma] apelação do COREN/MS só quanto aos honorários fixados contra o conselho [VALIDAR: contrarrazões do Município não localizadas]",
+    "lote": {
+     "id": "1512-2s",
+     "item": 49,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "0001552-89.2015.4.03.6002",
@@ -1081,11 +2138,32 @@
      },
      "adm": {
       "prot": "2024-09-23"
-     }
+     },
+     "obsGeral": "Sentença extinguiu a execução fiscal (artigo 26 da Lei 6.830/1980); nos embargos de declaração, condenou a ANS em honorários de 10% do valor da causa (ID 324969137); apelação pede fixação por equidade.",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] valor da causa",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-2s"
+      },
+      {
+       "desc": "[VALIDAR] Tema 1.229/STJ (honorários e artigo 26 da LEF)",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-2s"
+      }
+     ]
     },
     "editadoPor": "Bruno",
     "editadoEm": "2026-11-25T19:29:41.799Z",
-    "preparo": "Isento (ente público/MP)"
+    "preparo": "Isento (ente público/MP)",
+    "resJulg": "Proposta: negar provimento à apelação da ANS [VALIDAR paradigma]: extinção após embargos gera honorários contra a exequente (Súmula 153/STJ), sem equidade quando o valor não é irrisório (Tema 1.076/STJ) [VALIDAR: valor da causa; Tema 1.229/STJ (honorários e artigo 26 da LEF)]",
+    "lote": {
+     "id": "1512-2s",
+     "item": 50,
+     "autos": 0
+    }
    }
   },
   {
@@ -1119,7 +2197,31 @@
        }
       ]
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Apelação ID 362242961; autos migrados do TJMS.",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] autos do TJMS: sentença sem tipo",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-2s"
+      },
+      {
+       "desc": "[PRONTIDÃO · conferir] autos do TJMS sem peças tipadas: prontidão não verificável automaticamente",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-2s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR paradigma] apelação da União: não ocorrência da prescrição intercorrente (Tema 566/STJ) [VALIDAR: autos do TJMS: sentença sem tipo]",
+    "lote": {
+     "id": "1512-2s",
+     "item": 51,
+     "autos": 0
+    }
    }
   },
   {
@@ -1158,7 +2260,25 @@
        }
       ]
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença procedente: restituição do recolhido nos 5 anos anteriores ao mandado de segurança, com SELIC.",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] ponto impugnado pela União (forma de restituição ou honorários)",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-1s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: negar provimento à apelação da União [VALIDAR: objeto da apelação; honorários e dispensa do artigo 19, § 1º, I, da Lei 10.522/2002] [VALIDAR: ponto impugnado pela União (forma de restituição ou honorários)]",
+    "lote": {
+     "id": "1512-1s",
+     "item": 52,
+     "autos": 0
+    }
    }
   },
   {
@@ -1177,7 +2297,27 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença homologou o acordo, honorários \"nos moldes do acordo\" (ID 302663451); embargos rejeitados (ID 302663483).",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] competência federal (OAB como autora)",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-2s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR paradigma] apelação da OAB/MS pela condenação do Município em honorários (causalidade) após a homologação do acordo (artigo 487, III, b, do CPC) [VALIDAR: competência federal (OAB como autora)]",
+    "lote": {
+     "id": "1512-2s",
+     "item": 53,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "0008760-38.2012.4.03.6000",
@@ -1195,7 +2335,33 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença extinguiu a execução e condenou a União em honorários nos embargos de declaração (ID 360001487); apelações IDs 360001488 e 360001490.",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] apelante de cada recurso",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-2s"
+      },
+      {
+       "desc": "[PRONTIDÃO] intimação para comprovar o preparo pelo comprovante do Tesouro em 5 dias, sob pena de deserção (despacho ID 414461592, 25/11/2026) — sem resposta",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-2s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR paradigma] apelações sobre os honorários da extinção (artigo 26 da LEF e causalidade; Tema 1.076/STJ e artigo 19, § 1º, da Lei 10.522/2002) [VALIDAR: apelante de cada recurso]",
+    "lote": {
+     "id": "1512-2s",
+     "item": 54,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5012518-93.2024.4.03.6201",
@@ -1233,7 +2399,25 @@
        }
       ]
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença improcedente, honorários de 10% suspensos (artigo 98, § 3º) (ID 392505169); contrarrazões de dois réus.",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] réus apelados e pedido de dano moral",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR paradigma] apelação da autora contra a improcedência (manutenção do termo aditivo e transação do FIES) [VALIDAR: réus apelados e pedido de dano moral]",
+    "lote": {
+     "id": "1512-3s",
+     "item": 55,
+     "autos": 0
+    }
    }
   },
   {
@@ -1272,7 +2456,31 @@
        }
       ]
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença concedeu a segurança (ID 395562213); pareceres do MPF (IDs 395562212 e 401682342).",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] quem são os recorrentes (IDs 395562218 e 395562223)",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[VALIDAR] sentido do parecer ID 401682342",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR paradigma] recursos dos réus (FNDE/FUNASA e CAIXA: ilegitimidade passiva, requerimento administrativo prévio) e remessa contra a concessão do abatimento de 26% do saldo devedor (artigo 6º-B da Lei 10.260/2001) [VALIDAR: quem são os recorrentes (IDs 395562218 e 395562223); sentido do parecer ID 401682342]",
+    "lote": {
+     "id": "1512-3s",
+     "item": 56,
+     "autos": 0
+    }
    }
   },
   {
@@ -1311,7 +2519,31 @@
        }
       ]
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença concedeu a segurança (ID 401803619); MPF sem manifestação de mérito.",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] apelantes de cada recurso (IDs 401803620, 401803624, 401803629)",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[PRONTIDÃO] intimação do FNDE e da CAIXA para contrarrazões à apelação da União ID 401803629 (despacho ID 414541399, 25/11/2026) — prazo em curso",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR paradigma] apelações (FNDE, CAIXA e União/Ministério da Saúde) e remessa contra a concessão do abatimento de 19%; competência do Ministério da Saúde para o requerimento (artigo 6º-B da Lei 10.260/2001) [VALIDAR: apelantes de cada recurso (IDs 401803620, 401803624, 401803629)]",
+    "lote": {
+     "id": "1512-3s",
+     "item": 57,
+     "autos": 0
+    }
    }
   },
   {
@@ -1331,7 +2563,19 @@
    "dataLiberacao": "",
    "obs": "",
    "ctl": {
-    "meta": "M2"
+    "meta": "M2",
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Contrarrazões aos embargos (ID 366714241).",
+     "pendencias": []
+    },
+    "resJulg": "Proposta: [VALIDAR] embargos de declaração (ID 359798137) contra o acórdão de 27/02/2026 (apelação do DNIT e remessa desprovidas; apelação da autora parcialmente provida); pedem exame do artigo 85, §§ 2º, 3º e 11, do CPC",
+    "lote": {
+     "id": "1512-2s",
+     "item": 58,
+     "autos": 0
+    },
+    "editadoPor": "Index"
    }
   },
   {
@@ -1350,7 +2594,20 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença improcedente (ID 386608354).",
+     "pendencias": []
+    },
+    "resJulg": "Proposta: negar provimento à apelação: vedada a substituição da banca, salvo erro grosseiro ou conteúdo fora do edital (Tema 485/STF) [VALIDAR paradigma e se a questão 37 extrapola o edital]",
+    "lote": {
+     "id": "1512-2s",
+     "item": 59,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5003333-18.2025.4.03.6000",
@@ -1368,7 +2625,27 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença parcialmente procedente (ID 388898986); apelações IDs 388898987, 388898989, 388898990 e 388898992.",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] identificar cada apelante",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-2s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR paradigma] apelações (União, CESGRANRIO e autora) contra a procedência parcial que confirmou a tutela; Tema 485/STF [VALIDAR: identificar cada apelante]",
+    "lote": {
+     "id": "1512-2s",
+     "item": 60,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5000619-70.2025.4.03.6005",
@@ -1401,7 +2678,18 @@
        }
       ]
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença denegou a segurança (ID 372623853).",
+     "pendencias": []
+    },
+    "resJulg": "Proposta: negar provimento à apelação [VALIDAR paradigma]: critérios de correção da banca (Tema 485/STF); parecer do MPF no mesmo sentido (ID 375216394)",
+    "lote": {
+     "id": "1512-2s",
+     "item": 61,
+     "autos": 0
+    }
    }
   },
   {
@@ -1420,7 +2708,27 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença rejeitou a preliminar e julgou o mérito (ID 369941429).",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] dispositivo da sentença (improcedência?)",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-2s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR paradigma] apelação do autor pela anulação das questões 35 e 39 (Bloco 4); Tema 485/STF [VALIDAR: dispositivo da sentença (improcedência?)]",
+    "lote": {
+     "id": "1512-2s",
+     "item": 62,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5005524-02.2026.4.03.6000",
@@ -1438,7 +2746,45 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença julgou liminarmente improcedente (artigos 332, II, e 487, I, do CPC) (ID 398184148).",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] honorários recursais: sem fixação na origem",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[PRONTIDÃO · conferir] substabelecimentos após a pauta (IDs 414646988 e 414646995): pedido de sustentação oral?",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[PRONTIDÃO] intimação para comprovar o preparo pelo comprovante do Tesouro em 5 dias, sob pena de deserção (despacho ID 414533755, 25/11/2026) — peça posterior ID 414646995: conferir",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[PRONTIDÃO · conferir] substabelecimentos após a pauta (IDs 414646988 e 414646995): pedido de sustentação oral?",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: negar provimento à apelação: vedada a substituição da banca, salvo ilegalidade ou incompatibilidade com o edital (Tema 485/STF) [VALIDAR paradigma] [VALIDAR: honorários recursais: sem fixação na origem]",
+    "lote": {
+     "id": "1512-3s",
+     "item": 63,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5002294-49.2026.4.03.6000",
@@ -1456,7 +2802,27 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença concedeu a segurança e confirmou a liminar (ID 396552828); MPF sem manifestação de mérito.",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] norma do CFF invocada para o indeferimento",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR paradigma] apelação do CFF e remessa contra a concessão da segurança (nulidade do indeferimento da habilitação em farmácia oncológica) [VALIDAR: norma do CFF invocada para o indeferimento]",
+    "lote": {
+     "id": "1512-3s",
+     "item": 64,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "0011908-18.2016.4.03.6000",
@@ -1474,7 +2840,33 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença reconheceu a prescrição intercorrente (ID 406755668).",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] executada sem advogado: contrarrazões não esperadas?",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-2s"
+      },
+      {
+       "desc": "[PRONTIDÃO · conferir] sem contrarrazões nem certidão de decurso após a apelação (ID 406755669): executada revel?",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-2s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR paradigma] apelação do conselho: a penhora via BACENJUD requerida e deferida em 12/11/2018 interromperia o prazo (Tema 566/STJ) [VALIDAR: executada sem advogado: contrarrazões não esperadas?]",
+    "lote": {
+     "id": "1512-2s",
+     "item": 65,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5006742-41.2021.4.03.6000",
@@ -1492,7 +2884,27 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença procedente (ID 313183398).",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] nome da embargante na sentença (Marlene Maria de Jesus Muniz Grieger) difere do polo (Denise da Silva Pereira)",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-2s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR paradigma] apelação do COREN/MS contra a procedência dos embargos (inscrição/cancelamento e notificação administrativa) [VALIDAR: nome da embargante na sentença (Marlene Maria de Jesus Muniz Grieger) difere do polo (Denise da Silva Pereira)]",
+    "lote": {
+     "id": "1512-2s",
+     "item": 66,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5000140-52.2026.4.03.6002",
@@ -1510,7 +2922,33 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença denegou a segurança (ID 401342640); parecer do MPF (ID 407539146).",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] sentido do parecer ID 407539146",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-2s"
+      },
+      {
+       "desc": "[PRONTIDÃO] sem contrarrazões do INSS nem certidão de decurso após a apelação (ID 401342641)",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-2s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR paradigma] apelação da impetrante: prazo do acordo no RE 1.171.152 (Tema 1.066/STF) vencido em 30/08/2025 [VALIDAR: sentido do parecer ID 407539146]",
+    "lote": {
+     "id": "1512-2s",
+     "item": 67,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5000690-75.2025.4.03.6004",
@@ -1548,7 +2986,25 @@
        }
       ]
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença denegou a segurança (ID 406039834); MPF sem manifestação de mérito.",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] competência da Turma Regional (matéria previdenciária)",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR paradigma] apelação do impetrante contra a denegação da segurança (cancelamento da perícia e da prorrogação do benefício pelo INSS) [VALIDAR: competência da Turma Regional (matéria previdenciária)]",
+    "lote": {
+     "id": "1512-3s",
+     "item": 68,
+     "autos": 0
+    }
    }
   },
   {
@@ -1567,7 +3023,27 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença extinguiu sem mérito e condenou os réus em honorários (ID 389153015).",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] causa da extinção (óbito do autor?)",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-2s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR paradigma] apelação do Estado de MS contra os honorários fixados na extinção (artigo 485, IV e IX, do CPC); contrarrazões pedem equidade [VALIDAR: causa da extinção (óbito do autor?)]",
+    "lote": {
+     "id": "1512-2s",
+     "item": 69,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5008728-25.2024.4.03.6000",
@@ -1585,7 +3061,20 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença improcedente com honorários suspensos (ID 407251116); contrarrazões de três réus, inclusive o Município de Campo Grande (ID 407251125).",
+     "pendencias": []
+    },
+    "resJulg": "Proposta: [VALIDAR paradigma] apelação do autor (com pedido de tutela recursal) contra a improcedência; requisitos do Tema 106/STJ e do Tema 1.234/STF",
+    "lote": {
+     "id": "1512-2s",
+     "item": 70,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5419316-86.2026.4.03.9999",
@@ -1603,7 +3092,33 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença procedente confirmando a tutela (ID 401132028).",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] autos do TJMS: identificar a apelação e o apelante",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-2s"
+      },
+      {
+       "desc": "[PRONTIDÃO · conferir] autos do TJMS sem peças tipadas: prontidão não verificável automaticamente",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-2s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR] recurso do Estado de MS contra o fornecimento do plerixafor; competência e custeio pelo Tema 1.234/STF [VALIDAR: autos do TJMS: identificar a apelação e o apelante]",
+    "lote": {
+     "id": "1512-2s",
+     "item": 71,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5000165-02.2026.4.03.6702",
@@ -1621,7 +3136,33 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença improcedente (ID 408530537); recurso ID 408530539; contrarrazões (ID 408530542).",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] menor no polo: intervenção do MPF (artigo 178, II, do CPC) sem parecer no 2º grau",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-2s"
+      },
+      {
+       "desc": "[PRONTIDÃO] menor no polo (autora criança): intervenção do MPF (artigo 178, II, do CPC) sem parecer no 2º grau",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-2s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR paradigma] recurso da autora (criança com doença progressiva) contra a improcedência; Tema 500/STF (medicamento sem registro) e Tema 1.234/STF [VALIDAR: menor no polo: intervenção do MPF (artigo 178, II, do CPC) sem parecer no 2º grau]",
+    "lote": {
+     "id": "1512-2s",
+     "item": 72,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5000993-92.2025.4.03.6003",
@@ -1639,7 +3180,27 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença denegou a segurança (ID 400519235); embargos rejeitados (ID 400519238); parecer do MPF (ID 407273126).",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] sentido do parecer ID 407273126",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR paradigma] apelação da impetrante contra a denegação (vagas ociosas e preterição no Módulo de Acolhimento e Avaliação) [VALIDAR: sentido do parecer ID 407273126]",
+    "lote": {
+     "id": "1512-3s",
+     "item": 73,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5009454-67.2022.4.03.6000",
@@ -1657,7 +3218,20 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença parcialmente procedente, confirmando a tutela (ID 337282701); redistribuição (ID 337900314).",
+     "pendencias": []
+    },
+    "resJulg": "Proposta: [VALIDAR paradigma] apelação da autora pela indenização compensatória, mantida a nulidade do auto de infração 13364/2022 e da multa 85/2020",
+    "lote": {
+     "id": "1512-2s",
+     "item": 74,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5003394-78.2022.4.03.6000",
@@ -1675,7 +3249,27 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença procedente (ID 282510940); embargos rejeitados (ID 282510954).",
+     "pendencias": [
+      {
+       "desc": "[PRONTIDÃO] sem contrarrazões do CRA nem certidão de decurso após a apelação (ID 282510960)",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-2s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR paradigma] apelação da autora só quanto aos honorários sucumbenciais",
+    "lote": {
+     "id": "1512-2s",
+     "item": 75,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5000368-98.2025.4.03.9999",
@@ -1693,7 +3287,33 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Autos migrados.",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] triagem sem leitura da sentença e da apelação",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-2s"
+      },
+      {
+       "desc": "[PRONTIDÃO · conferir] autos com 8 documentos: conferir no PJe",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-2s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR] autos com 8 documentos: ler sentença e apelação no PJe [VALIDAR: triagem sem leitura da sentença e da apelação]",
+    "lote": {
+     "id": "1512-2s",
+     "item": 76,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5000376-71.2021.4.03.6004",
@@ -1711,7 +3331,20 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença rejeitou os embargos (ID 293533804); MPF sem interesse (ID 369873225).",
+     "pendencias": []
+    },
+    "resJulg": "Proposta: [VALIDAR paradigma] apelação do embargante contra a rejeição dos embargos; prescrição da pretensão punitiva e intercorrente no processo administrativo (Lei 9.873/1999)",
+    "lote": {
+     "id": "1512-2s",
+     "item": 77,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5421180-62.2026.4.03.9999",
@@ -1729,7 +3362,39 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "44 documentos, sem peça tipada.",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] autos migrados do TJMS: peças sem tipo; conferir sentença e apelação no PJe",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[PRONTIDÃO · conferir] autos do TJMS sem peças tipadas: prontidão não verificável automaticamente",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[PRONTIDÃO · conferir] autos do TJMS sem peças tipadas: prontidão não verificável automaticamente",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR] apelação do autor; nenhuma sentença ou razões localizadas no texto extraído [VALIDAR: autos migrados do TJMS: peças sem tipo; conferir sentença e apelação no PJe]",
+    "lote": {
+     "id": "1512-3s",
+     "item": 78,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5001082-55.2024.4.03.6002",
@@ -1762,7 +3427,31 @@
        }
       ]
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença extinguiu a execução e condenou o exequente em honorários de 10% (ID 366973803).",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] tempestividade da apelação (preliminar das contrarrazões)",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-2s"
+      },
+      {
+       "desc": "[PRONTIDÃO · conferir] preliminar de intempestividade da apelação nas contrarrazões",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-2s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR paradigma] apelação do CRF/MS; contrarrazões com preliminar de intempestividade (apelação em 14/04/2026, sentença de 07/01/2026) [VALIDAR: tempestividade da apelação (preliminar das contrarrazões)]",
+    "lote": {
+     "id": "1512-2s",
+     "item": 79,
+     "autos": 0
+    }
    }
   },
   {
@@ -1781,7 +3470,20 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Remessa Necessária",
+     "obsGeral": "Sentença concedeu a segurança: inscrição provisória da impetrante (ID 379888217); sem apelação.",
+     "pendencias": []
+    },
+    "resJulg": "Proposta: negar provimento à remessa necessária [VALIDAR paradigma e sentido do parecer ID 382565580]",
+    "lote": {
+     "id": "1512-2s",
+     "item": 80,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5001081-52.2024.4.03.6202",
@@ -1799,7 +3501,33 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença parcialmente procedente (ID 332295975); decisão de 05/11/2026 (ID 408850765).",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] teor da decisão ID 408850765",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-2s"
+      },
+      {
+       "desc": "[PRONTIDÃO · conferir] decisão de 05/11/2026 (ID 408850765): conferir teor",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-2s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR paradigma] apelações da União (ID 332295977) e de outro ente (ID 332296035) contra a condenação solidária à terapia; Tema 793/STF e Tema 1.234/STF; parecer do MPF pelo provimento parcial da apelação da União (ID 379072113) [VALIDAR: teor da decisão ID 408850765]",
+    "lote": {
+     "id": "1512-2s",
+     "item": 81,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5000496-78.2025.4.03.6003",
@@ -1817,7 +3545,27 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença procedente (ID 371953135).",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] fundamento da apelação ID 371953137",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-1s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR paradigma] apelação da União contra a homologação da opção de nacionalidade (artigo 12, I, c, da Constituição); conferir o fundamento (residência, registro ou documento) [VALIDAR: fundamento da apelação ID 371953137]",
+    "lote": {
+     "id": "1512-1s",
+     "item": 82,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5002689-12.2024.4.03.6000",
@@ -1855,7 +3603,18 @@
        }
       ]
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença (ID 380398825).",
+     "pendencias": []
+    },
+    "resJulg": "Proposta: [VALIDAR paradigma] apelação do impetrante contra a sentença (continência com outra ação); parecer do MPF (ID 383834737)",
+    "lote": {
+     "id": "1512-2s",
+     "item": 83,
+     "autos": 0
+    }
    }
   },
   {
@@ -1874,7 +3633,27 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença denegou a segurança (ID 381376414); MPF sem manifestação de mérito.",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] verba discutida e situação do Tema 1.079/STJ (limite de 20 salários mínimos)",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-2s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR paradigma] apelação da impetrante, com pedido de sobrestamento até embargos de divergência no STJ; contrarrazões invocam o Tema 1.079/STJ [VALIDAR: verba discutida e situação do Tema 1.079/STJ (limite de 20 salários mínimos)]",
+    "lote": {
+     "id": "1512-2s",
+     "item": 84,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "0000836-59.2001.4.03.6000",
@@ -1892,7 +3671,18 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "pendencias": []
+    },
+    "lote": {
+     "id": "1512-2s",
+     "item": 85,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5001025-62.2023.4.03.6005",
@@ -1910,7 +3700,18 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "pendencias": []
+    },
+    "lote": {
+     "id": "1512-2s",
+     "item": 86,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5000858-83.2025.4.03.6002",
@@ -1943,7 +3744,16 @@
        }
       ]
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Apelação",
+     "pendencias": []
+    },
+    "lote": {
+     "id": "1512-2s",
+     "item": 87,
+     "autos": 0
+    }
    }
   },
   {
@@ -1977,7 +3787,16 @@
        }
       ]
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Apelação",
+     "pendencias": []
+    },
+    "lote": {
+     "id": "1512-2s",
+     "item": 88,
+     "autos": 0
+    }
    }
   },
   {
@@ -2011,7 +3830,16 @@
        }
       ]
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Apelação",
+     "pendencias": []
+    },
+    "lote": {
+     "id": "1512-2s",
+     "item": 89,
+     "autos": 0
+    }
    }
   },
   {
@@ -2045,7 +3873,16 @@
        }
       ]
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Apelação",
+     "pendencias": []
+    },
+    "lote": {
+     "id": "1512-2s",
+     "item": 90,
+     "autos": 0
+    }
    }
   },
   {
@@ -2079,7 +3916,16 @@
        }
       ]
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Apelação",
+     "pendencias": []
+    },
+    "lote": {
+     "id": "1512-2s",
+     "item": 91,
+     "autos": 0
+    }
    }
   },
   {
@@ -2113,7 +3959,16 @@
        }
       ]
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Apelação",
+     "pendencias": []
+    },
+    "lote": {
+     "id": "1512-2s",
+     "item": 92,
+     "autos": 0
+    }
    }
   },
   {
@@ -2147,7 +4002,16 @@
        }
       ]
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Apelação",
+     "pendencias": []
+    },
+    "lote": {
+     "id": "1512-2s",
+     "item": 93,
+     "autos": 0
+    }
    }
   },
   {
@@ -2166,7 +4030,18 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "pendencias": []
+    },
+    "lote": {
+     "id": "1512-2s",
+     "item": 94,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5001590-89.2024.4.03.6005",
@@ -2184,7 +4059,18 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "pendencias": []
+    },
+    "lote": {
+     "id": "1512-2s",
+     "item": 95,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5001993-33.2025.4.03.6002",
@@ -2202,7 +4088,18 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "pendencias": []
+    },
+    "lote": {
+     "id": "1512-2s",
+     "item": 96,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5003272-07.2023.4.03.6202",
@@ -2235,7 +4132,16 @@
        }
       ]
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Apelação",
+     "pendencias": []
+    },
+    "lote": {
+     "id": "1512-2s",
+     "item": 97,
+     "autos": 0
+    }
    }
   },
   {
@@ -2269,7 +4175,25 @@
        }
       ]
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença parcialmente procedente (ID 393175722): manteve a CDA C2022/177294-9 e declarou inexigíveis outros créditos; embargos rejeitados (ID 393175727).",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] apelação do CREA também?",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR paradigma] apelação da embargante: termo inicial da prescrição da multa (constituição definitiva após o prazo de defesa ou pagamento; Lei 9.873/1999 e Súmula 467/STJ) [VALIDAR: apelação do CREA também?]",
+    "lote": {
+     "id": "1512-3s",
+     "item": 98,
+     "autos": 0
+    }
    }
   },
   {
@@ -2303,7 +4227,16 @@
        }
       ]
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Apelação",
+     "pendencias": []
+    },
+    "lote": {
+     "id": "1512-2s",
+     "item": 99,
+     "autos": 0
+    }
    }
   },
   {
@@ -2323,7 +4256,17 @@
    "dataLiberacao": "",
    "obs": "",
    "ctl": {
-    "meta": "M6"
+    "meta": "M6",
+    "cartao": {
+     "tipoJ": "Apelação",
+     "pendencias": []
+    },
+    "lote": {
+     "id": "1512-2s",
+     "item": 100,
+     "autos": 0
+    },
+    "editadoPor": "Index"
    }
   },
   {
@@ -2357,7 +4300,16 @@
        }
       ]
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Apelação",
+     "pendencias": []
+    },
+    "lote": {
+     "id": "1512-2s",
+     "item": 101,
+     "autos": 0
+    }
    }
   },
   {
@@ -2376,7 +4328,18 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "pendencias": []
+    },
+    "lote": {
+     "id": "1512-2s",
+     "item": 102,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5001612-30.2022.4.03.6002",
@@ -2409,7 +4372,16 @@
        }
       ]
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Apelação",
+     "pendencias": []
+    },
+    "lote": {
+     "id": "1512-2s",
+     "item": 103,
+     "autos": 0
+    }
    }
   },
   {
@@ -2428,7 +4400,18 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "pendencias": []
+    },
+    "lote": {
+     "id": "1512-2s",
+     "item": 104,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5002915-51.2023.4.03.6000",
@@ -2466,7 +4449,16 @@
        }
       ]
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Apelação",
+     "pendencias": []
+    },
+    "lote": {
+     "id": "1512-2s",
+     "item": 105,
+     "autos": 0
+    }
    }
   },
   {
@@ -2485,7 +4477,18 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "pendencias": []
+    },
+    "lote": {
+     "id": "1512-2s",
+     "item": 106,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5007385-28.2023.4.03.6000",
@@ -2503,7 +4506,18 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "pendencias": []
+    },
+    "lote": {
+     "id": "1512-2s",
+     "item": 107,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5007385-62.2022.4.03.6000",
@@ -2536,7 +4550,16 @@
        }
       ]
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Apelação",
+     "pendencias": []
+    },
+    "lote": {
+     "id": "1512-2s",
+     "item": 108,
+     "autos": 0
+    }
    }
   },
   {
@@ -2555,7 +4578,18 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "pendencias": []
+    },
+    "lote": {
+     "id": "1512-2s",
+     "item": 109,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5009313-77.2024.4.03.6000",
@@ -2588,7 +4622,16 @@
        }
       ]
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Apelação",
+     "pendencias": []
+    },
+    "lote": {
+     "id": "1512-2s",
+     "item": 110,
+     "autos": 0
+    }
    }
   },
   {
@@ -2607,7 +4650,18 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "pendencias": []
+    },
+    "lote": {
+     "id": "1512-2s",
+     "item": 111,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5008575-94.2021.4.03.6000",
@@ -2625,7 +4679,18 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "pendencias": []
+    },
+    "lote": {
+     "id": "1512-2s",
+     "item": 112,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5000161-62.2026.4.03.6702",
@@ -2658,7 +4723,16 @@
        }
       ]
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Apelação",
+     "pendencias": []
+    },
+    "lote": {
+     "id": "1512-2s",
+     "item": 113,
+     "autos": 0
+    }
    }
   },
   {
@@ -2692,7 +4766,16 @@
        }
       ]
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Apelação",
+     "pendencias": []
+    },
+    "lote": {
+     "id": "1512-2s",
+     "item": 114,
+     "autos": 0
+    }
    }
   },
   {
@@ -2731,7 +4814,16 @@
        }
       ]
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Apelação",
+     "pendencias": []
+    },
+    "lote": {
+     "id": "1512-2s",
+     "item": 115,
+     "autos": 0
+    }
    }
   },
   {
@@ -2750,7 +4842,18 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "pendencias": []
+    },
+    "lote": {
+     "id": "1512-2s",
+     "item": 116,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5007338-83.2025.4.03.6000",
@@ -2783,7 +4886,16 @@
        }
       ]
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Apelação",
+     "pendencias": []
+    },
+    "lote": {
+     "id": "1512-2s",
+     "item": 117,
+     "autos": 0
+    }
    }
   },
   {
@@ -2817,7 +4929,16 @@
        }
       ]
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Apelação",
+     "pendencias": []
+    },
+    "lote": {
+     "id": "1512-2s",
+     "item": 118,
+     "autos": 0
+    }
    }
   },
   {
@@ -2851,7 +4972,16 @@
        }
       ]
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Apelação",
+     "pendencias": []
+    },
+    "lote": {
+     "id": "1512-2s",
+     "item": 119,
+     "autos": 0
+    }
    }
   },
   {
@@ -2885,7 +5015,16 @@
        }
       ]
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Apelação",
+     "pendencias": []
+    },
+    "lote": {
+     "id": "1512-2s",
+     "item": 120,
+     "autos": 0
+    }
    }
   },
   {
@@ -2919,7 +5058,16 @@
        }
       ]
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Apelação",
+     "pendencias": []
+    },
+    "lote": {
+     "id": "1512-2s",
+     "item": 121,
+     "autos": 0
+    }
    }
   },
   {
@@ -2953,7 +5101,16 @@
        }
       ]
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Apelação",
+     "pendencias": []
+    },
+    "lote": {
+     "id": "1512-2s",
+     "item": 122,
+     "autos": 0
+    }
    }
   },
   {
@@ -2972,7 +5129,18 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "pendencias": []
+    },
+    "lote": {
+     "id": "1512-2s",
+     "item": 123,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5007473-66.2023.4.03.6000",
@@ -3005,7 +5173,16 @@
        }
       ]
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Apelação",
+     "pendencias": []
+    },
+    "lote": {
+     "id": "1512-2s",
+     "item": 124,
+     "autos": 0
+    }
    }
   },
   {
@@ -3039,7 +5216,16 @@
        }
       ]
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Apelação",
+     "pendencias": []
+    },
+    "lote": {
+     "id": "1512-2s",
+     "item": 125,
+     "autos": 0
+    }
    }
   },
   {
@@ -3073,7 +5259,16 @@
        }
       ]
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Apelação",
+     "pendencias": []
+    },
+    "lote": {
+     "id": "1512-2s",
+     "item": 126,
+     "autos": 0
+    }
    }
   },
   {
@@ -3107,7 +5302,16 @@
        }
       ]
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Apelação",
+     "pendencias": []
+    },
+    "lote": {
+     "id": "1512-2s",
+     "item": 127,
+     "autos": 0
+    }
    }
   },
   {
@@ -3146,7 +5350,16 @@
        }
       ]
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Apelação",
+     "pendencias": []
+    },
+    "lote": {
+     "id": "1512-2s",
+     "item": 128,
+     "autos": 0
+    }
    }
   },
   {
@@ -3165,7 +5378,33 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença denegou a segurança (ID 407373453); MPF sem manifestação de mérito.",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] competência da Turma Regional (matéria previdenciária)",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[PRONTIDÃO] sem contrarrazões do INSS nem certidão de decurso após a apelação (ID 407373454)",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR paradigma] apelação da impetrante contra a denegação (omissão do INSS na reanálise/renovação do benefício; prazos do Tema 1.066/STF e acordo no RE 1.171.152) [VALIDAR: competência da Turma Regional (matéria previdenciária)]",
+    "lote": {
+     "id": "1512-3s",
+     "item": 129,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5000247-30.2025.4.03.6003",
@@ -3203,7 +5442,25 @@
        }
       ]
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença denegou a segurança (ID 396625187); parecer do MPF pela manutenção (ID 398685300).",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] assunto no PJe (Acessibilidade) diverge da matéria",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: negar provimento à apelação [VALIDAR paradigma]: sem direito líquido e certo à inclusão no programa nem preterição comprovada; série Mais Médicos da pauta [VALIDAR: assunto no PJe (Acessibilidade) diverge da matéria]",
+    "lote": {
+     "id": "1512-3s",
+     "item": 130,
+     "autos": 0
+    }
    }
   },
   {
@@ -3222,7 +5479,20 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença denegou a segurança (ID 392500324); embargos rejeitados (ID 392500329); parecer do MPF pela ausência de direito líquido e certo (ID 400044790).",
+     "pendencias": []
+    },
+    "resJulg": "Proposta: negar provimento à apelação [VALIDAR paradigma]: sem direito líquido e certo à inclusão no MAAv nem preterição comprovada; série Mais Médicos da pauta",
+    "lote": {
+     "id": "1512-3s",
+     "item": 131,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5000465-61.2025.4.03.6002",
@@ -3260,7 +5530,16 @@
        }
       ]
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Apelação",
+     "pendencias": []
+    },
+    "lote": {
+     "id": "1512-2s",
+     "item": 132,
+     "autos": 0
+    }
    }
   },
   {
@@ -3294,7 +5573,16 @@
        }
       ]
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Apelação",
+     "pendencias": []
+    },
+    "lote": {
+     "id": "1512-2s",
+     "item": 133,
+     "autos": 0
+    }
    }
   },
   {
@@ -3328,7 +5616,16 @@
        }
       ]
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Apelação",
+     "pendencias": []
+    },
+    "lote": {
+     "id": "1512-2s",
+     "item": 134,
+     "autos": 0
+    }
    }
   },
   {
@@ -3362,7 +5659,16 @@
        }
       ]
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Apelação",
+     "pendencias": []
+    },
+    "lote": {
+     "id": "1512-2s",
+     "item": 135,
+     "autos": 0
+    }
    }
   },
   {
@@ -3396,7 +5702,16 @@
        }
       ]
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Apelação",
+     "pendencias": []
+    },
+    "lote": {
+     "id": "1512-2s",
+     "item": 136,
+     "autos": 0
+    }
    }
   },
   {
@@ -3435,7 +5750,16 @@
        }
       ]
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Apelação",
+     "pendencias": []
+    },
+    "lote": {
+     "id": "1512-2s",
+     "item": 137,
+     "autos": 0
+    }
    }
   },
   {
@@ -3469,7 +5793,16 @@
        }
       ]
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Apelação",
+     "pendencias": []
+    },
+    "lote": {
+     "id": "1512-2s",
+     "item": 138,
+     "autos": 0
+    }
    }
   },
   {
@@ -3508,7 +5841,16 @@
        }
       ]
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Apelação",
+     "pendencias": []
+    },
+    "lote": {
+     "id": "1512-2s",
+     "item": 139,
+     "autos": 0
+    }
    }
   },
   {
@@ -3527,7 +5869,18 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "pendencias": []
+    },
+    "lote": {
+     "id": "1512-2s",
+     "item": 140,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5013756-37.2025.4.03.6000",
@@ -3565,7 +5918,31 @@
        }
       ]
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença concedeu a segurança e confirmou a liminar (ID 394835060); pareceres do MPF (IDs 396794724 e 414150033).",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] motivo do indeferimento da posse",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[VALIDAR] sentido dos pareceres",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR paradigma] apelação do IFMS e remessa contra a concessão da segurança (posse e exercício no cargo de Técnico em Assuntos Educacionais; nulidade do Ofício DIPES 175/2025) [VALIDAR: motivo do indeferimento da posse; sentido dos pareceres]",
+    "lote": {
+     "id": "1512-3s",
+     "item": 141,
+     "autos": 0
+    }
    }
   },
   {
@@ -3584,7 +5961,20 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença denegou a segurança (ID 394283275); embargos rejeitados (ID 394283383); MPF pelo prosseguimento.",
+     "pendencias": []
+    },
+    "resJulg": "Proposta: negar provimento à apelação [VALIDAR paradigma]: sem direito líquido e certo à inclusão no MAAv nem preterição comprovada; série Mais Médicos da pauta",
+    "lote": {
+     "id": "1512-3s",
+     "item": 142,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5002404-92.2019.4.03.6000",
@@ -3602,7 +5992,33 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença procedente (ID 393606288); embargos de declaração rejeitados (ID 393606296); apelações IDs 393606295, 393606301 e 393606304.",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] identificar cada apelante",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[VALIDAR] competência federal: ente federal no polo?",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR paradigma] apelações das instituições de ensino e de pessoa física (ilegitimidade; desconsideração da personalidade, artigos 50 do CC e 28 do CDC) contra a condenação solidária à devolução de 24 parcelas de R$ 230,00 e ao dano moral [VALIDAR: identificar cada apelante; competência federal: ente federal no polo?]",
+    "lote": {
+     "id": "1512-3s",
+     "item": 143,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5006784-51.2025.4.03.6000",
@@ -3620,7 +6036,27 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença concedeu a segurança e confirmou a liminar (ID 400477570).",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] débitos vencidos há mais de 90 dias (precedente citado nas razões)",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR paradigma] apelação da União e remessa contra a ordem de remeter os débitos vencidos à PGFN para inscrição e adesão à transação; parecer do MPF pela manutenção (ID 403406636) [VALIDAR: débitos vencidos há mais de 90 dias (precedente citado nas razões)]",
+    "lote": {
+     "id": "1512-3s",
+     "item": 144,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5004898-17.2025.4.03.6000",
@@ -3638,7 +6074,20 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença (ID 398168963); gratuidade reiterada na apelação; MPF sem manifestação de mérito.",
+     "pendencias": []
+    },
+    "resJulg": "Proposta: [VALIDAR paradigma] apelação da impetrante contra a extinção quanto ao IBFC (ilegitimidade passiva) e a denegação quanto à EBSERH (sem vagas efetivas de Analista Administrativo)",
+    "lote": {
+     "id": "1512-3s",
+     "item": 145,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "0000669-02.2025.4.03.6000",
@@ -3671,7 +6120,18 @@
        }
       ]
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença concedeu a segurança (ID 389631620); MPF pelo prosseguimento.",
+     "pendencias": []
+    },
+    "resJulg": "Proposta: [VALIDAR paradigma] apelações da UFMS e da União e remessa contra a concessão da segurança (certificado de conclusão da residência; fato consumado); contrarrazões apontam falta de impugnação ao fato consumado (dialeticidade)",
+    "lote": {
+     "id": "1512-3s",
+     "item": 146,
+     "autos": 0
+    }
    }
   },
   {
@@ -3706,7 +6166,16 @@
        }
       ]
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Apelação",
+     "pendencias": []
+    },
+    "lote": {
+     "id": "1512-2s",
+     "item": 147,
+     "autos": 0
+    }
    }
   },
   {
@@ -3740,7 +6209,25 @@
        }
       ]
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença procedente (ID 395159187).",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] apelação de 06/08/2025 e contrarrazões de 24/08/2026: conferir tempestividade e tramitação",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR paradigma] apelação da ré contra a condenação a devolver a aposentadoria por idade de 04/01/2006 a 30/11/2013; boa-fé e erro administrativo (Tema 979/STJ) [VALIDAR: apelação de 06/08/2025 e contrarrazões de 24/08/2026: conferir tempestividade e tramitação]",
+    "lote": {
+     "id": "1512-3s",
+     "item": 148,
+     "autos": 0
+    }
    }
   },
   {
@@ -3759,7 +6246,45 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença parcialmente procedente: negou a aposentadoria especial e o afastamento do fator previdenciário (ID 391937969); decisão de 07/10/2026 (ID 402712251).",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] teor da decisão ID 402712251 (redistribuição?)",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[PRONTIDÃO · conferir] polo com sucessão (SUCEDIDO: ARY SILVA DE LIMA): conferir habilitação",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[PRONTIDÃO] vista à PRR para parecer (despacho ID 414321141, 24/11/2026) — parecer ainda não juntado",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[PRONTIDÃO · conferir] polo com sucessão (SUCEDIDO: ARY SILVA DE LIMA): conferir habilitação",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR paradigma] apelação do INSS: falta de interesse de agir por requerimento administrativo inapto (\"indeferimento forçado\"; Tema 350/STF e Tema 1.124/STJ) [VALIDAR: teor da decisão ID 402712251 (redistribuição?)]",
+    "lote": {
+     "id": "1512-3s",
+     "item": 149,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5466058-72.2026.4.03.9999",
@@ -3777,7 +6302,45 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Contrarrazões do autor (ID 407109419).",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] autos migrados do TJMS: peças sem tipo; conferir sentença e apelação no PJe",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[PRONTIDÃO · conferir] autos do TJMS sem peças tipadas: prontidão não verificável automaticamente",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[PRONTIDÃO] vista à PRR para parecer (despacho ID 414321145, 24/11/2026) — parecer ainda não juntado",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[PRONTIDÃO · conferir] autos do TJMS sem peças tipadas: prontidão não verificável automaticamente",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR] apelação do INSS contra a concessão da aposentadoria híbrida (Tema 1.007/STJ) [VALIDAR: autos migrados do TJMS: peças sem tipo; conferir sentença e apelação no PJe]",
+    "lote": {
+     "id": "1512-3s",
+     "item": 150,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5447213-89.2026.4.03.9999",
@@ -3795,7 +6358,45 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença improcedente com honorários suspensos (ID 404865399); apelação ID 404865406.",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] autos migrados do TJMS: peças sem tipo; conferir sentença e apelação no PJe",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[PRONTIDÃO · conferir] autos do TJMS sem peças tipadas: prontidão não verificável automaticamente",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[PRONTIDÃO] vista à PRR para parecer (despacho ID 414321146, 24/11/2026) — parecer ainda não juntado",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[PRONTIDÃO · conferir] autos do TJMS sem peças tipadas: prontidão não verificável automaticamente",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR] apelação do autor contra a improcedência (sentença ID 404865399): pede aposentadoria por incapacidade desde o requerimento de 12/11/2024 ou auxílio por incapacidade temporária desde 24/09/2024 [VALIDAR: autos migrados do TJMS: peças sem tipo; conferir sentença e apelação no PJe]",
+    "lote": {
+     "id": "1512-3s",
+     "item": 151,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5481403-78.2026.4.03.9999",
@@ -3813,7 +6414,45 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Apelação ID 408771856; decisão ID 409139221.",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] autos migrados do TJMS: peças sem tipo; conferir sentença e apelação no PJe",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[PRONTIDÃO · conferir] autos do TJMS sem peças tipadas: prontidão não verificável automaticamente",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[PRONTIDÃO] vista à PRR para parecer (despacho ID 414321148, 24/11/2026) — parecer ainda não juntado",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[PRONTIDÃO · conferir] autos do TJMS sem peças tipadas: prontidão não verificável automaticamente",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR] apelação do autor pelo restabelecimento do auxílio por incapacidade desde a cessação [VALIDAR: autos migrados do TJMS: peças sem tipo; conferir sentença e apelação no PJe]",
+    "lote": {
+     "id": "1512-3s",
+     "item": 152,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5466254-42.2026.4.03.9999",
@@ -3831,7 +6470,45 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Intimação para contrarrazões em 25/09/2026 (ID 407148154).",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] autos migrados do TJMS: peças sem tipo; conferir sentença e apelação no PJe",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[PRONTIDÃO · conferir] autos do TJMS sem peças tipadas: prontidão não verificável automaticamente",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[PRONTIDÃO] vista à PRR para parecer (despacho ID 414321151, 24/11/2026) — parecer ainda não juntado",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[PRONTIDÃO · conferir] autos do TJMS sem peças tipadas: prontidão não verificável automaticamente",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR] apelação do INSS contra a aposentadoria rural por idade (início de prova material, Súmula 149/STJ) [VALIDAR: autos migrados do TJMS: peças sem tipo; conferir sentença e apelação no PJe]",
+    "lote": {
+     "id": "1512-3s",
+     "item": 153,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5465866-42.2026.4.03.9999",
@@ -3849,7 +6526,45 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Contrarrazões da autora (ID 407059382).",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] autos migrados do TJMS: peças sem tipo; conferir sentença e apelação no PJe",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[PRONTIDÃO · conferir] autos do TJMS sem peças tipadas: prontidão não verificável automaticamente",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[PRONTIDÃO] vista à PRR para parecer (despacho ID 414321153, 24/11/2026) — parecer ainda não juntado",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[PRONTIDÃO · conferir] autos do TJMS sem peças tipadas: prontidão não verificável automaticamente",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR] apelação do INSS contra a aposentadoria rural por idade (início de prova material, Súmula 149/STJ); a autora pede negar o efeito suspensivo [VALIDAR: autos migrados do TJMS: peças sem tipo; conferir sentença e apelação no PJe]",
+    "lote": {
+     "id": "1512-3s",
+     "item": 154,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5465945-21.2026.4.03.9999",
@@ -3882,7 +6597,43 @@
        }
       ]
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Apelação ID 407079313.",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] autos migrados do TJMS: peças sem tipo; conferir sentença e apelação no PJe",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[PRONTIDÃO · conferir] menores no polo (B. C. F. D. S., K. F. D. S.)",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[PRONTIDÃO] vista à PRR para parecer (despacho ID 414321162, 24/11/2026) — parecer ainda não juntado",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[PRONTIDÃO · conferir] menores no polo (B. C. F. D. S., K. F. D. S.)",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR] apelação da autora pela concessão desde o requerimento ou, subsidiariamente, anulação da sentença (baixa renda do segurado, Tema 896/STJ) [VALIDAR: autos migrados do TJMS: peças sem tipo; conferir sentença e apelação no PJe]",
+    "lote": {
+     "id": "1512-3s",
+     "item": 155,
+     "autos": 0
+    }
    }
   },
   {
@@ -3901,7 +6652,45 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Apelação ID 407110908.",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] autos migrados do TJMS: peças sem tipo; conferir sentença e apelação no PJe",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[PRONTIDÃO · conferir] menores no polo",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[PRONTIDÃO] vista à PRR para parecer (despacho ID 414321163, 24/11/2026) — parecer ainda não juntado",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[PRONTIDÃO · conferir] menores no polo",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR] apelação dos autores pela pensão por morte desde o óbito (qualidade de segurado e dependência) [VALIDAR: autos migrados do TJMS: peças sem tipo; conferir sentença e apelação no PJe]",
+    "lote": {
+     "id": "1512-3s",
+     "item": 156,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5455744-67.2026.4.03.9999",
@@ -3919,7 +6708,45 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença improcedente, honorários suspensos (ID 405894695); apelação ID 405894701.",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] autos migrados do TJMS: peças sem tipo; conferir sentença e apelação no PJe",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[PRONTIDÃO · conferir] criança interessada no polo",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[PRONTIDÃO] vista à PRR para parecer (despacho ID 414321167, 24/11/2026) — parecer ainda não juntado",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[PRONTIDÃO · conferir] criança interessada no polo",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR] apelação do autor contra a improcedência do BPC (deficiência e miserabilidade, artigo 20 da Lei 8.742/1993) [VALIDAR: autos migrados do TJMS: peças sem tipo; conferir sentença e apelação no PJe]",
+    "lote": {
+     "id": "1512-3s",
+     "item": 157,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5464391-51.2026.4.03.9999",
@@ -3937,7 +6764,45 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Apelação ID 406845361.",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] autos migrados do TJMS: peças sem tipo; conferir sentença e apelação no PJe",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[PRONTIDÃO · conferir] autos do TJMS sem peças tipadas: prontidão não verificável automaticamente",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[PRONTIDÃO] vista à PRR para parecer (despacho ID 414321170, 24/11/2026) — parecer ainda não juntado",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[PRONTIDÃO · conferir] autos do TJMS sem peças tipadas: prontidão não verificável automaticamente",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR] apelação do autor: deficiência para fins assistenciais (artigo 20, § 2º, da LOAS) pelo impedimento físico e barreiras [VALIDAR: autos migrados do TJMS: peças sem tipo; conferir sentença e apelação no PJe]",
+    "lote": {
+     "id": "1512-3s",
+     "item": 158,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5469228-52.2026.4.03.9999",
@@ -3955,7 +6820,45 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Apelação ID 407563502.",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] autos migrados do TJMS: peças sem tipo; conferir sentença e apelação no PJe",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[PRONTIDÃO · conferir] autos do TJMS sem peças tipadas: prontidão não verificável automaticamente",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[PRONTIDÃO] vista à PRR para parecer (despacho ID 414321174, 24/11/2026) — parecer ainda não juntado",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[PRONTIDÃO · conferir] autos do TJMS sem peças tipadas: prontidão não verificável automaticamente",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR] apelação da autora contra a improcedência do BPC (ausência de comprovação de deficiência e miserabilidade) [VALIDAR: autos migrados do TJMS: peças sem tipo; conferir sentença e apelação no PJe]",
+    "lote": {
+     "id": "1512-3s",
+     "item": 159,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5313084-50.2026.4.03.9999",
@@ -3973,7 +6876,39 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Apelação ID 386718041.",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] autos migrados do TJMS: peças sem tipo; conferir sentença e apelação no PJe",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[PRONTIDÃO · conferir] autos do TJMS sem peças tipadas: prontidão não verificável automaticamente",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[PRONTIDÃO · conferir] autos do TJMS sem peças tipadas: prontidão não verificável automaticamente",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR] apelação pela implantação do benefício (pedido de tutela específica) [VALIDAR: autos migrados do TJMS: peças sem tipo; conferir sentença e apelação no PJe]",
+    "lote": {
+     "id": "1512-3s",
+     "item": 160,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5469681-47.2026.4.03.9999",
@@ -3991,7 +6926,51 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença improcedente (ID 407639832); apelação ID 407639834.",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] autos migrados do TJMS: peças sem tipo; conferir sentença e apelação no PJe",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[VALIDAR] tempestividade: sentença de 04/03/2025",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[PRONTIDÃO · conferir] autos do TJMS sem peças tipadas: prontidão não verificável automaticamente",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[PRONTIDÃO] vista à PRR para parecer (despacho ID 414321175, 24/11/2026) — parecer ainda não juntado",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[PRONTIDÃO · conferir] autos do TJMS sem peças tipadas: prontidão não verificável automaticamente",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR] apelação da autora contra a improcedência (sentença de 04/03/2025, Bela Vista-MS) [VALIDAR: autos migrados do TJMS: peças sem tipo; conferir sentença e apelação no PJe; tempestividade: sentença de 04/03/2025]",
+    "lote": {
+     "id": "1512-3s",
+     "item": 161,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5467708-57.2026.4.03.9999",
@@ -4009,7 +6988,45 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Apelação do INSS (ID 407335956); contrarrazões (ID 407335961).",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] autos migrados do TJMS: peças sem tipo; conferir sentença e apelação no PJe",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[PRONTIDÃO · conferir] autos do TJMS sem peças tipadas: prontidão não verificável automaticamente",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[PRONTIDÃO] vista à PRR para parecer (despacho ID 414321177, 24/11/2026) — parecer ainda não juntado",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[PRONTIDÃO · conferir] autos do TJMS sem peças tipadas: prontidão não verificável automaticamente",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR] apelação do INSS pela improcedência da pensão por morte [VALIDAR: autos migrados do TJMS: peças sem tipo; conferir sentença e apelação no PJe]",
+    "lote": {
+     "id": "1512-3s",
+     "item": 162,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5467717-19.2026.4.03.9999",
@@ -4027,7 +7044,45 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Apelação do INSS (ID 407339765).",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] autos migrados do TJMS: peças sem tipo; conferir sentença e apelação no PJe",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[PRONTIDÃO · conferir] autos do TJMS sem peças tipadas: prontidão não verificável automaticamente",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[PRONTIDÃO] vista à PRR para parecer (despacho ID 414321179, 24/11/2026) — parecer ainda não juntado",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[PRONTIDÃO · conferir] autos do TJMS sem peças tipadas: prontidão não verificável automaticamente",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR] apelação do INSS (revogação da tutela, prescrição quinquenal e consectários) [VALIDAR: autos migrados do TJMS: peças sem tipo; conferir sentença e apelação no PJe]",
+    "lote": {
+     "id": "1512-3s",
+     "item": 163,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "0000128-31.2014.4.03.6007",
@@ -4045,7 +7100,39 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Decisão monocrática conheceu do recurso inominado como apelação e negou provimento (ID 376487678); agravo interno (ID 380850342) pede afastar a majoração de honorários; memoriais (IDs 403184933 e 414150799).",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] honorários recursais no agravo interno",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-1s"
+      },
+      {
+       "desc": "[PRONTIDÃO · conferir] memoriais após a pauta (ID 414150799, 23/11/2026)",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-1s"
+      },
+      {
+       "desc": "[PRONTIDÃO · conferir] memoriais após a pauta (ID 414150799, 23/11/2026)",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-1s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: negar provimento ao agravo interno: correção do FGTS pela TR (Tema 731/STJ; ADI 5.090/STF, efeitos prospectivos) [VALIDAR: honorários recursais no agravo interno]",
+    "lote": {
+     "id": "1512-1s",
+     "item": 164,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5002918-74.2021.4.03.6000",
@@ -4063,7 +7150,18 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "pendencias": []
+    },
+    "lote": {
+     "id": "1512-2s",
+     "item": 165,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5009472-54.2023.4.03.6000",
@@ -4096,7 +7194,16 @@
        }
       ]
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Apelação",
+     "pendencias": []
+    },
+    "lote": {
+     "id": "1512-2s",
+     "item": 166,
+     "autos": 0
+    }
    }
   },
   {
@@ -4115,7 +7222,39 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Decisão monocrática (ID 376494205); agravo interno (ID 380864915); memoriais (ID 414150797). Par com 0000128-31.2014 e 0000098-93.2014.",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] honorários recursais no agravo interno",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-1s"
+      },
+      {
+       "desc": "[PRONTIDÃO · conferir] memoriais após a pauta (ID 414150797, 23/11/2026)",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-1s"
+      },
+      {
+       "desc": "[PRONTIDÃO · conferir] memoriais após a pauta (ID 414150797, 23/11/2026)",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-1s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: negar provimento ao agravo interno: correção do FGTS pela TR (Tema 731/STJ; ADI 5.090/STF, efeitos prospectivos) [VALIDAR: honorários recursais no agravo interno]",
+    "lote": {
+     "id": "1512-1s",
+     "item": 167,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "0000098-93.2014.4.03.6007",
@@ -4148,7 +7287,37 @@
        }
       ]
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Decisão monocrática (ID 376196053); agravo interno (ID 380864901); memoriais (ID 414150790). Par com 0000128-31.2014 e 0000115-32.2014.",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] honorários recursais no agravo interno",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-1s"
+      },
+      {
+       "desc": "[PRONTIDÃO · conferir] memoriais após a pauta (ID 414150790, 23/11/2026)",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-1s"
+      },
+      {
+       "desc": "[PRONTIDÃO · conferir] memoriais após a pauta (ID 414150790, 23/11/2026)",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-1s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: negar provimento ao agravo interno: correção do FGTS pela TR (Tema 731/STJ; ADI 5.090/STF, efeitos prospectivos) [VALIDAR: honorários recursais no agravo interno]",
+    "lote": {
+     "id": "1512-1s",
+     "item": 168,
+     "autos": 0
+    }
    }
   },
   {
@@ -4182,7 +7351,37 @@
        }
       ]
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "obsGeral": "Redistribuído pela Resolução 33/2025 (ID 405849932).",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] decisão agravada do 1º grau (ID e data)",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-1s"
+      },
+      {
+       "desc": "[VALIDAR] resposta do agravado",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-1s"
+      },
+      {
+       "desc": "[PRONTIDÃO] agravo interno do agravado (ID 409854279) sem contrarrazões nem certidão de decurso: conferir intimação (artigo 1.021, § 2º, do CPC) ou julgá-lo prejudicado com o mérito do agravo de instrumento",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-1s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR paradigma] mérito do agravo de instrumento da UFMS contra a liminar que preservou a lotação do agravado na UNIFESP; efeito suspensivo deferido (ID 408477541) e mantido (ID 410235882); o agravo interno do agravado (ID 409854279) fica prejudicado com o julgamento [VALIDAR: decisão agravada do 1º grau (ID e data); resposta do agravado]",
+    "lote": {
+     "id": "1512-1s",
+     "item": 169,
+     "autos": 0
+    }
    }
   },
   {
@@ -4201,7 +7400,45 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Autos de juizado/TJMS migrados.",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] autos migrados do TJMS: peças sem tipo; conferir sentença e apelação no PJe",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[VALIDAR] espécie do recurso e decisão recorrida",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[PRONTIDÃO · conferir] autos do TJMS sem peças tipadas: prontidão não verificável automaticamente",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[PRONTIDÃO · conferir] autos do TJMS sem peças tipadas: prontidão não verificável automaticamente",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR] apelação em matéria de tempo especial; os autos trazem decisão de reclamação sobre validade do PPP com LTCAT (ID 382439117). Paradigma da TNU é vedado: usar só STJ/STF e o Relator [VALIDAR: autos migrados do TJMS: peças sem tipo; conferir sentença e apelação no PJe; espécie do recurso e decisão recorrida]",
+    "lote": {
+     "id": "1512-3s",
+     "item": 170,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5184706-76.2026.4.03.9999",
@@ -4219,7 +7456,39 @@
    "dataCorrecao": "",
    "dataLiberacao": "",
    "obs": "",
-   "ctl": {}
+   "ctl": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença procedente (ID 368196051); contrarrazões com prazo até 17/03/2026.",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] autos migrados do TJMS: peças sem tipo; conferir sentença e apelação no PJe",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[PRONTIDÃO · conferir] autos do TJMS sem peças tipadas: prontidão não verificável automaticamente",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[PRONTIDÃO · conferir] autos do TJMS sem peças tipadas: prontidão não verificável automaticamente",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR] apelação do INSS contra o restabelecimento desde 27/11/2020 e a conversão em aposentadoria por incapacidade desde a juntada do laudo (11/05/2025) [VALIDAR: autos migrados do TJMS: peças sem tipo; conferir sentença e apelação no PJe]",
+    "lote": {
+     "id": "1512-3s",
+     "item": 171,
+     "autos": 0
+    },
+    "editadoPor": "Index"
+   }
   },
   {
    "cnj": "5000365-14.2022.4.03.6002",
@@ -4252,7 +7521,37 @@
        }
       ]
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Acórdão (ID 400934464): efeitos financeiros desde a DIB, sem postergação pela falta de pedido de retificação do CNIS.",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] proposta de acordo: intimar o autor antes do julgamento?",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[PRONTIDÃO · conferir] embargos de declaração do INSS com proposta de acordo: intimar o autor antes do julgamento?",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[PRONTIDÃO · conferir] embargos de declaração do INSS com proposta de acordo: intimar o autor antes do julgamento?",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR] embargos de declaração do INSS (ID 401406149) contra o acórdão de 28/09/2026 que negou provimento à apelação; pede intimação do autor sobre proposta de acordo e, sucessivamente, o exame dos vícios [VALIDAR: proposta de acordo: intimar o autor antes do julgamento?]",
+    "lote": {
+     "id": "1512-3s",
+     "item": 172,
+     "autos": 0
+    }
    }
   },
   {
@@ -4286,7 +7585,25 @@
        }
       ]
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Acórdão de 28/09/2026 deu parcial provimento à apelação (ID 400937174); contrarrazões aos embargos (ID 408912651).",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] Tema 1.124/STJ: situação do julgamento e eventual sobrestamento",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: rejeitar os embargos de declaração do INSS (ID 401370378) [VALIDAR]: rediscussão do termo inicial dos efeitos financeiros com documentos não apresentados na via administrativa (Tema 1.124/STJ) [VALIDAR: Tema 1.124/STJ: situação do julgamento e eventual sobrestamento]",
+    "lote": {
+     "id": "1512-3s",
+     "item": 173,
+     "autos": 0
+    }
    }
   },
   {
@@ -4320,7 +7637,37 @@
        }
       ]
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "95 documentos, sem peça tipada.",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] autos migrados do TJMS: peças sem tipo; conferir sentença e apelação no PJe",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[PRONTIDÃO · conferir] autos do TJMS sem peças tipadas: prontidão não verificável automaticamente",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[PRONTIDÃO · conferir] autos do TJMS sem peças tipadas: prontidão não verificável automaticamente",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR] nenhuma sentença ou razões localizadas no texto extraído [VALIDAR: autos migrados do TJMS: peças sem tipo; conferir sentença e apelação no PJe]",
+    "lote": {
+     "id": "1512-3s",
+     "item": 174,
+     "autos": 0
+    }
    }
   },
   {
@@ -4354,7 +7701,43 @@
        }
       ]
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Apelação do autor (ID 375595921).",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] autos migrados do TJMS: peças sem tipo; conferir sentença e apelação no PJe",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[VALIDAR] tipo de julgamento: apelação ou embargos de declaração",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[PRONTIDÃO · conferir] autos do TJMS sem peças tipadas: prontidão não verificável automaticamente",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[PRONTIDÃO · conferir] autos do TJMS sem peças tipadas: prontidão não verificável automaticamente",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR] embargos de declaração do autor (ID 394583500) pedindo DIB no requerimento de 25/09/2023 e inversão da sucumbência; conferir se há acórdão embargado [VALIDAR: autos migrados do TJMS: peças sem tipo; conferir sentença e apelação no PJe; tipo de julgamento: apelação ou embargos de declaração]",
+    "lote": {
+     "id": "1512-3s",
+     "item": 175,
+     "autos": 0
+    }
    }
   },
   {
@@ -4388,7 +7771,37 @@
        }
       ]
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença improcedente, honorários suspensos (ID 346449699); apelação ID 346449704.",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] autos migrados do TJMS: peças sem tipo; conferir sentença e apelação no PJe",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[PRONTIDÃO · conferir] autos do TJMS sem peças tipadas: prontidão não verificável automaticamente",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[PRONTIDÃO · conferir] autos do TJMS sem peças tipadas: prontidão não verificável automaticamente",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR] apelação da autora; subsidiariamente, averbação do período rural reconhecido [VALIDAR: autos migrados do TJMS: peças sem tipo; conferir sentença e apelação no PJe]",
+    "lote": {
+     "id": "1512-3s",
+     "item": 176,
+     "autos": 0
+    }
    }
   },
   {
@@ -4422,7 +7835,31 @@
        }
       ]
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença procedente: magistério de 1999 a 2025 e aposentadoria de professor com renda de 100% (ID 358556409); apelação do INSS (ID 358556420).",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] autos do TJMS: conferir se a apelação impugna também o mérito",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[PRONTIDÃO · conferir] autos do TJMS sem peças tipadas: prontidão não verificável automaticamente",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR] apelação do INSS sobre os consectários (SELIC pela EC 113/2021 até 08/2025 e artigo 406 do CC após a EC 136/2025); contrarrazões do autor [VALIDAR: autos do TJMS: conferir se a apelação impugna também o mérito]",
+    "lote": {
+     "id": "1512-3s",
+     "item": 177,
+     "autos": 0
+    }
    }
   },
   {
@@ -4442,7 +7879,26 @@
    "dataLiberacao": "",
    "obs": "",
    "ctl": {
-    "meta": "M2"
+    "meta": "M2",
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Acórdão (ID 393947021).",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] contrarrazões aos embargos (artigo 1.023, § 2º, do CPC) se houver efeito modificativo",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR] embargos de declaração do autor (ID 395543183) contra o acórdão de 27/08/2026 que deu provimento à apelação da União (devolução de valores recebidos por decisão precária); alega omissão no controle de legalidade do parecer da CPG [VALIDAR: contrarrazões aos embargos (artigo 1.023, § 2º, do CPC) se houver efeito modificativo]",
+    "lote": {
+     "id": "1512-3s",
+     "item": 178,
+     "autos": 0
+    },
+    "editadoPor": "Index"
    }
   },
   {
@@ -4476,7 +7932,31 @@
        }
       ]
      }
-    ]
+    ],
+    "cartao": {
+     "tipoJ": "Apelação",
+     "obsGeral": "Sentença procedente (ID 333266392); apelação do INSS (ID 333266453); contrarrazões (ID 333266459).",
+     "pendencias": [
+      {
+       "desc": "[VALIDAR] autos do TJMS: espécie do benefício",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      },
+      {
+       "desc": "[PRONTIDÃO · conferir] autos do TJMS sem peças tipadas: prontidão não verificável automaticamente",
+       "ok": false,
+       "em": "2026-11-26",
+       "por": "Index · lote 1512-3s"
+      }
+     ]
+    },
+    "resJulg": "Proposta: [VALIDAR] apelação do INSS (revogação da tutela, prescrição e consectários) contra a concessão do benefício [VALIDAR: autos do TJMS: espécie do benefício]",
+    "lote": {
+     "id": "1512-3s",
+     "item": 179,
+     "autos": 0
+    }
    }
   }
  ],
