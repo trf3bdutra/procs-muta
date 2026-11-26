@@ -2184,3 +2184,23 @@ html body.hero-redesign-v53 #tu-pop.tu-profile-pop{
  box-shadow:0 8px 24px rgb(0 0 0/.13)
 }
 html body.hero-redesign-v53 #tu-pop.tu-profile-pop[hidden]{display:none!important}
+
+/* Pauta: quarto indicador, no mesmo padrão da faixa de produção. */
+html body.hero-redesign-v53 #pauta-app .hero-pa-production-strip.hero-pa-four{grid-template-columns:repeat(4,minmax(0,1fr))!important}
+html body.hero-redesign-v53 #pauta-app .hero-pa-production-strip>.pa-m-solicitacoes{--pa-meter:#a57829;text-align:left;cursor:pointer;width:100%;font:inherit;color:var(--cmt-ink)}
+html body.hero-redesign-v53 #pauta-app .hero-pa-production-strip>.pa-m-solicitacoes[aria-pressed=true]{background:color-mix(in srgb,var(--pa-meter) 9%,var(--cmt-paper))!important;box-shadow:inset 0 0 0 1px var(--pa-meter)!important}
+html body.hero-redesign-v53 #pauta-app .hero-pa-cumulative>.hero-pa-solic-types{padding:6px 10px}
+html body.hero-redesign-v53 #pauta-app .pa-solic-warning{display:block;font-size:10px;padding:0 10px 6px;color:var(--cmd-warn)}
+@media(max-width:520px){html body.hero-redesign-v53 #pauta-app .hero-pa-production-strip.hero-pa-four{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+/* Roteiro essencial: título/progresso, três filtros e uma barra de ferramentas. */
+html body.hero-redesign-v53 #gab .hero-route-overview.hero-route-shared.hero-route-essential>summary.rt-tt{padding:4px 9px!important;min-height:28px!important}
+html body.hero-redesign-v53 #gab :is(.hero-tri-with-dock,.hero-production-route) .hero-route-overview.hero-route-shared.hero-route-essential .hero-route-metrics>button{grid-template-rows:auto!important;min-height:29px!important;padding:3px 7px!important;border-top-width:0!important;box-shadow:none!important}
+html body.hero-redesign-v53 #gab .hero-route-overview.hero-route-shared.hero-route-essential .hero-route-metrics>button[aria-pressed=true]{box-shadow:inset 0 -2px var(--stat-tone)!important}
+html body.hero-redesign-v53 #gab .hero-route-overview.hero-route-shared.hero-route-essential .hero-route-metrics>button>b{font-size:15px!important}
+html body.hero-redesign-v53 #gab .hero-route-overview.hero-route-shared.hero-route-essential .hero-route-progress{padding:0!important}
+html body.hero-redesign-v53 #gab .hero-route-overview.hero-route-shared.hero-route-essential .hero-route-progress :is(.rt-bar,.hero-minuta-meter){margin:0!important;height:3px!important;min-height:3px!important}
+html body.hero-redesign-v53 #gab :is(.hero-tri-with-dock,.hero-production-route) .hero-route-overview.hero-route-shared.hero-route-essential .hero-route-tools{display:flex!important;flex-wrap:wrap;align-items:center;gap:3px 5px!important;padding:5px 8px!important;border-top:0!important}
+html body.hero-redesign-v53 #gab .hero-route-overview.hero-route-shared.hero-route-essential .hero-minuta-nav-foot{flex:none;padding:0!important;gap:3px!important;margin:0!important;border:0!important}
+html body.hero-redesign-v53 #gab .hero-route-overview.hero-route-shared.hero-route-essential .hero-minuta-nav-foot>button{width:23px;min-height:24px!important;font-size:16px!important;padding:0!important}
+html body.hero-redesign-v53 #gab .hero-route-overview.hero-route-shared.hero-route-essential .hero-route-search{flex:1 1 170px}
+html body.hero-redesign-v53 #gab .hero-route-overview.hero-route-shared.hero-route-essential .hero-route-modes{flex:none}
