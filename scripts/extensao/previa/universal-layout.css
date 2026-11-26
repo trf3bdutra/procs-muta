@@ -1658,3 +1658,65 @@ html body.hero-redesign-v53 :is(#panel-dil,#panel-del) .gx-c{border-radius:2px!i
 html body.hero-redesign-v53 :is(#panel-pront,#panel-min,#panel-acervo,#panel-par,#panel-modelos,#panel-pauta,#panel-dil,#panel-del) :is(button.btn,button.tu-b){font-family:var(--cmt-font)!important;border-radius:2px!important;min-height:28px;box-shadow:none!important}
 html body.hero-redesign-v53 :is(#panel-pront,#panel-min,#panel-acervo,#panel-par,#panel-modelos,#panel-pauta,#panel-dil,#panel-del) :is(input:not([type=checkbox]):not([type=radio]),select,textarea){font-family:var(--cmt-font);border-radius:2px;max-width:100%;min-width:0;box-sizing:border-box}
 @media(max-width:420px){html body.hero-redesign-v53 #gab :is(.hero-tri-with-dock,.hero-production-route) .hero-route-metrics>button{padding:7px 6px!important}html body.hero-redesign-v53 #gab .hero-route-metrics>button>span{font-size:10px!important}html body.hero-redesign-v53 #gab .hero-first-panel{padding-inline:10px!important}}
+
+/* Fidelidade ao HTML hero-cmt-redesign: componentes reais, sem dados simulados. */
+html body.hero-redesign-v53 #gab .hero-v53-painel.hero-profile-panels{
+  background:transparent!important;border:0!important;margin:0!important;padding:0!important;overflow:visible!important;box-shadow:none!important
+}
+html body.hero-redesign-v53 #gab .hero-profile-panels>.hero-v53-painel-body{padding:0!important}
+html body.hero-redesign-v53 #gab .hero-profile-panels .hero-v53-profile.hero-profile-panel{
+  display:block;margin:12px 14px!important;padding:0!important;min-width:0;border:1px solid var(--cmt-line)!important;border-radius:0!important;background:var(--cmt-paper)!important;box-shadow:none!important
+}
+html body.hero-redesign-v53 #gab .hero-profile-panels .hero-profile-panel>summary{
+  display:flex!important;align-items:center;gap:7px;min-height:36px;box-sizing:border-box;padding:9px 11px!important;background:var(--cmt-ivory)!important;color:var(--cmt-ink)!important;border:0!important;font:650 12px/1.4 var(--cmt-font)!important;cursor:pointer;list-style:none
+}
+html body.hero-redesign-v53 #gab .hero-profile-panels .hero-profile-panel[open]>summary{border-bottom:1px solid var(--cmt-line)!important}
+html body.hero-redesign-v53 #gab .hero-profile-panels .hero-profile-panel>summary::-webkit-details-marker{display:none}
+html body.hero-redesign-v53 #gab .hero-profile-panels .hero-profile-panel>summary::before{content:none!important}
+html body.hero-redesign-v53 #gab .hero-profile-panels .hero-profile-panel>summary::after{content:""!important;width:6px;height:6px;flex:none;border-right:1.5px solid var(--cmt-muted);border-bottom:1.5px solid var(--cmt-muted);transform:rotate(45deg);margin-left:auto;margin-right:3px}
+html body.hero-redesign-v53 #gab .hero-profile-panels .hero-profile-panel[open]>summary::after{transform:rotate(225deg)}
+html body.hero-redesign-v53 #gab .hero-profile-panels .hero-profile-tools{display:flex;justify-content:flex-end;padding:8px 11px;border-top:1px solid var(--cmt-line)}
+html body.hero-redesign-v53 #gab .hero-profile-panels .hero-v53-pauta-body{padding:10px 11px!important}
+html body.hero-redesign-v53 #gab .hero-profile-editorial .hero-profile-aut{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;background:var(--cmt-paper)!important;min-width:0}
+html body.hero-redesign-v53 #gab .hero-profile-editorial .hero-profile-aut>*{grid-column:1/-1;min-width:0}
+html body.hero-redesign-v53 #gab .hero-profile-editorial .hero-profile-aut>.hero-profile-band{grid-column:auto;border-right:1px solid var(--cmt-line)!important}
+html body.hero-redesign-v53 #gab .hero-profile-editorial .hero-profile-aut>.hero-profile-band:nth-of-type(2n){border-right:0!important}
+html body.hero-redesign-v53 #gab .hero-profile-editorial .hero-profile-band>.pc-dl{display:block!important}
+html body.hero-redesign-v53 #gab .hero-profile-editorial .hero-profile-band>.pc-dl>div{grid-template-columns:minmax(82px,35%) minmax(0,1fr);gap:4px 9px!important}
+html body.hero-redesign-v53 #gab .hero-summary-integrated>.hero-summary-section>summary h4{font:400 10px/1.4 var(--cmt-mono)!important;letter-spacing:.13em!important;text-transform:uppercase!important;color:var(--cmt-blue2)!important}
+html body.hero-redesign-v53 #gab .hero-summary-integrated>.hero-summary-section>summary{min-height:33px!important;box-sizing:border-box}
+html body.hero-redesign-v53 #gab .hero-first-panel .pv-flow{display:grid!important;grid-template-columns:repeat(auto-fit,minmax(60px,1fr));gap:0!important;background:var(--cmt-paper)!important;border:1px solid var(--cmt-line)!important;margin:6px 0!important;padding:0!important}
+html body.hero-redesign-v53 #gab .hero-first-panel .pv-flow::before{display:none!important}
+html body.hero-redesign-v53 #gab .hero-first-panel .pv-stage{padding:7px 6px!important;border-right:1px solid var(--cmt-line);min-width:0;margin:0!important}
+html body.hero-redesign-v53 #gab .hero-first-panel .pv-stage:last-child{border-right:0}
+html body.hero-redesign-v53 #gab .hero-first-panel .pv-stage b{font:650 11px/1.35 var(--cmt-font)!important}
+html body.hero-redesign-v53 #gab .hero-first-panel .pv-stage small{font:400 10px/1.3 var(--cmt-mono)!important}
+html body.hero-redesign-v53 #gab :is(.hero-tri-with-dock,.hero-production-route) .hero-route-metrics>button>span{order:-1;color:var(--cmt-ink)!important}
+html body.hero-redesign-v53 #gab :is(.hero-tri-with-dock,.hero-production-route) .hero-route-metrics>button>b{font:400 27px/1.1 var(--cmt-mono)!important;letter-spacing:-.04em;margin-top:3px}
+html body.hero-redesign-v53 #gab .hero-route-modes{border:1px solid var(--cmt-edge)!important;background:var(--cmt-paper)!important;gap:0!important}
+html body.hero-redesign-v53 #gab .hero-route-modes>button{font:400 11px/1.4 var(--cmt-font)!important;border:0!important;border-left:1px solid var(--cmt-line)!important;border-radius:0!important;padding:5px 9px!important;white-space:normal}
+html body.hero-redesign-v53 #gab .hero-route-modes>button:first-child{border-left:0!important}
+html body.hero-redesign-v53 #gab .hero-route-modes>button[aria-pressed=true]{background:var(--cmt-blue)!important;color:var(--cmt-paper)!important}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock .rt-p>.rt-i,html body.hero-redesign-v53 #gab .hero-production-route .hero-prod-marker{margin-top:10px!important}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock ol.rt>.rt-p,html body.hero-redesign-v53 #gab .hero-production-route .hero-prod-step{margin-bottom:7px!important}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock .rt-p>.rt-c,html body.hero-redesign-v53 #gab .hero-production-route .hero-prod-step>.hero-minuta-secao{border-color:var(--cmt-edge)!important}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock .rt-p.ab>.rt-c,html body.hero-redesign-v53 #gab .hero-production-route .hero-prod-step>details[open]{border-color:var(--cmt-gold)!important}
+html body.hero-redesign-v53 #panel-pront #hero-ger-dock .hero-ger-dock-header{border-bottom:0!important}
+html body.hero-redesign-v53 #panel-pront #hero-ger-dock .hero-ger-dock-header>details{background:var(--cmt-paper)!important}
+html body.hero-redesign-v53 #panel-pront #hero-ger-dock .hero-ger-dock-header>details>summary{background:var(--cmt-paper)!important}
+html body.hero-redesign-v53 #panel-pront #hero-ger-dock>summary{background:var(--cmt-beige)!important}
+html body.hero-redesign-v53 .layout>aside{background:var(--cmt-ivory)!important;box-shadow:none!important;border-top:1px solid var(--cmt-edge)!important}
+html body.hero-redesign-v53 .layout>aside>.nav[role=tablist]{gap:3px!important;padding:4px!important}
+html body.hero-redesign-v53 .layout>aside>.nav[role=tablist]>button{padding:6px 2px!important;gap:3px!important;border:1px solid transparent!important;border-radius:3px!important;font:400 10.5px/1.3 var(--cmt-font)!important}
+html body.hero-redesign-v53 .layout>aside>.nav[role=tablist]>button[aria-selected=true]{background:var(--cmt-pale)!important;border-color:var(--cmt-line)!important;color:var(--cmt-ink)!important}
+html body.hero-redesign-v53 .layout>aside>.nav .nav-icon,html body.hero-redesign-v53 .layout>aside>.nav>button[aria-selected=true] .nav-icon{width:18px!important;height:18px!important;flex-basis:18px!important;background:transparent!important;color:inherit!important}
+html body.hero-redesign-v53 .layout>aside>.nav .nav-icon svg{width:17px!important;height:17px!important}
+html body.hero-redesign-v53 #topo-u .tu-utils{border:0!important;border-radius:0!important;background:transparent!important;gap:2px!important}
+html body.hero-redesign-v53 #topo-u .tu-utils>.tu-b{border-radius:2px!important}
+html body.hero-redesign-v53 #topo-u .tu-gestao>button{border-radius:2px!important;background:transparent!important}
+html body.hero-redesign-v53 #topo-u .tu-gestao>button[aria-selected=true]{background:var(--cmt-pale)!important;border-color:var(--cmt-line)!important}
+@media(max-width:520px){
+ html body.hero-redesign-v53 #gab .hero-profile-editorial .hero-profile-aut{grid-template-columns:minmax(0,1fr)}
+ html body.hero-redesign-v53 #gab .hero-profile-editorial .hero-profile-aut>.hero-profile-band{border-right:0!important}
+ html body.hero-redesign-v53 #gab :is(.hero-tri-with-dock,.hero-production-route) .hero-route-metrics>button>b{font-size:22px!important}
+}
