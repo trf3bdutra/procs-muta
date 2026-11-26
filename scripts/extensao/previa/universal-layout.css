@@ -965,3 +965,7 @@ html body.hero-redesign-v53 #gab .rt-c>.rt-h b{font:650 12px/1.35 var(--sans,sys
 html body.hero-redesign-v53 #gab .rt-c .rt-b{padding:6px 9px!important}
 html body.hero-redesign-v53 #panel-min,html body.hero-redesign-v53 #panel-min .min-wrap,html body.hero-redesign-v53 #panel-min .hero-review-workspace,html body.hero-redesign-v53 #panel-min .hero-review-divider{background:var(--hero-pront-header,#f1eee5)!important}
 html body.hero-redesign-v53 #panel-min .hero-review-document,html body.hero-redesign-v53 #panel-min .hero-conf-dock{background:var(--hero-pront-paper,#fff)!important}
+
+/* Triagem: respiro branco após a navegação e primeiro painel no bege canônico. */
+html body.hero-redesign-v53 #gab .gbody.hero-tri-with-dock:not([hidden]){padding-top:10px!important;box-sizing:border-box;background:var(--hero-pront-paper,#fff)!important}
+html body.hero-redesign-v53 #gab .gbody.hero-tri-with-dock .rt-top{background:var(--hero-pront-header,#f3f0e7)!important;margin-top:0!important;border:0!important;border-radius:0!important;border-bottom:1px solid var(--hero-pront-divider,var(--line))!important;box-shadow:none!important;padding:12px 10px!important}

@@ -2623,3 +2623,7 @@ html body.hero-redesign-v53 #gab #g-docs .hero-doc-data>.pc-s{background:color-m
 html body.hero-redesign-v53 #gab #g-docs .hero-doc-data>.pc-s>summary{background:var(--hero-pront-header,#f3f0e7)!important}
 html body.hero-redesign-v53 #gab #g-docs .hero-doc-data>.pc-s>.gr{background:transparent!important}
 html body.hero-redesign-v53 #gab #g-docs .hero-doc-data>.pc-s>.gr :is(input:not([type=checkbox]):not([type=radio]),select,textarea){background:var(--hero-pront-paper,#fff)!important}
+
+/* Triagem: respiro branco após a navegação e primeiro painel no bege canônico. */
+html body.hero-redesign-v53 #gab .gbody.hero-tri-with-dock:not([hidden]){padding-top:10px!important;box-sizing:border-box;background:var(--hero-pront-paper,#fff)!important}
+html body.hero-redesign-v53 #gab .gbody.hero-tri-with-dock .rt-top{background:var(--hero-pront-header,#f3f0e7)!important;margin-top:0!important;border:0!important;border-radius:0!important;border-bottom:1px solid var(--hero-pront-divider,var(--line))!important;box-shadow:none!important;padding:12px 10px!important}
