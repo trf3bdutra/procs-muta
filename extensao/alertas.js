@@ -258,7 +258,7 @@
     var t0=$('topo-u');if(!t0||$('tu-pop'))return;
     var p=document.createElement('div');p.id='tu-pop';p.className='tu-pop tu-profile-pop';p.hidden=true;p.setAttribute('role','dialog');p.setAttribute('aria-label','Perfil e notificações');document.body.appendChild(p);
     window.addEventListener('resize',posicionarPerfil);
-    window.addEventListener('scroll',function(e){if(aberto()&&!p.contains(e.target))posicionarPerfil();},true);
+    window.addEventListener('scroll',function(e){if(aberto()&&(!(e.target instanceof Node)||!p.contains(e.target)))posicionarPerfil();},true);
     if(typeof ResizeObserver!=='undefined')new ResizeObserver(posicionarPerfil).observe(t0);
     t0.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('#tu-sino');if(!b)return;e.stopPropagation();abrir(!aberto());});
     document.addEventListener('click',function(e){var b=$('tu-sino');if(aberto()&&!p.contains(e.target)&&!(b&&b.contains(e.target)))abrir(false);});
