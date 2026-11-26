@@ -102,6 +102,7 @@ test('referências documentais preservam decisões de triagem e centralizam edi�
     assert.match(gb,/sig\.docBloqueado/);
     assert.match(gb,/Base documental do caso/);
     assert.equal(fs.readFileSync(path.join(pn,'roteiro.js'),'utf8'),fs.readFileSync(path.join(ROOT,'extensao','roteiro.js'),'utf8'));
+    assert.equal(rt, fs.readFileSync(path.join(pn,'roteiro.js'),'utf8'), 'o roteiro universal é a mesma fonte, não uma versão reescrita');
   } finally {fs.rmSync(saida,{recursive:true,force:true});}
 });
 
@@ -252,4 +253,44 @@ test('próximo ato no título de Etapas, paleta neutra e faixa de três campos',
 
 test('site: mesma compilação da HERO, sem shim, com sessão real e CNJ fixo',()=>{
  const dir=fs.mkdtempSync(path.join(os.tmpdir(),'muta-web-'));try{execFileSync('python3',[path.join(ROOT,'scripts/extensao/previa.py'),'--saida',dir]);const pn=path.join(dir,'painel'),h=fs.readFileSync(path.join(pn,'web.html'),'utf8');assert.match(h,/src="gabinete-universal.js"/);assert.match(h,/src="roteiro-universal.js"/);assert.match(h,/src="web-bootstrap.js"/);assert.doesNotMatch(h,/shim-previa|MUTA_PREVIA = true|src="sincronia.js"/);for(const [,arq] of h.matchAll(/<script src="([^"]+)"/g))assert.ok(fs.existsSync(path.join(pn,arq)),arq);assert.match(fs.readFileSync(path.join(pn,'gabinete-universal.js'),'utf8'),/Matriz e proposta/);}finally{fs.rmSync(dir,{recursive:true,force:true});}
+});
+
+
+test('arquitetura HERO: ZIP, prévia e web partem da mesma interface canônica', () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'hero-canon-'));
+  try {
+    const scripts = path.join(ROOT, 'scripts/extensao');
+    const preview = path.join(dir, 'preview');
+    const zip = path.join(dir, 'hero.zip');
+    const pac = path.join(dir, 'pac');
+    execFileSync('python3', [path.join(scripts, 'previa.py'), '--saida', preview]);
+    execFileSync('python3', [path.join(scripts, 'pacote.py'), '--saida', zip]);
+    execFileSync('python3', ['-m', 'zipfile', '-e', zip, pac]);
+    const pn = path.join(preview, 'painel');
+    const ler = (base, nome) => fs.readFileSync(path.join(base, nome), 'utf8');
+    const instalada = ler(pac, 'universal.html');
+    const demo = ler(pn, 'universal.html');
+    const web = ler(pn, 'web.html');
+    const origem = '\n<script>/* prévia: o site é o da própria página */ if (window.Muta) Muta.SITE = location.origin;</script>';
+    const shim = '<script src="shim-previa.js"></script>\n<script>window.MUTA_PREVIA = true;</script>\n';
+    assert.equal(demo.replace(shim, '').replace(origem, ''), instalada,
+      'a prévia só acrescenta o adaptador e a origem local');
+    const scriptsHtml = h => [...h.matchAll(/<script src="([^"]+)"/g)].map(m => m[1]);
+    assert.deepEqual(scriptsHtml(web), scriptsHtml(instalada).filter(n => !['sincronia.js','alertas.js'].includes(n)).flatMap(n => n === 'tema.js' ? ['web-bootstrap.js', n] : [n]));
+    assert.doesNotMatch(instalada, /shim-previa|MUTA_PREVIA = true|Muta\.SITE = location\.origin|<script\b(?![^>]*\bsrc\s*=)[^>]*>/i);
+    assert.doesNotMatch(web, /shim-previa|MUTA_PREVIA = true/);
+    const manifest = JSON.parse(ler(pac, 'manifest.json'));
+    assert.equal(manifest.side_panel.default_path, 'universal.html');
+    assert.equal(manifest.version, JSON.parse(ler(path.join(ROOT, 'extensao'), 'manifest.json')).version);
+    assert.ok(!fs.existsSync(path.join(pac, 'shim-previa.js')));
+    assert.ok(!fs.existsSync(path.join(pac, 'web-bootstrap.js')));
+    for (const nome of ['gabinete-universal.js','roteiro-universal.js','universal-layout.css','universal-ajustes.js','manual-canhoto.js','manual-canhoto.css']) {
+      assert.equal(ler(pac, nome), ler(pn, nome), nome + ': conteúdo idêntico nos ambientes');
+    }
+    assert.equal(ler(pac, 'roteiro-universal.js'), ler(pac, 'roteiro.js'));
+    for (const nome of scriptsHtml(instalada)) assert.ok(fs.existsSync(path.join(pac, nome)), 'script ausente no ZIP: ' + nome);
+    for (const nome of ['gabinete-universal.js','roteiro-universal.js','universal-ajustes.js']) new Function(ler(pac,nome));
+  } finally {
+    fs.rmSync(dir, {recursive:true,force:true});
+  }
 });
