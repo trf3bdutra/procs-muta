@@ -1596,7 +1596,24 @@ function heroOrganizarProntuario(){
     var mainTabs=caixa.querySelector('.hero-v53-tabs'),gbody=caixa.querySelector('.gbody');
     var resumo=G.aba==='Processo'&&G.rot==='res';
     var perfil=el('details','hero-v53-profile'),perfilSum=el('summary','','Perfil do processo');
+    perfil.classList.add('hero-profile-editorial');aut.classList.add('hero-profile-aut');mat.classList.add('hero-profile-context');
     perfil.append(perfilSum,aut,mat);aut.hidden=mat.hidden=false;
+    /* Perfil editorial: reutiliza os nós da autuação e das partes, sem clonar editores. */
+    var profileAut=au||el('section','hero-profile-aut-fallback'),profileDL=profileAut.querySelector('.pc-dl')||el('dl','pc-dl');
+    if(!au)aut.prepend(profileAut);
+    var profileParts=el('section','hero-profile-band hero-profile-partes');
+    Array.from(profileAut.children).forEach(function(n){
+      if(n.matches('.pc-ps,.pm-pt')||(n.matches('h4')&&S(n.textContent)==='Partes'))profileParts.append(n);
+      else if(n.matches('h4')&&S(n.textContent)==='Autuação')n.remove();
+    });
+    if(profileParts.children.length){if(!profileParts.querySelector('h4'))profileParts.prepend(el('h4','pm-mer-h','Partes'));profileAut.after(profileParts);}
+    var profileTitle=el('h4','pm-mer-h hero-profile-band-title','Identificação e Autuação');
+    function profileField(label,value){var existing=Array.from(profileDL.children).find(function(n){var k=n.querySelector('dt');return k&&S(k.textContent)===label;});if(existing)return existing;var n=el('div');n.append(el('dt','',label),el('dd','',S(value)||'—'));return n;}
+    var profileNumber=profileField('Processo',G.cnj);profileNumber.classList.add('hero-profile-number');
+    profileDL.prepend(profileNumber,profileField('Classe',classFull),profileField('Seção competente',secao),profileField('Relator',R['Relator']));
+    var pSummary=profileAut.querySelector(':scope > summary');if(pSummary)pSummary.after(profileTitle);else profileAut.prepend(profileTitle);
+    profileTitle.after(profileDL);var pTask=profileAut.querySelector(':scope > .pm-tf');if(pTask)profileDL.after(pTask);
+    profileAut.classList.add('hero-profile-band');
     perfil.open=!!heroTopo.perfil||heroTopo.pagina>=2;
     perfil.addEventListener('toggle',function(){if(perfil.isConnected){heroTopo.perfil=perfil.open;if(!perfil.open)heroTopo.pagina=0;}});
     /* 0.74.4: Perfil do processo e Pauta e julgamento são abas de um só painel; a Ficha completa abre por botão no cabeçalho dele, numa janela */

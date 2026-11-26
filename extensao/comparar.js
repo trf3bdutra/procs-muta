@@ -416,12 +416,12 @@ function sincronizarFusao(){
 }
 function atualizarResultado(){
   var out=caixa.querySelector('.cx-res');if(!out)return;
-  out.innerHTML=resultadoHtml();var bar=caixa.querySelector('.hero-v53-review-actions'),side=out.querySelector('[data-c="janela"]');if(bar){var old=bar.querySelector('[data-c="janela"]');if(old)old.remove();if(side)bar.append(side);}
+  var oldSheet=out.querySelector('.folha,.cx-out'),sy=oldSheet?oldSheet.scrollTop:0;out.innerHTML=resultadoHtml();var newSheet=out.querySelector('.folha,.cx-out');if(newSheet)newSheet.scrollTop=sy;var bar=caixa.querySelector('.hero-v53-review-actions'),side=out.querySelector('[data-c="janela"]');if(bar){var old=bar.querySelector('[data-c="janela"]');if(old)old.remove();if(side)bar.append(side);}
   sincronizarFusao();
 }
 function render() {
   if (!caixa || !aberta()) return;
-  var y = $('panel-min').scrollTop, scrolls=Array.from(caixa.querySelectorAll('.mn-tx,.hero-v53-ref-text')).map(function(e){return e.scrollTop;}), foco = document.activeElement && document.activeElement.dataset ? document.activeElement.dataset.c : null;
+  var y = $('panel-min').scrollTop, scrolls=Array.from(caixa.querySelectorAll('.mn-tx,.hero-v53-ref-text')).map(function(e){return e.scrollTop;}), oldSheet=caixa.querySelector('.hero-review-fused-content .folha,.hero-review-fused-content .cx-out'),sheetScroll=oldSheet?oldSheet.scrollTop:0, foco = document.activeElement && document.activeElement.dataset ? document.activeElement.dataset.c : null;
   caixa.innerHTML = editorHtml() +
     '<div class="seg cx-fontes" role="tablist" aria-label="Comparar com">' + fontes().map(function (f) { return '<button type="button" role="tab" data-f="' + f[0] + '" aria-selected="' + (C.fonte === f[0]) + '">' + f[1] + '</button>'; }).join('') + '</div>' +
     '<div class="cx-pick">' + seletor() + '</div>' +
@@ -443,13 +443,13 @@ function render() {
       if(read){read.title=read.textContent;read.setAttribute('aria-label',read.textContent);read.textContent='Ler';}
       if(part){var sub=document.createElement('div');sub.className='hero-review-part';var lab=document.createElement('span');lab.textContent='Parte em revisão';sub.append(lab,part);eh.after(sub);}
       var work=document.createElement('section');work.className='hero-review-workspace hero-review-editorial';var grid=document.createElement('div');grid.className='hero-review-documents';ed.classList.add('hero-review-document');ref.classList.add('hero-review-document');var edText=ed.querySelector('.mn-tx');if(edText)edText.setAttribute('lang','pt-BR');ed.before(work);
-      var divider=document.createElement('div');divider.className='hero-review-divider';
+      var divider=document.createElement('div');divider.className='hero-review-divider';var comparisonTitle=document.createElement('span');comparisonTitle.className='hero-comparison-kicker';comparisonTitle.textContent='Comparação de textos';
       var mark=document.createElement('span');mark.className='hero-review-cross';mark.setAttribute('aria-label','Comparação entre os textos');mark.textContent='×';
-      divider.append(mark,bar);grid.append(ed,divider,ref);work.append(grid);
+      divider.append(comparisonTitle,mark,bar);grid.append(ed,divider,ref);work.append(grid);
       var result=document.createElement('section');result.className='hero-review-fused-content';result.setAttribute('aria-label','Folha de comparação');result.append(res);ref.insertBefore(result,busca);sincronizarFusao();
     }
   }
-  $('panel-min').scrollTop = y;Array.from(caixa.querySelectorAll('.mn-tx,.hero-v53-ref-text')).forEach(function(e,i){if(scrolls[i]!=null)e.scrollTop=scrolls[i];});
+  $('panel-min').scrollTop = y;Array.from(caixa.querySelectorAll('.mn-tx,.hero-v53-ref-text')).forEach(function(e,i){if(scrolls[i]!=null)e.scrollTop=scrolls[i];});var newSheet=caixa.querySelector('.hero-review-fused-content .folha,.hero-review-fused-content .cx-out');if(newSheet)newSheet.scrollTop=sheetScroll;
   if (foco === 'q') { var q = caixa.querySelector('[data-c=q]'); if (q) { q.focus(); q.setSelectionRange(q.value.length, q.value.length); } }
 }
 function preparar() {
