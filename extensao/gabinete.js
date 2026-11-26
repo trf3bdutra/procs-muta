@@ -1959,7 +1959,7 @@ function condicaoLocal(f){if(window.MUTA_WEB||location.protocol!=='chrome-extens
 function persistirFila(f){var k=RASCUNHO_FICHA+f.key,cs=condicaoLocal(f);try{
  if(cs==='restrito'){localStorage.removeItem(k);f.local=false;return;}
  if(cs==='permitido')f.local=true;
- if(!f.local)return;
+ if(!f.local||!f.recuperado)return;
  if(!Object.keys(f.campos).length){localStorage.removeItem(k);return;}
  /* não duplicar classificação documental, peças vinculadas ou inteiro teor. */
  var campos={},base={},bloqueados={};Object.keys(f.campos).forEach(function(id){if(/Classificação documental|Peças vinculadas|Inteiro teor/i.test(id))return;campos[id]=f.campos[id];base[id]=f.base[id];if(f.bloqueados[id])bloqueados[id]=f.bloqueados[id];});
@@ -1968,7 +1968,8 @@ function persistirFila(f){var k=RASCUNHO_FICHA+f.key,cs=condicaoLocal(f);try{
 function recuperarFila(f){if(!f||f.recuperado||f!==filaAtual()||!G.F||!mesmaConta(f))return;var cs=condicaoLocal(f);if(cs==='aguardando')return;f.recuperado=true;if(cs!=='permitido'){persistirFila(f);return;}f.local=true;
  try{var q=JSON.parse(localStorage.getItem(RASCUNHO_FICHA+f.key)||'null');if(q&&q.campos)Object.keys(q.campos).forEach(function(k){if(k in f.campos)return;var v=valorOperacional(G.op,k);if(igualFila(v,q.campos[k]))return;f.campos[k]=q.campos[k];f.base[k]=(q.base||{})[k];f.versoes[k]=++f.geracao;if(!igualFila(v,f.base[k]))f.bloqueados[k]='conflito';else if((q.bloqueados||{})[k])f.bloqueados[k]=q.bloqueados[k];});}catch(e){f.avisoLocal='Não foi possível recuperar o rascunho local.';}
  persistirFila(f);if(Object.keys(f.campos).length){render();estadoFila(f);programarFila(f,900);}}
-function estadoFila(f){if(!f||f!==filaAtual())return;var n=Object.keys(f.campos).length,b=Object.keys(f.bloqueados).filter(function(k){return k in f.campos;});if(f.erro||b.length){st((f.erro||('Alterações requerem conferência: '+b.join(', ')))+(f.avisoLocal?' · '+f.avisoLocal:''),'err');}else if(n)st(f.voo?'Gravando '+n+' campo(s)…':n+' campo(s) a gravar'+(f.local?' · rascunho local':' · somente nesta janela')+'…');}
+function filaSemDisco(f){return Object.keys(f.campos).some(function(k){return !f.local||!f.recuperado||/Classificação documental|Peças vinculadas|Inteiro teor/i.test(k);});}
+function estadoFila(f){if(!f||f!==filaAtual())return;var n=Object.keys(f.campos).length,b=Object.keys(f.bloqueados).filter(function(k){return k in f.campos;});if(f.erro||b.length){st((f.erro||('Alterações requerem conferência: '+b.join(', ')))+(f.avisoLocal?' · '+f.avisoLocal:''),'err');}else if(n)st(f.voo?'Gravando '+n+' campo(s)…':n+' campo(s) a gravar'+(filaSemDisco(f)?' · há dados somente nesta janela':' · rascunho local')+'…');}
 function programarFila(f,ms){if(!f)return;clearTimeout(f.t);if(!mesmaConta(f)||!Object.keys(f.campos).some(function(k){return !f.bloqueados[k];}))return;f.t=setTimeout(function(){enviarFila(f).catch(function(){});},ms);}
 function agendar(ms){var f=filaAtual();if(!f)return;persistirFila(f);programarFila(f,ms);estadoFila(f);}
 function enviarFila(f){if(!f||!mesmaConta(f)||window.MUTA_WEB&&window.MUTA_WEB.leitura)return Promise.resolve();clearTimeout(f.t);if(f.voo)return f.voo;var P={},vs={};Object.keys(f.campos).forEach(function(k){if(!f.bloqueados[k]){P[k]=f.campos[k];vs[k]=f.versoes[k];}});if(!Object.keys(P).length)return Promise.resolve();
@@ -1979,7 +1980,7 @@ function enviarFila(f){if(!f||!mesmaConta(f)||window.MUTA_WEB&&window.MUTA_WEB.l
   persistirFila(f);if(mesmaConta(f)&&window.MutaAlertas)window.MutaAlertas.esquecer(f.cnj);
   if(f===filaAtual()&&mesmaConta(f)){G.op=f.op||G.op;render();if(Object.keys(f.campos).length)estadoFila(f);else st('Gravado na ficha'+((j.cartoes||[]).length?' e no cartão da pauta':'')+' às '+new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'})+'.','ok');}
   if(mesmaConta(f)&&window.MUTA_WEB&&window.parent!==window)window.parent.postMessage({tipo:'cmt:hero-gravado',cnj:f.cnj},location.origin);return j;
- }).catch(function(e){var recus=e.dados&&e.dados.recusados;if(Array.isArray(recus))recus.forEach(function(k){if(f.versoes[k]===vs[k])f.bloqueados[k]='recusado';});f.erro='Não gravou: '+e.message+(e.status===401?' Entre de novo.':'');persistirFila(f);estadoFila(f);throw e;}).finally(function(){f.voo=null;if(Object.keys(f.campos).length){if(f===filaAtual())estadoFila(f);programarFila(f,f.erro?30000:600);}});
+ }).catch(function(e){var recus=e.dados&&e.dados.recusados;if(Array.isArray(recus))recus.forEach(function(k){if(f.versoes[k]===vs[k])f.bloqueados[k]='recusado';});else if(e.status===400||e.status===403||e.status===404)Object.keys(P).forEach(function(k){if(f.versoes[k]===vs[k])f.bloqueados[k]='validacao';});f.erro='Não gravou: '+e.message+(e.status===401?' Entre de novo.':'');persistirFila(f);estadoFila(f);throw e;}).finally(function(){f.voo=null;if(Object.keys(f.campos).length){if(f===filaAtual())estadoFila(f);programarFila(f,f.erro?30000:600);}});
  estadoFila(f);return f.voo;
 }
 function gravarJa(keepalive){var f=filaAtual();if(!f)return Promise.resolve();persistirFila(f);/* a saída nunca é tratada como confirmação do servidor. */return enviarFila(f);}
@@ -2215,7 +2216,7 @@ document.addEventListener('muta:sigilo',function(){var f=filaAtual();if(f){recup
 document.addEventListener('muta:autuacao',function(e){if(modo==='ficha'&&G.F&&e.detail&&Muta.chaveProcesso(e.detail.numero)===Muta.chaveProcesso(G.cnj))render();});
 document.addEventListener('muta:prontuario', function () { if (modo === 'ficha') carregar(false); else if (G.pend && Object.keys(G.pend).length) gravarJa().catch(function () {}); });
 window.addEventListener('pagehide', function () {Object.keys(FILA_FICHA).forEach(function(k){var f=FILA_FICHA[k];if(mesmaConta(f))persistirFila(f);});});
-window.addEventListener('beforeunload',function(e){var f=filaAtual();if(f&&Object.keys(f.campos).length&&!f.local){e.preventDefault();e.returnValue='';}});
+window.addEventListener('beforeunload',function(e){if(Object.keys(FILA_FICHA).some(function(k){return filaSemDisco(FILA_FICHA[k]);})){e.preventDefault();e.returnValue='';}});
 document.addEventListener('visibilitychange', function () { if (document.hidden && Object.keys(G.pend).length) gravarJa().catch(function () {}); });
 /* ---------- correspondência rascunho ↔ ficha, para a sincronia automática (sincronia.js) ---------- */
 function opVal(op, id) { var i = id.indexOf('.'), s = (op || {})[id.slice(0, i)] || {}, v = s[id.slice(i + 1)]; return v == null ? '' : v; }
