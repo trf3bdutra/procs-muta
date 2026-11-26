@@ -192,18 +192,11 @@ header.amicus-shell .amicus-brand,header#top #marca,header.top.nx .brand.tw{over
 .cmtl-full:before,.cmt-load[data-cmt-loader="legacy"]:before{background:none!important;mask-image:none!important;-webkit-mask-image:none!important}
 #entrada:not([hidden]),.cmt-entry{background:linear-gradient(110deg,#19452e,#153f3e 55%,#102d39)!important}
 
-/* Logomarca oficial do TRF-3 (Justiça Federal), montagem horizontal do manual do CJF; estática, sem caixa. */
-.cmtl-trf3{display:inline-flex!important;align-items:center;gap:.6em;color:#fff;font-family:"Myriad Pro","Open Sans","Segoe UI",Arial,sans-serif;line-height:1;text-align:left;white-space:nowrap;animation:none!important;transform:none!important}
-.cmtl-trf3 svg{display:block;flex:none;height:3.2em;width:auto;animation:none!important;transform:none!important;filter:none!important}
-.cmtl-trf3-t{display:flex;flex-direction:column;gap:.3em}
-.cmtl-trf3-t b{font-weight:400;font-size:1.36em;letter-spacing:.015em}
-.cmtl-trf3-t small{font-weight:400;font-size:.8em;letter-spacing:.005em;opacity:.92}
-.cmtl-trf3 .cmtl-trf3-t b,.cmtl-trf3 .cmtl-trf3-t small{color:inherit!important;text-transform:none!important;font-style:normal!important;font-family:inherit!important;margin:0!important}
-.cmtl-trf3.neg{color:#fff!important}
-.cmtl-trf3.cor .cmtl-trf3-t b{color:#8a8d90!important}.cmtl-trf3.cor .cmtl-trf3-t small{color:#3f4447!important;opacity:1}
-.cmtl-mark .cmtl-brand.cmtl-trf3,.cmt-load[data-cmt-loader="legacy"] .cmt-ld-mk .cmtl-brand.cmtl-trf3{display:inline-flex!important;width:auto!important;height:auto!important;font-size:14px;padding:0;background:none;border-radius:0;justify-self:center}
-#entrada .en-top .cmtl-trf3-top{margin-left:auto;font-size:12px;font-weight:400;letter-spacing:0}
+/* Marca do TRF-3: símbolo da Justiça Federal num círculo branco, sem texto; estática. */
+.cmtl-trf3{display:inline-block!important;line-height:0;animation:none!important;transform:none!important}
+.cmtl-trf3 svg{display:block;width:4.6em;height:4.6em;animation:none!important;transform:none!important;filter:drop-shadow(0 1px 3px rgba(0,0,0,.18))}
+.cmtl-mark .cmtl-brand.cmtl-trf3,.cmt-load[data-cmt-loader="legacy"] .cmt-ld-mk .cmtl-brand.cmtl-trf3{display:inline-block!important;width:auto!important;height:auto!important;font-size:14px;padding:0;background:none;border-radius:50%;justify-self:center}
+#entrada .en-top .cmtl-trf3-top{margin-left:auto;font-size:8px}
 .cmt-entry-jf{font-size:13px;margin-bottom:22px}
-@media(max-width:800px){#entrada .en-top .cmtl-trf3-top{font-size:10px}.cmt-entry-jf{font-size:11px;margin-bottom:14px}}
-@media(max-width:520px){#entrada .en-top .cmtl-trf3-top .cmtl-trf3-t{display:none}}
+@media(max-width:800px){.cmt-entry-jf{font-size:10px;margin-bottom:14px}}
 .cmtl-mark,.cmt-load[data-cmt-loader="legacy"] .cmt-ld-mk{width:auto!important}
