@@ -66,7 +66,7 @@ test('HERO18810: Caso do Roteiro de produção segue o tipo de julgamento', () =
   const g = fs.readFileSync(path.join(raiz, 'gabinete.js'), 'utf8'), r = fs.readFileSync(path.join(raiz, 'roteiro.js'), 'utf8');
   assert.match(g, /'Sentença': \['ap', 'rn', 'ms'\], 'Espécie e decisão impugnada': \['ai', 'agint', 'ed', 'ret'\]/);
   assert.match(g, /T\.ai \? 'Decisão agravada'/);
-  assert.match(r, /window\.MutaRoteiro = \{ tipos: tipos,/);
+  assert.match(r, /window\.MutaRoteiro = \{[^}]*\btipos:\s*tipos,/);
 });
 
 test('HERO18810 0.58: aba Pauta e Controle como ícone na faixa do topo', () => {
@@ -100,7 +100,7 @@ test('HERO18810 0.64: sigla da classe, Síntese e questões acima dos roteiros, 
   assert.equal(C.etiqueta('APELAÇÃO / REMESSA NECESSÁRIA', '').t, 'ApelRemNec');
   const g = R('extensao/gabinete.js'), p = R('extensao/pauta.js');
   assert.match(g,/hero-main-tabs hero-v53-tabs/); assert.match(g,/hero-v53-dock-tabs/); assert.match(g,/hero-v53-profile/);
-  assert.match(p, /function soProcesso\(cnj\)/); assert.match(p, /function pedSessao\(itens\)/); assert.match(p, /function listaHtml\(\)/); assert.match(p,/function solicitacoesHtml\(itens\)/);
+  assert.match(p, /function soProcesso\(cnj\)/); assert.match(p, /function pedSessao\(itens\)/); assert.match(p, /function listaHtml\(\)/); assert.match(p,/function solicitacoesHtml\(itens,\s*indicadores\)/);
   assert.match(R('extensao/painel.html'), /<script src="padrao-classes-cnj\.js"><\/script>/);
 });
 
