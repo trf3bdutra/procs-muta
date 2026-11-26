@@ -6,7 +6,7 @@ import sys
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
-VERSION = "20261126b"
+VERSION = "20261126c"
 FAMILIES = {
     "monitor": "caput", "caput": "caput", "office": "office",
     "equipe": "office", "exofficio": "office", "cmt": "office",
