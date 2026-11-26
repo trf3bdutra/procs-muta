@@ -526,3 +526,11 @@ html body.hero-redesign-v53 #gab .hero-route-footer-tools .hero-route-search inp
 html body.hero-redesign-v53 #gab .hero-route-footer-tools button{font-size:10px;min-height:24px;padding:3px 6px}
 html body.hero-redesign-v53 #gab .hero-route-aux:empty{display:none!important}
 @media(max-width:360px){html body.hero-redesign-v53 #gab .hero-summary-standard .hero-v53-pauta-body{grid-template-columns:minmax(0,1fr)}}
+
+/* Gerador: terceira subaba do Prontuário, sem dock fixo sobre os roteiros. */
+html body.hero-redesign-v53 #panel-pront #gab .hero-generator-route{display:block;min-width:0;padding-bottom:0!important}
+html body.hero-redesign-v53 #panel-pront #gab #hero-ger-dock.hero-ger-page{position:static!important;inset:auto!important;display:block!important;width:100%!important;height:auto!important;max-height:none!important;min-height:0!important;overflow:visible!important;padding:0!important;margin:0!important;border:0!important;border-radius:0!important;box-shadow:none!important;background:var(--cmt-paper,#fff)!important}
+html body.hero-redesign-v53 #panel-pront #gab #hero-ger-dock.hero-ger-page>.hero-ger-page-head{display:flex;align-items:center;justify-content:space-between;gap:6px;padding:7px 9px;background:var(--hero-nav-subtabs,#f9f7f3);border-bottom:1px solid var(--cmt-line);font:600 12px/1.4 var(--sans,system-ui)}
+html body.hero-redesign-v53 #panel-pront #gab #hero-ger-dock.hero-ger-page>.hero-ger-dock-body{display:grid!important;max-height:none!important;height:auto!important;overflow:visible!important;padding:6px!important}
+html body.hero-redesign-v53 #panel-pront #gab #hero-ger-dock.hero-ger-page .hero-ger-dock-header{position:static!important;display:grid!important;gap:5px!important}
+html body.hero-redesign-v53 #panel-pront #gab #hero-ger-dock.hero-ger-page .hero-ger-dock-content{max-height:none!important;overflow:visible!important;padding:0!important}
