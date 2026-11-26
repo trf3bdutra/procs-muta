@@ -969,3 +969,47 @@ html body.hero-redesign-v53 #panel-min .hero-review-document,html body.hero-rede
 /* Triagem: respiro branco após a navegação e primeiro painel no bege canônico. */
 html body.hero-redesign-v53 #gab .gbody.hero-tri-with-dock:not([hidden]){padding-top:10px!important;box-sizing:border-box;background:var(--hero-pront-paper,#fff)!important}
 html body.hero-redesign-v53 #gab .gbody.hero-tri-with-dock .rt-top{background:var(--hero-pront-header,#f3f0e7)!important;margin-top:0!important;border:0!important;border-radius:0!important;border-bottom:1px solid var(--hero-pront-divider,var(--line))!important;box-shadow:none!important;padding:12px 10px!important}
+
+/* HERO · roteiro de triagem: percurso, fases e estados. Escopo restrito à Triagem. */
+html body.hero-redesign-v53 #gab .hero-tri-with-dock{--rt-surface:var(--hero-pront-paper,#fff);--rt-rule:var(--hero-pront-divider,var(--line));--rt-beige:var(--hero-pront-header,#f3f0e7);--rt-done:#527b66;--rt-warn:#a66c35;--rt-pending:#849096}
+html[data-tema=escuro] body.hero-redesign-v53 #gab .hero-tri-with-dock{--rt-done:#91c1a6;--rt-warn:#e4b36d;--rt-pending:#a1b1bf}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock .rt-top{padding:10px 12px 12px!important}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock .rt-tt{align-items:center;gap:6px;min-height:20px;margin:0 0 6px}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock .rt-tt>b{flex:1;min-width:0}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock .rt-n{font:650 11px/1.35 var(--mono,monospace)!important;font-variant-numeric:tabular-nums;color:var(--fg)!important}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock .rt-al{background:color-mix(in srgb,var(--rt-warn) 12%,var(--rt-surface));color:var(--rt-warn);border:1px solid color-mix(in srgb,var(--rt-warn) 25%,var(--rt-rule));border-radius:3px;padding:2px 5px;font-size:9px}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock .rt-progress-caption{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:10px;line-height:1.35;color:var(--muted-fg)}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock .rt-progress-caption>b{font:600 10px/1.35 var(--mono,monospace);color:var(--rt-done)}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock .rt-bar{height:5px;margin:5px 0 8px!important;background:color-mix(in srgb,var(--rt-rule) 80%,var(--rt-surface));border-radius:2px}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock .rt-bar>i{background:var(--rt-done);border-radius:2px}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock ol.rt{padding:8px 10px 4px!important;margin:0!important;position:relative;background:var(--rt-surface)}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock ol.rt::before{content:"";left:19px;top:20px;bottom:20px;width:1px;background:var(--rt-rule)}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock ol.rt>li.rt-f{display:flex;align-items:center;gap:7px;min-height:25px;margin:10px 0 5px 27px!important;padding:5px 7px;border-bottom:1px solid var(--rt-rule);background:color-mix(in srgb,var(--rt-beige) 48%,var(--rt-surface));border-radius:3px 3px 0 0}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock ol.rt>li.rt-f:first-child{margin-top:0!important}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock ol.rt>li.rt-f>span:first-child{flex:1;min-width:0;font:650 10px/1.35 var(--sans,system-ui)!important;letter-spacing:.075em!important;text-transform:uppercase!important;color:var(--gold,var(--muted-fg))!important}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock .rt-phase-count{font:600 10px/1.3 var(--mono,monospace);color:var(--muted-fg);white-space:nowrap}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock .rt-phase-alert{font:600 9px/1.3 var(--sans,system-ui);color:var(--rt-warn);white-space:nowrap}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock ol.rt>.rt-p{--rt-state:var(--rt-pending);display:flex;align-items:flex-start;gap:8px;margin:0 0 5px!important;min-width:0}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock ol.rt>.rt-p.is-ok{--rt-state:var(--rt-done)}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock ol.rt>.rt-p.is-al{--rt-state:var(--rt-warn)}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock .rt-p>.rt-i{flex:0 0 19px;width:19px;height:19px;box-sizing:border-box;margin:9px 0 0;display:grid;place-items:center;border-radius:50%;border:1px solid var(--rt-state);background:var(--rt-surface);color:var(--rt-state);font:700 11px/1 var(--sans,system-ui)}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock .rt-p.is-pend>.rt-i::after{content:"";width:5px;height:5px;border:1px solid var(--rt-state);border-radius:50%;box-sizing:border-box}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock .rt-p.is-ok>.rt-i,html body.hero-redesign-v53 #gab .hero-tri-with-dock .rt-p.is-al>.rt-i{background:color-mix(in srgb,var(--rt-state) 14%,var(--rt-surface));color:var(--rt-state);border-color:var(--rt-state)}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock .rt-p>.rt-c{min-width:0;flex:1;background:var(--rt-surface)!important;border:1px solid var(--rt-rule)!important;border-radius:5px!important;box-shadow:none!important;overflow:hidden}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock .rt-p.is-al>.rt-c{border-color:color-mix(in srgb,var(--rt-warn) 42%,var(--rt-rule))!important}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock .rt-c>.rt-h{display:grid!important;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:2px 7px;padding:7px 8px!important;min-height:35px;box-sizing:border-box;text-align:left;background:color-mix(in srgb,var(--rt-state) 4%,var(--rt-surface));cursor:pointer}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock .rt-p.ab>.rt-c>.rt-h{background:color-mix(in srgb,var(--rt-state) 8%,var(--rt-surface))}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock .rt-c>.rt-h:hover{background:color-mix(in srgb,var(--rt-state) 10%,var(--rt-surface))}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock .rt-c>.rt-h:focus-visible{outline:2px solid var(--rt-state);outline-offset:-2px}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock .rt-c>.rt-h>b{min-width:0;font:650 11.5px/1.4 var(--sans,system-ui)!important;color:var(--fg)!important;overflow-wrap:anywhere}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock .rt-c>.rt-h>small{grid-column:1/-1;font:400 10px/1.35 var(--sans,system-ui)!important;color:var(--muted-fg);overflow-wrap:anywhere}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock .rt-step-meta{display:flex;align-items:center;gap:6px;white-space:nowrap}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock .rt-step-state{font:500 9px/1.3 var(--sans,system-ui);color:var(--rt-state)}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock .rt-step-chevron{width:6px;height:6px;border-right:1.5px solid var(--muted-fg);border-bottom:1.5px solid var(--muted-fg);transform:rotate(45deg);margin:0 2px 3px}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock .rt-p.ab .rt-step-chevron{transform:rotate(225deg);margin:3px 2px 0}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock .rt-c>.rt-b{padding:8px 9px!important;border-top:1px solid var(--rt-rule)!important;background:var(--rt-surface)!important}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock .rt-b>.gr{margin:0!important;gap:7px!important}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock .rt-b :is(.rt-calc,.rt-mais){border-top:1px solid var(--rt-rule);padding:6px 0 0;margin:7px 0 0}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock .rt-b .rt-d{border-left:2px solid var(--rt-rule);padding:5px 7px;margin:7px 0 0;background:color-mix(in srgb,var(--rt-beige) 35%,var(--rt-surface));font-size:10px!important}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock .rt-b .rt-m{display:flex;align-items:center;gap:6px;margin:8px 0 0;padding:6px 0 0;border-top:1px solid var(--rt-rule);font-size:11px}
+@media(max-width:330px){html body.hero-redesign-v53 #gab .hero-tri-with-dock .rt-step-state{display:none}html body.hero-redesign-v53 #gab .hero-tri-with-dock ol.rt{padding-inline:6px!important}html body.hero-redesign-v53 #gab .hero-tri-with-dock ol.rt::before{left:15px}}

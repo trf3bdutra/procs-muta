@@ -224,9 +224,9 @@
     var alHtml = function (x) { var a = x[0]; return '<div class="al-i ' + a.nivel + '"><span>' + esc(a.t) + '</span>' + (a.campo ? '<button type="button" class="btn line sm" data-au="al:' + x[1] + '">Gravar “' + esc(a.valor) + '”</button>' : '') + '</div>'; };
     var pct = L.length ? Math.round(100 * n.ok / L.length) : 0;
     var h = '@@TOPO@@';
-    var topo = '<section class="card rt-top"><div class="rt-tt"><b>Roteiro de triagem</b><span class="rt-n">' + n.ok + '/' + L.length + '</span>' +
+    var topo = '<section class="card rt-top"><div class="rt-tt"><b>Roteiro de triagem</b><span class="rt-n" title="Etapas conferidas">' + n.ok + '/' + L.length + '</span>' +
       (n.al ? '<span class="rt-al">' + n.al + ' alerta' + (n.al > 1 ? 's' : '') + '</span>' : '') + '</div>' +
-      '<div class="rt-bar"><i style="width:' + pct + '%"></i></div>' +
+      '<div class="rt-progress-caption"><span>Etapas conferidas</span><b>'+pct+'%</b></div><div class="rt-bar" role="progressbar" aria-label="Etapas conferidas" aria-valuemin="0" aria-valuemax="100" aria-valuenow="'+pct+'"><i style="width:' + pct + '%"></i></div>' +
       /* 0.63: seletor do tipo de julgamento recolhido no começo do roteiro; o resumo mostra o tipo em uso */
       '<details class="rt-tsel"' + (R.tipoAb ? ' open' : '') + '><summary><span class="rt-kind-main"><span class="rt-kind-label">Tipo de julgamento</span><b>' + esc(TIPOS.filter(function (x) { return T[x[0]]; }).map(function (x) { return x[1]; }).join(' · ') || 'A definir') + '</b></span><span class="rt-kind-mode">' + (S(g.V('triagem','Tipo de Julgamento')) ? 'Registrado' : 'Auto') + '</span><span class="rt-kind-arrow" aria-hidden="true"></span></summary>' +
       '<div class="rt-kind-body"><div class="rt-tipos" role="group" aria-label="Tipo de julgamento">' + TIPOS.map(function (x) { var sig={ap:'Ap',rn:'RemNec',ai:'AI',ms:'MS',ed:'ED',agint:'AgInt',ret:'JR'}[x[0]]; return '<button type="button" class="chip rt-kind-option' + (T[x[0]] ? ' on' : '') + '" data-rt="t:' + x[0] + '" aria-pressed="' + !!T[x[0]] + '"><span class="rt-kind-sig">' + esc(sig) + '</span><span class="rt-kind-name">' + esc(x[1]) + '</span><span class="rt-kind-check" aria-hidden="true">' + (T[x[0]]?'✓':'') + '</span></button>'; }).join('') + '</div>' +
@@ -234,7 +234,8 @@
     h += '<ol class="rt">';
     FASES.forEach(function (f) {
       var F = L.filter(function (x) { return x.p.f === f[0]; }); if (!F.length) return;
-      h += '<li class="rt-f"><span>' + esc(f[1]) + '</span></li>';
+      var fo=F.filter(function(x){return x.st==='ok';}).length, fa=F.filter(function(x){return x.st==='al';}).length;
+      h += '<li class="rt-f"><span>' + esc(f[1]) + '</span><small class="rt-phase-count" aria-label="'+fo+' de '+F.length+' etapas conferidas">'+fo+'/'+F.length+'</small>'+(fa?'<small class="rt-phase-alert">'+fa+' alerta'+(fa===1?'':'s')+'</small>':'')+'</li>';
       F.forEach(function (x) {
         var p = x.p, ab = R.aberto[p.id] != null ? R.aberto[p.id] : x.st !== 'ok';
         var cs = (p.campos || []).filter(function (c) { return typeof c[3] !== 'function' || c[3](ctx); });
@@ -245,7 +246,7 @@
         var AP = alPasso[p.id] || [];
         var AU0 = window.MutaAutos, doAuto = AU0 && AU0.preenchido && cs.concat(p.mais || []).some(function (c) { return AU0.preenchido(c[0] + '.' + c[1]); });
         h += '<li class="rt-p is-' + x.st + (ab ? ' ab' : '') + '"><span class="rt-i" aria-label="' + ROT[x.st] + '">' + ICO[x.st] + '</span><div class="rt-c">' +
-          '<button type="button" class="rt-h" data-rt="a:' + p.id + '" aria-expanded="' + ab + '"><b>' + esc(p.t) + (AP.length ? ' <i class="rt-av">' + AP.length + ' aviso' + (AP.length > 1 ? 's' : '') + '</i>' : '') + (doAuto ? ' <i class="au-tag" title="Preenchido pela leitura dos autos: confira">autos</i>' : '') + '</b>' + (!ab && resumo ? '<small>' + esc(resumo.slice(0, 120)) + '</small>' : '') + '</button>';
+          '<button type="button" class="rt-h" data-rt="a:' + p.id + '" aria-expanded="' + ab + '"><b>' + esc(p.t) + (AP.length ? ' <i class="rt-av">' + AP.length + ' aviso' + (AP.length > 1 ? 's' : '') + '</i>' : '') + (doAuto ? ' <i class="au-tag" title="Preenchido pela leitura dos autos: confira">autos</i>' : '') + '</b><span class="rt-step-meta"><span class="rt-step-state">'+esc(ROT[x.st]||'A conferir')+'</span><span class="rt-step-chevron" aria-hidden="true"></span></span>' + (!ab && resumo ? '<small>' + esc(resumo.slice(0, 120)) + '</small>' : '') + '</button>';
         if (ab) {
           var mais = (p.mais || []).map(comSug).filter(Boolean);
           h += '<div class="rt-b">' + (!X.docRef && p.f === 'adm' ? referenciaAdm(p.id,g) : '') + (AP.length ? '<div class="al-l">' + AP.map(alHtml).join('') + '</div>' : '') + (visiveis.length ? '<div class="gr">' + visiveis.map(comSug).join('') + '</div>' : '') +
