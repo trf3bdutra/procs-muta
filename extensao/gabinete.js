@@ -229,7 +229,7 @@ function cartao(s) {
     (S(R['DPU']) && !/^(não|nao)$/i.test(S(R['DPU'])) ? '<div class="pc-p"><span>DPU</span><b>' + esc(R['DPU']) + '</b></div>' : '') +
     (S(R['MPF']) && !/^(não|nao)$/i.test(S(R['MPF'])) ? '<div class="pc-p"><span>MPF</span><b>' + esc(R['MPF']) + '</b></div>' : '') +
     (!S(R['Polo ativo']) && S(R['Partes (texto da pauta)']) ? '<div class="pc-p"><span>Partes</span><b>' + esc(R['Partes (texto da pauta)']) + '</b></div>' : '');
-  var pills = ORD_CE.filter(function (g) { return g !== 'monocratica' && vale(g); }).map(function (g) { return '<button type="button" class="gp ' + g + '" data-ir="g-ctl" title="Abrir o controle">' + ROT_CE[g] + '</button>'; }).join('');
+  var pills = ORD_CE.filter(function (g) { return g !== 'monocratica' && (!heroV53() || ['meta','urgencia','sensivel'].indexOf(g)<0) && vale(g); }).map(function (g) { return '<button type="button" class="gp ' + g + '" data-ir="g-ctl" title="Abrir o controle">' + ROT_CE[g] + '</button>'; }).join('');
   return '<section class="pc">' +
     '<div class="pc-n"><button type="button" class="mono pc-cnj" data-copia="' + esc(G.cnj) + '" title="Copiar o número">' + esc(G.cnj) + '</button>' + (abrev ? '<span class="pc-cl">' + esc(abrev) + '</span>' : '') + '<span class="sp"></span>' + pills + '</div>' +
     (classe || assunto ? '<h2 class="pc-t">' + esc(classe) + (assunto ? '<em> · ' + esc(assunto) + '</em>' : '') + '</h2>' : '') +
@@ -625,11 +625,11 @@ function controlesProcesso(naSeta) {
   var linhas = gs.map(function (g) {
     var id = g.controle, on = ctlSim(id), fixo = ctlLista(id) && id !== 'sensivel'; if (on) n++;
     var raz = CTL_RAZAO[id], usados = {}; raz.forEach(function (r) { usados[r[1]] = 1; });
-    var resto = id === 'meta' ? [] : g.campos.filter(function (c) { return !usados[c.chave]; });
+    var resto = id === 'meta' && !heroV53() ? [] : g.campos.filter(function (c) { return !usados[c.chave]; });
     return '<div class="ct-i ' + id + (on ? ' on' : '') + (on && raz.length ? ' wide' : '') + '"><div class="ct-h"><b>' + esc(ROT_CE[id] === 'Sobrestado' ? 'Sobrestamento' : ROT_CE[id]) + '</b>' +
       (fixo ? '<small class="muted" title="' + esc(g.inclusao || '') + '">pelo PJe</small>' : '') +
       '<span class="seg ct-sn"><button type="button" data-ct="' + id + ':1" aria-selected="' + on + '">Sim</button><button type="button" data-ct="' + id + ':0" aria-selected="' + !on + '"' + (fixo ? ' disabled title="Vem da lista do PJe"' : '') + '>Não</button></span></div>' +
-      (on && raz.length ? '<div class="gr ct-r">' + raz.map(function (r) { return campoRot(r[0], r[1], r[2]); }).join('') + '</div>' +
+      (on && (raz.length || (heroV53()&&resto.length)) ? (raz.length?'<div class="gr ct-r">' + raz.map(function (r) { return campoRot(r[0], r[1], r[2]); }).join('') + '</div>':'') +
         (resto.length ? '<details class="ct-mais"><summary>Mais campos</summary><div class="gr">' + resto.map(campo).join('') + '</div></details>' : '') : '') + '</div>';
   }).join('');
   if (naSeta) return '<h4 class="pm-mer-h">Controles <small>' + (n ? n + ' em vigor' : 'nenhum em vigor') + '</small></h4><div class="ct-l pm-ctl2" id="g-ctl">' + linhas + '</div>';
@@ -1314,6 +1314,27 @@ function heroOrganizarProntuario(){
   var ctlGroup=el('section','hero-ctl-integrado');
   var ctl=aut.querySelector('.pm-ctl2');if(ctl){var ch=ctl.previousElementSibling;if(ch&&ch.tagName==='H4'&&/^Controles/.test(ch.textContent))ch.remove();ctlGroup.append(ctl);}
   var mon=el('details','hero-acomp hero-monitoramento'),ms=el('summary','','Monitoramento especial'),mb=el('div','hero-acomp-b');
+  if(heroV53()&&ctl){
+    var ativos=el('section','hero-mon-section'),disponiveis=el('details','hero-mon-section hero-mon-available'),ah=el('h4','hero-mon-heading','Controles ativos'),dh=el('summary','hero-mon-heading','Controles disponíveis'),al=el('div','hero-mon-list'),dlMon=el('div','hero-mon-list');
+    var grupos=Array.from(ctl.querySelectorAll('.ct-i')),nAt=0,nDisp=0;
+    grupos.forEach(function(node){
+      var ativo=node.classList.contains('on'),key=CTL_PROC.find(function(k){return node.classList.contains(k);}),head=node.querySelector('.ct-h');
+      node.dataset.monitorControl=key||'';
+      if(ativo){nAt++;al.append(node);var more=node.querySelector('.ct-mais');if(more&&key==='meta')more.querySelector('summary').textContent='Dados e providências da meta';}
+      else{nDisp++;dlMon.append(node);}
+      if(head&&readonly)head.querySelectorAll('[data-ct]').forEach(function(b){b.disabled=true;});
+    });
+    var monoGroup=(abaModelo(CE)&&abaModelo(CE).grupos||[]).find(function(x){return x.controle==='monocratica';});
+    if(monoGroup&&vale('monocratica')){
+      var mono=el('article','ct-i monocratica on'),mh=el('div','ct-h'),moreMono=el('details','ct-mais'),mf=el('div','gr');
+      mh.append(el('b','','Monocrática'),el('small','muted','Destino registrado'));moreMono.append(el('summary','','Dados e prazo'));
+      html(mf,monoGroup.campos.filter(function(x){return x.chave!=='Destino';}).map(campo).join(''));
+      moreMono.append(mf);mono.append(mh,moreMono);al.append(mono);nAt++;
+    }
+    ah.append(el('small','hero-mon-total',String(nAt)));dh.append(el('small','hero-mon-total',String(nDisp)));ativos.append(ah,al);
+    if(!nAt)al.append(el('small','muted','Nenhum controle ativo.'));
+    disponiveis.append(dh,dlMon);ctl.replaceChildren(ativos,disponiveis);ctl.classList.add('hero-mon-organized');
+  }
   mb.append(ctlGroup);mon.append(ms,mb);mon.open=!!heroTopo.monitoramento;
   mon.addEventListener('toggle',function(){if(mon.isConnected)heroTopo.monitoramento=mon.open;});
   /* Anotações e questões: uma representação por registro, sem mover controles legados. */
@@ -1344,7 +1365,7 @@ function heroOrganizarProntuario(){
     var c=campoModelo('triagem',field),item=card(k,label,v,'',c&&editavel(c)?function(t){salvarNotaFixa(r,t);}:null);var hist=historicoFixo.filter(function(l){return l.includes(' · [Histórico '+k+'] ');});if(hist.length){var hd=el('details','hero-fixed-history');hd.append(el('summary','','Histórico · '+hist.length));hist.slice().reverse().forEach(function(l){hd.append(el('p','hero-ann-meta',l.replace(' · [Histórico '+k+'] ',' · ').replace(/ ⏎ /g,'\n')));});item.append(hd);}if(heroV53())fixed.append(item);else(destacado(k)?fixed:others).append(item);
   });
   linhas.forEach(function(l,n){var m=/^(\d{2}\/\d{2}\/\d{4}(?: \d{2}:\d{2})?)\s*·\s*(?:([^·]{2,40}?)\s*·\s*)?(.+)$/.exec(l);
-    var item=card(l,heroV53()?'Anotação geral':String(n+1).padStart(2,'0'),m?m[3]:l,m?[m[2]||'Autor não registrado',m[1]].join(' · '):'Autoria e data não registradas',function(t){t=S(t).replace(/\s*\n+\s*/g,' ');if(!t)return;var novo=m?m[1]+' · '+(m[2]||'equipe')+' · '+t:t,at=fixados.indexOf(l);if(at>=0){fixados[at]=novo;gravaFix();}var L=notasL(),ix=L.indexOf(l);if(ix<0)return;L[ix]=novo;marcar('origem.Observações',L.join('\n'));agendar(500);render();},function(){if(!confirm('Excluir esta anotação?'))return;var L=notasL(),ix=L.indexOf(l);if(ix<0)return;L.splice(ix,1);fixados=fixados.filter(function(x){return x!==l;});gravaFix();marcar('origem.Observações',L.join('\n'));agendar(500);render();});(heroV53()?others:destacado(l)?fixed:others).append(item);
+    var item=card(l,heroV53()?'Anotação geral':String(n+1).padStart(2,'0'),m?m[3]:l,m?[m[2]||'Autor não registrado',m[1]].join(' · '):'Autoria e data não registradas',function(t){t=S(t).replace(/\s*\n+\s*/g,' ');if(!t)return;var novo=m?m[1]+' · '+(m[2]||'Autor não registrado')+' · '+t:t,at=fixados.indexOf(l);if(at>=0){fixados[at]=novo;gravaFix();}var L=notasL(),ix=L.indexOf(l);if(ix<0)return;L[ix]=novo;marcar('origem.Observações',L.join('\n'));agendar(500);render();},function(){if(!confirm('Excluir esta anotação?'))return;var L=notasL(),ix=L.indexOf(l);if(ix<0)return;L.splice(ix,1);fixados=fixados.filter(function(x){return x!==l;});gravaFix();marcar('origem.Observações',L.join('\n'));agendar(500);render();});(heroV53()?others:destacado(l)?fixed:others).append(item);
   });
   var qs=questoesLista(V('triagem','Alegações'));
   var qfix=[],qCampo=campoModelo('triagem','Questões destacadas');try{var qraw=JSON.parse(S(V('triagem','Questões destacadas'))||'[]');if(Array.isArray(qraw))qfix=[...new Set(qraw.filter(function(q){return typeof q==='string';}).flatMap(questoesLista).filter(function(q){return qs.includes(q);}))];}catch(e){}
@@ -1617,7 +1638,7 @@ function heroOrganizarProntuario(){
     show(0);abrirA(fechar?'':'monitoramento');
     if(!fechar&&foco){
       var t=foco==='sigilo'?sgBox:mon.querySelector('.ct-i.'+foco);
-      if(t){t.scrollIntoView({block:'nearest'});}
+      if(t){var parent=t.closest('.hero-mon-available');if(parent)parent.open=true;var detail=t.querySelector('.ct-mais');if(detail)detail.open=true;t.scrollIntoView({block:'nearest'});}
     }
   }
   /* Sinalizações: ocupam o lugar das etapas no mesmo cartão (não abrem abaixo); "‹ Etapas" ou a mesma categoria voltam. */

@@ -458,3 +458,29 @@ html body.hero-redesign-v53 #hero-ger-dock .hero-ger-part-actions{display:flex;j
 html body.hero-redesign-v53 #hero-ger-dock .hero-ger-part>.gr-tx{padding:8px 10px!important;overflow-wrap:anywhere}
 html body.hero-redesign-v53 #hero-ger-dock .hero-ger-disclaimer{font-size:10px;padding:3px 4px}
 @media(max-width:360px){html body.hero-redesign-v53 #hero-ger-dock .hero-ger-config-grid{grid-template-columns:minmax(0,1fr)}}
+
+/* HERO: controles reais do Monitoramento e indicadores documentais compactos. */
+html body.hero-redesign-v53 #gab .hero-mon-organized{display:grid!important;gap:6px;min-width:0}
+html body.hero-redesign-v53 #gab .hero-mon-section{display:block;margin:0;min-width:0}
+html body.hero-redesign-v53 #gab .hero-mon-heading{display:flex;align-items:center;gap:5px;justify-content:space-between;margin:0 0 4px;padding:6px 7px;background:var(--hero-nav-subtabs,#f9f7f3);border-radius:4px;font:600 11px/1.35 var(--sans,system-ui)}
+html body.hero-redesign-v53 #gab .hero-mon-total{margin-left:auto;font-size:10px}
+html body.hero-redesign-v53 #gab .hero-mon-list{display:grid;grid-template-columns:minmax(0,1fr);gap:5px}
+html body.hero-redesign-v53 #gab .hero-mon-list>.ct-i{--mon-head:#eaf2f8;--mon-edge:#d3e0eb;display:block!important;min-width:0;padding:0!important;border:1px solid var(--mon-edge)!important;border-radius:5px;overflow:hidden;background:var(--cmt-paper,#fff)!important;box-shadow:none!important}
+html body.hero-redesign-v53 #gab .hero-mon-list>.ct-i.urgencia{--mon-head:#f5e5db;--mon-edge:#e1c8b8}
+html body.hero-redesign-v53 #gab .hero-mon-list>.ct-i.meta{--mon-head:#e5eee4;--mon-edge:#c9daca}
+html body.hero-redesign-v53 #gab .hero-mon-list>.ct-i.sobrestamento{--mon-head:#f4ead0;--mon-edge:#e5d6ad}
+html body.hero-redesign-v53 #gab .hero-mon-list>.ct-i.sensivel{--mon-head:#f1e4e2;--mon-edge:#dfc8c4}
+html body.hero-redesign-v53 #gab .hero-mon-list>.ct-i>.ct-h{display:flex;align-items:center;flex-wrap:wrap;gap:4px;padding:6px 7px;background:var(--mon-head);font-size:11px}
+html body.hero-redesign-v53 #gab .hero-mon-list>.ct-i>.ct-h>b{flex:1;min-width:0}
+html body.hero-redesign-v53 #gab .hero-mon-list>.ct-i>:is(.ct-r,.ct-mais){margin:5px 7px;min-width:0}
+html body.hero-redesign-v53 #gab .hero-mon-list .gr{gap:6px;grid-template-columns:repeat(2,minmax(0,1fr))}
+html body.hero-redesign-v53 #gab .hero-mon-list .gf{min-width:0}
+html body.hero-redesign-v53 #gab .hero-mon-list .gf.w{grid-column:1/-1}
+html body.hero-redesign-v53 #gab .hero-mon-list :is(input,select,textarea){max-width:100%;min-width:0;box-sizing:border-box;background:var(--cmt-paper,#fff)}
+html body.hero-redesign-v53 #gab .hero-mon-available:not([open])>.hero-mon-list{display:none}
+html body.hero-redesign-v53 #gab #g-docs .hero-doc-overview{display:flex;flex-wrap:wrap;align-items:center;gap:4px 9px;padding:5px 7px;margin:0 0 5px;border:1px solid var(--cmt-line);border-radius:4px;background:var(--cmt-paper,#fff);font-size:10px;color:var(--cmt-muted)}
+html body.hero-redesign-v53 #gab #g-docs .hero-doc-overview b{font-size:12px;color:var(--cmt-ink)}
+html body.hero-redesign-v53 #gab .hero-case-standard .hero-ann-questions-group .hero-summary-fields>.gf{grid-column:1/-1}
+html body.hero-redesign-v53 #gab .hero-case-standard .hero-case-grid>.hero-case-field{align-content:start}
+html body.hero-redesign-v53 #gab .hero-case-standard .hero-case-grid .ro{display:block;border:1px solid var(--case-border);border-radius:var(--case-radius);padding:6px 8px;min-height:29px;box-sizing:border-box}
+@media(max-width:360px){html body.hero-redesign-v53 #gab .hero-mon-list .gr{grid-template-columns:minmax(0,1fr)}}
