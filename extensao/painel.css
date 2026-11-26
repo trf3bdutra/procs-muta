@@ -2715,3 +2715,23 @@ html body.hero-redesign-v53 #panel-min .hero-review-editorial .hero-review-fused
 .cf-matrix-evidence{margin-top:5px}
 .cf-matrix-evidence>summary{cursor:pointer;font-size:10px;color:var(--muted-fg,#6e767a)}
 .cf-matrix-evidence .cf-tr{font-size:11px;margin:4px 0;padding:5px;overflow-wrap:anywhere}
+
+/* Repertório · faixa de pesquisa comum às três subabas, inspirada no acervo. */
+html body.hero-redesign-v53 :is(#panel-acervo,#panel-par,#panel-modelos) .hero-rep-search{--rep-rule:var(--hero-pront-divider,var(--line));--rep-bg:var(--hero-pront-header,#f3f0e7);--rep-paper:var(--hero-pront-paper,#fff);display:flex!important;flex-direction:column;gap:0!important;padding:0!important;margin:7px 9px 9px!important;background:var(--rep-bg)!important;border:1px solid var(--rep-rule)!important;border-radius:4px!important;overflow:hidden;box-shadow:none!important;min-width:0}
+html body.hero-redesign-v53 :is(#panel-acervo,#panel-par,#panel-modelos) .hero-rep-search-head{display:flex;align-items:center;justify-content:space-between;gap:6px;padding:8px 9px 5px}
+html body.hero-redesign-v53 .hero-rep-search-kicker{font:650 10px/1.4 var(--mono,monospace);text-transform:uppercase;letter-spacing:.1em;color:var(--gold,#96743a)}
+html body.hero-redesign-v53 .hero-rep-search-head>small{font-size:10px;color:var(--muted-fg)}
+html body.hero-redesign-v53 .hero-rep-search .acv-form{gap:0!important;display:flex!important;flex-direction:column}
+html body.hero-redesign-v53 .hero-rep-search .hero-rep-query{display:flex!important;align-items:center;gap:4px!important;padding:4px 8px 8px!important;min-width:0}
+html body.hero-redesign-v53 .hero-rep-search .hero-rep-query input{flex:1 1 0;min-width:0;width:0!important;min-height:30px;border:1px solid var(--rep-rule)!important;border-radius:3px!important;background:var(--rep-paper)!important;font-size:11px!important;padding:6px 8px!important;box-shadow:none!important}
+html body.hero-redesign-v53 .hero-rep-search .hero-rep-query :is(button,.btn,.tu-b){flex:none;min-height:29px;border:1px solid var(--rep-rule)!important;border-radius:3px!important;background:var(--rep-paper)!important;color:var(--fg);padding:4px 7px!important;font-size:10px!important;white-space:nowrap}
+html body.hero-redesign-v53 .hero-rep-search .hero-rep-query button:first-of-type{border-color:var(--primary,#34585b)!important;color:var(--primary,#34585b)}
+html body.hero-redesign-v53 .hero-rep-search .hero-rep-filters{display:flex!important;align-items:center;gap:4px!important;flex-wrap:wrap;padding:6px 8px!important;background:var(--rep-paper)!important;border-top:1px solid var(--rep-rule);min-width:0}
+html body.hero-redesign-v53 .hero-rep-search .hero-rep-filters :is(select,input){flex:1 1 75px;min-width:0;max-width:100%;font-size:10px!important;min-height:26px;padding:4px 5px!important;background:var(--rep-paper)!important;border:1px solid var(--rep-rule)!important;border-radius:3px!important}
+html body.hero-redesign-v53 .hero-rep-search .hero-rep-filters :is(a,button){min-height:25px;padding:3px 5px!important;border:1px solid var(--rep-rule);border-radius:3px;background:var(--rep-paper)}
+html body.hero-redesign-v53 .hero-rep-search .rep-scope{display:flex!important;align-items:center;flex-wrap:wrap;gap:5px!important;padding:6px 8px!important;background:var(--rep-paper)!important;border-top:1px solid var(--rep-rule);margin:0!important}
+html body.hero-redesign-v53 .hero-rep-search .rep-scope select{flex:1 1 120px;min-width:0;min-height:27px;font-size:11px!important;border:1px solid var(--rep-rule)!important;border-radius:3px!important;background:var(--rep-paper)!important}
+html body.hero-redesign-v53 .hero-rep-search .rep-context{flex:1 1 100%;font-size:10px!important}
+html body.hero-redesign-v53 .hero-rep-search :is(#acv-status,.pp-n,.hero-rep-count){margin:0!important;padding:6px 9px!important;background:var(--rep-bg)!important;border-top:1px solid var(--rep-rule);font-size:10px!important;line-height:1.35}
+html body.hero-redesign-v53 .hero-rep-search #acv-status:empty{display:none}
+html body.hero-redesign-v53 :is(#panel-acervo,#panel-par,#panel-modelos) .emd-modos{margin:0 9px!important}

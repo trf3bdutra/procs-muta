@@ -105,15 +105,16 @@
     <!-- EMENTÁRIO (Compêndio) -->
     <section id="panel-acervo" role="tabpanel" aria-labelledby="tab-acervo" hidden>
       <div class="seg pmodos emd-modos" role="tablist" aria-label="Parte do Repertório"><button type="button" role="tab" data-rep-all aria-selected="false">Todos</button><button type="button" role="tab" data-emd="ementario" aria-selected="true">Precedentes</button><button type="button" role="tab" data-emd="par" aria-selected="false">Parágrafos-padrão</button><button type="button" role="tab" data-emd="modelos" aria-selected="false">Modelos</button></div>
-      <div class="acv-faixa">
+      <div class="acv-faixa hero-rep-search">
+        <div class="hero-rep-search-head"><span class="hero-rep-search-kicker">Pesquisa e visualização</span><small>Precedentes</small></div>
         <form id="acv-form" class="acv-form" role="search">
-          <div class="af-l">
+          <div class="af-l hero-rep-query">
             <label class="sr" for="acv-q">Buscar no Ementário</label>
             <input type="search" id="acv-q" placeholder='Buscar: termos, "frase exata", OU, -excluir, radical*' autocomplete="off" title='Busca com a sintaxe do Compêndio: termos soltos = todos; OU entre termos; "frase exata"; -termo exclui; radical* (aposentad*); número do processo'>
             <button class="tu-b" type="submit" title="Buscar" aria-label="Buscar"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button>
             <button class="tu-b" type="button" id="acv-clear" title="Limpar a busca e os filtros" aria-label="Limpar">×</button>
           </div>
-          <div class="af-l">
+          <div class="af-l hero-rep-filters">
             <label class="sr" for="acv-modo">Onde buscar</label>
             <select id="acv-modo" title="Onde buscar: no índice (número, classe, ementa e resultado) ou no texto integral (ementa e inteiro teor)">
               <option value="idx">Índice</option>
