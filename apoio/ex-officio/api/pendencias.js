@@ -101,6 +101,20 @@ function limpar(b, t) {
   if (t.dueDate && !/^\d{4}-\d{2}-\d{2}$/.test(t.dueDate)) t.dueDate = '';
   return t;
 }
+/* Encaminhamento de revisão: uma diligência ativa por processo; nunca transforma
+   apontamentos em decisão judicial, urgência ou bloqueio. Sem texto da minuta. */
+function prepararRevisao(b,reg,u,podeDesignar){
+ const cnj=String(b.cnj||''),n=dg(cnj),p=reg.producao||{},t=reg.triagem||{};
+ if(n.length!==20)throw Object.assign(Error('Processo inválido.'),{status:400});
+ const assignee=String(b.assignee||u).trim();
+ if(!assignee||(!podeDesignar&&L.norm(assignee)!==L.norm(u))||(podeDesignar&&![u,p.CORRETOR,p.SERVIDOR].filter(Boolean).some(v=>L.norm(v)===L.norm(assignee))))throw Object.assign(Error('Responsável não autorizado para esta revisão.'),{status:403});
+ const raw=Array.isArray(b.apontamentos)?b.apontamentos:[],codes=Array.from(new Set(raw.filter(x=>typeof x==='string'&&/^[A-Za-z0-9_-]{1,80}$/.test(x)))).slice(0,40);
+ const pd=String(t['O que falta sanar']||'').split(/\n+/).filter(x=>x.trim()&&!/^\s*✓/.test(x)).length;
+ const ic=String(t.Intercorrências||'').split(/\n+/).filter(x=>x.trim()&&!/^\s*✓/.test(x)).length;
+ if(!codes.length&&!pd&&!ic)throw Object.assign(Error('Nenhum apontamento ou pendência em aberto.'),{status:400});
+ return {origem:'conformidade',origemChave:'rev:'+n,title:'Revisão de conformidade · '+cnj,description:['Conferir os apontamentos encaminhados no Corretor/Gerador e a ficha do processo.','Referências de conferência: '+(codes.join(', ')||'sem apontamentos selecionados')+'.','Pendências da ficha no encaminhamento: '+pd+'; intercorrências: '+ic+'.','A conclusão da diligência não resolve automaticamente sinalizações nem autoriza liberação.'].join('\n').slice(0,2000),assignee,urgency:'Média',dueDate:'',numero:cnj,sessao:'',stage:'todo',revisao:{codigos:codes,pendencias:pd,intercorrencias:ic}};
+}
+function revisaoAtiva(registros,chave){return (registros||[]).find(t=>!t.excluida&&t.origem==='conformidade'&&t.origemChave===chave&&t.stage!=='done');}
 module.exports = async (req, res) => {
   res.setHeader('Cache-Control', 'no-store');
   /* login do Ex Officio ou o link próprio do relator (chave em x-cmt-chave ou ?k=, conferida com CMT_CHAVE) */
@@ -108,6 +122,19 @@ module.exports = async (req, res) => {
   if (!u) return res.status(401).json({ erro: 'Entre com o seu nome e a sua senha.' });
   if (req.query && req.query.com) return require('./_comunicar')(req, res, u);
   try {
+    if(req.query&&req.query.revisao){
+      if(req.method==='GET'){const {dados}=await ler();return res.status(200).json({ok:true,tasks:(dados.registros||[]).filter(t=>!t.excluida&&t.origem==='conformidade'&&t.stage!=='done'&&L.norm(t.assignee)===L.norm(u)).map(t=>({id:t.id,title:t.title,numero:t.numero,stage:t.stage,atualizadoEm:t.atualizadoEm,creator:t.creator}))});}
+      if(req.method!=='POST')return res.status(405).json({erro:'método não aceito'});
+      const b=req.body||{},cnj=String(b.cnj||''),fonte=dg(cnj).length===20?await FICHA.fonteDe(cnj):null;
+      if(!fonte||require('./_sigilo').sigiloDe(fonte))return res.status(403).json({erro:'Encaminhamento disponível apenas para processos identificados sem sigilo.'});
+      const {doc}=await FICHA.lerOpLeitura(),reg=(doc.registros||[]).find(x=>dg(x.processo)===dg(cnj))||{},perfil=await L.acessos(u).catch(()=>({}));
+      const novo=prepararRevisao(b,reg,u,L.gestor(u)||!!perfil.desembargador);
+      for(let n=0;n<4;n++){const {dados,sha}=await ler();dados.registros=dados.registros||[];const ant=revisaoAtiva(dados.registros,novo.origemChave);
+        if(ant)return res.status(200).json({ok:true,existente:true,task:ant});
+        const agora=new Date().toISOString(),task=Object.assign({id:'pen-'+require('node:crypto').randomUUID(),creator:u,criadoEm:agora,_rev:1,atualizadoEm:agora,atualizadoPor:u},novo);dados.registros.push(task);dados.atualizadoEm=agora;
+        try{await L.gravarJson(ARQ,dados,sha,'Revisão de conformidade ('+u+'): '+cnj);return res.status(200).json({ok:true,existente:false,task});}catch(e){if(e.status!==409&&e.status!==422)throw e;}
+      }return res.status(409).json({erro:'O quadro mudou. Tente novamente.'});
+    }
     if (req.method === 'GET') { const { dados } = await ler(); return res.status(200).json({ tasks: (dados.registros || []).filter(t => !t.excluida), equipe: L.equipe() }); }
     /* acerto dos cartões automáticos com as origens: cria o que falta, atualiza o texto, conclui o que a origem já resolveu */
     if (req.method === 'POST' && req.query.sync) {
@@ -129,7 +156,7 @@ module.exports = async (req, res) => {
           if (m) { t._rev = Number(t._rev || 0) + 1; t.atualizadoEm = agora; }
         });
         por.forEach((t, chave) => {
-          if (abertas.has(chave) || t.stage === 'done') return;
+          if (!['intercor','retido','urgencia'].includes(t.origem) || abertas.has(chave) || t.stage === 'done') return;
           t.stage = 'done'; t.concluidaEm = agora; t._rev = Number(t._rev || 0) + 1; t.atualizadoEm = agora; mud.push('concluída ' + chave);
         });
         const corpo = () => ({ tasks: dados.registros.filter(t => !t.excluida), equipe: L.equipe(), travas, acertos: mud.length });
@@ -178,5 +205,5 @@ module.exports = async (req, res) => {
       return res.status(200).json({ ok: true, task: alvo, whatsapp });
     }
     res.status(409).json({ erro: 'O quadro mudou várias vezes seguidas; tente de novo.' });
-  } catch (e) { res.status(500).json({ erro: e.message }); }
+  } catch (e) { res.status([400,403,404,409].includes(e.status)?e.status:500).json({ erro: e.message }); }
 };

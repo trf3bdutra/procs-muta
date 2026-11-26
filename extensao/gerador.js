@@ -650,7 +650,7 @@
     var body=document.createElement('div');body.className='hero-ger-context-body';var info=document.createElement('small');info.className='muted';info.textContent='Conferência estrutural da ficha: '+R.stats.questoes+' questões · '+R.stats.recursos+' recursos · '+R.stats.adotados+' materiais declarados adotados. Para comparar com a minuta efetiva, leia o editor no Corretor.';body.append(info);
     R.itens.forEach(function(x){var p=document.createElement('article');p.className='hero-ger-context-card';var b=document.createElement('b');b.textContent=(x.sev==='alta'?'Alta':x.sev==='media'?'Média':'Baixa')+' · '+x.msg;var s=document.createElement('small');s.textContent=x.sug;p.append(b,s);body.append(p);});
     if(!R.itens.length){var p=document.createElement('p');p.className='muted';p.textContent='Nenhuma inconsistência estrutural detectada nos campos disponíveis; não significa liberação ou revisão concluída.';body.append(p);}
-    d.append(body);var first=host.querySelector('.hero-ger-sheet');if(first)host.insertBefore(d,first);else host.append(d);
+    if(window.MutaConformidade&&window.MutaConformidade.comandoRevisao)window.MutaConformidade.comandoRevisao(body,R.itens);d.append(body);var first=host.querySelector('.hero-ger-sheet');if(first)host.insertBefore(d,first);else host.append(d);
   }
   function pintar(forca) {
     var g = $('ger-app');if(!g&&fundListener){document.removeEventListener('muta:fund-vinculos',fundListener);fundListener=null;} if (!g || (!forca && !visivel())) return;

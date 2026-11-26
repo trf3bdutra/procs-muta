@@ -302,6 +302,12 @@
       return '<details class="hero-not-group hero-gx-group" data-not-group="'+g[0]+'"'+(!X.categoriasFechadas[g[0]]?' open':'')+'><summary><b>'+esc(g[1])+'</b><small>'+V.length+(nl?' · '+nl+' não lidas':'')+'</small></summary>'+V.map(function(n){return itemNot(n,lidas);}).join('')+'</details>';
     }).join('');
   }
+  var REV={u:'',lista:null,erro:'',seq:0};
+  function pintarRevisoes(c){if(!c)return;var q=quem(),old=c.querySelector('#hero-not-revisoes');if(old)old.remove();if(!q.on||REV.u!==q.usuario)return;var d=document.createElement('section');d.id='hero-not-revisoes';d.className='hero-not-local-group';var h=document.createElement('div');h.className='hero-not-local-head';h.textContent='Revisões operacionais comigo'+(REV.lista?' · '+REV.lista.length:'');d.append(h);
+    if(REV.erro||REV.lista===null||!REV.lista.length){var p=document.createElement('p');p.className='muted gx-v';p.textContent=REV.erro||(!REV.lista?'Consultando…':'Nenhuma revisão em aberto.');d.append(p);}
+    (REV.lista||[]).forEach(function(t){var a=document.createElement('article');a.className='gx-it';var b=document.createElement('b');b.textContent=t.title;var s=document.createElement('small');s.className='muted';s.textContent=(NOME_ET[t.stage]||t.stage)+' · '+(t.creator||'Equipe');var btn=document.createElement('button');btn.className='btn line sm';btn.type='button';btn.textContent='Abrir processo';btn.dataset.gxOpen=t.numero;a.append(b,s,btn);d.append(a);});c.append(d);
+  }
+  function lerRevisoes(){var q=quem(),u=q.usuario,seq=++REV.seq;if(!q.on){REV.u='';REV.lista=null;REV.erro='';pintarRevisoes($('del-app'));return Promise.resolve();}if(REV.u!==u){REV.u=u;REV.lista=null;REV.erro='';}return ses.api('/api/pendencias?revisao=1').then(function(r){if(seq!==REV.seq||quem().usuario!==u)return;REV.lista=r.tasks||[];REV.erro='';pintarRevisoes($('del-app'));},function(e){if(seq!==REV.seq||quem().usuario!==u)return;REV.erro=e.message||'Falha ao consultar revisões.';pintarRevisoes($('del-app'));});}
   function pintarDel() {
     var c=$('del-app');if(!c)return;var q=quem();
     var hero=document.body.classList.contains('hero-redesign-v53');if(!pode(q)&&!(hero&&q.on)){c.innerHTML='<p class="muted gx-v">Entre na sua conta para consultar notificações.</p>';return;}
@@ -311,7 +317,7 @@
     var tab=function(k,r){return '<button type="button" role="tab" data-gx-a="'+k+'" aria-selected="'+(X.aba===k)+'">'+esc(r)+'</button>';};
     var m=pode(q)&&X.dados?metricasCmt([['total','Não lidas',N.filter(function(n){return !lidas[chaveLida(n)];}).length],['priority','A deliberar',pend],['lib','Hoje',N.filter(function(n){return String(n.em||'').slice(0,10)===hoje();}).length]]):'';
     var dia=null,corpo=X.aba==='categorias'?agruparNot(N,lidas):N.map(function(n){var d=String(n.em||'').slice(0,10),h='';if(d!==dia){dia=d;h='<h4 class="hero-not-dia">'+esc(d===hoje()?'Hoje':data(d)||'Sem data')+'</h4>';}return h+itemNot(n,lidas);}).join('');
-    var fontes=c.querySelector('#hero-not-local');if(fontes)fontes.remove();c.innerHTML=painelGestao('Notificações','', atualizaBtn('ler-del',X.lendo),m,'')+(pode(q)?faixaGestao('Notificações',tab('cronologia','Cronologia')+tab('categorias','Categorias'),'',X.lendo)+(X.msg?'<p class="gx-msg">'+esc(X.msg)+'</p>':'')+(X.erro?'<p class="gx-v err">'+esc(X.erro)+'</p>':!X.dados?'<p class="muted gx-v">Lendo…</p>':corpo||'<p class="muted gx-v">Nenhuma notificação nesta categoria.</p>'):'');if(hero){if(!fontes){fontes=document.createElement('section');fontes.id='hero-not-local';}c.append(fontes);if(window.MutaAlertas&&window.MutaAlertas.montarFontesNot)window.MutaAlertas.montarFontesNot(fontes);}
+    var fontes=c.querySelector('#hero-not-local');if(fontes)fontes.remove();c.innerHTML=painelGestao('Notificações','', atualizaBtn('ler-del',X.lendo),m,'')+(pode(q)?faixaGestao('Notificações',tab('cronologia','Cronologia')+tab('categorias','Categorias'),'',X.lendo)+(X.msg?'<p class="gx-msg">'+esc(X.msg)+'</p>':'')+(X.erro?'<p class="gx-v err">'+esc(X.erro)+'</p>':!X.dados?'<p class="muted gx-v">Lendo…</p>':corpo||'<p class="muted gx-v">Nenhuma notificação nesta categoria.</p>'):'');if(hero){if(!fontes){fontes=document.createElement('section');fontes.id='hero-not-local';}c.append(fontes);if(window.MutaAlertas&&window.MutaAlertas.montarFontesNot)window.MutaAlertas.montarFontesNot(fontes);pintarRevisoes(c);}
   }
   function urgEtapa(a){
     return a.assinado?'conferir':a.dataLiberacao?'assinar':a.dataCorrecao?'liberar':a.dataMinuta?'corrigir':a.servidor?'minuta':'designar';
@@ -443,7 +449,7 @@
         if(x.dataset.gxRead)return marcarNot(x.dataset.gxRead);
         if(x.dataset.gxOpen){var BR=window.MutaProntuarioBridge;if(window.MutaAbas)window.MutaAbas.ir('pront');if(BR&&BR.abrirProcesso)BR.abrirProcesso(x.dataset.gxOpen);return;}
         if (x.dataset.gxA) { X.aba = x.dataset.gxA; X.msg = ''; return pintarGestao(); }
-        if (x.dataset.gx === 'ler-del') { X.msg = ''; if(window.MutaAlertas&&window.MutaAlertas.lerFontesNot)window.MutaAlertas.lerFontesNot();return lerDel(); }
+        if (x.dataset.gx === 'ler-del') { X.msg = '';if(cx.id==='del-app')lerRevisoes(); if(window.MutaAlertas&&window.MutaAlertas.lerFontesNot)window.MutaAlertas.lerFontesNot();return lerDel(); }
         if (x.dataset.gxResp) { X.resp[x.dataset.gxResp] = !X.resp[x.dataset.gxResp]; pintarGestao(); var ta = cx.querySelector('[data-gx-form="responder"][data-id="' + x.dataset.gxResp + '"] textarea'); if (ta) ta.focus(); return; }
         if (x.dataset.gxAss) return assinar(x.dataset.gxAss, x);
         if (x.dataset.gxDev) { X.dev[x.dataset.gxDev] = !X.dev[x.dataset.gxDev]; pintarGestao(); var td = cx.querySelector('[data-gx-form="devolver"] textarea'); if (td) td.focus(); return; }
@@ -464,11 +470,12 @@
   }
   function abrir(n) {
     if (n === 'dil') { pintarDil(); lerDil(); }
-    if (n === 'del'||n==='urg') { pintarGestao(); lerDel();if(n==='del'&&window.MutaAlertas&&window.MutaAlertas.lerFontesNot)window.MutaAlertas.lerFontesNot(); }
+    if (n === 'del'||n==='urg') { pintarGestao(); lerDel();if(n==='del'){if(window.MutaAlertas&&window.MutaAlertas.lerFontesNot)window.MutaAlertas.lerFontesNot();lerRevisoes();} }
   }
   function iniciar() {
     ligar(); mostrar();
-    if (ses && ses.ouvir) ses.ouvir(function () { D.lista = null; X.dados = null; mostrar(); badges(); pintarDil(); pintarGestao(); });
+    if (ses && ses.ouvir) ses.ouvir(function () { D.lista = null; X.dados = null;REV.seq++;REV.u='';REV.lista=null;REV.erro=''; mostrar(); badges(); pintarDil(); pintarGestao(); });
+    document.addEventListener('muta:revisao-operacional',function(){lerRevisoes();if(pode(quem()))lerDil();});
     /* a cada 3 minutos, enquanto o painel está aberto, os contadores se renovam */
     setInterval(function () { if (pode(quem()) && document.visibilityState === 'visible') { lerDil(); lerDel(); } }, 3 * 60e3);
   }

@@ -78,6 +78,23 @@ function matrizHtml(lista,total){
   }).join('');
   return '<section class="cf-matrix"><div class="cf-matrix-head"><h3>Matriz de ajustes</h3><small>'+lista.length+(lista.length===1?' apontamento':' apontamentos')+(lista.length!==total?' de '+total:'')+'</small></div><div class="cf-matrix-scroll"><table class="cf-matrix-table" aria-label="Matriz de ajustes da conformidade"><colgroup><col style="width:17%"><col style="width:39%"><col style="width:26%"><col style="width:18%"></colgroup><thead><tr><th scope="col">Local</th><th scope="col">Problema</th><th scope="col">Correção</th><th scope="col">Natureza</th></tr></thead><tbody>'+rows+'</tbody></table></div></section>';
 }
+/* Encaminhamento explícito: o texto da minuta permanece no editor. */
+function comandoRevisao(host,opcoes){
+ var FT=window.MutaFontes,G=window.MutaGabinete,ss=window.MutaSessao,ctx=FT&&FT.conformidadeFicha&&FT.conformidadeFicha(),u=ss&&ss.estado();if(!ctx||!G||!u||u.estado!=='on'||window.MUTA_WEB&&window.MUTA_WEB.leitura)return;
+ var root=document.createElement('details');root.className='hero-revisao-command';var title=document.createElement('summary');title.textContent='Encaminhar revisão';root.append(title);var body=document.createElement('div');body.className='hero-revisao-body';root.append(body);host.append(root);
+ function el(t,v){var n=document.createElement(t);if(v!=null)n.textContent=v;return n;}
+ var op=G.op&&G.op()||{},prod=op.producao||{},select=el('select');select.setAttribute('aria-label','Responsável pela revisão');
+ Array.from(new Set([u.usuario].concat(u.gestor||u.perfil==='desembargador'?[prod.CORRETOR,prod.SERVIDOR]:[]).filter(Boolean))).forEach(function(v){var o=el('option',v);o.value=v;select.append(o);});
+ var lbl=el('label','Responsável');lbl.append(select);body.append(lbl);
+ var L=(opcoes||[]).filter(function(x){return x.sev==='alta'||x.sev==='media';}).slice(0,40),checks=[];
+ L.forEach(function(x){var lab=el('label'),cb=el('input');cb.type='checkbox';cb.checked=true;checks.push({cb:cb,regra:x.regra});lab.append(cb,el('span',x.msg));body.append(lab);});
+ body.append(el('small','A diligência também registra a quantidade de pendências e intercorrências abertas da ficha. Não envia o texto do editor, não marca urgência e não altera liberação.'));
+ var b=el('button','Criar diligência'),msg=el('small');b.type='button';b.className='btn line sm';msg.setAttribute('role','status');body.append(b,msg);
+ b.onclick=function(){var now=FT.conformidadeFicha(),usr=ss.estado();if(!now||now.cnj!==ctx.cnj||usr.usuario!==u.usuario||!root.isConnected||JSON.stringify(now)!==JSON.stringify(ctx)){msg.textContent='Ficha ou sessão alterada. Atualize a conferência.';return;}var codigos=checks.filter(function(x){return x.cb.checked;}).map(function(x){return x.regra;});
+  if(!window.confirm('Encaminhar revisão do processo '+ctx.cnj+' para '+select.value+'?'))return;
+  b.disabled=true;msg.textContent='Gravando…';Promise.resolve(G.gravarPendente()).then(function(){var a=FT.conformidadeFicha();if(!a||a.cnj!==ctx.cnj||ss.estado().usuario!==u.usuario||JSON.stringify(a)!==JSON.stringify(ctx))throw Error('Contexto alterado após gravação. Confira novamente.');return G.api('/api/pendencias?revisao=1',{method:'POST',body:JSON.stringify({cnj:ctx.cnj,assignee:select.value,apontamentos:codigos})});}).then(function(r){if(!r||!r.ok||!r.task)throw Error('Servidor não confirmou a diligência.');if(ss.estado().usuario!==u.usuario)return;msg.textContent=r.existente?'Já existe revisão em aberto com '+(r.task.assignee||'responsável a conferir')+'.':'Diligência criada e atribuída a '+r.task.assignee+'.';document.dispatchEvent(new CustomEvent('muta:revisao-operacional'));},function(e){msg.textContent=e.message;}).finally(function(){b.disabled=false;});
+ };
+}
 function render() {
   if (!caixa || !aberta()) return;
   var E = ED.estado(), r = K.r, y = $('panel-conf').scrollTop;
@@ -106,6 +123,7 @@ function render() {
   /* 0.45: a comparação com a minuta-matriz do processo mora aqui (saiu da aba Comparar) */
   var mxh = ''; try { mxh = window.MutaComparar && window.MutaComparar.estruturaConformidade ? window.MutaComparar.estruturaConformidade(render) : ''; } catch (e) {}
   caixa.innerHTML = topo + resumo + mxh + (r.itens.length ? filtros + (hero?matrizHtml(lista,r.itens.length):'<ul class="cf-lista">' + lista.map(itemHtml).join('') + '</ul>') : '<div class="empty"><h3>Nada a apontar</h3>A minuta segue a estrutura e as regras conferidas. Confira os autos antes de liberar.</div>') ;
+  if(hero&&r.fluxo&&r.fluxo.disponivel)comandoRevisao(caixa,r.fluxo.itens);
   $('panel-conf').scrollTop = y;
 }
 function relatorioTexto() {
@@ -142,7 +160,7 @@ document.addEventListener('muta:fund-vinculos',function(){if(ED.estado().texto)a
 document.addEventListener('muta:ficha-conformidade',function(){if(ED.estado().texto)analisar();});
 document.addEventListener('muta:autos', function () { if (ED.estado().texto) analisar(); }); /* 0.40: autos lidos → IDʼs conferidos */
 (function () { var t = $('mc-t'); if (t) t.addEventListener('click', function () { var w = $('min-conf'); rodape(!(w && w.dataset.aberto === '1')); render(); }); rodape(); })();
-window.MutaConformidade = {
+window.MutaConformidade = { comandoRevisao:comandoRevisao,
   /* 0.51: o mesmo contexto (prontuário, autos, questões) para a Conformidade da versão no Cortex */
   contexto: function () { try { return contexto(); } catch (e) { return {}; } },
   abrir: function () { if (!K.dados && !K.erroDados) carregarDados(); render(); var E = ED.estado(); if (!E.texto && !E.lendo) ED.ler().then(analisar, function () { render(); }); },
