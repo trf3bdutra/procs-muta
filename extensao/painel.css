@@ -2783,3 +2783,9 @@ html body.hero-redesign-v53 #panel-min .hero-review-editorial.is-fused .folha .f
 html body.hero-redesign-v53 #panel-min .hero-review-editorial.is-fused .folha .fl-m.ins{background:color-mix(in srgb,#4caf7a 8%,var(--cmp-paper))!important}
 html body.hero-redesign-v53 #panel-min .hero-review-editorial.is-fused .folha .fl-m.del{background:color-mix(in srgb,#c9624d 7%,var(--cmp-paper))!important}
 html body.hero-redesign-v53 #panel-min .hero-review-editorial.is-fused .hero-v53-ref-search{background:var(--cmp-bg)!important;border-top:1px solid var(--cmp-rule)!important}
+
+/* Documentos: a confirmação da ficha é independente da seleção de inteiro teor. */
+html body.hero-redesign-v53 #gab #g-docs .au-ficha-gravada{appearance:auto!important;accent-color:#527b66;opacity:1!important;cursor:default!important;color-scheme:light}
+html body.hero-redesign-v53 #gab #g-docs .au-ficha-status{color:#426e56!important;font-weight:600}
+html body.hero-redesign-v53 #gab #g-docs .au-regravar{display:inline-flex;align-items:center;gap:3px;font-size:9px;white-space:nowrap}
+html body.hero-redesign-v53 #gab #g-docs .au-regravar input{width:12px;height:12px;margin:0;accent-color:var(--primary,#31565a)}
