@@ -32113,12 +32113,14 @@
    "exequente": "UNIÃO FEDERAL",
    "executado": "AGENCIA DE DESENVOLVIMENTO AGRARIO E EXTENSAO RURAL",
    "assunto": "Locação / Permissão / Concessão / Autorização / Cessão de Uso",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "AP2",
+   "tipo_caso": "Apelação da União em procedimento comum · Locação / Permissão / Concessão / Autorização / Cessão de Uso · parcial procedência",
+   "resultado": "Ato a proferir: apelação de União (ID 288036921) da sentença ID 288036913; contrarrazões: ID 288036924 ‖ Proposta pelos precedentes: Voto [VALIDAR paradigma] [VALIDAR: Autor, objeto e apelante (o cabeçalho da apelação menciona a AGRAER e o pedido é da União)]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação da União contra sentença (parcial procedência) da 2ª Vara Federal de Campo Grande em procedimento comum: Diante do exposto, julgo parcialmente procedente o pedido formulado pela parte autora, extinguindo o processo com análise de mérito, na forma do artigo 487, inciso I, do Código de Processo Civil, para condenar a ré a pagar à autora a importância de R$ 13.090,55, correspondente ao valor do conserto do veículo descrito na inicial, conforme orçamento, além do valor mensal de R$ 1.000,00, a título de aluguel, nos termos ",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -32129,7 +32131,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da(s) apelação(ões) (voto)",
+    "materia": "Locação / Permissão / Concessão / Autorização / Cessão de Uso",
+    "origem": "Procedimento comum 0005377-47.2015.4.03.6000 (2ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 288036913 (18/05/2023)",
+    "recurso": "apelação de União (ID 288036921, 10/07/2023)",
+    "preparo": "União: isento (ente público)",
+    "monocratica": "Improvável sem paradigma",
+    "analisado_em": "26/11/2026",
+    "conf_preparo": "União: isento (ente público) · conferido em 26/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 26/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -32139,6 +32152,119 @@
    "chegada": "04/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Locação / Permissão / Concessão / Autorização / Cessão de Uso — [VALIDAR detalhamento]",
+   "especificidades": "► Situação em 26/11/2026: última decisão: ID 288078988 · 09/04/2024 — recebeu o recurso sem conceder efeito suspensivo | última peça: Contrarrazões (advogado de parte) · ID 288036924 · 08/01/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Origem: procedimento comum (2ª Vara Federal de Campo Grande) · Pedido de urgência nas razões [VALIDAR se apreciado] · Tempestividade: União: [VALIDAR tempestividade: intimação da sentença não localizada no texto extraído; apelação de 10/07/2023]",
+   "teor": {
+    "sintese_fatica": "A União [VALIDAR polo] e a AGRAER litigam sobre ressarcimento em concessão ou cessão de bem [VALIDAR objeto; processo administrativo 55000.000181/2016-31]. A sentença julgou parcialmente procedente o pedido e condenou a ré a pagar R$ 13.090 [VALIDAR valor completo].",
+    "inicial": "Procedimento comum ajuizado(a) em 07/11/2019 (petição inicial ID 288036802).",
+    "decisao_recorrida": "Sentença ID 288036913 (18/05/2023): Diante do exposto, julgo parcialmente procedente o pedido formulado pela parte autora, extinguindo o processo com análise de mérito, na forma do artigo 487, inciso I, do Código de Processo Civil, para condenar a ré a pagar à autora a importância de R$ 13.090,55, correspondente ao valor do conserto do veículo descrito na inicial, conforme orçamento, além do valor mensal de R$ 1.000,00, a título de aluguel, nos termos da cláusula nona do Termo de Cessão de Uso nº 026/2010, a partir da constituição em mora, que considero ocorrida em 04/12/2012. Tais valores deverão ser acrescidos juros de mora e ",
+    "recurso": "União (ID 288036921, 10/07/2023): efeito suspensivo e reforma da sentença [VALIDAR teses]",
+    "resposta": "Contrarrazões: ID 288036924 (08/01/2024).",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "[VALIDAR representação]",
+    "preparo": "União: isento (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação da União em procedimento comum · Locação / Permissão / Concessão / Autorização / Cessão de Uso · parcial procedência",
+     "sintese": "A União [VALIDAR polo] e a AGRAER litigam sobre ressarcimento em concessão ou cessão de bem [VALIDAR objeto; processo administrativo 55000.000181/2016-31]. A sentença julgou parcialmente procedente o pedido e condenou a ré a pagar R$ 13.090 [VALIDAR valor completo].",
+     "questoes": "[VALIDAR] 1) responsabilidade pela obrigação reconhecida",
+     "rel": {
+      "razoes": "União (ID 288036921, 10/07/2023): efeito suspensivo e reforma da sentença [VALIDAR teses]",
+      "contrarrazoes": "Contrarrazões: ID 288036924 (08/01/2024)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "288036913",
+      "juizo": "Procedimento comum 0005377-47.2015.4.03.6000 (2ª Vara Federal de Campo Grande)",
+      "dispositivo": "Diante do exposto, julgo parcialmente procedente o pedido formulado pela parte autora, extinguindo o processo com análise de mérito, na forma do artigo 487, inciso I, do Código de Processo Civil, para condenar a ré a pagar à autora a importância de R$ 13.090,55, correspondente ao valor do conserto do veículo descrito na inicial, conforme orçamento, além do valor mensal de R$ 1.000,00, a título de aluguel, nos termos da cláusula nona do Termo de Cessão de Uso nº 026/2010, a partir da constituição em mora, que considero ocorrida em 04/12/2012. Tais valores deverão ser acrescidos juros de mora e "
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2023-07-10",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "União",
+       "tipo": "Apelação",
+       "id": "288036921",
+       "contra": "Sentença"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: parcial procedência",
+       "id": "288036913",
+       "data": "2023-05-18",
+       "nota": "Sentença ID 288036913 (18/05/2023): Diante do exposto, julgo parcialmente procedente o pedido formulado pela parte autora, extinguindo o processo com análise de mérito, na forma do artigo 487, inciso I, do Código de Processo Civil, para condenar a ré a pagar à autora a importância de R$ 13.090,55, correspondente ao valor do conserto do veículo descrito na inicial, conforme orçamento, além do valor mensal de R$ …",
+       "pje": {
+        "tipo": "Sentença"
+       },
+       "trecho": "Diante do exposto, julgo parcialmente procedente o pedido formulado pela parte autora, extinguindo o processo com análise de mérito, na forma do artigo 487, inciso I, do Código de Processo Civil, para condenar a ré a pagar à autora a importância de R$ 13.090,55, correspondente ao valor do conserto …"
+      },
+      {
+       "desc": "Apelação: União",
+       "id": "288036921",
+       "data": "2023-07-10",
+       "nota": "União (ID 288036921, 10/07/2023): efeito suspensivo e reforma da sentença [VALIDAR teses]",
+       "pje": {
+        "tipo": "Apelação",
+        "paginas": 7
+       },
+       "trecho": "Diante do exposto, pede a União: a) a imediata concessão do efeito suspensivo ao presente recurso de apelação, com esteio no §4º do artigo 1012 do CPC, uma vez que presentes os seus requisitos legais; b) seja conhecido e provido o presente recurso de apelação, para que seja reformada a sentença, …"
+      },
+      {
+       "desc": "Contrarrazões",
+       "id": "288036924",
+       "data": "2024-01-08",
+       "nota": "Contrarrazões: ID 288036924 (08/01/2024).",
+       "pje": {
+        "tipo": "Contrarrazões",
+        "descricao": "Contrarrazões de Apelação (1 e 2 Grau)",
+        "paginas": 4
+       },
+       "trecho": "requer-se o recebimento, conhecimento e análise destas contrarrazões, com o total improvimento do Recurso de Apelação interposto pela Recorrente. Termos em que pede deferimento. Campo Grande, 20 de dezembro de 2023. CAIO GAMA MASCARENHAS Procurador(a) do Estado OAB Nº 19.855 B"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 26/11/2026: última decisão: ID 288078988 · 09/04/2024 — recebeu o recurso sem conceder efeito suspensivo | última peça: Contrarrazões (advogado de parte) · ID 288036924 · 08/01/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Origem: procedimento comum (2ª Vara Federal de Campo Grande) · Pedido de urgência nas razões [VALIDAR se apreciado] · Tempestividade: União: [VALIDAR tempestividade: intimação da sentença não localizada no texto extraído; apelação de 10/07/2023]",
+     "assuntoDet": "Locação / Permissão / Concessão / Autorização / Cessão de Uso — [VALIDAR detalhamento]",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Não verificado",
+     "urgTipo": "Pedido nas razões de apelação",
+     "urgSit": "Não verificado"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária",
+    "mov_fonte": "linha do tempo do PJe (autos extraídos)",
+    "ultima_decisao": "Decisão · ID 288078988 · 09/04/2024 — recebeu o recurso sem conceder efeito suspensivo",
+    "ultima_peca": "Contrarrazões (advogado de parte) · ID 288036924 · 08/01/2024",
+    "ultima_informacao": "Ato ordinatório · ID 288036909 · 21/06/2022",
+    "aviso": "Conferido em 26/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 26/11/2026: última decisão: ID 288078988 · 09/04/2024 — recebeu o recurso sem conceder efeito suspensivo | última peça: Contrarrazões (advogado de parte) · ID 288036924 · 08/01/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária"
    }
   },
   {
@@ -32150,12 +32276,14 @@
    "exequente": "INSTITUTO FEDERAL DE EDUCACAO, CIENCIA E TECNOLOGIA DE MATO GROSSO DO SUL",
    "executado": "KAYKY MACIEL DE ALMEIDA PINHEIRO",
    "assunto": "Matrícula - Ausência de Pré-Requisito",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "AP2",
+   "tipo_caso": "Apelação de IFMS em mandado de segurança · Matrícula - Ausência de Pré-Requisito · concessão da segurança",
+   "resultado": "Ato a proferir: apelação de IFMS (ID 291645167) da sentença ID 291645164; contrarrazões não localizadas; parecer do MPF (ID 291645166) ‖ Proposta pelos precedentes: Voto. Situação de fato consolidada [VALIDAR paradigma]. Parecer do MPF pelo desprovimento [VALIDAR: Contrarrazões; Remessa necessária]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação de IFMS contra sentença (concessão da segurança) da 2ª Vara Federal de Campo Grande em mandado de segurança: Diante do exposto, na forma do art. 487, I, do CPC, ratifico a liminar deferida e concedo a segurança pleiteada para manter o impetrante matriculado no curso de Técnico em Mecânica, período vespertino, para qual foi aprovado mediante processo seletivo, se por outro motivo não estiver impedido, devendo a autoridade observar o cumprimento do disposto no edital. Dou por extinto o feito.Indevidos honorários advocatícios,",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -32166,7 +32294,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da(s) apelação(ões) (voto)",
+    "materia": "Matrícula - Ausência de Pré-Requisito",
+    "origem": "Mandado de segurança 5000208-13.2023.4.03.6000 (2ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 291645164 (04/12/2023)",
+    "recurso": "apelação de IFMS (ID 291645167, 12/12/2023)",
+    "preparo": "IFMS: isento (ente público)",
+    "monocratica": "Improvável sem paradigma",
+    "analisado_em": "26/11/2026",
+    "conf_preparo": "IFMS: isento (ente público) · conferido em 26/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 26/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -32176,6 +32315,120 @@
    "chegada": "04/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Matrícula - Ausência de Pré-Requisito — [VALIDAR detalhamento]",
+   "especificidades": "► Situação em 26/11/2026: última decisão: ID 291645175 · 02/05/2024 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 291645164 · 04/12/2023 — sentença: concedeu a segurança | última peça: Parecer (MPF) · ID 291828392 · 05/06/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Origem: mandado de segurança (2ª Vara Federal de Campo Grande) · Gratuidade (ID 291645148) · MPF ID 291645166 (05/12/2023): [VALIDAR sentido] · Pedido de urgência nas razões [VALIDAR se apreciado] · Tempestividade: IFMS: [VALIDAR tempestividade: intimação da sentença não localizada no texto extraído; apelação de 12/12/2023] · No cadastro do lote, as partes estão invertidas: o impetrante é Kayky Maciel de Almeida Pinheiro",
+   "teor": {
+    "sintese_fatica": "Kayky Maciel de Almeida Pinheiro impetrou mandado de segurança contra o IFMS para manter a matrícula no curso Técnico em Mecânica (vespertino), para o qual foi aprovado em processo seletivo. A segurança foi concedida, com ratificação da liminar.",
+    "inicial": "Mandado de segurança ajuizado(a) em 18/01/2023 (petição inicial ID 291644931).",
+    "decisao_recorrida": "Sentença ID 291645164 (04/12/2023): Diante do exposto, na forma do art. 487, I, do CPC, ratifico a liminar deferida e concedo a segurança pleiteada para manter o impetrante matriculado no curso de Técnico em Mecânica, período vespertino, para qual foi aprovado mediante processo seletivo, se por outro motivo não estiver impedido, devendo a autoridade observar o cumprimento do disposto no edital. Dou por extinto o feito.Indevidos honorários advocatícios, nos termos do art. 25 da Lei nº 12.016/2009.Custas na forma lei.Sentença não sujeita ao duplo grau.Publique-se e intimem-se. Oportunamente, arquivem-se.Campo Grande, MS, data e as",
+    "recurso": "IFMS (ID 291645167, 12/12/2023): efeito suspensivo e denegação da segurança [VALIDAR teses]",
+    "resposta": "Não localizadas.",
+    "parecer": "MPF ID 291645166: [VALIDAR sentido]",
+    "memoriais": "Não consta",
+    "representacao": "[VALIDAR representação]",
+    "preparo": "IFMS: isento (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação de IFMS em mandado de segurança · Matrícula - Ausência de Pré-Requisito · concessão da segurança",
+     "sintese": "Kayky Maciel de Almeida Pinheiro impetrou mandado de segurança contra o IFMS para manter a matrícula no curso Técnico em Mecânica (vespertino), para o qual foi aprovado em processo seletivo. A segurança foi concedida, com ratificação da liminar.",
+     "questoes": "1) requisito de matrícula (pré-requisito ou documentação) [VALIDAR]; 2) situação consolidada pela liminar",
+     "rel": {
+      "razoes": "IFMS (ID 291645167, 12/12/2023): efeito suspensivo e denegação da segurança [VALIDAR teses]",
+      "contrarrazoes": "Não localizadas."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "291645164",
+      "juizo": "Mandado de segurança 5000208-13.2023.4.03.6000 (2ª Vara Federal de Campo Grande)",
+      "dispositivo": "Diante do exposto, na forma do art. 487, I, do CPC, ratifico a liminar deferida e concedo a segurança pleiteada para manter o impetrante matriculado no curso de Técnico em Mecânica, período vespertino, para qual foi aprovado mediante processo seletivo, se por outro motivo não estiver impedido, devendo a autoridade observar o cumprimento do disposto no edital. Dou por extinto o feito.Indevidos honorários advocatícios, nos termos do art. 25 da Lei nº 12.016/2009.Custas na forma lei.Sentença não sujeita ao duplo grau.Publique-se e intimem-se. Oportunamente, arquivem-se.Campo Grande, MS, data e as"
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2023-12-12",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "IFMS",
+       "tipo": "Apelação",
+       "id": "291645167",
+       "contra": "Sentença"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: concessão da segurança",
+       "id": "291645164",
+       "data": "2023-12-04",
+       "nota": "Sentença ID 291645164 (04/12/2023): Diante do exposto, na forma do art.",
+       "pje": {
+        "tipo": "Sentença"
+       },
+       "trecho": "Diante do exposto, na forma do art. 487, I, do CPC, ratifico a liminar deferida e concedo a segurança pleiteada para manter o impetrante matriculado no curso de Técnico em Mecânica, período vespertino, para qual foi aprovado mediante processo seletivo, se por outro motivo não estiver impedido, …"
+      },
+      {
+       "desc": "Apelação: IFMS",
+       "id": "291645167",
+       "data": "2023-12-12",
+       "nota": "IFMS (ID 291645167, 12/12/2023): efeito suspensivo e denegação da segurança [VALIDAR teses]",
+       "pje": {
+        "tipo": "Apelação"
+       },
+       "trecho": "requer que seja deferido efeito suspensivo à presente apelação e, ao final, seja ela provida e a sentença reformada, para que a ação seja julgada improcedente, condenando-se a parte autora nos ônus da sucumbência. Termos em que pede deferimento. Brasília, 12 de dezembro de 2023. JOSÉ CARLOS …"
+      },
+      {
+       "desc": "Parecer do MPF",
+       "id": "291645166",
+       "data": "2023-12-05",
+       "nota": "MPF ID 291645166: [VALIDAR sentido] · Origem: mandado de segurança (2ª Vara Federal de Campo Grande) · Gratuidade (ID 291645148) · MPF ID 291645166 (05/12/2023): [VALIDAR sentido] · Pedido de urgência nas razões [VALIDAR se apreciado] · Tempestividade: IFMS: [VALIDAR tempestividade: intimação da sentença não localizada no texto extraído; apelação de 12/12/2023] · No cadastro do lote, as partes estão invertidas: o …",
+       "pje": {
+        "tipo": "Manifestação",
+        "paginas": 1
+       },
+       "trecho": "PR-MS-MANIFESTAÇÃO-15022/2023 MINISTÉRIO PÚBLICO FEDERAL PROCURADORIA DA REPÚBLICA EM MATO GROSSO DO SUL 10º Ofício Juízo: 2ª Vara Federal de Campo Grande/MS Autos nº 5000208-13.2023.4.03.6000 Polo ativo: K. M. D. A. P. Polo passivo: INSTITUTO FEDERAL DE EDUCAÇÃO, CIÊNCIA E TECNOLOGIA DE MATO …"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 26/11/2026: última decisão: ID 291645175 · 02/05/2024 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 291645164 · 04/12/2023 — sentença: concedeu a segurança | última peça: Parecer (MPF) · ID 291828392 · 05/06/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Origem: mandado de segurança (2ª Vara Federal de Campo Grande) · Gratuidade (ID 291645148) · MPF ID 291645166 (05/12/2023): [VALIDAR sentido] · Pedido de urgência nas razões [VALIDAR se apreciado] · Tempestividade: IFMS: [VALIDAR tempestividade: intimação da sentença não localizada no texto extraído; apelação de 12/12/2023] · No cadastro do lote, as partes estão invertidas: o impetrante é Kayky Maciel de Almeida Pinheiro",
+     "assuntoDet": "Matrícula - Ausência de Pré-Requisito — [VALIDAR detalhamento]",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Mandado de segurança",
+     "parecer": "Com parecer",
+     "urgTipo": "Pedido nas razões de apelação",
+     "urgSit": "Não verificado",
+     "idParecer": "291645166",
+     "parecerSentido": "[VALIDAR sentido]"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária",
+    "mov_fonte": "linha do tempo do PJe (autos extraídos)",
+    "ultima_decisao": "Despacho · ID 291645175 · 02/05/2024 — remessa ou redistribuição à Turma Regional (sem exame do recurso)",
+    "ultima_decisao_relevante": "Sentença · ID 291645164 · 04/12/2023 — sentença: concedeu a segurança",
+    "ultima_peca": "Parecer (MPF) · ID 291828392 · 05/06/2024",
+    "ultima_informacao": "Certidão de devolução de mandado · ID 291645169 · 15/02/2024",
+    "aviso": "Conferido em 26/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 26/11/2026: última decisão: ID 291645175 · 02/05/2024 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 291645164 · 04/12/2023 — sentença: concedeu a segurança | última peça: Parecer (MPF) · ID 291828392 · 05/06/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária"
    }
   },
   {
@@ -32224,12 +32477,14 @@
    "exequente": "INSTITUTO NACIONAL DE METROLOGIA, QUALIDADE E TECNOLOGIA - INMETRO",
    "executado": "TIJUCA COMERCIO DE BEBIDAS LTDA",
    "assunto": "Metrológica",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "AP2",
+   "tipo_caso": "Apelação de INMETRO em execução fiscal · Metrológica · extinção sem resolução do mérito",
+   "resultado": "Ato a proferir: apelação de INMETRO (ID 332356894) da sentença ID 332356893; contrarrazões não localizadas ‖ Proposta pelos precedentes: Voto [VALIDAR paradigma]. Etiqueta \"LOTE MULTA - APCIV\". Mesma matéria do item 217 [VALIDAR: Contrarrazões]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação de INMETRO contra sentença (extinção sem resolução do mérito) da 6ª Vara Federal de Campo Grande em execução fiscal: Diante do exposto, indefiro a inicial e JULGO EXTINTO o processo sem resolução de mérito, nos termos do art. 485, IV, c/c art. 202, III, do CTN e art. 2º, §5, III, da Lei 6.830/80. Custas na forma da lei. Causa não sujeita ao pagamento de honorários, uma vez que não foi instaurado o contraditório. Oportunamente, arquive-se. Campo Grande, data e assinatura digitais. CAMPO GRANDE, 10 de abril de 2025. ",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -32240,7 +32495,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da(s) apelação(ões) (voto)",
+    "materia": "Metrológica",
+    "origem": "Execução fiscal 5009656-44.2022.4.03.6000 (6ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 332356893 (10/04/2025)",
+    "recurso": "apelação de INMETRO (ID 332356894, 14/04/2025)",
+    "preparo": "INMETRO: isento (ente público)",
+    "monocratica": "Improvável sem paradigma",
+    "analisado_em": "26/11/2026",
+    "conf_preparo": "INMETRO: isento (ente público) · conferido em 26/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 26/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -32250,6 +32516,107 @@
    "chegada": "01/09/2025",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Metrológica — [VALIDAR detalhamento]",
+   "especificidades": "► Situação em 26/11/2026: última decisão: ID 332356895 · 25/07/2025 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 332356893 · 10/04/2025 — sentença: extinguiu o processo sem resolução do mérito | última peça: Apelação (advogado de parte) · ID 332356894 · 14/04/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Origem: execução fiscal (6ª Vara Federal de Campo Grande) · Tempestividade: INMETRO: ciência em 11/04/2025, prazo de 15 dias até 12/05/2025; apelação de 14/04/2025",
+   "teor": {
+    "sintese_fatica": "O INMETRO promove execução fiscal de multa metrológica contra Tijuca Comércio de Bebidas Ltda. A sentença indeferiu a inicial e extinguiu a execução sem resolução do mérito, por vício da CDA (artigos 202, III, do CTN e 2º, § 5º, III, da Lei 6.830/1980).",
+    "inicial": "Execução fiscal ajuizado(a) em 29/11/2022 (petição inicial ID 332356521).",
+    "decisao_recorrida": "Sentença ID 332356893 (10/04/2025): Diante do exposto, indefiro a inicial e JULGO EXTINTO o processo sem resolução de mérito, nos termos do art. 485, IV, c/c art. 202, III, do CTN e art. 2º, §5, III, da Lei 6.830/80. Custas na forma da lei. Causa não sujeita ao pagamento de honorários, uma vez que não foi instaurado o contraditório. Oportunamente, arquive-se. Campo Grande, data e assinatura digitais. CAMPO GRANDE, 10 de abril de 2025. ",
+    "recurso": "INMETRO (ID 332356894, 14/04/2025): regular prosseguimento da execução fiscal (validade da CDA)",
+    "resposta": "Não localizadas.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "[VALIDAR representação]",
+    "preparo": "INMETRO: isento (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação de INMETRO em execução fiscal · Metrológica · extinção sem resolução do mérito",
+     "sintese": "O INMETRO promove execução fiscal de multa metrológica contra Tijuca Comércio de Bebidas Ltda. A sentença indeferiu a inicial e extinguiu a execução sem resolução do mérito, por vício da CDA (artigos 202, III, do CTN e 2º, § 5º, III, da Lei 6.830/1980).",
+     "questoes": "1) requisitos da CDA de multa administrativa e possibilidade de emenda ou substituição (artigo 2º, § 8º, da LEF; Súmula 392/STJ)",
+     "rel": {
+      "razoes": "INMETRO (ID 332356894, 14/04/2025): regular prosseguimento da execução fiscal (validade da CDA)",
+      "contrarrazoes": "Não localizadas."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "332356893",
+      "juizo": "Execução fiscal 5009656-44.2022.4.03.6000 (6ª Vara Federal de Campo Grande)",
+      "dispositivo": "Diante do exposto, indefiro a inicial e JULGO EXTINTO o processo sem resolução de mérito, nos termos do art. 485, IV, c/c art. 202, III, do CTN e art. 2º, §5, III, da Lei 6.830/80. Custas na forma da lei. Causa não sujeita ao pagamento de honorários, uma vez que não foi instaurado o contraditório. Oportunamente, arquive-se. Campo Grande, data e assinatura digitais. CAMPO GRANDE, 10 de abril de 2025. "
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2025-04-14",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "INMETRO",
+       "tipo": "Apelação",
+       "id": "332356894",
+       "contra": "Sentença"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: extinção sem resolução do mérito",
+       "id": "332356893",
+       "data": "2025-04-10",
+       "nota": "Sentença ID 332356893 (10/04/2025): Diante do exposto, indefiro a inicial e JULGO EXTINTO o processo sem resolução de mérito, nos termos do art.",
+       "pje": {
+        "tipo": "Sentença"
+       },
+       "trecho": "Diante do exposto, indefiro a inicial e JULGO EXTINTO o processo sem resolução de mérito, nos termos do art. 485, IV, c/c art. 202, III, do CTN e art. 2º, §5, III, da Lei 6.830/80. Custas na forma da lei. Causa não sujeita ao pagamento de honorários, uma vez que não foi instaurado o contraditório. …"
+      },
+      {
+       "desc": "Apelação: INMETRO",
+       "id": "332356894",
+       "data": "2025-04-14",
+       "nota": "INMETRO (ID 332356894, 14/04/2025): regular prosseguimento da execução fiscal (validade da CDA)",
+       "pje": {
+        "tipo": "Apelação",
+        "descricao": "P APELAÇÃO 2051705932 EM 14/04/2025 11:47:31",
+        "paginas": 10
+       },
+       "trecho": "Pelo exposto, requer a procedência do recurso para reformar a sentença, determinando-se o prosseguimento regular da execução fiscal. Nesses termos, pede deferimento. São Paulo, 14 de abril de 2025. (assinado digitalmente) Luciane de Lima Vellosa Schiaveto Procuradora Federal"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 26/11/2026: última decisão: ID 332356895 · 25/07/2025 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 332356893 · 10/04/2025 — sentença: extinguiu o processo sem resolução do mérito | última peça: Apelação (advogado de parte) · ID 332356894 · 14/04/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Origem: execução fiscal (6ª Vara Federal de Campo Grande) · Tempestividade: INMETRO: ciência em 11/04/2025, prazo de 15 dias até 12/05/2025; apelação de 14/04/2025",
+     "assuntoDet": "Metrológica — [VALIDAR detalhamento]",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Tempestivo",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Não verificado"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária",
+    "mov_fonte": "linha do tempo do PJe (autos extraídos)",
+    "ultima_decisao": "Despacho · ID 332356895 · 25/07/2025 — remessa ou redistribuição à Turma Regional (sem exame do recurso)",
+    "ultima_decisao_relevante": "Sentença · ID 332356893 · 10/04/2025 — sentença: extinguiu o processo sem resolução do mérito",
+    "ultima_peca": "Apelação (advogado de parte) · ID 332356894 · 14/04/2025",
+    "ultima_informacao": "Informação · ID 332356896 · 31/07/2025",
+    "aviso": "Conferido em 26/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 26/11/2026: última decisão: ID 332356895 · 25/07/2025 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 332356893 · 10/04/2025 — sentença: extinguiu o processo sem resolução do mérito | última peça: Apelação (advogado de parte) · ID 332356894 · 14/04/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária"
    }
   },
   {
@@ -32261,12 +32628,14 @@
    "exequente": "INSTITUTO NACIONAL DE METROLOGIA, QUALIDADE E TECNOLOGIA - INMETRO",
    "executado": "MARILENE FERREIRA BELTRAO",
    "assunto": "Metrológica",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "AP2",
+   "tipo_caso": "Apelação de INMETRO em execução fiscal · Metrológica · extinção sem resolução do mérito",
+   "resultado": "Ato a proferir: apelação de INMETRO (ID 341370702) da sentença ID 341370698, integrada pela sentença dos embargos de declaração ID 341370701; contrarrazões não localizadas ‖ Proposta pelos precedentes: Voto [VALIDAR paradigma]. Etiqueta \"LOTE MULTA - APCIV\". Mesma matéria do item 216 [VALIDAR: Contrarrazões]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação de INMETRO contra sentença (extinção sem resolução do mérito) da 6ª Vara Federal de Campo Grande em execução fiscal: Diante do exposto, indefiro a inicial e JULGO EXTINTO o processo sem resolução de mérito, nos termos do art. 485, IV, c/c art. 202, III, do CTN e art. 2º, §5, III, da Lei 6.830/80. Custas na forma da lei. Causa não sujeita ao pagamento de honorários, uma vez que não foi instaurado o contraditório. Oportunamente, arquive-se. Campo Grande, data e assinatura digitais. ",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -32277,7 +32646,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da(s) apelação(ões) (voto)",
+    "materia": "Metrológica",
+    "origem": "Execução fiscal 5004981-09.2020.4.03.6000 (6ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 341370698 (10/04/2025)",
+    "recurso": "apelação de INMETRO (ID 341370702, 20/10/2025)",
+    "preparo": "INMETRO: isento (ente público)",
+    "monocratica": "Improvável sem paradigma",
+    "analisado_em": "26/11/2026",
+    "conf_preparo": "INMETRO: isento (ente público) · conferido em 26/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 26/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -32287,6 +32667,117 @@
    "chegada": "12/11/2025",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Metrológica — [VALIDAR detalhamento]",
+   "especificidades": "► Situação em 26/11/2026: última decisão: ID 341370703 · 28/10/2025 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 341370701 · 07/10/2025 — sentença (dispositivo a conferir) | última peça: Apelação (PGF) · ID 341370702 · 20/10/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Origem: execução fiscal (6ª Vara Federal de Campo Grande) · Embargos de declaração julgados (ID 341370701) · Tempestividade: INMETRO: [VALIDAR tempestividade: intimação da sentença não localizada no texto extraído; apelação de 20/10/2025]",
+   "teor": {
+    "sintese_fatica": "O INMETRO promove execução fiscal de multa metrológica contra Marilene Ferreira Beltrão. A sentença indeferiu a inicial e extinguiu a execução sem resolução do mérito, por vício da CDA; os embargos de declaração foram rejeitados.",
+    "inicial": "Execução fiscal ajuizado(a) em 31/07/2020 (petição inicial ID 341370616).",
+    "decisao_recorrida": "Sentença ID 341370698 (10/04/2025): Diante do exposto, indefiro a inicial e JULGO EXTINTO o processo sem resolução de mérito, nos termos do art. 485, IV, c/c art. 202, III, do CTN e art. 2º, §5, III, da Lei 6.830/80. Custas na forma da lei. Causa não sujeita ao pagamento de honorários, uma vez que não foi instaurado o contraditório. Oportunamente, arquive-se. Campo Grande, data e assinatura digitais. ",
+    "recurso": "INMETRO (ID 341370702, 20/10/2025): regular prosseguimento da execução fiscal (validade da CDA) [VALIDAR: texto extraído repete o dispositivo]",
+    "resposta": "Não localizadas.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "[VALIDAR representação]",
+    "preparo": "INMETRO: isento (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação de INMETRO em execução fiscal · Metrológica · extinção sem resolução do mérito",
+     "sintese": "O INMETRO promove execução fiscal de multa metrológica contra Marilene Ferreira Beltrão. A sentença indeferiu a inicial e extinguiu a execução sem resolução do mérito, por vício da CDA; os embargos de declaração foram rejeitados.",
+     "questoes": "1) requisitos da CDA de multa administrativa e possibilidade de emenda ou substituição",
+     "rel": {
+      "razoes": "INMETRO (ID 341370702, 20/10/2025): regular prosseguimento da execução fiscal (validade da CDA) [VALIDAR: texto extraído repete o dispositivo]",
+      "contrarrazoes": "Não localizadas."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "341370698",
+      "juizo": "Execução fiscal 5004981-09.2020.4.03.6000 (6ª Vara Federal de Campo Grande)",
+      "dispositivo": "Diante do exposto, indefiro a inicial e JULGO EXTINTO o processo sem resolução de mérito, nos termos do art. 485, IV, c/c art. 202, III, do CTN e art. 2º, §5, III, da Lei 6.830/80. Custas na forma da lei. Causa não sujeita ao pagamento de honorários, uma vez que não foi instaurado o contraditório. Oportunamente, arquive-se. Campo Grande, data e assinatura digitais. "
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2025-10-20",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "INMETRO",
+       "tipo": "Apelação",
+       "id": "341370702",
+       "contra": "Sentença"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: extinção sem resolução do mérito",
+       "id": "341370698",
+       "data": "2025-04-10",
+       "nota": "Sentença ID 341370698 (10/04/2025): Diante do exposto, indefiro a inicial e JULGO EXTINTO o processo sem resolução de mérito, nos termos do art. 485, IV, c/c art. 202, III, do CTN e art. 2º, §5, III, da Lei 6.830/80. Custas na forma da lei. Causa não sujeita ao pagamento de honorários, uma vez que não foi instaurado o contraditório. Oportunamente, arquive-se. Campo Grande, data e assinatura digitais.",
+       "pje": {
+        "tipo": "Sentença"
+       },
+       "trecho": "Diante do exposto, indefiro a inicial e JULGO EXTINTO o processo sem resolução de mérito, nos termos do art. 485, IV, c/c art. 202, III, do CTN e art. 2º, §5, III, da Lei 6.830/80. Custas na forma da lei. Causa não sujeita ao pagamento de honorários, uma vez que não foi instaurado o contraditório. …"
+      },
+      {
+       "desc": "Sentença: embargos de declaração",
+       "id": "341370701",
+       "data": "2025-10-07",
+       "nota": "Origem: execução fiscal (6ª Vara Federal de Campo Grande) · Embargos de declaração julgados (ID 341370701) · Tempestividade: INMETRO: [VALIDAR tempestividade: intimação da sentença não localizada no texto extraído; apelação de 20/10/2025]",
+       "pje": {
+        "tipo": "Sentença"
+       },
+       "trecho": "ANTE O EXPOSTO:Conheço dos embargos de declaração opostos, porém, rejeito-os, nos termos da fundamentação supra.INTIMEM-SE. CUMPRA-SE.Campo Grande, data da assinatura eletrônica.BRUNO CEZAR DA CUNHA TEIXEIRAJuiz Federal"
+      },
+      {
+       "desc": "Apelação: INMETRO",
+       "id": "341370702",
+       "data": "2025-10-20",
+       "nota": "INMETRO (ID 341370702, 20/10/2025): regular prosseguimento da execução fiscal (validade da CDA) [VALIDAR: texto extraído repete o dispositivo]",
+       "pje": {
+        "tipo": "Apelação",
+        "descricao": "P APELAÇÃO 2979411727 EM 20/10/2025 16:12:49",
+        "paginas": 6
+       },
+       "trecho": "requer que, supridas por esse E. Tribunal as deficiências deste recurso, seja o mesmo conhecido e provido para o fim de ser reformada a sentença ora combatida que indeferiu a inicial e julgou extinto o processo sem resolução de mérito, como susa demonstrado, prosseguindo-se a execução fiscal até …"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 26/11/2026: última decisão: ID 341370703 · 28/10/2025 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 341370701 · 07/10/2025 — sentença (dispositivo a conferir) | última peça: Apelação (PGF) · ID 341370702 · 20/10/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Origem: execução fiscal (6ª Vara Federal de Campo Grande) · Embargos de declaração julgados (ID 341370701) · Tempestividade: INMETRO: [VALIDAR tempestividade: intimação da sentença não localizada no texto extraído; apelação de 20/10/2025]",
+     "assuntoDet": "Metrológica — [VALIDAR detalhamento]",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Não verificado"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária",
+    "mov_fonte": "linha do tempo do PJe (autos extraídos)",
+    "ultima_decisao": "Despacho · ID 341370703 · 28/10/2025 — remessa ou redistribuição à Turma Regional (sem exame do recurso)",
+    "ultima_decisao_relevante": "Sentença · ID 341370701 · 07/10/2025 — sentença (dispositivo a conferir)",
+    "ultima_peca": "Apelação (PGF) · ID 341370702 · 20/10/2025",
+    "ultima_informacao": "Informação · ID 341370704 · 29/10/2025",
+    "aviso": "Conferido em 26/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 26/11/2026: última decisão: ID 341370703 · 28/10/2025 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 341370701 · 07/10/2025 — sentença (dispositivo a conferir) | última peça: Apelação (PGF) · ID 341370702 · 20/10/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária"
    }
   },
   {
@@ -32298,12 +32789,14 @@
    "exequente": "INSTITUTO NACIONAL DE METROLOGIA, QUALIDADE E TECNOLOGIA - INMETRO",
    "executado": "LL EXTINTORES LTDA",
    "assunto": "Metrológica",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "AP2",
+   "tipo_caso": "Apelação de INMETRO em execução fiscal · Metrológica · [VALIDAR resultado]",
+   "resultado": "Ato a proferir: apelação de INMETRO (ID 344299631) da sentença ID 344299630; contrarrazões não localizadas ‖ Proposta pelos precedentes: Voto. Tema 566/STJ. Referência do Relator: ApCiv 0003604-93.2017.4.03.6000 (09/06/2026), prescrição intercorrente afastada [VALIDAR aderência]. Etiqueta \"LOTE MULTA - APCIV\" [VALIDAR: Contrarrazões]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação de INMETRO contra sentença ([VALIDAR resultado]) da 2ª Vara Federal de Dourados em execução fiscal: Diante do exposto, reconheço a prescrição intercorrente, conforme o artigo 40, § 4°, da LEF e julgo extinto o processo, nos termos do 924, V, do Código de Processo Civil e do art. 156, V, do CTN.Sem condenação em honorários advocatícios. Custas ex lege.Determino o levantamento de eventuais constrições que recaiam sobre os bens do executado relativos a presente execução fiscal, ressalvada eventual penhora no rosto dos",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -32314,7 +32807,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da(s) apelação(ões) (voto)",
+    "materia": "Metrológica",
+    "origem": "Execução fiscal 5001115-55.2018.4.03.6002 (2ª Vara Federal de Dourados)",
+    "decisao_agravada": "Sentença ID 344299630 (24/09/2025)",
+    "recurso": "apelação de INMETRO (ID 344299631, 06/10/2025)",
+    "preparo": "INMETRO: isento (ente público)",
+    "monocratica": "Improvável sem paradigma",
+    "analisado_em": "26/11/2026",
+    "conf_preparo": "INMETRO: isento (ente público) · conferido em 26/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 26/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -32324,6 +32828,106 @@
    "chegada": "04/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Metrológica — [VALIDAR detalhamento]",
+   "especificidades": "► Situação em 26/11/2026: última decisão: ID 344299682 · 25/11/2025 — …rmalidades legais.Deixo de intimar a parte contrária para contrarrazões em razão de não haver advogado constituído nos autos.Dourados/MS, datado e assinado eletronicamente.VITOR HENRIQUE FERNANDEZJuiz Federal Substituto | última peça: Apelação (PGF) · ID 344299631 · 06/10/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Origem: execução fiscal (2ª Vara Federal de Dourados) · Tempestividade: INMETRO: [VALIDAR tempestividade: intimação da sentença não localizada no texto extraído; apelação de 06/10/2025]",
+   "teor": {
+    "sintese_fatica": "O INMETRO promove execução fiscal contra LL Extintores Ltda. A sentença reconheceu a prescrição intercorrente (artigo 40, § 4º, da LEF) e extinguiu a execução.",
+    "inicial": "Execução fiscal ajuizado(a) em 14/06/2018 (petição inicial ID 344299588).",
+    "decisao_recorrida": "Sentença ID 344299630 (24/09/2025): Diante do exposto, reconheço a prescrição intercorrente, conforme o artigo 40, § 4°, da LEF e julgo extinto o processo, nos termos do 924, V, do Código de Processo Civil e do art. 156, V, do CTN.Sem condenação em honorários advocatícios. Custas ex lege.Determino o levantamento de eventuais constrições que recaiam sobre os bens do executado relativos a presente execução fiscal, ressalvada eventual penhora no rosto dos autos.Com a eventual interposição de recurso tempestivo, determino, desde já, a intimação da parte contrária para contrarrazões no prazo legal, bem como a oportuna remessa dos aut",
+    "recurso": "INMETRO (ID 344299631, 06/10/2025): afastamento da prescrição intercorrente (interrupção retroativa pela petição que requereu a diligência frutífera; Tema 566/STJ)",
+    "resposta": "Não localizadas.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "[VALIDAR representação]",
+    "preparo": "INMETRO: isento (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação de INMETRO em execução fiscal · Metrológica · [VALIDAR resultado]",
+     "sintese": "O INMETRO promove execução fiscal contra LL Extintores Ltda. A sentença reconheceu a prescrição intercorrente (artigo 40, § 4º, da LEF) e extinguiu a execução.",
+     "questoes": "1) prescrição intercorrente (Tema 566/STJ)",
+     "rel": {
+      "razoes": "INMETRO (ID 344299631, 06/10/2025): afastamento da prescrição intercorrente (interrupção retroativa pela petição que requereu a diligência frutífera; Tema 566/STJ)",
+      "contrarrazoes": "Não localizadas."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "344299630",
+      "juizo": "Execução fiscal 5001115-55.2018.4.03.6002 (2ª Vara Federal de Dourados)",
+      "dispositivo": "Diante do exposto, reconheço a prescrição intercorrente, conforme o artigo 40, § 4°, da LEF e julgo extinto o processo, nos termos do 924, V, do Código de Processo Civil e do art. 156, V, do CTN.Sem condenação em honorários advocatícios. Custas ex lege.Determino o levantamento de eventuais constrições que recaiam sobre os bens do executado relativos a presente execução fiscal, ressalvada eventual penhora no rosto dos autos.Com a eventual interposição de recurso tempestivo, determino, desde já, a intimação da parte contrária para contrarrazões no prazo legal, bem como a oportuna remessa dos aut"
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2025-10-06",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "INMETRO",
+       "tipo": "Apelação",
+       "id": "344299631",
+       "contra": "Sentença"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: [VALIDAR resultado]",
+       "id": "344299630",
+       "data": "2025-09-24",
+       "nota": "Sentença ID 344299630 (24/09/2025): Diante do exposto, reconheço a prescrição intercorrente, conforme o artigo 40, § 4°, da LEF e julgo extinto o processo, nos termos do 924, V, do Código de Processo Civil e do art.",
+       "pje": {
+        "tipo": "Sentença"
+       },
+       "trecho": "Logo, consolidada a prescrição intercorrente.Diante do exposto, reconheço a prescrição intercorrente, conforme o artigo 40, § 4°, da LEF e julgo extinto o processo, nos termos do 924, V, do Código de Processo Civil e do art. 156, V, do CTN.Sem condenação em honorários advocatícios. Custas ex …"
+      },
+      {
+       "desc": "Apelação: INMETRO",
+       "id": "344299631",
+       "data": "2025-10-06",
+       "nota": "INMETRO (ID 344299631, 06/10/2025): afastamento da prescrição intercorrente (interrupção retroativa pela petição que requereu a diligência frutífera; Tema 566/STJ)",
+       "pje": {
+        "tipo": "Apelação",
+        "descricao": "P APELAÇÃO 2959195075 EM 06/10/2025 19:43:06",
+        "paginas": 3
+       },
+       "trecho": "requereu a providência frutífera . DO PEDIDO Em face de todo o exposto, a autarquia pede e espera o PROVIMENTO do presente apelo, com a manutenção do processo executivo, afastando-se a prescrição na espécie , permitindo-se o prosseguimento da cobrança. São Paulo, 06 de outubro de 2025. MARIA ISABEL …"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 26/11/2026: última decisão: ID 344299682 · 25/11/2025 — …rmalidades legais.Deixo de intimar a parte contrária para contrarrazões em razão de não haver advogado constituído nos autos.Dourados/MS, datado e assinado eletronicamente.VITOR HENRIQUE FERNANDEZJuiz Federal Substituto | última peça: Apelação (PGF) · ID 344299631 · 06/10/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Origem: execução fiscal (2ª Vara Federal de Dourados) · Tempestividade: INMETRO: [VALIDAR tempestividade: intimação da sentença não localizada no texto extraído; apelação de 06/10/2025]",
+     "assuntoDet": "Metrológica — [VALIDAR detalhamento]",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Não verificado"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária",
+    "mov_fonte": "linha do tempo do PJe (autos extraídos)",
+    "ultima_decisao": "Despacho · ID 344299682 · 25/11/2025 — …rmalidades legais.Deixo de intimar a parte contrária para contrarrazões em razão de não haver advogado constituído nos autos.Dourados/MS, datado e assinado eletronicamente.VITOR HENRIQUE FERNANDEZJuiz Federal Substituto",
+    "ultima_peca": "Apelação (PGF) · ID 344299631 · 06/10/2025",
+    "ultima_informacao": "Informação · ID 344299683 · 25/11/2025",
+    "aviso": "Conferido em 26/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 26/11/2026: última decisão: ID 344299682 · 25/11/2025 — …rmalidades legais.Deixo de intimar a parte contrária para contrarrazões em razão de não haver advogado constituído nos autos.Dourados/MS, datado e assinado eletronicamente.VITOR HENRIQUE FERNANDEZJuiz Federal Substituto | última peça: Apelação (PGF) · ID 344299631 · 06/10/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária"
    }
   },
   {
@@ -32335,12 +32939,14 @@
    "exequente": "INSTITUTO NACIONAL DE METROLOGIA, QUALIDADE E TECNOLOGIA - INMETRO.",
    "executado": "C A DE OLIVEIRA & CIA LTDA",
    "assunto": "Metrológica",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "AP2",
+   "tipo_caso": "Apelação de INMETRO em procedimento comum · Metrológica · procedência",
+   "resultado": "Ato a proferir: apelação de INMETRO (ID 306564502) da sentença ID 306564500; contrarrazões: ID 306564505 ‖ Proposta pelos precedentes: Voto [VALIDAR paradigma]. Etiqueta \"LOTE MULTA - APCIV\"",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação de INMETRO contra sentença (procedência) da 1ª Vara Federal de Dourados em procedimento comum: Pelo exposto, é PROCEDENTE a demanda, resolvendo o mérito do processo, nos termos do art. 487, I, do CPC, a fim de acolher os pedidos vindicados na inicial. Declara-se inexistente o débito no valor de R$ 1.892,68 (um mil, oitocentos e noventa e dois reais e sessenta e oito centavos), referente à CDA L0098F099. Condena-se o requerido a restituir as quantias pagas indevidamente pela autora, referente ao débito e aos em",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -32351,7 +32957,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da(s) apelação(ões) (voto)",
+    "materia": "Metrológica",
+    "origem": "Procedimento comum 5001661-08.2021.4.03.6002 (1ª Vara Federal de Dourados)",
+    "decisao_agravada": "Sentença ID 306564500 (24/07/2024)",
+    "recurso": "apelação de INMETRO (ID 306564502, 11/09/2024)",
+    "preparo": "INMETRO: isento (ente público)",
+    "monocratica": "Improvável sem paradigma",
+    "analisado_em": "26/11/2026",
+    "conf_preparo": "INMETRO: isento (ente público) · conferido em 26/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 26/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -32361,6 +32978,115 @@
    "chegada": "04/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Metrológica — [VALIDAR detalhamento]",
+   "especificidades": "► Situação em 26/11/2026: última decisão: ID 306564501 · 25/07/2024 — sentença (dispositivo a conferir) | última peça: Contrarrazões de Recurso (apelado) · ID 306564505 · 07/10/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Origem: procedimento comum (1ª Vara Federal de Dourados) · Tempestividade: INMETRO: [VALIDAR tempestividade: intimação da sentença não localizada no texto extraído; apelação de 11/09/2024] · No cadastro do lote, as partes estão invertidas: a autora é C A de Oliveira & Cia. Ltda.",
+   "teor": {
+    "sintese_fatica": "C A de Oliveira & Cia. Ltda. pediu a declaração de inexistência de débito de multa metrológica do INMETRO. A sentença julgou procedente o pedido e declarou inexistente o débito de R$ 1.892,68.",
+    "inicial": "Procedimento comum ajuizado(a) em 23/06/2021 (petição inicial ID 306564354).",
+    "decisao_recorrida": "Sentença ID 306564500 (24/07/2024): Pelo exposto, é PROCEDENTE a demanda, resolvendo o mérito do processo, nos termos do art. 487, I, do CPC, a fim de acolher os pedidos vindicados na inicial. Declara-se inexistente o débito no valor de R$ 1.892,68 (um mil, oitocentos e noventa e dois reais e sessenta e oito centavos), referente à CDA L0098F099. Condena-se o requerido a restituir as quantias pagas indevidamente pela autora, referente ao débito e aos emolumentos de cartório, com correção monetária e juros de mora a contar do efetivo pagamento pela autora, sendo que os índices serão os estipulados no Manual de Cálculos da Justiça ",
+    "recurso": "INMETRO (ID 306564502, 11/09/2024): reforma da sentença e inversão da sucumbência [VALIDAR teses]",
+    "resposta": "Contrarrazões: ID 306564505 (07/10/2024).",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "[VALIDAR representação]",
+    "preparo": "INMETRO: isento (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação de INMETRO em procedimento comum · Metrológica · procedência",
+     "sintese": "C A de Oliveira & Cia. Ltda. pediu a declaração de inexistência de débito de multa metrológica do INMETRO. A sentença julgou procedente o pedido e declarou inexistente o débito de R$ 1.892,68.",
+     "questoes": "[VALIDAR fundamento] 1) validade do auto de infração metrológica",
+     "rel": {
+      "razoes": "INMETRO (ID 306564502, 11/09/2024): reforma da sentença e inversão da sucumbência [VALIDAR teses]",
+      "contrarrazoes": "Contrarrazões: ID 306564505 (07/10/2024)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "306564500",
+      "juizo": "Procedimento comum 5001661-08.2021.4.03.6002 (1ª Vara Federal de Dourados)",
+      "dispositivo": "Pelo exposto, é PROCEDENTE a demanda, resolvendo o mérito do processo, nos termos do art. 487, I, do CPC, a fim de acolher os pedidos vindicados na inicial. Declara-se inexistente o débito no valor de R$ 1.892,68 (um mil, oitocentos e noventa e dois reais e sessenta e oito centavos), referente à CDA L0098F099. Condena-se o requerido a restituir as quantias pagas indevidamente pela autora, referente ao débito e aos emolumentos de cartório, com correção monetária e juros de mora a contar do efetivo pagamento pela autora, sendo que os índices serão os estipulados no Manual de Cálculos da Justiça "
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2024-09-11",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "INMETRO",
+       "tipo": "Apelação",
+       "id": "306564502",
+       "contra": "Sentença"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: procedência",
+       "id": "306564500",
+       "data": "2024-07-24",
+       "nota": "Sentença ID 306564500 (24/07/2024): Pelo exposto, é PROCEDENTE a demanda, resolvendo o mérito do processo, nos termos do art.",
+       "pje": {
+        "tipo": "Sentença"
+       },
+       "trecho": "Pelo exposto, é PROCEDENTE a demanda, resolvendo o mérito do processo, nos termos do art. 487, I, do CPC, a fim de acolher os pedidos vindicados na inicial. Declara-se inexistente o débito no valor de R$ 1.892,68 (um mil, oitocentos e noventa e dois reais e sessenta e oito centavos), referente à …"
+      },
+      {
+       "desc": "Apelação: INMETRO",
+       "id": "306564502",
+       "data": "2024-09-11",
+       "nota": "INMETRO (ID 306564502, 11/09/2024): reforma da sentença e inversão da sucumbência [VALIDAR teses]",
+       "pje": {
+        "tipo": "Apelação"
+       },
+       "trecho": "Ante o exposto, e do mais que dos autos consta, requer seja o presente recurso recebido e, ao final, seja dado integral PROVIMENTO à apelação, com a consequente reforma da r. sentença e condenação da parte contrária nos ônus da sucumbência. Para fins de prequestionamento, viabilizador do manejo dos …"
+      },
+      {
+       "desc": "Contrarrazões",
+       "id": "306564505",
+       "data": "2024-10-07",
+       "nota": "Contrarrazões: ID 306564505 (07/10/2024).",
+       "pje": {
+        "tipo": "Contrarrazões de Recurso",
+        "paginas": 5
+       },
+       "trecho": "Ante o exposto, diante das provas robustas produzidas pela recorrida, aliada a ausência de fundamentos ou mesmo provas apresentadas pela recorrente, requer a Vossas Excelências: a) o improvimento dos pedidos da apelação, com a manutenção integral da r. sentença de primeiro grau por seus próprios …"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 26/11/2026: última decisão: ID 306564501 · 25/07/2024 — sentença (dispositivo a conferir) | última peça: Contrarrazões de Recurso (apelado) · ID 306564505 · 07/10/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Origem: procedimento comum (1ª Vara Federal de Dourados) · Tempestividade: INMETRO: [VALIDAR tempestividade: intimação da sentença não localizada no texto extraído; apelação de 11/09/2024] · No cadastro do lote, as partes estão invertidas: a autora é C A de Oliveira & Cia. Ltda.",
+     "assuntoDet": "Metrológica — [VALIDAR detalhamento]",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Não verificado"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária",
+    "mov_fonte": "linha do tempo do PJe (autos extraídos)",
+    "ultima_decisao": "Sentença · ID 306564501 · 25/07/2024 — sentença (dispositivo a conferir)",
+    "ultima_peca": "Contrarrazões de Recurso (apelado) · ID 306564505 · 07/10/2024",
+    "ultima_informacao": "Ato ordinatório · ID 306564504 · 12/09/2024",
+    "aviso": "Conferido em 26/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 26/11/2026: última decisão: ID 306564501 · 25/07/2024 — sentença (dispositivo a conferir) | última peça: Contrarrazões de Recurso (apelado) · ID 306564505 · 07/10/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária"
    }
   },
   {
@@ -32372,12 +33098,14 @@
    "exequente": "EUNICE JOSE DE ARAUJO",
    "executado": "ARLENIR MENDES MARQUES",
    "assunto": "Mineração",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "AP2",
+   "tipo_caso": "Apelação de Eunice José de Araújo [VALIDAR apelante] em ação civil pública · Mineração · improcedência",
+   "resultado": "Ato a proferir: apelação de Eunice José de Araújo [VALIDAR apelante] (ID 374575542) da sentença ID 374575532, integrada pela sentença dos embargos de declaração ID 374575540; contrarrazões: ID 374575535, ID 374575547; parecer do MPF (ID 382241511) ‖ Proposta pelos precedentes: Voto [VALIDAR paradigma] [VALIDAR: Autor, réus condenados e apelante]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação de Eunice José de Araújo [VALIDAR apelante] contra sentença (improcedência) da 1ª Vara Federal de Campo Grande em ação civil pública: Ante o exposto, e o mais que dos autos consta:a) JULGO IMPROCEDENTE o pedido, em relação à ré ARLENIR MENDES MARQUES FARIAS, e, por consequência, JULGO EXTINTO o processo, com resolução do mérito, com base no art. 487, I, do NCPC. Inexistente prova de má-fé, deixo de condenar ao pagamento de custas e honorários advocatícios (art. 18 da Lei nº 7.347/85).b) JULGO PROCEDENTE o pedido, em relação aos réus EUNICE JOSÉ DE ",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -32388,7 +33116,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da(s) apelação(ões) (voto)",
+    "materia": "Mineração",
+    "origem": "Ação civil pública 0007352-70.2016.4.03.6000 (1ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 374575532 (04/09/2025)",
+    "recurso": "apelação de Eunice José de Araújo [VALIDAR apelante] (ID 374575542, 07/04/2026)",
+    "preparo": "Eunice José de Araújo [VALIDAR apelante]: justiça gratuita (ID 374575264)",
+    "monocratica": "Improvável sem paradigma",
+    "analisado_em": "26/11/2026",
+    "conf_preparo": "Eunice José de Araújo [VALIDAR apelante]: justiça gratuita (ID 374575264) · conferido em 26/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 26/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -32398,6 +33137,152 @@
    "chegada": "25/06/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Mineração — [VALIDAR detalhamento]",
+   "especificidades": "► Situação em 26/11/2026: última decisão: ID 374575540 · 11/03/2026 — sentença (dispositivo a conferir) | última peça: Manifestação (MPF) · ID 382241511 · 23/06/2026 | última movimentação: 24/06/2026 13:09 · Conclusos para julgamento · Origem: ação civil pública (1ª Vara Federal de Campo Grande) · Embargos de declaração julgados (ID 374575540) · Gratuidade (ID 374575264) · MPF ID 382241511 (23/06/2026): desprovimento · Pedido de urgência nas razões [VALIDAR se apreciado] · Tempestividade: Eunice José de Araújo [VALIDAR apelante]: ciência em 23/03/2026, prazo de 15 dias até 16/04/2026; apelação de 07/04/2026 · Etiqueta \"INTIMAR MPF - PRR\"",
+   "teor": {
+    "sintese_fatica": "Ação civil pública ambiental sobre mineração [VALIDAR autor: MPF?] contra Eunice José de Araújo e Arlenir Mendes Marques Farias. A sentença julgou improcedente o pedido quanto a Arlenir [VALIDAR demais réus]; embargos de declaração foram acolhidos com efeitos infringentes para incluir tutela de urgência no dispositivo.",
+    "inicial": "Ação civil pública ajuizado(a) em 30/04/2019 (petição inicial ID 374575240).",
+    "decisao_recorrida": "Sentença ID 374575532 (04/09/2025): Ante o exposto, e o mais que dos autos consta:a) JULGO IMPROCEDENTE o pedido, em relação à ré ARLENIR MENDES MARQUES FARIAS, e, por consequência, JULGO EXTINTO o processo, com resolução do mérito, com base no art. 487, I, do NCPC. Inexistente prova de má-fé, deixo de condenar ao pagamento de custas e honorários advocatícios (art. 18 da Lei nº 7.347/85).b) JULGO PROCEDENTE o pedido, em relação aos réus EUNICE JOSÉ DE ARAÚJO OLIVEIRA e JOÃO FARIA ALVES, para o fim de condená-los, solidariamente, na obrigação de fazer consistente em reparação do dano ambiental por meio da execução do PRAD aprovad",
+    "recurso": "Eunice José de Araújo [VALIDAR apelante] (ID 374575542, 07/04/2026): nulidade da decisão dos embargos de declaração com efeitos infringentes (tutela de urgência incluída) ou sua reforma [VALIDAR]",
+    "resposta": "Contrarrazões: ID 374575535 (25/11/2025), ID 374575547 (19/05/2026).",
+    "parecer": "MPF ID 382241511: desprovimento",
+    "memoriais": "Não consta",
+    "representacao": "[VALIDAR representação]",
+    "preparo": "Eunice José de Araújo [VALIDAR apelante]: justiça gratuita (ID 374575264)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação de Eunice José de Araújo [VALIDAR apelante] em ação civil pública · Mineração · improcedência",
+     "sintese": "Ação civil pública ambiental sobre mineração [VALIDAR autor: MPF?] contra Eunice José de Araújo e Arlenir Mendes Marques Farias. A sentença julgou improcedente o pedido quanto a Arlenir [VALIDAR demais réus]; embargos de declaração foram acolhidos com efeitos infringentes para incluir tutela de urgência no dispositivo.",
+     "questoes": "1) efeitos infringentes nos embargos de declaração sem contraditório (artigo 1.023, § 2º, do CPC); 2) dano ambiental por mineração",
+     "rel": {
+      "razoes": "Eunice José de Araújo [VALIDAR apelante] (ID 374575542, 07/04/2026): nulidade da decisão dos embargos de declaração com efeitos infringentes (tutela de urgência incluída) ou sua reforma [VALIDAR]",
+      "contrarrazoes": "Contrarrazões: ID 374575535 (25/11/2025), ID 374575547 (19/05/2026)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "374575532",
+      "juizo": "Ação civil pública 0007352-70.2016.4.03.6000 (1ª Vara Federal de Campo Grande)",
+      "dispositivo": "Ante o exposto, e o mais que dos autos consta:a) JULGO IMPROCEDENTE o pedido, em relação à ré ARLENIR MENDES MARQUES FARIAS, e, por consequência, JULGO EXTINTO o processo, com resolução do mérito, com base no art. 487, I, do NCPC. Inexistente prova de má-fé, deixo de condenar ao pagamento de custas e honorários advocatícios (art. 18 da Lei nº 7.347/85).b) JULGO PROCEDENTE o pedido, em relação aos réus EUNICE JOSÉ DE ARAÚJO OLIVEIRA e JOÃO FARIA ALVES, para o fim de condená-los, solidariamente, na obrigação de fazer consistente em reparação do dano ambiental por meio da execução do PRAD aprovad"
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2026-04-07",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Eunice José de Araújo [VALIDAR apelante]",
+       "tipo": "Apelação",
+       "id": "374575542",
+       "contra": "Sentença"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: improcedência",
+       "id": "374575532",
+       "data": "2025-09-04",
+       "nota": "Sentença ID 374575532 (04/09/2025): Ante o exposto, e o mais que dos autos consta:a) JULGO IMPROCEDENTE o pedido, em relação à ré ARLENIR MENDES MARQUES FARIAS, e, por consequência, JULGO EXTINTO o processo, com resolução do mérito, com base no art.",
+       "pje": {
+        "tipo": "Sentença"
+       },
+       "trecho": "JULGO IMPROCEDENTE o pedido, em relação à ré ARLENIR MENDES MARQUES FARIAS, e, por consequência, JULGO EXTINTO o processo, com resolução do mérito, com base no art. 487, I, do NCPC. Inexistente prova de má-fé, deixo de condenar ao pagamento de custas e honorários advocatícios (art. 18 da Lei nº …"
+      },
+      {
+       "desc": "Sentença: embargos de declaração",
+       "id": "374575540",
+       "data": "2026-03-11",
+       "nota": "Origem: ação civil pública (1ª Vara Federal de Campo Grande) · Embargos de declaração julgados (ID 374575540) · Gratuidade (ID 374575264) · MPF ID 382241511 (23/06/2026): desprovimento · Pedido de urgência nas razões [VALIDAR se apreciado] · Tempestividade: Eunice José de Araújo [VALIDAR apelante]: ciência em 23/03/2026, prazo de 15 dias até 16/04/2026; apelação de 07/04/2026 · Etiqueta \"INTIMAR MPF - PRR\"",
+       "pje": {
+        "tipo": "Sentença"
+       },
+       "trecho": "Diante do exposto, acolho os presentes embargos de declaração, reconhecendo-lhes efeitos infringentes, para incluir no dispositivo do julgado o seguinte:“Tutela de urgênciaNos termos do art. 300 do CPC, a concessão da tutela provisória de urgência exige a presença da probabilidade do direito (fumus …"
+      },
+      {
+       "desc": "Apelação: Eunice José de Araújo [VALIDAR apelante]",
+       "id": "374575542",
+       "data": "2026-04-07",
+       "nota": "Eunice José de Araújo [VALIDAR apelante] (ID 374575542, 07/04/2026): nulidade da decisão dos embargos de declaração com efeitos infringentes (tutela de urgência incluída) ou sua reforma [VALIDAR]",
+       "pje": {
+        "tipo": "Apelação",
+        "paginas": 10
+       },
+       "trecho": "requer: a) o conhecimento e provimento do presente recurso, para declarar a nulidade da decisão proferida nos embargos de declaração, afastando - se os efeitos modificativos indevidamente atribuídos; b) subsidiariamente, seja reformada a decisão recorrida, com o reconhecimento da ausência de …"
+      },
+      {
+       "desc": "Contrarrazões",
+       "id": "374575535",
+       "data": "2025-11-25",
+       "nota": "Contrarrazões: ID 374575535 (25/11/2025), ID 374575547 (19/05/2026).",
+       "pje": {
+        "tipo": "Contrarrazões",
+        "paginas": 4
+       },
+       "trecho": "Diante do exposto, requer a Vossa Excelência pelo recebimento e processamento e conhecimento da s con trarra zões em tela com o reconhecimento da perda superveniente de objeto do pleito liminar e a consequente inutilidade de qualquer medida urgente , bem como seja apreciad a a documentação em anexo …"
+      },
+      {
+       "desc": "Contrarrazões",
+       "id": "374575547",
+       "data": "2026-05-19",
+       "nota": "Contrarrazões: ID 374575535 (25/11/2025), ID 374575547 (19/05/2026).",
+       "pje": {
+        "tipo": "Contrarrazões de Recurso",
+        "paginas": 8
+       },
+       "trecho": "Diante do exposto, o Ministério Público Federal manifesta-se pelo conhecimento e, no mérito, pugna pelo não provimento do recurso de apelação interposto pela apelante Eunice José de Araújo Oliveira. Campo Grande-MS, data da assinatura eletrônica. (assinatura eletrônica) Pedro Paulo Grubits …"
+      },
+      {
+       "desc": "Parecer do MPF",
+       "id": "382241511",
+       "data": "2026-06-23",
+       "nota": "MPF ID 382241511: desprovimento · Origem: ação civil pública (1ª Vara Federal de Campo Grande) · Embargos de declaração julgados (ID 374575540) · Gratuidade (ID 374575264) · MPF ID 382241511 (23/06/2026): desprovimento · Pedido de urgência nas razões [VALIDAR se apreciado] · Tempestividade: Eunice José de Araújo [VALIDAR apelante]: ciência em 23/03/2026, prazo de 15 dias até 16/04/2026; apelação de 07/04/2026 · …",
+       "pje": {
+        "tipo": "Manifestação",
+        "paginas": 5
+       },
+       "trecho": "Opina o M INISTÉRIO P ÚBLICO F EDERAL pelo desprovimento da apelação. São Paulo, 23 de junho de 2026. Documento assinado via Token digitalmente por WALTER CLAUDIUS ROTHENBURG, em 23/06/2026 19:22. Para verificar a assinatura acesse Chave 3931b3e3.15e18526.0fac4de9.eecca5df Walter Claudius …"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 26/11/2026: última decisão: ID 374575540 · 11/03/2026 — sentença (dispositivo a conferir) | última peça: Manifestação (MPF) · ID 382241511 · 23/06/2026 | última movimentação: 24/06/2026 13:09 · Conclusos para julgamento · Origem: ação civil pública (1ª Vara Federal de Campo Grande) · Embargos de declaração julgados (ID 374575540) · Gratuidade (ID 374575264) · MPF ID 382241511 (23/06/2026): desprovimento · Pedido de urgência nas razões [VALIDAR se apreciado] · Tempestividade: Eunice José de Araújo [VALIDAR apelante]: ciência em 23/03/2026, prazo de 15 dias até 16/04/2026; apelação de 07/04/2026 · Etiqueta \"INTIMAR MPF - PRR\"",
+     "assuntoDet": "Mineração — [VALIDAR detalhamento]",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Tempestivo",
+     "preparo": "Justiça gratuita",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Ação civil pública",
+     "parecer": "Com parecer",
+     "urgTipo": "Pedido nas razões de apelação",
+     "urgSit": "Não verificado",
+     "idParecer": "382241511",
+     "parecerSentido": "desprovimento"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "24/06/2026 13:09 · Conclusos para julgamento",
+    "mov_fonte": "linha do tempo do PJe (autos extraídos)",
+    "ultima_decisao": "Sentença · ID 374575540 · 11/03/2026 — sentença (dispositivo a conferir)",
+    "ultima_peca": "Manifestação (MPF) · ID 382241511 · 23/06/2026",
+    "ultima_informacao": "Informação · ID 374575548 · 19/05/2026",
+    "aviso": "Conferido em 26/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 26/11/2026: última decisão: ID 374575540 · 11/03/2026 — sentença (dispositivo a conferir) | última peça: Manifestação (MPF) · ID 382241511 · 23/06/2026 | última movimentação: 24/06/2026 13:09 · Conclusos para julgamento"
    }
   },
   {
@@ -32409,12 +33294,14 @@
    "exequente": "DNIT-DEPARTAMENTO NACIONAL DE INFRAEST DE TRANSPORTES",
    "executado": "ANTONIO CAMPOS ARANHA",
    "assunto": "Multas e demais Sanções",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "AP2",
+   "tipo_caso": "Apelação de DNIT em execução fiscal · Multas e demais Sanções · procedência",
+   "resultado": "Ato a proferir: apelação de DNIT (ID 303022284) da sentença ID 303022266; contrarrazões: ID 303022288 ‖ Proposta pelos precedentes: Voto [VALIDAR paradigma]. Etiqueta \"LOTE MULTA - APCIV\"",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação de DNIT contra sentença (procedência) da 1ª Vara Federal de Coxim em execução fiscal: Diante do exposto JULGO PROCEDENTE o pedido, nos termos do art. 487, I do Código de Processo Civil, para declarar a inexistência de relação jurídica entre as partes, no que tange as multas aplicadas em 10/04/2018, em razão de infrações cometidas na direção do veículo automotor de placa HRG8405, desconstituindo-se, assim, as referidas multas.Condeno o excepto nas despesas processuais e ao pagamento de honorários advoc",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -32425,7 +33312,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da(s) apelação(ões) (voto)",
+    "materia": "Multas e demais Sanções",
+    "origem": "Execução fiscal 5000433-12.2023.4.03.6007 (1ª Vara Federal de Coxim)",
+    "decisao_agravada": "Sentença ID 303022266 (06/02/2024)",
+    "recurso": "apelação de DNIT (ID 303022284, 19/03/2024)",
+    "preparo": "DNIT: isento (ente público)",
+    "monocratica": "Improvável sem paradigma",
+    "analisado_em": "26/11/2026",
+    "conf_preparo": "DNIT: isento (ente público) · conferido em 26/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 26/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -32435,6 +33333,115 @@
    "chegada": "13/09/2024",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Multas e demais Sanções — [VALIDAR detalhamento]",
+   "especificidades": "► Situação em 26/11/2026: última decisão: ID 303022280 · 01/03/2024 — …sejam: a) tentativa de conciliação ou adoção de solução administrativa; e b) protesto do título, sob pena de extinção por falta de interesse de agir. Prazo: 05 (cinco) dias. Coxim/MS, datado e assinado eletronicamente | última peça: Petição intercorrente (PGF) · ID 360600687 · 16/03/2026 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Origem: execução fiscal (1ª Vara Federal de Coxim) · Tempestividade: DNIT: [VALIDAR tempestividade: intimação da sentença não localizada no texto extraído; apelação de 19/03/2024] · No cadastro do lote, as partes estão invertidas: o autor é Antônio Campos Aranha",
+   "teor": {
+    "sintese_fatica": "Antônio Campos Aranha pediu a declaração de inexistência de relação jurídica quanto a multas do DNIT de 10/04/2018 [VALIDAR: embargos ou ação]. A sentença julgou procedente o pedido.",
+    "inicial": "Execução fiscal ajuizado(a) em 25/09/2023 (petição inicial ID 303022243).",
+    "decisao_recorrida": "Sentença ID 303022266 (06/02/2024): Diante do exposto JULGO PROCEDENTE o pedido, nos termos do art. 487, I do Código de Processo Civil, para declarar a inexistência de relação jurídica entre as partes, no que tange as multas aplicadas em 10/04/2018, em razão de infrações cometidas na direção do veículo automotor de placa HRG8405, desconstituindo-se, assim, as referidas multas.Condeno o excepto nas despesas processuais e ao pagamento de honorários advocatícios nos patamares mínimos previstos no art. 85, § 3º, do CPC/15, incidentes sobre o valor da causa, respeitada a regra escalonada do art. 85, § 5º, do CPC/15.Cópia desta senten",
+    "recurso": "DNIT (ID 303022284, 19/03/2024): prosseguimento da execução fiscal: o veículo da infração não é o de placa HRG8405 [VALIDAR teses]",
+    "resposta": "Contrarrazões: ID 303022288 (08/04/2024).",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "[VALIDAR representação]",
+    "preparo": "DNIT: isento (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação de DNIT em execução fiscal · Multas e demais Sanções · procedência",
+     "sintese": "Antônio Campos Aranha pediu a declaração de inexistência de relação jurídica quanto a multas do DNIT de 10/04/2018 [VALIDAR: embargos ou ação]. A sentença julgou procedente o pedido.",
+     "questoes": "1) identificação do veículo e do infrator nas multas do DNIT",
+     "rel": {
+      "razoes": "DNIT (ID 303022284, 19/03/2024): prosseguimento da execução fiscal: o veículo da infração não é o de placa HRG8405 [VALIDAR teses]",
+      "contrarrazoes": "Contrarrazões: ID 303022288 (08/04/2024)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "303022266",
+      "juizo": "Execução fiscal 5000433-12.2023.4.03.6007 (1ª Vara Federal de Coxim)",
+      "dispositivo": "Diante do exposto JULGO PROCEDENTE o pedido, nos termos do art. 487, I do Código de Processo Civil, para declarar a inexistência de relação jurídica entre as partes, no que tange as multas aplicadas em 10/04/2018, em razão de infrações cometidas na direção do veículo automotor de placa HRG8405, desconstituindo-se, assim, as referidas multas.Condeno o excepto nas despesas processuais e ao pagamento de honorários advocatícios nos patamares mínimos previstos no art. 85, § 3º, do CPC/15, incidentes sobre o valor da causa, respeitada a regra escalonada do art. 85, § 5º, do CPC/15.Cópia desta senten"
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2024-03-19",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "DNIT",
+       "tipo": "Apelação",
+       "id": "303022284",
+       "contra": "Sentença"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: procedência",
+       "id": "303022266",
+       "data": "2024-02-06",
+       "nota": "Sentença ID 303022266 (06/02/2024): Diante do exposto JULGO PROCEDENTE o pedido, nos termos do art.",
+       "pje": {
+        "tipo": "Sentença"
+       },
+       "trecho": "Determino o levantamento das restrições e bloqueio de bens e valores do excipiente, caso hajam, expedindo-se o necessário.III. DISPOSITIVODiante do exposto JULGO PROCEDENTE o pedido, nos termos do art. 487, I do Código de Processo Civil, para declarar a inexistência de relação jurídica entre as …"
+      },
+      {
+       "desc": "Apelação: DNIT",
+       "id": "303022284",
+       "data": "2024-03-19",
+       "nota": "DNIT (ID 303022284, 19/03/2024): prosseguimento da execução fiscal: o veículo da infração não é o de placa HRG8405 [VALIDAR teses]",
+       "pje": {
+        "tipo": "Apelação"
+       },
+       "trecho": "Pelo exposto, requer a procedência do recurso para reformar a sentença e determinar o prosseguimento da Execução Fiscal, uma vez que o veículo utilizado na infração não é o de placa HRG8405 e sim o de DJF4878/SP. Nesses termos, pede deferimento. São Paulo, 19 de março de 2024. JOÃO BATISTA MARTINS …"
+      },
+      {
+       "desc": "Contrarrazões",
+       "id": "303022288",
+       "data": "2024-04-08",
+       "nota": "Contrarrazões: ID 303022288 (08/04/2024).",
+       "pje": {
+        "tipo": "Contrarrazões",
+        "paginas": 7
+       },
+       "trecho": "Diante do exposto, requer seja recebida a presente contraminuta ao Recurso de Apelação, por tempestiva e cabível, para que seja extinto o Recurso, ou, no mérito JULGADO TOTALMENTE IMPROCEDENTE, pelos motivos acima dispostos. Nestes termos, pede deferimento. #4336234 Mon Apr 8 11:10:12 2024 Coxim, …"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 26/11/2026: última decisão: ID 303022280 · 01/03/2024 — …sejam: a) tentativa de conciliação ou adoção de solução administrativa; e b) protesto do título, sob pena de extinção por falta de interesse de agir. Prazo: 05 (cinco) dias. Coxim/MS, datado e assinado eletronicamente | última peça: Petição intercorrente (PGF) · ID 360600687 · 16/03/2026 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Origem: execução fiscal (1ª Vara Federal de Coxim) · Tempestividade: DNIT: [VALIDAR tempestividade: intimação da sentença não localizada no texto extraído; apelação de 19/03/2024] · No cadastro do lote, as partes estão invertidas: o autor é Antônio Campos Aranha",
+     "assuntoDet": "Multas e demais Sanções — [VALIDAR detalhamento]",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Não verificado"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária",
+    "mov_fonte": "linha do tempo do PJe (autos extraídos)",
+    "ultima_decisao": "Despacho · ID 303022280 · 01/03/2024 — …sejam: a) tentativa de conciliação ou adoção de solução administrativa; e b) protesto do título, sob pena de extinção por falta de interesse de agir. Prazo: 05 (cinco) dias. Coxim/MS, datado e assinado eletronicamente",
+    "ultima_peca": "Petição intercorrente (PGF) · ID 360600687 · 16/03/2026",
+    "ultima_informacao": "Certidão · ID 303022290 · 22/04/2024",
+    "aviso": "Conferido em 26/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 26/11/2026: última decisão: ID 303022280 · 01/03/2024 — …sejam: a) tentativa de conciliação ou adoção de solução administrativa; e b) protesto do título, sob pena de extinção por falta de interesse de agir. Prazo: 05 (cinco) dias. Coxim/MS, datado e assinado eletronicamente | última peça: Petição intercorrente (PGF) · ID 360600687 · 16/03/2026 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária"
    }
   },
   {
@@ -32446,12 +33453,14 @@
    "exequente": "CONSELHO REGIONAL DE FARMACIA DO ESTADO DE MS",
    "executado": "JOSIAS MACIEL GOES - ME",
    "assunto": "Multas e demais Sanções",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "AP4",
+   "tipo_caso": "Apelação de CRF/MS em execução fiscal · Multas e demais Sanções · extinção sem resolução do mérito",
+   "resultado": "Ato a proferir: apelação de CRF/MS (ID 336320247) da sentença ID 336320246; contrarrazões: ID 336320252 ‖ Proposta pelos precedentes: Conferir antes: etiqueta \"NÃO PAUTAR - GIOVANA\" e análise de prevenção (Res. 33) [VALIDAR: Preparo: CRF/MS: guia ou comprovante (ID 336320249) [VALIDAR]; Fundamento da sentença e prevenção]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação de CRF/MS contra sentença (extinção sem resolução do mérito) da 6ª Vara Federal de Campo Grande em execução fiscal: Ante o exposto, acolho a exceção de pré-executividade oposta e JULGO EXTINTAS a presente execução fiscal e aquelas a ela reunidas (processos nº 0015257-34.2013.4.03.6000, nº 5001007-72.2022.4.03.6006, nº 5001068-64.2021.4.03.6006 e nº 5000279-60.2024.4.03.6006) sem resolução do mérito, com fundamento no artigo 485, inciso IV, do Código de Processo Civil. Libere-se eventual constrição, expedindo-se o necessário. Haven",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -32462,7 +33471,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da(s) apelação(ões) (voto)",
+    "materia": "Multas e demais Sanções",
+    "origem": "Execução fiscal 0014690-66.2014.4.03.6000 (6ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 336320246 (02/07/2025)",
+    "recurso": "apelação de CRF/MS (ID 336320247, 18/08/2025)",
+    "preparo": "CRF/MS: guia ou comprovante (ID 336320249) [VALIDAR]",
+    "monocratica": "Improvável sem paradigma",
+    "analisado_em": "26/11/2026",
+    "conf_preparo": "CRF/MS: guia ou comprovante (ID 336320249) [VALIDAR] · conferido em 26/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 26/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -32472,6 +33492,116 @@
    "chegada": "14/11/2025",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Multas e demais Sanções — [VALIDAR detalhamento]",
+   "especificidades": "► Situação em 26/11/2026: última decisão: ID 340767811 · 30/10/2025 — …gamento autônomos, além de cuidar de CDA's diversas.Não reconheço, pois, a prevenção.Retornem os autos à e. Relatora.São Paulo, data constante da certificação de assinatura eletrônica.CARLOS DELGADODesembargador Federal | última peça: Contrarrazões (apelado) · ID 336320252 · 04/09/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Origem: execução fiscal (6ª Vara Federal de Campo Grande) · Tempestividade: CRF/MS: ciência em 04/07/2025, prazo de 30 dias até 18/08/2025; apelação de 18/08/2025 · Etiquetas \"NÃO PAUTAR - GIOVANA\", \"Analisar\" e \"analisar prevenção res 33\"",
+   "teor": {
+    "sintese_fatica": "O CRF/MS promove execução fiscal contra Josias Maciel Góes ME. A sentença acolheu exceção de pré-executividade e extinguiu esta execução e as reunidas (0015257-34.2013.4.03.6000, 5001007-72.2022.4.03.6006, 5001068-64.2021.4.03.6006 e 5000279-60.2024.4.03.6006 [VALIDAR]).",
+    "inicial": "Execução fiscal ajuizado(a) em 20/01/2020 (petição inicial ID 336320052).",
+    "decisao_recorrida": "Sentença ID 336320246 (02/07/2025): Ante o exposto, acolho a exceção de pré-executividade oposta e JULGO EXTINTAS a presente execução fiscal e aquelas a ela reunidas (processos nº 0015257-34.2013.4.03.6000, nº 5001007-72.2022.4.03.6006, nº 5001068-64.2021.4.03.6006 e nº 5000279-60.2024.4.03.6006) sem resolução do mérito, com fundamento no artigo 485, inciso IV, do Código de Processo Civil. Libere-se eventual constrição, expedindo-se o necessário. Havendo carta precatória expedida, solicite-se a devolução. Condeno a parte excepta/exequente ao pagamento das custas e dos honorários advocatícios em favor do patrono da parte contrári",
+    "recurso": "CRF/MS (ID 336320247, 18/08/2025): reforma da extinção das execuções fiscais reunidas [VALIDAR teses]",
+    "resposta": "Contrarrazões: ID 336320252 (04/09/2025).",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "[VALIDAR representação]",
+    "preparo": "CRF/MS: guia ou comprovante (ID 336320249) [VALIDAR]"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação de CRF/MS em execução fiscal · Multas e demais Sanções · extinção sem resolução do mérito",
+     "sintese": "O CRF/MS promove execução fiscal contra Josias Maciel Góes ME. A sentença acolheu exceção de pré-executividade e extinguiu esta execução e as reunidas (0015257-34.2013.4.03.6000, 5001007-72.2022.4.03.6006, 5001068-64.2021.4.03.6006 e 5000279-60.2024.4.03.6006 [VALIDAR]).",
+     "questoes": "[VALIDAR fundamento da exceção] 1) exigibilidade das multas ou anuidades do CRF",
+     "rel": {
+      "razoes": "CRF/MS (ID 336320247, 18/08/2025): reforma da extinção das execuções fiscais reunidas [VALIDAR teses]",
+      "contrarrazoes": "Contrarrazões: ID 336320252 (04/09/2025)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "336320246",
+      "juizo": "Execução fiscal 0014690-66.2014.4.03.6000 (6ª Vara Federal de Campo Grande)",
+      "dispositivo": "Ante o exposto, acolho a exceção de pré-executividade oposta e JULGO EXTINTAS a presente execução fiscal e aquelas a ela reunidas (processos nº 0015257-34.2013.4.03.6000, nº 5001007-72.2022.4.03.6006, nº 5001068-64.2021.4.03.6006 e nº 5000279-60.2024.4.03.6006) sem resolução do mérito, com fundamento no artigo 485, inciso IV, do Código de Processo Civil. Libere-se eventual constrição, expedindo-se o necessário. Havendo carta precatória expedida, solicite-se a devolução. Condeno a parte excepta/exequente ao pagamento das custas e dos honorários advocatícios em favor do patrono da parte contrári"
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2025-08-18",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "CRF/MS",
+       "tipo": "Apelação",
+       "id": "336320247",
+       "contra": "Sentença"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: extinção sem resolução do mérito",
+       "id": "336320246",
+       "data": "2025-07-02",
+       "nota": "Sentença ID 336320246 (02/07/2025): Ante o exposto, acolho a exceção de pré-executividade oposta e JULGO EXTINTAS a presente execução fiscal e aquelas a ela reunidas (processos nº 0015257-34.2013.4.03.6000, nº 5001007-72.2022.4.03.6006, nº 5001068-64.2021.4.03.6006 e nº 5000279-60.2024.4.03.6006) sem resolução do mérito, com fundamento no artigo 485, inciso IV, do Código de Processo Civil.",
+       "pje": {
+        "tipo": "Sentença"
+       },
+       "trecho": "Ante o exposto, acolho a exceção de pré-executividade oposta e JULGO EXTINTAS a presente execução fiscal e aquelas a ela reunidas (processos nº 0015257-34.2013.4.03.6000, nº 5001007-72.2022.4.03.6006, nº 5001068-64.2021.4.03.6006 e nº 5000279-60.2024.4.03.6006) sem resolução do mérito, com …"
+      },
+      {
+       "desc": "Apelação: CRF/MS",
+       "id": "336320247",
+       "data": "2025-08-18",
+       "nota": "CRF/MS (ID 336320247, 18/08/2025): reforma da extinção das execuções fiscais reunidas [VALIDAR teses]",
+       "pje": {
+        "tipo": "Apelação",
+        "paginas": 7
+       },
+       "trecho": "Diante do exposto, está comprovado que não é exigido pela legislação pertinente o respectivo preparo por parte do CONSELHO REGIONAL DE FARMACIA DO ESTADO DE MATO GROSSO DO SUL, como autarquia federal. DOS PEDIDOS SERVIÇO PÚBLICO FEDERAL CONSELHO REGIONAL DE FARMÁCIA DO ESTADO DE MATO GROSSO DO SUL …"
+      },
+      {
+       "desc": "Contrarrazões",
+       "id": "336320252",
+       "data": "2025-09-04",
+       "nota": "Contrarrazões: ID 336320252 (04/09/2025).",
+       "pje": {
+        "tipo": "Contrarrazões",
+        "paginas": 6
+       },
+       "trecho": "Diante do exposto, requer - se: a) o não provimento da apelação, mantendo - se a r. sentença que extinguiu a execução fiscal; b) a condenação do Apelante ao pagamento de honorários recursais, nos termos do art. 85, §11, CPC; c) o reconhecimento da ilegalidade das CDA’s, por afro nta à coisa …"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 26/11/2026: última decisão: ID 340767811 · 30/10/2025 — …gamento autônomos, além de cuidar de CDA's diversas.Não reconheço, pois, a prevenção.Retornem os autos à e. Relatora.São Paulo, data constante da certificação de assinatura eletrônica.CARLOS DELGADODesembargador Federal | última peça: Contrarrazões (apelado) · ID 336320252 · 04/09/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Origem: execução fiscal (6ª Vara Federal de Campo Grande) · Tempestividade: CRF/MS: ciência em 04/07/2025, prazo de 30 dias até 18/08/2025; apelação de 18/08/2025 · Etiquetas \"NÃO PAUTAR - GIOVANA\", \"Analisar\" e \"analisar prevenção res 33\"",
+     "assuntoDet": "Multas e demais Sanções — [VALIDAR detalhamento]",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Tempestivo",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Não verificado"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária",
+    "mov_fonte": "linha do tempo do PJe (autos extraídos)",
+    "ultima_decisao": "Despacho · ID 340767811 · 30/10/2025 — …gamento autônomos, além de cuidar de CDA's diversas.Não reconheço, pois, a prevenção.Retornem os autos à e. Relatora.São Paulo, data constante da certificação de assinatura eletrônica.CARLOS DELGADODesembargador Federal",
+    "ultima_peca": "Contrarrazões (apelado) · ID 336320252 · 04/09/2025",
+    "ultima_informacao": "Informação · ID 338469185 · 06/10/2025",
+    "aviso": "Conferido em 26/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 26/11/2026: última decisão: ID 340767811 · 30/10/2025 — …gamento autônomos, além de cuidar de CDA's diversas.Não reconheço, pois, a prevenção.Retornem os autos à e. Relatora.São Paulo, data constante da certificação de assinatura eletrônica.CARLOS DELGADODesembargador Federal | última peça: Contrarrazões (apelado) · ID 336320252 · 04/09/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária"
    }
   },
   {
@@ -32483,12 +33613,14 @@
    "exequente": "UNIÃO FEDERAL",
    "executado": "MARFRIG GLOBAL FOODS S.A.",
    "assunto": "Multas e demais Sanções",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "AP2",
+   "tipo_caso": "Apelação da União em procedimento comum · Multas e demais Sanções · procedência",
+   "resultado": "Ato a proferir: apelação de União (ID 342581796) da sentença ID 342581795; contrarrazões: ID 342581798 ‖ Proposta pelos precedentes: Voto [VALIDAR paradigma]. Etiqueta \"LOTE MULTA - APCIV\"",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação da União contra sentença (procedência) da 4ª Vara Federal de Campo Grande em procedimento comum: Ante o exposto, julgo procedentes os pedidos formulados por MARFRIG GLOBAL FOODS S/A, com fundamento no art. 487, I, do CPC, para:1) Declarar a nulidade do Auto de Infração nº 010/880/2023 e da multa dele decorrente;2) Determinar a liberação da apólice de seguro garantia apresentada, após o trânsito em julgado, caso não haja recurso com efeito suspensivo;Condeno a ré ao pagamento de honorários aos procuradores do aut",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -32499,7 +33631,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da(s) apelação(ões) (voto)",
+    "materia": "Multas e demais Sanções",
+    "origem": "Procedimento comum 5001017-66.2024.4.03.6000 (4ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 342581795 (14/08/2025)",
+    "recurso": "apelação de União (ID 342581796, 07/10/2025)",
+    "preparo": "União: isento (ente público)",
+    "monocratica": "Improvável sem paradigma",
+    "analisado_em": "26/11/2026",
+    "conf_preparo": "União: isento (ente público) · conferido em 26/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 26/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -32509,6 +33652,117 @@
    "chegada": "17/11/2025",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Multas e demais Sanções — [VALIDAR detalhamento]",
+   "especificidades": "► Situação em 26/11/2026: última decisão: ID 342581795 · 14/08/2025 — sentença: julgou procedente o pedido | última peça: Petição intercorrente (apelado) · ID 360871475 · 17/03/2026 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Origem: procedimento comum (4ª Vara Federal de Campo Grande) · Tempestividade: União: [VALIDAR tempestividade: intimação da sentença não localizada no texto extraído; apelação de 07/10/2025] · No cadastro do lote, as partes estão invertidas: a autora é a Marfrig Global Foods S.A.",
+   "teor": {
+    "sintese_fatica": "Marfrig Global Foods S.A. pediu a nulidade do Auto de Infração 010/880/2023 [VALIDAR órgão: MAPA?] e da multa, com liberação do seguro garantia. A sentença julgou procedentes os pedidos.",
+    "inicial": "Procedimento comum ajuizado(a) em 19/02/2024 (petição inicial ID 342581665).",
+    "decisao_recorrida": "Sentença ID 342581795 (14/08/2025): Ante o exposto, julgo procedentes os pedidos formulados por MARFRIG GLOBAL FOODS S/A, com fundamento no art. 487, I, do CPC, para:1) Declarar a nulidade do Auto de Infração nº 010/880/2023 e da multa dele decorrente;2) Determinar a liberação da apólice de seguro garantia apresentada, após o trânsito em julgado, caso não haja recurso com efeito suspensivo;Condeno a ré ao pagamento de honorários aos procuradores do autor, fixados em 10% (dez) por cento do valor da causa, bem como, a reembolsar o valor das custas adiantadas.P. R. I.Havendo interposição de recurso de Apelação, determino a intimaçã",
+    "recurso": "União (ID 342581796, 07/10/2025): improcedência dos pedidos [VALIDAR teses]",
+    "resposta": "Contrarrazões: ID 342581798 (05/11/2025).",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "[VALIDAR representação]",
+    "preparo": "União: isento (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação da União em procedimento comum · Multas e demais Sanções · procedência",
+     "sintese": "Marfrig Global Foods S.A. pediu a nulidade do Auto de Infração 010/880/2023 [VALIDAR órgão: MAPA?] e da multa, com liberação do seguro garantia. A sentença julgou procedentes os pedidos.",
+     "questoes": "[VALIDAR] 1) validade da autuação",
+     "rel": {
+      "razoes": "União (ID 342581796, 07/10/2025): improcedência dos pedidos [VALIDAR teses]",
+      "contrarrazoes": "Contrarrazões: ID 342581798 (05/11/2025)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "342581795",
+      "juizo": "Procedimento comum 5001017-66.2024.4.03.6000 (4ª Vara Federal de Campo Grande)",
+      "dispositivo": "Ante o exposto, julgo procedentes os pedidos formulados por MARFRIG GLOBAL FOODS S/A, com fundamento no art. 487, I, do CPC, para:1) Declarar a nulidade do Auto de Infração nº 010/880/2023 e da multa dele decorrente;2) Determinar a liberação da apólice de seguro garantia apresentada, após o trânsito em julgado, caso não haja recurso com efeito suspensivo;Condeno a ré ao pagamento de honorários aos procuradores do autor, fixados em 10% (dez) por cento do valor da causa, bem como, a reembolsar o valor das custas adiantadas.P. R. I.Havendo interposição de recurso de Apelação, determino a intimaçã"
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2025-10-07",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "União",
+       "tipo": "Apelação",
+       "id": "342581796",
+       "contra": "Sentença"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: procedência",
+       "id": "342581795",
+       "data": "2025-08-14",
+       "nota": "Sentença ID 342581795 (14/08/2025): Ante o exposto, julgo procedentes os pedidos formulados por MARFRIG GLOBAL FOODS S/A, com fundamento no art.",
+       "pje": {
+        "tipo": "Sentença"
+       },
+       "trecho": "julgo procedentes os pedidos formulados por MARFRIG GLOBAL FOODS S/A, com fundamento no art. 487, I, do CPC, para:1) Declarar a nulidade do Auto de Infração nº 010/880/2023 e da multa dele decorrente;2) Determinar a liberação da apólice de seguro garantia apresentada, após o trânsito em julgado, …"
+      },
+      {
+       "desc": "Apelação: União",
+       "id": "342581796",
+       "data": "2025-10-07",
+       "nota": "União (ID 342581796, 07/10/2025): improcedência dos pedidos [VALIDAR teses]",
+       "pje": {
+        "tipo": "Apelação",
+        "descricao": "P APELAÇÃO 2961580796 EM 07/10/2025 22:57:49",
+        "paginas": 15
+       },
+       "trecho": "Ante o exposto, requer a UNIÃO seja DADO PROVIMENTO ao presente recurso, reformando-se a r. sentença para julgar improcedentes os pedidos autorais. Nestes termos, pede-se deferimento. São Paulo, 07 de outubro de 2025. EMÍLIO CARLOS BRASIL DIAZ ADVOGADO DA UNIÃO"
+      },
+      {
+       "desc": "Contrarrazões",
+       "id": "342581798",
+       "data": "2025-11-05",
+       "nota": "Contrarrazões: ID 342581798 (05/11/2025).",
+       "pje": {
+        "tipo": "Contrarrazões",
+        "paginas": 16
+       },
+       "trecho": "Pelo exposto , requer - se, mui respeitosamente, a Vossas Excelências , seja negado provimento ao Recurso de Apelação interposto pela Recorrente, porquanto a sentença atacada é assertada em sua fundamentação e está em consonância ao art. 2º da Lei n. 9.784/1999 ao reconhecer o vício do ato que não …"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 26/11/2026: última decisão: ID 342581795 · 14/08/2025 — sentença: julgou procedente o pedido | última peça: Petição intercorrente (apelado) · ID 360871475 · 17/03/2026 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Origem: procedimento comum (4ª Vara Federal de Campo Grande) · Tempestividade: União: [VALIDAR tempestividade: intimação da sentença não localizada no texto extraído; apelação de 07/10/2025] · No cadastro do lote, as partes estão invertidas: a autora é a Marfrig Global Foods S.A.",
+     "assuntoDet": "Multas e demais Sanções — [VALIDAR detalhamento]",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Não verificado"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária",
+    "mov_fonte": "linha do tempo do PJe (autos extraídos)",
+    "ultima_decisao": "Sentença · ID 342581795 · 14/08/2025 — sentença: julgou procedente o pedido",
+    "ultima_peca": "Petição intercorrente (apelado) · ID 360871475 · 17/03/2026",
+    "ultima_informacao": "Informação · ID 342581799 · 06/11/2025",
+    "aviso": "Conferido em 26/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 26/11/2026: última decisão: ID 342581795 · 14/08/2025 — sentença: julgou procedente o pedido | última peça: Petição intercorrente (apelado) · ID 360871475 · 17/03/2026 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária"
    }
   },
   {
@@ -32520,12 +33774,14 @@
    "exequente": "SUPERMERCADO MORENO EIRELI",
    "executado": "INSTITUTO NACIONAL DE METROLOGIA, QUALIDADE E TECNOLOGIA - INMETRO",
    "assunto": "Multas e demais Sanções",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "AP2",
+   "tipo_caso": "Apelação de INMETRO e de Estado de Mato Grosso do Sul (AEM-MS) [VALIDAR] e de Supermercado Moreno Eireli EPP em procedimento comum · Multas e demais Sanções · parcial procedência",
+   "resultado": "Ato a proferir: apelação de INMETRO (ID 347129632) e apelação de Estado de Mato Grosso do Sul (AEM-MS) [VALIDAR] (ID 347129633) e apelação de Supermercado Moreno Eireli EPP (ID 347129635) da sentença ID 347129628, integrada pela sentença dos embargos de declaração ID 347129634; contrarrazões: ID 347129631, ID 347129639, ID 347129640 ‖ Proposta pelos precedentes: Voto [VALIDAR paradigma]. Etiqueta \"LOTE MULTA - APCIV\" [VALIDAR: Preparo: Estado de Mato Grosso do Sul (AEM-MS) [VALIDAR]: isento (ente público); Supermercado Moreno Eireli EPP: guia ou comprovante (ID 347129636) [VALIDAR]; Apelantes e decisão de 09/10/2025 (ID 347129634) sobre a lide secundária]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação de INMETRO e de Estado de Mato Grosso do Sul (AEM-MS) [VALIDAR] e de Supermercado Moreno Eireli EPP contra sentença (parcial procedência) da 4ª Vara Federal de Campo Grande em procedimento comum: Diante do exposto: 1) - Julgo parcialmente procedente o pedido para anular o AI 5401130005229 (PA 52636.003155/2016-09); sobrevindo o trânsito em julgado, levante-se o valor depositado em favor da parte autora, relativamente à multa afastada. Cada parte pagará ao advogado da outra, honorários advocatícios que fixo em 10% sobre sua sucumbência, o autor sobre a indenização pretendida e os réus (INMETRO e AEM/MS) sobre ",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -32536,7 +33792,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da(s) apelação(ões) (voto)",
+    "materia": "Multas e demais Sanções",
+    "origem": "Procedimento comum 5000250-38.2018.4.03.6000 (4ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 347129628 (23/06/2025)",
+    "recurso": "apelação de INMETRO (ID 347129632, 12/08/2025) e apelação de Estado de Mato Grosso do Sul (AEM-MS) [VALIDAR] (ID 347129633, 18/08/2025) e apelação de Supermercado Moreno Eireli EPP (ID 347129635, 16/10/2025)",
+    "preparo": "INMETRO: isento (ente público); Estado de Mato Grosso do Sul (AEM-MS) [VALIDAR]: isento (ente público); Supermercado Moreno Eireli EPP: guia ou comprovante (ID 347129636) [VALIDAR]",
+    "monocratica": "Improvável sem paradigma",
+    "analisado_em": "26/11/2026",
+    "conf_preparo": "INMETRO: isento (ente público); Estado de Mato Grosso do Sul (AEM-MS) [VALIDAR]: isento (ente público); Supermercado Moreno Eireli EPP: guia ou comprovante (ID 347129636) [VALIDAR] · conferido em 26/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 26/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -32546,6 +33813,183 @@
    "chegada": "21/01/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Multas e demais Sanções — [VALIDAR detalhamento]",
+   "especificidades": "► Situação em 26/11/2026: última decisão: ID 347129634 · 09/10/2025 — sentença: acolheu os embargos de declaração | última peça: Contrarrazões (advogado de parte) · ID 347129640 · 31/10/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Origem: procedimento comum (4ª Vara Federal de Campo Grande) · Embargos de declaração julgados (ID 347129634) · Tempestividade: INMETRO: [VALIDAR tempestividade: intimação da sentença não localizada no texto extraído; apelação de 12/08/2025] | Estado de Mato Grosso do Sul (AEM-MS) [VALIDAR]: [VALIDAR tempestividade: intimação da sentença não localizada no texto extraído; apelação de 18/08/2025] | Supermercado Moreno Eireli EPP: ciência em 14/10/2025, prazo de 15 dias até 05/11/2025; apelação de 16/10/2025",
+   "teor": {
+    "sintese_fatica": "Supermercado Moreno Eireli pediu a nulidade de autos de infração metrológica. A sentença julgou parcialmente procedente o pedido para anular o AI 5401130005229 (PA 52636.003155/2016-09), com levantamento do depósito correspondente e sucumbência recíproca; houve lide secundária com denunciada [VALIDAR].",
+    "inicial": "Procedimento comum ajuizado(a) em 18/01/2018 (petição inicial ID 347129215).",
+    "decisao_recorrida": "Sentença ID 347129628 (23/06/2025): Diante do exposto: 1) - Julgo parcialmente procedente o pedido para anular o AI 5401130005229 (PA 52636.003155/2016-09); sobrevindo o trânsito em julgado, levante-se o valor depositado em favor da parte autora, relativamente à multa afastada. Cada parte pagará ao advogado da outra, honorários advocatícios que fixo em 10% sobre sua sucumbência, o autor sobre a indenização pretendida e os réus (INMETRO e AEM/MS) sobre o valor da multa excluída. 2) - Em relação à demanda secundária, julgo-a extinta sem resolução do mérito (art. 485, VI, do CPC), condenando o denunciante a pagar honorários advocat",
+    "recurso": "INMETRO (ID 347129632, 12/08/2025): improcedência da ação anulatória, com inversão e majoração da sucumbência · Estado de Mato Grosso do Sul (AEM-MS) [VALIDAR] (ID 347129633, 18/08/2025): validade da autuação [VALIDAR teses] · Supermercado Moreno Eireli EPP (ID 347129635, 16/10/2025): reforma para indenização por danos [VALIDAR demais pedidos]",
+    "resposta": "Contrarrazões: ID 347129631 (23/07/2025), ID 347129639 (24/10/2025), ID 347129640 (31/10/2025).",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "[VALIDAR representação]",
+    "preparo": "INMETRO: isento (ente público); Estado de Mato Grosso do Sul (AEM-MS) [VALIDAR]: isento (ente público); Supermercado Moreno Eireli EPP: guia ou comprovante (ID 347129636) [VALIDAR]"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação de INMETRO e de Estado de Mato Grosso do Sul (AEM-MS) [VALIDAR] e de Supermercado Moreno Eireli EPP em procedimento comum · Multas e demais Sanções · parcial procedência",
+     "sintese": "Supermercado Moreno Eireli pediu a nulidade de autos de infração metrológica. A sentença julgou parcialmente procedente o pedido para anular o AI 5401130005229 (PA 52636.003155/2016-09), com levantamento do depósito correspondente e sucumbência recíproca; houve lide secundária com denunciada [VALIDAR].",
+     "questoes": "1) validade dos autos de infração metrológica; 2) denunciação da lide; 3) danos",
+     "rel": {
+      "razoes": "INMETRO (ID 347129632, 12/08/2025): improcedência da ação anulatória, com inversão e majoração da sucumbência · Estado de Mato Grosso do Sul (AEM-MS) [VALIDAR] (ID 347129633, 18/08/2025): validade da autuação [VALIDAR teses] · Supermercado Moreno Eireli EPP (ID 347129635, 16/10/2025): reforma para indenização por danos [VALIDAR demais pedidos]",
+      "contrarrazoes": "Contrarrazões: ID 347129631 (23/07/2025), ID 347129639 (24/10/2025), ID 347129640 (31/10/2025)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "347129628",
+      "juizo": "Procedimento comum 5000250-38.2018.4.03.6000 (4ª Vara Federal de Campo Grande)",
+      "dispositivo": "Diante do exposto: 1) - Julgo parcialmente procedente o pedido para anular o AI 5401130005229 (PA 52636.003155/2016-09); sobrevindo o trânsito em julgado, levante-se o valor depositado em favor da parte autora, relativamente à multa afastada. Cada parte pagará ao advogado da outra, honorários advocatícios que fixo em 10% sobre sua sucumbência, o autor sobre a indenização pretendida e os réus (INMETRO e AEM/MS) sobre o valor da multa excluída. 2) - Em relação à demanda secundária, julgo-a extinta sem resolução do mérito (art. 485, VI, do CPC), condenando o denunciante a pagar honorários advocat"
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2025-08-12",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "INMETRO",
+       "tipo": "Apelação",
+       "id": "347129632",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Estado de Mato Grosso do Sul (AEM-MS) [VALIDAR]",
+       "tipo": "Apelação",
+       "id": "347129633",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Supermercado Moreno Eireli EPP",
+       "tipo": "Apelação",
+       "id": "347129635",
+       "contra": "Sentença"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: parcial procedência",
+       "id": "347129628",
+       "data": "2025-06-23",
+       "nota": "Sentença ID 347129628 (23/06/2025): Diante do exposto: 1) - Julgo parcialmente procedente o pedido para anular o AI 5401130005229 (PA 52636.003155/2016-09); sobrevindo o trânsito em julgado, levante-se o valor depositado em favor da parte autora, relativamente à multa afastada.",
+       "pje": {
+        "tipo": "Sentença"
+       },
+       "trecho": "1.236.315/RS, relator Ministro Mauro Campbell Marques, Segunda Turma, julgado em 26/4/2011, DJe de 5/5/2011.)Diante do exposto: 1) - Julgo parcialmente procedente o pedido para anular o AI 5401130005229 (PA 52636.003155/2016-09); sobrevindo o trânsito em julgado, levante-se o valor depositado em …"
+      },
+      {
+       "desc": "Sentença: embargos de declaração",
+       "id": "347129634",
+       "data": "2025-10-09",
+       "nota": "Origem: procedimento comum (4ª Vara Federal de Campo Grande) · Embargos de declaração julgados (ID 347129634) · Tempestividade: INMETRO: [VALIDAR tempestividade: intimação da sentença não localizada no texto extraído; apelação de 12/08/2025]",
+       "pje": {
+        "tipo": "Sentença"
+       },
+       "trecho": "partir da data da aplicação (da multa).A lide secundária envolvendo a denunciada embargante e SUPERMERCADOS MORENO, diz respeito somente à multa, pelo que não procede a pretensão de incluir o valor pedido a título de danos morais nos cálculos da sucumbência.P.R.I.PEDRO PEREIRA DOS SANTOSJuiz Federal"
+      },
+      {
+       "desc": "Apelação: INMETRO",
+       "id": "347129632",
+       "data": "2025-08-12",
+       "nota": "INMETRO (ID 347129632, 12/08/2025): improcedência da ação anulatória, com inversão e majoração da sucumbência · Estado de Mato Grosso do Sul (AEM-MS) [VALIDAR] (ID 347129633, 18/08/2025): validade da autuação [VALIDAR teses] · Supermercado Moreno Eireli EPP (ID 347129635, 16/10/2025): reforma para indenização por danos [VALIDAR demais pedidos]",
+       "pje": {
+        "tipo": "Apelação"
+       },
+       "trecho": "ante o exposto, requer-se o conhecimento e provimento do recurso de apelação interposto, nos termos da argumentação supracitada, julgando-se improcedente a presente ação anulatória, com inversão e majoração do ônus da sucumbência. NTPD. São Paulo, 13 de agosto de 2025. CARLOS ROGÉRIO DA SILVA …"
+      },
+      {
+       "desc": "Apelação: Estado de Mato Grosso do Sul (AEM-MS) [VALIDAR]",
+       "id": "347129633",
+       "data": "2025-08-18",
+       "nota": "INMETRO (ID 347129632, 12/08/2025): improcedência da ação anulatória, com inversão e majoração da sucumbência · Estado de Mato Grosso do Sul (AEM-MS) [VALIDAR] (ID 347129633, 18/08/2025): validade da autuação [VALIDAR teses] · Supermercado Moreno Eireli EPP (ID 347129635, 16/10/2025): reforma para indenização por danos [VALIDAR demais pedidos]",
+       "pje": {
+        "tipo": "Apelação",
+        "paginas": 8
+       },
+       "trecho": "ANTE O EXPOSTO , pede digne - se Vossa Excelência em conhecer do recurso de apelação , para, preliminarmente , reco nhercer a ilegitimidade passiva da AEM/MS, com a consequente extinção do feito , sem julgamento do mérito , nos termos do art. 485, VI, do CPC e, se ultrapassada, no mérito , dar - …"
+      },
+      {
+       "desc": "Apelação: Supermercado Moreno Eireli EPP",
+       "id": "347129635",
+       "data": "2025-10-16",
+       "nota": "INMETRO (ID 347129632, 12/08/2025): improcedência da ação anulatória, com inversão e majoração da sucumbência · Estado de Mato Grosso do Sul (AEM-MS) [VALIDAR] (ID 347129633, 18/08/2025): validade da autuação [VALIDAR teses] · Supermercado Moreno Eireli EPP (ID 347129635, 16/10/2025): reforma para indenização por danos [VALIDAR demais pedidos]",
+       "pje": {
+        "tipo": "Apelação",
+        "paginas": 11
+       },
+       "trecho": "requer a V. Exa.: a) o provimento da apelação, reformando - se a r. sentença para assegur ar a plena aplicação do direito; b ) condenar os Réus ao pagamento de indenização por danos morais , em valor não inferior a R$ 30.000,00 (trinta mil reais) , compatível com a gravidade do constrangimento …"
+      },
+      {
+       "desc": "Contrarrazões",
+       "id": "347129631",
+       "data": "2025-07-23",
+       "nota": "Contrarrazões: ID 347129631 (23/07/2025), ID 347129639 (24/10/2025), ID 347129640 (31/10/2025).",
+       "pje": {
+        "tipo": "Contrarrazões",
+        "paginas": 7
+       },
+       "trecho": "Ante o exposto, requer-se: a ) permaneça incólume a r. sentença embargada, visto que a ausência de obscuridade, contradição, omissão ou erro material. Pede deferimento. Campo Grande MS, 23 de julho de 2025. _________________________________ ____________________________ MÁRCIO DE ÁVILA MARTINS FILHO …"
+      },
+      {
+       "desc": "Contrarrazões",
+       "id": "347129639",
+       "data": "2025-10-24",
+       "nota": "Contrarrazões: ID 347129631 (23/07/2025), ID 347129639 (24/10/2025), ID 347129640 (31/10/2025).",
+       "pje": {
+        "tipo": "Contrarrazões",
+        "descricao": "P CONTRARRAZÕES 2979264464 EM 24/10/2025 08:54:18",
+        "paginas": 5
+       },
+       "trecho": "Diante do exposto , consoante as razões preconizadas acima, demonstrada de forma insofismável a inconsistência do recurso interposto pelo recorrente, requer-se seja negado provimento ao Recurso , e, por conseguinte, seja mantida a r. sentença de improcedência, com a majoração dos honorários …"
+      },
+      {
+       "desc": "Contrarrazões",
+       "id": "347129640",
+       "data": "2025-10-31",
+       "nota": "Contrarrazões: ID 347129631 (23/07/2025), ID 347129639 (24/10/2025), ID 347129640 (31/10/2025).",
+       "pje": {
+        "tipo": "Contrarrazões",
+        "descricao": "Contrarrazões de Apelação (1 e 2 Grau)",
+        "paginas": 7
+       },
+       "trecho": "DIANTE DO EXPOSTO , com base nas razões ofertadas acima, demonstrando a total inconsistência do recurso interposto pelo apelante, requer-se seja negado provimento ao Recurso da parte autora , com a majoração dos honorários recursais nos termos estabelecidos pelo artigo 85, § 11, do Código de …"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 26/11/2026: última decisão: ID 347129634 · 09/10/2025 — sentença: acolheu os embargos de declaração | última peça: Contrarrazões (advogado de parte) · ID 347129640 · 31/10/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Origem: procedimento comum (4ª Vara Federal de Campo Grande) · Embargos de declaração julgados (ID 347129634) · Tempestividade: INMETRO: [VALIDAR tempestividade: intimação da sentença não localizada no texto extraído; apelação de 12/08/2025] | Estado de Mato Grosso do Sul (AEM-MS) [VALIDAR]: [VALIDAR tempestividade: intimação da sentença não localizada no texto extraído; apelação de 18/08/2025] | Supermercado Moreno Eireli EPP: ciência em 14/10/2025, prazo de 15 dias até 05/11/2025; apelação de 16/10/2025",
+     "assuntoDet": "Multas e demais Sanções — [VALIDAR detalhamento]",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Não verificado"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária",
+    "mov_fonte": "linha do tempo do PJe (autos extraídos)",
+    "ultima_decisao": "Sentença · ID 347129634 · 09/10/2025 — sentença: acolheu os embargos de declaração",
+    "ultima_peca": "Contrarrazões (advogado de parte) · ID 347129640 · 31/10/2025",
+    "ultima_informacao": "Informação · ID 347129641 · 17/12/2025",
+    "aviso": "Conferido em 26/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 26/11/2026: última decisão: ID 347129634 · 09/10/2025 — sentença: acolheu os embargos de declaração | última peça: Contrarrazões (advogado de parte) · ID 347129640 · 31/10/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária"
    }
   },
   {
@@ -32557,12 +34001,14 @@
    "exequente": "AGENCIA NACIONAL DE TELECOMUNICACOES",
    "executado": "HELIO CORDEIRO DE LIMA",
    "assunto": "Multas e demais Sanções",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "AP2",
+   "tipo_caso": "Apelação de ANATEL em execução fiscal · Multas e demais Sanções · extinção sem resolução do mérito",
+   "resultado": "Ato a proferir: apelação de ANATEL (ID 343886562) da sentença ID 343886561; contrarrazões não localizadas ‖ Proposta pelos precedentes: Voto. Linha do Relator na ApCiv 5003038-46.2024.4.03.9999 (30/06/2026): apelação desprovida em execução fiscal extinta por falta de interesse [VALIDAR: Contrarrazões]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação de ANATEL contra sentença (extinção sem resolução do mérito) da 2ª Vara Federal de Dourados em execução fiscal: Ante o exposto, julgo extinta a execução com fundamento no artigo 485, inciso VI, do Código de Processo Civil. Custas na forma da lei. Sem honorários, considerando que a exequente não deu causa à extinção do feito. Sem reexame necessário. Libere-se eventual constrição, providenciando-se o necessário. Oportunamente, dê-se baixa e arquivem-se. Registro Eletrônico. Publique-se, intimem-se. Cópia da presente sentença ser",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -32573,7 +34019,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da(s) apelação(ões) (voto)",
+    "materia": "Multas e demais Sanções",
+    "origem": "Execução fiscal 5001467-37.2023.4.03.6002 (2ª Vara Federal de Dourados)",
+    "decisao_agravada": "Sentença ID 343886561 (15/08/2025)",
+    "recurso": "apelação de ANATEL (ID 343886562, 06/11/2025)",
+    "preparo": "ANATEL: isento (ente público)",
+    "monocratica": "Possível: monocrática de desprovimento (Tema 1.184/STF)",
+    "analisado_em": "26/11/2026",
+    "conf_preparo": "ANATEL: isento (ente público) · conferido em 26/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 26/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -32583,6 +34040,106 @@
    "chegada": "26/03/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Multas e demais Sanções — [VALIDAR detalhamento]",
+   "especificidades": "► Situação em 26/11/2026: última decisão: ID 344619919 · 27/11/2025 — recebeu o recurso sem conceder efeito suspensivo | última peça: Apelação (PGF) · ID 343886562 · 06/11/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Origem: execução fiscal (2ª Vara Federal de Dourados) · Tempestividade: ANATEL: [VALIDAR tempestividade: intimação da sentença não localizada no texto extraído; apelação de 06/11/2025] · Etiqueta \"Res 547/2024 CNJ\"",
+   "teor": {
+    "sintese_fatica": "A ANATEL promove execução fiscal contra Hélio Cordeiro de Lima. A sentença extinguiu a execução por falta de interesse (artigo 485, VI, do CPC), sem honorários [VALIDAR fundamento: Tema 1.184/STF e Resolução CNJ 547/2024].",
+    "inicial": "Execução fiscal ajuizado(a) em 03/06/2023 (petição inicial ID 343886546).",
+    "decisao_recorrida": "Sentença ID 343886561 (15/08/2025): Ante o exposto, julgo extinta a execução com fundamento no artigo 485, inciso VI, do Código de Processo Civil. Custas na forma da lei. Sem honorários, considerando que a exequente não deu causa à extinção do feito. Sem reexame necessário. Libere-se eventual constrição, providenciando-se o necessário. Oportunamente, dê-se baixa e arquivem-se. Registro Eletrônico. Publique-se, intimem-se. Cópia da presente sentença servirá para como os expedientes que se fizerem necessários, tais como ofício, mandados e carta precatória. Dourados/MS, datado e assinado eletronicamente. EWERTON TEIXEIRA BUENOJuiz ",
+    "recurso": "ANATEL (ID 343886562, 06/11/2025): reforma da extinção da execução fiscal de baixo valor [VALIDAR teses]",
+    "resposta": "Não localizadas.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "[VALIDAR representação]",
+    "preparo": "ANATEL: isento (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação de ANATEL em execução fiscal · Multas e demais Sanções · extinção sem resolução do mérito",
+     "sintese": "A ANATEL promove execução fiscal contra Hélio Cordeiro de Lima. A sentença extinguiu a execução por falta de interesse (artigo 485, VI, do CPC), sem honorários [VALIDAR fundamento: Tema 1.184/STF e Resolução CNJ 547/2024].",
+     "questoes": "1) extinção de execução fiscal de baixo valor (Tema 1.184/STF e Resolução CNJ 547/2024)",
+     "rel": {
+      "razoes": "ANATEL (ID 343886562, 06/11/2025): reforma da extinção da execução fiscal de baixo valor [VALIDAR teses]",
+      "contrarrazoes": "Não localizadas."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "343886561",
+      "juizo": "Execução fiscal 5001467-37.2023.4.03.6002 (2ª Vara Federal de Dourados)",
+      "dispositivo": "Ante o exposto, julgo extinta a execução com fundamento no artigo 485, inciso VI, do Código de Processo Civil. Custas na forma da lei. Sem honorários, considerando que a exequente não deu causa à extinção do feito. Sem reexame necessário. Libere-se eventual constrição, providenciando-se o necessário. Oportunamente, dê-se baixa e arquivem-se. Registro Eletrônico. Publique-se, intimem-se. Cópia da presente sentença servirá para como os expedientes que se fizerem necessários, tais como ofício, mandados e carta precatória. Dourados/MS, datado e assinado eletronicamente. EWERTON TEIXEIRA BUENOJuiz "
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2025-11-06",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "ANATEL",
+       "tipo": "Apelação",
+       "id": "343886562",
+       "contra": "Sentença"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: extinção sem resolução do mérito",
+       "id": "343886561",
+       "data": "2025-08-15",
+       "nota": "Sentença ID 343886561 (15/08/2025): Ante o exposto, julgo extinta a execução com fundamento no artigo 485, inciso VI, do Código de Processo Civil.",
+       "pje": {
+        "tipo": "Sentença"
+       },
+       "trecho": "Ante o exposto, julgo extinta a execução com fundamento no artigo 485, inciso VI, do Código de Processo Civil. Custas na forma da lei. Sem honorários, considerando que a exequente não deu causa à extinção do feito. Sem reexame necessário. Libere-se eventual constrição, providenciando-se o …"
+      },
+      {
+       "desc": "Apelação: ANATEL",
+       "id": "343886562",
+       "data": "2025-11-06",
+       "nota": "ANATEL (ID 343886562, 06/11/2025): reforma da extinção da execução fiscal de baixo valor [VALIDAR teses]",
+       "pje": {
+        "tipo": "Apelação",
+        "descricao": "P APELAÇÃO 3001586499 EM 06/11/2025 10:22:46",
+        "paginas": 8
+       },
+       "trecho": "Diante do exposto, requer-se o provimento do presente recurso para, reconhecendo que estão cumpridos os requisitos definidos pelo Supremo Tribunal Federal no Tema 1.184 de Repercussão Geral e regulamentados na Resolução CNJ n. 547, de 2024, para a configuração do interesse processual de agir, …"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 26/11/2026: última decisão: ID 344619919 · 27/11/2025 — recebeu o recurso sem conceder efeito suspensivo | última peça: Apelação (PGF) · ID 343886562 · 06/11/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Origem: execução fiscal (2ª Vara Federal de Dourados) · Tempestividade: ANATEL: [VALIDAR tempestividade: intimação da sentença não localizada no texto extraído; apelação de 06/11/2025] · Etiqueta \"Res 547/2024 CNJ\"",
+     "assuntoDet": "Multas e demais Sanções — [VALIDAR detalhamento]",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Não verificado"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária",
+    "mov_fonte": "linha do tempo do PJe (autos extraídos)",
+    "ultima_decisao": "Decisão · ID 344619919 · 27/11/2025 — recebeu o recurso sem conceder efeito suspensivo",
+    "ultima_peca": "Apelação (PGF) · ID 343886562 · 06/11/2025",
+    "ultima_informacao": "Informação · ID 343886564 · 17/11/2025",
+    "aviso": "Conferido em 26/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 26/11/2026: última decisão: ID 344619919 · 27/11/2025 — recebeu o recurso sem conceder efeito suspensivo | última peça: Apelação (PGF) · ID 343886562 · 06/11/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária"
    }
   },
   {
@@ -32594,12 +34151,14 @@
    "exequente": "MEYER OSTROWSKY",
    "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "assunto": "Multas e demais Sanções",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "AP2",
+   "tipo_caso": "Apelação de Meyer Ostrowsky em embargos à execução fiscal · Multas e demais Sanções · improcedência",
+   "resultado": "Ato a proferir: apelação de Meyer Ostrowsky (ID 284394236) da sentença ID 284394233; contrarrazões: ID 284394284 ‖ Proposta pelos precedentes: Voto [VALIDAR paradigma]. Etiqueta \"LOTE MULTA - APCIV\" [VALIDAR: Preparo: Meyer Ostrowsky: guia ou comprovante (ID 284394281) [VALIDAR]]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação de Meyer Ostrowsky contra sentença (improcedência) da 4ª Vara Federal de Campo Grande em embargos à execução fiscal: Diante do exposto, nos termos do artigo 487, inciso I, do CPC, julgo improcedente o pedido material da presente ação. Custas ex lege. Condeno a autora no pagamento de honorários advocatícios que fixo em 10% (dez por cento) sobre o valor atualizado da causa, nos termos do artigo 85, 3º, I, e 4º, III, do CPC/2015.Publique-se. Registre-se. Intimem-se. Oportunamente, arquivem-se os autos.Campo Grande, MS, 18 de agosto de",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -32610,7 +34169,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da(s) apelação(ões) (voto)",
+    "materia": "Multas e demais Sanções",
+    "origem": "Embargos à execução fiscal 5000794-60.2017.4.03.6000 (4ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 284394233 (22/09/2023)",
+    "recurso": "apelação de Meyer Ostrowsky (ID 284394236, 20/10/2023)",
+    "preparo": "Meyer Ostrowsky: guia ou comprovante (ID 284394281) [VALIDAR]",
+    "monocratica": "Improvável sem paradigma",
+    "analisado_em": "26/11/2026",
+    "conf_preparo": "Meyer Ostrowsky: guia ou comprovante (ID 284394281) [VALIDAR] · conferido em 26/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 26/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -32620,6 +34190,115 @@
    "chegada": "06/04/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Multas e demais Sanções — [VALIDAR detalhamento]",
+   "especificidades": "► Situação em 26/11/2026: última decisão: ID 285281353 · 09/02/2024 — …D E C I S Ã O Recebo a apelação (Id. 284394236) apenas no efeito devolutivo, consoante o artigo 1.012, §1º, inciso III, do CPC.Publique-se. Intime-se. Após, conclusos | última peça: Manifestação (PFN) · ID 285553450 · 19/02/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Origem: embargos à execução fiscal (4ª Vara Federal de Campo Grande) · Prevenção a conferir: AI 5001923-53.2020.4.03.0000 · Tempestividade: Meyer Ostrowsky: [VALIDAR tempestividade: intimação da sentença não localizada no texto extraído; apelação de 20/10/2023]",
+   "teor": {
+    "sintese_fatica": "Meyer Ostrowsky opôs embargos à execução fiscal 0007652-95.2017.4.03.6000 de título do TCU [VALIDAR]. A sentença julgou improcedente o pedido, com honorários de 10% do valor atualizado da causa.",
+    "inicial": "Embargos à execução fiscal ajuizado(a) em 11/10/2017 (petição inicial ID 284393672).",
+    "decisao_recorrida": "Sentença ID 284394233 (22/09/2023): Diante do exposto, nos termos do artigo 487, inciso I, do CPC, julgo improcedente o pedido material da presente ação. Custas ex lege. Condeno a autora no pagamento de honorários advocatícios que fixo em 10% (dez por cento) sobre o valor atualizado da causa, nos termos do artigo 85, 3º, I, e 4º, III, do CPC/2015.Publique-se. Registre-se. Intimem-se. Oportunamente, arquivem-se os autos.Campo Grande, MS, 18 de agosto de 2017.O processo foi digitalizado sob nº 5001446-77.2017.4.03.6000 e, em consulta no Pje, constata-se que a sentença foi confirmada pelo TRF3, em sede de recurso de apelação, cujo ",
+    "recurso": "Meyer Ostrowsky (ID 284394236, 20/10/2023): nulidade da sentença e retorno à origem [VALIDAR teses]",
+    "resposta": "Contrarrazões: ID 284394284 (18/12/2023).",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "[VALIDAR representação]",
+    "preparo": "Meyer Ostrowsky: guia ou comprovante (ID 284394281) [VALIDAR]"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação de Meyer Ostrowsky em embargos à execução fiscal · Multas e demais Sanções · improcedência",
+     "sintese": "Meyer Ostrowsky opôs embargos à execução fiscal 0007652-95.2017.4.03.6000 de título do TCU [VALIDAR]. A sentença julgou improcedente o pedido, com honorários de 10% do valor atualizado da causa.",
+     "questoes": "1) nulidade da sentença [VALIDAR fundamento]; 2) validade do título do TCU",
+     "rel": {
+      "razoes": "Meyer Ostrowsky (ID 284394236, 20/10/2023): nulidade da sentença e retorno à origem [VALIDAR teses]",
+      "contrarrazoes": "Contrarrazões: ID 284394284 (18/12/2023)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "284394233",
+      "juizo": "Embargos à execução fiscal 5000794-60.2017.4.03.6000 (4ª Vara Federal de Campo Grande)",
+      "dispositivo": "Diante do exposto, nos termos do artigo 487, inciso I, do CPC, julgo improcedente o pedido material da presente ação. Custas ex lege. Condeno a autora no pagamento de honorários advocatícios que fixo em 10% (dez por cento) sobre o valor atualizado da causa, nos termos do artigo 85, 3º, I, e 4º, III, do CPC/2015.Publique-se. Registre-se. Intimem-se. Oportunamente, arquivem-se os autos.Campo Grande, MS, 18 de agosto de 2017.O processo foi digitalizado sob nº 5001446-77.2017.4.03.6000 e, em consulta no Pje, constata-se que a sentença foi confirmada pelo TRF3, em sede de recurso de apelação, cujo "
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2023-10-20",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Meyer Ostrowsky",
+       "tipo": "Apelação",
+       "id": "284394236",
+       "contra": "Sentença"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: improcedência",
+       "id": "284394233",
+       "data": "2023-09-22",
+       "nota": "Sentença ID 284394233 (22/09/2023): Diante do exposto, nos termos do artigo 487, inciso I, do CPC, julgo improcedente o pedido material da presente ação.",
+       "pje": {
+        "tipo": "Sentença"
+       },
+       "trecho": "Diante do exposto, nos termos do artigo 487, inciso I, do CPC, julgo improcedente o pedido material da presente ação. Custas ex lege. Condeno a autora no pagamento de honorários advocatícios que fixo em 10% (dez por cento) sobre o valor atualizado da causa, nos termos do artigo 85, 3º, I, e 4º, …"
+      },
+      {
+       "desc": "Apelação: Meyer Ostrowsky",
+       "id": "284394236",
+       "data": "2023-10-20",
+       "nota": "Meyer Ostrowsky (ID 284394236, 20/10/2023): nulidade da sentença e retorno à origem [VALIDAR teses]",
+       "pje": {
+        "tipo": "Apelação",
+        "paginas": 25
+       },
+       "trecho": "Diante do exposto, submeto à consideração superior a proposta de encaminhar os presentes autos ao Ministério Público junto a este Tribunal de Contas propondo o arquivamento do processo , urna vez que as irregularidades ainda tratadas nestes autos não resultaram até a presente data em prejuízo ao …"
+      },
+      {
+       "desc": "Contrarrazões",
+       "id": "284394284",
+       "data": "2023-12-18",
+       "nota": "Contrarrazões: ID 284394284 (18/12/2023).",
+       "pje": {
+        "tipo": "Contrarrazões"
+       },
+       "trecho": "Diante do exposto: 1) - em relação aos pedidos de nulidade do Acórdão do TCU nº 2.425/2011-Plenário e, em caráter sucessivo, de declaração do prejuízo (despesa não comprovada) em R$ 60.876,25, reconheço a ocorrência de coisa julgada, extinguindo os processos 5000794-60.2017.403.6000 e …"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 26/11/2026: última decisão: ID 285281353 · 09/02/2024 — …D E C I S Ã O Recebo a apelação (Id. 284394236) apenas no efeito devolutivo, consoante o artigo 1.012, §1º, inciso III, do CPC.Publique-se. Intime-se. Após, conclusos | última peça: Manifestação (PFN) · ID 285553450 · 19/02/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Origem: embargos à execução fiscal (4ª Vara Federal de Campo Grande) · Prevenção a conferir: AI 5001923-53.2020.4.03.0000 · Tempestividade: Meyer Ostrowsky: [VALIDAR tempestividade: intimação da sentença não localizada no texto extraído; apelação de 20/10/2023]",
+     "assuntoDet": "Multas e demais Sanções — [VALIDAR detalhamento]",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Não verificado"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária",
+    "mov_fonte": "linha do tempo do PJe (autos extraídos)",
+    "ultima_decisao": "Decisão · ID 285281353 · 09/02/2024 — …D E C I S Ã O Recebo a apelação (Id. 284394236) apenas no efeito devolutivo, consoante o artigo 1.012, §1º, inciso III, do CPC.Publique-se. Intime-se. Após, conclusos",
+    "ultima_peca": "Manifestação (PFN) · ID 285553450 · 19/02/2024",
+    "ultima_informacao": "Certidão · ID 284927749 · 01/02/2024",
+    "aviso": "Conferido em 26/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 26/11/2026: última decisão: ID 285281353 · 09/02/2024 — …D E C I S Ã O Recebo a apelação (Id. 284394236) apenas no efeito devolutivo, consoante o artigo 1.012, §1º, inciso III, do CPC.Publique-se. Intime-se. Após, conclusos | última peça: Manifestação (PFN) · ID 285553450 · 19/02/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária"
    }
   },
   {
@@ -32631,12 +34310,14 @@
    "exequente": "LUMERCO COMERCIO DE ILUMINACOES LTDA - ME",
    "executado": "AGENCIA ESTADUAL DE METROLOGIA",
    "assunto": "Multas e demais Sanções",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "AP2",
+   "tipo_caso": "Apelação de Lumerco Comércio de Iluminações Ltda. ME em procedimento comum · Multas e demais Sanções · improcedência",
+   "resultado": "Ato a proferir: apelação de Lumerco Comércio de Iluminações Ltda. ME (ID 291190340) da sentença ID 291190329, integrada pela sentença dos embargos de declaração ID 291190339; contrarrazões: ID 291190351 ‖ Proposta pelos precedentes: Voto [VALIDAR paradigma]. Etiqueta \"LOTE MULTA - APCIV\" [VALIDAR: Preparo: Lumerco Comércio de Iluminações Ltda. ME: guia ou comprovante (ID 291190342) [VALIDAR]]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação de Lumerco Comércio de Iluminações Ltda. ME contra sentença (improcedência) da 2ª Vara Federal de Campo Grande em procedimento comum: Diante do exposto, julgo improcedentes os pedidos formulados na exordial e, na forma do art. 487, I, do CPC, dou por extinto o feito com resolução de mérito. Condeno a parte autora ao pagamento de honorários advocatícios, que fixo em R$ 1.500,00 (mil e quinhentos mil reais), nos termos do art. 85, § 8º do CPC.Custas pela autora.Publique-se e intimem-se. Oportunamente, arquivem-se.Campo Grande, MS, datado e assinado e",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -32647,7 +34328,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da(s) apelação(ões) (voto)",
+    "materia": "Multas e demais Sanções",
+    "origem": "Procedimento comum 5002659-50.2019.4.03.6000 (2ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 291190329 (03/08/2022)",
+    "recurso": "apelação de Lumerco Comércio de Iluminações Ltda. ME (ID 291190340, 28/07/2023)",
+    "preparo": "Lumerco Comércio de Iluminações Ltda. ME: guia ou comprovante (ID 291190342) [VALIDAR]",
+    "monocratica": "Improvável sem paradigma",
+    "analisado_em": "26/11/2026",
+    "conf_preparo": "Lumerco Comércio de Iluminações Ltda. ME: guia ou comprovante (ID 291190342) [VALIDAR] · conferido em 26/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 26/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -32657,6 +34349,127 @@
    "chegada": "06/04/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Multas e demais Sanções — [VALIDAR detalhamento]",
+   "especificidades": "► Situação em 26/11/2026: última decisão: ID 291190350 · 21/03/2024 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 291190339 · 04/07/2023 — sentença (dispositivo a conferir) | última peça: Contrarrazões (advogado de parte) · ID 291190351 · 01/04/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Origem: procedimento comum (2ª Vara Federal de Campo Grande) · Embargos de declaração julgados (ID 291190339) · Prevenção a conferir: AI 5020872-62.2019.4.03.0000 · Tempestividade: Lumerco Comércio de Iluminações Ltda. ME: [VALIDAR tempestividade: intimação da sentença não localizada no texto extraído; apelação de 28/07/2023]",
+   "teor": {
+    "sintese_fatica": "Lumerco Comércio de Iluminações Ltda. ME pediu a nulidade de autuação da Agência Estadual de Metrologia. A sentença julgou improcedentes os pedidos, com honorários de R$ 1.500,00; os embargos de declaração foram rejeitados.",
+    "inicial": "Procedimento comum ajuizado(a) em 11/04/2019 (petição inicial ID 291189765).",
+    "decisao_recorrida": "Sentença ID 291190329 (03/08/2022): Diante do exposto, julgo improcedentes os pedidos formulados na exordial e, na forma do art. 487, I, do CPC, dou por extinto o feito com resolução de mérito. Condeno a parte autora ao pagamento de honorários advocatícios, que fixo em R$ 1.500,00 (mil e quinhentos mil reais), nos termos do art. 85, § 8º do CPC.Custas pela autora.Publique-se e intimem-se. Oportunamente, arquivem-se.Campo Grande, MS, datado e assinado eletronicamente. ",
+    "recurso": "Lumerco Comércio de Iluminações Ltda. ME (ID 291190340, 28/07/2023): anulação da autuação metrológica [VALIDAR teses]",
+    "resposta": "Contrarrazões: ID 291190351 (01/04/2024).",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "[VALIDAR representação]",
+    "preparo": "Lumerco Comércio de Iluminações Ltda. ME: guia ou comprovante (ID 291190342) [VALIDAR]"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação de Lumerco Comércio de Iluminações Ltda. ME em procedimento comum · Multas e demais Sanções · improcedência",
+     "sintese": "Lumerco Comércio de Iluminações Ltda. ME pediu a nulidade de autuação da Agência Estadual de Metrologia. A sentença julgou improcedentes os pedidos, com honorários de R$ 1.500,00; os embargos de declaração foram rejeitados.",
+     "questoes": "1) validade do auto de infração metrológica",
+     "rel": {
+      "razoes": "Lumerco Comércio de Iluminações Ltda. ME (ID 291190340, 28/07/2023): anulação da autuação metrológica [VALIDAR teses]",
+      "contrarrazoes": "Contrarrazões: ID 291190351 (01/04/2024)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "291190329",
+      "juizo": "Procedimento comum 5002659-50.2019.4.03.6000 (2ª Vara Federal de Campo Grande)",
+      "dispositivo": "Diante do exposto, julgo improcedentes os pedidos formulados na exordial e, na forma do art. 487, I, do CPC, dou por extinto o feito com resolução de mérito. Condeno a parte autora ao pagamento de honorários advocatícios, que fixo em R$ 1.500,00 (mil e quinhentos mil reais), nos termos do art. 85, § 8º do CPC.Custas pela autora.Publique-se e intimem-se. Oportunamente, arquivem-se.Campo Grande, MS, datado e assinado eletronicamente. "
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2023-07-28",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Lumerco Comércio de Iluminações Ltda. ME",
+       "tipo": "Apelação",
+       "id": "291190340",
+       "contra": "Sentença"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: improcedência",
+       "id": "291190329",
+       "data": "2022-08-03",
+       "nota": "Sentença ID 291190329 (03/08/2022): Diante do exposto, julgo improcedentes os pedidos formulados na exordial e, na forma do art.",
+       "pje": {
+        "tipo": "Sentença"
+       },
+       "trecho": "Por tais fundamentos, a improcedência do pedido é medida que se impõe.3 – Dispositivo Diante do exposto, julgo improcedentes os pedidos formulados na exordial e, na forma do art. 487, I, do CPC, dou por extinto o feito com resolução de mérito. Condeno a parte autora ao pagamento de honorários …"
+      },
+      {
+       "desc": "Sentença: embargos de declaração",
+       "id": "291190339",
+       "data": "2023-07-04",
+       "nota": "Origem: procedimento comum (2ª Vara Federal de Campo Grande) · Embargos de declaração julgados (ID 291190339) · Prevenção a conferir: AI 5020872-62.2019.4.03.0000 · Tempestividade: Lumerco Comércio de Iluminações Ltda. ME: [VALIDAR tempestividade: intimação da sentença não localizada no texto extraído; apelação de 28/07/2023]",
+       "pje": {
+        "tipo": "Sentença"
+       },
+       "trecho": "Diante do exposto, rejeito os presentes embargos.Publique-se e intimem-se. Campo Grande, MS, datado e assinado eletronicamente."
+      },
+      {
+       "desc": "Apelação: Lumerco Comércio de Iluminações Ltda. ME",
+       "id": "291190340",
+       "data": "2023-07-28",
+       "nota": "Lumerco Comércio de Iluminações Ltda. ME (ID 291190340, 28/07/2023): anulação da autuação metrológica [VALIDAR teses]",
+       "pje": {
+        "tipo": "Apelação",
+        "paginas": 7
+       },
+       "trecho": "requer a Apelante o acolhimento do Recurso de Apela ção, para o fim de reformar a r. sentença recorrida, para que os pedidos formulados na Inicial sejam julgados TOTALMENTE PROCEDENTES , para o fim de que seja anulado o auto de infração, e por consequência m ulta importa, seja pela ausência d e …"
+      },
+      {
+       "desc": "Contrarrazões",
+       "id": "291190351",
+       "data": "2024-04-01",
+       "nota": "Contrarrazões: ID 291190351 (01/04/2024).",
+       "pje": {
+        "tipo": "Contrarrazões",
+        "descricao": "P CONTRARRAZÕES 1449818201 EM 01/04/2024 19:23:40"
+       },
+       "trecho": "Diante do exposto, consoante as razões preconizadas acima, demonstrada de forma insofismável a inconsistência do recurso interposto pelo recorrente, requer-se seja negado provimento ao Recurso, e, por conseguinte, seja mantida a r. sentença de improcedência, com a majoração dos honorários recursais …"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 26/11/2026: última decisão: ID 291190350 · 21/03/2024 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 291190339 · 04/07/2023 — sentença (dispositivo a conferir) | última peça: Contrarrazões (advogado de parte) · ID 291190351 · 01/04/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Origem: procedimento comum (2ª Vara Federal de Campo Grande) · Embargos de declaração julgados (ID 291190339) · Prevenção a conferir: AI 5020872-62.2019.4.03.0000 · Tempestividade: Lumerco Comércio de Iluminações Ltda. ME: [VALIDAR tempestividade: intimação da sentença não localizada no texto extraído; apelação de 28/07/2023]",
+     "assuntoDet": "Multas e demais Sanções — [VALIDAR detalhamento]",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Não verificado"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária",
+    "mov_fonte": "linha do tempo do PJe (autos extraídos)",
+    "ultima_decisao": "Despacho · ID 291190350 · 21/03/2024 — remessa ou redistribuição à Turma Regional (sem exame do recurso)",
+    "ultima_decisao_relevante": "Sentença · ID 291190339 · 04/07/2023 — sentença (dispositivo a conferir)",
+    "ultima_peca": "Contrarrazões (advogado de parte) · ID 291190351 · 01/04/2024",
+    "ultima_informacao": "Certidão · ID 291962244 · 07/06/2024",
+    "aviso": "Conferido em 26/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 26/11/2026: última decisão: ID 291190350 · 21/03/2024 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 291190339 · 04/07/2023 — sentença (dispositivo a conferir) | última peça: Contrarrazões (advogado de parte) · ID 291190351 · 01/04/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária"
    }
   },
   {
@@ -32668,12 +34481,14 @@
    "exequente": "SEMENTES BOI GORDO LTDA",
    "executado": "UNIÃO FEDERAL",
    "assunto": "Multas e demais Sanções",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "AP2",
+   "tipo_caso": "Apelação de Sementes Boi Gordo Ltda. em procedimento comum · Multas e demais Sanções · improcedência",
+   "resultado": "Ato a proferir: apelação de Sementes Boi Gordo Ltda. (ID 292918521) da sentença ID 292918519; contrarrazões não localizadas ‖ Proposta pelos precedentes: Voto. Referência do Relator: ApCiv 0002716-27.2017.4.03.6000 (15/09/2026), autuação do MAPA sobre sementes mantida [VALIDAR aderência]. Etiqueta \"LOTE MULTA - APCIV\" [VALIDAR: Preparo: Sementes Boi Gordo Ltda.: guia ou comprovante (ID 292918523) [VALIDAR]; Contrarrazões; Preparo: boleto sem comprovante localizado (ID 292918523)]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação de Sementes Boi Gordo Ltda. contra sentença (improcedência) da 4ª Vara Federal de Campo Grande em procedimento comum: Diante do exposto, julgo improcedente o pedido. Condeno a autora a pagar honorários advocatícios aos Procuradores da ré, que fixo nos percentuais mínimos do art. 85, § 3º, do CPC. Custas pela autora.P. R. I. Havendo interposição de recurso de apelação, determino, desde já, a intimação da parte contrária para, querendo, apresentar contrarrazões. Após, remetam-se os autos ao egrégio Tribunal Regional Federal da 3ª Regi",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -32684,7 +34499,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da(s) apelação(ões) (voto)",
+    "materia": "Multas e demais Sanções",
+    "origem": "Procedimento comum 5002380-98.2018.4.03.6000 (4ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 292918519 (09/04/2024)",
+    "recurso": "apelação de Sementes Boi Gordo Ltda. (ID 292918521, 29/04/2024)",
+    "preparo": "Sementes Boi Gordo Ltda.: guia ou comprovante (ID 292918523) [VALIDAR]",
+    "monocratica": "Improvável sem paradigma",
+    "analisado_em": "26/11/2026",
+    "conf_preparo": "Sementes Boi Gordo Ltda.: guia ou comprovante (ID 292918523) [VALIDAR] · conferido em 26/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 26/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -32694,6 +34520,105 @@
    "chegada": "06/04/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Multas e demais Sanções — [VALIDAR detalhamento]",
+   "especificidades": "► Situação em 26/11/2026: última decisão: ID 292918520 · 09/04/2024 — sentença: julgou improcedente o pedido | última peça: Comprovante de Recolhimento de Preparo (advogado de parte) · ID 292918524 · 29/04/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Origem: procedimento comum (4ª Vara Federal de Campo Grande) · Prevenção a conferir: AI 5015317-64.2019.4.03.0000 · Tempestividade: Sementes Boi Gordo Ltda.: [VALIDAR tempestividade: intimação da sentença não localizada no texto extraído; apelação de 29/04/2024]",
+   "teor": {
+    "sintese_fatica": "Sementes Boi Gordo Ltda. pediu a nulidade de multa aplicada pelo MAPA. A sentença julgou improcedente o pedido, com honorários nos percentuais mínimos do artigo 85, § 3º, do CPC.",
+    "inicial": "Procedimento comum ajuizado(a) em 05/04/2018 (petição inicial ID 292918450).",
+    "decisao_recorrida": "Sentença ID 292918519 (09/04/2024): Diante do exposto, julgo improcedente o pedido. Condeno a autora a pagar honorários advocatícios aos Procuradores da ré, que fixo nos percentuais mínimos do art. 85, § 3º, do CPC. Custas pela autora.P. R. I. Havendo interposição de recurso de apelação, determino, desde já, a intimação da parte contrária para, querendo, apresentar contrarrazões. Após, remetam-se os autos ao egrégio Tribunal Regional Federal da 3ª Região, sob as cautelas de estilo.Não havendo requerimentos, com o trânsito em julgado, arquivem-se.Campo Grande, MS, 8 de abril de 2023. PEDRO PEREIRA DOS SANTOSJUIZ FEDERAL ",
+    "recurso": "Sementes Boi Gordo Ltda. (ID 292918521, 29/04/2024): procedência do pedido de nulidade da multa do MAPA ou, subsidiariamente, redução [VALIDAR]",
+    "resposta": "Não localizadas.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "[VALIDAR representação]",
+    "preparo": "Sementes Boi Gordo Ltda.: guia ou comprovante (ID 292918523) [VALIDAR]"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação de Sementes Boi Gordo Ltda. em procedimento comum · Multas e demais Sanções · improcedência",
+     "sintese": "Sementes Boi Gordo Ltda. pediu a nulidade de multa aplicada pelo MAPA. A sentença julgou improcedente o pedido, com honorários nos percentuais mínimos do artigo 85, § 3º, do CPC.",
+     "questoes": "1) regularidade da fiscalização de sementes e da autuação",
+     "rel": {
+      "razoes": "Sementes Boi Gordo Ltda. (ID 292918521, 29/04/2024): procedência do pedido de nulidade da multa do MAPA ou, subsidiariamente, redução [VALIDAR]",
+      "contrarrazoes": "Não localizadas."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "292918519",
+      "juizo": "Procedimento comum 5002380-98.2018.4.03.6000 (4ª Vara Federal de Campo Grande)",
+      "dispositivo": "Diante do exposto, julgo improcedente o pedido. Condeno a autora a pagar honorários advocatícios aos Procuradores da ré, que fixo nos percentuais mínimos do art. 85, § 3º, do CPC. Custas pela autora.P. R. I. Havendo interposição de recurso de apelação, determino, desde já, a intimação da parte contrária para, querendo, apresentar contrarrazões. Após, remetam-se os autos ao egrégio Tribunal Regional Federal da 3ª Região, sob as cautelas de estilo.Não havendo requerimentos, com o trânsito em julgado, arquivem-se.Campo Grande, MS, 8 de abril de 2023. PEDRO PEREIRA DOS SANTOSJUIZ FEDERAL "
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2024-04-29",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Sementes Boi Gordo Ltda.",
+       "tipo": "Apelação",
+       "id": "292918521",
+       "contra": "Sentença"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: improcedência",
+       "id": "292918519",
+       "data": "2024-04-09",
+       "nota": "Sentença ID 292918519 (09/04/2024): Diante do exposto, julgo improcedente o pedido.",
+       "pje": {
+        "tipo": "Sentença"
+       },
+       "trecho": "Diante do exposto, julgo improcedente o pedido. Condeno a autora a pagar honorários advocatícios aos Procuradores da ré, que fixo nos percentuais mínimos do art. 85, § 3º, do CPC. Custas pela autora.P. R. I. Havendo interposição de recurso de apelação, determino, desde já, a intimação da parte …"
+      },
+      {
+       "desc": "Apelação: Sementes Boi Gordo Ltda.",
+       "id": "292918521",
+       "data": "2024-04-29",
+       "nota": "Sementes Boi Gordo Ltda. (ID 292918521, 29/04/2024): procedência do pedido de nulidade da multa do MAPA ou, subsidiariamente, redução [VALIDAR]",
+       "pje": {
+        "tipo": "Apelação",
+        "paginas": 12
+       },
+       "trecho": "Diante do exposto, requer-se que este Egrégio Tribunal: a) Conheça da presente apelação e lhe dê provimento, reformando a sentença para julgar procedente o pedido da Apelante; b) Caso o entendimento de Vossas Excelências seja pela legitimidade do auto de infração, que seja revisto o valor da multa …"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 26/11/2026: última decisão: ID 292918520 · 09/04/2024 — sentença: julgou improcedente o pedido | última peça: Comprovante de Recolhimento de Preparo (advogado de parte) · ID 292918524 · 29/04/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Origem: procedimento comum (4ª Vara Federal de Campo Grande) · Prevenção a conferir: AI 5015317-64.2019.4.03.0000 · Tempestividade: Sementes Boi Gordo Ltda.: [VALIDAR tempestividade: intimação da sentença não localizada no texto extraído; apelação de 29/04/2024]",
+     "assuntoDet": "Multas e demais Sanções — [VALIDAR detalhamento]",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Não verificado"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária",
+    "mov_fonte": "linha do tempo do PJe (autos extraídos)",
+    "ultima_decisao": "Sentença · ID 292918520 · 09/04/2024 — sentença: julgou improcedente o pedido",
+    "ultima_peca": "Comprovante de Recolhimento de Preparo (advogado de parte) · ID 292918524 · 29/04/2024",
+    "ultima_informacao": "Certidão · ID 293424051 · 08/07/2024",
+    "aviso": "Conferido em 26/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 26/11/2026: última decisão: ID 292918520 · 09/04/2024 — sentença: julgou improcedente o pedido | última peça: Comprovante de Recolhimento de Preparo (advogado de parte) · ID 292918524 · 29/04/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária"
    }
   },
   {
@@ -32705,12 +34630,14 @@
    "exequente": "JAIRO FERNANDES MAZETTO",
    "executado": "UNIÃO FEDERAL",
    "assunto": "Multas e demais Sanções",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "AP2",
+   "tipo_caso": "Apelação de Jairo Fernandes Mazetto em procedimento comum · Multas e demais Sanções · improcedência",
+   "resultado": "Ato a proferir: apelação de Jairo Fernandes Mazetto (ID 303689359) da sentença ID 303689357; contrarrazões: ID 306437480 ‖ Proposta pelos precedentes: Voto [VALIDAR paradigma]. Etiqueta \"LOTE MULTA - APCIV\"",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação de Jairo Fernandes Mazetto contra sentença (improcedência) da 4ª Vara Federal de Campo Grande em procedimento comum: Diante do exposto, julgo improcedente o pedido, extinguindo o processo com resolução do mérito, nos termos do art. 487, I, do CPC.Condeno ao autor ao pagamento de honorários aos procuradores do réu, fixados nos percentuais mínimos estabelecidos no art. 85, § 3º, I a VI e § 4º, III, todos do CPC, sobre o valor atualizado da causa, levando-se em conta as vetoriais do art. 85, § 2º do CPC (médio grau de complexidade da ",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -32721,7 +34648,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da(s) apelação(ões) (voto)",
+    "materia": "Multas e demais Sanções",
+    "origem": "Procedimento comum 5007161-90.2023.4.03.6000 (4ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 303689357 (17/07/2024)",
+    "recurso": "apelação de Jairo Fernandes Mazetto (ID 303689359, 07/08/2024)",
+    "preparo": "Jairo Fernandes Mazetto: justiça gratuita (ID 303689348)",
+    "monocratica": "Improvável sem paradigma",
+    "analisado_em": "26/11/2026",
+    "conf_preparo": "Jairo Fernandes Mazetto: justiça gratuita (ID 303689348) · conferido em 26/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 26/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -32731,6 +34669,115 @@
    "chegada": "06/04/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Multas e demais Sanções — [VALIDAR detalhamento]",
+   "especificidades": "► Situação em 26/11/2026: última decisão: ID 304550707 · 01/10/2024 — recebeu o recurso sem conceder efeito suspensivo | última peça: Procuração/substabelecimento com reserva de poderes (advogado de parte) · ID 339133560 · 13/10/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Origem: procedimento comum (4ª Vara Federal de Campo Grande) · Gratuidade (ID 303689348) · Prevenção a conferir: AI 5025220-84.2023.4.03.0000 · Tempestividade: Jairo Fernandes Mazetto: [VALIDAR tempestividade: intimação da sentença não localizada no texto extraído; apelação de 07/08/2024]",
+   "teor": {
+    "sintese_fatica": "Jairo Fernandes Mazetto pediu a nulidade de multa de trânsito da PRF [VALIDAR]. A sentença julgou improcedente o pedido.",
+    "inicial": "Procedimento comum ajuizado(a) em 31/08/2023 (petição inicial ID 303689338).",
+    "decisao_recorrida": "Sentença ID 303689357 (17/07/2024): Diante do exposto, julgo improcedente o pedido, extinguindo o processo com resolução do mérito, nos termos do art. 487, I, do CPC.Condeno ao autor ao pagamento de honorários aos procuradores do réu, fixados nos percentuais mínimos estabelecidos no art. 85, § 3º, I a VI e § 4º, III, todos do CPC, sobre o valor atualizado da causa, levando-se em conta as vetoriais do art. 85, § 2º do CPC (médio grau de complexidade da causa, pouco tempo dispendido pelo advogado, ausência de produção de provas).As partes são isentas de custas (art. 4, I, da Lei n.º 9.289).Publique-se. Registre-se. Intimem-se.Have",
+    "recurso": "Jairo Fernandes Mazetto (ID 303689359, 07/08/2024): procedência dos pedidos sobre multa de trânsito [VALIDAR teses]",
+    "resposta": "Contrarrazões: ID 306437480 (07/10/2024).",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "[VALIDAR representação]",
+    "preparo": "Jairo Fernandes Mazetto: justiça gratuita (ID 303689348)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação de Jairo Fernandes Mazetto em procedimento comum · Multas e demais Sanções · improcedência",
+     "sintese": "Jairo Fernandes Mazetto pediu a nulidade de multa de trânsito da PRF [VALIDAR]. A sentença julgou improcedente o pedido.",
+     "questoes": "[VALIDAR] 1) validade da autuação de trânsito",
+     "rel": {
+      "razoes": "Jairo Fernandes Mazetto (ID 303689359, 07/08/2024): procedência dos pedidos sobre multa de trânsito [VALIDAR teses]",
+      "contrarrazoes": "Contrarrazões: ID 306437480 (07/10/2024)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "303689357",
+      "juizo": "Procedimento comum 5007161-90.2023.4.03.6000 (4ª Vara Federal de Campo Grande)",
+      "dispositivo": "Diante do exposto, julgo improcedente o pedido, extinguindo o processo com resolução do mérito, nos termos do art. 487, I, do CPC.Condeno ao autor ao pagamento de honorários aos procuradores do réu, fixados nos percentuais mínimos estabelecidos no art. 85, § 3º, I a VI e § 4º, III, todos do CPC, sobre o valor atualizado da causa, levando-se em conta as vetoriais do art. 85, § 2º do CPC (médio grau de complexidade da causa, pouco tempo dispendido pelo advogado, ausência de produção de provas).As partes são isentas de custas (art. 4, I, da Lei n.º 9.289).Publique-se. Registre-se. Intimem-se.Have"
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2024-08-07",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Jairo Fernandes Mazetto",
+       "tipo": "Apelação",
+       "id": "303689359",
+       "contra": "Sentença"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: improcedência",
+       "id": "303689357",
+       "data": "2024-07-17",
+       "nota": "Sentença ID 303689357 (17/07/2024): Diante do exposto, julgo improcedente o pedido, extinguindo o processo com resolução do mérito, nos termos do art.",
+       "pje": {
+        "tipo": "Sentença"
+       },
+       "trecho": "Diante do exposto, julgo improcedente o pedido, extinguindo o processo com resolução do mérito, nos termos do art. 487, I, do CPC.Condeno ao autor ao pagamento de honorários aos procuradores do réu, fixados nos percentuais mínimos estabelecidos no art. 85, § 3º, I a VI e § 4º, III, todos do CPC, …"
+      },
+      {
+       "desc": "Apelação: Jairo Fernandes Mazetto",
+       "id": "303689359",
+       "data": "2024-08-07",
+       "nota": "Jairo Fernandes Mazetto (ID 303689359, 07/08/2024): procedência dos pedidos sobre multa de trânsito [VALIDAR teses]",
+       "pje": {
+        "tipo": "Apelação",
+        "paginas": 6
+       },
+       "trecho": "requer o recebimento, processamento e, ao final, o provimento do presente Recurso de Apelação para reformar a sentença proferida pelo juízo de primeiro grau e dando procedência ao pedido para anulação e arquivamento do Auto de Inf ração de Trânsito – AIT nº T143091557 lavrado pela PRF, em razão da …"
+      },
+      {
+       "desc": "Contrarrazões",
+       "id": "306437480",
+       "data": "2024-10-07",
+       "nota": "Contrarrazões: ID 306437480 (07/10/2024).",
+       "pje": {
+        "tipo": "Contrarrazões"
+       },
+       "trecho": "requer: a) Liminarmente: a imposição de efeito suspensivo sobre o auto de infração nº T143091557 lavrado pela PRF. b) No mérito: a declaração de nulidade desse auto de infração e de todos os efeitos dele decorrentes. 2. CONSIDERAÇÕES INICIAIS 2.1. O impetrante traz em sua inicial dois argumentos …"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 26/11/2026: última decisão: ID 304550707 · 01/10/2024 — recebeu o recurso sem conceder efeito suspensivo | última peça: Procuração/substabelecimento com reserva de poderes (advogado de parte) · ID 339133560 · 13/10/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Origem: procedimento comum (4ª Vara Federal de Campo Grande) · Gratuidade (ID 303689348) · Prevenção a conferir: AI 5025220-84.2023.4.03.0000 · Tempestividade: Jairo Fernandes Mazetto: [VALIDAR tempestividade: intimação da sentença não localizada no texto extraído; apelação de 07/08/2024]",
+     "assuntoDet": "Multas e demais Sanções — [VALIDAR detalhamento]",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Justiça gratuita",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Não verificado"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária",
+    "mov_fonte": "linha do tempo do PJe (autos extraídos)",
+    "ultima_decisao": "Decisão · ID 304550707 · 01/10/2024 — recebeu o recurso sem conceder efeito suspensivo",
+    "ultima_peca": "Procuração/substabelecimento com reserva de poderes (advogado de parte) · ID 339133560 · 13/10/2025",
+    "ultima_informacao": "Certidão · ID 304499846 · 23/09/2024",
+    "aviso": "Conferido em 26/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 26/11/2026: última decisão: ID 304550707 · 01/10/2024 — recebeu o recurso sem conceder efeito suspensivo | última peça: Procuração/substabelecimento com reserva de poderes (advogado de parte) · ID 339133560 · 13/10/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária"
    }
   },
   {
@@ -32742,12 +34789,14 @@
    "exequente": "JAIR KLAUCK",
    "executado": "6ª SRPRF/SP POLICIA RODOVIARIA FEDERAL",
    "assunto": "Multas e demais Sanções",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "AP2",
+   "tipo_caso": "Apelação de Jair Klauck em procedimento comum · Multas e demais Sanções · improcedência",
+   "resultado": "Ato a proferir: apelação de Jair Klauck (ID 356735798) da sentença ID 356735792, integrada pela sentença dos embargos de declaração ID 356735797; contrarrazões: ID 356735796, ID 356735801 ‖ Proposta pelos precedentes: Voto [VALIDAR paradigma]. Etiqueta \"LOTE MULTA - APCIV\" [VALIDAR: Preparo: Jair Klauck: guia ou comprovante (ID 356735799, sem camada de texto) [VALIDAR]]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação de Jair Klauck contra sentença (improcedência) da 1ª Vara Federal de Três Lagoas em procedimento comum: Ante o exposto, revogo a decisão liminar e julgo improcedente o pedido inicial, e soluciono o feito com resolução de mérito, nos termos do artigo 487, inciso I, do Novo Código de Processo Civil.Condeno a parte autora ao pagamento de honorários de sucumbência que fixo em 10% sobre o valor atualizado da causa, nos termos do art. 85, §3º, do CPC/15. Condeno o autor ao pagamento das custas processuais remanescentes, fica",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -32758,7 +34807,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da(s) apelação(ões) (voto)",
+    "materia": "Multas e demais Sanções",
+    "origem": "Procedimento comum 5000548-50.2020.4.03.6003 (1ª Vara Federal de Três Lagoas)",
+    "decisao_agravada": "Sentença ID 356735792 (31/03/2025)",
+    "recurso": "apelação de Jair Klauck (ID 356735798, 01/10/2025)",
+    "preparo": "Jair Klauck: guia ou comprovante (ID 356735799, sem camada de texto) [VALIDAR]",
+    "monocratica": "Improvável sem paradigma",
+    "analisado_em": "26/11/2026",
+    "conf_preparo": "Jair Klauck: guia ou comprovante (ID 356735799, sem camada de texto) [VALIDAR] · conferido em 26/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 26/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -32768,6 +34828,138 @@
    "chegada": "06/04/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Multas e demais Sanções — [VALIDAR detalhamento]",
+   "especificidades": "► Situação em 26/11/2026: última decisão: ID 356735797 · 15/09/2025 — sentença (dispositivo a conferir) | última peça: Substabelecimento (advogado de parte) · ID 406791199 · 26/10/2026 | última movimentação: 26/10/2026 14:05 · Juntada de Petição de substabelecimento · Origem: procedimento comum (1ª Vara Federal de Três Lagoas) · Embargos de declaração julgados (ID 356735797) · Prevenção a conferir: AI 5027762-46.2021.4.03.0000 · Tempestividade: Jair Klauck: ciência em 18/09/2025, prazo de 15 dias até 09/10/2025; apelação de 01/10/2025",
+   "teor": {
+    "sintese_fatica": "Jair Klauck pediu a nulidade de autuação da PRF que levou à cassação da sua CNH. A sentença revogou a liminar e julgou improcedente o pedido; embargos de declaração do Estado de Mato Grosso do Sul não foram conhecidos.",
+    "inicial": "Procedimento comum ajuizado(a) em 19/05/2020 (petição inicial ID 356735595).",
+    "decisao_recorrida": "Sentença ID 356735792 (31/03/2025): Ante o exposto, revogo a decisão liminar e julgo improcedente o pedido inicial, e soluciono o feito com resolução de mérito, nos termos do artigo 487, inciso I, do Novo Código de Processo Civil.Condeno a parte autora ao pagamento de honorários de sucumbência que fixo em 10% sobre o valor atualizado da causa, nos termos do art. 85, §3º, do CPC/15. Condeno o autor ao pagamento das custas processuais remanescentes, ficando desde já intimado a recolhê-las.Interposta apelação contra esta sentença, por qualquer das partes, ou interposta apelação adesiva pelo apelado, intime-se a parte contrária para",
+    "recurso": "Jair Klauck (ID 356735798, 01/10/2025): nulidade do auto de infração que levou à cassação da CNH, por falta de notificação das infrações cometidas por terceiro",
+    "resposta": "Contrarrazões: ID 356735796 (28/05/2025), ID 356735801 (02/02/2026).",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "[VALIDAR representação]",
+    "preparo": "Jair Klauck: guia ou comprovante (ID 356735799, sem camada de texto) [VALIDAR]"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação de Jair Klauck em procedimento comum · Multas e demais Sanções · improcedência",
+     "sintese": "Jair Klauck pediu a nulidade de autuação da PRF que levou à cassação da sua CNH. A sentença revogou a liminar e julgou improcedente o pedido; embargos de declaração do Estado de Mato Grosso do Sul não foram conhecidos.",
+     "questoes": "1) notificação da autuação e indicação do condutor (artigos 257, § 7º, e 282 do CTB)",
+     "rel": {
+      "razoes": "Jair Klauck (ID 356735798, 01/10/2025): nulidade do auto de infração que levou à cassação da CNH, por falta de notificação das infrações cometidas por terceiro",
+      "contrarrazoes": "Contrarrazões: ID 356735796 (28/05/2025), ID 356735801 (02/02/2026)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "356735792",
+      "juizo": "Procedimento comum 5000548-50.2020.4.03.6003 (1ª Vara Federal de Três Lagoas)",
+      "dispositivo": "Ante o exposto, revogo a decisão liminar e julgo improcedente o pedido inicial, e soluciono o feito com resolução de mérito, nos termos do artigo 487, inciso I, do Novo Código de Processo Civil.Condeno a parte autora ao pagamento de honorários de sucumbência que fixo em 10% sobre o valor atualizado da causa, nos termos do art. 85, §3º, do CPC/15. Condeno o autor ao pagamento das custas processuais remanescentes, ficando desde já intimado a recolhê-las.Interposta apelação contra esta sentença, por qualquer das partes, ou interposta apelação adesiva pelo apelado, intime-se a parte contrária para"
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2025-10-01",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Jair Klauck",
+       "tipo": "Apelação",
+       "id": "356735798",
+       "contra": "Sentença"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: improcedência",
+       "id": "356735792",
+       "data": "2025-03-31",
+       "nota": "Sentença ID 356735792 (31/03/2025): Ante o exposto, revogo a decisão liminar e julgo improcedente o pedido inicial, e soluciono o feito com resolução de mérito, nos termos do artigo 487, inciso I, do Novo Código de Processo Civil.Condeno a parte autora ao pagamento de honorários de sucumbência que fixo em 10% sobre o valor atualizado da causa, nos termos do art.",
+       "pje": {
+        "tipo": "Sentença"
+       },
+       "trecho": "Dispositivo.Ante o exposto, revogo a decisão liminar e julgo improcedente o pedido inicial, e soluciono o feito com resolução de mérito, nos termos do artigo 487, inciso I, do Novo Código de Processo Civil.Condeno a parte autora ao pagamento de honorários de sucumbência que fixo em 10% sobre o …"
+      },
+      {
+       "desc": "Sentença: embargos de declaração",
+       "id": "356735797",
+       "data": "2025-09-15",
+       "nota": "Origem: procedimento comum (1ª Vara Federal de Três Lagoas) · Embargos de declaração julgados (ID 356735797) · Prevenção a conferir: AI 5027762-46.2021.4.03.0000 · Tempestividade: Jair Klauck: ciência em 18/09/2025, prazo de 15 dias até 09/10/2025; apelação de 01/10/2025",
+       "pje": {
+        "tipo": "Sentença"
+       },
+       "trecho": "acolho, parcialmente, os embargos para acrescentar na fundamentação da sentença de ID 358504639, o que segue:“Rejeito a alegação do autor de que não teria sido notificado das infrações de trânsito nºs T053623681 e B148555632, pois conforme documentos de ID 150061612 – Pág. 12/15, as notificações …"
+      },
+      {
+       "desc": "Apelação: Jair Klauck",
+       "id": "356735798",
+       "data": "2025-10-01",
+       "nota": "Jair Klauck (ID 356735798, 01/10/2025): nulidade do auto de infração que levou à cassação da CNH, por falta de notificação das infrações cometidas por terceiro",
+       "pje": {
+        "tipo": "Apelação",
+        "paginas": 12
+       },
+       "trecho": "Diante do exposto, a Apelante pede respeitosamente a Vossa Excelência que, juntamente com seus Eminentes Pares, conheça e dê provimento ao recurso para reformar a r. sentença apelada, nos termos da fundamentação supra. Pede deferimento. Curitiba, 01 de outubro de 2025. ISABELLA B. M. GONÇALVES …"
+      },
+      {
+       "desc": "Contrarrazões",
+       "id": "356735796",
+       "data": "2025-05-28",
+       "nota": "Contrarrazões: ID 356735796 (28/05/2025), ID 356735801 (02/02/2026).",
+       "pje": {
+        "tipo": "Contrarrazões de Recurso",
+        "paginas": 2
+       },
+       "trecho": "REQUERIMENTO 4. Por todo o exposto, pede o Embargado respeitosamente a Vossa Excelência que não conheça do recurso, ou, subsidiariamente, negue provimento aos embargos de declaração de ID 360908170, por, nesse caso específico, ausência dos requisitos previstos no art. 1.022, do CPC. Pede …"
+      },
+      {
+       "desc": "Contrarrazões",
+       "id": "356735801",
+       "data": "2026-02-02",
+       "nota": "Contrarrazões: ID 356735796 (28/05/2025), ID 356735801 (02/02/2026).",
+       "pje": {
+        "tipo": "Contrarrazões",
+        "descricao": "P CONTRARRAZÕES 3063209780 EM 02/02/2026 17:45:37",
+        "paginas": 7
+       },
+       "trecho": "requer seja negado provimento ao recurso de apelação, mantendo-se na íntegra a r. Sentença de origem. Termos em que, pede deferimento. São Paulo, 02 de fevereiro de 2026. JULIANA LOPES DA CRUZ ADVOGADA DA UNIÃO"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 26/11/2026: última decisão: ID 356735797 · 15/09/2025 — sentença (dispositivo a conferir) | última peça: Substabelecimento (advogado de parte) · ID 406791199 · 26/10/2026 | última movimentação: 26/10/2026 14:05 · Juntada de Petição de substabelecimento · Origem: procedimento comum (1ª Vara Federal de Três Lagoas) · Embargos de declaração julgados (ID 356735797) · Prevenção a conferir: AI 5027762-46.2021.4.03.0000 · Tempestividade: Jair Klauck: ciência em 18/09/2025, prazo de 15 dias até 09/10/2025; apelação de 01/10/2025",
+     "assuntoDet": "Multas e demais Sanções — [VALIDAR detalhamento]",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Tempestivo",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Não verificado"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "26/10/2026 14:05 · Juntada de Petição de substabelecimento",
+    "mov_fonte": "linha do tempo do PJe (autos extraídos)",
+    "ultima_decisao": "Sentença · ID 356735797 · 15/09/2025 — sentença (dispositivo a conferir)",
+    "ultima_peca": "Substabelecimento (advogado de parte) · ID 406791199 · 26/10/2026",
+    "ultima_informacao": "Certidão · ID 358484937 · 06/03/2026",
+    "aviso": "Conferido em 26/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 26/11/2026: última decisão: ID 356735797 · 15/09/2025 — sentença (dispositivo a conferir) | última peça: Substabelecimento (advogado de parte) · ID 406791199 · 26/10/2026 | última movimentação: 26/10/2026 14:05 · Juntada de Petição de substabelecimento"
    }
   },
   {
