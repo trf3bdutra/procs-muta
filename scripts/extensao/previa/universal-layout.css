@@ -1059,7 +1059,7 @@ html body.hero-redesign-v53 #panel-min .hero-review-editorial .hero-review-fused
 .cf-matrix-evidence .cf-tr{font-size:11px;margin:4px 0;padding:5px;overflow-wrap:anywhere}
 
 /* Perfil integrado: superfície contínua, identificação, autuação, partes e histórico. */
-html body.hero-redesign-v53 #gab section.card.hero-v53-painel:has(.hero-profile-editorial[open]){--profile-rule:var(--hero-pront-divider,var(--line));--profile-bg:color-mix(in srgb,var(--hero-pront-header,#f3f0e7) 52%,var(--hero-pront-paper,#fff));background:var(--profile-bg)!important;border:1px solid var(--profile-rule)!important;border-radius:0!important;margin:10px 10px 12px!important;box-shadow:none!important;overflow:hidden}
+html body.hero-redesign-v53 #gab section.card.hero-v53-painel:has(.hero-profile-editorial[open]){--profile-rule:var(--hero-pront-divider,var(--line));--profile-bg:#fff;background:var(--profile-bg)!important;border:1px solid var(--profile-rule)!important;border-radius:0!important;margin:10px 10px 12px!important;box-shadow:none!important;overflow:hidden}
 html body.hero-redesign-v53 #gab .hero-v53-painel:has(.hero-profile-editorial[open])>.hero-v53-painel-head{padding:6px 9px!important;background:var(--profile-bg)!important;border-bottom:1px solid var(--profile-rule)!important}
 html body.hero-redesign-v53 #gab .hero-v53-painel:has(.hero-profile-editorial[open])>.hero-v53-painel-body{padding:0!important}
 html body.hero-redesign-v53 #gab .hero-v53-painel .hero-profile-editorial[open]{padding:0!important;min-width:0;background:var(--profile-bg)!important}
@@ -1231,3 +1231,14 @@ html body.hero-redesign-v53 #pauta-app .pa-busca .pa-session-head .pa-sel{flex:1
 html body.hero-redesign-v53 #pauta-app .pa-busca .pa-session-head .pa-sel select{width:100%;min-width:0;max-width:none}
 html body.hero-redesign-v53 #pauta-app .pa-busca .pa-sol-resumo{border:0!important;border-top:1px solid var(--rep-rule)!important;background:transparent!important;border-radius:0!important;padding:6px 9px!important;margin:0!important;font-size:10px!important;gap:3px 6px}
 html body.hero-redesign-v53 #pauta-app .pa-busca .hero-rep-count{padding:6px 9px!important;margin:0!important;border-top:1px solid var(--rep-rule);font-size:10px!important;line-height:1.35;background:transparent!important}
+
+/* Perfil do processo: ficha cadastral branca, labels e valores na mesma linha. */
+html body.hero-redesign-v53 #gab .hero-profile-editorial .hero-profile-band>.pc-dl{column-gap:14px!important;row-gap:0!important}
+html body.hero-redesign-v53 #gab .hero-profile-editorial .hero-profile-band>.pc-dl>div{display:grid!important;grid-template-columns:minmax(72px,35%) minmax(0,1fr);align-items:start;gap:6px!important;padding:3px 0!important;border:0!important}
+html body.hero-redesign-v53 #gab .hero-profile-editorial .hero-profile-band>.pc-dl dt,html body.hero-redesign-v53 #gab .hero-profile-editorial .pc-p>span{font:400 10px/1.4 var(--sans,system-ui)!important;letter-spacing:0!important;text-transform:none!important;color:#64748b!important;margin:0!important;overflow-wrap:anywhere}
+html body.hero-redesign-v53 #gab .hero-profile-editorial .hero-profile-band>.pc-dl dd{font:400 11px/1.4 var(--sans,system-ui)!important;margin:0!important;min-width:0;color:#203343!important}
+html body.hero-redesign-v53 #gab .hero-profile-editorial .hero-profile-partes .pc-p{display:grid!important;grid-template-columns:minmax(72px,35%) minmax(0,1fr);gap:6px!important;align-items:start;padding:3px 0!important;border:0!important}
+html body.hero-redesign-v53 #gab .hero-profile-editorial .hero-profile-partes .pc-p>b{font-weight:400!important;min-width:0;overflow-wrap:anywhere}
+html body.hero-redesign-v53 #gab .hero-profile-editorial :is(.hero-profile-band,.hero-reg-acervo,.hero-materia)>h4.pm-mer-h{color:#52758a!important;margin-bottom:5px!important}
+html body.hero-redesign-v53 #gab .hero-profile-editorial :is(input:not([type=checkbox]):not([type=radio]),select,textarea){background:#fff!important;box-shadow:none!important;max-width:100%;min-width:0}
+@media(max-width:520px){html body.hero-redesign-v53 #gab .hero-profile-editorial .hero-profile-band>.pc-dl{grid-template-columns:minmax(0,1fr)!important}}
