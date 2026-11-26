@@ -177,6 +177,8 @@ function abrirAba(i,escolha){
     if(!u||u.estado!=='on'||!(u.gestor||u.perfil==='desembargador'))return;
   }
   selectTab(mainTabs,i);var n=NOMES[i];
+  var repTabs=$('hero-rep-header-tabs'),repOn=n==='ementario'||n==='par'||n==='modelos';
+  if(repTabs){repTabs.hidden=!repOn;repTabs.querySelectorAll('[data-emd]').forEach(function(b){b.setAttribute('aria-selected',String(repOn&&b.dataset.emd===n));});if(repOn&&window.MutaFontes&&window.MutaFontes.pintarTabs)window.MutaFontes.pintarTabs();}
   document.body.classList.toggle('hero-gestao-ativa',['dil','del','urg','gab'].includes(n));
   /* 0.47: Parágrafos-padrão é sub-aba do Ementário: a barra mantém o Ementário marcado */
   if(n==='par'||n==='modelos'){var te=$('tab-acervo');if(te)te.setAttribute('aria-selected','true');}
@@ -193,7 +195,7 @@ function abrirAba(i,escolha){
 }
 wireTabs(mainTabs,function(i){abrirAba(i,true);});
 document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-emd]');if(!b)return;var i=NOMES.indexOf(b.dataset.emd);if(i>=0)abrirAba(i);});
-window.MutaAbas={sincronizarProntuario:function(grupo){var p=$('panel-pront');if(!p||p.hidden)return;var i=NOMES.indexOf(grupo==='processo'?'processo':'pront');if(i>=0)selectTab(mainTabs,i);},ir:function(nome){if(nome==='ger'&&document.body.classList.contains('hero-redesign-v53')){abrirAba(NOMES.indexOf('pront'));if(window.MutaGabinete)window.MutaGabinete.ir('Produção');return;}var alvo=ALIAS[nome]||nome,i=NOMES.indexOf(alvo);if(i<0)return;abrirAba(i);if(nome==='tri'&&window.MutaGabinete&&window.MutaGabinete.ir)window.MutaGabinete.ir('Triagem');if((nome==='ger'||nome==='cmp'||nome==='conf')&&window.MutaGerador&&window.MutaGerador.modo)window.MutaGerador.modo(nome);}};
+window.MutaAbas={sincronizarProntuario:function(grupo){var p=$('panel-pront');if(!p||p.hidden)return;var i=NOMES.indexOf(grupo==='processo'?'processo':'pront');if(i>=0)selectTab(mainTabs,i);},ir:function(nome){if(nome==='ger'&&document.body.classList.contains('hero-redesign-v53')){abrirAba(NOMES.indexOf('pront'));if(window.MutaGabinete){if(window.MutaGabinete.irGerador)window.MutaGabinete.irGerador();else window.MutaGabinete.ir('Produção');}return;}var alvo=ALIAS[nome]||nome,i=NOMES.indexOf(alvo);if(i<0)return;abrirAba(i);if(nome==='tri'&&window.MutaGabinete&&window.MutaGabinete.ir)window.MutaGabinete.ir('Triagem');if((nome==='ger'||nome==='cmp'||nome==='conf')&&window.MutaGerador&&window.MutaGerador.modo)window.MutaGerador.modo(nome);}};
 (function(){var d=$('panel-lote');if(d)d.addEventListener('toggle',function(){if(d.open&&window.MutaLote)window.MutaLote.abrir();});var v=$('aj-volta');if(v)v.addEventListener('click',function(){abrirAba(0);});})();
 document.addEventListener('DOMContentLoaded',function(){var h=location.hash.replace('#','');var i=NOMES.indexOf(ALIAS[h]||h);if(i>0)abrirAba(i);});
 var modeTabs=[$('mode-tri'),$('mode-pro')];

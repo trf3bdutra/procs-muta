@@ -54,6 +54,14 @@
     if (pode(q)) { if (!D.lista && !D.lendo) lerDil(); if (!X.dados && !X.lendo) lerDel(); }
   }
 
+  /* Uma faixa única de navegação: ações fora do tablist, na mesma linha visual. */
+  function atualizaBtn(acao,lendo){
+    return '<button type="button" class="gx-nav-action" data-gx="'+acao+'" title="Atualizar" aria-label="Atualizar"'+(lendo?' disabled aria-busy="true"':'')+'><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 7v5h-5M4 17v-5h5"/><path d="M5.5 9a7 7 0 0 1 11.7-3L20 9M4 15l2.8 3A7 7 0 0 0 18.5 15"/></svg></button>';
+  }
+  function faixaGestao(rotulo,abas,acao,lendo,extra){
+    return '<div class="gx-nav"><div class="seg pmodos gx-modos" role="tablist" aria-label="'+esc(rotulo)+'">'+abas+'</div><div class="gx-nav-actions">'+atualizaBtn(acao,lendo)+(extra||'')+'</div></div>';
+  }
+
   /* ---------- Diligências ---------- */
   var ETAPAS = [['todo', 'A fazer'], ['doing', 'Em andamento'], ['review', 'Em revisão'], ['done', 'Concluída']];
   var NOME_ET = {}, STAGE_OK = {}; ETAPAS.forEach(function (e) { NOME_ET[e[0]] = e[1]; STAGE_OK[e[0]] = 1; });
@@ -131,11 +139,10 @@
           : '<p class="muted gx-v">Nenhuma.</p>') + '</details>';
     }).join('');
     var tab = function (k, r) { return '<button type="button" role="tab" data-gx-f="' + k + '" aria-selected="' + (D.f === k) + '">' + r + ' <i>' + n[k] + '</i></button>'; };
-    c.innerHTML = '<section class="hero-cmt-gestion"><div class="gx-top"><div><b>Diligências</b><small class="muted">quadro da equipe no Ex Officio</small></div>' +
-      '<span><button type="button" class="btn sm" data-gx="nova"' + (D.nova ? ' hidden' : '') + '>+ Nova</button><button type="button" class="lnk" data-gx="ler-dil" title="Ler de novo">' + (D.lendo ? 'lendo…' : 'atualizar') + '</button>' +
-      '<a class="lnk" target="_blank" rel="noopener" href="' + esc(site()) + (q.des && !q.gestor ? '/cmt/' : '/exofficio/#pendencias') + '">abrir no Ex Officio</a></span></div>' +
-      metricas+filtros+'</section>'+(D.nova ? formDil() : '') +
-      '<div class="seg pmodos gx-modos" role="tablist" aria-label="Filtro das diligências">' + tab('comigo', 'Comigo') + tab('criei', 'Que criei') + tab('todas', 'Todas') + '</div>' +
+    var acesso='<a class="gx-nav-action" target="_blank" rel="noopener" title="Abrir no Ex Officio" aria-label="Abrir no Ex Officio" href="'+esc(site())+(q.des&&!q.gestor?'/cmt/':'/exofficio/#pendencias')+'"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 5h6v6M19 5l-9 9M19 13v6H5V5h6"/></svg></a>';
+    c.innerHTML = '<section class="hero-cmt-gestion"><div class="gx-top"><div><b>Diligências</b><small class="muted">quadro da equipe no Ex Officio</small></div><span><button type="button" class="btn sm" data-gx="nova"' + (D.nova ? ' hidden' : '') + '>+ Nova</button></span></div>' +
+      metricas+filtros+'</section>'+faixaGestao('Filtro das diligências',tab('comigo','Comigo')+tab('criei','Que criei')+tab('todas','Todas'),'ler-dil',D.lendo,acesso) +
+      (D.nova ? formDil() : '') +
       (D.msg ? '<p class="gx-msg' + (/^Não|erro/i.test(D.msg) ? ' err' : '') + '">' + esc(D.msg) + '</p>' : '') +
       (D.erro ? '<p class="gx-v err">' + esc(D.erro) + '</p>' : !D.lista ? '<p class="muted gx-v">Lendo o quadro…</p>' :
         V.length ? fases : '<p class="muted gx-v">Nenhuma diligência ' + (D.f === 'comigo' ? 'com você' : D.f === 'criei' ? 'criada por você' : 'no quadro') + '.</p>');
@@ -255,9 +262,7 @@
     var tab=function(k,r,d){return '<button type="button" role="tab" data-gx-a="'+k+'" aria-selected="'+(X.aba===k)+'" title="'+esc(d)+'">'+esc(r)+' <i>'+L[k].length+'</i></button>';};
     var corpo = X.aba==='pe'?grupoDel('Retiradas de pauta',L.pe.filter(function(x){return x.tipo==='retirada';}),itemPe,'Nenhum pedido em aberto.','pendente')+grupoDel('Adiamentos',L.pe.filter(function(x){return x.tipo!=='retirada';}),itemPe,'Nenhum pedido em aberto.','pendente'):
       grupoDel('Dúvidas em aberto',L.du,itemDu,'Nenhuma dúvida em aberto dirigida a você.','pendente');
-    c.innerHTML = '<div class="gx-top"><div><b>Deliberações</b><small class="muted">o que aguarda decisão' + (X.dados && X.dados.hoje ? ' · ' + esc(data(X.dados.hoje)) : '') + '</small></div>' +
-      '<span><button type="button" class="lnk" data-gx="ler-del">' + (X.lendo ? 'lendo…' : 'atualizar') + '</button></span></div>' +
-      '<div class="seg pmodos gx-modos" role="tablist" aria-label="Tipo de deliberação">' + tab('du', 'Dúvidas', 'dúvidas da equipe') + tab('pe', 'Pauta', 'pedidos de retirada e de adiamento') + '</div>' +
+    c.innerHTML = faixaGestao('Tipo de deliberação',tab('du','Dúvidas','dúvidas da equipe')+tab('pe','Pauta','pedidos de retirada e de adiamento'),'ler-del',X.lendo) +
       (X.msg ? '<p class="gx-msg' + (/^Não/.test(X.msg) ? ' err' : '') + '">' + esc(X.msg) + '</p>' : '') +
       (X.erro ? '<p class="gx-v err">' + esc(X.erro) + '</p>' : !X.dados ? '<p class="muted gx-v">Lendo…</p>' : corpo);
   }

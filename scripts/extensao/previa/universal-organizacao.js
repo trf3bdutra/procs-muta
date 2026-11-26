@@ -47,6 +47,7 @@
   if(window.MutaGerador.acao(b))pintarGer();});
  /* quem ainda pedir o Gerador do Minutário vem para cá */
  window.MutaGabinete=window.MutaGabinete||{};
- window.MutaGabinete.irGerador=function(){if(window.MutaAbas)window.MutaAbas.ir('pront');G.aba='Processo';G.rot='pro';GER.aberto=true;render();var d=caixa.querySelector(heroV53()?'.hero-v53-gerador':'#pv-gerador');if(d){if(!heroV53()){d.open=true;pintarGer();}d.scrollIntoView({block:'start'});}};
+ var irGeradorNucleo=window.MutaGabinete.irGerador;
+ window.MutaGabinete.irGerador=function(){if(heroV53()&&irGeradorNucleo)return irGeradorNucleo();if(window.MutaAbas)window.MutaAbas.ir('pront');G.aba='Processo';G.rot='pro';GER.aberto=true;render();var d=caixa.querySelector('#pv-gerador');if(d){d.open=true;pintarGer();d.scrollIntoView({block:'start'});}};
  document.addEventListener('click',function(e){var t=e.target.closest&&e.target.closest('[data-mm="ger"]');if(!t)return;e.preventDefault();e.stopImmediatePropagation();window.MutaGabinete.irGerador();},true);
 })();

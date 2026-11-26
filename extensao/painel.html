@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="hero-design.css">
 </head>
 <body class="hero-redesign-v53">
-<div class="topo-u" id="topo-u" hidden><div class="tu-l" id="tu-main"></div><div class="tu-gestao" id="tu-gestao" role="tablist" aria-label="Gestão do gabinete" hidden></div><span class="tu-st" id="tu-st" role="status" aria-live="polite" hidden></span></div>
+<div class="topo-u" id="topo-u" hidden><div class="tu-l" id="tu-main"></div><div class="tu-gestao" id="tu-gestao" role="tablist" aria-label="Gestão do gabinete" hidden></div><span class="tu-st" id="tu-st" role="status" aria-live="polite" hidden></span><div id="hero-rep-header-tabs" class="emd-modos hero-rep-header-tabs" hidden role="tablist" aria-label="Parte do Repertório"><button type="button" role="tab" data-rep-all aria-selected="false">Todos</button><button type="button" role="tab" data-emd="ementario" aria-selected="true">Precedentes</button><button type="button" role="tab" data-emd="par" aria-selected="false">Parágrafos</button><button type="button" role="tab" data-emd="modelos" aria-selected="false">Modelos</button></div></div>
 <div class="layout">
   <aside>
     <div class="brand"><span class="name">HERO18810</span><span class="d"></span><p>Assistente do Gab. Muta</p></div>
@@ -108,7 +108,7 @@
 
     <!-- EMENTÁRIO (Compêndio) -->
     <section id="panel-acervo" role="tabpanel" aria-labelledby="tab-acervo" hidden>
-      <div class="seg pmodos emd-modos" role="tablist" aria-label="Parte do Repertório"><button type="button" role="tab" data-rep-all aria-selected="false">Todos</button><button type="button" role="tab" data-emd="ementario" aria-selected="true">Precedentes</button><button type="button" role="tab" data-emd="par" aria-selected="false">Parágrafos-padrão</button><button type="button" role="tab" data-emd="modelos" aria-selected="false">Modelos</button></div>
+      
       <div class="acv-faixa hero-rep-search">
         <div class="hero-rep-search-head"><span class="hero-rep-search-kicker">Pesquisa e visualização</span><small id="rep-acv-label">Precedentes</small></div>
         <form id="acv-form" class="acv-form" role="search">
@@ -161,11 +161,11 @@
 
     <!-- PARÁGRAFOS-PADRÃO (0.47: sub-aba do Ementário; o botão próprio na barra fica oculto) -->
     <section id="panel-par" role="tabpanel" aria-labelledby="tab-par" hidden>
-      <div class="seg pmodos emd-modos" role="tablist" aria-label="Parte do Repertório"><button type="button" role="tab" data-rep-all aria-selected="false">Todos</button><button type="button" role="tab" data-emd="ementario" aria-selected="false">Precedentes</button><button type="button" role="tab" data-emd="par" aria-selected="true">Parágrafos-padrão</button><button type="button" role="tab" data-emd="modelos" aria-selected="false">Modelos</button></div>
+      
       <div class="wrap"><div id="par-app"></div></div>
     </section>
 
-    <section id="panel-modelos" role="tabpanel" aria-labelledby="tab-modelos" hidden><div class="seg pmodos emd-modos" role="tablist" aria-label="Parte do Repertório"><button type="button" role="tab" data-rep-all aria-selected="false">Todos</button><button type="button" role="tab" data-emd="ementario" aria-selected="false">Precedentes</button><button type="button" role="tab" data-emd="par" aria-selected="false">Parágrafos-padrão</button><button type="button" role="tab" data-emd="modelos" aria-selected="true">Modelos</button></div><div id="modelos-app" class="wrap"></div></section>
+    <section id="panel-modelos" role="tabpanel" aria-labelledby="tab-modelos" hidden><div id="modelos-app" class="wrap"></div></section>
 
     <!-- 0.48: DILIGÊNCIAS e DELIBERAÇÕES (Desembargador e gestor) e CONTROLE (só o gestor) -->
     <section id="panel-pauta" role="tabpanel" aria-labelledby="tab-pauta" hidden><div class="wrap"><div id="pauta-app" class="gx-app pa-app"></div></div></section>

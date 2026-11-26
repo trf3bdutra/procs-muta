@@ -10,7 +10,7 @@
   "acordaos": "2026-10-30T06:00:26.052Z"
  },
  "totais": {
-  "monocraticas": 7311,
+  "monocraticas": 7313,
   "acordaos": 26276,
   "acordaos_na_base": 26438,
   "acordaos_nao_coletados": {
@@ -36,7 +36,7 @@
    "2023": 1252,
    "2024": 72,
    "2025": 1,
-   "2026": 935
+   "2026": 937
   },
   "acordaos": {
    "1999": 5,
@@ -154,8 +154,8 @@
   },
   {
    "arquivo": "dados/monocraticas/2026.json.gz",
-   "bytes": 1723042,
-   "sha256": "bcb1d130c15be9bb1f6b3c1945fabcba40618efe6c5bd54908da9f7f257a4ae7"
+   "bytes": 1728450,
+   "sha256": "2c054dbb09222c72d3dd296e610c909e1ca8567f61626e45fbe1350716e9696c"
   },
   {
    "arquivo": "dados/acordaos/1999.json.gz",
@@ -299,8 +299,8 @@
   },
   {
    "arquivo": "dados/indice.json.gz",
-   "bytes": 3491369,
-   "sha256": "9ecc59444ee18b3be872b6f160a320d841b1cd13475bce2a6f8e32e8aee334cb"
+   "bytes": 3491690,
+   "sha256": "70b16d092c83d6f5b8daa5f97fb1f7527af58d495433284a3a8ff3e08b7d3dbf"
   }
  ],
  "registros": [
@@ -194514,6 +194514,16 @@
    "id": "M07311",
    "arquivo": "dados/monocraticas/2026.json.gz",
    "sha256_inteiro_teor": "72af10822f1aaaf78ac7b3559cf5ecc9f729b6869e7c994fb3bf381ed40783e4"
+  },
+  {
+   "id": "M07312",
+   "arquivo": "dados/monocraticas/2026.json.gz",
+   "sha256_inteiro_teor": "ce8c8d0e692bddb185541ee7858f3df0a53b32cf642a7d48afc7aecf56d8bd24"
+  },
+  {
+   "id": "M07313",
+   "arquivo": "dados/monocraticas/2026.json.gz",
+   "sha256_inteiro_teor": "c8a5ffc62d879c429082f2cb6b8f82dea83b5580881cadc38b3bc9ad496ff8a7"
   }
  ],
  "coletas_incrementais": [
@@ -194555,6 +194565,17 @@
    "lidos": 2,
    "acordaos_completados": 2,
    "monocraticas_acrescentadas": 0,
+   "observacao": "texto do DJEN numa linha só; data da decisão lida do número do documento no PJe"
+  },
+  {
+   "data": "2026-11-25",
+   "colecao": "acordaos e monocraticas",
+   "fonte": "DJEN (CNJ) — comunicaapi.pje.jus.br, orgaoId 101584",
+   "criterio": "DJEN: siglaTribunal=TRF3, orgaoId=101584 (Gab. A da TRMS), disponibilização de 24/11/2026 a 25/11/2026 (lido pelo navegador do gabinete); decisões monocráticas terminativas",
+   "lidos": 2,
+   "acordaos_completados": 0,
+   "acordaos_acrescentados": 0,
+   "monocraticas_acrescentadas": 2,
    "observacao": "texto do DJEN numa linha só; data da decisão lida do número do documento no PJe"
   }
  ]
