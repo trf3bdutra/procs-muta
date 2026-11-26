@@ -742,11 +742,11 @@
    "assunto": "Aposentadoria por Incapacidade Permanente",
    "assunto_detalhado": "",
    "grupo": "assunto-3",
-   "tipo_caso": "Aposentadoria por incapacidade permanente · autos do TJMS",
-   "resultado": "Proposta: [VALIDAR] autos migrados sem peças tipadas: ler sentença e apelação no PJe [VALIDAR: triagem sem leitura da sentença e da apelação]",
+   "tipo_caso": "Aposentadoria por incapacidade permanente · apelação do autor",
+   "resultado": "Proposta: [VALIDAR] apelação do autor; nenhuma sentença ou razões localizadas no texto extraído [VALIDAR: autos migrados do TJMS: peças sem tipo; conferir sentença e apelação no PJe]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "Competência delegada (justiça estadual).",
+   "observacao": "44 documentos, sem peça tipada.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -759,7 +759,7 @@
    "mpf": "Não consta parecer",
    "triagem": {
     "ato": "Julgamento colegiado (voto)",
-    "materia": "Previdenciário — benefício por incapacidade",
+    "materia": "Previdenciário — benefício (competência delegada, autos do TJMS)",
     "monocratica": "Não (pauta)",
     "analisado_em": "26/11/2026",
     "decisao_agravada": "[VALIDAR]",
@@ -772,7 +772,7 @@
    },
    "ajustes": [],
    "pendencias": [
-    "[VALIDAR] triagem sem leitura da sentença e da apelação"
+    "[VALIDAR] autos migrados do TJMS: peças sem tipo; conferir sentença e apelação no PJe"
    ],
    "minuta": false
   },
@@ -1192,11 +1192,11 @@
    "assunto": "Cláusulas Abusivas",
    "assunto_detalhado": "",
    "grupo": "assunto-18",
-   "tipo_caso": "Cláusulas Abusivas",
-   "resultado": "",
+   "tipo_caso": "Curso superior irregular (EAD) · devolução de mensalidades e dano moral · várias apelações",
+   "resultado": "Proposta: [VALIDAR paradigma] apelações das instituições de ensino e de pessoa física (ilegitimidade; desconsideração da personalidade, artigos 50 do CC e 28 do CDC) contra a condenação solidária à devolução de 24 parcelas de R$ 230,00 e ao dano moral [VALIDAR: identificar cada apelante; competência federal: ente federal no polo?]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença procedente (ID 393606288); embargos de declaração rejeitados (ID 393606296); apelações IDs 393606295, 393606301 e 393606304.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -1205,11 +1205,67 @@
     "correcao": "Vanilda",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "393606288"
+    },
+    {
+     "peca": "Embargos de declaração",
+     "id": "393606291"
+    },
+    {
+     "peca": "Embargos de declaração",
+     "id": "393606292"
+    },
+    {
+     "peca": "Apelação",
+     "id": "393606295"
+    },
+    {
+     "peca": "Apelação",
+     "id": "393606301"
+    },
+    {
+     "peca": "Apelação",
+     "id": "393606304"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "393606294"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "393606300"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "393606310"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "393606311"
+    }
+   ],
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Civil/consumidor — ensino superior",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 393606288 (10/12/2025)",
+    "recurso": "embargos de declaração (ID 393606291, 16/12/2025); embargos de declaração (ID 393606292, 16/12/2025); apelação (ID 393606295, 05/02/2026); apelação (ID 393606301, 23/07/2026); apelação (ID 393606304, 23/07/2026)",
+    "preparo": "[VALIDAR]",
+    "representacao": "procuração/substabelecimento ID 393606160, 393606161, 393606230",
+    "mpf": "Não consta parecer",
+    "autos": "174 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] identificar cada apelante",
+    "[VALIDAR] competência federal: ente federal no polo?"
+   ],
    "minuta": false
   },
   {
@@ -1223,11 +1279,11 @@
    "assunto": "Inquérito / Processo / Recurso Administrativo",
    "assunto_detalhado": "",
    "grupo": "assunto-4",
-   "tipo_caso": "Inquérito / Processo / Recurso Administrativo",
-   "resultado": "",
+   "tipo_caso": "Receita Federal · remessa de débitos à PGFN para transação · MS",
+   "resultado": "Proposta: [VALIDAR paradigma] apelação da União e remessa contra a ordem de remeter os débitos vencidos à PGFN para inscrição e adesão à transação; parecer do MPF pela manutenção (ID 403406636) [VALIDAR: débitos vencidos há mais de 90 dias (precedente citado nas razões)]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença concedeu a segurança e confirmou a liminar (ID 400477570).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -1236,11 +1292,46 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "400477570"
+    },
+    {
+     "peca": "Apelação",
+     "id": "400477576"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "400477578"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "400477568"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "403406636"
+    }
+   ],
+   "mpf": "parecer ID 403406636 (09/10/2026)",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Tributário — transação tributária, inscrição em dívida ativa",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 400477570 (08/07/2026)",
+    "recurso": "apelação (ID 400477576, 28/08/2026)",
+    "preparo": "comprovante juntado (ID 400477545) — conferir o tipo",
+    "representacao": "procuração/substabelecimento ID 400477535",
+    "mpf": "parecer ID 403406636 (09/10/2026)",
+    "autos": "60 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] débitos vencidos há mais de 90 dias (precedente citado nas razões)"
+   ],
    "minuta": false
   },
   {
@@ -1254,11 +1345,11 @@
    "assunto": "Anulação",
    "assunto_detalhado": "",
    "grupo": "assunto-13",
-   "tipo_caso": "Anulação",
-   "resultado": "",
+   "tipo_caso": "Concurso EBSERH (IBFC) · nomeação · MS",
+   "resultado": "Proposta: [VALIDAR paradigma] apelação da impetrante contra a extinção quanto ao IBFC (ilegitimidade passiva) e a denegação quanto à EBSERH (sem vagas efetivas de Analista Administrativo)",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença (ID 398168963); gratuidade reiterada na apelação; MPF sem manifestação de mérito.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -1267,9 +1358,42 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "398168963"
+    },
+    {
+     "peca": "Apelação",
+     "id": "398168964"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "398168967"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "398168960"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "405482545"
+    }
+   ],
+   "mpf": "parecer ID 405482545 (19/10/2026)",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — concurso público",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 398168963 (03/07/2026)",
+    "recurso": "apelação (ID 398168964, 13/07/2026)",
+    "preparo": "[VALIDAR]",
+    "representacao": "procuração/substabelecimento ID 398168949, 398168956",
+    "mpf": "parecer ID 405482545 (19/10/2026)",
+    "autos": "53 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false
@@ -1285,11 +1409,11 @@
    "assunto": "Inscrição / Documentação",
    "assunto_detalhado": "",
    "grupo": "assunto-22",
-   "tipo_caso": "Inscrição / Documentação",
-   "resultado": "",
+   "tipo_caso": "Residência médica (UFMS) · certificado de conclusão · MS",
+   "resultado": "Proposta: [VALIDAR paradigma] apelações da UFMS e da União e remessa contra a concessão da segurança (certificado de conclusão da residência; fato consumado); contrarrazões apontam falta de impugnação ao fato consumado (dialeticidade)",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença concedeu a segurança (ID 389631620); MPF pelo prosseguimento.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -1298,9 +1422,50 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "389631620"
+    },
+    {
+     "peca": "Apelação",
+     "id": "389631622"
+    },
+    {
+     "peca": "Apelação",
+     "id": "389631625"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "389631624"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "389631628"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "389631617"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "394092240"
+    }
+   ],
+   "mpf": "parecer ID 394092240 (27/08/2026)",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — ensino, residência médica",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 389631620 (10/05/2026)",
+    "recurso": "apelação (ID 389631622, 14/06/2026); apelação (ID 389631625, 06/07/2026)",
+    "preparo": "comprovante juntado (ID 389631602, 389631603, 389631604) — conferir o tipo",
+    "representacao": "procuração/substabelecimento ID 389631594",
+    "mpf": "parecer ID 394092240 (27/08/2026)",
+    "autos": "53 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false
@@ -1316,11 +1481,11 @@
    "assunto": "Ação Regressiva",
    "assunto_detalhado": "",
    "grupo": "assunto-10",
-   "tipo_caso": "Ação Regressiva",
-   "resultado": "",
+   "tipo_caso": "Ressarcimento ao INSS · aposentadoria por idade recebida indevidamente",
+   "resultado": "Proposta: [VALIDAR paradigma] apelação da ré contra a condenação a devolver a aposentadoria por idade de 04/01/2006 a 30/11/2013; boa-fé e erro administrativo (Tema 979/STJ) [VALIDAR: apelação de 06/08/2025 e contrarrazões de 24/08/2026: conferir tempestividade e tramitação]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença procedente (ID 395159187).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -1329,11 +1494,38 @@
     "correcao": "Vanilda",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "395159187"
+    },
+    {
+     "peca": "Apelação",
+     "id": "395159190"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "395159192"
+    }
+   ],
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Previdenciário — ressarcimento",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 395159187 (27/11/2024)",
+    "recurso": "apelação (ID 395159190, 06/08/2025)",
+    "preparo": "[VALIDAR]",
+    "representacao": "procuração/substabelecimento ID 395159126, 395159128",
+    "mpf": "Não consta parecer",
+    "autos": "64 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] apelação de 06/08/2025 e contrarrazões de 24/08/2026: conferir tempestividade e tramitação"
+   ],
    "minuta": false
   },
   {
@@ -1347,11 +1539,11 @@
    "assunto": "Aposentadoria Especial (Art. 57/8)",
    "assunto_detalhado": "",
    "grupo": "assunto-15",
-   "tipo_caso": "Aposentadoria Especial (Art. 57/8)",
-   "resultado": "",
+   "tipo_caso": "Aposentadoria (tempo especial) · interesse de agir",
+   "resultado": "Proposta: [VALIDAR paradigma] apelação do INSS: falta de interesse de agir por requerimento administrativo inapto (\"indeferimento forçado\"; Tema 350/STF e Tema 1.124/STJ) [VALIDAR: teor da decisão ID 402712251 (redistribuição?)]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença parcialmente procedente: negou a aposentadoria especial e o afastamento do fator previdenciário (ID 391937969); decisão de 07/10/2026 (ID 402712251).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -1360,11 +1552,38 @@
     "correcao": "Alexander",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "391937969"
+    },
+    {
+     "peca": "Apelação",
+     "id": "391937973"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "391937975"
+    }
+   ],
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Previdenciário — tempo especial",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 391937969 (22/06/2026)",
+    "recurso": "apelação (ID 391937973, 22/07/2026)",
+    "preparo": "[VALIDAR]",
+    "representacao": "[VALIDAR]",
+    "mpf": "Não consta parecer",
+    "autos": "59 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] teor da decisão ID 402712251 (redistribuição?)"
+   ],
    "minuta": false
   },
   {
@@ -1378,11 +1597,11 @@
    "assunto": "Aposentadoria Híbrida (Art. 48/106)",
    "assunto_detalhado": "",
    "grupo": "assunto-2",
-   "tipo_caso": "Aposentadoria Híbrida (Art. 48/106)",
-   "resultado": "",
+   "tipo_caso": "Aposentadoria híbrida · apelação do INSS",
+   "resultado": "Proposta: [VALIDAR] apelação do INSS contra a concessão da aposentadoria híbrida (Tema 1.007/STJ) [VALIDAR: autos migrados do TJMS: peças sem tipo; conferir sentença e apelação no PJe]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Contrarrazões do autor (ID 407109419).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -1392,10 +1611,24 @@
     "situacao": "A minutar"
    },
    "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Previdenciário — benefício (competência delegada, autos do TJMS)",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "[VALIDAR]",
+    "recurso": "[VALIDAR]",
+    "preparo": "[VALIDAR]",
+    "representacao": "[VALIDAR]",
+    "mpf": "Não consta parecer",
+    "autos": "84 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] autos migrados do TJMS: peças sem tipo; conferir sentença e apelação no PJe"
+   ],
    "minuta": false
   },
   {
@@ -1409,11 +1642,11 @@
    "assunto": "Aposentadoria por Incapacidade Permanente",
    "assunto_detalhado": "",
    "grupo": "assunto-3",
-   "tipo_caso": "Aposentadoria por Incapacidade Permanente",
-   "resultado": "",
+   "tipo_caso": "Aposentadoria por incapacidade permanente · improcedência · apelação do autor",
+   "resultado": "Proposta: [VALIDAR] apelação do autor contra a improcedência (sentença ID 404865399): pede aposentadoria por incapacidade desde o requerimento de 12/11/2024 ou auxílio por incapacidade temporária desde 24/09/2024 [VALIDAR: autos migrados do TJMS: peças sem tipo; conferir sentença e apelação no PJe]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença improcedente com honorários suspensos (ID 404865399); apelação ID 404865406.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -1423,10 +1656,24 @@
     "situacao": "A minutar"
    },
    "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Previdenciário — benefício (competência delegada, autos do TJMS)",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "[VALIDAR]",
+    "recurso": "[VALIDAR]",
+    "preparo": "[VALIDAR]",
+    "representacao": "[VALIDAR]",
+    "mpf": "Não consta parecer",
+    "autos": "66 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] autos migrados do TJMS: peças sem tipo; conferir sentença e apelação no PJe"
+   ],
    "minuta": false
   },
   {
@@ -1440,11 +1687,11 @@
    "assunto": "Aposentadoria por Incapacidade Permanente",
    "assunto_detalhado": "",
    "grupo": "assunto-3",
-   "tipo_caso": "Aposentadoria por Incapacidade Permanente",
-   "resultado": "",
+   "tipo_caso": "Auxílio por incapacidade · apelação do autor",
+   "resultado": "Proposta: [VALIDAR] apelação do autor pelo restabelecimento do auxílio por incapacidade desde a cessação [VALIDAR: autos migrados do TJMS: peças sem tipo; conferir sentença e apelação no PJe]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Apelação ID 408771856; decisão ID 409139221.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -1454,10 +1701,24 @@
     "situacao": "A minutar"
    },
    "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Previdenciário — benefício (competência delegada, autos do TJMS)",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "[VALIDAR]",
+    "recurso": "[VALIDAR]",
+    "preparo": "[VALIDAR]",
+    "representacao": "procuração/substabelecimento ID 408771834",
+    "mpf": "Não consta parecer",
+    "autos": "48 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] autos migrados do TJMS: peças sem tipo; conferir sentença e apelação no PJe"
+   ],
    "minuta": false
   },
   {
@@ -1471,11 +1732,11 @@
    "assunto": "Aposentadoria Rural (Art. 48/51)",
    "assunto_detalhado": "",
    "grupo": "assunto-9",
-   "tipo_caso": "Aposentadoria Rural (Art. 48/51)",
-   "resultado": "",
+   "tipo_caso": "Aposentadoria rural por idade · apelação do INSS",
+   "resultado": "Proposta: [VALIDAR] apelação do INSS contra a aposentadoria rural por idade (início de prova material, Súmula 149/STJ) [VALIDAR: autos migrados do TJMS: peças sem tipo; conferir sentença e apelação no PJe]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Intimação para contrarrazões em 25/09/2026 (ID 407148154).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -1485,10 +1746,24 @@
     "situacao": "A minutar"
    },
    "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Previdenciário — benefício (competência delegada, autos do TJMS)",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "[VALIDAR]",
+    "recurso": "[VALIDAR]",
+    "preparo": "[VALIDAR]",
+    "representacao": "[VALIDAR]",
+    "mpf": "Não consta parecer",
+    "autos": "65 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] autos migrados do TJMS: peças sem tipo; conferir sentença e apelação no PJe"
+   ],
    "minuta": false
   },
   {
@@ -1502,11 +1777,11 @@
    "assunto": "Aposentadoria Rural (Art. 48/51)",
    "assunto_detalhado": "",
    "grupo": "assunto-9",
-   "tipo_caso": "Aposentadoria Rural (Art. 48/51)",
-   "resultado": "",
+   "tipo_caso": "Aposentadoria rural por idade · apelação do INSS",
+   "resultado": "Proposta: [VALIDAR] apelação do INSS contra a aposentadoria rural por idade (início de prova material, Súmula 149/STJ); a autora pede negar o efeito suspensivo [VALIDAR: autos migrados do TJMS: peças sem tipo; conferir sentença e apelação no PJe]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Contrarrazões da autora (ID 407059382).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -1516,10 +1791,24 @@
     "situacao": "A minutar"
    },
    "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Previdenciário — benefício (competência delegada, autos do TJMS)",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "[VALIDAR]",
+    "recurso": "[VALIDAR]",
+    "preparo": "[VALIDAR]",
+    "representacao": "[VALIDAR]",
+    "mpf": "Não consta parecer",
+    "autos": "65 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] autos migrados do TJMS: peças sem tipo; conferir sentença e apelação no PJe"
+   ],
    "minuta": false
   },
   {
