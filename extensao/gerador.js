@@ -591,10 +591,34 @@
   function novoHero(){return typeof document!=='undefined'&&document.body&&document.body.classList.contains('hero-redesign-v53');}
   function modoMin() { if(novoHero())return 'cmp';try { var m = localStorage.getItem(MM_K); return m === 'ger' || m === 'conf' || m === 'dir' ? m : 'cmp'; } catch (e) { return 'cmp'; } }
   function visivel() { var p = $(novoHero()?'panel-pront':'panel-min'), g = $('ger-app'); return !!(p && !p.hidden && g && !g.hidden); }
+  /* Consulta contextual explícita, somente sobre os bancos existentes. Não grava
+     sugestões na ficha, não altera a minuta-matriz e não envia contexto à rede. */
+  function montarRepertorioContextual(host){
+    var FT=window.MutaFontes,k=FT&&FT.contextoCaso();if(!k)return;
+    var d=document.createElement('details');d.className='hero-ger-contextual';var title=document.createElement('summary');title.textContent='Repertório contextual';d.append(title);
+    var b=document.createElement('div');b.className='hero-ger-context-body';d.append(b);host.append(d);
+    function el(tag,cls,txt){var n=document.createElement(tag);if(cls)n.className=cls;if(txt!=null)n.textContent=txt;return n;}
+    function btn(t,fn){var n=el('button','btn line sm',t);n.type='button';n.onclick=fn;return n;}
+    var q=el('select'),all=el('option','','Caso completo');all.value='';q.append(all);q.setAttribute('aria-label','Questão jurídica para pesquisa');
+    (k.questoesEstruturadas||[]).forEach(function(x,i){var o=el('option','','Questão '+x.ordem+' · '+(x.questao||x.alegacao||x.precedentes||x.dispositivos).slice(0,100));o.value=String(i);q.append(o);});
+    var out=el('div','hero-ger-context-results'),seq=0;
+    function vigente(){var a=FT.contextoCaso();return d.isConnected&&a&&JSON.stringify(a)===JSON.stringify(k);}
+    function modelText(x){return (x.secoes||[]).map(function(s){return [s.t].concat((s.ps||[]).map(function(p){return typeof p==='string'?p:p&&(p.t||p.texto)||'';})).join('\n');}).join('\n\n');}
+    function card(x){var a=el('article','hero-ger-context-card'),h=el('b','',x.titulo||String(x.id)),why=el('small','muted',[x.fontes.join(' · '),x.referencias.length?'Referências coincidentes: '+x.referencias.join(', '):'',x.termos.length?'Termos: '+x.termos.join(', '):''].filter(Boolean).join(' | ')),det=el('details','hero-ger-context-reading'),tools=el('div','hero-ger-context-actions');det.append(el('summary','','Conferir conteúdo'),el('pre','gr-tx',x.texto));tools.append(FT.botaoMaterial(x));if(x.modelo&&window.MutaModelosHero)tools.append(btn('Usar como referência',function(){if(vigente())window.MutaModelosHero.usar(x.modelo);}));a.append(h,why,det,tools);return a;}
+    function group(name,L,err){var a=el('section','hero-ger-context-group');a.append(el('h5','',name));if(err)a.append(el('p','muted',err));else if(!L.length)a.append(el('p','muted','Nenhuma correspondência textual.'));else L.forEach(function(x){a.append(card(x));});out.append(a);}
+    function buscar(){var t=++seq,scope=q.value;if(!vigente())return;out.replaceChildren(el('p','muted','Consultando o repertório…'));var E=window.MutaEmentario;
+     Promise.allSettled([E&&E.sugestoes?E.sugestoes(scope):Promise.reject(Error('Ementário indisponível.')),FT.base()]).then(function(v){if(t!==seq||!vigente())return;out.replaceChildren();group('Precedentes',v[0].status==='fulfilled'?v[0].value:[],v[0].status==='rejected'?String(v[0].reason.message||v[0].reason):'');
+      if(v[1].status==='rejected'){group('Modelos e parágrafos',[],String(v[1].reason.message||v[1].reason));return;}var D=v[1].value;
+      group('Modelos',FT.rankDetalhado(D.modelos||[],'proc',function(x){return [x.nome,x.assunto,x.classe,modelText(x)].join(' ');},scope).slice(0,3).map(function(a){return {tipo:'Modelo',id:a.x.id,titulo:a.x.nome||a.x.id,texto:modelText(a.x),modelo:a.x,fontes:a.fontes,termos:a.termos,referencias:a.referencias};}));
+      group('Parágrafos',FT.rankDetalhado(D.paragrafos||[],'proc',function(x){return [x.cat,x.titulo,x.texto].join(' ');},scope).slice(0,5).map(function(a){return {tipo:'Parágrafo',id:a.x.id,titulo:a.x.titulo||a.x.id,texto:String(a.x.texto||''),fontes:a.fontes,termos:a.termos,referencias:a.referencias};}));
+     });
+    }
+    var row=el('div','hero-ger-context-tools');row.append(q,btn('Buscar materiais',buscar),btn('Abrir Repertório',function(){if(!vigente())return;FT.atualizarPesquisa({q:'',modo:'proc',all:true});if(window.MutaAbas)window.MutaAbas.ir('acervo');}));b.append(el('small','muted','Correspondências textuais, não juízo de aplicabilidade. Confira órgão, teor, vigência e aderência ao caso.'),row,out);
+  }
   function pintar(forca) {
     var g = $('ger-app'); if (!g || (!forca && !visivel())) return;
     var p = $(novoHero()?'panel-pront':'panel-min'), y = p ? p.scrollTop : 0;
-    try { g.innerHTML = html(); if(novoHero()){g.querySelectorAll('.gr-l').forEach(function(l){if(l.querySelector('[data-gr-tipo],[data-gr-res]'))l.remove();});g.querySelectorAll('.gr-av').forEach(function(p){if(/^Sem resultado do voto na ficha/.test(p.textContent.trim()))p.textContent='Registre o resultado em Produção para completar a ementa.';});} if(window.MutaModelosHero)window.MutaModelosHero.montarGerador(g); } catch (e) { g.innerHTML = '<div class="empty">Gerador indisponível: ' + esc(e && e.message || e) + '</div>'; }
+    try { g.innerHTML = html(); if(novoHero()){g.querySelectorAll('.gr-l').forEach(function(l){if(l.querySelector('[data-gr-tipo],[data-gr-res]'))l.remove();});g.querySelectorAll('.gr-av').forEach(function(p){if(/^Sem resultado do voto na ficha/.test(p.textContent.trim()))p.textContent='Registre o resultado em Produção para completar a ementa.';});} if(window.MutaModelosHero)window.MutaModelosHero.montarGerador(g); if(novoHero())montarRepertorioContextual(g); } catch (e) { g.innerHTML = '<div class="empty">Gerador indisponível: ' + esc(e && e.message || e) + '</div>'; }
     if (p) p.scrollTop = y;
   }
   function modo(m) {

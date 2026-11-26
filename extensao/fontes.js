@@ -39,15 +39,35 @@ function secoesDeTexto(t) {
 /* Pesquisa por escopo: sem misturar ficha e editor. */
 var STOP=new Set('para pelo pela pelos pelas sobre entre contra quando sendo apenas caso parte partes artigo artigos processo recurso pedido decisao autos tema temas uniao federal inss direito direitos conforme forma razao termos prazo ainda tambem assim desde mesmo outros outras deste desta nesse nessa neste nesta quanto quais juizo autora autor apelante apelado recorrente recorrido julgado julgada provimento tribunal relator relatorio voto ementa acordao'.split(' '));
 function tokens(v){return Array.from(new Set(String(v||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().split(/[^a-z0-9]+/).filter(function(w){return w.length>=5&&!STOP.has(w)&&!/^\d+$/.test(w);})));}
-function contexto(modo){var g=window.MutaGabinete,k=g&&g.casoPrec&&g.casoPrec(),e=window.MutaEditor&&window.MutaEditor.estado(),sg=window.MutaSigilo;if(sg&&(sg.bloqueado()||sg.sigiloso()))return '';if(modo==='editor'){if(!e||!e.texto)return '';var n=function(v){return String(v||'').replace(/\D/g,'');};if(k&&k.cnj&&(!e.numero||n(e.numero)!==n(k.cnj)))return '';return e.texto;}return k?[k.assunto,k.subassuntos,k.questoes,k.sintese,k.especificidades].filter(Boolean).join(' '):'';}
-function rank(L,modo,extrair){if(modo==='todos')return L.slice();var q=tokens(contexto(modo));if(!q.length)return [];var Q=new Set(q),N=L.length,freq=Object.create(null),A=[];L.forEach(function(x,i){var ts=tokens(extrair(x)),hit=ts.filter(function(w){return Q.has(w);});if(hit.length<Math.min(2,q.length))return;hit.forEach(function(w){freq[w]=(freq[w]||0)+1;});A.push({x:x,i:i,hit:hit,n:ts.length});});return A.map(function(a){a.score=a.hit.reduce(function(n,w){return n+1+Math.log((N+1)/(1+freq[w]));},0)/Math.sqrt(Math.max(1,a.n));return a;}).sort(function(a,b){return b.score-a.score||a.i-b.i;}).map(function(a){return a.x;});}
+function contextoCaso(){var g=window.MutaGabinete,k=g&&g.casoPrec&&g.casoPrec();return k&&k.pronto?k:null;}
+function fontesContexto(modo,questao){
+ var k=contextoCaso(),e=window.MutaEditor&&window.MutaEditor.estado();if(!k)return [];
+ if(modo==='editor'){var n=function(v){return String(v||'').replace(/\D/g,'');};return e&&e.texto&&e.numero&&n(e.numero)===n(k.cnj)?[{nome:'Editor atual',texto:e.texto,peso:3}]:[];}
+ var qs=k.questoesEstruturadas||[],q=questao!=null&&questao!==''?qs[Number(questao)]:null;
+ if(q)return [{nome:'Questão '+q.ordem,texto:[q.questao,q.alegacao,q.tese].join(' '),peso:5},{nome:'Referências da questão',texto:[q.dispositivos,q.precedentes].join(' '),peso:6}];
+ return [{nome:'Assunto',texto:[k.assunto,k.subassuntos].join(' '),peso:3},{nome:'Questões jurídicas',texto:[k.questoes,k.objeto].concat(qs.map(function(x){return [x.questao,x.alegacao,x.tese].join(' ');})).join(' '),peso:5},{nome:'Referências jurídicas',texto:[k.dispositivos,k.precedentes].concat(qs.map(function(x){return [x.dispositivos,x.precedentes].join(' ');})).join(' '),peso:6},{nome:'Detalhamento e sínteses',texto:[k.especificidades,k.sintese].join(' '),peso:1},{nome:'Tese e modelo registrados',texto:[k.tese,k.modelo].join(' '),peso:4}];
+}
+function contexto(modo){return fontesContexto(modo).map(function(x){return x.texto;}).filter(Boolean).join(' ');}
+function referencias(v){var t=String(v||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase(),m,L=new Set(),re=/\b(tema|sumula)\s*(?:n[.º°o]*\s*)?(\d{1,5})\b/g;while((m=re.exec(t)))L.add(m[1]+' '+m[2]);return Array.from(L);}
+function rankDetalhado(L,modo,extrair,questao){
+ if(modo==='todos')return L.map(function(x){return {x:x,score:0,termos:[],fontes:[],referencias:[]};});
+ var F=fontesContexto(modo,questao),weights=new Map(),refs=new Set();F.forEach(function(x){tokens(x.texto).forEach(function(t){weights.set(t,Math.max(weights.get(t)||0,x.peso));});referencias(x.texto).forEach(function(t){refs.add(t);});});
+ if(!weights.size&&!refs.size)return [];
+ var N=L.length,freq=new Map(),A=[];
+ L.forEach(function(x,i){var tx=extrair(x),ts=tokens(tx),hit=ts.filter(function(w){return weights.has(w);}),rr=referencias(tx).filter(function(w){return refs.has(w);});if(!rr.length&&hit.length<Math.min(2,Math.max(1,weights.size)))return;
+ hit.forEach(function(w){freq.set(w,(freq.get(w)||0)+1);});A.push({x:x,i:i,hit:hit,rr:rr,n:ts.length});});
+ return A.map(function(a){var score=a.hit.reduce(function(n,w){return n+weights.get(w)*(1+Math.log((N+1)/(1+freq.get(w))));},0)/Math.sqrt(Math.max(1,a.n))+a.rr.length*12;
+ var nomes=F.filter(function(f){return tokens(f.texto).some(function(w){return a.hit.includes(w);})||referencias(f.texto).some(function(w){return a.rr.includes(w);});}).map(function(f){return f.nome;});
+ return {x:a.x,i:a.i,score:score,termos:a.hit.slice(0,8),fontes:nomes,referencias:a.rr};}).sort(function(a,b){return b.score-a.score||a.i-b.i;});
+}
+function rank(L,modo,extrair){return rankDetalhado(L,modo,extrair).map(function(a){return a.x;});}
 function scopeHTML(m){return '<div class="rep-scope"><label class="sr">Universo de pesquisa</label><select data-rep-scope aria-label="Universo de pesquisa">'+[['todos','Banco inteiro'],['proc','Relacionados ao processo'],['editor','Relacionados ao editor']].map(function(x){return '<option value="'+x[0]+'"'+(m===x[0]?' selected':'')+'>'+x[1]+'</option>';}).join('')+'</select>'+(m==='editor'?'<button type="button" class="tu-b" data-rep-read title="Ler editor do PJe" aria-label="Ler editor do PJe">↻</button>':'')+(m!=='todos'&&!contexto(m)?'<small class="muted rep-context">'+(m==='editor'?'Leia o editor do processo atual.':'Preencha o caso no prontuário.')+'</small>':'')+'</div>';}
 function lerEditor(){return window.MutaEditor?window.MutaEditor.ler():Promise.reject(new Error('Editor indisponível'));}
 
 /* Repertório · pesquisa compartilhada e seleção de trabalho local à sessão/processo. */
 var pesquisa={q:'',modo:'proc',all:false},selecao=new Map(),chaveSel=null;
 function cnjAtual(){var g=window.MutaGabinete;return g&&g.cnj?String(g.cnj()||''):'';}
-function limparContexto(){var k=cnjAtual();if(k!==chaveSel){selecao.clear();chaveSel=k;}}
+function limparContexto(){var s=window.MutaSessao&&window.MutaSessao.estado(),k=(s&&s.estado==='on'?String(s.usuario||''):'')+'|'+cnjAtual();if(k!==chaveSel){selecao.clear();chaveSel=k;}}
 function estadoPesquisa(){return pesquisa;}
 function atualizarPesquisa(v){Object.assign(pesquisa,v||{});return pesquisa;}
 function selecionarMaterial(x){limparContexto();var k=x.tipo+':'+x.id;if(selecao.has(k))selecao.delete(k);else selecao.set(k,x);pintarBandeja();return selecao.has(k);}
@@ -71,5 +91,5 @@ document.addEventListener('click',function(ev){
 },true);
 function pintarTabs(){var repLabel=document.getElementById('rep-acv-label');if(repLabel)repLabel.textContent=pesquisa.all?'Todos':'Precedentes';document.querySelectorAll('.emd-modos [data-rep-all]').forEach(function(b){b.setAttribute('aria-selected',String(pesquisa.all));});var active=[['ementario','panel-acervo'],['par','panel-par'],['modelos','panel-modelos']].find(function(x){var panel=document.getElementById(x[1]);return panel&&!panel.hidden;});var all=!!(pesquisa.all&&active&&active[0]==='ementario');document.querySelectorAll('.emd-modos [data-rep-all]').forEach(function(b){b.setAttribute('aria-selected',String(all));});document.querySelectorAll('.emd-modos [data-emd]').forEach(function(b){b.setAttribute('aria-selected',String(!!active&&!all&&b.dataset.emd===active[0]));});pintarBandeja();}
 
-window.MutaFontes = { estadoPesquisa:estadoPesquisa, atualizarPesquisa:atualizarPesquisa, pintarTabs:pintarTabs, botaoMaterial:botaoMaterial, rank:rank, contexto:contexto, scopeHTML:scopeHTML, lerEditor:lerEditor, base: base, blocos: blocos, porLinhas: porLinhas, secoesDeTexto: secoesDeTexto, pronto: function () { return D; } };
+window.MutaFontes = { contextoCaso:contextoCaso,rankDetalhado:rankDetalhado, estadoPesquisa:estadoPesquisa, atualizarPesquisa:atualizarPesquisa, pintarTabs:pintarTabs, botaoMaterial:botaoMaterial, rank:rank, contexto:contexto, scopeHTML:scopeHTML, lerEditor:lerEditor, base: base, blocos: blocos, porLinhas: porLinhas, secoesDeTexto: secoesDeTexto, pronto: function () { return D; } };
 })();

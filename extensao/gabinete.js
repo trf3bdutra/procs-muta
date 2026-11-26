@@ -637,9 +637,15 @@ function controlesProcesso(naSeta) {
   return '<section class="card pc-sec" id="g-ctl"><div class="pc-sh"><h3>Controles</h3><small class="muted">' + (n ? n + ' em vigor' : 'nenhum em vigor') + '</small></div><div class="ct-l">' + linhas + '</div></section>';
 }
 /* precedentes relacionados do processo aberto: no topo da aba Ementário */
-function casoPrec() { return { cnj: G.cnj, assunto: assuntoCNJ(),
-    subassuntos: S(gravado('triagem', 'Registro - Assunto detalhado')) || S(V('triagem', 'Assunto detalhado')), questoes: S(V('triagem', 'Alegações')),
-    sintese: [S(V('triagem', 'Síntese Processual')), S(V('triagem', 'Síntese Fática'))].join(' '), especificidades: [S(V('triagem', 'Especificidades')), S(V('triagem', 'Tema'))].join(' ') }; }
+function casoPrec() {
+  var k={cnj:G.cnj},sg=window.MutaSigilo;
+  if(!G.cnj||!G.F||G.carregando||dg(cnjAtual())!==dg(G.cnj)||ses.estado().estado!=='on'||!sg||!sg.situacaoRascunho||sg.situacaoRascunho(G.cnj)!=='permitido')return k;
+  function t(s,n){var x=V(s,n);return typeof x==='string'?x.trim():'';}
+  var qs=V('triagem','Questões jurídicas individualizadas');
+  k.questoesEstruturadas=(Array.isArray(qs)?qs:[]).filter(function(x){return x&&typeof x==='object';}).map(function(x,i){return {ordem:String(x.ordem||i+1),questao:S(x.questao),natureza:S(x.natureza),alegacao:S(x.alegacao),dispositivos:S(x.dispositivos_legais),precedentes:S(x.precedentes),tese:S(x.tese_adotada)};}).filter(function(x){return x.questao||x.alegacao||x.dispositivos||x.precedentes;});
+  k.assunto=assuntoCNJ();k.subassuntos=t('triagem','Assunto detalhado')||t('triagem','Registro - Assunto detalhado');k.questoes=t('triagem','Alegações');k.sintese=[t('triagem','Síntese Processual'),t('triagem','Síntese Fática')].join(' ');k.especificidades=t('triagem','Detalhamento do caso');
+  k.dispositivos=t('producao','Dispositivos legais aplicáveis');k.precedentes=t('producao','Precedentes aplicáveis');k.tese=t('producao','Tese jurídica adotada');k.modelo=t('producao','Modelo aplicável');k.objeto=t('producao','Objeto devolvido');k.pronto=true;return k;
+}
 function precEmentario(k) { if (window.MutaEmentario && window.MutaEmentario.caso) window.MutaEmentario.caso(k); }
 /* peças do processo (sentença, origem, recursos e contrarrazões, outras peças): um cartão só, uma seção por grupo */
 /* 0.44 · grupos de documento vindos do Roteiro (em Autos › Peças e documentos): os campos são os mesmos da ficha */

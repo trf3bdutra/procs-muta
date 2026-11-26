@@ -437,6 +437,7 @@ window.MutaEmentario = {
   /* o processo aberto no prontuário: os relacionados viram o filtro inicial */
   caso: function (k) { var c = JSON.stringify(k || {}); if (c === R.chave) return; R.chave = c; R.caso = k; R.lista = null; R.busy = false; R.mot = {}; if (B.ok && R.modo==='proc') buscar(); },
   julgado: julgado, porNumero: porNumero,
+  sugestoes: function(questao){return carregar().then(function(){if(!B.ok)throw Error('Ementário indisponível.');var FT=window.MutaFontes,k=FT.contextoCaso();if(!k)return [];return FT.rankDetalhado(B.idx.filter(function(x){return dig(x.n)!==dig(k.cnj)&&!!x.e;}),'proc',function(x){return [x.e,x.tese,x.ass,x.temas,x.tc,x.mat].join(' ');},questao).slice(0,5).map(function(a){var x=a.x;return {tipo:'Precedente',id:x.id,titulo:[x.n,x.d].filter(Boolean).join(' · '),texto:citacao(x).texto,termos:a.termos,fontes:a.fontes,referencias:a.referencias};});});},
   matches:function(q,t){var P=parseQ(q);return !P||casa(P,nz(t));},
   abrir: function () {var s=window.MutaFontes.estadoPesquisa();$('acv-q').value=s.q;R.modo=s.modo; return carregar().then(function(){if(B.ok)buscar();}); },
   atualizar: function () { if (B.ok) { var s = V.shown; render(); while (V.shown < s && V.shown < V.res.length) mais(); } },
