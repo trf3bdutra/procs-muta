@@ -2907,11 +2907,11 @@
    "assunto": "Inquérito / Processo / Recurso Administrativo",
    "assunto_detalhado": "",
    "grupo": "assunto-8",
-   "tipo_caso": "Inquérito / Processo / Recurso Administrativo",
-   "resultado": "",
+   "tipo_caso": "Receita · cobrança após ressarcimento (PER/DCOMP) sem processo administrativo · MS",
+   "resultado": "Proposta: [VALIDAR paradigma] apelação da União e remessa contra a concessão da segurança (cobrança iniciada sem processo administrativo; devido processo legal)",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença concedeu a segurança (ID 388447706); MPF pelo prosseguimento.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -2920,9 +2920,42 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "388447706"
+    },
+    {
+     "peca": "Apelação",
+     "id": "388447709"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "388447712"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "388447703"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "391018584"
+    }
+   ],
+   "mpf": "parecer ID 391018584 (07/08/2026)",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Tributário — processo administrativo fiscal",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 388447706 (18/06/2026)",
+    "recurso": "apelação (ID 388447709, 30/06/2026)",
+    "preparo": "[VALIDAR]",
+    "representacao": "procuração/substabelecimento ID 388447328, 388447705",
+    "mpf": "parecer ID 391018584 (07/08/2026)",
+    "autos": "96 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false
@@ -2938,11 +2971,11 @@
    "assunto": "IRPJ/ Imposto de Renda de Pessoa Jurídica",
    "assunto_detalhado": "",
    "grupo": "assunto-9",
-   "tipo_caso": "IRPJ/ Imposto de Renda de Pessoa Jurídica",
-   "resultado": "",
+   "tipo_caso": "Execução fiscal (União/FN) extinta · autos do TJMS",
+   "resultado": "Proposta: [VALIDAR] apelação da União pelo restabelecimento da execução fiscal (créditos não extintos) [VALIDAR: autos do TJMS: fundamento da sentença]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Apelação ID 379546639; autos migrados do TJMS.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -2952,10 +2985,24 @@
     "situacao": "A minutar"
    },
    "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Tributário — execução fiscal",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "[VALIDAR]",
+    "recurso": "[VALIDAR]",
+    "preparo": "[VALIDAR]",
+    "representacao": "[VALIDAR]",
+    "mpf": "Não consta parecer",
+    "autos": "99 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] autos do TJMS: fundamento da sentença"
+   ],
    "minuta": false
   },
   {
@@ -2969,11 +3016,11 @@
    "assunto": "Multas e demais Sanções",
    "assunto_detalhado": "",
    "grupo": "assunto-1",
-   "tipo_caso": "Multas e demais Sanções",
-   "resultado": "",
+   "tipo_caso": "Multa (União) · improcedência · recurso inominado do autor",
+   "resultado": "Proposta: [VALIDAR paradigma] recurso inominado (ID 367257782) recebido como apelação contra a improcedência; pede gratuidade para dispensa do preparo [VALIDAR: gratuidade pedida no recurso: há decisão?; autor analfabeto: regularidade da procuração (informação de irregularidade ID 367257562)]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença improcedente (ID 367257581).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -2982,11 +3029,39 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "367257581"
+    },
+    {
+     "peca": "Recurso inominado",
+     "id": "367257782"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "367257785"
+    }
+   ],
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — multa",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 367257581 (21/01/2026)",
+    "recurso": "recurso inominado (ID 367257782, 09/02/2026)",
+    "preparo": "[VALIDAR]",
+    "representacao": "procuração/substabelecimento ID 367257555",
+    "mpf": "Não consta parecer",
+    "autos": "38 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] gratuidade pedida no recurso: há decisão?",
+    "[VALIDAR] autor analfabeto: regularidade da procuração (informação de irregularidade ID 367257562)"
+   ],
    "minuta": false
   },
   {
@@ -3000,11 +3075,11 @@
    "assunto": "Multas e demais Sanções",
    "assunto_detalhado": "",
    "grupo": "assunto-1",
-   "tipo_caso": "Multas e demais Sanções",
-   "resultado": "",
+   "tipo_caso": "Multa vinculada a veículo · propriedade na data da apreensão · procedência",
+   "resultado": "Proposta: [VALIDAR paradigma] apelação da União: prova de que a autora não era proprietária do veículo EIV5785 na apreensão",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença procedente, com honorários contra a União (ID 377365743).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -3013,9 +3088,34 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "377365743"
+    },
+    {
+     "peca": "Apelação",
+     "id": "377365744"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "377365748"
+    }
+   ],
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Tributário/aduaneiro — multa",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 377365743 (10/06/2025)",
+    "recurso": "apelação (ID 377365744, 27/06/2025)",
+    "preparo": "comprovante juntado (ID 377365735, 377365736) — conferir o tipo",
+    "representacao": "procuração/substabelecimento ID 377364687",
+    "mpf": "Não consta parecer",
+    "autos": "78 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false
