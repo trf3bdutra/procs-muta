@@ -367,7 +367,7 @@ test('Mural v2: saudação com atalhos, Foco de hoje, sessões com trilha, cards
   assert.match(h, /data-o=\\"prazo\\"/);
   assert.doesNotMatch(h, /function gaveta\(k\)\{/);
   assert.match(h, /function abre\(k\)\{[^\n]*CX\.abrir\(e\.ses,e\.cnj,true\)/);
-  assert.match(h, /data-min="'\+esc\(e\.k\)\+'">✓ Minutado<\/button>/);
+  assert.match(h, /data-min="'\+esc\(e\.k\)\+'" title="Marca a minuta como feita hoje">Marcar minutado<\/button>/);
   assert.match(h, /CX\.etapa\(e\.ses,e\.cnj,'dataMinuta'\)/);
   assert.match(h, /function muEtapa\(ses,cnj,campo\)\{if\(\['dataMinuta','dataCorrecao'\]\.indexOf\(campo\)<0\)/);
   assert.match(h, /meta:muMeta,etapa:muEtapa/);
