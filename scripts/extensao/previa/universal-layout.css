@@ -1723,7 +1723,7 @@ html body.hero-redesign-v53 #topo-u .tu-gestao>button[aria-selected=true]{backgr
 
 /* Composição real do cabeçalho da referência, com nós de sessão e PJe preservados. */
 html body.hero-redesign-v53 #topo-u:not([hidden]){
- display:grid!important;grid-template-columns:minmax(0,1fr) auto auto auto;grid-template-rows:auto auto;
+ display:grid!important;grid-template-columns:minmax(0,1fr) auto auto auto auto;grid-template-rows:auto auto;
  column-gap:5px;row-gap:0;padding:0!important;align-items:center!important;background:var(--cmt-ivory)!important;
  border-top:0!important;border-bottom:1px solid var(--cmt-line)!important;box-shadow:none!important;min-width:0
 }
@@ -1740,21 +1740,26 @@ html body.hero-redesign-v53 #topo-u .hero-cmt-identity>span{font:400 9px/1.3 var
 html body.hero-redesign-v53 #topo-u .hero-cmt-identity>strong{font:650 18px/1 var(--cmt-font);letter-spacing:-.045em;white-space:nowrap}
 html body.hero-redesign-v53 #topo-u .hero-cmt-identity em{font:400 italic 15px var(--cmt-serif);letter-spacing:0;color:var(--cmt-gold)}
 html body.hero-redesign-v53 #topo-u #tu-sino{
- grid-row:1;grid-column:4;min-width:0;max-width:140px;margin:3px 9px 0 0!important;padding:3px 5px 3px 8px!important;
+ grid-row:2;grid-column:4;min-width:0;max-width:140px;margin:0!important;padding:3px 5px 3px 8px!important;
  border:0!important;border-left:1px solid var(--cmt-line)!important;border-radius:0!important;background:transparent!important;color:var(--cmt-ink)!important
 }
 html body.hero-redesign-v53 #topo-u #tu-sino .tu-av{width:24px;height:24px;background:var(--cmt-done);color:var(--cmt-green)}
 html body.hero-redesign-v53 #topo-u #tu-sino .tu-profile-name{font:500 11px/1.4 var(--cmt-font)!important}
-html body.hero-redesign-v53 #topo-u [data-tema-tu]{grid-row:1;grid-column:2;border:0!important;background:transparent!important;margin-top:3px}
-html body.hero-redesign-v53 #topo-u #pv-ajustes:not([hidden]){grid-row:1;grid-column:3;border:0!important;background:transparent!important;margin-top:3px}
+html body.hero-redesign-v53 #topo-u [data-tema-tu]{grid-row:2;grid-column:2;border:0!important;background:transparent!important;margin-top:0}
+html body.hero-redesign-v53 #topo-u #pv-ajustes:not([hidden]){grid-row:2;grid-column:3;border:0!important;background:transparent!important;margin-top:0}
 html body.hero-redesign-v53 #topo-u #tu-pje-slot{grid-row:2;grid-column:1;min-width:0;margin:0!important;padding:5px 0 5px 12px;background:var(--cmt-paper)!important;align-self:stretch}
 html body.hero-redesign-v53 #topo-u #tu-pje-slot .pje-bar{min-width:0;max-width:100%;overflow:hidden;flex-wrap:nowrap!important;gap:4px}
 html body.hero-redesign-v53 #topo-u #tu-pje-slot .pje-txt{flex:1 1 auto!important;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:10px}
-html body.hero-redesign-v53 #topo-u>.tu-gestao:not([hidden]){grid-row:2;grid-column:2/4;justify-self:end;margin:0!important;padding:4px 2px!important;gap:2px;background:var(--cmt-paper)!important;align-self:stretch}
+html body.hero-redesign-v53 #topo-u>.tu-gestao:not([hidden]){grid-row:1;grid-column:2/-1;justify-self:end;margin:0!important;padding:7px 10px 4px 0!important;gap:3px;background:transparent!important;align-self:center}
 html body.hero-redesign-v53 #topo-u>.tu-gestao>button{border:0!important;border-radius:2px!important;font:500 11px/1.3 var(--cmt-font)!important;padding:3px 5px!important}
-html body.hero-redesign-v53 #topo-u>.tu-st:not([hidden]){grid-row:2;grid-column:4;justify-self:end;margin:0 9px 0 0!important;border-radius:2px!important}
+html body.hero-redesign-v53 #topo-u>.tu-st:not([hidden]){grid-row:2;grid-column:5;justify-self:end;margin:0 9px 0 0!important;border-radius:2px!important}
 html body.hero-redesign-v53 #topo-u:not([hidden])::after{content:"";grid-row:2;grid-column:1/-1;background:var(--cmt-paper);border-top:1px solid var(--cmt-line);align-self:stretch;z-index:-1;pointer-events:none}
 html body.hero-redesign-v53 #topo-u{isolation:isolate}
+html body.hero-redesign-v53 #topo-u>.tu-gestao>button{display:inline-flex!important;flex-direction:row!important;align-items:center;justify-content:center;gap:4px!important;min-height:30px;height:auto!important;white-space:nowrap}
+html body.hero-redesign-v53 #topo-u>.tu-gestao>button[aria-selected=true]{background:var(--cmt-paper)!important;box-shadow:inset 0 -2px var(--cmt-gold)!important}
+html body.hero-redesign-v53 #topo-u>.tu-gestao .nav-text b{font:600 10.5px/1.3 var(--cmt-font,system-ui)!important}
+html body.hero-redesign-v53 #topo-u>.tu-gestao>button[hidden]{display:none!important}
+@media(max-width:390px){html body.hero-redesign-v53 #topo-u>.tu-gestao:not([hidden]){padding-right:6px!important;gap:2px}html body.hero-redesign-v53 #topo-u>.tu-gestao .nav-text b{font-size:10px!important}html body.hero-redesign-v53 #topo-u .hero-cmt-identity>span{font-size:8px;letter-spacing:.04em}html body.hero-redesign-v53 #topo-u .hero-cmt-star{width:18px;height:22px}html body.hero-redesign-v53 #topo-u .hero-cmt-brand{gap:5px;padding-left:8px;padding-right:3px}}
 html body.hero-redesign-v53 #pv-nav-main{gap:3px!important;padding:0!important;align-items:stretch}
 html body.hero-redesign-v53 #pv-nav-main>button{min-height:44px!important;padding:5px 2px!important;border:1px solid transparent!important;border-radius:3px!important;gap:3px!important;background:transparent!important;color:var(--cmt-muted)!important}
 html body.hero-redesign-v53 #pv-nav-main>button[aria-selected=true]{background:var(--cmt-pale)!important;border-color:var(--cmt-line)!important;color:var(--cmt-ink)!important}
@@ -1859,3 +1864,42 @@ html body.hero-redesign-v53 #gab .hero-tri-with-dock ol.rt>[hidden]{display:none
 html body.hero-redesign-v53 #gab .hero-tri-with-dock .rt-p>.rt-c>.rt-h{width:100%;min-width:0}
 html body.hero-redesign-v53 #gab .hero-tri-with-dock .rt-p>.rt-c>.rt-b{background:var(--cmt-paper)!important}
 html body.hero-redesign-v53 #gab .hero-route-production.rt-em-proc{width:100%;box-sizing:border-box}
+
+/* Superfícies CMT: uma única cor para faixas e navegação; papel para a área de trabalho. */
+html body.hero-redesign-v53{--cmt-ivory:var(--cmt-beige);--hero-pront-header:var(--cmt-beige);--hero-pront-paper:var(--cmt-paper);--hero-pront-divider:var(--cmt-line);background:var(--cmt-paper)!important}
+html body.hero-redesign-v53 :is(.layout,main,#gab,#panel-pront,#panel-min,#panel-acervo,#panel-par,#panel-modelos,#panel-pauta,#panel-dil,#panel-del){background:var(--cmt-paper)!important}
+html body.hero-redesign-v53 #topo-u:not([hidden]){background:var(--cmt-beige)!important}
+html body.hero-redesign-v53 #topo-u:not([hidden])::after{background:var(--cmt-beige)!important}
+html body.hero-redesign-v53 #topo-u #tu-pje-slot{background:transparent!important}
+html body.hero-redesign-v53 .layout>aside{background:var(--cmt-beige)!important}
+html body.hero-redesign-v53 #gab .hero-header-nav .hero-v53-tabs,
+html body.hero-redesign-v53 :is(#panel-acervo,#panel-par,#panel-modelos) .emd-modos,
+html body.hero-redesign-v53 :is(#panel-dil,#panel-del) .gx-modos,
+html body.hero-redesign-v53 #panel-min .hero-review-view-tabs{background:var(--cmt-beige)!important;border-color:var(--cmt-line)!important}
+html body.hero-redesign-v53 #gab .hero-header-nav .hero-v53-tabs>button[aria-selected=true],
+html body.hero-redesign-v53 :is(#panel-acervo,#panel-par,#panel-modelos) .emd-modos>button[aria-selected=true],
+html body.hero-redesign-v53 :is(#panel-dil,#panel-del) .gx-modos>button[aria-selected=true],
+html body.hero-redesign-v53 #panel-min .hero-review-view-tabs>button[aria-selected=true]{background:var(--cmt-paper)!important;color:var(--cmt-ink)!important;box-shadow:inset 0 -2px var(--cmt-gold)!important}
+html body.hero-redesign-v53 #gab .hero-first-panel,
+html body.hero-redesign-v53 #gab .hero-route-canonical>summary.rt-tt,
+html body.hero-redesign-v53 #gab .hero-profile-panels .hero-profile-panel>summary,
+html body.hero-redesign-v53 #gab .hero-tri-with-dock ol.rt>li.rt-f,
+html body.hero-redesign-v53 :is(#panel-acervo,#panel-par,#panel-modelos,#panel-pauta) .hero-rep-search,
+html body.hero-redesign-v53 :is(#panel-dil,#panel-del) :is(.gx-top,.gx-fase>summary),
+html body.hero-redesign-v53 #panel-min #cmp-app .hero-review-document :is(.mn-ed-h,.hero-review-ref-head),
+html body.hero-redesign-v53 #panel-min #min-conf>summary,
+html body.hero-redesign-v53 #panel-pront #hero-ger-dock>summary{background:var(--cmt-beige)!important}
+html body.hero-redesign-v53 #gab .hero-route-canonical .hero-route-metrics,
+html body.hero-redesign-v53 #pauta-app .hero-v53-pa-metrics{background:var(--cmt-beige)!important}
+html body.hero-redesign-v53 #gab .hero-route-canonical .hero-route-metrics>button[aria-pressed=true],
+html body.hero-redesign-v53 #pauta-app .hero-v53-pa-metric:is(.at,.on,[aria-pressed=true],:has(>button[aria-pressed=true])){background:var(--cmt-paper)!important}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock ol.rt,
+html body.hero-redesign-v53 #gab .hero-route-overview-body,
+html body.hero-redesign-v53 #gab .hero-summary-integrated,
+html body.hero-redesign-v53 #gab .hero-profile-panels .hero-profile-panel,
+html body.hero-redesign-v53 #gab .hero-tri-with-dock .rt-p>.rt-c>.rt-b,
+html body.hero-redesign-v53 #panel-pront #hero-ger-dock :is(.hero-ger-dock-body,.hero-ger-dock-content,.hero-enc-dock-body),
+html body.hero-redesign-v53 #panel-pront #hero-ger-dock .hero-ger-dock-header>details>summary,
+html body.hero-redesign-v53 #panel-min #cmp-app :is(.hero-review-document,.folha,.mn-tx,.hero-v53-ref-text,.cx-out),
+html body.hero-redesign-v53 #panel-min #panel-conf,
+html body.hero-redesign-v53 #pauta-app .hero-pa-results{background:var(--cmt-paper)!important}
