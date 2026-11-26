@@ -454,6 +454,8 @@ window.MutaRender = function () { render(); };
 function faixaUsuario(s) {
   var t0 = $('topo-u'), t = $('tu-main'); if (!t0 || !t) return;
   var pb = $('pje-bar'); if (pb && t.contains(pb) && PJE_CASA && PJE_CASA.parentNode) PJE_CASA.parentNode.insertBefore(pb, PJE_CASA);
+  var saveStatus=$('tu-st');if(saveStatus&&t.contains(saveStatus))t0.appendChild(saveStatus);
+  var pjeOpen=!!t.querySelector('.hero-pje-details[open]');
   t0.hidden = false;
   var on = s && s.estado === 'on';
   var q = function (attr, tit, svg) { return '<button type="button" class="tu-b" ' + attr + ' title="' + tit + '" aria-label="' + tit + '">' + SV(svg, 14) + '</button>'; };
@@ -464,6 +466,14 @@ function faixaUsuario(s) {
   var tema=t.querySelector('[data-tema-tu]'),perfil=$('tu-sino');
   if(tema)utils.appendChild(tema);if(ajustes)utils.appendChild(ajustes);if(perfil)utils.appendChild(perfil);t.appendChild(utils);
   var sl = $('tu-pje-slot'); if (sl && pb) { if (!PJE_CASA) { PJE_CASA = document.createComment('pje-bar'); pb.parentNode.insertBefore(PJE_CASA, pb); } sl.appendChild(pb); }
+  var brand=t.querySelector('.hero-cmt-brand');
+  if(brand&&sl&&pb){
+    var d=document.createElement('details');d.className='hero-pje-details';d.open=pjeOpen;
+    var sm=document.createElement('summary');sm.className='hero-pje-indicator';sm.title=$('pje-status').textContent;sm.setAttribute('aria-label',sm.title+' · opções do PJe');
+    var dot=document.createElement('span');dot.className='hero-pje-dot';dot.setAttribute('aria-hidden','true');sm.appendChild(dot);
+    d.append(sm,sl);brand.appendChild(d);
+  }
+  if(brand&&saveStatus)brand.appendChild(saveStatus);
   if(window.MutaAlertas&&window.MutaAlertas.sincronizarPerfil)window.MutaAlertas.sincronizarPerfil();
 }
 (function () { var t = $('topo-u'); if (!t) return;

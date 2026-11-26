@@ -29,6 +29,7 @@
   function mostrar(numero, texto, estado) {
     $('pje-status').textContent = texto;
     $('pje-bar').dataset.estado = estado || '';
+    var indicador=document.querySelector('.hero-pje-indicator');if(indicador){indicador.title=texto;indicador.setAttribute('aria-label',texto+' · opções do PJe');}
   }
   var hostAtual='';
   function primeiroGrau(host){return /^(pje1g|pje1g-jus)\.trf3\.jus\.br$/i.test(String(host||''));}

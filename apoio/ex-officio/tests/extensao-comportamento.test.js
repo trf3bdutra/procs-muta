@@ -389,14 +389,17 @@ test('universal 0.75.1: faixa das subabas colada ao cabeçalho, da mesma cor, e 
     await pg.click('#tab-pront');
     await pg.waitForTimeout(500);
     const v = await pg.evaluate(() => {
-      const nav = document.querySelector('.hero-header-nav'), topo = document.getElementById('topo-u');
-      const antes = { nav: Math.round(nav.getBoundingClientRect().top), base: Math.round(topo.getBoundingClientRect().bottom) };
+      const nav = document.getElementById('hero-area-header-tabs'), topo = document.getElementById('topo-u');
+      const antes = { nav: Math.round(nav.getBoundingClientRect().bottom), base: Math.round(topo.getBoundingClientRect().bottom) };
       window.scrollTo(0, 900);
-      return { antes, depois: Math.round(nav.getBoundingClientRect().top), cor: getComputedStyle(nav).backgroundColor === getComputedStyle(topo).backgroundColor, rolou: window.scrollY > 0 };
+      return { antes, integrado:nav.parentNode===topo, labels:[...nav.children].map(b=>b.textContent.trim()), origemOculta:getComputedStyle(document.querySelector('#gab .hero-v53-tabs')).display==='none', dot:!!topo.querySelector('.hero-cmt-brand .hero-pje-indicator'), cor:getComputedStyle(nav).backgroundColor===getComputedStyle(topo).backgroundColor };
     });
-    assert.equal(v.antes.nav, v.antes.base, 'faixa colada sob o cabeçalho');
-    assert.ok(v.cor, 'mesma cor do cabeçalho');
-    assert.ok(v.rolou && v.depois === v.antes.base, 'presa sob o cabeçalho ao rolar: ' + JSON.stringify(v));
+    assert.ok(v.integrado && v.origemOculta && v.dot,'subabas no cabeçalho, sem duplicação, PJe junto ao título');
+    assert.deepEqual(v.labels,['Triagem','Produção']);
+    assert.ok(Math.abs(v.antes.nav-v.antes.base)<=2,'subabas na última linha do cabeçalho');
+    assert.ok(v.cor,'mesma cor do cabeçalho');
+    await pg.locator('#hero-area-header-tabs button').filter({hasText:'Produção'}).click();
+    await pg.waitForFunction(()=>document.querySelector('#hero-area-header-tabs button[aria-selected=true]')?.textContent==='Produção');
     assert.deepEqual(P.erros, [], 'sem erro de script');
   } finally { await P.fim(); }
 });
