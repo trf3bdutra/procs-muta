@@ -167,7 +167,7 @@ html body.hero-redesign-v53 #topo-u>#pv-nav-main>button[aria-selected=true]{back
 html body.hero-redesign-v53 #topo-u :is(#hero-rep-header-tabs,#hero-area-header-tabs):not([hidden]){
  grid-row:2!important;grid-column:1/-1!important;justify-self:stretch!important;display:flex!important;
  justify-content:center!important;align-items:stretch!important;gap:0!important;padding:0 5px!important;
- min-height:27px;background:color-mix(in srgb,var(--hero-nav-cream,var(--cmt-beige)) 48%,var(--hero-nav-white,var(--cmt-paper)))!important;border-top:1px solid var(--cmt-line)!important;
+ min-height:27px;background:var(--hero-nav-subtabs)!important;border-top:1px solid var(--cmt-line)!important;
 }
 html body.hero-redesign-v53 #topo-u :is(#hero-rep-header-tabs,#hero-area-header-tabs)>button{
  flex:0 1 auto!important;min-height:27px!important;padding:3px 9px!important;font:500 10.5px/1.3 var(--cmt-font,system-ui)!important;
@@ -213,4 +213,18 @@ html body.hero-redesign-v53 .layout>aside>.nav>#pv-nav-main .nav-text b{font:500
  html body.hero-redesign-v53 #topo-u>.tu-gestao>button .nav-icon{display:none!important}
  html body.hero-redesign-v53 #topo-u>.tu-gestao>button:not([hidden]){padding-inline:3px!important}
  html body.hero-redesign-v53 #topo-u>.tu-gestao>button .nav-text b{font-size:9.5px!important}
+}
+
+/* Navegação: gestão com abas brancas; rodapé com o mesmo creme claro do Repertório. */
+html body.hero-redesign-v53{--hero-nav-subtabs:color-mix(in srgb,var(--hero-nav-cream,var(--cmt-beige)) 48%,var(--hero-nav-white,var(--cmt-paper)))}
+html body.hero-redesign-v53 #topo-u>.tu-gestao>button:not([hidden]),
+html body.hero-redesign-v53 #topo-u>.tu-gestao>button[aria-selected=true]:not([hidden]){
+ background:var(--hero-nav-white,var(--cmt-paper))!important
+}
+html body.hero-redesign-v53 .layout>aside,
+html body.hero-redesign-v53 .layout>aside>.nav,
+html body.hero-redesign-v53 .layout>aside>.nav>#pv-nav-main,
+html body.hero-redesign-v53 .layout>aside>.nav>#pv-nav-main>button:not([hidden]),
+html body.hero-redesign-v53 .layout>aside>.nav>#pv-nav-main>button[aria-selected=true]:not([hidden]){
+ background:var(--hero-nav-subtabs)!important
 }
