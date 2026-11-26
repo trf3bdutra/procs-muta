@@ -457,8 +457,12 @@ function faixaUsuario(s) {
   t0.hidden = false;
   var on = s && s.estado === 'on';
   var q = function (attr, tit, svg) { return '<button type="button" class="tu-b" ' + attr + ' title="' + tit + '" aria-label="' + tit + '">' + SV(svg, 14) + '</button>'; };
+  var ajustes=$('pv-ajustes');if(ajustes&&t.contains(ajustes))t0.appendChild(ajustes);
   t.innerHTML = '<div class="hero-cmt-brand" aria-label="HERO18810 · TRF3 Gabinete CMT"><svg class="hero-cmt-star" aria-hidden="true" fill="currentColor" viewBox="0 0 64 72"><path d="M31 0v18c0 7-5 12-12 12H0l8-8h9c6 0 10-4 10-10V4zM33 72V54c0-7 5-12 12-12h19l-8 8h-9c-6 0-10 4-10 10v8zM0 34h18c7 0 12 5 12 12v18l-8-8v-9c0-6-4-10-10-10H4zM64 38H46c-7 0-12-5-12-12V8l8 8v9c0 6 4 10 10 10h8z"/></svg><div class="hero-cmt-identity"><span>TRF3 · GABINETE CMT</span><strong>HERO <em>18810</em></strong></div></div><button type="button" id="tu-sino" class="tu-n tu-profile-trigger tu-profile-notif" aria-haspopup="dialog" aria-controls="tu-pop" aria-expanded="false" aria-label="Perfil e notificações">'+(on?'<i class="tu-av">'+esc(iniciais(s.usuario))+'</i><span class="tu-profile-name">'+esc(s.usuario)+'</span>':'<span class="tu-profile-name">Entrar</span>')+SV('<path d="m6 9 6 6 6-6"/>',11)+'<b class="tu-profile-count"></b></button><span class="tu-pje" id="tu-pje-slot"></span>' +
     q('data-tema-tu', 'Tema claro ou escuro', '<path d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9z"/>');
+  var utils=document.createElement('div');utils.className='hero-header-utilities';
+  var tema=t.querySelector('[data-tema-tu]'),perfil=$('tu-sino');
+  if(tema)utils.appendChild(tema);if(ajustes)utils.appendChild(ajustes);if(perfil)utils.appendChild(perfil);t.appendChild(utils);
   var sl = $('tu-pje-slot'); if (sl && pb) { if (!PJE_CASA) { PJE_CASA = document.createComment('pje-bar'); pb.parentNode.insertBefore(PJE_CASA, pb); } sl.appendChild(pb); }
   if(window.MutaAlertas&&window.MutaAlertas.sincronizarPerfil)window.MutaAlertas.sincronizarPerfil();
 }
