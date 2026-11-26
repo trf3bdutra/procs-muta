@@ -464,6 +464,7 @@ function faixaUsuario(s) {
     q('data-tema-tu', 'Tema claro ou escuro', '<path d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9z"/>');
   var utils=document.createElement('div');utils.className='hero-header-utilities';
   var tema=t.querySelector('[data-tema-tu]'),perfil=$('tu-sino');
+  if(on&&s.perfil==='desembargador'){var cmt=document.createElement('a');cmt.className='hero-cmt-shortcut';cmt.href='https://www.gabinete-cmt.com/cmt/';cmt.target='_blank';cmt.rel='noopener noreferrer';cmt.title='Abrir painel do desembargador';cmt.setAttribute('aria-label',cmt.title);cmt.textContent='CMT';utils.appendChild(cmt);}
   if(tema)utils.appendChild(tema);if(ajustes)utils.appendChild(ajustes);if(perfil)utils.appendChild(perfil);t.appendChild(utils);
   var sl = $('tu-pje-slot'); if (sl && pb) { if (!PJE_CASA) { PJE_CASA = document.createComment('pje-bar'); pb.parentNode.insertBefore(PJE_CASA, pb); } sl.appendChild(pb); }
   var brand=t.querySelector('.hero-cmt-brand');

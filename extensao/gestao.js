@@ -32,7 +32,7 @@
     ['tab-processo','tab-pront','tab-min','tab-acervo'].forEach(function(id){var b=$(id);if(b&&b.parentNode!==faixa)faixa.appendChild(b);});
     var divisor=faixa.querySelector('.pv-nav-divider');if(divisor)divisor.remove();
     if(slot.parentNode!==aside)aside.appendChild(slot);
-    [['tab-gab','Gabinete'],['tab-pauta','Pauta'],['tab-del','Deliberações'],['tab-dil','Diligências'],['tab-urg','Urgências']].forEach(function(x){
+    [['tab-pauta','Pauta'],['tab-del','Deliberações'],['tab-dil','Diligências'],['tab-urg','Urgências']].forEach(function(x){
       var b=$(x[0]);if(!b)return;slot.appendChild(b);
       b.title=x[1];b.setAttribute('aria-label',x[1]);
     });
@@ -42,10 +42,10 @@
 
   /* ---------- visibilidade das abas ---------- */
   function mostrar() {
-    var q = quem(), dil = $('tab-dil'), del = $('tab-del'), urg = $('tab-urg'), gab = $('tab-gab'), ctl = $('tab-ctl'), pa = $('tab-pauta');
+    var q = quem(), dil = $('tab-dil'), del = $('tab-del'), urg = $('tab-urg'), ctl = $('tab-ctl'), pa = $('tab-pauta');
     var ver = { dil: pode(q), del: pode(q), ctl: q.on && q.gestor, pauta: q.on };
     /* 0.58: Controle vira ícone na faixa do topo (gabinete.js › faixaUsuario); a aba fica escondida na barra */
-    [[dil, ver.dil], [del, ver.del], [urg, ver.del], [gab, ver.del], [ctl, ver.ctl, true], [pa, ver.pauta]].forEach(function (p) {
+    [[dil, ver.dil], [del, ver.del], [urg, ver.del], [ctl, ver.ctl, true], [pa, ver.pauta]].forEach(function (p) {
       if (!p[0]) return;
       p[0].hidden = !p[1] || !!p[2];
       if (!p[1] && p[0].getAttribute('aria-selected') === 'true' && window.MutaAbas) window.MutaAbas.ir('pront');
@@ -395,7 +395,7 @@
   }
   function abrir(n) {
     if (n === 'dil') { pintarDil(); lerDil(); }
-    if (n === 'del'||n==='urg'||n==='gab') { pintarGestao(); lerDel(); }
+    if (n === 'del'||n==='urg') { pintarGestao(); lerDel(); }
   }
   function iniciar() {
     ligar(); mostrar();

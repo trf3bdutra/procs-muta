@@ -157,3 +157,29 @@ html body.hero-redesign-v53 #topo-u .hero-header-subtabs>button:focus-visible,ht
 html body.hero-redesign-v53 .hero-subnav-source,html body.hero-redesign-v53 #gab .hero-header-nav:has(>.hero-subnav-source){display:none!important}
 html body.hero-redesign-v53 :is(#dil-app,#del-app) .gx-nav:has(>.hero-subnav-source){justify-content:flex-end!important;border:0!important;background:transparent!important;min-height:0!important}
 @media(max-width:460px){html body.hero-redesign-v53 #topo-u :is(#hero-rep-header-tabs,#hero-area-header-tabs)>button{flex:1 0 auto!important;padding-inline:5px!important}}
+
+/* HERO: cabeçalho bege e uma única faixa inferior para todas as subabas. */
+html body.hero-redesign-v53 #topo-u:not([hidden]),
+html body.hero-redesign-v53:has(#panel-pront:not([hidden])) #topo-u:not([hidden]){
+ background:var(--hero-nav-cream,var(--cmt-beige))!important
+}
+html body.hero-redesign-v53 #topo-u>#pv-nav-main>button[aria-selected=true]{background:var(--hero-nav-white,var(--cmt-paper))!important}
+html body.hero-redesign-v53 #topo-u :is(#hero-rep-header-tabs,#hero-area-header-tabs):not([hidden]){
+ grid-row:2!important;grid-column:1/-1!important;justify-self:stretch!important;display:flex!important;
+ justify-content:center!important;align-items:stretch!important;gap:0!important;padding:0 5px!important;
+ min-height:27px;background:var(--hero-nav-white,var(--cmt-paper))!important;border-top:1px solid var(--cmt-line)!important;
+}
+html body.hero-redesign-v53 #topo-u :is(#hero-rep-header-tabs,#hero-area-header-tabs)>button{
+ flex:0 1 auto!important;min-height:27px!important;padding:3px 9px!important;font:500 10.5px/1.3 var(--cmt-font,system-ui)!important;
+ border:0!important;border-bottom:2px solid transparent!important;border-radius:0!important;box-shadow:none!important;white-space:nowrap;
+}
+html body.hero-redesign-v53 #topo-u :is(#hero-rep-header-tabs,#hero-area-header-tabs)>button[aria-selected=true]{
+ color:var(--cmt-blue,var(--primary))!important;border-bottom-color:var(--cmt-blue,var(--primary))!important;font-weight:650!important
+}
+html body.hero-redesign-v53 #topo-u .hero-header-utilities>.hero-cmt-shortcut{
+ display:inline-flex;align-items:center;justify-content:center;flex:none;min-height:22px;padding:0 5px;
+ color:var(--cmt-blue,var(--primary));font:650 10px/1.2 var(--cmt-font,system-ui);text-decoration:none;
+ border-right:1px solid var(--cmt-line);white-space:nowrap
+}
+html body.hero-redesign-v53 #topo-u .hero-cmt-shortcut:focus-visible{outline:2px solid var(--cmt-blue);outline-offset:1px}
+@media(max-width:460px){html body.hero-redesign-v53 #topo-u :is(#hero-rep-header-tabs,#hero-area-header-tabs)>button{flex:1 0 auto!important;padding-inline:5px!important}}

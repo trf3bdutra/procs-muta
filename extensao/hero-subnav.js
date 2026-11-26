@@ -5,7 +5,8 @@
   var host=document.getElementById('hero-area-header-tabs');
   if(!host)return;
   var specs=[
-    ['panel-pront','.hero-v53-tabs','Prontuário',function(p){return p.getAttribute('aria-labelledby')==='tab-pront';}],
+    ['panel-pront','.hero-v53-tabs',function(p){return p.getAttribute('aria-labelledby')==='tab-processo'?'Processo':'Prontuário';}],
+    ['panel-pauta','.gx-modos','Pauta'],
     ['panel-min','.hero-review-view-tabs','Corretor'],
     ['panel-dil','.gx-modos','Diligências'],
     ['panel-del','.gx-modos','Deliberações']
@@ -16,7 +17,7 @@
     var next=null,label='';
     for(var i=0;i<specs.length;i++){
       var sp=specs[i],p=document.getElementById(sp[0]);
-      if(p&&!p.hidden&&(!sp[3]||sp[3](p))){next=p.querySelector(sp[1]);label=sp[2];break;}
+      if(p&&!p.hidden&&(!sp[3]||sp[3](p))){next=p.querySelector(sp[1]);label=typeof sp[2]==='function'?sp[2](p):sp[2];break;}
     }
     var bs=buttons(next);
     if(!bs.length)next=null;
