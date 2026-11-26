@@ -615,3 +615,7 @@ html body.hero-redesign-v53 .rep-link-tools small{flex:1 1 100%;font-size:10px}
 html body.hero-redesign-v53 #ger-app .hero-fund-list{display:grid;gap:5px}
 html body.hero-redesign-v53 #ger-app .hero-fund-ledger :is(input,textarea,select){min-width:0;max-width:100%;box-sizing:border-box;font-size:11px}
 html body.hero-redesign-v53 #ger-app .hero-fund-ledger textarea{width:100%;resize:vertical}
+
+/* Conferência integrada: escopo e avisos estruturais. */
+html body.hero-redesign-v53 .cf-flow-status{font-size:11px;line-height:1.4;padding:6px 8px;margin:3px 0;border-bottom:1px solid var(--cmt-line,#ded5c4);color:var(--cmt-muted,inherit)}
+html body.hero-redesign-v53 #ger-app .hero-ger-flow-check .hero-ger-context-card b{font-size:11px;font-weight:550}

@@ -37,7 +37,11 @@ function contexto() {
 function analisar() {
   var E = ED.estado();
   if (!E.texto) { K.r = null; badge(); render(); return; }
-  K.r = MO.analisar(E.paragrafos || [], contexto()); K.em = Date.now();
+  var ctx=contexto(),ficha=FT&&FT.conformidadeFicha&&FT.conformidadeFicha(),g=window.MutaGabinete,cnj=g&&g.cnj&&g.cnj(),dg=function(x){return String(x||'').replace(/\D/g,'');};
+  var ligado=!!(cnj&&E.numero&&!E.colado&&!E.erro&&dg(cnj).length===20&&dg(cnj)===dg(E.numero));
+  if(!ligado||!ficha){ctx.prontuario=null;ctx.cartao=null;ctx.autos=null;ctx.autosTodos=false;ctx.questoes=[];if(!ligado)ctx.classe='';}
+  if(ligado&&ficha)ctx.fluxo=ficha;
+  K.r = MO.analisar(E.paragrafos || [], ctx); K.em = Date.now();
   badge(); render();
 }
 function badge() {
@@ -92,6 +96,7 @@ function render() {
     '<div><p><b>' + esc(PECA[r.peca] || r.peca) + '</b>' + (r.resultado ? ' · resultado: ' + esc(MO.RES_TXT[r.resultado]) : '') + '</p>' +
     '<p class="cf-cont"><span data-sev="alta">' + r.resumo.alta + ' alta</span><span data-sev="media">' + r.resumo.media + ' média</span><span data-sev="baixa">' + r.resumo.baixa + ' baixa</span></p>' +
     '</div></div>';
+  resumo+=r.fluxo&&r.fluxo.disponivel?'<p class="cf-flow-status">Ficha vinculada ao editor · '+r.fluxo.stats.questoes+' questões · '+r.fluxo.stats.recursos+' recursos · '+r.fluxo.stats.adotados+' materiais declarados adotados. Conferência indicativa, não validação jurídica.</p>':'<p class="cf-flow-status">Conferência cruzada indisponível: confirme o número do editor, a ficha e o sigilo. A análise textual permanece disponível.</p>';
   var filtros = '<div class="seg cf-grupos"><button type="button" data-g="" aria-selected="' + !K.grupo + '">Todos · ' + r.itens.length + '</button>' +
     Object.keys(grupos).map(function (gq) { return '<button type="button" data-g="' + esc(gq) + '" aria-selected="' + (K.grupo === gq) + '">' + esc(gq) + ' · ' + grupos[gq] + '</button>'; }).join('') + '</div>';
   var hero=document.body.classList.contains('hero-redesign-v53');
@@ -133,6 +138,8 @@ caixa.addEventListener('change', function (e) {
 });
 ED.ouvir(function () { analisar(); });
 document.addEventListener('muta:prontuario', function () { if (ED.estado().texto) analisar(); });
+document.addEventListener('muta:fund-vinculos',function(){if(ED.estado().texto)analisar();});
+document.addEventListener('muta:ficha-conformidade',function(){if(ED.estado().texto)analisar();});
 document.addEventListener('muta:autos', function () { if (ED.estado().texto) analisar(); }); /* 0.40: autos lidos → IDʼs conferidos */
 (function () { var t = $('mc-t'); if (t) t.addEventListener('click', function () { var w = $('min-conf'); rodape(!(w && w.dataset.aberto === '1')); render(); }); rodape(); })();
 window.MutaConformidade = {

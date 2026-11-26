@@ -642,10 +642,19 @@
    d.addEventListener('toggle',function(){if(d.open&&vigente())action({acao:'listar'});});
    fundListener=function(e){if(d.isConnected&&e.detail.cnj===k.cnj&&vigente()){latest=e.detail.vinculos;draw();}};document.addEventListener('muta:fund-vinculos',fundListener);
   }
+  function montarConformidadeFluxo(host){
+    var FT=window.MutaFontes,MO=window.MutaConformidadeMotor,f=FT&&FT.conformidadeFicha&&FT.conformidadeFicha();
+    if(!f||!MO||!MO.conferirFluxo)return;
+    var R=MO.conferirFluxo(f,null),d=document.createElement('details');d.className='hero-ger-contextual hero-ger-flow-check';var title=document.createElement('summary');title.textContent='Conformidade processual da ficha · '+R.itens.length+' apontamento(s)';d.append(title);
+    var body=document.createElement('div');body.className='hero-ger-context-body';var info=document.createElement('small');info.className='muted';info.textContent='Conferência estrutural da ficha: '+R.stats.questoes+' questões · '+R.stats.recursos+' recursos · '+R.stats.adotados+' materiais declarados adotados. Para comparar com a minuta efetiva, leia o editor no Corretor.';body.append(info);
+    R.itens.forEach(function(x){var p=document.createElement('article');p.className='hero-ger-context-card';var b=document.createElement('b');b.textContent=(x.sev==='alta'?'Alta':x.sev==='media'?'Média':'Baixa')+' · '+x.msg;var s=document.createElement('small');s.textContent=x.sug;p.append(b,s);body.append(p);});
+    if(!R.itens.length){var p=document.createElement('p');p.className='muted';p.textContent='Nenhuma inconsistência estrutural detectada nos campos disponíveis; não significa liberação ou revisão concluída.';body.append(p);}
+    d.append(body);var first=host.querySelector('.hero-ger-sheet');if(first)host.insertBefore(d,first);else host.append(d);
+  }
   function pintar(forca) {
     var g = $('ger-app');if(!g&&fundListener){document.removeEventListener('muta:fund-vinculos',fundListener);fundListener=null;} if (!g || (!forca && !visivel())) return;
     var p = $(novoHero()?'panel-pront':'panel-min'), y = p ? p.scrollTop : 0;
-    try { g.innerHTML = html(); if(novoHero()){g.querySelectorAll('.gr-l').forEach(function(l){if(l.querySelector('[data-gr-tipo],[data-gr-res]'))l.remove();});g.querySelectorAll('.gr-av').forEach(function(p){if(/^Sem resultado do voto na ficha/.test(p.textContent.trim()))p.textContent='Registre o resultado em Produção para completar a ementa.';});} if(window.MutaModelosHero)window.MutaModelosHero.montarGerador(g); if(novoHero()){montarRepertorioContextual(g);montarVinculosFundamentacao(g);} } catch (e) { g.innerHTML = '<div class="empty">Gerador indisponível: ' + esc(e && e.message || e) + '</div>'; }
+    try { g.innerHTML = html(); if(novoHero()){g.querySelectorAll('.gr-l').forEach(function(l){if(l.querySelector('[data-gr-tipo],[data-gr-res]'))l.remove();});g.querySelectorAll('.gr-av').forEach(function(p){if(/^Sem resultado do voto na ficha/.test(p.textContent.trim()))p.textContent='Registre o resultado em Produção para completar a ementa.';});} if(window.MutaModelosHero)window.MutaModelosHero.montarGerador(g); if(novoHero()){montarRepertorioContextual(g);montarVinculosFundamentacao(g);montarConformidadeFluxo(g);} } catch (e) { g.innerHTML = '<div class="empty">Gerador indisponível: ' + esc(e && e.message || e) + '</div>'; }
     if (p) p.scrollTop = y;
   }
   function modo(m) {

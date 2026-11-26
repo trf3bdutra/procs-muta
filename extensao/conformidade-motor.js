@@ -193,7 +193,7 @@ function conferirFluxo(f,txt){
   var L=S(t).split(/;|\n|\.(?=\s+[A-ZÁÉÍÓÚ])/).filter(function(x){return id&&ids(x).includes(id)||nome&&(' '+norm(x)+' ').includes(' '+nome+' ');});
   if(L.length!==1)return '';var x=L[0],n=' '+norm(x)+' ';
   if(J.some(function(y){if(y===z)return false;var a=norm(y.recorrente);return a&&n.includes(' '+a+' ')||S(y.id_recurso)&&ids(x).includes(S(y.id_recurso));}))return '';
-  if(/\[VALIDAR:|\b(?:se|caso|pretende|requer|alega|pede)\b/i.test(x))return '';
+  if(/\[VALIDAR:|\b(?:se|caso|pretende|requer|alega|pede)\b|\bnão provid[oa]\b|\bnão dou provimento\b/i.test(x))return '';
   var tipos=[['parcial',/\bdou parcial provimento\b|\bparcialmente provid[oa]\b/i],['desprovido',/\bnego provimento\b|\bdesprovid[oa]\b/i],['naoconhecido',/\bnão conheço\b|\bnão conhecid[oa]\b/i],['prejudicado',/\bjulgo prejudicad[oa]\b|\brecurso prejudicado\b/i],['provido',/\bdou provimento\b|\bprovid[oa]\b/i]];
   var matches=tipos.filter(function(p){return p[1].test(x);}).map(function(p){return p[0];});if(matches.includes('parcial')&&matches.includes('provido'))matches=matches.filter(function(v){return v!=='provido';});if(matches.includes('naoconhecido')&&matches.includes('provido'))return '';return matches.length===1?matches[0]:'';
  }
