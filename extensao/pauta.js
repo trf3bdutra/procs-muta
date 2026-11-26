@@ -153,9 +153,7 @@
     if (P.lendo && !P.doc) return topo+h+'<section class="pa-ses hero-pa-results"><p class="muted">Lendo a pauta…</p></section>';
     var pedidos=(d.solicitacoes||[]).map(function(r){return {tipo:S(r.tipo)||'Outras',cnj:r.cnj};}).concat((P.pedPauta||[]).filter(function(r){return sesDe(r)===P.data;}).map(function(r){return {tipo:tipoPed(r),cnj:r.cnj||r.numero};}));
     var tipos={};pedidos.forEach(function(r){tipos[r.tipo]=(tipos[r.tipo]||0)+1;});
-    var resumo=Object.keys(tipos).sort().map(function(t){return '<button type="button" class="chip" style="font-size:10px;white-space:normal;padding:2px 5px;cursor:pointer" data-pa="soltipo:'+esc(t)+'" aria-pressed="'+(P.f==='sol'&&P.tipoProcSol===t)+'">'+esc(t)+' · '+tipos[t]+'</button>';}).join('');
     var incompleto=P.pedErro||!Array.isArray(d.solicitacoes)||d.solicitacoesErro;
-    var solCard='<div class="hero-pa-solic-types">'+(resumo||'<em>Nenhuma solicitação registrada</em>')+'</div>'+(incompleto?'<em class="pa-solic-warning">Consulta parcial · confira em Notificações</em>':'');
     var marcosHtml=h;h=topo;
 
     var cur = dg(GB().cnj ? GB().cnj() : '');
@@ -181,7 +179,7 @@
     var filtros=F.filter(function(f){return f[0]!=='todos'&&f[0]!=='sol'&&(f[2]||P.f===f[0]);}).map(function(f){var on=P.f===f[0]&&!P.tipoProcSol;return '<button type="button" class="chip pa-status-filter stat-'+f[0]+(on?' on':'')+'" data-pa="f:'+f[0]+'" aria-pressed="'+on+'">'+esc(f[1])+' <i>'+f[2]+'</i></button>';}).join('');
     var nSol=R.filter(function(x){return x.ps.length;}).length,pcSol=L.length?Math.round(nSol*100/L.length):0;
     var solMetric='<button type="button" class="hero-v53-pa-metric pa-m-solicitacoes" data-pa="solcard" aria-pressed="'+(P.f==='sol')+'" title="Filtrar processos com solicitações; clique novamente para limpar"><small>Solicitações</small><div class="pa-m-value"><b>'+pedidos.length+'<span> registros</span></b><span class="pa-pct">'+pcSol+'%</span></div><progress aria-label="Percentual de processos com solicitação" value="'+nSol+'" max="'+Math.max(1,L.length)+'"></progress><em class="pa-falta">'+nSol+' processo'+(nSol===1?'':'s')+' · '+Object.keys(tipos).length+' tipo'+(Object.keys(tipos).length===1?'':'s')+(incompleto?' · parcial':'')+'</em></button>';
-    var indicadores='<section class="hero-pa-overview" aria-label="Marcos e indicadores da sessão">'+marcosHtml+'<div class="hero-v53-pa-metrics hero-pa-production-strip hero-pa-four">'+m+solMetric+'</div><details class="hero-pa-cumulative"'+(P.cumulativeOpen||P.f==='sol'?' open':'')+'><summary>Solicitações por tipo <small>'+pedidos.length+' registros</small></summary>'+solCard+'</details></section>';
+    var indicadores='<section class="hero-pa-overview" aria-label="Marcos e indicadores da sessão">'+marcosHtml+'<div class="hero-v53-pa-metrics hero-pa-production-strip hero-pa-four">'+m+solMetric+'</div></section>';
     if(P.aba==='sol')return '<div class="pa-sol-session"><span>Sessão</span>'+seletor+'</div>'+solicitacoesHtml(L,'');
     h += indicadores+buscaPainel('itens')+buscaFaixa('itens',P.qItens,'Buscar na pauta por item, processo, assunto…')+facetas()+'<div class="pa-f hero-rep-filters" role="group" aria-label="Filtrar por situação">'+filtros+'</div><p class="status hero-rep-count" role="status">'+vis.length+' de '+L.length+' processos</p></div></div><section class="pa-ses hero-pa-results" aria-label="Resultados da pauta">'+(previa?'<p class="muted">Prévia da pauta (ainda sem a relação oficial do PJe).</p>':'')+(!vis.length?'<p class="muted">'+(L.length?'Nenhum processo corresponde aos filtros.':'Sem processos nesta pauta.')+'</p>':'');
     /* Solicitações resumidas nos indicadores e na lista de processos. */
@@ -229,7 +227,7 @@
   }
 
   /* ---------- ações ---------- */
-  document.addEventListener('toggle',function(e){var t=e.target;if(t&&t.isConnected&&t.matches&&t.matches('#pauta-app .hero-cmt-pauta-filters'))P.filtrosOpen=t.open;if(t&&t.isConnected&&t.matches&&t.matches('#pauta-app .hero-pa-cumulative'))P.cumulativeOpen=t.open;},true);
+  document.addEventListener('toggle',function(e){var t=e.target;if(t&&t.isConnected&&t.matches&&t.matches('#pauta-app .hero-cmt-pauta-filters'))P.filtrosOpen=t.open;},true);
   document.addEventListener('input',function(e){var t=e.target;if(!t.dataset||!t.dataset.paQ||!t.closest('#pauta-app'))return;P[t.dataset.paQ==='sol'?'qSol':t.dataset.paQ==='so'?'qSo':'qItens']=t.value;pintar();});
   document.addEventListener('click', function (e) {
     var b = e.target.closest && e.target.closest('#pauta-app [data-pa]'); if (!b) return;
@@ -245,7 +243,7 @@
     if(/^gerir:/.test(a)){solEditOpen=true;var n=a.slice(6),brg=window.MutaProntuarioBridge;if(brg&&brg.abrirProcesso)brg.abrirProcesso(n);pintar();return;}
     if (/^sol:/.test(a)) { P.solFiltro=a.slice(4);pintar();return; }
     if (/^sol-abrir:/.test(a)) { var n=a.slice(10),brg=window.MutaProntuarioBridge;if(brg&&brg.abrirProcesso)brg.abrirProcesso(n);if(window.MutaAbas)window.MutaAbas.ir('pront');return; }
-    if(a==='solcard'){P.f=P.f==='sol'?'todos':'sol';P.tipoProcSol='';P.cumulativeOpen=P.f==='sol';pintar();return;}
+    if(a==='solcard'){P.f=P.f==='sol'?'todos':'sol';P.tipoProcSol='';pintar();return;}
     if(a.indexOf('soltipo:')===0){var tipo=a.slice(8);var desativar=P.f==='sol'&&P.tipoProcSol===tipo;P.f=desativar?'todos':'sol';P.tipoProcSol=desativar?'':tipo;pintar();return;}
     if (/^f:/.test(a)) { var filtro=a.slice(2);P.f=P.f===filtro&&!P.tipoProcSol?'todos':filtro; P.tipoProcSol=''; pintar(); return; }
     if (/^abrir:/.test(a)) { var n = a.slice(6), brg = window.MutaProntuarioBridge; if (brg && brg.abrirProcesso) brg.abrirProcesso(n); if (window.MutaAbas) window.MutaAbas.ir('pront'); return; }
