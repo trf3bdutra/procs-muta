@@ -132,3 +132,8 @@ O **Caput** (`cmt-monitor.html`, antigo Painel Central) lê e grava nesta base, 
 - **Cortex** (`/amicus/cortex/`): lotes, coleções, versões e controle da produção; preserva a base `acervo/lotes`.
 - **Collectio** (`/amicus/collectio/`): consulta, curadoria e edição dos bancos `modelos/modelos.json` e `modelos/paragrafos.json`.
 - **Compendium** (`/amicus/compendium/`): Minutário e elaboração de minutas, além dos referenciais jurídicos. Os bancos são compartilhados como fontes canônicas, sem duplicação.
+
+### Barras por família (`apoio/amicus/header.py`)
+- **Amicus Curiae (equipe):** portal `/amicus/`, Compendium, Collectio e Collegium; a barra mostra a ferramenta e o atalho do Ex Officio, sem as ferramentas do gestor.
+- **Caput (gestor):** Caput (`/caput/`), Cognitio (`/cognitio/`) e Cortex (`/amicus/cortex/`); a marca leva ao Caput e cada página mostra Ex Officio e as outras duas.
+- **Ex Officio:** barra própria, porta de entrada do trabalho diário.
