@@ -1648,7 +1648,7 @@ function heroOrganizarProntuario(){
     profileAut.classList.add('hero-profile-band');
     perfil.open=!!heroTopo.perfil||heroTopo.pagina>=2;
     perfil.addEventListener('toggle',function(){if(perfil.isConnected){heroTopo.perfil=perfil.open;if(!perfil.open)heroTopo.pagina=0;}});
-    /* 0.74.4: Perfil do processo e Pauta e julgamento são abas de um só painel; a Ficha completa abre por botão no cabeçalho dele, numa janela */
+    /* Perfil e pauta: painéis expansíveis independentes; a ficha completa mantém seu diálogo. */
     id.append(perfil);var fichaBtn=null,fdlg=null;if(fichaFacePermitida()&&window.MutaGabinete&&window.MutaGabinete.fichaFace){fichaBtn=el('button','btn line sm hero-v53-ficha-btn','Ficha completa');fichaBtn.type='button';fdlg=el('dialog','hero-v53-field-dialog hero-v53-ficha-dlg');var fhd=el('div','hero-v53-dlg-head'),fclose=el('button','btn line sm','Fechar'),fb=el('div','hero-v53-ficha-body');fclose.type='button';fhd.append(el('h4','pm-mer-h','Ficha completa'),fclose);fdlg.append(fhd,fb);fichaBtn.onclick=function(){if(!fichaFacePermitida())return;fb.replaceChildren();html(fb,window.MutaGabinete.fichaFace());fdlg.showModal();};fclose.onclick=function(){fdlg.close();};fdlg.addEventListener('close',function(){fb.replaceChildren();});}
     var pautaPerfil=el('details','hero-v53-profile'),pautaSum=el('summary','','Pauta e julgamento');
     pautaPerfil.append(pautaSum);
@@ -1659,14 +1659,16 @@ function heroOrganizarProntuario(){
     pautaPerfil.append(pautaBody);pautaPerfil.open=!!heroTopo.pautaPerfil;
     pautaPerfil.addEventListener('toggle',function(){if(pautaPerfil.isConnected)heroTopo.pautaPerfil=pautaPerfil.open;});
     if(resumo&&destGrav()==='Sessão'){var full=id.querySelector('.hero-v53-profile:nth-last-child(1)');perfil.after(pautaPerfil);}
-    var painel=el('section','card hero-v53-painel'),phd=el('div','hero-v53-painel-head'),ptabs=el('div','hero-v53-painel-tabs'),pbody=el('div','hero-v53-painel-body');ptabs.setAttribute('role','tablist');ptabs.setAttribute('aria-label','Perfil e pauta do processo');
+    /* Composição da prévia: dois painéis nativos independentes, sem abas simulando expansão. */
+    var painel=el('section','hero-v53-painel hero-profile-panels'),pbody=el('div','hero-v53-painel-body');
     var pabas=[['perfil','Perfil do processo',perfil]];if(pautaPerfil.parentNode)pabas.push(['pauta','Pauta e julgamento',pautaPerfil]);
     perfil.replaceWith(painel);pbody.append(perfil);if(pabas.length>1)pbody.append(pautaPerfil);
-    var psync=function(){pabas.forEach(function(x){var pb=ptabs.querySelector('[data-painel="'+x[0]+'"]');if(pb)pb.setAttribute('aria-selected',String(x[2].open));});painel.classList.toggle('aberto',pabas.some(function(x){return x[2].open;}));};
-    pabas.forEach(function(a){var pb=el('button','',a[1]);pb.type='button';pb.setAttribute('role','tab');pb.dataset.painel=a[0];pb.title='Mostrar ou recolher';pb.onclick=function(){var era=a[2].open;pabas.forEach(function(x){x[2].open=false;});a[2].open=!era;psync();};ptabs.append(pb);
-      a[2].addEventListener('toggle',function(){if(a[2].open)pabas.forEach(function(x){if(x!==a&&x[2].open)x[2].open=false;});psync();});});
-    if(perfil.open&&pautaPerfil.open)pautaPerfil.open=false;
-    phd.append(ptabs);if(fichaBtn)phd.append(fichaBtn);painel.append(phd,pbody);if(fdlg)painel.append(fdlg);psync();
+    pabas.forEach(function(a){a[2].classList.add('hero-profile-panel');});
+    var psync=function(){painel.classList.toggle('aberto',pabas.some(function(x){return x[2].open;}));};
+    pabas.forEach(function(a){a[2].addEventListener('toggle',psync);});
+    painel.append(pbody);
+    if(fichaBtn){var fichaTools=el('div','hero-profile-tools');fichaTools.append(fichaBtn);perfil.append(fichaTools);}
+    if(fdlg)painel.append(fdlg);psync();
     /* Acesso aos documentos: fonte existente da leitura, IDs registrados na ficha. */
     var auDocs=window.MutaAutos,coverage=el('details','hero-v53-coverage'),cvSum=el('summary','','Documentos extraídos');
     coverage.append(cvSum);
