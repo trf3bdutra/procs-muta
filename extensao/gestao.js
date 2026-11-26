@@ -52,7 +52,7 @@
   var ETAPAS = [['todo', 'A fazer'], ['doing', 'Em andamento'], ['review', 'Em revisão'], ['done', 'Concluída']];
   var NOME_ET = {}, STAGE_OK = {}; ETAPAS.forEach(function (e) { NOME_ET[e[0]] = e[1]; STAGE_OK[e[0]] = 1; });
   var URG = ['Urgente', 'Alta', 'Média', 'Baixa'];
-  var D = { f: 'comigo', nova: false, lista: null, equipe: [], erro: '', msg: '', lendo: false, abertos: {}, ed: {}, exc: {}, resp: {}, fase: { todo: true, doing: true, review: true, done: false } };
+  var D = { busca:'', responsavel:'', prioridade:'', f: 'comigo', nova: false, lista: null, equipe: [], erro: '', msg: '', lendo: false, abertos: {}, ed: {}, exc: {}, resp: {}, fase: { todo: true, doing: true, review: true, done: false } };
   function lerDil() {
     if (!ses || !pode(quem())) return Promise.resolve();
     D.lendo = true; pintarDil();
@@ -102,6 +102,7 @@
       '<textarea name="description" rows="3" maxlength="2000" placeholder="O que fazer">' + esc(t.description || '') + '</textarea>' +
       '<span class="gx-fb"><button type="button" class="lnk" data-gx="' + (nova ? 'cancelar-nova' : 'cancelar-ed') + '"' + (nova ? '' : ' data-id="' + esc(t.id) + '"') + '>cancelar</button><button type="submit" class="btn solid sm">' + (nova ? 'Criar diligência' : 'Gravar') + '</button></span></form>';
   }
+  function metricasCmt(M,extra){return '<div class="hero-cmt-gestion-metrics '+(extra||'')+'">'+M.map(function(x){return '<div data-stage="'+x[0]+'"><b>'+esc(x[2])+'</b><small>'+esc(x[1])+'</small>'+(x[3]?'<small>'+esc(x[3])+'</small>':'')+'</div>';}).join('')+'</div>';}
   function pintarDil() {
     var c = $('dil-app'); if (!c) return;
     var q = quem();
@@ -110,7 +111,11 @@
     var L = D.lista || [];
     var n = { comigo: 0, criei: 0, todas: 0 };
     L.forEach(function (t) { if (t.stage === 'done') return; n.todas++; if (filtro(t, 'comigo', q.usuario)) n.comigo++; if (filtro(t, 'criei', q.usuario)) n.criei++; });
-    var V = L.filter(function (t) { return filtro(t, D.f, q.usuario); }).sort(ordem);
+    var V = L.filter(function(t){return filtro(t,D.f,q.usuario)&&(!D.responsavel||norm(t.assignee)===norm(D.responsavel))&&(!D.prioridade||t.urgency===D.prioridade)&&(!D.busca||norm([t.title,t.description,t.numero,t.assignee,t.creator].join(' ')).includes(norm(D.busca)));}).sort(ordem);
+    var abertas=L.filter(function(t){return t.stage!=='done';});
+    var metricas=metricasCmt([['total','Em aberto',abertas.length,n.comigo+' suas'],['priority','Prioritárias',abertas.filter(function(t){return /^(Alta|Urgente)$/.test(t.urgency);}).length],['sem','Sem responsável',abertas.filter(function(t){return !t.assignee;}).length]]);
+    var eq=Array.from(new Set(D.equipe.concat(L.map(function(t){return t.assignee;}).filter(Boolean)))).sort();
+    var filtros='<div class="hero-cmt-gestion-filters"><input type="search" data-gx-filter="busca" placeholder="Buscar diligência ou processo" aria-label="Buscar diligência" value="'+esc(D.busca)+'"><label>Responsável<select data-gx-filter="responsavel"><option value="">Todos os responsáveis</option>'+eq.map(function(n){return '<option value="'+esc(n)+'"'+(n===D.responsavel?' selected':'')+'>'+esc(n)+'</option>';}).join('')+'</select></label><label>Prioridade<select data-gx-filter="prioridade"><option value="">Todas as prioridades</option>'+URG.map(function(n){return '<option value="'+esc(n)+'"'+(n===D.prioridade?' selected':'')+'>'+esc(n)+'</option>';}).join('')+'</select></label></div>';
     var fases = ETAPAS.map(function (e) {
       var I = V.filter(function (t) { return (STAGE_OK[t.stage] ? t.stage : 'todo') === e[0]; });
       if (e[0] === 'done') I.sort(function (a, b) { return String(b.concluidaEm || b.atualizadoEm || '').localeCompare(String(a.concluidaEm || a.atualizadoEm || '')); });
@@ -120,10 +125,10 @@
           : '<p class="muted gx-v">Nenhuma.</p>') + '</details>';
     }).join('');
     var tab = function (k, r) { return '<button type="button" role="tab" data-gx-f="' + k + '" aria-selected="' + (D.f === k) + '">' + r + ' <i>' + n[k] + '</i></button>'; };
-    c.innerHTML = '<div class="gx-top"><div><b>Diligências</b><small class="muted">quadro da equipe no Ex Officio</small></div>' +
+    c.innerHTML = '<section class="hero-cmt-gestion"><div class="gx-top"><div><b>Diligências</b><small class="muted">quadro da equipe no Ex Officio</small></div>' +
       '<span><button type="button" class="btn sm" data-gx="nova"' + (D.nova ? ' hidden' : '') + '>+ Nova</button><button type="button" class="lnk" data-gx="ler-dil" title="Ler de novo">' + (D.lendo ? 'lendo…' : 'atualizar') + '</button>' +
       '<a class="lnk" target="_blank" rel="noopener" href="' + esc(site()) + (q.des && !q.gestor ? '/cmt/' : '/exofficio/#pendencias') + '">abrir no Ex Officio</a></span></div>' +
-      (D.nova ? formDil() : '') +
+      metricas+filtros+'</section>'+(D.nova ? formDil() : '') +
       '<div class="seg pmodos gx-modos" role="tablist" aria-label="Filtro das diligências">' + tab('comigo', 'Comigo') + tab('criei', 'Que criei') + tab('todas', 'Todas') + '</div>' +
       (D.msg ? '<p class="gx-msg' + (/^Não|erro/i.test(D.msg) ? ' err' : '') + '">' + esc(D.msg) + '</p>' : '') +
       (D.erro ? '<p class="gx-v err">' + esc(D.erro) + '</p>' : !D.lista ? '<p class="muted gx-v">Lendo o quadro…</p>' :
@@ -242,7 +247,9 @@
     var L = listas();
     var tab = function (k, r, d) { return '<button type="button" role="tab" data-gx-a="' + k + '" aria-selected="' + (X.aba === k) + '" title="' + esc(d) + '">' + r + ' <i' + (k === 'as' && nUrg ? ' class="gx-iu"' : '') + '>' + (L[k].length+(k==='as'?L.urg.length:0)) + '</i></button>'; };
     var nUrg = L.as.filter(function (a) { return a.urg; }).length;
-    var corpo = X.aba==='as'?grupoDel('Aguardando assinatura',L.as,itemAs,'Nenhuma decisão urgente submetida à assinatura.','urgente')+grupoDel('Demais urgências em aberto',L.urg,itemUrg,'Nenhuma outra urgência em aberto.','urgente'):
+    var totalUrg=L.as.map(function(a){return Object.assign({},a,a.urg||{});}).concat(L.urg);
+    var metUrg=metricasCmt([['total','Em aberto',totalUrg.length],['late','Sem responsável',totalUrg.filter(function(a){return !a.servidor;}).length],['priority','Em minuta',L.urg.filter(function(a){return !!a.servidor&&!a.dataMinuta&&!a.assinado;}).length],['lib','Em revisão / assinatura',L.as.length+L.urg.filter(function(a){return !!(a.dataMinuta||a.assinado);}).length]],'urg-metrics');
+    var corpo = X.aba==='as'?'<section class="hero-cmt-gestion">'+metUrg+'</section>'+grupoDel('01 · Chegou',L.urg.filter(function(a){return !a.servidor&&!a.dataMinuta&&!a.assinado;}),itemUrg,'Nenhuma urgência sem responsável.','urgente')+grupoDel('02 · Em minuta',L.urg.filter(function(a){return !!a.servidor&&!a.dataMinuta&&!a.assinado;}),itemUrg,'Nenhuma urgência em minuta.','urgente')+grupoDel('03 · Revisão e assinatura',L.urg.filter(function(a){return !!(a.dataMinuta||a.assinado);}),itemUrg,'Nenhuma urgência em revisão.','urgente')+grupoDel('Para assinatura',L.as,itemAs,'Nenhuma decisão urgente submetida à assinatura.','urgente'):
       X.aba==='pe'?grupoDel('Retiradas de pauta',L.pe.filter(function(x){return x.tipo==='retirada';}),itemPe,'Nenhum pedido em aberto.','pendente')+grupoDel('Adiamentos',L.pe.filter(function(x){return x.tipo!=='retirada';}),itemPe,'Nenhum pedido em aberto.','pendente'):
       grupoDel('Dúvidas em aberto',L.du,itemDu,'Nenhuma dúvida em aberto dirigida a você.','pendente');
     c.innerHTML = '<div class="gx-top"><div><b>Deliberações</b><small class="muted">o que aguarda decisão' + (X.dados && X.dados.hoje ? ' · ' + esc(data(X.dados.hoje)) : '') + '</small></div>' +
@@ -320,6 +327,7 @@
       });
       cd.addEventListener('change', function (e) {
         var i = e.target;
+        if(i.dataset.gxFilter){D[i.dataset.gxFilter]=i.value;return pintarDil();}
         if (i.dataset.gxEtapa) return etapa(i.dataset.gxEtapa, i.value, i);
       });
       /* seção aberta ou fechada: a escolha sobrevive ao redesenho */
