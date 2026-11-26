@@ -261,7 +261,7 @@ function pintarCombinados(list){
     c.append(bar);group.append(c);
    });
    if(!L.length)group.append(el('p','muted','Nenhuma correspondência.'));
-   else if(L.length>5){var more=btn('Ver todos desta categoria',function(){var b=document.querySelector('#panel-acervo [data-emd="'+(gr.tipo==='Modelo'?'modelos':'par')+'"]');if(b)b.click();});group.append(more);}
+   else if(L.length>5){var more=btn('Ver todos desta categoria',function(){var b=document.querySelector('#hero-rep-header-tabs [data-emd="'+(gr.tipo==='Modelo'?'modelos':'par')+'"]');if(b)b.click();});group.append(more);}
    host.append(group);
   });
   host.append(el('h4','hero-rep-result-heading','Precedentes'));

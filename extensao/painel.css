@@ -3913,3 +3913,30 @@ html body.hero-redesign-v53 #gab #g-docs .hero-data-toolbar>.hero-rep-query>butt
 html body.hero-redesign-v53 #gab #g-docs .hero-data-toolbar>.hero-rep-filters{display:flex!important;flex-wrap:wrap;gap:4px!important;padding:6px 8px!important;border-top:1px solid var(--rep-rule);background:transparent!important}
 html body.hero-redesign-v53 #gab #g-docs .hero-data-toolbar>.hero-rep-filters>button{margin:0!important;min-height:25px!important;padding:4px 6px!important;border:1px solid var(--rep-rule)!important;border-radius:3px!important;background:var(--rep-paper)!important;color:var(--fg)!important;font:500 10px/1.3 var(--sans,system-ui)!important;box-shadow:none!important}
 html body.hero-redesign-v53 #gab #g-docs .hero-data-toolbar>.hero-rep-filters>button[aria-pressed=true]{border-color:var(--primary,#31565a)!important;color:var(--primary,#31565a)!important;background:color-mix(in srgb,var(--primary,#31565a) 9%,var(--rep-paper))!important;font-weight:650!important}
+
+
+/* Repertório: barra única de subabas na faixa operacional superior. */
+#hero-rep-header-tabs[hidden]{display:none!important}
+html body.hero-redesign-v53 #topo-u #hero-rep-header-tabs:not([hidden]){
+ grid-row:2;grid-column:2;justify-self:center;align-self:center;display:flex!important;
+ align-items:stretch;gap:0!important;margin:0!important;padding:0!important;
+ background:var(--cmt-paper,#fff)!important;border:0!important;border-radius:0!important;
+ box-shadow:none!important;min-width:0
+}
+html body.hero-redesign-v53 #topo-u:has(#hero-rep-header-tabs:not([hidden])) #tu-pje-slot{grid-column:1!important}
+html body.hero-redesign-v53 #topo-u #hero-rep-header-tabs>button{
+ appearance:none;flex:0 0 auto;min-width:0;min-height:25px!important;padding:3px 6px!important;
+ font:500 10px/1.3 var(--cmt-font,system-ui)!important;white-space:nowrap;
+ border:0!important;border-bottom:2px solid transparent!important;border-radius:0!important;
+ background:transparent!important;color:var(--cmt-ink,var(--fg))!important;box-shadow:none!important;cursor:pointer
+}
+html body.hero-redesign-v53 #topo-u #hero-rep-header-tabs>button[aria-selected=true]{
+ background:transparent!important;color:var(--cmt-blue,var(--primary))!important;
+ border-bottom-color:var(--cmt-blue,var(--primary))!important;font-weight:650!important
+}
+html body.hero-redesign-v53 #topo-u #hero-rep-header-tabs>button:focus-visible{outline:2px solid var(--cmt-blue,var(--primary));outline-offset:-2px}
+@media(max-width:460px){
+ html body.hero-redesign-v53 #topo-u #hero-rep-header-tabs:not([hidden]){grid-row:3;grid-column:1/-1;justify-self:stretch;justify-content:center;border-top:1px solid var(--cmt-line,var(--line))!important}
+ html body.hero-redesign-v53 #topo-u:has(#hero-rep-header-tabs:not([hidden])) #tu-pje-slot{grid-column:1/3!important}
+ html body.hero-redesign-v53 #topo-u #hero-rep-header-tabs>button{flex:1 1 auto;padding-inline:3px!important}
+}

@@ -177,6 +177,9 @@ function abrirAba(i){
     if(!u||u.estado!=='on'||!(u.gestor||u.perfil==='desembargador'))return;
   }
   selectTab(mainTabs,i);var n=NOMES[i];
+  var repTabs=$('hero-rep-header-tabs'),repOn=n==='ementario'||n==='par'||n==='modelos';
+  if(repTabs){repTabs.hidden=!repOn;repTabs.querySelectorAll('[data-emd]').forEach(function(b){b.setAttribute('aria-selected',String(repOn&&b.dataset.emd===n));});if(repOn&&window.MutaFontes&&window.MutaFontes.pintarTabs)window.MutaFontes.pintarTabs();}
+
   document.body.classList.toggle('hero-gestao-ativa',n==='dil'||n==='del');
   /* 0.47: Parágrafos-padrão é sub-aba do Ementário: a barra mantém o Ementário marcado */
   if(n==='par'||n==='modelos'){var te=$('tab-acervo');if(te)te.setAttribute('aria-selected','true');}
