@@ -192,9 +192,10 @@
   var X = { quadro:'todas', aba: 'cronologia', categoriasFechadas:{}, dev: {}, dados: null, erro: '', msg: '', lendo: false, resp: {}, conf: {}, nota: {} };
   function lerDel() {
     if (!ses || !pode(quem())) return Promise.resolve();
+    var usuario=quem().usuario;
     X.lendo = true; pintarGestao();
-    return ses.api('/api/painel?cmt=1').then(function (j) { X.dados = j || {}; X.erro = ''; X.lendo = false; badges(); pintarGestao(); })
-      .catch(function (e) { X.erro = e.message || 'Não foi possível ler as deliberações.'; X.lendo = false; pintarGestao(); });
+    return ses.api('/api/painel?cmt=1').then(function (j) { if(usuario!==quem().usuario||!pode(quem()))return; X.dados = j || {}; X.erro = ''; X.lendo = false; sincronizarLeitura(); badges(); pintarGestao(); })
+      .catch(function (e) { if(usuario!==quem().usuario)return; X.erro = e.message || 'Não foi possível ler as notificações.'; X.lendo = false; pintarGestao(); });
   }
   function listas() {
     var j = X.dados || {};
@@ -259,8 +260,21 @@
     return pend.concat(info).sort(function(a,b){return String(b.em||'').localeCompare(String(a.em||''));});
   }
   function chaveLida(n){return String(n.id||[n.tipo,n.numero,n.titulo].join('|'))+'|'+String(n.em||'');}
-  function leituraNot(){try{return JSON.parse(localStorage.getItem('hero-not-lidas:'+norm(quem().usuario))||'{}')||{};}catch(e){return {};}}
-  function marcarNot(k){var m=leituraNot();m[k]=true;try{localStorage.setItem('hero-not-lidas:'+norm(quem().usuario),JSON.stringify(m));}catch(e){X.msg='Não foi possível registrar a leitura neste dispositivo.';}badges();pintarDel();}
+  function leituraLocal(u){try{var v=JSON.parse(localStorage.getItem('hero-not-lidas:'+norm(u))||'{}');return v&&typeof v==='object'&&!Array.isArray(v)?v:{};}catch(e){return {};}}
+  function leituraNot(){var m=Object.assign(Object.create(null),leituraLocal(quem().usuario));((X.dados||{}).notificacoesLidas||[]).forEach(function(k){m[k]=true;});return m;}
+  var syncLeitura=false;
+  function sincronizarLeitura(){
+    var u=quem().usuario,rem=(X.dados||{}).notificacoesLidas;if(!Array.isArray(rem)||syncLeitura)return;
+    var conhecidos=new Set(rem),local=leituraLocal(u),chaves=Object.keys(local).filter(function(k){return local[k]===true&&!conhecidos.has(k)&&k.length<=512;}).slice(0,200);
+    if(!chaves.length)return;syncLeitura=true;
+    post({acao:'notificacao-lida',chaves:chaves}).then(function(j){
+      if(u!==quem().usuario||!X.dados)return;
+      X.dados.notificacoesLidas=Array.from(new Set((X.dados.notificacoesLidas||[]).concat(j.lidas||[])));
+      var m=leituraLocal(u);chaves.forEach(function(k){delete m[k];});try{localStorage.setItem('hero-not-lidas:'+norm(u),JSON.stringify(m));}catch(e){}
+      badges();pintarDel();
+    }).catch(function(){if(u===quem().usuario){X.msg='Leitura salva neste dispositivo; sincronização pendente.';pintarDel();}}).finally(function(){syncLeitura=false;});
+  }
+  function marcarNot(k){var u=quem().usuario,m=leituraLocal(u);m[k]=true;try{localStorage.setItem('hero-not-lidas:'+norm(u),JSON.stringify(m));}catch(e){X.msg='Não foi possível registrar a leitura neste dispositivo.';}badges();pintarDel();sincronizarLeitura();}
   function itemNot(n,lidas){
     var pend=n.tipo==='duvida'||n.tipo==='pedido',k=chaveLida(n);
     var base=pend?(n.tipo==='duvida'?itemDu(n.registro):itemPe(n.registro)):'';
