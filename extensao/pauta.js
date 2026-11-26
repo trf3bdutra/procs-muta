@@ -166,7 +166,7 @@
       var on=P.f===f[0]&&!P.tipoProcSol,pc=L.length?Math.round(100*f[2]/L.length):0;
       return '<button type="button" class="hero-command-stat hero-pa-stat stat-'+f[0]+(on?' on':'')+'" data-pa="f:'+f[0]+'" aria-pressed="'+on+'" title="'+esc(on?'Clique para remover o filtro':'Filtrar: '+f[1])+'"><span class="hero-stat-title"><i></i>'+esc(f[1])+'</span><span class="hero-stat-number"><b>'+f[2]+'</b><small>'+pc+'% da pauta</small></span><span class="hero-stat-meter" aria-hidden="true"><i style="width:'+pc+'%"></i></span></button>';
     }).join('');
-    var indicadores='<section class="hero-pa-overview" aria-label="Marcos e indicadores da sessão">'+marcosHtml+'<div class="hero-command-section-label">Situação atual <small>Clique para filtrar</small></div><div class="hero-command-stats hero-pa-stats" role="group" aria-label="Filtrar processos por situação">'+cards+'</div><details class="hero-pa-cumulative"\'+(P.cumulativeOpen||P.tipoProcSol?\' open\':\'\')+\'><summary>Marcos de produção e solicitações <small>'+pedidos.length+' registros</small></summary><div class="hero-v53-pa-metrics">'+solCard+m+'</div></details></section>';
+    var indicadores='<section class="hero-pa-overview" aria-label="Marcos e indicadores da sessão">'+marcosHtml+'<div class="hero-command-section-label">Situação atual <small>Clique para filtrar</small></div><div class="hero-command-stats hero-pa-stats" role="group" aria-label="Filtrar processos por situação">'+cards+'</div><details class="hero-pa-cumulative"'+(P.cumulativeOpen||P.tipoProcSol?' open':'')+'><summary>Marcos de produção e solicitações <small>'+pedidos.length+' registros</small></summary><div class="hero-v53-pa-metrics">'+solCard+m+'</div></details></section>';
     h += indicadores+buscaPainel('itens')+buscaFaixa('itens',P.qItens,'Buscar processo, item, assunto, servidor…')+'<p class="status hero-rep-count" role="status">'+vis.length+' de '+L.length+' processos'+(P.f!=='todos'?' · '+esc(P.tipoProcSol||(F.find(function(f){return f[0]===P.f;})||['','Filtro ativo'])[1]):'')+'</p></div></div><section class="pa-ses hero-pa-results" aria-label="Resultados da pauta">'+(previa?'<p class="muted">Prévia da pauta (ainda sem a relação oficial do PJe).</p>':'')+(!vis.length?'<p class="muted">'+(L.length?'Nenhum processo corresponde aos filtros.':'Sem processos nesta pauta.')+'</p>':'');
     /* Solicitações resumidas nos indicadores e na lista de processos. */
     function renderProcessos(grupo){return '<ol class="pa-l">' + grupo.map(function (x) {
@@ -209,6 +209,7 @@
   }
 
   /* ---------- ações ---------- */
+  document.addEventListener('toggle',function(e){var t=e.target;if(t&&t.isConnected&&t.matches&&t.matches('#pauta-app .hero-pa-cumulative'))P.cumulativeOpen=t.open;},true);
   document.addEventListener('input',function(e){var t=e.target;if(!t.dataset||!t.dataset.paQ||!t.closest('#pauta-app'))return;P[t.dataset.paQ==='sol'?'qSol':'qItens']=t.value;pintar();});
   document.addEventListener('click', function (e) {
     var b = e.target.closest && e.target.closest('#pauta-app [data-pa]'); if (!b) return;
