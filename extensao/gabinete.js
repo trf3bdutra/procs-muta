@@ -2212,6 +2212,7 @@ window.MutaGabinete = { recarregar: function () { carregar(true); }, gravarPende
   render: function () { render(); }, cnj: function () { return G.cnj; }, modelo: function () { return G.F; }, op: function () { return G.op; }, fo: function () { var a=autuacaoAtual(),f=Object.assign({},G.fo||{});if(a.assunto)f.Assunto=a.assunto;if(a.classe)f.classe_judicial=a.classe;return f; }, assuntoCNJ:assuntoCNJ, classeAutuacao:classeAutuacao,
   api: function (p, o) { return ses.api(p, o); },
   gravado: gravado, V: V, F: function (k) { return fonteVal({ fonte: [k] }); }, marcar: marcar, gravar: function () { return gravarJa(); }, ir: function (aba) { if (aba === 'Triagem' || aba === 'Roteiro') {aba = 'Processo';if(heroV53())G.rot='tri';} if(heroV53()&&aba==='Produção'){aba='Processo';G.rot='pro';} if(heroV53()&&aba==='Resumo'){aba='Processo';G.rot='res';} if (MODOS.indexOf(aba) >= 0) { G.aba = aba; render(); } },
+  irGerador: function () { if(window.MutaAbas)window.MutaAbas.ir('pront'); if(!heroV53()){if(window.MutaAbas)window.MutaAbas.ir('ger');return;} G.aba='Processo';G.rot='pro';heroTopo.gerDockOpen=true;heroTopo.encDockOpen=false;render();var dock=caixa.querySelector('#hero-ger-dock');if(dock){dock.open=true;if(window.MutaGerador)window.MutaGerador.pintar();var sum=dock.querySelector('summary');if(sum)sum.focus({preventScroll:true});} },
   destino: function () { return G.F ? destino() : ''; }, pronunciamento: function(){var i=pronAtual();return i>=0?PRON[i][0]:'';},
   casoPrec: function () { return G.cnj ? casoPrec() : null; },
   pautaHtml: pautaHtml,
