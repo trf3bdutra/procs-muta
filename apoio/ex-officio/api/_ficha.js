@@ -228,8 +228,11 @@ const VC = {
   'orig.valor': v => ({ origem: { 'Origem - Valor da causa': v } }), 'orig.custas': v => ({ origem: { 'Sentença - Custas': v } }),
   'orig.honor': v => ({ origem: { 'Sentença - Honorários': v } })
 };
-/* ID e data da decisão de origem só valem para a sentença (a ficha não guarda decisão interlocutória nem acórdão) */
+/* ID e data da decisão de origem: na sentença, os campos da sentença; nas demais decisões (interlocutória, monocrática, acórdão), os da decisão recorrida */
 const VC_SENT = { 'orig.id': 'Sentença - ID', 'orig.data': 'Sentença - Data' };
+const VC_DEC = { 'orig.id': '1G - Decisão ID', 'orig.data': '1G - Decisão Data' };
+/* remessa e multa do julgamento dependem do que já está na ficha: doCartao deixa a marca e mudancaCoerente resolve */
+const RES = '_cartaoRes';
 /* ficha → campos do cartão (Monocráticas e urgências): o inverso de V, no vocabulário do app */
 const INV = {
   tempest: r => VOC.norm('tempest', r.triagem.Tempestividade), prelim: r => VOC.norm('prelim', r.triagem['Prelim.']), intercor: r => r.triagem['Intercorrências'],
@@ -276,9 +279,10 @@ const VCI = { tipoJ: ['triagem', 'Tipo de Julgamento'], especificidades: ['triag
 /* ficha → decisão de origem do cartão: ID e data da sentença, quando o cartão não registra outro tipo de decisão */
 function origDaFicha(r, orig) {
   const g = (r && r.origem) || {}, o = Object.assign({}, orig || {});
-  if (o.tipo && o.tipo !== 'Sentença') return null;
-  let m = false;
-  [['id', 'Sentença - ID'], ['data', 'Sentença - Data']].forEach(([k, f]) => { const v = g[f]; if (v && o[k] !== v) { o[k] = v; m = true; } });
+  let m = false; const pega = (k, f) => { const v = g[f]; if (v && o[k] !== v) { o[k] = v; m = true; } };
+  pega('tipo', 'Decisão recorrida - Tipo');
+  if (o.tipo && o.tipo !== 'Sentença') { pega('id', '1G - Decisão ID'); pega('data', '1G - Decisão Data'); return m ? o : null; }
+  [['id', 'Sentença - ID'], ['data', 'Sentença - Data']].forEach(([k, f]) => pega(k, f));
   if (m && !o.tipo) o.tipo = 'Sentença';
   return m ? o : null;
 }
@@ -288,6 +292,10 @@ function cartaoDaFicha(r, base) {
     const ks = p.split('.'); let o = c; ks.slice(0, -1).forEach(x => { o = o[x] = (o[x] && typeof o[x] === 'object') ? o[x] : {}; }); o[ks[ks.length - 1]] = b ? (v === 'Sim' || v === '2') : v; });
   c.detalhamento=detalhamento(r&&r.triagem);
   const og = origDaFicha(r, c.orig); if (og) c.orig = og;
+  /* remessa necessária e multa do julgamento, de volta ao painel */
+  const tr = (r && r.triagem) || {}, pr = (r && r.producao) || {}, rc = tr['Reexame - Cabimento'], tj = c.tipoJ || tr['Tipo de Julgamento'] || '';
+  const ml = tj === 'Agravo Interno' ? pr['AgInt - Multa'] : tj === 'Embargos de Declaração' ? pr['ED - Multa'] : (pr['ED - Multa'] || pr['AgInt - Multa']);
+  if (rc || ml) { c.jul = c.jul && typeof c.jul === 'object' ? c.jul : {}; if (rc) c.jul.remessa = rc === 'Cabível'; if (ml) c.jul.multa = ml; }
   return c;
 }
 /* Destinação comum ao Cognitio e à HERO. Não modifica inclusão efetiva em pauta. */
@@ -306,8 +314,14 @@ function destinoCoerente(r,m){
 }
 /* Normalização compartilhada: a data explícita prevalece sobre o indicador,
    sem inventar datas quando a equipe marca somente o indicador. */
+/* remessa necessária (marcada no painel → Reexame - Cabimento "Cabível"; desmarcada só limpa o "Cabível") e multa (art. 1.026 → ED - Multa; art. 1.021 → AgInt - Multa; "Sem multa" pelo tipo de julgamento) */
+function resolveCartao(r,m){const K='_cartaoRes',x=m[K];delete m[K];if(!x)return m;const t=(r&&r.triagem)||{},set=(s,k,v)=>{(m[s]||(m[s]={}))[k]=v;};
+ if(x.remessa===true)set('triagem','Reexame - Cabimento','Cabível');else if(x.remessa===false&&t['Reexame - Cabimento']==='Cabível')set('triagem','Reexame - Cabimento','');
+ if(x.multa!=null){const tj=x.tipoJ||(m.triagem||{})['Tipo de Julgamento']||t['Tipo de Julgamento']||'',v=x.multa;
+  const k=/1\.021/.test(v)?'AgInt - Multa':/1\.026/.test(v)?'ED - Multa':tj==='Agravo Interno'?'AgInt - Multa':tj==='Embargos de Declaração'?'ED - Multa':'';if(k)set('producao',k,v);}
+ return m;}
 function mudancaCoerente(r,mud){
- const m=destinoCoerente(r,JSON.parse(JSON.stringify(mud||{}))),p=m.producao||{};
+ const m=destinoCoerente(r,resolveCartao(r,JSON.parse(JSON.stringify(mud||{})))),p=m.producao||{};
  [['Data da Revisão','CORRIGIDO'],['Data da Liberação','LIBERADO'],['Data da Assinatura','Assinado'],['Mono - Data da publicação','Publicado']].forEach(([data,flag])=>{
    if(Object.prototype.hasOwnProperty.call(p,data))p[flag]=String(p[data]||'').trim()?'Sim':'';
  });
@@ -336,6 +350,11 @@ function doCartao(campos, cartao) {
   Object.keys(VC).forEach(p => { const v = p.split('.').reduce((o, k) => (o && typeof o === 'object' ? o[k] : undefined), c); if (v !== undefined) junta(m, VC[p](v)); });
   const o = c.orig && typeof c.orig === 'object' ? c.orig : null;
   if (o && (!o.tipo || o.tipo === 'Sentença')) Object.keys(VC_SENT).forEach(p => { const v = o[p.slice(5)]; if (v !== undefined) junta(m, { origem: { [VC_SENT[p]]: String(v == null ? '' : v) } }); });
+  if (o && o.tipo && o.tipo !== 'Sentença') Object.keys(VC_DEC).forEach(p => { const v = o[p.slice(5)]; if (v !== undefined) junta(m, { origem: { [VC_DEC[p]]: String(v == null ? '' : v) } }); });
+  if (o && 'tipo' in o) junta(m, { origem: { 'Decisão recorrida - Tipo': String(o.tipo || '') } });
+  if (o && o.tipo) junta(m, { origem: o.tipo === 'Sentença' ? { '1G - Sentença recorrida': 'Sim', '1G - Decisão recorrida': '' } : { '1G - Decisão recorrida': 'Sim', '1G - Sentença recorrida': '' } });
+  const jl = c.jul && typeof c.jul === 'object' ? c.jul : null;
+  if (jl && ('remessa' in jl || 'multa' in jl)) m[RES] = { remessa: 'remessa' in jl ? (jl.remessa === true || jl.remessa === 'true') : null, multa: 'multa' in jl ? String(jl.multa == null ? '' : jl.multa) : null, tipoJ: String(c.tipoJ || '') };
   return m;
 }
 /* commit com conferência (ver _lib.commitArquivos): arquivo mudado ou ramo andou → 409, e quem chamou tenta de novo */

@@ -296,6 +296,20 @@
        "apelido": "1g_decisao_recorrida"
       },
       {
+       "rotulo": "Tipo da decisão recorrida",
+       "chave": "Decisão recorrida - Tipo",
+       "tipo": "lista",
+       "secao": "origem",
+       "opcoes": [
+        "Decisão interlocutória",
+        "Sentença",
+        "Decisão monocrática",
+        "Acórdão"
+       ],
+       "apelido": "decisao_recorrida_tipo",
+       "subgrupo": "Decisão interlocutória / outra decisão"
+      },
+      {
        "secao": "origem",
        "chave": "1G - Decisão ID",
        "rotulo": "ID da decisão",
@@ -4112,6 +4126,18 @@
        "tipo": "texto-longo",
        "secao": "producao",
        "apelido": "ed_prequestionamento"
+      },
+      {
+       "rotulo": "ED · multa",
+       "chave": "ED - Multa",
+       "tipo": "lista",
+       "secao": "producao",
+       "opcoes": [
+        "Sem multa",
+        "Protelatórios · art. 1.026, § 2º",
+        "Reiteração · art. 1.026, § 3º"
+       ],
+       "apelido": "ed_multa"
       },
       {
        "rotulo": "AgInt · manutenção ou reforma",

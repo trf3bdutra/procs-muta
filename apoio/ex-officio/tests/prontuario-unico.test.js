@@ -110,3 +110,21 @@ test('HERO18810 0.67: "Liberada" só em processo pautado e com as caixas do edit
   assert.match(R('fundo.js'), /reg\.lib = ''/); assert.match(R('pje.js'), /liberacao: function \(\)/);
   assert.match(R('gabinete.js'), /else if \(pautado\(\) && \(libOk \|\| libMan\)\)/);
 });
+
+test('painel do Office → ficha: decisão de origem, remessa necessária e multa (ida e volta)',()=>{
+  const F=require('../api/_ficha.js');
+  const r={processo:'x',triagem:{'Tipo de Julgamento':'Embargos de Declaração','Reexame - Cabimento':'Dispensada'},producao:{},origem:{},controles:{}};
+  const passo=c=>F.aplica(r,F.mudancaCoerente(r,F.doCartao({},c)));
+  passo({orig:{tipo:'Decisão interlocutória',id:'123',data:'2026-10-01'}});
+  assert.equal(r.origem['Decisão recorrida - Tipo'],'Decisão interlocutória');
+  assert.equal(r.origem['1G - Decisão ID'],'123');assert.equal(r.origem['1G - Decisão recorrida'],'Sim');
+  passo({jul:{multa:'Protelatórios · art. 1.026, § 2º',remessa:false}});
+  assert.equal(r.producao['ED - Multa'],'Protelatórios · art. 1.026, § 2º');
+  assert.equal(r.triagem['Reexame - Cabimento'],'Dispensada','desmarcada não apaga o que não é "Cabível"');
+  passo({jul:{remessa:true}});assert.equal(r.triagem['Reexame - Cabimento'],'Cabível');
+  passo({jul:{remessa:false}});assert.equal(r.triagem['Reexame - Cabimento'],'');
+  r.triagem['Tipo de Julgamento']='Agravo Interno';passo({jul:{multa:'Sem multa'}});assert.equal(r.producao['AgInt - Multa'],'Sem multa');
+  r.origem['Decisão recorrida - Tipo']='Acórdão';r.origem['1G - Decisão ID']='777';
+  const c=F.cartaoDaFicha(r,{orig:{tipo:'Sentença'},tipoJ:'Agravo Interno'});
+  assert.equal(c.orig.tipo,'Acórdão');assert.equal(c.orig.id,'777');assert.equal(c.jul.multa,'Sem multa');
+});
