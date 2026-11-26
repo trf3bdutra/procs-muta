@@ -719,3 +719,15 @@ test('tipo de ato sugerido dentro da opção, sem seleção automática',()=>{
  assert.match(render.atoOpcoes(0),/<option value="0" selected>Acórdão<\/option>/);
  assert.match(src,/var xp = t\.value === '' \? null : PRON/);
 });
+
+
+test('HERO: Diligências e Deliberações sem cabeçalho redundante, atualização na faixa das abas', () => {
+  const x = read('extensao/gestao.js'), css = read('extensao/painel.css');
+  assert.doesNotMatch(x, /class="gx-top"/);
+  assert.doesNotMatch(x, /data-gx="nova"/);
+  assert.match(x, /faixaGestao\('Filtro das diligências'[^\n]*'ler-dil'/);
+  assert.match(x, /faixaGestao\('Tipo de deliberação'[^\n]*'ler-del'/);
+  assert.match(x, /class="gx-nav-actions"/);
+  assert.match(x, /aria-label="Atualizar"/);
+  assert.match(css, /\.gx-nav\{display:flex;align-items:center/);
+});

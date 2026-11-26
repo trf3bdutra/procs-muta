@@ -3880,3 +3880,14 @@ html body.hero-redesign-v53 #gab .hero-route-overview.hero-route-shared.hero-rou
 html body.hero-redesign-v53 #gab .hero-route-overview.hero-route-shared.hero-route-essential .hero-minuta-nav-foot>button{width:23px;min-height:24px!important;font-size:16px!important;padding:0!important}
 html body.hero-redesign-v53 #gab .hero-route-overview.hero-route-shared.hero-route-essential .hero-route-search{flex:1 1 170px}
 html body.hero-redesign-v53 #gab .hero-route-overview.hero-route-shared.hero-route-essential .hero-route-modes{flex:none}
+
+/* Gestão: abas e atualização na mesma faixa, sem cabeçalho repetido. */
+:is(#dil-app,#del-app) .gx-nav{display:flex;align-items:center;gap:5px;min-width:0;width:100%;margin:0 0 8px;background:transparent}
+:is(#dil-app,#del-app) .gx-nav>.gx-modos{flex:1 1 auto;min-width:0;width:auto;margin:0!important;overflow-x:auto!important;scrollbar-width:none}
+:is(#dil-app,#del-app) .gx-nav>.gx-modos::-webkit-scrollbar{display:none}
+:is(#dil-app,#del-app) .gx-nav>.gx-modos>button{flex:1 0 auto!important;min-width:max-content;justify-content:center;padding:5px 5px!important}
+:is(#dil-app,#del-app) .gx-nav-actions{display:flex;align-items:center;flex:0 0 auto;gap:3px}
+:is(#dil-app,#del-app) .gx-nav-action{display:inline-grid;place-items:center;flex:0 0 27px;width:27px;height:27px;padding:0;border:1px solid var(--line);border-radius:4px;background:transparent;color:var(--fg);text-decoration:none;cursor:pointer}
+:is(#dil-app,#del-app) .gx-nav-action:hover{background:var(--muted)}
+:is(#dil-app,#del-app) .gx-nav-action:focus-visible{outline:2px solid var(--ring);outline-offset:1px}
+:is(#dil-app,#del-app) .gx-nav-action:disabled{opacity:.45;cursor:default}
