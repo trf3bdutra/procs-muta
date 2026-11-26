@@ -1724,11 +1724,11 @@
    "assunto": "Fornecimento de medicamentos",
    "assunto_detalhado": "",
    "grupo": "assunto-7",
-   "tipo_caso": "Fornecimento de medicamentos",
-   "resultado": "",
+   "tipo_caso": "Saúde · medicamento · improcedência · apelação do autor",
+   "resultado": "Proposta: [VALIDAR paradigma] apelação do autor (com pedido de tutela recursal) contra a improcedência; requisitos do Tema 106/STJ e do Tema 1.234/STF",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença improcedente com honorários suspensos (ID 407251116); contrarrazões de três réus, inclusive o Município de Campo Grande (ID 407251125).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -1737,9 +1737,42 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "407251116"
+    },
+    {
+     "peca": "Apelação",
+     "id": "407251120"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "407251122"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "407251124"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "407251125"
+    }
+   ],
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Saúde — fornecimento de medicamentos/tratamento",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 407251116 (10/08/2026)",
+    "recurso": "apelação (ID 407251120, 15/09/2026)",
+    "preparo": "[VALIDAR]",
+    "representacao": "procuração/substabelecimento ID 407250710, 407250999",
+    "mpf": "Não consta parecer",
+    "autos": "149 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false
@@ -1755,11 +1788,11 @@
    "assunto": "Fornecimento de medicamentos",
    "assunto_detalhado": "",
    "grupo": "assunto-7",
-   "tipo_caso": "Fornecimento de medicamentos",
-   "resultado": "",
+   "tipo_caso": "Saúde · plerixafor (Mozobil) · procedência contra o Estado de MS · autos do TJMS",
+   "resultado": "Proposta: [VALIDAR] recurso do Estado de MS contra o fornecimento do plerixafor; competência e custeio pelo Tema 1.234/STF [VALIDAR: autos do TJMS: identificar a apelação e o apelante]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença procedente confirmando a tutela (ID 401132028).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -1769,10 +1802,24 @@
     "situacao": "A minutar"
    },
    "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Saúde — fornecimento de medicamentos/tratamento",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "[VALIDAR]",
+    "recurso": "[VALIDAR]",
+    "preparo": "[VALIDAR]",
+    "representacao": "[VALIDAR]",
+    "mpf": "Não consta parecer",
+    "autos": "59 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] autos do TJMS: identificar a apelação e o apelante"
+   ],
    "minuta": false
   },
   {
@@ -1786,11 +1833,11 @@
    "assunto": "Sem registro na ANVISA",
    "assunto_detalhado": "",
    "grupo": "assunto-38",
-   "tipo_caso": "Sem registro na ANVISA",
-   "resultado": "",
+   "tipo_caso": "Saúde · medicamento sem registro na ANVISA · criança · improcedência",
+   "resultado": "Proposta: [VALIDAR paradigma] recurso da autora (criança com doença progressiva) contra a improcedência; Tema 500/STF (medicamento sem registro) e Tema 1.234/STF [VALIDAR: menor no polo: intervenção do MPF (artigo 178, II, do CPC) sem parecer no 2º grau]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença improcedente (ID 408530537); recurso ID 408530539; contrarrazões (ID 408530542).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -1799,11 +1846,38 @@
     "correcao": "Vanilda",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "408530537"
+    },
+    {
+     "peca": "Recurso Ordinário",
+     "id": "408530539"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "408530542"
+    }
+   ],
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Saúde — fornecimento de medicamentos/tratamento",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 408530537 (03/09/2026)",
+    "recurso": "recurso ordinário (ID 408530539, 10/09/2026)",
+    "preparo": "comprovante juntado (ID 408530540) — conferir o tipo",
+    "representacao": "procuração/substabelecimento ID 408530467",
+    "mpf": "Não consta parecer",
+    "autos": "84 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] menor no polo: intervenção do MPF (artigo 178, II, do CPC) sem parecer no 2º grau"
+   ],
    "minuta": false
   },
   {
@@ -1817,11 +1891,11 @@
    "assunto": "Multas e demais Sanções",
    "assunto_detalhado": "",
    "grupo": "assunto-1",
-   "tipo_caso": "Multas e demais Sanções",
-   "resultado": "",
+   "tipo_caso": "CRMV · auto de infração anulado · indenização",
+   "resultado": "Proposta: [VALIDAR paradigma] apelação da autora pela indenização compensatória, mantida a nulidade do auto de infração 13364/2022 e da multa 85/2020",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença parcialmente procedente, confirmando a tutela (ID 337282701); redistribuição (ID 337900314).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -1830,9 +1904,34 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "337282701"
+    },
+    {
+     "peca": "Apelação",
+     "id": "337282703"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "337282707"
+    }
+   ],
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — conselho profissional",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 337282701 (28/05/2025)",
+    "recurso": "apelação (ID 337282703, 05/06/2025)",
+    "preparo": "comprovante juntado (ID 337282682, 337282704, 337282705) — conferir o tipo",
+    "representacao": "procuração/substabelecimento ID 337282475",
+    "mpf": "Não consta parecer",
+    "autos": "43 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false
@@ -1848,11 +1947,11 @@
    "assunto": "Multas e demais Sanções",
    "assunto_detalhado": "",
    "grupo": "assunto-1",
-   "tipo_caso": "Multas e demais Sanções",
-   "resultado": "",
+   "tipo_caso": "CRA · inexistência de relação jurídica · honorários",
+   "resultado": "Proposta: [VALIDAR paradigma] apelação da autora só quanto aos honorários sucumbenciais",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença procedente (ID 282510940); embargos rejeitados (ID 282510954).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -1861,9 +1960,34 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "282510940"
+    },
+    {
+     "peca": "Embargos de declaração",
+     "id": "282510946"
+    },
+    {
+     "peca": "Apelação",
+     "id": "282510960"
+    }
+   ],
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — conselho profissional",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 282510940 (30/03/2023)",
+    "recurso": "embargos de declaração (ID 282510946, 04/04/2023); apelação (ID 282510960, 23/10/2023)",
+    "preparo": "comprovante juntado (ID 282510910, 282510961) — conferir o tipo",
+    "representacao": "procuração/substabelecimento ID 282510870",
+    "mpf": "Não consta parecer",
+    "autos": "61 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false
@@ -1879,11 +2003,11 @@
    "assunto": "Multas e demais Sanções",
    "assunto_detalhado": "",
    "grupo": "assunto-1",
-   "tipo_caso": "Multas e demais Sanções",
-   "resultado": "",
+   "tipo_caso": "Autos do TJMS com 8 documentos",
+   "resultado": "Proposta: [VALIDAR] autos com 8 documentos: ler sentença e apelação no PJe [VALIDAR: triagem sem leitura da sentença e da apelação]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Autos migrados.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -1893,10 +2017,24 @@
     "situacao": "A minutar"
    },
    "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "[VALIDAR]",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "[VALIDAR]",
+    "recurso": "[VALIDAR]",
+    "preparo": "[VALIDAR]",
+    "representacao": "[VALIDAR]",
+    "mpf": "Não consta parecer",
+    "autos": "8 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] triagem sem leitura da sentença e da apelação"
+   ],
    "minuta": false
   },
   {
@@ -1910,11 +2048,11 @@
    "assunto": "Multas e demais Sanções",
    "assunto_detalhado": "",
    "grupo": "assunto-1",
-   "tipo_caso": "Multas e demais Sanções",
-   "resultado": "",
+   "tipo_caso": "Embargos à execução fiscal (CREA) · multa · prescrição",
+   "resultado": "Proposta: [VALIDAR paradigma] apelação do embargante contra a rejeição dos embargos; prescrição da pretensão punitiva e intercorrente no processo administrativo (Lei 9.873/1999)",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença rejeitou os embargos (ID 293533804); MPF sem interesse (ID 369873225).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -1923,9 +2061,38 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "293533804"
+    },
+    {
+     "peca": "Apelação",
+     "id": "293533805"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "294194555"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "369873225"
+    }
+   ],
+   "mpf": "parecer ID 369873225 (29/04/2026)",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — multa de conselho",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 293533804 (09/02/2024)",
+    "recurso": "apelação (ID 293533805, 26/02/2024)",
+    "preparo": "[VALIDAR]",
+    "representacao": "procuração/substabelecimento ID 293530777, 293533793",
+    "mpf": "parecer ID 369873225 (29/04/2026)",
+    "autos": "49 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false
@@ -1941,11 +2108,11 @@
    "assunto": "Profissional",
    "assunto_detalhado": "",
    "grupo": "assunto-34",
-   "tipo_caso": "Profissional",
-   "resultado": "",
+   "tipo_caso": "Execução fiscal (CRF) extinta (artigo 485, VI) · honorários",
+   "resultado": "Proposta: [VALIDAR paradigma] apelação do CRF/MS; contrarrazões com preliminar de intempestividade (apelação em 14/04/2026, sentença de 07/01/2026) [VALIDAR: tempestividade da apelação (preliminar das contrarrazões)]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença extinguiu a execução e condenou o exequente em honorários de 10% (ID 366973803).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -1954,11 +2121,38 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "366973803"
+    },
+    {
+     "peca": "Apelação",
+     "id": "366973805"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "366973809"
+    }
+   ],
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — conselho de farmácia, execução fiscal",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 366973803 (07/01/2026)",
+    "recurso": "apelação (ID 366973805, 14/04/2026)",
+    "preparo": "comprovante juntado (ID 366973788, 366973806) — conferir o tipo",
+    "representacao": "procuração/substabelecimento ID 366973783, 366973794, 366973802",
+    "mpf": "Não consta parecer",
+    "autos": "41 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] tempestividade da apelação (preliminar das contrarrazões)"
+   ],
    "minuta": false
   },
   {
@@ -1972,11 +2166,11 @@
    "assunto": "Exercício Profissional",
    "assunto_detalhado": "",
    "grupo": "assunto-15",
-   "tipo_caso": "Exercício Profissional",
-   "resultado": "",
+   "tipo_caso": "Remessa necessária · inscrição provisória no CRM · MS",
+   "resultado": "Proposta: negar provimento à remessa necessária [VALIDAR paradigma e sentido do parecer ID 382565580]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença concedeu a segurança: inscrição provisória da impetrante (ID 379888217); sem apelação.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -1985,9 +2179,34 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "379888217"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "379888216"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "382565580"
+    }
+   ],
+   "mpf": "parecer ID 382565580 (25/06/2026)",
+   "triagem": {
+    "ato": "Remessa necessária (voto)",
+    "materia": "Administrativo — conselho profissional (medicina)",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 379888217 (16/04/2026)",
+    "recurso": "[VALIDAR]",
+    "preparo": "[VALIDAR]",
+    "representacao": "procuração/substabelecimento ID 379888187, 379888213",
+    "mpf": "parecer ID 382565580 (25/06/2026)",
+    "autos": "49 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false
@@ -2003,11 +2222,11 @@
    "assunto": "Tratamento médico- hospitalar",
    "assunto_detalhado": "",
    "grupo": "assunto-40",
-   "tipo_caso": "Tratamento médico- hospitalar",
-   "resultado": "",
+   "tipo_caso": "Saúde · terapia ABA (autismo) · procedência parcial · apelações dos entes",
+   "resultado": "Proposta: [VALIDAR paradigma] apelações da União (ID 332295977) e de outro ente (ID 332296035) contra a condenação solidária à terapia; Tema 793/STF e Tema 1.234/STF; parecer do MPF pelo provimento parcial da apelação da União (ID 379072113) [VALIDAR: teor da decisão ID 408850765]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença parcialmente procedente (ID 332295975); decisão de 05/11/2026 (ID 408850765).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -2016,11 +2235,54 @@
     "correcao": "Vanilda",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "332295975"
+    },
+    {
+     "peca": "Apelação",
+     "id": "332295977"
+    },
+    {
+     "peca": "Apelação",
+     "id": "332296035"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "332296049"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "332295943"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "332295974"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "379072113"
+    }
+   ],
+   "mpf": "parecer ID 379072113 (08/06/2026)",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Saúde — fornecimento de medicamentos/tratamento",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 332295975 (11/04/2025)",
+    "recurso": "apelação (ID 332295977, 16/04/2025); apelação (ID 332296035, 02/05/2025)",
+    "preparo": "[VALIDAR]",
+    "representacao": "[VALIDAR]",
+    "mpf": "parecer ID 379072113 (08/06/2026)",
+    "autos": "97 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] teor da decisão ID 408850765"
+   ],
    "minuta": false
   },
   {
@@ -2034,11 +2296,11 @@
    "assunto": "Atos Administrativos",
    "assunto_detalhado": "",
    "grupo": "assunto-11",
-   "tipo_caso": "Atos Administrativos",
-   "resultado": "",
+   "tipo_caso": "IBAMA · ato administrativo · continência/litispendência",
+   "resultado": "Proposta: [VALIDAR paradigma] apelação do impetrante contra a sentença (continência com outra ação); parecer do MPF (ID 383834737)",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença (ID 380398825).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -2047,9 +2309,42 @@
     "correcao": "Vanilda",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "380398825"
+    },
+    {
+     "peca": "Apelação",
+     "id": "380398828"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "380398833"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "380398816"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "383834737"
+    }
+   ],
+   "mpf": "parecer ID 383834737 (01/07/2026)",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Ambiental/administrativo — IBAMA",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 380398825 (04/05/2026)",
+    "recurso": "apelação (ID 380398828, 27/05/2026)",
+    "preparo": "comprovante juntado (ID 380398829, 380398830) — conferir o tipo",
+    "representacao": "procuração/substabelecimento ID 380398539",
+    "mpf": "parecer ID 383834737 (01/07/2026)",
+    "autos": "108 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false
@@ -2065,11 +2360,11 @@
    "assunto": "Contribuição sobre a folha de salários",
    "assunto_detalhado": "",
    "grupo": "assunto-21",
-   "tipo_caso": "Contribuição sobre a folha de salários",
-   "resultado": "",
+   "tipo_caso": "Contribuições sobre a folha · MS denegado · pedido de sobrestamento",
+   "resultado": "Proposta: [VALIDAR paradigma] apelação da impetrante, com pedido de sobrestamento até embargos de divergência no STJ; contrarrazões invocam o Tema 1.079/STJ [VALIDAR: verba discutida e situação do Tema 1.079/STJ (limite de 20 salários mínimos)]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença denegou a segurança (ID 381376414); MPF sem manifestação de mérito.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -2078,11 +2373,46 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "381376414"
+    },
+    {
+     "peca": "Apelação",
+     "id": "381376417"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "381376422"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "381376405"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "386612168"
+    }
+   ],
+   "mpf": "parecer ID 386612168 (16/07/2026)",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Tributário — contribuições a terceiros/folha",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 381376414 (25/03/2026)",
+    "recurso": "apelação (ID 381376417, 17/04/2026)",
+    "preparo": "comprovante juntado (ID 381376409, 381376410, 381376418) — conferir o tipo",
+    "representacao": "procuração/substabelecimento ID 381376397, 381376411, 381376412",
+    "mpf": "parecer ID 386612168 (16/07/2026)",
+    "autos": "37 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] verba discutida e situação do Tema 1.079/STJ (limite de 20 salários mínimos)"
+   ],
    "minuta": false
   },
   {
