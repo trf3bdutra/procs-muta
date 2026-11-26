@@ -182,30 +182,31 @@
     return h + '</section>';
   }
   function pedidosHtml() {
-    var L = P.ped || [];
-    var h = '<section class="card pc-sec pa-so"><div class="pc-sh"><h3>Sustentação oral e preferência</h3><small class="muted">pedidos recebidos, por sessão</small></div>';
-    if (P.ped == null) return h + '<p class="muted">Lendo os pedidos…</p></section>';
-    if (!L.length) return h + '<p class="muted">Nenhum pedido recebido.</p></section>';
-    var por = {}; L.forEach(function (r) { var d = (r.vinculo && r.vinculo.sessao) || r.data || r.sessao || 'sem sessão'; (por[d] = por[d] || []).push(r); });
-    var cur = dg(GB().cnj ? GB().cnj() : ''), h0 = hoje();
-    return h + Object.keys(por).sort(function (a, b) { return a === 'sem sessão' ? 1 : b === 'sem sessão' ? -1 : (a >= h0) === (b >= h0) ? a.localeCompare(b) : a >= h0 ? -1 : 1; }).map(function (d) {
-      var X = por[d];
-      return '<details class="gg pa-sd"' + (d >= h0 || d === P.data ? ' open' : '') + '><summary><h4>' + (d === 'sem sessão' ? 'Sem sessão identificada' : 'Sessão de ' + esc(br(d))) + '</h4><span class="gn">' + X.length + '</span></summary><div class="gr">' +
-        X.map(function (r) {
-          var item = (r.vinculo && r.vinculo.item) || r.item || '', est = r.estado === 'a vincular' || r.aVincular;
-          return '<article class="gx-it' + (dg(r.cnj || r.numero) === cur ? ' pa-at' : '') + '"><div class="gx-h"><b class="gx-t">' + esc(r.tipo || r.titulo || 'Pedido') + '</b>' +
-            (est ? '<span class="gx-c venc" title="Ainda sem item correspondente na pauta">a vincular</span>' : item ? '<span class="gx-c">item ' + esc(item) + '</span>' : '') + '</div>' +
-            '<p class="gx-m">' + [r.cnj || r.numero ? '<button type="button" class="lnk mono" data-pa="abrir:' + esc(r.cnj || r.numero) + '">' + esc(r.cnj || r.numero) + '</button>' : '', r.recebidoEm || r.em ? 'recebido em ' + esc(br(S(r.recebidoEm || r.em).slice(0, 10))) : ''].filter(Boolean).join(' · ') + '</p>' +
-            ((r.advogado || r.parte) ? '<p class="gx-tx">' + [r.advogado ? esc(r.advogado) + (r.oab ? ' (OAB ' + esc(r.oab) + ')' : '') : '', r.parte ? 'por ' + esc(r.parte) : ''].filter(Boolean).join(', ') + '</p>' : '') + '</article>';
-        }).join('') + '</div></details>';
-    }).join('') + '</section>';
+    var L = P.pedPauta || [], por = {}, h0 = hoje();
+    var h = '<section class="card pc-sec pa-so"><div class="pc-sh"><h3>Sustentações e preferências</h3><small class="muted">Todas as sessões · '+L.length+' pedidos</small></div>';
+    if(P.pedErro)h+='<p class="status err">Não foi possível atualizar os pedidos externos.</p>';
+    if(P.pedPauta===null&&!P.pedErro)return h+'<p class="muted">Lendo os pedidos…</p></section>';
+    h+='<div class="bar"><button type="button" class="lnk" data-pa="reler">Atualizar</button><small>'+L.filter(aVincular).length+' a vincular</small></div>';
+    L.forEach(function(r){var d=sesDe(r)||'sem sessão';(por[d]=por[d]||[]).push(r);});
+    var datas=Object.keys(por).sort(function(a,b){return a==='sem sessão'?1:b==='sem sessão'?-1:(a>=h0)===(b>=h0)?a.localeCompare(b):a>=h0?-1:1;});
+    var d=P.doc||{},itens=(d.itens||[]).length?d.itens:(d.previa||[]);
+    h+=datas.map(function(data){
+      var X=por[data].slice().sort(function(a,b){return Number(aVincular(b))-Number(aVincular(a));});
+      return '<details class="gg pa-sd"'+(data>=h0||data===P.data||data==='sem sessão'?' open':'')+'><summary><h4>'+(data==='sem sessão'?'Sem sessão identificada':'Sessão de '+esc(br(data)))+'</h4><span class="gn">'+X.length+'</span></summary><div class="gr">'+
+        (data!=='sem sessão'&&data!==P.data&&X.some(aVincular)?'<button type="button" class="btn line sm" data-pa="ses:'+esc(data)+'">Selecionar sessão para vincular</button>':'')+
+        X.map(function(r){return pedCard(r,{itens:data===P.data&&!P.lendo&&P.doc?itens:null});}).join('')+'</div></details>';
+    }).join('');
+    return h+(!L.length&&!P.pedErro?'<p class="muted">Nenhum pedido recebido.</p>':'')+'</section>';
+  }
+  function abasPauta(){
+    return '<div class="seg pmodos gx-modos" role="tablist" aria-label="Áreas da pauta">'+[['itens','Sessão'],['so','Sustentações']].map(function(x){return '<button type="button" role="tab" data-pa="aba:'+x[0]+'" aria-selected="'+(P.aba===x[0])+'">'+x[1]+'</button>';}).join('')+'</div>';
   }
   function pintar() {
     var c = app(); if (!c || !visivel()) return;
     var s = ses ? ses.estado() : {};
     if (s.estado !== 'on') { c.innerHTML = '<div class="empty">Entre no Ex Officio (aba Prontuário) para ver as pautas.</div>'; return; }
     var y = c.scrollTop, ativo=document.activeElement, chave=ativo&&ativo.dataset&&ativo.dataset.paQ;
-    c.innerHTML = (P.erro ? '<p class="status err">' + esc(P.erro) + '</p>' : '') + listaHtml();
+    c.innerHTML = (P.erro ? '<p class="status err">' + esc(P.erro) + '</p>' : '') + abasPauta() + (P.aba==='so'?pedidosHtml():listaHtml());
     var host=$('pa-sol-editor');if(host&&solEditor&&dg(solCnj)===dg(GB().cnj&&GB().cnj())){host.replaceChildren();var head=document.createElement('p');head.className='muted';head.textContent='Processo em gestão · '+solCnj;host.append(head,solEditor);}
     c.scrollTop = y;if(chave){var inp=c.querySelector('[data-pa-q="'+chave+'"]');if(inp){inp.focus({preventScroll:true});if(ativo&&typeof ativo.selectionStart==='number')inp.setSelectionRange(ativo.selectionStart,ativo.selectionEnd);}}
   }
@@ -216,7 +217,8 @@
   document.addEventListener('click', function (e) {
     var b = e.target.closest && e.target.closest('#pauta-app [data-pa]'); if (!b) return;
     var a = b.getAttribute('data-pa');
-    if (/^aba:/.test(a)) { P.aba=a.slice(4);pintar();return; }
+    if (/^aba:/.test(a)) { var modo=a.slice(4); if(['itens','so'].indexOf(modo)<0)return; P.aba=modo;pintar();return; }
+    if (/^ses:/.test(a)) { var dt=a.slice(4);if((P.cal||[]).some(function(x){return x.date===dt;}))trocar(dt);return; }
     if(/^buscar:/.test(a)){var k=a.slice(7),inp=app().querySelector('[data-pa-q="'+k+'"]');if(inp)P[k==='sol'?'qSol':'qItens']=inp.value;pintar();return;}
     if(a==='reler'){if(P.data)trocar(P.data);else ler();return;}
     if(/^limpar:/.test(a)){P[a.slice(7)==='sol'?'qSol':'qItens']='';pintar();return;}
