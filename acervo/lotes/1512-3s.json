@@ -853,11 +853,11 @@
    "assunto": "Inquérito / Processo / Recurso Administrativo",
    "assunto_detalhado": "",
    "grupo": "assunto-4",
-   "tipo_caso": "Inquérito / Processo / Recurso Administrativo",
-   "resultado": "",
+   "tipo_caso": "Benefício previdenciário · demora na análise do requerimento · MS denegado",
+   "resultado": "Proposta: [VALIDAR paradigma] apelação da impetrante contra a denegação (omissão do INSS na reanálise/renovação do benefício; prazos do Tema 1.066/STF e acordo no RE 1.171.152) [VALIDAR: competência da Turma Regional (matéria previdenciária)]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença denegou a segurança (ID 407373453); MPF sem manifestação de mérito.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -866,11 +866,42 @@
     "correcao": "Alexander",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "407373453"
+    },
+    {
+     "peca": "Apelação",
+     "id": "407373454"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "407373448"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "409842061"
+    }
+   ],
+   "mpf": "parecer ID 409842061 (10/11/2026)",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Previdenciário — processo administrativo",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 407373453 (05/08/2026)",
+    "recurso": "apelação (ID 407373454, 12/08/2026)",
+    "preparo": "[VALIDAR]",
+    "representacao": "[VALIDAR]",
+    "mpf": "parecer ID 409842061 (10/11/2026)",
+    "autos": "33 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] competência da Turma Regional (matéria previdenciária)"
+   ],
    "minuta": false
   },
   {
@@ -884,11 +915,11 @@
    "assunto": "Acessibilidade",
    "assunto_detalhado": "",
    "grupo": "assunto-11",
-   "tipo_caso": "Acessibilidade",
-   "resultado": "",
+   "tipo_caso": "Mais Médicos/MAAv · inclusão e preterição · MS denegado",
+   "resultado": "Proposta: negar provimento à apelação [VALIDAR paradigma]: sem direito líquido e certo à inclusão no programa nem preterição comprovada; série Mais Médicos da pauta [VALIDAR: assunto no PJe (Acessibilidade) diverge da matéria]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença denegou a segurança (ID 396625187); parecer do MPF pela manutenção (ID 398685300).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -897,11 +928,46 @@
     "correcao": "Vanilda",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "396625187"
+    },
+    {
+     "peca": "Apelação",
+     "id": "396625189"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "396625193"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "396625184"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "398685300"
+    }
+   ],
+   "mpf": "parecer ID 398685300 (17/09/2026)",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — programa Mais Médicos",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 396625187 (23/07/2026)",
+    "recurso": "apelação (ID 396625189, 12/08/2026)",
+    "preparo": "comprovante juntado (ID 396625190, 396625191) — conferir o tipo",
+    "representacao": "procuração/substabelecimento ID 396624502",
+    "mpf": "parecer ID 398685300 (17/09/2026)",
+    "autos": "56 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] assunto no PJe (Acessibilidade) diverge da matéria"
+   ],
    "minuta": false
   },
   {
@@ -915,11 +981,11 @@
    "assunto": "Classificação e/ ou Preterição",
    "assunto_detalhado": "",
    "grupo": "assunto-5",
-   "tipo_caso": "Classificação e/ ou Preterição",
-   "resultado": "",
+   "tipo_caso": "Mais Médicos/MAAv · inclusão e preterição · MS denegado",
+   "resultado": "Proposta: negar provimento à apelação [VALIDAR paradigma]: sem direito líquido e certo à inclusão no MAAv nem preterição comprovada; série Mais Médicos da pauta",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença denegou a segurança (ID 392500324); embargos rejeitados (ID 392500329); parecer do MPF pela ausência de direito líquido e certo (ID 400044790).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -928,9 +994,50 @@
     "correcao": "Vanilda",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "392500324"
+    },
+    {
+     "peca": "Embargos de declaração",
+     "id": "392500326"
+    },
+    {
+     "peca": "Apelação",
+     "id": "392500331"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "392500328"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "392500733"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "392500323"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "400044790"
+    }
+   ],
+   "mpf": "parecer ID 400044790 (23/09/2026)",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — programa Mais Médicos",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 392500324 (12/06/2026)",
+    "recurso": "embargos de declaração (ID 392500326, 22/06/2026); apelação (ID 392500331, 28/07/2026)",
+    "preparo": "[VALIDAR]",
+    "representacao": "procuração/substabelecimento ID 392500294",
+    "mpf": "parecer ID 400044790 (23/09/2026)",
+    "autos": "52 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false
@@ -946,11 +1053,11 @@
    "assunto": "Inquérito / Processo / Recurso Administrativo",
    "assunto_detalhado": "",
    "grupo": "assunto-4",
-   "tipo_caso": "Inquérito / Processo / Recurso Administrativo",
-   "resultado": "",
+   "tipo_caso": "Posse em cargo (IFMS) · nulidade do ofício que negou a posse · MS",
+   "resultado": "Proposta: [VALIDAR paradigma] apelação do IFMS e remessa contra a concessão da segurança (posse e exercício no cargo de Técnico em Assuntos Educacionais; nulidade do Ofício DIPES 175/2025) [VALIDAR: motivo do indeferimento da posse; sentido dos pareceres]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença concedeu a segurança e confirmou a liminar (ID 394835060); pareceres do MPF (IDs 396794724 e 414150033).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -959,11 +1066,51 @@
     "correcao": "Vanilda",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "394835060"
+    },
+    {
+     "peca": "Apelação",
+     "id": "394835064"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "394835066"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "394835053"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "396794724"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "414150033"
+    }
+   ],
+   "mpf": "parecer ID 414150033 (23/11/2026)",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — concurso público, posse",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 394835060 (21/07/2026)",
+    "recurso": "apelação (ID 394835064, 02/08/2026)",
+    "preparo": "[VALIDAR]",
+    "representacao": "procuração/substabelecimento ID 394835032",
+    "mpf": "parecer ID 414150033 (23/11/2026)",
+    "autos": "47 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] motivo do indeferimento da posse",
+    "[VALIDAR] sentido dos pareceres"
+   ],
    "minuta": false
   },
   {
@@ -977,11 +1124,11 @@
    "assunto": "Classificação e/ ou Preterição",
    "assunto_detalhado": "",
    "grupo": "assunto-5",
-   "tipo_caso": "Classificação e/ ou Preterição",
-   "resultado": "",
+   "tipo_caso": "Mais Médicos/MAAv · inclusão e preterição · MS denegado",
+   "resultado": "Proposta: negar provimento à apelação [VALIDAR paradigma]: sem direito líquido e certo à inclusão no MAAv nem preterição comprovada; série Mais Médicos da pauta",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença denegou a segurança (ID 394283275); embargos rejeitados (ID 394283383); MPF pelo prosseguimento.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -990,9 +1137,46 @@
     "correcao": "Vanilda",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "394283275"
+    },
+    {
+     "peca": "Embargos de declaração",
+     "id": "394283280"
+    },
+    {
+     "peca": "Apelação",
+     "id": "394283385"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "394283387"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "394283272"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "400152695"
+    }
+   ],
+   "mpf": "parecer ID 400152695 (23/09/2026)",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — programa Mais Médicos",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 394283275 (10/07/2026)",
+    "recurso": "embargos de declaração (ID 394283280, 23/07/2026); apelação (ID 394283385, 23/08/2026)",
+    "preparo": "[VALIDAR]",
+    "representacao": "procuração/substabelecimento ID 394283255",
+    "mpf": "parecer ID 400152695 (23/09/2026)",
+    "autos": "47 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false
