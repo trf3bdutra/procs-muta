@@ -62,7 +62,7 @@ test('painel: abre o processo com sigla, etapas, roteiros e notas; sem erro de s
     const pil = await pg.$$eval('.pm-pl', L => L.map(x => ({ t: x.textContent.trim(), c: x.className })));
     assert.ok(pil.some(x => /^Minuta: Rodrigo · 13\/11\/2026$/.test(x.t) && /k-min ok/.test(x.c)), 'minuta verde com nome e data: ' + JSON.stringify(pil));
     assert.ok(!pil.some(x => /Liberada/.test(x.t)), 'sem "Liberada" sem as caixas do editor nem registro');
-    assert.deepEqual(await pg.$$eval('.hero-main-tabs [data-rot]', L => L.map(b=>b.dataset.rot)), ['res','tri','pro'], 'Resumo, Triagem e Produção com Autos como subaba independente');
+    assert.deepEqual(await pg.$$eval('.hero-main-tabs [data-rot]', L => L.map(b=>b.dataset.rot)), ['res'], 'Resumo e Autos na área Processo');
     assert.ok(await pg.$('.hero-main-tabs [data-aba="Autos"]'), 'Autos em aba própria');
     assert.ok(await pg.$('.hero-tipo-ref'), 'tipo de julgamento no cartão');
     assert.equal(await pg.$$eval('.hero-sn-ind [data-sn-kind]', L => L.length), 3, 'sinalizações independentes');
@@ -70,6 +70,7 @@ test('painel: abre o processo com sigla, etapas, roteiros e notas; sem erro de s
     assert.ok(!(await pg.$('#hs-mod')), 'todos os módulos carregaram');
     assert.deepEqual(P.erros, [], 'sem erro de script');
     /* Roteiro de produção: perfil acórdão, sem Pauta e julgamento (está na aba Pauta) */
+    await pg.click('#tab-pront');
     await pg.click('.hero-main-tabs [data-rot="pro"]');
     await pg.waitForSelector('.hero-minuta-roteiro', { timeout: 15000 });
     assert.equal(await pg.getAttribute('.hero-main-tabs [data-rot="pro"]','aria-selected'),'true');
@@ -118,6 +119,7 @@ async function abrirUniversal(op) {
   await P.pg.goto(url);
   await P.pg.waitForFunction(() => window.MutaSessao && window.MutaSessao.estado().estado === 'on', null, { timeout: 15000 });
   await P.pg.evaluate(cnj => { window.chrome.storage.session.set({ 'aba:1': { numero: cnj, classe: 'ApCiv', tarefa: '[Sessão] Aguardando a sessão', ctx: '', ed: false, lib: '' } }); }, CNJ);
+  await P.pg.click('#tab-pront');
   await P.pg.waitForSelector('.hero-main-tabs [data-rot="pro"]', { timeout: 15000 });
   await P.pg.click('.hero-main-tabs [data-rot="pro"]');
   await P.pg.waitForSelector('.hero-minuta-roteiro', { timeout: 15000 });
@@ -173,6 +175,7 @@ test('universal v53: Encaminhamento na Triagem, Monitoramento e sinalizações n
     await pg.goto(pg.url().replace('/painel/painel.html', '/painel/universal.html'));
     await pg.waitForFunction(() => window.MutaSessao && window.MutaSessao.estado().estado === 'on', null, { timeout: 15000 });
     await pg.evaluate(cnj => { window.chrome.storage.session.set({ 'aba:1': { numero: cnj, classe: 'ApCiv', tarefa: 'x', ctx: '', ed: false, lib: '' } }); }, CNJ);
+    await pg.click('#tab-pront');
     await pg.waitForSelector('.hero-main-tabs [data-rot="tri"]', { timeout: 15000 });
     await pg.click('.hero-main-tabs [data-rot="tri"]');
     /* Encaminhamento é a segunda face do prontuário (seta ›), não aba do rodapé */
@@ -182,7 +185,7 @@ test('universal v53: Encaminhamento na Triagem, Monitoramento e sinalizações n
     assert.ok(await pg.$('#hero-encaminhamento [data-fk="producao.Destino"]'), 'destino no Encaminhamento');
     assert.equal(await pg.inputValue('#hero-encaminhamento [data-fk="triagem.Seleção Prévia"]'),'SELECIONADO PREVIAMENTE');
     assert.ok(await pg.$('#hero-encaminhamento .pm-sitj'), 'situação para julgar no Encaminhamento');
-    await pg.click('.hero-main-tabs [data-rot="res"]');assert.ok(await pg.$('.hero-designacoes [data-fk="origem.Responsável"]'), 'responsável na faixa de designações');
+    await pg.click('#tab-processo');assert.ok(await pg.$('.hero-designacoes [data-fk="origem.Responsável"]'), 'responsável na faixa de designações');
     assert.ok(!(await pg.$('.pv-flowbox .pm-sitj')), 'sem duplicação na faixa de etapas');
     assert.ok(await pg.$('.hero-top-page .hero-reg-acervo'), 'registro no acervo em Autuação');
     assert.equal(await pg.getAttribute('.hero-main-tabs [data-rot="res"]','aria-selected'),'true');
@@ -238,14 +241,14 @@ test('universal v53: quatro subabas, sinalizações na barra, cinco páginas no 
       };
     });
     assert.equal(v.setas, 0, 'sem setas de navegação');
-    assert.deepEqual(v.faces,['Resumo','Autos','Triagem','Produção']);
+    assert.deepEqual(v.faces,['Resumo','Autos']);
     assert.ok(await pg.$('.hero-steps-head .hero-sn-ind'), 'sinalizações na barra do cartão Etapas');
     assert.equal(await pg.locator('.hero-header-nav .hero-face-label').count(),0,'sem face antiga');
     assert.equal(await pg.$$eval('.hero-case-status .hero-status-icon[data-ativo="false"]', L => L.filter(x => x.offsetParent).length),0,'ícones inativos ocultos');
     await pg.click('.hero-v53-dock-tabs [data-hero-dock="monitoramento"]');
     await pg.waitForSelector('.hero-steps.hero-steps-mon>#hero-dock-pane-monitoramento');
     await pg.click('.hero-v53-dock-tabs [data-hero-dock=""]');
-    assert.deepEqual(v.abas, ['Prontuário', 'Corretor', 'Repertório'], 'faixa principal sem gestão duplicada');
+    assert.deepEqual(v.abas, ['Processo', 'Prontuário', 'Corretor', 'Repertório'], 'faixa principal sem gestão duplicada');
     for (const [id, nome] of [['tab-pauta', 'Pauta'], ['tab-dil', 'Diligências'], ['tab-del', 'Deliberações']]) {
       const seletor = '#tu-gestao #' + id;
       await pg.waitForSelector(seletor, { state: 'visible', timeout: 15000 });
@@ -254,7 +257,7 @@ test('universal v53: quatro subabas, sinalizações na barra, cinco páginas no 
       await pg.click(seletor);
       await pg.waitForSelector('#panel-' + id.slice(4), { state: 'visible', timeout: 15000 });
     }
-    await pg.click('#tab-pront');
+    await pg.click('#tab-processo');
     assert.ok(v.etapas.some(c => /\bok\b/.test(c)) && v.etapas.some(c => /\bat\b/.test(c)) && v.etapas.some(c => /\bpend\b/.test(c)), 'feita, atual e pendente: ' + v.etapas.join(' | '));
     for (const k of ['pd','ic','av']) assert.ok(await pg.locator('.hero-steps-head [data-sn-kind="'+k+'"]').getAttribute('aria-label'), 'sinalização com rótulo acessível: '+k);
     assert.equal(v.lerAutos, 0, 'leitura exclusiva da aba Autos');
@@ -264,7 +267,7 @@ test('universal v53: quatro subabas, sinalizações na barra, cinco páginas no 
     await pg.waitForSelector('#hero-dock-pane-sinalizacoes textarea[placeholder="Registrar anotação"]',{state:'visible'});
     await pg.click('.hero-v53-dock-tabs [data-hero-dock=""]');
     assert.ok(v.frase <= 1, 'sem a frase repetida');
-    await pg.evaluate(() => [...document.querySelectorAll('button')].find(b => b.offsetParent && b.textContent.trim() === 'Triagem').click());
+    await pg.click('#tab-pront');
     await pg.waitForSelector('.hero-v53-autos-link', { timeout: 15000 });
     assert.equal(await pg.$$eval('[data-au="ler"]', L => L.filter(x => x.offsetParent).length), 0, 'na Triagem, só o aviso');
     await pg.click('.hero-v53-autos-link');
@@ -383,7 +386,7 @@ test('universal 0.75.1: faixa das subabas colada ao cabeçalho, da mesma cor, e 
     await pg.evaluate(cnj => { window.chrome.storage.session.set({ 'aba:1': { numero: cnj, classe: 'ApCiv', tarefa: '[Sessão] Aguardando a sessão', ctx: '', ed: false, lib: '' } }); }, CNJ);
     await pg.waitForSelector('.hero-v53-tabs', { timeout: 15000 });
     await pg.setViewportSize({ width: 500, height: 700 });
-    await pg.click('.hero-v53-tabs [data-rot="tri"]');
+    await pg.click('#tab-pront');
     await pg.waitForTimeout(500);
     const v = await pg.evaluate(() => {
       const nav = document.querySelector('.hero-header-nav'), topo = document.getElementById('topo-u');
@@ -486,3 +489,31 @@ test('conferência dos autos: seletor independente de sigilo', () => {
 });
 
 test('Autos: card de cobertura separa Localizados e A conferir; produção sem atalho externo',()=>{const fs=require('node:fs'),path=require('node:path'),root=path.resolve(__dirname,'../../..'),a=fs.readFileSync(path.join(root,'extensao/autos.js'),'utf8'),g=fs.readFileSync(path.join(root,'extensao/gabinete.js'),'utf8');assert.match(a,/function htmlLocalizados\(/);assert.match(a,/Comprovante de preparo/);assert.match(a,/ID na ficha · não localizado/);assert.match(g,/au-coverage-card/);assert.doesNotMatch(g,/>Minutário ↗<\/a>/);});
+
+test('HERO: Processo e Prontuário compartilham a ficha; Pauta recebe Sustentações', { skip: pular, timeout: 90000 }, async () => {
+  const P=await abrir({processo:CNJ,origem:{},triagem:{'Tipo de Julgamento':'Apelação'},producao:{Destino:'Sessão'},pauta:{},controles:{}},{sigilo:'',liberado:true,porque:'gestor'});
+  try {
+    const pg=P.pg;
+    await pg.click('#tab-processo');
+    const faces=()=>pg.$$eval('.hero-main-tabs>button',L=>L.map(b=>b.textContent.trim().replace(/\s+\d+$/,'')));
+    assert.deepEqual(await faces(),['Resumo','Autos']);
+    await pg.click('.hero-main-tabs [data-aba="Autos"]');
+    assert.equal(await pg.locator('#tab-processo').getAttribute('aria-selected'),'true');
+    await pg.click('#tab-pront');
+    assert.deepEqual(await faces(),['Triagem','Produção']);
+    assert.equal(await pg.locator('#panel-pront').getAttribute('aria-labelledby'),'tab-pront');
+    assert.equal(await pg.locator('#gab').count(),1);
+    assert.equal(await pg.evaluate(()=>window.MutaGabinete.cnj()),CNJ);
+    await pg.evaluate(()=>window.MutaGabinete.ir('Autos'));
+    assert.equal(await pg.locator('#tab-processo').getAttribute('aria-selected'),'true');
+    assert.equal(await pg.locator('#panel-pront').getAttribute('aria-labelledby'),'tab-processo');
+    for(const id of ['tab-pauta','tab-dil','tab-del']) assert.equal(await pg.locator('#tu-gestao #'+id).count(),1);
+    await pg.click('#tab-pauta');
+    await pg.click('[data-pa="aba:so"]');
+    await pg.waitForSelector('#pauta-app .pa-so .pa-ped');
+    assert.match(await pg.locator('#pauta-app .pa-so').innerText(),/Presencial/);
+    await pg.click('#tab-del');
+    assert.equal(await pg.locator('#del-app [data-gx-a="so"]').count(),0);
+    assert.deepEqual(P.erros,[]);
+  } finally {await P.fim();}
+});
