@@ -2849,8 +2849,8 @@ html body.hero-redesign-v53 #gab #g-docs .hero-data-entry .gf-seg button{font-si
 html body.hero-redesign-v53 #gab #g-docs .hero-doc-data [hidden]{display:none!important}
 @media(max-width:350px){html body.hero-redesign-v53 #gab #g-docs .hero-data-fields{grid-template-columns:1fr}}
 /* Resumo e cobertura: um só painel branco, cabeçalhos e separadores comuns. */
-html body.hero-redesign-v53 #gab .hero-summary-integrated{margin:8px 10px!important;padding:0!important;border:1px solid var(--hero-pront-divider,var(--line))!important;border-radius:3px!important;overflow:hidden}
-html body.hero-redesign-v53 #gab .hero-summary-integrated>.pm-mer-h{padding:9px 10px!important;background:var(--hero-pront-header,#f3f0e7)!important;margin:0!important}
+html body.hero-redesign-v53 #gab .hero-summary-integrated{margin:0!important;padding:0 10px!important;border:0!important;border-radius:0!important;overflow:visible}
+html body.hero-redesign-v53 #gab .hero-summary-integrated>.pm-mer-h{padding:9px 10px!important;background:transparent!important;margin:0!important}
 html body.hero-redesign-v53 #gab .hero-summary-integrated>.hero-summary-section{border:0!important;border-top:1px solid var(--hero-pront-divider,var(--line))!important;outline:0!important}
 html body.hero-redesign-v53 #gab .hero-summary-integrated>.hero-summary-section>summary,html body.hero-redesign-v53 #gab #g-lei .au-coverage-card>.au-coverage-section>summary{background:color-mix(in srgb,var(--hero-pront-header,#f3f0e7) 48%,var(--hero-pront-paper,#fff))!important;display:flex!important;align-items:center!important;gap:6px!important;min-height:34px!important;padding:7px 10px!important;border:0!important;box-shadow:none!important;border-radius:0!important;outline-offset:-2px}
 html body.hero-redesign-v53 #gab .hero-summary-integrated>.hero-summary-section>summary h4,html body.hero-redesign-v53 #gab #g-lei .au-coverage-card>.au-coverage-section>summary h4{flex:1;min-width:0;color:var(--fg)!important;font:650 11px/1.35 var(--sans,system-ui)!important;letter-spacing:0!important;text-transform:none!important}
@@ -3140,3 +3140,50 @@ html body.hero-redesign-v53 #panel-min #cmp-app .hero-review-view-tabs>button:di
 html body.hero-redesign-v53 #panel-min #cmp-app .hero-review-workspace>:is(.hero-review-documents,.hero-review-comparison)[hidden]{display:none!important}
 html body.hero-redesign-v53 #panel-min #cmp-app .hero-review-workspace.is-comparing .hero-review-comparison{width:100%!important;min-width:0}
 html body.hero-redesign-v53 #panel-min #cmp-app .hero-review-workspace.is-comparing .hero-review-comparison :is(.folha,.cx-out){max-height:70dvh}
+
+/* HERO · contrato visual final: superfícies, campos, faixas e ações compartilhadas. */
+html body.hero-redesign-v53{--hero-ui-radius:3px;--hero-ui-gutter:10px;--hero-ui-control:28px;--hero-ui-paper:var(--hero-pront-paper,var(--p53-card,#fff));--hero-ui-rule:var(--hero-pront-divider,var(--line));--hero-ui-head:var(--hero-pront-header,#f3f0e7)}
+html body.hero-redesign-v53 #gab .hero-top-pages:has(.hero-first-panel){padding-inline:0!important}
+html body.hero-redesign-v53 #gab .hero-top-page:has(>.hero-first-panel){padding:0!important}
+html body.hero-redesign-v53 #gab .hero-first-panel{width:100%;box-sizing:border-box;margin-inline:0!important;padding-inline:var(--hero-ui-gutter)!important;background:var(--hero-ui-head)!important}
+html body.hero-redesign-v53 #gab .hero-summary-integrated{box-sizing:border-box;width:100%;background:var(--hero-ui-paper)!important;margin:0!important;padding:0 var(--hero-ui-gutter) 8px!important;border:0!important;border-radius:0!important;box-shadow:none!important;overflow:visible!important}
+html body.hero-redesign-v53 #gab .hero-summary-integrated>.pm-mer-h{padding:10px 0 8px!important;background:transparent!important;color:var(--fg)!important;font:650 12px/1.45 var(--sans,system-ui)!important;text-transform:none!important;letter-spacing:0!important}
+html body.hero-redesign-v53 #gab .hero-summary-integrated>:is(details,.hero-case-block,.hero-sint-hist){margin:0!important;padding:0!important;background:transparent!important;border:0!important;border-top:1px solid var(--hero-ui-rule)!important;border-radius:0!important;box-shadow:none!important}
+html body.hero-redesign-v53 #gab .hero-summary-integrated>.hero-summary-section>summary{background:transparent!important;padding:7px 0!important;min-height:30px!important}
+html body.hero-redesign-v53 #gab .hero-summary-integrated>.hero-summary-section>summary h4{font:600 11px/1.4 var(--sans,system-ui)!important;letter-spacing:0!important;text-transform:none!important}
+html body.hero-redesign-v53 #gab .hero-summary-integrated .hero-summary-section>:not(summary){padding-inline:0!important;background:transparent!important}
+html body.hero-redesign-v53 #gab .hero-summary-integrated :is(.hero-case-grid,.hero-summary-fields){gap:6px 10px!important;min-width:0;padding-block:4px 9px!important}
+html body.hero-redesign-v53 #gab .hero-summary-integrated :is(.gf,.pc-dl,.hero-case-block,.hero-tags-content,.hero-sint-hist){min-width:0;background:transparent!important;box-shadow:none!important}
+html body.hero-redesign-v53 #gab .hero-summary-integrated :is(.gl,.pc-dl dt),html body.hero-redesign-v53 #gab .hero-profile-editorial :is(.gl,.pc-dl dt,.pc-p>span){font:400 10px/1.4 var(--sans,system-ui)!important;color:var(--muted-fg)!important;letter-spacing:0!important;text-transform:none!important}
+html body.hero-redesign-v53 #gab .hero-profile-editorial :is(.pc-dl dd,.pc-p>b){color:var(--fg)!important;font-size:11.5px!important;line-height:1.4!important}
+html body.hero-redesign-v53 #gab :is(.hero-summary-integrated,.hero-profile-editorial) :is(input:not([type=checkbox]):not([type=radio]),select,textarea){background:var(--hero-ui-paper)!important;box-shadow:none!important;border-radius:var(--hero-ui-radius)!important;min-width:0;max-width:100%;box-sizing:border-box}
+html body.hero-redesign-v53 #gab .hero-v53-painel:has(.hero-profile-editorial[open]){--profile-bg:var(--hero-ui-paper)}
+html body.hero-redesign-v53 #gab #g-docs .hero-data-fields{grid-template-columns:repeat(2,minmax(0,1fr));gap:3px 10px!important}
+@media(max-width:460px){html body.hero-redesign-v53 #gab #g-docs .hero-data-fields{grid-template-columns:minmax(0,1fr)}}
+html body.hero-redesign-v53 #gab #g-docs :is(.au-doc,.hero-data-toolbar){border-radius:var(--hero-ui-radius)!important;box-shadow:none!important;min-width:0}
+html body.hero-redesign-v53 #gab :is(.hero-tri-with-dock,.hero-production-route) .hero-route-overview{border-radius:var(--hero-ui-radius)!important}
+html body.hero-redesign-v53 #gab :is(.hero-tri-with-dock .rt-p>.rt-c,.hero-production-route .hero-prod-step>.hero-minuta-secao){background:var(--route-paper,var(--hero-ui-paper))!important;box-shadow:none!important;border-radius:var(--hero-ui-radius)!important}
+html body.hero-redesign-v53 #panel-pront #hero-ger-dock .hero-ger-dock-header:has(>details[open]){position:static}
+html body.hero-redesign-v53 #panel-pront #hero-ger-dock .hero-ger-dock-header>details{padding:0!important;margin:0!important;border:0!important;border-bottom:1px solid var(--hero-ui-rule)!important;border-radius:0!important;box-shadow:none!important;background:var(--hero-ui-paper)!important}
+html body.hero-redesign-v53 #panel-pront #hero-ger-dock .hero-ger-dock-header>details>summary{display:flex!important;align-items:center;gap:7px;min-height:37px;box-sizing:border-box;padding:8px 10px!important;background:var(--hero-ui-head)!important;font:600 11.5px/1.4 var(--sans,system-ui)!important;color:var(--fg)!important;cursor:pointer;list-style:none}
+html body.hero-redesign-v53 #panel-pront #hero-ger-dock .hero-ger-dock-header>details>summary::-webkit-details-marker{display:none}
+html body.hero-redesign-v53 #panel-pront #hero-ger-dock .hero-ger-dock-header>details>summary .hero-enc-dock-title{flex:1;min-width:0;font:inherit!important;color:inherit!important;text-transform:none!important;letter-spacing:0!important}
+html body.hero-redesign-v53 #panel-pront #hero-ger-dock .hero-ger-dock-header>details>summary .hero-enc-dock-meta{min-width:0;font-size:10px;color:var(--muted-fg);overflow-wrap:anywhere}
+html body.hero-redesign-v53 #panel-pront #hero-ger-dock .hero-ger-dock-header>details:not([open])>summary>.hero-conf-chevron{transform:rotate(45deg)}
+html body.hero-redesign-v53 #panel-pront #hero-ger-dock .hero-ger-dock-header>details[open]>summary>.hero-conf-chevron{transform:rotate(225deg)}
+html body.hero-redesign-v53 #panel-pront #hero-ger-dock #hero-prod-index>.hero-prod-index-group{padding:8px 10px!important;background:var(--hero-ui-paper)!important}
+html body.hero-redesign-v53 #panel-min #cmp-app .hero-review-comparison :is(.folha,.cx-out){width:calc(100% - 12px)!important;max-width:calc(100% - 12px)!important;margin-inline:6px!important;padding-inline:clamp(10px,3vw,20px)!important}
+html body.hero-redesign-v53 #panel-min #cmp-app .hero-cortex-side :is(.lal-h,.lal){min-width:0!important}
+html body.hero-redesign-v53 #panel-min #cmp-app .hero-cortex-side .lal-r>p{min-width:0;overflow-wrap:anywhere}
+html body.hero-redesign-v53 :is(#panel-acervo,#panel-par,#panel-modelos) .hero-rep-card{min-width:0;border-radius:0!important;padding:8px 10px!important;overflow-wrap:anywhere}
+html body.hero-redesign-v53 :is(#panel-acervo,#panel-par,#panel-modelos,#panel-min,#panel-pauta) .hero-rep-search{border-radius:var(--hero-ui-radius)!important;box-shadow:none!important}
+html body.hero-redesign-v53 #pauta-app .hero-v53-pa-metrics{grid-template-columns:repeat(2,minmax(0,1fr))!important;align-items:stretch;grid-auto-rows:1fr}
+html body.hero-redesign-v53 #pauta-app .hero-v53-pa-metric{min-width:0;box-sizing:border-box;padding:8px!important}
+html body.hero-redesign-v53 #pauta-app .hero-v53-pa-metric:nth-child(3){border-left:0!important}
+html body.hero-redesign-v53 #pauta-app .pa-m-solicitacoes .chip{font:500 10px/1.25 var(--sans,system-ui)!important;border:1px solid var(--hero-ui-rule)!important;border-radius:var(--hero-ui-radius)!important;background:var(--hero-ui-paper)!important;color:var(--fg)!important;padding:2px 4px!important;max-width:100%;overflow-wrap:anywhere}
+html body.hero-redesign-v53 #pauta-app .pa-m-solicitacoes .chip[aria-pressed=true]{border-color:var(--primary)!important;background:color-mix(in srgb,var(--primary) 12%,var(--hero-ui-paper))!important;font-weight:650!important}
+html body.hero-redesign-v53 :is(#panel-dil,#panel-del) :is(.gx-it,.gx-row,.gx-item){background:var(--hero-ui-paper)!important;box-shadow:none!important;border-radius:var(--hero-ui-radius)!important;min-width:0}
+html body.hero-redesign-v53 :is(#panel-dil,#panel-del) .gx-h{gap:5px;flex-wrap:wrap;align-items:center}
+html body.hero-redesign-v53 :is(#panel-pront,#panel-min,#panel-acervo,#panel-par,#panel-modelos,#panel-pauta,#panel-dil,#panel-del) :is(button.btn,button.tu-b){border-radius:var(--hero-ui-radius)!important;box-shadow:none;min-height:var(--hero-ui-control);box-sizing:border-box}
+html body.hero-redesign-v53 :is(#panel-pront,#panel-min,#panel-acervo,#panel-par,#panel-modelos,#panel-pauta,#panel-dil,#panel-del) :is(button,summary):focus-visible{outline:2px solid var(--gold,#947333);outline-offset:-2px}
+@media(min-width:620px){html body.hero-redesign-v53 #pauta-app .hero-v53-pa-metrics{grid-template-columns:repeat(4,minmax(0,1fr))!important}html body.hero-redesign-v53 #pauta-app .hero-v53-pa-metric:nth-child(3){border-left:1px solid var(--hero-ui-rule)!important}}
