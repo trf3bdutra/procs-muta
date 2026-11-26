@@ -551,7 +551,7 @@ function estadoDoc0(d) {
 /* 0.38 · Gravar na ficha: cada documento tem a sua caixa (as peças principais começam marcadas); um só botão grava os
    marcados — o registro em "Outras peças e ocorrências" (tipo, ID, data e detalhamento; o que já está noutro campo da
    ficha não se repete) e o inteiro teor em acervo/autos/<CNJ>.json.gz (o mesmo arquivo do Caput e da Ex Officio). */
-function marcado(d) { return !A.gravados[d.id] && !docBloq(d) && (d.id in A.sel ? !!A.sel[d.id] : !!(PRINC[d.k] && d.k !== 'intimacao' && !d.anexo)); }
+function marcado(d) { return !(A.gravados[d.id]&&fichaGravada(d.id)) && !docBloq(d) && (d.id in A.sel ? !!A.sel[d.id] : !!(PRINC[d.k] && d.k !== 'intimacao' && !d.anexo && !fichaGravada(d.id))); }
 function marcados() { return lista().filter(marcado); }
 function naFicha(id) { return linhasGravadas('origem', 'Outras peças').some(function (x) { return S(x.ids).split(/[,;\s]+/).indexOf(String(id)) >= 0; }); }
 function idsNaFicha(persistido) {
@@ -571,7 +571,7 @@ function abrirTexto(id, on) {
   if (on && !(d && /^(ok|sem|lendo)$/.test(d.estado))) extrair(id); else redesenhar();
 }
 function selecionar(id, on) { A.sel[id] = !!on; redesenhar(); }
-function selecionarTodos(modo) { lista().forEach(function (d) { A.sel[d.id] = !A.gravados[d.id]&&!docBloq(d)&&(modo === 'todos' ? true : modo === 'nenhum' ? false : !!(PRINC[d.k] && d.k !== 'intimacao' && !d.anexo)); }); redesenhar(); }
+function selecionarTodos(modo) { lista().forEach(function (d) { A.sel[d.id] = !(A.gravados[d.id]&&fichaGravada(d.id))&&!docBloq(d)&&(modo === 'todos' ? true : modo === 'nenhum' ? false : !!(PRINC[d.k] && d.k !== 'intimacao' && !d.anexo)); }); redesenhar(); }
 function secaoDoc(d) { var t = A.docs[d.id] || {}; return '===== ID ' + d.id + ' | ' + d.tipo + ' | ' + (d.desc || d.tipo) + ' | juntado em ' + d.data + (t.fmt === 'pdf' ? ' | pdf ' + (t.pags || 0) + ' pág.' : t.fmt ? ' | ' + t.fmt : '') + (t.ocr ? ' | OCR ' + t.ocr + ' pág.' : '') + ' =====\n' + S(t.texto) + '\n'; }
 function gravarMarcados() {
   var g = GB(), L = marcados().filter(function (d) { return !docBloq(d); }), cnj = A.cnj || cnjAtual();
