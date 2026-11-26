@@ -889,11 +889,11 @@
    "assunto": "Cédula de Crédito Rural",
    "assunto_detalhado": "",
    "grupo": "assunto-1",
-   "tipo_caso": "Crédito rural (União/FN) · autos digitalizados",
-   "resultado": "Proposta: [VALIDAR] autos do TJMS digitalizados em 2 PDFs (IDs 291021513 sem texto e 291021517): ler a sentença e a apelação no PJe [VALIDAR: triagem sem leitura da sentença e da apelação]",
+   "tipo_caso": "União × devedor · execução fiscal de crédito rural · prescrição intercorrente · suspensão legal",
+   "resultado": "Proposta: apelação da União contra a sentença (ID 291021517, pp. 98-100, registrada em 17/01/2024) que decretou a prescrição intercorrente em execução fiscal de crédito rural, contada da suspensão pelo artigo 40 da Lei 6.830/1980 em 15/10/2015; a União sustenta a suspensão do prazo prescricional de 28/05/2008 a 30/12/2019 pelas leis de renegociação das dívidas rurais (Lei 11.775/2008, artigo 8º; Lei 13.340/2016, artigo 10, II); a sentença limitou a suspensão aos devedores que requereram a liquidação ou a renegociação; tempestividade: certidão de trânsito em julgado de 01/02/2024 lavrada antes da ciência da PFN [VALIDAR paradigma: sem precedente direto do Relator no banco 2023–2026; Tema 566/STJ e leis de renegociação]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "Redistribuído pela Resolução 33/2025 (ID 356962064).",
+   "observacao": "Autos do TJMS em 2 PDFs (ID 291021513, sem texto até a p. 90, e ID 291021517), lidos no PJe em 26/11/2026. Executado representado pela DPE como curadora especial.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -902,29 +902,44 @@
     "correcao": "Vanilda",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "Não consta parecer",
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "291021517 (pp. 98-100)"
+    },
+    {
+     "peca": "Certidão de trânsito em julgado",
+     "id": "291021517 (p. 105)"
+    },
+    {
+     "peca": "Apelação",
+     "id": "291021517 (pp. 107-111)"
+    },
+    {
+     "peca": "Contrarrazões (DPE, curadoria especial)",
+     "id": "291021517 (pp. 113-117)"
+    }
+   ],
+   "mpf": "Não consta parecer (intervenção não exigida)",
    "triagem": {
     "ato": "Julgamento colegiado (voto)",
-    "materia": "Crédito rural securitizado",
+    "materia": "Execução fiscal da União — crédito rural; prescrição intercorrente",
     "monocratica": "Não (pauta)",
     "analisado_em": "26/11/2026",
-    "decisao_agravada": "[VALIDAR]",
-    "recurso": "[VALIDAR]",
-    "preparo": "[VALIDAR]",
-    "representacao": "[VALIDAR]",
-    "mpf": "Não consta parecer",
-    "autos": "11 documentos extraídos",
-    "tempestividade": "[VALIDAR]",
-    "prontidao": "CONFERIR | conferir: autos do TJMS em 2 PDFs, um sem texto (ID 291021513): ler no PJe",
+    "decisao_agravada": "Sentença (ID 291021517, pp. 98-100; registro em 17/01/2024)",
+    "recurso": "apelação da União (ID 291021517, pp. 107-111)",
+    "preparo": "dispensado (União)",
+    "representacao": "PFN; DPE como curadora especial do executado",
+    "mpf": "Não consta parecer (intervenção não exigida)",
+    "autos": "11 documentos; PDFs do TJMS lidos no PJe em 26/11/2026",
+    "tempestividade": "PFN intimada por meio eletrônico em 31/01/2024, com ciência em 07/02/2024 (p. 106); apelação juntada antes da intimação da Defensoria em 21/02/2024 (p. 112): tempestiva [VALIDAR: data do protocolo da apelação]; certidão de trânsito em julgado de 01/02/2024 (p. 105) anterior à ciência da PFN",
+    "prontidao": "APTO — sentença, apelação e contrarrazões localizadas no PDF do TJMS (ID 291021517, pp. 98-117) | conferir: a certidão de trânsito em julgado de 01/02/2024 (p. 105) foi lavrada antes da ciência da PFN em 07/02/2024 (p. 106); tratar a tempestividade no voto",
     "prontidao_em": "26/11/2026"
    },
    "ajustes": [],
    "pendencias": [
-    "[VALIDAR] triagem sem leitura da sentença e da apelação",
-    "[PRONTIDÃO · conferir] autos do TJMS sem peças tipadas: prontidão não verificável automaticamente",
-    "[PRONTIDÃO · conferir] autos do TJMS sem peças tipadas: prontidão não verificável automaticamente",
-    "[PRONTIDÃO · conferir] autos do TJMS em 2 PDFs, um sem texto (ID 291021513): ler no PJe"
+    "[PRONTIDÃO] sentença, apelação e contrarrazões localizadas no PDF do TJMS (ID 291021517, pp. 98-117)",
+    "[PRONTIDÃO · conferir] a certidão de trânsito em julgado de 01/02/2024 (p. 105) foi lavrada antes da ciência da PFN em 07/02/2024 (p. 106); tratar a tempestividade no voto"
    ],
    "minuta": false
   },
