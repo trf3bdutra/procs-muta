@@ -1687,10 +1687,10 @@ function heroOrganizarProntuario(){
     [['@fatica','Síntese Fática','fatica'],['@processual','Síntese Processual','processual']].forEach(function(x){
       var inp=contentGrid.querySelector('[data-fk="triagem.'+x[1]+'"],[data-pv-field="triagem.'+x[1]+'"]'),fieldNode=inp&&inp.closest('.gf,.pv-field,.pv-idrow');
       if(fieldNode){var lab=fieldNode.querySelector('.gl');(lab||fieldNode).append(pin(x[0]));}
-      var value=S(V('triagem',x[1]));if(value&&destacado(x[0])){var b=el('button','hero-v53-highlight '+x[2],value);b.type='button';b.title='Editar '+x[1];b.onclick=function(){perfil.open=true;heroTopo.perfil=true;secConteudo.open=true;contentGrid.scrollIntoView({block:'nearest'});};highlight.append(b);}
+      var value=S(V('triagem',x[1]));if(value&&destacado(x[0])){var b=el('button','hero-v53-highlight '+x[2],value);b.type='button';b.title='Editar '+x[1];b.onclick=function(){if(!resumo){perfil.open=true;heroTopo.perfil=true;}secConteudo.open=true;contentGrid.scrollIntoView({block:'nearest'});};highlight.append(b);}
     });
     if(highlight.childNodes.length)id.insertBefore(highlight,qtags.parentNode===id?qtags:steps);
-    if(qtags.childNodes.length){qtags.replaceChildren();qs.forEach(function(q,i){if(qfix.includes(q)){var b=el('button','hero-v53-question',String(i+1).padStart(2,'0')+' · '+q);b.type='button';b.onclick=function(){perfil.open=true;heroTopo.perfil=true;qd.open=true;qd.scrollIntoView({block:'nearest'});};qtags.append(b);}});}
+    if(qtags.childNodes.length){qtags.replaceChildren();qs.forEach(function(q,i){if(qfix.includes(q)){var b=el('button','hero-v53-question',String(i+1).padStart(2,'0')+' · '+q);b.type='button';b.onclick=function(){if(!resumo){perfil.open=true;heroTopo.perfil=true;}qd.open=true;qd.scrollIntoView({block:'nearest'});};qtags.append(b);}});}
     /* Mantém a seção imediatamente antes do assunto; tags reais ficam agrupadas. */
     if(secTag)as.prepend(secTag);
     if(l1){l1.append(status);openMon.remove();status.querySelectorAll('.hero-status-icon').forEach(function(b){var labels={urgencia:'Urgência',sigilo:'Sigilo',meta:'Meta',sensivel:'Caso sensível'};b.append(el('span','',labels[b.dataset.monFoco]||b.title));});}
@@ -1744,38 +1744,27 @@ function heroOrganizarProntuario(){
        O perfil e a pauta ficam após a divisória, sem mudar os nós nem os handlers. */
     if(resumo&&painel.parentNode===id){
       var firstPanel=el('div','hero-first-panel');id.insertBefore(firstPanel,id.firstChild);while(firstPanel.nextSibling&&firstPanel.nextSibling!==painel)firstPanel.append(firstPanel.nextSibling);
-      /* Campos complementares na faixa branca; move os controles existentes, sem duplicar editores. */
+      /* A seção superior é proprietária de todos os campos de caso: move os nós reais, inclusive campos destacados e históricos. */
       var complement=el('section','hero-summary-complement hero-summary-integrated'),ctitle=el('h4','pm-mer-h','Caso, conteúdo, questões e etiquetas');
       complement.append(ctitle);complement.setAttribute('aria-label','Caso, conteúdo, questões e etiquetas');
-      var cg=grupoModelo('Caso, Conteúdo e Questões'),shown=new Set(['Assunto']);
-      if(firstPanel.querySelector('.hero-assunto-stack .hero-case-preview'))shown.add('Assunto detalhado');
-      if(firstPanel.querySelector('.hero-case-detail'))shown.add('Detalhamento do caso');
-      if(firstPanel.querySelector('.hero-v53-complexidade'))shown.add('COMPLEXIDADE');
-      if(firstPanel.querySelector('.hero-v53-highlight.fatica'))shown.add('Síntese Fática');
-      if(firstPanel.querySelector('.hero-v53-highlight.processual'))shown.add('Síntese Processual');
-      var panes={};
-      function sectionOf(k,title){var d=el('details','hero-summary-section'),s=el('summary'),h=el('h4','',title),count=el('small','muted'),body=el('div','gr hero-summary-fields');s.append(h,count);d.append(s,body);d.open=heroTopo.caseOpen[k]!==false;d.addEventListener('toggle',function(){if(d.isConnected)heroTopo.caseOpen[k]=d.open;});panes[k]={d:d,body:body,count:count};return panes[k];}
-      var ca=sectionOf('resumoCaso','Caso'),co=sectionOf('resumoConteudo','Conteúdo');
       function existing(c){var key=(c.secao||'')+'.'+c.chave;return Array.from(caseGrid.children).concat(Array.from(contentGrid.children)).find(function(n){var a=n.querySelector('.gl'),f=Array.from(n.querySelectorAll('[data-fk],[data-pv-field]')).some(function(x){return x.getAttribute('data-fk')===key||x.getAttribute('data-pv-field')===key;});return f||!!(a&&normalAssunto(a.textContent).replace(/\s*(?:autos|auto)$/,'')===normalAssunto(c.rotulo));});}
+      var cg=grupoModelo('Caso, Conteúdo e Questões');
       (cg&&cg.campos||[]).forEach(function(c){
-        if(c.legado||shown.has(c.chave)||/^(Alegações|Questões destacadas|Questões jurídicas individualizadas)$/.test(c.chave))return;
-        /* Histórico fica disponível no perfil quando equivale ao assunto apresentado no cabeçalho. */
-        if(c.chave==='Registro - Assunto detalhado'&&(!S(V('triagem',c.chave))||normalAssunto(V('triagem',c.chave))===normalAssunto(assuntoComp)&&shown.has('Assunto detalhado')))return;
-        var target=/Síntese|Detalhamento do caso/.test(c.chave)?co:ca,n=existing(c);
-        if(n)target.body.append(n);else html(target.body,campo(c));
+        if(c.legado||/^(Alegações|Questões destacadas|Questões jurídicas individualizadas|Etiquetas sugeridas)$/.test(c.chave)||existing(c))return;
+        html(/Síntese|Detalhamento do caso/.test(c.chave)?contentGrid:caseGrid,campo(c));
       });
-      [ca,co].forEach(function(p){p.count.textContent=p.body.children.length+' campo(s)';if(p.body.children.length)complement.append(p.d);});
-      /* Questões completas (não apenas as destacadas) e os seus vínculos estruturados. */
+      [[secCaso,'Caso'],[secConteudo,'Conteúdo']].forEach(function(p){p[0].classList.add('hero-summary-section');var sh=p[0].querySelector('summary');if(sh){sh.replaceChildren(el('h4','',p[1]));}});
       qd.classList.add('hero-summary-section');var qtHead=qd.querySelector('summary h4');if(qtHead)qtHead.textContent='Questões';
       var qc=campoModelo('triagem','Questões jurídicas individualizadas');
       if(qc){var qn=existing(qc),qgrid=el('div','gr hero-summary-fields');if(qn)qgrid.append(qn);else html(qgrid,campo(qc));qd.append(qgrid);}
-      complement.append(qd);
       tagsGroup.classList.add('hero-summary-section');
-      var sugg=campoModelo('triagem','Etiquetas sugeridas');if(sugg){var eg=el('div','gr hero-summary-fields');html(eg,campo(sugg));tagsGroup.append(eg);}
-      complement.append(tagsGroup);
+      var sugg=campoModelo('triagem','Etiquetas sugeridas');if(sugg){var eg=el('div','gr hero-summary-fields'),en=existing(sugg);if(en)eg.append(en);else if(!tagsGroup.querySelector('[data-fk="triagem.Etiquetas sugeridas"],[data-pv-field="triagem.Etiquetas sugeridas"]'))html(eg,campo(sugg));if(eg.childNodes.length)tagsGroup.append(eg);}
+      complement.append(secCaso,secConteudo);
+      Array.from(materia.children).forEach(function(n){if(!n.matches('h4')&&n!==qd&&n!==tagsGroup)complement.append(n);});
+      complement.append(qd,tagsGroup);
       id.insertBefore(complement,painel);
-      /* Evita mostrar seções vazias no perfil, mantendo a edição dos campos destacados no cabeçalho. */
-      if(!caseGrid.children.length)secCaso.hidden=true;if(!contentGrid.children.length)secConteudo.hidden=true;
+      mat.remove();
+
     }
     nav.replaceChildren();if(mainTabs)nav.append(mainTabs);
     pages.replaceChildren(id);id.hidden=!resumo;pages.hidden=!resumo;
