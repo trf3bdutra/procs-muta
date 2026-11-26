@@ -203,6 +203,8 @@
     var comSug = function (c) {
       var alvo = c[0] + '.' + c[1], k = -1;
       /* 0.44: informação de documento já localizada fica em Autos › Peças e documentos; aqui, só a indicação */
+      /* Contrato de apresentação: o proprietário do documento pode ser fornecido pelo host. */
+      if (X.docOwned && X.docOwned(alvo)) { mostrados[alvo] = 1; return ''; }
       if (DOC_RT[alvo] && !mostrados[alvo]) { var vd = g.V(c[0], c[1]), tem = Array.isArray(vd) ? vd.length : S(vd);
         if (tem && !admEditavel(alvo)) { mostrados[alvo] = 1; var tx = Array.isArray(vd) ? vd.length + (vd.length === 1 ? ' linha' : ' linhas') : S(vd); if (/^\d{4}-\d{2}-\d{2}$/.test(tx)) tx = tx.split('-').reverse().join('/');
           return '<div class="gf rt-doc' + (tx.length > 60 ? ' w' : '') + '"><span class="gl">' + esc(c[2] || c[1]) + ' <button type="button" class="lnk" data-aba="Autos" title="Editar em Autos › Peças e documentos">em Autos</button></span><span class="ro">' + esc(tx.slice(0, 300)) + '</span></div>'; } }
@@ -257,6 +259,8 @@
         var AP = alPasso[p.id] || [];
         var AU0 = window.MutaAutos, doAuto = AU0 && AU0.preenchido && cs.concat(p.mais || []).some(function (c) { return AU0.preenchido(c[0] + '.' + c[1]); });
         h += inicioEtapa({status:x.st,open:ab,advance:trecho,search:[p.t,resumo].concat((p.campos||[]).concat(p.mais||[]).map(function(c){return c[2]||c[1];})).join(' '),state:ROT[x.st]||'A conferir',number:String(L.indexOf(x)+1).padStart(2,'0'),attr:'data-rt',key:'a:'+p.id,title:p.t,titleExtra:(AP.length?' <i class="rt-av">'+AP.length+' aviso'+(AP.length>1?'s':'')+'</i>':'')+(doAuto?' <i class="au-tag" title="Preenchido pela leitura dos autos: confira">autos</i>':''),summary:resumo.slice(0,120)});
+        /* Referências documentais do host, sem alterar o estado da etapa. */
+        if (X.docRef) h += X.docRef(p.id);
         if (ab) {
           var mais = (p.mais || []).map(comSug).filter(Boolean);
           h += '<div class="rt-b">' + (!X.docRef && p.f === 'adm' ? referenciaAdm(p.id,g) : '') + (AP.length ? '<div class="al-l">' + AP.map(alHtml).join('') + '</div>' : '') + (visiveis.length ? '<div class="gr">' + visiveis.map(comSug).join('') + '</div>' : '') +
