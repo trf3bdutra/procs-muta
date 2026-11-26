@@ -59,14 +59,14 @@
     return '<button type="button" class="gx-nav-action" data-gx="'+acao+'" title="Atualizar" aria-label="Atualizar"'+(lendo?' disabled aria-busy="true"':'')+'><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 7v5h-5M4 17v-5h5"/><path d="M5.5 9a7 7 0 0 1 11.7-3L20 9M4 15l2.8 3A7 7 0 0 0 18.5 15"/></svg></button>';
   }
   function faixaGestao(rotulo,abas,acao,lendo,extra){
-    return '<div class="gx-nav"><div class="seg pmodos gx-modos" role="tablist" aria-label="'+esc(rotulo)+'">'+abas+'</div><div class="gx-nav-actions">'+atualizaBtn(acao,lendo)+(extra||'')+'</div></div>';
+    return '<div class="gx-nav"><div class="seg pmodos gx-modos" role="tablist" aria-label="'+esc(rotulo)+'">'+abas+'</div><div class="gx-nav-actions">'+(acao?atualizaBtn(acao,lendo):'')+(extra||'')+'</div></div>';
   }
 
   /* ---------- Diligências ---------- */
   var ETAPAS = [['todo', 'A fazer'], ['doing', 'Em andamento'], ['review', 'Em revisão'], ['done', 'Concluída']];
   var NOME_ET = {}, STAGE_OK = {}; ETAPAS.forEach(function (e) { NOME_ET[e[0]] = e[1]; STAGE_OK[e[0]] = 1; });
   var URG = ['Urgente', 'Alta', 'Média', 'Baixa'];
-  var D = { busca:'', responsavel:'', prioridade:'', f: 'comigo', nova: false, lista: null, equipe: [], erro: '', msg: '', lendo: false, abertos: {}, ed: {}, exc: {}, resp: {}, fase: { todo: true, doing: true, review: true, done: false } };
+  var D = { filtrosAbertos:false, busca:'', responsavel:'', prioridade:'', f: 'comigo', nova: false, lista: null, equipe: [], erro: '', msg: '', lendo: false, abertos: {}, ed: {}, exc: {}, resp: {}, fase: { todo: true, doing: true, review: true, done: false } };
   function lerDil() {
     if (!ses || !pode(quem())) return Promise.resolve();
     D.lendo = true; pintarDil();
@@ -118,7 +118,7 @@
   }
   function metricasCmt(M,extra){return '<div class="hero-cmt-gestion-metrics '+(extra||'')+'">'+M.map(function(x){return '<div data-stage="'+x[0]+'"><b>'+esc(x[2])+'</b><small>'+esc(x[1])+'</small>'+(x[3]?'<small>'+esc(x[3])+'</small>':'')+'</div>';}).join('')+'</div>';}
   function painelGestao(titulo,subtitulo,acoes,metricas,filtros){
-    return '<section class="hero-cmt-gestion hero-gestao-strip" aria-label="'+esc(titulo)+' · indicadores"><div class="hero-gestao-inline">'+(metricas||'')+(acoes?'<div class="hero-gestao-tools">'+acoes+'</div>':'')+'</div>'+(filtros?'<details class="hero-gestao-filter"><summary>Busca e filtros</summary>'+filtros+'</details>':'')+'</section>';
+    return '<section class="hero-cmt-gestion hero-gestao-strip" aria-label="'+esc(titulo)+' · indicadores"><div class="hero-gestao-inline">'+(metricas||'')+(acoes?'<div class="hero-gestao-tools">'+acoes+'</div>':'')+'</div>'+(filtros?'<details class="hero-gestao-filter"'+(D.filtrosAbertos?' open':'')+'><summary title="Busca e filtros">Filtros</summary>'+filtros+'</details>':'')+'</section>';
   }
   function pintarDil() {
     var c = $('dil-app'); if (!c) return;
@@ -143,7 +143,7 @@
     }).join('');
     var tab = function (k, r) { return '<button type="button" role="tab" data-gx-f="' + k + '" aria-selected="' + (D.f === k) + '">' + r + ' <i>' + n[k] + '</i></button>'; };
     var acesso='<a class="gx-nav-action" target="_blank" rel="noopener" title="Abrir no Ex Officio" aria-label="Abrir no Ex Officio" href="'+esc(site())+(q.des&&!q.gestor?'/cmt/':'/exofficio/#pendencias')+'"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 5h6v6M19 5l-9 9M19 13v6H5V5h6"/></svg></a>';
-    c.innerHTML = painelGestao('Diligências','Quadro da equipe', '<button type="button" class="btn sm" data-gx="nova"'+(D.nova?' hidden':'')+'>+ Nova</button>',metricas,filtros)+faixaGestao('Filtro das diligências',tab('comigo','Comigo')+tab('criei','Que criei')+tab('todas','Todas'),'ler-dil',D.lendo,acesso) +
+    c.innerHTML = painelGestao('Diligências','Quadro da equipe', '<button type="button" class="btn sm" data-gx="nova"'+(D.nova?' hidden':'')+'>+ Nova</button>'+atualizaBtn('ler-dil',D.lendo)+acesso,metricas,filtros)+faixaGestao('Filtro das diligências',tab('comigo','Comigo')+tab('criei','Que criei')+tab('todas','Todas'),'',D.lendo) +
       (D.nova ? formDil() : '') +
       (D.msg ? '<p class="gx-msg' + (/^Não|erro/i.test(D.msg) ? ' err' : '') + '">' + esc(D.msg) + '</p>' : '') +
       (D.erro ? '<p class="gx-v err">' + esc(D.erro) + '</p>' : !D.lista ? '<p class="muted gx-v">Lendo o quadro…</p>' :
@@ -282,7 +282,7 @@
     var V=N.filter(function(n){var p=n.tipo==='duvida'||n.tipo==='pedido';return X.aba==='tudo'||(X.aba==='del'&&p)||(X.aba==='info'&&!p);});
     var m=X.dados?metricasCmt([['total','Não lidas',N.filter(function(n){return !lidas[chaveLida(n)];}).length],['priority','A deliberar',pend],['lib','Hoje',N.filter(function(n){return String(n.em||'').slice(0,10)===hoje();}).length]]):'';
     var dia=null,corpo=V.map(function(n){var d=String(n.em||'').slice(0,10),h='';if(d!==dia){dia=d;h='<h4 class="hero-not-dia">'+esc(d===hoje()?'Hoje':data(d)||'Sem data')+'</h4>';}return h+itemNot(n,lidas);}).join('');
-    c.innerHTML=painelGestao('Notificações','', '',m,'')+faixaGestao('Notificações',tab('tudo','Todas',N.length)+tab('del','Deliberações',pend)+tab('info','Informativas',info),'ler-del',X.lendo)+(X.msg?'<p class="gx-msg">'+esc(X.msg)+'</p>':'')+(X.erro?'<p class="gx-v err">'+esc(X.erro)+'</p>':!X.dados?'<p class="muted gx-v">Lendo…</p>':corpo||'<p class="muted gx-v">Nenhuma notificação nesta categoria.</p>');
+    c.innerHTML=painelGestao('Notificações','', atualizaBtn('ler-del',X.lendo),m,'')+faixaGestao('Notificações',tab('tudo','Todas',N.length)+tab('del','Deliberações',pend)+tab('info','Informativas',info),'',X.lendo)+(X.msg?'<p class="gx-msg">'+esc(X.msg)+'</p>':'')+(X.erro?'<p class="gx-v err">'+esc(X.erro)+'</p>':!X.dados?'<p class="muted gx-v">Lendo…</p>':corpo||'<p class="muted gx-v">Nenhuma notificação nesta categoria.</p>');
   }
   function pintarUrg(){
     var c=$('urg-app');if(!c)return;var q=quem();
@@ -353,7 +353,7 @@
   function badges() {
     var b1 = $('dil-badge'), b2 = $('del-badge'), b3=$('urg-badge');
     if (b1) { var n1 = D.lista ? abertasComigo().length : 0; b1.hidden = !n1; b1.textContent = n1 ? String(n1) : ''; b1.title = n1 ? n1 + ' diligência(s) com você' : ''; }
-    if (b2) { var L=listas(),n2=X.dados?notificacoes(L).filter(function(n){return !leituraNot()[chaveLida(n)];}).length:0; b2.hidden=!n2;b2.textContent=n2?String(n2):'';b2.title=n2+' notificações não lidas'; }
+    if (b2) { var L=listas(),lidas=leituraNot(),n2=X.dados?notificacoes(L).filter(function(n){return !lidas[chaveLida(n)];}).length:0; b2.hidden=!n2;b2.textContent=n2?String(n2):'';b2.title=n2+' notificações não lidas'; }
     if(b3){var u=X.dados?listas():{as:[],urg:[]},n3=u.as.length+u.urg.length;b3.hidden=!n3;b3.textContent=n3?String(n3):'';b3.title=n3+' urgências em aberto';}
   }
 
@@ -382,7 +382,7 @@
         if (i.dataset.gxEtapa) return etapa(i.dataset.gxEtapa, i.value, i);
       });
       /* seção aberta ou fechada: a escolha sobrevive ao redesenho */
-      cd.addEventListener('toggle', function (e) { var d = e.target; if (d && d.classList && d.classList.contains('gx-fase')) D.fase[d.getAttribute('data-fase')] = d.open; }, true);
+      cd.addEventListener('toggle', function (e) { var d = e.target; if(d&&d.classList&&d.classList.contains('hero-gestao-filter'))D.filtrosAbertos=d.open;else if (d && d.classList && d.classList.contains('gx-fase')) D.fase[d.getAttribute('data-fase')] = d.open; }, true);
       cd.addEventListener('submit', function (e) {
         var f = e.target.closest('[data-gx-form]'); if (!f) return; e.preventDefault();
         var k = f.getAttribute('data-gx-form'); if (k === 'nova') criar(f); else if (k === 'editar') editar(f); else if (k === 'dresp') responderDil(f);
