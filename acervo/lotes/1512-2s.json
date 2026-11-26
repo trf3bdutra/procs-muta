@@ -4082,11 +4082,11 @@
    "assunto": "Oncológico",
    "assunto_detalhado": "",
    "grupo": "assunto-17",
-   "tipo_caso": "Oncológico",
-   "resultado": "",
+   "tipo_caso": "Saúde · medicamento oncológico · indeferimento da inicial",
+   "resultado": "Proposta: APTO — apelação da autora (DPU) contra o indeferimento da inicial (artigos 321, parágrafo único, e 485, I, do CPC) [VALIDAR paradigma: emenda determinada e não cumprida?] [VALIDAR: teor da determinação de emenda]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença (ID 393620576); apelação (ID 393620578); contrarrazões da União (ID 393620834); MPF não intervirá (ID 393620577).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -4095,11 +4095,42 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "393620576"
+    },
+    {
+     "peca": "Apelação",
+     "id": "393620578"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "393620834"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "393620577"
+    }
+   ],
+   "mpf": "parecer ID 393620577 (06/08/2026)",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Saúde — fornecimento de medicamento",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 393620576 (05/08/2026)",
+    "recurso": "apelação (ID 393620578, 15/08/2026)",
+    "preparo": "[VALIDAR]",
+    "representacao": "[VALIDAR]",
+    "mpf": "parecer ID 393620577 (06/08/2026)",
+    "autos": "35 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] teor da determinação de emenda"
+   ],
    "minuta": false
   },
   {
@@ -4113,11 +4144,11 @@
    "assunto": "PIS",
    "assunto_detalhado": "",
    "grupo": "assunto-2",
-   "tipo_caso": "PIS",
-   "resultado": "",
+   "tipo_caso": "Benefícios fiscais de ICMS na base do IRPJ/CSLL/PIS/COFINS · MS denegado",
+   "resultado": "Proposta: APTO — apelação da impetrante contra a denegação (benefícios de ICMS e Lei 14.789/2023; Tema 1.182/STJ) [VALIDAR paradigma: lote IRPJ/CSLL · benefícios fiscais de ICMS da sessão de 30/11/2026]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença denegou a segurança (ID 371447685); embargos rejeitados (ID 371447694); apelação (ID 371447696); contrarrazões (ID 371447700); MPF sem manifestação de mérito.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -4126,9 +4157,46 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "371447685"
+    },
+    {
+     "peca": "Embargos de declaração",
+     "id": "371447691"
+    },
+    {
+     "peca": "Apelação",
+     "id": "371447696"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "371447700"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "371447684"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "374413263"
+    }
+   ],
+   "mpf": "parecer ID 374413263 (18/05/2026)",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Tributário — PIS/COFINS e benefícios de ICMS",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 371447685 (07/02/2025)",
+    "recurso": "embargos de declaração (ID 371447691, 16/03/2025); apelação (ID 371447696, 02/03/2026)",
+    "preparo": "comprovante juntado (ID 371447697, 371447698) — conferir o tipo",
+    "representacao": "procuração/substabelecimento ID 371447561",
+    "mpf": "parecer ID 374413263 (18/05/2026)",
+    "autos": "50 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false
@@ -4144,11 +4212,11 @@
    "assunto": "Residência Médica",
    "assunto_detalhado": "",
    "grupo": "assunto-36",
-   "tipo_caso": "Residência Médica",
-   "resultado": "",
+   "tipo_caso": "Residência médica (UNIDERP) · MS denegado",
+   "resultado": "Proposta: APTO — apelação do impetrante contra a denegação [VALIDAR paradigma e objeto exato] [VALIDAR: embargos de declaração de 09/03/2024 (ID 301148335): anteriores à sentença?]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença denegou a segurança (ID 301148358; repetida no ID 301148359); apelação (ID 301148361); contrarrazões (ID 301148366); MPF sem manifestação de mérito.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -4157,11 +4225,42 @@
     "correcao": "Vanilda",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "301148359"
+    },
+    {
+     "peca": "Apelação",
+     "id": "301148361"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "301148366"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "301377001"
+    }
+   ],
+   "mpf": "parecer ID 301377001 (22/08/2024)",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — ensino superior",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 301148359 (08/07/2024)",
+    "recurso": "apelação (ID 301148361, 29/07/2024)",
+    "preparo": "[VALIDAR]",
+    "representacao": "procuração/substabelecimento ID 301148166, 301148349, 301148350",
+    "mpf": "parecer ID 301377001 (22/08/2024)",
+    "autos": "64 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] embargos de declaração de 09/03/2024 (ID 301148335): anteriores à sentença?"
+   ],
    "minuta": false
   },
   {
@@ -4175,11 +4274,11 @@
    "assunto": "Colação de Grau",
    "assunto_detalhado": "",
    "grupo": "assunto-20",
-   "tipo_caso": "Colação de Grau",
-   "resultado": "",
+   "tipo_caso": "Colação de grau (Anhanguera/UNIDERP) · reprovação · MS denegado",
+   "resultado": "Proposta: APTO — apelação da impetrante contra a denegação (reprovação e colação de grau) [VALIDAR paradigma] [VALIDAR: sentido do parecer ID 312773087]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença denegou a segurança (ID 312563465); embargos decididos (ID 312563471); apelação (ID 312563473); contrarrazões (ID 312563478); parecer do MPF (ID 312773087).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -4188,11 +4287,50 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "312563465"
+    },
+    {
+     "peca": "Embargos de declaração",
+     "id": "312563468"
+    },
+    {
+     "peca": "Apelação",
+     "id": "312563473"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "312563470"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "312563478"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "312773087"
+    }
+   ],
+   "mpf": "parecer ID 312773087 (30/01/2025)",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — ensino superior",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 312563465 (16/08/2024)",
+    "recurso": "embargos de declaração (ID 312563468, 26/08/2024); apelação (ID 312563473, 12/12/2024)",
+    "preparo": "[VALIDAR]",
+    "representacao": "procuração/substabelecimento ID 312563434, 312563461, 312563462",
+    "mpf": "parecer ID 312773087 (30/01/2025)",
+    "autos": "62 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] sentido do parecer ID 312773087"
+   ],
    "minuta": false
   },
   {
@@ -4206,11 +4344,11 @@
    "assunto": "Exames de certificação - Diploma",
    "assunto_detalhado": "",
    "grupo": "assunto-24",
-   "tipo_caso": "Exames de certificação - Diploma",
-   "resultado": "",
+   "tipo_caso": "Abreviação de curso superior (FATECIE/União) · improcedência",
+   "resultado": "Proposta: APTO — apelação do autor contra a improcedência do pedido de conclusão antecipada ou banca especial (artigo 47, § 2º, da Lei 9.394/1996) [VALIDAR paradigma]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença improcedente, honorários de 10% suspensos (ID 372869734); apelação (ID 372869735); contrarrazões (ID 372869738).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -4219,9 +4357,34 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "372869734"
+    },
+    {
+     "peca": "Apelação",
+     "id": "372869735"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "372869738"
+    }
+   ],
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — ensino superior",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 372869734 (03/02/2026)",
+    "recurso": "apelação (ID 372869735, 26/02/2026)",
+    "preparo": "[VALIDAR]",
+    "representacao": "procuração/substabelecimento ID 372868988, 372869023, 372869024",
+    "mpf": "Não consta parecer",
+    "autos": "62 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false
@@ -4237,11 +4400,11 @@
    "assunto": "Acesso sem conclusão do Ensino Médio",
    "assunto_detalhado": "",
    "grupo": "assunto-10",
-   "tipo_caso": "Acesso sem conclusão do Ensino Médio",
-   "resultado": "",
+   "tipo_caso": "Ingresso no ensino superior sem conclusão do ensino médio (UFMS) · fato consumado",
+   "resultado": "Proposta: APTO — apelação da UFMS contra a procedência (inscrição na seleção sem conclusão do ensino médio); examinar a teoria do fato consumado [VALIDAR paradigma]. Já foi retirado de pauta em 30/01/2026 [VALIDAR: motivo da retirada de pauta em 30/01/2026 e se foi superado]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença procedente, com tutela confirmada (ID 285125799); apelação (ID 285125801); contrarrazões da DPU (ID 285125804); \"Deliberado em Sessão - Retirado\" em 30/01/2026.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -4250,11 +4413,38 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "285125800"
+    },
+    {
+     "peca": "Apelação",
+     "id": "285125801"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "285125804"
+    }
+   ],
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — ensino superior",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 285125800 (31/10/2023)",
+    "recurso": "apelação (ID 285125801, 13/11/2023)",
+    "preparo": "[VALIDAR]",
+    "representacao": "[VALIDAR]",
+    "mpf": "Não consta parecer",
+    "autos": "53 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] motivo da retirada de pauta em 30/01/2026 e se foi superado"
+   ],
    "minuta": false
   },
   {
@@ -4268,11 +4458,11 @@
    "assunto": "PIS",
    "assunto_detalhado": "",
    "grupo": "assunto-2",
-   "tipo_caso": "PIS",
-   "resultado": "",
+   "tipo_caso": "Exclusão de ICMS (creditamento/benefícios) da base do PIS/COFINS · MS denegado",
+   "resultado": "Proposta: APTO — apelação da impetrante contra a denegação [VALIDAR paradigma: matéria do lote IRPJ/CSLL · benefícios fiscais de ICMS] [VALIDAR: objeto exato: assunto do PJe (PIS) × DataJud (ICMS/creditamento)]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença denegou a segurança (ID 357866606); apelação (ID 357866609); contrarrazões (ID 357866613); MPF sem manifestação de mérito (ID 358509940).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -4281,11 +4471,46 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "357866606"
+    },
+    {
+     "peca": "Apelação",
+     "id": "357866609"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "357866613"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "357866605"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "358509940"
+    }
+   ],
+   "mpf": "parecer ID 358509940 (06/03/2026)",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Tributário — PIS/COFINS e benefícios de ICMS",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 357866606 (14/01/2026)",
+    "recurso": "apelação (ID 357866609, 12/02/2026)",
+    "preparo": "comprovante juntado (ID 357866610, 357866611) — conferir o tipo",
+    "representacao": "procuração/substabelecimento ID 357866163",
+    "mpf": "parecer ID 358509940 (06/03/2026)",
+    "autos": "63 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] objeto exato: assunto do PJe (PIS) × DataJud (ICMS/creditamento)"
+   ],
    "minuta": false
   },
   {
@@ -4299,11 +4524,11 @@
    "assunto": "PIS",
    "assunto_detalhado": "",
    "grupo": "assunto-2",
-   "tipo_caso": "PIS",
-   "resultado": "",
+   "tipo_caso": "Crédito presumido de ICMS na base do PIS/COFINS · Tema 843/STF",
+   "resultado": "Proposta: PENDENTE — processo suspenso até o julgamento do Tema 843/STF (decisão ID 344053096, 10/12/2025; movimento de suspensão por RE com repercussão geral); agravo interno da Fazenda (ID 358514131) e contrarrazões pedindo o sobrestamento (ID 359145383); conferir se o tema foi julgado ou se a pauta é só do agravo interno [VALIDAR: situação do Tema 843/STF; objeto do agravo interno ID 358514131]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença concedeu a segurança (ID 343870809); apelação da União (ID 343870812); contrarrazões (ID 343870814).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -4312,11 +4537,47 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Decisão recorrida",
+     "id": "344053096"
+    },
+    {
+     "peca": "Agravo interno",
+     "id": "358514131"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "359145383"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "343870807"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "344006120"
+    }
+   ],
+   "mpf": "parecer ID 344006120 (19/11/2025)",
+   "triagem": {
+    "ato": "Agravo interno (voto) [VALIDAR]",
+    "materia": "Tributário — PIS/COFINS e benefícios de ICMS",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Decisão ID 344053096 (10/12/2025)",
+    "recurso": "agravo interno (ID 358514131, 06/03/2026)",
+    "preparo": "[VALIDAR]",
+    "representacao": "procuração/substabelecimento ID 343870121, 343870130, 343870131",
+    "mpf": "parecer ID 344006120 (19/11/2025)",
+    "autos": "62 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] situação do Tema 843/STF",
+    "[VALIDAR] objeto do agravo interno ID 358514131"
+   ],
    "minuta": false
   },
   {
@@ -4330,11 +4591,11 @@
    "assunto": "PIS",
    "assunto_detalhado": "",
    "grupo": "assunto-2",
-   "tipo_caso": "PIS",
-   "resultado": "",
+   "tipo_caso": "PIS/COFINS (Alcoolvale) · inexistência de relação jurídica · apelação da União e remessa",
+   "resultado": "Proposta: APTO — apelação da União (preliminar de sentença extra petita; mérito) e remessa contra a concessão da segurança, integrada nos embargos (ID 317852232) [VALIDAR paradigma] [VALIDAR: apelação ID 317852179 (anterior aos embargos): ratificada?]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença integrada (ID 317852232); apelações IDs 317852179 e 317852234; contrarrazões (ID 317852236); MPF sem manifestação de mérito.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -4343,11 +4604,46 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "317852232"
+    },
+    {
+     "peca": "Apelação",
+     "id": "317852234"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "317852236"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "317852170"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "318266381"
+    }
+   ],
+   "mpf": "parecer ID 318266381 (20/03/2025)",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Tributário — PIS/COFINS e benefícios de ICMS",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 317852232 (06/02/2025)",
+    "recurso": "apelação (ID 317852234, 18/02/2025)",
+    "preparo": "[VALIDAR]",
+    "representacao": "procuração/substabelecimento ID 317852069",
+    "mpf": "parecer ID 318266381 (20/03/2025)",
+    "autos": "55 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] apelação ID 317852179 (anterior aos embargos): ratificada?"
+   ],
    "minuta": false
   },
   {
@@ -4361,11 +4657,11 @@
    "assunto": "PIS",
    "assunto_detalhado": "",
    "grupo": "assunto-2",
-   "tipo_caso": "PIS",
-   "resultado": "",
+   "tipo_caso": "ICMS na base do PIS/COFINS (créditos na revenda) · MS denegado",
+   "resultado": "Proposta: APTO — apelação da impetrante contra a denegação (exclusão do ICMS do valor de aquisição para créditos de PIS/COFINS; Lei 14.592/2023 e Tema 1.231/STJ) [VALIDAR paradigma]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença denegou a segurança (ID 302325666); embargos rejeitados (ID 302325677); apelação (ID 302325732); contrarrazões (ID 302325739).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -4374,9 +4670,46 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "302325666"
+    },
+    {
+     "peca": "Embargos de declaração",
+     "id": "302325672"
+    },
+    {
+     "peca": "Apelação",
+     "id": "302325732"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "302325739"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "302325664"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "302606001"
+    }
+   ],
+   "mpf": "parecer ID 302606001 (02/09/2024)",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Tributário — PIS/COFINS e benefícios de ICMS",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 302325666 (29/04/2024)",
+    "recurso": "embargos de declaração (ID 302325672, 08/05/2024); apelação (ID 302325732, 20/08/2024)",
+    "preparo": "comprovante juntado (ID 302325654, 302325655) — conferir o tipo",
+    "representacao": "procuração/substabelecimento ID 302325643",
+    "mpf": "parecer ID 302606001 (02/09/2024)",
+    "autos": "99 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false
@@ -4392,11 +4725,11 @@
    "assunto": "ICMS/ Importação",
    "assunto_detalhado": "",
    "grupo": "assunto-26",
-   "tipo_caso": "ICMS/ Importação",
-   "resultado": "",
+   "tipo_caso": "ICMS-importação na base do PIS/COFINS-importação · MS denegado",
+   "resultado": "Proposta: APTO — apelação da impetrante contra a denegação (ICMS na base do PIS/COFINS-importação) [VALIDAR paradigma e tema aplicável] [VALIDAR: tese e tema aplicável]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença denegou a segurança (ID 321983354); apelação (ID 321983360); contrarrazões (ID 321983363); MPF sem manifestação de mérito (ID 322479552).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -4405,11 +4738,46 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "321983354"
+    },
+    {
+     "peca": "Apelação",
+     "id": "321983360"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "321983363"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "321983352"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "322479552"
+    }
+   ],
+   "mpf": "parecer ID 322479552 (28/04/2025)",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Tributário — PIS/COFINS e benefícios de ICMS",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 321983354 (30/01/2025)",
+    "recurso": "apelação (ID 321983360, 21/03/2025)",
+    "preparo": "comprovante juntado (ID 321983341, 321983361) — conferir o tipo",
+    "representacao": "procuração/substabelecimento ID 321983334",
+    "mpf": "parecer ID 322479552 (28/04/2025)",
+    "autos": "43 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] tese e tema aplicável"
+   ],
    "minuta": false
   },
   {
@@ -4423,11 +4791,11 @@
    "assunto": "Contribuições Sociais",
    "assunto_detalhado": "",
    "grupo": "assunto-6",
-   "tipo_caso": "Contribuições Sociais",
-   "resultado": "",
+   "tipo_caso": "Contribuições sociais · MS denegado",
+   "resultado": "Proposta: APTO — apelação da impetrante contra a denegação [VALIDAR paradigma e tese] [VALIDAR: tese da impetração]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença denegou a segurança (ID 309827909); apelação (ID 309827915); contrarrazões (ID 309827919); MPF sem manifestação de mérito (ID 310137854).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -4436,11 +4804,50 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "309827909"
+    },
+    {
+     "peca": "Apelação",
+     "id": "309827915"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "309827919"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "309827907"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "309827911"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "310137854"
+    }
+   ],
+   "mpf": "parecer ID 310137854 (12/12/2024)",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Tributário — contribuições",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 309827909 (30/08/2024)",
+    "recurso": "apelação (ID 309827915, 27/11/2024)",
+    "preparo": "comprovante juntado (ID 309827895, 309827916, 309827917) — conferir o tipo",
+    "representacao": "procuração/substabelecimento ID 309827887",
+    "mpf": "parecer ID 310137854 (12/12/2024)",
+    "autos": "46 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] tese da impetração"
+   ],
    "minuta": false
   },
   {
