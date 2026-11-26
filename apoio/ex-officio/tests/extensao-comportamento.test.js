@@ -71,11 +71,11 @@ test('painel: abre o processo com sigla, etapas, roteiros e notas; sem erro de s
     assert.deepEqual(P.erros, [], 'sem erro de script');
     /* Roteiro de produção: perfil acórdão, sem Pauta e julgamento (está na aba Pauta) */
     await pg.click('.hero-main-tabs [data-rot="pro"]');
-    await pg.waitForSelector('.hero-minuta-roteiro', { timeout: 15000 });
+    await pg.waitForSelector('.hero-route-production', { timeout: 15000 });
     assert.equal(await pg.getAttribute('.hero-main-tabs [data-rot="pro"]','aria-selected'),'true');
-    const prod = await pg.$$eval('.hero-minuta-secao[data-cc]', L => L.map(x => x.getAttribute('data-cc')));
+    const prod = await pg.$$eval('.hero-route-production [data-cc^="minuta-"]', L => L.map(x => x.getAttribute('data-cc')));
     assert.deepEqual(prod,['minuta-relatorio','minuta-questoes','minuta-solucao','minuta-fundamentacao','minuta-sucumbencia','minuta-dispositivo']);
-    await pg.click('.hero-minuta-nav-steps [data-minuta-nav="solucao"]');
+    await pg.click('.hero-route-production [data-minuta-nav="step:solucao"]');
     await pg.waitForSelector('#pv-julgamento', { timeout: 15000 });
     assert.ok((await botoes(pg)).includes('Desprovido'), 'resultado de recurso na seção Solução');
     assert.equal(await pg.$$eval('.gbody [data-fk="producao.Destino"]', L=>L.length),0,'destino não se repete no roteiro');
@@ -120,11 +120,18 @@ async function abrirUniversal(op) {
   await P.pg.evaluate(cnj => { window.chrome.storage.session.set({ 'aba:1': { numero: cnj, classe: 'ApCiv', tarefa: '[Sessão] Aguardando a sessão', ctx: '', ed: false, lib: '' } }); }, CNJ);
   await P.pg.waitForSelector('.hero-main-tabs [data-rot="pro"]', { timeout: 15000 });
   await P.pg.click('.hero-main-tabs [data-rot="pro"]');
-  await P.pg.waitForSelector('.hero-minuta-roteiro', { timeout: 15000 });
-  await P.pg.click('.hero-minuta-nav-steps [data-minuta-nav="solucao"]');
+  await P.pg.waitForSelector('.hero-route-production', { timeout: 15000 });
+  await P.pg.click('.hero-route-production [data-minuta-nav="step:solucao"]');
   await P.pg.waitForSelector('#pv-julgamento', { timeout: 15000 });
   return P;
   } catch(e) { const diagnostico = await P.pg.evaluate(() => ({ abas: [...document.querySelectorAll('.hero-main-tabs button')].map(x=>[x.textContent,x.getAttribute('aria-selected')]), corpo: document.querySelector('.gbody')?.innerText?.slice(0,800) || '', gabinete: document.querySelector('#gab')?.innerText?.slice(0,800) || '' })).catch(()=>({})); await P.fim(); throw new Error(e.message+'\nErros da página: '+P.erros.join('\n')+'\nEstado: '+JSON.stringify(diagnostico),{cause:e}); }
+}
+async function abrirEncaminhamento(pg) {
+  for (const id of ['hero-ger-dock', 'hero-enc-dock']) {
+    const dock = pg.locator('#' + id);
+    await dock.waitFor({ state: 'visible' });
+    if (!(await dock.evaluate(e => e.open))) await dock.locator(':scope > summary').click();
+  }
 }
 const RJ = '[data-fk="producao.Voto - Resultado"],[data-ch="producao.Voto - Resultado"]';
 const botoes = pg => pg.$$eval('#pv-julgamento :is(' + RJ + ')', L => L.map(x => x.tagName === 'SELECT' ? [].map.call(x.options, o => o.value).filter(Boolean) : [x.getAttribute('data-v')]).flat());
@@ -134,7 +141,9 @@ test('universal: Julgamento do acórdão — resultado de recurso, tese e preced
   try {
     const { pg } = P;
     assert.match(await pg.textContent('#pv-julgamento'), /Solução do julgamento/);
+    await pg.click('[data-minuta-nav="step:fundamentacao"]');
     assert.ok(await pg.$('[data-cc="minuta-fundamentacao"] [data-fk="producao.Tese jurídica adotada"]'), 'tese na Fundamentação');
+    await pg.click('[data-minuta-nav="step:solucao"]');
     assert.equal(await pg.$$eval('#hero-encaminhamento [data-fk="triagem.Hipóteses Monocrática"]', L=>L.length),0,'sem art. 932 em acórdão');
     const R = await botoes(pg);
     assert.ok(R.includes('Desprovido') && !R.includes('Deferido'), 'opções de recurso: ' + R.join(', '));
@@ -150,8 +159,10 @@ test('universal: Julgamento da monocrática e da urgência — hipótese do art.
   const P = await abrirUniversal(op);
   try {
     const { pg } = P;
-    await pg.click('.hero-main-tabs [data-rot="tri"]');assert.ok(await pg.$('#hero-encaminhamento [data-fk="triagem.Hipóteses Monocrática"]'), 'art. 932 no Encaminhamento');await pg.click('.hero-main-tabs [data-rot="pro"]');await pg.click('.hero-minuta-nav-steps [data-minuta-nav="solucao"]');
+    await pg.click('.hero-main-tabs [data-rot="tri"]');await abrirEncaminhamento(pg);assert.ok(await pg.$('#hero-encaminhamento [data-fk="triagem.Hipóteses Monocrática"]'), 'art. 932 no Encaminhamento');await pg.click('.hero-main-tabs [data-rot="pro"]');await pg.click('.hero-route-production [data-minuta-nav="step:solucao"]');
+    await pg.click('[data-minuta-nav="step:fundamentacao"]');
     assert.ok(await pg.$('[data-cc="minuta-fundamentacao"] [data-fk="producao.Mono - Fundamento"]'), 'precedente ou fundamento na Fundamentação');
+    await pg.click('[data-minuta-nav="step:solucao"]');
     assert.ok((await botoes(pg)).includes('Desprovido'));
     if (process.env.HERO_FOTO) await pg.screenshot({ path: process.env.HERO_FOTO + '-mono.png', fullPage: true });
     assert.deepEqual(P.erros, [], 'sem erro de script');
@@ -177,7 +188,8 @@ test('universal v53: Encaminhamento na Triagem, Monitoramento e sinalizações n
     await pg.click('.hero-main-tabs [data-rot="tri"]');
     /* Encaminhamento é a segunda face do prontuário (seta ›), não aba do rodapé */
     assert.ok(!(await pg.$('#hero-dock-tab-acompanhamento')), 'sem a aba Encaminhamento no rodapé');
-    await pg.waitForSelector('.gbody #hero-encaminhamento', { state: 'visible', timeout: 15000 });
+    await abrirEncaminhamento(pg);
+    await pg.waitForSelector('#hero-enc-dock #hero-encaminhamento', { state: 'visible', timeout: 15000 });
     assert.equal(await pg.getAttribute('.hero-main-tabs [data-rot="tri"]', 'aria-selected'), 'true', 'Encaminhamento na Triagem');
     assert.ok(await pg.$('#hero-encaminhamento [data-fk="producao.Destino"]'), 'destino no Encaminhamento');
     assert.equal(await pg.inputValue('#hero-encaminhamento [data-fk="triagem.Seleção Prévia"]'),'SELECIONADO PREVIAMENTE');
@@ -265,9 +277,10 @@ test('universal v53: quatro subabas, sinalizações na barra, cinco páginas no 
     await pg.click('.hero-v53-dock-tabs [data-hero-dock=""]');
     assert.ok(v.frase <= 1, 'sem a frase repetida');
     await pg.evaluate(() => [...document.querySelectorAll('button')].find(b => b.offsetParent && b.textContent.trim() === 'Triagem').click());
-    await pg.waitForSelector('.hero-v53-autos-link', { timeout: 15000 });
+    await abrirEncaminhamento(pg);
+    await pg.waitForSelector('#hero-enc-dock .hero-v53-autos-link', { timeout: 15000 });
     assert.equal(await pg.$$eval('[data-au="ler"]', L => L.filter(x => x.offsetParent).length), 0, 'na Triagem, só o aviso');
-    await pg.click('.hero-v53-autos-link');
+    await pg.click('#hero-enc-dock .hero-v53-autos-link');
     await pg.waitForSelector('#g-lei [data-au="ler"]', { timeout: 15000 });
     assert.deepEqual(P.erros, [], 'sem erro de script');
   } finally { await P.fim(); }
@@ -286,7 +299,7 @@ test('universal 0.73.5: Controle dentro dos Ajustes, Gerador na Produção e cab
     assert.match(await pg.evaluate(() => document.getElementById('pv-ajustes-ctl').innerText), /Prazos/);
     await pg.evaluate(() => document.getElementById('pv-ajustes-ok').click());
     await pg.evaluate(() => window.MutaGabinete.irGerador());
-    await pg.waitForSelector('.hero-v53-gerador #ger-app :is(.gr-doc,.hero-ger-sheet)', { timeout: 10000 });
+    await pg.waitForSelector('#hero-ger-dock[open] #ger-app :is(.gr-doc,.hero-ger-sheet)', { timeout: 10000 });
     assert.equal(await pg.evaluate(() => document.querySelectorAll('#ger-app').length), 1);
     assert.match(await pg.evaluate(() => document.getElementById('ger-app').innerText), /RELATÓRIO|Relatório/);
     assert.equal(await pg.locator('#panel-min #ger-app').count(),0,'Corretor não tem o Gerador');
