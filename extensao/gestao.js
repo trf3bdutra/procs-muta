@@ -117,6 +117,9 @@
       '<span class="gx-fb"><button type="button" class="lnk" data-gx="' + (nova ? 'cancelar-nova' : 'cancelar-ed') + '"' + (nova ? '' : ' data-id="' + esc(t.id) + '"') + '>cancelar</button><button type="submit" class="btn solid sm">' + (nova ? 'Criar diligência' : 'Gravar') + '</button></span></form>';
   }
   function metricasCmt(M,extra){return '<div class="hero-cmt-gestion-metrics '+(extra||'')+'">'+M.map(function(x){return '<div data-stage="'+x[0]+'"><b>'+esc(x[2])+'</b><small>'+esc(x[1])+'</small>'+(x[3]?'<small>'+esc(x[3])+'</small>':'')+'</div>';}).join('')+'</div>';}
+  function painelGestao(titulo,subtitulo,acoes,metricas,filtros){
+    return '<section class="hero-cmt-gestion"><div class="gx-top"><div><b>'+esc(titulo)+'</b><small class="muted">'+esc(subtitulo)+'</small></div><span>'+ (acoes||'')+'</span></div>'+(metricas||'')+(filtros||'')+'</section>';
+  }
   function pintarDil() {
     var c = $('dil-app'); if (!c) return;
     var q = quem();
@@ -140,8 +143,7 @@
     }).join('');
     var tab = function (k, r) { return '<button type="button" role="tab" data-gx-f="' + k + '" aria-selected="' + (D.f === k) + '">' + r + ' <i>' + n[k] + '</i></button>'; };
     var acesso='<a class="gx-nav-action" target="_blank" rel="noopener" title="Abrir no Ex Officio" aria-label="Abrir no Ex Officio" href="'+esc(site())+(q.des&&!q.gestor?'/cmt/':'/exofficio/#pendencias')+'"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 5h6v6M19 5l-9 9M19 13v6H5V5h6"/></svg></a>';
-    c.innerHTML = '<section class="hero-cmt-gestion"><div class="gx-top"><div><b>Diligências</b><small class="muted">quadro da equipe no Ex Officio</small></div><span><button type="button" class="btn sm" data-gx="nova"' + (D.nova ? ' hidden' : '') + '>+ Nova</button></span></div>' +
-      metricas+filtros+'</section>'+faixaGestao('Filtro das diligências',tab('comigo','Comigo')+tab('criei','Que criei')+tab('todas','Todas'),'ler-dil',D.lendo,acesso) +
+    c.innerHTML = painelGestao('Diligências','Quadro da equipe', '<button type="button" class="btn sm" data-gx="nova"'+(D.nova?' hidden':'')+'>+ Nova</button>',metricas,filtros)+faixaGestao('Filtro das diligências',tab('comigo','Comigo')+tab('criei','Que criei')+tab('todas','Todas'),'ler-dil',D.lendo,acesso) +
       (D.nova ? formDil() : '') +
       (D.msg ? '<p class="gx-msg' + (/^Não|erro/i.test(D.msg) ? ' err' : '') + '">' + esc(D.msg) + '</p>' : '') +
       (D.erro ? '<p class="gx-v err">' + esc(D.erro) + '</p>' : !D.lista ? '<p class="muted gx-v">Lendo o quadro…</p>' :
@@ -262,7 +264,8 @@
     var tab=function(k,r,d){return '<button type="button" role="tab" data-gx-a="'+k+'" aria-selected="'+(X.aba===k)+'" title="'+esc(d)+'">'+esc(r)+' <i>'+L[k].length+'</i></button>';};
     var corpo = X.aba==='pe'?grupoDel('Retiradas de pauta',L.pe.filter(function(x){return x.tipo==='retirada';}),itemPe,'Nenhum pedido em aberto.','pendente')+grupoDel('Adiamentos',L.pe.filter(function(x){return x.tipo!=='retirada';}),itemPe,'Nenhum pedido em aberto.','pendente'):
       grupoDel('Dúvidas em aberto',L.du,itemDu,'Nenhuma dúvida em aberto dirigida a você.','pendente');
-    c.innerHTML = faixaGestao('Tipo de deliberação',tab('du','Dúvidas','dúvidas da equipe')+tab('pe','Pauta','pedidos de retirada e de adiamento'),'ler-del',X.lendo) +
+    var metDel=X.dados?metricasCmt([['total','Em aberto',L.du.length+L.pe.length],['priority','Dúvidas',L.du.length],['lib','Pedidos de pauta',L.pe.length]]):'';
+    c.innerHTML = painelGestao('Deliberações','Dúvidas e pedidos de pauta','',metDel,'')+faixaGestao('Tipo de deliberação',tab('du','Dúvidas','dúvidas da equipe')+tab('pe','Pauta','pedidos de retirada e de adiamento'),'ler-del',X.lendo) +
       (X.msg ? '<p class="gx-msg' + (/^Não/.test(X.msg) ? ' err' : '') + '">' + esc(X.msg) + '</p>' : '') +
       (X.erro ? '<p class="gx-v err">' + esc(X.erro) + '</p>' : !X.dados ? '<p class="muted gx-v">Lendo…</p>' : corpo);
   }
@@ -272,8 +275,8 @@
     var L=listas();
     var totalUrg=L.as.map(function(a){return Object.assign({},a,a.urg||{});}).concat(L.urg);
     var metUrg=metricasCmt([['total','Em aberto',totalUrg.length],['late','Sem responsável',totalUrg.filter(function(a){return !a.servidor;}).length],['priority','Em minuta',L.urg.filter(function(a){return !!a.servidor&&!a.dataMinuta&&!a.assinado;}).length],['lib','Em revisão / assinatura',L.as.length+L.urg.filter(function(a){return !!(a.dataMinuta||a.assinado);}).length]],'urg-metrics');
-    var corpo='<section class="hero-cmt-gestion">'+metUrg+'</section>'+grupoDel('01 · Chegou',L.urg.filter(function(a){return !a.servidor&&!a.dataMinuta&&!a.assinado;}),itemUrg,'Nenhuma urgência sem responsável.','urgente')+grupoDel('02 · Em minuta',L.urg.filter(function(a){return !!a.servidor&&!a.dataMinuta&&!a.assinado;}),itemUrg,'Nenhuma urgência em minuta.','urgente')+grupoDel('03 · Revisão e assinatura',L.urg.filter(function(a){return !!(a.dataMinuta||a.assinado);}),itemUrg,'Nenhuma urgência em revisão.','urgente')+grupoDel('Para assinatura',L.as,itemAs,'Nenhuma decisão urgente submetida à assinatura.','urgente');
-    c.innerHTML='<div class="gx-top"><div><b>Urgências</b><small class="muted">Providências em aberto · '+esc(X.dados&&X.dados.hoje?data(X.dados.hoje):'')+'</small></div><button type="button" class="lnk" data-gx="ler-del">'+(X.lendo?'lendo…':'atualizar')+'</button></div>'+(X.msg?'<p class="gx-msg">'+esc(X.msg)+'</p>':'')+(X.erro?'<p class="gx-v err">'+esc(X.erro)+'</p>':!X.dados?'<p class="muted gx-v">Lendo…</p>':corpo);
+    var corpo=grupoDel('01 · Chegou',L.urg.filter(function(a){return !a.servidor&&!a.dataMinuta&&!a.assinado;}),itemUrg,'Nenhuma urgência sem responsável.','urgente')+grupoDel('02 · Em minuta',L.urg.filter(function(a){return !!a.servidor&&!a.dataMinuta&&!a.assinado;}),itemUrg,'Nenhuma urgência em minuta.','urgente')+grupoDel('03 · Revisão e assinatura',L.urg.filter(function(a){return !!(a.dataMinuta||a.assinado);}),itemUrg,'Nenhuma urgência em revisão.','urgente')+grupoDel('Para assinatura',L.as,itemAs,'Nenhuma decisão urgente submetida à assinatura.','urgente');
+    c.innerHTML=painelGestao('Urgências','Providências em aberto'+(X.dados&&X.dados.hoje?' · '+data(X.dados.hoje):''),atualizaBtn('ler-del',X.lendo),X.dados?metUrg:'','')+(X.msg?'<p class="gx-msg">'+esc(X.msg)+'</p>':'')+(X.erro?'<p class="gx-v err">'+esc(X.erro)+'</p>':!X.dados?'<p class="muted gx-v">Lendo…</p>':corpo);
   }
   function pintarGab(){
     var c=$('gab-app');if(!c)return;if(!pode(quem())){c.textContent='Acesso restrito ao Desembargador e ao gestor.';return;}
