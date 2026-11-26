@@ -352,6 +352,32 @@ async function espelho(arqPauta, cnj, campos, cartao, msg, u) {
   if (out.length) { regras(r, out, u); doc.atualizado_em = agora(); arqs.push({ path: OP, txt: JSON.stringify(doc, null, 1) + '\n', sha }); }
   return commitConferido(arqs, msg + (out.length ? '\n\nFicha (operacional): ' + out.slice(0, 12).join(', ') : ''));
 }
+/* Vínculos de pesquisa: metadados operacionais geridos exclusivamente por esta ação.
+   Identidade conservadora: uma questão alterada não recebe vínculo de outra por posição. */
+const FUND_KEY='_fundamentacaoVinculos', FUND_TIPOS=['Precedente','Parágrafo','Modelo','Dispositivo legal'];
+function fundErro(msg,status=400){const e=new Error(msg);e.status=status;throw e;}
+function fundIdent(q){return ['ordem','questao','id_recurso'].map(k=>String(q&&q[k]||'').trim());}
+function fundQuestao(reg,ident){const qs=(reg.triagem||{})['Questões jurídicas individualizadas'];return (Array.isArray(qs)?qs:[]).filter(q=>JSON.stringify(fundIdent(q))===JSON.stringify(ident));}
+function fundLista(reg){const v=(reg&&reg.producao||{})[FUND_KEY];return Array.isArray(v)?v:[];}
+function fundVista(reg){return fundLista(reg).map(x=>Object.assign({},x,{questaoVigente:fundQuestao(reg,x.questao).length===1}));}
+function fundAplicar(reg,b,u,now){
+ const L=fundLista(reg).slice(),h=String(b.acao||'');let changed=false;
+ if(h==='vincular'){
+  const ident=fundIdent(b.questao),m=b.material||{},tipo=String(m.tipo||''),id=String(m.id||'').trim(),titulo=String(m.titulo||'').trim();
+  if(!ident[1]||ident.some(x=>x.length>4000)||fundQuestao(reg,ident).length!==1)fundErro('Questão não localizada de forma inequívoca. Grave e confira a ficha antes de vincular.',409);
+  if(!FUND_TIPOS.includes(tipo)||!id||id.length>500||!titulo||titulo.length>600)fundErro('Material inválido.');
+  const key=require('node:crypto').createHash('sha256').update(JSON.stringify([ident,tipo,id])).digest('hex');
+  if(!L.some(x=>x.id===key)){if(L.length>=150)fundErro('Limite de 150 vínculos por processo.');L.push({id:key,questao:ident,material:{tipo,id,titulo},estado:'Pesquisa',uso:'',autor:u,criadoEm:now,atualizadoPor:u,atualizadoEm:now,versao:1,historico:[]});changed=true;}
+ }else if(h==='situacao'){
+  const i=L.findIndex(x=>x.id===b.id),x=L[i];if(!x)fundErro('Vínculo não encontrado.',404);
+  if(x.versao!==b.versao)fundErro('O vínculo foi alterado por outro usuário. Atualize a lista.',409);
+  const estado=String(b.estado||''),uso=estado==='Adotado'?String(b.uso||''):'',nota=String(b.nota||'').trim();
+  if(!['Pesquisa','Adotado','Descartado'].includes(estado)||estado==='Adotado'&&!['Fundamentação','Dispositivo','Ambos'].includes(uso)||nota.length>1000)fundErro('Situação ou utilização inválida.');
+  if(estado==='Adotado'&&fundQuestao(reg,x.questao).length!==1)fundErro('Questão alterada ou excluída. Refaça o vínculo antes de adotar.',409);
+  if(x.estado!==estado||x.uso!==uso||String(x.nota||'')!==nota){L[i]=Object.assign({},x,{estado,uso,nota,atualizadoPor:u,atualizadoEm:now,versao:x.versao+1,historico:(x.historico||[]).concat({estado:x.estado,uso:x.uso,nota:x.nota||'',por:x.atualizadoPor,em:x.atualizadoEm}).slice(-20)});changed=true;}
+ }else fundErro('Operação desconhecida.');
+ if(changed){reg.producao=reg.producao||{};reg.producao[FUND_KEY]=L;}return changed;
+}
 module.exports = async (req, res, u) => {
   try {
     const F = await ficha(), perfil = await L.acessos(u).catch(() => ({desembargador:false}));
@@ -384,6 +410,13 @@ module.exports = async (req, res, u) => {
       return res.status(200).json({ ficha: F, operacional: op, fonte, sinais, equipe, devolutivas, devolutivasErro, desembargador: !!perfil.desembargador, gestor: L.gestor(u), controles: ativos(op, { metas: bMeta, sobrestados: bSobr, sensiveis: bSens }) });
     }
     if (req.method !== 'POST') return res.status(405).json({ erro: 'método não aceito' });
+    if((req.body||{}).vinculoFundamentacao){
+      const b=req.body,cnj=String(b.cnj||''),cmd=b.vinculoFundamentacao,fonte=dg(cnj).length===20?await fonteDe(cnj):null;
+      if(!fonte||require('./_sigilo').sigiloDe(fonte))return res.status(403).json({erro:'Vínculos disponíveis somente para processo identificado no acervo e sem sigilo.'});
+      if(cmd.acao==='listar'){const {doc}=await lerOpLeitura(),reg=registro(doc,cnj,F,false)||{};return res.status(200).json({ok:true,vinculos:fundVista(reg)});}
+      const {r,out}=await gravar(cnj,{},'Rastreabilidade da fundamentação ('+u+'): '+cnj,(reg,alterados)=>{if(fundAplicar(reg,cmd,u,agora()))alterados.push('producao.'+FUND_KEY);},u);
+      return res.status(200).json({ok:true,vinculos:fundVista(r),semMudanca:!out.length});
+    }
     /* 0.38: inteiro teor dos documentos marcados na extensão (Autos › Peças e documentos › Gravar) */
     if ((req.body || {}).autos) {
       /* processo sigiloso: o inteiro teor só é gravado pelo desembargador, pelo gestor ou com a senha (ver _sigilo.js) */
@@ -460,7 +493,7 @@ module.exports = async (req, res, u) => {
       return arqs;
     });
     return res.status(200).json(Object.assign({ ok: true, operacional: r, recusados: recus, cartoes: cart }, out.length ? {} : { semMudanca: true }));
-  } catch (e) { res.status(e.status === 404 ? 404 : e.status === 409 ? 409 : 500).json({ erro: e.message }); }
+  } catch (e) { res.status([400,403,404,409].includes(e.status)?e.status:500).json({ erro: e.message }); }
 };
 /* ---------- 0.38 · inteiro teor dos documentos, gravado pela extensão ----------
    acervo/autos/<CNJ>.json.gz, no formato do scripts/autos/registrar.py e da ação "autos" do Cortex

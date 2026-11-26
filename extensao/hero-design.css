@@ -607,3 +607,11 @@ html body.hero-redesign-v53 #ger-app .hero-ger-context-card{display:grid;gap:4px
 html body.hero-redesign-v53 #ger-app .hero-ger-context-card small{font-size:10px;line-height:1.4}
 html body.hero-redesign-v53 #ger-app .hero-ger-context-reading pre{white-space:pre-wrap;overflow-wrap:anywhere;max-height:210px;overflow:auto}
 html body.hero-redesign-v53 #ger-app .hero-ger-context-actions{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:4px}
+
+/* Vínculos de fundamentação · seleção explícita, ficha e histórico. */
+html body.hero-redesign-v53 .rep-link-tools{display:flex;flex-wrap:wrap;align-items:center;gap:4px;min-width:0;max-width:100%}
+html body.hero-redesign-v53 .rep-link-tools select{flex:1 1 145px;min-width:0;max-width:100%;font-size:11px}
+html body.hero-redesign-v53 .rep-link-tools small{flex:1 1 100%;font-size:10px}
+html body.hero-redesign-v53 #ger-app .hero-fund-list{display:grid;gap:5px}
+html body.hero-redesign-v53 #ger-app .hero-fund-ledger :is(input,textarea,select){min-width:0;max-width:100%;box-sizing:border-box;font-size:11px}
+html body.hero-redesign-v53 #ger-app .hero-fund-ledger textarea{width:100%;resize:vertical}
