@@ -173,10 +173,10 @@
     /* Solicitações resumidas nos indicadores e na lista de processos. */
     function renderProcessos(grupo){return '<ol class="pa-l">' + grupo.map(function (x) {
       var it = x.it, at = dg(it.cnj) === cur, passo = PASSOS.map(function (p) { return '<i class="' + (it[p[0]] ? 'ok' : '') + '" title="' + p[1] + '"></i>'; }).join('');
-      return '<li class="pa-it e-' + x.e.k + (at ? ' at' : '') + '"><button type="button" class="pa-b" data-pa="abrir:' + esc(it.cnj) + '" title="Abrir o prontuário deste processo">' +
+      return '<li class="pa-it e-' + x.e.k + (at ? ' at' : '') + '"><div class="pa-b">' +
         '<span class="pa-n">' + esc(it.item || '—') + '</span><span class="pa-c"><b class="mono">' + esc(it.cnj) + etqCl(it) + '</b><small>' + esc(S(it.assunto)) + '</small>' +
         '<span class="hero-v53-pa-people">'+(it.servidor?'<em>Minuta · '+esc(S(it.servidor))+'</em>':'')+(it.corretor?'<em>Correção · '+esc(S(it.corretor))+'</em>':'')+'</span><span class="pa-et"><span class="pa-st">' + passo + '</span>' + esc(x.e.t) + '</span>' +
-        (x.a.length ? '<span class="pa-al">' + x.a.map(function (a) { return '<em class="k-' + a[0] + '" title="' + esc(a[2]) + '">' + esc(a[1]) + '</em>'; }).join('') + '</span>' : '') + '</span></button></li>';
+        (x.a.length ? '<span class="pa-al">' + x.a.map(function (a) { return '<em class="k-' + a[0] + '" title="' + esc(a[2]) + '">' + esc(a[1]) + '</em>'; }).join('') + '</span>' : '') + '</span><button type="button" class="pa-open-proc" data-pa="abrir:' + esc(it.cnj) + '" title="Abrir o prontuário deste processo" aria-label="Abrir prontuário de ' + esc(it.cnj) + '"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 5h6v6M19 5l-9 9"/><path d="M19 13v6H5V5h6"/></svg></button></div></li>';
     }).join('') + '</ol>';}
     if(P.f==='sol'){Object.keys(tipos).sort().filter(function(t){return !P.tipoProcSol||P.tipoProcSol===t;}).forEach(function(t){var grupo=vis.filter(function(x){return x.ps.some(function(r){return r.tipo===t;});});if(grupo.length)h+='<h4 class="pm-mer-h" style="margin:10px 0 5px;padding:6px 0;border-top:1px solid var(--line)">'+esc(t)+' · '+grupo.length+' processos</h4>'+renderProcessos(grupo);});}else h+=renderProcessos(vis);
     return h + '</section>';

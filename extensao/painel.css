@@ -3891,3 +3891,11 @@ html body.hero-redesign-v53 #gab .hero-route-overview.hero-route-shared.hero-rou
 :is(#dil-app,#del-app) .gx-nav-action:hover{background:var(--muted)}
 :is(#dil-app,#del-app) .gx-nav-action:focus-visible{outline:2px solid var(--ring);outline-offset:1px}
 :is(#dil-app,#del-app) .gx-nav-action:disabled{opacity:.45;cursor:default}
+
+
+/* Pauta: card informativo, abertura apenas pelo botão dedicado. */
+html body #pauta-app .pa-it>.pa-b{cursor:default!important}
+html body #pauta-app .pa-it>.pa-b>.pa-c{flex:1;min-width:0}
+html body #pauta-app .pa-it .pa-open-proc{display:grid;place-items:center;flex:0 0 27px;width:27px;height:27px;margin:0;padding:0;border:1px solid var(--line);border-radius:4px;background:transparent;color:var(--cmt-blue,var(--primary));cursor:pointer}
+html body #pauta-app .pa-it .pa-open-proc:hover{background:var(--soft)}
+html body #pauta-app .pa-it .pa-open-proc:focus-visible{outline:2px solid var(--cmt-blue,var(--primary));outline-offset:2px}
