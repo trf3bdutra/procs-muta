@@ -1186,11 +1186,11 @@
    "assunto": "Aplicação INPC/ IPCA - Atualização FGTS",
    "assunto_detalhado": "",
    "grupo": "assunto-5",
-   "tipo_caso": "Aplicação INPC/ IPCA - Atualização FGTS",
-   "resultado": "",
+   "tipo_caso": "FGTS · TR × IPCA · agravo interno",
+   "resultado": "Proposta: negar provimento ao agravo interno: correção do FGTS pela TR (Tema 731/STJ; ADI 5.090/STF, efeitos prospectivos) [VALIDAR: honorários recursais no agravo interno]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Decisão monocrática (ID 376196053); agravo interno (ID 380864901); memoriais (ID 414150790). Par com 0000128-31.2014 e 0000115-32.2014.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -1199,11 +1199,38 @@
     "correcao": "Vanilda",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Decisão recorrida",
+     "id": "376196053"
+    },
+    {
+     "peca": "Agravo interno",
+     "id": "380864901"
+    },
+    {
+     "peca": "Memoriais",
+     "id": "414150790"
+    }
+   ],
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Agravo interno (voto)",
+    "materia": "FGTS — correção monetária",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Decisão ID 376196053 (12/06/2026)",
+    "recurso": "agravo interno (ID 380864901, 17/06/2026)",
+    "preparo": "[VALIDAR]",
+    "representacao": "[VALIDAR]",
+    "mpf": "Não consta parecer",
+    "autos": "29 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] honorários recursais no agravo interno"
+   ],
    "minuta": false
   },
   {
@@ -1217,11 +1244,11 @@
    "assunto": "Remoção",
    "assunto_detalhado": "",
    "grupo": "assunto-4",
-   "tipo_caso": "Remoção",
-   "resultado": "",
+   "tipo_caso": "Agravo de instrumento · remoção de servidor (UFMS × UNIFESP)",
+   "resultado": "Proposta: [VALIDAR paradigma] mérito do agravo de instrumento da UFMS contra a liminar que preservou a lotação do agravado na UNIFESP; efeito suspensivo deferido (ID 408477541) e mantido (ID 410235882); o agravo interno do agravado (ID 409854279) fica prejudicado com o julgamento [VALIDAR: decisão agravada do 1º grau (ID e data); resposta do agravado]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Redistribuído pela Resolução 33/2025 (ID 405849932).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -1230,11 +1257,35 @@
     "correcao": "Vanilda",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Decisão recorrida",
+     "id": "408477541"
+    },
+    {
+     "peca": "Agravo interno",
+     "id": "409854279"
+    }
+   ],
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento do agravo de instrumento (voto); agravo interno prejudicado",
+    "materia": "Administrativo — servidor público, remoção",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Decisão ID 408477541 (05/11/2026)",
+    "recurso": "agravo interno (ID 409854279, 10/11/2026)",
+    "preparo": "[VALIDAR]",
+    "representacao": "procuração/substabelecimento ID 409855682",
+    "mpf": "Não consta parecer",
+    "autos": "21 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] decisão agravada do 1º grau (ID e data)",
+    "[VALIDAR] resposta do agravado"
+   ],
    "minuta": false
   }
  ]
