@@ -333,8 +333,9 @@
   render0=function(){
     if(tabCnj!==G.cnj){tabCnj=G.cnj;identOpen=false;G.aba='Autos';G.rot='tri';if(heroV53()&&!window.MUTA_WEB){G.aba='Processo';G.rot='res';}if(window.MUTA_WEB){G.aba='Processo';G.rot=window.MUTA_WEB.modo;}G.adEd=false;}
     setupRoteiro();
-    // Preserva a derivação e a sincronização antes de desenhar a produção, sem depender da antiga seta.
-    if(G.aba==='Processo'&&G.rot==='pro'&&G.cnj&&G.op)try{autoGab();situacaoSync();}catch(e){}
+    // Preserva a derivação antes de desenhar a produção, sem depender da antiga seta.
+    // 0.77.56: abrir a Produção não grava a situação para julgar; o cálculo só aparece na tela e se grava quando a pessoa mexe nas sinalizações ou volta ao cálculo.
+    if(G.aba==='Processo'&&G.rot==='pro'&&G.cnj&&G.op)try{autoGab();}catch(e){}
     renderBase();
     if(heroV53()&&G.aba==='Processo'&&G.rot==='res'){var root=caixa.querySelector('.pc.pm');if(root)root.append(identity());}
     var top=caixa.querySelector('.pc.pm');if(top)top.classList.add('pv-universal');

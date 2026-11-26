@@ -13,3 +13,15 @@ test('fragmentos independentes por recurso e ED com efeitos explícitos',()=>{
  const d=g.comporFicha({'triagem.Tipo de Julgamento':'Embargos de Declaração','producao.Voto - Resultado':'Acolhidos sem efeito infringente'},{}).variaveis;assert.match(d.dispositivo_voto,/sem efeitos modificativos/);
 });
 test('marcadores de validação permanecem pendentes',()=>{const s=read('apoio/modus-operandi/fonte/ementario.js'),f=new Function(s.slice(s.indexOf('function campoConfirmado('),s.indexOf('function campoValor('))+';return campoConfirmado;')();assert.equal(f('[VALIDAR: ID]'),false);assert.equal(f('texto [VALIDAR: motivo]'),false);assert.equal(f('123456789'),true);});
+test('0.77.56: teses curtas ficam no relatório; fecho, folha e ID não viram tese',()=>{
+ const g=gerador(),x=g.comporFicha({'triagem.Tipo de Julgamento':'Apelação','origem.Recursos':[{parte:'réu',ids:'123456789',teses:'ilegitimidade passiva\nprescrição\nfls. 23\nNestes termos\npede deferimento\nID 4455667\nausência de dano moral'}]},{},'Apelação').variaveis;
+ assert.match(x.recurso_1_razoes,/ilegitimidade passiva/);assert.match(x.recurso_1_razoes,/prescrição/);assert.match(x.recurso_1_razoes,/ausência de dano moral/);
+ assert.doesNotMatch(x.recurso_1_razoes,/fls\.|Nestes termos|deferimento|4455667/);
+});
+test('0.77.56: remessa necessária com duas apelações vai ao plural no relatório',()=>{
+ const g=gerador(),R=[{parte:'réu',ids:'123456789',teses:'ausência de incapacidade laboral'},{parte:'autor',ids:'987654321',teses:'termo inicial do benefício'}];
+ const d=g.comporFicha({'triagem.Tipo de Julgamento':'Apelação / Remessa necessária','origem.Recursos':R,'origem.Sentença - ID':'111222333'},{},'Apelação');
+ assert.match(d.rel[0],/^Trata-se de remessa necessária e de apelações interpostas contra sentença/);
+ const u=g.comporFicha({'triagem.Tipo de Julgamento':'Apelação / Remessa necessária','origem.Recursos':R.slice(0,1),'origem.Sentença - ID':'111222333'},{},'Apelação');
+ assert.match(u.rel[0],/^Trata-se de remessa necessária e de apelação interposta contra sentença/);
+});

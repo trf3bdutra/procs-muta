@@ -171,7 +171,8 @@ test('universal: mérito integra o plano da produção, sem seta no cartão',()=
  assert.match(s,/campoRot\('triagem','Tipo de Voto','Tipo de voto'\)/);
  assert.match(s,/meritProduction\(root,q\)/);
  assert.match(s,/target\.prepend\(box\)/);
- assert.match(s,/autoGab\(\);situacaoSync\(\)/);
+ assert.match(s,/try\{autoGab\(\);\}catch/);
+ assert.doesNotMatch(s,/situacaoSync\(\)/,'abrir a Produção não grava a situação para julgar (0.77.56)');
  assert.match(s,/data-autog','desfazer'/);
  new Function(s);
 });

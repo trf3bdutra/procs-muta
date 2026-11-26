@@ -29,7 +29,9 @@
   function aliasesFicha(modelo){var G=GB(),f=G.fo?G.fo()||{}:{},R={};mapaFicha(modelo||G.modelo&&G.modelo()).forEach(function(c){if(!c.a)return;var x=c.s?v(c.s,c.k):fonteCampo(c,f);if(x!=null&&(Array.isArray(x)?x.length:S(x)))R[c.a]=x;});return R;}
   function fo(k) { var f = (GB().fo && GB().fo()) || {}; return S(f[k]); }
   /* itens de alegação: descarta o que não é texto de razão (cabeçalho de documento, carimbo de hora, rótulo solto) */
-  function linhas(t) { return S(t).split(/\n+|;\s*(?=\(?\d+\)|\w)/).map(function (l) { return S(l).replace(/^[-•·\d.)(\s]+/, '').replace(/[.;]+$/, ''); }).filter(function (l) { return l && l.split(/\s+/).length >= 3 && !/^P_|\d{2}:\d{2}:\d{2}|^(apela[çc][ãa]o|recurso|contrarraz[õo]es)$/i.test(l); }); }
+  function linhas(t) { return S(t).split(/\n+|;\s*(?=\(?\d+\)|\w)/).map(function (l) { return S(l).replace(/^[-•·\d.)(\s]+/, '').replace(/[.;]+$/, ''); }).filter(function (l) { return l && (l.split(/\s+/).length >= 3 || curtaValida(l)) && !/^P_|\d{2}:\d{2}:\d{2}|^(apela[çc][ãa]o|recurso|contrarraz[õo]es)$/i.test(l); }); }
+  /* 0.77.56: tese curta ("ilegitimidade passiva", "prescrição") não some do relatório; fica fora só o que é fecho, rótulo ou referência de folha/ID */
+  function curtaValida(l) { return /[A-Za-zÀ-ÿ]{5,}/.test(l) && !/^(id|fls?|p[áa]g(ina)?|evento|doc(umento)?)\b|^\d|^(nestes|nesses) termos|^termos em que|deferimento$|^excelent[íi]ssim|^(local|data)\b|^[ée] o relat[óo]rio|^(ementa|relat[óo]rio|voto|ac[óo]rd[ãa]o|senten[çc]a|peti[çc][ãa]o)$/i.test(l); }
   function enumerar(L) { if (!L.length) return ''; if (L.length === 1) return L[0]; return L.map(function (x, i) { return '(' + (i + 1) + ') ' + x; }).slice(0, -1).join('; ') + '; e (' + L.length + ') ' + L[L.length - 1]; }
   function ids(t) { var L = S(t).split(/[,;\s]+/).filter(function (x) { return /^\d{6,}$/.test(x); }); return !L.length ? '' : L.length === 1 ? '(ID ' + L[0] + ')' : '(ID’s ' + L.slice(0, -1).join(', ') + ' e ' + L[L.length - 1] + ')'; }
   function idOu(t, o) { return ids(t) || '(ID ' + VAL(o) + ')'; }
@@ -189,7 +191,7 @@
   }
   function aberturaOrigem(tipo){
     var sid=S(v('origem','Sentença - ID')),rn=remessaConjunta(),nRec=tab('origem','Recursos').length;
-    var ab=tipo==='Remessa Necessária'?'Trata-se de remessa necessária de sentença ':rn?'Trata-se de remessa necessária e de apelação interposta contra sentença ':nRec>2?'Trata-se de apelações à sentença ':nRec===2?'Trata-se de dupla apelação à sentença ':'Trata-se de apelação à sentença ';
+    var ab=tipo==='Remessa Necessária'?'Trata-se de remessa necessária de sentença ':rn?(nRec>1?'Trata-se de remessa necessária e de apelações interpostas contra sentença ':'Trata-se de remessa necessária e de apelação interposta contra sentença '):nRec>2?'Trata-se de apelações à sentença ':nRec===2?'Trata-se de dupla apelação à sentença ':'Trata-se de apelação à sentença ';
     return ab+idOu(sid,'ID da sentença')+' que '+comandosOrigem()+'. '+honorariosAbertura();
   }
   function resultadoSentenca(oque) {
@@ -306,7 +308,7 @@
       P.push(aberturaOrigem(tipo));
       P.push(nRec ? VAL('há recurso voluntário: conferir o tipo de julgamento') : 'Sem recurso voluntário, subiram os autos por força da remessa necessária.');
     } else {
-      var ab = rn ? 'Trata-se de remessa necessária e de apelação interposta contra sentença ' : nRec > 2 ? 'Trata-se de apelações à sentença ' : nRec === 2 ? 'Trata-se de dupla apelação à sentença ' : 'Trata-se de apelação à sentença ';
+      var ab = rn ? (nRec > 1 ? 'Trata-se de remessa necessária e de apelações interpostas contra sentença ' : 'Trata-se de remessa necessária e de apelação interposta contra sentença ') : nRec > 2 ? 'Trata-se de apelações à sentença ' : nRec === 2 ? 'Trata-se de dupla apelação à sentença ' : 'Trata-se de apelação à sentença ';
       P.push(aberturaOrigem(tipo));
       pRecursos(tipo).forEach(function (x) { P.push(x); });
       P.push(pContrarrazoes(tipo));

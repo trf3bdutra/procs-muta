@@ -379,7 +379,7 @@ function merEnc() {
   var ab = !!G.merAb, h = '<details class="pm-aut pm-mer"' + (ab ? ' open' : '') + '><summary aria-label="Mérito" title="Mérito: complexidade e tipo de voto"><span class="pm-aut-t">mérito</span><i class="pm-aut-h"></i></summary>';
   if (!ab) return h + '</details>';
   /* 0.50: com a seta aberta, o que dá para obter sozinho vai para os campos vazios (marca "auto", Desfazer) */
-  if (!G._seco) try { autoGab(); situacaoSync(); } catch (e) {}
+  if (!G._seco) try { autoGab(); } catch (e) {} /* 0.77.56: a situação para julgar não se grava só por abrir; ver situacaoSync */
   var TR = window.MutaTriagem, mono = N(V('producao', 'Destino')) === 'monocratica';
   var etqX = (TR && TR.etiquetasDe ? TR.etiquetasDe(G.op, G.fo) : '') + (window.MutaAlertas ? window.MutaAlertas.htmlRoteiro(G.cnj, V('triagem', 'Etiquetas sugeridas'), function () { render(); }) : '');
   var ag = autoGabItens();
