@@ -1848,3 +1848,14 @@ html body.hero-redesign-v53 #gab .hero-route-canonical .hero-minuta-nav-foot{pad
  html body.hero-redesign-v53 #gab .hero-route-canonical .hero-route-metrics>button>b{font-size:22px!important}
  html body.hero-redesign-v53 #gab .hero-route-canonical .hero-route-metrics>button{padding:8px 8px!important}
 }
+
+/* Roteiro único: ambos os módulos usam os mesmos nós, sem versões paralelas da timeline. */
+html body.hero-redesign-v53 #gab .hero-route-shared .hero-minuta-nav-foot{display:flex!important;align-items:center;justify-content:space-between;gap:6px;padding:5px 12px!important;margin:0!important}
+html body.hero-redesign-v53 #gab .hero-route-shared .hero-minuta-nav-foot>small{font:500 10px/1.4 var(--cmt-mono,monospace);color:var(--cmt-muted);text-align:center}
+html body.hero-redesign-v53 #gab .hero-route-shared .hero-minuta-nav-foot>button{font:500 11px/1.4 var(--cmt-font,system-ui)!important;padding:4px 7px!important;min-height:26px!important}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock ol.rt>.rt-p.is-partial{--rt-state:var(--cmt-ochre)}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock .rt-p.is-partial>.rt-c>.rt-h{background:var(--cmt-alert)!important}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock ol.rt>[hidden]{display:none!important}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock .rt-p>.rt-c>.rt-h{width:100%;min-width:0}
+html body.hero-redesign-v53 #gab .hero-tri-with-dock .rt-p>.rt-c>.rt-b{background:var(--cmt-paper)!important}
+html body.hero-redesign-v53 #gab .hero-route-production.rt-em-proc{width:100%;box-sizing:border-box}
