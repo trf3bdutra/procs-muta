@@ -3678,3 +3678,46 @@ html body.hero-redesign-v53 #gab .hero-header-nav .hero-v53-tabs>button[aria-sel
 html body.hero-redesign-v53 :is(#panel-acervo,#panel-par,#panel-modelos) .emd-modos>button[aria-selected=true],
 html body.hero-redesign-v53 :is(#panel-dil,#panel-del) .gx-modos>button[aria-selected=true],
 html body.hero-redesign-v53 #panel-min .hero-review-view-tabs>button[aria-selected=true]{background:var(--cmt-paper)!important}
+
+/* Pauta: faixa de produção restaurada conforme a referência CMT. */
+html body.hero-redesign-v53 #pauta-app .hero-v53-pa-metrics.hero-pa-production-strip{
+ display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:0!important;
+ align-items:stretch!important;margin:0!important;padding:0!important;border:1px solid var(--cmt-line)!important;
+ border-radius:0!important;box-shadow:none!important;background:var(--cmt-paper)!important;overflow:hidden
+}
+html body.hero-redesign-v53 #pauta-app .hero-pa-production-strip>.hero-v53-pa-metric{
+ --pa-meter:#30734d;display:flex!important;flex-direction:column!important;align-items:stretch!important;
+ position:relative;min-width:0;gap:4px!important;padding:10px 10px 8px!important;margin:0!important;
+ border:0!important;border-top:2px solid var(--pa-meter)!important;border-radius:0!important;
+ box-shadow:none!important;background:var(--cmt-paper)!important
+}
+html body.hero-redesign-v53 #pauta-app .hero-pa-production-strip>.hero-v53-pa-metric+.hero-v53-pa-metric{border-left:1px solid var(--cmt-line)!important}
+html body.hero-redesign-v53 #pauta-app .hero-pa-production-strip>.pa-m-dataCorrecao{--pa-meter:#2d5789}
+html body.hero-redesign-v53 #pauta-app .hero-pa-production-strip>.pa-m-dataLiberacao{--pa-meter:#6b409b}
+html[data-tema=escuro] body.hero-redesign-v53 #pauta-app .hero-pa-production-strip>.pa-m-dataMinuta{--pa-meter:#91c1a6}
+html[data-tema=escuro] body.hero-redesign-v53 #pauta-app .hero-pa-production-strip>.pa-m-dataCorrecao{--pa-meter:#9bcde8}
+html[data-tema=escuro] body.hero-redesign-v53 #pauta-app .hero-pa-production-strip>.pa-m-dataLiberacao{--pa-meter:#c3a6e6}
+html body.hero-redesign-v53 #pauta-app .hero-pa-production-strip>.hero-v53-pa-metric>small{
+ font:500 8px/1.4 var(--cmt-mono,monospace)!important;letter-spacing:.12em!important;text-transform:uppercase!important;
+ color:var(--cmt-muted)!important;min-height:12px;margin:0 0 3px!important
+}
+html body.hero-redesign-v53 #pauta-app .hero-pa-production-strip .pa-m-value{display:flex;justify-content:space-between;align-items:baseline;gap:3px;min-width:0}
+html body.hero-redesign-v53 #pauta-app .hero-pa-production-strip .pa-m-value>b{font:700 19px/1.15 var(--cmt-serif,Georgia,serif)!important;color:var(--cmt-ink)!important;letter-spacing:0!important;white-space:nowrap}
+html body.hero-redesign-v53 #pauta-app .hero-pa-production-strip .pa-m-value>b>span{font:400 9px/1.3 var(--cmt-mono,monospace)!important;color:var(--cmt-muted)!important;letter-spacing:0!important}
+html body.hero-redesign-v53 #pauta-app .hero-pa-production-strip .pa-pct{position:static!important;flex:none;color:var(--pa-meter)!important;font:600 9px/1.3 var(--cmt-mono,monospace)!important}
+html body.hero-redesign-v53 #pauta-app .hero-pa-production-strip .hero-v53-pa-metric>progress{
+ display:block;width:100%!important;height:5px!important;appearance:none;-webkit-appearance:none;
+ background:repeating-linear-gradient(-45deg,var(--cmt-line) 0 3px,var(--cmt-paper) 3px 6px)!important;border:0!important;border-radius:0!important;margin:0!important;overflow:hidden
+}
+html body.hero-redesign-v53 #pauta-app .hero-pa-production-strip .hero-v53-pa-metric>progress::-webkit-progress-bar{background:transparent!important}
+html body.hero-redesign-v53 #pauta-app .hero-pa-production-strip .hero-v53-pa-metric>progress::-webkit-progress-value{background:var(--pa-meter)!important;border-radius:0!important}
+html body.hero-redesign-v53 #pauta-app .hero-pa-production-strip .hero-v53-pa-metric>progress::-moz-progress-bar{background:var(--pa-meter)!important}
+html body.hero-redesign-v53 #pauta-app .hero-pa-production-strip .pa-falta{font:400 8px/1.35 var(--cmt-mono,monospace)!important;color:var(--cmt-muted)!important;text-align:right;margin:0!important;font-style:normal!important}
+html body.hero-redesign-v53 #pauta-app .hero-pa-cumulative>.pa-m-solicitacoes{border:0!important;padding:7px 10px!important;background:var(--cmt-paper)!important}
+@media(max-width:400px){
+ html body.hero-redesign-v53 #pauta-app .hero-pa-production-strip>.hero-v53-pa-metric{padding:8px 5px 6px!important}
+ html body.hero-redesign-v53 #pauta-app .hero-pa-production-strip>.hero-v53-pa-metric>small{font-size:7.5px!important;letter-spacing:.04em!important;min-height:20px}
+ html body.hero-redesign-v53 #pauta-app .hero-pa-production-strip .pa-m-value>b{font-size:16px!important}
+ html body.hero-redesign-v53 #pauta-app .hero-pa-production-strip .pa-m-value>b>span{font-size:8px!important}
+ html body.hero-redesign-v53 #pauta-app .hero-pa-production-strip .pa-pct{font-size:8px!important}
+}
