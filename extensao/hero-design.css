@@ -621,3 +621,20 @@ html body.hero-redesign-v53 .cf-flow-status{font-size:11px;line-height:1.4;paddi
 html body.hero-redesign-v53 #ger-app .hero-ger-flow-check .hero-ger-context-card b{font-size:11px;font-weight:550}
 
 html body.hero-redesign-v53 .hero-revisao-command{border:1px solid var(--cmt-line,#ded5c4);border-radius:5px;margin:6px 0;overflow:hidden}html body.hero-redesign-v53 .hero-revisao-command>summary{background:var(--hero-nav-subtabs,#eee5d3);padding:7px 9px;font-size:12px;font-weight:600;cursor:pointer}html body.hero-redesign-v53 .hero-revisao-body{display:grid;gap:6px;padding:8px;font-size:11px}html body.hero-redesign-v53 .hero-revisao-body label{display:flex;align-items:flex-start;gap:5px;min-width:0}html body.hero-redesign-v53 .hero-revisao-body select{max-width:100%;min-width:0}html body.hero-redesign-v53 #hero-not-revisoes{margin:6px 8px}html body.hero-redesign-v53 #hero-not-revisoes .gx-it{display:grid;gap:4px;padding:7px}
+
+/* Acompanhamento: projeção compacta de trâmite, sinais e controles. */
+html body.hero-redesign-v53 #gab .hero-acomp-overview{display:grid;gap:5px;margin:0 0 6px;padding:6px;border:1px solid var(--cmt-line,#ded5c4);border-radius:5px;background:var(--cmt-paper,#fff)}
+html body.hero-redesign-v53 #gab .hero-acomp-overview>h4{font-size:12px;margin:0;padding:3px 4px;font-weight:650}
+html body.hero-redesign-v53 #gab .hero-acomp-metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px}
+html body.hero-redesign-v53 #gab .hero-acomp-metric{display:grid;gap:2px;padding:5px 4px;border:1px solid var(--cmt-line,#ded5c4);border-radius:4px;min-width:0;background:var(--hero-nav-subtabs,#f7f2e7)}
+html body.hero-redesign-v53 #gab .hero-acomp-metric b{font-size:15px;font-variant-numeric:tabular-nums}
+html body.hero-redesign-v53 #gab .hero-acomp-metric small{font-size:10px;line-height:1.2;overflow-wrap:anywhere}
+html body.hero-redesign-v53 #gab .hero-acomp-linked{border:1px solid var(--cmt-line,#ded5c4);border-radius:4px;overflow:hidden}
+html body.hero-redesign-v53 #gab .hero-acomp-linked>summary{padding:5px 7px;font-size:11px;background:var(--hero-nav-subtabs,#f7f2e7);cursor:pointer}
+html body.hero-redesign-v53 #gab .hero-acomp-linked>p,html body.hero-redesign-v53 #gab .hero-acomp-monitor{padding:5px 7px;margin:0;border-top:1px solid var(--cmt-line,#ded5c4);font-size:11px}
+html body.hero-redesign-v53 #gab .hero-acomp-monitor{display:grid;gap:2px;justify-items:start}
+html body.hero-redesign-v53 #gab .hero-tr-meta-edit{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:5px}
+html body.hero-redesign-v53 #gab .hero-tr-meta-edit :is(select,input){min-width:0;max-width:100%;width:100%;box-sizing:border-box}
+html body.hero-redesign-v53 #gab .hero-tr-meta{display:flex;flex-wrap:wrap;gap:4px 9px;border-top:1px solid var(--cmt-line,#ded5c4);padding-top:4px;font-size:10px}
+html body.hero-redesign-v53 #gab .hero-tr-overdue{color:var(--danger,#a13a32);font-weight:650}
+@media(max-width:360px){html body.hero-redesign-v53 #gab .hero-acomp-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}}
