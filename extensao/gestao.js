@@ -274,6 +274,12 @@
       badges();pintarDel();
     }).catch(function(){if(u===quem().usuario){X.msg='Leitura salva neste dispositivo; sincronização pendente.';pintarDel();}}).finally(function(){syncLeitura=false;});
   }
+  /* 0.77.57: abrir Notificações conta como visto — o número da aba e o do ícone se limpam; os itens seguem destacados como não lidos até "Marcar lida" ou "Marcar todas como lidas" */
+  function vistasLocal(u){try{var v=JSON.parse(localStorage.getItem('hero-not-vistas:'+norm(u))||'{}');return v&&typeof v==='object'&&!Array.isArray(v)?v:{};}catch(e){return {};}}
+  function naoVistas(){if(!X.dados)return 0;var lidas=leituraNot(),v=vistasLocal(quem().usuario);return notificacoes(listas()).filter(function(n){var k=chaveLida(n);return !lidas[k]&&!v[k];}).length;}
+  function avisarFundo(){try{chrome.runtime.sendMessage({tipo:'muta-app-visto'}).catch(function(){});}catch(e){}}
+  function marcarVistas(){var c=$('del-app');if(!X.dados||!c||!c.offsetParent||document.visibilityState==='hidden')return;var u=quem().usuario,m={};notificacoes(listas()).forEach(function(n){m[chaveLida(n)]=true;});try{localStorage.setItem('hero-not-vistas:'+norm(u),JSON.stringify(m));}catch(e){}avisarFundo();}
+  function marcarTodas(){var u=quem().usuario,m=leituraLocal(u),lidas=leituraNot(),n=0;notificacoes(listas()).forEach(function(x){var k=chaveLida(x);if(!lidas[k]){m[k]=true;n++;}});try{localStorage.setItem('hero-not-lidas:'+norm(u),JSON.stringify(m));X.msg=n?(n===1?'1 notificação marcada como lida.':n+' notificações marcadas como lidas.'):'';}catch(e){X.msg='Não foi possível registrar a leitura neste dispositivo.';}avisarFundo();badges();pintarDel();sincronizarLeitura();}
   function marcarNot(k){var u=quem().usuario,m=leituraLocal(u);m[k]=true;try{localStorage.setItem('hero-not-lidas:'+norm(u),JSON.stringify(m));}catch(e){X.msg='Não foi possível registrar a leitura neste dispositivo.';}badges();pintarDel();sincronizarLeitura();}
   function itemNot(n,lidas){
     var pend=n.tipo==='duvida'||n.tipo==='pedido',k=chaveLida(n);
@@ -317,7 +323,8 @@
     var tab=function(k,r){return '<button type="button" role="tab" data-gx-a="'+k+'" aria-selected="'+(X.aba===k)+'">'+esc(r)+'</button>';};
     var m=pode(q)&&X.dados?metricasCmt([['total','Não lidas',N.filter(function(n){return !lidas[chaveLida(n)];}).length],['priority','A deliberar',pend],['lib','Hoje',N.filter(function(n){return String(n.em||'').slice(0,10)===hoje();}).length]]):'';
     var dia=null,corpo=X.aba==='categorias'?agruparNot(N,lidas):N.map(function(n){var d=String(n.em||'').slice(0,10),h='';if(d!==dia){dia=d;h='<h4 class="hero-not-dia">'+esc(d===hoje()?'Hoje':data(d)||'Sem data')+'</h4>';}return h+itemNot(n,lidas);}).join('');
-    var fontes=c.querySelector('#hero-not-local');if(fontes)fontes.remove();c.innerHTML=painelGestao('Notificações','', atualizaBtn('ler-del',X.lendo),m,'')+(pode(q)?faixaGestao('Notificações',tab('cronologia','Cronologia')+tab('categorias','Categorias'),'',X.lendo)+(X.msg?'<p class="gx-msg">'+esc(X.msg)+'</p>':'')+(X.erro?'<p class="gx-v err">'+esc(X.erro)+'</p>':!X.dados?'<p class="muted gx-v">Lendo…</p>':corpo||'<p class="muted gx-v">Nenhuma notificação nesta categoria.</p>'):'');if(hero){if(!fontes){fontes=document.createElement('section');fontes.id='hero-not-local';}c.append(fontes);if(window.MutaAlertas&&window.MutaAlertas.montarFontesNot)window.MutaAlertas.montarFontesNot(fontes);pintarRevisoes(c);}
+    var fontes=c.querySelector('#hero-not-local');if(fontes)fontes.remove();c.innerHTML=painelGestao('Notificações','', atualizaBtn('ler-del',X.lendo),m,'')+(pode(q)?faixaGestao('Notificações',tab('cronologia','Cronologia')+tab('categorias','Categorias'),'',X.lendo,X.dados&&N.some(function(n){return !lidas[chaveLida(n)];})?'<button type="button" class="lnk gx-ler-todas" data-gx="ler-todas" title="Marcar todas as notificações como lidas">Marcar todas como lidas</button>':'')+(X.msg?'<p class="gx-msg">'+esc(X.msg)+'</p>':'')+(X.erro?'<p class="gx-v err">'+esc(X.erro)+'</p>':!X.dados?'<p class="muted gx-v">Lendo…</p>':corpo||'<p class="muted gx-v">Nenhuma notificação nesta categoria.</p>'):'');if(hero){if(!fontes){fontes=document.createElement('section');fontes.id='hero-not-local';}c.append(fontes);if(window.MutaAlertas&&window.MutaAlertas.montarFontesNot)window.MutaAlertas.montarFontesNot(fontes);pintarRevisoes(c);}
+    marcarVistas();badges();
   }
   function urgEtapa(a){
     return a.assinado?'conferir':a.dataLiberacao?'assinar':a.dataCorrecao?'liberar':a.dataMinuta?'corrigir':a.servidor?'minuta':'designar';
@@ -405,7 +412,7 @@
   function badges() {
     var b1 = $('dil-badge'), b2 = $('del-badge'), b3=$('urg-badge');
     if (b1) { var n1 = D.lista ? abertasComigo().length : 0; b1.hidden = !n1; b1.textContent = n1 ? String(n1) : ''; b1.title = n1 ? n1 + ' diligência(s) com você' : ''; }
-    if (b2) { var L=listas(),lidas=leituraNot(),n2=X.dados?notificacoes(L).filter(function(n){return !lidas[chaveLida(n)];}).length:0; b2.hidden=!n2;b2.textContent=n2?String(n2):'';b2.title=n2+' notificações não lidas'; }
+    if (b2) { var L=listas(),lidas=leituraNot(),n2=naoVistas(); b2.hidden=!n2;b2.textContent=n2?String(n2):'';b2.title=n2+(n2===1?' notificação nova':' notificações novas'); }
     if(b3){var u=X.dados?listas():{as:[],urg:[]},n3=u.as.length+u.urg.length;b3.hidden=!n3;b3.textContent=n3?String(n3):'';b3.title=n3+' urgências em aberto';}
   }
 
@@ -447,6 +454,7 @@
         if (x.hasAttribute('data-gx-copia')) return copiar(x);
         if(x.dataset.gxBoard){X.quadro=x.dataset.gxBoard.split(':')[1];return pintarUrg();}
         if(x.dataset.gxRead)return marcarNot(x.dataset.gxRead);
+        if(x.dataset.gx==='ler-todas')return marcarTodas();
         if(x.dataset.gxOpen){var BR=window.MutaProntuarioBridge;if(window.MutaAbas)window.MutaAbas.ir('pront');if(BR&&BR.abrirProcesso)BR.abrirProcesso(x.dataset.gxOpen);return;}
         if (x.dataset.gxA) { X.aba = x.dataset.gxA; X.msg = ''; return pintarGestao(); }
         if (x.dataset.gx === 'ler-del') { X.msg = '';if(cx.id==='del-app')lerRevisoes(); if(window.MutaAlertas&&window.MutaAlertas.lerFontesNot)window.MutaAlertas.lerFontesNot();return lerDel(); }

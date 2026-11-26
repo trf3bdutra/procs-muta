@@ -206,12 +206,13 @@ function lerApp() {
   return fetch(SITE + '/api/notificacoes', { credentials: 'include', cache: 'no-store' }).then(function (r) { if (r.status === 401) return null; return r.ok ? r.json() : null; }).then(function (j) {
     if (!j) return;
     var ev = (j.events || []).slice(0, 60);
-    return chrome.storage.local.get(['muta-app-vistos', 'muta-prazos']).then(function (o) {
+    return chrome.storage.local.get(['muta-app-vistos', 'muta-prazos', 'muta-app-badge-vistos']).then(function (o) {
       var vistos = o['muta-app-vistos'], cfg = Object.assign({ avisosApp: true }, o['muta-prazos'] || {}), primeira = !vistos; vistos = vistos || {};
       var novos = ev.filter(function (e) { return !vistos[e.id]; });
       novos.forEach(function (e) { vistos[e.id] = Date.now(); });
       Object.keys(vistos).forEach(function (k) { if (Date.now() - vistos[k] > 30 * 864e5) delete vistos[k]; });
-      var naoLidos = ev.filter(function (e) { return !e.resolved && (e.nivel === 'urgente' || e.nivel === 'importante'); });
+      var bv = o['muta-app-badge-vistos'] || {};
+      var naoLidos = ev.filter(function (e) { return !e.resolved && !bv[e.id] && (e.nivel === 'urgente' || e.nivel === 'importante'); });
       BADGE.app = naoLidos.length > 9 ? 9 : naoLidos.length; badge();
       var p = chrome.storage.session.set({ 'muta-app': { em: new Date().toISOString(), eventos: ev } });
       if (!primeira && cfg.avisosApp !== false) novos.filter(function (e) { return e.origem !== 'pje' && e.nivel !== 'info'; }).slice(0, 3).forEach(function (e) {
@@ -226,7 +227,20 @@ function iniciarAlarmes() { chrome.alarms.create('muta-app', { periodInMinutes: 
 chrome.runtime.onInstalled.addListener(iniciarAlarmes);
 chrome.runtime.onStartup.addListener(iniciarAlarmes);
 chrome.storage.onChanged.addListener(function (ch, area) { if (area === 'local' && ch['muta-prazos']) agendarRelatorio(); });
-chrome.runtime.onMessage.addListener(function (msg) { if (msg && msg.tipo === 'muta-app-ler') lerApp(); if (msg && msg.tipo === 'muta-relatorio-teste') relatorio(); });
+/* 0.77.57: o painel avisa que as notificações foram vistas (aba Notificações aberta ou "Marcar todas como lidas"); o número do ícone se limpa até chegar aviso novo */
+function appVisto() {
+  return chrome.storage.session.get('muta-app').then(function (o) {
+    var ev = ((o['muta-app'] || {}).eventos) || [];
+    return chrome.storage.local.get('muta-app-badge-vistos').then(function (s) {
+      var bv = s['muta-app-badge-vistos'] || {}, agora = Date.now();
+      ev.forEach(function (e) { if (e && e.id && !bv[e.id]) bv[e.id] = agora; });
+      Object.keys(bv).forEach(function (k) { if (agora - bv[k] > 30 * 864e5) delete bv[k]; });
+      BADGE.app = 0; badge();
+      return chrome.storage.local.set({ 'muta-app-badge-vistos': bv });
+    });
+  }).catch(function () {});
+}
+chrome.runtime.onMessage.addListener(function (msg) { if (msg && msg.tipo === 'muta-app-visto') appVisto(); if (msg && msg.tipo === 'muta-app-ler') lerApp(); if (msg && msg.tipo === 'muta-relatorio-teste') relatorio(); });
 chrome.notifications.onClicked.addListener(function (id) {
   var abrir = function (url) { chrome.tabs.create({ url: url }); chrome.notifications.clear(id); };
   if (/^(rel|cheg):/.test(id)) return abrir(chrome.runtime.getURL('relatorio.html') + (/^rel:/.test(id) ? '#' + id.slice(4) : ''));

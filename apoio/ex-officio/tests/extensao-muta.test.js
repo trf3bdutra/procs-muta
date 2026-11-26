@@ -760,3 +760,13 @@ test('HERO: Gerador preserva seleção da prévia, reseta por processo/ficha e n
  fields['triagem.Tipo de Julgamento']='Agravo interno / Embargos de declaração';assert.equal(G.docs().tipo,'');G.selecionarTipo('Agravo Interno');cnj='5000001-00.2026.4.03.6000';fields['triagem.Tipo de Julgamento']='ED';assert.equal(G.docs().tipo,'Embargos de Declaração');
  fields['producao.Voto - Resultado']='';assert.equal(G.docs().k,'');G._ST.abertos['part-relatorio']=false;assert.doesNotMatch(G.html(),/data-ger-key="part-relatorio"[^>]* open/);
 });
+
+test('extensão 0.77.57: Notificações vistas limpam o número; Marcar todas como lidas',()=>{
+  const fs=require('node:fs'),path=require('node:path'),r=p=>fs.readFileSync(path.resolve(__dirname,'../../..',p),'utf8');
+  const g=r('extensao/gestao.js'),f=r('extensao/fundo.js');
+  assert.ok(g.includes('function marcarTodas()')&&g.includes("if(x.dataset.gx==='ler-todas')return marcarTodas();"),'botão marca todas');
+  assert.ok(g.includes('data-gx="ler-todas"'),'botão na faixa das Notificações');
+  assert.ok(g.includes('n2=naoVistas();'),'número da aba conta só as não vistas');
+  assert.ok(g.includes('marcarVistas();badges();'),'abrir a aba marca como visto');
+  assert.ok(f.includes("msg.tipo === 'muta-app-visto') appVisto();")&&f.includes('!bv[e.id]'),'ícone da extensão limpa ao ver');
+});
