@@ -1176,7 +1176,7 @@ html body.hero-redesign-v53 #panel-min #cmp-app .hero-review-editorial :is(.mn-t
 html body.hero-redesign-v53 #panel-min #cmp-app .hero-review-editorial :is(.mn-tx,.hero-v53-ref-text,.folha,.cx-out) p:not(.fl-tit):not(.hero-editorial-heading):not(.cx-h):not(.eq){font-size:inherit!important;line-height:inherit!important}
 html body.hero-redesign-v53 #panel-min #cmp-app .hero-review-editorial :is(.mn-tx,.hero-v53-ref-text,.folha,.cx-out) p.cita{font-size:.92em!important}
 
-/* HERO / CORTEX: padrões .cv, .mdoc, .mcab, .vs e .dif-l de lotes/previa.html e .vs-lr de lotes/index.html */
+/* HERO / Cortex: padrões .cv, .mdoc, .mcab, .vs e .dif-l de lotes/previa.html e .vs-lr de lotes/index.html */
 html body.hero-redesign-v53 :is(#panel-min,#panel-acervo,#panel-par,#panel-modelos){--cx-ep:color-mix(in srgb,var(--hero-pront-paper,#fff) 65%,var(--hero-pront-header,#f3f1e8));--cx-ep2:var(--hero-pront-header,#f3f1e8);--cx-ew:var(--hero-pront-paper,#fff);--cx-el:var(--hero-pront-divider,#ded9cc);--cx-eo:var(--gold,#a57829);--cx-eo2:var(--hero53-gold,#805b18);--cx-ei:var(--fg,#1c3344);--cx-em:var(--muted-fg,#5d6b72)}
 html body.hero-redesign-v53 #panel-min #cmp-app :is(.hero-cortex-editorial:not(.is-fused) .hero-cortex-panel,.hero-cortex-editorial.is-fused){background:var(--cx-ep)!important;border:1px solid var(--cx-el)!important;border-left:2px solid var(--cx-eo)!important;border-radius:0!important;box-shadow:none!important}
 html body.hero-redesign-v53 #panel-min #cmp-app .hero-cortex-editorial :is(.mn-ed-h,.hero-review-ref-head,.hero-review-part,.hero-review-divider,.cx-res-h,.cx-vis){border-color:var(--cx-el)!important}

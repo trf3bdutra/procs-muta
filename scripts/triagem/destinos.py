@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Destinos da triagem: leva às coleções de decisões do CORTEX os processos triados que estão aptos.
+"""Destinos da triagem: leva às coleções de decisões do Cortex os processos triados que estão aptos.
 
 A partir dos lotes de triagem (acervo/lotes/adp-*.json), pelo "ato a proferir" registrado na triagem:
   - Monocrática    → decisão monocrática (artigo 932 do CPC) indicada com paradigma ("Possível"/"Provável") ou já
@@ -266,7 +266,7 @@ if GRAVAR:
             ant.setdefault('grupos', []).append(dict(g, id=gid))
         for proc, m in mx['itens'].items():
             if proc in (ant.get('itens') or {}) and (ant['itens'][proc].get('grupo')):
-                continue  # marca feita no CORTEX prevalece
+                continue  # marca feita no Cortex prevalece
             ant.setdefault('itens', {})[proc] = dict(m, grupo=novo_id[m['grupo']])
         ant['atualizado_em'] = HOJE; ant['por'] = POR
         p.write_text(json.dumps(ant, ensure_ascii=False, indent=1) + '\n', encoding='utf-8')

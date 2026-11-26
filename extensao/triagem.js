@@ -8,7 +8,7 @@
    nota e trecho), gravado a partir dos lotes por scripts/triagem/ficha_lote.py.
    Grava só o que a pessoa mudou (POST /api/pauta?ficha=1 {cnj, campos}); o servidor recusa o que não é editável.
    Daqui saem também: as etiquetas sugeridas para o PJe (copiar), a comparação do editor com a proposta e o precedente da
-   triagem (aba Comparar), a transferência do texto do editor para o CORTEX (aba Lote) e, nos autos digitais, a leitura
+   triagem (aba Comparar), a transferência do texto do editor para o Cortex (aba Lote) e, nos autos digitais, a leitura
    do painel esquerdo do PJe (autos.js: conferência das peças e preenchimento do prontuário). */
 (function () {
 'use strict';
@@ -103,7 +103,7 @@ function render() {
   var h = '<article class="card tr-cab"><p class="kicker">' + esc(R('Lote') || 'Sem registro de triagem em lote') + '</p><div class="mono">' + esc(T.cnj) + '</div>' +
     '<div class="muted">' + esc([f.classe_judicial || f.Classe, f.Assunto, f.tarefa_atual].filter(Boolean).join(' · ')) + '</div>' +
     (R('Assunto detalhado') ? '<h2 class="display tr-ad">' + esc(R('Assunto detalhado')) + '</h2>' : '') +
-    '<div class="bar"><button type="button" class="btn line" data-t="cmp">Comparar o editor com a triagem</button><button type="button" class="btn line" data-t="tx">Transferir texto do PJe ao CORTEX</button><button type="button" class="btn line" data-t="atu">Atualizar</button></div></article>';
+    '<div class="bar"><button type="button" class="btn line" data-t="cmp">Comparar o editor com a triagem</button><button type="button" class="btn line" data-t="tx">Transferir texto do PJe ao Cortex</button><button type="button" class="btn line" data-t="atu">Atualizar</button></div></article>';
   if (window.MutaAutos) h += window.MutaAutos.html(T.cnj, pecas);
   h += '<section class="card tr-b tr-ed"><p class="kicker">Prontuário de triagem <small class="muted">grava na ficha do processo</small></p>' +
     CAMPOS.map(function (g) { return '<h4 class="tr-g">' + esc(g[0]) + '</h4><div class="tr-grid">' + g[1].map(campo).join('') + '</div>'; }).join('') +

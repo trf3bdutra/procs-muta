@@ -1,5 +1,5 @@
 'use strict';
-/* CORTEX: ponte que recebe as minutas lidas no editor do PJe e as registra como versões no lote. */
+/* Cortex: ponte que recebe as minutas lidas no editor do PJe e as registra como versões no lote. */
 const { test } = require('node:test'), assert = require('node:assert/strict');
 const path = require('node:path'), fs = require('node:fs');
 const ROOT = path.resolve(__dirname, '../../..');

@@ -1,5 +1,5 @@
 'use strict';
-/* CORTEX novo (/amicus/cortex/ e /amicus/cortex/previa/); o anterior segue em /amicus/cortex/classico/ e na gestão (cg). */
+/* Cortex novo (/amicus/cortex/ e /amicus/cortex/previa/); o anterior segue em /amicus/cortex/classico/ e na gestão (cg). */
 const { test } = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
@@ -9,14 +9,14 @@ const html = fs.readFileSync(path.join(ROOT, 'apoio/ex-officio/lotes/previa.html
 const wf = fs.readFileSync(path.join(ROOT, '.github/workflows/vercel-caput.yml'), 'utf8');
 const scripts = [...html.matchAll(/<script>([\s\S]*?)<\/script>/g)].map(m => m[1]);
 
-test('o CORTEX novo é publicado em /amicus/cortex/ e o anterior em /classico/ e na gestão', () => {
+test('o Cortex novo é publicado em /amicus/cortex/ e o anterior em /classico/ e na gestão', () => {
   assert.match(wf, /cp apoio\/ex-officio\/lotes\/previa\.html site\/public\/amicus\/cortex\/index\.html/);
   assert.match(wf, /cp apoio\/ex-officio\/lotes\/previa\.html site\/public\/amicus\/cortex\/previa\/index\.html/);
   assert.match(wf, /cp apoio\/ex-officio\/lotes\/index\.html site\/public\/amicus\/cortex\/classico\/index\.html/);
   assert.match(wf, /cp apoio\/ex-officio\/lotes\/index\.html site\/public\/amicus\/cortex\/cg\/index\.html/);
   assert.match(html, /location\.replace\('\/amicus\/cortex\/classico\/'/, 'o link do Relator segue para o clássico');
 });
-test('só grava a matriz (gestor) e a marca do PJe; as leituras são da API do CORTEX e da pauta', () => {
+test('só grava a matriz (gestor) e a marca do PJe; as leituras são da API do Cortex e da pauta', () => {
   const posts = [...html.matchAll(/method\s*:\s*['"]POST['"]/gi)];
   assert.equal(posts.length, 2, 'dois pontos de gravação');
   const acoes = [...html.matchAll(/\bacao\s*:\s*'([^']+)'/g)].map(m => m[1]).sort();
@@ -55,7 +55,7 @@ test('scripts válidos e HTML completo', () => {
   assert.ok(scripts.length >= 2);
   scripts.forEach(s => assert.doesNotThrow(() => new Function(s)));
 });
-test('mesmo tema do CORTEX (cmt-eq-tema) e visual editorial', () => {
+test('mesmo tema do Cortex (cmt-eq-tema) e visual editorial', () => {
   assert.match(html, /cmt-eq-tema/);
   assert.match(html, /--eo:#a57829/);
   assert.match(html, /font-family:var\(--eser\);font-style:italic/);

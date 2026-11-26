@@ -51,9 +51,9 @@ jobs:
         if: steps.v.outputs.publicar == '1'
         with:
           node-version: "20"
-      # Trava do CORTEX: se lotes/previa.html perder o que os testes cobrem (por exemplo, gravado por cima com uma cópia
+      # Trava do Cortex: se lotes/previa.html perder o que os testes cobrem (por exemplo, gravado por cima com uma cópia
       # antiga, como em 3e4f452), a publicação para aqui e o site continua na versão anterior.
-      - name: Confere o CORTEX
+      - name: Confere o Cortex
         if: steps.v.outputs.publicar == '1'
         working-directory: apoio/ex-officio
         run: node --test tests/collectio-previa.test.js tests/collectio-matriz.test.js
@@ -99,12 +99,12 @@ jobs:
           # /cmt/ é o endereço próprio do painel do relator (mesma página da Ex Officio).
           mkdir -p site/public/cmt && cp apoio/ex-officio/index.html site/public/cmt/index.html
           mkdir -p site/public/editor && cp apoio/modus-operandi/modus-operandi-editor.html site/public/editor/index.html
-          # Amicus Curiae: CORTEX e Compendium são ferramentas irmãs do projeto.
-          # CORTEX: /amicus/cortex/ (Geral) e /amicus/cortex/cg/ (controle e gestão). /cmt/ e /gc/ ficam só para links antigos:
+          # Amicus Curiae: Cortex e Compendium são ferramentas irmãs do projeto.
+          # Cortex: /amicus/cortex/ (Geral) e /amicus/cortex/cg/ (controle e gestão). /cmt/ e /gc/ ficam só para links antigos:
           # a própria página troca o endereço para o canônico (o Desembargador vê a página geral com o que foi liberado para ele).
           mkdir -p site/public/amicus/cortex/cg site/public/amicus/cortex/cmt site/public/amicus/cortex/gc site/public/amicus/compendium
           cp apoio/amicus/index.html site/public/amicus/index.html
-          # /amicus/cortex/ é o CORTEX novo (fluxo da minuta, matriz construível, versões entre coleções); o anterior segue em
+          # /amicus/cortex/ é o Cortex novo (fluxo da minuta, matriz construível, versões entre coleções); o anterior segue em
           # /amicus/cortex/classico/ (registrar versão, conformidade, Compendium e a visão do Relator) e é a página da gestão (cg)
           cp apoio/ex-officio/lotes/previa.html site/public/amicus/cortex/index.html
           mkdir -p site/public/amicus/collectio && cp apoio/modus-operandi/collectio.html site/public/amicus/collectio/index.html
@@ -112,11 +112,11 @@ jobs:
           cp apoio/ex-officio/lotes/index.html site/public/amicus/cortex/cg/index.html
           cp apoio/ex-officio/lotes/index.html site/public/amicus/cortex/cmt/index.html
           cp apoio/ex-officio/lotes/index.html site/public/amicus/cortex/gc/index.html
-          # motor da conformidade da extensão Muta, usado também pelas versões da minuta no CORTEX
+          # motor da conformidade da extensão Muta, usado também pelas versões da minuta no Cortex
           cp extensao/conformidade-motor.js site/public/amicus/cortex/conformidade-motor.js
-          # ponte para registrar no CORTEX as minutas lidas no editor do PJe (janela aberta pelo PJe, com código da importação)
+          # ponte para registrar no Cortex as minutas lidas no editor do PJe (janela aberta pelo PJe, com código da importação)
           cp apoio/ex-officio/lotes/pje.html site/public/amicus/cortex/pje.html
-          # prévia do CORTEX melhorado (/amicus/cortex/previa/): página só de leitura, com os mesmos dados e o mesmo login
+          # prévia do Cortex melhorado (/amicus/cortex/previa/): página só de leitura, com os mesmos dados e o mesmo login
           mkdir -p site/public/amicus/cortex/previa && cp apoio/ex-officio/lotes/previa.html site/public/amicus/cortex/previa/index.html
           cp apoio/modus-operandi/modus-operandi.html site/public/amicus/compendium/index.html
           # Collegium: painel interno do /amicus (#jur-collegium, sem iframe). O ementário gerado (collegium.html) vai como fonte.html, que o
@@ -137,7 +137,7 @@ jobs:
           mkdir -p site/public/caput site/public/monitor/triagem
           cp caput/triagem/index.html site/public/caput/index.html
           mkdir -p site/public/cognitio && cp cognitio/index.html cognitio/auth.js site/public/cognitio/
-          # Cabeçalho compartilhado: Cognitio, CORTEX, Compendium, Collegium, editor e portal Amicus.
+          # Cabeçalho compartilhado: Cognitio, Cortex, Compendium, Collegium, editor e portal Amicus.
           python3 apoio/amicus/references.py site/public/amicus/index.html
           python3 apoio/amicus/header.py site/public
           cp caput/triagem/index.html site/public/monitor/triagem/index.html

@@ -609,7 +609,7 @@ test('extensão 0.44: Ler/Reler sempre a íntegra; documentos do Roteiro em Auto
   assert.match(r, /var DOC_RT = \{/); assert.match(r, /data-aba="Autos" title="Editar em Autos › Peças e documentos"/);
 });
 
-test('extensão 0.45: Comparar só com modelos, precedentes, texto colado e 28,86%; minuta-matriz na Conformidade; Corretor com subabas e CORTEX fora da navegação', () => {
+test('extensão 0.45: Comparar só com modelos, precedentes, texto colado e 28,86%; minuta-matriz na Conformidade; Corretor com subabas e Cortex fora da navegação', () => {
   const c = read('extensao/comparar.js'), h = read('extensao/painel.html'), g = read('extensao/gerador.js');
   assert.match(c, /var FORA_CMP = \{ matriz: 1, lote: 1, tri: 1, par: 1 \};/); assert.match(c,/f\[0\] !== 'm2886'/); assert.match(c, /function estruturaConformidade\(aoBaixar\)/);
   assert.match(read('extensao/conformidade.js'), /window\.MutaComparar\.estruturaConformidade\(render\)/);
@@ -707,13 +707,13 @@ test('extensão 0.50: 2ª seta sem duplicados; situação calculada pelas sinali
   assert.match(c, /matriz: function \(\) \{ try \{ return C\.dados \? matrizDoProcesso\(\) : null;/);
 });
 
-test('extensão 0.51: CORTEX com o PJe aberto — referência na versão final, versões, confronto por seção, veredito, PJe conferido e tag nos cartões', () => {
+test('extensão 0.51: Cortex com o PJe aberto — referência na versão final, versões, confronto por seção, veredito, PJe conferido e tag nos cartões', () => {
   const l = read('extensao/lote.js'), c = read('extensao/conteudo-pje.js');
   assert.match(l, /function refPadrao\(\)/); assert.match(l, /a\.it\.final && a\.it\.final\.versao/); assert.match(l, /&versoes=1/); assert.match(l, /&versao=/);
   assert.match(l, /function confrontar\(\)/); assert.match(l, /function qualVersao\(ed, ref\)/); assert.match(l, /acao: 'minuta-pje'/);
   assert.match(l, /'muta-collectio-conf'/); assert.match(l, /function autoAba\(\)/); assert.match(l, /window\.MutaGerador\.modo\('lote'\)/);
-  assert.match(l, /\[\['cmp', 'Editor × CORTEX'/); assert.match(l, /function confVersao\(m\)/);
-  assert.match(c, /function colTag\(k, r, texto\)/); assert.match(c, /'= CORTEX' : '≠ CORTEX'/);
+  assert.match(l, /\[\['cmp', 'Editor × Cortex'/); assert.match(l, /function confVersao\(m\)/);
+  assert.match(c, /function colTag\(k, r, texto\)/); assert.match(c, /'= Cortex' : '≠ Cortex'/);
   assert.match(read('extensao/conformidade-motor.js'), /cabecalhoPje: cabecalhoPje/); assert.match(read('extensao/conformidade.js'), /contexto: function \(\)/);
 });
 

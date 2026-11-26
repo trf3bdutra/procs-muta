@@ -1,12 +1,12 @@
-/* Muta · aba Lote (Amicus Curiae · CORTEX)
+/* Muta · aba Lote (Amicus Curiae · Cortex)
    Função principal: conferir a minuta registrada no lote com a minuta que está no editor do PJe
-   (tarefa [Sessão] Aguardando a sessão), com a mesma comparação do botão "Comparar" do CORTEX
+   (tarefa [Sessão] Aguardando a sessão), com a mesma comparação do botão "Comparar" do Cortex
    (parágrafos por LCS; dentro do parágrafo, palavra a palavra; opção de ignorar espaços, aspas e travessões).
      GET /api/painel?lote=1                      lotes visíveis
      GET /api/painel?lote=1&id=<lote>            o lote (itens com o cartão do prontuário)
      GET /api/painel?lote=1&id=<lote>&minuta=X   minuta do processo (X = 10 primeiros caracteres do número)
    O texto do editor vem do conteudo-pje.js (só leitura). Sem editor detectado, dá para colar o texto.
-   Também mostra o perfil do processo no lote. A gestão do lote continua no CORTEX (/amicus/cortex/). */
+   Também mostra o perfil do processo no lote. A gestão do lote continua no Cortex (/amicus/cortex/). */
 (function () {
 'use strict';
 var SITE = Muta.SITE, ses = window.MutaSessao, br = window.MutaProntuarioBridge;
@@ -67,7 +67,7 @@ function atualizar(forcar) {
   });
 }
 
-/* ---------- comparação (a mesma do CORTEX: lotes/index.html, compara()) ---------- */
+/* ---------- comparação (a mesma do Cortex: lotes/index.html, compara()) ---------- */
 function nrm(t, ws) { t = String(t || ''); if (ws) t = t.replace(/[“”«»„]/g, '"').replace(/[‘’`´]/g, "'").replace(/[–—]/g, '-').replace(/\s+/g, ' '); return t.trim(); }
 function lcs(a, b, eq) {
   var n = a.length, m = b.length, D = [], i, j;
@@ -211,7 +211,7 @@ function qualVersao(ed, ref) {
   var igual = function (m) { return m && m.secoes && SECS.every(function (sx) { var A = linhasSec(m, sx[0]), B = ed[sx[0]] || []; return A.length === B.length && A.every(function (x, i) { return nrm(x, true) === nrm(B[i], true); }); }); };
   return cands.reduce(function (p, v) { return p.then(function (ach) { return ach || textoVersao(v).then(function (m) { return igual(m) ? v : ''; }); }); }, Promise.resolve(''));
 }
-/* o último confronto, para a tag "= CORTEX" / "≠ CORTEX" nos cartões da lista do PJe (conteudo-pje.js) */
+/* o último confronto, para a tag "= Cortex" / "≠ Cortex" nos cartões da lista do PJe (conteudo-pje.js) */
 function guardarConf(R) {
   try {
     if (typeof chrome === 'undefined' || !chrome.storage || !chrome.storage.local) return;
@@ -226,21 +226,21 @@ function veredito() {
   var k = chaveMin(), R = V.conf[k], I = indice(), L = (I && I.versoes) || [], ref = refAtual(), rx = L.filter(function (x) { return x.id === ref; })[0];
   var nomeRef = rx ? rotV(rx) : 'vigente';
   if (CP.lendo) return '<p class="lt-vd">Lendo o editor do PJe…</p>';
-  if (!CP.texto.trim()) return '<p class="lt-vd muted">' + (CP.erro ? esc(CP.erro) + ' · ' : '') + 'Abra a minuta no editor do PJe e toque em Ler para conferir com o CORTEX.</p>';
+  if (!CP.texto.trim()) return '<p class="lt-vd muted">' + (CP.erro ? esc(CP.erro) + ' · ' : '') + 'Abra a minuta no editor do PJe e toque em Ler para conferir com o Cortex.</p>';
   if (!R) return '<p class="lt-vd">Conferindo…</p>';
   if (R.erro) return '<p class="lt-vd err">' + esc(R.erro) + '</p>';
-  if (!R.total) return '<p class="lt-vd ok"><b>PJe igual ao CORTEX</b> · referência ' + esc(nomeRef) + '</p>';
+  if (!R.total) return '<p class="lt-vd ok"><b>PJe igual ao Cortex</b> · referência ' + esc(nomeRef) + '</p>';
   var por = Object.keys(R.secs).filter(function (s) { return R.secs[s].npar > 0; }).map(function (s) { return (s === '*' ? 'minuta' : SECS.filter(function (x) { return x[0] === s; })[0][1].toLowerCase()) + ' ' + R.secs[s].npar; }).join(', ');
   var pj = R.pjeEm ? L.filter(function (x) { return x.id === R.pjeEm; })[0] : null;
   return '<p class="lt-vd dif"><b>' + R.total + ' parágrafo' + (R.total > 1 ? 's diferentes' : ' diferente') + '</b> (' + esc(por) + ') · referência ' + esc(nomeRef) + '</p>' +
-    (pj ? '<p class="lt-vd dif2">O texto do PJe é a ' + esc(rotV(pj)) + (String(pj.em || '') < String((rx || {}).em || '') ? ': o CORTEX tem versão mais nova, falta colar no PJe' : '') + '.</p>' : '');
+    (pj ? '<p class="lt-vd dif2">O texto do PJe é a ' + esc(rotV(pj)) + (String(pj.em || '') < String((rx || {}).em || '') ? ': o Cortex tem versão mais nova, falta colar no PJe' : '') + '.</p>' : '');
 }
 function desenha() { if (!$('lt-corpo')) return; var h = $('lt-vd-box'); if (h) h.innerHTML = veredito() + acoesVd(); var c = $('lt-corpo'); c.innerHTML = corpo(); }
 function acoesVd() {
   var a = V.achados[V.sel], R = V.conf[chaveMin()], ref = refAtual(); if (!a) return '';
   var podePje = R && !R.erro && !R.total && ref !== 'vig' && !(a.it.pje && a.it.pje.versao === ref);
   return '<div class="bar lt-ac"><button type="button" class="btn sm" data-cp="ler"' + (CP.lendo ? ' disabled' : '') + '>' + (CP.texto && !CP.colado ? 'Ler de novo' : 'Ler o editor') + '</button>' +
-    (podePje ? '<button type="button" class="btn sm solid" data-lt="pje" title="Registra no CORTEX que esta é a versão que está no PJe (e a data da correção, se faltava)">PJe conferido: marcar ' + esc(ref) + '</button>' : '') +
+    (podePje ? '<button type="button" class="btn sm solid" data-lt="pje" title="Registra no Cortex que esta é a versão que está no PJe (e a data da correção, se faltava)">PJe conferido: marcar ' + esc(ref) + '</button>' : '') +
     (a.it.pje ? '<small class="muted">no PJe: ' + esc(a.it.pje.versao) + (a.it.pje.em ? ' em ' + brD(a.it.pje.em) : '') + (a.it.pje.por ? ' por ' + esc(a.it.pje.por) : '') + '</small>' : '') + '</div>';
 }
 function corpo() {
@@ -253,7 +253,7 @@ function corpo() {
   var ks = Object.keys(R.secs);
   return (ks.length > 1 ? '<div class="seg pmodos lt-secs" role="tablist">' + ks.map(function (s) { var d = R.secs[s]; return '<button type="button" role="tab" data-secv="' + s + '" aria-selected="' + (V.secv === s) + '">' + (s === '*' ? 'Minuta' : SECS.filter(function (x) { return x[0] === s; })[0][1]) + ' <i class="' + (d.npar ? 'dif' : 'ok') + '">' + (d.npar ? d.npar : '=') + '</i></button>'; }).join('') + '</div>' : '') +
     '<div class="bar cp-opc"><label><input type="checkbox" data-cp="ws"' + (CP.ws ? ' checked' : '') + '> ignorar espaços, aspas e travessões</label><label><input type="checkbox" data-cp="sd"' + (CP.sd ? ' checked' : '') + '> só as diferenças</label></div>' +
-    '<div class="cx-lg"><span><del>riscado</del> só no CORTEX</span><span><ins>verde</ins> só no PJe</span></div>' +
+    '<div class="cx-lg"><span><del>riscado</del> só no Cortex</span><span><ins>verde</ins> só no PJe</span></div>' +
     '<div class="cx-out">' + ((R.secs[V.secv] || R.secs[ks[0]] || {}).h || '') + '</div>' +
     (CP.texto && !CP.colado ? '<p class="muted cp-fonte">Texto lido do PJe (' + esc(CP.fonte) + ')' + (R.porSec ? '' : ' · sem os títulos RELATÓRIO, VOTO, EMENTA e ACÓRDÃO no editor: comparada a minuta inteira') + '</p>' : '');
 }
@@ -307,11 +307,11 @@ function render() {
     '<h2 class="display">' + esc(it.tipo_caso || (grupo && grupo.rotulo) || 'Processo do lote') + '</h2>' +
     '<div class="mono">' + esc(it.processo) + '</div><div class="muted">' + esc(it.recurso || '') + (it.partes ? ' · ' + esc(it.partes) : '') + '</div>' +
     '<div class="bar"><span class="chip">' + esc(eq.situacao || '—') + (dt.liberacao && /libera/i.test(eq.situacao || '') ? ' · ' + brD(dt.liberacao) : '') + '</span>' + pes('Minuta', eq.minuta, dt.minuta) + pes('Correção', eq.correcao, dt.correcao) + (dt.liberacao && !/libera/i.test(eq.situacao || '') ? '<span class="chip">Liberada · ' + brD(dt.liberacao) + '</span>' : '') + (it.final ? '<span class="chip">Final · ' + esc(it.final.versao) + '</span>' : '') + '</div>' +
-    '<div class="bar lt-refbar">' + selRef + '<a class="btn line sm" target="_blank" rel="noopener noreferrer" href="' + SITE + '/amicus/cortex/?id=' + encodeURIComponent(l.id) + '#p=' + encodeURIComponent(it.sessao + '-' + it.item) + '">Abrir no CORTEX</a><button type="button" class="btn line sm" data-atu>Atualizar</button></div>' +
+    '<div class="bar lt-refbar">' + selRef + '<a class="btn line sm" target="_blank" rel="noopener noreferrer" href="' + SITE + '/amicus/cortex/?id=' + encodeURIComponent(l.id) + '#p=' + encodeURIComponent(it.sessao + '-' + it.item) + '">Abrir no Cortex</a><button type="button" class="btn line sm" data-atu>Atualizar</button></div>' +
     '<div id="lt-vd-box">' + veredito() + acoesVd() + '</div>' +
     (V.msg ? '<p class="status' + (/^Não/.test(V.msg) ? ' err' : ' ok') + '">' + esc(V.msg) + '</p>' : '') +
     '</article>' +
-    '<div class="seg pmodos lt-modos" role="tablist" aria-label="CORTEX">' + [['cmp', 'Editor × CORTEX', 'confronto por seção'], ['min', 'Minuta', 'versões e texto'], ['inf', 'Informações', 'perfil, ajustes e transferir']].map(function (x) { return '<button type="button" role="tab" data-ltm="' + x[0] + '" aria-selected="' + (V.modo === x[0]) + '" title="' + x[2] + '">' + x[1] + '</button>'; }).join('') + '</div>' +
+    '<div class="seg pmodos lt-modos" role="tablist" aria-label="Cortex">' + [['cmp', 'Editor × Cortex', 'confronto por seção'], ['min', 'Minuta', 'versões e texto'], ['inf', 'Informações', 'perfil, ajustes e transferir']].map(function (x) { return '<button type="button" role="tab" data-ltm="' + x[0] + '" aria-selected="' + (V.modo === x[0]) + '" title="' + x[2] + '">' + x[1] + '</button>'; }).join('') + '</div>' +
     '<section class="card lt-corpo" id="lt-corpo"></section>' +
     (V.modo === 'inf' ? infoHtml(l, it) : '');
   caixa.innerHTML = h;
@@ -330,14 +330,14 @@ function infoHtml(l, it) {
     (Array.isArray(it.pendencias) && it.pendencias.length ? '<div class="lt-f"><span class="gl">Pendências</span><ul>' + it.pendencias.map(function (p) { return '<li>' + esc(typeof p === 'string' ? p : (p.texto || JSON.stringify(p))) + '</li>'; }).join('') + '</ul></div>' : (typeof it.pendencias === 'string' ? campo('Pendências', it.pendencias) : '')) +
     '</section>' + txHtml(l, it);
 }
-/* ---------- transferir o texto do editor do PJe para o CORTEX (nova versão da minuta do processo no lote) ---------- */
+/* ---------- transferir o texto do editor do PJe para o Cortex (nova versão da minuta do processo no lote) ---------- */
 var TX = { rotulo: '', vigente: true, prev: null, enviando: false, msg: '', erro: '' };
 function hojeBr() { var d = new Date(); return ('0' + d.getDate()).slice(-2) + '/' + ('0' + (d.getMonth() + 1)).slice(-2) + '/' + d.getFullYear(); }
 function secoesEditor() {
   var E = window.MutaEditor ? window.MutaEditor.estado() : null, CX = window.MutaComparador;
   if (!E || !E.texto || !CX) return null;
   var P = CX.partes(E.paragrafos || []), o = {};
-  if (!P.achou) return { erro: 'Não achei no editor os títulos RELATÓRIO, VOTO, EMENTA e ACÓRDÃO (um por linha). Sem eles, o CORTEX não separa as partes.' };
+  if (!P.achou) return { erro: 'Não achei no editor os títulos RELATÓRIO, VOTO, EMENTA e ACÓRDÃO (um por linha). Sem eles, o Cortex não separa as partes.' };
   SECS.forEach(function (s) { o[s[0]] = (P[s[0]] || []).map(function (p) { return String(p.t || '').trim(); }).filter(Boolean); });
   return { secoes: o, fonte: E.fonte || 'editor do PJe', numero: E.numero || '' };
 }
@@ -345,14 +345,14 @@ function txHtml(l, it) {
   var u = (ses.estado() || {}).usuario || '';
   if (!TX.rotulo) TX.rotulo = 'Texto do PJe · ' + (u ? u + ' · ' : '') + hojeBr();
   var p = TX.prev;
-  return '<section class="card lt-tx" id="lt-tx"><p class="kicker">Transferir o texto do PJe para o CORTEX</p>' +
+  return '<section class="card lt-tx" id="lt-tx"><p class="kicker">Transferir o texto do PJe para o Cortex</p>' +
     '<p class="muted">Nova versão no lote <b>' + esc(l.titulo) + '</b> (as anteriores ficam guardadas).</p>' +
     '<label class="lt-tx-f">Nome da versão <input type="text" data-tx="rotulo" maxlength="80" value="' + esc(TX.rotulo) + '"></label>' +
-    '<label class="lt-tx-c"><input type="checkbox" data-tx="vigente"' + (TX.vigente ? ' checked' : '') + '> Tornar vigente (é a versão que o CORTEX e o Relator veem); desmarcado, só guarda</label>' +
+    '<label class="lt-tx-c"><input type="checkbox" data-tx="vigente"' + (TX.vigente ? ' checked' : '') + '> Tornar vigente (é a versão que o Cortex e o Relator veem); desmarcado, só guarda</label>' +
     (p && p.secoes ? '<p class="muted lt-tx-p">Lido agora' + (p.numero ? ' nos autos ' + esc(p.numero) : '') + ': ' + SECS.map(function (s) { return s[1] + ' ' + p.secoes[s[0]].length + ' §'; }).join(' · ') + '</p>' : '') +
     (p && p.erro ? '<p class="status err">' + esc(p.erro) + '</p>' : '') +
     (TX.erro ? '<p class="status err">' + esc(TX.erro) + '</p>' : '') + (TX.msg ? '<p class="status ok">' + esc(TX.msg) + '</p>' : '') +
-    '<div class="bar"><button type="button" class="btn line" data-tx="ler">Ler o editor</button><button type="button" class="btn solid" data-tx="enviar"' + (TX.enviando ? ' disabled' : '') + '>' + (TX.enviando ? 'Transferindo…' : 'Transferir para o CORTEX') + '</button></div></section>';
+    '<div class="bar"><button type="button" class="btn line" data-tx="ler">Ler o editor</button><button type="button" class="btn solid" data-tx="enviar"' + (TX.enviando ? ' disabled' : '') + '>' + (TX.enviando ? 'Transferindo…' : 'Transferir para o Cortex') + '</button></div></section>';
 }
 function txRedesenha() { var a = V.achados[V.sel], box = $('lt-tx'); if (!a || !box) return; var d = document.createElement('div'); d.innerHTML = txHtml(a.lote, a.it); box.replaceWith(d.firstChild); }
 function txLer() {
@@ -375,7 +375,7 @@ function txEnviar() {
       return ses.api('/api/painel?lote=1', { method: 'POST', body: JSON.stringify({ acao: 'minuta-versao', id: a.lote.id, processo: a.it.processo, rotulo: TX.rotulo.trim() || 'Texto do PJe',
         origem: 'Editor do PJe (' + p.fonte + ') · transferido pela extensão HERO18810 em ' + hojeBr(), secoes: p.secoes, vigente: !!TX.vigente }) })
         .then(function (j) {
-          TX.enviando = false; TX.msg = 'Gravado no CORTEX: versão ' + ((j.versoes || []).slice(-1)[0] || {}).id + (j.trocouVigente ? ', vigente.' : ', guardada.'); TX.rotulo = '';
+          TX.enviando = false; TX.msg = 'Gravado no Cortex: versão ' + ((j.versoes || []).slice(-1)[0] || {}).id + (j.trocouVigente ? ', vigente.' : ', guardada.'); TX.rotulo = '';
           var k = a.lote.id + '/' + String(a.it.processo).slice(0, 10); if (j.minuta) V.minuta[k] = j.minuta; else delete V.minuta[k];
           a.it.minuta = true; render();
         }, function (e) { TX.enviando = false; TX.erro = e.status === 401 ? 'Entre no Ex Officio para transferir.' : 'Não foi possível transferir: ' + e.message; txRedesenha(); });
@@ -392,7 +392,7 @@ function marcarPje() {
   var a = V.achados[V.sel], ref = refAtual(); if (!a || ref === 'vig') return;
   V.msg = 'Gravando…'; render();
   ses.api('/api/painel?lote=1', { method: 'POST', body: JSON.stringify({ acao: 'minuta-pje', id: a.lote.id, processo: a.it.processo, versao: ref, marcado: true }) }).then(function (j) {
-    a.it.pje = j.pje || { versao: ref }; delete V.vers[chaveMin()]; V.msg = 'Registrado no CORTEX: a ' + ref + ' é a do PJe.'; carregarIndice().then(render);
+    a.it.pje = j.pje || { versao: ref }; delete V.vers[chaveMin()]; V.msg = 'Registrado no Cortex: a ' + ref + ' é a do PJe.'; carregarIndice().then(render);
   }, function (e) { V.msg = 'Não gravou: ' + (e.message || 'erro'); render(); });
 }
 function copiar(t, el) {
@@ -428,7 +428,7 @@ if (caixa) caixa.addEventListener('input', function (e) {
   clearTimeout(tCol); tCol = setTimeout(function () { CP.texto = t.value; CP.ps = null; CP.colado = !!t.value.trim(); CP.erro = ''; CP.fonte = ''; confrontar(); }, 600);
 });
 document.addEventListener('muta:prontuario', function () { if (aberta()) atualizar(false); if (caixa) autoAba(); });
-/* 0.51: para o gestor, processo de lote abre a aba Minuta no CORTEX (se ela estava no Comparar); fora de lote, volta ao Comparar */
+/* 0.51: para o gestor, processo de lote abre a aba Minuta no Cortex (se ela estava no Comparar); fora de lote, volta ao Comparar */
 var ultAuto = '';
 function autoAba() {
   var s0 = ses.estado(); if (!s0 || !s0.gestor || !window.MutaGerador || !window.MutaGerador.modo) return;
@@ -454,7 +454,7 @@ function minutasDoProcesso(chave) {
     }));
   });
 }
-/* 0.51: o processo aberto está em algum lote? (a aba Minuta abre no CORTEX para o gestor) */
+/* 0.51: o processo aberto está em algum lote? (a aba Minuta abre no Cortex para o gestor) */
 function temLote(chave) { return base(false).then(function () { return !!procurar(chave).length; }, function () { return false; }); }
 window.MutaLote = { temLote: temLote, transferir: function () { if (window.MutaAbas) window.MutaAbas.ir('min'); var d = $('panel-lote'); if (d && !d.open) { d.open = true; atualizar(false); } setTimeout(function () { var x = $('lt-tx'); if (x) x.scrollIntoView({ block: 'start' }); }, 500); }, abrir: function () { atualizar(false); }, sessao: function () { if (aberta()) atualizar(false); }, lerEditor: lerEditor, minutasDoProcesso: minutasDoProcesso };
 })();

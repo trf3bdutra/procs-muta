@@ -14,7 +14,7 @@
   var ABA = { Processo: 'Processo: sinalizações em aberto, notas, síntese, questões, peças e controles',
     Autos: 'Autos: conferência automática e peças (lidas/total; texto, OCR, JSON e PDF)', Roteiro: 'Roteiro de triagem: passos conferidos/total do tipo de julgamento, com todos os campos da triagem',
     'Produção': 'Produção: campos preenchidos/total — pronunciamento, decisão, revisão, ementa, liberação e pauta' };
-  var NAV = { 'tab-pront': 'Prontuário do processo aberto no PJe', 'tab-min': 'Minuta: o texto do editor do PJe comparado com a matriz, o CORTEX e a conformidade',
+  var NAV = { 'tab-pront': 'Prontuário do processo aberto no PJe', 'tab-min': 'Minuta: o texto do editor do PJe comparado com a matriz, o Cortex e a conformidade',
     'tab-acervo': 'Ementário: precedentes do Relator e do gabinete', 'tab-par': 'Parágrafos-padrão do gabinete, para buscar e copiar', 'tab-dir': 'Diretrizes: Manual CMT e lista de caça',
     'tab-ajuda': 'Ajuda e instalação' };
   var ID = { 'pje-seguir': 'Acompanhar o PJe: o painel segue o processo aberto na aba do PJe (desligado, congela o processo atual)',

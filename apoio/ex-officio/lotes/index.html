@@ -81,7 +81,7 @@
 <!-- /favicon:cmt -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
-<title>CORTEX · Amicus Curiae · CMT</title>
+<title>Cortex · Amicus Curiae · CMT</title>
 <script>try{document.documentElement.setAttribute('data-theme',localStorage.getItem('cmt-eq-tema')||'light')}catch(e){}</script>
 <!-- Painel de lotes (/lotes/): página própria, desenhada como parte do Painel do relator (/cmt), com o mesmo tema (cmt-eq-tema),
      /amicus/cortex/ é a página geral (o Desembargador, pelo perfil ou pela chave do link próprio, vê nela só o que foi liberado para ele);
@@ -337,7 +337,7 @@ html[data-theme=dark] .cx-out del{background:#5a2420;color:#ffd5cf}html[data-the
 #toast.on{opacity:1}
 @media print{.lx-nx,.lx-sub,.cmt-hd2 .cmt-ut,.cmt-ph,.pf .nav,.mbar .b{display:none!important}.pf{break-inside:avoid-page}}
 
-/* CORTEX: Coleção de Pauta única + Coleções Avulsas */
+/* Cortex: Coleção de Pauta única + Coleções Avulsas */
 .col-areas{border:1px solid var(--el);background:var(--ep);padding:10px;min-width:0;margin-top:10px}
 .col-tipos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px;margin-bottom:12px}
 .col-tipos button{border:1px solid var(--el);padding:9px 4px;background:var(--ep2);font:700 11px var(--font);cursor:pointer;min-width:0}
@@ -480,7 +480,7 @@ html[data-theme=dark] .cx-out del{background:#5a2420;color:#ffd5cf}html[data-the
 }
 
 
-/* CORTEX · ajustes de 20/11/2026: barra, tabela, cartões e menu lateral */
+/* Cortex · ajustes de 20/11/2026: barra, tabela, cartões e menu lateral */
 html{overflow-x:clip}                                   /* a barra em largura total (100vw) não abre rolagem horizontal */
 .lx-ir{display:flex;align-items:center;gap:2px;margin-left:clamp(6px,1.6vw,22px);padding-left:clamp(6px,1.2vw,14px);border-left:1px solid var(--el);align-self:center;min-height:30px}
 .hb.ic{padding:0;width:34px;justify-content:center}
@@ -544,7 +544,7 @@ html{overflow-x:clip}                                   /* a barra em largura to
 </head>
 <body class="relator">
 <div class="cv" id="cv">
- <div class="cmt-load" id="ld" data-cmt-loader="legacy" data-cmt-loader-family="compendium"><span class="cmt-ld-mk"><i class="star"></i></span><p class="cmt-ld-k">CMT · Amicus Curiae</p><p class="cmt-ld-t">CORTEX do <em>gabinete.</em></p><p class="cmt-ld-s" id="ld-s"></p><p class="cmt-ld-m" id="ld-m">Lendo o lote, os cartões do prontuário nas sessões e as minutas…</p><div class="cmt-ld-b"><i></i></div></div>
+ <div class="cmt-load" id="ld" data-cmt-loader="legacy" data-cmt-loader-family="compendium"><span class="cmt-ld-mk"><i class="star"></i></span><p class="cmt-ld-k">CMT · Amicus Curiae</p><p class="cmt-ld-t">Cortex do <em>gabinete.</em></p><p class="cmt-ld-s" id="ld-s"></p><p class="cmt-ld-m" id="ld-m">Lendo o lote, os cartões do prontuário nas sessões e as minutas…</p><div class="cmt-ld-b"><i></i></div></div>
  <div id="app" hidden></div>
 </div>
 <div id="toast">Copiado</div>
@@ -558,7 +558,7 @@ let VARIAS_SES=false, TEM_OBS=false, RELATOR=false, VIS=new Set(), PEND=new Map(
 const params=new URLSearchParams(location.search);
 const CAPUT=params.get('caput')==='1'; /* aberto dentro da triagem do Caput */
 const FILT_SESSAO=String(params.get('sessao')||'').trim(), FILT_MINUTISTA=String(params.get('minutista')||'').trim();
-/* Amicus Curiae · CORTEX: duas páginas no mesmo arquivo. Rotas canônicas: /amicus/cortex/ (Geral) e /amicus/cortex/cg/ (controle e gestão).
+/* Amicus Curiae · Cortex: duas páginas no mesmo arquivo. Rotas canônicas: /amicus/cortex/ (Geral) e /amicus/cortex/cg/ (controle e gestão).
    A antiga página do Desembargador (/amicus/cortex/cmt/ e rotas /index/cm, /lote/cmt, /cmt/lotes) abre a página geral: quem entra com o perfil
    de desembargador ou com a chave do link próprio recebe da API só os processos liberados para ele (R.relator), na mesma página. */
 const PATH=location.pathname.toLowerCase();
@@ -568,15 +568,15 @@ const MODO=(/^\/amicus\/cortex\/(?:gc|cg)(?:\/|$)/.test(PATH)||/^\/lote\/(?:cg|g
 let MODO_REL=false;   /* passa a true quando a API responde como Relator (perfil desembargador ou chave do link próprio) */
 let VZ=MODO==='cg'?'tudo':MODO;
 /* linha de abertura do carregamento, no lugar da saudação do Painel do Desembargador */
-(function(){const e=document.getElementById('ld-s');if(e)e.textContent=MODO==='cg'?'CORTEX · CG.':'CORTEX · Geral.'})();
+(function(){const e=document.getElementById('ld-s');if(e)e.textContent=MODO==='cg'?'Cortex · CG.':'Cortex · Geral.'})();
 /* O endereço escolhe a visão; a API exige sessão válida ou chave do relator (CMT_CHAVE). */
 const CMTK=(function(){try{const m=/[?&#]k=([^&#]+)/.exec(location.search+location.hash);if(m){const v=decodeURIComponent(m[1]);sessionStorage.setItem('cmt_k',v);const q=new URLSearchParams(location.search);q.delete('k');history.replaceState(null,'',location.pathname+(q.toString()?'?'+q:'')+location.hash.replace(/[#&]?k=[^&#]+/,''))}return sessionStorage.getItem('cmt_k')||''}catch(e){return ''}})();
 async function api(q){const h={};if(CMTK)h['x-cmt-chave']=CMTK;const r=await fetch('/api/painel?lote=1'+(MODO_REL?'&rel=1':MODO==='cg'?'&modo=cg':'')+(q?'&'+q.replace(/^\?/,''):''),{credentials:'same-origin',headers:h});const j=await r.json().catch(()=>({}));if(!r.ok){const e=new Error(j.erro||('HTTP '+r.status));e.status=r.status;throw e}return j}
 async function post(b){const r=await fetch('/api/painel?lote=1',{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)});const j=await r.json().catch(()=>({}));if(!r.ok){const e=new Error(j.erro||('HTTP '+r.status));e.status=r.status;throw e}return j}
 function mostra(html){$('#ld').hidden=true;const a=$('#app');a.hidden=false;a.innerHTML=html}
 function falha(e){
-  if(e.status===403&&MODO==='cg'){$('#ld-m').innerHTML='Esta página é só do controle geral.<br><a class="b pri" style="margin-top:14px" href="/amicus/cortex/">Ir para o CORTEX geral</a>';$('#ld .cmt-ld-b').hidden=true;return}
-  if(e.status===401){$('#ld-m').innerHTML='O Amicus Curiae · CORTEX usa o login do Ex Officio (o Desembargador também pode abrir pelo link próprio).<br><a class="b pri" style="margin-top:14px" href="/exofficio/">Entrar pelo Ex Officio</a>';$('#ld .cmt-ld-b').hidden=true;return}
+  if(e.status===403&&MODO==='cg'){$('#ld-m').innerHTML='Esta página é só do controle geral.<br><a class="b pri" style="margin-top:14px" href="/amicus/cortex/">Ir para o Cortex geral</a>';$('#ld .cmt-ld-b').hidden=true;return}
+  if(e.status===401){$('#ld-m').innerHTML='O Amicus Curiae · Cortex usa o login do Ex Officio (o Desembargador também pode abrir pelo link próprio).<br><a class="b pri" style="margin-top:14px" href="/exofficio/">Entrar pelo Ex Officio</a>';$('#ld .cmt-ld-b').hidden=true;return}
   $('#ld-m').textContent='Não foi possível abrir: '+e.message;$('#ld .cmt-ld-b').hidden=true;
 }
 const ROTULO={cg:'CG',eq:'Geral'};
@@ -590,7 +590,7 @@ function seletorColecoes(lotes,id) {
   const opt=l=>'<option value="'+esc(l.id)+'"'+(l.id===id?' selected':'')+'>'+(l.cor?'● ':'')+esc(l.titulo)+(l.subtitulo?' — '+esc(l.subtitulo):'')+' · '+l.total+'</option>';
   const optAv=avulsos.map(opt).join('');
   const bt=(k,r,t)=>'<button type="button" data-colecao="'+k+'" aria-pressed="'+(tipo===k)+'" title="'+t+'">'+r+'</button>';
-  return '<div class="col-areas" aria-label="Coleções do CORTEX"><div class="col-tipos">'+
+  return '<div class="col-areas" aria-label="Coleções do Cortex"><div class="col-tipos">'+
     bt('pauta','Pauta','Coleção de Pauta')+bt('avulsa','Avulsas','Coleções Avulsas')+'</div>'+
     '<div class="col-area" id="col-pauta"'+(tipo==='pauta'?'':' hidden')+'>'+
     '<label class="lx-sel">Sessão · processos na pauta<select id="sel-sessao">'+sess.map(x=>'<option value="'+esc(x.date)+'"'+(x.date===ses?' selected':'')+' title="'+esc(x.nome||br(x.date))+' · '+x.processos+' na pauta">'+esc(br(x.date))+' · '+(x.processos?x.processos:'vazia')+'</option>').join('')+'</select></label>'+
@@ -620,15 +620,15 @@ function cabecalho(lotes,id,usuario){
   /* Barra: título; logo à direita dele, o atalho para o Ex Officio; na ponta, as ações da página.
      "Voltar à matriz" e "Tema" são só ícones (o nome vai no title e no aria-label). */
   const exo=MODO_REL||(CMTK&&!usuario)?'':`<a class="hb" href="/exofficio/" title="Ex Officio: pautas, cartões e ficha do processo"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h18M3 12h18M3 17h18"/></svg><span>Ex Officio</span></a>`;
-  /* barra do Amicus Curiae, a mesma do Compendium: o Compendium não aparece aqui (nem o CORTEX na barra dele); o Ex Officio aparece nas duas */
+  /* barra do Amicus Curiae, a mesma do Compendium: o Compendium não aparece aqui (nem o Cortex na barra dele); o Ex Officio aparece nas duas */
   return `<header class="lx-nx"><div class="lx-nx1"><i class="star" aria-hidden="true"></i>
-   <div class="lx-bc"><span class="lx-nxey">CMT · Amicus Curiae</span><div class="lx-cad"><b>CORTEX<em>.</em></b><span class="lx-sl" aria-hidden="true">/</span><span class="lx-cr">${ROTULO[MODO]}</span></div></div>
+   <div class="lx-bc"><span class="lx-nxey">CMT · Amicus Curiae</span><div class="lx-cad"><b>Cortex<em>.</em></b><span class="lx-sl" aria-hidden="true">/</span><span class="lx-cr">${ROTULO[MODO]}</span></div></div>
    ${exo?`<nav class="lx-ir" aria-label="Outras ferramentas">${exo}</nav>`:''}
    <span class="cmt-sp"></span>
    <div class="cmt-ut">
    ${MODO==='cg'?`<button type="button" class="hb" id="b-ed" title="Editar título, descrição e filtro do lote"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg><span>Editar lote</span></button>`:''}
    ${MODO==='cg'?`<button type="button" class="hb" id="b-novo" title="Criar uma coleção avulsa a partir das sessões"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>Nova coleção avulsa</span></button><button type="button" class="hb" id="b-ses" title="Associar ou desassociar sessões deste lote"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg><span>Sessões</span></button>`:''}
-   ${MODO==='cg'?`<a class="hb" href="/amicus/cortex/?id=${encodeURIComponent(id)}" target="_blank" rel="noopener" title="Abre o CORTEX · Geral"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 20a6 6 0 0 0-3-5.2"/></svg><span>CORTEX · Geral</span></a>`:''}
+   ${MODO==='cg'?`<a class="hb" href="/amicus/cortex/?id=${encodeURIComponent(id)}" target="_blank" rel="noopener" title="Abre o Cortex · Geral"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 20a6 6 0 0 0-3-5.2"/></svg><span>Cortex · Geral</span></a>`:''}
    <button type="button" class="hb" id="b-cmp" title="Painel lateral: buscar no lote e ver as correspondências do Compendium"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1"/><path d="M14 4v16"/><path d="M17 9h1M17 13h1"/></svg><span>${MODO_REL?'Compendium':'Buscar e Compendium'}</span></button>
    <button type="button" class="hb ic" id="b-min-tudo" data-min-tudo title="Minimizar todos os processos" aria-label="Minimizar todos os processos"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 20l5-5 5 5"/><path d="M7 4l5 5 5-5"/></svg></button>
    <button type="button" class="hb ic" id="b-topo" title="Voltar à matriz" aria-label="Voltar à matriz"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg></button>
@@ -667,7 +667,7 @@ function gcor(it){return it.grupo&&COR[it.grupo]?COR[it.grupo]:OUT.cor}
 function painelVisLotes(lotes){
   if(MODO!=='cg')return '';
   return `<section class="cmt-q" id="g-lotes"><h2><i class="nn">00</i><span>Publicação dos <em>lotes.</em></span><span class="cmt-sp"></span><span class="cmt-n">${lotes.length} lote${lotes.length===1?'':'s'}</span></h2>
-   <p class="none" style="font-style:normal;margin:12px 0">Controle central de quais lotes aparecem no <b>CORTEX · Geral</b> para a equipe e para o Desembargador (ele vê, na mesma página, só o que estiver liberado).</p>
+   <p class="none" style="font-style:normal;margin:12px 0">Controle central de quais lotes aparecem no <b>Cortex · Geral</b> para a equipe e para o Desembargador (ele vê, na mesma página, só o que estiver liberado).</p>
    <div class="cmt-tw"><table class="cmt-tb"><thead><tr><th>Lote</th><th>Sessões</th><th>Processos</th><th>Geral</th><th>Desembargador</th><th></th></tr></thead><tbody>
    ${lotes.map(l=>{const v=l.visivel||{},eq=v.equipe!==false,rl=v.relator!==false;return `<tr data-lote="${esc(l.id)}"><td><b>${esc(l.titulo||l.id)}</b><br><span class="cmt-n">${esc(l.id)}</span></td><td class="cnj">${(l.sessoes||[]).map(br).join('<br>')}</td><td class="ii">${l.total}</td><td class="vz"><input type="checkbox" data-lve="${esc(l.id)}"${eq?' checked':''}${l.virtual?' disabled title="Matriz automática"':''}></td><td class="vz"><input type="checkbox" data-lvr="${esc(l.id)}"${rl?' checked':''}${l.virtual?' disabled title="Matriz automática"':''}></td><td><a class="b" href="/amicus/cortex/gc/?id=${encodeURIComponent(l.id)}">Abrir</a></td></tr>`}).join('')}
    </tbody></table></div><p class="k" id="gl-m">Alterações são aplicadas imediatamente ao seletor de lotes de cada visão.</p></section>`;
@@ -1539,8 +1539,8 @@ function filtra(){
 function relSel(it){const v=(it.visivel||{}).relator;return v===true?'r1':v===false?'r0':'ra'}
 function textoVis(it){return `equipe ${it.verEquipe?'sim':'não'} · Relator ${it.verRelator?'sim':'não'}${relSel(it)==='ra'?' (automático'+(it.pronto?', pronto)':', em preparo)'):''}`}
 function celulasVis(it){const r=relSel(it);
-  return `<td class="vz"><input type="checkbox" data-ve="${it.uid}"${it.verEquipe?' checked':''} title="Visível no CORTEX · Geral (/amicus/cortex/)"></td>`+
-   `<td class="vz"><select data-vr="${it.uid}" title="Visível para o Desembargador no CORTEX · Geral"><option value="ra"${r==='ra'?' selected':''}>Auto</option><option value="r1"${r==='r1'?' selected':''}>Sempre</option><option value="r0"${r==='r0'?' selected':''}>Nunca</option></select><small data-vrs="${it.uid}">${it.verRelator?'vê':'não vê'}</small></td>`}
+  return `<td class="vz"><input type="checkbox" data-ve="${it.uid}"${it.verEquipe?' checked':''} title="Visível no Cortex · Geral (/amicus/cortex/)"></td>`+
+   `<td class="vz"><select data-vr="${it.uid}" title="Visível para o Desembargador no Cortex · Geral"><option value="ra"${r==='ra'?' selected':''}>Auto</option><option value="r1"${r==='r1'?' selected':''}>Sempre</option><option value="r0"${r==='r0'?' selected':''}>Nunca</option></select><small data-vrs="${it.uid}">${it.verRelator?'vê':'não vê'}</small></td>`}
 function aplicaVis(it,eq,rl){
   const v=Object.assign({},it.visivel||{});
   if(eq===true)delete v.equipe;else if(eq===false)v.equipe=false;
@@ -1571,7 +1571,7 @@ function abrirEditar(){
     <label>Assunto contém<input id="ge-a" value="${esc(f.assunto||'')}"></label>
     <label>Classe contém<input id="ge-c" value="${esc(f.classe||'')}"></label>
     <label class="w">Texto livre<input id="ge-x2" value="${esc(f.texto||'')}"></label>
-    <div class="w"><span class="lb">Onde o lote aparece</span><div class="ses"><label><input type="checkbox" id="ge-ve"${(LOTE.visivel||{}).equipe===false?'':' checked'}> Para a equipe (no CORTEX · Geral), no seletor de conjuntos</label><label><input type="checkbox" id="ge-vr"${(LOTE.visivel||{}).relator===false?'':' checked'}> Para o Desembargador (no CORTEX · Geral), no seletor de conjuntos</label></div></div>
+    <div class="w"><span class="lb">Onde o lote aparece</span><div class="ses"><label><input type="checkbox" id="ge-ve"${(LOTE.visivel||{}).equipe===false?'':' checked'}> Para a equipe (no Cortex · Geral), no seletor de conjuntos</label><label><input type="checkbox" id="ge-vr"${(LOTE.visivel||{}).relator===false?'':' checked'}> Para o Desembargador (no Cortex · Geral), no seletor de conjuntos</label></div></div>
    </div>
    <p class="none" style="font-style:normal">O filtro vale para as próximas sessões associadas; os processos que já estão no lote ficam.</p>
    <div class="acts"><button type="button" class="b pri" id="ge-ok">Salvar</button><span class="k" id="ge-m"></span></div></section>`;

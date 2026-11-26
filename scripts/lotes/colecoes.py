@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Coleções do CORTEX ligadas à triagem do Caput.
+"""Coleções do Cortex ligadas à triagem do Caput.
 
 1. Avulsos = escaninhos personalizáveis. Os escaninhos antigos (acervo/triagem/escaninhos.json) viram lotes
    tipo 'avulso' (acervo/lotes/esc-<id>.json), com título, subtítulo, cor e bilhete. Depois da migração o arquivo
@@ -98,7 +98,7 @@ if ESC.get('escaninhos') and not ESC.get('migrado'):
         sincroniza(L, e.get('processos') or [])
         grava(p, L); ids.append(id_)
     grava(ESC_P, {'schema': ESC.get('schema', 'gabcmt.escaninhos'), 'versao': 2, 'atualizadoEm': AGORA,
-                  'migrado': 'acervo/lotes (coleção Avulsos do CORTEX)', 'lotes': ids, 'escaninhos': []})
+                  'migrado': 'acervo/lotes (coleção Avulsos do Cortex)', 'lotes': ids, 'escaninhos': []})
 
 # 2. seleção prévia por sessão futura
 CAL = (ler(R / 'acervo/sessoes/calendario.json', {}) or {}).get('sessoes', [])

@@ -452,7 +452,7 @@ module.exports = async (req, res, u) => {
   } catch (e) { res.status(e.status === 404 ? 404 : e.status === 409 ? 409 : 500).json({ erro: e.message }); }
 };
 /* ---------- 0.38 · inteiro teor dos documentos, gravado pela extensão ----------
-   acervo/autos/<CNJ>.json.gz, no formato do scripts/autos/registrar.py e da ação "autos" do CORTEX
+   acervo/autos/<CNJ>.json.gz, no formato do scripts/autos/registrar.py e da ação "autos" do Cortex
    ({cnj, extraido_em, lista, docs, faltam, texto}). Junta com o que já existe: o documento enviado substitui o de mesmo ID;
    os demais ficam. a = {lista:[[id,tipo,desc,'',data,hora,anexo]], docs:[{id,…}], secoes:[{id, sec}], mov} */
 const CNJ_FMT = /^\d{7}-\d{2}\.\d{4}\.\d\.\d{2}\.\d{4}$/;

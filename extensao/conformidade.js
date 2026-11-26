@@ -136,7 +136,7 @@ document.addEventListener('muta:prontuario', function () { if (ED.estado().texto
 document.addEventListener('muta:autos', function () { if (ED.estado().texto) analisar(); }); /* 0.40: autos lidos → IDʼs conferidos */
 (function () { var t = $('mc-t'); if (t) t.addEventListener('click', function () { var w = $('min-conf'); rodape(!(w && w.dataset.aberto === '1')); render(); }); rodape(); })();
 window.MutaConformidade = {
-  /* 0.51: o mesmo contexto (prontuário, autos, questões) para a Conformidade da versão no CORTEX */
+  /* 0.51: o mesmo contexto (prontuário, autos, questões) para a Conformidade da versão no Cortex */
   contexto: function () { try { return contexto(); } catch (e) { return {}; } },
   abrir: function () { if (!K.dados && !K.erroDados) carregarDados(); render(); var E = ED.estado(); if (!E.texto && !E.lendo) ED.ler().then(analisar, function () { render(); }); },
   ativa: function () { return K.ativa; }

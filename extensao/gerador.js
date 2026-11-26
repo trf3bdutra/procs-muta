@@ -586,7 +586,7 @@
   /* ---------- 0.38: a casa do Gerador é a aba Minuta (Comparar | Gerador) ---------- */
   var MM_K = 'hero18810:minModo';
   function $(id) { return typeof document !== 'undefined' ? document.getElementById(id) : null; }
-  /* 0.45: a aba CORTEX da Minuta é só do gestor */
+  /* 0.45: a aba Cortex da Minuta é só do gestor */
   function gestor() { var x = window.MutaSessao && window.MutaSessao.estado ? window.MutaSessao.estado() : {}; return x.estado === 'on' && !!x.gestor; }
   function novoHero(){return typeof document!=='undefined'&&document.body&&document.body.classList.contains('hero-redesign-v53');}
   function modoMin() { if(novoHero())return 'cmp';try { var m = localStorage.getItem(MM_K); return m === 'ger' || m === 'conf' || m === 'dir' ? m : 'cmp'; } catch (e) { return 'cmp'; } }

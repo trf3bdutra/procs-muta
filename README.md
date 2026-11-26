@@ -58,7 +58,7 @@ apoio/                         recursos de apoio à redação
                                lotes/index.html: painel de lotes (/lotes/), página independente da navegação do Ex Officio, no mesmo padrão
                                visual e com o mesmo login: matriz do lote, perfil de cada processo (prontuário da sessão) e minuta copiável;
                                liga-se ao Ex Officio (/equipe/) e à Consulta do Modus Operandi (/modus/#consulta=AAAA-MM-DD/ITEM);
-                               lotes/previa.html: o CORTEX (/amicus/cortex/; o anterior segue em /amicus/cortex/classico/):
+                               lotes/previa.html: o Cortex (/amicus/cortex/; o anterior segue em /amicus/cortex/classico/):
                                coleções Pauta (sessões ativas e lotes da pauta), Monocrática, Interlocutória e Despacho (monocráticas do
                                Ex Officio, /api/pauta?mono=1, pelo tipo de ato) e Avulsas; fluxo da minuta, matriz padrão e própria
                                (acervo/matrizes/ para a pauta e as decisões) e processo com versões e comparação, no layout da mesa de
@@ -129,6 +129,6 @@ O **Caput** (`cmt-monitor.html`, antigo Painel Central) lê e grava nesta base, 
 `construtor.html` e `index.html` ainda leem e gravam no repositório `brndutra/gabcmt`, com a estrutura antiga de pastas.
 
 ### Amicus Curiae — separação das ferramentas
-- **CORTEX** (`/amicus/cortex/`): lotes, coleções, versões e controle da produção; preserva a base `acervo/lotes`.
+- **Cortex** (`/amicus/cortex/`): lotes, coleções, versões e controle da produção; preserva a base `acervo/lotes`.
 - **Collectio** (`/amicus/collectio/`): consulta, curadoria e edição dos bancos `modelos/modelos.json` e `modelos/paragrafos.json`.
 - **Compendium** (`/amicus/compendium/`): Minutário e elaboração de minutas, além dos referenciais jurídicos. Os bancos são compartilhados como fontes canônicas, sem duplicação.

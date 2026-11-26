@@ -599,14 +599,14 @@
   function botaoVazio(k) { return '<button type="button" class="hs hs-vz" data-hero-sin="pd" data-hero-k="' + k + '" title="Sinalizações: nenhuma. Clique para incluir pendência, intercorrência ou nota">' + ico('sino', 15) + '</button>'; }
   /* 0.41 · processos aguardando sessão: quem minutou e quem corrigiu, na faixa do topo do cartão */
   function aguardandoSessao(r, texto) { return /aguardando\s+(a\s+)?sess[ãa]o/i.test(((r && r.tarefa) || '') + ' ' + (texto || '').slice(0, 1500) + ' ' + tarefaAberta()); }
-  /* 0.51 · para o gestor, nos aguardando sessão: o último confronto do editor do PJe com o CORTEX (aba Minuta › CORTEX) */
+  /* 0.51 · para o gestor, nos aguardando sessão: o último confronto do editor do PJe com o Cortex (aba Minuta › Cortex) */
   var COLC = { c: {}, g: false };
   try { chrome.storage.local.get(['muta-collectio-conf', 'muta-gestor']).then(function (o) { COLC.c = o['muta-collectio-conf'] || {}; COLC.g = !!o['muta-gestor']; if (COLC.g) agendarSelos(); }).catch(function () {});
     chrome.storage.onChanged.addListener(function (ch, area) { if (area === 'local' && (ch['muta-collectio-conf'] || ch['muta-gestor'])) { if (ch['muta-collectio-conf']) COLC.c = ch['muta-collectio-conf'].newValue || {}; if (ch['muta-gestor']) COLC.g = !!ch['muta-gestor'].newValue; agendarSelos(); } }); } catch (e) {}
   function colTag(k, r, texto) {
     var x = COLC.g && COLC.c[k]; if (!x || !aguardandoSessao(r, texto)) return '';
     var d = String(x.em || '').slice(0, 10).split('-').reverse().join('/');
-    return '<span class="hs-col ' + (x.igual ? 'ok' : 'dif') + '" title="Editor do PJe × CORTEX (' + escS(x.ref || '') + '), conferido em ' + escS(d) + (x.igual ? ': igual' : ': ' + x.n + ' parágrafo(s) diferente(s)') + '">' + (x.igual ? '= CORTEX' : '≠ CORTEX') + '</span>';
+    return '<span class="hs-col ' + (x.igual ? 'ok' : 'dif') + '" title="Editor do PJe × Cortex (' + escS(x.ref || '') + '), conferido em ' + escS(d) + (x.igual ? ': igual' : ': ' + x.n + ' parágrafo(s) diferente(s)') + '">' + (x.igual ? '= Cortex' : '≠ Cortex') + '</span>';
   }
   function equipeHtml(r, texto) {
     if (!r || !aguardandoSessao(r, texto) || !(r.servidor || r.corretor)) return '';

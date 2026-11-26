@@ -5,7 +5,7 @@ const read=p=>fs.readFileSync(path.join(root,p),'utf8');
 const app=read('apoio/ex-officio/lotes/index.html');
 const api=read('apoio/ex-officio/api/_lote.js');
 const workflow=read('.github/workflows/vercel-caput.yml');
-test('CORTEX e backend possuem JavaScript sintaticamente válido',()=>{
+test('Cortex e backend possuem JavaScript sintaticamente válido',()=>{
  new vm.Script(api,{filename:'_lote.js'});
  const scripts=[...app.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g)];
  assert.ok(scripts.length>0);
@@ -41,10 +41,10 @@ test('Permissões originais preservadas',()=>{
  assert.ok(api.includes('loteVe(lote)'));
  assert.ok(api.includes('it.verRelator'));
 });
-test('CORTEX tem só as páginas Geral e CG; cabeçalho enxuto',()=>{
+test('Cortex tem só as páginas Geral e CG; cabeçalho enxuto',()=>{
  assert.ok(!/MODO=.*'rel'/.test(app.split('\n').find(l=>l.startsWith('const MODO='))||''),'sem modo CMT');
  for(const x of ['id="b-topo"','class="hb ic" id="tema"','class="lx-ir"']) assert.ok(app.includes(x),x);
- for(const x of ['Painel do relator</span>','CORTEX · CMT</span>','Matriz ↑']) assert.ok(!app.includes(x),x);
+ for(const x of ['Painel do relator</span>','Cortex · CMT</span>','Matriz ↑']) assert.ok(!app.includes(x),x);
 });
 test('Leitura da pauta tira o cabeçalho da sessão grudado no processo',()=>{
  const m=api.match(/const CAB_SESSAO = .*;\nconst limpaPauta = .*;/); assert.ok(m);
@@ -68,12 +68,12 @@ test('Pendência do prontuário confrontada com a tabela de peças',()=>{
  assert.match(confPend('Confirmar no sistema o ID 598870878 atribuído à sentença.',P,{}),/ID 598870878 não está na tabela de peças, que registra sentença com ID 396555413/);
  assert.equal(confPend('Conferir a tempestividade.',P,{}),'');
 });
-test('Barra do Amicus Curiae: CORTEX e Compendium com a mesma barra, sem citar um ao outro, ambos com o Ex Officio',()=>{
+test('Barra do Amicus Curiae: Cortex e Compendium com a mesma barra, sem citar um ao outro, ambos com o Ex Officio',()=>{
  const build=read('apoio/modus-operandi/fonte/build.py'), nav=read('apoio/modus-operandi/fonte/nav_editorial.css');
- assert.ok(!app.includes('title="Compendium: Ementário'),'CORTEX sem o Compendium na barra');
+ assert.ok(!app.includes('title="Compendium: Ementário'),'Cortex sem o Compendium na barra');
  assert.ok(app.includes('href="/exofficio/" title="Ex Officio'));
  assert.ok(build.includes('CMT · Amicus Curiae') && build.includes('<span>Ex Officio</span>'));
- assert.ok(!/collectio/i.test(build.slice(build.indexOf('EXO = '),build.indexOf("a = '  </div>\\n</header>\\n'"))),'Compendium sem o CORTEX na barra');
+ assert.ok(!/collectio/i.test(build.slice(build.indexOf('EXO = '),build.indexOf("a = '  </div>\\n</header>\\n'"))),'Compendium sem o Cortex na barra');
  assert.ok(nav.includes('header.top.nx #cmp-nav{flex:0 1 auto;min-width:0;overflow-x:auto'));
 });
 

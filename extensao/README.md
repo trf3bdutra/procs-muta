@@ -12,13 +12,13 @@ Base: o HTML independente *muta-independente-prontuario-completo* (Prontuário +
 - Campos de produção estruturados e variáveis da ficha, condicionadas à espécie do julgamento. Preserva os campos históricos.
 - A prévia universal continua disponível; alterações ali não gravam na ficha. A apresentação original permanece disponível.
 
-## O que muda na 0.51 · CORTEX com o PJe aberto (gestor)
+## O que muda na 0.51 · Cortex com o PJe aberto (gestor)
 
-- Processo de lote abre a aba Minuta já no CORTEX (só o gestor, quando ela estava no Comparar); fora de lote, volta ao Comparar. Com o editor à vista, lê e confronta sozinho.
-- Topo: lote, sessão, item, situação, quem minutou e corrigiu (com as datas), **Referência** — a versão final, quando existe; senão, a vigente; qualquer versão pode ser escolhida — e o **veredito**: "PJe igual ao CORTEX" ou "N parágrafos diferentes (voto 2, ementa 1)", com a versão em que o PJe está quando é outra ("o CORTEX tem versão mais nova, falta colar no PJe").
-- Modos: **Editor × CORTEX** (por seção, com contagem; cabeçalho automático do PJe e títulos fora), **Minuta** (todas as versões — final, vigente, no PJe, referência —, texto com Copiar por seção e Conformidade da versão) e **Informações** (perfil no lote, ajustes, pendências, peças e transferir o texto do PJe).
-- **PJe conferido: marcar vN** — quando o PJe é igual à referência, registra no CORTEX a versão que está no PJe (ação minuta-pje).
-- Cartões da lista do PJe (gestor, aguardando sessão): tag **= CORTEX** / **≠ CORTEX** pelo último confronto (`muta-collectio-conf`).
+- Processo de lote abre a aba Minuta já no Cortex (só o gestor, quando ela estava no Comparar); fora de lote, volta ao Comparar. Com o editor à vista, lê e confronta sozinho.
+- Topo: lote, sessão, item, situação, quem minutou e corrigiu (com as datas), **Referência** — a versão final, quando existe; senão, a vigente; qualquer versão pode ser escolhida — e o **veredito**: "PJe igual ao Cortex" ou "N parágrafos diferentes (voto 2, ementa 1)", com a versão em que o PJe está quando é outra ("o Cortex tem versão mais nova, falta colar no PJe").
+- Modos: **Editor × Cortex** (por seção, com contagem; cabeçalho automático do PJe e títulos fora), **Minuta** (todas as versões — final, vigente, no PJe, referência —, texto com Copiar por seção e Conformidade da versão) e **Informações** (perfil no lote, ajustes, pendências, peças e transferir o texto do PJe).
+- **PJe conferido: marcar vN** — quando o PJe é igual à referência, registra no Cortex a versão que está no PJe (ação minuta-pje).
+- Cartões da lista do PJe (gestor, aguardando sessão): tag **= Cortex** / **≠ Cortex** pelo último confronto (`muta-collectio-conf`).
 
 ## O que muda na 0.50 · 2ª seta sem duplicados e com preenchimento automático
 
@@ -60,7 +60,7 @@ Base: o HTML independente *muta-independente-prontuario-completo* (Prontuário +
 
 - **Prontuário**: abas Processo e Autos. O Roteiro entrou na aba Processo, depois de sinalizações e notas; os controles (urgência, meta, sobrestamento, caso sensível) foram para a 1ª seta do cartão ("autuação, partes e controles").
 - **Ementário**: sub-abas Precedentes | Parágrafos-padrão (o botão Parágrafos saiu da barra).
-- **Minuta**: Diretrizes virou parte da Minuta (Comparar | Gerador | CORTEX — gestor — | Diretrizes | Conformidade).
+- **Minuta**: Diretrizes virou parte da Minuta (Comparar | Gerador | Cortex — gestor — | Diretrizes | Conformidade).
 - **Comparar** compacto: o texto do editor numa linha (parte e botão ao lado; erro numa linha); opções e legenda numa linha, só com o texto lido.
 - Saiu o botão "?" (Como usar).
 
@@ -70,11 +70,11 @@ Base: o HTML independente *muta-independente-prontuario-completo* (Prontuário +
 - 0.46.1: saiu do prontuário o quadro "Registro da triagem" (com "Comparar o editor com a triagem").
 - Saíram do Roteiro as fases Mérito e Encaminhamento (`roteiro.js › NO_CARTAO`) e da aba Processo o quadro "Síntese e questões". Os campos da 2ª seta só são desenhados com ela aberta.
 
-## O que muda na 0.45 · Minuta: Comparar enxuto, matriz na Conformidade, CORTEX só do gestor
+## O que muda na 0.45 · Minuta: Comparar enxuto, matriz na Conformidade, Cortex só do gestor
 
-- **Comparar** só com Modelos, Precedentes, Texto colado e 28,86% (quando é o caso). Saíram Minuta-matriz, CORTEX, Triagem e Parágrafos-padrão (`comparar.js › FORA_CMP`; o código fica).
+- **Comparar** só com Modelos, Precedentes, Texto colado e 28,86% (quando é o caso). Saíram Minuta-matriz, Cortex, Triagem e Parágrafos-padrão (`comparar.js › FORA_CMP`; o código fica).
 - **Conformidade** ganhou o quadro "Estrutura × minuta-matriz": os elementos obrigatórios da peça e, bloco a bloco, a minuta-matriz do processo (`comparar.js › estruturaConformidade`).
-- **CORTEX** saiu de baixo do Comparar e virou aba própria da Minuta, visível só para o gestor (`gerador.js › gestor`).
+- **Cortex** saiu de baixo do Comparar e virou aba própria da Minuta, visível só para o gestor (`gerador.js › gestor`).
 
 ## O que muda na 0.44 · Autos: íntegra; documentos do Roteiro em Autos; sugestão de tipo de ato
 
@@ -84,7 +84,7 @@ Base: o HTML independente *muta-independente-prontuario-completo* (Prontuário +
 
 ## O que muda na 0.43 · Gerador só com relatório e ementa
 
-- 0.43.1: saíram os botões "Localizar no CORTEX" e "Mandar ao CORTEX" do texto do editor (Comparar); o CORTEX segue no quadro de baixo.
+- 0.43.1: saíram os botões "Localizar no Cortex" e "Mandar ao Cortex" do texto do editor (Comparar); o Cortex segue no quadro de baixo.
 - Por ora (pedido do gestor), o Gerador mostra só o relatório e a ementa; dispositivo, acórdão e proclamação continuam no código, desligados em `gerador.js › PECAS`. O resultado escolhido segue valendo para o cabeçalho e o item IV da ementa.
 
 ## O que muda na 0.42 · Minuta: Conformidade em aba própria, matriz do processo, cabeçalho fora
@@ -427,9 +427,9 @@ do processo. As abas não têm mais cabeçalho grande: logo abaixo delas vem o c
   remessa necessária, Pix, gratuidade e tipo de julgamento (ED pela tarefa; os demais pelas etiquetas, conferidos pelo
   último recurso).
 - **Minuta (Lote + Comparar + Conformidade).** Tipo de pronunciamento (automático: "Aguardando a sessão" → acórdão); caixa
-  minimizável com o texto do editor e botões para localizar o processo no CORTEX e mandar o texto para lá; "Comparar
+  minimizável com o texto do editor e botões para localizar o processo no Cortex e mandar o texto para lá; "Comparar
   com", por padrão a minuta-matriz do tipo de julgamento (confere a estrutura: blocos presentes, parecidos, ausentes e
-  vagas preenchidas), além de CORTEX, modelos, precedentes, texto colado, triagem, 28,86% e parágrafos-padrão;
+  vagas preenchidas), além de Cortex, modelos, precedentes, texto colado, triagem, 28,86% e parágrafos-padrão;
   Conformidade num rodapé fixo e minimizável, com a nota e as contagens.
 - **Parágrafos-padrão.** Busca por palavra e categoria; "Copiar" leva o texto com as vagas em [MAIÚSCULAS].
 - **Diretrizes.** O Manual CMT por capítulos e a lista de caça, com busca.
@@ -459,7 +459,7 @@ O painel lê o número CNJ do processo aberto no PJe e acompanha esse processo e
   mudou, por `POST /api/pauta?ficha=1`) e o registro da triagem do lote (grupo e modelo da matriz, proposta com o precedente,
   situação atual, caso, peças e teor dos autos com nota e trecho). Etiquetas sugeridas para o PJe, nas regras do Caput, com
   as que o processo já tem; um clique inclui no campo "Etiquetas sugeridas" e "Copiar" leva ao PJe. Botões para comparar o
-  editor com a triagem e para transferir o texto do PJe ao CORTEX. Código em `triagem.js`.
+  editor com a triagem e para transferir o texto do PJe ao Cortex. Código em `triagem.js`.
 - **Prontuário completo, no GitHub.** O prontuário de cada processo fica em `acervo/prontuarios/<20 dígitos>.json` e se
   alimenta, nos dois sentidos, da ficha do processo (`acervo/operacional.json`) e do cartão da pauta (`acervo/sessoes/*.json`,
   o prontuário da Ex Officio e da LIA). Ao abrir o processo, o que a equipe registrou entra no prontuário (preenche o vazio;
@@ -471,7 +471,7 @@ O painel lê o número CNJ do processo aberto no PJe e acompanha esse processo e
 - **Ficha do gabinete.** A ficha única do processo da Ex Officio (`padrao/ficha.json` → `acervo/operacional.json`), com o login
   da equipe (cookie `cmt_eq`), gravada por `POST /api/pauta?ficha=1`.
 - **Comparar.** O texto do editor da minuta no PJe (ou colado) contra: a triagem do processo (proposta, grupo e modelo da
-  matriz e os precedentes citados, abertos pelo Ementário pelo número); a minuta do lote (CORTEX); os modelos do banco
+  matriz e os precedentes citados, abertos pelo Ementário pelo número); a minuta do lote (Cortex); os modelos do banco
   (sugeridos pela semelhança); as minutas-matriz por recurso e resultado; a matriz modular e os acórdãos-modelo do 28,86%;
   os parágrafos-padrão; os precedentes do Ementário (vinculados ao prontuário ou pelo botão “Comparar com o editor”); ou
   texto colado. Parágrafos alinhados por LCS e pareados pela semelhança; palavra a palavra dentro do par. Trechos a preencher
@@ -483,10 +483,10 @@ O painel lê o número CNJ do processo aberto no PJe e acompanha esse processo e
   (`apoio/diretrizes.json`), alertas do Manual (`apoio/vade-mecum.json`) e a lista de caça do gabinete. Transcrições ficam
   fora das regras de redação. Com “Conformidade ativa”, relê o editor a cada 4 segundos e refaz a análise quando o texto
   muda; o número de alertas altos e médios aparece na aba. Motor em `conformidade-motor.js` (função pura, com testes).
-- **Lote.** A minuta do processo nos lotes do Amicus Curiae · CORTEX, com o perfil do processo e a comparação de sempre.
-  **Transferir o texto do PJe para o CORTEX (0.9):** lê o editor da tarefa de minuta, separa relatório, voto, ementa e
+- **Lote.** A minuta do processo nos lotes do Amicus Curiae · Cortex, com o perfil do processo e a comparação de sempre.
+  **Transferir o texto do PJe para o Cortex (0.9):** lê o editor da tarefa de minuta, separa relatório, voto, ementa e
   acórdão pelos títulos e grava como nova versão da minuta do processo no lote (`POST /api/painel?lote=1 {acao:'minuta-versao'}`),
-  vigente ou só guardada; as versões anteriores ficam no CORTEX. Pede confirmação e confere se o editor é do mesmo processo.
+  vigente ou só guardada; as versões anteriores ficam no Cortex. Pede confirmação e confere se o editor é do mesmo processo.
 - **Ementário do Compêndio.** Busca nos precedentes curados e na série histórica do Relator (sintaxe do Compêndio).
 - **Só leitura no PJe.** O `conteudo-pje.js` lê o número do processo e, a pedido do painel, o texto do editor (parágrafos,
   classe, recuo, negrito e itálico). Não clica, não grava e não envia nada ao tribunal.
@@ -511,7 +511,7 @@ prontuario.js      estado e gravação do prontuário, por processo (localStorag
 ficha.js           rascunho pessoal: ficha completa (análise guiada, julgamento, ciclo da minuta)
 sessao.js          login do Ex Officio (/api/login) e chamadas à API do site
 gabinete.js        ficha do gabinete (Ex Officio) e correspondência rascunho ↔ ficha
-lote.js            aba Lote (Amicus Curiae · Index) e transferência do texto do PJe ao CORTEX
+lote.js            aba Lote (Amicus Curiae · Index) e transferência do texto do PJe ao Cortex
 triagem.js         aba Triagem (prontuário de triagem da ficha, registro do lote, etiquetas sugeridas)
 autos.js           peças dos autos digitais (cronologia do PJe): conferência com a triagem e preenchimento do prontuário
 ementario.js       busca no Ementário do Compêndio

@@ -1,5 +1,5 @@
 'use strict';
-/* CORTEX: matriz construível em qualquer coleção (lote gravado e pauta da sessão). */
+/* Cortex: matriz construível em qualquer coleção (lote gravado e pauta da sessão). */
 const { test } = require('node:test'), assert = require('node:assert/strict');
 const path = require('node:path');
 const ROOT = path.resolve(__dirname, '../../..');

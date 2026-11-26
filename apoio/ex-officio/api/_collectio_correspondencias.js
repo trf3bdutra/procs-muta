@@ -1,5 +1,5 @@
 'use strict';
-/* CORTEX x Compendium: correspondência descritiva, nunca aprovação automática de modelo.
+/* Cortex x Compendium: correspondência descritiva, nunca aprovação automática de modelo.
    Este módulo só examina os metadados efetivamente registrados em cada processo. */
 const normal=s=>String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/\s+/g,' ').trim();
 const classe=s=>{
@@ -86,7 +86,7 @@ function avaliar(lote,estruturais,modular){
  const tema28=!!modular&&(/28[.,]86/.test(lote.titulo||'')||itens.some(x=>/28[.,]86/.test(x.assunto||'')));
  return {schema:'gabcmt.collectio.correspondencias.1',lote:lote.id,total:itens.length,
   materiaCompendium:tema28?'28,86%':null,
-  limites:['Análise exclusivamente dos registros disponíveis no CORTEX e das matrizes do Compendium.',
+  limites:['Análise exclusivamente dos registros disponíveis no Cortex e das matrizes do Compendium.',
    'Sem leitura automática do inteiro teor no PJe; não há validação da identidade de causa, prova ou tese.',
    'Ausência de referência não equivale à ausência da peça nos autos.',
    'A matriz estrutural é um molde formal, não um precedente de mérito.'],

@@ -1,4 +1,4 @@
-/* Amicus Curiae · CORTEX: duas páginas com o mesmo arquivo e a mesma base de lotes.
+/* Amicus Curiae · Cortex: duas páginas com o mesmo arquivo e a mesma base de lotes.
      /amicus/cortex/      página geral: a equipe vê os processos visíveis para ela; o Desembargador (perfil desembargador
                              ou link próprio com a chave) vê, na mesma página, só os processos liberados para ele
      /amicus/cortex/cg/   controle e gestão (só o gestor, &modo=cg): todos os processos, criar e editar lotes, sessões e visibilidade
@@ -218,7 +218,7 @@ function calendarioM(M) { if (!M.cal) M.cal = calendario(); return M.cal; }
 const SECOES = ['relatorio', 'voto', 'ementa', 'acordao'], VID = /^v\d{1,3}$/;
 /* matriz construída na pauta da sessão (a Coleção de Pauta não é lote gravado): grupos, colunas e marcas por processo */
 const caminhoMatriz = id => 'acervo/matrizes/' + id + '.json';
-/* coleções de decisões do CORTEX (monocráticas do Ex Officio, pelo tipo de ato): não são lotes; a matriz fica em acervo/matrizes/ */
+/* coleções de decisões do Cortex (monocráticas do Ex Officio, pelo tipo de ato): não são lotes; a matriz fica em acervo/matrizes/ */
 const DECISOES = /^(monocratica|interlocutoria|despacho)$/;
 const COR = /^#[0-9a-f]{3,8}$/i;
 const limpaGrupos = a => (Array.isArray(a) ? a : []).slice(0, 60).filter(g => g && g.id && g.rotulo).map(g => ({ id: String(g.id).slice(0, 60), rotulo: String(g.rotulo).slice(0, 200),
@@ -257,7 +257,7 @@ function guardarAtual(atual, main, lista, id, mx, arqs) {
   if (!atual) return;
   const ed = (atual.edicoes || []).length;
   let meta;
-  if (!lista.length) meta = { id: 'v1', rotulo: atual.rotulo || (atual.padrao === 'rascunho' ? 'Rascunho do CORTEX' : 'Minuta inicial do lote'),
+  if (!lista.length) meta = { id: 'v1', rotulo: atual.rotulo || (atual.padrao === 'rascunho' ? 'Rascunho do Cortex' : 'Minuta inicial do lote'),
     por: atual.registrado_por || '', em: String(atual.atualizado_em || '').slice(0, 10), origem: atual.origem || '' };
   else if (editadaDepois(atual)) {
     const ult = atual.edicoes[ed - 1] || {};
@@ -304,7 +304,7 @@ function rascunhoMinuta(lote, it, u) {
   const ato = tri.ato || String(it.resultado || '').replace(/^Ato a proferir:\s*/i, '') || '[VALIDAR: ato a proferir]';
   return {
     schema: 'gabcmt.minuta', versao: '1', lote: lote.id, processo: it.processo, sessao: it.sessao || '', item: it.sessao ? String(it.item) : '',
-    padrao: 'rascunho', origem: 'Rascunho gerado no CORTEX por ' + u + ' em ' + new Date().toISOString().slice(0, 10).split('-').reverse().join('/') + ', a partir do prontuário registrado no lote. Voto e ementa a minutar pelo modelo-matriz.',
+    padrao: 'rascunho', origem: 'Rascunho gerado no Cortex por ' + u + ' em ' + new Date().toISOString().slice(0, 10).split('-').reverse().join('/') + ', a partir do prontuário registrado no lote. Voto e ementa a minutar pelo modelo-matriz.',
     pendencias: ['Conferir cada ID e cada fato do relatório nos autos', 'Minutar o voto: ' + ato, 'Redigir a ementa (Recomendação CNJ 154/2024 adaptada)'].concat(String(P.questoes || '') ? ['Questões: ' + P.questoes] : []),
     secoes: { relatorio, voto: ['[Minutar o voto pelo modelo-matriz do tipo de julgamento: ' + semPonto(ato) + '.]'], ementa: ['[Redigir a ementa após o voto.]'], acordao: [] }
   };
@@ -466,7 +466,7 @@ async function minutaPje(req, res, u, gestor) {
     main.versoes = lista; lote.atualizado_em = hoje;
     try {
       await L.commitArquivos(arqs.concat([{ path: pm, txt: jsonTxt(main), sha: shaMin }, { path: rel, txt: jsonTxt(lote), sha: shaLote }]),
-        'CORTEX (' + u + '): versão ' + v + ' da minuta de ' + proc + (marcar ? ' importada no PJe' : ' desmarcada como importada no PJe'));
+        'Cortex (' + u + '): versão ' + v + ' da minuta de ' + proc + (marcar ? ' importada no PJe' : ' desmarcada como importada no PJe'));
       fim = main;
     } catch (e) { if (e.status !== 409 && e.status !== 422) throw e; }
   }
@@ -491,7 +491,7 @@ async function gravar(req, res, u, gestor) {
   const ss = [...new Set((Array.isArray(b.sessoes) ? b.sessoes : []).filter(s => DATA.test(s)))].sort();
   const rel = 'acervo/lotes/' + id + '.json';
   /* Colunas de análise da triagem: dados próprios do lote, não substituem campos da ficha.
-     Alterações pontuais, sob o mesmo controle de concorrência do CORTEX. */
+     Alterações pontuais, sob o mesmo controle de concorrência do Cortex. */
   /* Grupos nativos e séries transversais: atualizações pontuais, sem sobrescrever a análise existente. */
   if (b.acao === 'triagem-grupo' || b.acao === 'triagem-serie-incluir') {
     const CNJ=/^\d{7}-\d{2}\.\d{4}\.\d\.\d{2}\.\d{4}$/;
@@ -517,7 +517,7 @@ async function gravar(req, res, u, gestor) {
         lote.itens=itens;
       }
       lote.atualizado_em=new Date().toISOString().slice(0,10);
-      try{await gravarLote(rel,lote,sha,'CORTEX ('+u+'): organização da triagem '+id);return res.status(200).json({ok:true,id,total:itens.length,grupos:lote.grupos||[]});}
+      try{await gravarLote(rel,lote,sha,'Cortex ('+u+'): organização da triagem '+id);return res.status(200).json({ok:true,id,total:itens.length,grupos:lote.grupos||[]});}
       catch(e){if(e.status!==409&&e.status!==422)throw e;}
     }
     return res.status(409).json({erro:'O lote mudou; tente novamente.'});
@@ -544,7 +544,7 @@ async function gravar(req, res, u, gestor) {
         for(const it of I){it.valores_triagem=Object.assign({},it.valores_triagem||{}, {[col]:valor});}
       }
       lote.atualizado_em=new Date().toISOString().slice(0,10);
-      try {await gravarLote(rel,lote,sha,'CORTEX ('+u+'): análise personalizada do lote '+id);return res.status(200).json({ok:true,id,colunas_triagem:C});}
+      try {await gravarLote(rel,lote,sha,'Cortex ('+u+'): análise personalizada do lote '+id);return res.status(200).json({ok:true,id,colunas_triagem:C});}
       catch(e){if(e.status!==409&&e.status!==422)throw e;}
     }
     return res.status(409).json({erro:'O lote mudou; tente novamente.'});
@@ -564,7 +564,7 @@ async function gravar(req, res, u, gestor) {
         let n = 0;
         for (const x of marcas) { const it = mapa.get(x.processo); if (!it) continue; Object.assign(it, limpaMarca(x)); n++; }
         lote.atualizado_em = hoje;
-        try { await gravarLote(rel, lote, sha, 'CORTEX (' + u + '): matriz do lote ' + id + ' (' + (lote.grupos || []).length + ' grupos, ' + (lote.colunas || []).length + ' colunas, ' + n + ' processos)'); return res.status(200).json({ ok: true, id, processos: n, grupos: (lote.grupos || []).length, colunas: (lote.colunas || []).length }); }
+        try { await gravarLote(rel, lote, sha, 'Cortex (' + u + '): matriz do lote ' + id + ' (' + (lote.grupos || []).length + ' grupos, ' + (lote.colunas || []).length + ' colunas, ' + n + ' processos)'); return res.status(200).json({ ok: true, id, processos: n, grupos: (lote.grupos || []).length, colunas: (lote.colunas || []).length }); }
         catch (e) { if (e.status !== 409 && e.status !== 422) throw e; continue; }
       }
       if (!sv && !dv) return res.status(404).json({ erro: 'Lote não encontrado.' });
@@ -576,7 +576,7 @@ async function gravar(req, res, u, gestor) {
       if (colunas) mx.colunas = colunas;
       for (const x of marcas) mx.itens[x.processo] = limpaMarca(x);
       mx.atualizado_em = hoje; mx.por = u;
-      try { await L.gravarJson(caminhoMatriz(id), mx, shaM, 'CORTEX (' + u + '): matriz ' + (sv ? 'da pauta de ' + sv[1] : 'da coleção ' + id) + ' (' + mx.grupos.length + ' grupos, ' + mx.colunas.length + ' colunas, ' + Object.keys(mx.itens).length + ' processos)'); return res.status(200).json({ ok: true, id, processos: marcas.length, grupos: mx.grupos.length, colunas: mx.colunas.length }); }
+      try { await L.gravarJson(caminhoMatriz(id), mx, shaM, 'Cortex (' + u + '): matriz ' + (sv ? 'da pauta de ' + sv[1] : 'da coleção ' + id) + ' (' + mx.grupos.length + ' grupos, ' + mx.colunas.length + ' colunas, ' + Object.keys(mx.itens).length + ' processos)'); return res.status(200).json({ ok: true, id, processos: marcas.length, grupos: mx.grupos.length, colunas: mx.colunas.length }); }
       catch (e) { if (e.status !== 409 && e.status !== 422) throw e; }
     }
     return res.status(409).json({ erro: 'A matriz mudou várias vezes seguidas; tente de novo.' });
@@ -605,7 +605,7 @@ async function gravar(req, res, u, gestor) {
       colunas:[],grupos:[],grupo_outros:{rotulo:'Processos não classificados',cor:'#5d6b72'},
       minutas:'acervo/minutas/'+id+'/<processo>.json',itens};
     agruparPorAssunto(lote);
-    await L.gravarJson(rel,lote,undefined,'CORTEX ('+u+'): lote '+id+' com '+itens.length+' processos selecionados da pauta '+data);
+    await L.gravarJson(rel,lote,undefined,'Cortex ('+u+'): lote '+id+' com '+itens.length+' processos selecionados da pauta '+data);
     return res.status(200).json({ok:true,id,total:itens.length,sessao:data});
   }
   /* lote a partir de uma lista de processos (sem sessão): tarefas do PJe, triagem do acervo.
@@ -773,7 +773,7 @@ async function gravar(req, res, u, gestor) {
       it.minuta = true; lote.atualizado_em = new Date().toISOString().slice(0, 10);
       try {
         await L.commitArquivos([{ path, txt: JSON.stringify(minuta, null, 1) + '\n' }, { path: rel, txt: JSON.stringify(lote, null, 1) + '\n', sha }],
-          'CORTEX (' + u + '): rascunho de minuta de ' + proc + ' no lote ' + id);
+          'Cortex (' + u + '): rascunho de minuta de ' + proc + ' no lote ' + id);
         return res.status(200).json({ ok: true, processo: proc, minuta });
       } catch (e) { if (e.status !== 409 && e.status !== 422) throw e; }
     }
@@ -819,7 +819,7 @@ async function gravar(req, res, u, gestor) {
         arqs.push({ path: caminhoVer(id, mx, meta.id), txt: jsonTxt(fotoVersao(main, meta, novas, '')) });
         vigente = b.vigente !== false || !atual;
         if (vigente) aplicarVigente(main, meta, novas, '');
-        msg = 'CORTEX (' + u + '): versão ' + meta.id + ' ("' + rotulo + '") da minuta de ' + proc + ' no lote ' + id + (vigente ? ', vigente' : ', guardada');
+        msg = 'Cortex (' + u + '): versão ' + meta.id + ' ("' + rotulo + '") da minuta de ' + proc + ' no lote ' + id + (vigente ? ', vigente' : ', guardada');
       } else {
         const meta = lista.find(x => x.id === b.versao);
         if (!meta) return res.status(404).json({ erro: 'Versão não encontrada.' });
@@ -828,7 +828,7 @@ async function gravar(req, res, u, gestor) {
         if (!foto) return res.status(404).json({ erro: 'Versão não encontrada.' });
         aplicarVigente(main, meta, foto.secoes || {}, foto.padrao);
         vigente = true;
-        msg = 'CORTEX (' + u + '): versão ' + meta.id + ' ("' + meta.rotulo + '") passa a vigente na minuta de ' + proc + ' no lote ' + id;
+        msg = 'Cortex (' + u + '): versão ' + meta.id + ' ("' + meta.rotulo + '") passa a vigente na minuta de ' + proc + ' no lote ' + id;
       }
       main.versoes = lista;
       arqs.push(Object.assign({ path: pm, txt: jsonTxt(main) }, shaMin ? { sha: shaMin } : {}));
