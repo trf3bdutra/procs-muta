@@ -4,8 +4,15 @@ const html=fs.readFileSync(path.resolve(__dirname,'../index.html'),'utf8');
 const script=html.match(/<script id="mu-cracha">([\s\S]*?)<\/script>/)[1];
 test('Mural Command: script válido e calendário antes dos módulos, sem substituir o painel da chefia',()=>{
   assert.doesNotThrow(()=>new vm.Script(script));
-  assert.ok(script.indexOf('class="fx-command-calendar"')<script.indexOf('class="fx-command-work"'));
-  assert.ok(script.indexOf('class="fx-command-work"')<script.indexOf('class="fx-row"'));
+  // O redesign pode acrescentar classes aos elementos sem alterar a estrutura do Mural.
+  const classAttrs=[...script.matchAll(/\bclass="([^"]*)"/g)];
+  const classIndex=name=>classAttrs.findIndex(m=>m[1].split(/\s+/).includes(name));
+  const calendar=classIndex('fx-command-calendar'),work=classIndex('fx-command-work'),row=classIndex('fx-row');
+  assert.ok(calendar>=0,'Elemento fx-command-calendar ausente');
+  assert.ok(work>=0,'Elemento fx-command-work ausente');
+  assert.ok(row>=0,'Elemento fx-row ausente');
+  assert.ok(calendar<work,'Calendário deve preceder o bloco de trabalho no markup');
+  assert.ok(work<row,'Bloco de trabalho deve preceder os demais módulos no markup');
   assert.match(html,/MUFX\.apos\(root,host,CX\)/);
   assert.match(html,/if\(!PAINEL_GAB\)try\{MU\.montar/);
   for(const key of ['POS.kp','POS.bd','POS.br','POS.cs','POS.sg','POS.ds','POS.hs','POS.as','POS.ss'])assert.ok(script.includes(key),key);
