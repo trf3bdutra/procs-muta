@@ -3899,3 +3899,17 @@ html body #pauta-app .pa-it>.pa-b>.pa-c{flex:1;min-width:0}
 html body #pauta-app .pa-it .pa-open-proc{display:grid;place-items:center;flex:0 0 27px;width:27px;height:27px;margin:0;padding:0;border:1px solid var(--line);border-radius:4px;background:transparent;color:var(--cmt-blue,var(--primary));cursor:pointer}
 html body #pauta-app .pa-it .pa-open-proc:hover{background:var(--soft)}
 html body #pauta-app .pa-it .pa-open-proc:focus-visible{outline:2px solid var(--cmt-blue,var(--primary));outline-offset:2px}
+
+
+/* Ficha dos autos: a mesma composição de busca do Repertório. */
+html body.hero-redesign-v53 #gab #g-docs .hero-data-toolbar.hero-rep-search{
+ --rep-rule:var(--hero-pront-divider,var(--line));--rep-paper:var(--hero-workspace-bg,var(--cmt-paper,#fff));
+ display:flex!important;flex-direction:column;align-items:stretch;gap:0!important;padding:0!important;
+ margin:0 0 8px!important;background:var(--rep-paper)!important;border:1px solid var(--rep-rule)!important;border-radius:3px!important;box-shadow:none!important;overflow:hidden
+}
+html body.hero-redesign-v53 #gab #g-docs .hero-data-toolbar>.hero-rep-query{display:flex!important;align-items:center;gap:4px!important;padding:6px 8px!important;margin:0!important;background:transparent!important}
+html body.hero-redesign-v53 #gab #g-docs .hero-data-toolbar>.hero-rep-query>input{flex:1 1 0;width:0!important;min-width:0;min-height:30px;padding:6px 8px!important;font-size:11px!important;border:1px solid var(--rep-rule)!important;border-radius:3px!important;background:var(--rep-paper)!important;box-shadow:none!important}
+html body.hero-redesign-v53 #gab #g-docs .hero-data-toolbar>.hero-rep-query>button{display:grid;place-items:center;flex:0 0 29px;min-height:29px;width:29px;padding:0!important;border:1px solid var(--rep-rule)!important;border-radius:3px!important;background:var(--rep-paper)!important;color:var(--fg);cursor:pointer}
+html body.hero-redesign-v53 #gab #g-docs .hero-data-toolbar>.hero-rep-filters{display:flex!important;flex-wrap:wrap;gap:4px!important;padding:6px 8px!important;border-top:1px solid var(--rep-rule);background:transparent!important}
+html body.hero-redesign-v53 #gab #g-docs .hero-data-toolbar>.hero-rep-filters>button{margin:0!important;min-height:25px!important;padding:4px 6px!important;border:1px solid var(--rep-rule)!important;border-radius:3px!important;background:var(--rep-paper)!important;color:var(--fg)!important;font:500 10px/1.3 var(--sans,system-ui)!important;box-shadow:none!important}
+html body.hero-redesign-v53 #gab #g-docs .hero-data-toolbar>.hero-rep-filters>button[aria-pressed=true]{border-color:var(--primary,#31565a)!important;color:var(--primary,#31565a)!important;background:color-mix(in srgb,var(--primary,#31565a) 9%,var(--rep-paper))!important;font-weight:650!important}
