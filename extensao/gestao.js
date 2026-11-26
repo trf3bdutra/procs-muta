@@ -28,16 +28,16 @@
     if(!slot||!topo||!aside)return;
     if(!faixa){faixa=document.createElement('div');faixa.id='pv-nav-main';faixa.className='pv-nav-row';}
     faixa.setAttribute('role','tablist');faixa.setAttribute('aria-label','Ferramentas processuais');
-    if(faixa.parentNode!==topo)topo.appendChild(faixa);
-    ['tab-processo','tab-pront','tab-min','tab-acervo'].forEach(function(id){var b=$(id);if(b&&b.parentNode!==faixa)faixa.appendChild(b);});
+    if(faixa.parentNode!==aside)aside.appendChild(faixa);
+    ['tab-processo','tab-pront','tab-min','tab-acervo','tab-pauta'].forEach(function(id){var b=$(id);if(b)faixa.appendChild(b);});
     var divisor=faixa.querySelector('.pv-nav-divider');if(divisor)divisor.remove();
-    if(slot.parentNode!==aside)aside.appendChild(slot);
-    [['tab-pauta','Pauta'],['tab-del','Deliberações'],['tab-dil','Diligências'],['tab-urg','Urgências']].forEach(function(x){
+    if(slot.parentNode!==topo)topo.appendChild(slot);
+    [['tab-del','Deliberações'],['tab-dil','Diligências'],['tab-urg','Urgências']].forEach(function(x){
       var b=$(x[0]);if(!b)return;slot.appendChild(b);
       b.title=x[1];b.setAttribute('aria-label',x[1]);
     });
-    slot.hidden=!q.on;
-    document.body.classList.toggle('hero-gestao-rodape',q.on);
+    slot.hidden=!pode(q);
+    document.body.classList.remove('hero-gestao-rodape');
   }
 
   /* ---------- visibilidade das abas ---------- */

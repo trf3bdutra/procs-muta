@@ -183,3 +183,34 @@ html body.hero-redesign-v53 #topo-u .hero-header-utilities>.hero-cmt-shortcut{
 }
 html body.hero-redesign-v53 #topo-u .hero-cmt-shortcut:focus-visible{outline:2px solid var(--cmt-blue);outline-offset:1px}
 @media(max-width:460px){html body.hero-redesign-v53 #topo-u :is(#hero-rep-header-tabs,#hero-area-header-tabs)>button{flex:1 0 auto!important;padding-inline:5px!important}}
+
+/* Gestão na faixa superior; navegação processual e Pauta no rodapé. */
+html body.hero-redesign-v53 #topo-u>.tu-gestao:not([hidden]){
+ grid-row:1!important;grid-column:2!important;display:flex!important;flex-wrap:nowrap!important;
+ justify-self:stretch!important;justify-content:center!important;align-items:center!important;
+ gap:2px!important;min-width:0;width:100%;padding:0!important;margin:0!important;
+ overflow-x:auto;scrollbar-width:none;background:transparent!important
+}
+html body.hero-redesign-v53 #topo-u>.tu-gestao>button:not([hidden]){
+ flex:0 0 auto;min-height:26px!important;height:26px!important;flex-direction:row!important;
+ padding:2px 4px!important;gap:3px!important;white-space:nowrap;background:transparent!important
+}
+html body.hero-redesign-v53 #topo-u>.tu-gestao>button[aria-selected=true]{background:var(--hero-nav-white)!important;box-shadow:inset 0 -2px var(--cmt-gold)!important}
+html body.hero-redesign-v53 #topo-u>.tu-gestao>button .nav-text b{font-size:10px!important}
+html body.hero-redesign-v53 .layout>aside>.nav>#pv-nav-main{
+ display:flex!important;flex:1 1 100%;width:100%;min-width:0;justify-content:space-around;align-items:stretch;
+ gap:2px!important;padding:0!important;background:var(--hero-nav-cream)!important
+}
+html body.hero-redesign-v53 .layout>aside>.nav>#pv-nav-main>button:not([hidden]){
+ display:flex!important;flex:1 1 0;flex-direction:column!important;justify-content:center;align-items:center;
+ min-width:0;min-height:40px!important;padding:3px 1px!important;gap:3px!important;border:0!important;
+ border-radius:0!important;background:transparent!important;color:var(--cmt-muted)!important
+}
+html body.hero-redesign-v53 .layout>aside>.nav>#pv-nav-main>button[aria-selected=true]{color:var(--cmt-ink)!important;box-shadow:inset 0 -2px var(--cmt-gold)!important}
+html body.hero-redesign-v53 .layout>aside>.nav>#pv-nav-main .nav-text{display:block!important;position:static!important;width:auto!important;height:auto!important}
+html body.hero-redesign-v53 .layout>aside>.nav>#pv-nav-main .nav-text b{font:500 10px/1.2 var(--cmt-font,system-ui)!important;white-space:nowrap}
+@media(max-width:540px){
+ html body.hero-redesign-v53 #topo-u>.tu-gestao>button .nav-icon{display:none!important}
+ html body.hero-redesign-v53 #topo-u>.tu-gestao>button:not([hidden]){padding-inline:3px!important}
+ html body.hero-redesign-v53 #topo-u>.tu-gestao>button .nav-text b{font-size:9.5px!important}
+}
