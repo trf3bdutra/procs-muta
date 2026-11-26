@@ -793,7 +793,7 @@ function fichaFacePermitida(){
 var HERO_MINUTA_NAV={cnj:'',sec:'relatorio',todos:false};
 function producaoMinuta(){
  if(HERO_MINUTA_NAV.cnj!==G.cnj)HERO_MINUTA_NAV={cnj:G.cnj,sec:'relatorio',todos:false};
- var nav=[],counts={n:0,filled:0};
+ var ui=window.MutaRoteiro;if(!ui||!ui.painel)return '<p class="muted">Roteiro indisponível.</p>';var nav=[],counts={n:0,filled:0},phaseAtual='',avancou=true;
  var sg=window.MutaSigilo;if(sg&&sg.bloqueado())return '<p class="muted">Acesso restrito.</p>';
  var T=ccTipos(),p=pronAtual(),d=destGrav(),desp=p===3||p===7||d==='Outro destino',ac=p===0||p<0&&d==='Sessão',urg=p===2||p===8,hom=p===6,mono=!ac&&p>=0,seen=new Set();
  function field(sec,k,rot,extras){
@@ -805,9 +805,13 @@ function producaoMinuta(){
  function prod(keys){return keys.map(function(k){return Array.isArray(k)?field('producao',k[0],k[1]):field('producao',k);}).join('');}
  function block(id,title,h,open){
   if(!h)return '';var st=counts;counts={n:0,filled:0};nav.push({id:id,title:title,n:st.n,filled:st.filled});
-  var active=HERO_MINUTA_NAV.sec===id,state=CC_ABERTO['minuta-'+id],expanded=HERO_MINUTA_NAV.todos?(state==null?open:state):active;
-  var status=st.n&&st.filled===st.n?'ok':st.filled?'partial':'pend',number=String(nav.length).padStart(2,'0');
-  return '<li class="hero-prod-step hero-route-step is-'+status+(active?' is-active':'')+'" data-route-status="'+status+'" data-route-text="'+esc(title+' '+h.replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').slice(0,15000))+'"><span class="hero-prod-marker" aria-hidden="true">'+number+'</span><details class="gg hero-minuta-secao" data-cc="minuta-'+id+'"'+(expanded?' open':'')+(id==='solucao'?' id="pv-julgamento"':'')+'><summary'+(!HERO_MINUTA_NAV.todos?' data-minuta-nav="'+id+'"':'')+'><h4>'+esc(title)+'</h4><span class="gn">'+st.filled+'/'+st.n+' registrados</span></summary><div class="gr">'+h+'</div></details></li>';
+  var active=HERO_MINUTA_NAV.sec===id,state=CC_ABERTO['minuta-'+id],expanded=HERO_MINUTA_NAV.todos?(state==null?open:state):active&&!HERO_MINUTA_NAV.fechada;
+  var status=st.n&&st.filled===st.n?'ok':st.filled?'partial':'pend',number=String(nav.length).padStart(2,'0'),advance=avancou&&status==='ok';if(status!=='ok')avancou=false;
+  var fase=id==='relatorio'||id==='questoes'?'rel':id==='solucao'||id==='fundamentacao'?'fund':'fim',prefix='';
+  nav[nav.length-1].fase=fase;
+  if(phaseAtual!==fase){phaseAtual=fase;prefix='@@FASE_'+fase+'@@';}
+  return prefix+ui.inicioEtapa({status:status,open:expanded,advance:advance,number:number,state:st.filled+'/'+st.n+' registrados',title:title,search:title+' '+h.replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').slice(0,15000),attr:'data-minuta-nav',key:'step:'+id,cardAttrs:' data-cc="minuta-'+id+'"'+(id==='solucao'?' id="pv-julgamento"':'')})+(expanded?'<div class="rt-b"><div class="gr">'+h+'</div></div>':'')+'</div></li>';
+
  }
  function value(v){return Array.isArray(v)?v.length+' registro(s)':S(v);}
  function ref(title,keys){var vals=keys.map(function(k){return value(V(k[0],k[1]));}).filter(Boolean);return '<div class="gf w hero-minuta-ref"><span class="gl">'+esc(title)+'</span><span class="ro">'+esc(vals.join(' · ')||'A conferir nos Autos')+'</span></div>';}
@@ -821,7 +825,7 @@ function producaoMinuta(){
   if(L.indexOf(normal)<0)normal=aliases[N(atual)]||atual;
   return field('producao','Voto - Resultado','Resultado proposto',{tipo:'lista',opcoes:Array.from(new Set(L)),valorExibicao:L.indexOf(normal)>=0?normal:atual});
  }
- var AU=window.MutaAutos,auto=AU&&AU.barra?AU.barra():'',h='<section class="card rt-top cc-caso hero-minuta-roteiro"><details class="hero-prod-top hero-route-overview hero-route-canonical" open><summary class="rt-tt"><b>Roteiro de produção</b><span class="rt-n" title="Campos registrados">@@HERO_MINUTA_TOTAL@@</span><span class="hero-route-overview-chevron" aria-hidden="true"></span></summary><div class="hero-route-overview-body">@@HERO_MINUTA_NAV@@</div></details><div class="hero-route-aux">'+auto+'</div><ol class="hero-prod-timeline" aria-label="Etapas do roteiro de produção">';
+ var AU=window.MutaAutos,auto=AU&&AU.barra?AU.barra():'',h='<div class="rt-em-proc hero-route-production">@@HERO_MINUTA_NAV@@<div class="hero-route-aux">'+auto+'</div><ol class="rt" aria-label="Etapas do roteiro de produção">';
  var rel='<div class="gf w"><small class="muted">Relatório: dados recuperados da ficha, sem nova transcrição.</small></div>';
  if(!(sg&&sg.sigiloso())){
   rel+=ref('Decisão recorrida / atos de referência',[['triagem','Impugnada - ID'],['origem','Sentença - ID'],['origem','1G - Decisão ID'],['origem','2G - Monocrática ID'],['producao','Acórdão - ID']]);
@@ -856,13 +860,23 @@ function producaoMinuta(){
  if(idx<0){HERO_MINUTA_NAV.sec=nav[0]?nav[0].id:'';return producaoMinuta();}
  var totalCampos=nav.reduce(function(n,x){return n+x.n;},0),F=nav.reduce(function(n,x){return n+x.filled;},0);
  var labels={relatorio:'Relatório',questoes:'Questões',solucao:'Solução',fundamentacao:'Fundamentos',sucumbencia:'Sucumbência',dispositivo:'Dispositivo'};
- var toolbar='<div class="hero-minuta-nav"><div class="hero-route-metrics" role="group" aria-label="Filtrar etapas por preenchimento">'+[['ok','Registradas',nav.filter(function(x){return x.n&&x.filled===x.n;}).length],['partial','Parciais',nav.filter(function(x){return x.filled&&x.filled<x.n;}).length],['pend','A preencher',nav.filter(function(x){return !x.filled;}).length]].map(function(x){return '<button type="button" data-route-filter="'+x[0]+'" aria-pressed="false"><span>'+x[1]+'</span><b>'+x[2]+'</b></button>';}).join('')+'</div><div class="hero-route-progress"><div class="hero-minuta-nav-head rt-progress-caption"><span>'+F+'/'+totalCampos+' campos registrados</span><b>'+(totalCampos?Math.round(F/totalCampos*100):0)+'%</b></div><div class="hero-minuta-meter" role="progressbar" aria-label="Campos registrados" aria-valuemin="0" aria-valuemax="100" aria-valuenow="'+(totalCampos?Math.round(F/totalCampos*100):0)+'"><i style="width:'+(totalCampos?Math.round(F/totalCampos*100):0)+'%"></i></div></div><div class="hero-minuta-nav-foot"><button type="button" class="btn line sm" data-minuta-nav="anterior"'+(idx===0?' disabled':'')+'>← Anterior</button><small>Etapa '+(idx+1)+' de '+nav.length+'</small><button type="button" class="btn line sm" data-minuta-nav="proximo"'+(idx===nav.length-1?' disabled':'')+'>Próximo →</button></div></div><div class="hero-route-tools"><div class="hero-route-modes" role="group" aria-label="Modo do roteiro"><button type="button" data-minuta-nav="focus" aria-pressed="'+!HERO_MINUTA_NAV.todos+'">Etapa em foco</button><button type="button" data-minuta-nav="list" aria-pressed="'+HERO_MINUTA_NAV.todos+'">Lista contínua</button></div><div class="hero-route-search"><input type="search" data-route-search aria-label="Localizar etapa ou campo" placeholder="Localizar etapa ou campo…"><button type="button" data-route-filter="all">Todos</button><button type="button" data-route-next>Próxima pendência ›</button><button type="button" data-minuta-nav="recolher" title="Recolher etapas" aria-label="Recolher etapas">−</button></div></div>';
- return h.replace('@@HERO_MINUTA_TOTAL@@',F+'/'+totalCampos).replace('@@HERO_MINUTA_NAV@@',toolbar)+'</ol></section>';
+ var toolbar=ui.painel({title:'Roteiro de produção',total:F+'/'+totalCampos,caption:F+'/'+totalCampos+' campos registrados',pct:totalCampos?Math.round(F/totalCampos*100):0,metrics:[['ok','Registradas',nav.filter(function(x){return x.n&&x.filled===x.n;}).length],['partial','Parciais',nav.filter(function(x){return x.filled&&x.filled<x.n;}).length],['pend','A preencher',nav.filter(function(x){return !x.filled;}).length]],attr:'data-minuta-nav',index:idx,length:nav.length,prev:'anterior',next:'proximo',focus:'focus',listKey:'list',list:HERO_MINUTA_NAV.todos,collapse:'recolher'});
+ var phaseNames={rel:'Relatório e questões',fund:'Solução e fundamentação',fim:'Conclusão do pronunciamento'};
+ Object.keys(phaseNames).forEach(function(k){var steps=nav.filter(function(x){return x.fase===k;});h=h.replace('@@FASE_'+k+'@@',ui.fase(phaseNames[k],steps.filter(function(x){return x.n&&x.filled===x.n;}).length,steps.length,0));});
+ return h.replace('@@HERO_MINUTA_NAV@@',toolbar)+'</ol></div>';
 }
 caixa.addEventListener('click',function(e){
  var b=e.target.closest&&e.target.closest('[data-minuta-nav],[data-minuta-autos],[data-minuta-caso]');if(!b)return;
  e.preventDefault();e.stopImmediatePropagation();
- if(b.hasAttribute('data-minuta-nav')){var k=b.getAttribute('data-minuta-nav'),L=Array.from(caixa.querySelectorAll('.hero-prod-timeline .hero-minuta-secao')).map(function(x){return x.getAttribute('data-cc').slice(7);}),i=L.indexOf(HERO_MINUTA_NAV.sec);if(k==='todos')HERO_MINUTA_NAV.todos=!HERO_MINUTA_NAV.todos;else if(k==='focus')HERO_MINUTA_NAV.todos=false;else if(k==='list'){HERO_MINUTA_NAV.todos=true;L.forEach(function(id){CC_ABERTO['minuta-'+id]=id===HERO_MINUTA_NAV.sec;});}else if(k==='recolher'){HERO_MINUTA_NAV.todos=true;L.forEach(function(id){CC_ABERTO['minuta-'+id]=false;});}else{HERO_MINUTA_NAV.todos=false;HERO_MINUTA_NAV.sec=k==='anterior'?L[Math.max(0,i-1)]:k==='proximo'?L[Math.min(L.length-1,i+1)]:k;}render();return;}
+ if(b.hasAttribute('data-minuta-nav')){
+ var k=b.getAttribute('data-minuta-nav'),L=Array.from(caixa.querySelectorAll('.hero-route-production [data-cc^="minuta-"]')).map(function(x){return x.getAttribute('data-cc').slice(7);}),i=L.indexOf(HERO_MINUTA_NAV.sec);
+ if(k.indexOf('step:')===0){var id=k.slice(5),open=b.getAttribute('aria-expanded')==='true';HERO_MINUTA_NAV.sec=id;if(HERO_MINUTA_NAV.todos)CC_ABERTO['minuta-'+id]=!open;else HERO_MINUTA_NAV.fechada=open;}
+ else if(k==='focus'){HERO_MINUTA_NAV.todos=false;HERO_MINUTA_NAV.fechada=false;}
+ else if(k==='list'){HERO_MINUTA_NAV.todos=true;L.forEach(function(id){CC_ABERTO['minuta-'+id]=id===HERO_MINUTA_NAV.sec;});}
+ else if(k==='recolher'){HERO_MINUTA_NAV.todos=true;L.forEach(function(id){CC_ABERTO['minuta-'+id]=false;});}
+ else if(k==='anterior'||k==='proximo'){var id=L[Math.max(0,Math.min(L.length-1,i+(k==='anterior'?-1:1)))];if(id){HERO_MINUTA_NAV.sec=id;HERO_MINUTA_NAV.fechada=false;if(HERO_MINUTA_NAV.todos)CC_ABERTO['minuta-'+id]=true;}}
+ else if(L.indexOf(k)>=0){HERO_MINUTA_NAV.sec=k;HERO_MINUTA_NAV.fechada=false;}
+ render();return;}
  if(b.hasAttribute('data-minuta-autos')){G.aba='Autos';render();return;}
  heroTopo.pagina=3;render();var p=caixa.querySelector('.hero-top-pages');if(p)p.scrollIntoView({block:'start'});
 },true);
@@ -1793,7 +1807,7 @@ function heroOrganizarProntuario(){
         gerDock.addEventListener('toggle',function(){if(!gerDock.isConnected)return;heroTopo.gerDockOpen=gerDock.open;if(gerDock.open&&window.MutaGerador)window.MutaGerador.pintar();});
         gbody.classList.add('hero-shared-ger-dock');if(G.rot==='tri')gbody.classList.add('hero-tri-with-dock');caixa.append(gerDock);
       }
-      if(G.aba==='Processo'&&G.rot==='pro')gbody.classList.add('hero-production-route');
+      if(G.aba==='Processo'&&G.rot==='pro')gbody.classList.add('hero-production-route','hero-tri-with-dock');
       gbody.hidden=resumo;
     }
     if(!resumo&&gbody&&top.parentNode)top.after(gbody);
@@ -1808,7 +1822,7 @@ function heroOrganizarProntuario(){
 var HERO_ROUTE_FILTER={cnj:'',tri:{q:'',status:'all'},pro:{q:'',status:'all'}};
 function heroRoteiroFiltros(){
  if(G.aba!=='Processo'||['tri','pro'].indexOf(G.rot)<0)return;
- var root=caixa.querySelector(G.rot==='tri'?'.hero-tri-with-dock':'.hero-production-route');if(!root)return;
+ var root=caixa.querySelector(G.rot==='tri'?'.hero-tri-with-dock:not(.hero-production-route)':'.hero-production-route');if(!root)return;
  if(HERO_ROUTE_FILTER.cnj!==G.cnj)HERO_ROUTE_FILTER={cnj:G.cnj,tri:{q:'',status:'all'},pro:{q:'',status:'all'}};
  var st=HERO_ROUTE_FILTER[G.rot],overview=root.querySelector('.hero-route-overview');if(overview){overview.open=st.overview!==false;overview.addEventListener('toggle',function(){if(overview.isConnected)st.overview=overview.open;});}
  var input=root.querySelector('[data-route-search]'),steps=Array.from(root.querySelectorAll('.hero-route-step')),buttons=Array.from(root.querySelectorAll('[data-route-filter]')),next=root.querySelector('[data-route-next]');if(!input)return;
