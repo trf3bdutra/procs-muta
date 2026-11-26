@@ -22,7 +22,7 @@ var FONTES = [['matriz', 'Minuta-matriz'], ['lote', 'CORTEX'], ['modelo', 'Model
 /* tipo de pronunciamento: os mesmos rótulos do banco de modelos e das minutas-matriz */
 var PRONS = [['Voto', 'Acórdão (voto)'], ['Decisão monocrática terminativa', 'Decisão monocrática'], ['Decisão interlocutória', 'Decisão interlocutória'], ['Despacho', 'Despacho']];
 var PARTES = [['tudo', 'Tudo'], ['relatorio', 'Relatório'], ['voto', 'Voto'], ['ementa', 'Ementa'], ['acordao', 'Acórdão']];
-var C = { fontePx:11.5, pron: '', pronAuto: '', pronChave: '', edAberto: !!(typeof document!=='undefined'&&document.body&&document.body.classList.contains('hero-redesign-v53')), estrutura: true, fonte: 'modelo', sel: {}, parteEd: 'tudo', parteFonte: 'inteira', ws: true, sd: true, q: '', ref: '', lotes: null, loteErro: '', loteChave: '', ement: {}, tri: null, triErro: '', triChave: '', dados: null, dadosErro: '', ranking: null, rankTxt: '' };
+var C = { fontePx:11.5, refAberto:true, compareEdMin:true, compareRefMin:true, pron: '', pronAuto: '', pronChave: '', edAberto: !!(typeof document!=='undefined'&&document.body&&document.body.classList.contains('hero-redesign-v53')), estrutura: true, fonte: 'modelo', sel: {}, parteEd: 'tudo', parteFonte: 'inteira', ws: true, sd: true, q: '', ref: '', lotes: null, loteErro: '', loteChave: '', ement: {}, tri: null, triErro: '', triChave: '', dados: null, dadosErro: '', ranking: null, rankTxt: '' };
 try { var g = JSON.parse(localStorage.getItem('muta-pje:comparar') || '{}'); ['parteEd', 'ws', 'sd', 'edAberto', 'fontePx'].forEach(function (k) { if (g[k] != null) C[k] = g[k]; }); } catch (e) {}
 function guarda() { try { localStorage.setItem('muta-pje:comparar', JSON.stringify({ parteEd: C.parteEd, ws: C.ws, sd: C.sd, edAberto: C.edAberto, fontePx: C.fontePx })); } catch (e) {} }
 function tamanhoFonte(v){v=Number(v);return Number.isFinite(v)?Math.max(10,Math.min(16,Math.round(v*2)/2)):11.5;}
@@ -93,13 +93,14 @@ function editorCaixa(E, n, P) {
   var aviso = E.numero && chave() && E.numero.replace(/\D/g, '') !== chave() ? '<p class="status err">O editor lido está nos autos ' + esc(E.numero) + ', não no processo aberto no painel.</p>' : '';
   var hora = E.em ? new Date(E.em).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }) : '';
   var ps = (E.paragrafos || []).map(function (p) { return p.t; }).filter(Boolean);
-  return '<section class="mn-ed card" data-aberto="' + (C.edAberto ? '1' : '0') + '">' +
-    '<div class="mn-ed-h"><button type="button" class="mn-tg" data-c="edtg" aria-expanded="' + C.edAberto + '"><b>Texto em revisão</b><span class="muted">' + (E.lendo ? 'lendo…' : E.texto ? esc(E.fonte || 'editor') + (hora ? ' · ' + hora : '') : 'ainda não lido') + '</span></button>' +
+  var aberto=C.fusao?!C.compareEdMin:C.edAberto;
+  return '<section class="mn-ed card" data-aberto="' + (aberto ? '1' : '0') + '">' +
+    '<div class="mn-ed-h"><button type="button" class="mn-tg" data-c="edtg" aria-expanded="' + aberto + '"><b>Texto em revisão</b><span class="muted">' + (E.lendo ? 'lendo…' : E.texto ? esc(E.fonte || 'editor') + (hora ? ' · ' + hora : '') : 'ainda não lido') + '</span></button>' +
     /* 0.47: numa linha só — título, parte (só com texto lido) e o botão; o erro em uma linha, com o resto na dica */
     '<span class="sp"></span>' + (document.body.classList.contains('hero-redesign-v53')?'<select class="hero-v53-pron" data-c="pron" aria-label="Pronunciamento"><option value="">Automático · '+esc(C.pronAuto||'pronunciamento')+'</option>'+PRONS.map(function(p){return '<option value="'+esc(p[0])+'"'+(C.pron===p[0]?' selected':'')+'>'+esc(p[1])+'</option>';}).join('')+'</select>':'') + (E.texto ? '<select class="mn-pt" data-c="parteEd" title="Parte do texto do editor a comparar" aria-label="Parte">' + PARTES.map(function (p) { var q = p[0] === 'tudo' ? 1 : (P[p[0]] || []).length; return '<option value="' + p[0] + '"' + (C.parteEd === p[0] ? ' selected' : '') + (q ? '' : ' disabled') + '>' + p[1] + '</option>'; }).join('') + '</select>' : '') +
     '<button type="button" class="btn ' + (E.texto ? 'line' : 'solid') + ' sm" data-c="ler"' + (E.lendo ? ' disabled' : '') + '>' + (E.texto && !E.colado ? 'Ler de novo' : 'Ler o editor') + '</button></div>' +
     (E.erro ? '<p class="status err mn-err" title="' + esc(E.erro) + '">' + esc(/Nenhum editor/i.test(E.erro) ? 'Nenhum editor aberto no PJe: abra a minuta na tarefa.' : E.erro) + '</p>' : '') + aviso +
-    (C.edAberto ? '<div class="mn-tx tx-j">' + (ps.length ? (E.paragrafos || []).filter(function (p) { return p.t; }).map(function (p) {
+    ((C.fusao||C.edAberto) ? '<div class="mn-tx tx-j">' + (ps.length ? (E.paragrafos || []).filter(function (p) { return p.t; }).map(function (p) {
       /* negrito e itálico do editor: o trecho marcado quando o leitor trouxe; senão, o parágrafo todo quando quase todo marcado */
       var h = p.h ? String(p.h).replace(/<(?!\/?(b|i|u)>|br>)[^>]*>/g, '') : esc(p.t);
       if (!p.h && p.neg > 0.8) h = '<b>' + h + '</b>'; if (!p.h && p.ita > 0.8) h = '<i>' + h + '</i>';
@@ -417,8 +418,12 @@ function sincronizarFusao(){
   if(!work||!go||!out)return;
   var ok=!!(ED.estado().texto&&itemAtual()),on=!!(C.fusao&&ok);
   if(!ok)C.fusao=false;
-  work.classList.toggle('is-fused',on);out.hidden=!on;
-  go.textContent=on?'Separar textos':'Comparar textos';go.setAttribute('aria-pressed',String(on));go.disabled=!ok;
+  work.classList.remove('is-fused');work.classList.toggle('is-comparing',on);out.hidden=!on;
+  var ed=work.querySelector('.mn-ed'),ref=work.querySelector('.hero-v53-ref'),em=on?C.compareEdMin:!C.edAberto,rm=on?C.compareRefMin:!C.refAberto;
+  if(ed){ed.classList.toggle('is-minimized',on&&em);ed.setAttribute('data-aberto',em?'0':'1');var b=ed.querySelector('[data-c="edtg"]');if(b)b.setAttribute('aria-expanded',String(!em));}
+  if(ref){ref.classList.toggle('is-minimized',rm);var t=ref.querySelector('[data-c="reftg"]');if(t)t.setAttribute('aria-expanded',String(!rm));}
+  var title=work.querySelector('.hero-comparison-kicker');if(title)title.textContent=on?'Folha comparativa':'Comparação de textos';
+  go.textContent=on?'Fechar comparação':'Comparar textos';go.setAttribute('aria-pressed',String(on));go.disabled=!ok;
 }
 function atualizarResultado(){
   var out=caixa.querySelector('.cx-res');if(!out)return;
@@ -439,7 +444,7 @@ function render() {
     var fontesEl=caixa.querySelector('.cx-fontes'),pick=caixa.querySelector('.cx-pick'),op=caixa.querySelector('.cx-op1'),res=caixa.querySelector('.cx-res'),ed=caixa.querySelector('.mn-ed');
     if(ed&&fontesEl&&pick&&res){
       var it=itemAtual(),ref=document.createElement('section');ref.className='card hero-v53-ref';
-      var head=document.createElement('header');head.className='hero-review-ref-head';var h=document.createElement('h4');h.className='hero-v53-page-title';h.textContent='Texto de referência';var meta=document.createElement('small');meta.className='muted';meta.textContent=it?String(it.rotulo||it.titulo||it.title||it.nome||'Referência selecionada'):'Nenhuma referência selecionada';head.append(h,meta);ref.append(head);
+      var head=document.createElement('header');head.className='hero-review-ref-head';var h=document.createElement('h4');h.className='hero-v53-page-title';var tg=document.createElement('button');tg.type='button';tg.className='hero-review-ref-toggle';tg.dataset.c='reftg';tg.textContent='Texto de referência';tg.setAttribute('aria-expanded',String(C.fusao?!C.compareRefMin:C.refAberto));h.append(tg);var meta=document.createElement('small');meta.className='muted';meta.textContent=it?String(it.rotulo||it.titulo||it.title||it.nome||'Referência selecionada'):'Nenhuma referência selecionada';head.append(h,meta);ref.append(head);
       if(C.fonte==='colar'){var ta=pick.querySelector('textarea');if(ta)ref.append(ta);}
       else{var tx=document.createElement('div');tx.className='hero-v53-ref-text tx-j';tx.setAttribute('lang','pt-BR');var bs=it?blocosFonte(it):[];bs.forEach(function(b){var p=document.createElement(b.h?'h4':'p');p.textContent=String(b.h||b.p||'');tx.append(p);});if(!bs.length)tx.textContent='Selecione um modelo ou precedente.';ref.append(tx);}
       var busca=document.createElement('details');busca.className='hero-v53-ref-search';busca.open=!!C.buscaRefAberta;var sm=document.createElement('summary');sm.textContent='Buscar referência';var searchPanel=document.createElement('div');searchPanel.className='hero-rep-search hero-ref-search-panel';var sh=document.createElement('div');sh.className='hero-rep-search-head';var sk=document.createElement('span');sk.className='hero-rep-search-kicker';sk.textContent='Pesquisa e visualização';var label=document.createElement('small');label.textContent=(fontes().find(function(f){return f[0]===C.fonte;})||[])[1]||'Referências';sh.append(sk,label);searchPanel.append(sh,fontesEl,pick);busca.append(sm,searchPanel);busca.addEventListener('toggle',function(){if(busca.isConnected)C.buscaRefAberta=busca.open;});ref.append(busca);
@@ -451,8 +456,10 @@ function render() {
       var work=document.createElement('section');work.className='hero-review-workspace hero-review-editorial hero-cortex-editorial';var grid=document.createElement('div');grid.className='hero-review-documents';ed.classList.add('hero-review-document','hero-cortex-panel');ref.classList.add('hero-review-document','hero-cortex-panel');var edText=ed.querySelector('.mn-tx');if(edText)edText.setAttribute('lang','pt-BR');ed.before(work);
       var divider=document.createElement('div');divider.className='hero-review-divider';var comparisonTitle=document.createElement('span');comparisonTitle.className='hero-comparison-kicker';comparisonTitle.textContent='Comparação de textos';
       var mark=document.createElement('span');mark.className='hero-review-cross';mark.setAttribute('aria-label','Comparação entre os textos');mark.textContent='×';
-      divider.append(comparisonTitle,mark,bar);grid.append(ed,divider,ref);work.append(grid);
-      var result=document.createElement('section');result.className='hero-review-fused-content';result.setAttribute('aria-label','Folha de comparação');result.append(res);ref.insertBefore(result,busca);sincronizarFusao();
+      divider.append(comparisonTitle,mark,bar);
+      var middle=document.createElement('section');middle.className='hero-review-comparison hero-cortex-panel';middle.setAttribute('aria-label','Comparação de textos');
+      var result=document.createElement('div');result.className='hero-review-fused-content';result.setAttribute('aria-label','Folha comparativa');result.append(res);
+      middle.append(divider,result);grid.append(ed,middle,ref);work.append(grid);sincronizarFusao();
     }
   }
   aplicarFonte();$('panel-min').scrollTop = y;Array.from(caixa.querySelectorAll('.mn-tx,.hero-v53-ref-text')).forEach(function(e,i){if(scrolls[i]!=null)e.scrollTop=scrolls[i];});var newSheet=caixa.querySelector('.hero-review-fused-content .folha,.hero-review-fused-content .cx-out');if(newSheet)newSheet.scrollTop=sheetScroll;
@@ -499,19 +506,20 @@ var tq = 0;
 caixa.addEventListener('click', function (e) {
   var b = e.target.closest('button'); if (!b) return;
   if(/^fonte-(menor|maior|padrao)$/.test(b.dataset.c||'')){C.fontePx=tamanhoFonte(b.dataset.c==='fonte-padrao'?11.5:C.fontePx+(b.dataset.c==='fonte-maior'?0.5:-0.5));aplicarFonte();guarda();return;}
-  if(b.dataset.c==='comparar'){if(C.fusao){C.fusao=false;sincronizarFusao();}else if(ED.estado().texto&&itemAtual()){C.fusao=true;C.vista=C.vista||'folha';atualizarResultado();}return;}
+  if(b.dataset.c==='comparar'){if(C.fusao){C.fusao=false;render();}else if(ED.estado().texto&&itemAtual()){C.fusao=true;C.compareEdMin=true;C.compareRefMin=true;C.vista=C.vista==='lado'?'lado':'folha';render();}return;}
   if(b.dataset.c==='buscar-ref'||b.dataset.c==='limpar-ref'){clearTimeout(tq);var q=caixa.querySelector('[data-c="q"]');C.q=b.dataset.c==='limpar-ref'?'':q?q.value:C.q;render();return;}
   if (b.dataset.c === 'ler') { ED.ler().catch(function () {}); return; }
   if (b.dataset.c === 'v:recortes' || b.dataset.c === 'v:folha' || b.dataset.c === 'v:lado') { C.vista = b.dataset.c.slice(2); render(); return; }
   if (b.dataset.c === 'janela') { if (ULT && ULT.it && window.MutaJanela) window.MutaJanela.abrir('comparar', 'Comparação · ' + ULT.rotulo, ladoALadoHtml(alinhar(ULT.it), ULT.rotulo)); return; }
   if (b.dataset.c === 'janela-folha') { if (window.MutaJanela) window.MutaJanela.abrir('comparar', 'Folha do editor', folhaHtml(null)); return; }
   if (b.dataset.pron != null) { C.pron = b.dataset.pron; C.sel.matriz = ''; render(); return; }
-  if (b.dataset.c === 'edtg') { C.edAberto = !C.edAberto; guarda(); render(); return; }
+  if (b.dataset.c === 'edtg') { if(C.fusao){C.compareEdMin=!C.compareEdMin;sincronizarFusao();}else{C.edAberto=!C.edAberto;guarda();render();}return; }
+  if (b.dataset.c === 'reftg') { if(C.fusao)C.compareRefMin=!C.compareRefMin;else C.refAberto=!C.refAberto;sincronizarFusao();return; }
   if (b.dataset.c === 'col-loc') { var d = $('panel-lote'); if (d) { d.open = true; if (window.MutaLote) window.MutaLote.abrir(); d.scrollIntoView({ block: 'start' }); } return; }
   if (b.dataset.c === 'col-env') { if (window.MutaLote && window.MutaLote.transferir) window.MutaLote.transferir(); return; }
-  if (b.dataset.f) { C.fusao=false; C.fonte = b.dataset.f; C.q = ''; C.parteFonte = 'inteira'; guarda(); preparar(); return; }
+  if (b.dataset.f) { C.fusao=false; C.refAberto=true; C.fonte = b.dataset.f; C.q = ''; C.parteFonte = 'inteira'; guarda(); preparar(); return; }
   if (b.dataset.s != null) {
-    C.fusao=false; C.sel[C.fonte] = b.dataset.s; C.parteFonte = 'inteira';
+    C.fusao=false; C.refAberto=true; C.sel[C.fonte] = b.dataset.s; C.parteFonte = 'inteira';
     if (C.fonte === 'ement' && !C.ement[b.dataset.s]) { carregarJulgado(b.dataset.s); return; }
     if (C.fonte === 'tri' && /^e:/.test(b.dataset.s) && !C.ement[b.dataset.s.slice(2)]) { carregarJulgado(b.dataset.s.slice(2)); return; }
     render(); return;

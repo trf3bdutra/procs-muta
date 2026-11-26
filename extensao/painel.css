@@ -3080,3 +3080,45 @@ html body.hero-redesign-v53 #panel-pront #hero-ger-dock .hero-ger-dock-header{po
 html body.hero-redesign-v53 #panel-pront #hero-ger-dock .hero-ger-dock-header:has(#hero-enc-dock[open]){position:static}
 html body.hero-redesign-v53 #panel-pront #hero-ger-dock .hero-ger-dock-header #hero-enc-dock>summary{border-bottom:1px solid var(--hero-pront-divider,var(--line))}
 @media(max-width:330px){html body.hero-redesign-v53 #gab .hero-route-search>input{flex-basis:100%}html body.hero-redesign-v53 #gab .hero-route-metrics>button{gap:3px;padding:6px 4px}html body.hero-redesign-v53 #gab .hero-tri-with-dock .rt-step-state{display:inline-flex}}
+
+/* Corretor · terceira folha autônoma, entre os dois painéis de origem. */
+html body.hero-redesign-v53 #panel-min #cmp-app .hero-review-workspace .hero-review-documents{display:flex!important;flex-direction:column!important;gap:7px!important;min-width:0}
+html body.hero-redesign-v53 #panel-min #cmp-app .hero-review-comparison{min-width:0;margin:0!important;padding:0!important;box-sizing:border-box}
+html body.hero-redesign-v53 #panel-min #cmp-app .hero-review-workspace:not(.is-comparing) .hero-review-comparison{border:0!important;background:transparent!important}
+html body.hero-redesign-v53 #panel-min #cmp-app .hero-review-workspace.is-comparing .hero-review-comparison{border:1px solid var(--cx-el,var(--line))!important;border-left:2px solid var(--cx-eo,var(--gold))!important;background:var(--cx-ep,var(--hero-pront-header,#f3f0e7))!important;border-radius:0!important;overflow:hidden;box-shadow:none!important}
+html body.hero-redesign-v53 #panel-min #cmp-app .hero-review-workspace.is-comparing .hero-review-comparison>.hero-review-divider{display:flex!important;flex-wrap:wrap;align-items:center;justify-content:space-between!important;gap:6px!important;background:var(--hero-pront-header,#f3f0e7)!important;padding:8px 10px!important;border-bottom:1px solid var(--cx-el,var(--line))}
+html body.hero-redesign-v53 #panel-min #cmp-app .hero-review-workspace.is-comparing .hero-review-comparison>.hero-review-divider::before,html body.hero-redesign-v53 #panel-min #cmp-app .hero-review-workspace.is-comparing .hero-review-comparison>.hero-review-divider::after,html body.hero-redesign-v53 #panel-min #cmp-app .hero-review-workspace.is-comparing .hero-review-cross{display:none!important}
+html body.hero-redesign-v53 #panel-min #cmp-app .hero-review-workspace.is-comparing .hero-comparison-kicker{display:block!important;flex:1 1 100%;font:600 10px/1.4 var(--mono,monospace);letter-spacing:.1em;text-transform:uppercase;color:var(--gold,#947333)}
+html body.hero-redesign-v53 #panel-min #cmp-app .hero-review-workspace.is-comparing .hero-v53-review-actions{flex:1 1 100%;justify-content:flex-start!important}
+html body.hero-redesign-v53 #panel-min #cmp-app .hero-review-comparison .hero-review-fused-content>.cx-res{padding:0!important;margin:0!important;min-width:0}
+html body.hero-redesign-v53 #panel-min #cmp-app .hero-review-comparison .cx-res-h{display:flex!important;flex-wrap:wrap;align-items:center;gap:6px;margin:0!important;padding:8px 10px!important;border-bottom:1px solid var(--cx-el,var(--line))}
+html body.hero-redesign-v53 #panel-min #cmp-app .hero-review-comparison .cx-res-h>b{flex:1 1 100%;font-size:11px;overflow-wrap:anywhere}
+html body.hero-redesign-v53 #panel-min #cmp-app .hero-review-comparison .cx-vis{padding:6px 10px!important;margin:0!important;border-bottom:1px solid var(--cx-el,var(--line))}
+html body.hero-redesign-v53 #panel-min #cmp-app .hero-review-comparison .cx-res>.status{font-size:10px;margin:0!important;padding:6px 10px!important}
+html body.hero-redesign-v53 #panel-min #cmp-app .hero-review-comparison :is(.folha,.cx-out){box-sizing:border-box;width:calc(100% - 20px)!important;max-width:calc(100% - 20px)!important;margin:0 10px 10px!important;padding:12px clamp(12px,4vw,26px)!important;max-height:65dvh;min-height:180px;overflow:auto;scrollbar-width:thin;font-size:var(--hero-review-font,11.5px)!important}
+html body.hero-redesign-v53 #panel-min #cmp-app .hero-review-document.is-minimized{padding:0!important;margin:0!important;min-height:0!important;height:auto!important;overflow:hidden}
+html body.hero-redesign-v53 #panel-min #cmp-app .hero-review-document.is-minimized>:not(.mn-ed-h):not(.hero-review-ref-head){display:none!important}
+html body.hero-redesign-v53 #panel-min #cmp-app .hero-review-document.is-minimized>.mn-ed-h{display:flex!important;min-height:36px!important;padding:6px 10px!important;border:0!important}
+html body.hero-redesign-v53 #panel-min #cmp-app .hero-review-document.is-minimized>.mn-ed-h>:not(.mn-tg){display:none!important}
+html body.hero-redesign-v53 #panel-min #cmp-app .hero-review-document.is-minimized .mn-tg{flex:1;display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:space-between!important;gap:8px!important;width:100%!important}
+html body.hero-redesign-v53 #panel-min #cmp-app .hero-review-document.is-minimized .mn-tg>.muted{flex:1;text-align:right;min-width:0}
+html body.hero-redesign-v53 #panel-min #cmp-app .hero-review-ref-toggle{display:flex;align-items:center;gap:5px;max-width:100%;padding:0;border:0;background:transparent;color:inherit;font:inherit;letter-spacing:inherit;text-align:left;cursor:pointer}
+html body.hero-redesign-v53 #panel-min #cmp-app .hero-review-ref-toggle::before{content:'▾';color:var(--muted-fg);flex:none}
+html body.hero-redesign-v53 #panel-min #cmp-app .hero-review-ref-toggle[aria-expanded=false]::before{content:'▸'}
+html body.hero-redesign-v53 #panel-min #cmp-app .hero-review-document.is-minimized>.hero-review-ref-head{min-height:36px!important;padding:6px 10px!important;border:0!important}
+html body.hero-redesign-v53 #panel-min #cmp-app .hero-review-document.is-minimized>.hero-review-ref-head small{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+html body.hero-redesign-v53 #panel-min #cmp-app .hero-review-workspace.is-comparing .hero-review-document{background:var(--hero-pront-paper,#fff)!important}
+/* Card inicial padronizado dos dois roteiros; controles pertencem à mesma superfície. */
+html body.hero-redesign-v53 #gab :is(.hero-tri-with-dock,.hero-production-route) .hero-route-overview{margin:10px 10px 10px!important;padding:0!important;min-width:0;background:var(--route-paper)!important;border:1px solid var(--route-rule)!important;border-radius:4px!important;box-shadow:none!important;overflow:hidden}
+html body.hero-redesign-v53 #gab :is(.hero-tri-with-dock,.hero-production-route) .hero-route-overview>summary.rt-tt{display:flex!important;align-items:center!important;gap:7px!important;min-height:38px;box-sizing:border-box;margin:0!important;padding:8px 10px!important;list-style:none;cursor:pointer;background:var(--route-bg)!important;border-bottom:0!important}
+html body.hero-redesign-v53 #gab .hero-route-overview>summary::-webkit-details-marker{display:none}
+html body.hero-redesign-v53 #gab :is(.hero-tri-with-dock,.hero-production-route) .hero-route-overview>summary.rt-tt>b{flex:1;min-width:0;color:var(--fg)!important;font:650 11.5px/1.4 var(--sans,system-ui)!important;text-transform:none!important;letter-spacing:0!important}
+html body.hero-redesign-v53 #gab .hero-route-overview>summary .rt-n{font:600 10px/1.4 var(--mono,monospace)!important;color:var(--muted-fg)!important;background:transparent!important;padding:0!important;border:0!important}
+html body.hero-redesign-v53 #gab .hero-route-overview-chevron{width:7px;height:7px;flex:none;border-right:1.5px solid var(--muted-fg);border-bottom:1.5px solid var(--muted-fg);transform:rotate(45deg);margin:0 3px 4px 0}
+html body.hero-redesign-v53 #gab .hero-route-overview[open]>summary .hero-route-overview-chevron{transform:rotate(225deg);margin:4px 3px 0 0}
+html body.hero-redesign-v53 #gab .hero-route-overview[open]>summary.rt-tt{border-bottom:1px solid var(--route-rule)!important}
+html body.hero-redesign-v53 #gab .hero-route-overview:not([open])>.hero-route-overview-body{display:none!important}
+html body.hero-redesign-v53 #gab .hero-route-overview-body{background:var(--route-paper);min-width:0}
+html body.hero-redesign-v53 #gab .hero-route-overview-body>.hero-route-intro{padding:6px 10px 0;margin:0;font-size:10px;line-height:1.35}
+html body.hero-redesign-v53 #gab :is(.hero-tri-with-dock,.hero-production-route) .hero-route-overview .hero-route-tools{margin:0!important;padding:7px 8px!important;border:0!important;border-top:1px solid var(--route-rule)!important;background:transparent}
+html body.hero-redesign-v53 #gab :is(.hero-tri-with-dock,.hero-production-route) .hero-route-overview .hero-route-metrics{border-top:0!important}
