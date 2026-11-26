@@ -9566,12 +9566,14 @@
    "exequente": "UNIÃO FEDERAL",
    "executado": "ALEX OLIVEIRA DA SILVA",
    "assunto": "Cirurgia",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "AP2",
+   "tipo_caso": "Apelação da União e de Estado de Mato Grosso do Sul em procedimento comum · Cirurgia · [VALIDAR resultado]",
+   "resultado": "Ato a proferir: apelação de União (ID 352468356) e apelação de Estado de Mato Grosso do Sul (ID 352468358) da sentença ID 352468348; contrarrazões: ID 352468361 ‖ Proposta pelos precedentes: Voto. Temas 793 e 1.234/STF [VALIDAR paradigma] [VALIDAR: Entes réus e situação atual da cirurgia (eventual perda do objeto)]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação da União e de Estado de Mato Grosso do Sul contra sentença ([VALIDAR resultado]) da 1ª Vara Federal de Dourados em procedimento comum: dispositivo, cujo rol é meramente exemplificativo, revela-se possível no presente caso, o bloqueio ou sequestro de verbas públicas e a imposição de multa.Intimem-se pelo meio mais célere, servindo-se desta como Mandado de Intimação.P.R.I.C. No ensejo, arquivem-se. JUIZ FEDERAL ",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -9582,7 +9584,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da(s) apelação(ões) (voto)",
+    "materia": "Cirurgia",
+    "origem": "Procedimento comum 5001672-32.2024.4.03.6002 (1ª Vara Federal de Dourados)",
+    "decisao_agravada": "Sentença ID 352468348 (03/11/2025)",
+    "recurso": "apelação de União (ID 352468356, 10/11/2025) e apelação de Estado de Mato Grosso do Sul (ID 352468358, 11/11/2025)",
+    "preparo": "União: isento (ente público); Estado de Mato Grosso do Sul: isento (ente público)",
+    "monocratica": "Improvável sem paradigma",
+    "analisado_em": "26/11/2026",
+    "conf_preparo": "União: isento (ente público); Estado de Mato Grosso do Sul: isento (ente público) · conferido em 26/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 26/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -9592,6 +9605,135 @@
    "chegada": "04/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Cirurgia — [VALIDAR detalhamento]",
+   "especificidades": "► Situação em 26/11/2026: última decisão: ID 352699983 · 30/01/2026 — indeferiu a liminar ou a tutela | última peça: Manifestação (apelado) · ID 356255065 · 23/02/2026 | última movimentação: 09/04/2026 14:07 · Conclusos para julgamento · Origem: procedimento comum (1ª Vara Federal de Dourados) · Pedido de urgência nas razões [VALIDAR se apreciado] · Tempestividade: União: [VALIDAR tempestividade: intimação da sentença não localizada no texto extraído; apelação de 10/11/2025] | Estado de Mato Grosso do Sul: [VALIDAR tempestividade: intimação da sentença não localizada no texto extraído; apelação de 11/11/2025] · No cadastro do lote, as partes estão invertidas: o autor é Alex Oliveira da Silva",
+   "teor": {
+    "sintese_fatica": "Alex Oliveira da Silva pediu tratamento ortopédico, inclusive artroplastia de quadril esquerdo, contra os entes do SUS. A sentença rejeitou as preliminares e julgou procedente o pedido.",
+    "inicial": "Procedimento comum ajuizado(a) em 29/07/2024 (petição inicial ID 352468322).",
+    "decisao_recorrida": "Sentença ID 352468348 (03/11/2025): dispositivo, cujo rol é meramente exemplificativo, revela-se possível no presente caso, o bloqueio ou sequestro de verbas públicas e a imposição de multa.Intimem-se pelo meio mais célere, servindo-se desta como Mandado de Intimação.P.R.I.C. No ensejo, arquivem-se. JUIZ FEDERAL ",
+    "recurso": "União (ID 352468356, 10/11/2025): reforma da procedência e da tutela de urgência; responsabilidade e regras do SUS [VALIDAR teses] · Estado de Mato Grosso do Sul (ID 352468358, 11/11/2025): reforma da condenação ao tratamento ortopédico e à artroplastia de quadril [VALIDAR teses]",
+    "resposta": "Contrarrazões: ID 352468361 (28/01/2026).",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "[VALIDAR representação]",
+    "preparo": "União: isento (ente público); Estado de Mato Grosso do Sul: isento (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação da União e de Estado de Mato Grosso do Sul em procedimento comum · Cirurgia · [VALIDAR resultado]",
+     "sintese": "Alex Oliveira da Silva pediu tratamento ortopédico, inclusive artroplastia de quadril esquerdo, contra os entes do SUS. A sentença rejeitou as preliminares e julgou procedente o pedido.",
+     "questoes": "1) responsabilidade dos entes e direcionamento do cumprimento (Temas 793 e 1.234/STF); 2) acesso ao procedimento fora da fila do SUS",
+     "rel": {
+      "razoes": "União (ID 352468356, 10/11/2025): reforma da procedência e da tutela de urgência; responsabilidade e regras do SUS [VALIDAR teses] · Estado de Mato Grosso do Sul (ID 352468358, 11/11/2025): reforma da condenação ao tratamento ortopédico e à artroplastia de quadril [VALIDAR teses]",
+      "contrarrazoes": "Contrarrazões: ID 352468361 (28/01/2026)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "352468348",
+      "juizo": "Procedimento comum 5001672-32.2024.4.03.6002 (1ª Vara Federal de Dourados)",
+      "dispositivo": "dispositivo, cujo rol é meramente exemplificativo, revela-se possível no presente caso, o bloqueio ou sequestro de verbas públicas e a imposição de multa.Intimem-se pelo meio mais célere, servindo-se desta como Mandado de Intimação.P.R.I.C. No ensejo, arquivem-se. JUIZ FEDERAL "
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2025-11-10",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "União",
+       "tipo": "Apelação",
+       "id": "352468356",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Estado de Mato Grosso do Sul",
+       "tipo": "Apelação",
+       "id": "352468358",
+       "contra": "Sentença"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: [VALIDAR resultado]",
+       "id": "352468348",
+       "data": "2025-11-03",
+       "nota": "Sentença ID 352468348 (03/11/2025): dispositivo, cujo rol é meramente exemplificativo, revela-se possível no presente caso, o bloqueio ou sequestro de verbas públicas e a imposição de multa.Intimem-se pelo meio mais célere, servindo-se desta como Mandado de Intimação.P.R.I.C. No ensejo, arquivem-se. JUIZ FEDERAL",
+       "pje": {
+        "tipo": "Sentença"
+       },
+       "trecho": "Pelo exposto, rejeitando as preliminares suscitadas, e, nos termos do art. 487, I, CPC, é PROCEDENTE a demanda, para condenar os requeridos à obrigação de fazer consistente na realização de tratamento ortopédico adequado ao autor, inclusive o procedimento cirúrgico (artroplastia de quadril …"
+      },
+      {
+       "desc": "Apelação: União",
+       "id": "352468356",
+       "data": "2025-11-10",
+       "nota": "União (ID 352468356, 10/11/2025): reforma da procedência e da tutela de urgência; responsabilidade e regras do SUS [VALIDAR teses] · Estado de Mato Grosso do Sul (ID 352468358, 11/11/2025): reforma da condenação ao tratamento ortopédico e à artroplastia de quadril [VALIDAR teses]",
+       "pje": {
+        "tipo": "Apelação",
+        "descricao": "P APELAÇÃO 3006140053 EM 10/11/2025 16:02:45",
+        "paginas": 35
+       },
+       "trecho": "Ante o exposto, voto por CONHECER E DAR PARCIAL PROVIMENTO AO RECURSO DA PARTE AUTORA, apenas para determinar que o procedimento almejado pela parte autora seja realizado sem prejuízo da ordem de prioridade já estabelecida para os inscritos no sistema, assegurando o tratamento conforme indicação …"
+      },
+      {
+       "desc": "Apelação: Estado de Mato Grosso do Sul",
+       "id": "352468358",
+       "data": "2025-11-11",
+       "nota": "União (ID 352468356, 10/11/2025): reforma da procedência e da tutela de urgência; responsabilidade e regras do SUS [VALIDAR teses] · Estado de Mato Grosso do Sul (ID 352468358, 11/11/2025): reforma da condenação ao tratamento ortopédico e à artroplastia de quadril [VALIDAR teses]",
+       "pje": {
+        "tipo": "Apelação",
+        "paginas": 9
+       },
+       "trecho": "Posto isso, concedo em parte a antecipação da tutela recursal, na forma do art. 1.019, inciso I, CPC, para determinar ao juízo de origem que adote, de imediato as medidas necessárias para o cumprimento da decisão de f. 12-16 dos autos originários, determinando a realização do procedimento cirúrgico …"
+      },
+      {
+       "desc": "Contrarrazões",
+       "id": "352468361",
+       "data": "2026-01-28",
+       "nota": "Contrarrazões: ID 352468361 (28/01/2026).",
+       "pje": {
+        "tipo": "Contrarrazões"
+       },
+       "trecho": "Ante o exposto, a parte autora requer:O desprovimento total dos recursos de apelação interpostos pela União Federal e pelo Estado de Mato Grosso do Sul.A manutenção integral da sentença recorrida por seus próprios fundamentos.A majoração dos honorários advocatícios em sede recursal, nos termos do …"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 26/11/2026: última decisão: ID 352699983 · 30/01/2026 — indeferiu a liminar ou a tutela | última peça: Manifestação (apelado) · ID 356255065 · 23/02/2026 | última movimentação: 09/04/2026 14:07 · Conclusos para julgamento · Origem: procedimento comum (1ª Vara Federal de Dourados) · Pedido de urgência nas razões [VALIDAR se apreciado] · Tempestividade: União: [VALIDAR tempestividade: intimação da sentença não localizada no texto extraído; apelação de 10/11/2025] | Estado de Mato Grosso do Sul: [VALIDAR tempestividade: intimação da sentença não localizada no texto extraído; apelação de 11/11/2025] · No cadastro do lote, as partes estão invertidas: o autor é Alex Oliveira da Silva",
+     "assuntoDet": "Cirurgia — [VALIDAR detalhamento]",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Não verificado",
+     "urgTipo": "Pedido nas razões de apelação",
+     "urgSit": "Não verificado"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "09/04/2026 14:07 · Conclusos para julgamento",
+    "mov_fonte": "linha do tempo do PJe (autos extraídos)",
+    "ultima_decisao": "Decisão · ID 352699983 · 30/01/2026 — indeferiu a liminar ou a tutela",
+    "ultima_peca": "Manifestação (apelado) · ID 356255065 · 23/02/2026",
+    "ultima_informacao": "Informação · ID 352468362 · 29/01/2026",
+    "aviso": "Conferido em 26/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 26/11/2026: última decisão: ID 352699983 · 30/01/2026 — indeferiu a liminar ou a tutela | última peça: Manifestação (apelado) · ID 356255065 · 23/02/2026 | última movimentação: 09/04/2026 14:07 · Conclusos para julgamento"
    }
   },
   {
@@ -9603,12 +9745,14 @@
    "exequente": "UNIÃO FEDERAL",
    "executado": "ANDERSON CARVALHO DE OLIVEIRA",
    "assunto": "CNH - Carteira Nacional de Habilitação",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "AP2",
+   "tipo_caso": "Apelação da União em procedimento comum · CNH - Carteira Nacional de Habilitação · parcial procedência",
+   "resultado": "Ato a proferir: apelação de União (ID 320388007) da sentença ID 320388005; contrarrazões: ID 320388009 ‖ Proposta pelos precedentes: Voto. Etiqueta \"LOTE MULTA - APCIV\": seguir o padrão do lote de multas [VALIDAR paradigma]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação da União contra sentença (parcial procedência) da 4ª Vara Federal de Campo Grande em procedimento comum: Diante do exposto, julgo parcialmente procedente o pedido para declarar a nulidade do Processo Administrativo PRF desencadeado com o auto B[ID do 1º grau]. Condeno a ré a pagar honorários ao advogado do autor. No passo, por constatar que o valor da causa é muito baixo (R$ 2.934,70), diante do disposto nos §§ 8º e 8º-A do art. 85 do CPC, devo observar os valores da Tabela de Honorários Advocatícios da Resolução OAB/MS Nº 08",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -9619,7 +9763,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da(s) apelação(ões) (voto)",
+    "materia": "CNH - Carteira Nacional de Habilitação",
+    "origem": "Procedimento comum 5007512-63.2023.4.03.6000 (4ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 320388005 (14/10/2024)",
+    "recurso": "apelação de União (ID 320388007, 05/02/2025)",
+    "preparo": "União: isento (ente público)",
+    "monocratica": "Improvável sem paradigma",
+    "analisado_em": "26/11/2026",
+    "conf_preparo": "União: isento (ente público) · conferido em 26/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 26/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -9629,6 +9784,115 @@
    "chegada": "14/04/2025",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "CNH - Carteira Nacional de Habilitação — [VALIDAR detalhamento]",
+   "especificidades": "► Situação em 26/11/2026: última decisão: ID 320388005 · 14/10/2024 — sentença: julgou parcialmente procedente o pedido | última peça: Contrarrazões de Recurso (apelado) · ID 320388009 · 07/04/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Origem: procedimento comum (4ª Vara Federal de Campo Grande) · Gratuidade (ID 320387997) · Tempestividade: União: ciência em 24/11/2024, prazo de 30 dias até 05/02/2025; apelação de 05/02/2025 · No cadastro do lote, as partes estão invertidas: o autor é Anderson Carvalho de Oliveira",
+   "teor": {
+    "sintese_fatica": "Anderson Carvalho de Oliveira pediu a anulação de autuação da PRF (auto B[ID do 1º grau]). A sentença julgou parcialmente procedente o pedido, declarou nulo o processo administrativo e fixou honorários pela tabela da OAB/MS, diante do valor da causa de R$ 2.934,70.",
+    "inicial": "Procedimento comum ajuizado(a) em 14/09/2023 (petição inicial ID 320387931).",
+    "decisao_recorrida": "Sentença ID 320388005 (14/10/2024): Diante do exposto, julgo parcialmente procedente o pedido para declarar a nulidade do Processo Administrativo PRF desencadeado com o auto B[ID do 1º grau]. Condeno a ré a pagar honorários ao advogado do autor. No passo, por constatar que o valor da causa é muito baixo (R$ 2.934,70), diante do disposto nos §§ 8º e 8º-A do art. 85 do CPC, devo observar os valores da Tabela de Honorários Advocatícios da Resolução OAB/MS Nº 08/2023 na fixação dos honorários sucumbenciais (Tratando-se de \"1.2 Ações de jurisdição contenciosa ou que assumam este caráter\" a referida tabela aponta o valor de R$ 9.300,00 (htt",
+    "recurso": "União (ID 320388007, 05/02/2025): improcedência do pedido ou, subsidiariamente, redução dos honorários fixados pela tabela da OAB/MS (artigo 85, §§ 8º e 8º-A, do CPC)",
+    "resposta": "Contrarrazões: ID 320388009 (07/04/2025).",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "[VALIDAR representação]",
+    "preparo": "União: isento (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação da União em procedimento comum · CNH - Carteira Nacional de Habilitação · parcial procedência",
+     "sintese": "Anderson Carvalho de Oliveira pediu a anulação de autuação da PRF (auto B[ID do 1º grau]). A sentença julgou parcialmente procedente o pedido, declarou nulo o processo administrativo e fixou honorários pela tabela da OAB/MS, diante do valor da causa de R$ 2.934,70.",
+     "questoes": "1) regularidade do processo administrativo de trânsito (notificações); 2) honorários por equidade com base na tabela da OAB (artigo 85, § 8º-A, do CPC; Tema 1.076/STJ)",
+     "rel": {
+      "razoes": "União (ID 320388007, 05/02/2025): improcedência do pedido ou, subsidiariamente, redução dos honorários fixados pela tabela da OAB/MS (artigo 85, §§ 8º e 8º-A, do CPC)",
+      "contrarrazoes": "Contrarrazões: ID 320388009 (07/04/2025)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "320388005",
+      "juizo": "Procedimento comum 5007512-63.2023.4.03.6000 (4ª Vara Federal de Campo Grande)",
+      "dispositivo": "Diante do exposto, julgo parcialmente procedente o pedido para declarar a nulidade do Processo Administrativo PRF desencadeado com o auto B[ID do 1º grau]. Condeno a ré a pagar honorários ao advogado do autor. No passo, por constatar que o valor da causa é muito baixo (R$ 2.934,70), diante do disposto nos §§ 8º e 8º-A do art. 85 do CPC, devo observar os valores da Tabela de Honorários Advocatícios da Resolução OAB/MS Nº 08/2023 na fixação dos honorários sucumbenciais (Tratando-se de \"1.2 Ações de jurisdição contenciosa ou que assumam este caráter\" a referida tabela aponta o valor de R$ 9.300,00 (htt"
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2025-02-05",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "União",
+       "tipo": "Apelação",
+       "id": "320388007",
+       "contra": "Sentença"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: parcial procedência",
+       "id": "320388005",
+       "data": "2024-10-14",
+       "nota": "Sentença ID 320388005 (14/10/2024): Diante do exposto, julgo parcialmente procedente o pedido para declarar a nulidade do Processo Administrativo PRF desencadeado com o auto B[ID do 1º grau].",
+       "pje": {
+        "tipo": "Sentença"
+       },
+       "trecho": "Diante do exposto, julgo parcialmente procedente o pedido para declarar a nulidade do Processo Administrativo PRF desencadeado com o auto B137728948. Condeno a ré a pagar honorários ao advogado do autor. No passo, por constatar que o valor da causa é muito baixo (R$ 2.934,70), diante do disposto …"
+      },
+      {
+       "desc": "Apelação: União",
+       "id": "320388007",
+       "data": "2025-02-05",
+       "nota": "União (ID 320388007, 05/02/2025): improcedência do pedido ou, subsidiariamente, redução dos honorários fixados pela tabela da OAB/MS (artigo 85, §§ 8º e 8º-A, do CPC)",
+       "pje": {
+        "tipo": "Apelação"
+       },
+       "trecho": "Ante o exposto, requer a União seja dado provimento ao presente recurso, reformando-se a r. sentença para julgar improcedentes os pedidos autorais ou alternativamente, reformando-se o valor fixado a título de honorários advocatícios. Nestes termos, pede-se deferimento. São Paulo, 05 de fevereiro de …"
+      },
+      {
+       "desc": "Contrarrazões",
+       "id": "320388009",
+       "data": "2025-04-07",
+       "nota": "Contrarrazões: ID 320388009 (07/04/2025).",
+       "pje": {
+        "tipo": "Contrarrazões de Recurso",
+        "paginas": 5
+       },
+       "trecho": "Diante do exposto, requer que essa Egrégia Câmara Re- cursal negue conhecimento do recurso de apelação interposto pelo recorrente e que seja mantida a decisão do juízo de primeiro grau em todos os seus termos. Requer ainda a condenação dos honorários sucumbenci- ais em face do recurso de apelação. …"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 26/11/2026: última decisão: ID 320388005 · 14/10/2024 — sentença: julgou parcialmente procedente o pedido | última peça: Contrarrazões de Recurso (apelado) · ID 320388009 · 07/04/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Origem: procedimento comum (4ª Vara Federal de Campo Grande) · Gratuidade (ID 320387997) · Tempestividade: União: ciência em 24/11/2024, prazo de 30 dias até 05/02/2025; apelação de 05/02/2025 · No cadastro do lote, as partes estão invertidas: o autor é Anderson Carvalho de Oliveira",
+     "assuntoDet": "CNH - Carteira Nacional de Habilitação — [VALIDAR detalhamento]",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Tempestivo",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Não verificado"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária",
+    "mov_fonte": "linha do tempo do PJe (autos extraídos)",
+    "ultima_decisao": "Sentença · ID 320388005 · 14/10/2024 — sentença: julgou parcialmente procedente o pedido",
+    "ultima_peca": "Contrarrazões de Recurso (apelado) · ID 320388009 · 07/04/2025",
+    "ultima_informacao": "Informação · ID 320388010 · 08/04/2025",
+    "aviso": "Conferido em 26/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 26/11/2026: última decisão: ID 320388005 · 14/10/2024 — sentença: julgou parcialmente procedente o pedido | última peça: Contrarrazões de Recurso (apelado) · ID 320388009 · 07/04/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária"
    }
   },
   {
@@ -9640,12 +9904,14 @@
    "exequente": "CRISTIANO JOSE ZAMPIERI",
    "executado": "SSP DEPARTAMENTO ESTADUAL DE TRANSITO DE MS",
    "assunto": "CNH - Carteira Nacional de Habilitação",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "AP2",
+   "tipo_caso": "Apelação de Cristiano José Zampieri em procedimento comum · CNH - Carteira Nacional de Habilitação · extinção sem resolução do mérito",
+   "resultado": "Ato a proferir: apelação de Cristiano José Zampieri (ID 389188840) da sentença ID 389188839; contrarrazões: ID 389188842, ID 389188843 ‖ Proposta pelos precedentes: Voto [VALIDAR paradigma] [VALIDAR: Autuante das infrações (PRF ou DETRAN) e trajetória do processo até a Justiça Federal; Texto da apelação com espaçamento corrompido (ID 389188840): conferir pedidos]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação de Cristiano José Zampieri contra sentença (extinção sem resolução do mérito) da 2ª Vara Federal de Ponta Porã em procedimento comum: Dispositivos relevantes citados: Código de Trânsito Brasileiro (Lei 9.503/97), artigos 19 e 22; Código de Processo Civil, artigos 485, VI, 370 e 1013, §3º, I; artigo 85, §2º do CPC.Jurisprudência relevante citada: AgRg no AREsp 312470/ES, Primeira Turma, Relator Ministro Sérgio Kukina, DJe 20/04/2015.(TRF 3ª Região, 6ª Turma, ApCiv - APELAÇÃO CÍVEL - 5000823-75.2021.4.03.6128, Rel. Desembargador Federal LUIZ ALBERTO ",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -9656,7 +9922,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da(s) apelação(ões) (voto)",
+    "materia": "CNH - Carteira Nacional de Habilitação",
+    "origem": "Procedimento comum 5000997-26.2025.4.03.6005 (2ª Vara Federal de Ponta Porã)",
+    "decisao_agravada": "Sentença ID 389188839 (03/02/2026)",
+    "recurso": "apelação de Cristiano José Zampieri (ID 389188840, 02/03/2026)",
+    "preparo": "Cristiano José Zampieri: justiça gratuita (ID 389188531)",
+    "monocratica": "Improvável sem paradigma",
+    "analisado_em": "26/11/2026",
+    "conf_preparo": "Cristiano José Zampieri: justiça gratuita (ID 389188531) · conferido em 26/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 26/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -9666,6 +9943,129 @@
    "chegada": "21/08/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "CNH - Carteira Nacional de Habilitação — [VALIDAR detalhamento]",
+   "especificidades": "► Situação em 26/11/2026: última decisão: ID 389188839 · 03/02/2026 — sentença: julgou improcedente o pedido | última peça: Contrarrazões (advogado de parte) · ID 389188843 · 10/07/2026 | última movimentação: 21/08/2026 12:44 · Conclusos para julgamento · Origem: procedimento comum (2ª Vara Federal de Ponta Porã) · Gratuidade (ID 389188531) · Tempestividade: Cristiano José Zampieri: ciência em 11/02/2026, prazo de 15 dias até 06/03/2026; apelação de 02/03/2026 · Processo vindo da Justiça Estadual (acórdão de Turma Recursal do TJMS juntado como inicial, ID 389188528)",
+   "teor": {
+    "sintese_fatica": "Cristiano José Zampieri pediu a nulidade de autuações de trânsito e a transferência de pontos para a CNH de seu genitor, Valdir José Zampieri. A sentença reconheceu a ilegitimidade do DETRAN/MS e extinguiu sem resolução do mérito o pedido relativo ao auto T[ID do 1º grau] e julgou improcedente o pedido quanto ao auto T[ID do 1º grau] e à indicação de condutor.",
+    "inicial": "Procedimento comum ajuizado(a) em 10/06/2025 (petição inicial ID 389188528).",
+    "decisao_recorrida": "Sentença ID 389188839 (03/02/2026): Dispositivos relevantes citados: Código de Trânsito Brasileiro (Lei 9.503/97), artigos 19 e 22; Código de Processo Civil, artigos 485, VI, 370 e 1013, §3º, I; artigo 85, §2º do CPC.Jurisprudência relevante citada: AgRg no AREsp 312470/ES, Primeira Turma, Relator Ministro Sérgio Kukina, DJe 20/04/2015.(TRF 3ª Região, 6ª Turma, ApCiv - APELAÇÃO CÍVEL - 5000823-75.2021.4.03.6128, Rel. Desembargador Federal LUIZ ALBERTO DE SOUZA RIBEIRO, julgado em 18/08/2025, DJEN DATA: 28/08/2025)No caso concreto, não foram levantadas ilegalidades procedimentais atribuídas à fase de tramitação de aplicação de pe",
+    "recurso": "Cristiano José Zampieri (ID 389188840, 02/03/2026): reforma da sentença: nulidade da autuação, transferência dos pontos ao condutor indicado e afastamento da pontuação na CNH [VALIDAR teses]",
+    "resposta": "Contrarrazões: ID 389188842 (21/06/2026), ID 389188843 (10/07/2026).",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "[VALIDAR representação]",
+    "preparo": "Cristiano José Zampieri: justiça gratuita (ID 389188531)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação de Cristiano José Zampieri em procedimento comum · CNH - Carteira Nacional de Habilitação · extinção sem resolução do mérito",
+     "sintese": "Cristiano José Zampieri pediu a nulidade de autuações de trânsito e a transferência de pontos para a CNH de seu genitor, Valdir José Zampieri. A sentença reconheceu a ilegitimidade do DETRAN/MS e extinguiu sem resolução do mérito o pedido relativo ao auto T[ID do 1º grau] e julgou improcedente o pedido quanto ao auto T[ID do 1º grau] e à indicação de condutor.",
+     "questoes": "1) legitimidade do DETRAN/MS na fase de autuação; 2) indicação extemporânea de condutor e transferência de pontos",
+     "rel": {
+      "razoes": "Cristiano José Zampieri (ID 389188840, 02/03/2026): reforma da sentença: nulidade da autuação, transferência dos pontos ao condutor indicado e afastamento da pontuação na CNH [VALIDAR teses]",
+      "contrarrazoes": "Contrarrazões: ID 389188842 (21/06/2026), ID 389188843 (10/07/2026)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "389188839",
+      "juizo": "Procedimento comum 5000997-26.2025.4.03.6005 (2ª Vara Federal de Ponta Porã)",
+      "dispositivo": "Dispositivos relevantes citados: Código de Trânsito Brasileiro (Lei 9.503/97), artigos 19 e 22; Código de Processo Civil, artigos 485, VI, 370 e 1013, §3º, I; artigo 85, §2º do CPC.Jurisprudência relevante citada: AgRg no AREsp 312470/ES, Primeira Turma, Relator Ministro Sérgio Kukina, DJe 20/04/2015.(TRF 3ª Região, 6ª Turma, ApCiv - APELAÇÃO CÍVEL - 5000823-75.2021.4.03.6128, Rel. Desembargador Federal LUIZ ALBERTO DE SOUZA RIBEIRO, julgado em 18/08/2025, DJEN DATA: 28/08/2025)No caso concreto, não foram levantadas ilegalidades procedimentais atribuídas à fase de tramitação de aplicação de pe"
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2026-03-02",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Cristiano José Zampieri",
+       "tipo": "Apelação",
+       "id": "389188840",
+       "contra": "Sentença"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: extinção sem resolução do mérito",
+       "id": "389188839",
+       "data": "2026-02-03",
+       "nota": "Sentença ID 389188839 (03/02/2026): Dispositivos relevantes citados: Código de Trânsito Brasileiro (Lei 9.503/97), artigos 19 e 22;",
+       "pje": {
+        "tipo": "Sentença"
+       },
+       "trecho": "JULGO o feito EXTINTO SEM JULGAMENTO DO MÉRITO quanto ao pedido de declaração de nulidade do Auto de Infração (CTB) T501743642 (SEI nº 66319052), ante a perda do objeto, o que faço com base no artigo 485, VI do Código de Processo Civil. No mais, JULGO IMPROCEDENTE o pedido de nulidade do …"
+      },
+      {
+       "desc": "Apelação: Cristiano José Zampieri",
+       "id": "389188840",
+       "data": "2026-03-02",
+       "nota": "Cristiano José Zampieri (ID 389188840, 02/03/2026): reforma da sentença: nulidade da autuação, transferência dos pontos ao condutor indicado e afastamento da pontuação na CNH [VALIDAR teses]",
+       "pje": {
+        "tipo": "Apelação",
+        "paginas": 24
+       },
+       "trecho": "1 E X C E L E N TÍ SS I MO S E N HO R D O UT O R J U I Z F E DER A L D A 2 ª V A R A F E DE R AL DE PO N T A P O RÃ MS P r o ce s s o n º : 5 0 0 0 9 9 7 - 2 6 .2 0 2 5 . 4 .0 3 .6 0 0 5 C R I ST I A N O J O SE Z A M P IE R I e V A LD I R J O SE Z A M P I E RI , já d e vi d a m e n te q u a l i f i …"
+      },
+      {
+       "desc": "Contrarrazões",
+       "id": "389188842",
+       "data": "2026-06-21",
+       "nota": "Contrarrazões: ID 389188842 (21/06/2026), ID 389188843 (10/07/2026).",
+       "pje": {
+        "tipo": "Contrarrazões",
+        "descricao": "P CONTRARRAZÕES 3262199665 EM 21/06/2026 18:47:54",
+        "paginas": 8
+       },
+       "trecho": "requer seja negado provimento ao recurso de apelação, mantendo-se na íntegra a r. Sentença de origem. São Paulo, 20 de junho de 2026. ARLENE SANTANA ARAÚJO"
+      },
+      {
+       "desc": "Contrarrazões",
+       "id": "389188843",
+       "data": "2026-07-10",
+       "nota": "Contrarrazões: ID 389188842 (21/06/2026), ID 389188843 (10/07/2026).",
+       "pje": {
+        "tipo": "Contrarrazões",
+        "descricao": "Contrarrazões de Apelação (1 e 2 Grau)",
+        "paginas": 6
+       },
+       "trecho": "Ante o exposto, o Departamento Estadual De Trânsito De Mato Grosso Do Sul DETRAN/MS requer o desprovimento do recurso de Apelação Cível interposto, mantendo- se integralmente a r. Sentença recorrida por seus próprios e jurídicos fundamentos. Termos em que pede deferimento. Campo Grande/MS, 10 de …"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 26/11/2026: última decisão: ID 389188839 · 03/02/2026 — sentença: julgou improcedente o pedido | última peça: Contrarrazões (advogado de parte) · ID 389188843 · 10/07/2026 | última movimentação: 21/08/2026 12:44 · Conclusos para julgamento · Origem: procedimento comum (2ª Vara Federal de Ponta Porã) · Gratuidade (ID 389188531) · Tempestividade: Cristiano José Zampieri: ciência em 11/02/2026, prazo de 15 dias até 06/03/2026; apelação de 02/03/2026 · Processo vindo da Justiça Estadual (acórdão de Turma Recursal do TJMS juntado como inicial, ID 389188528)",
+     "assuntoDet": "CNH - Carteira Nacional de Habilitação — [VALIDAR detalhamento]",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Tempestivo",
+     "preparo": "Justiça gratuita",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Não verificado"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "21/08/2026 12:44 · Conclusos para julgamento",
+    "mov_fonte": "linha do tempo do PJe (autos extraídos)",
+    "ultima_decisao": "Sentença · ID 389188839 · 03/02/2026 — sentença: julgou improcedente o pedido",
+    "ultima_peca": "Contrarrazões (advogado de parte) · ID 389188843 · 10/07/2026",
+    "ultima_informacao": "Informação · ID 389188846 · 28/07/2026",
+    "aviso": "Conferido em 26/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 26/11/2026: última decisão: ID 389188839 · 03/02/2026 — sentença: julgou improcedente o pedido | última peça: Contrarrazões (advogado de parte) · ID 389188843 · 10/07/2026 | última movimentação: 21/08/2026 12:44 · Conclusos para julgamento"
    }
   },
   {
@@ -9677,12 +10077,14 @@
    "exequente": "RONEU MOREIRA BRUM",
    "executado": "UNIÃO FEDERAL",
    "assunto": "CNH - Carteira Nacional de Habilitação",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "AP2",
+   "tipo_caso": "Apelação de Roneu Moreira Brum e Nelson Valcanaia Brum em procedimento comum · CNH - Carteira Nacional de Habilitação · improcedência",
+   "resultado": "Ato a proferir: apelação de Roneu Moreira Brum e Nelson Valcanaia Brum (ID 359346372) da sentença ID 359346365, integrada pela sentença dos embargos de declaração ID 359346371; contrarrazões: ID 359346375; parecer do MPF (ID 376855990) ‖ Proposta pelos precedentes: Voto [VALIDAR paradigma]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação de Roneu Moreira Brum e Nelson Valcanaia Brum contra sentença (improcedência) da 4ª Vara Federal de Campo Grande em procedimento comum: Diante do exposto, julgo improcedentes os pedidos, condenando os autores a pagarem honorários advocatícios aos advogados aos Procuradores da ré, no valor de R$ 9.300,00, pois, por constatar que o valor da causa é muito baixo (R$ 130,16), devo observar os valores da Tabela de Honorários Advocatícios da Resolução OAB/MS Nº 08/2023 diante do disposto nos §§ 8º e 8º-A do art. 85 do CPC. isentos de custas.P.R.I.Se interpo",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -9693,7 +10095,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da(s) apelação(ões) (voto)",
+    "materia": "CNH - Carteira Nacional de Habilitação",
+    "origem": "Procedimento comum 5001958-55.2020.4.03.6000 (4ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 359346365 (03/04/2025)",
+    "recurso": "apelação de Roneu Moreira Brum e Nelson Valcanaia Brum (ID 359346372, 04/11/2025)",
+    "preparo": "Roneu Moreira Brum e Nelson Valcanaia Brum: comprovante PagTesouro (ID 359346373)",
+    "monocratica": "Improvável sem paradigma",
+    "analisado_em": "26/11/2026",
+    "conf_preparo": "Roneu Moreira Brum e Nelson Valcanaia Brum: comprovante PagTesouro (ID 359346373) · conferido em 26/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 26/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -9703,6 +10116,140 @@
    "chegada": "04/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "CNH - Carteira Nacional de Habilitação — [VALIDAR detalhamento]",
+   "especificidades": "► Situação em 26/11/2026: última decisão: ID 369430488 · 28/04/2026 — abriu vista ao MPF | última peça: Parecer (MPF) · ID 376855990 · 27/05/2026 | última movimentação: 27/05/2026 18:12 · Conclusos para julgamento · Origem: procedimento comum (4ª Vara Federal de Campo Grande) · Embargos de declaração julgados (ID 359346371) · MPF ID 376855990 (27/05/2026): [VALIDAR sentido] · Tempestividade: Roneu Moreira Brum e Nelson Valcanaia Brum: ciência em 13/10/2025, prazo de 15 dias até 04/11/2025; apelação de 04/11/2025 · Prioridade: idoso",
+   "teor": {
+    "sintese_fatica": "Roneu Moreira Brum e Nelson Valcanaia Brum pediram a nulidade de autuações de trânsito federais. A sentença julgou improcedente o pedido e fixou honorários de R$ 9.300,00 pela tabela da OAB/MS, diante do valor da causa de R$ 130,16; os embargos de declaração foram rejeitados.",
+    "inicial": "Procedimento comum ajuizado(a) em 09/03/2020 (petição inicial ID 359346258).",
+    "decisao_recorrida": "Sentença ID 359346365 (03/04/2025): Diante do exposto, julgo improcedentes os pedidos, condenando os autores a pagarem honorários advocatícios aos advogados aos Procuradores da ré, no valor de R$ 9.300,00, pois, por constatar que o valor da causa é muito baixo (R$ 130,16), devo observar os valores da Tabela de Honorários Advocatícios da Resolução OAB/MS Nº 08/2023 diante do disposto nos §§ 8º e 8º-A do art. 85 do CPC. isentos de custas.P.R.I.Se interposto recurso, intime-se a parte contrária para apresentar contrarrazões. Em seguida, remetam-se os autos ao Egrégio TRF da 3ª Região. Não havendo recurso, certifique-se o trânsito e",
+    "recurso": "Roneu Moreira Brum e Nelson Valcanaia Brum (ID 359346372, 04/11/2025): nulidade das autuações por venda anterior do veículo, falta de prova da entrega das notificações e falha no edital; redução dos honorários de R$ 9.300,00",
+    "resposta": "Contrarrazões: ID 359346375 (02/02/2026).",
+    "parecer": "MPF ID 376855990: [VALIDAR sentido]",
+    "memoriais": "Não consta",
+    "representacao": "[VALIDAR representação]",
+    "preparo": "Roneu Moreira Brum e Nelson Valcanaia Brum: comprovante PagTesouro (ID 359346373)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação de Roneu Moreira Brum e Nelson Valcanaia Brum em procedimento comum · CNH - Carteira Nacional de Habilitação · improcedência",
+     "sintese": "Roneu Moreira Brum e Nelson Valcanaia Brum pediram a nulidade de autuações de trânsito federais. A sentença julgou improcedente o pedido e fixou honorários de R$ 9.300,00 pela tabela da OAB/MS, diante do valor da causa de R$ 130,16; os embargos de declaração foram rejeitados.",
+     "questoes": "1) responsabilidade pelas infrações após a venda do veículo (artigo 134 do CTB); 2) notificações e edital; 3) honorários por equidade (artigo 85, § 8º-A, do CPC)",
+     "rel": {
+      "razoes": "Roneu Moreira Brum e Nelson Valcanaia Brum (ID 359346372, 04/11/2025): nulidade das autuações por venda anterior do veículo, falta de prova da entrega das notificações e falha no edital; redução dos honorários de R$ 9.300,00",
+      "contrarrazoes": "Contrarrazões: ID 359346375 (02/02/2026)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "359346365",
+      "juizo": "Procedimento comum 5001958-55.2020.4.03.6000 (4ª Vara Federal de Campo Grande)",
+      "dispositivo": "Diante do exposto, julgo improcedentes os pedidos, condenando os autores a pagarem honorários advocatícios aos advogados aos Procuradores da ré, no valor de R$ 9.300,00, pois, por constatar que o valor da causa é muito baixo (R$ 130,16), devo observar os valores da Tabela de Honorários Advocatícios da Resolução OAB/MS Nº 08/2023 diante do disposto nos §§ 8º e 8º-A do art. 85 do CPC. isentos de custas.P.R.I.Se interposto recurso, intime-se a parte contrária para apresentar contrarrazões. Em seguida, remetam-se os autos ao Egrégio TRF da 3ª Região. Não havendo recurso, certifique-se o trânsito e"
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2025-11-04",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Roneu Moreira Brum e Nelson Valcanaia Brum",
+       "tipo": "Apelação",
+       "id": "359346372",
+       "contra": "Sentença"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: improcedência",
+       "id": "359346365",
+       "data": "2025-04-03",
+       "nota": "Sentença ID 359346365 (03/04/2025): Diante do exposto, julgo improcedentes os pedidos, condenando os autores a pagarem honorários advocatícios aos advogados aos Procuradores da ré, no valor de R$ 9.300,00, pois, por constatar que o valor da causa é muito baixo (R$ 130,16), devo observar os valores da Tabela de Honorários Advocatícios da Resolução OAB/MS Nº 08/2023 diante do disposto nos §§ 8º e 8º-A do art.",
+       "pje": {
+        "tipo": "Sentença"
+       },
+       "trecho": "Diante do exposto, julgo improcedentes os pedidos, condenando os autores a pagarem honorários advocatícios aos advogados aos Procuradores da ré, no valor de R$ 9.300,00, pois, por constatar que o valor da causa é muito baixo (R$ 130,16), devo observar os valores da Tabela de Honorários Advocatícios …"
+      },
+      {
+       "desc": "Sentença: embargos de declaração",
+       "id": "359346371",
+       "data": "2025-10-08",
+       "nota": "Origem: procedimento comum (4ª Vara Federal de Campo Grande) · Embargos de declaração julgados (ID 359346371) · MPF ID 376855990 (27/05/2026): [VALIDAR sentido] · Tempestividade: Roneu Moreira Brum e Nelson Valcanaia Brum: ciência em 13/10/2025, prazo de 15 dias até 04/11/2025; apelação de 04/11/2025 · Prioridade: idoso",
+       "pje": {
+        "tipo": "Sentença"
+       },
+       "trecho": "ontem dúvidas, contradições ou omissões, devendo então propor o recuso cabível perante o tribunal competente.Quanto aos honorários o tema referido não se aplica ao caso.A questão ainda é controvertida, porém aqui também não tem cabimento os embargos de declaração.PEDRO PEREIRA DOS SANTOSJuiz Federal"
+      },
+      {
+       "desc": "Apelação: Roneu Moreira Brum e Nelson Valcanaia Brum",
+       "id": "359346372",
+       "data": "2025-11-04",
+       "nota": "Roneu Moreira Brum e Nelson Valcanaia Brum (ID 359346372, 04/11/2025): nulidade das autuações por venda anterior do veículo, falta de prova da entrega das notificações e falha no edital; redução dos honorários de R$ 9.300,00",
+       "pje": {
+        "tipo": "Apelação",
+        "paginas": 10
+       },
+       "trecho": "Isto posto , requer , digne m - se Vossa s Excelência s de receber, conhecer e dar pro- vimento ao presente recurso de apelação, reformando - se a invectivada sentença nos pontos acima atacados , pelos fundamentos jurídicos acima apresentados . Campo Grande – MS, 04 de novembro de 2025 . (assinado …"
+      },
+      {
+       "desc": "Contrarrazões",
+       "id": "359346375",
+       "data": "2026-02-02",
+       "nota": "Contrarrazões: ID 359346375 (02/02/2026).",
+       "pje": {
+        "tipo": "Contrarrazões",
+        "descricao": "P CONTRARRAZÕES 3084284992 EM 02/02/2026 23:26:46",
+        "paginas": 5
+       },
+       "trecho": "requer seja negado provimento ao recurso de apelação, mantendo-se na íntegra a r. Sentença de origem. São Paulo, 02 de fevereiro de 2026. CRISTIANE BLANES ADVOGADO DA UNIÃO"
+      },
+      {
+       "desc": "Parecer do MPF",
+       "id": "376855990",
+       "data": "2026-05-27",
+       "nota": "MPF ID 376855990: [VALIDAR sentido] · Origem: procedimento comum (4ª Vara Federal de Campo Grande) · Embargos de declaração julgados (ID 359346371) · MPF ID 376855990 (27/05/2026): [VALIDAR sentido] · Tempestividade: Roneu Moreira Brum e Nelson Valcanaia Brum: ciência em 13/10/2025, prazo de 15 dias até 04/11/2025; apelação de 04/11/2025 · Prioridade: idoso",
+       "pje": {
+        "tipo": "Parecer",
+        "paginas": 4
+       },
+       "trecho": "Pelo exposto, o Ministério Público Federal requerer o regular prosseguimento do feito, deixando de se manifestar sobre o mérito da demanda, por inexistir hipótese que justifique sua intervenção. São Paulo, data da assinatura digital. Assinado digitalmente ELIZABETH MITIKO KOBAYASHI Procuradora …"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 26/11/2026: última decisão: ID 369430488 · 28/04/2026 — abriu vista ao MPF | última peça: Parecer (MPF) · ID 376855990 · 27/05/2026 | última movimentação: 27/05/2026 18:12 · Conclusos para julgamento · Origem: procedimento comum (4ª Vara Federal de Campo Grande) · Embargos de declaração julgados (ID 359346371) · MPF ID 376855990 (27/05/2026): [VALIDAR sentido] · Tempestividade: Roneu Moreira Brum e Nelson Valcanaia Brum: ciência em 13/10/2025, prazo de 15 dias até 04/11/2025; apelação de 04/11/2025 · Prioridade: idoso",
+     "assuntoDet": "CNH - Carteira Nacional de Habilitação — [VALIDAR detalhamento]",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Tempestivo",
+     "preparo": "Recolhido",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Com parecer",
+     "idParecer": "376855990",
+     "parecerSentido": "[VALIDAR sentido]"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "27/05/2026 18:12 · Conclusos para julgamento",
+    "mov_fonte": "linha do tempo do PJe (autos extraídos)",
+    "ultima_decisao": "Despacho · ID 369430488 · 28/04/2026 — abriu vista ao MPF",
+    "ultima_peca": "Parecer (MPF) · ID 376855990 · 27/05/2026",
+    "ultima_informacao": "Informação · ID 359346376 · 03/02/2026",
+    "aviso": "Conferido em 26/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 26/11/2026: última decisão: ID 369430488 · 28/04/2026 — abriu vista ao MPF | última peça: Parecer (MPF) · ID 376855990 · 27/05/2026 | última movimentação: 27/05/2026 18:12 · Conclusos para julgamento"
    }
   },
   {
@@ -9714,12 +10261,14 @@
    "exequente": "JEAN BARTH HOSTYN LIMA",
    "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "assunto": "Cofins",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "AP2",
+   "tipo_caso": "Apelação de Espólio de Jean Barth Hostyn Lima em procedimento comum · Cofins · [VALIDAR resultado]",
+   "resultado": "Ato a proferir: apelação de Espólio de Jean Barth Hostyn Lima (ID 324469310) da sentença ID 324469316; contrarrazões não localizadas; parecer do MPF (ID 371249049) ‖ Proposta pelos precedentes: Voto [VALIDAR paradigma] [VALIDAR: Preparo: Espólio de Jean Barth Hostyn Lima: guia ou comprovante (ID 324469311) [VALIDAR]; Contrarrazões]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação de Espólio de Jean Barth Hostyn Lima contra sentença ([VALIDAR resultado]) da 2ª Vara Federal de Dourados em procedimento comum:  PROCEDIMENTO COMUM CÍVEL (7) Nº 5001140-92.2023.4.03.6002 / 2ª Vara Federal de DouradosAUTOR: JEAN BARTH HOSTYN LIMAAdvogado do(a) AUTOR: ALINE ERMINIA MAIA DE ALMEIDA - MS16167REU: UNIAO FEDERAL - FAZENDA NACIONAL DESPACHO Não obstante terem os autos vindos conclusos para sentença de extinção, observo que já foi prolatada sentença de mérito com recurso de apelação interposto e contra-arrazoado.Ademais, o doc. de id",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -9730,7 +10279,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da(s) apelação(ões) (voto)",
+    "materia": "Cofins",
+    "origem": "Procedimento comum 5001140-92.2023.4.03.6002 (2ª Vara Federal de Dourados)",
+    "decisao_agravada": "Sentença ID 324469316 (31/03/2025)",
+    "recurso": "apelação de Espólio de Jean Barth Hostyn Lima (ID 324469310, 17/07/2024)",
+    "preparo": "Espólio de Jean Barth Hostyn Lima: guia ou comprovante (ID 324469311) [VALIDAR]",
+    "monocratica": "Improvável sem paradigma",
+    "analisado_em": "26/11/2026",
+    "conf_preparo": "Espólio de Jean Barth Hostyn Lima: guia ou comprovante (ID 324469311) [VALIDAR] · conferido em 26/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 26/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -9740,6 +10300,119 @@
    "chegada": "04/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Cofins — [VALIDAR detalhamento]",
+   "especificidades": "► Situação em 26/11/2026: última decisão: ID 369425699 · 28/04/2026 — abriu vista ao MPF | última peça: Procuração/substabelecimento com reserva de poderes (advogado de parte) · ID 391788787 · 13/08/2026 | última movimentação: 13/08/2026 15:29 · Juntada de Petição de manifestação · Origem: procedimento comum (2ª Vara Federal de Dourados) · MPF ID 371249049 (05/05/2026): [VALIDAR sentido] · Tempestividade: Espólio de Jean Barth Hostyn Lima: [VALIDAR tempestividade: intimação da sentença não localizada no texto extraído; apelação de 17/07/2024] · Despacho de 31/03/2025 (ID 324469316) considerou regular a representação do espólio pela inventariante · Prioridade: idoso",
+   "teor": {
+    "sintese_fatica": "O espólio de Jean Barth Hostyn Lima, representado pela inventariante, pediu a repetição de valores pagos à União em parcelamento aderido para suspender execuções fiscais. A sentença julgou improcedente o pedido, com honorários de 10% do valor da causa.",
+    "inicial": "Procedimento comum ajuizado(a) em 03/05/2023 (petição inicial ID 324469284).",
+    "decisao_recorrida": "Sentença ID 324469316 (31/03/2025):  PROCEDIMENTO COMUM CÍVEL (7) Nº 5001140-92.2023.4.03.6002 / 2ª Vara Federal de DouradosAUTOR: JEAN BARTH HOSTYN LIMAAdvogado do(a) AUTOR: ALINE ERMINIA MAIA DE ALMEIDA - MS16167REU: UNIAO FEDERAL - FAZENDA NACIONAL DESPACHO Não obstante terem os autos vindos conclusos para sentença de extinção, observo que já foi prolatada sentença de mérito com recurso de apelação interposto e contra-arrazoado.Ademais, o doc. de id. [ID do 1º grau], fls. 4/5 demonstra que a autora é de fato a inventariante do espólio, tendo ele sido adequadamente representado com a procuração à inventariante, sendo mera irregulari",
+    "recurso": "Espólio de Jean Barth Hostyn Lima (ID 324469310, 17/07/2024): repetição de valores pagos em parcelamento (Refis de 2022) para suspender as execuções fiscais 0003801-33.2003.4.03.6002, 0003738-66.2007.4.03.6002 e 0002291-33.2013.4.03.6002 [VALIDAR teses]",
+    "resposta": "Não localizadas.",
+    "parecer": "MPF ID 371249049: [VALIDAR sentido]",
+    "memoriais": "Não consta",
+    "representacao": "[VALIDAR representação]",
+    "preparo": "Espólio de Jean Barth Hostyn Lima: guia ou comprovante (ID 324469311) [VALIDAR]"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação de Espólio de Jean Barth Hostyn Lima em procedimento comum · Cofins · [VALIDAR resultado]",
+     "sintese": "O espólio de Jean Barth Hostyn Lima, representado pela inventariante, pediu a repetição de valores pagos à União em parcelamento aderido para suspender execuções fiscais. A sentença julgou improcedente o pedido, com honorários de 10% do valor da causa.",
+     "questoes": "[VALIDAR fundamento] 1) repetição de indébito de valores pagos em parcelamento (confissão e prescrição dos créditos executados)",
+     "rel": {
+      "razoes": "Espólio de Jean Barth Hostyn Lima (ID 324469310, 17/07/2024): repetição de valores pagos em parcelamento (Refis de 2022) para suspender as execuções fiscais 0003801-33.2003.4.03.6002, 0003738-66.2007.4.03.6002 e 0002291-33.2013.4.03.6002 [VALIDAR teses]",
+      "contrarrazoes": "Não localizadas."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "324469316",
+      "juizo": "Procedimento comum 5001140-92.2023.4.03.6002 (2ª Vara Federal de Dourados)",
+      "dispositivo": " PROCEDIMENTO COMUM CÍVEL (7) Nº 5001140-92.2023.4.03.6002 / 2ª Vara Federal de DouradosAUTOR: JEAN BARTH HOSTYN LIMAAdvogado do(a) AUTOR: ALINE ERMINIA MAIA DE ALMEIDA - MS16167REU: UNIAO FEDERAL - FAZENDA NACIONAL DESPACHO Não obstante terem os autos vindos conclusos para sentença de extinção, observo que já foi prolatada sentença de mérito com recurso de apelação interposto e contra-arrazoado.Ademais, o doc. de id. [ID do 1º grau], fls. 4/5 demonstra que a autora é de fato a inventariante do espólio, tendo ele sido adequadamente representado com a procuração à inventariante, sendo mera irregulari"
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2024-07-17",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Espólio de Jean Barth Hostyn Lima",
+       "tipo": "Apelação",
+       "id": "324469310",
+       "contra": "Sentença"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: [VALIDAR resultado]",
+       "id": "324469316",
+       "data": "2025-03-31",
+       "nota": "Sentença ID 324469316 (31/03/2025):  PROCEDIMENTO COMUM CÍVEL (7) Nº 5001140-92.2023.4.03.6002 / 2ª Vara Federal de DouradosAUTOR: JEAN BARTH HOSTYN LIMAAdvogado do(a) AUTOR: ALINE ERMINIA MAIA DE ALMEIDA - MS16167REU: UNIAO FEDERAL - FAZENDA NACIONAL DESPACHO Não obstante terem os autos vindos conclusos para sentença de extinção, observo que já foi prolatada sentença de mérito com recurso de apelação interposto e …",
+       "pje": {
+        "tipo": "Sentença"
+       },
+       "trecho": "s. 4/5 demonstra que a autora é de fato a inventariante do espólio, tendo ele sido adequadamente representado com a procuração à inventariante, sendo mera irregularidade ter constado seu nome como pessoa física.Assim, encaminhem-se os autos ao Egrégio TRF da 3ª Região .DOURADOS, 31 de março de 2025."
+      },
+      {
+       "desc": "Apelação: Espólio de Jean Barth Hostyn Lima",
+       "id": "324469310",
+       "data": "2024-07-17",
+       "nota": "Espólio de Jean Barth Hostyn Lima (ID 324469310, 17/07/2024): repetição de valores pagos em parcelamento (Refis de 2022) para suspender as execuções fiscais 0003801-33.2003.4.03.6002, 0003738-66.2007.4.03.6002 e 0002291-33.2013.4.03.6002 [VALIDAR teses]",
+       "pje": {
+        "tipo": "Apelação",
+        "paginas": 5
+       },
+       "trecho": "Ante o exposto, julgo improcedente o pedido, resolvendo o mérito processual, nos termos do art. 487, inciso I, do Código de Processo Civil. (...) Em que pesem os fundamentos apontados na sentenca, esta nao merece prosperar, conforme será demonstrado. RAZ ÕES DO RECURSO Primeiramente, insta …"
+      },
+      {
+       "desc": "Parecer do MPF",
+       "id": "371249049",
+       "data": "2026-05-05",
+       "nota": "MPF ID 371249049: [VALIDAR sentido] · Origem: procedimento comum (2ª Vara Federal de Dourados) · MPF ID 371249049 (05/05/2026): [VALIDAR sentido] · Tempestividade: Espólio de Jean Barth Hostyn Lima: [VALIDAR tempestividade: intimação da sentença não localizada no texto extraído; apelação de 17/07/2024] · Despacho de 31/03/2025 (ID 324469316) considerou regular a representação do espólio pela inventariante · …",
+       "pje": {
+        "tipo": "Parecer \"Falta de Interesse\"",
+        "descricao": "MP",
+        "paginas": 6
+       },
+       "trecho": "opinando pelo prosseguimento do feito. São Paulo/SP, 5 de maio de 2026. MARIA LUÍSA RODRIGUES DE LIMA CARVALHO Procuradora Regional da República Documento assinado via Token digitalmente por MARIA LUISA RODRIGUES DE LIMA CARVALHO, em 05/05/2026 17:03. Para verificar a assinatura acesse Chave …"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 26/11/2026: última decisão: ID 369425699 · 28/04/2026 — abriu vista ao MPF | última peça: Procuração/substabelecimento com reserva de poderes (advogado de parte) · ID 391788787 · 13/08/2026 | última movimentação: 13/08/2026 15:29 · Juntada de Petição de manifestação · Origem: procedimento comum (2ª Vara Federal de Dourados) · MPF ID 371249049 (05/05/2026): [VALIDAR sentido] · Tempestividade: Espólio de Jean Barth Hostyn Lima: [VALIDAR tempestividade: intimação da sentença não localizada no texto extraído; apelação de 17/07/2024] · Despacho de 31/03/2025 (ID 324469316) considerou regular a representação do espólio pela inventariante · Prioridade: idoso",
+     "assuntoDet": "Cofins — [VALIDAR detalhamento]",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Com parecer",
+     "idParecer": "371249049",
+     "parecerSentido": "[VALIDAR sentido]"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "13/08/2026 15:29 · Juntada de Petição de manifestação",
+    "mov_fonte": "linha do tempo do PJe (autos extraídos)",
+    "ultima_decisao": "Despacho · ID 369425699 · 28/04/2026 — abriu vista ao MPF",
+    "ultima_peca": "Procuração/substabelecimento com reserva de poderes (advogado de parte) · ID 391788787 · 13/08/2026",
+    "ultima_informacao": "Certidão · ID 336597891 · 17/09/2025",
+    "aviso": "Conferido em 26/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 26/11/2026: última decisão: ID 369425699 · 28/04/2026 — abriu vista ao MPF | última peça: Procuração/substabelecimento com reserva de poderes (advogado de parte) · ID 391788787 · 13/08/2026 | última movimentação: 13/08/2026 15:29 · Juntada de Petição de manifestação"
    }
   },
   {
@@ -9751,12 +10424,14 @@
    "exequente": "S. PIRES COMERCIO DE ALIMENTOS LTDA",
    "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "assunto": "Cofins",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "AP2",
+   "tipo_caso": "Apelação de S. Pires Comércio de Alimentos Ltda. e filiais em mandado de segurança · Cofins · denegação da segurança",
+   "resultado": "Ato a proferir: apelação de S. Pires Comércio de Alimentos Ltda. e filiais (ID 340497023) da sentença ID 340497020; contrarrazões: ID 340497026; parecer do MPF (ID 341142856) ‖ Proposta pelos precedentes: Voto. Linha do Relator na ApCiv 5011004-29.2024.4.03.6000 (Turma Regional de MS, 26/10/2026): PIS/COFINS-ST com base legalmente fixada, sem restituição [VALIDAR aderência dos produtos] [VALIDAR: Preparo: S. Pires Comércio de Alimentos Ltda. e filiais: guia ou comprovante (ID 340497024) [VALIDAR]]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação de S. Pires Comércio de Alimentos Ltda. e filiais contra sentença (denegação da segurança) da 4ª Vara Federal de Campo Grande em mandado de segurança: Diante do exposto, denego a segurança. Custas pela impetrante. Sem honorários (art. 25 da Lei n. 12.016/2009; Súmula 512/STF; Súmula 105/STJ).P. R. I. Ciência ao MPF. Havendo apelação, intime-se a parte contrária para apresentar contrarrazões. Após, ao MPF. Em seguida, remetam-se os autos ao egrégio Tribunal Regional Federal da 3ª Região, sob as cautelas de estilo. Sentença não sujeita ao reexame necessário.Saliento,",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -9767,7 +10442,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da(s) apelação(ões) (voto)",
+    "materia": "Cofins",
+    "origem": "Mandado de segurança 5011191-37.2024.4.03.6000 (4ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 340497020 (06/08/2025)",
+    "recurso": "apelação de S. Pires Comércio de Alimentos Ltda. e filiais (ID 340497023, 29/08/2025)",
+    "preparo": "S. Pires Comércio de Alimentos Ltda. e filiais: guia ou comprovante (ID 340497024) [VALIDAR]",
+    "monocratica": "Improvável sem paradigma",
+    "analisado_em": "26/11/2026",
+    "conf_preparo": "S. Pires Comércio de Alimentos Ltda. e filiais: guia ou comprovante (ID 340497024) [VALIDAR] · conferido em 26/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 26/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -9777,6 +10463,130 @@
    "chegada": "04/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Cofins — [VALIDAR detalhamento]",
+   "especificidades": "► Situação em 26/11/2026: última decisão: ID 340497020 · 06/08/2025 — sentença: denegou a segurança | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 341142856 · 28/10/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Origem: mandado de segurança (4ª Vara Federal de Campo Grande) · MPF ID 341142856 (28/10/2025): [VALIDAR sentido] · Tempestividade: S. Pires Comércio de Alimentos Ltda. e filiais: [VALIDAR tempestividade: intimação da sentença não localizada no texto extraído; apelação de 29/08/2025] · Mesma impetrante do item 70 (5011193-07.2024.4.03.6000)",
+   "teor": {
+    "sintese_fatica": "S. Pires Comércio de Alimentos Ltda. e filiais impetraram mandado de segurança para compensar ou restituir o PIS/COFINS recolhido por substituição tributária sobre base presumida superior à real. A segurança foi denegada.",
+    "inicial": "Mandado de segurança ajuizado(a) em 17/10/2024 (petição inicial ID 340497002).",
+    "decisao_recorrida": "Sentença ID 340497020 (06/08/2025): Diante do exposto, denego a segurança. Custas pela impetrante. Sem honorários (art. 25 da Lei n. 12.016/2009; Súmula 512/STF; Súmula 105/STJ).P. R. I. Ciência ao MPF. Havendo apelação, intime-se a parte contrária para apresentar contrarrazões. Após, ao MPF. Em seguida, remetam-se os autos ao egrégio Tribunal Regional Federal da 3ª Região, sob as cautelas de estilo. Sentença não sujeita ao reexame necessário.Saliento, por fim, que eventuais embargos de declaração opostos com o intuito de rediscutir as questões de mérito já definidas no julgado serão considerados meramente protelatórios, cabendo",
+    "recurso": "S. Pires Comércio de Alimentos Ltda. e filiais (ID 340497023, 29/08/2025): compensação ou restituição do PIS/COFINS recolhido por substituição tributária sobre base presumida superior à efetiva (Tema 228/STF)",
+    "resposta": "Contrarrazões: ID 340497026 (21/10/2025).",
+    "parecer": "MPF ID 341142856: [VALIDAR sentido]",
+    "memoriais": "Não consta",
+    "representacao": "[VALIDAR representação]",
+    "preparo": "S. Pires Comércio de Alimentos Ltda. e filiais: guia ou comprovante (ID 340497024) [VALIDAR]"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação de S. Pires Comércio de Alimentos Ltda. e filiais em mandado de segurança · Cofins · denegação da segurança",
+     "sintese": "S. Pires Comércio de Alimentos Ltda. e filiais impetraram mandado de segurança para compensar ou restituir o PIS/COFINS recolhido por substituição tributária sobre base presumida superior à real. A segurança foi denegada.",
+     "questoes": "1) restituição da diferença entre base presumida e efetiva na substituição tributária do PIS/COFINS (Tema 228/STF e regimes de preço fixado)",
+     "rel": {
+      "razoes": "S. Pires Comércio de Alimentos Ltda. e filiais (ID 340497023, 29/08/2025): compensação ou restituição do PIS/COFINS recolhido por substituição tributária sobre base presumida superior à efetiva (Tema 228/STF)",
+      "contrarrazoes": "Contrarrazões: ID 340497026 (21/10/2025)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "340497020",
+      "juizo": "Mandado de segurança 5011191-37.2024.4.03.6000 (4ª Vara Federal de Campo Grande)",
+      "dispositivo": "Diante do exposto, denego a segurança. Custas pela impetrante. Sem honorários (art. 25 da Lei n. 12.016/2009; Súmula 512/STF; Súmula 105/STJ).P. R. I. Ciência ao MPF. Havendo apelação, intime-se a parte contrária para apresentar contrarrazões. Após, ao MPF. Em seguida, remetam-se os autos ao egrégio Tribunal Regional Federal da 3ª Região, sob as cautelas de estilo. Sentença não sujeita ao reexame necessário.Saliento, por fim, que eventuais embargos de declaração opostos com o intuito de rediscutir as questões de mérito já definidas no julgado serão considerados meramente protelatórios, cabendo"
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2025-08-29",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "S. Pires Comércio de Alimentos Ltda. e filiais",
+       "tipo": "Apelação",
+       "id": "340497023",
+       "contra": "Sentença"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: denegação da segurança",
+       "id": "340497020",
+       "data": "2025-08-06",
+       "nota": "Sentença ID 340497020 (06/08/2025): Diante do exposto, denego a segurança.",
+       "pje": {
+        "tipo": "Sentença"
+       },
+       "trecho": "Diante do exposto, denego a segurança. Custas pela impetrante. Sem honorários (art. 25 da Lei n. 12.016/2009; Súmula 512/STF; Súmula 105/STJ).P. R. I. Ciência ao MPF. Havendo apelação, intime-se a parte contrária para apresentar contrarrazões. Após, ao MPF. Em seguida, remetam-se os autos ao …"
+      },
+      {
+       "desc": "Apelação: S. Pires Comércio de Alimentos Ltda. e filiais",
+       "id": "340497023",
+       "data": "2025-08-29",
+       "nota": "S. Pires Comércio de Alimentos Ltda. e filiais (ID 340497023, 29/08/2025): compensação ou restituição do PIS/COFINS recolhido por substituição tributária sobre base presumida superior à efetiva (Tema 228/STF)",
+       "pje": {
+        "tipo": "Apelação",
+        "paginas": 14
+       },
+       "trecho": "Ante o exposto, a Apelante e suas Filiais requerem seja CONHECIDO E PROVIDO o presente Recurso de Apelação reformando-se integralmente a r. sentença recorrida, notadamente para declarar o direito da Apelante e suas Filias à compensação/restituição dos valores indevidamente recolhidos a título de …"
+      },
+      {
+       "desc": "Contrarrazões",
+       "id": "340497026",
+       "data": "2025-10-21",
+       "nota": "Contrarrazões: ID 340497026 (21/10/2025).",
+       "pje": {
+        "tipo": "Contrarrazões de Recurso",
+        "paginas": 16
+       },
+       "trecho": "Isto posto, requer o não provimento da apelação ( Id 415503608 ), com documentos ( Id 415503612 ), por ser medida da mais salutar justiça. Requer, ainda , que este Egrégio Tribunal Regional se pronuncie expressamente acerca de todas as matérias , ora suscitadas , que ficam desde logo …"
+      },
+      {
+       "desc": "Parecer do MPF",
+       "id": "341142856",
+       "data": "2025-10-28",
+       "nota": "MPF ID 341142856: [VALIDAR sentido] · Origem: mandado de segurança (4ª Vara Federal de Campo Grande) · MPF ID 341142856 (28/10/2025): [VALIDAR sentido] · Tempestividade: S. Pires Comércio de Alimentos Ltda. e filiais: [VALIDAR tempestividade: intimação da sentença não localizada no texto extraído; apelação de 29/08/2025] · Mesma impetrante do item 70 (5011193-07.2024.4.03.6000)",
+       "pje": {
+        "tipo": "Parecer \"Falta de Interesse\"",
+        "descricao": "MP",
+        "paginas": 5
+       },
+       "trecho": "pugnação ao valor da causa [...] Página 4 de 5 Documento assinado via Token digitalmente por LAURA NOEME DOS SANTOS, em 28/10/2025 18:58. Para verificar a assinatura acesse Chave 0a066351.2472b7a1.c5264ac7.25d3c108 Ademais, a parte é capaz, está devidamente representada e, não havendo nenhum motivo …"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 26/11/2026: última decisão: ID 340497020 · 06/08/2025 — sentença: denegou a segurança | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 341142856 · 28/10/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Origem: mandado de segurança (4ª Vara Federal de Campo Grande) · MPF ID 341142856 (28/10/2025): [VALIDAR sentido] · Tempestividade: S. Pires Comércio de Alimentos Ltda. e filiais: [VALIDAR tempestividade: intimação da sentença não localizada no texto extraído; apelação de 29/08/2025] · Mesma impetrante do item 70 (5011193-07.2024.4.03.6000)",
+     "assuntoDet": "Cofins — [VALIDAR detalhamento]",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Mandado de segurança",
+     "parecer": "Com parecer",
+     "idParecer": "341142856",
+     "parecerSentido": "[VALIDAR sentido]"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária",
+    "mov_fonte": "linha do tempo do PJe (autos extraídos)",
+    "ultima_decisao": "Sentença · ID 340497020 · 06/08/2025 — sentença: denegou a segurança",
+    "ultima_peca": "Parecer \"Falta de Interesse\" (MPF) · ID 341142856 · 28/10/2025",
+    "ultima_informacao": "Informação · ID 340497027 · 22/10/2025",
+    "aviso": "Conferido em 26/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 26/11/2026: última decisão: ID 340497020 · 06/08/2025 — sentença: denegou a segurança | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 341142856 · 28/10/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária"
    }
   },
   {
@@ -9788,12 +10598,14 @@
    "exequente": "FERRAGEM ALVORADA LTDA",
    "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "assunto": "Cofins",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "AP2",
+   "tipo_caso": "Apelação de Ferragem Alvorada Ltda. em mandado de segurança · Cofins · [VALIDAR resultado]",
+   "resultado": "Ato a proferir: apelação de Ferragem Alvorada Ltda. (ID 366541169) da sentença ID 366541166; contrarrazões: ID 366541174; parecer do MPF (ID 367281513) ‖ Proposta pelos precedentes: Voto. Linha do Relator na ApCiv 5001923-50.2024.4.03.6002 (Turma Regional de MS, 09/06/2026): apelação desprovida [VALIDAR: Preparo: Ferragem Alvorada Ltda.: guia ou comprovante (ID 366541170) [VALIDAR]]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação de Ferragem Alvorada Ltda. contra sentença ([VALIDAR resultado]) da 4ª Vara Federal de Campo Grande em mandado de segurança: Ante o exposto, rejeito os embargos de declaração.Devolvo às partes o prazo recursal, nos termos do art. 1.026, caput, do CPC.Intimem-se.CAMPO GRANDE, 5 de fevereiro de 2026.kcpPEDRO PEREIRA DOS SANTOSJuiz Federal ",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -9804,7 +10616,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da(s) apelação(ões) (voto)",
+    "materia": "Cofins",
+    "origem": "Mandado de segurança 0000583-31.2025.4.03.6000 (4ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 366541166 (06/02/2026)",
+    "recurso": "apelação de Ferragem Alvorada Ltda. (ID 366541169, 06/03/2026)",
+    "preparo": "Ferragem Alvorada Ltda.: guia ou comprovante (ID 366541170) [VALIDAR]",
+    "monocratica": "Possível, se houver tese firmada no Tema 1.067/STF [VALIDAR situação do tema]",
+    "analisado_em": "26/11/2026",
+    "conf_preparo": "Ferragem Alvorada Ltda.: guia ou comprovante (ID 366541170) [VALIDAR] · conferido em 26/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 26/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -9814,6 +10637,130 @@
    "chegada": "04/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Cofins — [VALIDAR detalhamento]",
+   "especificidades": "► Situação em 26/11/2026: última decisão: ID 366541166 · 06/02/2026 — sentença: rejeitou os embargos de declaração | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 367281513 · 17/04/2026 | última movimentação: 17/04/2026 22:14 · Conclusos para julgamento · Origem: mandado de segurança (4ª Vara Federal de Campo Grande) · MPF ID 367281513 (17/04/2026): sem interesse em intervir · Tempestividade: Ferragem Alvorada Ltda.: ciência em 11/02/2026, prazo de 15 dias até 06/03/2026; apelação de 06/03/2026",
+   "teor": {
+    "sintese_fatica": "Ferragem Alvorada Ltda. impetrou mandado de segurança para excluir o PIS/COFINS das próprias bases de cálculo. A segurança foi denegada; os embargos de declaração foram rejeitados, com devolução do prazo recursal.",
+    "inicial": "Mandado de segurança ajuizado(a) em 27/01/2025 (petição inicial ID 366541132).",
+    "decisao_recorrida": "Sentença ID 366541166 (06/02/2026): Ante o exposto, rejeito os embargos de declaração.Devolvo às partes o prazo recursal, nos termos do art. 1.026, caput, do CPC.Intimem-se.CAMPO GRANDE, 5 de fevereiro de 2026.kcpPEDRO PEREIRA DOS SANTOSJuiz Federal ",
+    "recurso": "Ferragem Alvorada Ltda. (ID 366541169, 06/03/2026): exclusão do PIS/COFINS das próprias bases de cálculo, com compensação ou restituição",
+    "resposta": "Contrarrazões: ID 366541174 (12/03/2026).",
+    "parecer": "MPF ID 367281513: sem interesse em intervir",
+    "memoriais": "Não consta",
+    "representacao": "[VALIDAR representação]",
+    "preparo": "Ferragem Alvorada Ltda.: guia ou comprovante (ID 366541170) [VALIDAR]"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação de Ferragem Alvorada Ltda. em mandado de segurança · Cofins · [VALIDAR resultado]",
+     "sintese": "Ferragem Alvorada Ltda. impetrou mandado de segurança para excluir o PIS/COFINS das próprias bases de cálculo. A segurança foi denegada; os embargos de declaração foram rejeitados, com devolução do prazo recursal.",
+     "questoes": "1) exclusão do PIS/COFINS da própria base de cálculo (Tema 1.067/STF; inaplicabilidade do Tema 69/STF)",
+     "rel": {
+      "razoes": "Ferragem Alvorada Ltda. (ID 366541169, 06/03/2026): exclusão do PIS/COFINS das próprias bases de cálculo, com compensação ou restituição",
+      "contrarrazoes": "Contrarrazões: ID 366541174 (12/03/2026)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "366541166",
+      "juizo": "Mandado de segurança 0000583-31.2025.4.03.6000 (4ª Vara Federal de Campo Grande)",
+      "dispositivo": "Ante o exposto, rejeito os embargos de declaração.Devolvo às partes o prazo recursal, nos termos do art. 1.026, caput, do CPC.Intimem-se.CAMPO GRANDE, 5 de fevereiro de 2026.kcpPEDRO PEREIRA DOS SANTOSJuiz Federal "
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2026-03-06",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Ferragem Alvorada Ltda.",
+       "tipo": "Apelação",
+       "id": "366541169",
+       "contra": "Sentença"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: [VALIDAR resultado]",
+       "id": "366541166",
+       "data": "2026-02-06",
+       "nota": "Sentença ID 366541166 (06/02/2026): Ante o exposto, rejeito os embargos de declaração.Devolvo às partes o prazo recursal, nos termos do art. 1.026, caput, do CPC.Intimem-se.CAMPO GRANDE, 5 de fevereiro de 2026.kcpPEDRO PEREIRA DOS SANTOSJuiz Federal",
+       "pje": {
+        "tipo": "Sentença"
+       },
+       "trecho": "Ante o exposto, rejeito os embargos de declaração.Devolvo às partes o prazo recursal, nos termos do art. 1.026, caput, do CPC.Intimem-se.CAMPO GRANDE, 5 de fevereiro de 2026.kcpPEDRO PEREIRA DOS SANTOSJuiz Federal"
+      },
+      {
+       "desc": "Apelação: Ferragem Alvorada Ltda.",
+       "id": "366541169",
+       "data": "2026-03-06",
+       "nota": "Ferragem Alvorada Ltda. (ID 366541169, 06/03/2026): exclusão do PIS/COFINS das próprias bases de cálculo, com compensação ou restituição",
+       "pje": {
+        "tipo": "Apelação",
+        "paginas": 17
+       },
+       "trecho": "Diante do exposto, requer a este Colendo que conheça e julgue provido o recurso para o fim de, reformando integralmente a sentença, possa: a) declarar a exclusão dos valores relativos ao PIS/PASEP e COFINS da base de cálculo das Contribuições Sociais PIS/PASEP e COFINS, uma vez que tais valores não …"
+      },
+      {
+       "desc": "Contrarrazões",
+       "id": "366541174",
+       "data": "2026-03-12",
+       "nota": "Contrarrazões: ID 366541174 (12/03/2026).",
+       "pje": {
+        "tipo": "Contrarrazões",
+        "paginas": 12
+       },
+       "trecho": "requer que seja negado provimento ao recurso da Autora. Nestes Termos, Pede Deferimento. (datado e assinado eletronicamente) JOSÉ CARLOS DE SOUZA TEIXEIRA Procurador da Fazenda Nacional 12"
+      },
+      {
+       "desc": "Parecer do MPF",
+       "id": "367281513",
+       "data": "2026-04-17",
+       "nota": "MPF ID 367281513: sem interesse em intervir · Origem: mandado de segurança (4ª Vara Federal de Campo Grande) · MPF ID 367281513 (17/04/2026): sem interesse em intervir · Tempestividade: Ferragem Alvorada Ltda.: ciência em 11/02/2026, prazo de 15 dias até 06/03/2026; apelação de 06/03/2026",
+       "pje": {
+        "tipo": "Parecer \"Falta de Interesse\"",
+        "descricao": "MP",
+        "paginas": 4
+       },
+       "trecho": "pugnando seja negado provimento ao recurso interposto. Vieram os autos com vista para apresentação de parecer por este órgão do 1 Documento assinado via Token digitalmente por OSVALDO CAPELARI JUNIOR, em 17/04/2026 18:36. Para verificar a assinatura acesse Chave dffa44ec.22485db9.fa0856cd.9e46147f …"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 26/11/2026: última decisão: ID 366541166 · 06/02/2026 — sentença: rejeitou os embargos de declaração | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 367281513 · 17/04/2026 | última movimentação: 17/04/2026 22:14 · Conclusos para julgamento · Origem: mandado de segurança (4ª Vara Federal de Campo Grande) · MPF ID 367281513 (17/04/2026): sem interesse em intervir · Tempestividade: Ferragem Alvorada Ltda.: ciência em 11/02/2026, prazo de 15 dias até 06/03/2026; apelação de 06/03/2026",
+     "assuntoDet": "Cofins — [VALIDAR detalhamento]",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Tempestivo",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Mandado de segurança",
+     "parecer": "Com parecer",
+     "idParecer": "367281513",
+     "parecerSentido": "sem interesse em intervir"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "17/04/2026 22:14 · Conclusos para julgamento",
+    "mov_fonte": "linha do tempo do PJe (autos extraídos)",
+    "ultima_decisao": "Sentença · ID 366541166 · 06/02/2026 — sentença: rejeitou os embargos de declaração",
+    "ultima_peca": "Parecer \"Falta de Interesse\" (MPF) · ID 367281513 · 17/04/2026",
+    "ultima_informacao": "Informação · ID 366541173 · 06/03/2026",
+    "aviso": "Conferido em 26/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 26/11/2026: última decisão: ID 366541166 · 06/02/2026 — sentença: rejeitou os embargos de declaração | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 367281513 · 17/04/2026 | última movimentação: 17/04/2026 22:14 · Conclusos para julgamento"
    }
   },
   {
@@ -9825,12 +10772,14 @@
    "exequente": "HOTEL MAURA A.D. BENTO LTDA",
    "executado": "DELEGADO DA RECEITA FEDERAL EM MATO GROSSO DO SUL",
    "assunto": "Cofins",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "AP2",
+   "tipo_caso": "Apelação de Hotel Maura A. D. Bento Ltda. em mandado de segurança · Cofins · extinção sem resolução do mérito",
+   "resultado": "Ato a proferir: apelação de Hotel Maura A. D. Bento Ltda. (ID 310478705) da sentença ID 310478698; contrarrazões: ID 310478709; parecer do MPF (ID 310828197) ‖ Proposta pelos precedentes: Voto. Perse (Tema 1.283/STJ) [VALIDAR paradigma do Relator] [VALIDAR: Preparo: Hotel Maura A. D. Bento Ltda.: guia ou comprovante (ID 310478706, sem camada de texto) [VALIDAR]; Preparo: guia e comprovante de custas recursais sem texto extraído (IDs 310478706 e 310478707)]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação de Hotel Maura A. D. Bento Ltda. contra sentença (extinção sem resolução do mérito) da 2ª Vara Federal de Campo Grande em mandado de segurança: Diante do exposto, denego a segurança, extinguindo o feito sem resolução de mérito, nos termos do artigo 485, VI, do Código de Processo Civil.Deixo de fixar honorários advocatícios, nos termos do art. 25 da Lei 12.016/2009.Custas pela impetrante.Dê-se ciência da prolação desta sentença nos autos do agravo de instrumento nº 5032146-81.2023.4.03.0000.Sentença não sujeita a reexame necessário.Publique-se e intimem-se. O",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -9841,7 +10790,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da(s) apelação(ões) (voto)",
+    "materia": "Cofins",
+    "origem": "Mandado de segurança 5000196-96.2023.4.03.6000 (2ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 310478698 (02/09/2024)",
+    "recurso": "apelação de Hotel Maura A. D. Bento Ltda. (ID 310478705, 28/10/2024)",
+    "preparo": "Hotel Maura A. D. Bento Ltda.: guia ou comprovante (ID 310478706, sem camada de texto) [VALIDAR]",
+    "monocratica": "Improvável sem paradigma",
+    "analisado_em": "26/11/2026",
+    "conf_preparo": "Hotel Maura A. D. Bento Ltda.: guia ou comprovante (ID 310478706, sem camada de texto) [VALIDAR] · conferido em 26/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 26/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -9851,6 +10811,131 @@
    "chegada": "04/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Cofins — [VALIDAR detalhamento]",
+   "especificidades": "► Situação em 26/11/2026: última decisão: ID 310478708 · 26/11/2024 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 310478698 · 02/09/2024 — sentença: denegou a segurança | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 310828197 · 08/01/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Origem: mandado de segurança (2ª Vara Federal de Campo Grande) · MPF ID 310828197 (08/01/2025): [VALIDAR sentido] · Prevenção a conferir: AI 5032146-81.2023.4.03.0000 · Tempestividade: Hotel Maura A. D. Bento Ltda.: [VALIDAR tempestividade: intimação da sentença não localizada no texto extraído; apelação de 28/10/2024] · Agravo de instrumento 5032146-81.2023.4.03.0000 comunicado na sentença",
+   "teor": {
+    "sintese_fatica": "Hotel Maura A. D. Bento Ltda. impetrou mandado de segurança para aplicar a alíquota zero do Perse (artigo 4º da Lei 14.148/2021) e compensar tributos recolhidos. A sentença denegou a segurança e extinguiu o processo sem resolução do mérito (artigo 485, VI, do CPC).",
+    "inicial": "Mandado de segurança ajuizado(a) em 18/01/2023 (petição inicial ID 310478568).",
+    "decisao_recorrida": "Sentença ID 310478698 (02/09/2024): Diante do exposto, denego a segurança, extinguindo o feito sem resolução de mérito, nos termos do artigo 485, VI, do Código de Processo Civil.Deixo de fixar honorários advocatícios, nos termos do art. 25 da Lei 12.016/2009.Custas pela impetrante.Dê-se ciência da prolação desta sentença nos autos do agravo de instrumento nº 5032146-81.2023.4.03.0000.Sentença não sujeita a reexame necessário.Publique-se e intimem-se. Oportunamente, arquivem-se.Campo Grande, MS, datado e assinado eletronicamente. ",
+    "recurso": "Hotel Maura A. D. Bento Ltda. (ID 310478705, 28/10/2024): concessão da segurança: alíquota zero do Perse (artigo 4º da Lei 14.148/2021) por 60 meses e compensação dos valores recolhidos",
+    "resposta": "Contrarrazões: ID 310478709 (16/12/2024).",
+    "parecer": "MPF ID 310828197: [VALIDAR sentido]",
+    "memoriais": "Não consta",
+    "representacao": "[VALIDAR representação]",
+    "preparo": "Hotel Maura A. D. Bento Ltda.: guia ou comprovante (ID 310478706, sem camada de texto) [VALIDAR]"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação de Hotel Maura A. D. Bento Ltda. em mandado de segurança · Cofins · extinção sem resolução do mérito",
+     "sintese": "Hotel Maura A. D. Bento Ltda. impetrou mandado de segurança para aplicar a alíquota zero do Perse (artigo 4º da Lei 14.148/2021) e compensar tributos recolhidos. A sentença denegou a segurança e extinguiu o processo sem resolução do mérito (artigo 485, VI, do CPC).",
+     "questoes": "1) fundamento da extinção (via mandamental e interesse); 2) requisitos do Perse (Cadastur e CNAE; Tema 1.283/STJ)",
+     "rel": {
+      "razoes": "Hotel Maura A. D. Bento Ltda. (ID 310478705, 28/10/2024): concessão da segurança: alíquota zero do Perse (artigo 4º da Lei 14.148/2021) por 60 meses e compensação dos valores recolhidos",
+      "contrarrazoes": "Contrarrazões: ID 310478709 (16/12/2024)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "310478698",
+      "juizo": "Mandado de segurança 5000196-96.2023.4.03.6000 (2ª Vara Federal de Campo Grande)",
+      "dispositivo": "Diante do exposto, denego a segurança, extinguindo o feito sem resolução de mérito, nos termos do artigo 485, VI, do Código de Processo Civil.Deixo de fixar honorários advocatícios, nos termos do art. 25 da Lei 12.016/2009.Custas pela impetrante.Dê-se ciência da prolação desta sentença nos autos do agravo de instrumento nº 5032146-81.2023.4.03.0000.Sentença não sujeita a reexame necessário.Publique-se e intimem-se. Oportunamente, arquivem-se.Campo Grande, MS, datado e assinado eletronicamente. "
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2024-10-28",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Hotel Maura A. D. Bento Ltda.",
+       "tipo": "Apelação",
+       "id": "310478705",
+       "contra": "Sentença"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: extinção sem resolução do mérito",
+       "id": "310478698",
+       "data": "2024-09-02",
+       "nota": "Sentença ID 310478698 (02/09/2024): Diante do exposto, denego a segurança, extinguindo o feito sem resolução de mérito, nos termos do artigo 485, VI, do Código de Processo Civil.Deixo de fixar honorários advocatícios, nos termos do art.",
+       "pje": {
+        "tipo": "Sentença"
+       },
+       "trecho": "Diante do exposto, denego a segurança, extinguindo o feito sem resolução de mérito, nos termos do artigo 485, VI, do Código de Processo Civil.Deixo de fixar honorários advocatícios, nos termos do art. 25 da Lei 12.016/2009.Custas pela impetrante.Dê-se ciência da prolação desta sentença nos autos do …"
+      },
+      {
+       "desc": "Apelação: Hotel Maura A. D. Bento Ltda.",
+       "id": "310478705",
+       "data": "2024-10-28",
+       "nota": "Hotel Maura A. D. Bento Ltda. (ID 310478705, 28/10/2024): concessão da segurança: alíquota zero do Perse (artigo 4º da Lei 14.148/2021) por 60 meses e compensação dos valores recolhidos",
+       "pje": {
+        "tipo": "Apelação",
+        "descricao": "RECURSO APELAÇÃO",
+        "paginas": 6
+       },
+       "trecho": "Ante o exposto, postula - se as Vossas Excelências pelo recebimento e, no mérito, pelo provimento do presente recurso, a fim de reformar o comando sentencial julgando totalmente procedentes os pedidos iniciais formulados no Mandado de Segurança. JLS Página 6 de 6 Por fim, requer que todas as …"
+      },
+      {
+       "desc": "Contrarrazões",
+       "id": "310478709",
+       "data": "2024-12-16",
+       "nota": "Contrarrazões: ID 310478709 (16/12/2024).",
+       "pje": {
+        "tipo": "Contrarrazões"
+       },
+       "trecho": "requer seja julgado improcedente o recurso da autora e Denegada a Segurança. Termos em que pede deferimento. Geisa Santos de Aquino Procuradora da Fazenda Nacional"
+      },
+      {
+       "desc": "Parecer do MPF",
+       "id": "310828197",
+       "data": "2025-01-08",
+       "nota": "MPF ID 310828197: [VALIDAR sentido] · Origem: mandado de segurança (2ª Vara Federal de Campo Grande) · MPF ID 310828197 (08/01/2025): [VALIDAR sentido] · Prevenção a conferir: AI 5032146-81.2023.4.03.0000 · Tempestividade: Hotel Maura A. D. Bento Ltda.: [VALIDAR tempestividade: intimação da sentença não localizada no texto extraído; apelação de 28/10/2024] · Agravo de instrumento 5032146-81.2023.4.03.0000 comunicado …",
+       "pje": {
+        "tipo": "Parecer \"Falta de Interesse\"",
+        "descricao": "MP",
+        "paginas": 3
+       },
+       "trecho": "MINISTÉRIO PÚBLICO FEDERAL PROCURADORIA REGIONAL DA REPÚBLICA DA 3ª REGIÃO ApCiv Autos nº 5000196-96.2023.4.03.6000 Apelante: Hotel Maura A.D. Bento Ltda Apelado: União Federal - Fazenda Nacional Relator: Nery Júnior - Terceira Turma Colenda Turma, 1. Cuidam os autos de mandado de segurança …"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 26/11/2026: última decisão: ID 310478708 · 26/11/2024 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 310478698 · 02/09/2024 — sentença: denegou a segurança | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 310828197 · 08/01/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Origem: mandado de segurança (2ª Vara Federal de Campo Grande) · MPF ID 310828197 (08/01/2025): [VALIDAR sentido] · Prevenção a conferir: AI 5032146-81.2023.4.03.0000 · Tempestividade: Hotel Maura A. D. Bento Ltda.: [VALIDAR tempestividade: intimação da sentença não localizada no texto extraído; apelação de 28/10/2024] · Agravo de instrumento 5032146-81.2023.4.03.0000 comunicado na sentença",
+     "assuntoDet": "Cofins — [VALIDAR detalhamento]",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Mandado de segurança",
+     "parecer": "Com parecer",
+     "idParecer": "310828197",
+     "parecerSentido": "[VALIDAR sentido]"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária",
+    "mov_fonte": "linha do tempo do PJe (autos extraídos)",
+    "ultima_decisao": "Despacho · ID 310478708 · 26/11/2024 — remessa ou redistribuição à Turma Regional (sem exame do recurso)",
+    "ultima_decisao_relevante": "Sentença · ID 310478698 · 02/09/2024 — sentença: denegou a segurança",
+    "ultima_peca": "Parecer \"Falta de Interesse\" (MPF) · ID 310828197 · 08/01/2025",
+    "ultima_informacao": "Certidão · ID 310768438 · 07/01/2025",
+    "aviso": "Conferido em 26/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 26/11/2026: última decisão: ID 310478708 · 26/11/2024 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 310478698 · 02/09/2024 — sentença: denegou a segurança | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 310828197 · 08/01/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária"
    }
   },
   {
@@ -9862,12 +10947,14 @@
    "exequente": "RODOBELO TRANSPORTES RODOVIARIOS LTDA",
    "executado": "Delegado da Receita Federal do Brasil de Campo Grande/MS",
    "assunto": "Cofins",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "AP2",
+   "tipo_caso": "Apelação de Rodobelo Transportes Rodoviários Ltda. em mandado de segurança · Cofins · [VALIDAR resultado]",
+   "resultado": "Ato a proferir: apelação de Rodobelo Transportes Rodoviários Ltda. (ID 302923995) da sentença ID 302923992; contrarrazões: ID 302924001; parecer do MPF (ID 307197043) ‖ Proposta pelos precedentes: Voto [VALIDAR paradigma] [VALIDAR: Preparo: Rodobelo Transportes Rodoviários Ltda.: guia ou comprovante (ID 302923997) [VALIDAR]]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação de Rodobelo Transportes Rodoviários Ltda. contra sentença ([VALIDAR resultado]) da 4ª Vara Federal de Campo Grande em mandado de segurança: Diante do exposto, rejeito os presentes embargos, ao tempo em que devolvo às partes o prazo recursal, nos termos do art. 1.026, caput, do 1º CPC.Devolvo às partes o prazo recursal, nos termos do art. 1.026, caput, do 1º CPC.Intimem-se.Campo Grande, MS, data e assinatura conforme certificação digital.OBSERVAÇÕES: O acesso aos documentos do processo poderá ser efetivado por meio do sistema PJe ou link:https://pje1g.trf",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -9878,7 +10965,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da(s) apelação(ões) (voto)",
+    "materia": "Cofins",
+    "origem": "Mandado de segurança 5003377-08.2023.4.03.6000 (4ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 302923992 (16/07/2024)",
+    "recurso": "apelação de Rodobelo Transportes Rodoviários Ltda. (ID 302923995, 06/08/2024)",
+    "preparo": "Rodobelo Transportes Rodoviários Ltda.: guia ou comprovante (ID 302923997) [VALIDAR]",
+    "monocratica": "Improvável sem paradigma",
+    "analisado_em": "26/11/2026",
+    "conf_preparo": "Rodobelo Transportes Rodoviários Ltda.: guia ou comprovante (ID 302923997) [VALIDAR] · conferido em 26/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 26/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -9888,6 +10986,130 @@
    "chegada": "04/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Cofins — [VALIDAR detalhamento]",
+   "especificidades": "► Situação em 26/11/2026: última decisão: ID 302923993 · 17/07/2024 — sentença (dispositivo a conferir) | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 307197043 · 17/10/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Origem: mandado de segurança (4ª Vara Federal de Campo Grande) · MPF ID 307197043 (17/10/2024): [VALIDAR sentido] · Tempestividade: Rodobelo Transportes Rodoviários Ltda.: [VALIDAR tempestividade: intimação da sentença não localizada no texto extraído; apelação de 06/08/2024]",
+   "teor": {
+    "sintese_fatica": "Rodobelo Transportes Rodoviários Ltda. impetrou mandado de segurança para não recolher PIS/COFINS sobre receitas de frete prestado a comerciais exportadoras. A segurança foi denegada; os embargos de declaração foram rejeitados, com devolução do prazo recursal.",
+    "inicial": "Mandado de segurança ajuizado(a) em 26/04/2023 (petição inicial ID 302923906).",
+    "decisao_recorrida": "Sentença ID 302923992 (16/07/2024): Diante do exposto, rejeito os presentes embargos, ao tempo em que devolvo às partes o prazo recursal, nos termos do art. 1.026, caput, do 1º CPC.Devolvo às partes o prazo recursal, nos termos do art. 1.026, caput, do 1º CPC.Intimem-se.Campo Grande, MS, data e assinatura conforme certificação digital.OBSERVAÇÕES: O acesso aos documentos do processo poderá ser efetivado por meio do sistema PJe ou link:https://pje1g.trf3.jus.br/pje/ConsultaPublica/consultaPublicaDocumento.seam No campo CÓDIGO PARA CONSULTA DE DOCUMENTOS, utilizar o seguinte código:d603706e-fd88-4ee8-9219-69d47ac01de8 SEDE DO JUÍZ",
+    "recurso": "Rodobelo Transportes Rodoviários Ltda. (ID 302923995, 06/08/2024): concessão da segurança para não recolher PIS/COFINS sobre receitas de frete prestado a trading companies em operações de exportação (Tema 674/STF)",
+    "resposta": "Contrarrazões: ID 302924001 (06/09/2024).",
+    "parecer": "MPF ID 307197043: [VALIDAR sentido]",
+    "memoriais": "Não consta",
+    "representacao": "[VALIDAR representação]",
+    "preparo": "Rodobelo Transportes Rodoviários Ltda.: guia ou comprovante (ID 302923997) [VALIDAR]"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação de Rodobelo Transportes Rodoviários Ltda. em mandado de segurança · Cofins · [VALIDAR resultado]",
+     "sintese": "Rodobelo Transportes Rodoviários Ltda. impetrou mandado de segurança para não recolher PIS/COFINS sobre receitas de frete prestado a comerciais exportadoras. A segurança foi denegada; os embargos de declaração foram rejeitados, com devolução do prazo recursal.",
+     "questoes": "1) imunidade ou isenção do PIS/COFINS sobre frete vinculado à exportação indireta (artigo 149, § 2º, I, da Constituição Federal; Tema 674/STF; artigo 14 da MP 2.158-35/2001)",
+     "rel": {
+      "razoes": "Rodobelo Transportes Rodoviários Ltda. (ID 302923995, 06/08/2024): concessão da segurança para não recolher PIS/COFINS sobre receitas de frete prestado a trading companies em operações de exportação (Tema 674/STF)",
+      "contrarrazoes": "Contrarrazões: ID 302924001 (06/09/2024)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "302923992",
+      "juizo": "Mandado de segurança 5003377-08.2023.4.03.6000 (4ª Vara Federal de Campo Grande)",
+      "dispositivo": "Diante do exposto, rejeito os presentes embargos, ao tempo em que devolvo às partes o prazo recursal, nos termos do art. 1.026, caput, do 1º CPC.Devolvo às partes o prazo recursal, nos termos do art. 1.026, caput, do 1º CPC.Intimem-se.Campo Grande, MS, data e assinatura conforme certificação digital.OBSERVAÇÕES: O acesso aos documentos do processo poderá ser efetivado por meio do sistema PJe ou link:https://pje1g.trf3.jus.br/pje/ConsultaPublica/consultaPublicaDocumento.seam No campo CÓDIGO PARA CONSULTA DE DOCUMENTOS, utilizar o seguinte código:d603706e-fd88-4ee8-9219-69d47ac01de8 SEDE DO JUÍZ"
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2024-08-06",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Rodobelo Transportes Rodoviários Ltda.",
+       "tipo": "Apelação",
+       "id": "302923995",
+       "contra": "Sentença"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: [VALIDAR resultado]",
+       "id": "302923992",
+       "data": "2024-07-16",
+       "nota": "Sentença ID 302923992 (16/07/2024): Diante do exposto, rejeito os presentes embargos, ao tempo em que devolvo às partes o prazo recursal, nos termos do art.",
+       "pje": {
+        "tipo": "Sentença"
+       },
+       "trecho": "Havendo apelação, intime-se a parte contrária para contrarrazões. Após, ao MPF. Em seguida, remetam-se os autos ao egrégio , sob as cautelas de estilo. Não havendo recurso e sem outros requerimentos, arquive-se.Requer o acolhimento dos presentes Embargos de Declaração a fim de que seja esclarecida …"
+      },
+      {
+       "desc": "Apelação: Rodobelo Transportes Rodoviários Ltda.",
+       "id": "302923995",
+       "data": "2024-08-06",
+       "nota": "Rodobelo Transportes Rodoviários Ltda. (ID 302923995, 06/08/2024): concessão da segurança para não recolher PIS/COFINS sobre receitas de frete prestado a trading companies em operações de exportação (Tema 674/STF)",
+       "pje": {
+        "tipo": "Apelação",
+        "paginas": 27
+       },
+       "trecho": "Diante do exposto, com base no art. 21, §§ 1º, do Regimento Interno do Supremo Tribunal Federal, DOU PROVIMENTO AO RECURSO EXTRAORDINÁRIO para julgar procedentes os pedidos, declarando o direito da parte autora de não recolher as contribuições ao PIS e à COFINS sobre as receitas auferidas da venda …"
+      },
+      {
+       "desc": "Contrarrazões",
+       "id": "302924001",
+       "data": "2024-09-06",
+       "nota": "Contrarrazões: ID 302924001 (06/09/2024).",
+       "pje": {
+        "tipo": "Contrarrazões",
+        "paginas": 9
+       },
+       "trecho": "requer a União (Fazenda Nacional) que a o r ecurso de Apelação seja NEGADO PROVIMENTO , nos termos acima dispostos . P. deferimento. Sorocaba , 6 de setembro de 2024 PEDRO FERRAZ SCHMIDT PROCURADOR DA FAZENDA NACIONAL"
+      },
+      {
+       "desc": "Parecer do MPF",
+       "id": "307197043",
+       "data": "2024-10-17",
+       "nota": "MPF ID 307197043: [VALIDAR sentido] · Origem: mandado de segurança (4ª Vara Federal de Campo Grande) · MPF ID 307197043 (17/10/2024): [VALIDAR sentido] · Tempestividade: Rodobelo Transportes Rodoviários Ltda.: [VALIDAR tempestividade: intimação da sentença não localizada no texto extraído; apelação de 06/08/2024]",
+       "pje": {
+        "tipo": "Parecer \"Falta de Interesse\"",
+        "descricao": "MP",
+        "paginas": 3
+       },
+       "trecho": "opina o MINISTÉRIO PÚBLICO FEDERAL pelo regular prosseguimento do feito. São Paulo, data da assinatura digital. Assinado digitalmente ELIZABETH MITIKO KOBAYASHI Procuradora Regional da República ayu 3 Documento assinado via Token digitalmente por ELIZABETH MITIKO KOBAYASHI, em 17/10/2024 17:21. …"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 26/11/2026: última decisão: ID 302923993 · 17/07/2024 — sentença (dispositivo a conferir) | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 307197043 · 17/10/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Origem: mandado de segurança (4ª Vara Federal de Campo Grande) · MPF ID 307197043 (17/10/2024): [VALIDAR sentido] · Tempestividade: Rodobelo Transportes Rodoviários Ltda.: [VALIDAR tempestividade: intimação da sentença não localizada no texto extraído; apelação de 06/08/2024]",
+     "assuntoDet": "Cofins — [VALIDAR detalhamento]",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Mandado de segurança",
+     "parecer": "Com parecer",
+     "idParecer": "307197043",
+     "parecerSentido": "[VALIDAR sentido]"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária",
+    "mov_fonte": "linha do tempo do PJe (autos extraídos)",
+    "ultima_decisao": "Sentença · ID 302923993 · 17/07/2024 — sentença (dispositivo a conferir)",
+    "ultima_peca": "Parecer \"Falta de Interesse\" (MPF) · ID 307197043 · 17/10/2024",
+    "ultima_informacao": "Ato ordinatório · ID 302923999 · 06/08/2024",
+    "aviso": "Conferido em 26/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 26/11/2026: última decisão: ID 302923993 · 17/07/2024 — sentença (dispositivo a conferir) | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 307197043 · 17/10/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária"
    }
   },
   {
@@ -9899,12 +11121,14 @@
    "exequente": "S. PIRES COMERCIO DE ALIMENTOS LTDA",
    "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "assunto": "Cofins",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "AP2",
+   "tipo_caso": "Apelação de S. Pires Comércio de Alimentos Ltda. em mandado de segurança · Cofins · denegação da segurança",
+   "resultado": "Ato a proferir: apelação de S. Pires Comércio de Alimentos Ltda. (ID 370192676) da sentença ID 370192673; contrarrazões: ID 370192681 ‖ Proposta pelos precedentes: Voto. Tema 1.093/STJ veda o crédito no regime monofásico [VALIDAR paradigma do Relator] [VALIDAR: Parecer do MPF não localizado]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação de S. Pires Comércio de Alimentos Ltda. contra sentença (denegação da segurança) da 4ª Vara Federal de Campo Grande em mandado de segurança: Ante o exposto, DENEGO A SEGURANÇA requerida pela parte impetrante, nos termos da fundamentação.Sem honorários, conforme a Súmula 512 do STF e a Súmula 105 do STJ.Custas na forma da lei.Se interposto recurso, intime-se a parte contrária para apresentar contrarrazões. Em seguida, remetam-se os autos ao Egrégio TRF da 3ª Região.Com o trânsito em julgado, dê-se vista às partes. Nada sendo requerido, dê-se baixa e arquiv",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -9915,7 +11139,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da(s) apelação(ões) (voto)",
+    "materia": "Cofins",
+    "origem": "Mandado de segurança 5011193-07.2024.4.03.6000 (4ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 370192673 (12/02/2026)",
+    "recurso": "apelação de S. Pires Comércio de Alimentos Ltda. (ID 370192676, 09/03/2026)",
+    "preparo": "S. Pires Comércio de Alimentos Ltda.: comprovante PagTesouro (ID 370192677)",
+    "monocratica": "Possível: monocrática de desprovimento (artigo 932, IV, \"b\", do CPC), Tema 1.093/STJ",
+    "analisado_em": "26/11/2026",
+    "conf_preparo": "S. Pires Comércio de Alimentos Ltda.: comprovante PagTesouro (ID 370192677) · conferido em 26/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 26/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -9925,6 +11160,116 @@
    "chegada": "04/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Cofins — [VALIDAR detalhamento]",
+   "especificidades": "► Situação em 26/11/2026: última decisão: ID 370192673 · 12/02/2026 — sentença: denegou a segurança | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 371440512 · 06/05/2026 | última movimentação: 06/05/2026 15:09 · Conclusos para decisão · Origem: mandado de segurança (4ª Vara Federal de Campo Grande) · Tempestividade: S. Pires Comércio de Alimentos Ltda.: [VALIDAR tempestividade: intimação da sentença não localizada no texto extraído; apelação de 09/03/2026] · Mesma impetrante do item 66 (5011191-37.2024.4.03.6000)",
+   "teor": {
+    "sintese_fatica": "S. Pires Comércio de Alimentos Ltda. impetrou mandado de segurança para aproveitar créditos de PIS/COFINS sobre aquisições de produtos sujeitos à tributação monofásica. A segurança foi denegada.",
+    "inicial": "Mandado de segurança ajuizado(a) em 17/10/2024 (petição inicial ID 370192653).",
+    "decisao_recorrida": "Sentença ID 370192673 (12/02/2026): Ante o exposto, DENEGO A SEGURANÇA requerida pela parte impetrante, nos termos da fundamentação.Sem honorários, conforme a Súmula 512 do STF e a Súmula 105 do STJ.Custas na forma da lei.Se interposto recurso, intime-se a parte contrária para apresentar contrarrazões. Em seguida, remetam-se os autos ao Egrégio TRF da 3ª Região.Com o trânsito em julgado, dê-se vista às partes. Nada sendo requerido, dê-se baixa e arquivem-se os autos.P. R. I.Campo Grande/MS, na data da assinatura eletrônica.GUILHERME VICENTE LOPES LEITESJuiz Federal Substituto ",
+    "recurso": "S. Pires Comércio de Alimentos Ltda. (ID 370192676, 09/03/2026): aproveitamento de créditos de PIS/COFINS na aquisição de produtos sujeitos à tributação monofásica",
+    "resposta": "Contrarrazões: ID 370192681 (30/04/2026).",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "[VALIDAR representação]",
+    "preparo": "S. Pires Comércio de Alimentos Ltda.: comprovante PagTesouro (ID 370192677)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação de S. Pires Comércio de Alimentos Ltda. em mandado de segurança · Cofins · denegação da segurança",
+     "sintese": "S. Pires Comércio de Alimentos Ltda. impetrou mandado de segurança para aproveitar créditos de PIS/COFINS sobre aquisições de produtos sujeitos à tributação monofásica. A segurança foi denegada.",
+     "questoes": "1) créditos de PIS/COFINS no regime monofásico (Tema 1.093/STJ)",
+     "rel": {
+      "razoes": "S. Pires Comércio de Alimentos Ltda. (ID 370192676, 09/03/2026): aproveitamento de créditos de PIS/COFINS na aquisição de produtos sujeitos à tributação monofásica",
+      "contrarrazoes": "Contrarrazões: ID 370192681 (30/04/2026)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "370192673",
+      "juizo": "Mandado de segurança 5011193-07.2024.4.03.6000 (4ª Vara Federal de Campo Grande)",
+      "dispositivo": "Ante o exposto, DENEGO A SEGURANÇA requerida pela parte impetrante, nos termos da fundamentação.Sem honorários, conforme a Súmula 512 do STF e a Súmula 105 do STJ.Custas na forma da lei.Se interposto recurso, intime-se a parte contrária para apresentar contrarrazões. Em seguida, remetam-se os autos ao Egrégio TRF da 3ª Região.Com o trânsito em julgado, dê-se vista às partes. Nada sendo requerido, dê-se baixa e arquivem-se os autos.P. R. I.Campo Grande/MS, na data da assinatura eletrônica.GUILHERME VICENTE LOPES LEITESJuiz Federal Substituto "
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2026-03-09",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "S. Pires Comércio de Alimentos Ltda.",
+       "tipo": "Apelação",
+       "id": "370192676",
+       "contra": "Sentença"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: denegação da segurança",
+       "id": "370192673",
+       "data": "2026-02-12",
+       "nota": "Sentença ID 370192673 (12/02/2026): Ante o exposto, DENEGO A SEGURANÇA requerida pela parte impetrante, nos termos da fundamentação.Sem honorários, conforme a Súmula 512 do STF e a Súmula 105 do STJ.Custas na forma da lei.Se interposto recurso, intime-se a parte contrária para apresentar contrarrazões.",
+       "pje": {
+        "tipo": "Sentença"
+       },
+       "trecho": "intime-se a parte contrária para apresentar contrarrazões. Em seguida, remetam-se os autos ao Egrégio TRF da 3ª Região.Com o trânsito em julgado, dê-se vista às partes. Nada sendo requerido, dê-se baixa e arquivem-se os autos.P. R. I.Campo Grande/MS, na data da assinatura eletrônica.GUILHERME …"
+      },
+      {
+       "desc": "Apelação: S. Pires Comércio de Alimentos Ltda.",
+       "id": "370192676",
+       "data": "2026-03-09",
+       "nota": "S. Pires Comércio de Alimentos Ltda. (ID 370192676, 09/03/2026): aproveitamento de créditos de PIS/COFINS na aquisição de produtos sujeitos à tributação monofásica",
+       "pje": {
+        "tipo": "Apelação",
+        "paginas": 11
+       },
+       "trecho": "requer - se o expresso prequestionamento dos dispositivos legais e constitucionais mencionados, para fins de viabilizar a interposição de Recurso Especial e/ou Extraordinário, nos termo s da legislação vigente. Termos em que pede deferimento. São Paulo/SP, 9 de março de 2026 VLADIMIR PRADO COÊLHO …"
+      },
+      {
+       "desc": "Contrarrazões",
+       "id": "370192681",
+       "data": "2026-04-30",
+       "nota": "Contrarrazões: ID 370192681 (30/04/2026).",
+       "pje": {
+        "tipo": "Contrarrazões de Recurso",
+        "paginas": 11
+       },
+       "trecho": "Pelo exposto, requer-se seja negado provimento à Apelação da parte Impetrante, mantendo-se a r. sentença recorrida por seus próprios e jurídicos fundamentos, por ser medida da mais inteira Justiça! Nestes termos, Pede deferimento. São Paulo/SP, datado eletronicamente. Regina de Paula Leite Sampaio …"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 26/11/2026: última decisão: ID 370192673 · 12/02/2026 — sentença: denegou a segurança | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 371440512 · 06/05/2026 | última movimentação: 06/05/2026 15:09 · Conclusos para decisão · Origem: mandado de segurança (4ª Vara Federal de Campo Grande) · Tempestividade: S. Pires Comércio de Alimentos Ltda.: [VALIDAR tempestividade: intimação da sentença não localizada no texto extraído; apelação de 09/03/2026] · Mesma impetrante do item 66 (5011191-37.2024.4.03.6000)",
+     "assuntoDet": "Cofins — [VALIDAR detalhamento]",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Recolhido",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Mandado de segurança",
+     "parecer": "Não verificado"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "06/05/2026 15:09 · Conclusos para decisão",
+    "mov_fonte": "linha do tempo do PJe (autos extraídos)",
+    "ultima_decisao": "Sentença · ID 370192673 · 12/02/2026 — sentença: denegou a segurança",
+    "ultima_peca": "Parecer \"Falta de Interesse\" (MPF) · ID 371440512 · 06/05/2026",
+    "ultima_informacao": "Informação · ID 370192679 · 09/03/2026",
+    "aviso": "Conferido em 26/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 26/11/2026: última decisão: ID 370192673 · 12/02/2026 — sentença: denegou a segurança | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 371440512 · 06/05/2026 | última movimentação: 06/05/2026 15:09 · Conclusos para decisão"
    }
   },
   {
@@ -9936,12 +11281,14 @@
    "exequente": "DDR COMERCIO ATACADISTA DE MATERIAIS HIDRAULICOS E ELETRICOS LTDA",
    "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
    "assunto": "Cofins",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "AP2",
+   "tipo_caso": "Apelação de DDR Comércio Atacadista de Materiais Hidráulicos e Elétricos Ltda. em mandado de segurança · Cofins · denegação da segurança",
+   "resultado": "Ato a proferir: apelação de DDR Comércio Atacadista de Materiais Hidráulicos e Elétricos Ltda. (ID 371007119) da sentença ID 371007116; contrarrazões: ID 371007124; parecer do MPF (ID 373642128) ‖ Proposta pelos precedentes: Voto. Linha do Relator na ApCiv 5001923-50.2024.4.03.6002 (Turma Regional de MS, 09/06/2026): apelação desprovida. Mesma matéria do item 67 [VALIDAR: Preparo: DDR Comércio Atacadista de Materiais Hidráulicos e Elétricos Ltda.: guia ou comprovante (ID 371007120) [VALIDAR]]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação de DDR Comércio Atacadista de Materiais Hidráulicos e Elétricos Ltda. contra sentença (denegação da segurança) da 1ª Vara Federal de Dourados em mandado de segurança: trário, infirmando, assim, a presunção de constitucionalidade da legislação.5. Se tal motivação é insuficiente, fere normas apontadas (artigos 145, §1º, 153, III, 195, I, ‘b’, da Constituição Federal, e artigo 110 do Código Tributário Nacional) ou contraria a jurisprudência, deve o contribuinte veicular recurso próprio para a impugnação do acórdão e não rediscutir a matéria em embargos de declaração.6. Por fim, embor",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -9952,7 +11299,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da(s) apelação(ões) (voto)",
+    "materia": "Cofins",
+    "origem": "Mandado de segurança 5000296-74.2025.4.03.6002 (1ª Vara Federal de Dourados)",
+    "decisao_agravada": "Sentença ID 371007116 (06/08/2025)",
+    "recurso": "apelação de DDR Comércio Atacadista de Materiais Hidráulicos e Elétricos Ltda. (ID 371007119, 22/09/2025)",
+    "preparo": "DDR Comércio Atacadista de Materiais Hidráulicos e Elétricos Ltda.: guia ou comprovante (ID 371007120) [VALIDAR]",
+    "monocratica": "Possível, se houver tese firmada no Tema 1.067/STF [VALIDAR situação do tema]",
+    "analisado_em": "26/11/2026",
+    "conf_preparo": "DDR Comércio Atacadista de Materiais Hidráulicos e Elétricos Ltda.: guia ou comprovante (ID 371007120) [VALIDAR] · conferido em 26/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 26/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -9962,6 +11320,131 @@
    "chegada": "04/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Cofins — [VALIDAR detalhamento]",
+   "especificidades": "► Situação em 26/11/2026: última decisão: ID 380691667 · 17/06/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 371007116 · 06/08/2025 — sentença (dispositivo a conferir) | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 373642128 · 15/05/2026 | última movimentação: 06/07/2026 12:19 · Conclusos para julgamento · Origem: mandado de segurança (1ª Vara Federal de Dourados) · MPF ID 373642128 (15/05/2026): [VALIDAR sentido] · Tempestividade: DDR Comércio Atacadista de Materiais Hidráulicos e Elétricos Ltda.: [VALIDAR tempestividade: intimação da sentença não localizada no texto extraído; apelação de 22/09/2025]",
+   "teor": {
+    "sintese_fatica": "DDR Comércio Atacadista de Materiais Hidráulicos e Elétricos Ltda. impetrou mandado de segurança para excluir o PIS/COFINS das próprias bases de cálculo. A segurança foi denegada.",
+    "inicial": "Mandado de segurança ajuizado(a) em 10/02/2025 (petição inicial ID 371007099).",
+    "decisao_recorrida": "Sentença ID 371007116 (06/08/2025): trário, infirmando, assim, a presunção de constitucionalidade da legislação.5. Se tal motivação é insuficiente, fere normas apontadas (artigos 145, §1º, 153, III, 195, I, ‘b’, da Constituição Federal, e artigo 110 do Código Tributário Nacional) ou contraria a jurisprudência, deve o contribuinte veicular recurso próprio para a impugnação do acórdão e não rediscutir a matéria em embargos de declaração.6. Por fim, embora tratados todos os pontos invocados nos embargos declaratórios, de relevância e pertinência à demonstração de que não houve qualquer vício no julgamento, é expresso o artigo 1.025",
+    "recurso": "DDR Comércio Atacadista de Materiais Hidráulicos e Elétricos Ltda. (ID 371007119, 22/09/2025): exclusão do PIS/COFINS das próprias bases de cálculo, por aplicação do RE 574.706 mesmo após a Lei 12.973/2014",
+    "resposta": "Contrarrazões: ID 371007124 (07/01/2026).",
+    "parecer": "MPF ID 373642128: [VALIDAR sentido]",
+    "memoriais": "Não consta",
+    "representacao": "[VALIDAR representação]",
+    "preparo": "DDR Comércio Atacadista de Materiais Hidráulicos e Elétricos Ltda.: guia ou comprovante (ID 371007120) [VALIDAR]"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação de DDR Comércio Atacadista de Materiais Hidráulicos e Elétricos Ltda. em mandado de segurança · Cofins · denegação da segurança",
+     "sintese": "DDR Comércio Atacadista de Materiais Hidráulicos e Elétricos Ltda. impetrou mandado de segurança para excluir o PIS/COFINS das próprias bases de cálculo. A segurança foi denegada.",
+     "questoes": "1) exclusão do PIS/COFINS da própria base de cálculo (Tema 1.067/STF; inaplicabilidade do Tema 69/STF)",
+     "rel": {
+      "razoes": "DDR Comércio Atacadista de Materiais Hidráulicos e Elétricos Ltda. (ID 371007119, 22/09/2025): exclusão do PIS/COFINS das próprias bases de cálculo, por aplicação do RE 574.706 mesmo após a Lei 12.973/2014",
+      "contrarrazoes": "Contrarrazões: ID 371007124 (07/01/2026)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "371007116",
+      "juizo": "Mandado de segurança 5000296-74.2025.4.03.6002 (1ª Vara Federal de Dourados)",
+      "dispositivo": "trário, infirmando, assim, a presunção de constitucionalidade da legislação.5. Se tal motivação é insuficiente, fere normas apontadas (artigos 145, §1º, 153, III, 195, I, ‘b’, da Constituição Federal, e artigo 110 do Código Tributário Nacional) ou contraria a jurisprudência, deve o contribuinte veicular recurso próprio para a impugnação do acórdão e não rediscutir a matéria em embargos de declaração.6. Por fim, embora tratados todos os pontos invocados nos embargos declaratórios, de relevância e pertinência à demonstração de que não houve qualquer vício no julgamento, é expresso o artigo 1.025"
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2025-09-22",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "DDR Comércio Atacadista de Materiais Hidráulicos e Elétricos Ltda.",
+       "tipo": "Apelação",
+       "id": "371007119",
+       "contra": "Sentença"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: denegação da segurança",
+       "id": "371007116",
+       "data": "2025-08-06",
+       "nota": "Sentença ID 371007116 (06/08/2025): trário, infirmando, assim, a presunção de constitucionalidade da legislação.5.",
+       "pje": {
+        "tipo": "Sentença"
+       },
+       "trecho": "íquido e certo alegado pela parte impetrante. Com isso, é IMPROCEDENTE a demanda para denegar a segurança vindicada na inicial, resolvendo o mérito do processo nos termos do CPC, 487, I. Sem honorários (artigo 25 da Lei 12.016/2009). Custas na forma da lei. P.R.I No ensejo, arquivem-se. JUIZ FEDERAL"
+      },
+      {
+       "desc": "Apelação: DDR Comércio Atacadista de Materiais Hidráulicos e Elétricos Ltda.",
+       "id": "371007119",
+       "data": "2025-09-22",
+       "nota": "DDR Comércio Atacadista de Materiais Hidráulicos e Elétricos Ltda. (ID 371007119, 22/09/2025): exclusão do PIS/COFINS das próprias bases de cálculo, por aplicação do RE 574.706 mesmo após a Lei 12.973/2014",
+       "pje": {
+        "tipo": "Apelação",
+        "paginas": 20
+       },
+       "trecho": "Posto isso, CONCEDO A LIMINAR, a fim de suspender a exigibilidade dos créditos: a) de PIS e COFINS incidentes apenas sobre a parcela da base de cálculo composta pelo valor do ICMS, ISS, PIS, COFINS, ICMS - ST, este último pago por ocasião de suas compras, na qualidade de contribuinte substituído, e …"
+      },
+      {
+       "desc": "Contrarrazões",
+       "id": "371007124",
+       "data": "2026-01-07",
+       "nota": "Contrarrazões: ID 371007124 (07/01/2026).",
+       "pje": {
+        "tipo": "Contrarrazões",
+        "paginas": 20
+       },
+       "trecho": "pugnação, ainda mais quando mandado de segurança não é substitutivo de ação de cobrança (Súmula 269 e 271/STF) ou mesmo comporta dilação probatória em fase de execução de sentença, passível somente de compensação (Súmula 213/STJ). Destaca-se, ainda, que a restituição de eventuais indébitos somente …"
+      },
+      {
+       "desc": "Parecer do MPF",
+       "id": "373642128",
+       "data": "2026-05-15",
+       "nota": "MPF ID 373642128: [VALIDAR sentido] · Origem: mandado de segurança (1ª Vara Federal de Dourados) · MPF ID 373642128 (15/05/2026): [VALIDAR sentido] · Tempestividade: DDR Comércio Atacadista de Materiais Hidráulicos e Elétricos Ltda.: [VALIDAR tempestividade: intimação da sentença não localizada no texto extraído; apelação de 22/09/2025]",
+       "pje": {
+        "tipo": "Parecer \"Falta de Interesse\"",
+        "descricao": "MP",
+        "paginas": 3
+       },
+       "trecho": "EXCELENTÍSSIMO DESEMBARGADOR FEDERAL RELATOR DOUTOR A NDRÉ NABARRETE DA COLENDA QUARTA TURMA DO EGRÉGIO APELAÇÃO CÍVEL N° 5000296-74.2025.4.03.6002 ORIGEM: JUÍZO DA 1ª VARA FEDERAL DE DOURADOS APELANTE: DDR COMERCIO ATACADISTA DE MATERIAIS HIDRÁULICOS E ELÉTRICOS LTDA. APELADO: UNIÃO FEDERAL O …"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 26/11/2026: última decisão: ID 380691667 · 17/06/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 371007116 · 06/08/2025 — sentença (dispositivo a conferir) | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 373642128 · 15/05/2026 | última movimentação: 06/07/2026 12:19 · Conclusos para julgamento · Origem: mandado de segurança (1ª Vara Federal de Dourados) · MPF ID 373642128 (15/05/2026): [VALIDAR sentido] · Tempestividade: DDR Comércio Atacadista de Materiais Hidráulicos e Elétricos Ltda.: [VALIDAR tempestividade: intimação da sentença não localizada no texto extraído; apelação de 22/09/2025]",
+     "assuntoDet": "Cofins — [VALIDAR detalhamento]",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Mandado de segurança",
+     "parecer": "Com parecer",
+     "idParecer": "373642128",
+     "parecerSentido": "[VALIDAR sentido]"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "06/07/2026 12:19 · Conclusos para julgamento",
+    "mov_fonte": "linha do tempo do PJe (autos extraídos)",
+    "ultima_decisao": "Despacho · ID 380691667 · 17/06/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso)",
+    "ultima_decisao_relevante": "Sentença · ID 371007116 · 06/08/2025 — sentença (dispositivo a conferir)",
+    "ultima_peca": "Parecer \"Falta de Interesse\" (MPF) · ID 373642128 · 15/05/2026",
+    "ultima_informacao": "Certidão · ID 384629763 · 06/07/2026",
+    "aviso": "Conferido em 26/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 26/11/2026: última decisão: ID 380691667 · 17/06/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 371007116 · 06/08/2025 — sentença (dispositivo a conferir) | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 373642128 · 15/05/2026 | última movimentação: 06/07/2026 12:19 · Conclusos para julgamento"
    }
   },
   {
@@ -9973,12 +11456,14 @@
    "exequente": "UNIÃO FEDERAL",
    "executado": "MARCIA LOPES DE SOUZA",
    "assunto": "Concessão",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "AP2",
+   "tipo_caso": "Apelação da União em procedimento comum · Concessão · procedência",
+   "resultado": "Ato a proferir: apelação de União (ID 385144733) da sentença ID 385144429; contrarrazões: ID 385144738 ‖ Proposta pelos precedentes: Voto [VALIDAR paradigma]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação da União contra sentença (procedência) da 2ª Vara Federal de Campo Grande em procedimento comum: empo do óbito do pai da autora era devida a pensão para a filha solteira maior que não ocupasse cargo público de forma permanente. Ademais, a lei previa a reversão da pensão em favor daquela filha solteira em caso de morte da viúva pensionista vitalícia. Uma vez comprovada a qualidade de filha solteira que não exerce atividade econômica, tem-se que a autora faz jus à reversão de pensão requerida.Por todo o exposto, j",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -9989,7 +11474,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da(s) apelação(ões) (voto)",
+    "materia": "Concessão",
+    "origem": "Procedimento comum 5007797-90.2022.4.03.6000 (2ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 385144429 (19/05/2026)",
+    "recurso": "apelação de União (ID 385144733, 06/06/2026)",
+    "preparo": "União: isento (ente público)",
+    "monocratica": "Improvável sem paradigma",
+    "analisado_em": "26/11/2026",
+    "conf_preparo": "União: isento (ente público) · conferido em 26/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 26/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -9999,6 +11495,118 @@
    "chegada": "07/08/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Concessão — [VALIDAR detalhamento]",
+   "especificidades": "► Situação em 26/11/2026: última decisão: ID 385144429 · 19/05/2026 — sentença: julgou procedente o pedido | última peça: Informações Prestadas (advogado de parte) · ID 397125023 · 11/09/2026 | última movimentação: 11/09/2026 00:13 · Juntada de Petição de petição intercorrente · Origem: procedimento comum (2ª Vara Federal de Campo Grande) · Mídias: ID 385144414 · Pedido de urgência nas razões [VALIDAR se apreciado] · Tempestividade: União: [VALIDAR tempestividade: intimação da sentença não localizada no texto extraído; apelação de 06/06/2026] · No cadastro do lote, as partes estão invertidas: a autora é Márcia Lopes de Souza",
+   "teor": {
+    "sintese_fatica": "Márcia Lopes de Souza, assistida pela DPU, pediu a reversão da pensão por morte do genitor, servidor federal, como filha solteira (Lei 3.373/1958). A sentença julgou procedente o pedido, desde o requerimento administrativo, e concedeu tutela de urgência.",
+    "inicial": "Procedimento comum ajuizado(a) em 06/09/2022 (petição inicial ID 385144387).",
+    "decisao_recorrida": "Sentença ID 385144429 (19/05/2026): empo do óbito do pai da autora era devida a pensão para a filha solteira maior que não ocupasse cargo público de forma permanente. Ademais, a lei previa a reversão da pensão em favor daquela filha solteira em caso de morte da viúva pensionista vitalícia. Uma vez comprovada a qualidade de filha solteira que não exerce atividade econômica, tem-se que a autora faz jus à reversão de pensão requerida.Por todo o exposto, julgo procedente a pretensão inaugural para reverter em favor da autora a pensão por morte de seu genitor, a ser pagada desde a data do requerimento administrativo e atualizada com ",
+    "recurso": "União (ID 385144733, 06/06/2026): improcedência do pedido de reversão da pensão e revogação da tutela de urgência",
+    "resposta": "Contrarrazões: ID 385144738 (24/06/2026).",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "[VALIDAR representação]",
+    "preparo": "União: isento (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação da União em procedimento comum · Concessão · procedência",
+     "sintese": "Márcia Lopes de Souza, assistida pela DPU, pediu a reversão da pensão por morte do genitor, servidor federal, como filha solteira (Lei 3.373/1958). A sentença julgou procedente o pedido, desde o requerimento administrativo, e concedeu tutela de urgência.",
+     "questoes": "1) pensão de filha solteira maior (Lei 3.373/1958): requisitos e dependência econômica (Acórdão TCU 2.780/2016 e jurisprudência do STF); 2) tutela de urgência",
+     "rel": {
+      "razoes": "União (ID 385144733, 06/06/2026): improcedência do pedido de reversão da pensão e revogação da tutela de urgência",
+      "contrarrazoes": "Contrarrazões: ID 385144738 (24/06/2026)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "385144429",
+      "juizo": "Procedimento comum 5007797-90.2022.4.03.6000 (2ª Vara Federal de Campo Grande)",
+      "dispositivo": "empo do óbito do pai da autora era devida a pensão para a filha solteira maior que não ocupasse cargo público de forma permanente. Ademais, a lei previa a reversão da pensão em favor daquela filha solteira em caso de morte da viúva pensionista vitalícia. Uma vez comprovada a qualidade de filha solteira que não exerce atividade econômica, tem-se que a autora faz jus à reversão de pensão requerida.Por todo o exposto, julgo procedente a pretensão inaugural para reverter em favor da autora a pensão por morte de seu genitor, a ser pagada desde a data do requerimento administrativo e atualizada com "
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2026-06-06",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "União",
+       "tipo": "Apelação",
+       "id": "385144733",
+       "contra": "Sentença"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: procedência",
+       "id": "385144429",
+       "data": "2026-05-19",
+       "nota": "Sentença ID 385144429 (19/05/2026): empo do óbito do pai da autora era devida a pensão para a filha solteira maior que não ocupasse cargo público de forma permanente.",
+       "pje": {
+        "tipo": "Sentença"
+       },
+       "trecho": "conheço da Márcia era a Márcia, Dona Ilza, Talita, Mateus e Lucas”. (destaquei)A testemunha Juliana Miranda Xavier de Barros Brasil afirmou conhecer a autora desde 2005/2006 por ter amizade com a filha da autora, Talita Lorraine e que a autora sempre dependeu de sua mãe que teria criado Talita na …"
+      },
+      {
+       "desc": "Apelação: União",
+       "id": "385144733",
+       "data": "2026-06-06",
+       "nota": "União (ID 385144733, 06/06/2026): improcedência do pedido de reversão da pensão e revogação da tutela de urgência",
+       "pje": {
+        "tipo": "Apelação",
+        "descricao": "P APELAÇÃO 3243135194 EM 06/06/2026 15:49:55",
+        "paginas": 13
+       },
+       "trecho": "Pelo exposto, a União requer que esse Egrégio Tribunal Regional Federal da 1ª Região, após regular processamento, conheça do presente recurso de apelação, e ao final dê-lhe provimento para reformar a sentença nos termos destas razões recursais, julgando os pedidos do autor improcedentes e …"
+      },
+      {
+       "desc": "Contrarrazões",
+       "id": "385144738",
+       "data": "2026-06-24",
+       "nota": "Contrarrazões: ID 385144738 (24/06/2026).",
+       "pje": {
+        "tipo": "Contrarrazões"
+       },
+       "trecho": "Diante do exposto, requer a parte Apelada:a) concessão dos benefícios da Gratuidade de Justiça, com fundamento no art. 98 e seguintes do Código de Processo Civil;b) a intimação pessoal da Defensoria Pública da União de todos os atos do processo, na forma do art. 44, I, da LC nº 80/94;c) o …"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 26/11/2026: última decisão: ID 385144429 · 19/05/2026 — sentença: julgou procedente o pedido | última peça: Informações Prestadas (advogado de parte) · ID 397125023 · 11/09/2026 | última movimentação: 11/09/2026 00:13 · Juntada de Petição de petição intercorrente · Origem: procedimento comum (2ª Vara Federal de Campo Grande) · Mídias: ID 385144414 · Pedido de urgência nas razões [VALIDAR se apreciado] · Tempestividade: União: [VALIDAR tempestividade: intimação da sentença não localizada no texto extraído; apelação de 06/06/2026] · No cadastro do lote, as partes estão invertidas: a autora é Márcia Lopes de Souza",
+     "assuntoDet": "Concessão — [VALIDAR detalhamento]",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Há mídias",
+     "mpf": "Sem hipótese",
+     "parecer": "Não verificado",
+     "urgTipo": "Pedido nas razões de apelação",
+     "urgSit": "Não verificado"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "11/09/2026 00:13 · Juntada de Petição de petição intercorrente",
+    "mov_fonte": "linha do tempo do PJe (autos extraídos)",
+    "ultima_decisao": "Sentença · ID 385144429 · 19/05/2026 — sentença: julgou procedente o pedido",
+    "ultima_peca": "Informações Prestadas (advogado de parte) · ID 397125023 · 11/09/2026",
+    "ultima_informacao": "Informação · ID 385144740 · 08/07/2026",
+    "aviso": "Conferido em 26/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 26/11/2026: última decisão: ID 385144429 · 19/05/2026 — sentença: julgou procedente o pedido | última peça: Informações Prestadas (advogado de parte) · ID 397125023 · 11/09/2026 | última movimentação: 11/09/2026 00:13 · Juntada de Petição de petição intercorrente"
    }
   },
   {
@@ -10010,12 +11618,14 @@
    "exequente": "UNIÃO FEDERAL",
    "executado": "ASSOCIACAO DOS CENTROS DE FORMACAO DE CONDUTORES",
    "assunto": "Concessão / Permissão / Autorização",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "AP2",
+   "tipo_caso": "Apelação da União e de Estado de Mato Grosso do Sul (DETRAN/MS) em procedimento comum · Concessão / Permissão / Autorização · procedência",
+   "resultado": "Ato a proferir: apelação de União (ID 332508935) e apelação de Estado de Mato Grosso do Sul (DETRAN/MS) (ID 332508936) da sentença ID 332508934; contrarrazões não localizadas ‖ Proposta pelos precedentes: Voto [VALIDAR paradigma] [VALIDAR: Contrarrazões]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação da União e de Estado de Mato Grosso do Sul (DETRAN/MS) contra sentença (procedência) da 2ª Vara Federal de Campo Grande em procedimento comum: Diante do exposto, na forma do art. 487, I, CPC, julgo procedente o pedido inicial para que os Centros de Formação de Condutores de Veículos continuem a exercer as atividades para as quais foram credenciados, sem a exigência de monitoramento eletrônico nos veículos nas aulas práticas para obtenção de Carteira Nacional de Habilitação – CNH, afastando, assim, o disposto nas Portarias nº 238/2014 do DENATRAN nº 67/2020 ",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -10026,7 +11636,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da(s) apelação(ões) (voto)",
+    "materia": "Concessão / Permissão / Autorização",
+    "origem": "Procedimento comum 5002178-53.2020.4.03.6000 (2ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 332508934 (26/11/2024)",
+    "recurso": "apelação de União (ID 332508935, 27/02/2025) e apelação de Estado de Mato Grosso do Sul (DETRAN/MS) (ID 332508936, 12/03/2025)",
+    "preparo": "União: isento (ente público); Estado de Mato Grosso do Sul (DETRAN/MS): isento (ente público)",
+    "monocratica": "Improvável sem paradigma",
+    "analisado_em": "26/11/2026",
+    "conf_preparo": "União: isento (ente público); Estado de Mato Grosso do Sul (DETRAN/MS): isento (ente público) · conferido em 26/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 26/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -10036,6 +11657,121 @@
    "chegada": "02/09/2025",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Concessão / Permissão / Autorização — [VALIDAR detalhamento]",
+   "especificidades": "► Situação em 26/11/2026: última decisão: ID 332508934 · 26/11/2024 — sentença: julgou procedente o pedido | última peça: Apelação (apelado) · ID 332508936 · 12/03/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Origem: procedimento comum (2ª Vara Federal de Campo Grande) · Tempestividade: União: ciência em 07/02/2025, prazo de 30 dias até 25/03/2025; apelação de 27/02/2025 | Estado de Mato Grosso do Sul (DETRAN/MS): ciência em 07/02/2025, prazo de 30 dias até 25/03/2025; apelação de 12/03/2025 · No cadastro do lote, as partes estão invertidas: a autora é a Associação dos Centros de Formação de Condutores",
+   "teor": {
+    "sintese_fatica": "A Associação dos Centros de Formação de Condutores pediu que seus associados funcionem sem a exigência de monitoramento eletrônico nas aulas práticas de direção. A sentença julgou procedente o pedido e afastou as Portarias DENATRAN 238/2014 e 67/2020 [VALIDAR atos].",
+    "inicial": "Procedimento comum ajuizado(a) em 17/03/2020 (petição inicial ID 332508673).",
+    "decisao_recorrida": "Sentença ID 332508934 (26/11/2024): Diante do exposto, na forma do art. 487, I, CPC, julgo procedente o pedido inicial para que os Centros de Formação de Condutores de Veículos continuem a exercer as atividades para as quais foram credenciados, sem a exigência de monitoramento eletrônico nos veículos nas aulas práticas para obtenção de Carteira Nacional de Habilitação – CNH, afastando, assim, o disposto nas Portarias nº 238/2014 do DENATRAN nº 67/2020 do DETRAN/MS a respeito da matéria. Condeno a parte ré ao pagamento de honorários advocatícios, que fixo em R$ 6.000,00, nos termos do art. 85, § 8º do CPC, considerando especifica",
+    "recurso": "União (ID 332508935, 27/02/2025): ilegitimidade passiva da União e remessa à Justiça Estadual; no mérito, improcedência · Estado de Mato Grosso do Sul (DETRAN/MS) (ID 332508936, 12/03/2025): improcedência e restabelecimento da exigência de videomonitoramento das aulas práticas de direção",
+    "resposta": "Não localizadas.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "[VALIDAR representação]",
+    "preparo": "União: isento (ente público); Estado de Mato Grosso do Sul (DETRAN/MS): isento (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação da União e de Estado de Mato Grosso do Sul (DETRAN/MS) em procedimento comum · Concessão / Permissão / Autorização · procedência",
+     "sintese": "A Associação dos Centros de Formação de Condutores pediu que seus associados funcionem sem a exigência de monitoramento eletrônico nas aulas práticas de direção. A sentença julgou procedente o pedido e afastou as Portarias DENATRAN 238/2014 e 67/2020 [VALIDAR atos].",
+     "questoes": "1) legitimidade passiva da União e competência; 2) validade da exigência de monitoramento eletrônico por portaria do DENATRAN",
+     "rel": {
+      "razoes": "União (ID 332508935, 27/02/2025): ilegitimidade passiva da União e remessa à Justiça Estadual; no mérito, improcedência · Estado de Mato Grosso do Sul (DETRAN/MS) (ID 332508936, 12/03/2025): improcedência e restabelecimento da exigência de videomonitoramento das aulas práticas de direção",
+      "contrarrazoes": "Não localizadas."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "332508934",
+      "juizo": "Procedimento comum 5002178-53.2020.4.03.6000 (2ª Vara Federal de Campo Grande)",
+      "dispositivo": "Diante do exposto, na forma do art. 487, I, CPC, julgo procedente o pedido inicial para que os Centros de Formação de Condutores de Veículos continuem a exercer as atividades para as quais foram credenciados, sem a exigência de monitoramento eletrônico nos veículos nas aulas práticas para obtenção de Carteira Nacional de Habilitação – CNH, afastando, assim, o disposto nas Portarias nº 238/2014 do DENATRAN nº 67/2020 do DETRAN/MS a respeito da matéria. Condeno a parte ré ao pagamento de honorários advocatícios, que fixo em R$ 6.000,00, nos termos do art. 85, § 8º do CPC, considerando especifica"
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2025-02-27",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "União",
+       "tipo": "Apelação",
+       "id": "332508935",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Estado de Mato Grosso do Sul (DETRAN/MS)",
+       "tipo": "Apelação",
+       "id": "332508936",
+       "contra": "Sentença"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: procedência",
+       "id": "332508934",
+       "data": "2024-11-26",
+       "nota": "Sentença ID 332508934 (26/11/2024): Diante do exposto, na forma do art.",
+       "pje": {
+        "tipo": "Sentença"
+       },
+       "trecho": "Diante do exposto, na forma do art. 487, I, CPC, julgo procedente o pedido inicial para que os Centros de Formação de Condutores de Veículos continuem a exercer as atividades para as quais foram credenciados, sem a exigência de monitoramento eletrônico nos veículos nas aulas práticas para obtenção …"
+      },
+      {
+       "desc": "Apelação: União",
+       "id": "332508935",
+       "data": "2025-02-27",
+       "nota": "União (ID 332508935, 27/02/2025): ilegitimidade passiva da União e remessa à Justiça Estadual; no mérito, improcedência · Estado de Mato Grosso do Sul (DETRAN/MS) (ID 332508936, 12/03/2025): improcedência e restabelecimento da exigência de videomonitoramento das aulas práticas de direção",
+       "pje": {
+        "tipo": "Apelação"
+       },
+       "trecho": "Ante o exposto, requer a União seja dado provimento ao presente recurso, reformando-se a r. sentença para: (a) que seja reconhecida a sua ilegitimidade passiva (art. 485, VI, do CPC), com o consequente envio da demanda para a Justiça Estadual; (b) acaso superada a preliminar, sejam julgadas …"
+      },
+      {
+       "desc": "Apelação: Estado de Mato Grosso do Sul (DETRAN/MS)",
+       "id": "332508936",
+       "data": "2025-03-12",
+       "nota": "União (ID 332508935, 27/02/2025): ilegitimidade passiva da União e remessa à Justiça Estadual; no mérito, improcedência · Estado de Mato Grosso do Sul (DETRAN/MS) (ID 332508936, 12/03/2025): improcedência e restabelecimento da exigência de videomonitoramento das aulas práticas de direção",
+       "pje": {
+        "tipo": "Apelação",
+        "paginas": 11
+       },
+       "trecho": "Diante do exposto, requer a reforma da r. sentença vergastada, com a total improcedência do pedido inicial, restabelecendo a exigência do videomonitoramento das aulas práticas de direção veicular. Nestes termos, pede deferimento. Campo Grande MS, 12 de março de 2025. JUCELINO OLIVEIRA DA ROCHA …"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 26/11/2026: última decisão: ID 332508934 · 26/11/2024 — sentença: julgou procedente o pedido | última peça: Apelação (apelado) · ID 332508936 · 12/03/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Origem: procedimento comum (2ª Vara Federal de Campo Grande) · Tempestividade: União: ciência em 07/02/2025, prazo de 30 dias até 25/03/2025; apelação de 27/02/2025 | Estado de Mato Grosso do Sul (DETRAN/MS): ciência em 07/02/2025, prazo de 30 dias até 25/03/2025; apelação de 12/03/2025 · No cadastro do lote, as partes estão invertidas: a autora é a Associação dos Centros de Formação de Condutores",
+     "assuntoDet": "Concessão / Permissão / Autorização — [VALIDAR detalhamento]",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Tempestivo",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Não verificado"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária",
+    "mov_fonte": "linha do tempo do PJe (autos extraídos)",
+    "ultima_decisao": "Sentença · ID 332508934 · 26/11/2024 — sentença: julgou procedente o pedido",
+    "ultima_peca": "Apelação (apelado) · ID 332508936 · 12/03/2025",
+    "ultima_informacao": "Informação · ID 332508939 · 04/08/2025",
+    "aviso": "Conferido em 26/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 26/11/2026: última decisão: ID 332508934 · 26/11/2024 — sentença: julgou procedente o pedido | última peça: Apelação (apelado) · ID 332508936 · 12/03/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária"
    }
   },
   {
@@ -10047,12 +11783,14 @@
    "exequente": "KELEN ANDRESSA ALVES GODOY",
    "executado": "EMPRESA BRASILEIRA DE INFRAESTRUTURA AEROPORTUARIA - INFRAERO",
    "assunto": "Concessão / Permissão / Autorização",
-   "grupo": null,
-   "tipo_caso": "",
-   "resultado": "",
+   "grupo": "AP2",
+   "tipo_caso": "Apelação de Kelen Andressa Alves Godoy ME em procedimento comum · Concessão / Permissão / Autorização · improcedência",
+   "resultado": "Ato a proferir: apelação de Kelen Andressa Alves Godoy ME (ID 306994328) da sentença ID 306994327; contrarrazões: ID 306994335 ‖ Proposta pelos precedentes: Voto. Referência do Relator: ApCiv 5001711-40.2021.4.03.6000 (reequilíbrio de contrato com a INFRAERO, ED julgados em 30/06/2026) [VALIDAR aderência] [VALIDAR: Preparo: Kelen Andressa Alves Godoy ME: guia ou comprovante (ID 306994329) [VALIDAR]]",
    "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Apelação de Kelen Andressa Alves Godoy ME contra sentença (improcedência) da 4ª Vara Federal de Campo Grande em procedimento comum: Diante do exposto, julgo improcedente o pedido. Condeno a autora a pagar honorários advocatícios aos Procuradores/advogada da ré, que fixo em 10% sobre o valor da causa (art. 85, § 2º, do CPC). Custas pela autora.P. R. I.Havendo interposição de recurso de apelação, determino, desde já, a intimação da parte contrária para, querendo, apresentar contrarrazões. Após, remetam-se os autos ao egrégio Tribunal Regional Feder",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -10063,7 +11801,18 @@
    },
    "pecas": [],
    "mpf": "",
-   "triagem": {},
+   "triagem": {
+    "ato": "Julgamento da(s) apelação(ões) (voto)",
+    "materia": "Concessão / Permissão / Autorização",
+    "origem": "Procedimento comum 5006797-55.2022.4.03.6000 (4ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 306994327 (14/08/2024)",
+    "recurso": "apelação de Kelen Andressa Alves Godoy ME (ID 306994328, 09/09/2024)",
+    "preparo": "Kelen Andressa Alves Godoy ME: guia ou comprovante (ID 306994329) [VALIDAR]",
+    "monocratica": "Improvável sem paradigma",
+    "analisado_em": "26/11/2026",
+    "conf_preparo": "Kelen Andressa Alves Godoy ME: guia ou comprovante (ID 306994329) [VALIDAR] · conferido em 26/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 26/11/2026"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false,
@@ -10073,6 +11822,116 @@
    "chegada": "04/11/2026",
    "extracao": {
     "situacao": "pendente"
+   },
+   "assunto_detalhado": "Concessão / Permissão / Autorização — [VALIDAR detalhamento]",
+   "especificidades": "► Situação em 26/11/2026: última decisão: ID 307824848 · 30/10/2024 — recebeu o recurso sem conceder efeito suspensivo | última peça: Contrarrazões de Recurso (apelante) · ID 306994335 · 11/10/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Origem: procedimento comum (4ª Vara Federal de Campo Grande) · Prevenção a conferir: AI 5022105-89.2022.4.03.0000 · Tempestividade: Kelen Andressa Alves Godoy ME: [VALIDAR tempestividade: intimação da sentença não localizada no texto extraído; apelação de 09/09/2024]",
+   "teor": {
+    "sintese_fatica": "Kelen Andressa Alves Godoy ME, vencedora do Pregão Eletrônico 161/LCSP/SBCG/2016, explorava lanchonete no Aeroporto Internacional de Campo Grande por concessão de uso da INFRAERO (Contrato 02.2017.017.0001, de 15/03/2017 a 14/03/2022). A sentença julgou improcedente o pedido, com honorários de 10% do valor da causa.",
+    "inicial": "Procedimento comum ajuizado(a) em 01/08/2022 (petição inicial ID 306994145).",
+    "decisao_recorrida": "Sentença ID 306994327 (14/08/2024): Diante do exposto, julgo improcedente o pedido. Condeno a autora a pagar honorários advocatícios aos Procuradores/advogada da ré, que fixo em 10% sobre o valor da causa (art. 85, § 2º, do CPC). Custas pela autora.P. R. I.Havendo interposição de recurso de apelação, determino, desde já, a intimação da parte contrária para, querendo, apresentar contrarrazões. Após, remetam-se os autos ao egrégio Tribunal Regional Federal da 3ª Região, sob as cautelas de estilo.Não havendo requerimentos, com o trânsito em julgado, arquivem-se.Campo Grande, MS, 6 de agosto de 2024.PEDRO PEREIRA DOS SANTOSJUIZ FEDE",
+    "recurso": "Kelen Andressa Alves Godoy ME (ID 306994328, 09/09/2024): reforma da improcedência no contrato de concessão de uso de área para lanchonete no Aeroporto Internacional de Campo Grande, com inversão da sucumbência [VALIDAR teses]",
+    "resposta": "Contrarrazões: ID 306994335 (11/10/2024).",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "[VALIDAR representação]",
+    "preparo": "Kelen Andressa Alves Godoy ME: guia ou comprovante (ID 306994329) [VALIDAR]"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação de Kelen Andressa Alves Godoy ME em procedimento comum · Concessão / Permissão / Autorização · improcedência",
+     "sintese": "Kelen Andressa Alves Godoy ME, vencedora do Pregão Eletrônico 161/LCSP/SBCG/2016, explorava lanchonete no Aeroporto Internacional de Campo Grande por concessão de uso da INFRAERO (Contrato 02.2017.017.0001, de 15/03/2017 a 14/03/2022). A sentença julgou improcedente o pedido, com honorários de 10% do valor da causa.",
+     "questoes": "[VALIDAR pedido] 1) reequilíbrio ou revisão do contrato de concessão de uso de área aeroportuária",
+     "rel": {
+      "razoes": "Kelen Andressa Alves Godoy ME (ID 306994328, 09/09/2024): reforma da improcedência no contrato de concessão de uso de área para lanchonete no Aeroporto Internacional de Campo Grande, com inversão da sucumbência [VALIDAR teses]",
+      "contrarrazoes": "Contrarrazões: ID 306994335 (11/10/2024)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "306994327",
+      "juizo": "Procedimento comum 5006797-55.2022.4.03.6000 (4ª Vara Federal de Campo Grande)",
+      "dispositivo": "Diante do exposto, julgo improcedente o pedido. Condeno a autora a pagar honorários advocatícios aos Procuradores/advogada da ré, que fixo em 10% sobre o valor da causa (art. 85, § 2º, do CPC). Custas pela autora.P. R. I.Havendo interposição de recurso de apelação, determino, desde já, a intimação da parte contrária para, querendo, apresentar contrarrazões. Após, remetam-se os autos ao egrégio Tribunal Regional Federal da 3ª Região, sob as cautelas de estilo.Não havendo requerimentos, com o trânsito em julgado, arquivem-se.Campo Grande, MS, 6 de agosto de 2024.PEDRO PEREIRA DOS SANTOSJUIZ FEDE"
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2024-09-09",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Kelen Andressa Alves Godoy ME",
+       "tipo": "Apelação",
+       "id": "306994328",
+       "contra": "Sentença"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: improcedência",
+       "id": "306994327",
+       "data": "2024-08-14",
+       "nota": "Sentença ID 306994327 (14/08/2024): Diante do exposto, julgo improcedente o pedido.",
+       "pje": {
+        "tipo": "Sentença"
+       },
+       "trecho": "Diante do exposto, julgo improcedente o pedido. Condeno a autora a pagar honorários advocatícios aos Procuradores/advogada da ré, que fixo em 10% sobre o valor da causa (art. 85, § 2º, do CPC). Custas pela autora.P. R. I.Havendo interposição de recurso de apelação, determino, desde já, a intimação …"
+      },
+      {
+       "desc": "Apelação: Kelen Andressa Alves Godoy ME",
+       "id": "306994328",
+       "data": "2024-09-09",
+       "nota": "Kelen Andressa Alves Godoy ME (ID 306994328, 09/09/2024): reforma da improcedência no contrato de concessão de uso de área para lanchonete no Aeroporto Internacional de Campo Grande, com inversão da sucumbência [VALIDAR teses]",
+       "pje": {
+        "tipo": "Apelação",
+        "paginas": 14
+       },
+       "trecho": "Ante o exposto , pugna a apelante pela reforma da sentença singular, para fins de se reconhecer que a recorrente detinha o direito à pr orrogação do praz o de vigência de seu contrato par a fins de amortiza ção dos gastos incorridos com o remanejamento de ár ea imposto pela recorrida , objeto do …"
+      },
+      {
+       "desc": "Contrarrazões",
+       "id": "306994335",
+       "data": "2024-10-11",
+       "nota": "Contrarrazões: ID 306994335 (11/10/2024).",
+       "pje": {
+        "tipo": "Contrarrazões de Recurso",
+        "paginas": 9
+       },
+       "trecho": "Ante o exposto, requer seja mantida a r. sentença , negando - se provimento ao recurso de apelação manejado pela recorrente. Rio de Janeiro, 11 de outubro de 202 4 . ____________________ Renato Amaral OAB/RJ 131.289 (assinado eletronicamente)"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 26/11/2026: última decisão: ID 307824848 · 30/10/2024 — recebeu o recurso sem conceder efeito suspensivo | última peça: Contrarrazões de Recurso (apelante) · ID 306994335 · 11/10/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Origem: procedimento comum (4ª Vara Federal de Campo Grande) · Prevenção a conferir: AI 5022105-89.2022.4.03.0000 · Tempestividade: Kelen Andressa Alves Godoy ME: [VALIDAR tempestividade: intimação da sentença não localizada no texto extraído; apelação de 09/09/2024]",
+     "assuntoDet": "Concessão / Permissão / Autorização — [VALIDAR detalhamento]",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Não verificado"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária",
+    "mov_fonte": "linha do tempo do PJe (autos extraídos)",
+    "ultima_decisao": "Decisão · ID 307824848 · 30/10/2024 — recebeu o recurso sem conceder efeito suspensivo",
+    "ultima_peca": "Contrarrazões de Recurso (apelante) · ID 306994335 · 11/10/2024",
+    "ultima_informacao": "Certidão · ID 307296954 · 19/10/2024",
+    "aviso": "Conferido em 26/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 26/11/2026: última decisão: ID 307824848 · 30/10/2024 — recebeu o recurso sem conceder efeito suspensivo | última peça: Contrarrazões de Recurso (apelante) · ID 306994335 · 11/10/2024 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária"
    }
   },
   {
