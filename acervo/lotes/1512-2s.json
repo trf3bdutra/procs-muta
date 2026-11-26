@@ -4861,11 +4861,11 @@
    "assunto": "PIS",
    "assunto_detalhado": "",
    "grupo": "assunto-2",
-   "tipo_caso": "PIS",
-   "resultado": "",
+   "tipo_caso": "PIS/COFINS (revenda de veículos) · concessão parcial · apelações cruzadas",
+   "resultado": "Proposta: APTO — apelações da União e da impetrante e remessa contra a concessão parcial da segurança [VALIDAR paradigma e tese] [VALIDAR: tese da impetração]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença concedeu em parte e ratificou a liminar (ID 357651691); apelações IDs 357651696 e 357651697; contrarrazões IDs 357651702 e 359033139; MPF pelo prosseguimento (ID 358539840).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -4874,11 +4874,54 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "357651691"
+    },
+    {
+     "peca": "Apelação",
+     "id": "357651696"
+    },
+    {
+     "peca": "Apelação",
+     "id": "357651697"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "357651702"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "359033139"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "357651690"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "358539840"
+    }
+   ],
+   "mpf": "parecer ID 358539840 (06/03/2026)",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Tributário — PIS/COFINS",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 357651691 (21/01/2026)",
+    "recurso": "apelação (ID 357651696, 02/02/2026); apelação (ID 357651697, 13/02/2026)",
+    "preparo": "comprovante juntado (ID 357651698, 357651699) — conferir o tipo",
+    "representacao": "procuração/substabelecimento ID 357651456",
+    "mpf": "parecer ID 358539840 (06/03/2026)",
+    "autos": "73 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] tese da impetração"
+   ],
    "minuta": false
   },
   {
@@ -4892,11 +4935,11 @@
    "assunto": "Não Cumulatividade",
    "assunto_detalhado": "",
    "grupo": "assunto-32",
-   "tipo_caso": "Não Cumulatividade",
-   "resultado": "",
+   "tipo_caso": "Não cumulatividade · ICMS no crédito de PIS/COFINS (Lei 14.592/2023) · MS denegado",
+   "resultado": "Proposta: APTO — apelação da impetrante contra a denegação (artigos 6º e 7º da Lei 14.592/2023, oriundos da MP 1.159/2023) [VALIDAR paradigma]; já foi retirado de pauta em 09/09/2025, antes da redistribuição (ID 369594887) [VALIDAR: motivo da retirada de pauta em 09/09/2025 (outro órgão)]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença denegou a segurança (ID 314195829); apelação (ID 314195832); contrarrazões (ID 314195836); MPF sem manifestação de mérito.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -4905,11 +4948,46 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "314195829"
+    },
+    {
+     "peca": "Apelação",
+     "id": "314195832"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "314195836"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "314195824"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "314324134"
+    }
+   ],
+   "mpf": "parecer ID 314324134 (12/02/2025)",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Tributário — PIS/COFINS",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 314195829 (09/12/2024)",
+    "recurso": "apelação (ID 314195832, 27/01/2025)",
+    "preparo": "comprovante juntado (ID 314195818, 314195819, 314195820, 314195834) — conferir o tipo",
+    "representacao": "[VALIDAR]",
+    "mpf": "parecer ID 314324134 (12/02/2025)",
+    "autos": "63 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] motivo da retirada de pauta em 09/09/2025 (outro órgão)"
+   ],
    "minuta": false
   },
   {
@@ -4923,11 +5001,11 @@
    "assunto": "PIS",
    "assunto_detalhado": "",
    "grupo": "assunto-2",
-   "tipo_caso": "PIS",
-   "resultado": "",
+   "tipo_caso": "Habilitação de crédito decorrente de decisão judicial transitada · MS concedido",
+   "resultado": "Proposta: PENDENTE — apelação da União contra a concessão da segurança (habilitação do crédito tributário); não há contrarrazões da impetrante nem registro de decurso do prazo nos autos do 2º grau [VALIDAR: contrarrazões ou decurso do prazo da impetrante; remessa necessária (artigo 14, § 1º, da Lei 12.016/2009) afastada pela retificação da classe?]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença concedeu a segurança (ID 316930515); apelação (ID 316930517); MPF pelo prosseguimento (ID 317396802); classe retificada para apelação cível (sem remessa) em 11/03/2025.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -4936,11 +5014,43 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "316930515"
+    },
+    {
+     "peca": "Apelação",
+     "id": "316930517"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "316930512"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "317396802"
+    }
+   ],
+   "mpf": "parecer ID 317396802 (13/03/2025)",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Tributário — PIS/COFINS",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 316930515 (05/02/2025)",
+    "recurso": "apelação (ID 316930517, 10/02/2025)",
+    "preparo": "comprovante juntado (ID 316930504, 316930505, 316930506) — conferir o tipo",
+    "representacao": "procuração/substabelecimento ID 316930497",
+    "mpf": "parecer ID 317396802 (13/03/2025)",
+    "autos": "33 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] contrarrazões ou decurso do prazo da impetrante",
+    "[VALIDAR] remessa necessária (artigo 14, § 1º, da Lei 12.016/2009) afastada pela retificação da classe?"
+   ],
    "minuta": false
   },
   {
@@ -4954,11 +5064,11 @@
    "assunto": "Expedição de diplomas e omissão na entrega das notas",
    "assunto_detalhado": "",
    "grupo": "assunto-16",
-   "tipo_caso": "Expedição de diplomas e omissão na entrega das notas",
-   "resultado": "",
+   "tipo_caso": "Diploma não expedido (Estácio) · obrigação de fazer e dano moral",
+   "resultado": "Proposta: APTO — recurso da instituição contra a procedência (expedição e registro do diploma, multa diária e dano moral) [VALIDAR paradigma]; contrarrazões pedem majoração dos honorários para 20% [VALIDAR: origem no juizado (subseção 6201) e recurso inominado: competência da Turma Regional]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença procedente (ID 356473658); embargos rejeitados (ID 356473664); recurso inominado (ID 356473669); contrarrazões (ID 356473673); redistribuído por decisão de 05/11/2026 (ID 408850776), com base nos CC 5023920-82.2026 e 5021511-36.2026.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -4967,11 +5077,46 @@
     "correcao": "Vanilda",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "356473658"
+    },
+    {
+     "peca": "Embargos de declaração",
+     "id": "356473659"
+    },
+    {
+     "peca": "Recurso inominado",
+     "id": "356473669"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "356473663"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "356473673"
+    }
+   ],
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo/consumidor — ensino superior, diploma",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 356473658 (27/10/2025)",
+    "recurso": "embargos de declaração (ID 356473659, 06/11/2025); recurso inominado (ID 356473669, 08/12/2025)",
+    "preparo": "comprovante juntado (ID 356473671) — conferir o tipo",
+    "representacao": "procuração/substabelecimento ID 356473361, 356473644, 356473645",
+    "mpf": "Não consta parecer",
+    "autos": "79 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] origem no juizado (subseção 6201) e recurso inominado: competência da Turma Regional"
+   ],
    "minuta": false
   },
   {
@@ -4985,11 +5130,11 @@
    "assunto": "Acessibilidade",
    "assunto_detalhado": "",
    "grupo": "assunto-18",
-   "tipo_caso": "Acessibilidade",
-   "resultado": "",
+   "tipo_caso": "Matrícula em Medicina (UFGD) · cota/critério econômico · MS",
+   "resultado": "Proposta: APTO — apelação da UFGD (ID 328228519) e remessa contra a concessão parcial (matrícula da impetrante no curso de Medicina); parecer do MPF pelo desprovimento (ID 329041872) [VALIDAR paradigma] [VALIDAR: apelação ID 328228519 não tipada como apelação no PJe]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença concedeu em parte (ID 328228516); contrarrazões (ID 328228524); efeito suspensivo indeferido (ID 334788459); decurso do prazo das partes registrado.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -4998,11 +5143,42 @@
     "correcao": "Vanilda",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "328228516"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "328228524"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "328228515"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "329041872"
+    }
+   ],
+   "mpf": "parecer ID 329041872 (27/06/2025)",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — ensino superior, ações afirmativas",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 328228516 (12/05/2025)",
+    "recurso": "[VALIDAR]",
+    "preparo": "[VALIDAR]",
+    "representacao": "procuração/substabelecimento ID 328228470",
+    "mpf": "parecer ID 329041872 (27/06/2025)",
+    "autos": "56 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] apelação ID 328228519 não tipada como apelação no PJe"
+   ],
    "minuta": false
   },
   {
@@ -5016,11 +5192,11 @@
    "assunto": "Classificação e/ ou Preterição",
    "assunto_detalhado": "",
    "grupo": "assunto-4",
-   "tipo_caso": "Classificação e/ ou Preterição",
-   "resultado": "",
+   "tipo_caso": "Concurso EBSERH · extinção por incompetência (juizado)",
+   "resultado": "Proposta: APTO — apelação da autora contra a extinção sem mérito por incompetência absoluta da vara (valor da causa no limite do juizado, artigo 3º da Lei 10.259/2001) [VALIDAR paradigma] [VALIDAR: juizado: extinção ou remessa (artigo 64, § 3º, do CPC)]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença declarou a incompetência e extinguiu (485, IV) (ID 332508634); apelação (ID 332508635); contrarrazões (ID 332508637).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -5029,11 +5205,38 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "332508634"
+    },
+    {
+     "peca": "Apelação",
+     "id": "332508635"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "332508637"
+    }
+   ],
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — concurso público / programa Mais Médicos",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 332508634 (17/06/2025)",
+    "recurso": "apelação (ID 332508635, 01/07/2025)",
+    "preparo": "[VALIDAR]",
+    "representacao": "procuração/substabelecimento ID 332508638",
+    "mpf": "Não consta parecer",
+    "autos": "26 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] juizado: extinção ou remessa (artigo 64, § 3º, do CPC)"
+   ],
    "minuta": false
   },
   {
@@ -5047,11 +5250,11 @@
    "assunto": "Classificação e/ ou Preterição",
    "assunto_detalhado": "",
    "grupo": "assunto-4",
-   "tipo_caso": "Classificação e/ ou Preterição",
-   "resultado": "",
+   "tipo_caso": "Mais Médicos · alocação em vaga ociosa · improcedência",
+   "resultado": "Proposta: APTO — negar provimento à apelação do autor [VALIDAR paradigma]: alocação em vaga ociosa do PMMB sem direito subjetivo; série Mais Médicos da pauta (1512-3s)",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença improcedente, honorários de 10% (ID 382841524); apelação (ID 382841525); contrarrazões (ID 382841527).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -5060,9 +5263,34 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "382841524"
+    },
+    {
+     "peca": "Apelação",
+     "id": "382841525"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "382841527"
+    }
+   ],
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — concurso público / programa Mais Médicos",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 382841524 (23/01/2026)",
+    "recurso": "apelação (ID 382841525, 04/03/2026)",
+    "preparo": "[VALIDAR]",
+    "representacao": "procuração/substabelecimento ID 382841504",
+    "mpf": "Não consta parecer",
+    "autos": "36 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false
@@ -5078,11 +5306,11 @@
    "assunto": "Classificação e/ ou Preterição",
    "assunto_detalhado": "",
    "grupo": "assunto-4",
-   "tipo_caso": "Classificação e/ ou Preterição",
-   "resultado": "",
+   "tipo_caso": "Concurso (Cebraspe) · heteroidentificação (cota racial) · improcedência",
+   "resultado": "Proposta: APTO — apelação do autor contra a improcedência (eliminação por não ser identificado como pardo na heteroidentificação) [VALIDAR paradigma]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença improcedente (ID 275914484); apelação (ID 275914486); contrarrazões (IDs 275914494 e 275914495).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -5091,9 +5319,38 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "275914484"
+    },
+    {
+     "peca": "Apelação",
+     "id": "275914486"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "275914494"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "275914495"
+    }
+   ],
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — concurso público / programa Mais Médicos",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 275914484 (28/04/2023)",
+    "recurso": "apelação (ID 275914486, 23/05/2023)",
+    "preparo": "[VALIDAR]",
+    "representacao": "procuração/substabelecimento ID 275914454, 275914466",
+    "mpf": "Não consta parecer",
+    "autos": "62 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false
@@ -5109,11 +5366,11 @@
    "assunto": "Classificação e/ ou Preterição",
    "assunto_detalhado": "",
    "grupo": "assunto-4",
-   "tipo_caso": "Classificação e/ ou Preterição",
-   "resultado": "",
+   "tipo_caso": "Mais Médicos · inclusão · MS concedido em parte",
+   "resultado": "Proposta: APTO — apelação da União (ID 362171382), apelação da impetrante (ID 362171384) e remessa contra a concessão parcial; série Mais Médicos da pauta [VALIDAR paradigma] [VALIDAR: conteúdo da 2ª apelação (o trecho extraído reproduz decisão liminar)]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença concedeu em parte (ID 362171380); contrarrazões (IDs 362171386 e 362171387); MPF sem manifestação de mérito (ID 367252452).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -5122,11 +5379,54 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "362171380"
+    },
+    {
+     "peca": "Apelação",
+     "id": "362171382"
+    },
+    {
+     "peca": "Apelação",
+     "id": "362171384"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "362171386"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "362171387"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "362171379"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "367252452"
+    }
+   ],
+   "mpf": "parecer ID 367252452 (17/04/2026)",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — concurso público / programa Mais Médicos",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 362171380 (30/01/2026)",
+    "recurso": "apelação (ID 362171382, 10/02/2026); apelação (ID 362171384, 26/02/2026)",
+    "preparo": "[VALIDAR]",
+    "representacao": "procuração/substabelecimento ID 362171333",
+    "mpf": "parecer ID 367252452 (17/04/2026)",
+    "autos": "67 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] conteúdo da 2ª apelação (o trecho extraído reproduz decisão liminar)"
+   ],
    "minuta": false
   },
   {
