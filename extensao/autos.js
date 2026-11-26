@@ -619,12 +619,17 @@ function extrasDoc(d){return '<div class="au-inf">' + [d.rot, d.anexo ? 'anexo' 
         (GB().classificacaoDoc && !docBloq(d) ? GB().classificacaoDoc(d) : '') + notasHistoricasDoc(d) +
         /* 0.39: o detalhamento numa linha só; o inteiro teor num campo que se expande (lê o texto ao abrir) */
         '<input type="text" class="au-esp au-esp-l" data-esp="' + esc(d.id) + '" placeholder="Detalhamento (vai para Outras peças da ficha)" title="Vai para Outras peças e ocorrências da ficha" value="' + esc(espDe(d.id)) + '">';}
+function cabecalhoDoc(d,historico){
+ var id=S(d.id),det=d.desc&&N(d.desc)!==N(d.tipo)?d.desc:'';
+ return '<div class="au-h">'+(historico?'<span class="au-g hero-doc-placeholder" aria-hidden="true"></span>':'<input type="checkbox" class="au-g" data-au-g="'+esc(id)+'"'+(marcado(d)?' checked':'')+' title="Gravar na ficha com o inteiro teor" aria-label="Gravar '+esc(d.tipo)+' ID '+esc(id)+' na ficha">')+
+ '<span class="au-d">'+esc(d.data||'Sem data')+(d.hora?'<small>'+esc(d.hora)+'</small>':'')+'</span>'+
+ '<div class="au-n"><b>'+esc(d.tipo||'Documento')+'</b>'+(det?'<small>'+esc(det)+'</small>':'')+'</div>'+
+ (id?'<button type="button" class="mono lnk" data-copia="'+esc(id)+'" title="Copiar o ID">'+esc(id)+'</button>':'<span class="mono hero-doc-noid">Sem ID</span>')+'</div>';
+}
 function linhaDoc(d) {
       var ab = A.abertos[d.id], dd = A.docs[d.id], hero=document.body.classList.contains('hero-redesign-v53');
       if (GB().classificacaoVisivel && !GB().classificacaoVisivel(d)) return '';
-      return '<div class="au-doc hero-doc-card' + (d.anexo ? ' anx' : '') + (PRINC[d.k] ? ' pr' : '') + (marcado(d) ? ' sel' : '') + '" data-doc-kind="' + esc(d.k||'outro') + '"><div class="au-h"><input type="checkbox" class="au-g" data-au-g="' + esc(d.id) + '"' + (marcado(d) ? ' checked' : '') + ' title="Gravar na ficha com o inteiro teor" aria-label="Gravar ' + esc(d.tipo) + ' ID ' + esc(d.id) + ' na ficha"><span class="au-d">' + esc(d.data) + (d.hora ? '<small>' + esc(d.hora) + '</small>' : '') + '</span>' +
-        '<div class="au-n"><b>' + esc(d.tipo) + '</b>' + (d.desc && N(d.desc) !== N(d.tipo) ? '<small>' + esc(d.desc) + '</small>' : '') + '</div>' +
-        '<button type="button" class="mono lnk" data-copia="' + esc(d.id) + '" title="Copiar o ID">' + esc(d.id) + '</button></div>' +
+      return '<div class="au-doc hero-doc-card' + (d.anexo ? ' anx' : '') + (PRINC[d.k] ? ' pr' : '') + (marcado(d) ? ' sel' : '') + '" data-doc-kind="' + esc(d.k||'outro') + '">' + cabecalhoDoc(d,false) +
         (hero?'':extrasDoc(d)) +
         '<details class="au-it" data-au-it="' + esc(d.id) + '"' + (ab ? ' open' : '') + '><summary><span>Inteiro teor</span>' + estadoDoc(d.id) +
         '<span class="au-it-a"><button type="button" class="btn line sm" data-au="ocr:' + esc(d.id) + '"' + (dd && dd.estado === 'lendo' ? ' disabled' : '') + ' title="Lê o documento por OCR, página por página (PDF digitalizado ou com texto ruim). Roda no computador; nada sai dele">OCR</button>' +
@@ -660,7 +665,8 @@ function cronologiaIntegrada(L,H){return L.concat(H).map(function(d,i){return {d
 function linhaHistorica(d){
  if(!d.historico)return linhaDoc(d);
  var texto=d.registros.map(function(r){return ['pje','nota','trecho'].map(function(k){return S(r[k])?'<p style="white-space:pre-wrap;overflow-wrap:anywhere"><b>'+esc({pje:'Referência PJe',nota:'Nota histórica',trecho:'Trecho histórico'}[k])+':</b> '+esc(r[k])+'</p>':'';}).join('');}).join('<hr>');
- return '<div class="au-doc au-historico hero-doc-card" data-doc-kind="'+esc(d.k||'outro')+'"><div class="au-h"><span class="au-d">'+esc(d.data||'Sem data')+'</span><div class="au-n"><b>'+esc(d.tipo)+'</b><small>Registro histórico · '+(PRINC[d.k]&&d.k!=='intimacao'?'Peça principal':'Outro documento')+'</small></div>'+(d.id?'<button type="button" class="mono lnk" data-copia="'+esc(d.id)+'" title="Copiar ID">'+esc(d.id)+'</button>':'')+'</div>'+texto+'<small class="muted">Inteiro teor ainda não localizado na cronologia lida.</small></div>';
+ return '<div class="au-doc au-historico hero-doc-card" data-doc-kind="'+esc(d.k||'outro')+'">'+cabecalhoDoc(d,true)+
+ '<details class="au-it hero-doc-history"><summary><span>Inteiro teor</span><span class="au-st" title="Registro da ficha; documento ainda não localizado na cronologia">Histórico · a localizar</span></summary><div class="au-tx">'+(texto||'<p class="muted">Sem trecho histórico registrado.</p>')+'<small class="muted">Inteiro teor ainda não localizado na cronologia lida.</small></div></details></div>';
 }
 function historicoDocsFicha(){
  var gb=GB(),sig=window.MutaSigilo;if(!gb.gravado||sig&&(sig.bloqueado()||sig.sigiloso()))return '';
@@ -680,14 +686,16 @@ function htmlDocs(pecas) {
   var L = ok ? lista() : [], P = ok ? principais() : [], H=historicosIntegrados(L), C=cronologiaIntegrada(L,H), HP=H.filter(function(d){return PRINC[d.k]&&d.k!=='intimacao';}), HO=H.filter(function(d){return !PRINC[d.k]||d.k==='intimacao';});
   var nSel = ok ? marcados().length : 0;
   var lidos = Object.keys(A.docs).filter(function (k) { return /^(ok|sem)$/.test(A.docs[k].estado); }).length;
-  var cab = '<div class="pc-sh hero-doc-panel-head"><div><small class="hero-doc-kicker">ACERVO DOCUMENTAL</small><h3>Peças e documentos</h3></div><small class="muted">' + (ok ? C.length + ' na cronologia · ' + lidos + ' leituras concluídas' : 'da ficha do processo') + '</small></div>';
+  var cab = '<div class="pc-sh hero-doc-panel-head"><h3>Peças e documentos</h3><small class="muted hero-doc-count">' + (ok ? C.length + ' na cronologia · ' + lidos + ' leituras concluídas' : 'da ficha do processo') + '</small></div>';
   var filtroFuncional=ok&&GB().classificacaoFiltro?GB().classificacaoFiltro(L.filter(function(d){return !docBloq(d);})) : '';
   var seg = ok ? '<div class="au-doc-toolbar"><div class="au-fx"><span class="seg"><button type="button" data-au="f:pecas" aria-selected="' + (F === 'pecas') + '" title="Documentos principais identificados na cronologia e registros históricos correspondentes" >Peças principais (' + (P.length+HP.length) + ')</button><button type="button" data-au="f:todos" aria-selected="' + (F === 'todos') + '" title="A cronologia inteira do PJe, do mais recente ao mais antigo">Cronologia (' + C.length + ')</button></span>' +
     '<button type="button" class="btn line sm au-js" data-au="tudojs"' + (A.todo ? ' disabled' : '') + ' title="Lê o texto de todos os documentos (PDF digitalizado vai ao OCR) e baixa num arquivo JSON, no formato do acervo" aria-label="Baixar o inteiro teor em JSON">' + SVGDL + (A.todo ? A.todo.feitos + '/' + A.todo.total : 'JSON') + '</button></div>' +
     filtroFuncional+'<div class="au-gv"><span class="muted">Marcar: <button type="button" class="lnk" data-au="sel:principais">principais</button> · <button type="button" class="lnk" data-au="sel:todos">todos</button> · <button type="button" class="lnk" data-au="sel:nenhum">nenhum</button></span>' +
     '<button type="button" class="btn solid sm" data-au="gravar"' + (A.grav || !nSel ? ' disabled' : '') + ' title="Registra os marcados na ficha (Outras peças) e grava o inteiro teor de cada um no acervo">' + (A.grav ? (A.grav.fase === 'lendo' ? 'Lendo ' + A.grav.feitos + '/' + A.grav.total + '…' : 'Gravando…') : 'Gravar ' + nSel + ' na ficha') + '</button></div></div>' +
     (A.gravMsg ? '<p class="status' + (/Não gravou/.test(A.gravMsg) ? ' err' : ' ok') + '">' + esc(A.gravMsg) + '</p>' : '') : '';
-  var tabs=hero?'<div class="seg hero-doc-tabs" role="tablist" aria-label="Conteúdo documental"><button type="button" role="tab" data-au="docaba:docs" aria-selected="'+(!ficha)+'">Documentos</button><button type="button" role="tab" data-au="docaba:ficha" aria-selected="'+ficha+'">Dados da ficha</button></div>':'';
+  var tabs=hero?'<div class="seg hero-doc-tabs" role="tablist" aria-label="Conteúdo documental"><button type="button" role="tab" data-au="docaba:docs" aria-selected="'+(!ficha)+'">Documentos</button><button type="button" role="tab" data-au="docaba:ficha" aria-selected="'+ficha+'">Dados</button></div>':'';
+  if(hero)cab='<div class="pc-sh hero-doc-panel-head"><h3>Peças e documentos</h3>'+tabs+'</div>';
+  if(hero&&!ok)seg='<div class="au-doc-toolbar"><div class="au-fx"><span class="seg"><button type="button" data-au="f:pecas" aria-selected="'+(F==='pecas')+'">Peças principais ('+HP.length+')</button><button type="button" data-au="f:todos" aria-selected="'+(F==='todos')+'">Cronologia ('+C.length+')</button></span></div></div>';
   var corpo;
   if(hero){var vis=F==='todos'?C:cronologiaIntegrada(P,HP);corpo=ficha?gr:'<div class="au-docs hero-doc-list">'+(vis.map(linhaHistorica).join('')||'<p class="muted au-nl">Nenhum documento disponível nesta visualização.</p>')+'</div>';}
   else if (F === 'todos') corpo = '<div class="au-docs">' + C.map(linhaHistorica).join('') + '</div>';
@@ -697,7 +705,7 @@ function htmlDocs(pecas) {
   }
   if(!hero&&F!=='todos'&&HO.length)corpo+='<details class="pc-s" open><summary><b>Outros documentos ('+HO.length+')</b></summary><div class="au-docs">'+cronologiaIntegrada([],HO).map(linhaHistorica).join('')+'</div></details>';
   var aviso = A.itens && !lidoDoProcesso() ? '<p class="status err">Os autos lidos são de outro processo (' + esc(A.cnj || 'sem número') + ').</p>' : !A.itens ? '<p class="muted au-nl">Leia os autos para ver os documentos de cada peça.</p>' : '';
-  return '<section class="card pc-sec pecas hero-doc-panel" id="g-docs">' + cab + tabs + (ficha?'':seg) + (A.msg ? '<p class="status ok">' + esc(A.msg) + '</p>' : '') + (ficha?'':aviso) + '<div class="hero-doc-panel-body">'+corpo+'</div></section>';
+  return '<section class="card pc-sec pecas hero-doc-panel" id="g-docs">' + cab + (ficha?'':seg) + (A.msg ? '<p class="status ok">' + esc(A.msg) + '</p>' : '') + (ficha?'':aviso) + '<div class="hero-doc-panel-body'+(ficha?' hero-doc-data':'')+'">'+corpo+'</div></section>';
 }
 function idSet(v){return String(v||'').match(/\b\d{6,}\b/g)||[];}
 function idsTabela(L){return Array.from(new Set((Array.isArray(L)?L:[]).reduce(function(a,r){return a.concat(idSet(r.id||r.ids||''));},[]))).sort();}
