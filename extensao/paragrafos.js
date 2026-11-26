@@ -23,7 +23,7 @@ function filtrados() {
     if (P.cat && p.cat.split(' › ')[0] !== P.cat) return false;
     if (!t.length) return true;
     var h = N(p.cat + ' ' + p.titulo + ' ' + p.texto);
-    return t.every(function (w) { return h.indexOf(w) >= 0; });
+    return window.MutaEmentario&&window.MutaEmentario.matches?window.MutaEmentario.matches(P.q,h):t.every(function (w) { return h.indexOf(w) >= 0; });
   });
   return FT.rank(L,P.modo,function(p){return [p.cat,p.titulo,p.texto].join(' ');});
 }
@@ -40,15 +40,16 @@ function render() {
     FT.scopeHTML(P.modo)+'<p class="muted pp-n">' + L.length + ' de ' + P.lista.length + ' parágrafos · as partes destacadas são vagas a preencher</p></div>' +
     ordem.map(function (c) {
       return '<h4 class="tr-g">' + esc(c) + ' <small class="muted">' + grupos[c].length + '</small></h4>' + grupos[c].map(function (p) {
-        return '<article class="pp-i"><div class="pp-h"><b>' + esc(p.titulo) + '</b><span class="pp-ac"><button type="button" class="btn solid sm" data-ins="' + esc(p.id) + '" title="Inserir no editor do PJe, na posição do cursor">Inserir</button><button type="button" class="btn line sm" data-cp="' + esc(p.id) + '">Copiar</button></span></div><p class="pp-t">' + comVagas(p.texto) + '</p></article>';
+        return '<article class="pp-i hero-rep-card hero-rep-para" data-pp-id="'+esc(p.id)+'"><div class="pp-h hero-rep-card-head"><b>' + esc(p.titulo) + '</b><span class="pp-ac"><button type="button" class="btn solid sm" data-ins="' + esc(p.id) + '" title="Inserir no editor do PJe, na posição do cursor">Inserir</button><button type="button" class="btn line sm" data-cp="' + esc(p.id) + '">Copiar</button></span></div><p class="hero-rep-preview">'+esc(String(p.texto||'').slice(0,180))+(String(p.texto||'').length>180?'…':'')+'</p><details class="hero-rep-details"><summary>Ver conteúdo</summary><p class="pp-t">' + comVagas(p.texto) + '</p></details></article>';
       }).join('');
     }).join('') + (L.length ? '' : '<div class="empty">Nenhum parágrafo com esses termos.</div>');
+  caixa.querySelectorAll('[data-pp-id]').forEach(function(c){var x=L.find(function(p){return String(p.id)===c.dataset.ppId;});if(x)c.querySelector('.pp-ac').append(FT.botaoMaterial({tipo:'Parágrafo',id:x.id,titulo:x.titulo,texto:paraCopiar(x.texto)}));});FT.pintarTabs();
   if (foco) { var q = $('pp-q'); q.focus(); q.setSelectionRange(q.value.length, q.value.length); }
 }
 var tq = 0;
 if (caixa) {
-  caixa.addEventListener('input', function (e) { if (e.target.id !== 'pp-q') return; clearTimeout(tq); tq = setTimeout(function () { P.q = e.target.value; render(); }, 250); });
-  caixa.addEventListener('change', function (e) { if(e.target.hasAttribute('data-rep-scope')){P.modo=e.target.value;render();return;} if (e.target.id === 'pp-cat') { P.cat = e.target.value; render(); } });
+  caixa.addEventListener('input', function (e) { if (e.target.id !== 'pp-q') return; clearTimeout(tq); tq = setTimeout(function () { P.q = e.target.value;FT.atualizarPesquisa({q:P.q}); render(); }, 250); });
+  caixa.addEventListener('change', function (e) { if(e.target.hasAttribute('data-rep-scope')){P.modo=e.target.value;FT.atualizarPesquisa({modo:P.modo});render();return;} if (e.target.id === 'pp-cat') { P.cat = e.target.value; render(); } });
   caixa.addEventListener('click', function (e) {
     if(e.target.closest('[data-rep-read]')){FT.lerEditor().then(render,function(err){var b=e.target.closest('[data-rep-read]');if(b)b.title=err.message;});return;}
     var bi = e.target.closest('[data-ins]');
@@ -65,5 +66,5 @@ if (caixa) {
     (navigator.clipboard ? navigator.clipboard.writeText(paraCopiar(p.texto)) : Promise.reject()).then(function () { b.textContent = 'Copiado'; setTimeout(function () { b.textContent = 'Copiar'; }, 1200); }, function () {});
   });
 }
-window.MutaParagrafos = { abrir: function () { render(); carregar().then(render); } };
+window.MutaParagrafos = { abrir: function () {var s=FT.estadoPesquisa();P.q=s.q;P.modo=s.modo;render(); carregar().then(render); } };
 })();

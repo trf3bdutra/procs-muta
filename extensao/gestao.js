@@ -76,14 +76,14 @@
     var u = quem().usuario, minha = norm(t.assignee) === norm(u), criei = norm(t.creator) === norm(u);
     var venc = t.stage !== 'done' && t.dueDate && t.dueDate < hoje();
     var desc = String(t.description || ''), longa = desc.length > 220, ab = D.abertos[t.id];
-    return '<article class="gx-it' + (venc ? ' venc' : '') + (t.stage === 'done' ? ' feita' : '') + '" data-id="' + esc(t.id) + '">' +
+    return '<article class="gx-it hero-gx-row' + (venc ? ' venc' : '') + (t.stage === 'done' ? ' feita' : '') + '" data-id="' + esc(t.id) + '" data-stage="'+esc(t.stage||'todo')+'">' +
       '<div class="gx-h"><b class="gx-t">' + esc(t.title || 'Diligência') + '</b>' +
       (t.urgency && t.urgency !== 'Média' ? '<span class="gx-c u-' + esc(norm(t.urgency)) + '">' + esc(t.urgency) + '</span>' : '') +
       (t.dueDate ? '<span class="gx-c' + (venc ? ' venc' : '') + '" title="Prazo">até ' + esc(data(t.dueDate)) + '</span>' : '') + '</div>' +
       '<p class="gx-m">' + [t.assignee ? 'Para <b>' + esc(t.assignee) + '</b>' : 'Sem destinatário', t.creator ? 'de ' + esc(t.creator) : '', t.numero ? copiaBtn(t.numero) : '', t.sessao ? 'sessão de ' + esc(data(t.sessao)) : ''].filter(Boolean).join(' · ') + '</p>' +
       (desc ? '<p class="gx-tx">' + esc(longa && !ab ? desc.slice(0, 220) + '…' : desc) + (longa ? ' <button type="button" class="lnk" data-gx-mais="' + esc(t.id) + '">' + (ab ? 'menos' : 'ler tudo') + '</button>' : '') + '</p>' : '') +
       (t.resposta ? '<p class="gx-ob">Resposta' + (t.respondidoPor ? ' de ' + esc(t.respondidoPor) : '') + ': ' + esc(t.resposta) + '</p>' : '') +
-      '<div class="gx-ac"><label class="gx-et">Etapa <select data-gx-etapa="' + esc(t.id) + '">' + ETAPAS.map(function (e) { return '<option value="' + e[0] + '"' + (e[0] === (t.stage || 'todo') ? ' selected' : '') + '>' + e[1] + '</option>'; }).join('') + '</select></label>' +
+      '<div class="gx-ac hero-gx-state"><label class="gx-et">Etapa <select data-gx-etapa="' + esc(t.id) + '">' + ETAPAS.map(function (e) { return '<option value="' + e[0] + '"' + (e[0] === (t.stage || 'todo') ? ' selected' : '') + '>' + e[1] + '</option>'; }).join('') + '</select></label>' +
       '<span class="gx-bt">' + (minha && t.stage !== 'done' ? '<button type="button" class="lnk" data-gx-dr="' + esc(t.id) + '">responder</button>' : '') + '<button type="button" class="lnk" data-gx-ed="' + esc(t.id) + '">editar</button>' + (criei ? '<button type="button" class="lnk gx-del" data-gx-exc="' + esc(t.id) + '">excluir</button>' : '') + '</span>' +
       '<small class="muted">' + esc(diaMes(t.atualizadoEm || t.criadoEm)) + (t.atualizadoPor ? ' · ' + esc(t.atualizadoPor) : '') + '</small></div>' +
       (D.exc[t.id] ? '<div class="gx-ac gx-cf"><span>Excluir a diligência "' + esc(t.title || '') + '"? Ela sai do quadro da equipe.</span><span><button type="button" class="lnk" data-gx-exc="' + esc(t.id) + '">cancelar</button><button type="button" class="btn solid sm" data-gx-excok="' + esc(t.id) + '">Excluir</button></span></div>' : '') +
@@ -232,6 +232,7 @@
       '<p class="gx-m">' + [copiaBtn(s.numero), s.sessao ? 'sessão de ' + esc(data(s.sessao)) : '', s.em ? 'recebido em ' + esc(diaMes(s.em)) : ''].filter(Boolean).join(' · ') + '</p>' +
       ((s.advogado || s.parte) ? '<p class="gx-tx">' + [s.advogado ? esc(s.advogado) + (s.oab ? ' (OAB ' + esc(s.oab) + ')' : '') : '', s.parte ? 'por ' + esc(s.parte) : ''].filter(Boolean).join(', ') + '</p>' : '') + '</article>';
   }
+  function grupoDel(t,L,fn,empty,tone){return '<section class="hero-gx-group" data-tone="'+esc(tone||'neutro')+'"><header><b>'+esc(t)+'</b><small>'+L.length+'</small></header>'+(L.length?L.map(fn).join(''):'<p class="muted gx-v">'+esc(empty)+'</p>')+'</section>';}
   function pintarDel() {
     var c = $('del-app'); if (!c) return;
     var q = quem();
@@ -239,10 +240,10 @@
     var L = listas();
     var tab = function (k, r, d) { return '<button type="button" role="tab" data-gx-a="' + k + '" aria-selected="' + (X.aba === k) + '" title="' + esc(d) + '">' + r + ' <i' + (k === 'as' && nUrg ? ' class="gx-iu"' : '') + '>' + (L[k].length+(k==='as'?L.urg.length:0)) + '</i></button>'; };
     var nUrg = L.as.filter(function (a) { return a.urg; }).length;
-    var corpo = X.aba === 'as' ? ('<h4 class="hero-v53-page-title">Aguardando assinatura · '+L.as.length+'</h4>'+(L.as.length?L.as.map(itemAs).join(''):'<p class="muted gx-v">Nenhuma decisão urgente submetida à assinatura.</p>')+'<h4 class="hero-v53-page-title">Demais urgências em aberto · '+L.urg.length+'</h4>'+(L.urg.length?L.urg.map(itemUrg).join(''):'<p class="muted gx-v">Nenhuma outra urgência em aberto.</p>'))
-      : X.aba === 'pe' ? (L.pe.length ? L.pe.map(itemPe).join('') : '<p class="muted gx-v">Nenhum pedido de retirada ou de adiamento em aberto.</p>')
-      : X.aba === 'so' ? (L.so.length ? L.so.map(itemSo).join('') : '<p class="muted gx-v">Nenhum pedido de sustentação oral ou de preferência recebido para as próximas sessões.</p>')
-      : (L.du.length ? L.du.map(itemDu).join('') : '<p class="muted gx-v">Nenhuma dúvida em aberto dirigida a você.</p>');
+    var corpo = X.aba==='as'?grupoDel('Aguardando assinatura',L.as,itemAs,'Nenhuma decisão urgente submetida à assinatura.','urgente')+grupoDel('Demais urgências em aberto',L.urg,itemUrg,'Nenhuma outra urgência em aberto.','urgente'):
+      X.aba==='pe'?grupoDel('Retiradas de pauta',L.pe.filter(function(x){return x.tipo==='retirada';}),itemPe,'Nenhum pedido em aberto.','pendente')+grupoDel('Adiamentos',L.pe.filter(function(x){return x.tipo!=='retirada';}),itemPe,'Nenhum pedido em aberto.','pendente'):
+      X.aba==='so'?grupoDel('Sustentações e preferências',L.so,itemSo,'Nenhum pedido recebido.','sessao'):
+      grupoDel('Dúvidas em aberto',L.du,itemDu,'Nenhuma dúvida em aberto dirigida a você.','pendente');
     c.innerHTML = '<div class="gx-top"><div><b>Deliberações</b><small class="muted">o que aguarda decisão' + (X.dados && X.dados.hoje ? ' · ' + esc(data(X.dados.hoje)) : '') + '</small></div>' +
       '<span><button type="button" class="lnk" data-gx="ler-del">' + (X.lendo ? 'lendo…' : 'atualizar') + '</button></span></div>' +
       '<div class="seg pmodos gx-modos" role="tablist" aria-label="Tipo de deliberação">' + tab('as', 'Urgências', 'Urgências em aberto, separadas das decisões prontas para assinatura') + tab('du', 'Dúvidas', 'dúvidas da equipe') + tab('pe', 'Pauta', 'pedidos de retirada e de adiamento') + tab('so', 'Sustentações', 'pedidos de sustentação e preferência') + '</div>' +
