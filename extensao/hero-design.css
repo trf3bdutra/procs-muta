@@ -215,12 +215,8 @@ html body.hero-redesign-v53 .layout>aside>.nav>#pv-nav-main .nav-text b{font:500
  html body.hero-redesign-v53 #topo-u>.tu-gestao>button .nav-text b{font-size:9.5px!important}
 }
 
-/* Navegação: gestão com abas brancas; rodapé com o mesmo creme claro do Repertório. */
+/* Navegação: gestão preserva o estilo anterior; rodapé creme claro. */
 html body.hero-redesign-v53{--hero-nav-subtabs:color-mix(in srgb,var(--hero-nav-cream,var(--cmt-beige)) 48%,var(--hero-nav-white,var(--cmt-paper)))}
-html body.hero-redesign-v53 #topo-u>.tu-gestao>button:not([hidden]),
-html body.hero-redesign-v53 #topo-u>.tu-gestao>button[aria-selected=true]:not([hidden]){
- background:var(--hero-nav-white,var(--cmt-paper))!important
-}
 html body.hero-redesign-v53 .layout>aside,
 html body.hero-redesign-v53 .layout>aside>.nav,
 html body.hero-redesign-v53 .layout>aside>.nav>#pv-nav-main,
@@ -228,3 +224,31 @@ html body.hero-redesign-v53 .layout>aside>.nav>#pv-nav-main>button:not([hidden])
 html body.hero-redesign-v53 .layout>aside>.nav>#pv-nav-main>button[aria-selected=true]:not([hidden]){
  background:var(--hero-nav-subtabs)!important
 }
+
+/* Gestão: papel branco na tela, não nos botões; mesma composição para as três áreas. */
+html body.hero-redesign-v53:has(:is(#panel-dil,#panel-del,#panel-urg):not([hidden])){
+ --hero-management-paper:var(--hero-nav-white,#fff);
+}
+html body.hero-redesign-v53:has(:is(#panel-dil,#panel-del,#panel-urg):not([hidden])) :is(.layout,main),
+html body.hero-redesign-v53 :is(#panel-dil,#panel-del,#panel-urg):not([hidden]),
+html body.hero-redesign-v53 :is(#panel-dil,#panel-del,#panel-urg) :is(.wrap,.gx-app,.hero-cmt-gestion,.gx-top,.gx-it,.hero-gx-group,.gx-fase){
+ background:var(--hero-management-paper,var(--hero-nav-white,#fff))!important;
+}
+html body.hero-redesign-v53 :is(#dil-app,#del-app,#urg-app) .hero-cmt-gestion{
+ display:grid;gap:0;padding:0!important;margin:0 0 8px!important;border:1px solid var(--cmt-line)!important;border-radius:4px!important;overflow:hidden;box-shadow:none!important
+}
+html body.hero-redesign-v53 :is(#dil-app,#del-app,#urg-app) .hero-cmt-gestion>.gx-top{
+ display:flex;align-items:center;justify-content:space-between;gap:6px;padding:6px 8px!important;margin:0!important;border:0!important;border-bottom:1px solid var(--cmt-line)!important;border-radius:0!important;box-shadow:none!important
+}
+html body.hero-redesign-v53 :is(#dil-app,#del-app,#urg-app) .hero-cmt-gestion>.gx-top b{font-size:12px!important}
+html body.hero-redesign-v53 :is(#dil-app,#del-app,#urg-app) .hero-cmt-gestion>.gx-top small{font-size:10px!important}
+html body.hero-redesign-v53 :is(#dil-app,#del-app,#urg-app) .hero-cmt-gestion-metrics{display:flex;flex-wrap:wrap;gap:0;border:0;border-radius:0}
+html body.hero-redesign-v53 :is(#dil-app,#del-app,#urg-app) .hero-cmt-gestion-metrics>div{flex:1 1 65px;min-width:0;min-height:0;padding:7px 6px!important;gap:3px;box-shadow:none;border-bottom:0}
+html body.hero-redesign-v53 :is(#dil-app,#del-app,#urg-app) .hero-cmt-gestion-metrics>div:last-child{border-inline-end:0}
+html body.hero-redesign-v53 :is(#dil-app,#del-app,#urg-app) .hero-cmt-gestion-metrics b{font-size:16px;color:var(--stage,var(--cmt-blue))}
+html body.hero-redesign-v53 :is(#dil-app,#del-app,#urg-app) .hero-cmt-gestion-filters{padding:6px 8px;margin:0;border-top:1px solid var(--cmt-line)}
+html body.hero-redesign-v53 :is(#dil-app,#del-app,#urg-app) :is(.gx-fase,.hero-gx-group){border:1px solid var(--cmt-line)!important;border-radius:4px!important;margin:0 0 7px!important;overflow:hidden}
+html body.hero-redesign-v53 :is(#dil-app,#del-app,#urg-app) :is(.gx-fase>summary,.hero-gx-group>header){display:flex;justify-content:space-between;align-items:center;gap:6px;padding:6px 8px!important;background:var(--hero-nav-subtabs)!important;border:0!important;border-bottom:1px solid var(--cmt-line)!important;font-size:11px!important}
+html body.hero-redesign-v53 :is(#dil-app,#del-app,#urg-app) .gx-it{padding:7px 8px!important;margin:0!important;border-radius:0!important;box-shadow:none!important}
+html body.hero-redesign-v53 #urg-app .gx-nav-action{display:inline-grid;place-items:center;width:27px;height:27px;padding:0;border:1px solid var(--cmt-line);border-radius:4px;background:transparent;color:var(--cmt-ink);cursor:pointer}
+html body.hero-redesign-v53 #urg-app .gx-nav-action:disabled{opacity:.45;cursor:default}
