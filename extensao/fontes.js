@@ -38,7 +38,8 @@ function secoesDeTexto(t) {
 }
 /* Pesquisa por escopo: sem misturar ficha e editor. */
 var STOP=new Set('para pelo pela pelos pelas sobre entre contra quando sendo apenas caso parte partes artigo artigos processo recurso pedido decisao autos tema temas uniao federal inss direito direitos conforme forma razao termos prazo ainda tambem assim desde mesmo outros outras deste desta nesse nessa neste nesta quanto quais juizo autora autor apelante apelado recorrente recorrido julgado julgada provimento tribunal relator relatorio voto ementa acordao'.split(' '));
-function tokens(v){return Array.from(new Set(String(v||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().split(/[^a-z0-9]+/).filter(function(w){return w.length>=5&&!STOP.has(w)&&!/^\d+$/.test(w);})));}
+var SIGLAS=new Set('icms ipi irpj csll pis loas bpc rgps rpps dpu mpf ctn cpc clt fgts irrf'.split(' '));
+function tokens(v){return Array.from(new Set(String(v||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().split(/[^a-z0-9]+/).filter(function(w){return (w.length>=5||SIGLAS.has(w))&&!STOP.has(w)&&!/^\d+$/.test(w);})));}
 function contextoCaso(){var g=window.MutaGabinete,k=g&&g.casoPrec&&g.casoPrec();return k&&k.pronto?k:null;}
 function fontesContexto(modo,questao){
  var k=contextoCaso(),e=window.MutaEditor&&window.MutaEditor.estado();if(!k)return [];
@@ -51,13 +52,13 @@ function contexto(modo){return fontesContexto(modo).map(function(x){return x.tex
 function referencias(v){var t=String(v||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase(),m,L=new Set(),re=/\b(tema|sumula)\s*(?:n[.º°o]*\s*)?(\d{1,5})\b/g;while((m=re.exec(t)))L.add(m[1]+' '+m[2]);return Array.from(L);}
 function rankDetalhado(L,modo,extrair,questao){
  if(modo==='todos')return L.map(function(x){return {x:x,score:0,termos:[],fontes:[],referencias:[]};});
- var F=fontesContexto(modo,questao),weights=new Map(),refs=new Set();F.forEach(function(x){tokens(x.texto).forEach(function(t){weights.set(t,Math.max(weights.get(t)||0,x.peso));});referencias(x.texto).forEach(function(t){refs.add(t);});});
+ var F=fontesContexto(modo,questao).map(function(x){return {nome:x.nome,peso:x.peso,ts:new Set(tokens(x.texto)),rs:new Set(referencias(x.texto))};}),weights=new Map(),refs=new Set();F.forEach(function(x){x.ts.forEach(function(t){weights.set(t,Math.max(weights.get(t)||0,x.peso));});x.rs.forEach(function(t){refs.add(t);});});
  if(!weights.size&&!refs.size)return [];
  var N=L.length,freq=new Map(),A=[];
  L.forEach(function(x,i){var tx=extrair(x),ts=tokens(tx),hit=ts.filter(function(w){return weights.has(w);}),rr=referencias(tx).filter(function(w){return refs.has(w);});if(!rr.length&&hit.length<Math.min(2,Math.max(1,weights.size)))return;
  hit.forEach(function(w){freq.set(w,(freq.get(w)||0)+1);});A.push({x:x,i:i,hit:hit,rr:rr,n:ts.length});});
  return A.map(function(a){var score=a.hit.reduce(function(n,w){return n+weights.get(w)*(1+Math.log((N+1)/(1+freq.get(w))));},0)/Math.sqrt(Math.max(1,a.n))+a.rr.length*12;
- var nomes=F.filter(function(f){return tokens(f.texto).some(function(w){return a.hit.includes(w);})||referencias(f.texto).some(function(w){return a.rr.includes(w);});}).map(function(f){return f.nome;});
+ var nomes=F.filter(function(f){return a.hit.some(function(w){return f.ts.has(w);})||a.rr.some(function(w){return f.rs.has(w);});}).map(function(f){return f.nome;});
  return {x:a.x,i:a.i,score:score,termos:a.hit.slice(0,8),fontes:nomes,referencias:a.rr};}).sort(function(a,b){return b.score-a.score||a.i-b.i;});
 }
 function rank(L,modo,extrair){return rankDetalhado(L,modo,extrair).map(function(a){return a.x;});}
