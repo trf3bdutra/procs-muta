@@ -555,7 +555,8 @@
    },
    "ajustes": [],
    "pendencias": [
-    "[VALIDAR] ID da apelação (juntada como petição intercorrente)"
+    "[VALIDAR] ID da apelação (juntada como petição intercorrente)",
+    "[PRONTIDÃO] apelação não localizada pelo tipo do documento: conferir recurso e contrarrazões"
    ],
    "minuta": false
   },
@@ -877,7 +878,8 @@
    },
    "ajustes": [],
    "pendencias": [
-    "[VALIDAR] contrarrazões do Município não localizadas"
+    "[VALIDAR] contrarrazões do Município não localizadas",
+    "[PRONTIDÃO] sem contrarrazões nem certidão de decurso após a apelação (ID 317374450)"
    ],
    "minuta": false
   },
