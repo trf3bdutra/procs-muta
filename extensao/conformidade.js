@@ -61,6 +61,19 @@ function itemHtml(x) {
     (x.sec ? '<span class="cf-pos">' + esc(SECN[x.sec] || x.sec) + (x.par != null ? ' · § ' + (x.par + 1) : '') + '</span>' : '') + '</div>' +
     '<p>' + esc(x.msg) + '</p>' + trecho(x.trecho) + (x.sug ? '<p class="cf-sug">Sugestão: <b>' + esc(x.sug) + '</b></p>' : '') + '</li>';
 }
+function matrizHtml(lista,total){
+  var rows=lista.map(function(x){
+    var pos=x.sec?(SECN[x.sec]||x.sec):'Geral';
+    var grau=SEVR[x.sev]||'Não informado';
+    var sev=/^(alta|media|baixa)$/.test(x.sev)?x.sev:'';
+    var regra=x.regra?'<small class="cf-matrix-rule">'+esc(x.regra)+'</small>':'';
+    return '<tr data-sev="'+sev+'"><td><b>'+esc(pos)+'</b>'+(x.par!=null?'<small class="cf-matrix-pos">§ '+(Number(x.par)+1)+'</small>':'')+'</td>'+
+      '<td><span class="cf-matrix-problem">'+esc(x.msg||'')+'</span>'+regra+(x.trecho?'<details class="cf-matrix-evidence"><summary>Trecho</summary>'+trecho(x.trecho)+'</details>':'')+'</td>'+
+      '<td>'+(x.sug?'<span class="cf-matrix-sug">'+esc(x.sug)+'</span>':'<small class="cf-matrix-none">Sem sugestão específica</small>')+'</td>'+
+      '<td><span class="cf-matrix-kind">'+esc(x.grupo||'Geral')+'</span><span class="cf-matrix-sev" data-sev="'+sev+'">'+esc(grau)+'</span></td></tr>';
+  }).join('');
+  return '<section class="cf-matrix"><div class="cf-matrix-head"><h3>Matriz de ajustes</h3><small>'+lista.length+(lista.length===1?' apontamento':' apontamentos')+(lista.length!==total?' de '+total:'')+'</small></div><div class="cf-matrix-scroll"><table class="cf-matrix-table" aria-label="Matriz de ajustes da conformidade"><colgroup><col style="width:17%"><col style="width:39%"><col style="width:26%"><col style="width:18%"></colgroup><thead><tr><th scope="col">Local</th><th scope="col">Problema</th><th scope="col">Correção</th><th scope="col">Natureza</th></tr></thead><tbody>'+rows+'</tbody></table></div></section>';
+}
 function render() {
   if (!caixa || !aberta()) return;
   var E = ED.estado(), r = K.r, y = $('panel-conf').scrollTop;
@@ -81,12 +94,13 @@ function render() {
     '</div></div>';
   var filtros = '<div class="seg cf-grupos"><button type="button" data-g="" aria-selected="' + !K.grupo + '">Todos · ' + r.itens.length + '</button>' +
     Object.keys(grupos).map(function (gq) { return '<button type="button" data-g="' + esc(gq) + '" aria-selected="' + (K.grupo === gq) + '">' + esc(gq) + ' · ' + grupos[gq] + '</button>'; }).join('') + '</div>';
-  var corpoCf = resumo + (r.itens.length ? '<ul class="cf-lista">' + r.itens.map(itemHtml).join('') + '</ul>' : '<div class="empty"><h3>Nada a apontar</h3></div>');
+  var hero=document.body.classList.contains('hero-redesign-v53');
+  var corpoCf = resumo + (r.itens.length ? (hero?matrizHtml(r.itens,r.itens.length):'<ul class="cf-lista">' + r.itens.map(itemHtml).join('') + '</ul>') : '<div class="empty"><h3>Nada a apontar</h3></div>');
   if (window.MutaJanela) window.MutaJanela.atualizar('conformidade', 'Conformidade da minuta', corpoCf);
   K.cheia = corpoCf;
   /* 0.45: a comparação com a minuta-matriz do processo mora aqui (saiu da aba Comparar) */
   var mxh = ''; try { mxh = window.MutaComparar && window.MutaComparar.estruturaConformidade ? window.MutaComparar.estruturaConformidade(render) : ''; } catch (e) {}
-  caixa.innerHTML = topo + resumo + mxh + (r.itens.length ? filtros + '<ul class="cf-lista">' + lista.map(itemHtml).join('') + '</ul>' : '<div class="empty"><h3>Nada a apontar</h3>A minuta segue a estrutura e as regras conferidas. Confira os autos antes de liberar.</div>') ;
+  caixa.innerHTML = topo + resumo + mxh + (r.itens.length ? filtros + (hero?matrizHtml(lista,r.itens.length):'<ul class="cf-lista">' + lista.map(itemHtml).join('') + '</ul>') : '<div class="empty"><h3>Nada a apontar</h3>A minuta segue a estrutura e as regras conferidas. Confira os autos antes de liberar.</div>') ;
   $('panel-conf').scrollTop = y;
 }
 function relatorioTexto() {

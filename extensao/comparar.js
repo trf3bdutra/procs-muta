@@ -99,7 +99,8 @@ function editorCaixa(E, n, P) {
       /* negrito e itálico do editor: o trecho marcado quando o leitor trouxe; senão, o parágrafo todo quando quase todo marcado */
       var h = p.h ? String(p.h).replace(/<(?!\/?(b|i|u)>|br>)[^>]*>/g, '') : esc(p.t);
       if (!p.h && p.neg > 0.8) h = '<b>' + h + '</b>'; if (!p.h && p.ita > 0.8) h = '<i>' + h + '</i>';
-      return '<p' + (p.cita ? ' class="cita"' : p.recuo > 20 ? ' class="rec"' : /center/.test(p.alinha || '') ? ' class="cen"' : '') + '>' + h + '</p>'; }).join('') : '<p class="muted">Abra a tarefa da minuta no PJe e clique em Ler o editor.</p>') + '</div>' +
+      var titulo=/^(relat[óo]rio|voto|e\s*m\s*e\s*n\s*t\s*a|ac[óo]rd[ãa]o)\.?$/i.test(String(p.t||'').trim());
+      return '<p' + (titulo?' class="hero-editorial-heading"':p.cita ? ' class="cita"' : p.recuo > 20 ? ' class="rec"' : /center/.test(p.alinha || '') ? ' class="cen"' : '') + '>' + h + '</p>'; }).join('') : '<p class="muted">Abra a tarefa da minuta no PJe e clique em Ler o editor.</p>') + '</div>' +
       '<details class="cp-colar"' + (E.colado ? ' open' : '') + '><summary>Colar o texto em vez de ler</summary><textarea data-c="colarEd" placeholder="Cole aqui a minuta do editor do PJe">' + (E.colado ? esc(E.texto) : '') + '</textarea></details>' : '') +
     '</section>';
 }
@@ -434,14 +435,14 @@ function render() {
       var it=itemAtual(),ref=document.createElement('section');ref.className='card hero-v53-ref';
       var head=document.createElement('header');head.className='hero-review-ref-head';var h=document.createElement('h4');h.className='hero-v53-page-title';h.textContent='Texto de referência';var meta=document.createElement('small');meta.className='muted';meta.textContent=it?String(it.rotulo||it.titulo||it.title||it.nome||'Referência selecionada'):'Nenhuma referência selecionada';head.append(h,meta);ref.append(head);
       if(C.fonte==='colar'){var ta=pick.querySelector('textarea');if(ta)ref.append(ta);}
-      else{var tx=document.createElement('div');tx.className='hero-v53-ref-text tx-j';var bs=it?blocosFonte(it):[];bs.forEach(function(b){var p=document.createElement(b.h?'h4':'p');p.textContent=String(b.h||b.p||'');tx.append(p);});if(!bs.length)tx.textContent='Selecione um modelo ou precedente.';ref.append(tx);}
+      else{var tx=document.createElement('div');tx.className='hero-v53-ref-text tx-j';tx.setAttribute('lang','pt-BR');var bs=it?blocosFonte(it):[];bs.forEach(function(b){var p=document.createElement(b.h?'h4':'p');p.textContent=String(b.h||b.p||'');tx.append(p);});if(!bs.length)tx.textContent='Selecione um modelo ou precedente.';ref.append(tx);}
       var busca=document.createElement('details');busca.className='hero-v53-ref-search';busca.open=!!C.buscaRefAberta;var sm=document.createElement('summary');sm.textContent='Buscar referência';busca.append(sm,fontesEl,pick);busca.addEventListener('toggle',function(){if(busca.isConnected)C.buscaRefAberta=busca.open;});ref.append(busca);
       var bar=document.createElement('div');bar.className='hero-v53-review-actions';var go=document.createElement('button');go.type='button';go.className='btn solid sm';go.dataset.c='comparar';go.textContent='Comparar textos';go.disabled=!ED.estado().texto||!it;bar.append(go);
       var side=res.querySelector('[data-c="janela"]');if(side)bar.append(side);if(op)bar.append(op);
       var eh=ed.querySelector('.mn-ed-h'),part=eh&&eh.querySelector('.mn-pt'),read=eh&&eh.querySelector('[data-c="ler"]');
       if(read){read.title=read.textContent;read.setAttribute('aria-label',read.textContent);read.textContent='Ler';}
       if(part){var sub=document.createElement('div');sub.className='hero-review-part';var lab=document.createElement('span');lab.textContent='Parte em revisão';sub.append(lab,part);eh.after(sub);}
-      var work=document.createElement('section');work.className='hero-review-workspace';var grid=document.createElement('div');grid.className='hero-review-documents';ed.classList.add('hero-review-document');ref.classList.add('hero-review-document');ed.before(work);
+      var work=document.createElement('section');work.className='hero-review-workspace hero-review-editorial';var grid=document.createElement('div');grid.className='hero-review-documents';ed.classList.add('hero-review-document');ref.classList.add('hero-review-document');var edText=ed.querySelector('.mn-tx');if(edText)edText.setAttribute('lang','pt-BR');ed.before(work);
       var divider=document.createElement('div');divider.className='hero-review-divider';
       var mark=document.createElement('span');mark.className='hero-review-cross';mark.setAttribute('aria-label','Comparação entre os textos');mark.textContent='×';
       divider.append(mark,bar);grid.append(ed,divider,ref);work.append(grid);
