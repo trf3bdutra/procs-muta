@@ -6,7 +6,7 @@
   "arquivo": "acervo/fonte.json",
   "chave": "processo"
  },
- "atualizado_em": "2026-11-26T18:41:34.459Z",
+ "atualizado_em": "2026-11-26T18:59:40.599Z",
  "registros": [
   {
    "processo": "0000008-23.2025.4.03.6000",
@@ -3589,7 +3589,7 @@
     "Responsável": "",
     "Próxima ação": "",
     "Observações": "",
-    "atualizado_em": "2026-11-26T18:14:59Z",
+    "atualizado_em": "2026-11-26T18:59:40.599Z",
     "Sentença - Data": "22/05/2023",
     "Origem - Juízo": "Execução fiscal 0000201-44.2016.4.03.6003 (1ª Vara Federal de Três Lagoas)",
     "Recursos": [
@@ -3613,7 +3613,19 @@
      }
     ],
     "Autos - Extraído em": "2026-11-21",
-    "Autos - Total": "22"
+    "Autos - Total": "22",
+    "Outras peças": [
+     {
+      "tipo": "Decisão",
+      "ids": "295536303",
+      "data": "2024-08-12"
+     },
+     {
+      "tipo": "Petição Inicial (0000201 44.2016.4.03.6003 VOL 001 1.pdf)",
+      "ids": "294067013",
+      "data": "2019-07-18"
+     }
+    ]
    },
    "triagem": {
     "Urgência": "",
@@ -3743,7 +3755,8 @@
     "JULGAMENTO": "",
     "Motivo da remarcação": "",
     "sessoes": []
-   }
+   },
+   "controles": {}
   },
   {
    "processo": "0000205-95.2013.4.03.6000",
