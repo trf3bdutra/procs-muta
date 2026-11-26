@@ -220,3 +220,12 @@ header.amicus-shell .amicus-brand,header#top #marca,header.top.nx .brand.tw{over
 /* Grafismo no fundo. */
 #entrada:not([hidden]),.cmt-entry{background:url("/padrao/loading/grafismo-fundo.svg") 0 0/288px 81px repeat,linear-gradient(120deg,#19452e,#153f3e 55%,#102d39)!important}
 .cmtl-full:before,.cmt-load[data-cmt-loader="legacy"]:before{content:""!important;position:absolute;inset:0!important;z-index:-1;opacity:1!important;background:url("/padrao/loading/grafismo-fundo.svg") 0 0/288px 81px repeat!important;mask-image:none!important;-webkit-mask-image:none!important;pointer-events:none}
+
+/* 26/11/2026 · escolhas do gestor: entrada e login com o grafismo JF verde e azul; carregamento em verde com o grafismo JF
+   em contorno tracejado branco e a logo branca da JF (PNG), sem círculo. Estes fundos substituem o ladrilho do bloco anterior. */
+#entrada:not([hidden]),.cmt-entry{background:linear-gradient(rgba(8,30,24,.34),rgba(8,30,24,.34)),url("/padrao/loading/grafismo-fundo-verde.svg") center/cover no-repeat,#1b4730!important}
+.cmtl-full,.cmt-load[data-cmt-loader="legacy"]{background:radial-gradient(75% 65% at 50% 45%,#23744a,#1d6341 68%,#174f35)!important;border-image:none!important}
+.cmtl-full:before,.cmt-load[data-cmt-loader="legacy"]:before{background:url("/padrao/loading/grafismo-contorno.svg") center/cover no-repeat!important;opacity:.55!important}
+.cmtl-mark .cmtl-brand.cmtl-jfb,.cmt-load[data-cmt-loader="legacy"] .cmt-ld-mk .cmtl-brand.cmtl-jfb{display:block!important;width:96px!important;height:auto!important;background:none!important;border-radius:0!important;box-shadow:none!important;animation:none!important;transform:none!important}
+.cmtl-jfb img{display:block;width:100%;height:auto;pointer-events:none;user-select:none}
+.cmtl-mark,.cmt-load[data-cmt-loader="legacy"] .cmt-ld-mk{border:0!important;width:auto!important;height:auto!important}
