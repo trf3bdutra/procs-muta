@@ -2924,3 +2924,42 @@ html body.hero-redesign-v53 #pauta-app .pa-busca .pa-session-head .pa-sel{flex:1
 html body.hero-redesign-v53 #pauta-app .pa-busca .pa-session-head .pa-sel select{width:100%;min-width:0;max-width:none}
 html body.hero-redesign-v53 #pauta-app .pa-busca .pa-sol-resumo{border:0!important;border-top:1px solid var(--rep-rule)!important;background:transparent!important;border-radius:0!important;padding:6px 9px!important;margin:0!important;font-size:10px!important;gap:3px 6px}
 html body.hero-redesign-v53 #pauta-app .pa-busca .hero-rep-count{padding:6px 9px!important;margin:0!important;border-top:1px solid var(--rep-rule);font-size:10px!important;line-height:1.35;background:transparent!important}
+
+/* Repertório: uma única geometria para Todos, Precedentes, Parágrafos e Modelos.
+   Elimina a centralização e largura intrínseca legadas de .pp-top e margens duplas de .wrap. */
+html body.hero-redesign-v53 :is(#panel-acervo,#panel-par,#panel-modelos)>.wrap{
+ box-sizing:border-box;width:100%;max-width:none!important;margin:0!important;padding:0 9px 62px!important
+}
+html body.hero-redesign-v53 :is(#panel-par,#panel-modelos) :is(#par-app,#modelos-app){min-width:0;box-sizing:border-box;width:100%}
+html body.hero-redesign-v53 :is(#panel-acervo,#panel-par,#panel-modelos) .hero-rep-search{
+ box-sizing:border-box;align-items:stretch!important;justify-content:flex-start!important;flex-wrap:nowrap!important;
+ width:auto!important;min-width:0!important;max-width:none!important;margin:7px 0 9px!important;padding:0!important;gap:0!important
+}
+html body.hero-redesign-v53 #panel-acervo>.hero-rep-search{margin:7px 9px 9px!important}
+html body.hero-redesign-v53 :is(#panel-acervo,#panel-par,#panel-modelos) .hero-rep-search>.hero-rep-search-head{
+ box-sizing:border-box;display:flex!important;width:100%!important;align-self:stretch!important;justify-content:space-between!important;
+ align-items:center!important;gap:6px!important;padding:8px 9px 5px!important;margin:0!important
+}
+html body.hero-redesign-v53 :is(#panel-acervo,#panel-par,#panel-modelos) .hero-rep-search>.acv-form{
+ box-sizing:border-box;display:flex!important;flex-direction:column!important;align-items:stretch!important;width:100%!important;min-width:0!important;gap:0!important;margin:0!important;padding:0!important;border:0!important
+}
+html body.hero-redesign-v53 :is(#panel-acervo,#panel-par,#panel-modelos) .hero-rep-search .hero-rep-query{
+ box-sizing:border-box;width:100%!important;display:grid!important;grid-template-columns:minmax(0,1fr) 40px 40px;align-items:center!important;gap:4px!important;margin:0!important;padding:4px 8px 8px!important
+}
+html body.hero-redesign-v53 :is(#panel-acervo,#panel-par,#panel-modelos) .hero-rep-query input[type=search]{
+ box-sizing:border-box;width:100%!important;min-width:0!important;max-width:none!important;height:30px!important;font-size:11px!important;margin:0!important
+}
+html body.hero-redesign-v53 :is(#panel-acervo,#panel-par,#panel-modelos) .hero-rep-query .tu-b{
+ box-sizing:border-box;width:40px!important;min-width:0!important;height:38px!important;padding:0!important;display:grid!important;place-items:center
+}
+html body.hero-redesign-v53 :is(#panel-acervo,#panel-par,#panel-modelos) .hero-rep-query .tu-b[type=submit]{border-color:var(--primary,#34585b)!important;color:var(--primary,#34585b)!important}
+html body.hero-redesign-v53 :is(#panel-acervo,#panel-par,#panel-modelos) .hero-rep-search :is(.hero-rep-filters,.rep-scope){
+ box-sizing:border-box;align-self:stretch!important;width:100%!important;min-width:0!important;max-width:none!important;margin:0!important;padding:6px 8px!important;gap:4px!important
+}
+html body.hero-redesign-v53 :is(#panel-acervo,#panel-par,#panel-modelos) .hero-rep-search .rep-scope select,html body.hero-redesign-v53 #panel-par .hero-rep-search #pp-cat{
+ flex:1 1 0!important;min-width:0!important;max-width:none!important;width:100%!important;height:29px!important;font-size:11px!important;margin:0!important
+}
+html body.hero-redesign-v53 :is(#panel-acervo,#panel-par,#panel-modelos) .hero-rep-search :is(.hero-rep-count,.pp-n,#acv-status){
+ box-sizing:border-box;align-self:stretch!important;width:100%!important;min-width:0!important;margin:0!important;padding:6px 9px!important;text-align:left!important
+}
+@media(max-width:330px){html body.hero-redesign-v53 :is(#panel-acervo,#panel-par,#panel-modelos) .hero-rep-search .hero-rep-query{grid-template-columns:minmax(0,1fr) 32px 32px}html body.hero-redesign-v53 :is(#panel-acervo,#panel-par,#panel-modelos) .hero-rep-query .tu-b{width:32px!important}}

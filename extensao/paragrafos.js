@@ -35,8 +35,8 @@ function render() {
   var L = filtrados(), foco = document.activeElement && document.activeElement.id === 'pp-q';
   var grupos = {}, ordem = [];
   L.forEach(function (p) { if (!grupos[p.cat]) { grupos[p.cat] = []; ordem.push(p.cat); } grupos[p.cat].push(p); });
-  caixa.innerHTML = '<div class="pp-top acv-faixa hero-rep-search"><div class="hero-rep-search-head"><span class="hero-rep-search-kicker">Pesquisa e visualização</span><small>Parágrafos-padrão</small></div><div class="af-l hero-rep-query"><input type="search" id="pp-q" placeholder="Buscar: honorários, gratuidade, tempestividade…" value="' + esc(P.q) + '"><button type="button" class="tu-b" data-pp-search title="Buscar" aria-label="Buscar">Buscar</button><button type="button" class="tu-b" data-pp-clear title="Limpar a busca" aria-label="Limpar">×</button></div>' +
-    '<div class="af-l hero-rep-filters"><select id="pp-cat" title="Filtrar por categoria"><option value="">Todas as categorias</option>' + cats.map(function (c) { return '<option' + (c === P.cat ? ' selected' : '') + '>' + esc(c) + '</option>'; }).join('') + '</select></div>' +
+  caixa.innerHTML = '<div class="acv-faixa hero-rep-search"><div class="hero-rep-search-head"><span class="hero-rep-search-kicker">Pesquisa e visualização</span><small>Parágrafos-padrão</small></div><form class="acv-form" data-pp-form role="search"><div class="af-l hero-rep-query"><input type="search" id="pp-q" placeholder="Buscar: honorários, gratuidade, tempestividade…" value="' + esc(P.q) + '"><button type="submit" class="tu-b" data-pp-search title="Buscar" aria-label="Buscar"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></button><button type="button" class="tu-b" data-pp-clear title="Limpar a busca" aria-label="Limpar">×</button></div>' +
+    '<div class="af-l hero-rep-filters"><select id="pp-cat" title="Filtrar por categoria"><option value="">Todas as categorias</option>' + cats.map(function (c) { return '<option' + (c === P.cat ? ' selected' : '') + '>' + esc(c) + '</option>'; }).join('') + '</select></div></form>' +
     FT.scopeHTML(P.modo)+'<p class="muted pp-n">' + L.length + ' de ' + P.lista.length + ' parágrafos · as partes destacadas são vagas a preencher</p></div>' +
     ordem.map(function (c) {
       return '<h4 class="tr-g">' + esc(c) + ' <small class="muted">' + grupos[c].length + '</small></h4>' + grupos[c].map(function (p) {
@@ -48,10 +48,11 @@ function render() {
 }
 var tq = 0;
 if (caixa) {
+  caixa.addEventListener('submit',function(e){if(!e.target.matches('[data-pp-form]'))return;e.preventDefault();clearTimeout(tq);P.q=$('pp-q').value;FT.atualizarPesquisa({q:P.q});render();});
   caixa.addEventListener('input', function (e) { if (e.target.id !== 'pp-q') return; clearTimeout(tq); tq = setTimeout(function () { P.q = e.target.value;FT.atualizarPesquisa({q:P.q}); render(); }, 250); });
   caixa.addEventListener('change', function (e) { if(e.target.hasAttribute('data-rep-scope')){P.modo=e.target.value;FT.atualizarPesquisa({modo:P.modo});render();return;} if (e.target.id === 'pp-cat') { P.cat = e.target.value; render(); } });
   caixa.addEventListener('click', function (e) {
-    if(e.target.closest('[data-pp-search],[data-pp-clear]')){clearTimeout(tq);P.q=e.target.closest('[data-pp-clear]')?'':$('pp-q').value;FT.atualizarPesquisa({q:P.q});render();return;}
+    if(e.target.closest('[data-pp-clear]')){clearTimeout(tq);P.q='';FT.atualizarPesquisa({q:P.q});render();return;}
     if(e.target.closest('[data-rep-read]')){FT.lerEditor().then(render,function(err){var b=e.target.closest('[data-rep-read]');if(b)b.title=err.message;});return;}
     var bi = e.target.closest('[data-ins]');
     if (bi) {

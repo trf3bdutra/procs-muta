@@ -69,7 +69,7 @@ document.addEventListener('click',function(ev){
  var all=ev.target.closest('[data-rep-all]');if(all){ev.preventDefault();pesquisa.all=true;if(window.MutaAbas&&window.MutaAbas.ir)window.MutaAbas.ir('acervo');if(window.MutaEmentario)window.MutaEmentario.abrir();return;}
  var tab=ev.target.closest('[data-emd]');if(tab){pesquisa.all=false;}
 },true);
-function pintarTabs(){document.querySelectorAll('.emd-modos [data-rep-all]').forEach(function(b){b.setAttribute('aria-selected',String(pesquisa.all));});if(pesquisa.all)document.querySelectorAll('.emd-modos [data-emd]').forEach(function(b){b.setAttribute('aria-selected','false');});pintarBandeja();}
+function pintarTabs(){var repLabel=document.getElementById('rep-acv-label');if(repLabel)repLabel.textContent=pesquisa.all?'Todos':'Precedentes';document.querySelectorAll('.emd-modos [data-rep-all]').forEach(function(b){b.setAttribute('aria-selected',String(pesquisa.all));});if(pesquisa.all)document.querySelectorAll('.emd-modos [data-emd]').forEach(function(b){b.setAttribute('aria-selected','false');});pintarBandeja();}
 
 window.MutaFontes = { estadoPesquisa:estadoPesquisa, atualizarPesquisa:atualizarPesquisa, pintarTabs:pintarTabs, botaoMaterial:botaoMaterial, rank:rank, contexto:contexto, scopeHTML:scopeHTML, lerEditor:lerEditor, base: base, blocos: blocos, porLinhas: porLinhas, secoesDeTexto: secoesDeTexto, pronto: function () { return D; } };
 })();
