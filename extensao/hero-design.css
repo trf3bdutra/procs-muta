@@ -571,3 +571,26 @@ html body.hero-redesign-v53 #tab-processo[hidden]{display:none!important}
 html body.hero-redesign-v53:has(#panel-pront:not([hidden])) #hero-area-header-tabs:not([hidden]){display:flex!important;flex-wrap:nowrap!important;gap:0!important;overflow-x:auto;scrollbar-width:thin}
 html body.hero-redesign-v53:has(#panel-pront:not([hidden])) #hero-area-header-tabs>button{flex:1 0 auto!important;min-width:0;white-space:nowrap;font-size:11px!important;padding:5px 6px!important;min-height:27px!important}
 html body.hero-redesign-v53:has(#panel-pront:not([hidden])) #hero-area-header-tabs>button[aria-selected=true]{box-shadow:inset 0 -2px var(--cmt-gold,#b49a64)!important;border-bottom-color:var(--cmt-gold,#b49a64)!important}
+
+/* HERO · ferramentas do Prontuário: diálogos nativos, uma única instância de cada editor. */
+html body.hero-redesign-v53 #gab .hero-pront-commands{display:flex;align-items:center;justify-content:flex-end;gap:5px;padding:4px 7px;border-bottom:1px solid var(--cmt-line,#ded5c4);background:var(--hero-nav-white,#fff);min-width:0}
+html body.hero-redesign-v53 #gab .hero-pront-command{font:550 11px/1.4 var(--sans,system-ui);background:var(--hero-nav-subtabs,#f7f2e7);border:1px solid var(--cmt-line,#ded5c4);border-radius:4px;color:inherit;padding:4px 8px;cursor:pointer}
+html body.hero-redesign-v53 #gab .hero-pront-dialog:not([open]){display:none!important}
+html body.hero-redesign-v53 #gab .hero-pront-dialog[open]{position:fixed;inset:0;display:flex;flex-direction:column;box-sizing:border-box;width:min(620px,calc(100% - 16px));max-width:calc(100% - 16px);max-height:calc(100dvh - 24px);margin:auto;padding:0;overflow:hidden;border:1px solid var(--cmt-line,#ded5c4);border-radius:8px;background:var(--cmt-paper,var(--field,#fff));color:var(--cmt-fg,inherit);box-shadow:0 12px 35px #0002}
+html body.hero-redesign-v53 #gab .hero-pront-dialog::backdrop{background:rgba(28,33,38,.32)}
+html body.hero-redesign-v53 #gab .hero-pront-dialog-head{display:flex;align-items:center;justify-content:space-between;flex:none;gap:8px;padding:9px 12px;background:var(--hero-nav-subtabs,#eee5d3);border-bottom:1px solid var(--cmt-line,#ded5c4)}
+html body.hero-redesign-v53 #gab .hero-pront-dialog-caption{min-width:0;display:grid;gap:2px}
+html body.hero-redesign-v53 #gab .hero-pront-dialog-caption h4{margin:0;font-size:13px;font-weight:650}
+html body.hero-redesign-v53 #gab .hero-pront-dialog-caption small{font-size:11px;color:var(--cmt-muted,var(--muted-fg,inherit))}
+html body.hero-redesign-v53 #gab .hero-pront-dialog-close{border:0;background:transparent;color:inherit;font-size:22px;line-height:1;cursor:pointer;padding:3px 5px}
+html body.hero-redesign-v53 #gab .hero-pront-dialog-body{flex:1 1 auto;min-height:0;min-width:0;overflow:auto;overscroll-behavior:contain;padding:9px}
+html body.hero-redesign-v53 #gab .hero-pront-dialog-body #hero-encaminhamento{display:grid!important;gap:6px;padding:0!important;border:0!important;box-shadow:none!important;background:transparent!important;margin:0!important}
+html body.hero-redesign-v53 #gab .hero-pront-dialog-body .hero-v53-section-head{display:flex;justify-content:space-between;gap:4px}
+html body.hero-redesign-v53 #gab .hero-pront-dialog-body :is(.hero-enc-part,.hero-prod-index-group,.hero-prod-index-history){min-width:0;border:1px solid var(--cmt-line,#ded5c4);border-radius:5px;margin:0 0 5px;overflow:hidden}
+html body.hero-redesign-v53 #gab .hero-pront-dialog-body :is(.hero-enc-part-head,.hero-prod-index-group>h4,.hero-prod-index-history>summary){background:var(--hero-nav-subtabs,#f7f2e7);padding:6px 8px;margin:0;font-size:11px}
+html body.hero-redesign-v53 #gab .hero-pront-dialog-body .hero-enc-part-head h5{margin:0;font-size:11px}
+html body.hero-redesign-v53 #gab .hero-pront-dialog-body :is(.hero-enc-part,.hero-prod-index-group,.hero-prod-index-history)>.gr{padding:7px;gap:6px}
+html body.hero-redesign-v53 #gab .hero-pront-dialog-body :is(input,select,textarea){max-width:100%;min-width:0;box-sizing:border-box}
+html body.hero-redesign-v53 #gab .hero-pront-dialog-foot{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:7px 10px;flex:none;border-top:1px solid var(--cmt-line,#ded5c4);background:var(--cmt-paper,var(--field,#fff))}
+html body.hero-redesign-v53 #gab .hero-pront-dialog-foot small{font-size:10px}
+@media(max-width:360px){html body.hero-redesign-v53 #gab .hero-pront-dialog-body .gr{grid-template-columns:minmax(0,1fr)}}
