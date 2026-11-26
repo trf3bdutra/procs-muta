@@ -32,8 +32,8 @@
     ['tab-processo','tab-pront','tab-min','tab-acervo'].forEach(function(id){var b=$(id);if(b&&b.parentNode!==faixa)faixa.appendChild(b);});
     var divisor=faixa.querySelector('.pv-nav-divider');if(divisor)divisor.remove();
     if(slot.parentNode!==aside)aside.appendChild(slot);
-    [['tab-gab','Gabinete'],['tab-pauta','Pauta'],['tab-dil','Diligências'],['tab-urg','Urgências'],['tab-del','Deliberações']].forEach(function(x){
-      var b=$(x[0]);if(!b)return;if(b.parentNode!==slot)slot.appendChild(b);
+    [['tab-gab','Gabinete'],['tab-pauta','Pauta'],['tab-del','Deliberações'],['tab-dil','Diligências'],['tab-urg','Urgências']].forEach(function(x){
+      var b=$(x[0]);if(!b)return;slot.appendChild(b);
       b.title=x[1];b.setAttribute('aria-label',x[1]);
     });
     slot.hidden=!q.on;

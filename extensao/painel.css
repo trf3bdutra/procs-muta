@@ -4005,3 +4005,14 @@ html body.hero-redesign-v53 #pauta-app .pa-marcos .pa-mk.ses .pa-marco-select{di
 html body.hero-redesign-v53 #pauta-app .pa-marcos .pa-mk.ses .pa-marco-select select{display:block;width:100%;min-width:0;max-width:100%;box-sizing:border-box;padding:2px 2px;font:600 10px/1.3 var(--mono,monospace);color:var(--primary);background:var(--cmt-paper,var(--card));border:1px solid var(--line);border-radius:3px;cursor:pointer}
 html body.hero-redesign-v53 #pauta-app .pa-marcos{grid-auto-columns:minmax(58px,1fr)}
 html body.hero-redesign-v53 #pauta-app .pa-marcos .pa-mk.ses .pa-marco-select select:focus-visible{outline:2px solid var(--primary);outline-offset:1px}
+
+
+/* HERO: fundo bege uniforme no cabeçalho, inclusive nas ferramentas e subabas. */
+html body.hero-redesign-v53 #topo-u:not([hidden]),
+html body.hero-redesign-v53:has(#panel-pront:not([hidden]) .hero-v53-tabs) #topo-u:not([hidden]){
+ background:var(--cmt-beige)!important;
+}
+html body.hero-redesign-v53 #topo-u:not([hidden])::after{background:var(--cmt-beige)!important}
+html body.hero-redesign-v53 #topo-u :is(#pv-nav-main,#hero-area-header-tabs,#hero-rep-header-tabs:not([hidden]),#tu-pje-slot){
+ background:transparent!important;
+}
