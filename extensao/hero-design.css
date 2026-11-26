@@ -303,3 +303,21 @@ html body.hero-redesign-v53 #pauta-app .pa-shared-card>.gx-it{margin:0!important
 html body.hero-redesign-v53 #pauta-app .pa-shared-card .gx-nota{width:100%;box-sizing:border-box;font-size:10px}
 html body.hero-redesign-v53 #pauta-app .pa-shared-card .gx-ac{padding:3px 0;gap:4px}
 html body.hero-redesign-v53 #pauta-app .pa-shared-card .gx-ac button{font-size:10px;min-height:24px}
+
+/* Kanban visual: somente leitura da distribuição, sem drag and drop. */
+html body.hero-redesign-v53 :is(#dil-app,#urg-app) .hero-kanban{min-width:0;--kb-tone:#627587;--kb-bg:#edf1f5}
+html body.hero-redesign-v53 .hero-kanban [data-tone="todo"],html body.hero-redesign-v53 .hero-kanban [data-tone="designar"]{--kb-tone:#91594b;--kb-bg:#f7ece7}
+html body.hero-redesign-v53 .hero-kanban [data-tone="doing"],html body.hero-redesign-v53 .hero-kanban [data-tone="minuta"]{--kb-tone:#3c6589;--kb-bg:#e9f0f7}
+html body.hero-redesign-v53 .hero-kanban [data-tone="review"],html body.hero-redesign-v53 .hero-kanban [data-tone="corrigir"]{--kb-tone:#8c6a28;--kb-bg:#faf2dc}
+html body.hero-redesign-v53 .hero-kanban [data-tone="done"],html body.hero-redesign-v53 .hero-kanban [data-tone="liberar"]{--kb-tone:#3c7358;--kb-bg:#eaf4ed}
+html body.hero-redesign-v53 .hero-kanban [data-tone="assinar"]{--kb-tone:#69568d;--kb-bg:#f0ebf7}
+html body.hero-redesign-v53 .hero-kanban [data-tone="conferir"]{--kb-tone:#8c5675;--kb-bg:#f7eaf1}
+html body.hero-redesign-v53 .hero-kanban-nav{display:flex;gap:3px;align-items:center;overflow-x:auto;padding:3px 0 5px;scrollbar-width:thin}
+html body.hero-redesign-v53 .hero-kanban-nav button{flex:none;display:flex;align-items:center;gap:4px;white-space:nowrap;min-height:24px;border:1px solid color-mix(in srgb,var(--kb-tone) 25%,var(--cmt-line));border-radius:4px;background:var(--kb-bg);color:var(--kb-tone);font:500 10px/1.2 var(--cmt-font,system-ui);padding:3px 6px;cursor:pointer}
+html body.hero-redesign-v53 .hero-kanban-nav button[aria-pressed=true]{box-shadow:inset 0 -2px var(--kb-tone);font-weight:700}
+html body.hero-redesign-v53 .hero-kanban-board{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:6px;align-items:start}
+html body.hero-redesign-v53 .hero-kanban-col{min-width:0;border:1px solid color-mix(in srgb,var(--kb-tone) 25%,var(--cmt-line));border-radius:5px;overflow:hidden;background:var(--kb-bg)}
+html body.hero-redesign-v53 .hero-kanban-col>header{display:flex;justify-content:space-between;align-items:center;padding:5px 7px;color:var(--kb-tone);font-size:11px;border-bottom:1px solid color-mix(in srgb,var(--kb-tone) 22%,transparent)}
+html body.hero-redesign-v53 .hero-kanban-cards{display:grid;gap:4px;padding:4px;min-width:0}
+html body.hero-redesign-v53 :is(#dil-app,#urg-app) .hero-kanban-cards>.gx-it{border:1px solid color-mix(in srgb,var(--kb-tone) 20%,var(--cmt-line))!important;border-radius:4px!important;background:var(--hero-management-paper,var(--hero-nav-white))!important;cursor:default;min-width:0;overflow-wrap:anywhere}
+html body.hero-redesign-v53 .hero-kanban-col .gx-v{margin:0;padding:5px;font-size:10px}
