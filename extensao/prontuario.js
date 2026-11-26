@@ -166,37 +166,36 @@ function wireTabs(tabs,onSelect){
       if(e.key==='Home')d=-i;if(e.key==='End')d=tabs.length-1-i;if(!d&&e.key!=='Home')return;e.preventDefault();var n=(i+d+tabs.length)%tabs.length;onSelect(n,true);tabs[n].focus();});
   });
 }
-function selectTab(tabs,idx){tabs.forEach(function(t,i){var on=i===idx;t.setAttribute('aria-selected',on);t.tabIndex=on?0:-1;$(t.getAttribute('aria-controls')).hidden=!on;});}
+function selectTab(tabs,idx){var active=tabs[idx],target=active.getAttribute('aria-controls');tabs.forEach(function(t,i){var on=i===idx;t.setAttribute('aria-selected',on);t.tabIndex=on?0:-1;var p=$(t.getAttribute('aria-controls'));if(p)p.hidden=p.id!==target;});var p=$(target);if(p&&tabs.filter(function(t){return t.getAttribute('aria-controls')===target;}).length>1)p.setAttribute('aria-labelledby',active.id);}
 /* 0.11: Prontuário (com a triagem), Minuta (lote, comparar e conformidade), Ementário, Parágrafos-padrão e Diretrizes; a Ajuda abre pelo "?" */
-var mainTabs=[$('tab-pront'),$('tab-min'),$('tab-acervo'),$('tab-par'),$('tab-ajuda'),$('tab-dil'),$('tab-del'),$('tab-ctl'),$('tab-pauta'),$('tab-modelos')];
-var NOMES=['pront','min','ementario','par','ajuda','dil','del','ctl','pauta','modelos'];
-var ALIAS={tri:'pront',lote:'min',cmp:'min',conf:'min',ger:'min',acervo:'ementario',diligencias:'dil',deliberacoes:'del',controle:'ctl'};
-function abrirAba(i){
-  if(NOMES[i]==='dil'||NOMES[i]==='del'){
+var mainTabs=[$('tab-pront'),$('tab-min'),$('tab-acervo'),$('tab-par'),$('tab-ajuda'),$('tab-dil'),$('tab-del'),$('tab-ctl'),$('tab-pauta'),$('tab-modelos'),$('tab-processo'),$('tab-urg'),$('tab-gab')];
+var NOMES=['pront','min','ementario','par','ajuda','dil','del','ctl','pauta','modelos','processo','urg','gab'];
+var ALIAS={tri:'pront',lote:'min',cmp:'min',conf:'min',ger:'min',acervo:'ementario',diligencias:'dil',deliberacoes:'del',urgencias:'urg',gabinete:'gab',controle:'ctl'};
+function abrirAba(i,escolha){
+  if(['dil','del','urg','gab'].includes(NOMES[i])){
     var ses=window.MutaSessao,u=ses&&ses.estado?ses.estado():null;
     if(!u||u.estado!=='on'||!(u.gestor||u.perfil==='desembargador'))return;
   }
   selectTab(mainTabs,i);var n=NOMES[i];
   var repTabs=$('hero-rep-header-tabs'),repOn=n==='ementario'||n==='par'||n==='modelos';
   if(repTabs){repTabs.hidden=!repOn;repTabs.querySelectorAll('[data-emd]').forEach(function(b){b.setAttribute('aria-selected',String(repOn&&b.dataset.emd===n));});if(repOn&&window.MutaFontes&&window.MutaFontes.pintarTabs)window.MutaFontes.pintarTabs();}
-
-  document.body.classList.toggle('hero-gestao-ativa',n==='dil'||n==='del');
+  document.body.classList.toggle('hero-gestao-ativa',['dil','del','urg','gab'].includes(n));
   /* 0.47: Parágrafos-padrão é sub-aba do Ementário: a barra mantém o Ementário marcado */
   if(n==='par'||n==='modelos'){var te=$('tab-acervo');if(te)te.setAttribute('aria-selected','true');}
-  if(n==='pront'&&window.MutaGabinete&&window.MutaGabinete.render)window.MutaGabinete.render();
+  if((n==='pront'||n==='processo')&&window.MutaGabinete){var g=window.MutaGabinete;if(escolha||n==='processo')g.ir(n==='processo'?'Resumo':'Triagem');else g.render();}
   if(n==='ementario'&&window.MutaEmentario)window.MutaEmentario.abrir();
   if(n==='min'){if(window.MutaGerador&&window.MutaGerador.abrir)window.MutaGerador.abrir();if(window.MutaComparar)window.MutaComparar.abrir();if(window.MutaConformidade)window.MutaConformidade.abrir();if(window.MutaLote)window.MutaLote.sessao();}
   if(n==='modelos'&&window.MutaModelosHero)window.MutaModelosHero.abrir();
   if(n==='par'&&window.MutaParagrafos)window.MutaParagrafos.abrir();
   /* 0.48: Diligências e Deliberações (Desembargador e gestor); Controle — prazos e etiquetas — só do gestor */
-  if((n==='dil'||n==='del')&&window.MutaGestao)window.MutaGestao.abrir(n);
+  if((['dil','del','urg','gab'].includes(n))&&window.MutaGestao)window.MutaGestao.abrir(n);
   /* 0.58: aba Pauta (sessões do Ex Officio, etapas, alertas e sustentações por sessão) */
   if(n==='pauta'&&window.MutaPauta)window.MutaPauta.abrir();
   if(n==='ctl'&&window.MutaAlertas&&window.MutaAlertas.controle)window.MutaAlertas.controle();
 }
-wireTabs(mainTabs,function(i){abrirAba(i);});
+wireTabs(mainTabs,function(i){abrirAba(i,true);});
 document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-emd]');if(!b)return;var i=NOMES.indexOf(b.dataset.emd);if(i>=0)abrirAba(i);});
-window.MutaAbas={ir:function(nome){if(nome==='ger'&&document.body.classList.contains('hero-redesign-v53')){abrirAba(NOMES.indexOf('pront'));if(window.MutaGabinete){if(window.MutaGabinete.irGerador)window.MutaGabinete.irGerador();else window.MutaGabinete.ir('Produção');}return;}var alvo=ALIAS[nome]||nome,i=NOMES.indexOf(alvo);if(i<0)return;abrirAba(i);if(nome==='tri'&&window.MutaGabinete&&window.MutaGabinete.ir)window.MutaGabinete.ir('Triagem');if((nome==='ger'||nome==='cmp'||nome==='conf')&&window.MutaGerador&&window.MutaGerador.modo)window.MutaGerador.modo(nome);}};
+window.MutaAbas={sincronizarProntuario:function(grupo){var p=$('panel-pront');if(!p||p.hidden)return;var i=NOMES.indexOf(grupo==='processo'?'processo':'pront');if(i>=0)selectTab(mainTabs,i);},ir:function(nome){if(nome==='ger'&&document.body.classList.contains('hero-redesign-v53')){abrirAba(NOMES.indexOf('pront'));if(window.MutaGabinete){if(window.MutaGabinete.irGerador)window.MutaGabinete.irGerador();else window.MutaGabinete.ir('Produção');}return;}var alvo=ALIAS[nome]||nome,i=NOMES.indexOf(alvo);if(i<0)return;abrirAba(i);if(nome==='tri'&&window.MutaGabinete&&window.MutaGabinete.ir)window.MutaGabinete.ir('Triagem');if((nome==='ger'||nome==='cmp'||nome==='conf')&&window.MutaGerador&&window.MutaGerador.modo)window.MutaGerador.modo(nome);}};
 (function(){var d=$('panel-lote');if(d)d.addEventListener('toggle',function(){if(d.open&&window.MutaLote)window.MutaLote.abrir();});var v=$('aj-volta');if(v)v.addEventListener('click',function(){abrirAba(0);});})();
 document.addEventListener('DOMContentLoaded',function(){var h=location.hash.replace('#','');var i=NOMES.indexOf(ALIAS[h]||h);if(i>0)abrirAba(i);});
 var modeTabs=[$('mode-tri'),$('mode-pro')];

@@ -24,22 +24,28 @@
 
   /* Reaproveita os botões reais e seus contadores, sem clonagem ou duplicação. */
   function gestaoNaFaixa(q){
-    var slot=$('tu-gestao'),faixa=$('pv-nav-main');if(!slot)return;
-    /* Gestão na faixa do perfil também na prévia universal. */
-    [['tab-dil','Diligências'],['tab-del','Deliberações']].forEach(function(x){
-      var b=$(x[0]);if(!b)return;
-      if(b.parentNode!==slot)slot.appendChild(b);
+    var slot=$('tu-gestao'),faixa=$('pv-nav-main'),topo=$('topo-u'),aside=document.querySelector('.layout>aside>.nav');
+    if(!slot||!topo||!aside)return;
+    if(!faixa){faixa=document.createElement('div');faixa.id='pv-nav-main';faixa.className='pv-nav-row';}
+    faixa.setAttribute('role','tablist');faixa.setAttribute('aria-label','Ferramentas processuais');
+    if(faixa.parentNode!==topo)topo.appendChild(faixa);
+    ['tab-processo','tab-pront','tab-min','tab-acervo'].forEach(function(id){var b=$(id);if(b&&b.parentNode!==faixa)faixa.appendChild(b);});
+    var divisor=faixa.querySelector('.pv-nav-divider');if(divisor)divisor.remove();
+    if(slot.parentNode!==aside)aside.appendChild(slot);
+    [['tab-gab','Gabinete'],['tab-pauta','Pauta'],['tab-dil','Diligências'],['tab-urg','Urgências'],['tab-del','Deliberações']].forEach(function(x){
+      var b=$(x[0]);if(!b)return;if(b.parentNode!==slot)slot.appendChild(b);
       b.title=x[1];b.setAttribute('aria-label',x[1]);
     });
-    slot.hidden=!pode(q);
+    slot.hidden=!q.on;
+    document.body.classList.toggle('hero-gestao-rodape',q.on);
   }
 
   /* ---------- visibilidade das abas ---------- */
   function mostrar() {
-    var q = quem(), dil = $('tab-dil'), del = $('tab-del'), ctl = $('tab-ctl'), pa = $('tab-pauta');
+    var q = quem(), dil = $('tab-dil'), del = $('tab-del'), urg = $('tab-urg'), gab = $('tab-gab'), ctl = $('tab-ctl'), pa = $('tab-pauta');
     var ver = { dil: pode(q), del: pode(q), ctl: q.on && q.gestor, pauta: q.on };
     /* 0.58: Controle vira ícone na faixa do topo (gabinete.js › faixaUsuario); a aba fica escondida na barra */
-    [[dil, ver.dil], [del, ver.del], [ctl, ver.ctl, true], [pa, ver.pauta]].forEach(function (p) {
+    [[dil, ver.dil], [del, ver.del], [urg, ver.del], [gab, ver.del], [ctl, ver.ctl, true], [pa, ver.pauta]].forEach(function (p) {
       if (!p[0]) return;
       p[0].hidden = !p[1] || !!p[2];
       if (!p[1] && p[0].getAttribute('aria-selected') === 'true' && window.MutaAbas) window.MutaAbas.ir('pront');
@@ -60,7 +66,7 @@
   var ETAPAS = [['todo', 'A fazer'], ['doing', 'Em andamento'], ['review', 'Em revisão'], ['done', 'Concluída']];
   var NOME_ET = {}, STAGE_OK = {}; ETAPAS.forEach(function (e) { NOME_ET[e[0]] = e[1]; STAGE_OK[e[0]] = 1; });
   var URG = ['Urgente', 'Alta', 'Média', 'Baixa'];
-  var D = { f: 'comigo', nova: false, lista: null, equipe: [], erro: '', msg: '', lendo: false, abertos: {}, ed: {}, exc: {}, resp: {}, fase: { todo: true, doing: true, review: true, done: false } };
+  var D = { busca:'', responsavel:'', prioridade:'', f: 'comigo', nova: false, lista: null, equipe: [], erro: '', msg: '', lendo: false, abertos: {}, ed: {}, exc: {}, resp: {}, fase: { todo: true, doing: true, review: true, done: false } };
   function lerDil() {
     if (!ses || !pode(quem())) return Promise.resolve();
     D.lendo = true; pintarDil();
@@ -110,6 +116,7 @@
       '<textarea name="description" rows="3" maxlength="2000" placeholder="O que fazer">' + esc(t.description || '') + '</textarea>' +
       '<span class="gx-fb"><button type="button" class="lnk" data-gx="' + (nova ? 'cancelar-nova' : 'cancelar-ed') + '"' + (nova ? '' : ' data-id="' + esc(t.id) + '"') + '>cancelar</button><button type="submit" class="btn solid sm">' + (nova ? 'Criar diligência' : 'Gravar') + '</button></span></form>';
   }
+  function metricasCmt(M,extra){return '<div class="hero-cmt-gestion-metrics '+(extra||'')+'">'+M.map(function(x){return '<div data-stage="'+x[0]+'"><b>'+esc(x[2])+'</b><small>'+esc(x[1])+'</small>'+(x[3]?'<small>'+esc(x[3])+'</small>':'')+'</div>';}).join('')+'</div>';}
   function pintarDil() {
     var c = $('dil-app'); if (!c) return;
     var q = quem();
@@ -118,7 +125,11 @@
     var L = D.lista || [];
     var n = { comigo: 0, criei: 0, todas: 0 };
     L.forEach(function (t) { if (t.stage === 'done') return; n.todas++; if (filtro(t, 'comigo', q.usuario)) n.comigo++; if (filtro(t, 'criei', q.usuario)) n.criei++; });
-    var V = L.filter(function (t) { return filtro(t, D.f, q.usuario); }).sort(ordem);
+    var V = L.filter(function(t){return filtro(t,D.f,q.usuario)&&(!D.responsavel||norm(t.assignee)===norm(D.responsavel))&&(!D.prioridade||t.urgency===D.prioridade)&&(!D.busca||norm([t.title,t.description,t.numero,t.assignee,t.creator].join(' ')).includes(norm(D.busca)));}).sort(ordem);
+    var abertas=L.filter(function(t){return t.stage!=='done';});
+    var metricas=metricasCmt([['total','Em aberto',abertas.length,n.comigo+' suas'],['priority','Prioritárias',abertas.filter(function(t){return /^(Alta|Urgente)$/.test(t.urgency);}).length],['sem','Sem responsável',abertas.filter(function(t){return !t.assignee;}).length]]);
+    var eq=Array.from(new Set(D.equipe.concat(L.map(function(t){return t.assignee;}).filter(Boolean)))).sort();
+    var filtros='<div class="hero-cmt-gestion-filters"><input type="search" data-gx-filter="busca" placeholder="Buscar diligência ou processo" aria-label="Buscar diligência" value="'+esc(D.busca)+'"><label>Responsável<select data-gx-filter="responsavel"><option value="">Todos os responsáveis</option>'+eq.map(function(n){return '<option value="'+esc(n)+'"'+(n===D.responsavel?' selected':'')+'>'+esc(n)+'</option>';}).join('')+'</select></label><label>Prioridade<select data-gx-filter="prioridade"><option value="">Todas as prioridades</option>'+URG.map(function(n){return '<option value="'+esc(n)+'"'+(n===D.prioridade?' selected':'')+'>'+esc(n)+'</option>';}).join('')+'</select></label></div>';
     var fases = ETAPAS.map(function (e) {
       var I = V.filter(function (t) { return (STAGE_OK[t.stage] ? t.stage : 'todo') === e[0]; });
       if (e[0] === 'done') I.sort(function (a, b) { return String(b.concluidaEm || b.atualizadoEm || '').localeCompare(String(a.concluidaEm || a.atualizadoEm || '')); });
@@ -129,7 +140,8 @@
     }).join('');
     var tab = function (k, r) { return '<button type="button" role="tab" data-gx-f="' + k + '" aria-selected="' + (D.f === k) + '">' + r + ' <i>' + n[k] + '</i></button>'; };
     var acesso='<a class="gx-nav-action" target="_blank" rel="noopener" title="Abrir no Ex Officio" aria-label="Abrir no Ex Officio" href="'+esc(site())+(q.des&&!q.gestor?'/cmt/':'/exofficio/#pendencias')+'"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 5h6v6M19 5l-9 9M19 13v6H5V5h6"/></svg></a>';
-    c.innerHTML = faixaGestao('Filtro das diligências',tab('comigo','Comigo')+tab('criei','Que criei')+tab('todas','Todas'),'ler-dil',D.lendo,acesso) +
+    c.innerHTML = '<section class="hero-cmt-gestion"><div class="gx-top"><div><b>Diligências</b><small class="muted">quadro da equipe no Ex Officio</small></div><span><button type="button" class="btn sm" data-gx="nova"' + (D.nova ? ' hidden' : '') + '>+ Nova</button></span></div>' +
+      metricas+filtros+'</section>'+faixaGestao('Filtro das diligências',tab('comigo','Comigo')+tab('criei','Que criei')+tab('todas','Todas'),'ler-dil',D.lendo,acesso) +
       (D.nova ? formDil() : '') +
       (D.msg ? '<p class="gx-msg' + (/^Não|erro/i.test(D.msg) ? ' err' : '') + '">' + esc(D.msg) + '</p>' : '') +
       (D.erro ? '<p class="gx-v err">' + esc(D.erro) + '</p>' : !D.lista ? '<p class="muted gx-v">Lendo o quadro…</p>' :
@@ -178,12 +190,12 @@
   }
 
   /* ---------- Deliberações ---------- */
-  var X = { aba: 'as', dev: {}, dados: null, erro: '', msg: '', lendo: false, resp: {}, conf: {}, nota: {} };
+  var X = { aba: 'du', dev: {}, dados: null, erro: '', msg: '', lendo: false, resp: {}, conf: {}, nota: {} };
   function lerDel() {
     if (!ses || !pode(quem())) return Promise.resolve();
-    X.lendo = true; pintarDel();
-    return ses.api('/api/painel?cmt=1').then(function (j) { X.dados = j || {}; X.erro = ''; X.lendo = false; badges(); pintarDel(); })
-      .catch(function (e) { X.erro = e.message || 'Não foi possível ler as deliberações.'; X.lendo = false; pintarDel(); });
+    X.lendo = true; pintarGestao();
+    return ses.api('/api/painel?cmt=1').then(function (j) { X.dados = j || {}; X.erro = ''; X.lendo = false; badges(); pintarGestao(); })
+      .catch(function (e) { X.erro = e.message || 'Não foi possível ler as deliberações.'; X.lendo = false; pintarGestao(); });
   }
   function listas() {
     var j = X.dados || {};
@@ -246,16 +258,38 @@
     var q = quem();
     if (!pode(q)) { c.innerHTML = '<p class="muted gx-v">' + (q.on ? 'As Deliberações são do Desembargador e do gestor.' : 'Entre no painel para ver as deliberações.') + '</p>'; return; }
     var L = listas();
-    var tab = function (k, r, d) { return '<button type="button" role="tab" data-gx-a="' + k + '" aria-selected="' + (X.aba === k) + '" title="' + esc(d) + '">' + r + ' <i' + (k === 'as' && nUrg ? ' class="gx-iu"' : '') + '>' + (L[k].length+(k==='as'?L.urg.length:0)) + '</i></button>'; };
-    var nUrg = L.as.filter(function (a) { return a.urg; }).length;
-    var corpo = X.aba==='as'?grupoDel('Aguardando assinatura',L.as,itemAs,'Nenhuma decisão urgente submetida à assinatura.','urgente')+grupoDel('Demais urgências em aberto',L.urg,itemUrg,'Nenhuma outra urgência em aberto.','urgente'):
-      X.aba==='pe'?grupoDel('Retiradas de pauta',L.pe.filter(function(x){return x.tipo==='retirada';}),itemPe,'Nenhum pedido em aberto.','pendente')+grupoDel('Adiamentos',L.pe.filter(function(x){return x.tipo!=='retirada';}),itemPe,'Nenhum pedido em aberto.','pendente'):
-      X.aba==='so'?grupoDel('Sustentações e preferências',L.so,itemSo,'Nenhum pedido recebido.','sessao'):
+    if(X.aba==='as')X.aba='du';
+    var tab=function(k,r,d){return '<button type="button" role="tab" data-gx-a="'+k+'" aria-selected="'+(X.aba===k)+'" title="'+esc(d)+'">'+esc(r)+' <i>'+L[k].length+'</i></button>';};
+    var corpo = X.aba==='pe'?grupoDel('Retiradas de pauta',L.pe.filter(function(x){return x.tipo==='retirada';}),itemPe,'Nenhum pedido em aberto.','pendente')+grupoDel('Adiamentos',L.pe.filter(function(x){return x.tipo!=='retirada';}),itemPe,'Nenhum pedido em aberto.','pendente'):
       grupoDel('Dúvidas em aberto',L.du,itemDu,'Nenhuma dúvida em aberto dirigida a você.','pendente');
-    c.innerHTML = faixaGestao('Tipo de deliberação',tab('as','Urgências','Urgências em aberto, separadas das decisões prontas para assinatura')+tab('du','Dúvidas','dúvidas da equipe')+tab('pe','Pauta','pedidos de retirada e de adiamento')+tab('so','Sustentações','pedidos de sustentação e preferência'),'ler-del',X.lendo) +
+    c.innerHTML = faixaGestao('Tipo de deliberação',tab('du','Dúvidas','dúvidas da equipe')+tab('pe','Pauta','pedidos de retirada e de adiamento'),'ler-del',X.lendo) +
       (X.msg ? '<p class="gx-msg' + (/^Não/.test(X.msg) ? ' err' : '') + '">' + esc(X.msg) + '</p>' : '') +
       (X.erro ? '<p class="gx-v err">' + esc(X.erro) + '</p>' : !X.dados ? '<p class="muted gx-v">Lendo…</p>' : corpo);
   }
+  function pintarUrg(){
+    var c=$('urg-app');if(!c)return;var q=quem();
+    if(!pode(q)){c.textContent='Acesso restrito ao Desembargador e ao gestor.';return;}
+    var L=listas();
+    var totalUrg=L.as.map(function(a){return Object.assign({},a,a.urg||{});}).concat(L.urg);
+    var metUrg=metricasCmt([['total','Em aberto',totalUrg.length],['late','Sem responsável',totalUrg.filter(function(a){return !a.servidor;}).length],['priority','Em minuta',L.urg.filter(function(a){return !!a.servidor&&!a.dataMinuta&&!a.assinado;}).length],['lib','Em revisão / assinatura',L.as.length+L.urg.filter(function(a){return !!(a.dataMinuta||a.assinado);}).length]],'urg-metrics');
+    var corpo='<section class="hero-cmt-gestion">'+metUrg+'</section>'+grupoDel('01 · Chegou',L.urg.filter(function(a){return !a.servidor&&!a.dataMinuta&&!a.assinado;}),itemUrg,'Nenhuma urgência sem responsável.','urgente')+grupoDel('02 · Em minuta',L.urg.filter(function(a){return !!a.servidor&&!a.dataMinuta&&!a.assinado;}),itemUrg,'Nenhuma urgência em minuta.','urgente')+grupoDel('03 · Revisão e assinatura',L.urg.filter(function(a){return !!(a.dataMinuta||a.assinado);}),itemUrg,'Nenhuma urgência em revisão.','urgente')+grupoDel('Para assinatura',L.as,itemAs,'Nenhuma decisão urgente submetida à assinatura.','urgente');
+    c.innerHTML='<div class="gx-top"><div><b>Urgências</b><small class="muted">Providências em aberto · '+esc(X.dados&&X.dados.hoje?data(X.dados.hoje):'')+'</small></div><button type="button" class="lnk" data-gx="ler-del">'+(X.lendo?'lendo…':'atualizar')+'</button></div>'+(X.msg?'<p class="gx-msg">'+esc(X.msg)+'</p>':'')+(X.erro?'<p class="gx-v err">'+esc(X.erro)+'</p>':!X.dados?'<p class="muted gx-v">Lendo…</p>':corpo);
+  }
+  function pintarGab(){
+    var c=$('gab-app');if(!c)return;if(!pode(quem())){c.textContent='Acesso restrito ao Desembargador e ao gestor.';return;}
+    var j=X.dados||{},hj=j.hoje||hoje();
+    function sec(t,arr,render){return '<section class="hero-gx-group"><header><b>'+esc(t)+'</b><small>'+arr.length+'</small></header>'+(arr.length?arr.map(render).join(''):'<p class="muted gx-v">Nenhum registro.</p>')+'</section>';}
+    var sessoes=(j.agenda||[]).filter(function(a){return a.date>=hj;}).slice(0,5);
+    var nomes={pautarAte:'Peço dia',inicioPreparacao:'Preparação',entregaMinutas:'Minutas',liberacao:'Liberação'};
+    var agenda=sec('Próximas sessões',sessoes,function(a){return '<article class="gx-it"><div class="gx-h"><b>'+esc(data(a.date))+'</b><span class="gx-c">'+esc(a.hora||'')+'</span><span class="gx-c">'+esc(a.publicada?'Publicada':'Marcos')+'</span></div><p class="gx-m">'+esc(a.processos||0)+' processos</p><div class="hero-gab-marcos">'+Object.keys(nomes).filter(function(k){return (a.marcos||{})[k];}).map(function(k){return '<span>'+esc(nomes[k])+' <b>'+esc(data(a.marcos[k]))+'</b></span>';}).join('')+'</div></article>';});
+    var prazos=sec('Próximos marcos',(j.prazos||[]).slice(0,12),function(a){return '<article class="gx-it"><div class="gx-h"><b>'+esc(a.marco)+'</b><span class="gx-c">'+esc(data(a.data))+'</span></div><p class="gx-m">Sessão '+esc(data(a.sessao))+'</p></article>';});
+    var eq=Array.isArray(j.equipe)?j.equipe:[];
+    var equipe=sec('Produção da equipe',eq,function(a){return '<article class="gx-it"><div class="gx-h"><b>'+esc(a.nome)+'</b></div><p class="gx-m">Minutas '+esc(a.minutasFeitas||0)+' / '+esc(a.minutas||0)+' · Correções '+esc(a.correcoesFeitas||0)+' / '+esc(a.correcoes||0)+'</p></article>';});
+    var aus=sec('Ausências pendentes',j.ausencias||[],function(a){return '<article class="gx-it"><div class="gx-h"><b>'+esc(a.nome)+'</b><span class="gx-c">'+esc(a.tipo)+'</span></div><p class="gx-m">'+esc(data(a.de))+' — '+esc(data(a.ate))+'</p></article>';});
+    var comunicados=sec('Comunicados',j.comunicados||[],function(a){return '<article class="gx-it"><b>'+esc(a.titulo||'Comunicado')+'</b><p class="gx-tx">'+esc(a.texto||'')+'</p></article>';});
+    c.innerHTML='<div class="gx-top"><div><b>Gabinete</b><small>Calendário, equipe e comunicados</small></div><button type="button" class="lnk" data-gx="ler-del">Atualizar</button></div>'+(X.erro?'<p class="gx-v err">'+esc(X.erro)+'</p>':!X.dados?'<p class="muted gx-v">Lendo…</p>':agenda+prazos+equipe+aus+comunicados);
+  }
+  function pintarGestao(){pintarDel();pintarUrg();pintarGab();}
   function post(corpo) { return ses.api('/api/painel?cmt=1', { method: 'POST', body: JSON.stringify(Object.assign({ origem: 'extensao' }, corpo)) }); }
   /* observação gravada na pauta junto com a situação, como no painel /cmt (cmtNotaSit) */
   function notaSit(p) {
@@ -270,44 +304,45 @@
     var ses0 = p.sessao || ((X.dados || {}).pauta || {}).date || '';
     var nota = String(X.nota[id] || '').trim();
     var texto = (ret ? 'Retirada ' + (defere ? 'deferida.' : 'indeferida.') : 'Adiamento ' + (defere ? 'deferido.' : 'indeferido.')) + (nota ? ' ' + nota : '');
-    if (defere && !ses0) { X.msg = 'Não deferiu: o pedido não indica a sessão.'; pintarDel(); return; }
+    if (defere && !ses0) { X.msg = 'Não deferiu: o pedido não indica a sessão.'; pintarGestao(); return; }
     if (bt) bt.disabled = true;
     (defere ? post({ acao: 'situacao', sessao: ses0, cnj: p.numero, valor: ret ? 'Retirado' : 'Adiado', obs: notaSit(p) }) : Promise.resolve())
       .then(function () { return post({ acao: 'responder', id: id, texto: texto }); })
       .then(function () { delete X.conf[id]; delete X.nota[id]; X.msg = defere ? 'Pedido deferido e registrado na pauta. Cópia ao gestor.' : 'Pedido indeferido.'; return lerDel(); })
-      .catch(function (e) { if (bt) bt.disabled = false; X.msg = 'Não concluiu: ' + (e.message || 'erro'); pintarDel(); });
+      .catch(function (e) { if (bt) bt.disabled = false; X.msg = 'Não concluiu: ' + (e.message || 'erro'); pintarGestao(); });
   }
   function assinar(cnj, bt) {
     if (bt) bt.disabled = true;
     post({ acao: 'assinar', cnj: cnj }).then(function () { X.msg = 'Assinatura registrada no app · ' + cnj + '.'; return lerDel(); })
-      .catch(function (e) { if (bt) bt.disabled = false; X.msg = 'Não registrou: ' + (e.message || 'erro'); pintarDel(); });
+      .catch(function (e) { if (bt) bt.disabled = false; X.msg = 'Não registrou: ' + (e.message || 'erro'); pintarGestao(); });
   }
   function devolver(f) {
     var cnj = f.getAttribute('data-cnj'), t = String(f.elements.texto.value || '').trim(); if (!t) return;
     var bt = f.querySelector('[type=submit]'); if (bt) bt.disabled = true;
     post({ acao: 'devolver', cnj: cnj, texto: t, para: f.elements.para ? f.elements.para.value : '' }).then(function () {
       delete X.dev[cnj]; X.msg = 'Devolutiva enviada (vira diligência para ' + (f.elements.para ? f.elements.para.value : 'a equipe') + ').'; lerDil(); return lerDel();
-    }).catch(function (e) { if (bt) bt.disabled = false; X.msg = 'Não enviou: ' + (e.message || 'erro'); pintarDel(); });
+    }).catch(function (e) { if (bt) bt.disabled = false; X.msg = 'Não enviou: ' + (e.message || 'erro'); pintarGestao(); });
   }
   function responder(f) {
     var id = f.getAttribute('data-id'), t = String(f.elements.texto.value || '').trim(); if (!t) return;
     var bt = f.querySelector('[type=submit]'); if (bt) bt.disabled = true;
     post({ acao: 'responder', id: id, texto: t, manter: !!(f.elements.manter && f.elements.manter.checked) }).then(function () {
       delete X.resp[id]; X.msg = 'Resposta enviada.'; return lerDel();
-    }).catch(function (e) { if (bt) bt.disabled = false; X.msg = 'Não enviou: ' + (e.message || 'erro'); pintarDel(); });
+    }).catch(function (e) { if (bt) bt.disabled = false; X.msg = 'Não enviou: ' + (e.message || 'erro'); pintarGestao(); });
   }
 
   /* ---------- contadores nas abas ---------- */
   function badges() {
-    var b1 = $('dil-badge'), b2 = $('del-badge');
+    var b1 = $('dil-badge'), b2 = $('del-badge'), b3=$('urg-badge');
     if (b1) { var n1 = D.lista ? abertasComigo().length : 0; b1.hidden = !n1; b1.textContent = n1 ? String(n1) : ''; b1.title = n1 ? n1 + ' diligência(s) com você' : ''; }
-    if (b2) { var L = X.dados ? listas() : { as: [], urg: [], du: [], pe: [], so: [] }, n2 = L.as.length + L.urg.length + L.du.length + L.pe.length + L.so.filter(function (s) { return s.aVincular; }).length; b2.hidden = !n2; b2.textContent = n2 ? String(n2) : ''; b2.title = n2 ? n2 + ' aguardando decisão' : ''; }
+    if (b2) { var L = X.dados ? listas() : { as: [], urg: [], du: [], pe: [], so: [] }, n2 = L.du.length + L.pe.length; b2.hidden = !n2; b2.textContent = n2 ? String(n2) : ''; b2.title = n2 ? n2 + ' aguardando decisão' : ''; }
+    if(b3){var u=X.dados?listas():{as:[],urg:[]},n3=u.as.length+u.urg.length;b3.hidden=!n3;b3.textContent=n3?String(n3):'';b3.title=n3+' urgências em aberto';}
   }
 
   /* ---------- eventos ---------- */
   function copiar(x) { var t = x.getAttribute('data-gx-copia'); try { navigator.clipboard.writeText(t).then(function () { var o = x.textContent; x.textContent = 'Copiado'; setTimeout(function () { x.textContent = o; }, 1000); }); } catch (e) {} }
   function ligar() {
-    var cd = $('dil-app'), cx = $('del-app');
+    var cd = $('dil-app'), cu=$('urg-app'), cg=$('gab-app'), cx = $('del-app');
     if (cd) {
       cd.addEventListener('click', function (e) {
         var x = e.target.closest('button'); if (!x) return;
@@ -325,6 +360,7 @@
       });
       cd.addEventListener('change', function (e) {
         var i = e.target;
+        if(i.dataset.gxFilter){D[i.dataset.gxFilter]=i.value;return pintarDil();}
         if (i.dataset.gxEtapa) return etapa(i.dataset.gxEtapa, i.value, i);
       });
       /* seção aberta ou fechada: a escolha sobrevive ao redesenho */
@@ -334,18 +370,18 @@
         var k = f.getAttribute('data-gx-form'); if (k === 'nova') criar(f); else if (k === 'editar') editar(f); else if (k === 'dresp') responderDil(f);
       });
     }
-    if (cx) {
+    [cx,cu,cg].filter(Boolean).forEach(function(cx){
       cx.addEventListener('click', function (e) {
         var x = e.target.closest('button'); if (!x) return;
         if (x.hasAttribute('data-gx-copia')) return copiar(x);
-        if (x.dataset.gxA) { X.aba = x.dataset.gxA; X.msg = ''; return pintarDel(); }
+        if (x.dataset.gxA) { X.aba = x.dataset.gxA; X.msg = ''; return pintarGestao(); }
         if (x.dataset.gx === 'ler-del') { X.msg = ''; return lerDel(); }
-        if (x.dataset.gxResp) { X.resp[x.dataset.gxResp] = !X.resp[x.dataset.gxResp]; pintarDel(); var ta = cx.querySelector('[data-gx-form="responder"][data-id="' + x.dataset.gxResp + '"] textarea'); if (ta) ta.focus(); return; }
+        if (x.dataset.gxResp) { X.resp[x.dataset.gxResp] = !X.resp[x.dataset.gxResp]; pintarGestao(); var ta = cx.querySelector('[data-gx-form="responder"][data-id="' + x.dataset.gxResp + '"] textarea'); if (ta) ta.focus(); return; }
         if (x.dataset.gxAss) return assinar(x.dataset.gxAss, x);
-        if (x.dataset.gxDev) { X.dev[x.dataset.gxDev] = !X.dev[x.dataset.gxDev]; pintarDel(); var td = cx.querySelector('[data-gx-form="devolver"] textarea'); if (td) td.focus(); return; }
+        if (x.dataset.gxDev) { X.dev[x.dataset.gxDev] = !X.dev[x.dataset.gxDev]; pintarGestao(); var td = cx.querySelector('[data-gx-form="devolver"] textarea'); if (td) td.focus(); return; }
         var pe = x.dataset.gxPe, id = x.dataset.id;
-        if (pe === 'defere' || pe === 'indefere') { X.conf[id] = pe; return pintarDel(); }
-        if (pe === 'cancelar') { delete X.conf[id]; return pintarDel(); }
+        if (pe === 'defere' || pe === 'indefere') { X.conf[id] = pe; return pintarGestao(); }
+        if (pe === 'cancelar') { delete X.conf[id]; return pintarGestao(); }
         if (pe === 'confirmar') return decidir(id, x);
       });
       cx.addEventListener('input', function (e) { var i = e.target; if (i.dataset.gxNota) X.nota[i.dataset.gxNota] = i.value; });
@@ -353,17 +389,17 @@
         var f = e.target.closest('[data-gx-form]'); if (!f) return; e.preventDefault();
         if (f.getAttribute('data-gx-form') === 'devolver') devolver(f); else responder(f);
       });
-    }
+    });
     /* teclas digitadas nas abas não chegam a atalhos do painel */
-    [cd, cx].forEach(function (el) { if (el) el.addEventListener('keydown', function (e) { e.stopPropagation(); }); });
+    [cd, cx, cu, cg].forEach(function (el) { if (el) el.addEventListener('keydown', function (e) { e.stopPropagation(); }); });
   }
   function abrir(n) {
     if (n === 'dil') { pintarDil(); lerDil(); }
-    if (n === 'del') { pintarDel(); lerDel(); }
+    if (n === 'del'||n==='urg'||n==='gab') { pintarGestao(); lerDel(); }
   }
   function iniciar() {
     ligar(); mostrar();
-    if (ses && ses.ouvir) ses.ouvir(function () { D.lista = null; X.dados = null; mostrar(); badges(); pintarDil(); pintarDel(); });
+    if (ses && ses.ouvir) ses.ouvir(function () { D.lista = null; X.dados = null; mostrar(); badges(); pintarDil(); pintarGestao(); });
     /* a cada 3 minutos, enquanto o painel está aberto, os contadores se renovam */
     setInterval(function () { if (pode(quem()) && document.visibilityState === 'visible') { lerDil(); lerDel(); } }, 3 * 60e3);
   }

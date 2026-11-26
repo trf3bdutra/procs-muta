@@ -1,17 +1,14 @@
 #!/usr/bin/env python3
-"""Monta o pacote da extensão HERO18810 (/extensao/muta-pje.zip) com o prontuário universal.
+"""Monta o pacote HERO18810 diretamente da interface universal canônica.
 
-O prontuário universal é composto pelos mesmos arquivos da prévia (scripts/extensao/previa/), pela mesma
-montagem de scripts/extensao/previa.py: uma fonte só para a prévia e para a extensão. Aqui saem as peças
-da prévia (o shim que faz o papel do Chrome, a marca MUTA_PREVIA e o endereço do site trocado) e o painel
-lateral passa a abrir universal.html. O painel anterior (painel.html) continua no pacote.
+Nenhum shim, marca MUTA_PREVIA ou ajuste de origem da prévia entra no ZIP.
+O painel anterior (painel.html) permanece disponível para compatibilidade.
 
 Uso: python3 scripts/extensao/pacote.py --saida site/public/extensao/muta-pje.zip
 """
 import argparse
 import json
 import pathlib
-import re
 import shutil
 import sys
 import tempfile
@@ -22,24 +19,14 @@ EXT = RAIZ / 'extensao'
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 import previa  # noqa: E402
 
-UNIVERSAL = ('gabinete-universal.js', 'roteiro-universal.js', 'universal-layout.css', 'universal-ajustes.js', 'manual-canhoto.js', 'manual-canhoto.css')
-
 
 def montar(zip_saida: pathlib.Path) -> None:
     with tempfile.TemporaryDirectory() as t:
         tmp = pathlib.Path(t)
-        previa.montar(tmp / 'previa')
-        painel = tmp / 'previa' / 'painel'
         pac = tmp / 'pacote'
         shutil.copytree(EXT, pac, ignore=shutil.ignore_patterns('README.md'))
-        for f in UNIVERSAL:
-            shutil.copy2(painel / f, pac / f)
-        html = (painel / 'universal.html').read_text(encoding='utf-8')
-        html = html.replace('<script src="shim-previa.js"></script>\n', '').replace('<script>window.MUTA_PREVIA = true;</script>\n', '')
-        html = re.sub(r'\n<script>/\* prévia: o site é o da própria página \*/[^<]*</script>', '', html)
-        if 'shim-previa' in html or 'MUTA_PREVIA' in html or re.search(r'<script>(?!</script>)', html):
-            sys.exit('universal.html: sobrou código da prévia ou script embutido (o Chrome não executa script inline na extensão)')
-        (pac / 'universal.html').write_text(html, encoding='utf-8')
+        # Montagem limpa: não cria nem importa a prévia; o manifesto aponta para o painel universal.
+        previa.montar_universal(pac)
         man = json.loads((pac / 'manifest.json').read_text(encoding='utf-8'))
         man.setdefault('side_panel', {})['default_path'] = 'universal.html'
         (pac / 'manifest.json').write_text(json.dumps(man, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')

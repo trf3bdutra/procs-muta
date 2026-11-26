@@ -13,8 +13,31 @@ concurrency:
   group: hero-regressoes-${{ github.ref }}
   cancel-in-progress: true
 jobs:
+  arquitetura:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: "22"
+      - name: Paridade da extensão, prévia e web
+        run: node --test --test-reporter=tap --test-name-pattern="arquitetura HERO" apoio/ex-officio/tests/extensao-previa.test.js 2>&1 | tee hero-arquitetura.log
+      - name: Preservar diagnóstico arquitetura
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: diagnostico-hero-arquitetura
+          path: hero-arquitetura.log
+          if-no-files-found: ignore
   codigo:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
     timeout-minutes: 12
     steps:
       - uses: actions/checkout@v5
@@ -22,9 +45,19 @@ jobs:
         with:
           node-version: "22"
       - name: Testes de código e integração
-        run: node --test apoio/ex-officio/tests/extensao-muta.test.js apoio/ex-officio/tests/prontuario-extensao.test.js
+        run: node --test --test-reporter=tap apoio/ex-officio/tests/extensao-muta.test.js apoio/ex-officio/tests/prontuario-extensao.test.js 2>&1 | tee hero-codigo.log
+      - name: Preservar diagnóstico codigo
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: diagnostico-hero-codigo
+          path: hero-codigo.log
+          if-no-files-found: ignore
   navegador:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
     timeout-minutes: 8
     steps:
       - uses: actions/checkout@v5
@@ -39,4 +72,11 @@ jobs:
         env:
           NODE_PATH: /tmp/hero-ci/node_modules
           HERO_TEST_REQUIRED: "1"
-        run: node --test apoio/ex-officio/tests/extensao-comportamento.test.js
+        run: node --test --test-reporter=tap apoio/ex-officio/tests/extensao-comportamento.test.js 2>&1 | tee hero-navegador.log
+      - name: Preservar diagnóstico navegador
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: diagnostico-hero-navegador
+          path: hero-navegador.log
+          if-no-files-found: ignore
