@@ -640,12 +640,13 @@
    var control=el('div','hero-ger-context-tools');control.append(btn('Atualizar vínculos',function(){action({acao:'listar'});}));
    b.append(el('small','muted','Adoção é declaração expressa da equipe, não prova de inserção no texto final. Os vínculos não alteram a minuta-matriz.'),control,manual,msg,out);
    d.addEventListener('toggle',function(){if(d.open&&vigente())action({acao:'listar'});});
-   fundListener=function(e){if(d.isConnected&&e.detail.cnj===k.cnj&&vigente()){latest=e.detail.vinculos;draw();}};document.addEventListener('muta:fund-vinculos',fundListener);
+   fundListener=function(e){if(d.isConnected&&e.detail.cnj===k.cnj&&vigente()){latest=e.detail.vinculos;draw();montarConformidadeFluxo(host);}};document.addEventListener('muta:fund-vinculos',fundListener);
   }
   function montarConformidadeFluxo(host){
+    var anterior=host.querySelector('.hero-ger-flow-check'),aberto=anterior&&anterior.open;if(anterior)anterior.remove();
     var FT=window.MutaFontes,MO=window.MutaConformidadeMotor,f=FT&&FT.conformidadeFicha&&FT.conformidadeFicha();
     if(!f||!MO||!MO.conferirFluxo)return;
-    var R=MO.conferirFluxo(f,null),d=document.createElement('details');d.className='hero-ger-contextual hero-ger-flow-check';var title=document.createElement('summary');title.textContent='Conformidade processual da ficha · '+R.itens.length+' apontamento(s)';d.append(title);
+    var R=MO.conferirFluxo(f,null),d=document.createElement('details');d.className='hero-ger-contextual hero-ger-flow-check';d.open=!!aberto;var title=document.createElement('summary');title.textContent='Conformidade processual da ficha · '+R.itens.length+' apontamento(s)';d.append(title);
     var body=document.createElement('div');body.className='hero-ger-context-body';var info=document.createElement('small');info.className='muted';info.textContent='Conferência estrutural da ficha: '+R.stats.questoes+' questões · '+R.stats.recursos+' recursos · '+R.stats.adotados+' materiais declarados adotados. Para comparar com a minuta efetiva, leia o editor no Corretor.';body.append(info);
     R.itens.forEach(function(x){var p=document.createElement('article');p.className='hero-ger-context-card';var b=document.createElement('b');b.textContent=(x.sev==='alta'?'Alta':x.sev==='media'?'Média':'Baixa')+' · '+x.msg;var s=document.createElement('small');s.textContent=x.sug;p.append(b,s);body.append(p);});
     if(!R.itens.length){var p=document.createElement('p');p.className='muted';p.textContent='Nenhuma inconsistência estrutural detectada nos campos disponíveis; não significa liberação ou revisão concluída.';body.append(p);}

@@ -1897,10 +1897,12 @@ function heroRoteiroFiltros(){
  input.value=st.q;input.oninput=function(){st.q=input.value;apply();};buttons.forEach(function(b){b.onclick=function(){var k=b.dataset.routeFilter;st.status=st.status===k?'all':k;if(k==='all'){st.q='';input.value='';}apply();};});
  if(next)next.onclick=function(){var pending=steps.filter(function(s){return s.dataset.routeStatus!=='ok';}),active=pending.findIndex(function(s){return s.classList.contains('ab')||s.querySelector('details[open]');});if(!pending.length)return;var target=pending[(active+1)%pending.length],b=target.querySelector('.rt-h,summary');st.status='all';st.q='';st.phases={};input.value='';apply();if(b&&!target.classList.contains('ab')&&!target.querySelector('details[open]')){var k=target.querySelector('[data-rt],[data-cc]');var id=target.querySelector('[data-cc]');b.click();var live=id?caixa.querySelector('[data-cc="'+id.getAttribute('data-cc')+'"]'):k?Array.from(caixa.querySelectorAll('[data-rt]')).find(function(n){return n.dataset.rt===k.dataset.rt;}):null;if(live)live.scrollIntoView({block:'nearest'});}else target.scrollIntoView({block:'nearest'});};apply();
 }
+var ultimoContextoConformidade=null;
 function render() {
   var old=caixa&&caixa.querySelector('.hero-pront-dialog[open]');
   if(old&&heroTopo.dialog===old.dataset.heroDialog&&heroTopo.cnj===G.cnj){var scroll=old.querySelector('.hero-pront-dialog-body'),a=document.activeElement;heroTopo.dialogScroll=scroll?scroll.scrollTop:0;heroTopo.dialogFocus=a&&old.contains(a)&&a.dataset.fk?{key:a.dataset.fk,start:a.selectionStart,end:a.selectionEnd}:null;}
   render0(); heroOrganizarProntuario(); heroDadosFiltros(); heroRoteiroFiltros(); if (window.MutaGerador && window.MutaGerador.pintar) window.MutaGerador.pintar();estadoFila(filaAtual());
+  var FT=window.MutaFontes,atual=JSON.stringify(FT&&FT.conformidadeFicha?FT.conformidadeFicha():null);if(atual!==ultimoContextoConformidade){ultimoContextoConformidade=atual;document.dispatchEvent(new CustomEvent('muta:ficha-conformidade'));}
 }
 function render0() {
   if (!caixa) return;

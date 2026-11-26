@@ -214,7 +214,7 @@ function conferirFluxo(f,txt){
   if(rr.length&&(R.length>1||J.length)&&rows.length!==1)aviso('media','R'+(i+1)+'-resultado',label+': '+(rows.length?'resultado ambíguo.':'resultado individual não registrado.'),'Individualizar pelo ID.');
   if(rows.length===1){var z=rows[0];usados.set(z,(usados.get(z)||0)+1);if(!S(z.resultado))aviso('media','R'+(i+1)+'-vazio',label+': resultado em branco.','Registrar resultado.');if(S(r.parte)&&S(z.recorrente)&&norm(r.parte)!==norm(z.recorrente)){usados.set(z,2);aviso('media','R'+(i+1)+'-parte',label+': recorrente diverge do registro de resultado.','Conferir identidade.');}}
  });
- J.forEach(function(z,i){var key='J'+(i+1),label='Resultado '+(S(z.recorrente)||S(z.id_recurso)||String(i+1)),esperado=resultadoProntuario(z.resultado);
+ J.forEach(function(z,i){var key='J'+(i+1),label='Resultado '+(S(z.recorrente)||S(z.id_recurso)||String(i+1)),esperado=({'provido':'provido','desprovido':'desprovido','parcialmente provido':'parcial','nao conhecido':'naoconhecido','prejudicado':'prejudicado'})[nz(z.resultado)]||'';
   if(usados.get(z)!==1){aviso('media',key+'-associacao',label+': sem associação inequívoca a recurso.','Conferir IDs e recorrentes.');return;}
   if(!esperado)return;
   var found=sections.map(function(s){return {nome:s.nome,r:alvo(s.texto,z)};}).filter(function(s){return s.r;});
@@ -224,7 +224,7 @@ function conferirFluxo(f,txt){
  L.forEach(function(x,i){var key='V'+(i+1),q=Q.filter(function(q){return JSON.stringify(ident(q))===JSON.stringify(x.questao);}),mat=x.material||{},label=S(mat.titulo)||S(mat.id)||'Material';
   if(q.length!==1){stats.vinculosObsoletos++;if(x.estado!=='Descartado')aviso('media',key+'-obsoleto','Vínculo de questão alterada, excluída ou ambígua: '+label+'.','Refazer vínculo.');return;}
   if(x.estado!=='Adotado')return;
-  var t=x.uso==='Dispositivo'?disp:x.uso==='Ambos'?[fund,disp].filter(Boolean).join(' '):fund;if(!t)return;
+  var refText=txt&&S(txt.referencias)||fund;var t=x.uso==='Dispositivo'?disp:x.uso==='Ambos'?[refText,disp].filter(Boolean).join(' '):refText;if(!t)return;
   if(mat.tipo==='Precedente'){var cnj=(S(mat.id)+' '+S(mat.titulo)).match(/\b\d{7}-\d{2}\.\d{4}\.\d\.\d{2}\.\d{4}\b/);if(cnj){var d=cnj[0].replace(/\D/g,''),achou=(String(t).match(/\b\d{7}-\d{2}\.\d{4}\.\d\.\d{2}\.\d{4}\b|\b\d{20}\b/g)||[]).some(function(v){return v.replace(/\D/g,'')===d;});if(!achou)aviso('baixa',key+'-citacao','Precedente adotado não localizado pelo CNJ na utilização declarada: '+label+'.','Conferir formas alternativas de citação e efetiva utilização.');}}
   if(mat.tipo==='Dispositivo legal'&&norm(label).length>8&&!(' '+norm(t)+' ').includes(' '+norm(label)+' '))aviso('baixa',key+'-norma','Referência normativa adotada não localizada literalmente: '+label+'.','Conferir variantes de redação.');
  });
@@ -504,7 +504,7 @@ function analisar(paragrafos, ctx) {
     if (p.ita != null && /^[“"]/.test(t) && /[”"](\s*\(g\.n\.\))?[.;:]?$/.test(t) && t.length > 60 && (p.ita || 0) < 0.5) add('baixa', 'Formatação', 'MAN-CMT-009', 'Transcrição em parágrafo próprio, entre aspas e em itálico.', p, 0, 1);
   });
 
-  var fluxo=conferirFluxo(ctx.fluxo,{fundamentacao:(peca==='acordao'?P.voto:peca==='decisao'?corpo:[]).filter(function(p){return !citacao(p)&&!/^Ante o exposto,/i.test(p.t);}).map(function(p){return p.t;}).join('\n'),dispositivo:dispV.map(function(p){return p.t;}).join('\n'),resultados:[{nome:'dispositivo',texto:dispV.map(function(p){return p.t;}).join('\n')},{nome:'item IV da ementa',texto:(disE||[]).map(function(p){return p.t;}).join('\n')},{nome:'acórdão',texto:P.acordao.map(function(p){return p.t;}).join('\n')}]});
+  var fluxo=conferirFluxo(ctx.fluxo,{referencias:(peca==='acordao'?P.voto:peca==='decisao'?corpo:[]).map(function(p){return p.t;}).join('\n'),fundamentacao:(peca==='acordao'?P.voto:peca==='decisao'?corpo:[]).filter(function(p){return !citacao(p)&&!/^Ante o exposto,/i.test(p.t);}).map(function(p){return p.t;}).join('\n'),dispositivo:dispV.map(function(p){return p.t;}).join('\n'),resultados:[{nome:'dispositivo',texto:dispV.map(function(p){return p.t;}).join('\n')},{nome:'item IV da ementa',texto:(disE||[]).map(function(p){return p.t;}).join('\n')},{nome:'acórdão',texto:P.acordao.map(function(p){return p.t;}).join('\n')}]});
   fluxo.itens.forEach(function(x){if(!off[x.regra])itens.push(x);});
   itens.sort(function (x, y) { return (SEV[y.sev] - SEV[x.sev]) || ((x.par == null ? -1 : x.par) - (y.par == null ? -1 : y.par)); });
   var resumo = { alta: 0, media: 0, baixa: 0 };
