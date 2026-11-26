@@ -10,8 +10,9 @@ name: Lotes · alimentar ficha e prontuários
 # quando a pauta oficial entra) e o índice acervo/lotes/colecoes.json.
 on:
   schedule:
-    - cron: '7 10-23 * * *'
-    - cron: '7 0-3 * * *'
+    # a cada 2 horas, das 6h às 22h de Cuiabá (UTC-4)
+    - cron: '7 10-22/2 * * *'
+    - cron: '7 0,2 * * *'
   workflow_dispatch:
 permissions:
   contents: write

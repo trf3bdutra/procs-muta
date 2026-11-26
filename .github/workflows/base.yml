@@ -1,27 +1,9 @@
 # Base gabcmt (padrão 1.0): a cada gravação, valida a base, atualiza o manifesto e reconstrói o Vade Mecum.
 # Commits feitos por este fluxo (GITHUB_TOKEN) não disparam o fluxo de novo.
 name: Base gabcmt
+# As mesmas etapas rodam agora dentro de "Caput na Vercel" a cada push (uma publicação só).
+# Este workflow fica para acionamento manual.
 on:
-  push:
-    branches: [main]
-    paths:
-      - "precedentes/precedentes.jsonl"
-      - "precedentes/inteiros-teores/**"
-      - "modelos/**"
-      - "apoio/**"
-      - "padrao/esquema.json"
-      - "padrao/paradigmas.js"
-      - "padrao/lia/Prompt_Minuta_CMT_v3.txt"
-      - "padrao/lia/campos-prontuario.json"
-      - "padrao/vocabulario.json"
-      - "scripts/vocabulario/**"
-      - "scripts/lia/**"
-      - "gerar.py"
-      # dados que a equipe grava pelo app não mudam o Vade Mecum nem o manifesto: sem commit do Base e sem nova publicação a cada clique
-      - "!apoio/equipe*.json"
-      - "!apoio/sustentacoes.json"
-      - "!apoio/regras/**"
-      - "!apoio/ex-officio/**"
   workflow_dispatch:
 permissions:
   contents: write

@@ -11,42 +11,45 @@ name: Caput na Vercel
 on:
   push:
     branches: [main]
-    paths: ["vercel.json", "caput/**", "cognitio/**", "apoio/modus-operandi/modus-operandi.html", "apoio/modus-operandi/modus-operandi-editor.html", "apoio/enciclopedia.json", "apoio/ex-officio/**", "apoio/amicus/**", "apoio/modus-operandi/fonte/**", "apoio/vade-mecum.json", "modelos/modelos.json", "modelos/paragrafos.json", "apoio/repertorio-normativo-complemento.json", "scripts/repertorio/**", ".github/workflows/vercel-caput.yml", "padrao/acervo-fonte.js", "padrao/favicon/**", "padrao/loading/**", "precedentes/jurisprudencia/**", "precedentes/collegium/**", "apoio/modus-operandi/collegium.html", "scripts/jurisprudencia/**", "precedentes/precedentes.jsonl", "precedentes/inteiros-teores/**", "extensao/**", "scripts/extensao/**", "!apoio/ex-officio/tests/**", "!cognitio/tests/**"]
+    paths: ["precedentes/precedentes.jsonl", "precedentes/inteiros-teores/**", "modelos/**", "apoio/**", "padrao/esquema.json", "padrao/paradigmas.js", "padrao/lia/Prompt_Minuta_CMT_v3.txt", "padrao/lia/campos-prontuario.json", "padrao/vocabulario.json", "scripts/vocabulario/**", "scripts/lia/**", "gerar.py", "!apoio/equipe*.json", "!apoio/sustentacoes.json", "!apoio/regras/**", "vercel.json", "caput/**", "cognitio/**", "apoio/modus-operandi/modus-operandi.html", "apoio/modus-operandi/modus-operandi-editor.html", "apoio/enciclopedia.json", "apoio/ex-officio/**", "apoio/amicus/**", "apoio/modus-operandi/fonte/**", "apoio/vade-mecum.json", "modelos/modelos.json", "modelos/paragrafos.json", "apoio/repertorio-normativo-complemento.json", "scripts/repertorio/**", ".github/workflows/vercel-caput.yml", "padrao/acervo-fonte.js", "padrao/favicon/**", "padrao/loading/**", "precedentes/jurisprudencia/**", "precedentes/collegium/**", "apoio/modus-operandi/collegium.html", "scripts/jurisprudencia/**", "precedentes/precedentes.jsonl", "precedentes/inteiros-teores/**", "extensao/**", "scripts/extensao/**", "!apoio/ex-officio/tests/**", "!cognitio/tests/**"]
   # o commit do Base (feito com o GITHUB_TOKEN) não dispara outros workflows: publica de novo quando ele termina
-  workflow_run:
-    workflows: ["Base gabcmt"]
-    types: [completed]
-    branches: [main]
   workflow_dispatch:
 permissions:
-  contents: read
+  contents: write
 env:
   VERCEL_SCOPE: ${{ vars.VERCEL_SCOPE || 'brndutras-projects' }}
   VERCEL_NAME: ${{ vars.VERCEL_NAME || 'gabinete-cmt' }}
 jobs:
-  # Um job só (cada job cobra no mínimo um minuto). Depois do Base: só publica se ele gravou alguma coisa (o commit "Base: validação e manifesto (<sha>)").
+  # Um job só (cada job cobra no mínimo um minuto). Inclui as etapas do Base, para publicar uma vez por push (o commit "Base: validação e manifesto (<sha>)").
   # Sem isso, cada gravação da equipe virava uma publicação nova, que ainda cancelava a publicação em curso.
   publicar:
     runs-on: ubuntu-latest
-    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     concurrency:
       group: vercel-caput
       # Um push ou acionamento manual mais recente substitui a publicação anterior.
-      # Um evento do Base pode não ter gerado alterações: não interrompe uma publicação em curso.
-      cancel-in-progress: ${{ github.event_name != 'workflow_run' }}
+      cancel-in-progress: true
     steps:
       - uses: actions/checkout@v5
         with:
           ref: main
           fetch-depth: 30
       - id: v
-        env:
-          EVENTO: ${{ github.event_name }}
-          SHA_BASE: ${{ github.event.workflow_run.head_sha }}
+        run: echo "publicar=1" >> "$GITHUB_OUTPUT"
+      # Etapas do Base (antes no workflow base.yml, que disparava uma segunda publicação ao terminar):
+      # valida e atualiza o manifesto, o vocabulário, os prompts da LIA e o Vade Mecum; grava se mudou e segue para publicar.
+      - name: Base · valida, atualiza e grava
         run: |
-          if [ "$EVENTO" != "workflow_run" ]; then echo "publicar=1" >> "$GITHUB_OUTPUT"; exit 0; fi
-          if git log -30 --format=%s | grep -qF "Base: validação e manifesto (${SHA_BASE:0:7})"; then echo "publicar=1" >> "$GITHUB_OUTPUT"
-          else echo "publicar=0" >> "$GITHUB_OUTPUT"; echo "O Base não gravou nada: nada novo a publicar."; fi
+          python3 gerar.py
+          python3 scripts/vocabulario/aplicar.py
+          python3 scripts/lia/gerar_prompts.py
+          python3 apoio/modus-operandi/fonte/build.py
+          if [ -n "$(git status --porcelain)" ]; then
+            git config user.name "base-gabcmt[bot]"
+            git config user.email "base-gabcmt@users.noreply.github.com"
+            git add -A
+            git commit -q -m "Base: validação e manifesto (${GITHUB_SHA::7})"
+            for i in 1 2 3 4; do git push -q origin HEAD:main && break; sleep $((i*3)); git pull --rebase -q origin main; done
+          fi
       - uses: actions/setup-node@v5
         if: steps.v.outputs.publicar == '1'
         with:
