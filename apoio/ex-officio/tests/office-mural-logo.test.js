@@ -431,3 +431,11 @@ test('Mural: coluna da direita até a borda de baixo da lista, sem rolagem próp
   assert.match(h, /overflow:visible!important;display:flex;flex-direction:column;align-self:stretch!important\}/);
   assert.match(h, /#mu-host>#mu-alm>\.cc-esq\{display:block!important;position:static!important;top:auto!important;margin:0!important/);
 });
+test('Mural v2: crachá, Meu dia e agenda em faixa montados sobre os blocos reais do MU, sem dados de prévia',()=>{
+ const i=app.indexOf('<script id="mural-v2">'),js=app.slice(i,app.indexOf('</script>',i));
+ assert.ok(i>0&&app.indexOf('<style id="mural-v2-css">')>0);
+ assert.ok(js.includes('var orig=MU.montar;MU.montar=function(){var r=orig.apply(this,arguments);aplica();return r;};'));
+ for(const x of ["fx.querySelector('.fx-kp').appendChild(KP)","fx.querySelector('.fx-bd').appendChild(BD)","au.setAttribute('slot','xaus')","dc.slot='dia'","#hc-cal-full #cc-cal .cc-esq","document.querySelectorAll('#l-not>.nt')","A.set('itens',L)"]) assert.ok(js.includes(x),x);
+ assert.ok(!/prévia|AF\.push|Salvas nesta/.test(js),'sem gravação de mentira');
+ assert.ok(js.includes("document.body.classList.toggle('mural-pg',on)"),'visual só na página do Mural');
+});
