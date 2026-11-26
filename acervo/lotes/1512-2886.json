@@ -16,10 +16,38 @@
  "colunas": [],
  "grupos": [
   {
-   "id": "assunto-1",
-   "rotulo": "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
+   "id": "1",
+   "rotulo": "Limitação territorial afastada",
    "cor": "#2f6db5",
-   "resultado": "",
+   "resultado": "Provimento, com retorno à origem",
+   "modelo": "5006369-05.2024 (1-a)"
+  },
+  {
+   "id": "2",
+   "rotulo": "Limitação afastada + acordo",
+   "cor": "#7a5cc2",
+   "resultado": "Desprovimento",
+   "modelo": "5007937-56.2024 (2-a)"
+  },
+  {
+   "id": "3",
+   "rotulo": "Acordo administrativo",
+   "cor": "#1f8a70",
+   "resultado": "Desprovimento",
+   "modelo": "5006719-90.2024 (3-a)"
+  },
+  {
+   "id": "6",
+   "rotulo": "BACEN fora do polo",
+   "cor": "#b8562f",
+   "resultado": "Desprovimento, conforme explicitado",
+   "modelo": "5007534-87.2024 (6-a)"
+  },
+  {
+   "id": "9",
+   "rotulo": "Outros (sem modelo)",
+   "cor": "#8a8f98",
+   "resultado": "Voto próprio",
    "modelo": ""
   }
  ],
@@ -39,12 +67,17 @@
    "executado": "UNIÃO FEDERAL",
    "assunto": "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
    "assunto_detalhado": "",
-   "grupo": "assunto-1",
-   "tipo_caso": "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
-   "resultado": "",
-   "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "grupo": "1",
+   "tipo_caso": "1 · Limitação territorial afastada",
+   "resultado": "Proposta: dar provimento à apelação, com retorno à origem (grupo 1) [VALIDAR: vínculo com o SINDSPREV/RJ: se a União alegou a ação coletiva 0023278-37.1995, o caso é do grupo 4]",
+   "modelo": "5006369-05.2024 (1-a)",
+   "variacoes": [
+    "SOB",
+    "ILA",
+    "TERR",
+    "H-REF"
+   ],
+   "observacao": "Sentença por ilegitimidade ativa (servidora fora de MS), com custas e honorários; patrono do SINDSPREV/RJ.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -53,11 +86,38 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "404532860"
+    },
+    {
+     "peca": "Apelação",
+     "id": "404532861"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "404532863"
+    }
+   ],
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — servidor público (28,86%, ACP 0005019-15.1997.4.03.6000)",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 404532860 (25/06/2026)",
+    "recurso": "apelação (ID 404532861, 15/07/2026)",
+    "preparo": "[VALIDAR]",
+    "representacao": "procuração/substabelecimento ID 404532831, 404532836",
+    "mpf": "Não consta parecer",
+    "autos": "44 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] vínculo com o SINDSPREV/RJ: se a União alegou a ação coletiva 0023278-37.1995, o caso é do grupo 4"
+   ],
    "minuta": false
   },
   {
@@ -70,12 +130,16 @@
    "executado": "FUNDACAO NACIONAL DE SAUDE",
    "assunto": "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
    "assunto_detalhado": "",
-   "grupo": "assunto-1",
-   "tipo_caso": "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
-   "resultado": "",
-   "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "grupo": "2",
+   "tipo_caso": "2 · Limitação afastada + acordo",
+   "resultado": "Proposta: negar provimento à apelação: afastada a limitação territorial, mantida a extinção pelo acordo administrativo (grupo 2) [VALIDAR: gratuidade pedida na apelação × custas recolhidas: conferir preparo]",
+   "modelo": "5007937-56.2024 (2-a)",
+   "variacoes": [
+    "TERR",
+    "ACORDO",
+    "H-MAJ"
+   ],
+   "observacao": "Sentença acolheu ilegitimidade ativa e ausência de título por acordo, com custas e honorários; apelação pede gratuidade ou preparo ao final.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -84,11 +148,38 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "404072631"
+    },
+    {
+     "peca": "Apelação",
+     "id": "404072632"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "404072634"
+    }
+   ],
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — servidor público (28,86%, ACP 0005019-15.1997.4.03.6000)",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 404072631 (17/08/2026)",
+    "recurso": "apelação (ID 404072632, 14/09/2026)",
+    "preparo": "comprovante juntado (ID 404072620, 404072623, 404072627, 404072630) — conferir o tipo",
+    "representacao": "procuração/substabelecimento ID 404072583",
+    "mpf": "Não consta parecer",
+    "autos": "60 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] gratuidade pedida na apelação × custas recolhidas: conferir preparo"
+   ],
    "minuta": false
   },
   {
@@ -101,12 +192,16 @@
    "executado": "UNIÃO FEDERAL",
    "assunto": "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
    "assunto_detalhado": "",
-   "grupo": "assunto-1",
-   "tipo_caso": "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
-   "resultado": "",
-   "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "grupo": "1",
+   "tipo_caso": "1 · Limitação territorial afastada",
+   "resultado": "Proposta: dar provimento à apelação, com retorno à origem (grupo 1) [VALIDAR: contrarrazões alegam acordo: módulo TRANS se só nas contrarrazões]",
+   "modelo": "5006369-05.2024 (1-a)",
+   "variacoes": [
+    "SOB",
+    "ILA",
+    "TERR"
+   ],
+   "observacao": "Sentença por ilegitimidade ativa, sem honorários (relação não angularizada); contrarrazões da FUNASA também com acordo.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -115,11 +210,38 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "402924865"
+    },
+    {
+     "peca": "Apelação",
+     "id": "402924866"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "402924869"
+    }
+   ],
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — servidor público (28,86%, ACP 0005019-15.1997.4.03.6000)",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 402924865 (04/09/2026)",
+    "recurso": "apelação (ID 402924866, 25/09/2026)",
+    "preparo": "[VALIDAR]",
+    "representacao": "procuração/substabelecimento ID 402924844",
+    "mpf": "Não consta parecer",
+    "autos": "36 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] contrarrazões alegam acordo: módulo TRANS se só nas contrarrazões"
+   ],
    "minuta": false
   },
   {
@@ -132,12 +254,16 @@
    "executado": "INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS",
    "assunto": "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
    "assunto_detalhado": "",
-   "grupo": "assunto-1",
-   "tipo_caso": "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
-   "resultado": "",
-   "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "grupo": "1",
+   "tipo_caso": "1 · Limitação territorial afastada",
+   "resultado": "Proposta: dar provimento à apelação, com retorno à origem (grupo 1) [VALIDAR: herdeiros/sucessores no polo? (módulo PENS/SUC); peça sem texto extraído: ID 402966875]",
+   "modelo": "5006369-05.2024 (1-a)",
+   "variacoes": [
+    "SOB",
+    "ILA",
+    "TERR"
+   ],
+   "observacao": "Sentença por ilegitimidade ativa, sem honorários; apelação menciona prescrição.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -146,11 +272,39 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "402966864"
+    },
+    {
+     "peca": "Apelação",
+     "id": "402966865"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "402966875"
+    }
+   ],
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — servidor público (28,86%, ACP 0005019-15.1997.4.03.6000)",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 402966864 (17/07/2026)",
+    "recurso": "apelação (ID 402966865, 12/08/2026)",
+    "preparo": "[VALIDAR]",
+    "representacao": "procuração/substabelecimento ID 402966836",
+    "mpf": "Não consta parecer",
+    "autos": "55 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] herdeiros/sucessores no polo? (módulo PENS/SUC)",
+    "[VALIDAR] peça sem texto extraído: ID 402966875"
+   ],
    "minuta": false
   },
   {
@@ -163,12 +317,16 @@
    "executado": "UNIÃO FEDERAL",
    "assunto": "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
    "assunto_detalhado": "",
-   "grupo": "assunto-1",
-   "tipo_caso": "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
-   "resultado": "",
-   "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "grupo": "1",
+   "tipo_caso": "1 · Limitação territorial afastada",
+   "resultado": "Proposta: dar provimento à apelação, com retorno à origem (grupo 1) [VALIDAR: GRU com a apelação (ID 402967751): conferir preparo]",
+   "modelo": "5006369-05.2024 (1-a)",
+   "variacoes": [
+    "SOB",
+    "ILA",
+    "TERR"
+   ],
+   "observacao": "Sentença por ilegitimidade ativa (ID 402967745), sem honorários; embargos de declaração rejeitados (ID 402967749); apelação com sobrestamento (Tema 1.433).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -177,11 +335,46 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "402967745"
+    },
+    {
+     "peca": "Embargos de declaração",
+     "id": "402967746"
+    },
+    {
+     "peca": "Apelação",
+     "id": "402967750"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "402967748"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "402967753"
+    }
+   ],
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — servidor público (28,86%, ACP 0005019-15.1997.4.03.6000)",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 402967745 (10/08/2026)",
+    "recurso": "embargos de declaração (ID 402967746, 17/08/2026); apelação (ID 402967750, 28/09/2026)",
+    "preparo": "comprovante juntado (ID 402967734, 402967737, 402967740, 402967751) — conferir o tipo",
+    "representacao": "procuração/substabelecimento ID 402967646",
+    "mpf": "Não consta parecer",
+    "autos": "69 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] GRU com a apelação (ID 402967751): conferir preparo"
+   ],
    "minuta": false
   },
   {
@@ -194,12 +387,17 @@
    "executado": "UNIÃO FEDERAL",
    "assunto": "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
    "assunto_detalhado": "",
-   "grupo": "assunto-1",
-   "tipo_caso": "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
-   "resultado": "",
-   "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "grupo": "1",
+   "tipo_caso": "1 · Limitação territorial afastada",
+   "resultado": "Proposta: dar provimento à apelação, com retorno à origem (grupo 1) [VALIDAR: contrarrazões citam sindicato e litispendência: módulos SIND/LITISP (grupo 4?)]",
+   "modelo": "5006369-05.2024 (1-a)",
+   "variacoes": [
+    "SOB",
+    "ILA",
+    "TERR",
+    "H-REF"
+   ],
+   "observacao": "Sentença por ilegitimidade ativa, com custas e honorários; patrono do SINDSPREV/RJ; contrarrazões com litispendência e sindicato.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -208,11 +406,38 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "407294606"
+    },
+    {
+     "peca": "Apelação",
+     "id": "407294607"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "407294609"
+    }
+   ],
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — servidor público (28,86%, ACP 0005019-15.1997.4.03.6000)",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 407294606 (29/06/2026)",
+    "recurso": "apelação (ID 407294607, 15/07/2026)",
+    "preparo": "[VALIDAR]",
+    "representacao": "procuração/substabelecimento ID 407294360, 407294381, 407294582",
+    "mpf": "Não consta parecer",
+    "autos": "60 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] contrarrazões citam sindicato e litispendência: módulos SIND/LITISP (grupo 4?)"
+   ],
    "minuta": false
   },
   {
@@ -225,12 +450,14 @@
    "executado": "UNIÃO FEDERAL",
    "assunto": "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
    "assunto_detalhado": "",
-   "grupo": "assunto-1",
-   "tipo_caso": "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
-   "resultado": "",
-   "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "grupo": "3",
+   "tipo_caso": "3 · Acordo administrativo",
+   "resultado": "Proposta: negar provimento à apelação: acordo administrativo (MP 2.169-43/2001, Tema 550/STJ) (grupo 3) [VALIDAR: tese de absorção por reestruturação de carreira: sem modelo direto]",
+   "modelo": "5006719-90.2024 (3-a)",
+   "variacoes": [
+    "ACORDO"
+   ],
+   "observacao": "Sentença (485, VI) com honorários de 10%; apelação discute absorção do índice pela reestruturação da carreira policial federal; memoriais em 26/11/2026.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -239,11 +466,42 @@
     "correcao": "Alexander",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "403138679"
+    },
+    {
+     "peca": "Apelação",
+     "id": "403138680"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "403138734"
+    },
+    {
+     "peca": "Memoriais",
+     "id": "414621639"
+    }
+   ],
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — servidor público (28,86%, ACP 0005019-15.1997.4.03.6000)",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 403138679 (27/05/2026)",
+    "recurso": "apelação (ID 403138680, 22/06/2026)",
+    "preparo": "comprovante juntado (ID 403138681) — conferir o tipo",
+    "representacao": "procuração/substabelecimento ID 403138655",
+    "mpf": "Não consta parecer",
+    "autos": "45 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] tese de absorção por reestruturação de carreira: sem modelo direto"
+   ],
    "minuta": false
   },
   {
@@ -256,12 +514,16 @@
    "executado": "UNIÃO FEDERAL",
    "assunto": "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
    "assunto_detalhado": "",
-   "grupo": "assunto-1",
-   "tipo_caso": "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
-   "resultado": "",
-   "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "grupo": "1",
+   "tipo_caso": "1 · Limitação territorial afastada",
+   "resultado": "Proposta: dar provimento à apelação, com retorno à origem (grupo 1) [VALIDAR: fundamento da sentença ID 366441412 (lotação fora de MS?)]",
+   "modelo": "5006369-05.2024 (1-a)",
+   "variacoes": [
+    "SOB",
+    "ILA",
+    "TERR"
+   ],
+   "observacao": "Sentença (ID 366441412) e embargos de declaração rejeitados (ID 366441416); parecer do MPF pelo desprovimento (ID 371195346).",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -270,11 +532,50 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "366441412"
+    },
+    {
+     "peca": "Embargos de declaração",
+     "id": "366441413"
+    },
+    {
+     "peca": "Apelação",
+     "id": "366441417"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "366441415"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "366441419"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "371195346"
+    }
+   ],
+   "mpf": "parecer ID 371195346 (05/05/2026)",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — servidor público (28,86%, ACP 0005019-15.1997.4.03.6000)",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 366441412 (02/02/2026)",
+    "recurso": "embargos de declaração (ID 366441413, 11/02/2026); apelação (ID 366441417, 20/03/2026)",
+    "preparo": "[VALIDAR]",
+    "representacao": "procuração/substabelecimento ID 366441381",
+    "mpf": "parecer ID 371195346 (05/05/2026)",
+    "autos": "52 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] fundamento da sentença ID 366441412 (lotação fora de MS?)"
+   ],
    "minuta": false
   },
   {
@@ -287,12 +588,16 @@
    "executado": "BANCO CENTRAL DO BRASIL",
    "assunto": "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
    "assunto_detalhado": "",
-   "grupo": "assunto-1",
-   "tipo_caso": "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
-   "resultado": "",
-   "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "grupo": "6",
+   "tipo_caso": "6 · BACEN fora do polo da ACP",
+   "resultado": "Proposta: negar provimento à apelação, conforme explicitado: BACEN não integrou a ACP; honorários (artigo 331 do CPC) e gratuidade (Tema 1.178/STJ) (grupo 6) [VALIDAR: honorários da sentença e gratuidade: módulos H-331/GRAT]",
+   "modelo": "5007534-87.2024 (6-a)",
+   "variacoes": [
+    "BACEN",
+    "H-331",
+    "GRAT"
+   ],
+   "observacao": "Sentença (31/03/2026) acolheu as impugnações: ilegitimidade passiva da União e do BACEN; apelação do exequente com pedido de gratuidade; contrarrazões do BACEN sobre a gratuidade.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -301,11 +606,38 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "392708135"
+    },
+    {
+     "peca": "Apelação",
+     "id": "392708136"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "392708138"
+    }
+   ],
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — servidor público (28,86%, ACP 0005019-15.1997.4.03.6000)",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 392708135 (31/03/2026)",
+    "recurso": "apelação (ID 392708136, 15/04/2026)",
+    "preparo": "Gratuidade pedida na apelação [VALIDAR]",
+    "representacao": "procuração/substabelecimento ID 392708061",
+    "mpf": "Não consta parecer",
+    "autos": "38 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] honorários da sentença e gratuidade: módulos H-331/GRAT"
+   ],
    "minuta": false
   },
   {
@@ -318,12 +650,16 @@
    "executado": "BANCO CENTRAL DO BRASIL",
    "assunto": "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
    "assunto_detalhado": "",
-   "grupo": "assunto-1",
-   "tipo_caso": "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
-   "resultado": "",
-   "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "grupo": "6",
+   "tipo_caso": "6 · BACEN fora do polo da ACP",
+   "resultado": "Proposta: negar provimento à apelação, conforme explicitado: BACEN não integrou a ACP; honorários (artigo 331 do CPC) e gratuidade (Tema 1.178/STJ) (grupo 6) [VALIDAR: honorários da sentença e gratuidade: módulos H-331/GRAT]",
+   "modelo": "5007534-87.2024 (6-a)",
+   "variacoes": [
+    "BACEN",
+    "H-331",
+    "GRAT"
+   ],
+   "observacao": "Sentença (31/03/2026) acolheu as impugnações: ilegitimidade passiva da União e do BACEN; apelação do exequente com pedido de gratuidade; contrarrazões do BACEN sobre a gratuidade.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -332,11 +668,38 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "392706746"
+    },
+    {
+     "peca": "Apelação",
+     "id": "392706747"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "392706749"
+    }
+   ],
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — servidor público (28,86%, ACP 0005019-15.1997.4.03.6000)",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 392706746 (31/03/2026)",
+    "recurso": "apelação (ID 392706747, 10/04/2026)",
+    "preparo": "Gratuidade pedida na apelação [VALIDAR]",
+    "representacao": "procuração/substabelecimento ID 392706723",
+    "mpf": "Não consta parecer",
+    "autos": "37 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] honorários da sentença e gratuidade: módulos H-331/GRAT"
+   ],
    "minuta": false
   },
   {
@@ -349,12 +712,16 @@
    "executado": "BANCO CENTRAL DO BRASIL",
    "assunto": "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
    "assunto_detalhado": "",
-   "grupo": "assunto-1",
-   "tipo_caso": "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
-   "resultado": "",
-   "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "grupo": "6",
+   "tipo_caso": "6 · BACEN fora do polo da ACP",
+   "resultado": "Proposta: negar provimento à apelação, conforme explicitado: BACEN não integrou a ACP; honorários (artigo 331 do CPC) e gratuidade (Tema 1.178/STJ) (grupo 6) [VALIDAR: honorários da sentença e gratuidade: módulos H-331/GRAT]",
+   "modelo": "5007534-87.2024 (6-a)",
+   "variacoes": [
+    "BACEN",
+    "H-331",
+    "GRAT"
+   ],
+   "observacao": "Sentença (31/03/2026) acolheu as impugnações: ilegitimidade passiva da União e do BACEN; apelação do exequente com pedido de gratuidade; contrarrazões do BACEN sobre a gratuidade.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -363,11 +730,38 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "393371633"
+    },
+    {
+     "peca": "Apelação",
+     "id": "393371634"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "393371636"
+    }
+   ],
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — servidor público (28,86%, ACP 0005019-15.1997.4.03.6000)",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 393371633 (31/03/2026)",
+    "recurso": "apelação (ID 393371634, 17/04/2026)",
+    "preparo": "Gratuidade pedida na apelação [VALIDAR]",
+    "representacao": "procuração/substabelecimento ID 393371509",
+    "mpf": "Não consta parecer",
+    "autos": "38 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] honorários da sentença e gratuidade: módulos H-331/GRAT"
+   ],
    "minuta": false
   },
   {
@@ -380,12 +774,16 @@
    "executado": "BANCO CENTRAL DO BRASIL",
    "assunto": "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
    "assunto_detalhado": "",
-   "grupo": "assunto-1",
-   "tipo_caso": "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
-   "resultado": "",
-   "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "grupo": "6",
+   "tipo_caso": "6 · BACEN fora do polo da ACP",
+   "resultado": "Proposta: negar provimento à apelação, conforme explicitado: BACEN não integrou a ACP; honorários (artigo 331 do CPC) e gratuidade (Tema 1.178/STJ) (grupo 6) [VALIDAR: honorários da sentença e gratuidade: módulos H-331/GRAT]",
+   "modelo": "5007534-87.2024 (6-a)",
+   "variacoes": [
+    "BACEN",
+    "H-331",
+    "GRAT"
+   ],
+   "observacao": "Sentença (31/03/2026) acolheu as impugnações: ilegitimidade passiva da União e do BACEN; apelação do exequente com pedido de gratuidade; contrarrazões do BACEN sobre a gratuidade.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -394,11 +792,38 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "392773273"
+    },
+    {
+     "peca": "Apelação",
+     "id": "392773274"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "392773276"
+    }
+   ],
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — servidor público (28,86%, ACP 0005019-15.1997.4.03.6000)",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 392773273 (31/03/2026)",
+    "recurso": "apelação (ID 392773274, 13/04/2026)",
+    "preparo": "Gratuidade pedida na apelação [VALIDAR]",
+    "representacao": "procuração/substabelecimento ID 392773250",
+    "mpf": "Não consta parecer",
+    "autos": "37 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] honorários da sentença e gratuidade: módulos H-331/GRAT"
+   ],
    "minuta": false
   },
   {
@@ -411,12 +836,12 @@
    "executado": "BANCO CENTRAL DO BRASIL",
    "assunto": "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
    "assunto_detalhado": "",
-   "grupo": "assunto-1",
-   "tipo_caso": "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
-   "resultado": "",
+   "grupo": "9",
+   "tipo_caso": "Outros · desistência homologada (honorários)",
+   "resultado": "Proposta: apelação só contra honorários após desistência homologada: voto próprio [VALIDAR: sem modelo no lote]",
    "modelo": "",
    "variacoes": [],
-   "observacao": "",
+   "observacao": "Sentença homologou a desistência e condenou em honorários; apelação contra a verba; BACEN apelado.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -425,11 +850,38 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "392611940"
+    },
+    {
+     "peca": "Apelação",
+     "id": "392611941"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "392611943"
+    }
+   ],
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Processual — honorários na desistência (28,86%)",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 392611940 (13/02/2026)",
+    "recurso": "apelação (ID 392611941, 12/03/2026)",
+    "preparo": "[VALIDAR]",
+    "representacao": "procuração/substabelecimento ID 392611815",
+    "mpf": "Não consta parecer",
+    "autos": "38 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] sem modelo no lote"
+   ],
    "minuta": false
   },
   {
@@ -442,12 +894,16 @@
    "executado": "BANCO CENTRAL DO BRASIL",
    "assunto": "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
    "assunto_detalhado": "",
-   "grupo": "assunto-1",
-   "tipo_caso": "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
-   "resultado": "",
-   "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "grupo": "6",
+   "tipo_caso": "6 · BACEN fora do polo da ACP",
+   "resultado": "Proposta: negar provimento à apelação, conforme explicitado: BACEN não integrou a ACP; honorários (artigo 331 do CPC) e gratuidade (Tema 1.178/STJ) (grupo 6) [VALIDAR: honorários da sentença e gratuidade: módulos H-331/GRAT]",
+   "modelo": "5007534-87.2024 (6-a)",
+   "variacoes": [
+    "BACEN",
+    "H-331",
+    "GRAT"
+   ],
+   "observacao": "Sentença (31/03/2026) acolheu as impugnações: ilegitimidade passiva da União e do BACEN; apelação do exequente com pedido de gratuidade; contrarrazões do BACEN sobre a gratuidade.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -456,11 +912,38 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "392771917"
+    },
+    {
+     "peca": "Apelação",
+     "id": "392771918"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "392771920"
+    }
+   ],
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — servidor público (28,86%, ACP 0005019-15.1997.4.03.6000)",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 392771917 (31/03/2026)",
+    "recurso": "apelação (ID 392771918, 06/04/2026)",
+    "preparo": "Gratuidade pedida na apelação [VALIDAR]",
+    "representacao": "procuração/substabelecimento ID 392771893",
+    "mpf": "Não consta parecer",
+    "autos": "38 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] honorários da sentença e gratuidade: módulos H-331/GRAT"
+   ],
    "minuta": false
   },
   {
@@ -473,12 +956,16 @@
    "executado": "BANCO CENTRAL DO BRASIL",
    "assunto": "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
    "assunto_detalhado": "",
-   "grupo": "assunto-1",
-   "tipo_caso": "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
-   "resultado": "",
-   "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "grupo": "6",
+   "tipo_caso": "6 · BACEN fora do polo da ACP",
+   "resultado": "Proposta: negar provimento à apelação, conforme explicitado: BACEN não integrou a ACP; honorários (artigo 331 do CPC) e gratuidade (Tema 1.178/STJ) (grupo 6) [VALIDAR: honorários da sentença e gratuidade: módulos H-331/GRAT]",
+   "modelo": "5007534-87.2024 (6-a)",
+   "variacoes": [
+    "BACEN",
+    "H-331",
+    "GRAT"
+   ],
+   "observacao": "Sentença (31/03/2026) acolheu as impugnações: ilegitimidade passiva da União e do BACEN; apelação do exequente com pedido de gratuidade; contrarrazões do BACEN sobre a gratuidade.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -487,11 +974,38 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "393372032"
+    },
+    {
+     "peca": "Apelação",
+     "id": "393372033"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "393372035"
+    }
+   ],
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — servidor público (28,86%, ACP 0005019-15.1997.4.03.6000)",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 393372032 (31/03/2026)",
+    "recurso": "apelação (ID 393372033, 10/04/2026)",
+    "preparo": "Gratuidade pedida na apelação [VALIDAR]",
+    "representacao": "procuração/substabelecimento ID 393371957",
+    "mpf": "Não consta parecer",
+    "autos": "39 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] honorários da sentença e gratuidade: módulos H-331/GRAT"
+   ],
    "minuta": false
   },
   {
@@ -504,12 +1018,16 @@
    "executado": "BANCO CENTRAL DO BRASIL",
    "assunto": "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
    "assunto_detalhado": "",
-   "grupo": "assunto-1",
-   "tipo_caso": "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
-   "resultado": "",
-   "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "grupo": "6",
+   "tipo_caso": "6 · BACEN fora do polo da ACP",
+   "resultado": "Proposta: negar provimento à apelação, conforme explicitado: BACEN não integrou a ACP; honorários (artigo 331 do CPC) e gratuidade (Tema 1.178/STJ) (grupo 6) [VALIDAR: honorários da sentença e gratuidade: módulos H-331/GRAT]",
+   "modelo": "5007534-87.2024 (6-a)",
+   "variacoes": [
+    "BACEN",
+    "H-331",
+    "GRAT"
+   ],
+   "observacao": "Sentença (31/03/2026) acolheu as impugnações: ilegitimidade passiva da União e do BACEN; apelação do exequente com pedido de gratuidade; contrarrazões do BACEN sobre a gratuidade.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -518,11 +1036,38 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "392499894"
+    },
+    {
+     "peca": "Apelação",
+     "id": "392499895"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "392499897"
+    }
+   ],
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — servidor público (28,86%, ACP 0005019-15.1997.4.03.6000)",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 392499894 (30/03/2026)",
+    "recurso": "apelação (ID 392499895, 06/04/2026)",
+    "preparo": "Gratuidade pedida na apelação [VALIDAR]",
+    "representacao": "procuração/substabelecimento ID 392499870",
+    "mpf": "Não consta parecer",
+    "autos": "38 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] honorários da sentença e gratuidade: módulos H-331/GRAT"
+   ],
    "minuta": false
   },
   {
@@ -535,12 +1080,16 @@
    "executado": "BANCO CENTRAL DO BRASIL",
    "assunto": "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
    "assunto_detalhado": "",
-   "grupo": "assunto-1",
-   "tipo_caso": "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
-   "resultado": "",
-   "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "grupo": "6",
+   "tipo_caso": "6 · BACEN fora do polo da ACP",
+   "resultado": "Proposta: negar provimento à apelação, conforme explicitado: BACEN não integrou a ACP; honorários (artigo 331 do CPC) e gratuidade (Tema 1.178/STJ) (grupo 6) [VALIDAR: honorários da sentença e gratuidade: módulos H-331/GRAT]",
+   "modelo": "5007534-87.2024 (6-a)",
+   "variacoes": [
+    "BACEN",
+    "H-331",
+    "GRAT"
+   ],
+   "observacao": "Sentença (31/03/2026) acolheu as impugnações: ilegitimidade passiva da União e do BACEN; apelação do exequente com pedido de gratuidade; contrarrazões do BACEN sobre a gratuidade.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -549,11 +1098,38 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "392791126"
+    },
+    {
+     "peca": "Apelação",
+     "id": "392791127"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "392791129"
+    }
+   ],
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — servidor público (28,86%, ACP 0005019-15.1997.4.03.6000)",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 392791126 (31/03/2026)",
+    "recurso": "apelação (ID 392791127, 10/04/2026)",
+    "preparo": "Gratuidade pedida na apelação [VALIDAR]",
+    "representacao": "procuração/substabelecimento ID 392791100",
+    "mpf": "Não consta parecer",
+    "autos": "40 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] honorários da sentença e gratuidade: módulos H-331/GRAT"
+   ],
    "minuta": false
   },
   {
@@ -566,12 +1142,16 @@
    "executado": "BANCO CENTRAL DO BRASIL",
    "assunto": "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
    "assunto_detalhado": "",
-   "grupo": "assunto-1",
-   "tipo_caso": "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
-   "resultado": "",
-   "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "grupo": "6",
+   "tipo_caso": "6 · BACEN fora do polo da ACP",
+   "resultado": "Proposta: negar provimento à apelação, conforme explicitado: BACEN não integrou a ACP; honorários (artigo 331 do CPC) e gratuidade (Tema 1.178/STJ) (grupo 6) [VALIDAR: honorários da sentença e gratuidade: módulos H-331/GRAT]",
+   "modelo": "5007534-87.2024 (6-a)",
+   "variacoes": [
+    "BACEN",
+    "H-331",
+    "GRAT"
+   ],
+   "observacao": "Sentença (31/03/2026) acolheu as impugnações: ilegitimidade passiva da União e do BACEN; apelação do exequente com pedido de gratuidade; contrarrazões do BACEN sobre a gratuidade.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -580,11 +1160,38 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "392772032"
+    },
+    {
+     "peca": "Apelação",
+     "id": "392772033"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "392772035"
+    }
+   ],
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — servidor público (28,86%, ACP 0005019-15.1997.4.03.6000)",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 392772032 (31/03/2026)",
+    "recurso": "apelação (ID 392772033, 06/04/2026)",
+    "preparo": "Gratuidade pedida na apelação [VALIDAR]",
+    "representacao": "procuração/substabelecimento ID 392771708",
+    "mpf": "Não consta parecer",
+    "autos": "38 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] honorários da sentença e gratuidade: módulos H-331/GRAT"
+   ],
    "minuta": false
   },
   {
@@ -597,12 +1204,16 @@
    "executado": "UNIÃO FEDERAL",
    "assunto": "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
    "assunto_detalhado": "",
-   "grupo": "assunto-1",
-   "tipo_caso": "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
-   "resultado": "",
-   "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "grupo": "6",
+   "tipo_caso": "6 · BACEN fora do polo da ACP",
+   "resultado": "Proposta: negar provimento à apelação, conforme explicitado: BACEN não integrou a ACP; honorários (artigo 331 do CPC) e gratuidade (Tema 1.178/STJ) (grupo 6) [VALIDAR: fundamento da sentença (BACEN fora do polo × legitimidade ativa)]",
+   "modelo": "5007534-87.2024 (6-a)",
+   "variacoes": [
+    "BACEN",
+    "H-331",
+    "GRAT"
+   ],
+   "observacao": "Sentença indeferiu a inicial (485, VI); apelação discute legitimidade e associação; contrarrazões do BACEN (ilegitimidade passiva); MPF sem manifestação de mérito.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -611,11 +1222,46 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "362807334"
+    },
+    {
+     "peca": "Apelação",
+     "id": "362807335"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "362807337"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "362807338"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "372861774"
+    }
+   ],
+   "mpf": "parecer ID 372861774 (12/05/2026)",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — servidor público (28,86%, ACP 0005019-15.1997.4.03.6000)",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 362807334 (02/10/2025)",
+    "recurso": "apelação (ID 362807335, 25/10/2025)",
+    "preparo": "Gratuidade pedida na apelação [VALIDAR]",
+    "representacao": "procuração/substabelecimento ID 362807310",
+    "mpf": "parecer ID 372861774 (12/05/2026)",
+    "autos": "41 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] fundamento da sentença (BACEN fora do polo × legitimidade ativa)"
+   ],
    "minuta": false
   },
   {
@@ -628,12 +1274,15 @@
    "executado": "UNIÃO FEDERAL",
    "assunto": "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
    "assunto_detalhado": "",
-   "grupo": "assunto-1",
-   "tipo_caso": "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
-   "resultado": "",
-   "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "grupo": "3",
+   "tipo_caso": "3 · Acordo administrativo",
+   "resultado": "Proposta: negar provimento à apelação: acordo administrativo (MP 2.169-43/2001, Tema 550/STJ) (grupo 3) [VALIDAR: preliminar de dialeticidade nas contrarrazões (grupo 7?)]",
+   "modelo": "5006719-90.2024 (3-a)",
+   "variacoes": [
+    "ACORDO",
+    "MAFE"
+   ],
+   "observacao": "Sentença: ausência de título por acordo; contrarrazões com preliminar de não conhecimento e má-fé; MPF pelo não conhecimento.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -642,11 +1291,42 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "364731558"
+    },
+    {
+     "peca": "Apelação",
+     "id": "364731559"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "364731561"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "371195446"
+    }
+   ],
+   "mpf": "parecer ID 371195446 (05/05/2026)",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — servidor público (28,86%, ACP 0005019-15.1997.4.03.6000)",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 364731558 (06/03/2026)",
+    "recurso": "apelação (ID 364731559, 30/03/2026)",
+    "preparo": "[VALIDAR]",
+    "representacao": "procuração/substabelecimento ID 364731231, 364731536",
+    "mpf": "parecer ID 371195446 (05/05/2026)",
+    "autos": "44 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] preliminar de dialeticidade nas contrarrazões (grupo 7?)"
+   ],
    "minuta": false
   },
   {
@@ -659,12 +1339,17 @@
    "executado": "UNIÃO FEDERAL",
    "assunto": "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
    "assunto_detalhado": "",
-   "grupo": "assunto-1",
-   "tipo_caso": "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
-   "resultado": "",
-   "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "grupo": "2",
+   "tipo_caso": "2 · Limitação afastada + acordo",
+   "resultado": "Proposta: negar provimento à apelação: afastada a limitação territorial, mantida a extinção pelo acordo administrativo (grupo 2) [VALIDAR: fundamento da sentença: territorial + acordo (grupo 2) ou só acordo (grupo 3)]",
+   "modelo": "5007937-56.2024 (2-a)",
+   "variacoes": [
+    "TERR",
+    "ACORDO",
+    "MAFE",
+    "H-MAJ"
+   ],
+   "observacao": "Sentença acolheu a impugnação (485, VI), com honorários; contrarrazões com má-fé e prescrição.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -673,11 +1358,38 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "392472172"
+    },
+    {
+     "peca": "Apelação",
+     "id": "392472173"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "392472176"
+    }
+   ],
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — servidor público (28,86%, ACP 0005019-15.1997.4.03.6000)",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 392472172 (28/05/2026)",
+    "recurso": "apelação (ID 392472173, 25/06/2026)",
+    "preparo": "[VALIDAR]",
+    "representacao": "procuração/substabelecimento ID 392472142, 392472145, 392472157",
+    "mpf": "Não consta parecer",
+    "autos": "49 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] fundamento da sentença: territorial + acordo (grupo 2) ou só acordo (grupo 3)"
+   ],
    "minuta": false
   },
   {
@@ -690,12 +1402,16 @@
    "executado": "UNIÃO FEDERAL",
    "assunto": "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
    "assunto_detalhado": "",
-   "grupo": "assunto-1",
-   "tipo_caso": "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
-   "resultado": "",
-   "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "grupo": "1",
+   "tipo_caso": "1 · Limitação territorial afastada",
+   "resultado": "Proposta: dar provimento à apelação, com retorno à origem (grupo 1) [VALIDAR: sentido do parecer do MPF]",
+   "modelo": "5006369-05.2024 (1-a)",
+   "variacoes": [
+    "SOB",
+    "ILA",
+    "TERR"
+   ],
+   "observacao": "Sentença extinguiu por falta de título para servidor fora de MS.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -704,11 +1420,42 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "363341492"
+    },
+    {
+     "peca": "Apelação",
+     "id": "363341493"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "363341495"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "372857769"
+    }
+   ],
+   "mpf": "parecer ID 372857769 (12/05/2026)",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — servidor público (28,86%, ACP 0005019-15.1997.4.03.6000)",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 363341492 (07/11/2025)",
+    "recurso": "apelação (ID 363341493, 17/11/2025)",
+    "preparo": "[VALIDAR]",
+    "representacao": "[VALIDAR]",
+    "mpf": "parecer ID 372857769 (12/05/2026)",
+    "autos": "18 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] sentido do parecer do MPF"
+   ],
    "minuta": false
   },
   {
@@ -721,12 +1468,16 @@
    "executado": "UNIÃO FEDERAL",
    "assunto": "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
    "assunto_detalhado": "",
-   "grupo": "assunto-1",
-   "tipo_caso": "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
-   "resultado": "",
-   "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "grupo": "1",
+   "tipo_caso": "1 · Limitação territorial afastada",
+   "resultado": "Proposta: dar provimento à apelação, com retorno à origem (grupo 1)",
+   "modelo": "5006369-05.2024 (1-a)",
+   "variacoes": [
+    "SOB",
+    "ILA",
+    "TERR"
+   ],
+   "observacao": "Sentença por ilegitimidade ativa, sem honorários.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -735,9 +1486,34 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "391302877"
+    },
+    {
+     "peca": "Apelação",
+     "id": "391302878"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "391303883"
+    }
+   ],
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — servidor público (28,86%, ACP 0005019-15.1997.4.03.6000)",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 391302877 (14/07/2026)",
+    "recurso": "apelação (ID 391302878, 06/08/2026)",
+    "preparo": "comprovante juntado (ID 391302873, 391302880) — conferir o tipo",
+    "representacao": "procuração/substabelecimento ID 391302865",
+    "mpf": "Não consta parecer",
+    "autos": "29 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false
@@ -752,12 +1528,17 @@
    "executado": "UNIÃO FEDERAL",
    "assunto": "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
    "assunto_detalhado": "",
-   "grupo": "assunto-1",
-   "tipo_caso": "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
-   "resultado": "",
-   "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "grupo": "1",
+   "tipo_caso": "1 · Limitação territorial afastada",
+   "resultado": "Proposta: dar provimento à apelação, com retorno à origem (grupo 1) [VALIDAR: herdeiros/pensionista no polo: módulo PENS ou SUC]",
+   "modelo": "5006369-05.2024 (1-a)",
+   "variacoes": [
+    "SOB",
+    "ILA",
+    "TERR",
+    "SUC/PENS"
+   ],
+   "observacao": "Sentença por ilegitimidade ativa; herdeiros ou sucessores.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -766,11 +1547,38 @@
     "correcao": "Bruno",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "393949389"
+    },
+    {
+     "peca": "Apelação",
+     "id": "393949390"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "393949392"
+    }
+   ],
+   "mpf": "Não consta parecer",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — servidor público (28,86%, ACP 0005019-15.1997.4.03.6000)",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 393949389 (14/07/2026)",
+    "recurso": "apelação (ID 393949390, 14/07/2026)",
+    "preparo": "[VALIDAR]",
+    "representacao": "procuração/substabelecimento ID 393949008",
+    "mpf": "Não consta parecer",
+    "autos": "53 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
-   "pendencias": [],
+   "pendencias": [
+    "[VALIDAR] herdeiros/pensionista no polo: módulo PENS ou SUC"
+   ],
    "minuta": false
   },
   {
@@ -783,12 +1591,15 @@
    "executado": "FUNDACAO NACIONAL DE SAUDE",
    "assunto": "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
    "assunto_detalhado": "",
-   "grupo": "assunto-1",
-   "tipo_caso": "Índice de 28,86% Lei 8.622/1993 e 8.627/1993",
-   "resultado": "",
-   "modelo": "",
-   "variacoes": [],
-   "observacao": "",
+   "grupo": "3",
+   "tipo_caso": "3 · Acordo administrativo",
+   "resultado": "Proposta: negar provimento à apelação: acordo administrativo (MP 2.169-43/2001, Tema 550/STJ) (grupo 3)",
+   "modelo": "5006719-90.2024 (3-a)",
+   "variacoes": [
+    "ACORDO",
+    "H-MAJ"
+   ],
+   "observacao": "Sentença acolheu a ausência de título pelo acordo; MPF pelo desprovimento.",
    "peculiaridades": "",
    "peculiaridades_relator": "",
    "orientacao": "",
@@ -797,9 +1608,38 @@
     "correcao": "Vanilda",
     "situacao": "A minutar"
    },
-   "pecas": [],
-   "mpf": "",
-   "triagem": {},
+   "pecas": [
+    {
+     "peca": "Sentença",
+     "id": "365641473"
+    },
+    {
+     "peca": "Apelação",
+     "id": "365641474"
+    },
+    {
+     "peca": "Contrarrazões",
+     "id": "365641476"
+    },
+    {
+     "peca": "Parecer do MPF",
+     "id": "371251496"
+    }
+   ],
+   "mpf": "parecer ID 371251496 (05/05/2026)",
+   "triagem": {
+    "ato": "Julgamento colegiado (voto)",
+    "materia": "Administrativo — servidor público (28,86%, ACP 0005019-15.1997.4.03.6000)",
+    "monocratica": "Não (pauta)",
+    "analisado_em": "26/11/2026",
+    "decisao_agravada": "Sentença ID 365641473 (29/01/2026)",
+    "recurso": "apelação (ID 365641474, 26/02/2026)",
+    "preparo": "[VALIDAR]",
+    "representacao": "procuração/substabelecimento ID 365641448",
+    "mpf": "parecer ID 371251496 (05/05/2026)",
+    "autos": "42 documentos extraídos",
+    "tempestividade": "[VALIDAR]"
+   },
    "ajustes": [],
    "pendencias": [],
    "minuta": false
