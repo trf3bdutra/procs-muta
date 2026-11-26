@@ -9,7 +9,7 @@
     ['panel-pauta','.gx-modos','Pauta'],
     ['panel-min','.hero-review-view-tabs','Corretor'],
     ['panel-dil','.gx-modos','Diligências'],
-    ['panel-del','.gx-modos','Deliberações']
+    ['panel-del','.gx-modos','Notificações']
   ],source=null,signature='',queued=false;
   function buttons(el){return el?Array.from(el.querySelectorAll(':scope > button')).filter(function(b){return !b.hidden;}):[];}
   function sync(){
