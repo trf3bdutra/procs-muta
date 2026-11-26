@@ -3881,3 +3881,33 @@ html body.hero-redesign-v53 #gab .hero-route-overview.hero-route-shared.hero-rou
 html body.hero-redesign-v53 #gab .hero-route-overview.hero-route-shared.hero-route-essential .hero-minuta-nav-foot>button{width:23px;min-height:24px!important;font-size:16px!important;padding:0!important}
 html body.hero-redesign-v53 #gab .hero-route-overview.hero-route-shared.hero-route-essential .hero-route-search{flex:1 1 170px}
 html body.hero-redesign-v53 #gab .hero-route-overview.hero-route-shared.hero-route-essential .hero-route-modes{flex:none}
+
+/* Componentes CMT: indicadores integrados, filtros e trilhas de trabalho. */
+#pauta-app .hero-cmt-pauta,#dil-app .hero-cmt-gestion,#del-app .hero-cmt-gestion{display:grid;gap:8px;padding:9px;border:1px solid var(--cmt-line,var(--line));background:var(--cmt-paper,var(--card));border-radius:3px;margin-bottom:8px}
+.hero-cmt-pauta-metrics,.hero-cmt-gestion-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border:1px solid var(--cmt-line,var(--line));border-radius:2px;overflow:hidden}
+.hero-cmt-pauta-metrics>button,.hero-cmt-gestion-metrics>div{font:inherit;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:4px;min-height:52px;min-width:0;padding:8px;border:0;border-inline-end:1px solid var(--cmt-line,var(--line));border-bottom:1px solid var(--cmt-line,var(--line));background:transparent;color:var(--cmt-ink,var(--fg));text-align:left;box-shadow:inset 0 2px var(--stage,#89918b)}
+.hero-cmt-pauta-metrics>button{cursor:pointer}
+.hero-cmt-pauta-metrics>button[aria-pressed=true]{background:var(--cmt-beige,var(--card2));box-shadow:inset 0 -3px var(--stage,#89918b)}
+.hero-cmt-pauta-metrics b,.hero-cmt-gestion-metrics b{font-size:21px;font-weight:600;line-height:1;letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+.hero-cmt-pauta-metrics small,.hero-cmt-gestion-metrics small{font-size:10px;line-height:1.2}
+.hero-cmt-pauta [data-stage=pautados],.hero-cmt-gestion [data-stage=total]{--stage:#68868c}
+.hero-cmt-pauta [data-stage=a-liberar],.hero-cmt-pauta [data-stage=sem]{--stage:#c6c4b9}
+.hero-cmt-pauta [data-stage=minutados],.hero-cmt-pauta [data-stage=min],.hero-cmt-gestion [data-stage=priority]{--stage:#c3a164}
+.hero-cmt-pauta [data-stage=corrigidos],.hero-cmt-pauta [data-stage=cor]{--stage:#6987a6}
+.hero-cmt-pauta [data-stage=liberados],.hero-cmt-pauta [data-stage=lib]{--stage:#567a64}
+.hero-cmt-pauta [data-stage=retidos],.hero-cmt-gestion [data-stage=late]{--stage:#a55b4a}
+.hero-cmt-pauta-progress{display:grid;gap:6px;font-size:11px}
+.hero-cmt-pauta-progress>div:first-child{display:flex;justify-content:space-between;align-items:center}
+.hero-cmt-pauta-stack{display:flex;height:8px;background:var(--cmt-beige,var(--card2));border-radius:2px;overflow:hidden}
+.hero-cmt-pauta-stack span{display:block;min-width:0;background:var(--stage)}
+.hero-cmt-pauta-legend{display:flex;flex-wrap:wrap;gap:6px 12px;font-size:10px}
+.hero-cmt-pauta-legend span{display:inline-flex;gap:4px;align-items:center}
+.hero-cmt-pauta-legend span:before{content:"";width:7px;height:7px;background:var(--stage)}
+.hero-cmt-pauta-filters>div,.hero-cmt-gestion-filters{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;margin:6px 0}
+.hero-cmt-pauta-filters label,.hero-cmt-gestion-filters label{display:grid;gap:3px;min-width:0;font-size:10px}
+.hero-cmt-pauta-filters select,.hero-cmt-gestion-filters select,.hero-cmt-gestion-filters input{width:100%;min-width:0;box-sizing:border-box;font:inherit}
+.hero-cmt-gestion-filters input[type=search]{grid-column:1/-1}
+.hero-cmt-gestion .gx-top{margin:0;padding:0}
+.hero-cmt-gestion-metrics.urg-metrics{grid-template-columns:repeat(4,minmax(0,1fr))}
+.hero-cmt-gestion-metrics.urg-metrics>div{padding:7px 4px}
+@media(min-width:650px){.hero-cmt-pauta-metrics{grid-template-columns:repeat(6,minmax(0,1fr))}}
