@@ -325,26 +325,39 @@
     var comunicados=sec('Comunicados',j.comunicados||[],function(a){return '<article class="gx-it"><b>'+esc(a.titulo||'Comunicado')+'</b><p class="gx-tx">'+esc(a.texto||'')+'</p></article>';});
     c.innerHTML='<div class="gx-top"><div><b>Gabinete</b><small>Calendário, equipe e comunicados</small></div><button type="button" class="lnk" data-gx="ler-del">Atualizar</button></div>'+(X.erro?'<p class="gx-v err">'+esc(X.erro)+'</p>':!X.dados?'<p class="muted gx-v">Lendo…</p>':agenda+prazos+equipe+aus+comunicados);
   }
-  function pintarGestao(){pintarDel();pintarUrg();pintarGab();}
+  function pintarGestao(){pintarDel();pintarUrg();pintarGab();if(window.MutaPauta&&window.MutaPauta.atualizarGestao)window.MutaPauta.atualizarGestao();}
+  /* Mesmos registros e ações das Notificações, com escopo da sessão selecionada. */
+  function pautaPendencias(sessao,itens,internas){
+    if(!pode(quem())||!X.dados||!sessao)return {duvidas:[],pedidos:[],erro:pode(quem())?X.erro:''};
+    var L=listas(),cnjs=new Set((itens||[]).map(function(i){return dg(i.cnj);}).filter(Boolean));
+    var ids=new Set((internas||[]).filter(function(i){return i.origem==='Deliberações'||i.origem==='Notificações';}).map(function(i){return String(i.id);}));
+    return {duvidas:L.du.filter(function(d){return cnjs.has(dg(d.numero));}),pedidos:L.pe.filter(function(p){return p.sessao?p.sessao===sessao:ids.has(String(p.id));}),erro:X.erro};
+  }
+  function pautaCard(tipo,r){return tipo==='duvida'?itemDu(r):itemPe(r);}
+  function pautaContexto(bt,p){
+    var host=bt&&bt.closest('#pauta-app');
+    if(!host||!window.MutaPauta||!window.MutaPauta.contextoGestao)return null;
+    return window.MutaPauta.contextoGestao(p);
+  }
   function post(corpo) { return ses.api('/api/painel?cmt=1', { method: 'POST', body: JSON.stringify(Object.assign({ origem: 'extensao' }, corpo)) }); }
   /* observação gravada na pauta junto com a situação, como no painel /cmt (cmtNotaSit) */
-  function notaSit(p) {
+  function notaSit(p,ctx) {
     var j = X.dados || {}, it = (((j.pauta || {}).itens) || []).filter(function (x) { return dg(x.cnj) === dg(p.numero); })[0] || {};
     var nota = (p.tipo === 'retirada' ? 'Retirado de pauta' : 'Adiado') + ' em ' + data(j.hoje || hoje()) + ' por decisão do relator' + (p.de ? ', a pedido de ' + p.de : '') + '.';
-    var o = String(it.obs || '').trim();
+    var o = String(ctx&&ctx.item?ctx.item.obs||'':it.obs || '').trim();
     return !o ? nota : o.indexOf(nota) >= 0 ? o : o + ' · ' + nota;
   }
   function decidir(id, bt) {
     var p = listas().pe.filter(function (x) { return x.id === id; })[0]; if (!p) return;
     var defere = X.conf[id] === 'defere', ret = p.tipo === 'retirada';
-    var ses0 = p.sessao || ((X.dados || {}).pauta || {}).date || '';
+    var ctx=pautaContexto(bt,p),ses0=p.sessao||(ctx&&ctx.sessao)||((X.dados||{}).pauta||{}).date||'';
     var nota = String(X.nota[id] || '').trim();
     var texto = (ret ? 'Retirada ' + (defere ? 'deferida.' : 'indeferida.') : 'Adiamento ' + (defere ? 'deferido.' : 'indeferido.')) + (nota ? ' ' + nota : '');
     if (defere && !ses0) { X.msg = 'Não deferiu: o pedido não indica a sessão.'; pintarGestao(); return; }
     if (bt) bt.disabled = true;
-    (defere ? post({ acao: 'situacao', sessao: ses0, cnj: p.numero, valor: ret ? 'Retirado' : 'Adiado', obs: notaSit(p) }) : Promise.resolve())
+    (defere ? post({ acao: 'situacao', sessao: ses0, cnj: p.numero, valor: ret ? 'Retirado' : 'Adiado', obs: notaSit(p,ctx) }) : Promise.resolve())
       .then(function () { return post({ acao: 'responder', id: id, texto: texto }); })
-      .then(function () { delete X.conf[id]; delete X.nota[id]; X.msg = defere ? 'Pedido deferido e registrado na pauta. Cópia ao gestor.' : 'Pedido indeferido.'; return lerDel(); })
+      .then(function () { delete X.conf[id]; delete X.nota[id]; X.msg = defere ? 'Pedido deferido e registrado na pauta. Cópia ao gestor.' : 'Pedido indeferido.'; if(window.MutaPauta&&window.MutaPauta.relerGestao)window.MutaPauta.relerGestao(); return lerDel(); })
       .catch(function (e) { if (bt) bt.disabled = false; X.msg = 'Não concluiu: ' + (e.message || 'erro'); pintarGestao(); });
   }
   function assinar(cnj, bt) {
@@ -406,7 +419,7 @@
         var k = f.getAttribute('data-gx-form'); if (k === 'nova') criar(f); else if (k === 'editar') editar(f); else if (k === 'dresp') responderDil(f);
       });
     }
-    [cx,cu,cg].filter(Boolean).forEach(function(cx){
+    [cx,cu,cg,$('pauta-app')].filter(Boolean).forEach(function(cx){
       cx.addEventListener('click', function (e) {
         var x = e.target.closest('button'); if (!x) return;
         if (x.hasAttribute('data-gx-copia')) return copiar(x);
@@ -425,7 +438,7 @@
       cx.addEventListener('toggle',function(e){var d=e.target;if(d&&d.dataset&&d.dataset.notGroup&&d.isConnected)X.categoriasFechadas[d.dataset.notGroup]=!d.open;},true);
       cx.addEventListener('input', function (e) { var i = e.target; if (i.dataset.gxNota) X.nota[i.dataset.gxNota] = i.value; });
       cx.addEventListener('submit', function (e) {
-        var f = e.target.closest('[data-gx-form]'); if (!f) return; e.preventDefault();
+        var f = e.target.closest('[data-gx-form]'); if (!f||!pode(quem())) return; e.preventDefault();
         if (f.getAttribute('data-gx-form') === 'devolver') devolver(f); else responder(f);
       });
     });
@@ -442,6 +455,6 @@
     /* a cada 3 minutos, enquanto o painel está aberto, os contadores se renovam */
     setInterval(function () { if (pode(quem()) && document.visibilityState === 'visible') { lerDil(); lerDel(); } }, 3 * 60e3);
   }
-  window.MutaGestao = { abrir: abrir, mostrar: mostrar, _D: D, _X: X };
+  window.MutaGestao = { abrir: abrir, mostrar: mostrar, pautaPendencias:pautaPendencias,pautaCard:pautaCard, _D: D, _X: X };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', iniciar); else iniciar();
 })();
