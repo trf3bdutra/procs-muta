@@ -747,7 +747,7 @@ test('HERO: Gerador preserva seleção da prévia, reseta por processo/ficha e n
  ctx.window.MutaGabinete={V:(s,k)=>fields[s+'.'+k]||'',fo:()=>({classe_judicial:'APELAÇÃO CÍVEL'}),cnj:()=>cnj,pronunciamento:()=> 'Acórdão (sessão)'};ctx.window.Muta={SITE:'https://www.gabinete-cmt.com'};
  vm.createContext(ctx);vm.runInContext(read('extensao/gerador.js'),ctx);const G=ctx.window.MutaGerador;
  assert.equal(G.docs().tipo,'Apelação');assert.equal(G.docs().k,'desp');
- for(const tipo of ['Agravo de Instrumento','Embargos de Declaração','Agravo Interno','Juízo de Retratação','Remessa Necessária']){assert.equal(G.selecionarTipo(tipo).tipo,tipo);assert.match(G.html(),/data-ger-tipo/);assert.equal(G.docs().tipo,tipo);}
+ for(const tipo of ['Agravo de Instrumento','Embargos de Declaração','Agravo Interno','Juízo de Retratação','Remessa Necessária']){assert.equal(G.selecionarTipo(tipo).tipo,tipo);assert.equal(G.docs().k,'','não reutiliza resultado de outro tipo');assert.match(G.html(),/data-ger-tipo/);assert.equal(G.docs().tipo,tipo);}
  fields['triagem.Tipo de Julgamento']='Apelação / Remessa necessária';assert.equal(G.docs().tipo,'Apelação');assert.match(G.docs().rel[0],/remessa necessária/i);
  fields['triagem.Tipo de Julgamento']='Mandado de segurança';assert.equal(G.docs().tipo,'');assert.match(G.html(),/Nenhuma fórmula será presumida/);
  fields['triagem.Tipo de Julgamento']='Agravo interno / Embargos de declaração';assert.equal(G.docs().tipo,'');G.selecionarTipo('Agravo Interno');cnj='5000001-00.2026.4.03.6000';fields['triagem.Tipo de Julgamento']='ED';assert.equal(G.docs().tipo,'Embargos de Declaração');
