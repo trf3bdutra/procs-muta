@@ -192,7 +192,8 @@
   }
   function faseRoteiro(title,ok,total,alerts){return '<li class="rt-f"><span>'+esc(title)+'</span><small class="rt-phase-count" aria-label="'+ok+' de '+total+' etapas concluídas">'+ok+'/'+total+'</small>'+(alerts?'<small class="rt-phase-alert">'+alerts+' alerta'+(alerts===1?'':'s')+'</small>':'')+'</li>';}
   function inicioEtapa(o){
-    return '<li class="rt-p hero-route-step is-'+esc(o.status)+(o.open?' ab':'')+(o.advance?' rt-avanco':'')+'" data-route-status="'+esc(o.status)+'" data-route-text="'+esc(o.search)+'"><span class="rt-i" aria-label="'+esc(o.state)+'">'+esc(o.number)+'</span><div class="rt-c"'+(o.cardAttrs||'')+'><button type="button" class="rt-h" '+o.attr+'="'+esc(o.key)+'" aria-expanded="'+!!o.open+'"><b>'+esc(o.title)+(o.titleExtra||'')+'</b><span class="rt-step-meta"><span class="rt-step-chevron" aria-hidden="true"></span></span></button><div class="rt-step-strip"><span class="rt-step-state">'+esc(o.state)+'</span>'+(!o.open&&o.summary?'<small>'+esc(o.summary)+'</small>':'')+'</div>';
+    var tone=['azul','lilas','verde','rosa','turquesa','areia'][(Math.max(1,parseInt(o.number,10)||1)-1)%6];
+    return '<li data-route-tone="'+tone+'" class="rt-p hero-route-step is-'+esc(o.status)+(o.open?' ab':'')+(o.advance?' rt-avanco':'')+'" data-route-status="'+esc(o.status)+'" data-route-text="'+esc(o.search)+'"><span class="rt-i" aria-label="'+esc(o.state)+'">'+esc(o.number)+'</span><div class="rt-c"'+(o.cardAttrs||'')+'><button type="button" class="rt-h" '+o.attr+'="'+esc(o.key)+'" aria-expanded="'+!!o.open+'"><b>'+esc(o.title)+(o.titleExtra||'')+'</b><span class="rt-step-meta"><span class="rt-step-chevron" aria-hidden="true"></span></span></button><div class="rt-step-strip"><span class="rt-step-state">'+esc(o.state)+'</span>'+(!o.open&&o.summary?'<small>'+esc(o.summary)+'</small>':'')+'</div>';
   }
   function html(g, campoRot, questoesHtml, X) {
     X = X || {};

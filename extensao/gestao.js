@@ -29,23 +29,23 @@
     if(!faixa){faixa=document.createElement('div');faixa.id='pv-nav-main';faixa.className='pv-nav-row';}
     faixa.setAttribute('role','tablist');faixa.setAttribute('aria-label','Ferramentas processuais');
     if(faixa.parentNode!==aside)aside.appendChild(faixa);
-    ['tab-processo','tab-pront','tab-min','tab-acervo','tab-pauta'].forEach(function(id){var b=$(id);if(b)faixa.appendChild(b);});
+    ['tab-pront','tab-min','tab-acervo','tab-pauta'].forEach(function(id){var b=$(id);if(b)faixa.appendChild(b);});
     var divisor=faixa.querySelector('.pv-nav-divider');if(divisor)divisor.remove();
     if(slot.parentNode!==topo)topo.appendChild(slot);
     [['tab-del','Notificações'],['tab-dil','Diligências'],['tab-urg','Urgências']].forEach(function(x){
       var b=$(x[0]);if(!b)return;slot.appendChild(b);
       b.title=x[1];b.setAttribute('aria-label',x[1]);
     });
-    slot.hidden=!pode(q);
+    slot.hidden=!(pode(q)||(q.on&&document.body.classList.contains('hero-redesign-v53')));
     document.body.classList.remove('hero-gestao-rodape');
   }
 
   /* ---------- visibilidade das abas ---------- */
   function mostrar() {
     var q = quem(), dil = $('tab-dil'), del = $('tab-del'), urg = $('tab-urg'), ctl = $('tab-ctl'), pa = $('tab-pauta');
-    var ver = { dil: pode(q), del: pode(q), ctl: q.on && q.gestor, pauta: q.on };
+    var ver = { dil: pode(q), del: pode(q)||(q.on&&document.body.classList.contains('hero-redesign-v53')), ctl: q.on && q.gestor, pauta: q.on };
     /* 0.58: Controle vira ícone na faixa do topo (gabinete.js › faixaUsuario); a aba fica escondida na barra */
-    [[dil, ver.dil], [del, ver.del], [urg, ver.del], [ctl, ver.ctl, true], [pa, ver.pauta]].forEach(function (p) {
+    [[dil, ver.dil], [del, ver.del], [urg, pode(q)], [ctl, ver.ctl, true], [pa, ver.pauta]].forEach(function (p) {
       if (!p[0]) return;
       p[0].hidden = !p[1] || !!p[2];
       if (!p[1] && p[0].getAttribute('aria-selected') === 'true' && window.MutaAbas) window.MutaAbas.ir('pront');
@@ -304,14 +304,14 @@
   }
   function pintarDel() {
     var c=$('del-app');if(!c)return;var q=quem();
-    if(!pode(q)){c.innerHTML='<p class="muted gx-v">Acesso restrito ao Desembargador e ao gestor.</p>';return;}
-    var L=listas(),N=notificacoes(L),lidas=leituraNot();
+    var hero=document.body.classList.contains('hero-redesign-v53');if(!pode(q)&&!(hero&&q.on)){c.innerHTML='<p class="muted gx-v">Entre na sua conta para consultar notificações.</p>';return;}
+    var L=pode(q)?listas():{du:[],pe:[]},N=pode(q)?notificacoes(L):[],lidas=leituraNot();
     var pend=L.du.length+L.pe.length;
     if(!['cronologia','categorias'].includes(X.aba))X.aba='cronologia';
     var tab=function(k,r){return '<button type="button" role="tab" data-gx-a="'+k+'" aria-selected="'+(X.aba===k)+'">'+esc(r)+'</button>';};
-    var m=X.dados?metricasCmt([['total','Não lidas',N.filter(function(n){return !lidas[chaveLida(n)];}).length],['priority','A deliberar',pend],['lib','Hoje',N.filter(function(n){return String(n.em||'').slice(0,10)===hoje();}).length]]):'';
+    var m=pode(q)&&X.dados?metricasCmt([['total','Não lidas',N.filter(function(n){return !lidas[chaveLida(n)];}).length],['priority','A deliberar',pend],['lib','Hoje',N.filter(function(n){return String(n.em||'').slice(0,10)===hoje();}).length]]):'';
     var dia=null,corpo=X.aba==='categorias'?agruparNot(N,lidas):N.map(function(n){var d=String(n.em||'').slice(0,10),h='';if(d!==dia){dia=d;h='<h4 class="hero-not-dia">'+esc(d===hoje()?'Hoje':data(d)||'Sem data')+'</h4>';}return h+itemNot(n,lidas);}).join('');
-    c.innerHTML=painelGestao('Notificações','', atualizaBtn('ler-del',X.lendo),m,'')+faixaGestao('Notificações',tab('cronologia','Cronologia')+tab('categorias','Categorias'),'',X.lendo)+(X.msg?'<p class="gx-msg">'+esc(X.msg)+'</p>':'')+(X.erro?'<p class="gx-v err">'+esc(X.erro)+'</p>':!X.dados?'<p class="muted gx-v">Lendo…</p>':corpo||'<p class="muted gx-v">Nenhuma notificação nesta categoria.</p>');
+    var fontes=c.querySelector('#hero-not-local');if(fontes)fontes.remove();c.innerHTML=painelGestao('Notificações','', atualizaBtn('ler-del',X.lendo),m,'')+(pode(q)?faixaGestao('Notificações',tab('cronologia','Cronologia')+tab('categorias','Categorias'),'',X.lendo)+(X.msg?'<p class="gx-msg">'+esc(X.msg)+'</p>':'')+(X.erro?'<p class="gx-v err">'+esc(X.erro)+'</p>':!X.dados?'<p class="muted gx-v">Lendo…</p>':corpo||'<p class="muted gx-v">Nenhuma notificação nesta categoria.</p>'):'');if(hero){if(!fontes){fontes=document.createElement('section');fontes.id='hero-not-local';}c.append(fontes);if(window.MutaAlertas&&window.MutaAlertas.montarFontesNot)window.MutaAlertas.montarFontesNot(fontes);}
   }
   function urgEtapa(a){
     return a.assinado?'conferir':a.dataLiberacao?'assinar':a.dataCorrecao?'liberar':a.dataMinuta?'corrigir':a.servidor?'minuta':'designar';
@@ -443,7 +443,7 @@
         if(x.dataset.gxRead)return marcarNot(x.dataset.gxRead);
         if(x.dataset.gxOpen){var BR=window.MutaProntuarioBridge;if(window.MutaAbas)window.MutaAbas.ir('pront');if(BR&&BR.abrirProcesso)BR.abrirProcesso(x.dataset.gxOpen);return;}
         if (x.dataset.gxA) { X.aba = x.dataset.gxA; X.msg = ''; return pintarGestao(); }
-        if (x.dataset.gx === 'ler-del') { X.msg = ''; return lerDel(); }
+        if (x.dataset.gx === 'ler-del') { X.msg = ''; if(window.MutaAlertas&&window.MutaAlertas.lerFontesNot)window.MutaAlertas.lerFontesNot();return lerDel(); }
         if (x.dataset.gxResp) { X.resp[x.dataset.gxResp] = !X.resp[x.dataset.gxResp]; pintarGestao(); var ta = cx.querySelector('[data-gx-form="responder"][data-id="' + x.dataset.gxResp + '"] textarea'); if (ta) ta.focus(); return; }
         if (x.dataset.gxAss) return assinar(x.dataset.gxAss, x);
         if (x.dataset.gxDev) { X.dev[x.dataset.gxDev] = !X.dev[x.dataset.gxDev]; pintarGestao(); var td = cx.querySelector('[data-gx-form="devolver"] textarea'); if (td) td.focus(); return; }
@@ -464,7 +464,7 @@
   }
   function abrir(n) {
     if (n === 'dil') { pintarDil(); lerDil(); }
-    if (n === 'del'||n==='urg') { pintarGestao(); lerDel(); }
+    if (n === 'del'||n==='urg') { pintarGestao(); lerDel();if(n==='del'&&window.MutaAlertas&&window.MutaAlertas.lerFontesNot)window.MutaAlertas.lerFontesNot(); }
   }
   function iniciar() {
     ligar(); mostrar();

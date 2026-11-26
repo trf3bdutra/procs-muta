@@ -5,7 +5,7 @@
   var host=document.getElementById('hero-area-header-tabs');
   if(!host)return;
   var specs=[
-    ['panel-pront','.hero-v53-tabs',function(p){return p.getAttribute('aria-labelledby')==='tab-processo'?'Processo':'Prontuário';}],
+    ['panel-pront','.hero-v53-tabs','Prontuário'],
     ['panel-pauta','.gx-modos','Pauta'],
     ['panel-min','.hero-review-view-tabs','Corretor'],
     ['panel-dil','.gx-modos','Diligências'],

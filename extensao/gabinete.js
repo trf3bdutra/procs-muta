@@ -460,7 +460,7 @@ function faixaUsuario(s) {
   var on = s && s.estado === 'on';
   var q = function (attr, tit, svg) { return '<button type="button" class="tu-b" ' + attr + ' title="' + tit + '" aria-label="' + tit + '">' + SV(svg, 14) + '</button>'; };
   var ajustes=$('pv-ajustes');if(ajustes&&t.contains(ajustes))t0.appendChild(ajustes);
-  t.innerHTML = '<div class="hero-cmt-brand" aria-label="HERO18810 · TRF3 Gabinete CMT"><svg class="hero-cmt-star" aria-hidden="true" fill="currentColor" viewBox="0 0 64 72"><path d="M31 0v18c0 7-5 12-12 12H0l8-8h9c6 0 10-4 10-10V4zM33 72V54c0-7 5-12 12-12h19l-8 8h-9c-6 0-10 4-10 10v8zM0 34h18c7 0 12 5 12 12v18l-8-8v-9c0-6-4-10-10-10H4zM64 38H46c-7 0-12-5-12-12V8l8 8v9c0 6 4 10 10 10h8z"/></svg><div class="hero-cmt-identity"><span>TRF3 · GABINETE CMT</span><strong>HERO <em>18810</em></strong></div></div><button type="button" id="tu-sino" class="tu-n tu-profile-trigger tu-profile-notif" aria-haspopup="dialog" aria-controls="tu-pop" aria-expanded="false" aria-label="Perfil e notificações">'+(on?'<i class="tu-av">'+esc(iniciais(s.usuario))+'</i><span class="tu-profile-name">'+esc(s.usuario)+'</span>':'<span class="tu-profile-name">Entrar</span>')+SV('<path d="m6 9 6 6 6-6"/>',11)+'<b class="tu-profile-count"></b></button><span class="tu-pje" id="tu-pje-slot"></span>' +
+  t.innerHTML = '<div class="hero-cmt-brand" aria-label="HERO18810 · TRF3 Gabinete CMT"><svg class="hero-cmt-star" aria-hidden="true" fill="currentColor" viewBox="0 0 64 72"><path d="M31 0v18c0 7-5 12-12 12H0l8-8h9c6 0 10-4 10-10V4zM33 72V54c0-7 5-12 12-12h19l-8 8h-9c-6 0-10 4-10 10v8zM0 34h18c7 0 12 5 12 12v18l-8-8v-9c0-6-4-10-10-10H4zM64 38H46c-7 0-12-5-12-12V8l8 8v9c0 6 4 10 10 10h8z"/></svg><div class="hero-cmt-identity"><span>TRF3 · GABINETE CMT</span><strong>HERO <em>18810</em></strong></div></div><button type="button" id="tu-sino" class="tu-n tu-profile-trigger tu-profile-notif" aria-haspopup="dialog" aria-controls="tu-pop" aria-expanded="false" aria-label="Perfil">'+(on?'<i class="tu-av">'+esc(iniciais(s.usuario))+'</i><span class="tu-profile-name">'+esc(s.usuario)+'</span>':'<span class="tu-profile-name">Entrar</span>')+SV('<path d="m6 9 6 6 6-6"/>',11)+'<b class="tu-profile-count"></b></button><span class="tu-pje" id="tu-pje-slot"></span>' +
     q('data-tema-tu', 'Tema claro ou escuro', '<path d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9z"/>');
   var utils=document.createElement('div');utils.className='hero-header-utilities';
   var tema=t.querySelector('[data-tema-tu]'),perfil=$('tu-sino');
@@ -1679,7 +1679,7 @@ function heroOrganizarProntuario(){
        Os callbacks legados de Autuação/Caso abrem Perfil; os de tipo abrem Triagem. */
     var mainTabs=caixa.querySelector('.hero-v53-tabs'),gbody=caixa.querySelector('.gbody');
     var resumo=G.aba==='Processo'&&G.rot==='res';
-    var perfil=el('details','hero-v53-profile'),perfilSum=el('summary','','Perfil do processo');
+    var perfil=el('section','hero-v53-profile hero-profile-static'),perfilSum=el('h4','hero-editorial-heading hero-editorial-heading-main','Perfil do processo');
     perfil.classList.add('hero-profile-editorial');aut.classList.add('hero-profile-aut');mat.classList.add('hero-profile-context');
     perfil.append(perfilSum,aut,mat);aut.hidden=mat.hidden=false;
     /* Perfil editorial: reutiliza os nós da autuação e das partes, sem clonar editores. */
@@ -1698,8 +1698,7 @@ function heroOrganizarProntuario(){
     var pSummary=profileAut.querySelector(':scope > summary');if(pSummary)pSummary.after(profileTitle);else profileAut.prepend(profileTitle);
     profileTitle.after(profileDL);var pTask=profileAut.querySelector(':scope > .pm-tf');if(pTask)profileDL.after(pTask);
     profileAut.classList.add('hero-profile-band');
-    perfil.open=!!heroTopo.perfil||heroTopo.pagina>=2;
-    perfil.addEventListener('toggle',function(){if(perfil.isConnected){heroTopo.perfil=perfil.open;if(!perfil.open)heroTopo.pagina=0;}});
+    heroTopo.perfil=true;
     /* Perfil e pauta: painéis expansíveis independentes; a ficha completa mantém seu diálogo. */
     id.append(perfil);var fichaBtn=null,fdlg=null;if(fichaFacePermitida()&&window.MutaGabinete&&window.MutaGabinete.fichaFace){fichaBtn=el('button','btn line sm hero-v53-ficha-btn','Ficha completa');fichaBtn.type='button';fdlg=el('dialog','hero-v53-field-dialog hero-v53-ficha-dlg');var fhd=el('div','hero-v53-dlg-head'),fclose=el('button','btn line sm','Fechar'),fb=el('div','hero-v53-ficha-body');fclose.type='button';fhd.append(el('h4','pm-mer-h','Ficha completa'),fclose);fdlg.append(fhd,fb);fichaBtn.onclick=function(){if(!fichaFacePermitida())return;fb.replaceChildren();html(fb,window.MutaGabinete.fichaFace());fdlg.showModal();};fclose.onclick=function(){fdlg.close();};fdlg.addEventListener('close',function(){fb.replaceChildren();});}
     var pautaPerfil=el('details','hero-v53-profile'),pautaSum=el('summary','','Pauta e julgamento');
@@ -1716,7 +1715,7 @@ function heroOrganizarProntuario(){
     var pabas=[['perfil','Perfil do processo',perfil]];if(pautaPerfil.parentNode)pabas.push(['pauta','Pauta e julgamento',pautaPerfil]);
     perfil.replaceWith(painel);pbody.append(perfil);if(pabas.length>1)pbody.append(pautaPerfil);
     pabas.forEach(function(a){a[2].classList.add('hero-profile-panel');});
-    var psync=function(){painel.classList.toggle('aberto',pabas.some(function(x){return x[2].open;}));};
+    var psync=function(){painel.classList.toggle('aberto',pabas.some(function(x){return x[2]===perfil||x[2].open;}));};
     pabas.forEach(function(a){a[2].addEventListener('toggle',psync);});
     painel.append(pbody);
     if(fichaBtn){var fichaTools=el('div','hero-profile-tools');fichaTools.append(fichaBtn);perfil.append(fichaTools);}
@@ -1741,10 +1740,10 @@ function heroOrganizarProntuario(){
     [['@detalhamento','Detalhamento do caso','detalhamento'],['@fatica','Síntese Fática','fatica'],['@processual','Síntese Processual','processual']].forEach(function(x){
       var inp=contentGrid.querySelector('[data-fk="triagem.'+x[1]+'"],[data-pv-field="triagem.'+x[1]+'"]'),fieldNode=inp&&inp.closest('.gf,.pv-field,.pv-idrow');
       if(fieldNode){var lab=fieldNode.querySelector('.gl');(lab||fieldNode).append(pin(x[0]));}
-      var value=S(V('triagem',x[1]));if(value&&destacado(x[0])){var b=el('button','hero-v53-highlight '+x[2],value);b.type='button';b.title='Editar '+x[1];b.onclick=function(){if(!resumo){perfil.open=true;heroTopo.perfil=true;}secConteudo.open=true;contentGrid.scrollIntoView({block:'nearest'});};highlight.append(b);}
+      var value=S(V('triagem',x[1]));if(value&&destacado(x[0])){var b=el('button','hero-v53-highlight '+x[2],value);b.type='button';b.title='Editar '+x[1];b.onclick=function(){if(!resumo){heroTopo.perfil=true;}secConteudo.open=true;contentGrid.scrollIntoView({block:'nearest'});};highlight.append(b);}
     });
     if(heroV53()){id.querySelectorAll('.hero-case-preview.hero-case-detail').forEach(function(n){n.remove();});linhas.filter(destacado).forEach(function(l){var m=/^(\d{2}\/\d{2}\/\d{4}(?: \d{2}:\d{2})?)\s*·\s*(?:([^·]{2,40}?)\s*·\s*)?(.+)$/.exec(l),b=el('button','hero-v53-highlight geral',m?m[3]:l);b.type='button';b.title=m?[m[2],m[1]].filter(Boolean).join(' · '):'Anotação destacada';b.onclick=function(){secConteudo.open=true;secConteudo.scrollIntoView({block:'nearest'});};highlight.append(b);});}if(highlight.childNodes.length)id.insertBefore(highlight,qtags.parentNode===id?qtags:steps);
-    if(qtags.childNodes.length){qtags.replaceChildren();qs.forEach(function(q,i){if(qfix.includes(q)){var b=el('button','hero-v53-question',String(i+1).padStart(2,'0')+' · '+q);b.type='button';b.onclick=function(){if(!resumo){perfil.open=true;heroTopo.perfil=true;}qd.open=true;qd.scrollIntoView({block:'nearest'});};qtags.append(b);}});}
+    if(qtags.childNodes.length){qtags.replaceChildren();qs.forEach(function(q,i){if(qfix.includes(q)){var b=el('button','hero-v53-question',String(i+1).padStart(2,'0')+' · '+q);b.type='button';b.onclick=function(){if(!resumo){heroTopo.perfil=true;}qd.open=true;qd.scrollIntoView({block:'nearest'});};qtags.append(b);}});}
     /* Mantém a seção imediatamente antes do assunto; tags reais ficam agrupadas. */
     if(secTag)as.prepend(secTag);
     if(l1){l1.append(status);openMon.remove();status.querySelectorAll('.hero-status-icon').forEach(function(b){var labels={urgencia:'Urgência',sigilo:'Sigilo',meta:'Meta',sensivel:'Caso sensível'};b.append(el('span','',labels[b.dataset.monFoco]||b.title));});}
@@ -1856,7 +1855,7 @@ function heroOrganizarProntuario(){
     }
     if(!resumo&&gbody&&top.parentNode)top.after(gbody);
     if(window.MutaPauta&&window.MutaPauta.receberEditor)window.MutaPauta.receberEditor(G.cnj,solBody);
-    show=function(i){if(i===1){G.aba='Processo';G.rot='tri';render();}else if(i>=2){heroTopo.perfil=true;perfil.open=true;}else if(!resumo){G.aba='Processo';G.rot='res';render();}};
+    show=function(i){if(i===1){G.aba='Processo';G.rot='tri';render();}else if(i>=2){heroTopo.perfil=true;}else if(!resumo){G.aba='Processo';G.rot='res';render();}};
     heroTopo.pagina=0;
     return;
   }
@@ -1894,13 +1893,13 @@ function render0() {
   if (G.aba === 'Gerador') { G.aba = 'Processo'; if(heroV53())G.rot='ger';else if (window.MutaAbas) setTimeout(function () { window.MutaAbas.ir('ger'); }, 0); }
   if (MODOS.indexOf(G.aba) < 0) G.aba = 'Processo';
   if(heroV53()&&!G.rot)G.rot='res';
-  var grupoHero=G.aba==='Autos'||G.rot==='res'?'processo':'pront';
+  var grupoHero='pront';
   if(heroV53()&&window.MutaAbas&&window.MutaAbas.sincronizarProntuario)window.MutaAbas.sincronizarProntuario(grupoHero);
   var nAl = window.MutaAutos && window.MutaAutos.estado().itens ? window.MutaAutos.alertas().filter(function (a) { return a.nivel === 'al'; }).length : 0;
   var tabs = '<div class="seg gtabs pmodos hero-main-tabs" role="tablist" aria-label="Parte do prontuário">' +
     '<button type="button" role="tab" data-aba="Autos" aria-selected="'+(G.aba==='Autos')+'"><span>Autos'+(nAl?' <i class="gnum">'+nAl+'</i>':'')+'</span><small>'+esc(contaModo('Autos'))+'</small></button>'+
     [['tri','Triagem'],['pro','Produção'],['sol','Solicitações']].map(function(x){var on=G.aba==='Processo'&&(G.rot||'tri')===x[0];return '<button type="button" role="tab" data-rot="'+x[0]+'" data-pv-tab="'+x[0]+'" aria-selected="'+on+'"><span>'+x[1]+'</span></button>';}).join('')+'</div>';
-  if(heroV53())tabs='<div class="seg gtabs pmodos hero-main-tabs hero-v53-tabs" role="tablist" aria-label="Parte do prontuário">'+(grupoHero==='processo'?[['res','Resumo'],['autos','Autos']]:[['tri','Triagem'],['pro','Produção'],['ger','Gerador']]).map(function(x){var on=x[0]==='autos'?G.aba==='Autos':G.aba==='Processo'&&G.rot===x[0];return '<button type="button" role="tab" '+(x[0]==='autos'?'data-aba="Autos"':'data-rot="'+x[0]+'"')+' aria-selected="'+on+'">'+(x[0]==='pro'?'Produção':x[1])+(x[0]==='autos'&&nAl?' <i class="gnum">'+nAl+'</i>':'')+'</button>';}).join('')+'</div>';
+  if(heroV53())tabs='<div class="seg gtabs pmodos hero-main-tabs hero-v53-tabs" role="tablist" aria-label="Parte do prontuário">'+([['res','Resumo'],['autos','Autos'],['tri','Triagem'],['pro','Produção'],['ger','Gerador']]).map(function(x){var on=x[0]==='autos'?G.aba==='Autos':G.aba==='Processo'&&G.rot===x[0];return '<button type="button" role="tab" '+(x[0]==='autos'?'data-aba="Autos"':'data-rot="'+x[0]+'"')+' aria-selected="'+on+'">'+(x[0]==='pro'?'Produção':x[1])+(x[0]==='autos'&&nAl?' <i class="gnum">'+nAl+'</i>':'')+'</button>';}).join('')+'</div>';
   var snc = snCard(), cab = cabeca(s); CAB_HTML = cab;
   /* 0.69: aviso de sigilo no alto do cartão (processo sigiloso ou documento sigiloso nos autos) */
   if (window.MutaSigilo) { window.MutaSigilo.consultar(G.cnj); var sgh = window.MutaSigilo.html(); if (sgh) cab = cab.replace('<section class="pc pm">', '<section class="pc pm">' + sgh); }
