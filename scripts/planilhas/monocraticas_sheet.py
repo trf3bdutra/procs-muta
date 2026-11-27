@@ -7,13 +7,16 @@ A planilha é uma vista de trabalho. Duas colunas são editadas pela equipe e vo
   L · Assinado         → producao."Assinado" (Sim) e "Data da Assinatura" (dd/mm/aaaa no texto, se houver)
 "Não" ou vazio na planilha não apaga o que a ficha já tem (a divergência é informada). Texto começando por "Conferir"
 fica como está, nos dois sentidos.
-Depois da gravação, a planilha recebe da ficha: K e L recalculados, M · ID da decisão, N · Destino (situação) e
-O · Ficha (data da sincronização).
+Depois da gravação, a planilha recebe da ficha: K e L recalculados, M · ID da decisão, N · Destino (situação),
+O · Ficha (data da sincronização) e P · Pronto para julgar.
+P separa o estado dos autos da certeza do tipo de caso (coluna B): "Sim" quando nada falta nos autos; "Não · <motivos>"
+pelas categorias de "O que falta sanar" (preparo, tempestividade, ato prévio...); "Já assinada"; ou o destino, se não
+for Monocrática. Dúvida de critério do Relator fica na coluna B (certeza), não em P.
 
 Uso (a leitura e a escrita da planilha ficam com quem chama, pelo conector ou pela API do Google):
   python3 scripts/planilhas/monocraticas_sheet.py entrada.json saida.json [--grava]
-entrada.json: {"linhas": [{"linha": 4, "processo": "...", "incluido": "...", "assinado": "..."}, ...]}
-saida.json:   {"intervalo": "Monocráticas!K3:O<n>", "valores": [[...], ...], "mudancas": [...], "divergencias": [...]}
+entrada.json: {"linhas": [{"linha": 4, "processo": "...", "incluido": "...", "assinado": "...", "conferencia": "<coluna D>"}, ...]}
+saida.json:   {"intervalo": "Monocráticas!K3:P<n>", "valores": [[...], ...], "mudancas": [...], "divergencias": [...]}
 """
 import datetime, json, re, sys
 from pathlib import Path
@@ -39,6 +42,57 @@ def conferir(v):
     return str(v or '').strip().lower().startswith('conferir')
 
 
+# Categorias de "O que falta sanar" para a coluna P (a ordem é a da exibição)
+MOTIVOS = [
+    ('preparo', r'preparo|\bgru\b|pix|tesouro|recolh|custas|comprovante'),
+    ('gratuidade', r'gratuidade'),
+    ('tempestividade', r'tempestiv|intempest|datas? (de|da|do) (publica|intima|ciência|protocolo|disponibiliza)|aferir o prazo|prazo em dobro'),
+    ('representação', r'procura[çc]|representa[çc]|poderes'),
+    ('ato prévio', r'\b(intimar|intimá-l|despacho para|apreciar|dar vista|(re)?abrir (nova )?vista|vista a|aguardar|retificar|revogar|citação|certificar)'),
+    ('situação na origem', r'na origem|senten[çc]a|andamento|perda d[eo] objeto|prejuízo|certame'),
+    ('leitura dos autos', r'ler no pje|ler a |sem leitura dos autos|sem triagem detalhada'),
+    ('acordo', r'acordo|transigir|transa[çc]'),
+    ('alinhar o resultado', r'alinhar o resultado'),
+]
+# Critério da GRU fechado pelo gestor em 27/11/2026: comprovante bancário vinculado à guia basta; guia com Pix ou
+# outro comprovante sem vínculo com ela, não. A frase "critério ... em aberto" deixa de ser pendência.
+GRU_FECHADO = re.compile(r'[^.;\n]*(crit[ée]rio[^.;\n]*GRU|GRU[^.;\n]*crit[ée]rio|GRU[^.;\n]*03/04/2026)[^.;\n]*', re.I)
+
+
+# Avisos genéricos da extração, que não são pendência do processo
+GENERICO = re.compile(r'\[VALIDAR\] Autos extraídos em[^\n]*|Contrarraz[õo]es: n[ãa]o verificad[oa]s?\.?|Movido da Sessão para Monocrática[^.]*\.', re.I)
+# Conferência feita na planilha (coluna D "Conferido: ...") vale enquanto a ficha não tiver análise mais nova
+CONFERIDO = re.compile(r'^\s*Conferido:', re.I)
+AINDA = re.compile(r'\b(conferir|intimar|aguardar|apreciar|falta)\b', re.I)
+
+
+def pronto(x, ass_em_conferencia=False, conferencia=''):
+    pr, tr = x.get('producao', {}), x.get('triagem', {})
+    if (sim(pr.get('Assinado')) or pr.get('Data da Assinatura')) and not ass_em_conferencia:
+        return 'Já assinada'
+    dest = pr.get('Destino') or ''
+    if dest and not dest.startswith('Monocr'):
+        return f'Não · destino {dest} na ficha'
+    falta = str(tr.get('O que falta sanar') or pr.get('O que falta sanar') or '')
+    nota = str(pr.get('Art. 932 - Nota de enquadramento') or tr.get('Art. 932 - Nota de enquadramento') or '')
+    if CONFERIDO.match(conferencia or '') and not AINDA.search(conferencia) and not nota.startswith('Análise de'):
+        falta = ''
+    falta = GENERICO.sub('', GRU_FECHADO.sub('', falta)).lower()
+    if re.fullmatch(r'\s*(sem pend[êe]ncia\.?|—|-)?\s*', falta):
+        falta = ''
+    if 'embargos' in falta and re.search(r'teor|tempestiv', falta):
+        mot = ['teor e prazo dos embargos']
+    else:
+        mot = [n for n, rx in MOTIVOS if re.search(rx, falta)]
+    if falta and not mot and not re.search(r'definir|decidir|confirmar (a linha|com o relator)|basta como|suspens[ãa]o nacional|irdr', falta):
+        mot = ['conferência pendente']
+    if mot:
+        return 'Não · ' + ', '.join(mot)
+    if (pr.get('Destino - Situação') or '') == 'Pendente':
+        return 'Não · ver a pendência na ficha'
+    return 'Sim'
+
+
 def main(ent, sai, grava):
     d = json.loads(OP.read_text(encoding='utf-8'))
     F = {}
@@ -47,13 +101,13 @@ def main(ent, sai, grava):
         if m:
             F[m.group(0)] = x
     linhas = json.loads(Path(ent).read_text(encoding='utf-8'))['linhas']
-    mud, div, vals = [], [], [['Incluído no PJe', 'Assinado', 'ID da decisão', 'Destino na ficha', 'Ficha']]
+    mud, div, vals = [], [], [['Incluído no PJe', 'Assinado', 'ID da decisão', 'Destino na ficha', 'Ficha', 'Pronto para julgar']]
     for ln in linhas:
         p = ln['processo']
         x = F.get(p)
         if not x:
             div.append(f'{p}: não está na ficha')
-            vals.append([ln.get('incluido', ''), ln.get('assinado', ''), '', 'fora da ficha', ''])
+            vals.append([ln.get('incluido', ''), ln.get('assinado', ''), '', 'fora da ficha', '', ''])
             continue
         pr = x.setdefault('producao', {})
         inc, ass = ln.get('incluido', ''), ln.get('assinado', '')
@@ -78,9 +132,9 @@ def main(ent, sai, grava):
         k = inc if conferir(inc) or (sim(inc) and no_pje) else ('Sim' + (' · ' + br(pr.get('Minuta no PJe - Data')) if pr.get('Minuta no PJe - Data') else '') if no_pje else 'Não')
         l = ass if conferir(ass) or (sim(ass) and assinado) else ('Sim' + (' · ' + br(pr.get('Data da Assinatura')) if pr.get('Data da Assinatura') else '') if assinado else 'Não')
         dest = (pr.get('Destino') or '—') + (' · ' + pr['Destino - Situação'] if pr.get('Destino - Situação') else '')
-        vals.append([k, l, pr.get('Decisão - ID') or '', dest, br(HOJE)])
+        vals.append([k, l, pr.get('Decisão - ID') or '', dest, br(HOJE), pronto(x, conferir(ass), ln.get('conferencia', ''))])
     primeira = min(l['linha'] for l in linhas) - 1 if linhas else 3
-    out = {'intervalo': f'Monocráticas!K{primeira}:O{primeira + len(vals) - 1}', 'valores': vals, 'mudancas': mud, 'divergencias': div}
+    out = {'intervalo': f'Monocráticas!K{primeira}:P{primeira + len(vals) - 1}', 'valores': vals, 'mudancas': mud, 'divergencias': div}
     Path(sai).write_text(json.dumps(out, ensure_ascii=False, indent=1), encoding='utf-8')
     if grava and mud:
         OP.write_text(json.dumps(d, ensure_ascii=False, indent=1) + '\n', encoding='utf-8')
