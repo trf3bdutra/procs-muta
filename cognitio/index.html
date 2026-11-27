@@ -1103,6 +1103,10 @@ body.so-tri #modulos [data-mod]:not([data-mod=triagem]),body.so-tri #bt-acervo,b
 /* link de consulta: sem o Acervo nem ações de gravação */
 html[data-leitura] #modulos [data-cog="acervo"],html[data-leitura] #rodape{display:none!important}
 html[data-leitura] #cog-role{color:var(--g)}
+html[data-leitura] #top .amicus-brand,html[data-leitura] #top #marca,html[data-leitura] #top .amicus-eyebrow,html[data-leitura] #top .amicus-office,html[data-leitura] #top .amicus-fam,html[data-leitura] #top .amicus-context,html[data-leitura] #top .amicus-actions,html[data-leitura] #top .amicus-session,html[data-leitura] #top #estado,html[data-leitura] #top .eqsp,html[data-leitura] #top #marca .nx-ey,html[data-leitura] #top #marca .cog-office-text,html[data-leitura] #cog-over-toggle,html[data-leitura] #cog-report-toggle,html[data-leitura] #cog-over-panel{display:none!important}
+html[data-leitura] #top .amicus-title,html[data-leitura] #top #marca a{pointer-events:none}
+#cog-leitura-tag{display:none}
+html[data-leitura] #cog-leitura-tag{display:block;margin-left:auto;align-self:center;order:9;padding:0 2px 0 14px;font-size:11px;font-weight:600;letter-spacing:.04em;color:var(--g);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:40vw}
 </style>
 <link rel="stylesheet" href="/padrao/loading/gabinete-loader.css">
 <!-- voc:inicio --><script>
@@ -5258,6 +5262,8 @@ function cogLeitura(){return !!(COG_SESSAO&&COG_SESSAO.leitura);}
 const COG_LEITURA_MSG='Consulta: só leitura. Nada é gravado por este acesso.';
 function cogModoLeitura(){
  D.documentElement.dataset.leitura='1';
+ /* cabeçalho resumido: só as três abas e a identificação da consulta (sem família, Ex Officio, estado e sessão) */
+ const top=D.getElementById('top');if(top&&!D.getElementById('cog-leitura-tag')){const t=D.createElement('span');t.id='cog-leitura-tag';t.textContent='Cognitio · consulta, só leitura'+(COG_SESSAO&&COG_SESSAO.nome?' · '+COG_SESSAO.nome:'');top.appendChild(t);}
  /* bloqueia, já no navegador, toda gravação nas rotas do gabinete; o servidor recusa de qualquer forma */
  const F=W.fetch.bind(W);let avisou=0;
  W.fetch=function(input,init){

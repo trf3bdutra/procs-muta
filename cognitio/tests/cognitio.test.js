@@ -101,12 +101,13 @@ test('modo consulta: só Triagem, Seleção Prévia e Monocráticas, ficha em le
  assert.match(html,/editarAoAbrir:!cogLeitura\(\),leitura:cogLeitura\(\)/);
  assert.match(html,/on=PRONTO&&!cogLeitura\(\)&&/);
  assert.match(html,/html\[data-leitura\] #modulos \[data-cog="acervo"\],html\[data-leitura\] #rodape\{display:none!important\}/);
+ assert.match(html,/html\[data-leitura\] #top \.amicus-brand,[^{]*#top \.amicus-eyebrow,[^{]*html\[data-leitura\] #top #estado,[^{]*html\[data-leitura\] #cog-over-toggle,[^{]*\{display:none!important\}/,'cabeçalho resumido às três abas');
  assert.ok(html.indexOf('if(COG_SESSAO.leitura)cogModoLeitura();')<html.indexOf("frame.src='/init/motor/index.html?cognitio=1'"),'o bloqueio entra antes do motor');
  const i=html.indexOf('function cogModoLeitura(){'),j=html.indexOf('/* gestor: copia o link',i);
- const W={fetch:async(u,o)=>({passou:u,metodo:(o&&o.method)||'GET'})},D={documentElement:{dataset:{}}};
- new Function('W','D','toast','COG_LEITURA_MSG','Response',html.slice(i,j)+';cogModoLeitura();')(W,D,()=>{},'só leitura',class{constructor(b,o){this.status=o.status;this.b=b;}});
+ const W={fetch:async(u,o)=>({passou:u,metodo:(o&&o.method)||'GET'})},tag=[],D={documentElement:{dataset:{}},getElementById:id=>id==='top'?{appendChild:e=>tag.push(e)}:null,createElement:()=>({})};
+ new Function('W','D','toast','COG_LEITURA_MSG','Response','COG_SESSAO',html.slice(i,j)+';cogModoLeitura();')(W,D,()=>{},'só leitura',class{constructor(b,o){this.status=o.status;this.b=b;}},{nome:'Maria',leitura:true});
  return (async()=>{
-  assert.equal(D.documentElement.dataset.leitura,'1');
+  assert.equal(D.documentElement.dataset.leitura,'1');assert.equal(tag.length,1);assert.equal(tag[0].textContent,'Cognitio · consulta, só leitura · Maria');
   assert.equal((await W.fetch('/api/pauta?ficha=1',{method:'POST'})).status,403);
   assert.equal((await W.fetch('/api/painel?lote=1&modo=cg',{method:'POST'})).status,403);
   assert.equal((await W.fetch('/api/pauta?ficha=5000187-84.2026.4.03.0001')).passou,'/api/pauta?ficha=5000187-84.2026.4.03.0001');
