@@ -1100,6 +1100,9 @@ html[data-theme="dark"] #tri-prontuario .tp-s h3{color:#e6e2d6;background:linear
 @media(max-width:1000px){.cg-studio{grid-template-columns:190px minmax(0,1fr)}.cg-set{grid-column:1/-1;border-left:0;border-top:1px solid var(--b);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.cg-composer{grid-template-columns:1fr}}
 @media(max-width:800px){.cg-grid{grid-template-columns:1fr}.cg-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.cg-studio{grid-template-columns:1fr}.cg-cat{max-height:none;border-right:0;border-bottom:1px solid var(--b);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px}.cg-prev{padding:8px}.cg-paper{padding:22px 18px;min-height:700px}.cg-set{grid-template-columns:1fr}}
 body.so-tri #modulos [data-mod]:not([data-mod=triagem]),body.so-tri #bt-acervo,body.so-tri #bt-regras{display:none!important}
+/* link de consulta: sem o Acervo nem ações de gravação */
+html[data-leitura] #modulos [data-cog="acervo"],html[data-leitura] #rodape{display:none!important}
+html[data-leitura] #cog-role{color:var(--g)}
 </style>
 <link rel="stylesheet" href="/padrao/loading/gabinete-loader.css">
 <!-- voc:inicio --><script>
@@ -2647,7 +2650,7 @@ function rotear(){
  if(!COG_SESSAO)return;
  let p=location.hash.slice(1);
  if(p==='outras'){p='triagem';COG_SUB='triados';LS.set('tri_col_triados','cog-outros-destinos');try{history.replaceState(null,'','#triagem');}catch(e){}}
- const next=Object.prototype.hasOwnProperty.call(COG_PAGES,p)?p:'acervo';if(next!==COG){COG_LOTE=null;COG_GRUPO='';COG_SES_FILTRO='';COG_DEST_COLECAO='';SEL.clear();if(!COG_TRANSFER||next!=='triagem'){COG_TRANSFER=false;cogTriFacLimpar();}}COG=next;D.documentElement.dataset.cogPage=COG;
+ let next=Object.prototype.hasOwnProperty.call(COG_PAGES,p)?p:(cogLeitura()?'mono':'acervo');if(cogLeitura()&&!COG_LEITURA_PAGES.includes(next))next='mono';if(next!==COG){COG_LOTE=null;COG_GRUPO='';COG_SES_FILTRO='';COG_DEST_COLECAO='';SEL.clear();if(!COG_TRANSFER||next!=='triagem'){COG_TRANSFER=false;cogTriFacLimpar();}}COG=next;D.documentElement.dataset.cogPage=COG;
  ABA='fila';
  if(COG==='triagem')TRI_SUBABA=COG_SUB;
  if(COG==='selecao')TRI_SUBABA='selecao';
@@ -2657,6 +2660,7 @@ function rotear(){
 W.addEventListener('hashchange',rotear);W.addEventListener('popstate',rotear);
 function cogIr(p){
  if(!COG_SESSAO||!COG_PAGES[p])return;
+ if(cogLeitura()&&!COG_LEITURA_PAGES.includes(p))return;
  if(COG==='triagem'&&['todos','triar','triados'].includes(TRI_SUBABA))COG_SUB=TRI_SUBABA;
  if(COG!==p){SEL.clear();FILA=[];COG_STATUS='ativos';COG_LOTE=null;COG_GRUPO='';COG_SES_FILTRO='';COG_DEST_COLECAO='';if(p!=='triagem')COG_TRANSFER=false;cogTriFacLimpar();LS.set('tri_atq','');LS.set('tri_atso','');}
  if(location.hash!=='#'+p){try{history.pushState(null,'','#'+p);}catch(e){location.hash=p;return;}}
@@ -3687,7 +3691,7 @@ function fichaDe(cnj,aba='Triagem'){
  const o=IDX.get(dg(cnj)),n=o?o.cnj:cnj;
  if(!W.CMTFicha)return toast('Ficha do processo ainda indisponível.',true);
  const carregar=async c=>{const j=await cogApi('/api/pauta?ficha='+encodeURIComponent(c));if(j.operacional&&!PEND.has(dg(c)))cogAtualizaFicha(j.operacional);try{const l=await cogApi('/api/painel?lote=1&processo='+encodeURIComponent(c)+(COG_SESSAO&&COG_SESSAO.gestor?'&modo=cg':''));j.indexacao=l.registros||[];j.indexacaoGestor=!!l.gestor;}catch(e){j.indexacaoErro=e.message;}return j;};
- W.CMTFicha.abrir(n,{aba:'Triagem',editarAoAbrir:true,equipeDisponivel:cogEquipeCadastro,sessoesDisponiveis:()=>sessoesPrevia().map(nomeSes),gravarIndexacao:async(lote,coluna,processo,valor)=>{await cogLotePost({acao:'triagem-celula',id:lote,coluna,processo,valor});if(COG_LOTE&&COG_LOTE.id===lote){const it=COG_LOTE.itens.find(x=>dg(x.processo)===dg(processo));if(it)it.valores_triagem=Object.assign({},it.valores_triagem||{},{[coluna]:valor});if(COG==='triagem')refazAtTab();}},lista:(['triagem','selecao','mono'].includes(COG)?cogTriRecorte(COG==='triagem'?LS.get('tri_triar_tarefa',''):''):FILA).map(x=>x.cnj),carregar,gravar:cogFichaGravar,avisar:(t,e)=>toast(t,e==='warn'||e==='err'||e===true)});
+ W.CMTFicha.abrir(n,{aba:'Triagem',editarAoAbrir:!cogLeitura(),leitura:cogLeitura(),equipeDisponivel:cogEquipeCadastro,sessoesDisponiveis:()=>sessoesPrevia().map(nomeSes),gravarIndexacao:async(lote,coluna,processo,valor)=>{await cogLotePost({acao:'triagem-celula',id:lote,coluna,processo,valor});if(COG_LOTE&&COG_LOTE.id===lote){const it=COG_LOTE.itens.find(x=>dg(x.processo)===dg(processo));if(it)it.valores_triagem=Object.assign({},it.valores_triagem||{},{[coluna]:valor});if(COG==='triagem')refazAtTab();}},lista:(['triagem','selecao','mono'].includes(COG)?cogTriRecorte(COG==='triagem'?LS.get('tri_triar_tarefa',''):''):FILA).map(x=>x.cnj),carregar,gravar:cogFichaGravar,avisar:(t,e)=>toast(t,e==='warn'||e==='err'||e===true)});
 }
 /* a ficha atual do processo (operacional), com as seções achatadas: o painel do processo mostra o prontuário gravado */
 async function fichaPlana(cnj) {
@@ -5015,7 +5019,7 @@ function cogVisiveis(){
 }
 let COG_ROD_MIN=false,COG_ROD_HAD=false;
 function pintaRodape(){
- const r=rodEl();docarRodape();const n=SEL.size,on=PRONTO&&['acervo','triagem','selecao','mono'].includes(COG),S=sessoesPrevia();
+ const r=rodEl();docarRodape();const n=SEL.size,on=PRONTO&&!cogLeitura()&&['acervo','triagem','selecao','mono'].includes(COG),S=sessoesPrevia();
  r.hidden=!on||!n;D.body.classList.remove('cog-rod-on','rod-min');if(!on||!n){COG_ROD_HAD=false;COG_ROD_MIN=false;return;}
  if(!COG_ROD_HAD){COG_ROD_MIN=false;COG_ROD_HAD=true;}
  const val=RODA.dest||'sessao';if(RODA['r-ses']&&RODA['r-ses']!=='reserva'&&!S.some(s=>s.data===RODA['r-ses']))RODA['r-ses']='reserva';
@@ -5239,15 +5243,53 @@ function portaOffice(){return new Promise(resolve=>{
  v.querySelector('form').addEventListener('submit',async e=>{e.preventDefault();bt.disabled=true;er.hidden=true;try{const s=await W.CognitioAuth.entrar(u.value.trim(),p.value);p.value='';v.remove();resolve(s);}catch(x){er.textContent=x.message;er.hidden=false;p.value='';p.focus();}finally{bt.disabled=false;}});
  setTimeout(()=>u.focus(),30);
 });}
+/* Link de consulta (só leitura: Triagem, Seleção Prévia e Monocráticas). Quem abre /cognitio/?consulta=<chave> informa o nome;
+   o servidor guarda o acesso no cookie cmt_cons e recusa qualquer gravação. Aqui, além disso, nenhuma gravação sai do navegador. */
+function portaConsulta(chave){return new Promise(resolve=>{
+ const v=D.createElement('div');v.id='porta-tk';
+ v.innerHTML='<form class="pt-c" autocomplete="on"><p class="k" style="margin:0;color:var(--g)">Gabinete CMT · Cognitio</p><h2>Consulta.</h2><p>Triagem, Seleção Prévia e Monocráticas, só para leitura. Informe o seu nome para abrir.</p><input id="pt-n" autocomplete="name" required maxlength="40" placeholder="Nome" aria-label="Nome"><p id="pt-e" role="alert" hidden></p><div class="pt-f"><span></span><span id="pt-s"></span><button class="btn pri" type="submit">Abrir</button></div></form>';
+ D.body.appendChild(v);
+ const n=v.querySelector('#pt-n'),er=v.querySelector('#pt-e'),bt=v.querySelector('button');
+ v.querySelector('form').addEventListener('submit',async e=>{e.preventDefault();bt.disabled=true;er.hidden=true;try{const s=await W.CognitioAuth.entrarConsulta(chave,n.value.trim());v.remove();resolve(s);}catch(x){er.textContent=x.message;er.hidden=false;}finally{bt.disabled=false;}});
+ setTimeout(()=>n.focus(),30);
+});}
+const COG_LEITURA_PAGES=['triagem','selecao','mono'];
+function cogLeitura(){return !!(COG_SESSAO&&COG_SESSAO.leitura);}
+const COG_LEITURA_MSG='Consulta: só leitura. Nada é gravado por este acesso.';
+function cogModoLeitura(){
+ D.documentElement.dataset.leitura='1';
+ /* bloqueia, já no navegador, toda gravação nas rotas do gabinete; o servidor recusa de qualquer forma */
+ const F=W.fetch.bind(W);let avisou=0;
+ W.fetch=function(input,init){
+  const url=typeof input==='string'?input:(input&&input.url)||'',m=String((init&&init.method)||(input&&typeof input!=='string'&&input.method)||'GET').toUpperCase();
+  if(m!=='GET'&&m!=='HEAD'&&/(^|\/\/[^/]+)\/api\//.test(url)&&!/\/api\/acesso\?consulta=1$/.test(url)){
+   if(Date.now()-avisou>4000){avisou=Date.now();try{toast(COG_LEITURA_MSG,true);}catch(e){}}
+   return Promise.resolve(new Response(JSON.stringify({erro:COG_LEITURA_MSG,message:COG_LEITURA_MSG}),{status:403,headers:{'Content-Type':'application/json'}}));
+  }
+  return F(input,init);
+ };
+}
+/* gestor: copia o link de consulta (o servidor gera a chave; trocar a versão em apoio/acessos.json › linkConsulta invalida o link) */
+async function cogCopiarConsulta(){
+ try{const j=await cogApi('/api/acesso?consultaLink=1');if(!j.link)throw Error('sem link');
+  if(j.ativo===false){toast('O link de consulta está desativado (apoio/acessos.json › linkConsulta).',true);return;}
+  try{await navigator.clipboard.writeText(j.link);toast('Link de consulta copiado ('+(j.dias||30)+' dias por acesso, só leitura).');}catch(e){W.prompt('Link de consulta (só leitura):',j.link);}
+ }catch(e){toast('Não obtive o link de consulta: '+e.message,true);}
+}
 var SO_TRI='';
 (async function arrancar() {
   const msg = (t) => { const m = $('#carga-msg'); if (m) m.textContent = t; };
   try {
+    const chaveCons=new URLSearchParams(location.search).get('consulta');
     COG_SESSAO=await W.CognitioAuth.lerSessao();
+    if(!COG_SESSAO&&chaveCons)COG_SESSAO=await portaConsulta(chaveCons);
+    if(chaveCons){try{history.replaceState(null,'',location.pathname+(location.hash||'#mono'));}catch(e){}}
     if(!COG_SESSAO)COG_SESSAO=await portaOffice();
+    if(COG_SESSAO.leitura)cogModoLeitura();
     await W.CognitioAuth.ponte();
     COG_REPORT_SESSAO_OK=true;cogReportPermissaoUI();
-    const chip=$('#cog-chip');$('#cog-user').textContent=COG_SESSAO.usuario;$('#cog-role').textContent=COG_SESSAO.gestor?'Gestor':'Equipe';chip.hidden=false;
+    const chip=$('#cog-chip');$('#cog-user').textContent=COG_SESSAO.usuario;$('#cog-role').textContent=COG_SESSAO.leitura?'Consulta · só leitura':COG_SESSAO.gestor?'Gestor':'Equipe';chip.hidden=false;
+    if(COG_SESSAO.gestor&&!$('#cog-cons')){const b=D.createElement('button');b.type='button';b.id='cog-cons';b.className='btn ib';b.title='Copiar o link de consulta (só leitura: Triagem, Seleção Prévia e Monocráticas)';b.setAttribute('aria-label','Copiar o link de consulta');b.innerHTML='<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></svg>';b.addEventListener('click',cogCopiarConsulta);chip.parentNode.insertBefore(b,chip);}
     if(!COG_SESSAO.gestor) {SO_TRI=COG_SESSAO.usuario;D.body.classList.add('so-tri');}
     frame.src='/init/motor/index.html?cognitio=1';
     let t=0;while(!PM()){if(++t>300)throw new Error('O motor do Caput não carregou.');await new Promise(r=>setTimeout(r,200));}

@@ -32,3 +32,4 @@ module.exports = async (req, res) => {
     const ac = await L.acessos(nome).catch(() => ({})); res.status(200).json({ usuario: nome, gestor: L.gestor(nome), perfil: ac.perfil || 'equipe', desembargador: !!ac.desembargador, assessoria: !!ac.assessoria });
   } catch (e) { res.status(500).json({ erro: e.message }); }
 };
+module.exports.registrarEntrada = registrarEntrada;

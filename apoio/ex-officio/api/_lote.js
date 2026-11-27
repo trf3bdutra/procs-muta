@@ -315,14 +315,18 @@ module.exports = async (req, res) => {
   const q = req.query || {};
   const login = L.quem(req);
   /* A rota escolhe a visão, mas não concede acesso. Link do relator usa CMT_CHAVE como credencial. */
-  const u = login || (CMT.porChave(req) ? (process.env.CMT_RELATOR || 'CM') : null);
+  const chave = !login && CMT.porChave(req);
+  /* link de consulta do Cognitio (cookie cmt_cons): só leitura, na visão da equipe */
+  const consulta = !login && !chave && L.quemConsulta ? await L.quemConsulta(req).catch(() => null) : null;
+  const u = login || (chave ? (process.env.CMT_RELATOR || 'CM') : consulta ? consulta.usuario : null);
   if (!u) return res.status(401).json({ erro: 'Entre com o seu nome e a sua senha.' });
   const gestor = !!(login && L.gestor(login)), M = memoria();
   try {
+    if (consulta && req.method !== 'GET') return res.status(403).json({ erro: 'O link de consulta é só leitura.' });
     if (req.method === 'POST') return await gravar(req, res, login, gestor);
     if (req.method !== 'GET') return res.status(405).json({ erro: 'método não aceito' });
     const id = String(q.id || '');
-    const perfilRel = !gestor && (!login || (await L.acessos(login)).perfil === 'desembargador');
+    const perfilRel = !gestor && !consulta && (!login || (await L.acessos(login)).perfil === 'desembargador');
     const modo = q.rel || perfilRel ? 'rel' : q.modo === 'cg' ? 'cg' : 'eq', relator = modo === 'rel';
     if (modo === 'cg' && !gestor) return res.status(403).json({ erro: 'Esta página é só do gestor.' });
     const loteVe = l => { const v = (l && l.visivel) || {}; return modo === 'cg' || (modo === 'rel' ? v.relator !== false : v.equipe !== false); };

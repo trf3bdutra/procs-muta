@@ -164,5 +164,35 @@ async function quemTriagem(req) {
     return { nome: o.n || 'colaborador', versao: o.v };
   } catch (e) { return null; }
 }
+/* Link de consulta do Cognitio (só leitura: Triagem, Seleção Prévia e Monocráticas), para quem é de fora do Office.
+   Mesmo desenho do link da Triagem: a chave deriva do CMT_SESSION_SECRET e da versão em apoio/acessos.json › linkConsulta
+   {versao, ativo, dias}; trocar a versão (ou ativo: false) invalida o link e todos os acessos já abertos com ele.
+   Quem abre o link informa o nome e recebe o cookie cmt_cons (padrão: 30 dias). A ponte do acervo e as rotas de leitura
+   aceitam esse cookie só para leitura; nenhuma gravação passa. */
+let CONS = null, CONS_T = 0;
+async function cfgConsulta() {
+  if (!CONS || Date.now() - CONS_T > 60e3) { const a = (await (module.exports.lerJson || lerJson)('apoio/acessos.json')).dados || {}; CONS = Object.assign({ versao: 1, ativo: true, dias: 30 }, a.linkConsulta || {}); CONS_T = Date.now(); }
+  return CONS;
+}
+function chaveConsulta(versao) { return crypto.createHmac('sha256', segredo()).update('consulta-link:' + versao).digest('base64url').slice(0, 32); }
+function confereChaveConsulta(chave, versao) { return igual(String(chave || ''), chaveConsulta(versao)); }
+function emitirConsulta(res, nome, versao, dias) {
+  dias = Math.max(1, Math.min(90, Number(dias) || 30));
+  const v = Buffer.from(JSON.stringify({ t: 'cons', n: String(nome || '').trim().slice(0, 40), v: versao, e: Date.now() + dias * 864e5 })).toString('base64url');
+  res.setHeader('Set-Cookie', `cmt_cons=${v}.${assinar(v)}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=${dias * 86400}`);
+}
+function sairConsulta(res) { res.setHeader('Set-Cookie', 'cmt_cons=; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0'); }
+async function quemConsulta(req) {
+  const m = /(?:^|;\s*)cmt_cons=([^;]+)/.exec((req.headers && req.headers.cookie) || ''); if (!m) return null;
+  const [v, s] = m[1].split('.'); if (!v || !s) return null;
+  try {
+    if (!igual(assinar(v), s)) return null;
+    const o = JSON.parse(Buffer.from(v, 'base64url').toString());
+    if (o.t !== 'cons' || !(o.e > Date.now())) return null;
+    const c = await cfgConsulta(); if (c.ativo === false || Number(o.v) !== Number(c.versao)) return null;
+    return { nome: o.n || 'consulta', versao: o.v, usuario: 'Consulta · ' + (o.n || 'sem nome') };
+  } catch (e) { return null; }
+}
 module.exports = { diaLocal, fimDoDia, ghFetch, gh, gestor, norm, equipe, conferir, emitir, sair, quem, exigir, lerJson, gravarJson, dataOk, acessos, lerGrande, commitArquivos,
-  cfgTriagem, chaveTriagem, confereChaveTriagem, emitirTriagem, sairTriagem, quemTriagem };
+  cfgTriagem, chaveTriagem, confereChaveTriagem, emitirTriagem, sairTriagem, quemTriagem,
+  cfgConsulta, chaveConsulta, confereChaveConsulta, emitirConsulta, sairConsulta, quemConsulta };

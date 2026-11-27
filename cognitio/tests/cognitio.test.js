@@ -83,3 +83,33 @@ test('gerador de relatórios restrito a gestor, editor e Bruno',()=>{
  assert.equal(p(null),false);assert.equal(p({usuario:'Servidor',gestor:false,perfil:'equipe'}),false);assert.equal(p({usuario:'Servidor',perfil:'avancado'}),false);assert.equal(p({usuario:'Servidor',perfil:'desembargador'}),false);assert.equal(p({usuario:'Gestor',gestor:true}),true);assert.equal(p({usuario:'Editor',perfil:'editor'}),true);assert.equal(p({usuario:'Bruno',perfil:'equipe'}),true);assert.equal(p({usuario:'Brunolino',perfil:'equipe'}),false);
  assert.match(html,/id="cog-report-toggle" hidden/);assert.match(html,/function cogReportOpen\(\)\{\s*if\(!PRONTO\|\|!cogPodeGerarRelatorio\(\)\)return/);assert.match(html,/function cogReportPrint\(\)\{if\(!cogPodeGerarRelatorio\(\)\|\|!COG_RP\)return/);
 });
+
+test('link de consulta: sem Office, a sessão de consulta abre só leitura e não gera relatório',async()=>{
+ const a=auth(),urls=[];
+ const s=await a.lerSessao(async(u,i)=>{urls.push(u);assert.equal(i.method,'GET');return u==='/api/login'?response(401,{}):response(200,{usuario:'Consulta · Maria',perfil:'consulta',leitura:true,gestor:true});});
+ assert.deepEqual(urls,['/api/login','/api/acesso?consulta=1']);assert.equal(s.leitura,true);assert.equal(s.gestor,false,'a consulta nunca vira gestor');
+ assert.equal(a.podeGerarRelatorio(Object.assign({},s,{perfil:'editor'})),false);
+ assert.equal(await a.lerSessao(async u=>u==='/api/login'?response(401,{}):response(200,{usuario:'X'})),null,'resposta sem leitura não abre');
+ let n=0;const e=await a.entrarConsulta('chave','Maria',async(u,i)=>{assert.equal(u,'/api/acesso?consulta=1');if(++n===1){assert.equal(i.method,'POST');assert.deepEqual(JSON.parse(i.body),{chave:'chave',nome:'Maria'});return response(200,{ok:true});}return response(200,{usuario:'Consulta · Maria',leitura:true});});
+ assert.equal(e.leitura,true);
+ await assert.rejects(a.entrarConsulta('x','Maria',async()=>response(401,{erro:'Este link de consulta não vale mais.'})),/não vale mais/);
+});
+test('modo consulta: só Triagem, Seleção Prévia e Monocráticas, ficha em leitura e nenhuma gravação',()=>{
+ assert.match(html,/const COG_LEITURA_PAGES=\['triagem','selecao','mono'\];/);
+ assert.match(html,/if\(cogLeitura\(\)&&!COG_LEITURA_PAGES\.includes\(next\)\)next='mono';/);
+ assert.match(html,/if\(cogLeitura\(\)&&!COG_LEITURA_PAGES\.includes\(p\)\)return;/);
+ assert.match(html,/editarAoAbrir:!cogLeitura\(\),leitura:cogLeitura\(\)/);
+ assert.match(html,/on=PRONTO&&!cogLeitura\(\)&&/);
+ assert.match(html,/html\[data-leitura\] #modulos \[data-cog="acervo"\],html\[data-leitura\] #rodape\{display:none!important\}/);
+ assert.ok(html.indexOf('if(COG_SESSAO.leitura)cogModoLeitura();')<html.indexOf("frame.src='/init/motor/index.html?cognitio=1'"),'o bloqueio entra antes do motor');
+ const i=html.indexOf('function cogModoLeitura(){'),j=html.indexOf('/* gestor: copia o link',i);
+ const W={fetch:async(u,o)=>({passou:u,metodo:(o&&o.method)||'GET'})},D={documentElement:{dataset:{}}};
+ new Function('W','D','toast','COG_LEITURA_MSG','Response',html.slice(i,j)+';cogModoLeitura();')(W,D,()=>{},'só leitura',class{constructor(b,o){this.status=o.status;this.b=b;}});
+ return (async()=>{
+  assert.equal(D.documentElement.dataset.leitura,'1');
+  assert.equal((await W.fetch('/api/pauta?ficha=1',{method:'POST'})).status,403);
+  assert.equal((await W.fetch('/api/painel?lote=1&modo=cg',{method:'POST'})).status,403);
+  assert.equal((await W.fetch('/api/pauta?ficha=5000187-84.2026.4.03.0001')).passou,'/api/pauta?ficha=5000187-84.2026.4.03.0001');
+  assert.equal((await W.fetch('/api/acesso?consulta=1',{method:'DELETE'})).passou,'/api/acesso?consulta=1');
+ })();
+});

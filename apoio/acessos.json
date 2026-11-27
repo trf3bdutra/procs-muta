@@ -16,5 +16,11 @@
   "versao": 1,
   "ativo": false,
   "descricao": "Link da Triagem do Caput para colaboradores (só a aba Triagem). Para invalidar o link e os acessos abertos com ele, troque a versão ou ponha ativo: false."
+ },
+ "linkConsulta": {
+  "versao": 1,
+  "ativo": true,
+  "dias": 30,
+  "descricao": "Link de consulta do Cognitio (só leitura: Triagem, Seleção Prévia e Monocráticas), para quem não tem login do Office. O gestor copia o link pelo botão ao lado do nome, no Cognitio. Cada acesso vale pelos dias indicados (até 90). Para invalidar o link e os acessos abertos com ele, troque a versão ou ponha ativo: false."
  }
 }

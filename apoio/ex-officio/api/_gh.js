@@ -35,24 +35,38 @@ async function triagemPode(metodo, p, corpo) {
   return 'operação não permitida pelo link da Triagem';
 }
 
+/* Link de consulta do Cognitio (cookie cmt_cons, ver _lib.js › quemConsulta): só leitura. Lê o que a Triagem lê,
+   menos os autos (inteiro teor), os prontuários completos e as minutas; nenhum método de gravação passa. */
+const CONS_LE_NAO = /^contents\/acervo\/(autos|prontuarios|minutas)(\/|\?|$)/;
+function consultaPode(metodo, p) {
+  if (metodo !== 'GET' && metodo !== 'HEAD') return 'o link de consulta é só leitura';
+  return TRI_LE.test(p) && !TRI_LE_NAO.test(p) && !CONS_LE_NAO.test(p) ? '' : 'leitura fora da consulta';
+}
+
 module.exports = async (req, res) => {
   res.setHeader('Cache-Control', 'no-store');
   try {
     /* acesso completo: só o gestor. Quem entra com o login do Office (equipe) ou pelo link da Triagem fica com as regras da Triagem */
-    let u = L.quem(req), tri = null;
+    let u = L.quem(req), tri = null, cons = null;
     const ok = !!u && L.gestor(u);
     if (u && !ok) tri = { nome: u, login: true };
-    if (!u && req.query && req.query.office === '1') return res.status(401).json({message:'Entre no Ex Officio para acessar o Cognitio.'});
+    /* no Cognitio, sem a sessão do Office, só o link de consulta (somente leitura) */
+    if (!u && req.query && req.query.office === '1') {
+      cons = L.quemConsulta ? await L.quemConsulta(req).catch(() => null) : null;
+      if (!cons) return res.status(401).json({message:'Entre no Ex Officio para acessar o Cognitio.'});
+      u = cons.usuario;
+    }
     if (!u) { tri = await L.quemTriagem(req).catch(() => null); if (tri) u = 'Triagem (link) · ' + tri.nome; }
     if (!u) return res.status(401).json({ message: 'Entre com o seu nome e a sua senha da Ex Officio.' });
-    if (!ok && !tri) return res.status(403).json({ message: 'Sem permissão para o acervo do gabinete (' + u + ').' });
+    if (!ok && !tri && !cons) return res.status(403).json({ message: 'Sem permissão para o acervo do gabinete (' + u + ').' });
     const p = String((req.query && req.query.p) || '').replace(/^\/+/, '');
     if (p.indexOf('..') >= 0 || !PERMITIDO.test(p)) return res.status(400).json({ message: 'caminho não permitido: ' + p });
     const t = process.env.GH_TOKEN; if (!t) return res.status(500).json({ message: 'GH_TOKEN ausente na Vercel' });
     const metodo = String(req.method || 'GET').toUpperCase();
     let corpo;
     if (!['GET', 'HEAD'].includes(metodo)) { corpo = await lerCorpo(req); if (req.headers['x-ponte-gz'] === '1') corpo = zlib.gunzipSync(corpo); }
-    if (tri) { const nao = await triagemPode(metodo, p, corpo); if (nao) return res.status(403).json({ message: 'Link da Triagem: ' + nao + ' (' + p.split('?')[0] + ').' }); }
+    if (cons) { const nao = consultaPode(metodo, p); if (nao) return res.status(403).json({ message: 'Consulta: ' + nao + ' (' + p.split('?')[0] + ').' }); }
+    else if (tri) { const nao = await triagemPode(metodo, p, corpo); if (nao) return res.status(403).json({ message: 'Link da Triagem: ' + nao + ' (' + p.split('?')[0] + ').' }); }
     /* GET com ETag (L.ghFetch): o que não mudou volta do cache desta instância sem gastar a cota do GitHub */
     const r = await L.ghFetch('https://api.github.com/repos/' + REPO + (p ? '/' + p : ''), {
       method: metodo, body: corpo && corpo.length ? corpo : undefined,
@@ -67,3 +81,4 @@ module.exports = async (req, res) => {
 };
 
 module.exports.triagemPode = triagemPode;
+module.exports.consultaPode = consultaPode;

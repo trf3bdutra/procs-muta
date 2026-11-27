@@ -7,5 +7,6 @@ Cópia da interface de Triagem do Caput na rota /cognitio/, preservando os compo
 - Monocráticas e Outras Decisões: recortes da ficha, usando a matriz e o prontuário originais. A espécie ambígua fica em Tipo a confirmar; nenhum lote é criado por esses recortes.
 - Chefia: importação e administração permanecem no Caput. Etiquetas: editor original, para o gestor.
 - Autenticação: /api/login, cookie cmt_eq e ponte de acesso Office. Não usa token pessoal nem aceita cmt_tri como substituição. Mantém os perfis do servidor.
+- Consulta (só leitura): o gestor copia o link pelo botão de corrente ao lado do nome (/cognitio/?consulta=<chave>#mono). Quem abre informa o nome e recebe o cookie cmt_cons (apoio/acessos.json › linkConsulta: versão, ativo e dias). Vê só Triagem, Seleção Prévia e Monocráticas; a ficha abre em leitura; o navegador e o servidor recusam toda gravação; a ponte não entrega autos, prontuários nem minutas. Trocar a versão (ou ativo: false) invalida o link e os acessos abertos.
 
 Validação: node --test cognitio/tests/cognitio.test.js. O deploy publica uma rota adicional e não substitui o Caput. A validação em navegador autenticado e a extensão do fluxo de acompanhamento/retornos e do Prontuário Universal devem ser feitas antes de retirar a Triagem original.

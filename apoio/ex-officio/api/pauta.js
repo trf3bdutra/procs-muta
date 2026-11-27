@@ -84,7 +84,10 @@ module.exports = async (req, res) => {
   if (req.query.planilha) return require('./_planilha')(req, res);
   /* a ficha do processo também abre, só para leitura, pelo link próprio do painel do Desembargador (chave CMT_CHAVE) */
   const pelaChave = req.query.ficha && req.method === 'GET' && !L.quem(req) && require('./_cmt').porChave(req);
-  const u = pelaChave ? (process.env.CMT_RELATOR || 'CM') : L.exigir(req, res); if (!u) return;
+  /* e pelo link de consulta do Cognitio (cookie cmt_cons): só a leitura da ficha de um processo */
+  const consulta = !pelaChave && req.query.ficha && req.method === 'GET' && !L.quem(req) ? await L.quemConsulta(req).catch(() => null) : null;
+  const u = pelaChave ? (process.env.CMT_RELATOR || 'CM') : consulta ? consulta.usuario : L.exigir(req, res); if (!u) return;
+  if (consulta) return FICHA(req, res, u);
   if (req.query.mono) return require('./_mono')(req, res, u);
   if (req.query.fichas) return FICHA.resumos(req, res, u);
   if (req.query.etiquetas) return FICHA.etiquetasGab(req, res, u);
