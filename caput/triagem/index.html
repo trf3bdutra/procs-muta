@@ -4623,9 +4623,9 @@ function entrarPeloLink() { return new Promise((fim) => {
   const waRetirado = (x, it) => retirado(x.tarefa) || /retirad|adiad/i.test(String(it.resultado || '') + ' ' + String((it.ctl || {}).planilhaEtapa || ''));
   const waTipoRet = (x, it) => /adiad/i.test(String(it.resultado || '') + ' ' + String((it.ctl || {}).planilhaEtapa || '') + ' ' + String(it.obs || '')) && !/retirad/i.test(String(it.resultado || '')) ? 'Adiado' : 'Retirado';
   const waLinhasObs = (it) => String(it.obs || '').split(/\n+/).map((l) => l.trim()).filter(Boolean);
-  const waNota = (it, re) => waLinhasObs(it).filter((l) => re.test(l)).map((l) => l.replace(re, '').replace(/^\s*[:\-–—]\s*/, '').trim()).filter(Boolean);
+  const waNota = (it, re) => waLinhasObs(it).filter((l) => re.test(l)).map((l) => l.replace(re, '').replace(/^\s*[:\-–—]\s*/, '').trim()).filter(Boolean).map((l) => l.charAt(0).toUpperCase() + l.slice(1));
   const waCaso = (x, it) => [x.classe || it.classe || '', x.assunto || it.assunto || '', it.partes || ''].map((v) => String(v).trim()).filter(Boolean).join(' · ');
-  const waFim = (t) => String(t || '').replace(/[\s.;,]+$/, '') + '.';
+  const waFim = (t) => { const v = String(t || '').replace(/[\s.;,]+$/, ''); return /[?!]$/.test(v) ? v : v + '.'; };
   const waOrd = (a, b) => (+a.item || 1e9) - (+b.item || 1e9);
   function waPendentes(ss, d) {
     const hoje = hojeLocal(), L = d.lines.slice().sort(waOrd);
