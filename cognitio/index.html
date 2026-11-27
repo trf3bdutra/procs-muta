@@ -5258,6 +5258,7 @@ function portaConsulta(chave){return new Promise(resolve=>{
  setTimeout(()=>n.focus(),30);
 });}
 const COG_LEITURA_PAGES=['triagem','selecao','mono'];
+function cogComoConsulta(s){return Object.assign({},s,{leitura:true,gestor:false,nome:s.nome||s.usuario,forcada:true});}
 function cogLeitura(){return !!(COG_SESSAO&&COG_SESSAO.leitura);}
 const COG_LEITURA_MSG='Consulta: só leitura. Nada é gravado por este acesso.';
 function cogModoLeitura(){
@@ -5288,9 +5289,12 @@ var SO_TRI='';
   try {
     const chaveCons=new URLSearchParams(location.search).get('consulta');
     COG_SESSAO=await W.CognitioAuth.lerSessao();
-    if(!COG_SESSAO&&chaveCons)COG_SESSAO=await portaConsulta(chaveCons);
-    if(chaveCons){try{history.replaceState(null,'',location.pathname+(location.hash||'#mono'));}catch(e){}}
+    if(!COG_SESSAO&&chaveCons&&chaveCons!=='1')COG_SESSAO=await portaConsulta(chaveCons);
+    /* a chave sai do endereço; ?consulta=1 mantém o modo ao recarregar */
+    if(chaveCons){try{history.replaceState(null,'',location.pathname+'?consulta=1'+(location.hash||'#mono'));}catch(e){}}
     if(!COG_SESSAO)COG_SESSAO=await portaOffice();
+    /* pelo link de consulta, mesmo quem tem login do Office vê o modo resumido, só leitura */
+    if(chaveCons&&!COG_SESSAO.leitura)COG_SESSAO=cogComoConsulta(COG_SESSAO);
     if(COG_SESSAO.leitura)cogModoLeitura();
     await W.CognitioAuth.ponte();
     COG_REPORT_SESSAO_OK=true;cogReportPermissaoUI();
@@ -5303,7 +5307,7 @@ var SO_TRI='';
     const Pn=M().__ghPonte;if(!Pn||!await Pn.confere())throw new Error('A sessão do Office perdeu acesso ao acervo.');
     if(PM().atual!==Pn.SENT){const r=await PM().definir(Pn.SENT,false);if(!r||!r.ok)throw new Error('Não foi possível conectar o motor pela sessão do Office.');}
     const G=M().__acervoGitHub;if(G&&G.token){G.token(Pn.SENT);if(G.puxar)G.puxar(true);}
-    const revalidar=async()=>{try{const s=await W.CognitioAuth.lerSessao();if(!s||!COG_SESSAO||s.usuario!==COG_SESSAO.usuario){COG_REPORT_SESSAO_OK=false;COG_SESSAO=null;cogReportPermissaoUI();location.reload();return;}COG_SESSAO=s;COG_REPORT_SESSAO_OK=true;cogReportPermissaoUI();}catch(e){COG_REPORT_SESSAO_OK=false;cogReportPermissaoUI();}};
+    const revalidar=async()=>{try{const s=await W.CognitioAuth.lerSessao();if(!s||!COG_SESSAO||s.usuario!==COG_SESSAO.usuario){COG_REPORT_SESSAO_OK=false;COG_SESSAO=null;cogReportPermissaoUI();location.reload();return;}COG_SESSAO=COG_SESSAO.forcada&&!s.leitura?cogComoConsulta(s):s;COG_REPORT_SESSAO_OK=true;cogReportPermissaoUI();}catch(e){COG_REPORT_SESSAO_OK=false;cogReportPermissaoUI();}};
     W.addEventListener('focus',revalidar);setInterval(revalidar,60000);
   } catch(e){COG_SESSAO=null;frame.src='about:blank';msg(e.message+' Recarregue ou entre no Office.');return;}
   rotear();

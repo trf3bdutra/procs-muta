@@ -99,6 +99,10 @@ test('modo consulta: só Triagem, Seleção Prévia e Monocráticas, ficha em le
  assert.match(html,/if\(cogLeitura\(\)&&!COG_LEITURA_PAGES\.includes\(next\)\)next='mono';/);
  assert.match(html,/if\(cogLeitura\(\)&&!COG_LEITURA_PAGES\.includes\(p\)\)return;/);
  assert.match(html,/editarAoAbrir:!cogLeitura\(\),leitura:cogLeitura\(\)/);
+ assert.match(html,/if\(chaveCons&&!COG_SESSAO\.leitura\)COG_SESSAO=cogComoConsulta\(COG_SESSAO\);/,'pelo link, mesmo com login do Office, entra no modo consulta');
+ assert.match(html,/COG_SESSAO=COG_SESSAO\.forcada&&!s\.leitura\?cogComoConsulta\(s\):s;/,'a revalidação da sessão não desfaz o modo consulta');
+ const k=html.indexOf('function cogComoConsulta('),c=new Function(html.slice(k,html.indexOf('\n',k))+';return cogComoConsulta;')()({usuario:'Bruno',gestor:true,perfil:'editor'});
+ assert.equal(c.leitura,true);assert.equal(c.gestor,false);assert.equal(c.nome,'Bruno');
  assert.match(html,/on=PRONTO&&!cogLeitura\(\)&&/);
  assert.match(html,/html\[data-leitura\] #modulos \[data-cog="acervo"\],html\[data-leitura\] #rodape\{display:none!important\}/);
  assert.match(html,/html\[data-leitura\] #top \.amicus-brand,[^{]*#top \.amicus-eyebrow,[^{]*html\[data-leitura\] #top #estado,[^{]*html\[data-leitura\] #cog-over-toggle,[^{]*\{display:none!important\}/,'cabeçalho resumido às três abas');
