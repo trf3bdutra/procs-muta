@@ -1,7 +1,7 @@
 {
  "schema": "gabcmt.equipe.matriz",
  "versao": 1,
- "geradoEm": "2026-11-27T02:48:33Z",
+ "geradoEm": "2026-11-27T19:26:42Z",
  "geradoPor": "scripts/equipe/matriz_minutas.py",
  "tipos": [
   "Apelação",
@@ -128,7 +128,7 @@
    "servidor": "Debora",
    "noCadastro": true,
    "minutaNoCadastro": true,
-   "total": 241,
+   "total": 242,
    "correcoes": 0,
    "assuntosCorrigidos": {},
    "tipos": {
@@ -139,17 +139,17 @@
     "Embargos de declaração": 22,
     "Agravo interno": 1,
     "Juízo de retratação": 3,
-    "Decisão monocrática": 0,
+    "Decisão monocrática": 1,
     "Outras classes": 0
    },
    "secoes": {
-    "3ª Seção": 181,
+    "3ª Seção": 182,
     "2ª Seção": 42,
     "1ª Seção": 17,
     "sem seção": 1
    },
    "ramos": {
-    "DIREITO PREVIDENCIÁRIO": 171,
+    "DIREITO PREVIDENCIÁRIO": 172,
     "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO": 25,
     "DIREITO DA SAÚDE": 18,
     "DIREITO TRIBUTÁRIO": 10,
@@ -166,8 +166,8 @@
     "Fornecimento de medicamentos": 11,
     "Liberação de Veículo Apreendido": 10,
     "Rural (Art. 48/51)": 8,
+    "Aposentadoria Híbrida (Art. 48/106)": 6,
     "Oncológico": 6,
-    "Aposentadoria Híbrida (Art. 48/106)": 5,
     "Aposentadoria por Idade (Art. 48/51)": 4,
     "Reajustes e Revisões Específicos": 3,
     "Inquérito / Processo / Recurso Administrativo": 3,
@@ -617,11 +617,11 @@
     "Apelação": 91,
     "Apelação e remessa": 0,
     "Remessa necessária": 0,
-    "Agravo de instrumento": 2,
+    "Agravo de instrumento": 3,
     "Embargos de declaração": 0,
     "Agravo interno": 0,
     "Juízo de retratação": 0,
-    "Decisão monocrática": 4,
+    "Decisão monocrática": 3,
     "Outras classes": 0
    },
    "secoes": {
@@ -664,7 +664,7 @@
    "noCadastro": true,
    "minutaNoCadastro": false,
    "total": 88,
-   "correcoes": 381,
+   "correcoes": 382,
    "assuntosCorrigidos": {
     "Aposentadoria por Tempo de Contribuição (Art. 55/6)": 45,
     "Aposentadoria por Incapacidade Permanente": 44,
@@ -673,8 +673,8 @@
     "Pensão por Morte (Art. 74/9)": 33,
     "Aposentadoria Especial (Art. 57/8)": 29,
     "Auxílio por Incapacidade Temporária": 16,
+    "Aposentadoria Híbrida (Art. 48/106)": 9,
     "Rural (Art. 48/51)": 8,
-    "Aposentadoria Híbrida (Art. 48/106)": 8,
     "Reajustes e Revisões Específicos": 7,
     "RMI - Renda Mensal Inicial": 6,
     "Índice de 28,86% Lei 8.622/1993 e 8.627/1993": 5
@@ -12107,6 +12107,19 @@
    "2026-11-30",
    "2026-11-13",
    "50758609620254039999",
+   1
+  ],
+  [
+   "Debora",
+   "Decisão monocrática",
+   "3ª Seção",
+   "DIREITO PREVIDENCIÁRIO",
+   "Aposentadoria Híbrida (Art. 48/106)",
+   "Alexander",
+   0,
+   "",
+   "",
+   "53130845020264039999",
    1
   ],
   [
@@ -30950,6 +30963,19 @@
    "Wellington",
    "Agravo de instrumento",
    "2ª Seção",
+   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
+   "Inscrição / Documentação",
+   "",
+   0,
+   "",
+   "2026-10-22",
+   "50007204320264030001",
+   1
+  ],
+  [
+   "Wellington",
+   "Agravo de instrumento",
+   "2ª Seção",
    "DIREITO TRIBUTÁRIO",
    "Perdimento de Bens",
    "Saffioti",
@@ -32140,19 +32166,6 @@
    "2026-06-08",
    "",
    "50058344720224036000",
-   1
-  ],
-  [
-   "Wellington",
-   "Decisão monocrática",
-   "2ª Seção",
-   "DIREITO ADMINISTRATIVO E OUTRAS MATÉRIAS DE DIREITO PÚBLICO",
-   "Inscrição / Documentação",
-   "",
-   0,
-   "",
-   "2026-10-22",
-   "50007204320264030001",
    1
   ],
   [
