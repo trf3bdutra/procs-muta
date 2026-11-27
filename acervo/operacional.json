@@ -11137,7 +11137,7 @@
     "Tempest - Dobro": "",
     "Tempest - Suspensões": "",
     "Tipo de Julgamento": "",
-    "Hipóteses Monocrática": "",
+    "Hipóteses Monocrática": "Não se aplica",
     "Tempestividade": "",
     "Preparo": "",
     "AJG": "",
@@ -11165,13 +11165,17 @@
     "Mídias": "",
     "Etiquetas": "2ª Seção, Conselho profissional, Res 547/2024 CNJ",
     "Alegações": "",
-    "O que falta sanar": "",
+    "O que falta sanar": "Triagem por classe, partes e etiquetas do PJe (fonte de 16/11/2026), sem leitura dos autos: conferir a sentença (extinção pela Resolução CNJ 547/2024) e o preparo.",
     "Intercorrências": "",
     "Síntese Processual": "",
-    "Especificidades": ""
+    "Especificidades": "",
+    "Status da triagem": "Triado",
+    "Destino - Confirmado em": "2026-11-27",
+    "Destino - Confirmado por": "Bruno",
+    "Art. 932 - Nota de enquadramento": "Etiquetas da equipe no PJe: Conselho profissional, Execução Fiscal e Res 547/2024 CNJ. Tema 1.184/STF e Resolução CNJ 547/2024: desprovimento por decisão monocrática, na linha aplicada pelo Relator nas execuções de conselhos decididas em 19/11/2026 (ApCiv 5000191-79.2020.4.03.6000 e 5003374-24.2021.4.03.6000)."
    },
    "producao": {
-    "Destino": "",
+    "Destino": "Monocrática",
     "SERVIDOR": "",
     "MINUTADO": "",
     "Refinado": "",
@@ -11207,7 +11211,9 @@
     "Lote - Observação": "",
     "Lote - Ajustes da correção": [],
     "Lote - Pendências": "",
-    "Lote - Minuta": "sem minuta no lote"
+    "Lote - Minuta": "sem minuta no lote",
+    "Mono - Tipo de ato": "Decisão monocrática (art. 932)",
+    "Mono - Fundamento": "Tema 1.184/STF e Resolução CNJ 547/2024: desprovimento por decisão monocrática, na linha aplicada pelo Relator nas execuções de conselhos decididas em 19/11/2026 (ApCiv 5000191-79.2020.4.03.6000 e 5003374-24.2021.4.03.6000)."
    },
    "pauta": {
     "Status de Julgamento": "",
@@ -22298,10 +22304,14 @@
     "O que falta sanar": "",
     "Intercorrências": "",
     "Síntese Processual": "",
-    "Especificidades": ""
+    "Especificidades": "",
+    "Status da triagem": "Triado",
+    "Destino - Confirmado em": "2026-11-27",
+    "Destino - Confirmado por": "Bruno",
+    "Art. 932 - Nota de enquadramento": "Decidido por monocrática em 19/11/2026 (série do Relator, DJEN de 24/11/2026): Ante o exposto, com esteio no artigo 932, CPC, nego provimento à apelação."
    },
    "producao": {
-    "Destino": "",
+    "Destino": "Monocrática",
     "SERVIDOR": "",
     "MINUTADO": "",
     "Refinado": "",
@@ -22318,17 +22328,19 @@
     "Rev - Mérito": "",
     "Rev - Honorários": "",
     "Rev - Nota de atenção": "",
-    "Assinado": "",
-    "Data da Assinatura": "",
+    "Assinado": "Sim",
+    "Data da Assinatura": "2026-11-19",
     "Decisão - ID": "",
     "Publicado": "",
     "Relatório Padronizado": "",
     "Adequação Ementa": "",
     "Formatação Subementa": "",
-    "Voto - Resultado": "",
+    "Voto - Resultado": "Desprovido",
     "Voto - Honorários": "",
     "Mídias Necessárias": "",
-    "Voto - Descrição": ""
+    "Voto - Descrição": "",
+    "Mono - Tipo de ato": "Decisão monocrática (art. 932)",
+    "Mono - Fundamento": "Ante o exposto, com esteio no artigo 932, CPC, nego provimento à apelação."
    },
    "pauta": {
     "Status de Julgamento": "",
@@ -22338,6 +22350,9 @@
     "JULGAMENTO": "",
     "Motivo da remarcação": "",
     "sessoes": []
+   },
+   "controles": {
+    "Monocrática - Observação": "Decisão de 19/11/2026 localizada na série do Relator (DJEN)."
    }
   },
   {
@@ -85216,10 +85231,14 @@
     "O que falta sanar": "",
     "Intercorrências": "",
     "Síntese Processual": "",
-    "Especificidades": ""
+    "Especificidades": "",
+    "Status da triagem": "Triado",
+    "Destino - Confirmado em": "2026-11-27",
+    "Destino - Confirmado por": "Bruno",
+    "Art. 932 - Nota de enquadramento": "Decidido por monocrática em 19/11/2026 (série do Relator, DJEN de 24/11/2026): Ante o exposto, com esteio no artigo 932, CPC, nego provimento à apelação, prejudicado o pedido de antecipação da tutela recursal."
    },
    "producao": {
-    "Destino": "",
+    "Destino": "Monocrática",
     "SERVIDOR": "",
     "MINUTADO": "",
     "Refinado": "",
@@ -85236,14 +85255,14 @@
     "Rev - Mérito": "",
     "Rev - Honorários": "",
     "Rev - Nota de atenção": "",
-    "Assinado": "",
-    "Data da Assinatura": "",
+    "Assinado": "Sim",
+    "Data da Assinatura": "2026-11-19",
     "Decisão - ID": "",
     "Publicado": "",
     "Relatório Padronizado": "",
     "Adequação Ementa": "",
     "Formatação Subementa": "",
-    "Voto - Resultado": "",
+    "Voto - Resultado": "Desprovido",
     "Voto - Honorários": "",
     "Mídias Necessárias": "",
     "Voto - Descrição": "",
@@ -85255,7 +85274,9 @@
     "Lote - Observação": "",
     "Lote - Ajustes da correção": [],
     "Lote - Pendências": "",
-    "Lote - Minuta": "sem minuta no lote"
+    "Lote - Minuta": "sem minuta no lote",
+    "Mono - Tipo de ato": "Decisão monocrática (art. 932)",
+    "Mono - Fundamento": "Ante o exposto, com esteio no artigo 932, CPC, nego provimento à apelação, prejudicado o pedido de antecipação da tutela recursal."
    },
    "pauta": {
     "Status de Julgamento": "",
@@ -85265,6 +85286,9 @@
     "JULGAMENTO": "",
     "Motivo da remarcação": "",
     "sessoes": []
+   },
+   "controles": {
+    "Monocrática - Observação": "Decisão de 19/11/2026 localizada na série do Relator (DJEN)."
    }
   },
   {
@@ -90431,7 +90455,7 @@
     "Tempest - Dobro": "",
     "Tempest - Suspensões": "",
     "Tipo de Julgamento": "",
-    "Hipóteses Monocrática": "",
+    "Hipóteses Monocrática": "Não se aplica",
     "Tempestividade": "",
     "Preparo": "",
     "AJG": "",
@@ -90459,13 +90483,17 @@
     "Mídias": "",
     "Etiquetas": "apenas remessa, PRIORIDADE - Idoso(a), PRIORIDADE - IDOSO(A), representação, tempestividade, ver. preparo",
     "Alegações": "",
-    "O que falta sanar": "",
+    "O que falta sanar": "Triagem por classe, partes e etiquetas do PJe (fonte de 16/11/2026), sem leitura dos autos: conferir a sentença (ordem para concluir a análise do requerimento).",
     "Intercorrências": "",
     "Síntese Processual": "",
-    "Especificidades": ""
+    "Especificidades": "",
+    "Status da triagem": "Triado",
+    "Destino - Confirmado em": "2026-11-27",
+    "Destino - Confirmado por": "Bruno",
+    "Art. 932 - Nota de enquadramento": "Remessa necessária em mandado de segurança contra o INSS (assunto: Inquérito / Processo / Recurso Administrativo); etiqueta apenas remessa. Linha do Relator em remessa de mandado de segurança contra a demora do INSS na análise de requerimento: desprovimento por decisão monocrática (RemNecCiv 5010986-71.2025.4.03.6000 e 5012112-59.2025.4.03.6000, monocráticas de 19/11/2026)."
    },
    "producao": {
-    "Destino": "",
+    "Destino": "Monocrática",
     "SERVIDOR": "",
     "MINUTADO": "",
     "Refinado": "",
@@ -90492,7 +90520,9 @@
     "Voto - Resultado": "",
     "Voto - Honorários": "",
     "Mídias Necessárias": "",
-    "Voto - Descrição": ""
+    "Voto - Descrição": "",
+    "Mono - Tipo de ato": "Decisão monocrática (art. 932)",
+    "Mono - Fundamento": "Linha do Relator em remessa de mandado de segurança contra a demora do INSS na análise de requerimento: desprovimento por decisão monocrática (RemNecCiv 5010986-71.2025.4.03.6000 e 5012112-59.2025.4.03.6000, monocráticas de 19/11/2026)."
    },
    "pauta": {
     "Status de Julgamento": "",
@@ -101578,7 +101608,7 @@
     "Tempest - Dobro": "",
     "Tempest - Suspensões": "",
     "Tipo de Julgamento": "",
-    "Hipóteses Monocrática": "",
+    "Hipóteses Monocrática": "Não se aplica",
     "Tempestividade": "",
     "Preparo": "",
     "AJG": "",
@@ -101606,13 +101636,17 @@
     "Mídias": "",
     "Etiquetas": "2ª Seção, Wellington, Concurso Público",
     "Alegações": "",
-    "O que falta sanar": "",
+    "O que falta sanar": "Triagem pela tarefa [ED] Minutar ato judicial e pela série do Relator, sem leitura dos autos: conferir o teor e a tempestividade dos embargos.",
     "Intercorrências": "",
     "Síntese Processual": "",
-    "Especificidades": ""
+    "Especificidades": "",
+    "Status da triagem": "Triado",
+    "Destino - Confirmado em": "2026-11-27",
+    "Destino - Confirmado por": "Bruno",
+    "Art. 932 - Nota de enquadramento": "Embargos de declaração contra a decisão monocrática de 23/07/2026 (\"Ante o exposto, não conheço da apelação.\"): julgamento pelo Relator (artigo 1.024, § 2º, do CPC)."
    },
    "producao": {
-    "Destino": "",
+    "Destino": "Monocrática",
     "SERVIDOR": "",
     "MINUTADO": "",
     "Refinado": "",
@@ -101639,7 +101673,8 @@
     "Voto - Resultado": "",
     "Voto - Honorários": "",
     "Mídias Necessárias": "",
-    "Voto - Descrição": ""
+    "Voto - Descrição": "",
+    "Mono - Tipo de ato": "Decisão monocrática (art. 932)"
    },
    "pauta": {
     "Status de Julgamento": "",
@@ -105761,10 +105796,14 @@
     "O que falta sanar": "",
     "Intercorrências": "",
     "Síntese Processual": "",
-    "Especificidades": ""
+    "Especificidades": "",
+    "Status da triagem": "Triado",
+    "Destino - Confirmado em": "2026-11-27",
+    "Destino - Confirmado por": "Bruno",
+    "Art. 932 - Nota de enquadramento": "Decidido por monocrática em 19/11/2026 (série do Relator, DJEN de 24/11/2026): Ante o exposto, com fundamento no artigo 932, do CPC, nego provimento à remessa necessária."
    },
    "producao": {
-    "Destino": "",
+    "Destino": "Monocrática",
     "SERVIDOR": "",
     "MINUTADO": "",
     "Refinado": "",
@@ -105781,17 +105820,19 @@
     "Rev - Mérito": "",
     "Rev - Honorários": "",
     "Rev - Nota de atenção": "",
-    "Assinado": "",
-    "Data da Assinatura": "",
+    "Assinado": "Sim",
+    "Data da Assinatura": "2026-11-19",
     "Decisão - ID": "",
     "Publicado": "",
     "Relatório Padronizado": "",
     "Adequação Ementa": "",
     "Formatação Subementa": "",
-    "Voto - Resultado": "",
+    "Voto - Resultado": "Desprovido",
     "Voto - Honorários": "",
     "Mídias Necessárias": "",
-    "Voto - Descrição": ""
+    "Voto - Descrição": "",
+    "Mono - Tipo de ato": "Decisão monocrática (art. 932)",
+    "Mono - Fundamento": "Ante o exposto, com fundamento no artigo 932, do CPC, nego provimento à remessa necessária."
    },
    "pauta": {
     "Status de Julgamento": "",
@@ -105801,6 +105842,9 @@
     "JULGAMENTO": "",
     "Motivo da remarcação": "",
     "sessoes": []
+   },
+   "controles": {
+    "Monocrática - Observação": "Decisão de 19/11/2026 localizada na série do Relator (DJEN)."
    }
   },
   {
@@ -105832,7 +105876,7 @@
     "Tempest - Dobro": "",
     "Tempest - Suspensões": "",
     "Tipo de Julgamento": "",
-    "Hipóteses Monocrática": "",
+    "Hipóteses Monocrática": "III · recurso inadmissível, prejudicado ou sem impugnação específica",
     "Tempestividade": "",
     "Preparo": "",
     "AJG": "",
@@ -105860,13 +105904,17 @@
     "Mídias": "",
     "Etiquetas": "2ª Seção",
     "Alegações": "",
-    "O que falta sanar": "",
+    "O que falta sanar": "Triagem por etiquetas e tarefa do PJe (fonte de 16/11/2026), sem leitura dos autos: conferir a intimação para o preparo e a falta de recolhimento.",
     "Intercorrências": "",
     "Síntese Processual": "",
-    "Especificidades": ""
+    "Especificidades": "",
+    "Status da triagem": "Triado",
+    "Destino - Confirmado em": "2026-11-27",
+    "Destino - Confirmado por": "Bruno",
+    "Art. 932 - Nota de enquadramento": "Etiquetas da equipe no PJe: DESERÇÃO e MONOCRÁTICA; tarefa Revisar ato judicial em 16/11/2026 (minuta pronta). Não conhecimento do agravo por deserção (artigo 1.007 do CPC; artigo 932, III, do CPC)."
    },
    "producao": {
-    "Destino": "",
+    "Destino": "Monocrática",
     "SERVIDOR": "",
     "MINUTADO": "",
     "Refinado": "",
@@ -105893,7 +105941,10 @@
     "Voto - Resultado": "",
     "Voto - Honorários": "",
     "Mídias Necessárias": "",
-    "Voto - Descrição": ""
+    "Voto - Descrição": "",
+    "Mono - Tipo de ato": "Decisão monocrática (art. 932)",
+    "Mono - Fundamento": "Não conhecimento do agravo por deserção (artigo 1.007 do CPC; artigo 932, III, do CPC).",
+    "Minuta no PJe": "Sim"
    },
    "pauta": {
     "Status de Julgamento": "",
@@ -150353,10 +150404,14 @@
     "O que falta sanar": "",
     "Intercorrências": "",
     "Síntese Processual": "",
-    "Especificidades": ""
+    "Especificidades": "",
+    "Status da triagem": "Triado",
+    "Destino - Confirmado em": "2026-11-27",
+    "Destino - Confirmado por": "Bruno",
+    "Art. 932 - Nota de enquadramento": "Decidido por monocrática em 17/11/2026 (série do Relator, DJEN de ): Ante o exposto, com esteio no artigo 932 do CPC, dou parcial provimento ao agravo de instrumento, apenas para afastar a exigência de recolhimento de custas para o processamento dos embargos à execução. Por força do artigo 101, § 2º, do CPC, intime-se a parte agravante para que, no prazo de 05 (cinco) dias, recolha o preparo do presente recurso."
    },
    "producao": {
-    "Destino": "",
+    "Destino": "Monocrática",
     "SERVIDOR": "",
     "MINUTADO": "",
     "Refinado": "",
@@ -150373,17 +150428,19 @@
     "Rev - Mérito": "",
     "Rev - Honorários": "",
     "Rev - Nota de atenção": "",
-    "Assinado": "",
-    "Data da Assinatura": "",
+    "Assinado": "Sim",
+    "Data da Assinatura": "2026-11-17",
     "Decisão - ID": "",
     "Publicado": "",
     "Relatório Padronizado": "",
     "Adequação Ementa": "",
     "Formatação Subementa": "",
-    "Voto - Resultado": "",
+    "Voto - Resultado": "Parcialmente provido",
     "Voto - Honorários": "",
     "Mídias Necessárias": "",
-    "Voto - Descrição": ""
+    "Voto - Descrição": "",
+    "Mono - Tipo de ato": "Decisão monocrática (art. 932)",
+    "Mono - Fundamento": "Ante o exposto, com esteio no artigo 932 do CPC, dou parcial provimento ao agravo de instrumento, apenas para afastar a exigência de recolhimento de custas para o processamento dos embargos à execução. Por força do artigo 101, § 2º, do CPC, intime-se a parte agravante para que, no prazo de 05 (cinco) dias, recolha o preparo do presente recurso."
    },
    "pauta": {
     "Status de Julgamento": "",
@@ -150393,6 +150450,9 @@
     "JULGAMENTO": "",
     "Motivo da remarcação": "",
     "sessoes": []
+   },
+   "controles": {
+    "Monocrática - Observação": "Decisão de 17/11/2026 localizada na série do Relator (DJEN)."
    }
   },
   {
@@ -150662,10 +150722,14 @@
     "O que falta sanar": "",
     "Intercorrências": "",
     "Síntese Processual": "",
-    "Especificidades": ""
+    "Especificidades": "",
+    "Status da triagem": "Triado",
+    "Destino - Confirmado em": "2026-11-27",
+    "Destino - Confirmado por": "Bruno",
+    "Art. 932 - Nota de enquadramento": "Decidido por monocrática em 18/11/2026 (série do Relator, DJEN de 20/11/2026): Ante o exposto, com esteio no artigo 932 do CPC, nego provimento ao agravo de instrumento."
    },
    "producao": {
-    "Destino": "",
+    "Destino": "Monocrática",
     "SERVIDOR": "",
     "MINUTADO": "",
     "Refinado": "",
@@ -150682,17 +150746,19 @@
     "Rev - Mérito": "",
     "Rev - Honorários": "",
     "Rev - Nota de atenção": "",
-    "Assinado": "",
-    "Data da Assinatura": "",
+    "Assinado": "Sim",
+    "Data da Assinatura": "2026-11-18",
     "Decisão - ID": "",
     "Publicado": "",
     "Relatório Padronizado": "",
     "Adequação Ementa": "",
     "Formatação Subementa": "",
-    "Voto - Resultado": "",
+    "Voto - Resultado": "Desprovido",
     "Voto - Honorários": "",
     "Mídias Necessárias": "",
-    "Voto - Descrição": ""
+    "Voto - Descrição": "",
+    "Mono - Tipo de ato": "Decisão monocrática (art. 932)",
+    "Mono - Fundamento": "Ante o exposto, com esteio no artigo 932 do CPC, nego provimento ao agravo de instrumento."
    },
    "pauta": {
     "Status de Julgamento": "",
@@ -150702,6 +150768,9 @@
     "JULGAMENTO": "",
     "Motivo da remarcação": "",
     "sessoes": []
+   },
+   "controles": {
+    "Monocrática - Observação": "Decisão de 18/11/2026 localizada na série do Relator (DJEN)."
    }
   },
   {
@@ -176874,7 +176943,7 @@
     "Tempest - Dobro": "",
     "Tempest - Suspensões": "",
     "Tipo de Julgamento": "",
-    "Hipóteses Monocrática": "",
+    "Hipóteses Monocrática": "Não se aplica",
     "Tempestividade": "",
     "Preparo": "",
     "AJG": "",
@@ -176902,13 +176971,17 @@
     "Mídias": "",
     "Etiquetas": "",
     "Alegações": "",
-    "O que falta sanar": "",
+    "O que falta sanar": "Triagem por etiquetas e tarefa do PJe (fonte de 16/11/2026), sem leitura dos autos: conferir no PJe se a decisão já foi assinada.",
     "Intercorrências": "",
     "Síntese Processual": "",
-    "Especificidades": ""
+    "Especificidades": "",
+    "Status da triagem": "Triado",
+    "Destino - Confirmado em": "2026-11-27",
+    "Destino - Confirmado por": "Bruno",
+    "Art. 932 - Nota de enquadramento": "Etiquetas da equipe no PJe: Conselho profissional, Ausência de prévio protesto/cadastro de inadimplentes e MONOCRÁTICA TERMINATIVA; tarefa Assinar ato judicial em 16/11/2026 (minuta pronta). Tema 1.184/STF (extinção da execução de conselho sem as providências prévias da Resolução CNJ 547/2024): desprovimento por decisão monocrática, como nas monocráticas do Relator de 19/11/2026 nas ApCiv 5000191-79.2020.4.03.6000 e 5003374-24.2021.4.03.6000."
    },
    "producao": {
-    "Destino": "",
+    "Destino": "Monocrática",
     "SERVIDOR": "",
     "MINUTADO": "",
     "Refinado": "",
@@ -176935,7 +177008,10 @@
     "Voto - Resultado": "",
     "Voto - Honorários": "",
     "Mídias Necessárias": "",
-    "Voto - Descrição": ""
+    "Voto - Descrição": "",
+    "Mono - Tipo de ato": "Decisão monocrática (art. 932)",
+    "Mono - Fundamento": "Tema 1.184/STF (extinção da execução de conselho sem as providências prévias da Resolução CNJ 547/2024): desprovimento por decisão monocrática, como nas monocráticas do Relator de 19/11/2026 nas ApCiv 5000191-79.2020.4.03.6000 e 5003374-24.2021.4.03.6000.",
+    "Minuta no PJe": "Sim"
    },
    "pauta": {
     "Status de Julgamento": "",
@@ -206156,10 +206232,14 @@
     "O que falta sanar": "",
     "Intercorrências": "",
     "Síntese Processual": "",
-    "Especificidades": ""
+    "Especificidades": "",
+    "Status da triagem": "Triado",
+    "Destino - Confirmado em": "2026-11-27",
+    "Destino - Confirmado por": "Bruno",
+    "Art. 932 - Nota de enquadramento": "Decidido por monocrática em 19/11/2026 (série do Relator, DJEN de 24/11/2026): Ante o exposto, com fundamento no artigo 932, do CPC, nego provimento à remessa necessária."
    },
    "producao": {
-    "Destino": "",
+    "Destino": "Monocrática",
     "SERVIDOR": "",
     "MINUTADO": "",
     "Refinado": "",
@@ -206176,17 +206256,19 @@
     "Rev - Mérito": "",
     "Rev - Honorários": "",
     "Rev - Nota de atenção": "",
-    "Assinado": "",
-    "Data da Assinatura": "",
+    "Assinado": "Sim",
+    "Data da Assinatura": "2026-11-19",
     "Decisão - ID": "",
     "Publicado": "",
     "Relatório Padronizado": "",
     "Adequação Ementa": "",
     "Formatação Subementa": "",
-    "Voto - Resultado": "",
+    "Voto - Resultado": "Desprovido",
     "Voto - Honorários": "",
     "Mídias Necessárias": "",
-    "Voto - Descrição": ""
+    "Voto - Descrição": "",
+    "Mono - Tipo de ato": "Decisão monocrática (art. 932)",
+    "Mono - Fundamento": "Ante o exposto, com fundamento no artigo 932, do CPC, nego provimento à remessa necessária."
    },
    "pauta": {
     "Status de Julgamento": "",
@@ -206196,6 +206278,9 @@
     "JULGAMENTO": "",
     "Motivo da remarcação": "",
     "sessoes": []
+   },
+   "controles": {
+    "Monocrática - Observação": "Decisão de 19/11/2026 localizada na série do Relator (DJEN)."
    }
   },
   {
@@ -223560,7 +223645,7 @@
     "Tempest - Dobro": "",
     "Tempest - Suspensões": "",
     "Tipo de Julgamento": "",
-    "Hipóteses Monocrática": "",
+    "Hipóteses Monocrática": "Não se aplica",
     "Tempestividade": "",
     "Preparo": "",
     "AJG": "",
@@ -223588,13 +223673,17 @@
     "Mídias": "",
     "Etiquetas": "",
     "Alegações": "",
-    "O que falta sanar": "",
+    "O que falta sanar": "Triagem por etiquetas e tarefa do PJe (fonte de 16/11/2026), sem leitura dos autos: conferir no PJe se a decisão já foi assinada.",
     "Intercorrências": "",
     "Síntese Processual": "",
-    "Especificidades": ""
+    "Especificidades": "",
+    "Status da triagem": "Triado",
+    "Destino - Confirmado em": "2026-11-27",
+    "Destino - Confirmado por": "Bruno",
+    "Art. 932 - Nota de enquadramento": "Etiquetas da equipe no PJe: Conselho profissional, Ausência de prévio protesto/cadastro de inadimplentes e MONOCRÁTICA TERMINATIVA; tarefa Assinar ato judicial em 16/11/2026 (minuta pronta). Tema 1.184/STF (extinção da execução de conselho sem as providências prévias da Resolução CNJ 547/2024): desprovimento por decisão monocrática, como nas monocráticas do Relator de 19/11/2026 nas ApCiv 5000191-79.2020.4.03.6000 e 5003374-24.2021.4.03.6000."
    },
    "producao": {
-    "Destino": "",
+    "Destino": "Monocrática",
     "SERVIDOR": "",
     "MINUTADO": "",
     "Refinado": "",
@@ -223621,7 +223710,10 @@
     "Voto - Resultado": "",
     "Voto - Honorários": "",
     "Mídias Necessárias": "",
-    "Voto - Descrição": ""
+    "Voto - Descrição": "",
+    "Mono - Tipo de ato": "Decisão monocrática (art. 932)",
+    "Mono - Fundamento": "Tema 1.184/STF (extinção da execução de conselho sem as providências prévias da Resolução CNJ 547/2024): desprovimento por decisão monocrática, como nas monocráticas do Relator de 19/11/2026 nas ApCiv 5000191-79.2020.4.03.6000 e 5003374-24.2021.4.03.6000.",
+    "Minuta no PJe": "Sim"
    },
    "pauta": {
     "Status de Julgamento": "",
@@ -265434,10 +265526,14 @@
     "O que falta sanar": "",
     "Intercorrências": "",
     "Síntese Processual": "",
-    "Especificidades": ""
+    "Especificidades": "",
+    "Status da triagem": "Triado",
+    "Destino - Confirmado em": "2026-11-27",
+    "Destino - Confirmado por": "Bruno",
+    "Art. 932 - Nota de enquadramento": "Decidido por monocrática em 19/11/2026 (série do Relator, DJEN de 24/11/2026): Ante o exposto, com esteio no artigo 932, CPC, nego provimento à apelação, prejudicado o pedido de antecipação da tutela recursal."
    },
    "producao": {
-    "Destino": "",
+    "Destino": "Monocrática",
     "SERVIDOR": "",
     "MINUTADO": "",
     "Refinado": "",
@@ -265454,14 +265550,14 @@
     "Rev - Mérito": "",
     "Rev - Honorários": "",
     "Rev - Nota de atenção": "",
-    "Assinado": "",
-    "Data da Assinatura": "",
+    "Assinado": "Sim",
+    "Data da Assinatura": "2026-11-19",
     "Decisão - ID": "",
     "Publicado": "",
     "Relatório Padronizado": "",
     "Adequação Ementa": "",
     "Formatação Subementa": "",
-    "Voto - Resultado": "",
+    "Voto - Resultado": "Desprovido",
     "Voto - Honorários": "",
     "Mídias Necessárias": "",
     "Voto - Descrição": "",
@@ -265473,7 +265569,9 @@
     "Lote - Observação": "",
     "Lote - Ajustes da correção": [],
     "Lote - Pendências": "",
-    "Lote - Minuta": "sem minuta no lote"
+    "Lote - Minuta": "sem minuta no lote",
+    "Mono - Tipo de ato": "Decisão monocrática (art. 932)",
+    "Mono - Fundamento": "Ante o exposto, com esteio no artigo 932, CPC, nego provimento à apelação, prejudicado o pedido de antecipação da tutela recursal."
    },
    "pauta": {
     "Status de Julgamento": "",
@@ -265483,6 +265581,9 @@
     "JULGAMENTO": "",
     "Motivo da remarcação": "",
     "sessoes": []
+   },
+   "controles": {
+    "Monocrática - Observação": "Decisão de 19/11/2026 localizada na série do Relator (DJEN)."
    }
   },
   {
@@ -266511,7 +266612,7 @@
     "Tempest - Dobro": "",
     "Tempest - Suspensões": "",
     "Tipo de Julgamento": "",
-    "Hipóteses Monocrática": "",
+    "Hipóteses Monocrática": "Não se aplica",
     "Tempestividade": "",
     "Preparo": "",
     "AJG": "",
@@ -266539,13 +266640,17 @@
     "Mídias": "",
     "Etiquetas": "recursos anuidades conselhos",
     "Alegações": "",
-    "O que falta sanar": "",
+    "O que falta sanar": "Triagem por etiquetas e tarefa do PJe (fonte de 16/11/2026), sem leitura dos autos: conferir no PJe se a decisão já foi assinada e o preparo (etiqueta Recolher preparo).",
     "Intercorrências": "",
     "Síntese Processual": "",
-    "Especificidades": ""
+    "Especificidades": "",
+    "Status da triagem": "Triado",
+    "Destino - Confirmado em": "2026-11-27",
+    "Destino - Confirmado por": "Bruno",
+    "Art. 932 - Nota de enquadramento": "Etiquetas da equipe no PJe: Conselho profissional, Ausência de prévio protesto/cadastro de inadimplentes, MONOCRÁTICA TERMINATIVA e Recolher preparo; tarefa Assinar ato judicial em 16/11/2026 (minuta pronta). Tema 1.184/STF (extinção da execução de conselho sem as providências prévias da Resolução CNJ 547/2024): desprovimento por decisão monocrática, como nas monocráticas do Relator de 19/11/2026 nas ApCiv 5000191-79.2020.4.03.6000 e 5003374-24.2021.4.03.6000."
    },
    "producao": {
-    "Destino": "",
+    "Destino": "Monocrática",
     "SERVIDOR": "",
     "MINUTADO": "",
     "Refinado": "",
@@ -266572,7 +266677,10 @@
     "Voto - Resultado": "",
     "Voto - Honorários": "",
     "Mídias Necessárias": "",
-    "Voto - Descrição": ""
+    "Voto - Descrição": "",
+    "Mono - Tipo de ato": "Decisão monocrática (art. 932)",
+    "Mono - Fundamento": "Tema 1.184/STF (extinção da execução de conselho sem as providências prévias da Resolução CNJ 547/2024): desprovimento por decisão monocrática, como nas monocráticas do Relator de 19/11/2026 nas ApCiv 5000191-79.2020.4.03.6000 e 5003374-24.2021.4.03.6000.",
+    "Minuta no PJe": "Sim"
    },
    "pauta": {
     "Status de Julgamento": "",
@@ -272899,10 +273007,14 @@
     "O que falta sanar": "",
     "Intercorrências": "",
     "Síntese Processual": "",
-    "Especificidades": ""
+    "Especificidades": "",
+    "Status da triagem": "Triado",
+    "Destino - Confirmado em": "2026-11-27",
+    "Destino - Confirmado por": "Bruno",
+    "Art. 932 - Nota de enquadramento": "Decidido por monocrática em 19/11/2026 (série do Relator, DJEN de 24/11/2026): Ante o exposto, com esteio no artigo 932, do CPC, nego provimento à remessa necessária."
    },
    "producao": {
-    "Destino": "",
+    "Destino": "Monocrática",
     "SERVIDOR": "",
     "MINUTADO": "",
     "Refinado": "",
@@ -272919,17 +273031,19 @@
     "Rev - Mérito": "",
     "Rev - Honorários": "",
     "Rev - Nota de atenção": "",
-    "Assinado": "",
-    "Data da Assinatura": "",
+    "Assinado": "Sim",
+    "Data da Assinatura": "2026-11-19",
     "Decisão - ID": "",
     "Publicado": "",
     "Relatório Padronizado": "",
     "Adequação Ementa": "",
     "Formatação Subementa": "",
-    "Voto - Resultado": "",
+    "Voto - Resultado": "Desprovido",
     "Voto - Honorários": "",
     "Mídias Necessárias": "",
-    "Voto - Descrição": ""
+    "Voto - Descrição": "",
+    "Mono - Tipo de ato": "Decisão monocrática (art. 932)",
+    "Mono - Fundamento": "Ante o exposto, com esteio no artigo 932, do CPC, nego provimento à remessa necessária."
    },
    "pauta": {
     "Status de Julgamento": "",
@@ -272939,6 +273053,9 @@
     "JULGAMENTO": "",
     "Motivo da remarcação": "",
     "sessoes": []
+   },
+   "controles": {
+    "Monocrática - Observação": "Decisão de 19/11/2026 localizada na série do Relator (DJEN)."
    }
   },
   {
@@ -274093,7 +274210,7 @@
     "Tempest - Dobro": "",
     "Tempest - Suspensões": "",
     "Tipo de Julgamento": "",
-    "Hipóteses Monocrática": "",
+    "Hipóteses Monocrática": "Não se aplica",
     "Tempestividade": "",
     "Preparo": "",
     "AJG": "",
@@ -274121,13 +274238,17 @@
     "Mídias": "",
     "Etiquetas": "",
     "Alegações": "",
-    "O que falta sanar": "",
+    "O que falta sanar": "Triagem por classe, partes e etiquetas do PJe (fonte de 16/11/2026), sem leitura dos autos: conferir a sentença (ordem para concluir a análise do requerimento).",
     "Intercorrências": "",
     "Síntese Processual": "",
-    "Especificidades": ""
+    "Especificidades": "",
+    "Status da triagem": "Triado",
+    "Destino - Confirmado em": "2026-11-27",
+    "Destino - Confirmado por": "Bruno",
+    "Art. 932 - Nota de enquadramento": "Remessa necessária em mandado de segurança contra o INSS (assunto: Inquérito / Processo / Recurso Administrativo); etiqueta apenas remessa. Linha do Relator em remessa de mandado de segurança contra a demora do INSS na análise de requerimento: desprovimento por decisão monocrática (RemNecCiv 5010986-71.2025.4.03.6000 e 5012112-59.2025.4.03.6000, monocráticas de 19/11/2026)."
    },
    "producao": {
-    "Destino": "",
+    "Destino": "Monocrática",
     "SERVIDOR": "",
     "MINUTADO": "",
     "Refinado": "",
@@ -274154,7 +274275,9 @@
     "Voto - Resultado": "",
     "Voto - Honorários": "",
     "Mídias Necessárias": "",
-    "Voto - Descrição": ""
+    "Voto - Descrição": "",
+    "Mono - Tipo de ato": "Decisão monocrática (art. 932)",
+    "Mono - Fundamento": "Linha do Relator em remessa de mandado de segurança contra a demora do INSS na análise de requerimento: desprovimento por decisão monocrática (RemNecCiv 5010986-71.2025.4.03.6000 e 5012112-59.2025.4.03.6000, monocráticas de 19/11/2026)."
    },
    "pauta": {
     "Status de Julgamento": "",
@@ -284271,7 +284394,7 @@
     "Tempest - Dobro": "",
     "Tempest - Suspensões": "",
     "Tipo de Julgamento": "",
-    "Hipóteses Monocrática": "",
+    "Hipóteses Monocrática": "Não se aplica",
     "Tempestividade": "",
     "Preparo": "",
     "AJG": "",
@@ -284299,13 +284422,17 @@
     "Mídias": "",
     "Etiquetas": "2ª Seção, Responsabilidade Civil, Seguro de Vida",
     "Alegações": "",
-    "O que falta sanar": "",
+    "O que falta sanar": "Triagem pela tarefa [ED] Minutar ato judicial e pela série do Relator, sem leitura dos autos: conferir o teor e a tempestividade dos embargos.",
     "Intercorrências": "",
     "Síntese Processual": "",
-    "Especificidades": ""
+    "Especificidades": "",
+    "Status da triagem": "Triado",
+    "Destino - Confirmado em": "2026-11-27",
+    "Destino - Confirmado por": "Bruno",
+    "Art. 932 - Nota de enquadramento": "Embargos de declaração contra a decisão monocrática de 23/07/2026 (\"Ante o exposto, não conheço da apelação.\"): julgamento pelo Relator (artigo 1.024, § 2º, do CPC)."
    },
    "producao": {
-    "Destino": "",
+    "Destino": "Monocrática",
     "SERVIDOR": "",
     "MINUTADO": "",
     "Refinado": "",
@@ -284332,7 +284459,8 @@
     "Voto - Resultado": "",
     "Voto - Honorários": "",
     "Mídias Necessárias": "",
-    "Voto - Descrição": ""
+    "Voto - Descrição": "",
+    "Mono - Tipo de ato": "Decisão monocrática (art. 932)"
    },
    "pauta": {
     "Status de Julgamento": "",
@@ -297093,7 +297221,7 @@
     "Tempest - Dobro": "",
     "Tempest - Suspensões": "",
     "Tipo de Julgamento": "",
-    "Hipóteses Monocrática": "",
+    "Hipóteses Monocrática": "Não se aplica",
     "Tempestividade": "",
     "Preparo": "",
     "AJG": "",
@@ -297121,13 +297249,17 @@
     "Mídias": "",
     "Etiquetas": "DPF MARCELLUS, 1ª Seção, 28, 86%, Servidor",
     "Alegações": "",
-    "O que falta sanar": "",
+    "O que falta sanar": "Triagem pela tarefa [ED] Minutar ato judicial e pela série do Relator, sem leitura dos autos: conferir o teor e a tempestividade dos embargos.",
     "Intercorrências": "",
     "Síntese Processual": "",
-    "Especificidades": ""
+    "Especificidades": "",
+    "Status da triagem": "Triado",
+    "Destino - Confirmado em": "2026-11-27",
+    "Destino - Confirmado por": "Bruno",
+    "Art. 932 - Nota de enquadramento": "Embargos de declaração contra a decisão monocrática de 14/07/2026 (\"Ante o exposto, não conheço da apelação.\"): julgamento pelo Relator (artigo 1.024, § 2º, do CPC)."
    },
    "producao": {
-    "Destino": "",
+    "Destino": "Monocrática",
     "SERVIDOR": "",
     "MINUTADO": "",
     "Refinado": "",
@@ -297154,7 +297286,8 @@
     "Voto - Resultado": "",
     "Voto - Honorários": "",
     "Mídias Necessárias": "",
-    "Voto - Descrição": ""
+    "Voto - Descrição": "",
+    "Mono - Tipo de ato": "Decisão monocrática (art. 932)"
    },
    "pauta": {
     "Status de Julgamento": "",
@@ -301538,7 +301671,7 @@
     "Tempest - Dobro": "",
     "Tempest - Suspensões": "",
     "Tipo de Julgamento": "",
-    "Hipóteses Monocrática": "",
+    "Hipóteses Monocrática": "Não se aplica",
     "Tempestividade": "",
     "Preparo": "",
     "AJG": "",
@@ -301566,13 +301699,17 @@
     "Mídias": "",
     "Etiquetas": "apenas remessa, José V.",
     "Alegações": "",
-    "O que falta sanar": "",
+    "O que falta sanar": "Triagem por etiquetas e tarefa do PJe (fonte de 16/11/2026), sem leitura dos autos: registrar o fundamento da minuta.",
     "Intercorrências": "",
     "Síntese Processual": "",
-    "Especificidades": ""
+    "Especificidades": "",
+    "Status da triagem": "Triado",
+    "Destino - Confirmado em": "2026-11-27",
+    "Destino - Confirmado por": "Bruno",
+    "Art. 932 - Nota de enquadramento": "Etiquetas da equipe no PJe: apenas remessa e MONOCRÁTICA; tarefa Revisar ato judicial em 16/11/2026 (minuta pronta)."
    },
    "producao": {
-    "Destino": "",
+    "Destino": "Monocrática",
     "SERVIDOR": "",
     "MINUTADO": "",
     "Refinado": "",
@@ -301599,7 +301736,9 @@
     "Voto - Resultado": "",
     "Voto - Honorários": "",
     "Mídias Necessárias": "",
-    "Voto - Descrição": ""
+    "Voto - Descrição": "",
+    "Mono - Tipo de ato": "Decisão monocrática (art. 932)",
+    "Minuta no PJe": "Sim"
    },
    "pauta": {
     "Status de Julgamento": "",
@@ -341029,7 +341168,7 @@
     "Tempest - Dobro": "",
     "Tempest - Suspensões": "",
     "Tipo de Julgamento": "",
-    "Hipóteses Monocrática": "",
+    "Hipóteses Monocrática": "Não se aplica",
     "Tempestividade": "",
     "Preparo": "",
     "AJG": "",
@@ -341057,13 +341196,17 @@
     "Mídias": "",
     "Etiquetas": "recursos anuidades conselhos",
     "Alegações": "",
-    "O que falta sanar": "",
+    "O que falta sanar": "Triagem por etiquetas e tarefa do PJe (fonte de 16/11/2026), sem leitura dos autos: conferir no PJe se a decisão já foi assinada e o comprovante do Tesouro (etiqueta GIOVANA - LOTE - SECRETARIA DO TESOURO).",
     "Intercorrências": "",
     "Síntese Processual": "",
-    "Especificidades": ""
+    "Especificidades": "",
+    "Status da triagem": "Triado",
+    "Destino - Confirmado em": "2026-11-27",
+    "Destino - Confirmado por": "Bruno",
+    "Art. 932 - Nota de enquadramento": "Etiquetas da equipe no PJe: Conselho profissional, Ausência de prévio protesto/cadastro de inadimplentes e MONOCRÁTICA TERMINATIVA; tarefa Assinar ato judicial em 16/11/2026 (minuta pronta). Tema 1.184/STF (extinção da execução de conselho sem as providências prévias da Resolução CNJ 547/2024): desprovimento por decisão monocrática, como nas monocráticas do Relator de 19/11/2026 nas ApCiv 5000191-79.2020.4.03.6000 e 5003374-24.2021.4.03.6000."
    },
    "producao": {
-    "Destino": "",
+    "Destino": "Monocrática",
     "SERVIDOR": "",
     "MINUTADO": "",
     "Refinado": "",
@@ -341090,7 +341233,10 @@
     "Voto - Resultado": "",
     "Voto - Honorários": "",
     "Mídias Necessárias": "",
-    "Voto - Descrição": ""
+    "Voto - Descrição": "",
+    "Mono - Tipo de ato": "Decisão monocrática (art. 932)",
+    "Mono - Fundamento": "Tema 1.184/STF (extinção da execução de conselho sem as providências prévias da Resolução CNJ 547/2024): desprovimento por decisão monocrática, como nas monocráticas do Relator de 19/11/2026 nas ApCiv 5000191-79.2020.4.03.6000 e 5003374-24.2021.4.03.6000.",
+    "Minuta no PJe": "Sim"
    },
    "pauta": {
     "Status de Julgamento": "",
@@ -347700,7 +347846,7 @@
     "Tempest - Dobro": "",
     "Tempest - Suspensões": "",
     "Tipo de Julgamento": "",
-    "Hipóteses Monocrática": "",
+    "Hipóteses Monocrática": "Não se aplica",
     "Tempestividade": "",
     "Preparo": "",
     "AJG": "",
@@ -347728,13 +347874,17 @@
     "Mídias": "",
     "Etiquetas": "2ª Seção, Inexistência de débito",
     "Alegações": "",
-    "O que falta sanar": "",
+    "O que falta sanar": "Triagem pela tarefa [ED] Minutar ato judicial e pela série do Relator, sem leitura dos autos: conferir o teor e a tempestividade dos embargos.",
     "Intercorrências": "",
     "Síntese Processual": "",
-    "Especificidades": ""
+    "Especificidades": "",
+    "Status da triagem": "Triado",
+    "Destino - Confirmado em": "2026-11-27",
+    "Destino - Confirmado por": "Bruno",
+    "Art. 932 - Nota de enquadramento": "Embargos de declaração contra a decisão monocrática de 14/07/2026 (\"Ante o exposto, não conheço da apelação.\"): julgamento pelo Relator (artigo 1.024, § 2º, do CPC)."
    },
    "producao": {
-    "Destino": "",
+    "Destino": "Monocrática",
     "SERVIDOR": "",
     "MINUTADO": "",
     "Refinado": "",
@@ -347761,7 +347911,8 @@
     "Voto - Resultado": "",
     "Voto - Honorários": "",
     "Mídias Necessárias": "",
-    "Voto - Descrição": ""
+    "Voto - Descrição": "",
+    "Mono - Tipo de ato": "Decisão monocrática (art. 932)"
    },
    "pauta": {
     "Status de Julgamento": "",
@@ -355065,10 +355216,14 @@
     "O que falta sanar": "",
     "Intercorrências": "",
     "Síntese Processual": "",
-    "Especificidades": ""
+    "Especificidades": "",
+    "Status da triagem": "Triado",
+    "Destino - Confirmado em": "2026-11-27",
+    "Destino - Confirmado por": "Bruno",
+    "Art. 932 - Nota de enquadramento": "Decidido por monocrática em 19/11/2026 (série do Relator, DJEN de 24/11/2026): Ante o exposto, com fundamento no artigo 932, do CPC, nego provimento à remessa necessária."
    },
    "producao": {
-    "Destino": "",
+    "Destino": "Monocrática",
     "SERVIDOR": "",
     "MINUTADO": "",
     "Refinado": "",
@@ -355085,17 +355240,19 @@
     "Rev - Mérito": "",
     "Rev - Honorários": "",
     "Rev - Nota de atenção": "",
-    "Assinado": "",
-    "Data da Assinatura": "",
+    "Assinado": "Sim",
+    "Data da Assinatura": "2026-11-19",
     "Decisão - ID": "",
     "Publicado": "",
     "Relatório Padronizado": "",
     "Adequação Ementa": "",
     "Formatação Subementa": "",
-    "Voto - Resultado": "",
+    "Voto - Resultado": "Desprovido",
     "Voto - Honorários": "",
     "Mídias Necessárias": "",
-    "Voto - Descrição": ""
+    "Voto - Descrição": "",
+    "Mono - Tipo de ato": "Decisão monocrática (art. 932)",
+    "Mono - Fundamento": "Ante o exposto, com fundamento no artigo 932, do CPC, nego provimento à remessa necessária."
    },
    "pauta": {
     "Status de Julgamento": "",
@@ -355105,6 +355262,9 @@
     "JULGAMENTO": "",
     "Motivo da remarcação": "",
     "sessoes": []
+   },
+   "controles": {
+    "Monocrática - Observação": "Decisão de 19/11/2026 localizada na série do Relator (DJEN)."
    }
   },
   {
@@ -357302,7 +357462,7 @@
     "Tempest - Dobro": "",
     "Tempest - Suspensões": "",
     "Tipo de Julgamento": "",
-    "Hipóteses Monocrática": "",
+    "Hipóteses Monocrática": "Não se aplica",
     "Tempestividade": "",
     "Preparo": "",
     "AJG": "",
@@ -357330,13 +357490,17 @@
     "Mídias": "",
     "Etiquetas": "",
     "Alegações": "",
-    "O que falta sanar": "",
+    "O que falta sanar": "Triagem por classe, partes e etiquetas do PJe (fonte de 16/11/2026), sem leitura dos autos: conferir a sentença (ordem para concluir a análise do requerimento).",
     "Intercorrências": "",
     "Síntese Processual": "",
-    "Especificidades": ""
+    "Especificidades": "",
+    "Status da triagem": "Triado",
+    "Destino - Confirmado em": "2026-11-27",
+    "Destino - Confirmado por": "Bruno",
+    "Art. 932 - Nota de enquadramento": "Remessa necessária em mandado de segurança contra o Gerente Executivo do INSS (assunto: Tácito); etiqueta apenas remessa. Linha do Relator em remessa de mandado de segurança contra a demora do INSS na análise de requerimento: desprovimento por decisão monocrática (RemNecCiv 5010986-71.2025.4.03.6000 e 5012112-59.2025.4.03.6000, monocráticas de 19/11/2026)."
    },
    "producao": {
-    "Destino": "",
+    "Destino": "Monocrática",
     "SERVIDOR": "",
     "MINUTADO": "",
     "Refinado": "",
@@ -357363,7 +357527,9 @@
     "Voto - Resultado": "",
     "Voto - Honorários": "",
     "Mídias Necessárias": "",
-    "Voto - Descrição": ""
+    "Voto - Descrição": "",
+    "Mono - Tipo de ato": "Decisão monocrática (art. 932)",
+    "Mono - Fundamento": "Linha do Relator em remessa de mandado de segurança contra a demora do INSS na análise de requerimento: desprovimento por decisão monocrática (RemNecCiv 5010986-71.2025.4.03.6000 e 5012112-59.2025.4.03.6000, monocráticas de 19/11/2026)."
    },
    "pauta": {
     "Status de Julgamento": "",
@@ -388344,10 +388510,14 @@
     "O que falta sanar": "",
     "Intercorrências": "",
     "Síntese Processual": "",
-    "Especificidades": ""
+    "Especificidades": "",
+    "Status da triagem": "Triado",
+    "Destino - Confirmado em": "2026-11-27",
+    "Destino - Confirmado por": "Bruno",
+    "Art. 932 - Nota de enquadramento": "Decidido por monocrática em 19/11/2026 (série do Relator, DJEN de 24/11/2026): Ante o exposto, com fundamento no artigo 932, do CPC, nego provimento à remessa necessária."
    },
    "producao": {
-    "Destino": "",
+    "Destino": "Monocrática",
     "SERVIDOR": "",
     "MINUTADO": "",
     "Refinado": "",
@@ -388364,17 +388534,19 @@
     "Rev - Mérito": "",
     "Rev - Honorários": "",
     "Rev - Nota de atenção": "",
-    "Assinado": "",
-    "Data da Assinatura": "",
+    "Assinado": "Sim",
+    "Data da Assinatura": "2026-11-19",
     "Decisão - ID": "",
     "Publicado": "",
     "Relatório Padronizado": "",
     "Adequação Ementa": "",
     "Formatação Subementa": "",
-    "Voto - Resultado": "",
+    "Voto - Resultado": "Desprovido",
     "Voto - Honorários": "",
     "Mídias Necessárias": "",
-    "Voto - Descrição": ""
+    "Voto - Descrição": "",
+    "Mono - Tipo de ato": "Decisão monocrática (art. 932)",
+    "Mono - Fundamento": "Ante o exposto, com fundamento no artigo 932, do CPC, nego provimento à remessa necessária."
    },
    "pauta": {
     "Status de Julgamento": "",
@@ -388384,6 +388556,9 @@
     "JULGAMENTO": "",
     "Motivo da remarcação": "",
     "sessoes": []
+   },
+   "controles": {
+    "Monocrática - Observação": "Decisão de 19/11/2026 localizada na série do Relator (DJEN)."
    }
   },
   {
@@ -395883,10 +396058,14 @@
     "O que falta sanar": "",
     "Intercorrências": "",
     "Síntese Processual": "",
-    "Especificidades": ""
+    "Especificidades": "",
+    "Status da triagem": "Triado",
+    "Destino - Confirmado em": "2026-11-27",
+    "Destino - Confirmado por": "Bruno",
+    "Art. 932 - Nota de enquadramento": "Decidido por monocrática em 19/11/2026 (série do Relator, DJEN de 24/11/2026): Ante o exposto, com fundamento no artigo 932, do CPC, nego provimento à remessa necessária."
    },
    "producao": {
-    "Destino": "",
+    "Destino": "Monocrática",
     "SERVIDOR": "",
     "MINUTADO": "",
     "Refinado": "",
@@ -395903,17 +396082,19 @@
     "Rev - Mérito": "",
     "Rev - Honorários": "",
     "Rev - Nota de atenção": "",
-    "Assinado": "",
-    "Data da Assinatura": "",
+    "Assinado": "Sim",
+    "Data da Assinatura": "2026-11-19",
     "Decisão - ID": "",
     "Publicado": "",
     "Relatório Padronizado": "",
     "Adequação Ementa": "",
     "Formatação Subementa": "",
-    "Voto - Resultado": "",
+    "Voto - Resultado": "Desprovido",
     "Voto - Honorários": "",
     "Mídias Necessárias": "",
-    "Voto - Descrição": ""
+    "Voto - Descrição": "",
+    "Mono - Tipo de ato": "Decisão monocrática (art. 932)",
+    "Mono - Fundamento": "Ante o exposto, com fundamento no artigo 932, do CPC, nego provimento à remessa necessária."
    },
    "pauta": {
     "Status de Julgamento": "",
@@ -395923,6 +396104,9 @@
     "JULGAMENTO": "",
     "Motivo da remarcação": "",
     "sessoes": []
+   },
+   "controles": {
+    "Monocrática - Observação": "Decisão de 19/11/2026 localizada na série do Relator (DJEN)."
    }
   },
   {
@@ -398234,10 +398418,14 @@
     "O que falta sanar": "",
     "Intercorrências": "",
     "Síntese Processual": "",
-    "Especificidades": ""
+    "Especificidades": "",
+    "Status da triagem": "Triado",
+    "Destino - Confirmado em": "2026-11-27",
+    "Destino - Confirmado por": "Bruno",
+    "Art. 932 - Nota de enquadramento": "Decidido por monocrática em 19/11/2026 (série do Relator, DJEN de 24/11/2026): Ante o exposto, com esteio no artigo 932, do CPC, nego provimento à remessa necessária."
    },
    "producao": {
-    "Destino": "",
+    "Destino": "Monocrática",
     "SERVIDOR": "",
     "MINUTADO": "",
     "Refinado": "",
@@ -398254,17 +398442,19 @@
     "Rev - Mérito": "",
     "Rev - Honorários": "",
     "Rev - Nota de atenção": "",
-    "Assinado": "",
-    "Data da Assinatura": "",
+    "Assinado": "Sim",
+    "Data da Assinatura": "2026-11-19",
     "Decisão - ID": "",
     "Publicado": "",
     "Relatório Padronizado": "",
     "Adequação Ementa": "",
     "Formatação Subementa": "",
-    "Voto - Resultado": "",
+    "Voto - Resultado": "Desprovido",
     "Voto - Honorários": "",
     "Mídias Necessárias": "",
-    "Voto - Descrição": ""
+    "Voto - Descrição": "",
+    "Mono - Tipo de ato": "Decisão monocrática (art. 932)",
+    "Mono - Fundamento": "Ante o exposto, com esteio no artigo 932, do CPC, nego provimento à remessa necessária."
    },
    "pauta": {
     "Status de Julgamento": "",
@@ -398274,6 +398464,9 @@
     "JULGAMENTO": "",
     "Motivo da remarcação": "",
     "sessoes": []
+   },
+   "controles": {
+    "Monocrática - Observação": "Decisão de 19/11/2026 localizada na série do Relator (DJEN)."
    }
   },
   {
@@ -399563,7 +399756,7 @@
     "Tempest - Dobro": "",
     "Tempest - Suspensões": "",
     "Tipo de Julgamento": "",
-    "Hipóteses Monocrática": "",
+    "Hipóteses Monocrática": "Não se aplica",
     "Tempestividade": "",
     "Preparo": "",
     "AJG": "",
@@ -399591,13 +399784,17 @@
     "Mídias": "",
     "Etiquetas": "1ª Seção, honorários advocatícios em cumprimento de sentença, TRMS, PJ/SAF",
     "Alegações": "",
-    "O que falta sanar": "",
+    "O que falta sanar": "Triagem pela tarefa [ED] Minutar ato judicial e pela série do Relator, sem leitura dos autos: conferir o teor e a tempestividade dos embargos.",
     "Intercorrências": "",
     "Síntese Processual": "",
-    "Especificidades": ""
+    "Especificidades": "",
+    "Status da triagem": "Triado",
+    "Destino - Confirmado em": "2026-11-27",
+    "Destino - Confirmado por": "Bruno",
+    "Art. 932 - Nota de enquadramento": "Embargos de declaração contra a decisão monocrática de 07/08/2026 (\"Ante o exposto, com esteio no artigo 932, III, do CPC, não conheço do presente agravo de instrumento.\"): julgamento pelo Relator (artigo 1.024, § 2º, do CPC)."
    },
    "producao": {
-    "Destino": "",
+    "Destino": "Monocrática",
     "SERVIDOR": "",
     "MINUTADO": "",
     "Refinado": "",
@@ -399624,7 +399821,8 @@
     "Voto - Resultado": "",
     "Voto - Honorários": "",
     "Mídias Necessárias": "",
-    "Voto - Descrição": ""
+    "Voto - Descrição": "",
+    "Mono - Tipo de ato": "Decisão monocrática (art. 932)"
    },
    "pauta": {
     "Status de Julgamento": "",
@@ -404706,7 +404904,7 @@
     "Tempest - Dobro": "",
     "Tempest - Suspensões": "",
     "Tipo de Julgamento": "",
-    "Hipóteses Monocrática": "",
+    "Hipóteses Monocrática": "Não se aplica",
     "Tempestividade": "",
     "Preparo": "",
     "AJG": "",
@@ -404734,13 +404932,17 @@
     "Mídias": "",
     "Etiquetas": "DPF MARCELLUS, 2ª Seção, PIS/COFINS - Combustíveis, MONOCRÁTICA, deserção",
     "Alegações": "",
-    "O que falta sanar": "",
+    "O que falta sanar": "Triagem pela tarefa [ED] Minutar ato judicial e pela série do Relator, sem leitura dos autos: conferir o teor e a tempestividade dos embargos.",
     "Intercorrências": "",
     "Síntese Processual": "",
-    "Especificidades": ""
+    "Especificidades": "",
+    "Status da triagem": "Triado",
+    "Destino - Confirmado em": "2026-11-27",
+    "Destino - Confirmado por": "Bruno",
+    "Art. 932 - Nota de enquadramento": "Embargos de declaração contra a decisão monocrática de 14/07/2026 (\"Ante o exposto, não conheço da apelação.\"): julgamento pelo Relator (artigo 1.024, § 2º, do CPC)."
    },
    "producao": {
-    "Destino": "",
+    "Destino": "Monocrática",
     "SERVIDOR": "",
     "MINUTADO": "",
     "Refinado": "",
@@ -404767,7 +404969,8 @@
     "Voto - Resultado": "",
     "Voto - Honorários": "",
     "Mídias Necessárias": "",
-    "Voto - Descrição": ""
+    "Voto - Descrição": "",
+    "Mono - Tipo de ato": "Decisão monocrática (art. 932)"
    },
    "pauta": {
     "Status de Julgamento": "",
@@ -413764,7 +413967,7 @@
     "Tempest - Dobro": "",
     "Tempest - Suspensões": "",
     "Tipo de Julgamento": "",
-    "Hipóteses Monocrática": "",
+    "Hipóteses Monocrática": "Não se aplica",
     "Tempestividade": "",
     "Preparo": "",
     "AJG": "",
@@ -413792,13 +413995,17 @@
     "Mídias": "",
     "Etiquetas": "2ª Seção, AG. PRAZO DEC. MONOCRÁTICA",
     "Alegações": "",
-    "O que falta sanar": "",
+    "O que falta sanar": "Triagem pela tarefa [ED] Minutar ato judicial e pela série do Relator, sem leitura dos autos: conferir o teor e a tempestividade dos embargos.",
     "Intercorrências": "",
     "Síntese Processual": "",
-    "Especificidades": ""
+    "Especificidades": "",
+    "Status da triagem": "Triado",
+    "Destino - Confirmado em": "2026-11-27",
+    "Destino - Confirmado por": "Bruno",
+    "Art. 932 - Nota de enquadramento": "Embargos de declaração contra a decisão monocrática de 13/07/2026 (\"Ante o exposto, não conheço do agravo de instrumento.\"): julgamento pelo Relator (artigo 1.024, § 2º, do CPC)."
    },
    "producao": {
-    "Destino": "",
+    "Destino": "Monocrática",
     "SERVIDOR": "",
     "MINUTADO": "",
     "Refinado": "",
@@ -413825,7 +414032,8 @@
     "Voto - Resultado": "",
     "Voto - Honorários": "",
     "Mídias Necessárias": "",
-    "Voto - Descrição": ""
+    "Voto - Descrição": "",
+    "Mono - Tipo de ato": "Decisão monocrática (art. 932)"
    },
    "pauta": {
     "Status de Julgamento": "",
@@ -420828,7 +421036,7 @@
     "Tempest - Dobro": "",
     "Tempest - Suspensões": "",
     "Tipo de Julgamento": "",
-    "Hipóteses Monocrática": "",
+    "Hipóteses Monocrática": "Não se aplica",
     "Tempestividade": "",
     "Preparo": "",
     "AJG": "",
@@ -420856,13 +421064,17 @@
     "Mídias": "",
     "Etiquetas": "MS, 2ª Seção, ICMS - IRPJ/CSLL, AI - Tutela provisória",
     "Alegações": "",
-    "O que falta sanar": "",
+    "O que falta sanar": "Triagem pela tarefa [ED] Minutar ato judicial e pela série do Relator, sem leitura dos autos: conferir o teor e a tempestividade dos embargos.",
     "Intercorrências": "",
     "Síntese Processual": "",
-    "Especificidades": ""
+    "Especificidades": "",
+    "Status da triagem": "Triado",
+    "Destino - Confirmado em": "2026-11-27",
+    "Destino - Confirmado por": "Bruno",
+    "Art. 932 - Nota de enquadramento": "Embargos de declaração contra a decisão monocrática de 06/08/2026 (\"Ante o exposto, não conheço do agravo de instrumento.\"): julgamento pelo Relator (artigo 1.024, § 2º, do CPC)."
    },
    "producao": {
-    "Destino": "",
+    "Destino": "Monocrática",
     "SERVIDOR": "",
     "MINUTADO": "",
     "Refinado": "",
@@ -420889,7 +421101,8 @@
     "Voto - Resultado": "",
     "Voto - Honorários": "",
     "Mídias Necessárias": "",
-    "Voto - Descrição": ""
+    "Voto - Descrição": "",
+    "Mono - Tipo de ato": "Decisão monocrática (art. 932)"
    },
    "pauta": {
     "Status de Julgamento": "",
@@ -420961,10 +421174,14 @@
     "O que falta sanar": "",
     "Intercorrências": "",
     "Síntese Processual": "",
-    "Especificidades": ""
+    "Especificidades": "",
+    "Status da triagem": "Triado",
+    "Destino - Confirmado em": "2026-11-27",
+    "Destino - Confirmado por": "Bruno",
+    "Art. 932 - Nota de enquadramento": "Decidido por monocrática em 17/11/2026 (série do Relator, DJEN de ): Ante o exposto, com esteio no artigo 932 do CPC, nego provimento ao agravo de instrumento."
    },
    "producao": {
-    "Destino": "",
+    "Destino": "Monocrática",
     "SERVIDOR": "",
     "MINUTADO": "",
     "Refinado": "",
@@ -420981,17 +421198,19 @@
     "Rev - Mérito": "",
     "Rev - Honorários": "",
     "Rev - Nota de atenção": "",
-    "Assinado": "",
-    "Data da Assinatura": "",
+    "Assinado": "Sim",
+    "Data da Assinatura": "2026-11-17",
     "Decisão - ID": "",
     "Publicado": "",
     "Relatório Padronizado": "",
     "Adequação Ementa": "",
     "Formatação Subementa": "",
-    "Voto - Resultado": "",
+    "Voto - Resultado": "Desprovido",
     "Voto - Honorários": "",
     "Mídias Necessárias": "",
-    "Voto - Descrição": ""
+    "Voto - Descrição": "",
+    "Mono - Tipo de ato": "Decisão monocrática (art. 932)",
+    "Mono - Fundamento": "Ante o exposto, com esteio no artigo 932 do CPC, nego provimento ao agravo de instrumento."
    },
    "pauta": {
     "Status de Julgamento": "",
@@ -421001,6 +421220,9 @@
     "JULGAMENTO": "",
     "Motivo da remarcação": "",
     "sessoes": []
+   },
+   "controles": {
+    "Monocrática - Observação": "Decisão de 17/11/2026 localizada na série do Relator (DJEN)."
    }
   },
   {
@@ -440346,7 +440568,7 @@
     "Tempest - Dobro": "",
     "Tempest - Suspensões": "",
     "Tipo de Julgamento": "",
-    "Hipóteses Monocrática": "",
+    "Hipóteses Monocrática": "Não se aplica",
     "Tempestividade": "",
     "Preparo": "",
     "AJG": "",
@@ -440374,13 +440596,17 @@
     "Mídias": "",
     "Etiquetas": "2ª Seção, AI - Tutela provisória, MONOCRÁTICA TERMINATIVA, MS, Pedido de Despacho, Wellington",
     "Alegações": "",
-    "O que falta sanar": "",
+    "O que falta sanar": "Triagem por etiquetas e tarefa do PJe (fonte de 16/11/2026), sem leitura dos autos: conferir no PJe se a decisão já foi assinada e registrar o fundamento.",
     "Intercorrências": "",
     "Síntese Processual": "",
-    "Especificidades": ""
+    "Especificidades": "",
+    "Status da triagem": "Triado",
+    "Destino - Confirmado em": "2026-11-27",
+    "Destino - Confirmado por": "Bruno",
+    "Art. 932 - Nota de enquadramento": "Etiquetas da equipe no PJe: MONOCRÁTICA TERMINATIVA, AI - Tutela provisória, MS e Pedido de Despacho; tarefa Assinar ato judicial em 16/11/2026 (minuta pronta)."
    },
    "producao": {
-    "Destino": "",
+    "Destino": "Monocrática",
     "SERVIDOR": "",
     "MINUTADO": "",
     "Refinado": "",
@@ -440407,7 +440633,9 @@
     "Voto - Resultado": "",
     "Voto - Honorários": "",
     "Mídias Necessárias": "",
-    "Voto - Descrição": ""
+    "Voto - Descrição": "",
+    "Mono - Tipo de ato": "Decisão monocrática (art. 932)",
+    "Minuta no PJe": "Sim"
    },
    "pauta": {
     "Status de Julgamento": "",
@@ -440709,10 +440937,14 @@
     "O que falta sanar": "",
     "Intercorrências": "",
     "Síntese Processual": "",
-    "Especificidades": ""
+    "Especificidades": "",
+    "Status da triagem": "Triado",
+    "Destino - Confirmado em": "2026-11-27",
+    "Destino - Confirmado por": "Bruno",
+    "Art. 932 - Nota de enquadramento": "Decidido por monocrática em 18/11/2026 (série do Relator, DJEN de 20/11/2026): Ante o exposto, com esteio no artigo 932 do CPC, nego provimento ao agravo de instrumento."
    },
    "producao": {
-    "Destino": "",
+    "Destino": "Monocrática",
     "SERVIDOR": "",
     "MINUTADO": "",
     "Refinado": "",
@@ -440729,17 +440961,19 @@
     "Rev - Mérito": "",
     "Rev - Honorários": "",
     "Rev - Nota de atenção": "",
-    "Assinado": "",
-    "Data da Assinatura": "",
+    "Assinado": "Sim",
+    "Data da Assinatura": "2026-11-18",
     "Decisão - ID": "",
     "Publicado": "",
     "Relatório Padronizado": "",
     "Adequação Ementa": "",
     "Formatação Subementa": "",
-    "Voto - Resultado": "",
+    "Voto - Resultado": "Desprovido",
     "Voto - Honorários": "",
     "Mídias Necessárias": "",
-    "Voto - Descrição": ""
+    "Voto - Descrição": "",
+    "Mono - Tipo de ato": "Decisão monocrática (art. 932)",
+    "Mono - Fundamento": "Ante o exposto, com esteio no artigo 932 do CPC, nego provimento ao agravo de instrumento."
    },
    "pauta": {
     "Status de Julgamento": "",
@@ -440749,6 +440983,9 @@
     "JULGAMENTO": "",
     "Motivo da remarcação": "",
     "sessoes": []
+   },
+   "controles": {
+    "Monocrática - Observação": "Decisão de 18/11/2026 localizada na série do Relator (DJEN)."
    }
   },
   {
@@ -441330,10 +441567,14 @@
     "O que falta sanar": "",
     "Intercorrências": "",
     "Síntese Processual": "",
-    "Especificidades": ""
+    "Especificidades": "",
+    "Status da triagem": "Triado",
+    "Destino - Confirmado em": "2026-11-27",
+    "Destino - Confirmado por": "Bruno",
+    "Art. 932 - Nota de enquadramento": "Decidido por monocrática em 17/11/2026 (série do Relator, DJEN de ): Ante o exposto, com esteio no artigo 932 do CPC, nego provimento ao agravo de instrumento."
    },
    "producao": {
-    "Destino": "",
+    "Destino": "Monocrática",
     "SERVIDOR": "",
     "MINUTADO": "",
     "Refinado": "",
@@ -441350,17 +441591,19 @@
     "Rev - Mérito": "",
     "Rev - Honorários": "",
     "Rev - Nota de atenção": "",
-    "Assinado": "",
-    "Data da Assinatura": "",
+    "Assinado": "Sim",
+    "Data da Assinatura": "2026-11-17",
     "Decisão - ID": "",
     "Publicado": "",
     "Relatório Padronizado": "",
     "Adequação Ementa": "",
     "Formatação Subementa": "",
-    "Voto - Resultado": "",
+    "Voto - Resultado": "Desprovido",
     "Voto - Honorários": "",
     "Mídias Necessárias": "",
-    "Voto - Descrição": ""
+    "Voto - Descrição": "",
+    "Mono - Tipo de ato": "Decisão monocrática (art. 932)",
+    "Mono - Fundamento": "Ante o exposto, com esteio no artigo 932 do CPC, nego provimento ao agravo de instrumento."
    },
    "pauta": {
     "Status de Julgamento": "",
@@ -441370,6 +441613,9 @@
     "JULGAMENTO": "",
     "Motivo da remarcação": "",
     "sessoes": []
+   },
+   "controles": {
+    "Monocrática - Observação": "Decisão de 17/11/2026 localizada na série do Relator (DJEN)."
    }
   },
   {
@@ -458355,7 +458601,7 @@
     "Tempest - Dobro": "",
     "Tempest - Suspensões": "",
     "Tipo de Julgamento": "",
-    "Hipóteses Monocrática": "",
+    "Hipóteses Monocrática": "Não se aplica",
     "Tempestividade": "",
     "Preparo": "",
     "AJG": "",
@@ -458383,13 +458629,17 @@
     "Mídias": "",
     "Etiquetas": "3ª Seção, Aposentadoria por Idade Rural, idoso, Apto para julgamento, triagem de gabinete",
     "Alegações": "",
-    "O que falta sanar": "",
+    "O que falta sanar": "Triagem por etiquetas e tarefa do PJe (fonte de 16/11/2026), sem leitura dos autos: conferir os termos do acordo e os poderes para transigir.",
     "Intercorrências": "",
     "Síntese Processual": "",
-    "Especificidades": ""
+    "Especificidades": "",
+    "Status da triagem": "Triado",
+    "Destino - Confirmado em": "2026-11-27",
+    "Destino - Confirmado por": "Bruno",
+    "Art. 932 - Nota de enquadramento": "Etiquetas da equipe no PJe: Homologação de acordo, MONOCRÁTICA TERMINATIVA e APTO - CONFERIR; acordo noticiado depois do acórdão (tarefa [ED] Minutar ato judicial)."
    },
    "producao": {
-    "Destino": "",
+    "Destino": "Monocrática",
     "SERVIDOR": "",
     "MINUTADO": "",
     "Refinado": "",
@@ -458416,7 +458666,8 @@
     "Voto - Resultado": "",
     "Voto - Honorários": "",
     "Mídias Necessárias": "",
-    "Voto - Descrição": ""
+    "Voto - Descrição": "",
+    "Mono - Tipo de ato": "Homologação / extinção"
    },
    "pauta": {
     "Status de Julgamento": "",
