@@ -1,0 +1,803 @@
+{
+ "schema": "gabcmt.lote",
+ "versao": 1,
+ "tipo": "triagem",
+ "id": "pre-triagem-mono",
+ "titulo": "Pré-triagem · candidatos à monocrática (falta ler os autos)",
+ "descricao": "Processos sem triagem e sem autos extraídos, separados por classe, partes, etiquetas da equipe no PJe e pela série de decisões do Relator. Nenhum destino foi gravado: cada um precisa da leitura dos autos para entrar na Monocrática ou na Sessão.",
+ "origem": "triagem de 27/11/2026 dos processos sem triagem (fonte do acervo de 16/11/2026; série do Relator até 24/11/2026)",
+ "tarefa": "Triagem de Gabinete",
+ "sessoes": [],
+ "criado_por": "Bruno",
+ "atualizado_em": "2026-11-27",
+ "colunas": [],
+ "grupos": [
+  {
+   "id": "A1",
+   "rotulo": "Execuções de conselho (multa ou anuidade) sem a etiqueta da Resolução CNJ 547/2024",
+   "cor": "#2f6db5",
+   "resultado": "Candidato: falta ler os autos",
+   "modelo": ""
+  },
+  {
+   "id": "A2",
+   "rotulo": "Remessas em mandado de segurança contra o INSS",
+   "cor": "#a33b5c",
+   "resultado": "Candidato: falta ler os autos",
+   "modelo": ""
+  },
+  {
+   "id": "A3",
+   "rotulo": "TCFA (IBAMA)",
+   "cor": "#2a6a4a",
+   "resultado": "Candidato: falta ler os autos",
+   "modelo": ""
+  },
+  {
+   "id": "A4",
+   "rotulo": "INEP: ENADE, diploma e revalidação",
+   "cor": "#8a6d3b",
+   "resultado": "Candidato: falta ler os autos",
+   "modelo": ""
+  },
+  {
+   "id": "A5",
+   "rotulo": "FGTS: substituição da TR",
+   "cor": "#6a2a2a",
+   "resultado": "Candidato: falta ler os autos",
+   "modelo": ""
+  },
+  {
+   "id": "A6",
+   "rotulo": "Tema 1.433/STJ: sobrestamento",
+   "cor": "#5a4a8a",
+   "resultado": "Candidato: falta ler os autos",
+   "modelo": ""
+  },
+  {
+   "id": "B1",
+   "rotulo": "Já decididos por monocrática e recebidos de novo (agravo interno ou embargos?)",
+   "cor": "#7a7a2a",
+   "resultado": "Candidato: falta ler os autos",
+   "modelo": ""
+  },
+  {
+   "id": "B2",
+   "rotulo": "Efeito suspensivo já decidido; falta o mérito",
+   "cor": "#2e6da4",
+   "resultado": "Candidato: falta ler os autos",
+   "modelo": ""
+  },
+  {
+   "id": "C1",
+   "rotulo": "Duplicidade de distribuição",
+   "cor": "#555555",
+   "resultado": "Candidato: falta ler os autos",
+   "modelo": ""
+  }
+ ],
+ "itens": [
+  {
+   "sessao": "",
+   "item": 1,
+   "processo": "0006182-05.2012.4.03.6000",
+   "recurso": "Apelação cível",
+   "partes": "CONSELHO REGIONAL DE ENGENHARIA, ARQUITETURA E AGRONOMIA DE MATO GROSSO DO SUL x IVANIR COMPARIN",
+   "assunto": "Conselhos Regionais e Afins (Anuidade)",
+   "grupo": "A1",
+   "tipo_caso": "Execuções de conselho (multa ou anuidade) sem a etiqueta da Resolução CNJ 547/2024",
+   "resultado": "Candidato à monocrática na linha do Relator em execuções de conselho (Tema 1.184/STF; Tema 1.193/STJ; artigo 8º da Lei 12.514/2011, conforme o fundamento da sentença).",
+   "orientacao": "Ler a sentença e o recurso; conferir o preparo e o fundamento (multa ou anuidade; valor; providências prévias).",
+   "observacao": "Tarefa no PJe em 16/11/2026: Minutar ato judicial. Etiquetas: 2ª Seção, Conselho profissional, LOTE MULTA - APCIV",
+   "triagem": {
+    "ato": "Pré-triagem por classe, partes, etiquetas e série do Relator; sem leitura dos autos"
+   },
+   "pendencias": [
+    "Extrair os autos e confirmar"
+   ]
+  },
+  {
+   "sessao": "",
+   "item": 2,
+   "processo": "0010912-54.2015.4.03.6000",
+   "recurso": "Apelação cível",
+   "partes": "CREF-11 - MS/MT x HEDDY PATRICK ALVES GARCIA",
+   "assunto": "Conselhos Regionais e Afins (Anuidade)",
+   "grupo": "A1",
+   "tipo_caso": "Execuções de conselho (multa ou anuidade) sem a etiqueta da Resolução CNJ 547/2024",
+   "resultado": "Candidato à monocrática na linha do Relator em execuções de conselho (Tema 1.184/STF; Tema 1.193/STJ; artigo 8º da Lei 12.514/2011, conforme o fundamento da sentença).",
+   "orientacao": "Ler a sentença e o recurso; conferir o preparo e o fundamento (multa ou anuidade; valor; providências prévias).",
+   "observacao": "Tarefa no PJe em 16/11/2026: Minutar ato judicial. Etiquetas: 2ª Seção, Conselho profissional",
+   "triagem": {
+    "ato": "Pré-triagem por classe, partes, etiquetas e série do Relator; sem leitura dos autos"
+   },
+   "pendencias": [
+    "Extrair os autos e confirmar"
+   ]
+  },
+  {
+   "sessao": "",
+   "item": 3,
+   "processo": "5000084-48.2019.4.03.6007",
+   "recurso": "Apelação cível",
+   "partes": "CREF-11 - MS/MT x MARCO ANTONIO LUCIANO DE OLIVEIRA",
+   "assunto": "Conselhos Regionais e Afins (Anuidade)",
+   "grupo": "A1",
+   "tipo_caso": "Execuções de conselho (multa ou anuidade) sem a etiqueta da Resolução CNJ 547/2024",
+   "resultado": "Candidato à monocrática na linha do Relator em execuções de conselho (Tema 1.184/STF; Tema 1.193/STJ; artigo 8º da Lei 12.514/2011, conforme o fundamento da sentença).",
+   "orientacao": "Ler a sentença e o recurso; conferir o preparo e o fundamento (multa ou anuidade; valor; providências prévias).",
+   "observacao": "Tarefa no PJe em 16/11/2026: Minutar ato judicial. Etiquetas: 2ª Seção, Conselho profissional",
+   "triagem": {
+    "ato": "Pré-triagem por classe, partes, etiquetas e série do Relator; sem leitura dos autos"
+   },
+   "pendencias": [
+    "Extrair os autos e confirmar"
+   ]
+  },
+  {
+   "sessao": "",
+   "item": 4,
+   "processo": "5000155-87.2018.4.03.6006",
+   "recurso": "Apelação cível",
+   "partes": "CREF-11 - MS/MT x MARCELA DACZKOWSKI VIDAL",
+   "assunto": "Conselhos Regionais e Afins (Anuidade)",
+   "grupo": "A1",
+   "tipo_caso": "Execuções de conselho (multa ou anuidade) sem a etiqueta da Resolução CNJ 547/2024",
+   "resultado": "Candidato à monocrática na linha do Relator em execuções de conselho (Tema 1.184/STF; Tema 1.193/STJ; artigo 8º da Lei 12.514/2011, conforme o fundamento da sentença).",
+   "orientacao": "Ler a sentença e o recurso; conferir o preparo e o fundamento (multa ou anuidade; valor; providências prévias).",
+   "observacao": "Tarefa no PJe em 16/11/2026: Minutar ato judicial. Etiquetas: 2ª Seção, Conselho profissional",
+   "triagem": {
+    "ato": "Pré-triagem por classe, partes, etiquetas e série do Relator; sem leitura dos autos"
+   },
+   "pendencias": [
+    "Extrair os autos e confirmar"
+   ]
+  },
+  {
+   "sessao": "",
+   "item": 5,
+   "processo": "5000923-83.2022.4.03.6002",
+   "recurso": "Apelação cível",
+   "partes": "CONSELHO REGIONAL DE CONTABILIDADE DO MATO GROSSO DO SUL x MILTON APARECIDO OLSEN MESSA",
+   "assunto": "Conselhos Regionais e Afins (Anuidade)",
+   "grupo": "A1",
+   "tipo_caso": "Execuções de conselho (multa ou anuidade) sem a etiqueta da Resolução CNJ 547/2024",
+   "resultado": "Candidato à monocrática na linha do Relator em execuções de conselho (Tema 1.184/STF; Tema 1.193/STJ; artigo 8º da Lei 12.514/2011, conforme o fundamento da sentença).",
+   "orientacao": "Ler a sentença e o recurso; conferir o preparo e o fundamento (multa ou anuidade; valor; providências prévias).",
+   "observacao": "Tarefa no PJe em 16/11/2026: Minutar ato judicial. Etiquetas: 2ª Seção, Conselho profissional, INTIMAR PARA CONTRARRAZÕES, Prescrição, z Giovana Sato - Produtividade Novembro",
+   "triagem": {
+    "ato": "Pré-triagem por classe, partes, etiquetas e série do Relator; sem leitura dos autos"
+   },
+   "pendencias": [
+    "Extrair os autos e confirmar"
+   ]
+  },
+  {
+   "sessao": "",
+   "item": 6,
+   "processo": "5006214-75.2019.4.03.6000",
+   "recurso": "Apelação cível",
+   "partes": "CONSELHO REGIONAL DE CORRETORES DE IMOVEIS DA 2 REGIAO x JOSE MAURICIO RODRIGUES",
+   "assunto": "Conselhos Regionais e Afins (Anuidade)",
+   "grupo": "A1",
+   "tipo_caso": "Execuções de conselho (multa ou anuidade) sem a etiqueta da Resolução CNJ 547/2024",
+   "resultado": "Candidato à monocrática na linha do Relator em execuções de conselho (Tema 1.184/STF; Tema 1.193/STJ; artigo 8º da Lei 12.514/2011, conforme o fundamento da sentença).",
+   "orientacao": "Ler a sentença e o recurso; conferir o preparo e o fundamento (multa ou anuidade; valor; providências prévias).",
+   "observacao": "Tarefa no PJe em 16/11/2026: Minutar ato judicial. Etiquetas: 2ª Seção, Conselho profissional, LOTE MULTA - APCIV",
+   "triagem": {
+    "ato": "Pré-triagem por classe, partes, etiquetas e série do Relator; sem leitura dos autos"
+   },
+   "pendencias": [
+    "Extrair os autos e confirmar"
+   ]
+  },
+  {
+   "sessao": "",
+   "item": 7,
+   "processo": "5001473-41.2023.4.03.6003",
+   "recurso": "Apelação cível",
+   "partes": "CONSELHO REGIONAL DE ENGENHARIA, ARQUITETURA E AGRONOMIA DE MATO GROSSO DO SUL x CLAILTON CASTRO DA SILVEIRA JUNIOR",
+   "assunto": "Multas e demais Sanções",
+   "grupo": "A1",
+   "tipo_caso": "Execuções de conselho (multa ou anuidade) sem a etiqueta da Resolução CNJ 547/2024",
+   "resultado": "Candidato à monocrática na linha do Relator em execuções de conselho (Tema 1.184/STF; Tema 1.193/STJ; artigo 8º da Lei 12.514/2011, conforme o fundamento da sentença).",
+   "orientacao": "Ler a sentença e o recurso; conferir o preparo e o fundamento (multa ou anuidade; valor; providências prévias).",
+   "observacao": "Tarefa no PJe em 16/11/2026: Minutar ato judicial. Etiquetas: 2ª Seção, Conselho profissional, LOTE MULTA - APCIV",
+   "triagem": {
+    "ato": "Pré-triagem por classe, partes, etiquetas e série do Relator; sem leitura dos autos"
+   },
+   "pendencias": [
+    "Extrair os autos e confirmar"
+   ]
+  },
+  {
+   "sessao": "",
+   "item": 8,
+   "processo": "5001862-26.2023.4.03.6003",
+   "recurso": "Apelação / remessa necessária",
+   "partes": "CONSELHO REGIONAL DE ENGENHARIA, ARQUITETURA E AGRONOMIA DE MATO GROSSO DO SUL x HENRIQUE SILVA DONINHO",
+   "assunto": "Profissional",
+   "grupo": "A1",
+   "tipo_caso": "Execuções de conselho (multa ou anuidade) sem a etiqueta da Resolução CNJ 547/2024",
+   "resultado": "Candidato à monocrática na linha do Relator em execuções de conselho (Tema 1.184/STF; Tema 1.193/STJ; artigo 8º da Lei 12.514/2011, conforme o fundamento da sentença).",
+   "orientacao": "Ler a sentença e o recurso; conferir o preparo e o fundamento (multa ou anuidade; valor; providências prévias).",
+   "observacao": "Tarefa no PJe em 16/11/2026: Analisar tipo de decisão a proferir. Etiquetas: 2ª Seção, APTO - CONFERIR, Conselho profissional, Inscrição dívida ativa, LOTE MULTA - APCIV",
+   "triagem": {
+    "ato": "Pré-triagem por classe, partes, etiquetas e série do Relator; sem leitura dos autos"
+   },
+   "pendencias": [
+    "Extrair os autos e confirmar"
+   ]
+  },
+  {
+   "sessao": "",
+   "item": 9,
+   "processo": "5006931-24.2018.4.03.6000",
+   "recurso": "Apelação cível",
+   "partes": "CONSELHO REGIONAL DE ENGENHARIA, ARQUITETURA E AGRONOMIA DE MATO GROSSO DO SUL x EDEMILSON AMBROSIO DUENHA",
+   "assunto": "Profissional",
+   "grupo": "A1",
+   "tipo_caso": "Execuções de conselho (multa ou anuidade) sem a etiqueta da Resolução CNJ 547/2024",
+   "resultado": "Candidato à monocrática na linha do Relator em execuções de conselho (Tema 1.184/STF; Tema 1.193/STJ; artigo 8º da Lei 12.514/2011, conforme o fundamento da sentença).",
+   "orientacao": "Ler a sentença e o recurso; conferir o preparo e o fundamento (multa ou anuidade; valor; providências prévias).",
+   "observacao": "Tarefa no PJe em 16/11/2026: Minutar ato judicial. Etiquetas: 2ª Seção, Conselho profissional, LOTE MULTA - APCIV",
+   "triagem": {
+    "ato": "Pré-triagem por classe, partes, etiquetas e série do Relator; sem leitura dos autos"
+   },
+   "pendencias": [
+    "Extrair os autos e confirmar"
+   ]
+  },
+  {
+   "sessao": "",
+   "item": 10,
+   "processo": "5007678-03.2020.4.03.6000",
+   "recurso": "Apelação cível",
+   "partes": "CONSELHO REGIONAL DE ENGENHARIA, ARQUITETURA E AGRONOMIA DE MATO GROSSO DO SUL x MEGA NET INFORMATICA LTDA",
+   "assunto": "Profissional",
+   "grupo": "A1",
+   "tipo_caso": "Execuções de conselho (multa ou anuidade) sem a etiqueta da Resolução CNJ 547/2024",
+   "resultado": "Candidato à monocrática na linha do Relator em execuções de conselho (Tema 1.184/STF; Tema 1.193/STJ; artigo 8º da Lei 12.514/2011, conforme o fundamento da sentença).",
+   "orientacao": "Ler a sentença e o recurso; conferir o preparo e o fundamento (multa ou anuidade; valor; providências prévias).",
+   "observacao": "Tarefa no PJe em 16/11/2026: Minutar ato judicial. Etiquetas: 2ª Seção, Conselho profissional, LOTE MULTA - APCIV",
+   "triagem": {
+    "ato": "Pré-triagem por classe, partes, etiquetas e série do Relator; sem leitura dos autos"
+   },
+   "pendencias": [
+    "Extrair os autos e confirmar"
+   ]
+  },
+  {
+   "sessao": "",
+   "item": 11,
+   "processo": "5009481-50.2022.4.03.6000",
+   "recurso": "Apelação cível",
+   "partes": "CONSELHO REGIONAL DE FARMACIA DO ESTADO DE MS x RICARDO GUILHERME MALFATTI",
+   "assunto": "Profissional",
+   "grupo": "A1",
+   "tipo_caso": "Execuções de conselho (multa ou anuidade) sem a etiqueta da Resolução CNJ 547/2024",
+   "resultado": "Candidato à monocrática na linha do Relator em execuções de conselho (Tema 1.184/STF; Tema 1.193/STJ; artigo 8º da Lei 12.514/2011, conforme o fundamento da sentença).",
+   "orientacao": "Ler a sentença e o recurso; conferir o preparo e o fundamento (multa ou anuidade; valor; providências prévias).",
+   "observacao": "Tarefa no PJe em 16/11/2026: Minutar ato judicial. Etiquetas: 2ª Seção, Conselho profissional, LOTE MULTA - APCIV",
+   "triagem": {
+    "ato": "Pré-triagem por classe, partes, etiquetas e série do Relator; sem leitura dos autos"
+   },
+   "pendencias": [
+    "Extrair os autos e confirmar"
+   ]
+  },
+  {
+   "sessao": "",
+   "item": 12,
+   "processo": "5001368-62.2026.4.03.6002",
+   "recurso": "Remessa necessária cível",
+   "partes": "SAMUEL ROSA PIRES x INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS",
+   "assunto": "Auxílio-Reclusão (Art. 80)",
+   "grupo": "A2",
+   "tipo_caso": "Remessas em mandado de segurança contra o INSS",
+   "resultado": "Candidato à monocrática na linha do Relator em remessas de mandado de segurança contra o INSS (desprovimento).",
+   "orientacao": "Ler a sentença: ordem de análise do requerimento ou concessão do benefício; conferir se há apelação.",
+   "observacao": "Tarefa no PJe em 16/11/2026: Triagem de Gabinete. Etiquetas: apenas remessa, PRIORIDADE - Menor, representação, tempestividade, ver. preparo",
+   "triagem": {
+    "ato": "Pré-triagem por classe, partes, etiquetas e série do Relator; sem leitura dos autos"
+   },
+   "pendencias": [
+    "Extrair os autos e confirmar"
+   ]
+  },
+  {
+   "sessao": "",
+   "item": 13,
+   "processo": "5001495-88.2026.4.03.6005",
+   "recurso": "Remessa necessária cível",
+   "partes": "MARLENE ALMEIDA DA SILVA x INSS",
+   "assunto": "Urbano (art. 60)",
+   "grupo": "A2",
+   "tipo_caso": "Remessas em mandado de segurança contra o INSS",
+   "resultado": "Candidato à monocrática na linha do Relator em remessas de mandado de segurança contra o INSS (desprovimento).",
+   "orientacao": "Ler a sentença: ordem de análise do requerimento ou concessão do benefício; conferir se há apelação.",
+   "observacao": "Tarefa no PJe em 16/11/2026: Triagem de Gabinete. Etiquetas: representação, tempestividade, ver. preparo",
+   "triagem": {
+    "ato": "Pré-triagem por classe, partes, etiquetas e série do Relator; sem leitura dos autos"
+   },
+   "pendencias": [
+    "Extrair os autos e confirmar"
+   ]
+  },
+  {
+   "sessao": "",
+   "item": 14,
+   "processo": "5000145-05.2026.4.03.6704",
+   "recurso": "Apelação / remessa necessária",
+   "partes": "ROGERIO COELHO DE OLIVEIRA x INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS",
+   "assunto": "Incapacidade Laborativa Temporária",
+   "grupo": "A2",
+   "tipo_caso": "Remessas em mandado de segurança contra o INSS",
+   "resultado": "Candidato à monocrática na linha do Relator em remessas de mandado de segurança contra o INSS (desprovimento).",
+   "orientacao": "Ler a sentença: ordem de análise do requerimento ou concessão do benefício; conferir se há apelação.",
+   "observacao": "Tarefa no PJe em 16/11/2026: Triagem de Gabinete. Etiquetas: 2ª Seção, Benefício previdenciário, MS",
+   "triagem": {
+    "ato": "Pré-triagem por classe, partes, etiquetas e série do Relator; sem leitura dos autos"
+   },
+   "pendencias": [
+    "Extrair os autos e confirmar"
+   ]
+  },
+  {
+   "sessao": "",
+   "item": 15,
+   "processo": "5000155-90.2018.4.03.6005",
+   "recurso": "Apelação / remessa necessária",
+   "partes": "INSTITUTO BRASILEIRO DO MEIO AMBIENTE E DOS RECURSOS NATURAIS RENOVAVEIS x MINI USINA DE LEITE E DERIVADOS",
+   "assunto": "Taxa de Fiscalização Ambiental",
+   "grupo": "A3",
+   "tipo_caso": "TCFA (IBAMA)",
+   "resultado": "Candidato à monocrática na linha da Turma Regional em TCFA (ApCiv 5010796-21.2019.4.03.6000, 01/07/2026).",
+   "orientacao": "Conferir se a atividade consta do Anexo VIII da Lei 6.938/1981 e o resultado da sentença.",
+   "observacao": "Tarefa no PJe em 16/11/2026: Triagem de Gabinete. Etiquetas: ",
+   "triagem": {
+    "ato": "Pré-triagem por classe, partes, etiquetas e série do Relator; sem leitura dos autos"
+   },
+   "pendencias": [
+    "Extrair os autos e confirmar"
+   ]
+  },
+  {
+   "sessao": "",
+   "item": 16,
+   "processo": "5002258-35.2025.4.03.6002",
+   "recurso": "Apelação cível",
+   "partes": "INSTITUTO BRASILEIRO DO MEIO AMBIENTE E DOS RECURSOS NATURAIS RENOVAVEIS x ENZO CAMINHOES LTDA",
+   "assunto": "Taxa de Fiscalização Ambiental",
+   "grupo": "A3",
+   "tipo_caso": "TCFA (IBAMA)",
+   "resultado": "Candidato à monocrática na linha da Turma Regional em TCFA (ApCiv 5010796-21.2019.4.03.6000, 01/07/2026).",
+   "orientacao": "Conferir se a atividade consta do Anexo VIII da Lei 6.938/1981 e o resultado da sentença.",
+   "observacao": "Tarefa no PJe em 16/11/2026: Triagem de Gabinete. Etiquetas: ",
+   "triagem": {
+    "ato": "Pré-triagem por classe, partes, etiquetas e série do Relator; sem leitura dos autos"
+   },
+   "pendencias": [
+    "Extrair os autos e confirmar"
+   ]
+  },
+  {
+   "sessao": "",
+   "item": 17,
+   "processo": "5008382-45.2022.4.03.6000",
+   "recurso": "Apelação cível",
+   "partes": "INSTITUTO BRASILEIRO DO MEIO AMBIENTE E DOS RECURSOS NATURAIS RENOVAVEIS x FAQUIBRAS AGRO INDUSTRIAL LTDA",
+   "assunto": "Taxa de Fiscalização Ambiental",
+   "grupo": "A3",
+   "tipo_caso": "TCFA (IBAMA)",
+   "resultado": "Candidato à monocrática na linha da Turma Regional em TCFA (ApCiv 5010796-21.2019.4.03.6000, 01/07/2026).",
+   "orientacao": "Conferir se a atividade consta do Anexo VIII da Lei 6.938/1981 e o resultado da sentença.",
+   "observacao": "Tarefa no PJe em 16/11/2026: Triagem de Gabinete. Etiquetas: ",
+   "triagem": {
+    "ato": "Pré-triagem por classe, partes, etiquetas e série do Relator; sem leitura dos autos"
+   },
+   "pendencias": [
+    "Extrair os autos e confirmar"
+   ]
+  },
+  {
+   "sessao": "",
+   "item": 18,
+   "processo": "5000723-95.2026.4.03.0001",
+   "recurso": "Agravo de instrumento",
+   "partes": "J. VANUCHI FRANCO AGROPECUARIA SOCIEDADE SIMPLES x INSTITUTO BRASILEIRO DO MEIO AMBIENTE E DOS RECURSOS NATURAIS RENOVAVEIS",
+   "assunto": "Taxa de Fiscalização Ambiental",
+   "grupo": "A3",
+   "tipo_caso": "TCFA (IBAMA)",
+   "resultado": "Candidato à monocrática na linha da Turma Regional em TCFA (ApCiv 5010796-21.2019.4.03.6000, 01/07/2026).",
+   "orientacao": "Conferir se a atividade consta do Anexo VIII da Lei 6.938/1981 e o resultado da sentença.",
+   "observacao": "Tarefa no PJe em 16/11/2026: Triagem de Gabinete. Etiquetas: ",
+   "triagem": {
+    "ato": "Pré-triagem por classe, partes, etiquetas e série do Relator; sem leitura dos autos"
+   },
+   "pendencias": [
+    "Extrair os autos e confirmar"
+   ]
+  },
+  {
+   "sessao": "",
+   "item": 19,
+   "processo": "5001584-19.2023.4.03.6005",
+   "recurso": "Apelação cível",
+   "partes": "INSTITUTO NACIONAL DE ESTUDOS E PESQUISAS EDUCACIONAIS ANISIO TEIXEIRA x KAMILA MARINHO E SILVA",
+   "assunto": "Inscrição / Documentação",
+   "grupo": "A4",
+   "tipo_caso": "INEP: ENADE, diploma e revalidação",
+   "resultado": "Candidato à monocrática na linha do gabinete em ENADE e colação de grau (situação consolidada).",
+   "orientacao": "Ler a sentença e o recurso do INEP.",
+   "observacao": "Tarefa no PJe em 16/11/2026: Minutar ato judicial. Etiquetas: 2ª Seção, Revalida - Diploma na inscrição",
+   "triagem": {
+    "ato": "Pré-triagem por classe, partes, etiquetas e série do Relator; sem leitura dos autos"
+   },
+   "pendencias": [
+    "Extrair os autos e confirmar"
+   ]
+  },
+  {
+   "sessao": "",
+   "item": 20,
+   "processo": "5001747-62.2024.4.03.6005",
+   "recurso": "Apelação cível",
+   "partes": "INSTITUTO NACIONAL DE ESTUDOS E PESQUISAS EDUCACIONAIS ANISIO TEIXEIRA x LUIZ ALBERTO SILVA CARNEIRO",
+   "assunto": "Inscrição / Documentação",
+   "grupo": "A4",
+   "tipo_caso": "INEP: ENADE, diploma e revalidação",
+   "resultado": "Candidato à monocrática na linha do gabinete em ENADE e colação de grau (situação consolidada).",
+   "orientacao": "Ler a sentença e o recurso do INEP.",
+   "observacao": "Tarefa no PJe em 16/11/2026: Minutar ato judicial. Etiquetas: 2ª Seção, Analisar, Revalida - Diploma na inscrição",
+   "triagem": {
+    "ato": "Pré-triagem por classe, partes, etiquetas e série do Relator; sem leitura dos autos"
+   },
+   "pendencias": [
+    "Extrair os autos e confirmar"
+   ]
+  },
+  {
+   "sessao": "",
+   "item": 21,
+   "processo": "5005055-87.2025.4.03.6000",
+   "recurso": "Apelação cível",
+   "partes": "INSTITUTO NACIONAL DE ESTUDOS E PESQUISAS EDUCACIONAIS ANISIO TEIXEIRA x UNIÃO FEDERAL",
+   "assunto": "Inscrição / Documentação",
+   "grupo": "A4",
+   "tipo_caso": "INEP: ENADE, diploma e revalidação",
+   "resultado": "Candidato à monocrática na linha do gabinete em ENADE e colação de grau (situação consolidada).",
+   "orientacao": "Ler a sentença e o recurso do INEP.",
+   "observacao": "Tarefa no PJe em 16/11/2026: Minutar ato judicial. Etiquetas: 2ª Seção, Revalida - Diploma na inscrição",
+   "triagem": {
+    "ato": "Pré-triagem por classe, partes, etiquetas e série do Relator; sem leitura dos autos"
+   },
+   "pendencias": [
+    "Extrair os autos e confirmar"
+   ]
+  },
+  {
+   "sessao": "",
+   "item": 22,
+   "processo": "5001663-72.2021.4.03.6003",
+   "recurso": "Apelação cível",
+   "partes": "VILSON DONIZETH JOSE PEDRO x CAIXA ECONÔMICA FEDERAL",
+   "assunto": "Aplicação INPC/IPCA - Atualização FGTS",
+   "grupo": "A5",
+   "tipo_caso": "FGTS: substituição da TR",
+   "resultado": "Candidato à monocrática pela ADI 5.090/STF e pelo Tema 731/STJ.",
+   "orientacao": "Conferir a sentença e se a apelação contraria a tese.",
+   "observacao": "Tarefa no PJe em 16/11/2026: Minutar ato judicial. Etiquetas: 1ª Seção, FGTS",
+   "triagem": {
+    "ato": "Pré-triagem por classe, partes, etiquetas e série do Relator; sem leitura dos autos"
+   },
+   "pendencias": [
+    "Extrair os autos e confirmar"
+   ]
+  },
+  {
+   "sessao": "",
+   "item": 23,
+   "processo": "5006029-66.2021.4.03.6000",
+   "recurso": "Apelação cível",
+   "partes": "MONICA DE OLIVEIRA LIMA PASSONI x CAIXA ECONÔMICA FEDERAL",
+   "assunto": "Aplicação INPC/IPCA - Atualização FGTS",
+   "grupo": "A5",
+   "tipo_caso": "FGTS: substituição da TR",
+   "resultado": "Candidato à monocrática pela ADI 5.090/STF e pelo Tema 731/STJ.",
+   "orientacao": "Conferir a sentença e se a apelação contraria a tese.",
+   "observacao": "Tarefa no PJe em 16/11/2026: Revisar ato judicial. Etiquetas: 1ª Seção, APTO - CONFERIR, FGTS, Maria Eduarda",
+   "triagem": {
+    "ato": "Pré-triagem por classe, partes, etiquetas e série do Relator; sem leitura dos autos"
+   },
+   "pendencias": [
+    "Extrair os autos e confirmar"
+   ]
+  },
+  {
+   "sessao": "",
+   "item": 24,
+   "processo": "5027918-58.2026.4.03.0000",
+   "recurso": "Agravo de instrumento",
+   "partes": "BERTHA RENEE LIMA PIFFERO x INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS",
+   "assunto": "Reajustes de Remuneração, Proventos ou Pensão",
+   "grupo": "A6",
+   "tipo_caso": "Tema 1.433/STJ: sobrestamento",
+   "resultado": "Candidato à monocrática na linha do Relator em agravos contra sobrestamento indevido pelo Tema 1.433/STJ.",
+   "orientacao": "Ler a decisão agravada.",
+   "observacao": "Tarefa no PJe em 16/11/2026: Minutar ato judicial. Etiquetas: 1ª Seção, 28,86%, AI - gratuidade da Justiça, Tema 1433 STJ, Wellington, z Giovana Sato - Produtividade Outubro",
+   "triagem": {
+    "ato": "Pré-triagem por classe, partes, etiquetas e série do Relator; sem leitura dos autos"
+   },
+   "pendencias": [
+    "Extrair os autos e confirmar"
+   ]
+  },
+  {
+   "sessao": "",
+   "item": 25,
+   "processo": "5000617-36.2026.4.03.0001",
+   "recurso": "Agravo de instrumento",
+   "partes": "INSTITUTO NACIONAL DE COLONIZACAO E REFORMA AGRARIA - INCRA x LUCAS GOMES CATRINCK",
+   "assunto": "Política fundiária e da reforma agrária",
+   "grupo": "B1",
+   "tipo_caso": "Já decididos por monocrática e recebidos de novo (agravo interno ou embargos?)",
+   "resultado": "Há decisão monocrática anterior na série do Relator; o processo voltou ao gabinete. Decisão anterior: 28/09/2026 (\"Ante o exposto, com esteio no artigo 932 do CPC, nego provimento ao agravo de instrumento.\").",
+   "orientacao": "Ver o que foi juntado depois da decisão: embargos (monocrática, artigo 1.024, § 2º, do CPC) ou agravo interno (Sessão).",
+   "observacao": "Tarefa no PJe em 16/11/2026: Recebidos da unidade processante. Etiquetas: 1ª Seção, AI, AI - Perícia, LIMINAR PENDENTE, MONOCRÁTICA TERMINATIVA, Wellington",
+   "triagem": {
+    "ato": "Pré-triagem por classe, partes, etiquetas e série do Relator; sem leitura dos autos"
+   },
+   "pendencias": [
+    "Extrair os autos e confirmar"
+   ]
+  },
+  {
+   "sessao": "",
+   "item": 26,
+   "processo": "5276188-08.2026.4.03.9999",
+   "recurso": "Apelação cível",
+   "partes": "NILSON SILVA SOARES x INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS",
+   "assunto": "Aposentadoria por Incapacidade Permanente",
+   "grupo": "B1",
+   "tipo_caso": "Já decididos por monocrática e recebidos de novo (agravo interno ou embargos?)",
+   "resultado": "Há decisão monocrática anterior na série do Relator; o processo voltou ao gabinete. Decisão anterior: 21/07/2026 (\"Ante o exposto, não conheço da apelação, nos termos do artigo 932, III, do CPC.\").",
+   "orientacao": "Ver o que foi juntado depois da decisão: embargos (monocrática, artigo 1.024, § 2º, do CPC) ou agravo interno (Sessão).",
+   "observacao": "Tarefa no PJe em 16/11/2026: Recebidos da unidade processante. Etiquetas: 3ª Seção, Aposentadoria por Invalidez, Auxílio-acidente, Auxílio-doença, PRIORIDADE - IDOSO(A), PRIORIDADE - Idoso(a), triagem de gabinete",
+   "triagem": {
+    "ato": "Pré-triagem por classe, partes, etiquetas e série do Relator; sem leitura dos autos"
+   },
+   "pendencias": [
+    "Extrair os autos e confirmar"
+   ]
+  },
+  {
+   "sessao": "",
+   "item": 27,
+   "processo": "5000389-61.2026.4.03.0001",
+   "recurso": "Agravo de instrumento",
+   "partes": "ERBE INCORPORADORA 037 S.A. x ELIZETE DE SOUZA MORENO",
+   "assunto": "Vícios de Construção",
+   "grupo": "B1",
+   "tipo_caso": "Já decididos por monocrática e recebidos de novo (agravo interno ou embargos?)",
+   "resultado": "Há decisão monocrática anterior na série do Relator; o processo voltou ao gabinete. Decisão anterior: 31/08/2026 (\"Ante o exposto, com esteio no artigo 932, IV, do Código de Processo Civil, não conheço do recurso, quanto ao deferimento da perícia técnica, e, quanto ao mais, nego provimento ao agravo de instrumento.\").",
+   "orientacao": "Ver o que foi juntado depois da decisão: embargos (monocrática, artigo 1.024, § 2º, do CPC) ou agravo interno (Sessão).",
+   "observacao": "Tarefa no PJe em 16/11/2026: Recebidos da unidade processante. Etiquetas: 1ª Seção, AI, AI - Perícia, ERBE - AI, José V., LIMINAR PENDENTE, MONOCRÁTICA",
+   "triagem": {
+    "ato": "Pré-triagem por classe, partes, etiquetas e série do Relator; sem leitura dos autos"
+   },
+   "pendencias": [
+    "Extrair os autos e confirmar"
+   ]
+  },
+  {
+   "sessao": "",
+   "item": 28,
+   "processo": "5000403-45.2026.4.03.0001",
+   "recurso": "Agravo de instrumento",
+   "partes": "ERBE INCORPORADORA 037 S.A. x SANDRA LUCIANA DE LIMA",
+   "assunto": "Vícios de Construção",
+   "grupo": "B1",
+   "tipo_caso": "Já decididos por monocrática e recebidos de novo (agravo interno ou embargos?)",
+   "resultado": "Há decisão monocrática anterior na série do Relator; o processo voltou ao gabinete. Decisão anterior: 31/08/2026 (\"Ante o exposto, com esteio no artigo 932, IV, do Código de Processo Civil, não conheço do recurso, quanto ao deferimento da perícia técnica, e, quanto ao mais, nego provimento ao agravo de instrumento.\").",
+   "orientacao": "Ver o que foi juntado depois da decisão: embargos (monocrática, artigo 1.024, § 2º, do CPC) ou agravo interno (Sessão).",
+   "observacao": "Tarefa no PJe em 16/11/2026: Recebidos da unidade processante. Etiquetas: 1ª Seção, AI, AI - Perícia, ERBE - AI, LIMINAR PENDENTE, MONOCRÁTICA, Rodrigo",
+   "triagem": {
+    "ato": "Pré-triagem por classe, partes, etiquetas e série do Relator; sem leitura dos autos"
+   },
+   "pendencias": [
+    "Extrair os autos e confirmar"
+   ]
+  },
+  {
+   "sessao": "",
+   "item": 29,
+   "processo": "5000429-43.2026.4.03.0001",
+   "recurso": "Agravo de instrumento",
+   "partes": "ERBE INCORPORADORA 037 S.A. x CALIRA JOSE BEZERRA",
+   "assunto": "Vícios de Construção",
+   "grupo": "B1",
+   "tipo_caso": "Já decididos por monocrática e recebidos de novo (agravo interno ou embargos?)",
+   "resultado": "Há decisão monocrática anterior na série do Relator; o processo voltou ao gabinete. Decisão anterior: 31/08/2026 (\"Ante o exposto, com esteio no artigo 932, IV, do Código de Processo Civil, não conheço do recurso, quanto ao deferimento da perícia técnica, e, quanto ao mais, nego provimento ao agravo de instrumento.\").",
+   "orientacao": "Ver o que foi juntado depois da decisão: embargos (monocrática, artigo 1.024, § 2º, do CPC) ou agravo interno (Sessão).",
+   "observacao": "Tarefa no PJe em 16/11/2026: Recebidos da unidade processante. Etiquetas: 1ª Seção, AI, AI - Perícia, ERBE - AI, LIMINAR PENDENTE, MONOCRÁTICA, Wellington",
+   "triagem": {
+    "ato": "Pré-triagem por classe, partes, etiquetas e série do Relator; sem leitura dos autos"
+   },
+   "pendencias": [
+    "Extrair os autos e confirmar"
+   ]
+  },
+  {
+   "sessao": "",
+   "item": 30,
+   "processo": "5000466-70.2026.4.03.0001",
+   "recurso": "Agravo de instrumento",
+   "partes": "ERBE INCORPORADORA 037 S.A. x ELAINE MOREIRA DE ABREU",
+   "assunto": "Vícios de Construção",
+   "grupo": "B1",
+   "tipo_caso": "Já decididos por monocrática e recebidos de novo (agravo interno ou embargos?)",
+   "resultado": "Há decisão monocrática anterior na série do Relator; o processo voltou ao gabinete. Decisão anterior: 31/08/2026 (\"Ante o exposto, com esteio no artigo 932, IV, do Código de Processo Civil, não conheço do recurso, quanto ao deferimento da perícia técnica, e, quanto ao mais, nego provimento ao agravo de instrumento.\").",
+   "orientacao": "Ver o que foi juntado depois da decisão: embargos (monocrática, artigo 1.024, § 2º, do CPC) ou agravo interno (Sessão).",
+   "observacao": "Tarefa no PJe em 16/11/2026: Recebidos da unidade processante. Etiquetas: 1ª Seção, AI, AI - Perícia, ERBE - AI, José V., LIMINAR PENDENTE, MONOCRÁTICA",
+   "triagem": {
+    "ato": "Pré-triagem por classe, partes, etiquetas e série do Relator; sem leitura dos autos"
+   },
+   "pendencias": [
+    "Extrair os autos e confirmar"
+   ]
+  },
+  {
+   "sessao": "",
+   "item": 31,
+   "processo": "5028294-44.2026.4.03.0000",
+   "recurso": "Agravo de instrumento",
+   "partes": "ERBE INCORPORADORA 037 S.A. x EDINALVA CARVALHO DE LIMA",
+   "assunto": "Vícios de Construção",
+   "grupo": "B1",
+   "tipo_caso": "Já decididos por monocrática e recebidos de novo (agravo interno ou embargos?)",
+   "resultado": "Há decisão monocrática anterior na série do Relator; o processo voltou ao gabinete. Decisão anterior: 15/09/2026 (\"Ante o exposto, com esteio no artigo 932, IV, do Código de Processo Civil, não conheço do recurso, quanto ao deferimento da perícia técnica, e, quanto ao mais, nego provimento ao agravo de instrumento. Nada obstante, considerando que as custas processuais são devidas pelo protocolo do recurso (REsp 1.216.685, Rel. Min. CASTRO MEIRA, DJe 27/04/2011), providencie a agravante o respectivo recolhimento, em dobro (artigo 1.007, § 4º, do CPC), no prazo de 5 (cinco) dias.\").",
+   "orientacao": "Ver o que foi juntado depois da decisão: embargos (monocrática, artigo 1.024, § 2º, do CPC) ou agravo interno (Sessão).",
+   "observacao": "Tarefa no PJe em 16/11/2026: Recebidos da unidade processante. Etiquetas: 1ª Seção, AI, AI - Perícia, LIMINAR PENDENTE, Wellington",
+   "triagem": {
+    "ato": "Pré-triagem por classe, partes, etiquetas e série do Relator; sem leitura dos autos"
+   },
+   "pendencias": [
+    "Extrair os autos e confirmar"
+   ]
+  },
+  {
+   "sessao": "",
+   "item": 32,
+   "processo": "5000012-20.2026.4.03.6006",
+   "recurso": "Apelação cível",
+   "partes": "NATHALIA DE ALMEIDA SESTAK x AUDITOR FISCAL DA RECEITA FEDERAL EM MUNDO NOVO",
+   "assunto": "Inquérito / Processo / Recurso Administrativo",
+   "grupo": "B1",
+   "tipo_caso": "Já decididos por monocrática e recebidos de novo (agravo interno ou embargos?)",
+   "resultado": "Há decisão monocrática anterior na série do Relator; o processo voltou ao gabinete. Decisão anterior: 14/07/2026 (\"Ante o exposto, não conheço da apelação.\").",
+   "orientacao": "Ver o que foi juntado depois da decisão: embargos (monocrática, artigo 1.024, § 2º, do CPC) ou agravo interno (Sessão).",
+   "observacao": "Tarefa no PJe em 16/11/2026: Analisar tipo de decisão a proferir. Etiquetas: 2ª Seção, AgInt, Apreensão - Veículo, DESERÇÃO, MS, Nulidade - Atos Administrativos",
+   "triagem": {
+    "ato": "Pré-triagem por classe, partes, etiquetas e série do Relator; sem leitura dos autos"
+   },
+   "pendencias": [
+    "Extrair os autos e confirmar"
+   ]
+  },
+  {
+   "sessao": "",
+   "item": 33,
+   "processo": "5035017-79.2026.4.03.0000",
+   "recurso": "Agravo de instrumento",
+   "partes": "UNIÃO FEDERAL x HIGOR DIAS DE AGUIAR",
+   "assunto": "Reserva de Vagas",
+   "grupo": "B2",
+   "tipo_caso": "Efeito suspensivo já decidido; falta o mérito",
+   "resultado": "Efeito suspensivo deferido em 17/11/2026 (série do Relator); falta o julgamento do agravo. Decisão anterior: 17/11/2026 (\"Ante o exposto, defiro o pedido de efeito suspensivo, para suspender os efeitos da decisão recorrida quanto à manutenção ou inclusão do agravado nas listas de candidatos negros para os cargos em disputa.\").",
+   "orientacao": "Aguardar a contraminuta; depois, monocrática ou voto conforme a linha do gabinete.",
+   "observacao": "Tarefa no PJe em 16/11/2026: Triagem de Gabinete. Etiquetas: AI, AI - Perícia, LIMINAR PENDENTE, representação, tempestividade, ver. preparo",
+   "triagem": {
+    "ato": "Pré-triagem por classe, partes, etiquetas e série do Relator; sem leitura dos autos"
+   },
+   "pendencias": [
+    "Extrair os autos e confirmar"
+   ]
+  },
+  {
+   "sessao": "",
+   "item": 34,
+   "processo": "5018352-22.2025.4.03.0000",
+   "recurso": "Petição cível",
+   "partes": "LETICIA DE MORAES FRANCO MARTINS x INSTITUTO NACIONAL DE ESTUDOS E PESQUISAS EDUCACIONAIS ANISIO TEIXEIRA",
+   "assunto": "Convalidação de Estudos e Reconhecimento de Diploma",
+   "grupo": "C1",
+   "tipo_caso": "Duplicidade de distribuição",
+   "resultado": "Etiqueta Duplicidade da equipe: provável despacho de cancelamento ou de reunião de processos (Outro destino).",
+   "orientacao": "Conferir o processo principal e o despacho cabível.",
+   "observacao": "Tarefa no PJe em 16/11/2026: Triagem de Gabinete. Etiquetas: 2ª Seção, Duplicidade, NÃO PAUTAR - GIOVANA, Revalida",
+   "triagem": {
+    "ato": "Pré-triagem por classe, partes, etiquetas e série do Relator; sem leitura dos autos"
+   },
+   "pendencias": [
+    "Extrair os autos e confirmar"
+   ]
+  },
+  {
+   "sessao": "",
+   "item": 35,
+   "processo": "5119744-78.2025.4.03.9999",
+   "recurso": "Apelação cível",
+   "partes": "INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS x BIBIANA VALDECI FERREIRA DOS SANTOS",
+   "assunto": "Aposentadoria Híbrida (Art. 48/106)",
+   "grupo": "C1",
+   "tipo_caso": "Duplicidade de distribuição",
+   "resultado": "Etiqueta Duplicidade da equipe: provável despacho de cancelamento ou de reunião de processos (Outro destino).",
+   "orientacao": "Conferir o processo principal e o despacho cabível.",
+   "observacao": "Tarefa no PJe em 16/11/2026: Minutar ato judicial. Etiquetas: 3ª Seção, Aposentadoria Híbrida, Duplicidade, extinção sem mérito, NÃO PAUTAR - GIOVANA, Prevenção Res 33",
+   "triagem": {
+    "ato": "Pré-triagem por classe, partes, etiquetas e série do Relator; sem leitura dos autos"
+   },
+   "pendencias": [
+    "Extrair os autos e confirmar"
+   ]
+  },
+  {
+   "sessao": "",
+   "item": 36,
+   "processo": "5121188-49.2025.4.03.9999",
+   "recurso": "Apelação cível",
+   "partes": "LUZIA BAGINI ANEQUINI x INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS",
+   "assunto": "Aposentadoria Híbrida (Art. 48/106)",
+   "grupo": "C1",
+   "tipo_caso": "Duplicidade de distribuição",
+   "resultado": "Etiqueta Duplicidade da equipe: provável despacho de cancelamento ou de reunião de processos (Outro destino).",
+   "orientacao": "Conferir o processo principal e o despacho cabível.",
+   "observacao": "Tarefa no PJe em 16/11/2026: Minutar ato judicial. Etiquetas: 3ª Seção, Duplicidade, NÃO PAUTAR - GIOVANA, Prevenção Res 33, sentença anulada",
+   "triagem": {
+    "ato": "Pré-triagem por classe, partes, etiquetas e série do Relator; sem leitura dos autos"
+   },
+   "pendencias": [
+    "Extrair os autos e confirmar"
+   ]
+  },
+  {
+   "sessao": "",
+   "item": 37,
+   "processo": "5186342-14.2025.4.03.9999",
+   "recurso": "Apelação cível",
+   "partes": "ANTONIO APARECIDO DA SILVA x INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS",
+   "assunto": "Auxílio por Incapacidade Temporária",
+   "grupo": "C1",
+   "tipo_caso": "Duplicidade de distribuição",
+   "resultado": "Etiqueta Duplicidade da equipe: provável despacho de cancelamento ou de reunião de processos (Outro destino).",
+   "orientacao": "Conferir o processo principal e o despacho cabível.",
+   "observacao": "Tarefa no PJe em 16/11/2026: Minutar ato judicial. Etiquetas: 3ª Seção, Duplicidade, NÃO PAUTAR - GIOVANA, Prevenção Res 33, sentença anulada",
+   "triagem": {
+    "ato": "Pré-triagem por classe, partes, etiquetas e série do Relator; sem leitura dos autos"
+   },
+   "pendencias": [
+    "Extrair os autos e confirmar"
+   ]
+  },
+  {
+   "sessao": "",
+   "item": 38,
+   "processo": "5409305-95.2026.4.03.9999",
+   "recurso": "Apelação cível",
+   "partes": "APARECIDA FRANCISCO DA SILVA x INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS",
+   "assunto": "Aposentadoria por Incapacidade Permanente",
+   "grupo": "C1",
+   "tipo_caso": "Duplicidade de distribuição",
+   "resultado": "Etiqueta Duplicidade da equipe: provável despacho de cancelamento ou de reunião de processos (Outro destino).",
+   "orientacao": "Conferir o processo principal e o despacho cabível.",
+   "observacao": "Tarefa no PJe em 16/11/2026: Minutar ato judicial. Etiquetas: 3ª Seção, Aposentadoria por Invalidez, DETERMINAR CANCELAMENTO DISTRIBUIÇÃO, Duplicidade",
+   "triagem": {
+    "ato": "Pré-triagem por classe, partes, etiquetas e série do Relator; sem leitura dos autos"
+   },
+   "pendencias": [
+    "Extrair os autos e confirmar"
+   ]
+  }
+ ]
+}
