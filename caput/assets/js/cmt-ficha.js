@@ -1035,6 +1035,7 @@ function fluxo() {
   var min = { etapa: 'Minutado', feito: !!iso(p('MINUTADO')), quem: p('SERVIDOR'), quando: brD(iso(p('MINUTADO'))) || 'sem data' };
   var cor = { etapa: 'Corrigido', feito: sim(p('CORRIGIDO')) || !!iso(p('Data da Revisão')), quem: p('CORRETOR'), quando: brD(iso(p('Data da Revisão'))) || (sim(p('CORRIGIDO')) ? 'feito' : 'aguardando') };
   var L = destino() === 'monocratica' ? [min, cor,
+    { etapa: 'No PJe', feito: sim(p('Minuta no PJe')) || !!iso(p('Minuta no PJe - Data')), quem: '', quando: brD(iso(p('Minuta no PJe - Data'))) || (sim(p('Minuta no PJe')) ? 'incluída' : 'a incluir') },
     { etapa: 'Assinado', feito: sim(p('Assinado')) || !!iso(p('Data da Assinatura')), quem: '', quando: brD(iso(p('Data da Assinatura'))) || (iso(p('Data da Liberação')) ? 'enviada em ' + brD(iso(p('Data da Liberação'))) : 'pendente') },
     { etapa: 'Publicada', feito: sim(p('Publicado')) || !!iso(p('Mono - Data da publicação')), quem: p('Decisão - ID') ? 'ID ' + p('Decisão - ID') : '', quando: brD(iso(p('Mono - Data da publicação'))) || 'a publicar', destino: true }]
     : [{ etapa: 'Pautado', feito: !!sessao, quem: ult.item ? 'item ' + ult.item : '', quando: sessao ? brD(sessao) : 'sem sessão' }, min, cor,

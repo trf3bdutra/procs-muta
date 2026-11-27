@@ -108,7 +108,7 @@ def _prod(a):
             NOVO('Hipótese do art. 932', 'Hipóteses Monocrática', 'lista', 'triagem', HIP932), NOVO('Precedente ou fundamento', 'Mono - Fundamento', 'texto-longo')]},
         {'grupo': 'Decisão monocrática', 'destino': 'monocratica', 'campos': [com('Voto - Resultado', rotulo='Resultado', tipo='lista', opcoes=RES_MONO),
             com('Voto - Honorários', rotulo='Honorários', tipo='lista', opcoes=HONOR), NOVO('Tópico-síntese', 'Tópico-síntese', 'texto'),
-            com('Voto - Descrição', rotulo='Fundamentos da decisão'), NOVO('Enviada para assinatura em', 'Data da Liberação', 'data'), com('Assinado', rotulo='Assinada'),
+            com('Voto - Descrição', rotulo='Fundamentos da decisão'), NOVO('Minuta incluída no PJe', 'Minuta no PJe', 'simnao'), NOVO('Incluída no PJe em', 'Minuta no PJe - Data', 'data'), NOVO('Enviada para assinatura em', 'Data da Liberação', 'data'), com('Assinado', rotulo='Assinada'),
             com('Data da Assinatura', rotulo='Data da assinatura'), com('Decisão - ID', rotulo='ID da decisão'), com('Publicado', rotulo='Publicada'),
             NOVO('Data da publicação', 'Mono - Data da publicação', 'data')]}]
 # Controles especiais: grupos oficiais da ficha para os processos sob acompanhamento próprio (seção "controles" do operacional;

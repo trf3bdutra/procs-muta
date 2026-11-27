@@ -3680,7 +3680,7 @@ async function cogFichaGravar(cnj,campos){
  const j=await cogApi('/api/pauta?ficha=1',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({cnj,campos})});
  if(j.operacional)cogAtualizaFicha(j.operacional);
  if(j.recusados&&j.recusados.length)throw Error('Campos não gravados: '+j.recusados.join(', '));
- if(COG==='triagem'&&Object.prototype.hasOwnProperty.call(campos,'triagem.Status da triagem')||['selecao','mono'].includes(COG)&&Object.keys(campos).some(k=>['producao.Destino','producao.Mono - Tipo de ato','producao.Assinado','producao.Data da Assinatura','triagem.Seleção Prévia','pauta.Nova sessão de destino'].includes(k)))refazTriEm();
+ if(COG==='triagem'&&Object.prototype.hasOwnProperty.call(campos,'triagem.Status da triagem')||['selecao','mono'].includes(COG)&&Object.keys(campos).some(k=>['producao.Destino','producao.Mono - Tipo de ato','producao.Assinado','producao.Data da Assinatura','producao.Minuta no PJe','producao.Minuta no PJe - Data','triagem.Seleção Prévia','pauta.Nova sessão de destino'].includes(k)))refazTriEm();
  return j;
 }
 function fichaDe(cnj,aba='Triagem'){
@@ -3728,6 +3728,7 @@ function cogTipo(o){
  if(/art\.\s*932|homologacao|extincao|decisao monocratica/.test(a))return 'mono';
  return 'confirmar';
 }
+function cogNoPje(o){const r=o.row||{};return /^(sim|s|true|1)$/i.test(String(r['Minuta no PJe']||'').trim())||!!String(r['Minuta no PJe - Data']||'').trim();}
 function cogAssinado(o){const r=o.row||{};return /^(sim|s|true|1)$/i.test(String(r.Assinado||'').trim())||!!String(r['Data da Assinatura']||'').trim();}
 function cogRecorte(k,status,all){return all.filter(o=>status==='confirmar'?cogTipo(o)==='confirmar':cogTipo(o)===k&&cogAssinado(o)===(status==='concluidos'));}
 /* Outros destinos: coleção virtual dos Triados, derivada da ficha única; não grava lote nem duplica o acervo. */
@@ -4319,7 +4320,7 @@ D.addEventListener('change',e=>{const t=e.target;if(!t.matches?.('[data-cog-sess
 function cogTemPendencia(o){return !!((o.pend||[]).length||String(o.row?.['O que falta sanar']||'').trim()||nz(o.row?.['Destino - Situação']||'')==='pendente');}
 function cogSidebarMetrics(L){
   const m = [['Processos', L.length], ['Com prontuário', L.filter(atTri).length], ['Prioridade', L.filter((o) => o.prior).length], ['Liminar', L.filter(o=>cogLiminarPendente(o)).length],
-    COG==='mono'?['Assinados', L.filter(cogAssinado).length]:COG==='selecao'?['Com pendências', L.filter(cogTemPendencia).length]:['Mono?', L.filter((o) => o.cand && !(o.dest || {}).k).length], ['+180 dias', L.filter((o) => (atDias(o) || 0) > 180).length]];
+    COG==='mono'?['Assinados', L.filter(cogAssinado).length]:COG==='selecao'?['Com pendências', L.filter(cogTemPendencia).length]:['Mono?', L.filter((o) => o.cand && !(o.dest || {}).k).length], ...(COG==='mono'?[['No PJe · a assinar', L.filter(o=>cogNoPje(o)&&!cogAssinado(o)).length]]:[]), ['+180 dias', L.filter((o) => (atDias(o) || 0) > 180).length]];
  return m.map(x=>'<div><span>'+esc(x[0])+'</span><b>'+nf(x[1])+'</b></div>').join('');
 }
 function atLado(soTarefa){const L=cogTriRecorte(soTarefa);
@@ -4404,7 +4405,7 @@ function cogReportDoc(R,opt){
  add('triagem',dist('Situação da triagem',o=>cogTriAnalisado(o)?'Triado':'A triar')+dist('Destino registrado',o=>o.row.Destino||o.dest?.t)+dist('Situação para julgar',o=>o.row['Destino - Situação']));
  add('pend',table(['Processo','Pendências','Próxima ação'],pend.map(o=>[o.cnj,cogPendingItems(o).join('\n')||'Situação pendente',o.row['Próxima ação']])));
  add('sessao',dist('Sessão de seleção prévia',o=>R.ses.has(o.d)?R.ses.get(o.d)==='reserva'?'Banco de reserva':br(R.ses.get(o.d)):'Sem sessão')+dist('Aptidão registrada',o=>o.row['Destino - Situação']));
- add('mono',dist('Situação do ato',o=>cogAssinado(o)?'Assinado':'Ativo')+dist('Pronunciamento',o=>o.row['Mono - Tipo de ato']));
+ add('mono',dist('Situação do ato',o=>cogAssinado(o)?'Assinado':cogNoPje(o)?'Minuta no PJe':'Ativo')+dist('Pronunciamento',o=>o.row['Mono - Tipo de ato']));
  add('prior',table(['Processo','Assunto','Sinais','Tarefa'],prior.map(o=>[o.cnj,o.assunto,[o.prior?'Prioridade legal':'',cogLiminarPendente(o)?'Liminar pendente':'',o.row.Urgência||''].filter(Boolean).join(' · '),o.tarefa])));
  add('lotes',dist('Coleção de origem',o=>R.orig.get(o.d)?.l?.titulo||'Sem coleção')+dist('Grupo',o=>{const z=R.orig.get(o.d);return z?.l?.grupos?.find(g=>g.id===z.it.grupo)?.rotulo||'Sem grupo';}));
  add('lista',table(['Processo','Classe · seção','Assunto','Tarefa · dias','Destino','Pendências',...(opt.notes?['Detalhamento · observações']:[]),...(opt.parts?['Partes']:[])],L.map(o=>[o.cnj,[o.cl,o.secao].filter(Boolean).join(' · '),o.assunto,[o.tarefa,atDias(o)==null?'':atDias(o)+' dias'].filter(Boolean).join(' · '),o.row.Destino||o.dest?.t,cogPendingItems(o).join('\n'),...(opt.notes?[[cogDetalhamento(o.row),o.row.Observações].filter(Boolean).join('\n')]:[]),...(opt.parts?[o.partes]:[])])));
@@ -4740,7 +4741,7 @@ function cogPreparoRows(root,f){
 }
 
 function cogPainelPerfil(k=COG){return k==='mono'?'Acompanhamento da decisão':k==='selecao'?'Preparação para julgamento colegiado':k==='acervo'?'Anotações e providências':'Análise e encaminhamento';}
-function cogPainelEtapa(f,k){const sim=v=>/^(sim|s|true|1)$/i.test(String(v||'').trim());if(k==='mono')return sim(f.Assinado)||f['Data da Assinatura']?'Assinada':f['Data de envio para assinatura']||f['Data da Liberação']?'Enviada à assinatura':sim(f.CORRIGIDO)||f['Data da Revisão']?'Revisada':f.MINUTADO?'Minutada':'Em preparação';return sim(f.LIBERADO)||f['Data da Liberação']?'Liberada':sim(f.CORRIGIDO)||f['Data da Revisão']?'Corrigida':f.MINUTADO?'Minutada':'Em preparação';}
+function cogPainelEtapa(f,k){const sim=v=>/^(sim|s|true|1)$/i.test(String(v||'').trim());if(k==='mono')return sim(f.Assinado)||f['Data da Assinatura']?'Assinada':f['Data de envio para assinatura']||f['Data da Liberação']?'Enviada à assinatura':sim(f['Minuta no PJe'])||f['Minuta no PJe - Data']?'Minuta no PJe':sim(f.CORRIGIDO)||f['Data da Revisão']?'Revisada':f.MINUTADO?'Minutada':'Em preparação';return sim(f.LIBERADO)||f['Data da Liberação']?'Liberada':sim(f.CORRIGIDO)||f['Data da Revisão']?'Corrigida':f.MINUTADO?'Minutada':'Em preparação';}
 function cogPainelCabeca(o,f,k){const tags=k==='mono'?[f['Mono - Tipo de ato']||'Decisão do relator',cogPainelEtapa(f,k),f['Destino - Situação']]:k==='selecao'?['Colegiado',f['Nova sessão de destino']||f['Sessão Destino']||'Banco de reserva',f['Destino - Situação']]:[f['Status da triagem'],f.Destino,f['Destino - Situação']];return '<header class="cog-op-head"><div><span class="cog-op-ey">'+esc(cogPainelPerfil(k))+'</span><div class="cog-op-id">'+cogCopyCnj(o)+' <span>'+esc(o.cl||'')+'</span></div><div class="cog-op-tags">'+tags.filter(Boolean).map(v=>'<span>'+esc(v)+'</span>').join('')+'</div></div><div class="cog-op-head-actions">'+cogFichaIcon(o.d)+'<button type="submit" class="btn sm pri">Salvar alterações</button></div></header>';}
 function cogPainelResumo(o,f,k){const kv=(label,v)=>'<div class="cog-op-kv"><span>'+esc(label)+'</span><p>'+esc(String(v||'Não registrado'))+'</p></div>';const z=COG_LOTE?{l:COG_LOTE,it:COG_LOTE.itens?.find(x=>dg(x.processo)===o.d)}:cogOrigemMap().get(o.d);const g=z?.l.grupos?.find(x=>x.id===z.it?.grupo);return '<div class="cog-op-summary">'+kv('Assunto CNJ',o.assunto)+kv('Coleção / lote',z?.l.titulo||f['Registro - Lote'])+kv('Grupo',g?.rotulo||f['Registro - Grupo'])+'<details><summary>Partes e tarefa no PJe</summary>'+kv('Partes',o.partes)+kv('Tarefa',o.tarefa)+'</details></div>';}
 function cogPainelProducao(f,k){const kv=(t,v)=>'<div class="cog-op-kv"><span>'+esc(t)+'</span><p>'+esc(String(v||'Não registrado'))+'</p></div>';return '<div class="cog-op-summary">'+(k==='mono'?kv('Etapa',cogPainelEtapa(f,k))+kv('Hipótese do art. 932',f['Hipóteses Monocrática']):k==='selecao'?kv('Sessão prevista',f['Nova sessão de destino']||f['Sessão Destino']||'Banco de reserva'):kv('Destino final',f.Destino))+kv('Proposta registrada',f['Registro - Proposta'])+kv('Modelo indicado',f['Modelo aplicável']||f['Registro - Modelo'])+(k==='mono'||k==='selecao'?kv('Minutante',f.SERVIDOR)+kv('Corretor',f.CORRETOR):'')+'</div>';}

@@ -322,7 +322,7 @@ function resolveCartao(r,m){const K='_cartaoRes',x=m[K];delete m[K];if(!x)return
  return m;}
 function mudancaCoerente(r,mud){
  const m=destinoCoerente(r,resolveCartao(r,JSON.parse(JSON.stringify(mud||{})))),p=m.producao||{};
- [['Data da Revisão','CORRIGIDO'],['Data da Liberação','LIBERADO'],['Data da Assinatura','Assinado'],['Mono - Data da publicação','Publicado']].forEach(([data,flag])=>{
+ [['Data da Revisão','CORRIGIDO'],['Minuta no PJe - Data','Minuta no PJe'],['Data da Liberação','LIBERADO'],['Data da Assinatura','Assinado'],['Mono - Data da publicação','Publicado']].forEach(([data,flag])=>{
    if(Object.prototype.hasOwnProperty.call(p,data))p[flag]=String(p[data]||'').trim()?'Sim':'';
  });
  return m;

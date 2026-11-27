@@ -3723,6 +3723,21 @@
        "apelido": "voto_descricao"
       },
       {
+       "rotulo": "Minuta incluída no PJe",
+       "chave": "Minuta no PJe",
+       "tipo": "simnao",
+       "secao": "producao",
+       "apelido": "minuta_pje",
+       "regra": "minuta já colada no editor do PJe (tarefa de revisar ou assinar); a data marca Sim"
+      },
+      {
+       "rotulo": "Incluída no PJe em",
+       "chave": "Minuta no PJe - Data",
+       "tipo": "data",
+       "secao": "producao",
+       "apelido": "minuta_pje_data"
+      },
+      {
        "rotulo": "Enviada para assinatura em",
        "chave": "Data da Liberação",
        "tipo": "data",
