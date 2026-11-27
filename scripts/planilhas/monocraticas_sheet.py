@@ -48,7 +48,7 @@ MOTIVOS = [
     ('gratuidade', r'gratuidade'),
     ('tempestividade', r'tempestiv|intempest|datas? (de|da|do) (publica|intima|ciência|protocolo|disponibiliza)|aferir o prazo|prazo em dobro'),
     ('representação', r'procura[çc]|representa[çc]|poderes'),
-    ('ato prévio', r'\b(intimar|intimá-l|despacho para|apreciar|dar vista|(re)?abrir (nova )?vista|vista a|aguardar|retificar|revogar|citação|certificar)'),
+    ('ato prévio', r'\b(intimar|intimá-l|despacho para|apreciar|dar vista|(re)?abrir (nova )?vista|vista a|aguardar|retificar|revogar|citação|certificar)|despacho:|decisão interlocutória|intimação para|intimação d[ao]s? (agravad|apelad|união|pfn|parte)'),
     ('situação na origem', r'na origem|senten[çc]a|andamento|perda d[eo] objeto|prejuízo|certame'),
     ('leitura dos autos', r'ler no pje|ler a |sem leitura dos autos|sem triagem detalhada'),
     ('acordo', r'acordo|transigir|transa[çc]'),
