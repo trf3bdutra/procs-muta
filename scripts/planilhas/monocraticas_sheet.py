@@ -77,6 +77,9 @@ def pronto(x, ass_em_conferencia=False, conferencia=''):
     nota = str(pr.get('Art. 932 - Nota de enquadramento') or tr.get('Art. 932 - Nota de enquadramento') or '')
     if CONFERIDO.match(conferencia or '') and not AINDA.search(conferencia) and not nota.startswith('Análise de'):
         falta = ''
+    # Origem já conferida na consulta pública do PJe 1º grau ("... sem sentença (consulta pública ...)") deixa de ser pendência
+    partes = re.split(r'(?<=\.)\s+(?=[A-ZÁÉÍÓÚÂÊÔÃÕÇ\[])', falta)
+    falta = ' '.join(x for x in partes if not ('sem sentença' in x and 'consulta pública do PJe 1º grau' in x))
     falta = GENERICO.sub('', GRU_FECHADO.sub('', falta)).lower()
     if re.fullmatch(r'\s*(sem pend[êe]ncia\.?|—|-)?\s*', falta):
         falta = ''
