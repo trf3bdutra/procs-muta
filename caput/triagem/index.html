@@ -4268,7 +4268,7 @@ function entrarPeloLink() { return new Promise((fim) => {
     const desc = [dia, ss.hora || '', d.pauta ? d.itens.length + ' itens' : 'sem pauta oficial', d.realizada ? 'realizada' : ss.publicada ? 'pauta publicada' : ss.marcosPub ? 'marcos publicados' : d.pauta ? 'pauta não publicada' : 'seleção prévia'].filter(Boolean).join(' · ');
     const J = julgDe(ss), nSub = (J.substituicoes || []).length;
     const mg = (J.composicao || []).map((m) => `<span><b>${e(m.nome)}</b> <small>${e(m.papel)}</small></span>`).join('') + (nSub ? `<span class="cwe-tg a">${nSub} substituiç${nSub > 1 ? 'ões' : 'ão'}</span>` : '');
-    const exp = [['xlsx', 'Planilha de controle padrão', '.xlsx · aba da sessão no bimestre'], ['doc', 'Pauta simplificada', '.doc · item, processo, partes, assunto'], ['pdf', 'Pauta simplificada', 'PDF · pela impressão do navegador'], ['txt', 'Lista de processos', '.txt · um número por linha'], ['csv', 'Estatísticas da sessão', '.csv · o painel da sessão'], ['copiar', 'Copiar a lista', 'área de transferência']];
+    const exp = [['xlsx', 'Planilha de controle padrão', '.xlsx · aba da sessão no bimestre'], ['doc', 'Pauta simplificada', '.doc · item, processo, partes, assunto'], ['pdf', 'Pauta simplificada', 'PDF · pela impressão do navegador'], ['txt', 'Lista de processos', '.txt · um número por linha'], ['csv', 'Estatísticas da sessão', '.csv · o painel da sessão'], ['copiar', 'Copiar a lista', 'área de transferência'], ['wa-pend', 'Não liberados (WhatsApp)', 'texto copiado · caso e situação de cada item'], ['wa-ret', 'Retirados e adiados (WhatsApp)', 'texto copiado · data do registro e razão']];
     return `<div class="cwe-top"><div><div class="cwe-hl"><h1>Sessão de ${e(A.br(ss.data))}</h1><p>${e(desc)}</p></div>
       <p class="cwe-julg"><span class="cwe-k">JULGADORES</span>${mg || '<small>carregando o cadastro…</small>'}<button type="button" class="cwe-jico" data-cwe="j-ed" title="Editar julgadores e substituições" aria-label="Editar julgadores e substituições"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></button></p></div>
       <div class="cwe-tools"><span class="cwe-pubg" role="group" aria-label="Publicação na Ex Officio"><span class="cwe-k">EX OFFICIO</span><button type="button" class="cwe-pico ${ss.marcosPub || ss.publicada ? 'on' : ''}" data-cwe="m-pub" aria-pressed="${!!(ss.marcosPub || ss.publicada)}" title="${ss.marcosPub || ss.publicada ? 'Marcos publicados na Ex Officio · clique para retirar' : 'Marcos não publicados · clique para publicar na Ex Officio'}" aria-label="Marcos na Ex Officio"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><i></i></button><button type="button" class="cwe-pico ${ss.publicada ? 'on' : ''}" data-cwe="${ss.publicada ? 'despublicar' : 'publicar'}" ${ss.publicada || (d.pauta && !d.realizada) ? '' : 'disabled'} aria-pressed="${!!ss.publicada}" title="${ss.publicada ? 'Pauta publicada na Ex Officio · clique para retirar' : d.pauta ? 'Pauta não publicada · clique para publicar (processos e marcos)' : 'Importe o PDF da pauta antes de publicar'}" aria-label="Pauta na Ex Officio"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13"/><circle cx="3.5" cy="6" r="1"/><circle cx="3.5" cy="12" r="1"/><circle cx="3.5" cy="18" r="1"/></svg><i></i></button></span>
@@ -4618,12 +4618,69 @@ function entrarPeloLink() { return new Promise((fim) => {
     const linhas = d.lines.map((x) => { const it = d.raw.get(A.digits(x.cnj)) || {}; return `<tr><td>${e(x.item || '')}</td><td>${e(A.cnj(x.cnj))}</td><td>${e(x.classe || '')}</td><td>${e(it.partes || '')}</td><td>${e(x.assunto || '')}</td></tr>`; }).join('');
     return `<html><head><meta charset="utf-8"><title>Pauta ${e(A.br(ss.data))}</title><style>body{font:11pt Arial,sans-serif}h1{font-size:14pt}table{border-collapse:collapse;width:100%}td,th{border:1px solid #999;padding:3px 5px;font-size:9.5pt;text-align:left;vertical-align:top}</style></head><body><h1>Pauta da sessão de ${e(A.br(ss.data))}${ss.hora ? ' · ' + e(ss.hora) : ''}</h1><p>${e((d.s?.estado?.() || {}).gab || '')} · ${d.lines.length} processos</p><table><thead><tr><th>Item</th><th>Processo</th><th>Classe</th><th>Partes</th><th>Assunto</th></tr></thead><tbody>${linhas}</tbody></table></body></html>`;
   }
+  /* listagens para o WhatsApp: não liberados e retirados/adiados (negrito com *…*, sem tabela e sem nomes da equipe) */
+  const hojeLocal = () => { const t = new Date(); return t.getFullYear() + '-' + String(t.getMonth() + 1).padStart(2, '0') + '-' + String(t.getDate()).padStart(2, '0'); };
+  const waRetirado = (x, it) => retirado(x.tarefa) || /retirad|adiad/i.test(String(it.resultado || '') + ' ' + String((it.ctl || {}).planilhaEtapa || ''));
+  const waTipoRet = (x, it) => /adiad/i.test(String(it.resultado || '') + ' ' + String((it.ctl || {}).planilhaEtapa || '') + ' ' + String(it.obs || '')) && !/retirad/i.test(String(it.resultado || '')) ? 'Adiado' : 'Retirado';
+  const waLinhasObs = (it) => String(it.obs || '').split(/\n+/).map((l) => l.trim()).filter(Boolean);
+  const waNota = (it, re) => waLinhasObs(it).filter((l) => re.test(l)).map((l) => l.replace(re, '').replace(/^\s*[:\-–—]\s*/, '').trim()).filter(Boolean);
+  const waCaso = (x, it) => [x.classe || it.classe || '', x.assunto || it.assunto || '', it.partes || ''].map((v) => String(v).trim()).filter(Boolean).join(' · ');
+  const waFim = (t) => String(t || '').replace(/[\s.;,]+$/, '') + '.';
+  const waOrd = (a, b) => (+a.item || 1e9) - (+b.item || 1e9);
+  function waPendentes(ss, d) {
+    const hoje = hojeLocal(), L = d.lines.slice().sort(waOrd);
+    const reg = (x) => d.raw.get(A.digits(x.cnj)) || {};
+    const ret = L.filter((x) => waRetirado(x, reg(x)));
+    const lib = L.filter((x) => !waRetirado(x, reg(x)) && x.dataLiberacao);
+    const pend = L.filter((x) => !waRetirado(x, reg(x)) && !x.dataLiberacao);
+    const sit = (x) => x.dataCorrecao ? 'Corrigido' : x.dataMinuta ? 'Em correção' : 'Em minuta';
+    const grupos = { 'Em minuta': [], 'Em correção': [], 'Corrigido': [], 'Dúvida ou indicação': [] };
+    const blocos = pend.map((x) => {
+      const it = reg(x), ctl = it.ctl || {}, res = String(ctl.resJulg || (/retirad|adiad/i.test(it.resultado || '') ? '' : it.resultado || '')).trim();
+      const duv = waNota(it, /^\s*D[ÚU]VIDA\b/i), ind = waNota(it, /^\s*INDICA[ÇC][ÃA]O\b/i);
+      const marca = duv.length ? ' ⚠️ *DÚVIDA*' : ind.length ? ' ⚠️ *INDICAÇÃO*' : '';
+      const s = sit(x); (marca ? grupos['Dúvida ou indicação'] : grupos[s]).push(x.item || '?');
+      const linhas = [`*Item ${x.item || '?'} – ${A.cnj(x.cnj)}*${marca}`, waCaso(x, it), waFim(s + (res && s === 'Corrigido' ? ': ' + res : ''))];
+      duv.concat(ind).forEach((t) => linhas.push(waFim(t)));
+      return linhas.join('\n');
+    });
+    const lista = (a) => a.length ? (a.length > 1 ? 'itens ' + a.slice(0, -1).join(', ') + ' e ' + a[a.length - 1] : 'item ' + a[0]) : '';
+    const resumo = Object.entries(grupos).filter(([, a]) => a.length).map(([k, a]) => `${k} (${a.length}): ${lista(a)}.`);
+    if (ret.length) resumo.push(`Retirados ou adiados (${ret.length}): ${lista(ret.map((x) => x.item || '?'))}.`);
+    const libHoje = lib.filter((x) => String(x.dataLiberacao).slice(0, 10) === hoje).map((x) => x.item || '?');
+    if (libHoje.length) resumo.push(`*Já liberados hoje:* ${lista(libHoje)}.`);
+    return [`*Sessão ${A.br(ss.data)} – processos ainda não liberados (${pend.length})*`, ...blocos, '*Resumo*\n' + resumo.join('\n')].join('\n\n');
+  }
+  function waRetirados(ss, d) {
+    const L = d.lines.slice().sort(waOrd).filter((x) => waRetirado(x, d.raw.get(A.digits(x.cnj)) || {}));
+    const ano = String(ss.data || '').slice(0, 4);
+    const blocos = L.map((x) => {
+      const it = d.raw.get(A.digits(x.cnj)) || {}, ctl = it.ctl || {}, obs = waLinhasObs(it), tipo = waTipoRet(x, it);
+      let data = '';
+      const m1 = String(it.obs || '').match(/(?:retirad|adiad)\w*(?: de pauta)? em (\d{2}\/\d{2}\/\d{4})/i);
+      const m2 = String(it.obs || '').match(/\[Planilha (\d{2})\/(\d{2})\]/);
+      if (m1) data = m1[1]; else if (m2) data = m2[1] + '/' + m2[2] + '/' + ano; else if (ctl.editadoEm) data = A.br(String(ctl.editadoEm).slice(0, 10));
+      const corrido = String(it.obs || '').replace(/\s*\n\s*/g, ' ');
+      let razao = ((corrido.match(/(?:RETIRAD[OA]|ADIAD[OA])(?: DE PAUTA)?\s*[-–—:]\s*(.+?)(?=\s*(?:\[Planilha|CONFER[ÊE]NCIA PJE|$))/i) || [])[1] || '').trim();
+      if (!razao) razao = obs.filter((l) => !/^CONFER[ÊE]NCIA PJE|^\[Planilha|^(RETIRAD|ADIAD)\w*( DE PAUTA)?\s*$/i.test(l)).map((l) => l.replace(/\s*·\s*(Retirad|Adiad)\w* de pauta em .*$/i, '')).join(' ').trim();
+      const quem = (String(it.obs || '').match(/(?:retirad|adiad)\w*(?: de pauta)? em \d{2}\/\d{2}\/\d{4}([^.\n]*)/i) || [])[1] || '';
+      return [`*Item ${x.item || '?'} – ${A.cnj(x.cnj)}* · ${tipo}`, waCaso(x, it), `Registro: ${data || 'data não informada'}${quem.trim() ? ' (' + quem.trim().replace(/^,\s*/, '') + ')' : ''}.`, `Razão: ${waFim(razao || 'não informada')}`].join('\n');
+    });
+    return [`*Sessão ${A.br(ss.data)} – retirados e adiados (${L.length})*`, ...(blocos.length ? blocos : ['Nenhum processo retirado ou adiado.'])].join('\n\n');
+  }
+  function waCopiar(txt, nome, rot) {
+    const ok = () => A.msg(rot + ' copiado para colar no WhatsApp.');
+    const falha = () => { baixar(nome + '.txt', txt, 'text/plain;charset=utf-8'); A.msg('Não foi possível copiar; o texto foi baixado em .txt.', true); };
+    try { (navigator.clipboard?.writeText(txt) || Promise.reject()).then(ok).catch(falha); } catch (er) { falha(); }
+  }
   function exportar(k, ss, d) {
     const nome = 'Pauta_' + A.br(ss.data).replace(/\//g, '-');
     if (k === 'xlsx') { if (!d.pauta) return A.msg('A planilha de controle sai da pauta oficial.', true); if (!d.s?.exportarXlsx?.(ss.id)) A.msg('Exportação indisponível no motor.', true); return; }
     if (k === 'txt') return baixar(nome + '.txt', d.lines.map((x) => A.cnj(x.cnj)).join('\r\n'), 'text/plain;charset=utf-8');
     if (k === 'doc') return baixar(nome + '_simplificada.doc', simplificada(ss, d), 'application/msword');
     if (k === 'pdf') { const w = W.open('', '_blank'); if (!w) return A.msg('O navegador bloqueou a janela de impressão.', true); w.document.write(simplificada(ss, d)); w.document.close(); w.focus(); setTimeout(() => w.print(), 300); return; }
+    if (k === 'wa-pend') return waCopiar(waPendentes(ss, d), nome + '_nao_liberados', 'Lista dos não liberados');
+    if (k === 'wa-ret') return waCopiar(waRetirados(ss, d), nome + '_retirados_adiados', 'Lista dos retirados e adiados');
     if (k === 'copiar') { const t = d.lines.map((x) => A.cnj(x.cnj)).join('\n'); (navigator.clipboard?.writeText(t) || Promise.reject()).then(() => A.msg(d.lines.length + ' números copiados.')).catch(() => A.msg('Não foi possível copiar.', true)); return; }
     if (k === 'csv') {
       const P = d.plan, L = d.lines; const linhas = [['bloco', 'valor', 'quantidade']];
