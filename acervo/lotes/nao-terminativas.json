@@ -1,0 +1,1833 @@
+{
+ "schema": "gabcmt.lote",
+ "versao": 1,
+ "tipo": "triagem",
+ "id": "nao-terminativas",
+ "titulo": "Analisar decisão · Não terminativas (voto ou ato prévio)",
+ "descricao": "Saíram da matriz das monocráticas terminativas: vão a voto ou pedem um ato antes da decisão (intimação para o preparo, conferência do comprovante do Tesouro, efeito suspensivo).",
+ "origem": "planilha Monocráticas terminativas — aba Não terminativas",
+ "tarefa": "Analisar tipo de decisão a proferir",
+ "sessoes": [],
+ "criado_por": "Bruno",
+ "atualizado_em": "2026-11-27",
+ "colunas": [],
+ "grupos": [],
+ "itens": [
+  {
+   "sessao": "",
+   "item": 1,
+   "processo": "5009594-25.2023.4.03.0000",
+   "recurso": "Agravo de instrumento",
+   "partes": "PAULO BERNARDO REICHARDT JUNIOR registrado(a) civilmente como PAULO BERNARDO REICHARDT JUNIOR x UNIAO FEDERAL - FAZENDA NACIONAL",
+   "exequente": "PAULO BERNARDO REICHARDT JUNIOR registrado(a) civilmente como PAULO BERNARDO REICHARDT JUNIOR",
+   "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
+   "assunto": "Responsabilidade da Administração",
+   "grupo": "A3",
+   "tipo_caso": "Execução fiscal (multa de IPI, 2004) · sócio cotista incluído como responsável · exceção de pré-executividade rejeitada · tutela recursal indeferida pelo relator anterior · questões de ofício (artigo 10 do CPC): IRDR 0017610-97.2016.4.03.0000, Súmula 392/STJ e artigo 8º do Decreto-lei 1.736/1979 · preparo não comprovado",
+   "resultado": "Ato a proferir: a certidão ID 272500235 registra a falta de recolhimento das custas e não houve intimação para o preparo; o relator anterior indeferiu a tutela recursal (ID 275315151) e abriu contraditório sobre questões de ofício (IDs 273427218 e 278226911); a PFN respondeu (IDs 275027257, 277880347 e 279513408) ‖ Proposta pelos precedentes: Intimar para o preparo em dobro; recolhido, voto na linha do gabinete sobre a responsabilidade solidária do artigo 8º do Decreto-lei 1.736/1979 e o redirecionamento sem os requisitos do artigo 135 do CTN (AI 0012557-38.2016.4.03.0000, 3ª Turma, 15/12/2016; AI 0002761-23.2016.4.03.0000, 3ª Turma, 25/08/2016) [VALIDAR: Comprovante de preparo eventualmente juntado depois]",
+   "modelo": "Encaminhado: lote adp-mono-terminativas (Monocráticas terminativas) · não pautado",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Agravo de Paulo Bernardo Reichardt Junior, ex-cotista da Exportadora Reichardt Ltda., contra a rejeição de sua exceção de pré-executividade na execução fiscal de multa de IPI. O relator anterior indeferiu a tutela recursal (ID 275315151) e intimou as partes sobre questões de ofício: falta de incidente de desconsideração (IRDR 0017610-97.2016.4.03.0000), inclusão do sócio na CDA depois do ajuizamento (Súmula 392/STJ) e inaplicabilidade do artigo 8º do Decreto-lei 1.736/1979. Não há comprovante de preparo.",
+   "peculiaridades": "",
+   "peculiaridades_relator": "",
+   "orientacao": "Não houve intimação para o preparo: o ato é despacho de intimação para recolher em dobro (artigo 1.007, § 4º, do CPC).",
+   "equipe": {
+    "minuta": "",
+    "correcao": "",
+    "situacao": "A minutar"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {
+    "ato": "Despacho · Não houve intimação para o preparo: o ato é despacho de intimação para recolher em dobro (artigo 1.007, § 4º, do CPC).",
+    "materia": "Tributário — execução fiscal (responsabilidade de sócio)",
+    "origem": "Execução fiscal 0000500-35.2004.4.03.6005 (2ª Vara Federal de Ponta Porã)",
+    "decisao_agravada": "Decisão da origem que rejeitou a exceção de pré-executividade de Paulo Bernardo Reichardt Junior [VALIDAR ID]",
+    "recurso": "ID 272490257 · 11/04/2023",
+    "preparo": "Não comprovado (certidão ID 272500235); sem intimação para recolhimento",
+    "monocratica": "Possível monocrática de não conhecimento (deserção), se não recolhido em dobro após a intimação",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "NÃO RECOLHIDO · certidão ID 272500235 (12/04/2023): não há comprovante de custas; a capa da execução registra \"Justiça gratuita? NÃO\" (ID 272490241) · conferido em 21/11/2026",
+    "conf_prevencao": "Distribuído por prevenção ao Des. Fed. André Nabarrete (AI 0099346-55.2007.4.03.0000 e AI 5030712-33.2018.4.03.0000) e redistribuído pelo despacho ID 365449940 (10/04/2026, Resolução 33/2025) · conferido em 21/11/2026"
+   },
+   "ajustes": [],
+   "pendencias": [
+    "[VALIDAR] Intimar para o preparo em dobro"
+   ],
+   "minuta": false,
+   "classe": "AI",
+   "tarefa": "Analisar tipo de decisão a proferir",
+   "etiquetas": "2ª Seção; AI - exceção de pré-exec; Execução Fiscal",
+   "chegada": "04/11/2026",
+   "extracao": {
+    "situacao": "pendente"
+   },
+   "assunto_detalhado": "Execução fiscal — responsabilidade de sócio (artigo 8º do Decreto-lei 1.736/1979; artigo 135, III, do CTN)",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 365449940 · 10/04/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 278226911 · 25/08/2023 — intimou as partes (artigo 10 do CPC) sobre a CDA, a Súmula 392/STJ e o artigo 8º do Decreto-lei 1.736/1979 | última peça: Contraminuta (PFN) · ID 279513408 · 05/09/2023 | última movimentação: [VALIDAR no PJe] · Preparo não comprovado (certidão ID 272500235) · Tutela recursal indeferida (ID 275315151) · Questões de ofício (IDs 273427218 e 278226911) · Prevenção: AI 0099346-55.2007.4.03.0000 e AI 5030712-33.2018.4.03.0000",
+   "teor": {
+    "sintese_fatica": "A União executa multa de IPI contra a Exportadora Reichardt Ltda. e seus sócios desde 2004; Paulo Bernardo Reichardt Junior, ex-cotista, alegou ilegitimidade por exceção de pré-executividade, rejeitada.",
+    "inicial": "Execução fiscal 0000500-35.2004.4.03.6005 (valor da causa R$ 210.766,16).",
+    "decisao_recorrida": "Decisão da origem: rejeitou a exceção. Decisão ID 275315151 (relator anterior): indeferiu a tutela recursal. Despachos IDs 273427218 e 278226911: contraditório sobre questões de ofício.",
+    "recurso": "Agravo ID 272490257 (11/04/2023): ilegitimidade passiva do ex-cotista; suspensão da execução; honorários.",
+    "resposta": "PFN: manifestações IDs 275027257 (01/06/2023), 277880347 (31/07/2023) e 279513408 (05/09/2023): desprovimento.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Advogados Bruna Pavão Passos (OAB/MS 26.316) e Laudelino Balbuena Medeiros (OAB/MS 2.477).",
+    "preparo": "Não comprovado."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Execução fiscal (multa de IPI, 2004) · sócio cotista incluído como responsável · exceção de pré-executividade rejeitada · tutela recursal indeferida pelo relator anterior · questões de ofício (artigo 10 do CPC): IRDR 0017610-97.2016.4.03.0000, Súmula 392/STJ e artigo 8º do Decreto-lei 1.736/1979 · preparo não comprovado",
+     "sintese": "A União executa multa de IPI contra a Exportadora Reichardt Ltda. e seus sócios desde 2004; Paulo Bernardo Reichardt Junior, ex-cotista, alegou ilegitimidade por exceção de pré-executividade, rejeitada.",
+     "questoes": "1) Preparo; 2) responsabilidade do sócio por multa de IPI (artigo 8º do Decreto-lei 1.736/1979; artigo 135, III, do CTN); 3) inclusão na CDA depois do ajuizamento (Súmula 392/STJ); 4) incidente de desconsideração (IRDR 0017610-97.2016.4.03.0000).",
+     "rel": {
+      "razoes": "Agravo ID 272490257 (11/04/2023): ilegitimidade passiva do ex-cotista; suspensão da execução; honorários.",
+      "contrarrazoes": "PFN: manifestações IDs 275027257 (01/06/2023), 277880347 (31/07/2023) e 279513408 (05/09/2023): desprovimento."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "",
+      "juizo": "2ª Vara Federal de Ponta Porã",
+      "dispositivo": "Rejeitou a exceção de pré-executividade."
+     },
+     "ai": {
+      "hip": "Execução / cumprimento",
+      "efeito": "Indeferido",
+      "id": "275315151"
+     },
+     "adm": {
+      "prot": "2023-04-11",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte ré",
+       "tipo": "Agravo de instrumento",
+       "id": "272490257",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "272490257",
+       "data": "2023-04-11",
+       "nota": "Agravo ID 272490257 (11/04/2023): ilegitimidade passiva do ex-cotista; suspensão da execução; honorários.",
+       "pje": {
+        "tipo": "Petição Inicial",
+        "paginas": 18
+       },
+       "trecho": "ANTE O EXPOSTO, r equer a Agravante a Vs. Exas.: Face ao exposto, e convocando os lúcidos suplementos jurídicos dos Excelentíssimos Senhores Desembargadores integrantes deste Egrégio Tribunal, a Agravante interpõe o presente recurso, requerendo o seguinte: a) Seja recebido o presente recurso no seu …"
+      },
+      {
+       "desc": "Certidão: prevenção e sem custas",
+       "id": "272500235",
+       "data": "2023-04-12",
+       "nota": "Preparo não comprovado (certidão ID 272500235) · Tutela recursal indeferida (ID 275315151) · Questões de ofício (IDs 273427218 e 278226911) · Prevenção: AI 0099346-55.2007.4.03.0000 e AI 5030712-33.2018.4.03.0000",
+       "pje": {
+        "tipo": "Certidão"
+       },
+       "trecho": "AGRAVO DE INSTRUMENTO (202) Nº 5009594-25.2023.4.03.0000 RELATOR: Gab. 11 - DES. FED. ANDRÉ NABARRETE AGRAVANTE: PAULO BERNARDO REICHARDT JUNIOR REGISTRADO(A) CIVILMENTE COMO PAULO BERNARDO REICHARDT JUNIOR Advogado do(a) AGRAVANTE: BRUNA PAVAO PASSOS - MS26316-A INTERESSADO: UNIAO FEDERAL - …"
+      },
+      {
+       "desc": "Despacho: questão de ofício (IRDR)",
+       "id": "273427218",
+       "data": "2023-05-26",
+       "nota": "Decisão da origem: rejeitou a exceção. Decisão ID 275315151 (relator anterior): indeferiu a tutela recursal. Despachos IDs 273427218 e 278226911: contraditório sobre questões de ofício. · Preparo não comprovado (certidão ID 272500235) · Tutela recursal indeferida (ID 275315151) · Questões de ofício (IDs 273427218 e 278226911) · Prevenção: AI 0099346-55.2007.4.03.0000 e AI 5030712-33.2018.4.03.0000",
+       "pje": {
+        "tipo": "Despacho"
+       },
+       "trecho": "intimem-se."
+      },
+      {
+       "desc": "Decisão: tutela recursal indeferida",
+       "id": "275315151",
+       "data": "2023-06-26",
+       "nota": "Decisão da origem: rejeitou a exceção. Decisão ID 275315151 (relator anterior): indeferiu a tutela recursal. Despachos IDs 273427218 e 278226911: contraditório sobre questões de ofício. · Preparo não comprovado (certidão ID 272500235) · Tutela recursal indeferida (ID 275315151) · Questões de ofício (IDs 273427218 e 278226911) · Prevenção: AI 0099346-55.2007.4.03.0000 e AI 5030712-33.2018.4.03.0000",
+       "pje": {
+        "tipo": "Decisão"
+       },
+       "trecho": "Ante o exposto, INDEFIRO a tutela recursal.Intime-se a agravada, nos termos e para os efeitos do artigo 1.019, inciso II, da lei processual civil.Publique-se."
+      },
+      {
+       "desc": "Contraminuta da PFN",
+       "id": "277880347",
+       "data": "2023-07-31",
+       "nota": "PFN: manifestações IDs 275027257 (01/06/2023), 277880347 (31/07/2023) e 279513408 (05/09/2023): desprovimento.",
+       "pje": {
+        "tipo": "Contraminuta",
+        "paginas": 4
+       },
+       "trecho": "Ante o exposto, pugna a UNIÃO FEDERAL pelo não provimento deste Agravo, com a consequente manutenção da decisão agravada. São Paulo, 31 de julho de 2023. MARINA TOMAZ KATALINIC DUTRA PROCURADORA DA FAZENDA NACIONAL"
+      },
+      {
+       "desc": "Despacho: questões de ofício (artigo 10 do CPC)",
+       "id": "278226911",
+       "data": "2023-08-25",
+       "nota": "Decisão da origem: rejeitou a exceção. Decisão ID 275315151 (relator anterior): indeferiu a tutela recursal. Despachos IDs 273427218 e 278226911: contraditório sobre questões de ofício. · Preparo não comprovado (certidão ID 272500235) · Tutela recursal indeferida (ID 275315151) · Questões de ofício (IDs 273427218 e 278226911) · Prevenção: AI 0099346-55.2007.4.03.0000 e AI 5030712-33.2018.4.03.0000",
+       "pje": {
+        "tipo": "Despacho"
+       },
+       "trecho": "Intimem-se."
+      },
+      {
+       "desc": "Contraminuta da PFN",
+       "id": "279513408",
+       "data": "2023-09-05",
+       "nota": "PFN: manifestações IDs 275027257 (01/06/2023), 277880347 (31/07/2023) e 279513408 (05/09/2023): desprovimento.",
+       "pje": {
+        "tipo": "Contraminuta",
+        "paginas": 5
+       },
+       "trecho": "Ante o exposto, pugna a UNIÃO FEDERAL pelo não provimento deste Agravo, com a consequente manutenção da decisão agravada. São Paulo, 5 de setembro de 2023. MARINA TOMAZ KATALINIC DUTRA PROCURADORA DA FAZENDA NACIONAL"
+      },
+      {
+       "desc": "Despacho: redistribuição à Turma Regional",
+       "id": "365449940",
+       "data": "2026-04-10",
+       "pje": {
+        "tipo": "Despacho"
+       },
+       "trecho": "determino a sua redistribuição à , nos termos do artigo 1º, §1º, da Resolução n.º 33, de 26 de fevereiro de 2025.Cumpra-se.rcrANDRÉ NABARRETEDesembargador Federal"
+      }
+     ],
+     "pendencias": "[VALIDAR] Intimar para o preparo em dobro",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 365449940 · 10/04/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 278226911 · 25/08/2023 — intimou as partes (artigo 10 do CPC) sobre a CDA, a Súmula 392/STJ e o artigo 8º do Decreto-lei 1.736/1979 | última peça: Contraminuta (PFN) · ID 279513408 · 05/09/2023 | última movimentação: [VALIDAR no PJe] · Preparo não comprovado (certidão ID 272500235) · Tutela recursal indeferida (ID 275315151) · Questões de ofício (IDs 273427218 e 278226911) · Prevenção: AI 0099346-55.2007.4.03.0000 e AI 5030712-33.2018.4.03.0000",
+     "assuntoDet": "Execução fiscal — responsabilidade de sócio (artigo 8º do Decreto-lei 1.736/1979; artigo 135, III, do CTN)",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Tempestivo",
+     "preparo": "Não recolhido",
+     "prelim": "Preliminar de ofício",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Antecipação da tutela recursal",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2023-06-26",
+     "descPrelim": "Preparo não comprovado (certidão ID 272500235): intimar para recolhimento em dobro (artigo 1.007, § 4º, do CPC)"
+    }
+   },
+   "situacao_atual": {
+    "ultima_decisao": "Despacho · ID 365449940 · 10/04/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso)",
+    "ultima_decisao_relevante": "Despacho · ID 278226911 · 25/08/2023 — intimou as partes (artigo 10 do CPC) sobre a CDA, a Súmula 392/STJ e o artigo 8º do Decreto-lei 1.736/1979",
+    "ultima_peca": "Contraminuta (PFN) · ID 279513408 · 05/09/2023",
+    "ultima_informacao": "Certidão · ID 365649730 · 10/04/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação a conferir no PJe",
+    "ultima_movimentacao": "[VALIDAR no PJe]",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 365449940 · 10/04/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 278226911 · 25/08/2023 — intimou as partes (artigo 10 do CPC) sobre a CDA, a Súmula 392/STJ e o artigo 8º do Decreto-lei 1.736/1979 | última peça: Contraminuta (PFN) · ID 279513408 · 05/09/2023 | última movimentação: [VALIDAR no PJe]"
+   },
+   "origem_lote": "adp-ai"
+  },
+  {
+   "sessao": "",
+   "item": 2,
+   "processo": "5000012-90.2026.4.03.0001",
+   "recurso": "Agravo de instrumento",
+   "partes": "COSTA VAZ COMERCIO DE ALIMENTOS LTDA x UNIAO FEDERAL - FAZENDA NACIONAL",
+   "exequente": "COSTA VAZ COMERCIO DE ALIMENTOS LTDA",
+   "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
+   "assunto": "1/3 de férias",
+   "grupo": "L03",
+   "tipo_caso": "Execução fiscal · exceção de pré-executividade rejeitada · PIS e COFINS · composição da base de cálculo e certeza da CDA",
+   "resultado": "Ato a proferir: julgamento do agravo (voto), depois de conferir a regularidade do preparo em dobro; a tutela recursal foi indeferida e há contraminuta ‖ Proposta pelos precedentes: Antes do mérito, o preparo: comprovante STN do valor em dobro após a intimação específica → conhecer; comprovante bancário Pix ou guia \"aguardando pagamento\" → não conhecer por deserção (artigo 1.007, § 4º, do CPC e artigo 2º, § 2º, III, da Resolução PRES 138/2017), por monocrática. Mérito, se conhecido: exceção de pré-executividade só para matéria sem dilação probatória (Súmula 393/STJ); exclusão do ICMS da base do PIS e da COFINS por exceção admitida quando não exige recálculo complexo. [VALIDAR: Comprovante juntado em 10/06/2026: STN e valor em dobro? Fundamentos específicos da exceção]",
+   "modelo": "Encaminhado: lote adp-mono-terminativas (Monocráticas terminativas) · não pautado",
+   "variacoes": [
+    "ADM",
+    "VAL"
+   ],
+   "observacao": "Agravo de Costa Vaz Comércio de Alimentos contra a decisão que rejeitou a exceção de pré-executividade (ID 560379721 nos autos de origem; EF 5011102-14.2024.4.03.6000, PIS e COFINS, R$ 145.716,71). A União, na contraminuta (ID 387709321), sustenta a presunção de certeza e liquidez da CDA e o descabimento da exceção para discutir a composição da base de cálculo.",
+   "peculiaridades": "Preparo: o despacho ID 366467045 (16/04/2026) mandou recolher em dobro (artigo 1.007, § 4º, do CPC); a guia ID 372624804 constava como \"aguardando realização do pagamento\", e o despacho ID 376122107 (27/05/2026) mandou comprovar pelo Tesouro; a agravante juntou comprovante em 10/06/2026 (ID 379489258). Tutela recursal indeferida pela decisão ID 385924056 (13/07/2026).",
+   "peculiaridades_relator": "",
+   "orientacao": "O agravante juntou o comprovante do Tesouro após a intimação (ID 379489258, imagem): preparo provavelmente regular, então vai a voto. Se a imagem não for do Tesouro, volta como deserção.",
+   "equipe": {
+    "minuta": "",
+    "correcao": "",
+    "situacao": "A minutar"
+   },
+   "pecas": [
+    {
+     "peca": "Agravo de instrumento",
+     "id": "364874536",
+     "data": "07/04/2026"
+    },
+    {
+     "peca": "Contraminuta",
+     "id": "387709320",
+     "data": "28/07/2026"
+    },
+    {
+     "peca": "Decisão no agravo",
+     "id": "385924056",
+     "data": "13/07/2026"
+    }
+   ],
+   "mpf": "",
+   "triagem": {
+    "ato": "Voto · O agravante juntou o comprovante do Tesouro após a intimação (ID 379489258, imagem): preparo provavelmente regular, então vai a voto. Se a imagem não for do Tesouro, volta como deserção.",
+    "materia": "Execução fiscal — exceção de pré-executividade (PIS e COFINS)",
+    "origem": "EF 5011102-14.2024.4.03.6000 (1ª Vara Federal de Campo Grande, conforme a petição; capa indica Núcleo Adjunto 4.0 da 1ª Vara Federal de Araçatuba)",
+    "decisao_agravada": "ID 560379721 (autos de origem)",
+    "recurso": "ID 364874536 · 07/04/2026",
+    "preparo": "Em dobro determinado; comprovante STN (ID 379489258, R$ 128,52, UG 090029, código 18720-8)",
+    "monocratica": "Possível, se deserto [VALIDAR]",
+    "analisado_em": "19/11/2026",
+    "conf_preparo": "COMPROVADO (STN) · STN (aceito): ID 379489258 · \"Aguardando pagamento\": ID 372624804 · comprovante bancário: ID 372624802 · certidão sem custas: ID 365175224 · despacho/decisão sobre preparo: ID 376122107, 366467045 · valor R$ 128,52 · leitura visual (OCR) em 20/11/2026: ID 379489258, 372624804 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
+    "conf_prevencao": "Origem: 5011102-14.2024.4.03.6000 · conferido em 20/11/2026"
+   },
+   "ajustes": [],
+   "pendencias": [
+    "[VALIDAR] Preparo em dobro: comprovante ID 379489258 é imagem, sem texto; conferir valor, unidade e data; se irregular, deserção",
+    "[VALIDAR] Procuração",
+    "[VALIDAR] Fundamentos específicos da exceção",
+    "[VALIDAR] Autos extraídos em 20-21/11/2026 pela linha do tempo do PJe: a lista pode omitir anexos e peças; conferir no PJe antes de concluir"
+   ],
+   "minuta": false,
+   "classe": "AI",
+   "tarefa": "Analisar tipo de decisão a proferir",
+   "etiquetas": "2ª Seção; AI - exceção de pré-exec; BRUNO; ICMS - PIS/COFINS",
+   "chegada": "04/11/2026",
+   "extracao": {
+    "situacao": "extraída",
+    "em": "20/11/2026",
+    "documentos": "12",
+    "sem_texto": "0"
+   },
+   "situacao_atual": {
+    "ultima_decisao": "Decisão · ID 385924056 · 13/07/2026 — não concedeu a tutela recursal antes do contraditório",
+    "ultima_peca": "Contraminuta (PFN) · ID 387709321 · 28/07/2026",
+    "ultima_informacao": "Certidão · ID 365175224 · 08/04/2026",
+    "ultima_movimentacao": "03/08/2026 17:18 · Conclusos para julgamento",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 385924056 · 13/07/2026 — não concedeu a tutela recursal antes do contraditório | última peça: Contraminuta (PFN) · ID 387709321 · 28/07/2026 | última movimentação: 03/08/2026 17:18 · Conclusos para julgamento"
+   },
+   "teor": {
+    "sintese_fatica": "Execução fiscal da União contra Costa Vaz Comércio de Alimentos (PIS e COFINS, R$ 145.716,71). A exceção de pré-executividade foi rejeitada; daí o agravo, sem preparo inicial comprovado.",
+    "inicial": "Não consta nos autos do recurso (EF 5011102-14.2024.4.03.6000; capa no ID 364874547)",
+    "decisao_recorrida": "Decisão ID 560379721 dos autos de origem, que rejeitou a exceção de pré-executividade. Não juntada com texto nos autos do agravo.",
+    "recurso": "Agravo de instrumento ID 364874536 (07/04/2026): reforma da decisão que rejeitou a exceção quanto às CDAs (IDs 342438830 a 342438833 da origem); fundamentos específicos não constam do trecho extraído.",
+    "resposta": "Contraminuta da União ID 387709321 (28/07/2026): presunção de certeza e liquidez da CDA; descabimento da exceção para discutir a composição da base de cálculo.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Advogados Gabriel Barbosa Corrêa (OAB/MS 28.299) e Hugo Cagnin Conforte (OAB/MS 27.601) assinam as petições; procuração não identificada com texto [VALIDAR]",
+    "preparo": "Sem comprovação inicial: despacho ID 366467045 (16/04/2026) mandou recolher em dobro (artigo 1.007, § 4º, do CPC). Guia Pix ID 372624804 \"aguardando realização do pagamento\"; despacho ID 376122107 mandou comprovar pelo Tesouro; comprovante juntado em 10/06/2026 (ID 379489258), sem texto extraível."
+   },
+   "bloco": "1",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 385924056 · 13/07/2026 — não concedeu a tutela recursal antes do contraditório | última peça: Contraminuta (PFN) · ID 387709321 · 28/07/2026 | última movimentação: 03/08/2026 17:18 · Conclusos para julgamento · Preparo: sem comprovação inicial; intimação para dobro (despacho ID 366467045); guia \"aguardando pagamento\" (ID 372624804) e despacho ID 376122107 para comprovar pelo Tesouro; comprovante STN juntado em 10/06/2026 (ID 379489258): conferir valor do dobro e prazo [VALIDAR] · Tutela recursal indeferida (ID 385924056, 13/07/2026) · Número do agravo com final 0001 · Procuração não identificada com texto [VALIDAR] · Fundamentos específicos do agravo não extraídos [VALIDAR]",
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Execução fiscal · exceção de pré-executividade rejeitada · PIS e COFINS · composição da base de cálculo e certeza da CDA",
+     "sintese": "Execução fiscal da União contra Costa Vaz Comércio de Alimentos (PIS e COFINS, R$ 145.716,71). A exceção de pré-executividade foi rejeitada; daí o agravo, sem preparo inicial comprovado.",
+     "questoes": "1) Regularidade do preparo em dobro; 2) cabimento da exceção de pré-executividade para discutir a base de cálculo do PIS e da COFINS; 3) certeza e liquidez das CDAs.",
+     "rel": {
+      "razoes": "Agravo de instrumento ID 364874536 (07/04/2026): reforma da decisão que rejeitou a exceção quanto às CDAs (IDs 342438830 a 342438833 da origem); fundamentos específicos não constam do trecho extraído.",
+      "contrarrazoes": "Contraminuta da União ID 387709321 (28/07/2026): presunção de certeza e liquidez da CDA; descabimento da exceção para discutir a composição da base de cálculo."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "560379721",
+      "juizo": "1ª Vara Federal de Campo Grande [VALIDAR]",
+      "dispositivo": "Rejeitou a exceção de pré-executividade."
+     },
+     "ai": {
+      "hip": "Execução / cumprimento",
+      "efeito": "Indeferido",
+      "id": "560379721"
+     },
+     "adm": {
+      "prot": "2026-04-07",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte ré",
+       "tipo": "Agravo de instrumento",
+       "id": "364874536",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "364874536",
+       "data": "2026-04-07",
+       "nota": "Agravo de instrumento ID 364874536 (07/04/2026): reforma da decisão que rejeitou a exceção quanto às CDAs (IDs 342438830 a 342438833 da origem); fundamentos específicos não constam do trecho extraído.",
+       "pje": {
+        "tipo": "Petição Inicial",
+        "paginas": 10
+       },
+       "trecho": "Diante do exposto, requer-se: conforte@cebadvassociados.com.br (67) 99821-0168 Rua Santa Lina, 57 - 1º Andar, Sala 8 Vilas Boas, Campo Grande/MS I. A reforma integral da decisão agravada, a fim de que seja acolhida a exceção de pré-executividade e, consequentemente: i. Declare a extinção da …"
+      },
+      {
+       "desc": "Despacho: recolhimento em dobro",
+       "id": "366467045",
+       "data": "2026-04-16",
+       "nota": "Sem comprovação inicial: despacho ID 366467045 (16/04/2026) mandou recolher em dobro (artigo 1.007, § 4º, do CPC). Guia Pix ID 372624804 \"aguardando realização do pagamento\"; despacho ID 376122107 mandou comprovar pelo Tesouro; comprovante juntado em 10/06/2026 (ID 379489258), sem texto extraível. · Preparo: sem comprovação inicial; intimação para dobro (despacho ID 366467045); guia \"aguardando pagamento\" (ID …",
+       "pje": {
+        "tipo": "Despacho"
+       },
+       "trecho": "te a não comprovação do recolhimento do preparo, promova a agravante, no prazo de 5 (cinco) dias, a regularização do presente recurso, com o recolhimento em dobro do preparo, conforme artigo 1.007, § 4º, do CPC, sob pena de deserção. Campo Grande, data da assinatura. CARLOS MUTADesembargador Federal"
+      },
+      {
+       "desc": "Despacho: comprovação pelo Tesouro",
+       "id": "376122107",
+       "data": "2026-05-27",
+       "nota": "Sem comprovação inicial: despacho ID 366467045 (16/04/2026) mandou recolher em dobro (artigo 1.007, § 4º, do CPC). Guia Pix ID 372624804 \"aguardando realização do pagamento\"; despacho ID 376122107 mandou comprovar pelo Tesouro; comprovante juntado em 10/06/2026 (ID 379489258), sem texto extraível. · Preparo: sem comprovação inicial; intimação para dobro (despacho ID 366467045); guia \"aguardando pagamento\" (ID …",
+       "pje": {
+        "tipo": "Despacho"
+       },
+       "trecho": "intime-se a parte agravante para comprovar o recolhimento tempestivo do preparo, por meio do comprovante da Secretaria do Tesouro Nacional, nos termos do artigo 2°, § 2°, III, da Resolução PRES 138/2017, no prazo de 05 (cinco) dias, sob pena de deserção.Intime-se.Campo Grande, data da …"
+      },
+      {
+       "desc": "Comprovante STN",
+       "id": "379489258",
+       "data": "2026-06-10",
+       "nota": "Sem comprovação inicial: despacho ID 366467045 (16/04/2026) mandou recolher em dobro (artigo 1.007, § 4º, do CPC). Guia Pix ID 372624804 \"aguardando realização do pagamento\"; despacho ID 376122107 mandou comprovar pelo Tesouro; comprovante juntado em 10/06/2026 (ID 379489258), sem texto extraível. · Preparo: sem comprovação inicial; intimação para dobro (despacho ID 366467045); guia \"aguardando pagamento\" (ID …",
+       "pje": {
+        "tipo": "Comprovante de Recolhimento de Preparo",
+        "descricao": "Comprovante de Pagamento Agravo LF",
+        "paginas": 1,
+        "sem_texto": true
+       }
+      },
+      {
+       "desc": "Decisão que indeferiu a tutela recursal",
+       "id": "385924056",
+       "data": "2026-07-13",
+       "nota": "Preparo: sem comprovação inicial; intimação para dobro (despacho ID 366467045); guia \"aguardando pagamento\" (ID 372624804) e despacho ID 376122107 para comprovar pelo Tesouro; comprovante STN juntado em 10/06/2026 (ID 379489258): conferir valor do dobro e prazo [VALIDAR] · Tutela recursal indeferida (ID 385924056, 13/07/2026) · Número do agravo com final 0001 · Procuração não identificada com texto [VALIDAR] · …",
+       "pje": {
+        "tipo": "Decisão"
+       },
+       "trecho": "Intime-se a parte agravada para apresentar contraminuta, nos termos do artigo 1.019, II, do CPC.Intime-se.Campo Grande, data da assinatura.CARLOS MUTADesembargador Federal"
+      },
+      {
+       "desc": "Contraminuta da União",
+       "id": "387709321",
+       "data": "2026-07-28",
+       "nota": "Contraminuta da União ID 387709321 (28/07/2026): presunção de certeza e liquidez da CDA; descabimento da exceção para discutir a composição da base de cálculo. · Agravo de Costa Vaz Comércio de Alimentos contra a decisão que rejeitou a exceção de pré-executividade (ID 560379721 nos autos de origem; EF 5011102-14.2024.4.03.6000, PIS e COFINS, R$ 145.716,71). A União, na contraminuta (ID 387709321), sustenta a …",
+       "pje": {
+        "tipo": "Contraminuta",
+        "descricao": "Cm 5000012 90.2026.4.03.0001",
+        "paginas": 16
+       },
+       "trecho": "Ante o exposto, a União (Fazenda Nacional) requer seja acolhida a presente manifestação, sendo negado provimento ao agravo. Termos em que , p ede deferimento. São Paulo, data do protocolo. Soleni Sônia Tozze Procuradora da Fazenda Nacional"
+      }
+     ],
+     "pendencias": "Conferir o valor e o prazo do dobro; conferir a procuração",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 385924056 · 13/07/2026 — não concedeu a tutela recursal antes do contraditório | última peça: Contraminuta (PFN) · ID 387709321 · 28/07/2026 | última movimentação: 03/08/2026 17:18 · Conclusos para julgamento · Preparo: sem comprovação inicial; intimação para dobro (despacho ID 366467045); guia \"aguardando pagamento\" (ID 372624804) e despacho ID 376122107 para comprovar pelo Tesouro; comprovante STN juntado em 10/06/2026 (ID 379489258): conferir valor do dobro e prazo [VALIDAR] · Tutela recursal indeferida (ID 385924056, 13/07/2026) · Número do agravo com final 0001 · Procuração não identificada com texto [VALIDAR] · Fundamentos específicos do agravo não extraídos [VALIDAR]",
+     "assuntoDet": "Execução fiscal — exceção de pré-executividade (PIS e COFINS)",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Comprovado",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Antecipação da tutela recursal",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-07-13",
+     "fundamento": "Paradigmas do gabinete: AI 5000301-23.2026.4.03.0001 (monocrática TRMS, 05/08/2026: não conhecido, dobro não atendido); AI 5000239-80.2026.4.03.0001 (06/08/2026: não conhecido, Pix sem comprovante STN); AI 5025719-44.2018.4.03.0000 (acórdão 3ª Turma, 18/11/2022: exceção cabível, ICMS na base do PIS e da COFINS)"
+    }
+   },
+   "assunto_detalhado": "Execução fiscal — exceção de pré-executividade (PIS e COFINS)",
+   "grupo_tema": "g4",
+   "origem_lote": "adp-ai"
+  },
+  {
+   "sessao": "",
+   "item": 3,
+   "processo": "5001923-43.2026.4.03.0000",
+   "recurso": "Agravo de instrumento",
+   "partes": "M. A. B LIMA & CIA LTDA x FUNDAÇÃO UNIVERSIDADE FEDERAL DE MATO GROSSO DO SUL",
+   "exequente": "M. A. B LIMA & CIA LTDA",
+   "executado": "FUNDAÇÃO UNIVERSIDADE FEDERAL DE MATO GROSSO DO SUL",
+   "assunto": "Anulação",
+   "grupo": "A3",
+   "tipo_caso": "Administrativo · licitações · penalidade de impedimento de licitar e contratar aplicada pela UFMS · nulidade do processo administrativo · tutela deferida em parte na origem",
+   "resultado": "Ato a proferir: julgamento do agravo (voto), depois de conferido o preparo; tutela recursal indeferida em 30/01/2026 e há contrarrazões da União e da UFMS ‖ Proposta pelos precedentes: Primeiro o preparo: guia Pix \"aguardando realização do pagamento\" (ID 352529775) e comprovantes sem texto — ler por imagem; sem comprovante STN, intimar para comprovar e, não atendido, não conhecer por deserção, como nos precedentes da Turma Regional. Mérito (voto): pelos precedentes, o Judiciário controla só a legalidade do processo sancionador (contraditório, ampla defesa, ciência efetiva antes da execução da sanção), sem reduzir a penalidade por proporcionalidade; nulidade só com vício demonstrado. [VALIDAR: Tipo dos comprovantes IDs 352529776 e 352529777; vícios concretos alegados no Processo Administrativo 23104.004898/2025-99]",
+   "modelo": "Encaminhado: lote adp-mono-terminativas (Monocráticas terminativas) · não pautado",
+   "variacoes": [
+    "ADM",
+    "VAL"
+   ],
+   "observacao": "Agravo de M. A. B. Lima & Cia contra a decisão (ID 473092717 da origem) que, na ação 5006521-19.2025.4.03.6000 (1ª Vara Federal de Campo Grande), deferiu em parte a tutela para suspender a penalidade de impedimento de licitar e contratar com a União aplicada no Processo Administrativo 23104.004898/2025-99. A agravante busca a nulidade do processo administrativo e a exclusão das penalidades; alega asfixia financeira. A União (ID 365273942) e a UFMS (ID 362392356) pedem o desprovimento.",
+   "peculiaridades": "Tutela recursal indeferida pela Relatora anterior (decisão ID 352675226). Preparo: solicitação Pix de R$ 64,26 \"aguardando realização do pagamento\" (ID 352529775) e comprovantes sem conteúdo (IDs 352529776 e 352529777).",
+   "peculiaridades_relator": "",
+   "orientacao": "A petição de 29/01/2026 (ID 352529759) junta o comprovante do Tesouro (imagem): preparo provavelmente regular, então vai a voto. Se a imagem não for do Tesouro, volta como deserção.",
+   "equipe": {
+    "minuta": "",
+    "correcao": "",
+    "situacao": "A minutar"
+   },
+   "pecas": [
+    {
+     "peca": "Agravo de instrumento",
+     "id": "352519724",
+     "data": "29/01/2026"
+    },
+    {
+     "peca": "Contraminuta",
+     "id": "365273942",
+     "data": "08/04/2026"
+    },
+    {
+     "peca": "Decisão no agravo",
+     "id": "365676620",
+     "data": "10/04/2026"
+    },
+    {
+     "peca": "Decisão no agravo",
+     "id": "352675226",
+     "data": "30/01/2026"
+    }
+   ],
+   "mpf": "",
+   "triagem": {
+    "ato": "Voto · A petição de 29/01/2026 (ID 352529759) junta o comprovante do Tesouro (imagem): preparo provavelmente regular, então vai a voto. Se a imagem não for do Tesouro, volta como deserção.",
+    "materia": "Licitações — sanção administrativa de impedimento de licitar",
+    "origem": "5006521-19.2025.4.03.6000 (1ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "ID 473092717 da origem (cópia ID 352519728)",
+    "recurso": "ID 352519724 · 29/01/2026",
+    "preparo": "Comprovante STN em Consulta de Pagamentos de GRU, formato de lista (ID 352529777, R$ 64,26) [VALIDAR]",
+    "monocratica": "Possível, se deserto [VALIDAR]",
+    "analisado_em": "20/11/2026",
+    "conf_preparo": "COMPROVADO (STN) · STN (aceito): ID 352529777 (Consulta de Pagamentos de GRU em formato de lista [VALIDAR]) · \"Aguardando pagamento\": ID 352529775 · comprovante bancário: ID 352529776 · valor R$ 64,26 · leitura visual (OCR) em 20/11/2026: ID 352529776, 352529777 · conferido em 20/11/2026 (regra: só vale o comprovante STN — Consulta de Pagamentos de GRU/PagTesouro, UG 090029, código 18720-8)",
+    "conf_prevencao": "Origem: 5006521-19.2025.4.03.6000 · conferido em 20/11/2026"
+   },
+   "ajustes": [],
+   "pendencias": [
+    "[VALIDAR] Preparo: não há comprovante legível do pagamento; conferir no PJe e, se faltar, intimar para recolher em dobro (artigo 1.007, § 4º, do CPC)",
+    "[VALIDAR] Autos extraídos em 20-21/11/2026 pela linha do tempo do PJe: a lista pode omitir anexos e peças; conferir no PJe antes de concluir"
+   ],
+   "minuta": false,
+   "classe": "AI",
+   "tarefa": "Analisar tipo de decisão a proferir",
+   "etiquetas": "2ª Seção; AI - Tutela provisória; BRUNO; Licitação; Nulidade - Penas",
+   "chegada": "04/11/2026",
+   "extracao": {
+    "situacao": "extraída",
+    "em": "20/11/2026",
+    "documentos": "13",
+    "sem_texto": "1"
+   },
+   "situacao_atual": {
+    "ultima_decisao": "Decisão · ID 365676620 · 10/04/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso)",
+    "ultima_peca": "Contrarrazões (AGU (PRU)) · ID 365273942 · 08/04/2026",
+    "ultima_informacao": "Certidão · ID 366209983 · 13/04/2026",
+    "ultima_movimentacao": "13/04/2026 10:59 · Conclusos para julgamento",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao_relevante": "Decisão · ID 352675226 · 30/01/2026 — indeferiu o efeito suspensivo ou a tutela recursal",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 365676620 · 10/04/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 352675226 · 30/01/2026 — indeferiu o efeito suspensivo ou a tutela recursal | última peça: Contrarrazões (AGU (PRU)) · ID 365273942 · 08/04/2026 | última movimentação: 13/04/2026 10:59 · Conclusos para julgamento"
+   },
+   "teor": {
+    "sintese_fatica": "A UFMS aplicou a M. A. B. Lima & Cia penalidades em processo administrativo de contratação, entre elas o impedimento de licitar; a empresa obteve na origem a suspensão só dessa penalidade e agravou para ampliar a tutela.",
+    "inicial": "Ação 5006521-19.2025.4.03.6000: nulidade do Processo Administrativo 23104.004898/2025-99 e exclusão das penalidades",
+    "decisao_recorrida": "Decisão ID 473092717 da origem, que deferiu em parte a tutela (suspensão do impedimento de licitar)",
+    "recurso": "Agravo de instrumento ID 352519724 (29/01/2026): nulidade do processo administrativo; exclusão das demais penalidades; risco de asfixia financeira; antecipação da tutela recursal.",
+    "resposta": "Contrarrazões da União ID 365273942 (27/03/2026) e da UFMS ID 362392356 (25/03/2026): presunção de legitimidade do ato e necessidade de instrução; desprovimento.",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Procuração com reserva de poderes (ID 352519725) a Canton Matos Advogados",
+    "preparo": "Solicitação Pix de R$ 64,26 (ID 352529775) \"aguardando realização do pagamento\"; comprovantes sem conteúdo (IDs 352529776 e 352529777); manifestação ID 352529759 sobre a forma de recolhimento"
+   },
+   "bloco": "1",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 365676620 · 10/04/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 352675226 · 30/01/2026 — indeferiu o efeito suspensivo ou a tutela recursal | última peça: Contrarrazões (AGU (PRU)) · ID 365273942 · 08/04/2026 | última movimentação: 13/04/2026 10:59 · Conclusos para julgamento · Sem grupo adequado entre os 12 (matéria administrativa) · Tutela recursal indeferida (ID 352675226, 30/01/2026) · Preparo: comprovante STN em formato de lista (Consulta de Pagamentos de GRU, ID 352529777) [VALIDAR]; solicitação Pix \"aguardando pagamento\" (ID 352529775) · Contrarrazões da União e da UFMS",
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Administrativo · licitações · penalidade de impedimento de licitar e contratar aplicada pela UFMS · nulidade do processo administrativo · tutela deferida em parte na origem",
+     "sintese": "A UFMS aplicou a M. A. B. Lima & Cia penalidades em processo administrativo de contratação, entre elas o impedimento de licitar; a empresa obteve na origem a suspensão só dessa penalidade e agravou para ampliar a tutela.",
+     "questoes": "1) Regularidade do preparo; 2) nulidade do Processo Administrativo 23104.004898/2025-99; 3) suspensão das demais penalidades além do impedimento de licitar.",
+     "rel": {
+      "razoes": "Agravo de instrumento ID 352519724 (29/01/2026): nulidade do processo administrativo; exclusão das demais penalidades; risco de asfixia financeira; antecipação da tutela recursal.",
+      "contrarrazoes": "Contrarrazões da União ID 365273942 (27/03/2026) e da UFMS ID 362392356 (25/03/2026): presunção de legitimidade do ato e necessidade de instrução; desprovimento."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "473092717",
+      "juizo": "1ª Vara Federal de Campo Grande",
+      "dispositivo": "Deferiu em parte a tutela para suspender a penalidade de impedimento de licitar e contratar com a União."
+     },
+     "ai": {
+      "hip": "Tutela provisória",
+      "efeito": "Indeferido",
+      "id": "473092717"
+     },
+     "adm": {
+      "prot": "2026-01-29",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte autora",
+       "tipo": "Agravo de instrumento",
+       "id": "352519724",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "352519724",
+       "data": "2026-01-29",
+       "nota": "Agravo de instrumento ID 352519724 (29/01/2026): nulidade do processo administrativo; exclusão das demais penalidades; risco de asfixia financeira; antecipação da tutela recursal.",
+       "pje": {
+        "tipo": "Petição Inicial",
+        "paginas": 14
+       },
+       "trecho": "Ante o exposto, requer: a. O deferimento da tutela antecipada recursal , nos termos do art. 1.019, I c/c 300 do CPC, inaudita altera pars , para o fim de determinar i) a probabilidade do direito, consubstanciada na ausência de elementos suficientes a justificar, neste momento processual, a …"
+      },
+      {
+       "desc": "Comprovante STN (lista)",
+       "id": "352529777",
+       "data": "2026-01-29",
+       "nota": "Solicitação Pix de R$ 64,26 (ID 352529775) \"aguardando realização do pagamento\"; comprovantes sem conteúdo (IDs 352529776 e 352529777); manifestação ID 352529759 sobre a forma de recolhimento · Sem grupo adequado entre os 12 (matéria administrativa) · Tutela recursal indeferida (ID 352675226, 30/01/2026) · Preparo: comprovante STN em formato de lista (Consulta de Pagamentos de GRU, ID 352529777) [VALIDAR]; …",
+       "pje": {
+        "tipo": "Comprovante de Recolhimento de Preparo",
+        "descricao": "Doc. 03 Comprovante da Secretaria do Tesouro Nacional",
+        "paginas": 2,
+        "sem_texto": true
+       }
+      },
+      {
+       "desc": "Decisão que indeferiu a tutela recursal",
+       "id": "352675226",
+       "data": "2026-01-30",
+       "nota": "Sem grupo adequado entre os 12 (matéria administrativa) · Tutela recursal indeferida (ID 352675226, 30/01/2026) · Preparo: comprovante STN em formato de lista (Consulta de Pagamentos de GRU, ID 352529777) [VALIDAR]; solicitação Pix \"aguardando pagamento\" (ID 352529775) · Contrarrazões da União e da UFMS · Tutela recursal indeferida pela Relatora anterior (decisão ID 352675226). Preparo: solicitação Pix de R$ 64,26 …",
+       "pje": {
+        "tipo": "Decisão"
+       },
+       "trecho": "Ante o exposto, indefiro o pedido de antecipação de tutela.Comunique-se ao digno Juízo de 1º grau de jurisdição.Publique-se. Intime-se, inclusive para resposta.São Paulo, data da assinatura eletrônica.GISELLE FRANÇADesembargadora Federal"
+      },
+      {
+       "desc": "Contrarrazões da UFMS",
+       "id": "362392356",
+       "data": "2026-03-25",
+       "nota": "Contrarrazões da União ID 365273942 (27/03/2026) e da UFMS ID 362392356 (25/03/2026): presunção de legitimidade do ato e necessidade de instrução; desprovimento. · A União (ID 365273942) e a UFMS (ID 362392356) pedem o desprovimento.",
+       "pje": {
+        "tipo": "Contrarrazões",
+        "descricao": "P CONTRARRAZÕES 3151211897 EM 25/03/2026 15:00:20",
+        "paginas": 3
+       },
+       "trecho": "Ante o exposto, requer a UFMS seja negado provimento ao recurso da parte autora. São Paulo, 25 de março de 2026. ALVARO PERES MESSAS PROCURADOR FEDERAL"
+      },
+      {
+       "desc": "Contrarrazões da União",
+       "id": "365273942",
+       "data": "2026-03-27",
+       "nota": "Contrarrazões da União ID 365273942 (27/03/2026) e da UFMS ID 362392356 (25/03/2026): presunção de legitimidade do ato e necessidade de instrução; desprovimento. · A União (ID 365273942) e a UFMS (ID 362392356) pedem o desprovimento.",
+       "pje": {
+        "tipo": "Contrarrazões",
+        "descricao": "P CONTRARRAZÕES 3155170215 EM 08/04/2026 21:36:14",
+        "paginas": 4
+       },
+       "trecho": "Ante o exposto, requer a União que seja negado provimento ao presente agravo, mantendo-se íntegra o r. decisum combatido, por seus próprios e jurídicos fundamentos. Nestes termos, pede-se deferimento. São Paulo, 27 de março de 2026. SANDRA SORDI ADVOGADA DA UNIÃO"
+      }
+     ],
+     "pendencias": "Conferir o comprovante STN em formato de lista",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 365676620 · 10/04/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 352675226 · 30/01/2026 — indeferiu o efeito suspensivo ou a tutela recursal | última peça: Contrarrazões (AGU (PRU)) · ID 365273942 · 08/04/2026 | última movimentação: 13/04/2026 10:59 · Conclusos para julgamento · Sem grupo adequado entre os 12 (matéria administrativa) · Tutela recursal indeferida (ID 352675226, 30/01/2026) · Preparo: comprovante STN em formato de lista (Consulta de Pagamentos de GRU, ID 352529777) [VALIDAR]; solicitação Pix \"aguardando pagamento\" (ID 352529775) · Contrarrazões da União e da UFMS",
+     "assuntoDet": "Licitações — sanção administrativa de impedimento de licitar",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Comprovado",
+     "prelim": "Sem preliminares",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "urgTipo": "Antecipação da tutela recursal",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2026-01-30",
+     "fundamento": "Paradigmas do gabinete: AI 5000239-80.2026.4.03.0001 (monocrática TRMS, 06/08/2026: não conhecido, Pix sem comprovante STN); ApCiv 0005091-29.2016.4.03.6002 (acórdão TRMS, 15/09/2026: impedimento de licitar mantido; sem nulidade formal; Judiciário não reduz a penalidade); ApCiv 0013693-49.2015.4.03.6000 (acórdão TRMS, 27/08/2026: execução da penalidade antes da ciência efetiva, parcial provimento); AI 5033957-13.2022.4.03.0000 (acórdão 3ª Turma, 14/04/2023: liminar negada contra impedimento de licitar, desprovido)"
+    }
+   },
+   "assunto_detalhado": "Licitações — sanção administrativa de impedimento de licitar",
+   "grupo_tema": "",
+   "origem_lote": "adp-ai"
+  },
+  {
+   "sessao": "",
+   "item": 4,
+   "processo": "5032669-25.2025.4.03.0000",
+   "recurso": "Tutela cautelar antecedente",
+   "partes": "CSI SERVICOS MEDICOS LTDA. x UNIAO FEDERAL - FAZENDA NACIONAL",
+   "exequente": "CSI SERVICOS MEDICOS LTDA.",
+   "executado": "UNIAO FEDERAL - FAZENDA NACIONAL",
+   "assunto": "Redução de Alíquota IR/CSLL - Serviços Hospitalares",
+   "grupo": "A2",
+   "tipo_caso": "Pedido de efeito suspensivo/tutela à apelação (artigo 1.012, § 3º, do CPC) em mandado de segurança · IRPJ e CSLL com bases reduzidas de serviços hospitalares (sentença de improcedência) · tutela indeferida pela relatora anterior · embargos de declaração pendentes · apelação 5000384-15.2025.4.03.6002 no acervo do gabinete",
+   "resultado": "Ato a proferir: a relatora anterior indeferiu a tutela (ID 345468992), porque a atividade principal da requerente é \"atividade médica ambulatorial restrita a consultas\"; a requerente opôs embargos de declaração (ID 346984730), respondidos pela PFN (ID 347783556), que também contraminutou o pedido (ID 347783551); o MPF declarou falta de interesse (ID 349301795); redistribuído por prevenção em 22/04/2026 ‖ Proposta pelos precedentes: Julgar a apelação 5000384-15.2025.4.03.6002 e declarar prejudicados o pedido e os embargos; no mérito, linha do gabinete no Tema 217/STJ (ApCiv 5028815-95.2021.4.03.6100, 3ª Turma, 20/03/2023) [VALIDAR: Preparo; Situação da apelação 5000384-15.2025.4.03.6002]",
+   "modelo": "Encaminhado: lote adp-mono-terminativas (Monocráticas terminativas) · não pautado",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Pedido da CSI Serviços Médicos Ltda. de tutela recursal à apelação contra a sentença que negou, em mandado de segurança, o recolhimento do IRPJ e da CSLL pelas bases reduzidas de serviços hospitalares. A relatora anterior indeferiu a tutela (Tema 217/STJ; atividade restrita a consultas) (ID 345468992). Pendem embargos de declaração da requerente (ID 346984730). A apelação está no acervo do gabinete.",
+   "peculiaridades": "",
+   "peculiaridades_relator": "",
+   "orientacao": "Tutela cautelar antecedente: julgar junto com a apelação 5000384-15.2025, em acórdão.",
+   "equipe": {
+    "minuta": "",
+    "correcao": "",
+    "situacao": "A minutar"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {
+    "ato": "Voto · Tutela cautelar antecedente: julgar junto com a apelação 5000384-15.2025, em acórdão.",
+    "materia": "Tributário — IRPJ e CSLL (lucro presumido; serviços hospitalares)",
+    "origem": "Mandado de segurança 5000384-15.2025.4.03.6002 (2ª Vara Federal de Dourados)",
+    "decisao_agravada": "Sentença de improcedência no mandado de segurança, objeto da apelação 5000384-15.2025.4.03.6002",
+    "recurso": "ID 345292040 · 03/12/2025",
+    "preparo": "Não verificado [VALIDAR]",
+    "monocratica": "Possível monocrática de prejuízo, após o julgamento da apelação",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "NÃO VERIFICADO · sem comprovante na lista extraída [VALIDAR] · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuído por prevenção em 22/04/2026 (linha do tempo do PJe) · apelação 5000384-15.2025.4.03.6002 no lote adp-ap-2s · conferido em 21/11/2026"
+   },
+   "ajustes": [],
+   "pendencias": [
+    "[VALIDAR] Julgamento conjunto com a apelação"
+   ],
+   "minuta": false,
+   "classe": "TutCautAnt",
+   "tarefa": "Analisar tipo de decisão a proferir",
+   "etiquetas": "2ª Seção; BRUNO; ED",
+   "chegada": "04/11/2026",
+   "extracao": {
+    "situacao": "pendente"
+   },
+   "assunto_detalhado": "Tutela à apelação (IRPJ/CSLL hospitalar) — embargos de declaração e julgamento conjunto com a apelação",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 366979069 · 17/04/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 345468992 · 04/12/2025 — indeferiu a tutela à apelação | última peça: Embargos de declaração (requerente) · ID 346984730 · 16/12/2025; resposta da PFN · ID 347783556 · 22/12/2025 | última movimentação: 22/04/2026 18:37 · Conclusos para julgamento · Tutela indeferida (ID 345468992) · Embargos de declaração pendentes (ID 346984730) · Apelação 5000384-15.2025.4.03.6002 no lote adp-ap-2s · MPF sem interesse (ID 349301795)",
+   "teor": {
+    "sintese_fatica": "A CSI Serviços Médicos Ltda. impetrou mandado de segurança para recolher IRPJ e CSLL pelas bases reduzidas de serviços hospitalares; a sentença foi de improcedência e a empresa apelou e pediu tutela à apelação.",
+    "inicial": "Mandado de segurança 5000384-15.2025.4.03.6002.",
+    "decisao_recorrida": "Decisão ID 345468992 (relatora anterior): indeferiu a tutela à apelação.",
+    "recurso": "Pedido ID 345292040 (03/12/2025): tutela à apelação (artigos 299 e 1.012, § 3º, do CPC). Embargos de declaração ID 346984730 (16/12/2025).",
+    "resposta": "Contraminuta da PFN ID 347783551 e contrarrazões aos embargos ID 347783556 (22/12/2025).",
+    "parecer": "MPF ID 349301795: falta de interesse.",
+    "memoriais": "Não consta",
+    "representacao": "Advogado Valterlei Aparecido da Costa (OAB/PR 40.057).",
+    "preparo": "Não localizado."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Embargos de Declaração",
+     "subassuntos": "Pedido de efeito suspensivo/tutela à apelação (artigo 1.012, § 3º, do CPC) em mandado de segurança · IRPJ e CSLL com bases reduzidas de serviços hospitalares (sentença de improcedência) · tutela indeferida pela relatora anterior · embargos de declaração pendentes · apelação 5000384-15.2025.4.03.6002 no acervo do gabinete",
+     "sintese": "A CSI Serviços Médicos Ltda. impetrou mandado de segurança para recolher IRPJ e CSLL pelas bases reduzidas de serviços hospitalares; a sentença foi de improcedência e a empresa apelou e pediu tutela à apelação.",
+     "questoes": "1) Tutela à apelação para as bases reduzidas de serviços hospitalares (Tema 217/STJ; Lei 11.727/2008); 2) embargos de declaração; 3) prejuízo pelo julgamento da apelação.",
+     "rel": {
+      "razoes": "Pedido ID 345292040 (03/12/2025): tutela à apelação (artigos 299 e 1.012, § 3º, do CPC). Embargos de declaração ID 346984730 (16/12/2025).",
+      "contrarrazoes": "Contraminuta da PFN ID 347783551 e contrarrazões aos embargos ID 347783556 (22/12/2025)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "",
+      "juizo": "2ª Vara Federal de Dourados",
+      "dispositivo": "Julgou improcedente o mandado de segurança."
+     },
+     "ai": {
+      "hip": "Tutela provisória",
+      "efeito": "Indeferido",
+      "id": "345468992"
+     },
+     "adm": {
+      "prot": "2025-12-03",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte autora",
+       "tipo": "Pedido de tutela à apelação",
+       "id": "345292040",
+       "contra": "Apresentada"
+      },
+      {
+       "parte": "Parte autora",
+       "tipo": "Embargos de declaração",
+       "id": "346984730",
+       "contra": "Apresentada"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Pedido de tutela à apelação",
+       "id": "345292040",
+       "data": "2025-12-03",
+       "nota": "Pedido ID 345292040 (03/12/2025): tutela à apelação (artigos 299 e 1.012, § 3º, do CPC). Embargos de declaração ID 346984730 (16/12/2025).",
+       "pje": {
+        "tipo": "Petição Inicial",
+        "paginas": 6
+       },
+       "trecho": "requer seja: 1. deferida tutela recursal de urgência pelo relator , declarando - se a possibilidade de enquadramento da presente empresa no regime de alíquotas diferenciadas previstas no art. 15, § 1º, III, “a” e do art. 20, III, da Lei nº 9.249/1995 ; 2. citada a fazenda pública para que , caso …"
+      },
+      {
+       "desc": "Decisão: tutela indeferida",
+       "id": "345468992",
+       "data": "2025-12-04",
+       "nota": "Decisão ID 345468992 (relatora anterior): indeferiu a tutela à apelação. · Tutela indeferida (ID 345468992) · Embargos de declaração pendentes (ID 346984730) · Apelação 5000384-15.2025.4.03.6002 no lote adp-ap-2s · MPF sem interesse (ID 349301795)",
+       "pje": {
+        "tipo": "Decisão"
+       },
+       "trecho": "Ante o exposto, indefiro o pedido de antecipação de tutela.Publique-se. Intime-se, inclusive para resposta.Após, à Procuradoria Regional da República.São Paulo, data da assinatura eletrônica.GISELLE FRANÇADesembargadora Federal"
+      },
+      {
+       "desc": "Embargos de declaração",
+       "id": "346984730",
+       "data": "2025-12-16",
+       "nota": "Pedido ID 345292040 (03/12/2025): tutela à apelação (artigos 299 e 1.012, § 3º, do CPC). Embargos de declaração ID 346984730 (16/12/2025). · Tutela indeferida (ID 345468992) · Embargos de declaração pendentes (ID 346984730) · Apelação 5000384-15.2025.4.03.6002 no lote adp-ap-2s · MPF sem interesse (ID 349301795)",
+       "pje": {
+        "tipo": "Embargos de Declaração",
+        "paginas": 2
+       },
+       "trecho": "requer sejam acolhidos os presentes Embargo s de Declaração para correção da omissão demonstrada , apreciando - se tais documentos e, assim, reconhecendo que a atividade da ora embargante é, de fato, análoga à hospitalar, motivo pelo qual há de deferir - se a tutela recursal pleiteada . Nestes …"
+      },
+      {
+       "desc": "Contraminuta da PFN",
+       "id": "347783551",
+       "data": "2025-12-22",
+       "nota": "Contraminuta da PFN ID 347783551 e contrarrazões aos embargos ID 347783556 (22/12/2025).",
+       "pje": {
+        "tipo": "Contraminuta",
+        "paginas": 20
+       },
+       "trecho": "Ante o exposto, requer a Fazenda Nacional seja negado provimento ao presente pedido, mantendo-se apenas o efeito devolutivo da apelação. Nesses termos, Pede deferimento. São Paulo 22 de dezembro de 2025. assinado digitalmente PAULA CAROLINA BISSOLI CONTRERAS Procuradora da Fazenda Nacional"
+      },
+      {
+       "desc": "Contrarrazões aos embargos",
+       "id": "347783556",
+       "data": "2025-12-22",
+       "nota": "Contraminuta da PFN ID 347783551 e contrarrazões aos embargos ID 347783556 (22/12/2025).",
+       "pje": {
+        "tipo": "Contrarrazões de Recurso",
+        "descricao": "Contrarrazões ao Recurso",
+        "paginas": 2
+       },
+       "trecho": "requer, assim, que não sejam conhecidos os Embargos interpostos, uma vez que não restou demonstrada a omissão alegada do v. acórdão embargado. Termos em que, p. deferimento. São Paulo, 22 de dezembro de 2025. Assinado digitalmente PAULA CAROLINA BISSOLI CONTRERAS Procuradora da Fazenda Nacional"
+      },
+      {
+       "desc": "Parecer do MPF (sem interesse)",
+       "id": "349301795",
+       "data": "",
+       "nota": "MPF ID 349301795: falta de interesse. · Tutela indeferida (ID 345468992) · Embargos de declaração pendentes (ID 346984730) · Apelação 5000384-15.2025.4.03.6002 no lote adp-ap-2s · MPF sem interesse (ID 349301795)",
+       "pje": {
+        "tipo": "Parecer \"Falta de Interesse\"",
+        "descricao": "MP",
+        "paginas": 1
+       },
+       "trecho": "Ante o exposto, o Ministério Público Federal dá-se por ciente do processado e manifesta-se tão somente pelo prosseguimento da demanda. São Paulo, 7 de janeiro de 2026. (Assinado digitalmente) EUGÊNIA AUGUSTA GONZAGA Procuradora Regional da República Av. Brigadeiro Luís Antônio, 2020 - Bela Vista, …"
+      }
+     ],
+     "pendencias": "[VALIDAR] Julgamento conjunto com a apelação",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 366979069 · 17/04/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 345468992 · 04/12/2025 — indeferiu a tutela à apelação | última peça: Embargos de declaração (requerente) · ID 346984730 · 16/12/2025; resposta da PFN · ID 347783556 · 22/12/2025 | última movimentação: 22/04/2026 18:37 · Conclusos para julgamento · Tutela indeferida (ID 345468992) · Embargos de declaração pendentes (ID 346984730) · Apelação 5000384-15.2025.4.03.6002 no lote adp-ap-2s · MPF sem interesse (ID 349301795)",
+     "assuntoDet": "Tutela à apelação (IRPJ/CSLL hospitalar) — embargos de declaração e julgamento conjunto com a apelação",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Tempestivo",
+     "preparo": "Não verificado",
+     "prelim": "Sem preliminares",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Mandado de segurança",
+     "parecer": "Com parecer",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Apreciada · indeferida",
+     "urgData": "2025-12-04",
+     "idParecer": "349301795",
+     "parecerSentido": "Ausência de interesse que justifique a intervenção"
+    }
+   },
+   "situacao_atual": {
+    "ultima_movimentacao": "22/04/2026 18:37 · Conclusos para julgamento",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Decisão · ID 366979069 · 17/04/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso)",
+    "ultima_decisao_relevante": "Decisão · ID 345468992 · 04/12/2025 — indeferiu a tutela à apelação",
+    "ultima_peca": "Embargos de declaração (requerente) · ID 346984730 · 16/12/2025; resposta da PFN · ID 347783556 · 22/12/2025",
+    "ultima_informacao": "Certidão · ID 368266501 · 22/04/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 366979069 · 17/04/2026 — remessa ou redistribuição à Turma Regional (sem exame do recurso) | último ato decisório sobre o recurso: ID 345468992 · 04/12/2025 — indeferiu a tutela à apelação | última peça: Embargos de declaração (requerente) · ID 346984730 · 16/12/2025; resposta da PFN · ID 347783556 · 22/12/2025 | última movimentação: 22/04/2026 18:37 · Conclusos para julgamento"
+   },
+   "origem_lote": "adp-ai"
+  },
+  {
+   "sessao": "",
+   "item": 5,
+   "processo": "5000090-84.2026.4.03.0001",
+   "recurso": "Agravo de instrumento",
+   "partes": "INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS x JULIANNE DE MORAIS LIMA",
+   "exequente": "INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS",
+   "executado": "JULIANNE DE MORAIS LIMA",
+   "assunto": "Salário-Maternidade (Art. 71/73)",
+   "grupo": "A4",
+   "tipo_caso": "Previdenciário · salário-maternidade (nascimento em 15/04/2025) · tutela de implantação deferida na origem (competência delegada) · agravo do INSS: segurada empregada com vínculo ativo, indenizada na Justiça do Trabalho pelo período de estabilidade · efeito suspensivo pendente",
+   "resultado": "Ato a proferir: o pedido de efeito suspensivo do INSS (ID 371522775) não foi apreciado; o relator abriu vista ao MPF (ID 373677827), que declarou falta de interesse (ID 381481398), e mandou intimar a agravada para contraminuta (ID 374592522, 19/05/2026); a lista extraída não traz contraminuta [VALIDAR prazo] ‖ Proposta pelos precedentes: Apreciar o efeito suspensivo ou julgar logo o agravo, se decorrido o prazo da contraminuta; sem paradigma do gabinete no banco sobre salário-maternidade de empregada indenizada na Justiça do Trabalho [VALIDAR: Contraminuta ou decurso do prazo; Comarca de origem; Prova da indenização trabalhista do período de estabilidade]",
+   "modelo": "Encaminhado: lote adp-mono-terminativas (Monocráticas terminativas) · não pautado",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Agravo do INSS contra a tutela que determinou a implantação do salário-maternidade a Julianne de Morais Lima, pelo nascimento em 15/04/2025. O INSS sustenta que a autora era empregada com vínculo ativo e recebeu na Justiça do Trabalho as verbas do período de estabilidade da gestante. O efeito suspensivo não foi apreciado; o MPF declarou falta de interesse (ID 381481398).",
+   "peculiaridades": "",
+   "peculiaridades_relator": "",
+   "orientacao": "Efeito suspensivo pendente e sem paradigma: voto.",
+   "equipe": {
+    "minuta": "",
+    "correcao": "",
+    "situacao": "A minutar"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {
+    "ato": "Voto · Efeito suspensivo pendente e sem paradigma: voto.",
+    "materia": "Previdenciário — salário-maternidade",
+    "origem": "Ação 5000110-61.2026.8.12.0043 (Justiça Estadual, competência delegada) [VALIDAR comarca]",
+    "decisao_agravada": "Decisão da origem que deferiu a tutela para implantar o salário-maternidade",
+    "recurso": "ID 371522775 · 06/05/2026",
+    "preparo": "Isento (INSS)",
+    "monocratica": "Possível, conforme a linha do gabinete [VALIDAR paradigma]",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "ISENTO · INSS · conferido em 21/11/2026",
+    "conf_prevencao": "Distribuição na Turma Regional · conferido em 21/11/2026"
+   },
+   "ajustes": [],
+   "pendencias": [
+    "[VALIDAR] Contraminuta",
+    "[VALIDAR] Efeito suspensivo pendente"
+   ],
+   "minuta": false,
+   "classe": "AI",
+   "tarefa": "Analisar tipo de decisão a proferir",
+   "etiquetas": "3ª Seção; Apresentar Contraminuta; BRUNO; LIMINAR PENDENTE",
+   "chegada": "04/11/2026",
+   "extracao": {
+    "situacao": "pendente"
+   },
+   "assunto_detalhado": "Salário-maternidade — empregada indenizada na Justiça do Trabalho (tutela de implantação)",
+   "especificidades": "► Situação em 21/11/2026: última decisão: ID 374592522 · 19/05/2026 — mandou intimar a agravada para contraminuta | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 381481398 · 19/06/2026 | última movimentação: [VALIDAR no PJe] · Etiquetas \"LIMINAR PENDENTE\" e \"Apresentar Contraminuta\" · Efeito suspensivo não apreciado · MPF sem interesse (ID 381481398) · Competência delegada",
+   "teor": {
+    "sintese_fatica": "Julianne de Morais Lima pediu salário-maternidade pelo nascimento do filho em 15/04/2025; o juízo deferiu a tutela de implantação.",
+    "inicial": "Ação 5000110-61.2026.8.12.0043.",
+    "decisao_recorrida": "Decisão da origem: tutela de implantação do salário-maternidade.",
+    "recurso": "Agravo ID 371522775 (06/05/2026): segurada empregada com vínculo ativo, indenizada na Justiça do Trabalho pela estabilidade; irreversibilidade (artigo 300, § 3º, do CPC).",
+    "resposta": "Não consta.",
+    "parecer": "MPF ID 381481398 (19/06/2026): falta de interesse.",
+    "memoriais": "Não consta",
+    "representacao": "Procuradora federal; agravada: advogada Adriana Patricia Lima Wommer (OAB/MS 21.281).",
+    "preparo": "Isento."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Agravo de Instrumento",
+     "subassuntos": "Previdenciário · salário-maternidade (nascimento em 15/04/2025) · tutela de implantação deferida na origem (competência delegada) · agravo do INSS: segurada empregada com vínculo ativo, indenizada na Justiça do Trabalho pelo período de estabilidade · efeito suspensivo pendente",
+     "sintese": "Julianne de Morais Lima pediu salário-maternidade pelo nascimento do filho em 15/04/2025; o juízo deferiu a tutela de implantação.",
+     "questoes": "1) Salário-maternidade de segurada empregada indenizada na Justiça do Trabalho pelo período de estabilidade (bis in idem); 2) requisitos da tutela e irreversibilidade.",
+     "rel": {
+      "razoes": "Agravo ID 371522775 (06/05/2026): segurada empregada com vínculo ativo, indenizada na Justiça do Trabalho pela estabilidade; irreversibilidade (artigo 300, § 3º, do CPC).",
+      "contrarrazoes": "Não consta."
+     },
+     "orig": {
+      "tipo": "Decisão interlocutória",
+      "id": "",
+      "juizo": "Justiça Estadual (competência delegada)",
+      "dispositivo": "Deferiu a tutela de implantação."
+     },
+     "ai": {
+      "hip": "Tutela provisória",
+      "efeito": "Pendente",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2026-05-06",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Parte ré",
+       "tipo": "Agravo de instrumento",
+       "id": "371522775",
+       "contra": "Intimada [VALIDAR resposta]"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Agravo de instrumento",
+       "id": "371522775",
+       "data": "2026-05-06",
+       "nota": "Agravo ID 371522775 (06/05/2026): segurada empregada com vínculo ativo, indenizada na Justiça do Trabalho pela estabilidade; irreversibilidade (artigo 300, § 3º, do CPC).",
+       "pje": {
+        "tipo": "Petição Inicial",
+        "paginas": 5
+       },
+       "trecho": "Diante do exposto, requer o agravante: a) com fundamento nos art. 995 e 1.019, I, do CPC, a concessão do efeito suspensivo ao presente recurso, em razão do risco de dano grave, de difícil ou impossível reparação, somado à probabilidade de provimento do recurso, para que os efeitos da decisão …"
+      },
+      {
+       "desc": "Despacho: vista ao MPF",
+       "id": "373677827",
+       "data": "2026-05-15",
+       "pje": {
+        "tipo": "Despacho"
+       },
+       "trecho": "Intime-se. Campo Grande, 15 de maio de 2026. CARLOS MUTA Desembargador Federal"
+      },
+      {
+       "desc": "Despacho: intimação para contraminuta",
+       "id": "374592522",
+       "data": "2026-05-19",
+       "pje": {
+        "tipo": "Despacho"
+       },
+       "trecho": "Intime-se.Campo Grande, data da assinatura.CARLOS MUTADesembargador Federal"
+      },
+      {
+       "desc": "Parecer do MPF (sem interesse)",
+       "id": "381481398",
+       "data": "2026-06-19",
+       "nota": "MPF ID 381481398 (19/06/2026): falta de interesse. · Etiquetas \"LIMINAR PENDENTE\" e \"Apresentar Contraminuta\" · Efeito suspensivo não apreciado · MPF sem interesse (ID 381481398) · Competência delegada",
+       "pje": {
+        "tipo": "Parecer \"Falta de Interesse\"",
+        "descricao": "MP",
+        "paginas": 2
+       },
+       "trecho": "Ante o exposto, constatando-se a regularidade dos atos processuais e a inexistência de hipótese de intervenção meritória do Ministério Público Federal, deixa-se de opinar quanto ao mérito da controvérsia, restituindo-se os autos para regular prosseguimento. São Paulo, 19 de junho de 2026. MARIA …"
+      }
+     ],
+     "pendencias": "[VALIDAR] Contraminuta; [VALIDAR] Efeito suspensivo pendente",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 374592522 · 19/05/2026 — mandou intimar a agravada para contraminuta | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 381481398 · 19/06/2026 | última movimentação: [VALIDAR no PJe] · Etiquetas \"LIMINAR PENDENTE\" e \"Apresentar Contraminuta\" · Efeito suspensivo não apreciado · MPF sem interesse (ID 381481398) · Competência delegada",
+     "assuntoDet": "Salário-maternidade — empregada indenizada na Justiça do Trabalho (tutela de implantação)",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Dispensada (procurador público)",
+     "midias": "Não se aplica",
+     "mpf": "Sem hipótese",
+     "parecer": "Com parecer",
+     "urgTipo": "Efeito suspensivo",
+     "urgSit": "Pendente · não apreciada",
+     "idParecer": "381481398",
+     "parecerSentido": "Ausência de interesse que justifique a intervenção"
+    }
+   },
+   "situacao_atual": {
+    "ultima_decisao": "Despacho · ID 374592522 · 19/05/2026 — mandou intimar a agravada para contraminuta",
+    "ultima_peca": "Parecer \"Falta de Interesse\" (MPF) · ID 381481398 · 19/06/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação a conferir no PJe",
+    "ultima_movimentacao": "[VALIDAR no PJe]",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 374592522 · 19/05/2026 — mandou intimar a agravada para contraminuta | última peça: Parecer \"Falta de Interesse\" (MPF) · ID 381481398 · 19/06/2026 | última movimentação: [VALIDAR no PJe]"
+   },
+   "origem_lote": "adp-ai"
+  },
+  {
+   "sessao": "",
+   "item": 6,
+   "processo": "5008585-36.2024.4.03.6000",
+   "recurso": "Apelação e remessa necessária",
+   "partes": "UNIAO FEDERAL - FAZENDA NACIONAL x IPEDI MS INSTITUTO DO PANTANAL ESPECIALIZADO EM DIAGNOSTICO POR IMAGEM DO MATO GROSSO DO SUL LTDA",
+   "exequente": "",
+   "executado": "",
+   "assunto": "IRPJ/Imposto de Renda de Pessoa Jurídica",
+   "assunto_detalhado": "",
+   "grupo": "t13",
+   "tipo_caso": "Apelação da União e remessa necessária em mandado de segurança · IRPJ e CSLL: base de cálculo presumida reduzida (8% e 12%) para serviços hospitalares e de diagnóstico por imagem (artigo 15, § 1º, III, a, e artigo 20 da Lei 9.249/1995) · segurança concedida",
+   "resultado": "Ato a proferir: apelação da União (ID 340496844) e remessa necessária da sentença ID 340496838; contrarrazões com documentos novos (ID 340496845 e seguintes); MPF sem intervenção (ID 340691228) ‖ Proposta pelos precedentes: Voto: conferir a prova pré-constituída dos três requisitos (atividade, sociedade empresária registrada e licença sanitária vigente); desconsiderar ou não os documentos juntados com as contrarrazões [VALIDAR] [VALIDAR: Licença sanitária vigente (renovação protocolada, ID 340496730); Registro como sociedade empresária]",
+   "modelo": "Origem: lote adp-remessas · não pautado",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "A triagem indica voto (prova pré-constituída dos três requisitos).",
+   "peculiaridades": "",
+   "peculiaridades_relator": "",
+   "orientacao": "A triagem indica voto (prova pré-constituída dos três requisitos).",
+   "equipe": {
+    "minuta": "",
+    "correcao": "",
+    "situacao": "A minutar"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {
+    "ato": "Voto · A triagem indica voto (prova pré-constituída dos três requisitos).",
+    "materia": "Tributário — IRPJ/CSLL (serviços hospitalares)",
+    "origem": "Mandado de segurança 5008585-36.2024.4.03.6000 (4ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 340496838 (23/05/2025)",
+    "recurso": "apelação de União (Fazenda Nacional) (ID 340496844, 23/09/2025) · remessa necessária",
+    "preparo": "União (Fazenda Nacional): Isento (ente público)",
+    "monocratica": "Possível (artigo 932, IV, b, do CPC): REsp 1.116.399/BA, se a prova pré-constituída bastar",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "União (Fazenda Nacional): Isento (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
+   "ajustes": [],
+   "pendencias": [],
+   "minuta": false,
+   "classe": "ApelRemNec",
+   "tarefa": "Analisar tipo de decisão a proferir",
+   "etiquetas": "2ª Seção; Redução Tributária - Serviços Hospitalares",
+   "chegada": "27/10/2025",
+   "situacao_atual": {
+    "ultima_movimentacao": "20/05/2026 15:33 · Juntada de Petição de substabelecimento",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Sentença · ID 340496838 · 23/05/2025 — sentença (dispositivo a conferir)",
+    "ultima_peca": "Substabelecimento (apelado) · ID 374849974 · 20/05/2026",
+    "ultima_informacao": "Informação · ID 340496852 · 22/10/2025",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 340496838 · 23/05/2025 — sentença (dispositivo a conferir) | última peça: Substabelecimento (apelado) · ID 374849974 · 20/05/2026 | última movimentação: 20/05/2026 15:33 · Juntada de Petição de substabelecimento"
+   },
+   "teor": {
+    "sintese_fatica": "IPEDI MS Instituto do Pantanal Especializado em Diagnóstico por Imagem Ltda., clínica de radiologia e ultrassom, pede a base de cálculo presumida reduzida do IRPJ e da CSLL. A sentença reconheceu os requisitos com base no contrato social, na licença sanitária e no alvará.",
+    "inicial": "Mandado de segurança contra o Delegado da Receita Federal do Brasil em Campo Grande (indicado na emenda à inicial).",
+    "decisao_recorrida": "Sentença ID 340496838 (23/05/2025): concedeu a segurança para declarar o direito da impetrante de aplicar os percentuais de 8% e 12% na apuração do IRPJ e da CSLL, com ressarcimento das custas.",
+    "recurso": "União (Fazenda Nacional) (ID 340496844, 23/09/2025): ausência de prova pré-constituída do preenchimento cumulativo dos requisitos (serviço hospitalar efetivo, sociedade empresária e normas da Anvisa), embora reconheça dispensa de recorrer quanto à tese do REsp 1.116.399/BA.",
+    "resposta": "Contrarrazões da impetrante com documentos (ID 340496845).",
+    "parecer": "MPF ID 340691228: Ausência de interesse que justifique intervenção",
+    "memoriais": "Não consta",
+    "representacao": "Advogado Rodrigo Martins Alcântara (OAB/MS 8.158).",
+    "preparo": "União (Fazenda Nacional): Isento (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação da União e remessa necessária em mandado de segurança · IRPJ e CSLL: base de cálculo presumida reduzida (8% e 12%) para serviços hospitalares e de diagnóstico por imagem (artigo 15, § 1º, III, a, e artigo 20 da Lei 9.249/1995) · segurança concedida",
+     "sintese": "IPEDI MS Instituto do Pantanal Especializado em Diagnóstico por Imagem Ltda., clínica de radiologia e ultrassom, pede a base de cálculo presumida reduzida do IRPJ e da CSLL. A sentença reconheceu os requisitos com base no contrato social, na licença sanitária e no alvará.",
+     "questoes": "1) Base de cálculo presumida reduzida do IRPJ e da CSLL para serviços de diagnóstico por imagem; 2) prova pré-constituída dos requisitos.",
+     "rel": {
+      "razoes": "União (Fazenda Nacional) (ID 340496844, 23/09/2025): ausência de prova pré-constituída do preenchimento cumulativo dos requisitos (serviço hospitalar efetivo, sociedade empresária e normas da Anvisa), embora reconheça dispensa de recorrer quanto à tese do REsp 1.116.399/BA.",
+      "contrarrazoes": "Contrarrazões da impetrante com documentos (ID 340496845)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "340496838",
+      "juizo": "Mandado de segurança 5008585-36.2024.4.03.6000 (4ª Vara Federal de Campo Grande)",
+      "dispositivo": "concedeu a segurança para declarar o direito da impetrante de aplicar os percentuais de 8% e 12% na apuração do IRPJ e da CSLL, com ressarcimento das custas."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2024-08-08",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "União (Fazenda Nacional)",
+       "tipo": "Apelação",
+       "id": "340496844",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "340496838",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Documento: licença sanitária",
+       "id": "340496729",
+       "data": "2024-08-08",
+       "pje": {
+        "tipo": "Outros Documentos",
+        "descricao": "Licença sanitária",
+        "paginas": 1,
+        "sem_texto": true
+       }
+      },
+      {
+       "desc": "Documento: alvará de localização",
+       "id": "340496783",
+       "data": "2024-08-08",
+       "pje": {
+        "tipo": "Outros Documentos",
+        "descricao": "Alvará de localização",
+        "paginas": 1
+       },
+       "trecho": "Prefeitura Municipal de Campo Grande Secretaria Municipal de Finanças e Planejamento Divisão de Cadastro Econômico CÓDIGO DE AUTENTICIDADE: EMITIDO EM: 03/07/2024 2D764129435EC07BD9FFEA01242D84FF 1 / 1 ALVARÁ DE LOCALIZAÇÃO E FUNCIONAMENTO Inscrição Municipal CPF/CNPJ Data de Abertura Nº de …"
+      },
+      {
+       "desc": "Decisão: emenda para indicar a autoridade coatora",
+       "id": "340496828",
+       "data": "2024-11-29",
+       "pje": {
+        "tipo": "Decisão"
+       },
+       "trecho": "12.016/2009.Considerando que o processo é eletrônico, intime-se, concomitantemente, o Ministério Público Federal para manifestação (art. 12 da Lei do Mandado de Segurança).Intimem-se. Campo Grande, MS, 29 de novembro de 2024. GUILHERME VICENTE LOPES LEITESJUIZ FEDERAL SUBSTITUTO"
+      },
+      {
+       "desc": "Sentença: segurança concedida",
+       "id": "340496838",
+       "data": "2025-05-23",
+       "nota": "Sentença ID 340496838 (23/05/2025): concedeu a segurança para declarar o direito da impetrante de aplicar os percentuais de 8% e 12% na apuração do IRPJ e da CSLL, com ressarcimento das custas.",
+       "pje": {
+        "tipo": "Sentença"
+       },
+       "trecho": "concedo a segurança para (1) declarar o direito líquido e certo da impetrante em aplicar o percentual de 8% e de 12% para apuração do IRPJ e da CSLL, respectivamente; (2) a Fazenda Nacional é isenta de custas processuais (art. 4º, I, da Lei n. 9.289/1996), mas deverá ressarcir a impetrante pelas …"
+      },
+      {
+       "desc": "Apelação da União",
+       "id": "340496844",
+       "data": "2025-09-23",
+       "nota": "União (Fazenda Nacional) (ID 340496844, 23/09/2025): ausência de prova pré-constituída do preenchimento cumulativo dos requisitos (serviço hospitalar efetivo, sociedade empresária e normas da Anvisa), embora reconheça dispensa de recorrer quanto à tese do REsp 1.116.399/BA.",
+       "pje": {
+        "tipo": "Apelação",
+        "paginas": 18
+       },
+       "trecho": "Ante o exposto, a União requer seja dado provimento integral ao recurso para o fim de reformar a sentença de piso, julgando-se improcedentes os pleitos da parte autora, com a consequente denegação da segurança. Termos em que pede deferimento. 23 de setembro de 2025. HELEN MARIA FERREIRA Procuradora …"
+      },
+      {
+       "desc": "Contrarrazões da impetrante",
+       "id": "340496845",
+       "data": "2025-10-14",
+       "nota": "Contrarrazões da impetrante com documentos (ID 340496845).",
+       "pje": {
+        "tipo": "Contrarrazões de Recurso",
+        "paginas": 14
+       },
+       "trecho": "Diante do exposto , requer : 1. S eja acatada a preliminar de inova ç ão recursal , não conhec endo o re curso; RODRIGO MARTINS ALCÂNTARA OAB/MS 8.158 Rua Coronel Cacildo Arantes, n. 915, B. Chácara Cachoeira , Campo Grande – MS Tel. 67 3045 - 2076 /99611 - 3186 , Email: rodrigoalcan35@gmail.com 2. …"
+      },
+      {
+       "desc": "Parecer do MPF (sem intervenção)",
+       "id": "340691228",
+       "data": "2025-10-23",
+       "nota": "MPF ID 340691228: Ausência de interesse que justifique intervenção",
+       "pje": {
+        "tipo": "Parecer \"Falta de Interesse\"",
+        "descricao": "MP",
+        "paginas": 2
+       },
+       "trecho": "MINISTÉRIO PÚBLICO FEDERAL PROCURADORIA REGIONAL DA REPÚBLICA DA 3ª REGIÃO GABINETE DE PROCURADOR REGIONAL DA REPÚBLICA EGRÉGIO TRIBUNAL REGIONAL FEDERAL DA TERCEIRA REGIÃO APELAÇÃO / REMESSA NECESSÁRIA PROCESSO N. 5008585-36.2024.4.03.6000 APELANTE: DELEGADO DA RECEITA FEDERAL DO BRASIL EM CAMPO …"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 340496838 · 23/05/2025 — sentença (dispositivo a conferir) | última peça: Substabelecimento (apelado) · ID 374849974 · 20/05/2026 | última movimentação: 20/05/2026 15:33 · Juntada de Petição de substabelecimento · REsp 1.116.399/BA (repetitivo): interpretação objetiva de \"serviços hospitalares\" · Requisitos da Lei 11.727/2008: sociedade empresária e normas da Anvisa · Licença sanitária e alvará na inicial · Documentos juntados com as contrarrazões (notas fiscais e relação de funcionários): artigo 435 do CPC e prova pré-constituída",
+     "assuntoDet": "IRPJ/CSLL — base de cálculo reduzida para serviços hospitalares (REsp 1.116.399/BA)",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Mandado de segurança",
+     "parecer": "Com parecer",
+     "idParecer": "340691228",
+     "parecerSentido": "Ausência de interesse que justifique intervenção"
+    }
+   },
+   "observacao_triagem": "Apelação da União e remessa necessária da sentença que assegurou ao IPEDI MS a base presumida de 8% (IRPJ) e 12% (CSLL) por serviços de diagnóstico por imagem. A União não impugna a tese do REsp 1.116.399/BA, mas a prova dos requisitos.",
+   "origem_lote": "adp-mono-terminativas"
+  },
+  {
+   "sessao": "",
+   "item": 7,
+   "processo": "5000156-25.2025.4.03.6007",
+   "recurso": "Apelação e remessa necessária",
+   "partes": "UNIAO FEDERAL - FAZENDA NACIONAL x CLINICA BISMARCK SERVICOS MEDICOS E HOSPITALARES LTDA",
+   "exequente": "",
+   "executado": "",
+   "assunto": "Redução de Alíquota IR/CSLL - Serviços Hospitalares",
+   "assunto_detalhado": "",
+   "grupo": "t13",
+   "tipo_caso": "Apelação da União e remessa necessária em mandado de segurança · IRPJ e CSLL: base de cálculo presumida reduzida (8% e 12%) para serviços hospitalares (artigo 15, § 1º, III, a, e artigo 20 da Lei 9.249/1995) · liminar indeferida · segurança concedida em parte, excluídas consultas e atividades administrativas",
+   "resultado": "Ato a proferir: apelação da União (ID 345436127) e remessa necessária da sentença ID 345436121; contrarrazões (ID 345436129); MPF sem intervenção (ID 346317009) ‖ Proposta pelos precedentes: Voto ou monocrática: conferir a prova pré-constituída dos requisitos; manter a exclusão das consultas [VALIDAR] [VALIDAR: Prova da sociedade empresária e da licença sanitária]",
+   "modelo": "Origem: lote adp-remessas · não pautado",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Prova pré-constituída a examinar: voto.",
+   "peculiaridades": "",
+   "peculiaridades_relator": "",
+   "orientacao": "Prova pré-constituída a examinar: voto.",
+   "equipe": {
+    "minuta": "",
+    "correcao": "",
+    "situacao": "A minutar"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {
+    "ato": "Voto · Prova pré-constituída a examinar: voto.",
+    "materia": "Tributário — IRPJ/CSLL (serviços hospitalares)",
+    "origem": "Mandado de segurança 5000156-25.2025.4.03.6007 (1ª Vara Federal de Coxim)",
+    "decisao_agravada": "Sentença ID 345436121 (04/11/2025)",
+    "recurso": "apelação de União (Fazenda Nacional) (ID 345436127, 11/11/2025) · remessa necessária",
+    "preparo": "União (Fazenda Nacional): Isento (ente público)",
+    "monocratica": "Possível (artigo 932, IV, b, do CPC): REsp 1.116.399/BA, se a prova pré-constituída bastar",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "União (Fazenda Nacional): Isento (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
+   "ajustes": [],
+   "pendencias": [],
+   "minuta": false,
+   "classe": "ApelRemNec",
+   "tarefa": "Analisar tipo de decisão a proferir",
+   "etiquetas": "2ª Seção; Redução Tributária - Serviços Hospitalares",
+   "chegada": "09/03/2026",
+   "situacao_atual": {
+    "ultima_movimentacao": "08/06/2026 16:08 · Juntada de Petição de petição intercorrente",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Sentença · ID 345436121 · 04/11/2025 — sentença: concedeu em parte a segurança; sujeita a reexame necessário",
+    "ultima_peca": "Petição intercorrente (apelado) · ID 379065490 · 08/06/2026",
+    "ultima_informacao": "Informação · ID 345436139 · 04/12/2025",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 345436121 · 04/11/2025 — sentença: concedeu em parte a segurança; sujeita a reexame necessário | última peça: Petição intercorrente (apelado) · ID 379065490 · 08/06/2026 | última movimentação: 08/06/2026 16:08 · Juntada de Petição de petição intercorrente"
+   },
+   "teor": {
+    "sintese_fatica": "Clínica Bismarck Serviços Médicos e Hospitalares Ltda. pede a base presumida reduzida do IRPJ e da CSLL para seus serviços hospitalares. A liminar foi indeferida e a sentença concedeu em parte a segurança.",
+    "inicial": "Mandado de segurança contra o Delegado da Receita Federal do Brasil em Campo Grande.",
+    "decisao_recorrida": "Sentença ID 345436121 (04/11/2025): concedeu em parte a segurança para assegurar a apuração do IRPJ e da CSLL pelas bases de 8% e 12% sobre a receita dos serviços hospitalares, excluídas as receitas de consultas e de atividades administrativas [VALIDAR demais itens].",
+    "recurso": "União (Fazenda Nacional) (ID 345436127, 11/11/2025): ausência de prova pré-constituída do preenchimento dos requisitos (sociedade empresária, normas da Anvisa e serviços hospitalares efetivos) [VALIDAR teor].",
+    "resposta": "Contrarrazões da impetrante (ID 345436129).",
+    "parecer": "MPF ID 346317009: Ausência de interesse que justifique intervenção",
+    "memoriais": "Não consta",
+    "representacao": "Impetrante assistida por advogado constituído [VALIDAR].",
+    "preparo": "União (Fazenda Nacional): Isento (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelação da União e remessa necessária em mandado de segurança · IRPJ e CSLL: base de cálculo presumida reduzida (8% e 12%) para serviços hospitalares (artigo 15, § 1º, III, a, e artigo 20 da Lei 9.249/1995) · liminar indeferida · segurança concedida em parte, excluídas consultas e atividades administrativas",
+     "sintese": "Clínica Bismarck Serviços Médicos e Hospitalares Ltda. pede a base presumida reduzida do IRPJ e da CSLL para seus serviços hospitalares. A liminar foi indeferida e a sentença concedeu em parte a segurança.",
+     "questoes": "1) Base de cálculo presumida reduzida do IRPJ e da CSLL para serviços hospitalares; 2) prova pré-constituída dos requisitos.",
+     "rel": {
+      "razoes": "União (Fazenda Nacional) (ID 345436127, 11/11/2025): ausência de prova pré-constituída do preenchimento dos requisitos (sociedade empresária, normas da Anvisa e serviços hospitalares efetivos) [VALIDAR teor].",
+      "contrarrazoes": "Contrarrazões da impetrante (ID 345436129)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "345436121",
+      "juizo": "Mandado de segurança 5000156-25.2025.4.03.6007 (1ª Vara Federal de Coxim)",
+      "dispositivo": "concedeu em parte a segurança para assegurar a apuração do IRPJ e da CSLL pelas bases de 8% e 12% sobre a receita dos serviços hospitalares, excluídas as receitas de consultas e de atividades administrativas [VALIDAR demais itens]."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2025-07-08",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "União (Fazenda Nacional)",
+       "tipo": "Apelação",
+       "id": "345436127",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "345436121",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Decisão: liminar indeferida",
+       "id": "345436114",
+       "data": "2025-07-15",
+       "pje": {
+        "tipo": "Decisão"
+       },
+       "trecho": "Posto isso, INDEFIRO o pedido de concessão da liminar.Notifique-se a autoridade impetrada para prestar as informações pertinentes, no prazo legal.Dê-se ciência do feito ao órgão de representação judicial da pessoa jurídica interessada, nos termos do artigo 7º, II, da Lei nº. 12.016, de 7 de agosto …"
+      },
+      {
+       "desc": "Sentença: segurança concedida em parte",
+       "id": "345436121",
+       "data": "2025-11-04",
+       "nota": "Sentença ID 345436121 (04/11/2025): concedeu em parte a segurança para assegurar a apuração do IRPJ e da CSLL pelas bases de 8% e 12% sobre a receita dos serviços hospitalares, excluídas as receitas de consultas e de atividades administrativas [VALIDAR demais itens].",
+       "pje": {
+        "tipo": "Sentença"
+       },
+       "trecho": "III - DISPOSITIVOAnte o exposto, nos termos do artigo 487, inciso I, do CPC:a) CONCEDO PARCIALMENTE A SEGURANÇA para assegurar o direito líquido e certo da impetrante de apurar a base de cálculo conforme os percentuais de 8% (oito por cento), no caso do IRPJ, e de 12% (doze por cento), no caso de …"
+      },
+      {
+       "desc": "Apelação da União",
+       "id": "345436127",
+       "data": "2025-11-11",
+       "nota": "União (Fazenda Nacional) (ID 345436127, 11/11/2025): ausência de prova pré-constituída do preenchimento dos requisitos (sociedade empresária, normas da Anvisa e serviços hospitalares efetivos) [VALIDAR teor].",
+       "pje": {
+        "tipo": "Apelação",
+        "paginas": 22
+       },
+       "trecho": "Ante o exposto, a União requer seja dado provimento ao presente recurso, reformando-se a sentença proferida, para que seja denegada a Segurança, vez que não foram comprovados os requisitos necessários para aplicação do percentual de 8% e de 12% para apuração do IRPJ e da CSLL. Nestes termos, pede …"
+      },
+      {
+       "desc": "Contrarrazões da impetrante",
+       "id": "345436129",
+       "data": "2025-11-27",
+       "nota": "Contrarrazões da impetrante (ID 345436129).",
+       "pje": {
+        "tipo": "Contrarrazões de Recurso",
+        "paginas": 29
+       },
+       "trecho": "Ante o exposto, nos termos do artigo 487, inciso I, do CPC: a) CONCEDO PARCIALMENTE A SEGURANÇA para assegurar o direito líquido e certo da impetrante de apurar a base de cálculo conforme os percentuais de 8% (oito por cento), no caso do IRPJ, e de 12% (doze por cento), no caso de CSLL, excluídas …"
+      },
+      {
+       "desc": "Parecer do MPF (sem intervenção)",
+       "id": "346317009",
+       "data": "2025-12-11",
+       "nota": "MPF ID 346317009: Ausência de interesse que justifique intervenção",
+       "pje": {
+        "tipo": "Parecer \"Falta de Interesse\"",
+        "descricao": "MP",
+        "paginas": 3
+       },
+       "trecho": "Diante do exposto, tratando-se de matéria de cunho patrimonial e inexistindo na espécie interesse público ou social a justificar a intervenção do órgão ministerial, manifesta-se o Ministério Público Federal pelo regular prosseguimento do feito. Página 2 de 3 Documento assinado via Token …"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 345436121 · 04/11/2025 — sentença: concedeu em parte a segurança; sujeita a reexame necessário | última peça: Petição intercorrente (apelado) · ID 379065490 · 08/06/2026 | última movimentação: 08/06/2026 16:08 · Juntada de Petição de petição intercorrente · REsp 1.116.399/BA (repetitivo): interpretação objetiva de \"serviços hospitalares\"; requisitos da Lei 11.727/2008 (sociedade empresária e normas da Anvisa) · Mesmo grupo de 5008585-36 (diagnóstico por imagem) · Linha da 3ª Turma (ApCiv 5002425-13.2020.4.03.6104, 23/04/2021)",
+     "assuntoDet": "IRPJ/CSLL — base de cálculo reduzida para serviços hospitalares (REsp 1.116.399/BA)",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Tempestivo",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Sem preliminares",
+     "repres": "Dispensada (procurador público)",
+     "midias": "Não se aplica",
+     "mpf": "Mandado de segurança",
+     "parecer": "Com parecer",
+     "idParecer": "346317009",
+     "parecerSentido": "Ausência de interesse que justifique intervenção"
+    }
+   },
+   "observacao_triagem": "Apelação da União e remessa necessária da sentença que assegurou à Clínica Bismarck a base presumida reduzida do IRPJ e da CSLL sobre serviços hospitalares, excluídas consultas e atividades administrativas.",
+   "origem_lote": "adp-mono-terminativas"
+  },
+  {
+   "sessao": "",
+   "item": 8,
+   "processo": "5002052-46.2024.4.03.6005",
+   "recurso": "Remessa necessária",
+   "partes": "ALISON DA SILVA ARAUJO x UNIÃO FEDERAL",
+   "exequente": "",
+   "executado": "",
+   "assunto": "Inscrição / Documentação",
+   "assunto_detalhado": "",
+   "grupo": "t13",
+   "tipo_caso": "Remessa necessária em mandado de segurança · concurso para Agente Federal de Execução Penal (DEPEN, Edital 1/2020) · candidato com deficiência aprovado no curso de formação por liminar depois revogada em outro mandado de segurança · nomeação e posse determinadas · segurança concedida · União não recorre",
+   "resultado": "Ato a proferir: remessa necessária da sentença ID 319551760, sem recurso voluntário; a União informou que não recorrerá (ID 319551766); MPF pelo desprovimento (ID 319966498) ‖ Proposta pelos precedentes: Voto ou monocrática: desprovimento, se confirmada a aprovação em todas as etapas; avaliar se a manifestação da União (ID 319551766) atrai o artigo 19, § 2º, da Lei 10.522/2002 [VALIDAR fundamento e paradigma] [VALIDAR: Efeito da manifestação da União de não recorrer (ID 319551766); Cumprimento da nomeação e posse]",
+   "modelo": "Origem: lote adp-remessas · não pautado",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Sentença fundada em fato consumado pode contrariar o Tema 476/STF: a triagem recomenda voto.",
+   "peculiaridades": "",
+   "peculiaridades_relator": "",
+   "orientacao": "Sentença fundada em fato consumado pode contrariar o Tema 476/STF: a triagem recomenda voto.",
+   "equipe": {
+    "minuta": "",
+    "correcao": "",
+    "situacao": "A minutar"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {
+    "ato": "Voto · Sentença fundada em fato consumado pode contrariar o Tema 476/STF: a triagem recomenda voto.",
+    "materia": "Administrativo — concurso público",
+    "origem": "Mandado de segurança 5002052-46.2024.4.03.6005 (1ª Vara Federal de Ponta Porã)",
+    "decisao_agravada": "Sentença ID 319551760 (17/02/2025)",
+    "recurso": "Remessa necessária · sentença de 17/02/2025",
+    "preparo": "Não se aplica (remessa necessária)",
+    "monocratica": "Possível, se houver paradigma ou se a manifestação da União afastar a remessa [VALIDAR]",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "NÃO SE APLICA · remessa necessária · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
+   "ajustes": [],
+   "pendencias": [
+    "[Triagem terminativas] Sentença fundada em fato consumado (CFP feito por liminar de outro MS, depois extinto): risco de contrariar o Tema 476/STF (RE 608.482). Recomenda-se voto, com exame do mérito do ato (prazo de 1 dia para documentos da investigação social)."
+   ],
+   "minuta": false,
+   "classe": "RemNecCiv",
+   "tarefa": "Analisar tipo de decisão a proferir · prioridade",
+   "etiquetas": "2ª Seção; apenas remessa; Concurso Público; Cotas; MS",
+   "chegada": "04/11/2026",
+   "situacao_atual": {
+    "ultima_movimentacao": "20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Sentença · ID 319551760 · 17/02/2025 — sentença: concedeu a segurança; sujeita a reexame necessário",
+    "ultima_peca": "Parecer de Mérito (MPF) · ID 319966498 · 03/04/2025",
+    "ultima_informacao": "Informação · ID 319551767 · 31/03/2025",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 319551760 · 17/02/2025 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Parecer de Mérito (MPF) · ID 319966498 · 03/04/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária"
+   },
+   "teor": {
+    "sintese_fatica": "Alison da Silva Araújo, inscrito como pessoa com deficiência (visão monocular) no concurso do DEPEN, foi eliminado por não atender, em um dia, a exigência de nova documentação de investigação social; cursou a formação por liminar em outro mandado de segurança (5001481-75.2024.4.03.6005), extinto sem resolução do mérito, e não foi nomeado.",
+    "inicial": "Mandado de segurança contra o Secretário Nacional de Políticas Penais do Ministério da Justiça e Segurança Pública.",
+    "decisao_recorrida": "Sentença ID 319551760 (17/02/2025): concedeu a segurança e deferiu a liminar para determinar a nomeação e a posse do impetrante no cargo de Agente Federal de Execução Penal (hoje Policial Penal Federal), conforme o Edital 1 - DEPEN, de 04/05/2020.",
+    "recurso": "Sem recurso voluntário; remessa necessária.",
+    "resposta": "Não consta.",
+    "parecer": "MPF ID 319966498: Desprovimento da remessa necessária",
+    "memoriais": "Não consta",
+    "representacao": "Impetrante assistido por advogado constituído [VALIDAR].",
+    "preparo": "Não se aplica."
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Remessa Necessária",
+     "subassuntos": "Remessa necessária em mandado de segurança · concurso para Agente Federal de Execução Penal (DEPEN, Edital 1/2020) · candidato com deficiência aprovado no curso de formação por liminar depois revogada em outro mandado de segurança · nomeação e posse determinadas · segurança concedida · União não recorre",
+     "sintese": "Alison da Silva Araújo, inscrito como pessoa com deficiência (visão monocular) no concurso do DEPEN, foi eliminado por não atender, em um dia, a exigência de nova documentação de investigação social; cursou a formação por liminar em outro mandado de segurança (5001481-75.2024.4.03.6005), extinto sem resolução do mérito, e não foi nomeado.",
+     "questoes": "1) Direito à nomeação e posse de candidato aprovado em todas as etapas, inclusive no curso de formação feito por liminar revogada; 2) eliminação por exigência documental com prazo exíguo.",
+     "rel": {
+      "razoes": "Sem recurso voluntário; remessa necessária.",
+      "contrarrazoes": "Não consta."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "319551760",
+      "juizo": "Mandado de segurança 5002052-46.2024.4.03.6005 (1ª Vara Federal de Ponta Porã)",
+      "dispositivo": "concedeu a segurança e deferiu a liminar para determinar a nomeação e a posse do impetrante no cargo de Agente Federal de Execução Penal (hoje Policial Penal Federal), conforme o Edital 1 - DEPEN, de 04/05/2020."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2024-10-05",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "319551760",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Sentença: segurança concedida (nomeação e posse)",
+       "id": "319551760",
+       "data": "2025-02-17",
+       "nota": "Sentença ID 319551760 (17/02/2025): concedeu a segurança e deferiu a liminar para determinar a nomeação e a posse do impetrante no cargo de Agente Federal de Execução Penal (hoje Policial Penal Federal), conforme o Edital 1 - DEPEN, de 04/05/2020.",
+       "pje": {
+        "tipo": "Sentença"
+       },
+       "trecho": "publicado em 11/11/2022)”Assim, presente o direito líquido e certo do impetrante, cabível a concessão da segurança.Ante o exposto, CONCEDO A SEGURANÇA, resolvendo o mérito do processo na forma do artigo 487, I, do CPC, e, presentes o fumus boni iuris e periculum in mora, DEFIRO O PEDIDO LIMINAR, …"
+      },
+      {
+       "desc": "Manifestação da União: não recorrerá",
+       "id": "319551766",
+       "data": "2025-03-28",
+       "nota": "Sem recurso voluntário · União não recorrerá (ID 319551766) · Nomeação e posse determinadas na sentença · MPF pelo desprovimento (ID 319966498) · Candidato com deficiência (visão monocular)",
+       "pje": {
+        "tipo": "Petição intercorrente"
+       },
+       "trecho": "ADVOCACIA-GERAL DA UNIÃO PROCURADORIA-GERAL DA UNIÃO PROCURADORIA-REGIONAL DA UNIÃO DA 3ª REGIÃO NÚCLEO ESPECIALIZADO (PRU3R/CORESP/NUESP) R. BELA CINTRA, 657, 10º/11º/12º ANDAR, CONSOLAÇÃO, SÃO PAULO/SP - CEP 01415-003 - TELEFONE (11) 3506 2800/2900 EXCELENTÍSSIMO(A) SENHOR(A) JUIZ(A) DO(A) 1ª …"
+      },
+      {
+       "desc": "Parecer do MPF (desprovimento)",
+       "id": "319966498",
+       "data": "2025-04-03",
+       "nota": "MPF ID 319966498: Desprovimento da remessa necessária · Sem recurso voluntário · União não recorrerá (ID 319551766) · Nomeação e posse determinadas na sentença · MPF pelo desprovimento (ID 319966498) · Candidato com deficiência (visão monocular)",
+       "pje": {
+        "tipo": "Parecer de Mérito",
+        "descricao": "MP",
+        "paginas": 3
+       },
+       "trecho": "Ante o exposto, manifesta-s e esta PRR-3.ª Região pelo desprovimento da remessa necessária. (Datado e assinado digitalmente) José Ricardo Meirelles Procurador Regional da República LMN 3 Documento assinado via Token digitalmente por JOSE RICARDO MEIRELLES, em 03/04/2025 17:19. Para verificar a …"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 319551760 · 17/02/2025 — sentença: concedeu a segurança; sujeita a reexame necessário | última peça: Parecer de Mérito (MPF) · ID 319966498 · 03/04/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Sem recurso voluntário · União não recorrerá (ID 319551766) · Nomeação e posse determinadas na sentença · MPF pelo desprovimento (ID 319966498) · Candidato com deficiência (visão monocular)",
+     "assuntoDet": "Concurso público — nomeação e posse de candidato aprovado no curso de formação (Policial Penal Federal)",
+     "papeis": [
+      "Autor(a)",
+      "Réu/ré"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não se aplica",
+     "preparo": "Não se aplica",
+     "prelim": "Sem preliminares",
+     "repres": "Regular",
+     "midias": "Não se aplica",
+     "mpf": "Mandado de segurança",
+     "parecer": "Com parecer",
+     "idParecer": "319966498",
+     "parecerSentido": "Desprovimento da remessa necessária"
+    }
+   },
+   "observacao_triagem": "Remessa necessária da sentença que determinou a nomeação e a posse de Alison da Silva Araújo como Agente Federal de Execução Penal, aprovado no curso de formação por força de liminar em outro mandado de segurança, depois extinto. A União informou que não recorrerá. O MPF opinou pelo desprovimento.",
+   "origem_lote": "adp-mono-terminativas"
+  },
+  {
+   "sessao": "",
+   "item": 9,
+   "processo": "5005056-43.2023.4.03.6000",
+   "recurso": "Apelação e remessa necessária",
+   "partes": "ESTADO DE MATO GROSSO DO SUL x CONSELHO REGIONAL DE MEDICINA EST DE MATO GROSSO DO SUL",
+   "exequente": "",
+   "executado": "",
+   "assunto": "Questões Funcionais",
+   "assunto_detalhado": "",
+   "grupo": "t13",
+   "tipo_caso": "Apelações do CRM/MS e do Estado de Mato Grosso do Sul e remessa necessária em ação declaratória · nulidade da decisão plenária do CRM/MS que aprovou o Parecer 13/2023 (atendimentos do IMOL/MS na Casa da Mulher Brasileira e no CEPOL/MS) · tutela de urgência deferida · pedido julgado procedente",
+   "resultado": "Ato a proferir: apelações do CRM/MS (ID 346218493) e do Estado (ID 346218500) e remessa necessária da sentença ID 346218488; contrarrazões (ID 346218502) ‖ Proposta pelos precedentes: Voto: não conhecer da apelação do Estado; rejeitar ou acolher a preliminar de litisconsórcio do CFM; no mérito, examinar o Parecer 13/2023 à luz do artigo 95 do Código de Ética Médica [VALIDAR] [VALIDAR: Apelação do Estado (peça de outro processo); Admissibilidade do Parecer CFM 14/2025 como documento novo; Intervenção do MPF]",
+   "modelo": "Origem: lote adp-remessas · não pautado",
+   "variacoes": [
+    "VAL"
+   ],
+   "observacao": "Preliminar de litisconsórcio do CFM e mérito (Parecer 13/2023): voto.",
+   "peculiaridades": "",
+   "peculiaridades_relator": "",
+   "orientacao": "Preliminar de litisconsórcio do CFM e mérito (Parecer 13/2023): voto.",
+   "equipe": {
+    "minuta": "",
+    "correcao": "",
+    "situacao": "A minutar"
+   },
+   "pecas": [],
+   "mpf": "",
+   "triagem": {
+    "ato": "Voto · Preliminar de litisconsórcio do CFM e mérito (Parecer 13/2023): voto.",
+    "materia": "Administrativo — conselho profissional (CRM)",
+    "origem": "Procedimento comum 5005056-43.2023.4.03.6000 (1ª Vara Federal de Campo Grande)",
+    "decisao_agravada": "Sentença ID 346218488 (21/08/2025)",
+    "recurso": "apelação de CRM/MS (ID 346218493, 30/09/2025) e apelação de Estado de Mato Grosso do Sul (ID 346218500, 08/10/2025) · remessa necessária",
+    "preparo": "CRM/MS: Isento (autarquia); Estado de Mato Grosso do Sul: Isento (ente público)",
+    "monocratica": "Parcial: não conhecimento da apelação do Estado (artigo 932, III, do CPC)",
+    "analisado_em": "21/11/2026",
+    "conf_preparo": "CRM/MS: Isento (autarquia); Estado de Mato Grosso do Sul: Isento (ente público) · conferido em 21/11/2026",
+    "conf_prevencao": "Redistribuição à Turma Regional (Resolução 33/2025) · conferido em 21/11/2026"
+   },
+   "ajustes": [],
+   "pendencias": [],
+   "minuta": false,
+   "classe": "ApelRemNec",
+   "tarefa": "Analisar tipo de decisão a proferir",
+   "etiquetas": "2ª Seção",
+   "chegada": "04/11/2026",
+   "situacao_atual": {
+    "ultima_movimentacao": "20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária",
+    "mov_fonte": "linha do tempo do PJe (extração de 21/11/2026)",
+    "ultima_decisao": "Sentença · ID 346218488 · 21/08/2025 — sentença: julgou procedente o pedido; sujeita a reexame necessário",
+    "ultima_peca": "Contrarrazões (advogado de parte) · ID 346218502 · 24/11/2025",
+    "ultima_informacao": "Certidão · ID 349775037 · 12/01/2026",
+    "aviso": "Conferido em 21/11/2026: decisões e peças pelo inteiro teor dos autos extraídos; movimentação pela linha do tempo do PJe",
+    "resumo": "► Situação em 21/11/2026: última decisão: ID 346218488 · 21/08/2025 — sentença: julgou procedente o pedido; sujeita a reexame necessário | última peça: Contrarrazões (advogado de parte) · ID 346218502 · 24/11/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária"
+   },
+   "teor": {
+    "sintese_fatica": "O Estado de Mato Grosso do Sul impugna decisão do CRM/MS que considerou antiética a realização de perícias médico-legais do IMOL na Casa da Mulher Brasileira e no CEPOL, por entender esses locais equiparados a dependências policiais. A tutela de urgência garantiu os atendimentos.",
+    "inicial": "Ação declaratória de nulidade cumulada com obrigação de fazer contra o CRM/MS.",
+    "decisao_recorrida": "Sentença ID 346218488 (21/08/2025): ratificou a tutela e julgou procedente o pedido para declarar nula a decisão plenária do CRM/MS que aprovou o Parecer 13/2023, de modo que não se oponha aos atendimentos do IMOL/MS na Casa da Mulher Brasileira e no CEPOL/MS.",
+    "recurso": "CRM/MS (ID 346218493, 30/09/2025): litisconsórcio passivo necessário do CFM; validade do Parecer 13/2023 (artigo 95 do Código de Ética Médica e Resolução CFM 1.635/2002); Parecer CFM 14/2025 juntado com o recurso. Estado de Mato Grosso do Sul (ID 346218500, 08/10/2025): razões dirigidas ao TJMS e a sentença de improcedência da Vara de Fazenda Pública, com honorários de R$ 500,00, estranhas a este processo.",
+    "resposta": "Contrarrazões do Estado (ID 346218502).",
+    "parecer": "Não consta",
+    "memoriais": "Não consta",
+    "representacao": "Procurador autárquico Rodrigo Flávio Barboza da Silva (CRM/MS); Procurador do Estado João Bahia de Holanda Sousa (OAB/MS 29.080).",
+    "preparo": "CRM/MS: Isento (autarquia); Estado de Mato Grosso do Sul: Isento (ente público)"
+   },
+   "prontuario_triagem": {
+    "cartao": {
+     "tipoJ": "Apelação",
+     "subassuntos": "Apelações do CRM/MS e do Estado de Mato Grosso do Sul e remessa necessária em ação declaratória · nulidade da decisão plenária do CRM/MS que aprovou o Parecer 13/2023 (atendimentos do IMOL/MS na Casa da Mulher Brasileira e no CEPOL/MS) · tutela de urgência deferida · pedido julgado procedente",
+     "sintese": "O Estado de Mato Grosso do Sul impugna decisão do CRM/MS que considerou antiética a realização de perícias médico-legais do IMOL na Casa da Mulher Brasileira e no CEPOL, por entender esses locais equiparados a dependências policiais. A tutela de urgência garantiu os atendimentos.",
+     "questoes": "1) Admissibilidade da apelação do Estado; 2) litisconsórcio necessário do CFM; 3) validade do Parecer 13/2023 do CRM/MS.",
+     "rel": {
+      "razoes": "CRM/MS (ID 346218493, 30/09/2025): litisconsórcio passivo necessário do CFM; validade do Parecer 13/2023 (artigo 95 do Código de Ética Médica e Resolução CFM 1.635/2002); Parecer CFM 14/2025 juntado com o recurso. Estado de Mato Grosso do Sul (ID 346218500, 08/10/2025): razões dirigidas ao TJMS e a sentença de improcedência da Vara de Fazenda Pública, com honorários de R$ 500,00, estranhas a este processo.",
+      "contrarrazoes": "Contrarrazões do Estado (ID 346218502)."
+     },
+     "orig": {
+      "tipo": "Sentença",
+      "id": "346218488",
+      "juizo": "Procedimento comum 5005056-43.2023.4.03.6000 (1ª Vara Federal de Campo Grande)",
+      "dispositivo": "ratificou a tutela e julgou procedente o pedido para declarar nula a decisão plenária do CRM/MS que aprovou o Parecer 13/2023, de modo que não se oponha aos atendimentos do IMOL/MS na Casa da Mulher Brasileira e no CEPOL/MS."
+     },
+     "ai": {
+      "hip": "Não se aplica",
+      "efeito": "Não se aplica",
+      "id": ""
+     },
+     "adm": {
+      "prot": "2023-06-07",
+      "prazo": "15",
+      "dobro": false,
+      "ajg": false,
+      "dpu": false
+     },
+     "recursos": [
+      {
+       "parte": "CRM/MS",
+       "tipo": "Apelação",
+       "id": "346218493",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Estado de Mato Grosso do Sul",
+       "tipo": "Apelação",
+       "id": "346218500",
+       "contra": "Sentença"
+      },
+      {
+       "parte": "Remessa",
+       "tipo": "Remessa necessária",
+       "id": "346218488",
+       "contra": "Não se aplica"
+      }
+     ],
+     "pecas": [
+      {
+       "desc": "Decisão: tutela de urgência deferida",
+       "id": "346218438",
+       "data": "2023-06-07",
+       "pje": {
+        "tipo": "Decisão"
+       },
+       "trecho": "Ante o exposto, defiro os pedidos de tutela de urgência para suspender os efeitos da decisão plenária do CRM/MS, que aprovou o Parecer n. 13/2023, de modo a garantir o restabelecimento imediato dos atendimentos “do Instituto de Medicina e Odontologia Legal (IMOL/MS), no interior da Casa da Mulher …"
+      },
+      {
+       "desc": "Decisão: prova testemunhal deferida",
+       "id": "346218464",
+       "data": "2024-07-09",
+       "nota": "Apelação do Estado: falta de interesse e razões dissociadas (pedido de remessa ao TJMS; cita sentença de improcedência da 1ª Vara de Fazenda Pública da Comarca de Campo Grande) [VALIDAR] · Litisconsórcio necessário do CFM (preliminar) · Documento novo com a apelação: Parecer CFM 14/2025 (ID 346218496), artigo 1.014 do CPC [VALIDAR] · Prova testemunhal produzida (decisão ID 346218464) · Tema de interesse público: …",
+       "pje": {
+        "tipo": "Decisão"
+       },
+       "trecho": "indefiro o requerimento de participação do CFM na condição de litisconsorte passivo necessário.As partes são legítimas e estão devidamente representadas nos autos; e, presentes os pressupostos processuais, dou o feito por saneado.Da Produção ProbatóriaDefiro a juntada de novos documentos, atendido …"
+      },
+      {
+       "desc": "Sentença: pedido procedente",
+       "id": "346218488",
+       "data": "2025-08-21",
+       "nota": "Sentença ID 346218488 (21/08/2025): ratificou a tutela e julgou procedente o pedido para declarar nula a decisão plenária do CRM/MS que aprovou o Parecer 13/2023, de modo que não se oponha aos atendimentos do IMOL/MS na Casa da Mulher Brasileira e no CEPOL/MS.",
+       "pje": {
+        "tipo": "Sentença"
+       },
+       "trecho": "Ante o exposto, nos termos do artigo 487, I, do CPC, ratifico a decisão ID 290455189 e JULGO PROCEDENTE o pedido inicial para declarar nula a decisão plenária do CRM/MS, que aprovou o Parecer n. 13/2023, de modo que não mais se oponha aos atendimentos do Instituto de Medicina e Odontologia Legal …"
+      },
+      {
+       "desc": "Apelação do CRM/MS",
+       "id": "346218493",
+       "data": "2025-09-30",
+       "nota": "CRM/MS (ID 346218493, 30/09/2025): litisconsórcio passivo necessário do CFM; validade do Parecer 13/2023 (artigo 95 do Código de Ética Médica e Resolução CFM 1.635/2002); Parecer CFM 14/2025 juntado com o recurso. Estado de Mato Grosso do Sul (ID 346218500, 08/10/2025): razões dirigidas ao TJMS e a sentença de improcedência da Vara de Fazenda Pública, com honorários de R$ 500,00, estranhas a este processo.",
+       "pje": {
+        "tipo": "Apelação",
+        "paginas": 15
+       },
+       "trecho": "Ante o exposto : a) R equer seja admitido o presente recurso, de forma Tempestiva, com fulcro no exposto no item 1 ; b) Requer a juntada da competente guia e comprovante de pagamento das custas de preparo recursal (Anexos 4 e 5) ; c) O deferimento para Chamamento do Conselho Federal de Medicina …"
+      },
+      {
+       "desc": "Documento: Parecer CFM 14/2025",
+       "id": "346218496",
+       "data": "2025-09-30",
+       "nota": "Apelação do Estado: falta de interesse e razões dissociadas (pedido de remessa ao TJMS; cita sentença de improcedência da 1ª Vara de Fazenda Pública da Comarca de Campo Grande) [VALIDAR] · Litisconsórcio necessário do CFM (preliminar) · Documento novo com a apelação: Parecer CFM 14/2025 (ID 346218496), artigo 1.014 do CPC [VALIDAR] · Prova testemunhal produzida (decisão ID 346218464) · Tema de interesse público: …",
+       "pje": {
+        "tipo": "Documento Comprobatório",
+        "descricao": "Anexo 3 PARECER CFM Nº 14 2025",
+        "paginas": 5
+       },
+       "trecho": "Diante do exposto, e em consonância com as evidências apresentadas, este Conselho Federal conclui que o Parecer nº 13/2023 do CRM-MS está correto em sua análise e perfeitamente alinhado às normativas vigentes. Esse é o parecer, S.M.J. Brasília, 16 de julho de 2025 ALCINDO CERCI NETO Conselheiro …"
+      },
+      {
+       "desc": "Apelação do Estado",
+       "id": "346218500",
+       "data": "2025-10-08",
+       "nota": "CRM/MS (ID 346218493, 30/09/2025): litisconsórcio passivo necessário do CFM; validade do Parecer 13/2023 (artigo 95 do Código de Ética Médica e Resolução CFM 1.635/2002); Parecer CFM 14/2025 juntado com o recurso. Estado de Mato Grosso do Sul (ID 346218500, 08/10/2025): razões dirigidas ao TJMS e a sentença de improcedência da Vara de Fazenda Pública, com honorários de R$ 500,00, estranhas a este processo.",
+       "pje": {
+        "tipo": "Apelação",
+        "paginas": 7
+       },
+       "trecho": "Diante do exposto, requer o apelante: a) o recebimento e processamento da presente apelação; b) o seu regular encaminhamento ao Egrégio Tribunal de Justiça do Estado de Mato Grosso do Sul; c) no mérito, o provimento do recurso, para reformar a sentença no que diz respeito aos honorários …"
+      },
+      {
+       "desc": "Contrarrazões do Estado",
+       "id": "346218502",
+       "data": "2025-11-24",
+       "nota": "Contrarrazões do Estado (ID 346218502).",
+       "pje": {
+        "tipo": "Contrarrazões",
+        "descricao": "Contrarrazões de Apelação (1 e 2 Grau)",
+        "paginas": 13
+       },
+       "trecho": "Diante do exposto, o Estado requer seja rejeitado o pedido de litisconsórcio passivo necessário pretendido pelo apelante e seja desentranhado o Parecer n. 014/2025, trazido com as razões de apelação. Requer ainda seja negado provimento ao Recurso de Apelação interposto, mantendo-se integralmente a …"
+      }
+     ],
+     "pendencias": "",
+     "especificidades": "► Situação em 21/11/2026: última decisão: ID 346218488 · 21/08/2025 — sentença: julgou procedente o pedido; sujeita a reexame necessário | última peça: Contrarrazões (advogado de parte) · ID 346218502 · 24/11/2025 | última movimentação: 20/03/2026 18:00 · Redistribuído por sorteio em razão de criação de unidade judiciária · Apelação do Estado: falta de interesse e razões dissociadas (pedido de remessa ao TJMS; cita sentença de improcedência da 1ª Vara de Fazenda Pública da Comarca de Campo Grande) [VALIDAR] · Litisconsórcio necessário do CFM (preliminar) · Documento novo com a apelação: Parecer CFM 14/2025 (ID 346218496), artigo 1.014 do CPC [VALIDAR] · Prova testemunhal produzida (decisão ID 346218464) · Tema de interesse público: atendimento a mulheres vítimas de violência",
+     "assuntoDet": "CRM/MS — Parecer 13/2023: perícias do IMOL na Casa da Mulher Brasileira e no CEPOL",
+     "papeis": [
+      "Réu/ré",
+      "Autor(a)"
+     ]
+    },
+    "ctl": {
+     "tempest": "Não verificado",
+     "preparo": "Isento (ente público/MP)",
+     "prelim": "Há preliminares",
+     "repres": "Não verificado",
+     "midias": "Não se aplica",
+     "mpf": "Interesse público ou social (178, I)",
+     "parecer": "Não verificado"
+    }
+   },
+   "observacao_triagem": "Apelações do CRM/MS e do Estado e remessa necessária da sentença que anulou o Parecer 13/2023 do CRM/MS e garantiu as perícias do IMOL na Casa da Mulher Brasileira e no CEPOL. O CRM invoca litisconsórcio necessário do CFM; a apelação do Estado, vencedor, reproduz peça de outro processo.",
+   "origem_lote": "adp-mono-terminativas"
+  }
+ ]
+}
