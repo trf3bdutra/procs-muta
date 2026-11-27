@@ -1,0 +1,33 @@
+name: DataJud · consulta por lista
+# Só à mão: consulta no DataJud os números de um pedido (acervo/datajud/consultas/pedido-*.json)
+# e grava os movimentos em acervo/datajud/consultas/resultado-*.json. Serve ao saneamento da triagem.
+on:
+  workflow_dispatch:
+    inputs:
+      pedido:
+        description: 'Nome do pedido, sem extensão (ex.: saneamento-2026-11-27)'
+        required: true
+permissions:
+  contents: write
+jobs:
+  consultar:
+    if: github.event.repository.private
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - name: Consultar e gravar
+        env:
+          DATAJUD_API_KEY: ${{ secrets.DATAJUD_API_KEY }}
+          PEDIDO: ${{ inputs.pedido }}
+        run: |
+          case "$PEDIDO" in *[!A-Za-z0-9_-]*|'') echo 'Nome de pedido inválido.' >&2; exit 1;; esac
+          python3 scripts/datajud/consultar_lista.py "acervo/datajud/consultas/pedido-$PEDIDO.json" "acervo/datajud/consultas/resultado-$PEDIDO.json"
+          git config user.name 'datajud-consulta[bot]'
+          git config user.email 'datajud-consulta[bot]@users.noreply.github.com'
+          git add "acervo/datajud/consultas/resultado-$PEDIDO.json"
+          git commit -m "DataJud: consulta $PEDIDO"
+          for i in 1 2 3 4; do git push origin HEAD:main && exit 0; sleep $((i*3)); git pull --rebase origin main; done
+          exit 1
