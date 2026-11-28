@@ -1,12 +1,24 @@
 # Ementário · Ambiental
 
-Gerado do índice dos julgados do Relator (22 julgados, 22 assuntos). Teses resumidas pelo modelo a partir da ementa: conferir no inteiro teor antes de citar.
+Gerado do índice dos julgados do Relator (28 julgados, 28 assuntos). Teses resumidas pelo modelo a partir da ementa: conferir no inteiro teor antes de citar.
+
+## Homologação de desistência de agravo de instrumento contra decisão de origem (1)
+- Homologada a desistência do recurso, nos termos do artigo 998 do CPC, com comunicação ao Juízo de origem e arquivamento oportuno dos autos. — AI 5000830-42.2026.4.03.0001, 24/11/2026 · Outro
+
+## Execução fiscal de multa ambiental; prescrição intercorrente administrativa e proporcionalidade da multa (1)
+- Negado provimento ao agravo de instrumento por decisão monocrática, nos termos do artigo 932 do CPC. A tutela provisória exige a presença cumulativa da probabilidade do direito e do perigo de dano, bastando a ausência de um deles para o indeferimento. O texto recebido não traz a análise completa da cronologia, de modo que a tese registrada é apenas a conclusão de rejeição do recurso. — AI 5023085-94.2026.4.03.0000, 17/11/2026 · Desprovido
+
+## Auto de infração ambiental IBAMA; prescrição intercorrente; dosimetria da multa; embargos de declaração (1)
+-  — ApCiv 0006495-87.2017.4.03.6000, 14/11/2026 · 
 
 ## Autos de infração por manutenção de fauna silvestre em desacordo com autorização ambiental (1)
 - A falta de individualização de cada ave não invalida a autuação quando a irregularidade atinge todo o plantel que excede a licença. Cabe ao autuado provar a regularidade de cada espécime apreendido. — ApCiv 5000160-81.2019.4.03.6004, 26/10/2026 · Provido
 
 ## Embargos de declaração em ação anulatória de auto de infração por desmatamento sem autorização (1)
 -  — ApCiv 0001666-97.2016.4.03.6000, 26/10/2026 · 
+
+## Auto de infração do IBAMA por ranchos de pesca no entorno de reservatório hidrelétrico (1)
+- Em reservatório artificial anterior à MP 2.166-67/2001, a APP corresponde à faixa entre o nível máximo operativo normal e a cota máxima maximorum, e não à faixa de 100 metros. Sem prova dessa distância, a autuação é nula por vício de motivação. — ApelRemNec 0001634-25.2012.4.03.6003, 16/10/2026 · Desprovido · Tema 1.075/STF
 
 ## Pedido de efeito suspensivo à apelação em ação anulatória de Termo de Embargo ambiental (1)
 - O efeito suspensivo à apelação exige probabilidade de provimento do recurso ou risco de dano grave, demonstrados concretamente. Decisão administrativa favorável ao requerente não basta para evidenciar a probabilidade de provimento, e alegações genéricas de prejuízo não suprem o risco de dano. — SuspApel 5000578-39.2026.4.03.0001, 07/10/2026 · Desprovido
@@ -70,3 +82,9 @@ Gerado do índice dos julgados do Relator (22 julgados, 22 assuntos). Teses resu
 
 ## Homologação de acordo em ação civil pública sobre quilombo e Parque Estadual da Serra do Mar (1)
 - As partes firmaram acordo em ação civil pública sobre território quilombola sobreposto a parque estadual. O acordo prevê permanência de moradias, fóruns para plano de uso tradicional e recategorização parcial. A homologação foi decidida monocraticamente. — ApelRemNec 5000688-47.2018.4.03.6135, 20/12/2023 · Outro
+
+## Dano ambiental em APP e APA com cumulação de obrigações e indenização (1)
+- Obrigações de fazer e não fazer não impedem condenação cumulativa à indenização por dano ambiental. Cabível indenização pela ocupação irregular com supressão de mata nativa e impedimento da regeneração, considerando extensão e período do dano. — ApCiv 0000143-77.2012.4.03.6004, 14/04/2023 · Parcialmente provido
+
+## Ocupação irregular de praia em Parque Estadual; demolição e reparação de dano ambiental (1)
+- A obrigação de reparar dano ambiental é propter rem e recai sobre o atual proprietário ou possuidor, não se aplicando prescrição ou direito adquirido a construção irregular em área de preservação permanente. Extinção sem exame de mérito de ação anterior não gera coisa julgada. — ApCiv 0001135-12.2011.4.03.6121, 14/04/2023 · Desprovido

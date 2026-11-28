@@ -1,6 +1,6 @@
 # Ementário · Administrativo · servidor público
 
-Gerado do índice dos julgados do Relator (149 julgados, 137 assuntos). Teses resumidas pelo modelo a partir da ementa: conferir no inteiro teor antes de citar.
+Gerado do índice dos julgados do Relator (293 julgados, 271 assuntos). Teses resumidas pelo modelo a partir da ementa: conferir no inteiro teor antes de citar.
 
 ## Cumprimento individual de sentença coletiva. Vantagem de 28,86%. Acordo individual ou transação administrativa (6)
 - Registro de pagamentos da vantagem nas fichas financeiras comprova acordo individual e impede nova cobrança em cumprimento individual. Pagamentos presumem-se regulares, e a parte não provou ação judicial prévia. Honorários recursais fixados em 1% sobre a sucumbência. — ApCiv 5006719-90.2024.4.03.6000, 05/10/2026 · Desprovido · Tema 550/STJ, Tema 1.102/STJ
@@ -9,6 +9,18 @@ Gerado do índice dos julgados do Relator (149 julgados, 137 assuntos). Teses re
 - Registro de pagamentos da vantagem nas fichas financeiras comprova acordo individual e impede nova cobrança no cumprimento individual. Pagamento administrativo não se presume irregular sem prova específica. Mantém-se a extinção sem resolução do mérito, com honorários recursais de 1%. — ApCiv 5008090-89.2024.4.03.6000, 05/10/2026 · Desprovido · Tema 550/STJ, Tema 1.102/STJ
 - Registro de pagamentos da vantagem nas fichas financeiras comprova acordo individual, que impede nova cobrança em cumprimento individual. Pagamento administrativo presume-se regular, sem prova específica em contrário. Honorários recursais devidos pelo exequente. — ApCiv 5007809-36.2024.4.03.6000, 05/10/2026 · Desprovido · Tema 550/STJ, Tema 1.102/STJ
 - Registro de pagamentos da vantagem nas fichas financeiras do SIAPE comprova acordo individual e impede nova cobrança em cumprimento individual. Não se reabre pretensão exaurida por adesão a acordo administrativo. Cabe honorários recursais de 1% quando o recurso é desprovido. — ApCiv 5006736-29.2024.4.03.6000, 05/10/2026 · Desprovido · Tema 550/STJ, Tema 1.102/STJ
+
+## Cumprimento individual de sentença coletiva. Vantagem de 28,86%. Acordo administrativo (4)
+- Não há cerceamento de defesa quando o Juízo intima a parte para se manifestar sobre o pagamento administrativo antes de sentenciar. A coisa julgada coletiva não tem limitação territorial automática. O registro de pagamentos nas fichas financeiras comprova acordo individual e impede nova cobrança em cumprimento individual.</tese>
+<parameter name="resultado">Desprovido — ApCiv 5004631-11.2026.4.03.6000, 14/11/2026 ·  · Tema 1.075/STF, Tema 733/STF, Tema 550/STJ, Tema 1.102/STJ
+- Pagamentos da vantagem registrados em fichas financeiras do SIAPE comprovam acordo individual administrativo, que impede nova cobrança no cumprimento individual. Não se reabre pretensão exaurida por adesão a acordo administrativo, mesmo sem prova de transação homologada. — ApCiv 5010221-71.2023.4.03.6000, 26/10/2026 · Desprovido · Tema 550/STJ, Tema 1.102/STJ
+- A União é parte ilegítima quando a remuneração é paga por autarquia federal com autonomia. Registro de pagamentos da vantagem em fichas financeiras comprova acordo individual e impede nova cobrança em cumprimento individual. — ApCiv 5006040-90.2024.4.03.6000, 26/10/2026 · Desprovido · Tema 550/STJ, Tema 1.102/STJ
+-  — ApCiv 5011234-37.2025.4.03.6000, 05/10/2026 · Desprovido · Tema 550/STJ, Tema 1.102/STJ
+
+## Cumprimento individual de sentença coletiva; vantagem de 28,86%; acordo individual ou transação administrativa (3)
+- Registro de pagamentos da vantagem nas fichas financeiras comprova acordo individual e impede nova cobrança em cumprimento individual. Pagamento administrativo não se presume irregular sem prova concreta. Opção por transação judicial no SIAPE não altera a conclusão. — ApCiv 5005972-43.2024.4.03.6000, 14/11/2026 · Desprovido · Tema 550/STJ, Tema 1.102/STJ
+-  — ApCiv 5005409-15.2025.4.03.6000, 26/10/2026 ·  · Tema 550/STJ, Tema 1.102/STJ
+-  — ApCiv 5008339-40.2024.4.03.6000, 05/10/2026 ·  · Tema 550/STJ, Tema 1.102/STJ
 
 ## Cumprimento de sentença de ACP sobre 28,86%; ilegitimidade ativa por exclusão da coisa julgada (3)
 - A coisa julgada da ação coletiva exclui os servidores que já tenham ajuizado, individualmente ou por sindicato, ação com a mesma pretensão. Assim, não há título judicial em favor da parte exequente, e a extinção do cumprimento por ilegitimidade ativa é mantida. — ApCiv 5006675-71.2024.4.03.6000, 05/10/2026 · Parcialmente provido
@@ -23,6 +35,18 @@ Gerado do índice dos julgados do Relator (149 julgados, 137 assuntos). Teses re
 - Não é parte legítima o ente que não integrou a lide originária nem foi citado, ainda que pertença à administração indireta. Sem participação no processo de conhecimento, não há título executivo judicial que o alcance, e a parte exequente que ajuizou ação contra ente ilegítimo responde pelos honorários.</tese>
 <parameter name="resultado">Desprovido — ApCiv 5007984-30.2024.4.03.6000, 12/05/2026 · 
 
+## Progressão funcional em carreira previdenciária; interstício de 18 meses; efeitos financeiros (3)
+- Embargos de declaração não se prestam a rediscutir error in judicando quando o acórdão enfrentou expressamente os pontos suscitados. A regra de interstício de 18 meses da carreira previdenciária, por ser de eficácia limitada e não regulamentada, não produziu efeitos, e a Lei 13.324/2016 não impede a progressão com efeitos financeiros retroativos.</tese>
+<parameter name="resultado">Embargos rejeitados — ApCiv 5002396-43.2018.4.03.6100, 31/08/2023 ·  · Tema 1.129/STJ
+- A regra de progressão em 18 meses da Lei 10.855/2004, na redação de 2007, era de eficácia limitada e nunca foi eficaz, pois dependia de regulamento inexistente. A Lei 13.324/2016 tem efeito prospectivo e não impede o reconhecimento de progressão em 12 meses com efeitos financeiros já produzidos. O termo inicial da progressão deve ser a data de ingresso no cargo.</tese>
+<parameter name="resultado">Desprovido — ApCiv 5002623-56.2021.4.03.6123, 08/06/2023 · 
+- A regra de progressão em 18 meses, prevista na Lei 10.855/2004 na redação de 2007, nunca foi eficaz, por depender de regulamento jamais editado. Após a Medida Provisória 479/2009, retomou-se o Decreto 84.669/1980. A Lei 13.324/2016 tem efeitos prospectivos e não impede o reconhecimento de progressões com efeitos financeiros já produzidas. O cálculo dos lapsos deve partir da data de ingresso no cargo.</tese>
+<parameter name="resultado">Desprovido — ApCiv 5002396-43.2018.4.03.6100, 25/05/2023 · 
+
+## Cumprimento individual de sentença coletiva; vantagem de 28,86%; acordo administrativo (2)
+- Registro de pagamentos da vantagem nas fichas financeiras comprova acordo administrativo, impedindo nova cobrança em cumprimento individual de sentença coletiva. Honorários por equidade são inviáveis quando o valor da causa é elevado, conforme Tema 1.076/STJ. — ApCiv 5008200-88.2024.4.03.6000, 26/10/2026 · Desprovido · Tema 550/STJ, Tema 1.076/STJ, Tema 1.102/STJ, Tema 1.255/STF, Tema 1.302/STJ, Tema 1.433/STJ
+- Pagamentos da vantagem registrados em fichas financeiras comprovam acordo administrativo e impedem nova cobrança em cumprimento individual. Honorários contra a Fazenda Pública seguem o mínimo legal de 8% do valor da causa. — ApCiv 5008040-63.2024.4.03.6000, 05/10/2026 · Parcialmente provido · Tema 550/STJ, Tema 1.102/STJ
+
 ## Cumprimento individual de ACP sobre reajuste de 28,86%; abrangência nacional e acordo administrativo (2)
 -  — ApCiv 5008405-20.2024.4.03.6000, 06/10/2026 ·  · Tema 1.075/STF, Tema 733/STF, Tema 499/STF, Tema 1.102/STJ, Tema 550/STJ
 - A coisa julgada em ação civil pública não tem limite territorial automático, conforme o Tema 1.075/STF. Registro de pagamentos da vantagem nas fichas financeiras comprova acordo administrativo e impede nova cobrança em cumprimento individual. — ApCiv 5002762-81.2024.4.03.6000, 05/10/2026 · Desprovido · Tema 1.075/STF, Tema 733/STF, Tema 499/STF, Tema 1.102/STJ, Tema 550/STJ
@@ -35,6 +59,33 @@ Gerado do índice dos julgados do Relator (149 julgados, 137 assuntos). Teses re
 - A licença sem remuneração para acompanhar cônjuge ou companheiro é direito subjetivo do servidor, derivado da preservação da unidade familiar. O cônjuge acompanhado não precisa ser servidor público, e a falta de pessoal no órgão não afasta o direito. — ApCiv 5000348-43.2020.4.03.6100, 09/02/2024 · Provido
 - A licença sem remuneração para acompanhar cônjuge é direito subjetivo do servidor, derivado da preservação da unidade familiar. O cônjuge não precisa ser servidor público, e o vínculo em empresa coligada do mesmo grupo não descaracteriza o direito. — AI 5022649-43.2023.4.03.0000, 01/02/2024 · Desprovido
 
+## Licenciamento de militar temporário na vigência da Lei 13.954/2019 (2)
+- Embargos de declaração não se prestam a rediscutir a matéria decidida. Não havendo omissão, contradição, obscuridade ou erro material, os embargos são rejeitados. Na vigência da Lei 13.954/2019, é possível o licenciamento de militar temporário não julgado inválido ou incapaz definitivamente.</tese>
+<parameter name="resultado">Embargos rejeitados — AI 5030052-34.2021.4.03.0000, 11/10/2023 · 
+-  — AI 5030052-34.2021.4.03.0000, 08/06/2023 · 
+
+## Progressão funcional de servidor; interstício de 12 meses; embargos de declaração rejeitados (2)
+-  — ApCiv 0009367-44.2015.4.03.6130, 06/07/2023 ·  · Tema 1.129/STJ
+-  — ApCiv 5002408-34.2021.4.03.6106, 06/07/2023 ·  · Tema 1.129/STJ
+
+## Concurso público, reserva de vagas para negros, heteroidentificação, efeito suspensivo em agravo (1)
+- A reserva de vagas para negros em concurso público é constitucional, nos termos da ADC 41. Presentes os requisitos do artigo 300 do CPC, defere-se efeito suspensivo para suspender a decisão quanto à manutenção do candidato nas listas de cotas. — AI 5035017-79.2026.4.03.0000, 17/11/2026 · Provido
+
+## Cumprimento de sentença de ACP; reajuste de 28,86%; ilegitimidade passiva de BACEN e União (1)
+- A coisa julgada coletiva não alcança autarquia que não integrou o polo passivo da ação de conhecimento. A União não responde solidária ou subsidiariamente por obrigação de autarquia dotada de personalidade jurídica própria. Desprovido o recurso da exequente, cabe honorários sucumbenciais suspensos pela gratuidade, que não pode ser revogada sem contraditório.</tese>
+<parameter name="resultado">Parcialmente provido — ApCiv 5007502-82.2024.4.03.6000, 14/11/2026 ·  · Tema 1.433/STJ, Tema 1.178/STJ
+
+## Cumprimento de sentença em ACP sobre reajuste de 28,86%; alcance territorial da coisa julgada (1)
+- A limitação territorial automática do artigo 16 da Lei 7.347/1985 foi declarada inconstitucional pelo Tema 1.075/STF, sem modulação. Como o título não mencionou o artigo 16, não é exigível ação rescisória, e a execução pode prosseguir sem restrição territorial.</tese>
+<parameter name="resultado">Provido — ApCiv 5010353-31.2023.4.03.6000, 14/11/2026 ·  · Tema 1.075/STF, Tema 499/STF, Tema 733/STF, Tema 1.178/STJ
+
+## Embargos de declaração. FUSEX. Ex-cônjuge pensionista. Assistência médico-hospitalar (1)
+- Embargos de declaração não se prestam à rediscussão do julgado por alegado error in judicando. Não há direito adquirido a regime de assistência médico-hospitalar, que pode ser revisto com base no Tema 1.080/STJ, inclusive sem aplicação do prazo decadencial do artigo 54 da Lei 9.784/1999.</tese>
+<parameter name="resultado">Embargos rejeitados — ApCiv 5000290-10.2024.4.03.6000, 14/11/2026 ·  · Tema 1.080/STJ
+
+## Afastamento remunerado de servidor para curso de formação; agravo prejudicado por sentença (1)
+-  — AI 5010078-35.2026.4.03.0000, 29/10/2026 · 
+
 ## Pensão por morte de servidora federal. Filho maior inválido. Preexistência da invalidez ao óbito não comprovada (1)
 - A pensão por morte pode ser concedida ao filho inválido de qualquer idade, desde que a invalidez seja anterior ao óbito. Laudo de outro processo que afastou incapacidade laboral, em data posterior ao óbito, não comprova essa preexistência. Cabe ao autor o ônus da prova, nos termos do artigo 373, I, do CPC. — ApCiv 5001428-74.2022.4.03.6002, 26/10/2026 · Provido
 
@@ -44,6 +95,44 @@ Gerado do índice dos julgados do Relator (149 julgados, 137 assuntos). Teses re
 
 ## Cumprimento de sentença de ACP sobre 28,86%; ilegitimidade ativa por exclusão expressa da coisa julgada (1)
 -  — ApCiv 5008404-35.2024.4.03.6000, 26/10/2026 · 
+
+## Licenciamento de militar temporário sem invalidez para atividade civil (1)
+-  — ApelRemNec 5007777-70.2020.4.03.6000, 26/10/2026 · 
+
+## Desincorporação de militar temporário incapaz para o serviço militar e apto para atividades civis (1)
+-  — ApCiv 5005376-64.2021.4.03.6000, 26/10/2026 · 
+
+## Militar temporário licenciado por conveniência do serviço com incapacidade para atividade militar; reforma e compensação pecuniária (1)
+-  — ApelRemNec 5000563-42.2022.4.03.6005, 26/10/2026 · 
+
+## Cumprimento de sentença coletiva; reajuste de 28,86%; servidores federais; carreira policial federal (1)
+-  — ApCiv 5007899-44.2024.4.03.6000, 26/10/2026 ·  · Tema 549/STJ, Tema 1.075/STF, Tema 733/STF, Tema 1.433/STJ, Tema 1.302/STJ
+
+## Cumprimento de sentença em ACP; limitação territorial da coisa julgada; extinção sem mérito reformada (1)
+- A coisa julgada em ação civil pública não tem limitação territorial quando o pedido, a relação de órgãos e o título judicial não a restringem expressamente. A limitação automática do artigo 16 da Lei 7.347/1985 foi declarada inconstitucional pelo STF (Tema 1.075), sem modulação, e não se aplica a associações com mero rol de associados.</tese>
+<parameter name="resultado">Provido — ApCiv 5008188-74.2024.4.03.6000, 26/10/2026 ·  · Tema 1.075/STF, Tema 733/STF, Tema 499/STF
+
+## Revisão de pensão militar por ato do TCU; decadência administrativa (1)
+-  — ApCiv 5000594-66.2025.4.03.6002, 26/10/2026 ·  · Tema 445/STF
+
+## Cumprimento individual de sentença coletiva. PAE para magistrados classistas. Ilegitimidade ativa (1)
+- A inclusão em lista de associados não basta para legitimar a execução individual. É preciso comprovar o enquadramento material no título matriz. Tempo de exercício inferior ao exigido pela Lei 6.903/1981 afasta a legitimidade. — ApCiv 5001030-27.2022.4.03.6003, 26/10/2026 · Desprovido
+
+## Cumprimento individual de sentença coletiva; reajuste de 28,86% a policiais rodoviários federais; servidor empossado após a impetração (1)
+-  — ApCiv 5002356-31.2022.4.03.6000, 26/10/2026 · 
+
+## Processo seletivo serviço militar temporário; inspeção de saúde; inaptidão por lesão no joelho (1)
+- A aptidão física para exercícios específicos não se confunde com a higidez médica exigida para atividades militares. Sem prova pré-constituída de elementos técnicos médicos, o laudo oficial prevalece e o Judiciário não substitui a avaliação da junta. — ApelRemNec 5013463-67.2025.4.03.6000, 26/10/2026 · Provido
+
+## Cumprimento individual de sentença coletiva. Reajuste de 28,86%. Abrangência territorial. Tema 1.075 (1)
+- A ação coletiva não limitou territorialmente a pretensão, e a decisão do Tema 1.075/STF não desconstitui a coisa julgada quando o título não impôs restrição geográfica. Por isso, dispensa-se ação rescisória, e a afetação dos Temas 1.302 e 1.433/STJ não suspende processos sem recurso especial na segunda instância.</tese>
+<parameter name="resultado">Parcialmente provido — AI 5016621-54.2026.4.03.0000, 26/10/2026 ·  · Tema 1.075/STF, Tema 733/STF, Tema 1.302/STJ, Tema 1.433/STJ
+
+## Cumprimento individual de ACP; reajuste de 28,86%; carreira policial federal; absorção (1)
+-  — ApCiv 5005900-56.2024.4.03.6000, 26/10/2026 ·  · Tema 549/STJ, Tema 1.075/STF, Tema 733/STF, Tema 1.433/STJ, Tema 1.302/STJ
+
+## Cumprimento de sentença em ACP. Abrangência nacional da coisa julgada. Limitação territorial do art. 16 da Lei 7.347/1985 (1)
+-  — ApCiv 5008419-04.2024.4.03.6000, 26/10/2026 ·  · Tema 1.075/STF, Tema 733/STF, Tema 499/STF, Tema 1.433/STJ, Tema 1.059/STJ
 
 ## Agravo de instrumento contra indeferimento de tutela de urgência em demissão de servidor com provas supostamente ilícitas (1)
 - A tutela provisória de urgência exige, cumulativamente, probabilidade do direito e perigo de dano ou risco ao resultado útil do processo. A ausência de um dos requisitos basta para o indeferimento. Recurso julgado monocraticamente com base no artigo 932 do CPC. — AI 5000630-35.2026.4.03.0001, 13/10/2026 · Desprovido · Tema 1.238/STF
@@ -58,9 +147,6 @@ Gerado do índice dos julgados do Relator (149 julgados, 137 assuntos). Teses re
 
 ## Licenciamento de militar temporário incapacitado; reintegração como adido para tratamento médico (1)
 -  — ApCiv 5004651-46.2019.4.03.6000, 05/10/2026 · 
-
-## Cumprimento individual de sentença coletiva; vantagem de 28,86%; acordo administrativo (1)
-- Pagamentos da vantagem registrados em fichas financeiras comprovam acordo administrativo e impedem nova cobrança em cumprimento individual. Honorários contra a Fazenda Pública seguem o mínimo legal de 8% do valor da causa. — ApCiv 5008040-63.2024.4.03.6000, 05/10/2026 · Parcialmente provido · Tema 550/STJ, Tema 1.102/STJ
 
 ## Adicional de periculosidade. Supressão administrativa. Laudos posteriores. Pagamento retroativo (1)
 - Havendo permanência inalterada das condições de risco, a avaliação administrativa tem natureza revisional e não originária, o que afasta a orientação do PUIL 413/RS. São devidas as diferenças do adicional, observada a prescrição quinquenal, com correção monetária e juros. — ApCiv 5005188-45.2024.4.03.6201, 05/10/2026 · Provido
@@ -91,12 +177,6 @@ Gerado do índice dos julgados do Relator (149 julgados, 137 assuntos). Teses re
 
 ## Cumprimento de sentença de ACP; extinção sem mérito por ilegitimidade ativa; coisa julgada coletiva (1)
 - A coisa julgada de ação coletiva exclui os servidores que já tenham ajuizado ação, individual ou por sindicato, com a mesma pretensão. Sem título condenatório em seu favor, a parte exequente não tem legitimidade para o cumprimento de sentença. — ApCiv 5008281-37.2024.4.03.6000, 05/10/2026 · Desprovido · Tema 1.075/STF, Tema 499/STF, Tema 733/STF
-
-## Cumprimento individual de sentença coletiva. Vantagem de 28,86%. Acordo administrativo (1)
--  — ApCiv 5011234-37.2025.4.03.6000, 05/10/2026 · Desprovido · Tema 550/STJ, Tema 1.102/STJ
-
-## Cumprimento individual de sentença coletiva; vantagem de 28,86%; acordo individual ou transação administrativa (1)
--  — ApCiv 5008339-40.2024.4.03.6000, 05/10/2026 ·  · Tema 550/STJ, Tema 1.102/STJ
 
 ## Cumprimento individual de ação civil pública; abrangência nacional; acordo administrativo de pagamento do reajuste de 28,86% (1)
 -  — ApCiv 5011941-39.2024.4.03.6000, 05/10/2026 ·  · Tema 1.075/STF, Tema 733/STF, Tema 499/STF, Tema 1.102/STJ, Tema 550/STJ
@@ -452,3 +532,366 @@ Gerado do índice dos julgados do Relator (149 julgados, 137 assuntos). Teses re
 
 ## Licenciamento de militar temporário por enfermidade sem prova de incapacidade (1)
 -  — AI 5022775-93.2023.4.03.0000, 29/11/2023 · 
+
+## Licenciamento de militar de carreira sem estabilidade por incapacidade; encostamento para tratamento (1)
+-  — AI 5019206-84.2023.4.03.0000, 29/11/2023 · 
+
+## Pensão temporária por morte de servidor. Filha maior e solteira. Exigência indevida de dependência econômica (1)
+- Na vigência da Lei 3.373/1958, a pensão temporária à filha maior e solteira não exige dependência econômica; a lei aplicável é a da data do óbito. A união estável não comprovada afasta o requisito de estado civil, e a Administração não pode exigir condições sem amparo legal. — ApCiv 0001214-58.2014.4.03.6000, 29/11/2023 · Desprovido
+
+## Militar temporário reintegrado para tratamento médico; compensação pecuniária e FUSEX (1)
+-  — AI 5022251-96.2023.4.03.0000, 14/11/2023 ·  · Tema 356/STJ
+
+## Militar temporário licenciado por incapacidade; prescrição e nexo causal (1)
+- A pretensão está prescrita quando a ciência do dano e de sua extensão ocorreu antes do quinquênio anterior ao ajuizamento. Não comprovado o acidente em serviço nem o nexo causal, e a incapacidade parcial não gera direito à reforma. — ApCiv 0007348-04.2014.4.03.6000, 14/11/2023 · Desprovido
+
+## Militar temporário invalidez, licenciamento anulado, reforma e ressarcimento da compensação pecuniária (1)
+-  — ApelRemNec 5000405-81.2022.4.03.6103, 14/11/2023 · 
+
+## Embargos de declaração rejeitados; militar temporário com incapacidade parcial e licenciamento (1)
+-  — ApCiv 0003577-09.2014.4.03.6100, 14/11/2023 · 
+
+## Militar temporário incapaz; licenciamento sob a Lei 13.954/2019; reintegração indevida (1)
+- Incapacidade temporária não gera direito à reforma de militar temporário. Licenciamento ou desincorporação segue a legislação do serviço militar, na redação da Lei 13.954/2019. Inviável a reintegração. — ApelRemNec 5001328-10.2022.4.03.6103, 14/11/2023 · Provido
+
+## Incorporação de quintos e décimos entre Lei 9.624/98 e MP 2.225-45/2001; embargos de declaração rejeitados (1)
+-  — ApCiv 5002968-76.2021.4.03.6105, 14/11/2023 ·  · Tema 395/STF, Tema 503/STJ
+
+## Suspensão de PAD por incapacidade médica e prescrição (1)
+-  — RemNecCiv 5001019-59.2023.4.03.6133, 14/11/2023 · 
+
+## Embargos de declaração em mandado de segurança sobre indeferimento de provas em processo administrativo disciplinar (1)
+- Embargos de declaração não servem para rediscutir o mérito por suposto error in judicando. O prazo decadencial do mandado de segurança conta-se da ciência de cada ato impugnado. O Judiciário controla o PAD apenas quanto à regularidade e legalidade, sem revisar a pertinência das provas indeferidas de forma motivada.</tese>
+<parameter name="resultado">Embargos rejeitados — ApCiv 5022263-51.2020.4.03.6100, 14/11/2023 · 
+
+## Remoção de servidor por acompanhamento de cônjuge em processo seletivo interno (1)
+-  — ApelRemNec 5028545-76.2018.4.03.6100, 14/11/2023 ·  · Tema 1.076/STJ
+
+## Execução individual de ação coletiva de sindicato de servidores; limitação subjetiva da coisa julgada (1)
+- Embora o sindicato tenha legitimidade extraordinária ampla, o título judicial transitado em julgado limitou seus efeitos aos filiados listados na ação coletiva. Quem não comprova essa condição não pode ser beneficiado pelo julgado, o que caracteriza ilegitimidade ativa.</tese>
+<parameter name="resultado">Desprovido — ApCiv 5004239-67.2023.4.03.6100, 14/11/2023 ·  · Tema 1.075/STF
+
+## Demissão de servidor com proibição de nova investidura por cinco anos (1)
+-  — ApCiv 0018866-21.2010.4.03.6100, 30/10/2023 · 
+
+## Licença especial não gozada convertida em pecúnia; prescrição quinquenal de militar reformado (1)
+-  — ApCiv 5001838-88.2020.4.03.6104, 27/10/2023 · 
+
+## Embargos de declaração rejeitados; aposentadoria especial de servidor; ON 10/2010 MPOG (1)
+- Embargos de declaração não se prestam a rediscutir o julgado sob alegação de error in judicando. Inexistindo omissão, contradição ou obscuridade, rejeitam-se os embargos, com correção apenas de erro material. — ApelRemNec 0011489-62.2011.4.03.6100, 27/10/2023 · Embargos rejeitados · Tema 942/STF
+
+## Férias de servidor não gozadas; conversão em perdas e danos na aposentadoria (1)
+-  — ApCiv 0001795-21.2001.4.03.6100, 27/10/2023 · 
+
+## Perito médico federal. Progressão funcional. Termo inicial dos efeitos financeiros (1)
+- A progressão funcional deve ter como referência a data de ingresso do servidor no cargo, sob pena de violação à isonomia. Não se aplica o precedente da carreira de policial federal, pois o critério financeiro das datas únicas não tem fundamento legal para as demais carreiras. — ApCiv 5001711-68.2020.4.03.6002, 25/10/2023 · Desprovido
+
+## Reajuste de pensão por morte pelo índice do RGPS no período entre a EC 41/2003 e a Lei 11.784/2008 (1)
+- É constitucional o reajuste de proventos e pensões de servidores federais não beneficiados pela paridade pelo índice do RGPS no período anterior à Lei 11.784/2008. Os valores em atraso observam a prescrição quinquenal retroativa à propositura da ação. — ApCiv 5004429-35.2020.4.03.6100, 25/10/2023 · Provido · Tema 1.224/STF
+
+## Auxílio-transporte de servidor federal; declaração sem apresentação de bilhetes; uso de veículo próprio (1)
+-  — RemNecCiv 5001381-88.2022.4.03.6103, 11/10/2023 · 
+
+## Anistiado com reparação econômica inferior a outros anistiados (1)
+-  — ApCiv 5000411-22.2021.4.03.6104, 10/10/2023 · 
+
+## Conversão de emprego celetista em cargo estatutário; desvio de função; irredutibilidade salarial (1)
+- Desvio de função não gera reenquadramento, mas pode gerar indenização pela diferença salarial no período não prescrito, desde que comprovado o desempenho de atividades da carreira paradigma. A irredutibilidade salarial incide na transposição de regime, devendo ser preservado o valor nominal dos vencimentos.</tese>
+<parameter name="resultado">Parcialmente provido — ApCiv 0002719-35.2015.4.03.6005, 29/09/2023 · 
+
+## Cumprimento de sentença. Reajuste de 28,86%. Termo inicial fixado em mandado de segurança (1)
+- Havendo coisa julgada em mandado de segurança, o reajuste é devido a partir da impetração, conforme Súmulas 269 e 271/STF. Não cabe pretender cobrança retroativa à data de ingresso na carreira por meio de cumprimento de sentença. — AI 5019374-86.2023.4.03.0000, 29/09/2023 · Desprovido
+
+## Militar temporário incapaz; licenciamento e reforma sob a Lei 13.954/2019 (1)
+- Perícia judicial sobre nexo causal é desnecessária quando o militar não é total e definitivamente incapaz para qualquer trabalho. Militar temporário deve ser licenciado ou desincorporado na forma da legislação do serviço militar. — ApCiv 5030338-45.2021.4.03.6100, 29/09/2023 · Desprovido
+
+## Demissão de servidor por abandono de cargo e inassiduidade habitual (1)
+- Caracterizado o abandono de cargo por trinta dias consecutivos de faltas injustificadas e demonstrado o animus abandonandi, a demissão é válida. Pedido de licença pendente não afasta a infração quando formulado após sua consumação. — ApCiv 5000604-25.2016.4.03.6100, 29/09/2023 · Desprovido
+
+## Demissão de servidor em processo administrativo disciplinar; nulidades afastadas (1)
+- Processo administrativo disciplinar que observa contraditório e ampla defesa é válido, e a falta de defesa técnica não o invalida. Não cabe ao Judiciário rever o mérito administrativo, e a demissão é cabível nas hipóteses do artigo 132 da Lei 8.112/1990, sem discricionariedade para aplicar pena diversa.</tese>
+<parameter name="resultado">Provido — ApCiv 0006261-76.2015.4.03.6000, 29/09/2023 · 
+
+## Policial Rodoviário Federal. Flexibilização voluntária do repouso remunerado (IFR). Exigência de participação em TAF (1)
+-  — ApCiv 5002839-32.2020.4.03.6000, 28/09/2023 · 
+
+## URP de abril de 1988 absorvida por reajustes posteriores em cumprimento de sentença de servidores do INCRA (1)
+- As diferenças da URP de abril e maio de 1988 foram absorvidas pelo reajuste de novembro de 1988, e os reajustes sucessivos na carreira absorveram a URP de 3,77%, inexistindo valores a executar. Com o acolhimento da impugnação, a parte autora foi condenada em honorários de 10% sobre o valor pretendido; o agravo conexo sobre juros e honorários ficou prejudicado. — AI 5011412-12.2023.4.03.0000, 15/09/2023 · Provido
+
+## URP de abril de 1988 absorvida por reajustes posteriores em cumprimento de sentença (1)
+- As diferenças da URP de abril e maio de 1988 foram absorvidas pelo reajuste de novembro de 1988. Sucessivos reajustes na carreira também absorveram a URP de 3,77%, o que afasta a execução. — AI 5012321-54.2023.4.03.0000, 15/09/2023 · Provido
+
+## Extinção de dívida de consignado com falecimento de servidor (1)
+- A previsão do artigo 16 da Lei 1.046/1950 não foi revogada pelas Leis 8.112/1990 e 10.820/2003, prevalecendo sobre a regra geral do Código Civil. Embargos acolhidos apenas para suprir omissão, sem efeito infringente. — ApCiv 0001764-78.2013.4.03.6100, 15/09/2023 · Embargos acolhidos
+
+## Gratificação de raio-x e adicional de irradiação ionizante, cumulação e prescrição (1)
+-  — ApelRemNec 0016199-86.2015.4.03.6100, 15/09/2023 · 
+
+## Militar temporário incapaz, desincorporação e encostamento sob a Lei 13.954/2019 (1)
+- Não há direito do militar temporário à reforma por enfermidade sem nexo causal e sem invalidez. A desincorporação e o encostamento segundo a legislação vigente são válidos, e a norma superveniente se aplica sem direito adquirido ao regime anterior. — ApCiv 5000331-04.2020.4.03.6004, 15/09/2023 · Parcialmente provido
+
+## Lotação de servidor em estágio probatório; remoção discricionária; vaga superveniente (1)
+-  — ApelRemNec 0009001-51.2008.4.03.6000, 15/09/2023 · 
+
+## Licenciamento de militar temporário por enfermidade superveniente sem prova de incapacidade (1)
+-  — AI 5012770-12.2023.4.03.0000, 15/09/2023 · 
+
+## Afastamento de servidor para pós-graduação; não obtenção do título; ressarcimento ao erário; embargos de declaração (1)
+-  — ApCiv 5007058-70.2020.4.03.6103, 15/09/2023 · 
+
+## Progressão funcional na carreira previdenciária; interstício de 18 meses; efeitos financeiros (1)
+-  — ApCiv 5002623-56.2021.4.03.6123, 15/09/2023 ·  · Tema 1.129/STJ
+
+## Revisão de pensão por morte de militar; decadência quinquenal (1)
+- Não há decadência quando a revisão ocorre dentro de cinco anos contados da chegada do processo ao Tribunal de Contas. Tendo a Administração revisado o ato dentro desse prazo, não é necessário prévio contraditório. — ApCiv 5019960-93.2022.4.03.6100, 15/09/2023 · Provido · Tema 445/STF
+
+## Lotação de servidor aprovado em concurso; remoção em estágio probatório (1)
+-  — ApelRemNec 0008724-35.2008.4.03.6000, 15/09/2023 · 
+
+## Lotação de servidor empossado em vaga existente; remoção em estágio probatório (1)
+-  — ApelRemNec 0007639-14.2008.4.03.6000, 15/09/2023 · 
+
+## Licença remunerada de servidor federal para curso de formação de concurso estadual (1)
+- É possível a licença remunerada de servidor federal para curso de formação de concurso estadual. A restrição do artigo 20, §4º, da Lei 8.112/1990 é incompatível com o princípio da isonomia, devendo ser estendida a cargos estaduais. — ApelRemNec 5008109-66.2022.4.03.6000, 15/09/2023 · Desprovido
+
+## Embargos de declaração rejeitados; demissão em PAD; dolo e cerceamento de defesa (1)
+-  — ApelRemNec 5002253-40.2021.4.03.6103, 15/09/2023 · 
+
+## Cumprimento de sentença. Incorporação de quintos e décimos entre a Lei 9.624/98 e a MP 2.225-45/2001 (1)
+- A incorporação de quintos e décimos nesse período é indevida, por falta de norma autorizadora. A modulação de efeitos preservou apenas o pagamento já recebido por decisão não transitada em julgado, sem garantir diferenças não pagas administrativamente. — ApCiv 5002968-76.2021.4.03.6105, 31/08/2023 · Desprovido · Tema 395/STF, Tema 503/STJ
+
+## Assistente social do INSS. Jornada de 40 horas semanais. Inaplicabilidade da jornada de 30 horas (1)
+- O regime estatutário da Lei 8.112/1990 prevalece sobre a Lei 8.662/1992, que se aplica às relações celetistas. A jornada de 40 horas semanais é legal, não havendo direito líquido e certo à redução. — ApCiv 5001490-23.2022.4.03.6000, 31/08/2023 · Desprovido
+
+## Embargos de declaração rejeitados; cumprimento individual de sentença coletiva; ilegitimidade ativa do substituto (1)
+- Embargos de declaração não se prestam à rediscussão do mérito por suposto error in judicando. A eficácia da coisa julgada coletiva deve ser questionada em ação rescisória própria, e não nos embargos. — AI 5001889-73.2023.4.03.0000, 31/08/2023 · Embargos rejeitados
+
+## URP de abril/1988 absorvida por reestruturação de carreira; embargos de declaração (1)
+- Embargos de declaração não se prestam a rediscutir o mérito de decisão sem vício sanável. Inexistindo omissão, contradição ou obscuridade, rejeitam-se os embargos, considerando-se prequestionados os elementos suscitados. — ApCiv 5005767-10.2021.4.03.6100, 31/08/2023 · Embargos rejeitados
+
+## Descontos por ausências injustificadas de servidor após cassação de tutela de urgência (1)
+- Cassada a tutela que autorizava o afastamento, o servidor deve apresentar-se ao trabalho de imediato. As faltas injustificadas geram desconto na remuneração, sem necessidade de notificação para retorno nem de processo administrativo. A licença médica requerida depois do período não altera essa conclusão. — ApCiv 0001067-07.2016.4.03.6115, 31/08/2023 · Desprovido
+
+## Pensão militar de filhas maiores; renúncia à regra de transição; militar incapaz à época (1)
+-  — ApelRemNec 0007398-98.2012.4.03.6000, 31/08/2023 · 
+
+## Reforma de militar por doença; nexo causal com serviço; danos morais (1)
+- Não há nexo causal comprovado entre a doença incapacitante e o serviço militar quando a causa é incerta e há fator alheio relevante, como o tabagismo prolongado. Sem nexo, mantém-se o fundamento jurídico da reforma e afasta-se o dano moral. A incapacidade permanente para o serviço é requisito da reforma e não existia antes da data fixada.</tese>
+<parameter name="resultado">Desprovido — ApCiv 0003957-75.2013.4.03.6000, 31/08/2023 · 
+
+## Reposição ao erário de proventos pagos por decisão judicial precária a militares (1)
+-  — ApCiv 5000475-92.2017.4.03.6000, 31/08/2023 · 
+
+## Embargos de declaração rejeitados; decadência da revisão de aposentadoria (1)
+-  — ApCiv 5028030-41.2018.4.03.6100, 31/08/2023 ·  · Tema 445/STF
+
+## Militar. Ressarcimento ao erário. Desconto em folha suspenso (1)
+- Não é devida a restituição de valores recebidos por serviços efetivamente prestados, ainda que o ato que embasou a remuneração seja anulado. O desconto em folha, por privar o militar de parte de seu sustento, justifica a antecipação da tutela. — AI 5028910-58.2022.4.03.0000, 31/08/2023 · Desprovido
+
+## Redução de jornada de servidor com filho com TEA (1)
+- O servidor com cônjuge, filho ou dependente com deficiência tem direito ao horário especial sem compensação de jornada, desde que comprovada a necessidade por junta médica oficial. O transtorno do espectro autista é considerado deficiência para todos os efeitos legais. A redução abaixo do limite mínimo legal deve observar os princípios da proporcionalidade e da razoabilidade.</tese>
+<parameter name="resultado">Desprovido — ApCiv 5035025-65.2021.4.03.6100, 31/08/2023 · 
+
+## Revisão de pensão por morte à filha maior solteira após prazo decadencial (1)
+-  — ApCiv 5006336-07.2018.4.03.6103, 31/08/2023 · 
+
+## Embargos de declaração rejeitados; horas extras e GEPR não cumuláveis (1)
+- Não há vício a ser sanado quando o acórdão motiva expressamente a solução com base nos dispositivos citados. A jornada de 24 horas semanais não é cumulável com a GEPR, e as horas extras devidas são apuradas com acréscimo de 50% e divisor de 120. — ApelRemNec 5008711-48.2022.4.03.6100, 31/08/2023 · Embargos rejeitados
+
+## Embargos de declaração rejeitados; decadência para rever aposentadoria; modulação RE 638.115 (1)
+- Embargos de declaração não se prestam à rediscussão do mérito. Inexistindo vício sanável, o acórdão que já enfrentou os pontos suscitados fica mantido, e os elementos invocados consideram-se incluídos para fins de prequestionamento. — ApCiv 5012755-18.2019.4.03.6100, 31/08/2023 · Embargos rejeitados · Tema 1.075/STF
+
+## Embargos de declaração rejeitados em aposentadoria especial de servidor com período celetista (1)
+-  — ApCiv 0006659-38.2006.4.03.6000, 31/08/2023 · 
+
+## Mandado de segurança em processo administrativo disciplinar; indeferimento de prova testemunhal (1)
+-  — ApCiv 5022263-51.2020.4.03.6100, 31/08/2023 · 
+
+## Militar temporário licenciado com incapacidade parcial; reintegração e pedido de reforma (1)
+-  — ApelRemNec 0014560-76.2014.4.03.6000, 31/08/2023 · 
+
+## Suspensão de pensão civil temporária de filha maior e solteira por união estável (1)
+- A união estável equipara-se ao casamento para fins de cancelamento da pensão civil temporária de filha maior e solteira. Não há violação a direito adquirido, segurança jurídica ou proporcionalidade quando a apuração segue contraditório e ampla defesa. — ApCiv 5004781-35.2020.4.03.6183, 31/08/2023 · Desprovido
+
+## Embargos de declaração rejeitados; aposentadoria voluntária e isenção de contribuição previdenciária (1)
+- Embargos de declaração não se prestam à rediscussão do mérito por suposto error in judicando. Não havendo vício sanável, rejeitam-se os embargos, considerando-se incluídos no acórdão os elementos suscitados para fins de prequestionamento. — ApCiv 5013737-80.2020.4.03.6105, 17/08/2023 · Embargos rejeitados
+
+## Militar temporário com incapacidade parcial; reforma indevida; dano estético (1)
+- Militar temporário só tem direito à reforma se incapaz para o serviço militar ou para qualquer trabalho. Licenciamento regular afasta danos morais, mas sequela estética decorrente do acidente em serviço gera indenização por dano estético. — ApCiv 0003577-09.2014.4.03.6100, 03/08/2023 · Parcialmente provido
+
+## Militar temporário licenciado com incapacidade decorrente de acidente em serviço (1)
+-  — ApCiv 5003991-96.2017.4.03.6105, 03/08/2023 · 
+
+## Jornada reduzida de 24 horas para servidores expostos a radiação; horas extras e GEPR (1)
+-  — ApCiv 5006722-80.2017.4.03.6100, 03/08/2023 ·  · Tema 810/STF
+
+## Licença remunerada para tratamento de saúde de familiar, prazo indeterminado (1)
+- A Lei 8.112/1990 limita a licença para tratamento de saúde de familiar a 150 dias, sendo 60 remunerados. Não há previsão legal de licença remunerada por prazo indeterminado, e o Judiciário não pode ampliar o benefício. Horário especial já concedido atende à necessidade de acompanhamento.</tesis>
+<parameter name="resultado">Desprovido — ApCiv 5000356-57.2019.4.03.6002, 03/08/2023 · 
+
+## Militar temporário com incapacidade temporária; licenciamento indevido; reintegração para tratamento; reforma indevida (1)
+- É ilegal o licenciamento de militar temporário com incapacidade temporária, sendo devida a reintegração para tratamento e recebimento de soldo até a recuperação. A reforma ex officio exige incapacidade definitiva, o que não se verificou no caso. — ApCiv 5001488-05.2017.4.03.6105, 03/08/2023 · Desprovido
+
+## Teletrabalho no exterior de servidora pública federal (1)
+- O teletrabalho depende de aquiescência formal da Administração, segundo conveniência e oportunidade. O Judiciário só pode controlar regularidade procedimental e legalidade do ato, sem substituir o mérito administrativo. — ApCiv 5002983-81.2022.4.03.6114, 03/08/2023 · Desprovido
+
+## Licença sem remuneração para acompanhar cônjuge deslocado (1)
+- A licença sem remuneração para acompanhar cônjuge é direito subjetivo do servidor, derivado da preservação da unidade familiar. O cônjuge acompanhado não precisa ser servidor público. — AI 5029032-71.2022.4.03.0000, 03/08/2023 · Provido
+
+## Gratificação de raio-x incorporada a proventos de aposentadoria (1)
+- Gratificação de natureza propter laborem não se incorpora aos proventos após cessada a exposição, salvo previsão legal expressa. Não há direito adquirido a regime previdenciário, e a opção legal de inclusão na base de cálculo não foi comprovada. — ApCiv 5018513-70.2022.4.03.6100, 03/08/2023 · Desprovido
+
+## Militar reintegrado para tratamento médico; demora no cumprimento; danos morais (1)
+- A demora em cumprir decisão judicial de reintegração e tratamento médico, com agravamento do quadro de saúde do militar e resistência em dar cobertura aos dependentes, causa dano moral indenizável, além do mero aborrecimento. O valor deve ser razoável e proporcional, e a sucumbência recursal é acrescida nos termos do art. 85, § 11, do CPC.</tese>
+<parameter name="resultado">Desprovido — ApCiv 0012762-85.2016.4.03.6105, 03/08/2023 · 
+
+## Militar licenciado. Cobrança indevida de despesas médicas. Dano moral (1)
+- A cobrança prosseguida pela organização militar, mesmo após comunicado de cancelamento do ato e ordem de reintegração, ultrapassa o mero dissabor e configura dano moral indenizável. O valor deve ser razoável e proporcional, e a sucumbência recursal é acrescida nos termos do artigo 85, § 11, do CPC.</tese>
+<parameter name="resultado">Desprovido — ApCiv 0012848-56.2016.4.03.6105, 03/08/2023 · 
+
+## Demissão de servidor em processo disciplinar; nulidades afastadas; proporcionalidade (1)
+- Ausência de defesa técnica e a oitiva de testemunhas sem notificação não geram nulidade quando não há prejuízo demonstrado. Configuradas as hipóteses do artigo 132 da Lei 8.112/1990, a demissão é obrigatória, não cabendo mitigação por atenuantes. Honorários de sucumbência a advogados públicos são constitucionais, observado o teto.</tese>
+<parameter name="resultado">Desprovido — ApCiv 5031117-05.2018.4.03.6100, 03/08/2023 · 
+
+## Revisão de aposentadoria por invalidez de servidor; proventos proporcionais em vez de integrais (1)
+-  — ApCiv 0014238-90.2013.4.03.6000, 03/08/2023 · 
+
+## Rescisória de incorporação de quintos; violação literal de lei e aplicação retroativa do CPC/2015 (1)
+-  — AR 0025017-96.2012.4.03.0000, 06/07/2023 ·  · Tema 1.075/STF
+
+## Servidora de universidade federal. Função de coordenação de curso. Pagamento de FG-7. Embargos rejeitados (1)
+- Embargos de declaração não se prestam a rediscutir o mérito quando o acórdão enfrentou expressamente a designação e o pagamento da função. Inexistindo vício sanável, ficam incluídos no acórdão os elementos suscitados para fins de prequestionamento. — ApCiv 5000120-71.2020.4.03.6002, 06/07/2023 · Embargos rejeitados
+
+## Militar temporário com incapacidade temporária; licenciamento após Lei 13.954/2019 (1)
+-  — AI 5014093-86.2022.4.03.0000, 06/07/2023 ·  · Tema 1.088/STJ
+
+## Movimentação de militar da Aeronáutica (PALMOV) por interesse da Administração (1)
+-  — ApCiv 5033220-77.2021.4.03.6100, 06/07/2023 · 
+
+## Licenciamento de militar temporário; reintegração, reforma e danos morais (1)
+-  — ApCiv 5007222-98.2021.4.03.6103, 06/07/2023 · 
+
+## Embargos de declaração rejeitados; gratificação de servidor reconhecida administrativamente; honorários (1)
+- Embargos de declaração não se prestam à rediscussão do mérito por alegado error in judicando. Inexistindo vício sanável, os embargos são rejeitados, considerando-se incluídos no acórdão os elementos suscitados para prequestionamento. — ApCiv 5009957-98.2021.4.03.6105, 06/07/2023 · Embargos rejeitados
+
+## Licenciamento de militar temporário com incapacidade temporária, após Lei 13.954/2019 (1)
+-  — AI 5034292-32.2022.4.03.0000, 06/07/2023 ·  · Tema 1.088/STJ
+
+## Supressão de VPNI de odontólogo da Funasa e devolução de valores (1)
+-  — ApCiv 0009580-86.2014.4.03.6000, 06/07/2023 ·  · Tema 531/STJ, Tema 1.009/STJ
+
+## Militar. Reclassificação de comportamento disciplinar após condenação penal prescrita (1)
+-  — ApCiv 5003448-78.2021.4.03.6000, 06/07/2023 · 
+
+## Execução individual de sentença coletiva. Juízes classistas. Parcela Autônoma de Equivalência (1)
+-  — AI 5001651-54.2023.4.03.0000, 26/06/2023 · 
+
+## Embargos de declaração; servidor municipal requisitado pela Justiça Eleitoral; alegado desvio de função (1)
+-  — ApCiv 5003774-35.2022.4.03.6119, 26/06/2023 · 
+
+## Conversão de férias não gozadas em indenização para servidor em atividade (1)
+- A tese fixada no Tema 635 trata apenas de servidor inativo, pois o erro material reconhecido nos embargos afastou o servidor ativo do paradigma. Não havendo decisão sobre servidor em atividade, não há violação de tema de repercussão geral que justifique juízo de retratação. — ApCiv 5003944-27.2019.4.03.6114, 26/06/2023 · Acórdão mantido · Tema 635/STF
+
+## Embargos de declaração rejeitados; reajuste de aposentadoria e pensão sem paridade (1)
+-  — ApCiv 5016332-04.2019.4.03.6100, 26/06/2023 · Embargos rejeitados
+
+## Cumprimento individual de sentença coletiva. GAT incorporada ao vencimento básico de auditores fiscais. Rescisão do título (1)
+-  — AI 5022902-65.2022.4.03.0000, 26/06/2023 · 
+
+## Cumprimento individual de sentença coletiva. Auditores fiscais. GAT incorporada ao vencimento básico. Rescisão do título (1)
+- Rescindido o título judicial em ação rescisória, não subsiste a pretensão de cumprimento individual fundada nele. A GAT é vantagem permanente do cargo que integra os vencimentos e não pode ser incorporada ao vencimento básico. Verba de sucumbência fixada em favor da parte que acolheu a impugnação.</tese>
+<parameter name="resultado">Provido — AI 5011012-32.2022.4.03.0000, 26/06/2023 · 
+
+## Pensão por morte a filho maior inválido; tutela provisória de urgência (1)
+-  — AI 5020803-25.2022.4.03.0000, 26/06/2023 · 
+
+## Pensão especial de ex-combatente e aposentadoria civil de ex-integrante da FEB (1)
+-  — ApCiv 0009043-56.2015.4.03.6000, 26/06/2023 · 
+
+## Embargos de declaração rejeitados; afastamento cautelar de servidor em PAD (1)
+- Embargos de declaração não se prestam à rediscussão da causa. O acórdão apreciou expressamente o afastamento cautelar como medida de preservação do procedimento apuratório, e o Judiciário não reexamina o mérito administrativo, apenas a legalidade do ato. — ApCiv 5015411-30.2019.4.03.6105, 26/06/2023 · Embargos rejeitados
+
+## Militar temporário com alienação mental; reforma ex officio; remuneração e dano moral (1)
+-  — ApCiv 0001809-28.2013.4.03.6118, 26/06/2023 · 
+
+## Cumprimento individual de sentença coletiva. GAT de auditores fiscais. Incorporação ao vencimento básico. Rescisão do título (1)
+-  — AI 5001708-72.2023.4.03.0000, 26/06/2023 · 
+
+## Cumprimento individual de sentença coletiva; GAT incorporada ao vencimento básico; título rescindido (1)
+- Rescindido o título judicial que fundamenta o cumprimento, não subsiste a pretensão executiva. A GAT é vantagem permanente relativa ao cargo, integra os vencimentos e não pode ser incorporada ao vencimento básico. Fixada sucumbência pelo acolhimento da impugnação.</tese>
+<parameter name="resultado">Provido — AI 5032125-42.2022.4.03.0000, 26/06/2023 · 
+
+## Militar temporário licenciado com incapacidade temporária; reintegração para tratamento; dano moral não configurado (1)
+- É ilegal o licenciamento de militar temporário acometido de incapacidade temporária, sendo devida a reintegração para tratamento e recebimento de soldo e vantagens até a recuperação. A reforma só cabe se a moléstia decorrer de atividades castrenses ou houver incapacidade para qualquer trabalho. Sem acidente em serviço ou incapacidade total, não há dano moral indenizável.</tese>
+<parameter name="resultado">Parcialmente provido — ApCiv 0004256-13.2017.4.03.6000, 08/06/2023 · 
+
+## Juros de mora em diferença remuneratória de servidor público (1)
+-  — ResAutCiv 0011151-74.2000.4.03.6100, 08/06/2023 ·  · Tema 905/STJ, Tema 810/STF
+
+## Militar temporário, acidente em serviço, reforma ex officio e remuneração de grau superior (1)
+- Comprovada incapacidade permanente para atividade militar, há direito à reforma ex officio segundo a lei vigente à época dos fatos. A remuneração pelo grau superior exige invalidez para qualquer trabalho, o que não ficou demonstrado. Dano estético não reconhecido por ser de mínima magnitude, e a apelação não impugnou esse fundamento.</tese>
+<parameter name="resultado">Desprovido — ApelRemNec 0007045-15.2013.4.03.6100, 08/06/2023 · 
+
+## Pensão temporária à filha solteira maior de 21 anos (1)
+-  — RemNecCiv 5013265-68.2022.4.03.6183, 08/06/2023 · 
+
+## Militar reformado. Auxílio-invalidez cumulado com atividade laboral. Ressarcimento ao erário. Prescrição (1)
+- Os valores só são devidos pelo período em que o recebimento foi indevido, não desde 2006. Não há prescrição, pois a ação decorre de fato que depende de apuração no juízo criminal, e a sentença penal ainda não transitou em julgado. Honorários fixados apenas contra o autor. — ApCiv 5004656-05.2018.4.03.6000, 08/06/2023 · Parcialmente provido
+
+## Demissão de servidor em PAD por inserção de dados falsos em sistema da Receita Federal (1)
+- Havendo condenação criminal transitada em julgamento na Corte, com comprovação de autoria, materialidade e dolo, a demissão é mantida. Não há cerceamento de defesa quando o servidor não requereu a produção de prova na fase própria do processo administrativo e a oportunidade precluiu.</tese>
+<parameter name="resultado">Provido — ApelRemNec 5002253-40.2021.4.03.6103, 08/06/2023 · 
+
+## Acumulação de cargos de profissionais de saúde com compatibilidade de horários (1)
+- A vedação constitucional de acumulação admite exceção para dois cargos privativos de profissionais de saúde com profissões regulamentadas, desde que comprovada a compatibilidade de horários. O limite infraconstitucional de 60 horas semanais não é critério decisivo para afastar essa comprovação. — ApCiv 5003314-45.2021.4.03.6002, 08/06/2023 · Desprovido
+
+## Agravo de instrumento contra liminar em MS suspensivo de PAD; prejudicado por sentença superveniente (1)
+-  — AI 5011726-55.2023.4.03.0000, 31/05/2023 · 
+
+## Afastamento para pós-graduação stricto sensu; não obtenção do título; dispensa de ressarcimento por motivo de saúde (1)
+- Não é devido o ressarcimento ao erário quando a interrupção do afastamento decorre de força maior ou caso fortuito, comprovados por condições de saúde, sem negligência do servidor. A ilegitimidade passiva da universidade é reconhecida quando nenhum pedido lhe foi dirigido, e a sucumbência recursal é acrescida ao decaimento de origem.</tese>
+<parameter name="resultado">Parcialmente provido — ApCiv 5007058-70.2020.4.03.6103, 25/05/2023 · 
+
+## Jornada reduzida de 24 horas semanais para servidor exposto a radiação; horas extras; GEPR (1)
+-  — ApelRemNec 5008711-48.2022.4.03.6100, 25/05/2023 ·  · Tema 810/STF
+
+## Remoção de servidor por motivo de saúde; junta médica oficial; indeferimento mantido (1)
+- A remoção por motivo de saúde exige comprovação por junta médica oficial da pertinência da mudança de lotação para tratamento. Parecer oficial que afasta benefício climático ou terapêutico, sem prova técnica em contrário, prevalece, e a discussão sobre condições meteorológicas demanda dilação probatória incompatível com o mandado de segurança.</tese>
+<parameter name="resultado">Desprovido — ApCiv 5026826-88.2020.4.03.6100, 25/05/2023 · 
+
+## Revisão de proventos de aposentadoria; decadência do prazo de revisão administrativa (1)
+- Reconhecida a decadência da revisão administrativa realizada após cinco anos, contados da chegada do processo de aposentadoria ao Tribunal de Contas. Restabelece-se a verba excluída e os descontos indevidos são devolvidos, com inversão da sucumbência à União. — ApCiv 5028030-41.2018.4.03.6100, 25/05/2023 · Provido · Tema 445/STF
+
+## Redução de jornada de servidor com filho com deficiência, sem compensação (1)
+-  — ApCiv 0005144-79.2017.4.03.6000, 25/05/2023 · Desprovido
+
+## Militar temporário com incapacidade temporária; licenciamento indevido; reintegração para tratamento; reforma e dano moral (1)
+- É ilegal o licenciamento de militar temporário com incapacidade temporária, sendo devida reintegração para tratamento e soldo até a recuperação. A reforma só cabe se a incapacidade impedir qualquer trabalho ou decorrer de atividade castrense. Recuperado o militar, cessa a reintegração; sem doença por acidente em serviço e com tratamento fornecido, não há dano moral.</tese>
+<parameter name="resultado">Parcialmente provido — ApCiv 0009265-58.2014.4.03.6000, 25/05/2023 · 
+
+## Militar temporário com incapacidade permanente por acidente em serviço; reintegração e reforma (1)
+-  — ApCiv 0008185-88.2016.4.03.6000, 25/05/2023 · 
+
+## Progressão funcional em carreira previdenciária; interstício de 18 meses (1)
+-  — ApCiv 0044585-76.2013.4.03.6301, 25/05/2023 · 
+
+## Militar da reserva; preterição em promoção; prescrição quinquenal (1)
+- O termo inicial da prescrição coincide com o conhecimento da violação do direito, aplicando-se a teoria actio nata. Se o militar teve acesso aos registros funcionais em 1996 e só ajuizou a ação em 2014, a pretensão está prescrita pelo prazo quinquenal. As Súmulas 85/STJ e 443/STF não se aplicam quando o próprio fundo de direito não foi negado ou reconhecido pela Administração.</tese>
+<parameter name="resultado">Desprovido — ApCiv 0000592-31.2014.4.03.6112, 25/05/2023 · 
+
+## Auxílio-transporte de servidor com residência em município diverso do trabalho (1)
+- O auxílio-transporte cobre o deslocamento entre residência e trabalho, inclusive intermunicipal, não podendo a Administração recusá-lo com base no domicílio civil. A fixação de termo inicial distinto é decaimento mínimo, e cabe condenação exclusiva do réu.</tese>
+<parameter name="resultado">Desprovido — ApCiv 5002605-15.2018.4.03.6002, 25/05/2023 · 
+
+## Pensão temporária de filha maior de 21 anos; união estável comprovada (1)
+-  — ApCiv 5003230-34.2018.4.03.6104, 25/05/2023 · 
+
+## Pensão especial de ex-combatente. Reversão a dependente. Óbito anterior à CF/1988 (1)
+-  — ApelRemNec 5006431-34.2018.4.03.6104, 25/05/2023 · 
+
+## Improbidade de auditor fiscal do trabalho por fraudes em fiscalizações (1)
+-  — ApCiv 5004167-44.2018.4.03.6104, 14/04/2023 ·  · Tema 1.199/STF, Tema 1.042/STJ
+
+## Litispendência entre mandado de segurança e ação ordinária em processo ético disciplinar (1)
+- Há litispendência quando a ação ordinária repete pedido, partes e causa de pedir de mandado de segurança anterior, mudando apenas a via processual. A alegação de nulidade já analisada no mandamus não pode ser renovada com provas novas em outra ação. Honorários recursais fixados com base no artigo 85, §11, do CPC.</tessubjacente>
+<parameter name="resultado">Desprovido — ApCiv 5001378-08.2019.4.03.6114, 20/03/2023 · 

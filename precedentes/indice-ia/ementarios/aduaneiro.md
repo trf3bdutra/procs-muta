@@ -1,11 +1,21 @@
 # Ementário · Aduaneiro
 
-Gerado do índice dos julgados do Relator (47 julgados, 46 assuntos). Teses resumidas pelo modelo a partir da ementa: conferir no inteiro teor antes de citar.
+Gerado do índice dos julgados do Relator (55 julgados, 54 assuntos). Teses resumidas pelo modelo a partir da ementa: conferir no inteiro teor antes de citar.
 
 ## Perdimento de veículo transportador de mercadorias estrangeiras sem entrada regular; proprietário não condutor (2)
 - A pena de perdimento do veículo exige avaliação de aspectos objetivos e subjetivos, como boa-fé, reincidência e proporcionalidade. O proprietário responde se concorreu, ao menos com culpa, para a infração, e a desproporção de valores não é fator único para afastar o perdimento.</tese>
 <parameter name="resultado">Desprovido — ApCiv 5005031-30.2023.4.03.6000, 09/06/2026 · 
 - O proprietário que não comprova boa-fé responde pelo perdimento do veículo se concorreu, ao menos com culpa, para a infração do condutor. Não basta alegar desconhecimento sem prova mínima, e a pena observa a proporcionalidade entre o valor do veículo e o das mercadorias. — ApCiv 0003203-16.2016.4.03.6005, 09/06/2026 · Desprovido
+
+## Perdimento de veículo van por transporte de mercadorias estrangeiras sem regular internação (1)
+-  — ApCiv 0001497-61.2017.4.03.6005, 26/10/2026 · 
+
+## Apreensão administrativa de joia importada; pena de perdimento; restituição (1)
+- A retenção de mercadoria estrangeira em circulação sem documento fiscal, sem prova de importação regular, justifica o procedimento de perdimento. A aquisição no mercado interno não gera presunção de boa-fé quando há inconsistências na documentação. A demora administrativa não assegura a liberação do bem. — ApCiv 5002376-07.2022.4.03.6005, 26/10/2026 · Desprovido
+
+## Embargos de declaração. Retenção de veículos por tráfego internacional irregular. Omissão quanto à proporcionalidade e ausência de dolo (1)
+- A infração do artigo 27, II, do Decreto 6.759/2009 é de natureza objetiva e se consuma com a irregularidade constatada na fiscalização. Regularização posterior não afasta a infração já consumada. Embargos acolhidos parcialmente, sem efeitos infringentes, apenas para integrar a fundamentação.</tese>
+<parameter name="resultado">Embargos acolhidos — ApelRemNec 5000660-16.2020.4.03.6004, 26/10/2026 · 
 
 ## Liberação de veículo apreendido em fiscalização aduaneira; terceiro de boa-fé; tutela recursal (1)
 - A tutela provisória de urgência exige a demonstração cumulativa da probabilidade do direito e do perigo de dano, nos termos do art. 300 do CPC. A ausência de um dos requisitos basta para o indeferimento do pedido. Recurso negado com base no art. 932 do CPC. — AI 5000593-08.2026.4.03.0001, 21/10/2026 · Desprovido
@@ -152,3 +162,18 @@ Gerado do índice dos julgados do Relator (47 julgados, 46 assuntos). Teses resu
 
 ## Embargos de declaração rejeitados; perdimento de veículo por transporte de mercadoria estrangeira sem documentação; boa-fé do proprietário (1)
 - A pena de perdimento de veículo por infração aduaneira exige exame casuístico da boa-fé do responsável legal, não havendo presunção. Absolvição criminal por falta de provas não vincula as esferas administrativa e cível. Embargos não se prestam à rediscussão do mérito. — ApelRemNec 5000571-34.2022.4.03.6000, 28/04/2026 · Embargos rejeitados
+
+## Ilegitimidade ativa para anular pena de perdimento aplicada a terceiro (1)
+- A parte que não sofreu a pena de perdimento não tem legitimidade para impugná-la em nome próprio. Interesse econômico ou reflexo decorrente de contrato privado com a destinatária dos bens não basta para integrar a lide. — ApCiv 0021786-26.2014.4.03.6100, 14/04/2023 · Desprovido
+
+## Duplo grau administrativo em pena de perdimento de mercadorias; intempestividade de recurso (1)
+-  — ApCiv 5006139-44.2021.4.03.6104, 14/04/2023 · 
+
+## Pena de perdimento; recurso administrativo obrigatório; Convenção de Quioto Revisada (1)
+-  — ApCiv 5012604-66.2021.4.03.6105, 14/04/2023 · 
+
+## Taxa SISCOMEX, majoração por portaria, limite de correção monetária e compensação (1)
+-  — ApCiv 5001531-21.2022.4.03.6119, 23/03/2023 · 
+
+## Advertência por atraso reiterado em informações de carga ao SISCOMEX (1)
+-  — ApelRemNec 5024032-94.2020.4.03.6100, 20/03/2023 · 

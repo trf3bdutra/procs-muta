@@ -1,6 +1,6 @@
 # Ementário · Assistencial (BPC/LOAS)
 
-Gerado do índice dos julgados do Relator (253 julgados, 229 assuntos). Teses resumidas pelo modelo a partir da ementa: conferir no inteiro teor antes de citar.
+Gerado do índice dos julgados do Relator (269 julgados, 244 assuntos). Teses resumidas pelo modelo a partir da ementa: conferir no inteiro teor antes de citar.
 
 ## Mora administrativa na análise de benefício assistencial à pessoa com deficiência (6)
 - Configura-se mora ilegal quando o requerimento administrativo permanece sem apreciação além do prazo legal, sem motivo que justifique a demora. Viola a razoável duração do processo administrativo e os prazos da Lei 9.784/1999. — RemNecCiv 5000218-52.2026.4.03.6000, 21/07/2026 · Desprovido
@@ -17,6 +17,11 @@ Gerado do índice dos julgados do Relator (253 julgados, 229 assuntos). Teses re
 - Configura mora ilegal a ausência de apreciação de requerimento administrativo além do prazo legal, sem fundamento que justifique o atraso. Aplica-se o prazo de trinta dias do artigo 49 da Lei 9.784/1999. Remessa necessária desprovida, com decisão monocrática. — RemNecCiv 5000292-91.2026.4.03.6005, 17/06/2026 · Desprovido
 -  — RemNecCiv 5000323-42.2025.4.03.6007, 15/06/2026 · 
 - Configura mora ilegal a ausência de apreciação de requerimento administrativo após o prazo legal, sem motivo que a justifique. Confirmada a ordem para conclusão do processo em trinta dias. — RemNecCiv 5002269-55.2025.4.03.6005, 12/06/2026 · Desprovido
+
+## Mora do INSS em benefício assistencial; prazo para conclusão de requerimento (3)
+-  — RemNecCiv 5000360-41.2026.4.03.6005, 19/11/2026 · 
+- A demora da Administração em decidir requerimento de benefício, sem motivação razoável e além do prazo legal, configura mora ilegal e viola direito líquido e certo à tramitação administrativa. Mantém-se a sentença que determinou a conclusão do procedimento em 20 dias. — RemNecCiv 5001265-55.2026.4.03.6002, 28/08/2026 · Desprovido
+- A demora sem motivação razoável, além do prazo legal, configura mora ilegal e viola o direito líquido e certo à tramitação administrativa. Sentença que fixou prazo de 30 dias para decisão foi mantida. — RemNecCiv 5000818-58.2026.4.03.6005, 25/08/2026 · Desprovido
 
 ## Mora do INSS em benefício assistencial; mandado de segurança; prazo para decisão administrativa (3)
 - Configura mora ilegal o decurso do prazo legal sem decisão administrativa, sem razoável motivação nos autos. Nega-se provimento à remessa necessária e mantém-se a ordem para conclusão da análise. — RemNecCiv 5001432-72.2026.4.03.6002, 28/08/2026 · Desprovido
@@ -42,10 +47,6 @@ Gerado do índice dos julgados do Relator (253 julgados, 229 assuntos). Teses re
 - Decorrido o prazo legal sem decisão administrativa e sem motivação razoável, configura-se mora ilegal e direito líquido e certo à tramitação administrativa nos prazos fixados. Remessa necessária desprovida. — RemNecCiv 5001212-65.2026.4.03.6005, 27/10/2026 · Desprovido
 - A demora da Administração em decidir requerimento de benefício, sem motivação razoável e além do prazo legal, configura mora ilegal e viola o direito líquido e certo à tramitação administrativa. Mantida a sentença que determinou a conclusão do procedimento em 20 dias. — RemNecCiv 5000857-64.2026.4.03.6002, 28/08/2026 · Desprovido
 
-## Mora do INSS em benefício assistencial; prazo para conclusão de requerimento (2)
-- A demora da Administração em decidir requerimento de benefício, sem motivação razoável e além do prazo legal, configura mora ilegal e viola direito líquido e certo à tramitação administrativa. Mantém-se a sentença que determinou a conclusão do procedimento em 20 dias. — RemNecCiv 5001265-55.2026.4.03.6002, 28/08/2026 · Desprovido
-- A demora sem motivação razoável, além do prazo legal, configura mora ilegal e viola o direito líquido e certo à tramitação administrativa. Sentença que fixou prazo de 30 dias para decisão foi mantida. — RemNecCiv 5000818-58.2026.4.03.6005, 25/08/2026 · Desprovido
-
 ## Mora administrativa em requerimento de benefício assistencial ao idoso (2)
 - A ausência de apreciação do requerimento administrativo além do prazo legal caracteriza mora ilegal da Administração. Cabe a ordem para conclusão do processo no prazo de trinta dias. — RemNecCiv 5002249-64.2025.4.03.6005, 21/07/2026 · Desprovido
 - Configura mora ilegal a falta de apreciação de requerimento administrativo além do prazo legal, sem fundamento que justifique a demora. Impõe-se a conclusão do processo administrativo. — RemNecCiv 5002253-04.2025.4.03.6005, 17/06/2026 · Desprovido
@@ -67,6 +68,36 @@ Gerado do índice dos julgados do Relator (253 julgados, 229 assuntos). Teses re
 ## Mora da Administração na análise de requerimento de benefício assistencial à pessoa com deficiência (2)
 - Configura mora ilegal a ausência de apreciação de requerimento administrativo após o prazo legal, sem fundamento que justifique a demora. Cabe ordem para conclusão do processo administrativo. — RemNecCiv 5000376-92.2026.4.03.6005, 29/06/2026 · Desprovido
 - A mora administrativa sem fundamento que justifique o atraso, além do prazo legal, configura ilegalidade. Cabe ao Poder Público concluir a análise dentro dos prazos fixados na lei. Remessa necessária desprovida. — RemNecCiv 5000084-19.2026.4.03.6002, 12/06/2026 · Desprovido
+
+## Demora do INSS na análise de requerimento de BPC/LOAS (1)
+- Decorrido o prazo legal sem decisão administrativa e sem motivação razoável, configura-se mora ilegal da Administração. Cabe determinar a análise do requerimento. — RemNecCiv 5003128-52.2026.4.03.6000, 19/11/2026 · Desprovido
+
+## Demora do INSS na análise de pedido de amparo social à pessoa com deficiência (1)
+-  — RemNecCiv 5001170-31.2026.4.03.6000, 19/11/2026 · Acórdão mantido
+
+## Reintegração de posse de lote rural em assentamento após óbito do beneficiário (1)
+- A posse de lote rural em assentamento transmite-se aos herdeiros legítimos com a abertura da sucessão. Ocupação por terceiro, sem vacância do lote, configura esbulho que autoriza a reintegração em favor do sucessor. — ApCiv 5000630-96.2025.4.03.6006, 14/11/2026 · Provido
+
+## Embargos de declaração. BPC. Consectários legais. Correção monetária e juros após EC 113/2021 e EC 136/2025 (1)
+-  — ApCiv 5218258-32.2026.4.03.9999, 14/11/2026 ·  · Tema 810/STF, Tema 1.419/STF, Tema 1.457/STF
+
+## BPC à pessoa com deficiência; visão monocular; embargos de declaração rejeitados (1)
+-  — ApCiv 5145372-35.2026.4.03.9999, 14/11/2026 · 
+
+## BPC à pessoa com deficiência; embargos de declaração rejeitados; renda familiar e vulnerabilidade não demonstradas (1)
+- Embargos de declaração não se prestam a rediscutir o mérito quando inexistem omissão, contradição ou obscuridade. Dados do CNIS e atividade não remunerada, mencionados como contexto, não configuram violação ao contraditório. Para fins de prequestionamento, consideram-se incluídos no acórdão os elementos suscitados (art. 1.025 do CPC). — ApCiv 5193426-32.2026.4.03.9999, 14/11/2026 · Embargos rejeitados
+
+## BPC para pessoa com deficiência; impedimento de longo prazo não configurado; embargos de declaração rejeitados (1)
+- Embargos de declaração não se prestam à rediscussão do mérito. Não há omissão quando o acórdão examina a natureza e a duração das limitações constatadas na perícia e conclui pela ausência de impedimento de longo prazo. Teses da TNU não vinculam o Tribunal. — ApCiv 5145544-74.2026.4.03.9999, 14/11/2026 · Embargos rejeitados · Tema 173/TNU
+
+## BPC para pessoa com deficiência visual monocular com comprometimento do olho remanescente (1)
+- A visão monocular é deficiência sensorial visual para todos os efeitos legais, e a lei não exige graduação da deficiência para o BPC. Impedimento de longo prazo com barreiras à participação social e profissional basta para a concessão. Os consectários seguem os critérios das ECs 113/2021 e 136/2025. — ApCiv 5423359-66.2026.4.03.9999, 14/11/2026 · Desprovido · Tema 27/STF, Tema 312/STF, Tema 185/STJ, Tema 640/STJ, Tema 1.105/STJ, Tema 810/STF, Tema 1.419/STF
+
+## Agravo de instrumento prejudicado por sentença homologatória de acordo em benefício assistencial (1)
+- Sobrevindo sentença no processo principal, a decisão provisória é substituída e o agravo de instrumento perde o objeto. O recurso é julgado prejudicado por falta de interesse superveniente. — AI 5005915-12.2026.4.03.0000, 29/10/2026 · Prejudicado
+
+## Mora do INSS em requerimento de BPC/LOAS; mandado de segurança (1)
+- Decorrido prazo legal sem decisão administrativa e sem razão motivada, configura-se mora ilegal da Administração. Remessa necessária desprovida, com decisão monocrática do relator nos termos do art. 932 do CPC. — RemNecCiv 5001130-34.2026.4.03.6005, 28/10/2026 · Desprovido
 
 ## Restabelecimento de BPC a pessoa com deficiência; inexigibilidade de débito por boa-fé (1)
 - O BPC exige deficiência e vulnerabilidade socioeconômica cumulativas; renda per capita acima de meio salário mínimo, sem situação excepcional comprovada, afasta o benefício. Valores pagos por erro administrativo não são exigíveis quando há boa-fé objetiva e a autarquia manteve o pagamento por longo período sem alerta.</tese>
@@ -750,3 +781,19 @@ Gerado do índice dos julgados do Relator (253 julgados, 229 assuntos). Teses re
 
 ## Laudo pericial incompleto em BPC/LOAS; quesitos não respondidos; nulidade da sentença (1)
 - Laudo pericial que deixa de responder quesitos e não analisa os documentos juntados não permite o controle da conclusão pelas partes e pelo juízo. Havendo impugnação tempestiva e perícia incompleta, a causa não está madura e os autos retornam à origem para complementação da prova. — ApCiv 5000101-11.2024.4.03.6007, 31/03/2026 · Parcialmente provido · Tema 27/STF, Tema 312/STF, Tema 640/STJ, Tema 185/STJ
+
+## Liminar em mandado de segurança sobre cancelamento de leilões de joias pela CAIXA (1)
+- A tutela de urgência em mandado de segurança exige fumus boni iuris e periculum in mora. Presentes ambos, com arrematação de boa-fé e risco de esvaziamento do objeto, mantém-se a decisão agravada. — AI 5018804-37.2022.4.03.0000, 26/06/2023 · Desprovido
+
+## Fraude bancária com aplicativo digital; responsabilidade objetiva da CEF (1)
+- Instituição financeira responde objetivamente por fraudes de terceiros em operações bancárias, por fortuito interno. Não há culpa exclusiva ou concorrente do consumidor quando cabia ao banco identificar transações fora do perfil e evitar a fraude. — ApCiv 5005131-02.2021.4.03.6114, 08/06/2023 · Parcialmente provido
+
+## Fraude em aplicativo bancário contra cliente idoso; responsabilidade objetiva (1)
+- A instituição financeira responde objetivamente por fraudes de terceiros em operações bancárias, sem culpa concorrente do consumidor quando cabia ao banco identificar transações fora do perfil. A vulnerabilidade do consumidor idoso afasta a divisão proporcional da culpa, e a condenação cobre o dano material, com correção e juros, e dano moral arbitrado em dez mil reais.</tese>
+<parameter name="resultado">Parcialmente provido — ApCiv 5004172-58.2022.4.03.6126, 08/06/2023 · 
+
+## Ação monitória. Cédula de crédito bancário GiroCaixa. Revisão de juros e encargos (1)
+- A monitória instruída com contratos, extratos e demonstrativos de débito é suficiente, e a perícia contábil é dispensável quando a controvérsia é de direito. A capitalização de juros prevista em contrato expresso não é abusiva, e não cabe substituir os encargos de mora livremente pactuados. — ApCiv 5007260-62.2021.4.03.6119, 08/06/2023 · Desprovido
+
+## ação monitória contrato bancário crédito rotativo cheque especial (1)
+- Não ocorre prescrição quando não decorrido o prazo quinquenal até a citação, retroativa à propositura. Juros capitalizados previstos expressamente em contrato não são abusivos, e a comissão de permanência, sem cumulação com outros encargos, é válida. — ApCiv 5019647-11.2017.4.03.6100, 25/05/2023 · Desprovido

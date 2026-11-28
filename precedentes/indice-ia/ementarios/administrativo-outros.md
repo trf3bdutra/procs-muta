@@ -1,9 +1,150 @@
 # Ementário · Administrativo · outros
 
-Gerado do índice dos julgados do Relator (155 julgados, 155 assuntos). Teses resumidas pelo modelo a partir da ementa: conferir no inteiro teor antes de citar.
+Gerado do índice dos julgados do Relator (352 julgados, 316 assuntos). Teses resumidas pelo modelo a partir da ementa: conferir no inteiro teor antes de citar.
+
+## REVALIDA. Exigência de diploma estrangeiro na inscrição. Edital ilegal (12)
+- A Lei 13.959/2019 não exige diploma estrangeiro para inscrição no REVALIDA. A exigência editalícia extrapola a lei, pois a revalidação do diploma ocorre depois da aprovação, perante universidade pública. Admite-se a tutela de urgência, pois o sobrestamento do IRDR não alcança tutelas de urgência.</tese>
+<parameter name="resultado">Desprovido — AI 5001869-19.2022.4.03.0000, 20/03/2023 · 
+- A exigência de diploma no ato de inscrição do REVALIDA extrapola a Lei 13.959/2019 e não guarda relação com a natureza da avaliação de conhecimentos. A apresentação do diploma cabe à etapa de revalidação perante a universidade pública. Tutela de urgência é cabível, pois o sobrestamento do IRDR não alcança tutelas de urgência.</tese>
+<parameter name="resultado">Outro — AI 5001190-19.2022.4.03.0000, 20/03/2023 · 
+-  — AI 5002343-87.2022.4.03.0000, 20/03/2023 · 
+-  — AI 5002161-04.2022.4.03.0000, 20/03/2023 · 
+-  — AI 5021880-69.2022.4.03.0000, 20/03/2023 · 
+- A exigência de apresentação do diploma estrangeiro no ato de inscrição extrapola a Lei 13.959/2019 e não se harmoniza com a natureza avaliativa do REVALIDA. A revalidação do diploma ocorre depois, perante universidade pública. Cabe tutela de urgência, pois o sobrestamento do IRDR não alcança tutelas de urgência.</tese>
+<parameter name="resultado">Desprovido — AI 5002691-08.2022.4.03.0000, 20/03/2023 · 
+-  — AI 5018204-16.2022.4.03.0000, 20/03/2023 · 
+-  — AI 5002143-80.2022.4.03.0000, 20/03/2023 · 
+- A exigência de apresentação do diploma estrangeiro no ato de inscrição no REVALIDA extrapola a Lei 13.959/2019, pois a avaliação não se confunde com a revalidação junto à universidade pública. A decisão de sobrestamento do IRDR não atinge tutelas de urgência.</tese>
+<parameter name="resultado">Acórdão mantido — AI 5017645-59.2022.4.03.0000, 20/03/2023 · 
+-  — AI 5017634-30.2022.4.03.0000, 20/03/2023 · 
+-  — AI 5016786-43.2022.4.03.0000, 20/03/2023 · 
+- A exigência de apresentação do diploma estrangeiro no ato de inscrição extrapola a Lei 13.959/2019, pois a avaliação não se confunde com a revalidação junto à universidade pública. A decisão de sobrestamento do IRDR não atinge tutelas de urgência. — AI 5019927-70.2022.4.03.0000, 20/03/2023 · Desprovido
+
+## Multa de conselho profissional fixada em salários mínimos (6)
+-  — ApCiv 0053744-56.2006.4.03.6182, 03/04/2023 · 
+-  — ApCiv 0056568-85.2006.4.03.6182, 03/04/2023 · 
+-  — ApCiv 5025177-70.2019.4.03.6182, 03/04/2023 · 
+-  — ApCiv 0027343-93.2001.4.03.6182, 03/04/2023 · 
+-  — ApCiv 0027282-38.2001.4.03.6182, 03/04/2023 · 
+-  — ApCiv 0013170-83.2009.4.03.6182, 03/04/2023 · 
+
+## REVALIDA. exigência de diploma estrangeiro na inscrição do exame (5)
+-  — AI 5001121-84.2022.4.03.0000, 20/03/2023 · 
+-  — AI 5021888-46.2022.4.03.0000, 20/03/2023 · 
+-  — AI 5016887-80.2022.4.03.0000, 20/03/2023 · 
+-  — AI 5002895-52.2022.4.03.0000, 20/03/2023 · 
+- A exigência de diploma no ato de inscrição do REVALIDA extrapola a Lei 13.959/2019, pois a avaliação não se confunde com a revalidação junto às universidades públicas. Cabe tutela de urgência, mesmo com IRDR pendente sobre a matéria. — AI 5003956-45.2022.4.03.0000, 20/03/2023 · Desprovido
+
+## REVALIDA. Exigência de diploma estrangeiro na inscrição do exame (5)
+-  — AI 5017537-30.2022.4.03.0000, 20/03/2023 · 
+-  — AI 5021899-75.2022.4.03.0000, 20/03/2023 · 
+- A exigência de apresentação do diploma no ato de inscrição extrapola a Lei 13.959/2019, pois o exame avalia conhecimentos, habilidades e competências, e a revalidação do diploma ocorre depois, perante universidade pública. A tutela de urgência é cabível enquanto não houver decisão do IRDR 5.</tese>
+<parameter name="resultado">Provido — AI 5017023-77.2022.4.03.0000, 20/03/2023 · 
+-  — AI 5017637-82.2022.4.03.0000, 20/03/2023 · 
+-  — AI 5002613-14.2022.4.03.0000, 20/03/2023 · 
+
+## REVALIDA. Exigência de diploma estrangeiro no ato de inscrição (4)
+- A exigência de apresentação do diploma no ato de inscrição do REVALIDA extrapola a Lei 13.959/2019, pois a avaliação não se confunde com a revalidação do diploma. A tutela de urgência é cabível enquanto não houver solução do IRDR 5/TRF3. — AI 5007549-82.2022.4.03.0000, 20/03/2023 · Provido
+-  — AI 5004508-10.2022.4.03.0000, 20/03/2023 · 
+- A exigência de apresentação do diploma estrangeiro no ato de inscrição no REVALIDA extrapola a Lei 13.959/2019, pois a avaliação de conhecimentos independe desse documento. A revalidação do diploma ocorre depois, perante a universidade pública, e a Súmula 266/STJ não pode ser descartada. Tutela de urgência mantida, pois a demora gera perigo de dano.</tese>
+<parameter name="resultado">Acórdão mantido — AI 5016877-36.2022.4.03.0000, 20/03/2023 · 
+-  — AI 5003253-17.2022.4.03.0000, 20/03/2023 · 
+
+## Revalidação de diploma estrangeiro de Medicina; tramitação simplificada vedada (3)
+- A Resolução CNE/CES 2/2024 afastou a tramitação simplificada para diplomas estrangeiros de Medicina e condicionou a revalidação à aprovação no Revalida. Não há direito líquido e certo à modalidade simplificada ou alternativa. — ApCiv 5007881-86.2025.4.03.6000, 14/11/2026 · Desprovido · Tema 599/STJ, Tema 615/STJ
+- A Resolução CNE/CES 2/2024 excluiu a tramitação simplificada para diplomas estrangeiros de Medicina e exigiu aprovação no Revalida. Inexiste direito líquido e certo à modalidade simplificada ou alternativa. — ApCiv 5007641-97.2025.4.03.6000, 14/11/2026 · Desprovido · Tema 599/STJ, Tema 615/STJ
+- A Resolução CNE/CES 2/2024 excluiu a tramitação simplificada para diplomas estrangeiros de Medicina e condicionou a revalidação à aprovação no Revalida. Não há direito líquido e certo à tramitação simplificada ou a procedimento alternativo, e a universidade pode disciplinar o procedimento no exercício de sua autonomia.</tese>
+<parameter name="resultado">Acórdão mantido — ApCiv 5011562-64.2025.4.03.6000, 14/11/2026 ·  · Tema 599/STJ, Tema 615/STJ
+
+## Indenização por danos morais por perseguição política na Ditadura Militar (3)
+- Homologada a transação entre as partes, resolve-se o mérito com fundamento no art. 487, III, "b", do CPC, e os recursos ficam prejudicados. Os autos retornam ao juízo de origem para cumprimento do acordo. — ApCiv 5000243-53.2022.4.03.6114, 05/07/2023 · Prejudicado
+- Acordo celebrado com concessões recíprocas foi homologado, resolvendo-se o mérito nos termos do art. 487, III, "b", do CPC. Recursos interpostos ficaram prejudicados. — ApCiv 5003868-66.2020.4.03.6114, 19/05/2023 · Prejudicado
+- Acordo celebrado pelas partes, com concessões recíprocas, foi homologado com resolução do mérito nos termos do art. 487, III, "b", do CPC. Recursos interpostos ficaram prejudicados. — ApCiv 5007138-64.2021.4.03.6114, 14/04/2023 · Prejudicado
+
+## Mora administrativa no encaminhamento de débitos à PGFN para inscrição em dívida ativa (2)
+-  — RemNecCiv 5006313-35.2025.4.03.6000, 29/10/2026 · 
+- A RFB deve encaminhar à PGFN, no prazo legal, os débitos exigíveis que cumpram os requisitos, sob pena de responsabilidade dos dirigentes. A mora administrativa justifica a concessão parcial da ordem. — RemNecCiv 5009055-04.2023.4.03.6000, 28/07/2026 · Desprovido
+
+## Exigência de publicação de demonstrações financeiras como condição para arquivamento de atos societários na JUCESP (2)
+- A exigência de cumprimento da Deliberação JUCESP 02/2015 como condição para arquivar atos societários viola direito líquido e certo. A publicidade das demonstrações financeiras de sociedades de grande porte segue a Lei 6.404/1976, e a restrição seria desproporcional. — ApelRemNec 5018150-83.2022.4.03.6100, 09/02/2024 · Acórdão mantido
+-  — RemNecCiv 5001163-33.2022.4.03.6112, 25/05/2023 · 
+
+## FIES. Segunda graduação. Ordem de classificação. Portaria MEC 38/2021 (2)
+-  — AI 5020753-62.2023.4.03.0000, 29/11/2023 · 
+-  — AI 5018475-88.2023.4.03.0000, 14/11/2023 · 
+
+## FIES. Extensão de carência para residência médica. Embargos de declaração rejeitados (2)
+- Embargos de declaração não se prestam à rediscussão do julgado. Ausentes vícios sanáveis na via eleita, rejeitam-se os embargos. A carência prevista no artigo 6º-B, § 3º, da Lei 10.260/2001 não pode ser restringida por normas infralegais. — ApCiv 5000493-59.2022.4.03.6123, 29/11/2023 · Embargos rejeitados
+-  — ApCiv 5002882-02.2022.4.03.6128, 11/10/2023 · Embargos rejeitados
+
+## FIES. Extensão de carência para residência médica em especialidade prioritária (2)
+- O artigo 6º-B, § 3º, da Lei 10.260/2001 garante a carência por todo o período da residência em especialidade prioritária. Atos normativos que imponham outras restrições são ilegais, e o benefício não depende do marco temporal de contratação nem da vigência da carência do inciso V.</tese>
+<parameter name="resultado">Desprovido — ApelRemNec 5003081-13.2021.4.03.6143, 29/11/2023 · 
+- O direito à carência por todo o período da residência médica em especialidade prioritária não depende do marco temporal de contratação nem da fase de amortização. Restrições infralegais além da definição das especialidades prioritárias são ilegais. — ApelRemNec 5000545-58.2022.4.03.6122, 08/06/2023 · Desprovido
+
+## Tutela contra notificação de concessionária sobre faturamento Optante B e SCEE (1)
+-  — AI 5000799-22.2026.4.03.0001, 18/11/2026 · 
+
+## Energia elétrica; geração distribuída; enquadramento tarifário Grupo B; tutela provisória (1)
+- A tutela provisória de urgência exige a presença cumulativa da probabilidade do direito e do perigo de dano ou risco ao resultado útil do processo, nos termos do artigo 300 do CPC. A ausência de um deles basta para afastar a medida. Recurso negado monocraticamente com base no artigo 932 do CPC. — AI 5033487-40.2026.4.03.0000, 18/11/2026 · Desprovido
+
+## Carência estendida FIES para médico residente; contrato já em amortização (1)
+- A carência estendida para médicos residentes pressupõe requerimento tempestivo e contrato ainda na fase de carência. Não é possível transformar obrigação já em amortização em nova fase de carência. Não há efeito suspensivo à apelação. — TutCautAnt 5000794-97.2026.4.03.0001, 17/11/2026 · Desprovido
+
+## Embargos de declaração em reintegração de posse de lote em projeto de assentamento (1)
+-  — ApCiv 0000780-85.2013.4.03.6006, 14/11/2026 · 
+
+## Revalidação de diploma estrangeiro de Medicina; tramitação simplificada; Revalida (1)
+- A Resolução CNE/CES 2/2024 excluiu a tramitação simplificada para diplomas estrangeiros de Medicina e condicionou a revalidação à aprovação no Revalida. Não há direito líquido e certo à tramitação simplificada, e a distinção em relação a outras áreas não viola a isonomia. — ApCiv 5000439-29.2026.4.03.6002, 14/11/2026 · Desprovido · Tema 599/STJ, Tema 615/STJ
+
+## Nulidade de georreferenciamento certificado pelo INCRA e cancelamento de registros imobiliários (1)
+-  — ApCiv 0001997-50.2014.4.03.6000, 14/11/2026 · 
+
+## Revalidação de diploma estrangeiro de Medicina; tramitação simplificada; exigência de Revalida (1)
+- A Resolução CNE/CES 2/2024 afastou a tramitação simplificada para diplomas estrangeiros de Medicina e condicionou a revalidação à aprovação no Revalida. Não há direito líquido e certo à modalidade simplificada ou a procedimento alternativo. — ApCiv 5000732-05.2026.4.03.6000, 14/11/2026 · Acórdão mantido · Tema 599/STJ, Tema 615/STJ
+
+## Revalidação de diploma estrangeiro de Medicina e tramitação simplificada (1)
+-  — ApCiv 5012474-61.2025.4.03.6000, 14/11/2026 ·  · Tema 599/STJ, Tema 615/STJ
+
+## Exigência de documentos de identificação para realização do ENEM 2024 por candidato indígena (1)
+-  — RemNecCiv 5011625-26.2024.4.03.6000, 14/11/2026 · Desprovido
+
+## Exame RevalidA segunda etapa; desistência de mandado de segurança (1)
+- Pedido da impetrante, após aprovação em nova edição do exame, foi recebido como desistência da ação e homologado independentemente da concordância da parte contrária. Processo extinto sem resolução do mérito. — ApCiv 5002259-11.2025.4.03.6005, 12/11/2026 · Não conhecido · Tema 530/STF
+
+## Mandado de segurança sobre questões de concurso da PRF; desistência homologada (1)
+- A desistência da ação de mandado de segurança pode ser homologada independentemente da aquiescência da parte contrária, com extinção do feito sem resolução do mérito. Não há julgamento do mérito do pedido de anulação de questões. — ApCiv 5000376-62.2021.4.03.6007, 12/11/2026 · Não conhecido · Tema 530/STF
+
+## Mais Médicos; alteração de edital de convocação para módulo de acolhimento (1)
+- Ausente a probabilidade do direito, não se concede tutela provisória de urgência, pois os requisitos do artigo 300 do CPC são cumulativos. Recurso negado monocraticamente por entendimento consolidado. — AI 5033764-56.2026.4.03.0000, 12/11/2026 · Desprovido
+
+## Mais Médicos, convocação para MAAv, cadastro de reserva, tutela de urgência (1)
+- A tutela provisória de urgência exige a presença cumulativa da probabilidade do direito e do perigo de dano, nos termos do artigo 300 do CPC. A ausência de um dos requisitos basta para o indeferimento. Recurso desprovido por decisão monocrática, com base no artigo 932 do CPC. — AI 5000791-45.2026.4.03.0001, 12/11/2026 · Desprovido
+
+## Inclusão em ciclo do MAAv; perda de objeto do agravo por sentença superveniente (1)
+-  — AI 5020602-91.2026.4.03.0000, 06/11/2026 · 
+
+## Exame de residência médica (ENARE) · candidato com deficiência · tutela provisória recursal (1)
+- A tutela provisória de urgência exige, cumulativamente, probabilidade do direito e perigo de dano ou risco ao resultado útil do processo. A ausência de um dos requisitos basta para o indeferimento. Recurso negado com base no art. 932 do CPC, por decisão monocrática. — AI 5000786-23.2026.4.03.0001, 06/11/2026 · Desprovido
+
+## Agravo de instrumento prejudicado por perda superveniente do interesse recursal após concessão de tutela em mandado de segurança sobre inclusão no Mais Médicos (1)
+- A concessão na origem da tutela de urgência pretendida no recurso torna prejudicado o agravo de instrumento, por ausência de interesse recursal superveniente. Aplica-se o artigo 932, III, do CPC. — AI 5000213-82.2026.4.03.0001, 29/10/2026 · Prejudicado
 
 ## Mais Médicos; edital de seleção; vagas ociosas; agravo prejudicado por sentença (1)
 - A sentença proferida nos autos principais substitui a decisão provisória e esvazia o objeto do agravo de instrumento. Reconhecida a perda superveniente de interesse recursal, o agravo é julgado prejudicado com base no artigo 932, III, do CPC. — AI 5005989-66.2026.4.03.0000, 28/10/2026 · Prejudicado
+
+## Mora administrativa em encaminhar débitos à PGFN para inscrição em dívida ativa (1)
+-  — RemNecCiv 5001013-83.2025.4.03.6003, 28/10/2026 · 
+
+## Perdimento de veículo e tutela de urgência em agravo de instrumento (1)
+- A tutela provisória de urgência exige probabilidade do direito e perigo de dano cumulativamente. A ausência de um dos requisitos basta para o indeferimento. Negado provimento ao agravo por decisão monocrática do relator. — AI 5000759-40.2026.4.03.0001, 28/10/2026 · Desprovido
+
+## Programa Mais Médicos; alteração de edital durante seleção; perda de objeto do agravo (1)
+-  — AI 5016449-15.2026.4.03.0000, 28/10/2026 · 
+
+## Agravo de instrumento contra tutela em mandado de segurança sobre assistência consular; perda de objeto após sentença (1)
+- A prolação de sentença substitui ou prejudica a decisão provisória proferida no curso do processo, esvaziando o objeto do agravo de instrumento. Há superveniente perda de interesse recursal, pois o recurso não tem mais utilidade para reformar decisão que não produz mais efeitos jurídicos.</tese>
+<parameter name="resultado">Prejudicado — AI 5000359-26.2026.4.03.0001, 27/10/2026 · 
 
 ## FIES. baixa de contrato quitado. ilegitimidade passiva da CEF e do FNDE (1)
 - A baixa de contrato quitado de financiamento estudantil cabe ao agente financeiro contratante, que controla os dados da relação contratual. As alterações da Lei 13.530/2017 não atingem contratos antigos operados por outra instituição. A suposta baixa feita pela CEF em seus cadastros não demonstra competência sobre o contrato.</tese>
@@ -11,6 +152,44 @@ Gerado do índice dos julgados do Relator (155 julgados, 155 assuntos). Teses re
 
 ## Abatimento de saldo devedor do FIES para médico atuante no SUS na pandemia de Covid-19 (1)
 -  — ApelRemNec 5002829-11.2022.4.03.6002, 26/10/2026 · 
+
+## Embargos à execução de acórdão do TCU; responsabilidade solidária de terceiro por termo aditivo (1)
+- O requerimento de aditamento contratual não é ilícito em tese. Quando feito sem base legal e sem prova do desequilíbrio econômico-financeiro, gerando vantagem à contratada e prejuízo ao erário, justifica a responsabilização solidária do terceiro. A decisão administrativa fundamentada e sem cerceamento de defesa não é nula.</tese>
+<parameter name="resultado">Desprovido — ApCiv 0008324-16.2011.4.03.6000, 26/10/2026 · 
+
+## Abatimento de saldo devedor de FIES para médico militar em região de fronteira (1)
+- O médico militar que atua por período ininterrupto superior a um ano em região de fronteira com carência de profissionais tem direito ao abatimento do artigo 6º-F da Lei 10.260/2001. A falta de regulamentação atualizada não impede o exercício desse direito. Os requisitos previstos para médicos de Saúde da Família não se aplicam ao médico militar. O FNDE tem legitimidade passiva.</tese>
+<parameter name="resultado">Provido — ApCiv 5000796-71.2024.4.03.6004, 26/10/2026 · 
+
+## FIES. Aditamento não efetivado por inconsistência no SisFIES. Carência a partir da colação de grau (1)
+- A colação de grau marca o início da carência quando a dilação decorre de inconsistência do sistema do FIES alheia à vontade do financiado. O FNDE e o agente financeiro respondem pela discussão sobre aditamento e amortização. — ApCiv 5007654-38.2021.4.03.6000, 26/10/2026 · Desprovido
+
+## FIES. Legitimidade passiva do FNDE. Aditamento e cobrança retroativa de coparticipação (1)
+-  — ApCiv 5002148-13.2023.4.03.6000, 26/10/2026 · Desprovido
+
+## Multa administrativa em múltiplos do salário mínimo; Conselho de Farmácia (1)
+-  — ApCiv 5009262-03.2023.4.03.6000, 26/10/2026 ·  · Tema 1.244/STF
+
+## FIES. renegociação. contrato adimplente. taxa de juros zero retroativa (1)
+- Os descontos de renegociação do FIES destinam-se a contratos inadimplentes, e a inscrição no Cadastro Único não supre esse requisito. A taxa de juros zero não retroage a contratos celebrados antes do primeiro semestre de 2018. — ApCiv 5012201-19.2024.4.03.6000, 26/10/2026 · Desprovido
+
+## FIES. abatimento de 1% do saldo devedor. médico no SUS durante a pandemia de Covid-19 (1)
+-  — ApCiv 5006941-24.2025.4.03.6000, 26/10/2026 · 
+
+## Abatimento do saldo devedor do FIES para médico atuante no SUS na pandemia de Covid-19 (1)
+- O abatimento do FIES pode ser concedido a profissional de saúde que atendeu os requisitos legais e atuou no SUS até o fim da emergência sanitária, sem limitação ao período de vigência do Decreto Legislativo 6/2020. A ausência de regulamentação específica não impede o benefício, e a falta de requerimento administrativo não afasta o interesse processual. — ApelRemNec 5005353-16.2024.4.03.6000, 26/10/2026 · Parcialmente provido
+
+## Eleição de conselheiros COREN/MS; indeferimento de chapa por inelegibilidade sindical (1)
+- A cessação da inelegibilidade exige interrupção material das atividades sindicais, não apenas pedido formal de licença. Sem demonstração de ilegalidade ou abuso no ato administrativo, não há probabilidade do direito para suspender o indeferimento da chapa. — AI 5000742-04.2026.4.03.0001, 26/10/2026 · Desprovido
+
+## FIES. aditamento contratual. falha no SisFIES. legitimidade passiva do agente financeiro (1)
+- O agente financeiro do FIES responde pela formalização de aditamentos e deve atuar em conjunto com a instituição de ensino e o agente operador. Falhas sistêmicas que impedem o aditamento, alheias à vontade do estudante, justificam a obrigação de regularização, e a validade contratual não afasta essa responsabilidade. — ApCiv 0003348-53.2017.4.03.6000, 26/10/2026 · Desprovido
+
+## Embargos à execução de multa do TCU; prescrição intercorrente e controle judicial (1)
+-  — ApCiv 0014572-22.2016.4.03.6000, 26/10/2026 · 
+
+## FIES. abatimento de saldo devedor. médico de equipe de saúde da família. legitimidade passiva do FNDE e do Banco do Brasil (1)
+-  — ApCiv 5001217-67.2024.4.03.6002, 26/10/2026 · 
 
 ## Cadastro suplementar de médicos; edital 24/2026; faixa de convocação (1)
 -  — AI 5032002-05.2026.4.03.0000, 25/10/2026 · Desprovido
@@ -196,9 +375,6 @@ Gerado do índice dos julgados do Relator (155 julgados, 155 assuntos). Teses re
 
 ## Mora administrativa da RFB no encaminhamento de débitos à PGFN (1)
 -  — RemNecCiv 0000332-13.2025.4.03.6000, 28/07/2026 · 
-
-## Mora administrativa no encaminhamento de débitos à PGFN para inscrição em dívida ativa (1)
-- A RFB deve encaminhar à PGFN, no prazo legal, os débitos exigíveis que cumpram os requisitos, sob pena de responsabilidade dos dirigentes. A mora administrativa justifica a concessão parcial da ordem. — RemNecCiv 5009055-04.2023.4.03.6000, 28/07/2026 · Desprovido
 
 ## Embargos de declaração. Multas por excesso de peso. Responsabilidade do embarcador (1)
 - A embarcadora responde por excesso de peso apenas quando o peso aferido supera o peso bruto declarado na nota fiscal. Havendo peso declarado igual ou superior ao aferido, a responsabilidade é afastada. Embargos acolhidos com efeito infringente. — ApCiv 5000105-59.2021.4.03.6005, 20/07/2026 · Embargos acolhidos
@@ -422,9 +598,6 @@ Gerado do índice dos julgados do Relator (155 julgados, 155 assuntos). Teses re
 ## Laudêmio sobre contrato sem registro; decadência quinquenal (1)
 -  — ApelRemNec 5020153-84.2017.4.03.6100, 09/02/2024 ·  · Tema 1.142/STJ
 
-## Exigência de publicação de demonstrações financeiras como condição para arquivamento de atos societários na JUCESP (1)
-- A exigência de cumprimento da Deliberação JUCESP 02/2015 como condição para arquivar atos societários viola direito líquido e certo. A publicidade das demonstrações financeiras de sociedades de grande porte segue a Lei 6.404/1976, e a restrição seria desproporcional. — ApelRemNec 5018150-83.2022.4.03.6100, 09/02/2024 · Acórdão mantido
-
 ## Reintegração de posse de faixa de domínio em rodovia; tutela provisória (1)
 - Ocupação de faixa de domínio e área non aedificandi é clandestina e precária, inoponível ao ente público, sem direito a retenção ou indenização por acessões. Cabe reintegração liminar, e a ordem de demolição, por ser irreversível, deve aguardar o julgamento definitivo. — AI 5023274-77.2023.4.03.0000, 09/02/2024 · Desprovido
 
@@ -480,14 +653,386 @@ Gerado do índice dos julgados do Relator (155 julgados, 155 assuntos). Teses re
 ## Desapropriação indireta sem oferta inicial; juros compensatórios e moratórios; honorários (1)
 -  — RemNecCiv 0017156-69.1987.4.03.6100, 29/11/2023 ·  · Tema 210/STJ, Tema 211/STJ, Tema 280/STJ, Tema 281/STJ, Tema 282/STJ
 
-## FIES. Segunda graduação. Ordem de classificação. Portaria MEC 38/2021 (1)
--  — AI 5020753-62.2023.4.03.0000, 29/11/2023 · 
-
-## FIES. Extensão de carência para residência médica. Embargos de declaração rejeitados (1)
-- Embargos de declaração não se prestam à rediscussão do julgado. Ausentes vícios sanáveis na via eleita, rejeitam-se os embargos. A carência prevista no artigo 6º-B, § 3º, da Lei 10.260/2001 não pode ser restringida por normas infralegais. — ApCiv 5000493-59.2022.4.03.6123, 29/11/2023 · Embargos rejeitados
-
 ## Pensão militar. Exclusão de filha maior. Renúncia após prazo da MP 2.215-10/2001 (1)
 - A renúncia à regra de transição da pensão militar pode ser feita após 31/08/2001, sem prejuízo ao erário. A Administração não pode anular o ato de exclusão após o prazo de cinco anos da Lei 9.784/1999. — ApCiv 5005270-50.2022.4.03.6103, 29/11/2023 · Parcialmente provido
 
 ## FIES. classificação por nota do ENEM. legitimidade passiva do FNDE (1)
 -  — AI 5022508-24.2023.4.03.0000, 29/11/2023 · 
+
+## Reintegração de posse de faixa de domínio de ferrovia desativada (1)
+- A ocupação clandestina de bem público configura mera detenção precária, inoponível ao ente proprietário. Não há direito a ressarcimento por acessões e benfeitorias. A desativação da linha não descaracteriza a faixa de domínio. — ApCiv 0003717-39.2016.4.03.6111, 29/11/2023 · Desprovido
+
+## FIES. Classificação por nota do ENEM. Legitimidade do FNDE (1)
+-  — AI 5022717-90.2023.4.03.0000, 14/11/2023 · 
+
+## FIES. alteração de curso. devolução de prazo por doença do advogado (1)
+- A devolução de prazo por doença do advogado exige único patrono constituído e impossibilidade absoluta de praticar o ato ou de substabelecer. Mera descrição de doença não basta. Recurso intempestivo, não conhecido. — AI 5017720-64.2023.4.03.0000, 14/11/2023 · Não conhecido
+
+## FIES. classificação por nota do ENEM. Portaria MEC 38/2021 (1)
+-  — AI 5016977-54.2023.4.03.0000, 14/11/2023 · 
+
+## FIES. Classificação por nota do ENEM. Legitimidade passiva do FNDE (1)
+-  — AI 5018429-02.2023.4.03.0000, 14/11/2023 · 
+
+## Anistiado político. Indenização por danos morais e reajuste de reparação mensal. Acordo homologado (1)
+- As partes reconheceram erro material quanto ao termo inicial do reajuste fixado em sentença e acórdão, e pactuaram indenização e reajuste mediante concessões recíprocas. O acordo encerrou a lide. — ApCiv 5000719-80.2021.4.03.6129, 06/11/2023 · Outro
+
+## Acordo em improbidade por contratação direta emergencial do DNIT (1)
+-  — ApelRemNec 0002842-10.2013.4.03.6100, 06/11/2023 · 
+
+## Usucapião de imóvel em terreno de marinha sem aforamento; embargos de declaração rejeitados (1)
+-  — ApCiv 5002516-55.2021.4.03.6141, 27/10/2023 · 
+
+## Reintegração de posse de faixa de domínio ferroviária com moradia (1)
+- A faixa de domínio ferroviária é perímetro de segurança sujeito a limitação administrativa. A moradia digna não afasta a ilicitude da invasão, mas o prazo para desocupação voluntária pode ser estendido por noventa dias, em razão da urgência e da segurança. — ApCiv 0002483-63.2015.4.03.6141, 27/10/2023 · Parcialmente provido
+
+## Registro de imóvel rural no SIGEF; indeferimento pelo INCRA; ação de obrigação de fazer (1)
+-  — ApCiv 5000886-63.2016.4.03.6100, 27/10/2023 · 
+
+## Desapropriação indireta; juros compensatórios sobre terras reservadas; exigência de exploração econômica (1)
+-  — ApCiv 0526642-60.1983.4.03.6100, 25/10/2023 ·  · Tema 281/STJ, Tese 218/STJ, Tese 184/STJ
+
+## Migração de acervo arquivístico da CEF; astreintes e multa por litigância de má-fé (1)
+- Alegações de impossibilidade material não se sustentam quando a perícia atesta a viabilidade do cronograma com segurança sanitária. Mantém-se a astreinte e a multa por litigância de má-fé diante do descumprimento reiterado e da alteração da verdade dos fatos. — ApCiv 5018773-21.2020.4.03.6100, 25/10/2023 · Parcialmente provido
+
+## Migração de acervo arquivístico da CEF; astreintes e litigância de má-fé (1)
+- A alegação de impossibilidade de cumprir ordens judiciais não se sustenta diante da prova pericial e dos autos. É cabível a multa astreinte, inclusive majorada, diante do descumprimento reiterado e da conduta contrária à boa-fé. — ApCiv 5016864-41.2020.4.03.6100, 25/10/2023 · Outro
+
+## Abatimento de saldo devedor de FIES por atuação em saúde (1)
+-  — ApCiv 5001376-49.2022.4.03.6141, 11/10/2023 · 
+
+## FIES. Exigência de nota mínima do ENEM. Legalidade da Portaria MEC 38/2021 (1)
+- A exigência de nota mínima do ENEM para inscrição no FIES é legal. Trata-se de critério objetivo de seleção, previsto em regulamentação do Ministério da Educação, justificado pela restrição orçamentária do programa e pela necessidade de tratamento isonômico. A União, via FNDE, responde pela administração do fundo, e a Caixa cobra as parcelas.</tese>
+<parameter name="resultado">Parcialmente provido — ApCiv 5006879-20.2022.4.03.6119, 11/10/2023 · 
+
+## FIES. carência prorrogada para residência médica. embargos de declaração rejeitados (1)
+-  — ApelRemNec 5000545-58.2022.4.03.6122, 11/10/2023 · 
+
+## Reintegração de posse de imóvel da RFFSA sucedida pela União; venda a non domino (1)
+- Promessa de compra e venda não cumprida, sem pagamento integral do preço, não gera direito à propriedade. A venda feita por quem não era titular é nula de pleno direito. Ocupação sem título jurídico é mera detenção, o que autoriza a reintegração do proprietário público. — ApCiv 0003786-55.2012.4.03.6000, 29/09/2023 · Desprovido
+
+## Securitização de cédulas rurais e PESA; prescrição da pretensão revisional (1)
+- Não há utilidade em provimento para cédulas já securitizadas e quitadas antes da ação. A pretensão revisional de negócio com instituição financeira é decenal, contada da celebração, e está prescrita. Se dirigida à União, o prazo é quinquenal, contado da notificação, também prescrito.</tese>
+<parameter name="resultado">Prejudicado — ApCiv 0000649-05.2013.4.03.6138, 29/09/2023 · 
+
+## Faixa de domínio de rodovia federal; adequação técnica de instalações elétricas de concessionária (1)
+-  — ApCiv 5001092-64.2019.4.03.6135, 28/09/2023 · 
+
+## Transação homologada sobre iluminação pública e ativo imobilizado (AIS) (1)
+- Homologada a transação entre as partes, com extinção do feito com resolução do mérito, por ausência de impedimento legal ao acordo. Recurso especial prejudicado pela perda de objeto. — ApCiv 0001323-88.2014.4.03.6124, 25/09/2023 · Prejudicado
+
+## Embargos de declaração em apelação sobre FIES, legitimidade do FNDE e danos morais (1)
+-  — ApCiv 5005389-54.2021.4.03.6100, 15/09/2023 · 
+
+## Desapropriação; juros compensatórios em imóvel rural improdutivo (1)
+- Em imóvel improdutivo, os juros compensatórios dependem da prova de efetiva perda de renda a partir de 27/9/1999 e são vedados a partir de 5/5/2000, índice de produtividade zero. Juízo de retratação rejeitado por aplicação dessas restrições aos laudos periciais que atestaram improdutividade.</tese>
+<parameter name="resultado">Acórdão mantido — ApCiv 0007690-25.2013.4.03.6105, 15/09/2023 · 
+
+## Restituição de laudêmio pago a maior; legitimidade ativa do adquirente (1)
+-  — ApCiv 5000043-58.2019.4.03.6144, 15/09/2023 · 
+
+## FIES. Prorrogação de carência para médico residente. Embargos de declaração rejeitados (1)
+- Embargos de declaração não se prestam à rediscussão do mérito quando o acórdão enfrentou os pontos suscitados. Eventual error in judicando deve ser veiculado em recurso próprio. A ilegalidade de indeferimento baseado só em norma infralegal foi reconhecida, mas o programa de cirurgia básica não consta do Anexo II da Portaria Conjunta 3/2013. — ApelRemNec 5000435-05.2022.4.03.6140, 15/09/2023 · Embargos rejeitados
+
+## Desapropriação de imóvel rural para reforma agrária; embargos de declaração; adstrição; juros compensatórios (1)
+-  — ApelRemNec 0001902-17.2006.4.03.6124, 15/09/2023 · 
+
+## Pensão especial de ex-combatente; reversão a dependente; embargos de declaração rejeitados (1)
+-  — ApelRemNec 5006431-34.2018.4.03.6104, 15/09/2023 · 
+
+## Iluminação pública; transação homologada; recebimento de AIS pelo município (1)
+- Homologada a transação entre as partes, com extinção do feito com resolução do mérito. Agravo interposto contra não admissão de recurso especial é julgado prejudicado pela perda de objeto. — RemNecCiv 5000267-10.2019.4.03.6107, 15/09/2023 · Prejudicado
+
+## Acessibilidade em prédio da Receita Federal em Botucatu (1)
+- Após providências da União, o prédio passou a atender às regras de acessibilidade. Houve reconhecimento da procedência do pedido, com extinção do feito com resolução do mérito e prejuízo da apelação. — ApelRemNec 0002104-55.2015.4.03.6131, 04/09/2023 · Prejudicado
+
+## Taxa de ocupação de bem público; majoração sem intimação do administrado (1)
+-  — ApCiv 5002061-46.2017.4.03.6104, 31/08/2023 ·  · Tema 451/STJ
+
+## Desapropriação; IPTU; responsabilidade do expropriado até imissão na posse (1)
+-  — AI 5011160-09.2023.4.03.0000, 31/08/2023 · Provido
+
+## Embargos de declaração rejeitados; acidente em rodovia federal; responsabilidade do DNIT (1)
+- Embargos de declaração não servem para rediscutir o mérito sob alegação de error in judicando. Ausentes vícios sanáveis, o recurso é rejeitado, considerando-se prequestionados os elementos suscitados. — ApCiv 0005875-17.2013.4.03.6000, 31/08/2023 · Embargos rejeitados
+
+## Embargos de declaração rejeitados; juros compensatórios em desapropriação de imóvel improdutivo (1)
+- Embargos de declaração não se prestam a rediscutir o mérito sob alegação de error in judicando. Não havendo vício sanável, são rejeitados, considerando-se prequestionados os elementos suscitados. — ApelRemNec 0006821-46.2010.4.03.6112, 31/08/2023 · Embargos rejeitados
+
+## Embargos de declaração em ação de desapropriação; valor da indenização (1)
+- Embargos de declaração não se prestam à rediscussão da causa por suposto error in judicando. Não havendo vício sanável, são rejeitados, considerando-se prequestionados os elementos suscitados, nos termos do artigo 1.025 do CPC. — ApelRemNec 0006179-89.2013.4.03.6105, 31/08/2023 · Embargos rejeitados
+
+## Desapropriação. Embargos de declaração. Omissão quanto aos juros moratórios (1)
+- Havendo omissão, supre-se o vício para incluir no dispositivo a fixação dos juros moratórios em 6% ao ano, a partir de 1º de janeiro do exercício seguinte ao em que o pagamento deveria ser feito. Embargos acolhidos.</tese>
+<parameter name="resultado">Embargos acolhidos — ApelRemNec 0013820-57.1987.4.03.6100, 31/08/2023 · 
+
+## Laudêmio. Prescrição quinquenal. Fato gerador em 2001 e lançamento em 2014 (1)
+-  — AI 5033455-74.2022.4.03.0000, 31/08/2023 ·  · Tema 1.142/STJ
+
+## Parcelamento de crédito não tributário do INSS em ação regressiva de acidente de trabalho (1)
+- A Portaria PGFN 6.757/2022 disciplina apenas a transação de créditos da União e do FGTS sob atribuição da PGFN. Ao crédito de titularidade do INSS aplica-se a Portaria AGU 218/2019, que é norma específica para ações regressivas previdenciárias. O Judiciário não pode ampliar hipóteses de ato normativo para contrariar a opção administrativa, sob pena de violar a separação dos poderes.</tese>
+<parameter name="resultado">Desprovido — AI 5011012-95.2023.4.03.0000, 31/08/2023 · 
+
+## Embargos de declaração rejeitados em FIES; mera rediscussão da causa (1)
+-  — ApelRemNec 5004420-09.2021.4.03.6110, 31/08/2023 · Embargos rejeitados
+
+## Laudêmio, fato gerador em contrato sem registro, benfeitorias na base de cálculo (1)
+- O fato gerador do laudêmio ocorre com a celebração do negócio jurídico, mesmo sem registro imobiliário. O cálculo segue a lei vigente nessa data, em que as benfeitorias integravam a base de cálculo.</tese>
+<parameter name="resultado">Embargos rejeitados — ApCiv 5000422-33.2018.4.03.6144, 17/08/2023 ·  · Tema 1.142/STJ
+
+## Laudêmio sem registro imobiliário e decadência quinquenal (1)
+-  — ApelRemNec 5036871-20.2021.4.03.6100, 17/08/2023 ·  · Tema 1.142/STJ
+
+## Laudêmio sobre contrato sem registro e decadência quinquenal (1)
+- A falta de registro não impede o fato gerador do laudêmio. A receita não é exigível referente a período anterior a cinco anos contados retroativamente à ciência do fato pela União. — ApelRemNec 5008854-42.2019.4.03.6100, 17/08/2023 · Acórdão mantido · Tema 1.142/STJ
+
+## Laudêmio, contrato sem registro, decadência e prazo quinquenal (1)
+-  — ApCiv 5013813-27.2017.4.03.6100, 17/08/2023 ·  · Tema 1.142/STJ
+
+## Laudêmio, contrato sem registro e decadência quinquenal (1)
+- A falta de registro da transação não impede a caracterização do fato gerador do laudêmio. Decorrido mais de cinco anos entre o fato gerador e o conhecimento pela União, o crédito não é exigível, conforme o paradigma vinculante. — ApCiv 5012427-54.2020.4.03.6100, 17/08/2023 · Embargos rejeitados · Tema 1.142/STJ
+
+## Laudêmio sem registro imobiliário; decadência quinquenal; juízo de retratação (1)
+-  — ApelRemNec 5015361-87.2017.4.03.6100, 17/08/2023 ·  · Tema 1.142/STJ
+
+## Laudêmio sobre contrato sem registro imobiliário; decadência quinquenal (1)
+- A falta de registro imobiliário não impede o fato gerador do laudêmio. Parcelas anteriores a cinco anos contados da ciência do fato pela União são inexigíveis, nos termos do artigo 47, § 1º, da Lei 9.636/1998. Mantido o julgamento por fundamento diverso do paradigma.</tese>
+<parameter name="resultado">Acórdão mantido — ApelRemNec 5018469-90.2018.4.03.6100, 17/08/2023 ·  · Tema 1.142/STJ
+
+## Reembolso Fusex de terapia ABA para transtorno do espectro autista por profissional não credenciado (1)
+- Embargos de declaração não servem para rediscutir o mérito quando inexistem omissão, contradição, obscuridade ou erro material. Alegado error in judicando deve ser veiculado em recurso próprio. Considera-se prequestionado o que foi suscitado, nos termos do artigo 1.025 do CPC. — ApCiv 5000965-40.2019.4.03.6002, 03/08/2023 · Embargos rejeitados
+
+## Laudêmio, fato gerador e inexigibilidade por decurso de prazo (1)
+-  — ApCiv 5016396-09.2022.4.03.6100, 03/08/2023 ·  · Tema 1.142/STJ
+
+## Juros compensatórios em desapropriação indireta; limite de 6% ao ano (1)
+- Declarada a constitucionalidade do limite de 6% ao ano para juros compensatórios, com efeito erga omnes, a taxa deve incidir sem limitação de termo final. Superado o entendimento da Súmula 618/STF quanto ao percentual de 12%. — ApCiv 0937601-20.1986.4.03.6100, 06/07/2023 · Embargos acolhidos
+
+## Embargos de declaração em ação regressiva acidentária por negligência do empregador (1)
+- Embargos de declaração não se prestam a rediscutir o mérito e a apreciação de provas quando o acórdão enfrentou integralmente a questão. Ressarcimento ao INSS por benefícios acidentários decorrentes de negligência do empregador não se confunde com a contribuição ao SAT. — ApCiv 5010408-31.2018.4.03.6105, 06/07/2023 · Embargos rejeitados
+
+## FIES. Transferência de curso. Exigência de nota do ENEM (1)
+- A exigência de nota do ENEM igual ou superior à média do último pré-selecionado no curso de destino, prevista em portaria regulamentar com base em autorização legal, é válida. Aplica-se o regime vigente no momento do pedido de transferência. — ApCiv 5027221-46.2021.4.03.6100, 06/07/2023 · Desprovido
+
+## Juros compensatórios sobre imóvel não desapropriado; liquidação por arbitramento do valor do imóvel (1)
+- A coisa julgada não fixou critério de avaliação pelo valor da época da imissão na posse. Laudo do perito judicial, imparcial, prevalece sobre parecer do assistente técnico que não rebate suas premissas nem demonstra o valor pretendido. — AI 5007156-26.2023.4.03.0000, 06/07/2023 · Desprovido
+
+## Embargos de declaração rejeitados; taxa de ocupação em terreno da marinha e coisa julgada de usucapião (1)
+-  — ApCiv 5005286-35.2021.4.03.6104, 06/07/2023 · 
+
+## Embargos de declaração com razões dissociadas do acórdão; reintegração de posse e demolição em faixa de domínio de rodovia (1)
+- Embargos de declaração com razões dissociadas do acórdão embargado e apresentados fora do prazo não são conhecidos. O recurso foi protocolado nos autos de outro processo por equívoco da parte. — ApCiv 0001884-33.2013.4.03.6000, 06/07/2023 · Não conhecido
+
+## Embargos de declaração em ação civil pública sobre cobrança de valores "por fora" no PMCMV (1)
+-  — ApCiv 0002724-39.2015.4.03.6108, 06/07/2023 ·  · Tema 938/STJ
+
+## FIES. prorrogação de carência para residência médica em contrato em amortização (1)
+-  — ApelRemNec 5005807-80.2021.4.03.6103, 06/07/2023 · Embargos rejeitados
+
+## Embargos de declaração rejeitados; registro de marca com termo "extra" (1)
+-  — ApCiv 0024431-24.2014.4.03.6100, 27/06/2023 · Embargos acolhidos
+
+## Ação de cobrança de contraprestação por representação judicial do INSS por advogado autônomo (1)
+- A pretensão de cobrança fundada em contrato administrativo e em ordens de serviço internas tem natureza administrativa, não se confundindo com execução de honorários de sucumbência. Competência material das Turmas da 2ª Seção. — CCCiv 5030015-41.2020.4.03.0000, 27/06/2023 · Outro
+
+## Acessibilidade em prédios administrativos de universidade federal (1)
+- Acordo celebrado pelas partes, sem vícios ou impedimentos legais, é homologado com resolução de mérito, extinguindo-se a ação. Os embargos de declaração ficam prejudicados. — ApCiv 0001664-10.2015.4.03.6115, 27/06/2023 · Outro
+
+## Extensão de carência do FIES para residência médica em cirurgia básica (1)
+- A extensão da carência do FIES para residência médica limita-se às especialidades prioritárias definidas pelo Ministro da Saúde. Programa de pré-requisito em cirurgia básica não se enquadra nessas especialidades, não sendo devida a extensão. — ApCiv 5008765-82.2020.4.03.6100, 26/06/2023 · Parcialmente provido
+
+## Laudêmio sobre cessão de direitos anterior à escritura; embargos de declaração rejeitados (1)
+-  — ApCiv 5002134-87.2020.4.03.6144, 26/06/2023 · 
+
+## Auxílio-moradia a médico residente em entidade filantrópica do SUS (1)
+- Embargos de declaração não servem para rediscutir a matéria decidida, sem omissão, contradição, obscuridade ou erro material. A técnica do artigo 942 do CPC exige que a maioria reforme decisão de mérito no julgamento inicial do agravo. — AI 5024897-16.2022.4.03.0000, 26/06/2023 · Embargos rejeitados
+
+## Homologação de transação em agravo sobre reintegração de imóvel federal ocupado (1)
+- Homologada a transação entre as partes, com base no art. 487, III, "b", do CPC, extinguindo o recurso com resolução de mérito. Os autos ficam sobrestados até o cumprimento do acordo, com acompanhamento pelo Gabinete da Conciliação.</tese>
+<parameter name="resultado">Outro — AI 5016557-59.2017.4.03.0000, 19/06/2023 · 
+
+## Desapropriação para obras de segurança viária; homologação de transação (1)
+- A transação entre as partes, sem impedimento legal quanto ao objeto, pode ser homologada com resolução do mérito. Com a homologação, fica prejudicado o recurso especial por perda de objeto. — ApCiv 0005772-46.2014.4.03.6106, 12/06/2023 · Prejudicado
+
+## Desapropriação. Juízo de retratação. Índices de correção e juros em cumprimento de sentença (1)
+- Em cumprimento de sentença contra a Fazenda Pública, os critérios de cálculo fixados pela coisa julgada são imodificáveis na execução, conforme o item 4 das teses do Tema 905/STJ, que preserva a coisa julgada. Juízo de retratação rejeitado e acórdão mantido. — AI 0013730-34.2015.4.03.0000, 08/06/2023 · Acórdão mantido · Tema 905/STJ, Tema 810/STF
+
+## FIES. extensão de carência para residência médica em especialidade prioritária (1)
+-  — ApCiv 5002882-02.2022.4.03.6128, 08/06/2023 · 
+
+## Junta Comercial. Arquivamento de alteração contratual. Exigência do DBE (1)
+-  — ApelRemNec 5024992-50.2020.4.03.6100, 08/06/2023 · 
+
+## Registro público na JUCESP; exigência de publicação de demonstrações financeiras como condição para arquivamento de atos societários (1)
+- A exigência de cumprimento da Deliberação JUCESP 02/2015 como condição para arquivar atos societários viola direito líquido e certo. A publicação de demonstrações financeiras, nos termos da Lei 6.404/1976, não pode ser imposta como requisito para o registro, sob pena de desproporcionalidade.</tese>
+<parameter name="resultado">Provido — ApCiv 5014942-91.2022.4.03.6100, 08/06/2023 · 
+
+## Nulidade de intimação por edital e termo de revelia em processo administrativo fiscal (1)
+-  — AI 5031956-55.2022.4.03.0000, 08/06/2023 · 
+
+## Indenização por danos morais de perseguição política na ditadura militar (1)
+-  — ApCiv 0009871-48.2012.4.03.6100, 26/05/2023 · 
+
+## Indenização por danos morais de perseguição política na Ditadura Militar; acordo homologado (1)
+-  — ApCiv 5005292-45.2021.4.03.6103, 19/05/2023 · 
+
+## Indenização por perseguição política na Ditadura Militar; acordo homologado (1)
+- As partes celebraram transação mediante concessões recíprocas. Homologado o acordo, com resolução do mérito, os recursos ficam prejudicados. — ApCiv 5006040-44.2021.4.03.6114, 19/05/2023 · Prejudicado
+
+## Homologação de transação em ação sobre iluminação pública e resoluções da ANEEL (1)
+- Não havendo impedimento legal à celebração do acordo quanto ao objeto da ação, a transação é homologada e o mérito resolvido nos termos do art. 487, III, "b", do CPC. Cada parte arca com os honorários de seus patronos, conforme acordado. — ApCiv 0000728-19.2015.4.03.6136, 19/04/2023 · Outro
+
+## FIES, legitimidade passiva de agente financeiro, razões dissociadas (1)
+-  — AI 5004475-83.2023.4.03.0000, 17/04/2023 · 
+
+## FIES. abatimento Covid-19. ausência de regulamentação. tutela de urgência (1)
+-  — AI 5007147-64.2023.4.03.0000, 17/04/2023 · 
+
+## Multas do CRECI por facilitação do exercício ilegal da profissão de corretor (1)
+- A Lei 6.530/1978 e o regulamento do Decreto 81.871/1978 preveem a infração de facilitar o exercício ilegal da profissão, inclusive por estagiários sem cédula vigente. Não atender notificações do conselho também é conduta sancionável pelo Código de Ética. A multa aplicada no mínimo legal foi mantida.</tese>
+<parameter name="resultado">Desprovido — ApCiv 5003668-72.2018.4.03.6100, 14/04/2023 · 
+
+## Cartel em licitações privadas de estacionamentos; sanção do CADE (1)
+- Não há nulidade no processo administrativo quando a acusação descreve as condutas concertadas e as provas são lícitas. A dosimetria da multa, dentro dos parâmetros legais, é competência do órgão administrativo e só pode ser revista em caso de ilegalidade flagrante. — ApCiv 5026830-96.2018.4.03.6100, 14/04/2023 · Desprovido
+
+## Correios. Sedex. Extravio de objeto. Dano moral in re ipsa (1)
+- A contratação de serviço postal com rastreio caracteriza relação de consumo, com responsabilidade objetiva da ECT quando não comprovada a entrega ao destinatário. O dano moral é presumido e o valor deve observar razoabilidade e proporcionalidade. — ApelRemNec 5000845-44.2018.4.03.6127, 14/04/2023 · Parcialmente provido
+
+## Penalidade contratual de impedimento de licitar e contratar; tutela de urgência indeferida (1)
+- Não há probabilidade do direito quando a autarquia comprova a apuração administrativa e a contratada não demonstra, de forma mínima, a prestação do serviço. A gravidade da infração e a penalidade cabível são juízo discricionário da administração, que só pode ser afastado em caso de desproporção manifesta e induvidosa. Discussão que exige dilação probatória não cabe em tutela provisória.</tese>
+<parameter name="resultado">Desprovido — AI 5033957-13.2022.4.03.0000, 14/04/2023 · 
+
+## Meta bimestral de aquisição de biodiesel. Redução de vendas. Caso fortuito (1)
+-  — AI 5013421-78.2022.4.03.0000, 14/04/2023 · 
+
+## Carga horária de atividades complementares em curso de Direito; participação em audiências judiciais (1)
+-  — AI 5019480-82.2022.4.03.0000, 14/04/2023 · 
+
+## REVALIDA. Exigência de diploma no ato de inscrição prevista em edital (1)
+-  — AI 5000777-69.2023.4.03.0000, 14/04/2023 · 
+
+## Abreviação de curso por aproveitamento extraordinário de estudos; multa por descumprimento de liminar (1)
+- A Lei de Diretrizes e Bases admite a abreviação da duração de curso na hipótese de aproveitamento extraordinário de estudos. A multa por descumprimento de ordem liminar fica mantida quando a instituição apenas cumpriu a ordem após a cominação da sanção. — ApelRemNec 5009153-33.2021.4.03.6105, 13/04/2023 · Desprovido
+
+## Exame da OAB, correção de questão discursiva e habilitação (1)
+- Não cabe ao Judiciário substituir a banca examinadora na avaliação de respostas e notas. Os critérios de correção não podem ser revistos judicialmente, salvo juízo de compatibilidade com o edital. — AI 5002226-62.2023.4.03.0000, 03/04/2023 · Desprovido · Tema 485/STF
+
+## Embargos de declaração rejeitados; multa de conselho profissional fixada em salários mínimos (1)
+-  — ApCiv 0000385-06.2020.4.03.6182, 29/03/2023 · 
+
+## Embargos de declaração rejeitados em ação de anistiado político por danos morais (1)
+- Embargos de declaração não se prestam a rediscutir o mérito quando inexistem omissão, contradição ou obscuridade. Alegação de error in judicando deve ser veiculada em recurso próprio. — ApCiv 5002174-44.2021.4.03.6141, 29/03/2023 · Embargos rejeitados
+
+## FIES. Portarias do MEC sobre participação de graduados e beneficiários (1)
+- Não conhecido o agravo, por ausência de impugnação específica aos fundamentos da decisão recorrida, em afronta ao princípio da dialeticidade. Decisão monocrática com base no artigo 932, III, do CPC.</tese>
+<parameter name="resultado">Não conhecido — AI 5005474-36.2023.4.03.0000, 29/03/2023 · 
+
+## Indenização por danos morais, perseguição política na Ditadura Militar, homologação de acordo (1)
+- Homologada a transação entre as partes, com resolução do mérito nos termos do art. 487, III, "b", do CPC. Recurso prejudicado e autos restituídos ao juízo de origem para cumprimento do acordo. — ApCiv 5001136-78.2021.4.03.6114, 29/03/2023 · Prejudicado
+
+## Mora administrativa em pedido de cópias de processo administrativo (1)
+- Há mora administrativa quando a Administração não observa prazo legal para decidir pedido em processo administrativo, violando a razoável duração do processo. Remessa necessária não conhecida com base no artigo 496, § 4º, do CPC, em decisão monocrática. — RemNecCiv 5007360-93.2020.4.03.6105, 28/03/2023 · Não conhecido
+
+## Exame de Ordem da OAB; perda superveniente do objeto após realização da prova (1)
+-  — ApCiv 5001166-85.2022.4.03.6112, 27/03/2023 · 
+
+## Exame da OAB; mandado de segurança; correção de prova; perda de objeto após homologação (1)
+-  — ApCiv 5000445-76.2022.4.03.6131, 27/03/2023 · 
+
+## Inscrição especial de advogado em causa própria; efeito suspensivo à apelação (1)
+-  — SuspApel 5004621-27.2023.4.03.0000, 24/03/2023 · 
+
+## Mora administrativa em pedido de revisão de ofício; prazo legal (1)
+-  — RemNecCiv 5030069-69.2022.4.03.6100, 24/03/2023 · Não conhecido
+
+## Antecipação de tutela sobre estimativas populacionais para repartição do FPM (1)
+- A concessão de tutela de urgência exige demonstração mínima e concreta de fumus boni iuris e periculum in mora. Recurso contrário à jurisprudência dominante pode ser decidido monocraticamente pelo relator, nos termos do artigo 932, IV e V, do CPC. — AI 5007391-90.2023.4.03.0000, 23/03/2023 · Desprovido
+
+## Mora administrativa em aposentadoria por tempo de contribuição; remessa oficial não conhecida (1)
+-  — RemNecCiv 5012985-55.2022.4.03.6100, 23/03/2023 · 
+
+## Embargos de declaração. Movimentação mínima contratual em arrendamento portuário. Força maior na pandemia de Covid-19 (1)
+-  — AI 5012972-23.2022.4.03.0000, 20/03/2023 · 
+
+## REVALIDA. Exigência de diploma estrangeiro na inscrição. Tutela de urgência (1)
+-  — AI 5001398-03.2022.4.03.0000, 20/03/2023 · 
+
+## Embargos de declaração rejeitados; restrição ao exercício profissional de engenheiro eletricista por conselho (1)
+-  — ApCiv 5013086-97.2019.4.03.6100, 20/03/2023 · 
+
+## Registro de auxiliar de farmácia por técnico de farmácia (1)
+- Formação em habilitação de técnico, com currículo similar ao de auxiliar e diferença apenas na carga horária, não impede o registro na habilitação de auxiliar. Remessa necessária desprovida. — RemNecCiv 5020178-29.2019.4.03.6100, 20/03/2023 · Desprovido
+
+## Revalida. Inscrição de médico formado no exterior sem diploma no ato da inscrição (1)
+-  — SuspApel 5001421-46.2022.4.03.0000, 20/03/2023 · 
+
+## Revalida. Exigência de diploma para inscrição no exame. Efeito suspensivo à apelação (1)
+- A exigência de diploma no ato de inscrição no Revalida não tem respaldo legal, pois a Lei 13.959/2019 não a prevê e o diploma só é necessário na etapa de revalidação perante universidade pública. Presentes probabilidade de reforma e risco de dano, defere-se em parte o efeito suspensivo.</tese>
+<parameter name="resultado">Parcialmente provido — SuspApel 5009085-31.2022.4.03.0000, 20/03/2023 · 
+
+## REVALIDA. Exigência de diploma estrangeiro na inscrição. Edital ilegal. Tutela de urgência (1)
+-  — AI 5020850-96.2022.4.03.0000, 20/03/2023 · 
+
+## Revalida. Exigência de diploma estrangeiro na inscrição. Tutela de urgência (1)
+-  — AI 5002401-90.2022.4.03.0000, 20/03/2023 · 
+
+## Conselho de corretores exigir inscrição para venda de imóveis próprios em loteamento (1)
+-  — ApCiv 5016941-84.2019.4.03.6100, 20/03/2023 · 
+
+## Revalida. Exigência de diploma estrangeiro na inscrição do exame (1)
+-  — AI 5021885-91.2022.4.03.0000, 20/03/2023 · 
+
+## Conselho profissional exige registro de instrutor de beach tennis (1)
+- A exigência de registro em conselho profissional depende de lei específica que a imponha. Os artigos 1º, 2º e 3º da Lei 9.696/1998 não obrigam o instrutor de beach tennis a se inscrever no CREF, e não cabe interpretação extensiva dessas normas. — RemNecCiv 5015822-20.2021.4.03.6100, 20/03/2023 · Desprovido
+
+## Revalidação de diploma médico estrangeiro por universidade privada; embargos rejeitados (1)
+-  — ApCiv 5001131-31.2018.4.03.6124, 20/03/2023 · 
+
+## Revalida: exigência de diploma estrangeiro na inscrição do exame (1)
+-  — AI 5001983-55.2022.4.03.0000, 20/03/2023 · 
+
+## Conselho profissional exige restrição não prevista em lei a engenheiro eletricista (1)
+-  — ApelRemNec 5000615-15.2020.4.03.6100, 20/03/2023 · 
+
+## Exame Revalida. Exigência de diploma estrangeiro na inscrição. Edital ilegal (1)
+-  — AI 5001517-61.2022.4.03.0000, 20/03/2023 · 
+
+## REVALIDA. Exigência de diploma estrangeiro na inscrição do exame. Tutela de urgência (1)
+- A exigência de diploma no ato de inscrição do REVALIDA extrapola a Lei 13.959/2019, pois o exame avalia conhecimentos e não revalida o diploma. A tutela de urgência não se sujeita ao sobrestamento decorrente do IRDR enquanto o mérito não for julgado.</tese>
+<parameter name="resultado">Provido — AI 5002354-19.2022.4.03.0000, 20/03/2023 · 
+
+## Revalida. Exigência de diploma estrangeiro na inscrição do exame. Tutela de urgência (1)
+-  — AI 5002462-48.2022.4.03.0000, 20/03/2023 · 
+
+## Revalida. Exigência de diploma estrangeiro na inscrição. Edital ilegal. Tutela de urgência (1)
+- A exigência de diploma estrangeiro no ato de inscrição no REVALIDA extrapola a Lei 13.959/2019, pois a avaliação não se confunde com a revalidação junto às universidades públicas. A decisão de sobrestamento do IRDR não atinge a análise de tutelas de urgência.</tese>
+<parameter name="resultado">Desprovido — AI 5016506-72.2022.4.03.0000, 20/03/2023 · 
+
+## REVALIDA. Exigência de diploma estrangeiro na inscrição do processo seletivo (1)
+-  — AI 5018613-89.2022.4.03.0000, 20/03/2023 · 
+
+## Registro de arquiteto e urbanista em conselho regional; curso EAD reconhecido pelo MEC (1)
+-  — ApelRemNec 5022302-14.2021.4.03.6100, 20/03/2023 · 
+
+## Registro de contrato social de empresa unipessoal por corretor de imóveis; tutela de urgência em mandado de segurança (1)
+- A concessão de liminar em mandado de segurança exige demonstração mínima e concreta de fumus boni iuris e periculum in mora, nos termos do artigo 300 do CPC e do artigo 7º, III, da Lei 12.016/2009. Não havendo essa demonstração, nega-se provimento ao agravo de instrumento. — AI 5006195-85.2023.4.03.0000, 20/03/2023 · Desprovido
+
+## PERSE. Exigência de cadastro no Cadastrur anterior à lei. Tutela recursal (1)
+-  — AI 5012713-28.2022.4.03.0000, 17/03/2023 · 
+
+## Inscrição no Revalida sem diploma apresentado previamente (1)
+- O julgado nega provimento ao agravo e mantém decisão que garantiu inscrição no Revalida sem diploma prévio. A controvérsia envolve ilegalidade reflexa e é dirimida no âmbito regional, com base em jurisprudência do Tribunal. O texto não fixa a fundamentação completa, pois a parte final está truncada. — AI 5006392-40.2023.4.03.0000, 17/03/2023 · Desprovido · Tema 382/STJ
+
+## Inscrição no REVALIDA sem apresentação prévia do diploma (1)
+- A matéria envolve ilegalidade reflexa e deve ser decidida no âmbito regional, com base na jurisprudência do Tribunal. Não há tutela de urgência afastada pelo IRDR 5 nesse ponto. O recurso foi desprovido por decisão monocrática. — AI 5006324-90.2023.4.03.0000, 17/03/2023 · Desprovido · Controvérsia 382/STJ
+
+## Base de cálculo das contribuições a terceiros limitada a 20 salários-mínimos (1)
+-  — AI 5030963-12.2022.4.03.0000, 17/03/2023 · 
+
+## PERSE. Exigência de cadastro no Cadastrur. Tutela recursal em agravo de instrumento (1)
+-  — AI 5006191-48.2023.4.03.0000, 16/03/2023 · 
+
+## Mora administrativa em análise de pedido de revisão de auxílio-acidente (1)
+- A mora administrativa em observar prazo legal para decidir pedido viola a duração razoável do processo e as regras da Lei 9.784/1999. Remessa necessária não conhecida, com base no artigo 496, § 4º, do CPC, por se tratar de hipótese do artigo 932 do CPC. — RemNecCiv 5002821-73.2022.4.03.6183, 16/03/2023 · Não conhecido
+
+## Exigência de inscrição no CREF de instrutor de voleibol (1)
+- A Lei 9.696/1998 não torna obrigatória a inscrição de técnico, instrutor ou treinador de modalidade esportiva no Conselho de Educação Física. Não há exclusividade de profissionais graduados em educação física para essas atividades. Apelação e remessa oficial desprovidas. — ApelRemNec 5030379-12.2021.4.03.6100, 16/03/2023 · Desprovido

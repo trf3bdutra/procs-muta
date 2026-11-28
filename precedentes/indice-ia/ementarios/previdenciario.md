@@ -1,10 +1,16 @@
 # Ementário · Previdenciário
 
-Gerado do índice dos julgados do Relator (1374 julgados, 1294 assuntos). Teses resumidas pelo modelo a partir da ementa: conferir no inteiro teor antes de citar.
+Gerado do índice dos julgados do Relator (1638 julgados, 1536 assuntos). Teses resumidas pelo modelo a partir da ementa: conferir no inteiro teor antes de citar.
 
-## Homologação de acordo sobre correção monetária em cumprimento de sentença (12)
+## Homologação de acordo sobre correção monetária em cumprimento de sentença (18)
+-  — ApCiv 5108431-86.2026.4.03.9999, 29/10/2026 · 
 - Havendo concordância expressa da parte autora, homologa-se o acordo sobre correção monetária e julgam-se prejudicados os embargos de declaração. A decisão homologatória vale como título executivo judicial. — ApCiv 5003119-29.2023.4.03.9999, 28/10/2026 · Prejudicado
 - Havendo concordância expressa da parte autora, homologa-se o acordo, com força de título executivo judicial, e julgam-se prejudicados os embargos de declaração. — ApCiv 5066569-38.2026.4.03.9999, 28/10/2026 · Outro
+-  — ApCiv 5208567-28.2025.4.03.9999, 28/10/2026 · 
+- Havendo concordância expressa da parte autora, homologa-se o acordo, que vale como título executivo judicial, e julgam-se prejudicados os embargos de declaração. — ApCiv 5264320-33.2026.4.03.9999, 28/10/2026 · Prejudicado
+- Havendo concordância expressa da parte autora, homologa-se o acordo sobre correção monetária, com força de título executivo judicial, e julgam-se prejudicados os embargos de declaração da autarquia. — ApCiv 5236903-08.2026.4.03.9999, 28/10/2026 · Outro
+- Havendo concordância expressa da parte autora, o acordo é homologado por decisão monocrática, valendo como título executivo judicial, e os embargos de declaração ficam prejudicados. — ApCiv 5125314-11.2026.4.03.9999, 28/10/2026 · Prejudicado
+- Havendo concordância expressa do autor com a proposta de acordo apresentada pelo INSS, homologa-se o acordo como título executivo judicial, com extinção do mérito. Os embargos de declaração da autarquia ficam prejudicados. — ApCiv 5164090-80.2026.4.03.9999, 28/10/2026 · Outro
 - Havendo concordância expressa da parte autora com a proposta da autarquia, o acordo é homologado por decisão monocrática, valendo como título executivo judicial. Os embargos de declaração opostos pela autarquia ficam prejudicados. — ApCiv 5008676-34.2021.4.03.6000, 21/08/2026 · Prejudicado
 -  — ApCiv 5000578-52.2025.4.03.9999, 24/07/2026 · 
 - Havendo concordância expressa da parte autora, homologa-se o acordo com resolução do mérito, valendo a decisão como título executivo judicial. Os embargos de declaração opostos pela autarquia ficam prejudicados. — ApelRemNec 5126015-06.2025.4.03.9999, 24/07/2026 · Outro
@@ -16,6 +22,17 @@ Gerado do índice dos julgados do Relator (1374 julgados, 1294 assuntos). Teses 
 - Havendo concordância expressa da parte autora, homologa-se o acordo sobre correção monetária, com força de título executivo judicial. Os embargos de declaração opostos pela autarquia ficam prejudicados. — ApCiv 5144718-48.2026.4.03.9999, 24/06/2026 · Outro
 - Havendo concordância expressa da parte autora, homologa-se o acordo sobre correção monetária e julgam-se prejudicados os embargos de declaração. A decisão homologatória vale como título executivo judicial. — ApCiv 5087384-56.2026.4.03.9999, 08/06/2026 · Prejudicado
 
+## Aposentadoria por idade rural; segurada especial; ausência de início de prova material (8)
+-  — ApCiv 5353066-71.2026.4.03.9999, 26/10/2026 · Parcialmente provido · Tema 629/STJ, Tema 692/STJ, Tema 642/STJ
+- Documentos que apenas indicam residência em propriedade rural, ou vínculos de empregado rural do companheiro, não comprovam o trabalho pessoal da segurada. A prova testemunhal não supre a falta de início de prova material contemporânea à carência. Extingue-se o processo sem resolução do mérito, com cassação da tutela antecipada.</tese>
+<parameter name="resultado">Parcialmente provido — ApCiv 5280066-38.2026.4.03.9999, 05/10/2026 ·  · Tema 629/STJ, Tema 642/STJ, Tema 692/STJ
+-  — ApCiv 5287932-97.2026.4.03.9999, 15/09/2026 · Prejudicado · Tema 629/STJ
+-  — ApCiv 5083173-74.2026.4.03.9999, 13/07/2026 ·  · Tema 642/STJ, Tema 629/STJ
+- Documentos predominantemente autodeclaratórios e relativos a terceiros não bastam como início de prova material. Sem prova eficaz, o processo é extinto sem resolução do mérito, de ofício, e a apelação fica prejudicada. — ApCiv 5162604-94.2025.4.03.9999, 06/07/2026 · Outro · Tema 629/STJ
+- Certidões com qualificação rural do cônjuge e endereço rural, sem contemporaneidade e sem prova de atividade própria, não bastam para o benefício. A deficiência probatória impõe extinção do processo sem resolução do mérito, com apelação prejudicada. — ApCiv 5165537-06.2026.4.03.9999, 30/06/2026 · Outro · Tema 629/STJ, Tema 642/STJ
+- A CTPS do companheiro, por ser documento personalíssimo, não serve como início de prova material da atividade rural da autora sem indícios de economia familiar. Ausente prova material eficaz, o processo é extinto sem resolução do mérito. — ApCiv 5035046-42.2025.4.03.9999, 30/06/2026 · Outro · Tema 629/STJ, Tema 642/STJ
+- Documentos em nome de ex-cônjuge não podem ser estendidos à segurada sem prova de continuidade do núcleo familiar. Fichas cadastrais com conteúdo autodeclaratório não servem como início de prova material. Ausente prova material idônea, o processo é extinto sem resolução do mérito. — ApCiv 5001220-59.2024.4.03.9999, 27/04/2026 · Outro · Tema 532/STJ, Tema 533/STJ, Tema 629/STJ
+
 ## Aposentadoria por idade rural; ausência de início de prova material; extinção sem resolução do mérito (8)
 - Documentos que não qualificam a autora como trabalhadora rural, e que só vinculam o núcleo familiar, não servem como início de prova material. Prova testemunhal não supre essa ausência, e a falta de prova eficaz leva à extinção do processo sem resolução do mérito. — ApCiv 5112977-87.2026.4.03.9999, 27/08/2026 · Parcialmente provido · Tema 629/STJ
 - Documentos sem nome próprio da segurada e prova testemunhal genérica não suprem o início de prova material. Sem prova eficaz, o processo é extinto sem resolução do mérito. — ApCiv 5105468-08.2026.4.03.9999, 27/08/2026 · Parcialmente provido · Tema 554/STJ, Tema 629/STJ, Tema 692/STJ
@@ -26,16 +43,6 @@ Gerado do índice dos julgados do Relator (1374 julgados, 1294 assuntos). Teses 
 - A certidão eleitoral, a CTPS com vínculos antigos e distantes da carência, a certidão de casamento sem menção rural, a união estável apenas declaratória e o holerite de terceiro não comprovam atividade rural em economia familiar no período de carência. A prova oral não supre a ausência de início de prova material, impondo extinção do processo sem resolução do mérito. — ApCiv 5135516-47.2026.4.03.9999, 10/08/2026 · Outro · Tema 629/STJ
 - Certidões de nascimento dos filhos, não corroboradas por prova testemunhal robusta e distantes no tempo do período alegado, não servem como início de prova material. Documentos autodeclaratórios são inaptos. Sem prova eficaz, o processo é extinto sem resolução do mérito. — ApCiv 5001777-46.2024.4.03.9999, 14/04/2026 · Outro · Tema 629/STJ
 
-## Aposentadoria por idade rural; segurada especial; ausência de início de prova material (7)
-- Documentos que apenas indicam residência em propriedade rural, ou vínculos de empregado rural do companheiro, não comprovam o trabalho pessoal da segurada. A prova testemunhal não supre a falta de início de prova material contemporânea à carência. Extingue-se o processo sem resolução do mérito, com cassação da tutela antecipada.</tese>
-<parameter name="resultado">Parcialmente provido — ApCiv 5280066-38.2026.4.03.9999, 05/10/2026 ·  · Tema 629/STJ, Tema 642/STJ, Tema 692/STJ
--  — ApCiv 5287932-97.2026.4.03.9999, 15/09/2026 · Prejudicado · Tema 629/STJ
--  — ApCiv 5083173-74.2026.4.03.9999, 13/07/2026 ·  · Tema 642/STJ, Tema 629/STJ
-- Documentos predominantemente autodeclaratórios e relativos a terceiros não bastam como início de prova material. Sem prova eficaz, o processo é extinto sem resolução do mérito, de ofício, e a apelação fica prejudicada. — ApCiv 5162604-94.2025.4.03.9999, 06/07/2026 · Outro · Tema 629/STJ
-- Certidões com qualificação rural do cônjuge e endereço rural, sem contemporaneidade e sem prova de atividade própria, não bastam para o benefício. A deficiência probatória impõe extinção do processo sem resolução do mérito, com apelação prejudicada. — ApCiv 5165537-06.2026.4.03.9999, 30/06/2026 · Outro · Tema 629/STJ, Tema 642/STJ
-- A CTPS do companheiro, por ser documento personalíssimo, não serve como início de prova material da atividade rural da autora sem indícios de economia familiar. Ausente prova material eficaz, o processo é extinto sem resolução do mérito. — ApCiv 5035046-42.2025.4.03.9999, 30/06/2026 · Outro · Tema 629/STJ, Tema 642/STJ
-- Documentos em nome de ex-cônjuge não podem ser estendidos à segurada sem prova de continuidade do núcleo familiar. Fichas cadastrais com conteúdo autodeclaratório não servem como início de prova material. Ausente prova material idônea, o processo é extinto sem resolução do mérito. — ApCiv 5001220-59.2024.4.03.9999, 27/04/2026 · Outro · Tema 532/STJ, Tema 533/STJ, Tema 629/STJ
-
 ## Agravo de instrumento contra decisão que defere perícia técnica em ação de vícios construtivos em imóvel do MCMV (6)
 - Não cabe agravo de instrumento contra decisão que defere perícia técnica, por não constar do rol do artigo 1.015 do CPC e por inexistir urgência que justifique a mitigação da taxatividade. O recurso não foi conhecido quanto a esse ponto e foi negado provimento quanto aos demais. — AI 5028265-91.2026.4.03.0000, 24/09/2026 · Desprovido
 - Não cabe agravo de instrumento contra decisão que defere perícia técnica, por não constar do rol do artigo 1.015 do CPC e por inexistir urgência ou risco de inutilidade do julgamento na apelação. Não conhecido nessa parte; no mais, agravo desprovido. — AI 5028150-70.2026.4.03.0000, 24/09/2026 · Desprovido · Tema 988/STJ
@@ -44,6 +51,14 @@ Gerado do índice dos julgados do Relator (1374 julgados, 1294 assuntos). Teses 
 <parameter name="resultado">Desprovido — AI 5028288-37.2026.4.03.0000, 15/09/2026 ·  · Tema 988/STJ
 - Não cabe agravo de instrumento contra decisão que defere perícia técnica, por não constar do rol do artigo 1.015 do CPC e por inexistir urgência que justifique a mitigação da taxatividade. Demais questões do agravo foram rejeitadas, com negativa de provimento ao recurso. — AI 5000484-91.2026.4.03.0001, 31/08/2026 · Não conhecido · Tema 988/STJ
 - Não cabe agravo de instrumento contra decisão que defere perícia técnica, pois a hipótese não consta do rol do artigo 1.015 do CPC e não há urgência ou risco de inutilidade do julgamento na apelação. As demais questões foram desprovidas. — AI 5000403-45.2026.4.03.0001, 31/08/2026 · Parcialmente provido · Tema 988/STJ
+
+## Mora administrativa em recurso previdenciário; prazo legal em mandado de segurança (6)
+- A demora da Administração em decidir recurso administrativo, além do prazo legal, viola a razoável duração do processo. A remessa necessária não foi conhecida, com base no artigo 496, § 4º, do CPC, e no artigo 932 do CPC. — RemNecCiv 5031628-61.2022.4.03.6100, 31/03/2023 · Não conhecido
+- A Administração deve decidir recurso administrativo dentro do prazo legal. A demora injustificada viola a razoável duração do processo e o direito de petição. Remessa necessária não conhecida com base no artigo 496, § 4º, CPC. — RemNecCiv 5024340-62.2022.4.03.6100, 29/03/2023 · Não conhecido
+- A Administração deve decidir recurso administrativo dentro do prazo legal, sob pena de violação da razoável duração do processo. A remessa necessária não foi conhecida, com base no artigo 496, § 4º, do CPC, e na decisão monocrática do relator. — RemNecCiv 5010515-51.2022.4.03.6100, 20/03/2023 · Não conhecido
+- A Administração deve decidir recurso administrativo dentro do prazo legal, sob pena de violação da razoável duração do processo. Remessa necessária não conhecida com base no artigo 496, § 4º, CPC, e no artigo 932, CPC. — RemNecCiv 5004481-60.2022.4.03.6100, 17/03/2023 · Não conhecido
+- A Administração deve decidir o recurso administrativo dentro do prazo legal, sob pena de violação à duração razoável do processo. Remessa oficial não conhecida com base no artigo 496, § 4º, CPC. — RemNecCiv 5023946-55.2022.4.03.6100, 16/03/2023 · Não conhecido
+- A Administração deve decidir recurso administrativo dentro do prazo legal, sob pena de violação à razoável duração do processo. Remessa oficial não conhecida, com decisão monocrática com base no art. 932 do CPC. — RemNecCiv 5025978-33.2022.4.03.6100, 16/03/2023 · Não conhecido
 
 ## Aposentadoria por idade híbrida; segurado especial rural; ausência de início de prova material (5)
 -  — ApCiv 5265688-77.2026.4.03.9999, 15/09/2026 ·  · Tema 629/STJ
@@ -98,6 +113,26 @@ Gerado do índice dos julgados do Relator (1374 julgados, 1294 assuntos). Teses 
 -  — ApCiv 5185610-33.2025.4.03.9999, 27/08/2026 ·  · Tema 629/STJ
 - Documentos sem lastro material robusto e prova oral genérica não comprovam o labor rural no longo período de carência. Diante disso, o processo é extinto de ofício sem resolução do mérito, com apelação prejudicada. — ApCiv 5134155-92.2026.4.03.9999, 27/08/2026 · Prejudicado · Tema 629/STJ
 - Documentos que indicam vínculo remoto com o meio rural, sem continuidade no período de carência, não constituem início de prova material. Prova testemunhal sozinha não supre essa deficiência, e a falta de prova eficaz implica extinção do processo sem resolução do mérito. — ApCiv 5123254-02.2025.4.03.9999, 10/08/2026 · Outro · Tema 629/STJ
+
+## Compensação de remuneração de gestante afastada na pandemia como salário-maternidade (3)
+- Não há previsão legal para reenquadrar a remuneração integral como salário-maternidade. Leis 14.151/2021 e 14.311/2022 não criam responsabilidade patrimonial da União nem fonte de custeio, e o Judiciário não pode criar essa hipótese. — ApCiv 5005479-69.2021.4.03.6130, 29/02/2024 · Desprovido
+- As Leis 14.151/2021 e 14.311/2022 não preveem responsabilidade patrimonial da União pela remuneração da gestante afastada. Não cabe criar, por decisão judicial, benefício previdenciário e fonte de custeio sem previsão legal. Apelação provida.</tese>
+<parameter name="resultado">Provido — ApelRemNec 5002376-95.2022.4.03.6105, 15/09/2023 · 
+- Não há previsão legal para transformar remuneração integral de gestante afastada na pandemia em salário-maternidade para compensação. As Leis 14.151/2021 e 14.311/2022 não criam responsabilidade patrimonial da União, e a pretensão exigiria lei e fonte de custeio específicas.</tese>
+<parameter name="resultado">Desprovido — ApCiv 5004705-05.2021.4.03.6109, 03/08/2023 · 
+
+## Aposentadoria por idade rural; juízo de retratação; consectários legais; correção monetária e juros de mora (2)
+- Os consectários devem seguir o Tema 810/STF até a EC 113/2021, a taxa Selic exclusiva até a EC 136/2025 e, depois, os artigos 389, parágrafo único, e 406 do Código Civil. O Tema 1.419/STF não se projeta automaticamente sobre o regime da EC 136/2025. — ApCiv 5005049-82.2023.4.03.9999, 26/10/2026 · Retratação exercida · Tema 810/STF, Tema 1.419/STF
+- Os critérios de correção e juros devem seguir o Tema 810/STF até a EC 113/2021, a taxa Selic até a EC 136/2025 e, a partir daí, os artigos 389, parágrafo único, e 406 do Código Civil. O Tema 1.419/STF não se projeta automaticamente sobre o regime da EC 136/2025.</tese>
+<parameter name="resultado">Outro — ApCiv 5002848-83.2024.4.03.9999, 26/10/2026 ·  · Tema 810/STF, Tema 1.419/STF
+
+## Revisão de aposentadoria por tempo de contribuição com inclusão de auxílio-alimentação em vale ou cartão no salário de contribuição (2)
+- Antes de 11/11/2017, o auxílio-alimentação fornecido habitualmente por vale, talão ou cartão tem natureza remuneratória e integra o salário de contribuição, independentemente de previsão em instrumento coletivo ou de inscrição no PAT. A ausência de recolhimento pela empregadora não prejudica o segurado. — ApCiv 5006437-86.2023.4.03.6000, 26/10/2026 · Parcialmente provido · Tema 1.437/STF, Tema 1.105/STJ, Tema 1.059/STJ
+- Antes de 11/11/2017, o auxílio-alimentação pago por vale, cartão ou tíquete tem natureza remuneratória e integra o salário de contribuição, independentemente da inscrição da empregadora no PAT. A falta de recolhimento pela empresa não prejudica o segurado. — ApCiv 5002640-62.2024.4.03.6002, 05/10/2026 · Desprovido · Tema 1.437/STF
+
+## Aposentadoria por idade rural de segurada especial; ausência de início de prova material (2)
+- Documentos que indicam apenas residência em área rural não comprovam o efetivo labor campesino. Vínculos rurais na CTPS do cônjuge não servem, por si só, como início de prova material da atividade da autora, pois o contrato de emprego é personalíssimo. Prova testemunhal complementa, mas não supre a ausência de início de prova material; sem prova eficaz, o processo é extinto sem resolução do mérito. — ApCiv 5342730-08.2026.4.03.9999, 26/10/2026 · Outro · Tema 629/STJ
+- Autodeclaração e documento em nome de terceiro não integrante do núcleo familiar não servem como início de prova material. Ausente prova idônea, o processo é extinto de ofício sem resolução do mérito, com apelação prejudicada. — ApCiv 5000415-72.2025.4.03.9999, 27/04/2026 · Prejudicado · Tema 629/STJ, Tema 642/STJ
 
 ## Benefício por incapacidade; laudo pericial conclusivo pela capacidade laboral (2)
 - Laudo pericial judicial, produzido sob contraditório, prevalece sobre documentos médicos unilaterais sem crítica técnica específica. Divergência documental não basta para afastar a conclusão pericial de capacidade laboral. — ApCiv 5318357-10.2026.4.03.9999, 28/09/2026 · Desprovido
@@ -204,12 +239,308 @@ Gerado do índice dos julgados do Relator (1374 julgados, 1294 assuntos). Teses 
 - Comprovado o desemprego involuntário por anotação na CTPS, o período de graça é prorrogado por 24 meses e a qualidade de segurada se mantém na data do parto. Apelação do INSS desprovida, com honorários recursais de 1%. — ApCiv 5144548-13.2025.4.03.9999, 14/04/2026 · Desprovido
 - Comprovado o desemprego involuntário por CTPS, CNIS e prova testemunhal, o período de graça é prorrogado por mais 12 meses, mantendo a qualidade de segurada na data do parto. Faz jus ao salário-maternidade. — ApCiv 5144400-02.2025.4.03.9999, 14/04/2026 · Provido · Tema 810/STF, Tema 1.105/STJ
 
+## Compensação de remuneração de empregada gestante afastada na pandemia como salário-maternidade (2)
+- As Leis 14.151/2021 e 14.311/2022 não preveem responsabilidade patrimonial da União pela remuneração da gestante afastada. A conversão em salário-maternidade para compensação depende de lei específica, que inexiste, sob pena de criação judicial de benefício sem fonte de custeio.</tese>
+<parameter name="resultado">Desprovido — ApCiv 5032120-87.2021.4.03.6100, 29/02/2024 · 
+- Não há previsão legal para transformar a remuneração integral da gestante afastada em salário-maternidade para compensação. As Leis 14.151/2021 e 14.311/2022 não criam responsabilidade patrimonial da União, e a criação de benefício sem fonte de custeio exige lei específica. — ApCiv 5013590-20.2021.4.03.6105, 31/08/2023 · Desprovido
+
 ## Aposentadoria especial; acordo homologado sobre termo inicial e honorários (2)
 - Acordo sobre termo inicial do pagamento dos atrasados e verba de sucumbência, sem exigência de reconhecimento do pedido, é homologado. Recursos ficam prejudicados e o processo é devolvido ao juízo de origem para cumprimento. — ApCiv 5512585-29.2019.4.03.9999, 23/01/2024 · Prejudicado
 - Homologado o acordo entre as partes, com resolução do mérito nos termos do art. 487, III, "b", do CPC. Recursos especial e extraordinário do INSS julgados prejudicados. — ApCiv 5238994-81.2020.4.03.9999, 13/12/2023 · Prejudicado
 
+## Afastamento de empregada gestante na pandemia; remuneração integral reenquadrada como salário-maternidade para compensação (2)
+- Não há previsão legal para atribuir à União a responsabilidade pela remuneração de gestante afastada na pandemia nem para tratá-la como salário-maternidade. A exigência de lei para benefício e fonte de custeio impede a criação judicial desse regime. O INSS não tem legitimidade para integrar a lide, que envolve aspecto tributário.</tese>
+<parameter name="resultado">Desprovido — ApCiv 5003374-88.2021.4.03.6108, 29/11/2023 · 
+- As Leis 14.151/2021 e 14.311/2022 não preveem responsabilidade patrimonial da União pela remuneração da gestante afastada. O artigo 72, § 1º, da Lei 8.213/1991 não se aplica a essa situação, e criar essa compensação por decisão judicial exigiria lei específica com fonte de custeio.</tese>
+<parameter name="resultado">Desprovido — ApCiv 5000622-97.2023.4.03.6133, 11/10/2023 · 
+
+## Embargos de declaração rejeitados; contribuições previdenciárias sobre terço constitucional de férias (2)
+- Embargos de declaração não se prestam a rediscutir a matéria decidida sob alegação de error in judicando. Não havendo vício sanável na via eleita, rejeitam-se os embargos, considerando-se prequestionados os elementos suscitados. — ApCiv 0012909-05.2011.4.03.6100, 26/06/2023 · Embargos rejeitados
+-  — ApelRemNec 0009542-09.2012.4.03.6109, 26/06/2023 · 
+
+## Mandado de segurança. Mora em requerimento previdenciário remetido ao CRPS antes da impetração (2)
+- A autoridade vinculada ao INSS é parte ilegítima quando o recurso já estava com o órgão julgador antes da impetração. Demora no julgamento não pode ser imputada à autoridade autárquica, e a ordem é denegada. — ApCiv 5001262-81.2022.4.03.6183, 13/04/2023 · Desprovido
+- A autoridade vinculada ao INSS não responde por demora no julgamento de recurso que já estava com o órgão julgador antes da impetração. A ilegalidade de outra autoridade não pode ser imputada ao agente autárquico, o que leva à denegação da ordem. — ApCiv 5000515-83.2022.4.03.6102, 13/04/2023 · Desprovido
+
+## Mora administrativa em requerimento de benefício previdenciário (2)
+- A demora da Administração em decidir requerimento, além do prazo legal, viola a duração razoável do processo e o direito de petição. A remessa oficial não foi conhecida, com base no artigo 496, CPC. — RemNecCiv 5013597-90.2022.4.03.6100, 11/04/2023 · Não conhecido
+- A Administração deve decidir o requerimento administrativo dentro do prazo legal, sob pena de violação da razoável duração do processo. A remessa necessária não foi conhecida, com base no artigo 496, § 4º, do CPC, e no artigo 932 do CPC. — RemNecCiv 5001626-63.2022.4.03.6115, 28/03/2023 · Não conhecido
+
+## Mora do INSS em revisão de Certidão de Tempo de Contribuição (1)
+-  — RemNecCiv 5010986-71.2025.4.03.6000, 19/11/2026 · 
+
+## Mora do INSS em requerimento de aposentadoria por idade urbana (1)
+- Não havendo motivação razoável, o decurso do prazo legal sem decisão administrativa configura mora ilegal e viola o direito líquido e certo à tramitação administrativa. Aplica-se o prazo de 45 dias do art. 41-A, § 5º, da Lei 8.213/1991 e o prazo de 30 dias da Lei 9.784/1999.</tese>
+<parameter name="resultado">Desprovido — RemNecCiv 5008474-18.2025.4.03.6000, 19/11/2026 · 
+
+## Demora do INSS na análise de requerimento de auxílio-acidente; mandado de segurança (1)
+- A ausência de decisão administrativa após o prazo legal, sem motivação razoável, caracteriza mora ilegal e viola o direito à tramitação administrativa em prazo razoável. Aplica-se o prazo de 45 dias do artigo 41-A, § 5º, da Lei 8.213/1991 e o prazo de 30 dias da Lei 9.784/1999.</tese>
+<parameter name="resultado">Desprovido — RemNecCiv 5012112-59.2025.4.03.6000, 19/11/2026 · 
+
+## Mandado de segurança. Mora do INSS em cumprir decisão de recurso administrativo. Reconhecimento de atividade especial (1)
+- Havendo decurso do prazo legal para decidir ou cumprir decisão administrativa, sem motivação razoável, configura-se mora ilegal e violação ao direito líquido e certo à tramitação administrativa. Remessa necessária negada, com decisão monocrática. — RemNecCiv 5011771-33.2025.4.03.6000, 19/11/2026 · Desprovido
+
+## Reabertura de processo administrativo de aposentadoria híbrida e dever de motivação da decisão do INSS (1)
+- A Administração deve analisar e motivar as decisões sobre pedidos administrativos, sob pena de violação ao contraditório e à ampla defesa. Negado provimento à remessa necessária, com sentença concessiva da ordem mantida. — RemNecCiv 5000895-76.2026.4.03.6002, 19/11/2026 · Acórdão mantido
+
+## Mora do INSS em recurso administrativo de aposentadoria por tempo de contribuição (1)
+- A ausência de motivação razoável para o decurso do prazo legal, sem providência para solução do caso, configura mora ilegal da Administração. A demora viola o direito líquido e certo à tramitação administrativa nos prazos legais. — RemNecCiv 5000544-06.2026.4.03.6002, 19/11/2026 · Desprovido
+
+## Mora do INSS em implantar aposentadoria por idade concedida em recurso administrativo (1)
+- O prazo legal para decisão e pagamento do benefício administrativo deve ser observado. Sem motivação razoável para o atraso, configura-se mora ilegal e direito líquido e certo à tramitação no prazo legal. — RemNecCiv 5001442-19.2026.4.03.6002, 19/11/2026 · Desprovido
+
+## Mora do INSS em requerimento de Certidão de Tempo de Contribuição (1)
+- A ausência de decisão administrativa, após o prazo legal, sem motivação razoável, configura mora ilegal. Cabe ao INSS concluir o processo no prazo fixado em lei. — RemNecCiv 5013787-57.2025.4.03.6000, 19/11/2026 · Desprovido
+
+## Mora do INSS em requerimento de benefício por incapacidade (1)
+-  — RemNecCiv 5001733-19.2026.4.03.6002, 19/11/2026 · 
+
+## Mora do INSS em implantar aposentadoria por tempo de contribuição após recurso administrativo provido (1)
+- Não havendo motivação razoável para o decurso do prazo legal, sem decisão ou providência administrativa, configura-se mora ilegal da Administração. O prazo do artigo 41-A, § 5º, da Lei 8.213/1991 e o artigo 49 da Lei 9.784/1999 são os parâmetros aplicados.</tese>
+<parameter name="resultado">Desprovido — RemNecCiv 5001373-84.2026.4.03.6002, 19/11/2026 · 
+
+## Mora do INSS na implantação de auxílio por incapacidade temporária após provimento de recurso administrativo (1)
+- Decorrido o prazo legal de 45 dias para o primeiro pagamento após o provimento do recurso administrativo, sem motivação razoável, configura-se mora ilegal e direito líquido e certo à tramitação administrativa nos prazos fixados. Remessa necessária desprovida. — RemNecCiv 5012437-34.2025.4.03.6000, 19/11/2026 · Acórdão mantido
+
+## Aposentadoria especial e por tempo de contribuição; PPP obtido em reclamação trabalhista; hidrocarbonetos (1)
+- A exposição a hidrocarbonetos, inclusive benzeno, submete-se a avaliação qualitativa, e o EPI eficaz não descaracteriza a especialidade. PPP novo apresentado em juízo não é afastado pelo simples fato de ter sido obtido após a propositura da ação, observada a data de início do benefício fixada na citação ou em data posterior em que preenchidos os requisitos.</tese>
+<parameter name="resultado">Parcialmente provido — ApCiv 5000102-61.2017.4.03.6000, 14/11/2026 ·  · Tema 1.124/STJ, Tema 995/STJ, Tema 1.419/STF, Tema 810/STF
+
+## Aposentadoria especial. Eletricidade acima de 250 volts. Exposição habitual e permanente (1)
+-  — ApCiv 5000221-08.2020.4.03.6003, 14/11/2026 ·  · Tema 534/STJ, Tema 1.209/STF
+
+## Aposentadoria por tempo de contribuição; reafirmação da DER; embargos de declaração com efeitos infringentes (1)
+- É possível reafirmar a DER para o momento em que implementados os requisitos, ainda que no curso da ação, observada a causa de pedir. Havendo benefício administrativo inacumulável, o segurado pode optar pelo mais vantajoso, com compensação de valores pagos no mesmo período. — ApCiv 0001022-19.2014.4.03.6003, 14/11/2026 · Embargos rejeitados · Tema 995/STJ, Tema 1.018/STJ, Tema 1.059/STJ, Tema 810/STF, Tema 1.419/STF
+
+## Pensão por morte; embargos de declaração rejeitados; consectários legais e taxa Selic (1)
+-  — ApCiv 5001682-50.2023.4.03.9999, 14/11/2026 ·  · Tema 810/STF, Tema 1.419/STF, Tema 1.457/STF
+
+## Aposentadoria por tempo de contribuição. Vigia. Especialidade após 28/04/1995. Embargos de declaração rejeitados (1)
+- Não há omissão quando o acórdão aplica expressamente a tese do Tema 1.209/STF e afasta a especialidade da atividade de vigia após 28/04/1995. Erro material no dispositivo quanto à data de início do benefício é corrigido de ofício. — ApCiv 5001552-36.2018.4.03.9999, 14/11/2026 · Embargos acolhidos · Tema 1.209/STF
+
+## Aposentadoria por tempo de contribuição, motorista de ambulância, agentes biológicos, erro material e preclusão de perícia (1)
+-  — ApCiv 5001654-50.2020.4.03.6002, 14/11/2026 ·  · Tema 1.059/STJ, Tema 1.307/STJ, Tema 534/STJ
+
+## Aposentadoria por tempo de contribuição; tempo especial; consectários legais (EC 113/2021 e EC 136/2025) (1)
+- Antes da EC 113/2021, aplicam-se o Tema 810/STF e o Manual da Justiça Federal. Entre a EC 113/2021 e a EC 136/2025, incide somente a taxa Selic. Após a EC 136/2025, aplicam-se os artigos 389, parágrafo único, e 406 do Código Civil, com INPC e juros correspondentes à Selic deduzido o INPC.</tese>
+<parameter name="resultado">Desprovido — ApCiv 5000346-88.2025.4.03.6006, 14/11/2026 ·  · Tema 810/STF, Tema 1.419/STF
+
+## Aposentadoria por tempo de contribuição; porteiro noturno; enquadramento como vigia até 28/04/1995 (1)
+- Ausente prova do exercício da função de vigia, afasta-se a especialidade do período. O Tema 1.209/STF foi aplicado como fundamento adicional, restrito a períodos posteriores a 28/04/1995, sem contradição. — ApCiv 5005269-17.2022.4.03.9999, 14/11/2026 · Embargos rejeitados · Tema 1.209/STF
+
+## Aposentadoria por tempo de contribuição; tempo rural e mandato eletivo; embargos de declaração (1)
+- Recolhimentos previdenciários de mandato eletivo em intervalo documentado devem ser computados, se atendidos os requisitos de filiação facultativa. Atividade remunerada sem contribuições não gera averbação automática, pois depende de indenização legal. — ApCiv 5001244-43.2021.4.03.6006, 14/11/2026 · Parcialmente provido
+
+## Revisão de aposentadoria por tempo de contribuição; gratuidade revogada; decaimento mínimo (1)
+-  — ApCiv 5001272-69.2025.4.03.6006, 14/11/2026 ·  · Tema 1.178/STJ
+
+## Embargos de declaração. Pedido alternativo de aposentadoria por tempo de contribuição não impugnado (1)
+- Embargos de declaração não servem à ampliação do objeto do julgamento nem ao suprimento de recurso não interposto. Capítulo da sentença não impugnado oportunamente não é devolvido ao Tribunal. — ApCiv 5001264-46.2021.4.03.6002, 14/11/2026 · Embargos rejeitados
+
+## Aposentadoria especial com reconhecimento de tempo por agentes biológicos e químicos (1)
+-  — ApCiv 5001180-91.2025.4.03.6006, 14/11/2026 · 
+
+## Aposentadoria por tempo de contribuição. Tempo especial por periculosidade com risco de explosão. Embargos rejeitados (1)
+- A periculosidade pode caracterizar atividade especial, pois o rol de agentes nocivos das normas regulamentadoras é exemplificativo. Os precedentes invocados tratam de hipóteses diversas, como servidores públicos e vigilantes. Embargos com propósito de prequestionamento não são protelatórios.</tese>
+<parameter name="resultado">Embargos rejeitados — ApCiv 5006195-98.2021.4.03.6000, 14/11/2026 ·  · Tema 534/STJ, Tema 1.209/STF, Tema 810/STF, Tema 1.419/STF
+
+## Aposentadoria por idade rural; segurada especial; vínculos urbanos intercalados; embargos rejeitados (1)
+- Embargos de declaração não se prestam à rediscussão da valoração da prova. Início de prova material com documentos da unidade produtiva e prova testemunhal basta para o regime de economia familiar, dispensada prova de cada mês da carência. Consectários seguem os marcos da EC 113/2021 e da EC 136/2025, com compensação de valores pagos administrativamente.</tese>
+<parameter name="resultado">Embargos acolhidos — ApCiv 5162598-87.2025.4.03.9999, 14/11/2026 ·  · Tema 642/STJ, Tema 1.457/STF, Tema 810/STF, Tema 1.419/STF
+
+## Aposentadoria por idade rural; segurada especial; auxiliar de limpeza em estabelecimento rural; embargos de declaração (1)
+- Embargos de declaração não se prestam a rediscutir o mérito quando não há omissão, contradição ou obscuridade. Prequestionamento considera incluídos os elementos suscitados, nos termos do artigo 1.025 do CPC. — ApCiv 5158690-22.2025.4.03.9999, 14/11/2026 · Embargos rejeitados · Tema 532/STJ, Tema 533/STJ, Tema 642/STJ, Tema 629/STJ
+
+## Aposentadoria por incapacidade permanente; erro material na data de ajuizamento; prescrição quinquenal (1)
+- A data de distribuição do recurso não serve como marco do ajuizamento da ação. Corrigido o erro material, a prescrição quinquenal alcança apenas as parcelas anteriores à data de ajuizamento, mantido o termo inicial do benefício. — ApCiv 5121664-53.2026.4.03.9999, 14/11/2026 · Embargos acolhidos · Tema 810/STF, Tema 1.419/STF
+
+## Embargos de declaração. Aposentadoria por idade rural. Segurada especial. Vínculos intercalados (1)
+- Embargos rejeitados por inexistir omissão, contradição ou obscuridade. O acórdão examinou a prova material e testemunhal, a carência e a imediatidade. A discordância quanto à valoração da prova não se sana por embargos. Consectários fixados conforme a EC 113/2021 e a EC 136/2025. — ApCiv 5105717-56.2026.4.03.9999, 14/11/2026 · Embargos rejeitados · Tema 642/STJ, Tema 1.457/STF, Tema 810/STF, Tema 1.419/STF
+
+## Aposentadoria por idade rural. Embargos de declaração rejeitados. Insuficiência probatória (1)
+- Não há omissão, contradição ou erro material em acórdão que examinou o conjunto probatório. Embargos que apenas rediscutem o mérito não são cabíveis, ainda que para fins de prequestionamento. — ApCiv 5094334-18.2025.4.03.9999, 14/11/2026 · Embargos rejeitados · Tema 629/STJ, Tema 995/STJ
+
+## Pensão por morte de segurado especial indígena; embargos de declaração rejeitados (1)
+- Embargos de declaração não se prestam a rediscutir o mérito. Pensão por morte independe de carência (art. 26, I, da Lei 8.213/1991). A concessão baseou-se em certidão da FUNAI e prova testemunhal. — ApCiv 5076414-31.2025.4.03.9999, 14/11/2026 · Embargos rejeitados
+
+## Pensão por morte. União estável posterior ao divórcio. Duração limitada a quatro meses (1)
+- União estável posterior ao divórcio, com duração inferior a dois anos até o óbito, limita a pensão por morte a quatro meses. Histórico afetivo, prole comum e cuidados prestados não afastam o requisito temporal legal. — ApCiv 5363954-02.2026.4.03.9999, 14/11/2026 · Desprovido
+
+## Aposentadoria por idade híbrida; tempo rural remoto; prova material insuficiente (1)
+- Documentos em nome de genitores e do cônjuge, com vínculos urbanos deste, não bastam isoladamente para comprovar labor rural pessoal. Sem início de prova material eficaz, a prova testemunhal não supre a carência, e o processo é extinto sem resolução do mérito. — ApCiv 5363962-76.2026.4.03.9999, 14/11/2026 · Outro · Tema 1.007/STJ, Tema 629/STJ
+
+## Aposentadoria por idade rural; diarista ou boia-fria; início de prova material insuficiente na carência (1)
+- Recibos de trabalho rural remotos não comprovam labor no período de carência imediatamente anterior ao implemento da idade ou ao requerimento. A prova testemunhal não supre a ausência de início de prova material eficaz. Extingue-se o processo sem resolução do mérito. — ApCiv 5363932-41.2026.4.03.9999, 14/11/2026 · Parcialmente provido · Tema 629/STJ
+
+## Seguro-defeso de pescador artesanal cumulado com auxílio por incapacidade temporária (1)
+- A lei veda o seguro-defeso ao pescador que esteja em gozo de benefício previdenciário de prestação continuada não ressalvado por lei. Afastado o direito ao benefício, não há dano moral indenizável pelo indeferimento administrativo. — ApCiv 5362265-20.2026.4.03.9999, 14/11/2026 · Desprovido
+
+## Embargos de declaração. Benefício por incapacidade. Documentos supervenientes e nova perícia (1)
+-  — ApCiv 5203045-83.2026.4.03.9999, 14/11/2026 ·  · Tema 350/STF, Tema 1.124/STJ
+
+## Pensão por morte de companheiro; união estável comprovada por prova documental e testemunhal (1)
+- Prova documental corroborada por prova testemunhal comprova a união estável. Divergência de endereço não afasta a união quando a prova oral esclarece a mudança de residência. Dependência econômica do companheiro é presumida. — ApCiv 5369927-35.2026.4.03.9999, 14/11/2026 · Desprovido
+
+## Pensão por morte de companheira; união estável; início de prova material contemporânea (1)
+-  — ApCiv 5371693-26.2026.4.03.9999, 14/11/2026 ·  · Tema 810/STF, Tema 1.419/STF, Tema 1.105/STJ
+
+## Aposentadoria por tempo de contribuição; coisa julgada parcial; tempo rural e especial (1)
+- Períodos já definitivamente julgados em ação anterior não podem ser reapreciados, por coisa julgada material. A ausência de pedido específico de prova e de demonstração de prejuízo afasta o cerceamento. Sem comprovação de atividade rural pessoal e com tempo insuficiente após a reafirmação da DER, o benefício não é concedido. — ApCiv 5000645-11.2024.4.03.6003, 14/11/2026 · Parcialmente provido
+
+## Aposentadoria por tempo de contribuição; atividade especial de cirurgião-dentista; embargos de declaração rejeitados (1)
+- Embargos de declaração não servem à rediscussão da causa. O termo inicial fixado na DER, com formulários apresentados ao INSS e confirmados por laudo judicial, não configura vício. Alegação de falta de interesse de agir não suscitada na apelação é inovação recursal. Multa do artigo 1.026, § 2º, do CPC não cabe.</tese>
+<parameter name="resultado">Embargos acolhidos — ApelRemNec 5008378-08.2022.4.03.6000, 14/11/2026 ·  · Tema 1.124/STJ, Tema 350/STF
+
+## Aposentadoria por tempo de contribuição; contagem recíproca; CTC não apresentada na via administrativa; interesse de agir (1)
+- Não há dever de o INSS oportunizar carta de exigência quando o segurado formula o requerimento sem documento essencial, conduta análoga ao indeferimento forçado. O dever de exigência pressupõe requerimento instruído com documentação apta, porém insuficiente. Embargos rejeitados por inexistência de omissão.</tese>
+<parameter name="resultado">Embargos rejeitados — ApCiv 5009539-87.2021.4.03.6000, 14/11/2026 ·  · Tema 1.124/STJ
+
+## Revisão de aposentadoria por tempo de contribuição com conversão em aposentadoria especial por exposição a ruído (1)
+- Níveis de ruído do PPP acima do limite legal vigente à época caracterizam tempo especial, mesmo sem indicação da metodologia de aferição na norma de regência. Reconhecidos os períodos, o segurado preenche o tempo mínimo de atividade especial e tem direito à conversão do benefício.</tese>
+<parameter name="resultado">Provido — ApCiv 5005781-71.2019.4.03.6000, 14/11/2026 ·  · Tema 1.083/STJ, Tema 1.105/STJ, Tema 1.419/STF, Tema 810/STF
+
+## Embargos de declaração. Benefício por incapacidade. Segurado especial rural. Ausência de início de prova material (1)
+- Embargos de declaração não se prestam à rediscussão do mérito. O acórdão examinou o conjunto probatório e concluiu pela ausência de comprovação do retorno à atividade rural no período da incapacidade. Prequestionamento considerado para fins do art. 1.025 do CPC. — ApCiv 5001961-02.2024.4.03.9999, 14/11/2026 · Embargos acolhidos
+
+## Aposentadoria por idade rural; segurada especial; embargos de declaração; extinção sem resolução do mérito (1)
+- Sem início de prova material do exercício pessoal de atividade rural, e sem prova testemunhal que a supra, o processo deve ser extinto sem resolução do mérito. Erro material na data de alienação do imóvel corrige-se sem efeitos modificativos. — ApCiv 5002031-19.2024.4.03.9999, 14/11/2026 · Embargos rejeitados · Tema 629/STJ, Tema 532/STJ, Tema 533/STJ
+
+## Contribuição patronal e RAT sobre verbas pagas a trabalhadores; compensação (1)
+-  — ApelRemNec 5002145-28.2018.4.03.6002, 14/11/2026 ·  · Tema 20/STF, Tema 72/STF, Tema 985/STF, Tema 738/STJ, Tema 338/STJ, Tema 1.174/STJ, Tema 1.164/STJ, Tema 740/STJ, Tema 265/STJ
+
+## Embargos de declaração; aposentadoria por incapacidade permanente; correção monetária e juros de mora (1)
+-  — ApCiv 5001452-40.2024.4.03.6000, 14/11/2026 ·  · Tema 810/STF, Tema 1.419/STF, Tema 1.457/STF
+
+## Mandado de segurança contra revisão de RMI em acordo homologado no JEF (1)
+- Mandado de segurança não substitui recurso nem desconstitui decisão preclusa. Eventual revisão deve ser buscada no sistema recursal do Juizado ou em ação de conhecimento, pois a controvérsia sobre tempo de contribuição exige dilação probatória. — ApCiv 0000403-15.2025.4.03.6000, 14/11/2026 · Desprovido
+
+## Embargos de declaração. Aposentadoria especial. Erro material na contagem. Conversão para tempo integral (1)
+- Embargos do INSS rejeitados, pois o acórdão já tratou da eficácia do EPI. Embargos do autor acolhidos, com efeitos infringentes: o tempo especial é insuficiente para aposentadoria especial, mas basta para aposentadoria por tempo de contribuição integral, com consectários legais conforme a EC 136/2025.</tese>
+<parameter name="resultado">Embargos acolhidos — ApCiv 0002912-22.2016.4.03.6003, 14/11/2026 ·  · Tema 555/STF, Tema 810/STF, Tema 1.419/STF, Tema 546/STJ, Tema 1.018/STJ, Tema 1.090/STJ
+
+## Aposentadoria por incapacidade permanente; termo inicial; preclusão lógica; embargos de declaração rejeitados (1)
+-  — ApCiv 5073529-44.2025.4.03.9999, 14/11/2026 · 
+
+## Aposentadoria por tempo de contribuição de professora; reafirmação da DER no processo administrativo; embargos de declaração (1)
+- Requisitos implementados no curso do processo administrativo autorizam o termo inicial na data do implemento, e a condenação em honorários é cabível quando o direito nasce no processo administrativo e a autarquia contesta. Não há omissão, e a repercussão geral não suspende o feito sem determinação expressa do relator. — ApCiv 5150713-42.2026.4.03.9999, 14/11/2026 · Embargos acolhidos · Tema 995/STJ, Tema 1.457/STF, Tema 810/STF, Tema 1.419/STF
+
+## Aposentadoria por tempo de contribuição; regra de transição; vínculo em CTPS com cópia parcial; reafirmação da DER não deduzida na apelação (1)
+- Não há omissão quando o acórdão examina expressamente o período anotado em CTPS e conclui que cópia parcial, sem a página de identificação do segurado, não permite aferir a regularidade do registro. Pedido de reafirmação da DER não deduzido na apelação configura inovação recursal, incompatível com embargos de declaração.</tese>
+<parameter name="resultado">Embargos rejeitados — ApCiv 5114719-50.2026.4.03.9999, 14/11/2026 · 
+
+## Aposentadoria por tempo de contribuição de professora; magistério em contratos temporários; termo inicial na citação (1)
+- Documentação emitida pelo ente público empregador comprova o magistério em contratos temporários. Prova essencial não apresentada na via administrativa desloca o termo inicial do benefício para a data da citação válida. — ApCiv 5174370-47.2025.4.03.9999, 14/11/2026 · Parcialmente provido · Tema 810/STF, Tema 1.419/STF
+
+## Embargos de declaração rejeitados; benefício por incapacidade; ausência de incapacidade laborativa (1)
+- Embargos de declaração não se prestam à rediscussão de provas ou do julgado por error in judicando. Laudo pericial judicial sem incapacidade laborativa prevalece sobre documentos médicos particulares. Risco de agravamento futuro não comprova incapacidade presente. — ApCiv 5173423-56.2026.4.03.9999, 14/11/2026 · Embargos rejeitados
+
+## Aposentadoria por idade híbrida; termo inicial dos efeitos financeiros; DER; prova rural (1)
+- Havendo requerimento administrativo instruído com documentação mínima e indeferimento sem reconhecimento do direito, há interesse de agir. Os efeitos financeiros podem ser fixados na DER quando a prova judicial confirma elementos já submetidos à Administração. — ApCiv 5387572-73.2026.4.03.9999, 14/11/2026 · Parcialmente provido · Tema 1.124/STJ, Tema 810/STF, Tema 1.419/STF, Tema 350/STF, Tema 995/STJ, Tema 905/STJ
+
+## Embargos de declaração. Averbação de tempo rural em regime de economia familiar (1)
+- Embargos de declaração não se prestam à rediscussão do mérito por suposto error in judicando. Não havendo omissão, contradição ou erro material, são rejeitados, considerando-se prequestionados os dispositivos invocados. — ApCiv 5096644-31.2024.4.03.9999, 14/11/2026 · Embargos rejeitados
+
+## Aposentadoria por idade rural; segurada especial; documentos do cônjuge empregado rural; embargos de declaração rejeitados (1)
+- Documentos em nome do cônjuge empregado rural não comprovam, por si, atividade campesina pessoal da segurada em regime de economia familiar. Prova testemunhal não supre a ausência de início de prova material eficaz. Embargos não se prestam à rediscussão do mérito. — ApCiv 5206085-73.2026.4.03.9999, 14/11/2026 · Embargos rejeitados · Tema 629/STJ
+
+## Aposentadoria por idade rural; regime de economia familiar; documentos de familiares; ausência de início de prova material (1)
+-  — ApCiv 5128470-07.2026.4.03.9999, 14/11/2026 ·  · Tema 629/STJ
+
+## Aposentadoria por idade rural. Termo inicial retroativo ao primeiro requerimento administrativo (1)
+- Havendo requerimento administrativo anterior indeferido por falta de carência, e comprovado o labor rural por início de prova material corroborada por prova testemunhal, o termo inicial do benefício retroage à data desse requerimento, observada a prescrição quinquenal. Pedido de cópia de processo administrativo não equivale a novo requerimento de concessão.</tese>
+<parameter name="resultado">Provido — ApCiv 5387428-02.2026.4.03.9999, 14/11/2026 · 
+
+## Aposentadoria por idade rural; descaracterização de segurado especial por vínculos urbanos; revogação de tutela (1)
+- Vínculos profissionais superiores a 120 dias no ano civil descaracterizam a condição de segurado especial. Sem prova material do retorno à atividade rural, o pedido de aposentadoria por idade rural é improcedente. A aposentadoria híbrida, pedida só na impugnação, não integra a inicial e exige idade de 65 anos.</tese>
+<parameter name="resultado">Provido — ApCiv 5377297-65.2026.4.03.9999, 14/11/2026 ·  · Tema 692/STJ
+
+## Aposentadoria por idade rural de diarista ou boia-fria sem início de prova material (1)
+-  — ApCiv 5384339-68.2026.4.03.9999, 14/11/2026 · Desprovido · Tema 629/STJ
+
+## BPC à pessoa com deficiência; restabelecimento; vulnerabilidade socioeconômica não comprovada; inversão da sucumbência (1)
+- O BPC exige impedimento de longo prazo e impossibilidade de prover a própria subsistência ou de tê-la provida pela família. Renda per capita acima de meio salário mínimo, com imóvel próprio e medicamentos fornecidos pelo SUS, afasta a miserabilidade exigida. — ApCiv 5358535-98.2026.4.03.9999, 14/11/2026 · Provido
+
+## Aposentadoria por idade rural de segurada especial; coisa julgada afastada; insuficiência de prova material (1)
+- A coisa julgada não impede a nova ação sem identidade integral de conjuntos probatórios. Documentos remotos, insuficientes para a carência e sem início de prova material contemporâneo, levam à extinção do processo sem resolução do mérito, nos termos do Tema 629/STJ. — ApCiv 5001746-26.2024.4.03.9999, 14/11/2026 · Parcialmente provido · Tema 313/STF, Tema 642/STJ, Tema 629/STJ
+
+## Aposentadoria da pessoa com deficiência leve; erro material no IFBrA; reafirmação da DER (1)
+- Erro material na soma das avaliações médica e social pode ser corrigido em embargos de declaração, com contraditório observado. Reafirma-se a DER para o momento em que implementados os requisitos, quando mais vantajoso que a aposentadoria etária. — ApelRemNec 0004057-59.2015.4.03.6000, 14/11/2026 · Parcialmente provido · Tema 995/STJ, Tema 334/STF, Tema 810/STF, Tema 1.419/STF
+
+## Aposentadoria por idade urbana; tempo de contribuição anterior à EC 103/2019; contagem data a data (1)
+-  — ApCiv 5373758-91.2026.4.03.9999, 14/11/2026 · Desprovido
+
+## Aposentadoria por idade urbana; correção monetária e juros de mora (1)
+- Não havendo aceitação expressa da proposta de acordo, nada há a homologar. Na vigência da EC 113/2021, a taxa Selic incide de forma exclusiva desde o vencimento das parcelas, e não apenas a partir da citação. A partir da EC 136/2025, aplicam-se INPC e juros pela taxa legal do Código Civil, deduzido o INPC. — ApCiv 5377076-82.2026.4.03.9999, 14/11/2026 · Parcialmente provido · Tema 810/STF, Tema 1.419/STF, Tema 1.457/STF
+
+## Salário-maternidade de contribuinte individual sem carência em mandado de segurança (1)
+- A exigência de carência para salário-maternidade de contribuinte individual foi declarada inconstitucional, mas a qualidade de segurada na data do parto deve ser comprovada. Efeitos patrimoniais anteriores à impetração não são devidos na via mandamental. — ApCiv 5000073-21.2025.4.03.6003, 14/11/2026 · Parcialmente provido · Tema 831/STF
+
+## Aposentadoria rural por idade; tutela de urgência; comprovante de residência (1)
+- A tutela provisória de urgência exige a presença cumulativa da probabilidade do direito e do perigo de dano, nos termos do artigo 300 do CPC. A ausência de um dos requisitos basta para o indeferimento. — AI 5027471-70.2026.4.03.0000, 14/11/2026 · Desprovido
+
+## Servidora pública; lapso entre exoneração estadual e posse federal; regras de transição de aposentadoria (1)
+- Pedido de efeito suspensivo à apelação julgado improcedente, sem exame exauriente da matéria. Na sentença, o curto intervalo entre os vínculos foi considerado compatível com a continuidade do serviço público para fins de transição. — SuspApel 5009910-33.2026.4.03.0000, 13/11/2026 · Outro · Tema 139/STF
+
+## Contribuições previdenciárias patronais sobre verbas de afastamento, aviso prévio e salário-maternidade; remessa necessária não conhecida (1)
+- Não se aplica o duplo grau obrigatório quando a sentença se funda em precedentes vinculantes e em orientação administrativa coincidente do próprio ente público, nos termos do artigo 496, § 4º, II e IV, do CPC. Verbas de afastamento, aviso prévio e salário-maternidade seguem essa hipótese.</tese>
+<parameter name="resultado">Não conhecido — RemNecCiv 0000440-42.2025.4.03.6000, 12/11/2026 ·  · Tema 738/STJ, Tema 478/STJ, Tema 72/STF
+
+## Mora do INSS em recurso administrativo contra suspensão de benefício assistencial (1)
+-  — ApCiv 5007767-21.2023.4.03.6000, 29/10/2026 · 
+
+## Revisão da vida toda; regra permanente do art. 29 versus regra de transição da Lei 9.876/1999 (1)
+- Após a declaração de constitucionalidade do art. 3º da Lei 9.876/1999, o segurado enquadrado no dispositivo não pode optar pela regra definitiva do art. 29, I e II, da Lei 8.213/1991, ainda que mais favorável. Apelação negada monocraticamente com base no art. 932 do CPC.</tese>
+<parameter name="resultado">Desprovido — ApCiv 5003674-15.2023.4.03.6000, 29/10/2026 ·  · Tema 1.102/STF, Tema 999/STJ
+
+## Revisão de benefício; regra definitiva do art. 29, I e II, versus transição do art. 3º da Lei 9.876/1999 (1)
+-  — ApCiv 5009201-79.2022.4.03.6000, 29/10/2026 ·  · Tema 1.102/STF, Tema 999/STJ
+
+## Competência recursal. Aposentadoria rural por idade. Recurso de sentença do Juizado Especial Federal. Remessa às Turmas Recursais (1)
+-  — ApCiv 0000173-53.2019.4.03.6203, 29/10/2026 · Outro
+
+## Mora do INSS em requerimento de benefício assistencial à pessoa com deficiência; mandado de segurança (1)
+- Configura mora ilegal a ausência de decisão administrativa por prazo superior ao legal, sem motivação razoável nos autos. Mantém-se a ordem para conclusão da análise, após o que o requerimento foi decidido. — RemNecCiv 5000227-08.2026.4.03.6002, 29/10/2026 · Desprovido
+
+## Revisão de aposentadoria por idade; período contributivo anterior a 1994 (1)
+-  — ApCiv 5000430-91.2022.4.03.6007, 29/10/2026 ·  · Tema 1.102/STF, Tema 999/STJ
+
+## Pensão por morte; tutela de urgência; perda superveniente do interesse recursal (1)
+- Deferida a tutela de urgência em decisão posterior, que substitui a decisão interlocutória impugnada, o agravo de instrumento fica prejudicado por perda superveniente do objeto, pela ausência de utilidade do provimento jurisdicional. Recurso julgado prejudicado com base no art. 932, III, do CPC. — AI 5000264-93.2026.4.03.0001, 29/10/2026 · Prejudicado
+
+## Revisão da vida toda; incompetência de turma regional; redistribuição do feito (1)
+- Turma Regional do MS não tem competência para julgar apelação de ação processada em vara da Seção Judiciária de São Paulo. Declarada a incompetência e determinada a redistribuição do feito. — ApCiv 5001718-59.2023.4.03.6130, 29/10/2026 · Outro
+
+## Revisão da vida toda; regra permanente do artigo 29 da Lei 8.213/1991 versus regra de transição; sobrestamento (1)
+- A tese vinculante do Tema 1.102/STF já está firmada, com revogação da suspensão nacional e modulação de efeitos. Não há fundamento para novo sobrestamento à espera do julgamento da ADI 2.111. Apelação negada monocraticamente com base no artigo 932 do CPC.</tese>
+<parameter name="resultado">Desprovido — ApCiv 5005506-83.2023.4.03.6000, 29/10/2026 ·  · Tema 1.102/STF
+
+## Mora do INSS em revisão de aposentadoria por tempo de contribuição (1)
+- Decorrido o prazo legal sem decisão administrativa e sem motivação razoável, configura-se mora ilegal da autarquia. Remessa necessária desprovida; a conclusão posterior do requerimento não afasta o direito à ordem. — RemNecCiv 5001092-31.2026.4.03.6002, 29/10/2026 · Desprovido
+
 ## Mora do INSS em recurso ordinário administrativo; mandado de segurança (1)
 - O decurso do prazo legal para decidir processo administrativo, sem motivação razoável, configura mora ilegal. Cabe ordem para conclusão do julgamento. — RemNecCiv 5000693-02.2026.4.03.6002, 28/10/2026 · Desprovido
+
+## Acordo em embargos de declaração sobre correção monetária em cumprimento de sentença (1)
+- Havendo concordância expressa da parte autora, homologa-se o acordo como título executivo judicial, com extinção do processo com resolução de mérito. Os embargos de declaração opostos pela autarquia ficam prejudicados. — ApCiv 5222656-22.2026.4.03.9999, 28/10/2026 · Outro
+
+## Revisão de benefício; salário de benefício; regra de transição da Lei 9.876/1999 versus regra definitiva (1)
+- O segurado enquadrado no art. 3º da Lei 9.876/1999 não pode optar pela regra definitiva do art. 29, I e II, da Lei 8.213/1991, ainda que mais favorável. A regra de transição tem caráter cogente, conforme decidido nas ADIs 2.110 e 2.111.</tese>
+<parameter name="resultado">Desprovido — ApCiv 5008610-20.2022.4.03.6000, 28/10/2026 ·  · Tema 1.102/STF, Tema 999/STJ
+
+## Pensão por morte, cumprimento de sentença, excesso de execução, cota-parte de dependentes (1)
+- Ausente a probabilidade do direito, não se concede efeito suspensivo ao agravo de instrumento. O relator pode negar provimento monocraticamente quando a decisão recorrida se apoia em jurisprudência dominante de tribunal superior. — AI 5032635-16.2026.4.03.0000, 28/10/2026 · Desprovido
+
+## Acordo homologado em embargos de declaração sobre correção monetária em cumprimento de sentença (1)
+-  — ApCiv 5078215-79.2025.4.03.9999, 28/10/2026 · 
+
+## Tutela de urgência em agravo de instrumento; restabelecimento de auxílio por incapacidade temporária (1)
+- A tutela provisória de urgência exige a demonstração cumulativa da probabilidade do direito e do perigo de dano, nos termos do artigo 300 do CPC. A ausência de um dos requisitos basta para o indeferimento. Recurso desprovido por decisão monocrática do relator. — AI 5000290-91.2026.4.03.0001, 28/10/2026 · Desprovido
+
+## Mora do INSS em cumprimento de acórdão administrativo e implantação de benefício (1)
+-  — RemNecCiv 5002692-93.2026.4.03.6000, 28/10/2026 · 
+
+## Revisão de benefício; opção pela regra definitiva do art. 29, I e II, da Lei 8.213/1991 (1)
+- Segurado enquadrado no art. 3º da Lei 9.876/1999 não pode optar pela regra definitiva do art. 29, I e II, da Lei 8.213/1991, ainda que mais favorável. Recurso negado por decisão monocrática, com base em precedentes vinculantes. — ApCiv 5006516-70.2020.4.03.6000, 28/10/2026 · Desprovido · Tema 1.102/STF, Tema 999/STJ
 
 ## Mora do INSS em aposentadoria à pessoa com deficiência; prazo para conclusão do requerimento administrativo (1)
 - A demora sem razoável motivação, além do prazo legal de decisão administrativa, configura mora ilegal e viola o direito líquido e certo à tramitação administrativa no prazo. Confirmada a ordem que determinou a conclusão da análise em trinta dias, sob pena de multa diária. — RemNecCiv 5001523-96.2025.4.03.6003, 27/10/2026 · Desprovido
@@ -225,6 +556,12 @@ Gerado do índice dos julgados do Relator (1374 julgados, 1294 assuntos). Teses 
 
 ## Isenção de imposto de renda sobre proventos por neoplasia maligna (1)
 - A isenção do art. 6º, XIV, da Lei 7.713/1988 alcança a neoplasia maligna, por ser rol taxativo de moléstias graves. Comprovado o diagnóstico, cabe a restituição dos valores descontados, respeitada a prescrição quinquenal. — RemNecCiv 5004183-09.2024.4.03.6000, 27/10/2026 · Desprovido · Tema 250/STJ
+
+## Agravo de instrumento. Cumprimento de sentença de obrigação de fazer. Prejudicado por superveniente sentença extintiva (1)
+- A prolação de sentença que substitui ou prejudica a decisão provisória esvazia o objeto do agravo de instrumento. Com a perda superveniente de interesse recursal, o recurso é julgado prejudicado. — AI 5004795-31.2026.4.03.0000, 27/10/2026 · Prejudicado
+
+## Mora administrativa em restituição de contribuição previdenciária indevida ou a maior (1)
+- O prazo de 360 dias do art. 24 da Lei 11.457/2007 para decidir pedidos administrativos de restituição é obrigatório. Sem razoável motivação para o atraso, configura-se mora ilegal e viola o direito à razoável duração do processo administrativo. — RemNecCiv 5001227-49.2026.4.03.6000, 27/10/2026 · Desprovido
 
 ## Aposentadoria por idade rural de segurada especial indígena artesã (1)
 - O indígena artesão que usa matéria-prima de extrativismo vegetal pode ser enquadrado como segurado especial, independentemente do local de residência. Certidões, apuração administrativa e prova testemunhal comprovam a carência, e a indicação de endereço urbano não afasta isoladamente o trabalho documentado. — ApCiv 5000754-65.2024.4.03.9999, 26/10/2026 · Provido
@@ -261,6 +598,104 @@ Gerado do índice dos julgados do Relator (1374 julgados, 1294 assuntos). Teses 
 
 ## Embargos de declaração rejeitados em aposentadoria especial; correção de ofício dos consectários legais (1)
 - Embargos sem vício sanável são rejeitados por mera rediscussão do julgado. Precedente obrigatório aplica-se de imediato, sem aguardar trânsito em julgado. Correção de ofício dos consectários conforme Tema 810/STF, Tema 1.419/STF e EC 136/2025. — ApCiv 5146027-07.2026.4.03.9999, 26/10/2026 · Embargos rejeitados · Tema 1.124/STJ, Tema 995/STJ, Tema 810/STF, Tema 1.419/STF
+
+## Juízo de retratação. Aposentadoria por idade híbrida. Correção monetária e juros de mora após EC 136/2025 (1)
+- Os consectários devem seguir o Tema 810/STF até a EC 113/2021, a taxa Selic exclusiva até a EC 136/2025 e, depois, os artigos 389, parágrafo único, e 406 do Código Civil. O Tema 1.419/STF não se projeta automaticamente sobre o regime da EC 136/2025.</tese>
+<parameter name="resultado">Acórdão mantido — ApCiv 5001990-86.2023.4.03.9999, 26/10/2026 ·  · Tema 810/STF, Tema 1.419/STF
+
+## Aposentadoria especial ou por tempo de contribuição com labor rural e atividade especial não submetidos ao INSS (1)
+- Em ação previdenciária, o interesse de agir depende de prévio requerimento administrativo com os mesmos fatos e provas levados a Juízo. Documentos essenciais e fatos novos exigem novo requerimento, e a contestação de mérito só supre essa falta em ações ajuizadas antes de 03/09/2014.</tese>
+<parameter name="resultado">Desprovido — ApCiv 5002893-03.2022.4.03.6202, 26/10/2026 ·  · Tema 350/STF, Tema 1.124/STJ
+
+## Benefício por incapacidade; interesse de agir; patologia diversa da analisada no requerimento administrativo (1)
+- Não há interesse de agir quando a incapacidade reconhecida em juízo decorre de patologia diversa da analisada administrativamente, pois o INSS não teve oportunidade de apreciar os fatos e provas novos. Extinção do processo sem resolução do mérito; apelação desprovida, com honorários recursais. — ApCiv 5354549-39.2026.4.03.9999, 26/10/2026 · Desprovido · Tema 350/STF
+
+## Auxílio-doença; incapacidade parcial e temporária; reabilitação profissional indevida (1)
+- A reabilitação profissional exige insuscetibilidade de recuperação para a atividade habitual. Quando o perito atesta possibilidade de recuperação após tratamento, o encaminhamento à reabilitação é inviável. — ApCiv 5353943-11.2026.4.03.9999, 26/10/2026 · Desprovido
+
+## Auxílio-doença. Data de início do benefício. Laudo pericial conclusivo (1)
+- A data de início do benefício por incapacidade temporária fica na data da perícia judicial quando não há prova de incapacidade em momento anterior. A mera existência de doença não comprova, por si, a incapacidade laboral. O laudo pericial judicial, com exame direto e documentos médicos, prevalece sobre a divergência de documentos médicos particulares. — ApCiv 5354658-53.2026.4.03.9999, 26/10/2026 · Desprovido
+
+## Benefício por incapacidade. Perda da qualidade de segurada antes do início da incapacidade (1)
+-  — ApCiv 5353940-56.2026.4.03.9999, 26/10/2026 ·  · Tema 692/STJ
+
+## Restabelecimento de benefício por incapacidade convertido em aposentadoria por invalidez; termo inicial (1)
+- Cessado o benefício por incapacidade temporária sem recuperação comprovada, é devido o restabelecimento desde a cessação. A conversão em benefício permanente é devida a partir do ajuizamento da ação, por ausência de prévio requerimento administrativo com tal pedido. — ApCiv 5354821-33.2026.4.03.9999, 26/10/2026 · Provido
+
+## Auxílio-acidente para contribuinte individual e facultativo; ausência de incapacidade (1)
+-  — ApCiv 5217056-20.2026.4.03.9999, 26/10/2026 · 
+
+## Auxílio-doença acidentário por doença ocupacional; incompetência da Justiça Federal (1)
+-  — ApCiv 5358409-48.2026.4.03.9999, 26/10/2026 ·  · Tema 414/STF
+
+## Seguro-defeso do pescador artesanal recebido com auxílio-reclusão; débito limitado às parcelas sobrepostas (1)
+- A boa-fé não afasta a restituição de valores cuja percepção indevida esteja objetivamente comprovada nos registros administrativos. A cobrança deve restringir-se às parcelas efetivamente sobrepostas, com abatimento do que já foi compensado ou restituído. — ApCiv 5101415-52.2024.4.03.9999, 26/10/2026 · Parcialmente provido · Tema 979/STJ
+
+## Embargos de declaração rejeitados; benefício por incapacidade; incapacidade congênita preexistente à filiação (1)
+- Embargos de declaração não servem para rediscutir a valoração da perícia e da prova. Não há omissão, contradição ou erro material quando o acórdão analisa a prova e fundamenta a conclusão sobre a preexistência da incapacidade. Considera-se prequestionado o que foi suscitado, ainda que os embargos sejam rejeitados.</tese>
+<parameter name="resultado">Embargos rejeitados — ApCiv 5101361-18.2026.4.03.9999, 26/10/2026 · 
+
+## Benefício por incapacidade com alegação de nexo acidentário; incompetência da Justiça Federal (1)
+- A competência é fixada pelo pedido e pela causa de pedir da petição inicial, não pelo resultado da perícia. Havendo alegação de acidente de trabalho, a competência é da Justiça Estadual, inclusive em grau recursal, e o Tribunal reconhece de ofício a incompetência federal. — ApCiv 5274973-94.2026.4.03.9999, 26/10/2026 · Outro · Tema 414/STF
+
+## Pensão por morte. Ex-cônjuge divorciada. União estável posterior. Ausência de prova material contemporânea (1)
+- A união estável exige início de prova material contemporânea ao óbito, produzido em até vinte e quatro meses antes dele. Documentos antigos ou que não demonstrem convivência no período não bastam. Sem a condição de dependente, fica prejudicada a análise da qualidade de segurado especial. — ApCiv 5352156-44.2026.4.03.9999, 26/10/2026 · Desprovido
+
+## Aposentadoria por tempo de contribuição; conversão de tempo especial em comum; mecânico (1)
+-  — ApCiv 5000428-21.2022.4.03.6202, 26/10/2026 · 
+
+## Aposentadoria especial; PPP sem quantificação de ruído; tratorista rural; defensivos agrícolas; prova por similaridade (1)
+-  — ApCiv 5000403-57.2021.4.03.6003, 26/10/2026 · 
+
+## Revisão de aposentadoria por tempo de contribuição para conversão em aposentadoria da pessoa com deficiência; ausência de perícia e avaliação biopsicossocial (1)
+- A comprovação da deficiência e do seu grau para aposentadoria da pessoa com deficiência exige avaliação biopsicossocial por equipe multiprofissional, não supridas por laudos para isenção de imposto de renda ou relatório de médico assistente. Sem essa prova, a sentença é nula e a tutela de evidência é revogada. — ApCiv 5001492-53.2024.4.03.9999, 26/10/2026 · Parcialmente provido · Tema 1.018/STF, Tema 692/STJ
+
+## PASEP. ausência de aplicação de rendimentos e descontos indevidos na conta individual (1)
+- Nas demandas sobre falha na conta vinculada ao PASEP, o Banco do Brasil tem legitimidade passiva e a competência é da Justiça Estadual, conforme o Tema 1.150/STJ. Julgamento monocrático com agravo interno preserva a colegialidade. — AI 5001518-07.2026.4.03.0000, 26/10/2026 · Desprovido · Tema 1.150/STJ
+
+## Benefício por incapacidade; cerceamento probatório; especialização do perito (1)
+-  — ApCiv 5001275-24.2025.4.03.6006, 26/10/2026 · 
+
+## Benefício por incapacidade permanente; renda mensal inicial; regra de cálculo da EC 103/2019 (1)
+-  — ApCiv 5002419-79.2024.4.03.6002, 26/10/2026 ·  · Tema 1.300/STF
+
+## Revisão de RMI de aposentadoria por incapacidade permanente convertida de auxílio temporário anterior à EC 103/2019 (1)
+-  — ApCiv 5003331-14.2026.4.03.6000, 26/10/2026 ·  · Tema 1.300/STF, Tema 88/STF, Tema 704/STJ
+
+## Aposentadoria especial; trabalhador agrícola polivalente e mecânico; PPP sem fatores de risco; DER e DIB (1)
+-  — ApCiv 5000201-80.2021.4.03.6003, 26/10/2026 ·  · Tema 1.124/STJ
+
+## Benefício por incapacidade cessado por alta programada sem pedido de prorrogação (1)
+-  — ApCiv 5353928-42.2026.4.03.9999, 26/10/2026 ·  · Tema 350/STF, Tema 1.124/STJ
+
+## Aposentadoria por idade rural de pecuarista; prova material insuficiente para a carência (1)
+-  — ApCiv 5353935-34.2026.4.03.9999, 26/10/2026 ·  · Tema 629/STJ
+
+## Pensão por morte de filho segurado; genitor; dependência econômica não comprovada (1)
+-  — ApCiv 5348313-71.2026.4.03.9999, 26/10/2026 · Desprovido
+
+## Embargos de declaração em revisional de pensão por morte; data de início do benefício (1)
+-  — ApCiv 5088684-53.2026.4.03.9999, 26/10/2026 ·  · Tema 1.124/STJ
+
+## Aposentadoria por idade híbrida; cômputo conjunto de período rural e urbano; economia familiar; citra petita (1)
+- O cômputo conjunto de períodos rurais e urbanos é admitido para carência da aposentadoria híbrida, observado o requisito etário. Documentos em nome de filho podem ser aceitos quando comprovado o trabalho rural em regime de economia familiar, corroborado por prova testemunhal. Causa madura permite julgamento direto do mérito pelo Tribunal. — ApCiv 5354872-44.2026.4.03.9999, 26/10/2026 · Provido · Tema 1.007/STJ, Tema 642/STJ
+
+## Aposentadoria por idade rural em regime de economia familiar; conversão de benefício assistencial; ausência de início de prova material (1)
+-  — ApCiv 5353918-95.2026.4.03.9999, 26/10/2026 ·  · Tema 629/STJ
+
+## Conversão de benefício assistencial em aposentadoria por idade rural; prova material insuficiente (1)
+-  — ApCiv 5353954-40.2026.4.03.9999, 26/10/2026 ·  · Tema 629/STJ
+
+## Salário-maternidade de contribuinte individual; recolhimento tempestivo da competência do parto (1)
+-  — ApCiv 5354876-81.2026.4.03.9999, 26/10/2026 · 
+
+## Benefício por incapacidade temporária convolado de aposentadoria por invalidez; prazo de recuperação e consectários (1)
+- Laudo que aponta incapacidade temporária com prazo de tratamento de seis meses não autoriza benefício permanente. Fatores como idade, escolaridade e histórico profissional não impõem conclusão diversa. Concede-se prazo de 30 dias, após a intimação do acórdão, para pedido de prorrogação administrativa. Os consectários seguem o Manual de Cálculos da Justiça Federal.</tese>
+<parameter name="resultado">Parcialmente provido — ApCiv 5353771-69.2026.4.03.9999, 26/10/2026 ·  · Tema 810/STF, Tema 1.419/STF
+
+## Benefício por incapacidade com nexo de acidente de trabalho; competência da Justiça Estadual (1)
+- Reconhecido o nexo da incapacidade com acidente de trabalho, a competência é da Justiça Estadual, por incompetência absoluta da Justiça Federal. Declina-se de ofício a competência para o tribunal estadual.</tese>
+<parameter name="resultado">Outro — ApCiv 5293096-43.2026.4.03.9999, 26/10/2026 · 
 
 ## Indeferimento de perícia por similaridade em agravo de instrumento; não conhecimento (1)
 - Não cabe agravo de instrumento contra decisão que defere ou indefere prova, por não se enquadrar no rol do artigo 1.015 do CPC. A taxatividade é mitigada apenas quando houver urgência decorrente da inutilidade do julgamento da questão na apelação. — AI 5032514-85.2026.4.03.0000, 23/10/2026 · Não conhecido · Tema 988/STJ
@@ -378,9 +813,6 @@ Gerado do índice dos julgados do Relator (1374 julgados, 1294 assuntos). Teses 
 
 ## Restabelecimento de auxílio por incapacidade temporária; conversão em permanente; prazo para prorrogação (1)
 - A incapacidade temporária, constatada em perícia judicial com possibilidade de recuperação após tratamento, não autoriza benefício permanente. Após o exaurimento do prazo fixado, deve ser assegurado prazo adicional de trinta dias, contado da implantação do benefício, para requerimento administrativo de prorrogação. — ApCiv 5001085-41.2023.4.03.6003, 05/10/2026 · Parcialmente provido · Tema 1059/STJ
-
-## Revisão de aposentadoria por tempo de contribuição com inclusão de auxílio-alimentação em vale ou cartão no salário de contribuição (1)
-- Antes de 11/11/2017, o auxílio-alimentação pago por vale, cartão ou tíquete tem natureza remuneratória e integra o salário de contribuição, independentemente da inscrição da empregadora no PAT. A falta de recolhimento pela empresa não prejudica o segurado. — ApCiv 5002640-62.2024.4.03.6002, 05/10/2026 · Desprovido · Tema 1.437/STF
 
 ## Embargos de declaração rejeitados; aposentadoria por tempo de contribuição; tempo especial por defensivos agrícolas e EPI (1)
 - Mera discordância com a conclusão do acórdão não configura vício sanável em embargos de declaração. Em agente de análise qualitativa, o uso de EPI não descaracteriza, por si só, a especialidade. — ApCiv 5104176-56.2024.4.03.9999, 05/10/2026 · Embargos rejeitados · Tema 555/STF, Tema 1.090/STJ, Tema 694/STJ
@@ -3696,9 +4128,6 @@ Gerado do índice dos julgados do Relator (1374 julgados, 1294 assuntos). Teses 
 - A extemporaneidade do laudo e a falta de registro profissional no PPP não afastam a especialidade, cabendo ao INSS provar a inaptidão do técnico. Para ruído, o EPI não neutraliza a exposição, e a conversão de tempo especial em comum pelo fator 1,40 é garantida. Mantida a concessão pela regra de transição da EC 103/2019.</tese>
 <parameter name="resultado">Desprovido — ApCiv 5000401-88.2025.4.03.9999, 27/04/2026 ·  · Tema 555/STF, Tema 1.083/STJ
 
-## Aposentadoria por idade rural de segurada especial; ausência de início de prova material (1)
-- Autodeclaração e documento em nome de terceiro não integrante do núcleo familiar não servem como início de prova material. Ausente prova idônea, o processo é extinto de ofício sem resolução do mérito, com apelação prejudicada. — ApCiv 5000415-72.2025.4.03.9999, 27/04/2026 · Prejudicado · Tema 629/STJ, Tema 642/STJ
-
 ## Pensão por morte; qualidade de segurado; exoneração de cargo em comissão; prorrogação do período de graça (1)
 - A exoneração de cargo em comissão configura desemprego involuntário, que prorroga o período de graça. Comprovado o desemprego por outros meios de prova, mantém-se a qualidade de segurado e são devidos a pensão por morte e os consectários. — ApCiv 5000471-45.2023.4.03.6000, 27/04/2026 · Provido · Tema 1360/STJ, Tema 810/STF, Tema 692/STJ, Tema 1.105/STJ
 
@@ -4113,9 +4542,6 @@ Gerado do índice dos julgados do Relator (1374 julgados, 1294 assuntos). Teses 
 ## Contribuição patronal sobre verbas não remuneratórias pagas a empregados em mandado de segurança (1)
 - Há divergência entre os votos. Pelo voto do relator e do acompanhamento, a análise da falta de interesse de agir e do mérito segue a devolução dos pontos decididos. Pelo voto divergente, deu-se parcial provimento à apelação da União para reconhecer a incidência sobre o terço constitucional de férias gozadas e declarar falta de interesse quanto às férias indenizadas. Afastou-se a incidência sobre salário-maternidade, por provimento da apelação da impetrante. O julgamento de embargos no RE 1.072.485 foi indicado como ponto a ser observado. — ApelRemNec 5002999-47.2019.4.03.6144, 26/02/2025 · Parcialmente provido · Tema 1.072/STF
 
-## Compensação de remuneração de gestante afastada na pandemia como salário-maternidade (1)
-- Não há previsão legal para reenquadrar a remuneração integral como salário-maternidade. Leis 14.151/2021 e 14.311/2022 não criam responsabilidade patrimonial da União nem fonte de custeio, e o Judiciário não pode criar essa hipótese. — ApCiv 5005479-69.2021.4.03.6130, 29/02/2024 · Desprovido
-
 ## Embargos de declaração rejeitados. SAT para setor bancário e NTEP (1)
 - O NTEP, validado pelo STF, foi positivado com base em estudos técnicos públicos e prévios, e a presunção relativa admite contraprova. A mera rediscussão do mérito não autoriza embargos de declaração. — ApCiv 0020014-72.2007.4.03.6100, 29/02/2024 · Embargos rejeitados · Tema 1.075/STF
 
@@ -4124,10 +4550,6 @@ Gerado do índice dos julgados do Relator (1374 julgados, 1294 assuntos). Teses 
 
 ## Habeas data para acesso a dados de terceiros usados no cálculo do FAP (1)
 - O habeas data é remédio personalíssimo, restrito a informações do próprio impetrante. Sem recusa administrativa comprovada, não há interesse para a ação. — ApCiv 5000988-12.2021.4.03.6100, 29/02/2024 · Desprovido · Tema 582/STF
-
-## Compensação de remuneração de empregada gestante afastada na pandemia como salário-maternidade (1)
-- As Leis 14.151/2021 e 14.311/2022 não preveem responsabilidade patrimonial da União pela remuneração da gestante afastada. A conversão em salário-maternidade para compensação depende de lei específica, que inexiste, sob pena de criação judicial de benefício sem fonte de custeio.</tese>
-<parameter name="resultado">Desprovido — ApCiv 5032120-87.2021.4.03.6100, 29/02/2024 · 
 
 ## Aposentadoria por tempo de contribuição; conversão de tempo especial; acordo homologado sobre termo inicial e honorários (1)
 - Homologada transação que fixa termo inicial do benefício na juntada de documento comprobatório em juízo e afasta honorários sucumbenciais, com resolução do mérito e prejudicados os recursos. Pagamento por precatório ou RPV, nos termos do art. 100 da CF/88. — ApCiv 5057112-21.2022.4.03.9999, 20/02/2024 · Outro
@@ -4193,9 +4615,391 @@ Gerado do índice dos julgados do Relator (1374 julgados, 1294 assuntos). Teses 
 ## Homologação de acordo em revisão de aposentadoria especial com recurso prejudicado (1)
 - Acordo homologado com resolução do mérito nos termos do art. 487, III, "b", do CPC. Recursos da autarquia julgados prejudicados. — ApelRemNec 0000168-25.2014.4.03.6003, 07/12/2023 · Prejudicado
 
-## Afastamento de empregada gestante na pandemia; remuneração integral reenquadrada como salário-maternidade para compensação (1)
-- Não há previsão legal para atribuir à União a responsabilidade pela remuneração de gestante afastada na pandemia nem para tratá-la como salário-maternidade. A exigência de lei para benefício e fonte de custeio impede a criação judicial desse regime. O INSS não tem legitimidade para integrar a lide, que envolve aspecto tributário.</tese>
-<parameter name="resultado">Desprovido — ApCiv 5003374-88.2021.4.03.6108, 29/11/2023 · 
-
 ## Afastamento de empregada gestante na pandemia; compensação de remuneração como salário-maternidade (1)
 - Não há previsão legal para transformar a remuneração integral da gestante afastada, nas Leis 14.151/2021 e 14.311/2022, em salário-maternidade compensável. Sem lei específica, não há responsabilidade da União nem fonte de custeio para essa compensação. — ApCiv 5002451-81.2021.4.03.6134, 29/11/2023 · Desprovido
+
+## Embargos de declaração rejeitados. Afastamento de empregada gestante na pandemia. Compensação pela União (1)
+-  — ApCiv 5013590-20.2021.4.03.6105, 14/11/2023 · 
+
+## Embargos de declaração rejeitados; contribuição RAT/FAP por acidentes do trabalho (1)
+-  — ApCiv 0004806-43.2010.4.03.6100, 14/11/2023 · 
+
+## Embargos à execução fiscal; citação por edital; redirecionamento a sócio por dissolução irregular (1)
+-  — ApCiv 5001182-40.2020.4.03.6005, 14/11/2023 ·  · Tema 962/STJ, Tema 630/STJ
+
+## Embargos de declaração rejeitados; Proagro e quebra de safra com cédula rural pignoratícia (1)
+-  — ApCiv 0016644-75.2013.4.03.6100, 14/11/2023 · Embargos acolhidos
+
+## Juízo de retratação. Salário maternidade. Contribuição previdenciária. Inovação recursal (1)
+- O acórdão anterior não tratou de contribuição sobre salário maternidade, mas de outras verbas. Por isso, a diversidade da questão afasta a retratação pelo Tema 72/STF. — ApelRemNec 0018301-52.2013.4.03.6100, 14/11/2023 · Acórdão mantido · Tema 72/STF
+
+## Conversão de aposentadoria por tempo em especial; homologação de acordo (1)
+- Homologada a transação celebrada entre as partes, com resolução do mérito. Recursos especial e extraordinário julgados prejudicados por perda de objeto. Os autos retornam ao juízo de origem para implantação do benefício conforme o acordo. — ApCiv 5001244-64.2018.4.03.6130, 09/11/2023 · Prejudicado
+
+## Embargos de declaração rejeitados; decadência de contribuição previdenciária; contratos de locação de táxis (1)
+-  — ApCiv 0007167-63.2019.4.03.6182, 27/10/2023 · 
+
+## Contribuições previdenciárias sobre verbas remuneratórias; embargos de declaração de ambas as partes rejeitados (1)
+-  — ApelRemNec 5004010-22.2020.4.03.6130, 27/10/2023 · 
+
+## Embargos de declaração rejeitados; SAT/RAT, reenquadramento de grau de risco e majoração de alíquotas pelo Decreto 6.957/2009 (1)
+- Embargos de declaração não se prestam a rediscutir a matéria decidida por suposto erro de julgamento. Ausentes vícios sanáveis na via eleita, os embargos são rejeitados. — ApCiv 5001153-20.2017.4.03.6126, 25/10/2023 · Embargos rejeitados
+
+## Afastamento de empregada gestante na pandemia; pedido de compensação como salário-maternidade (1)
+- Não há previsão legal para transformar a remuneração integral de gestante afastada na pandemia em salário-maternidade. As Leis 14.151/2021 e 14.311/2022 não criam responsabilidade patrimonial da União nem fonte de custeio. Sem lei específica, não cabe criar o benefício por decisão judicial.</tese>
+<parameter name="resultado">Desprovido — ApCiv 5015459-75.2021.4.03.6183, 25/10/2023 · 
+
+## Embargos de declaração rejeitados; CRP e extrapolação da competência da União (1)
+- Embargos de declaração não servem para rediscutir o mérito por suposto error in judicando. A alegação não deduzida na apelação não pode ser imputada como omissão. Rejeição dos embargos. — ApCiv 5001381-02.2021.4.03.6143, 11/10/2023 · Embargos rejeitados · Tema 968/STF
+
+## Embargos de declaração em apelação; não homologação de compensações; crédito por afastamento da cobrança do artigo 22, IV, da Lei 8.212/1991; multa isolada excluída; sucumbência recíproca (1)
+-  — ApCiv 5025715-06.2019.4.03.6100, 11/10/2023 · 
+
+## Embargos de declaração rejeitados. Contribuições previdenciárias sobre verbas. Salário-paternidade e FGTS (1)
+- Embargos de declaração não servem para rediscutir o mérito por suposto error in judicando. Não há vício sanável quando o acórdão enfrenta os pontos relevantes. A contribuição ao FGTS não tem natureza tributária, e suas exclusões são taxativas.</tese>
+<parameter name="resultado">Embargos rejeitados — ApelRemNec 5002024-89.2021.4.03.6100, 11/10/2023 ·  · Tema 72/STF, Tema 740/STJ
+
+## Afastamento de empregada gestante na pandemia; remuneração integral não equiparada a salário-maternidade para compensação (1)
+- Não há previsão legal para transformar a remuneração integral da gestante afastada em salário-maternidade compensável. As Leis 14.151/2021 e 14.311/2022 não fixam responsabilidade patrimonial da União, e a criação desse efeito dependeria de lei específica com fonte de custeio.</tese>
+<parameter name="resultado">Desprovido — ApCiv 5025960-46.2021.4.03.6100, 11/10/2023 · 
+
+## Embargos de declaração após juízo de retratação; restituição de benefício recebido com salários (1)
+- Embargos de declaração não se prestam a rediscutir o mérito, sem omissão, contradição, obscuridade ou erro material. A tese do repetitivo não se aplica por não haver modulação temporal abrangendo o caso. — ApCiv 0009035-76.2016.4.03.9999, 29/09/2023 · Embargos rejeitados · Tema 979/STJ
+
+## Majoração de SAT para setor bancário e NTEP; sentença extra e citra petita (1)
+- O NTEP é constitucional e a presunção de nexo causal por ele criada é relativa, cabendo contraprova. A majoração do SAT para o setor bancário teve estudos prévios e base científica, e a contribuição tem natureza parafiscal, não sinalagmática. — ApCiv 0020014-72.2007.4.03.6100, 28/09/2023 · Outro
+
+## Contribuição patronal sobre verbas salariais; sindicato em substituição processual; compensação (1)
+-  — ApelRemNec 5002386-02.2020.4.03.6141, 20/09/2023 ·  · Tema 20/STF, Tema 265/STJ
+
+## Vícios construtivos em imóveis do PMCMV com recursos do FAR; responsabilidade solidária da CEF e construtora (1)
+- A Caixa responde solidariamente com a construtora por vícios de construção em imóveis do PMCMV com recursos do FAR, dada a natureza do programa e o papel de gestão da instituição financeira. O condomínio não tem legitimidade para pleitear danos morais em nome dos condôminos, por falta de personalidade jurídica própria.</tese>
+<parameter name="resultado">Parcialmente provido — ApCiv 5001111-05.2020.4.03.6113, 15/09/2023 · 
+
+## Pensão por morte. Concomitância de uniões estáveis. Pluralidade de pensões (1)
+- A preexistência de casamento ou união estável impede o reconhecimento de novo vínculo para o mesmo período, inclusive para fins previdenciários, salvo a exceção do artigo 1.723, § 1º, do Código Civil. Juízo de retratação acolhido para adequar o acórdão ao precedente vinculante.</tese>
+<parameter name="resultado">Retratação exercida — ApCiv 5000108-79.2019.4.03.6006, 15/09/2023 ·  · Tema 529/STF
+
+## Embargos à execução fiscal de contribuição previdenciária; decadência não alegada na sentença; vínculo de emprego em locação de veículos para táxi (1)
+- Decadência não alegada na sentença não pode ser apreciada em apelação, por inovação da lide. Relação de emprego verificada pela fiscalização na situação concreta, sem prova documental em contrário, mantém a presunção de liquidez e certeza do título. — ApCiv 0007167-63.2019.4.03.6182, 15/09/2023 · Desprovido
+
+## Desapropriação de imóvel rural para reforma agrária; valor da indenização; juros compensatórios (1)
+-  — RemNecCiv 0000475-48.2007.4.03.6124, 15/09/2023 · 
+
+## Contribuição patronal e RAT sobre salário-maternidade; juízo de retratação (1)
+-  — ApelRemNec 5003752-10.2017.4.03.6100, 15/09/2023 ·  · Tema 72/STF
+
+## Afastamento de empregada gestante; compensação de salário-maternidade; ilegitimidade passiva do INSS (1)
+-  — ApelRemNec 5006082-51.2021.4.03.6128, 15/09/2023 · 
+
+## Contribuição patronal, terceiros e RAT sobre salário-maternidade (1)
+- Segundo o STF, não incide contribuição patronal, destinada a terceiros e RAT/SAT sobre o salário-maternidade, garantida a compensação. Em juízo de retratação, o acórdão anterior foi reformado nesse ponto.</tese>
+<parameter name="resultado">Retratação exercida — ApelRemNec 5011901-92.2017.4.03.6100, 15/09/2023 ·  · Tema 72/STF
+
+## Embargos de declaração rejeitados; afastamento de empregada gestante na pandemia e compensação pela União (1)
+-  — ApCiv 5001147-18.2022.4.03.6100, 15/09/2023 · 
+
+## Afastamento de empregada gestante na pandemia; remuneração integral como salário-maternidade para compensação (1)
+- Não há previsão legal para reenquadrar a remuneração integral como salário-maternidade. As Leis 14.151/2021 e 14.311/2022 não fixam responsabilidade patrimonial da União, e o Judiciário não pode criar essa fonte de custeio sem lei. — ApCiv 5000058-27.2022.4.03.6110, 15/09/2023 · Desprovido
+
+## Embargos de declaração rejeitados; incidência de contribuição previdenciária sobre hora extra (1)
+-  — ApCiv 5004256-31.2022.4.03.6103, 15/09/2023 ·  · Tema 687/STJ
+
+## Ação regressiva do INSS contra empregadora por acidente do trabalho com negligência (1)
+- A empresa responde pelo ressarcimento ao INSS quando o acidente decorre de culpa por inobservância de normas de segurança e higiene do trabalho. O recolhimento do SAT/RAT não afasta essa responsabilidade nem gera bis in idem. O artigo 120 da Lei 8.213/1991 é constitucional. Os juros de mora incidem desde cada desembolso, com SELIC.</tese>
+<parameter name="resultado">Desprovido — ApelRemNec 5000300-37.2018.4.03.6106, 15/09/2023 · 
+
+## Conflito negativo de competência entre ações civis públicas conexas sobre conversão de tempo especial (1)
+- A mera reprodução de tese jurídica não configura, em regra, conexão, pois as relações jurídicas são autônomas e podem ser decididas de forma distinta. Não há prevenção do juízo que recebeu a primeira ação coletiva quando ausente identidade de pedido ou causa de pedir entre as demandas.</tese>
+<parameter name="resultado">Provido — CCCiv 5013796-45.2023.4.03.0000, 05/09/2023 ·  · Tema 942/STF
+
+## Contribuição RAT com FAP; arredondamento de casas decimais na alíquota (1)
+- O FAP deve ser aplicado sobre as alíquotas da contribuição RAT com quatro casas decimais, com arredondamento apenas na quarta casa, conforme o regulamento e o ato declaratório vigente à época. A falta de prova necessária pelo contribuinte mantém a presunção de legitimidade do auto de infração.</tese>
+<parameter name="resultado">Desprovido — ApCiv 5031854-08.2018.4.03.6100, 31/08/2023 · 
+
+## Seguro-desemprego fraudado; CEF como mera agente pagadora; embargos de declaração rejeitados (1)
+- Não cabe à CEF, como agente pagador, regularizar cadastro do programa nem responder por pagamento autorizado pelo órgão gestor. Embargos de declaração que apenas rediscutem o mérito são rejeitados. — ApCiv 0003066-59.2016.4.03.6126, 31/08/2023 · Embargos rejeitados
+
+## Aviso para regularização de tributos; contribuição de riscos ambientais do trabalho (benzeno); retificação de GFIP (1)
+- A apelação é intempestiva quando interposta após o prazo legal, contado da publicação da sentença e de embargos de declaração sem efeito modificativo. Não há decadência quando, notificado o contribuinte em 2019, não decorreu o quinquênio do parágrafo único do artigo 173 do CTN. Pela sucumbência recursal, cabe honorária adicional de 10%.</tese>
+<parameter name="resultado">Não conhecido — ApCiv 5000087-54.2020.4.03.6108, 31/08/2023 · 
+
+## Embargos de declaração rejeitados; contribuições previdenciárias sobre verbas pagas a empregados (1)
+- Embargos de declaração não se prestam a rediscutir o mérito quando não há omissão, contradição, obscuridade ou erro material. Alegação de error in judicando deve ser veiculada em recurso próprio. — ApelRemNec 5006270-16.2021.4.03.6105, 31/08/2023 · Embargos rejeitados · Tema 265/STJ
+
+## Embargos de declaração rejeitados; incidência de contribuições previdenciárias sobre hora extra (1)
+-  — ApCiv 5012591-67.2021.4.03.6105, 31/08/2023 · 
+
+## Embargos de declaração; contribuições previdenciárias sobre horas extras, abono de faltas e adicionais (1)
+-  — ApelRemNec 5015932-19.2021.4.03.6100, 31/08/2023 · 
+
+## Desistência de apelação do INSS homologada (1)
+- Homologada a desistência do recurso de apelação apresentada pela autarquia, com fundamento no art. 998 do CPC. Trânsito em julgado certificado e autos devolvidos à Vara de origem. — ApelRemNec 5901633-23.2019.4.03.9999, 23/08/2023 · Outro
+
+## Contribuição previdenciária patronal e RAT sobre verbas pagas ao empregado; exclusões de auxílio-doença, aviso prévio e salário-maternidade (1)
+- Não incide contribuição previdenciária sobre valores pagos a título de aviso prévio indenizado, por não se tratar de verba salarial. As verbas de quinze dias anteriores a auxílio-doença ou acidente, salário-maternidade e salário-família podem ser excluídas da base de cálculo. A compensação do indébito segue o regime legal vigente na propositura da ação, com juros pela Taxa SELIC.</tese>
+<parameter name="resultado">Parcialmente provido — ApelRemNec 5026729-54.2021.4.03.6100, 21/08/2023 ·  · Tema 20/STF, Tema 265/STJ
+
+## Embargos de declaração rejeitados; CTVA e previdência complementar da Funcef (1)
+-  — ApCiv 0001012-23.2015.4.03.6105, 17/08/2023 ·  · Tema 936/STJ
+
+## Contribuição previdenciária patronal sobre verbas indenizatórias e ganhos habituais (1)
+-  — ApelRemNec 5004010-22.2020.4.03.6130, 17/08/2023 ·  · Tema 20/STF
+
+## Aposentadoria por tempo de contribuição; tempo especial; homologação de transação (1)
+- Homologada a transação, sem impedimento legal quanto ao objeto da ação, o feito é extinto com resolução de mérito. Recurso especial pendente fica prejudicado por perda de objeto. — ApCiv 5001438-64.2018.4.03.6130, 07/08/2023 · Prejudicado
+
+## Contribuições previdenciárias patronal e RAT sobre verbas salariais; compensação; multa do art. 89 §10 (1)
+- A contribuição patronal e o RAT incidem sobre ganhos habituais do empregado, conforme o Tema 20. Para servidor vinculado a RPPS, aplica-se o Tema 163, cabendo ao contribuinte provar a não incorporação da verba. A multa do art. 89, §10, exige ato de falsificação, não mero erro.</tese>
+<parameter name="resultado">Parcialmente provido — ApCiv 5000099-43.2022.4.03.6126, 03/08/2023 ·  · Tema 20/STF, Tema 163/STF
+
+## Contribuição para riscos ambientais do trabalho. Adicional por benzeno. Validade da cobrança em 2016 (1)
+- A exposição ao benzeno, agente cancerígeno previsto em norma regulamentadora, autoriza a cobrança do adicional. O Ato Declaratório Interpretativo RFB 2/2019 não criou a cobrança nem gerou retroatividade. A neutralização só afastou a exposição efetiva a partir do Decreto 10.410/2020.</tese>
+<parameter name="resultado">Desprovido — ApCiv 5001021-18.2020.4.03.6106, 03/08/2023 · 
+
+## Contribuição SAT/RAT, reenquadramento de grau de risco e majoração de alíquotas pelo Decreto 6.957/2009 (1)
+- A alíquota do SAT/RAT tem previsão legal e observa a legalidade tributária, sendo o FAP calculado por estabelecimento. A redução exige comprovação de queda de acidentes em toda a subclasse econômica, o que não ocorreu. Rejeitada a alegação de nulidade da sentença por suposta insuficiência de fundamentação.</tese>
+<parameter name="resultado">Desprovido — ApCiv 5001153-20.2017.4.03.6126, 03/08/2023 · 
+
+## ProAgro. quebra de safra. desconto de receita da venda parcial da colheita (1)
+- Alegação de redução da cobertura pela receita da venda parcial constitui inovação recursal, pois não foi suscitada na origem. A ausência de ressalva no título executivo e a coisa julgada impedem o exame. Apelo não conhecido. — ApCiv 0016644-75.2013.4.03.6100, 03/08/2023 · Não conhecido
+
+## Contribuição previdenciária sobre pagamentos a cooperativas; prescrição do indébito; protesto interruptivo (1)
+-  — ApCiv 0003534-39.2014.4.03.6111, 03/08/2023 ·  · Tema 1.075/STF
+
+## Contribuição RAT e FAP bloqueado por taxa de rotatividade acima da média (1)
+- É legítimo o bloqueio da redução do FAP por taxa de rotatividade acima de 75%, previsto na Resolução CNPS 1.316/2010, por fator técnico de avaliação de riscos. A alta rotatividade inerente à atividade não afasta o bloqueio, e a redução pode ser obtida mediante comprovação do cumprimento das normas de saúde e segurança do trabalho.</tese>
+<parameter name="resultado">Desprovido — ApCiv 5002266-19.2019.4.03.6100, 03/08/2023 · 
+
+## Mandado de segurança; pensão por morte; agravo de instrumento prejudicado por sentença superveniente (1)
+- A sentença de mérito superveniente substitui integralmente a tutela provisória de urgência, tornando prejudicado o agravo de instrumento interposto contra a liminar. Recurso julgado prejudicado com base no artigo 932, III, do CPC. — AI 5028218-59.2022.4.03.0000, 14/07/2023 · Prejudicado
+
+## Embargos de declaração rejeitados; cobertura securitária SFH, apólice pública, FCVS (1)
+-  — ApCiv 0003049-08.2016.4.03.6131, 06/07/2023 · 
+
+## Contribuição patronal sobre assistência médica paga a empregados com planos diferenciados (1)
+- A exclusão do salário de contribuição para assistência médica exige cobertura da totalidade dos empregados e dirigentes. A parcela de plano superior concedida só ao corpo diretivo, sem custo, configura salário-utilidade habitual e integra a base de cálculo; o plano básico, fornecido a todos, permanece excluído.</tese>
+<parameter name="resultado">Acórdão mantido — ApCiv 0058458-58.1999.4.03.6100, 06/07/2023 ·  · Tema 20/STF
+
+## Embargos de declaração rejeitados; saque de benefício após óbito; ilegitimidade passiva do banco (1)
+-  — ApCiv 5003015-24.2019.4.03.6104, 06/07/2023 · 
+
+## Pensão especial de ex-combatente. Reversão à ex-companheira que recebia alimentos judiciais até o óbito (1)
+- A ex-companheira que recebia alimentos por decisão judicial até o óbito do ex-combatente tem direito à pensão especial no valor desses alimentos. A dependência econômica é presumida nesse caso, e a pensão especial é acumulável com benefícios previdenciários. — ApCiv 5002718-80.2020.4.03.6104, 06/07/2023 · Desprovido
+
+## Afastamento de empregada gestante na pandemia; pedido de compensação de remuneração como salário-maternidade (1)
+-  — ApCiv 5001075-59.2022.4.03.6123, 06/07/2023 · 
+
+## Desconto indevido em aposentadoria por empréstimo consignado fraudulento; responsabilidade do INSS (1)
+- Embargos de declaração não servem para rediscutir a causa sob alegação de error in judicando. Havendo enfrentamento dos pontos relevantes, o acórdão considera prequestionados os elementos suscitados, nos termos do art. 1.025 do CPC. — ApCiv 5005417-22.2021.4.03.6100, 06/07/2023 · Embargos rejeitados
+
+## Adicional de riscos ambientais do trabalho por exposição ao benzeno em 2016 (1)
+-  — ApCiv 5000123-85.2020.4.03.6144, 06/07/2023 · 
+
+## Decadência de contribuições previdenciárias anteriores à Constituição de 1988 (1)
+-  — ApCiv 0066316-88.1996.4.03.9999, 06/07/2023 · 
+
+## Contribuição ao FGTS e descanso semanal remunerado; embargos de declaração (1)
+- O descanso semanal remunerado tem natureza remuneratória. A contribuição ao FGTS não tem natureza tributária, e só as verbas do art. 28, § 9º, da Lei 8.212/1991 são excluídas da base de cálculo. Não há omissão quanto à compensação já reconhecida no acórdão.</tese>
+<parameter name="resultado">Embargos rejeitados — ApelRemNec 5002008-72.2020.4.03.6100, 06/07/2023 · 
+
+## Revisão de aposentadoria por tempo de contribuição; reconhecimento de período rural; homologação de acordo sem efeito por falecimento da parte (1)
+- Havendo prova do falecimento da parte autora antes da homologação e de ausência de pagamento pelo INSS, torna-se sem efeito a decisão homologatória do acordo, com devolução dos autos para processamento do recurso extraordinário interposto pelo INSS.</tese>
+<parameter name="resultado">Outro — ApelRemNec 0003933-62.2009.4.03.6105, 05/07/2023 · 
+
+## Contribuições previdenciárias sobre verbas pagas a empregados; verbas não incidentes; compensação (1)
+-  — RemNecCiv 5004574-42.2022.4.03.6126, 28/06/2023 ·  · Tema 20/STF, Tema 265/STJ
+
+## Contribuição previdenciária patronal sobre salário-maternidade, prêmio e primeiros 15 dias de auxílio-doença (1)
+-  — RemNecCiv 5006758-53.2021.4.03.6110, 28/06/2023 ·  · Tema 20/STF, Tema 265/STJ
+
+## Contribuição SAT/GILRAT com FAP; acidentes de trajeto e sem relação laboral (1)
+- Embargos de declaração não servem para rediscutir o mérito. Não há omissão, contradição ou obscuridade no acórdão que manteve o FAP. A resolução de 2017 não retroage ao fato gerador. A classificação de acidente pelo órgão público tem presunção de legalidade, cabendo ao contribuinte provar o erro. — ApCiv 5014314-44.2018.4.03.6100, 27/06/2023 · Embargos rejeitados
+
+## Embargos de declaração rejeitados; contribuição previdenciária sobre terço constitucional de férias (1)
+- Embargos de declaração não se prestam a rediscutir a matéria decidida sob alegação de error in judicando. Ausentes vícios sanáveis na via eleita, os embargos são rejeitados, considerando-se prequestionados os elementos suscitados. — ApelRemNec 0011766-73.2014.4.03.6100, 26/06/2023 · Embargos rejeitados
+
+## Paridade de pensão por morte com servidor aposentado por invalidez com doença grave (1)
+-  — ApCiv 5000862-69.2021.4.03.6129, 26/06/2023 · 
+
+## Embargos de declaração rejeitados; juízo de retratação por tese de repercussão geral sobre salário-maternidade e contribuições previdenciárias (1)
+- Embargos de declaração não se prestam à rediscussão do julgado nem à correção de error in judicando. Inexistindo vício sanável, rejeitam-se os embargos, considerando-se incluídos no acórdão os elementos suscitados para fins de prequestionamento. — ApelRemNec 0013934-14.2015.4.03.6100, 26/06/2023 · Embargos rejeitados · Tema 72/STF
+
+## Contribuição previdenciária patronal sobre auxílio-educação; compensação administrativa (1)
+- Não incide contribuição previdenciária sobre auxílio-educação, conforme jurisprudência consolidada. O contribuinte tem direito apenas à compensação administrativa, com prescrição quinquenal, trânsito em julgado e Taxa SELIC. — ApCiv 5006955-78.2021.4.03.6119, 26/06/2023 · Parcialmente provido · Tema 20/STF, Tema 265/STJ
+
+## Empregada gestante afastada na pandemia; remuneração integral como salário-maternidade para compensação (1)
+-  — ApCiv 5013508-86.2021.4.03.6105, 26/06/2023 · 
+
+## Embargos de declaração em juízo de retratação; contribuição previdenciária; sucumbência mínima e honorários por equidade (1)
+- O juízo de retratação não pode ampliar os limites da devolução recursal. Com decaimento mínimo da parte autora, aplica-se o parágrafo único do artigo 21 do CPC/1973, com honorários fixados por equidade, conforme o artigo 20, §4º.</tese>
+<parameter name="resultado">Embargos acolhidos — ApelRemNec 0042821-67.1999.4.03.6100, 26/06/2023 · 
+
+## Contribuição RAT e FAP; tutela de urgência negada em agravo (1)
+-  — AI 5018786-16.2022.4.03.0000, 26/06/2023 · 
+
+## Afastamento de empregada gestante na pandemia; pretensão de equiparar remuneração a salário-maternidade para compensação (1)
+- As Leis 14.151/2021 e 14.311/2022 garantem remuneração integral à gestante afastada, sem atribuir responsabilidade patrimonial à União. Não há previsão legal para o reenquadramento como salário-maternidade, e a criação judicial de tal efeito violaria a separação dos Poderes e a exigência de fonte de custeio.</tese>
+<parameter name="resultado">Desprovido — ApCiv 5019586-14.2021.4.03.6100, 26/06/2023 · 
+
+## Compensação de remuneração de gestante afastada como salário-maternidade (1)
+- Não há previsão legal para transformar a remuneração integral em salário-maternidade para compensação. As Leis 14.151/2021 e 14.311/2022 não criam responsabilidade patrimonial da União nem fonte de custeio. — ApCiv 5001147-18.2022.4.03.6100, 26/06/2023 · Segurança denegada
+
+## Embargos de declaração rejeitados; contribuição previdenciária sobre 13º proporcional ao aviso prévio indenizado (1)
+-  — ApCiv 5004153-33.2022.4.03.6100, 26/06/2023 ·  · Tema 1.170/STJ
+
+## Embargos de declaração. Terço constitucional de férias. Contribuição previdenciária. Prequestionamento (1)
+- Não há vícios sanáveis em embargos de declaração quando a matéria foi examinada no acórdão. Pedido de prequestionamento explícito de dispositivos já considerados no julgado não justifica o recurso. — ApelRemNec 0002460-64.2011.4.03.6107, 26/06/2023 · Embargos rejeitados
+
+## Contribuição patronal e destinada a terceiros sobre terço constitucional de férias; embargos de declaração rejeitados (1)
+-  — ApelRemNec 0004144-47.2013.4.03.6109, 26/06/2023 · Embargos rejeitados
+
+## Contribuições previdenciárias. Matriz e filiais. Centralização da apuração. Ilegitimidade ativa de filial (1)
+- A apuração centralizada na matriz não permite impetração por filiais, salvo exceções de descentralização tributária. A escrituração contábil fiscal centralizada, prevista em norma administrativa, afasta a exceção. Reconhecida a ilegitimidade ativa, mantém-se a extinção sem resolução do mérito.</tese>
+<parameter name="resultado">Desprovido — ApCiv 5019055-93.2019.4.03.6100, 26/06/2023 · 
+
+## Embargos de declaração rejeitados; contribuição patronal e terceiros sobre terço constitucional de férias (1)
+-  — ApelRemNec 0005809-69.2012.4.03.6130, 26/06/2023 · 
+
+## Embargos de declaração; juízo de retratação; contribuições previdenciárias sobre terço constitucional de férias (1)
+-  — ApelRemNec 0014352-54.2012.4.03.6100, 26/06/2023 · 
+
+## Contribuições previdenciárias sobre salário-maternidade e terço constitucional de férias em embargos de declaração (1)
+-  — ApelRemNec 0006168-57.2009.4.03.6119, 26/06/2023 · 
+
+## Contribuições previdenciárias sobre verbas pagas ao empregado; alcance da remessa necessária (1)
+- Somente são excluídas da incidência as verbas pagas nos quinze dias anteriores à concessão de auxílio-doença ou acidente, salário-maternidade, vale transporte e auxílio alimentação in natura. Não cabe remessa necessária quanto ao aviso prévio indenizado, pois a Fazenda manifestou desinteresse em apelar.</tese>
+<parameter name="resultado">Desprovido — RemNecCiv 5004295-78.2021.4.03.6130, 26/06/2023 ·  · Tema 20/STF
+
+## Contribuições previdenciárias patronal, RAT e terceiros; ganhos habituais; aviso prévio indenizado; compensação (1)
+-  — RemNecCiv 5009952-97.2022.4.03.6119, 12/06/2023 ·  · Tema 20/STF, Tema 265/STJ
+
+## Certificado de regularidade previdenciária (CRP) de regime próprio; sanções da Lei 9.717/1998 (1)
+- A Suprema Corte já entendeu que a União extrapolou sua competência ao editar a Lei 9.717/1998 e impor sanções pela negativa do CRP. Afastam-se as sanções, garantindo-se a emissão do certificado, sem prejuízo do que vier a ser decidido em repercussão geral.</tese>
+<parameter name="resultado">Desprovido — ApCiv 5001381-02.2021.4.03.6143, 08/06/2023 ·  · Tema 968/STF
+
+## Atraso na entrega de imóvel do Minha Casa Minha Vida; legitimidade da CEF; lucros cessantes; juros de obra; danos morais (1)
+- A CEF, como executora e fiscalizadora da política federal de moradia, é parte legítima. O atraso gera dano material presumido, em forma de lucros cessantes, que não se cumula com multa moratória. Juros de obra cobrados após o prazo ajustado devem ser restituídos de forma simples. Mero inadimplemento não gera dano moral, mas atraso considerável pode gerar.</tese>
+<parameter name="resultado">Desprovido — ApCiv 5001516-75.2020.4.03.6134, 08/06/2023 ·  · Tema 996/STJ, Tema 970/STJ
+
+## Contribuições previdenciárias patronais, RAT e terceiros sobre verbas salariais (1)
+- Incide contribuição patronal sobre ganhos habituais do empregado, conforme o Tema 20 do STF. Nos limites da devolução, incide sobre o terço constitucional de férias. — ApelRemNec 0000971-03.2017.4.03.6100, 08/06/2023 · Parcialmente provido · Tema 20/STF, Tema 985/STF
+
+## Securitização de dívida rural; excesso de garantia hipotecária (1)
+- Não há excesso de garantia reconhecível após longo decurso de tempo, pois as garantias foram livremente oferecidas e não houve prova de exigência potestativa. A pretensão de revisão contratual e liberação de garantias viola a boa-fé objetiva. Afasta-se a gratuidade diante de patrimônio imobiliário declarado.</tese>
+<parameter name="resultado">Parcialmente provido — ApCiv 0000138-95.2007.4.03.6112, 08/06/2023 · 
+
+## Atraso na entrega de imóvel do Minha Casa Minha Vida, responsabilidade da CEF (1)
+- A CEF, como executora de política federal de moradia e fiscalizadora da obra, é parte legítima. Juros de obra cobrados após o prazo de entrega são ilícitos e devem ser restituídos de forma simples. Considerável atraso na entrega gera dano moral indenizável. — ApCiv 5000886-98.2020.4.03.6140, 08/06/2023 · Parcialmente provido
+
+## Restituição de benefício por incapacidade recebido com remuneração em atividade (1)
+- Não se aplica o Tema 979 quando o erro administrativo foi induzido pelo próprio segurado, que tinha ciência da incompatibilidade e agiu sem boa-fé objetiva. Ainda que aplicável, a modulação alcança apenas ações ajuizadas a partir da publicação do acórdão paradigma.</tese>
+<parameter name="resultado">Acórdão mantido — ApCiv 0009035-76.2016.4.03.9999, 08/06/2023 ·  · Tema 979/STJ
+
+## PROAGRO. restituição de valor pago. correção monetária e juros de mora (1)
+-  — ApCiv 0024983-82.1997.4.03.6100, 08/06/2023 ·  · Tema 810/STF, Tema 905/STJ
+
+## Embargos de declaração em juízo de retratação sobre contribuição previdenciária e terço constitucional de férias (1)
+-  — ApelRemNec 0025375-26.2014.4.03.6100, 08/06/2023 ·  · Tema 985/STF
+
+## Contribuições previdenciárias patronais, RAT e terceiros; verbas não sujeitas à incidência; compensação administrativa (1)
+-  — ApelRemNec 5005127-54.2020.4.03.6128, 08/06/2023 ·  · Tema 20/STF, Tema 265/STJ
+
+## Seguro-desemprego fraudado por terceiros; CEF como agente pagador; danos morais (1)
+- A CEF é mera agente pagadora do seguro-desemprego, sem atribuição legal para regularizar cadastro ou cancelar operações indevidas, função do gestor técnico-administrativo. Não há dano moral comprovado quando a restrição ao benefício decorre de ato do Ministério, e não da CEF. — ApCiv 0003066-59.2016.4.03.6126, 25/05/2023 · Provido
+
+## Imunidade e isenção de contribuições previdenciárias para entidade beneficente de assistência social (1)
+- Certificada a condição de entidade beneficente, a imunidade alcança a contribuição patronal, o RAT e o PIS sobre folha, com efeitos retroativos à data da comprovação. A contribuição a terceiros não é imune, mas é isenta conforme requisitos da lei instituidora. Cabe repetição do indébito nos limites reconhecidos, vedada a restituição administrativa em espécie.</tese>
+<parameter name="resultado">Parcialmente provido — ApCiv 5001040-84.2021.4.03.6107, 25/05/2023 · 
+
+## Ação regressiva do INSS contra empregadora por acidente do trabalho; culpa exclusiva da vítima (1)
+- Não havendo negligência da empresa quanto às normas de saúde e segurança do trabalho, falta nexo causal com o evento, afastando o dever de ressarcimento. A culpa do empregador é presumida, mas pode ser afastada por prova de causa excludente. — ApCiv 5000712-23.2017.4.03.6002, 25/05/2023 · Desprovido
+
+## Contribuições previdenciárias patronais, RAT e terceiros sobre verbas trabalhistas (1)
+- A contribuição previdenciária incide sobre ganhos habituais do empregado, conforme jurisprudência consolidada. Com isso, fica prejudicado o pedido de restituição e de compensação do indébito. — ApCiv 5013531-32.2021.4.03.6105, 25/05/2023 · Desprovido · Tema 20/STF
+
+## Contribuições previdenciárias patronal, RAT e terceiros sobre verbas pagas ao empregado (1)
+-  — ApelRemNec 5015932-19.2021.4.03.6100, 25/05/2023 ·  · Tema 20/STF, Tema 265/STJ
+
+## Contagem recíproca de tempo de contribuição com indenização de contribuições não recolhidas (1)
+- A indenização para contagem recíproca só é cabível a partir do artigo 45 da Lei 8.212/1991, com redação dada pela Lei 9.032/1995. O cálculo segue a lei vigente à competência cujo tempo se pretende integrar. Na espécie, o período é posterior à Lei 9.032/1995 e à MP 1.523/1996, e a ordem foi negada.</tese>
+<parameter name="resultado">Provido — ApCiv 5001794-72.2021.4.03.6124, 25/05/2023 · 
+
+## Contribuição previdenciária patronal sobre verbas trabalhistas; salário-família, auxílio-doença e aviso prévio (1)
+- Somente o salário-família pode ser excluído da incidência, pois as demais verbas objeto de pedido reconhecido permanecem na procedência. O contribuinte tem direito apenas à compensação administrativa, com prescrição quinquenal, trânsito em julgado e incidência exclusiva da Taxa SELIC.</tese>
+<parameter name="resultado">Parcialmente provido — ApelRemNec 5006270-16.2021.4.03.6105, 25/05/2023 ·  · Tema 20/STF, Tema 265/STJ
+
+## Ação regressiva do INSS por acidente do trabalho; homologação de acordo (1)
+-  — ApelRemNec 5009134-81.2017.4.03.6100, 14/04/2023 · 
+
+## Mandado de segurança. Mora do INSS em requerimento previdenciário. Divergência fática não esclarecida (1)
+- Não há direito líquido e certo demonstrado quando a prova indica andamento regular e a divergência fática não é esclarecida. Eventual mora em recurso superveniente à impetração não pode ser apreciada no feito e é imputável a outra autoridade. — ApelRemNec 5035421-42.2021.4.03.6100, 13/04/2023 · Segurança denegada
+
+## Mandado de segurança. Mora em requerimento previdenciário. Recurso já remetido ao CRPS. Ilegitimidade passiva do INSS (1)
+- A autoridade do INSS é parte ilegítima quando o expediente já estava no CRPS antes da impetração. Demora no julgamento do recurso não pode ser imputada ao agente autárquico, e a ordem é denegada. — ApelRemNec 5004879-47.2022.4.03.6119, 13/04/2023 · Provido
+
+## Mandado de segurança contra demora em recurso administrativo previdenciário remetido ao CRPS (1)
+- Não há ato coator imputável à autoridade do INSS quando o recurso já estava com o órgão julgador antes da impetração. A demora no julgamento é de outro órgão, o que afasta a ilegalidade e a ordem. — ApelRemNec 5000269-98.2021.4.03.6142, 11/04/2023 · Embargos rejeitados
+
+## Mandado de segurança contra demora em recurso administrativo previdenciário; ilegitimidade passiva da autoridade do INSS (1)
+- Recurso já remetido ao órgão julgador antes da impetração não gera ato coator imputável à autoridade do INSS. A eventual demora no julgamento é de outro órgão, o que afasta a ilegalidade e leva à denegação da ordem. — ApelRemNec 5032455-09.2021.4.03.6100, 11/04/2023 · Embargos rejeitados
+
+## Mora administrativa em recurso previdenciário; prazo legal; razoável duração do processo (1)
+- A Administração deve decidir o recurso administrativo dentro do prazo legal, sob pena de violação da razoável duração do processo. A remessa oficial não foi conhecida com base no artigo 496, § 4º, do CPC, por se tratar de hipótese de julgamento monocrático. — RemNecCiv 5001626-76.2022.4.03.6143, 11/04/2023 · Não conhecido
+
+## Mora administrativa em recurso previdenciário, prazo legal em mandado de segurança (1)
+- A demora da Administração em decidir recurso administrativo, além do prazo legal, viola a razoável duração do processo e o direito de petição. A remessa oficial não foi conhecida, com base no art. 932 e no art. 496, § 4º, do CPC. — RemNecCiv 5018404-56.2022.4.03.6100, 31/03/2023 · Não conhecido
+
+## Mora administrativa em concessão de benefício previdenciário; prazo legal em processo administrativo (1)
+-  — RemNecCiv 5026103-98.2022.4.03.6100, 31/03/2023 · 
+
+## Mora administrativa em benefício assistencial à pessoa com deficiência (1)
+- Remessa necessária não conhecida com base no artigo 932 do CPC, por jurisprudência consolidada sobre a matéria. A mora administrativa viola a razoável duração do processo e as regras da Lei 9.784/1999. — RemNecCiv 5010574-81.2022.4.03.6183, 31/03/2023 · Não conhecido
+
+## Mora administrativa em aposentadoria por tempo de contribuição; razoável duração do processo (1)
+- A mora administrativa em observar prazo legal em processo administrativo viola a razoável duração do processo e os deveres de decidir previstos na Lei 9.784/1999. Remessa necessária não conhecida, com fundamento no artigo 496, § 4º, do CPC, por aplicação do artigo 932 do CPC. — RemNecCiv 5016617-26.2021.4.03.6100, 29/03/2023 · Não conhecido
+
+## Mora administrativa em concessão de aposentadoria por tempo de contribuição (1)
+- Não se conhece da remessa oficial em mandado de segurança que visa garantir o cumprimento de acórdão em processo administrativo previdenciário, com base no artigo 496, § 4º, do CPC, e decisão monocrática nos termos do artigo 932 do CPC. — RemNecCiv 5024160-46.2022.4.03.6100, 29/03/2023 · Não conhecido
+
+## Mora administrativa em recurso previdenciário; prazo para decidir (1)
+- A demora excessiva da Administração em decidir recurso administrativo viola o prazo legal e a razoável duração do processo. Por isso, a remessa oficial não foi conhecida, com base no artigo 496, CPC. — RemNecCiv 5008210-79.2022.4.03.6105, 28/03/2023 · Não conhecido
+
+## Mora administrativa em recurso de benefício previdenciário (1)
+- A Administração deve decidir o processo administrativo dentro do prazo legal, sob pena de violação da razoável duração do processo. Na remessa oficial, o relator não conheceu do reexame com base no artigo 496, § 4º, do CPC. — RemNecCiv 5011843-16.2022.4.03.6100, 27/03/2023 · Não conhecido
+
+## Mora administrativa em revisão de benefício previdenciário; prazo legal (1)
+- A mora administrativa em observar prazo legal viola a razoável duração do processo e as regras da Lei 9.784/1999. A remessa oficial não foi conhecida com base no artigo 496, § 4º, do CPC, por alinhamento ao artigo 932 do CPC. — RemNecCiv 5006969-28.2022.4.03.6119, 27/03/2023 · Não conhecido
+
+## Mora administrativa em aposentadoria por tempo de contribuição; remessa necessária não conhecida (1)
+-  — RemNecCiv 5000787-63.2022.4.03.6139, 24/03/2023 · 
+
+## Mora administrativa em apreciação de requerimento de revisão de benefício (1)
+-  — RemNecCiv 5000395-32.2022.4.03.6137, 23/03/2023 · 
+
+## Limite de 20 salários-mínimos sobre remuneração de empregados para contribuições (1)
+- Não se concede tutela de urgência sem demonstração mínima e concreta de fumus boni iuris e periculum in mora. Relator pode decidir monocraticamente com base em jurisprudência dominante do Tribunal Superior. — AI 5030886-03.2022.4.03.0000, 23/03/2023 · Desprovido
+
+## Mora administrativa em aposentadoria por tempo de contribuição (1)
+- A mora administrativa em observar prazo legal viola a duração razoável do processo. Não se conhece da remessa oficial, por decisão monocrática, com base no artigo 496, § 4º, CPC. — RemNecCiv 5032880-02.2022.4.03.6100, 23/03/2023 · Não conhecido
+
+## Mora administrativa em cumprir acórdão sobre aposentadoria por tempo de contribuição (1)
+- A demora excessiva e injustificada da Administração em cumprir decisão administrativa viola a razoável duração do processo. Apelação provida para reformar a sentença que denegou a segurança. — ApCiv 5013387-39.2022.4.03.6100, 22/03/2023 · Provido
+
+## Mora administrativa em revisão de benefício assistencial à pessoa com deficiência (1)
+- A mora administrativa em decidir pedido dentro do prazo legal viola a razoável duração do processo. Remessa oficial não conhecida, com base no artigo 496, § 4º, do CPC, e decisão monocrática do relator. — RemNecCiv 5001340-65.2021.4.03.6133, 22/03/2023 · Não conhecido
+
+## Mora administrativa em aposentadoria por tempo de contribuição; prazo legal em processo administrativo (1)
+-  — RemNecCiv 5012056-07.2022.4.03.6105, 22/03/2023 · 
+
+## Responsabilidade civil do INSS por demora na implantação de benefício (1)
+- Atraso na prática de ato administrativo não gera responsabilidade civil do Estado sem conduta particularmente gravosa. A demora, por falta de pessoal, é compensada pelos juros e pela correção monetária. — ApCiv 5001768-62.2020.4.03.6107, 20/03/2023 · Desprovido
+
+## Indenização por danos morais por cessação de auxílio-doença após perícia administrativa (1)
+-  — ApCiv 5002596-19.2019.4.03.6002, 20/03/2023 · 
+
+## Reativação de benefício previdenciário cessado por não atendimento à convocação (1)
+- Mandado de segurança exige prova pré-constituída de direito líquido e certo. Benefício cessado com base em norma vigente à época, sem pedido de reativação em tempo hábil, não gera direito à reativação; cabe novo requerimento. — ApCiv 5010496-30.2022.4.03.6105, 20/03/2023 · Segurança denegada
+
+## Mandado de segurança contra omissão do INSS em recurso de benefício acidentário (1)
+- Não há perda de objeto quando o ato omissivo persiste após a impetração. O processo deve ser extinto sem resolução do mérito quando a autoridade informa que aguarda decisão de órgão externo. Apelação desprovida por decisão monocrática. — ApCiv 5001873-05.2022.4.03.6128, 15/03/2023 · Desprovido
